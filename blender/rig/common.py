@@ -38,10 +38,13 @@ DESK_COLOR = (0.30, 0.24, 0.19, 1.0)  # a worn wooden desk under everything
 
 # ---- argv ------------------------------------------------------------------------------------
 def argv():
-    """Arguments after '--'."""
-    if "--" in sys.argv:
-        return sys.argv[sys.argv.index("--") + 1:]
-    return []
+    """Arguments after the first '--' (any further leading '--' tokens are dropped)."""
+    if "--" not in sys.argv:
+        return []
+    rest = sys.argv[sys.argv.index("--") + 1:]
+    while rest and rest[0] == "--":
+        rest = rest[1:]
+    return rest
 
 
 def repo_root():

@@ -1,0 +1,139 @@
+{
+ "transport": "local",
+ "generated_at": "2026-09-03T16:39:41.270725Z",
+ "host": {
+  "transport": "local",
+  "role": "host",
+  "state": "connected",
+  "address": "127.0.0.1:33051",
+  "peer_cursor": 174,
+  "our_cursor": 174,
+  "last_error": null,
+  "since": "2026-09-03T16:39:41.243199Z",
+  "last_contact": "2026-09-03T16:39:41.268380Z",
+  "device_id": "android-rel",
+  "paired": {
+   "host_id": "android-rel",
+   "client_id": "pwa-rel",
+   "host_person": "noor",
+   "client_person": "teo",
+   "paired_at": "2026-09-03T16:39:40.062537Z"
+  },
+  "faults": "scripted",
+  "offline": false,
+  "drop_next": 0,
+  "lose_response_next": 0,
+  "latency_ms": 0,
+  "log": []
+ },
+ "client": {
+  "transport": "local",
+  "role": "client",
+  "state": "connected",
+  "address": "http://127.0.0.1:33051",
+  "peer_cursor": 174,
+  "our_cursor": 174,
+  "last_error": null,
+  "since": "2026-09-03T16:39:40.591122Z",
+  "last_contact": "2026-09-03T16:39:41.269599Z",
+  "device_id": "pwa-rel",
+  "paired": {
+   "host_id": "android-rel",
+   "client_id": "pwa-rel",
+   "host_person": "noor",
+   "client_person": "teo",
+   "paired_at": "2026-09-03T16:39:40.070537Z"
+  },
+  "faults": "scripted",
+  "offline": false,
+  "drop_next": 0,
+  "lose_response_next": 0,
+  "latency_ms": 0,
+  "log": [
+   "lose-response 1",
+   "offline",
+   "online",
+   "offline",
+   "online"
+  ]
+ },
+ "capabilities": {
+  "send": {
+   "ok": true,
+   "detail": "client message reached the host as seq 1"
+  },
+  "ack": {
+   "ok": true,
+   "detail": "host acknowledged with seq 1; client outbox empty: true"
+  },
+  "read": {
+   "ok": true,
+   "detail": "client sees its message as read after the host read marker"
+  },
+  "reply": {
+   "ok": true,
+   "detail": "reply resolved to its target on the client"
+  },
+  "react": {
+   "ok": true,
+   "detail": "reaction folded onto the target on the host, not a row"
+  },
+  "edit": {
+   "ok": true,
+   "detail": "edited text shown on the host, original kept in the log"
+  },
+  "delete": {
+   "ok": true,
+   "detail": "the row became a stub on the host"
+  },
+  "voice_note": {
+   "ok": true,
+   "detail": "voice blob and event reached the host"
+  },
+  "video": {
+   "ok": true,
+   "detail": "video and poster blobs fetched by the client with the event"
+  },
+  "viewer": {
+   "ok": true,
+   "detail": "full-resolution photo bytes on the other device hash to the same blob"
+  },
+  "search": {
+   "ok": true,
+   "detail": "hits by type: {\"message\":\"message\",\"photo\":\"photo\",\"todo_event\":\"todo_event\",\"date_event\":\"date_event\",\"feeling\":\"feeling\",\"state_declared\":\"state_declared\",\"milestone\":\"milestone\",\"video\":\"video\",\"voice_note\":\"voice_note\"}"
+  },
+  "draft_survival": {
+   "ok": true,
+   "detail": "draft and pairing intact after the client process was closed and reopened"
+  },
+  "kill_mid_send": {
+   "ok": true,
+   "detail": "host received it once, the retry did not duplicate it, the client learned its seq"
+  },
+  "offline_queue": {
+   "ok": true,
+   "detail": "26 events queued offline, all delivered on reconnect"
+  },
+  "reconnect_ordering": {
+   "ok": true,
+   "detail": "client holds seq 1..173 gapless and monotonic after the gap"
+  },
+  "host_offline_outbox": {
+   "ok": true,
+   "detail": "queued while the host was down; delivered when it came back with its sequence intact"
+  }
+ },
+ "all_ok": true,
+ "events_host": 174,
+ "events_client": 174,
+ "duplicates": 0,
+ "same_order_both_sides": true,
+ "ordering": "monotonic",
+ "faults_injected": [
+  "lose-response 1",
+  "offline",
+  "online",
+  "offline",
+  "online"
+ ]
+}

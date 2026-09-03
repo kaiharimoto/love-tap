@@ -1,0 +1,2377 @@
+{
+ "files": {
+  "assets/sound/snd_breathe.ogg": {
+   "bytes": 28868,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 2500,
+    "channels": 1,
+    "duration_ms": 2500,
+    "family": "Shelter",
+    "feeling": "breathe",
+    "format": "ogg/vorbis q6",
+    "haptic": "1200@110 off800 1200@110",
+    "haptic_expanded": "1200@110 off800 1200@110",
+    "peak_dbfs": -2.95,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.431,
+      "ms": 1570,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 0,
+      "gain": 0.302,
+      "ms": 1200,
+      "primitive": "breath_in"
+     },
+     {
+      "at_ms": 2000,
+      "gain": 0.431,
+      "ms": 500,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 2000,
+      "gain": 0.302,
+      "ms": 500,
+      "primitive": "breath_out"
+     }
+    ],
+    "primitives": [
+     "breath_in",
+     "breath_out",
+     "press"
+    ],
+    "recipe": "snd_breathe",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a blanket-folded sheet: in, out"
+   }
+  },
+  "assets/sound/snd_catch.ogg": {
+   "bytes": 14916,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 800,
+    "channels": 1,
+    "duration_ms": 599,
+    "family": "Mischief",
+    "feeling": "catch",
+    "format": "ogg/vorbis q6",
+    "haptic": "40@120 off30 40@160 off30 40@200 off30 40@240 off30 120@255",
+    "haptic_expanded": "40@120 off30 40@160 off30 40@200 off30 40@240 off30 120@255",
+    "peak_dbfs": -3.02,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.471,
+      "ms": 55,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 70,
+      "gain": 0.627,
+      "ms": 55,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 140,
+      "gain": 0.784,
+      "ms": 55,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 210,
+      "gain": 0.941,
+      "ms": 55,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 280,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 286,
+      "gain": 0.6,
+      "ms": 288,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 286,
+      "gain": 0.45,
+      "ms": 114,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "press",
+     "rustle",
+     "tap"
+    ],
+    "recipe": "snd_catch",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a paper plane: rising flutter, a land"
+   }
+  },
+  "assets/sound/snd_chair.ogg": {
+   "bytes": 20881,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1900,
+    "channels": 1,
+    "duration_ms": 1839,
+    "family": "Ache",
+    "feeling": "empty_chair",
+    "format": "ogg/vorbis q6",
+    "haptic": "300@200 off900 300@100",
+    "haptic_expanded": "300@200 off900 300@100",
+    "peak_dbfs": -2.97,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.784,
+      "ms": 500,
+      "primitive": "breath_in"
+     },
+     {
+      "at_ms": 1200,
+      "gain": 0.392,
+      "ms": 620,
+      "primitive": "breath_out"
+     }
+    ],
+    "primitives": [
+     "breath_in",
+     "breath_out"
+    ],
+    "recipe": "snd_chair",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a pencil chair: two slow breaths"
+   }
+  },
+  "assets/sound/snd_confetti.ogg": {
+   "bytes": 14943,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 850,
+    "channels": 1,
+    "duration_ms": 499,
+    "family": "Sparkle",
+    "feeling": "confetti",
+    "format": "ogg/vorbis q6",
+    "haptic": "30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150",
+    "haptic_expanded": "30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150",
+    "peak_dbfs": -3.07,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.588,
+      "ms": 80,
+      "primitive": "punch"
+     },
+     {
+      "at_ms": 70,
+      "gain": 0.745,
+      "ms": 80,
+      "primitive": "punch"
+     },
+     {
+      "at_ms": 140,
+      "gain": 0.902,
+      "ms": 80,
+      "primitive": "punch"
+     },
+     {
+      "at_ms": 210,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "punch"
+     },
+     {
+      "at_ms": 280,
+      "gain": 0.902,
+      "ms": 80,
+      "primitive": "punch"
+     },
+     {
+      "at_ms": 350,
+      "gain": 0.745,
+      "ms": 80,
+      "primitive": "punch"
+     },
+     {
+      "at_ms": 420,
+      "gain": 0.588,
+      "ms": 80,
+      "primitive": "punch"
+     }
+    ],
+    "primitives": [
+     "punch"
+    ],
+    "recipe": "snd_confetti",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "hole-punch circles: a handful of punches"
+   }
+  },
+  "assets/sound/snd_crown.ogg": {
+   "bytes": 27226,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1700,
+    "channels": 1,
+    "duration_ms": 1389,
+    "family": "Sparkle",
+    "feeling": "crown",
+    "format": "ogg/vorbis q6",
+    "haptic": "100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255",
+    "haptic_expanded": "100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255",
+    "peak_dbfs": -3.03,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.471,
+      "ms": 130,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 200,
+      "gain": 0.667,
+      "ms": 130,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 400,
+      "gain": 0.863,
+      "ms": 130,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 600,
+      "gain": 1.0,
+      "ms": 130,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 1000,
+      "gain": 1.0,
+      "ms": 330,
+      "primitive": "peel"
+     },
+     {
+      "at_ms": 1120,
+      "gain": 0.5,
+      "ms": 240,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "peel",
+     "rustle"
+    ],
+    "recipe": "snd_crown",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a paper crown: four rising folds, a flourish"
+   }
+  },
+  "assets/sound/snd_didit.ogg": {
+   "bytes": 13001,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 900,
+    "channels": 1,
+    "duration_ms": 559,
+    "family": "Sparkle",
+    "feeling": "did_it",
+    "format": "ogg/vorbis q6",
+    "haptic": "40@120 off60 40@170 off60 40@220 off60 200@255",
+    "haptic_expanded": "40@120 off60 40@170 off60 40@220 off60 200@255",
+    "peak_dbfs": -2.8,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.471,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 0,
+      "gain": 0.329,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 100,
+      "gain": 0.667,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 100,
+      "gain": 0.467,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 200,
+      "gain": 0.863,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 200,
+      "gain": 0.604,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 300,
+      "gain": 1.0,
+      "ms": 230,
+      "primitive": "peel"
+     }
+    ],
+    "primitives": [
+     "flick",
+     "peel",
+     "tap"
+    ],
+    "recipe": "snd_didit",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a foil star sticker: three rising taps, a peel"
+   }
+  },
+  "assets/sound/snd_forehead.ogg": {
+   "bytes": 12943,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 920,
+    "channels": 1,
+    "duration_ms": 775,
+    "family": "Warmth",
+    "feeling": "forehead",
+    "format": "ogg/vorbis q6",
+    "haptic": "200@120 off120 200@120",
+    "haptic_expanded": "200@120 off120 200@120",
+    "peak_dbfs": -2.98,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.471,
+      "ms": 430,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 20,
+      "gain": 0.118,
+      "ms": 180,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 320,
+      "gain": 0.471,
+      "ms": 430,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 340,
+      "gain": 0.118,
+      "ms": 180,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "press",
+     "rustle"
+    ],
+    "recipe": "snd_forehead",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a blue-ink thumbprint: two soft presses"
+   }
+  },
+  "assets/sound/snd_goodnight.ogg": {
+   "bytes": 21081,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1670,
+    "channels": 1,
+    "duration_ms": 1630,
+    "family": "Warmth",
+    "feeling": "goodnight",
+    "format": "ogg/vorbis q6",
+    "haptic": "500@120 off200 250@80 off200 120@50",
+    "haptic_expanded": "500@120 off200 250@80 off200 120@50",
+    "peak_dbfs": -2.96,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.471,
+      "ms": 758,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 700,
+      "gain": 0.314,
+      "ms": 550,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 1150,
+      "gain": 0.196,
+      "ms": 462,
+      "primitive": "press"
+     }
+    ],
+    "primitives": [
+     "press"
+    ],
+    "recipe": "snd_goodnight",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a folded corner with a moon: fading press"
+   }
+  },
+  "assets/sound/snd_grey.ogg": {
+   "bytes": 19113,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1300,
+    "channels": 1,
+    "duration_ms": 947,
+    "family": "Static",
+    "feeling": "grey",
+    "format": "ogg/vorbis q6",
+    "haptic": "(60@70 off60) \u00d78",
+    "haptic_expanded": "60@70 off60 60@70 off60 60@70 off60 60@70 off60 60@70 off60 60@70 off60 60@70 off60 60@70 off60",
+    "peak_dbfs": -2.96,
+    "placements": [
+     {
+      "at_ms": 44,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 42,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 40,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 0,
+      "gain": 0.137,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 126,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 124,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 120,
+      "gain": 0.137,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 288,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 250,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 289,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 240,
+      "gain": 0.137,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 381,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 374,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 360,
+      "gain": 0.137,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 511,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 485,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 480,
+      "gain": 0.137,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 635,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 606,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 600,
+      "gain": 0.137,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 735,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 735,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 720,
+      "gain": 0.137,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 850,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 854,
+      "gain": 0.247,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 840,
+      "gain": 0.137,
+      "ms": 60,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "rustle",
+     "tap"
+    ],
+    "recipe": "snd_grey",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "rain in pencil: faint patter"
+   }
+  },
+  "assets/sound/snd_here.ogg": {
+   "bytes": 29528,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 2400,
+    "channels": 1,
+    "duration_ms": 2364,
+    "family": "Shelter",
+    "feeling": "here",
+    "format": "ogg/vorbis q6",
+    "haptic": "400@140 off400 400@140 off400 400@140",
+    "haptic_expanded": "400@140 off400 400@140 off400 400@140",
+    "peak_dbfs": -2.65,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.549,
+      "ms": 742,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 30,
+      "gain": 0.165,
+      "ms": 370,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 800,
+      "gain": 0.549,
+      "ms": 742,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 830,
+      "gain": 0.165,
+      "ms": 370,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 1600,
+      "gain": 0.549,
+      "ms": 742,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 1630,
+      "gain": 0.165,
+      "ms": 370,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "press",
+     "rustle"
+    ],
+    "recipe": "snd_here",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a paper boat: three even smooths"
+   }
+  },
+  "assets/sound/snd_hold.ogg": {
+   "bytes": 27632,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 2300,
+    "channels": 1,
+    "duration_ms": 2300,
+    "family": "Shelter",
+    "feeling": "hold",
+    "format": "ogg/vorbis q6",
+    "haptic": "900@150 off100 900@150",
+    "haptic_expanded": "900@150 off100 900@150",
+    "peak_dbfs": -3.04,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.588,
+      "ms": 1298,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 1000,
+      "gain": 0.588,
+      "ms": 1298,
+      "primitive": "press"
+     }
+    ],
+    "primitives": [
+     "press"
+    ],
+    "recipe": "snd_hold",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a candle stub: two long presses"
+   }
+  },
+  "assets/sound/snd_home.ogg": {
+   "bytes": 22767,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 2180,
+    "channels": 1,
+    "duration_ms": 2019,
+    "family": "Ache",
+    "feeling": "come_home",
+    "format": "ogg/vorbis q6",
+    "haptic": "60@255 off200 60@255 off200 60@255 off800 400@120",
+    "haptic_expanded": "60@255 off200 60@255 off200 60@255 off800 400@120",
+    "peak_dbfs": -3.01,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.9,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 260,
+      "gain": 0.9,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 520,
+      "gain": 0.9,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 1380,
+      "gain": 0.471,
+      "ms": 620,
+      "primitive": "breath_out"
+     }
+    ],
+    "primitives": [
+     "breath_out",
+     "tap"
+    ],
+    "recipe": "snd_home",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a loop of string: three knocks, a sigh"
+   }
+  },
+  "assets/sound/snd_longday.ogg": {
+   "bytes": 25339,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 2300,
+    "channels": 1,
+    "duration_ms": 2286,
+    "family": "Ache",
+    "feeling": "long_day",
+    "format": "ogg/vorbis q6",
+    "haptic": "800@100 off300 800@60",
+    "haptic_expanded": "800@100 off300 800@60",
+    "peak_dbfs": -3.07,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.392,
+      "ms": 1020,
+      "primitive": "breath_in"
+     },
+     {
+      "at_ms": 1100,
+      "gain": 0.235,
+      "ms": 1180,
+      "primitive": "breath_out"
+     }
+    ],
+    "primitives": [
+     "breath_in",
+     "breath_out"
+    ],
+    "recipe": "snd_longday",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a rainy window doodle: two long slow breaths"
+   }
+  },
+  "assets/sound/snd_miss.ogg": {
+   "bytes": 29559,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 2050,
+    "channels": 1,
+    "duration_ms": 2050,
+    "family": "Ache",
+    "feeling": "miss_you",
+    "format": "ogg/vorbis q6",
+    "haptic": "150@220 off600 150@150 off600 150@90",
+    "haptic_expanded": "150@220 off600 150@150 off600 150@90",
+    "peak_dbfs": -2.97,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.863,
+      "ms": 310,
+      "primitive": "page_turn"
+     },
+     {
+      "at_ms": 750,
+      "gain": 0.588,
+      "ms": 430,
+      "primitive": "page_turn"
+     },
+     {
+      "at_ms": 1500,
+      "gain": 0.353,
+      "ms": 550,
+      "primitive": "page_turn"
+     }
+    ],
+    "primitives": [
+     "page_turn"
+    ],
+    "recipe": "snd_miss",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a paper crane: page turned, slower each time"
+   }
+  },
+  "assets/sound/snd_notokay.ogg": {
+   "bytes": 13798,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1220,
+    "channels": 1,
+    "duration_ms": 867,
+    "family": "Static",
+    "feeling": "not_okay",
+    "format": "ogg/vorbis q6",
+    "haptic": "400@255 off100 40@255 off100 40@255 off100 40@255",
+    "haptic_expanded": "400@255 off100 40@255 off100 40@255 off100 40@255",
+    "peak_dbfs": -2.95,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 440,
+      "primitive": "tear"
+     },
+     {
+      "at_ms": 500,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 640,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 780,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "tap"
+     }
+    ],
+    "primitives": [
+     "tap",
+     "tear"
+    ],
+    "recipe": "snd_notokay",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a torn-off corner: one tear, three taps"
+   }
+  },
+  "assets/sound/snd_nuzzle.ogg": {
+   "bytes": 23548,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1390,
+    "channels": 1,
+    "duration_ms": 1245,
+    "family": "Warmth",
+    "feeling": "nuzzle",
+    "format": "ogg/vorbis q6",
+    "haptic": "90@150 off60 90@150 off60 90@150 off200 400@110",
+    "haptic_expanded": "90@150 off60 90@150 off60 90@150 off200 400@110",
+    "peak_dbfs": -2.97,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.588,
+      "ms": 140,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 150,
+      "gain": 0.588,
+      "ms": 140,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 300,
+      "gain": 0.588,
+      "ms": 140,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 590,
+      "gain": 0.431,
+      "ms": 630,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 590,
+      "gain": 0.173,
+      "ms": 400,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "press",
+     "rustle"
+    ],
+    "recipe": "snd_nuzzle",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a pressed clover: three small rustles, one long"
+   }
+  },
+  "assets/sound/snd_nyeh.ogg": {
+   "bytes": 8407,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 650,
+    "channels": 1,
+    "duration_ms": 297,
+    "family": "Mischief",
+    "feeling": "nyeh",
+    "format": "ogg/vorbis q6",
+    "haptic": "30@200 off50 30@200 off50 90@255",
+    "haptic_expanded": "30@200 off50 30@200 off50 90@255",
+    "peak_dbfs": -3.0,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.784,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 80,
+      "gain": 0.784,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 160,
+      "gain": 0.8,
+      "ms": 108,
+      "primitive": "scratch"
+     },
+     {
+      "at_ms": 160,
+      "gain": 0.7,
+      "ms": 90,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "rustle",
+     "scratch",
+     "tap"
+    ],
+    "recipe": "snd_nyeh",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a biro tongue-out face: two taps, a raspberry of paper"
+   }
+  },
+  "assets/sound/snd_okay.ogg": {
+   "bytes": 22390,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1800,
+    "channels": 1,
+    "duration_ms": 1721,
+    "family": "Shelter",
+    "feeling": "its_okay",
+    "format": "ogg/vorbis q6",
+    "haptic": "200@160 off200 200@160 off200 200@160 off200 200@160",
+    "haptic_expanded": "200@160 off200 200@160 off200 200@160 off200 200@160",
+    "peak_dbfs": -2.92,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.627,
+      "ms": 500,
+      "primitive": "pat"
+     },
+     {
+      "at_ms": 400,
+      "gain": 0.627,
+      "ms": 500,
+      "primitive": "pat"
+     },
+     {
+      "at_ms": 800,
+      "gain": 0.627,
+      "ms": 500,
+      "primitive": "pat"
+     },
+     {
+      "at_ms": 1200,
+      "gain": 0.627,
+      "ms": 500,
+      "primitive": "pat"
+     }
+    ],
+    "primitives": [
+     "pat"
+    ],
+    "recipe": "snd_okay",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a plaster strip: four gentle pats"
+   }
+  },
+  "assets/sound/snd_overwhelmed.ogg": {
+   "bytes": 18945,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 875,
+    "channels": 1,
+    "duration_ms": 573,
+    "family": "Static",
+    "feeling": "overwhelmed",
+    "format": "ogg/vorbis q6",
+    "haptic": "(25@255 off25 25@200 off25) \u00d75",
+    "haptic_expanded": "25@255 off25 25@200 off25 25@255 off25 25@200 off25 25@255 off25 25@200 off25 25@255 off25 25@200 off25 25@255 off25 25@200 off25",
+    "peak_dbfs": -3.1,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 545,
+      "primitive": "crumple"
+     }
+    ],
+    "primitives": [
+     "crumple"
+    ],
+    "recipe": "snd_overwhelmed",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a crumpled ball: continuous crumple"
+   }
+  },
+  "assets/sound/snd_palm.ogg": {
+   "bytes": 15123,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1000,
+    "channels": 1,
+    "duration_ms": 909,
+    "family": "Warmth",
+    "feeling": "warm_palm",
+    "format": "ogg/vorbis q6",
+    "haptic": "600@140",
+    "haptic_expanded": "600@140",
+    "peak_dbfs": -2.85,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.549,
+      "ms": 886,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 0,
+      "gain": 0.247,
+      "ms": 600,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "press",
+     "rustle"
+    ],
+    "recipe": "snd_palm",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a coffee ring with a heart drawn inside: slow rub"
+   }
+  },
+  "assets/sound/snd_pick.ogg": {
+   "bytes": 20999,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1300,
+    "channels": 1,
+    "duration_ms": 962,
+    "family": "Mischief",
+    "feeling": "pick_one",
+    "format": "ogg/vorbis q6",
+    "haptic": "50@180 off120 \u00d76",
+    "haptic_expanded": "50@180 off120 50@180 off120 50@180 off120 50@180 off120 50@180 off120 50@180 off120",
+    "peak_dbfs": -2.96,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.565,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 3,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 170,
+      "gain": 0.565,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 173,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 340,
+      "gain": 0.565,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 343,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 510,
+      "gain": 0.565,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 513,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 680,
+      "gain": 0.565,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 683,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 850,
+      "gain": 0.565,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 853,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "flick",
+     "rustle"
+    ],
+    "recipe": "snd_pick",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a paper fortune teller: six folds"
+   }
+  },
+  "assets/sound/snd_poke.ogg": {
+   "bytes": 4955,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 430,
+    "channels": 1,
+    "duration_ms": 58,
+    "family": "Mischief",
+    "feeling": "poke",
+    "format": "ogg/vorbis q6",
+    "haptic": "30@255",
+    "haptic_expanded": "30@255",
+    "peak_dbfs": -2.92,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 48,
+      "primitive": "flick"
+     }
+    ],
+    "primitives": [
+     "flick"
+    ],
+    "recipe": "snd_poke",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a spitball: one flick"
+   }
+  },
+  "assets/sound/snd_snap.ogg": {
+   "bytes": 10819,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 940,
+    "channels": 1,
+    "duration_ms": 610,
+    "family": "Mischief",
+    "feeling": "snap",
+    "format": "ogg/vorbis q6",
+    "haptic": "20@255 off40 60@255 off400 20@180",
+    "haptic_expanded": "20@255 off40 60@255 off400 20@180",
+    "peak_dbfs": -2.81,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.8,
+      "ms": 70,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 60,
+      "gain": 1.0,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 62,
+      "gain": 0.8,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 520,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "tap"
+     }
+    ],
+    "primitives": [
+     "flick",
+     "rustle",
+     "tap"
+    ],
+    "recipe": "snd_snap",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a rubber band: stretch, snap, drop"
+   }
+  },
+  "assets/sound/snd_snapped.ogg": {
+   "bytes": 15107,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1275,
+    "channels": 1,
+    "duration_ms": 922,
+    "family": "Static",
+    "feeling": "snapped",
+    "format": "ogg/vorbis q6",
+    "haptic": "15@255 off15 15@255 off15 15@255 off300 500@255",
+    "haptic_expanded": "15@255 off15 15@255 off15 15@255 off300 500@255",
+    "peak_dbfs": -2.97,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 0,
+      "gain": 0.7,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 30,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 30,
+      "gain": 0.7,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 60,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 60,
+      "gain": 0.7,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 375,
+      "gain": 1.0,
+      "ms": 518,
+      "primitive": "scratch"
+     }
+    ],
+    "primitives": [
+     "flick",
+     "scratch",
+     "tap"
+    ],
+    "recipe": "snd_snapped",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a snapped pencil: three cracks, a long scrape"
+   }
+  },
+  "assets/sound/snd_squeeze.ogg": {
+   "bytes": 15389,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1040,
+    "channels": 1,
+    "duration_ms": 895,
+    "family": "Warmth",
+    "feeling": "squeeze",
+    "format": "ogg/vorbis q6",
+    "haptic": "80@90 off40 160@160 off40 320@230",
+    "haptic_expanded": "80@90 off40 160@160 off40 320@230",
+    "peak_dbfs": -3.01,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.353,
+      "ms": 310,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 120,
+      "gain": 0.627,
+      "ms": 390,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 320,
+      "gain": 0.902,
+      "ms": 550,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 360,
+      "gain": 0.316,
+      "ms": 280,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "press",
+     "rustle"
+    ],
+    "recipe": "snd_squeeze",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "an origami heart: press"
+   }
+  },
+  "assets/sound/snd_steady.ogg": {
+   "bytes": 30791,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 2500,
+    "channels": 1,
+    "duration_ms": 2500,
+    "family": "Shelter",
+    "feeling": "steady",
+    "format": "ogg/vorbis q6",
+    "haptic": "300@180 off300 300@180 off300 300@180 off300 300@180 off300 300@180",
+    "haptic_expanded": "300@180 off300 300@180 off300 300@180 off300 300@180 off300 300@180",
+    "peak_dbfs": -3.0,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 8,
+      "gain": 0.388,
+      "ms": 606,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 600,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 608,
+      "gain": 0.388,
+      "ms": 606,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 1200,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 1208,
+      "gain": 0.388,
+      "ms": 606,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 1800,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 1808,
+      "gain": 0.388,
+      "ms": 606,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 2400,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 2408,
+      "gain": 0.388,
+      "ms": 92,
+      "primitive": "press"
+     }
+    ],
+    "primitives": [
+     "press",
+     "tap"
+    ],
+    "recipe": "snd_steady",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a smooth stone: five slow taps"
+   }
+  },
+  "assets/sound/snd_stuck.ogg": {
+   "bytes": 10412,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 850,
+    "channels": 1,
+    "duration_ms": 491,
+    "family": "Mischief",
+    "feeling": "stuck_with_me",
+    "format": "ogg/vorbis q6",
+    "haptic": "30@220 off30 \u00d78",
+    "haptic_expanded": "30@220 off30 30@220 off30 30@220 off30 30@220 off30 30@220 off30 30@220 off30 30@220 off30 30@220 off30",
+    "peak_dbfs": -2.96,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.863,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 60,
+      "gain": 0.863,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 120,
+      "gain": 0.863,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 180,
+      "gain": 0.863,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 240,
+      "gain": 0.863,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 300,
+      "gain": 0.863,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 360,
+      "gain": 0.863,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 420,
+      "gain": 0.863,
+      "ms": 80,
+      "primitive": "tap"
+     }
+    ],
+    "primitives": [
+     "tap"
+    ],
+    "recipe": "snd_stuck",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a chain of staples: eight staple clicks"
+   }
+  },
+  "assets/sound/snd_tangled.ogg": {
+   "bytes": 12810,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 900,
+    "channels": 1,
+    "duration_ms": 569,
+    "family": "Static",
+    "feeling": "tangled",
+    "format": "ogg/vorbis q6",
+    "haptic": "40@180 off20 80@220 off20 40@180 off20 120@255 off20 40@180 off20 80@220",
+    "haptic_expanded": "40@180 off20 80@220 off20 40@180 off20 120@255 off20 40@180 off20 80@220",
+    "peak_dbfs": -2.58,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.706,
+      "ms": 58,
+      "primitive": "scratch"
+     },
+     {
+      "at_ms": 60,
+      "gain": 0.863,
+      "ms": 120,
+      "primitive": "tear"
+     },
+     {
+      "at_ms": 160,
+      "gain": 0.706,
+      "ms": 58,
+      "primitive": "scratch"
+     },
+     {
+      "at_ms": 220,
+      "gain": 1.0,
+      "ms": 160,
+      "primitive": "tear"
+     },
+     {
+      "at_ms": 360,
+      "gain": 0.706,
+      "ms": 58,
+      "primitive": "scratch"
+     },
+     {
+      "at_ms": 420,
+      "gain": 0.863,
+      "ms": 120,
+      "primitive": "tear"
+     }
+    ],
+    "primitives": [
+     "scratch",
+     "tear"
+    ],
+    "recipe": "snd_tangled",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a knot of thread: uneven thread pulls"
+   }
+  },
+  "assets/sound/snd_tea.ogg": {
+   "bytes": 14656,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1300,
+    "channels": 1,
+    "duration_ms": 986,
+    "family": "Shelter",
+    "feeling": "make_you_tea",
+    "format": "ogg/vorbis q6",
+    "haptic": "100@120 off100 100@120 off100 500@150",
+    "haptic_expanded": "100@120 off100 100@120 off100 500@150",
+    "peak_dbfs": -3.03,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.471,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 200,
+      "gain": 0.471,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 400,
+      "gain": 0.588,
+      "ms": 560,
+      "primitive": "pour"
+     }
+    ],
+    "primitives": [
+     "pour",
+     "tap"
+    ],
+    "recipe": "snd_tea",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a mug with steam: two clinks, a pour"
+   }
+  },
+  "assets/sound/snd_thinking.ogg": {
+   "bytes": 18004,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1340,
+    "channels": 1,
+    "duration_ms": 1194,
+    "family": "Warmth",
+    "feeling": "thinking_of_you",
+    "format": "ogg/vorbis q6",
+    "haptic": "40@80 off300 40@80 off300 260@170",
+    "haptic_expanded": "40@80 off300 40@80 off300 260@170",
+    "peak_dbfs": -2.74,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.282,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 340,
+      "gain": 0.282,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 680,
+      "gain": 0.667,
+      "ms": 490,
+      "primitive": "press"
+     }
+    ],
+    "primitives": [
+     "press",
+     "rustle"
+    ],
+    "recipe": "snd_thinking",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a sun doodled in a margin: two ticks, a press"
+   }
+  },
+  "assets/sound/snd_treat.ogg": {
+   "bytes": 14964,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1090,
+    "channels": 1,
+    "duration_ms": 726,
+    "family": "Sparkle",
+    "feeling": "treat",
+    "format": "ogg/vorbis q6",
+    "haptic": "50@200 off80 50@200 off80 300@150 off80 50@255",
+    "haptic_expanded": "50@200 off80 50@200 off80 300@150 off80 50@255",
+    "peak_dbfs": -2.92,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.784,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 0,
+      "gain": 0.627,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 130,
+      "gain": 0.784,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 130,
+      "gain": 0.627,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 260,
+      "gain": 0.471,
+      "ms": 330,
+      "primitive": "peel"
+     },
+     {
+      "at_ms": 640,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "tap"
+     }
+    ],
+    "primitives": [
+     "flick",
+     "peel",
+     "tap"
+    ],
+    "recipe": "snd_treat",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a curled ribbon: two snips, a curl, a tap"
+   }
+  },
+  "assets/sound/snd_ugh.ogg": {
+   "bytes": 15568,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1060,
+    "channels": 1,
+    "duration_ms": 707,
+    "family": "Static",
+    "feeling": "ugh",
+    "format": "ogg/vorbis q6",
+    "haptic": "180@255 off60 180@255 off60 180@255",
+    "haptic_expanded": "180@255 off60 180@255 off60 180@255",
+    "peak_dbfs": -3.01,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 198,
+      "primitive": "scratch"
+     },
+     {
+      "at_ms": 240,
+      "gain": 1.0,
+      "ms": 198,
+      "primitive": "scratch"
+     },
+     {
+      "at_ms": 480,
+      "gain": 1.0,
+      "ms": 198,
+      "primitive": "scratch"
+     }
+    ],
+    "primitives": [
+     "scratch"
+    ],
+    "recipe": "snd_ugh",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a scribbled-out line: three hard scratches"
+   }
+  },
+  "assets/sound/snd_user_pigeon.ogg": {
+   "bytes": 15988,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "authored_by": "noor",
+    "bound_ms": 1150,
+    "channels": 1,
+    "duration_ms": 975,
+    "family": "Mischief",
+    "feeling": "pigeon",
+    "format": "ogg/vorbis q6",
+    "haptic": "30@200 off80 30@200 off80 30@200 off300 200@160",
+    "haptic_expanded": "30@200 off80 30@200 off80 30@200 off300 200@160",
+    "peak_dbfs": -3.04,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.784,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 1,
+      "gain": 0.353,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 110,
+      "gain": 0.784,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 111,
+      "gain": 0.353,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 220,
+      "gain": 0.784,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 221,
+      "gain": 0.353,
+      "ms": 48,
+      "primitive": "flick"
+     },
+     {
+      "at_ms": 550,
+      "gain": 0.627,
+      "ms": 200,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 550,
+      "gain": 0.22,
+      "ms": 402,
+      "primitive": "press"
+     }
+    ],
+    "primitives": [
+     "flick",
+     "press",
+     "rustle",
+     "tap"
+    ],
+    "recipe": "snd_user_pigeon",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a pigeon on top of the classroom cupboard: three claw taps on a cupboard, a wing rustle"
+   }
+  },
+  "assets/sound/snd_user_soup.ogg": {
+   "bytes": 17843,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "authored_by": "teo",
+    "bound_ms": 1600,
+    "channels": 1,
+    "duration_ms": 1286,
+    "family": "Shelter",
+    "feeling": "soup",
+    "format": "ogg/vorbis q6",
+    "haptic": "150@130 off150 150@130 off150 600@170",
+    "haptic_expanded": "150@130 off150 150@130 off150 600@170",
+    "peak_dbfs": -2.66,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.459,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 10,
+      "gain": 0.178,
+      "ms": 426,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 300,
+      "gain": 0.459,
+      "ms": 80,
+      "primitive": "tap"
+     },
+     {
+      "at_ms": 310,
+      "gain": 0.178,
+      "ms": 426,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 600,
+      "gain": 0.667,
+      "ms": 660,
+      "primitive": "pour"
+     }
+    ],
+    "primitives": [
+     "pour",
+     "press",
+     "tap"
+    ],
+    "recipe": "snd_user_soup",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a pot of Teo's day-off soup: two lid taps, a slow pour"
+   }
+  },
+  "assets/sound/snd_wish.ogg": {
+   "bytes": 35522,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 2500,
+    "channels": 1,
+    "duration_ms": 2409,
+    "family": "Ache",
+    "feeling": "wish_you_were_here",
+    "format": "ogg/vorbis q6",
+    "haptic": "250@180 off400 250@120 off400 250@70 off400 250@40",
+    "haptic_expanded": "250@180 off400 250@120 off400 250@70 off400 250@40",
+    "peak_dbfs": -2.98,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.706,
+      "ms": 310,
+      "primitive": "page_turn"
+     },
+     {
+      "at_ms": 650,
+      "gain": 0.471,
+      "ms": 350,
+      "primitive": "page_turn"
+     },
+     {
+      "at_ms": 1300,
+      "gain": 0.275,
+      "ms": 390,
+      "primitive": "page_turn"
+     },
+     {
+      "at_ms": 1950,
+      "gain": 0.157,
+      "ms": 430,
+      "primitive": "page_turn"
+     }
+    ],
+    "primitives": [
+     "page_turn"
+    ],
+    "recipe": "snd_wish",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a torn cinema ticket: four fading turns"
+   }
+  },
+  "assets/sound/snd_yes.ogg": {
+   "bytes": 16031,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1020,
+    "channels": 1,
+    "duration_ms": 654,
+    "family": "Sparkle",
+    "feeling": "yes",
+    "format": "ogg/vorbis q6",
+    "haptic": "60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255",
+    "haptic_expanded": "60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255",
+    "peak_dbfs": -3.05,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.392,
+      "ms": 80,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 100,
+      "gain": 0.706,
+      "ms": 80,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 200,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 460,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "punch"
+     },
+     {
+      "at_ms": 465,
+      "gain": 0.6,
+      "ms": 60,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 560,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "punch"
+     },
+     {
+      "at_ms": 565,
+      "gain": 0.6,
+      "ms": 60,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "punch",
+     "rustle"
+    ],
+    "recipe": "snd_yes",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a biro firework: rising, then two bursts"
+   }
+  },
+  "assets/sound/ui_land.ogg": {
+   "bytes": 9807,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 450,
+    "channels": 1,
+    "duration_ms": 450,
+    "format": "ogg/vorbis q6",
+    "haptic": null,
+    "peak_dbfs": -3.05,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 450,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 30,
+      "gain": 0.5,
+      "ms": 120,
+      "primitive": "rustle"
+     }
+    ],
+    "primitives": [
+     "press",
+     "rustle"
+    ],
+    "recipe": "ui_land",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a note settling: a press and one rustle"
+   }
+  },
+  "assets/sound/ui_page.ogg": {
+   "bytes": 11892,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 700,
+    "channels": 1,
+    "duration_ms": 509,
+    "format": "ogg/vorbis q6",
+    "haptic": null,
+    "peak_dbfs": -3.0,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 480,
+      "primitive": "page_turn"
+     }
+    ],
+    "primitives": [
+     "page_turn"
+    ],
+    "recipe": "ui_page",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a page turned"
+   }
+  },
+  "assets/sound/ui_pencil.ogg": {
+   "bytes": 6839,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 220,
+    "channels": 1,
+    "duration_ms": 198,
+    "format": "ogg/vorbis q6",
+    "haptic": null,
+    "peak_dbfs": -2.93,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 168,
+      "primitive": "scratch"
+     }
+    ],
+    "primitives": [
+     "scratch"
+    ],
+    "recipe": "ui_pencil",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a pencil mark"
+   }
+  },
+  "assets/sound/ui_send.ogg": {
+   "bytes": 8816,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 450,
+    "channels": 1,
+    "duration_ms": 359,
+    "format": "ogg/vorbis q6",
+    "haptic": null,
+    "peak_dbfs": -3.04,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.9,
+      "ms": 330,
+      "primitive": "slide"
+     },
+     {
+      "at_ms": 300,
+      "gain": 0.7,
+      "ms": 48,
+      "primitive": "flick"
+     }
+    ],
+    "primitives": [
+     "flick",
+     "slide"
+    ],
+    "recipe": "ui_send",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a note sliding off the desk"
+   }
+  },
+  "assets/sound/ui_tape.ogg": {
+   "bytes": 8952,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 260,
+    "channels": 1,
+    "duration_ms": 239,
+    "format": "ogg/vorbis q6",
+    "haptic": null,
+    "peak_dbfs": -2.51,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 210,
+      "primitive": "peel"
+     }
+    ],
+    "primitives": [
+     "peel"
+    ],
+    "recipe": "ui_tape",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a short strip of tape peeled"
+   }
+  },
+  "assets/sound/ui_tear.ogg": {
+   "bytes": 10017,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 470,
+    "channels": 1,
+    "duration_ms": 469,
+    "format": "ogg/vorbis q6",
+    "haptic": null,
+    "peak_dbfs": -3.03,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 440,
+      "primitive": "tear"
+     }
+    ],
+    "primitives": [
+     "tear"
+    ],
+    "recipe": "ui_tear",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a strip torn off a sheet"
+   }
+  },
+  "assets/sound/ui_tick.ogg": {
+   "bytes": 5205,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 140,
+    "channels": 1,
+    "duration_ms": 90,
+    "format": "ogg/vorbis q6",
+    "haptic": null,
+    "peak_dbfs": -3.02,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 1.0,
+      "ms": 80,
+      "primitive": "tap"
+     }
+    ],
+    "primitives": [
+     "tap"
+    ],
+    "recipe": "ui_tick",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a pencil tick on the desk"
+   }
+  },
+  "assets/sound/ui_unfold.ogg": {
+   "bytes": 22886,
+   "generator": "tools/sound/synth.py",
+   "kind": "sound",
+   "settings": {
+    "bound_ms": 1200,
+    "channels": 1,
+    "duration_ms": 1200,
+    "format": "ogg/vorbis q6",
+    "haptic": null,
+    "peak_dbfs": -2.99,
+    "placements": [
+     {
+      "at_ms": 0,
+      "gain": 0.7,
+      "ms": 230,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 40,
+      "gain": 0.35,
+      "ms": 340,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 400,
+      "gain": 0.8,
+      "ms": 230,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 440,
+      "gain": 0.35,
+      "ms": 340,
+      "primitive": "press"
+     },
+     {
+      "at_ms": 800,
+      "gain": 0.9,
+      "ms": 230,
+      "primitive": "rustle"
+     },
+     {
+      "at_ms": 840,
+      "gain": 0.35,
+      "ms": 340,
+      "primitive": "press"
+     }
+    ],
+    "primitives": [
+     "press",
+     "rustle"
+    ],
+    "recipe": "ui_unfold",
+    "sample_rate": 44100,
+    "seed": 20260903,
+    "sound": "a folded note opened: three soft rustles"
+   }
+  }
+ },
+ "light": "DIRECTION.md: daylight from upper-left, azimuth 315, elevation 50",
+ "version": 1
+}

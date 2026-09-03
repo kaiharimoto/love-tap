@@ -1,0 +1,132 @@
+// The one object graph: spine, transport, sync, identity, clock. Regions read it from the
+// widget tree; modules write through it. Nothing else holds state that could drift.
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
+
+import 'flags.dart';
+import 'spine/projections/state.dart';
+import 'spine/projections/thread.dart';
+import 'spine/spine.dart';
+import 'transport/sync.dart';
+import 'transport/transport.dart';
+
+/// Time source: the wall clock, or the frozen/driven clock in capture and seeded runs.
+class Clock {
+  Clock({this.frozenAt});
+  final DateTime? frozenAt;
+  Duration _offset = Duration.zero;
+
+  DateTime now() => (frozenAt ?? DateTime.now()).add(_offset).toUtc();
+
+  /// Capture mode: advance the driven clock.
+  void advance(Duration d) => _offset += d;
+
+  bool get frozen => frozenAt != null;
+}
+
+class AppScope extends ChangeNotifier {
+  AppScope({
+    required this.spine,
+    required this.transport,
+    required this.sync,
+    required this.clock,
+  }) {
+    _sub = spine.changes.listen((_) => _refresh());
+    _tsub = transport.status.listen((s) {
+      link = s;
+      notifyListeners();
+    });
+    _esub = transport.ephemeral.listen(_onEphemeral);
+    link = transport.current;
+    _refresh();
+  }
+
+  final Spine spine;
+  final Transport transport;
+  final SyncEngine sync;
+  final Clock clock;
+
+  late ThreadState thread;
+  late Map<Person, PersonState> state;
+  late TransportStatus link;
+
+  /// Partner typing, from ephemeral frames; expires on its own.
+  bool partnerTyping = false;
+  Timer? _typingTimer;
+  StreamSubscription<SpineChange>? _sub;
+  StreamSubscription<TransportStatus>? _tsub;
+  StreamSubscription<Ephemeral>? _esub;
+
+  Person get me => spine.identity.person;
+  Person get partner => me.other;
+  PersonState get partnerState => state[partner]!;
+  PersonState get myState => state[me]!;
+
+  void _refresh() {
+    final all = spine.all;
+    thread = projectThread(all, me: me);
+    state = projectState(all);
+    notifyListeners();
+  }
+
+  void _onEphemeral(Ephemeral e) {
+    if (e.from == me) return;
+    if (e.kind == 'typing') {
+      partnerTyping = e.data['on'] == true;
+      _typingTimer?.cancel();
+      if (partnerTyping) {
+        _typingTimer = Timer(const Duration(seconds: 6), () {
+          partnerTyping = false;
+          notifyListeners();
+        });
+      }
+      notifyListeners();
+    }
+  }
+
+  // ---- writing into the spine (every module and region goes through here) ------------------
+  bool get _hostAssign => transport.role == TransportRole.host;
+
+  Future<Event> emit(String type, Map<String, dynamic> payload, {DateTime? at}) =>
+      spine.append(type, payload, at: at ?? clock.now(), hostAssign: _hostAssign);
+
+  Future<void> sendTyping(bool on) async {
+    try {
+      await transport.sendEphemeral(Ephemeral(kind: 'typing', from: me, at: clock.now().millisecondsSinceEpoch, data: {'on': on}));
+    } catch (_) {}
+  }
+
+  /// Advance my read marker to the latest accepted row, if it moved.
+  Future<void> markRead() async {
+    final latest = thread.latestSeq();
+    if (latest == null) return;
+    final mine = thread.readUpto[me] ?? 0;
+    if (latest > mine) await emit('read_marker', {'upto_seq': latest});
+  }
+
+  static AppScope of(BuildContext context) {
+    final w = context.dependOnInheritedWidgetOfExactType<_ScopeProvider>();
+    assert(w != null, 'AppScope missing');
+    return w!.scope;
+  }
+
+  static Widget provide({required AppScope scope, required Widget child}) => _ScopeProvider(scope: scope, child: child);
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    _tsub?.cancel();
+    _esub?.cancel();
+    _typingTimer?.cancel();
+    super.dispose();
+  }
+}
+
+class _ScopeProvider extends InheritedNotifier<AppScope> {
+  const _ScopeProvider({required this.scope, required super.child}) : super(notifier: scope);
+  final AppScope scope;
+}
+
+/// Convenience: the flags a region may need.
+bool get isCaptureBuild => Flags.capture;

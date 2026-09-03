@@ -247,6 +247,20 @@ class Spine {
     _noteSeq(e.seq!);
   }
 
+  /// Seed import: events already carrying ids and seqs, identical on both devices. Only valid on
+  /// an empty spine; the seed loader guards with a meta key.
+  Future<void> importSeed(List<Event> events) async {
+    if (_ordered.isNotEmpty) throw StateError('seed import needs an empty spine');
+    await _store.upsertAll(events);
+    for (final e in events) {
+      _byId[e.id] = e;
+      _ordered.add(e);
+      _noteSeq(e.seq!);
+      _search.add(e);
+    }
+    _changes.add(SpineChange(added: events, assigned: const []));
+  }
+
   // ---- search ----------------------------------------------------------------------------
   List<SearchHit> search(String query, {Set<String>? types, Person? author, int? fromTs, int? toTs, int limit = 200}) =>
       _search.search(query, types: types, author: author, fromTs: fromTs, toTs: toTs, limit: limit);
