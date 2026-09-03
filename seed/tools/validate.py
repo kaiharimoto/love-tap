@@ -33,6 +33,8 @@ DATE_ACTIONS = {"planned","scheduled","done","rated","remembered"}
 TODO_ACTIONS = {"added","assigned","done","reopened","removed"}
 EMOJI = re.compile("[\U0001F300-\U0001FAFF\U00002600-\U000027BF\U0001F1E6-\U0001F1FF\U0001F900-\U0001F9FF⭐⭕‼⁉™ℹ↔-↙↩↪⌚⌛⌨⏏⏩-⏳⏸-⏺Ⓜ▪▫▶◀◻-◾⤴⤵⬅-⬇⬛⬜〰〽㊗㊙️]")
 KEY_RE = re.compile(r"^\d{4}-\d{2}-\d{2}-\d{4}$")
+# feelings authored during the year (the authoring event must appear in that month's file)
+KNOWN_AUTHORED = {"pigeon": "2025-10-16", "soup": "2026-02-10"}
 
 def builtin_feelings():
     ids = set()
@@ -107,13 +109,16 @@ def main(paths):
                 if not tgt.startswith("k:"): errors.append(f"{where}: target must be k:<key>")
                 elif tgt[2:] not in keys_seen: errors.append(f"{where}: target {tgt} not seen earlier")
             if typ in ("reaction","feeling"):
-                if pl.get("feeling_id") not in feelings: errors.append(f"{where}: unknown feeling {pl.get('feeling_id')!r}")
+                fid = pl.get("feeling_id")
+                ok = fid in feelings or (fid in KNOWN_AUTHORED and ts[:10] >= KNOWN_AUTHORED[fid])
+                if not ok: errors.append(f"{where}: unknown feeling {fid!r} (or used before it was authored)")
             if typ == "feeling":
                 i = pl.get("intensity")
                 if not isinstance(i,(int,float)) or not 0 <= i <= 1: errors.append(f"{where}: intensity must be 0..1")
             if typ == "feeling_authored":
                 fid = pl.get("feeling_id")
                 if fid in feelings: errors.append(f"{where}: feeling {fid} already exists")
+                elif fid in KNOWN_AUTHORED and ts[:10] != KNOWN_AUTHORED[fid]: errors.append(f"{where}: {fid} must be authored on {KNOWN_AUTHORED[fid]}")
                 else: feelings.add(fid)
             if typ == "state_declared":
                 sig, val = pl.get("signal"), pl.get("value")
