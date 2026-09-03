@@ -61,7 +61,7 @@ def reset_scene():
     return scene
 
 
-def render_settings(scene, width, height, samples=128, transparent=False, seed=20260903):
+def render_settings(scene, width, height, samples=128, transparent=False, seed=20260903, file_format="PNG", webp_quality=92):
     scene.render.engine = "CYCLES"
     scene.cycles.device = "CPU"
     scene.cycles.samples = samples
@@ -78,10 +78,13 @@ def render_settings(scene, width, height, samples=128, transparent=False, seed=2
     scene.render.resolution_y = height
     scene.render.resolution_percentage = 100
     scene.render.film_transparent = transparent
-    scene.render.image_settings.file_format = "PNG"
+    scene.render.image_settings.file_format = file_format
     scene.render.image_settings.color_mode = "RGBA" if transparent else "RGB"
-    scene.render.image_settings.color_depth = "8"
-    scene.render.image_settings.compression = 50
+    if file_format == "PNG":
+        scene.render.image_settings.color_depth = "8"
+        scene.render.image_settings.compression = 50
+    elif file_format == "WEBP":
+        scene.render.image_settings.quality = webp_quality
     scene.render.dither_intensity = 1.0
     scene.view_settings.view_transform = "Standard"   # a scan, not a filmic photograph
     scene.view_settings.look = "None"
@@ -183,9 +186,9 @@ def add_top_camera(scene, width_m, height_m, ortho=True, tilt_deg=0.0, distance=
     return cam
 
 
-def add_desk(scene, size_m=2.0):
+def add_desk(scene, size_m=2.0, z=-0.0005):
     """The desk plane under everything (catches contact shadows)."""
-    bpy.ops.mesh.primitive_plane_add(size=size_m, location=(0, 0, -0.0005))
+    bpy.ops.mesh.primitive_plane_add(size=size_m, location=(0, 0, z))
     desk = bpy.context.active_object
     desk.name = "desk"
     mat = bpy.data.materials.new("desk")
@@ -260,14 +263,14 @@ def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_i
 
     # fibre mottle in the colour (very subtle)
     mottle = nodes.new("ShaderNodeTexNoise")
-    mottle.inputs["Scale"].default_value = 160.0
-    mottle.inputs["Detail"].default_value = 6.0
-    mottle.inputs["Roughness"].default_value = 0.62
+    mottle.inputs["Scale"].default_value = 420.0
+    mottle.inputs["Detail"].default_value = 7.0
+    mottle.inputs["Roughness"].default_value = 0.68
     links.new(texco.outputs["UV"], mottle.inputs["Vector"])
     mottle_ramp = nodes.new("ShaderNodeValToRGB")
-    mottle_ramp.color_ramp.elements[0].position = 0.42
-    mottle_ramp.color_ramp.elements[0].color = (0.955, 0.95, 0.94, 1)
-    mottle_ramp.color_ramp.elements[1].position = 0.60
+    mottle_ramp.color_ramp.elements[0].position = 0.40
+    mottle_ramp.color_ramp.elements[0].color = (0.975, 0.972, 0.965, 1)
+    mottle_ramp.color_ramp.elements[1].position = 0.62
     mottle_ramp.color_ramp.elements[1].color = (1.0, 1.0, 1.0, 1)
     links.new(mottle.outputs["Fac"], mottle_ramp.inputs["Fac"])
     mottled = nodes.new("ShaderNodeMix")
@@ -305,19 +308,34 @@ def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_i
     grain = nodes.new("ShaderNodeTexWhiteNoise")
     grain.noise_dimensions = "2D"
     links.new(texco.outputs["UV"], grain.inputs["Vector"])
-    m1 = nodes.new("ShaderNodeMath"); m1.operation = "MULTIPLY"; m1.inputs[1].default_value = 0.65
-    m2 = nodes.new("ShaderNodeMath"); m2.operation = "MULTIPLY"; m2.inputs[1].default_value = 0.30
+    # long fibres: the same noise stretched along one direction (machine direction of the paper)
+    stretch = nodes.new("ShaderNodeMapping")
+    stretch.inputs["Scale"].default_value = (1.0, 7.0, 1.0)
+    stretch.inputs["Rotation"].default_value = (0.0, 0.0, 0.12)
+    links.new(texco.outputs["UV"], stretch.inputs["Vector"])
+    fibres = nodes.new("ShaderNodeTexNoise")
+    fibres.inputs["Scale"].default_value = fibre_scale * 0.45
+    fibres.inputs["Detail"].default_value = 5.0
+    fibres.inputs["Roughness"].default_value = 0.55
+    links.new(stretch.outputs["Vector"], fibres.inputs["Vector"])
+    m1 = nodes.new("ShaderNodeMath"); m1.operation = "MULTIPLY"; m1.inputs[1].default_value = 0.50
+    m2 = nodes.new("ShaderNodeMath"); m2.operation = "MULTIPLY"; m2.inputs[1].default_value = 0.22
     m3 = nodes.new("ShaderNodeMath"); m3.operation = "MULTIPLY"; m3.inputs[1].default_value = 0.05
+    m4 = nodes.new("ShaderNodeMath"); m4.operation = "MULTIPLY"; m4.inputs[1].default_value = 0.23
     links.new(fine.outputs["Fac"], m1.inputs[0])
     links.new(coarse.outputs["Fac"], m2.inputs[0])
     links.new(grain.outputs["Value"], m3.inputs[0])
+    links.new(fibres.outputs["Fac"], m4.inputs[0])
     a1 = nodes.new("ShaderNodeMath"); a1.operation = "ADD"
     a2 = nodes.new("ShaderNodeMath"); a2.operation = "ADD"
+    a3 = nodes.new("ShaderNodeMath"); a3.operation = "ADD"
     links.new(m1.outputs[0], a1.inputs[0]); links.new(m2.outputs[0], a1.inputs[1])
     links.new(a1.outputs[0], a2.inputs[0]); links.new(m3.outputs[0], a2.inputs[1])
+    links.new(a2.outputs[0], a3.inputs[0]); links.new(m4.outputs[0], a3.inputs[1])
+    a2 = a3
     bump = nodes.new("ShaderNodeBump")
-    bump.inputs["Strength"].default_value = 0.35 * tooth
-    bump.inputs["Distance"].default_value = 0.00012
+    bump.inputs["Strength"].default_value = 0.45 * tooth
+    bump.inputs["Distance"].default_value = 0.00016
     links.new(a2.outputs[0], bump.inputs["Height"])
     links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
     return mat
@@ -342,3 +360,42 @@ def render(scene, path):
 
 def load_image(path):
     return bpy.data.images.load(os.path.abspath(path), check_existing=True)
+
+
+# ---- images (Blender's own API: the bundled Python has no Pillow) ----------------------------
+def load_image_array(path):
+    """An RGBA float array (h, w, 4) in top-down row order, read through Blender."""
+    import numpy as np
+    img = bpy.data.images.load(os.path.abspath(path), check_existing=False)
+    w, h = img.size
+    buf = np.empty(w * h * 4, dtype=np.float32)
+    img.pixels.foreach_get(buf)
+    bpy.data.images.remove(img)
+    return np.flipud(buf.reshape(h, w, 4))
+
+
+def save_image_array(path, arr, colorspace="sRGB"):
+    """Write an RGBA float array (h, w, 4), top-down, as PNG through Blender."""
+    import numpy as np
+    h, w = arr.shape[:2]
+    img = bpy.data.images.new("out", width=w, height=h, alpha=True, float_buffer=False)
+    img.colorspace_settings.name = colorspace
+    img.pixels.foreach_set(np.flipud(arr).astype(np.float32).ravel())
+    img.filepath_raw = os.path.abspath(path)
+    img.file_format = "PNG"
+    img.save()
+    bpy.data.images.remove(img)
+    return path
+
+
+def keep_shadow_only(path):
+    """A shadow-catcher render carries the shadow in its alpha and the ground in its colour.
+    Keep the alpha, drop the colour: the app multiplies this over whatever is beneath."""
+    import numpy as np
+    a = load_image_array(path)
+    shadow = np.clip(a[..., 3] * (1.0 - a[..., 0]), 0.0, 1.0)
+    out = np.zeros_like(a)
+    out[..., 3] = shadow
+    save_image_array(path, out, colorspace="Non-Color")
+    return path
+

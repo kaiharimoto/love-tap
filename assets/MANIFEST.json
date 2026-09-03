@@ -1,5 +1,755 @@
 {
  "files": {
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/foldtest/unfold_thirds": {
+   "bytes": 4096,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_sequence",
+   "settings": {
+    "crease_mm": 1.4,
+    "frames": 240,
+    "light": "day",
+    "resolution": 320,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_boat.png": {
+   "bytes": 29792,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_boat",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_boat_shadow.png": {
+   "bytes": 17823,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_boat",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_candle.png": {
+   "bytes": 29421,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_candle",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_candle_shadow.png": {
+   "bytes": 23262,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_candle",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_crane.png": {
+   "bytes": 38207,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_crane",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_crane_shadow.png": {
+   "bytes": 20858,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_crane",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_crumple_ball.png": {
+   "bytes": 33125,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_crumple_ball",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_crumple_ball_shadow.png": {
+   "bytes": 13307,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_crumple_ball",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_fortune_teller.png": {
+   "bytes": 45790,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_fortune_teller",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_fortune_teller_shadow.png": {
+   "bytes": 34455,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_fortune_teller",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_gold_star.png": {
+   "bytes": 25973,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_gold_star",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_gold_star_shadow.png": {
+   "bytes": 12623,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_gold_star",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_heart_fold.png": {
+   "bytes": 31349,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_heart_fold",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_heart_fold_shadow.png": {
+   "bytes": 18079,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_heart_fold",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_mug.png": {
+   "bytes": 35721,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_mug",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_mug_shadow.png": {
+   "bytes": 23830,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_mug",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_plane.png": {
+   "bytes": 32193,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_plane",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_plane_shadow.png": {
+   "bytes": 31409,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_plane",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_ribbon.png": {
+   "bytes": 28864,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_ribbon",
+    "pass": "object",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/objtest/obj_ribbon_shadow.png": {
+   "bytes": 21860,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_ribbon",
+    "pass": "shadow",
+    "resolution": [
+     300,
+     300
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 12
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/stocktest/lined_01.png": {
+   "bytes": 269160,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "PNG",
+    "light": "day",
+    "look": {
+     "fibre": 950.0,
+     "rgb": [
+      0.93,
+      0.9,
+      0.84
+     ],
+     "sheen": 0.22,
+     "tooth": 1.05
+    },
+    "px_per_mm": 14.29,
+    "resolution": [
+     2147,
+     3000
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.92,
+       "end": 205.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.18,
+       "ghost_offset": 0.129,
+       "kind": "hrules",
+       "pitch": 8.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.2731,
+        "dy": 0.1455,
+        "rot_deg": 0.0862
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 22.815,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.123,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0
+       ],
+       "reg": {
+        "dx": 0.1711,
+        "dy": -0.0678,
+        "rot_deg": -0.0852
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.4,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 2879916390,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "lined",
+     "variant": 1
+    },
+    "samples": 24,
+    "seed": 2879916390,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "lined",
+    "variant": 1,
+    "yellowing": 0.12
+   }
+  },
+  "assets/fonts/MANIFEST.fonts.json": {
+   "bytes": 6141,
+   "generator": "tools/handwriting/build.py",
+   "kind": "manifest",
+   "settings": {
+    "faces": [
+     "NoorHand"
+    ],
+    "inputs": {
+     "tools/handwriting/hands.json": "8064eea99da0afa21e6da4fd9e117dc2e2377af64ff466e9168ccb1b2ab6088b",
+     "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
+    },
+    "seed": 20260903
+   }
+  },
+  "assets/fonts/NoorHand.ttf": {
+   "bytes": 311744,
+   "generator": "tools/handwriting/build.py",
+   "kind": "font",
+   "settings": {
+    "face": "NoorHand",
+    "glyphs": 155,
+    "hand": {
+     "baseline_wobble": 9,
+     "corner_deg": 92,
+     "description": "fast, slanted ballpoint; loops open; crosses t late; light with heavy stops",
+     "exit_stretch": 1.15,
+     "family": "NoorHand",
+     "gap": 28,
+     "ink": "#1f2a44",
+     "jitter": {
+      "alt_prob": 0.55,
+      "field_wavelength": [
+       220,
+       520
+      ],
+      "point": 18,
+      "point_noise": 5,
+      "rotation_deg": 2.5
+     },
+     "loop_openness": 0.85,
+     "paper": "#f1ecdf",
+     "pen": {
+      "edge_noise_em": 0.0,
+      "gamma": 1.6,
+      "model": "ballpoint",
+      "pool_prob": 0.75,
+      "pool_radius": 1.4,
+      "pool_turn_deg": 70,
+      "skip_len": [
+       22,
+       44
+      ],
+      "skip_prob": 0.1,
+      "width_em": 0.055,
+      "width_max": 1.45,
+      "width_min": 0.62
+     },
+     "person": "Noor",
+     "pressure": {
+      "base": 0.3,
+      "baseline_weight": 0.0,
+      "down_weight": 0.12,
+      "jitter": 0.14,
+      "scale": 0.45,
+      "start_weight": 0.25,
+      "stop_weight": 0.55,
+      "turn_weight": 0.35
+     },
+     "rounding": 0.05,
+     "slant_deg": 12,
+     "space_em": 0.32,
+     "spacing_jitter": 12,
+     "start_overshoot": 16,
+     "style": "Regular",
+     "t_cross_late": 0.85,
+     "tension": 0.35,
+     "variants": 5,
+     "width_scale": 0.98,
+     "xheight_scale": 0.96
+    },
+    "inputs": {
+     "tools/handwriting/hands.json": "8064eea99da0afa21e6da4fd9e117dc2e2377af64ff466e9168ccb1b2ab6088b",
+     "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
+    },
+    "outline": "RDP + Schneider cubic fit + cu2qu",
+    "seed": 20260903,
+    "union": "skia-pathops",
+    "variants": 5
+   }
+  },
+  "assets/fonts/TeoHand.ttf": {
+   "bytes": 724340,
+   "generator": "tools/handwriting/build.py",
+   "kind": "font",
+   "settings": {
+    "face": "TeoHand",
+    "glyphs": 155,
+    "hand": {
+     "baseline_wobble": 6,
+     "corner_deg": 100,
+     "description": "upright, rounded pencil; presses hard; heaviest on downstrokes; sits heavy on the line",
+     "exit_stretch": 0.85,
+     "family": "TeoHand",
+     "gap": 46,
+     "ink": "#3a3a3c",
+     "jitter": {
+      "alt_prob": 0.5,
+      "field_wavelength": [
+       260,
+       600
+      ],
+      "point": 18,
+      "point_noise": 4,
+      "rotation_deg": 2.5
+     },
+     "loop_openness": 0.25,
+     "paper": "#f1ecdf",
+     "pen": {
+      "edge_noise_em": 0.012,
+      "edge_samples_per_em": 40,
+      "gamma": 1.2,
+      "model": "pencil",
+      "width_em": 0.075,
+      "width_max": 1.5,
+      "width_min": 0.55
+     },
+     "person": "Teo",
+     "pressure": {
+      "base": 0.62,
+      "baseline_weight": 0.28,
+      "down_weight": 0.38,
+      "jitter": 0.1,
+      "scale": 0.4,
+      "start_weight": 0.05,
+      "stop_weight": 0.08,
+      "turn_weight": 0.05
+     },
+     "rounding": 0.55,
+     "slant_deg": 0,
+     "space_em": 0.36,
+     "spacing_jitter": 12,
+     "start_overshoot": 4,
+     "style": "Regular",
+     "t_cross_late": 0.0,
+     "tension": 0.5,
+     "variants": 5,
+     "width_scale": 1.06,
+     "xheight_scale": 1.04
+    },
+    "inputs": {
+     "tools/handwriting/hands.json": "8064eea99da0afa21e6da4fd9e117dc2e2377af64ff466e9168ccb1b2ab6088b",
+     "tools/handwriting/skeletons.json": "5581c72f0df70dc1ee0d617144008ead762ac6e792a69fb0b52e4e3ad128b5ae"
+    },
+    "outline": "RDP + Schneider cubic fit + cu2qu",
+    "seed": 20260903,
+    "union": "skia-pathops",
+    "variants": 5
+   }
+  },
+  "assets/fonts/previews/NoorHand.png": {
+   "bytes": 309199,
+   "generator": "tools/handwriting/build.py",
+   "kind": "preview",
+   "settings": {
+    "face": "NoorHand",
+    "features": [
+     "calt"
+    ],
+    "font": "assets/fonts/NoorHand.ttf",
+    "height": 1079,
+    "layout_engine": "raqm",
+    "scale": 2,
+    "seed": 20260903,
+    "width": 2200
+   }
+  },
+  "assets/fonts/previews/TeoHand.png": {
+   "bytes": 338552,
+   "generator": "tools/handwriting/build.py",
+   "kind": "preview",
+   "settings": {
+    "face": "TeoHand",
+    "features": [
+     "calt"
+    ],
+    "font": "assets/fonts/TeoHand.ttf",
+    "height": 1176,
+    "layout_engine": "raqm",
+    "scale": 2,
+    "seed": 20260903,
+    "width": 2200
+   }
+  },
+  "assets/paper/lined_01.webp": {
+   "bytes": 83650,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 950.0,
+     "rgb": [
+      0.93,
+      0.9,
+      0.84
+     ],
+     "sheen": 0.22,
+     "tooth": 1.05
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.92,
+       "end": 205.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.18,
+       "ghost_offset": 0.129,
+       "kind": "hrules",
+       "pitch": 8.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.2731,
+        "dy": 0.1455,
+        "rot_deg": 0.0862
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 22.815,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.123,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0
+       ],
+       "reg": {
+        "dx": 0.1711,
+        "dy": -0.0678,
+        "rot_deg": -0.0852
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.4,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 2879916390,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "lined",
+     "variant": 1
+    },
+    "samples": 20,
+    "seed": 2879916390,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "lined",
+    "variant": 1,
+    "yellowing": 0.12
+   }
+  },
   "assets/sound/snd_breathe.ogg": {
    "bytes": 28868,
    "generator": "tools/sound/synth.py",

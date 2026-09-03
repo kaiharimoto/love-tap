@@ -78,11 +78,21 @@ def build_sheet(stock, variant, w_mm, h_mm):
     p1, p2 = rng.uniform(0, 6.28), rng.uniform(0, 6.28)
     k1, k2 = rng.uniform(0.8, 1.4), rng.uniform(1.2, 2.2)
     bow = rng.uniform(-0.25, 0.25) * 1e-3
+    zs = []
     for v in bm.verts:
         u = v.co.x / w + 0.5
         t = v.co.y / h + 0.5
         z = a1 * math.sin(2 * math.pi * k1 * u + p1) + a2 * math.sin(2 * math.pi * k2 * t + p2) + bow * (2 * u - 1) ** 2
-        v.co.z = z
+        zs.append(z)
+    # the sheet rests on the desk: its lowest point (after the thickness below the surface) sits at z = 0
+    zmin = min(zs)
+    for v, z in zip(bm.verts, zs):
+        v.co.z = z - zmin + THICKNESS_M + 0.00002
+    # a guillotined edge is never perfectly straight: 0.05 mm of jitter along the outer verts
+    for (i, j), v in verts.items():
+        if v.is_valid and (i == 0 or i == nx or j == 0 or j == ny):
+            v.co.x += rng.uniform(-0.05, 0.05) * 1e-3
+            v.co.y += rng.uniform(-0.05, 0.05) * 1e-3
 
     # spiral: torn fringe along the left edge (the paper pulled out of the coil)
     if stock == "spiral":
@@ -200,7 +210,7 @@ def ensure_rules(stock, variant):
     return path, rules.params_for(stock, variant)
 
 
-def render_sheet(stock, variant, res_long, condition, samples, out_dir):
+def render_sheet(stock, variant, res_long, condition, samples, out_dir, fmt="WEBP", border=None, threads=0):
     scene = common.reset_scene()
     w_mm, h_mm = rules.SHEETS_MM[stock]
     rules_png, params = ensure_rules(stock, variant)
@@ -214,7 +224,7 @@ def render_sheet(stock, variant, res_long, condition, samples, out_dir):
     mat = common.paper_material(f"paper_{stock}_{variant}", look["rgb"], tooth=look["tooth"], yellowing=yellow,
                                 sheen=look["sheen"], rules_image=rules_img, fibre_scale=look["fibre"])
     sheet.data.materials.append(mat)
-    common.add_desk(scene)
+    common.add_desk(scene, z=0.0)
 
     fw, fh = (w_mm + 2 * MARGIN_MM) / 1000.0, (h_mm + 2 * MARGIN_MM) / 1000.0
     common.add_top_camera(scene, fw, fh, ortho=True, distance=0.6)
@@ -222,20 +232,30 @@ def render_sheet(stock, variant, res_long, condition, samples, out_dir):
         rx, ry = int(round(res_long * fw / fh)), res_long
     else:
         rx, ry = res_long, int(round(res_long * fh / fw))
-    common.render_settings(scene, rx, ry, samples=samples, transparent=False)
+    common.render_settings(scene, rx, ry, samples=samples, transparent=False, file_format=fmt)
+    scene.cycles.adaptive_threshold = 0.05
+    if threads:
+        scene.render.threads_mode = "FIXED"
+        scene.render.threads = threads
+    if border:
+        scene.render.use_border = True
+        scene.render.use_crop_to_border = True
+        scene.render.border_min_x, scene.render.border_min_y = border[0], border[1]
+        scene.render.border_max_x, scene.render.border_max_y = border[2], border[3]
     if condition == "day":
         common.add_daylight(scene)
     else:
         common.add_dusk(scene)
 
     name = f"{stock}_{variant:02d}" + ("" if condition == "day" else "_dusk")
-    path = os.path.join(out_dir, name + ".png")
+    path = os.path.join(out_dir, name + (".webp" if fmt == "WEBP" else ".png"))
     common.render(scene, path)
     manifest.record(path, "blender/paper/stocks.py", {
         "stock": stock, "variant": variant, "condition": condition, "resolution": [rx, ry],
         "sheet_mm": [w_mm, h_mm], "samples": samples, "seed": int(rules.seed_for(stock, variant)),
         "look": {k: v for k, v in look.items() if k != "yellow"}, "yellowing": yellow,
-        "rules": params, "rig": "blender/rig/common.py", "light": condition,
+        "rules": params, "rig": "blender/rig/common.py", "light": condition, "format": fmt,
+        "px_per_mm": round(ry / max(w_mm, h_mm), 2),
     }, kind="paper_stock")
     return path
 
@@ -246,11 +266,15 @@ def main():
     ap.add_argument("--stock", choices=rules.STOCKS)
     ap.add_argument("--variant", type=int, default=1)
     ap.add_argument("--all", action="store_true")
-    ap.add_argument("--res", type=int, default=2400, help="long side in px")
-    ap.add_argument("--samples", type=int, default=64)
+    ap.add_argument("--res", type=int, default=3000, help="long side in px")
+    ap.add_argument("--samples", type=int, default=24)
     ap.add_argument("--condition", choices=["day", "dusk", "both"], default="day")
     ap.add_argument("--out", default=OUT_DIR)
     ap.add_argument("--skip-existing", action="store_true")
+    ap.add_argument("--format", choices=["WEBP", "PNG"], default="WEBP")
+    ap.add_argument("--threads", type=int, default=0, help="render threads (0 = all)")
+    ap.add_argument("--border", type=float, nargs=4, metavar=("X0", "Y0", "X1", "Y1"),
+                    help="render only this fraction of the frame (fast full-resolution tests)")
     a = ap.parse_args(argv)
     conds = ["day", "dusk"] if a.condition == "both" else [a.condition]
     jobs = []
@@ -267,13 +291,13 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     for (s, v, c) in jobs:
         name = f"{s}_{v:02d}" + ("" if c == "day" else "_dusk")
-        target = os.path.join(a.out, name + ".png")
+        target = os.path.join(a.out, name + (".webp" if a.format == "WEBP" else ".png"))
         if a.skip_existing and os.path.exists(target):
             print(f"skip {name}")
             continue
         import time
         t0 = time.time()
-        path = render_sheet(s, v, a.res, c, a.samples, a.out)
+        path = render_sheet(s, v, a.res, c, a.samples, a.out, fmt=a.format, border=a.border, threads=a.threads)
         print(f"rendered {path} in {time.time() - t0:.0f}s", flush=True)
 
 
