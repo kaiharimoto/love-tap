@@ -1,0 +1,639 @@
+{"key":"2025-10-01-0001","ts":"2025-10-01T07:12:04+01:00","author":"noor","type":"message","payload":{"text":"bins are out. both. before 7. nobody saw"}}
+{"key":"2025-10-01-0002","ts":"2025-10-01T07:13:10+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":2}}
+{"key":"2025-10-01-0003","ts":"2025-10-01T07:41:30+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-01-0004","ts":"2025-10-01T12:44:12+01:00","author":"noor","type":"message","payload":{"text":"hall bulb at yours. still dead? i have spares in the drawer by my door if you want them"}}
+{"key":"2025-10-01-0005","ts":"2025-10-01T12:46:02+01:00","author":"noor","type":"todo_event","payload":{"todo_id":"todo_bulb","action":"added","text":"hall bulb at teos","assignee":"teo"}}
+{"key":"2025-10-01-0006","ts":"2025-10-01T12:52:40+01:00","author":"noor","type":"message","payload":{"text":"3 nights this week or 4"}}
+{"key":"2025-10-01-0007","ts":"2025-10-01T15:02:11+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-01-0008","ts":"2025-10-01T15:06:45+01:00","author":"teo","type":"message","payload":{"text":"Three. Tonight, tomorrow, Friday.","reply_to":"k:2025-10-01-0006"}}
+{"key":"2025-10-01-0009","ts":"2025-10-01T15:07:30+01:00","author":"teo","type":"message","payload":{"text":"The bulb is on the list. The list is on the fridge.","reply_to":"k:2025-10-01-0005"}}
+{"key":"2025-10-01-0010","ts":"2025-10-01T15:40:08+01:00","author":"noor","type":"message","payload":{"text":"the list on the fridge is from august"}}
+{"key":"2025-10-01-0011","ts":"2025-10-01T15:41:02+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"nyeh","intensity":0.5}}
+{"key":"2025-10-01-0012","ts":"2025-10-01T15:42:50+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-01-0013","ts":"2025-10-01T16:30:22+01:00","author":"teo","type":"message","payload":{"text":"Rice. Eating it standing up. Leaving at seven."}}
+{"key":"2025-10-01-0014","ts":"2025-10-01T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-01-0015","ts":"2025-10-01T19:26:14+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"here","intensity":0.6}}
+{"key":"2025-10-01-0016","ts":"2025-10-01T21:40:33+01:00","author":"noor","type":"message","payload":{"text":"marking year 8 still lifes. one of them drew the apple as a cube. hes my favourite now"}}
+{"key":"2025-10-01-0017","ts":"2025-10-01T22:15:47+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"thinking_of_you","intensity":0.6}}
+{"key":"2025-10-01-0018","ts":"2025-10-01T23:20:05+01:00","author":"noor","type":"state_declared","payload":{"signal":"mood","value":"calm"}}
+{"key":"2025-10-02-0001","ts":"2025-10-02T08:14:20+01:00","author":"teo","type":"message","payload":{"text":"Quiet one. A man sang all night. Not badly."}}
+{"key":"2025-10-02-0002","ts":"2025-10-02T08:16:02+01:00","author":"teo","type":"message","payload":{"text":"Cold walk. I need a proper coat."}}
+{"key":"2025-10-02-0003","ts":"2025-10-02T08:17:11+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"squeeze","intensity":0.7}}
+{"key":"2025-10-02-0004","ts":"2025-10-02T08:20:38+01:00","author":"noor","type":"message","payload":{"text":"dont buy a coat without me. you will buy a sad one","reply_to":"k:2025-10-02-0002"}}
+{"key":"2025-10-02-0005","ts":"2025-10-02T08:21:15+01:00","author":"noor","type":"message","payload":{"text":"film thurs? the long one"}}
+{"key":"2025-10-02-0006","ts":"2025-10-02T08:22:01+01:00","author":"noor","type":"message_edit","payload":{"target":"k:2025-10-02-0005","text":"film sat? the long one"}}
+{"key":"2025-10-02-0007","ts":"2025-10-02T08:24:44+01:00","author":"teo","type":"message","payload":{"text":"Saturday works. If I am upright by six."}}
+{"key":"2025-10-02-0008","ts":"2025-10-02T08:26:30+01:00","author":"noor","type":"date_event","payload":{"date_id":"date_film","action":"planned","title":"the long film","when":"2025-10-04T18:30:00+01:00","place":"the cinema on the hill"}}
+{"key":"2025-10-02-0009","ts":"2025-10-02T08:27:12+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-02-0010","ts":"2025-10-02T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-02-0011","ts":"2025-10-02T12:41:09+01:00","author":"noor","type":"message","payload":{"text":"dentist. whose turn. its yours. its been yours since july"}}
+{"key":"2025-10-02-0012","ts":"2025-10-02T12:42:26+01:00","author":"noor","type":"todo_event","payload":{"todo_id":"todo_dentist","action":"added","text":"book the dentist","assignee":"teo"}}
+{"key":"2025-10-02-0013","ts":"2025-10-02T12:55:51+01:00","author":"noor","type":"message","payload":{"text":"also year 7 have discovered i cant draw horses"}}
+{"key":"2025-10-02-0014","ts":"2025-10-02T15:10:03+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-02-0015","ts":"2025-10-02T15:12:40+01:00","author":"teo","type":"message","payload":{"text":"I booked it last time. The time before was the flood.","reply_to":"k:2025-10-02-0011"}}
+{"key":"2025-10-02-0016","ts":"2025-10-02T15:13:22+01:00","author":"teo","type":"message","payload":{"text":"Fine. I will ring them tomorrow."}}
+{"key":"2025-10-02-0017","ts":"2025-10-02T15:44:07+01:00","author":"noor","type":"message","payload":{"text":"you wont"}}
+{"key":"2025-10-02-0018","ts":"2025-10-02T15:45:01+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"poke","intensity":0.5}}
+{"key":"2025-10-02-0019","ts":"2025-10-02T16:20:18+01:00","author":"teo","type":"message","payload":{"text":"Correct."}}
+{"key":"2025-10-02-0020","ts":"2025-10-02T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-02-0021","ts":"2025-10-02T19:31:40+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"steady","intensity":0.5}}
+{"key":"2025-10-02-0022","ts":"2025-10-02T20:05:12+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"year 9 sketchbooks"}}
+{"key":"2025-10-02-0023","ts":"2025-10-02T22:48:33+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.6}}
+{"key":"2025-10-03-0001","ts":"2025-10-03T03:12:28+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"long_day","intensity":0.8}}
+{"key":"2025-10-03-0002","ts":"2025-10-03T08:13:05+01:00","author":"teo","type":"voice_note","payload":{"voice":"2025-10_teo_walk_oct3","duration_ms":41000}}
+{"key":"2025-10-03-0003","ts":"2025-10-03T08:15:12+01:00","author":"teo","type":"message","payload":{"text":"Third one. Legs gone."}}
+{"key":"2025-10-03-0004","ts":"2025-10-03T08:16:40+01:00","author":"teo","type":"message","payload":{"text":"The man sang again. Same song. I know the words now."}}
+{"key":"2025-10-03-0005","ts":"2025-10-03T08:18:02+01:00","author":"noor","type":"message","payload":{"text":"which song","reply_to":"k:2025-10-03-0004"}}
+{"key":"2025-10-03-0006","ts":"2025-10-03T08:19:15+01:00","author":"teo","type":"message","payload":{"text":"Not telling. It would be in your head all day."}}
+{"key":"2025-10-03-0007","ts":"2025-10-03T08:20:03+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"nyeh","intensity":0.6}}
+{"key":"2025-10-03-0008","ts":"2025-10-03T08:22:19+01:00","author":"noor","type":"message","payload":{"text":"sleep. ill come to yours after school. bring anything?"}}
+{"key":"2025-10-03-0009","ts":"2025-10-03T08:23:07+01:00","author":"teo","type":"message","payload":{"text":"Bread. There is none."}}
+{"key":"2025-10-03-0010","ts":"2025-10-03T08:24:30+01:00","author":"noor","type":"todo_event","payload":{"todo_id":"todo_bread","action":"reopened","text":"bread from the bridge place","assignee":"noor"}}
+{"key":"2025-10-03-0011","ts":"2025-10-03T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-03-0012","ts":"2025-10-03T12:45:14+01:00","author":"noor","type":"message","payload":{"text":"the bridge place shuts at 4 on fridays. who knew. so no bread"}}
+{"key":"2025-10-03-0013","ts":"2025-10-03T12:46:02+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"ugh","intensity":0.4}}
+{"key":"2025-10-03-0014","ts":"2025-10-03T15:20:41+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-03-0015","ts":"2025-10-03T15:22:09+01:00","author":"teo","type":"message","payload":{"text":"There is a shop. Shops have bread."}}
+{"key":"2025-10-03-0016","ts":"2025-10-03T15:40:27+01:00","author":"noor","type":"message","payload":{"text":"thats not bread thats a sponge"}}
+{"key":"2025-10-03-0017","ts":"2025-10-03T15:41:16+01:00","author":"noor","type":"message","payload":{"text":"coming at 5ish. dont cook"}}
+{"key":"2025-10-03-0018","ts":"2025-10-03T16:02:33+01:00","author":"teo","type":"message","payload":{"text":"Already cooking."}}
+{"key":"2025-10-03-0019","ts":"2025-10-03T17:25:50+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-03-0020","ts":"2025-10-03T19:20:11+01:00","author":"teo","type":"message","payload":{"text":"Leaving. Lock the top one. Do not touch the pot."}}
+{"key":"2025-10-03-0021","ts":"2025-10-03T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-03-0022","ts":"2025-10-03T19:27:38+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"miss_you","intensity":0.5}}
+{"key":"2025-10-03-0023","ts":"2025-10-03T21:30:04+01:00","author":"noor","type":"message","payload":{"text":"touched the pot"}}
+{"key":"2025-10-03-0024","ts":"2025-10-03T22:10:22+01:00","author":"noor","type":"message","payload":{"text":"it needed salt. i did nothing about it. respecting your process"}}
+{"key":"2025-10-03-0025","ts":"2025-10-03T22:11:40+01:00","author":"noor","type":"state_declared","payload":{"signal":"mood","value":"tender"}}
+{"key":"2025-10-03-0026","ts":"2025-10-03T23:15:09+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.5}}
+{"key":"2025-10-04-0001","ts":"2025-10-04T08:16:31+01:00","author":"teo","type":"message","payload":{"text":"Done. Walking. Are you still there."}}
+{"key":"2025-10-04-0002","ts":"2025-10-04T08:17:20+01:00","author":"noor","type":"message","payload":{"text":"still here. ate your toast. sorry"}}
+{"key":"2025-10-04-0003","ts":"2025-10-04T08:18:05+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"squeeze","intensity":0.9}}
+{"key":"2025-10-04-0004","ts":"2025-10-04T08:19:12+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-04-0002","feeling_id":"nuzzle"}}
+{"key":"2025-10-04-0005","ts":"2025-10-04T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-04-0006","ts":"2025-10-04T12:30:44+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-04-0007","ts":"2025-10-04T14:50:17+01:00","author":"noor","type":"message","payload":{"text":"went to the market and got the wrong cheese. its aggressive"}}
+{"key":"2025-10-04-0008","ts":"2025-10-04T15:30:02+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-04-0009","ts":"2025-10-04T15:32:28+01:00","author":"teo","type":"message","payload":{"text":"Aggressive is a texture, not a flavour.","reply_to":"k:2025-10-04-0007"}}
+{"key":"2025-10-04-0010","ts":"2025-10-04T15:33:10+01:00","author":"noor","type":"message","payload":{"text":"its both"}}
+{"key":"2025-10-04-0011","ts":"2025-10-04T15:35:46+01:00","author":"teo","type":"message","payload":{"text":"Six thirty. I will be upright."}}
+{"key":"2025-10-04-0012","ts":"2025-10-04T15:36:30+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-04-0011","feeling_id":"catch"}}
+{"key":"2025-10-04-0013","ts":"2025-10-04T18:05:12+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-04-0014","ts":"2025-10-04T18:07:55+01:00","author":"teo","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-04-0015","ts":"2025-10-04T22:52:03+01:00","author":"teo","type":"date_event","payload":{"date_id":"date_film","action":"done","title":"the long film"}}
+{"key":"2025-10-04-0016","ts":"2025-10-04T22:58:41+01:00","author":"noor","type":"message","payload":{"text":"my legs dont work. why is the last bit an hour"}}
+{"key":"2025-10-04-0017","ts":"2025-10-04T23:00:15+01:00","author":"teo","type":"message","payload":{"text":"It was two hours. The last bit was the film."}}
+{"key":"2025-10-04-0018","ts":"2025-10-04T23:01:02+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"nyeh","intensity":0.7}}
+{"key":"2025-10-04-0019","ts":"2025-10-04T23:10:29+01:00","author":"noor","type":"message","payload":{"text":"chips were the best bit tho"}}
+{"key":"2025-10-04-0020","ts":"2025-10-04T23:12:14+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-04-0019","feeling_id":"steady"}}
+{"key":"2025-10-05-0001","ts":"2025-10-05T10:12:20+01:00","author":"noor","type":"date_event","payload":{"date_id":"date_film","action":"rated","title":"the long film","rating":3,"note":"too long. good chips after."}}
+{"key":"2025-10-05-0002","ts":"2025-10-05T11:30:05+01:00","author":"teo","type":"message","payload":{"text":"Making a stock. Whole day. Do not ask what for."}}
+{"key":"2025-10-05-0003","ts":"2025-10-05T11:41:12+01:00","author":"noor","type":"message","payload":{"text":"what for"}}
+{"key":"2025-10-05-0004","ts":"2025-10-05T11:42:01+01:00","author":"teo","type":"message","payload":{"text":"Tuesday."}}
+{"key":"2025-10-05-0005","ts":"2025-10-05T11:45:33+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"catch","intensity":0.6}}
+{"key":"2025-10-05-0006","ts":"2025-10-05T13:00:48+01:00","author":"noor","type":"message","payload":{"text":"sketchbook day. canal. its grey but in a nice way"}}
+{"key":"2025-10-05-0007","ts":"2025-10-05T13:02:15+01:00","author":"noor","type":"state_declared","payload":{"signal":"mood","value":"calm"}}
+{"key":"2025-10-05-0008","ts":"2025-10-05T13:03:02+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-05-0009","ts":"2025-10-05T16:28:40+01:00","author":"noor","type":"photo","payload":{"photo":"2025-10_sketch_canal","caption":"the bridge is wrong but the water is right"}}
+{"key":"2025-10-05-0010","ts":"2025-10-05T16:31:09+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-05-0009","feeling_id":"warm_palm"}}
+{"key":"2025-10-05-0011","ts":"2025-10-05T17:00:27+01:00","author":"teo","type":"message","payload":{"text":"The bridge is fine. The water is the good bit. You knew that."}}
+{"key":"2025-10-05-0012","ts":"2025-10-05T17:05:51+01:00","author":"noor","type":"message","payload":{"text":"i did know that"}}
+{"key":"2025-10-05-0013","ts":"2025-10-05T17:06:30+01:00","author":"noor","type":"message","payload":{"text":"also give me my pen back"}}
+{"key":"2025-10-05-0014","ts":"2025-10-05T17:10:14+01:00","author":"teo","type":"message","payload":{"text":"It is in my coat. The coat is here. Come and get it."}}
+{"key":"2025-10-05-0015","ts":"2025-10-05T17:12:03+01:00","author":"noor","type":"message","payload":{"text":"not falling for that"}}
+{"key":"2025-10-05-0016","ts":"2025-10-05T17:12:40+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"nyeh","intensity":0.4}}
+{"key":"2025-10-05-0017","ts":"2025-10-05T18:10:22+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-05-0018","ts":"2025-10-05T20:30:36+01:00","author":"noor","type":"message","payload":{"text":"sunday night dread has arrived. its sitting on the sofa with me"}}
+{"key":"2025-10-05-0019","ts":"2025-10-05T20:33:12+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"its_okay","intensity":0.6}}
+{"key":"2025-10-05-0020","ts":"2025-10-05T20:34:45+01:00","author":"teo","type":"message","payload":{"text":"Stock is done. It tastes of Tuesday."}}
+{"key":"2025-10-05-0021","ts":"2025-10-05T20:36:08+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-05-0020","feeling_id":"treat"}}
+{"key":"2025-10-05-0022","ts":"2025-10-05T22:40:19+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.6}}
+{"key":"2025-10-05-0023","ts":"2025-10-05T22:41:30+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.5}}
+{"key":"2025-10-06-0001","ts":"2025-10-06T07:05:14+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":2}}
+{"key":"2025-10-06-0002","ts":"2025-10-06T07:06:40+01:00","author":"noor","type":"message","payload":{"text":"forgot to set a bins reminder. its wednesday. tell me on wednesday"}}
+{"key":"2025-10-06-0003","ts":"2025-10-06T07:08:22+01:00","author":"teo","type":"message","payload":{"text":"It is Monday."}}
+{"key":"2025-10-06-0004","ts":"2025-10-06T07:09:05+01:00","author":"noor","type":"message","payload":{"text":"i know what day it is teo"}}
+{"key":"2025-10-06-0005","ts":"2025-10-06T07:09:48+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"poke","intensity":0.6}}
+{"key":"2025-10-06-0006","ts":"2025-10-06T07:40:11+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-06-0007","ts":"2025-10-06T12:43:30+01:00","author":"noor","type":"message","payload":{"text":"year 10 mocks are in november. november is a scam"}}
+{"key":"2025-10-06-0008","ts":"2025-10-06T12:50:02+01:00","author":"teo","type":"message","payload":{"text":"Bulb done. Took four minutes. Took three weeks."}}
+{"key":"2025-10-06-0009","ts":"2025-10-06T12:50:40+01:00","author":"teo","type":"todo_event","payload":{"todo_id":"todo_bulb","action":"done","text":"hall bulb at teos"}}
+{"key":"2025-10-06-0010","ts":"2025-10-06T12:52:17+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-06-0008","feeling_id":"confetti"}}
+{"key":"2025-10-06-0011","ts":"2025-10-06T15:41:25+01:00","author":"noor","type":"message","payload":{"text":"home. shoes off. no plans. dont make plans for me"}}
+{"key":"2025-10-06-0012","ts":"2025-10-06T15:42:03+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-06-0013","ts":"2025-10-06T16:05:44+01:00","author":"teo","type":"message","payload":{"text":"No plans. I am reading about lentils."}}
+{"key":"2025-10-06-0014","ts":"2025-10-06T16:06:31+01:00","author":"noor","type":"message","payload":{"text":"thats a plan"}}
+{"key":"2025-10-06-0015","ts":"2025-10-06T18:30:09+01:00","author":"teo","type":"message","payload":{"text":"Yours or mine tomorrow. Soup needs an audience."}}
+{"key":"2025-10-06-0016","ts":"2025-10-06T18:34:52+01:00","author":"noor","type":"message","payload":{"text":"mine. bring it in the big flask. the lid on the small one lies"}}
+{"key":"2025-10-06-0017","ts":"2025-10-06T18:36:15+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-06-0016","feeling_id":"steady"}}
+{"key":"2025-10-06-0018","ts":"2025-10-06T21:10:38+01:00","author":"noor","type":"message","payload":{"text":"marking. 30 down. 30 to go. send help"}}
+{"key":"2025-10-06-0019","ts":"2025-10-06T21:11:02+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"marking"}}
+{"key":"2025-10-06-0020","ts":"2025-10-06T21:12:47+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"make_you_tea","intensity":0.7}}
+{"key":"2025-10-06-0021","ts":"2025-10-06T21:13:30+01:00","author":"noor","type":"message","payload":{"text":"that helps. weirdly"}}
+{"key":"2025-10-06-0022","ts":"2025-10-06T22:50:11+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":1}}
+{"key":"2025-10-06-0023","ts":"2025-10-06T23:05:56+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.4}}
+{"key":"2025-10-07-0001","ts":"2025-10-07T08:10:19+01:00","author":"noor","type":"message","payload":{"text":"soup day"}}
+{"key":"2025-10-07-0002","ts":"2025-10-07T08:11:03+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"soup day"}}
+{"key":"2025-10-07-0003","ts":"2025-10-07T08:25:40+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-07-0004","ts":"2025-10-07T12:44:27+01:00","author":"noor","type":"message","payload":{"text":"what colour"}}
+{"key":"2025-10-07-0005","ts":"2025-10-07T12:47:12+01:00","author":"teo","type":"message","payload":{"text":"Orange. Again. It is a phase."}}
+{"key":"2025-10-07-0006","ts":"2025-10-07T12:48:01+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"nyeh","intensity":0.5}}
+{"key":"2025-10-07-0007","ts":"2025-10-07T12:49:38+01:00","author":"noor","type":"message","payload":{"text":"orange twice in a row loses a point. rules are rules"}}
+{"key":"2025-10-07-0008","ts":"2025-10-07T13:00:22+01:00","author":"teo","type":"message","payload":{"text":"There are no rules. You made them up in September."}}
+{"key":"2025-10-07-0009","ts":"2025-10-07T13:02:10+01:00","author":"noor","type":"message","payload":{"text":"and they stuck"}}
+{"key":"2025-10-07-0010","ts":"2025-10-07T15:50:33+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-07-0011","ts":"2025-10-07T16:15:48+01:00","author":"teo","type":"photo","payload":{"photo":"2025-10_soup_orange","caption":"Carrot. Something else. A lot of pepper."}}
+{"key":"2025-10-07-0012","ts":"2025-10-07T16:20:05+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-07-0011","feeling_id":"warm_palm"}}
+{"key":"2025-10-07-0013","ts":"2025-10-07T16:21:30+01:00","author":"noor","type":"message","payload":{"text":"something else is doing a lot of work in that sentence"}}
+{"key":"2025-10-07-0014","ts":"2025-10-07T17:30:14+01:00","author":"teo","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-07-0015","ts":"2025-10-07T18:45:52+01:00","author":"teo","type":"message","payload":{"text":"At the door. Buzzer is broken again."}}
+{"key":"2025-10-07-0016","ts":"2025-10-07T18:46:20+01:00","author":"noor","type":"message","payload":{"text":"coming down"}}
+{"key":"2025-10-07-0017","ts":"2025-10-07T21:40:09+01:00","author":"noor","type":"message","payload":{"text":"6.5. lost a point for being orange twice. got half back for the pepper"}}
+{"key":"2025-10-07-0018","ts":"2025-10-07T21:42:33+01:00","author":"teo","type":"message","payload":{"text":"Half points are not a thing."}}
+{"key":"2025-10-07-0019","ts":"2025-10-07T21:43:01+01:00","author":"noor","type":"message","payload":{"text":"they are now"}}
+{"key":"2025-10-07-0020","ts":"2025-10-07T21:44:15+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"steady","intensity":0.6}}
+{"key":"2025-10-07-0021","ts":"2025-10-07T22:30:44+01:00","author":"teo","type":"message","payload":{"text":"Staying. Bins in the morning. I will do them."}}
+{"key":"2025-10-07-0022","ts":"2025-10-07T22:31:27+01:00","author":"teo","type":"todo_event","payload":{"todo_id":"todo_bins","action":"assigned","text":"bins out wednesday","assignee":"teo"}}
+{"key":"2025-10-07-0023","ts":"2025-10-07T22:32:10+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-07-0021","feeling_id":"squeeze"}}
+{"key":"2025-10-08-0001","ts":"2025-10-08T06:50:32+01:00","author":"teo","type":"todo_event","payload":{"todo_id":"todo_bins","action":"done","text":"bins out wednesday"}}
+{"key":"2025-10-08-0002","ts":"2025-10-08T06:52:18+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"squeeze","intensity":0.4}}
+{"key":"2025-10-08-0003","ts":"2025-10-08T07:30:05+01:00","author":"teo","type":"message","payload":{"text":"Gone home. Your milk is on the turn. Do not smell it, just believe me."}}
+{"key":"2025-10-08-0004","ts":"2025-10-08T07:41:50+01:00","author":"noor","type":"message","payload":{"text":"smelled it"}}
+{"key":"2025-10-08-0005","ts":"2025-10-08T07:42:14+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"ugh","intensity":0.5}}
+{"key":"2025-10-08-0006","ts":"2025-10-08T08:20:41+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-08-0007","ts":"2025-10-08T12:41:23+01:00","author":"noor","type":"message","payload":{"text":"four nights this week. thats a lot"}}
+{"key":"2025-10-08-0008","ts":"2025-10-08T12:42:07+01:00","author":"noor","type":"message","payload":{"text":"ill do sunday. we can be horizontal together"}}
+{"key":"2025-10-08-0009","ts":"2025-10-08T12:45:39+01:00","author":"teo","type":"message","payload":{"text":"Four. Tonight to Saturday. Sunday I will be a plant."}}
+{"key":"2025-10-08-0010","ts":"2025-10-08T12:46:22+01:00","author":"noor","type":"message","payload":{"text":"plants are fine. ill water you"}}
+{"key":"2025-10-08-0011","ts":"2025-10-08T12:47:05+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-08-0010","feeling_id":"nuzzle"}}
+{"key":"2025-10-08-0012","ts":"2025-10-08T15:38:11+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-08-0013","ts":"2025-10-08T15:40:47+01:00","author":"noor","type":"message","payload":{"text":"it is raining sideways. inside somehow"}}
+{"key":"2025-10-08-0014","ts":"2025-10-08T18:20:30+01:00","author":"teo","type":"message","payload":{"text":"Rice and the last of the stock. Then off."}}
+{"key":"2025-10-08-0015","ts":"2025-10-08T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-08-0016","ts":"2025-10-08T19:27:12+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"here","intensity":0.5}}
+{"key":"2025-10-08-0017","ts":"2025-10-08T20:15:38+01:00","author":"noor","type":"message","payload":{"text":"watching the thing about the volcano. you would hate it. theres a lot of crying"}}
+{"key":"2025-10-08-0018","ts":"2025-10-08T21:50:04+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"year 9. still."}}
+{"key":"2025-10-08-0019","ts":"2025-10-08T22:05:27+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"overwhelmed","intensity":0.4}}
+{"key":"2025-10-08-0020","ts":"2025-10-08T22:06:15+01:00","author":"noor","type":"message","payload":{"text":"not the volcano. the year 9s"}}
+{"key":"2025-10-08-0021","ts":"2025-10-08T23:20:50+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.5}}
+{"key":"2025-10-09-0001","ts":"2025-10-09T08:13:16+01:00","author":"teo","type":"message","payload":{"text":"Long one. Two admissions at four."}}
+{"key":"2025-10-09-0002","ts":"2025-10-09T08:14:33+01:00","author":"teo","type":"message","payload":{"text":"Walked past the bridge place. It was open. Bought two."}}
+{"key":"2025-10-09-0003","ts":"2025-10-09T08:15:10+01:00","author":"teo","type":"todo_event","payload":{"todo_id":"todo_bread","action":"done","text":"bread from the bridge place"}}
+{"key":"2025-10-09-0004","ts":"2025-10-09T08:16:02+01:00","author":"teo","type":"message","payload":{"text":"One is for you. It is in my bag. So technically it is for later."}}
+{"key":"2025-10-09-0005","ts":"2025-10-09T08:19:44+01:00","author":"noor","type":"message","payload":{"text":"technically its mine"}}
+{"key":"2025-10-09-0006","ts":"2025-10-09T08:20:21+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"treat","intensity":0.6}}
+{"key":"2025-10-09-0007","ts":"2025-10-09T08:21:05+01:00","author":"noor","type":"message","payload":{"text":"sleep x"}}
+{"key":"2025-10-09-0008","ts":"2025-10-09T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-09-0009","ts":"2025-10-09T12:47:28+01:00","author":"noor","type":"message","payload":{"text":"the dentist rang ME. said you havent booked. how do they have me"}}
+{"key":"2025-10-09-0010","ts":"2025-10-09T12:48:14+01:00","author":"noor","type":"state_declared","payload":{"signal":"need","value":2}}
+{"key":"2025-10-09-0011","ts":"2025-10-09T15:05:37+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-09-0012","ts":"2025-10-09T15:08:02+01:00","author":"teo","type":"message","payload":{"text":"They have my number and yours. I gave them yours in March.","reply_to":"k:2025-10-09-0009"}}
+{"key":"2025-10-09-0013","ts":"2025-10-09T15:09:11+01:00","author":"teo","type":"message","payload":{"text":"That was a mistake."}}
+{"key":"2025-10-09-0014","ts":"2025-10-09T15:36:45+01:00","author":"noor","type":"message","payload":{"text":"unforgivable"}}
+{"key":"2025-10-09-0015","ts":"2025-10-09T15:37:20+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"snap","intensity":0.6}}
+{"key":"2025-10-09-0016","ts":"2025-10-09T17:10:08+01:00","author":"teo","type":"message","payload":{"text":"Bins are tonight. Mine. I remembered without you."}}
+{"key":"2025-10-09-0017","ts":"2025-10-09T17:10:50+01:00","author":"teo","type":"todo_event","payload":{"todo_id":"todo_bins","action":"reopened","text":"bins out thursday","assignee":"teo"}}
+{"key":"2025-10-09-0018","ts":"2025-10-09T17:12:31+01:00","author":"teo","type":"todo_event","payload":{"todo_id":"todo_bins","action":"done","text":"bins out thursday"}}
+{"key":"2025-10-09-0019","ts":"2025-10-09T18:40:19+01:00","author":"noor","type":"message","payload":{"text":"ok bins hero"}}
+{"key":"2025-10-09-0020","ts":"2025-10-09T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-09-0021","ts":"2025-10-09T21:00:42+01:00","author":"noor","type":"message","payload":{"text":"your bread is gone. sorry. it was a hard evening"}}
+{"key":"2025-10-09-0022","ts":"2025-10-09T21:01:15+01:00","author":"noor","type":"message","payload":{"text":"not sorry"}}
+{"key":"2025-10-09-0023","ts":"2025-10-09T21:01:48+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"nyeh","intensity":0.7}}
+{"key":"2025-10-09-0024","ts":"2025-10-09T23:10:06+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.5}}
+{"key":"2025-10-10-0001","ts":"2025-10-10T03:22:16+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"here","intensity":0.45}}
+{"key":"2025-10-10-0002","ts":"2025-10-10T08:13:41+01:00","author":"teo","type":"message","payload":{"text":"Bread situation understood. I ate a biscuit out of the tin on the desk. It was soft."}}
+{"key":"2025-10-10-0003","ts":"2025-10-10T08:14:20+01:00","author":"teo","type":"message","payload":{"text":"You owe me a loaf."}}
+{"key":"2025-10-10-0004","ts":"2025-10-10T08:16:05+01:00","author":"noor","type":"message","payload":{"text":"i owe you nothing. you gave the dentist my number","reply_to":"k:2025-10-10-0003"}}
+{"key":"2025-10-10-0005","ts":"2025-10-10T08:17:12+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-10-0004","feeling_id":"stuck_with_me"}}
+{"key":"2025-10-10-0006","ts":"2025-10-10T08:19:33+01:00","author":"noor","type":"message","payload":{"text":"third one tonight. eat something that did not come out of a tin"}}
+{"key":"2025-10-10-0007","ts":"2025-10-10T08:20:11+01:00","author":"teo","type":"message","payload":{"text":"There is a tin at home as well. Different tin."}}
+{"key":"2025-10-10-0008","ts":"2025-10-10T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-10-0009","ts":"2025-10-10T08:42:27+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-10-0010","ts":"2025-10-10T12:42:50+01:00","author":"noor","type":"message","payload":{"text":"someone has drawn a very detailed eye on my board and i cannot bring myself to rub it out"}}
+{"key":"2025-10-10-0011","ts":"2025-10-10T12:48:14+01:00","author":"noor","type":"message","payload":{"text":"so now i am teaching around an eye"}}
+{"key":"2025-10-10-0012","ts":"2025-10-10T13:04:02+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"teaching around an eye"}}
+{"key":"2025-10-10-0013","ts":"2025-10-10T15:12:38+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-10-0014","ts":"2025-10-10T15:14:09+01:00","author":"teo","type":"message","payload":{"text":"Leave the eye. Make it a feature.","reply_to":"k:2025-10-10-0010"}}
+{"key":"2025-10-10-0015","ts":"2025-10-10T15:44:21+01:00","author":"noor","type":"message","payload":{"text":"rubbed out one eyelash by accident and felt like a criminal"}}
+{"key":"2025-10-10-0016","ts":"2025-10-10T16:32:44+01:00","author":"teo","type":"message","payload":{"text":"I am wearing the coat you hate for one more week."}}
+{"key":"2025-10-10-0017","ts":"2025-10-10T16:35:07+01:00","author":"noor","type":"message","payload":{"text":"you are not replacing it on your own. saturday. we go together"}}
+{"key":"2025-10-10-0018","ts":"2025-10-10T16:36:30+01:00","author":"noor","type":"todo_event","payload":{"todo_id":"todo_coat","action":"added","text":"a coat for teo, chosen with supervision","assignee":"noor"}}
+{"key":"2025-10-10-0019","ts":"2025-10-10T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-10-0020","ts":"2025-10-10T19:26:18+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"here","intensity":0.5}}
+{"key":"2025-10-10-0021","ts":"2025-10-10T21:40:55+01:00","author":"noor","type":"message","payload":{"text":"made toast for dinner and ate it standing at the counter like something wild"}}
+{"key":"2025-10-11-0001","ts":"2025-10-11T03:34:12+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"long_day","intensity":0.7}}
+{"key":"2025-10-11-0002","ts":"2025-10-11T03:36:40+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"miss_you","intensity":0.6}}
+{"key":"2025-10-11-0003","ts":"2025-10-11T08:15:02+01:00","author":"teo","type":"message","payload":{"text":"Third. I have stopped being a person. I am a corridor."}}
+{"key":"2025-10-11-0004","ts":"2025-10-11T08:16:20+01:00","author":"teo","type":"message","payload":{"text":"One more."}}
+{"key":"2025-10-11-0005","ts":"2025-10-11T08:18:44+01:00","author":"noor","type":"message","payload":{"text":"come here after. my bed, no alarm, i have nowhere to be"}}
+{"key":"2025-10-11-0006","ts":"2025-10-11T08:19:51+01:00","author":"teo","type":"message","payload":{"text":"Too far. I would fall over somewhere between here and there."}}
+{"key":"2025-10-11-0007","ts":"2025-10-11T08:20:33+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-11-0006","feeling_id":"its_okay"}}
+{"key":"2025-10-11-0008","ts":"2025-10-11T08:22:10+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"squeeze","intensity":0.8}}
+{"key":"2025-10-11-0009","ts":"2025-10-11T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-11-0010","ts":"2025-10-11T10:15:26+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-11-0011","ts":"2025-10-11T10:58:03+01:00","author":"noor","type":"message","payload":{"text":"market. the cheese man called me the cube apple woman which is a mix up but i am taking it"}}
+{"key":"2025-10-11-0012","ts":"2025-10-11T11:20:47+01:00","author":"noor","type":"message","payload":{"text":"got you the boring cheese. the one with no opinions"}}
+{"key":"2025-10-11-0013","ts":"2025-10-11T15:20:09+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-11-0014","ts":"2025-10-11T15:22:31+01:00","author":"teo","type":"message","payload":{"text":"Boring cheese is correct cheese.","reply_to":"k:2025-10-11-0012"}}
+{"key":"2025-10-11-0015","ts":"2025-10-11T15:24:18+01:00","author":"teo","type":"message","payload":{"text":"Last one tonight."}}
+{"key":"2025-10-11-0016","ts":"2025-10-11T16:40:52+01:00","author":"noor","type":"message","payload":{"text":"cleaning the flat, which so far means moving one pile to a different part of the room"}}
+{"key":"2025-10-11-0017","ts":"2025-10-11T16:42:15+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"moving piles"}}
+{"key":"2025-10-11-0018","ts":"2025-10-11T17:30:40+01:00","author":"teo","type":"message","payload":{"text":"The pile method is a method."}}
+{"key":"2025-10-11-0019","ts":"2025-10-11T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-11-0020","ts":"2025-10-11T21:15:33+01:00","author":"noor","type":"message","payload":{"text":"found the good pen. it was in my coat pocket. i accused you for eleven days"}}
+{"key":"2025-10-11-0021","ts":"2025-10-11T22:48:07+01:00","author":"noor","type":"message","payload":{"text":"not apologising. you have taken it before"}}
+{"key":"2025-10-11-0022","ts":"2025-10-11T23:20:14+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.4}}
+{"key":"2025-10-12-0001","ts":"2025-10-12T08:16:31+01:00","author":"teo","type":"message","payload":{"text":"Out. Four done. The car park was full of gulls and one of them stared."}}
+{"key":"2025-10-12-0002","ts":"2025-10-12T08:17:44+01:00","author":"teo","type":"message","payload":{"text":"I want that in writing.","reply_to":"k:2025-10-11-0020"}}
+{"key":"2025-10-12-0003","ts":"2025-10-12T08:19:02+01:00","author":"noor","type":"message","payload":{"text":"absolutely not"}}
+{"key":"2025-10-12-0004","ts":"2025-10-12T08:22:26+01:00","author":"noor","type":"message","payload":{"text":"coming at 2. bringing the boring cheese and nothing else. do not get up"}}
+{"key":"2025-10-12-0005","ts":"2025-10-12T08:23:10+01:00","author":"teo","type":"message","payload":{"text":"Understood. Plant hours."}}
+{"key":"2025-10-12-0006","ts":"2025-10-12T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-12-0007","ts":"2025-10-12T13:50:18+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-12-0008","ts":"2025-10-12T14:05:40+01:00","author":"noor","type":"message","payload":{"text":"your buzzer works today. suspicious"}}
+{"key":"2025-10-12-0009","ts":"2025-10-12T15:10:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-12-0010","ts":"2025-10-12T17:30:22+01:00","author":"noor","type":"photo","payload":{"photo":"2025-10_flask_lid_bench","caption":"exhibit a"}}
+{"key":"2025-10-12-0011","ts":"2025-10-12T17:33:05+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-12-0010","feeling_id":"poke"}}
+{"key":"2025-10-12-0012","ts":"2025-10-12T18:40:19+01:00","author":"teo","type":"message","payload":{"text":"The lid is fine. You hold it wrong."}}
+{"key":"2025-10-12-0013","ts":"2025-10-12T18:42:03+01:00","author":"noor","type":"message","payload":{"text":"there is one way to hold a lid"}}
+{"key":"2025-10-12-0014","ts":"2025-10-12T20:34:47+01:00","author":"noor","type":"message","payload":{"text":"home. you fell asleep mid sentence about lentils again"}}
+{"key":"2025-10-12-0015","ts":"2025-10-12T20:36:12+01:00","author":"teo","type":"message","payload":{"text":"I was resting my eyes and thinking about lentils."}}
+{"key":"2025-10-12-0016","ts":"2025-10-12T21:10:38+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"warm_palm","intensity":0.6}}
+{"key":"2025-10-12-0017","ts":"2025-10-12T22:05:51+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":2}}
+{"key":"2025-10-13-0001","ts":"2025-10-13T07:10:24+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":2}}
+{"key":"2025-10-13-0002","ts":"2025-10-13T07:12:08+01:00","author":"noor","type":"message","payload":{"text":"bins wednesday. writing it on my hand in the good pen, which is a waste of the good pen"}}
+{"key":"2025-10-13-0003","ts":"2025-10-13T07:40:15+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-13-0004","ts":"2025-10-13T12:41:33+01:00","author":"noor","type":"message","payload":{"text":"the eye is gone. someone rubbed it out overnight. i have never been so betrayed by a cleaner"}}
+{"key":"2025-10-13-0005","ts":"2025-10-13T12:44:02+01:00","author":"teo","type":"message","payload":{"text":"Draw another one."}}
+{"key":"2025-10-13-0006","ts":"2025-10-13T12:45:19+01:00","author":"noor","type":"message","payload":{"text":"it would not be the same and you know it"}}
+{"key":"2025-10-13-0007","ts":"2025-10-13T12:52:40+01:00","author":"noor","type":"state_declared","payload":{"signal":"need","value":2}}
+{"key":"2025-10-13-0008","ts":"2025-10-13T13:06:11+01:00","author":"noor","type":"message","payload":{"text":"sorry. long morning. year 11 portfolio panic has started six weeks early"}}
+{"key":"2025-10-13-0009","ts":"2025-10-13T15:50:27+01:00","author":"noor","type":"message","payload":{"text":"44 sketchbooks came home with me. they are on the table where food normally happens"}}
+{"key":"2025-10-13-0010","ts":"2025-10-13T15:52:04+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"44 sketchbooks"}}
+{"key":"2025-10-13-0011","ts":"2025-10-13T16:20:36+01:00","author":"teo","type":"message","payload":{"text":"Then eat standing up. It is a good system."}}
+{"key":"2025-10-13-0012","ts":"2025-10-13T16:22:14+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-13-0011","feeling_id":"ugh"}}
+{"key":"2025-10-13-0013","ts":"2025-10-13T18:00:42+01:00","author":"teo","type":"message","payload":{"text":"Nights from tomorrow. Three of them. Tuesday to Thursday."}}
+{"key":"2025-10-13-0014","ts":"2025-10-13T18:02:19+01:00","author":"noor","type":"message","payload":{"text":"so no soup tomorrow"}}
+{"key":"2025-10-13-0015","ts":"2025-10-13T18:04:03+01:00","author":"teo","type":"message","payload":{"text":"There is stock. There is always stock. I will do it in the afternoon."}}
+{"key":"2025-10-13-0016","ts":"2025-10-13T21:30:50+01:00","author":"noor","type":"message","payload":{"text":"12 down. the standard is fine, i am the problem, i cannot read my own writing on the criteria sheet"}}
+{"key":"2025-10-13-0017","ts":"2025-10-13T21:33:12+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"make_you_tea","intensity":0.6}}
+{"key":"2025-10-13-0018","ts":"2025-10-13T22:40:29+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":1}}
+{"key":"2025-10-13-0019","ts":"2025-10-13T23:05:06+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.45}}
+{"key":"2025-10-14-0001","ts":"2025-10-14T07:15:11+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":1}}
+{"key":"2025-10-14-0002","ts":"2025-10-14T07:42:38+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-14-0003","ts":"2025-10-14T08:22:04+01:00","author":"noor","type":"message","payload":{"text":"there is a pigeon in my room"}}
+{"key":"2025-10-14-0004","ts":"2025-10-14T08:23:19+01:00","author":"noor","type":"message","payload":{"text":"inside. actually inside. on top of the cupboard"}}
+{"key":"2025-10-14-0005","ts":"2025-10-14T08:25:47+01:00","author":"noor","type":"photo","payload":{"photo":"2025-10_pigeon_cupboard","caption":"it has chosen"}}
+{"key":"2025-10-14-0006","ts":"2025-10-14T08:27:12+01:00","author":"noor","type":"message","payload":{"text":"form time in eight minutes. what do i do"}}
+{"key":"2025-10-14-0007","ts":"2025-10-14T08:33:40+01:00","author":"noor","type":"message","payload":{"text":"opened both windows. it looked at them. it looked at me. it stayed"}}
+{"key":"2025-10-14-0008","ts":"2025-10-14T08:40:02+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"there is a pigeon"}}
+{"key":"2025-10-14-0009","ts":"2025-10-14T09:12:25+01:00","author":"noor","type":"message","payload":{"text":"site team say it is not their department. what department is a pigeon"}}
+{"key":"2025-10-14-0010","ts":"2025-10-14T10:05:33+01:00","author":"noor","type":"message","payload":{"text":"year 8 have named it. i am not repeating the name"}}
+{"key":"2025-10-14-0011","ts":"2025-10-14T10:07:18+01:00","author":"noor","type":"message","payload":{"text":"the name is fine actually. it is just very confident for a pigeon"}}
+{"key":"2025-10-14-0012","ts":"2025-10-14T11:24:09+01:00","author":"teo","type":"message","payload":{"text":"You have a pigeon."}}
+{"key":"2025-10-14-0013","ts":"2025-10-14T11:25:31+01:00","author":"noor","type":"message","payload":{"text":"i have a pigeon"}}
+{"key":"2025-10-14-0014","ts":"2025-10-14T11:26:14+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-14-0005","feeling_id":"stuck_with_me"}}
+{"key":"2025-10-14-0015","ts":"2025-10-14T11:30:02+01:00","author":"teo","type":"message","payload":{"text":"Leave one window. Kill the lights at the far end. It will go towards the bright one."}}
+{"key":"2025-10-14-0016","ts":"2025-10-14T11:32:47+01:00","author":"noor","type":"message","payload":{"text":"i cannot turn off half the lights in a lesson about tone"}}
+{"key":"2025-10-14-0017","ts":"2025-10-14T11:33:20+01:00","author":"teo","type":"message","payload":{"text":"Then it lives there now."}}
+{"key":"2025-10-14-0018","ts":"2025-10-14T12:41:05+01:00","author":"noor","type":"photo","payload":{"photo":"2025-10_classroom_door_wedged","caption":"propped the fire door with the year 7 folders. deputy head walked past twice and said nothing"}}
+{"key":"2025-10-14-0019","ts":"2025-10-14T12:44:22+01:00","author":"noor","type":"message","payload":{"text":"it has moved to the other end of the cupboard. that is the entire development"}}
+{"key":"2025-10-14-0020","ts":"2025-10-14T12:50:40+01:00","author":"noor","type":"video","payload":{"video":"2025-10_pigeon_cupboard_clip","duration_ms":9000,"caption":"nine seconds of nothing happening"}}
+{"key":"2025-10-14-0021","ts":"2025-10-14T12:52:16+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-14-0020","feeling_id":"warm_palm"}}
+{"key":"2025-10-14-0022","ts":"2025-10-14T12:55:08+01:00","author":"teo","type":"message","payload":{"text":"It is very still for something that has caused this much trouble."}}
+{"key":"2025-10-14-0023","ts":"2025-10-14T13:02:44+01:00","author":"noor","type":"message","payload":{"text":"there is no paperwork yet"}}
+{"key":"2025-10-14-0024","ts":"2025-10-14T13:08:11+01:00","author":"noor","type":"message","payload":{"text":"there might be paperwork"}}
+{"key":"2025-10-14-0025","ts":"2025-10-14T14:10:36+01:00","author":"noor","type":"message","payload":{"text":"period 4 it did one lap. twelve children screamed. i screamed. it went back to the cupboard"}}
+{"key":"2025-10-14-0026","ts":"2025-10-14T14:12:02+01:00","author":"teo","type":"message","payload":{"text":"You screamed."}}
+{"key":"2025-10-14-0027","ts":"2025-10-14T14:13:29+01:00","author":"noor","type":"message","payload":{"text":"briefly and with dignity"}}
+{"key":"2025-10-14-0028","ts":"2025-10-14T14:15:07+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"here","intensity":0.6}}
+{"key":"2025-10-14-0029","ts":"2025-10-14T15:20:41+01:00","author":"teo","type":"message","payload":{"text":"Soup is on. It is green. Do not start."}}
+{"key":"2025-10-14-0030","ts":"2025-10-14T15:40:18+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"still the pigeon"}}
+{"key":"2025-10-14-0031","ts":"2025-10-14T16:05:53+01:00","author":"noor","type":"message","payload":{"text":"everyone has gone. it is me and it. lights off properly now and the big window is open"}}
+{"key":"2025-10-14-0032","ts":"2025-10-14T16:20:14+01:00","author":"noor","type":"voice_note","payload":{"voice":"2025-10_noor_pigeon_room","duration_ms":27000}}
+{"key":"2025-10-14-0033","ts":"2025-10-14T16:26:39+01:00","author":"teo","type":"message","payload":{"text":"You sound like you are in a cave."}}
+{"key":"2025-10-14-0034","ts":"2025-10-14T16:28:05+01:00","author":"noor","type":"message","payload":{"text":"the room is empty. that is what empty sounds like"}}
+{"key":"2025-10-14-0035","ts":"2025-10-14T16:50:22+01:00","author":"noor","type":"message","payload":{"text":"it went. one lap of the ceiling and out. i sat down on the floor afterwards"}}
+{"key":"2025-10-14-0036","ts":"2025-10-14T16:52:47+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"did_it","intensity":0.8}}
+{"key":"2025-10-14-0037","ts":"2025-10-14T16:54:10+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-14-0035","feeling_id":"crown"}}
+{"key":"2025-10-14-0038","ts":"2025-10-14T16:55:36+01:00","author":"teo","type":"message","payload":{"text":"A whole day. For a bird that could have left at any point."}}
+{"key":"2025-10-14-0039","ts":"2025-10-14T16:58:04+01:00","author":"noor","type":"message","payload":{"text":"that is the thing about it"}}
+{"key":"2025-10-14-0040","ts":"2025-10-14T17:40:19+01:00","author":"noor","type":"message","payload":{"text":"green soup. explain"}}
+{"key":"2025-10-14-0041","ts":"2025-10-14T17:42:33+01:00","author":"teo","type":"message","payload":{"text":"Peas. Stock. The last of the good pepper. Better than it looks."}}
+{"key":"2025-10-14-0042","ts":"2025-10-14T18:30:08+01:00","author":"teo","type":"message","payload":{"text":"Flask is in the fridge. Come tomorrow or it becomes mine."}}
+{"key":"2025-10-14-0043","ts":"2025-10-14T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-14-0044","ts":"2025-10-14T20:40:27+01:00","author":"noor","type":"message","payload":{"text":"cannot stop thinking about the moment it looked at the open window and decided no"}}
+{"key":"2025-10-14-0045","ts":"2025-10-14T21:50:41+01:00","author":"noor","type":"message","payload":{"text":"marked nine. all of them drew hands. why is it always hands"}}
+{"key":"2025-10-15-0001","ts":"2025-10-15T03:40:52+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"thinking_of_you","intensity":0.5}}
+{"key":"2025-10-15-0002","ts":"2025-10-15T08:14:07+01:00","author":"teo","type":"message","payload":{"text":"Quiet night. I thought about your pigeon at four in the morning."}}
+{"key":"2025-10-15-0003","ts":"2025-10-15T08:15:24+01:00","author":"teo","type":"message","payload":{"text":"It has a whole city and it picked a cupboard."}}
+{"key":"2025-10-15-0004","ts":"2025-10-15T08:17:40+01:00","author":"noor","type":"message","payload":{"text":"the room smells different. i keep looking up"}}
+{"key":"2025-10-15-0005","ts":"2025-10-15T08:18:55+01:00","author":"noor","type":"message","payload":{"text":"bins are out. did them in the dark like a criminal"}}
+{"key":"2025-10-15-0006","ts":"2025-10-15T08:20:11+01:00","author":"teo","type":"message","payload":{"text":"Criminal is the correct way to do bins."}}
+{"key":"2025-10-15-0007","ts":"2025-10-15T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-15-0008","ts":"2025-10-15T08:44:19+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-15-0009","ts":"2025-10-15T12:44:03+01:00","author":"noor","type":"photo","payload":{"photo":"2025-10_pigeon_feather_desk","caption":"on my desk this morning. keeping it. do not start"}}
+{"key":"2025-10-15-0010","ts":"2025-10-15T12:50:36+01:00","author":"noor","type":"message","payload":{"text":"it left me something. that is a fact and you cannot take it off me"}}
+{"key":"2025-10-15-0011","ts":"2025-10-15T13:05:12+01:00","author":"noor","type":"state_declared","payload":{"signal":"mood","value":"bright"}}
+{"key":"2025-10-15-0012","ts":"2025-10-15T15:10:44+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-15-0013","ts":"2025-10-15T15:14:28+01:00","author":"teo","type":"message","payload":{"text":"You are keeping a feather from a bird that ruined a Tuesday.","reply_to":"k:2025-10-15-0010"}}
+{"key":"2025-10-15-0014","ts":"2025-10-15T15:16:03+01:00","author":"noor","type":"message","payload":{"text":"correct"}}
+{"key":"2025-10-15-0015","ts":"2025-10-15T16:30:47+01:00","author":"noor","type":"message","payload":{"text":"coming for the flask. i can be there by 6 and i will not stay, you have work"}}
+{"key":"2025-10-15-0016","ts":"2025-10-15T16:35:19+01:00","author":"teo","type":"message","payload":{"text":"Stay until seven. I like the noise."}}
+{"key":"2025-10-15-0017","ts":"2025-10-15T18:50:02+01:00","author":"noor","type":"message","payload":{"text":"green soup verdict pending. i need to sit with it"}}
+{"key":"2025-10-15-0018","ts":"2025-10-15T18:52:31+01:00","author":"teo","type":"message","payload":{"text":"Sit with it in my kitchen. There is a chair for exactly this."}}
+{"key":"2025-10-15-0019","ts":"2025-10-15T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-15-0020","ts":"2025-10-15T20:40:18+01:00","author":"noor","type":"message","payload":{"text":"5.5. the peas are honest but there is a texture event in the middle that we need to talk about"}}
+{"key":"2025-10-15-0021","ts":"2025-10-15T21:50:40+01:00","author":"noor","type":"message","payload":{"text":"20 sketchbooks to go. the criteria sheet has beaten me and it knows"}}
+{"key":"2025-10-15-0022","ts":"2025-10-15T22:00:14+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":1}}
+{"key":"2025-10-16-0001","ts":"2025-10-16T03:05:33+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"long_day","intensity":0.6}}
+{"key":"2025-10-16-0002","ts":"2025-10-16T08:13:20+01:00","author":"teo","type":"message","payload":{"text":"Two admissions and a man who wanted to discuss the roof at three in the morning."}}
+{"key":"2025-10-16-0003","ts":"2025-10-16T08:16:07+01:00","author":"teo","type":"message","payload":{"text":"One more tonight."}}
+{"key":"2025-10-16-0004","ts":"2025-10-16T08:18:41+01:00","author":"noor","type":"message","payload":{"text":"then two days off. then me"}}
+{"key":"2025-10-16-0005","ts":"2025-10-16T08:19:26+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-16-0004","feeling_id":"squeeze"}}
+{"key":"2025-10-16-0006","ts":"2025-10-16T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-16-0007","ts":"2025-10-16T08:45:12+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-16-0008","ts":"2025-10-16T12:42:55+01:00","author":"noor","type":"message","payload":{"text":"the feather is in a jar on the windowsill. year 8 have started leaving things next to it. a conker. a bolt. half a rubber"}}
+{"key":"2025-10-16-0009","ts":"2025-10-16T12:58:20+01:00","author":"noor","type":"message","payload":{"text":"i appear to run a shrine"}}
+{"key":"2025-10-16-0010","ts":"2025-10-16T15:20:37+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-16-0011","ts":"2025-10-16T15:24:02+01:00","author":"teo","type":"message","payload":{"text":"A shrine with a bolt in it.","reply_to":"k:2025-10-16-0009"}}
+{"key":"2025-10-16-0012","ts":"2025-10-16T17:10:44+01:00","author":"noor","type":"state_declared","payload":{"signal":"mood","value":"bright"}}
+{"key":"2025-10-16-0013","ts":"2025-10-16T19:04:18+01:00","author":"noor","type":"feeling_authored","payload":{"feeling_id":"pigeon","name":"pigeon","family":"Mischief","colour":"#3a3a3c","object_asset":"obj_user_pigeon","haptic":"30@200 off80 30@200 off80 30@200 off300 200@160","sound":"snd_user_pigeon","retired":false}}
+{"key":"2025-10-16-0014","ts":"2025-10-16T19:06:02+01:00","author":"noor","type":"message","payload":{"text":"made a thing. grey. three taps and then it just sits there"}}
+{"key":"2025-10-16-0015","ts":"2025-10-16T19:07:29+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"pigeon","intensity":0.7}}
+{"key":"2025-10-16-0016","ts":"2025-10-16T19:12:05+01:00","author":"teo","type":"message","payload":{"text":"It refuses to leave. Correct usage."}}
+{"key":"2025-10-16-0017","ts":"2025-10-16T19:13:31+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"pigeon","intensity":0.6}}
+{"key":"2025-10-16-0018","ts":"2025-10-16T19:15:14+01:00","author":"noor","type":"message","payload":{"text":"you got it first go. i am annoyed"}}
+{"key":"2025-10-16-0019","ts":"2025-10-16T19:16:02+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"nyeh","intensity":0.6}}
+{"key":"2025-10-16-0020","ts":"2025-10-16T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-16-0021","ts":"2025-10-16T21:20:47+01:00","author":"noor","type":"message","payload":{"text":"17 left. i have started grading on instinct and then checking the instinct against the sheet"}}
+{"key":"2025-10-16-0022","ts":"2025-10-16T22:05:13+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"instinct then sheet"}}
+{"key":"2025-10-16-0023","ts":"2025-10-16T23:20:08+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.5}}
+{"key":"2025-10-17-0001","ts":"2025-10-17T02:50:19+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"miss_you","intensity":0.7}}
+{"key":"2025-10-17-0002","ts":"2025-10-17T03:52:41+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"empty_chair","intensity":0.6}}
+{"key":"2025-10-17-0003","ts":"2025-10-17T08:12:26+01:00","author":"teo","type":"voice_note","payload":{"voice":"2025-10_teo_walk_third_night","duration_ms":52000}}
+{"key":"2025-10-17-0004","ts":"2025-10-17T08:20:03+01:00","author":"noor","type":"message","payload":{"text":"you sound like you are being carried"}}
+{"key":"2025-10-17-0005","ts":"2025-10-17T08:22:17+01:00","author":"teo","type":"message","payload":{"text":"I am being carried. By legs. Barely."}}
+{"key":"2025-10-17-0006","ts":"2025-10-17T08:24:38+01:00","author":"teo","type":"message","payload":{"text":"Roster came. Four weeks. I have the ninth of November off."}}
+{"key":"2025-10-17-0007","ts":"2025-10-17T08:25:20+01:00","author":"noor","type":"message","payload":{"text":"the ninth"}}
+{"key":"2025-10-17-0008","ts":"2025-10-17T08:26:04+01:00","author":"noor","type":"message","payload":{"text":"hold it. do not let them have it"}}
+{"key":"2025-10-17-0009","ts":"2025-10-17T08:27:11+01:00","author":"teo","type":"message","payload":{"text":"It is held."}}
+{"key":"2025-10-17-0010","ts":"2025-10-17T08:28:33+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"yes","intensity":0.85}}
+{"key":"2025-10-17-0011","ts":"2025-10-17T08:32:50+01:00","author":"teo","type":"photo","payload":{"photo":"2025-10_roster_paper","caption":"Four weeks. Folded into thirds so it fits the tin."}}
+{"key":"2025-10-17-0012","ts":"2025-10-17T08:35:14+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-17-0011","feeling_id":"did_it"}}
+{"key":"2025-10-17-0013","ts":"2025-10-17T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-17-0014","ts":"2025-10-17T08:47:22+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-17-0015","ts":"2025-10-17T12:43:09+01:00","author":"noor","type":"message","payload":{"text":"friday period 5 was invented to punish people who chose this job"}}
+{"key":"2025-10-17-0016","ts":"2025-10-17T12:55:31+01:00","author":"noor","type":"message","payload":{"text":"tomorrow. eleven. the place with the rail outside, not the other one"}}
+{"key":"2025-10-17-0017","ts":"2025-10-17T12:56:48+01:00","author":"noor","type":"date_event","payload":{"date_id":"date_market","action":"planned","title":"coat and the market","when":"2025-10-18T11:00:00+01:00","place":"the market by the arches"}}
+{"key":"2025-10-17-0018","ts":"2025-10-17T15:30:05+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-17-0019","ts":"2025-10-17T15:34:27+01:00","author":"teo","type":"message","payload":{"text":"Eleven is early for a man who has been awake since Tuesday."}}
+{"key":"2025-10-17-0020","ts":"2025-10-17T15:36:12+01:00","author":"noor","type":"message","payload":{"text":"eleven is late. eleven is generous. eleven is a gift"}}
+{"key":"2025-10-17-0021","ts":"2025-10-17T15:38:40+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-17-0020","feeling_id":"nuzzle"}}
+{"key":"2025-10-17-0022","ts":"2025-10-17T18:20:16+01:00","author":"noor","type":"message","payload":{"text":"i am going to sleep at nine tonight like a victorian child"}}
+{"key":"2025-10-17-0023","ts":"2025-10-17T20:15:44+01:00","author":"teo","type":"message","payload":{"text":"Cooking two things at once. It is going badly for one of them."}}
+{"key":"2025-10-17-0024","ts":"2025-10-17T21:10:02+01:00","author":"noor","type":"message","payload":{"text":"which of them"}}
+{"key":"2025-10-17-0025","ts":"2025-10-17T21:12:29+01:00","author":"teo","type":"message","payload":{"text":"The one that was supposed to be a sauce."}}
+{"key":"2025-10-17-0026","ts":"2025-10-17T22:10:51+01:00","author":"noor","type":"message","payload":{"text":"did not sleep at nine. obviously"}}
+{"key":"2025-10-18-0001","ts":"2025-10-18T09:40:11+01:00","author":"teo","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-18-0002","ts":"2025-10-18T09:42:33+01:00","author":"teo","type":"message","payload":{"text":"Awake. Alarmed by it."}}
+{"key":"2025-10-18-0003","ts":"2025-10-18T10:05:20+01:00","author":"noor","type":"message","payload":{"text":"already out. i have had a coffee and made two decisions"}}
+{"key":"2025-10-18-0004","ts":"2025-10-18T10:06:47+01:00","author":"teo","type":"message","payload":{"text":"Which two."}}
+{"key":"2025-10-18-0005","ts":"2025-10-18T10:08:05+01:00","author":"noor","type":"message","payload":{"text":"one is about the coat. one is not for you"}}
+{"key":"2025-10-18-0006","ts":"2025-10-18T10:30:18+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-18-0007","ts":"2025-10-18T10:52:40+01:00","author":"teo","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-18-0008","ts":"2025-10-18T11:04:09+01:00","author":"teo","type":"message","payload":{"text":"At the rail. There is a green one that is wrong in a way I cannot name."}}
+{"key":"2025-10-18-0009","ts":"2025-10-18T11:05:36+01:00","author":"noor","type":"message","payload":{"text":"two minutes. do not touch the green one"}}
+{"key":"2025-10-18-0010","ts":"2025-10-18T13:20:22+01:00","author":"noor","type":"photo","payload":{"photo":"2025-10_coat_on_chair","caption":"the one we did not buy. for the record"}}
+{"key":"2025-10-18-0011","ts":"2025-10-18T13:24:15+01:00","author":"teo","type":"message","payload":{"text":"The one we bought is better. The hood does not lie about being a hood."}}
+{"key":"2025-10-18-0012","ts":"2025-10-18T13:26:03+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-18-0011","feeling_id":"treat"}}
+{"key":"2025-10-18-0013","ts":"2025-10-18T14:40:51+01:00","author":"noor","type":"message","payload":{"text":"also bought: bread, a lemon, a small brush i did not need, and the boring cheese again"}}
+{"key":"2025-10-18-0014","ts":"2025-10-18T14:42:19+01:00","author":"teo","type":"message","payload":{"text":"You needed the brush."}}
+{"key":"2025-10-18-0015","ts":"2025-10-18T14:43:02+01:00","author":"noor","type":"message","payload":{"text":"i did not need the brush"}}
+{"key":"2025-10-18-0016","ts":"2025-10-18T14:44:30+01:00","author":"noor","type":"message","payload":{"text":"i needed the brush"}}
+{"key":"2025-10-18-0017","ts":"2025-10-18T16:30:44+01:00","author":"teo","type":"date_event","payload":{"date_id":"date_market","action":"done","title":"coat and the market"}}
+{"key":"2025-10-18-0018","ts":"2025-10-18T16:32:10+01:00","author":"noor","type":"todo_event","payload":{"todo_id":"todo_coat","action":"done","text":"a coat for teo, chosen with supervision"}}
+{"key":"2025-10-18-0019","ts":"2025-10-18T16:50:26+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-18-0020","ts":"2025-10-18T18:20:38+01:00","author":"noor","type":"date_event","payload":{"date_id":"date_market","action":"rated","title":"coat and the market","rating":4,"note":"cold hands. good coat. a point off for the queue."}}
+{"key":"2025-10-18-0021","ts":"2025-10-18T18:25:07+01:00","author":"teo","type":"message","payload":{"text":"Four is fair. The queue was your idea."}}
+{"key":"2025-10-18-0022","ts":"2025-10-18T18:27:41+01:00","author":"noor","type":"message","payload":{"text":"the queue was for the bread. you ate most of the bread"}}
+{"key":"2025-10-18-0023","ts":"2025-10-18T18:29:12+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"warm_palm","intensity":0.6}}
+{"key":"2025-10-18-0024","ts":"2025-10-18T20:10:33+01:00","author":"teo","type":"message","payload":{"text":"Staying at mine tonight. I need to be horizontal in my own postcode."}}
+{"key":"2025-10-18-0025","ts":"2025-10-18T20:12:09+01:00","author":"noor","type":"message","payload":{"text":"go. be horizontal. tell me when you are in"}}
+{"key":"2025-10-18-0026","ts":"2025-10-18T21:04:47+01:00","author":"teo","type":"message","payload":{"text":"In. Coat on the hook. It looks smug."}}
+{"key":"2025-10-18-0027","ts":"2025-10-18T22:55:20+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.45}}
+{"key":"2025-10-19-0001","ts":"2025-10-19T10:20:14+01:00","author":"noor","type":"state_declared","payload":{"signal":"mood","value":"flat"}}
+{"key":"2025-10-19-0002","ts":"2025-10-19T10:22:39+01:00","author":"noor","type":"message","payload":{"text":"sunday. 17 sketchbooks. they are watching me from the table"}}
+{"key":"2025-10-19-0003","ts":"2025-10-19T11:05:07+01:00","author":"teo","type":"message","payload":{"text":"Move them to a chair. Then the table is a table again."}}
+{"key":"2025-10-19-0004","ts":"2025-10-19T11:06:22+01:00","author":"noor","type":"message","payload":{"text":"then the chair is a threat"}}
+{"key":"2025-10-19-0005","ts":"2025-10-19T11:08:03+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-19-0004","feeling_id":"stuck_with_me"}}
+{"key":"2025-10-19-0006","ts":"2025-10-19T13:40:18+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"counting down"}}
+{"key":"2025-10-19-0007","ts":"2025-10-19T14:50:41+01:00","author":"noor","type":"message","payload":{"text":"did 11. gave one an A and i am not sure why. it had a fish in it"}}
+{"key":"2025-10-19-0008","ts":"2025-10-19T15:12:09+01:00","author":"teo","type":"message","payload":{"text":"A fish is worth a grade."}}
+{"key":"2025-10-19-0009","ts":"2025-10-19T16:20:35+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":1}}
+{"key":"2025-10-19-0010","ts":"2025-10-19T16:22:12+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"overwhelmed","intensity":0.6}}
+{"key":"2025-10-19-0011","ts":"2025-10-19T16:24:40+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"make_you_tea","intensity":0.7}}
+{"key":"2025-10-19-0012","ts":"2025-10-19T16:30:26+01:00","author":"teo","type":"message","payload":{"text":"Four nights from tonight. Sunday to Wednesday. I checked twice because I did not believe it."}}
+{"key":"2025-10-19-0013","ts":"2025-10-19T16:32:03+01:00","author":"noor","type":"message","payload":{"text":"four again"}}
+{"key":"2025-10-19-0014","ts":"2025-10-19T16:33:19+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"ugh","intensity":0.6}}
+{"key":"2025-10-19-0015","ts":"2025-10-19T16:40:52+01:00","author":"teo","type":"message","payload":{"text":"It is the same four as everyone else. It only sounds worse said out loud."}}
+{"key":"2025-10-19-0016","ts":"2025-10-19T17:50:14+01:00","author":"noor","type":"message","payload":{"text":"so nothing on tuesday"}}
+{"key":"2025-10-19-0017","ts":"2025-10-19T17:52:38+01:00","author":"teo","type":"message","payload":{"text":"Nothing on Tuesday. There is a rule about not making soup on four hours of sleep."}}
+{"key":"2025-10-19-0018","ts":"2025-10-19T17:53:20+01:00","author":"noor","type":"message","payload":{"text":"there is no such rule"}}
+{"key":"2025-10-19-0019","ts":"2025-10-19T17:54:05+01:00","author":"teo","type":"message","payload":{"text":"There is now."}}
+{"key":"2025-10-19-0020","ts":"2025-10-19T17:55:31+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-19-0019","feeling_id":"snap"}}
+{"key":"2025-10-19-0021","ts":"2025-10-19T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-19-0022","ts":"2025-10-19T21:30:47+01:00","author":"noor","type":"message","payload":{"text":"6 to go. i can see the end and the end is wednesday"}}
+{"key":"2025-10-20-0001","ts":"2025-10-20T08:14:22+01:00","author":"teo","type":"message","payload":{"text":"Long. A drip that would not behave and a woman who wanted the window open in October."}}
+{"key":"2025-10-20-0002","ts":"2025-10-20T08:16:09+01:00","author":"noor","type":"message","payload":{"text":"did she get the window"}}
+{"key":"2025-10-20-0003","ts":"2025-10-20T08:17:33+01:00","author":"teo","type":"message","payload":{"text":"She got the window."}}
+{"key":"2025-10-20-0004","ts":"2025-10-20T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-20-0005","ts":"2025-10-20T08:46:15+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-20-0006","ts":"2025-10-20T08:47:02+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":1}}
+{"key":"2025-10-20-0007","ts":"2025-10-20T12:41:48+01:00","author":"noor","type":"message","payload":{"text":"parents evening emails have started. eleven of them. one is about a pencil"}}
+{"key":"2025-10-20-0008","ts":"2025-10-20T12:44:11+01:00","author":"noor","type":"message","payload":{"text":"a PENCIL"}}
+{"key":"2025-10-20-0009","ts":"2025-10-20T13:06:30+01:00","author":"noor","type":"state_declared","payload":{"signal":"need","value":3}}
+{"key":"2025-10-20-0010","ts":"2025-10-20T15:22:07+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-20-0011","ts":"2025-10-20T15:26:44+01:00","author":"teo","type":"message","payload":{"text":"Answer the pencil one last. Or never.","reply_to":"k:2025-10-20-0008"}}
+{"key":"2025-10-20-0012","ts":"2025-10-20T15:50:19+01:00","author":"noor","type":"message","payload":{"text":"answering it first because otherwise it will sit in me all week"}}
+{"key":"2025-10-20-0013","ts":"2025-10-20T16:40:05+01:00","author":"noor","type":"message","payload":{"text":"sent. professional. warm. absolutely seething"}}
+{"key":"2025-10-20-0014","ts":"2025-10-20T16:42:31+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-20-0013","feeling_id":"steady"}}
+{"key":"2025-10-20-0015","ts":"2025-10-20T18:30:26+01:00","author":"teo","type":"message","payload":{"text":"Eating early. The same rice. It is developing a personality."}}
+{"key":"2025-10-20-0016","ts":"2025-10-20T18:34:12+01:00","author":"noor","type":"message","payload":{"text":"name it and it stops being a problem and starts being a pet"}}
+{"key":"2025-10-20-0017","ts":"2025-10-20T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-20-0018","ts":"2025-10-20T21:15:40+01:00","author":"noor","type":"message","payload":{"text":"3 left. my handwriting has left the building"}}
+{"key":"2025-10-20-0019","ts":"2025-10-20T22:20:14+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"3 left"}}
+{"key":"2025-10-21-0001","ts":"2025-10-21T08:13:37+01:00","author":"teo","type":"message","payload":{"text":"Tuesday and no soup. I am aware of it."}}
+{"key":"2025-10-21-0002","ts":"2025-10-21T08:15:02+01:00","author":"noor","type":"message","payload":{"text":"putting it on the record"}}
+{"key":"2025-10-21-0003","ts":"2025-10-21T08:16:20+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"pigeon","intensity":0.5}}
+{"key":"2025-10-21-0004","ts":"2025-10-21T08:18:44+01:00","author":"teo","type":"message","payload":{"text":"That is not what that one means."}}
+{"key":"2025-10-21-0005","ts":"2025-10-21T08:19:26+01:00","author":"noor","type":"message","payload":{"text":"it means what i decide it means"}}
+{"key":"2025-10-21-0006","ts":"2025-10-21T08:20:09+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-21-0005","feeling_id":"nuzzle"}}
+{"key":"2025-10-21-0007","ts":"2025-10-21T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-21-0008","ts":"2025-10-21T08:50:31+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-21-0009","ts":"2025-10-21T12:45:18+01:00","author":"noor","type":"message","payload":{"text":"DONE. all of them. every sketchbook. i am free until january"}}
+{"key":"2025-10-21-0010","ts":"2025-10-21T12:47:03+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"did_it","intensity":0.9}}
+{"key":"2025-10-21-0011","ts":"2025-10-21T12:50:40+01:00","author":"noor","type":"state_declared","payload":{"signal":"status_line","value":"free"}}
+{"key":"2025-10-21-0012","ts":"2025-10-21T13:00:22+01:00","author":"noor","type":"message","payload":{"text":"found one i had already marked and marked it again. got a different grade. i am not saying which one i wrote down"}}
+{"key":"2025-10-21-0013","ts":"2025-10-21T15:30:11+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-21-0014","ts":"2025-10-21T15:33:47+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-21-0009","feeling_id":"confetti"}}
+{"key":"2025-10-21-0015","ts":"2025-10-21T15:35:20+01:00","author":"teo","type":"message","payload":{"text":"Write down the higher one. It is Tuesday and there is no soup, you are owed something.","reply_to":"k:2025-10-21-0012"}}
+{"key":"2025-10-21-0016","ts":"2025-10-21T18:40:05+01:00","author":"teo","type":"message","payload":{"text":"There is a flask of nothing in my fridge and it is entirely your fault for having standards."}}
+{"key":"2025-10-21-0017","ts":"2025-10-21T18:42:33+01:00","author":"noor","type":"message","payload":{"text":"my standards are a gift"}}
+{"key":"2025-10-21-0018","ts":"2025-10-21T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-21-0019","ts":"2025-10-21T21:40:16+01:00","author":"noor","type":"message","payload":{"text":"watched two episodes of the thing with the boats. no idea what is happening. fully invested"}}
+{"key":"2025-10-22-0001","ts":"2025-10-22T03:14:29+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"miss_you","intensity":0.75}}
+{"key":"2025-10-22-0002","ts":"2025-10-22T03:20:41+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"wish_you_were_here","intensity":0.6}}
+{"key":"2025-10-22-0003","ts":"2025-10-22T08:14:12+01:00","author":"teo","type":"message","payload":{"text":"Third. The corridor and I have an understanding now."}}
+{"key":"2025-10-22-0004","ts":"2025-10-22T08:16:38+01:00","author":"teo","type":"message","payload":{"text":"One more, then two days, then you."}}
+{"key":"2025-10-22-0005","ts":"2025-10-22T08:18:05+01:00","author":"noor","type":"message","payload":{"text":"bins done. in the rain. i would like that noted somewhere permanent"}}
+{"key":"2025-10-22-0006","ts":"2025-10-22T08:19:20+01:00","author":"noor","type":"todo_event","payload":{"todo_id":"todo_bins","action":"done","text":"bins out wednesday at mine"}}
+{"key":"2025-10-22-0007","ts":"2025-10-22T08:22:44+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-22-0005","feeling_id":"crown"}}
+{"key":"2025-10-22-0008","ts":"2025-10-22T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-22-0009","ts":"2025-10-22T08:52:17+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-22-0010","ts":"2025-10-22T12:44:03+01:00","author":"noor","type":"message","payload":{"text":"four days until half term. four. i can taste it"}}
+{"key":"2025-10-22-0011","ts":"2025-10-22T15:25:36+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-22-0012","ts":"2025-10-22T15:45:09+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-22-0013","ts":"2025-10-22T16:20:41+01:00","author":"noor","type":"message","payload":{"text":"going to mums sunday to friday. i keep moving it around in my head and it keeps landing there"}}
+{"key":"2025-10-22-0014","ts":"2025-10-22T16:55:18+01:00","author":"teo","type":"message","payload":{"text":"Sunday to Friday. Then the weekend is ours and nobody has to get on anything."}}
+{"key":"2025-10-22-0015","ts":"2025-10-22T16:58:02+01:00","author":"noor","type":"message","payload":{"text":"look at you with a plan"}}
+{"key":"2025-10-22-0016","ts":"2025-10-22T17:00:33+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-22-0014","feeling_id":"warm_palm"}}
+{"key":"2025-10-22-0017","ts":"2025-10-22T18:40:26+01:00","author":"teo","type":"message","payload":{"text":"Last of the four tonight. Then I sleep, and then I am useful again."}}
+{"key":"2025-10-22-0018","ts":"2025-10-22T19:25:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-22-0019","ts":"2025-10-22T21:30:14+01:00","author":"noor","type":"message","payload":{"text":"flat is cold in the evenings now. i have put a jumper on the radiator like my mother"}}
+{"key":"2025-10-23-0001","ts":"2025-10-23T04:40:08+01:00","author":"teo","type":"feeling","payload":{"feeling_id":"long_day","intensity":0.85}}
+{"key":"2025-10-23-0002","ts":"2025-10-23T08:16:22+01:00","author":"teo","type":"message","payload":{"text":"Out. Four done. I am going to sleep until something wakes me."}}
+{"key":"2025-10-23-0003","ts":"2025-10-23T08:18:41+01:00","author":"noor","type":"message","payload":{"text":"nothing will wake you. i will be quiet from here"}}
+{"key":"2025-10-23-0004","ts":"2025-10-23T08:19:30+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"hold","intensity":0.7}}
+{"key":"2025-10-23-0005","ts":"2025-10-23T08:40:00+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-23-0006","ts":"2025-10-23T08:55:14+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-23-0007","ts":"2025-10-23T12:42:36+01:00","author":"noor","type":"message","payload":{"text":"someone brought a cake in for no reason. i ate two pieces for no reason. it balances"}}
+{"key":"2025-10-23-0008","ts":"2025-10-23T15:40:02+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-23-0009","ts":"2025-10-23T16:30:19+01:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-23-0010","ts":"2025-10-23T16:34:47+01:00","author":"teo","type":"message","payload":{"text":"Nine hours. My mouth tastes of the ward."}}
+{"key":"2025-10-23-0011","ts":"2025-10-23T16:36:12+01:00","author":"noor","type":"message","payload":{"text":"romantic"}}
+{"key":"2025-10-23-0012","ts":"2025-10-23T16:40:33+01:00","author":"teo","type":"message","payload":{"text":"Bins are mine tonight. I will do them before I forget I exist."}}
+{"key":"2025-10-23-0013","ts":"2025-10-23T18:10:05+01:00","author":"noor","type":"message","payload":{"text":"dentist"}}
+{"key":"2025-10-23-0014","ts":"2025-10-23T18:11:20+01:00","author":"noor","type":"message","payload":{"text":"that is the whole message. it has been three weeks"}}
+{"key":"2025-10-23-0015","ts":"2025-10-23T18:30:44+01:00","author":"teo","type":"message","payload":{"text":"I am aware."}}
+{"key":"2025-10-23-0016","ts":"2025-10-23T18:32:09+01:00","author":"teo","type":"message","payload":{"text":"Tomorrow. Before ten. Before I can talk myself out of it."}}
+{"key":"2025-10-23-0017","ts":"2025-10-23T18:34:26+01:00","author":"noor","type":"todo_event","payload":{"todo_id":"todo_dentist","action":"reopened","text":"book the dentist","assignee":"teo"}}
+{"key":"2025-10-23-0018","ts":"2025-10-23T20:40:11+01:00","author":"teo","type":"message","payload":{"text":"Come tomorrow after school. I will do the thing with the lemon."}}
+{"key":"2025-10-23-0019","ts":"2025-10-23T20:42:38+01:00","author":"noor","type":"message","payload":{"text":"the lemon from saturday is now a small hard sad object"}}
+{"key":"2025-10-23-0020","ts":"2025-10-23T20:44:03+01:00","author":"teo","type":"message","payload":{"text":"There are other lemons."}}
+{"key":"2025-10-23-0021","ts":"2025-10-23T20:45:29+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-23-0020","feeling_id":"nyeh"}}
+{"key":"2025-10-24-0001","ts":"2025-10-24T07:20:15+01:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":3}}
+{"key":"2025-10-24-0002","ts":"2025-10-24T07:22:40+01:00","author":"noor","type":"message","payload":{"text":"last day. one day. i can do one day"}}
+{"key":"2025-10-24-0003","ts":"2025-10-24T07:50:07+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"work"}}
+{"key":"2025-10-24-0004","ts":"2025-10-24T09:48:33+01:00","author":"teo","type":"message","payload":{"text":"Rang them. Monday the third, ten past nine. Both of us. They had a gap because someone cancelled."}}
+{"key":"2025-10-24-0005","ts":"2025-10-24T09:49:41+01:00","author":"teo","type":"message_edit","payload":{"target":"k:2025-10-24-0004","text":"Rang them. Tuesday the fourth, ten past nine. Both of us. They had a gap because someone cancelled."}}
+{"key":"2025-10-24-0006","ts":"2025-10-24T09:50:26+01:00","author":"teo","type":"todo_event","payload":{"todo_id":"todo_dentist","action":"done","text":"book the dentist"}}
+{"key":"2025-10-24-0007","ts":"2025-10-24T12:41:19+01:00","author":"noor","type":"message","payload":{"text":"you actually did it"}}
+{"key":"2025-10-24-0008","ts":"2025-10-24T12:42:50+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"confetti","intensity":0.7}}
+{"key":"2025-10-24-0009","ts":"2025-10-24T12:44:12+01:00","author":"noor","type":"message","payload":{"text":"hold on. BOTH of us. i did not agree to that"}}
+{"key":"2025-10-24-0010","ts":"2025-10-24T12:46:37+01:00","author":"teo","type":"message","payload":{"text":"You did. In September. In the kitchen. You were holding a plate."}}
+{"key":"2025-10-24-0011","ts":"2025-10-24T12:48:04+01:00","author":"noor","type":"message","payload":{"text":"that is not agreement that is ambush"}}
+{"key":"2025-10-24-0012","ts":"2025-10-24T12:50:22+01:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-24-0011","feeling_id":"stuck_with_me"}}
+{"key":"2025-10-24-0013","ts":"2025-10-24T13:05:48+01:00","author":"noor","type":"message","payload":{"text":"sorry can you cover the yard on tuesday, im on the trip that morning"}}
+{"key":"2025-10-24-0014","ts":"2025-10-24T13:06:11+01:00","author":"noor","type":"message_delete","payload":{"target":"k:2025-10-24-0013"}}
+{"key":"2025-10-24-0015","ts":"2025-10-24T13:07:33+01:00","author":"noor","type":"message","payload":{"text":"not for you. obviously"}}
+{"key":"2025-10-24-0016","ts":"2025-10-24T13:08:52+01:00","author":"teo","type":"message","payload":{"text":"I will cover the yard."}}
+{"key":"2025-10-24-0017","ts":"2025-10-24T13:09:30+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"nyeh","intensity":0.5}}
+{"key":"2025-10-24-0018","ts":"2025-10-24T15:40:06+01:00","author":"noor","type":"state_declared","payload":{"signal":"mood","value":"bright"}}
+{"key":"2025-10-24-0019","ts":"2025-10-24T16:10:44+01:00","author":"noor","type":"message","payload":{"text":"half term. HALF TERM. i intend to sleep eleven hours and then eat toast in a chair"}}
+{"key":"2025-10-24-0020","ts":"2025-10-24T17:30:18+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-24-0021","ts":"2025-10-24T18:40:02+01:00","author":"noor","type":"message","payload":{"text":"at yours. buzzer broken again. do not pretend you cannot hear me"}}
+{"key":"2025-10-24-0022","ts":"2025-10-24T18:42:27+01:00","author":"teo","type":"message","payload":{"text":"Coming down. Do not press it a fourth time."}}
+{"key":"2025-10-25-0001","ts":"2025-10-25T09:40:12+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"travelling"}}
+{"key":"2025-10-25-0002","ts":"2025-10-25T10:15:38+01:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-25-0003","ts":"2025-10-25T10:20:05+01:00","author":"noor","type":"message","payload":{"text":"the lemon thing. write it down. i want it again in november"}}
+{"key":"2025-10-25-0004","ts":"2025-10-25T10:24:19+01:00","author":"teo","type":"message","payload":{"text":"It is written on the back of the roster, which I will lose."}}
+{"key":"2025-10-25-0005","ts":"2025-10-25T10:26:41+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-25-0004","feeling_id":"nyeh"}}
+{"key":"2025-10-25-0006","ts":"2025-10-25T11:40:27+01:00","author":"noor","type":"message","payload":{"text":"packing for mums. so far i have packed four books and no jumper"}}
+{"key":"2025-10-25-0007","ts":"2025-10-25T12:30:03+01:00","author":"teo","type":"message","payload":{"text":"Take a coat. Yours. Not mine."}}
+{"key":"2025-10-25-0008","ts":"2025-10-25T12:32:16+01:00","author":"noor","type":"message","payload":{"text":"i was going to take yours"}}
+{"key":"2025-10-25-0009","ts":"2025-10-25T12:33:40+01:00","author":"teo","type":"message","payload":{"text":"I know."}}
+{"key":"2025-10-25-0010","ts":"2025-10-25T14:20:11+01:00","author":"noor","type":"message","payload":{"text":"clocks go back tonight. an extra hour. i intend to spend it on nothing"}}
+{"key":"2025-10-25-0011","ts":"2025-10-25T14:22:35+01:00","author":"teo","type":"message","payload":{"text":"Spend it asleep. That is what it is for."}}
+{"key":"2025-10-25-0012","ts":"2025-10-25T16:40:09+01:00","author":"noor","type":"message","payload":{"text":"boiler is making a noise like a man clearing his throat"}}
+{"key":"2025-10-25-0013","ts":"2025-10-25T16:44:22+01:00","author":"teo","type":"message","payload":{"text":"Check the gauge. If the needle is under one it wants topping up."}}
+{"key":"2025-10-25-0014","ts":"2025-10-25T16:50:47+01:00","author":"noor","type":"message","payload":{"text":"the needle is somewhere behind the thing. i cannot see any numbers at all"}}
+{"key":"2025-10-25-0015","ts":"2025-10-25T16:52:14+01:00","author":"noor","type":"todo_event","payload":{"todo_id":"todo_boiler","action":"added","text":"top up the boiler pressure","assignee":"noor"}}
+{"key":"2025-10-25-0016","ts":"2025-10-25T16:55:33+01:00","author":"teo","type":"message","payload":{"text":"I will look at it when you are back. Do not touch the red tap."}}
+{"key":"2025-10-25-0017","ts":"2025-10-25T16:56:08+01:00","author":"noor","type":"message","payload":{"text":"there are two red taps"}}
+{"key":"2025-10-25-0018","ts":"2025-10-25T16:57:26+01:00","author":"teo","type":"message","payload":{"text":"Then touch neither of them."}}
+{"key":"2025-10-25-0019","ts":"2025-10-25T16:58:40+01:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-25-0018","feeling_id":"ugh"}}
+{"key":"2025-10-25-0020","ts":"2025-10-25T19:30:15+01:00","author":"noor","type":"message","payload":{"text":"ate standing at the counter. your system. it works and i resent it"}}
+{"key":"2025-10-25-0021","ts":"2025-10-25T21:10:44+01:00","author":"teo","type":"message","payload":{"text":"It is not a system. It is a shortage of chairs."}}
+{"key":"2025-10-25-0022","ts":"2025-10-25T23:40:07+01:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.5}}
+{"key":"2025-10-26-0001","ts":"2025-10-26T09:12:20+00:00","author":"teo","type":"message","payload":{"text":"One extra hour and I still woke at six. My body has been ruined by a rota."}}
+{"key":"2025-10-26-0002","ts":"2025-10-26T09:30:41+00:00","author":"noor","type":"message","payload":{"text":"i got the hour and i used it. i lay there like a stone"}}
+{"key":"2025-10-26-0003","ts":"2025-10-26T10:40:14+00:00","author":"teo","type":"message","payload":{"text":"Making soup. It is Sunday. I know what this is."}}
+{"key":"2025-10-26-0004","ts":"2025-10-26T10:42:33+00:00","author":"noor","type":"message","payload":{"text":"it is a problem for the record. sunday soup is not soup, it is liquid with ambition"}}
+{"key":"2025-10-26-0005","ts":"2025-10-26T10:44:09+00:00","author":"teo","type":"message","payload":{"text":"You will still eat it."}}
+{"key":"2025-10-26-0006","ts":"2025-10-26T12:20:36+00:00","author":"teo","type":"voice_note","payload":{"voice":"2025-10_teo_kitchen_sunday","duration_ms":33000}}
+{"key":"2025-10-26-0007","ts":"2025-10-26T12:26:02+00:00","author":"noor","type":"message","payload":{"text":"you are narrating a pan"}}
+{"key":"2025-10-26-0008","ts":"2025-10-26T12:28:47+00:00","author":"teo","type":"message","payload":{"text":"The pan has earned it."}}
+{"key":"2025-10-26-0009","ts":"2025-10-26T12:40:18+00:00","author":"noor","type":"reaction","payload":{"target":"k:2025-10-26-0006","feeling_id":"warm_palm"}}
+{"key":"2025-10-26-0010","ts":"2025-10-26T13:50:05+00:00","author":"noor","type":"message","payload":{"text":"train at 4. mum has texted twice about dinner. i said anything. she does not accept anything"}}
+{"key":"2025-10-26-0011","ts":"2025-10-26T13:55:29+00:00","author":"teo","type":"message","payload":{"text":"Say the pie. She wants you to say the pie."}}
+{"key":"2025-10-26-0012","ts":"2025-10-26T13:57:11+00:00","author":"noor","type":"message","payload":{"text":"how do you know about the pie"}}
+{"key":"2025-10-26-0013","ts":"2025-10-26T13:58:40+00:00","author":"teo","type":"message","payload":{"text":"Everyone has a pie."}}
+{"key":"2025-10-26-0014","ts":"2025-10-26T15:30:22+00:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"travelling"}}
+{"key":"2025-10-26-0015","ts":"2025-10-26T15:40:07+00:00","author":"noor","type":"feeling","payload":{"feeling_id":"pigeon","intensity":0.5}}
+{"key":"2025-10-26-0016","ts":"2025-10-26T16:05:44+00:00","author":"teo","type":"message","payload":{"text":"What did I do."}}
+{"key":"2025-10-26-0017","ts":"2025-10-26T16:07:19+00:00","author":"noor","type":"message","payload":{"text":"you were right about the pie. it was the pie"}}
+{"key":"2025-10-26-0018","ts":"2025-10-26T16:10:03+00:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-26-0017","feeling_id":"steady"}}
+{"key":"2025-10-26-0019","ts":"2025-10-26T17:35:26+00:00","author":"noor","type":"message","payload":{"text":"on the train. a man opposite is eating a whole roast chicken with his fingers. i have never been more awake"}}
+{"key":"2025-10-26-0020","ts":"2025-10-26T17:38:41+00:00","author":"teo","type":"message","payload":{"text":"Is he sharing."}}
+{"key":"2025-10-26-0021","ts":"2025-10-26T17:39:12+00:00","author":"noor","type":"message","payload":{"text":"he is not sharing"}}
+{"key":"2025-10-26-0022","ts":"2025-10-26T18:10:35+00:00","author":"teo","type":"message","payload":{"text":"Four nights from tomorrow. The last four before the dark makes it worse."}}
+{"key":"2025-10-26-0023","ts":"2025-10-26T18:12:08+00:00","author":"noor","type":"message","payload":{"text":"so we both disappear for a week and come back on friday like nothing happened"}}
+{"key":"2025-10-26-0024","ts":"2025-10-26T18:14:47+00:00","author":"teo","type":"message","payload":{"text":"That is the arrangement."}}
+{"key":"2025-10-26-0025","ts":"2025-10-26T19:20:16+00:00","author":"noor","type":"message","payload":{"text":"arrived. the house smells like the inside of my childhood"}}
+{"key":"2025-10-26-0026","ts":"2025-10-26T19:22:04+00:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-26-0027","ts":"2025-10-26T20:40:33+00:00","author":"noor","type":"message","payload":{"text":"no rating. sunday soup does not get a number. that is the ruling"}}
+{"key":"2025-10-26-0028","ts":"2025-10-26T20:45:11+00:00","author":"teo","type":"message","payload":{"text":"The ruling is noted and ignored."}}
+{"key":"2025-10-27-0001","ts":"2025-10-27T08:50:14+00:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"out"}}
+{"key":"2025-10-27-0002","ts":"2025-10-27T09:40:27+00:00","author":"noor","type":"message","payload":{"text":"mum has a list of jobs for me. i am on holiday. my name is at the top of the list"}}
+{"key":"2025-10-27-0003","ts":"2025-10-27T11:20:03+00:00","author":"teo","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-27-0004","ts":"2025-10-27T11:25:41+00:00","author":"teo","type":"message","payload":{"text":"Do the shed one. It is always the shed."}}
+{"key":"2025-10-27-0005","ts":"2025-10-27T11:27:19+00:00","author":"noor","type":"message","payload":{"text":"it is the shed"}}
+{"key":"2025-10-27-0006","ts":"2025-10-27T13:40:52+00:00","author":"noor","type":"message","payload":{"text":"cleared half of it. found my old portfolio. everything in it is brown"}}
+{"key":"2025-10-27-0007","ts":"2025-10-27T15:10:08+00:00","author":"teo","type":"message","payload":{"text":"Brown was the fashion."}}
+{"key":"2025-10-27-0008","ts":"2025-10-27T15:12:33+00:00","author":"noor","type":"message","payload":{"text":"it was not. i only had brown"}}
+{"key":"2025-10-27-0009","ts":"2025-10-27T19:25:00+00:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"heads_down"}}
+{"key":"2025-10-27-0010","ts":"2025-10-27T19:26:37+00:00","author":"teo","type":"feeling","payload":{"feeling_id":"here","intensity":0.5}}
+{"key":"2025-10-27-0011","ts":"2025-10-27T21:50:20+00:00","author":"noor","type":"message","payload":{"text":"dad has strong opinions about my car and i do not own a car"}}
+{"key":"2025-10-27-0012","ts":"2025-10-27T22:40:05+00:00","author":"noor","type":"feeling","payload":{"feeling_id":"goodnight","intensity":0.45}}
+{"key":"2025-10-31-0001","ts":"2025-10-31T08:20:11+00:00","author":"teo","type":"message","payload":{"text":"Out. Four done. That week did not happen."}}
+{"key":"2025-10-31-0002","ts":"2025-10-31T08:22:36+00:00","author":"teo","type":"message","payload":{"text":"You went quiet."}}
+{"key":"2025-10-31-0003","ts":"2025-10-31T08:40:04+00:00","author":"noor","type":"message","payload":{"text":"so did you"}}
+{"key":"2025-10-31-0004","ts":"2025-10-31T08:41:19+00:00","author":"noor","type":"message","payload":{"text":"there was no signal in the shed and then there was no reason"}}
+{"key":"2025-10-31-0005","ts":"2025-10-31T08:43:02+00:00","author":"teo","type":"feeling","payload":{"feeling_id":"miss_you","intensity":0.8}}
+{"key":"2025-10-31-0006","ts":"2025-10-31T08:44:27+00:00","author":"noor","type":"feeling","payload":{"feeling_id":"miss_you","intensity":0.7}}
+{"key":"2025-10-31-0007","ts":"2025-10-31T08:46:15+00:00","author":"teo","type":"message","payload":{"text":"Sleep first. Then you. What time."}}
+{"key":"2025-10-31-0008","ts":"2025-10-31T08:47:40+00:00","author":"noor","type":"message","payload":{"text":"im on the 2 oclock. at mine by 4. come to me"}}
+{"key":"2025-10-31-0009","ts":"2025-10-31T08:48:22+00:00","author":"teo","type":"message","payload":{"text":"I will come to you."}}
+{"key":"2025-10-31-0010","ts":"2025-10-31T08:50:00+00:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"asleep"}}
+{"key":"2025-10-31-0011","ts":"2025-10-31T10:20:33+00:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"travelling"}}
+{"key":"2025-10-31-0012","ts":"2025-10-31T12:30:08+00:00","author":"noor","type":"message","payload":{"text":"packed the brown portfolio. do not look at it. you will look at it"}}
+{"key":"2025-10-31-0013","ts":"2025-10-31T15:40:26+00:00","author":"noor","type":"state_declared","payload":{"signal":"place","value":"home"}}
+{"key":"2025-10-31-0014","ts":"2025-10-31T15:44:12+00:00","author":"noor","type":"message","payload":{"text":"flat is cold. the boiler has stopped clearing its throat and started sulking"}}
+{"key":"2025-10-31-0015","ts":"2025-10-31T15:50:41+00:00","author":"noor","type":"photo","payload":{"photo":"2025-10_boiler_gauge","caption":"found the needle. it is nowhere near the numbers i was promised"}}
+{"key":"2025-10-31-0016","ts":"2025-10-31T16:10:00+00:00","author":"teo","type":"state_declared","payload":{"signal":"availability","value":"open"}}
+{"key":"2025-10-31-0017","ts":"2025-10-31T16:14:29+00:00","author":"teo","type":"reaction","payload":{"target":"k:2025-10-31-0015","feeling_id":"steady"}}
+{"key":"2025-10-31-0018","ts":"2025-10-31T16:16:07+00:00","author":"teo","type":"message","payload":{"text":"That is under one. Leave the heating off until I am there. I will bring the little key thing."}}
+{"key":"2025-10-31-0019","ts":"2025-10-31T16:18:44+00:00","author":"noor","type":"message","payload":{"text":"the little key thing has a name"}}
+{"key":"2025-10-31-0020","ts":"2025-10-31T16:19:31+00:00","author":"teo","type":"message","payload":{"text":"It does. I am not going to use it."}}
+{"key":"2025-10-31-0021","ts":"2025-10-31T16:20:18+00:00","author":"noor","type":"feeling","payload":{"feeling_id":"pigeon","intensity":0.6}}
+{"key":"2025-10-31-0022","ts":"2025-10-31T16:40:05+00:00","author":"noor","type":"todo_event","payload":{"todo_id":"todo_boiler","action":"assigned","text":"top up the boiler pressure","assignee":"teo"}}
+{"key":"2025-10-31-0023","ts":"2025-10-31T17:50:22+00:00","author":"noor","type":"state_declared","payload":{"signal":"mood","value":"tender"}}
+{"key":"2025-10-31-0024","ts":"2025-10-31T18:30:14+00:00","author":"noor","type":"message","payload":{"text":"also. the ninth. two weeks tomorrow. i want the place by the bridge and nothing else"}}
+{"key":"2025-10-31-0025","ts":"2025-10-31T18:31:47+00:00","author":"noor","type":"message_edit","payload":{"target":"k:2025-10-31-0024","text":"also. the ninth. nine days. i want the place by the bridge and nothing else"}}
+{"key":"2025-10-31-0026","ts":"2025-10-31T18:34:03+00:00","author":"teo","type":"message","payload":{"text":"The place by the bridge. I already asked them about the corner table."}}
+{"key":"2025-10-31-0027","ts":"2025-10-31T18:36:29+00:00","author":"noor","type":"message","payload":{"text":"you asked them"}}
+{"key":"2025-10-31-0028","ts":"2025-10-31T18:37:11+00:00","author":"teo","type":"message","payload":{"text":"In September."}}
+{"key":"2025-10-31-0029","ts":"2025-10-31T18:38:40+00:00","author":"noor","type":"feeling","payload":{"feeling_id":"squeeze","intensity":0.9}}
+{"key":"2025-10-31-0030","ts":"2025-10-31T19:02:16+00:00","author":"noor","type":"message","payload":{"text":"i am not going to say anything about that. i am just going to sit here for a minute"}}
+{"key":"2025-10-31-0031","ts":"2025-10-31T20:30:38+00:00","author":"teo","type":"message","payload":{"text":"At your door. Bring a jumper down, this stairwell is arctic."}}
+{"key":"2025-10-31-0032","ts":"2025-10-31T22:10:05+00:00","author":"noor","type":"state_declared","payload":{"signal":"energy","value":2}}

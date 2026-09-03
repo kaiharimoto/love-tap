@@ -1,0 +1,892 @@
+{
+ "count": 56,
+ "size": 2048,
+ "px_per_mm": 17.067,
+ "threshold": 0.72,
+ "seed0": 20260903,
+ "generator": "tools/tears/tear.py",
+ "masks": [
+  {
+   "kind": "strip",
+   "seed": 20260904,
+   "w_mm": 114.69,
+   "h_mm": 51.39,
+   "torn_edges": [
+    "t",
+    "b"
+   ],
+   "roughness_mm": 1.04,
+   "wander_mm": 6.38,
+   "hurst": 0.958,
+   "px_per_mm": 17.067,
+   "id": "tear_001",
+   "max_correlation": -1.0
+  },
+  {
+   "kind": "half",
+   "seed": 20260905,
+   "w_mm": 105.23,
+   "h_mm": 97.6,
+   "torn_edges": [
+    "b"
+   ],
+   "roughness_mm": 2.72,
+   "wander_mm": 3.22,
+   "hurst": 0.73,
+   "px_per_mm": 17.067,
+   "id": "tear_002",
+   "max_correlation": 0.3149
+  },
+  {
+   "kind": "corner",
+   "seed": 20260906,
+   "w_mm": 87.5,
+   "h_mm": 62.97,
+   "torn_edges": [
+    "b",
+    "l"
+   ],
+   "roughness_mm": 2.31,
+   "wander_mm": 5.8,
+   "hurst": 0.705,
+   "px_per_mm": 17.067,
+   "id": "tear_003",
+   "max_correlation": 0.3447
+  },
+  {
+   "kind": "rect",
+   "seed": 20260907,
+   "w_mm": 78.15,
+   "h_mm": 59.75,
+   "torn_edges": [
+    "t",
+    "b",
+    "l"
+   ],
+   "roughness_mm": 1.99,
+   "wander_mm": 3.94,
+   "hurst": 0.782,
+   "px_per_mm": 17.067,
+   "id": "tear_004",
+   "max_correlation": 0.3736
+  },
+  {
+   "kind": "three",
+   "seed": 20260908,
+   "w_mm": 104.99,
+   "h_mm": 65.94,
+   "torn_edges": [
+    "t",
+    "b",
+    "r"
+   ],
+   "roughness_mm": 2.4,
+   "wander_mm": 3.52,
+   "hurst": 0.796,
+   "px_per_mm": 17.067,
+   "id": "tear_005",
+   "max_correlation": 0.424
+  },
+  {
+   "kind": "diagonal",
+   "seed": 20260909,
+   "w_mm": 114.97,
+   "h_mm": 75.92,
+   "torn_edges": [
+    "d"
+   ],
+   "roughness_mm": 0.76,
+   "wander_mm": 2.74,
+   "hurst": 1.007,
+   "px_per_mm": 17.067,
+   "id": "tear_006",
+   "max_correlation": 0.3433
+  },
+  {
+   "kind": "cut",
+   "seed": 20260910,
+   "w_mm": 85.2,
+   "h_mm": 100.75,
+   "torn_edges": [
+    "r"
+   ],
+   "roughness_mm": 2.95,
+   "wander_mm": 5.72,
+   "hurst": 0.556,
+   "px_per_mm": 17.067,
+   "id": "tear_007",
+   "max_correlation": 0.3791
+  },
+  {
+   "kind": "notepad",
+   "seed": 20260911,
+   "w_mm": 108.57,
+   "h_mm": 69.14,
+   "torn_edges": [
+    "t"
+   ],
+   "roughness_mm": 1.91,
+   "wander_mm": 5.89,
+   "hurst": 0.987,
+   "px_per_mm": 17.067,
+   "id": "tear_008",
+   "max_correlation": 0.4155
+  },
+  {
+   "kind": "strip",
+   "seed": 20260912,
+   "w_mm": 100.08,
+   "h_mm": 52.93,
+   "torn_edges": [
+    "t",
+    "b"
+   ],
+   "roughness_mm": 2.01,
+   "wander_mm": 6.9,
+   "hurst": 0.575,
+   "px_per_mm": 17.067,
+   "id": "tear_009",
+   "max_correlation": 0.3931
+  },
+  {
+   "kind": "half",
+   "seed": 20260913,
+   "w_mm": 99.93,
+   "h_mm": 74.13,
+   "torn_edges": [
+    "b"
+   ],
+   "roughness_mm": 1.24,
+   "wander_mm": 4.37,
+   "hurst": 0.67,
+   "px_per_mm": 17.067,
+   "id": "tear_010",
+   "max_correlation": 0.4125
+  },
+  {
+   "kind": "corner",
+   "seed": 20260914,
+   "w_mm": 63.31,
+   "h_mm": 63.37,
+   "torn_edges": [
+    "b",
+    "l"
+   ],
+   "roughness_mm": 2.41,
+   "wander_mm": 6.54,
+   "hurst": 0.931,
+   "px_per_mm": 17.067,
+   "id": "tear_011",
+   "max_correlation": 0.4293
+  },
+  {
+   "kind": "rect",
+   "seed": 20260915,
+   "w_mm": 99.74,
+   "h_mm": 63.6,
+   "torn_edges": [
+    "t",
+    "b",
+    "l"
+   ],
+   "roughness_mm": 0.98,
+   "wander_mm": 4.95,
+   "hurst": 0.698,
+   "px_per_mm": 17.067,
+   "id": "tear_012",
+   "max_correlation": 0.4471
+  },
+  {
+   "kind": "three",
+   "seed": 20260916,
+   "w_mm": 75.93,
+   "h_mm": 53.28,
+   "torn_edges": [
+    "t",
+    "b",
+    "r"
+   ],
+   "roughness_mm": 1.76,
+   "wander_mm": 3.1,
+   "hurst": 0.651,
+   "px_per_mm": 17.067,
+   "id": "tear_013",
+   "max_correlation": 0.4798
+  },
+  {
+   "kind": "diagonal",
+   "seed": 20260917,
+   "w_mm": 102.86,
+   "h_mm": 62.35,
+   "torn_edges": [
+    "d"
+   ],
+   "roughness_mm": 1.5,
+   "wander_mm": 4.8,
+   "hurst": 0.589,
+   "px_per_mm": 17.067,
+   "id": "tear_014",
+   "max_correlation": 0.4615
+  },
+  {
+   "kind": "cut",
+   "seed": 20260918,
+   "w_mm": 113.82,
+   "h_mm": 63.89,
+   "torn_edges": [
+    "r"
+   ],
+   "roughness_mm": 2.74,
+   "wander_mm": 6.6,
+   "hurst": 1.134,
+   "px_per_mm": 17.067,
+   "id": "tear_015",
+   "max_correlation": 0.4741
+  },
+  {
+   "kind": "notepad",
+   "seed": 20260919,
+   "w_mm": 95.8,
+   "h_mm": 88.93,
+   "torn_edges": [
+    "t"
+   ],
+   "roughness_mm": 2.39,
+   "wander_mm": 5.74,
+   "hurst": 1.142,
+   "px_per_mm": 17.067,
+   "id": "tear_016",
+   "max_correlation": 0.4136
+  },
+  {
+   "kind": "strip",
+   "seed": 20260920,
+   "w_mm": 96.01,
+   "h_mm": 30.51,
+   "torn_edges": [
+    "t",
+    "b"
+   ],
+   "roughness_mm": 1.68,
+   "wander_mm": 3.36,
+   "hurst": 1.101,
+   "px_per_mm": 17.067,
+   "id": "tear_017",
+   "max_correlation": 0.4691
+  },
+  {
+   "kind": "half",
+   "seed": 20260921,
+   "w_mm": 112.92,
+   "h_mm": 70.16,
+   "torn_edges": [
+    "b"
+   ],
+   "roughness_mm": 1.71,
+   "wander_mm": 3.02,
+   "hurst": 0.893,
+   "px_per_mm": 17.067,
+   "id": "tear_018",
+   "max_correlation": 0.485
+  },
+  {
+   "kind": "corner",
+   "seed": 20260922,
+   "w_mm": 94.67,
+   "h_mm": 79.77,
+   "torn_edges": [
+    "b",
+    "l"
+   ],
+   "roughness_mm": 1.36,
+   "wander_mm": 5.0,
+   "hurst": 0.925,
+   "px_per_mm": 17.067,
+   "id": "tear_019",
+   "max_correlation": 0.4659
+  },
+  {
+   "kind": "rect",
+   "seed": 20260923,
+   "w_mm": 109.59,
+   "h_mm": 60.77,
+   "torn_edges": [
+    "t",
+    "b",
+    "l"
+   ],
+   "roughness_mm": 2.63,
+   "wander_mm": 2.45,
+   "hurst": 0.73,
+   "px_per_mm": 17.067,
+   "id": "tear_020",
+   "max_correlation": 0.464
+  },
+  {
+   "kind": "three",
+   "seed": 20260924,
+   "w_mm": 72.64,
+   "h_mm": 46.25,
+   "torn_edges": [
+    "t",
+    "b",
+    "r"
+   ],
+   "roughness_mm": 2.12,
+   "wander_mm": 4.22,
+   "hurst": 0.575,
+   "px_per_mm": 17.067,
+   "id": "tear_021",
+   "max_correlation": 0.5496
+  },
+  {
+   "kind": "diagonal",
+   "seed": 20260925,
+   "w_mm": 85.57,
+   "h_mm": 63.79,
+   "torn_edges": [
+    "d"
+   ],
+   "roughness_mm": 1.68,
+   "wander_mm": 3.66,
+   "hurst": 0.856,
+   "px_per_mm": 17.067,
+   "id": "tear_022",
+   "max_correlation": 0.4974
+  },
+  {
+   "kind": "cut",
+   "seed": 20260926,
+   "w_mm": 110.13,
+   "h_mm": 97.16,
+   "torn_edges": [
+    "r"
+   ],
+   "roughness_mm": 2.02,
+   "wander_mm": 5.8,
+   "hurst": 1.133,
+   "px_per_mm": 17.067,
+   "id": "tear_023",
+   "max_correlation": 0.5603
+  },
+  {
+   "kind": "notepad",
+   "seed": 20260927,
+   "w_mm": 92.73,
+   "h_mm": 68.03,
+   "torn_edges": [
+    "t"
+   ],
+   "roughness_mm": 0.62,
+   "wander_mm": 6.41,
+   "hurst": 0.565,
+   "px_per_mm": 17.067,
+   "id": "tear_024",
+   "max_correlation": 0.4955
+  },
+  {
+   "kind": "strip",
+   "seed": 20260928,
+   "w_mm": 107.2,
+   "h_mm": 29.47,
+   "torn_edges": [
+    "t",
+    "b"
+   ],
+   "roughness_mm": 1.3,
+   "wander_mm": 3.66,
+   "hurst": 1.016,
+   "px_per_mm": 17.067,
+   "id": "tear_025",
+   "max_correlation": 0.4859
+  },
+  {
+   "kind": "half",
+   "seed": 20260929,
+   "w_mm": 103.06,
+   "h_mm": 91.39,
+   "torn_edges": [
+    "b"
+   ],
+   "roughness_mm": 1.79,
+   "wander_mm": 1.72,
+   "hurst": 0.551,
+   "px_per_mm": 17.067,
+   "id": "tear_026",
+   "max_correlation": 0.4995
+  },
+  {
+   "kind": "corner",
+   "seed": 20260930,
+   "w_mm": 71.69,
+   "h_mm": 59.66,
+   "torn_edges": [
+    "b",
+    "l"
+   ],
+   "roughness_mm": 1.26,
+   "wander_mm": 3.11,
+   "hurst": 0.644,
+   "px_per_mm": 17.067,
+   "id": "tear_027",
+   "max_correlation": 0.5364
+  },
+  {
+   "kind": "rect",
+   "seed": 20260931,
+   "w_mm": 86.97,
+   "h_mm": 54.72,
+   "torn_edges": [
+    "t",
+    "b",
+    "l"
+   ],
+   "roughness_mm": 2.41,
+   "wander_mm": 5.72,
+   "hurst": 0.618,
+   "px_per_mm": 17.067,
+   "id": "tear_028",
+   "max_correlation": 0.3844
+  },
+  {
+   "kind": "three",
+   "seed": 20260932,
+   "w_mm": 108.54,
+   "h_mm": 48.73,
+   "torn_edges": [
+    "t",
+    "b",
+    "r"
+   ],
+   "roughness_mm": 1.62,
+   "wander_mm": 2.75,
+   "hurst": 0.986,
+   "px_per_mm": 17.067,
+   "id": "tear_029",
+   "max_correlation": 0.4815
+  },
+  {
+   "kind": "diagonal",
+   "seed": 20260933,
+   "w_mm": 91.62,
+   "h_mm": 70.79,
+   "torn_edges": [
+    "d"
+   ],
+   "roughness_mm": 2.35,
+   "wander_mm": 4.93,
+   "hurst": 1.062,
+   "px_per_mm": 17.067,
+   "id": "tear_030",
+   "max_correlation": 0.5184
+  },
+  {
+   "kind": "cut",
+   "seed": 20260934,
+   "w_mm": 100.47,
+   "h_mm": 93.76,
+   "torn_edges": [
+    "r"
+   ],
+   "roughness_mm": 2.16,
+   "wander_mm": 4.13,
+   "hurst": 0.69,
+   "px_per_mm": 17.067,
+   "id": "tear_031",
+   "max_correlation": 0.456
+  },
+  {
+   "kind": "notepad",
+   "seed": 20260935,
+   "w_mm": 101.78,
+   "h_mm": 53.5,
+   "torn_edges": [
+    "t"
+   ],
+   "roughness_mm": 2.65,
+   "wander_mm": 4.25,
+   "hurst": 0.974,
+   "px_per_mm": 17.067,
+   "id": "tear_032",
+   "max_correlation": 0.5101
+  },
+  {
+   "kind": "strip",
+   "seed": 20260936,
+   "w_mm": 99.94,
+   "h_mm": 43.75,
+   "torn_edges": [
+    "t",
+    "b"
+   ],
+   "roughness_mm": 2.66,
+   "wander_mm": 1.56,
+   "hurst": 1.044,
+   "px_per_mm": 17.067,
+   "id": "tear_033",
+   "max_correlation": 0.5013
+  },
+  {
+   "kind": "half",
+   "seed": 20260937,
+   "w_mm": 102.1,
+   "h_mm": 95.82,
+   "torn_edges": [
+    "b"
+   ],
+   "roughness_mm": 0.56,
+   "wander_mm": 4.29,
+   "hurst": 0.644,
+   "px_per_mm": 17.067,
+   "id": "tear_034",
+   "max_correlation": 0.5206
+  },
+  {
+   "kind": "corner",
+   "seed": 20260938,
+   "w_mm": 57.35,
+   "h_mm": 46.25,
+   "torn_edges": [
+    "b",
+    "l"
+   ],
+   "roughness_mm": 2.06,
+   "wander_mm": 4.04,
+   "hurst": 0.694,
+   "px_per_mm": 17.067,
+   "id": "tear_035",
+   "max_correlation": 0.5365
+  },
+  {
+   "kind": "rect",
+   "seed": 20260939,
+   "w_mm": 84.48,
+   "h_mm": 40.45,
+   "torn_edges": [
+    "t",
+    "b",
+    "l"
+   ],
+   "roughness_mm": 2.95,
+   "wander_mm": 2.38,
+   "hurst": 0.864,
+   "px_per_mm": 17.067,
+   "id": "tear_036",
+   "max_correlation": 0.5012
+  },
+  {
+   "kind": "three",
+   "seed": 20260940,
+   "w_mm": 88.13,
+   "h_mm": 55.82,
+   "torn_edges": [
+    "t",
+    "b",
+    "r"
+   ],
+   "roughness_mm": 1.41,
+   "wander_mm": 4.22,
+   "hurst": 0.907,
+   "px_per_mm": 17.067,
+   "id": "tear_037",
+   "max_correlation": 0.4411
+  },
+  {
+   "kind": "diagonal",
+   "seed": 20260941,
+   "w_mm": 102.1,
+   "h_mm": 55.33,
+   "torn_edges": [
+    "d"
+   ],
+   "roughness_mm": 1.19,
+   "wander_mm": 2.03,
+   "hurst": 0.718,
+   "px_per_mm": 17.067,
+   "id": "tear_038",
+   "max_correlation": 0.5424
+  },
+  {
+   "kind": "cut",
+   "seed": 20260942,
+   "w_mm": 98.54,
+   "h_mm": 99.89,
+   "torn_edges": [
+    "r"
+   ],
+   "roughness_mm": 2.21,
+   "wander_mm": 6.67,
+   "hurst": 0.886,
+   "px_per_mm": 17.067,
+   "id": "tear_039",
+   "max_correlation": 0.4708
+  },
+  {
+   "kind": "notepad",
+   "seed": 20260943,
+   "w_mm": 108.75,
+   "h_mm": 51.62,
+   "torn_edges": [
+    "t"
+   ],
+   "roughness_mm": 2.52,
+   "wander_mm": 6.51,
+   "hurst": 0.921,
+   "px_per_mm": 17.067,
+   "id": "tear_040",
+   "max_correlation": 0.4556
+  },
+  {
+   "kind": "strip",
+   "seed": 20260944,
+   "w_mm": 100.37,
+   "h_mm": 39.34,
+   "torn_edges": [
+    "t",
+    "b"
+   ],
+   "roughness_mm": 1.3,
+   "wander_mm": 5.39,
+   "hurst": 0.841,
+   "px_per_mm": 17.067,
+   "id": "tear_041",
+   "max_correlation": 0.4057
+  },
+  {
+   "kind": "half",
+   "seed": 20260945,
+   "w_mm": 107.65,
+   "h_mm": 65.77,
+   "torn_edges": [
+    "b"
+   ],
+   "roughness_mm": 0.9,
+   "wander_mm": 4.11,
+   "hurst": 0.911,
+   "px_per_mm": 17.067,
+   "id": "tear_042",
+   "max_correlation": 0.5175
+  },
+  {
+   "kind": "corner",
+   "seed": 20260946,
+   "w_mm": 81.96,
+   "h_mm": 60.82,
+   "torn_edges": [
+    "b",
+    "l"
+   ],
+   "roughness_mm": 1.13,
+   "wander_mm": 5.83,
+   "hurst": 0.634,
+   "px_per_mm": 17.067,
+   "id": "tear_043",
+   "max_correlation": 0.4486
+  },
+  {
+   "kind": "rect",
+   "seed": 20260947,
+   "w_mm": 108.11,
+   "h_mm": 61.98,
+   "torn_edges": [
+    "t",
+    "b",
+    "l"
+   ],
+   "roughness_mm": 0.51,
+   "wander_mm": 6.99,
+   "hurst": 1.092,
+   "px_per_mm": 17.067,
+   "id": "tear_044",
+   "max_correlation": 0.426
+  },
+  {
+   "kind": "three",
+   "seed": 20260948,
+   "w_mm": 87.35,
+   "h_mm": 70.42,
+   "torn_edges": [
+    "t",
+    "b",
+    "r"
+   ],
+   "roughness_mm": 1.79,
+   "wander_mm": 4.17,
+   "hurst": 0.72,
+   "px_per_mm": 17.067,
+   "id": "tear_045",
+   "max_correlation": 0.4853
+  },
+  {
+   "kind": "diagonal",
+   "seed": 20260949,
+   "w_mm": 95.46,
+   "h_mm": 70.82,
+   "torn_edges": [
+    "d"
+   ],
+   "roughness_mm": 2.1,
+   "wander_mm": 5.34,
+   "hurst": 1.138,
+   "px_per_mm": 17.067,
+   "id": "tear_046",
+   "max_correlation": 0.4842
+  },
+  {
+   "kind": "cut",
+   "seed": 20260950,
+   "w_mm": 99.52,
+   "h_mm": 83.11,
+   "torn_edges": [
+    "r"
+   ],
+   "roughness_mm": 1.57,
+   "wander_mm": 5.62,
+   "hurst": 0.772,
+   "px_per_mm": 17.067,
+   "id": "tear_047",
+   "max_correlation": 0.4711
+  },
+  {
+   "kind": "notepad",
+   "seed": 20260951,
+   "w_mm": 108.95,
+   "h_mm": 75.68,
+   "torn_edges": [
+    "t"
+   ],
+   "roughness_mm": 0.78,
+   "wander_mm": 3.88,
+   "hurst": 0.822,
+   "px_per_mm": 17.067,
+   "id": "tear_048",
+   "max_correlation": 0.5196
+  },
+  {
+   "kind": "strip",
+   "seed": 20260952,
+   "w_mm": 107.42,
+   "h_mm": 41.66,
+   "torn_edges": [
+    "t",
+    "b"
+   ],
+   "roughness_mm": 1.52,
+   "wander_mm": 2.85,
+   "hurst": 0.639,
+   "px_per_mm": 17.067,
+   "id": "tear_049",
+   "max_correlation": 0.433
+  },
+  {
+   "kind": "half",
+   "seed": 20260953,
+   "w_mm": 112.83,
+   "h_mm": 79.94,
+   "torn_edges": [
+    "b"
+   ],
+   "roughness_mm": 1.03,
+   "wander_mm": 2.05,
+   "hurst": 1.052,
+   "px_per_mm": 17.067,
+   "id": "tear_050",
+   "max_correlation": 0.5208
+  },
+  {
+   "kind": "corner",
+   "seed": 20260954,
+   "w_mm": 55.01,
+   "h_mm": 50.27,
+   "torn_edges": [
+    "b",
+    "l"
+   ],
+   "roughness_mm": 2.78,
+   "wander_mm": 4.8,
+   "hurst": 1.042,
+   "px_per_mm": 17.067,
+   "id": "tear_051",
+   "max_correlation": 0.5206
+  },
+  {
+   "kind": "rect",
+   "seed": 20260955,
+   "w_mm": 87.65,
+   "h_mm": 48.4,
+   "torn_edges": [
+    "t",
+    "b",
+    "l"
+   ],
+   "roughness_mm": 1.56,
+   "wander_mm": 3.34,
+   "hurst": 0.641,
+   "px_per_mm": 17.067,
+   "id": "tear_052",
+   "max_correlation": 0.5107
+  },
+  {
+   "kind": "three",
+   "seed": 20260956,
+   "w_mm": 103.93,
+   "h_mm": 67.44,
+   "torn_edges": [
+    "t",
+    "b",
+    "r"
+   ],
+   "roughness_mm": 2.33,
+   "wander_mm": 1.88,
+   "hurst": 0.963,
+   "px_per_mm": 17.067,
+   "id": "tear_053",
+   "max_correlation": 0.4216
+  },
+  {
+   "kind": "diagonal",
+   "seed": 20260957,
+   "w_mm": 90.22,
+   "h_mm": 87.99,
+   "torn_edges": [
+    "d"
+   ],
+   "roughness_mm": 1.55,
+   "wander_mm": 1.38,
+   "hurst": 0.647,
+   "px_per_mm": 17.067,
+   "id": "tear_054",
+   "max_correlation": 0.5035
+  },
+  {
+   "kind": "cut",
+   "seed": 20260958,
+   "w_mm": 103.2,
+   "h_mm": 76.76,
+   "torn_edges": [
+    "r"
+   ],
+   "roughness_mm": 1.01,
+   "wander_mm": 2.38,
+   "hurst": 0.574,
+   "px_per_mm": 17.067,
+   "id": "tear_055",
+   "max_correlation": 0.5789
+  },
+  {
+   "kind": "notepad",
+   "seed": 20260959,
+   "w_mm": 98.64,
+   "h_mm": 76.18,
+   "torn_edges": [
+    "t"
+   ],
+   "roughness_mm": 1.72,
+   "wander_mm": 5.82,
+   "hurst": 0.807,
+   "px_per_mm": 17.067,
+   "id": "tear_056",
+   "max_correlation": 0.5081
+  }
+ ]
+}

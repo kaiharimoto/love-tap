@@ -65,11 +65,32 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/INDEX.json
+    - assets/paper/
+    - assets/tears/
+    - assets/objects/
+    - assets/bits/
+    - assets/shell/
+    - assets/sound/
+    - assets/seed/
+    - assets/seed/year/
+    - assets/seed/photos/
+    - assets/seed/videos/
+    - assets/seed/voice/
+
+  fonts:
+    - family: NoorHand
+      fonts:
+        - asset: assets/fonts/NoorHand.ttf
+    - family: TeoHand
+      fonts:
+        - asset: assets/fonts/TeoHand.ttf
+    - family: DeskStamp
+      fonts:
+        - asset: assets/fonts/TeoHand.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -549,7 +549,7 @@
    }
   },
   "assets/fonts/TeoHand.ttf": {
-   "bytes": 724340,
+   "bytes": 723720,
    "generator": "tools/handwriting/build.py",
    "kind": "font",
    "settings": {
@@ -609,7 +609,7 @@
     },
     "inputs": {
      "tools/handwriting/hands.json": "8064eea99da0afa21e6da4fd9e117dc2e2377af64ff466e9168ccb1b2ab6088b",
-     "tools/handwriting/skeletons.json": "5581c72f0df70dc1ee0d617144008ead762ac6e792a69fb0b52e4e3ad128b5ae"
+     "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
     },
     "outline": "RDP + Schneider cubic fit + cu2qu",
     "seed": 20260903,
@@ -635,7 +635,7 @@
    }
   },
   "assets/fonts/previews/TeoHand.png": {
-   "bytes": 338552,
+   "bytes": 339182,
    "generator": "tools/handwriting/build.py",
    "kind": "preview",
    "settings": {
@@ -649,6 +649,497 @@
     "scale": 2,
     "seed": 20260903,
     "width": 2200
+   }
+  },
+  "assets/objects/obj_boat.png": {
+   "bytes": 362679,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_boat",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_boat_shadow.png": {
+   "bytes": 196330,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_boat",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_boat_shadow_dusk.png": {
+   "bytes": 113730,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_boat",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_crane.png": {
+   "bytes": 451634,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_crane",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_crane_shadow.png": {
+   "bytes": 173301,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_crane",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_crane_shadow_dusk.png": {
+   "bytes": 166824,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_crane",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_heart_fold.png": {
+   "bytes": 401714,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_heart_fold",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_heart_fold_shadow.png": {
+   "bytes": 144160,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_heart_fold",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_heart_fold_shadow_dusk.png": {
+   "bytes": 171526,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_heart_fold",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_plane.png": {
+   "bytes": 457873,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_plane",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_plane_shadow.png": {
+   "bytes": 366422,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_plane",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/paper/graph_01.webp": {
+   "bytes": 171814,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1100.0,
+     "rgb": [
+      0.9,
+      0.92,
+      0.92
+     ],
+     "sheen": 0.2,
+     "tooth": 0.9
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.85,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.08,
+       "ghost_offset": 0.131,
+       "heavy_density": 0.95,
+       "heavy_every": 2,
+       "heavy_width": 0.3,
+       "kind": "grid",
+       "phase_x": 0.367,
+       "phase_y": 0.12,
+       "pitch": 5.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.2791,
+        "dy": -0.0276,
+        "rot_deg": -0.1715
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.17,
+       "width_cell": 0.7,
+       "width_jitter": 0.14
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 741566172,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "graph",
+     "variant": 1
+    },
+    "samples": 12,
+    "seed": 741566172,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "graph",
+    "variant": 1,
+    "yellowing": 0.05
+   }
+  },
+  "assets/paper/graph_02.webp": {
+   "bytes": 173684,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1100.0,
+     "rgb": [
+      0.9,
+      0.92,
+      0.92
+     ],
+     "sheen": 0.2,
+     "tooth": 0.9
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.85,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.08,
+       "ghost_offset": 0.165,
+       "heavy_density": 0.95,
+       "heavy_every": 2,
+       "heavy_width": 0.3,
+       "kind": "grid",
+       "phase_x": 4.116,
+       "phase_y": 3.347,
+       "pitch": 5.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.3895,
+        "dy": 0.3154,
+        "rot_deg": 0.1247
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.17,
+       "width_cell": 0.7,
+       "width_jitter": 0.14
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3040491366,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "graph",
+     "variant": 2
+    },
+    "samples": 12,
+    "seed": 3040491366,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "graph",
+    "variant": 2,
+    "yellowing": 0.12
+   }
+  },
+  "assets/paper/graph_03.webp": {
+   "bytes": 163710,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1100.0,
+     "rgb": [
+      0.9,
+      0.92,
+      0.92
+     ],
+     "sheen": 0.2,
+     "tooth": 0.9
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.85,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.08,
+       "ghost_offset": 0.205,
+       "heavy_density": 0.95,
+       "heavy_every": 2,
+       "heavy_width": 0.3,
+       "kind": "grid",
+       "phase_x": 3.094,
+       "phase_y": 3.936,
+       "pitch": 5.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.3815,
+        "dy": -0.3088,
+        "rot_deg": 0.0503
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.17,
+       "width_cell": 0.7,
+       "width_jitter": 0.14
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3258779632,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "graph",
+     "variant": 3
+    },
+    "samples": 12,
+    "seed": 3258779632,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "graph",
+    "variant": 3,
+    "yellowing": 0.22
+   }
+  },
+  "assets/paper/graph_04.webp": {
+   "bytes": 161574,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1100.0,
+     "rgb": [
+      0.9,
+      0.92,
+      0.92
+     ],
+     "sheen": 0.2,
+     "tooth": 0.9
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.85,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.08,
+       "ghost_offset": 0.194,
+       "heavy_density": 0.95,
+       "heavy_every": 2,
+       "heavy_width": 0.3,
+       "kind": "grid",
+       "phase_x": 3.313,
+       "phase_y": 3.301,
+       "pitch": 5.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.0371,
+        "dy": 0.1112,
+        "rot_deg": 0.0677
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.17,
+       "width_cell": 0.7,
+       "width_jitter": 0.14
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 1549374035,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "graph",
+     "variant": 4
+    },
+    "samples": 12,
+    "seed": 1549374035,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "graph",
+    "variant": 4,
+    "yellowing": 0.3
    }
   },
   "assets/paper/lined_01.webp": {
@@ -748,6 +1239,501 @@
     "stock": "lined",
     "variant": 1,
     "yellowing": 0.12
+   }
+  },
+  "assets/paper/lined_02.webp": {
+   "bytes": 91506,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 950.0,
+     "rgb": [
+      0.93,
+      0.9,
+      0.84
+     ],
+     "sheen": 0.22,
+     "tooth": 1.05
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.92,
+       "end": 205.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.18,
+       "ghost_offset": 0.253,
+       "kind": "hrules",
+       "pitch": 8.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.0096,
+        "dy": 0.3723,
+        "rot_deg": -0.054
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 23.395,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.158,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0
+       ],
+       "reg": {
+        "dx": -0.2113,
+        "dy": 0.0155,
+        "rot_deg": -0.079
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.4,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 849434844,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "lined",
+     "variant": 2
+    },
+    "samples": 20,
+    "seed": 849434844,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "lined",
+    "variant": 2,
+    "yellowing": 0.3
+   }
+  },
+  "assets/paper/lined_03.webp": {
+   "bytes": 89414,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 950.0,
+     "rgb": [
+      0.93,
+      0.9,
+      0.84
+     ],
+     "sheen": 0.22,
+     "tooth": 1.05
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.92,
+       "end": 205.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.18,
+       "ghost_offset": 0.136,
+       "kind": "hrules",
+       "pitch": 8.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.2128,
+        "dy": 0.2386,
+        "rot_deg": 0.0671
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 22.71,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.142,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0
+       ],
+       "reg": {
+        "dx": 0.0641,
+        "dy": -0.1952,
+        "rot_deg": -0.1035
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.4,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 1168533578,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "lined",
+     "variant": 3
+    },
+    "samples": 12,
+    "seed": 1168533578,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "lined",
+    "variant": 3,
+    "yellowing": 0.48
+   }
+  },
+  "assets/paper/lined_04.webp": {
+   "bytes": 88736,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 950.0,
+     "rgb": [
+      0.93,
+      0.9,
+      0.84
+     ],
+     "sheen": 0.22,
+     "tooth": 1.05
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.92,
+       "end": 205.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.18,
+       "ghost_offset": 0.162,
+       "kind": "hrules",
+       "pitch": 8.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.1082,
+        "dy": -0.0343,
+        "rot_deg": -0.0319
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 23.455,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.19,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0
+       ],
+       "reg": {
+        "dx": -0.2769,
+        "dy": -0.1262,
+        "rot_deg": 0.0342
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.4,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3686989289,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "lined",
+     "variant": 4
+    },
+    "samples": 12,
+    "seed": 3686989289,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "lined",
+    "variant": 4,
+    "yellowing": 0.6
+   }
+  },
+  "assets/paper/spiral_01.webp": {
+   "bytes": 97344,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 900.0,
+     "rgb": [
+      0.93,
+      0.9,
+      0.84
+     ],
+     "sheen": 0.22,
+     "tooth": 1.1
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.92,
+       "end": 205.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.18,
+       "ghost_offset": 0.249,
+       "kind": "hrules",
+       "pitch": 8.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.2247,
+        "dy": 0.065,
+        "rot_deg": -0.0848
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 21.54,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.216,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0
+       ],
+       "reg": {
+        "dx": -0.0904,
+        "dy": -0.3019,
+        "rot_deg": -0.0315
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.4,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 61176216,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "spiral",
+     "variant": 1
+    },
+    "samples": 12,
+    "seed": 61176216,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "spiral",
+    "variant": 1,
+    "yellowing": 0.1
+   }
+  },
+  "assets/paper/spiral_02.webp": {
+   "bytes": 103362,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 900.0,
+     "rgb": [
+      0.93,
+      0.9,
+      0.84
+     ],
+     "sheen": 0.22,
+     "tooth": 1.1
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.92,
+       "end": 205.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.18,
+       "ghost_offset": 0.155,
+       "kind": "hrules",
+       "pitch": 8.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.3985,
+        "dy": 0.034,
+        "rot_deg": -0.151
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 24.27,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.236,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0
+       ],
+       "reg": {
+        "dx": 0.0843,
+        "dy": -0.4971,
+        "rot_deg": 0.1197
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.4,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 2594973730,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "spiral",
+     "variant": 2
+    },
+    "samples": 12,
+    "seed": 2594973730,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "spiral",
+    "variant": 2,
+    "yellowing": 0.28
    }
   },
   "assets/sound/snd_breathe.ogg": {
@@ -3119,6 +4105,1120 @@
     "sample_rate": 44100,
     "seed": 20260903,
     "sound": "a folded note opened: three soft rustles"
+   }
+  },
+  "assets/tears/tear_001.png": {
+   "bytes": 154189,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 51.39,
+    "hurst": 0.958,
+    "kind": "strip",
+    "max_correlation": -1.0,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.04,
+    "seed": 20260904,
+    "torn_edges": [
+     "t",
+     "b"
+    ],
+    "w_mm": 114.69,
+    "wander_mm": 6.38
+   }
+  },
+  "assets/tears/tear_002.png": {
+   "bytes": 210840,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 97.6,
+    "hurst": 0.73,
+    "kind": "half",
+    "max_correlation": 0.3149,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.72,
+    "seed": 20260905,
+    "torn_edges": [
+     "b"
+    ],
+    "w_mm": 105.23,
+    "wander_mm": 3.22
+   }
+  },
+  "assets/tears/tear_003.png": {
+   "bytes": 185221,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 62.97,
+    "hurst": 0.705,
+    "kind": "corner",
+    "max_correlation": 0.3447,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.31,
+    "seed": 20260906,
+    "torn_edges": [
+     "b",
+     "l"
+    ],
+    "w_mm": 87.5,
+    "wander_mm": 5.8
+   }
+  },
+  "assets/tears/tear_004.png": {
+   "bytes": 158014,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 59.75,
+    "hurst": 0.782,
+    "kind": "rect",
+    "max_correlation": 0.3736,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.99,
+    "seed": 20260907,
+    "torn_edges": [
+     "t",
+     "b",
+     "l"
+    ],
+    "w_mm": 78.15,
+    "wander_mm": 3.94
+   }
+  },
+  "assets/tears/tear_005.png": {
+   "bytes": 175281,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 65.94,
+    "hurst": 0.796,
+    "kind": "three",
+    "max_correlation": 0.424,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.4,
+    "seed": 20260908,
+    "torn_edges": [
+     "t",
+     "b",
+     "r"
+    ],
+    "w_mm": 104.99,
+    "wander_mm": 3.52
+   }
+  },
+  "assets/tears/tear_006.png": {
+   "bytes": 105342,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 75.92,
+    "hurst": 1.007,
+    "kind": "diagonal",
+    "max_correlation": 0.3433,
+    "px_per_mm": 17.067,
+    "roughness_mm": 0.76,
+    "seed": 20260909,
+    "torn_edges": [
+     "d"
+    ],
+    "w_mm": 114.97,
+    "wander_mm": 2.74
+   }
+  },
+  "assets/tears/tear_007.png": {
+   "bytes": 223737,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 100.75,
+    "hurst": 0.556,
+    "kind": "cut",
+    "max_correlation": 0.3791,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.95,
+    "seed": 20260910,
+    "torn_edges": [
+     "r"
+    ],
+    "w_mm": 85.2,
+    "wander_mm": 5.72
+   }
+  },
+  "assets/tears/tear_008.png": {
+   "bytes": 155011,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 69.14,
+    "hurst": 0.987,
+    "kind": "notepad",
+    "max_correlation": 0.4155,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.91,
+    "seed": 20260911,
+    "torn_edges": [
+     "t"
+    ],
+    "w_mm": 108.57,
+    "wander_mm": 5.89
+   }
+  },
+  "assets/tears/tear_009.png": {
+   "bytes": 167516,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 52.93,
+    "hurst": 0.575,
+    "kind": "strip",
+    "max_correlation": 0.3931,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.01,
+    "seed": 20260912,
+    "torn_edges": [
+     "t",
+     "b"
+    ],
+    "w_mm": 100.08,
+    "wander_mm": 6.9
+   }
+  },
+  "assets/tears/tear_010.png": {
+   "bytes": 175097,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 74.13,
+    "hurst": 0.67,
+    "kind": "half",
+    "max_correlation": 0.4125,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.24,
+    "seed": 20260913,
+    "torn_edges": [
+     "b"
+    ],
+    "w_mm": 99.93,
+    "wander_mm": 4.37
+   }
+  },
+  "assets/tears/tear_011.png": {
+   "bytes": 127527,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 63.37,
+    "hurst": 0.931,
+    "kind": "corner",
+    "max_correlation": 0.4293,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.41,
+    "seed": 20260914,
+    "torn_edges": [
+     "b",
+     "l"
+    ],
+    "w_mm": 63.31,
+    "wander_mm": 6.54
+   }
+  },
+  "assets/tears/tear_012.png": {
+   "bytes": 172213,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 63.6,
+    "hurst": 0.698,
+    "kind": "rect",
+    "max_correlation": 0.4471,
+    "px_per_mm": 17.067,
+    "roughness_mm": 0.98,
+    "seed": 20260915,
+    "torn_edges": [
+     "t",
+     "b",
+     "l"
+    ],
+    "w_mm": 99.74,
+    "wander_mm": 4.95
+   }
+  },
+  "assets/tears/tear_013.png": {
+   "bytes": 124051,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 53.28,
+    "hurst": 0.651,
+    "kind": "three",
+    "max_correlation": 0.4798,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.76,
+    "seed": 20260916,
+    "torn_edges": [
+     "t",
+     "b",
+     "r"
+    ],
+    "w_mm": 75.93,
+    "wander_mm": 3.1
+   }
+  },
+  "assets/tears/tear_014.png": {
+   "bytes": 92346,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 62.35,
+    "hurst": 0.589,
+    "kind": "diagonal",
+    "max_correlation": 0.4615,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.5,
+    "seed": 20260917,
+    "torn_edges": [
+     "d"
+    ],
+    "w_mm": 102.86,
+    "wander_mm": 4.8
+   }
+  },
+  "assets/tears/tear_015.png": {
+   "bytes": 131508,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 63.89,
+    "hurst": 1.134,
+    "kind": "cut",
+    "max_correlation": 0.4741,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.74,
+    "seed": 20260918,
+    "torn_edges": [
+     "r"
+    ],
+    "w_mm": 113.82,
+    "wander_mm": 6.6
+   }
+  },
+  "assets/tears/tear_016.png": {
+   "bytes": 189430,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 88.93,
+    "hurst": 1.142,
+    "kind": "notepad",
+    "max_correlation": 0.4136,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.39,
+    "seed": 20260919,
+    "torn_edges": [
+     "t"
+    ],
+    "w_mm": 95.8,
+    "wander_mm": 5.74
+   }
+  },
+  "assets/tears/tear_017.png": {
+   "bytes": 84470,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 30.51,
+    "hurst": 1.101,
+    "kind": "strip",
+    "max_correlation": 0.4691,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.68,
+    "seed": 20260920,
+    "torn_edges": [
+     "t",
+     "b"
+    ],
+    "w_mm": 96.01,
+    "wander_mm": 3.36
+   }
+  },
+  "assets/tears/tear_018.png": {
+   "bytes": 184210,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 70.16,
+    "hurst": 0.893,
+    "kind": "half",
+    "max_correlation": 0.485,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.71,
+    "seed": 20260921,
+    "torn_edges": [
+     "b"
+    ],
+    "w_mm": 112.92,
+    "wander_mm": 3.02
+   }
+  },
+  "assets/tears/tear_019.png": {
+   "bytes": 165666,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 79.77,
+    "hurst": 0.925,
+    "kind": "corner",
+    "max_correlation": 0.4659,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.36,
+    "seed": 20260922,
+    "torn_edges": [
+     "b",
+     "l"
+    ],
+    "w_mm": 94.67,
+    "wander_mm": 5.0
+   }
+  },
+  "assets/tears/tear_020.png": {
+   "bytes": 238094,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 60.77,
+    "hurst": 0.73,
+    "kind": "rect",
+    "max_correlation": 0.464,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.63,
+    "seed": 20260923,
+    "torn_edges": [
+     "t",
+     "b",
+     "l"
+    ],
+    "w_mm": 109.59,
+    "wander_mm": 2.45
+   }
+  },
+  "assets/tears/tear_021.png": {
+   "bytes": 165962,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 46.25,
+    "hurst": 0.575,
+    "kind": "three",
+    "max_correlation": 0.5496,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.12,
+    "seed": 20260924,
+    "torn_edges": [
+     "t",
+     "b",
+     "r"
+    ],
+    "w_mm": 72.64,
+    "wander_mm": 4.22
+   }
+  },
+  "assets/tears/tear_022.png": {
+   "bytes": 110328,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 63.79,
+    "hurst": 0.856,
+    "kind": "diagonal",
+    "max_correlation": 0.4974,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.68,
+    "seed": 20260925,
+    "torn_edges": [
+     "d"
+    ],
+    "w_mm": 85.57,
+    "wander_mm": 3.66
+   }
+  },
+  "assets/tears/tear_023.png": {
+   "bytes": 144916,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 97.16,
+    "hurst": 1.133,
+    "kind": "cut",
+    "max_correlation": 0.5603,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.02,
+    "seed": 20260926,
+    "torn_edges": [
+     "r"
+    ],
+    "w_mm": 110.13,
+    "wander_mm": 5.8
+   }
+  },
+  "assets/tears/tear_024.png": {
+   "bytes": 179228,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 68.03,
+    "hurst": 0.565,
+    "kind": "notepad",
+    "max_correlation": 0.4955,
+    "px_per_mm": 17.067,
+    "roughness_mm": 0.62,
+    "seed": 20260927,
+    "torn_edges": [
+     "t"
+    ],
+    "w_mm": 92.73,
+    "wander_mm": 6.41
+   }
+  },
+  "assets/tears/tear_025.png": {
+   "bytes": 110526,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 29.47,
+    "hurst": 1.016,
+    "kind": "strip",
+    "max_correlation": 0.4859,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.3,
+    "seed": 20260928,
+    "torn_edges": [
+     "t",
+     "b"
+    ],
+    "w_mm": 107.2,
+    "wander_mm": 3.66
+   }
+  },
+  "assets/tears/tear_026.png": {
+   "bytes": 190342,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 91.39,
+    "hurst": 0.551,
+    "kind": "half",
+    "max_correlation": 0.4995,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.79,
+    "seed": 20260929,
+    "torn_edges": [
+     "b"
+    ],
+    "w_mm": 103.06,
+    "wander_mm": 1.72
+   }
+  },
+  "assets/tears/tear_027.png": {
+   "bytes": 142397,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 59.66,
+    "hurst": 0.644,
+    "kind": "corner",
+    "max_correlation": 0.5364,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.26,
+    "seed": 20260930,
+    "torn_edges": [
+     "b",
+     "l"
+    ],
+    "w_mm": 71.69,
+    "wander_mm": 3.11
+   }
+  },
+  "assets/tears/tear_028.png": {
+   "bytes": 183790,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 54.72,
+    "hurst": 0.618,
+    "kind": "rect",
+    "max_correlation": 0.3844,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.41,
+    "seed": 20260931,
+    "torn_edges": [
+     "t",
+     "b",
+     "l"
+    ],
+    "w_mm": 86.97,
+    "wander_mm": 5.72
+   }
+  },
+  "assets/tears/tear_029.png": {
+   "bytes": 149983,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 48.73,
+    "hurst": 0.986,
+    "kind": "three",
+    "max_correlation": 0.4815,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.62,
+    "seed": 20260932,
+    "torn_edges": [
+     "t",
+     "b",
+     "r"
+    ],
+    "w_mm": 108.54,
+    "wander_mm": 2.75
+   }
+  },
+  "assets/tears/tear_030.png": {
+   "bytes": 105538,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 70.79,
+    "hurst": 1.062,
+    "kind": "diagonal",
+    "max_correlation": 0.5184,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.35,
+    "seed": 20260933,
+    "torn_edges": [
+     "d"
+    ],
+    "w_mm": 91.62,
+    "wander_mm": 4.93
+   }
+  },
+  "assets/tears/tear_031.png": {
+   "bytes": 176579,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 93.76,
+    "hurst": 0.69,
+    "kind": "cut",
+    "max_correlation": 0.456,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.16,
+    "seed": 20260934,
+    "torn_edges": [
+     "r"
+    ],
+    "w_mm": 100.47,
+    "wander_mm": 4.13
+   }
+  },
+  "assets/tears/tear_032.png": {
+   "bytes": 116731,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 53.5,
+    "hurst": 0.974,
+    "kind": "notepad",
+    "max_correlation": 0.5101,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.65,
+    "seed": 20260935,
+    "torn_edges": [
+     "t"
+    ],
+    "w_mm": 101.78,
+    "wander_mm": 4.25
+   }
+  },
+  "assets/tears/tear_033.png": {
+   "bytes": 153611,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 43.75,
+    "hurst": 1.044,
+    "kind": "strip",
+    "max_correlation": 0.5013,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.66,
+    "seed": 20260936,
+    "torn_edges": [
+     "t",
+     "b"
+    ],
+    "w_mm": 99.94,
+    "wander_mm": 1.56
+   }
+  },
+  "assets/tears/tear_034.png": {
+   "bytes": 154950,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 95.82,
+    "hurst": 0.644,
+    "kind": "half",
+    "max_correlation": 0.5206,
+    "px_per_mm": 17.067,
+    "roughness_mm": 0.56,
+    "seed": 20260937,
+    "torn_edges": [
+     "b"
+    ],
+    "w_mm": 102.1,
+    "wander_mm": 4.29
+   }
+  },
+  "assets/tears/tear_035.png": {
+   "bytes": 132312,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 46.25,
+    "hurst": 0.694,
+    "kind": "corner",
+    "max_correlation": 0.5365,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.06,
+    "seed": 20260938,
+    "torn_edges": [
+     "b",
+     "l"
+    ],
+    "w_mm": 57.35,
+    "wander_mm": 4.04
+   }
+  },
+  "assets/tears/tear_036.png": {
+   "bytes": 174526,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 40.45,
+    "hurst": 0.864,
+    "kind": "rect",
+    "max_correlation": 0.5012,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.95,
+    "seed": 20260939,
+    "torn_edges": [
+     "t",
+     "b",
+     "l"
+    ],
+    "w_mm": 84.48,
+    "wander_mm": 2.38
+   }
+  },
+  "assets/tears/tear_037.png": {
+   "bytes": 155936,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 55.82,
+    "hurst": 0.907,
+    "kind": "three",
+    "max_correlation": 0.4411,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.41,
+    "seed": 20260940,
+    "torn_edges": [
+     "t",
+     "b",
+     "r"
+    ],
+    "w_mm": 88.13,
+    "wander_mm": 4.22
+   }
+  },
+  "assets/tears/tear_038.png": {
+   "bytes": 122413,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 55.33,
+    "hurst": 0.718,
+    "kind": "diagonal",
+    "max_correlation": 0.5424,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.19,
+    "seed": 20260941,
+    "torn_edges": [
+     "d"
+    ],
+    "w_mm": 102.1,
+    "wander_mm": 2.03
+   }
+  },
+  "assets/tears/tear_039.png": {
+   "bytes": 155047,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 99.89,
+    "hurst": 0.886,
+    "kind": "cut",
+    "max_correlation": 0.4708,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.21,
+    "seed": 20260942,
+    "torn_edges": [
+     "r"
+    ],
+    "w_mm": 98.54,
+    "wander_mm": 6.67
+   }
+  },
+  "assets/tears/tear_040.png": {
+   "bytes": 122316,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 51.62,
+    "hurst": 0.921,
+    "kind": "notepad",
+    "max_correlation": 0.4556,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.52,
+    "seed": 20260943,
+    "torn_edges": [
+     "t"
+    ],
+    "w_mm": 108.75,
+    "wander_mm": 6.51
+   }
+  },
+  "assets/tears/tear_041.png": {
+   "bytes": 167112,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 39.34,
+    "hurst": 0.841,
+    "kind": "strip",
+    "max_correlation": 0.4057,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.3,
+    "seed": 20260944,
+    "torn_edges": [
+     "t",
+     "b"
+    ],
+    "w_mm": 100.37,
+    "wander_mm": 5.39
+   }
+  },
+  "assets/tears/tear_042.png": {
+   "bytes": 177772,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 65.77,
+    "hurst": 0.911,
+    "kind": "half",
+    "max_correlation": 0.5175,
+    "px_per_mm": 17.067,
+    "roughness_mm": 0.9,
+    "seed": 20260945,
+    "torn_edges": [
+     "b"
+    ],
+    "w_mm": 107.65,
+    "wander_mm": 4.11
+   }
+  },
+  "assets/tears/tear_043.png": {
+   "bytes": 139898,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 60.82,
+    "hurst": 0.634,
+    "kind": "corner",
+    "max_correlation": 0.4486,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.13,
+    "seed": 20260946,
+    "torn_edges": [
+     "b",
+     "l"
+    ],
+    "w_mm": 81.96,
+    "wander_mm": 5.83
+   }
+  },
+  "assets/tears/tear_044.png": {
+   "bytes": 165759,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 61.98,
+    "hurst": 1.092,
+    "kind": "rect",
+    "max_correlation": 0.426,
+    "px_per_mm": 17.067,
+    "roughness_mm": 0.51,
+    "seed": 20260947,
+    "torn_edges": [
+     "t",
+     "b",
+     "l"
+    ],
+    "w_mm": 108.11,
+    "wander_mm": 6.99
+   }
+  },
+  "assets/tears/tear_045.png": {
+   "bytes": 172650,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 70.42,
+    "hurst": 0.72,
+    "kind": "three",
+    "max_correlation": 0.4853,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.79,
+    "seed": 20260948,
+    "torn_edges": [
+     "t",
+     "b",
+     "r"
+    ],
+    "w_mm": 87.35,
+    "wander_mm": 4.17
+   }
+  },
+  "assets/tears/tear_046.png": {
+   "bytes": 128459,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 70.82,
+    "hurst": 1.138,
+    "kind": "diagonal",
+    "max_correlation": 0.4842,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.1,
+    "seed": 20260949,
+    "torn_edges": [
+     "d"
+    ],
+    "w_mm": 95.46,
+    "wander_mm": 5.34
+   }
+  },
+  "assets/tears/tear_047.png": {
+   "bytes": 189286,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 83.11,
+    "hurst": 0.772,
+    "kind": "cut",
+    "max_correlation": 0.4711,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.57,
+    "seed": 20260950,
+    "torn_edges": [
+     "r"
+    ],
+    "w_mm": 99.52,
+    "wander_mm": 5.62
+   }
+  },
+  "assets/tears/tear_048.png": {
+   "bytes": 177494,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 75.68,
+    "hurst": 0.822,
+    "kind": "notepad",
+    "max_correlation": 0.5196,
+    "px_per_mm": 17.067,
+    "roughness_mm": 0.78,
+    "seed": 20260951,
+    "torn_edges": [
+     "t"
+    ],
+    "w_mm": 108.95,
+    "wander_mm": 3.88
+   }
+  },
+  "assets/tears/tear_049.png": {
+   "bytes": 169635,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 41.66,
+    "hurst": 0.639,
+    "kind": "strip",
+    "max_correlation": 0.433,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.52,
+    "seed": 20260952,
+    "torn_edges": [
+     "t",
+     "b"
+    ],
+    "w_mm": 107.42,
+    "wander_mm": 2.85
+   }
+  },
+  "assets/tears/tear_050.png": {
+   "bytes": 132260,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 79.94,
+    "hurst": 1.052,
+    "kind": "half",
+    "max_correlation": 0.5208,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.03,
+    "seed": 20260953,
+    "torn_edges": [
+     "b"
+    ],
+    "w_mm": 112.83,
+    "wander_mm": 2.05
+   }
+  },
+  "assets/tears/tear_051.png": {
+   "bytes": 102875,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 50.27,
+    "hurst": 1.042,
+    "kind": "corner",
+    "max_correlation": 0.5206,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.78,
+    "seed": 20260954,
+    "torn_edges": [
+     "b",
+     "l"
+    ],
+    "w_mm": 55.01,
+    "wander_mm": 4.8
+   }
+  },
+  "assets/tears/tear_052.png": {
+   "bytes": 145112,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 48.4,
+    "hurst": 0.641,
+    "kind": "rect",
+    "max_correlation": 0.5107,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.56,
+    "seed": 20260955,
+    "torn_edges": [
+     "t",
+     "b",
+     "l"
+    ],
+    "w_mm": 87.65,
+    "wander_mm": 3.34
+   }
+  },
+  "assets/tears/tear_053.png": {
+   "bytes": 169228,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 67.44,
+    "hurst": 0.963,
+    "kind": "three",
+    "max_correlation": 0.4216,
+    "px_per_mm": 17.067,
+    "roughness_mm": 2.33,
+    "seed": 20260956,
+    "torn_edges": [
+     "t",
+     "b",
+     "r"
+    ],
+    "w_mm": 103.93,
+    "wander_mm": 1.88
+   }
+  },
+  "assets/tears/tear_054.png": {
+   "bytes": 94251,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 87.99,
+    "hurst": 0.647,
+    "kind": "diagonal",
+    "max_correlation": 0.5035,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.55,
+    "seed": 20260957,
+    "torn_edges": [
+     "d"
+    ],
+    "w_mm": 90.22,
+    "wander_mm": 1.38
+   }
+  },
+  "assets/tears/tear_055.png": {
+   "bytes": 160470,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 76.76,
+    "hurst": 0.574,
+    "kind": "cut",
+    "max_correlation": 0.5789,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.01,
+    "seed": 20260958,
+    "torn_edges": [
+     "r"
+    ],
+    "w_mm": 103.2,
+    "wander_mm": 2.38
+   }
+  },
+  "assets/tears/tear_056.png": {
+   "bytes": 179127,
+   "generator": "tools/tears/tear.py",
+   "kind": "tear_mask",
+   "settings": {
+    "h_mm": 76.18,
+    "hurst": 0.807,
+    "kind": "notepad",
+    "max_correlation": 0.5081,
+    "px_per_mm": 17.067,
+    "roughness_mm": 1.72,
+    "seed": 20260959,
+    "torn_edges": [
+     "t"
+    ],
+    "w_mm": 98.64,
+    "wander_mm": 5.82
+   }
+  },
+  "assets/tears/tears.json": {
+   "bytes": 15031,
+   "generator": "tools/tears/tear.py",
+   "kind": "index",
+   "settings": {
+    "masks": 56
    }
   }
  },

@@ -13,7 +13,7 @@ import '../../media/read_bytes.dart';
 import '../../scope.dart';
 import '../../spine/projections/thread.dart';
 import '../../voice/strings.dart';
-import 'rows.dart';
+import 'note.dart';
 import 'search_page.dart';
 
 class ChatRegion extends StatefulWidget {
@@ -284,7 +284,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                   initialAlignment: 0.8,
                   itemBuilder: (context, i) {
                     final it = items[i];
-                    return ThreadRow(
+                    return Note(
                       key: ValueKey(it.id),
                       item: it,
                       registry: registry,
