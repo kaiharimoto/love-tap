@@ -189,10 +189,21 @@ def _translate(x, y, z):
     return Matrix.Translation((x, y, z))
 
 
+def ensure_rules(stock, variant):
+    """The rules image comes from rules.py under the system python (Blender's has no Pillow)."""
+    import shutil
+    import subprocess
+    path = rules.output_path(stock, variant)
+    if not os.path.exists(path):
+        py = shutil.which("python3") or "python3"
+        subprocess.run([py, os.path.join(HERE, "rules.py"), "--stock", stock, "--variant", str(variant)], check=True)
+    return path, rules.params_for(stock, variant)
+
+
 def render_sheet(stock, variant, res_long, condition, samples, out_dir):
     scene = common.reset_scene()
     w_mm, h_mm = rules.SHEETS_MM[stock]
-    rules_png, params = rules.generate(stock, variant, verbose=False)
+    rules_png, params = ensure_rules(stock, variant)
     look = STOCK_LOOK[stock]
     yellow = look["yellow"][(variant - 1) % len(look["yellow"])]
 
