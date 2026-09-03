@@ -1,0 +1,75 @@
+{
+  "frozen_now": "2026-09-03T18:40:00+01:00",
+  "timezone": "Europe/London",
+  "together_since": "2024-11-09",
+  "people": [
+    {
+      "id": "noor",
+      "name": "Noor",
+      "pronouns": "she/her",
+      "birthday": "1996-03-14",
+      "hand": "NoorHand",
+      "pen": "ballpoint",
+      "ink": "#1f2a44",
+      "second_ink": "#a8322b",
+      "device": "android",
+      "role": "host",
+      "paper_habit": "tears strips off whatever is nearest: lined, graph, receipts",
+      "life": "art teacher at a secondary school; quiet 8:30 to 15:30 except a burst at lunch; long evenings; keeps a sketchbook; flat by the canal in the east; hates the phone ringing",
+      "home_ssid": "canalflat"
+    },
+    {
+      "id": "teo",
+      "name": "Teo",
+      "pronouns": "he/him",
+      "birthday": "1994-07-27",
+      "hand": "TeoHand",
+      "pen": "pencil",
+      "ink": "#3a3a3c",
+      "second_ink": "#141a2e",
+      "device": "pwa",
+      "role": "client",
+      "paper_habit": "folds things: thirds, halves, corners turned down",
+      "life": "night-shift nurse on a respiratory ward; three or four nights a week, silent from 19:30 to 08:00 then a flood at 08:15; sleeps until 15:00 on shift days; flat near the hospital in the north; cooks on days off",
+      "home_ssid": "teo_flat_5g"
+    }
+  ],
+  "world": {
+    "city": "an unnamed river city with a canal in the east, a hospital on the hill, a ferry to a small island in summer",
+    "in_jokes": [
+      "the pigeon: a pigeon got into Noor's classroom in October 2025 and lived on top of the cupboard for a day; 'the pigeon' now means anything that refuses to leave",
+      "tuesday soup: Teo's day-off soup, never the same twice, rated by Noor out of ten with unfair criteria",
+      "left sock: Noor lost one sock at Teo's in December 2025; it has never turned up; any lost thing is 'with the sock'",
+      "the lift: they were stuck in the hospital car park lift for forty minutes in August 2026; 'in the lift' means stuck anywhere",
+      "the good pen: Noor's one pen that Teo keeps borrowing"
+    ],
+    "logistics": [
+      "bins on Wednesday at Noor's, Thursday at Teo's",
+      "whose turn to book the dentist",
+      "bread from the place by the bridge",
+      "Teo's shift roster arriving every fourth Friday",
+      "Noor's marking piles at half term",
+      "the boiler at Noor's that needs the pressure topped up"
+    ]
+  },
+  "anchors": [
+    {
+      "id": "anchor_lift",
+      "artifact": "02_chat.png",
+      "when": "2026-08-21T22:10:00+01:00",
+      "what": "the night of the lift: a run of messages from inside the stuck lift, a photo of the lift buttons, a `here` feeling from Teo, the note that trails off when the doors open"
+    },
+    {
+      "id": "anchor_ferry",
+      "artifact": "03_us.png",
+      "when": "2026-07-18T09:00:00+01:00",
+      "what": "the ferry to the island: planned in May, scheduled in June, done and rated in July, and the two-year anniversary on 2026-11-09 counting down in the calendar"
+    },
+    {
+      "id": "anchor_key",
+      "artifact": "04_moments.png",
+      "when": "2026-02-02T19:30:00+00:00",
+      "what": "the first key: a milestone the day Teo got a key to Noor's flat, with the photo of the key on the table and the `did_it` feeling that went with it"
+    }
+  ]
+}
