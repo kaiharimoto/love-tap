@@ -8,8 +8,15 @@ import 'material/hands.dart';
 import 'material/library.dart';
 import 'material/light.dart';
 import 'material/palette.dart';
+import 'feelings/builtins.dart';
+import 'feelings/corner.dart';
+import 'feelings/registry.dart';
+import 'feelings/sensation.dart';
 import 'regions/chat/chat_region.dart';
+import 'regions/moments/moments_region.dart';
+import 'regions/pulse/pulse_region.dart';
 import 'regions/settings/settings_region.dart';
+import 'regions/us/us_region.dart';
 import 'scope.dart';
 import 'voice/strings.dart';
 
@@ -45,8 +52,21 @@ class Shell extends StatefulWidget {
 
 class _ShellState extends State<Shell> {
   int _index = 1;
+  final Sensation _sensation = Sensation();
 
   static const _labels = [S.pulse, S.chat, S.us, S.moments, S.settings];
+
+  @override
+  void dispose() {
+    _sensation.dispose();
+    super.dispose();
+  }
+
+  Future<void> _send(Feeling f, double intensity) async {
+    final scope = AppScope.of(context);
+    await scope.emit('feeling', {'feeling_id': f.id, 'intensity': double.parse(intensity.toStringAsFixed(2))});
+    await _sensation.play(f, intensity: intensity);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +83,24 @@ class _ShellState extends State<Shell> {
                 nowMs: scope.clock.now().millisecondsSinceEpoch,
               ),
               Expanded(
-                child: IndexedStack(
-                  index: _index,
-                  children: const [
-                    _PulseStub(),
-                    ChatRegion(),
-                    _Stub(S.us),
-                    _Stub(S.moments),
-                    SettingsRegion(),
+                child: Stack(
+                  children: [
+                    IndexedStack(
+                      index: _index,
+                      children: const [
+                        PulseRegion(),
+                        ChatRegion(),
+                        UsRegion(),
+                        MomentsRegion(),
+                        SettingsRegion(),
+                      ],
+                    ),
+                    // one gesture from any region
+                    FeelingCorner(
+                      registry: FeelingRegistry(scope.spine.all),
+                      onSend: _send,
+                      onPreview: (f, i) => _sensation.play(f, intensity: i, sound: true),
+                    ),
                   ],
                 ),
               ),
@@ -139,39 +169,4 @@ class _Tabs extends StatelessWidget {
       ),
     );
   }
-}
-
-class _PulseStub extends StatelessWidget {
-  const _PulseStub();
-
-  @override
-  Widget build(BuildContext context) {
-    final scope = AppScope.of(context);
-    final p = scope.partnerState;
-    if (p.signals.isEmpty) {
-      return Center(child: Text(S.emptyPulse, style: Hands.margin(size: 16)));
-    }
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        for (final s in p.signals.values)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Row(children: [
-              SizedBox(width: 120, child: Stamped(s.signal, size: 11)),
-              Expanded(child: Text('${s.value}', style: Hands.of(scope.partner, size: 17))),
-              Text(s.declared ? 'set' : 'read', style: Hands.margin(size: 11)),
-            ]),
-          ),
-      ],
-    );
-  }
-}
-
-class _Stub extends StatelessWidget {
-  const _Stub(this.label);
-  final String label;
-
-  @override
-  Widget build(BuildContext context) => Center(child: Stamped(label, size: 14));
 }

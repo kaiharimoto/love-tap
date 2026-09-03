@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
 class LibraryEntry {
-  const LibraryEntry(this.id, this.w, this.h, [this.safe]);
+  const LibraryEntry(this.id, this.w, this.h, [this.safe, this.usable = 1.0]);
   final String id;
   final int w;
   final int h;
@@ -13,6 +13,9 @@ class LibraryEntry {
   /// For a tear mask: how far in from each edge (left, top, right, bottom, as fractions) writing
   /// must sit so the tear cannot cut it. tools/pack_assets.py measures it from the mask itself.
   final List<double>? safe;
+
+  /// How much of the piece is inside that rectangle: a long strip has little, a half sheet a lot.
+  final double usable;
 
   double get aspect => h == 0 ? 1 : w / h;
 }
@@ -54,6 +57,7 @@ class MaterialLibrary {
               (e['w'] as num).toInt(),
               (e['h'] as num).toInt(),
               (e['safe'] as List?)?.map((x) => (x as num).toDouble()).toList(),
+              (e['usable'] as num?)?.toDouble() ?? 1.0,
             ))
         .toList();
     final folds = <String, int>{};
@@ -103,6 +107,16 @@ class MaterialLibrary {
   /// Mask ids only (tear_001), not their edge or shadow renders.
   List<String> get tearMasks =>
       tears.map((e) => e.id).where((id) => !id.contains('_edge') && !id.contains('_shadow')).toList()..sort();
+
+  /// Masks with room to write on: a note goes on one of these, a stamp or a strip can use any.
+  List<String> get writableTears {
+    final ok = tears
+        .where((e) => !e.id.contains('_edge') && !e.id.contains('_shadow') && e.usable >= 0.5)
+        .map((e) => e.id)
+        .toList()
+      ..sort();
+    return ok.isEmpty ? tearMasks : ok;
+  }
 
   bool hasTearRender(String id, String suffix) => tears.any((e) => e.id == '$id$suffix');
 

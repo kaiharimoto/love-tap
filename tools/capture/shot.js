@@ -52,6 +52,30 @@ function flag(name) {
   } catch (_) {
     await page.waitForTimeout(Math.min(wait, 20000));
   }
+  // tap a list of points (CSS pixels) before the shot: the app is a canvas, so a screen is
+  // reached the way a thumb reaches it
+  const taps = arg('tap', '');
+  if (taps) {
+    for (const pair of taps.split(';')) {
+      const [x, y] = pair.split(',').map(Number);
+      await page.mouse.click(x, y);
+      await page.waitForTimeout(parseInt(arg('tap-settle', '900'), 10));
+    }
+  }
+  const drags = arg('drag', '');
+  if (drags) {
+    for (const move of drags.split(';')) {
+      const [x1, y1, x2, y2] = move.split(',').map(Number);
+      await page.mouse.move(x1, y1);
+      await page.mouse.down();
+      for (let k = 1; k <= 12; k++) {
+        await page.mouse.move(x1 + (x2 - x1) * k / 12, y1 + (y2 - y1) * k / 12);
+        await page.waitForTimeout(16);
+      }
+      await page.mouse.up();
+      await page.waitForTimeout(parseInt(arg('tap-settle', '900'), 10));
+    }
+  }
   if (script) await page.evaluate(script);
   await page.waitForTimeout(parseInt(arg('settle', '1200'), 10));
   await page.screenshot({ path: out, fullPage: false });

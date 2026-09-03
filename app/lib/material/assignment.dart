@@ -63,8 +63,8 @@ String stockVariantFor(Event e, MaterialLibrary lib, {bool dusk = false, String?
 /// hash, so two notes that sit next to each other in the thread are far apart in the pool. With
 /// 48 or more masks and at most a dozen notes on screen, a repeat within one frame cannot happen
 /// unless the pool is smaller than the screenful, which the capture check would catch.
-String? tearFor(Event e, MaterialLibrary lib) {
-  final masks = lib.tearMasks;
+String? tearFor(Event e, MaterialLibrary lib, {bool writable = true}) {
+  final masks = writable ? lib.writableTears : lib.tearMasks;
   if (masks.isEmpty) return null;
   final n = masks.length;
   final stride = _coprimeStride(n);

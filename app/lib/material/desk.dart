@@ -50,7 +50,7 @@ class PartnerStrip extends StatelessWidget {
     final stock = stockForMood(state.mood);
     final variants = lib?.stockVariants(stock) ?? const <String>[];
     final id = variants.isEmpty ? '' : variants[(partner.index + (state.mood?.length ?? 0)) % variants.length];
-    final tears = lib?.tearMasks ?? const <String>[];
+    final tears = lib?.writableTears ?? const <String>[];
     // a strip torn across the page: the strip kinds sit early in the pool
     final tear = tears.isEmpty ? null : tears[(state.mood?.hashCode.abs() ?? 3) % tears.length];
     final asleep = state.availability == 'asleep';

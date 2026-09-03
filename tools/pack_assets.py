@@ -85,49 +85,47 @@ def paper_box(mask_path, margin=0.02):
 
 
 def safe_inset(mask_path, box):
-    """The largest rectangle inside the crop that is certainly paper, as fractions of the crop.
+    """The largest rectangle that is entirely paper, as fractions in from each edge.
 
-    A torn edge wanders inward, so the bounding box of the piece is not where writing can go. For
-    every row (ignoring the outer twentieth, which is the torn end itself) the first and last solid
-    column is found, and the safe rectangle is the intersection of all of them; the same is done
-    down the columns. Writing inset by this much can never be cut by the tear."""
+    A torn edge wanders, and a bite out of one corner is exactly where a first line would sit, so
+    this is not a percentile: it is the maximal axis-aligned rectangle inscribed in the solid part
+    of the mask (the classic largest-rectangle-in-a-histogram sweep), which cannot be wrong.
+    Writing laid inside it can never be cut by the tear."""
     from PIL import Image
     import numpy as np
     a = np.asarray(Image.open(mask_path).convert("L"), dtype=np.float32) / 255.0
     a = a[box[1]:box[3], box[0]:box[2]]
-    solid = a > 0.85
+    solid = (a > 0.85).astype(np.int32)
     h, w = solid.shape
-    y0, y1 = int(h * 0.06), int(h * 0.94)
-    x0, x1 = int(w * 0.06), int(w * 0.94)
-    lefts, rights = [], []
-    for y in range(y0, y1):
-        xs = np.where(solid[y])[0]
-        if len(xs):
-            lefts.append(xs[0])
-            rights.append(xs[-1])
-    tops, bottoms = [], []
-    for x in range(x0, x1):
-        ys = np.where(solid[:, x])[0]
-        if len(ys):
-            tops.append(ys[0])
-            bottoms.append(ys[-1])
-    if not lefts or not tops:
+    # work at a coarse resolution: a millimetre of precision is plenty and this is O(h*w)
+    step = max(1, min(h, w) // 220)
+    if step > 1:
+        solid = solid[::step, ::step]
+        h, w = solid.shape
+    heights = np.zeros(w, dtype=np.int32)
+    best = (0, 0, 0, 0, 0)   # area, top, left, bottom, right
+    for y in range(h):
+        heights = np.where(solid[y] > 0, heights + 1, 0)
+        stack = []
+        for x in range(w + 1):
+            cur = heights[x] if x < w else 0
+            start = x
+            while stack and stack[-1][1] > cur:
+                sx, sh = stack.pop()
+                area = sh * (x - sx)
+                if area > best[0]:
+                    best = (area, y - sh + 1, sx, y, x - 1)
+                start = sx
+            stack.append((start, cur))
+    _, top, left, bottom, right = best
+    if best[0] == 0:
         return [0.08, 0.08, 0.08, 0.08]
-    # a single deep notch should not cost the whole note: take a high percentile of the edges and
-    # add a small margin, so writing clears the tear everywhere but the very worst bite
-    def hi(v):
-        return float(np.percentile(np.asarray(v, dtype=np.float32), 98))
-
-    def lo(v):
-        return float(np.percentile(np.asarray(v, dtype=np.float32), 2))
-
-    margin = 0.02
-    left = hi(lefts) / w + margin
-    right = 1.0 - (lo(rights) + 1) / w + margin
-    top = hi(tops) / h + margin
-    bottom = 1.0 - (lo(bottoms) + 1) / h + margin
-    cap = 0.2
-    return [round(min(left, cap), 4), round(min(top, cap), 4), round(min(right, cap), 4), round(min(bottom, cap), 4)]
+    return [
+        round(left / w, 4),
+        round(top / h, 4),
+        round(1.0 - (right + 1) / w, 4),
+        round(1.0 - (bottom + 1) / h, 4),
+    ]
 
 
 def pack_family(name, index, verbose=True):
@@ -160,6 +158,8 @@ def pack_family(name, index, verbose=True):
         row = {"id": stem, "w": size[0], "h": size[1]}
         if stem in safes:
             row["safe"] = safes[stem]
+            sf = safes[stem]
+            row["usable"] = round((1 - sf[0] - sf[2]) * (1 - sf[1] - sf[3]), 4)
         out.append(row)
     index[name] = out
     if verbose:
