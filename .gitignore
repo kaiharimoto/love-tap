@@ -1,0 +1,21 @@
+# pinned toolchain installed by bootstrap.sh (never committed)
+/toolchain/
+# build output
+/app/build/
+/app/.dart_tool/
+/app/.flutter-plugins*
+/app/android/.gradle/
+/app/android/local.properties
+/app/android/app/.cxx/
+/app/.idea/
+*.iml
+# secrets: never committed
+.env
+*.authkey
+/toolchain/ts/
+# scratch
+/tmp/
+/.scratch/
+__pycache__/
+*.pyc
+node_modules/
