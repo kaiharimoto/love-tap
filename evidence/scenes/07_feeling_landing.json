@@ -23,7 +23,7 @@
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/07_feeling_landing_b",
+   "dir": "evidence/frames/07_feeling_landing",
    "count": 32,
    "ms": 8
   },
@@ -35,7 +35,7 @@
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/07_feeling_landing_b",
+   "dir": "evidence/frames/07_feeling_landing",
    "count": 160,
    "from": 32,
    "ms": 8
@@ -48,7 +48,7 @@
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/07_feeling_landing_b",
+   "dir": "evidence/frames/07_feeling_landing",
    "count": 160,
    "from": 192,
    "ms": 8
@@ -60,7 +60,7 @@
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/07_feeling_landing_b",
+   "dir": "evidence/frames/07_feeling_landing",
    "count": 32,
    "from": 352,
    "ms": 8
@@ -68,7 +68,7 @@
   {
    "do": "report",
    "out": "evidence/logs/07_feeling_landing.report.json",
-   "at": "07_feeling_landing_b"
+   "at": "07_feeling_landing"
   }
  ]
 }
