@@ -54,12 +54,29 @@ Eighteen types. The floor is fourteen.
 ## Adding a nineteenth
 
 1. Add one entry to `kEventTypes` in `app/lib/spine/types.dart` (id, payload codec, search fields,
-   notification treatment).
-2. Add one renderer under `app/lib/regions/chat/renderers.dart`, registered by id.
+   notification treatment), and one row to the table above.
+2. Add one renderer under `app/lib/regions/chat/renderers.dart`, registered by the id the entry
+   names — or point at one that is already there, the way the shelf points at the margin sentence.
+3. Add one arm to `summaryOf` in the same file: the one sentence the type reads as away from the
+   thread, which is what search results, notification bodies and the ambient standing line all
+   show.
+
+Three, not two, and it used to say two. That was not a rounding error — it was the reason a
+scheduled ping read `one hour, then stop · 2026-04-23T16:00:00+01:00` in the thread and
+`one hour, then stop · Thu 23 Apr` in search: the thread kept a second sentence of its own, the two
+drifted, and a person was shown a stored field. There is one sentence now, and the third step is
+the price of that.
 
 Nothing else changes: persistence is schema-less per type (payload is JSON), search fields are
 declared by the registry entry, Moments filters by `type` generically, and notifications read the
-registry. `app/test/spine_schema_test.dart` fails if the registry and this table disagree.
+registry.
+
+Three tests hold the whole of it. `app/test/spine_schema_test.dart` fails if the registry and this
+table disagree. `app/test/thread_types_test.dart` fails if a type names a renderer that does not
+exist, if a renderer is named by no type, if a type has no sentence, or if a sentence shows a raw
+timestamp or a payload key to a person. And a type is a line in the margin rather than a sheet
+exactly when the renderer it names is the margin sentence — asked of the registry, so there is no
+fourth list to keep in step.
 
 ## Projections (derived, rebuildable)
 
