@@ -31,6 +31,12 @@ const browserName = arg('browser', scene.browser || 'webkit');
 const outDir = arg('out-dir', ROOT);
 // The far phone: where it wrote its six words, and where to leave it an instruction.
 const pairPath = arg('pair', '');
+// The far phone is on the tailnet and this browser is not. In userspace networking there is no
+// route to 100.64.0.0/10 from the machine at all — only through the node's own proxy — so a page
+// that fetches from a tailnet address gets "could not connect" until the browser is told the way.
+// Everything served from loopback stays off it, or the page itself would go through the tailnet
+// to reach the file server three ports away.
+const proxy = arg('proxy', '');
 const controlPath = arg('control', pairPath ? pairPath + '.do' : '');
 function farSay(line) {
   if (!controlPath) throw new Error('no --control path, so nothing can be asked of the far phone');
@@ -47,7 +53,11 @@ function ensure(p) {
 (async () => {
   const vp = Object.assign({ width: 440, height: 956, dpr: 3 }, scene.viewport || {});
   const type = browserName === 'chromium' ? chromium : webkit;
-  const browser = await type.launch({ headless: true, channel: browserName === 'chromium' ? 'chromium' : undefined });
+  const browser = await type.launch({
+    headless: true,
+    channel: browserName === 'chromium' ? 'chromium' : undefined,
+    ...(proxy ? { proxy: { server: proxy, bypass: '127.0.0.1,localhost' } } : {}),
+  });
   const context = await browser.newContext({
     viewport: { width: vp.width, height: vp.height },
     deviceScaleFactor: vp.dpr,

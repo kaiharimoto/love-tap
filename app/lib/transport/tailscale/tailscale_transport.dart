@@ -112,11 +112,13 @@ Transport tailscaleTransport({
   String declaredAddress = '',
   String peerAddress = '',
   String userspaceProxy = '',
+  String? pwaRoot,
 }) =>
     HttpTransport(
       role: role,
       spine: spine,
       deviceId: deviceId,
+      pwaRoot: pwaRoot,
       binding: TailscaleBinding(
         port: port,
         declaredAddress: declaredAddress,

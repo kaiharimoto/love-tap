@@ -35,6 +35,12 @@ Future<void> main(List<String> argv) async {
   final proxy = _arg(argv, 'proxy', '');
   final port = int.parse(_arg(argv, 'port', kind == 'tailscale' ? '8443' : '8480'));
   final seconds = int.parse(_arg(argv, 'seconds', '120'));
+  // The other phone loads the app from this one. That is how the two of them actually work —
+  // the host serves the conversation and the page that reads it from one origin — and it is also
+  // the only way a browser is allowed to fetch from here: a page served off a loopback file
+  // server is a different origin from a host on the tailnet, and nothing in this transport sends
+  // an Access-Control-Allow-Origin header, because on the phones there is nothing to allow.
+  final pwa = _arg(argv, 'pwa', '');
   final dir = await Directory.systemTemp.createTemp('host-daemon-');
 
   final spine = await Spine.open(NativeStore.openAt('${dir.path}/host.sqlite3'),
@@ -44,10 +50,11 @@ Future<void> main(List<String> argv) async {
   if (kind == 'tailscale') {
     transport = tailscaleTransport(role: TransportRole.host, spine: spine,
         deviceId: 'android-capture', port: port, declaredAddress: address,
-        userspaceProxy: proxy);
+        userspaceProxy: proxy, pwaRoot: pwa.isEmpty ? null : pwa);
   } else {
     transport = LocalTransport(role: TransportRole.host, spine: spine,
-        deviceId: 'android-capture', binding: LocalBinding(port: port));
+        deviceId: 'android-capture', binding: LocalBinding(port: port),
+        pwaRoot: pwa.isEmpty ? null : pwa);
   }
   await transport.start();
   final code = await (transport as dynamic).beginPairing();
@@ -86,6 +93,15 @@ Future<void> main(List<String> argv) async {
             'intensity': parts.length > 2 ? double.parse(parts[2]) : 0.85,
           }, at: DateTime.now(), hostAssign: true);
           stdout.writeln('host-daemon: sent ${f.id} as ${e.id}');
+        } else if (parts.first == 'state' && parts.length >= 3) {
+          // What 08 is actually about: one of them says how they are, and the other one's phone
+          // changes. The daemon could send a feeling and a message and not this, which is the one
+          // thing the artifact is named after.
+          final e = await spine.append('state_declared', {
+            'signal': parts[1],
+            'value': parts.skip(2).join(' '),
+          }, at: DateTime.now(), hostAssign: true);
+          stdout.writeln('host-daemon: said ${parts[1]} is ${parts.skip(2).join(' ')} as ${e.id}');
         } else if (parts.first == 'message') {
           final e = await spine.append('message', {'text': parts.skip(1).join(' ')},
               at: DateTime.now(), hostAssign: true);
