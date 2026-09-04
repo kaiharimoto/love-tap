@@ -32,6 +32,7 @@ class Note extends StatelessWidget {
     required this.registry,
     required this.onLongPress,
     required this.row,
+    required this.unreadFrom,
     this.highlight = false,
   });
 
@@ -39,6 +40,10 @@ class Note extends StatelessWidget {
 
   /// Where this note sits in the thread: what decides which tear it was torn along.
   final int row;
+
+  /// The seq the reader's read marker stood at when they opened the thread. A note above it was
+  /// already read; a note below it was waiting for them.
+  final int unreadFrom;
   final FeelingRegistry registry;
   final VoidCallback onLongPress;
   final bool highlight;
@@ -59,9 +64,15 @@ class Note extends StatelessWidget {
     final lift = liftFor(e);
     final tilt = tiltFor(e) + (mine ? -0.004 : 0.004);
 
-    // A note of theirs that has not been read yet lies folded, the way one passed across a table
-    // does, and opens when it is touched. Nothing of mine is ever folded: I wrote it.
-    final folded = !mine && (e.seq ?? 0) > (scope.thread.readUpto[scope.me] ?? 0);
+    // A note of theirs that had not been read when the thread was opened lies folded, the way one
+    // passed across a table does, and opens when it is touched. Nothing of mine is ever folded:
+    // I wrote it.
+    //
+    // Against the read marker as it stands, rather than as it stood on arrival, nothing is ever
+    // folded for longer than one frame: opening the thread writes a read marker over everything
+    // in it, the note rebuilds unfolded, and it goes from folded to flat with nothing in between.
+    // Which is why the unfolding clip was two hundred and forty identical frames.
+    final folded = !mine && (e.seq ?? 0) > unreadFrom;
 
     final piece = PaperPiece(
       stockId: stock,

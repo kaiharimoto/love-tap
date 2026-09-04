@@ -37,8 +37,24 @@
   {
    "do": "frames",
    "dir": "evidence/frames/06_unfolding_b",
-   "count": 240,
+   "count": 185,
    "ms": 16
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/06_unfolding_b",
+   "count": 55,
+   "from": 185,
+   "ms": 16,
+   "drive": {
+    "kind": "scrollBy",
+    "per": 5
+   }
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/06_unfolding.report.json",
+   "at": "06_unfolding_b"
   }
  ]
 }

@@ -160,6 +160,9 @@ function ensure(p) {
         fs.mkdirSync(dir, { recursive: true });
         const count = step.count || 30;
         const ms = step.ms || 33;
+        // where this step's frames start in the directory, so one clip can be made of two takes:
+        // a note opening, and then the thread it opened in
+        const from = step.from || 0;
         const drive = step.drive;
         const names = [];
         if (drive && drive.kind === 'drag') {
@@ -190,7 +193,7 @@ function ensure(p) {
             // five seconds of a reply sheet sitting open.
             await page.evaluate((d) => window.__deskScrollBy(d), drive.per || -10);
           }
-          const name = path.join(dir, String(i).padStart(4, '0') + '.png');
+          const name = path.join(dir, String(from + i).padStart(4, '0') + '.png');
           await page.screenshot({ path: name, fullPage: false, clip: step.clip });
           names.push(path.relative(ROOT, name));
           await page.evaluate((m) => window.__deskStep(m), ms);

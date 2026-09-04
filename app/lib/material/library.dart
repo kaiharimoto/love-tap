@@ -2,6 +2,7 @@
 // builds the app's copy; this reads it once at startup so the app never guesses at a file name.
 import 'dart:convert';
 
+import 'package:flutter/painting.dart' show Size;
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
 class LibraryEntry {
@@ -21,8 +22,8 @@ class LibraryEntry {
 }
 
 class MaterialLibrary {
-  MaterialLibrary._(this.paper, this.tears, this.objects, this.bits, this.shell, this.folds, this.fonts,
-      this.sounds, this.shadowFrame);
+  MaterialLibrary._(this.paper, this.tears, this.objects, this.bits, this.shell, this.folds,
+      this.foldSize, this.fonts, this.sounds, this.shadowFrame);
 
   final List<LibraryEntry> paper;
   final List<LibraryEntry> tears;
@@ -32,6 +33,9 @@ class MaterialLibrary {
 
   /// sequence name -> frame count
   final Map<String, int> folds;
+
+  /// sequence name -> the shape one frame is, so a note can take up its room before it has one
+  final Map<String, Size> foldSize;
   final List<String> fonts;
   final List<String> sounds;
 
@@ -71,6 +75,17 @@ class MaterialLibrary {
     if (f is Map) {
       f.forEach((k, v) => folds[k as String] = (v as num).toInt());
     }
+    // the shape of one frame, so a note about to open can take up the room it is going to take up
+    // before the first frame has decoded
+    final foldSize = <String, Size>{};
+    final fs = j['fold_size'];
+    if (fs is Map) {
+      fs.forEach((k, v) {
+        if (v is List && v.length == 2) {
+          foldSize[k as String] = Size((v[0] as num).toDouble(), (v[1] as num).toDouble());
+        }
+      });
+    }
     return _instance = MaterialLibrary._(
       family('paper'),
       family('tears'),
@@ -78,6 +93,7 @@ class MaterialLibrary {
       family('bits'),
       family('shell'),
       folds,
+      foldSize,
       ((j['fonts'] as List?) ?? const []).cast<String>(),
       ((j['sound'] as List?) ?? const []).cast<String>(),
       ((j['relief'] as Map?)?['shadow_frame'] as num?)?.toDouble() ?? 1.0,

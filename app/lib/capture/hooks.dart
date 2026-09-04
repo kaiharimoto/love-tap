@@ -10,6 +10,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../flags.dart';
 import '../material/assignment.dart';
+import '../material/fold.dart';
 import '../material/library.dart';
 import '../scope.dart';
 import 'bus.dart';
@@ -186,6 +187,9 @@ class CaptureHooks {
       'has_dusk_paper': lib?.hasDusk ?? false,
       'paper_stocks': lib?.paper.length ?? 0,
       'setup_showing': CaptureBus.setupShowing,
+      // a clip of a note opening that does not open is either a sequence nothing asked to play
+      // or a sequence whose frames never decoded, and from the outside they look the same
+      'fold': FoldFrames.state,
     };
   }
 

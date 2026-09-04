@@ -74,6 +74,11 @@ flutter:
     - assets/objects/
     - assets/bits/
     - assets/shell/
+    # Flutter bundles a directory, not a tree: assets/folds/ alone brings nothing, and without
+    # this line the hundred and fifty frames of a note opening were packed, counted in INDEX.json,
+    # and left out of the build — so every note lay flat and the unfolding clip was two hundred
+    # and forty identical frames.
+    - assets/folds/unfold_thirds/
     - assets/sound/
     - assets/seed/
     - assets/seed/year/

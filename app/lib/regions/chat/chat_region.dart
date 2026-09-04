@@ -33,6 +33,11 @@ class ChatRegion extends StatefulWidget {
 }
 
 class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
+  /// Where the reader's read marker stood when they opened the thread. Opening it writes a
+  /// new one over everything, and a note that folds against the marker as it stands is
+  /// folded for exactly one frame.
+  int? _arrivedAt;
+
   final _text = TextEditingController();
   final _scroll = ItemScrollController();
   final _positions = ItemPositionsListener.create();
@@ -397,6 +402,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                           key: ValueKey(it.id),
                           item: it,
                           row: i,
+                          unreadFrom: _arrivedAt ??= scope.thread.readUpto[scope.me] ?? 0,
                           registry: registry,
                           highlight: it.id == _highlightId,
                           onLongPress: () => _actions(it, registry),

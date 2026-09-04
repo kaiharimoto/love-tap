@@ -42,6 +42,22 @@ class FoldFrames {
   static String? _current;
   static FoldFrames? _instance;
 
+  /// What the capture report says about the sequence: enough to tell a clip that did not play
+  /// from a clip that played over frames that never decoded.
+  static Map<String, dynamic> get state {
+    final f = _instance;
+    if (f == null) return {'sequence': null};
+    return {
+      'sequence': f.seq,
+      'length': f.length,
+      'decoded': f._held.length,
+      'decoding': f._loading.length,
+      'playhead': f._playhead,
+      'held_from': f._held.isEmpty ? null : f._held.keys.reduce((a, b) => a < b ? a : b),
+      'held_to': f._held.isEmpty ? null : f._held.keys.reduce((a, b) => a > b ? a : b),
+    };
+  }
+
   static Future<FoldFrames> load(String seq) async {
     if (_current == seq && _instance != null) return _instance!;
     _instance?.dispose();
@@ -53,33 +69,53 @@ class FoldFrames {
     return frames;
   }
 
-  /// The frame at [i], if it has been decoded. Null while it is still coming.
+  /// The frame at [i] if it is decoded, and otherwise the last one before it that is.
+  ///
+  /// Asking for exactly [i] and taking nothing else is what made the unfolding clip a still: the
+  /// playhead is driven by the clock and the decoder is driven by the machine, the clock wins,
+  /// and every single frame of a four-second grab asked for a frame that was one ahead of what
+  /// had been decoded — so the note sat on frame zero for the whole take and then jumped open.
+  /// A note that opens a little behind is a note opening. A note that holds still is not.
   ui.Image? at(int i) {
     if (i != _playhead) {
       _playhead = i;
       unawaited(_fill(i));
     }
-    return _held[i];
+    final exact = _held[i];
+    if (exact != null) return exact;
+    var best = -1;
+    for (final k in _held.keys) {
+      if (k <= i && k > best) best = k;
+    }
+    return best < 0 ? null : _held[best];
   }
 
   Future<void> _fill(int from) async {
+    // decoded together rather than one after another: a chain of twenty-four awaits is twenty-four
+    // round trips through the event loop before the first frame after the playhead is ready
+    final want = <int>[];
     for (var i = from; i < from + _ahead && i < length; i++) {
       if (_held.containsKey(i) || _loading.contains(i)) continue;
       _loading.add(i);
-      try {
-        final data = await rootBundle.load(foldFrameAsset(seq, i));
-        final codec = await ui.instantiateImageCodec(data.buffer.asUint8List());
-        _held[i] = (await codec.getNextFrame()).image;
-      } catch (_) {
-        // a sequence that stops short plays as far as it goes rather than throwing under a note
-      } finally {
-        _loading.remove(i);
-      }
+      want.add(i);
     }
+    await Future.wait(want.map(_decode));
     // let go of everything well behind the playhead
     final drop = _held.keys.where((i) => i < from - (window - _ahead)).toList();
     for (final i in drop) {
       _held.remove(i)?.dispose();
+    }
+  }
+
+  Future<void> _decode(int i) async {
+    try {
+      final data = await rootBundle.load(foldFrameAsset(seq, i));
+      final codec = await ui.instantiateImageCodec(data.buffer.asUint8List());
+      _held[i] = (await codec.getNextFrame()).image;
+    } catch (_) {
+      // a sequence that stops short plays as far as it goes rather than throwing under a note
+    } finally {
+      _loading.remove(i);
     }
   }
 
@@ -174,14 +210,28 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
     super.dispose();
   }
 
+  /// How tall this is going to be, before any of it has decoded.
+  ///
+  /// A note whose height came from its first decoded frame was zero high until the decoder caught
+  /// up, and then it was not: everything under it moved, and a thread scrolled to its end scrolled
+  /// past the very note that was about to open. The shape of a frame is in the library, written
+  /// there by tools/pack_assets.py off the frame itself.
+  double get _height {
+    final size = MaterialLibrary.loaded
+        ? MaterialLibrary.instance.foldSize[widget.seq]
+        : null;
+    if (size == null || size.width == 0) return widget.width;
+    return widget.width * size.height / size.width;
+  }
+
   @override
   Widget build(BuildContext context) {
     final f = _frames;
-    if (f == null || f.length == 0) return SizedBox(width: widget.width);
+    if (f == null || f.length == 0) return SizedBox(width: widget.width, height: _height);
     final after = _elapsed - widget.holdFirst;
     final i = after.isNegative ? 0 : (after.inMilliseconds * _frameRate ~/ 1000).clamp(0, f.length - 1);
     final image = f.at(i) ?? _lastDrawn;
-    if (image == null) return SizedBox(width: widget.width);
+    if (image == null) return SizedBox(width: widget.width, height: _height);
     _lastDrawn = image;
     return SizedBox(
       width: widget.width,
@@ -246,12 +296,40 @@ class _FoldedNoteState extends State<FoldedNote> {
 
   @override
   Widget build(BuildContext context) {
-    if (_open || !FoldedNote.available) return widget.child;
+    if (!FoldedNote.available) return widget.child;
+    // The three states are three different heights — a folded sheet, the sequence playing, the
+    // note with the writing on it — and swapping between them moved everything underneath by a
+    // hundred points in one frame. The note keeps its place in the thread while it changes shape.
+    return AnimatedSize(
+      duration: Motion.settle,
+      curve: Curves.easeOut,
+      alignment: Alignment.topCenter,
+      child: _face(context),
+    );
+  }
+
+  Widget _face(BuildContext context) {
+    if (_open) {
+      // The last frame of the sequence is the sheet lying flat, and the note is the same sheet
+      // with the writing on it — but they are not the same height, and cutting from one to the
+      // other is a twitch at the end of every note anyone opens. In a clip it is a jump in the
+      // light, which is how a recording stitched out of two takes gives itself away. So the note
+      // arrives over the frame it is replacing rather than instead of it.
+      return TweenAnimationBuilder<double>(
+        tween: Tween(begin: 0.0, end: 1.0),
+        duration: Motion.settle,
+        curve: Curves.easeOut,
+        builder: (_, t, child) => Opacity(opacity: t.clamp(0.0, 1.0), child: child),
+        child: widget.child,
+      );
+    }
     if (_opening) {
       return Unfolding(
         seq: widget.seq,
         width: widget.width,
-        holdFirst: Flags.capture ? const Duration(milliseconds: 600) : Duration.zero,
+        // long enough for a reader to see the note lying folded, short enough that the clip
+        // is the note opening rather than the note sitting there
+        holdFirst: Flags.capture ? const Duration(milliseconds: 200) : Duration.zero,
         onOpen: () => setState(() => _open = true),
       );
     }

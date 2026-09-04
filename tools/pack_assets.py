@@ -15,6 +15,7 @@ app/assets/ is gitignored: it is derived, and capture.sh regenerates it.
 import argparse
 import json
 import os
+import re
 import shutil
 import sys
 
@@ -207,6 +208,7 @@ def pack_folds(index, verbose=True):
     if not os.path.isdir(src_dir):
         return
     seqs = {}
+    sizes = {}
     for seq in sorted(os.listdir(src_dir)):
         d = os.path.join(src_dir, seq)
         if not os.path.isdir(d):
@@ -216,9 +218,18 @@ def pack_folds(index, verbose=True):
             convert(os.path.join(d, f), os.path.join(DST, "folds", seq, os.path.splitext(f)[0] + ".webp"),
                     SIZES["folds"], QUALITY["folds"], keep_alpha=True)
         seqs[seq] = len(frames)
+        if frames:
+            # the shape of a frame, so a note that is about to open can be the size it will be
+            # before its first frame has decoded. Without it the note is zero high until the
+            # decoder catches up, and then it is not — which moves everything under it.
+            from PIL import Image
+            with Image.open(os.path.join(DST, "folds", seq,
+                                         os.path.splitext(frames[0])[0] + ".webp")) as im:
+                sizes[seq] = list(im.size)
         if verbose:
             print(f"folds/{seq}: {len(frames)} frames")
     index["folds"] = seqs
+    index["fold_size"] = sizes
 
 
 def copy_flat(name, index, exts=(".ttf", ".ogg", ".json"), verbose=True):
@@ -307,7 +318,51 @@ def main(argv=None):
                 f.write("this family is not baked yet; tools/pack_assets.py fills it\n")
     total = sum(os.path.getsize(os.path.join(dp, f)) for dp, _, fs in os.walk(DST) for f in fs)
     print(f"app/assets: {total / 1e6:.1f} MB, seed {'included' if index['seed'] else 'absent'}")
+    left_out = not_in_pubspec()
+    if left_out:
+        # Packing a family and not declaring it is silent in every direction: the files are on
+        # disk, INDEX.json counts them, and the build simply does not carry them. The hundred and
+        # fifty frames of a note opening were packed, counted and left out for as long as there
+        # were frames, and what it looked like was a note that would not open.
+        print("\npack_assets: packed but not in app/pubspec.yaml, so the build will not carry it:")
+        for d, n in left_out:
+            print(f"  {d}  ({n} files)")
+        return 1
     return 0
+
+
+def not_in_pubspec():
+    """Directories with files in them that pubspec.yaml does not ask the build to carry.
+
+    Flutter bundles a directory, not a tree: `assets/folds/` brings nothing when the files are in
+    `assets/folds/unfold_thirds/`. So every directory that directly holds a file has to be named.
+    """
+    pubspec = os.path.join(ROOT, "app", "pubspec.yaml")
+    if not os.path.exists(pubspec):
+        return []
+    declared = set()
+    with open(pubspec, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith("- assets/"):
+                declared.add(line[2:].strip())
+            m = re.search(r"asset:\s*(assets/\S+)", line)
+            if m:
+                declared.add(m.group(1))
+    missing = []
+    for dp, _, fns in os.walk(DST):
+        real = [f for f in fns if f != "empty.txt"]
+        if not real:
+            continue
+        rel = "assets/" + os.path.relpath(dp, DST).replace(os.sep, "/")
+        rel = "assets/" if rel == "assets/." else rel
+        as_dir = rel if rel.endswith("/") else rel + "/"
+        if as_dir in declared:
+            continue
+        if any(os.path.join(as_dir, f) in declared or as_dir + f in declared for f in real):
+            continue
+        missing.append((as_dir, len(real)))
+    return missing
 
 
 if __name__ == "__main__":

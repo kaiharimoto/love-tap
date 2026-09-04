@@ -34,6 +34,13 @@ say "3/4 paper stocks, dusk — the half the library has never had"
 bash blender/run.sh blender/paper/stocks.py -- --all --res 1800 --samples 48 \
     --condition dusk --threads 3 2>&1 | grep -E "^paper:|Error|Traceback" || true
 
+say "3.5/4 the fold sequence, all two hundred and forty frames of it"
+# a hundred and fifty were baked of the two hundred and forty the sequence is, which is two and a
+# half seconds of a four-second clip: the rest of the clip had to be something else, and the seam
+# between the two was a jump in the light
+bash blender/run.sh blender/folds/fold.py -- --seq unfold_thirds --frames 240 --res 540 \
+    2>&1 | grep -E "^fold:|Error|Traceback" || true
+
 say "4/4 packing the display-resolution set"
 python3 tools/pack_assets.py --seed=year 2>&1 | tail -2
 python3 tools/check/manifest.py --fill 2>&1 | tail -2
