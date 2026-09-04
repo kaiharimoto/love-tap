@@ -201,8 +201,10 @@ def hold_by_hand(scene, frames, fps, amount, seed):
 
 
 # ---- the take ----------------------------------------------------------------------------------
-def shoot(recipe, entry, res, samples, fps, out_dir, frames_dir):
+def shoot(recipe, entry, res, samples, fps, out_dir, frames_dir, cap=None):
     seconds = float(entry["duration_ms"]) / 1000.0
+    if cap:
+        seconds = min(seconds, float(cap))
     frames = max(2, int(round(seconds * fps)))
     scene = still.build(recipe)
     kinds = {o["kind"] for o in recipe.get("objects", [])}
@@ -249,6 +251,9 @@ def main():
     ap.add_argument("--res", type=int, default=480)
     ap.add_argument("--samples", type=int, default=20)
     ap.add_argument("--fps", type=int, default=12)
+    ap.add_argument("--seconds", type=float, default=0.0,
+                    help="cap every clip at this length; cut.py writes the true length back into "
+                         "the index, so the note in the thread says what the file actually is")
     ap.add_argument("--skip-existing", action="store_true")
     ap.add_argument("--frames-dir", default=os.path.join(ROOT, "scratch", "clips"))
     args = ap.parse_args(argv)
@@ -273,7 +278,8 @@ def main():
             recipe = json.load(fh)
         recipe.setdefault("id", entry["id"])
         t0 = time.time()
-        n = shoot(recipe, entry, args.res, args.samples, args.fps, OUT, frames_dir)
+        n = shoot(recipe, entry, args.res, args.samples, args.fps, OUT, frames_dir,
+                  cap=args.seconds or None)
         print(f"clip: {entry['id']} {n} frames in {time.time() - t0:.0f}s", flush=True)
 
 
