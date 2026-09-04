@@ -53,8 +53,39 @@ def read_exr(path):
     return np.stack([r, g, b], axis=-1).astype(np.float64)
 
 
-def develop_one(raw_path, out_path, shot):
+# What a photograph has to have in it before it is one. These are measured on the negative, which
+# is scene-linear, so they are exposure and structure rather than taste.
+FLOOR_MEDIAN = 0.004      # below this the frame is dark enough that development is guesswork
+FLOOR_P99 = 0.020         # nothing in the frame is lit at all
+FLOOR_RANGE = 0.010       # p99 minus p1: a frame this flat is one colour, not a picture
+
+
+def look_at_the_negative(a):
+    """Whether this is a photograph, said in one sentence, or None if it is.
+
+    A sealed room lit by a sun outside it renders black, and a camera aimed into the sky over an
+    empty plane renders a flat grey field. Both develop without complaint into a file of the right
+    size with the right name, and the only way anyone finds out is by opening a hundred and
+    fifteen of them. So the negative is looked at before it is developed.
+    """
+    med = float(np.median(a))
+    p1, p99 = (float(x) for x in np.percentile(a, [1, 99]))
+    if med < FLOOR_MEDIAN and p99 < FLOOR_P99:
+        return (f"the frame is empty: median {med:.5f}, brightest percentile {p99:.5f}. "
+                f"Nothing in this scene is lit — check that the light can reach it.")
+    if p99 - p1 < FLOOR_RANGE:
+        return (f"the frame is one flat value: the 1st and 99th percentiles are {p1:.4f} and "
+                f"{p99:.4f}. There is nothing in shot.")
+    return None
+
+
+def develop_one(raw_path, out_path, shot, strict=True):
     a = read_exr(raw_path)
+    wrong = look_at_the_negative(a)
+    if wrong:
+        if strict:
+            raise ValueError(wrong)
+        print(f"develop: {os.path.basename(raw_path)} — {wrong}", flush=True)
     rgb = camera.develop(a, by=shot.get("by", "noor"), light=shot.get("light", "window_left"),
                          seed=shot.get("seed", 1), handheld=shot.get("handheld", 0.0))
     Image.fromarray(rgb, "RGB").save(out_path, "JPEG", quality=shot.get("quality", 86),
@@ -69,6 +100,8 @@ def main():
     ap.add_argument("--dir", default=OUT)
     ap.add_argument("--out", default="")
     ap.add_argument("--keep-negatives", action="store_true")
+    ap.add_argument("--anyway", action="store_true",
+                    help="develop a negative that has nothing in it, and say so, rather than stop")
     args = ap.parse_args()
     out_dir = args.out or args.dir
     os.makedirs(out_dir, exist_ok=True)
@@ -78,6 +111,7 @@ def main():
         raws = [r for r in raws if os.path.basename(r).startswith(args.only + ".")]
     if not raws:
         raise SystemExit("develop.py: no negatives found in " + args.dir)
+    empty = []
     for raw in raws:
         name = os.path.basename(raw)[:-len(".exr")]
         side = os.path.join(args.dir, name + ".shot.json")
@@ -86,7 +120,11 @@ def main():
             with open(side, encoding="utf-8") as f:
                 shot = json.load(f)
         out = os.path.join(out_dir, name + ".jpg")
-        develop_one(raw, out, shot)
+        try:
+            develop_one(raw, out, shot, strict=not args.anyway)
+        except ValueError as e:
+            empty.append(f"{name}: {e}")
+            continue
         manifest.record(out, "blender/photos/still.py + blender/photos/develop.py", {
             "recipe": name, "light": shot.get("light"), "surface": shot.get("surface"),
             "objects": shot.get("objects"), "camera": shot.get("camera"),
@@ -97,7 +135,15 @@ def main():
         print(f"develop: {name}  {os.path.getsize(out)//1024}kB", flush=True)
         if not args.keep_negatives:
             os.unlink(raw)
+    if empty:
+        # the negatives stay on disk: whatever is wrong is in the scene, and it is quicker to look
+        # at the one that failed than to render it again to find out
+        print(f"\ndevelop: {len(empty)} negatives had nothing in them, and were not developed:")
+        for line in empty:
+            print("  " + line)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
