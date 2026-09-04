@@ -67,28 +67,49 @@ bash blender/run.sh blender/paper/stocks.py -- --stock lined --variant 1 --res 7
 
 ## Worst problems (ranked)
 
-1. The Tailscale transport does not exist. Every report says `local`, which is correct and honest
-   but is not the proof the mission asks for. It needs `TS_AUTHKEY`, and the brief says to ask for
-   that only in the session the Tailscale phase begins.
-2. Three artifacts need the Android phone and could not be taken: `09_two_devices.png` needs both
-   screens in one frame off one display, `16_setup_android.png` needs a fresh install on it, and
-   `08_state_propagating.mp4` needs both phones running at once. The emulator booted once this
-   session and the container restarted under it; there is no KVM here, so each boot costs about
-   ten minutes of the same four cores the renders are using.
-3. `06_unfolding.mp4` cannot honestly be taken yet: only part of one fold sequence is rendered, and
-   the app plays a sequence only when it is whole, so the clip would be of a note that does not
-   move. Rendering the remaining frames is the fix, not lowering the bar in the player.
-4. The seed's photographs, videos and voice notes are written as scenes but not rendered, so every
-   media row in the thread is a placeholder.
-5. No critic has run. The rubric score is unknown rather than low.
+1. **Twenty-three of the thirty-four feelings have no object**, so two thirds of the vocabulary
+   renders as its own name in text. That is precisely what the emotional layer is meant not to be,
+   and it shows in 02, 07, 13 and 15. The objects batch is rendering; it is first in the queue.
+2. **The seed's media do not exist.** A hundred and eighty photographs, videos and voice notes are
+   referenced and none are rendered, so the loader drops every one: Moments is empty, the hero has
+   no pictures in it, and 14_media_viewer has nothing to open. `blender/photos/` is the pipeline
+   for this and it works end to end at nine seconds a photograph, but nothing it has produced yet
+   is good enough to put in the thread, so nothing it has produced is in the thread.
+3. **The Tailscale transport does not exist.** Every report says `local`, which is true and is not
+   the proof the mission asks for. It needs `TS_AUTHKEY`, and the brief says to ask only in the
+   session that phase begins.
+4. **Three artifacts need the Android phone**: `09_two_devices.png` needs both screens in one frame
+   off one display, `16_setup_android.png` needs a fresh install on it, `08_state_propagating.mp4`
+   needs both phones at once. No KVM here, so each emulator boot costs about ten minutes of the
+   same four cores the renders want, and the container has restarted under it twice.
+5. **`06_unfolding.mp4` has nothing in it** until the fold sequence is rendered. The app plays a
+   sequence only when it is whole, which is right; the frames are queued behind the objects.
+6. **`05_settings.png` cannot show two paired devices** with only one phone up: the host is the
+   Android app, and a web build cannot be a host. It captures the unpaired state honestly instead.
+7. No critic has run. The rubric score is unknown rather than low.
 
 ## What was fixed this session
 
-- Contact shadows and edge light exist at all (they were rendering to nothing: no scipy in
-  Blender's Python, and the pass produced a slab rather than a shadow).
+Most of it was found by capturing and looking, which is what capturing every session is for.
+
+- Contact shadows and edge light exist at all. They were rendering to nothing (no scipy in
+  Blender's Python), and then the pass produced a slab rather than a shadow until the sheet was
+  modelled as touching in the middle and curling at its torn edges.
 - No two tears can repeat on one screen, by construction rather than by luck.
-- Two glyph variants had lost strokes; the builder was dropping ink when skia refused a union.
-- The seeded year is complete and clean, with the read markers and passive signals derived from it.
+- Two glyph variants had lost strokes: the font builder was dropping ink when skia refused a union.
+- The seeded year is complete, clean, and now runs up to the frozen now rather than stopping two
+  days short of it, so Pulse has a day of traffic to show.
+- Four thousand passive signals were being written into the thread as `battery 100` and
+  `network cell`. docs/EVENT_TYPES.md always said one mark per meaningful transition per hour; the
+  projection now does that, and says it in sentences.
+- Every surface outside the thread was a beige rounded rectangle — the named anti-goal, the one
+  that costs the build twice. All four modules, both Settings panels, the Us tabs and every empty
+  surface are on real paper now, through `app/lib/material/slip.dart`.
+- Nothing counts: the unread number on the chat tab is a folded corner.
+- The clip of a feeling arriving had nothing in it, for two separate reasons — the scene named a
+  feeling that does not exist, and the handle awaited the whole animation before the frames began.
+- `capture.sh` could not start its second server: a background job inside `$(...)` holds the
+  substitution's pipe open, so reading a pid that way blocks for ever.
 
 ## Next action
 
