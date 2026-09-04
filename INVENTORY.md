@@ -14,47 +14,47 @@ Component families, sources, status, substitutions. Status: `planned` · `buildi
 | ffmpeg | release static (johnvansickle) | johnvansickle.com | building | — |
 | tailscaled / tailscale | 1.102.3 | pkgs.tailscale.com | building | userspace networking, two state dirs |
 | Playwright + WebKit | 1.62.1 | registry.npmjs.org / playwright CDN | building | — |
-| Python image/font libs | numpy, pillow, fonttools, scipy, scikit-image, opencv-headless | pypi | built | — |
+| Python image/font libs | numpy, pillow, fonttools, cffi, scikit-image, opencv-headless | pypi | built | Blender's own Python has numpy and nothing else, so the two image operations the paper scripts need are written out in `blender/rig/common.py` rather than pulled in |
 
 ## Code families
 
 | Family | Location | Status |
 |---|---|---|
-| Transport interface (Host/Client, cursor sync, outbox, pairing auth, blobs) | `app/lib/transport/` | planned |
-| Local transport with injectable faults | `app/lib/transport/local/` | planned |
-| Tailscale transport | `app/lib/transport/tailscale/` | planned (final phase) |
-| Spine (drift/sqlite3, FTS5, blob store, replay, projections) | `app/lib/spine/` | planned |
-| Event type registry (17 types) | `app/lib/spine/types.dart` | planned |
-| Messenger (unstyled first) | `app/lib/regions/chat/` | planned |
-| Feelings engine (33 built-ins, 6 families, authored) | `app/lib/feelings/` | planned |
-| Partner-state signals (13) | `app/lib/state/` | planned |
-| Ambient surfaces (widget, notifications, pocket pulse; PWA standing notification, push) | `app/lib/presence/`, `app/android/` | planned |
-| Modules: dates, todos, calendar, rituals + registry | `app/lib/modules/` | planned |
-| Moments, Settings, Pulse, Us | `app/lib/regions/` | planned |
-| Setup checklists + HTTP bootstrap page | `app/lib/setup/` | planned |
-| Voice string table + lint | `app/lib/voice/`, `tools/lint/strings.py` | planned |
-| Web Push sender (RFC 8291, VAPID) | `app/lib/presence/webpush/` | planned |
+| Transport interface (Host/Client, cursor sync, outbox, pairing auth, blobs) | `app/lib/transport/` | verified |
+| Local transport with injectable faults | `app/lib/transport/local/` | verified (20 tests, `evidence/reliability.json`) |
+| Tailscale transport | `app/lib/transport/tailscale/` | planned (final phase; needs TS_AUTHKEY) |
+| Spine (sqlite3 / idb_shim, blob store, replay, projections) | `app/lib/spine/` | verified (boundary test: only `spine/store/` imports a driver) |
+| Event type registry (17 types) | `app/lib/spine/types.dart` | verified against `docs/EVENT_TYPES.md` |
+| Messenger, then material | `app/lib/regions/chat/` | built; chrome redrawn in the material language, no icon set |
+| Feelings engine (34 built-ins, 6 families, authored) | `app/lib/feelings/` | verified (`app/test/floors_test.dart`) |
+| Partner-state signals (14) | `app/lib/spine/projections/state.dart` | verified (6 declared, 8 passive) |
+| Ambient surfaces (standing line, pocket, background delivery) | `app/lib/ambient/`, `app/android/`, `app/web/push/` | built; not yet exercised on a real phone |
+| Modules: dates, todos, calendar, rituals + registry | `app/lib/modules/` | built (a fifth is a directory and one line) |
+| Moments, Settings, Pulse, Us | `app/lib/regions/` | built |
+| Setup checklists (observed, never claimed) | `app/lib/setup/` | built; the CA bootstrap page is not written yet |
+| Voice string table + lint | `app/lib/voice/`, `tools/lint/strings.py` | built (106 displayed strings, 0 against the voice) |
+| Web Push sender (RFC 8291, VAPID) | `tools/push/webpush.py` | verified against the RFC's own §5 vector |
 
 ## Material families (`assets/`, every file in `assets/MANIFEST.json`)
 
 | Family | Count | Generator | Status |
 |---|---:|---|---|
-| Paper stocks (+ dusk) | 9 stocks / 21 sheets ×2 | `blender/paper/stocks.py` | planned |
-| Tear masks | ≥48 distinct | `tools/tears/tear.py` + `blender/paper/tear_relief.py` | planned |
-| Fold / crumple sequences | 4 sequences, 660 frames | `blender/folds/*.py` | planned |
-| Handwriting faces | 3 faces × 5 variants/glyph | `tools/handwriting/build.py` | planned |
-| Feeling objects + shadows | 33 + 33 | `blender/objects/*.py`, `tools/doodles/` | planned |
-| Tape / staples / clips | ≥24 | `blender/bits/bits.py` | planned |
-| Feeling sounds | 33 | `tools/sound/synth.py` | planned |
-| Shell furniture (desk, tabs, strips) | ~12 | `blender/shell/` | planned |
+| Paper stocks (+ dusk) | 23 sheets | `blender/paper/stocks.py` | rendering |
+| Tear masks, edge light, contact shadow | 139 masks, 41 lit | `tools/tears/tear.py` + `blender/paper/tear_relief.py` | masks verified distinct; relief rendering |
+| Fold / crumple sequences | 1 of 4 started | `blender/folds/fold.py` | partly rendered; the app plays a sequence only once it is whole |
+| Handwriting faces | 2 of 3 × 5 variants/glyph | `tools/handwriting/build.py` | verified (`tools/handwriting/check.py`: no glyph has lost a stroke) |
+| Feeling objects + shadows | 22 rendered | `blender/objects/objects.py` | rendering |
+| Tape / staples / clips | 0 rendered of 11 | `blender/bits/bits.py` | queued |
+| Feeling sounds | 44 | `tools/sound/synth.py` | built |
+| The desk itself (day and dusk) | 2 | `blender/shell/desk.py` | rendered |
 
 ## Seed (`seed/`)
 
 | Item | Status |
 |---|---|
-| `people.json` (Noor, Teo, hands, devices, anchors) | planned |
-| Year-deep events (months of messages, hundreds of feelings, photos, dates, to-dos) | planned |
-| Photographs (rendered scenes, not downloads) | planned |
+| `people.json` (Noor, Teo, hands, devices, three anchors) | built |
+| Year-deep events: 13 months, 14,099 events, 0 validator errors | built |
+| Photographs, videos and voice notes: scenes written, renders not made yet | building |
 
 ## Evidence (`evidence/`)
 

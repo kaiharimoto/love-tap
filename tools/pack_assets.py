@@ -128,6 +128,35 @@ def safe_inset(mask_path, box):
     ]
 
 
+# How much wider than the piece the packed contact shadow is. The renderer frames the shadow wider
+# than the sheet because the visible part of one is the part outside the paper; packing keeps that
+# margin relative to the piece's own box, so the app can put every shadow back with one number
+# instead of a different one per mask.
+SHADOW_MARGIN = 1.25
+
+
+def _expand(box, factor):
+    cx = (box[0] + box[2]) / 2.0
+    cy = (box[1] + box[3]) / 2.0
+    return (cx + (box[0] - cx) * factor, cy + (box[1] - cy) * factor,
+            cx + (box[2] - cx) * factor, cy + (box[3] - cy) * factor)
+
+
+def _into_frame(box, frame, side=2048.0):
+    """The same physical rectangle, in the coordinates of a render framed [frame] times as wide."""
+    half = side / 2.0
+    return tuple(half + (c - half) / frame for c in box)
+
+
+def render_frame():
+    """What blender/paper/tear_relief.py framed the shadow pass at, from the file it wrote."""
+    path = os.path.join(SRC, "tears", "relief.json")
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            return float(json.load(f).get("shadow_frame", 1.0))
+    return 1.0
+
+
 def pack_family(name, index, verbose=True):
     src_dir = os.path.join(SRC, name)
     if not os.path.isdir(src_dir):
@@ -135,6 +164,7 @@ def pack_family(name, index, verbose=True):
     out = []
     boxes = {}
     safes = {}
+    frame = render_frame() if name == "tears" else 1.0
     if name == "tears":
         for fn in sorted(os.listdir(src_dir)):
             stem = os.path.splitext(fn)[0]
@@ -153,6 +183,12 @@ def pack_family(name, index, verbose=True):
         if name == "tears":
             base = stem.split("_edge")[0].split("_shadow")[0]
             crop = boxes.get(base)
+            if crop and "_shadow" in stem:
+                # the shadow keeps a margin around the piece, and its render is framed wider than
+                # the mask, so the box is grown about the piece and then read in the render's own
+                # coordinates. Anything past the render's edge crops to transparent, which is
+                # what is there anyway.
+                crop = _into_frame(_expand(crop, SHADOW_MARGIN), frame)
         size = convert(os.path.join(src_dir, fn), dst, SIZES.get(name, 1024), QUALITY.get(name, 90),
                        keep_alpha=name != "paper", luminance_to_alpha=plain_mask, crop=crop)
         row = {"id": stem, "w": size[0], "h": size[1]}
@@ -248,6 +284,9 @@ def main(argv=None):
     if os.path.exists(relief_path):
         with open(relief_path, encoding="utf-8") as f:
             index["relief"] = json.load(f)
+        # what the app has to scale the packed shadow by, which is the margin packing kept rather
+        # than the frame the renderer used
+        index["relief"]["shadow_frame"] = SHADOW_MARGIN
     pack_folds(index)
     copy_flat("fonts", index, exts=(".ttf",))
     copy_flat("sound", index, exts=(".ogg",))

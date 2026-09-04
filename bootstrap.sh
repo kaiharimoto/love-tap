@@ -54,6 +54,23 @@ fi
 JAVA_MAJOR="$(java -version 2>&1 | awk -F'"' '/version/ {print $2}' | cut -d. -f1)"
 [ "${JAVA_MAJOR:-0}" -ge 17 ] || die "java 17 or newer is required (found ${JAVA_MAJOR:-none})"
 python3 -c 'import sys; assert sys.version_info >= (3,10)' 2>/dev/null || die "python3 3.10 or newer is required"
+
+# The python packages the material pipeline and the push sender need. They are named rather than
+# guessed at, and a missing one stops here with its own name in the message instead of failing in
+# the middle of a three-hour render.
+py_missing=()
+for mod in numpy PIL fontTools cv2 skia_pathops cffi cryptography; do
+  python3 -c "import $mod" >/dev/null 2>&1 || py_missing+=("$mod")
+done
+if [ ${#py_missing[@]} -gt 0 ]; then
+  echo "· installing python packages: ${py_missing[*]}"
+  python3 -m pip install --quiet --disable-pip-version-check \
+    numpy pillow fonttools skia-pathops opencv-python-headless cffi cryptography \
+    || die "could not install the python packages: ${py_missing[*]}"
+  for mod in "${py_missing[@]}"; do
+    python3 -c "import $mod" >/dev/null 2>&1 || die "python package still missing after install: $mod"
+  done
+fi
 if [ -z "${JAVA_HOME:-}" ]; then
   JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v java)")")")"
 fi

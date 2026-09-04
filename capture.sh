@@ -42,6 +42,17 @@ note_missing() { echo "$1|$2" >> "$MISSING"; echo "  ✗ $1 — $2"; }
 
 wants() { [ -z "$ONLY" ] || [ "$ONLY" = "$1" ]; }
 
+# ---- what has to be true before a screenshot is worth taking -------------------------------------
+# Three of the four anti-goals are things only a reader catches, and a broken glyph or a widened
+# push payload would be visible in the artifacts. Checking first means a failure reads as a
+# sentence here rather than as something odd in a picture.
+echo "· reading every displayed string against docs/VOICE.md"
+python3 tools/lint/strings.py --out "$LOG/strings.json" || note_missing "voice" "a displayed string is against docs/VOICE.md"
+echo "· checking both hands still have all their ink"
+python3 tools/handwriting/check.py --out "$LOG/fonts.json" || note_missing "handwriting" "a glyph variant has lost a stroke"
+echo "· checking the push payload carries only kind and sender"
+python3 tools/push/webpush.py --self-test > "$LOG/webpush.txt" 2>&1 || note_missing "push" "the web push sender failed its own vectors"
+
 # ---- the two builds ----------------------------------------------------------------------------
 # One carries the seeded year; the other is a genuinely fresh install. 10_first_run, 16_setup_android
 # and 17_setup_pwa may only come from the fresh one.
