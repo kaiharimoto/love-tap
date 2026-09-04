@@ -35,6 +35,7 @@ import camera            # noqa: E402
 from develop import read_exr  # noqa: E402
 
 TAKES = os.path.join(ROOT, "scratch", "clips")
+POSTERS = os.path.join(ROOT, "scratch", "posters")
 OUT = os.path.join(ROOT, "seed", "videos")
 FFMPEG = os.path.join(ROOT, "toolchain", "ffmpeg", "ffmpeg")
 
@@ -74,10 +75,17 @@ def encode(work, take, out_dir):
         "-r", str(fps),
         mp4,
     ], check=True)
-    # the poster is a frame out of the clip, a little way in, not a separate render
-    at = max(1, int(take.get("frames", 1) * 0.18))
-    Image.open(os.path.join(work, f"{at:04d}.png")).save(poster, "JPEG", quality=84,
-                                                         subsampling=2, optimize=True)
+    # The poster is the frame the thread shows before anybody plays anything, so it is the part
+    # of a video most likely to be looked at closely — and a clip has to be small to render at
+    # all. Where the same scene has been exposed as a still at a proper size, that is the poster;
+    # otherwise it is a frame out of the clip, a little way in.
+    shot = os.path.join(POSTERS, take["id"] + ".jpg")
+    if os.path.exists(shot):
+        shutil.copy2(shot, poster)
+    else:
+        at = max(1, int(take.get("frames", 1) * 0.18))
+        Image.open(os.path.join(work, f"{at:04d}.png")).save(poster, "JPEG", quality=84,
+                                                             subsampling=2, optimize=True)
     return mp4, poster
 
 
