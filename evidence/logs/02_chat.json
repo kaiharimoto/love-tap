@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4115
+   "ms": 4586
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1903
   },
   {
    "do": "scrollTo",
-   "ms": 3762
+   "ms": 5329
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1902
   },
   {
    "do": "shot",
-   "ms": 3110
+   "ms": 2999
   },
   {
    "do": "report",
-   "ms": 721
+   "ms": 731
   }
  ],
  "shots": [
@@ -43,47 +43,47 @@
   {
    "region": 1,
    "visible": [
+    "0002TXKD88ZJPQ3PXPG1DQ0CN8",
+    "0002TY53N816B1Y330XQS2B0AX",
     "0002V0E6H000S96SY78DF5NFTE",
     "0002V0PH48RXHYX3MJ7PZ1PMBG",
     "0002V0SDX06FA58CJ9JXH23W7R",
     "0002V11RG88S9FGS842FKJ9ZHQ",
     "0002V17SVRQY5E5S69MJ3HT7NT",
     "0002V1KKSGZBD11H39SVDW9WD5",
-    "0002V1XN2R0RM20X63VYGJ17V7",
-    "0002V3A8T8TA4CKWWHNDVHH6VV",
-    "0002VBA59G5C7M6892M0WA6BF1"
+    "0002V1XN2R0RM20X63VYGJ17V7"
    ],
    "tears": {
-    "0002V0E6H000S96SY78DF5NFTE": "tear_051",
-    "0002V0PH48RXHYX3MJ7PZ1PMBG": "tear_013",
-    "0002V0SDX06FA58CJ9JXH23W7R": "tear_035",
-    "0002V11RG88S9FGS842FKJ9ZHQ": "tear_055",
-    "0002V17SVRQY5E5S69MJ3HT7NT": "tear_018",
-    "0002V1KKSGZBD11H39SVDW9WD5": "tear_040",
-    "0002V1XN2R0RM20X63VYGJ17V7": "tear_003",
-    "0002V3A8T8TA4CKWWHNDVHH6VV": "tear_023",
-    "0002VBA59G5C7M6892M0WA6BF1": "tear_045"
+    "0002TXKD88ZJPQ3PXPG1DQ0CN8": "tear_003",
+    "0002TY53N816B1Y330XQS2B0AX": "tear_023",
+    "0002V0E6H000S96SY78DF5NFTE": "tear_045",
+    "0002V0PH48RXHYX3MJ7PZ1PMBG": "tear_008",
+    "0002V0SDX06FA58CJ9JXH23W7R": "tear_029",
+    "0002V11RG88S9FGS842FKJ9ZHQ": "tear_050",
+    "0002V17SVRQY5E5S69MJ3HT7NT": "tear_012",
+    "0002V1KKSGZBD11H39SVDW9WD5": "tear_034",
+    "0002V1XN2R0RM20X63VYGJ17V7": "tear_054"
    },
    "stocks": {
+    "0002TXKD88ZJPQ3PXPG1DQ0CN8": "looseleaf_03",
+    "0002TY53N816B1Y330XQS2B0AX": "lined_04",
     "0002V0E6H000S96SY78DF5NFTE": "lined_01",
     "0002V0PH48RXHYX3MJ7PZ1PMBG": "looseleaf_02",
     "0002V0SDX06FA58CJ9JXH23W7R": "lined_02",
     "0002V11RG88S9FGS842FKJ9ZHQ": "looseleaf_02",
     "0002V17SVRQY5E5S69MJ3HT7NT": "lined_04",
     "0002V1KKSGZBD11H39SVDW9WD5": "index_02",
-    "0002V1XN2R0RM20X63VYGJ17V7": "legal_02",
-    "0002V3A8T8TA4CKWWHNDVHH6VV": "looseleaf_01",
-    "0002VBA59G5C7M6892M0WA6BF1": "receipt_01"
+    "0002V1XN2R0RM20X63VYGJ17V7": "legal_02"
    },
    "scroll": {
-    "first": 5189,
-    "last": 5197,
-    "of": 8375
+    "first": 5195,
+    "last": 5203,
+    "of": 8387
    },
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 96,
    "seed": 20260903,
-   "events": 14050,
+   "events": 14062,
    "transport": "local",
    "link": "connecting",
    "me": "teo",
@@ -105,7 +105,11 @@
    "at": "02_chat.png"
   }
  ],
- "cold_ms": 15583,
- "problems": [],
- "ok": true
+ "cold_ms": 15629,
+ "problems": [
+  "console: RuntimeError: call_indirect to a signature that does not match (evaluating 'e(...C)')",
+  "console: ",
+  "console: Another exception was thrown: Instance of 'minified:hk<void>'"
+ ],
+ "ok": false
 }

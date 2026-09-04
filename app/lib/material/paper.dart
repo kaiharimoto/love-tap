@@ -263,12 +263,20 @@ class _RenderWithinTear extends RenderShiftedBox {
 /// Applies a mask image's alpha to its child. The masks are packed as white with the paper in
 /// their alpha channel, so `dstIn` against the mask keeps exactly the paper, fibres and all.
 ///
-/// The mask is drawn as a nine-slice rather than stretched to fit, and that is the whole reason
-/// this is a render object instead of a ShaderMask. A mask is about 1024x580; the setup sheet is
-/// 1440x2600. Stretched to fill, every fibre along the torn edge was pulled four and a half times
-/// its own length, and a sheet that reads as paper at note size read as fur at page size. Sliced,
-/// the four corners and the four edges keep the scale they were rendered at, and only the middle —
-/// which is solid paper — is stretched.
+/// The mask is nine-sliced before it is applied, and that is the whole reason this is more than a
+/// ShaderMask. A mask is about 1024x580; the setup sheet is 1440x2600. Stretched to fill, every
+/// fibre along the torn edge is pulled four and a half times its own length, and a sheet that
+/// reads as paper at note size reads as fur at page size. Sliced, the four corners and the four
+/// edges keep the scale they were rendered at and only the middle — which is solid paper — is
+/// stretched.
+///
+/// It is done by composing the slice into one image at the size the piece turned out to be, and
+/// then applying *that* as an ordinary shader. The obvious way — a render object that opens a
+/// layer, paints the child and draws the mask over it with dstIn — does not work: after
+/// `PaintingContext.paintChild` the context may be on a different canvas, so the saveLayer and the
+/// restore land on two different ones. It failed loudly, in the way this class of mistake does:
+/// the mask was not applied at all, every sheet in the app came out a rectangle, and the engine
+/// eventually threw `call_indirect to a signature that does not match`.
 class MaskedLayer extends StatefulWidget {
   const MaskedLayer({super.key, required this.maskAsset, required this.child});
   final String maskAsset;
@@ -314,66 +322,56 @@ class _MaskedLayerState extends State<MaskedLayer> {
   Widget build(BuildContext context) {
     final mask = _mask;
     if (mask == null) return widget.child;
-    return _Masked(mask: mask, child: widget.child);
-  }
-}
-
-class _Masked extends SingleChildRenderObjectWidget {
-  const _Masked({required this.mask, required Widget child}) : super(child: child);
-  final ui.Image mask;
-
-  @override
-  RenderObject createRenderObject(BuildContext context) => _RenderMasked(mask);
-
-  @override
-  void updateRenderObject(BuildContext context, _RenderMasked renderObject) {
-    renderObject.mask = mask;
-  }
-}
-
-class _RenderMasked extends RenderProxyBox {
-  _RenderMasked(this._mask);
-
-  ui.Image _mask;
-
-  set mask(ui.Image v) {
-    if (identical(_mask, v)) return;
-    _mask = v;
-    markNeedsPaint();
-  }
-
-  /// How much of the mask, from each edge, is the torn edge itself rather than the paper inside
-  /// it. Measured off the masks: the fibres reach about a fifth of the way in, and the middle
-  /// fifth is always solid.
-  static const double _edge = 0.4;
-
-  @override
-  bool get alwaysNeedsCompositing => true;
-
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    final child = this.child;
-    if (child == null) return;
-    final bounds = offset & size;
-    final canvas = context.canvas;
-    canvas.saveLayer(bounds, Paint());
-    context.paintChild(child, offset);
-    final w = _mask.width.toDouble(), h = _mask.height.toDouble();
-    // The centre slice: everything outside it keeps the scale it was rendered at, so a corner is
-    // never sheared and a fibre is never stretched along its own length.
-    final centre = Rect.fromLTRB(w * _edge, h * _edge, w * (1 - _edge), h * (1 - _edge));
-    canvas.drawImageNine(
-      _mask,
-      centre,
-      bounds,
-      Paint()
-        ..blendMode = BlendMode.dstIn
-        ..filterQuality = FilterQuality.medium,
+    return ShaderMask(
+      blendMode: BlendMode.dstIn,
+      shaderCallback: (Rect rect) {
+        final sliced = SlicedMasks.at(widget.maskAsset, mask, rect.size);
+        final m = Matrix4.identity()..translateByDouble(rect.left, rect.top, 0, 1);
+        return ImageShader(sliced, TileMode.clamp, TileMode.clamp, m.storage,
+            filterQuality: FilterQuality.medium);
+      },
+      child: widget.child,
     );
-    canvas.restore();
   }
 }
 
+/// Masks composed at the size a piece turned out to be, kept so a screenful of notes composes
+/// each shape once rather than once a frame.
+class SlicedMasks {
+  static final Map<String, ui.Image> _images = {};
+  static const _keep = 64;
+
+  /// How much of a mask, in from each edge, is the torn edge itself rather than the paper inside
+  /// it. Measured off the masks: the fibres reach about a fifth of the way in and the middle fifth
+  /// is always solid, so four tenths is comfortably outside them.
+  static const double edge = 0.4;
+
+  static ui.Image at(String asset, ui.Image mask, Size size) {
+    // rounded, so a note whose height moves by a pixel while its text lays out does not compose a
+    // new mask every frame
+    final w = size.width.round().clamp(1, 4096);
+    final h = size.height.round().clamp(1, 4096);
+    final key = '$asset@${w}x$h';
+    final have = _images[key];
+    if (have != null) return have;
+    if (_images.length > _keep) {
+      final oldest = _images.keys.first;
+      _images.remove(oldest)?.dispose();
+    }
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder);
+    final mw = mask.width.toDouble(), mh = mask.height.toDouble();
+    canvas.drawImageNine(
+      mask,
+      Rect.fromLTRB(mw * edge, mh * edge, mw * (1 - edge), mh * (1 - edge)),
+      Rect.fromLTWH(0, 0, w.toDouble(), h.toDouble()),
+      Paint()..filterQuality = FilterQuality.medium,
+    );
+    final image = recorder.endRecording().toImageSync(w, h);
+    _images[key] = image;
+    return image;
+  }
+}
 
 /// An image drawn as a nine-slice: the four corners and the four edges at the scale they were
 /// rendered at, and only the middle stretched.

@@ -2,6 +2,7 @@
 // a corner before it turns. Durations are short and the overshoot is small — a note is light.
 import 'dart:async';
 
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 import '../capture/hooks.dart';
@@ -54,11 +55,12 @@ class Turning extends StatefulWidget {
   State<Turning> createState() => _TurningState();
 }
 
-class _TurningState extends State<Turning> {
+class _TurningState extends State<Turning> with SingleTickerProviderStateMixin {
   Widget? _leaving;
   Duration? _from;
   double _t = 1.0;
   StreamSubscription<Duration>? _driven;
+  Ticker? _ticker;
 
   @override
   void initState() {
@@ -87,22 +89,23 @@ class _TurningState extends State<Turning> {
     });
   }
 
-  Future<void> _wallClock() async {
-    final started = DateTime.now();
-    while (mounted && _t < 1.0) {
-      await Future<void>.delayed(const Duration(milliseconds: 16));
-      if (!mounted) return;
-      final ms = DateTime.now().difference(started).inMilliseconds;
+  /// Same reason as Settling: a Ticker is owned and stopped, a loop of delayed futures is not.
+  void _wallClock() {
+    _ticker?.dispose();
+    _ticker = createTicker((elapsed) {
+      final t = (elapsed.inMicroseconds / widget.duration.inMicroseconds).clamp(0.0, 1.0);
       setState(() {
-        _t = (ms / widget.duration.inMilliseconds).clamp(0.0, 1.0);
-        if (_t >= 1.0) _leaving = null;
+        _t = t;
+        if (t >= 1.0) _leaving = null;
       });
-    }
+      if (t >= 1.0) _ticker?.stop();
+    })..start();
   }
 
   @override
   void dispose() {
     _driven?.cancel();
+    _ticker?.dispose();
     super.dispose();
   }
 
@@ -151,10 +154,11 @@ class Settling extends StatefulWidget {
   State<Settling> createState() => _SettlingState();
 }
 
-class _SettlingState extends State<Settling> {
+class _SettlingState extends State<Settling> with SingleTickerProviderStateMixin {
   double _t = 0.0;
   Duration? _from;
   StreamSubscription<Duration>? _driven;
+  Ticker? _ticker;
 
   @override
   void initState() {
@@ -163,7 +167,14 @@ class _SettlingState extends State<Settling> {
       _from = DrivenClock.now;
       _driven = DrivenClock.ticks.listen(_advance);
     } else {
-      _wallClock();
+      // A Ticker rather than a loop of delayed futures: a loop leaves a timer pending when the
+      // widget goes away mid-animation, and flutter_test fails the whole test file for it — which
+      // is fair, because a timer nobody owns is a timer nobody stops.
+      _ticker = createTicker((elapsed) {
+        final t = (elapsed.inMicroseconds / widget.duration.inMicroseconds).clamp(0.0, 1.0);
+        setState(() => _t = t);
+        if (t >= 1.0) _ticker?.stop();
+      })..start();
     }
   }
 
@@ -174,19 +185,10 @@ class _SettlingState extends State<Settling> {
     if (mounted) setState(() => _t = t);
   }
 
-  Future<void> _wallClock() async {
-    final started = DateTime.now();
-    while (mounted && _t < 1.0) {
-      await Future<void>.delayed(const Duration(milliseconds: 16));
-      if (!mounted) return;
-      final ms = DateTime.now().difference(started).inMilliseconds;
-      setState(() => _t = (ms / widget.duration.inMilliseconds).clamp(0.0, 1.0));
-    }
-  }
-
   @override
   void dispose() {
     _driven?.cancel();
+    _ticker?.dispose();
     super.dispose();
   }
 
