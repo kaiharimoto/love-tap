@@ -270,7 +270,7 @@ if adb shell true >/dev/null 2>&1; then
   bash tools/capture/android.sh "$SEEDED_URL" "$FRESH_URL" || true
 else
   for s in 09_two_devices.png 16_setup_android.png; do
-    wants "${s%.*}" && note_missing "$s" "no Android device was up in this session: this container has no /dev/kvm, so the emulator cannot boot, and no GTK, so there is no desktop build to stand in for a second screen"
+    wants "${s%.*}" && note_missing "$s" "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start — adbd answered after 113 minutes — but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA"
   done
 fi
 

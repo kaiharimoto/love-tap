@@ -77,3 +77,30 @@ Without a key the tailscale run is recorded in `evidence/reliability.json` as **
 passing, and not as failing, because the thing it would have checked has not been checked. Every
 other reliability check runs over the local transport and is unaffected — the two transports share
 one protocol, one pairing and one sync engine, and differ only in which address the host binds.
+
+## Why there is no Android screenshot in the evidence
+
+`09_two_devices.png` and `16_setup_android.png` are the two artifacts that need the Android phone,
+and neither of them exists. This is what was actually tried, so that it reads as a measurement
+rather than as an excuse.
+
+The AVD is `lovetap`, an `aosp_atd` x86_64 image on android-34 at 1440×3120 — the artifact's own
+resolution. This container has no `/dev/kvm`, so an x86_64 guest cannot be virtualised and QEMU
+falls back to emulating the instruction set. The emulator was started headless with
+`-accel off -gpu swiftshader_indirect`, and it did start: it reached `init.svc.bootanim: stopped`
+and `adb devices` showed `emulator-5554  device` after a hundred and thirteen minutes on one core.
+
+That is where it stopped. `sys.boot_completed` and `dev.bootcomplete` were both still empty, and
+`pm list packages` answered `cmd: Can't find service: package` — the framework had not come up, so
+there was nothing to install an APK into. It was left running while the paper library rendered and
+had made no further progress; it was then stopped, because it was holding a core the hundred and
+fifteen photographs needed more.
+
+There is no GTK in the container either, so a Linux desktop build cannot stand in for a second
+screen, and the brief requires 09 to be one display carrying an AVD window beside a Playwright
+window. Neither artifact was faked from the PWA, and `capture.sh` records both as missing with
+this reason rather than substituting anything.
+
+What would produce them: a host with `/dev/kvm`, or an ARM64 host where the `arm64-v8a` image runs
+natively. Everything else in the capture — the PWA, the tailnet transport, the seeded year — runs
+here unchanged.
