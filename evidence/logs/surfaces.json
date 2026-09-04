@@ -1,0 +1,407 @@
+{
+ "floors": {
+  "paper": 1.2,
+  "shell": 4.0,
+  "objects": 2.0
+ },
+ "surfaces": {
+  "paper/graph_01.webp": {
+   "family": "paper",
+   "patch_std": 9.79,
+   "floor": 1.2
+  },
+  "paper/graph_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.28,
+   "floor": 1.2
+  },
+  "paper/graph_02.webp": {
+   "family": "paper",
+   "patch_std": 9.361,
+   "floor": 1.2
+  },
+  "paper/graph_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.415,
+   "floor": 1.2
+  },
+  "paper/graph_03.webp": {
+   "family": "paper",
+   "patch_std": 9.765,
+   "floor": 1.2
+  },
+  "paper/graph_03_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.636,
+   "floor": 1.2
+  },
+  "paper/graph_04.webp": {
+   "family": "paper",
+   "patch_std": 9.638,
+   "floor": 1.2
+  },
+  "paper/graph_04_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.804,
+   "floor": 1.2
+  },
+  "paper/index_01.webp": {
+   "family": "paper",
+   "patch_std": 11.557,
+   "floor": 1.2
+  },
+  "paper/index_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.676,
+   "floor": 1.2
+  },
+  "paper/index_02.webp": {
+   "family": "paper",
+   "patch_std": 11.385,
+   "floor": 1.2
+  },
+  "paper/index_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.681,
+   "floor": 1.2
+  },
+  "paper/legal_01.webp": {
+   "family": "paper",
+   "patch_std": 11.486,
+   "floor": 1.2
+  },
+  "paper/legal_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.026,
+   "floor": 1.2
+  },
+  "paper/legal_02.webp": {
+   "family": "paper",
+   "patch_std": 11.238,
+   "floor": 1.2
+  },
+  "paper/legal_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.944,
+   "floor": 1.2
+  },
+  "paper/lined_01.webp": {
+   "family": "paper",
+   "patch_std": 10.158,
+   "floor": 1.2
+  },
+  "paper/lined_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 8.992,
+   "floor": 1.2
+  },
+  "paper/lined_02.webp": {
+   "family": "paper",
+   "patch_std": 10.177,
+   "floor": 1.2
+  },
+  "paper/lined_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.383,
+   "floor": 1.2
+  },
+  "paper/lined_03.webp": {
+   "family": "paper",
+   "patch_std": 10.198,
+   "floor": 1.2
+  },
+  "paper/lined_03_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.21,
+   "floor": 1.2
+  },
+  "paper/lined_04.webp": {
+   "family": "paper",
+   "patch_std": 10.122,
+   "floor": 1.2
+  },
+  "paper/lined_04_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.011,
+   "floor": 1.2
+  },
+  "paper/looseleaf_01.webp": {
+   "family": "paper",
+   "patch_std": 7.661,
+   "floor": 1.2
+  },
+  "paper/looseleaf_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 7.896,
+   "floor": 1.2
+  },
+  "paper/looseleaf_02.webp": {
+   "family": "paper",
+   "patch_std": 6.789,
+   "floor": 1.2
+  },
+  "paper/looseleaf_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 7.593,
+   "floor": 1.2
+  },
+  "paper/looseleaf_03.webp": {
+   "family": "paper",
+   "patch_std": 7.84,
+   "floor": 1.2
+  },
+  "paper/looseleaf_03_dusk.webp": {
+   "family": "paper",
+   "patch_std": 8.368,
+   "floor": 1.2
+  },
+  "paper/looseleaf_04.webp": {
+   "family": "paper",
+   "patch_std": 7.381,
+   "floor": 1.2
+  },
+  "paper/looseleaf_04_dusk.webp": {
+   "family": "paper",
+   "patch_std": 7.638,
+   "floor": 1.2
+  },
+  "paper/receipt_01.webp": {
+   "family": "paper",
+   "patch_std": 11.323,
+   "floor": 1.2
+  },
+  "paper/receipt_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.244,
+   "floor": 1.2
+  },
+  "paper/spiral_01.webp": {
+   "family": "paper",
+   "patch_std": 10.009,
+   "floor": 1.2
+  },
+  "paper/spiral_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.128,
+   "floor": 1.2
+  },
+  "paper/spiral_02.webp": {
+   "family": "paper",
+   "patch_std": 10.153,
+   "floor": 1.2
+  },
+  "paper/spiral_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.459,
+   "floor": 1.2
+  },
+  "paper/spiral_03.webp": {
+   "family": "paper",
+   "patch_std": 10.267,
+   "floor": 1.2
+  },
+  "paper/spiral_03_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.549,
+   "floor": 1.2
+  },
+  "paper/spiral_04.webp": {
+   "family": "paper",
+   "patch_std": 9.997,
+   "floor": 1.2
+  },
+  "paper/spiral_04_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.135,
+   "floor": 1.2
+  },
+  "paper/sticky_blue_01.webp": {
+   "family": "paper",
+   "patch_std": 2.59,
+   "floor": 1.2
+  },
+  "paper/sticky_blue_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.976,
+   "floor": 1.2
+  },
+  "paper/sticky_blue_02.webp": {
+   "family": "paper",
+   "patch_std": 2.641,
+   "floor": 1.2
+  },
+  "paper/sticky_blue_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.67,
+   "floor": 1.2
+  },
+  "paper/sticky_pink_01.webp": {
+   "family": "paper",
+   "patch_std": 2.839,
+   "floor": 1.2
+  },
+  "paper/sticky_pink_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.766,
+   "floor": 1.2
+  },
+  "paper/sticky_pink_02.webp": {
+   "family": "paper",
+   "patch_std": 2.734,
+   "floor": 1.2
+  },
+  "paper/sticky_pink_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.998,
+   "floor": 1.2
+  },
+  "paper/sticky_yellow_01.webp": {
+   "family": "paper",
+   "patch_std": 2.804,
+   "floor": 1.2
+  },
+  "paper/sticky_yellow_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.881,
+   "floor": 1.2
+  },
+  "paper/sticky_yellow_02.webp": {
+   "family": "paper",
+   "patch_std": 2.288,
+   "floor": 1.2
+  },
+  "paper/sticky_yellow_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 4.022,
+   "floor": 1.2
+  },
+  "shell/desk.webp": {
+   "family": "shell",
+   "patch_std": 12.624,
+   "floor": 4.0
+  },
+  "shell/desk_dusk.webp": {
+   "family": "shell",
+   "patch_std": 16.18,
+   "floor": 4.0
+  },
+  "objects/obj_blanket_fold.webp": {
+   "family": "objects",
+   "patch_std": 20.567,
+   "floor": 2.0
+  },
+  "objects/obj_boat.webp": {
+   "family": "objects",
+   "patch_std": 32.889,
+   "floor": 2.0
+  },
+  "objects/obj_candle.webp": {
+   "family": "objects",
+   "patch_std": 31.729,
+   "floor": 2.0
+  },
+  "objects/obj_clover.webp": {
+   "family": "objects",
+   "patch_std": 16.749,
+   "floor": 2.0
+  },
+  "objects/obj_coffee_ring.webp": {
+   "family": "objects",
+   "patch_std": 37.149,
+   "floor": 2.0
+  },
+  "objects/obj_confetti.webp": {
+   "family": "objects",
+   "patch_std": 29.808,
+   "floor": 2.0
+  },
+  "objects/obj_crane.webp": {
+   "family": "objects",
+   "patch_std": 30.292,
+   "floor": 2.0
+  },
+  "objects/obj_crown.webp": {
+   "family": "objects",
+   "patch_std": 24.89,
+   "floor": 2.0
+  },
+  "objects/obj_crumple_ball.webp": {
+   "family": "objects",
+   "patch_std": 34.45,
+   "floor": 2.0
+  },
+  "objects/obj_fortune_teller.webp": {
+   "family": "objects",
+   "patch_std": 32.031,
+   "floor": 2.0
+  },
+  "objects/obj_gold_star.webp": {
+   "family": "objects",
+   "patch_std": 28.591,
+   "floor": 2.0
+  },
+  "objects/obj_heart_fold.webp": {
+   "family": "objects",
+   "patch_std": 14.045,
+   "floor": 2.0
+  },
+  "objects/obj_knot.webp": {
+   "family": "objects",
+   "patch_std": 26.456,
+   "floor": 2.0
+  },
+  "objects/obj_mug.webp": {
+   "family": "objects",
+   "patch_std": 37.503,
+   "floor": 2.0
+  },
+  "objects/obj_pinch.webp": {
+   "family": "objects",
+   "patch_std": 26.403,
+   "floor": 2.0
+  },
+  "objects/obj_plane.webp": {
+   "family": "objects",
+   "patch_std": 44.495,
+   "floor": 2.0
+  },
+  "objects/obj_plaster.webp": {
+   "family": "objects",
+   "patch_std": 22.611,
+   "floor": 2.0
+  },
+  "objects/obj_ribbon.webp": {
+   "family": "objects",
+   "patch_std": 35.193,
+   "floor": 2.0
+  },
+  "objects/obj_rubber_band.webp": {
+   "family": "objects",
+   "patch_std": 29.76,
+   "floor": 2.0
+  },
+  "objects/obj_snapped_pencil.webp": {
+   "family": "objects",
+   "patch_std": 33.685,
+   "floor": 2.0
+  },
+  "objects/obj_stone.webp": {
+   "family": "objects",
+   "patch_std": 19.221,
+   "floor": 2.0
+  },
+  "objects/obj_ticket.webp": {
+   "family": "objects",
+   "patch_std": 11.17,
+   "floor": 2.0
+  },
+  "objects/obj_torn_corner.webp": {
+   "family": "objects",
+   "patch_std": 5.161,
+   "floor": 2.0
+  }
+ },
+ "flat": [],
+ "read": 79,
+ "ok": true
+}
