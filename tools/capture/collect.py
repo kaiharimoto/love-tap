@@ -48,6 +48,12 @@ MIN_SECONDS = {
 }
 
 
+def _stamp_of(path):
+    import datetime as dt
+    return dt.datetime.fromtimestamp(path.stat().st_mtime, dt.timezone.utc).strftime(
+        "%Y-%m-%dT%H:%M:%SZ")
+
+
 def png_size(path):
     from PIL import Image
     with Image.open(path) as im:
@@ -116,13 +122,41 @@ def main():
     manifest = {"captured_at": args.stamp, "browser": args.browser, "artifacts": {}, "missing": {}}
     diff = {"captured_at": args.stamp, "note": "ssim against the previous session; label assigned by the coherence critic", "artifacts": {}}
 
+    stamp_s = None
+    try:
+        import datetime as _dt
+        stamp_s = _dt.datetime.strptime(args.stamp, "%Y-%m-%dT%H:%M:%SZ").replace(
+            tzinfo=_dt.timezone.utc).timestamp()
+    except Exception:
+        pass
+
     for name in STILLS + CLIPS:
         path = EVIDENCE / name
         key = name.rsplit(".", 1)[0]
-        if not path.exists():
-            manifest["missing"][name] = reasons.get(name) or reasons.get(key) or "not captured this session"
+        why = reasons.get(name) or reasons.get(key)
+        # A scene that failed is a missing artifact, whatever is on disk. This is the whole reason
+        # the file exists: 13_messenger_states failed four runs in a row and the manifest listed it
+        # as captured every time, because a copy of it from five hours earlier was still sitting
+        # there. That is not evidence of anything this session did — it is exactly the substitution
+        # the brief forbids, made by accident.
+        if why:
+            manifest["missing"][name] = why
+            if path.exists():
+                manifest["missing"][name] += (
+                    f" (a copy from an earlier run is still on disk, written "
+                    f"{_stamp_of(path)}; it is not this session's and is not counted)")
             continue
-        entry = {"bytes": path.stat().st_size}
+        if not path.exists():
+            manifest["missing"][name] = reasons.get("__default__") or "not captured this session"
+            continue
+        entry = {"bytes": path.stat().st_size, "written": _stamp_of(path)}
+        # and one that nothing reported on, but which predates this run, is stale rather than fresh
+        if stamp_s is not None and path.stat().st_mtime < stamp_s - 5:
+            entry["from_this_run"] = False
+            manifest.setdefault("stale", {})[name] = (
+                f"on disk from {_stamp_of(path)}, before this capture began at {args.stamp}")
+        else:
+            entry["from_this_run"] = True
         if name.endswith(".png"):
             entry["size"] = png_size(path)
         else:

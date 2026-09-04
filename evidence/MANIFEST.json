@@ -1,9 +1,11 @@
 {
- "captured_at": "2026-09-04T22:53:03Z",
+ "captured_at": "2026-09-04T20:20:00Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
    "bytes": 3124936,
+   "written": "2026-09-04T20:22:17Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -16,6 +18,8 @@
   },
   "02_chat.png": {
    "bytes": 3416835,
+   "written": "2026-09-04T20:22:46Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -28,6 +32,8 @@
   },
   "03_us.png": {
    "bytes": 2967475,
+   "written": "2026-09-04T20:23:10Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -40,6 +46,8 @@
   },
   "04_moments.png": {
    "bytes": 2660697,
+   "written": "2026-09-04T20:23:41Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -52,6 +60,8 @@
   },
   "05_settings.png": {
    "bytes": 2185885,
+   "written": "2026-09-04T20:24:07Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -64,6 +74,8 @@
   },
   "10_first_run.png": {
    "bytes": 2650558,
+   "written": "2026-09-04T20:25:59Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -76,18 +88,8 @@
   },
   "12_search.png": {
    "bytes": 3684434,
-   "size": [
-    1440,
-    3120
-   ],
-   "meets_minimum": true,
-   "minimum": [
-    1440,
-    3120
-   ]
-  },
-  "13_messenger_states.png": {
-   "bytes": 2285665,
+   "written": "2026-09-04T20:24:38Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -100,6 +102,8 @@
   },
   "14_media_viewer.png": {
    "bytes": 2178559,
+   "written": "2026-09-04T20:25:50Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -112,6 +116,8 @@
   },
   "17_setup_pwa.png": {
    "bytes": 1059474,
+   "written": "2026-09-04T20:26:06Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -124,6 +130,8 @@
   },
   "06_unfolding.mp4": {
    "bytes": 2616470,
+   "written": "2026-09-04T20:53:00Z",
+   "from_this_run": true,
    "size": [
     1080,
     2340
@@ -141,6 +149,8 @@
   },
   "07_feeling_landing.mp4": {
    "bytes": 5773509,
+   "written": "2026-09-04T22:46:24Z",
+   "from_this_run": true,
    "size": [
     1080,
     2340
@@ -158,6 +168,8 @@
   },
   "08_state_propagating.mp4": {
    "bytes": 4671982,
+   "written": "2026-09-04T23:01:44Z",
+   "from_this_run": true,
    "size": [
     1080,
     2340
@@ -175,6 +187,8 @@
   },
   "11_chat_scroll.mp4": {
    "bytes": 6162308,
+   "written": "2026-09-04T22:47:59Z",
+   "from_this_run": true,
    "size": [
     1080,
     2340
@@ -192,6 +206,8 @@
   },
   "15_authored_feeling.mp4": {
    "bytes": 4689770,
+   "written": "2026-09-04T22:49:24Z",
+   "from_this_run": true,
    "size": [
     1080,
     2340
@@ -209,7 +225,8 @@
   }
  },
  "missing": {
-  "09_two_devices.png": "not captured this session",
-  "16_setup_android.png": "not captured this session"
+  "09_two_devices.png": "no Android device was up in this session: with no /dev/kvm the x86_64 image runs under QEMU instruction emulation, reaches adbd after 113 minutes and never brings the framework up. No GTK either, so no desktop build can stand in for a second screen. docs/PHONES.md records all three attempts. Not faked from the PWA",
+  "13_messenger_states.png": "__deskStage() threw; the handle now reports what it threw, so the next run will name it rather than reporting the Dart-to-JS bridge",
+  "16_setup_android.png": "no Android device was up in this session, for the same measured reason: see docs/PHONES.md"
  }
 }
