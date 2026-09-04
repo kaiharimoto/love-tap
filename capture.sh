@@ -230,15 +230,23 @@ if wants 08_state_propagating && [ -f evidence/scenes/08_state_propagating.json 
   if [ -f toolchain/ts/a/address ] && [ -f toolchain/ts/b/address ]; then
     FAR_TRANSPORT="tailscale"; FAR_ADDR="$(cat toolchain/ts/a/address)"; FAR_PROXY="127.0.0.1:1155"
   fi
+  # The far phone serves the page the near one loads, which is how the two of them actually work:
+  # the host serves the conversation and the page that reads it, from one origin. It is also the
+  # only arrangement a browser will accept — a page served off the loopback file server is a
+  # different origin from the host, and nothing in this transport sends an
+  # Access-Control-Allow-Origin header, because on the phones there is nothing to allow.
   ( cd app && dart run tool/host_daemon.dart --out "../$PAIR" \
-      --transport "$FAR_TRANSPORT" --address "$FAR_ADDR" --proxy "$FAR_PROXY" --seconds 180 \
+      --transport "$FAR_TRANSPORT" --address "$FAR_ADDR" --proxy "$FAR_PROXY" \
+      --pwa "$SCRATCH/web_fresh" --seconds 900 \
     ) >"$SCRATCH/host_daemon.log" 2>&1 &
   DAEMON_PID=$!
   for _ in $(seq 1 60); do [ -f "$PAIR" ] && break; sleep 0.5; done
   if [ -f "$PAIR" ]; then
-    echo "· 08_state_propagating (the far phone is headless, over $FAR_TRANSPORT)"
+    FAR_BASE="$(python3 -c "import json;print(json.load(open('$PAIR'))['base'])")"
+    echo "· 08_state_propagating (the far phone is headless and serving, over $FAR_TRANSPORT)"
     if node tools/capture/scene.js evidence/scenes/08_state_propagating.json \
-          --url "$FRESH_URL" --browser "$BROWSER" --pair "$PAIR" \
+          --url "$FAR_BASE/" --browser "$BROWSER" --pair "$PAIR" \
+          ${FAR_PROXY:+--proxy "http://$FAR_PROXY"} \
           >"$SCRATCH/08.out" 2>"$SCRATCH/08.err"; then
       echo "  ✓ 08_state_propagating"
       make_clip 08_state_propagating 60 8
