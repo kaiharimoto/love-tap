@@ -162,17 +162,29 @@ class PaperPiece extends StatelessWidget {
     final piece = tearId == null ? clipped : MaskedLayer(maskAsset: tearAsset(tearId!), child: clipped);
     return Transform.rotate(
       angle: tilt,
-      child: SizedBox(
-        width: width,
-        child: Stack(
-          children: [
-            // The contact shadow is not drawn here so much as uncovered: it came out of the same
-            // render as the piece, already in the right place, already the right shape. All the
-            // app does is put it back at the size it was framed at — wider than the piece, because
-            // the part of a contact shadow anyone sees is the part the paper is not covering.
-            if (tearId != null) _bakedShadow(context, suffix),
-            piece,
-          ],
+      // The shadow is Positioned.fill, so it is the size of the Stack; the Stack is the size of
+      // the piece, except where something hands the piece tight constraints — a square cell in a
+      // grid — and then the shadow stretches to fill the cell while the piece stays the height of
+      // what is written on it. In Moments that put a black torn rectangle under every voice note:
+      // a contact shadow blown up until its dense middle covered a quarter of the screen.
+      //
+      // Align passes loose constraints down whatever it is given, so the Stack is the size of the
+      // piece again and the shadow is the piece's own.
+      child: Align(
+        alignment: Alignment.topCenter,
+        heightFactor: 1.0,
+        child: SizedBox(
+          width: width,
+          child: Stack(
+            children: [
+              // The contact shadow is not drawn here so much as uncovered: it came out of the same
+              // render as the piece, already in the right place, already the right shape. All the
+              // app does is put it back at the size it was framed at — wider than the piece, because
+              // the part of a contact shadow anyone sees is the part the paper is not covering.
+              if (tearId != null) _bakedShadow(context, suffix),
+              piece,
+            ],
+          ),
         ),
       ),
     );

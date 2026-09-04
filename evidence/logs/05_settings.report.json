@@ -1,7 +1,6 @@
 {
  "region": 4,
  "visible": [
-  "0001M2ZNX8AF4811Y2F7FNAGMG",
   "0001M34C9R04NVG11H0AJ4SFDZ",
   "0001M3AY8G83A3FBSRB1Y7W78Q",
   "0001M3F41R2APQC59QKBMZK4XF",
@@ -11,17 +10,15 @@
   "0001M59VY0YA13H9M86HTA6XNP"
  ],
  "tears": {
-  "0001M2ZNX8AF4811Y2F7FNAGMG": "tear_001",
-  "0001M34C9R04NVG11H0AJ4SFDZ": "tear_020",
-  "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_043",
-  "0001M3F41R2APQC59QKBMZK4XF": "tear_005",
-  "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_026",
-  "0001M4GW48FEW3M67XKAZT5051": "tear_048",
-  "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_010",
-  "0001M59VY0YA13H9M86HTA6XNP": "tear_032"
+  "0001M34C9R04NVG11H0AJ4SFDZ": "tear_031",
+  "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_051",
+  "0001M3F41R2APQC59QKBMZK4XF": "tear_013",
+  "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_035",
+  "0001M4GW48FEW3M67XKAZT5051": "tear_055",
+  "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_018",
+  "0001M59VY0YA13H9M86HTA6XNP": "tear_040"
  },
  "stocks": {
-  "0001M2ZNX8AF4811Y2F7FNAGMG": "lined_02",
   "0001M34C9R04NVG11H0AJ4SFDZ": "looseleaf_03",
   "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
   "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
@@ -31,18 +28,31 @@
   "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
  },
  "scroll": {
-  "first": 8178,
-  "last": 8185,
-  "of": 8186
+  "first": 8243,
+  "last": 8249,
+  "of": 8250
  },
- "now": "2026-09-03T19:40:00.000Z",
+ "now": "2026-08-30T09:14:00.000Z",
  "driven_ms": 48,
  "seed": 20260903,
- "events": 13724,
+ "events": 13814,
  "transport": "local",
  "link": "connecting",
  "me": "teo",
  "masks_in_pool": 56,
  "writable_masks": 47,
+ "light": "day",
+ "has_dusk_paper": false,
+ "paper_stocks": 27,
+ "setup_showing": false,
+ "fold": {
+  "sequence": "unfold_thirds",
+  "length": 150,
+  "decoded": 14,
+  "decoding": 10,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 13
+ },
  "at": "05_settings.png"
 }
