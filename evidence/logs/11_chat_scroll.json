@@ -6,50 +6,42 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8799/",
+ "url": "http://127.0.0.1:8912/",
  "steps": [
   {
    "do": "goTo",
-   "ms": 3178
+   "ms": 3736
   },
   {
    "do": "wait",
-   "ms": 2003
+   "ms": 2005
   },
   {
    "do": "scrollTo",
-   "ms": 1613
+   "ms": 3951
   },
   {
    "do": "wait",
-   "ms": 1303
+   "ms": 1102
   },
   {
    "do": "frames",
-   "ms": 228881
+   "ms": 467979
   }
  ],
  "shots": [
   {
-   "frames": 300,
+   "frames": 330,
    "dir": "evidence/frames/11_chat_scroll",
    "ms": 16,
    "drive": {
-    "kind": "drag",
-    "from": [
-     180,
-     660
-    ],
-    "to": [
-     180,
-     90
-    ],
-    "release": 0.72
+    "kind": "scrollBy",
+    "per": -11
    }
   }
  ],
  "reports": [],
- "cold_ms": 14332,
+ "cold_ms": 13309,
  "problems": [],
  "ok": true
 }
