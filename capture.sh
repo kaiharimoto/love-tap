@@ -101,20 +101,29 @@ if [ "$BUILD" = "yes" ]; then
   fi
 fi
 
+# Sets SERVED to the server's pid. It does not echo it: a background job started inside $(...)
+# keeps the substitution's pipe open for as long as it runs, so reading the pid that way blocks
+# until the server exits, which is to say for ever.
+SERVED=""
 serve() { # dir port
+  SERVED=""
   [ -d "$1" ] || return 1
   if (exec 3<>"/dev/tcp/127.0.0.1/$2") 2>/dev/null; then
     echo "capture.sh: something is already serving on port $2; stop it first" >&2
     return 1
   fi
-  (cd "$1" && python3 -m http.server "$2" --bind 127.0.0.1 >/dev/null 2>&1) &
-  echo $!
+  ( cd "$1" && exec python3 -m http.server "$2" --bind 127.0.0.1 ) >/dev/null 2>&1 &
+  SERVED=$!
+  return 0
 }
-stop() { kill "$1" 2>/dev/null; wait "$1" 2>/dev/null; }
+stop() { [ -n "$1" ] && kill "$1" 2>/dev/null; wait "$1" 2>/dev/null; return 0; }
 
-SEEDED_PID="$(serve "$SCRATCH/web_seeded" "$SEEDED_PORT")" || { echo "no seeded build"; exit 1; }
-FRESH_PID="$(serve "$SCRATCH/web_fresh" "$FRESH_PORT")" || { echo "no fresh build"; exit 1; }
-DUSK_PID="$(serve "$SCRATCH/web_dusk" "$DUSK_PORT")" || DUSK_PID=""
+serve "$SCRATCH/web_seeded" "$SEEDED_PORT" || { echo "no seeded build to serve"; exit 1; }
+SEEDED_PID="$SERVED"
+serve "$SCRATCH/web_fresh" "$FRESH_PORT" || { echo "no fresh build to serve"; exit 1; }
+FRESH_PID="$SERVED"
+serve "$SCRATCH/web_dusk" "$DUSK_PORT" || true
+DUSK_PID="$SERVED"
 trap 'stop "$SEEDED_PID"; stop "$FRESH_PID"; [ -n "$DUSK_PID" ] && stop "$DUSK_PID"' EXIT
 sleep 2
 

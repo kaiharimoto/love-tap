@@ -95,6 +95,11 @@ def phone_camera(scene, look_at=(0, 0, 0), height=0.42, distance=0.30, lean_deg=
                     look_at[2] + height)
     common._aim(cam, (look_at[0] - cam.location[0], look_at[1] - cam.location[1],
                       look_at[2] - cam.location[2]))
+    # A phone held thirty centimetres from a loaf does not hold the whole table in focus, and a
+    # picture where everything is equally sharp is the other loud way a render says it is one.
+    data.dof.use_dof = True
+    data.dof.focus_distance = math.dist(cam.location, look_at)
+    data.dof.aperture_fstop = 2.2
     return cam
 
 
@@ -118,6 +123,8 @@ BUILDERS = {
 
 def build(recipe):
     scene = common.reset_scene()
+    if recipe.get("room", True):
+        kit.room(dark=tuple(recipe.get("room_colour", [0.10, 0.09, 0.085])))
     if recipe.get("surface"):
         kit.surface(recipe["surface"], size=recipe.get("surface_size", 1.2),
                     seed=recipe.get("seed", 1))
@@ -156,6 +163,7 @@ def render(recipe, res, samples, out_dir):
     manifest.record(path, "blender/photos/still.py", {
         "recipe": recipe["id"], "light": recipe.get("light"), "surface": recipe.get("surface"),
         "objects": [o["kind"] for o in recipe.get("objects", [])],
+        "depth_of_field": "f/2.2 at the subject, as a phone would",
         "camera": recipe.get("camera"), "res": [w, h], "samples": samples,
         "rig": "blender/rig/common.py",
     }, kind="photo")

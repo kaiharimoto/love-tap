@@ -120,6 +120,24 @@ SURFACES = {
 }
 
 
+def room(dark=(0.10, 0.09, 0.085), size=4.0):
+    """What is behind the thing being photographed.
+
+    The first version of this had a table floating in a void, which is the single loudest way a
+    render says it is a render. A kitchen at night has walls, and they are out of focus and nearly
+    black, but they are there and they bounce a little light back.
+    """
+    bm = bmesh.new()
+    bmesh.ops.create_cube(bm, size=size)
+    obj = link(bm, "room", matte("room", dark, 0.92), smooth=False)
+    obj.location = (0, 0, size / 2 - 0.02)
+    # seen from inside
+    for p in obj.data.polygons:
+        p.flip()
+    obj.data.update()
+    return obj
+
+
 def surface(kind="desk", size=1.2, z=0.0, wear=0.0006, seed=1):
     rgb, rough = SURFACES.get(kind, SURFACES["desk"])
     bm = bmesh.new()
@@ -175,17 +193,14 @@ def mug(at=(0, 0), r=0.041, h=0.095, colour=(0.86, 0.84, 0.79), rot=0.0, full=0.
     solid = body.modifiers.new("wall", "SOLIDIFY")
     solid.thickness = 0.004
     handle_bm = bmesh.new()
-    bmesh.ops.create_cone(handle_bm, cap_ends=True, cap_tris=False, segments=20,
-                          radius1=0.005, radius2=0.005, depth=0.001)
+    bmesh.ops.create_circle(handle_bm, cap_ends=False, segments=28, radius=r * 0.62)
+    bmesh.ops.spin(handle_bm, geom=list(handle_bm.verts) + list(handle_bm.edges),
+                   axis=(0, 0, 1), cent=(r * 0.62, 0, 0), angle=math.radians(360), steps=20,
+                   use_merge=True)
     handle = link(handle_bm, "handle", glazed("mug", colour))
-    handle.location = (at[0] + r * 1.05, at[1], h * 0.55)
-    screw = handle.modifiers.new("ring", "SCREW")
-    screw.angle = math.radians(210)
-    screw.axis = "Y"
-    screw.steps = 28
-    screw.render_steps = 28
-    screw.screw_offset = 0.0
-    handle.scale = (1, 1, 1)
+    handle.rotation_euler = (math.radians(90), 0, 0)
+    handle.location = (at[0] + r * 1.02, at[1], h * 0.56)
+    handle.scale = (1.0, 1.0, 0.42)
     made = [body, handle]
     if full > 0:
         bm2 = bmesh.new()
@@ -210,16 +225,65 @@ def pan(at=(0, 0), r=0.11, h=0.085, soup=(0.86, 0.72, 0.44), level=0.72):
     return [body, top]
 
 
+def crust_material(seed=7):
+    """A crust is not a colour. It is blistered, floured in patches, and darker where it caught."""
+    mat = bpy.data.materials.new("crust")
+    mat.use_nodes = True
+    nt = mat.node_tree
+    b = nt.nodes.get("Principled BSDF")
+    b.inputs["Roughness"].default_value = 0.88
+    tex = nt.nodes.new("ShaderNodeTexNoise")
+    tex.inputs["Scale"].default_value = 26.0
+    tex.inputs["Detail"].default_value = 9.0
+    tex.inputs["Roughness"].default_value = 0.72
+    ramp = nt.nodes.new("ShaderNodeValToRGB")
+    nt.links.new(tex.outputs["Fac"], ramp.inputs["Fac"])
+    ramp.color_ramp.elements[0].position = 0.30
+    ramp.color_ramp.elements[0].color = (0.16, 0.085, 0.040, 1.0)   # where it caught
+    ramp.color_ramp.elements[1].position = 0.72
+    ramp.color_ramp.elements[1].color = (0.52, 0.36, 0.20, 1.0)     # floured
+    mid = ramp.color_ramp.elements.new(0.52)
+    mid.color = (0.30, 0.18, 0.088, 1.0)
+    nt.links.new(ramp.outputs["Color"], b.inputs["Base Color"])
+    # the blisters, as real relief rather than a painted highlight
+    bump = nt.nodes.new("ShaderNodeBump")
+    bump.inputs["Strength"].default_value = 0.55
+    fine = nt.nodes.new("ShaderNodeTexNoise")
+    fine.inputs["Scale"].default_value = 180.0
+    fine.inputs["Detail"].default_value = 6.0
+    nt.links.new(fine.outputs["Fac"], bump.inputs["Height"])
+    nt.links.new(bump.outputs["Normal"], b.inputs["Normal"])
+    return mat
+
+
 def loaf(at=(0, 0), length=0.24, width=0.12, height=0.085, rot=12.0, cut=0.35, seed=7):
     bm = bmesh.new()
-    bmesh.ops.create_uvsphere(bm, u_segments=48, v_segments=28, radius=0.5)
-    obj = link(bm, "loaf", matte("crust", (0.32, 0.20, 0.11), 0.86))
+    bmesh.ops.create_uvsphere(bm, u_segments=96, v_segments=56, radius=0.5)
+    obj = link(bm, "loaf", crust_material(seed))
     obj.scale = (length * (1 - cut * 0.5), width, height)
     obj.location = (at[0], at[1], height * 0.48)
     obj.rotation_euler = (0, 0, math.radians(rot))
     bpy.context.view_layer.objects.active = obj
     bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
-    rough_up(obj, 0.0035, seed, scale=55.0)
+    # A loaf slumps a little and sits flat where it touched the tray. Clamping coordinates
+    # outright collapses the silhouette into a dome, so this eases them instead.
+    half = length * (1 - cut * 0.5) * 0.5
+    for v in obj.data.vertices:
+        t = v.co.z / height + 0.5
+        v.co.x *= 1.0 + 0.08 * (1 - t)
+        v.co.y *= 1.0 + 0.12 * (1 - t)
+        if v.co.z < -height * 0.40:
+            v.co.z = -height * 0.40 - (v.co.z + height * 0.40) * 0.25
+        # the end already eaten: the last tenth is drawn in toward a square cut, not chopped
+        over = (v.co.x - half * 0.80) / (half * 0.20)
+        if over > 0:
+            v.co.x = half * 0.80 + half * 0.20 * (1 - (1 - min(over, 1.0)) ** 2) * 0.55
+    rough_up(obj, 0.0032, seed, scale=42.0)
+    # the slash across the top, opened where it sprang in the oven
+    for v in obj.data.vertices:
+        d = abs(v.co.y - v.co.x * 0.35)
+        if v.co.z > height * 0.10 and d < width * 0.09:
+            v.co.z -= 0.006 * math.cos(d / (width * 0.09) * math.pi / 2)
     return obj
 
 
@@ -381,14 +445,21 @@ def spoon(at=(0, 0), length=0.28, rot=30.0, z=0.0):
 
 
 def knife(at=(0, 0), length=0.21, rot=-24.0):
+    """A bread knife lying on its side: a spine, a bevel down to an edge, a serrated line."""
     made = []
+    l, w = length * 0.62, 0.021
     bm = bmesh.new()
-    bmesh.ops.create_cube(bm, size=1.0)
-    blade = link(bm, "blade", metal("blade", (0.72, 0.73, 0.75), 0.18), smooth=False)
-    blade.scale = (length * 0.62, 0.020, 0.0011)
-    blade.location = (at[0], at[1], 0.0016)
-    blade.rotation_euler = (0, 0, math.radians(rot))
-    made.append(blade)
+    # seen from above it is a long wedge; the bevel is what catches the light along one side
+    pts = [(-l / 2, w * 0.5, 0.0018), (l / 2 - 0.012, w * 0.5, 0.0018), (l / 2, w * 0.1, 0.0012),
+           (l / 2, -w * 0.45, 0.0003), (-l / 2, -w * 0.5, 0.0003)]
+    verts = [bm.verts.new(p) for p in pts]
+    bm.faces.new(verts)
+    top = link(bm, "blade", metal("blade", (0.76, 0.77, 0.79), 0.14), smooth=False)
+    solid = top.modifiers.new("thick", "SOLIDIFY")
+    solid.thickness = 0.0016
+    top.location = (at[0], at[1], 0.0004)
+    top.rotation_euler = (0, 0, math.radians(rot))
+    made.append(top)
     bm = bmesh.new()
     bmesh.ops.create_cube(bm, size=1.0)
     grip = link(bm, "grip", matte("grip", (0.10, 0.09, 0.09), 0.52), smooth=False)
@@ -407,7 +478,12 @@ def crumbs(at=(0, 0), spread=0.09, count=90, seed=9):
         r = float(rng.uniform(0.0004, 0.0018))
         bm = bmesh.new()
         bmesh.ops.create_icosphere(bm, subdivisions=1, radius=r)
-        c = link(bm, "crumb", matte("crumb", (0.55, 0.42, 0.26), 0.88), smooth=False)
-        c.location = (at[0] + float(rng.normal(0, spread)), at[1] + float(rng.normal(0, spread)), r)
+        shade = float(rng.uniform(0.34, 0.62))
+        c = link(bm, "crumb", matte("crumb", (shade, shade * 0.76, shade * 0.50), 0.92), smooth=False)
+        # a crumb is a flake off a crust, not a ball bearing
+        c.scale = (float(rng.uniform(0.8, 2.2)), float(rng.uniform(0.8, 1.8)), float(rng.uniform(0.22, 0.5)))
+        c.rotation_euler = (0, 0, float(rng.uniform(0, 3.14)))
+        c.location = (at[0] + float(rng.normal(0, spread)), at[1] + float(rng.normal(0, spread)),
+                      r * 0.35)
         made.append(c)
     return made

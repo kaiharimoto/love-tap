@@ -9416,6 +9416,40 @@
    "settings": {
     "masks": 56
    }
+  },
+  "seed/photos/2026-08_bread_loaf.jpg": {
+   "bytes": 25935,
+   "generator": "blender/photos/still.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.26,
+     "height": 0.3,
+     "lean_deg": 4,
+     "look_at": [
+      0,
+      0,
+      0.03
+     ],
+     "mm": 26
+    },
+    "depth_of_field": "f/2.2 at the subject, as a phone would",
+    "light": "kitchen_bulb",
+    "objects": [
+     "loaf",
+     "knife",
+     "mug",
+     "crumbs"
+    ],
+    "recipe": "2026-08_bread_loaf",
+    "res": [
+     700,
+     525
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40,
+    "surface": "board"
+   }
   }
  },
  "light": "DIRECTION.md: daylight from upper-left, azimuth 315, elevation 50",
