@@ -35,8 +35,14 @@ from rig import common, manifest  # noqa: E402
 TEARS = os.path.join(common.repo_root(), "assets", "tears")
 PX_PER_MM = 2048 / 120.0
 THICKNESS_M = 0.00011
-FIBRE_BAND_MM = 0.9          # how far the flared fibre band reaches in from the break
-LIFT_MM = 1.6                # how far one corner of the piece lifts off the desk
+FIBRE_BAND_MM = 1.4          # how far the flared fibre band reaches in from the break
+FLARE_MM = 0.42              # how far the broken fibres stand up out of the sheet
+LIFT_MM = 2.4                # how far one corner of the piece lifts off the desk
+CURL_MM = 1.15               # torn paper curls up along its edges; this is how far
+COCKLE_MM = 0.40             # and waves this much across its width
+MESH = 340                   # the outline is quantised to this grid, so it decides the shadow
+SHADOW_FRAME = 1.20          # the shadow pass is framed wider than the piece, because the part of
+                             # a contact shadow you can see is the part outside the paper
 
 
 def load_mask(path, max_side=1024):
@@ -52,24 +58,36 @@ def load_mask(path, max_side=1024):
 
 def sheet_from_mask(mask, meta, name):
     """A thin sheet whose outline follows the mask, with the fibre band raised along the break."""
-    from scipy.ndimage import distance_transform_edt, gaussian_filter
     h, w = mask.shape
     px_mm = w / 120.0
     solid = mask > 0.5
-    d_in = distance_transform_edt(solid) / px_mm          # mm inside the piece
     band = FIBRE_BAND_MM
+    d_in = common.distance_inside(solid, int(band * px_mm) + 2) / px_mm   # mm inside the piece
     # the break flares: the fibre band lifts and thickens toward the edge
     flare = np.clip(1.0 - d_in / band, 0.0, 1.0) ** 1.6
     # torn edges only: a cut edge is flat. Distance to the nearest cut edge is large inside.
-    grain = gaussian_filter(np.random.default_rng(meta.get("seed", 1)).normal(0, 1, mask.shape).astype(np.float32), 1.4)
+    grain = common.blur(np.random.default_rng(meta.get("seed", 1)).normal(0, 1, mask.shape).astype(np.float32), 1.4)
     grain /= (np.abs(grain).max() + 1e-9)
-    z_mm = flare * (0.16 + 0.10 * grain)                   # up to ~0.26 mm of flare
-    # the whole piece lifts a little at one corner so the contact shadow has somewhere to open
+    z_mm = flare * (FLARE_MM * (0.7 + 0.3 * grain))         # the break stands proud of the face
+    # The sheet does not lie dead flat, and that is the whole reason a contact shadow exists: it
+    # rides a little off the desk everywhere, cockles across its width, and lifts at one corner.
+    # The gap is what lets the sky get underneath, which is what makes the shadow soft near the
+    # edges and dark where the paper actually touches.
     yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
-    corner = ((xx / w) * 0.6 + (1.0 - yy / h) * 0.4)
-    z_mm = z_mm + LIFT_MM * (corner ** 3)
+    u = xx / max(1.0, w - 1.0)
+    v = yy / max(1.0, h - 1.0)
+    corner = (u * 0.6 + (1.0 - v) * 0.4)
+    phase = float(meta.get("seed", 1) % 17) * 0.37
+    cockle = COCKLE_MM * 0.5 * (np.sin(2 * np.pi * (u * 1.3) + phase) + np.sin(2 * np.pi * (v * 0.9) + phase * 1.7))
+    # Paper lying on a desk touches it in the middle and curls away at the edges, and that curl
+    # is the whole reason a contact shadow can be seen at all: under the middle the shadow is
+    # hidden by the paper making it, and at the edges the sheet lifts far enough for the shadow to
+    # come out from under and open into a soft gradient on the desk.
+    far = common.distance_inside(solid, int(6.0 * px_mm) + 2) / px_mm
+    curl = CURL_MM * np.exp(-far / 2.2)
+    z_mm = z_mm + curl + cockle * (0.4 + 0.6 * np.clip(far / 4.0, 0, 1)) + LIFT_MM * (corner ** 3)
 
-    nx, ny = 220, 220                                       # mesh resolution over the mask
+    nx, ny = MESH, MESH                                     # mesh resolution over the mask
     bm = bmesh.new()
     verts = {}
     for j in range(ny + 1):
@@ -126,9 +144,11 @@ def render_one(mask_path, meta, out_dir, res, samples, conditions):
             if pass_kind == "shadow":
                 catcher = common.add_shadow_catcher(scene, size_m=max(span_x, span_y) * 2.2)
                 obj.visible_camera = False          # the piece casts but is not seen
-            common.add_top_camera(scene, span_x, span_y, ortho=True, distance=0.6)
+            frame = SHADOW_FRAME if pass_kind == "shadow" else 1.0
+            common.add_top_camera(scene, span_x * frame, span_y * frame, ortho=True, distance=0.6)
             rx = res if span_x >= span_y else int(round(res * span_x / span_y))
             ry = res if span_y > span_x else int(round(res * span_y / span_x))
+            rx, ry = int(round(rx * frame)), int(round(ry * frame))
             common.render_settings(scene, rx, ry, samples=samples, transparent=True, file_format="PNG")
             if condition == "day":
                 common.add_daylight(scene)
@@ -144,6 +164,8 @@ def render_one(mask_path, meta, out_dir, res, samples, conditions):
                 "mask": os.path.relpath(mask_path, common.repo_root()).replace(os.sep, "/"),
                 "pass": pass_kind, "light": condition, "samples": samples, "resolution": [rx, ry],
                 "fibre_band_mm": FIBRE_BAND_MM, "lift_mm": LIFT_MM, "thickness_m": THICKNESS_M,
+                    "curl_mm": CURL_MM, "cockle_mm": COCKLE_MM, "mesh": MESH,
+                "frame": frame,
                 "rig": "blender/rig/common.py",
             }, kind=f"tear_{pass_kind}")
             written.append(path)
@@ -180,6 +202,16 @@ def main():
         t0 = time.time()
         render_one(path, metas.get(mid, {}), a.dir, a.res, a.samples, conditions)
         print(f"{mid} in {time.time() - t0:.0f}s", flush=True)
+
+    # what the app needs to lay the three layers on top of each other correctly
+    with open(os.path.join(a.dir, "relief.json"), "w", encoding="utf-8") as f:
+        json.dump({
+            "shadow_frame": SHADOW_FRAME,
+            "note": "the shadow image is this many times the piece's box, centred on it; "
+                    "the edge image is exactly the piece's box",
+            "curl_mm": CURL_MM, "cockle_mm": COCKLE_MM, "lift_mm": LIFT_MM,
+            "fibre_band_mm": FIBRE_BAND_MM, "flare_mm": FLARE_MM,
+        }, f, indent=1)
 
 
 if __name__ == "__main__":

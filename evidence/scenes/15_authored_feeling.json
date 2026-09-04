@@ -1,0 +1,26 @@
+{
+ "name": "15_authored_feeling",
+ "viewport": {
+  "width": 360,
+  "height": 780,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/15_authored_feeling.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 4
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 260,
+   "ms": 16
+  }
+ ]
+}

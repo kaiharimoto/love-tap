@@ -1,0 +1,30 @@
+{
+ "name": "17_setup_pwa",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/17_setup_pwa.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 4
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "shot",
+   "out": "evidence/17_setup_pwa.png",
+   "settle": 900
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/17_setup_pwa.report.json",
+   "at": "17_setup_pwa.png"
+  }
+ ]
+}

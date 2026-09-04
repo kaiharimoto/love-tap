@@ -1,0 +1,30 @@
+{
+ "name": "04_moments",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/04_moments.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 3
+  },
+  {
+   "do": "wait",
+   "ms": 1600
+  },
+  {
+   "do": "shot",
+   "out": "evidence/04_moments.png",
+   "settle": 900
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/04_moments.report.json",
+   "at": "04_moments.png"
+  }
+ ]
+}

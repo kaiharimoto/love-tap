@@ -7,6 +7,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../capture/bus.dart';
+import '../flags.dart';
 import '../material/hands.dart';
 import '../material/motion.dart';
 import '../material/objects.dart';
@@ -65,7 +67,14 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (Flags.capture) CaptureBus.openCorner = (open) => open ? _openSender() : _close();
+  }
+
+  @override
   void dispose() {
+    if (Flags.capture) CaptureBus.openCorner = null;
     _curl.dispose();
     super.dispose();
   }

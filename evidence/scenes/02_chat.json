@@ -1,0 +1,38 @@
+{
+ "name": "02_chat",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/02_chat.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 1
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "scrollTo",
+   "arg": "0.62"
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "shot",
+   "out": "evidence/02_chat.png",
+   "settle": 1400
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/02_chat.report.json",
+   "at": "02_chat.png"
+  }
+ ]
+}

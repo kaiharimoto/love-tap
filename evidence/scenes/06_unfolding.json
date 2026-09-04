@@ -1,0 +1,37 @@
+{
+ "name": "06_unfolding",
+ "viewport": {
+  "width": 360,
+  "height": 780,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/06_unfolding.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 1
+  },
+  {
+   "do": "wait",
+   "ms": 1500
+  },
+  {
+   "do": "scrollTo",
+   "arg": "end"
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "unfold"
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/06_unfolding",
+   "count": 260,
+   "ms": 16
+  }
+ ]
+}

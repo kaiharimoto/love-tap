@@ -1,5 +1,23 @@
 {
  "files": {
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/foldsmoke/unfold_thirds": {
+   "bytes": 4096,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_sequence",
+   "settings": {
+    "crease_mm": 1.4,
+    "frames": 240,
+    "light": "day",
+    "resolution": 540,
+    "rig": "blender/rig/common.py",
+    "samples": 16,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
   "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/foldtest/unfold_thirds": {
    "bytes": 4096,
    "generator": "blender/folds/fold.py",
@@ -473,7 +491,7 @@
    }
   },
   "assets/fonts/NoorHand.ttf": {
-   "bytes": 311744,
+   "bytes": 311836,
    "generator": "tools/handwriting/build.py",
    "kind": "font",
    "settings": {
@@ -651,6 +669,57 @@
     "width": 2200
    }
   },
+  "assets/objects/obj_blanket_fold.png": {
+   "bytes": 423808,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_blanket_fold",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_blanket_fold_shadow.png": {
+   "bytes": 181683,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_blanket_fold",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_blanket_fold_shadow_dusk.png": {
+   "bytes": 108677,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_blanket_fold",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
   "assets/objects/obj_boat.png": {
    "bytes": 362679,
    "generator": "blender/objects/objects.py",
@@ -762,6 +831,91 @@
     "light": "day",
     "object": "obj_crown",
     "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_crown_shadow.png": {
+   "bytes": 167719,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_crown",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_crown_shadow_dusk.png": {
+   "bytes": 186980,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_crown",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_crumple_ball.png": {
+   "bytes": 391889,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_crumple_ball",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_crumple_ball_shadow.png": {
+   "bytes": 105377,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_crumple_ball",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_crumple_ball_shadow_dusk.png": {
+   "bytes": 93843,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_crumple_ball",
+    "pass": "shadow",
     "resolution": [
      1200,
      1200
@@ -914,6 +1068,91 @@
     "frame_mm": 60,
     "light": "dusk",
     "object": "obj_plane",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_ticket.png": {
+   "bytes": 322328,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_ticket",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_ticket_shadow.png": {
+   "bytes": 124702,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_ticket",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_torn_corner.png": {
+   "bytes": 368050,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_torn_corner",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_torn_corner_shadow.png": {
+   "bytes": 168092,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_torn_corner",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40
+   }
+  },
+  "assets/objects/obj_torn_corner_shadow_dusk.png": {
+   "bytes": 96726,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_torn_corner",
     "pass": "shadow",
     "resolution": [
      1200,
@@ -1224,6 +1463,404 @@
     ],
     "stock": "graph",
     "variant": 4,
+    "yellowing": 0.3
+   }
+  },
+  "assets/paper/index_01.webp": {
+   "bytes": 70618,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1300.0,
+     "rgb": [
+      0.95,
+      0.93,
+      0.88
+     ],
+     "sheen": 0.28,
+     "tooth": 0.8
+    },
+    "px_per_mm": 10.78,
+    "resolution": [
+     2200,
+     1369
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.9,
+       "end": 72.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.15,
+       "ghost_offset": 0.138,
+       "kind": "hrules",
+       "pitch": 6.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.0043,
+        "dy": 0.0576,
+        "rot_deg": -0.0999
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 19.829,
+       "width": 0.28,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.1,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "end": 13.929,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.6,
+       "ghost_offset": 0.171,
+       "kind": "hrules",
+       "pitch": 6.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.2037,
+        "dy": -0.1111,
+        "rot_deg": -0.0916
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 13.829,
+       "width": 0.45,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3138999500,
+     "sheet_mm": [
+      127.0,
+      76.0
+     ],
+     "stock": "index",
+     "variant": 1
+    },
+    "samples": 12,
+    "seed": 3138999500,
+    "sheet_mm": [
+     127.0,
+     76.0
+    ],
+    "stock": "index",
+    "variant": 1,
+    "yellowing": 0.06
+   }
+  },
+  "assets/paper/index_02.webp": {
+   "bytes": 69152,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1300.0,
+     "rgb": [
+      0.95,
+      0.93,
+      0.88
+     ],
+     "sheen": 0.28,
+     "tooth": 0.8
+    },
+    "px_per_mm": 10.78,
+    "resolution": [
+     2200,
+     1369
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.9,
+       "end": 72.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.15,
+       "ghost_offset": 0.217,
+       "kind": "hrules",
+       "pitch": 6.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.0031,
+        "dy": 0.0291,
+        "rot_deg": 0.1721
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 19.292,
+       "width": 0.28,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.1,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "end": 13.392,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.6,
+       "ghost_offset": 0.202,
+       "kind": "hrules",
+       "pitch": 6.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.1183,
+        "dy": -0.0649,
+        "rot_deg": 0.0121
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 13.292,
+       "width": 0.45,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 571475318,
+     "sheet_mm": [
+      127.0,
+      76.0
+     ],
+     "stock": "index",
+     "variant": 2
+    },
+    "samples": 12,
+    "seed": 571475318,
+    "sheet_mm": [
+     127.0,
+     76.0
+    ],
+    "stock": "index",
+    "variant": 2,
+    "yellowing": 0.2
+   }
+  },
+  "assets/paper/legal_01.webp": {
+   "bytes": 94808,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 900.0,
+     "rgb": [
+      0.94,
+      0.88,
+      0.62
+     ],
+     "sheen": 0.2,
+     "tooth": 1.0
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.9,
+       "end": 204.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.15,
+       "ghost_offset": 0.253,
+       "kind": "hrules",
+       "pitch": 8.7,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.3962,
+        "dy": 0.1592,
+        "rot_deg": -0.1339
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 27.601,
+       "width": 0.28,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.258,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0,
+        34.2
+       ],
+       "reg": {
+        "dx": -0.4862,
+        "dy": -0.3744,
+        "rot_deg": 0.0685
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.36,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 1342926211,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "legal",
+     "variant": 1
+    },
+    "samples": 12,
+    "seed": 1342926211,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "legal",
+    "variant": 1,
+    "yellowing": 0.1
+   }
+  },
+  "assets/paper/legal_02.webp": {
+   "bytes": 87166,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 900.0,
+     "rgb": [
+      0.94,
+      0.88,
+      0.62
+     ],
+     "sheen": 0.2,
+     "tooth": 1.0
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.9,
+       "end": 204.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.15,
+       "ghost_offset": 0.213,
+       "kind": "hrules",
+       "pitch": 8.7,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.3094,
+        "dy": 0.1068,
+        "rot_deg": -0.1919
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 27.707,
+       "width": 0.28,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.248,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0,
+        34.2
+       ],
+       "reg": {
+        "dx": -0.2668,
+        "dy": -0.4351,
+        "rot_deg": 0.1298
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.36,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3372366905,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "legal",
+     "variant": 2
+    },
+    "samples": 12,
+    "seed": 3372366905,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "legal",
+    "variant": 2,
     "yellowing": 0.3
    }
   },
@@ -1769,6 +2406,152 @@
     "yellowing": 0.22
    }
   },
+  "assets/paper/looseleaf_03.webp": {
+   "bytes": 83628,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1000.0,
+     "rgb": [
+      0.94,
+      0.92,
+      0.87
+     ],
+     "sheen": 0.24,
+     "tooth": 0.95
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.9,
+       "end": 204.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.15,
+       "ghost_offset": 0.253,
+       "kind": "hrules",
+       "pitch": 7.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.3352,
+        "dy": -0.1143,
+        "rot_deg": -0.0132
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 20.815,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 1396264363,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "looseleaf",
+     "variant": 3
+    },
+    "samples": 12,
+    "seed": 1396264363,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "looseleaf",
+    "variant": 3,
+    "yellowing": 0.38
+   }
+  },
+  "assets/paper/looseleaf_04.webp": {
+   "bytes": 84548,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1000.0,
+     "rgb": [
+      0.94,
+      0.92,
+      0.87
+     ],
+     "sheen": 0.24,
+     "tooth": 0.95
+    },
+    "px_per_mm": 10.48,
+    "resolution": [
+     1574,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.9,
+       "end": 204.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.15,
+       "ghost_offset": 0.241,
+       "kind": "hrules",
+       "pitch": 7.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.3258,
+        "dy": -0.3769,
+        "rot_deg": -0.1902
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 22.702,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3445479432,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "looseleaf",
+     "variant": 4
+    },
+    "samples": 12,
+    "seed": 3445479432,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "looseleaf",
+    "variant": 4,
+    "yellowing": 0.5
+   }
+  },
   "assets/paper/spiral_01.webp": {
    "bytes": 97344,
    "generator": "blender/paper/stocks.py",
@@ -2163,6 +2946,114 @@
     "stock": "spiral",
     "variant": 4,
     "yellowing": 0.58
+   }
+  },
+  "assets/paper/sticky_yellow_01.webp": {
+   "bytes": 67420,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1200.0,
+     "rgb": [
+      0.94,
+      0.86,
+      0.52
+     ],
+     "sheen": 0.26,
+     "tooth": 0.75
+    },
+    "px_per_mm": 28.95,
+    "resolution": [
+     2200,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "band_mm": 13.39,
+       "colour": "#000000",
+       "density": 0.028,
+       "edge_mm": 1.6,
+       "kind": "adhesive_band"
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 978801883,
+     "sheet_mm": [
+      76.0,
+      76.0
+     ],
+     "stock": "sticky_yellow",
+     "variant": 1
+    },
+    "samples": 12,
+    "seed": 978801883,
+    "sheet_mm": [
+     76.0,
+     76.0
+    ],
+    "stock": "sticky_yellow",
+    "variant": 1,
+    "yellowing": 0.04
+   }
+  },
+  "assets/paper/sticky_yellow_02.webp": {
+   "bytes": 64820,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1200.0,
+     "rgb": [
+      0.94,
+      0.86,
+      0.52
+     ],
+     "sheen": 0.26,
+     "tooth": 0.75
+    },
+    "px_per_mm": 28.95,
+    "resolution": [
+     2200,
+     2200
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "band_mm": 14.73,
+       "colour": "#000000",
+       "density": 0.028,
+       "edge_mm": 1.6,
+       "kind": "adhesive_band"
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 2740847969,
+     "sheet_mm": [
+      76.0,
+      76.0
+     ],
+     "stock": "sticky_yellow",
+     "variant": 2
+    },
+    "samples": 12,
+    "seed": 2740847969,
+    "sheet_mm": [
+     76.0,
+     76.0
+    ],
+    "stock": "sticky_yellow",
+    "variant": 2,
+    "yellowing": 0.12
    }
   },
   "assets/sound/snd_breathe.ogg": {
@@ -4554,6 +5445,63 @@
     ],
     "w_mm": 114.69,
     "wander_mm": 6.38
+   }
+  },
+  "assets/tears/tear_001_edge.png": {
+   "bytes": 270126,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_edge",
+   "settings": {
+    "fibre_band_mm": 1.4,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "assets/tears/tear_001.png",
+    "pass": "edge",
+    "resolution": [
+     700,
+     700
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 16,
+    "thickness_m": 0.00011
+   }
+  },
+  "assets/tears/tear_001_shadow.png": {
+   "bytes": 157369,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "fibre_band_mm": 1.4,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "assets/tears/tear_001.png",
+    "pass": "shadow",
+    "resolution": [
+     700,
+     700
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 16,
+    "thickness_m": 0.00011
+   }
+  },
+  "assets/tears/tear_001_shadow_dusk.png": {
+   "bytes": 124661,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "fibre_band_mm": 1.4,
+    "lift_mm": 2.4,
+    "light": "dusk",
+    "mask": "assets/tears/tear_001.png",
+    "pass": "shadow",
+    "resolution": [
+     700,
+     700
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 16,
+    "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_002.png": {

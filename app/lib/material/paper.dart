@@ -73,6 +73,7 @@ class PaperPiece extends StatelessWidget {
 
   /// Radians. Paper never lies square to the desk.
   final double tilt;
+
   /// Extra room inside the safe area, in logical pixels.
   final EdgeInsets padding;
 
@@ -91,6 +92,27 @@ class PaperPiece extends StatelessWidget {
   final List<Widget> overlays;
 
   static Widget none(BuildContext c, Object e, StackTrace? s) => const SizedBox.shrink();
+
+  Widget _bakedShadow(BuildContext context, String suffix) {
+    final frame = MaterialLibrary.loaded ? MaterialLibrary.instance.shadowFrame : 1.0;
+    // Scaling about the centre is what puts it back: the render was framed [frame] times the
+    // piece in both directions, and the piece's height is not known until its writing is laid out.
+    return Positioned.fill(
+      child: Transform.scale(
+        scale: frame,
+        child: Opacity(
+          // one lift was modelled; a note that lies flatter presses its shadow harder into the desk
+          opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(1.6)).clamp(0.6, 1.25),
+          child: Image.asset(
+            tearAsset('${tearId!}_shadow$suffix'),
+            fit: BoxFit.fill,
+            gaplessPlayback: true,
+            errorBuilder: none,
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +137,13 @@ class PaperPiece extends StatelessWidget {
         ),
         if (tearId != null)
           Positioned.fill(
-            child: Image.asset(tearAsset('${tearId!}_edge'),
-                fit: BoxFit.fill, gaplessPlayback: true, filterQuality: FilterQuality.medium, errorBuilder: none),
+            child: Image.asset(
+              tearAsset('${tearId!}_edge'),
+              fit: BoxFit.fill,
+              gaplessPlayback: true,
+              filterQuality: FilterQuality.medium,
+              errorBuilder: none,
+            ),
           ),
         _WithinTear(safe: safe, padding: padding, child: child ?? const SizedBox.shrink()),
         ...overlays,
@@ -132,17 +159,11 @@ class PaperPiece extends StatelessWidget {
         width: width,
         child: Stack(
           children: [
-            if (tearId != null)
-              Positioned.fill(
-                child: Transform.translate(
-                  offset: shadowOffsetFor(liftMm),
-                  child: Opacity(
-                    opacity: shadowOpacityFor(liftMm),
-                    child: Image.asset(tearAsset('${tearId!}_shadow$suffix'),
-                        fit: BoxFit.fill, gaplessPlayback: true, errorBuilder: none),
-                  ),
-                ),
-              ),
+            // The contact shadow is not drawn here so much as uncovered: it came out of the same
+            // render as the piece, already in the right place, already the right shape. All the
+            // app does is put it back at the size it was framed at — wider than the piece, because
+            // the part of a contact shadow anyone sees is the part the paper is not covering.
+            if (tearId != null) _bakedShadow(context, suffix),
             piece,
           ],
         ),
@@ -206,8 +227,10 @@ class _RenderWithinTear extends RenderShiftedBox {
     final vertical = (1 - fT - fB).clamp(0.35, 1.0);
     final height = content / vertical;
     size = constraints.constrain(Size(width, height));
-    (child.parentData! as BoxParentData).offset =
-        Offset(width * fL + _padding.left, size.height * fT + _padding.top);
+    (child.parentData! as BoxParentData).offset = Offset(
+      width * fL + _padding.left,
+      size.height * fT + _padding.top,
+    );
   }
 }
 
@@ -247,12 +270,11 @@ class _MaskedLayerState extends State<MaskedLayer> {
       return;
     }
     // a mask that is not baked yet leaves the sheet whole rather than blank
-    unawaited(MaskCache.load(widget.maskAsset).then(
-      (img) {
+    unawaited(
+      MaskCache.load(widget.maskAsset).then((img) {
         if (mounted) setState(() => _mask = img);
-      },
-      onError: (Object _) {},
-    ));
+      }, onError: (Object _) {}),
+    );
   }
 
   @override
@@ -265,8 +287,13 @@ class _MaskedLayerState extends State<MaskedLayer> {
         final m = Matrix4.identity()
           ..translateByDouble(rect.left, rect.top, 0, 1)
           ..scaleByDouble(rect.width / mask.width, rect.height / mask.height, 1, 1);
-        return ImageShader(mask, TileMode.clamp, TileMode.clamp, m.storage,
-            filterQuality: FilterQuality.medium);
+        return ImageShader(
+          mask,
+          TileMode.clamp,
+          TileMode.clamp,
+          m.storage,
+          filterQuality: FilterQuality.medium,
+        );
       },
       child: widget.child,
     );

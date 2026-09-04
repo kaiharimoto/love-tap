@@ -5,8 +5,15 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../capture/bus.dart';
 import '../../feelings/builtins.dart';
+import '../../flags.dart';
 import '../../feelings/registry.dart';
+import '../../material/hands.dart';
+import '../../material/fold.dart';
+import '../../material/marks.dart';
+import '../../material/objects.dart';
+import '../../material/palette.dart';
 import '../../media/capture.dart';
 import '../../media/local_uri.dart';
 import '../../media/read_bytes.dart';
@@ -15,6 +22,7 @@ import '../../spine/projections/thread.dart';
 import '../../voice/strings.dart';
 import 'note.dart';
 import 'search_page.dart';
+import 'viewer_page.dart';
 
 class ChatRegion extends StatefulWidget {
   const ChatRegion({super.key});
@@ -39,12 +47,65 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   bool _recording = false;
   int _lastCount = 0;
   bool _draftLoaded = false;
+  bool _attaching = false;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _text.addListener(_onTextChanged);
+    if (Flags.capture) _offerHandles();
+  }
+
+  /// Capture mode: the same four things a thumb does in Chat, reachable from the harness.
+  void _offerHandles() {
+    CaptureBus.scrollTo = _scrollToAnchor;
+    CaptureBus.openSender = (open) => setState(() => _attaching = open);
+    // an event id, or a type ('photo', 'video') meaning the most recent one of that kind
+    CaptureBus.openViewer = (idOrType) async {
+      final items = AppScope.of(context).thread.items;
+      var it = items.where((i) => i.id == idOrType).firstOrNull;
+      if (it == null) {
+        final ofType = items.where((i) => i.type == idOrType).toList();
+        if (ofType.isEmpty) return;
+        it = ofType[ofType.length ~/ 2];
+        await _scrollToAnchor(it.id);
+      }
+      if (!mounted) return;
+      await ViewerPage.open(context, it);
+    };
+    CaptureBus.search = (q) => _land(q);
+    CaptureBus.unfoldAll = Folds.openAll;
+    CaptureBus.chatReport = () {
+      final ps = _positions.itemPositions.value.toList()..sort((a, b) => a.index.compareTo(b.index));
+      final items = AppScope.of(context).thread.items;
+      return {
+        'visible': [for (final p in ps) if (p.index < items.length) items[p.index].id],
+        'scroll': ps.isEmpty ? null : {'first': ps.first.index, 'last': ps.last.index, 'of': items.length},
+        'composer': _text.text,
+        'attaching': _attaching,
+        'replying_to': _replyTo?.id,
+        'editing': _editing?.id,
+      };
+    };
+  }
+
+  /// Land the thread on an anchor: an event id, a fraction of the way through, or the end.
+  Future<void> _scrollToAnchor(String anchor) async {
+    final items = AppScope.of(context).thread.items;
+    if (items.isEmpty || !_scroll.isAttached) return;
+    int index;
+    if (anchor == 'end') {
+      index = items.length - 1;
+    } else {
+      final fraction = double.tryParse(anchor);
+      index = fraction != null
+          ? (fraction.clamp(0.0, 1.0) * (items.length - 1)).round()
+          : items.indexWhere((it) => it.id == anchor);
+    }
+    if (index < 0) return;
+    _scroll.jumpTo(index: index, alignment: 0.35);
+    await Future<void>.delayed(const Duration(milliseconds: 40));
   }
 
   @override
@@ -166,76 +227,98 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   Future<void> _actions(ThreadItem item, FeelingRegistry registry) async {
     final scope = AppScope.of(context);
     final mine = item.author == scope.me;
-    await showModalBottomSheet<void>(
-      context: context,
-      builder: (ctx) => SafeArea(
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.reply),
-              title: const Text(S.reply),
-              onTap: () {
-                Navigator.pop(ctx);
-                setState(() => _replyTo = item);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.add_reaction_outlined),
-              title: const Text(S.react),
-              onTap: () async {
-                Navigator.pop(ctx);
-                final f = await _pickFeeling(registry);
-                if (f != null) await scope.emit('reaction', {'target': item.id, 'feeling_id': f.id});
-              },
-            ),
-            if (mine && item.type == 'message' && !item.deleted)
-              ListTile(
-                leading: const Icon(Icons.edit_outlined),
-                title: const Text(S.edit),
-                onTap: () {
-                  Navigator.pop(ctx);
-                  setState(() {
-                    _editing = item;
-                    _text.text = item.text ?? '';
-                  });
-                },
-              ),
-            if (mine && !item.deleted)
-              ListTile(
-                leading: const Icon(Icons.undo),
-                title: const Text(S.delete),
-                onTap: () async {
-                  Navigator.pop(ctx);
-                  await scope.emit('message_delete', {'target': item.id});
-                },
-              ),
-          ],
-        ),
-      ),
-    );
+    final choices = <String>[
+      S.reply,
+      S.react,
+      if (mine && item.type == 'message' && !item.deleted) S.edit,
+      if (mine && !item.deleted) S.delete,
+    ];
+    final picked = await _pickWord(context, choices);
+    if (picked == null || !mounted) return;
+    if (picked == S.reply) {
+      setState(() => _replyTo = item);
+    } else if (picked == S.react) {
+      final f = await _pickFeeling(registry);
+      if (f != null && mounted) await AppScope.of(context).emit('reaction', {'target': item.id, 'feeling_id': f.id});
+    } else if (picked == S.edit) {
+      setState(() {
+        _editing = item;
+        _text.text = item.text ?? '';
+      });
+    } else if (picked == S.delete) {
+      await AppScope.of(context).emit('message_delete', {'target': item.id});
+    }
   }
 
+  /// What can be done to a note: the words, written out, on the desk under it.
+  Future<String?> _pickWord(BuildContext context, List<String> words) => showModalBottomSheet<String>(
+        context: context,
+        backgroundColor: Colors.transparent,
+        barrierColor: Shadow.warm.withValues(alpha: 0.18),
+        builder: (ctx) => Container(
+          color: const Color(0xFFF1ECDF),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(padding: EdgeInsets.fromLTRB(22, 12, 0, 0), child: RuleLine(seed: 41)),
+                for (final w in words)
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => Navigator.pop(ctx, w),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 11, 24, 11),
+                      child: Text(w, style: Hands.teo(size: 20)),
+                    ),
+                  ),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+        ),
+      );
+
+  /// The vocabulary, as objects on the desk, grouped by family the way docs/FEELINGS.md groups it.
   Future<Feeling?> _pickFeeling(FeelingRegistry registry) => showModalBottomSheet<Feeling>(
         context: context,
-        builder: (ctx) => SafeArea(
-          child: ListView(
-            children: [
-              for (final fam in Family.values)
-                ExpansionTile(
-                  title: Text(fam.label),
-                  initiallyExpanded: true,
-                  children: [
+        backgroundColor: Colors.transparent,
+        barrierColor: Shadow.warm.withValues(alpha: 0.18),
+        builder: (ctx) => Container(
+          color: const Color(0xFFF1ECDF),
+          child: SafeArea(
+            child: ListView(
+              shrinkWrap: true,
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+              children: [
+                for (final fam in Family.values)
+                  if (registry.family(fam).isNotEmpty) ...[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(4, 10, 0, 6),
+                      child: Stamped(fam.label, size: 10),
+                    ),
                     Wrap(
-                      spacing: 6,
+                      spacing: 14,
+                      runSpacing: 10,
                       children: [
                         for (final f in registry.family(fam))
-                          ActionChip(label: Text(f.name), onPressed: () => Navigator.pop(ctx, f)),
+                          GestureDetector(
+                            onTap: () => Navigator.pop(ctx, f),
+                            child: SizedBox(
+                              width: 62,
+                              child: Column(
+                                children: [
+                                  FeelingObject(feeling: f, size: 42, intensity: 0.7),
+                                  Text(f.name, textAlign: TextAlign.center, style: Hands.margin(size: 11)),
+                                ],
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ],
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       );
@@ -243,6 +326,18 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   Future<void> _search() async {
     final id = await SearchPage.open(context);
     if (id == null || !mounted) return;
+    _goTo(id);
+  }
+
+  /// Run a query without the sheet and stop on the first hit: what the harness does, and what the
+  /// sheet does once a hit is tapped.
+  Future<void> _land(String query) async {
+    final hits = AppScope.of(context).spine.search(query);
+    if (hits.isEmpty || !mounted) return;
+    _goTo(hits.first.event.id);
+  }
+
+  void _goTo(String id) {
     final items = AppScope.of(context).thread.items;
     final i = items.indexWhere((it) => it.id == id);
     if (i < 0) return;
@@ -267,58 +362,89 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     }
     return Column(
       children: [
-        Row(
-          children: [
-            const Spacer(),
-            IconButton(tooltip: S.search, icon: const Icon(Icons.search), onPressed: _search),
-          ],
-        ),
         Expanded(
-          child: items.isEmpty
-              ? const Center(child: Text(S.emptyChat))
-              : ScrollablePositionedList.builder(
-                  itemScrollController: _scroll,
-                  itemPositionsListener: _positions,
-                  itemCount: items.length,
-                  initialScrollIndex: items.length - 1,
-                  initialAlignment: 0.8,
-                  itemBuilder: (context, i) {
-                    final it = items[i];
-                    return Note(
-                      key: ValueKey(it.id),
-                      item: it,
-                      registry: registry,
-                      highlight: it.id == _highlightId,
-                      onLongPress: () => _actions(it, registry),
-                    );
-                  },
+          child: Stack(
+            children: [
+              items.isEmpty
+                  ? Center(child: Text(S.emptyChat, style: Hands.margin(size: 17)))
+                  : ScrollablePositionedList.builder(
+                      itemScrollController: _scroll,
+                      itemPositionsListener: _positions,
+                      itemCount: items.length,
+                      initialScrollIndex: items.length - 1,
+                      initialAlignment: 0.8,
+                      itemBuilder: (context, i) {
+                        final it = items[i];
+                        return Note(
+                          key: ValueKey(it.id),
+                          item: it,
+                          row: i,
+                          registry: registry,
+                          highlight: it.id == _highlightId,
+                          onLongPress: () => _actions(it, registry),
+                        );
+                      },
+                    ),
+              // finding something is a loop drawn round a word, up in the margin
+              Positioned(
+                top: 0,
+                right: 8,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: _search,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 4, 4, 10),
+                    child: Row(mainAxisSize: MainAxisSize.min, children: [
+                      Mark.loop(size: 17, colour: Pen.margin),
+                      const SizedBox(width: 5),
+                      Text(S.search, style: Hands.margin(size: 13)),
+                    ]),
+                  ),
                 ),
+              ),
+            ],
+          ),
         ),
         if (scope.partnerTyping)
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: Align(alignment: Alignment.centerLeft, child: Text('${scope.partner.name} ${S.typing}', style: Theme.of(context).textTheme.bodySmall)),
+            padding: const EdgeInsets.fromLTRB(18, 2, 18, 2),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('${scope.partner.name} ${S.typing}', style: Hands.margin(size: 13)),
+            ),
           ),
         if (_replyTo != null || _editing != null)
-          ListTile(
-            dense: true,
-            leading: Icon(_editing != null ? Icons.edit_outlined : Icons.reply),
-            title: Text(_editing != null ? S.editHint : '${S.replyingTo}: ${_replyTo!.text ?? _replyTo!.type}', maxLines: 1, overflow: TextOverflow.ellipsis),
-            trailing: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () => setState(() {
-                _replyTo = null;
-                if (_editing != null) _text.clear();
-                _editing = null;
-              }),
-            ),
+          _Answering(
+            label: _editing != null ? S.editHint : '${S.replyingTo} ${_replyTo!.text ?? _replyTo!.type}',
+            onDrop: () => setState(() {
+              _replyTo = null;
+              if (_editing != null) _text.clear();
+              _editing = null;
+            }),
+          ),
+        if (_attaching)
+          _AttachStrip(
+            onPick: (what) {
+              setState(() => _attaching = false);
+              switch (what) {
+                case 'photo':
+                  _sendPhoto();
+                case 'camera':
+                  _sendPhoto(camera: true);
+                case 'video':
+                  _sendVideo();
+                case 'film':
+                  _sendVideo(camera: true);
+              }
+            },
           ),
         _Composer(
           controller: _text,
+          hand: Hands.of(scope.me, size: 18),
           recording: _recording,
+          attaching: _attaching,
+          onAttach: () => setState(() => _attaching = !_attaching),
           onSend: _send,
-          onPhoto: _sendPhoto,
-          onVideo: _sendVideo,
           onRecordStart: _startRecording,
           onRecordStop: _stopRecording,
         ),
@@ -334,74 +460,150 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   }
 }
 
+/// The composer: a ruled line to write on, a clip for what else can go in the envelope, three
+/// ticks that swell while a voice note is being made, and the word send.
 class _Composer extends StatelessWidget {
   const _Composer({
     required this.controller,
+    required this.hand,
     required this.recording,
+    required this.attaching,
+    required this.onAttach,
     required this.onSend,
-    required this.onPhoto,
-    required this.onVideo,
     required this.onRecordStart,
     required this.onRecordStop,
   });
   final TextEditingController controller;
+  final TextStyle hand;
   final bool recording;
+  final bool attaching;
+  final VoidCallback onAttach;
   final VoidCallback onSend;
-  final Future<void> Function({bool camera}) onPhoto;
-  final Future<void> Function({bool camera}) onVideo;
   final VoidCallback onRecordStart;
   final VoidCallback onRecordStop;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+      padding: const EdgeInsets.fromLTRB(14, 2, 14, 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          PopupMenuButton<String>(
-            icon: const Icon(Icons.attach_file),
-            onSelected: (v) {
-              switch (v) {
-                case 'photo':
-                  onPhoto();
-                case 'camera':
-                  onPhoto(camera: true);
-                case 'video':
-                  onVideo();
-                case 'video_camera':
-                  onVideo(camera: true);
-              }
-            },
-            itemBuilder: (_) => const [
-              PopupMenuItem(value: 'photo', child: Text('a photo')),
-              PopupMenuItem(value: 'camera', child: Text('take a photo')),
-              PopupMenuItem(value: 'video', child: Text('a video')),
-              PopupMenuItem(value: 'video_camera', child: Text('film something')),
-            ],
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onAttach,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(2, 8, 8, 8),
+              child: Mark.clip(size: 21, colour: attaching ? Pen.ballpoint : Pen.margin),
+            ),
           ),
           Expanded(
-            child: TextField(
-              controller: controller,
-              minLines: 1,
-              maxLines: 6,
-              textInputAction: TextInputAction.newline,
-              decoration: InputDecoration(hintText: recording ? S.recording : S.composerHint, border: const OutlineInputBorder()),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: controller,
+                  minLines: 1,
+                  maxLines: 6,
+                  style: hand,
+                  cursorColor: Pen.ballpoint,
+                  cursorWidth: 1.2,
+                  textInputAction: TextInputAction.newline,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: const EdgeInsets.fromLTRB(0, 6, 0, 5),
+                    hintText: recording ? S.recording : S.composerHint,
+                    hintStyle: Hands.margin(size: 16),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                  ),
+                ),
+                const RuleLine(seed: 29),
+              ],
             ),
           ),
           GestureDetector(
             onLongPressStart: (_) => onRecordStart(),
             onLongPressEnd: (_) => onRecordStop(),
-            child: Tooltip(
-              message: S.holdToRecord,
-              child: Icon(recording ? Icons.mic : Icons.mic_none, color: recording ? Colors.red : null, size: 28),
+            behavior: HitTestBehavior.opaque,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 6, 8, 6),
+              child: Mark.ticks(
+                size: 22,
+                level: recording ? 1 : 0,
+                colour: recording ? Pen.red : Pen.margin,
+              ),
             ),
           ),
-          IconButton(tooltip: S.send, icon: const Icon(Icons.send), onPressed: onSend),
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onSend,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(2, 6, 2, 8),
+              child: Text(S.send, style: Hands.margin(size: 16)),
+            ),
+          ),
         ],
       ),
     );
   }
+}
+
+/// The line that says what is being answered or changed, written in the margin beside the
+/// composer rather than shown as a card.
+class _Answering extends StatelessWidget {
+  const _Answering({required this.label, required this.onDrop});
+  final String label;
+  final VoidCallback onDrop;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.fromLTRB(16, 2, 14, 0),
+        child: Row(
+          children: [
+            Mark.turnback(size: 17),
+            const SizedBox(width: 6),
+            Expanded(child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: Hands.margin(size: 14))),
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onDrop,
+              child: Padding(padding: const EdgeInsets.all(6), child: Mark.cross(size: 14)),
+            ),
+          ],
+        ),
+      );
+}
+
+/// What else can go in: four words on the desk, not a menu.
+class _AttachStrip extends StatelessWidget {
+  const _AttachStrip({required this.onPick});
+  final void Function(String what) onPick;
+
+  static const _choices = [
+    ('photo', 'a photo'),
+    ('camera', 'take one'),
+    ('video', 'a video'),
+    ('film', 'film something'),
+  ];
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.fromLTRB(30, 4, 14, 2),
+        child: Row(
+          children: [
+            for (final (id, word) in _choices)
+              Padding(
+                padding: const EdgeInsets.only(right: 14),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => onPick(id),
+                  child: Text(word, style: Hands.teo(size: 16)),
+                ),
+              ),
+          ],
+        ),
+      );
 }
 
 /// A 1×1 grey PNG used as a video poster until frame extraction exists on both platforms.

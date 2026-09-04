@@ -1,0 +1,38 @@
+{
+ "name": "13_messenger_states",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/13_messenger_states.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 1
+  },
+  {
+   "do": "wait",
+   "ms": 1000
+  },
+  {
+   "do": "scrollTo",
+   "arg": "end"
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "shot",
+   "out": "evidence/13_messenger_states.png",
+   "settle": 1200
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/13_messenger_states.report.json",
+   "at": "13_messenger_states.png"
+  }
+ ]
+}

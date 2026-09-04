@@ -9,6 +9,7 @@ else. Do not change these numbers without updating DIRECTION.md.
 import math
 import os
 import sys
+import numpy as np
 
 import bpy
 
@@ -399,3 +400,53 @@ def keep_shadow_only(path):
     save_image_array(path, out, colorspace="Non-Color")
     return path
 
+
+
+# ---------------------------------------------------------------- image maths without scipy
+# Blender's bundled Python has numpy and nothing else, so the two image operations the paper
+# scripts need are written out here rather than pulled in from scipy.
+
+def blur(a, sigma):
+    """A separable Gaussian blur. Same result as scipy's gaussian_filter to within rounding."""
+    radius = max(1, int(round(sigma * 3)))
+    x = np.arange(-radius, radius + 1, dtype=np.float32)
+    k = np.exp(-(x ** 2) / (2.0 * sigma * sigma))
+    k /= k.sum()
+    out = a.astype(np.float32)
+    for axis in (0, 1):
+        pad = [(0, 0), (0, 0)]
+        pad[axis] = (radius, radius)
+        padded = np.pad(out, pad, mode="edge")
+        moved = np.moveaxis(padded, axis, -1)
+        stacked = np.stack([moved[..., i:i + out.shape[axis]] for i in range(len(k))], axis=-1)
+        out = np.moveaxis((stacked * k).sum(axis=-1), -1, axis)
+    return out
+
+
+def distance_inside(solid, max_px):
+    """Distance in pixels from each solid pixel to the nearest edge, capped at [max_px].
+
+    An octagonal distance: 4- and 8-connected erosions alternate, which stays within about four
+    per cent of the Euclidean distance and is what the fibre band ramp needs. It is capped because
+    nothing beyond the band is used, which is also why an exact transform would be wasted here.
+    """
+    d = np.zeros(solid.shape, dtype=np.float32)
+    cur = solid.copy()
+    for step in range(1, int(max_px) + 1):
+        e = cur.copy()
+        e[1:, :] &= cur[:-1, :]
+        e[:-1, :] &= cur[1:, :]
+        e[:, 1:] &= cur[:, :-1]
+        e[:, :-1] &= cur[:, 1:]
+        if step % 2 == 0:  # every other pass takes the diagonals too
+            e[1:, 1:] &= cur[:-1, :-1]
+            e[1:, :-1] &= cur[:-1, 1:]
+            e[:-1, 1:] &= cur[1:, :-1]
+            e[:-1, :-1] &= cur[1:, 1:]
+        d[e] = step
+        cur = e
+        if not cur.any():
+            break
+    d[solid & (d == 0)] = 0.0
+    d[~solid] = 0.0
+    return d

@@ -1,0 +1,37 @@
+{
+ "name": "05_settings",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/05_settings.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 4
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "showWords"
+  },
+  {
+   "do": "wait",
+   "ms": 800
+  },
+  {
+   "do": "shot",
+   "out": "evidence/05_settings.png",
+   "settle": 900
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/05_settings.report.json",
+   "at": "05_settings.png"
+  }
+ ]
+}

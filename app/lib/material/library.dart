@@ -21,7 +21,8 @@ class LibraryEntry {
 }
 
 class MaterialLibrary {
-  MaterialLibrary._(this.paper, this.tears, this.objects, this.bits, this.shell, this.folds, this.fonts, this.sounds);
+  MaterialLibrary._(this.paper, this.tears, this.objects, this.bits, this.shell, this.folds, this.fonts,
+      this.sounds, this.shadowFrame);
 
   final List<LibraryEntry> paper;
   final List<LibraryEntry> tears;
@@ -33,6 +34,11 @@ class MaterialLibrary {
   final Map<String, int> folds;
   final List<String> fonts;
   final List<String> sounds;
+
+  /// How much wider than the piece the baked contact shadow was framed, straight from
+  /// blender/paper/tear_relief.py. The visible part of a contact shadow is the part outside the
+  /// paper, so the shadow render reaches past the piece and the app has to inflate it to match.
+  final double shadowFrame;
 
   static MaterialLibrary? _instance;
   static MaterialLibrary get instance {
@@ -74,6 +80,7 @@ class MaterialLibrary {
       folds,
       ((j['fonts'] as List?) ?? const []).cast<String>(),
       ((j['sound'] as List?) ?? const []).cast<String>(),
+      ((j['relief'] as Map?)?['shadow_frame'] as num?)?.toDouble() ?? 1.0,
     );
   }
 

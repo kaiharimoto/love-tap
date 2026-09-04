@@ -243,6 +243,11 @@ def main(argv=None):
     index = {}
     for fam in ("paper", "tears", "objects", "bits", "shell"):
         pack_family(fam, index)
+    # how the three tear layers line up, straight from the renderer that made them
+    relief_path = os.path.join(SRC, "tears", "relief.json")
+    if os.path.exists(relief_path):
+        with open(relief_path, encoding="utf-8") as f:
+            index["relief"] = json.load(f)
     pack_folds(index)
     copy_flat("fonts", index, exts=(".ttf",))
     copy_flat("sound", index, exts=(".ogg",))

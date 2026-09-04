@@ -1,0 +1,30 @@
+{
+ "name": "01_pulse",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/01_pulse.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 0
+  },
+  {
+   "do": "wait",
+   "ms": 1400
+  },
+  {
+   "do": "shot",
+   "out": "evidence/01_pulse.png",
+   "settle": 900
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/01_pulse.report.json",
+   "at": "01_pulse.png"
+  }
+ ]
+}

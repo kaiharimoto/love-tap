@@ -1,0 +1,183 @@
+#!/usr/bin/env python3
+"""Gather what capture.sh produced into the three files the evidence set is read through.
+
+  evidence/frames.json   what every clip actually is: frame count, rate, dropped frames, and the
+                         scroll timings, with the device they came off
+  evidence/DIFF.json     each still against the same still from the previous session, by SSIM
+  evidence/MANIFEST.json every artifact, its size, and — for the ones that are missing — why
+
+Nothing is invented here. An artifact that was not captured is listed as missing with the reason
+capture.sh gave, and the previous session's copy is left where it is rather than being passed off
+as this session's.
+"""
+import argparse
+import json
+import pathlib
+import shutil
+import subprocess
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+EVIDENCE = ROOT / "evidence"
+PREVIOUS = EVIDENCE / ".previous"
+LOGS = EVIDENCE / "logs"
+
+STILLS = [
+    "01_pulse.png", "02_chat.png", "03_us.png", "04_moments.png", "05_settings.png",
+    "09_two_devices.png", "10_first_run.png", "12_search.png", "13_messenger_states.png",
+    "14_media_viewer.png", "16_setup_android.png", "17_setup_pwa.png",
+]
+CLIPS = [
+    "06_unfolding.mp4", "07_feeling_landing.mp4", "08_state_propagating.mp4",
+    "11_chat_scroll.mp4", "15_authored_feeling.mp4",
+]
+MINIMUMS = {
+    "01_pulse.png": (1440, 3120), "02_chat.png": (1440, 3120), "03_us.png": (1440, 3120),
+    "04_moments.png": (1440, 3120), "05_settings.png": (1440, 3120),
+    "09_two_devices.png": (3840, 2160), "10_first_run.png": (1440, 3120),
+    "12_search.png": (1440, 3120), "13_messenger_states.png": (1440, 3120),
+    "14_media_viewer.png": (1440, 3120), "16_setup_android.png": (1440, 3120),
+    "17_setup_pwa.png": (1440, 3120),
+    "06_unfolding.mp4": (1080, 2340), "07_feeling_landing.mp4": (1080, 2340),
+    "08_state_propagating.mp4": (1080, 2340), "11_chat_scroll.mp4": (1080, 2340),
+    "15_authored_feeling.mp4": (1080, 2340),
+}
+MIN_SECONDS = {
+    "06_unfolding.mp4": 4, "07_feeling_landing.mp4": 6, "08_state_propagating.mp4": 8,
+    "11_chat_scroll.mp4": 4, "15_authored_feeling.mp4": 4,
+}
+
+
+def png_size(path):
+    from PIL import Image
+    with Image.open(path) as im:
+        return list(im.size)
+
+
+def probe(path):
+    ffprobe = ROOT / "toolchain" / "ffmpeg" / "ffprobe"
+    out = subprocess.run(
+        [str(ffprobe), "-v", "error", "-select_streams", "v:0", "-show_entries",
+         "stream=width,height,nb_frames,r_frame_rate,duration", "-of", "json", str(path)],
+        capture_output=True, text=True,
+    )
+    try:
+        s = json.loads(out.stdout)["streams"][0]
+    except Exception:
+        return {}
+    num, _, den = s.get("r_frame_rate", "0/1").partition("/")
+    fps = float(num) / float(den or 1) if float(den or 1) else 0.0
+    return {
+        "size": [int(s.get("width", 0)), int(s.get("height", 0))],
+        "frames": int(s.get("nb_frames", 0) or 0),
+        "fps": round(fps, 2),
+        "seconds": round(float(s.get("duration", 0) or 0), 2),
+    }
+
+
+def ssim(a, b):
+    out = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "check" / "ssim.py"), str(a), str(b)],
+        capture_output=True, text=True,
+    )
+    try:
+        return json.loads(out.stdout).get("ssim")
+    except Exception:
+        return None
+
+
+def label_for(value):
+    """The coherence critic assigns the label; this is the reading the label has to agree with."""
+    if value is None:
+        return "new"
+    if value >= 0.995:
+        return "unchanged"
+    if value >= 0.90:
+        return "nudged"
+    if value >= 0.60:
+        return "reworked"
+    return "redrawn"
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--stamp", required=True)
+    ap.add_argument("--missing", default="")
+    ap.add_argument("--browser", default="webkit")
+    args = ap.parse_args()
+
+    reasons = {}
+    if args.missing and pathlib.Path(args.missing).exists():
+        for line in pathlib.Path(args.missing).read_text().splitlines():
+            if "|" in line:
+                name, why = line.split("|", 1)
+                reasons[name.strip()] = why.strip()
+
+    manifest = {"captured_at": args.stamp, "browser": args.browser, "artifacts": {}, "missing": {}}
+    diff = {"captured_at": args.stamp, "note": "ssim against the previous session; label assigned by the coherence critic", "artifacts": {}}
+
+    for name in STILLS + CLIPS:
+        path = EVIDENCE / name
+        key = name.rsplit(".", 1)[0]
+        if not path.exists():
+            manifest["missing"][name] = reasons.get(name) or reasons.get(key) or "not captured this session"
+            continue
+        entry = {"bytes": path.stat().st_size}
+        if name.endswith(".png"):
+            entry["size"] = png_size(path)
+        else:
+            entry.update(probe(path))
+        want = MINIMUMS.get(name)
+        if want and entry.get("size"):
+            entry["meets_minimum"] = entry["size"][0] >= want[0] and entry["size"][1] >= want[1]
+            entry["minimum"] = list(want)
+        if name in MIN_SECONDS:
+            entry["minimum_seconds"] = MIN_SECONDS[name]
+            entry["long_enough"] = entry.get("seconds", 0) >= MIN_SECONDS[name]
+        manifest["artifacts"][name] = entry
+
+        if name.endswith(".png"):
+            prev = PREVIOUS / name
+            value = ssim(path, prev) if prev.exists() else None
+            diff["artifacts"][name] = {"ssim": value, "reading": label_for(value), "label": None}
+
+    # frames.json: what every clip is made of, and where the frames came from
+    frames = {"captured_at": args.stamp, "source": args.browser, "clips": {}, "scroll": {}}
+    for name in CLIPS:
+        log = LOGS / f"{name.rsplit('.', 1)[0]}.frames.json"
+        if log.exists():
+            frames["clips"][name] = json.loads(log.read_text())
+    scroll_log = LOGS / "11_chat_scroll.json"
+    if scroll_log.exists():
+        s = json.loads(scroll_log.read_text())
+        frames["scroll"] = {
+            "source": args.browser,
+            "viewport": s.get("viewport"),
+            "cold_ms": s.get("cold_ms"),
+            "steps": s.get("steps"),
+        }
+    emulator = LOGS / "scroll_emulator.json"
+    if emulator.exists():
+        frames["scroll_emulator"] = json.loads(emulator.read_text())
+    else:
+        frames["scroll_emulator"] = {"missing": reasons.get("frames.json") or "no Android device was up in this session"}
+
+    (EVIDENCE / "frames.json").write_text(json.dumps(frames, indent=1) + "\n")
+    (EVIDENCE / "DIFF.json").write_text(json.dumps(diff, indent=1) + "\n")
+    (EVIDENCE / "MANIFEST.json").write_text(json.dumps(manifest, indent=1) + "\n")
+
+    # keep this session's stills as the baseline the next session is measured against
+    PREVIOUS.mkdir(parents=True, exist_ok=True)
+    for name in STILLS:
+        p = EVIDENCE / name
+        if p.exists():
+            shutil.copy2(p, PREVIOUS / name)
+
+    have = len(manifest["artifacts"])
+    print(f"· {have} of {len(STILLS) + len(CLIPS)} artifacts present")
+    for name, why in sorted(manifest["missing"].items()):
+        print(f"    {name}: {why}")
+
+
+if __name__ == "__main__":
+    main()

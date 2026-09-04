@@ -57,19 +57,22 @@ String stockVariantFor(Event e, MaterialLibrary lib, {bool dusk = false, String?
   return variants[(hashOf(e.id) >> 8) % variants.length];
 }
 
-/// The tear mask for an event.
+/// The tear mask for a note, by where it sits in the thread.
 ///
-/// The pool is walked with a stride that is coprime with its size, indexed by the event's own
-/// hash, so two notes that sit next to each other in the thread are far apart in the pool. With
-/// 48 or more masks and at most a dozen notes on screen, a repeat within one frame cannot happen
-/// unless the pool is smaller than the screenful, which the capture check would catch.
-String? tearFor(Event e, MaterialLibrary lib, {bool writable = true}) {
+/// This is the one assignment that is not free to be random. The rule the brief sets is that no
+/// two tears visible at once may be the same, and a hash of the event id cannot promise that: with
+/// 56 masks and eight notes on screen, two ids collide about a third of the time. So the pool is
+/// walked down the thread with a stride that is coprime with its size. Any run of [n] consecutive
+/// notes then holds [n] different masks, which makes a repeat within one screen impossible rather
+/// than unlikely, and the two phones agree because they agree about the order of the thread.
+///
+/// The variation an id would have given is carried by the stock, the lift and the tilt instead.
+String? tearFor(Event e, MaterialLibrary lib, {bool writable = true, int row = 0}) {
   final masks = writable ? lib.writableTears : lib.tearMasks;
   if (masks.isEmpty) return null;
   final n = masks.length;
   final stride = _coprimeStride(n);
-  final index = ((hashOf(e.id) % n) * stride) % n;
-  return masks[index];
+  return masks[((row % n) * stride) % n];
 }
 
 int _coprimeStride(int n) {

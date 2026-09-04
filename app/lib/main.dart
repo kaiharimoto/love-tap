@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'app.dart';
+import 'capture/hooks.dart';
 import 'flags.dart';
 import 'scope.dart';
 import 'material/library.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
   await MaterialLibrary.load();
   final scope = await bootstrap();
   runApp(AppScope.provide(scope: scope, child: const DeskApp()));
+  CaptureHooks.install(scope);
   // the capture harness waits for this rather than guessing at a delay
   WidgetsBinding.instance.addPostFrameCallback((_) {
     WidgetsBinding.instance.addPostFrameCallback((_) => markReady());

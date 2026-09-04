@@ -1,0 +1,30 @@
+{
+ "name": "10_first_run",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/10_first_run.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 0
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "shot",
+   "out": "evidence/10_first_run.png",
+   "settle": 900
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/10_first_run.report.json",
+   "at": "10_first_run.png"
+  }
+ ]
+}

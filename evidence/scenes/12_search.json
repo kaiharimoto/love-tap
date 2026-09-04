@@ -1,0 +1,38 @@
+{
+ "name": "12_search",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/12_search.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 1
+  },
+  {
+   "do": "wait",
+   "ms": 1000
+  },
+  {
+   "do": "search",
+   "arg": "rain"
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "shot",
+   "out": "evidence/12_search.png",
+   "settle": 900
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/12_search.report.json",
+   "at": "12_search.png"
+  }
+ ]
+}

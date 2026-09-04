@@ -486,15 +486,24 @@ def _path_of(polys, snap=0.0):
 
 
 def _simplified(pieces):
-    """Skia occasionally refuses a pile of near-degenerate ribbon quads. Try it clean, then
-    snapped to a grid, then piece by piece, dropping only the pieces that will not union."""
+    """Union the ribbon polygons, and never lose ink doing it.
+
+    Skia occasionally refuses a pile of near-degenerate ribbon quads. Try it clean, then snapped to
+    a grid, then piece by piece. A piece the union still refuses is handed back whole instead of
+    being dropped: two overlapping contours wound the same way fill correctly under the nonzero
+    rule, whereas a dropped piece is a letter with a stroke missing, which is how an 'h' loses its
+    ascender and a 'b' becomes a stub.
+
+    Returns (path, leftovers).
+    """
     for snap in (0.0, 0.5, 1.0):
         try:
-            return pathops.simplify(_path_of(pieces, snap), fix_winding=True, keep_starting_points=False)
+            return pathops.simplify(_path_of(pieces, snap), fix_winding=True, keep_starting_points=False), []
         except pathops.PathOpsError:
             continue
     acc = pathops.Path()
     acc.fillType = pathops.FillType.WINDING
+    leftovers = []
     for poly in pieces:
         one = _path_of([poly], 0.5)
         if not list(one.contours):
@@ -504,13 +513,13 @@ def _simplified(pieces):
             pathops.union([acc, one], out.getPen())
             acc = out
         except pathops.PathOpsError:
-            continue
-    return acc
+            leftovers.append(np.asarray(poly, float))
+    return acc, leftovers
 
 
 def union_pieces(pieces):
     """Union of consistently-wound polygons with skia-pathops -> list of (N,2) polylines."""
-    result = _simplified(pieces)
+    result, leftovers = _simplified(pieces)
     contours = []
     for c in result.contours:
         pts = []
@@ -528,6 +537,9 @@ def union_pieces(pieces):
             if np.allclose(pts[0], pts[-1]):
                 pts = pts[:-1]
             contours.append(pts)
+    for poly in leftovers:
+        if len(poly) >= 3 and abs(signed_area(poly)) > 40:
+            contours.append(poly)
     return contours
 
 
@@ -782,23 +794,61 @@ def contour_points(contours):
     return np.vstack([resample_closed(c, 4.0) for c in contours])
 
 
+def skeleton_bounds(glyph, plan=None):
+    """The box the strokes of a glyph are drawn inside, before any pen is put to them."""
+    pts = []
+    for s in glyph.get("strokes", []):
+        pts += [(p[0], p[1]) for p in s]
+    if not pts:
+        return None
+    a = np.asarray(pts, float)
+    return a[:, 0].min(), a[:, 1].min(), a[:, 0].max(), a[:, 1].max()
+
+
+def covers(contours, want, slack=0.22):
+    """Did the built outline keep the ink the skeleton asked for?
+
+    A stroke lost in the union shows up here as an outline that is far shorter or narrower than
+    the strokes it was made from — an 'h' whose ascender vanished, a 'b' reduced to a stub. The
+    pen widens the skeleton, so the outline is always a little larger; it is never much smaller.
+    """
+    if want is None or not contours:
+        return not contours and want is None
+    pts = np.vstack(contours)
+    got_w = pts[:, 0].max() - pts[:, 0].min()
+    got_h = pts[:, 1].max() - pts[:, 1].min()
+    want_w = max(1.0, want[2] - want[0])
+    want_h = max(1.0, want[3] - want[1])
+    return got_w >= want_w * (1 - slack) and got_h >= want_h * (1 - slack)
+
+
 def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
-    """All variants of a glyph, re-rolled until every pair is distinct (Hausdorff > 12)."""
+    """All variants of a glyph, re-rolled until every pair is distinct (Hausdorff > 12) and every
+    one of them still carries all of its ink."""
     n = hand["variants"]
     results = []
     plan = plan_alts(glyph, hand, np.random.default_rng([seed, face_index, glyph_index, 7]))
+    want = skeleton_bounds(glyph)
     for v in range(n):
+        fallback = None      # the best attempt so far, whether or not it is distinct
+        chosen = None
         for attempt in range(24):
             rng = np.random.default_rng([seed, face_index, glyph_index, v, attempt])
             contours, alt = build_variant(glyph, v, hand, rng, plan)
             if not contours and glyph["strokes"]:
                 continue
             pts = contour_points(contours)
-            if v == 0 or not glyph["strokes"]:
+            whole = covers(contours, want)
+            made = {"contours": contours, "pts": pts, "alt": alt, "attempts": attempt + 1, "whole": whole}
+            if fallback is None or (whole and not fallback["whole"]):
+                fallback = made
+            if not whole:
+                continue                                  # a letter missing a stroke is never kept
+            if v == 0 or not glyph["strokes"] or all(hausdorff(pts, r["pts"]) > HAUSDORFF_MIN for r in results):
+                chosen = made
                 break
-            if all(hausdorff(pts, r["pts"]) > HAUSDORFF_MIN for r in results):
-                break
-        results.append({"contours": contours, "pts": pts, "alt": alt, "attempts": attempt + 1})
+        results.append(chosen or fallback or
+                       {"contours": [], "pts": np.zeros((0, 2)), "alt": None, "attempts": 24, "whole": True})
     return results
 
 

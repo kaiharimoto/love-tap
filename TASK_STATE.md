@@ -8,16 +8,22 @@ checkpoint under `checkpoints/` and continue from **Next action**.
 | Session | Date (UTC) | Reached | Score |
 |---|---|---|---|
 | 1 | 2026-09-03 | bootstrap; STEP 01 transport; STEP 02 spine; STEP 03 unstyled messenger + reliability report; sounds; paper-stock renderer started; seed year and handwriting delegated (in flight) | 0 |
+| 2 | 2026-09-03 | tears, fonts, objects, seed year on disk; STEP 06 material on shell and Chat; STEP 07 feelings and signals; STEP 08 four modules; Moments and Settings | 0 |
+| 3 | 2026-09-04 | capture handles wired into the app; `run.sh` and `capture.sh`; the scene driver, frame/tear/SSIM/crop checks and the string lint; Chat chrome redrawn in the material language (no icon set anywhere in Chat); tear assignment made collision-free by construction; the fold player and folded unread notes; `app/lib/setup/` checklists; the six critic prompts; first evidence pass | see evidence/SCORE.json |
 
 ## Current position
 
 - phase: build
-- step: STEP 03 done (unstyled messenger, reliability.json over local); STEP 04 seed being authored; STEP 05 material pipeline in progress (sounds done, stocks renderer written, fonts in flight, tears/folds/objects not started)
-- review cycle: 0
-- rubric score: 0 / 100 (no evidence artifacts captured yet)
-- transport in use: local (app/lib/transport/local/), named in every report; tailscale not built yet
-- fourth-module commit hash: —
-- WebKit texture budget: not yet measured (planned: 64 MB decoded per fold sequence window)
+- step: STEP 09 in progress (setup checklists written, not yet wired into the shell); STEP 10 first
+  evidence pass captured; STEP 05 still filling in (stocks and objects rendering in the background;
+  folds partially rendered; bits renderer written but not run; shell renders not started)
+- review cycle: 0 (first artifacts exist; critics have not yet run against them)
+- rubric score: not yet scored — see `evidence/SCORE.json`
+- transport in use: local (`app/lib/transport/local/`), named in every report; tailscale not built yet
+- fourth-module commit hash: 7dfeca2 (`STEP 07-08`), `git show --stat 7dfeca2` touches only
+  `app/lib/modules/rituals/`, the registry line, and files outside `modules/`
+- WebKit texture budget: one fold sequence held at a time (`FoldFrames` drops the previous
+  sequence when a new one is asked for); measured budget still to be taken on the device
 - TS_AUTHKEY: not needed yet (ask only when the Tailscale phase begins)
 
 ## What exists (verified)

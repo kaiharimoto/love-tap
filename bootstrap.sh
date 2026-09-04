@@ -116,7 +116,7 @@ p = sys.argv[1]
 want = {
   "hw.lcd.width": "1440", "hw.lcd.height": "3120", "hw.lcd.density": "560",
   "hw.gpu.enabled": "yes", "hw.gpu.mode": "swiftshader_indirect",
-  "hw.ramSize": "3072", "vm.heapSize": "512", "disk.dataPartition.size": "4096M",
+  "hw.ramSize": "3072", "vm.heapSize": "512", "disk.dataPartition.size": "2048M",
   "hw.keyboard": "yes", "hw.audioInput": "no", "hw.audioOutput": "yes",
   "hw.camera.back": "emulated", "hw.camera.front": "emulated",
   "skin.name": "1440x3120", "skin.path": "_no_skin", "showDeviceFrame": "no",

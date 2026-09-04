@@ -12,6 +12,7 @@ import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/library.dart';
 import '../../material/objects.dart';
+import '../../material/fold.dart';
 import '../../material/paper.dart';
 import '../../material/palette.dart';
 import '../../scope.dart';
@@ -31,10 +32,14 @@ class Note extends StatelessWidget {
     required this.item,
     required this.registry,
     required this.onLongPress,
+    required this.row,
     this.highlight = false,
   });
 
   final ThreadItem item;
+
+  /// Where this note sits in the thread: what decides which tear it was torn along.
+  final int row;
   final FeelingRegistry registry;
   final VoidCallback onLongPress;
   final bool highlight;
@@ -51,73 +56,85 @@ class Note extends StatelessWidget {
 
     final width = MediaQuery.sizeOf(context).width * _noteWidthFraction;
     final stock = lib == null ? '' : stockVariantFor(e, lib);
-    final tear = lib == null ? null : tearFor(e, lib);
+    final tear = lib == null ? null : tearFor(e, lib, row: row);
     final lift = liftFor(e);
     final tilt = tiltFor(e) + (mine ? -0.004 : 0.004);
+
+    // A note of theirs that has not been read yet lies folded, the way one passed across a table
+    // does, and opens when it is touched. Nothing of mine is ever folded: I wrote it.
+    final folded = !mine && (e.seq ?? 0) > (scope.thread.readUpto[scope.me] ?? 0);
+
+    final piece = PaperPiece(
+      stockId: stock,
+      tearId: tear,
+      liftMm: lift,
+      tilt: tilt,
+      width: width,
+      stockAlignment: _patchOf(e),
+      stockScale: 1.15,
+      padding: const EdgeInsets.fromLTRB(14, 9, 14, 8),
+      safe: lib == null || tear == null ? const [0.06, 0.07, 0.06, 0.07] : lib.safeOf(tear),
+      overlays: [
+        if (item.reactions.isNotEmpty)
+          Positioned(
+            right: 14,
+            bottom: -6,
+            child: Row(
+              children: [
+                for (final r in item.reactions.take(3))
+                  Padding(
+                    padding: const EdgeInsets.only(left: 2),
+                    child: FeelingObject(
+                      feeling: registry.byId(r.feelingId) ?? kBuiltInFeelings.first,
+                      size: 46,
+                      intensity: 0.6,
+                      tilt: (r.eventId.hashCode % 20 - 10) / 90,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        if (highlight)
+          Positioned.fill(
+            child: IgnorePointer(
+              child: DecoratedBox(decoration: const BoxDecoration(color: Accent.highlighterYellow)),
+            ),
+          ),
+      ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (item.replyTo != null) _ReplyStrip(target: item.replyTo!, registry: registry),
+          _body(context, scope),
+          const SizedBox(height: 3),
+          _Margin(item: item, mine: mine),
+        ],
+      ),
+    );
 
     return Align(
       alignment: mine ? Alignment.centerRight : Alignment.centerLeft,
       child: GestureDetector(
         onLongPress: onLongPress,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(mine ? 40 : 14, 7, mine ? 14 : 40, 7),
-          child: PaperPiece(
-            stockId: stock,
-            tearId: tear,
-            liftMm: lift,
-            tilt: tilt,
-            width: width,
-            stockAlignment: _patchOf(e),
-            stockScale: 1.15,
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-            safe: lib == null || tear == null ? const [0.06, 0.07, 0.06, 0.07] : lib.safeOf(tear),
-            overlays: [
-              if (item.reactions.isNotEmpty)
-                Positioned(
-                  right: 14,
-                  bottom: -6,
-                  child: Row(
-                    children: [
-                      for (final r in item.reactions.take(3))
-                        Padding(
-                          padding: const EdgeInsets.only(left: 2),
-                          child: FeelingObject(
-                            feeling: registry.byId(r.feelingId) ?? kBuiltInFeelings.first,
-                            size: 46,
-                            intensity: 0.6,
-                            tilt: (r.eventId.hashCode % 20 - 10) / 90,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              if (highlight)
-                Positioned.fill(
-                  child: IgnorePointer(
-                    child: DecoratedBox(decoration: const BoxDecoration(color: Accent.highlighterYellow)),
-                  ),
-                ),
-            ],
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (item.replyTo != null) _ReplyStrip(target: item.replyTo!, registry: registry),
-                _body(context, scope),
-                const SizedBox(height: 6),
-                _Margin(item: item, mine: mine),
-              ],
-            ),
-          ),
+          padding: EdgeInsets.fromLTRB(mine ? 40 : 14, 4, mine ? 14 : 40, 4),
+          child: folded ? FoldedNote(width: width, child: piece) : piece,
         ),
       ),
     );
   }
 
   static bool _isMarginal(String type) => const {
-        'state_declared', 'state_passive', 'ritual_kept', 'milestone', 'date_event', 'todo_event',
-        'ping', 'feeling_authored',
-      }.contains(type);
+    'state_declared',
+    'state_passive',
+    'ritual_kept',
+    'milestone',
+    'date_event',
+    'todo_event',
+    'ping',
+    'feeling_authored',
+  }.contains(type);
 
   /// Which square of the stock this note is torn from, so two notes never show the same paper.
   static Alignment _patchOf(Event e) {
@@ -133,7 +150,7 @@ class Note extends StatelessWidget {
     }
     switch (item.type) {
       case 'message':
-        return Written(item.text ?? '', by: item.author, size: 20);
+        return Written(item.text ?? '', by: item.author, size: 19);
       case 'photo':
         return _Print(
           item: item,
@@ -194,7 +211,10 @@ class _Print extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              AspectRatio(aspectRatio: aspect, child: BlobImage(hash: hash, fit: BoxFit.cover)),
+              AspectRatio(
+                aspectRatio: aspect,
+                child: BlobImage(hash: hash, fit: BoxFit.cover),
+              ),
               if (tape != null)
                 Positioned(
                   left: -10,
@@ -214,7 +234,10 @@ class _Print extends StatelessWidget {
           ),
         ),
         if (caption != null && caption!.isNotEmpty)
-          Padding(padding: const EdgeInsets.only(top: 6), child: Written(caption!, by: item.author, size: 17)),
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Written(caption!, by: item.author, size: 17),
+          ),
       ],
     );
   }
@@ -239,7 +262,9 @@ class _ReplyStrip extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.only(left: 8, bottom: 4),
-      decoration: const BoxDecoration(border: Border(left: BorderSide(color: Pen.margin, width: 1.2))),
+      decoration: const BoxDecoration(
+        border: Border(left: BorderSide(color: Pen.margin, width: 1.2)),
+      ),
       child: Written(text, by: target.author, size: 15, colour: Pen.margin, maxLines: 2),
     );
   }

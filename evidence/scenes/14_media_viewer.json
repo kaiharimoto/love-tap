@@ -1,0 +1,38 @@
+{
+ "name": "14_media_viewer",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/14_media_viewer.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 1
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "openViewer",
+   "arg": "photo"
+  },
+  {
+   "do": "wait",
+   "ms": 1800
+  },
+  {
+   "do": "shot",
+   "out": "evidence/14_media_viewer.png",
+   "settle": 1200
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/14_media_viewer.report.json",
+   "at": "14_media_viewer.png"
+  }
+ ]
+}

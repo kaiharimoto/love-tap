@@ -1,0 +1,30 @@
+{
+ "name": "03_us",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/03_us.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 2
+  },
+  {
+   "do": "wait",
+   "ms": 1400
+  },
+  {
+   "do": "shot",
+   "out": "evidence/03_us.png",
+   "settle": 900
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/03_us.report.json",
+   "at": "03_us.png"
+  }
+ ]
+}

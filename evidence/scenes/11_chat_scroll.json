@@ -1,0 +1,44 @@
+{
+ "name": "11_chat_scroll",
+ "viewport": {
+  "width": 360,
+  "height": 780,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/11_chat_scroll.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 1
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "scrollTo",
+   "arg": "0.30"
+  },
+  {
+   "do": "wait",
+   "ms": 800
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/11_chat_scroll",
+   "count": 300,
+   "ms": 16,
+   "scroll": {
+    "from": [
+     180,
+     620
+    ],
+    "to": [
+     180,
+     160
+    ]
+   }
+  }
+ ]
+}

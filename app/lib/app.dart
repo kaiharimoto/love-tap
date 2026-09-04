@@ -3,6 +3,8 @@
 // every region so a feeling is one gesture away from anywhere.
 import 'package:flutter/material.dart';
 
+import 'capture/bus.dart';
+import 'flags.dart';
 import 'material/desk.dart';
 import 'material/hands.dart';
 import 'material/library.dart';
@@ -18,6 +20,10 @@ import 'regions/pulse/pulse_region.dart';
 import 'regions/settings/settings_region.dart';
 import 'regions/us/us_region.dart';
 import 'scope.dart';
+import 'setup/checklist.dart';
+import 'transport/transport.dart';
+import 'setup/platform.dart';
+import 'setup/setup_region.dart';
 import 'voice/strings.dart';
 
 class DeskApp extends StatelessWidget {
@@ -52,15 +58,59 @@ class Shell extends StatefulWidget {
 
 class _ShellState extends State<Shell> {
   int _index = 1;
+
+  /// Until the two phones are actually set up, the list of what is left is the first thing shown.
+  /// Any tab still works — nothing is locked — and the list comes back from Settings.
+  bool _showSetup = true;
+  PhoneFacts? _phone;
   final Sensation _sensation = Sensation();
 
   static const _labels = [S.pulse, S.chat, S.us, S.moments, S.settings];
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _readPhone());
+    if (!Flags.capture) return;
+    CaptureBus.regionIndex = _index;
+    CaptureBus.goToRegion = _go;
+    CaptureBus.sendFeeling = (id, intensity) async {
+      final registry = FeelingRegistry(AppScope.of(context).spine.all);
+      final f = registry.byId(id);
+      if (f == null) return;
+      await _send(f, intensity);
+    };
+  }
+
+  @override
   void dispose() {
+    if (Flags.capture) CaptureBus.clear();
     _sensation.dispose();
     super.dispose();
   }
+
+  void _go(int i) {
+    setState(() {
+      _index = i;
+      _showSetup = false;
+    });
+    CaptureBus.regionIndex = i;
+  }
+
+  Future<void> _readPhone() async {
+    final f = await PhoneFacts.read();
+    if (mounted) setState(() => _phone = f);
+  }
+
+  /// The facts the list watches for, read fresh every time it is drawn.
+  SetupFacts _setupFacts(AppScope scope) => factsFrom(
+        platform: scope.transport.role == TransportRole.host ? 'android' : 'pwa',
+        spine: scope.spine,
+        link: scope.link,
+        pairing: scope.transport.pairing,
+        notificationsAllowed: _phone?.notificationsAllowed ?? false,
+        installedToHome: _phone?.installedToHome ?? false,
+      );
 
   Future<void> _send(Feeling f, double intensity) async {
     final scope = AppScope.of(context);
@@ -71,6 +121,9 @@ class _ShellState extends State<Shell> {
   @override
   Widget build(BuildContext context) {
     final scope = AppScope.of(context);
+    final facts = _setupFacts(scope);
+    final platform = scope.transport.role == TransportRole.host ? 'android' : 'pwa';
+    final setup = _showSetup && !settled(stepsFor(platform), facts) ? facts : null;
     return Scaffold(
       backgroundColor: DeskColour.day,
       body: Desk(
@@ -85,16 +138,23 @@ class _ShellState extends State<Shell> {
               Expanded(
                 child: Stack(
                   children: [
-                    IndexedStack(
-                      index: _index,
-                      children: const [
-                        PulseRegion(),
-                        ChatRegion(),
-                        UsRegion(),
-                        MomentsRegion(),
-                        SettingsRegion(),
-                      ],
-                    ),
+                    if (setup != null)
+                      SetupSheet(
+                        platform: scope.transport.role == TransportRole.host ? 'android' : 'pwa',
+                        facts: setup,
+                        hostAddress: scope.link.address,
+                      )
+                    else
+                      IndexedStack(
+                        index: _index,
+                        children: const [
+                          PulseRegion(),
+                          ChatRegion(),
+                          UsRegion(),
+                          MomentsRegion(),
+                          SettingsRegion(),
+                        ],
+                      ),
                     // one gesture from any region
                     FeelingCorner(
                       registry: FeelingRegistry(scope.spine.all),
@@ -104,7 +164,7 @@ class _ShellState extends State<Shell> {
                   ],
                 ),
               ),
-              _Tabs(index: _index, labels: _labels, onPick: (i) => setState(() => _index = i)),
+              _Tabs(index: _index, labels: _labels, onPick: _go),
             ],
           ),
         ),
