@@ -137,10 +137,26 @@
   "online"
  ],
  "tailscale": {
-  "status": "pending",
-  "why": "no TS_AUTHKEY was supplied in this session, so the two tailnet nodes were never brought up and nothing over the tailnet has been checked",
-  "how_to_run": "TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh, then flutter test test/reliability_test.dart",
-  "what_is_still_checked": "the protocol, the pairing and every fault run above, over the local transport — the two transports differ only in which address the host binds",
-  "checked_at": "2026-09-04T06:03:37.493042Z"
+  "status": "ran",
+  "nodes": "two userspace tailscaled daemons, tools/tailscale/up.sh",
+  "counted_by_the_daemon": {
+   "read": true,
+   "peer": "lovetap-a",
+   "tx_bytes": 8632,
+   "rx_bytes": 7768,
+   "path": "direct to 192.0.2.2:48859",
+   "active": true
+  },
+  "host_node": "100.68.254.25",
+  "client_node": "100.72.198.108",
+  "host_reachable_at": "100.68.254.25",
+  "host_reachable_at_is_tailnet": true,
+  "host_listener": "127.0.0.1:8443",
+  "why_the_listener_is_loopback": "a userspace tailscaled has no TUN device, so no tailnet address exists on any interface to bind; it takes the inbound tailnet connection itself and hands it to loopback on the same port. The socket is narrower than it would be on a phone, not wider. On a phone the address is real and the host binds it — tailnet_test holds that path, including that every non-tailnet address is refused.",
+  "client_reached": "http://100.68.254.25:8443 through 127.0.0.1:1156",
+  "crossed_to_the_host": true,
+  "crossed_to_the_client": true,
+  "paired": true,
+  "checked_at": "2026-09-04T07:23:43.972093Z"
  }
 }

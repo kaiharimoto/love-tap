@@ -25,12 +25,18 @@ SOCKS_BASE=1055
 
 down() {
   for n in "${NODES[@]}"; do
+    # log out first, so the node stops showing as online in the admin console rather than
+    # lingering there as a machine that never comes back
+    [ -S "$TS_DIR/$n/tailscaled.sock" ] && \
+      "$TAILSCALE" --socket="$TS_DIR/$n/tailscaled.sock" logout >/dev/null 2>&1 || true
     if [ -f "$TS_DIR/$n/pid" ]; then
       kill "$(cat "$TS_DIR/$n/pid")" 2>/dev/null || true
       rm -f "$TS_DIR/$n/pid"
     fi
   done
-  echo "both nodes are down"
+  echo "both nodes are down and logged out"
+  echo "a key that was not marked ephemeral leaves lovetap-a and lovetap-b registered;"
+  echo "remove them at login.tailscale.com/admin/machines, and revoke the key under Settings > Keys."
 }
 
 if [ "${1:-}" = "--down" ]; then down; exit 0; fi

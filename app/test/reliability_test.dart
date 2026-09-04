@@ -287,6 +287,15 @@ void main() {
 
     final hostAddress = (await a.readAsString()).trim();
     final clientAddress = (await b.readAsString()).trim();
+    // The two development nodes run tailscaled in userspace, because a container cannot have a
+    // TUN device. So the host's socket sits on loopback and node a's tailscaled hands inbound
+    // tailnet connections to it, while the client dials node a's tailnet address through node b's
+    // own outbound proxy. The traffic genuinely crosses the tailnet — it is encrypted by one
+    // tailscaled and decrypted by the other — and the listener is narrower than it would be on a
+    // phone, not wider. On a phone there is a TUN, the tailnet address is real, and the host binds
+    // it: that path is what tailnet_test holds to.
+    const hostProxy = '127.0.0.1:1155';
+    const clientProxy = '127.0.0.1:1156';
     expect(isTailnetAddress(hostAddress), isTrue,
         reason: '$hostAddress is not a tailnet address');
 
@@ -295,12 +304,14 @@ void main() {
         const Identity(person: Person.noor, device: DeviceKind.android));
     final client = await Spine.open(NativeStore.openAt('${dir.path}/client.sqlite3'),
         const Identity(person: Person.teo, device: DeviceKind.pwa));
-    final binding = TailscaleBinding(port: 8443, declaredAddress: hostAddress);
+    final binding = TailscaleBinding(port: 8443, declaredAddress: hostAddress,
+        userspaceProxy: hostProxy);
     final hostT = HttpTransport(role: TransportRole.host, spine: host, deviceId: 'android-ts',
         binding: binding);
     await hostT.start();
     final clientT = tailscaleTransport(role: TransportRole.client, spine: client,
-        deviceId: 'pwa-ts', port: 8443, peerAddress: hostAddress);
+        deviceId: 'pwa-ts', port: 8443, peerAddress: hostAddress,
+        userspaceProxy: clientProxy);
     await clientT.start();
 
     final code = await hostT.beginPairing();
@@ -313,20 +324,63 @@ void main() {
         at: DateTime.now(), hostAssign: true);
     await sync.once();
 
+    // What the daemon counted, rather than what this test believes. If the two spines agree but
+    // node b's tailscaled never sent a byte to node a, the crossing happened over something that
+    // was not the tailnet and the whole run means nothing.
+    Map<String, dynamic> wire = {'read': false};
+    try {
+      final out = await Process.run('../toolchain/ts/bin/tailscale',
+          ['--socket=../toolchain/ts/b/tailscaled.sock', 'status', '--json']);
+      final status = jsonDecode(out.stdout as String) as Map<String, dynamic>;
+      for (final peer in (status['Peer'] as Map<String, dynamic>).values) {
+        final p = peer as Map<String, dynamic>;
+        if ('${p['HostName']}'.contains('lovetap-a')) {
+          wire = {
+            'read': true,
+            'peer': p['HostName'],
+            'tx_bytes': p['TxBytes'],
+            'rx_bytes': p['RxBytes'],
+            'path': p['CurAddr'] != null && '${p['CurAddr']}'.isNotEmpty
+                ? 'direct to ${p['CurAddr']}'
+                : 'relayed through ${p['Relay']}',
+            'active': p['Active'],
+          };
+        }
+      }
+    } catch (e) {
+      wire = {'read': false, 'why': '$e'};
+    }
+
     await record({
       'status': 'ran',
-      'host_bound_to': binding.boundTo,
-      'host_address_is_tailnet': isTailnetAddress(binding.boundTo ?? ''),
-      'client_reached': 'http://$hostAddress:8443',
+      'nodes': 'two userspace tailscaled daemons, tools/tailscale/up.sh',
+      'counted_by_the_daemon': wire,
+      'host_node': hostAddress,
       'client_node': clientAddress,
+      'host_reachable_at': binding.reachableAt,
+      'host_reachable_at_is_tailnet': isTailnetAddress(binding.reachableAt ?? ''),
+      'host_listener': '${binding.boundTo}:8443',
+      'why_the_listener_is_loopback':
+          'a userspace tailscaled has no TUN device, so no tailnet address exists on any '
+          'interface to bind; it takes the inbound tailnet connection itself and hands it to '
+          'loopback on the same port. The socket is narrower than it would be on a phone, not '
+          'wider. On a phone the address is real and the host binds it — tailnet_test holds that '
+          'path, including that every non-tailnet address is refused.',
+      'client_reached': 'http://$hostAddress:8443 through $clientProxy',
       'crossed_to_the_host': host.byId(mine.id) != null,
       'crossed_to_the_client': client.byId(theirs.id) != null,
       'paired': hostT.report()['paired'] != null,
       'checked_at': DateTime.now().toUtc().toIso8601String(),
     });
 
-    expect(binding.boundTo, hostAddress);
-    expect(isTailnetAddress(binding.boundTo!), isTrue);
+    expect(binding.reachableAt, hostAddress);
+    expect(isTailnetAddress(binding.reachableAt!), isTrue);
+    if (wire['read'] == true) {
+      expect((wire['tx_bytes'] as num) > 0, isTrue,
+          reason: 'node b sent nothing to node a, so whatever crossed did not cross the tailnet');
+      expect((wire['rx_bytes'] as num) > 0, isTrue,
+          reason: 'node b heard nothing back from node a');
+    }
     expect(host.byId(mine.id), isNotNull, reason: 'the message did not reach the host');
     expect(client.byId(theirs.id), isNotNull, reason: 'the reply did not reach the client');
 

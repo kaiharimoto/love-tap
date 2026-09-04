@@ -22,6 +22,7 @@ import '../faults.dart';
 import '../protocol/http_transport.dart';
 import '../transport.dart';
 import '../../spine/spine.dart';
+import 'proxy_client.dart';
 import 'tailnet.dart';
 
 class TailscaleBinding implements Binding {
@@ -29,6 +30,7 @@ class TailscaleBinding implements Binding {
     this.port = 8443,
     this.declaredAddress = '',
     this.peerAddress = '',
+    this.userspaceProxy = '',
     ScriptedFaults? faults,
   }) : faults = faults ?? ScriptedFaults();
 
@@ -41,6 +43,19 @@ class TailscaleBinding implements Binding {
   /// The other phone's tailnet address, learned during pairing.
   final String peerAddress;
 
+  /// Set only for a node whose tailscaled has no TUN device — the two development nodes, which
+  /// cannot have one inside a container.
+  ///
+  /// On a phone the tailnet address is a real address on a real interface, so the host binds it
+  /// and that is the whole safety property. A userspace tailscaled has no interface, so there is
+  /// no such address to bind: it accepts the inbound connection itself and hands it to loopback
+  /// on the same port. The listener is then on 127.0.0.1, which is *narrower* than the tailnet
+  /// address rather than wider — nothing but tailscaled can reach it — and outbound requests go
+  /// through tailscaled's own proxy, which is what this holds. `host:port`, and empty on a phone.
+  final String userspaceProxy;
+
+  bool get isUserspace => userspaceProxy.isNotEmpty;
+
   @override
   final ScriptedFaults faults;
 
@@ -51,11 +66,17 @@ class TailscaleBinding implements Binding {
   /// evidence/reliability.json, so the claim can be checked rather than believed.
   String? boundTo;
 
+  /// The tailnet address this host answers on, whichever address the socket is bound to.
+  String? reachableAt;
+
   @override
   Future<HostBind> hostBind() async {
+    // Checked first and in both modes: a node that is not on the tailnet does not serve, and a
+    // declared address that is not a tailnet address is refused whether there is a TUN or not.
     final address = await addressToServeOn(declared: declaredAddress);
-    boundTo = address;
-    return HostBind(address: address, port: port);
+    reachableAt = address;
+    boundTo = isUserspace ? '127.0.0.1' : address;
+    return HostBind(address: boundTo!, port: port);
   }
 
   @override
@@ -79,7 +100,7 @@ class TailscaleBinding implements Binding {
       address.contains(':') ? 'http://[$address]:$port' : 'http://$address:$port';
 
   @override
-  http.Client makeClient() => http.Client();
+  http.Client makeClient() => tailnetClient(proxy: userspaceProxy);
 }
 
 /// The transport the two phones use. Nothing here but the binding: the protocol is the one in
@@ -91,6 +112,7 @@ Transport tailscaleTransport({
   int port = 8443,
   String declaredAddress = '',
   String peerAddress = '',
+  String userspaceProxy = '',
 }) =>
     HttpTransport(
       role: role,
@@ -100,5 +122,6 @@ Transport tailscaleTransport({
         port: port,
         declaredAddress: declaredAddress,
         peerAddress: peerAddress,
+        userspaceProxy: userspaceProxy,
       ),
     );
