@@ -13,6 +13,7 @@ import '../../material/library.dart';
 import '../../material/objects.dart';
 import '../../material/paper.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../scope.dart';
 import '../../spine/projections/state.dart';
 import '../../spine/spine.dart';
@@ -33,7 +34,7 @@ class PulseRegion extends StatelessWidget {
     final today = feelingsSince(scope.spine.all, since);
 
     if (them.signals.isEmpty && today.isEmpty) {
-      return Center(child: Text(S.emptyPulse, style: Hands.margin(size: 16)));
+      return const EmptySurface(id: 'pulse', line: S.emptyPulse, aside: S.emptyPulseAside);
     }
 
     return ListView(

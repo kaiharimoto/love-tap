@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../spine/spine.dart';
 import '../module.dart';
 
@@ -91,10 +92,10 @@ class TodoList extends StatelessWidget {
         ),
         if (open.isEmpty)
           Padding(padding: const EdgeInsets.all(12), child: Text('nothing to do. suspicious.', style: Hands.margin(size: 15))),
-        for (final t in open) _Line(item: t, ctx: ctx),
+        for (final (i, t) in open.indexed) _Line(item: t, ctx: ctx, row: i),
         const SizedBox(height: 14),
         const Padding(padding: EdgeInsets.fromLTRB(12, 4, 12, 4), child: Stamped('done', size: 11)),
-        for (final t in done.take(30)) _Line(item: t, ctx: ctx),
+        for (final (i, t) in done.take(30).indexed) _Line(item: t, ctx: ctx, row: open.length + i),
       ],
     );
   }
@@ -125,7 +126,8 @@ class TodoList extends StatelessWidget {
 }
 
 class _Line extends StatelessWidget {
-  const _Line({required this.item, required this.ctx});
+  const _Line({required this.item, required this.ctx, required this.row});
+  final int row;
   final TodoItem item;
   final ModuleContext ctx;
 
@@ -144,11 +146,15 @@ class _Line extends StatelessWidget {
         'text': item.text,
         'assignee': (item.assignee == ctx.partner ? ctx.me : ctx.partner).name,
       }),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
-        color: const Color(0xFFF3EEE3),
-        child: Row(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 3, 20, 3),
+        child: Slip(
+          id: item.id,
+          row: row,
+          stock: 'looseleaf',
+          width: MediaQuery.sizeOf(context).width - 32,
+          padding: const EdgeInsets.fromLTRB(13, 8, 13, 8),
+          child: Row(
           children: [
             SizedBox(width: 22, child: item.done ? _Tick(by: by) : const SizedBox.shrink()),
             Expanded(
@@ -161,8 +167,10 @@ class _Line extends StatelessWidget {
               ),
             ),
             if (item.assignee != null) Stamped(item.assignee!.name, size: 9, colour: Pen.margin),
-            if (item.reopened > 1) Padding(padding: const EdgeInsets.only(left: 6), child: Text('again', style: Hands.margin(size: 12))),
-          ],
+            if (item.reopened > 1)
+              Padding(padding: const EdgeInsets.only(left: 6), child: Text('again', style: Hands.margin(size: 12))),
+            ],
+          ),
         ),
       ),
     );

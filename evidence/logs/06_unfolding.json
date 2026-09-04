@@ -1,0 +1,47 @@
+{
+ "scene": "06_unfolding",
+ "browser": "webkit",
+ "viewport": {
+  "width": 360,
+  "height": 780,
+  "dpr": 3
+ },
+ "url": "http://127.0.0.1:8799/",
+ "steps": [
+  {
+   "do": "goTo",
+   "ms": 3033
+  },
+  {
+   "do": "wait",
+   "ms": 2204
+  },
+  {
+   "do": "scrollTo",
+   "ms": 1099
+  },
+  {
+   "do": "wait",
+   "ms": 1903
+  },
+  {
+   "do": "unfold",
+   "ms": 1050
+  },
+  {
+   "do": "frames",
+   "ms": 204052
+  }
+ ],
+ "shots": [
+  {
+   "frames": 260,
+   "dir": "evidence/frames/06_unfolding",
+   "ms": 16
+  }
+ ],
+ "reports": [],
+ "cold_ms": 14992,
+ "problems": [],
+ "ok": true
+}

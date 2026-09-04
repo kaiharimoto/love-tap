@@ -294,6 +294,45 @@ class _Margin extends StatelessWidget {
 }
 
 /// Module and state events: a mark in the margin of the desk rather than a note of their own.
+/// Something one of them said about themselves, written the way they would say it rather than the
+/// way it is stored. `mood: low` is a field; "noor · low" is a person telling you something.
+String _declared(String who, Map<String, dynamic> p) {
+  final signal = p['signal'] as String?;
+  final value = p['value'];
+  return switch (signal) {
+    'mood' => '$who · $value',
+    'status_line' => '$who · $value',
+    'availability' => '$who is $value',
+    'place' => '$who · $value',
+    'need' => '$who needs ${_dial(value)}',
+    'energy' => '$who has ${_dial(value)} left',
+    _ => '$who · $value',
+  };
+}
+
+/// The three things a phone notices that are worth saying out loud. Everything else it knows stays
+/// on the partner strip, where it is a fact about them rather than a line in the conversation.
+String _noticed(String who, Map<String, dynamic> p) {
+  final value = p['value'];
+  return switch (p['signal']) {
+    'battery' => "$who's phone is nearly out",
+    'at_home' => value == true ? '$who got in' : '$who went out',
+    'ringer' => value == 'silent' ? "$who's phone went quiet" : "$who's phone is on again",
+    _ => '$who · $value',
+  };
+}
+
+String _dial(Object? value) {
+  final n = (value is num) ? value.round() : 2;
+  return switch (n) {
+    <= 0 => 'nothing',
+    1 => 'a little',
+    2 => 'some',
+    3 => 'a lot',
+    _ => 'everything',
+  };
+}
+
 class _MarginLine extends StatelessWidget {
   const _MarginLine({required this.item, required this.registry});
   final ThreadItem item;
@@ -302,9 +341,10 @@ class _MarginLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final p = item.event.payload;
+    final who = item.author.name;
     final text = switch (item.type) {
-      'state_declared' => '${p['signal']} · ${p['value']}',
-      'state_passive' => '${p['signal']} ${p['value']}',
+      'state_declared' => _declared(who, p),
+      'state_passive' => _noticed(who, p),
       'date_event' => '${p['action']} · ${p['title']}${p['rating'] != null ? ' · ${p['rating']}/5' : ''}',
       'todo_event' => '${p['action']} · ${p['text']}',
       'milestone' => '${p['title']} · ${p['date']}',

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../modules/module.dart';
 import '../../modules/registry.dart';
 import '../../scope.dart';
@@ -33,26 +34,35 @@ class _UsRegionState extends State<UsRegion> {
     return Column(
       children: [
         SizedBox(
-          height: 56,
+          height: 74,
           child: ListView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 8),
             children: [
               for (var i = 0; i < kModules.length; i++)
-                GestureDetector(
-                  onTap: () => setState(() => _tab = i),
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(4, 8, 4, 6),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    color: i == _tab ? const Color(0xFFF6F1E6) : const Color(0x33F6F1E6),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Stamped(kModules[i].label, size: i == _tab ? 11 : 10,
-                            colour: i == _tab ? Pen.stamp : Pen.margin),
-                        Text(kModules[i].glance(events), style: Hands.margin(size: 11)),
-                      ],
+                Padding(
+                  // the one being read sits flat; the others are still half under it
+                  padding: EdgeInsets.fromLTRB(4, i == _tab ? 4 : 10, 4, i == _tab ? 8 : 2),
+                  child: Opacity(
+                    opacity: i == _tab ? 1.0 : 0.78,
+                    child: Slip(
+                      id: 'us.${kModules[i].id}',
+                      row: i,
+                      stock: 'index',
+                      torn: false,
+                      width: 152,
+                      padding: const EdgeInsets.fromLTRB(12, 7, 12, 8),
+                      onTap: () => setState(() => _tab = i),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stamped(kModules[i].label, size: i == _tab ? 11 : 10,
+                              colour: i == _tab ? Pen.stamp : Pen.margin),
+                          Text(kModules[i].glance(events), style: Hands.margin(size: 11),
+                              maxLines: 1, overflow: TextOverflow.ellipsis),
+                        ],
+                      ),
                     ),
                   ),
                 ),

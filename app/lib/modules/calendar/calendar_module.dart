@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../spine/spine.dart';
 import '../module.dart';
 
@@ -91,26 +92,33 @@ class MilestoneList extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(4, 8, 4, 90),
       children: [
-        for (final (m, next) in withNext) _Card(m: m, next: next, now: ctx.now),
+        for (final (i, (m, next)) in withNext.indexed) _Card(m: m, next: next, now: ctx.now, row: i),
       ],
     );
   }
 }
 
 class _Card extends StatelessWidget {
-  const _Card({required this.m, required this.next, required this.now});
+  const _Card({required this.m, required this.next, required this.now, this.row = 0});
   final Milestone m;
   final DateTime? next;
   final DateTime now;
+  final int row;
 
   @override
   Widget build(BuildContext context) {
     final days = next?.difference(now).inDays;
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
-      color: const Color(0xFFF6F1E6),
-      child: Row(
+    // A day that matters was written on a card and kept, not torn off anything.
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 5, 16, 5),
+      child: Slip(
+        id: m.id,
+        row: row,
+        torn: false,
+        stock: 'index',
+        width: MediaQuery.sizeOf(context).width - 28,
+        padding: const EdgeInsets.fromLTRB(15, 12, 15, 13),
+        child: Row(
         children: [
           Expanded(
             child: Column(
@@ -139,6 +147,7 @@ class _Card extends StatelessWidget {
               ],
             ),
         ],
+        ),
       ),
     );
   }

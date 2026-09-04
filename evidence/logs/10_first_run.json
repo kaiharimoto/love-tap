@@ -1,0 +1,56 @@
+{
+ "scene": "10_first_run",
+ "browser": "webkit",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "url": "http://127.0.0.1:8798/",
+ "steps": [
+  {
+   "do": "goTo",
+   "ms": 1402
+  },
+  {
+   "do": "wait",
+   "ms": 1905
+  },
+  {
+   "do": "shot",
+   "ms": 1258
+  },
+  {
+   "do": "report",
+   "ms": 706
+  }
+ ],
+ "shots": [
+  {
+   "out": "evidence/10_first_run.png",
+   "clip": null
+  }
+ ],
+ "reports": [
+  {
+   "region": 0,
+   "visible": [],
+   "tears": {},
+   "stocks": {},
+   "scroll": null,
+   "now": "2026-09-04T03:22:32.282Z",
+   "driven_ms": 48,
+   "seed": 20260903,
+   "events": 0,
+   "transport": "local",
+   "link": "connecting",
+   "me": "teo",
+   "masks_in_pool": 56,
+   "writable_masks": 47,
+   "at": "10_first_run.png"
+  }
+ ],
+ "cold_ms": 1383,
+ "problems": [],
+ "ok": true
+}

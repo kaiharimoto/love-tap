@@ -10,6 +10,7 @@ import '../../feelings/registry.dart';
 import '../../material/hands.dart';
 import '../../material/objects.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../scope.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
@@ -51,7 +52,7 @@ class _MomentsRegionState extends State<MomentsRegion> {
         ),
         Expanded(
           child: filtered.isEmpty
-              ? Center(child: Text(S.emptyMoments, style: Hands.margin(size: 15)))
+              ? const EmptySurface(id: 'moments', line: S.emptyMoments, aside: S.emptyMomentsAside)
               : switch (_view) {
                   MomentsView.media => _Gallery(events: filtered),
                   MomentsView.milestones => _Timeline(events: filtered),

@@ -1,0 +1,95 @@
+{
+ "scene": "13_messenger_states",
+ "browser": "webkit",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "url": "http://127.0.0.1:8799/",
+ "steps": [
+  {
+   "do": "goTo",
+   "ms": 2802
+  },
+  {
+   "do": "wait",
+   "ms": 1703
+  },
+  {
+   "do": "scrollTo",
+   "ms": 1324
+  },
+  {
+   "do": "wait",
+   "ms": 1904
+  },
+  {
+   "do": "shot",
+   "ms": 2146
+  },
+  {
+   "do": "report",
+   "ms": 718
+  }
+ ],
+ "shots": [
+  {
+   "out": "evidence/13_messenger_states.png",
+   "clip": null
+  }
+ ],
+ "reports": [
+  {
+   "region": 1,
+   "visible": [
+    "0001FFAJS8Y82ASXZA5WV2KZPZ",
+    "0001FFGWY0803HHBRMC1WV99D8",
+    "0001FFNBGGSB6ETZ9KEHGJD2WC",
+    "0001FG4SN095WWHF1GC4KZJ0M4",
+    "0001FGB3SRHK3TCYHHP6BJRJZ7",
+    "0001FGK7J84FG90R6N4AGB4BMF",
+    "0001FGNEVG8H0ZYXE8YEM2MPDQ",
+    "0001FJP7402X9902JFV208R4MB"
+   ],
+   "tears": {
+    "0001FFAJS8Y82ASXZA5WV2KZPZ": "tear_003",
+    "0001FFGWY0803HHBRMC1WV99D8": "tear_023",
+    "0001FFNBGGSB6ETZ9KEHGJD2WC": "tear_045",
+    "0001FG4SN095WWHF1GC4KZJ0M4": "tear_008",
+    "0001FGB3SRHK3TCYHHP6BJRJZ7": "tear_029",
+    "0001FGK7J84FG90R6N4AGB4BMF": "tear_050",
+    "0001FGNEVG8H0ZYXE8YEM2MPDQ": "tear_012",
+    "0001FJP7402X9902JFV208R4MB": "tear_034"
+   },
+   "stocks": {
+    "0001FFAJS8Y82ASXZA5WV2KZPZ": "lined_01",
+    "0001FFGWY0803HHBRMC1WV99D8": "looseleaf_02",
+    "0001FFNBGGSB6ETZ9KEHGJD2WC": "graph_01",
+    "0001FG4SN095WWHF1GC4KZJ0M4": "lined_03",
+    "0001FGB3SRHK3TCYHHP6BJRJZ7": "lined_01",
+    "0001FGK7J84FG90R6N4AGB4BMF": "lined_03",
+    "0001FGNEVG8H0ZYXE8YEM2MPDQ": "lined_02",
+    "0001FJP7402X9902JFV208R4MB": "lined_01"
+   },
+   "scroll": {
+    "first": 11211,
+    "last": 11218,
+    "of": 11219
+   },
+   "now": "2026-09-03T19:40:00.000Z",
+   "driven_ms": 96,
+   "seed": 20260903,
+   "events": 13775,
+   "transport": "local",
+   "link": "connecting",
+   "me": "teo",
+   "masks_in_pool": 56,
+   "writable_masks": 47,
+   "at": "13_messenger_states.png"
+  }
+ ],
+ "cold_ms": 13662,
+ "problems": [],
+ "ok": true
+}

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../spine/spine.dart';
 import '../module.dart';
 
@@ -76,16 +77,17 @@ class RitualList extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(4, 8, 4, 90),
       children: [
-        for (final r in rituals) _Ritual(r: r, ctx: ctx),
+        for (final (i, r) in rituals.indexed) _Ritual(r: r, ctx: ctx, row: i),
       ],
     );
   }
 }
 
 class _Ritual extends StatelessWidget {
-  const _Ritual({required this.r, required this.ctx});
+  const _Ritual({required this.r, required this.ctx, required this.row});
   final Ritual r;
   final ModuleContext ctx;
+  final int row;
 
   @override
   Widget build(BuildContext context) {
@@ -104,31 +106,39 @@ class _Ritual extends StatelessWidget {
         'title': r.title,
         'kept_at': ctx.now.toIso8601String(),
       }),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
-        color: const Color(0xFFF0EFE6),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(r.title, style: Hands.of(r.by ?? ctx.me, size: 19)),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                for (final w in lastEight)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: _Tally(marks: weeks[w] ?? 0, ink: (r.by ?? ctx.me) == Person.noor ? Pen.ballpoint : Pen.graphite),
-                  ),
-              ],
-            ),
-            if (r.notes.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(r.notes.last, style: Hands.margin(size: 14)),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 5, 18, 5),
+        child: Slip(
+          id: r.id,
+          row: row,
+          stock: 'graph',
+          width: MediaQuery.sizeOf(context).width - 30,
+          padding: const EdgeInsets.fromLTRB(14, 11, 14, 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(r.title, style: Hands.of(r.by ?? ctx.me, size: 19)),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  for (final w in lastEight)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: _Tally(
+                        marks: weeks[w] ?? 0,
+                        ink: (r.by ?? ctx.me) == Person.noor ? Pen.ballpoint : Pen.graphite,
+                      ),
+                    ),
+                ],
               ),
-          ],
+              if (r.notes.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(r.notes.last, style: Hands.margin(size: 14)),
+                ),
+            ],
+          ),
         ),
       ),
     );

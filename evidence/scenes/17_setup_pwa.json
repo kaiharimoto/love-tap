@@ -9,12 +9,8 @@
  "log": "evidence/logs/17_setup_pwa.json",
  "steps": [
   {
-   "do": "goTo",
-   "arg": 4
-  },
-  {
    "do": "wait",
-   "ms": 1200
+   "ms": 2200
   },
   {
    "do": "shot",

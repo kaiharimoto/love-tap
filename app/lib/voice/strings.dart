@@ -33,6 +33,7 @@ class S {
   static const searchHint = 'anything, any time';
   static const searchNothing = 'nothing with that in it.';
   static const emptyChat = "first one's yours.";
+  static const emptyChatAside = 'whatever it is. it only goes to one person.';
   static const replyingTo = 'answering';
   static const cancel = 'cancel';
   static const play = 'play';
@@ -46,6 +47,7 @@ class S {
 
   // pulse
   static const emptyPulse = 'nothing from them yet. it will show here.';
+  static const emptyPulseAside = 'their phone tells this one where they are, once it can reach it.';
 
   // us
   static const emptyDates = "nowhere planned. that's fine.";
@@ -55,6 +57,7 @@ class S {
 
   // moments
   static const emptyMoments = 'it fills in as it happens.';
+  static const emptyMomentsAside = 'everything either of you sends ends up here, by day and by kind.';
 
   // settings
   static const emptyFeelings = 'the built-in ones are here. make one below.';

@@ -52,9 +52,13 @@ class _SettingsRegionState extends State<SettingsRegion> {
     if (mounted) setState(() => _prefs = p);
   }
 
-  /// Capture mode: put the six words on screen without a thumb on the button.
+  /// Capture mode: put the six words on screen without a thumb on the button. Only the host has
+  /// any to read out — the client is the phone they are read *to* — so on a client this quietly
+  /// does nothing rather than failing the scene.
   Future<void> _showWords() async {
-    final c = await AppScope.of(context).transport.beginPairing();
+    final t = AppScope.of(context).transport;
+    if (t.role != TransportRole.host) return;
+    final c = await t.beginPairing();
     if (mounted) setState(() => _code = c);
   }
 

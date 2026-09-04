@@ -10,11 +10,11 @@
  "steps": [
   {
    "do": "goTo",
-   "arg": 0
+   "arg": 1
   },
   {
    "do": "wait",
-   "ms": 1200
+   "ms": 1400
   },
   {
    "do": "shot",

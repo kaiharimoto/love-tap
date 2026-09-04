@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../module.dart';
 import 'dates_module.dart';
 
@@ -20,11 +21,12 @@ class DateList extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(4, 4, 4, 90),
       children: [
         _Header(label: 'ahead', onAdd: () => _plan(context)),
-        if (upcoming.isEmpty) Padding(padding: const EdgeInsets.all(12), child: Text("nowhere planned. that's fine.", style: Hands.margin(size: 15))),
-        for (final d in upcoming) _Stub(item: d, ctx: ctx),
+        if (upcoming.isEmpty)
+          Padding(padding: const EdgeInsets.all(12), child: Text("nowhere planned. that's fine.", style: Hands.margin(size: 15))),
+        for (var i = 0; i < upcoming.length; i++) _Stub(item: upcoming[i], ctx: ctx, row: i),
         const SizedBox(height: 14),
         const _Header(label: 'been'),
-        for (final d in past.take(40)) _Stub(item: d, ctx: ctx),
+        for (var i = 0; i < past.take(40).length; i++) _Stub(item: past[i], ctx: ctx, row: upcoming.length + i),
       ],
     );
   }
@@ -79,9 +81,10 @@ class _Header extends StatelessWidget {
 
 /// One date as a ticket stub, with its rating in pencil stars.
 class _Stub extends StatefulWidget {
-  const _Stub({required this.item, required this.ctx});
+  const _Stub({required this.item, required this.ctx, required this.row});
   final DateItem item;
   final ModuleContext ctx;
+  final int row;
 
   @override
   State<_Stub> createState() => _StubState();
@@ -94,15 +97,16 @@ class _StubState extends State<_Stub> {
   @override
   Widget build(BuildContext context) {
     final by = item.by ?? ctx.me;
-    return GestureDetector(
-      onTap: _act,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
-        decoration: BoxDecoration(
-          color: const Color(0xFFF6F1E6),
-          border: Border(left: BorderSide(color: Pen.red.withValues(alpha: 0.5), width: 2)),
-        ),
+    final width = MediaQuery.sizeOf(context).width - 30;
+    // A date is a ticket stub: it was torn off something, and it is the same stub every time.
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 5, 18, 5),
+      child: Slip(
+        id: item.id,
+        row: widget.row,
+        width: width,
+        stock: item.rating != null ? 'index' : 'receipt',
+        onTap: _act,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -119,7 +123,8 @@ class _StubState extends State<_Stub> {
                 if (item.rating != null) Stars(rating: item.rating!),
               ],
             ),
-            if (item.note != null) Padding(padding: const EdgeInsets.only(top: 4), child: Text(item.note!, style: Hands.margin(size: 14))),
+            if (item.note != null)
+              Padding(padding: const EdgeInsets.only(top: 4), child: Text(item.note!, style: Hands.margin(size: 14))),
           ],
         ),
       ),

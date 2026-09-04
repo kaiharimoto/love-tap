@@ -85,11 +85,42 @@ class ThreadState {
   }
 }
 
+/// Which passive signals are worth a mark in the margin, and how often.
+///
+/// Three things a phone knows are worth saying out loud: that it is nearly out of battery, that
+/// its owner has come in or gone out, and that it has been put on silent. Everything else — the
+/// network it is on, whether it is moving, the hour where they are — belongs to the partner strip,
+/// where it is a fact about them rather than a line in the conversation.
+const Map<String, Set<String>> _saidPassive = {
+  'battery': {'low'},
+  'at_home': {'true', 'false'},
+  'ringer': {'silent', 'normal'},
+};
+
+String _passiveKey(Event e) => '${e.author.name}.${e.payload['signal']}';
+
+/// The mark this signal would leave, or null if it leaves none. At most one an hour per signal
+/// per person, so a phone that flickers between two networks says nothing at all.
+String? _worthSaying(Event e, Map<String, int> last) {
+  final signal = e.payload['signal'] as String?;
+  final allowed = _saidPassive[signal];
+  if (allowed == null) return null;
+  final value = e.payload['value'];
+  final word = signal == 'battery'
+      ? ((value is num && value <= 12) ? 'low' : null)
+      : '$value';
+  if (word == null || !allowed.contains(word)) return null;
+  final since = last[_passiveKey(e)];
+  if (since != null && e.ts - since < 3600 * 1000) return null;
+  return word;
+}
+
 /// Builds the thread from the log. Linear in the number of events.
 ThreadState projectThread(List<Event> events, {Person? me}) {
   final rows = <String, _Row>{};
   final order = <String>[];
   final readUpto = <Person, int>{};
+  final lastPassive = <String, int>{};
   for (final e in events) {
     final spec = kEventTypeById[e.type];
     if (spec == null) continue;
@@ -114,6 +145,17 @@ ThreadState projectThread(List<Event> events, {Person? me}) {
           row.reactions.removeWhere((r) => r.by == e.author && r.feelingId == e.payload['feeling_id']);
           row.reactions.add(Reaction(by: e.author, feelingId: e.payload['feeling_id'] as String, eventId: e.id, at: e.ts));
         }
+        continue;
+      case 'state_passive':
+        // A phone reports about its owner all day, and almost none of it belongs in a
+        // conversation: docs/EVENT_TYPES.md says one margin mark per meaningful transition per
+        // hour, and the rest folded into the partner strip only. A battery level is not a thing
+        // either of them said.
+        final mark = _worthSaying(e, lastPassive);
+        if (mark == null) continue;
+        lastPassive[_passiveKey(e)] = e.ts;
+        rows[e.id] = _Row(e);
+        order.add(e.id);
         continue;
       case 'read_marker':
         final upto = e.payload['upto_seq'];

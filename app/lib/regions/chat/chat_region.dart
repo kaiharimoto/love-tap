@@ -14,6 +14,7 @@ import '../../material/fold.dart';
 import '../../material/marks.dart';
 import '../../material/objects.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../media/capture.dart';
 import '../../media/local_uri.dart';
 import '../../media/read_bytes.dart';
@@ -366,7 +367,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
           child: Stack(
             children: [
               items.isEmpty
-                  ? Center(child: Text(S.emptyChat, style: Hands.margin(size: 17)))
+                  ? const EmptySurface(id: 'chat', line: S.emptyChat, aside: S.emptyChatAside)
                   : ScrollablePositionedList.builder(
                       itemScrollController: _scroll,
                       itemPositionsListener: _positions,
