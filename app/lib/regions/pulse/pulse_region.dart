@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../../feelings/registry.dart';
 import '../../material/assignment.dart';
 import '../../material/hands.dart';
+import '../../material/marks.dart';
 import '../../material/library.dart';
 import '../../material/objects.dart';
 import '../../material/paper.dart';
@@ -312,15 +313,32 @@ class _StatusFieldState extends State<_StatusField> {
   }
 
   @override
-  Widget build(BuildContext context) => TextField(
-        controller: _c,
-        style: Hands.of(widget.me, size: 18),
-        decoration: InputDecoration(
-          isDense: true,
-          border: UnderlineInputBorder(borderSide: BorderSide(color: Pen.margin.withValues(alpha: 0.4))),
-          hintText: 'a line about now',
-          hintStyle: Hands.margin(size: 16),
-        ),
-        onSubmitted: widget.onSet,
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _c,
+            style: Hands.of(widget.me, size: 18),
+            // it wraps rather than scrolling sideways: a line about now that runs off the edge of
+            // the paper is a line you cannot read on paper
+            minLines: 1,
+            maxLines: 3,
+            cursorColor: Pen.ballpoint,
+            cursorWidth: 1.2,
+            decoration: InputDecoration(
+              isDense: true,
+              contentPadding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              hintText: 'a line about now',
+              hintStyle: Hands.margin(size: 16),
+            ),
+            onSubmitted: widget.onSet,
+            onEditingComplete: () => widget.onSet(_c.text),
+          ),
+          const RuleLine(seed: 61),
+        ],
       );
 }

@@ -1380,6 +1380,57 @@
     "samples": 28
    }
   },
+  "assets/objects/obj_spitball.png": {
+   "bytes": 160933,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_spitball",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_spitball_shadow.png": {
+   "bytes": 44324,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_spitball",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_spitball_shadow_dusk.png": {
+   "bytes": 71276,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_spitball",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
   "assets/objects/obj_staple_chain.png": {
    "bytes": 191601,
    "generator": "blender/objects/objects.py",
@@ -1405,6 +1456,74 @@
     "frame_mm": 60,
     "light": "day",
     "object": "obj_staple_chain",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_staple_chain_shadow_dusk.png": {
+   "bytes": 64737,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_staple_chain",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_stone.png": {
+   "bytes": 203853,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_stone",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_stone_shadow.png": {
+   "bytes": 143408,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_stone",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_stone_shadow_dusk.png": {
+   "bytes": 72015,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_stone",
     "pass": "shadow",
     "resolution": [
      900,

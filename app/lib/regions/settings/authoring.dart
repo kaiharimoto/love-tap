@@ -109,7 +109,9 @@ class _AuthoringSheetState extends State<AuthoringSheet> {
                 decoration: InputDecoration(
                   hintText: 'what it is called',
                   hintStyle: Hands.margin(size: 17),
-                  border: const UnderlineInputBorder(borderSide: BorderSide(color: Pen.margin)),
+                  border: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
                 ),
               ),
               const SizedBox(height: 14),

@@ -15,6 +15,7 @@ import '../../flags.dart';
 import '../../feelings/registry.dart';
 import '../../feelings/sensation.dart';
 import '../../material/hands.dart';
+import '../../material/marks.dart';
 import '../../material/objects.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
@@ -268,7 +269,10 @@ class _Pairing extends StatelessWidget {
               ),
           ] else ...[
             TextField(controller: address, style: Hands.teo(size: 16), decoration: _line('their address')),
+            const RuleLine(seed: 67),
+            const SizedBox(height: 8),
             TextField(controller: words, style: Hands.teo(size: 16), decoration: _line('the six words')),
+            const RuleLine(seed: 73),
             const SizedBox(height: 8),
             GestureDetector(onTap: onPair, child: Text('pair', style: Hands.margin(size: 15))),
           ],
@@ -290,7 +294,9 @@ class _Pairing extends StatelessWidget {
         isDense: true,
         hintText: hint,
         hintStyle: Hands.margin(size: 15),
-        border: const UnderlineInputBorder(borderSide: BorderSide(color: Pen.margin)),
+        border: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
       );
 
   static String _ago(DateTime when) {
