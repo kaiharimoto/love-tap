@@ -132,19 +132,40 @@ function ensure(p) {
         break;
       }
       case 'frames': {
-        // one frame at a time, with the clock stepped between them
+        // One frame at a time, with the clock stepped between them, and — when the clip is of
+        // something being done rather than something happening — the thumb moved a little between
+        // each one too. A drag spread across three hundred frames is a real recording of a scroll:
+        // the app draws every frame of it, and none of them is invented afterwards.
         const dir = abs(step.dir);
         fs.mkdirSync(dir, { recursive: true });
         const count = step.count || 30;
         const ms = step.ms || 33;
+        const drive = step.drive;
         const names = [];
+        if (drive && drive.kind === 'drag') {
+          await page.mouse.move(drive.from[0], drive.from[1]);
+          await page.mouse.down();
+        }
         for (let i = 0; i < count; i++) {
+          if (drive && drive.kind === 'drag') {
+            // ease it, the way a thumb does: slow at the start, quick through the middle
+            const t = count === 1 ? 1 : i / (count - 1);
+            const e = t < 0.5 ? 2 * t * t : 1 - 2 * (1 - t) * (1 - t);
+            await page.mouse.move(
+              drive.from[0] + (drive.to[0] - drive.from[0]) * e,
+              drive.from[1] + (drive.to[1] - drive.from[1]) * e,
+            );
+            if (drive.release && i === Math.round(count * (drive.release || 0.7))) {
+              await page.mouse.up();   // let go part way, so the rest is the thread's own momentum
+            }
+          }
           const name = path.join(dir, String(i).padStart(4, '0') + '.png');
           await page.screenshot({ path: name, fullPage: false, clip: step.clip });
           names.push(path.relative(ROOT, name));
           await page.evaluate((m) => window.__deskStep(m), ms);
         }
-        log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms });
+        if (drive && drive.kind === 'drag' && !drive.release) await page.mouse.up();
+        log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms, drive: drive || null });
         break;
       }
       case 'report': {

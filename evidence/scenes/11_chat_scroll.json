@@ -5,7 +5,7 @@
   "height": 780,
   "dpr": 3
  },
- "settle": 700,
+ "settle": 400,
  "log": "evidence/logs/11_chat_scroll.json",
  "steps": [
   {
@@ -14,30 +14,32 @@
   },
   {
    "do": "wait",
-   "ms": 1200
+   "ms": 1600
   },
   {
    "do": "scrollTo",
-   "arg": "0.30"
+   "arg": "0.55"
   },
   {
    "do": "wait",
-   "ms": 800
+   "ms": 900
   },
   {
    "do": "frames",
    "dir": "evidence/frames/11_chat_scroll",
    "count": 300,
    "ms": 16,
-   "scroll": {
+   "drive": {
+    "kind": "drag",
     "from": [
      180,
-     620
+     660
     ],
     "to": [
      180,
-     160
-    ]
+     90
+    ],
+    "release": 0.72
    }
   }
  ]

@@ -166,12 +166,16 @@ make_clip() { # name fps min_seconds
   local name="$1" fps="${2:-60}" min="${3:-4}"
   wants "$name" || return 0
   local dir="evidence/frames/$name"
-  local extra="evidence/frames/${name}_b"
   [ -d "$dir" ] || { note_missing "$name.mp4" "no frames were captured"; return 1; }
   local staged="$SCRATCH/$name"
   rm -rf "$staged" && mkdir -p "$staged"
   local i=0
-  for f in "$dir"/*.png ${extra:+$( [ -d "$extra" ] && echo "$extra"/*.png )}; do
+  # a clip is taken in runs — before a thing happens, and after it — and they play in order
+  local parts=("$dir")
+  for suffix in _b _c _d; do
+    [ -d "evidence/frames/${name}${suffix}" ] && parts+=("evidence/frames/${name}${suffix}")
+  done
+  for f in $(for d in "${parts[@]}"; do ls "$d"/*.png 2>/dev/null; done); do
     [ -f "$f" ] || continue
     ln -sf "$(realpath "$f")" "$(printf '%s/%06d.png' "$staged" "$i")"
     i=$((i + 1))

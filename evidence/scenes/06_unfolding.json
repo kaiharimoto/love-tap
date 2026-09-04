@@ -5,7 +5,7 @@
   "height": 780,
   "dpr": 3
  },
- "settle": 700,
+ "settle": 400,
  "log": "evidence/logs/06_unfolding.json",
  "steps": [
   {
@@ -14,7 +14,7 @@
   },
   {
    "do": "wait",
-   "ms": 1500
+   "ms": 1600
   },
   {
    "do": "scrollTo",
@@ -25,12 +25,19 @@
    "ms": 1200
   },
   {
-   "do": "unfold"
+   "do": "frames",
+   "dir": "evidence/frames/06_unfolding",
+   "count": 40,
+   "ms": 16
+  },
+  {
+   "do": "unfold",
+   "after": 0
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/06_unfolding",
-   "count": 260,
+   "dir": "evidence/frames/06_unfolding_b",
+   "count": 240,
    "ms": 16
   }
  ]

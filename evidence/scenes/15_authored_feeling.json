@@ -5,7 +5,7 @@
   "height": 780,
   "dpr": 3
  },
- "settle": 700,
+ "settle": 400,
  "log": "evidence/logs/15_authored_feeling.json",
  "steps": [
   {
@@ -14,12 +14,42 @@
   },
   {
    "do": "wait",
-   "ms": 1200
+   "ms": 1600
   },
   {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 260,
+   "count": 60,
+   "ms": 16
+  },
+  {
+   "do": "goTo",
+   "arg": 1
+  },
+  {
+   "do": "wait",
+   "ms": 900
+  },
+  {
+   "do": "openCorner",
+   "arg": true
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling_b",
+   "count": 70,
+   "ms": 16
+  },
+  {
+   "do": "sendFeeling",
+   "feeling": "pigeon",
+   "intensity": 0.8,
+   "after": 0
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling_c",
+   "count": 180,
    "ms": 16
   }
  ]
