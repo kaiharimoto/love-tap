@@ -46,8 +46,11 @@ class DeskApp extends StatelessWidget {
         ),
         textTheme: Typography.blackCupertino.apply(fontFamily: 'TeoHand'),
       ),
+      // dusk only when the dusk half of the library is actually baked; see MaterialLibrary.hasDusk
       home: Light(
-        condition: Flags.dusk ? LightCondition.dusk : LightCondition.day,
+        condition: Flags.dusk && MaterialLibrary.loaded && MaterialLibrary.instance.hasDusk
+            ? LightCondition.dusk
+            : LightCondition.day,
         child: const Shell(),
       ),
     );

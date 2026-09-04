@@ -84,6 +84,15 @@ class MaterialLibrary {
     );
   }
 
+  /// Whether the dusk half of the library exists at all.
+  ///
+  /// The desk, the paper and every baked shadow were rendered under two conditions, and the app
+  /// shows one of them at a time. A build lit at dusk with only the daylight paper baked would put
+  /// a lamp on the desk and leave the notes in the afternoon — contact shadows disagreeing about
+  /// where the light is, which is the first thing anyone looking for faked material checks. Not
+  /// being dusk yet is honest; being half of each is not.
+  bool get hasDusk => paper.any((e) => e.id.endsWith('_dusk'));
+
   // ---- paper stocks --------------------------------------------------------------------------
   /// Ids of a stock's variants under a light condition, e.g. stockVariants('lined') ->
   /// [lined_01, lined_02, …]; dusk variants carry the _dusk suffix.

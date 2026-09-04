@@ -1176,6 +1176,23 @@
     "samples": 28
    }
   },
+  "assets/objects/obj_knot_shadow_dusk.png": {
+   "bytes": 69384,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_knot",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
   "assets/objects/obj_plane.png": {
    "bytes": 457873,
    "generator": "blender/objects/objects.py",
@@ -1303,6 +1320,91 @@
     "frame_mm": 60,
     "light": "dusk",
     "object": "obj_ribbon",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_rubber_band.png": {
+   "bytes": 183189,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_rubber_band",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_rubber_band_shadow.png": {
+   "bytes": 99142,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_rubber_band",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_rubber_band_shadow_dusk.png": {
+   "bytes": 61193,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_rubber_band",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_staple_chain.png": {
+   "bytes": 191601,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_staple_chain",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_staple_chain_shadow.png": {
+   "bytes": 110343,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_staple_chain",
     "pass": "shadow",
     "resolution": [
      900,
