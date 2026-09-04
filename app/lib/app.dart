@@ -12,6 +12,7 @@ import 'material/hands.dart';
 import 'material/library.dart';
 import 'material/light.dart';
 import 'material/paper.dart';
+import 'material/motion.dart';
 import 'material/palette.dart';
 import 'feelings/builtins.dart';
 import 'feelings/corner.dart';
@@ -188,15 +189,32 @@ class _ShellState extends State<Shell> {
                         hostAddress: scope.link.address,
                       )
                     else
-                      IndexedStack(
-                        index: _index,
-                        children: const [
-                          PulseRegion(),
-                          ChatRegion(),
-                          UsRegion(),
-                          MomentsRegion(),
-                          SettingsRegion(),
-                        ],
+                      // Every region keeps its state and its scroll, so they are all built and
+                      // one is shown — but showing one by cutting to it is a hard edit: half the
+                      // brightness of the screen changes between two frames, which reads as a
+                      // splice rather than as a hand moving between two piles of paper. The paper
+                      // underneath does not move; what is on it is exchanged.
+                      AnimatedSwitcher(
+                        duration: Motion.turn,
+                        switchInCurve: Curves.easeOut,
+                        switchOutCurve: Curves.easeIn,
+                        layoutBuilder: (current, previous) => Stack(
+                          alignment: Alignment.topCenter,
+                          children: [...previous, ?current],
+                        ),
+                        child: KeyedSubtree(
+                          key: ValueKey(_index),
+                          child: IndexedStack(
+                            index: _index,
+                            children: const [
+                              PulseRegion(),
+                              ChatRegion(),
+                              UsRegion(),
+                              MomentsRegion(),
+                              SettingsRegion(),
+                            ],
+                          ),
+                        ),
                       ),
                     // one gesture from any region
                     FeelingCorner(

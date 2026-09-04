@@ -17,7 +17,7 @@
   },
   {
    "do": "wait",
-   "ms": 1400
+   "ms": 3200
   },
   {
    "do": "goTo",
@@ -25,7 +25,7 @@
   },
   {
    "do": "wait",
-   "ms": 900
+   "ms": 1200
   },
   {
    "do": "frames",
@@ -40,7 +40,7 @@
   {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating_b",
-   "count": 56,
+   "count": 24,
    "ms": 16
   },
   {
@@ -51,7 +51,7 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating_b",
    "count": 160,
-   "from": 56,
+   "from": 24,
    "ms": 8
   },
   {
@@ -71,7 +71,7 @@
   {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating_c",
-   "count": 110,
+   "count": 120,
    "from": 40,
    "ms": 16,
    "drive": {
@@ -86,8 +86,8 @@
   {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating_c",
-   "count": 160,
-   "from": 150,
+   "count": 120,
+   "from": 160,
    "ms": 8
   },
   {
