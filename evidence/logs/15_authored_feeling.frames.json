@@ -1,12 +1,12 @@
 {
  "dir": "evidence/frames/15_authored_feeling",
- "frames": 260,
+ "frames": 60,
  "fps": 60.0,
- "seconds": 4.33,
+ "seconds": 1.0,
  "mean_change_per_frame": 0.0,
- "repeated_frames": 259,
+ "repeated_frames": 59,
  "repeated_fraction": 1.0,
- "longest_still_run": 259,
+ "longest_still_run": 59,
  "repeated_at": [
   0,
   1,
@@ -23,14 +23,14 @@
  ],
  "brightness_jumps": 0,
  "ok": false,
- "why": "nothing moves in it at all; 100% of it is frames the app did not draw; it holds still for 4.3s in one stretch",
+ "why": "nothing moves in it at all; 1.0s is short of 4.0s; 100% of it is frames the app did not draw",
  "strip": "evidence/crops/15_authored_feeling_strip.png",
  "strip_frames": [
   "evidence/frames/15_authored_feeling/0000.png",
-  "evidence/frames/15_authored_feeling/0052.png",
-  "evidence/frames/15_authored_feeling/0104.png",
-  "evidence/frames/15_authored_feeling/0155.png",
-  "evidence/frames/15_authored_feeling/0207.png",
-  "evidence/frames/15_authored_feeling/0259.png"
+  "evidence/frames/15_authored_feeling/0012.png",
+  "evidence/frames/15_authored_feeling/0024.png",
+  "evidence/frames/15_authored_feeling/0035.png",
+  "evidence/frames/15_authored_feeling/0047.png",
+  "evidence/frames/15_authored_feeling/0059.png"
  ]
 }

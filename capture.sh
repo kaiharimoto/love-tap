@@ -186,7 +186,9 @@ make_clip() { # name fps min_seconds
   ffmpeg -y -loglevel error -framerate "$fps" -i "$staged/%06d.png" \
     -c:v libx264 -preset slow -crf 16 -pix_fmt yuv420p -movflags +faststart \
     "evidence/$name.mp4" </dev/null || { note_missing "$name.mp4" "ffmpeg refused the frames"; return 1; }
-  python3 tools/check/frames.py "$dir" --fps "$fps" --min-seconds "$min" \
+  # the check reads the frames the clip was actually assembled from, not just its first run:
+  # judging 06 on its opening still is how four static clips came back marked as passing
+  python3 tools/check/frames.py "$staged" --fps "$fps" --min-seconds "$min" \
     --strip "evidence/crops/${name}_strip.png" --out "$LOG/${name}.frames.json" >/dev/null \
     || note_missing "$name.mp4" "the frame check failed; see $LOG/${name}.frames.json"
   echo "  ✓ $name.mp4 ($i frames at ${fps}fps)"

@@ -10,34 +10,46 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2669
+   "ms": 3178
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 2003
   },
   {
    "do": "scrollTo",
-   "ms": 2321
+   "ms": 1613
   },
   {
    "do": "wait",
-   "ms": 1504
+   "ms": 1303
   },
   {
    "do": "frames",
-   "ms": 234640
+   "ms": 228881
   }
  ],
  "shots": [
   {
    "frames": 300,
    "dir": "evidence/frames/11_chat_scroll",
-   "ms": 16
+   "ms": 16,
+   "drive": {
+    "kind": "drag",
+    "from": [
+     180,
+     660
+    ],
+    "to": [
+     180,
+     90
+    ],
+    "release": 0.72
+   }
   }
  ],
  "reports": [],
- "cold_ms": 13488,
+ "cold_ms": 14332,
  "problems": [],
  "ok": true
 }

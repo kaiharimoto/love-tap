@@ -10,43 +10,45 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2325
+   "ms": 1840
   },
   {
    "do": "wait",
-   "ms": 1704
+   "ms": 1804
   },
   {
    "do": "openCorner",
-   "ms": 1200
+   "ms": 1112
   },
   {
    "do": "frames",
-   "ms": 88940
+   "ms": 73967
   },
   {
    "do": "sendFeeling",
-   "ms": 1092
+   "ms": 2687
   },
   {
    "do": "frames",
-   "ms": 192960
+   "ms": 258840
   }
  ],
  "shots": [
   {
-   "frames": 120,
+   "frames": 90,
    "dir": "evidence/frames/07_feeling_landing",
-   "ms": 16
+   "ms": 16,
+   "drive": null
   },
   {
-   "frames": 260,
+   "frames": 300,
    "dir": "evidence/frames/07_feeling_landing_b",
-   "ms": 16
+   "ms": 16,
+   "drive": null
   }
  ],
  "reports": [],
- "cold_ms": 13586,
+ "cold_ms": 15428,
  "problems": [],
  "ok": true
 }

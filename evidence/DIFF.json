@@ -1,50 +1,55 @@
 {
- "captured_at": "2026-09-04T03:18:47Z",
+ "captured_at": "2026-09-04T04:09:19Z",
  "note": "ssim against the previous session; label assigned by the coherence critic",
  "artifacts": {
   "01_pulse.png": {
-   "ssim": null,
-   "reading": "new",
+   "ssim": 0.7269,
+   "reading": "reworked",
    "label": null
   },
   "02_chat.png": {
-   "ssim": null,
-   "reading": "new",
+   "ssim": 0.5901,
+   "reading": "redrawn",
    "label": null
   },
   "03_us.png": {
-   "ssim": null,
-   "reading": "new",
+   "ssim": 0.6027,
+   "reading": "reworked",
    "label": null
   },
   "04_moments.png": {
+   "ssim": 0.8926,
+   "reading": "reworked",
+   "label": null
+  },
+  "05_settings.png": {
    "ssim": null,
    "reading": "new",
    "label": null
   },
   "10_first_run.png": {
-   "ssim": null,
-   "reading": "new",
+   "ssim": 0.8289,
+   "reading": "reworked",
    "label": null
   },
   "12_search.png": {
-   "ssim": null,
-   "reading": "new",
+   "ssim": 0.6786,
+   "reading": "reworked",
    "label": null
   },
   "13_messenger_states.png": {
-   "ssim": null,
-   "reading": "new",
+   "ssim": 0.6042,
+   "reading": "reworked",
    "label": null
   },
   "14_media_viewer.png": {
-   "ssim": null,
-   "reading": "new",
+   "ssim": 0.6282,
+   "reading": "reworked",
    "label": null
   },
   "17_setup_pwa.png": {
-   "ssim": null,
-   "reading": "new",
+   "ssim": 0.5677,
+   "reading": "redrawn",
    "label": null
   }
  }

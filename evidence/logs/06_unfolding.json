@@ -10,38 +10,49 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3033
+   "ms": 3093
   },
   {
    "do": "wait",
-   "ms": 2204
+   "ms": 2004
   },
   {
    "do": "scrollTo",
-   "ms": 1099
+   "ms": 861
   },
   {
    "do": "wait",
-   "ms": 1903
-  },
-  {
-   "do": "unfold",
-   "ms": 1050
+   "ms": 1603
   },
   {
    "do": "frames",
-   "ms": 204052
+   "ms": 29825
+  },
+  {
+   "do": "unfold",
+   "ms": 344
+  },
+  {
+   "do": "frames",
+   "ms": 181872
   }
  ],
  "shots": [
   {
-   "frames": 260,
+   "frames": 40,
    "dir": "evidence/frames/06_unfolding",
-   "ms": 16
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 240,
+   "dir": "evidence/frames/06_unfolding_b",
+   "ms": 16,
+   "drive": null
   }
  ],
  "reports": [],
- "cold_ms": 14992,
+ "cold_ms": 14181,
  "problems": [],
  "ok": true
 }

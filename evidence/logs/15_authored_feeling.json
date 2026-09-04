@@ -10,26 +10,63 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2788
+   "ms": 2632
   },
   {
    "do": "wait",
-   "ms": 1905
+   "ms": 2002
   },
   {
    "do": "frames",
-   "ms": 121776
+   "ms": 54683
+  },
+  {
+   "do": "goTo",
+   "ms": 971
+  },
+  {
+   "do": "wait",
+   "ms": 1303
+  },
+  {
+   "do": "openCorner",
+   "ms": 1129
+  },
+  {
+   "do": "frames",
+   "ms": 60117
+  },
+  {
+   "do": "sendFeeling",
+   "ms": 1501
+  },
+  {
+   "do": "frames",
+   "ms": 166111
   }
  ],
  "shots": [
   {
-   "frames": 260,
+   "frames": 60,
    "dir": "evidence/frames/15_authored_feeling",
-   "ms": 16
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 70,
+   "dir": "evidence/frames/15_authored_feeling_b",
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 180,
+   "dir": "evidence/frames/15_authored_feeling_c",
+   "ms": 16,
+   "drive": null
   }
  ],
  "reports": [],
- "cold_ms": 14546,
+ "cold_ms": 13103,
  "problems": [],
  "ok": true
 }

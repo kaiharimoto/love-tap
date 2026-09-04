@@ -11,8 +11,8 @@ The camera is a phone: a perspective lens around 26 mm equivalent, held at the h
 person actually holds one at. That is why these do not read as product shots — nobody photographs
 their own boiler from a tripod.
 
-Output goes to seed/photos/<id>.jpg at the dimensions the month's index declares, because the seed
-loader reads the size off the file and the thread lays the row out from it.
+This writes the negative: seed/photos/<id>.exr, scene-linear and unclipped. Running
+blender/photos/develop.py turns the negatives into the JPEGs the seed loader reads.
 """
 import argparse
 import json
@@ -118,6 +118,8 @@ BUILDERS = {
     "knife": kit.knife,
     "crumbs": kit.crumbs,
     "wall": kit.wall,
+    "board": kit.board,
+    "slab": kit.slab,
 }
 
 
@@ -131,6 +133,9 @@ def build(recipe):
     for spec in recipe.get("objects", []):
         spec = dict(spec)
         kind = spec.pop("kind")
+        # things stand on other things, and a board is twenty-one millimetres thick, so a recipe
+        # says how high off the table a piece starts rather than every builder growing a z
+        lift = spec.pop("on", 0.0)
         builder = BUILDERS.get(kind)
         if builder is None:
             raise SystemExit(f"still.py: nothing in the kit called {kind!r}")
@@ -138,7 +143,10 @@ def build(recipe):
         for key, value in list(spec.items()):
             if isinstance(value, list):
                 spec[key] = tuple(value)
-        builder(**spec)
+        made = builder(**spec)
+        if lift:
+            for obj in (made if isinstance(made, (list, tuple)) else [made]):
+                obj.location = (obj.location[0], obj.location[1], obj.location[2] + lift)
     cam = recipe.get("camera", {})
     phone_camera(scene,
                  look_at=tuple(cam.get("look_at", [0, 0, 0])),
@@ -151,23 +159,38 @@ def build(recipe):
 
 
 def render(recipe, res, samples, out_dir):
+    """Render the scene to a scene-linear negative and stop there.
+
+    The negative is half-float OpenEXR, so nothing above white is thrown away before the
+    highlight rolloff has had a chance to roll it off. What a camera does to light on its way to
+    a JPEG is a separate step, in blender/photos/develop.py, run by plain Python afterwards.
+    Keeping the two apart means the sensor can be re-judged and re-run over the whole set in a
+    minute rather than re-rendering four hours of geometry.
+    """
     scene = build(recipe)
     w, h = recipe.get("size", [1200, 1600])
     if max(w, h) != res:
         s = res / max(w, h)
         w, h = max(1, round(w * s)), max(1, round(h * s))
-    common.render_settings(scene, w, h, samples=samples, transparent=False, file_format="JPEG")
-    scene.render.image_settings.quality = 90
-    path = os.path.join(out_dir, recipe["id"] + ".jpg")
-    common.render(scene, path)
-    manifest.record(path, "blender/photos/still.py", {
-        "recipe": recipe["id"], "light": recipe.get("light"), "surface": recipe.get("surface"),
-        "objects": [o["kind"] for o in recipe.get("objects", [])],
-        "depth_of_field": "f/2.2 at the subject, as a phone would",
-        "camera": recipe.get("camera"), "res": [w, h], "samples": samples,
-        "rig": "blender/rig/common.py",
-    }, kind="photo")
-    return path
+    common.render_settings(scene, w, h, samples=samples, transparent=False,
+                           file_format="OPEN_EXR")
+    scene.render.image_settings.color_depth = "16"      # half float
+    scene.render.image_settings.exr_codec = "ZIP"
+    scene.view_settings.view_transform = "Raw"          # scene-linear, unbounded, nothing clipped
+    scene.view_settings.exposure = 0.0
+    raw = os.path.join(out_dir, recipe["id"] + ".exr")
+    common.render(scene, raw)
+    with open(os.path.join(out_dir, recipe["id"] + ".shot.json"), "w", encoding="utf-8") as f:
+        json.dump({
+            "id": recipe["id"], "by": recipe.get("by", "noor"),
+            "light": recipe.get("light", "window_left"),
+            "seed": recipe.get("seed", 1), "handheld": recipe.get("handheld", 0.0),
+            "quality": recipe.get("quality", 86),
+            "surface": recipe.get("surface"),
+            "objects": [o["kind"] for o in recipe.get("objects", [])],
+            "camera": recipe.get("camera"), "res": [w, h], "samples": samples,
+        }, f, indent=1)
+    return raw
 
 
 def main():
@@ -190,7 +213,7 @@ def main():
         raise SystemExit("still.py: pass --only <id> or --all")
     os.makedirs(args.out, exist_ok=True)
     for name in names:
-        path = os.path.join(args.out, name + ".jpg")
+        path = os.path.join(args.out, name + ".exr")
         if args.skip_existing and os.path.exists(path):
             print(f"still: {name} already rendered")
             continue
@@ -200,7 +223,7 @@ def main():
         import time
         t0 = time.time()
         render(recipe, args.res, args.samples, args.out)
-        print(f"still: {name} in {time.time() - t0:.0f}s", flush=True)
+        print(f"still: {name} exposed in {time.time() - t0:.0f}s", flush=True)
 
 
 if __name__ == "__main__":

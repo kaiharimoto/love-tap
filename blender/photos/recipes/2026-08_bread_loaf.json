@@ -1,6 +1,6 @@
 {
- "surface": "board",
- "surface_size": 2.4,
+ "surface": "worktop",
+ "surface_size": 1.4,
  "light": "kitchen_bulb",
  "size": [
   1600,
@@ -20,6 +20,19 @@
  },
  "objects": [
   {
+   "kind": "board",
+   "at": [
+    -0.01,
+    0.0
+   ],
+   "w": 0.34,
+   "d": 0.23,
+   "thick": 0.021,
+   "rot": 8,
+   "scars": 16,
+   "seed": 41
+  },
+  {
    "kind": "loaf",
    "at": [
     -0.02,
@@ -30,26 +43,29 @@
    "height": 0.09,
    "rot": 14,
    "cut": 0.34,
-   "seed": 41
+   "seed": 41,
+   "on": 0.021
   },
   {
    "kind": "knife",
    "at": [
-    0.06,
-    -0.09
+    0.07,
+    -0.1
    ],
    "length": 0.22,
-   "rot": -18
+   "rot": -18,
+   "on": 0.021
   },
   {
    "kind": "mug",
    "at": [
-    0.17,
-    0.1
+    0.19,
+    0.11
    ],
    "r": 0.04,
    "h": 0.093,
-   "full": 0.62
+   "full": 0.62,
+   "rot": -40
   },
   {
    "kind": "crumbs",
@@ -59,8 +75,10 @@
    ],
    "spread": 0.075,
    "count": 110,
-   "seed": 41
+   "seed": 41,
+   "on": 0.021
   }
  ],
- "id": "2026-08_bread_loaf"
+ "id": "2026-08_bread_loaf",
+ "by": "noor"
 }

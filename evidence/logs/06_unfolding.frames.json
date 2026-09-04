@@ -1,12 +1,12 @@
 {
  "dir": "evidence/frames/06_unfolding",
- "frames": 260,
+ "frames": 40,
  "fps": 60.0,
- "seconds": 4.33,
+ "seconds": 0.67,
  "mean_change_per_frame": 0.0,
- "repeated_frames": 259,
+ "repeated_frames": 39,
  "repeated_fraction": 1.0,
- "longest_still_run": 259,
+ "longest_still_run": 39,
  "repeated_at": [
   0,
   1,
@@ -23,14 +23,14 @@
  ],
  "brightness_jumps": 0,
  "ok": false,
- "why": "nothing moves in it at all; 100% of it is frames the app did not draw; it holds still for 4.3s in one stretch",
+ "why": "nothing moves in it at all; 0.7s is short of 4.0s; 100% of it is frames the app did not draw",
  "strip": "evidence/crops/06_unfolding_strip.png",
  "strip_frames": [
   "evidence/frames/06_unfolding/0000.png",
-  "evidence/frames/06_unfolding/0052.png",
-  "evidence/frames/06_unfolding/0104.png",
-  "evidence/frames/06_unfolding/0155.png",
-  "evidence/frames/06_unfolding/0207.png",
-  "evidence/frames/06_unfolding/0259.png"
+  "evidence/frames/06_unfolding/0008.png",
+  "evidence/frames/06_unfolding/0016.png",
+  "evidence/frames/06_unfolding/0023.png",
+  "evidence/frames/06_unfolding/0031.png",
+  "evidence/frames/06_unfolding/0039.png"
  ]
 }

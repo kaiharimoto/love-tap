@@ -1,5 +1,67 @@
 {
  "files": {
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/desk.png": {
+   "bytes": 1004465,
+   "generator": "blender/shell/desk.py",
+   "kind": "shell",
+   "settings": {
+    "condition": "day",
+    "grain": "computed at render resolution as albedo, height and gloss maps, not carried by the mesh",
+    "grain_mm": 0.16,
+    "height_m": 0.92,
+    "join_mm": 2.2,
+    "marks": "three ring stains, nine scratches, up to two knots a board",
+    "mesh": [
+     300,
+     660
+    ],
+    "planks": 3,
+    "res": [
+     700,
+     1533
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 24,
+    "seed": 20260903,
+    "tiles": "vertically, by construction: every field is whole-numbered sinusoids",
+    "width_m": 0.42
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/voice/2026-08_bread_loaf.jpg": {
+   "bytes": 55783,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.26,
+     "height": 0.3,
+     "lean_deg": 4,
+     "look_at": [
+      0,
+      0,
+      0.03
+     ],
+     "mm": 26
+    },
+    "light": "kitchen_bulb",
+    "objects": [
+     "board",
+     "loaf",
+     "knife",
+     "mug",
+     "crumbs"
+    ],
+    "recipe": "2026-08_bread_loaf",
+    "res": [
+     700,
+     525
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 40,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "worktop"
+   }
+  },
   "assets/bits/clip_01.png": {
    "bytes": 57426,
    "generator": "blender/bits/bits.py",

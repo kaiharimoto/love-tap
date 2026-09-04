@@ -1,5 +1,5 @@
 {
- "scene": "01_pulse",
+ "scene": "05_settings",
  "browser": "webkit",
  "viewport": {
   "width": 480,
@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4571
+   "ms": 2347
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2307
   },
   {
    "do": "shot",
-   "ms": 1864
+   "ms": 1820
   },
   {
    "do": "report",
@@ -27,13 +27,13 @@
  ],
  "shots": [
   {
-   "out": "evidence/01_pulse.png",
+   "out": "evidence/05_settings.png",
    "clip": null
   }
  ],
  "reports": [
   {
-   "region": 0,
+   "region": 4,
    "visible": [
     "0001M2ZNX8AF4811Y2F7FNAGMG",
     "0001M34C9R04NVG11H0AJ4SFDZ",
@@ -78,10 +78,10 @@
    "me": "teo",
    "masks_in_pool": 56,
    "writable_masks": 47,
-   "at": "01_pulse.png"
+   "at": "05_settings.png"
   }
  ],
- "cold_ms": 13133,
+ "cold_ms": 14811,
  "problems": [],
  "ok": true
 }

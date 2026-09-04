@@ -1,6 +1,7 @@
 {
- "region": 1,
+ "region": 4,
  "visible": [
+  "0001M2ZNX8AF4811Y2F7FNAGMG",
   "0001M34C9R04NVG11H0AJ4SFDZ",
   "0001M3AY8G83A3FBSRB1Y7W78Q",
   "0001M3F41R2APQC59QKBMZK4XF",
@@ -10,6 +11,7 @@
   "0001M59VY0YA13H9M86HTA6XNP"
  ],
  "tears": {
+  "0001M2ZNX8AF4811Y2F7FNAGMG": "tear_001",
   "0001M34C9R04NVG11H0AJ4SFDZ": "tear_020",
   "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_043",
   "0001M3F41R2APQC59QKBMZK4XF": "tear_005",
@@ -19,6 +21,7 @@
   "0001M59VY0YA13H9M86HTA6XNP": "tear_032"
  },
  "stocks": {
+  "0001M2ZNX8AF4811Y2F7FNAGMG": "lined_02",
   "0001M34C9R04NVG11H0AJ4SFDZ": "looseleaf_03",
   "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
   "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
@@ -28,12 +31,12 @@
   "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
  },
  "scroll": {
-  "first": 8179,
+  "first": 8178,
   "last": 8185,
   "of": 8186
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 96,
+ "driven_ms": 48,
  "seed": 20260903,
  "events": 13724,
  "transport": "local",
@@ -41,5 +44,5 @@
  "me": "teo",
  "masks_in_pool": 56,
  "writable_masks": 47,
- "at": "13_messenger_states.png"
+ "at": "05_settings.png"
 }
