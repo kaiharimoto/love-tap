@@ -315,11 +315,8 @@ class _FoldedNoteState extends State<FoldedNote> {
       // other is a twitch at the end of every note anyone opens. In a clip it is a jump in the
       // light, which is how a recording stitched out of two takes gives itself away. So the note
       // arrives over the frame it is replacing rather than instead of it.
-      return TweenAnimationBuilder<double>(
-        tween: Tween(begin: 0.0, end: 1.0),
-        duration: Motion.settle,
-        curve: Curves.easeOut,
-        builder: (_, t, child) => Opacity(opacity: t.clamp(0.0, 1.0), child: child),
+      return Settling(
+        builder: (_, t, child) => Opacity(opacity: t, child: child),
         child: widget.child,
       );
     }
@@ -335,10 +332,8 @@ class _FoldedNoteState extends State<FoldedNote> {
     }
     return GestureDetector(
       onTap: () => setState(() => _opening = true),
-      child: TweenAnimationBuilder<double>(
-        tween: Tween(begin: 0.98, end: 1.0),
-        duration: Motion.settle,
-        builder: (_, t, child) => Transform.scale(scale: t, child: child),
+      child: Settling(
+        builder: (_, t, child) => Transform.scale(scale: 0.98 + 0.02 * t, child: child),
         child: Unfolding(seq: widget.seq, width: widget.width, autoplay: false),
       ),
     );

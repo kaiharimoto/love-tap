@@ -120,3 +120,77 @@ class _TurningState extends State<Turning> {
     );
   }
 }
+
+/// A number that runs from 0 to 1 once, on whichever clock is running.
+///
+/// This is the third time the same defect has been fixed in a different place, so it is a widget
+/// now. TweenAnimationBuilder, AnimatedOpacity, AnimatedSize and every AnimationController run on
+/// the framework's wall clock, and under capture the wall clock is not the app's clock: a quarter
+/// of a second of it passes between two grabbed frames, so an implicit animation either has not
+/// started or is already over, and never once appears in the recording. The unfolding clip ended
+/// on a blank cream rectangle for exactly this reason — the note faded in over the last fold
+/// frame, on the wall clock, in the gap between two screenshots.
+///
+/// [Settling] follows DrivenClock.ticks when it is enabled and a plain loop when it is not, and
+/// hands the builder the eased value either way.
+class Settling extends StatefulWidget {
+  const Settling({
+    super.key,
+    required this.builder,
+    this.duration = Motion.settle,
+    this.curve = Curves.easeOut,
+    this.child,
+  });
+
+  final Widget Function(BuildContext context, double t, Widget? child) builder;
+  final Duration duration;
+  final Curve curve;
+  final Widget? child;
+
+  @override
+  State<Settling> createState() => _SettlingState();
+}
+
+class _SettlingState extends State<Settling> {
+  double _t = 0.0;
+  Duration? _from;
+  StreamSubscription<Duration>? _driven;
+
+  @override
+  void initState() {
+    super.initState();
+    if (DrivenClock.enabled) {
+      _from = DrivenClock.now;
+      _driven = DrivenClock.ticks.listen(_advance);
+    } else {
+      _wallClock();
+    }
+  }
+
+  void _advance(Duration now) {
+    final from = _from;
+    if (from == null || _t >= 1.0) return;
+    final t = ((now - from).inMicroseconds / widget.duration.inMicroseconds).clamp(0.0, 1.0);
+    if (mounted) setState(() => _t = t);
+  }
+
+  Future<void> _wallClock() async {
+    final started = DateTime.now();
+    while (mounted && _t < 1.0) {
+      await Future<void>.delayed(const Duration(milliseconds: 16));
+      if (!mounted) return;
+      final ms = DateTime.now().difference(started).inMilliseconds;
+      setState(() => _t = (ms / widget.duration.inMilliseconds).clamp(0.0, 1.0));
+    }
+  }
+
+  @override
+  void dispose() {
+    _driven?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      widget.builder(context, widget.curve.transform(_t.clamp(0.0, 1.0)), widget.child);
+}
