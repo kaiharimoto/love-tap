@@ -32,7 +32,7 @@ class SearchPage extends StatefulWidget {
         opaque: false,
         barrierColor: const Color(0x66120D08),
         transitionDuration: const Duration(milliseconds: 160),
-        pageBuilder: (_, __, ___) => SearchPage(initialQuery: query),
+        pageBuilder: (_, _, _) => SearchPage(initialQuery: query),
       ));
 
   @override

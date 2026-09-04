@@ -200,16 +200,40 @@ class _SettingsRegionState extends State<SettingsRegion> {
     unawaited(scope.spine.setMeta('export.last', DateTime.now().toUtc().toIso8601String()));
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFFF1ECDF),
-        content: SizedBox(
-          width: 420,
-          child: SelectableText(
-            lines.length > 4000 ? '${lines.substring(0, 4000)}\n…' : lines,
-            style: const TextStyle(fontFamily: 'monospace', fontSize: 10),
+      barrierColor: const Color(0x2E3A2A1C),
+      builder: (ctx) => Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 60),
+          child: Material(
+            type: MaterialType.transparency,
+            child: Slip(
+              id: 'the.whole.log',
+              row: 6,
+              stock: 'graph',
+              width: MediaQuery.sizeOf(ctx).width * 0.88,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(
+                    child: SingleChildScrollView(
+                      child: SelectableText(
+                        lines.length > 4000 ? '${lines.substring(0, 4000)}\n…' : lines,
+                        style: const TextStyle(fontFamily: 'monospace', fontSize: 9, height: 1.5),
+                      ),
+                    ),
+                  ),
+                  const Padding(padding: EdgeInsets.only(top: 8, bottom: 6), child: RuleLine(seed: 77)),
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => Navigator.pop(ctx),
+                    child: Text('close', style: Hands.margin(size: 15)),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
-        actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: Text('close', style: Hands.margin(size: 15)))],
       ),
     );
   }

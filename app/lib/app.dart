@@ -11,6 +11,7 @@ import 'material/desk.dart';
 import 'material/hands.dart';
 import 'material/library.dart';
 import 'material/light.dart';
+import 'material/paper.dart';
 import 'material/palette.dart';
 import 'feelings/builtins.dart';
 import 'feelings/corner.dart';
@@ -39,8 +40,12 @@ class DeskApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: Flags.dusk ? DeskColour.dusk : DeskColour.day,
-        colorScheme: const ColorScheme.light(
-          surface: Color(0xFFF1ECDF),
+        colorScheme: ColorScheme.light(
+          // Every surface in this app is a piece of paper that was rendered, and none of them is
+          // this one. A stock Material surface showing through is a bug, so it is the colour of
+          // the desk: it reads as a widget floating on wood, which is what it is, rather than as
+          // a convincing enough sheet to survive a look.
+          surface: Flags.dusk ? DeskColour.dusk : DeskColour.day,
           primary: Pen.ballpoint,
           secondary: Pen.graphite,
         ),
@@ -278,23 +283,34 @@ class _Tabs extends StatelessWidget {
                 onTap: () => onPick(i),
                 child: Padding(
                   padding: EdgeInsets.only(top: i == index ? 0 : 8, left: 2, right: 2),
-                  child: Container(
+                  child: SizedBox(
                     height: 44,
-                    decoration: BoxDecoration(
-                      image: card.isEmpty
-                          ? null
-                          : DecorationImage(
-                              image: AssetImage(paperAsset(card[i % card.length])),
-                              fit: BoxFit.cover,
-                              alignment: Alignment(-1 + 0.4 * i, 0.2),
-                              opacity: i == index ? 1.0 : 0.82,
-                            ),
-                      color: card.isEmpty ? Paper.index.withValues(alpha: i == index ? 1 : 0.8) : null,
-                    ),
-                    alignment: Alignment.center,
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
+                        // Five cards cut from a sheet of index card, and each one has to be a
+                        // different piece of it. Covering the card with the whole 1288x1800 sheet
+                        // scaled a sheet down to forty-four points and averaged its tooth away:
+                        // five stamps of one swatch, correlating at 0.99 with each other. So the
+                        // card shows a window onto the sheet at the sheet's own pixel density,
+                        // and each tab looks through a different window.
+                        Positioned.fill(child: ColoredBox(color: Paper.index)),
+                        if (card.isNotEmpty)
+                          Positioned.fill(
+                            child: Opacity(
+                              opacity: i == index ? 1.0 : 0.82,
+                              child: ClipRect(
+                                child: Image.asset(
+                                  paperAsset(card[i % card.length]),
+                                  fit: BoxFit.none,
+                                  alignment: _cardWindows[i % _cardWindows.length],
+                                  filterQuality: FilterQuality.medium,
+                                  gaplessPlayback: true,
+                                  errorBuilder: PaperPiece.none,
+                                ),
+                              ),
+                            ),
+                          ),
                         // and the label shrinks to fit its card rather than wrapping: five
                         // stamps across a 360-point screen leaves SETTINGS about a point short
                         FittedBox(
@@ -317,3 +333,13 @@ class _Tabs extends StatelessWidget {
     );
   }
 }
+
+/// Where on the sheet each tab card was cut from. Spread over both axes so no two windows share a
+/// band of the ruling, and off the sheet's centre, where every stock is at its most uniform.
+const List<Alignment> _cardWindows = [
+  Alignment(-0.82, -0.64),
+  Alignment(0.41, -0.88),
+  Alignment(-0.35, 0.77),
+  Alignment(0.88, 0.22),
+  Alignment(-0.93, 0.09),
+];

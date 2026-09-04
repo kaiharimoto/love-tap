@@ -26,7 +26,7 @@ class ViewerPage extends StatefulWidget {
         opaque: false,
         barrierColor: const Color(0xCC0E0A06),
         transitionDuration: const Duration(milliseconds: 200),
-        pageBuilder: (_, __, ___) => ViewerPage(item: item),
+        pageBuilder: (_, _, _) => ViewerPage(item: item),
       ));
 
   @override

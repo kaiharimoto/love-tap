@@ -131,8 +131,10 @@ class _CornerPainter extends CustomPainter {
     final curl = 0.35 + 0.65 * t;
     final w = size.width * curl;
     final h = size.height * curl;
-    final under = Paint()..color = const Color(0xFFE7E0CE);
-    final face = Paint()..color = const Color(0xFFF1ECDF);
+    // The two sides of one sheet: the back of the paper, which is where the light is not, and the
+    // face of it where the corner has turned over far enough to show again.
+    final under = Paint()..color = Paper.underside;
+    final face = Paint()..color = Paper.forStock('looseleaf');
     final shade = Paint()
       ..shader = LinearGradient(
         begin: Alignment.bottomRight,

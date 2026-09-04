@@ -285,26 +285,23 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         context: context,
         backgroundColor: Colors.transparent,
         barrierColor: Shadow.warm.withValues(alpha: 0.18),
-        builder: (ctx) => Container(
-          color: const Color(0xFFF1ECDF),
-          child: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(padding: EdgeInsets.fromLTRB(22, 12, 0, 0), child: RuleLine(seed: 41)),
-                for (final w in words)
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () => Navigator.pop(ctx, w),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 11, 24, 11),
-                      child: Text(w, style: Hands.teo(size: 20)),
-                    ),
+        builder: (ctx) => DeskSheet(
+          id: 'what.can.be.done',
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(padding: EdgeInsets.only(bottom: 2), child: RuleLine(seed: 41)),
+              for (final w in words)
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => Navigator.pop(ctx, w),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(w, style: Hands.teo(size: 20)),
                   ),
-                const SizedBox(height: 8),
-              ],
-            ),
+                ),
+            ],
           ),
         ),
       );
@@ -314,13 +311,13 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         context: context,
         backgroundColor: Colors.transparent,
         barrierColor: Shadow.warm.withValues(alpha: 0.18),
-        builder: (ctx) => Container(
-          color: const Color(0xFFF1ECDF),
-          child: SafeArea(
-            child: ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-              children: [
+        builder: (ctx) => DeskSheet(
+          id: 'the.vocabulary',
+          row: 2,
+          child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            children: [
                 for (final fam in Family.values)
                   if (registry.family(fam).isNotEmpty) ...[
                     Padding(
@@ -347,8 +344,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                       ],
                     ),
                   ],
-              ],
-            ),
+          ],
           ),
         ),
       );

@@ -105,20 +105,11 @@ class TodoList extends StatelessWidget {
   }
 
   Future<void> _add(BuildContext context) async {
-    final c = TextEditingController();
-    final text = await showDialog<String>(
-      context: context,
-      builder: (dctx) => AlertDialog(
-        backgroundColor: const Color(0xFFF1ECDF),
-        content: TextField(
-          controller: c,
-          autofocus: true,
-          style: Hands.of(ctx.me, size: 19),
-          decoration: InputDecoration(hintText: 'what needs doing', hintStyle: Hands.margin(size: 16)),
-          onSubmitted: (v) => Navigator.pop(dctx, v),
-        ),
-        actions: [TextButton(onPressed: () => Navigator.pop(dctx, c.text), child: Text('keep', style: Hands.margin(size: 15)))],
-      ),
+    final text = await askOnPaper(
+      context,
+      id: 'what.needs.doing',
+      hint: 'what needs doing',
+      hand: Hands.of(ctx.me, size: 19),
     );
     if (text == null || text.trim().isEmpty) return;
     await ctx.emit('todo_event', {

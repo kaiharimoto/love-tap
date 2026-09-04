@@ -39,26 +39,14 @@ class DateList extends StatelessWidget {
   }
 }
 
-Future<String?> _ask(BuildContext context, String hint, {String initial = ''}) {
-  final c = TextEditingController(text: initial);
-  return showDialog<String>(
-    context: context,
-    builder: (ctx) => AlertDialog(
-      backgroundColor: const Color(0xFFF1ECDF),
-      content: TextField(
-        controller: c,
-        autofocus: true,
-        style: Hands.teo(size: 19),
-        decoration: InputDecoration(hintText: hint, hintStyle: Hands.margin(size: 16)),
-        onSubmitted: (v) => Navigator.pop(ctx, v),
-      ),
-      actions: [
-        TextButton(onPressed: () => Navigator.pop(ctx), child: Text('leave it', style: Hands.margin(size: 15))),
-        TextButton(onPressed: () => Navigator.pop(ctx, c.text), child: Text('keep', style: Hands.margin(size: 15))),
-      ],
-    ),
-  );
-}
+Future<String?> _ask(BuildContext context, String hint, {String initial = ''}) => askOnPaper(
+      context,
+      id: hint,
+      hint: hint,
+      initial: initial,
+      hand: Hands.teo(size: 19),
+      leaveWord: 'leave it',
+    );
 
 class _Header extends StatelessWidget {
   const _Header({required this.label, this.onAdd});
@@ -134,13 +122,24 @@ class _StubState extends State<_Stub> {
   Future<void> _act() async {
     final choice = await showModalBottomSheet<String>(
       context: context,
-      backgroundColor: const Color(0xFFF1ECDF),
-      builder: (ctx) => SafeArea(
+      backgroundColor: Colors.transparent,
+      barrierColor: const Color(0x2E3A2A1C),
+      builder: (ctx) => DeskSheet(
+        id: 'what.happened.to.it',
+        row: 3,
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             for (final a in const ['scheduled', 'done', 'rated', 'remembered'])
-              ListTile(title: Text(a, style: Hands.teo(size: 18)), onTap: () => Navigator.pop(ctx, a)),
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => Navigator.pop(ctx, a),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(a, style: Hands.teo(size: 18)),
+                ),
+              ),
           ],
         ),
       ),

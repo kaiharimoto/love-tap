@@ -54,6 +54,9 @@ class Paper {
   static const stickyYellow = Color(0xFFF3E08A);
   static const stickyPink = Color(0xFFF2C1C1);
 
+  /// The back of a sheet: the same paper with the light off it, for a corner turned over.
+  static const underside = Color(0xFFE7E0CE);
+
   /// The colour a stock is, before its render arrives — or if it never does.
   ///
   /// A piece of paper with no paper on it is not a lesser version of a piece of paper. The setup

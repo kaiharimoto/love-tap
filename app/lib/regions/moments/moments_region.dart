@@ -173,10 +173,15 @@ class _Filters extends StatelessWidget {
                   _Chip(label: feelingId == null ? 'any feeling' : feelingId!, on: feelingId != null, onTap: () async {
                     final f = await showModalBottomSheet<Feeling>(
                       context: context,
-                      backgroundColor: const Color(0xFFF1ECDF),
-                      builder: (ctx) => SafeArea(
+                      backgroundColor: Colors.transparent,
+                      barrierColor: const Color(0x2E3A2A1C),
+                      builder: (ctx) => DeskSheet(
+                        id: 'which.feeling',
+                        row: 8,
                         child: GridView.count(
                           crossAxisCount: 4,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
                           children: [
                             for (final f in registry.active)
                               GestureDetector(

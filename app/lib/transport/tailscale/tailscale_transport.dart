@@ -18,7 +18,6 @@
 // authentication — it is only the reason nobody else can see the traffic.
 import 'package:http/http.dart' as http;
 
-import '../faults.dart';
 import '../protocol/http_transport.dart';
 import '../transport.dart';
 import '../../spine/spine.dart';

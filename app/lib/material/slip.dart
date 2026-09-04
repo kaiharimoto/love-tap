@@ -6,11 +6,13 @@
 // quietly become a beige rounded rectangle with a drop shadow while nobody is looking. That is the
 // named failure of the whole visual concept, and it is the failure a card widget arrives at by
 // default.
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'assignment.dart';
 import 'hands.dart';
 import 'library.dart';
+import 'marks.dart';
+import 'palette.dart';
 import 'paper.dart';
 
 /// One slip of paper. [id] is anything stable about the thing on it — an event id, a date id, a
@@ -136,4 +138,117 @@ class EmptySurface extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The paper that comes up from the bottom edge when a note is asked what can be done to it.
+///
+/// A modal sheet arrives at a flat rectangle by default, and that is what this was: one uniform
+/// fill at L=235, sharp-cornered, with "reply" and "react" written on bare colour — a flat surface
+/// standing in for paper in the one place the reader is asked to act on a note. So it is a piece
+/// of paper now, torn like every other piece, carrying the edge light and the contact shadow out
+/// of the same render, with the desk showing around it.
+///
+/// [id] decides the stock and the tear, so the same question is always asked on the same slip.
+class DeskSheet extends StatelessWidget {
+  const DeskSheet({super.key, required this.id, required this.child, this.row = 5});
+
+  final String id;
+  final Widget child;
+  final int row;
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(width * 0.055, 10, width * 0.055, 18),
+        child: Slip(
+          id: 'sheet.$id',
+          row: row,
+          width: width * 0.89,
+          padding: const EdgeInsets.fromLTRB(20, 14, 20, 16),
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+/// A question, on a slip, rather than in a dialog box.
+///
+/// AlertDialog is a rounded rectangle with a flat fill and an elevation shadow under it, which is
+/// the failure the whole visual concept is defined against. The question goes on paper like
+/// everything else the app says.
+Future<String?> askOnPaper(
+  BuildContext context, {
+  required String id,
+  required String hint,
+  required TextStyle hand,
+  String initial = '',
+  String keepWord = 'keep',
+  String? leaveWord,
+}) {
+  final c = TextEditingController(text: initial);
+  return showDialog<String>(
+    context: context,
+    barrierColor: const Color(0x2E3A2A1C),
+    builder: (ctx) => Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 26),
+        child: Material(
+          type: MaterialType.transparency,
+          child: Slip(
+            id: 'ask.$id',
+            row: 4,
+            width: MediaQuery.sizeOf(ctx).width * 0.82,
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 14),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  controller: c,
+                  autofocus: true,
+                  style: hand,
+                  cursorColor: Pen.graphite,
+                  decoration: InputDecoration(
+                    hintText: hint,
+                    hintStyle: Hands.margin(size: 16),
+                    isDense: true,
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                  onSubmitted: (v) => Navigator.pop(ctx, v),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 6, bottom: 8), child: RuleLine(seed: 63)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    if (leaveWord != null)
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () => Navigator.pop(ctx),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 4, 18, 4),
+                          child: Text(leaveWord, style: Hands.margin(size: 15)),
+                        ),
+                      ),
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => Navigator.pop(ctx, c.text),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 4, 2, 4),
+                        child: Text(keepWord, style: Hands.margin(size: 15)),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 }

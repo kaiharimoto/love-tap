@@ -10,6 +10,7 @@ import '../../feelings/registry.dart';
 import '../../material/hands.dart';
 import '../../material/library.dart';
 import '../../material/objects.dart';
+import '../../material/slip.dart';
 import '../../material/palette.dart';
 import '../../spine/spine.dart';
 
@@ -24,8 +25,13 @@ class AuthoringSheet extends StatefulWidget {
       showModalBottomSheet<Map<String, dynamic>>(
         context: context,
         isScrollControlled: true,
-        backgroundColor: const Color(0xFFF1ECDF),
-        builder: (ctx) => AuthoringSheet(registry: registry, me: me),
+        backgroundColor: Colors.transparent,
+        barrierColor: const Color(0x2E3A2A1C),
+        builder: (ctx) => DeskSheet(
+          id: 'a.feeling.of.your.own',
+          row: 7,
+          child: AuthoringSheet(registry: registry, me: me),
+        ),
       );
 
   @override
