@@ -179,7 +179,9 @@ def light_for(scene, kind, indoors=False, enclosed=False):
     if kind == "torch":
         # a phone torch held in the other hand: hard, close, and from one side only
         data = bpy.data.lights.new("torch", "SPOT")
-        data.energy = 9.0
+        # a phone torch thirty centimetres from a pressure gauge is bright; nine watts in a room
+        # whose walls reflect five per cent developed to 5.6 grey levels across the whole frame
+        data.energy = 42.0
         data.color = (0.98, 0.97, 0.94)
         data.spot_size = math.radians(48)
         data.spot_blend = 0.35
