@@ -136,6 +136,23 @@ def add_daylight(scene, elevation=None, azimuth=None):
     return sun, world
 
 
+# How far the camera stops down for the dusk condition.
+#
+# The desk lamp is thirty-eight watts half a metre from the sheet, which is about four times what
+# the daylight sun puts on it. That is physically right and it came out as a dusk plate brighter
+# than its own daylight twin, clipped at 254 with half the tooth. A person in front of a desk lamp
+# stops down; so does this. The rig is untouched — this is the aperture, and it is here rather
+# than in one generator because everything lit at dusk has to agree about it. It did not: the
+# paper stopped down three stops and the desk did not, so the dusk desk was brighter than the
+# daylight desk with the paper on it dimmer than both.
+DUSK_STOPS = -3.0
+
+
+def stop_down_for_dusk(scene):
+    """Set the dusk aperture. Call after add_dusk, before rendering."""
+    scene.view_settings.exposure = DUSK_STOPS
+
+
 def add_dusk(scene):
     """The dusk condition: low warm sun, cool sky, a desk lamp on the right."""
     sun_data = bpy.data.lights.new("dusk_sun", "SUN")

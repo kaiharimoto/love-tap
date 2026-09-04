@@ -319,6 +319,10 @@ def render(res, condition, out_dir, samples, seed):
         common.add_daylight(scene)
     else:
         common.add_dusk(scene)
+        # The desk did not stop down and the paper did, so the dusk desk came out brighter than
+        # the daylight desk with the paper on it dimmer than both — wood glowing under dim notes,
+        # in one picture, which is the first thing anyone looking for faked material checks.
+        common.stop_down_for_dusk(scene)
     name = "desk" if condition == "day" else "desk_dusk"
     path = os.path.join(out_dir, name + ".png")
     common.render(scene, path)

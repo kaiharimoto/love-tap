@@ -20,6 +20,7 @@ import '../../media/local_uri.dart';
 import '../../media/read_bytes.dart';
 import '../../scope.dart';
 import '../../spine/projections/thread.dart';
+import '../../spine/spine.dart';
 import '../../voice/strings.dart';
 import 'note.dart';
 import 'search_page.dart';
@@ -116,6 +117,29 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // is told it is pushing and one of which is still waiting its turn; a third is refused the
       // way the host refuses one. Nothing here draws a state that the app is not in.
       final scope = AppScope.of(context);
+      // read, first, because the artifact is of all five states and the other four are below it:
+      // one of ours that they have opened. The read mark is their event, arriving the way theirs
+      // arrive — a read_marker over our sequence — not a flag set on the row.
+      // host-assigned, because a row with no sequence has not been accepted anywhere yet and
+      // cannot have been read: this is the one message on the artifact that has been across and
+      // back, so it is the one that is given a sequence the way the host gives one
+      final seen = await scope.spine.append(
+        'message',
+        {'text': 'left the key under the pot'},
+        at: scope.clock.now(),
+        hostAssign: true,
+      );
+      await scope.spine.applyFromHost([
+        Event(
+          id: 'stage_read_marker',
+          seq: (seen.seq ?? 0) + 1,
+          author: scope.partner,
+          device: DeviceKind.android,
+          ts: seen.ts + 1000,
+          type: 'read_marker',
+          payload: {'upto_seq': seen.seq ?? 0},
+        ),
+      ]);
       final going = await scope.emit('message', {'text': 'ok — leaving now'});
       scope.spine.markInFlight([going.id]);
       await scope.emit('message', {'text': 'and the bread, if there is any'});
