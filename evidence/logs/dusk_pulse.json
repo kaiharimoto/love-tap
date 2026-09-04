@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4869
+   "ms": 4786
   },
   {
    "do": "wait",
-   "ms": 2303
+   "ms": 2307
   },
   {
    "do": "shot",
-   "ms": 3372
+   "ms": 3902
   },
   {
    "do": "report",
-   "ms": 966
+   "ms": 969
   }
  ],
  "shots": [
@@ -91,7 +91,7 @@
    "at": "crops/dusk_pulse.png"
   }
  ],
- "cold_ms": 13069,
+ "cold_ms": 14970,
  "problems": [],
  "ok": true
 }

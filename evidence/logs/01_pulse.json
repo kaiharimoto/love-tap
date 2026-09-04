@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3405
+   "ms": 4711
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2103
   },
   {
    "do": "shot",
-   "ms": 2759
+   "ms": 3768
   },
   {
    "do": "report",
-   "ms": 1061
+   "ms": 961
   }
  ],
  "shots": [
@@ -69,7 +69,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 48,
    "seed": 20260903,
-   "events": 14061,
+   "events": 14062,
    "transport": "local",
    "link": "connecting",
    "me": "teo",
@@ -91,7 +91,7 @@
    "at": "01_pulse.png"
   }
  ],
- "cold_ms": 13752,
+ "cold_ms": 13700,
  "problems": [],
  "ok": true
 }

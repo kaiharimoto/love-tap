@@ -4,8 +4,10 @@
 // it, and the media view had nothing because the loader had dropped every photograph. There was no
 // test between "the screen builds" and "the screen is worth looking at", so this is it — the year
 // is loaded the way the app loads it, and each region has to put something on the desk.
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:desk/capture/bus.dart';
 import 'package:desk/feelings/registry.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/material/paper.dart';
@@ -71,6 +73,25 @@ void main() {
     await tester.pump(const Duration(milliseconds: 400));
     expect(tester.takeException(), isNull);
   }
+
+  testWidgets('the states can be staged against a year of history', (tester) async {
+    // __deskStage threw three captures in a row, and the harness could only report
+    // `Dart exception thrown from converted Future` — a sentence about the bridge. The handle
+    // passes against a spine with two messages in it; it is the year that breaks it, so the year
+    // is what it is called against here.
+    if (absent != null) return;
+    CaptureBus.wanted = true;
+    addTearDown(() => CaptureBus.wanted = false);
+    await draw(tester, const ChatRegion());
+    final run = CaptureBus.stageStates!();
+    var settled = false;
+    unawaited(run.then((_) => settled = true, onError: (Object _) => settled = true));
+    for (var i = 0; i < 12 && !settled; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    await run;                      // rethrows whatever it threw, with the real message
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('a year of it went into the log', (tester) async {
     if (absent != null) return markTestSkipped(absent!);

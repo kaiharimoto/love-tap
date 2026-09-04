@@ -96,10 +96,20 @@ class CaptureHooks {
   }
 
   /// Every delivery state at once, made rather than drawn.
+  ///
+  /// The try is not decoration. A Dart exception crossing into JS arrives at the harness as
+  /// `Dart exception thrown from converted Future. Use the properties 'error' to fetch the boxed
+  /// error` — which is a sentence about the bridge, not about what went wrong, and it is all the
+  /// scene log had to show for an artifact that failed three runs in a row. Every handle that can
+  /// fail says what failed.
   Future<String> stageStates() async {
     final f = CaptureBus.stageStates;
     if (f == null) return 'the shell is not up';
-    await f();
+    try {
+      await f();
+    } catch (e, stack) {
+      return 'staging the states threw: $e\n${stack.toString().split('\n').take(4).join('\n')}';
+    }
     await _settle();
     return 'ok';
   }
