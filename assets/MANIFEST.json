@@ -14434,6 +14434,40 @@
     "surface": "board"
    }
   },
+  "seed/photos/2025-11_table_after_marking.jpg": {
+   "bytes": 56241,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.2240286131891589,
+     "height": 0.3078737543056891,
+     "lean_deg": 5.3731262534584765,
+     "look_at": [
+      0,
+      0,
+      0.03906629166457492
+     ],
+     "mm": 25.737144893174825
+    },
+    "light": "night_lamp",
+    "objects": [
+     "pen",
+     "mug",
+     "sheet",
+     "book"
+    ],
+    "recipe": "2025-11_table_after_marking",
+    "res": [
+     1000,
+     750
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "desk"
+   }
+  },
   "seed/photos/2025-11_ward_carpark_dawn.jpg": {
    "bytes": 55777,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
@@ -14630,6 +14664,40 @@
     "surface": "desk"
    }
   },
+  "seed/photos/2025-12_soup_green.jpg": {
+   "bytes": 53142,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.2240286131891589,
+     "height": 0.3078737543056891,
+     "lean_deg": 5.3731262534584765,
+     "look_at": [
+      0,
+      0,
+      0.03906629166457492
+     ],
+     "mm": 25.737144893174825
+    },
+    "light": "night_lamp",
+    "objects": [
+     "bowl",
+     "spoon",
+     "tin",
+     "pan"
+    ],
+    "recipe": "2025-12_soup_green",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "steel"
+   }
+  },
   "seed/photos/2025-12_two_loaves.jpg": {
    "bytes": 50494,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
@@ -14767,7 +14835,7 @@
    }
   },
   "seed/photos/2026-01_boiler_gauge.jpg": {
-   "bytes": 13759,
+   "bytes": 22770,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
    "kind": "photo",
    "settings": {
@@ -14897,6 +14965,41 @@
     "surface": "melamine"
    }
   },
+  "seed/photos/2026-01_sketchbook_greys.jpg": {
+   "bytes": 59779,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.3251617439286219,
+     "height": 0.3767556681100488,
+     "lean_deg": 15.23471662177744,
+     "look_at": [
+      0,
+      0,
+      0.03432684600654477
+     ],
+     "mm": 26.231531893212033
+    },
+    "light": "night_lamp",
+    "objects": [
+     "pen",
+     "book",
+     "sheet",
+     "tin",
+     "jar"
+    ],
+    "recipe": "2026-01_sketchbook_greys",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "desk"
+   }
+  },
   "seed/photos/2026-01_soup_lentil.jpg": {
    "bytes": 110920,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
@@ -15002,7 +15105,7 @@
    }
   },
   "seed/photos/2026-02_bread_notice.jpg": {
-   "bytes": 24562,
+   "bytes": 93966,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
    "kind": "photo",
    "settings": {
@@ -15134,6 +15237,41 @@
     "samples": 28,
     "sensor": "blender/photos/camera.py, teo's phone",
     "surface": null
+   }
+  },
+  "seed/photos/2026-02_key_on_table.jpg": {
+   "bytes": 50874,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.3761735831088872,
+     "height": 0.3914521799107774,
+     "lean_deg": 4.681804116557014,
+     "look_at": [
+      0,
+      0,
+      0.033351133622009754
+     ],
+     "mm": 24.198399841807007
+    },
+    "light": "night_lamp",
+    "objects": [
+     "sheet",
+     "tin",
+     "folded",
+     "cloth",
+     "mug"
+    ],
+    "recipe": "2026-02_key_on_table",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "desk"
    }
   },
   "seed/photos/2026-02_marking_pile.jpg": {
@@ -15413,6 +15551,41 @@
     "surface": "melamine"
    }
   },
+  "seed/photos/2026-03_passport_form.jpg": {
+   "bytes": 64529,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.313404534488039,
+     "height": 0.3816342300327239,
+     "lean_deg": 5.032348785724377,
+     "look_at": [
+      0,
+      0,
+      0.04989569767248956
+     ],
+     "mm": 27.880424472152725
+    },
+    "light": "night_lamp",
+    "objects": [
+     "folded",
+     "pen",
+     "sheet",
+     "mug",
+     "envelope"
+    ],
+    "recipe": "2026-03_passport_form",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "desk"
+   }
+  },
   "seed/photos/2026-03_reports_table.jpg": {
    "bytes": 95574,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
@@ -15447,6 +15620,41 @@
     "samples": 28,
     "sensor": "blender/photos/camera.py, noor's phone",
     "surface": "desk"
+   }
+  },
+  "seed/photos/2026-03_soup_green.jpg": {
+   "bytes": 64260,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.313404534488039,
+     "height": 0.3816342300327239,
+     "lean_deg": 5.032348785724377,
+     "look_at": [
+      0,
+      0,
+      0.04989569767248956
+     ],
+     "mm": 27.880424472152725
+    },
+    "light": "night_lamp",
+    "objects": [
+     "bowl",
+     "pan",
+     "spoon",
+     "folded",
+     "sheet"
+    ],
+    "recipe": "2026-03_soup_green",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "steel"
    }
   },
   "seed/photos/2026-04_carpark_dawn.jpg": {
@@ -15624,7 +15832,7 @@
    }
   },
   "seed/photos/2026-04_shop_oranges.jpg": {
-   "bytes": 10659,
+   "bytes": 42160,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
    "kind": "photo",
    "settings": {
@@ -15727,6 +15935,40 @@
     "samples": 28,
     "sensor": "blender/photos/camera.py, noor's phone",
     "surface": "desk"
+   }
+  },
+  "seed/photos/2026-04_soup_green.jpg": {
+   "bytes": 67546,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.3328661155754401,
+     "height": 0.4484370980678681,
+     "lean_deg": 2.031150084108795,
+     "look_at": [
+      0,
+      0,
+      0.03559463967769814
+     ],
+     "mm": 27.986962209061197
+    },
+    "light": "night_lamp",
+    "objects": [
+     "bowl",
+     "loaf",
+     "pan",
+     "ladle"
+    ],
+    "recipe": "2026-04_soup_green",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "steel"
    }
   },
   "seed/photos/2026-04_towpath_blossom.jpg": {
@@ -16070,6 +16312,40 @@
     "surface": "desk"
    }
   },
+  "seed/photos/2026-05_soup_fennel.jpg": {
+   "bytes": 43613,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.310155750420544,
+     "height": 0.40108264446930014,
+     "lean_deg": 15.916558137991647,
+     "look_at": [
+      0,
+      0,
+      0.04768741961357362
+     ],
+     "mm": 26.040855750818096
+    },
+    "light": "night_lamp",
+    "objects": [
+     "bowl",
+     "pan",
+     "loaf",
+     "spoon"
+    ],
+    "recipe": "2026-05_soup_fennel",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "steel"
+   }
+  },
   "seed/photos/2026-05_waiting_room.jpg": {
    "bytes": 37480,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
@@ -16137,6 +16413,40 @@
     "surface": null
    }
   },
+  "seed/photos/2026-06_cold_soup.jpg": {
+   "bytes": 124253,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.3328661155754401,
+     "height": 0.4484370980678681,
+     "lean_deg": 2.031150084108795,
+     "look_at": [
+      0,
+      0,
+      0.03559463967769814
+     ],
+     "mm": 27.986962209061197
+    },
+    "light": "night_lamp",
+    "objects": [
+     "bowl",
+     "spoon",
+     "board",
+     "pen"
+    ],
+    "recipe": "2026-06_cold_soup",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "board"
+   }
+  },
   "seed/photos/2026-06_fan_desk.jpg": {
    "bytes": 53656,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
@@ -16169,6 +16479,40 @@
     "samples": 28,
     "sensor": "blender/photos/camera.py, noor's phone",
     "surface": null
+   }
+  },
+  "seed/photos/2026-06_ferry_timetable.jpg": {
+   "bytes": 124531,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.310155750420544,
+     "height": 0.40108264446930014,
+     "lean_deg": 15.916558137991647,
+     "look_at": [
+      0,
+      0,
+      0.04768741961357362
+     ],
+     "mm": 26.040855750818096
+    },
+    "light": "night",
+    "objects": [
+     "sheet",
+     "folded",
+     "board",
+     "pen"
+    ],
+    "recipe": "2026-06_ferry_timetable",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "board"
    }
   },
   "seed/photos/2026-06_letter_result.jpg": {
@@ -16477,6 +16821,41 @@
     "surface": null
    }
   },
+  "seed/photos/2026-07_hill_thermos.jpg": {
+   "bytes": 19096,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.3234090205827851,
+     "height": 0.455216978886109,
+     "lean_deg": -8.330241012435156,
+     "look_at": [
+      0,
+      0,
+      0.03629043598215547
+     ],
+     "mm": 26.960335190813048
+    },
+    "light": "night",
+    "objects": [
+     "flask",
+     "mug",
+     "folded",
+     "sheet",
+     "bag"
+    ],
+    "recipe": "2026-07_hill_thermos",
+    "res": [
+     1000,
+     750
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "steel"
+   }
+  },
   "seed/photos/2026-07_island_wall.jpg": {
    "bytes": 102275,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
@@ -16579,6 +16958,79 @@
     "surface": "melamine"
    }
   },
+  "seed/photos/2026-07_soup_july.jpg": {
+   "bytes": 57382,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.2725677286986334,
+     "height": 0.383589742762263,
+     "lean_deg": 15.144182056079899,
+     "look_at": [
+      0,
+      0,
+      0.03343473080837575
+     ],
+     "mm": 25.068073229077278
+    },
+    "light": "night_lamp",
+    "objects": [
+     "bowl",
+     "sheet",
+     "pan",
+     "plate",
+     "tin",
+     "mug",
+     "pen"
+    ],
+    "recipe": "2026-07_soup_july",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "steel"
+   }
+  },
+  "seed/photos/2026-07_soup_lid.jpg": {
+   "bytes": 62121,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.3564961759768086,
+     "height": 0.4184134076325219,
+     "lean_deg": 1.7834681916838733,
+     "look_at": [
+      0,
+      0,
+      0.019587198734456055
+     ],
+     "mm": 27.068350972028206
+    },
+    "light": "night",
+    "objects": [
+     "pan",
+     "mug",
+     "card",
+     "board",
+     "spoon",
+     "plate"
+    ],
+    "recipe": "2026-07_soup_lid",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "board"
+   }
+  },
   "seed/photos/2026-08_art_room_empty.jpg": {
    "bytes": 55226,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
@@ -16613,36 +17065,37 @@
    }
   },
   "seed/photos/2026-08_bread_loaf.jpg": {
-   "bytes": 25935,
-   "generator": "blender/photos/still.py",
+   "bytes": 71443,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
    "kind": "photo",
    "settings": {
     "camera": {
-     "distance": 0.26,
-     "height": 0.3,
-     "lean_deg": 4,
+     "distance": 0.2583487949378242,
+     "height": 0.38926127572848135,
+     "lean_deg": 9.3461452212035,
      "look_at": [
       0,
       0,
-      0.03
+      0.049043395777221804
      ],
-     "mm": 26
+     "mm": 27.26550549927527
     },
-    "depth_of_field": "f/2.2 at the subject, as a phone would",
-    "light": "kitchen_bulb",
+    "light": "night_lamp",
     "objects": [
      "loaf",
+     "board",
+     "crumbs",
      "knife",
-     "mug",
-     "crumbs"
+     "mug"
     ],
     "recipe": "2026-08_bread_loaf",
     "res": [
-     700,
-     525
+     1000,
+     750
     ],
     "rig": "blender/rig/common.py",
-    "samples": 40,
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
     "surface": "board"
    }
   },
@@ -16746,7 +17199,7 @@
    }
   },
   "seed/photos/2026-08_sketchbook_lift.jpg": {
-   "bytes": 28359,
+   "bytes": 89055,
    "generator": "blender/photos/still.py + blender/photos/develop.py",
    "kind": "photo",
    "settings": {
