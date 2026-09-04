@@ -1,0 +1,97 @@
+{
+ "transport": "tailscale",
+ "status": "ran",
+ "nodes": {
+  "host": {
+   "hostname": "lovetap-a",
+   "node_key": "nodekey:74abf7bd69e3b6c1644838b1f21277993193c321872b9e39fa050f9afa04fe19",
+   "addresses": [
+    "100.68.254.25",
+    "fd7a:115c:a1e0::fa38:fe1a"
+   ],
+   "os": "linux",
+   "online": true
+  },
+  "client": {
+   "hostname": "lovetap-b",
+   "node_key": "nodekey:4b869ddd090d0420045a610b1dd00a084cf79a4ed8675cf2c419abdfb3c8c66c",
+   "addresses": [
+    "100.72.198.108",
+    "fd7a:115c:a1e0::b338:c66d"
+   ],
+   "os": "linux",
+   "online": true
+  }
+ },
+ "distinct_node_keys": true,
+ "distinct_addresses": [
+  "100.68.254.25",
+  "100.72.198.108"
+ ],
+ "host_listener": "127.0.0.1:8443",
+ "host_reachable_at": "100.68.254.25",
+ "paired_with": "six spoken words, HKDF-SHA256; every request signed thereafter",
+ "events": {
+  "message_client_to_host": {
+   "id": "01M1NN49GTXG3M78M1RBK4MPH7",
+   "type": "message",
+   "from": "teo",
+   "written_at": "2026-09-04T07:29:00.954Z",
+   "arrived_seq": 1
+  },
+  "feeling_client_to_host": {
+   "id": "01M1NN49H46HGEYBHP7F4T521Y",
+   "type": "feeling",
+   "from": "teo",
+   "written_at": "2026-09-04T07:29:00.964Z",
+   "arrived_seq": 2
+  },
+  "message_host_to_client": {
+   "id": "01M1NN49JW31C5N8KTXBKD3W4J",
+   "type": "message",
+   "from": "noor",
+   "written_at": "2026-09-04T07:29:01.020Z",
+   "arrived_seq": 3
+  },
+  "feeling_host_to_client": {
+   "id": "01M1NN49JX7A3K5JPAQEJMCQJ7",
+   "type": "feeling",
+   "from": "noor",
+   "written_at": "2026-09-04T07:29:01.021Z",
+   "arrived_seq": 4
+  }
+ },
+ "spine_host_order": [
+  "01M1NN49GTXG3M78M1RBK4MPH7",
+  "01M1NN49H46HGEYBHP7F4T521Y",
+  "01M1NN49JW31C5N8KTXBKD3W4J",
+  "01M1NN49JX7A3K5JPAQEJMCQJ7"
+ ],
+ "spine_client_order": [
+  "01M1NN49GTXG3M78M1RBK4MPH7",
+  "01M1NN49H46HGEYBHP7F4T521Y",
+  "01M1NN49JW31C5N8KTXBKD3W4J",
+  "01M1NN49JX7A3K5JPAQEJMCQJ7"
+ ],
+ "four_events_at": {
+  "host": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "client": [
+   0,
+   1,
+   2,
+   3
+  ]
+ },
+ "same_order_both_sides": true,
+ "counted_by_node_b": {
+  "tx_bytes": 12684,
+  "rx_bytes": 11252,
+  "path": "direct to 192.0.2.2:48859"
+ },
+ "written_at": "2026-09-04T07:29:01.074783Z"
+}
