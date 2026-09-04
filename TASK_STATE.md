@@ -10,16 +10,32 @@ checkpoint under `checkpoints/` and continue from **Next action**.
 | 1 | 2026-09-03 | bootstrap; STEP 01 transport; STEP 02 spine; STEP 03 unstyled messenger + reliability report; sounds; paper-stock renderer started; seed year and handwriting delegated (in flight) | 0 |
 | 2 | 2026-09-03 | tears, fonts, objects, seed year on disk; STEP 06 material on shell and Chat; STEP 07 feelings and signals; STEP 08 four modules; Moments and Settings | 0 |
 | 3 | 2026-09-04 | capture handles wired into the app; `run.sh` and `capture.sh`; the scene driver, frame/tear/SSIM/crop checks and the string lint; Chat chrome redrawn in the material language (no icon set anywhere in Chat); tear assignment made collision-free by construction; the fold player and folded unread notes; `app/lib/setup/` checklists; the six critic prompts; first evidence pass | see evidence/SCORE.json |
+| 4 | 2026-09-04 | the photograph pipeline found to be producing black frames and empty fields and fixed at the source; the unfolding clip found to be 240 identical frames and fixed at four separate causes; every screen given a test that builds it; the seeded year measured as 251 lines short and the reason named; three layout overflows and one out-of-range opacity found by those tests; six flat modal surfaces rebuilt as paper; the tab strip given five different pieces of card | see evidence/SCORE.json (cycle 1: 40) |
 
 ## Current position
 
 - phase: build
-- step: STEP 04 done (13 months, 14,099 events, 0 validator errors); STEP 07 ambient surfaces built;
-  STEP 09 setup checklists and the CA bootstrap page written; STEP 05 filling in (tear relief and
-  the desk rendered this session, bits queued, folds partly rendered); STEP 10 harness complete,
-  second capture pass pending
-- review cycle: 0 (the first artifacts exist; critics have not run against them yet)
-- rubric score: not yet scored — see `evidence/SCORE.json`
+- step: STEP 05 finishing — the render queue (`tools/render_queue3.sh`) is exposing the 115
+  photographs, then the 14 videos, then the dusk half of the paper library, then the fold sequence
+  to its full 240 frames. STEP 10's harness is complete and the second capture pass waits on the
+  photographs: 129 missing renders were taking 122 read markers, reactions and replies down with
+  them, which is why the thread came back text only.
+- review cycle: 1 done (40/100, every floor missed); 2 waits on the second capture pass
+- rubric score: 40 — see `evidence/SCORE.json`
+
+### What cycle 1 said, and where each of it stands
+
+| finding | state |
+|---|---|
+| a heart used as the token for a feeling | `obj_pinch` is a strip of paper pinched between finger and thumb; rendered |
+| the setup screen was one flat fill with no paper | root cause found and fixed; measured again at 2.85M of 4.49M pixels above L=140, 19,570 colours |
+| the action sheet was one flat rectangle at L=235 | six modal surfaces rebuilt as torn paper; three tests hold the line |
+| the five tab cards were five stamps of one swatch | five windows onto the sheet at its own pixel density; highest correlation between any two now 0.59, was 0.991–1.000 |
+| the media viewer, the states frame and search proved nothing | rebuilt; waiting on the photographs to be re-captured |
+| no fold or crease anywhere; the unfolding clip was a still | four causes found and fixed; the clip is 8% repeated frames, was 100% |
+| there is no dusk half of the library | queued behind the photographs |
+| a feeling did not land, it cut in | `app/lib/feelings/landing.dart`: real ballistics, and the page moves with the haptic amplitude |
+| Moments was empty | it opens on the first view with something in it; a test holds it |
 - transport in use: local (`app/lib/transport/local/`), named in every report; tailscale not built
 - fourth-module commit hash: 7dfeca2 (`STEP 07-08`); `git show --stat 7dfeca2` touches only
   `app/lib/modules/rituals/`, the registry line, and files outside `modules/`
