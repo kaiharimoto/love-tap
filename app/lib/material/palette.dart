@@ -49,6 +49,30 @@ class Paper {
   static const graph = Color(0xFFE9ECEC);
   static const legal = Color(0xFFF3E6A8);
   static const index = Color(0xFFF6F1E6);
+  static const looseleaf = Color(0xFFF2EDE2);
+  static const spiral = Color(0xFFEFEADC);
+  static const stickyYellow = Color(0xFFF3E08A);
+  static const stickyPink = Color(0xFFF2C1C1);
+
+  /// The colour a stock is, before its render arrives — or if it never does.
+  ///
+  /// A piece of paper with no paper on it is not a lesser version of a piece of paper. The setup
+  /// screen came out as a page of dark text on bare wood at about one-to-one contrast, which is
+  /// worse than any wrong colour would have been. Whatever else happens, a PaperPiece is the
+  /// colour of the stock it is made of.
+  static Color forStock(String stockId) {
+    final family = stockId.split('_').first;
+    return switch (family) {
+      'lined' => lined,
+      'graph' => graph,
+      'legal' => legal,
+      'index' => index,
+      'looseleaf' => looseleaf,
+      'spiral' => spiral,
+      'sticky' => stockId.contains('pink') ? stickyPink : stickyYellow,
+      _ => lined,
+    };
+  }
 }
 
 /// The pen a person writes with, by their id in seed/people.json.

@@ -13,6 +13,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'library.dart';
+import 'palette.dart';
 import 'light.dart';
 
 /// Decoded masks, kept for the life of the process: a screenful of notes shares a small pool.
@@ -101,8 +102,10 @@ class PaperPiece extends StatelessWidget {
       child: Transform.scale(
         scale: frame,
         child: Opacity(
-          // one lift was modelled; a note that lies flatter presses its shadow harder into the desk
-          opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(1.6)).clamp(0.6, 1.25),
+          // One lift was modelled, and the render is as dark as this shadow gets: a note that
+          // lies flatter than the model cannot press harder than the render already did, so the
+          // reference is the flattest lift and every other note lifts away from it, lighter.
+          opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(0.0)).clamp(0.6, 1.0),
           child: Image.asset(
             tearAsset('${tearId!}_shadow$suffix'),
             fit: BoxFit.fill,
@@ -121,6 +124,10 @@ class PaperPiece extends StatelessWidget {
     final stock = (!dusk || stockId.endsWith('_dusk')) ? stockId : '${stockId}_dusk';
     final content = Stack(
       children: [
+        // Underneath everything, the colour the stock is. The render is what makes it paper, but
+        // this is what stops it ever being nothing: a sheet whose image has not arrived, or whose
+        // image is missing from the bundle, is still a sheet.
+        Positioned.fill(child: ColoredBox(color: Paper.forStock(stock))),
         Positioned.fill(
           child: Transform.scale(
             scale: stockScale,
@@ -131,7 +138,7 @@ class PaperPiece extends StatelessWidget {
               alignment: stockAlignment,
               gaplessPlayback: true,
               filterQuality: FilterQuality.medium,
-              errorBuilder: (c, e, s) => const ColoredBox(color: Color(0xFFF1ECDF)),
+              errorBuilder: PaperPiece.none,
             ),
           ),
         ),
