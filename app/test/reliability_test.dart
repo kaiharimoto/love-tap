@@ -11,6 +11,9 @@ import 'package:desk/spine/spine.dart';
 import 'package:desk/spine/store/store_native.dart';
 import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/sync.dart';
+import 'package:desk/transport/protocol/http_transport.dart';
+import 'package:desk/transport/tailscale/tailnet.dart';
+import 'package:desk/transport/tailscale/tailscale_transport.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Future<int> _freePort() async {
@@ -241,4 +244,95 @@ void main() {
     expect(duplicates, 0);
     expect(sameOrder, isTrue);
   }, timeout: const Timeout(Duration(minutes: 5)));
+
+  // ---- the same protocol, over the tailnet -------------------------------------------------
+  //
+  // The brief's failure condition is the host binding anything other than its tailnet address, so
+  // what this checks is that two nodes on a real tailnet pair and carry a message both ways with
+  // the host bound to a 100.64.0.0/10 address and to nothing else.
+  //
+  // Without a Tailscale auth key the two nodes cannot exist, so there is nothing to check. That is
+  // recorded as pending — not as passing, which would be a lie, and not as failing, which would
+  // say the code is wrong when what is missing is a credential. tools/tailscale/up.sh writes the
+  // two addresses when it brings the nodes up.
+  test('reliability report over the tailscale transport', () async {
+    final a = File('../toolchain/ts/a/address');
+    final b = File('../toolchain/ts/b/address');
+    final report = File('../evidence/reliability.json');
+    Map<String, dynamic> existing = {};
+    if (await report.exists()) {
+      existing = jsonDecode(await report.readAsString()) as Map<String, dynamic>;
+    }
+
+    Future<void> record(Map<String, dynamic> block) async {
+      existing['tailscale'] = block;
+      await report.parent.create(recursive: true);
+      await report.writeAsString(const JsonEncoder.withIndent(' ').convert(existing));
+    }
+
+    if (!await a.exists() || !await b.exists()) {
+      await record({
+        'status': 'pending',
+        'why': 'no TS_AUTHKEY was supplied in this session, so the two tailnet nodes were never '
+            'brought up and nothing over the tailnet has been checked',
+        'how_to_run': 'TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh, then flutter test '
+            'test/reliability_test.dart',
+        'what_is_still_checked': 'the protocol, the pairing and every fault run above, over the '
+            'local transport — the two transports differ only in which address the host binds',
+        'checked_at': DateTime.now().toUtc().toIso8601String(),
+      });
+      // deliberately not a failure: the credential is absent, not the code
+      return;
+    }
+
+    final hostAddress = (await a.readAsString()).trim();
+    final clientAddress = (await b.readAsString()).trim();
+    expect(isTailnetAddress(hostAddress), isTrue,
+        reason: '$hostAddress is not a tailnet address');
+
+    final dir = await Directory.systemTemp.createTemp('reliability-ts-');
+    final host = await Spine.open(NativeStore.openAt('${dir.path}/host.sqlite3'),
+        const Identity(person: Person.noor, device: DeviceKind.android));
+    final client = await Spine.open(NativeStore.openAt('${dir.path}/client.sqlite3'),
+        const Identity(person: Person.teo, device: DeviceKind.pwa));
+    final binding = TailscaleBinding(port: 8443, declaredAddress: hostAddress);
+    final hostT = HttpTransport(role: TransportRole.host, spine: host, deviceId: 'android-ts',
+        binding: binding);
+    await hostT.start();
+    final clientT = tailscaleTransport(role: TransportRole.client, spine: client,
+        deviceId: 'pwa-ts', port: 8443, peerAddress: hostAddress);
+    await clientT.start();
+
+    final code = await hostT.beginPairing();
+    await clientT.completePairing('http://$hostAddress:8443', code.spoken);
+    final sync = SyncEngine(spine: client, transport: clientT);
+    final mine = await client.append('message', {'text': 'over the tailnet'},
+        at: DateTime.now(), hostAssign: false);
+    await sync.once();
+    final theirs = await host.append('message', {'text': 'and back'},
+        at: DateTime.now(), hostAssign: true);
+    await sync.once();
+
+    await record({
+      'status': 'ran',
+      'host_bound_to': binding.boundTo,
+      'host_address_is_tailnet': isTailnetAddress(binding.boundTo ?? ''),
+      'client_reached': 'http://$hostAddress:8443',
+      'client_node': clientAddress,
+      'crossed_to_the_host': host.byId(mine.id) != null,
+      'crossed_to_the_client': client.byId(theirs.id) != null,
+      'paired': hostT.report()['paired'] != null,
+      'checked_at': DateTime.now().toUtc().toIso8601String(),
+    });
+
+    expect(binding.boundTo, hostAddress);
+    expect(isTailnetAddress(binding.boundTo!), isTrue);
+    expect(host.byId(mine.id), isNotNull, reason: 'the message did not reach the host');
+    expect(client.byId(theirs.id), isNotNull, reason: 'the reply did not reach the client');
+
+    await clientT.stop();
+    await client.close();
+    await hostT.stop();
+    await host.close();
+  }, timeout: const Timeout(Duration(minutes: 3)));
 }

@@ -26,6 +26,14 @@ class Flags {
   /// Local transport port (host binds it; client connects to it through adb forward).
   static const int port = int.fromEnvironment('PORT', defaultValue: 8480);
 
+  /// This device's own tailnet address, when the setup list or run.sh knows it. Checked against
+  /// the tailnet ranges before anything is bound to it — declaring it is a convenience, not a
+  /// way round the rule that the host serves on the tailnet and nowhere else.
+  static const String tailnetAddress = String.fromEnvironment('TAILNET_ADDRESS', defaultValue: '');
+
+  /// The other phone's tailnet address, when pairing has not recorded one yet.
+  static const String peerAddress = String.fromEnvironment('PEER_ADDRESS', defaultValue: '');
+
   /// 'day' or 'dusk'. The whole app is lit by one condition at a time, so the desk, the paper and
   /// every baked shadow agree; this is what the dusk capture is taken under.
   static const String light = String.fromEnvironment('LIGHT', defaultValue: 'day');

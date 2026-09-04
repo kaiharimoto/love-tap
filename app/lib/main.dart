@@ -12,6 +12,7 @@ import 'ready.dart';
 import 'spine/seed_loader.dart';
 import 'spine/spine.dart';
 import 'transport/local/local_transport.dart';
+import 'transport/tailscale/tailscale_transport.dart';
 import 'transport/sync.dart';
 
 Future<void> main() async {
@@ -53,6 +54,15 @@ Future<AppScope> bootstrap() async {
   switch (Flags.transport) {
     case 'local':
       transport = LocalTransport(role: role, spine: spine, deviceId: deviceId, binding: LocalBinding(port: Flags.port));
+    case 'tailscale':
+      transport = tailscaleTransport(
+        role: role,
+        spine: spine,
+        deviceId: deviceId,
+        port: Flags.port == 8480 ? 8443 : Flags.port,
+        declaredAddress: Flags.tailnetAddress,
+        peerAddress: Flags.peerAddress,
+      );
     default:
       throw UnsupportedError('transport ${Flags.transport} is not built yet');
   }

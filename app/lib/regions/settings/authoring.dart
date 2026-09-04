@@ -78,7 +78,7 @@ class _AuthoringSheetState extends State<AuthoringSheet> {
       id: 'preview',
       name: _name.text.isEmpty ? 'no name yet' : _name.text,
       family: _family,
-      object: _object ?? (_drawer.isEmpty ? 'obj_heart_fold' : _drawer.first),
+      object: _object ?? (_drawer.isEmpty ? 'obj_pinch' : _drawer.first),
       haptic: _haptic,
       sound: 'snd_${_family.label.toLowerCase()}_made',
       colour: switch (_family) {

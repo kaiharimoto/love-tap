@@ -1,97 +1,79 @@
 # The two phones
 
-A mirror of the setup checklist each phone shows on its first run (`app/lib/setup/checklist.dart`),
-written out here so it can be read before either phone has the app on it. Nothing in this document
-is a step the app cannot see for itself: every line below corresponds to a step that ticks off when
-the app observes the thing happening, and stays unticked otherwise.
+What has to be true on each of them, in the order it has to become true. This is the same list the
+app shows on its own first screen; it is written down here as well so it can be followed without
+the app running.
 
-There is no account, no server, and nobody else on the wire. The two phones talk to each other over
-a tailnet with two nodes on it, and that is the whole system.
+## The two roles
 
----
+One phone is the **host**: the Android one. It holds the log, hands out the sequence numbers, and
+serves the other phone over the tailnet. Being the host is not being in charge of anything — either
+person can write anything at any time and their own phone keeps it whether or not the other one is
+reachable — it only decides which of the two assigns the order.
 
-## Before either phone
+The other is the **client**: the iPhone, running the installable web app. It keeps its own copy of
+everything, writes into it while offline, and pushes what it wrote when the host comes back.
 
-One tailnet, two nodes, nothing else joined to it. The Android phone is the host: it holds the log,
-serves the certificate, and reads out the six words. The iPhone is the client. Either phone can be
-replaced later without the other one being reinstalled — Settings has "replace one of the phones".
+## The list
 
-A key expires. Tailscale auth keys are good for at most 90 days, and a node whose key has expired
-drops off the tailnet silently: the notes simply stop arriving, and nothing on either screen says
-why. Re-authenticate the node from the Tailscale app before that happens; the setup list's
-"put this phone on the tailnet" step un-ticks itself when the address goes away, which is the
-app's only way of telling you.
+1. **Both phones on the same tailnet, and nothing else on it.**
+   Install Tailscale on each and sign both into the same account. The conversation is only ever
+   served to a tailnet address, so until this is true there is nothing to connect to. Turn subnet
+   routes and DNS acceptance off on both: neither phone needs anything from the tailnet except the
+   other phone.
 
----
+2. **The Android app installed, and its tailnet address noted.**
+   The Tailscale app shows it: four numbers beginning with 100. That address is what the iPhone
+   will look for, and it is the only address the Android phone will serve on. With Tailscale down
+   the app says so and does not start serving on anything else — there is no fallback in the code
+   and `app/test/tailnet_test.dart` is there to keep it that way.
 
-## The Android phone
+3. **The web app added to the iPhone's home screen.**
+   Open the host's address in Safari, share, add to home screen. It will not hold on to anything
+   until it is opened from the home screen rather than from a tab — an iOS rule, not ours, and the
+   setup list waits for it rather than pretending.
 
-1. **Put this phone on the tailnet.** The same private network as the other phone, and nothing else
-   on it.
-   *Ticks when: the transport reports an address on the tailnet.*
-2. **Trust the certificate the other phone holds.** So nothing between the two of you can read what
-   goes across.
-   *Ticks when: a connection completes with a certificate this device verified.*
-3. **Read the six words off the other phone.** Say them out loud in the same room. They are only
-   good once.
-   *Ticks when: pairing completes and both device ids are recorded.*
-4. **Let it interrupt you.** You choose which kinds, later, in settings. This only opens the door.
-   *Ticks when: the notification permission is granted.*
-5. **Write the first thing.** Anything. It goes to one person.
-   *Ticks when: an event authored on this phone is in the log.*
-6. **Wait for theirs to arrive.**
-   *Ticks when: an event authored by the other person is in the log.*
+4. **The profile trusted.**
+   The host serves over HTTPS with a certificate it made itself. Open its address in Safari, take
+   the profile, then trust it under Settings → General → About → Certificate Trust Settings. This
+   is the fiddliest step and there is no way round it: the alternative is a certificate authority
+   that has heard of your phones, and none has.
 
-## The iPhone
+5. **The six words, read out loud.**
+   The host shows six words. Say them in the same room; type them into the iPhone. They are good
+   once. What they do is derive a key on both phones (HKDF-SHA256 over the words and both device
+   ids); every request either phone makes afterwards is signed with it, and one that is not is
+   refused. Being on the same tailnet is *not* what authenticates the two phones to each other —
+   it is only the reason nobody else can watch them talk.
 
-An iPhone needs two things Android does not: the app has to leave Safari, and the certificate goes
-in through a profile rather than a prompt.
+6. **Notifications, if you want them.**
+   The Android phone vibrates the pattern a feeling carries. The iPhone cannot — Safari has no
+   vibration API — so the same pattern moves the paper under your thumb instead, and a web push
+   arrives carrying only what kind of thing it is and who sent it. Never the content: the content
+   only ever travels over the tailnet.
 
-1. **Add it to the home screen.** Share, then add to home screen. It will not hold on to anything
-   until you do — a PWA in a Safari tab has its storage evicted.
-   *Ticks when: the page is running in standalone display mode.*
-2. **Put this phone on the tailnet.**
-   *Ticks when: the transport reports an address on the tailnet.*
-3. **Install the profile the other phone is serving.** Open its address in Safari, take the profile,
-   then trust it in Settings → General → About → Certificate Trust Settings. iOS will not offer the
-   trust switch until the profile is installed, and will not install a profile from a page opened
-   inside the app.
-   *Ticks when: a connection completes with a certificate this device verified.*
-4. **Read the six words off the other phone.**
-   *Ticks when: pairing completes.*
-5. **Let it interrupt you.** An iPhone only offers this once the app is on the home screen.
-   *Ticks when: the notification permission is granted.*
-6. **Write the first thing.**
-   *Ticks when: an event authored on this phone is in the log.*
-7. **Wait for theirs to arrive.**
-   *Ticks when: an event authored by the other person is in the log.*
+## What is deliberately not here
 
----
+- No account, no server, no directory, nothing to sign up for. The only thing either phone talks
+  to is the other phone.
+- No cloud backup. What is on the two phones is what there is. Settings writes the whole log out
+  to a file, and that is the backup.
+- No third device. The pairing is between two device ids and there is nowhere to put a third.
 
-## What the iPhone does not have
+## Running the two test nodes
 
-**Haptics.** There is no vibration API in a PWA on iOS, and there is not going to be one. The
-substitute is not an apology: a feeling arriving moves the page itself — the whole surface shifts on
-the same rhythm the Android phone would buzz on, with the feeling's own sound underneath it. The
-notation is the same in both places (`docs/FEELINGS.md`), so "held" has the same shape whichever
-phone you are holding.
+In development there is no pair of phones, so `tools/tailscale/up.sh` brings up two userspace
+`tailscaled` daemons — one per role — each with its own state directory, and prints the address
+each is on. It needs a Tailscale auth key in the environment:
 
-**Background delivery of content.** A Web Push payload carries the event kind and who sent it, and
-nothing else. The note itself is fetched over the tailnet when the app is opened. This is not a
-limitation being worked around — it is the rule: nothing of what they wrote travels by any path but
-the one wire between the two phones.
+    TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh
+    ./run.sh --transport=tailscale
 
----
+The key is read from the environment and never written to disk; `toolchain/ts/a/` and `b/` are
+ignored by git, and `toolchain/ts/AUTHKEY_STATUS` records only whether a key has ever been
+supplied — the word `pending` or the word `supplied`, nothing else.
 
-## Verified
-
-| what | on | date |
-|---|---|---|
-| Android build installed and run in the AVD | android-34 aosp_atd x86_64, no KVM | — |
-| PWA run in Playwright WebKit | WebKit 26.5 | 2026-09-03 |
-| Pairing across two tailnet nodes | — | — |
-| Real iPhone, added to home screen | — | — |
-| Real Android phone | — | — |
-
-A dash means it has not been done yet, not that it failed. The rows are filled in on the day the
-thing actually happens, by the person it happened to.
+Without a key the tailscale run is recorded in `evidence/reliability.json` as **pending**: not as
+passing, and not as failing, because the thing it would have checked has not been checked. Every
+other reliability check runs over the local transport and is unaffected — the two transports share
+one protocol, one pairing and one sync engine, and differ only in which address the host binds.

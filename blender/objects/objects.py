@@ -123,23 +123,34 @@ def tube(points, radius, sections=12, name="tube", mat=None, taper=None):
 
 
 # ------------------------------------------------------------------ the objects
-def obj_heart_fold(rng):
-    """An origami heart: a square folded to a point at the bottom and two lobes at the top."""
-    s = 0.030
+def obj_pinch(rng):
+    """A squeeze: a strip of paper taken between finger and thumb and pressed.
+
+    This replaces an origami heart. A heart is a glyph whatever it is modelled out of — a filled
+    white one on a warm ground is the emoji whether or not it was folded — and the anti-goal is
+    about what a thing reads as, not how it was made. A squeeze is a gesture, so the object is the
+    mark that gesture leaves: the strip pleats at the pinch, stands up either side of it, and the
+    two ends drop back down to the desk.
+    """
+    L, W = 0.052, 0.017
     def warp(u, v):
-        lobe = math.exp(-((u - 0.28) ** 2 + (v - 0.72) ** 2) / 0.02) + math.exp(-((u - 0.72) ** 2 + (v - 0.72) ** 2) / 0.02)
-        point = max(0.0, 0.5 - abs(u - 0.5) * 2) * max(0.0, 0.35 - v) * 2.4
-        return 0.0035 * lobe + 0.004 * point
-    bm = sheet(s, s, 48, 48, warp)
-    # cut the heart outline by deleting verts outside it
-    kill = []
+        # u runs along the strip. The pinch is at the middle: two creases about four millimetres
+        # apart, with the paper standing between them and settling away either side.
+        d = abs(u - 0.5)
+        peak = math.exp(-(d / 0.055) ** 2)
+        pleat = 0.0028 * math.cos((v - 0.5) * math.pi * 3.0) * peak
+        settle = 0.0011 * math.exp(-((d - 0.22) / 0.13) ** 2)
+        return 0.0075 * peak + pleat + settle
+    bm = sheet(L, W, 90, 34, warp)
+    # the strip is torn off, not cut: its two ends are ragged
     for v in bm.verts:
-        u, w = v.co.x / s + 0.5, v.co.y / s + 0.5
-        x, y = (u - 0.5) * 2.2, (w - 0.42) * 2.2
-        if (x * x + y * y - 1) ** 3 - x * x * y * y * y > 0:
-            kill.append(v)
-    bmesh.ops.delete(bm, geom=kill, context="VERTS")
-    return solidify(new_mesh(bm, "heart_fold", paper_mat("heart_paper", (0.93, 0.88, 0.86))))
+        u = v.co.x / L + 0.5
+        if u < 0.03 or u > 0.97:
+            v.co.y += 0.0006 * math.sin(v.co.y * 900.0 + u * 60.0)
+            v.co.z += 0.0004 * math.sin(v.co.y * 1400.0)
+    obj = solidify(new_mesh(bm, "pinch", paper_mat("pinch_paper", (0.93, 0.90, 0.84), tooth=1.0)))
+    obj.rotation_euler = (0.0, 0.0, math.radians(float(rng.uniform(-16, 16))))
+    return obj
 
 
 def _poly(points, name, mat, t=PAPER_T):
@@ -216,25 +227,35 @@ def obj_fortune_teller(rng):
 
 
 def obj_crown(rng):
+    """A paper crown, cut from a strip and taped into a ring, lying over on its side.
+
+    Stood upright and seen from above it is a ring of triangles, which is a graphic. Tipped over
+    the way one actually ends up on a table, it is a band of paper with points on it, and you can
+    see the thickness of the card at every cut edge and where the two ends overlap at the join.
+    """
     mat = paper_mat("crown_paper", (0.95, 0.92, 0.72))
     bm = bmesh.new()
-    n = 5
-    r = 0.020
-    ring = []
+    n = 7
+    r = 0.019
+    ring, top = [], []
     for k in range(n * 2):
         a = 2 * math.pi * k / (n * 2)
-        rr = r if k % 2 == 0 else r * 0.86
-        ring.append((rr * math.cos(a), rr * math.sin(a), 0.0))
-    top = []
-    for k, (x, y, _) in enumerate(ring):
-        h = 0.016 if k % 2 == 0 else 0.006
-        top.append((x, y, h))
+        rr = r if k % 2 == 0 else r * 0.88
+        # the band is not a true circle: it has been squashed by being sat on
+        squash = 1.0 - 0.22 * abs(math.sin(a))
+        ring.append((rr * math.cos(a) * squash, rr * math.sin(a), 0.0))
+        h = 0.015 if k % 2 == 0 else 0.005
+        top.append((rr * math.cos(a) * squash * 1.03, rr * math.sin(a) * 1.03, h))
     vb = [bm.verts.new(p) for p in ring]
     vt = [bm.verts.new(p) for p in top]
     for k in range(len(vb)):
         k2 = (k + 1) % len(vb)
         bm.faces.new((vb[k], vb[k2], vt[k2], vt[k]))
-    return solidify(new_mesh(bm, "crown", mat, smooth=False), t=0.0002)
+    obj = solidify(new_mesh(bm, "crown", mat, smooth=False), t=0.00035)
+    # tipped over onto the desk, resting on its rim
+    obj.rotation_euler = (math.radians(76.0), 0.0, math.radians(float(rng.uniform(-20, 20))))
+    obj.location = (0.0, 0.0, r * 0.94)
+    return obj
 
 
 def obj_blanket_fold(rng):
@@ -291,15 +312,34 @@ def obj_plaster(rng):
 
 
 def obj_gold_star(rng):
-    mat = simple_mat("foil", (0.86, 0.68, 0.24), roughness=0.22, metallic=0.9)
+    """A foil star, stuck on a scrap of paper with one point lifting off it.
+
+    A five-pointed star lying flat and dead-on is a glyph. What makes it a sticker is that it is
+    stuck to something, that it is not quite flat, and that the foil throws a hard highlight in
+    one place while the paper under it does not.
+    """
+    parts = []
+    backing = sheet(0.026, 0.024, 20, 20, lambda u, v: 0.0003 * math.sin(u * 5 + v * 3))
+    parts.append(solidify(new_mesh(backing, "star_backing",
+                                   paper_mat("star_backing", (0.90, 0.87, 0.80))), t=0.00016))
+
+    mat = simple_mat("foil", (0.86, 0.68, 0.24), roughness=0.14, metallic=1.0)
     bm = bmesh.new()
+    lift_at = int(rng.integers(0, 5)) * 2
     pts = []
     for k in range(10):
         a = math.pi / 2 + 2 * math.pi * k / 10
         r = 0.011 if k % 2 == 0 else 0.0048
-        pts.append(bm.verts.new((r * math.cos(a), r * math.sin(a), 0.0)))
-    bm.faces.new(pts)
-    return solidify(new_mesh(bm, "gold_star", mat, smooth=False), t=0.00025)
+        # one point has been picked at and stands off the paper, curling as it goes
+        z = 0.0009 + (0.0042 if k == lift_at else 0.0)
+        pts.append(bm.verts.new((r * math.cos(a), r * math.sin(a), z)))
+    centre = bm.verts.new((0.0, 0.0, 0.0009))
+    for k in range(10):
+        bm.faces.new((centre, pts[k], pts[(k + 1) % 10]))
+    star = solidify(new_mesh(bm, "gold_star", mat, smooth=False), t=0.00022)
+    star.rotation_euler = (0.0, 0.0, math.radians(float(rng.uniform(-25, 25))))
+    parts.append(star)
+    return parts
 
 
 def obj_confetti(rng):
@@ -429,18 +469,34 @@ def obj_snapped_pencil(rng):
 
 
 def obj_clover(rng):
-    mat = simple_mat("clover", (0.36, 0.48, 0.28), roughness=0.75)
+    """A clover, picked rather than drawn: three leaves that each dish and tilt their own way, on
+    a stem that bends where it was pinched off. Light comes through a leaf, so it has thickness
+    and scatter rather than being a flat green shape."""
+    mat = simple_mat("clover", (0.20, 0.34, 0.14), roughness=0.62)
+    b = mat.node_tree.nodes.get("Principled BSDF")
+    b.inputs["Subsurface Weight"].default_value = 0.45
+    b.inputs["Subsurface Radius"].default_value = (0.0016, 0.0034, 0.0012)
+    b.inputs["Sheen Weight"].default_value = 0.25
     parts = []
     for k in range(3):
-        a = 2 * math.pi * k / 3
-        bm = sheet(0.010, 0.012, 12, 12, lambda u, v: 0.0004 * math.sin(v * 3))
-        kill = [v for v in bm.verts if ((v.co.x / 0.010) ** 2 + ((v.co.y / 0.012) - 0.15) ** 2) > 0.26]
+        a = 2 * math.pi * k / 3 + float(rng.uniform(-0.25, 0.25))
+        dish = float(rng.uniform(0.0016, 0.0032))
+        bm = sheet(0.011, 0.013, 18, 18,
+                   lambda u, v, d=dish: d * (((u - 0.5) * 2) ** 2 + ((v - 0.35) * 1.6) ** 2))
+        kill = [v for v in bm.verts
+                if ((v.co.x / 0.011) ** 2 + ((v.co.y / 0.013) - 0.15) ** 2) > 0.26]
         bmesh.ops.delete(bm, geom=kill, context="VERTS")
-        o = solidify(new_mesh(bm, f"leaf{k}", mat), t=0.00008)
-        o.rotation_euler = (0.0, 0.0, a)
-        o.location = (0.006 * math.cos(a), 0.006 * math.sin(a), 0.0002)
+        # the crease down the middle of a leaf, and the notch at its tip
+        for v in bm.verts:
+            v.co.z += 0.0009 * math.exp(-((v.co.x / 0.0016) ** 2))
+            if v.co.y > 0.0045 and abs(v.co.x) < 0.0011:
+                v.co.y -= 0.0012 * (1 - abs(v.co.x) / 0.0011)
+        o = solidify(new_mesh(bm, f"leaf{k}", mat), t=0.00010)
+        o.rotation_euler = (float(rng.uniform(-0.30, -0.10)), float(rng.uniform(-0.15, 0.15)), a)
+        o.location = (0.006 * math.cos(a), 0.006 * math.sin(a), 0.0004)
         parts.append(o)
-    stem = tube([(0.0, 0.0, 0.0002), (-0.004, -0.012, 0.0002)], 0.0004, 6, "stem", mat)
+    stem = tube([(0.0, 0.0, 0.0004), (-0.002, -0.007, 0.0012), (-0.005, -0.014, 0.0004)],
+                0.00042, 7, "stem", mat)
     parts.append(stem)
     return parts
 
@@ -459,7 +515,7 @@ def obj_coffee_ring(rng):
 
 
 OBJECTS = {
-    "obj_heart_fold": obj_heart_fold, "obj_crane": obj_crane, "obj_boat": obj_boat, "obj_plane": obj_plane,
+    "obj_pinch": obj_pinch, "obj_crane": obj_crane, "obj_boat": obj_boat, "obj_plane": obj_plane,
     "obj_fortune_teller": obj_fortune_teller, "obj_crown": obj_crown, "obj_blanket_fold": obj_blanket_fold,
     "obj_crumple_ball": obj_crumple_ball, "obj_torn_corner": obj_torn_corner, "obj_ticket": obj_ticket,
     "obj_plaster": obj_plaster, "obj_gold_star": obj_gold_star, "obj_confetti": obj_confetti,

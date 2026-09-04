@@ -87,7 +87,7 @@ class Feeling {
 }
 
 const List<Feeling> kBuiltInFeelings = [
-  Feeling(id: 'squeeze', name: 'a squeeze', family: Family.warmth, object: 'obj_heart_fold', haptic: '80@90 off40 160@160 off40 320@230', sound: 'snd_squeeze', colour: '#1f2a44'),
+  Feeling(id: 'squeeze', name: 'a squeeze', family: Family.warmth, object: 'obj_pinch', haptic: '80@90 off40 160@160 off40 320@230', sound: 'snd_squeeze', colour: '#1f2a44'),
   Feeling(id: 'forehead', name: 'forehead', family: Family.warmth, object: 'obj_thumbprint', haptic: '200@120 off120 200@120', sound: 'snd_forehead', colour: '#1f2a44'),
   Feeling(id: 'warm_palm', name: 'warm palm', family: Family.warmth, object: 'obj_coffee_ring', haptic: '600@140', sound: 'snd_palm', colour: '#a67c52'),
   Feeling(id: 'nuzzle', name: 'nuzzle', family: Family.warmth, object: 'obj_clover', haptic: '90@150 off60 90@150 off60 90@150 off200 400@110', sound: 'snd_nuzzle', colour: '#5d7a4a'),

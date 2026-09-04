@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+# tools/tailscale/up.sh — bring up the two nodes the reliability run needs.
+#
+#   TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh
+#   bash tools/tailscale/up.sh --down
+#
+# Two userspace tailscaled daemons, one per phone, each with its own state directory and its own
+# SOCKS port, so the host and the client are genuinely two nodes on a tailnet rather than two
+# processes on loopback pretending. Userspace mode means no TUN device and no root networking,
+# which is what makes this runnable here at all.
+#
+# The auth key is read from the environment and never written anywhere: not into a file, not into
+# a log, not into the manifest. It is a secret with a short life and putting it on disk in a
+# repository is a failure condition of this build. toolchain/ts/AUTHKEY_STATUS records only
+# whether one has ever been supplied — the word `pending` or the word `supplied`, nothing else.
+set -euo pipefail
+cd "$(dirname "$0")/../.."
+
+TS_DIR="toolchain/ts"
+TAILSCALED="$TS_DIR/bin/tailscaled"
+TAILSCALE="$TS_DIR/bin/tailscale"
+NODES=(a b)
+SOCKS_BASE=1055
+
+down() {
+  for n in "${NODES[@]}"; do
+    if [ -f "$TS_DIR/$n/pid" ]; then
+      kill "$(cat "$TS_DIR/$n/pid")" 2>/dev/null || true
+      rm -f "$TS_DIR/$n/pid"
+    fi
+  done
+  echo "both nodes are down"
+}
+
+if [ "${1:-}" = "--down" ]; then down; exit 0; fi
+
+[ -x "$TAILSCALED" ] || { echo "up.sh: $TAILSCALED is not there; run ./bootstrap.sh" >&2; exit 2; }
+
+if [ -z "${TS_AUTHKEY:-}" ]; then
+  echo "pending" > "$TS_DIR/AUTHKEY_STATUS"
+  cat >&2 <<'MSG'
+up.sh: no TS_AUTHKEY in the environment.
+
+  The two phones cannot join a tailnet without one, so the tailscale transport cannot be exercised
+  end to end and evidence/reliability.json will record the tailscale run as pending rather than as
+  passing. Everything else — the protocol, the pairing, the fault runs — is exercised over the
+  local transport and is unaffected.
+
+  To run it:  TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh
+  The key is read from the environment and is never written to disk.
+MSG
+  exit 3
+fi
+
+echo "supplied" > "$TS_DIR/AUTHKEY_STATUS"
+down || true
+
+i=0
+for n in "${NODES[@]}"; do
+  mkdir -p "$TS_DIR/$n"
+  socks=$((SOCKS_BASE + i))
+  # userspace networking: no TUN, no root, a SOCKS5 port per node to reach the tailnet through
+  "$TAILSCALED" \
+    --tun=userspace-networking \
+    --socks5-server="127.0.0.1:$socks" \
+    --outbound-http-proxy-listen="127.0.0.1:$((socks + 100))" \
+    --statedir="$TS_DIR/$n/state" \
+    --socket="$TS_DIR/$n/tailscaled.sock" \
+    >"$TS_DIR/$n/tailscaled.log" 2>&1 &
+  echo $! > "$TS_DIR/$n/pid"
+  i=$((i + 1))
+done
+
+sleep 2
+for n in "${NODES[@]}"; do
+  # --authkey comes from the environment on the command line of this process only
+  "$TAILSCALE" --socket="$TS_DIR/$n/tailscaled.sock" up \
+      --authkey="$TS_AUTHKEY" \
+      --hostname="lovetap-$n" \
+      --accept-routes=false \
+      --accept-dns=false \
+      >"$TS_DIR/$n/up.log" 2>&1 \
+    || { echo "up.sh: node $n would not come up; see $TS_DIR/$n/up.log" >&2; exit 4; }
+  ip=$("$TAILSCALE" --socket="$TS_DIR/$n/tailscaled.sock" ip -4 | head -1)
+  echo "$ip" > "$TS_DIR/$n/address"
+  echo "node $n is up at $ip"
+done
+
+echo
+echo "the host serves on $(cat "$TS_DIR/a/address"), the client reaches it there and nowhere else."

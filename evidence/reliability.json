@@ -1,23 +1,23 @@
 {
  "transport": "local",
- "generated_at": "2026-09-04T05:49:04.490837Z",
+ "generated_at": "2026-09-04T06:03:37.436988Z",
  "host": {
   "transport": "local",
   "role": "host",
   "state": "connected",
-  "address": "127.0.0.1:43295",
+  "address": "127.0.0.1:45373",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-04T05:49:04.463442Z",
-  "last_contact": "2026-09-04T05:49:04.487222Z",
+  "since": "2026-09-04T06:03:37.413613Z",
+  "last_contact": "2026-09-04T06:03:37.430640Z",
   "device_id": "android-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-04T05:49:03.258366Z"
+   "paired_at": "2026-09-04T06:03:34.180529Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -30,19 +30,19 @@
   "transport": "local",
   "role": "client",
   "state": "connected",
-  "address": "http://127.0.0.1:43295",
+  "address": "http://127.0.0.1:45373",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-04T05:49:03.719469Z",
-  "last_contact": "2026-09-04T05:49:04.488745Z",
+  "since": "2026-09-04T06:03:36.187749Z",
+  "last_contact": "2026-09-04T06:03:37.434366Z",
   "device_id": "pwa-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-04T05:49:03.270121Z"
+   "paired_at": "2026-09-04T06:03:34.188970Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -135,5 +135,12 @@
   "online",
   "offline",
   "online"
- ]
+ ],
+ "tailscale": {
+  "status": "pending",
+  "why": "no TS_AUTHKEY was supplied in this session, so the two tailnet nodes were never brought up and nothing over the tailnet has been checked",
+  "how_to_run": "TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh, then flutter test test/reliability_test.dart",
+  "what_is_still_checked": "the protocol, the pairing and every fault run above, over the local transport — the two transports differ only in which address the host binds",
+  "checked_at": "2026-09-04T06:03:37.493042Z"
+ }
 }
