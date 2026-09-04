@@ -1,0 +1,81 @@
+{
+ "cycle": 1,
+ "categories": {
+  "messenger_reliability": {
+   "weight": 30,
+   "floor": 26,
+   "critic": 8,
+   "critics": {
+    "messenger_reliability": 8
+   },
+   "builder": 9,
+   "builder_why": "Photographs, video and voice notes do not exist as files, so the seed loader drops every one of the 183 media events and the thread is text only. Three of the artifacts commissioned to prove a capability disproved it: the media viewer artifact was the chat list, the states artifact showed one state, and search never opened. The protocol underneath is sound and exercised \u2014 16 capabilities pass over the local transport with faults injected \u2014 but none of that is visible in a picture, and this row is judged on the pictures.",
+   "score": 8,
+   "meets_floor": false
+  },
+  "material_truth": {
+   "weight": 25,
+   "floor": 22,
+   "critic": 9,
+   "critics": {
+    "material_truth": 9
+   },
+   "builder": 9,
+   "builder_why": "The tears and the contact shadows are genuinely good and survive a hostile look at 300 per cent. Everything else in the row does not: a blank patch of paper carried 0.44 grey levels of high-frequency variation, less than the desk under it, because the tooth was a bump too fine for the renderer to resolve; the two hands repeated because the contextual alternates restarted at every word boundary; there is no dusk half of the library at all, so the different-light check had no evidence to run on; and no fold or crease appears anywhere because the unfolding clip was a still.",
+   "score": 9,
+   "meets_floor": false
+  },
+  "emotional_transmission": {
+   "weight": 20,
+   "floor": 17,
+   "critic": 7,
+   "critics": {
+    "emotional_transmission": 7
+   },
+   "builder": 7,
+   "builder_why": "A feeling did not land, it cut in: the arrival happened in one sixtieth of a second and nothing moved for six seconds afterwards, because there was no landing at all \u2014 the object simply appeared, and Sensation's amplitude stream was consumed by no widget in the app, so on a phone that cannot vibrate the feeling arrived as silence. The partner-state header and the drawn marks are real and good. The propagation clip and the two-device frame are absent, so the app's central claim is unevidenced.",
+   "score": 7,
+   "meets_floor": false
+  },
+  "coherence": {
+   "weight": 15,
+   "floor": 13,
+   "critic": 13,
+   "critics": {
+    "code": 13,
+    "coherence": 13
+   },
+   "builder": 12,
+   "builder_why": "The shared chrome is one component carrying one state across all five regions, which is the hard half. Against that: Moments was empty, the setup screen rendered with no paper under it at all and headings at about 1.05:1 contrast, the search page and the media viewer were still stock Material, and the registry's extension contract \u2014 a type is one entry and one renderer \u2014 was not true, with two copies of a per-type switch and a renderer field nothing read.",
+   "score": 12,
+   "meets_floor": false
+  },
+  "anti_goal": {
+   "weight": 10,
+   "floor": 9,
+   "critic": 4,
+   "critics": {
+    "anti_goal": 4
+   },
+   "builder": 4,
+   "builder_why": "Engagement machinery and product voice are clean and I believe they will stay clean. Two blocking failures stood: a filled white heart used as the affordance for sending affection, which is an emoji whatever it was modelled from, and a setup screen that was one flat fill with no paper on it anywhere.",
+   "score": 4,
+   "meets_floor": false
+  }
+ },
+ "total": 40,
+ "exit_threshold": 95,
+ "every_floor_met": false,
+ "at_exit": false,
+ "critics_run": [
+  "anti_goal",
+  "code",
+  "coherence",
+  "emotional_transmission",
+  "material_truth",
+  "messenger_reliability"
+ ],
+ "critic_count": 6,
+ "declined": [],
+ "problems": []
+}

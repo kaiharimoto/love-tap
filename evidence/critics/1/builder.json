@@ -1,0 +1,29 @@
+{
+ "critic": "builder",
+ "cycle": 1,
+ "note": "The builder's own reading of the same evidence set the six critics were handed. Where it is lower than a critic's, SCORE.json takes this one; where it is higher, SCORE.json takes theirs. It is written before reading their reports where possible and reconciled against them afterwards, and every place the two disagree is written down rather than averaged.",
+ "scores": {
+  "messenger_reliability": {
+   "score": 9,
+   "why": "Photographs, video and voice notes do not exist as files, so the seed loader drops every one of the 183 media events and the thread is text only. Three of the artifacts commissioned to prove a capability disproved it: the media viewer artifact was the chat list, the states artifact showed one state, and search never opened. The protocol underneath is sound and exercised — 16 capabilities pass over the local transport with faults injected — but none of that is visible in a picture, and this row is judged on the pictures."
+  },
+  "material_truth": {
+   "score": 9,
+   "why": "The tears and the contact shadows are genuinely good and survive a hostile look at 300 per cent. Everything else in the row does not: a blank patch of paper carried 0.44 grey levels of high-frequency variation, less than the desk under it, because the tooth was a bump too fine for the renderer to resolve; the two hands repeated because the contextual alternates restarted at every word boundary; there is no dusk half of the library at all, so the different-light check had no evidence to run on; and no fold or crease appears anywhere because the unfolding clip was a still."
+  },
+  "emotional_transmission": {
+   "score": 7,
+   "why": "A feeling did not land, it cut in: the arrival happened in one sixtieth of a second and nothing moved for six seconds afterwards, because there was no landing at all — the object simply appeared, and Sensation's amplitude stream was consumed by no widget in the app, so on a phone that cannot vibrate the feeling arrived as silence. The partner-state header and the drawn marks are real and good. The propagation clip and the two-device frame are absent, so the app's central claim is unevidenced."
+  },
+  "coherence": {
+   "score": 12,
+   "why": "The shared chrome is one component carrying one state across all five regions, which is the hard half. Against that: Moments was empty, the setup screen rendered with no paper under it at all and headings at about 1.05:1 contrast, the search page and the media viewer were still stock Material, and the registry's extension contract — a type is one entry and one renderer — was not true, with two copies of a per-type switch and a renderer field nothing read."
+  },
+  "anti_goal": {
+   "score": 4,
+   "why": "Engagement machinery and product voice are clean and I believe they will stay clean. Two blocking failures stood: a filled white heart used as the affordance for sending affection, which is an emoji whatever it was modelled from, and a setup screen that was one flat fill with no paper on it anywhere."
+  }
+ },
+ "declined": [],
+ "verdict": "The first cycle found five things I would not have found by looking, and every one of them was a measurement rather than an opinion: 0.44 grey levels in a blank patch, 0.997 correlation between two of the same letter, 17,431 pixels changing in one frame and none in the next 39, two files with the same md5. That is what the critics are for and the score should say so plainly rather than being talked up."
+}

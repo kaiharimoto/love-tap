@@ -60,7 +60,12 @@ def main():
     for name, spec in CATEGORIES.items():
         critic_scores = [r.get("score") for k, r in reports.items()
                          if (FOLDS_INTO.get(k, k) == name) and isinstance(r.get("score"), (int, float))]
-        own = builder.get("scores", {}).get(name)
+        # The builder's sheet carries a number and the reasoning behind it. Taking the whole
+        # object here is how a category came out at the critic's 13 when the builder had said 12,
+        # which is the one arithmetic this file exists to get right.
+        own_entry = builder.get("scores", {}).get(name)
+        own = own_entry.get("score") if isinstance(own_entry, dict) else own_entry
+        own_why = own_entry.get("why") if isinstance(own_entry, dict) else None
         if not critic_scores:
             problems.append(f"{name}: no critic scored it in cycle {args.cycle}")
         critic = min(critic_scores) if critic_scores else None
@@ -77,6 +82,7 @@ def main():
             "critic": critic,
             "critics": {k: r.get("score") for k, r in reports.items() if FOLDS_INTO.get(k, k) == name},
             "builder": own,
+            "builder_why": own_why,
             "score": taken,
             "meets_floor": taken is not None and taken >= spec["floor"],
         }
