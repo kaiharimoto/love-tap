@@ -475,6 +475,20 @@
     "yellowing": 0.12
    }
   },
+  "assets/bits/tape_01.png": {
+   "bytes": 61327,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "tape",
+    "pass": "colour",
+    "res": 620,
+    "samples": 20,
+    "seed": 11,
+    "width_m": 0.052
+   }
+  },
   "assets/fonts/MANIFEST.fonts.json": {
    "bytes": 6141,
    "generator": "tools/handwriting/build.py",
@@ -9365,6 +9379,30 @@
     "resolution": [
      640,
      640
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 10,
+    "thickness_m": 0.00011
+   }
+  },
+  "assets/tears/tear_056_shadow.png": {
+   "bytes": 179147,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "assets/tears/tear_056.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     768,
+     768
     ],
     "rig": "blender/rig/common.py",
     "samples": 10,

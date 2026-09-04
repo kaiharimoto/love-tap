@@ -1,0 +1,5 @@
+RFC 8291 §5 record: matches
+round trip: plaintext recovered
+payload: {"kind":"feeling","from":"noor"} (32 bytes)
+payload carries only ['kind', 'from']: yes
+VAPID header: ES256 JWT in three parts, 3 parts, k= present: True
