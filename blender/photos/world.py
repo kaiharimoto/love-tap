@@ -607,7 +607,7 @@ def _string_lights_at(at, along):
     return [(p[0] + dx, p[1] + dy) + tuple(p[2:]) for p in along]
 
 
-def string_lights(along=((-2.0, 6.0, 3.0), (2.0, 6.5, 4.2)), count=14, energy=0.22,
+def string_lights(along=((-2.0, 6.0, 3.0), (2.0, 6.5, 4.2)), count=14, energy=6.5,
                   colour=(1.0, 0.68, 0.35), sag=0.5, seed=16, at=None):
     """Small warm lights wound through branches: point lights, and a small bright bead at each
     so the camera sees the source and not only what it lights."""
@@ -620,7 +620,10 @@ def string_lights(along=((-2.0, 6.0, 3.0), (2.0, 6.5, 4.2)), count=14, energy=0.
     nt = mat.node_tree
     em = nt.nodes.new("ShaderNodeEmission")
     em.inputs["Color"].default_value = (*colour, 1.0)
-    em.inputs["Strength"].default_value = 22.0
+    # the bead is the source anyone actually sees: it has to read as a lit bulb against a night
+    # sky, not as a grey pea. A festoon bulb is a few watts and its glass is much brighter than
+    # anything it lights
+    em.inputs["Strength"].default_value = 140.0
     nt.links.new(em.outputs["Emission"], nt.nodes["Material Output"].inputs["Surface"])
     for k in range(count):
         t = k / max(count - 1, 1)
