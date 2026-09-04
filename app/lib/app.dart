@@ -30,6 +30,18 @@ import 'setup/platform.dart';
 import 'setup/setup_region.dart';
 import 'voice/strings.dart';
 
+class _NoBars extends MaterialScrollBehavior {
+  const _NoBars();
+
+  @override
+  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) => child;
+
+  /// And no blue glow at the end of a list either: paper stops because it has run out.
+  @override
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) =>
+      child;
+}
+
 class DeskApp extends StatelessWidget {
   const DeskApp({super.key});
 
@@ -38,6 +50,11 @@ class DeskApp extends StatelessWidget {
     return MaterialApp(
       title: '',
       debugShowCheckedModeBanner: false,
+      // No scrollbars. Every list in the app is paper being moved on a desk, and a grey capsule
+      // sliding down the right-hand edge of it is the framework's furniture, not the app's — two
+      // of them were visible on the settings artifact at once, one inside the pairing card and
+      // one down the side of the sheet of notification settings.
+      scrollBehavior: const _NoBars(),
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: Flags.dusk ? DeskColour.dusk : DeskColour.day,

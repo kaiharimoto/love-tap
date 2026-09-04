@@ -94,6 +94,8 @@ class PaperPiece extends StatelessWidget {
 
   static Widget none(BuildContext c, Object e, StackTrace? s) => const SizedBox.shrink();
 
+
+
   Widget _bakedShadow(BuildContext context, String suffix) {
     final frame = MaterialLibrary.loaded ? MaterialLibrary.instance.shadowFrame : 1.0;
     // Scaling about the centre is what puts it back: the render was framed [frame] times the
@@ -143,15 +145,9 @@ class PaperPiece extends StatelessWidget {
           ),
         ),
         if (tearId != null)
-          Positioned.fill(
-            child: Image.asset(
-              tearAsset('${tearId!}_edge'),
-              fit: BoxFit.fill,
-              gaplessPlayback: true,
-              filterQuality: FilterQuality.medium,
-              errorBuilder: none,
-            ),
-          ),
+          // sliced the same way the mask is, so the lit fibres on the torn edge keep the length
+          // they were rendered at however tall the sheet turns out to be
+          Positioned.fill(child: NineSliced(asset: tearAsset('${tearId!}_edge'))),
         _WithinTear(safe: safe, padding: padding, child: child ?? const SizedBox.shrink()),
         ...overlays,
       ],
@@ -265,7 +261,14 @@ class _RenderWithinTear extends RenderShiftedBox {
 }
 
 /// Applies a mask image's alpha to its child. The masks are packed as white with the paper in
-/// their alpha channel, so `dstIn` against an image shader keeps exactly the paper, fibres and all.
+/// their alpha channel, so `dstIn` against the mask keeps exactly the paper, fibres and all.
+///
+/// The mask is drawn as a nine-slice rather than stretched to fit, and that is the whole reason
+/// this is a render object instead of a ShaderMask. A mask is about 1024x580; the setup sheet is
+/// 1440x2600. Stretched to fill, every fibre along the torn edge was pulled four and a half times
+/// its own length, and a sheet that reads as paper at note size read as fur at page size. Sliced,
+/// the four corners and the four edges keep the scale they were rendered at, and only the middle —
+/// which is solid paper — is stretched.
 class MaskedLayer extends StatefulWidget {
   const MaskedLayer({super.key, required this.maskAsset, required this.child});
   final String maskAsset;
@@ -311,21 +314,146 @@ class _MaskedLayerState extends State<MaskedLayer> {
   Widget build(BuildContext context) {
     final mask = _mask;
     if (mask == null) return widget.child;
-    return ShaderMask(
-      blendMode: BlendMode.dstIn,
-      shaderCallback: (Rect rect) {
-        final m = Matrix4.identity()
-          ..translateByDouble(rect.left, rect.top, 0, 1)
-          ..scaleByDouble(rect.width / mask.width, rect.height / mask.height, 1, 1);
-        return ImageShader(
-          mask,
-          TileMode.clamp,
-          TileMode.clamp,
-          m.storage,
-          filterQuality: FilterQuality.medium,
-        );
-      },
-      child: widget.child,
+    return _Masked(mask: mask, child: widget.child);
+  }
+}
+
+class _Masked extends SingleChildRenderObjectWidget {
+  const _Masked({required this.mask, required Widget child}) : super(child: child);
+  final ui.Image mask;
+
+  @override
+  RenderObject createRenderObject(BuildContext context) => _RenderMasked(mask);
+
+  @override
+  void updateRenderObject(BuildContext context, _RenderMasked renderObject) {
+    renderObject.mask = mask;
+  }
+}
+
+class _RenderMasked extends RenderProxyBox {
+  _RenderMasked(this._mask);
+
+  ui.Image _mask;
+
+  set mask(ui.Image v) {
+    if (identical(_mask, v)) return;
+    _mask = v;
+    markNeedsPaint();
+  }
+
+  /// How much of the mask, from each edge, is the torn edge itself rather than the paper inside
+  /// it. Measured off the masks: the fibres reach about a fifth of the way in, and the middle
+  /// fifth is always solid.
+  static const double _edge = 0.4;
+
+  @override
+  bool get alwaysNeedsCompositing => true;
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    final child = this.child;
+    if (child == null) return;
+    final bounds = offset & size;
+    final canvas = context.canvas;
+    canvas.saveLayer(bounds, Paint());
+    context.paintChild(child, offset);
+    final w = _mask.width.toDouble(), h = _mask.height.toDouble();
+    // The centre slice: everything outside it keeps the scale it was rendered at, so a corner is
+    // never sheared and a fibre is never stretched along its own length.
+    final centre = Rect.fromLTRB(w * _edge, h * _edge, w * (1 - _edge), h * (1 - _edge));
+    canvas.drawImageNine(
+      _mask,
+      centre,
+      bounds,
+      Paint()
+        ..blendMode = BlendMode.dstIn
+        ..filterQuality = FilterQuality.medium,
+    );
+    canvas.restore();
+  }
+}
+
+
+/// An image drawn as a nine-slice: the four corners and the four edges at the scale they were
+/// rendered at, and only the middle stretched.
+///
+/// Image's own `centerSlice` cannot do this here — it asserts that the fit leaves the whole source
+/// visible, and every one of these is drawn into a box of a different shape from the render. So
+/// the image is decoded through the same cache the masks use and drawn straight.
+class NineSliced extends StatefulWidget {
+  const NineSliced({super.key, required this.asset, this.edge = 0.4, this.opacity = 1.0});
+
+  final String asset;
+
+  /// How much of the render, in from each edge, is the torn edge itself rather than the paper
+  /// inside it. Measured off the masks: the fibres reach about a fifth of the way in and the
+  /// middle fifth is always solid, so four tenths is comfortably outside them.
+  final double edge;
+  final double opacity;
+
+  @override
+  State<NineSliced> createState() => _NineSlicedState();
+}
+
+class _NineSlicedState extends State<NineSliced> {
+  ui.Image? _image;
+
+  @override
+  void initState() {
+    super.initState();
+    _resolve();
+  }
+
+  @override
+  void didUpdateWidget(NineSliced old) {
+    super.didUpdateWidget(old);
+    if (old.asset != widget.asset) {
+      _image = MaskCache.peek(widget.asset);
+      _resolve();
+    }
+  }
+
+  void _resolve() {
+    final cached = MaskCache.peek(widget.asset);
+    if (cached != null) {
+      _image = cached;
+      return;
+    }
+    unawaited(MaskCache.load(widget.asset).then((img) {
+      if (mounted) setState(() => _image = img);
+    }, onError: (Object _) {}));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final image = _image;
+    if (image == null) return const SizedBox.shrink();
+    return CustomPaint(painter: _NinePainter(image, widget.edge, widget.opacity));
+  }
+}
+
+class _NinePainter extends CustomPainter {
+  _NinePainter(this.image, this.edge, this.opacity);
+  final ui.Image image;
+  final double edge;
+  final double opacity;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (size.isEmpty) return;
+    final w = image.width.toDouble(), h = image.height.toDouble();
+    canvas.drawImageNine(
+      image,
+      Rect.fromLTRB(w * edge, h * edge, w * (1 - edge), h * (1 - edge)),
+      Offset.zero & size,
+      Paint()
+        ..filterQuality = FilterQuality.medium
+        ..color = Color.fromRGBO(0, 0, 0, opacity),
     );
   }
+
+  @override
+  bool shouldRepaint(_NinePainter old) =>
+      !identical(old.image, image) || old.edge != edge || old.opacity != opacity;
 }
