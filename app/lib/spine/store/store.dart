@@ -4,10 +4,6 @@ import 'dart:typed_data';
 
 import '../event.dart';
 
-import 'store_stub.dart'
-    if (dart.library.io) 'store_native.dart'
-    if (dart.library.js_interop) 'store_web.dart' as impl;
-
 /// A stored blob: bytes addressed by their sha256.
 class StoredBlob {
   const StoredBlob({required this.hash, required this.mime, required this.length, required this.bytes});
@@ -20,7 +16,6 @@ class StoredBlob {
 abstract class SpineStore {
   /// Opens (or creates) the store for one device profile. `profile` separates two instances on one
   /// machine (the two-container proof) and the seeded build from the empty one.
-  static Future<SpineStore> open(String profile) => impl.openStore(profile);
 
   /// In-memory store for tests and for the seed loader's dry run.
   static SpineStore memory() => MemoryStore();

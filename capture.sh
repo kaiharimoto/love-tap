@@ -213,6 +213,42 @@ make_clip 07_feeling_landing 60 6
 make_clip 11_chat_scroll 60 4
 make_clip 15_authored_feeling 60 4
 
+# ---- the clip that needs a second device ---------------------------------------------------------
+# There is no Android phone in a container: no /dev/kvm, so the emulator will not boot, and no GTK,
+# so there is no desktop build either. But 08 does not need the far phone to be *visible* — it needs
+# a gesture on one device to become a sensation on the other. app/tool/host_daemon.dart is that far
+# device: a real spine, the real transport in its host role, the real six-word pairing, headless.
+# It is the tailnet host when the two nodes are up and a loopback host when they are not, and the
+# report says which. 09_two_devices does need both screens, so it stays missing.
+PAIR="$SCRATCH/pair.json"
+if wants 08_state_propagating && [ -f evidence/scenes/08_state_propagating.json ]; then
+  rm -f "$PAIR" "$PAIR.do"
+  FAR_TRANSPORT="local"; FAR_ADDR=""; FAR_PROXY=""
+  if [ -f toolchain/ts/a/address ] && [ -f toolchain/ts/b/address ]; then
+    FAR_TRANSPORT="tailscale"; FAR_ADDR="$(cat toolchain/ts/a/address)"; FAR_PROXY="127.0.0.1:1155"
+  fi
+  ( cd app && dart run tool/host_daemon.dart --out "../$PAIR" \
+      --transport "$FAR_TRANSPORT" --address "$FAR_ADDR" --proxy "$FAR_PROXY" --seconds 180 \
+    ) >"$SCRATCH/host_daemon.log" 2>&1 &
+  DAEMON_PID=$!
+  for _ in $(seq 1 60); do [ -f "$PAIR" ] && break; sleep 0.5; done
+  if [ -f "$PAIR" ]; then
+    echo "· 08_state_propagating (the far phone is headless, over $FAR_TRANSPORT)"
+    if node tools/capture/scene.js evidence/scenes/08_state_propagating.json \
+          --url "$FRESH_URL" --browser "$BROWSER" --pair "$PAIR" \
+          >"$SCRATCH/08.out" 2>"$SCRATCH/08.err"; then
+      echo "  ✓ 08_state_propagating"
+      make_clip 08_state_propagating 60 8
+    else
+      note_missing "08_state_propagating.mp4" "$(head -1 "$SCRATCH/08.err" | cut -c1-160)"
+    fi
+    echo "stop" >> "$PAIR.do"
+  else
+    note_missing "08_state_propagating.mp4" "the far phone would not start; see $SCRATCH/host_daemon.log"
+  fi
+  wait "$DAEMON_PID" 2>/dev/null || true
+fi
+
 # ---- the two artifacts that need the Android phone -----------------------------------------------
 # 08 and 09 need both phones at once, and 16 needs the Android one. When the emulator is not up
 # they are recorded as missing with the reason, never faked from the PWA.
@@ -230,8 +266,8 @@ if adb shell true >/dev/null 2>&1; then
   fi
   bash tools/capture/android.sh "$SEEDED_URL" "$FRESH_URL" || true
 else
-  for s in 08_state_propagating.mp4 09_two_devices.png 16_setup_android.png; do
-    wants "${s%.*}" && note_missing "$s" "no Android device was up in this session"
+  for s in 09_two_devices.png 16_setup_android.png; do
+    wants "${s%.*}" && note_missing "$s" "no Android device was up in this session: this container has no /dev/kvm, so the emulator cannot boot, and no GTK, so there is no desktop build to stand in for a second screen"
   done
 fi
 

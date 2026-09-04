@@ -78,6 +78,22 @@ class CaptureHooks {
     return 'ok';
   }
 
+  /// Pair with the phone at [base] using the six words it is showing.
+  ///
+  /// The same call the setup list makes, not a shortcut past it: the words derive the key, and
+  /// every request after this is signed with it. The capture harness needs it because the clip
+  /// that shows a feeling crossing between two devices has to start with two devices that have
+  /// actually been introduced.
+  Future<String> pair(String base, String words) async {
+    try {
+      await scope.transport.completePairing(base, words);
+      await _settle();
+      return 'ok';
+    } catch (e) {
+      return 'pairing was refused: $e';
+    }
+  }
+
   /// Every delivery state at once, made rather than drawn.
   Future<String> stageStates() async {
     final f = CaptureBus.stageStates;

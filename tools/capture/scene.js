@@ -29,6 +29,13 @@ const scene = JSON.parse(fs.readFileSync(scenePath, 'utf8'));
 const url = arg('url', scene.url || 'http://127.0.0.1:8799/');
 const browserName = arg('browser', scene.browser || 'webkit');
 const outDir = arg('out-dir', ROOT);
+// The far phone: where it wrote its six words, and where to leave it an instruction.
+const pairPath = arg('pair', '');
+const controlPath = arg('control', pairPath ? pairPath + '.do' : '');
+function farSay(line) {
+  if (!controlPath) throw new Error('no --control path, so nothing can be asked of the far phone');
+  fs.appendFileSync(controlPath, line + '\n');
+}
 
 function abs(p) {
   return path.isAbsolute(p) ? p : path.join(outDir, p);
@@ -97,6 +104,17 @@ function ensure(p) {
         await hook('__deskUnfold'); break;
       case 'stage':
         await hook('__deskStage'); break;
+      case 'pair': {
+        // The six words the far phone is showing, read out of the file it wrote.
+        const pair = JSON.parse(fs.readFileSync(abs(step.from || pairPath), 'utf8'));
+        await hook('__deskPair', pair.base, pair.words);
+        break;
+      }
+      case 'far':
+        // Make the other phone do something. It is a headless process on the far end of the
+        // transport (app/tool/host_daemon.dart) watching a file for one instruction a line.
+        farSay(step.arg);
+        break;
       case 'showWords':
         await hook('__deskShowWords'); break;
       case 'step':
@@ -160,6 +178,11 @@ function ensure(p) {
             if (drive.release && i === Math.round(count * (drive.release || 0.7))) {
               await page.mouse.up();   // let go part way, so the rest is the thread's own momentum
             }
+          }
+          if (drive && drive.kind === 'far' && i === (drive.at || 0)) {
+            // at this exact frame, and no other: the clip has to show the arrival, so the far
+            // phone is told to send at a known frame rather than at a hopeful moment
+            farSay(drive.line);
           }
           if (drive && drive.kind === 'scrollBy') {
             // The thread's own scroller, a step per frame. Dragging a note is a long press as

@@ -10,6 +10,7 @@ import 'scope.dart';
 import 'material/library.dart';
 import 'ready.dart';
 import 'spine/seed_loader.dart';
+import 'spine/store/open_store.dart';
 import 'spine/spine.dart';
 import 'transport/local/local_transport.dart';
 import 'transport/tailscale/tailscale_transport.dart';
@@ -40,7 +41,7 @@ Future<AppScope> bootstrap() async {
   final device = kIsWeb ? DeviceKind.pwa : DeviceKind.android;
   final identity = Identity(person: person, device: device);
 
-  final store = await SpineStore.open(Flags.profile);
+  final store = await openStore(Flags.profile);
   final spine = await Spine.open(store, identity);
 
   if (Flags.seeded) {

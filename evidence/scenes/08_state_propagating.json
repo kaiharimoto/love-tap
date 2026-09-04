@@ -1,0 +1,19 @@
+{
+ "name": "08_state_propagating",
+ "viewport": { "width": 360, "height": 780, "dpr": 3 },
+ "settle": 500,
+ "log": "evidence/logs/08_state_propagating.json",
+ "steps": [
+  { "do": "wait", "ms": 1800 },
+  { "do": "pair" },
+  { "do": "wait", "ms": 1400 },
+  { "do": "goTo", "arg": 0 },
+  { "do": "wait", "ms": 900 },
+  { "do": "frames", "dir": "evidence/frames/08_state_propagating", "count": 40, "ms": 16 },
+  { "do": "frames", "dir": "evidence/frames/08_state_propagating_b", "count": 300, "ms": 16,
+    "drive": { "kind": "far", "at": 2, "line": "feeling hold 0.92" } },
+  { "do": "far", "arg": "message it is raining here too" },
+  { "do": "frames", "dir": "evidence/frames/08_state_propagating_c", "count": 160, "ms": 16 },
+  { "do": "report", "out": "evidence/logs/08_state_propagating.report.json", "at": "08_state_propagating.mp4" }
+ ]
+}
