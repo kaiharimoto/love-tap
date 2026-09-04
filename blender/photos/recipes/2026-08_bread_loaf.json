@@ -1,0 +1,66 @@
+{
+ "surface": "board",
+ "surface_size": 0.7,
+ "light": "kitchen_bulb",
+ "size": [
+  1600,
+  1200
+ ],
+ "seed": 41,
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03
+  ],
+  "height": 0.3,
+  "distance": 0.26,
+  "lean_deg": 4,
+  "mm": 26
+ },
+ "objects": [
+  {
+   "kind": "loaf",
+   "at": [
+    -0.02,
+    0.01
+   ],
+   "length": 0.25,
+   "width": 0.125,
+   "height": 0.09,
+   "rot": 14,
+   "cut": 0.34,
+   "seed": 41
+  },
+  {
+   "kind": "knife",
+   "at": [
+    0.06,
+    -0.09
+   ],
+   "length": 0.22,
+   "rot": -18
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.17,
+    0.1
+   ],
+   "r": 0.04,
+   "h": 0.093,
+   "full": 0.62
+  },
+  {
+   "kind": "crumbs",
+   "at": [
+    0.03,
+    -0.05
+   ],
+   "spread": 0.075,
+   "count": 110,
+   "seed": 41
+  }
+ ],
+ "id": "2026-08_bread_loaf"
+}

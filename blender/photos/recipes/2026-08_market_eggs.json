@@ -1,0 +1,69 @@
+{
+ "surface": "trestle",
+ "surface_size": 1.4,
+ "light": "overcast",
+ "size": [
+  1600,
+  1200
+ ],
+ "seed": 63,
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.02
+  ],
+  "height": 0.34,
+  "distance": 0.28,
+  "lean_deg": 10,
+  "mm": 24
+ },
+ "objects": [
+  {
+   "kind": "tray",
+   "at": [
+    0,
+    0
+   ],
+   "rows": 5,
+   "cols": 6,
+   "cell": 0.046,
+   "rot": -4,
+   "seed": 63
+  },
+  {
+   "kind": "sheet",
+   "w": 0.1,
+   "h": 0.07,
+   "at": [
+    0.2,
+    -0.09
+   ],
+   "rot": 16,
+   "curl": 0.006,
+   "colour": [
+    0.9,
+    0.87,
+    0.78
+   ],
+   "seed": 64
+  },
+  {
+   "kind": "crate",
+   "at": [
+    -0.3,
+    0.14
+   ],
+   "w": 0.3,
+   "d": 0.22,
+   "h": 0.1,
+   "rot": 6,
+   "colour": [
+    0.48,
+    0.2,
+    0.16
+   ]
+  }
+ ],
+ "id": "2026-08_market_eggs"
+}

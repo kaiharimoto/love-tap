@@ -91,3 +91,17 @@ AVD window and the WebKit window, both window ids logged.
   `tools/sound/`. Slots for real scans and recordings are documented for the builder.
 - Critics run as fresh-context subagents (the brief requires it) even though the build itself is
   one head; parallel helpers may draft seed text and docs, but every material decision lives here.
+- Blender's bundled Python has numpy and nothing else. Rather than shipping a second interpreter or
+  vendoring scipy, the two image operations the paper scripts need — a separable Gaussian blur and
+  a capped distance transform — are written out in `blender/rig/common.py`, where they can be read
+  and checked against the stdlib versions.
+- The clips are directories of single frames, taken one at a time with the app's own clock stepped
+  between them, then assembled by ffmpeg without re-encoding what is in them. That is why 60 fps is
+  achievable in a container with four cores and no GPU: the frame rate is a property of the
+  assembly, not of how fast the browser could paint.
+- `evidence/frames/` and `evidence/.previous/` are derived and gitignored; the clips and the stills
+  they produce are committed. `app/assets/` is likewise generated from `assets/` at build time, so
+  the repository holds the renders rather than the display-resolution copies of them.
+- The seeded months are authored; the read markers and the passive signals in them are derived from
+  those months by `seed/tools/finish.py`, and the validator rejects either kind written by hand.
+  Nobody types a battery level, so nothing in the seed should pretend somebody did.
