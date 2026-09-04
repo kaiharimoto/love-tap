@@ -204,7 +204,13 @@ class _Margin extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(words.join(' · '), style: Hands.margin(size: 12)),
+          // the time, and what happened to the note, and how far it got — on a narrow note with
+          // all three of those to say, this ran off the edge of the paper
+          Flexible(
+            child: Text(words.join(' · '),
+                style: Hands.margin(size: 12), maxLines: 1, overflow: TextOverflow.fade,
+                softWrap: false),
+          ),
           if (item.edited)
             const Padding(padding: EdgeInsets.only(left: 5), child: _EditCaret()),
           if (mine) ...[
