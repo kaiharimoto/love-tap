@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4586
+   "ms": 4224
   },
   {
    "do": "wait",
@@ -18,19 +18,19 @@
   },
   {
    "do": "scrollTo",
-   "ms": 5329
+   "ms": 3923
   },
   {
    "do": "wait",
-   "ms": 1902
+   "ms": 1904
   },
   {
    "do": "shot",
-   "ms": 2999
+   "ms": 4220
   },
   {
    "do": "report",
-   "ms": 731
+   "ms": 1006
   }
  ],
  "shots": [
@@ -105,11 +105,7 @@
    "at": "02_chat.png"
   }
  ],
- "cold_ms": 15629,
- "problems": [
-  "console: RuntimeError: call_indirect to a signature that does not match (evaluating 'e(...C)')",
-  "console: ",
-  "console: Another exception was thrown: Instance of 'minified:hk<void>'"
- ],
- "ok": false
+ "cold_ms": 14606,
+ "problems": [],
+ "ok": true
 }

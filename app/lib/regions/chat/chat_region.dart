@@ -169,7 +169,11 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     if (items.isEmpty || !_scroll.isAttached) return;
     int index;
     if (anchor == 'end') {
-      index = items.length - 1;
+      // the spacer, pinned to the bottom of the viewport, which leaves the newest note whole
+      // above it however tall it turned out to be
+      _scroll.jumpTo(index: items.length, alignment: 0.985);
+      await Future<void>.delayed(const Duration(milliseconds: 40));
+      return;
     } else {
       final fraction = double.tryParse(anchor);
       index = fraction != null
@@ -431,10 +435,16 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                   : ScrollablePositionedList.builder(
                       itemScrollController: _scroll,
                       itemPositionsListener: _positions,
-                      itemCount: items.length,
-                      initialScrollIndex: items.length - 1,
-                      initialAlignment: 0.8,
+                      // one more than there are notes: the last index is a hand's width of bare
+                      // desk under the newest note. Without it there is nothing to scroll the
+                      // newest note *to* — the list positions an item by its leading edge, so
+                      // `the end` put the last note's top part way down the screen and let the
+                      // rest of it run under the composer.
+                      itemCount: items.length + 1,
+                      initialScrollIndex: items.length,
+                      initialAlignment: 0.985,
                       itemBuilder: (context, i) {
+                        if (i == items.length) return const SizedBox(height: 10);
                         final it = items[i];
                         return Note(
                           key: ValueKey(it.id),
@@ -459,7 +469,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                     child: Row(mainAxisSize: MainAxisSize.min, children: [
                       Mark.loop(size: 17, colour: Pen.margin),
                       const SizedBox(width: 5),
-                      Text(S.search, style: Hands.margin(size: 13)),
+                      Text(S.search, style: Hands.onDesk(size: 13)),
                     ]),
                   ),
                 ),
@@ -472,7 +482,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
             padding: const EdgeInsets.fromLTRB(18, 2, 18, 2),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text('${scope.partner.name} ${S.typing}', style: Hands.margin(size: 13)),
+              child: Text('${scope.partner.name} ${S.typing}', style: Hands.onDesk(size: 13)),
             ),
           ),
         if (_replyTo != null || _editing != null)
@@ -575,7 +585,7 @@ class _Composer extends StatelessWidget {
                     isDense: true,
                     contentPadding: const EdgeInsets.fromLTRB(0, 6, 0, 5),
                     hintText: recording ? S.recording : S.composerHint,
-                    hintStyle: Hands.margin(size: 16),
+                    hintStyle: Hands.onDesk(size: 16),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -603,7 +613,7 @@ class _Composer extends StatelessWidget {
             onTap: onSend,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(2, 6, 2, 8),
-              child: Text(S.send, style: Hands.margin(size: 16)),
+              child: Text(S.send, style: Hands.onDesk(size: 16)),
             ),
           ),
         ],

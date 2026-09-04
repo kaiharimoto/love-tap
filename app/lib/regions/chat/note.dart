@@ -303,10 +303,10 @@ class _MarginLine extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(26, 6, 26, 6),
       child: Row(
         children: [
-          Container(width: 14, height: 1, color: Pen.margin.withValues(alpha: 0.5)),
+          Container(width: 14, height: 1, color: Pen.onWood.withValues(alpha: 0.55)),
           const SizedBox(width: 8),
-          Expanded(child: Text(text, style: Hands.margin(size: 13))),
-          Text(timeLabel(item.ts), style: Hands.margin(size: 11.5)),
+          Expanded(child: Text(text, style: Hands.onDesk(size: 13))),
+          Text(timeLabel(item.ts), style: Hands.onDesk(size: 11.5)),
         ],
       ),
     );

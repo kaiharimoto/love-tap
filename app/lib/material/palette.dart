@@ -19,7 +19,10 @@ class Pen {
   static const stamp = Color(0xFF4A4A4C);
 
   /// A pencil margin note.
-  static const margin = Color(0xFF6D6D70);
+  /// Pencil, for the margin of a page. Two levels darker than it was, which is what it takes to
+  /// clear four and a half to one against the palest stock at the size a margin note is set —
+  /// 4.37 was close enough to look fine and not close enough to be right.
+  static const margin = Color(0xFF6B6B6E);
 
   /// Stamp ink is made for paper, and on the desk it disappears. This is the same stamp in the
   /// chalky tone wood takes, for the few headings that sit straight on the wood.

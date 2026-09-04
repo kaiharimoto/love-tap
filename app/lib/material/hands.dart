@@ -36,6 +36,20 @@ class Hands {
         fontFeatures: _handFeatures,
       );
 
+  /// The same hand, in the ink that is legible on wood.
+  ///
+  /// Pencil grey is #6D6D70 and the desk is a dark waxed oak: one and a half to one, which is not
+  /// a contrast ratio, it is a rumour. It was survivable while the desk was a flat fill and it
+  /// stopped being survivable the moment the desk had grain in it. Anything written straight onto
+  /// the desk — the margin line beside the thread, the composer, the word `search` — uses this.
+  /// Anything written on paper uses [margin], because paper is pale and pencil is not.
+  static TextStyle onDesk({double size = 13, Color? colour}) => TextStyle(
+        fontFamily: 'TeoHand',
+        fontSize: size,
+        color: colour ?? Pen.onWood,
+        fontFeatures: _handFeatures,
+      );
+
   /// A margin note in pencil: system facts inside the thread.
   static TextStyle margin({double size = 12.5}) => TextStyle(
         fontFamily: 'TeoHand',

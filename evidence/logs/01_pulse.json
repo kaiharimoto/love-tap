@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4368
+   "ms": 4704
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2107
   },
   {
    "do": "shot",
-   "ms": 2954
+   "ms": 3134
   },
   {
    "do": "report",
-   "ms": 1281
+   "ms": 767
   }
  ],
  "shots": [
@@ -85,19 +85,16 @@
    "fold": {
     "sequence": "unfold_thirds",
     "length": 240,
-    "decoded": 0,
-    "decoding": 24,
+    "decoded": 16,
+    "decoding": 8,
     "playhead": 0,
-    "held_from": null,
-    "held_to": null
+    "held_from": 0,
+    "held_to": 15
    },
    "at": "01_pulse.png"
   }
  ],
- "cold_ms": 13505,
- "problems": [
-  "console: RuntimeError: call_indirect to a signature that does not match (evaluating 'e(...C)')",
-  "console: "
- ],
- "ok": false
+ "cold_ms": 13015,
+ "problems": [],
+ "ok": true
 }
