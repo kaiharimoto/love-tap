@@ -135,7 +135,8 @@ run_scene() { # name url
         >"$SCRATCH/$name.out" 2>"$SCRATCH/$name.err"; then
     echo "  ✓ $name"
   else
-    note_missing "$name" "$(tail -2 "$SCRATCH/$name.err" | tr '\n' ' ' | cut -c1-200)"
+    # the first line of the error is the sentence; the rest is a stack trace nobody reads
+    note_missing "$name" "$(head -1 "$SCRATCH/$name.err" | sed 's/^Error: //' | cut -c1-180)"
     return 1
   fi
 }

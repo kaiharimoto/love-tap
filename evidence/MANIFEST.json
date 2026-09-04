@@ -1,0 +1,188 @@
+{
+ "captured_at": "2026-09-04T03:18:47Z",
+ "browser": "webkit",
+ "artifacts": {
+  "01_pulse.png": {
+   "bytes": 2008224,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "02_chat.png": {
+   "bytes": 1993370,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "03_us.png": {
+   "bytes": 1102078,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "04_moments.png": {
+   "bytes": 1376755,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "10_first_run.png": {
+   "bytes": 72198,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "12_search.png": {
+   "bytes": 2119518,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "13_messenger_states.png": {
+   "bytes": 2130880,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "14_media_viewer.png": {
+   "bytes": 2130606,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "17_setup_pwa.png": {
+   "bytes": 1302360,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "06_unfolding.mp4": {
+   "bytes": 552860,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 260,
+   "fps": 60.0,
+   "seconds": 4.33,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
+   "minimum_seconds": 4,
+   "long_enough": true
+  },
+  "07_feeling_landing.mp4": {
+   "bytes": 776800,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 380,
+   "fps": 60.0,
+   "seconds": 6.33,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
+   "minimum_seconds": 6,
+   "long_enough": true
+  },
+  "11_chat_scroll.mp4": {
+   "bytes": 694226,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 300,
+   "fps": 60.0,
+   "seconds": 5.0,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
+   "minimum_seconds": 4,
+   "long_enough": true
+  },
+  "15_authored_feeling.mp4": {
+   "bytes": 448053,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 260,
+   "fps": 60.0,
+   "seconds": 4.33,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
+   "minimum_seconds": 4,
+   "long_enough": true
+  }
+ },
+ "missing": {
+  "05_settings.png": "at hook (/home/user/love-tap/tools/capture/scene.js:71:58)     at async /home/user/love-tap/tools/capture/scene.js:99:9",
+  "09_two_devices.png": "no Android device was up in this session",
+  "16_setup_android.png": "no Android device was up in this session",
+  "08_state_propagating.mp4": "no Android device was up in this session"
+ }
+}

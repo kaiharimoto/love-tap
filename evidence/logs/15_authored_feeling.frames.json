@@ -1,0 +1,36 @@
+{
+ "dir": "evidence/frames/15_authored_feeling",
+ "frames": 260,
+ "fps": 60.0,
+ "seconds": 4.33,
+ "mean_change_per_frame": 0.0,
+ "repeated_frames": 259,
+ "repeated_fraction": 1.0,
+ "longest_still_run": 259,
+ "repeated_at": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11
+ ],
+ "brightness_jumps": 0,
+ "ok": false,
+ "why": "nothing moves in it at all; 100% of it is frames the app did not draw; it holds still for 4.3s in one stretch",
+ "strip": "evidence/crops/15_authored_feeling_strip.png",
+ "strip_frames": [
+  "evidence/frames/15_authored_feeling/0000.png",
+  "evidence/frames/15_authored_feeling/0052.png",
+  "evidence/frames/15_authored_feeling/0104.png",
+  "evidence/frames/15_authored_feeling/0155.png",
+  "evidence/frames/15_authored_feeling/0207.png",
+  "evidence/frames/15_authored_feeling/0259.png"
+ ]
+}

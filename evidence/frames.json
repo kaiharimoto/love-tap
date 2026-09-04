@@ -1,0 +1,184 @@
+{
+ "captured_at": "2026-09-04T03:18:47Z",
+ "source": "webkit",
+ "clips": {
+  "06_unfolding.mp4": {
+   "dir": "evidence/frames/06_unfolding",
+   "frames": 260,
+   "fps": 60.0,
+   "seconds": 4.33,
+   "mean_change_per_frame": 0.0,
+   "repeated_frames": 259,
+   "repeated_fraction": 1.0,
+   "longest_still_run": 259,
+   "repeated_at": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "brightness_jumps": 0,
+   "ok": false,
+   "why": "nothing moves in it at all; 100% of it is frames the app did not draw; it holds still for 4.3s in one stretch",
+   "strip": "evidence/crops/06_unfolding_strip.png",
+   "strip_frames": [
+    "evidence/frames/06_unfolding/0000.png",
+    "evidence/frames/06_unfolding/0052.png",
+    "evidence/frames/06_unfolding/0104.png",
+    "evidence/frames/06_unfolding/0155.png",
+    "evidence/frames/06_unfolding/0207.png",
+    "evidence/frames/06_unfolding/0259.png"
+   ]
+  },
+  "07_feeling_landing.mp4": {
+   "dir": "evidence/frames/07_feeling_landing",
+   "frames": 120,
+   "fps": 60.0,
+   "seconds": 2.0,
+   "mean_change_per_frame": 1e-05,
+   "repeated_frames": 118,
+   "repeated_fraction": 0.992,
+   "longest_still_run": 118,
+   "repeated_at": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "brightness_jumps": 0,
+   "ok": false,
+   "why": "nothing moves in it at all; 2.0s is short of 6.0s; 99% of it is frames the app did not draw; it holds still for 2.0s in one stretch",
+   "strip": "evidence/crops/07_feeling_landing_strip.png",
+   "strip_frames": [
+    "evidence/frames/07_feeling_landing/0000.png",
+    "evidence/frames/07_feeling_landing/0024.png",
+    "evidence/frames/07_feeling_landing/0048.png",
+    "evidence/frames/07_feeling_landing/0071.png",
+    "evidence/frames/07_feeling_landing/0095.png",
+    "evidence/frames/07_feeling_landing/0119.png"
+   ]
+  },
+  "11_chat_scroll.mp4": {
+   "dir": "evidence/frames/11_chat_scroll",
+   "frames": 300,
+   "fps": 60.0,
+   "seconds": 5.0,
+   "mean_change_per_frame": 0.0,
+   "repeated_frames": 299,
+   "repeated_fraction": 1.0,
+   "longest_still_run": 299,
+   "repeated_at": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "brightness_jumps": 0,
+   "ok": false,
+   "why": "nothing moves in it at all; 100% of it is frames the app did not draw; it holds still for 5.0s in one stretch",
+   "strip": "evidence/crops/11_chat_scroll_strip.png",
+   "strip_frames": [
+    "evidence/frames/11_chat_scroll/0000.png",
+    "evidence/frames/11_chat_scroll/0060.png",
+    "evidence/frames/11_chat_scroll/0120.png",
+    "evidence/frames/11_chat_scroll/0179.png",
+    "evidence/frames/11_chat_scroll/0239.png",
+    "evidence/frames/11_chat_scroll/0299.png"
+   ]
+  },
+  "15_authored_feeling.mp4": {
+   "dir": "evidence/frames/15_authored_feeling",
+   "frames": 260,
+   "fps": 60.0,
+   "seconds": 4.33,
+   "mean_change_per_frame": 0.0,
+   "repeated_frames": 259,
+   "repeated_fraction": 1.0,
+   "longest_still_run": 259,
+   "repeated_at": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "brightness_jumps": 0,
+   "ok": false,
+   "why": "nothing moves in it at all; 100% of it is frames the app did not draw; it holds still for 4.3s in one stretch",
+   "strip": "evidence/crops/15_authored_feeling_strip.png",
+   "strip_frames": [
+    "evidence/frames/15_authored_feeling/0000.png",
+    "evidence/frames/15_authored_feeling/0052.png",
+    "evidence/frames/15_authored_feeling/0104.png",
+    "evidence/frames/15_authored_feeling/0155.png",
+    "evidence/frames/15_authored_feeling/0207.png",
+    "evidence/frames/15_authored_feeling/0259.png"
+   ]
+  }
+ },
+ "scroll": {
+  "source": "webkit",
+  "viewport": {
+   "width": 360,
+   "height": 780,
+   "dpr": 3
+  },
+  "cold_ms": 13488,
+  "steps": [
+   {
+    "do": "goTo",
+    "ms": 2669
+   },
+   {
+    "do": "wait",
+    "ms": 1903
+   },
+   {
+    "do": "scrollTo",
+    "ms": 2321
+   },
+   {
+    "do": "wait",
+    "ms": 1504
+   },
+   {
+    "do": "frames",
+    "ms": 234640
+   }
+  ]
+ },
+ "scroll_emulator": {
+  "missing": "no Android device was up in this session"
+ }
+}
