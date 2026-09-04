@@ -173,6 +173,46 @@ class _ShellState extends State<Shell> {
   }
 }
 
+/// A corner folded down on the card: something is waiting, and that is all it says.
+class _TurnedCorner extends StatelessWidget {
+  const _TurnedCorner();
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(size: const Size(15, 15), painter: _CornerPainter());
+}
+
+class _CornerPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width, h = size.height;
+    // the flap: the back of the card, catching the light from the same direction as everything else
+    final flap = Path()
+      ..moveTo(w, 0)
+      ..lineTo(w, h)
+      ..lineTo(0, 0)
+      ..close();
+    canvas.drawPath(flap, Paint()..color = Paper.aged);
+    canvas.drawPath(
+      flap,
+      Paint()
+        ..color = Shadow.warm.withValues(alpha: 0.28)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 0.9,
+    );
+    // and the small shadow it drops on the card underneath it
+    canvas.drawLine(
+      Offset(0, 0),
+      Offset(w, h),
+      Paint()
+        ..color = Shadow.warm.withValues(alpha: 0.22)
+        ..strokeWidth = 1.4,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_CornerPainter old) => false;
+}
+
 /// The region strip: five tabs cut from index card, each with its label stamped on it.
 class _Tabs extends StatelessWidget {
   const _Tabs({required this.index, required this.labels, required this.onPick});
@@ -183,7 +223,10 @@ class _Tabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scope = AppScope.of(context);
-    final unread = scope.thread.unreadFor(scope.me);
+    // Something unread turns the corner of the card down. It is not a count and it never becomes
+    // one: a number that goes up while you are not looking is the whole mechanism the brief
+    // forbids, and a folded corner says the same true thing without keeping score.
+    final waiting = scope.thread.unreadFor(scope.me) > 0;
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
     final card = lib?.stockVariants('index') ?? const <String>[];
     return Container(
@@ -210,15 +253,12 @@ class _Tabs extends StatelessWidget {
                       color: card.isEmpty ? Paper.index.withValues(alpha: i == index ? 1 : 0.8) : null,
                     ),
                     alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Stack(
+                      alignment: Alignment.center,
                       children: [
                         Stamped(labels[i], size: i == index ? 12 : 11, colour: i == index ? Pen.stamp : Pen.margin),
-                        if (i == 1 && unread > 0)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 4),
-                            child: Text('$unread', style: Hands.margin(size: 12)),
-                          ),
+                        if (i == 1 && waiting)
+                          const Positioned(top: 0, right: 0, child: _TurnedCorner()),
                       ],
                     ),
                   ),

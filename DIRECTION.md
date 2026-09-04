@@ -106,3 +106,27 @@ the feeling's paper sound plays the same rhythm. Same data, different body.
 - 2026-09-03 · Spine storage: drift over sqlite3 (native on Android, wasm on web) inside `app/lib/spine/` only.
 - 2026-09-03 · Transport: host (Android, tailnet-bound HTTPS) / client (PWA served by the host);
   ordering by host sequence; cursor sync; outbox on both sides; pairing = six-word code → HKDF key → HMAC.
+- 2026-09-04 · A note lies on the desk and touches it. The contact shadow exists only because paper
+  curls: `blender/paper/tear_relief.py` models the sheet touching in the middle and lifting along
+  its torn edges, so the shadow is hidden under the paper that makes it and opens out around the
+  break. A flat sheet under a small sun casts a slab, which is what a drop shadow looks like, and
+  the first attempt produced exactly that.
+- 2026-09-04 · The edge layer is a band, not a sheet. It carries only the two or three millimetres
+  along the break where the fibres have been pulled open and the unprinted core of the paper shows;
+  everything further in is the stock's own render and is never painted over.
+- 2026-09-04 · Tear masks are assigned by position in the thread, not by a hash of the event id.
+  A hash cannot promise that no two tears repeat on one screen — with 56 masks and eight notes it
+  collided about a third of the time. Walking the pool with a stride coprime with its size makes a
+  repeat within a screenful impossible rather than unlikely. The variation an id would have given
+  is carried by the stock, the lift and the tilt instead.
+- 2026-09-04 · Nothing counts. An unread count on the chat tab became a corner folded down on the
+  card: it says the same true thing without keeping score, and a number that goes up while you are
+  not looking is the mechanism the brief forbids.
+- 2026-09-04 · No icon set anywhere. Where a word fits, the word is used, in the margin hand. Where
+  a word will not do, the mark is a pen stroke with a hand's wobble and its pressure swelling in
+  the middle of the stroke (`app/lib/material/marks.dart`).
+- 2026-09-04 · Read markers and passive signals are derived from the seeded months rather than
+  authored alongside them, and the validator rejects either one written by hand. Nobody types a
+  battery level.
+- 2026-09-04 · The home screen says "the other phone". The app still does not name itself, and on
+  an iPhone the thing you tap is the person, not a product.

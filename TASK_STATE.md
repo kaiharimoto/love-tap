@@ -14,16 +14,17 @@ checkpoint under `checkpoints/` and continue from **Next action**.
 ## Current position
 
 - phase: build
-- step: STEP 09 in progress (setup checklists written, not yet wired into the shell); STEP 10 first
-  evidence pass captured; STEP 05 still filling in (stocks and objects rendering in the background;
-  folds partially rendered; bits renderer written but not run; shell renders not started)
-- review cycle: 0 (first artifacts exist; critics have not yet run against them)
+- step: STEP 04 done (13 months, 14,099 events, 0 validator errors); STEP 07 ambient surfaces built;
+  STEP 09 setup checklists and the CA bootstrap page written; STEP 05 filling in (tear relief and
+  the desk rendered this session, bits queued, folds partly rendered); STEP 10 harness complete,
+  second capture pass pending
+- review cycle: 0 (the first artifacts exist; critics have not run against them yet)
 - rubric score: not yet scored — see `evidence/SCORE.json`
-- transport in use: local (`app/lib/transport/local/`), named in every report; tailscale not built yet
-- fourth-module commit hash: 7dfeca2 (`STEP 07-08`), `git show --stat 7dfeca2` touches only
+- transport in use: local (`app/lib/transport/local/`), named in every report; tailscale not built
+- fourth-module commit hash: 7dfeca2 (`STEP 07-08`); `git show --stat 7dfeca2` touches only
   `app/lib/modules/rituals/`, the registry line, and files outside `modules/`
 - WebKit texture budget: one fold sequence held at a time (`FoldFrames` drops the previous
-  sequence when a new one is asked for); measured budget still to be taken on the device
+  sequence when a new one is asked for); the measured budget is still to be taken on the device
 - TS_AUTHKEY: not needed yet (ask only when the Tailscale phase begins)
 
 ## What exists (verified)
@@ -66,14 +67,32 @@ bash blender/run.sh blender/paper/stocks.py -- --stock lined --variant 1 --res 7
 
 ## Worst problems (ranked)
 
-1. No evidence artifacts exist yet; run.sh and capture.sh are not written.
-2. Material pipeline: stocks renderer untested at full resolution; tears, folds, objects, bits, shell not started.
-3. Seed year not yet on disk (authoring in flight).
-4. Emotional layer, Us modules, Moments, Settings (beyond pairing), setup checklists not started.
+1. The Tailscale transport does not exist. Every report says `local`, which is correct and honest
+   but is not the proof the mission asks for. It needs `TS_AUTHKEY`, and the brief says to ask for
+   that only in the session the Tailscale phase begins.
+2. Three artifacts need the Android phone and could not be taken: `09_two_devices.png` needs both
+   screens in one frame off one display, `16_setup_android.png` needs a fresh install on it, and
+   `08_state_propagating.mp4` needs both phones running at once. The emulator booted once this
+   session and the container restarted under it; there is no KVM here, so each boot costs about
+   ten minutes of the same four cores the renders are using.
+3. `06_unfolding.mp4` cannot honestly be taken yet: only part of one fold sequence is rendered, and
+   the app plays a sequence only when it is whole, so the clip would be of a note that does not
+   move. Rendering the remaining frames is the fix, not lowering the bar in the player.
+4. The seed's photographs, videos and voice notes are written as scenes but not rendered, so every
+   media row in the thread is a placeholder.
+5. No critic has run. The rubric score is unknown rather than low.
+
+## What was fixed this session
+
+- Contact shadows and edge light exist at all (they were rendering to nothing: no scipy in
+  Blender's Python, and the pass produced a slab rather than a shadow).
+- No two tears can repeat on one screen, by construction rather than by luck.
+- Two glyph variants had lost strokes; the builder was dropping ink when skia refused a union.
+- The seeded year is complete and clean, with the read markers and passive signals derived from it.
 
 ## Next action
 
-Judge the first lined-sheet render (scratchpad/stocktest), then run the stock batch in the
-background; write `tools/tears/tear.py` + distinctness check; when seed months land, write
-`seed/tools/finish.py` (read markers + passive state) and `seed/tools/merge_index.py`, bundle the
-seed into `app/assets/seed/` via run.sh, and boot the AVD to see the messenger against the year.
+Re-capture the whole evidence set against the tear relief and the desk (`./capture.sh`), read the
+hero at 300 percent, then run the six critics against what comes out and write `evidence/SCORE.json`
+from the lower of each critic's score and the builder's. After that: the remaining fold frames, the
+seed's media renders, and then the Tailscale phase, which is the session to ask for `TS_AUTHKEY`.
