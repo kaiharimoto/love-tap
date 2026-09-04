@@ -494,7 +494,12 @@ def main():
         raise SystemExit(1 if broken else 0)
     for name in names:
         path = os.path.join(args.out, name + ".exr")
-        if args.skip_existing and os.path.exists(path):
+        # develop.py deletes the negative once it has developed it, so a negative on disk means a
+        # render in flight and a photograph on disk means one that is finished. Looking only for
+        # the negative made --skip-existing skip nothing at all after the first develop pass, and
+        # re-exposing a hundred and fifteen photographs to get at eighteen is two and a half hours
+        done = os.path.join(args.out, name + ".jpg")
+        if args.skip_existing and (os.path.exists(path) or os.path.exists(done)):
             print(f"still: {name} already rendered")
             continue
         with open(os.path.join(args.recipes, name + ".json"), encoding="utf-8") as f:

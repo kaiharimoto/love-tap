@@ -79,6 +79,22 @@ def look_at_the_negative(a):
     return None
 
 
+# And what the photograph has to have in it once the sensor has been applied. Three frames passed
+# the check on the negative and developed to a flat dark rectangle anyway: the linear range was
+# there, and the tone curve put all of it inside four grey levels.
+FLOOR_DEVELOPED_STD = 6.0
+
+
+def look_at_the_photograph(rgb):
+    """Whether a developed frame is a picture, said in one sentence, or None if it is."""
+    grey = np.asarray(rgb, dtype=np.float64) @ (0.2126, 0.7152, 0.0722)
+    std = float(grey.std())
+    if std < FLOOR_DEVELOPED_STD:
+        return (f"it developed flat: {std:.1f} grey levels of variation across the whole frame, "
+                f"mean {grey.mean():.0f}. There is a picture in the negative and none in this.")
+    return None
+
+
 def develop_one(raw_path, out_path, shot, strict=True):
     a = read_exr(raw_path)
     wrong = look_at_the_negative(a)
@@ -88,6 +104,11 @@ def develop_one(raw_path, out_path, shot, strict=True):
         print(f"develop: {os.path.basename(raw_path)} — {wrong}", flush=True)
     rgb = camera.develop(a, by=shot.get("by", "noor"), light=shot.get("light", "window_left"),
                          seed=shot.get("seed", 1), handheld=shot.get("handheld", 0.0))
+    flat = look_at_the_photograph(rgb)
+    if flat:
+        if strict:
+            raise ValueError(flat)
+        print(f"develop: {os.path.basename(raw_path)} — {flat}", flush=True)
     Image.fromarray(rgb, "RGB").save(out_path, "JPEG", quality=shot.get("quality", 86),
                                      subsampling=1, optimize=True)
     return out_path
