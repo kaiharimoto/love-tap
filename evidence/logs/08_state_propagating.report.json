@@ -1,27 +1,30 @@
 {
  "region": 1,
  "visible": [
-  "01M1PJT5H50NTT5644GHRHCTF1",
-  "01M1PK0VXZ30THB5WETW9BPNER",
-  "01M1PK4NMPMN1C6ENVFXDEYXH3"
+  "01M1PKRNXMWY9Q1E3BZW0KW170",
+  "01M1PKSGJDZ77Z6X0MANEPQ0K4",
+  "01M1PM09PBSEGD87ZNAW9SY417",
+  "01M1PM506JAHQYQ608EFDWXE2K"
  ],
  "tears": {
-  "01M1PJT5H50NTT5644GHRHCTF1": "tear_020",
-  "01M1PK0VXZ30THB5WETW9BPNER": "tear_043",
-  "01M1PK4NMPMN1C6ENVFXDEYXH3": "tear_005"
+  "01M1PKRNXMWY9Q1E3BZW0KW170": "tear_001",
+  "01M1PKSGJDZ77Z6X0MANEPQ0K4": "tear_020",
+  "01M1PM09PBSEGD87ZNAW9SY417": "tear_043",
+  "01M1PM506JAHQYQ608EFDWXE2K": "tear_005"
  },
  "stocks": {
-  "01M1PJT5H50NTT5644GHRHCTF1": "lined_01",
-  "01M1PK0VXZ30THB5WETW9BPNER": "lined_04",
-  "01M1PK4NMPMN1C6ENVFXDEYXH3": "lined_02"
+  "01M1PKRNXMWY9Q1E3BZW0KW170": "lined_02",
+  "01M1PKSGJDZ77Z6X0MANEPQ0K4": "lined_03",
+  "01M1PM09PBSEGD87ZNAW9SY417": "lined_01",
+  "01M1PM506JAHQYQ608EFDWXE2K": "lined_04"
  },
  "scroll": {
-  "first": 1,
+  "first": 0,
   "last": 3,
   "of": 4
  },
- "now": "2026-09-04T16:16:07.862Z",
- "driven_ms": 6384,
+ "now": "2026-09-04T16:33:11.742Z",
+ "driven_ms": 5712,
  "seed": 20260903,
  "events": 8,
  "transport": "local",
@@ -31,7 +34,7 @@
  "writable_masks": 47,
  "light": "day",
  "has_dusk_paper": true,
- "paper_stocks": 33,
+ "paper_stocks": 44,
  "setup_showing": false,
  "fold": {
   "sequence": "unfold_thirds",

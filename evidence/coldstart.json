@@ -33,45 +33,45 @@
  "paired_with": "six spoken words, HKDF-SHA256; every request signed thereafter",
  "events": {
   "message_client_to_host": {
-   "id": "01M1PKR4S0V09D0RD512VX9A2T",
+   "id": "01M1PMGHW1FR2RWJJZ4Y1P29YD",
    "type": "message",
    "from": "teo",
-   "written_at": "2026-09-04T16:24:08.736Z",
+   "written_at": "2026-09-04T16:37:28.577Z",
    "arrived_seq": 1
   },
   "feeling_client_to_host": {
-   "id": "01M1PKR4SBD1TCTEWE9RX416CY",
+   "id": "01M1PMGHWCFD6ZV31P0XK81QG8",
    "type": "feeling",
    "from": "teo",
-   "written_at": "2026-09-04T16:24:08.747Z",
+   "written_at": "2026-09-04T16:37:28.588Z",
    "arrived_seq": 2
   },
   "message_host_to_client": {
-   "id": "01M1PKR4VEPM0HAV41FB3WYE2A",
+   "id": "01M1PMGHYQ7XRSFVTXMEABCHRR",
    "type": "message",
    "from": "noor",
-   "written_at": "2026-09-04T16:24:08.814Z",
+   "written_at": "2026-09-04T16:37:28.663Z",
    "arrived_seq": 3
   },
   "feeling_host_to_client": {
-   "id": "01M1PKR4VK1YKKBKEED4E7BRBS",
+   "id": "01M1PMGHYR7KKYFTTC84NM1ACB",
    "type": "feeling",
    "from": "noor",
-   "written_at": "2026-09-04T16:24:08.819Z",
+   "written_at": "2026-09-04T16:37:28.664Z",
    "arrived_seq": 4
   }
  },
  "spine_host_order": [
-  "01M1PKR4S0V09D0RD512VX9A2T",
-  "01M1PKR4SBD1TCTEWE9RX416CY",
-  "01M1PKR4VEPM0HAV41FB3WYE2A",
-  "01M1PKR4VK1YKKBKEED4E7BRBS"
+  "01M1PMGHW1FR2RWJJZ4Y1P29YD",
+  "01M1PMGHWCFD6ZV31P0XK81QG8",
+  "01M1PMGHYQ7XRSFVTXMEABCHRR",
+  "01M1PMGHYR7KKYFTTC84NM1ACB"
  ],
  "spine_client_order": [
-  "01M1PKR4S0V09D0RD512VX9A2T",
-  "01M1PKR4SBD1TCTEWE9RX416CY",
-  "01M1PKR4VEPM0HAV41FB3WYE2A",
-  "01M1PKR4VK1YKKBKEED4E7BRBS"
+  "01M1PMGHW1FR2RWJJZ4Y1P29YD",
+  "01M1PMGHWCFD6ZV31P0XK81QG8",
+  "01M1PMGHYQ7XRSFVTXMEABCHRR",
+  "01M1PMGHYR7KKYFTTC84NM1ACB"
  ],
  "four_events_at": {
   "host": [
@@ -93,5 +93,5 @@
   "rx_bytes": 3388,
   "path": "direct to 192.0.2.2:48859"
  },
- "written_at": "2026-09-04T16:24:08.863484Z"
+ "written_at": "2026-09-04T16:37:28.698414Z"
 }

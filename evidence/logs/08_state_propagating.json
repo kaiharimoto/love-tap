@@ -10,35 +10,27 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2307
+   "ms": 2304
   },
   {
    "do": "pair",
-   "ms": 1619
+   "ms": 1647
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 3715
   },
   {
    "do": "goTo",
-   "ms": 1704
+   "ms": 2415
   },
   {
    "do": "wait",
-   "ms": 1403
+   "ms": 1716
   },
   {
    "do": "frames",
-   "ms": 23009
-  },
-  {
-   "do": "far",
-   "ms": 502
-  },
-  {
-   "do": "frames",
-   "ms": 61250
+   "ms": 23769
   },
   {
    "do": "far",
@@ -46,35 +38,43 @@
   },
   {
    "do": "frames",
-   "ms": 179959
+   "ms": 26735
+  },
+  {
+   "do": "far",
+   "ms": 512
+  },
+  {
+   "do": "frames",
+   "ms": 179367
   },
   {
    "do": "goTo",
-   "ms": 1144
+   "ms": 1625
   },
   {
    "do": "frames",
-   "ms": 37988
+   "ms": 40886
   },
   {
    "do": "far",
-   "ms": 506
+   "ms": 503
   },
   {
    "do": "frames",
-   "ms": 124110
+   "ms": 153549
   },
   {
    "do": "far",
-   "ms": 502
+   "ms": 501
   },
   {
    "do": "frames",
-   "ms": 156790
+   "ms": 121296
   },
   {
    "do": "report",
-   "ms": 509
+   "ms": 522
   }
  ],
  "shots": [
@@ -85,7 +85,7 @@
    "drive": null
   },
   {
-   "frames": 56,
+   "frames": 24,
    "dir": "evidence/frames/08_state_propagating_b",
    "ms": 16,
    "drive": null
@@ -103,7 +103,7 @@
    "drive": null
   },
   {
-   "frames": 110,
+   "frames": 120,
    "dir": "evidence/frames/08_state_propagating_c",
    "ms": 16,
    "drive": {
@@ -112,7 +112,7 @@
    }
   },
   {
-   "frames": 160,
+   "frames": 120,
    "dir": "evidence/frames/08_state_propagating_c",
    "ms": 8,
    "drive": null
@@ -122,27 +122,30 @@
   {
    "region": 1,
    "visible": [
-    "01M1PJT5H50NTT5644GHRHCTF1",
-    "01M1PK0VXZ30THB5WETW9BPNER",
-    "01M1PK4NMPMN1C6ENVFXDEYXH3"
+    "01M1PKRNXMWY9Q1E3BZW0KW170",
+    "01M1PKSGJDZ77Z6X0MANEPQ0K4",
+    "01M1PM09PBSEGD87ZNAW9SY417",
+    "01M1PM506JAHQYQ608EFDWXE2K"
    ],
    "tears": {
-    "01M1PJT5H50NTT5644GHRHCTF1": "tear_020",
-    "01M1PK0VXZ30THB5WETW9BPNER": "tear_043",
-    "01M1PK4NMPMN1C6ENVFXDEYXH3": "tear_005"
+    "01M1PKRNXMWY9Q1E3BZW0KW170": "tear_001",
+    "01M1PKSGJDZ77Z6X0MANEPQ0K4": "tear_020",
+    "01M1PM09PBSEGD87ZNAW9SY417": "tear_043",
+    "01M1PM506JAHQYQ608EFDWXE2K": "tear_005"
    },
    "stocks": {
-    "01M1PJT5H50NTT5644GHRHCTF1": "lined_01",
-    "01M1PK0VXZ30THB5WETW9BPNER": "lined_04",
-    "01M1PK4NMPMN1C6ENVFXDEYXH3": "lined_02"
+    "01M1PKRNXMWY9Q1E3BZW0KW170": "lined_02",
+    "01M1PKSGJDZ77Z6X0MANEPQ0K4": "lined_03",
+    "01M1PM09PBSEGD87ZNAW9SY417": "lined_01",
+    "01M1PM506JAHQYQ608EFDWXE2K": "lined_04"
    },
    "scroll": {
-    "first": 1,
+    "first": 0,
     "last": 3,
     "of": 4
    },
-   "now": "2026-09-04T16:16:07.862Z",
-   "driven_ms": 6384,
+   "now": "2026-09-04T16:33:11.742Z",
+   "driven_ms": 5712,
    "seed": 20260903,
    "events": 8,
    "transport": "local",
@@ -152,7 +155,7 @@
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
-   "paper_stocks": 33,
+   "paper_stocks": 44,
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
@@ -166,7 +169,7 @@
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 2430,
+ "cold_ms": 2213,
  "problems": [],
  "ok": true
 }

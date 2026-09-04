@@ -7797,6 +7797,105 @@
     "yellowing": 0.2
    }
   },
+  "assets/paper/index_02_dusk.webp": {
+   "bytes": 213210,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "dusk",
+    "format": "WEBP",
+    "light": "dusk",
+    "look": {
+     "fibre": 1300.0,
+     "rgb": [
+      0.95,
+      0.93,
+      0.88
+     ],
+     "sheen": 0.28,
+     "tooth": 0.8
+    },
+    "px_per_mm": 8.82,
+    "resolution": [
+     1800,
+     1120
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.9,
+       "end": 72.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.15,
+       "ghost_offset": 0.217,
+       "kind": "hrules",
+       "pitch": 6.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.0031,
+        "dy": 0.0291,
+        "rot_deg": 0.1721
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 19.292,
+       "width": 0.28,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.1,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "end": 13.392,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.6,
+       "ghost_offset": 0.202,
+       "kind": "hrules",
+       "pitch": 6.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.1183,
+        "dy": -0.0649,
+        "rot_deg": 0.0121
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 13.292,
+       "width": 0.45,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 571475318,
+     "sheet_mm": [
+      127.0,
+      76.0
+     ],
+     "stock": "index",
+     "variant": 2
+    },
+    "samples": 48,
+    "seed": 571475318,
+    "sheet_mm": [
+     127.0,
+     76.0
+    ],
+    "stock": "index",
+    "variant": 2,
+    "yellowing": 0.2
+   }
+  },
   "assets/paper/legal_01.webp": {
    "bytes": 159804,
    "generator": "blender/paper/stocks.py",
@@ -10651,6 +10750,60 @@
     "condition": "day",
     "format": "WEBP",
     "light": "day",
+    "look": {
+     "fibre": 1200.0,
+     "rgb": [
+      0.94,
+      0.86,
+      0.52
+     ],
+     "sheen": 0.26,
+     "tooth": 0.75
+    },
+    "px_per_mm": 23.68,
+    "resolution": [
+     1800,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "band_mm": 13.39,
+       "colour": "#000000",
+       "density": 0.028,
+       "edge_mm": 1.6,
+       "kind": "adhesive_band"
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 978801883,
+     "sheet_mm": [
+      76.0,
+      76.0
+     ],
+     "stock": "sticky_yellow",
+     "variant": 1
+    },
+    "samples": 48,
+    "seed": 978801883,
+    "sheet_mm": [
+     76.0,
+     76.0
+    ],
+    "stock": "sticky_yellow",
+    "variant": 1,
+    "yellowing": 0.04
+   }
+  },
+  "assets/paper/sticky_yellow_01_dusk.webp": {
+   "bytes": 326932,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "dusk",
+    "format": "WEBP",
+    "light": "dusk",
     "look": {
      "fibre": 1200.0,
      "rgb": [
