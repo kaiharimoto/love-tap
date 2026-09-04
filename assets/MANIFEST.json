@@ -4027,7 +4027,7 @@
    }
   },
   "assets/objects/obj_clover.png": {
-   "bytes": 185752,
+   "bytes": 341488,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -4036,15 +4036,15 @@
     "object": "obj_clover",
     "pass": "object",
     "resolution": [
-     900,
-     900
+     1200,
+     1200
     ],
     "rig": "blender/rig/common.py",
-    "samples": 28
+    "samples": 64
    }
   },
   "assets/objects/obj_clover_shadow.png": {
-   "bytes": 89891,
+   "bytes": 270389,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -4053,15 +4053,15 @@
     "object": "obj_clover",
     "pass": "shadow",
     "resolution": [
-     900,
-     900
+     1200,
+     1200
     ],
     "rig": "blender/rig/common.py",
-    "samples": 28
+    "samples": 64
    }
   },
   "assets/objects/obj_clover_shadow_dusk.png": {
-   "bytes": 51642,
+   "bytes": 100344,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -4070,11 +4070,11 @@
     "object": "obj_clover",
     "pass": "shadow",
     "resolution": [
-     900,
-     900
+     1200,
+     1200
     ],
     "rig": "blender/rig/common.py",
-    "samples": 28
+    "samples": 64
    }
   },
   "assets/objects/obj_coffee_ring.png": {
@@ -4231,7 +4231,7 @@
    }
   },
   "assets/objects/obj_crown.png": {
-   "bytes": 402206,
+   "bytes": 433996,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -4244,11 +4244,11 @@
      1200
     ],
     "rig": "blender/rig/common.py",
-    "samples": 40
+    "samples": 64
    }
   },
   "assets/objects/obj_crown_shadow.png": {
-   "bytes": 167719,
+   "bytes": 161310,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -4261,11 +4261,11 @@
      1200
     ],
     "rig": "blender/rig/common.py",
-    "samples": 40
+    "samples": 64
    }
   },
   "assets/objects/obj_crown_shadow_dusk.png": {
-   "bytes": 186980,
+   "bytes": 166406,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -4278,7 +4278,7 @@
      1200
     ],
     "rig": "blender/rig/common.py",
-    "samples": 40
+    "samples": 64
    }
   },
   "assets/objects/obj_crumple_ball.png": {
@@ -4384,7 +4384,7 @@
    }
   },
   "assets/objects/obj_gold_star.png": {
-   "bytes": 168574,
+   "bytes": 411974,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -4393,15 +4393,15 @@
     "object": "obj_gold_star",
     "pass": "object",
     "resolution": [
-     900,
-     900
+     1200,
+     1200
     ],
     "rig": "blender/rig/common.py",
-    "samples": 28
+    "samples": 64
    }
   },
   "assets/objects/obj_gold_star_shadow.png": {
-   "bytes": 56009,
+   "bytes": 167963,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -4410,15 +4410,15 @@
     "object": "obj_gold_star",
     "pass": "shadow",
     "resolution": [
-     900,
-     900
+     1200,
+     1200
     ],
     "rig": "blender/rig/common.py",
-    "samples": 28
+    "samples": 64
    }
   },
   "assets/objects/obj_gold_star_shadow_dusk.png": {
-   "bytes": 39319,
+   "bytes": 109668,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -4427,11 +4427,11 @@
     "object": "obj_gold_star",
     "pass": "shadow",
     "resolution": [
-     900,
-     900
+     1200,
+     1200
     ],
     "rig": "blender/rig/common.py",
-    "samples": 28
+    "samples": 64
    }
   },
   "assets/objects/obj_heart_fold.png": {
@@ -4585,6 +4585,57 @@
     ],
     "rig": "blender/rig/common.py",
     "samples": 28
+   }
+  },
+  "assets/objects/obj_pinch.png": {
+   "bytes": 456697,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_pinch",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 64
+   }
+  },
+  "assets/objects/obj_pinch_shadow.png": {
+   "bytes": 296501,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_pinch",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 64
+   }
+  },
+  "assets/objects/obj_pinch_shadow_dusk.png": {
+   "bytes": 137827,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_pinch",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 64
    }
   },
   "assets/objects/obj_plane.png": {
@@ -5436,7 +5487,7 @@
    }
   },
   "assets/paper/index_01.webp": {
-   "bytes": 70618,
+   "bytes": 132444,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -5453,10 +5504,10 @@
      "sheen": 0.28,
      "tooth": 0.8
     },
-    "px_per_mm": 10.78,
+    "px_per_mm": 8.82,
     "resolution": [
-     2200,
-     1369
+     1800,
+     1120
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -5523,7 +5574,7 @@
      "stock": "index",
      "variant": 1
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 3138999500,
     "sheet_mm": [
      127.0,
@@ -5535,7 +5586,7 @@
    }
   },
   "assets/paper/index_02.webp": {
-   "bytes": 69152,
+   "bytes": 130424,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -5552,10 +5603,10 @@
      "sheen": 0.28,
      "tooth": 0.8
     },
-    "px_per_mm": 10.78,
+    "px_per_mm": 8.82,
     "resolution": [
-     2200,
-     1369
+     1800,
+     1120
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -5622,7 +5673,7 @@
      "stock": "index",
      "variant": 2
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 571475318,
     "sheet_mm": [
      127.0,
@@ -5634,7 +5685,7 @@
    }
   },
   "assets/paper/legal_01.webp": {
-   "bytes": 94808,
+   "bytes": 159804,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -5651,10 +5702,10 @@
      "sheen": 0.2,
      "tooth": 1.0
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -5722,7 +5773,7 @@
      "stock": "legal",
      "variant": 1
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 1342926211,
     "sheet_mm": [
      148.0,
@@ -5734,7 +5785,7 @@
    }
   },
   "assets/paper/legal_02.webp": {
-   "bytes": 87166,
+   "bytes": 156116,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -5751,10 +5802,10 @@
      "sheen": 0.2,
      "tooth": 1.0
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -5822,7 +5873,7 @@
      "stock": "legal",
      "variant": 2
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 3372366905,
     "sheet_mm": [
      148.0,
@@ -6230,7 +6281,7 @@
    }
   },
   "assets/paper/looseleaf_01.webp": {
-   "bytes": 96162,
+   "bytes": 135124,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6247,10 +6298,10 @@
      "sheen": 0.24,
      "tooth": 0.95
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6291,7 +6342,7 @@
      "stock": "looseleaf",
      "variant": 1
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 3174509703,
     "sheet_mm": [
      148.0,
@@ -6303,7 +6354,7 @@
    }
   },
   "assets/paper/looseleaf_02.webp": {
-   "bytes": 90408,
+   "bytes": 134950,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6320,10 +6371,10 @@
      "sheen": 0.24,
      "tooth": 0.95
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6364,7 +6415,7 @@
      "stock": "looseleaf",
      "variant": 2
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 608075069,
     "sheet_mm": [
      148.0,
@@ -6376,7 +6427,7 @@
    }
   },
   "assets/paper/looseleaf_03.webp": {
-   "bytes": 83628,
+   "bytes": 138284,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6393,10 +6444,10 @@
      "sheen": 0.24,
      "tooth": 0.95
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6437,7 +6488,7 @@
      "stock": "looseleaf",
      "variant": 3
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 1396264363,
     "sheet_mm": [
      148.0,
@@ -6449,7 +6500,7 @@
    }
   },
   "assets/paper/looseleaf_04.webp": {
-   "bytes": 84548,
+   "bytes": 140834,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6466,10 +6517,10 @@
      "sheen": 0.24,
      "tooth": 0.95
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6510,7 +6561,7 @@
      "stock": "looseleaf",
      "variant": 4
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 3445479432,
     "sheet_mm": [
      148.0,
@@ -6519,6 +6570,68 @@
     "stock": "looseleaf",
     "variant": 4,
     "yellowing": 0.5
+   }
+  },
+  "assets/paper/receipt_01.webp": {
+   "bytes": 63802,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1600.0,
+     "rgb": [
+      0.95,
+      0.94,
+      0.9
+     ],
+     "sheen": 0.35,
+     "tooth": 0.55
+    },
+    "px_per_mm": 10.0,
+    "resolution": [
+     843,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "band_var": 0.18,
+       "barcode": true,
+       "char_w": 1.75,
+       "colour": "#8a8a8a",
+       "density": 0.55,
+       "dot_mm": 0.24,
+       "fade_cell": 9.0,
+       "fade_var": 0.5,
+       "items": 7,
+       "kind": "thermal_print",
+       "line_pitch": 3.5,
+       "margin": 6.0,
+       "top": 13.0
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 1472711998,
+     "sheet_mm": [
+      80.0,
+      180.0
+     ],
+     "stock": "receipt",
+     "variant": 1
+    },
+    "samples": 48,
+    "seed": 1472711998,
+    "sheet_mm": [
+     80.0,
+     180.0
+    ],
+    "stock": "receipt",
+    "variant": 1,
+    "yellowing": 0.1
    }
   },
   "assets/paper/spiral_01.webp": {
@@ -6621,7 +6734,7 @@
    }
   },
   "assets/paper/spiral_02.webp": {
-   "bytes": 103362,
+   "bytes": 171132,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6638,10 +6751,10 @@
      "sheen": 0.22,
      "tooth": 1.1
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6708,7 +6821,7 @@
      "stock": "spiral",
      "variant": 2
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 2594973730,
     "sheet_mm": [
      148.0,
@@ -6720,7 +6833,7 @@
    }
   },
   "assets/paper/spiral_03.webp": {
-   "bytes": 109680,
+   "bytes": 174052,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6737,10 +6850,10 @@
      "sheen": 0.22,
      "tooth": 1.1
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6807,7 +6920,7 @@
      "stock": "spiral",
      "variant": 3
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 3987413172,
     "sheet_mm": [
      148.0,
@@ -6819,7 +6932,7 @@
    }
   },
   "assets/paper/spiral_04.webp": {
-   "bytes": 110096,
+   "bytes": 169260,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6836,10 +6949,10 @@
      "sheen": 0.22,
      "tooth": 1.1
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6906,7 +7019,7 @@
      "stock": "spiral",
      "variant": 4
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 1942981911,
     "sheet_mm": [
      148.0,
@@ -6917,8 +7030,116 @@
     "yellowing": 0.58
    }
   },
+  "assets/paper/sticky_blue_01.webp": {
+   "bytes": 189924,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1200.0,
+     "rgb": [
+      0.72,
+      0.83,
+      0.9
+     ],
+     "sheen": 0.26,
+     "tooth": 0.75
+    },
+    "px_per_mm": 23.68,
+    "resolution": [
+     1800,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "band_mm": 13.2,
+       "colour": "#000000",
+       "density": 0.028,
+       "edge_mm": 1.6,
+       "kind": "adhesive_band"
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3326007451,
+     "sheet_mm": [
+      76.0,
+      76.0
+     ],
+     "stock": "sticky_blue",
+     "variant": 1
+    },
+    "samples": 48,
+    "seed": 3326007451,
+    "sheet_mm": [
+     76.0,
+     76.0
+    ],
+    "stock": "sticky_blue",
+    "variant": 1,
+    "yellowing": 0.04
+   }
+  },
+  "assets/paper/sticky_blue_02.webp": {
+   "bytes": 178480,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1200.0,
+     "rgb": [
+      0.72,
+      0.83,
+      0.9
+     ],
+     "sheen": 0.26,
+     "tooth": 0.75
+    },
+    "px_per_mm": 23.68,
+    "resolution": [
+     1800,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "band_mm": 14.71,
+       "colour": "#000000",
+       "density": 0.028,
+       "edge_mm": 1.6,
+       "kind": "adhesive_band"
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 1597475105,
+     "sheet_mm": [
+      76.0,
+      76.0
+     ],
+     "stock": "sticky_blue",
+     "variant": 2
+    },
+    "samples": 48,
+    "seed": 1597475105,
+    "sheet_mm": [
+     76.0,
+     76.0
+    ],
+    "stock": "sticky_blue",
+    "variant": 2,
+    "yellowing": 0.12
+   }
+  },
   "assets/paper/sticky_pink_01.webp": {
-   "bytes": 54002,
+   "bytes": 174826,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6935,10 +7156,10 @@
      "sheen": 0.26,
      "tooth": 0.75
     },
-    "px_per_mm": 28.95,
+    "px_per_mm": 23.68,
     "resolution": [
-     2200,
-     2200
+     1800,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6960,7 +7181,7 @@
      "stock": "sticky_pink",
      "variant": 1
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 3443919343,
     "sheet_mm": [
      76.0,
@@ -6971,8 +7192,62 @@
     "yellowing": 0.04
    }
   },
+  "assets/paper/sticky_pink_02.webp": {
+   "bytes": 176472,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "day",
+    "format": "WEBP",
+    "light": "day",
+    "look": {
+     "fibre": 1200.0,
+     "rgb": [
+      0.94,
+      0.74,
+      0.74
+     ],
+     "sheen": 0.26,
+     "tooth": 0.75
+    },
+    "px_per_mm": 23.68,
+    "resolution": [
+     1800,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "band_mm": 13.23,
+       "colour": "#000000",
+       "density": 0.028,
+       "edge_mm": 1.6,
+       "kind": "adhesive_band"
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 1414486101,
+     "sheet_mm": [
+      76.0,
+      76.0
+     ],
+     "stock": "sticky_pink",
+     "variant": 2
+    },
+    "samples": 48,
+    "seed": 1414486101,
+    "sheet_mm": [
+     76.0,
+     76.0
+    ],
+    "stock": "sticky_pink",
+    "variant": 2,
+    "yellowing": 0.12
+   }
+  },
   "assets/paper/sticky_yellow_01.webp": {
-   "bytes": 67420,
+   "bytes": 169336,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6989,10 +7264,10 @@
      "sheen": 0.26,
      "tooth": 0.75
     },
-    "px_per_mm": 28.95,
+    "px_per_mm": 23.68,
     "resolution": [
-     2200,
-     2200
+     1800,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -7014,7 +7289,7 @@
      "stock": "sticky_yellow",
      "variant": 1
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 978801883,
     "sheet_mm": [
      76.0,
@@ -7026,7 +7301,7 @@
    }
   },
   "assets/paper/sticky_yellow_02.webp": {
-   "bytes": 64820,
+   "bytes": 173674,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -7043,10 +7318,10 @@
      "sheen": 0.26,
      "tooth": 0.75
     },
-    "px_per_mm": 28.95,
+    "px_per_mm": 23.68,
     "resolution": [
-     2200,
-     2200
+     1800,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -7068,7 +7343,7 @@
      "stock": "sticky_yellow",
      "variant": 2
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 2740847969,
     "sheet_mm": [
      76.0,
@@ -13319,6 +13594,342 @@
    "kind": "index",
    "settings": {
     "masks": 56
+   }
+  },
+  "seed/photos/2025-09_bread_loaf.jpg": {
+   "bytes": 99272,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.3708837308306036,
+     "height": 0.28986928377097576,
+     "lean_deg": 0.39606854445600703,
+     "look_at": [
+      0,
+      0,
+      0.013216021335190235
+     ],
+     "mm": 26.505247147518155
+    },
+    "light": "window_left",
+    "objects": [
+     "loaf",
+     "sheet",
+     "bag",
+     "pen",
+     "knife"
+    ],
+    "recipe": "2025-09_bread_loaf",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "melamine"
+   }
+  },
+  "seed/photos/2025-09_canal_grey.jpg": {
+   "bytes": 51647,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 5.089902218117896,
+     "height": 1.304366968073077,
+     "lean_deg": 2.082563853610921,
+     "look_at": [
+      0.8776132877400642,
+      7.02310069059506,
+      0.45199511745032145
+     ],
+     "mm": 29.31916334691188
+    },
+    "light": "overcast",
+    "objects": [
+     "water",
+     "post",
+     "rope",
+     "limbs",
+     "trunk"
+    ],
+    "recipe": "2025-09_canal_grey",
+    "res": [
+     1000,
+     750
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": null
+   }
+  },
+  "seed/photos/2025-09_classroom_display.jpg": {
+   "bytes": 114304,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.31388375902407284,
+     "height": 0.30359608872471583,
+     "lean_deg": 12.368871183530008,
+     "look_at": [
+      0,
+      0,
+      0.03834935744584616
+     ],
+     "mm": 26.633286458071865
+    },
+    "light": "window_left",
+    "objects": [
+     "board",
+     "sheet",
+     "card"
+    ],
+    "recipe": "2025-09_classroom_display",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "board"
+   }
+  },
+  "seed/photos/2025-09_marker_drawer.jpg": {
+   "bytes": 90816,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.34707303893439123,
+     "height": 0.311890542735981,
+     "lean_deg": -14.464124428260906,
+     "look_at": [
+      0,
+      0,
+      0.017060991201539602
+     ],
+     "mm": 23.49138918681042
+    },
+    "light": "window_left",
+    "objects": [
+     "pen",
+     "sheet"
+    ],
+    "recipe": "2025-09_marker_drawer",
+    "res": [
+     1000,
+     750
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "desk"
+   }
+  },
+  "seed/photos/2025-09_market_crates.jpg": {
+   "bytes": 124993,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 7.02310069059506,
+     "height": 1.3828361016125132,
+     "lean_deg": 9.69576563761543,
+     "look_at": [
+      0.7060955840158678,
+      4.239980558084233,
+      0.04913891868104181
+     ],
+     "mm": 28.252403616876926
+    },
+    "light": "overcast",
+    "objects": [
+     "wood",
+     "crate",
+     "car"
+    ],
+    "recipe": "2025-09_market_crates",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": null
+   }
+  },
+  "seed/photos/2025-09_roster_paper.jpg": {
+   "bytes": 103724,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.34707303893439123,
+     "height": 0.311890542735981,
+     "lean_deg": -14.464124428260906,
+     "look_at": [
+      0,
+      0,
+      0.017060991201539602
+     ],
+     "mm": 23.49138918681042
+    },
+    "light": "window_left",
+    "objects": [
+     "folded",
+     "pen"
+    ],
+    "recipe": "2025-09_roster_paper",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": "desk"
+   }
+  },
+  "seed/photos/2025-09_sketchbook_door.jpg": {
+   "bytes": 108144,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.25487687097977263,
+     "height": 0.40174678722923085,
+     "lean_deg": 2.7767518048145625,
+     "look_at": [
+      0,
+      0,
+      0.046159609396025716
+     ],
+     "mm": 27.432636122426565
+    },
+    "light": "window_left",
+    "objects": [
+     "book",
+     "pen",
+     "board"
+    ],
+    "recipe": "2025-09_sketchbook_door",
+    "res": [
+     750,
+     1000
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "board"
+   }
+  },
+  "seed/photos/2025-09_soup_bowl.jpg": {
+   "bytes": 84706,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 0.24863800156094734,
+     "height": 0.26228810971830685,
+     "lean_deg": -7.647664187314948,
+     "look_at": [
+      0,
+      0,
+      0.04807458043746512
+     ],
+     "mm": 23.402002666898778
+    },
+    "light": "window_left",
+    "objects": [
+     "bowl",
+     "mug",
+     "spoon",
+     "tin",
+     "stack"
+    ],
+    "recipe": "2025-09_soup_bowl",
+    "res": [
+     1000,
+     750
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": "desk"
+   }
+  },
+  "seed/photos/2025-09_two_cups_wall.jpg": {
+   "bytes": 50150,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 8.519951174503214,
+     "height": 1.252310069059506,
+     "lean_deg": 5.009614467507696,
+     "look_at": [
+      -1.084809332119568,
+      4.491389186810418,
+      0.43283610161251335
+     ],
+     "mm": 25.307882661741473
+    },
+    "light": "low_sun",
+    "objects": [
+     "wall",
+     "car",
+     "barrier"
+    ],
+    "recipe": "2025-09_two_cups_wall",
+    "res": [
+     1000,
+     750
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": null
+   }
+  },
+  "seed/photos/2025-09_ward_carpark_dawn.jpg": {
+   "bytes": 102505,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 4.125894162161216,
+     "height": 1.0696843857642226,
+     "lean_deg": 4.0298446900938565,
+     "look_at": [
+      0.20825638536109214,
+      8.432636122426564,
+      0.3633286458071865
+     ],
+     "mm": 27.28457387180979
+    },
+    "light": "fog_dawn",
+    "objects": [
+     "car",
+     "bays",
+     "barrier",
+     "post",
+     "wall"
+    ],
+    "recipe": "2025-09_ward_carpark_dawn",
+    "res": [
+     1000,
+     750
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, teo's phone",
+    "surface": null
    }
   },
   "seed/photos/2026-08_bread_loaf.jpg": {

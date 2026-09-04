@@ -1,0 +1,33 @@
+{
+ "id": "2025-11_bread_board_window",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "handheld": 0.22918524254151512,
+ "quality": 90,
+ "surface": "board",
+ "objects": [
+  "loaf",
+  "board",
+  "crumbs",
+  "folded",
+  "sheet",
+  "bag"
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03257622140714188
+  ],
+  "height": 0.35720446466864963,
+  "distance": 0.2894046955280927,
+  "lean_deg": -14.895920955616557,
+  "mm": 26.943616863241893
+ },
+ "res": [
+  1000,
+  750
+ ],
+ "samples": 28
+}

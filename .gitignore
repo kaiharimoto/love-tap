@@ -29,3 +29,11 @@ node_modules/
 /evidence/frames/
 /evidence/.previous/
 /evidence/.diffscratch/
+
+# the negatives: what still.py exposes, before blender/photos/develop.py applies the sensor to it.
+# One is eleven megabytes and develop.py deletes it as soon as it has been developed, so a
+# negative in the tree is a render in flight rather than something anyone needs.
+/seed/photos/*.exr
+/blender/videos/scratch/
+# working room for the render queue: frames of a take, on their way to an mp4
+/scratch/

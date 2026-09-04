@@ -6,35 +6,43 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8799/",
+ "url": "http://127.0.0.1:8912/",
  "steps": [
   {
    "do": "goTo",
-   "ms": 3093
+   "ms": 3919
   },
   {
    "do": "wait",
-   "ms": 2004
+   "ms": 2068
   },
   {
    "do": "scrollTo",
-   "ms": 861
+   "ms": 4301
   },
   {
    "do": "wait",
-   "ms": 1603
+   "ms": 1602
   },
   {
    "do": "frames",
-   "ms": 29825
+   "ms": 40721
   },
   {
    "do": "unfold",
-   "ms": 344
+   "ms": 683
   },
   {
    "do": "frames",
-   "ms": 181872
+   "ms": 184453
+  },
+  {
+   "do": "frames",
+   "ms": 74066
+  },
+  {
+   "do": "report",
+   "ms": 446
   }
  ],
  "shots": [
@@ -45,14 +53,76 @@
    "drive": null
   },
   {
-   "frames": 240,
+   "frames": 185,
    "dir": "evidence/frames/06_unfolding_b",
    "ms": 16,
    "drive": null
+  },
+  {
+   "frames": 55,
+   "dir": "evidence/frames/06_unfolding_b",
+   "ms": 16,
+   "drive": {
+    "kind": "scrollBy",
+    "per": 5
+   }
   }
  ],
- "reports": [],
- "cold_ms": 14181,
+ "reports": [
+  {
+   "region": 1,
+   "visible": [
+    "0001M3F41R2APQC59QKBMZK4XF",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF",
+    "0001M4GW48FEW3M67XKAZT5051",
+    "0001M4ZQQ0H0PPVTKMMQEE268D",
+    "0001M59VY0YA13H9M86HTA6XNP"
+   ],
+   "tears": {
+    "0001M3F41R2APQC59QKBMZK4XF": "tear_013",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_035",
+    "0001M4GW48FEW3M67XKAZT5051": "tear_055",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_018",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_040"
+   },
+   "stocks": {
+    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
+    "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
+    "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
+   },
+   "scroll": {
+    "first": 8245,
+    "last": 8249,
+    "of": 8250
+   },
+   "now": "2026-08-30T09:14:00.000Z",
+   "driven_ms": 4624,
+   "seed": 20260903,
+   "events": 13814,
+   "transport": "local",
+   "link": "connecting",
+   "me": "teo",
+   "masks_in_pool": 56,
+   "writable_masks": 47,
+   "light": "day",
+   "has_dusk_paper": false,
+   "paper_stocks": 27,
+   "setup_showing": false,
+   "fold": {
+    "sequence": "unfold_thirds",
+    "length": 150,
+    "decoded": 37,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 149
+   },
+   "at": "06_unfolding_b"
+  }
+ ],
+ "cold_ms": 12840,
  "problems": [],
  "ok": true
 }
