@@ -322,11 +322,18 @@ class _MaskedLayerState extends State<MaskedLayer> {
   Widget build(BuildContext context) {
     final mask = _mask;
     if (mask == null) return widget.child;
+    // Composed at device pixels, not logical ones. A note is about 340 points wide and the screen
+    // it is on is three times that, so a mask composed at 340 would be upsampled threefold before
+    // anybody saw it — and the row this material is judged on is judged at three hundred per cent
+    // on exactly this. The shader scales it back down.
+    final dpr = MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0;
     return ShaderMask(
       blendMode: BlendMode.dstIn,
       shaderCallback: (Rect rect) {
-        final sliced = SlicedMasks.at(widget.maskAsset, mask, rect.size);
-        final m = Matrix4.identity()..translateByDouble(rect.left, rect.top, 0, 1);
+        final sliced = SlicedMasks.at(widget.maskAsset, mask, rect.size, dpr);
+        final m = Matrix4.identity()
+          ..translateByDouble(rect.left, rect.top, 0, 1)
+          ..scaleByDouble(rect.width / sliced.width, rect.height / sliced.height, 1, 1);
         return ImageShader(sliced, TileMode.clamp, TileMode.clamp, m.storage,
             filterQuality: FilterQuality.medium);
       },
@@ -346,11 +353,12 @@ class SlicedMasks {
   /// is always solid, so four tenths is comfortably outside them.
   static const double edge = 0.4;
 
-  static ui.Image at(String asset, ui.Image mask, Size size) {
+  static ui.Image at(String asset, ui.Image mask, Size size, double dpr) {
     // rounded, so a note whose height moves by a pixel while its text lays out does not compose a
-    // new mask every frame
-    final w = size.width.round().clamp(1, 4096);
-    final h = size.height.round().clamp(1, 4096);
+    // new mask every frame; and never larger than the mask itself, because upsampling a render is
+    // not the same as having rendered it larger
+    final w = (size.width * dpr).round().clamp(1, mask.width);
+    final h = (size.height * dpr).round().clamp(1, mask.height * 4);
     final key = '$asset@${w}x$h';
     final have = _images[key];
     if (have != null) return have;
