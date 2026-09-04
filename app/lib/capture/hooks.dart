@@ -70,6 +70,23 @@ class CaptureHooks {
     return 'ok';
   }
 
+  /// Move the thread by [dy] logical pixels, once.
+  Future<String> scrollBy(double dy) async {
+    final f = CaptureBus.scrollBy;
+    if (f == null) return 'chat is not on screen';
+    f(dy);
+    return 'ok';
+  }
+
+  /// Every delivery state at once, made rather than drawn.
+  Future<String> stageStates() async {
+    final f = CaptureBus.stageStates;
+    if (f == null) return 'the shell is not up';
+    await f();
+    await _settle();
+    return 'ok';
+  }
+
   Future<String> openSender(bool open) async {
     final f = CaptureBus.openSender;
     if (f == null) return 'chat is not on screen';

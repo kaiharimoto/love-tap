@@ -4,15 +4,26 @@
 import '../event.dart';
 import '../types.dart';
 
+/// What has happened to something you wrote, on its way to the other phone.
+///
+/// There were three of these, and two of them looked the same on screen — which meant a message
+/// that had not gone anywhere was indistinguishable from one that had. These are the five states
+/// a thing can actually be in, and note.dart gives each of them its own mark.
 enum Delivery {
-  /// Minted here, not yet accepted by the host.
-  waiting,
+  /// Written while the other phone was out of reach. It is in the outbox and it will go.
+  queued,
 
-  /// Accepted (seq assigned) but the partner has not read past it.
+  /// The link is up and this is on its way.
+  sending,
+
+  /// Accepted by the host (it has a seq) but the partner has not read past it.
   sent,
 
   /// The partner's read marker covers it.
   read,
+
+  /// The host would not take it. It is still here, and it is not going anywhere on its own.
+  refused,
 }
 
 class Reaction {
@@ -123,7 +134,8 @@ String? _worthSaying(Event e, Map<String, int> last) {
 /// that reads its input in arrival order silently drops both. Order is the host-assigned seq,
 /// then the timestamp, then the id, so two devices holding the same events always draw the same
 /// thread whatever order they received them in.
-ThreadState projectThread(List<Event> events, {Person? me}) {
+ThreadState projectThread(List<Event> events, {Person? me, bool linkUp = true,
+    Map<String, String> refused = const {}, Set<String> inFlight = const {}}) {
   events = inLogOrder(events);
   final rows = <String, _Row>{};
   final order = <String>[];
@@ -184,9 +196,12 @@ ThreadState projectThread(List<Event> events, {Person? me}) {
     final e = r.event;
     final other = e.author.other;
     final theirRead = readUpto[other] ?? 0;
-    final delivery = e.seq == null
-        ? Delivery.waiting
-        : (e.seq! <= theirRead ? Delivery.read : Delivery.sent);
+    final delivery = e.seq != null
+        ? (e.seq! <= theirRead ? Delivery.read : Delivery.sent)
+        : refused.containsKey(e.id)
+            ? Delivery.refused
+            : (inFlight.contains(e.id) ? Delivery.sending
+                : linkUp ? Delivery.sending : Delivery.queued);
     Event? replyTo;
     final rt = e.payload['reply_to'];
     if (rt is String) replyTo = rows[rt]?.event;

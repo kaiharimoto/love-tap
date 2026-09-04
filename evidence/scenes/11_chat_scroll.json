@@ -18,28 +18,20 @@
   },
   {
    "do": "scrollTo",
-   "arg": "0.55"
+   "arg": "0.62"
   },
   {
    "do": "wait",
-   "ms": 900
+   "ms": 700
   },
   {
    "do": "frames",
    "dir": "evidence/frames/11_chat_scroll",
-   "count": 300,
+   "count": 330,
    "ms": 16,
    "drive": {
-    "kind": "drag",
-    "from": [
-     180,
-     660
-    ],
-    "to": [
-     180,
-     90
-    ],
-    "release": 0.72
+    "kind": "scrollBy",
+    "per": -11.0
    }
   }
  ]

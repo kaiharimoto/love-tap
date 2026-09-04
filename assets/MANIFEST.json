@@ -3771,7 +3771,7 @@
    }
   },
   "assets/fonts/TeoHand.ttf": {
-   "bytes": 725128,
+   "bytes": 732744,
    "generator": "tools/handwriting/build.py",
    "kind": "font",
    "settings": {
@@ -3857,7 +3857,7 @@
    }
   },
   "assets/fonts/previews/TeoHand.png": {
-   "bytes": 339929,
+   "bytes": 329754,
    "generator": "tools/handwriting/build.py",
    "kind": "preview",
    "settings": {
@@ -5933,7 +5933,7 @@
    }
   },
   "assets/paper/lined_02.webp": {
-   "bytes": 91506,
+   "bytes": 141248,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -5950,10 +5950,10 @@
      "sheen": 0.22,
      "tooth": 1.05
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6020,7 +6020,7 @@
      "stock": "lined",
      "variant": 2
     },
-    "samples": 20,
+    "samples": 48,
     "seed": 849434844,
     "sheet_mm": [
      148.0,
@@ -6032,7 +6032,7 @@
    }
   },
   "assets/paper/lined_03.webp": {
-   "bytes": 89414,
+   "bytes": 142350,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6049,10 +6049,10 @@
      "sheen": 0.22,
      "tooth": 1.05
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6119,7 +6119,7 @@
      "stock": "lined",
      "variant": 3
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 1168533578,
     "sheet_mm": [
      148.0,

@@ -77,7 +77,34 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       if (!mounted) return;
       await ViewerPage.open(context, it);
     };
-    CaptureBus.search = (q) => _land(q);
+    // The artifact of searching has to be a picture of searching: the sheet open, the words in
+    // the field, the facets down the side and the hits under them. Jumping straight to the first
+    // hit in the thread — which is what this did — produced a second picture of the thread.
+    CaptureBus.search = (q) async {
+      final id = await SearchPage.open(context, query: q);
+      if (id != null && mounted) _goTo(id);
+    };
+    CaptureBus.scrollBy = (dy) {
+      // one nudge of the thread's own scroller, which is what a frame of the scroll clip is
+      final ps = _positions.itemPositions.value;
+      if (ps.isEmpty || !_scroll.isAttached) return;
+      final first = ps.reduce((a, b) => a.index <= b.index ? a : b);
+      final height = MediaQuery.sizeOf(context).height;
+      _scroll.jumpTo(index: first.index, alignment: first.itemLeadingEdge - dy / height);
+    };
+    CaptureBus.stageStates = () async {
+      // Real messages down the real path. Two go into the outbox, one of which the sync engine
+      // is told it is pushing and one of which is still waiting its turn; a third is refused the
+      // way the host refuses one. Nothing here draws a state that the app is not in.
+      final scope = AppScope.of(context);
+      final going = await scope.emit('message', {'text': 'ok — leaving now'});
+      scope.spine.markInFlight([going.id]);
+      await scope.emit('message', {'text': 'and the bread, if there is any'});
+      final no = await scope.emit('message', {'text': 'sending you the roster'});
+      scope.spine.markRefused(no.id, 'the other phone is on an older version');
+      if (mounted) setState(() {});
+      await _scrollToAnchor(no.id);
+    };
     CaptureBus.unfoldAll = Folds.openAll;
     CaptureBus.chatReport = () {
       final ps = _positions.itemPositions.value.toList()..sort((a, b) => a.index.compareTo(b.index));
@@ -330,14 +357,6 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     final id = await SearchPage.open(context);
     if (id == null || !mounted) return;
     _goTo(id);
-  }
-
-  /// Run a query without the sheet and stop on the first hit: what the harness does, and what the
-  /// sheet does once a hit is tapped.
-  Future<void> _land(String query) async {
-    final hits = AppScope.of(context).spine.search(query);
-    if (hits.isEmpty || !mounted) return;
-    _goTo(hits.first.event.id);
   }
 
   void _goTo(String id) {

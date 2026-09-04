@@ -78,7 +78,9 @@ class AppScope extends ChangeNotifier {
 
   void _refresh() {
     final all = spine.all;
-    thread = projectThread(all, me: me);
+    thread = projectThread(all, me: me,
+        linkUp: link.state == LinkState.connected, refused: spine.refused,
+        inFlight: spine.inFlight);
     state = projectState(all);
     _tellThePocket(all);
     notifyListeners();

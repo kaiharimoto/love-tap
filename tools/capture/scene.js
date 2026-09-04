@@ -95,6 +95,8 @@ function ensure(p) {
         await hook('__deskSearch', step.arg); break;
       case 'unfold':
         await hook('__deskUnfold'); break;
+      case 'stage':
+        await hook('__deskStage'); break;
       case 'showWords':
         await hook('__deskShowWords'); break;
       case 'step':
@@ -158,6 +160,12 @@ function ensure(p) {
             if (drive.release && i === Math.round(count * (drive.release || 0.7))) {
               await page.mouse.up();   // let go part way, so the rest is the thread's own momentum
             }
+          }
+          if (drive && drive.kind === 'scrollBy') {
+            // The thread's own scroller, a step per frame. Dragging a note is a long press as
+            // far as the app is concerned, which is how a clip of the year scrolling past became
+            // five seconds of a reply sheet sitting open.
+            await page.evaluate((d) => window.__deskScrollBy(d), drive.per || -10);
           }
           const name = path.join(dir, String(i).padStart(4, '0') + '.png');
           await page.screenshot({ path: name, fullPage: false, clip: step.clip });

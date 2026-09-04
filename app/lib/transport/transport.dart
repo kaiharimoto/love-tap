@@ -100,9 +100,19 @@ class TransportStatus {
 
 /// What the host says about each pushed event.
 class Accepted {
-  const Accepted({required this.id, required this.seq});
+  const Accepted({required this.id, required this.seq, this.refused});
+
   final String id;
+
+  /// The seq the host gave it. Meaningless when [refused] is set.
   final int seq;
+
+  /// Why the host would not take it, if it would not. A refusal is per event rather than per
+  /// batch: one malformed event from a device running older code must not stop the rest of the
+  /// outbox, and the person who wrote it has to be able to see that it did not go.
+  final String? refused;
+
+  bool get accepted => refused == null;
 }
 
 class PullResponse {

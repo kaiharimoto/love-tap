@@ -1,7 +1,17 @@
-// The media viewer: full-resolution photo with pinch zoom, video playback.
+// A photograph picked up off the desk.
+//
+// This was a black Material Scaffold with an AppBar — a lightbox, which is what every messenger
+// does and which has nothing to do with the rest of this app. Here the desk stays under it and
+// goes dark, the print comes up off the paper it was taped to, and what was written with it is on
+// a slip underneath in the hand that wrote it. Pinch still zooms; a video still plays and loops.
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../material/hands.dart';
+import '../../material/light.dart';
+import '../../material/marks.dart';
+import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../media/local_uri.dart';
 import '../../scope.dart';
 import '../../spine/projections/thread.dart';
@@ -12,7 +22,12 @@ class ViewerPage extends StatefulWidget {
   final ThreadItem item;
 
   static Future<void> open(BuildContext context, ThreadItem item) =>
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => ViewerPage(item: item), fullscreenDialog: true));
+      Navigator.of(context).push(PageRouteBuilder<void>(
+        opaque: false,
+        barrierColor: const Color(0xCC0E0A06),
+        transitionDuration: const Duration(milliseconds: 200),
+        pageBuilder: (_, __, ___) => ViewerPage(item: item),
+      ));
 
   @override
   State<ViewerPage> createState() => _ViewerPageState();
@@ -70,15 +85,73 @@ class _ViewerPageState extends State<ViewerPage> {
     } else {
       body = const SizedBox.shrink();
     }
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(backgroundColor: Colors.black, foregroundColor: Colors.white, title: Text(widget.item.text ?? '')),
-      body: GestureDetector(
-        onTap: () {
-          final v = _video;
-          if (v != null) v.value.isPlaying ? v.pause() : v.play();
-        },
-        child: body,
+    final dusk = Light.of(context) == LightCondition.dusk;
+    final tilt = ((widget.item.id.hashCode % 21) - 10) / 420.0;
+    return GestureDetector(
+      onTap: () {
+        final v = _video;
+        if (v != null) {
+          v.value.isPlaying ? v.pause() : v.play();
+        } else {
+          Navigator.of(context).maybePop();
+        }
+      },
+      child: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(),
+            // the print itself, lifted: a real drop under it because it is being held up off
+            // the desk rather than lying on it
+            Flexible(
+              flex: 12,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Transform.rotate(
+                  angle: tilt,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Shadow.warm.withValues(alpha: dusk ? 0.68 : 0.55),
+                          blurRadius: 34,
+                          spreadRadius: 2,
+                          offset: const Offset(9, 16),
+                        ),
+                      ],
+                    ),
+                    child: body,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+            if ((widget.item.text ?? '').isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 26),
+                child: Slip(
+                  id: 'viewer_${widget.item.id}',
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+                  child: Written(widget.item.text!, by: widget.item.author, size: 18),
+                ),
+              ),
+            const Spacer(),
+            GestureDetector(
+              onTap: () => Navigator.of(context).maybePop(),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 18),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Mark.turnback(size: 20, colour: Pen.onWood, seed: 7),
+                    const SizedBox(width: 8),
+                    Stamped('put it back', size: 10, colour: Pen.onWood),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

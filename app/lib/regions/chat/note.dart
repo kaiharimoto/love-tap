@@ -11,6 +11,7 @@ import '../../feelings/registry.dart';
 import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/library.dart';
+import '../../material/marks.dart';
 import '../../material/objects.dart';
 import '../../material/fold.dart';
 import '../../material/paper.dart';
@@ -188,18 +189,84 @@ class _Margin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bits = <String>[
+    // Each state has its own mark as well as its own word. Five grey lowercase words at the same
+    // size in the same place is not five states: a message that failed to send looked exactly
+    // like one that had been read, which is the kind of thing that sends somebody back to
+    // Instagram on the first day.
+    final words = <String>[
       timeLabel(item.ts),
       if (item.writtenEarlier) S.writtenEarlier,
       if (item.edited) S.edited,
-      if (mine)
-        switch (item.delivery) {
-          Delivery.waiting => S.waitingToSend,
-          Delivery.sent => S.sent,
-          Delivery.read => S.read,
-        },
     ];
-    return Opacity(opacity: 0.75, child: Text(bits.join(' · '), style: Hands.margin(size: 12)));
+    return Opacity(
+      opacity: 0.78,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(words.join(' · '), style: Hands.margin(size: 12)),
+          if (item.edited)
+            const Padding(padding: EdgeInsets.only(left: 5), child: _EditCaret()),
+          if (mine) ...[
+            const SizedBox(width: 7),
+            _DeliveryMark(delivery: item.delivery, id: item.id),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+/// The caret a person puts in when they change a word.
+class _EditCaret extends StatelessWidget {
+  const _EditCaret();
+  @override
+  Widget build(BuildContext context) => Mark.turnback(size: 11, colour: Pen.margin, seed: 3);
+}
+
+/// What happened to something you wrote, as a mark rather than a word alone.
+///
+///   queued   a dash, unfinished: it has not left
+///   sending  the same dash with a line running off it
+///   sent     one tick
+///   read     one tick and the word, in the ink of the person who read it
+///   refused  a cross, in red, and the reason on the paper
+class _DeliveryMark extends StatelessWidget {
+  const _DeliveryMark({required this.delivery, required this.id});
+  final Delivery delivery;
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    final seed = id.hashCode & 0x7fff;
+    return switch (delivery) {
+      Delivery.queued => Row(mainAxisSize: MainAxisSize.min, children: [
+          Text(S.waitingToSend, style: Hands.margin(size: 12)),
+          const SizedBox(width: 4),
+          Mark.clip(size: 12, colour: Pen.margin, seed: seed),
+        ]),
+      Delivery.sending => Row(mainAxisSize: MainAxisSize.min, children: [
+          Text(S.sending, style: Hands.margin(size: 12)),
+          const SizedBox(width: 4),
+          Mark.ticks(size: 12, colour: Pen.margin, seed: seed),
+        ]),
+      Delivery.sent => Row(mainAxisSize: MainAxisSize.min, children: [
+          Text(S.sent, style: Hands.margin(size: 12)),
+          const SizedBox(width: 4),
+          Mark.tick(size: 12, colour: Pen.margin, seed: seed),
+        ]),
+      Delivery.read => Row(mainAxisSize: MainAxisSize.min, children: [
+          Text(S.read, style: Hands.margin(size: 12).copyWith(color: Pen.ballpoint)),
+          const SizedBox(width: 4),
+          Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed),
+          Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed + 1),
+        ]),
+      Delivery.refused => Row(mainAxisSize: MainAxisSize.min, children: [
+          Text(S.refused, style: Hands.margin(size: 12).copyWith(color: Pen.red)),
+          const SizedBox(width: 4),
+          Mark.cross(size: 12, colour: Pen.red, seed: seed),
+        ]),
+    };
   }
 }
 

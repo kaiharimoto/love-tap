@@ -30,6 +30,16 @@ class CaptureBus {
   /// Chat: run a search and land on the first hit.
   static Future<void> Function(String query)? search;
 
+  /// Chat: move the thread by this many logical pixels, once, right now. One of these per frame
+  /// is a scroll; a pointer drag down the middle of the desk is a long press on a note.
+  static void Function(double dy)? scrollBy;
+
+  /// Chat: put one of everything on the desk — a message on its way, one waiting for the link,
+  /// one the host refused — beside the sent, read, edited, deleted, replied and reacted-to rows
+  /// the seeded year already carries. The evidence for the messenger's states has to be a
+  /// picture of the app in them, not a drawing of them.
+  static Future<void> Function()? stageStates;
+
   /// Chat: which rows are on screen, and where the thread is sitting.
   static Report Function()? chatReport;
 
@@ -49,6 +59,8 @@ class CaptureBus {
     openViewer = null;
     search = null;
     chatReport = null;
+    scrollBy = null;
+    stageStates = null;
     unfoldAll = null;
     showWords = null;
   }

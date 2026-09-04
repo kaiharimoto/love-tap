@@ -19,6 +19,7 @@ class SyncEngine {
   Duration _backoff = const Duration(milliseconds: 500);
   int _rounds = 0;
   int _pushed = 0;
+  int _refused = 0;
   int _pulled = 0;
   int _blobsFetched = 0;
   StreamSubscription<SpineChange>? _sub;
@@ -27,6 +28,7 @@ class SyncEngine {
   bool get running => _running;
   int get rounds => _rounds;
   int get pushed => _pushed;
+  int get refused => _refused;
   int get pulled => _pulled;
 
   void _log(String s) => onLog?.call('[sync ${transport.name} ${transport.role.name}] $s');
@@ -87,12 +89,26 @@ class SyncEngine {
           }
         }
       }
-      final accepted = await transport.push(batch);
+      spine.markInFlight([for (final e in batch) e.id]);
+      final List<Accepted> accepted;
+      try {
+        accepted = await transport.push(batch);
+      } finally {
+        spine.markInFlight([for (final e in batch) e.id], on: false);
+      }
       final byId = {for (final e in batch) e.id: e};
       final assigned = <Event>[];
       for (final a in accepted) {
         final e = byId[a.id];
-        if (e != null) assigned.add(e.withSeq(a.seq));
+        if (e == null) continue;
+        if (a.accepted) {
+          assigned.add(e.withSeq(a.seq));
+        } else {
+          // The host will not take this one. It stays in the outbox, marked, where the person
+          // who wrote it can see that it did not go — rather than sitting there looking sent.
+          spine.markRefused(a.id, a.refused!);
+          _refused++;
+        }
       }
       if (assigned.isEmpty) break;
       await spine.applyFromHost(assigned);
@@ -134,6 +150,7 @@ class SyncEngine {
         'role': transport.role.name,
         'rounds': _rounds,
         'pushed': _pushed,
+        'refused': _refused,
         'pulled': _pulled,
         'blobs_fetched': _blobsFetched,
         'pending': spine.pending.length,

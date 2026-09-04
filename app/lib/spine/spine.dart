@@ -42,6 +42,15 @@ class Spine {
   final UlidFactory _ulids;
   final List<Event> _ordered = []; // seq order
   final List<Event> _pending = []; // outbox: minted here, no seq yet
+
+  /// Ids the host would not take, and why. Nothing is deleted from the outbox when it is
+  /// refused: it stays where its author can see it, marked, until they deal with it.
+  final Map<String, String> _refused = {};
+
+  /// Ids the sync engine has a push in flight for. Whether something is on its way or still
+  /// waiting for its turn is a fact about the event, not about the link — two messages written a
+  /// second apart can be in different states, and the thread should say so.
+  final Set<String> _inFlight = {};
   final Map<String, Event> _byId = {};
   final SearchIndex _search = SearchIndex();
   final StreamController<SpineChange> _changes = StreamController.broadcast();
@@ -86,6 +95,27 @@ class Spine {
 
   /// Every accepted event in host order.
   List<Event> get ordered => List.unmodifiable(_ordered);
+
+  /// Ids the host refused, with the reason. Read by the thread to mark the row.
+  Map<String, String> get refused => Map.unmodifiable(_refused);
+
+  Set<String> get inFlight => Set.unmodifiable(_inFlight);
+
+  /// The sync engine says which of the outbox it is pushing right now.
+  void markInFlight(Iterable<String> ids, {bool on = true}) {
+    if (on) {
+      _inFlight.addAll(ids);
+    } else {
+      _inFlight.removeAll(ids);
+    }
+    _changes.add(const SpineChange(added: [], assigned: []));
+  }
+
+  /// Records a refusal. The event stays in the outbox.
+  void markRefused(String id, String why) {
+    _refused[id] = why;
+    _changes.add(const SpineChange(added: [], assigned: []));
+  }
 
   /// Events minted here that the host has not accepted yet (the outbox).
   List<Event> get pending => List.unmodifiable(_pending);

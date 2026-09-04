@@ -31,7 +31,11 @@ class S {
   static const recording = 'recording…';
   static const search = 'search';
   static const searchHint = 'anything, any time';
+  static const sending = 'going';
+  static const refused = 'it would not go';
   static const searchNothing = 'nothing with that in it.';
+  static const searchAside = 'a year of it, and every kind of thing in it.';
+  static const searchNoneAside = 'try fewer words, or a different month.';
   static const emptyChat = "first one's yours.";
   static const emptyChatAside = 'whatever it is. it only goes to one person.';
   static const replyingTo = 'answering';

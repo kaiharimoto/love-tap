@@ -11,6 +11,7 @@ import 'package:desk/modules/registry.dart';
 import 'package:desk/setup/checklist.dart';
 import 'package:desk/spine/event.dart';
 import 'package:desk/spine/projections/state.dart';
+import 'package:desk/spine/projections/thread.dart';
 import 'package:desk/spine/types.dart';
 import 'package:desk/transport/transport.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -185,5 +186,36 @@ void main() {
     expect(moved, greaterThan(0), reason: 'the surface moves at all');
     expect(moved * 8, lessThan(total), reason: 'and it is a rhythm, not one long push');
     expect(amplitudeAt(segments, total + 50), 0.0, reason: 'and it stops when the pattern does');
+  });
+
+  test('a message that did not go looks nothing like one that was read', () {
+    // Five delivery states used to be three, two of which were the same grey lowercase word in
+    // the same place — so a message that failed to send was indistinguishable from one the other
+    // person had read. That is the row-01 disqualifier in one pixel.
+    final states = Delivery.values.toSet();
+    expect(states.length, 5);
+    expect(states.containsAll({Delivery.queued, Delivery.sending, Delivery.sent,
+      Delivery.read, Delivery.refused}), isTrue);
+
+    Event mine(String id, {int? seq}) => Event(
+          id: id, seq: seq, author: Person.teo, device: DeviceKind.pwa,
+          ts: DateTime.utc(2026, 9, 3, 17).millisecondsSinceEpoch,
+          type: 'message', payload: const {'text': 'ok'},
+        );
+    final log = [
+      mine('a', seq: 1), mine('b', seq: 2), mine('c'), mine('d'), mine('e'),
+      Event(id: 'r', seq: 3, author: Person.noor, device: DeviceKind.android,
+          ts: DateTime.utc(2026, 9, 3, 17, 1).millisecondsSinceEpoch,
+          type: 'read_marker', payload: const {'upto_seq': 1}),
+    ];
+    final t = projectThread(log, me: Person.teo, linkUp: true,
+        refused: {'e': 'the other phone is on an older version'}, inFlight: {'c'});
+    final by = {for (final i in t.items) i.id: i.delivery};
+    expect(by['a'], Delivery.read);
+    expect(by['b'], Delivery.sent);
+    expect(by['c'], Delivery.sending);
+    expect(by['e'], Delivery.refused);
+    final offline = projectThread(log, me: Person.teo, linkUp: false);
+    expect(offline.items.firstWhere((i) => i.id == 'd').delivery, Delivery.queued);
   });
 }
