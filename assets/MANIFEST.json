@@ -10688,6 +10688,60 @@
     "yellowing": 0.04
    }
   },
+  "assets/paper/sticky_pink_01_dusk.webp": {
+   "bytes": 337680,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "dusk",
+    "format": "WEBP",
+    "light": "dusk",
+    "look": {
+     "fibre": 1200.0,
+     "rgb": [
+      0.94,
+      0.74,
+      0.74
+     ],
+     "sheen": 0.26,
+     "tooth": 0.75
+    },
+    "px_per_mm": 23.68,
+    "resolution": [
+     1800,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "band_mm": 13.26,
+       "colour": "#000000",
+       "density": 0.028,
+       "edge_mm": 1.6,
+       "kind": "adhesive_band"
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3443919343,
+     "sheet_mm": [
+      76.0,
+      76.0
+     ],
+     "stock": "sticky_pink",
+     "variant": 1
+    },
+    "samples": 48,
+    "seed": 3443919343,
+    "sheet_mm": [
+     76.0,
+     76.0
+    ],
+    "stock": "sticky_pink",
+    "variant": 1,
+    "yellowing": 0.04
+   }
+  },
   "assets/paper/sticky_pink_02.webp": {
    "bytes": 176472,
    "generator": "blender/paper/stocks.py",
@@ -10858,6 +10912,60 @@
     "condition": "day",
     "format": "WEBP",
     "light": "day",
+    "look": {
+     "fibre": 1200.0,
+     "rgb": [
+      0.94,
+      0.86,
+      0.52
+     ],
+     "sheen": 0.26,
+     "tooth": 0.75
+    },
+    "px_per_mm": 23.68,
+    "resolution": [
+     1800,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "band_mm": 14.73,
+       "colour": "#000000",
+       "density": 0.028,
+       "edge_mm": 1.6,
+       "kind": "adhesive_band"
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 2740847969,
+     "sheet_mm": [
+      76.0,
+      76.0
+     ],
+     "stock": "sticky_yellow",
+     "variant": 2
+    },
+    "samples": 48,
+    "seed": 2740847969,
+    "sheet_mm": [
+     76.0,
+     76.0
+    ],
+    "stock": "sticky_yellow",
+    "variant": 2,
+    "yellowing": 0.12
+   }
+  },
+  "assets/paper/sticky_yellow_02_dusk.webp": {
+   "bytes": 330794,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "dusk",
+    "format": "WEBP",
+    "light": "dusk",
     "look": {
      "fibre": 1200.0,
      "rgb": [
