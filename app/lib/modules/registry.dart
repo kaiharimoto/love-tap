@@ -4,6 +4,7 @@ import 'calendar/calendar_module.dart';
 import 'dates/dates_module.dart';
 import 'module.dart';
 import 'rituals/rituals_module.dart';
+import 'shelf/shelf_module.dart';
 import 'todos/todos_module.dart';
 
 const List<Module> kModules = [
@@ -11,4 +12,5 @@ const List<Module> kModules = [
   TodosModule(),
   CalendarModule(),
   RitualsModule(),
+  ShelfModule(),
 ];

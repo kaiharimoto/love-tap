@@ -12,9 +12,34 @@ Exit 1 on any error; warnings are printed but do not fail.
 import glob, json, os, re, sys, collections, datetime
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-TYPES = {"message","photo","video","voice_note","reaction","message_edit","message_delete","read_marker",
-         "feeling","state_declared","state_passive","date_event","todo_event","milestone","ritual_kept",
-         "ping","feeling_authored"}
+
+
+def _registry():
+    """The event types and their required fields, read out of app/lib/spine/types.dart.
+
+    This file used to keep its own copy of both, which made it the third place a new type had to be
+    added to and the second place the required fields were written down. The registry is the one
+    that the app, the docs test and the payload validation all already agree on, so it is the one
+    this reads.
+    """
+    src = open(os.path.join(ROOT, "app", "lib", "spine", "types.dart"), encoding="utf-8").read()
+    types, req = set(), {}
+    for block in re.finditer(r"EventTypeSpec\((.*?)\n  \)", src, re.S):
+        body = block.group(1)
+        m = re.search(r"id:\s*'([a-z_]+)'", body)
+        if not m:
+            continue
+        tid = m.group(1)
+        types.add(tid)
+        fields = re.search(r"required:\s*\[(.*?)\]", body, re.S)
+        req[tid] = re.findall(r"'([a-z_0-9]+)'", fields.group(1)) if fields else []
+    if len(types) < 14:
+        raise SystemExit("validate.py: could not read the registry out of app/lib/spine/types.dart")
+    return types, req
+
+
+TYPES, REGISTRY_REQ = _registry()
+
 # Neither of these is typed by a person, so neither may be hand-written into a month: read
 # markers and passive signals are derived from the months by seed/tools/finish.py and carry
 # "gen": "finish" to say so. A line of either type without that mark is somebody inventing a
@@ -31,6 +56,16 @@ REQ = {
  "ping": ["schedule_id","text","fires_at"],
  "feeling_authored": ["feeling_id","name","family","colour","object_asset","haptic","sound","retired"],
 }
+# A month names things the way a month can name them, and the loader turns those into what the
+# registry asks for: the three media types name a seed id (`photo`, `video`, `voice`) where the
+# registry names the blob that will stand in its place, and a read marker names the key of the line
+# it was read up to, because a month has no sequence numbers in it — the host assigns those. Those
+# four keep the entry written above. Every other type takes its required fields straight from the
+# registry, so a type added there is checked here without this file being touched.
+REQ["read_marker"] = ["upto_key"]
+for _t, _fields in REGISTRY_REQ.items():
+    if _t not in REQ:
+        REQ[_t] = _fields
 SIGNALS = {"mood","status_line","availability","need","energy","place"}
 MOODS = {"bright","calm","tender","restless","low","flat"}
 AVAIL = {"open","heads_down","asleep"}

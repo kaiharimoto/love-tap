@@ -812,6 +812,7 @@
 {"key": "2026-01-19-9142", "ts": "2026-01-19T19:24:50+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-01-19-0013"}, "gen": "finish"}
 {"key": "2026-01-19-0014", "ts": "2026-01-19T19:25:00+00:00", "author": "teo", "type": "state_declared", "payload": {"signal": "availability", "value": "heads_down"}}
 {"key": "2026-01-19-0015", "ts": "2026-01-19T19:26:31+00:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "here", "intensity": 0.6}}
+{"key": "2026-01-19-8800", "ts": "2026-01-19T20:31:00+01:00", "author": "teo", "type": "passed_on", "payload": {"item_id": "shelf_ferry", "action": "passed", "title": "the one on the ferry", "kind": "film"}}
 {"key": "2026-01-19-9713", "ts": "2026-01-19T19:40:47+00:00", "author": "teo", "type": "state_passive", "payload": {"signal": "ringer", "value": "normal"}, "gen": "finish"}
 {"key": "2026-01-19-9143", "ts": "2026-01-19T20:06:28+00:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-01-19-0015"}, "gen": "finish"}
 {"key": "2026-01-19-0016", "ts": "2026-01-19T20:10:47+00:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "thinking_of_you", "intensity": 0.8}}

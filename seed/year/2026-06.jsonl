@@ -420,6 +420,7 @@
 {"key": "2026-06-13-9557", "ts": "2026-06-13T23:32:19+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "last_active", "value": 0}, "gen": "finish"}
 {"key": "2026-06-13-9549", "ts": "2026-06-13T23:40:39+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "charging", "value": true}, "gen": "finish"}
 {"key": "2026-06-13-0014", "ts": "2026-06-13T23:50:03+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "hold", "intensity": 0.6}}
+{"key": "2026-06-14-8800", "ts": "2026-06-14T07:20:00+01:00", "author": "noor", "type": "passed_on", "payload": {"item_id": "shelf_kitchen", "action": "passed", "title": "the kitchen programme", "kind": "film"}}
 {"key": "2026-06-14-0001", "ts": "2026-06-14T09:00:00+01:00", "author": "noor", "type": "ritual_kept", "payload": {"ritual_id": "ritual_sunday_call", "title": "sunday 9 call", "kept_at": "2026-06-14T09:00:00+01:00", "note": "he was in the room. we did it anyway, out loud, at nine"}}
 {"key": "2026-06-14-9563", "ts": "2026-06-14T09:04:37+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "local_hour", "value": 9}, "gen": "finish"}
 {"key": "2026-06-14-9559", "ts": "2026-06-14T09:20:54+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "charging", "value": false}, "gen": "finish"}

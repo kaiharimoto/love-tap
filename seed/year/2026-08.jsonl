@@ -1099,6 +1099,7 @@
 {"key": "2026-08-30-0021", "ts": "2026-08-30T18:20:43+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "place", "value": "out"}}
 {"key": "2026-08-30-9822", "ts": "2026-08-30T19:40:16+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "battery", "value": 56}, "gen": "finish"}
 {"key": "2026-08-30-0022", "ts": "2026-08-30T22:40:09+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "mood", "value": "bright"}}
+{"key": "2026-08-30-8800", "ts": "2026-08-30T22:47:00+01:00", "author": "teo", "type": "passed_on", "payload": {"item_id": "shelf_stopped", "action": "passed", "title": "the one you said you stopped", "kind": "book"}}
 {"key": "2026-08-30-9187", "ts": "2026-08-30T23:20:07+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-08-30-0020"}, "gen": "finish"}
 {"key": "2026-08-30-0023", "ts": "2026-08-30T23:20:36+01:00", "author": "teo", "type": "message", "payload": {"text": "Home. Tomorrow is the last day and I am not going to say that out loud again after this one."}}
 {"key": "2026-08-30-9188", "ts": "2026-08-30T23:23:12+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-08-30-0023"}, "gen": "finish"}

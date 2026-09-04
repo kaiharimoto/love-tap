@@ -45,12 +45,13 @@ cursor acknowledgement, blob transfer progress.
 | 13 | `todo_event` | `todo_id`, `action` (added/assigned/done/reopened/removed), `text`, `assignee?` | a checklist line torn from a list, ticked in the author's ink when done | quiet; interruptive when assigned to you | text |
 | 14 | `milestone` | `milestone_id`, `kind` (anniversary/first/custom), `title`, `date`, `yearly` | a stamped card | on the day, interruptive, via a `ping` scheduled by a person | title |
 | 15 | `ritual_kept` | `ritual_id`, `title`, `kept_at`, `note?` | a small tally mark in the margin; never a count, never a run | none | title, note |
-| 16 | `ping` | `schedule_id`, `text`, `feeling_id?`, `fires_at`, `repeat?` | a folded note with a clock scribble, unfolding when it fires | at `fires_at`, interruptive, honouring quiet hours | text |
-| 17 | `feeling_authored` | `feeling_id`, `name`, `family`, `colour`, `object_asset`, `haptic`, `sound`, `retired` | a card announcing a new feeling in the author's hand | quiet | name |
+| 16 | `passed_on` | `item_id`, `action` (passed/started/finished), `title`, `kind` (book/film/record), `note?` | an index card in the hand of whoever passed it on, with what the other one wrote underneath | quiet | title, note |
+| 17 | `ping` | `schedule_id`, `text`, `feeling_id?`, `fires_at`, `repeat?` | a folded note with a clock scribble, unfolding when it fires | at `fires_at`, interruptive, honouring quiet hours | text |
+| 18 | `feeling_authored` | `feeling_id`, `name`, `family`, `colour`, `object_asset`, `haptic`, `sound`, `retired` | a card announcing a new feeling in the author's hand | quiet | name |
 
-Seventeen types. The floor is fourteen.
+Eighteen types. The floor is fourteen.
 
-## Adding an eighteenth
+## Adding a nineteenth
 
 1. Add one entry to `kEventTypes` in `app/lib/spine/types.dart` (id, payload codec, search fields,
    notification treatment).

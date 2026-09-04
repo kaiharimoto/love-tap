@@ -146,6 +146,7 @@
 {"key": "2026-02-03-9021", "ts": "2026-02-03T19:23:13+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-02-03-0016"}, "gen": "finish"}
 {"key": "2026-02-03-0018", "ts": "2026-02-03T19:25:00+00:00", "author": "teo", "type": "state_declared", "payload": {"signal": "availability", "value": "heads_down"}}
 {"key": "2026-02-03-0019", "ts": "2026-02-03T19:27:14+00:00", "author": "teo", "type": "message", "payload": {"text": "In. Four bays and the corridor tonight."}}
+{"key": "2026-02-03-8800", "ts": "2026-02-03T21:58:00+01:00", "author": "noor", "type": "passed_on", "payload": {"item_id": "shelf_ferry", "action": "started", "title": "the one on the ferry", "kind": "film"}}
 {"key": "2026-02-03-9022", "ts": "2026-02-03T21:14:25+00:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-02-03-0019"}, "gen": "finish"}
 {"key": "2026-02-03-0020", "ts": "2026-02-03T21:15:40+00:00", "author": "noor", "type": "message", "payload": {"text": "the flat is quiet in a way it was not quiet in january and i cannot work out what changed"}}
 {"key": "2026-02-03-0021", "ts": "2026-02-03T22:40:06+00:00", "author": "noor", "type": "state_declared", "payload": {"signal": "energy", "value": 2}}
@@ -213,6 +214,7 @@
 {"key": "2026-02-04-9580", "ts": "2026-02-04T20:45:22+00:00", "author": "teo", "type": "state_passive", "payload": {"signal": "network", "value": "wifi"}, "gen": "finish"}
 {"key": "2026-02-04-9581", "ts": "2026-02-04T20:47:40+00:00", "author": "teo", "type": "state_passive", "payload": {"signal": "moving", "value": "still"}, "gen": "finish"}
 {"key": "2026-02-04-9582", "ts": "2026-02-04T21:05:04+00:00", "author": "teo", "type": "state_passive", "payload": {"signal": "ringer", "value": "silent"}, "gen": "finish"}
+{"key": "2026-02-04-8800", "ts": "2026-02-04T22:16:00+01:00", "author": "noor", "type": "passed_on", "payload": {"item_id": "shelf_ferry", "action": "finished", "title": "the one on the ferry", "kind": "film", "note": "the long shot of the water. that is the whole thing, isn't it"}}
 {"key": "2026-02-04-0023", "ts": "2026-02-04T22:31:09+00:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "thinking_of_you", "intensity": 0.55}}
 {"key": "2026-02-04-9565", "ts": "2026-02-04T23:15:10+00:00", "author": "noor", "type": "state_passive", "payload": {"signal": "charging", "value": true}, "gen": "finish"}
 {"key": "2026-02-04-0024", "ts": "2026-02-04T23:20:45+00:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "goodnight", "intensity": 0.5}}

@@ -1117,6 +1117,7 @@
 {"key": "2026-05-27-9807", "ts": "2026-05-27T21:05:24+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "ringer", "value": "silent"}, "gen": "finish"}
 {"key": "2026-05-27-9185", "ts": "2026-05-27T21:18:56+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-05-27-0015"}, "gen": "finish"}
 {"key": "2026-05-27-0017", "ts": "2026-05-27T21:20:59+01:00", "author": "noor", "type": "voice_note", "payload": {"voice": "2026-05_noor_halfterm_yard", "duration_ms": 34000}}
+{"key": "2026-05-27-8800", "ts": "2026-05-27T22:03:00+01:00", "author": "teo", "type": "passed_on", "payload": {"item_id": "shelf_hospital", "action": "passed", "title": "the hospital one", "kind": "book"}}
 {"key": "2026-05-27-0018", "ts": "2026-05-27T22:40:26+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "here", "intensity": 0.5}}
 {"key": "2026-05-27-9790", "ts": "2026-05-27T23:40:36+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "charging", "value": true}, "gen": "finish"}
 {"key": "2026-05-28-9186", "ts": "2026-05-28T03:07:31+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-05-27-0018"}, "gen": "finish"}

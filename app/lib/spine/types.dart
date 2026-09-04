@@ -216,6 +216,14 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'tally_mark',
   ),
   EventTypeSpec(
+    id: 'passed_on',
+    required: ['item_id', 'action', 'title', 'kind'],
+    optional: ['note'],
+    notify: Notify.quiet,
+    search: SearchSpec(textFields: ['title', 'note'], facets: ['us', 'shelf']),
+    renderer: 'shelf_card',
+  ),
+  EventTypeSpec(
     id: 'ping',
     required: ['schedule_id', 'text', 'fires_at'],
     optional: ['feeling_id', 'repeat'],

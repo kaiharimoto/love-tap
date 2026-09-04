@@ -116,6 +116,7 @@ const Map<String, ThreadBody> kThreadRenderers = {
   'list_line': marginSentence,
   'stamped_card': marginSentence,
   'tally_mark': marginSentence,
+  'shelf_card': marginSentence,
   'folded_clock': marginSentence,
   'new_feeling_card': marginSentence,
 };
@@ -162,6 +163,12 @@ String summaryOf(Event e, {Person? me}) {
       return '${p['title']} · ${_when(p['date'])}';
     case 'ritual_kept':
       return '${p['title']} · kept';
+    case 'passed_on':
+      return switch (p['action']) {
+        'started' => '$who started ${p['title']}',
+        'finished' => '$who finished ${p['title']}',
+        _ => '$who passed on ${p['title']}',
+      };
     case 'ping':
       return '${p['text']} · ${_when(p['fires_at'])}';
     case 'feeling_authored':
