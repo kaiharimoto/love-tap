@@ -10,63 +10,135 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4453
+   "ms": 4488
   },
   {
    "do": "wait",
-   "ms": 2003
-  },
-  {
-   "do": "frames",
-   "ms": 59763
+   "ms": 1802
   },
   {
    "do": "goTo",
-   "ms": 1523
+   "ms": 2964
   },
   {
    "do": "wait",
-   "ms": 1304
+   "ms": 1301
   },
   {
    "do": "openCorner",
-   "ms": 1956
+   "ms": 1409
   },
   {
    "do": "frames",
-   "ms": 85669
+   "ms": 39713
   },
   {
    "do": "sendFeeling",
-   "ms": 5436
+   "ms": 2958
   },
   {
    "do": "frames",
-   "ms": 201472
+   "ms": 102034
+  },
+  {
+   "do": "sendFeeling",
+   "ms": 2516
+  },
+  {
+   "do": "frames",
+   "ms": 162727
+  },
+  {
+   "do": "openCorner",
+   "ms": 1386
+  },
+  {
+   "do": "frames",
+   "ms": 37614
+  },
+  {
+   "do": "report",
+   "ms": 447
   }
  ],
  "shots": [
   {
-   "frames": 60,
+   "frames": 32,
    "dir": "evidence/frames/15_authored_feeling",
-   "ms": 16,
+   "ms": 8,
    "drive": null
   },
   {
-   "frames": 70,
-   "dir": "evidence/frames/15_authored_feeling_b",
-   "ms": 16,
+   "frames": 94,
+   "dir": "evidence/frames/15_authored_feeling",
+   "ms": 8,
    "drive": null
   },
   {
-   "frames": 180,
-   "dir": "evidence/frames/15_authored_feeling_c",
-   "ms": 16,
+   "frames": 150,
+   "dir": "evidence/frames/15_authored_feeling",
+   "ms": 8,
+   "drive": null
+  },
+  {
+   "frames": 32,
+   "dir": "evidence/frames/15_authored_feeling",
+   "ms": 8,
    "drive": null
   }
  ],
- "reports": [],
- "cold_ms": 12550,
+ "reports": [
+  {
+   "region": 1,
+   "visible": [
+    "0001M4ZQQ0H0PPVTKMMQEE268D",
+    "0001M59VY0YA13H9M86HTA6XNP",
+    "00018Z4XY03RGV7J6E668B69KH",
+    "00018Z4XY03RGV7J6E668B69KJ"
+   ],
+   "tears": {
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_010",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_032",
+    "00018Z4XY03RGV7J6E668B69KH": "tear_052",
+    "00018Z4XY03RGV7J6E668B69KJ": "tear_014"
+   },
+   "stocks": {
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
+    "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
+    "00018Z4XY03RGV7J6E668B69KH": "looseleaf_01",
+    "00018Z4XY03RGV7J6E668B69KJ": "looseleaf_01"
+   },
+   "scroll": {
+    "first": 8372,
+    "last": 8375,
+    "of": 8376
+   },
+   "now": "2026-08-30T09:14:00.000Z",
+   "driven_ms": 2752,
+   "seed": 20260903,
+   "events": 14051,
+   "transport": "local",
+   "link": "connecting",
+   "me": "teo",
+   "masks_in_pool": 56,
+   "writable_masks": 47,
+   "light": "day",
+   "has_dusk_paper": false,
+   "paper_stocks": 27,
+   "setup_showing": false,
+   "fold": {
+    "sequence": "unfold_thirds",
+    "length": 240,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
+   },
+   "at": "15_authored_feeling"
+  }
+ ],
+ "cold_ms": 13765,
  "problems": [],
  "ok": true
 }

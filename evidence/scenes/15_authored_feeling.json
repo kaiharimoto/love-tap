@@ -14,13 +14,7 @@
   },
   {
    "do": "wait",
-   "ms": 1600
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 60,
-   "ms": 16
+   "ms": 1400
   },
   {
    "do": "goTo",
@@ -32,13 +26,14 @@
   },
   {
    "do": "openCorner",
-   "arg": true
+   "arg": true,
+   "after": 0
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling_b",
-   "count": 70,
-   "ms": 16
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 32,
+   "ms": 8
   },
   {
    "do": "sendFeeling",
@@ -48,9 +43,40 @@
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling_c",
-   "count": 180,
-   "ms": 16
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 94,
+   "from": 32,
+   "ms": 8
+  },
+  {
+   "do": "sendFeeling",
+   "feeling": "soup",
+   "intensity": 0.55,
+   "after": 0
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 150,
+   "from": 126,
+   "ms": 8
+  },
+  {
+   "do": "openCorner",
+   "arg": false,
+   "after": 0
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 32,
+   "from": 276,
+   "ms": 8
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/15_authored_feeling.report.json",
+   "at": "15_authored_feeling"
   }
  ]
 }
