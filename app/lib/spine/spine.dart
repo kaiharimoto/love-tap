@@ -251,6 +251,14 @@ class Spine {
     final added = <Event>[];
     final assigned = <Event>[];
     for (final e in incoming) {
+      // A spine row is keyed by a ULID, and that was true only because everything that made one
+      // used the factory. It was not checked, so an event built by hand with the id
+      // `stage_read_marker` was accepted by the memory store, refused by the store on a phone, and
+      // the difference only showed up as a scene throwing an hour into a capture. The invariant
+      // belongs here, where both stores are behind it.
+      if (!UlidFactory.isValid(e.id)) {
+        throw ArgumentError('event id ${e.id} is not a ULID');
+      }
       if (e.seq == null) continue;
       final known = _byId[e.id];
       if (known != null) {

@@ -8,6 +8,7 @@
 //
 // Nothing here can see a Navigator, so this reads the source: a handle registered on CaptureBus
 // may not await a push.
+import 'dart:async';
 import 'dart:io';
 
 import 'package:desk/capture/bus.dart';
@@ -108,10 +109,18 @@ void _everyHandleRuns() {
       'unfoldAll': () async => CaptureBus.unfoldAll!(),
     };
     for (final e in handles.entries) {
+      // Started, then pumped, then awaited. Every one of these ends in a delay — the handles wait
+      // for the app to settle before they answer — and inside a widget test a delay only elapses
+      // when the test advances the clock. Awaiting first is a deadlock: the future is waiting for
+      // a pump that is waiting for the future.
+      final running = e.value();
+      var settled = false;
+      unawaited(running.then((_) => settled = true, onError: (Object _) => settled = true));
+      for (var i = 0; i < 12 && !settled; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
       try {
-        await e.value();
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 200));
+        await running;
       } catch (err) {
         fail('${e.key} threw: $err');
       }
