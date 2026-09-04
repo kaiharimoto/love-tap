@@ -17,50 +17,81 @@ import '../flags.dart';
 import 'library.dart';
 import 'motion.dart';
 
-/// The frames of one sequence, decoded once and shared.
+/// The frames of one sequence, decoded a window at a time.
 ///
-/// A whole sequence at display size is a few tens of megabytes decoded, which is inside WebKit's
-/// texture budget for one sequence at a time but not for four, so only the sequence being played
-/// is held and the previous one is dropped when a new one is asked for.
+/// A hundred and fifty frames at 460 by 405 is a hundred and twelve megabytes of decoded texture,
+/// which is more than WebKit will hold for one animation on a phone. So the sequence is never all
+/// in memory: a window of frames ahead of the playhead is decoded, and frames well behind it are
+/// dropped. The window is sized so that decoding keeps ahead of sixty frames a second on the
+/// slowest thing this has to run on, and so that the whole of it stays inside about a quarter of
+/// the budget one sequence is allowed.
 class FoldFrames {
-  FoldFrames._(this.seq, this.frames);
+  FoldFrames._(this.seq, this.length);
+
   final String seq;
-  final List<ui.Image> frames;
+  final int length;
 
-  int get length => frames.length;
+  /// How many frames are held at once, and how far ahead decoding runs.
+  static const window = 36;
+  static const _ahead = 24;
 
-  static String? _held;
-  static Future<FoldFrames>? _pending;
+  final Map<int, ui.Image> _held = {};
+  final Set<int> _loading = {};
+  int _playhead = 0;
 
-  static Future<FoldFrames> load(String seq) {
-    if (_held == seq && _pending != null) return _pending!;
-    final previous = _pending;
-    _held = seq;
-    _pending = _decode(seq);
-    // let the old sequence go as soon as the new one is in hand
-    previous?.then((old) {
-      if (old.seq != seq) {
-        for (final image in old.frames) {
-          image.dispose();
-        }
-      }
-    });
-    return _pending!;
+  static String? _current;
+  static FoldFrames? _instance;
+
+  static Future<FoldFrames> load(String seq) async {
+    if (_current == seq && _instance != null) return _instance!;
+    _instance?.dispose();
+    final count = MaterialLibrary.loaded ? (MaterialLibrary.instance.folds[seq] ?? 0) : 0;
+    final frames = FoldFrames._(seq, count);
+    _current = seq;
+    _instance = frames;
+    await frames._fill(0);
+    return frames;
   }
 
-  static Future<FoldFrames> _decode(String seq) async {
-    final count = MaterialLibrary.loaded ? (MaterialLibrary.instance.folds[seq] ?? 0) : 0;
-    final images = <ui.Image>[];
-    for (var i = 0; i < count; i++) {
+  /// The frame at [i], if it has been decoded. Null while it is still coming.
+  ui.Image? at(int i) {
+    if (i != _playhead) {
+      _playhead = i;
+      unawaited(_fill(i));
+    }
+    return _held[i];
+  }
+
+  Future<void> _fill(int from) async {
+    for (var i = from; i < from + _ahead && i < length; i++) {
+      if (_held.containsKey(i) || _loading.contains(i)) continue;
+      _loading.add(i);
       try {
         final data = await rootBundle.load(foldFrameAsset(seq, i));
         final codec = await ui.instantiateImageCodec(data.buffer.asUint8List());
-        images.add((await codec.getNextFrame()).image);
+        _held[i] = (await codec.getNextFrame()).image;
       } catch (_) {
-        break; // a short sequence plays as far as it goes rather than throwing under a note
+        // a sequence that stops short plays as far as it goes rather than throwing under a note
+      } finally {
+        _loading.remove(i);
       }
     }
-    return FoldFrames._(seq, images);
+    // let go of everything well behind the playhead
+    final drop = _held.keys.where((i) => i < from - (window - _ahead)).toList();
+    for (final i in drop) {
+      _held.remove(i)?.dispose();
+    }
+  }
+
+  void dispose() {
+    for (final image in _held.values) {
+      image.dispose();
+    }
+    _held.clear();
+    if (identical(_instance, this)) {
+      _instance = null;
+      _current = null;
+    }
   }
 }
 
@@ -96,6 +127,10 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
   StreamSubscription<Duration>? _driven;
   Duration _elapsed = Duration.zero;
   bool _done = false;
+
+  /// The last frame actually drawn: if decoding falls a frame behind, the note holds rather than
+  /// blinking out, which is what a dropped frame would look like.
+  ui.Image? _lastDrawn;
 
   static const _frameRate = 60;
 
@@ -145,7 +180,9 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
     if (f == null || f.length == 0) return SizedBox(width: widget.width);
     final after = _elapsed - widget.holdFirst;
     final i = after.isNegative ? 0 : (after.inMilliseconds * _frameRate ~/ 1000).clamp(0, f.length - 1);
-    final image = f.frames[i];
+    final image = f.at(i) ?? _lastDrawn;
+    if (image == null) return SizedBox(width: widget.width);
+    _lastDrawn = image;
     return SizedBox(
       width: widget.width,
       height: widget.width * image.height / image.width,

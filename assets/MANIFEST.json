@@ -1,5 +1,397 @@
 {
  "files": {
+  "assets/bits/clip_01.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "clip",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 5,
+    "width_m": 0.03
+   }
+  },
+  "assets/bits/clip_01_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "clip",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 5,
+    "width_m": 0.03
+   }
+  },
+  "assets/bits/clip_01_dusk_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "clip",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 5,
+    "width_m": 0.03
+   }
+  },
+  "assets/bits/clip_01_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "clip",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 5,
+    "width_m": 0.03
+   }
+  },
+  "assets/bits/clip_02.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "clip",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 29,
+    "width_m": 0.03
+   }
+  },
+  "assets/bits/clip_02_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "clip",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 29,
+    "width_m": 0.03
+   }
+  },
+  "assets/bits/clip_02_dusk_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "clip",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 29,
+    "width_m": 0.03
+   }
+  },
+  "assets/bits/clip_02_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "clip",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 29,
+    "width_m": 0.03
+   }
+  },
+  "assets/bits/glue_01.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "glue",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 17,
+    "width_m": 0.034
+   }
+  },
+  "assets/bits/glue_01_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "glue",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 17,
+    "width_m": 0.034
+   }
+  },
+  "assets/bits/glue_01_dusk_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "glue",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 17,
+    "width_m": 0.034
+   }
+  },
+  "assets/bits/glue_01_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "glue",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 17,
+    "width_m": 0.034
+   }
+  },
+  "assets/bits/pin_01.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "pin",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 13,
+    "width_m": 0.02
+   }
+  },
+  "assets/bits/pin_01_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "pin",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 13,
+    "width_m": 0.02
+   }
+  },
+  "assets/bits/pin_01_dusk_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "pin",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 13,
+    "width_m": 0.02
+   }
+  },
+  "assets/bits/pin_01_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "pin",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 13,
+    "width_m": 0.02
+   }
+  },
+  "assets/bits/pin_02.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "pin",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 41,
+    "width_m": 0.02
+   }
+  },
+  "assets/bits/pin_02_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "pin",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 41,
+    "width_m": 0.02
+   }
+  },
+  "assets/bits/pin_02_dusk_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "pin",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 41,
+    "width_m": 0.02
+   }
+  },
+  "assets/bits/pin_02_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "pin",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 41,
+    "width_m": 0.02
+   }
+  },
+  "assets/bits/staple_01.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "staple",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 7,
+    "width_m": 0.016
+   }
+  },
+  "assets/bits/staple_01_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "staple",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 7,
+    "width_m": 0.016
+   }
+  },
+  "assets/bits/staple_01_dusk_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "staple",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 7,
+    "width_m": 0.016
+   }
+  },
+  "assets/bits/staple_01_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "staple",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 7,
+    "width_m": 0.016
+   }
+  },
+  "assets/bits/staple_02.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "staple",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 19,
+    "width_m": 0.016
+   }
+  },
+  "assets/bits/staple_02_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "staple",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 19,
+    "width_m": 0.016
+   }
+  },
+  "assets/bits/staple_02_dusk_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "staple",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 19,
+    "width_m": 0.016
+   }
+  },
+  "assets/bits/staple_02_shadow.png": {
+   "bytes": 9148,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "staple",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 19,
+    "width_m": 0.016
+   }
+  },
   "assets/bits/tape_01.png": {
    "bytes": 57426,
    "generator": "blender/bits/bits.py",
@@ -124,6 +516,104 @@
     "samples": 18,
     "seed": 37,
     "width_m": 0.061
+   }
+  },
+  "assets/bits/tape_03_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "tape",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 37,
+    "width_m": 0.061
+   }
+  },
+  "assets/bits/tape_03_dusk_shadow.png": {
+   "bytes": 9782,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "tape",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 37,
+    "width_m": 0.061
+   }
+  },
+  "assets/bits/tape_03_shadow.png": {
+   "bytes": 9782,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "tape",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 37,
+    "width_m": 0.061
+   }
+  },
+  "assets/bits/tape_04.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "tape",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 53,
+    "width_m": 0.038
+   }
+  },
+  "assets/bits/tape_04_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "tape",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 53,
+    "width_m": 0.038
+   }
+  },
+  "assets/bits/tape_04_dusk_shadow.png": {
+   "bytes": 9207,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "tape",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 53,
+    "width_m": 0.038
+   }
+  },
+  "assets/bits/tape_04_shadow.png": {
+   "bytes": 9207,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "tape",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 53,
+    "width_m": 0.038
    }
   },
   "assets/folds/unfold_thirds": {

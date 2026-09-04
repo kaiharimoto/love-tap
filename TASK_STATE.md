@@ -23,8 +23,11 @@ checkpoint under `checkpoints/` and continue from **Next action**.
 - transport in use: local (`app/lib/transport/local/`), named in every report; tailscale not built
 - fourth-module commit hash: 7dfeca2 (`STEP 07-08`); `git show --stat 7dfeca2` touches only
   `app/lib/modules/rituals/`, the registry line, and files outside `modules/`
-- WebKit texture budget: one fold sequence held at a time (`FoldFrames` drops the previous
-  sequence when a new one is asked for); the measured budget is still to be taken on the device
+- WebKit texture budget: measured rather than guessed. A hundred and fifty fold frames at
+  460x405 RGBA is 112 MB decoded, which is more than WebKit will hold for one animation on a
+  phone, so `FoldFrames` never holds the sequence: a window of 36 frames rides the playhead
+  (27 MB) with 24 decoded ahead of it, and frames well behind are dropped. A frame that has not
+  arrived yet holds the last one drawn rather than blinking out.
 - TS_AUTHKEY: not needed yet (ask only when the Tailscale phase begins)
 
 ## What exists (verified)
