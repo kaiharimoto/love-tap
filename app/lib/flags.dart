@@ -26,5 +26,10 @@ class Flags {
   /// Local transport port (host binds it; client connects to it through adb forward).
   static const int port = int.fromEnvironment('PORT', defaultValue: 8480);
 
+  /// 'day' or 'dusk'. The whole app is lit by one condition at a time, so the desk, the paper and
+  /// every baked shadow agree; this is what the dusk capture is taken under.
+  static const String light = String.fromEnvironment('LIGHT', defaultValue: 'day');
+
   static bool get seeded => seed == 'year';
+  static bool get dusk => light == 'dusk';
 }

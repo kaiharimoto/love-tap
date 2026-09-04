@@ -1,0 +1,30 @@
+{
+ "name": "dusk_pulse",
+ "viewport": {
+  "width": 480,
+  "height": 1040,
+  "dpr": 3
+ },
+ "settle": 700,
+ "log": "evidence/logs/dusk_pulse.json",
+ "steps": [
+  {
+   "do": "goTo",
+   "arg": 0
+  },
+  {
+   "do": "wait",
+   "ms": 1600
+  },
+  {
+   "do": "shot",
+   "out": "evidence/crops/dusk_pulse.png",
+   "settle": 900
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/dusk_pulse.report.json",
+   "at": "crops/dusk_pulse.png"
+  }
+ ]
+}

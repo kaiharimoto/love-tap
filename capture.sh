@@ -19,6 +19,7 @@ BUILD="yes"
 ONLY=""
 SEEDED_PORT=8799
 FRESH_PORT=8798
+DUSK_PORT=8797
 FROZEN_NOW="2026-09-03T19:40:00Z"
 SCRATCH="${TMPDIR:-/tmp}/lovetap-capture"
 LOG="evidence/logs"
@@ -74,6 +75,17 @@ if [ "$BUILD" = "yes" ]; then
       --dart-define=PROFILE=fresh) >"$SCRATCH/build_fresh.log" 2>&1 \
     || { tail -20 "$SCRATCH/build_fresh.log"; exit 1; }
   rm -rf "$SCRATCH/web_fresh" && cp -r app/build/web "$SCRATCH/web_fresh"
+
+  # and one more, lit by the dusk condition, for the crop the critics are handed alongside the
+  # hero: the same desk, the same paper, the same shadows, one light later in the day
+  echo "· building the PWA at dusk"
+  python3 tools/pack_assets.py --seed=year >/dev/null || exit 1
+  (cd app && flutter build web --release --no-web-resources-cdn \
+      --dart-define=SEED=year --dart-define=TRANSPORT=local --dart-define=CAPTURE=true \
+      --dart-define=ROLE=client --dart-define=PERSON=teo --dart-define=LIGHT=dusk \
+      --dart-define=FROZEN_NOW="$FROZEN_NOW") >"$SCRATCH/build_dusk.log" 2>&1 \
+    || { tail -20 "$SCRATCH/build_dusk.log"; exit 1; }
+  rm -rf "$SCRATCH/web_dusk" && cp -r app/build/web "$SCRATCH/web_dusk"
   # The seed must not be reachable from the fresh build. pack_assets.py leaves the directories
   # behind because pubspec declares them, so what is checked is content, not the folder.
   if find "$SCRATCH/web_fresh/assets/assets/seed" \
@@ -102,7 +114,8 @@ stop() { kill "$1" 2>/dev/null; wait "$1" 2>/dev/null; }
 
 SEEDED_PID="$(serve "$SCRATCH/web_seeded" "$SEEDED_PORT")" || { echo "no seeded build"; exit 1; }
 FRESH_PID="$(serve "$SCRATCH/web_fresh" "$FRESH_PORT")" || { echo "no fresh build"; exit 1; }
-trap 'stop "$SEEDED_PID"; stop "$FRESH_PID"' EXIT
+DUSK_PID="$(serve "$SCRATCH/web_dusk" "$DUSK_PORT")" || DUSK_PID=""
+trap 'stop "$SEEDED_PID"; stop "$FRESH_PID"; [ -n "$DUSK_PID" ] && stop "$DUSK_PID"' EXIT
 sleep 2
 
 run_scene() { # name url
@@ -130,6 +143,11 @@ done
 for s in 10_first_run 17_setup_pwa; do
   [ -f "evidence/scenes/$s.json" ] && run_scene "$s" "$FRESH_URL"
 done
+
+# ---- the dusk crop: not an artifact, but what the material critic is handed beside the hero ------
+if [ -n "$DUSK_PID" ] && [ -f evidence/scenes/dusk_pulse.json ]; then
+  run_scene dusk_pulse "http://127.0.0.1:$DUSK_PORT/"
+fi
 
 # ---- clips ---------------------------------------------------------------------------------------
 # ffmpeg is handed the frames the app produced, one per output frame, at the rate the clock was

@@ -36,7 +36,7 @@ class DeskApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: DeskColour.day,
+        scaffoldBackgroundColor: Flags.dusk ? DeskColour.dusk : DeskColour.day,
         colorScheme: const ColorScheme.light(
           surface: Color(0xFFF1ECDF),
           primary: Pen.ballpoint,
@@ -44,7 +44,10 @@ class DeskApp extends StatelessWidget {
         ),
         textTheme: Typography.blackCupertino.apply(fontFamily: 'TeoHand'),
       ),
-      home: const Light(condition: LightCondition.day, child: Shell()),
+      home: Light(
+        condition: Flags.dusk ? LightCondition.dusk : LightCondition.day,
+        child: const Shell(),
+      ),
     );
   }
 }
@@ -125,7 +128,7 @@ class _ShellState extends State<Shell> {
     final platform = scope.transport.role == TransportRole.host ? 'android' : 'pwa';
     final setup = _showSetup && !settled(stepsFor(platform), facts) ? facts : null;
     return Scaffold(
-      backgroundColor: DeskColour.day,
+      backgroundColor: Flags.dusk ? DeskColour.dusk : DeskColour.day,
       body: Desk(
         child: SafeArea(
           child: Column(
