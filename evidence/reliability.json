@@ -1,23 +1,23 @@
 {
  "transport": "local",
- "generated_at": "2026-09-04T14:36:26.591410Z",
+ "generated_at": "2026-09-04T16:24:12.126646Z",
  "host": {
   "transport": "local",
   "role": "host",
   "state": "connected",
-  "address": "127.0.0.1:44353",
+  "address": "127.0.0.1:40365",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-04T14:36:26.574580Z",
-  "last_contact": "2026-09-04T14:36:26.586103Z",
+  "since": "2026-09-04T16:24:12.108589Z",
+  "last_contact": "2026-09-04T16:24:12.123668Z",
   "device_id": "android-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-04T14:36:25.968887Z"
+   "paired_at": "2026-09-04T16:24:11.086893Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -30,19 +30,19 @@
   "transport": "local",
   "role": "client",
   "state": "connected",
-  "address": "http://127.0.0.1:44353",
+  "address": "http://127.0.0.1:40365",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-04T14:36:26.306737Z",
-  "last_contact": "2026-09-04T14:36:26.590229Z",
+  "since": "2026-09-04T16:24:11.464343Z",
+  "last_contact": "2026-09-04T16:24:12.125043Z",
   "device_id": "pwa-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-04T14:36:25.973567Z"
+   "paired_at": "2026-09-04T16:24:11.098007Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -142,8 +142,8 @@
   "counted_by_the_daemon": {
    "read": true,
    "peer": "lovetap-a",
-   "tx_bytes": 7644,
-   "rx_bytes": 6844,
+   "tx_bytes": 7436,
+   "rx_bytes": 6652,
    "path": "direct to 192.0.2.2:48859",
    "active": true
   },
@@ -157,6 +157,6 @@
   "crossed_to_the_host": true,
   "crossed_to_the_client": true,
   "paired": true,
-  "checked_at": "2026-09-04T14:36:26.736294Z"
+  "checked_at": "2026-09-04T16:24:12.334144Z"
  }
 }

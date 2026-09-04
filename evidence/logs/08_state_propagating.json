@@ -1,0 +1,172 @@
+{
+ "scene": "08_state_propagating",
+ "browser": "webkit",
+ "viewport": {
+  "width": 360,
+  "height": 780,
+  "dpr": 3
+ },
+ "url": "http://127.0.0.1:8480/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 2307
+  },
+  {
+   "do": "pair",
+   "ms": 1619
+  },
+  {
+   "do": "wait",
+   "ms": 1903
+  },
+  {
+   "do": "goTo",
+   "ms": 1704
+  },
+  {
+   "do": "wait",
+   "ms": 1403
+  },
+  {
+   "do": "frames",
+   "ms": 23009
+  },
+  {
+   "do": "far",
+   "ms": 502
+  },
+  {
+   "do": "frames",
+   "ms": 61250
+  },
+  {
+   "do": "far",
+   "ms": 501
+  },
+  {
+   "do": "frames",
+   "ms": 179959
+  },
+  {
+   "do": "goTo",
+   "ms": 1144
+  },
+  {
+   "do": "frames",
+   "ms": 37988
+  },
+  {
+   "do": "far",
+   "ms": 506
+  },
+  {
+   "do": "frames",
+   "ms": 124110
+  },
+  {
+   "do": "far",
+   "ms": 502
+  },
+  {
+   "do": "frames",
+   "ms": 156790
+  },
+  {
+   "do": "report",
+   "ms": 509
+  }
+ ],
+ "shots": [
+  {
+   "frames": 24,
+   "dir": "evidence/frames/08_state_propagating",
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 56,
+   "dir": "evidence/frames/08_state_propagating_b",
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 160,
+   "dir": "evidence/frames/08_state_propagating_b",
+   "ms": 8,
+   "drive": null
+  },
+  {
+   "frames": 40,
+   "dir": "evidence/frames/08_state_propagating_c",
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 110,
+   "dir": "evidence/frames/08_state_propagating_c",
+   "ms": 16,
+   "drive": {
+    "kind": "scrollBy",
+    "per": -4
+   }
+  },
+  {
+   "frames": 160,
+   "dir": "evidence/frames/08_state_propagating_c",
+   "ms": 8,
+   "drive": null
+  }
+ ],
+ "reports": [
+  {
+   "region": 1,
+   "visible": [
+    "01M1PJT5H50NTT5644GHRHCTF1",
+    "01M1PK0VXZ30THB5WETW9BPNER",
+    "01M1PK4NMPMN1C6ENVFXDEYXH3"
+   ],
+   "tears": {
+    "01M1PJT5H50NTT5644GHRHCTF1": "tear_020",
+    "01M1PK0VXZ30THB5WETW9BPNER": "tear_043",
+    "01M1PK4NMPMN1C6ENVFXDEYXH3": "tear_005"
+   },
+   "stocks": {
+    "01M1PJT5H50NTT5644GHRHCTF1": "lined_01",
+    "01M1PK0VXZ30THB5WETW9BPNER": "lined_04",
+    "01M1PK4NMPMN1C6ENVFXDEYXH3": "lined_02"
+   },
+   "scroll": {
+    "first": 1,
+    "last": 3,
+    "of": 4
+   },
+   "now": "2026-09-04T16:16:07.862Z",
+   "driven_ms": 6384,
+   "seed": 20260903,
+   "events": 8,
+   "transport": "local",
+   "link": "connected",
+   "me": "teo",
+   "masks_in_pool": 56,
+   "writable_masks": 47,
+   "light": "day",
+   "has_dusk_paper": true,
+   "paper_stocks": 33,
+   "setup_showing": false,
+   "fold": {
+    "sequence": "unfold_thirds",
+    "length": 240,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
+   },
+   "at": "08_state_propagating"
+  }
+ ],
+ "cold_ms": 2430,
+ "problems": [],
+ "ok": true
+}
