@@ -115,8 +115,16 @@ String? _worthSaying(Event e, Map<String, int> last) {
   return word;
 }
 
-/// Builds the thread from the log. Linear in the number of events.
+/// Builds the thread from the log. Linear in the number of events, after the sort.
+///
+/// The log is put in order first rather than trusted to arrive in it. An edit that reaches this
+/// device before the message it edits, or a reaction that arrives before its target, is exactly
+/// what a phone that has been offline for a day produces when it catches up, and a projection
+/// that reads its input in arrival order silently drops both. Order is the host-assigned seq,
+/// then the timestamp, then the id, so two devices holding the same events always draw the same
+/// thread whatever order they received them in.
 ThreadState projectThread(List<Event> events, {Person? me}) {
+  events = inLogOrder(events);
   final rows = <String, _Row>{};
   final order = <String>[];
   final readUpto = <Person, int>{};

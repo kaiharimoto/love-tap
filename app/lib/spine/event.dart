@@ -96,3 +96,22 @@ class Event {
   @override
   String toString() => 'Event($type ${author.name} seq=$seq id=$id)';
 }
+
+/// The one order every projection reads the log in.
+///
+/// A device that has been offline receives what it missed in whatever order the sync gave it, so
+/// nothing downstream may assume the list it is handed is sorted. Sorting on the host-assigned
+/// seq first makes two devices holding the same events draw the same screen; the timestamp and
+/// then the id break ties for anything not yet assigned a seq (a message still in the outbox).
+List<Event> inLogOrder(List<Event> events) {
+  final out = List<Event>.of(events);
+  out.sort((a, b) {
+    final sa = a.seq, sb = b.seq;
+    if (sa != null && sb != null && sa != sb) return sa.compareTo(sb);
+    if (sa == null && sb != null) return 1;      // not yet acknowledged: after what has been
+    if (sa != null && sb == null) return -1;
+    if (a.ts != b.ts) return a.ts.compareTo(b.ts);
+    return a.id.compareTo(b.id);
+  });
+  return out;
+}

@@ -634,27 +634,11 @@
    "arrivals": [
     "mug"
    ],
-   "bytes": 111978,
+   "bytes": 116790,
    "from": "the setting written in index.2026-05.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
-    "gulls",
-    "traffic_building",
-    "birds",
-    "birds",
-    "wind",
-    "rain_hood",
-    "birds",
-    "wind",
     "gulls"
    ],
    "seconds": 34.0,
@@ -693,27 +677,11 @@
     "paper",
     "paper"
    ],
-   "bytes": 150312,
+   "bytes": 156775,
    "from": "the setting written in index.2026-05.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
-    "gulls",
-    "traffic_building",
-    "birds",
-    "birds",
-    "wind",
-    "rain_hood",
-    "birds",
-    "wind",
     "footsteps on grit"
    ],
    "seconds": 47.0,
@@ -766,6 +734,26 @@
    "tone": "flat",
    "voice": "teo"
   },
+  "seed/voice/2026-06_noor_artroom_late.ogg": {
+   "arrivals": [
+    "keys",
+    "tap",
+    "tap"
+   ],
+   "bytes": 112817,
+   "from": "the setting written in index.2026-06.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "room",
+    "deskfan",
+    "stacking"
+   ],
+   "seconds": 34.0,
+   "stops_for": [],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "quick",
+   "voice": "noor"
+  },
   "seed/voice/2026-06_teo_field_bus.ogg": {
    "arrivals": [
     "car_door",
@@ -787,9 +775,154 @@
    "tone": "low",
    "voice": "teo"
   },
+  "seed/voice/2026-06_teo_walk_last_june.ogg": {
+   "arrivals": [
+    "bus",
+    "paper",
+    "paper"
+   ],
+   "bytes": 129277,
+   "from": "the setting written in index.2026-06.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "air",
+    "birds",
+    "footsteps on grit"
+   ],
+   "seconds": 38.0,
+   "stops_for": [
+    3
+   ],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "level",
+   "voice": "teo"
+  },
+  "seed/voice/2026-06_teo_walk_third_june.ogg": {
+   "arrivals": [
+    "lorry"
+   ],
+   "bytes": 173456,
+   "from": "the setting written in index.2026-06.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "air",
+    "traffic_building",
+    "footsteps on grit"
+   ],
+   "seconds": 52.0,
+   "stops_for": [
+    11
+   ],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "level",
+   "voice": "teo"
+  },
+  "seed/voice/2026-07_noor_empty_room.ogg": {
+   "arrivals": [
+    "door",
+    "keys",
+    "chair",
+    "window"
+   ],
+   "bytes": 135551,
+   "from": "the setting written in index.2026-07.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "room",
+    "footsteps on boards"
+   ],
+   "seconds": 41.0,
+   "stops_for": [
+    2,
+    8
+   ],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "bright",
+   "voice": "noor"
+  },
+  "seed/voice/2026-07_teo_walk_before_ferry.ogg": {
+   "arrivals": [
+    "paper",
+    "paper"
+   ],
+   "bytes": 132087,
+   "from": "the setting written in index.2026-07.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "air",
+    "gulls"
+   ],
+   "seconds": 39.0,
+   "stops_for": [],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "bright",
+   "voice": "teo"
+  },
+  "seed/voice/2026-07_teo_walk_birthday_eve.ogg": {
+   "arrivals": [
+    "lid",
+    "bin"
+   ],
+   "bytes": 124687,
+   "from": "the setting written in index.2026-07.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "air",
+    "birds",
+    "footsteps on grit"
+   ],
+   "seconds": 36.0,
+   "stops_for": [
+    3
+   ],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "flat",
+   "voice": "teo"
+  },
+  "seed/voice/2026-07_teo_walk_home_ferry.ogg": {
+   "arrivals": [
+    "car_door",
+    "car",
+    "door",
+    "keys"
+   ],
+   "bytes": 150447,
+   "from": "the setting written in index.2026-07.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "air",
+    "traffic",
+    "footsteps on grit"
+   ],
+   "seconds": 44.0,
+   "stops_for": [],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "low",
+   "voice": "teo"
+  },
+  "seed/voice/2026-07_teo_walk_third_july.ogg": {
+   "arrivals": [
+    "reversing",
+    "gate"
+   ],
+   "bytes": 156317,
+   "from": "the setting written in index.2026-07.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "air",
+    "footsteps on grit"
+   ],
+   "seconds": 47.0,
+   "stops_for": [
+    12
+   ],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "flat",
+   "voice": "teo"
+  },
   "seed/voice/2026-08_noor_kitchen_late.ogg": {
    "arrivals": [],
-   "bytes": 415756,
+   "bytes": 377648,
    "from": "the setting written in index.2026-08.json",
    "generator": "tools/voice/say.py",
    "layers": [
@@ -801,6 +934,96 @@
    "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
    "tone": "low",
    "voice": "noor"
+  },
+  "seed/voice/2026-08_noor_train_back.ogg": {
+   "arrivals": [],
+   "bytes": 204722,
+   "from": "the setting written in index.2026-08.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "rails",
+    "room"
+   ],
+   "seconds": 63.0,
+   "stops_for": [
+    12
+   ],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "low",
+   "voice": "noor"
+  },
+  "seed/voice/2026-08_teo_walk_after_lift.ogg": {
+   "arrivals": [
+    "bus"
+   ],
+   "bytes": 139374,
+   "from": "the setting written in index.2026-08.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "air",
+    "footsteps on grit"
+   ],
+   "seconds": 41.0,
+   "stops_for": [],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "flat",
+   "voice": "teo"
+  },
+  "seed/voice/2026-08_teo_walk_wet.ogg": {
+   "arrivals": [
+    "gate"
+   ],
+   "bytes": 168348,
+   "from": "the setting written in index.2026-08.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "air",
+    "rain_hood",
+    "footsteps on wet"
+   ],
+   "seconds": 52.0,
+   "stops_for": [
+    8
+   ],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "flat",
+   "voice": "teo"
+  },
+  "seed/voice/2026-09_room_echo.ogg": {
+   "arrivals": [
+    "door"
+   ],
+   "bytes": 103343,
+   "from": "the setting written in index.2026-09.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "room"
+   ],
+   "seconds": 31.0,
+   "stops_for": [],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "level",
+   "voice": "noor"
+  },
+  "seed/voice/2026-09_walk_home_tue.ogg": {
+   "arrivals": [
+    "gate",
+    "keys"
+   ],
+   "bytes": 186570,
+   "from": "the setting written in index.2026-09.json",
+   "generator": "tools/voice/say.py",
+   "layers": [
+    "air",
+    "footsteps on grit"
+   ],
+   "seconds": 58.0,
+   "stops_for": [
+    20
+   ],
+   "synthesis": "glottal source and a moving four-formant tract; not a recording, and not intelligible as words",
+   "tone": "level",
+   "voice": "teo"
   }
  },
  "version": 1

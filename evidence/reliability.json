@@ -1,23 +1,23 @@
 {
  "transport": "local",
- "generated_at": "2026-09-04T04:56:37.667775Z",
+ "generated_at": "2026-09-04T05:33:59.654198Z",
  "host": {
   "transport": "local",
   "role": "host",
   "state": "connected",
-  "address": "127.0.0.1:33729",
+  "address": "127.0.0.1:46781",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-04T04:56:37.639122Z",
-  "last_contact": "2026-09-04T04:56:37.661873Z",
+  "since": "2026-09-04T05:33:59.617108Z",
+  "last_contact": "2026-09-04T05:33:59.648720Z",
   "device_id": "android-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-04T04:56:36.056837Z"
+   "paired_at": "2026-09-04T05:33:58.517343Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -30,19 +30,19 @@
   "transport": "local",
   "role": "client",
   "state": "connected",
-  "address": "http://127.0.0.1:33729",
+  "address": "http://127.0.0.1:46781",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-04T04:56:37.095984Z",
-  "last_contact": "2026-09-04T04:56:37.663547Z",
+  "since": "2026-09-04T05:33:58.911166Z",
+  "last_contact": "2026-09-04T05:33:59.650222Z",
   "device_id": "pwa-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-04T04:56:36.063253Z"
+   "paired_at": "2026-09-04T05:33:58.524587Z"
   },
   "faults": "scripted",
   "offline": false,

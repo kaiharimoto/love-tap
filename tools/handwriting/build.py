@@ -906,17 +906,58 @@ def variant_name(name, v):
 
 
 def feature_text(base_names, n):
+    """The contextual alternates, in two passes.
+
+    The first pass is a cascade: each glyph takes the variant one further on than the glyph
+    before it, so a run of letters walks through the whole set. On its own that is not enough,
+    because a space is in none of the variant classes and so the cascade restarts at every word
+    boundary — which makes the first letter of every word variant zero, the second letter of
+    every word variant one, and a critic comparing two word-initial letters find them identical
+    to four decimal places. Which is exactly what happened.
+
+    So a second pass rotates the whole thing again by an amount that depends on which letter came
+    before, with every glyph in the font — space and punctuation included — belonging to one of
+    the rotation classes. The variant a letter takes is then (its place in the run + a number that
+    depends on the letter before it) modulo the number of variants, and two of the same letter
+    coincide only when both agree, which over a page is rare.
+    """
     names = [b for b in base_names if b != ".notdef"]
     lines = ["languagesystem DFLT dflt;", "languagesystem latn dflt;", ""]
     for k in range(n):
         lines.append(f"@v{k} = [" + " ".join(variant_name(b, k) for b in names) + "];")
     lines.append("")
+
+    # every glyph of a given base letter is in the same rotation class whichever variant it
+    # became, so the second pass sees the letter rather than the variant
+    buckets = [[] for _ in range(n)]
+    for i, b in enumerate(sorted(names)):
+        # spread by position in the sorted set as well as by name, so no bucket comes out empty
+        # on a small alphabet and the letters that actually occur together land in different ones
+        j = (i * 3 + sum(ord(c) * (m + 7) for m, c in enumerate(b))) % n
+        for k in range(n):
+            buckets[j].append(variant_name(b, k))
+    filled = [j for j in range(n) if buckets[j]]
+    for j in filled:
+        lines.append(f"@K{j} = [" + " ".join(buckets[j]) + "];")
+    lines.append("")
+
     for k in range(1, n):
         lines.append(f"lookup CYC{k} {{ sub @v0 by @v{k}; }} CYC{k};")
+    lines.append("")
+    for j in filled:
+        if j == 0:
+            continue
+        rot = [f"sub @v{k} by @v{(k + j) % n};" for k in range(n)]
+        lines.append(f"lookup ROT{j} {{ " + " ".join(rot) + f" }} ROT{j};")
     lines.append("")
     lines.append("feature calt {")
     for k in range(n - 1):
         lines.append(f"  sub @v{k} @v0' lookup CYC{k + 1};")
+    all_v = " ".join(f"@v{k}" for k in range(n))
+    for j in filled:
+        if j == 0:
+            continue
+        lines.append(f"  sub @K{j} [{all_v}]' lookup ROT{j};")
     lines.append("} calt;")
     lines.append("")
     for j in range(1, 6):

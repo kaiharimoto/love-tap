@@ -55,7 +55,11 @@ List<DateItem> projectDates(List<Event> events) {
   final byId = <String, DateItem>{};
   for (final e in events) {
     if (e.type != 'date_event') continue;
-    final id = e.payload['date_id'] as String;
+    // A projection is handed whatever is in the log, including whatever the other phone
+    // sent, so it may not assume a payload is well formed: an event missing the key that
+    // identifies it used to take down the whole module and with it the whole screen.
+    final id = e.payload['date_id'] as String?;
+    if (id == null) continue;
     final d = byId.putIfAbsent(id, () => DateItem(id));
     d.title = (e.payload['title'] as String?) ?? d.title;
     d.place = (e.payload['place'] as String?) ?? d.place;

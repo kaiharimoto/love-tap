@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../scope.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
-import 'rows.dart';
+import 'renderers.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -97,7 +97,7 @@ class _SearchPageState extends State<SearchPage> {
                       return ListTile(
                         dense: true,
                         leading: Text(e.author.name),
-                        title: Text(summaryOf(e.type, e.payload), maxLines: 2, overflow: TextOverflow.ellipsis),
+                        title: Text(summaryOf(e), maxLines: 2, overflow: TextOverflow.ellipsis),
                         subtitle: Text('${e.type} · ${timeLabel(e.ts)}'),
                         onTap: () => Navigator.of(context).pop(e.id),
                       );

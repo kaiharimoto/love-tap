@@ -61,7 +61,11 @@ List<Milestone> projectMilestones(List<Event> events) {
   final byId = <String, Milestone>{};
   for (final e in events) {
     if (e.type != 'milestone') continue;
-    final id = e.payload['milestone_id'] as String;
+    // A projection is handed whatever is in the log, including whatever the other phone
+    // sent, so it may not assume a payload is well formed: an event missing the key that
+    // identifies it used to take down the whole module and with it the whole screen.
+    final id = e.payload['milestone_id'] as String?;
+    if (id == null) continue;
     final m = byId.putIfAbsent(id, () => Milestone(id));
     m.title = (e.payload['title'] as String?) ?? m.title;
     m.kind = (e.payload['kind'] as String?) ?? m.kind;

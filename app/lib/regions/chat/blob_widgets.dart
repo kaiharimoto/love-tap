@@ -8,6 +8,13 @@ import '../../media/local_uri.dart';
 import '../../scope.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
+import 'viewer_page.dart';
+import '../../spine/projections/thread.dart';
+import '../../material/palette.dart';
+import '../../material/paper.dart';
+import '../../material/library.dart';
+import '../../material/hands.dart';
+import '../../material/assignment.dart';
 
 /// Process-wide cache of decoded blob bytes so scrolling never re-reads the store.
 class BlobCache {
@@ -152,3 +159,61 @@ class _WavePainter extends CustomPainter {
 /// Bytes of a blob for the viewer (photo full-res, video).
 Future<Uint8List?> blobBytes(BuildContext context, String hash) async =>
     (await BlobCache.get(AppScope.of(context).spine, hash))?.bytes;
+
+
+/// A photograph or a video still, taped to the note at two corners.
+class Print extends StatelessWidget {
+  const Print({super.key, required this.item, required this.hash, required this.aspect, this.caption, this.durationMs});
+  final ThreadItem item;
+  final String hash;
+  final double aspect;
+  final String? caption;
+  final int? durationMs;
+
+  @override
+  Widget build(BuildContext context) {
+    final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
+    final bits = lib?.bits ?? const [];
+    final tape = bits.isEmpty ? null : bits[hashOf(item.id) % bits.length].id;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        GestureDetector(
+          onTap: () => ViewerPage.open(context, item),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              AspectRatio(
+                aspectRatio: aspect,
+                child: BlobImage(hash: hash, fit: BoxFit.cover),
+              ),
+              if (tape != null)
+                Positioned(
+                  left: -10,
+                  top: -8,
+                  child: Transform.rotate(
+                    angle: -0.5,
+                    child: Image.asset(bitAsset(tape), width: 60, errorBuilder: PaperPiece.none),
+                  ),
+                ),
+              if (durationMs != null)
+                Positioned(
+                  right: 8,
+                  bottom: 6,
+                  child: Stamped('${(durationMs! / 1000).round()}s', size: 11, colour: Pen.margin),
+                ),
+            ],
+          ),
+        ),
+        if (caption != null && caption!.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Written(caption!, by: item.author, size: 17),
+          ),
+      ],
+    );
+  }
+}
+
+/// The note being answered, as a torn strip pinned above the reply.

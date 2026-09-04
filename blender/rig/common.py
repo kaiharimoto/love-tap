@@ -269,25 +269,69 @@ def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_i
     links.new(edge_mix.outputs[2], mixy.inputs[7])
     colour_out = mixy.outputs[2]
 
-    # fibre mottle in the colour (very subtle)
-    mottle = nodes.new("ShaderNodeTexNoise")
-    mottle.inputs["Scale"].default_value = 420.0
-    mottle.inputs["Detail"].default_value = 7.0
-    mottle.inputs["Roughness"].default_value = 0.68
-    links.new(texco.outputs["UV"], mottle.inputs["Vector"])
-    mottle_ramp = nodes.new("ShaderNodeValToRGB")
-    mottle_ramp.color_ramp.elements[0].position = 0.40
-    mottle_ramp.color_ramp.elements[0].color = (0.975, 0.972, 0.965, 1)
-    mottle_ramp.color_ramp.elements[1].position = 0.62
-    mottle_ramp.color_ramp.elements[1].color = (1.0, 1.0, 1.0, 1)
-    links.new(mottle.outputs["Fac"], mottle_ramp.inputs["Fac"])
-    mottled = nodes.new("ShaderNodeMix")
-    mottled.data_type = "RGBA"
-    mottled.blend_type = "MULTIPLY"
-    mottled.inputs["Factor"].default_value = 1.0
-    links.new(colour_out, mottled.inputs[6])
-    links.new(mottle_ramp.outputs["Color"], mottled.inputs[7])
-    colour_out = mottled.outputs[2]
+    # The fibres, in the colour.
+    #
+    # Paper is a pressed mat of fibres of unequal brightness with filler between them, and at any
+    # magnification where you can see a letterform you can also see that. Carrying the tooth only
+    # as a bump does not survive: the relief that matters is a couple of hundredths of a
+    # millimetre, which at render resolution is about one pixel, and Cycles antialiases it into a
+    # flat field. Measured on the sheets this replaced, the blank areas held 0.44 grey levels of
+    # high-frequency variation — less than the desk under them. So the fibres are put into the
+    # albedo as well, where nothing can average them away and where downsampling to display size
+    # preserves them, and the relief stays for the raking light to find.
+    fibre_layers = []
+
+    def _mottle(scale, detail, rough, amount, stretch_uv=None):
+        n = nodes.new("ShaderNodeTexNoise")
+        n.inputs["Scale"].default_value = scale
+        n.inputs["Detail"].default_value = detail
+        n.inputs["Roughness"].default_value = rough
+        if stretch_uv is None:
+            links.new(texco.outputs["UV"], n.inputs["Vector"])
+        else:
+            links.new(stretch_uv, n.inputs["Vector"])
+        r = nodes.new("ShaderNodeValToRGB")
+        r.color_ramp.elements[0].position = 0.30
+        r.color_ramp.elements[0].color = (1.0 - amount, 1.0 - amount * 0.97, 1.0 - amount * 0.92, 1)
+        r.color_ramp.elements[1].position = 0.70
+        r.color_ramp.elements[1].color = (1.0 + amount, 1.0 + amount * 0.99, 1.0 + amount * 0.96, 1)
+        links.new(n.outputs["Fac"], r.inputs["Fac"])
+        fibre_layers.append(r.outputs["Color"])
+        return n
+
+    # the machine direction: the fibres lie along the way the sheet came off the wire
+    machine = nodes.new("ShaderNodeMapping")
+    machine.inputs["Scale"].default_value = (1.0, 9.0, 1.0)
+    machine.inputs["Rotation"].default_value = (0.0, 0.0, 0.10)
+    links.new(texco.outputs["UV"], machine.inputs["Vector"])
+
+    _mottle(150.0, 6.0, 0.62, 0.020 * tooth)                      # look-through, the cloudiness
+    _mottle(560.0, 8.0, 0.70, 0.022 * tooth)                       # individual fibres
+    _mottle(300.0, 6.0, 0.55, 0.018 * tooth, machine.outputs["Vector"])   # along the machine
+    speck = nodes.new("ShaderNodeTexWhiteNoise")
+    speck.noise_dimensions = "2D"
+    speck_map = nodes.new("ShaderNodeMapping")
+    speck_map.inputs["Scale"].default_value = (2600.0, 2600.0, 1.0)
+    links.new(texco.outputs["UV"], speck_map.inputs["Vector"])
+    links.new(speck_map.outputs["Vector"], speck.inputs["Vector"])
+    speck_ramp = nodes.new("ShaderNodeValToRGB")
+    speck_ramp.color_ramp.elements[0].position = 0.32
+    speck_ramp.color_ramp.elements[0].color = (1.0 - 0.014 * tooth, 1.0 - 0.014 * tooth,
+                                               1.0 - 0.013 * tooth, 1)
+    speck_ramp.color_ramp.elements[1].position = 0.68
+    speck_ramp.color_ramp.elements[1].color = (1.0 + 0.014 * tooth, 1.0 + 0.014 * tooth,
+                                               1.0 + 0.014 * tooth, 1)
+    links.new(speck.outputs["Value"], speck_ramp.inputs["Fac"])
+    fibre_layers.append(speck_ramp.outputs["Color"])
+
+    for layer in fibre_layers:
+        m = nodes.new("ShaderNodeMix")
+        m.data_type = "RGBA"
+        m.blend_type = "MULTIPLY"
+        m.inputs["Factor"].default_value = 1.0
+        links.new(colour_out, m.inputs[6])
+        links.new(layer, m.inputs[7])
+        colour_out = m.outputs[2]
 
     if rules_image is not None:
         img = nodes.new("ShaderNodeTexImage")
@@ -305,7 +349,9 @@ def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_i
 
     # fibre relief: fine noise + coarse mottle + very fine grain, as a bump
     fine = nodes.new("ShaderNodeTexNoise")
-    fine.inputs["Scale"].default_value = fibre_scale
+    # a third of what it was: features of about half a millimetre, which at render resolution is
+    # four or five pixels rather than one, so the relief survives being antialiased
+    fine.inputs["Scale"].default_value = fibre_scale / 3.0
     fine.inputs["Detail"].default_value = 8.0
     fine.inputs["Roughness"].default_value = 0.7
     links.new(texco.outputs["UV"], fine.inputs["Vector"])
@@ -342,8 +388,8 @@ def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_i
     links.new(a2.outputs[0], a3.inputs[0]); links.new(m4.outputs[0], a3.inputs[1])
     a2 = a3
     bump = nodes.new("ShaderNodeBump")
-    bump.inputs["Strength"].default_value = 0.45 * tooth
-    bump.inputs["Distance"].default_value = 0.00016
+    bump.inputs["Strength"].default_value = 0.85 * tooth
+    bump.inputs["Distance"].default_value = 0.00030
     links.new(a2.outputs[0], bump.inputs["Height"])
     links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
     return mat

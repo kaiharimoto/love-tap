@@ -19,9 +19,7 @@ import '../../scope.dart';
 import '../../spine/projections/thread.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
-import 'blob_widgets.dart';
-import 'rows.dart' show timeLabel;
-import 'viewer_page.dart';
+import 'renderers.dart';
 
 /// The width a note takes on the desk, as a fraction of the region's width.
 const double _noteWidthFraction = 0.76;
@@ -142,108 +140,20 @@ class Note extends StatelessWidget {
     return Alignment(((h % 100) / 50.0) - 1.0, (((h >> 7) % 100) / 50.0) - 1.0);
   }
 
+  /// The thread's half of the registry's promise: a type names the renderer that draws it, and
+  /// renderers.dart is where they live. There is no switch on the type here and no second one in
+  /// search, so the two cannot drift apart the way they had.
   Widget _body(BuildContext context, AppScope scope) {
-    final e = item.event;
-    final p = e.payload;
     if (item.deleted) {
       return Written(S.tookBack, by: item.author, size: 17, colour: Pen.margin);
     }
-    switch (item.type) {
-      case 'message':
-        return Written(item.text ?? '', by: item.author, size: 19);
-      case 'photo':
-        return _Print(
-          item: item,
-          hash: p['blob'] as String,
-          aspect: (p['w'] as num) / (p['h'] as num),
-          caption: item.text,
-        );
-      case 'video':
-        return _Print(
-          item: item,
-          hash: p['poster_blob'] as String,
-          aspect: (p['w'] as num) / (p['h'] as num),
-          caption: item.text,
-          durationMs: (p['duration_ms'] as num).toInt(),
-        );
-      case 'voice_note':
-        return VoiceNotePlayer(
-          hash: p['blob'] as String,
-          durationMs: (p['duration_ms'] as num).toInt(),
-          waveform: (p['waveform'] as List).map((x) => (x as num).toDouble()).toList(),
-        );
-      case 'feeling':
-        final f = registry.byId(p['feeling_id'] as String);
-        return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (f != null) FeelingObject(feeling: f, size: 96, intensity: (p['intensity'] as num).toDouble()),
-            const SizedBox(width: 10),
-            Flexible(child: Written(f?.name ?? '', by: item.author, size: 19)),
-          ],
-        );
-      default:
-        return Written(item.text ?? item.type, by: item.author, size: 18);
-    }
+    final spec = kEventTypeById[item.type];
+    final draw = spec == null ? null : kThreadRenderers[spec.renderer];
+    if (draw == null) return Written(item.text ?? item.type, by: item.author, size: 18);
+    return draw(NoteContext(item: item, registry: registry, me: scope.me, context: context));
   }
 }
 
-/// A photograph or a video still, taped to the note at two corners.
-class _Print extends StatelessWidget {
-  const _Print({required this.item, required this.hash, required this.aspect, this.caption, this.durationMs});
-  final ThreadItem item;
-  final String hash;
-  final double aspect;
-  final String? caption;
-  final int? durationMs;
-
-  @override
-  Widget build(BuildContext context) {
-    final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
-    final bits = lib?.bits ?? const [];
-    final tape = bits.isEmpty ? null : bits[hashOf(item.id) % bits.length].id;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        GestureDetector(
-          onTap: () => ViewerPage.open(context, item),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              AspectRatio(
-                aspectRatio: aspect,
-                child: BlobImage(hash: hash, fit: BoxFit.cover),
-              ),
-              if (tape != null)
-                Positioned(
-                  left: -10,
-                  top: -8,
-                  child: Transform.rotate(
-                    angle: -0.5,
-                    child: Image.asset(bitAsset(tape), width: 60, errorBuilder: PaperPiece.none),
-                  ),
-                ),
-              if (durationMs != null)
-                Positioned(
-                  right: 8,
-                  bottom: 6,
-                  child: Stamped('${(durationMs! / 1000).round()}s', size: 11, colour: Pen.margin),
-                ),
-            ],
-          ),
-        ),
-        if (caption != null && caption!.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Written(caption!, by: item.author, size: 17),
-          ),
-      ],
-    );
-  }
-}
-
-/// The note being answered, as a torn strip pinned above the reply.
 class _ReplyStrip extends StatelessWidget {
   const _ReplyStrip({required this.target, required this.registry});
   final Event target;

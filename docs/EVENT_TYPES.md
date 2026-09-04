@@ -54,7 +54,7 @@ Seventeen types. The floor is fourteen.
 
 1. Add one entry to `kEventTypes` in `app/lib/spine/types.dart` (id, payload codec, search fields,
    notification treatment).
-2. Add one renderer under `app/lib/regions/chat/renderers/`, registered by id.
+2. Add one renderer under `app/lib/regions/chat/renderers.dart`, registered by id.
 
 Nothing else changes: persistence is schema-less per type (payload is JSON), search fields are
 declared by the registry entry, Moments filters by `type` generically, and notifications read the

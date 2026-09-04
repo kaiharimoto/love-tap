@@ -41,6 +41,9 @@ const List<String> kPassiveSignals = [
 ];
 
 Map<Person, PersonState> projectState(List<Event> events) {
+  // in order, for the same reason projectThread is: the last thing said about a signal is the
+  // last thing said about it, not the last one that happened to arrive
+  events = inLogOrder(events);
   final out = {for (final p in Person.values) p: PersonState(p, {})};
   for (final e in events) {
     if (e.type != 'state_declared' && e.type != 'state_passive') continue;

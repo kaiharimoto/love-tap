@@ -48,7 +48,11 @@ List<TodoItem> projectTodos(List<Event> events) {
   final byId = <String, TodoItem>{};
   for (final e in events) {
     if (e.type != 'todo_event') continue;
-    final id = e.payload['todo_id'] as String;
+    // A projection is handed whatever is in the log, including whatever the other phone
+    // sent, so it may not assume a payload is well formed: an event missing the key that
+    // identifies it used to take down the whole module and with it the whole screen.
+    final id = e.payload['todo_id'] as String?;
+    if (id == null) continue;
     final t = byId.putIfAbsent(id, () => TodoItem(id)..addedBy = e.author);
     t.text = (e.payload['text'] as String?) ?? t.text;
     final a = e.payload['assignee'] as String?;

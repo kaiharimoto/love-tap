@@ -52,7 +52,11 @@ List<Ritual> projectRituals(List<Event> events) {
   final byId = <String, Ritual>{};
   for (final e in events) {
     if (e.type != 'ritual_kept') continue;
-    final id = e.payload['ritual_id'] as String;
+    // A projection is handed whatever is in the log, including whatever the other phone
+    // sent, so it may not assume a payload is well formed: an event missing the key that
+    // identifies it used to take down the whole module and with it the whole screen.
+    final id = e.payload['ritual_id'] as String?;
+    if (id == null) continue;
     final r = byId.putIfAbsent(id, () => Ritual(id));
     r.title = (e.payload['title'] as String?) ?? r.title;
     r.by = e.author;

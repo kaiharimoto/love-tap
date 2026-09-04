@@ -1,0 +1,87 @@
+{
+  "critic": "material-truth",
+  "cycle": 1,
+  "score": 9,
+  "floor": 22,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "02_chat.png",
+      "where": "inside every note; measured on a blank patch of the 'properly' note at y300-334 x380-940 and between the ruled lines of the 'open is not read' note at y1795-1853 x700-1050",
+      "what": "The paper has no stock in it: high-pass (sigma 3) standard deviation inside blank paper is 0.06-0.30 grey levels on every screen, a 36x180 blank patch of the 'properly' note holds 11 distinct RGB values, 15.4 percent of the whole hero is uniform under a 5x5 min/max test, and at 40x amplification a clean interior shows only 8-bit quantisation terraces with not one fibre.",
+      "why": "The rubric asks for real scanned stock; a flat cream fill with vector ruled lines and a red margin rule is an approximation of paper, and the desk it sits on carries 3-20x more grain than the paper does, which is backwards."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "02_chat.png",
+      "where": "on the desk immediately around each note - clearest around 'The folder is open' (y1080-1800), and visible unenhanced in the supplied crops 02_chat_300_hand.png (four short light segments on the brown, top) and 02_chat_300_shadow.png (four more, bottom)",
+      "what": "A dashed rectangular outline is drawn on the desk around every note, with left, right, top and bottom edges and corner brackets, extending past the torn silhouette; it measures +26 to +51 grey levels over the 82-level desk, and the same rectangle sits around the single note in 10_first_run.png and the graph-paper note in 04_moments.png.",
+      "why": "This is literally a rectangle standing in for the paper's bounding box, showing through on the surface the paper is supposed to be lying on, and it is visible at the exact zoom the rubric says decides the category."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "06_unfolding.mp4",
+      "where": "the entire clip, all 280 frames",
+      "what": "Nothing unfolds: maximum frame-to-frame mean absolute difference is 0.150 grey levels, zero frames change by more than 0.5, and the first and last frames differ by 0.152 - the 4.67 second clip is a still of a static chat screen. 07_feeling_landing.mp4 is likewise static (1 changed frame in 390); 11 and 15 are jump cuts (2 and 4 changed frames).",
+      "why": "The rubric judges Blender-rendered folds and creases in slow motion on this clip, and the clip contains no fold, no crease and no motion of any kind."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "01_pulse.png, 02_chat.png, 05_settings.png, 13_messenger_states.png",
+      "where": "the interior low-frequency luminance field of every note on every screen",
+      "what": "There is not a single fold or crease anywhere in the evidence: after removing blurred text, the low-frequency field inside each note is flat, with no ridge, no valley and no directional falloff that would read as folded geometry catching light.",
+      "why": "The rubric's central material claim is Blender-rendered folds and creases under one consistent light direction; the folds do not exist in any artifact, so the claim is unsupported."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "02_chat.png",
+      "where": "the print face in 'The folder is open. It has been open on the table for nine days.' and the cursive face in 'open is not read. im setting you something...'",
+      "what": "One shape per glyph and one flat ink value: same-letter pairs correlate at r=0.997, 0.989 and 0.973 (print) and 0.9999 and 0.995 (cursive), with one 'e' pair byte-identical after centring; 73.7 percent of all cursive ink pixels are exactly RGB (31,42,68) and 59.1 percent of print ink pixels are exactly RGB (58,58,60).",
+      "why": "The rubric requires multiple variants per glyph and real pressure variance; this is a single webfont with a flat vector ink fill, so the same letter has the same nib pressure every time it appears."
+    },
+    {
+      "severity": "serious",
+      "artifact": "01_pulse.png, 02_chat.png, 03_us.png, 04_moments.png, 05_settings.png, 12_search.png, 13_messenger_states.png, 14_media_viewer.png",
+      "where": "rows 205-260, full width, directly beneath the header note",
+      "what": "An opaque pure-black band, RGB (1,1,1), roughly 55px tall and identical on eight of the ten screens, with a 15px gradient at its lower edge and a stray light D-shaped blob at x=140; 1.57 percent of each screen is near-black because of it.",
+      "why": "Whether it is a header shadow at full opacity or an unstyled element, it is a uniform black rectangle with no relationship to the scene's lighting, sitting on top of the composition on almost every screen."
+    },
+    {
+      "severity": "serious",
+      "artifact": "17_setup_pwa.png, 03_us.png, 04_moments.png, and the nav bar on every screen",
+      "where": "17_setup_pwa entire screen; 03_us 'DATES next:', 'TO DO 10 open', 'DATES THAT MATTER' and both anniversary cards; 04_moments the 'both' and 'noor' chips; the five nav tabs everywhere",
+      "what": "The standard falls away from Chat: 17_setup_pwa.png contains zero paper pixels and is dark text floating on bare desk with the nav bar reduced to labels; 03_us.png carries four hard-cornered rectangles plus two full-bleed anniversary cards with no tear anywhere; 04_moments.png uses a flat pale-yellow and a flat grey rectangle as filter chips; the five nav tabs on all ten screens are square-cornered bordered rectangles with a drop shadow.",
+      "why": "The rubric asks whether every paper surface is held to the hero's standard, and on three screens plus the persistent nav bar the answer is that flat bordered rectangles are standing in for paper."
+    },
+    {
+      "severity": "serious",
+      "artifact": "crops/dusk_pulse.png",
+      "where": "the whole file",
+      "what": "It is byte-identical to 01_pulse.png - both md5 09f556a1fe0d62460dc39a25b5f59458, zero differing pixels. There is no dusk state to judge.",
+      "why": "The evidence for the app agreeing with a different light does not exist, so the claim that shadows and paper respond to a changed light cannot be supported."
+    },
+    {
+      "severity": "minor",
+      "artifact": "01_pulse.png",
+      "where": "the row of feeling objects at y1290-1440",
+      "what": "Two of six are real objects and four are icons: the candle (a shaded cylinder with a wick and a contact shadow at 54.5 degrees) and the bead cluster (spheres lit from upper-left with soft contact shadows) are genuine renders, while the moon, the face, the scribble and the chair are flat monoline vector strokes of uniform width with rounded caps and no shadow at all.",
+      "why": "The rubric asks for feelings as physical objects rather than icons; four of the six sit on the desk with no contact, no thickness and no light on them."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.png",
+      "where": "the desk between notes, e.g. y2380-2540",
+      "what": "The desk grain is a single monochrome overlay, not photographic: its RGB channels correlate at r=0.984-0.995 with amplitude ratios 1 : 1.60 : 2.22, its correlation length is about 3 device pixels (autocorrelation at lag 1 is 0.877 horizontally against 0.593 vertically), and it is anisotropically stretched.",
+      "why": "One grey noise layer composited over a brown fill at CSS resolution and scaled by the device pixel ratio is a procedural noise overlay, which the rubric names as an automatic failure."
+    }
+  ],
+  "what_is_working": [
+    "The tear masks genuinely do not repeat. After correcting for endpoint artefacts, band-passed silhouette detail across all fourteen note edges in the Chat hero peaks at r=0.581 (properly-top against onehour-top, mirrored), against a phase-randomised surrogate null whose maximum over forty trials is 0.556 - statistically indistinguishable from independent masks. A 40x120 pixel 2D template taken from the big note's tear fibres finds no off-source match above 0.433 anywhere else on the screen, where a reused mask would give 1.0.",
+    "The tear edge micro-structure is the best thing in the evidence. At 300 percent (02_chat_300_edge.png, 02_chat_300_hand.png) and in the fringe of the settings note at 05_settings.png y1230-1500, the fibres vary in length, angle, density and clumping, some hairs detach entirely, and a dark under-fringe sits behind them. It reads as torn rather than cut.",
+    "Silhouette variety is real. The 'ugh' note carries a concave bite out of its left side, the big Chat note has a wavy dipping top, the 'YOURS' note on Pulse has a diagonal tear down its right side, and the graph-paper note in 04_moments has a ragged right edge - no two notes read as the same cut-out.",
+    "Light direction is consistent wherever a shadow exists. Every note brightens on its top and left edges (up to 138 against a desk of 82 at two pixels out) and darkens on its bottom and right (down to 33-38 at six to ten pixels out); the rendered candle casts at 54.5 degrees down-right; the rendered spheres are lit from upper-left with contact shadows down-right. Nothing disagrees with an upper-left key.",
+    "The candle and the bead cluster on Pulse are genuine render output - gradient shading across a curved body, a modelled wick, and contact shadows that start dark at the base and soften outward rather than being a uniform blur."
+  ],
+  "verdict": "The tear work is genuine and I want to say so plainly: the masks are measurably non-repeating, the fibres survive 300 percent zoom, the silhouettes differ from note to note, and the two rendered feeling objects on Pulse are real geometry lit from the same upper-left key that the notes' shadows agree with. But the category is about paper reading as photographed, and the paper is not there. Inside the torn outline is a flat cream fill: high-pass texture of 0.06 to 0.30 grey levels, eleven distinct colours in a 36x180 patch, nothing but quantisation terraces at 40x, while the desk beneath it carries more grain than the sheet does. The handwriting is a single webfont whose repeated letters correlate at r=0.9999 and whose ink is one flat value for three quarters of its pixels, so every 'e' in the app was written with identical pressure. There are no folds or creases anywhere in the evidence, and the clip that is supposed to prove them is 280 frames of a motionless screenshot; the dusk crop that is supposed to prove the lighting responds is the same file as the day one, byte for byte. Worst of all, contrast-stretch the hero and a dashed rectangle appears on the desk around every single note, corner brackets and all, poking out past the torn edge - and it is faintly visible unenhanced in the very 300 percent crops the rubric points at. Add the opaque pure-black bar under the header on eight of ten screens, the five square-cornered nav rectangles everywhere, and a whole setup screen with no paper on it at all, and the illusion holds only in the one place the tear generator is doing the work. Nine of twenty-five, well below the floor."
+}

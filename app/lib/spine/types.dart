@@ -1,6 +1,13 @@
 // The event type registry. docs/EVENT_TYPES.md lists the same seventeen types; the schema test
-// fails if the two disagree. Adding a type: one entry here and one renderer in
-// regions/chat/renderers/. Nothing else.
+// fails if the two disagree.
+//
+// Adding a type is one entry here and one renderer in regions/chat/renderers.dart, and
+// app/test/thread_types_test.dart holds both ends of that to it: every renderer named here has to
+// exist, every renderer there has to be named here, and every type has to read as a sentence in
+// search and in a notification. For most of this build's life the field below named a directory
+// that did not exist and no code read it, while the thread and search each kept their own copy of
+// a switch on the type — so a type added to one and forgotten in the other rendered properly in
+// the thread and as a bare id in search. Hence the tests.
 
 /// How a type is announced when it arrives from the partner.
 enum Notify {
@@ -51,7 +58,7 @@ class EventTypeSpec {
   final Notify notify;
   final SearchSpec search;
 
-  /// The renderer id in regions/chat/renderers (one per type).
+  /// The renderer id in regions/chat/renderers.dart (one per type; the map is keyed by this).
   final String renderer;
 
   /// Payload keys whose values are event ids (become `refs`).

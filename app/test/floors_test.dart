@@ -15,6 +15,7 @@ import 'package:desk/spine/types.dart';
 import 'package:desk/transport/transport.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:desk/feelings/landing.dart';
+import 'package:desk/regions/chat/renderers.dart';
 
 void main() {
   test('at least thirty built-in feelings, in at least five named families', () {
@@ -65,15 +66,27 @@ void main() {
   });
 
   test('at least fourteen event types, each with a renderer and a notification treatment', () {
+    // This test used to assert that a non-nullable List was not null, which is to say it asserted
+    // nothing at all while carrying a name that said otherwise. The renderer half now has to
+    // exist in regions/chat/renderers.dart, and thread_types_test holds the other end.
     expect(kEventTypes.length, greaterThanOrEqualTo(14));
-    for (final t in kEventTypes) {
-      expect(t.id.trim(), isNotEmpty);
-      expect(t.required, isNotNull);
-      expect(kEventTypeById[t.id], same(t), reason: '${t.id} is reachable from the registry');
+    for (final spec in kEventTypes) {
+      expect(spec.renderer.trim(), isNotEmpty, reason: '${spec.id} names no renderer');
+      expect(kThreadRenderers.containsKey(spec.renderer), isTrue,
+          reason: '${spec.id} names a renderer that does not exist');
+      expect(Notify.values.contains(spec.notify), isTrue);
+      expect(spec.search.excluded || spec.search.textFields.isNotEmpty ||
+             spec.search.facets.isNotEmpty, isTrue,
+          reason: '${spec.id} can neither be searched nor filtered nor is it excluded, so it '
+              'would be invisible in Moments and in search both');
     }
-    // adding an eighteenth is one entry and one renderer, which is only true while the registry is
-    // the single place a type is declared
-    expect(kEventTypeById.length, kEventTypes.length);
+    // and the seventeen the brief names are all of them present
+    for (final id in ['message', 'photo', 'video', 'voice_note', 'reaction', 'message_edit',
+                      'message_delete', 'read_marker', 'feeling', 'state_declared',
+                      'state_passive', 'date_event', 'todo_event', 'milestone', 'ritual_kept',
+                      'ping', 'feeling_authored']) {
+      expect(kEventTypeById[id], isNotNull, reason: '$id is not in the registry');
+    }
   });
 
   test('at least four shared-life modules, each writing into the one log', () {
