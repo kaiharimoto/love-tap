@@ -785,6 +785,57 @@
     "samples": 40
    }
   },
+  "assets/objects/obj_confetti.png": {
+   "bytes": 192692,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_confetti",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_confetti_shadow.png": {
+   "bytes": 70191,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_confetti",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_confetti_shadow_dusk.png": {
+   "bytes": 66189,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_confetti",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
   "assets/objects/obj_crane.png": {
    "bytes": 451634,
    "generator": "blender/objects/objects.py",
@@ -1023,6 +1074,23 @@
     "samples": 28
    }
   },
+  "assets/objects/obj_gold_star_shadow_dusk.png": {
+   "bytes": 39319,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_gold_star",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
   "assets/objects/obj_heart_fold.png": {
    "bytes": 401714,
    "generator": "blender/objects/objects.py",
@@ -1157,6 +1225,40 @@
     ],
     "rig": "blender/rig/common.py",
     "samples": 40
+   }
+  },
+  "assets/objects/obj_ribbon.png": {
+   "bytes": 195644,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_ribbon",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_ribbon_shadow.png": {
+   "bytes": 120852,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_ribbon",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
    }
   },
   "assets/objects/obj_ticket.png": {
