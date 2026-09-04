@@ -57,6 +57,9 @@ python3 tools/check/manifest.py --out "$LOG/manifest.json" >/dev/null \
 echo "· checking every recipe can actually be built"
 python3 tools/check/recipes.py --out "$LOG/recipes.json" >/dev/null \
   || note_missing "recipes" "a recipe names something the kit cannot build, or tells it something it cannot be told"
+echo "· checking no surface in the library is a flat fill"
+python3 tools/check/surfaces.py --out "$LOG/surfaces.json" \
+  || note_missing "surfaces" "a rendered surface in the library has nothing in it; see $LOG/surfaces.json"
 echo "· checking the push payload carries only kind and sender"
 python3 tools/push/webpush.py --self-test > "$LOG/webpush.txt" 2>&1 || note_missing "push" "the web push sender failed its own vectors"
 

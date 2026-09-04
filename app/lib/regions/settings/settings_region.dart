@@ -113,14 +113,27 @@ class _SettingsRegionState extends State<SettingsRegion> {
         const Stamped.onDesk('what may interrupt', size: 11),
         const SizedBox(height: 6),
         if (!scope.ambient.allowed)
+          // On a slip, and in the ink that is legible on wood. This was pencil grey written
+          // straight onto the desk: 0xFF6D6D70 on 0xFF5E5044 is under two to one, and it is the
+          // one thing on the screen that has to be tapped before any of the rest of it does
+          // anything.
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: GestureDetector(
-              onTap: () async {
-                await scope.ambient.ask();
-                if (mounted) setState(() {});
-              },
-              child: Text('let it interrupt you', style: Hands.margin(size: 16)),
+            padding: const EdgeInsets.fromLTRB(2, 0, 2, 12),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Slip(
+                id: 'settings.interrupt',
+                row: 2,
+                stock: 'sticky_yellow',
+                torn: false,
+                padding: const EdgeInsets.fromLTRB(14, 8, 14, 9),
+                onTap: () async {
+                  await scope.ambient.ask();
+                  if (mounted) setState(() {});
+                },
+                child: Text('let it interrupt you',
+                    style: Hands.margin(size: 16).copyWith(color: Pen.stamp)),
+              ),
             ),
           ),
         if (_prefs != null)
