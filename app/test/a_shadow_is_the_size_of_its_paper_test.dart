@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  _unconstrainedIsTheSizeOfItsWriting();
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     await MaterialLibrary.load();
@@ -73,5 +74,41 @@ void main() {
     ));
     await tester.pump();
     expect(tester.getSize(find.byType(PaperPiece)).height, lessThan(400));
+  });
+}
+
+// ---------------------------------------------------------------------------------------------
+// And a piece nothing is constraining is the width of what is on it.
+//
+// PaperPiece fell back to a flat 320 logical points whenever its width was unbounded — a slip in
+// a horizontally scrolling row, which is what every filter chip in Moments is. The chip reading
+// `both` came out nine hundred and sixty device pixels wide, two thirds of the screen, and the
+// third chip was off the right edge of the artifact entirely.
+void _unconstrainedIsTheSizeOfItsWriting() {
+  testWidgets('a piece with nothing constraining it is the width of its writing', (tester) async {
+    late Size narrow;
+    late Size wide;
+    for (final (label, out) in [('both', 0), ('a much longer label than that', 1)]) {
+      await tester.pumpWidget(Directionality(
+        textDirection: TextDirection.ltr,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(children: [
+            PaperPiece(
+              key: const ValueKey('chip'),
+              stockId: '',
+              padding: const EdgeInsets.fromLTRB(11, 5, 11, 6),
+              child: Text(label, textDirection: TextDirection.ltr),
+            ),
+          ]),
+        ),
+      ));
+      final size = tester.getSize(find.byKey(const ValueKey('chip')));
+      if (out == 0) narrow = size; else wide = size;
+    }
+    expect(narrow.width, lessThan(120),
+        reason: 'a four-letter chip came out ${narrow.width} points wide');
+    expect(wide.width, greaterThan(narrow.width),
+        reason: 'both labels came out the same width, so the width is not the writing');
   });
 }

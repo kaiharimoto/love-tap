@@ -42,10 +42,11 @@ class _UsRegionState extends State<UsRegion> {
             module: kModules[i],
             ctx: ctx,
             row: i,
-            height: _windowFor(kModules[i].id),
+            rows: _rowsFor(kModules[i].id),
             onOpen: () => Navigator.of(context).push(
               MaterialPageRoute<void>(
-                builder: (_) => _Alone(module: kModules[i], ctx: ctx),
+                // opened on its own it gets the whole of itself: no limit, its own scroller
+              builder: (_) => _Alone(module: kModules[i], ctx: ctx.whole()),
               ),
             ),
           ),
@@ -53,13 +54,17 @@ class _UsRegionState extends State<UsRegion> {
     );
   }
 
-  /// How much of each module is on the desk before you have to move something. The dates and the
-  /// list are the two anyone actually reads standing up, so they get more of it.
-  static double _windowFor(String id) => switch (id) {
-    'dates' => 300,
-    'todos' => 268,
-    'calendar' => 210,
-    _ => 190,
+  /// How much of each module is on the desk before you have to move something, counted in rows
+  /// rather than in points. It used to be a height, and a height cuts a row in half: a to-do read
+  /// `get someone out to look at the` and then stopped at a hard horizontal edge. Rows end where
+  /// the paper ends.
+  ///
+  /// The dates and the list are the two anyone reads standing up, so they get more of them.
+  static int _rowsFor(String id) => switch (id) {
+    'dates' => 2,
+    'todos' => 3,
+    'calendar' => 2,
+    _ => 2,
   };
 }
 
@@ -70,14 +75,16 @@ class _Section extends StatelessWidget {
     required this.module,
     required this.ctx,
     required this.row,
-    required this.height,
+    required this.rows,
     required this.onOpen,
   });
 
   final Module module;
   final ModuleContext ctx;
   final int row;
-  final double height;
+
+  /// How many of the module's own rows are on the desk. Whole rows, so nothing is sliced.
+  final int rows;
   final VoidCallback onOpen;
 
   @override
@@ -94,35 +101,33 @@ class _Section extends StatelessWidget {
               row: row,
               stock: 'index',
               torn: false,
-              width: 200,
+              width: 236,
               padding: const EdgeInsets.fromLTRB(12, 6, 12, 7),
               onTap: onOpen,
-              child: Row(
+              // The label and the glance used to share one line on a card two hundred points
+              // wide, and there was never room: three of the four cards read `next: the …`,
+              // `us in 65 d…`. A card is a card — the name is stamped on it and what it would
+              // tell you is written under the stamp, on the next line, where it fits.
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // a card is two hundred points wide and "dates that matter" stamped at eleven
-                  // is wider than what is left of it, so the label shrinks rather than spilling
-                  Flexible(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.centerLeft,
-                      child: Stamped(module.label, size: 11),
-                    ),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: Stamped(module.label, size: 11),
                   ),
-                  const SizedBox(width: 10),
-                  Flexible(
-                    child: Text(
-                      module.glance(ctx.events),
-                      style: Hands.margin(size: 12),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                  const SizedBox(height: 3),
+                  Text(
+                    module.glance(ctx.events),
+                    style: Hands.margin(size: 12.5),
+                    maxLines: 2,
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(height: height, child: module.build(context, ctx)),
+          module.build(context, ctx.only(rows)),
         ],
       ),
     );

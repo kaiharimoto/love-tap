@@ -152,6 +152,21 @@ class MaterialLibrary {
 
   bool hasTearRender(String id, String suffix) => tears.any((e) => e.id == '$id$suffix');
 
+  /// Masks that are roughly as tall as they are wide: a scrap rather than a strip. A feeling that
+  /// is a drawn mark is drawn on one of these, because ink has to be on something.
+  List<String> get scrapTears {
+    final ok = <String>[];
+    for (final e in tears) {
+      if (e.id.contains('_edge') || e.id.contains('_shadow')) continue;
+      final w = e.w, h = e.h;
+      if (w <= 0 || h <= 0) continue;
+      final ratio = h / w;
+      if (ratio > 0.72 && ratio < 1.4) ok.add(e.id);
+    }
+    ok.sort();
+    return ok.isEmpty ? tearMasks : ok;
+  }
+
   /// The safe writing insets of a mask (left, top, right, bottom as fractions), or a modest
   /// default when the library has not been baked.
   List<double> safeOf(String tearId) {

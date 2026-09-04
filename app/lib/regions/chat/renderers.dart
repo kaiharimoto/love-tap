@@ -80,6 +80,9 @@ Widget _objectLanding(NoteContext c) {
           feeling: f,
           size: 96,
           intensity: (c.payload['intensity'] as num?)?.toDouble() ?? 0.7,
+          // this one *is* the note: a drawn feeling is drawn on the sheet it arrived on, and a
+          // scrap laid over it would be a sticker on a letter
+          onPaper: false,
         ),
       const SizedBox(width: 10),
       Flexible(child: Written(f?.name ?? '', by: c.item.author, size: 19)),
@@ -89,7 +92,7 @@ Widget _objectLanding(NoteContext c) {
 
 /// The types that are a line in the margin rather than a piece of paper: state, the modules,
 /// a ping, a feeling somebody made. All of them read as one sentence in pencil.
-Widget _marginSentence(NoteContext c) =>
+Widget marginSentence(NoteContext c) =>
     Text(summaryOf(c.event, me: c.me), style: Hands.margin(size: 14).copyWith(color: Pen.margin));
 
 /// Reactions, read markers, edits and deletes never stand as rows: they change a row that is
@@ -107,14 +110,14 @@ const Map<String, ThreadBody> kThreadRenderers = {
   'edit_mark': _neverARow,
   'stub': _neverARow,
   'ink_dries': _neverARow,
-  'margin_note': _marginSentence,
-  'margin_mark': _marginSentence,
-  'ticket_stub': _marginSentence,
-  'list_line': _marginSentence,
-  'stamped_card': _marginSentence,
-  'tally_mark': _marginSentence,
-  'folded_clock': _marginSentence,
-  'new_feeling_card': _marginSentence,
+  'margin_note': marginSentence,
+  'margin_mark': marginSentence,
+  'ticket_stub': marginSentence,
+  'list_line': marginSentence,
+  'stamped_card': marginSentence,
+  'tally_mark': marginSentence,
+  'folded_clock': marginSentence,
+  'new_feeling_card': marginSentence,
 };
 
 /// The one sentence an event reads as away from the thread.
@@ -207,7 +210,9 @@ String _stateSentence(String who, Map<String, dynamic> p, {required bool declare
     'energy' => '$who has ${_dial(value)} left',
     'status_line' => '$who: $words',
     'battery' => value == 'low' ? "$who's phone is nearly out" : "$who's phone is on $words",
-    'at_home' => value == true || value == 'true' ? '$who is home' : '$who is out',
+    // a passive notice is a change, so it reads as one: the phone noticed them arrive, it did
+    // not take a reading of where they are
+    'at_home' => value == true || value == 'true' ? '$who got in' : '$who went out',
     'ringer' => "$who's phone is on $words",
     'moving' => '$who is $words',
     'network' => "$who's signal is $words",

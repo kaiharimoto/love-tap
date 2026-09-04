@@ -35,6 +35,7 @@ class ModuleContext {
     required this.partner,
     required this.now,
     required this.emit,
+    this.limit,
   });
 
   /// Every event in the spine, in order. A module filters for its own.
@@ -46,5 +47,31 @@ class ModuleContext {
   /// The only way anything is written.
   final Future<Event> Function(String type, Map<String, dynamic> payload) emit;
 
+  /// How many rows there is room for, when a module is one of four on the Us desk. Null when the
+  /// module has been pushed open on its own and can run to whatever length it is.
+  ///
+  /// This exists because the alternative did not work: Us gave each module a fixed-height window
+  /// onto its own scroller, and a window cuts wherever it lands — a to-do read `get someone out to
+  /// look at the` and then stopped at a hard horizontal edge, which is a rendering fault, not a
+  /// stack of paper. A module that is handed a limit lays out that many whole rows and ends.
+  final int? limit;
+
+  /// The first [limit] of something, or all of it when there is no limit.
+  List<T> few<T>(List<T> xs) => limit == null ? xs : xs.take(limit!).toList();
+
+  /// True when the module is a section on the shared desk rather than open on its own: it should
+  /// lay itself out at its natural height and not scroll, because Us is the scroller.
+  bool get onTheDesk => limit != null;
+
   List<Event> ofTypes(List<String> types) => events.where((e) => types.contains(e.type)).toList();
+
+  /// The same context, with room for [rows] of whatever the module lists.
+  ModuleContext only(int rows) => ModuleContext(
+        events: events, me: me, partner: partner, now: now, emit: emit, limit: rows,
+      );
+
+  /// The same context with no limit at all: the module opened on its own.
+  ModuleContext whole() => ModuleContext(
+        events: events, me: me, partner: partner, now: now, emit: emit,
+      );
 }

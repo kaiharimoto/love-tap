@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3029
+   "ms": 6209
   },
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2305
   },
   {
    "do": "shot",
-   "ms": 1897
+   "ms": 2186
   },
   {
    "do": "report",
-   "ms": 729
+   "ms": 720
   }
  ],
  "shots": [
@@ -35,7 +35,6 @@
   {
    "region": 0,
    "visible": [
-    "0001M2ZNX8AF4811Y2F7FNAGMG",
     "0001M34C9R04NVG11H0AJ4SFDZ",
     "0001M3AY8G83A3FBSRB1Y7W78Q",
     "0001M3F41R2APQC59QKBMZK4XF",
@@ -45,17 +44,15 @@
     "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M2ZNX8AF4811Y2F7FNAGMG": "tear_001",
-    "0001M34C9R04NVG11H0AJ4SFDZ": "tear_020",
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_043",
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_005",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_026",
-    "0001M4GW48FEW3M67XKAZT5051": "tear_048",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_010",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_032"
+    "0001M34C9R04NVG11H0AJ4SFDZ": "tear_043",
+    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_005",
+    "0001M3F41R2APQC59QKBMZK4XF": "tear_026",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_048",
+    "0001M4GW48FEW3M67XKAZT5051": "tear_010",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_052"
    },
    "stocks": {
-    "0001M2ZNX8AF4811Y2F7FNAGMG": "lined_02",
     "0001M34C9R04NVG11H0AJ4SFDZ": "looseleaf_03",
     "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
     "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
@@ -65,23 +62,36 @@
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
    },
    "scroll": {
-    "first": 8178,
-    "last": 8185,
-    "of": 8186
+    "first": 8368,
+    "last": 8374,
+    "of": 8375
    },
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 48,
    "seed": 20260903,
-   "events": 13724,
+   "events": 14050,
    "transport": "local",
    "link": "connecting",
    "me": "teo",
    "masks_in_pool": 56,
    "writable_masks": 47,
+   "light": "dusk",
+   "has_dusk_paper": true,
+   "paper_stocks": 54,
+   "setup_showing": false,
+   "fold": {
+    "sequence": "unfold_thirds",
+    "length": 240,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
+   },
    "at": "crops/dusk_pulse.png"
   }
  ],
- "cold_ms": 14796,
+ "cold_ms": 13819,
  "problems": [],
  "ok": true
 }

@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 1921
+   "ms": 2008
   },
   {
    "do": "wait",
-   "ms": 2106
+   "ms": 2104
   },
   {
    "do": "shot",
-   "ms": 1805
+   "ms": 1693
   },
   {
    "do": "report",
-   "ms": 708
+   "ms": 706
   }
  ],
  "shots": [
@@ -38,7 +38,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-04T04:19:10.953Z",
+   "now": "2026-09-04T17:31:08.258Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -47,10 +47,17 @@
    "me": "teo",
    "masks_in_pool": 56,
    "writable_masks": 47,
+   "light": "day",
+   "has_dusk_paper": true,
+   "paper_stocks": 54,
+   "setup_showing": false,
+   "fold": {
+    "sequence": null
+   },
    "at": "10_first_run.png"
   }
  ],
- "cold_ms": 1530,
+ "cold_ms": 1439,
  "problems": [],
  "ok": true
 }

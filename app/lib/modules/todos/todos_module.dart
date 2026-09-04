@@ -83,25 +83,30 @@ class TodoList extends StatelessWidget {
     final items = projectTodos(ctx.events);
     final open = items.where((t) => !t.done).toList();
     final done = items.where((t) => t.done).toList().reversed.toList();
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(4, 4, 4, 90),
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(12, 10, 12, 4),
-          child: Row(children: [
-            const Stamped('open', size: 11),
-            const Spacer(),
-            GestureDetector(onTap: () => _add(context), child: Text('add one', style: Hands.margin(size: 14))),
-          ]),
-        ),
-        if (open.isEmpty)
-          Padding(padding: const EdgeInsets.all(12), child: Text('nothing to do. suspicious.', style: Hands.margin(size: 15))),
-        for (final (i, t) in open.indexed) _Line(item: t, ctx: ctx, row: i),
+    final rows = <Widget>[
+      Padding(
+        padding: const EdgeInsets.fromLTRB(12, 10, 12, 4),
+        child: Row(children: [
+          const Stamped('open', size: 11),
+          const Spacer(),
+          GestureDetector(onTap: () => _add(context), child: Text('add one', style: Hands.margin(size: 14))),
+        ]),
+      ),
+      if (open.isEmpty)
+        Padding(padding: const EdgeInsets.all(12), child: Text('nothing to do. suspicious.', style: Hands.margin(size: 15))),
+      for (final (i, t) in ctx.few(open).indexed) _Line(item: t, ctx: ctx, row: i),
+      // the done half is only for the module opened on its own; on the desk there is room for
+      // what is still to do and nothing else
+      if (!ctx.onTheDesk) ...[
         const SizedBox(height: 14),
         const Padding(padding: EdgeInsets.fromLTRB(12, 4, 12, 4), child: Stamped('done', size: 11)),
         for (final (i, t) in done.take(30).indexed) _Line(item: t, ctx: ctx, row: open.length + i),
       ],
-    );
+    ];
+    if (ctx.onTheDesk) {
+      return Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+    }
+    return ListView(padding: const EdgeInsets.fromLTRB(4, 4, 4, 90), children: rows);
   }
 
   Future<void> _add(BuildContext context) async {

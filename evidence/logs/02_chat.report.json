@@ -8,17 +8,19 @@
   "0002V17SVRQY5E5S69MJ3HT7NT",
   "0002V1KKSGZBD11H39SVDW9WD5",
   "0002V1XN2R0RM20X63VYGJ17V7",
-  "0002V3A8T8TA4CKWWHNDVHH6VV"
+  "0002V3A8T8TA4CKWWHNDVHH6VV",
+  "0002VBA59G5C7M6892M0WA6BF1"
  ],
  "tears": {
-  "0002V0E6H000S96SY78DF5NFTE": "tear_029",
-  "0002V0PH48RXHYX3MJ7PZ1PMBG": "tear_050",
-  "0002V0SDX06FA58CJ9JXH23W7R": "tear_012",
-  "0002V11RG88S9FGS842FKJ9ZHQ": "tear_034",
-  "0002V17SVRQY5E5S69MJ3HT7NT": "tear_054",
-  "0002V1KKSGZBD11H39SVDW9WD5": "tear_016",
-  "0002V1XN2R0RM20X63VYGJ17V7": "tear_039",
-  "0002V3A8T8TA4CKWWHNDVHH6VV": "tear_002"
+  "0002V0E6H000S96SY78DF5NFTE": "tear_051",
+  "0002V0PH48RXHYX3MJ7PZ1PMBG": "tear_013",
+  "0002V0SDX06FA58CJ9JXH23W7R": "tear_035",
+  "0002V11RG88S9FGS842FKJ9ZHQ": "tear_055",
+  "0002V17SVRQY5E5S69MJ3HT7NT": "tear_018",
+  "0002V1KKSGZBD11H39SVDW9WD5": "tear_040",
+  "0002V1XN2R0RM20X63VYGJ17V7": "tear_003",
+  "0002V3A8T8TA4CKWWHNDVHH6VV": "tear_023",
+  "0002VBA59G5C7M6892M0WA6BF1": "tear_045"
  },
  "stocks": {
   "0002V0E6H000S96SY78DF5NFTE": "lined_01",
@@ -28,25 +30,35 @@
   "0002V17SVRQY5E5S69MJ3HT7NT": "lined_04",
   "0002V1KKSGZBD11H39SVDW9WD5": "index_02",
   "0002V1XN2R0RM20X63VYGJ17V7": "legal_02",
-  "0002V3A8T8TA4CKWWHNDVHH6VV": "looseleaf_01"
+  "0002V3A8T8TA4CKWWHNDVHH6VV": "looseleaf_01",
+  "0002VBA59G5C7M6892M0WA6BF1": "receipt_01"
  },
  "scroll": {
-  "first": 5105,
-  "last": 5112,
-  "of": 8240
+  "first": 5189,
+  "last": 5197,
+  "of": 8375
  },
- "now": "2026-08-30T09:14:00.000Z",
+ "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 96,
  "seed": 20260903,
- "events": 13799,
+ "events": 14050,
  "transport": "local",
  "link": "connecting",
  "me": "teo",
  "masks_in_pool": 56,
  "writable_masks": 47,
  "light": "day",
- "has_dusk_paper": false,
- "paper_stocks": 25,
+ "has_dusk_paper": true,
+ "paper_stocks": 54,
  "setup_showing": false,
+ "fold": {
+  "sequence": "unfold_thirds",
+  "length": 240,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
+ },
  "at": "02_chat.png"
 }

@@ -51,6 +51,44 @@ void main() {
     }
   });
 
+  test('the thread and search read an event the same way', () {
+    // There were two sentences for one event and they had drifted. A scheduled ping read as
+    // "one hour, then stop · 2026-04-23T16:00:00+01:00" on the hero artifact and as
+    // "one hour, then stop · Thu 23 Apr" in search, off the same payload — a person was being
+    // shown a stored field. The thread's margin line now asks summaryOf, like everything else.
+    for (final spec in kEventTypes) {
+      final e = Event(
+        id: '01J0', seq: 1, author: Person.noor, device: DeviceKind.android,
+        ts: DateTime.utc(2026, 4, 22, 16, 30).millisecondsSinceEpoch,
+        type: spec.id,
+        payload: {for (final k in spec.required) k: _plausible(k)},
+      );
+      final line = summaryOf(e, me: Person.teo);
+      // no stored value reaches a person raw: not an ISO timestamp, not a registry key
+      expect(line, isNot(matches(RegExp(r'\d{4}-\d{2}-\d{2}T'))),
+          reason: '${spec.id} shows a machine timestamp: "$line"');
+      expect(line, isNot(contains('_')), reason: '${spec.id} shows a key: "$line"');
+    }
+  });
+
+  test('marginality is asked of the registry, not of a second list', () {
+    // The thread kept its own set of the eight types that are a line rather than a sheet, and
+    // that set was a third place a new type had to be added to. It is the registry's answer now:
+    // a type is marginal exactly when the renderer it names is the margin sentence.
+    final marginal = [
+      for (final s in kEventTypes)
+        if (kThreadRenderers[s.renderer] == marginSentence) s.id,
+    ];
+    expect(marginal, containsAll(<String>[
+      'state_declared', 'state_passive', 'ritual_kept', 'milestone',
+      'date_event', 'todo_event', 'ping', 'feeling_authored',
+    ]));
+    // and the things that are sheets are not in it
+    expect(marginal, isNot(contains('message')));
+    expect(marginal, isNot(contains('photo')));
+    expect(marginal, isNot(contains('voice_note')));
+  });
+
   test('the types that are never rows say so', () {
     for (final spec in kEventTypes) {
       if (spec.rowInThread) continue;
@@ -76,6 +114,6 @@ Object _plausible(String key) => switch (key) {
       'ritual' => 'text when home',
       'done' => false,
       'upto_seq' => 12,
-      'at' => '2026-07-18T09:00:00+01:00',
+      'at' || 'fires_at' || 'date' || 'when' || 'kept_at' => '2026-07-18T09:00:00+01:00',
       _ => 'x',
     };

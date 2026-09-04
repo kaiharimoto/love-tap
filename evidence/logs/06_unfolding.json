@@ -6,44 +6,44 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8912/",
+ "url": "http://127.0.0.1:8799/",
  "steps": [
   {
    "do": "goTo",
-   "ms": 4319
+   "ms": 2281
   },
   {
    "do": "wait",
-   "ms": 2004
+   "ms": 2007
   },
   {
    "do": "scrollTo",
-   "ms": 2580
+   "ms": 1704
   },
   {
    "do": "wait",
-   "ms": 1603
+   "ms": 1604
   },
   {
    "do": "frames",
-   "ms": 38889
+   "ms": 16196
   },
   {
    "do": "unfold",
-   "ms": 497
+   "ms": 367
   },
   {
    "do": "frames",
-   "ms": 247866
+   "ms": 203364
   },
   {
    "do": "report",
-   "ms": 462
+   "ms": 430
   }
  ],
  "shots": [
   {
-   "frames": 40,
+   "frames": 20,
    "dir": "evidence/frames/06_unfolding",
    "ms": 16,
    "drive": null
@@ -66,11 +66,11 @@
     "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_005",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_026",
-    "0001M4GW48FEW3M67XKAZT5051": "tear_048",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_010",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_032"
+    "0001M3F41R2APQC59QKBMZK4XF": "tear_026",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_048",
+    "0001M4GW48FEW3M67XKAZT5051": "tear_010",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_052"
    },
    "stocks": {
     "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
@@ -80,22 +80,22 @@
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
    },
    "scroll": {
-    "first": 8369,
-    "last": 8373,
-    "of": 8374
+    "first": 8370,
+    "last": 8374,
+    "of": 8375
    },
-   "now": "2026-08-30T09:14:00.000Z",
-   "driven_ms": 4880,
+   "now": "2026-09-03T19:40:00.000Z",
+   "driven_ms": 4560,
    "seed": 20260903,
-   "events": 14049,
+   "events": 14050,
    "transport": "local",
    "link": "connecting",
    "me": "teo",
    "masks_in_pool": 56,
    "writable_masks": 47,
    "light": "day",
-   "has_dusk_paper": false,
-   "paper_stocks": 27,
+   "has_dusk_paper": true,
+   "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
@@ -109,7 +109,7 @@
    "at": "06_unfolding_b"
   }
  ],
- "cold_ms": 11677,
+ "cold_ms": 17410,
  "problems": [],
  "ok": true
 }

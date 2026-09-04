@@ -1,5 +1,6 @@
 // The date planner and tracker: a stack of ticket stubs on the desk.
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../material/hands.dart';
 import '../../material/palette.dart';
@@ -17,18 +18,23 @@ class DateList extends StatelessWidget {
     final upcoming = dates.where((d) => d.when != null && d.when!.isAfter(ctx.now) && d.state != 'done' && d.state != 'rated').toList()
       ..sort((a, b) => a.when!.compareTo(b.when!));
     final past = dates.where((d) => !upcoming.contains(d)).toList().reversed.toList();
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(4, 4, 4, 90),
-      children: [
-        _Header(label: 'ahead', onAdd: () => _plan(context)),
-        if (upcoming.isEmpty)
-          Padding(padding: const EdgeInsets.all(12), child: Text("nowhere planned. that's fine.", style: Hands.margin(size: 15))),
-        for (var i = 0; i < upcoming.length; i++) _Stub(item: upcoming[i], ctx: ctx, row: i),
-        const SizedBox(height: 14),
-        const _Header(label: 'been'),
-        for (var i = 0; i < past.take(40).length; i++) _Stub(item: past[i], ctx: ctx, row: upcoming.length + i),
-      ],
-    );
+    final ahead = ctx.few(upcoming);
+    final rows = <Widget>[
+      _Header(label: 'ahead', onAdd: () => _plan(context)),
+      if (upcoming.isEmpty)
+        Padding(padding: const EdgeInsets.all(12), child: Text("nowhere planned. that's fine.", style: Hands.margin(size: 15))),
+      for (var i = 0; i < ahead.length; i++) _Stub(item: ahead[i], ctx: ctx, row: i),
+      // where they have been is a long list; on the desk it is one stub under the heading, and
+      // the whole of it when the module is opened on its own
+      const SizedBox(height: 14),
+      const _Header(label: 'been'),
+      for (var i = 0; i < (ctx.onTheDesk ? past.take(1) : past.take(40)).length; i++)
+        _Stub(item: past[i], ctx: ctx, row: ahead.length + i),
+    ];
+    if (ctx.onTheDesk) {
+      return Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+    }
+    return ListView(padding: const EdgeInsets.fromLTRB(4, 4, 4, 90), children: rows);
   }
 
   Future<void> _plan(BuildContext context) async {
@@ -106,7 +112,7 @@ class _StubState extends State<_Stub> {
                 Stamped(item.state, size: 9, colour: Pen.margin),
                 const SizedBox(width: 8),
                 if (item.when != null)
-                  Text('${item.when!.day}/${item.when!.month}', style: Hands.margin(size: 13)),
+                  Text(DateFormat('d MMM').format(item.when!), style: Hands.margin(size: 13)),
                 const Spacer(),
                 if (item.rating != null) Stars(rating: item.rating!),
               ],

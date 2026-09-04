@@ -254,41 +254,96 @@ class _Chip extends StatelessWidget {
 }
 
 /// Everything they have sent each other, as prints on the desk.
+///
+/// Not a grid. A grid gives every item the same square hole, and two things go wrong at once: a
+/// photograph is centre-cropped to a square, so a wide render of a room becomes an unreadable
+/// patch of its middle; and a voice note — a receipt slip four lines tall — sits at the top of a
+/// square with a hand's width of bare desk under it. Eleven of those on one screen read as a
+/// layout that has failed rather than as a pile of prints.
+///
+/// So: three columns, each print at its own shape, each new thing laid on whichever column is
+/// currently shortest. That is also how a pile actually grows.
 class _Gallery extends StatelessWidget {
   const _Gallery({required this.events});
   final List<Event> events;
 
+  static const _columns = 3;
+  static const _gap = 7.0;
+
   @override
   Widget build(BuildContext context) {
     final media = events.reversed.toList();
-    return GridView.builder(
+    final width = (MediaQuery.sizeOf(context).width - 16 - _gap * (_columns - 1)) / _columns;
+
+    final columns = List.generate(_columns, (_) => <Widget>[]);
+    final heights = List.filled(_columns, 0.0);
+    for (final (i, e) in media.indexed) {
+      final tall = _heightOf(e, width);
+      var shortest = 0;
+      for (var c = 1; c < _columns; c++) {
+        if (heights[c] < heights[shortest]) shortest = c;
+      }
+      heights[shortest] += tall + _gap;
+      columns[shortest].add(Padding(
+        padding: const EdgeInsets.only(bottom: _gap),
+        child: _One(event: e, row: i, width: width),
+      ));
+    }
+
+    return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(8, 4, 8, 90),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 6,
-        mainAxisSpacing: 6,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (var c = 0; c < _columns; c++) ...[
+            if (c > 0) const SizedBox(width: _gap),
+            Expanded(child: Column(children: columns[c])),
+          ],
+        ],
       ),
-      itemCount: media.length,
-      itemBuilder: (context, i) {
-        final e = media[i];
-        final hash = (e.payload['poster_blob'] ?? e.payload['blob']) as String;
-        if (e.type == 'voice_note') {
-          // a voice note in the gallery is the slip it was written on, with its length on it
-          return Slip(
-            id: e.id,
-            row: i,
-            stock: 'receipt',
-            padding: const EdgeInsets.all(8),
-            child: Center(
-              child: Text(
-                '${((e.payload['duration_ms'] as num) / 1000).round()}s',
-                style: Hands.margin(size: 14),
-              ),
-            ),
-          );
-        }
-        return BlobImage(hash: hash, fit: BoxFit.cover);
-      },
+    );
+  }
+
+  /// Roughly how tall a thing will be, only so the columns end up about level. A print is its
+  /// own shape; a slip is the few lines that fit on it.
+  static double _heightOf(Event e, double width) {
+    if (e.type == 'voice_note') return 74;
+    final w = (e.payload['w'] as num?)?.toDouble() ?? 4;
+    final h = (e.payload['h'] as num?)?.toDouble() ?? 3;
+    return width * (h / (w == 0 ? 4 : w)).clamp(0.6, 1.6);
+  }
+}
+
+class _One extends StatelessWidget {
+  const _One({required this.event, required this.row, required this.width});
+  final Event event;
+  final int row;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    if (event.type == 'voice_note') {
+      // a voice note in the gallery is the slip it was written on, with its length on it
+      return Slip(
+        id: event.id,
+        row: row,
+        stock: 'receipt',
+        width: width,
+        padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),
+        child: Center(
+          child: Text(
+            '${((event.payload['duration_ms'] as num) / 1000).round()}s',
+            style: Hands.margin(size: 14),
+          ),
+        ),
+      );
+    }
+    final hash = (event.payload['poster_blob'] ?? event.payload['blob']) as String;
+    final w = (event.payload['w'] as num?)?.toDouble() ?? 4;
+    final h = (event.payload['h'] as num?)?.toDouble() ?? 3;
+    return AspectRatio(
+      aspectRatio: (w == 0 ? 4 : w) / (h == 0 ? 3 : h),
+      child: BlobImage(hash: hash, fit: BoxFit.cover),
     );
   }
 }

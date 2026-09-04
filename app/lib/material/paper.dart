@@ -233,15 +233,26 @@ class _RenderWithinTear extends RenderShiftedBox {
 
   @override
   void performLayout() {
-    final width = constraints.hasBoundedWidth ? constraints.maxWidth : 320.0;
     final fL = _safe[0], fT = _safe[1], fR = _safe[2], fB = _safe[3];
     final child = this.child;
     if (child == null) {
-      size = constraints.constrain(Size(width, 0));
+      size = constraints.constrain(Size(constraints.hasBoundedWidth ? constraints.maxWidth : 0, 0));
       return;
     }
-    final inner = (width * (1 - fL - fR) - _padding.horizontal).clamp(24.0, width);
-    child.layout(BoxConstraints(maxWidth: inner), parentUsesSize: true);
+    final double width;
+    if (constraints.hasBoundedWidth) {
+      width = constraints.maxWidth;
+      final inner = (width * (1 - fL - fR) - _padding.horizontal).clamp(24.0, width);
+      child.layout(BoxConstraints(maxWidth: inner), parentUsesSize: true);
+    } else {
+      // Nothing is constraining the width — a slip in a horizontal strip of them, a chip in a
+      // scrolling row. It used to fall back to a flat 320 points, so a filter chip reading
+      // `both` was two thirds of the screen wide and the third chip was off the edge of it.
+      // A piece with no width given is the width of what is written on it.
+      child.layout(const BoxConstraints(), parentUsesSize: true);
+      final horizontal = (1 - fL - fR).clamp(0.35, 1.0);
+      width = (child.size.width + _padding.horizontal) / horizontal;
+    }
     final content = child.size.height + _padding.vertical;
     final vertical = (1 - fT - fB).clamp(0.35, 1.0);
     final height = content / vertical;

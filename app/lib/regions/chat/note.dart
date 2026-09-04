@@ -56,7 +56,7 @@ class Note extends StatelessWidget {
     final e = item.event;
 
     // margin events: a pencil line beside the thread, not a piece of paper
-    if (_isMarginal(item.type)) return _MarginLine(item: item, registry: registry);
+    if (_isMarginal(item.type)) return _MarginLine(item: item, me: scope.me);
 
     final width = MediaQuery.sizeOf(context).width * _noteWidthFraction;
     final stock = lib == null ? '' : stockVariantFor(e, lib);
@@ -135,16 +135,13 @@ class Note extends StatelessWidget {
     );
   }
 
-  static bool _isMarginal(String type) => const {
-    'state_declared',
-    'state_passive',
-    'ritual_kept',
-    'milestone',
-    'date_event',
-    'todo_event',
-    'ping',
-    'feeling_authored',
-  }.contains(type);
+  /// Which types are a line in the margin rather than a piece of paper — asked of the registry,
+  /// not of a list kept here. The registry already says it: those are exactly the types whose
+  /// renderer is the margin sentence. A list here would be a third place a type has to be added
+  /// to, and the two that existed had already drifted.
+  static bool _isMarginal(String type) =>
+      kEventTypeById[type]?.renderer != null &&
+      kThreadRenderers[kEventTypeById[type]!.renderer] == marginSentence;
 
   /// Which square of the stock this note is torn from, so two notes never show the same paper.
   static Alignment _patchOf(Event e) {
@@ -287,66 +284,21 @@ class _DeliveryMark extends StatelessWidget {
   }
 }
 
-/// Module and state events: a mark in the margin of the desk rather than a note of their own.
-/// Something one of them said about themselves, written the way they would say it rather than the
-/// way it is stored. `mood: low` is a field; "noor · low" is a person telling you something.
-String _declared(String who, Map<String, dynamic> p) {
-  final signal = p['signal'] as String?;
-  final value = p['value'];
-  return switch (signal) {
-    'mood' => '$who · $value',
-    'status_line' => '$who · $value',
-    'availability' => '$who is $value',
-    'place' => '$who · $value',
-    'need' => '$who needs ${_dial(value)}',
-    'energy' => '$who has ${_dial(value)} left',
-    _ => '$who · $value',
-  };
-}
-
-/// The three things a phone notices that are worth saying out loud. Everything else it knows stays
-/// on the partner strip, where it is a fact about them rather than a line in the conversation.
-String _noticed(String who, Map<String, dynamic> p) {
-  final value = p['value'];
-  return switch (p['signal']) {
-    'battery' => "$who's phone is nearly out",
-    'at_home' => value == true ? '$who got in' : '$who went out',
-    'ringer' => value == 'silent' ? "$who's phone went quiet" : "$who's phone is on again",
-    _ => '$who · $value',
-  };
-}
-
-String _dial(Object? value) {
-  final n = (value is num) ? value.round() : 2;
-  return switch (n) {
-    <= 0 => 'nothing',
-    1 => 'a little',
-    2 => 'some',
-    3 => 'a lot',
-    _ => 'everything',
-  };
-}
-
+/// A line in the margin of the desk: a rule, the sentence, and when it was written.
+///
+/// The sentence is [summaryOf] and nothing else. This class used to keep its own switch over the
+/// same eight types, and the two had drifted: a scheduled ping read as
+/// `one hour, then stop · 2026-04-23T16:00:00+01:00` in the thread and as
+/// `one hour, then stop · Thu 23 Apr` in search, off the same event. A person was being shown a
+/// stored field. Two sentences for one event is one sentence too many.
 class _MarginLine extends StatelessWidget {
-  const _MarginLine({required this.item, required this.registry});
+  const _MarginLine({required this.item, required this.me});
   final ThreadItem item;
-  final FeelingRegistry registry;
+  final Person me;
 
   @override
   Widget build(BuildContext context) {
-    final p = item.event.payload;
-    final who = item.author.name;
-    final text = switch (item.type) {
-      'state_declared' => _declared(who, p),
-      'state_passive' => _noticed(who, p),
-      'date_event' => '${p['action']} · ${p['title']}${p['rating'] != null ? ' · ${p['rating']}/5' : ''}',
-      'todo_event' => '${p['action']} · ${p['text']}',
-      'milestone' => '${p['title']} · ${p['date']}',
-      'ritual_kept' => 'kept · ${p['title']}',
-      'ping' => '${p['text']} · ${p['fires_at']}',
-      'feeling_authored' => 'a new one · ${p['name']}',
-      _ => item.type,
-    };
+    final text = summaryOf(item.event, me: me);
     return Padding(
       padding: const EdgeInsets.fromLTRB(26, 6, 26, 6),
       child: Row(

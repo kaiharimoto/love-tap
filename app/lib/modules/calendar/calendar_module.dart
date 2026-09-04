@@ -1,5 +1,6 @@
 // The dates that matter: anniversaries and firsts, stamped on cards, counting down.
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../material/hands.dart';
 import '../../material/palette.dart';
@@ -93,12 +94,14 @@ class MilestoneList extends StatelessWidget {
     if (all.isEmpty) {
       return Center(child: Text('no dates that matter yet. add the first.', style: Hands.margin(size: 15)));
     }
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(4, 8, 4, 90),
-      children: [
-        for (final (i, (m, next)) in withNext.indexed) _Card(m: m, next: next, now: ctx.now, row: i),
-      ],
-    );
+    final rows = [
+      for (final (i, (m, next)) in ctx.few(withNext).indexed)
+        _Card(m: m, next: next, now: ctx.now, row: i),
+    ];
+    if (ctx.onTheDesk) {
+      return Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+    }
+    return ListView(padding: const EdgeInsets.fromLTRB(4, 8, 4, 90), children: rows);
   }
 }
 
@@ -135,7 +138,10 @@ class _Card extends StatelessWidget {
                   Stamped(m.kind, size: 9, colour: Pen.margin),
                   const SizedBox(width: 8),
                   if (m.date != null)
-                    Text('${m.date!.day}/${m.date!.month}/${m.date!.year}', style: Hands.margin(size: 13)),
+                    // written, not punched: 9/11/2024 is one date to a British reader and a
+                    // different one to an American, and neither of them is what a person writes
+                    // on a card
+                    Text(DateFormat('d MMM y').format(m.date!), style: Hands.margin(size: 13)),
                 ]),
               ],
             ),

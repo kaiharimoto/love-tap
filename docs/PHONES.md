@@ -104,3 +104,34 @@ this reason rather than substituting anything.
 What would produce them: a host with `/dev/kvm`, or an ARM64 host where the `arm64-v8a` image runs
 natively. Everything else in the capture — the PWA, the tailnet transport, the seeded year — runs
 here unchanged.
+
+### And the third thing that was tried: Flutter's own engine as the second screen
+
+If the emulator will not boot, the far phone still exists — `app/tool/host_daemon.dart` is a real
+spine in the real host role, and `08_state_propagating` is a recording of a gesture on one device
+becoming a sensation on it. What it has never had is a surface. `flutter_tester` has one:
+`RenderRepaintBoundary.toImage` writes a real PNG out of the same framework that draws the app on
+a phone, with no browser anywhere in it. That is arguably a *more* faithful second device than an
+emulator screenshot, so it was worth half an hour to find out.
+
+`docs/far_screen_probe.png` is what came back, and it is why 09 stays missing.
+
+The handwriting is right — both hands load through `FontLoader` and render with their variants —
+and the layout is the app's own. Everything made of paper is gone. Each note is a flat fill in
+`0xFFF1ECDF`: the colour `PaperPiece` paints *underneath* the stock render so that a sheet whose
+image has not arrived is still a sheet. The stock is missing, the tear mask is missing, the edge
+light is missing, the contact shadow is missing, and the desk behind them is missing too.
+
+The cause is not the assets. `flutter test` does bundle them, into `build/unit_test_assets`. It is
+that `testWidgets` runs in a fake-async zone where a real `Future` never completes, so
+`instantiateImageCodec` — every `Image.asset`, and every mask through `MaskCache` — is still
+pending when the frame is drawn. `tester.runAsync` escapes the zone, but a screen holds dozens of
+those decodes across four layers per note, and a render that resolves some of them and not others
+is worse evidence than none: a screen of flat beige rounded rectangles is a photograph of the one
+anti-goal the brief calls a failure of the entire visual concept.
+
+So the probe was deleted rather than kept as a half-working capture path, and its output is left in
+`docs/` as the reason. Three ways to a second screen have now been tried and measured: the x86_64
+emulator under instruction emulation (booted `adbd`, never the framework), a Linux desktop build
+(no GTK in the container), and the engine in a test harness (no material). None of them was faked
+from the PWA.

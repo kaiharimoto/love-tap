@@ -78,12 +78,13 @@ class RitualList extends StatelessWidget {
     if (rituals.isEmpty) {
       return Center(child: Text('nothing kept yet.', style: Hands.margin(size: 15)));
     }
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(4, 8, 4, 90),
-      children: [
-        for (final (i, r) in rituals.indexed) _Ritual(r: r, ctx: ctx, row: i),
-      ],
-    );
+    final rows = [
+      for (final (i, r) in ctx.few(rituals).indexed) _Ritual(r: r, ctx: ctx, row: i),
+    ];
+    if (ctx.onTheDesk) {
+      return Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+    }
+    return ListView(padding: const EdgeInsets.fromLTRB(4, 8, 4, 90), children: rows);
   }
 }
 
