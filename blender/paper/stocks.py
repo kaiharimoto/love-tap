@@ -27,6 +27,7 @@ from rig import common, manifest             # noqa: E402
 import rules                                 # noqa: E402
 
 OUT_DIR = os.path.join(common.repo_root(), "assets", "paper")
+DUSK_STOPS = -3.0          # how far the camera stops down for the dusk plate
 MARGIN_MM = 4.0
 THICKNESS_M = 0.00010
 
@@ -246,6 +247,11 @@ def render_sheet(stock, variant, res_long, condition, samples, out_dir, fmt="WEB
         common.add_daylight(scene)
     else:
         common.add_dusk(scene)
+        # The desk lamp is thirty-eight watts half a metre from one sheet, which is about four
+        # times what the daylight sun puts on it — physically right, and it came out as a plate
+        # brighter than the daylight plate, clipped at 254 with half the tooth of its own twin.
+        # A camera in front of a desk lamp stops down. The rig is untouched: this is the aperture.
+        scene.view_settings.exposure = DUSK_STOPS
 
     name = f"{stock}_{variant:02d}" + ("" if condition == "day" else "_dusk")
     path = os.path.join(out_dir, name + (".webp" if fmt == "WEBP" else ".png"))

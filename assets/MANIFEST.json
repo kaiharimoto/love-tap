@@ -6968,6 +6968,82 @@
     "yellowing": 0.05
    }
   },
+  "assets/paper/graph_01_dusk.webp": {
+   "bytes": 12736,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "dusk",
+    "format": "WEBP",
+    "light": "dusk",
+    "look": {
+     "fibre": 1100.0,
+     "rgb": [
+      0.9,
+      0.92,
+      0.92
+     ],
+     "sheen": 0.2,
+     "tooth": 0.9
+    },
+    "px_per_mm": 8.57,
+    "resolution": [
+     1288,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.85,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.08,
+       "ghost_offset": 0.131,
+       "heavy_density": 0.95,
+       "heavy_every": 2,
+       "heavy_width": 0.3,
+       "kind": "grid",
+       "phase_x": 0.367,
+       "phase_y": 0.12,
+       "pitch": 5.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.2791,
+        "dy": -0.0276,
+        "rot_deg": -0.1715
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.17,
+       "width_cell": 0.7,
+       "width_jitter": 0.14
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 741566172,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "graph",
+     "variant": 1
+    },
+    "samples": 48,
+    "seed": 741566172,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "graph",
+    "variant": 1,
+    "yellowing": 0.05
+   }
+  },
   "assets/paper/graph_02.webp": {
    "bytes": 178436,
    "generator": "blender/paper/stocks.py",
@@ -6976,6 +7052,82 @@
     "condition": "day",
     "format": "WEBP",
     "light": "day",
+    "look": {
+     "fibre": 1100.0,
+     "rgb": [
+      0.9,
+      0.92,
+      0.92
+     ],
+     "sheen": 0.2,
+     "tooth": 0.9
+    },
+    "px_per_mm": 8.57,
+    "resolution": [
+     1288,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.85,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.08,
+       "ghost_offset": 0.165,
+       "heavy_density": 0.95,
+       "heavy_every": 2,
+       "heavy_width": 0.3,
+       "kind": "grid",
+       "phase_x": 4.116,
+       "phase_y": 3.347,
+       "pitch": 5.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.3895,
+        "dy": 0.3154,
+        "rot_deg": 0.1247
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.17,
+       "width_cell": 0.7,
+       "width_jitter": 0.14
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3040491366,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "graph",
+     "variant": 2
+    },
+    "samples": 48,
+    "seed": 3040491366,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "graph",
+    "variant": 2,
+    "yellowing": 0.12
+   }
+  },
+  "assets/paper/graph_02_dusk.webp": {
+   "bytes": 12998,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "dusk",
+    "format": "WEBP",
+    "light": "dusk",
     "look": {
      "fibre": 1100.0,
      "rgb": [
@@ -7120,6 +7272,82 @@
     "yellowing": 0.22
    }
   },
+  "assets/paper/graph_03_dusk.webp": {
+   "bytes": 12850,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "dusk",
+    "format": "WEBP",
+    "light": "dusk",
+    "look": {
+     "fibre": 1100.0,
+     "rgb": [
+      0.9,
+      0.92,
+      0.92
+     ],
+     "sheen": 0.2,
+     "tooth": 0.9
+    },
+    "px_per_mm": 8.57,
+    "resolution": [
+     1288,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.85,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.08,
+       "ghost_offset": 0.205,
+       "heavy_density": 0.95,
+       "heavy_every": 2,
+       "heavy_width": 0.3,
+       "kind": "grid",
+       "phase_x": 3.094,
+       "phase_y": 3.936,
+       "pitch": 5.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.3815,
+        "dy": -0.3088,
+        "rot_deg": 0.0503
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.17,
+       "width_cell": 0.7,
+       "width_jitter": 0.14
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 3258779632,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "graph",
+     "variant": 3
+    },
+    "samples": 48,
+    "seed": 3258779632,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "graph",
+    "variant": 3,
+    "yellowing": 0.22
+   }
+  },
   "assets/paper/graph_04.webp": {
    "bytes": 173712,
    "generator": "blender/paper/stocks.py",
@@ -7128,6 +7356,82 @@
     "condition": "day",
     "format": "WEBP",
     "light": "day",
+    "look": {
+     "fibre": 1100.0,
+     "rgb": [
+      0.9,
+      0.92,
+      0.92
+     ],
+     "sheen": 0.2,
+     "tooth": 0.9
+    },
+    "px_per_mm": 8.57,
+    "resolution": [
+     1288,
+     1800
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.85,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.08,
+       "ghost_offset": 0.194,
+       "heavy_density": 0.95,
+       "heavy_every": 2,
+       "heavy_width": 0.3,
+       "kind": "grid",
+       "phase_x": 3.313,
+       "phase_y": 3.301,
+       "pitch": 5.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": 0.0371,
+        "dy": 0.1112,
+        "rot_deg": 0.0677
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.17,
+       "width_cell": 0.7,
+       "width_jitter": 0.14
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 1549374035,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "graph",
+     "variant": 4
+    },
+    "samples": 48,
+    "seed": 1549374035,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "graph",
+    "variant": 4,
+    "yellowing": 0.3
+   }
+  },
+  "assets/paper/graph_04_dusk.webp": {
+   "bytes": 12496,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "dusk",
+    "format": "WEBP",
+    "light": "dusk",
     "look": {
      "fibre": 1100.0,
      "rgb": [
@@ -15700,6 +16004,105 @@
    "kind": "index",
    "settings": {
     "masks": 56
+   }
+  },
+  "scratch/dusk/lined_01_dusk.webp": {
+   "bytes": 6256,
+   "generator": "blender/paper/stocks.py",
+   "kind": "paper_stock",
+   "settings": {
+    "condition": "dusk",
+    "format": "WEBP",
+    "light": "dusk",
+    "look": {
+     "fibre": 950.0,
+     "rgb": [
+      0.93,
+      0.9,
+      0.84
+     ],
+     "sheen": 0.22,
+     "tooth": 1.05
+    },
+    "px_per_mm": 1.9,
+    "resolution": [
+     286,
+     400
+    ],
+    "rig": "blender/rig/common.py",
+    "rules": {
+     "layers": [
+      {
+       "along_cell": 6.0,
+       "along_var": 0.2,
+       "colour": "#b9cbe0",
+       "density": 0.92,
+       "end": 205.0,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.18,
+       "ghost_offset": 0.129,
+       "kind": "hrules",
+       "pitch": 8.0,
+       "pitch_jitter": 0.045,
+       "reg": {
+        "dx": -0.2731,
+        "dy": 0.1455,
+        "rot_deg": 0.0862
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "start": 22.815,
+       "width": 0.3,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      },
+      {
+       "along_cell": 6.0,
+       "along_var": 0.12,
+       "colour": "#d98c86",
+       "density": 0.95,
+       "ghost_density": 0.3,
+       "ghost_frac": 0.5,
+       "ghost_offset": 0.123,
+       "kind": "vrules",
+       "pitch_jitter": 0.045,
+       "positions": [
+        32.0
+       ],
+       "reg": {
+        "dx": 0.1711,
+        "dy": -0.0678,
+        "rot_deg": -0.0852
+       },
+       "skip_amt": 0.55,
+       "skip_cell": 0.13,
+       "skip_hi": 0.92,
+       "skip_lo": 0.6,
+       "width": 0.4,
+       "width_cell": 0.7,
+       "width_jitter": 0.18
+      }
+     ],
+     "px_per_cm": 300,
+     "seed": 2879916390,
+     "sheet_mm": [
+      148.0,
+      210.0
+     ],
+     "stock": "lined",
+     "variant": 1
+    },
+    "samples": 12,
+    "seed": 2879916390,
+    "sheet_mm": [
+     148.0,
+     210.0
+    ],
+    "stock": "lined",
+    "variant": 1,
+    "yellowing": 0.12
    }
   },
   "scratch/posters/2025-09_market_awning.jpg": {
