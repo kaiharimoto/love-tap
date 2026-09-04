@@ -1,7 +1,6 @@
 {
  "region": 0,
  "visible": [
-  "0001M2ZNX8AF4811Y2F7FNAGMG",
   "0001M34C9R04NVG11H0AJ4SFDZ",
   "0001M3AY8G83A3FBSRB1Y7W78Q",
   "0001M3F41R2APQC59QKBMZK4XF",
@@ -11,7 +10,6 @@
   "0001M59VY0YA13H9M86HTA6XNP"
  ],
  "tears": {
-  "0001M2ZNX8AF4811Y2F7FNAGMG": "tear_042",
   "0001M34C9R04NVG11H0AJ4SFDZ": "tear_004",
   "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
   "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
@@ -21,7 +19,6 @@
   "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
  },
  "stocks": {
-  "0001M2ZNX8AF4811Y2F7FNAGMG": "lined_02",
   "0001M34C9R04NVG11H0AJ4SFDZ": "looseleaf_03",
   "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
   "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
@@ -31,8 +28,8 @@
   "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
  },
  "scroll": {
-  "first": 8379,
-  "last": 8386,
+  "first": 8380,
+  "last": 8387,
   "of": 8387
  },
  "now": "2026-09-03T19:40:00.000Z",
@@ -51,11 +48,11 @@
  "fold": {
   "sequence": "unfold_thirds",
   "length": 240,
-  "decoded": 16,
-  "decoding": 8,
+  "decoded": 24,
+  "decoding": 0,
   "playhead": 0,
   "held_from": 0,
-  "held_to": 15
+  "held_to": 23
  },
  "at": "01_pulse.png"
 }
