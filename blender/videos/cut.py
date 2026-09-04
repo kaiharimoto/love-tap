@@ -132,7 +132,7 @@ def main(argv=None):
         write_back_duration(name, secs)
         size = os.path.getsize(mp4) / 1e6
         print(f"cut: {name} {n} frames, {secs:.1f}s, {size:.2f} MB"
-              f"{'  moving: ' + ', '.join(take['moving']) if take.get('moving') else '  (still)'}",
+              f"{'  moving: ' + ', '.join(take['moving']) if take.get('moving') else '  the camera only'}",
               flush=True)
         if not a.keep_frames:
             shutil.rmtree(work, ignore_errors=True)

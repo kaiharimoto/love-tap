@@ -18,13 +18,14 @@
   },
   {
    "do": "openCorner",
-   "arg": true
+   "arg": true,
+   "after": 0
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/07_feeling_landing",
-   "count": 40,
-   "ms": 16
+   "dir": "evidence/frames/07_feeling_landing_b",
+   "count": 32,
+   "ms": 8
   },
   {
    "do": "sendFeeling",
@@ -35,8 +36,39 @@
   {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing_b",
-   "count": 340,
-   "ms": 16
+   "count": 160,
+   "from": 32,
+   "ms": 8
+  },
+  {
+   "do": "sendFeeling",
+   "feeling": "squeeze",
+   "intensity": 0.6,
+   "after": 0
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/07_feeling_landing_b",
+   "count": 160,
+   "from": 192,
+   "ms": 8
+  },
+  {
+   "do": "openCorner",
+   "arg": false,
+   "after": 0
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/07_feeling_landing_b",
+   "count": 32,
+   "from": 352,
+   "ms": 8
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/07_feeling_landing.report.json",
+   "at": "07_feeling_landing_b"
   }
  ]
 }

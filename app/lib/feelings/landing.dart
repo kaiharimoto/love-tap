@@ -139,6 +139,11 @@ class LandingStage extends StatefulWidget {
   State<LandingStage> createState() => _LandingStageState();
 }
 
+/// How fast the surface moves under a feeling, in cycles a second. A phone's motor runs faster
+/// than this; a page that ran that fast would be a blur and then an alias. This is the rate a hand
+/// reads as one thing buzzing rather than as a page shaking.
+const double _kBuzzHz = 18.0;
+
 class _LandingStageState extends State<LandingStage> with SingleTickerProviderStateMixin {
   Arrival? _arrival;
   double _t = 0.0;
@@ -209,7 +214,13 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
     var lift = 0.0;
     if (a != null) {
       final ms = (_t * 1000).round();
-      lift = amplitudeAt(a.feeling.segments, ms) * (0.55 + 0.45 * a.intensity);
+      // The amplitude is how hard, not how far. Taking it as a displacement held the page a fixed
+      // distance off its place for as long as a segment lasted — nine hundred milliseconds of a
+      // page that was not where it should be and was not moving either, which is not a vibration,
+      // it is a nudge that forgot to come back. It is an envelope on a buzz: eighteen a second,
+      // which is about what a hand feels.
+      final amp = amplitudeAt(a.feeling.segments, ms) * (0.55 + 0.45 * a.intensity);
+      lift = amp * math.sin(2 * math.pi * _kBuzzHz * _t);
     }
     return Stack(
       fit: StackFit.expand,

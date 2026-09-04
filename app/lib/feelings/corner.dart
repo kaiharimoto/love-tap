@@ -3,11 +3,13 @@
 // One gesture from anywhere. Hold the corner and it curls up; the vocabulary fans out across the
 // desk as objects, not as a grid of icons; drag onto one and let go, and it slides off the desk
 // toward the other phone. How long you held it is how hard it arrives.
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
 import '../capture/bus.dart';
+import '../capture/hooks.dart';
 import '../flags.dart';
 import '../material/hands.dart';
 import '../material/motion.dart';
@@ -33,8 +35,11 @@ class FeelingCorner extends StatefulWidget {
 }
 
 class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProviderStateMixin {
-  late final AnimationController _curl =
-      AnimationController(vsync: this, duration: Motion.turn, reverseDuration: Motion.settle);
+  late final AnimationController _curl = AnimationController(
+    vsync: this,
+    duration: Motion.turn,
+    reverseDuration: Motion.settle,
+  );
   bool _open = false;
   DateTime? _heldSince;
   Feeling? _under;
@@ -53,7 +58,12 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
       _open = true;
       _heldSince = DateTime.now();
     });
-    _curl.forward();
+    if (DrivenClock.enabled) {
+      _curlFrom = DrivenClock.now;
+      _curl.value = 0.0;
+    } else {
+      _curl.forward();
+    }
   }
 
   void _close({Feeling? send}) {
@@ -63,42 +73,81 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
       _under = null;
       _heldSince = null;
     });
-    _curl.reverse();
+    if (DrivenClock.enabled) {
+      _curlFrom = DrivenClock.now;
+      _curl.value = 1.0;
+    } else {
+      _curl.reverse();
+    }
     if (send != null) widget.onSend(send, intensity);
   }
+
+  StreamSubscription<Duration>? _driven;
+  Duration? _curlFrom;
 
   @override
   void initState() {
     super.initState();
-    if (Flags.capture) CaptureBus.openCorner = (open) => open ? _openSender() : _close();
+    if (Flags.capture) {
+      CaptureBus.openCorner = (open) => open ? _openSender() : _close();
+      // A corner turning up takes a quarter of a second, and under the capture harness a quarter
+      // of a second of wall clock passes between the first two frames of a take — so the whole
+      // turn happened before the second one was grabbed, and ninety-four of ninety-five frames
+      // were identical. The clock the harness drives is the one the corner has to turn on.
+      _driven = DrivenClock.ticks.listen(_onDriven);
+    }
+  }
+
+  void _onDriven(Duration now) {
+    final from = _curlFrom;
+    if (from == null) return;
+    final span = _open ? Motion.turn : Motion.settle;
+    final t = ((now - from).inMicroseconds / span.inMicroseconds).clamp(0.0, 1.0);
+    _curl.value = _open ? t : 1.0 - t;
+    if (t >= 1.0) _curlFrom = null;
   }
 
   @override
   void dispose() {
     if (Flags.capture) CaptureBus.openCorner = null;
+    _driven?.cancel();
     _curl.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    return AnimatedBuilder(animation: _curl, builder: (context, _) => _stack(context));
+  }
+
+  Widget _stack(BuildContext context) {
     return Stack(
       children: [
-        if (_open) Positioned.fill(child: _Fan(
-          registry: widget.registry,
-          family: _family,
-          onFamily: (f) => setState(() => _family = f),
-          onHover: (f) {
-            if (f != _under) {
-              setState(() => _under = f);
-              if (f != null) widget.onPreview?.call(f, _intensity);
-            }
-          },
-          onPick: (f) => _close(send: f),
-          onDismiss: () => _close(),
-          under: _under,
-          intensity: _intensity,
-        )),
+        // The palette comes and goes with the corner rather than instead of it. Taken out in one
+        // frame it was a jump in the light — a fifth of the brightness of the whole screen gone
+        // between two frames, which is what a cut looks like — and in the app it was a page that
+        // blinked. _curl is the corner's own turn, so the two are the same movement.
+        if (_open || _curl.value > 0.01)
+          Positioned.fill(
+            child: Opacity(
+              opacity: _curl.value.clamp(0.0, 1.0),
+              child: _Fan(
+                registry: widget.registry,
+                family: _family,
+                onFamily: (f) => setState(() => _family = f),
+                onHover: (f) {
+                  if (f != _under) {
+                    setState(() => _under = f);
+                    if (f != null) widget.onPreview?.call(f, _intensity);
+                  }
+                },
+                onPick: (f) => _close(send: f),
+                onDismiss: () => _close(),
+                under: _under,
+                intensity: _intensity,
+              ),
+            ),
+          ),
         Positioned(
           right: 0,
           bottom: 0,
@@ -108,10 +157,8 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
             onLongPressStart: (_) => _openSender(),
             child: AnimatedBuilder(
               animation: _curl,
-              builder: (context, _) => CustomPaint(
-                size: const Size(74, 74),
-                painter: _CornerPainter(_curl.value),
-              ),
+              builder: (context, _) =>
+                  CustomPaint(size: const Size(74, 74), painter: _CornerPainter(_curl.value)),
             ),
           ),
         ),
@@ -230,9 +277,11 @@ class _Fan extends StatelessWidget {
                               id: 'family_${f.name}',
                               stock: 'index',
                               padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
-                              child: Stamped(f.label,
-                                  size: f == family ? 12 : 10.5,
-                                  colour: f == family ? Pen.stamp : Pen.margin),
+                              child: Stamped(
+                                f.label,
+                                size: f == family ? 12 : 10.5,
+                                colour: f == family ? Pen.stamp : Pen.margin,
+                              ),
                             ),
                           ),
                         ),
