@@ -1,6 +1,8 @@
 // The shell: one desk, five stacks of paper on it. The partner's strip sits at the top of every
 // region so their state is legible everywhere, and the feeling corner sits at the bottom right of
 // every region so a feeling is one gesture away from anywhere.
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'capture/bus.dart';
@@ -78,10 +80,17 @@ class _ShellState extends State<Shell> {
     CaptureBus.regionIndex = _index;
     CaptureBus.goToRegion = _go;
     CaptureBus.sendFeeling = (id, intensity) async {
-      final registry = FeelingRegistry(AppScope.of(context).spine.all);
-      final f = registry.byId(id);
+      final scope = AppScope.of(context);
+      final f = FeelingRegistry(scope.spine.all).byId(id);
       if (f == null) return;
-      await _send(f, intensity);
+      // The handle returns as soon as the feeling is in the log, and leaves the sensation running.
+      // Awaiting the whole thing would mean the harness only ever started taking frames after the
+      // landing had finished, which is how a clip of a feeling arriving becomes a clip of a desk.
+      await scope.emit('feeling', {
+        'feeling_id': f.id,
+        'intensity': double.parse(intensity.toStringAsFixed(2)),
+      });
+      unawaited(_sensation.play(f, intensity: intensity));
     };
   }
 

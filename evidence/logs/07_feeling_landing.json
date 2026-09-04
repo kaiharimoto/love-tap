@@ -1,0 +1,52 @@
+{
+ "scene": "07_feeling_landing",
+ "browser": "webkit",
+ "viewport": {
+  "width": 360,
+  "height": 780,
+  "dpr": 3
+ },
+ "url": "http://127.0.0.1:8799/",
+ "steps": [
+  {
+   "do": "goTo",
+   "ms": 2325
+  },
+  {
+   "do": "wait",
+   "ms": 1704
+  },
+  {
+   "do": "openCorner",
+   "ms": 1200
+  },
+  {
+   "do": "frames",
+   "ms": 88940
+  },
+  {
+   "do": "sendFeeling",
+   "ms": 1092
+  },
+  {
+   "do": "frames",
+   "ms": 192960
+  }
+ ],
+ "shots": [
+  {
+   "frames": 120,
+   "dir": "evidence/frames/07_feeling_landing",
+   "ms": 16
+  },
+  {
+   "frames": 260,
+   "dir": "evidence/frames/07_feeling_landing_b",
+   "ms": 16
+  }
+ ],
+ "reports": [],
+ "cold_ms": 13586,
+ "problems": [],
+ "ok": true
+}

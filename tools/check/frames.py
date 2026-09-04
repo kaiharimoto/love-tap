@@ -69,9 +69,25 @@ def main():
         prev = cur
 
     seconds = len(paths) / args.fps
-    # a repeated frame is a dropped frame: nothing moved between two steps of the clock
+    # A frame identical to the one before it is a frame the app did not draw. Some of those are
+    # honest — a note that has finished moving is still, and a clip that holds on it for a moment
+    # is a clip, not a fault — so what matters is that the motion itself has no gaps in it and that
+    # most of the clip is moving.
     still = [i for i, d in enumerate(deltas) if d < 1e-4]
     moved = float(np.mean(deltas)) if deltas else 0.0
+    runs = []
+    run = 0
+    for i, d in enumerate(deltas):
+        if d < 1e-4:
+            run += 1
+        else:
+            if run:
+                runs.append(run)
+            run = 0
+    if run:
+        runs.append(run)
+    longest_still = max(runs) if runs else 0
+    still_fraction = len(still) / max(1, len(deltas))
     # the light must not swing about mid-motion: overall brightness may drift, not jump
     jumps = [i for i in range(1, len(means)) if abs(means[i] - means[i - 1]) > 0.06]
 
@@ -82,10 +98,26 @@ def main():
         "seconds": round(seconds, 2),
         "mean_change_per_frame": round(moved, 5),
         "repeated_frames": len(still),
+        "repeated_fraction": round(still_fraction, 3),
+        "longest_still_run": longest_still,
         "repeated_at": still[:12],
         "brightness_jumps": len(jumps),
-        "ok": len(still) == 0 and moved > 1e-4 and not jumps and seconds >= args.min_seconds,
+        "ok": (moved > 1e-4 and not jumps and seconds >= args.min_seconds
+               and still_fraction < 0.35 and longest_still <= args.fps),
     }
+    if not report["ok"]:
+        why = []
+        if moved <= 1e-4:
+            why.append("nothing moves in it at all")
+        if jumps:
+            why.append(f"the light jumps {len(jumps)} times")
+        if seconds < args.min_seconds:
+            why.append(f"{seconds:.1f}s is short of {args.min_seconds}s")
+        if still_fraction >= 0.35:
+            why.append(f"{still_fraction:.0%} of it is frames the app did not draw")
+        if longest_still > args.fps:
+            why.append(f"it holds still for {longest_still / args.fps:.1f}s in one stretch")
+        report["why"] = "; ".join(why)
     if args.strip:
         report["strip"] = args.strip
         report["strip_frames"] = strip(paths, args.strip)

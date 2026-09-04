@@ -5,7 +5,7 @@
   "height": 780,
   "dpr": 3
  },
- "settle": 700,
+ "settle": 400,
  "log": "evidence/logs/07_feeling_landing.json",
  "steps": [
   {
@@ -14,7 +14,7 @@
   },
   {
    "do": "wait",
-   "ms": 1000
+   "ms": 1400
   },
   {
    "do": "openCorner",
@@ -23,18 +23,19 @@
   {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing",
-   "count": 120,
+   "count": 90,
    "ms": 16
   },
   {
    "do": "sendFeeling",
-   "feeling": "held",
-   "intensity": 0.85
+   "feeling": "hold",
+   "intensity": 0.85,
+   "after": 0
   },
   {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing_b",
-   "count": 260,
+   "count": 300,
    "ms": 16
   }
  ]
