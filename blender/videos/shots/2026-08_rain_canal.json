@@ -1,0 +1,53 @@
+{
+ "mode": "outdoor",
+ "ground": "grass",
+ "room": false,
+ "sky": true,
+ "id": "2026-08_rain_canal",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1600,
+  900
+ ],
+ "camera": {
+  "look_at": [
+   1.1149447047788883,
+   6.963834820508161,
+   0.4222987640618492
+  ],
+  "height": 1.3069702641247056,
+  "distance": 4.13380840384675,
+  "lean_deg": -0.528426726202234,
+  "mm": 28.711472593870667
+ },
+ "handheld": 0.0980721564662403,
+ "quality": 85,
+ "objects": [
+  {
+   "kind": "water",
+   "at": [
+    -0.2231252183184238,
+    52.463788087909094
+   ],
+   "w": 8.903093466823284,
+   "d": 96.82598221638888
+  },
+  {
+   "kind": "car",
+   "at": [
+    -1.012061748153437,
+    4.786305354867222
+   ],
+   "rot": 3.4551394119070054,
+   "colour": [
+    0.028337294074043163,
+    0.028337294074043163,
+    0.028337294074043163
+   ]
+  }
+ ],
+ "from_scene": "nine seconds of a canal in rain, held on the water rather than the sky, the whole surface pocked with rings that fill it and cancel each other, a shopping trolley handle breaking the surface at the left, the towpath grass going dark, no voice, only the sound of rain on water and a car somewhere behind",
+ "not_built": []
+}

@@ -239,7 +239,11 @@ def _tabletop_vocab():
 
 
 OUTDOOR_VOCAB = [
-    ("water|canal|lock|river|reflection", "water", lambda r: {"w": 16.0, "d": 11.0}),
+    # A canal is long. Sixteen by eleven metres is a pond, and a pond photographed from its bank
+    # is a mirror lying on a field: the thing that says canal is that it runs away from you and
+    # goes on after the picture stops.
+    ("water|canal|lock|river|reflection", "water",
+     lambda r: {"w": float(r.uniform(6.0, 9.0)), "d": float(r.uniform(70.0, 120.0))}),
     ("blossom", "canopy",
      lambda r: {"radius": float(r.uniform(2.2, 3.4)), "count": 420, "leaf": 0.055,
                 "colour": [0.72, 0.68, 0.62], "centre_h": float(r.uniform(4.4, 6.0))}),
@@ -352,11 +356,18 @@ def lay_tabletop(items, rng):
 
 def lay_outdoor(items, rng):
     out = []
+    # A tree is one thing. Placing the trunk, the limbs and the canopy independently put three
+    # metres between a trunk and the branches that grow out of it, and what the picture showed
+    # was a handful of black sticks hanging in an empty sky.
+    tree_at = [float(rng.uniform(-3.0, 3.0)), float(rng.uniform(5.0, 11.0))]
     for k, (builder, args) in enumerate(items):
-        if builder in ("water", "bays"):
+        if builder == "water":
+            # the near edge of the water is a few metres off; the rest of it runs away
+            at = [float(rng.uniform(-1.5, 1.5)), float(rng.uniform(30.0, 55.0))]
+        elif builder == "bays":
             at = [float(rng.uniform(-1.5, 1.5)), float(rng.uniform(5.0, 9.0))]
         elif builder in ("trunk", "limbs", "canopy", "wood"):
-            at = [float(rng.uniform(-3.0, 3.0)), float(rng.uniform(5.0, 11.0))]
+            at = list(tree_at)
         elif builder == "undergrowth":
             at = [0.0, float(rng.uniform(6.0, 10.0))]
         elif builder in ("post",):
@@ -403,12 +414,19 @@ CAMERAS = {
                        "distance": float(r.uniform(2.4, 4.0)),
                        "lean_deg": float(r.uniform(-14, 14)),
                        "mm": float(r.uniform(22, 26))},
-    # held at chest or eye height and pointed at something eight to fourteen metres off, which
-    # is where a phone is when somebody stops on a towpath to take a picture
-    "outdoor": lambda r: {"look_at": [float(r.uniform(-1.0, 1.0)), float(r.uniform(7.0, 13.0)),
-                                      float(r.uniform(0.7, 2.2))],
-                          "height": float(r.uniform(-0.6, 0.6)),
-                          "distance": float(r.uniform(7.0, 13.0)),
+    # Held at eye height and pointed at something on the ground four to nine metres off, which is
+    # where a phone is when somebody stops on a towpath to take a picture.
+    #
+    # The first version aimed at a point up to two metres in the air ten metres away, from a
+    # camera whose height was measured from that point rather than from the ground — so it looked
+    # level into the sky, the horizon sat across the middle of the frame, and the near ground was
+    # never in shot. Every outdoor picture came out as an empty plane meeting a flat sky.
+    # phone_camera adds height to look_at, so the look_at stays near the ground and the height is
+    # how far above it a person's eyes are.
+    "outdoor": lambda r: {"look_at": [float(r.uniform(-1.2, 1.2)), float(r.uniform(4.0, 9.0)),
+                                      float(r.uniform(0.0, 0.5))],
+                          "height": float(r.uniform(0.95, 1.45)),
+                          "distance": float(r.uniform(4.0, 9.0)),
                           "lean_deg": float(r.uniform(-12, 12)),
                           "mm": float(r.uniform(24, 30))},
 }
@@ -487,12 +505,18 @@ def main():
     ap.add_argument("--only", default="")
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--print", action="store_true", dest="show")
+    # The fourteen videos are written the same way the photographs are — an index of sentences,
+    # one per clip — so they are composed by the same reader into the same recipe shape, and the
+    # motion is added on top of a scene that was built exactly like a still.
+    ap.add_argument("--index-dir", default=INDEX, help="where the index.<month>.json files are")
+    ap.add_argument("--out", default=RECIPES, help="where to write the recipes")
     args = ap.parse_args()
-    os.makedirs(RECIPES, exist_ok=True)
+    index_dir, recipes_dir = args.index_dir, args.out
+    os.makedirs(recipes_dir, exist_ok=True)
     made = 0
     counts = {"tabletop": 0, "room": 0, "outdoor": 0}
     empty = []
-    for f in sorted(glob.glob(os.path.join(INDEX, "index.*.json"))):
+    for f in sorted(glob.glob(os.path.join(index_dir, "index.*.json"))):
         with open(f, encoding="utf-8") as fh:
             for entry in json.load(fh):
                 if args.only and entry["id"] != args.only:
@@ -503,7 +527,7 @@ def main():
                 counts[recipe["mode"]] += 1
                 if not recipe["objects"]:
                     empty.append(entry["id"])
-                with open(os.path.join(RECIPES, entry["id"] + ".json"), "w",
+                with open(os.path.join(recipes_dir, entry["id"] + ".json"), "w",
                           encoding="utf-8") as out:
                     json.dump(recipe, out, indent=1)
                 made += 1

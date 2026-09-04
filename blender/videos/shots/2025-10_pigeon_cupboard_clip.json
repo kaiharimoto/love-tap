@@ -1,0 +1,88 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.0068643291549206,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-10_pigeon_cupboard_clip",
+ "by": "noor",
+ "light": "strip",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.017159500390236837
+  ],
+  "height": 0.31220209882928157,
+  "distance": 0.23286408534076095,
+  "lean_deg": -11.220914596643876,
+  "mm": 27.71511658845636
+ },
+ "handheld": 0.3586639994099751,
+ "quality": 82,
+ "objects": [
+  {
+   "kind": "board",
+   "at": [
+    0.014626888129001068,
+    0.004184805524760478
+   ],
+   "w": 0.3597297001345454,
+   "d": 0.26567345070459814,
+   "thick": 0.018612384412420226,
+   "rot": -9.357561543820761,
+   "scars": 12
+  },
+  {
+   "kind": "stack",
+   "at": [
+    0.23567707557908235,
+    0.0806024456148508
+   ],
+   "count": 4,
+   "rot": -0.9237239057961908
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.0662389048944585,
+    0.18289062996166283
+   ],
+   "w": 0.18736271426739393,
+   "h": 0.14767937785869548,
+   "rot": -24.10332975827498
+  },
+  {
+   "kind": "tray",
+   "at": [
+    -0.2431503084841281,
+    -0.07916995998615228
+   ],
+   "rows": 5,
+   "cols": 5,
+   "rot": -4.810945726401902
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.03879148386463234,
+    -0.1830799445361736
+   ],
+   "r": 0.08116567293279801,
+   "h": 0.07761850389818042,
+   "rot": 88.36005938153417,
+   "lid": "beside"
+  }
+ ],
+ "from_scene": "a fixed handheld shot of the top of a classroom cupboard, a pigeon standing among stacked paper trays doing almost nothing, one small head turn near the end, strip lighting flickering faintly, ceiling tiles above",
+ "not_built": []
+}

@@ -1,0 +1,68 @@
+{
+ "mode": "tabletop",
+ "surface": "melamine",
+ "surface_size": 1.519403321935016,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-11_rain_window_night",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03418480552476048
+  ],
+  "height": 0.4407980469801286,
+  "distance": 0.33339742978338466,
+  "lean_deg": -9.02462580404547,
+  "mm": 25.933867469502275
+ },
+ "handheld": 0.6205690571397189,
+ "quality": 84,
+ "objects": [
+  {
+   "kind": "folded",
+   "at": [
+    -0.001319605579708845,
+    -0.012939008798460399
+   ],
+   "w": 0.21349133853090724,
+   "h": 0.3090889218786301,
+   "folds": 3,
+   "rot": 7.0760460199496436,
+   "printed": 1.0
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.26138208448366107,
+    -0.05129295984564752
+   ],
+   "r": 0.07783715323726068,
+   "h": 0.06497404120304918,
+   "rot": 76.13397831232561,
+   "lid": "beside"
+  },
+  {
+   "kind": "pan",
+   "at": [
+    -0.14819727416224365,
+    0.057563252788131215
+   ],
+   "r": 0.11657656671151513,
+   "h": 0.1075276861169132
+  }
+ ],
+ "from_scene": "a fixed handheld shot of a dark sash window from inside, heavy rain running down the outer glass in shifting sheets, a street lamp far behind it broken into moving spots, the sill and a candle stub in soft focus at the bottom of the frame",
+ "not_built": []
+}

@@ -1,0 +1,62 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-05_canal_dusk_rings",
+ "by": "noor",
+ "light": "night_lamp",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.8270340674968761,
+   7.569702641247057,
+   0.013380840384674964
+  ],
+  "height": 1.1889911098707868,
+  "distance": 7.926227161558889,
+  "lean_deg": -8.637526064014619,
+  "mm": 29.06481285688397
+ },
+ "handheld": 0.0882318327404101,
+ "quality": 84,
+ "objects": [
+  {
+   "kind": "water",
+   "at": [
+    -0.2231252183184238,
+    52.463788087909094
+   ],
+   "w": 8.903093466823284,
+   "d": 96.82598221638888
+  },
+  {
+   "kind": "wall",
+   "at": [
+    -0.5060308740767185,
+    5.612920405562539
+   ],
+   "as_kind": "brick",
+   "w": 10.036541823572101,
+   "h": 0.9480997735040952
+  },
+  {
+   "kind": "post",
+   "at": [
+    4.645602936578701,
+    13.520436605117954
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  }
+ ],
+ "from_scene": "a fixed shot of flat canal water at dusk from the towpath, the first rain of a shower arriving so that single rings spread and multiply until the whole surface is broken, the reflection of a brick wall and one lit window coming apart in it, a mooring ring and wet stone in the bottom corner, low grey blue light",
+ "not_built": [
+  "reflection"
+ ]
+}

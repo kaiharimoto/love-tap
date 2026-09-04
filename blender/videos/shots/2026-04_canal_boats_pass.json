@@ -1,0 +1,79 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-04_canal_boats_pass",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0.5134572677985876,
+   4.13380840384675,
+   0.2389911098707868
+  ],
+  "height": 1.3426227161558888,
+  "distance": 4.700515403330288,
+  "lean_deg": 8.25925142753589,
+  "mm": 24.756272852060658
+ },
+ "handheld": 0.20247703498705752,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "water",
+   "at": [
+    -0.7590463111150778,
+    46.33075253476587
+   ],
+   "w": 8.903093466823284,
+   "d": 96.82598221638888
+  },
+  {
+   "kind": "undergrowth",
+   "at": [
+    0.0,
+    9.85824117463148
+   ],
+   "count": 2806,
+   "height": 0.23466379049229075,
+   "w": 26.0,
+   "d": 26.0
+  },
+  {
+   "kind": "canopy",
+   "at": [
+    -0.4462504366368476,
+    10.391309141098182
+   ],
+   "radius": 3.0073083647144205,
+   "count": 420,
+   "leaf": 0.055,
+   "colour": [
+    0.72,
+    0.68,
+    0.62
+   ],
+   "centre_h": 4.451306425071035
+  },
+  {
+   "kind": "post",
+   "at": [
+    0.9276696410163225,
+    16.290572809360683
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  }
+ ],
+ "from_scene": "a handheld shot held on the canal from the towpath, two narrow boats passing each other slowly, one of them drifting backwards on the current with its tiller unattended, spring light broken into moving shards on brown water, blossom petals turning on the surface, a mooring bollard steady in the bottom of the frame",
+ "not_built": [
+  "bollard"
+ ]
+}

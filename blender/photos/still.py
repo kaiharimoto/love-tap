@@ -35,31 +35,68 @@ SEED_INDEX = os.path.join(common.repo_root(), "seed", "photos")
 
 
 # ------------------------------------------------------------------ light
-def light_for(scene, kind):
+def daylight_through_the_window(scene, sky=(0.62, 0.70, 0.86), strength=60.0):
+    """The window itself, as light.
+
+    A sun outside a room reaches the table through the opening in one wall, and nothing else does.
+    Left at that, the frame is a hard shaft on the floor and everything out of it is black, and
+    Cycles has to find a small bright rectangle by chance from every shaded point, which is noise.
+    So the opening is also a light: a rectangle of sky, the size of the hole, facing into the room.
+    That is what a window is — the sun is what makes the shaft across the table, the sky is what
+    makes the rest of the room visible.
+    """
+    w = kit.WINDOW
+    data = bpy.data.lights.new("window", "AREA")
+    data.shape = "RECTANGLE"
+    data.size = w["y1"] - w["y0"]
+    data.size_y = w["z1"] - w["z0"]
+    data.energy = strength
+    data.color = sky
+    lamp = bpy.data.objects.new("window", data)
+    scene.collection.objects.link(lamp)
+    lamp.location = (w["x"] + 0.01, (w["y0"] + w["y1"]) / 2.0, (w["z0"] + w["z1"]) / 2.0)
+    # an area light emits along its local -Z, so this turns that to +X: into the room, not out of it
+    lamp.rotation_euler = (0.0, math.radians(-90), 0.0)
+    return lamp
+
+
+def light_for(scene, kind, indoors=False):
     """The conditions a phone photograph is actually taken in, all off the one rig.
 
     Every daylight condition is the shared rig in blender/rig/common.py with its energy and its
     sky changed, so a photograph and the note it will be pinned beside agree about which way the
     light is coming from. The artificial ones are the lamps that are actually in these rooms.
+
+    Indoors, every daylight condition also lights the window it is coming through; see
+    daylight_through_the_window.
     """
     if kind == "window_left":
-        return common.add_daylight(scene)
+        sun, world_ = common.add_daylight(scene)
+        if indoors:
+            daylight_through_the_window(scene, strength=62.0)
+        return sun, world_
     if kind == "overcast":
         sun, world_ = common.add_daylight(scene)
         sun.data.energy *= 0.42
         sun.data.angle = math.radians(24)          # a big soft source: cloud, not sun
         world_.node_tree.nodes["Background"].inputs["Strength"].default_value = 1.6
+        if indoors:
+            daylight_through_the_window(scene, sky=(0.74, 0.77, 0.82), strength=78.0)
         return sun, world_
     if kind == "hard_sun":
         sun, world_ = common.add_daylight(scene)
         sun.data.energy *= 1.7
         sun.data.angle = math.radians(0.53)        # the sun's actual angular size
+        if indoors:
+            daylight_through_the_window(scene, strength=48.0)
         return sun, world_
     if kind == "low_sun":
         sun, world_ = common.add_daylight(scene, elevation=9.0)
         sun.data.energy *= 1.25
         sun.data.color = (1.0, 0.78, 0.52)
         sun.data.angle = math.radians(0.6)
+        if indoors:
+            daylight_through_the_window(scene, sky=(0.86, 0.66, 0.44), strength=44.0)
         return sun, world_
     if kind == "fog_dawn":
         sun, world_ = common.add_daylight(scene, elevation=6.0)
@@ -67,6 +104,8 @@ def light_for(scene, kind):
         sun.data.angle = math.radians(30)
         world_.node_tree.nodes["Background"].inputs["Strength"].default_value = 2.4
         world.fog(density=0.030, colour=(0.60, 0.62, 0.65))
+        if indoors:
+            daylight_through_the_window(scene, sky=(0.72, 0.74, 0.78), strength=40.0)
         return sun, world_
     if kind == "kitchen_bulb":
         # one warm bulb directly overhead, which is why the shadow under a loaf is so hard
@@ -91,7 +130,11 @@ def light_for(scene, kind):
         return common._world(scene, (0.20, 0.18, 0.16), 0.09), lamp
     if kind == "night":
         # a town at night: no key light at all, only what the sky and the streetlights leave
-        return common._world(scene, (0.030, 0.034, 0.048), 0.30), None
+        w = common._world(scene, (0.030, 0.034, 0.048), 0.30)
+        if indoors:
+            # the window is still there; what is behind it is a street
+            daylight_through_the_window(scene, sky=(0.42, 0.40, 0.52), strength=2.6)
+        return w, None
     if kind == "night_lamp":
         w = common._world(scene, (0.020, 0.024, 0.038), 0.16)
         data = bpy.data.lights.new("streetlamp", "POINT")
@@ -214,10 +257,50 @@ BUILDERS = {
 TAKES_KIND = {"wall", "post", "ground", "pen", "bag"}
 
 
+def _cut_the_channel(recipe):
+    """Where there is water, take the ground out from under it.
+
+    world.water lays its surface ten centimetres below zero, on the assumption that something has
+    dug a channel for it. Nothing had: the ground was one flat plane over the top, so every canal,
+    every river and every stretch of open water in the year was buried under it and the picture
+    came back as an empty field. This digs the channel — a flat bottom under the water and a bank
+    that slopes up to the towpath — so the water has somewhere to be and an edge to have.
+    """
+    waters = [o for o in recipe.get("objects", []) if o.get("kind") == "water"]
+    if not waters:
+        return
+    ground = next((o for o in bpy.data.objects
+                   if o.type == "MESH" and o.name.startswith("ground_")), None)
+    if ground is None:
+        return
+    beds = []
+    for spec in waters:
+        at = spec.get("at", [0.0, 4.0])
+        w = float(spec.get("w", 14.0)) / 2.0
+        d = float(spec.get("d", 9.0)) / 2.0
+        beds.append((float(at[0]), float(at[1]), w, d, float(spec.get("z", -0.10))))
+    bank = 0.9                      # how far the bank takes to fall away, in metres
+    for v in ground.data.vertices:
+        drop = 0.0
+        for cx, cy, w, d, z in beds:
+            # how far outside the water's footprint this vertex is, along each axis
+            ox = max(0.0, abs(v.co.x - cx) - w)
+            oy = max(0.0, abs(v.co.y - cy) - d)
+            out = math.hypot(ox, oy)
+            if out < bank:
+                t = 1.0 - (out / bank)
+                # a bank is a curve, not a ramp
+                drop = min(drop, (z - 0.06) * (t * t * (3 - 2 * t)))
+        if drop:
+            v.co.z += drop
+    ground.data.update()
+
+
 def build(recipe):
     scene = common.reset_scene()
     mode = recipe.get("mode", "tabletop")
-    if recipe.get("room", mode == "tabletop"):
+    indoors = recipe.get("room", mode == "tabletop")
+    if indoors:
         # a still life is photographed in a room, and a table floating in a void is the single
         # loudest way a render says it is a render
         kit.room(dark=tuple(recipe.get("room_colour", [0.10, 0.09, 0.085])))
@@ -237,6 +320,8 @@ def build(recipe):
     elif recipe.get("fog"):
         world.fog(density=float(recipe["fog"]))
     if mode == "room" and not recipe.get("ground"):
+        # a room seen from across it is not enclosed by kit.room, so the sky still reaches it and
+        # it is not lit through a window
         world.ground("carpet", size=12.0, seed=recipe.get("seed", 1))
     for spec in recipe.get("objects", []):
         spec = dict(spec)
@@ -259,6 +344,7 @@ def build(recipe):
         if lift:
             for obj in (made if isinstance(made, (list, tuple)) else [made]):
                 obj.location = (obj.location[0], obj.location[1], obj.location[2] + lift)
+    _cut_the_channel(recipe)
     cam = recipe.get("camera", {})
     phone_camera(scene,
                  look_at=tuple(cam.get("look_at", [0, 0, 0])),
@@ -266,7 +352,7 @@ def build(recipe):
                  distance=cam.get("distance", 0.30),
                  lean_deg=cam.get("lean_deg", 0.0),
                  mm=cam.get("mm", 26.0))
-    light_for(scene, recipe.get("light", "window_left"))
+    light_for(scene, recipe.get("light", "window_left"), indoors=bool(indoors))
     if mode == "outdoor" and recipe.get("sky", True) and recipe.get("light") not in ("night",
                                                                                      "night_lamp"):
         world.sky(scene, turbidity=6.0 if recipe.get("light") == "overcast" else 3.0,

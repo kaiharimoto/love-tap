@@ -1,0 +1,61 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2025-12_window_lights_sleet",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0.7060955840158678,
+   4.239980558084233,
+   0.04913891868104181
+  ],
+  "height": 1.3828361016125132,
+  "distance": 7.02310069059506,
+  "lean_deg": 9.69576563761543,
+  "mm": 28.252403616876926
+ },
+ "handheld": 0.15258631053650532,
+ "quality": 84,
+ "objects": [
+  {
+   "kind": "trunk",
+   "at": [
+    2.890670625435612,
+    9.76901150498741
+   ],
+   "height": 6.04495376496809,
+   "radius": 0.16652821974959567,
+   "lean": 0.04151197108310081
+  },
+  {
+   "kind": "water",
+   "at": [
+    -0.09897041847816324,
+    34.41311950096225
+   ],
+   "w": 7.993242503363635,
+   "d": 116.9096076461415
+  },
+  {
+   "kind": "undergrowth",
+   "at": [
+    0.0,
+    7.03781085471962
+   ],
+   "count": 3890,
+   "height": 0.2822196848581754,
+   "w": 26.0,
+   "d": 26.0
+  }
+ ],
+ "from_scene": "a fixed handheld shot of a dark flat window from inside, sleet striking the glass and running in short broken tracks, the small tree's working lights reflected as soft doubled points, the black canal and one far street lamp beyond, focus drifting once between the glass and the outside",
+ "not_built": []
+}

@@ -78,8 +78,11 @@ def ground(kind="tarmac", size=40.0, z=0.0, seed=1):
     bmesh.ops.create_grid(bm, x_segments=90, y_segments=90, size=size / 2)
     obj = kit.link(bm, f"ground_{kind}", _speckled(kind, rgb, rough, scale, seed=seed))
     obj.location = (0, 0, z)
-    # ground is never flat: a few centimetres of roll across ten metres
-    kit.rough_up(obj, 0.03 if kind in ("grass", "earth", "leaf_litter") else 0.012, seed, scale=0.9)
+    # Ground is never flat, and how un-flat it is depends on how much of it is in shot. A couple
+    # of centimetres of roll is right for a ten metre yard and invisible across two hundred and
+    # sixty metres of towpath, where the plane went to the horizon like a table.
+    soft = 0.03 if kind in ("grass", "earth", "leaf_litter") else 0.012
+    kit.rough_up(obj, soft * max(1.0, size / 12.0) * 0.5, seed, scale=0.9)
     return obj
 
 

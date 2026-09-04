@@ -38,7 +38,9 @@ class SetupSheet extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width - 36;
 
     return ListView(
-      padding: const EdgeInsets.fromLTRB(18, 18, 18, 40),
+      // the tab strip sits over the foot of this list, so the sheet ends above it rather
+      // than under it
+      padding: const EdgeInsets.fromLTRB(18, 18, 18, 108),
       children: [
         PaperPiece(
           stockId: stock,

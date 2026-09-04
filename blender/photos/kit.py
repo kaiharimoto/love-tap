@@ -294,17 +294,52 @@ SURFACES = {
 }
 
 
-def room(dark=(0.10, 0.09, 0.085), size=4.0):
+# Where the window is, in the room built below. light_for() puts the daylight in this opening,
+# so a photograph taken indoors is lit through the same rectangle the walls have a hole in.
+# The wall is the one the rig's light comes from: DIRECTION.md puts the sun in the upper left,
+# which is the -X side of the room.
+WINDOW = {"x": -1.98, "y0": -0.62, "y1": 0.62, "z0": 0.34, "z1": 1.58}
+
+
+def _quad(bm, corners):
+    verts = [bm.verts.new(c) for c in corners]
+    bm.faces.new(verts)
+
+
+def room(dark=(0.10, 0.09, 0.085), size=4.0, window=True):
     """What is behind the thing being photographed.
 
     The first version of this had a table floating in a void, which is the single loudest way a
     render says it is a render. A kitchen at night has walls, and they are out of focus and nearly
     black, but they are there and they bounce a little light back.
+
+    The second version had walls all the way round and no window, so a sun outside it lit nothing
+    at all: every daylight interior rendered pure black, and the negatives were not underexposed,
+    they were empty — max 0.0001 over the whole frame. A room light is shut in is not a room, it
+    is a box. So the wall the light comes from has a hole in it the size of a window.
     """
+    half = size / 2.0
+    z0, z1 = -0.02, size - 0.02
     bm = bmesh.new()
-    bmesh.ops.create_cube(bm, size=size)
+    # floor is the surface the still life stands on, so the room has five sides and an opening
+    _quad(bm, [(-half, -half, z1), (half, -half, z1), (half, half, z1), (-half, half, z1)])   # ceiling
+    _quad(bm, [(-half, half, z0), (half, half, z0), (half, half, z1), (-half, half, z1)])     # back
+    _quad(bm, [(-half, -half, z0), (half, -half, z0), (half, -half, z1), (-half, -half, z1)])  # front
+    _quad(bm, [(half, -half, z0), (half, half, z0), (half, half, z1), (half, -half, z1)])     # right
+    if window:
+        w = WINDOW
+        x = -half
+        # the wall the light comes through, as four pieces round the opening
+        _quad(bm, [(x, -half, z0), (x, half, z0), (x, half, w["z0"]), (x, -half, w["z0"])])
+        _quad(bm, [(x, -half, w["z1"]), (x, half, w["z1"]), (x, half, z1), (x, -half, z1)])
+        _quad(bm, [(x, -half, w["z0"]), (x, w["y0"], w["z0"]), (x, w["y0"], w["z1"]),
+                   (x, -half, w["z1"])])
+        _quad(bm, [(x, w["y1"], w["z0"]), (x, half, w["z0"]), (x, half, w["z1"]),
+                   (x, w["y1"], w["z1"])])
+    else:
+        _quad(bm, [(-half, -half, z0), (-half, half, z0), (-half, half, z1), (-half, -half, z1)])
     obj = link(bm, "room", matte("room", dark, 0.92), smooth=False)
-    obj.location = (0, 0, size / 2 - 0.02)
+    obj.location = (0, 0, 0)
     # seen from inside
     for p in obj.data.polygons:
         p.flip()

@@ -1,0 +1,78 @@
+{
+ "mode": "tabletop",
+ "surface": "hob",
+ "surface_size": 1.217104175439173,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-02_soup_pot",
+ "by": "teo",
+ "light": "kitchen_bulb",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.02344729546413922
+  ],
+  "height": 0.3879731983884907,
+  "distance": 0.37074967845429446,
+  "lean_deg": 6.57322311508802,
+  "mm": 25.817367200642
+ },
+ "handheld": 0.6981747092685673,
+ "quality": 83,
+ "objects": [
+  {
+   "kind": "pan",
+   "at": [
+    0.0037106785640652895,
+    0.013783901124947939
+   ],
+   "r": 0.12870791289097713,
+   "h": 0.0914607857731111
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.15050301693259624,
+    0.0261592874380435
+   ],
+   "r": 0.0423820557647628,
+   "h": 0.08564133031338794,
+   "rot": 350.4113488752687,
+   "full": 0.0
+  },
+  {
+   "kind": "tin",
+   "at": [
+    -0.1287552192051234,
+    0.18784141691666126
+   ],
+   "r": 0.07740953688884923,
+   "h": 0.07959690304171904,
+   "rot": 86.8104264292083,
+   "lid": "on"
+  },
+  {
+   "kind": "spoon",
+   "at": [
+    -0.22332811200438216,
+    -0.1466476113721854
+   ],
+   "length": 0.25404999417817536,
+   "rot": 55.79721329229092
+  }
+ ],
+ "from_scene": "a fixed close shot down into a heavy enamel pan on a hob, thick brick-red soup at a slow simmer with single bubbles breaking and closing, steam drifting across the frame and fogging the lens edge once, a wooden spoon resting against the rim, one warm bulb above and a dark kitchen window beyond",
+ "not_built": [
+  "steam"
+ ]
+}

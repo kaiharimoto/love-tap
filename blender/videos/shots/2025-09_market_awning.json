@@ -1,0 +1,47 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2025-09_market_awning",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   1.1562682501742445,
+   7.974176254156175,
+   0.23350493025363944
+  ],
+  "height": 1.038262390019245,
+  "distance": 5.297263568399524,
+  "lean_deg": 7.06095584015868,
+  "mm": 24.28797666970108
+ },
+ "handheld": 0.06879448615345853,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "rope",
+   "at": [
+    -1.3367945062601088,
+    5.460765823257107
+   ],
+   "z": 0.0
+  },
+  {
+   "kind": "crate",
+   "at": [
+    -0.5112436089602661,
+    4.5554921214543835
+   ],
+   "rot": 6.5765667115151345
+  }
+ ],
+ "from_scene": "a striped canvas awning over a market stall snapping and filling in gusts, the pole guy-rope going slack and tight, crates of apples below going in and out of shadow, sky white behind",
+ "not_built": []
+}

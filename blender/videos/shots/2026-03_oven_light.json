@@ -1,0 +1,80 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.3839195951654721,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-03_oven_light",
+ "by": "teo",
+ "light": "night_lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04768741961357362
+  ],
+  "height": 0.40108264446930014,
+  "distance": 0.310155750420544,
+  "lean_deg": 15.916558137991647,
+  "mm": 26.040855750818096
+ },
+ "handheld": 0.40864483838517074,
+ "quality": 87,
+ "objects": [
+  {
+   "kind": "cake",
+   "at": [
+    0.008557621129976458,
+    -0.018929532769226005
+   ],
+   "r": 0.09893680880973611,
+   "layers": 3,
+   "lean": 10.601377753113285
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.26772190826842746,
+    -0.00471647589715388
+   ],
+   "r": 0.09920094573960572,
+   "h": 0.06742795510549086,
+   "rot": 38.30624345044728,
+   "lid": "on"
+  },
+  {
+   "kind": "cloth",
+   "at": [
+    -0.045081278544214134,
+    0.21833769154919197
+   ],
+   "w": 0.38579721329229094,
+   "d": 0.19975876503693124,
+   "rot": 117.58141825031427
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.22955181761024812,
+    -0.1464625726516347
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  }
+ ],
+ "from_scene": "a fixed close shot through the glass door of a domestic oven at night, a single sponge rising unevenly in a round loose-bottomed tin on the middle shelf, the interior bulb warm and yellow, faint condensation blooming and clearing at the lower edge of the glass, the dark reflection of a kitchen and one hanging tea towel across the top of the frame, the element cycling once",
+ "not_built": [
+  "reflection"
+ ]
+}

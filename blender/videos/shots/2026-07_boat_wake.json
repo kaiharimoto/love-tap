@@ -1,0 +1,62 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-07_boat_wake",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   -1.1357719661535601,
+   6.389911098707868,
+   0.3926227161558889
+  ],
+  "height": 1.0200515403330288,
+  "distance": 8.220677380736644,
+  "lean_deg": -8.974908591757368,
+  "mm": 25.735517442746207
+ },
+ "handheld": 0.25328820467903496,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "railing",
+   "at": [
+    -0.5060308740767185,
+    5.612920405562539
+   ],
+   "length": 6.691027882381401,
+   "height": 0.7128266062677586
+  },
+  {
+   "kind": "car",
+   "at": [
+    1.8582411746314804,
+    4.574684374355712
+   ],
+   "rot": 9.46729715973715,
+   "colour": [
+    0.08437561091425422,
+    0.08437561091425422,
+    0.08437561091425422
+   ]
+  },
+  {
+   "kind": "water",
+   "at": [
+    1.0337925843710951,
+    47.84851320623528
+   ],
+   "w": 8.903093466823284,
+   "d": 96.82598221638888
+  }
+ ],
+ "from_scene": "a shot held over the stern rail of a small ferry looking straight back down the wake, white churn boiling out from under the boat and flattening into a long pale scar across grey green water, gulls crossing the frame twice without flapping, the mainland a thin dark line going soft at the top of the shot, the rail steady in the bottom corner and cold morning light with no sun in it",
+ "not_built": []
+}

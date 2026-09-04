@@ -1,0 +1,77 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.2017094319620885,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-06_fan_ribbon",
+ "by": "noor",
+ "light": "strip",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03559463967769814
+  ],
+  "height": 0.4484370980678681,
+  "distance": 0.3328661155754401,
+  "lean_deg": 2.031150084108795,
+  "mm": 27.986962209061197
+ },
+ "handheld": 0.4257198051145335,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "sheet",
+   "at": [
+    0.013783901124947939,
+    0.008557621129976458
+   ],
+   "w": 0.17185531115296981,
+   "h": 0.2943296469852592,
+   "rot": 5.566017846097935
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.19733213664909507,
+    -0.08083458779558371
+   ],
+   "r": 0.09920094573960572,
+   "h": 0.06742795510549086,
+   "rot": 38.30624345044728,
+   "lid": "on"
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -0.12372793801513897,
+    0.09444638057824672
+   ],
+   "count": 5,
+   "rot": -7.08443223707406
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.05286929889082158,
+    -0.23314176482002016
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  }
+ ],
+ "from_scene": "a fixed close shot of a strip of red sugar paper knotted to the grille of a small desk fan, the strip lifting and dropping in a slow uneven rhythm while the blades turn behind it, a stack of cartridge paper and a lump of dry clay steady in the background, hard fluorescent light and a white window beyond, nothing else in the frame moving at all",
+ "not_built": []
+}

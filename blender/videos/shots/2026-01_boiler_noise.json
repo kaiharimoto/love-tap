@@ -1,0 +1,77 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.0756272852060658,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-01_boiler_noise",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.021570116284974718
+  ],
+  "height": 0.3323680584797243,
+  "distance": 0.2737891818565569,
+  "lean_deg": 4.475711742158509,
+  "mm": 27.7109274516967
+ },
+ "handheld": 0.4937892556425504,
+ "quality": 86,
+ "objects": [
+  {
+   "kind": "board",
+   "at": [
+    0.018582411746314805,
+    0.0037106785640652895
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "gauge",
+   "at": [
+    0.2419770780207619,
+    0.06947997345303443
+   ],
+   "needle_deg": 1.8553111529698327
+  },
+  {
+   "kind": "folded",
+   "at": [
+    -0.011160060155273679,
+    0.17713300855473474
+   ],
+   "w": 0.1999039401406545,
+   "h": 0.2812812463613596,
+   "folds": 3,
+   "rot": 9.565236564392727,
+   "printed": 1.0
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -0.040377237087749075,
+    -0.13294442027230477
+   ],
+   "count": 10,
+   "rot": -7.08443223707406
+  }
+ ],
+ "from_scene": "a handheld shot held close on a boiler inside an airing cupboard, the white casing and pressure gauge filling most of the frame, a folded towel and a stacked shelf of sheets at the edge, the camera not moving while the unit fires and begins to knock, the phone light making one hard highlight on the plastic",
+ "not_built": []
+}

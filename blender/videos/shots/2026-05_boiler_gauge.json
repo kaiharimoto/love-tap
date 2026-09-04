@@ -1,0 +1,77 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.2017094319620885,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-05_boiler_gauge",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03559463967769814
+  ],
+  "height": 0.4484370980678681,
+  "distance": 0.3328661155754401,
+  "lean_deg": 2.031150084108795,
+  "mm": 27.986962209061197
+ },
+ "handheld": 0.4257198051145335,
+ "quality": 89,
+ "objects": [
+  {
+   "kind": "gauge",
+   "at": [
+    0.013783901124947939,
+    0.008557621129976458
+   ],
+   "needle_deg": -4.795633948820452
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.19733213664909507,
+    -0.08083458779558371
+   ],
+   "r": 0.07742795510549087,
+   "h": 0.07276874781681576,
+   "rot": 80.86963711647273,
+   "lid": "beside"
+  },
+  {
+   "kind": "board",
+   "at": [
+    -0.12372793801513897,
+    0.09444638057824672
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "card",
+   "at": [
+    -0.05286929889082158,
+    -0.23314176482002016
+   ],
+   "w": 0.08481907377769846,
+   "h": 0.1422584081112508,
+   "rot": 32.51922055605091
+  }
+ ],
+ "from_scene": "a fixed close shot of a small round pressure gauge on the underside of a wall boiler, the white dial dirty at the rim, the needle sitting just under one in the red band and shivering very slightly, a copper pipe and a grey plastic lever in the frame, cupboard light from one side and a cardboard box edge at the bottom",
+ "not_built": []
+}

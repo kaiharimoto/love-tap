@@ -3,8 +3,8 @@
  "ground": "tarmac",
  "room": false,
  "sky": true,
- "id": "2026-07_island_wall",
- "by": "teo",
+ "id": "2026-04_washing_line_wind",
+ "by": "noor",
  "light": "hard_sun",
  "seed": 9382,
  "size": [
@@ -26,16 +26,6 @@
  "quality": 91,
  "objects": [
   {
-   "kind": "wall",
-   "at": [
-    0.7971030470327274,
-    3.987938251846563
-   ],
-   "as_kind": "brick",
-   "w": 6.1923990940163804,
-   "h": 2.360047286980286
-  },
-  {
    "kind": "wood",
    "at": [
     -1.5144089789018258,
@@ -44,8 +34,18 @@
    "count": 9,
    "height": 12.219117865966666,
    "radius": 0.28109625470716304
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.7971030470327274,
+    3.987938251846563
+   ],
+   "as_kind": "brick",
+   "w": 6.1923990940163804,
+   "h": 2.360047286980286
   }
  ],
- "from_scene": "a dry stone wall running along the top path of a small island, sheep cropped turf and thrift growing out of the gaps, a wooden stile with one worn step, the sea flat and pale beyond the drop and a single white house far off on the headland, high thin cloud and a wide bright sky with no sun in the frame",
+ "from_scene": "a fixed shot of a washing line strung across a small back yard in a hard wind, one white sheet snapping out full and collapsing again, wooden pegs holding, brick wall and a drainpipe behind, a plastic chair tipped on its side at the edge of the frame, bright grey afternoon light",
  "not_built": []
 }
