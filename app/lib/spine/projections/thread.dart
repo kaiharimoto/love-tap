@@ -126,100 +126,261 @@ String? _worthSaying(Event e, Map<String, int> last) {
   return word;
 }
 
-/// Builds the thread from the log. Linear in the number of events, after the sort.
+/// Builds the thread from the log, from nothing.
 ///
 /// The log is put in order first rather than trusted to arrive in it. An edit that reaches this
 /// device before the message it edits, or a reaction that arrives before its target, is exactly
-/// what a phone that has been offline for a day produces when it catches up, and a projection
-/// that reads its input in arrival order silently drops both. Order is the host-assigned seq,
-/// then the timestamp, then the id, so two devices holding the same events always draw the same
-/// thread whatever order they received them in.
+/// what a phone that has been offline for a day produces when it catches up, and a projection that
+/// reads its input in arrival order silently drops both. Order is the host-assigned seq, then the
+/// timestamp, then the id, so two devices holding the same events always draw the same thread
+/// whatever order they received them in.
+///
+/// This does the whole year every time, which measured at 177 milliseconds over fourteen thousand
+/// events — eleven frames. It is what the golden test and every other caller wants, and it is what
+/// [ThreadProjector] falls back to; what the app scrolling against a year of history uses is the
+/// projector, which folds in what is new.
 ThreadState projectThread(List<Event> events, {Person? me, bool linkUp = true,
-    Map<String, String> refused = const {}, Set<String> inFlight = const {}}) {
-  events = inLogOrder(events);
-  final rows = <String, _Row>{};
-  final order = <String>[];
-  final readUpto = <Person, int>{};
-  final lastPassive = <String, int>{};
-  for (final e in events) {
+    Map<String, String> refused = const {}, Set<String> inFlight = const {}}) =>
+    (ThreadProjector(me: me)..fold(inLogOrder(events)))
+        .assemble(linkUp: linkUp, refused: refused, inFlight: inFlight);
+
+/// The thread, kept rather than rebuilt.
+///
+/// One log and no second store means the thread is a function of the events — but it does not mean
+/// recomputing that function from the first event of the year every time somebody scrolls. The
+/// spine appends, so the ordinary case is that everything this has already folded in is still
+/// there, unchanged, followed by something new; that case costs the new events and nothing else.
+/// Anything else — an event arriving out of order, the log shrinking, a different log entirely —
+/// is detected and rebuilt from scratch, so the answer is always the one the free function above
+/// would have given. thread_incremental_test holds it to exactly that.
+class ThreadProjector {
+  ThreadProjector({this.me});
+
+  final Person? me;
+
+  final Map<String, _Row> _rows = {};
+  final List<String> _order = [];
+  final Map<Person, int> _readUpto = {};
+  final Map<String, int> _lastPassive = {};
+
+  /// Rows whose ThreadItem has to be built again: new ones, and ones an edit, a delete or a
+  /// reaction has landed on since the last assembly.
+  final Set<String> _dirty = {};
+  final Map<String, ThreadItem> _items = {};
+
+  /// How much of the log has been folded in, and what the last of it was — enough to tell an
+  /// append from anything else without comparing the whole list.
+  int _seen = 0;
+  String _lastId = '';
+
+  /// Rows this device wrote that have a seq, kept in seq order, so a read marker moving can mark
+  /// exactly the rows whose delivery it changes instead of every row of the year.
+  final List<int> _mineSeqs = [];
+  final List<String> _mineIds = [];
+
+  /// Rows still in the outbox. Whether the link is up, what is in flight and what was refused can
+  /// only change the margin of these.
+  final Set<String> _pending = {};
+
+  /// The state of the delivery inputs at the last assembly.
+  int _assembledRead = 0;
+  int _assembledRefused = -1;
+  int _assembledInFlight = -1;
+  bool _assembledLinkUp = true;
+
+  /// Fold in everything of [ordered] that has not been folded in yet, rebuilding if it is not an
+  /// append to what is already here.
+  void fold(List<Event> ordered) {
+    if (ordered.length < _seen ||
+        (_seen > 0 && (ordered.length < _seen || ordered[_seen - 1].id != _lastId))) {
+      _reset();
+    }
+    for (var i = _seen; i < ordered.length; i++) {
+      _apply(ordered[i]);
+    }
+    _seen = ordered.length;
+    if (_seen > 0) _lastId = ordered[_seen - 1].id;
+  }
+
+  void _reset() {
+    _rows.clear();
+    _order.clear();
+    _readUpto.clear();
+    _lastPassive.clear();
+    _items.clear();
+    _dirty.clear();
+    _mineSeqs.clear();
+    _mineIds.clear();
+    _pending.clear();
+    _seen = 0;
+    _lastId = '';
+    _assembledRead = 0;
+    _assembledRefused = -1;
+    _assembledInFlight = -1;
+  }
+
+  void _apply(Event e) {
     final spec = kEventTypeById[e.type];
-    if (spec == null) continue;
+    if (spec == null) return;
     switch (e.type) {
       case 'message_edit':
         final t = e.payload['target'] as String?;
-        final row = t == null ? null : rows[t];
+        final row = t == null ? null : _rows[t];
         if (row != null && row.event.author == e.author) {
           row.text = e.payload['text'] as String?;
           row.edited = true;
+          _dirty.add(t!);
         }
-        continue;
+        return;
       case 'message_delete':
         final t = e.payload['target'] as String?;
-        final row = t == null ? null : rows[t];
-        if (row != null && row.event.author == e.author) row.deleted = true;
-        continue;
+        final row = t == null ? null : _rows[t];
+        if (row != null && row.event.author == e.author) {
+          row.deleted = true;
+          _dirty.add(t!);
+        }
+        return;
       case 'reaction':
         final t = e.payload['target'] as String?;
-        final row = t == null ? null : rows[t];
+        final row = t == null ? null : _rows[t];
         if (row != null) {
-          row.reactions.removeWhere((r) => r.by == e.author && r.feelingId == e.payload['feeling_id']);
-          row.reactions.add(Reaction(by: e.author, feelingId: e.payload['feeling_id'] as String, eventId: e.id, at: e.ts));
+          row.reactions.removeWhere(
+              (r) => r.by == e.author && r.feelingId == e.payload['feeling_id']);
+          row.reactions.add(Reaction(by: e.author, feelingId: e.payload['feeling_id'] as String,
+              eventId: e.id, at: e.ts));
+          _dirty.add(t!);
         }
-        continue;
+        return;
       case 'state_passive':
         // A phone reports about its owner all day, and almost none of it belongs in a
         // conversation: docs/EVENT_TYPES.md says one margin mark per meaningful transition per
         // hour, and the rest folded into the partner strip only. A battery level is not a thing
         // either of them said.
-        final mark = _worthSaying(e, lastPassive);
-        if (mark == null) continue;
-        lastPassive[_passiveKey(e)] = e.ts;
-        rows[e.id] = _Row(e);
-        order.add(e.id);
-        continue;
+        final mark = _worthSaying(e, _lastPassive);
+        if (mark == null) return;
+        _lastPassive[_passiveKey(e)] = e.ts;
+        _add(e);
+        return;
       case 'read_marker':
         final upto = e.payload['upto_seq'];
         if (upto is int) {
-          final prev = readUpto[e.author] ?? 0;
-          if (upto > prev) readUpto[e.author] = upto;
+          final prev = _readUpto[e.author] ?? 0;
+          if (upto > prev) _readUpto[e.author] = upto;
         }
-        continue;
+        return;
     }
-    if (!spec.rowInThread) continue;
-    rows[e.id] = _Row(e);
-    order.add(e.id);
+    if (!spec.rowInThread) return;
+    _add(e);
   }
-  final items = <ThreadItem>[];
-  final byId = <String, ThreadItem>{};
-  for (final id in order) {
-    final r = rows[id]!;
-    final e = r.event;
-    final other = e.author.other;
-    final theirRead = readUpto[other] ?? 0;
-    final delivery = e.seq != null
-        ? (e.seq! <= theirRead ? Delivery.read : Delivery.sent)
-        : refused.containsKey(e.id)
-            ? Delivery.refused
-            : (inFlight.contains(e.id) ? Delivery.sending
-                : linkUp ? Delivery.sending : Delivery.queued);
-    Event? replyTo;
-    final rt = e.payload['reply_to'];
-    if (rt is String) replyTo = rows[rt]?.event;
-    final arrived = e.seq == null ? null : _arrivalHint(e);
-    final item = ThreadItem(
-      event: e,
-      text: r.text ?? (e.payload['text'] as String?) ?? (e.payload['caption'] as String?),
-      edited: r.edited,
-      deleted: r.deleted,
-      reactions: List.unmodifiable(r.reactions),
-      replyTo: replyTo,
-      delivery: delivery,
-      writtenEarlier: arrived ?? false,
-    );
-    items.add(item);
-    byId[id] = item;
+
+  void _add(Event e) {
+    _rows[e.id] = _Row(e);
+    _order.add(e.id);
+    _dirty.add(e.id);
+    if (e.author == me) {
+      final seq = e.seq;
+      if (seq == null) {
+        _pending.add(e.id);
+      } else {
+        // the log is folded in seq order, so this stays sorted by construction
+        _mineSeqs.add(seq);
+        _mineIds.add(e.id);
+      }
+    }
   }
-  return ThreadState(items: items, readUpto: readUpto, byId: byId);
+
+  /// The first index in [_mineSeqs] whose seq is greater than [seq].
+  int _after(int seq) {
+    var lo = 0, hi = _mineSeqs.length;
+    while (lo < hi) {
+      final mid = (lo + hi) >> 1;
+      if (_mineSeqs[mid] <= seq) {
+        lo = mid + 1;
+      } else {
+        hi = mid;
+      }
+    }
+    return lo;
+  }
+
+  /// The thread as it stands. Only rows whose inputs have changed are built again.
+  ThreadState assemble({bool linkUp = true, Map<String, String> refused = const {},
+      Set<String> inFlight = const {}}) {
+    // A read marker moving changes the margin of rows it has just covered, and of no others. The
+    // first version of this re-marked every row this device wrote — half a year of them — which
+    // cost more than the thing it was avoiding. The rows it covers are exactly mine with a seq in
+    // (what it covered before, what it covers now], so they are found by binary search.
+    final now = _readUpto[me?.other] ?? 0;
+    if (now != _assembledRead) {
+      final from = _after(_assembledRead < now ? _assembledRead : 0);
+      final to = _after(now);
+      for (var i = from; i < to && i < _mineIds.length; i++) {
+        _dirty.add(_mineIds[i]);
+      }
+      // a marker that went backwards should not happen, but if it does, rebuild what it uncovered
+      if (now < _assembledRead) {
+        for (var i = _after(now); i < _after(_assembledRead) && i < _mineIds.length; i++) {
+          _dirty.add(_mineIds[i]);
+        }
+      }
+      _assembledRead = now;
+    }
+
+    // The link going down, or something being refused or picked up for sending, can only change
+    // the margin of what is still in the outbox.
+    if (refused.length != _assembledRefused ||
+        inFlight.length != _assembledInFlight ||
+        linkUp != _assembledLinkUp) {
+      _dirty.addAll(_pending);
+      _assembledRefused = refused.length;
+      _assembledInFlight = inFlight.length;
+      _assembledLinkUp = linkUp;
+    }
+
+    for (final id in _dirty) {
+      final r = _rows[id];
+      if (r == null) continue;
+      final e = r.event;
+      final theirRead = _readUpto[e.author.other] ?? 0;
+      final delivery = e.seq != null
+          ? (e.seq! <= theirRead ? Delivery.read : Delivery.sent)
+          : refused.containsKey(e.id)
+              ? Delivery.refused
+              : (inFlight.contains(e.id) ? Delivery.sending
+                  : linkUp ? Delivery.sending : Delivery.queued);
+      Event? replyTo;
+      final rt = e.payload['reply_to'];
+      if (rt is String) replyTo = _rows[rt]?.event;
+      _items[id] = ThreadItem(
+        event: e,
+        text: r.text ?? (e.payload['text'] as String?) ?? (e.payload['caption'] as String?),
+        edited: r.edited,
+        deleted: r.deleted,
+        reactions: List.unmodifiable(r.reactions),
+        replyTo: replyTo,
+        delivery: delivery,
+        writtenEarlier: e.seq == null ? false : (_arrivalHint(e) ?? false),
+      );
+    }
+    _dirty.clear();
+
+    final items = <ThreadItem>[];
+    final byId = <String, ThreadItem>{};
+    for (final id in _order) {
+      final item = _items[id];
+      if (item == null) continue;
+      items.add(item);
+      byId[id] = item;
+    }
+    return ThreadState(items: items, readUpto: Map.of(_readUpto), byId: byId);
+  }
+
+  /// Fold and assemble in one go: what the app calls on every spine change.
+  ThreadState update(List<Event> log, {bool linkUp = true,
+      Map<String, String> refused = const {}, Set<String> inFlight = const {}}) {
+    fold(inLogOrder(log));
+    return assemble(linkUp: linkUp, refused: refused, inFlight: inFlight);
+  }
 }
 
 /// An event authored more than twenty minutes before the previous seq's author time was

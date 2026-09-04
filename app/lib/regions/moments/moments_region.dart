@@ -41,7 +41,7 @@ class _MomentsRegionState extends State<MomentsRegion> {
   @override
   Widget build(BuildContext context) {
     final scope = AppScope.of(context);
-    final registry = FeelingRegistry(scope.spine.all);
+    final registry = scope.feelings;
     final all = scope.spine.all;
     final filtered = all.where(_keeps).toList();
     return Column(

@@ -96,6 +96,19 @@ class Spine {
   /// Every accepted event in host order.
   List<Event> get ordered => List.unmodifiable(_ordered);
 
+  /// How many events of one type there are. Cheap enough to ask on every change, and the way
+  /// the scope knows whether anything that would change the feeling registry has happened.
+  int countOf(String type) {
+    var n = 0;
+    for (final e in _ordered) {
+      if (e.type == type) n++;
+    }
+    for (final e in _pending) {
+      if (e.type == type) n++;
+    }
+    return n;
+  }
+
   /// Ids the host refused, with the reason. Read by the thread to mark the row.
   Map<String, String> get refused => Map.unmodifiable(_refused);
 

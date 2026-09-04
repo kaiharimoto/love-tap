@@ -76,9 +76,29 @@ class AppScope extends ChangeNotifier {
   final StreamController<(String, double)> _landed = StreamController<(String, double)>.broadcast();
   Stream<(String, double)> get landed => _landed.stream;
 
+  /// Kept between refreshes: the thread is a function of the log, but that does not mean
+  /// recomputing it from the first event of the year every time somebody scrolls. Scrolling emits
+  /// read markers, every one of which is a spine change, and the full projection measured at 177
+  /// milliseconds over fourteen thousand events.
+  late final ThreadProjector _threadProjector = ThreadProjector(me: me);
+
+  /// Every feeling either of them has, rebuilt only when one is made or changed.
+  ///
+  /// It was constructed inside build() in five regions, each time from every event in the spine.
+  /// Nothing about it changes unless a feeling_authored event arrives, which happens a handful of
+  /// times a year.
+  FeelingRegistry _feelings = FeelingRegistry(const []);
+  int _authoredSeen = -1;
+  FeelingRegistry get feelings => _feelings;
+
   void _refresh() {
     final all = spine.all;
-    thread = projectThread(all, me: me,
+    final authored = spine.countOf('feeling_authored');
+    if (authored != _authoredSeen) {
+      _feelings = FeelingRegistry(all);
+      _authoredSeen = authored;
+    }
+    thread = _threadProjector.update(all,
         linkUp: link.state == LinkState.connected, refused: spine.refused,
         inFlight: spine.inFlight);
     state = projectState(all);
@@ -100,7 +120,7 @@ class AppScope extends ChangeNotifier {
       if (e.type != 'feeling' || e.author == me) continue;
       if (e.id == _lastArrival) break;
       _lastArrival = e.id;
-      final f = FeelingRegistry(all).byId(e.payload['feeling_id'] as String? ?? '');
+      final f = _feelings.byId(e.payload['feeling_id'] as String? ?? '');
       final intensity = (e.payload['intensity'] as num?)?.toDouble() ?? 0.7;
       if (f != null) {
         unawaited(ambient.pocket(f, intensity));

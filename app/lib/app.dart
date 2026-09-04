@@ -14,7 +14,6 @@ import 'material/light.dart';
 import 'material/palette.dart';
 import 'feelings/builtins.dart';
 import 'feelings/corner.dart';
-import 'feelings/registry.dart';
 import 'feelings/landing.dart';
 import 'feelings/sensation.dart';
 import 'regions/chat/chat_region.dart';
@@ -90,7 +89,7 @@ class _ShellState extends State<Shell> {
       // point of the app, so it happens whichever region is open rather than only in Chat.
       final scope = AppScope.of(context);
       _landings = scope.landed.listen((pair) {
-        final f = FeelingRegistry(scope.spine.all).byId(pair.$1);
+        final f = scope.feelings.byId(pair.$1);
         if (f == null || !mounted) return;
         _arrivals.add(Arrival(feeling: f, intensity: pair.$2, mine: false));
         unawaited(_sensation.play(f, intensity: pair.$2));
@@ -101,7 +100,7 @@ class _ShellState extends State<Shell> {
     CaptureBus.goToRegion = _go;
     CaptureBus.sendFeeling = (id, intensity) async {
       final scope = AppScope.of(context);
-      final f = FeelingRegistry(scope.spine.all).byId(id);
+      final f = scope.feelings.byId(id);
       if (f == null) return;
       // The handle returns as soon as the feeling is in the log, and leaves the sensation running.
       // Awaiting the whole thing would mean the harness only ever started taking frames after the
@@ -196,7 +195,7 @@ class _ShellState extends State<Shell> {
                       ),
                     // one gesture from any region
                     FeelingCorner(
-                      registry: FeelingRegistry(scope.spine.all),
+                      registry: scope.feelings,
                       onSend: _send,
                       onPreview: (f, i) => _sensation.play(f, intensity: i, sound: true),
                     ),

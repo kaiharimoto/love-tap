@@ -29,7 +29,7 @@ class PulseRegion extends StatelessWidget {
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
     final them = scope.partnerState;
     final me = scope.myState;
-    final registry = FeelingRegistry(scope.spine.all);
+    final registry = scope.feelings;
     final now = scope.clock.now();
     final since = now.subtract(const Duration(hours: 24)).millisecondsSinceEpoch;
     final today = feelingsSince(scope.spine.all, since);

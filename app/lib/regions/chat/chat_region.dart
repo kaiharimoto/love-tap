@@ -375,7 +375,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final scope = AppScope.of(context);
     final items = scope.thread.items;
-    final registry = FeelingRegistry(scope.spine.all);
+    final registry = scope.feelings;
     if (items.length != _lastCount) {
       final wasAtEnd = _lastCount == 0 || _nearEnd();
       _lastCount = items.length;

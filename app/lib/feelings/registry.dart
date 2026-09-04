@@ -32,14 +32,15 @@ class FeelingRegistry {
 
   final List<Feeling> _all = [];
 
+  /// byId is the hottest call in the app — the thread asks it once a row, the fan once a feeling
+  /// — and it was a linear walk of every feeling either of them has ever made, which cost most on
+  /// the misses. _all is fixed once the constructor has run, so this is built once and asked.
+  Map<String, Feeling>? _index;
+  Map<String, Feeling> get _byId => _index ??= {for (final f in _all) f.id: f};
+
   List<Feeling> get all => List.unmodifiable(_all);
   List<Feeling> get active => _all.where((f) => !f.retired).toList();
-  Feeling? byId(String id) {
-    for (final f in _all) {
-      if (f.id == id) return f;
-    }
-    return null;
-  }
+  Feeling? byId(String id) => _byId[id];
 
   List<Feeling> family(Family fam) => active.where((f) => f.family == fam).toList();
 }

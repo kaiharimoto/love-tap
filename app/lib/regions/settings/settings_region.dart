@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import '../../capture/bus.dart';
 import '../../feelings/builtins.dart';
 import '../../flags.dart';
-import '../../feelings/registry.dart';
 import '../../feelings/sensation.dart';
 import '../../material/hands.dart';
 import '../../material/marks.dart';
@@ -78,7 +77,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
     final scope = AppScope.of(context);
     final t = scope.transport;
     final link = scope.link;
-    final registry = FeelingRegistry(scope.spine.all);
+    final registry = scope.feelings;
     final authored = registry.all.where((f) => !f.builtIn).toList();
     return ListView(
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 96),

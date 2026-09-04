@@ -33,45 +33,45 @@
  "paired_with": "six spoken words, HKDF-SHA256; every request signed thereafter",
  "events": {
   "message_client_to_host": {
-   "id": "01M1NNK0MN5MC27BXG72KTFAJ1",
+   "id": "01M1NQ7CQCWTNDNAJ7NQ8C95GN",
    "type": "message",
    "from": "teo",
-   "written_at": "2026-09-04T07:37:03.381Z",
+   "written_at": "2026-09-04T08:05:39.692Z",
    "arrived_seq": 1
   },
   "feeling_client_to_host": {
-   "id": "01M1NNK0MZ211P0PRH8H3ZQCBV",
+   "id": "01M1NQ7CQQKCPQA4EBM14S0CQE",
    "type": "feeling",
    "from": "teo",
-   "written_at": "2026-09-04T07:37:03.391Z",
+   "written_at": "2026-09-04T08:05:39.703Z",
    "arrived_seq": 2
   },
   "message_host_to_client": {
-   "id": "01M1NNK0PPVPCCPJ7AQ7N3SHM9",
+   "id": "01M1NQ7CSRHJHPGYZX0EGCWV3G",
    "type": "message",
    "from": "noor",
-   "written_at": "2026-09-04T07:37:03.446Z",
+   "written_at": "2026-09-04T08:05:39.768Z",
    "arrived_seq": 3
   },
   "feeling_host_to_client": {
-   "id": "01M1NNK0PRC355JKKYBZF8X0P8",
+   "id": "01M1NQ7CSTXA2T2A52YV29JEAC",
    "type": "feeling",
    "from": "noor",
-   "written_at": "2026-09-04T07:37:03.448Z",
+   "written_at": "2026-09-04T08:05:39.770Z",
    "arrived_seq": 4
   }
  },
  "spine_host_order": [
-  "01M1NNK0MN5MC27BXG72KTFAJ1",
-  "01M1NNK0MZ211P0PRH8H3ZQCBV",
-  "01M1NNK0PPVPCCPJ7AQ7N3SHM9",
-  "01M1NNK0PRC355JKKYBZF8X0P8"
+  "01M1NQ7CQCWTNDNAJ7NQ8C95GN",
+  "01M1NQ7CQQKCPQA4EBM14S0CQE",
+  "01M1NQ7CSRHJHPGYZX0EGCWV3G",
+  "01M1NQ7CSTXA2T2A52YV29JEAC"
  ],
  "spine_client_order": [
-  "01M1NNK0MN5MC27BXG72KTFAJ1",
-  "01M1NNK0MZ211P0PRH8H3ZQCBV",
-  "01M1NNK0PPVPCCPJ7AQ7N3SHM9",
-  "01M1NNK0PRC355JKKYBZF8X0P8"
+  "01M1NQ7CQCWTNDNAJ7NQ8C95GN",
+  "01M1NQ7CQQKCPQA4EBM14S0CQE",
+  "01M1NQ7CSRHJHPGYZX0EGCWV3G",
+  "01M1NQ7CSTXA2T2A52YV29JEAC"
  ],
  "four_events_at": {
   "host": [
@@ -89,9 +89,9 @@
  },
  "same_order_both_sides": true,
  "counted_by_node_b": {
-  "tx_bytes": 16736,
-  "rx_bytes": 14832,
+  "tx_bytes": 3700,
+  "rx_bytes": 3484,
   "path": "direct to 192.0.2.2:48859"
  },
- "written_at": "2026-09-04T07:37:03.478846Z"
+ "written_at": "2026-09-04T08:05:39.812729Z"
 }
