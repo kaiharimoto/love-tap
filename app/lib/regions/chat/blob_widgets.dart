@@ -15,6 +15,7 @@ import '../../material/paper.dart';
 import '../../material/library.dart';
 import '../../material/hands.dart';
 import '../../material/assignment.dart';
+import '../../material/marks.dart';
 
 /// Process-wide cache of decoded blob bytes so scrolling never re-reads the store.
 class BlobCache {
@@ -115,10 +116,21 @@ class _VoiceNotePlayerState extends State<VoiceNotePlayer> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        IconButton(
-          tooltip: _playing ? S.pause : S.play,
-          icon: Icon(_playing ? Icons.pause : Icons.play_arrow),
-          onPressed: _toggle,
+        // Drawn, not set: the last icon in the app was a Material play arrow, and a glyph out of
+        // an icon font sitting on a torn sheet reads as a sticker stuck to it.
+        Semantics(
+          button: true,
+          label: _playing ? S.pause : S.play,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: _toggle,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(6, 6, 10, 6),
+              child: _playing
+                  ? Mark.hold(size: 20, colour: Pen.graphite)
+                  : Mark.play(size: 20, colour: Pen.graphite),
+            ),
+          ),
         ),
         SizedBox(
           width: 160,

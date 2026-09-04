@@ -45,6 +45,16 @@ class Mark extends StatelessWidget {
   factory Mark.turnback({double size = 20, Color colour = Pen.margin, int seed = 13}) =>
       Mark._(_turnback, size: size, colour: colour, weight: 1.2, seed: seed);
 
+  /// A triangle, drawn in three strokes that overshoot at the corners the way a pencil does.
+  /// It is what anyone draws beside a recording they want to hear, and the reason it is drawn
+  /// rather than set is that a glyph out of an icon font on a sheet of paper is a sticker.
+  factory Mark.play({double size = 20, Color colour = Pen.graphite, int seed = 23}) =>
+      Mark._(_play, size: size, colour: colour, weight: 1.4, seed: seed);
+
+  /// Two bars, pressed the way a pencil is when a hand stops: harder in the middle of the stroke.
+  factory Mark.hold({double size = 20, Color colour = Pen.graphite, int seed = 29}) =>
+      Mark._(_hold, size: size, colour: colour, weight: 1.6, seed: seed);
+
   @override
   Widget build(BuildContext context) =>
       CustomPaint(size: Size.square(size), painter: _MarkPainter(_draw, colour, weight, seed));
@@ -171,6 +181,24 @@ void _turnback(Canvas canvas, Size size, _Hand hand) {
     ..cubicTo(w * 0.86, h * 0.72, w * 0.52, h * 0.74, w * 0.20, h * 0.72);
   hand.along(path, steps: 36, wobble: 0.4);
   hand.stroke([Offset(w * 0.36, h * 0.54), Offset(w * 0.18, h * 0.72), Offset(w * 0.38, h * 0.88)], wobble: 0.4);
+}
+
+void _play(Canvas canvas, Size size, _Hand hand) {
+  final w = size.width, h = size.height;
+  // Each side is its own stroke and each one runs a little past the corner, because a hand
+  // lifting off a corner leaves the overshoot behind. A closed path would not have them.
+  final a = Offset(w * 0.28, h * 0.16);
+  final b = Offset(w * 0.84, h * 0.50);
+  final c = Offset(w * 0.28, h * 0.84);
+  hand.stroke([a, Offset(w * 0.86, h * 0.52)], wobble: 0.45, taper: 0.35);
+  hand.stroke([b, Offset(w * 0.26, h * 0.86)], wobble: 0.45, taper: 0.35);
+  hand.stroke([c, Offset(w * 0.29, h * 0.13)], wobble: 0.5, taper: 0.3);
+}
+
+void _hold(Canvas canvas, Size size, _Hand hand) {
+  final w = size.width, h = size.height;
+  hand.stroke([Offset(w * 0.36, h * 0.18), Offset(w * 0.34, h * 0.82)], wobble: 0.4, taper: 0.25);
+  hand.stroke([Offset(w * 0.64, h * 0.17), Offset(w * 0.66, h * 0.83)], wobble: 0.4, taper: 0.25);
 }
 
 /// A line ruled by hand: what a composer sits on, and what separates two things on a page.
