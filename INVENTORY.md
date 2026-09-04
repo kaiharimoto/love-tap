@@ -10,6 +10,7 @@ Component families, sources, status, substitutions. Status: `planned` · `buildi
 | Android cmdline-tools | 16111833 | dl.google.com | building | — |
 | Android platform / build-tools | android-36 / 36.0.0 | dl.google.com | building | — |
 | System image + AVD | android-34 aosp_atd x86_64, `lovetap` 1440×3120 | dl.google.com | building | software emulation (`-no-accel`), no KVM here |
+| Android NDK | 28.2.13676358 (2.1 GB) | dl.google.com | built | needed: `sqlite3_flutter_libs` and the media plugins build native code, so an APK cannot be produced without it. Deleting it to free disk costs a 2.1 GB re-download on the next Android build. |
 | Blender | 4.5.13 LTS | download.blender.org | building | CPU Cycles, headless |
 | ffmpeg | release static (johnvansickle) | johnvansickle.com | building | — |
 | tailscaled / tailscale | 1.102.3 | pkgs.tailscale.com | building | userspace networking, two state dirs |

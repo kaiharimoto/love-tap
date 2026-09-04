@@ -921,6 +921,23 @@
     "samples": 28
    }
   },
+  "assets/objects/obj_coffee_ring_shadow_dusk.png": {
+   "bytes": 104187,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_coffee_ring",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
   "assets/objects/obj_confetti.png": {
    "bytes": 192692,
    "generator": "blender/objects/objects.py",
