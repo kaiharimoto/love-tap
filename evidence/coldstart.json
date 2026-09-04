@@ -33,45 +33,45 @@
  "paired_with": "six spoken words, HKDF-SHA256; every request signed thereafter",
  "events": {
   "message_client_to_host": {
-   "id": "01M1PRDS5A73DS9PHMYQXBNQVT",
+   "id": "01M1PS7CJCZSAV53D2FDSNWJR4",
    "type": "message",
    "from": "teo",
-   "written_at": "2026-09-04T17:45:52.042Z",
+   "written_at": "2026-09-04T17:59:51.116Z",
    "arrived_seq": 1
   },
   "feeling_client_to_host": {
-   "id": "01M1PRDS5M5E0EYW9J4T6Q6MEH",
+   "id": "01M1PS7CJVA53YKMZYZDKQX4KK",
    "type": "feeling",
    "from": "teo",
-   "written_at": "2026-09-04T17:45:52.052Z",
+   "written_at": "2026-09-04T17:59:51.131Z",
    "arrived_seq": 2
   },
   "message_host_to_client": {
-   "id": "01M1PRDS6YG5B7S1ERVTTRG8T1",
+   "id": "01M1PS7CMP5G7WXY67QQJV1WYM",
    "type": "message",
    "from": "noor",
-   "written_at": "2026-09-04T17:45:52.094Z",
+   "written_at": "2026-09-04T17:59:51.190Z",
    "arrived_seq": 3
   },
   "feeling_host_to_client": {
-   "id": "01M1PRDS6ZB0HBGAXVKT53FEWC",
+   "id": "01M1PS7CMRCD7J2JZ9WZDH42ZD",
    "type": "feeling",
    "from": "noor",
-   "written_at": "2026-09-04T17:45:52.095Z",
+   "written_at": "2026-09-04T17:59:51.192Z",
    "arrived_seq": 4
   }
  },
  "spine_host_order": [
-  "01M1PRDS5A73DS9PHMYQXBNQVT",
-  "01M1PRDS5M5E0EYW9J4T6Q6MEH",
-  "01M1PRDS6YG5B7S1ERVTTRG8T1",
-  "01M1PRDS6ZB0HBGAXVKT53FEWC"
+  "01M1PS7CJCZSAV53D2FDSNWJR4",
+  "01M1PS7CJVA53YKMZYZDKQX4KK",
+  "01M1PS7CMP5G7WXY67QQJV1WYM",
+  "01M1PS7CMRCD7J2JZ9WZDH42ZD"
  ],
  "spine_client_order": [
-  "01M1PRDS5A73DS9PHMYQXBNQVT",
-  "01M1PRDS5M5E0EYW9J4T6Q6MEH",
-  "01M1PRDS6YG5B7S1ERVTTRG8T1",
-  "01M1PRDS6ZB0HBGAXVKT53FEWC"
+  "01M1PS7CJCZSAV53D2FDSNWJR4",
+  "01M1PS7CJVA53YKMZYZDKQX4KK",
+  "01M1PS7CMP5G7WXY67QQJV1WYM",
+  "01M1PS7CMRCD7J2JZ9WZDH42ZD"
  ],
  "four_events_at": {
   "host": [
@@ -89,9 +89,9 @@
  },
  "same_order_both_sides": true,
  "counted_by_node_b": {
-  "tx_bytes": 3596,
+  "tx_bytes": 3700,
   "rx_bytes": 3292,
   "path": "direct to 192.0.2.2:48859"
  },
- "written_at": "2026-09-04T17:45:52.143668Z"
+ "written_at": "2026-09-04T17:59:51.232338Z"
 }

@@ -32,7 +32,16 @@ class SearchPage extends StatefulWidget {
         opaque: false,
         barrierColor: const Color(0x66120D08),
         transitionDuration: const Duration(milliseconds: 160),
-        pageBuilder: (_, _, _) => SearchPage(initialQuery: query),
+        // Material, because there is no Scaffold on this route and a Text with no Material over
+        // it anywhere is drawn by Flutter in red under a double yellow underline — a diagnostic,
+        // painted in release too. It put sixty-three thousand pure #FFFF00 pixels through the
+        // search results and twelve thousand through the photograph's caption, two lines under
+        // every line of writing, and it read as a design decision rather than as the error it is.
+        // Transparency, so the desk is still what is under the page.
+        pageBuilder: (_, _, _) => Material(
+          type: MaterialType.transparency,
+          child: SearchPage(initialQuery: query),
+        ),
       ));
 
   @override

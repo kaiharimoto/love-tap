@@ -6,27 +6,27 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8912/",
+ "url": "http://127.0.0.1:8799/",
  "steps": [
   {
    "do": "goTo",
-   "ms": 4706
+   "ms": 3176
   },
   {
    "do": "wait",
-   "ms": 2003
+   "ms": 2004
   },
   {
    "do": "scrollTo",
-   "ms": 4884
+   "ms": 2128
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1103
   },
   {
    "do": "frames",
-   "ms": 470005
+   "ms": 349856
   }
  ],
  "shots": [
@@ -41,7 +41,7 @@
   }
  ],
  "reports": [],
- "cold_ms": 11907,
+ "cold_ms": 14770,
  "problems": [],
  "ok": true
 }

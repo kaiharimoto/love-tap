@@ -13,6 +13,7 @@ import '../../material/marks.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../media/local_uri.dart';
+import '../../app.dart';
 import '../../scope.dart';
 import '../../spine/projections/thread.dart';
 import 'blob_widgets.dart';
@@ -26,7 +27,16 @@ class ViewerPage extends StatefulWidget {
         opaque: false,
         barrierColor: const Color(0xCC0E0A06),
         transitionDuration: const Duration(milliseconds: 200),
-        pageBuilder: (_, _, _) => ViewerPage(item: item),
+        // Material, because there is no Scaffold on this route and a Text with no Material over
+        // it anywhere is drawn by Flutter in red under a double yellow underline — a diagnostic,
+        // painted in release too. It put sixty-three thousand pure #FFFF00 pixels through the
+        // search results and twelve thousand through the photograph's caption, two lines under
+        // every line of writing, and it read as a design decision rather than as the error it is.
+        // Transparency, so the desk is still what is under the page.
+        pageBuilder: (_, _, _) => Material(
+          type: MaterialType.transparency,
+          child: ViewerPage(item: item),
+        ),
       ));
 
   @override
@@ -139,7 +149,8 @@ class _ViewerPageState extends State<ViewerPage> {
             GestureDetector(
               onTap: () => Navigator.of(context).maybePop(),
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 18),
+                // clear of the tab strip: this sat on top of `chat` and `moments`
+                padding: const EdgeInsets.only(bottom: 18 + kTabStrip),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

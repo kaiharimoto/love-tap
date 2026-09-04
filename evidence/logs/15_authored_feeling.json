@@ -6,11 +6,11 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8912/",
+ "url": "http://127.0.0.1:8799/",
  "steps": [
   {
    "do": "goTo",
-   "ms": 4488
+   "ms": 2930
   },
   {
    "do": "wait",
@@ -18,47 +18,47 @@
   },
   {
    "do": "goTo",
-   "ms": 2964
+   "ms": 4240
   },
   {
    "do": "wait",
-   "ms": 1301
+   "ms": 1304
   },
   {
    "do": "openCorner",
-   "ms": 1409
+   "ms": 1037
   },
   {
    "do": "frames",
-   "ms": 39713
+   "ms": 37604
   },
   {
    "do": "sendFeeling",
-   "ms": 2958
+   "ms": 2085
   },
   {
    "do": "frames",
-   "ms": 102034
+   "ms": 85682
   },
   {
    "do": "sendFeeling",
-   "ms": 2516
+   "ms": 2367
   },
   {
    "do": "frames",
-   "ms": 162727
+   "ms": 145580
   },
   {
    "do": "openCorner",
-   "ms": 1386
+   "ms": 723
   },
   {
    "do": "frames",
-   "ms": 37614
+   "ms": 34829
   },
   {
    "do": "report",
-   "ms": 447
+   "ms": 434
   }
  ],
  "shots": [
@@ -91,40 +91,43 @@
   {
    "region": 1,
    "visible": [
+    "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "00018Z4XY03RGV7J6E668B69KH",
-    "00018Z4XY03RGV7J6E668B69KJ"
+    "0001MCJ1M0641MQ40TY636JVNA",
+    "0001MCJ1M0641MQ40TY636JVNB"
    ],
    "tears": {
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_010",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_032",
-    "00018Z4XY03RGV7J6E668B69KH": "tear_052",
-    "00018Z4XY03RGV7J6E668B69KJ": "tear_014"
+    "0001M4GW48FEW3M67XKAZT5051": "tear_010",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
+    "0001MCJ1M0641MQ40TY636JVNA": "tear_014",
+    "0001MCJ1M0641MQ40TY636JVNB": "tear_036"
    },
    "stocks": {
+    "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "00018Z4XY03RGV7J6E668B69KH": "looseleaf_01",
-    "00018Z4XY03RGV7J6E668B69KJ": "looseleaf_01"
+    "0001MCJ1M0641MQ40TY636JVNA": "legal_01",
+    "0001MCJ1M0641MQ40TY636JVNB": "looseleaf_01"
    },
    "scroll": {
     "first": 8372,
-    "last": 8375,
-    "of": 8376
+    "last": 8376,
+    "of": 8377
    },
-   "now": "2026-08-30T09:14:00.000Z",
+   "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 2752,
    "seed": 20260903,
-   "events": 14051,
+   "events": 14052,
    "transport": "local",
    "link": "connecting",
    "me": "teo",
    "masks_in_pool": 56,
    "writable_masks": 47,
    "light": "day",
-   "has_dusk_paper": false,
-   "paper_stocks": 27,
+   "has_dusk_paper": true,
+   "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
@@ -138,7 +141,7 @@
    "at": "15_authored_feeling"
   }
  ],
- "cold_ms": 13765,
+ "cold_ms": 13650,
  "problems": [],
  "ok": true
 }

@@ -1,36 +1,27 @@
 {
- "dir": "evidence/frames/11_chat_scroll",
- "frames": 300,
+ "dir": "/tmp/lovetap-capture/11_chat_scroll",
+ "frames": 330,
  "fps": 60.0,
- "seconds": 5.0,
- "mean_change_per_frame": 0.00046,
- "repeated_frames": 297,
- "repeated_fraction": 0.993,
- "longest_still_run": 297,
+ "seconds": 5.5,
+ "mean_change_per_frame": 0.05232,
+ "repeated_frames": 4,
+ "repeated_fraction": 0.012,
+ "longest_still_run": 1,
  "repeated_at": [
-  2,
   3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
-  13
+  175,
+  216,
+  222
  ],
  "brightness_jumps": 0,
- "ok": false,
- "why": "99% of it is frames the app did not draw; it holds still for 5.0s in one stretch",
+ "ok": true,
  "strip": "evidence/crops/11_chat_scroll_strip.png",
  "strip_frames": [
-  "evidence/frames/11_chat_scroll/0000.png",
-  "evidence/frames/11_chat_scroll/0060.png",
-  "evidence/frames/11_chat_scroll/0120.png",
-  "evidence/frames/11_chat_scroll/0179.png",
-  "evidence/frames/11_chat_scroll/0239.png",
-  "evidence/frames/11_chat_scroll/0299.png"
+  "/tmp/lovetap-capture/11_chat_scroll/000000.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000066.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000132.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000197.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000263.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000329.png"
  ]
 }

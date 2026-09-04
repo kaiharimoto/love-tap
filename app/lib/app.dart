@@ -269,6 +269,11 @@ class _CornerPainter extends CustomPainter {
 }
 
 /// The region strip: five tabs cut from index card, each with its label stamped on it.
+/// How much of the bottom of the screen the tab strip takes, including the safe area under it.
+/// A surface laid over the app has to clear it: the media viewer's `put it back` sat exactly on
+/// top of `chat` and `moments`, two sets of words in the same place.
+const double kTabStrip = 44 + 18;
+
 class _Tabs extends StatelessWidget {
   const _Tabs({required this.index, required this.labels, required this.onPick});
   final int index;

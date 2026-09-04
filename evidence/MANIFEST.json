@@ -1,9 +1,9 @@
 {
- "captured_at": "2026-09-04T04:09:19Z",
+ "captured_at": "2026-09-04T17:19:40Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
-   "bytes": 2104954,
+   "bytes": 2500772,
    "size": [
     1440,
     3120
@@ -15,7 +15,7 @@
    ]
   },
   "02_chat.png": {
-   "bytes": 2356213,
+   "bytes": 2777657,
    "size": [
     1440,
     3120
@@ -27,7 +27,7 @@
    ]
   },
   "03_us.png": {
-   "bytes": 1946604,
+   "bytes": 2362771,
    "size": [
     1440,
     3120
@@ -39,7 +39,7 @@
    ]
   },
   "04_moments.png": {
-   "bytes": 1631241,
+   "bytes": 3093573,
    "size": [
     1440,
     3120
@@ -51,7 +51,7 @@
    ]
   },
   "05_settings.png": {
-   "bytes": 2090219,
+   "bytes": 2564883,
    "size": [
     1440,
     3120
@@ -63,7 +63,7 @@
    ]
   },
   "10_first_run.png": {
-   "bytes": 1563664,
+   "bytes": 1629745,
    "size": [
     1440,
     3120
@@ -75,7 +75,7 @@
    ]
   },
   "12_search.png": {
-   "bytes": 2296432,
+   "bytes": 3218776,
    "size": [
     1440,
     3120
@@ -87,7 +87,7 @@
    ]
   },
   "13_messenger_states.png": {
-   "bytes": 2164220,
+   "bytes": 2285665,
    "size": [
     1440,
     3120
@@ -99,7 +99,7 @@
    ]
   },
   "14_media_viewer.png": {
-   "bytes": 2181642,
+   "bytes": 2021789,
    "size": [
     1440,
     3120
@@ -111,7 +111,7 @@
    ]
   },
   "17_setup_pwa.png": {
-   "bytes": 398327,
+   "bytes": 1045948,
    "size": [
     1440,
     3120
@@ -123,14 +123,14 @@
    ]
   },
   "06_unfolding.mp4": {
-   "bytes": 699253,
+   "bytes": 1020511,
    "size": [
     1080,
     2340
    ],
-   "frames": 280,
+   "frames": 296,
    "fps": 60.0,
-   "seconds": 4.67,
+   "seconds": 4.93,
    "meets_minimum": true,
    "minimum": [
     1080,
@@ -140,14 +140,14 @@
    "long_enough": true
   },
   "07_feeling_landing.mp4": {
-   "bytes": 851941,
+   "bytes": 4488170,
    "size": [
     1080,
     2340
    ],
-   "frames": 390,
+   "frames": 384,
    "fps": 60.0,
-   "seconds": 6.5,
+   "seconds": 6.4,
    "meets_minimum": true,
    "minimum": [
     1080,
@@ -157,14 +157,14 @@
    "long_enough": true
   },
   "11_chat_scroll.mp4": {
-   "bytes": 831778,
+   "bytes": 3085726,
    "size": [
     1080,
     2340
    ],
-   "frames": 300,
+   "frames": 330,
    "fps": 60.0,
-   "seconds": 5.0,
+   "seconds": 5.5,
    "meets_minimum": true,
    "minimum": [
     1080,
@@ -174,14 +174,14 @@
    "long_enough": true
   },
   "15_authored_feeling.mp4": {
-   "bytes": 1224629,
+   "bytes": 3601917,
    "size": [
     1080,
     2340
    ],
-   "frames": 310,
+   "frames": 308,
    "fps": 60.0,
-   "seconds": 5.17,
+   "seconds": 5.13,
    "meets_minimum": true,
    "minimum": [
     1080,
@@ -192,8 +192,8 @@
   }
  },
  "missing": {
-  "09_two_devices.png": "no Android device was up in this session",
-  "16_setup_android.png": "no Android device was up in this session",
-  "08_state_propagating.mp4": "no Android device was up in this session"
+  "09_two_devices.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
+  "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
+  "08_state_propagating.mp4": "the far phone would not start; see /tmp/lovetap-capture/host_daemon.log"
  }
 }

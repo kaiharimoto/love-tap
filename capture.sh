@@ -235,7 +235,9 @@ if wants 08_state_propagating && [ -f evidence/scenes/08_state_propagating.json 
   # only arrangement a browser will accept — a page served off the loopback file server is a
   # different origin from the host, and nothing in this transport sends an
   # Access-Control-Allow-Origin header, because on the phones there is nothing to allow.
-  ( cd app && dart run tool/host_daemon.dart --out "../$PAIR" \
+  # $PAIR is absolute, so it must not be joined to anything: "../$PAIR" made "..//tmp/..." and
+  # the far phone died on its first write, which capture.sh then reported as "would not start"
+  ( cd app && dart run tool/host_daemon.dart --out "$PAIR" \
       --transport "$FAR_TRANSPORT" --address "$FAR_ADDR" --proxy "$FAR_PROXY" \
       --pwa "$SCRATCH/web_fresh" --seconds 900 \
     ) >"$SCRATCH/host_daemon.log" 2>&1 &

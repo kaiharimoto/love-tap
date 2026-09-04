@@ -84,12 +84,20 @@ def bend_about(co, hinge_y, angle, sign=1.0):
     return (co[0], hinge_y + y * c, co[2] + y * s)
 
 
+# A flap folded back on itself never reaches a full half turn: the paper it is folded against is
+# in the way. Folding to exactly pi put the flap's surface in the same plane as the third it lies
+# on, and Cycles cannot choose between two coincident surfaces — frame 0000 came out as grey
+# interference banding instead of paper, sixty-three levels darker than frame 0001, and that first
+# frame is the one every unopened note in the thread shows. Two degrees of paper is what stops it.
+FLAT = math.pi - 0.035
+
+
 def apply_thirds(verts_co, h, t, rng):
     """A letter folded in thirds opening: the top flap first, then the bottom, then a settle."""
     y1, y2 = h / 6.0, -h / 6.0
     # phase 1: top flap 0 -> 1.6 s, phase 2: bottom flap 1.4 -> 3.2 s, settle to 4 s
-    a_top = math.pi * (1.0 - ease(min(1.0, t / 0.40)))
-    a_bot = math.pi * (1.0 - ease(min(1.0, max(0.0, (t - 0.35) / 0.45))))
+    a_top = FLAT * (1.0 - ease(min(1.0, t / 0.40)))
+    a_bot = FLAT * (1.0 - ease(min(1.0, max(0.0, (t - 0.35) / 0.45))))
     settle = 1.0 - ease(min(1.0, max(0.0, (t - 0.80) / 0.20)))
     out = []
     for co in verts_co:
@@ -106,7 +114,7 @@ def apply_thirds(verts_co, h, t, rng):
 
 
 def apply_half(verts_co, h, t, rng):
-    a = math.pi * (1.0 - ease(min(1.0, t / 0.7)))
+    a = FLAT * (1.0 - ease(min(1.0, t / 0.7)))
     settle = 1.0 - ease(min(1.0, max(0.0, (t - 0.7) / 0.3)))
     out = []
     for co in verts_co:

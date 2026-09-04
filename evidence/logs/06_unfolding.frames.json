@@ -1,12 +1,12 @@
 {
- "dir": "evidence/frames/06_unfolding",
- "frames": 40,
+ "dir": "/tmp/lovetap-capture/06_unfolding",
+ "frames": 296,
  "fps": 60.0,
- "seconds": 0.67,
- "mean_change_per_frame": 0.0,
- "repeated_frames": 39,
- "repeated_fraction": 1.0,
- "longest_still_run": 39,
+ "seconds": 4.93,
+ "mean_change_per_frame": 0.00053,
+ "repeated_frames": 78,
+ "repeated_fraction": 0.264,
+ "longest_still_run": 19,
  "repeated_at": [
   0,
   1,
@@ -22,15 +22,14 @@
   11
  ],
  "brightness_jumps": 0,
- "ok": false,
- "why": "nothing moves in it at all; 0.7s is short of 4.0s; 100% of it is frames the app did not draw",
+ "ok": true,
  "strip": "evidence/crops/06_unfolding_strip.png",
  "strip_frames": [
-  "evidence/frames/06_unfolding/0000.png",
-  "evidence/frames/06_unfolding/0008.png",
-  "evidence/frames/06_unfolding/0016.png",
-  "evidence/frames/06_unfolding/0023.png",
-  "evidence/frames/06_unfolding/0031.png",
-  "evidence/frames/06_unfolding/0039.png"
+  "/tmp/lovetap-capture/06_unfolding/000000.png",
+  "/tmp/lovetap-capture/06_unfolding/000059.png",
+  "/tmp/lovetap-capture/06_unfolding/000118.png",
+  "/tmp/lovetap-capture/06_unfolding/000177.png",
+  "/tmp/lovetap-capture/06_unfolding/000236.png",
+  "/tmp/lovetap-capture/06_unfolding/000295.png"
  ]
 }

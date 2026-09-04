@@ -1,16 +1,16 @@
 {
- "captured_at": "2026-09-04T04:09:19Z",
+ "captured_at": "2026-09-04T17:19:40Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
-   "dir": "evidence/frames/06_unfolding",
-   "frames": 40,
+   "dir": "/tmp/lovetap-capture/06_unfolding",
+   "frames": 296,
    "fps": 60.0,
-   "seconds": 0.67,
-   "mean_change_per_frame": 0.0,
-   "repeated_frames": 39,
-   "repeated_fraction": 1.0,
-   "longest_still_run": 39,
+   "seconds": 4.93,
+   "mean_change_per_frame": 0.00053,
+   "repeated_frames": 78,
+   "repeated_fraction": 0.264,
+   "longest_still_run": 19,
    "repeated_at": [
     0,
     1,
@@ -26,124 +26,112 @@
     11
    ],
    "brightness_jumps": 0,
-   "ok": false,
-   "why": "nothing moves in it at all; 0.7s is short of 4.0s; 100% of it is frames the app did not draw",
+   "ok": true,
    "strip": "evidence/crops/06_unfolding_strip.png",
    "strip_frames": [
-    "evidence/frames/06_unfolding/0000.png",
-    "evidence/frames/06_unfolding/0008.png",
-    "evidence/frames/06_unfolding/0016.png",
-    "evidence/frames/06_unfolding/0023.png",
-    "evidence/frames/06_unfolding/0031.png",
-    "evidence/frames/06_unfolding/0039.png"
+    "/tmp/lovetap-capture/06_unfolding/000000.png",
+    "/tmp/lovetap-capture/06_unfolding/000059.png",
+    "/tmp/lovetap-capture/06_unfolding/000118.png",
+    "/tmp/lovetap-capture/06_unfolding/000177.png",
+    "/tmp/lovetap-capture/06_unfolding/000236.png",
+    "/tmp/lovetap-capture/06_unfolding/000295.png"
    ]
   },
   "07_feeling_landing.mp4": {
-   "dir": "evidence/frames/07_feeling_landing",
-   "frames": 90,
+   "dir": "/tmp/lovetap-capture/07_feeling_landing",
+   "frames": 384,
    "fps": 60.0,
-   "seconds": 1.5,
-   "mean_change_per_frame": 4e-05,
-   "repeated_frames": 88,
-   "repeated_fraction": 0.989,
-   "longest_still_run": 88,
+   "seconds": 6.4,
+   "mean_change_per_frame": 0.00963,
+   "repeated_frames": 59,
+   "repeated_fraction": 0.154,
+   "longest_still_run": 33,
    "repeated_at": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151
    ],
    "brightness_jumps": 0,
-   "ok": false,
-   "why": "nothing moves in it at all; 1.5s is short of 6.0s; 99% of it is frames the app did not draw; it holds still for 1.5s in one stretch",
+   "ok": true,
    "strip": "evidence/crops/07_feeling_landing_strip.png",
    "strip_frames": [
-    "evidence/frames/07_feeling_landing/0000.png",
-    "evidence/frames/07_feeling_landing/0018.png",
-    "evidence/frames/07_feeling_landing/0036.png",
-    "evidence/frames/07_feeling_landing/0053.png",
-    "evidence/frames/07_feeling_landing/0071.png",
-    "evidence/frames/07_feeling_landing/0089.png"
+    "/tmp/lovetap-capture/07_feeling_landing/000000.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000077.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000153.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000230.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000306.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000383.png"
    ]
   },
   "11_chat_scroll.mp4": {
-   "dir": "evidence/frames/11_chat_scroll",
-   "frames": 300,
+   "dir": "/tmp/lovetap-capture/11_chat_scroll",
+   "frames": 330,
    "fps": 60.0,
-   "seconds": 5.0,
-   "mean_change_per_frame": 0.00046,
-   "repeated_frames": 297,
-   "repeated_fraction": 0.993,
-   "longest_still_run": 297,
+   "seconds": 5.5,
+   "mean_change_per_frame": 0.05232,
+   "repeated_frames": 4,
+   "repeated_fraction": 0.012,
+   "longest_still_run": 1,
    "repeated_at": [
-    2,
     3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13
+    175,
+    216,
+    222
    ],
    "brightness_jumps": 0,
-   "ok": false,
-   "why": "99% of it is frames the app did not draw; it holds still for 5.0s in one stretch",
+   "ok": true,
    "strip": "evidence/crops/11_chat_scroll_strip.png",
    "strip_frames": [
-    "evidence/frames/11_chat_scroll/0000.png",
-    "evidence/frames/11_chat_scroll/0060.png",
-    "evidence/frames/11_chat_scroll/0120.png",
-    "evidence/frames/11_chat_scroll/0179.png",
-    "evidence/frames/11_chat_scroll/0239.png",
-    "evidence/frames/11_chat_scroll/0299.png"
+    "/tmp/lovetap-capture/11_chat_scroll/000000.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000066.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000132.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000197.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000263.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000329.png"
    ]
   },
   "15_authored_feeling.mp4": {
-   "dir": "evidence/frames/15_authored_feeling",
-   "frames": 60,
+   "dir": "/tmp/lovetap-capture/15_authored_feeling",
+   "frames": 308,
    "fps": 60.0,
-   "seconds": 1.0,
-   "mean_change_per_frame": 0.0,
-   "repeated_frames": 59,
-   "repeated_fraction": 1.0,
-   "longest_still_run": 59,
+   "seconds": 5.13,
+   "mean_change_per_frame": 0.00824,
+   "repeated_frames": 99,
+   "repeated_fraction": 0.322,
+   "longest_still_run": 36,
    "repeated_at": [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11
+    30,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    45,
+    46,
+    47,
+    48
    ],
    "brightness_jumps": 0,
-   "ok": false,
-   "why": "nothing moves in it at all; 1.0s is short of 4.0s; 100% of it is frames the app did not draw",
+   "ok": true,
    "strip": "evidence/crops/15_authored_feeling_strip.png",
    "strip_frames": [
-    "evidence/frames/15_authored_feeling/0000.png",
-    "evidence/frames/15_authored_feeling/0012.png",
-    "evidence/frames/15_authored_feeling/0024.png",
-    "evidence/frames/15_authored_feeling/0035.png",
-    "evidence/frames/15_authored_feeling/0047.png",
-    "evidence/frames/15_authored_feeling/0059.png"
+    "/tmp/lovetap-capture/15_authored_feeling/000000.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000061.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000123.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000184.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000246.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000307.png"
    ]
   }
  },
@@ -154,27 +142,27 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 14332,
+  "cold_ms": 14770,
   "steps": [
    {
     "do": "goTo",
-    "ms": 3178
+    "ms": 3176
    },
    {
     "do": "wait",
-    "ms": 2003
+    "ms": 2004
    },
    {
     "do": "scrollTo",
-    "ms": 1613
+    "ms": 2128
    },
    {
     "do": "wait",
-    "ms": 1303
+    "ms": 1103
    },
    {
     "do": "frames",
-    "ms": 228881
+    "ms": 349856
    }
   ]
  },

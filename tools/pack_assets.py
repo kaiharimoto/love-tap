@@ -203,10 +203,52 @@ def pack_family(name, index, verbose=True):
         print(f"{name}: {len(out)} files")
 
 
+def _fold_band(paths):
+    """The columns any frame of a sequence ever covers, and the rows each one covers.
+
+    Every frame comes off Blender on the same canvas, sized for the sheet fully open, so a folded
+    frame is a strip of paper with two thirds of the canvas transparent above and below it. Drawn
+    as-is, a note that has arrived and not been opened is a strip of paper with a hand's width of
+    nothing over and under it: on 13_messenger_states it read as a hole in the thread nine hundred
+    pixels tall.
+
+    So the canvas is cut away. The columns are the union over the whole sequence — the sheet never
+    changes width, and cutting each frame to its own columns would make the paper breathe sideways
+    as it opens. The rows are per frame, because that is the unfold: the sheet grows out from a
+    centre that does not move.
+    """
+    from PIL import Image
+    import numpy as np
+    left, right = 10**9, -1
+    rows = []
+    for path in paths:
+        with Image.open(path) as im:
+            a = np.asarray(im.convert("RGBA"))[..., 3]
+        # By how much a row or column carries, not by whether any single pixel in it is non-zero.
+        # Cycles leaves a whisker of alpha over the whole film — a per-pixel test at any threshold
+        # low enough to keep the contact shadow also keeps that, and the frame does not get cut at
+        # all. Two per cent of the strongest row is under the shadow's own tail and well over the
+        # noise.
+        rowsum, colsum = a.sum(axis=1), a.sum(axis=0)
+        cols = np.where(colsum > colsum.max() * 0.02)[0]
+        rs = np.where(rowsum > rowsum.max() * 0.02)[0]
+        if len(cols):
+            left = min(left, int(cols.min()))
+            right = max(right, int(cols.max()))
+        pad = 3  # the softest edge of the shadow, kept rather than sliced square
+        h = a.shape[0]
+        rows.append((max(0, int(rs.min()) - pad), min(h - 1, int(rs.max()) + pad))
+                    if len(rs) else (0, h - 1))
+    if right < 0:
+        return None, rows
+    return (left, right), rows
+
+
 def pack_folds(index, verbose=True):
     src_dir = os.path.join(SRC, "folds")
     if not os.path.isdir(src_dir):
         return
+    from PIL import Image
     seqs = {}
     sizes = {}
     for seq in sorted(os.listdir(src_dir)):
@@ -214,20 +256,36 @@ def pack_folds(index, verbose=True):
         if not os.path.isdir(d):
             continue
         frames = sorted(f for f in os.listdir(d) if f.endswith(".png"))
-        for f in frames:
-            convert(os.path.join(d, f), os.path.join(DST, "folds", seq, os.path.splitext(f)[0] + ".webp"),
-                    SIZES["folds"], QUALITY["folds"], keep_alpha=True)
+        paths = [os.path.join(d, f) for f in frames]
+        band, rows = _fold_band(paths)
+        for i, f in enumerate(frames):
+            src = paths[i]
+            dst = os.path.join(DST, "folds", seq, os.path.splitext(f)[0] + ".webp")
+            if band is None:
+                convert(src, dst, SIZES["folds"], QUALITY["folds"], keep_alpha=True)
+                continue
+            top, bottom = rows[i]
+            with Image.open(src) as im:
+                cut = im.convert("RGBA").crop((band[0], top, band[1] + 1, bottom + 1))
+                os.makedirs(os.path.dirname(dst), exist_ok=True)
+                tmp = dst + ".cut.png"
+                cut.save(tmp)
+            convert(tmp, dst, SIZES["folds"], QUALITY["folds"], keep_alpha=True)
+            os.remove(tmp)
         seqs[seq] = len(frames)
         if frames:
-            # the shape of a frame, so a note that is about to open can be the size it will be
-            # before its first frame has decoded. Without it the note is zero high until the
-            # decoder catches up, and then it is not — which moves everything under it.
-            from PIL import Image
+            # the shape of the *first* frame, so a note that is about to open is the size it is
+            # while it is still folded, before that frame has decoded. Without it the note is zero
+            # high until the decoder catches up, and then it is not — which moves everything under
+            # it. It used to be the shape of the whole canvas, which reserved the open size.
             with Image.open(os.path.join(DST, "folds", seq,
                                          os.path.splitext(frames[0])[0] + ".webp")) as im:
                 sizes[seq] = list(im.size)
         if verbose:
-            print(f"folds/{seq}: {len(frames)} frames")
+            band_says = "no alpha" if band is None else f"cols {band[0]}..{band[1]}"
+            print(f"folds/{seq}: {len(frames)} frames, {band_says}, "
+                  f"folded {sizes.get(seq)} → open "
+                  f"{[band[1] - band[0] + 1, rows[-1][1] - rows[-1][0] + 1] if band else None}")
     index["folds"] = seqs
     index["fold_size"] = sizes
 
