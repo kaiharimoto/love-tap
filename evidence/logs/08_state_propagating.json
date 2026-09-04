@@ -6,39 +6,31 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8480/",
+ "url": "http://100.68.254.25:8443/",
  "steps": [
   {
    "do": "wait",
-   "ms": 2305
+   "ms": 2304
   },
   {
    "do": "pair",
-   "ms": 1585
+   "ms": 1182
   },
   {
    "do": "wait",
-   "ms": 3702
+   "ms": 3705
   },
   {
    "do": "goTo",
-   "ms": 1761
+   "ms": 1506
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1704
   },
   {
    "do": "frames",
-   "ms": 23030
-  },
-  {
-   "do": "far",
-   "ms": 501
-  },
-  {
-   "do": "frames",
-   "ms": 31874
+   "ms": 20482
   },
   {
    "do": "far",
@@ -46,15 +38,23 @@
   },
   {
    "do": "frames",
-   "ms": 176983
+   "ms": 24750
+  },
+  {
+   "do": "far",
+   "ms": 501
+  },
+  {
+   "do": "frames",
+   "ms": 144051
   },
   {
    "do": "goTo",
-   "ms": 2223
+   "ms": 1677
   },
   {
    "do": "frames",
-   "ms": 45979
+   "ms": 41295
   },
   {
    "do": "far",
@@ -62,7 +62,7 @@
   },
   {
    "do": "frames",
-   "ms": 155844
+   "ms": 120485
   },
   {
    "do": "far",
@@ -70,11 +70,11 @@
   },
   {
    "do": "frames",
-   "ms": 122029
+   "ms": 105204
   },
   {
    "do": "report",
-   "ms": 518
+   "ms": 517
   }
  ],
  "shots": [
@@ -122,29 +122,29 @@
   {
    "region": 1,
    "visible": [
-    "01M1PMW642KJX8PJXHQEWK284C",
-    "01M1PMX5Q813155CCPV8E34PX8",
-    "01M1PN4238RDS0R4PHJ68DWTJF",
-    "01M1PN8TT1BWAFWNBRFJVWV2MY"
+    "01M1QA1JQEDHKBA6FDT35JDNXZ",
+    "01M1QA2BCPCS9DNG2P8FERJZGV",
+    "01M1QA82GNQVZ23RH0SS00QR1J",
+    "01M1QABRNFYDY1N1HDENF0SAYE"
    ],
    "tears": {
-    "01M1PMW642KJX8PJXHQEWK284C": "tear_001",
-    "01M1PMX5Q813155CCPV8E34PX8": "tear_020",
-    "01M1PN4238RDS0R4PHJ68DWTJF": "tear_043",
-    "01M1PN8TT1BWAFWNBRFJVWV2MY": "tear_005"
+    "01M1QA1JQEDHKBA6FDT35JDNXZ": "tear_001",
+    "01M1QA2BCPCS9DNG2P8FERJZGV": "tear_020",
+    "01M1QA82GNQVZ23RH0SS00QR1J": "tear_043",
+    "01M1QABRNFYDY1N1HDENF0SAYE": "tear_005"
    },
    "stocks": {
-    "01M1PMW642KJX8PJXHQEWK284C": "lined_04",
-    "01M1PMX5Q813155CCPV8E34PX8": "lined_01",
-    "01M1PN4238RDS0R4PHJ68DWTJF": "lined_04",
-    "01M1PN8TT1BWAFWNBRFJVWV2MY": "lined_01"
+    "01M1QA1JQEDHKBA6FDT35JDNXZ": "lined_01",
+    "01M1QA2BCPCS9DNG2P8FERJZGV": "lined_01",
+    "01M1QA82GNQVZ23RH0SS00QR1J": "lined_01",
+    "01M1QABRNFYDY1N1HDENF0SAYE": "lined_02"
    },
    "scroll": {
     "first": 0,
-    "last": 3,
+    "last": 4,
     "of": 4
    },
-   "now": "2026-09-04T16:52:46.617Z",
+   "now": "2026-09-04T23:01:06.000Z",
    "driven_ms": 5712,
    "seed": 20260903,
    "events": 8,
@@ -155,7 +155,7 @@
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
-   "paper_stocks": 48,
+   "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
@@ -169,7 +169,7 @@
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 1935,
+ "cold_ms": 4311,
  "problems": [],
  "ok": true
 }

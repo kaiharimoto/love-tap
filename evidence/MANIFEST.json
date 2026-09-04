@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-04T22:50:22Z",
+ "captured_at": "2026-09-04T22:53:03Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
@@ -156,6 +156,23 @@
    "minimum_seconds": 6,
    "long_enough": true
   },
+  "08_state_propagating.mp4": {
+   "bytes": 4671982,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 488,
+   "fps": 60.0,
+   "seconds": 8.13,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
+   "minimum_seconds": 8,
+   "long_enough": true
+  },
   "11_chat_scroll.mp4": {
    "bytes": 6162308,
    "size": [
@@ -193,7 +210,6 @@
  },
  "missing": {
   "09_two_devices.png": "not captured this session",
-  "16_setup_android.png": "not captured this session",
-  "08_state_propagating.mp4": "page.goto: Could not connect to proxy server 127.0.0.1: Connection refused"
+  "16_setup_android.png": "not captured this session"
  }
 }
