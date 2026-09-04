@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2305
   },
   {
    "do": "pair",
-   "ms": 1647
+   "ms": 1585
   },
   {
    "do": "wait",
-   "ms": 3715
+   "ms": 3702
   },
   {
    "do": "goTo",
-   "ms": 2415
+   "ms": 1761
   },
   {
    "do": "wait",
-   "ms": 1716
+   "ms": 1703
   },
   {
    "do": "frames",
-   "ms": 23769
+   "ms": 23030
   },
   {
    "do": "far",
@@ -38,31 +38,23 @@
   },
   {
    "do": "frames",
-   "ms": 26735
+   "ms": 31874
   },
   {
    "do": "far",
-   "ms": 512
+   "ms": 502
   },
   {
    "do": "frames",
-   "ms": 179367
+   "ms": 176983
   },
   {
    "do": "goTo",
-   "ms": 1625
+   "ms": 2223
   },
   {
    "do": "frames",
-   "ms": 40886
-  },
-  {
-   "do": "far",
-   "ms": 503
-  },
-  {
-   "do": "frames",
-   "ms": 153549
+   "ms": 45979
   },
   {
    "do": "far",
@@ -70,11 +62,19 @@
   },
   {
    "do": "frames",
-   "ms": 121296
+   "ms": 155844
+  },
+  {
+   "do": "far",
+   "ms": 501
+  },
+  {
+   "do": "frames",
+   "ms": 122029
   },
   {
    "do": "report",
-   "ms": 522
+   "ms": 518
   }
  ],
  "shots": [
@@ -122,29 +122,29 @@
   {
    "region": 1,
    "visible": [
-    "01M1PKRNXMWY9Q1E3BZW0KW170",
-    "01M1PKSGJDZ77Z6X0MANEPQ0K4",
-    "01M1PM09PBSEGD87ZNAW9SY417",
-    "01M1PM506JAHQYQ608EFDWXE2K"
+    "01M1PMW642KJX8PJXHQEWK284C",
+    "01M1PMX5Q813155CCPV8E34PX8",
+    "01M1PN4238RDS0R4PHJ68DWTJF",
+    "01M1PN8TT1BWAFWNBRFJVWV2MY"
    ],
    "tears": {
-    "01M1PKRNXMWY9Q1E3BZW0KW170": "tear_001",
-    "01M1PKSGJDZ77Z6X0MANEPQ0K4": "tear_020",
-    "01M1PM09PBSEGD87ZNAW9SY417": "tear_043",
-    "01M1PM506JAHQYQ608EFDWXE2K": "tear_005"
+    "01M1PMW642KJX8PJXHQEWK284C": "tear_001",
+    "01M1PMX5Q813155CCPV8E34PX8": "tear_020",
+    "01M1PN4238RDS0R4PHJ68DWTJF": "tear_043",
+    "01M1PN8TT1BWAFWNBRFJVWV2MY": "tear_005"
    },
    "stocks": {
-    "01M1PKRNXMWY9Q1E3BZW0KW170": "lined_02",
-    "01M1PKSGJDZ77Z6X0MANEPQ0K4": "lined_03",
-    "01M1PM09PBSEGD87ZNAW9SY417": "lined_01",
-    "01M1PM506JAHQYQ608EFDWXE2K": "lined_04"
+    "01M1PMW642KJX8PJXHQEWK284C": "lined_04",
+    "01M1PMX5Q813155CCPV8E34PX8": "lined_01",
+    "01M1PN4238RDS0R4PHJ68DWTJF": "lined_04",
+    "01M1PN8TT1BWAFWNBRFJVWV2MY": "lined_01"
    },
    "scroll": {
     "first": 0,
     "last": 3,
     "of": 4
    },
-   "now": "2026-09-04T16:33:11.742Z",
+   "now": "2026-09-04T16:52:46.617Z",
    "driven_ms": 5712,
    "seed": 20260903,
    "events": 8,
@@ -155,7 +155,7 @@
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
-   "paper_stocks": 44,
+   "paper_stocks": 48,
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
@@ -169,7 +169,7 @@
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 2213,
+ "cold_ms": 1935,
  "problems": [],
  "ok": true
 }
