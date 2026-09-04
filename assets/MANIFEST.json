@@ -1,17 +1,2997 @@
 {
  "files": {
   "assets/bits/tape_01.png": {
-   "bytes": 61327,
+   "bytes": 57426,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "tape",
     "pass": "colour",
-    "res": 620,
-    "samples": 20,
+    "res": 600,
+    "samples": 18,
     "seed": 11,
     "width_m": 0.052
+   }
+  },
+  "assets/bits/tape_01_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "tape",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 11,
+    "width_m": 0.052
+   }
+  },
+  "assets/bits/tape_01_dusk_shadow.png": {
+   "bytes": 9358,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "tape",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 11,
+    "width_m": 0.052
+   }
+  },
+  "assets/bits/tape_01_shadow.png": {
+   "bytes": 9358,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "tape",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 11,
+    "width_m": 0.052
+   }
+  },
+  "assets/bits/tape_02.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "tape",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 23,
+    "width_m": 0.044
+   }
+  },
+  "assets/bits/tape_02_dusk.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "tape",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 23,
+    "width_m": 0.044
+   }
+  },
+  "assets/bits/tape_02_dusk_shadow.png": {
+   "bytes": 9299,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "dusk",
+    "kind": "tape",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 23,
+    "width_m": 0.044
+   }
+  },
+  "assets/bits/tape_02_shadow.png": {
+   "bytes": 9299,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "tape",
+    "pass": "shadow",
+    "res": 600,
+    "samples": 18,
+    "seed": 23,
+    "width_m": 0.044
+   }
+  },
+  "assets/bits/tape_03.png": {
+   "bytes": 57426,
+   "generator": "blender/bits/bits.py",
+   "kind": "bit",
+   "settings": {
+    "condition": "day",
+    "kind": "tape",
+    "pass": "colour",
+    "res": 600,
+    "samples": 18,
+    "seed": 37,
+    "width_m": 0.061
+   }
+  },
+  "assets/folds/unfold_thirds": {
+   "bytes": 4096,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_sequence",
+   "settings": {
+    "crease_mm": 1.4,
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0000.png": {
+   "bytes": 101018,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0000.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0001.png": {
+   "bytes": 81554,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0001.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0002.png": {
+   "bytes": 80707,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0002.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0003.png": {
+   "bytes": 80917,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0003.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0004.png": {
+   "bytes": 80215,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0004.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0005.png": {
+   "bytes": 78949,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0005.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0006.png": {
+   "bytes": 78667,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0006.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0007.png": {
+   "bytes": 77518,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0007.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0008.png": {
+   "bytes": 76374,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0008.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0009.png": {
+   "bytes": 76844,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0009.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0010.png": {
+   "bytes": 76913,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0010.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0011.png": {
+   "bytes": 76511,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0011.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0012.png": {
+   "bytes": 76663,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0012.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0013.png": {
+   "bytes": 76201,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0013.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0014.png": {
+   "bytes": 76546,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0014.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0015.png": {
+   "bytes": 76336,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0015.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0016.png": {
+   "bytes": 76110,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0016.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0017.png": {
+   "bytes": 76289,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0017.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0018.png": {
+   "bytes": 77040,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0018.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0019.png": {
+   "bytes": 77477,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0019.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0020.png": {
+   "bytes": 76626,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0020.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0021.png": {
+   "bytes": 77391,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0021.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0022.png": {
+   "bytes": 75955,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0022.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0023.png": {
+   "bytes": 76878,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0023.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0024.png": {
+   "bytes": 77860,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0024.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0025.png": {
+   "bytes": 77102,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0025.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0026.png": {
+   "bytes": 77436,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0026.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0027.png": {
+   "bytes": 76815,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0027.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0028.png": {
+   "bytes": 77307,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0028.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0029.png": {
+   "bytes": 76429,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0029.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0030.png": {
+   "bytes": 77570,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0030.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0031.png": {
+   "bytes": 76533,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0031.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0032.png": {
+   "bytes": 77740,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0032.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0033.png": {
+   "bytes": 77836,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0033.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0034.png": {
+   "bytes": 77504,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0034.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0035.png": {
+   "bytes": 77334,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0035.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0036.png": {
+   "bytes": 78090,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0036.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0037.png": {
+   "bytes": 78355,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0037.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0038.png": {
+   "bytes": 78758,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0038.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0039.png": {
+   "bytes": 78772,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0039.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0040.png": {
+   "bytes": 78093,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0040.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0041.png": {
+   "bytes": 78121,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0041.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0042.png": {
+   "bytes": 79074,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0042.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0043.png": {
+   "bytes": 79777,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0043.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0044.png": {
+   "bytes": 79923,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0044.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0045.png": {
+   "bytes": 80816,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0045.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0046.png": {
+   "bytes": 82220,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0046.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0047.png": {
+   "bytes": 83867,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0047.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0048.png": {
+   "bytes": 83648,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0048.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0049.png": {
+   "bytes": 85166,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0049.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0050.png": {
+   "bytes": 86172,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0050.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0051.png": {
+   "bytes": 86037,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0051.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0052.png": {
+   "bytes": 87128,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0052.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0053.png": {
+   "bytes": 88827,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0053.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0054.png": {
+   "bytes": 90214,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0054.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0055.png": {
+   "bytes": 91015,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0055.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0056.png": {
+   "bytes": 94687,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0056.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0057.png": {
+   "bytes": 96228,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0057.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0058.png": {
+   "bytes": 96556,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0058.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0059.png": {
+   "bytes": 97473,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0059.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0060.png": {
+   "bytes": 97219,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0060.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0061.png": {
+   "bytes": 96667,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0061.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0062.png": {
+   "bytes": 96725,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0062.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0063.png": {
+   "bytes": 95821,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0063.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0064.png": {
+   "bytes": 96021,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0064.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0065.png": {
+   "bytes": 95743,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0065.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0066.png": {
+   "bytes": 95438,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0066.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0067.png": {
+   "bytes": 95743,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0067.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0068.png": {
+   "bytes": 95380,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0068.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0069.png": {
+   "bytes": 94857,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0069.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0070.png": {
+   "bytes": 95409,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0070.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0071.png": {
+   "bytes": 95180,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0071.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0072.png": {
+   "bytes": 95406,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0072.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0073.png": {
+   "bytes": 95169,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0073.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0074.png": {
+   "bytes": 94858,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0074.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0075.png": {
+   "bytes": 94007,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0075.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0076.png": {
+   "bytes": 94202,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0076.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0077.png": {
+   "bytes": 94086,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0077.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0078.png": {
+   "bytes": 93490,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0078.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0079.png": {
+   "bytes": 93938,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0079.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0080.png": {
+   "bytes": 93689,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0080.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0081.png": {
+   "bytes": 93326,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0081.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0082.png": {
+   "bytes": 93982,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0082.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0083.png": {
+   "bytes": 92996,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0083.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0084.png": {
+   "bytes": 93914,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0084.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0085.png": {
+   "bytes": 93081,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0085.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0086.png": {
+   "bytes": 93664,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0086.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0087.png": {
+   "bytes": 93829,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0087.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0088.png": {
+   "bytes": 94610,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0088.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0089.png": {
+   "bytes": 94659,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0089.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0090.png": {
+   "bytes": 95575,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0090.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0091.png": {
+   "bytes": 95180,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0091.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0092.png": {
+   "bytes": 95862,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0092.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0093.png": {
+   "bytes": 95775,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0093.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0094.png": {
+   "bytes": 96126,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0094.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0095.png": {
+   "bytes": 97125,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0095.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0096.png": {
+   "bytes": 97379,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0096.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0097.png": {
+   "bytes": 98608,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0097.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0098.png": {
+   "bytes": 98886,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0098.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0099.png": {
+   "bytes": 98629,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0099.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0100.png": {
+   "bytes": 99429,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0100.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0101.png": {
+   "bytes": 100629,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0101.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0102.png": {
+   "bytes": 101225,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0102.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0103.png": {
+   "bytes": 100504,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0103.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0104.png": {
+   "bytes": 102218,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0104.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0105.png": {
+   "bytes": 102194,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0105.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0106.png": {
+   "bytes": 103361,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0106.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0107.png": {
+   "bytes": 104493,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0107.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0108.png": {
+   "bytes": 104935,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0108.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0109.png": {
+   "bytes": 106657,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0109.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0110.png": {
+   "bytes": 107328,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0110.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0111.png": {
+   "bytes": 109386,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0111.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0112.png": {
+   "bytes": 109977,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0112.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0113.png": {
+   "bytes": 110527,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0113.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0114.png": {
+   "bytes": 112622,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0114.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0115.png": {
+   "bytes": 114625,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0115.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0116.png": {
+   "bytes": 117611,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0116.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0117.png": {
+   "bytes": 117259,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0117.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0118.png": {
+   "bytes": 117973,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0118.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0119.png": {
+   "bytes": 118347,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0119.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0120.png": {
+   "bytes": 118224,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0120.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0121.png": {
+   "bytes": 118400,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0121.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0122.png": {
+   "bytes": 118371,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0122.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0123.png": {
+   "bytes": 118879,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0123.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0124.png": {
+   "bytes": 118708,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0124.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0125.png": {
+   "bytes": 118808,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0125.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0126.png": {
+   "bytes": 118512,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0126.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0127.png": {
+   "bytes": 118164,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0127.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0128.png": {
+   "bytes": 118028,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0128.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0129.png": {
+   "bytes": 117859,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0129.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0130.png": {
+   "bytes": 117431,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0130.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0131.png": {
+   "bytes": 117255,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0131.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0132.png": {
+   "bytes": 117670,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0132.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0133.png": {
+   "bytes": 117503,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0133.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0134.png": {
+   "bytes": 116897,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0134.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0135.png": {
+   "bytes": 117364,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0135.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0136.png": {
+   "bytes": 116825,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0136.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0137.png": {
+   "bytes": 117292,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0137.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0138.png": {
+   "bytes": 116992,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0138.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0139.png": {
+   "bytes": 115840,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0139.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0140.png": {
+   "bytes": 116065,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0140.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0141.png": {
+   "bytes": 116223,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0141.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0142.png": {
+   "bytes": 115913,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0142.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0143.png": {
+   "bytes": 116343,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0143.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0144.png": {
+   "bytes": 115826,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0144.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0145.png": {
+   "bytes": 116157,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0145.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0146.png": {
+   "bytes": 115983,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0146.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0147.png": {
+   "bytes": 115884,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0147.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0148.png": {
+   "bytes": 115343,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0148.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "assets/folds/unfold_thirds/0149.png": {
+   "bytes": 115434,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "file": "0149.png",
+    "frames": 150,
+    "light": "day",
+    "resolution": 460,
+    "rig": "blender/rig/common.py",
+    "samples": 8,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
    }
   },
   "assets/fonts/MANIFEST.fonts.json": {
