@@ -10,55 +10,55 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2930
+   "ms": 5607
   },
   {
    "do": "wait",
-   "ms": 1802
+   "ms": 1807
   },
   {
    "do": "goTo",
-   "ms": 4240
+   "ms": 6235
   },
   {
    "do": "wait",
-   "ms": 1304
+   "ms": 1303
   },
   {
    "do": "openCorner",
-   "ms": 1037
+   "ms": 1068
   },
   {
    "do": "frames",
-   "ms": 37604
+   "ms": 50578
   },
   {
    "do": "sendFeeling",
-   "ms": 2085
+   "ms": 2741
   },
   {
    "do": "frames",
-   "ms": 85682
+   "ms": 102788
   },
   {
    "do": "sendFeeling",
-   "ms": 2367
+   "ms": 2255
   },
   {
    "do": "frames",
-   "ms": 145580
+   "ms": 165878
   },
   {
    "do": "openCorner",
-   "ms": 723
+   "ms": 797
   },
   {
    "do": "frames",
-   "ms": 34829
+   "ms": 36863
   },
   {
    "do": "report",
-   "ms": 434
+   "ms": 432
   }
  ],
  "shots": [
@@ -94,32 +94,32 @@
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0641MQ40TY636JVNA",
-    "0001MCJ1M0641MQ40TY636JVNB"
+    "0001MCJ1M0S1JRQ3D96JE44S19",
+    "0001MCJ1M0S1JRQ3D96JE44S1A"
    ],
    "tears": {
-    "0001M4GW48FEW3M67XKAZT5051": "tear_010",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-    "0001MCJ1M0641MQ40TY636JVNA": "tear_014",
-    "0001MCJ1M0641MQ40TY636JVNB": "tear_036"
+    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
+    "0001MCJ1M0S1JRQ3D96JE44S19": "tear_035",
+    "0001MCJ1M0S1JRQ3D96JE44S1A": "tear_055"
    },
    "stocks": {
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M0641MQ40TY636JVNA": "legal_01",
-    "0001MCJ1M0641MQ40TY636JVNB": "looseleaf_01"
+    "0001MCJ1M0S1JRQ3D96JE44S19": "legal_01",
+    "0001MCJ1M0S1JRQ3D96JE44S1A": "legal_02"
    },
    "scroll": {
-    "first": 8372,
-    "last": 8376,
-    "of": 8377
+    "first": 8384,
+    "last": 8388,
+    "of": 8389
    },
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 2752,
    "seed": 20260903,
-   "events": 14052,
+   "events": 14064,
    "transport": "local",
    "link": "connecting",
    "me": "teo",
@@ -141,7 +141,7 @@
    "at": "15_authored_feeling"
   }
  ],
- "cold_ms": 13650,
+ "cold_ms": 12972,
  "problems": [],
  "ok": true
 }

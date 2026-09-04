@@ -1,0 +1,49 @@
+{
+ "source": "evidence/02_chat.png",
+ "scale": 3,
+ "note": "boxes are found from the paper in the frame, not fixed fractions",
+ "crops": [
+  {
+   "name": "edge",
+   "file": "evidence/crops/02_chat_300_edge.png",
+   "box": [
+    548,
+    1524,
+    968,
+    1784
+   ],
+   "size": [
+    1260,
+    780
+   ]
+  },
+  {
+   "name": "hand",
+   "file": "evidence/crops/02_chat_300_hand.png",
+   "box": [
+    23,
+    1621,
+    443,
+    1881
+   ],
+   "size": [
+    1260,
+    780
+   ]
+  },
+  {
+   "name": "shadow",
+   "file": "evidence/crops/02_chat_300_shadow.png",
+   "box": [
+    653,
+    1856,
+    1073,
+    2116
+   ],
+   "size": [
+    1260,
+    780
+   ]
+  }
+ ]
+}

@@ -1,9 +1,9 @@
 {
- "captured_at": "2026-09-04T19:28:50Z",
+ "captured_at": "2026-09-04T22:50:22Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
-   "bytes": 3119410,
+   "bytes": 3124936,
    "size": [
     1440,
     3120
@@ -27,7 +27,7 @@
    ]
   },
   "03_us.png": {
-   "bytes": 3185778,
+   "bytes": 2967475,
    "size": [
     1440,
     3120
@@ -39,7 +39,7 @@
    ]
   },
   "04_moments.png": {
-   "bytes": 2820479,
+   "bytes": 2660697,
    "size": [
     1440,
     3120
@@ -51,7 +51,7 @@
    ]
   },
   "05_settings.png": {
-   "bytes": 2732965,
+   "bytes": 2185885,
    "size": [
     1440,
     3120
@@ -75,7 +75,7 @@
    ]
   },
   "12_search.png": {
-   "bytes": 3686579,
+   "bytes": 3684434,
    "size": [
     1440,
     3120
@@ -123,29 +123,77 @@
    ]
   },
   "06_unfolding.mp4": {
-   "bytes": 1376256,
+   "bytes": 2616470,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 320,
+   "fps": 60.0,
+   "seconds": 5.33,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
    "minimum_seconds": 4,
-   "long_enough": false
+   "long_enough": true
   },
   "07_feeling_landing.mp4": {
-   "bytes": 4521984,
+   "bytes": 5773509,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 384,
+   "fps": 60.0,
+   "seconds": 6.4,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
    "minimum_seconds": 6,
-   "long_enough": false
+   "long_enough": true
   },
   "11_chat_scroll.mp4": {
-   "bytes": 3014656,
+   "bytes": 6162308,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 330,
+   "fps": 60.0,
+   "seconds": 5.5,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
    "minimum_seconds": 4,
-   "long_enough": false
+   "long_enough": true
   },
   "15_authored_feeling.mp4": {
-   "bytes": 3801088,
+   "bytes": 4689770,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 308,
+   "fps": 60.0,
+   "seconds": 5.13,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
    "minimum_seconds": 4,
-   "long_enough": false
+   "long_enough": true
   }
  },
  "missing": {
-  "09_two_devices.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "08_state_propagating.mp4": "the far phone would not start; see /tmp/lovetap-capture/host_daemon.log"
+  "09_two_devices.png": "not captured this session",
+  "16_setup_android.png": "not captured this session",
+  "08_state_propagating.mp4": "page.goto: Could not connect to proxy server 127.0.0.1: Connection refused"
  }
 }

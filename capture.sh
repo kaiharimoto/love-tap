@@ -243,8 +243,17 @@ PAIR="$SCRATCH/pair.json"
 if wants 08_state_propagating && [ -f evidence/scenes/08_state_propagating.json ]; then
   rm -f "$PAIR" "$PAIR.do"
   FAR_TRANSPORT="local"; FAR_ADDR=""; FAR_PROXY=""
-  if [ -f toolchain/ts/a/address ] && [ -f toolchain/ts/b/address ]; then
+  # The address files say a tailnet node was once brought up here. They do not say one is running:
+  # after a container restart both files are still on disk and both daemons are gone, and the scene
+  # then fails with `Could not connect to proxy server` — which reads as the app's fault and is not.
+  # So the proxy is asked. A dead tailnet falls back to the local transport rather than failing,
+  # and the report says which one carried it.
+  if [ -f toolchain/ts/a/address ] && [ -f toolchain/ts/b/address ] \
+     && (exec 3<>/dev/tcp/127.0.0.1/1155) 2>/dev/null; then
     FAR_TRANSPORT="tailscale"; FAR_ADDR="$(cat toolchain/ts/a/address)"; FAR_PROXY="127.0.0.1:1155"
+  elif [ -f toolchain/ts/a/address ]; then
+    echo "  · the tailnet nodes are not running; the far phone will use the local transport." >&2
+    echo "    tools/tailscale/up.sh brings them back — their state survives, so no new key is needed." >&2
   fi
   # The far phone serves the page the near one loads, which is how the two of them actually work:
   # the host serves the conversation and the page that reads it, from one origin. It is also the
