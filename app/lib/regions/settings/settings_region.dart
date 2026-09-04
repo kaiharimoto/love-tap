@@ -107,6 +107,17 @@ class _SettingsRegionState extends State<SettingsRegion> {
         const SizedBox(height: 22),
         const Stamped('what may interrupt', size: 11),
         const SizedBox(height: 6),
+        if (!scope.ambient.allowed)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: GestureDetector(
+              onTap: () async {
+                await scope.ambient.ask();
+                if (mounted) setState(() {});
+              },
+              child: Text('let it interrupt you', style: Hands.margin(size: 16)),
+            ),
+          ),
         if (_prefs != null)
           NotificationSettings(
             prefs: _prefs!,

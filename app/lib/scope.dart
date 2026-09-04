@@ -4,6 +4,8 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 
+import 'ambient/ambient.dart';
+import 'feelings/registry.dart';
 import 'flags.dart';
 import 'spine/projections/state.dart';
 import 'spine/projections/thread.dart';
@@ -31,7 +33,8 @@ class AppScope extends ChangeNotifier {
     required this.transport,
     required this.sync,
     required this.clock,
-  }) {
+    Ambient? ambient,
+  }) : ambient = ambient ?? Ambient.of() {
     _sub = spine.changes.listen((_) => _refresh());
     _tsub = transport.status.listen((s) {
       link = s;
@@ -46,6 +49,9 @@ class AppScope extends ChangeNotifier {
   final Transport transport;
   final SyncEngine sync;
   final Clock clock;
+
+  /// The three surfaces the other person reaches without either of them opening anything.
+  final Ambient ambient;
 
   late ThreadState thread;
   late Map<Person, PersonState> state;
@@ -63,11 +69,36 @@ class AppScope extends ChangeNotifier {
   PersonState get partnerState => state[partner]!;
   PersonState get myState => state[me]!;
 
+  String _lastStanding = '';
+  String _lastArrival = '';
+
   void _refresh() {
     final all = spine.all;
     thread = projectThread(all, me: me);
     state = projectState(all);
+    _tellThePocket(all);
     notifyListeners();
+  }
+
+  /// Keep the ambient surfaces true. The standing line is rewritten only when it would actually
+  /// read differently, so the phone is not woken to say the same thing twice; a feeling from them
+  /// is played once, when it lands.
+  void _tellThePocket(List<Event> all) {
+    final line = standingLine(partner, partnerState, clock.now().millisecondsSinceEpoch);
+    if (line != _lastStanding) {
+      _lastStanding = line;
+      unawaited(ambient.standing(partner, line));
+    }
+    for (var i = all.length - 1; i >= 0 && i > all.length - 12; i--) {
+      final e = all[i];
+      if (e.type != 'feeling' || e.author == me) continue;
+      if (e.id == _lastArrival) break;
+      _lastArrival = e.id;
+      final f = FeelingRegistry(all).byId(e.payload['feeling_id'] as String? ?? '');
+      final intensity = (e.payload['intensity'] as num?)?.toDouble() ?? 0.7;
+      if (f != null) unawaited(ambient.pocket(f, intensity));
+      break;
+    }
   }
 
   void _onEphemeral(Ephemeral e) {

@@ -44,6 +44,12 @@ kotlin {
     }
 }
 
+dependencies {
+    // NotificationCompat, ContextCompat and the permission request: the standing line and the
+    // pocket both go through these, and nothing else is pulled in for them.
+    implementation("androidx.core:core-ktx:1.13.1")
+}
+
 flutter {
     source = "../.."
 }

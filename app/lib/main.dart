@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import 'ambient/ambient.dart';
 import 'app.dart';
 import 'capture/hooks.dart';
 import 'flags.dart';
@@ -64,5 +65,7 @@ Future<AppScope> bootstrap() async {
   }
   final sync = SyncEngine(spine: spine, transport: transport);
   await sync.start();
-  return AppScope(spine: spine, transport: transport, sync: sync, clock: clock);
+  final ambient = Ambient.of();
+  await ambient.start();
+  return AppScope(spine: spine, transport: transport, sync: sync, clock: clock, ambient: ambient);
 }
