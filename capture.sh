@@ -54,6 +54,9 @@ python3 tools/handwriting/check.py --out "$LOG/fonts.json" || note_missing "hand
 echo "· checking every file in assets/ names what made it"
 python3 tools/check/manifest.py --out "$LOG/manifest.json" >/dev/null \
   || note_missing "assets" "a file in assets/ has no manifest entry naming its generator"
+echo "· checking every recipe can actually be built"
+python3 tools/check/recipes.py --out "$LOG/recipes.json" >/dev/null \
+  || note_missing "recipes" "a recipe names something the kit cannot build, or tells it something it cannot be told"
 echo "· checking the push payload carries only kind and sender"
 python3 tools/push/webpush.py --self-test > "$LOG/webpush.txt" 2>&1 || note_missing "push" "the web push sender failed its own vectors"
 

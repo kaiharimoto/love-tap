@@ -72,7 +72,9 @@ def _speckled(name, rgb, rough, scale, contrast=0.45, bump=0.5, seed=1):
     return mat
 
 
-def ground(kind="tarmac", size=40.0, z=0.0, seed=1):
+def ground(kind="tarmac", size=40.0, z=0.0, seed=1, at=None):
+    """The ground. `at` is accepted and ignored: the ground is under everything, wherever the
+    recipe thought it was putting it."""
     rgb, rough, scale = GROUNDS.get(kind, GROUNDS["tarmac"])
     bm = bmesh.new()
     bmesh.ops.create_grid(bm, x_segments=90, y_segments=90, size=size / 2)
@@ -597,10 +599,19 @@ def fog(density=0.02, colour=(0.62, 0.64, 0.66), size=60.0):
     return obj
 
 
+def _string_lights_at(at, along):
+    """`at` moves a run of lights sideways and back, keeping its shape."""
+    if at is None:
+        return along
+    dx, dy = float(at[0]), float(at[1])
+    return [(p[0] + dx, p[1] + dy) + tuple(p[2:]) for p in along]
+
+
 def string_lights(along=((-2.0, 6.0, 3.0), (2.0, 6.5, 4.2)), count=14, energy=0.22,
-                  colour=(1.0, 0.68, 0.35), sag=0.5, seed=16):
+                  colour=(1.0, 0.68, 0.35), sag=0.5, seed=16, at=None):
     """Small warm lights wound through branches: point lights, and a small bright bead at each
     so the camera sees the source and not only what it lights."""
+    along = _string_lights_at(at, list(along))
     made = []
     rng = np.random.default_rng(seed)
     a, b = np.array(along[0], dtype=float), np.array(along[1], dtype=float)

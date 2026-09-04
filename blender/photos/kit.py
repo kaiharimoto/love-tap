@@ -367,14 +367,21 @@ def surface(kind="desk", size=2.4, z=0.0, wear=0.0006, seed=1, depth=0.9, thick=
     return obj
 
 
-def wall(kind="wall", w=1.2, h=1.2, y=0.35):
+def wall(kind="wall", w=1.2, h=1.2, y=0.35, at=None):
+    """A flat wall standing across the back of the shot.
+
+    Every recipe says where a thing stands with `at`, and this one did not take it: still.py hands
+    the whole spec to the builder, so a recipe with a wall in it stopped the run — which is why a
+    hundred and seven of the hundred and fifteen photographs were never exposed.
+    """
     rgb, rough = SURFACES.get(kind, SURFACES["wall"])
     bm = bmesh.new()
     bmesh.ops.create_grid(bm, x_segments=20, y_segments=20, size=0.5)
     obj = link(bm, "wall", matte(f"{kind}_wall", rgb, rough))
     obj.scale = (w, h, 1)
     obj.rotation_euler = (math.radians(90), 0, 0)
-    obj.location = (0, y, h / 2)
+    x, back = (0.0, y) if at is None else (float(at[0]), float(at[1]))
+    obj.location = (x, back, h / 2)
     return obj
 
 
@@ -684,7 +691,12 @@ def gauge(at=(0, 0, 0.9), r=0.028, needle_deg=-38.0):
     return made
 
 
-def pipe(a, b, r=0.008, mat=None):
+def pipe(a=(0.0, 0.0, 0.0), b=(0.0, 0.0, 0.3), r=0.008, mat=None, at=None):
+    """A run of pipe between two points; `at` moves both ends together."""
+    if at is not None:
+        dx, dy = float(at[0]), float(at[1])
+        a = (a[0] + dx, a[1] + dy, a[2])
+        b = (b[0] + dx, b[1] + dy, b[2])
     bm = bmesh.new()
     v1 = bm.verts.new(a)
     v2 = bm.verts.new(b)
