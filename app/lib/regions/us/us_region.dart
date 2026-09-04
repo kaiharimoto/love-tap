@@ -19,7 +19,6 @@ class UsRegion extends StatefulWidget {
 }
 
 class _UsRegionState extends State<UsRegion> {
-
   @override
   Widget build(BuildContext context) {
     final scope = AppScope.of(context);
@@ -44,9 +43,11 @@ class _UsRegionState extends State<UsRegion> {
             ctx: ctx,
             row: i,
             height: _windowFor(kModules[i].id),
-            onOpen: () => Navigator.of(context).push(MaterialPageRoute<void>(
-              builder: (_) => _Alone(module: kModules[i], ctx: ctx),
-            )),
+            onOpen: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => _Alone(module: kModules[i], ctx: ctx),
+              ),
+            ),
           ),
       ],
     );
@@ -55,11 +56,11 @@ class _UsRegionState extends State<UsRegion> {
   /// How much of each module is on the desk before you have to move something. The dates and the
   /// list are the two anyone actually reads standing up, so they get more of it.
   static double _windowFor(String id) => switch (id) {
-        'dates' => 300,
-        'todos' => 268,
-        'calendar' => 210,
-        _ => 190,
-      };
+    'dates' => 300,
+    'todos' => 268,
+    'calendar' => 210,
+    _ => 190,
+  };
 }
 
 /// One module on the desk: its name stamped on an index card laid over the top of it, and as much
@@ -99,11 +100,23 @@ class _Section extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Stamped(module.label, size: 11),
+                  // a card is two hundred points wide and "dates that matter" stamped at eleven
+                  // is wider than what is left of it, so the label shrinks rather than spilling
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Stamped(module.label, size: 11),
+                    ),
+                  ),
                   const SizedBox(width: 10),
                   Flexible(
-                    child: Text(module.glance(ctx.events), style: Hands.margin(size: 12),
-                        maxLines: 1, overflow: TextOverflow.ellipsis),
+                    child: Text(
+                      module.glance(ctx.events),
+                      style: Hands.margin(size: 12),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
@@ -124,27 +137,29 @@ class _Alone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: DeskColour.day,
-        body: Desk(
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(18, 10, 18, 6),
-                  child: GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: Row(children: [
-                      Mark.turnback(size: 18),
-                      const SizedBox(width: 8),
-                      Stamped(module.label, size: 12),
-                    ]),
-                  ),
+    backgroundColor: DeskColour.day,
+    body: Desk(
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(18, 10, 18, 6),
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Row(
+                  children: [
+                    Mark.turnback(size: 18),
+                    const SizedBox(width: 8),
+                    Stamped(module.label, size: 12),
+                  ],
                 ),
-                Expanded(child: module.build(context, ctx)),
-              ],
+              ),
             ),
-          ),
+            Expanded(child: module.build(context, ctx)),
+          ],
         ),
-      );
+      ),
+    ),
+  );
 }
