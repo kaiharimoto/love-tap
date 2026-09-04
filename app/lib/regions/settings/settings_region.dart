@@ -17,6 +17,7 @@ import '../../feelings/sensation.dart';
 import '../../material/hands.dart';
 import '../../material/objects.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../scope.dart';
 import '../../transport/transport.dart';
 import '../../voice/strings.dart';
@@ -240,9 +241,12 @@ class _Pairing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final paired = transport.pairing;
-    return Container(
-      padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
-      color: const Color(0xFFF3EEE3),
+    return Slip(
+      id: 'settings.pairing',
+      row: 0,
+      stock: 'index',
+      torn: false,
+      padding: const EdgeInsets.fromLTRB(15, 13, 15, 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

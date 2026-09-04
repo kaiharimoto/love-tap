@@ -1,0 +1,43 @@
+{
+ "scene": "11_chat_scroll",
+ "browser": "webkit",
+ "viewport": {
+  "width": 360,
+  "height": 780,
+  "dpr": 3
+ },
+ "url": "http://127.0.0.1:8799/",
+ "steps": [
+  {
+   "do": "goTo",
+   "ms": 2669
+  },
+  {
+   "do": "wait",
+   "ms": 1903
+  },
+  {
+   "do": "scrollTo",
+   "ms": 2321
+  },
+  {
+   "do": "wait",
+   "ms": 1504
+  },
+  {
+   "do": "frames",
+   "ms": 234640
+  }
+ ],
+ "shots": [
+  {
+   "frames": 300,
+   "dir": "evidence/frames/11_chat_scroll",
+   "ms": 16
+  }
+ ],
+ "reports": [],
+ "cold_ms": 13488,
+ "problems": [],
+ "ok": true
+}

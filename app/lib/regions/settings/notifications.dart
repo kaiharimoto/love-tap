@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
 import '../../material/palette.dart';
+import '../../material/slip.dart';
 import '../../spine/spine.dart';
 
 /// How each event type may announce itself on this phone.
@@ -79,6 +80,29 @@ class NotificationPrefs {
   }
 }
 
+/// What each kind of event is, said the way one of them would say it. The registry's ids are for
+/// the log; this list is a person deciding what may wake them up.
+String _said(String type) => switch (type) {
+      'message' => 'something written',
+      'photo' => 'a picture',
+      'video' => 'something to watch',
+      'voice_note' => 'their voice',
+      'reaction' => 'an answer to something of yours',
+      'message_edit' => 'a change to something already said',
+      'message_delete' => 'something taken back',
+      'read_marker' => 'them catching up',
+      'feeling' => 'a feeling',
+      'state_declared' => 'something they say about themselves',
+      'state_passive' => 'something their phone notices',
+      'date_event' => 'a date moving',
+      'todo_event' => 'the list moving',
+      'milestone' => 'a day that matters',
+      'ritual_kept' => 'one of the things you keep',
+      'ping' => 'a note set to arrive later',
+      'feeling_authored' => 'a feeling one of you made',
+      _ => type.replaceAll('_', ' '),
+    };
+
 class NotificationSettings extends StatelessWidget {
   const NotificationSettings({super.key, required this.prefs, required this.onChanged});
   final NotificationPrefs prefs;
@@ -86,9 +110,11 @@ class NotificationSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
-      color: const Color(0xFFF3EEE3),
+    return Slip(
+      id: 'settings.notify',
+      row: 1,
+      stock: 'looseleaf',
+      padding: const EdgeInsets.fromLTRB(14, 11, 14, 13),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -108,7 +134,7 @@ class NotificationSettings extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 2),
                 child: Row(
                   children: [
-                    Expanded(child: Text(t.id.replaceAll('_', ' '), style: Hands.margin(size: 14))),
+                    Expanded(child: Text(_said(t.id), style: Hands.margin(size: 14))),
                     for (final a in Announce.values)
                       GestureDetector(
                         onTap: () => onChanged(prefs.copyWith(byType: {...prefs.byType, t.id: a})),
