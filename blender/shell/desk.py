@@ -32,7 +32,7 @@ WIDTH_M = 0.42          # what is framed across the screen
 HEIGHT_M = 0.84         # twice as tall, so the strip tiles
 PLANKS = 3
 JOIN_MM = 1.1           # the gap between two planks
-GRAIN_MM = 0.16         # how deep the grain is cut
+GRAIN_MM = 0.38         # how deep the grain is cut
 MESH_X, MESH_Y = 420, 840
 
 
@@ -105,17 +105,34 @@ def wood_material():
     b.inputs["Specular IOR Level"].default_value = 0.42
     b.inputs["Coat Weight"].default_value = 0.22
     b.inputs["Coat Roughness"].default_value = 0.30
-    # the late wood is darker: tie colour to the geometry's own slope
+    # The late wood — the narrow band laid down at the end of a growing season — is denser, darker
+    # and stands a little proud. The geometry already carries that as height, so the colour is
+    # taken from the height rather than painted separately: the dark line and the ridge are the
+    # same fact about the plank. Height is in metres and a colour ramp reads 0 to 1, so it is
+    # mapped across the grain's own depth first.
     geom = nt.nodes.new("ShaderNodeNewGeometry")
     sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    span = nt.nodes.new("ShaderNodeMapRange")
     ramp = nt.nodes.new("ShaderNodeValToRGB")
     nt.links.new(geom.outputs["Position"], sep.inputs["Vector"])
-    nt.links.new(sep.outputs["Z"], ramp.inputs["Fac"])
-    ramp.color_ramp.elements[0].position = -0.00016
-    ramp.color_ramp.elements[0].color = (0.075, 0.050, 0.034, 1.0)
-    ramp.color_ramp.elements[1].position = 0.00016
-    ramp.color_ramp.elements[1].color = (0.165, 0.118, 0.082, 1.0)
+    nt.links.new(sep.outputs["Z"], span.inputs["Value"])
+    span.inputs["From Min"].default_value = -GRAIN_MM / 1000.0
+    span.inputs["From Max"].default_value = GRAIN_MM / 1000.0
+    span.clamp = True
+    nt.links.new(span.outputs["Result"], ramp.inputs["Fac"])
+    ramp.color_ramp.elements[0].position = 0.0
+    ramp.color_ramp.elements[0].color = (0.055, 0.036, 0.024, 1.0)
+    ramp.color_ramp.elements[1].position = 1.0
+    ramp.color_ramp.elements[1].color = (0.180, 0.130, 0.090, 1.0)
+    mid = ramp.color_ramp.elements.new(0.62)
+    mid.color = (0.126, 0.088, 0.062, 1.0)
     nt.links.new(ramp.outputs["Color"], b.inputs["Base Color"])
+    # and the same height drives a fine roughness break, so the light does not sit on it evenly
+    rough = nt.nodes.new("ShaderNodeMapRange")
+    nt.links.new(span.outputs["Result"], rough.inputs["Value"])
+    rough.inputs["To Min"].default_value = 0.52
+    rough.inputs["To Max"].default_value = 0.34
+    nt.links.new(rough.outputs["Result"], b.inputs["Roughness"])
     return mat
 
 

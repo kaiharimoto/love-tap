@@ -1,0 +1,198 @@
+{"key": "2026-09-01-0001", "ts": "2026-09-01T03:12:44+01:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "long_day", "intensity": 0.55}}
+{"key": "2026-09-01-9540", "ts": "2026-09-01T03:40:22+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "last_active", "value": 3}, "gen": "finish"}
+{"key": "2026-09-01-0002", "ts": "2026-09-01T05:41:19+01:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "empty_chair", "intensity": 0.5}}
+{"key": "2026-09-01-0003", "ts": "2026-09-01T06:02:07+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "mood", "value": "restless"}}
+{"key": "2026-09-01-0004", "ts": "2026-09-01T06:04:33+01:00", "author": "noor", "type": "message", "payload": {"text": "awake at ten to five for no reason except that the year starts today and my body knew about it before i did"}}
+{"key": "2026-09-01-9001", "ts": "2026-09-01T06:05:10+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0002"}, "gen": "finish"}
+{"key": "2026-09-01-0005", "ts": "2026-09-01T06:07:50+01:00", "author": "noor", "type": "message", "payload": {"text": "the alarm goes off in eight minutes and its going to be humiliating"}}
+{"key": "2026-09-01-0006", "ts": "2026-09-01T06:11:16+01:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2026-09-01-0004", "feeling_id": "here"}}
+{"key": "2026-09-01-0007", "ts": "2026-09-01T06:14:42+01:00", "author": "noor", "type": "message", "payload": {"text": "youre on the ward reading that instead of doing whatever it is you do at six. go and do it"}}
+{"key": "2026-09-01-0008", "ts": "2026-09-01T06:19:08+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "grey", "intensity": 0.35}}
+{"key": "2026-09-01-0009", "ts": "2026-09-01T06:26:35+01:00", "author": "noor", "type": "message", "payload": {"text": "cannot find the lanyard. its with the sock"}}
+{"key": "2026-09-01-0010", "ts": "2026-09-01T06:31:01+01:00", "author": "noor", "type": "message", "payload": {"text": "list. new register, seating plans for two groups, chase the kiln, name labels on 31 books, and the thing in the hall at nine that will be ninety minutes of a man with a laptop"}}
+{"key": "2026-09-01-0011", "ts": "2026-09-01T06:33:27+01:00", "author": "noor", "type": "message", "payload": {"text": "thats not a list thats a day"}}
+{"key": "2026-09-01-0012", "ts": "2026-09-01T06:48:53+01:00", "author": "noor", "type": "message", "payload": {"text": "toast standing at the window. the canal has that skin on it that it gets in september, like somebody has breathed on it"}}
+{"key": "2026-09-01-9501", "ts": "2026-09-01T07:05:50+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "charging", "value": false}, "gen": "finish"}
+{"key": "2026-09-01-0013", "ts": "2026-09-01T07:06:20+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "travelling"}}
+{"key": "2026-09-01-9502", "ts": "2026-09-01T07:07:20+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "battery", "value": 100}, "gen": "finish"}
+{"key": "2026-09-01-0014", "ts": "2026-09-01T07:12:46+01:00", "author": "noor", "type": "message", "payload": {"text": "on the bus with four other people in ironed shirts, all of us pretending we did not spend august horizontal"}}
+{"key": "2026-09-01-9519", "ts": "2026-09-01T07:20:12+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "battery", "value": 21}, "gen": "finish"}
+{"key": "2026-09-01-9520", "ts": "2026-09-01T07:24:26+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "moving", "value": "walking"}, "gen": "finish"}
+{"key": "2026-09-01-9002", "ts": "2026-09-01T07:24:52+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0006"}, "gen": "finish"}
+{"key": "2026-09-01-9521", "ts": "2026-09-01T07:26:58+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "network", "value": "cell"}, "gen": "finish"}
+{"key": "2026-09-01-9522", "ts": "2026-09-01T07:28:51+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "at_home", "value": false}, "gen": "finish"}
+{"key": "2026-09-01-0015", "ts": "2026-09-01T07:29:12+01:00", "author": "noor", "type": "message", "payload": {"text": "im going to be the first one in the building and i will hate that about myself all day"}}
+{"key": "2026-09-01-9503", "ts": "2026-09-01T07:35:16+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "at_home", "value": false}, "gen": "finish"}
+{"key": "2026-09-01-9504", "ts": "2026-09-01T07:37:39+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "moving", "value": "walking"}, "gen": "finish"}
+{"key": "2026-09-01-9505", "ts": "2026-09-01T07:39:00+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "network", "value": "cell"}, "gen": "finish"}
+{"key": "2026-09-01-0016", "ts": "2026-09-01T07:48:39+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "work"}}
+{"key": "2026-09-01-0017", "ts": "2026-09-01T07:52:05+01:00", "author": "noor", "type": "message", "payload": {"text": "first one in. the caretaker said good summer and did not stop walking"}}
+{"key": "2026-09-01-0018", "ts": "2026-09-01T07:56:31+01:00", "author": "noor", "type": "voice_note", "payload": {"voice": "2026-09_room_echo", "duration_ms": 21000}}
+{"key": "2026-09-01-0019", "ts": "2026-09-01T08:02:57+01:00", "author": "noor", "type": "photo", "payload": {"photo": "2026-09_art_room_start", "caption": "chairs down. thats as far as ive got"}}
+{"key": "2026-09-01-9506", "ts": "2026-09-01T08:05:14+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "network", "value": "wifi"}, "gen": "finish"}
+{"key": "2026-09-01-0020", "ts": "2026-09-01T08:06:24+01:00", "author": "noor", "type": "message", "payload": {"text": "somebody has taken the tall stool and left a note saying they will bring it back. there is no name on the note"}}
+{"key": "2026-09-01-9507", "ts": "2026-09-01T08:07:43+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "moving", "value": "still"}, "gen": "finish"}
+{"key": "2026-09-01-0021", "ts": "2026-09-01T08:12:50+01:00", "author": "teo", "type": "message", "payload": {"text": "Off. Walking down the hill."}}
+{"key": "2026-09-01-0022", "ts": "2026-09-01T08:14:16+01:00", "author": "teo", "type": "photo", "payload": {"photo": "2026-09_ward_car_park", "caption": "eight o clock and all of it leaving at once"}}
+{"key": "2026-09-01-9003", "ts": "2026-09-01T08:15:22+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0020"}, "gen": "finish"}
+{"key": "2026-09-01-0023", "ts": "2026-09-01T08:16:42+01:00", "author": "teo", "type": "message", "payload": {"text": "Third one. Quiet until four, then a bad hour, then quiet again in the way that is worse than busy."}}
+{"key": "2026-09-01-0024", "ts": "2026-09-01T08:19:09+01:00", "author": "teo", "type": "message", "payload": {"text": "The man with the beans went home yesterday. He shook my hand and told me to plant fewer next year, which is not advice he has ever taken."}}
+{"key": "2026-09-01-0025", "ts": "2026-09-01T08:21:35+01:00", "author": "teo", "type": "voice_note", "payload": {"voice": "2026-09_walk_home_tue", "duration_ms": 41000}}
+{"key": "2026-09-01-0026", "ts": "2026-09-01T08:24:01+01:00", "author": "noor", "type": "message", "payload": {"text": "youre out of breath on the last bit again"}}
+{"key": "2026-09-01-0027", "ts": "2026-09-01T08:26:28+01:00", "author": "teo", "type": "message", "payload": {"text": "The hill is steeper in september. It is a known fact and nobody measures it."}}
+{"key": "2026-09-01-0028", "ts": "2026-09-01T08:28:54+01:00", "author": "noor", "type": "reaction", "payload": {"target": "k:2026-09-01-0027", "feeling_id": "nyeh"}}
+{"key": "2026-09-01-0029", "ts": "2026-09-01T08:29:20+01:00", "author": "teo", "type": "message", "payload": {"text": "Your room sounded enormous."}}
+{"key": "2026-09-01-0030", "ts": "2026-09-01T08:31:47+01:00", "author": "noor", "type": "message", "payload": {"text": "it is enormous for about six more hours"}}
+{"key": "2026-09-01-0031", "ts": "2026-09-01T08:33:13+01:00", "author": "teo", "type": "message", "payload": {"text": "The roster came friday and I read it properly this morning, which was a mistake to do while walking."}}
+{"key": "2026-09-01-9004", "ts": "2026-09-01T08:34:38+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0031"}, "gen": "finish"}
+{"key": "2026-09-01-0032", "ts": "2026-09-01T08:35:39+01:00", "author": "noor", "type": "message", "payload": {"text": "and"}}
+{"key": "2026-09-01-9523", "ts": "2026-09-01T08:35:51+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "at_home", "value": true}, "gen": "finish"}
+{"key": "2026-09-01-0033", "ts": "2026-09-01T08:36:06+01:00", "author": "teo", "type": "message", "payload": {"text": "Tonight off. Tomorrow off. Then thursday."}}
+{"key": "2026-09-01-9524", "ts": "2026-09-01T08:36:30+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "network", "value": "wifi"}, "gen": "finish"}
+{"key": "2026-09-01-9525", "ts": "2026-09-01T08:37:00+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "charging", "value": true}, "gen": "finish"}
+{"key": "2026-09-01-0034", "ts": "2026-09-01T08:38:32+01:00", "author": "teo", "type": "ritual_kept", "payload": {"ritual_id": "ritual_text_when_home", "title": "text when home", "kept_at": "2026-09-01T08:38:00+01:00", "note": "in, boots off, kettle not touched"}}
+{"key": "2026-09-01-9526", "ts": "2026-09-01T08:38:46+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "moving", "value": "still"}, "gen": "finish"}
+{"key": "2026-09-01-0035", "ts": "2026-09-01T08:39:58+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "place", "value": "home"}}
+{"key": "2026-09-01-9527", "ts": "2026-09-01T08:40:18+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "ringer", "value": "silent"}, "gen": "finish"}
+{"key": "2026-09-01-0036", "ts": "2026-09-01T08:41:24+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "availability", "value": "asleep"}}
+{"key": "2026-09-01-0037", "ts": "2026-09-01T08:42:51+01:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "goodnight", "intensity": 0.5}}
+{"key": "2026-09-01-0038", "ts": "2026-09-01T08:44:17+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "here", "intensity": 0.45}}
+{"key": "2026-09-01-0039", "ts": "2026-09-01T08:46:43+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "availability", "value": "heads_down"}}
+{"key": "2026-09-01-9508", "ts": "2026-09-01T08:55:28+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "ringer", "value": "silent"}, "gen": "finish"}
+{"key": "2026-09-01-9518", "ts": "2026-09-01T09:18:39+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "local_hour", "value": 9}, "gen": "finish"}
+{"key": "2026-09-01-9005", "ts": "2026-09-01T09:55:48+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0037"}, "gen": "finish"}
+{"key": "2026-09-01-0040", "ts": "2026-09-01T09:58:10+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "ugh", "intensity": 0.45}}
+{"key": "2026-09-01-0041", "ts": "2026-09-01T10:32:36+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "status_line", "value": "hall. the new email system. hour two"}}
+{"key": "2026-09-01-9541", "ts": "2026-09-01T10:40:24+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "local_hour", "value": 10}, "gen": "finish"}
+{"key": "2026-09-01-0042", "ts": "2026-09-01T11:26:02+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "pigeon", "intensity": 0.5}}
+{"key": "2026-09-01-9528", "ts": "2026-09-01T11:30:29+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "battery", "value": 74}, "gen": "finish"}
+{"key": "2026-09-01-0043", "ts": "2026-09-01T12:41:29+01:00", "author": "noor", "type": "message", "payload": {"text": "the man with the laptop went on until twenty past eleven and the new one from the faculty kept saying we would circle back"}}
+{"key": "2026-09-01-0044", "ts": "2026-09-01T12:43:55+01:00", "author": "noor", "type": "message", "payload": {"text": "circle back to what. there was no circle"}}
+{"key": "2026-09-01-0045", "ts": "2026-09-01T12:45:21+01:00", "author": "noor", "type": "message", "payload": {"text": "kiln is still broken. it has been broken since the tuesday before we broke up and the form for reporting it goes to a person who left in april"}}
+{"key": "2026-09-01-9509", "ts": "2026-09-01T12:45:33+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "battery", "value": 60}, "gen": "finish"}
+{"key": "2026-09-01-9510", "ts": "2026-09-01T12:47:32+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "last_active", "value": 0}, "gen": "finish"}
+{"key": "2026-09-01-0046", "ts": "2026-09-01T12:47:48+01:00", "author": "noor", "type": "message", "payload": {"text": "the kiln man can come on the 14th between 8 and 12"}}
+{"key": "2026-09-01-0047", "ts": "2026-09-01T12:48:14+01:00", "author": "noor", "type": "message_edit", "payload": {"target": "k:2026-09-01-0046", "text": "the kiln man can come on the 14th between 12 and 4"}}
+{"key": "2026-09-01-0048", "ts": "2026-09-01T12:52:40+01:00", "author": "noor", "type": "photo", "payload": {"photo": "2026-09_timetable", "caption": "four ringed in red. those are the ones that decide the year"}}
+{"key": "2026-09-01-0049", "ts": "2026-09-01T12:54:07+01:00", "author": "noor", "type": "message", "payload": {"text": "year 9 on a friday last is a punishment and i have not worked out yet whose"}}
+{"key": "2026-09-01-0050", "ts": "2026-09-01T12:57:33+01:00", "author": "noor", "type": "todo_event", "payload": {"todo_id": "todo_dentist", "action": "reopened", "text": "book the dentist", "assignee": "teo"}}
+{"key": "2026-09-01-0051", "ts": "2026-09-01T12:58:59+01:00", "author": "noor", "type": "message", "payload": {"text": "the dentist is back on the list. it has been on the list since march and it has started looking at me"}}
+{"key": "2026-09-01-0052", "ts": "2026-09-01T13:01:25+01:00", "author": "noor", "type": "todo_event", "payload": {"todo_id": "todo_labels", "action": "added", "text": "31 name labels, the good pen only", "assignee": "noor"}}
+{"key": "2026-09-01-0053", "ts": "2026-09-01T13:03:52+01:00", "author": "noor", "type": "message", "payload": {"text": "im doing the labels tonight with the pen and something bad on in the background, and thats the evening, and im fine about that"}}
+{"key": "2026-09-01-0054", "ts": "2026-09-01T13:05:18+01:00", "author": "noor", "type": "message", "payload": {"text": "sandwich eaten standing over the sink in the back room. very glamorous, day one"}}
+{"key": "2026-09-01-0055", "ts": "2026-09-01T13:07:44+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "energy", "value": 2}}
+{"key": "2026-09-01-0056", "ts": "2026-09-01T13:09:11+01:00", "author": "noor", "type": "message", "payload": {"text": "back in. talk to you at three when you get up like something out of a cellar"}}
+{"key": "2026-09-01-9529", "ts": "2026-09-01T15:10:29+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "charging", "value": false}, "gen": "finish"}
+{"key": "2026-09-01-9530", "ts": "2026-09-01T15:12:33+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "battery", "value": 100}, "gen": "finish"}
+{"key": "2026-09-01-0057", "ts": "2026-09-01T15:12:37+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "availability", "value": "open"}}
+{"key": "2026-09-01-9531", "ts": "2026-09-01T15:14:03+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "last_active", "value": 0}, "gen": "finish"}
+{"key": "2026-09-01-9006", "ts": "2026-09-01T15:15:05+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0056"}, "gen": "finish"}
+{"key": "2026-09-01-0058", "ts": "2026-09-01T15:16:03+01:00", "author": "teo", "type": "message", "payload": {"text": "Awake. Fourteen things from you and one of them is a timetable."}}
+{"key": "2026-09-01-0059", "ts": "2026-09-01T15:19:29+01:00", "author": "teo", "type": "message", "payload": {"text": "You have ringed friday last and written a word next to it in pencil and then photographed the evidence."}}
+{"key": "2026-09-01-0060", "ts": "2026-09-01T15:22:56+01:00", "author": "teo", "type": "message", "payload": {"text": "The kiln has been broken for eleven weeks and the form goes to a ghost. That is the most school thing I have ever been told."}}
+{"key": "2026-09-01-0061", "ts": "2026-09-01T15:26:22+01:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "make_you_tea", "intensity": 0.6}}
+{"key": "2026-09-01-0062", "ts": "2026-09-01T15:36:48+01:00", "author": "noor", "type": "message", "payload": {"text": "out. sitting on the wall by the bike racks in the sun and im not going back in for the stool"}}
+{"key": "2026-09-01-0063", "ts": "2026-09-01T15:39:15+01:00", "author": "teo", "type": "message", "payload": {"text": "Somebody will bring the stool back in november with paint on it and a story."}}
+{"key": "2026-09-01-9511", "ts": "2026-09-01T15:40:34+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "ringer", "value": "normal"}, "gen": "finish"}
+{"key": "2026-09-01-0064", "ts": "2026-09-01T15:42:41+01:00", "author": "noor", "type": "reaction", "payload": {"target": "k:2026-09-01-0063", "feeling_id": "snap"}}
+{"key": "2026-09-01-0065", "ts": "2026-09-01T15:47:07+01:00", "author": "noor", "type": "message", "payload": {"text": "how was the sleep"}}
+{"key": "2026-09-01-0066", "ts": "2026-09-01T15:50:34+01:00", "author": "teo", "type": "message", "payload": {"text": "Four hours, then the bins outside, then two more that did not count."}}
+{"key": "2026-09-01-0067", "ts": "2026-09-01T15:53:00+01:00", "author": "teo", "type": "message", "payload": {"text": "Nights are thursday friday and saturday."}}
+{"key": "2026-09-01-0068", "ts": "2026-09-01T15:56:26+01:00", "author": "teo", "type": "message_edit", "payload": {"target": "k:2026-09-01-0067", "text": "Nights are thursday friday saturday and sunday."}}
+{"key": "2026-09-01-0069", "ts": "2026-09-01T15:58:53+01:00", "author": "teo", "type": "message", "payload": {"text": "Four. I read the line under mine the first time."}}
+{"key": "2026-09-01-0070", "ts": "2026-09-01T16:01:19+01:00", "author": "noor", "type": "message", "payload": {"text": "sunday too"}}
+{"key": "2026-09-01-0071", "ts": "2026-09-01T16:04:45+01:00", "author": "teo", "type": "message", "payload": {"text": "Sunday too."}}
+{"key": "2026-09-01-0072", "ts": "2026-09-01T16:07:12+01:00", "author": "noor", "type": "message", "payload": {"text": "so the call is off on sunday"}}
+{"key": "2026-09-01-0073", "ts": "2026-09-01T16:10:38+01:00", "author": "teo", "type": "message", "payload": {"text": "The call is off on sunday. I will have my shoes half on while you are dialling."}}
+{"key": "2026-09-01-0074", "ts": "2026-09-01T16:12:04+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "tangled", "intensity": 0.45}}
+{"key": "2026-09-01-0075", "ts": "2026-09-01T16:20:31+01:00", "author": "noor", "type": "message", "payload": {"text": "im not going to make a thing of it. its four nights, its the job, and i knew about the job before i knew about you"}}
+{"key": "2026-09-01-0076", "ts": "2026-09-01T16:23:57+01:00", "author": "teo", "type": "message", "payload": {"text": "Make a small thing of it. A small thing is allowed and I would rather have it now than in october."}}
+{"key": "2026-09-01-0077", "ts": "2026-09-01T16:26:23+01:00", "author": "noor", "type": "message", "payload": {"text": "a small thing then"}}
+{"key": "2026-09-01-9007", "ts": "2026-09-01T16:29:04+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0077"}, "gen": "finish"}
+{"key": "2026-09-01-0078", "ts": "2026-09-01T16:29:50+01:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2026-09-01-0077", "feeling_id": "squeeze"}}
+{"key": "2026-09-01-0079", "ts": "2026-09-01T16:44:16+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "travelling"}}
+{"key": "2026-09-01-9512", "ts": "2026-09-01T16:50:12+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "at_home", "value": false}, "gen": "finish"}
+{"key": "2026-09-01-9513", "ts": "2026-09-01T16:52:29+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "moving", "value": "walking"}, "gen": "finish"}
+{"key": "2026-09-01-0080", "ts": "2026-09-01T16:52:42+01:00", "author": "noor", "type": "message", "payload": {"text": "bus. a boy on the back seat with a full sized house plant on his lap and no explanation offered to anybody"}}
+{"key": "2026-09-01-0081", "ts": "2026-09-01T16:55:09+01:00", "author": "teo", "type": "message", "payload": {"text": "That is the best thing I have been told today and I have only been awake for two hours."}}
+{"key": "2026-09-01-0082", "ts": "2026-09-01T17:10:35+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "home"}}
+{"key": "2026-09-01-9008", "ts": "2026-09-01T17:11:01+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0081"}, "gen": "finish"}
+{"key": "2026-09-01-0083", "ts": "2026-09-01T17:14:01+01:00", "author": "noor", "type": "message", "payload": {"text": "in. the flat smells of nothing at all, which is the best it ever smells"}}
+{"key": "2026-09-01-0084", "ts": "2026-09-01T17:18:28+01:00", "author": "noor", "type": "message", "payload": {"text": "there is no soup today is there"}}
+{"key": "2026-09-01-0085", "ts": "2026-09-01T17:22:54+01:00", "author": "teo", "type": "message", "payload": {"text": "There is no soup today. I have been upright since three and the shops are a bridge too far."}}
+{"key": "2026-09-01-0086", "ts": "2026-09-01T17:25:20+01:00", "author": "noor", "type": "message", "payload": {"text": "then it moves to wednesday"}}
+{"key": "2026-09-01-9514", "ts": "2026-09-01T17:25:36+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "at_home", "value": true}, "gen": "finish"}
+{"key": "2026-09-01-9515", "ts": "2026-09-01T17:27:50+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "moving", "value": "still"}, "gen": "finish"}
+{"key": "2026-09-01-0087", "ts": "2026-09-01T17:28:47+01:00", "author": "teo", "type": "message", "payload": {"text": "It cannot move. It has a day in its name."}}
+{"key": "2026-09-01-0088", "ts": "2026-09-01T17:31:13+01:00", "author": "noor", "type": "message", "payload": {"text": "it moves to wednesday and then it gets judged on wednesday terms"}}
+{"key": "2026-09-01-0089", "ts": "2026-09-01T17:34:39+01:00", "author": "teo", "type": "message", "payload": {"text": "What are wednesday terms."}}
+{"key": "2026-09-01-0090", "ts": "2026-09-01T17:37:06+01:00", "author": "noor", "type": "message", "payload": {"text": "harsher"}}
+{"key": "2026-09-01-9009", "ts": "2026-09-01T17:38:55+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0090"}, "gen": "finish"}
+{"key": "2026-09-01-0091", "ts": "2026-09-01T17:40:32+01:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2026-09-01-0090", "feeling_id": "stuck_with_me"}}
+{"key": "2026-09-01-0092", "ts": "2026-09-01T17:52:58+01:00", "author": "noor", "type": "todo_event", "payload": {"todo_id": "todo_spare_key", "action": "added", "text": "get a spare cut for his flat and it lives at mine", "assignee": "teo"}}
+{"key": "2026-09-01-0093", "ts": "2026-09-01T17:55:25+01:00", "author": "noor", "type": "message", "payload": {"text": "put the key on the list before we both forget it again. the ninth is eight days of you being one dropped ring away from sleeping in a car park"}}
+{"key": "2026-09-01-0094", "ts": "2026-09-01T17:58:51+01:00", "author": "teo", "type": "message", "payload": {"text": "I will get it cut tomorrow when the place by the bridge is open, and get bread in the same journey, which is two things in one journey and is my limit."}}
+{"key": "2026-09-01-0095", "ts": "2026-09-01T18:01:17+01:00", "author": "noor", "type": "todo_event", "payload": {"todo_id": "todo_bread", "action": "added", "text": "bread from the bridge on the way down", "assignee": "teo"}}
+{"key": "2026-09-01-0096", "ts": "2026-09-01T18:04:44+01:00", "author": "noor", "type": "message", "payload": {"text": "two things in one journey. look at you"}}
+{"key": "2026-09-01-9010", "ts": "2026-09-01T18:15:56+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0094"}, "gen": "finish"}
+{"key": "2026-09-01-0097", "ts": "2026-09-01T18:20:10+01:00", "author": "noor", "type": "message", "payload": {"text": "labels started. eleven done. the pen is behaving itself"}}
+{"key": "2026-09-01-0098", "ts": "2026-09-01T18:40:36+01:00", "author": "teo", "type": "message", "payload": {"text": "Eating standing up. I have made an omelette that is technically a scramble."}}
+{"key": "2026-09-01-0099", "ts": "2026-09-01T18:44:03+01:00", "author": "noor", "type": "message", "payload": {"text": "photograph it"}}
+{"key": "2026-09-01-0100", "ts": "2026-09-01T18:47:29+01:00", "author": "teo", "type": "message", "payload": {"text": "No."}}
+{"key": "2026-09-01-0101", "ts": "2026-09-01T18:50:55+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "poke", "intensity": 0.6}}
+{"key": "2026-09-01-0102", "ts": "2026-09-01T19:06:21+01:00", "author": "teo", "type": "message", "payload": {"text": "I have watched forty minutes of a programme about a canal boat and thought of you every time they hit something."}}
+{"key": "2026-09-01-0103", "ts": "2026-09-01T19:12:48+01:00", "author": "noor", "type": "message", "payload": {"text": "we are not getting a boat"}}
+{"key": "2026-09-01-0104", "ts": "2026-09-01T19:15:14+01:00", "author": "teo", "type": "message", "payload": {"text": "I have said nothing about a boat."}}
+{"key": "2026-09-01-0105", "ts": "2026-09-01T19:18:40+01:00", "author": "noor", "type": "message", "payload": {"text": "you say it every september. the light goes and you start on about a boat and by november its a caravan"}}
+{"key": "2026-09-01-0106", "ts": "2026-09-01T19:22:07+01:00", "author": "teo", "type": "message", "payload": {"text": "The caravan was one time and there was a reason."}}
+{"key": "2026-09-01-9011", "ts": "2026-09-01T19:25:49+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0106"}, "gen": "finish"}
+{"key": "2026-09-01-0107", "ts": "2026-09-01T19:26:33+01:00", "author": "noor", "type": "reaction", "payload": {"target": "k:2026-09-01-0106", "feeling_id": "catch"}}
+{"key": "2026-09-01-9532", "ts": "2026-09-01T19:40:21+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "ringer", "value": "normal"}, "gen": "finish"}
+{"key": "2026-09-01-0108", "ts": "2026-09-01T19:40:59+01:00", "author": "noor", "type": "message", "payload": {"text": "twenty done. the ones with two names in take twice as long, which is obvious, and which i did not think about once in july"}}
+{"key": "2026-09-01-0109", "ts": "2026-09-01T19:52:26+01:00", "author": "teo", "type": "message", "payload": {"text": "You did not think about anything in july. That was the entire purpose of july."}}
+{"key": "2026-09-01-9012", "ts": "2026-09-01T20:00:47+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0109"}, "gen": "finish"}
+{"key": "2026-09-01-0110", "ts": "2026-09-01T20:02:52+01:00", "author": "noor", "type": "message", "payload": {"text": "true. i thought about the water and about nothing and i would like that back please"}}
+{"key": "2026-09-01-0111", "ts": "2026-09-01T20:14:18+01:00", "author": "noor", "type": "message", "payload": {"text": "31 done. all of them. my hands smell of the pen"}}
+{"key": "2026-09-01-9533", "ts": "2026-09-01T20:15:03+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "at_home", "value": false}, "gen": "finish"}
+{"key": "2026-09-01-0112", "ts": "2026-09-01T20:16:45+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "did_it", "intensity": 0.75, "hold_ms": 1400}}
+{"key": "2026-09-01-9534", "ts": "2026-09-01T20:17:48+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "moving", "value": "walking"}, "gen": "finish"}
+{"key": "2026-09-01-0113", "ts": "2026-09-01T20:18:11+01:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2026-09-01-0111", "feeling_id": "crown"}}
+{"key": "2026-09-01-9535", "ts": "2026-09-01T20:19:46+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "network", "value": "cell"}, "gen": "finish"}
+{"key": "2026-09-01-0114", "ts": "2026-09-01T20:22:37+01:00", "author": "noor", "type": "todo_event", "payload": {"todo_id": "todo_labels", "action": "done", "text": "31 name labels, the good pen only"}}
+{"key": "2026-09-01-0115", "ts": "2026-09-01T20:40:04+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_bridge_two_year", "action": "planned", "title": "the second one", "when": "2026-11-09T19:30:00+00:00", "place": "the place by the bridge", "note": "book it in october or the table goes to somebody else"}}
+{"key": "2026-09-01-0116", "ts": "2026-09-01T20:44:30+01:00", "author": "teo", "type": "message", "payload": {"text": "November the ninth is a monday."}}
+{"key": "2026-09-01-9536", "ts": "2026-09-01T20:45:14+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "network", "value": "wifi"}, "gen": "finish"}
+{"key": "2026-09-01-9537", "ts": "2026-09-01T20:47:19+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "moving", "value": "still"}, "gen": "finish"}
+{"key": "2026-09-01-0117", "ts": "2026-09-01T20:47:56+01:00", "author": "noor", "type": "message", "payload": {"text": "i know what it is. ive known what it is since about june"}}
+{"key": "2026-09-01-0118", "ts": "2026-09-01T20:50:23+01:00", "author": "teo", "type": "message", "payload": {"text": "I am not on that week. I checked before I said it."}}
+{"key": "2026-09-01-0119", "ts": "2026-09-01T20:53:49+01:00", "author": "noor", "type": "message", "payload": {"text": "you checked"}}
+{"key": "2026-09-01-0120", "ts": "2026-09-01T20:56:15+01:00", "author": "teo", "type": "message", "payload": {"text": "I checked in june."}}
+{"key": "2026-09-01-0121", "ts": "2026-09-01T20:58:42+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "thinking_of_you", "intensity": 0.7}}
+{"key": "2026-09-01-9538", "ts": "2026-09-01T21:05:27+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "ringer", "value": "silent"}, "gen": "finish"}
+{"key": "2026-09-01-0122", "ts": "2026-09-01T21:20:08+01:00", "author": "noor", "type": "message", "payload": {"text": "ten weeks. i worked it out on the back of a register and then scribbled over it so nobody would find it"}}
+{"key": "2026-09-01-9013", "ts": "2026-09-01T21:23:08+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0122"}, "gen": "finish"}
+{"key": "2026-09-01-0123", "ts": "2026-09-01T21:26:34+01:00", "author": "teo", "type": "message", "payload": {"text": "Ten weeks, and one of them is a half term you will spend asleep with a red pen still in your hand."}}
+{"key": "2026-09-01-9516", "ts": "2026-09-01T21:30:11+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "battery", "value": 39}, "gen": "finish"}
+{"key": "2026-09-01-0124", "ts": "2026-09-01T21:32:01+01:00", "author": "noor", "type": "message", "payload": {"text": "dont walk me through the year. i can see the whole of it from here and its long and its mostly weather"}}
+{"key": "2026-09-01-0125", "ts": "2026-09-01T21:38:27+01:00", "author": "teo", "type": "message", "payload": {"text": "It is long. It is also the one where you keep the ones you had last year all the way through."}}
+{"key": "2026-09-01-0126", "ts": "2026-09-01T21:44:53+01:00", "author": "noor", "type": "message", "payload": {"text": "thats the only good part of it. i get to find out what they did with what i gave them"}}
+{"key": "2026-09-01-0127", "ts": "2026-09-01T21:50:20+01:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "warm_palm", "intensity": 0.65}}
+{"key": "2026-09-01-0128", "ts": "2026-09-01T22:10:46+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "energy", "value": 1}}
+{"key": "2026-09-01-0129", "ts": "2026-09-01T22:20:12+01:00", "author": "noor", "type": "ping", "payload": {"schedule_id": "ping_roster", "text": "roster", "fires_at": "2026-09-25T09:00:00+01:00", "repeat": "none"}}
+{"key": "2026-09-01-0130", "ts": "2026-09-01T22:22:39+01:00", "author": "noor", "type": "message", "payload": {"text": "ive put the next one in for the 25th so that i stop asking you every friday whether its a roster friday"}}
+{"key": "2026-09-01-0131", "ts": "2026-09-01T22:26:05+01:00", "author": "teo", "type": "message", "payload": {"text": "You ask because half the time you like the answer."}}
+{"key": "2026-09-01-0132", "ts": "2026-09-01T22:34:31+01:00", "author": "noor", "type": "message", "payload": {"text": "i dont want to do the whole year again. i want to skip to the part where i know all their names and the room smells right and im not frightened of my own register"}}
+{"key": "2026-09-01-0133", "ts": "2026-09-01T22:36:58+01:00", "author": "noor", "type": "message_delete", "payload": {"target": "k:2026-09-01-0132"}}
+{"key": "2026-09-01-0134", "ts": "2026-09-01T22:39:24+01:00", "author": "noor", "type": "message", "payload": {"text": "ignore that. first day brain"}}
+{"key": "2026-09-01-0135", "ts": "2026-09-01T22:42:50+01:00", "author": "teo", "type": "message", "payload": {"text": "I read it."}}
+{"key": "2026-09-01-0136", "ts": "2026-09-01T22:45:17+01:00", "author": "noor", "type": "message", "payload": {"text": "i know you read it. thats why i took it back"}}
+{"key": "2026-09-01-0137", "ts": "2026-09-01T22:48:43+01:00", "author": "teo", "type": "message", "payload": {"text": "You are frightened of the register every september and by the second week you are complaining that they will not stop talking. Those are the same person and I am fond of her."}}
+{"key": "2026-09-01-0138", "ts": "2026-09-01T22:52:09+01:00", "author": "noor", "type": "message", "payload": {"text": "dont be kind at me at ten to eleven. im holding the whole thing together with sticky labels"}}
+{"key": "2026-09-01-0139", "ts": "2026-09-01T22:55:36+01:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "steady", "intensity": 0.7, "hold_ms": 1600}}
+{"key": "2026-09-01-9014", "ts": "2026-09-01T22:56:49+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-09-01-0139"}, "gen": "finish"}
+{"key": "2026-09-01-0140", "ts": "2026-09-01T22:58:02+01:00", "author": "noor", "type": "message", "payload": {"text": "ok"}}
+{"key": "2026-09-01-0141", "ts": "2026-09-01T23:06:28+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "goodnight", "intensity": 0.6}}
+{"key": "2026-09-01-0142", "ts": "2026-09-01T23:09:55+01:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "forehead", "intensity": 0.6}}
+{"key": "2026-09-01-0143", "ts": "2026-09-01T23:14:21+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "mood", "value": "calm"}}
+{"key": "2026-09-01-9517", "ts": "2026-09-01T23:15:34+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "charging", "value": true}, "gen": "finish"}
+{"key": "2026-09-01-9539", "ts": "2026-09-01T23:50:56+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "battery", "value": 72}, "gen": "finish"}

@@ -128,6 +128,35 @@ def sheet_from_mask(mask, meta, name):
     return obj, span_x, span_y
 
 
+EDGE_BAND_MM = 2.6           # how far in from the break the edge layer reaches before it is gone
+
+
+def keep_edge_band(path, mask, band_mm=EDGE_BAND_MM):
+    """Cut the edge render back to the band along the break.
+
+    The render is of the whole sheet, but only its outer few millimetres are the edge layer's
+    business: that is where the fibres have been pulled open and the unprinted core of the paper
+    shows, lighter and rougher than the face. Everything further in is the stock's own render and
+    must not be painted over — a sheet whose rules disappeared under a second sheet of white is
+    not a sheet.
+
+    So the alpha is replaced with a ramp that is solid at the break and gone by [band_mm] inside.
+    """
+    a = common.load_image_array(path)
+    h, w = a.shape[0], a.shape[1]
+    # the mask at the render's own resolution
+    m = np.asarray(mask, dtype=np.float32)
+    ys = (np.linspace(0, m.shape[0] - 1, h)).astype(int)
+    xs = (np.linspace(0, m.shape[1] - 1, w)).astype(int)
+    solid = m[np.ix_(ys, xs)] > 0.5
+    px_mm = w / 120.0
+    d = common.distance_inside(solid, int(band_mm * px_mm) + 2) / px_mm
+    ramp = np.clip(1.0 - d / band_mm, 0.0, 1.0) ** 1.35
+    a[..., 3] = a[..., 3] * ramp
+    common.save_image_array(path, a)
+    return path
+
+
 def render_one(mask_path, meta, out_dir, res, samples, conditions):
     name = os.path.splitext(os.path.basename(mask_path))[0]
     mask = load_mask(mask_path)
@@ -160,12 +189,14 @@ def render_one(mask_path, meta, out_dir, res, samples, conditions):
             if pass_kind == "shadow":
                 # the catcher render carries the shadow in its alpha; keep only that
                 common.keep_shadow_only(path)
+            else:
+                keep_edge_band(path, mask)
             manifest.record(path, "blender/paper/tear_relief.py", {
                 "mask": os.path.relpath(mask_path, common.repo_root()).replace(os.sep, "/"),
                 "pass": pass_kind, "light": condition, "samples": samples, "resolution": [rx, ry],
                 "fibre_band_mm": FIBRE_BAND_MM, "lift_mm": LIFT_MM, "thickness_m": THICKNESS_M,
                     "curl_mm": CURL_MM, "cockle_mm": COCKLE_MM, "mesh": MESH,
-                "frame": frame,
+                "edge_band_mm": EDGE_BAND_MM, "frame": frame,
                 "rig": "blender/rig/common.py",
             }, kind=f"tear_{pass_kind}")
             written.append(path)
@@ -210,7 +241,7 @@ def main():
             "note": "the shadow image is this many times the piece's box, centred on it; "
                     "the edge image is exactly the piece's box",
             "curl_mm": CURL_MM, "cockle_mm": COCKLE_MM, "lift_mm": LIFT_MM,
-            "fibre_band_mm": FIBRE_BAND_MM, "flare_mm": FLARE_MM,
+            "fibre_band_mm": FIBRE_BAND_MM, "flare_mm": FLARE_MM, "edge_band_mm": EDGE_BAND_MM,
         }, f, indent=1)
 
 

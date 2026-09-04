@@ -48,6 +48,9 @@ class SeedLoader {
       }
     }
     final keyToId = <String, String>{};
+    // a read marker points at a place in the log, and the seed cannot know the seq it will get
+    // until the log has been laid down, so the seed names the line and this resolves it
+    final keyToSeq = <String, int>{};
     final out = <Event>[];
     final skipped = <String>[];
     final anchors = <String, String>{};
@@ -84,6 +87,17 @@ class SeedLoader {
           payload[entry.key] = v;
         }
         if (bad) continue;
+        if (type == 'read_marker') {
+          final upto = payload.remove('upto_key');
+          if (upto is String) {
+            final at = keyToSeq[upto];
+            if (at == null) {
+              skipped.add('$key: unresolved read marker $upto');
+              continue;
+            }
+            payload['upto_seq'] = at;
+          }
+        }
         // media: replace ids with blobs
         try {
           if (type == 'photo') {
@@ -133,6 +147,7 @@ class SeedLoader {
         final id = _ulidFor(key, ts);
         keyToId[key] = id;
         seq++;
+        keyToSeq[key] = seq;
         final e = Event(
           id: id,
           seq: seq,
