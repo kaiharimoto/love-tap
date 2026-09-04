@@ -34,6 +34,9 @@ node_modules/
 # One is eleven megabytes and develop.py deletes it as soon as it has been developed, so a
 # negative in the tree is a render in flight rather than something anyone needs.
 /seed/photos/*.exr
+# and its sidecar: still.py writes it for develop.py to read, and what it says ends up in
+# assets/MANIFEST.json once the photograph exists
+/seed/photos/*.shot.json
 /blender/videos/scratch/
 # working room for the render queue: frames of a take, on their way to an mp4
 /scratch/
