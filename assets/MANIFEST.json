@@ -11042,52 +11042,56 @@
    }
   },
   "assets/shell/desk.png": {
-   "bytes": 1693711,
+   "bytes": 2342254,
    "generator": "blender/shell/desk.py",
    "kind": "shell",
    "settings": {
     "condition": "day",
+    "grain": "computed at render resolution as albedo, height and gloss maps, not carried by the mesh",
     "grain_mm": 0.16,
-    "height_m": 0.84,
-    "join_mm": 1.1,
+    "height_m": 0.92,
+    "join_mm": 2.2,
+    "marks": "three ring stains, nine scratches, up to two knots a board",
     "mesh": [
-     420,
-     840
+     300,
+     660
     ],
     "planks": 3,
     "res": [
      1100,
-     2200
+     2410
     ],
     "rig": "blender/rig/common.py",
-    "samples": 40,
+    "samples": 48,
     "seed": 20260903,
-    "tiles": "vertically, by construction",
+    "tiles": "vertically, by construction: every field is whole-numbered sinusoids",
     "width_m": 0.42
    }
   },
   "assets/shell/desk_dusk.png": {
-   "bytes": 1700244,
+   "bytes": 2680247,
    "generator": "blender/shell/desk.py",
    "kind": "shell",
    "settings": {
     "condition": "dusk",
+    "grain": "computed at render resolution as albedo, height and gloss maps, not carried by the mesh",
     "grain_mm": 0.16,
-    "height_m": 0.84,
-    "join_mm": 1.1,
+    "height_m": 0.92,
+    "join_mm": 2.2,
+    "marks": "three ring stains, nine scratches, up to two knots a board",
     "mesh": [
-     420,
-     840
+     300,
+     660
     ],
     "planks": 3,
     "res": [
      1100,
-     2200
+     2410
     ],
     "rig": "blender/rig/common.py",
-    "samples": 40,
+    "samples": 48,
     "seed": 20260903,
-    "tiles": "vertically, by construction",
+    "tiles": "vertically, by construction: every field is whole-numbered sinusoids",
     "width_m": 0.42
    }
   },
