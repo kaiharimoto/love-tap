@@ -26,7 +26,14 @@ class MomentsRegion extends StatefulWidget {
 }
 
 class _MomentsRegionState extends State<MomentsRegion> {
-  MomentsView _view = MomentsView.media;
+  /// Opens on whichever of the three views has anything in it.
+  ///
+  /// It opened on media unconditionally, and with the seed's photographs not yet rendered that
+  /// meant the one region whose entire job is to show that these are views over a single log
+  /// opened on an empty surface, against a year of history.
+  MomentsView? _picked;
+  MomentsView get _view => _picked ?? _firstWithSomething();
+  set _view(MomentsView v) => _picked = v;
   Person? _person;
   String? _feelingId;
   DateTimeRange? _range;
@@ -63,10 +70,21 @@ class _MomentsRegionState extends State<MomentsRegion> {
     );
   }
 
-  bool _keeps(Event e) {
+  MomentsView _firstWithSomething() {
+    final all = AppScope.of(context).spine.all;
+    for (final v in MomentsView.values) {
+      if (all.any((e) => _keepsIn(e, v))) return v;
+    }
+    return MomentsView.media;
+  }
+
+
+  bool _keeps(Event e) => _keepsIn(e, _view);
+
+  bool _keepsIn(Event e, MomentsView view) {
     const media = {'photo', 'video', 'voice_note'};
     const marks = {'milestone', 'date_event', 'ritual_kept', 'feeling_authored'};
-    final typeOk = switch (_view) {
+    final typeOk = switch (view) {
       MomentsView.media => media.contains(e.type),
       MomentsView.milestones => marks.contains(e.type),
       MomentsView.feelings => e.type == 'feeling' || e.type == 'reaction',

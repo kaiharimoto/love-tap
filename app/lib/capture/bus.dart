@@ -30,6 +30,10 @@ class CaptureBus {
   /// Chat: run a search and land on the first hit.
   static Future<void> Function(String query)? search;
 
+  /// Whether the setup list is the thing on screen. The artifact of it came back as text on
+  /// bare wood once, and nothing in the report said whether the sheet under it had drawn.
+  static bool setupShowing = false;
+
   /// Chat: move the thread by this many logical pixels, once, right now. One of these per frame
   /// is a scroll; a pointer drag down the middle of the desk is a long press on a note.
   static void Function(double dy)? scrollBy;

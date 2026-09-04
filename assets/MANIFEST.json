@@ -6131,7 +6131,7 @@
    }
   },
   "assets/paper/lined_04.webp": {
-   "bytes": 88736,
+   "bytes": 146108,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -6148,10 +6148,10 @@
      "sheen": 0.22,
      "tooth": 1.05
     },
-    "px_per_mm": 10.48,
+    "px_per_mm": 8.57,
     "resolution": [
-     1574,
-     2200
+     1288,
+     1800
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -6218,7 +6218,7 @@
      "stock": "lined",
      "variant": 4
     },
-    "samples": 12,
+    "samples": 48,
     "seed": 3686989289,
     "sheet_mm": [
      148.0,

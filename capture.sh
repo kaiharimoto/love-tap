@@ -158,8 +158,19 @@ for s in 10_first_run 17_setup_pwa; do
 done
 
 # ---- the dusk crop: not an artifact, but what the material critic is handed beside the hero ------
+# A dusk build whose library has no dusk paper in it renders exactly like the day build, and the
+# crop taken from it came back byte-identical to 01_pulse.png — which is worse than not having one,
+# because it looks like evidence. The app says in its own report whether the dusk half is baked.
 if [ -n "$DUSK_PID" ] && [ -f evidence/scenes/dusk_pulse.json ]; then
-  run_scene dusk_pulse "http://127.0.0.1:$DUSK_PORT/"
+  if run_scene dusk_pulse "http://127.0.0.1:$DUSK_PORT/"; then
+    if ! python3 -c "
+import json,sys
+r=json.load(open('$LOG/dusk_pulse.report.json'))
+sys.exit(0 if r.get('has_dusk_paper') else 1)" 2>/dev/null; then
+      rm -f evidence/crops/dusk_pulse.png
+      note_missing "dusk_pulse" "the library has no dusk paper baked, so a dusk build renders as the day one"
+    fi
+  fi
 fi
 
 # ---- clips ---------------------------------------------------------------------------------------
@@ -230,6 +241,16 @@ if [ -f evidence/02_chat.png ]; then
   python3 tools/check/tears.py "$LOG/02_chat.report.json" --out "$LOG/tears.json" >/dev/null \
     || note_missing "02_chat.png" "$(python3 -c "import json;print(json.load(open('$LOG/tears.json')).get('why',''))" 2>/dev/null)"
 fi
+
+# What moved since the last capture, measured against evidence/.previous, and then this capture
+# becomes the baseline for the next one. The rotation has to happen here rather than by hand:
+# nothing rotated it for a long time, so every SSIM in DIFF.json was unreproducible from the
+# baseline that shipped beside it.
+python3 tools/check/diff.py --rotate || true
+
+# the frames are the negative of a clip and run to hundreds of megabytes a run; the mp4 and the
+# strip in evidence/crops are what anybody looks at, so the frames go once they are folded in
+[ "${KEEP_FRAMES:-no}" = "yes" ] || rm -rf evidence/frames
 
 python3 tools/capture/collect.py --stamp "$STAMP" --missing "$MISSING" --browser "$BROWSER"
 

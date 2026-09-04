@@ -93,6 +93,15 @@ class Stamped extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
         text.toUpperCase(),
+        // A stamp does not wrap. It was stamped in one go, and a tab reading "SETTING / S" down
+        // the bottom of a real phone is the letters running out of room, not a design.
+        maxLines: 1,
+        softWrap: false,
+        overflow: TextOverflow.visible,
+        textHeightBehavior: const TextHeightBehavior(
+          applyHeightToFirstAscent: false,
+          applyHeightToLastDescent: false,
+        ),
         style: Hands.stamp(
           size: size,
           colour: colour ?? (onDesk ? Pen.onWood : null),

@@ -163,6 +163,13 @@ class CaptureHooks {
       'me': scope.me.name,
       'masks_in_pool': lib?.tearMasks.length ?? 0,
       'writable_masks': lib?.writableTears.length ?? 0,
+      // What the app is lit by, and whether the library it is drawing from actually has that
+      // half baked. A dusk build with no dusk paper in it looks exactly like a day build, and
+      // the crop taken from it came out byte-identical to the day one.
+      'light': Flags.light,
+      'has_dusk_paper': lib?.hasDusk ?? false,
+      'paper_stocks': lib?.paper.length ?? 0,
+      'setup_showing': CaptureBus.setupShowing,
     };
   }
 

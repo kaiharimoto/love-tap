@@ -160,6 +160,7 @@ class _ShellState extends State<Shell> {
     final facts = _setupFacts(scope);
     final platform = scope.transport.role == TransportRole.host ? 'android' : 'pwa';
     final setup = _showSetup && !settled(stepsFor(platform), facts) ? facts : null;
+    if (Flags.capture) CaptureBus.setupShowing = setup != null;
     return Scaffold(
       backgroundColor: Flags.dusk ? DeskColour.dusk : DeskColour.day,
       body: Desk(
@@ -295,7 +296,15 @@ class _Tabs extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Stamped(labels[i], size: i == index ? 12 : 11, colour: i == index ? Pen.stamp : Pen.margin),
+                        // and the label shrinks to fit its card rather than wrapping: five
+                        // stamps across a 360-point screen leaves SETTINGS about a point short
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Stamped(labels[i],
+                              size: i == index ? 12 : 11,
+                              spacing: labels[i].length > 6 ? 1.0 : 1.6,
+                              colour: i == index ? Pen.stamp : Pen.margin),
+                        ),
                         if (i == 1 && waiting)
                           const Positioned(top: 0, right: 0, child: _TurnedCorner()),
                       ],

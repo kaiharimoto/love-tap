@@ -13,6 +13,7 @@ import '../material/hands.dart';
 import '../material/motion.dart';
 import '../material/objects.dart';
 import '../material/palette.dart';
+import '../material/slip.dart';
 import 'builtins.dart';
 import 'registry.dart';
 
@@ -194,12 +195,24 @@ class _Fan extends StatelessWidget {
     final members = registry.family(family);
     return GestureDetector(
       onTap: onDismiss,
-      child: ColoredBox(
-        color: Colors.black.withValues(alpha: 0.18),
+      child: DecoratedBox(
+        // A scrim at eighteen per cent is not a scrim: the family names landed straight on top of
+        // whatever region was underneath and read as printing over it rather than as being held
+        // in front of it. It goes deep toward the bottom, where the fan is, and stays light at
+        // the top so you can still see where you were.
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.0, 0.38, 1.0],
+            colors: [Color(0x2E120D08), Color(0x8A120D08), Color(0xD6120D08)],
+          ),
+        ),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              // the families, on a torn strip: a stamp belongs on paper, not on the wood
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: SingleChildScrollView(
@@ -211,9 +224,13 @@ class _Fan extends StatelessWidget {
                           padding: const EdgeInsets.all(4),
                           child: GestureDetector(
                             onTap: () => onFamily(f),
-                            child: Opacity(
-                              opacity: f == family ? 1.0 : 0.6,
-                              child: Stamped(f.label, size: f == family ? 13 : 11),
+                            child: Slip(
+                              id: 'family_${f.name}',
+                              stock: 'index',
+                              padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
+                              child: Stamped(f.label,
+                                  size: f == family ? 12 : 10.5,
+                                  colour: f == family ? Pen.stamp : Pen.margin),
                             ),
                           ),
                         ),
