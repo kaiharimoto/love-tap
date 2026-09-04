@@ -15,6 +15,7 @@ This writes the negative: seed/photos/<id>.exr, scene-linear and unclipped. Runn
 blender/photos/develop.py turns the negatives into the JPEGs the seed loader reads.
 """
 import argparse
+import inspect
 import json
 import math
 import os
@@ -257,6 +258,24 @@ BUILDERS = {
 TAKES_KIND = {"wall", "post", "ground", "pen", "bag"}
 
 
+def _fit_position(builder, at):
+    """`at` in the shape this builder asks for: two numbers, three, or none at all."""
+    if at is None:
+        return None
+    try:
+        default = inspect.signature(builder).parameters["at"].default
+    except (KeyError, ValueError, TypeError):
+        return at
+    if not isinstance(default, (tuple, list)):
+        return at
+    at = tuple(at)
+    if len(at) >= len(default):
+        # more than the builder's own default is not an error: a builder that can be told a height
+        # reads it defensively, and truncating here would quietly drop it
+        return at
+    return at + tuple(default[len(at):])
+
+
 def _cut_the_channel(recipe):
     """Where there is water, take the ground out from under it.
 
@@ -336,6 +355,15 @@ def build(recipe):
         for key, value in list(spec.items()):
             if isinstance(value, list):
                 spec[key] = tuple(value)
+        # A recipe says where a thing stands as two numbers, because almost everything in the kit
+        # stands on something. A few things hang in the air — a pressure gauge on a wall, a panel
+        # over a worktop — and take a height as well. Rather than every recipe having to know
+        # which is which, the height the builder itself defaults to is used when the recipe does
+        # not give one. Without this a gauge in a recipe was two numbers into a three-number slot,
+        # which is a ValueError a hundred and five photographs into a run.
+        spec["at"] = _fit_position(builder, spec.get("at"))
+        if spec["at"] is None:
+            del spec["at"]
         if "as_kind" in spec:
             spec["kind"] = spec.pop("as_kind")
         elif kind in TAKES_KIND and "kind" not in spec:
@@ -404,23 +432,41 @@ def main():
     ap.add_argument("--res", type=int, default=1200)
     ap.add_argument("--samples", type=int, default=48)
     ap.add_argument("--skip-existing", action="store_true")
+    ap.add_argument("--build-only", action="store_true",
+                    help="build every scene and render none of them, so a recipe that cannot be "
+                         "built is a minute rather than a hundred photographs into a run")
     ap.add_argument("--out", default=OUT)
+    ap.add_argument("--recipes", default=RECIPES,
+                    help="where the recipes are; the video shots are the same shape")
     args = ap.parse_args(argv)
 
     names = []
     if args.only:
         names = [args.only]
     elif args.all:
-        names = [os.path.splitext(f)[0] for f in sorted(os.listdir(RECIPES)) if f.endswith(".json")]
+        names = [os.path.splitext(f)[0] for f in sorted(os.listdir(args.recipes)) if f.endswith(".json")]
     if not names:
         raise SystemExit("still.py: pass --only <id> or --all")
     os.makedirs(args.out, exist_ok=True)
+    if args.build_only:
+        broken = []
+        for name in names:
+            with open(os.path.join(args.recipes, name + ".json"), encoding="utf-8") as f:
+                recipe = json.load(f)
+            recipe.setdefault("id", name)
+            try:
+                build(recipe)
+            except Exception as e:                       # noqa: BLE001 — any failure is the point
+                broken.append(f"{name}: {type(e).__name__}: {e}")
+                print(f"still: {name} CANNOT BE BUILT — {type(e).__name__}: {e}", flush=True)
+        print(f"still: {len(names) - len(broken)} of {len(names)} scenes build", flush=True)
+        raise SystemExit(1 if broken else 0)
     for name in names:
         path = os.path.join(args.out, name + ".exr")
         if args.skip_existing and os.path.exists(path):
             print(f"still: {name} already rendered")
             continue
-        with open(os.path.join(RECIPES, name + ".json"), encoding="utf-8") as f:
+        with open(os.path.join(args.recipes, name + ".json"), encoding="utf-8") as f:
             recipe = json.load(f)
         recipe.setdefault("id", name)
         import time

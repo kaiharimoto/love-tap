@@ -42,6 +42,16 @@ def builder_table():
             re.findall(r'"([a-z_0-9]+)":\s*(kit|world)\.([a-z_0-9]+)', block.group(1))}
 
 
+def _default_of(node, name):
+    """The default value the source gives one argument, as an AST node, or None."""
+    args = [a.arg for a in node.args.args]
+    if name not in args:
+        return None
+    i = args.index(name)
+    pad = len(args) - len(node.args.defaults)
+    return node.args.defaults[i - pad] if i >= pad else None
+
+
 def signatures():
     out = {}
     for mod in ("kit", "world"):
@@ -49,7 +59,11 @@ def signatures():
         for node in tree.body:
             if isinstance(node, ast.FunctionDef):
                 names = [a.arg for a in node.args.args] + [a.arg for a in node.args.kwonlyargs]
-                out[(mod, node.name)] = (set(names), node.args.kwarg is not None)
+                d = _default_of(node, "at")
+                # how many numbers this builder's own default says a position is: two for a thing
+                # standing on something, three for a thing hanging in the air
+                arity = len(d.elts) if isinstance(d, (ast.Tuple, ast.List)) else None
+                out[(mod, node.name)] = (set(names), node.args.kwarg is not None, arity)
     return out
 
 
@@ -78,7 +92,7 @@ def main(argv=None):
                     problems.append({"recipe": name, "kind": kind,
                                      "why": "nothing in the kit is called this"})
                     continue
-                args, takes_kwargs = sigs.get(where, (set(), False))
+                args, takes_kwargs, _ = sigs.get(where, (set(), False, None))
                 if not args and not takes_kwargs:
                     problems.append({"recipe": name, "kind": kind,
                                      "why": f"still.py maps it to {where[0]}.{where[1]}, "

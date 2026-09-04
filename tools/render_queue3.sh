@@ -13,6 +13,10 @@ say() { echo "[$(date +%H:%M:%S)] $*"; }
 
 say "checking every recipe can be built before spending four hours finding out"
 python3 tools/check/recipes.py || { say "the recipes do not build; stopping"; exit 1; }
+bash blender/run.sh blender/photos/still.py -- --all --build-only 2>&1 \
+    | grep -E "CANNOT|scenes build" || { say "a photograph's scene will not build; stopping"; exit 1; }
+bash blender/run.sh blender/photos/still.py -- --all --build-only --recipes blender/videos/shots \
+    2>&1 | grep -E "CANNOT|scenes build" || { say "a video's scene will not build; stopping"; exit 1; }
 
 say "1/4 the photographs — 115, at a thousand pixels"
 bash blender/run.sh blender/photos/still.py -- --all --res 1000 --samples 28 --skip-existing \
