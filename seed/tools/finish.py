@@ -41,6 +41,10 @@ SAID = {"message", "photo", "video", "voice_note", "feeling", "ping", "reaction"
 # app is actually looking at; further back the phone only reports when something changed
 DENSE_FROM = dt.date(2026, 8, 25)
 
+# A phone reports all day, but the seed stops at the frozen now: nothing may be dated after the
+# moment the app is opened, or the history contains its own future.
+FROZEN_NOW = dt.datetime.fromisoformat("2026-09-03T18:40:00+01:00")
+
 
 def load(path):
     rows = []
@@ -249,7 +253,8 @@ def main():
 
         # sorted by the actual instant, not the string: the clocks change inside March and
         # October and "+00:00" sorts before "+01:00" whatever the hour says
-        merged = sorted(rows + marks + passive, key=lambda r: (when(r), r["key"]))
+        merged = [r for r in rows + marks + passive if when(r) <= FROZEN_NOW]
+        merged.sort(key=lambda r: (when(r), r["key"]))
         total_read += len(marks)
         total_passive += len(passive)
         print(f"{os.path.basename(path)}: +{len(marks)} read markers, +{len(passive)} passive")

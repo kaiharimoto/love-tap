@@ -82,16 +82,18 @@ class _TheirSheet extends StatelessWidget {
             runSpacing: 8,
             children: [
               _Fact('mood', state.mood),
-              _Fact('here', state.availability),
-              _Fact('place', state.place),
-              _Fact('need', '${state.need}/4'),
-              _Fact('energy', '${state.energy}/4'),
-              if (state.battery != null) _Fact('battery', '${state.battery}%${state.charging ? ' on charge' : ''}'),
-              if (state.lastActiveMinutes != null) _Fact('last up', '${state.lastActiveMinutes}m ago'),
+              _Fact('here', _words(state.availability)),
+              _Fact('place', _words(state.place)),
+              // never a score out of anything: a dial is how much, said in words
+              _Fact('needs', _dial(state.need)),
+              _Fact('has left', _dial(state.energy)),
+              if (state.battery != null)
+                _Fact('battery', '${state.battery}%${state.charging ? ' on charge' : ''}'),
+              if (state.lastActiveMinutes != null) _Fact('last up', _ago(state.lastActiveMinutes!)),
               if (state.localHour != null) _Fact('their clock', '${state.localHour}:00'),
-              if (state.ringer != null) _Fact('ringer', state.ringer),
-              if (state.moving != null) _Fact('moving', state.moving),
-              if (state.network != null) _Fact('signal', state.network),
+              if (state.ringer != null) _Fact('ringer', _words(state.ringer)),
+              if (state.moving != null) _Fact('moving', _words(state.moving)),
+              if (state.network != null) _Fact('signal', _words(state.network)),
               if (state.atHome != null) _Fact('at home', state.atHome! ? 'yes' : 'no'),
             ],
           ),
@@ -99,6 +101,29 @@ class _TheirSheet extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Nothing on this screen is stored the way it is read. `heads_down` is a key; "heads down" is
+/// what one person says about another.
+String? _words(String? key) => key?.replaceAll('_', ' ');
+
+/// A need or an energy is how much, and how much is a word. Four out of four is a score, and a
+/// score is a thing to be measured against.
+String _dial(int level) => switch (level) {
+      <= 0 => 'nothing',
+      1 => 'a little',
+      2 => 'some',
+      3 => 'a lot',
+      _ => 'everything',
+    };
+
+String _ago(int minutes) {
+  if (minutes < 2) return 'just now';
+  if (minutes < 60) return '$minutes minutes ago';
+  final hours = minutes ~/ 60;
+  if (hours < 24) return hours == 1 ? 'an hour ago' : '$hours hours ago';
+  final days = hours ~/ 24;
+  return days == 1 ? 'yesterday' : '$days days ago';
 }
 
 class _Fact extends StatelessWidget {
