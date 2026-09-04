@@ -1142,6 +1142,40 @@
     "samples": 40
    }
   },
+  "assets/objects/obj_knot.png": {
+   "bytes": 203698,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_knot",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_knot_shadow.png": {
+   "bytes": 155137,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_knot",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
   "assets/objects/obj_plane.png": {
    "bytes": 457873,
    "generator": "blender/objects/objects.py",
@@ -1252,6 +1286,74 @@
     "frame_mm": 60,
     "light": "day",
     "object": "obj_ribbon",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_ribbon_shadow_dusk.png": {
+   "bytes": 70852,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_ribbon",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_string_loop.png": {
+   "bytes": 187897,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_string_loop",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_string_loop_shadow.png": {
+   "bytes": 82335,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_string_loop",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_string_loop_shadow_dusk.png": {
+   "bytes": 66126,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_string_loop",
     "pass": "shadow",
     "resolution": [
      900,

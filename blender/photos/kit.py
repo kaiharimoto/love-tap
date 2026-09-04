@@ -138,7 +138,7 @@ def room(dark=(0.10, 0.09, 0.085), size=4.0):
     return obj
 
 
-def surface(kind="desk", size=1.2, z=0.0, wear=0.0006, seed=1):
+def surface(kind="desk", size=2.4, z=0.0, wear=0.0006, seed=1):
     rgb, rough = SURFACES.get(kind, SURFACES["desk"])
     bm = bmesh.new()
     bmesh.ops.create_grid(bm, x_segments=60, y_segments=60, size=size / 2)
@@ -193,14 +193,20 @@ def mug(at=(0, 0), r=0.041, h=0.095, colour=(0.86, 0.84, 0.79), rot=0.0, full=0.
     solid = body.modifiers.new("wall", "SOLIDIFY")
     solid.thickness = 0.004
     handle_bm = bmesh.new()
-    bmesh.ops.create_circle(handle_bm, cap_ends=False, segments=28, radius=r * 0.62)
-    bmesh.ops.spin(handle_bm, geom=list(handle_bm.verts) + list(handle_bm.edges),
-                   axis=(0, 0, 1), cent=(r * 0.62, 0, 0), angle=math.radians(360), steps=20,
-                   use_merge=True)
+    bmesh.ops.create_cone(handle_bm, cap_ends=True, cap_tris=False, segments=18,
+                          radius1=0.0045, radius2=0.0045, depth=0.001)
     handle = link(handle_bm, "handle", glazed("mug", colour))
-    handle.rotation_euler = (math.radians(90), 0, 0)
-    handle.location = (at[0] + r * 1.02, at[1], h * 0.56)
-    handle.scale = (1.0, 1.0, 0.42)
+    handle.location = (at[0] + r * 0.98, at[1], h * 0.56)
+    handle.rotation_euler = (0, 0, math.radians(rot))
+    # a mug handle is a piece of the same clay bent round: a torus, flattened, standing off the side
+    screw = handle.modifiers.new("bend", "SCREW")
+    screw.axis = "Z"
+    screw.angle = math.radians(340)
+    screw.steps = 32
+    screw.render_steps = 32
+    screw.screw_offset = 0.0
+    screw.use_merge_vertices = True
+    handle.scale = (1.0, 0.55, 1.0)
     made = [body, handle]
     if full > 0:
         bm2 = bmesh.new()
