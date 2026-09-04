@@ -6,43 +6,43 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8799/",
+ "url": "http://127.0.0.1:8912/",
  "steps": [
   {
    "do": "goTo",
-   "ms": 2632
+   "ms": 4453
   },
   {
    "do": "wait",
-   "ms": 2002
+   "ms": 2003
   },
   {
    "do": "frames",
-   "ms": 54683
+   "ms": 59763
   },
   {
    "do": "goTo",
-   "ms": 971
+   "ms": 1523
   },
   {
    "do": "wait",
-   "ms": 1303
+   "ms": 1304
   },
   {
    "do": "openCorner",
-   "ms": 1129
+   "ms": 1956
   },
   {
    "do": "frames",
-   "ms": 60117
+   "ms": 85669
   },
   {
    "do": "sendFeeling",
-   "ms": 1501
+   "ms": 5436
   },
   {
    "do": "frames",
-   "ms": 166111
+   "ms": 201472
   }
  ],
  "shots": [
@@ -66,7 +66,7 @@
   }
  ],
  "reports": [],
- "cold_ms": 13103,
+ "cold_ms": 12550,
  "problems": [],
  "ok": true
 }

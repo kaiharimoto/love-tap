@@ -10,39 +10,35 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3919
+   "ms": 4319
   },
   {
    "do": "wait",
-   "ms": 2068
+   "ms": 2004
   },
   {
    "do": "scrollTo",
-   "ms": 4301
+   "ms": 2580
   },
   {
    "do": "wait",
-   "ms": 1602
+   "ms": 1603
   },
   {
    "do": "frames",
-   "ms": 40721
+   "ms": 38889
   },
   {
    "do": "unfold",
-   "ms": 683
+   "ms": 497
   },
   {
    "do": "frames",
-   "ms": 184453
-  },
-  {
-   "do": "frames",
-   "ms": 74066
+   "ms": 247866
   },
   {
    "do": "report",
-   "ms": 446
+   "ms": 462
   }
  ],
  "shots": [
@@ -53,19 +49,10 @@
    "drive": null
   },
   {
-   "frames": 185,
+   "frames": 256,
    "dir": "evidence/frames/06_unfolding_b",
    "ms": 16,
    "drive": null
-  },
-  {
-   "frames": 55,
-   "dir": "evidence/frames/06_unfolding_b",
-   "ms": 16,
-   "drive": {
-    "kind": "scrollBy",
-    "per": 5
-   }
   }
  ],
  "reports": [
@@ -79,11 +66,11 @@
     "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_013",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_035",
-    "0001M4GW48FEW3M67XKAZT5051": "tear_055",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_018",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_040"
+    "0001M3F41R2APQC59QKBMZK4XF": "tear_005",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_026",
+    "0001M4GW48FEW3M67XKAZT5051": "tear_048",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_010",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_032"
    },
    "stocks": {
     "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
@@ -93,14 +80,14 @@
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
    },
    "scroll": {
-    "first": 8245,
-    "last": 8249,
-    "of": 8250
+    "first": 8369,
+    "last": 8373,
+    "of": 8374
    },
    "now": "2026-08-30T09:14:00.000Z",
-   "driven_ms": 4624,
+   "driven_ms": 4880,
    "seed": 20260903,
-   "events": 13814,
+   "events": 14049,
    "transport": "local",
    "link": "connecting",
    "me": "teo",
@@ -112,17 +99,17 @@
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 150,
-    "decoded": 37,
+    "length": 240,
+    "decoded": 17,
     "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 149
+    "playhead": 235,
+    "held_from": 223,
+    "held_to": 239
    },
    "at": "06_unfolding_b"
   }
  ],
- "cold_ms": 12840,
+ "cold_ms": 11677,
  "problems": [],
  "ok": true
 }
