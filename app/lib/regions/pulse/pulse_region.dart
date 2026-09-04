@@ -13,6 +13,7 @@ import '../../material/marks.dart';
 import '../../material/library.dart';
 import '../../material/objects.dart';
 import '../../material/paper.dart';
+import '../../material/motion.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../scope.dart';
@@ -34,11 +35,23 @@ class PulseRegion extends StatelessWidget {
     final since = now.subtract(const Duration(hours: 24)).millisecondsSinceEpoch;
     final today = feelingsSince(scope.spine.all, since);
 
+    // A fresh phone shows the empty surface until the first thing arrives, and then it shows
+    // their sheet — which for eight seconds of a capture is a whole screen replaced between two
+    // frames, and for a person is the page blinking. It turns.
     if (them.signals.isEmpty && today.isEmpty) {
-      return const EmptySurface(id: 'pulse', line: S.emptyPulse, aside: S.emptyPulseAside);
+      return const Turning(
+        child: EmptySurface(
+          key: ValueKey('pulse.empty'),
+          id: 'pulse',
+          line: S.emptyPulse,
+          aside: S.emptyPulseAside,
+        ),
+      );
     }
 
-    return ListView(
+    return Turning(
+      child: ListView(
+      key: const ValueKey('pulse.theirs'),
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 96),
       children: [
         _TheirSheet(partner: scope.partner, state: them, lib: lib),
@@ -47,6 +60,7 @@ class PulseRegion extends StatelessWidget {
         const SizedBox(height: 14),
         _MySheet(me: scope.me, state: me, lib: lib, onSet: (signal, value) => scope.emit('state_declared', {'signal': signal, 'value': value})),
       ],
+      ),
     );
   }
 }

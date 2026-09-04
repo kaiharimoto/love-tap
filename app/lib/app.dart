@@ -194,14 +194,7 @@ class _ShellState extends State<Shell> {
                       // brightness of the screen changes between two frames, which reads as a
                       // splice rather than as a hand moving between two piles of paper. The paper
                       // underneath does not move; what is on it is exchanged.
-                      AnimatedSwitcher(
-                        duration: Motion.turn,
-                        switchInCurve: Curves.easeOut,
-                        switchOutCurve: Curves.easeIn,
-                        layoutBuilder: (current, previous) => Stack(
-                          alignment: Alignment.topCenter,
-                          children: [...previous, ?current],
-                        ),
+                      Turning(
                         child: KeyedSubtree(
                           key: ValueKey(_index),
                           child: IndexedStack(
