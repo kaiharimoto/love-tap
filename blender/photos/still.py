@@ -61,7 +61,27 @@ def daylight_through_the_window(scene, sky=(0.62, 0.70, 0.86), strength=60.0):
     return lamp
 
 
-def light_for(scene, kind, indoors=False):
+def lamp_in_the_room(scene, energy=18.0, colour=(1.0, 0.80, 0.55), at=(0.40, 0.16, 0.30)):
+    """A lamp that is in the room rather than down the road.
+
+    night_lamp is a streetlamp: a point source at (-4.5, 9, 5.5) with sixty watts in it, which is
+    right for a towpath and useless for a kitchen table, because the room has walls and the lamp
+    is outside them. Eighteen of the hundred and fifteen photographs are night scenes and every
+    one of them came back with nothing in it. A kitchen at night is not dark; it is lit by
+    whatever happens to be on.
+    """
+    data = bpy.data.lights.new("room_lamp", "AREA")
+    data.energy = energy
+    data.color = colour
+    data.size = 0.11
+    lamp = bpy.data.objects.new("room_lamp", data)
+    scene.collection.objects.link(lamp)
+    lamp.location = at
+    common._aim(lamp, (-at[0], -at[1], -at[2] * 0.7))
+    return lamp
+
+
+def light_for(scene, kind, indoors=False, enclosed=False):
     """The conditions a phone photograph is actually taken in, all off the one rig.
 
     Every daylight condition is the shared rig in blender/rig/common.py with its energy and its
@@ -73,7 +93,7 @@ def light_for(scene, kind, indoors=False):
     """
     if kind == "window_left":
         sun, world_ = common.add_daylight(scene)
-        if indoors:
+        if enclosed:
             daylight_through_the_window(scene, strength=62.0)
         return sun, world_
     if kind == "overcast":
@@ -81,14 +101,14 @@ def light_for(scene, kind, indoors=False):
         sun.data.energy *= 0.42
         sun.data.angle = math.radians(24)          # a big soft source: cloud, not sun
         world_.node_tree.nodes["Background"].inputs["Strength"].default_value = 1.6
-        if indoors:
+        if enclosed:
             daylight_through_the_window(scene, sky=(0.74, 0.77, 0.82), strength=78.0)
         return sun, world_
     if kind == "hard_sun":
         sun, world_ = common.add_daylight(scene)
         sun.data.energy *= 1.7
         sun.data.angle = math.radians(0.53)        # the sun's actual angular size
-        if indoors:
+        if enclosed:
             daylight_through_the_window(scene, strength=48.0)
         return sun, world_
     if kind == "low_sun":
@@ -96,7 +116,7 @@ def light_for(scene, kind, indoors=False):
         sun.data.energy *= 1.25
         sun.data.color = (1.0, 0.78, 0.52)
         sun.data.angle = math.radians(0.6)
-        if indoors:
+        if enclosed:
             daylight_through_the_window(scene, sky=(0.86, 0.66, 0.44), strength=44.0)
         return sun, world_
     if kind == "fog_dawn":
@@ -105,7 +125,7 @@ def light_for(scene, kind, indoors=False):
         sun.data.angle = math.radians(30)
         world_.node_tree.nodes["Background"].inputs["Strength"].default_value = 2.4
         world.fog(density=0.030, colour=(0.60, 0.62, 0.65))
-        if indoors:
+        if enclosed:
             daylight_through_the_window(scene, sky=(0.72, 0.74, 0.78), strength=40.0)
         return sun, world_
     if kind == "kitchen_bulb":
@@ -133,11 +153,21 @@ def light_for(scene, kind, indoors=False):
         # a town at night: no key light at all, only what the sky and the streetlights leave
         w = common._world(scene, (0.030, 0.034, 0.048), 0.30)
         if indoors:
-            # the window is still there; what is behind it is a street
-            daylight_through_the_window(scene, sky=(0.42, 0.40, 0.52), strength=2.6)
+            # Indoors at night the sky leaves nothing at all, and a photograph of a kitchen at
+            # night is not a photograph of nothing: it is whatever was on. One lamp, low and
+            # warm, and the street outside the window.
+            lamp_in_the_room(scene, energy=2.6, colour=(1.0, 0.83, 0.62))
+            if enclosed:
+                daylight_through_the_window(scene, sky=(0.42, 0.40, 0.52), strength=1.8)
         return w, None
     if kind == "night_lamp":
         w = common._world(scene, (0.020, 0.024, 0.038), 0.16)
+        if indoors:
+            # the lamp the sentence means is the one in the room, not the one down the road
+            lamp = lamp_in_the_room(scene, energy=4.5)
+            if enclosed:
+                daylight_through_the_window(scene, sky=(0.46, 0.40, 0.44), strength=2.2)
+            return w, lamp
         data = bpy.data.lights.new("streetlamp", "POINT")
         data.energy = 60.0
         data.color = (1.0, 0.70, 0.38)
@@ -380,7 +410,8 @@ def build(recipe):
                  distance=cam.get("distance", 0.30),
                  lean_deg=cam.get("lean_deg", 0.0),
                  mm=cam.get("mm", 26.0))
-    light_for(scene, recipe.get("light", "window_left"), indoors=bool(indoors))
+    light_for(scene, recipe.get("light", "window_left"),
+              indoors=mode != "outdoor", enclosed=bool(indoors))
     if mode == "outdoor" and recipe.get("sky", True) and recipe.get("light") not in ("night",
                                                                                      "night_lamp"):
         world.sky(scene, turbidity=6.0 if recipe.get("light") == "overcast" else 3.0,
