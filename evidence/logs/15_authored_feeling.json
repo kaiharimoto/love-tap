@@ -1,0 +1,35 @@
+{
+ "scene": "15_authored_feeling",
+ "browser": "webkit",
+ "viewport": {
+  "width": 360,
+  "height": 780,
+  "dpr": 3
+ },
+ "url": "http://127.0.0.1:8799/",
+ "steps": [
+  {
+   "do": "goTo",
+   "ms": 2788
+  },
+  {
+   "do": "wait",
+   "ms": 1905
+  },
+  {
+   "do": "frames",
+   "ms": 121776
+  }
+ ],
+ "shots": [
+  {
+   "frames": 260,
+   "dir": "evidence/frames/15_authored_feeling",
+   "ms": 16
+  }
+ ],
+ "reports": [],
+ "cold_ms": 14546,
+ "problems": [],
+ "ok": true
+}

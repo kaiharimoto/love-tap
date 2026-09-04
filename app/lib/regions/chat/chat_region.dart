@@ -62,13 +62,15 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   void _offerHandles() {
     CaptureBus.scrollTo = _scrollToAnchor;
     CaptureBus.openSender = (open) => setState(() => _attaching = open);
-    // an event id, or a type ('photo', 'video') meaning the most recent one of that kind
+    // an event id, or a type ('photo', 'video') meaning one from the middle of that kind
     CaptureBus.openViewer = (idOrType) async {
       final items = AppScope.of(context).thread.items;
       var it = items.where((i) => i.id == idOrType).firstOrNull;
       if (it == null) {
         final ofType = items.where((i) => i.type == idOrType).toList();
-        if (ofType.isEmpty) return;
+        // Finding nothing is not the same as succeeding. A handle that returns quietly here is how
+        // a capture of the media viewer becomes a second capture of the thread behind it.
+        if (ofType.isEmpty) throw StateError('there is no $idOrType in the thread to open');
         it = ofType[ofType.length ~/ 2];
         await _scrollToAnchor(it.id);
       }

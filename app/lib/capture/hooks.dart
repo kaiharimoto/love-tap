@@ -81,7 +81,11 @@ class CaptureHooks {
   Future<String> openViewer(String eventId) async {
     final f = CaptureBus.openViewer;
     if (f == null) return 'chat is not on screen';
-    await f(eventId);
+    try {
+      await f(eventId);
+    } on StateError catch (e) {
+      return e.message;
+    }
     await _settle();
     return 'ok';
   }
