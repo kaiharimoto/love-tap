@@ -20,6 +20,10 @@ class Pen {
 
   /// A pencil margin note.
   static const margin = Color(0xFF6D6D70);
+
+  /// Stamp ink is made for paper, and on the desk it disappears. This is the same stamp in the
+  /// chalky tone wood takes, for the few headings that sit straight on the wood.
+  static const onWood = Color(0xFFBFB2A0);
 }
 
 class Accent {

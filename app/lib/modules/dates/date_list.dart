@@ -70,7 +70,7 @@ class _Header extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(12, 10, 12, 4),
         child: Row(
           children: [
-            Stamped(label, size: 11),
+            Stamped.onDesk(label, size: 11),
             const Spacer(),
             if (onAdd != null)
               GestureDetector(onTap: onAdd, child: Text('add one', style: Hands.margin(size: 14))),

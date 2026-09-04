@@ -191,13 +191,22 @@ class _Chip extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        onTap: onTap,
-        child: Container(
-          margin: const EdgeInsets.only(right: 6),
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          color: on ? const Color(0xFFF3E08A) : const Color(0x22F6F1E6),
-          child: Text(label, style: Hands.margin(size: 13).copyWith(color: on ? Pen.stamp : Pen.margin)),
+  Widget build(BuildContext context) => Padding(
+        // a filter is a tab on a sticky note: the one you are on is stuck down, the rest are
+        // half-lifted and paler
+        padding: EdgeInsets.only(right: 6, top: on ? 0 : 4, bottom: on ? 4 : 0),
+        child: Opacity(
+          opacity: on ? 1.0 : 0.72,
+          child: Slip(
+            id: 'moments.$label',
+            row: label.length,
+            stock: on ? 'sticky_yellow' : 'index',
+            torn: false,
+            padding: const EdgeInsets.fromLTRB(11, 5, 11, 6),
+            onTap: onTap,
+            child: Text(label,
+                style: Hands.margin(size: 13).copyWith(color: on ? Pen.stamp : Pen.margin)),
+          ),
         ),
       );
 }
@@ -218,10 +227,16 @@ class _Gallery extends StatelessWidget {
         final e = media[i];
         final hash = (e.payload['poster_blob'] ?? e.payload['blob']) as String;
         if (e.type == 'voice_note') {
-          return Container(
-            color: const Color(0xFFF1ECDF),
-            alignment: Alignment.center,
-            child: Text('${((e.payload['duration_ms'] as num) / 1000).round()}s', style: Hands.margin(size: 14)),
+          // a voice note in the gallery is the slip it was written on, with its length on it
+          return Slip(
+            id: e.id,
+            row: i,
+            stock: 'receipt',
+            padding: const EdgeInsets.all(8),
+            child: Center(
+              child: Text('${((e.payload['duration_ms'] as num) / 1000).round()}s',
+                  style: Hands.margin(size: 14)),
+            ),
           );
         }
         return BlobImage(hash: hash, fit: BoxFit.cover);

@@ -785,6 +785,57 @@
     "samples": 40
    }
   },
+  "assets/objects/obj_candle.png": {
+   "bytes": 212439,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_candle",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_candle_shadow.png": {
+   "bytes": 150045,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_candle",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_candle_shadow_dusk.png": {
+   "bytes": 85297,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_candle",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
   "assets/objects/obj_confetti.png": {
    "bytes": 192692,
    "generator": "blender/objects/objects.py",
@@ -1193,6 +1244,57 @@
     "samples": 28
    }
   },
+  "assets/objects/obj_mug.png": {
+   "bytes": 252591,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_mug",
+    "pass": "object",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_mug_shadow.png": {
+   "bytes": 153039,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_mug",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_mug_shadow_dusk.png": {
+   "bytes": 100847,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_mug",
+    "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
   "assets/objects/obj_plane.png": {
    "bytes": 457873,
    "generator": "blender/objects/objects.py",
@@ -1372,6 +1474,23 @@
     "light": "dusk",
     "object": "obj_rubber_band",
     "pass": "shadow",
+    "resolution": [
+     900,
+     900
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28
+   }
+  },
+  "assets/objects/obj_snapped_pencil.png": {
+   "bytes": 171695,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_snapped_pencil",
+    "pass": "object",
     "resolution": [
      900,
      900

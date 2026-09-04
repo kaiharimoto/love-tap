@@ -83,7 +83,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
     return ListView(
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 96),
       children: [
-        const Stamped('the two phones', size: 11),
+        const Stamped.onDesk('the two phones', size: 11),
         const SizedBox(height: 6),
         _Pairing(
           transport: t,
@@ -111,7 +111,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
           },
         ),
         const SizedBox(height: 22),
-        const Stamped('what may interrupt', size: 11),
+        const Stamped.onDesk('what may interrupt', size: 11),
         const SizedBox(height: 6),
         if (!scope.ambient.allowed)
           Padding(
@@ -134,7 +134,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
           ),
         const SizedBox(height: 22),
         Row(children: [
-          const Stamped('feelings you made', size: 11),
+          const Stamped.onDesk('feelings you made', size: 11),
           const Spacer(),
           GestureDetector(
             onTap: () async {
@@ -177,7 +177,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
             ],
           ),
         const SizedBox(height: 22),
-        const Stamped('the two of you', size: 11),
+        const Stamped.onDesk('the two of you', size: 11),
         const SizedBox(height: 6),
         _Fact('this phone', '${scope.me.name} · ${t.role.name} · ${t.name}'),
         _Fact('their phone', scope.partner.name),

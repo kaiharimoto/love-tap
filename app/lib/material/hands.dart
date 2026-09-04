@@ -74,13 +74,29 @@ class Written extends StatelessWidget {
 
 /// A stamped label: tabs, dates, the furniture of the desk.
 class Stamped extends StatelessWidget {
-  const Stamped(this.text, {super.key, this.size = 12, this.colour, this.spacing = 1.6});
+  const Stamped(this.text, {super.key, this.size = 12, this.colour, this.spacing = 1.6})
+      : onDesk = false;
+
+  /// A heading stamped straight onto the desk rather than onto a piece of paper. The stamp ink is
+  /// dark because it is meant for paper; on the desk it disappears, so this is the same stamp in
+  /// the chalky tone the desk takes.
+  const Stamped.onDesk(this.text, {super.key, this.size = 12, this.spacing = 1.6})
+      : colour = null,
+        onDesk = true;
+
   final String text;
   final double size;
   final Color? colour;
   final double spacing;
+  final bool onDesk;
 
   @override
-  Widget build(BuildContext context) =>
-      Text(text.toUpperCase(), style: Hands.stamp(size: size, colour: colour, spacing: spacing));
+  Widget build(BuildContext context) => Text(
+        text.toUpperCase(),
+        style: Hands.stamp(
+          size: size,
+          colour: colour ?? (onDesk ? Pen.onWood : null),
+          spacing: spacing,
+        ),
+      );
 }
