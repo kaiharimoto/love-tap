@@ -9,7 +9,6 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/services.dart' show AssetBundle;
 
 import 'spine.dart';
-import 'ulid.dart';
 
 class SeedReport {
   SeedReport({required this.events, required this.blobs, required this.skipped, required this.anchors});

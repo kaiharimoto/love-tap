@@ -6,6 +6,14 @@
 typedef Report = Map<String, dynamic>;
 
 class CaptureBus {
+  /// Set by a test that wants the handles registered without a capture build.
+  ///
+  /// The handles are offered when `Flags.capture` is on, which is a compile-time define, which
+  /// means the only thing that has ever run them is capture.sh — and a handle that throws is then
+  /// found by a scene failing an hour into a run. `__deskStage` threw for exactly that long.
+  /// With this a test can ask for them and call every one.
+  static bool wanted = false;
+
   /// Which region is on screen, kept by the shell.
   static int regionIndex = -1;
 

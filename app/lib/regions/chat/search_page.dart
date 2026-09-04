@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 
 import '../../material/assignment.dart';
+import '../../material/desk.dart';
 import '../../material/hands.dart';
 import '../../material/library.dart';
 import '../../material/marks.dart';
@@ -23,14 +24,10 @@ class SearchPage extends StatefulWidget {
   const SearchPage({super.key, this.initialQuery = ''});
   final String initialQuery;
 
-  /// Opens the sheet over the desk and returns the id of the hit that was tapped, or null.
-  ///
-  /// The sheet is drawn over the thread rather than replacing it, because a search is something
-  /// you do while holding your place, and because the desk has to still be under it.
+  /// Opens the search on its own desk and returns the id of the hit that was tapped, or null.
   static Future<String?> open(BuildContext context, {String query = ''}) =>
       Navigator.of(context).push<String>(PageRouteBuilder<String>(
-        opaque: false,
-        barrierColor: const Color(0x66120D08),
+        opaque: true,
         transitionDuration: const Duration(milliseconds: 160),
         // Material, because there is no Scaffold on this route and a Text with no Material over
         // it anywhere is drawn by Flutter in red under a double yellow underline — a diagnostic,
@@ -107,8 +104,14 @@ class SearchPageState extends State<SearchPage> {
     final scope = AppScope.of(context);
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
     final width = MediaQuery.sizeOf(context).width;
-    return ColoredBox(
-      color: Colors.transparent,
+    // The desk this is on is this page's own desk, not the thread's showing through a scrim.
+    //
+    // It was opaque: false with a forty per cent barrier, on the reasoning that a search is
+    // something you do while holding your place. What that actually produced was every note of the
+    // conversation legible *between* the results — `end off.`, `Thu 3 Sep 16:55 sent`, `you the
+    // better one, which is` — a year of somebody else's sentences interleaved with the eight this
+    // page found. Holding your place is what the Navigator does; it does not need to be visible.
+    return Desk(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

@@ -61,7 +61,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _text.addListener(_onTextChanged);
-    if (Flags.capture) _offerHandles();
+    if (Flags.capture || CaptureBus.wanted) _offerHandles();
   }
 
   /// Capture mode: the same four things a thumb does in Chat, reachable from the harness.
@@ -131,7 +131,9 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       );
       await scope.spine.applyFromHost([
         Event(
-          id: 'stage_read_marker',
+          // a real id, because a spine row is keyed by one: 'stage_read_marker' is not a ULID and
+          // the store would not take it
+          id: UlidFactory().next(scope.clock.now()),
           seq: (seen.seq ?? 0) + 1,
           author: scope.partner,
           device: DeviceKind.android,

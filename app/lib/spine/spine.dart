@@ -13,6 +13,7 @@ import 'types.dart';
 import 'ulid.dart';
 
 export 'event.dart';
+export 'ulid.dart';
 export 'search.dart' show SearchHit;
 export 'store/store.dart' show SpineStore, StoredBlob;
 export 'types.dart';

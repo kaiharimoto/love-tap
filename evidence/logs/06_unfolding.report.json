@@ -1,6 +1,7 @@
 {
  "region": 1,
  "visible": [
+  "0001M3AY8G83A3FBSRB1Y7W78Q",
   "0001M3F41R2APQC59QKBMZK4XF",
   "0001M3Y4GR5ZE8WDQ00S3NX0KF",
   "0001M4GW48FEW3M67XKAZT5051",
@@ -8,13 +9,15 @@
   "0001M59VY0YA13H9M86HTA6XNP"
  ],
  "tears": {
-  "0001M3F41R2APQC59QKBMZK4XF": "tear_026",
-  "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_048",
-  "0001M4GW48FEW3M67XKAZT5051": "tear_010",
-  "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
-  "0001M59VY0YA13H9M86HTA6XNP": "tear_052"
+  "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
+  "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
+  "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
+  "0001M4GW48FEW3M67XKAZT5051": "tear_031",
+  "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
+  "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
  },
  "stocks": {
+  "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
   "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
   "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
   "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
@@ -22,14 +25,14 @@
   "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
  },
  "scroll": {
-  "first": 8370,
-  "last": 8374,
-  "of": 8375
+  "first": 8381,
+  "last": 8387,
+  "of": 8387
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 4560,
+ "driven_ms": 5264,
  "seed": 20260903,
- "events": 14050,
+ "events": 14062,
  "transport": "local",
  "link": "connecting",
  "me": "teo",
@@ -42,10 +45,10 @@
  "fold": {
   "sequence": "unfold_thirds",
   "length": 240,
-  "decoded": 17,
+  "decoded": 13,
   "decoding": 0,
-  "playhead": 235,
-  "held_from": 223,
+  "playhead": 239,
+  "held_from": 227,
   "held_to": 239
  },
  "at": "06_unfolding_b"
