@@ -47,6 +47,19 @@ wants() { [ -z "$ONLY" ] || [ "$ONLY" = "$1" ]; }
 # Three of the four anti-goals are things only a reader catches, and a broken glyph or a widened
 # push payload would be visible in the artifacts. Checking first means a failure reads as a
 # sentence here rather than as something odd in a picture.
+# A clip is three hundred full-resolution frames and there are five of them. A run that starts
+# with less than this free does not fail where it runs out — ffmpeg says "refused the frames",
+# the scenes say ENOSPC in a stack trace, and four artifacts come back missing for a reason that
+# has nothing to do with the app. Ask first.
+NEED_MB=6000
+FREE_MB="$(df -Pm . | awk 'NR==2 {print $4}')"
+if [ "${FREE_MB:-0}" -lt "$NEED_MB" ]; then
+  echo "capture.sh: ${FREE_MB}MB free and a full run needs about ${NEED_MB}MB." >&2
+  echo "  The frames are the bulk of it: five clips at three hundred 1080x2340 PNGs each." >&2
+  echo "  evidence/frames/ and the web builds under \$TMPDIR are safe to delete." >&2
+  exit 3
+fi
+
 echo "· reading every displayed string against docs/VOICE.md"
 python3 tools/lint/strings.py --out "$LOG/strings.json" || note_missing "voice" "a displayed string is against docs/VOICE.md"
 echo "· checking both hands still have all their ink"

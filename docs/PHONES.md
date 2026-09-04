@@ -135,3 +135,16 @@ So the probe was deleted rather than kept as a half-working capture path, and it
 emulator under instruction emulation (booted `adbd`, never the framework), a Linux desktop build
 (no GTK in the container), and the engine in a test harness (no material). None of them was faked
 from the PWA.
+
+### The eight gigabytes that could not boot
+
+The `android-34` system images are no longer in `toolchain/`. Three ways to a second screen have
+been tried and measured above, and the emulator's is the one that took a hundred and thirteen
+minutes to reach `adbd` and never reached the framework. What the images were still doing was
+occupying 8.2 GB of a container with 2.8 GB of writable space left — and that ran out mid-capture,
+which is how a whole evidence run came back with `ENOSPC: no space left on device` against every
+clip and four artifacts recorded missing for a reason that had nothing to do with the app.
+
+`./bootstrap.sh` puts them back. On a host with `/dev/kvm`, or an ARM64 host where the `arm64-v8a`
+image runs natively, that is the first thing to do; `capture.sh` already checks `adb shell true`
+and records 09 and 16 with their reason when it fails.

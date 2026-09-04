@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-04T17:19:40Z",
+ "captured_at": "2026-09-04T19:28:50Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -142,11 +142,11 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 14770,
+  "cold_ms": 14285,
   "steps": [
    {
     "do": "goTo",
-    "ms": 3176
+    "ms": 3877
    },
    {
     "do": "wait",
@@ -154,7 +154,7 @@
    },
    {
     "do": "scrollTo",
-    "ms": 2128
+    "ms": 2840
    },
    {
     "do": "wait",
@@ -162,7 +162,7 @@
    },
    {
     "do": "frames",
-    "ms": 349856
+    "ms": 365053
    }
   ]
  },
