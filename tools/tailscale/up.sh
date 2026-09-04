@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # tools/tailscale/up.sh — bring up the two nodes the reliability run needs.
 #
-#   TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh
+#   TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh     # with a key
+#   bash tools/tailscale/up.sh --login                     # without one: two URLs to click
 #   bash tools/tailscale/up.sh --down
 #
 # Two userspace tailscaled daemons, one per phone, each with its own state directory and its own
@@ -33,10 +34,12 @@ down() {
 }
 
 if [ "${1:-}" = "--down" ]; then down; exit 0; fi
+LOGIN="no"
+[ "${1:-}" = "--login" ] && LOGIN="yes"
 
 [ -x "$TAILSCALED" ] || { echo "up.sh: $TAILSCALED is not there; run ./bootstrap.sh" >&2; exit 2; }
 
-if [ -z "${TS_AUTHKEY:-}" ]; then
+if [ -z "${TS_AUTHKEY:-}" ] && [ "$LOGIN" = "no" ]; then
   echo "pending" > "$TS_DIR/AUTHKEY_STATUS"
   cat >&2 <<'MSG'
 up.sh: no TS_AUTHKEY in the environment.
@@ -46,13 +49,26 @@ up.sh: no TS_AUTHKEY in the environment.
   passing. Everything else — the protocol, the pairing, the fault runs — is exercised over the
   local transport and is unaffected.
 
-  To run it:  TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh
-  The key is read from the environment and is never written to disk.
+  Two ways to run it:
+
+    TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh
+
+      A key from the admin console — login.tailscale.com/admin/settings/keys, "Generate auth key".
+      Not from the Tailscale app: the app is a client and has no key generation in it. Tick
+      Reusable (there are two nodes), tick Ephemeral (they disappear when this container does),
+      and set the shortest expiry offered. The key is read from the environment here and is never
+      written to disk. Revoke it in the same place afterwards.
+
+    bash tools/tailscale/up.sh --login
+
+      No key at all. Each node prints a URL; open it, sign in, and it comes up. Two clicks instead
+      of a credential, and nothing to revoke afterwards.
 MSG
   exit 3
 fi
 
-echo "supplied" > "$TS_DIR/AUTHKEY_STATUS"
+if [ "$LOGIN" = "yes" ]; then echo "interactive" > "$TS_DIR/AUTHKEY_STATUS"
+else echo "supplied" > "$TS_DIR/AUTHKEY_STATUS"; fi
 down || true
 
 i=0
@@ -73,14 +89,24 @@ done
 
 sleep 2
 for n in "${NODES[@]}"; do
-  # --authkey comes from the environment on the command line of this process only
-  "$TAILSCALE" --socket="$TS_DIR/$n/tailscaled.sock" up \
-      --authkey="$TS_AUTHKEY" \
-      --hostname="lovetap-$n" \
-      --accept-routes=false \
-      --accept-dns=false \
-      >"$TS_DIR/$n/up.log" 2>&1 \
-    || { echo "up.sh: node $n would not come up; see $TS_DIR/$n/up.log" >&2; exit 4; }
+  if [ "$LOGIN" = "yes" ]; then
+    # No key anywhere. tailscale prints a URL; open it, sign in, and the node comes up. Two clicks
+    # instead of a credential, which is the better trade if you would rather not hand one over at
+    # all: nothing reusable ever exists, and there is nothing to revoke afterwards.
+    echo "· node $n wants approving; open this and sign in:"
+    "$TAILSCALE" --socket="$TS_DIR/$n/tailscaled.sock" up \
+        --hostname="lovetap-$n" --accept-routes=false --accept-dns=false --timeout=300s \
+      2>&1 | tee "$TS_DIR/$n/up.log" | grep -E "https://" || true
+  else
+    # --authkey comes from the environment, on the command line of this process only
+    "$TAILSCALE" --socket="$TS_DIR/$n/tailscaled.sock" up \
+        --authkey="$TS_AUTHKEY" \
+        --hostname="lovetap-$n" \
+        --accept-routes=false \
+        --accept-dns=false \
+        >"$TS_DIR/$n/up.log" 2>&1 \
+      || { echo "up.sh: node $n would not come up; see $TS_DIR/$n/up.log" >&2; exit 4; }
+  fi
   ip=$("$TAILSCALE" --socket="$TS_DIR/$n/tailscaled.sock" ip -4 | head -1)
   echo "$ip" > "$TS_DIR/$n/address"
   echo "node $n is up at $ip"
