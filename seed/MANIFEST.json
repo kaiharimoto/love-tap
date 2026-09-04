@@ -2,10 +2,11 @@
  "files": {
   "seed/voice/2025-09_walk_home_gap.ogg": {
    "arrivals": [],
-   "bytes": 137662,
+   "bytes": 174854,
    "from": "the setting written in index.2025-09.json",
    "generator": "tools/voice/say.py",
    "layers": [
+    "air",
     "gulls"
    ],
    "seconds": 52.0,
@@ -48,13 +49,11 @@
   },
   "seed/voice/2025-09_walk_home_toast.ogg": {
    "arrivals": [],
-   "bytes": 95313,
+   "bytes": 92836,
    "from": "the setting written in index.2025-09.json",
    "generator": "tools/voice/say.py",
    "layers": [
-    "air",
-    "traffic_building",
-    "wind"
+    "air"
    ],
    "seconds": 28.0,
    "stops_for": [],
@@ -98,13 +97,11 @@
   },
   "seed/voice/2025-10_teo_walk_oct3.ogg": {
    "arrivals": [],
-   "bytes": 131225,
+   "bytes": 131160,
    "from": "the setting written in index.2025-10.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
     "traffic_building",
     "wind",
     "footsteps on grit"
@@ -123,15 +120,11 @@
    "arrivals": [
     "bus"
    ],
-   "bytes": 174515,
+   "bytes": 174226,
    "from": "the setting written in index.2025-10.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
     "footsteps on grit"
    ],
    "seconds": 52.0,
@@ -145,13 +138,11 @@
     "drip",
     "drip"
    ],
-   "bytes": 72743,
+   "bytes": 72855,
    "from": "the setting written in index.2025-11.json",
    "generator": "tools/voice/say.py",
    "layers": [
-    "room",
-    "extractor",
-    "simmer"
+    "room"
    ],
    "seconds": 22.0,
    "stops_for": [],
@@ -166,13 +157,11 @@
     "knife",
     "knife"
    ],
-   "bytes": 115625,
+   "bytes": 115549,
    "from": "the setting written in index.2025-11.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "room",
-    "extractor",
-    "simmer",
     "extractor",
     "simmer"
    ],
@@ -184,16 +173,11 @@
   },
   "seed/voice/2025-11_teo_walk_fourth_morning.ogg": {
    "arrivals": [],
-   "bytes": 186261,
+   "bytes": 195832,
    "from": "the setting written in index.2025-11.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
     "traffic",
     "wind",
     "footsteps on grit"
@@ -210,15 +194,11 @@
    "arrivals": [
     "bus"
    ],
-   "bytes": 139861,
+   "bytes": 143671,
    "from": "the setting written in index.2025-11.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
     "rain_hood",
     "footsteps on wet"
    ],
@@ -270,15 +250,11 @@
     "spoon",
     "lid_rattle"
    ],
-   "bytes": 83550,
+   "bytes": 83652,
    "from": "the setting written in index.2025-12.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "room",
-    "extractor",
-    "simmer",
-    "extractor",
-    "simmer",
     "extractor",
     "simmer"
    ],
@@ -292,18 +268,11 @@
    "arrivals": [
     "church"
    ],
-   "bytes": 185084,
+   "bytes": 188128,
    "from": "the setting written in index.2025-12.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
     "footsteps on grit"
    ],
    "seconds": 57.0,
@@ -318,18 +287,11 @@
    "arrivals": [
     "lorry"
    ],
-   "bytes": 137454,
+   "bytes": 143609,
    "from": "the setting written in index.2025-12.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
     "footsteps on grit"
    ],
    "seconds": 44.0,
@@ -364,17 +326,11 @@
     "spoon",
     "lid"
    ],
-   "bytes": 78054,
+   "bytes": 79130,
    "from": "the setting written in index.2026-01.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "room",
-    "extractor",
-    "simmer",
-    "extractor",
-    "simmer",
-    "extractor",
-    "simmer",
     "simmer"
    ],
    "seconds": 24.0,
@@ -391,18 +347,11 @@
     "paper",
     "paper"
    ],
-   "bytes": 166022,
+   "bytes": 173947,
    "from": "the setting written in index.2026-01.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
     "footsteps on grit"
    ],
    "seconds": 52.0,
@@ -417,18 +366,11 @@
    "arrivals": [
     "bus"
    ],
-   "bytes": 130836,
+   "bytes": 139183,
    "from": "the setting written in index.2026-01.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
     "footsteps on wet"
    ],
    "seconds": 41.0,
@@ -444,18 +386,11 @@
     "paper",
     "paper"
    ],
-   "bytes": 94537,
+   "bytes": 97358,
    "from": "the setting written in index.2026-02.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "room",
-    "extractor",
-    "simmer",
-    "extractor",
-    "simmer",
-    "extractor",
-    "simmer",
-    "simmer",
     "fridge",
     "radiator"
    ],
@@ -469,18 +404,11 @@
    "arrivals": [
     "car"
    ],
-   "bytes": 164197,
+   "bytes": 175085,
    "from": "the setting written in index.2026-02.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
     "footsteps on slush"
    ],
    "seconds": 52.0,
@@ -496,18 +424,11 @@
    "arrivals": [
     "bus"
    ],
-   "bytes": 130863,
+   "bytes": 137077,
    "from": "the setting written in index.2026-02.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
     "footsteps on wet"
    ],
    "seconds": 41.0,
@@ -523,18 +444,11 @@
     "paper",
     "paper"
    ],
-   "bytes": 111583,
+   "bytes": 115386,
    "from": "the setting written in index.2026-02.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
     "gulls"
    ],
    "seconds": 34.0,
@@ -568,20 +482,11 @@
     "plate",
     "plate"
    ],
-   "bytes": 109718,
+   "bytes": 110541,
    "from": "the setting written in index.2026-03.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "room",
-    "extractor",
-    "simmer",
-    "extractor",
-    "simmer",
-    "extractor",
-    "simmer",
-    "simmer",
-    "fridge",
-    "radiator",
     "radiator"
    ],
    "seconds": 33.0,
@@ -594,19 +499,11 @@
    "arrivals": [
     "gate"
    ],
-   "bytes": 152070,
+   "bytes": 160780,
    "from": "the setting written in index.2026-03.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
     "gulls",
     "footsteps on grit"
    ],
@@ -622,20 +519,11 @@
    "arrivals": [
     "gate"
    ],
-   "bytes": 181534,
+   "bytes": 188486,
    "from": "the setting written in index.2026-03.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
-    "gulls",
     "footsteps on grit"
    ],
    "seconds": 58.0,
@@ -650,20 +538,11 @@
   },
   "seed/voice/2026-03_teo_walk_light.ogg": {
    "arrivals": [],
-   "bytes": 169566,
+   "bytes": 177182,
    "from": "the setting written in index.2026-03.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
-    "gulls",
     "traffic_building",
     "birds",
     "footsteps on grit"
@@ -680,21 +559,11 @@
     "paper",
     "paper"
    ],
-   "bytes": 104995,
+   "bytes": 103465,
    "from": "the setting written in index.2026-04.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "room",
-    "extractor",
-    "simmer",
-    "extractor",
-    "simmer",
-    "extractor",
-    "simmer",
-    "simmer",
-    "fridge",
-    "radiator",
-    "radiator",
     "radio"
    ],
    "seconds": 31.0,
@@ -708,23 +577,11 @@
     "reversing",
     "gate"
    ],
-   "bytes": 177257,
+   "bytes": 183027,
    "from": "the setting written in index.2026-04.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
-    "gulls",
-    "traffic_building",
-    "birds",
-    "birds",
     "wind"
    ],
    "seconds": 55.0,
@@ -738,22 +595,11 @@
   },
   "seed/voice/2026-04_teo_walk_sixdays.ogg": {
    "arrivals": [],
-   "bytes": 151298,
+   "bytes": 158211,
    "from": "the setting written in index.2026-04.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
-    "gulls",
-    "traffic_building",
-    "birds",
     "birds",
     "footsteps on grit"
    ],
@@ -771,24 +617,11 @@
     "paper",
     "paper"
    ],
-   "bytes": 126285,
+   "bytes": 125895,
    "from": "the setting written in index.2026-04.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
-    "gulls",
-    "traffic_building",
-    "birds",
-    "birds",
-    "wind",
     "rain_hood"
    ],
    "seconds": 38.0,
@@ -895,26 +728,11 @@
    "arrivals": [
     "lorry"
    ],
-   "bytes": 161992,
+   "bytes": 166631,
    "from": "the setting written in index.2026-05.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
-    "gulls",
-    "traffic_building",
-    "birds",
-    "birds",
-    "wind",
-    "rain_hood",
-    "birds",
     "wind",
     "footsteps on grit"
    ],
@@ -932,25 +750,11 @@
    "arrivals": [
     "car_door"
    ],
-   "bytes": 133396,
+   "bytes": 137768,
    "from": "the setting written in index.2026-05.json",
    "generator": "tools/voice/say.py",
    "layers": [
     "air",
-    "traffic_building",
-    "wind",
-    "traffic_building",
-    "wind",
-    "rain_hood",
-    "traffic",
-    "wind",
-    "gulls",
-    "gulls",
-    "traffic_building",
-    "birds",
-    "birds",
-    "wind",
-    "rain_hood",
     "birds"
    ],
    "seconds": 41.0,

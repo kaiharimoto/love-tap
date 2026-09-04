@@ -1,0 +1,69 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.0840618483996345,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-09_art_room_start",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04376541904589315
+  ],
+  "height": 0.28520909506868863,
+  "distance": 0.2662804651398989,
+  "lean_deg": -4.421110643244116,
+  "mm": 24.680911933017402
+ },
+ "handheld": 0.44790619435971735,
+ "quality": 89,
+ "objects": [
+  {
+   "kind": "board",
+   "at": [
+    0.0037106785640652895,
+    0.013783901124947939
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.15050301693259624,
+    0.0261592874380435
+   ],
+   "w": 0.1271683019257805,
+   "h": 0.24451681622250157,
+   "rot": 27.873617619472206
+  },
+  {
+   "kind": "tin",
+   "at": [
+    -0.26772190826842746,
+    0.004716475897153883
+   ],
+   "r": 0.07742795510549087,
+   "h": 0.07276874781681576,
+   "rot": 80.86963711647273,
+   "lid": "beside"
+  }
+ ],
+ "from_scene": "the same art room on the first morning back, chairs down, blinds up, one board already half covered in brown paper and a staple gun sitting on the trolley, three tall stools where there should be four, a note in someone else's handwriting taped where the fourth was, the sun coming in low from the left across the floor",
+ "not_built": []
+}

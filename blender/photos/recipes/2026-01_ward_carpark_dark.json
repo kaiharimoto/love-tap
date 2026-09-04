@@ -1,0 +1,81 @@
+{
+ "mode": "outdoor",
+ "ground": "wet_tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-01_ward_carpark_dark",
+ "by": "teo",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   -0.747909049313114,
+   8.735517442746207,
+   1.242760438597932
+  ],
+  "height": -0.19658113607582334,
+  "distance": 10.83919595165472,
+  "lean_deg": 10.612451768144169,
+  "mm": 28.232479334079002
+ },
+ "handheld": 0.39443140808987986,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "car",
+   "at": [
+    0.6129204055625395,
+    5.875961027802545
+   ],
+   "rot": 7.971030470327275,
+   "colour": [
+    0.0842159863700266,
+    0.0842159863700266,
+    0.0842159863700266
+   ]
+  },
+  {
+   "kind": "bays",
+   "at": [
+    0.27830089230489663,
+    8.378390112494793
+   ],
+   "rows": 2,
+   "cols": 6
+  },
+  {
+   "kind": "barrier",
+   "at": [
+    0.4278810564988229,
+    3.1070467230773997
+   ],
+   "angle": -0.8925008732736952
+  },
+  {
+   "kind": "trunk",
+   "at": [
+    -0.1321066815505585,
+    9.711472593870667
+   ],
+   "height": 5.1282660626775876,
+   "radius": 0.2957383772778972,
+   "lean": -0.030288179578036516
+  },
+  {
+   "kind": "wood",
+   "at": [
+    -2.1593815160036547,
+    10.064812856883972
+   ],
+   "count": 9,
+   "height": 12.219117865966666,
+   "radius": 0.28109625470716304
+  }
+ ],
+ "from_scene": "a hospital car park at eight on a january morning, still nearly night, wet tarmac holding long orange smears of the sodium lamps, four cars scattered across empty painted bays, a barrier arm down, a low black hill of trees against a barely lighter sky",
+ "not_built": []
+}

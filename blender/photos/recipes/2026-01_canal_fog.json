@@ -1,0 +1,51 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "fog": 0.034387391733697724,
+ "id": "2026-01_canal_fog",
+ "by": "noor",
+ "light": "fog_dawn",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   -0.5048029929672753,
+   9.553749563363152,
+   2.0478272852745456
+  ],
+  "height": -0.3036185244460311,
+  "distance": 10.91938060834381,
+  "lean_deg": 11.149447047788883,
+  "mm": 27.556601784609793
+ },
+ "handheld": 0.5912182696865889,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "water",
+   "at": [
+    1.4030934668232846,
+    7.14607857731111
+   ],
+   "w": 16.0,
+   "d": 11.0
+  },
+  {
+   "kind": "post",
+   "at": [
+    1.7275697059535027,
+    7.3527316723633644
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  }
+ ],
+ "from_scene": "a canal towpath in thick january fog, the water perfectly still and the same colour as the air, an iron mooring ring and a length of rusted chain in the near foreground, the far bank dissolving completely, one bare branch hanging in from the top edge",
+ "not_built": []
+}

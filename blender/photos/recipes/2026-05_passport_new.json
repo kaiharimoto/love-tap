@@ -1,0 +1,82 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.0840618483996345,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-05_passport_new",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04376541904589315
+  ],
+  "height": 0.28520909506868863,
+  "distance": 0.2662804651398989,
+  "lean_deg": -4.421110643244116,
+  "mm": 24.680911933017402
+ },
+ "handheld": 0.44790619435971735,
+ "quality": 80,
+ "objects": [
+  {
+   "kind": "card",
+   "at": [
+    -0.010120617481534372,
+    0.006129204055625396
+   ],
+   "w": 0.088,
+   "h": 0.125,
+   "rot": 23.66824289934287,
+   "colour": [
+    0.02,
+    0.028,
+    0.045
+   ],
+   "thick": 0.005
+  },
+  {
+   "kind": "envelope",
+   "at": [
+    0.21359450649824074,
+    0.085632836084399
+   ],
+   "w": 0.21980788028130901,
+   "h": 0.1612812463613596,
+   "rot": 15.94206094065455
+  },
+  {
+   "kind": "crumbs",
+   "at": [
+    -0.1962028165911262,
+    0.13290665063309
+   ],
+   "spread": 0.02,
+   "count": 14
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.18617207649382142,
+    -0.09629842075915095
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  }
+ ],
+ "from_scene": "a new dark passport lying closed on a kitchen table with the torn courier envelope beneath it, a stiff card insert half slid out, the old passport with its corner clipped lying alongside at an angle, a bunch of keys and a cold mug at the top edge of the frame, grey even daylight from a window to the left",
+ "not_built": []
+}

@@ -1,0 +1,48 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.5391309141098182,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-01_boards_wall",
+ "by": "noor",
+ "light": "strip",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.01987938251846563
+  ],
+  "height": 0.390646020278127,
+  "distance": 0.3743296469852592,
+  "lean_deg": 2.9685428512522307,
+  "mm": 27.22298764061849
+ },
+ "handheld": 0.499758369774588,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "board",
+   "at": [
+    -0.010096059859345505,
+    -0.0029750029109123187
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  }
+ ],
+ "from_scene": "nine mounted exam boards pinned in a row along a school corridor wall, each a black-backed sheet of drawings and photographs and torn tissue, one of them hung noticeably straighter than the rest, a fire door and a strip light at the end of the corridor",
+ "not_built": []
+}

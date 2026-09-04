@@ -1,0 +1,72 @@
+{
+ "mode": "outdoor",
+ "ground": "leaf_litter",
+ "room": false,
+ "sky": true,
+ "id": "2026-05_bluebells_wood",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.5704908646235556,
+   7.840618483996345,
+   1.9662032142209933
+  ],
+  "height": -0.44874542958786834,
+  "distance": 8.735517442746207,
+  "lean_deg": -3.3158329824330863,
+  "mm": 26.017094319620885
+ },
+ "handheld": 0.44790619435971735,
+ "quality": 89,
+ "objects": [
+  {
+   "kind": "wood",
+   "at": [
+    0.9193806083438094,
+    10.78736176194722
+   ],
+   "count": 9,
+   "height": 12.219117865966666,
+   "radius": 0.28109625470716304
+  },
+  {
+   "kind": "undergrowth",
+   "at": [
+    0.0,
+    8.37106785640653
+   ],
+   "count": 4148,
+   "height": 0.2345778388146297,
+   "w": 26.0,
+   "d": 26.0
+  },
+  {
+   "kind": "trunk",
+   "at": [
+    2.0675851687421902,
+    9.283643169496468
+   ],
+   "height": 5.1282660626775876,
+   "radius": 0.2957383772778972,
+   "lean": -0.030288179578036516
+  },
+  {
+   "kind": "canopy",
+   "at": [
+    -2.8394299153839,
+    7.8678933184494415
+   ],
+   "radius": 2.9107499126726304,
+   "count": 360,
+   "centre_h": 7.24637880879091
+  }
+ ],
+ "from_scene": "the floor of a beech wood in early may seen low and along, bluebells running unbroken between the trunks and over a slight rise, one fallen branch lying across the drift, last year's leaf litter showing through in patches, a thin desire path worn to bare earth, green light coming down through new leaves",
+ "not_built": []
+}

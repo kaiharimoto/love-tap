@@ -1,0 +1,98 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.3877838271854441,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-02_marking_pile",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.019587198734456055
+  ],
+  "height": 0.4184134076325219,
+  "distance": 0.3564961759768086,
+  "lean_deg": 1.7834681916838733,
+  "mm": 27.068350972028206
+ },
+ "handheld": 0.35549335425125606,
+ "quality": 83,
+ "objects": [
+  {
+   "kind": "bag",
+   "at": [
+    -0.014395876773357696,
+    0.013765419045893148
+   ],
+   "w": 0.31139405282494115,
+   "d": 0.162140934461548,
+   "h": 0.31735786636898883,
+   "rot": 70.67208890806
+  },
+  {
+   "kind": "pen",
+   "at": [
+    0.1800229039697836,
+    -0.05651561405873082
+   ],
+   "as_kind": "pen",
+   "length": 0.1492009457396057,
+   "rot": 44.56773063294523
+  },
+  {
+   "kind": "book",
+   "at": [
+    0.08759727290349692,
+    0.14421726634143345
+   ],
+   "w": 0.19553749563363154,
+   "d": 0.30289860664614543,
+   "rot": -4.554277866690467,
+   "open_book": true
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -0.2572599703552913,
+    0.1093667837770121
+   ],
+   "count": 4,
+   "rot": 4.290442838937775
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.23073002267531223,
+    -0.1529007613008013
+   ],
+   "w": 0.20610163230236572,
+   "h": 0.23484271425626116,
+   "rot": 20.675851687421904
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.09633274567591822,
+    -0.18333193522974423
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  }
+ ],
+ "from_scene": "a kitchen table taken over by school work, two canvas bags upright and open, sketchbooks in leaning stacks with sugar paper edges sticking out, a mug used as a paperweight, a red pen lying across a mark sheet, a cold grey window behind and the chair pushed back",
+ "not_built": []
+}

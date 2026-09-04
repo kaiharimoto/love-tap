@@ -1,0 +1,83 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.5319163346911877,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-11_pen_ward_desk",
+ "by": "teo",
+ "light": "strip",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03906629166457492
+  ],
+  "height": 0.3078737543056891,
+  "distance": 0.2240286131891589,
+  "lean_deg": 5.3731262534584765,
+  "mm": 25.737144893174825
+ },
+ "handheld": 0.6663051576556395,
+ "quality": 80,
+ "objects": [
+  {
+   "kind": "pen",
+   "at": [
+    -0.009621891452803805,
+    0.0117682597335978
+   ],
+   "as_kind": "pen",
+   "length": 0.14384505752493704,
+   "rot": 84.0617748913102
+  },
+  {
+   "kind": "board",
+   "at": [
+    0.14819727416224365,
+    -0.057563252788131215
+   ],
+   "w": 0.3597297001345454,
+   "d": 0.26567345070459814,
+   "thick": 0.018612384412420226,
+   "rot": -9.357561543820761,
+   "scars": 12
+  },
+  {
+   "kind": "folded",
+   "at": [
+    -0.18692525341149152,
+    0.12130511576175879
+   ],
+   "w": 0.21,
+   "h": 0.297,
+   "folds": 1,
+   "rot": -6.4695043992302,
+   "printed": 1.0
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.03802571389275204,
+    -0.2531204274297424
+   ],
+   "r": 0.03997751278207946,
+   "h": 0.09674566926545362,
+   "rot": 353.4402375261367,
+   "full": 0.66
+  }
+ ],
+ "from_scene": "a single blue ballpoint pen with a shallow dent near its clip, lying on a laminated hospital desk beside a clipboard of printed charts and a plastic cup of cold tea, harsh overhead strip light, everything slightly too bright",
+ "not_built": [
+  "clip"
+ ]
+}

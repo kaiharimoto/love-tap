@@ -1,0 +1,77 @@
+{
+ "mode": "tabletop",
+ "surface": "melamine",
+ "surface_size": 1.0756272852060658,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-03_jar_of_yellow",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.021570116284974718
+  ],
+  "height": 0.3323680584797243,
+  "distance": 0.2737891818565569,
+  "lean_deg": 4.475711742158509,
+  "mm": 27.7109274516967
+ },
+ "handheld": 0.4937892556425504,
+ "quality": 86,
+ "objects": [
+  {
+   "kind": "jar",
+   "at": [
+    0.018582411746314805,
+    0.0037106785640652895
+   ],
+   "r": 0.04951546733411642,
+   "h": 0.11682598221638889,
+   "holds": 6
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.2419770780207619,
+    0.06947997345303443
+   ],
+   "w": 0.1988406675868,
+   "h": 0.1795175300738625,
+   "rot": 9.19380608343809
+  },
+  {
+   "kind": "folded",
+   "at": [
+    -0.011160060155273679,
+    0.17713300855473474
+   ],
+   "w": 0.19128266062677587,
+   "h": 0.30866824289934286,
+   "folds": 3,
+   "rot": -6.057635915607303,
+   "printed": 1.0
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -0.040377237087749075,
+    -0.13294442027230477
+   ],
+   "count": 8,
+   "rot": -2.0825020376386227
+  }
+ ],
+ "from_scene": "a bunch of yellow spring flowers crammed into a jam jar with the label half soaked off, standing on a windowsill in a north facing flat, the paper sleeve they came in folded flat under the jar, water clouded and a fallen petal beside it, cold flat daylight and the shape of a chimney stack beyond the glass",
+ "not_built": []
+}

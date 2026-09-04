@@ -1,0 +1,69 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.4711472593870667,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-01_flu_bedside",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.015604123226642303
+  ],
+  "height": 0.42882709522946577,
+  "distance": 0.2401672760549509,
+  "lean_deg": -6.743906972020227,
+  "mm": 24.809201461993105
+ },
+ "handheld": 0.23532767062243637,
+ "quality": 80,
+ "objects": [
+  {
+   "kind": "mug",
+   "at": [
+    0.018582411746314805,
+    0.0037106785640652895
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.2419770780207619,
+    0.06947997345303443
+   ],
+   "w": 0.2289345943194743,
+   "h": 0.2723799251758181,
+   "folds": 3,
+   "rot": -1.7850017465473904,
+   "printed": 1.0
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.19733213664909507,
+    0.08083458779558374
+   ],
+   "w": 0.1988406675868,
+   "h": 0.1795175300738625,
+   "rot": 9.19380608343809
+  }
+ ],
+ "from_scene": "a bedside table crowded with a fortnight of illness, two mugs with tea rings dried inside, a half-pressed blister pack, a glass of flat water, a thermometer on a folded paper, a lamp switched on in the afternoon, curtain edge and grey light behind",
+ "not_built": []
+}

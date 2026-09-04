@@ -1,0 +1,96 @@
+{
+ "mode": "outdoor",
+ "ground": "gravel",
+ "room": false,
+ "sky": true,
+ "id": "2026-03_blossom_canal",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.27973198388490683,
+   12.653112942036042,
+   1.758119833519751
+  ],
+  "height": 0.0761681281540798,
+  "distance": 12.984354650873435,
+  "lean_deg": 2.596107603926864,
+  "mm": 27.502670043301464
+ },
+ "handheld": 0.46008262968772073,
+ "quality": 88,
+ "objects": [
+  {
+   "kind": "limbs",
+   "at": [
+    0.5566017846097933,
+    10.067585168742191
+   ],
+   "count": 10,
+   "length": 2.0448931219371556
+  },
+  {
+   "kind": "trunk",
+   "at": [
+    1.283643169496469,
+    5.1605700846161
+   ],
+   "height": 8.89345943194743,
+   "radius": 0.179615760562618,
+   "lean": -0.00892500873273696
+  },
+  {
+   "kind": "canopy",
+   "at": [
+    -0.1321066815505585,
+    9.711472593870667
+   ],
+   "radius": 3.3612373867293135,
+   "count": 420,
+   "leaf": 0.055,
+   "colour": [
+    0.72,
+    0.68,
+    0.62
+   ],
+   "centre_h": 5.258431430924444
+  },
+  {
+   "kind": "water",
+   "at": [
+    -1.0796907580018273,
+    8.376541904589315
+   ],
+   "w": 16.0,
+   "d": 11.0
+  },
+  {
+   "kind": "railing",
+   "at": [
+    -0.747909049313114,
+    4.157011628497472
+   ],
+   "length": 7.594206094065455,
+   "height": 0.7987938251846562
+  },
+  {
+   "kind": "post",
+   "at": [
+    -1.3815970760137866,
+    10.698006252638287
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  }
+ ],
+ "from_scene": "a bare-limbed tree in full white blossom leaning over a canal towpath, still black water below holding an upside down copy of it, a low iron railing and a mooring ring, brick wall and gravel path in the foreground, thin bright overcast light with no shadows",
+ "not_built": [
+  "gravel"
+ ]
+}

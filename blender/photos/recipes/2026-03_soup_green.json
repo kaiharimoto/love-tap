@@ -1,0 +1,86 @@
+{
+ "mode": "tabletop",
+ "surface": "steel",
+ "surface_size": 1.33808406407704,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-03_soup_green",
+ "by": "teo",
+ "light": "night_lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04989569767248956
+  ],
+  "height": 0.3816342300327239,
+  "distance": 0.313404534488039,
+  "lean_deg": 5.032348785724377,
+  "mm": 27.880424472152725
+ },
+ "handheld": 0.45241446504968463,
+ "quality": 87,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    0.008557621129976458,
+    -0.018929532769226005
+   ],
+   "r": 0.12370791289097713,
+   "h": 0.058412991108194444,
+   "rot": 60.54812735358152
+  },
+  {
+   "kind": "pan",
+   "at": [
+    0.26772190826842746,
+    -0.00471647589715388
+   ],
+   "r": 0.09128266062677587,
+   "h": 0.1089345943194743
+  },
+  {
+   "kind": "spoon",
+   "at": [
+    0.09741952476387314,
+    0.20711849890293685
+   ],
+   "length": 0.23980788028130898,
+   "rot": -10.412510188193117
+  },
+  {
+   "kind": "folded",
+   "at": [
+    -0.2733262945800486,
+    0.08580687810247614
+   ],
+   "w": 0.22594206094065455,
+   "h": 0.27234922814808205,
+   "folds": 3,
+   "rot": 3.6775224333752377,
+   "printed": 1.0
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.040614133210372806,
+    -0.2307863329866481
+   ],
+   "w": 0.20610163230236572,
+   "h": 0.23484271425626116,
+   "rot": 20.675851687421904
+  }
+ ],
+ "from_scene": "a wide shallow bowl of pale green soup on a scratched steel kitchen bench, a heavy swirl of black pepper across the middle and a thread of oil at the rim, the enamel pan behind with its lid tipped against the wall tiles, a wooden spoon laid on a folded square of kitchen paper, one bare bulb overhead and a dark window beyond",
+ "not_built": []
+}

@@ -1,0 +1,58 @@
+{
+ "mode": "outdoor",
+ "ground": "grass",
+ "room": false,
+ "sky": true,
+ "id": "2026-02_hail_bench",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.18553392820326442,
+   12.067585168742191,
+   1.7709107923741172
+  ],
+  "height": -0.5678859830767801,
+  "distance": 9.867893318449442,
+  "lean_deg": 6.845890375482668,
+  "mm": 24.840618483996344
+ },
+ "handheld": 0.5908948333031301,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "bench",
+   "at": [
+    -1.0096059859345505,
+    3.989687245295172
+   ],
+   "length": 1.3224465609685778,
+   "rot": 23.66824289934287
+  },
+  {
+   "kind": "wood",
+   "at": [
+    2.3913091410981817,
+    6.481907377769844
+   ],
+   "count": 9,
+   "height": 12.219117865966666,
+   "radius": 0.28109625470716304
+  },
+  {
+   "kind": "flask",
+   "at": [
+    0.6129204055625395,
+    5.875961027802545
+   ],
+   "z": 0.47
+  }
+ ],
+ "from_scene": "a slatted wooden bench on high open ground with hailstones caught in the gaps between the slats, wet dark wood, a dented steel flask standing on one end, coarse winter grass bent flat around the legs, a reservoir and low cloud behind",
+ "not_built": []
+}

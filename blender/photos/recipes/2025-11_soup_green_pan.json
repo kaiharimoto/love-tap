@@ -1,0 +1,75 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.1307882661741475,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-11_soup_green_pan",
+ "by": "teo",
+ "light": "kitchen_bulb",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.033470939756018205
+  ],
+  "height": 0.4373054448970626,
+  "distance": 0.3362651666582997,
+  "lean_deg": -8.340199311089748,
+  "mm": 23.125894162161217
+ },
+ "handheld": 0.4675371367944041,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "pan",
+   "at": [
+    -0.012939008798460399,
+    -0.009621891452803805
+   ],
+   "r": 0.10488756391039734,
+   "h": 0.09349133853090724
+  },
+  {
+   "kind": "spoon",
+   "at": [
+    0.15044495788982312,
+    0.0364678161208046
+   ],
+   "length": 0.29854227500580816,
+   "rot": 41.27693511637291
+  },
+  {
+   "kind": "board",
+   "at": [
+    -0.03402289632656788,
+    0.22221997008081656
+   ],
+   "w": 0.3597297001345454,
+   "d": 0.26567345070459814,
+   "thick": 0.018612384412420226,
+   "rot": -9.357561543820761,
+   "scars": 12
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -0.11618937970962118,
+    -0.20871653714433053
+   ],
+   "count": 9,
+   "rot": -0.9237239057961908
+  }
+ ],
+ "from_scene": "a heavy enamel pan of thick green soup on a steel hob, a wooden spoon standing upright in it, a chopping board of stalks and a small pile of chopped green pushed to one side, one warm bulb overhead",
+ "not_built": []
+}

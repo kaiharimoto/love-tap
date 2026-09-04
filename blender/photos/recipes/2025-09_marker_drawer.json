@@ -1,0 +1,56 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.2802059163043673,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-09_marker_drawer",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.017060991201539602
+  ],
+  "height": 0.311890542735981,
+  "distance": 0.34707303893439123,
+  "lean_deg": -14.464124428260906,
+  "mm": 23.49138918681042
+ },
+ "handheld": 0.6059705422575187,
+ "quality": 88,
+ "objects": [
+  {
+   "kind": "pen",
+   "at": [
+    -0.005112436089602662,
+    0.0034913385309072384
+   ],
+   "as_kind": "pen",
+   "length": 0.13993242503363634,
+   "rot": 168.87458752610937
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.23857998563937952,
+    0.09979770241494083
+   ],
+   "w": 0.12873622853662248,
+   "h": 0.16652821974959567,
+   "rot": 20.75598554155041
+  }
+ ],
+ "from_scene": "an open shallow drawer full of felt-tip markers lying loose with their lids off, colours dulled and dried, a few lids alone at one end, a small handwritten note on lined paper on top of the pile with one word on it underlined twice",
+ "not_built": []
+}

@@ -1,0 +1,89 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.3649026900981718,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-02_boiler_gauge",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.033351133622009754
+  ],
+  "height": 0.3914521799107774,
+  "distance": 0.3761735831088872,
+  "lean_deg": 4.681804116557014,
+  "mm": 24.198399841807007
+ },
+ "handheld": 0.5544469267138266,
+ "quality": 87,
+ "objects": [
+  {
+   "kind": "gauge",
+   "at": [
+    0.011409817292471109,
+    -0.014395876773357696
+   ],
+   "needle_deg": -17.421955828426903
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.15900338872069783,
+    0.04558902785551502
+   ],
+   "r": 0.07740953688884923,
+   "h": 0.07959690304171904,
+   "rot": 86.8104264292083,
+   "lid": "beside"
+  },
+  {
+   "kind": "board",
+   "at": [
+    0.04273261215131056,
+    0.15980513324167545
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "cloth",
+   "at": [
+    -0.05716414335302692,
+    0.1151057747111445
+   ],
+   "w": 0.3782436539373178,
+   "d": 0.23711524225995292,
+   "rot": 4.817102538482986,
+   "on": 0.0227275697059535
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.047835653229086374,
+    -0.18367250374050453
+   ],
+   "r": 0.038980788028130896,
+   "h": 0.09351249854454384,
+   "rot": 323.4785484658909,
+   "full": 0.66
+  }
+ ],
+ "from_scene": "the pressure dial of a wall-mounted domestic boiler in close view, white face with a red needle sitting just past 1.2, a smear of thumbprint on the plastic cover, the grey filling loop and its lever below, a kitchen cupboard door and a tea towel at the edge of frame, hard phone-flash light",
+ "not_built": []
+}

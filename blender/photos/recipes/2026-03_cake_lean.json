@@ -1,0 +1,96 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.3877838271854441,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-03_cake_lean",
+ "by": "noor",
+ "light": "lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.019587198734456055
+  ],
+  "height": 0.4184134076325219,
+  "distance": 0.3564961759768086,
+  "lean_deg": 1.7834681916838733,
+  "mm": 27.068350972028206
+ },
+ "handheld": 0.35549335425125606,
+ "quality": 83,
+ "objects": [
+  {
+   "kind": "cake",
+   "at": [
+    -0.014395876773357696,
+    0.013765419045893148
+   ],
+   "r": 0.08433946659224721,
+   "layers": 3,
+   "lean": 10.067208890806
+  },
+  {
+   "kind": "plate",
+   "at": [
+    0.1800229039697836,
+    -0.05651561405873082
+   ],
+   "r": 0.12212732377122351,
+   "rot": 2.408551269241493
+  },
+  {
+   "kind": "crumbs",
+   "at": [
+    0.08759727290349692,
+    0.14421726634143345
+   ],
+   "spread": 0.06481907377769844,
+   "count": 88
+  },
+  {
+   "kind": "knife",
+   "at": [
+    -0.2572599703552913,
+    0.1093667837770121
+   ],
+   "length": 0.20553749563363152,
+   "rot": 47.82618282196364
+  },
+  {
+   "kind": "loaf",
+   "at": [
+    -0.23073002267531223,
+    -0.1529007613008013
+   ],
+   "length": 0.26773884755921,
+   "width": 0.12146078577311112,
+   "height": 0.09181892426488375,
+   "cut": 0.2080166289173492,
+   "rot": 28.40189147921145,
+   "flour": 0.34855910210981744
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.09633274567591822,
+    -0.18333193522974423
+   ],
+   "w": 0.20610163230236572,
+   "h": 0.23484271425626116,
+   "rot": 20.675851687421904
+  }
+ ],
+ "from_scene": "a three layer sponge cake on a chipped white plate on a small kitchen table, visibly leaning to one side, buttercream squeezing out between the top two layers, one stub of a birthday candle pushed in off centre with old wax down its side, crumbs and a bread knife on greaseproof paper beside it, warm lamp light from the left",
+ "not_built": []
+}

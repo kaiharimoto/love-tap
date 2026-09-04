@@ -1,0 +1,80 @@
+{
+ "mode": "outdoor",
+ "ground": "cobbles",
+ "room": false,
+ "sky": true,
+ "id": "2025-12_towpath_lights",
+ "by": "noor",
+ "light": "night_lamp",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.7313444064500534,
+   10.627720828714072,
+   2.0559853523509646
+  ],
+  "height": 0.25048072337538474,
+  "distance": 8.307882661741473,
+  "lean_deg": 2.082563853610921,
+  "mm": 29.31916334691188
+ },
+ "handheld": 0.508660104130061,
+ "quality": 84,
+ "objects": [
+  {
+   "kind": "limbs",
+   "at": [
+    -0.7668654134403994,
+    8.523700779636087
+   ],
+   "count": 9,
+   "length": 3.313469014091962
+  },
+  {
+   "kind": "trunk",
+   "at": [
+    2.890670625435612,
+    9.76901150498741
+   ],
+   "height": 6.04495376496809,
+   "radius": 0.16652821974959567,
+   "lean": 0.04151197108310081
+  },
+  {
+   "kind": "water",
+   "at": [
+    -0.09897041847816324,
+    5.70609912015396
+   ],
+   "w": 16.0,
+   "d": 11.0
+  },
+  {
+   "kind": "string_lights",
+   "at": [
+    -0.9621891452803806,
+    5.2797227266898075
+   ],
+   "count": 16
+  },
+  {
+   "kind": "post",
+   "at": [
+    -4.520038883831533,
+    8.08105621098292
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  }
+ ],
+ "from_scene": "a bare tree beside a canal lock at night, strings of small warm lights wound through its branches, black water below holding the reflection in broken lines, wet cobbles and an iron bollard in the foreground, no moon",
+ "not_built": [
+  "bollard",
+  "reflection"
+ ]
+}

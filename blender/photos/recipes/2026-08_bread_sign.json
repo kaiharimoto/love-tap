@@ -1,0 +1,77 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-08_bread_sign",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0.5704908646235556,
+   7.840618483996345,
+   1.9662032142209933
+  ],
+  "height": -0.44874542958786834,
+  "distance": 8.735517442746207,
+  "lean_deg": -3.3158329824330863,
+  "mm": 26.017094319620885
+ },
+ "handheld": 0.44790619435971735,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "car",
+   "at": [
+    -1.012061748153437,
+    4.786305354867222
+   ],
+   "rot": -1.4875014554561599,
+   "colour": [
+    0.25362339611425455,
+    0.25362339611425455,
+    0.25362339611425455
+   ]
+  },
+  {
+   "kind": "wood",
+   "at": [
+    2.7873617619472206,
+    8.556601784609793
+   ],
+   "count": 9,
+   "height": 12.219117865966666,
+   "radius": 0.28109625470716304
+  },
+  {
+   "kind": "water",
+   "at": [
+    1.0337925843710951,
+    7.855762112997645
+   ],
+   "w": 16.0,
+   "d": 11.0
+  },
+  {
+   "kind": "trunk",
+   "at": [
+    -2.8394299153839,
+    7.8678933184494415
+   ],
+   "height": 5.1282660626775876,
+   "radius": 0.2957383772778972,
+   "lean": -0.030288179578036516
+  }
+ ],
+ "from_scene": "a handwritten card taped inside the glass door of a small bakery, biro on the back of a receipt roll, the word CLOSED and a date and the word sorry underlined once, the tape gone amber at its corners, an empty wooden shelf and a wire basket behind the glass, the photographer's own reflection cropped to a shoulder and a hand, flat overcast light from the street",
+ "not_built": [
+  "receipt",
+  "reflection",
+  "tape"
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2025-09_two_cups_wall",
+ "by": "noor",
+ "light": "low_sun",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   -0.4810945726401903,
+   11.765238960039671,
+   0.77199416742527
+  ],
+  "height": -0.48206659516549966,
+  "distance": 12.19403321935016,
+  "lean_deg": 2.5108833148562866,
+  "mm": 29.42394140940386
+ },
+ "handheld": 0.4961137553023078,
+ "quality": 86,
+ "objects": [
+  {
+   "kind": "wall",
+   "at": [
+    -0.25562180448013305,
+    5.3491338530907235
+   ],
+   "as_kind": "brick",
+   "w": 11.62915291753698,
+   "h": 1.291857661863034
+  },
+  {
+   "kind": "car",
+   "at": [
+    1.9271137502904079,
+    5.281923377909322
+   ],
+   "rot": -6.683972531300544,
+   "colour": [
+    0.2399426040133851,
+    0.2399426040133851,
+    0.2399426040133851
+   ]
+  },
+  {
+   "kind": "barrier",
+   "at": [
+    -0.06598027898544223,
+    3.70609912015396
+   ],
+   "angle": 1.9729700134545398
+  }
+ ],
+ "from_scene": "two paper cups on a low brick wall, one crushed flat and one still full with a lid on, a car park barrier arm out of focus behind, early sun raking across the brick",
+ "not_built": []
+}

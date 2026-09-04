@@ -1,0 +1,55 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.476901150498741,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-10_classroom_door_wedged",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.028680394420291154
+  ],
+  "height": 0.295304956007698,
+  "distance": 0.2615124341887848,
+  "lean_deg": 9.41460778687824,
+  "mm": 23.239980558084234
+ },
+ "handheld": 0.06879448615345853,
+ "quality": 83,
+ "objects": [
+  {
+   "kind": "pen",
+   "at": [
+    0.013837323694366941,
+    -0.005112436089602662
+   ],
+   "as_kind": "pen",
+   "length": 0.13993242503363634,
+   "rot": 168.87458752610937
+  },
+  {
+   "kind": "stack",
+   "at": [
+    0.2961351353405271,
+    0.020730832202819068
+   ],
+   "count": 8,
+   "rot": -9.357561543820761
+  }
+ ],
+ "from_scene": "a heavy fire door propped open with a leaning stack of A3 folders on a scuffed vinyl floor, a corridor of lockers beyond, a bent door closer arm above, flat institutional light",
+ "not_built": []
+}

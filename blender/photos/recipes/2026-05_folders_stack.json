@@ -1,0 +1,100 @@
+{
+ "mode": "tabletop",
+ "surface": "lino",
+ "surface_size": 1.394356539732332,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-05_folders_stack",
+ "by": "noor",
+ "light": "hard_sun",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.049043395777221804
+  ],
+  "height": 0.38926127572848135,
+  "distance": 0.2583487949378242,
+  "lean_deg": 9.3461452212035,
+  "mm": 27.26550549927527
+ },
+ "handheld": 0.38901336669308473,
+ "quality": 85,
+ "objects": [
+  {
+   "kind": "stack",
+   "at": [
+    -0.0008807112103370561,
+    0.011409817292471109
+   ],
+   "count": 9,
+   "rot": 11.159442658458183
+  },
+  {
+   "kind": "card",
+   "at": [
+    0.25889812362867104,
+    -0.07793561981109852
+   ],
+   "w": 0.07192399094016381,
+   "h": 0.16786918863894862,
+   "rot": -17.668104753854635
+  },
+  {
+   "kind": "bag",
+   "at": [
+    0.12281706548211474,
+    0.11950527953058797
+   ],
+   "w": 0.29927669641016325,
+   "d": 0.22756780224989587,
+   "h": 0.34567286338992936,
+   "rot": 2.408551269241493
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.14437941765728685,
+    0.11121355194544556
+   ],
+   "w": 0.1271683019257805,
+   "h": 0.24451681622250157,
+   "rot": 27.873617619472206
+  },
+  {
+   "kind": "pen",
+   "at": [
+    -0.12270841416807043,
+    -0.17956822154281704
+   ],
+   "as_kind": "pen",
+   "length": 0.14903093466823283,
+   "rot": 96.57353597899996
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.17497453755957681,
+    -0.13284273117512815
+   ],
+   "w": 0.21,
+   "h": 0.297,
+   "folds": 1,
+   "rot": 3.4551394119070054,
+   "printed": 1.0
+  }
+ ],
+ "from_scene": "nine ring binders and card folders stacked at angles in a canvas bag on a kitchen floor, tabs and sugar paper corners sticking out of them at different heights, a red pen and a bulldog clip on the tiles beside the bag, one folder slipped free and lying flat with a photocopied grid sheet on top, hard morning light from a window off frame",
+ "not_built": [
+  "clip"
+ ]
+}

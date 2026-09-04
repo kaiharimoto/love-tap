@@ -1,0 +1,69 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.3627720828714072,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-09_sketchbook_door",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.046159609396025716
+  ],
+  "height": 0.40174678722923085,
+  "distance": 0.25487687097977263,
+  "lean_deg": 2.7767518048145625,
+  "mm": 27.432636122426565
+ },
+ "handheld": 0.508660104130061,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "book",
+   "at": [
+    -0.012939008798460399,
+    -0.009621891452803805
+   ],
+   "w": 0.22890670625435613,
+   "d": 0.29563846755818646,
+   "rot": -0.5938225108689803,
+   "open_book": true
+  },
+  {
+   "kind": "pen",
+   "at": [
+    0.15044495788982312,
+    0.0364678161208046
+   ],
+   "as_kind": "pencil",
+   "length": 0.10349701879839401,
+   "rot": 105.71102338908258
+  },
+  {
+   "kind": "board",
+   "at": [
+    -0.25757162231104025,
+    0.08753823101710262
+   ],
+   "w": 0.3597297001345454,
+   "d": 0.26567345070459814,
+   "thick": 0.018612384412420226,
+   "rot": -9.357561543820761,
+   "scars": 12
+  }
+ ],
+ "from_scene": "an open sketchbook on a floor, a pencil drawing of a cupboard door with a rounded handle, hatching down one side, a rubbed-out first attempt still faintly visible, the good pen lying across the gutter of the book",
+ "not_built": []
+}

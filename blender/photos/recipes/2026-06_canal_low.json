@@ -1,0 +1,50 @@
+{
+ "mode": "outdoor",
+ "ground": "grass",
+ "room": false,
+ "sky": true,
+ "id": "2026-06_canal_low",
+ "by": "noor",
+ "light": "hard_sun",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.9467297159737149,
+   8.485591021098173,
+   1.338437390840788
+  ],
+  "height": 0.47826182821963636,
+  "distance": 8.481907377769843,
+  "lean_deg": 3.6775224333752377,
+  "mm": 29.78736176194722
+ },
+ "handheld": 0.4149368748711425,
+ "quality": 86,
+ "objects": [
+  {
+   "kind": "water",
+   "at": [
+    1.4030934668232846,
+    7.14607857731111
+   ],
+   "w": 16.0,
+   "d": 11.0
+  },
+  {
+   "kind": "post",
+   "at": [
+    1.7275697059535027,
+    7.3527316723633644
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  }
+ ],
+ "from_scene": "a canal at low water in a heatwave seen from the towpath, the water dropped to show a bank of cracked grey mud and the rusted frame of a shopping trolley half out of it, bright weed along the far edge, a black mooring ring and a scorched line of dead grass on the path, hard white midday light with no cloud at all",
+ "not_built": []
+}

@@ -1,0 +1,68 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.519403321935016,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-11_bridge_table_window",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03418480552476048
+  ],
+  "height": 0.4407980469801286,
+  "distance": 0.33339742978338466,
+  "lean_deg": -9.02462580404547,
+  "mm": 25.933867469502275
+ },
+ "handheld": 0.6205690571397189,
+ "quality": 83,
+ "objects": [
+  {
+   "kind": "jar",
+   "at": [
+    -0.001319605579708845,
+    -0.012939008798460399
+   ],
+   "r": 0.04496621251681818,
+   "h": 0.13690960764614152,
+   "holds": 4
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.26138208448366107,
+    -0.05129295984564752
+   ],
+   "w": 0.1966320549373989,
+   "h": 0.3022966546179587,
+   "folds": 3,
+   "rot": -3.0674616537615975,
+   "printed": 1.0
+  },
+  {
+   "kind": "cloth",
+   "at": [
+    -0.14819727416224365,
+    0.057563252788131215
+   ],
+   "w": 0.34221968485817533,
+   "d": 0.2585422750058082,
+   "rot": 143.0703451496223
+  }
+ ],
+ "from_scene": "a corner table by a dark restaurant window, two empty wine glasses, a small candle in a glass jar, a folded napkin and a spare fork, and beyond the glass a lit stone bridge doubled in still black water",
+ "not_built": []
+}

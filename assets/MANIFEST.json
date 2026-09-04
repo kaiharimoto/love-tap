@@ -27,6 +27,40 @@
     "width_m": 0.42
    }
   },
+  "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/shots/2026-05_bluebells_wood.jpg": {
+   "bytes": 50347,
+   "generator": "blender/photos/still.py + blender/photos/develop.py",
+   "kind": "photo",
+   "settings": {
+    "camera": {
+     "distance": 8.735517442746207,
+     "height": -0.44874542958786834,
+     "lean_deg": -3.3158329824330863,
+     "look_at": [
+      0.5704908646235556,
+      7.840618483996345,
+      1.9662032142209933
+     ],
+     "mm": 26.017094319620885
+    },
+    "light": "overcast",
+    "objects": [
+     "wood",
+     "undergrowth",
+     "trunk",
+     "canopy"
+    ],
+    "recipe": "2026-05_bluebells_wood",
+    "res": [
+     600,
+     450
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 28,
+    "sensor": "blender/photos/camera.py, noor's phone",
+    "surface": null
+   }
+  },
   "../../../tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/voice/2026-08_bread_loaf.jpg": {
    "bytes": 55783,
    "generator": "blender/photos/still.py + blender/photos/develop.py",

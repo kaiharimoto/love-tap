@@ -1,0 +1,71 @@
+{
+ "mode": "room",
+ "ground": "carpet",
+ "room": false,
+ "interior": true,
+ "id": "2026-06_fan_desk",
+ "by": "noor",
+ "light": "strip",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   -0.026421336310111676,
+   3.3422945187741333,
+   0.7700515403330288
+  ],
+  "height": 0.27206773807366436,
+  "distance": 2.601672760549509,
+  "lean_deg": -5.900918600517699,
+  "mm": 23.447361169594487
+ },
+ "handheld": 0.23532767062243637,
+ "quality": 85,
+ "objects": [
+  {
+   "kind": "table",
+   "at": [
+    2.0131898649843984,
+    1.2057853555945046
+   ],
+   "w": 1.380618693364657,
+   "d": 0.6609558932983333,
+   "h": 0.6420098002964656,
+   "rot": -13.10213756125689
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -1.7678098325890759,
+    2.1889405593416806
+   ],
+   "count": 8,
+   "rot": 11.159442658458183
+  },
+  {
+   "kind": "window_light",
+   "at": [
+    1.3783901124947935,
+    4.542304845199058,
+    1.21070467230774
+   ],
+   "w": 1.5813554005908004,
+   "h": 1.2485591021098175
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.0,
+    4.6
+   ],
+   "as_kind": "painted",
+   "w": 7.0,
+   "h": 2.8
+  }
+ ],
+ "from_scene": "a small grey plastic desk fan standing on an art room desk, dust furred into the grille and a torn strip of red sugar paper tied to one bar of it, a stacked pile of cartridge paper weighted with a lump of dry clay beside it, a chipped enamel water jug at the back, hard flat fluorescent light from above and a long window of white sky behind",
+ "not_built": []
+}

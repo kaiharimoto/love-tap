@@ -1,0 +1,57 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.155671628207943,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-12_backdrop_paint",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.0417682597335978
+  ],
+  "height": 0.26959922232336936,
+  "distance": 0.23572445397793337,
+  "lean_deg": 11.701510503200854,
+  "mm": 26.023100690595058
+ },
+ "handheld": 0.63279316443045,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "sheet",
+   "at": [
+    0.019271137502904077,
+    0.011793410033249404
+   ],
+   "w": 0.19305264015950907,
+   "h": 0.19955025564158935,
+   "rot": 5.237007796360857
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.17638269047105856,
+    -0.004656801181558387
+   ],
+   "r": 0.08993242503363635,
+   "h": 0.08814576458768489,
+   "rot": 23.51145971178203,
+   "lid": "beside"
+  }
+ ],
+ "from_scene": "a large paper backdrop taped flat to a school hall floor, half painted in wide blue brush strokes going from deep to pale, a bucket of water with a brush standing in it, blue footprints along the untouched edge, harsh overhead hall lighting",
+ "not_built": []
+}

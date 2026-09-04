@@ -1,0 +1,78 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.5319163346911877,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-11_table_after_marking",
+ "by": "noor",
+ "light": "night_lamp",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03906629166457492
+  ],
+  "height": 0.3078737543056891,
+  "distance": 0.2240286131891589,
+  "lean_deg": 5.3731262534584765,
+  "mm": 25.737144893174825
+ },
+ "handheld": 0.6663051576556395,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "pen",
+   "at": [
+    0.0117682597335978,
+    -0.01808015553532613
+   ],
+   "as_kind": "pen",
+   "length": 0.1453779927707752,
+   "rot": 66.99403759678802
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.25757162231104025,
+    -0.0875382310171026
+   ],
+   "r": 0.042315313342303026,
+   "h": 0.1037638430584566,
+   "rot": 94.04583884712812,
+   "full": 0.55
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.16784758934132524,
+    0.18485663215495574
+   ],
+   "w": 0.15137108465580068,
+   "h": 0.1682439648061584,
+   "rot": -14.432837179205709
+  },
+  {
+   "kind": "book",
+   "at": [
+    -0.056579081514049626,
+    -0.13897228652335558
+   ],
+   "w": 0.20523700779636087,
+   "d": 0.3087244906300821,
+   "rot": 5.307034514962231,
+   "open_book": true
+  }
+ ],
+ "from_scene": "a cleared kitchen table under a lamp, one red pen lying diagonally, two overlapping mug rings, a single loose sheet of squared paper and an open sketchbook at the edge, warm bulb light against a dark window",
+ "not_built": []
+}

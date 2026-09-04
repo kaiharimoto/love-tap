@@ -1,0 +1,71 @@
+{
+ "mode": "room",
+ "ground": "carpet",
+ "room": false,
+ "interior": true,
+ "id": "2026-03_drawing_show_wall",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   -0.4318763032007309,
+   3.4129625713767946,
+   0.7630227376717215
+  ],
+  "height": -0.00537354643781604,
+  "distance": 2.978944467837794,
+  "lean_deg": -4.586893175102546,
+  "mm": 24.559463967769815
+ },
+ "handheld": 0.6595298432375382,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "wall",
+   "at": [
+    0.0,
+    4.8064602027812695
+   ],
+   "as_kind": "painted",
+   "w": 7.0,
+   "h": 2.7404999417817537
+  },
+  {
+   "kind": "table",
+   "at": [
+    -1.0598157766087113,
+    2.662478058392998
+   ],
+   "w": 1.380618693364657,
+   "d": 0.6609558932983333,
+   "h": 0.6420098002964656,
+   "rot": -13.10213756125689
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -2.029710728576742,
+    1.0433276792119326
+   ],
+   "count": 5,
+   "rot": -7.08443223707406
+  },
+  {
+   "kind": "window_light",
+   "at": [
+    -1.8929532769226003,
+    4.164771551586518,
+    1.5140981729247112
+   ],
+   "w": 1.5813554005908004,
+   "h": 1.2485591021098175
+  }
+ ],
+ "from_scene": "the far wall of a college hall hung with unframed student drawings pinned at the corners, uneven spacing, one sheet curling away from the wall, a folding table at the edge of frame with plastic cups and a stack of photocopied sheets, scuffed parquet floor and high grey daylight from clerestory windows",
+ "not_built": []
+}

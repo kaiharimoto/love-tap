@@ -15,6 +15,7 @@ import 'material/palette.dart';
 import 'feelings/builtins.dart';
 import 'feelings/corner.dart';
 import 'feelings/registry.dart';
+import 'feelings/landing.dart';
 import 'feelings/sensation.dart';
 import 'regions/chat/chat_region.dart';
 import 'regions/moments/moments_region.dart';
@@ -73,12 +74,28 @@ class _ShellState extends State<Shell> {
   PhoneFacts? _phone;
   final Sensation _sensation = Sensation();
 
+  /// Everything that lands on this phone, whichever side let go of it.
+  final StreamController<Arrival> _arrivals = StreamController<Arrival>.broadcast();
+
   static const _labels = [S.pulse, S.chat, S.us, S.moments, S.settings];
+
+  StreamSubscription<(String, double)>? _landings;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _readPhone());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _readPhone();
+      // Something they sent lands here the same way something you sent does. This is the whole
+      // point of the app, so it happens whichever region is open rather than only in Chat.
+      final scope = AppScope.of(context);
+      _landings = scope.landed.listen((pair) {
+        final f = FeelingRegistry(scope.spine.all).byId(pair.$1);
+        if (f == null || !mounted) return;
+        _arrivals.add(Arrival(feeling: f, intensity: pair.$2, mine: false));
+        unawaited(_sensation.play(f, intensity: pair.$2));
+      });
+    });
     if (!Flags.capture) return;
     CaptureBus.regionIndex = _index;
     CaptureBus.goToRegion = _go;
@@ -93,6 +110,7 @@ class _ShellState extends State<Shell> {
         'feeling_id': f.id,
         'intensity': double.parse(intensity.toStringAsFixed(2)),
       });
+      _arrivals.add(Arrival(feeling: f, intensity: intensity, mine: true));
       unawaited(_sensation.play(f, intensity: intensity));
     };
   }
@@ -100,6 +118,8 @@ class _ShellState extends State<Shell> {
   @override
   void dispose() {
     if (Flags.capture) CaptureBus.clear();
+    _landings?.cancel();
+    _arrivals.close();
     _sensation.dispose();
     super.dispose();
   }
@@ -130,6 +150,7 @@ class _ShellState extends State<Shell> {
   Future<void> _send(Feeling f, double intensity) async {
     final scope = AppScope.of(context);
     await scope.emit('feeling', {'feeling_id': f.id, 'intensity': double.parse(intensity.toStringAsFixed(2))});
+    _arrivals.add(Arrival(feeling: f, intensity: intensity, mine: true));
     await _sensation.play(f, intensity: intensity);
   }
 
@@ -142,7 +163,9 @@ class _ShellState extends State<Shell> {
     return Scaffold(
       backgroundColor: Flags.dusk ? DeskColour.dusk : DeskColour.day,
       body: Desk(
-        child: SafeArea(
+        child: LandingStage(
+          arrivals: _arrivals.stream,
+          child: SafeArea(
           child: Column(
             children: [
               PartnerStrip(
@@ -181,6 +204,7 @@ class _ShellState extends State<Shell> {
               ),
               _Tabs(index: _index, labels: _labels, onPick: _go),
             ],
+            ),
           ),
         ),
       ),

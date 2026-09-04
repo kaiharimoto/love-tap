@@ -15,6 +15,7 @@ class FeelingObject extends StatelessWidget {
     this.intensity = 0.7,
     this.tilt = 0.0,
     this.shadowScale = 1.0,
+    this.lift = 0.0,
   });
 
   final Feeling feeling;
@@ -26,6 +27,10 @@ class FeelingObject extends StatelessWidget {
 
   /// While an object is still falling its shadow is smaller and lighter.
   final double shadowScale;
+
+  /// How far the object itself is off the desk, in object-heights. The shadow does not move with
+  /// it: that gap between a thing and its shadow is the only thing that says it is in the air.
+  final double lift;
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +77,16 @@ class FeelingObject extends StatelessWidget {
                     fit: BoxFit.contain, gaplessPlayback: true, errorBuilder: _none),
               ),
             ),
-            Transform.scale(
-              scale: scale,
-              child: Image.asset(objectAsset(id),
-                  fit: BoxFit.contain,
-                  gaplessPlayback: true,
-                  filterQuality: FilterQuality.medium,
-                  errorBuilder: (c, e, s) => _Fallback(feeling: feeling)),
+            Transform.translate(
+              offset: Offset(lift * size * 0.16, -lift * size * 0.62),
+              child: Transform.scale(
+                scale: scale,
+                child: Image.asset(objectAsset(id),
+                    fit: BoxFit.contain,
+                    gaplessPlayback: true,
+                    filterQuality: FilterQuality.medium,
+                    errorBuilder: (c, e, s) => _Fallback(feeling: feeling)),
+              ),
             ),
           ],
         ),

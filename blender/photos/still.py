@@ -27,6 +27,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 from rig import common, manifest  # noqa: E402
 sys.path.insert(0, HERE)
 import kit  # noqa: E402
+import world  # noqa: E402
 
 RECIPES = os.path.join(HERE, "recipes")
 OUT = os.path.join(common.repo_root(), "seed", "photos")
@@ -35,14 +36,38 @@ SEED_INDEX = os.path.join(common.repo_root(), "seed", "photos")
 
 # ------------------------------------------------------------------ light
 def light_for(scene, kind):
-    """The conditions a phone photograph is actually taken in, all off the one rig."""
+    """The conditions a phone photograph is actually taken in, all off the one rig.
+
+    Every daylight condition is the shared rig in blender/rig/common.py with its energy and its
+    sky changed, so a photograph and the note it will be pinned beside agree about which way the
+    light is coming from. The artificial ones are the lamps that are actually in these rooms.
+    """
     if kind == "window_left":
         return common.add_daylight(scene)
     if kind == "overcast":
-        sun, world = common.add_daylight(scene)
-        sun.data.energy *= 0.55
-        world.node_tree.nodes["Background"].inputs["Strength"].default_value = 1.1
-        return sun, world
+        sun, world_ = common.add_daylight(scene)
+        sun.data.energy *= 0.42
+        sun.data.angle = math.radians(24)          # a big soft source: cloud, not sun
+        world_.node_tree.nodes["Background"].inputs["Strength"].default_value = 1.6
+        return sun, world_
+    if kind == "hard_sun":
+        sun, world_ = common.add_daylight(scene)
+        sun.data.energy *= 1.7
+        sun.data.angle = math.radians(0.53)        # the sun's actual angular size
+        return sun, world_
+    if kind == "low_sun":
+        sun, world_ = common.add_daylight(scene, elevation=9.0)
+        sun.data.energy *= 1.25
+        sun.data.color = (1.0, 0.78, 0.52)
+        sun.data.angle = math.radians(0.6)
+        return sun, world_
+    if kind == "fog_dawn":
+        sun, world_ = common.add_daylight(scene, elevation=6.0)
+        sun.data.energy *= 0.5
+        sun.data.angle = math.radians(30)
+        world_.node_tree.nodes["Background"].inputs["Strength"].default_value = 2.4
+        world.fog(density=0.030, colour=(0.60, 0.62, 0.65))
+        return sun, world_
     if kind == "kitchen_bulb":
         # one warm bulb directly overhead, which is why the shadow under a loaf is so hard
         data = bpy.data.lights.new("bulb", "POINT")
@@ -53,6 +78,30 @@ def light_for(scene, kind):
         scene.collection.objects.link(lamp)
         lamp.location = (0.05, -0.02, 0.72)
         return common._world(scene, (0.30, 0.26, 0.22), 0.12), lamp
+    if kind == "lamp":
+        # a lamp off to one side at desk height: long shadows across the table, warm
+        data = bpy.data.lights.new("lamp", "AREA")
+        data.energy = 14.0
+        data.color = (1.0, 0.82, 0.58)
+        data.size = 0.09
+        lamp = bpy.data.objects.new("lamp", data)
+        scene.collection.objects.link(lamp)
+        lamp.location = (0.42, 0.12, 0.34)
+        common._aim(lamp, (-0.42, -0.12, -0.22))
+        return common._world(scene, (0.20, 0.18, 0.16), 0.09), lamp
+    if kind == "night":
+        # a town at night: no key light at all, only what the sky and the streetlights leave
+        return common._world(scene, (0.030, 0.034, 0.048), 0.30), None
+    if kind == "night_lamp":
+        w = common._world(scene, (0.020, 0.024, 0.038), 0.16)
+        data = bpy.data.lights.new("streetlamp", "POINT")
+        data.energy = 60.0
+        data.color = (1.0, 0.70, 0.38)
+        data.shadow_soft_size = 0.25
+        lamp = bpy.data.objects.new("streetlamp", data)
+        scene.collection.objects.link(lamp)
+        lamp.location = (-4.5, 9.0, 5.5)
+        return w, lamp
     if kind == "torch":
         # a phone torch held in the other hand: hard, close, and from one side only
         data = bpy.data.lights.new("torch", "SPOT")
@@ -69,16 +118,16 @@ def light_for(scene, kind):
     if kind == "strip":
         # institutional: a long tube overhead, flat and slightly green
         data = bpy.data.lights.new("strip", "AREA")
-        data.energy = 32.0
+        data.energy = 260.0
         data.color = (0.94, 1.0, 0.96)
         data.shape = "RECTANGLE"
-        data.size = 1.2
-        data.size_y = 0.08
+        data.size = 1.5
+        data.size_y = 0.10
         lamp = bpy.data.objects.new("strip", data)
         scene.collection.objects.link(lamp)
-        lamp.location = (0.0, 0.10, 1.9)
+        lamp.location = (0.0, 2.0, 2.7)
         common._aim(lamp, (0, 0, -1))
-        return common._world(scene, (0.62, 0.66, 0.64), 0.35), lamp
+        return common._world(scene, (0.32, 0.34, 0.33), 0.30), lamp
     return common.add_daylight(scene)
 
 
@@ -120,16 +169,75 @@ BUILDERS = {
     "wall": kit.wall,
     "board": kit.board,
     "slab": kit.slab,
+    "bowl": kit.bowl,
+    "tin": kit.tin,
+    "jar": kit.jar,
+    "pen": kit.pen,
+    "folded": kit.folded,
+    "card": kit.card,
+    "envelope": kit.envelope,
+    "book": kit.book,
+    "stack": kit.stack,
+    "cloth": kit.cloth,
+    "bag": kit.bag,
+    "ladle": kit.ladle,
+    "hob_ring": kit.hob_ring,
+    "plate": kit.plate,
+    "cake": kit.cake,
+    "flask": kit.flask,
+    "bench": kit.bench,
+    "cone": kit.cone,
+    "car": kit.car,
+    "rope": kit.rope,
+    "coat": kit.coat,
+    # the world beyond a table top
+    "ground": world.ground,
+    "bays": world.bays,
+    "water": world.water,
+    "trunk": world.trunk,
+    "limbs": world.limbs,
+    "canopy": world.canopy,
+    "undergrowth": world.undergrowth,
+    "post": world.post,
+    "railing": world.railing,
+    "barrier": world.barrier,
+    "block": world.block,
+    "chair": world.chair,
+    "table": world.table,
+    "shelf_rack": world.shelf_rack,
+    "window_light": world.window_light,
+    "string_lights": world.string_lights,
+    "wood": world.wood,
 }
+# builders whose own first argument is called `kind`; a recipe says `as_kind` so that the
+# argument cannot overwrite the key that decides which builder to call in the first place
+TAKES_KIND = {"wall", "post", "ground", "pen", "bag"}
 
 
 def build(recipe):
     scene = common.reset_scene()
-    if recipe.get("room", True):
+    mode = recipe.get("mode", "tabletop")
+    if recipe.get("room", mode == "tabletop"):
+        # a still life is photographed in a room, and a table floating in a void is the single
+        # loudest way a render says it is a render
         kit.room(dark=tuple(recipe.get("room_colour", [0.10, 0.09, 0.085])))
     if recipe.get("surface"):
         kit.surface(recipe["surface"], size=recipe.get("surface_size", 1.2),
                     seed=recipe.get("seed", 1))
+    if recipe.get("ground"):
+        world.ground(recipe["ground"], size=260.0 if mode == "outdoor" else 12.0,
+                     seed=recipe.get("seed", 1))
+    if mode == "outdoor":
+        # Air is not empty. Even on a clear day the far side of a car park is a little paler and
+        # a little bluer than the near side, and without that everything sits on one flat plane
+        # at the same distance. A photograph of a wood is mostly this.
+        world.fog(density=float(recipe.get("fog", 0.006)), size=300.0,
+                  colour=(0.55, 0.60, 0.68) if recipe.get("light") != "night_lamp"
+                  else (0.10, 0.11, 0.16))
+    elif recipe.get("fog"):
+        world.fog(density=float(recipe["fog"]))
+    if mode == "room" and not recipe.get("ground"):
+        world.ground("carpet", size=12.0, seed=recipe.get("seed", 1))
     for spec in recipe.get("objects", []):
         spec = dict(spec)
         kind = spec.pop("kind")
@@ -143,6 +251,10 @@ def build(recipe):
         for key, value in list(spec.items()):
             if isinstance(value, list):
                 spec[key] = tuple(value)
+        if "as_kind" in spec:
+            spec["kind"] = spec.pop("as_kind")
+        elif kind in TAKES_KIND and "kind" not in spec:
+            pass
         made = builder(**spec)
         if lift:
             for obj in (made if isinstance(made, (list, tuple)) else [made]):
@@ -155,6 +267,11 @@ def build(recipe):
                  lean_deg=cam.get("lean_deg", 0.0),
                  mm=cam.get("mm", 26.0))
     light_for(scene, recipe.get("light", "window_left"))
+    if mode == "outdoor" and recipe.get("sky", True) and recipe.get("light") not in ("night",
+                                                                                     "night_lamp"):
+        world.sky(scene, turbidity=6.0 if recipe.get("light") == "overcast" else 3.0,
+                  elevation_deg={"low_sun": 9.0, "fog_dawn": 6.0}.get(recipe.get("light")),
+                  strength=1.0 if recipe.get("light") != "overcast" else 1.5)
     return scene
 
 

@@ -1,0 +1,75 @@
+{
+ "mode": "tabletop",
+ "surface": "steel",
+ "surface_size": 1.5319163346911877,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-12_soup_green",
+ "by": "teo",
+ "light": "night_lamp",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03906629166457492
+  ],
+  "height": 0.3078737543056891,
+  "distance": 0.2240286131891589,
+  "lean_deg": 5.3731262534584765,
+  "mm": 25.737144893174825
+ },
+ "handheld": 0.6663051576556395,
+ "quality": 82,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    -0.009621891452803805,
+    0.0117682597335978
+   ],
+   "r": 0.11157656671151514,
+   "h": 0.06845480382307076,
+   "rot": 23.51145971178203
+  },
+  {
+   "kind": "spoon",
+   "at": [
+    0.14819727416224365,
+    -0.057563252788131215
+   ],
+   "length": 0.24977512782079467,
+   "rot": 12.219684858175341
+  },
+  {
+   "kind": "tin",
+   "at": [
+    -0.18692525341149152,
+    0.12130511576175879
+   ],
+   "r": 0.09945335312717807,
+   "h": 0.08384505752493705,
+   "rot": 42.0308874456551,
+   "lid": "on"
+  },
+  {
+   "kind": "pan",
+   "at": [
+    -0.03802571389275204,
+    -0.2531204274297424
+   ],
+   "r": 0.0966320549373989,
+   "h": 0.10383732369436693
+  }
+ ],
+ "from_scene": "a shallow bowl of pale green soup on a scratched steel kitchen bench, a swirl of cream not yet stirred in, coarse pepper across it, a wooden spoon resting on the rim of a chipped enamel pan behind, one warm bulb overhead, dark window beyond",
+ "not_built": []
+}

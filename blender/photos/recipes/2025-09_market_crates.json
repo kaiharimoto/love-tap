@@ -1,0 +1,62 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2025-09_market_crates",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0.58841298667989,
+   7.28797666970108,
+   0.8474167560431254
+  ],
+  "height": 0.4388066438700321,
+  "distance": 10.627720828714072,
+  "lean_deg": 9.69576563761543,
+  "mm": 28.252403616876926
+ },
+ "handheld": 0.15258631053650532,
+ "quality": 87,
+ "objects": [
+  {
+   "kind": "wood",
+   "at": [
+    0.5237007796360862,
+    10.890670625435611
+   ],
+   "count": 14,
+   "height": 14.62915291753698,
+   "radius": 0.20702291942356407
+  },
+  {
+   "kind": "crate",
+   "at": [
+    1.1793410033249403,
+    4.134534511775476
+   ],
+   "rot": -13.367945062601088
+  },
+  {
+   "kind": "car",
+   "at": [
+    -1.2939008798460399,
+    3.408084497879667
+   ],
+   "rot": 6.918661847183468,
+   "colour": [
+    0.11676916541758271,
+    0.11676916541758271,
+    0.11676916541758271
+   ]
+  }
+ ],
+ "from_scene": "wooden crates on a market stall, apples in two of them and one squash on its own, three hand-lettered price cards on wire stalks, a set of brass scales at the back, canvas shadow falling across the front row",
+ "not_built": []
+}

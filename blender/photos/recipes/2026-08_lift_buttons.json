@@ -1,42 +1,55 @@
 {
- "surface": null,
- "light": "strip",
+ "mode": "tabletop",
+ "surface": "steel",
+ "surface_size": 1.5391309141098182,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-08_lift_buttons",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
  "size": [
   1200,
   1600
  ],
- "seed": 77,
  "camera": {
   "look_at": [
    0,
    0,
-   1.05
+   0.01987938251846563
   ],
-  "height": 0.02,
-  "distance": 0.22,
-  "lean_deg": 6,
-  "mm": 26
+  "height": 0.390646020278127,
+  "distance": 0.3743296469852592,
+  "lean_deg": 2.9685428512522307,
+  "mm": 27.22298764061849
  },
+ "handheld": 0.499758369774588,
+ "quality": 88,
  "objects": [
-  {
-   "kind": "wall",
-   "kind_": "",
-   "w": 0.9,
-   "h": 2.2,
-   "y": 0.05
-  },
   {
    "kind": "panel",
    "at": [
-    0,
-    0,
-    1.05
+    -0.018717339373224128,
+    0.018934594319474297
    ],
-   "w": 0.11,
-   "h": 0.34,
-   "buttons": 8,
-   "seed": 77
+   "buttons": 11
+  },
+  {
+   "kind": "pan",
+   "at": [
+    0.20706820469442053,
+    -0.04272257183336508
+   ],
+   "r": 0.12870791289097713,
+   "h": 0.0914607857731111
   }
  ],
- "id": "2026-08_lift_buttons"
+ "from_scene": "the button panel of an old lift photographed close, the numbers worn to ghosts on brushed steel, the alarm bell symbol scratched around from years of pressing, a stop button with its red gone pink, the panel's screws not quite aligned, the mirrored back wall of the car doubling the picture behind, tube light from above",
+ "not_built": [
+  "button"
+ ]
 }

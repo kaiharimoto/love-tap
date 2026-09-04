@@ -1,0 +1,57 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-07_ferry_rail",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   -0.5060308740767185,
+   10.91938060834381,
+   2.1468404404868053
+  ],
+  "height": 0.11132035692195863,
+  "distance": 12.067585168742191,
+  "lean_deg": 5.134572677985876,
+  "mm": 24.1605700846161
+ },
+ "handheld": 0.3345875538191015,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "railing",
+   "at": [
+    0.34551394119070045,
+    3.128266062677587
+   ],
+   "length": 7.870791289097713,
+   "height": 0.9146078577311111
+  },
+  {
+   "kind": "rope",
+   "at": [
+    1.8934594319474298,
+    3.366594762307268
+   ],
+   "z": 0.0
+  },
+  {
+   "kind": "water",
+   "at": [
+    -0.2231252183184238,
+    8.594206094065456
+   ],
+   "w": 16.0,
+   "d": 11.0
+  }
+ ],
+ "from_scene": "the painted iron rail of a small passenger ferry seen from the top deck, chipped white gloss over rust and a knotted length of rope on a cleat, grey green water racing past below and the mainland receding into haze, a lifebuoy bracket at the edge of the frame, cold early morning light and a smear of spray on the lens",
+ "not_built": []
+}

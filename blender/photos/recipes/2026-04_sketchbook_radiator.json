@@ -1,0 +1,87 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.33808406407704,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-04_sketchbook_radiator",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04989569767248956
+  ],
+  "height": 0.3816342300327239,
+  "distance": 0.313404534488039,
+  "lean_deg": 5.032348785724377,
+  "mm": 27.880424472152725
+ },
+ "handheld": 0.45241446504968463,
+ "quality": 87,
+ "objects": [
+  {
+   "kind": "book",
+   "at": [
+    0.008557621129976458,
+    -0.018929532769226005
+   ],
+   "w": 0.22391309141098184,
+   "d": 0.25728891940731485,
+   "rot": 2.7581418250314282,
+   "open_book": true
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.26772190826842746,
+    -0.00471647589715388
+   ],
+   "w": 0.20610163230236572,
+   "h": 0.23484271425626116,
+   "rot": 20.675851687421904
+  },
+  {
+   "kind": "pen",
+   "at": [
+    0.09741952476387314,
+    0.20711849890293685
+   ],
+   "as_kind": "pencil",
+   "length": 0.09228386531647262,
+   "rot": 76.61248690089457
+  },
+  {
+   "kind": "crumbs",
+   "at": [
+    -0.2733262945800486,
+    0.08580687810247614
+   ],
+   "spread": 0.10840189147921145,
+   "count": 72
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.040614133210372806,
+    -0.2307863329866481
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  }
+ ],
+ "from_scene": "an open sketchbook on a kitchen table, the right page filled with a hard pencil drawing of a domestic radiator seen straight on, every fin counted and the perspective slightly wrong, eraser crumbs along the gutter, a ballpoint pen lying across the left page and a mug ring in the corner, low window light from the left",
+ "not_built": []
+}

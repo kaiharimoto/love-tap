@@ -1,0 +1,90 @@
+{
+ "mode": "outdoor",
+ "ground": "wet_tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-04_carpark_dawn",
+ "by": "teo",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.27973198388490683,
+   12.653112942036042,
+   1.758119833519751
+  ],
+  "height": 0.0761681281540798,
+  "distance": 12.984354650873435,
+  "lean_deg": 2.596107603926864,
+  "mm": 27.502670043301464
+ },
+ "handheld": 0.46008262968772073,
+ "quality": 88,
+ "objects": [
+  {
+   "kind": "car",
+   "at": [
+    0.37106785640652884,
+    5.4560913484329445
+   ],
+   "rot": 3.064602027812697,
+   "colour": [
+    0.2707856763510463,
+    0.2707856763510463,
+    0.2707856763510463
+   ]
+  },
+  {
+   "kind": "bays",
+   "at": [
+    0.6418215847482345,
+    5.107046723077399
+   ],
+   "rows": 2,
+   "cols": 6
+  },
+  {
+   "kind": "barrier",
+   "at": [
+    -0.044035560516852756,
+    6.140981729247111
+   ],
+   "angle": -3.0361852444603112
+  },
+  {
+   "kind": "trunk",
+   "at": [
+    -2.1593815160036547,
+    10.064812856883972
+   ],
+   "height": 5.1282660626775876,
+   "radius": 0.2957383772778972,
+   "lean": -0.030288179578036516
+  },
+  {
+   "kind": "wood",
+   "at": [
+    -2.243727147939342,
+    6.7355174427462075
+   ],
+   "count": 9,
+   "height": 12.219117865966666,
+   "radius": 0.28109625470716304
+  },
+  {
+   "kind": "railing",
+   "at": [
+    -0.27631941520275727,
+    4.344729546413922
+   ],
+   "length": 5.702499708908768,
+   "height": 1.0594206094065455
+  }
+ ],
+ "from_scene": "a hospital car park at eight in the morning in april, wet tarmac holding a pink and grey sky, painted bays mostly empty with two cars left overnight and their windscreens fogged, a low barrier and a sodium lamp just gone out, the hill and a line of budding trees beyond the fence",
+ "not_built": []
+}

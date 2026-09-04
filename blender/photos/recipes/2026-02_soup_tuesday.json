@@ -1,0 +1,88 @@
+{
+ "mode": "tabletop",
+ "surface": "steel",
+ "surface_size": 1.5984354650873436,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-02_soup_tuesday",
+ "by": "teo",
+ "light": "kitchen_bulb",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03432684600654477
+  ],
+  "height": 0.3767556681100488,
+  "distance": 0.3251617439286219,
+  "lean_deg": 15.23471662177744,
+  "mm": 26.231531893212033
+ },
+ "handheld": 0.16777597785298096,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    -0.0008807112103370561,
+    0.011409817292471109
+   ],
+   "r": 0.12370791289097713,
+   "h": 0.058412991108194444,
+   "rot": 60.54812735358152
+  },
+  {
+   "kind": "pan",
+   "at": [
+    0.25889812362867104,
+    -0.07793561981109852
+   ],
+   "r": 0.09128266062677587,
+   "h": 0.1089345943194743
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.07064451757341353,
+    0.14401832317582688
+   ],
+   "w": 0.1999039401406545,
+   "h": 0.2812812463613596,
+   "folds": 3,
+   "rot": 9.565236564392727,
+   "printed": 1.0
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.19851750963344816,
+    0.02208237958184348
+   ],
+   "w": 0.1271683019257805,
+   "h": 0.24451681622250157,
+   "rot": 27.873617619472206
+  },
+  {
+   "kind": "bag",
+   "at": [
+    0.10946598241709207,
+    -0.18496610633507027
+   ],
+   "w": 0.29927669641016325,
+   "d": 0.22756780224989587,
+   "h": 0.34567286338992936,
+   "rot": 2.408551269241493
+  }
+ ],
+ "from_scene": "a wide bowl of deep brick-red soup on a scratched steel kitchen bench, the surface still moving, a slick of oil across it and a scatter of black pepper, a heavy enamel pan with the lid tipped against it behind, a folded paper bag of onion skins at the back, one bare bulb overhead",
+ "not_built": []
+}

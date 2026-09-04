@@ -1,0 +1,66 @@
+{
+ "mode": "tabletop",
+ "surface": "melamine",
+ "surface_size": 1.2867893318449442,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-01_kitchen_after",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04140981729247111
+  ],
+  "height": 0.2880206161332115,
+  "distance": 0.3550616761835726,
+  "lean_deg": -11.966544789009824,
+  "mm": 24.44626453562184
+ },
+ "handheld": 0.25328820467903496,
+ "quality": 82,
+ "objects": [
+  {
+   "kind": "tin",
+   "at": [
+    0.006129204055625396,
+    0.018582411746314805
+   ],
+   "r": 0.07742795510549087,
+   "h": 0.07276874781681576,
+   "rot": 80.86963711647273,
+   "lid": "beside"
+  },
+  {
+   "kind": "pan",
+   "at": [
+    0.2754999274682896,
+    0.020504686403937645
+   ],
+   "r": 0.09128266062677587,
+   "h": 0.1089345943194743
+  },
+  {
+   "kind": "bowl",
+   "at": [
+    -0.15050301693259624,
+    -0.026159287438043473
+   ],
+   "r": 0.12370791289097713,
+   "h": 0.058412991108194444,
+   "rot": 60.54812735358152
+  }
+ ],
+ "from_scene": "a kitchen counter on new years morning, eleven mismatched glasses stood in a loose crowd with one chipped rim turned to the front, a roasting tin with two cold potatoes left in the fat, a foil-topped bowl, a wine cork on its side, flat grey daylight from a window over the sink",
+ "not_built": []
+}

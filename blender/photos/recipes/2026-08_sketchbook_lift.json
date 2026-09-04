@@ -1,0 +1,84 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.5653112942036043,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-08_sketchbook_lift",
+ "by": "noor",
+ "light": "night",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03821652889386003
+  ],
+  "height": 0.37269468802567995,
+  "distance": 0.37958279068995826,
+  "lean_deg": 3.4614768052358187,
+  "mm": 25.918891702751218
+ },
+ "handheld": 0.46008262968772073,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "book",
+   "at": [
+    0.0037106785640652895,
+    0.013783901124947939
+   ],
+   "w": 0.22840189147921147,
+   "d": 0.25733189524614536,
+   "rot": -1.3387513099105437,
+   "open_book": true
+  },
+  {
+   "kind": "panel",
+   "at": [
+    0.15050301693259624,
+    0.0261592874380435
+   ],
+   "buttons": 7
+  },
+  {
+   "kind": "pan",
+   "at": [
+    0.0058955948714423355,
+    0.214177526614742
+   ],
+   "r": 0.12870791289097713,
+   "h": 0.0914607857731111
+  },
+  {
+   "kind": "pen",
+   "at": [
+    -0.2704147520679665,
+    0.08140244901391634
+   ],
+   "as_kind": "pencil",
+   "length": 0.1305481273535815,
+   "rot": 5.7719728204914205
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.02760297447730428,
+    -0.15881400770675855
+   ],
+   "w": 0.1271683019257805,
+   "h": 0.24451681622250157,
+   "rot": 27.873617619472206
+  }
+ ],
+ "from_scene": "a sketchbook open on a kitchen table to four attempts at the same lift panel, the first two in pencil and the last two in biro, the mirror worked over and over until the paper has gone grey and furred, a note to herself in the margin, the page cockled where an eraser has been used hard, warm evening light from one side",
+ "not_built": []
+}

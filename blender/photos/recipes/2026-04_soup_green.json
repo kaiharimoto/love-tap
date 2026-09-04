@@ -1,0 +1,76 @@
+{
+ "mode": "tabletop",
+ "surface": "steel",
+ "surface_size": 1.2017094319620885,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-04_soup_green",
+ "by": "teo",
+ "light": "night_lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03559463967769814
+  ],
+  "height": 0.4484370980678681,
+  "distance": 0.3328661155754401,
+  "lean_deg": 2.031150084108795,
+  "mm": 27.986962209061197
+ },
+ "handheld": 0.4257198051145335,
+ "quality": 89,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    0.013783901124947939,
+    0.008557621129976458
+   ],
+   "r": 0.10202499708908769,
+   "h": 0.0674637880879091,
+   "rot": 22.228610666547667
+  },
+  {
+   "kind": "loaf",
+   "at": [
+    0.19733213664909507,
+    -0.08083458779558371
+   ],
+   "length": 0.26773884755921,
+   "width": 0.12146078577311112,
+   "height": 0.09181892426488375,
+   "cut": 0.2080166289173492,
+   "rot": 28.40189147921145,
+   "flour": 0.34855910210981744
+  },
+  {
+   "kind": "pan",
+   "at": [
+    -0.12372793801513897,
+    0.09444638057824672
+   ],
+   "r": 0.11612920405562539,
+   "h": 0.1085824117463148
+  },
+  {
+   "kind": "ladle",
+   "at": [
+    -0.05286929889082158,
+    -0.23314176482002016
+   ],
+   "rot": 5.566017846097935
+  }
+ ],
+ "from_scene": "a wide shallow bowl of thick pale green soup on a steel bench, the surface matt and still with a swirl of oil going grey at the edge, a torn heel of dark bread laid across the rim, the heavy enamel pan behind with the ladle standing upright in it, one bare bulb and a dark window",
+ "not_built": []
+}

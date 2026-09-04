@@ -1,0 +1,77 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.2017094319620885,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-06_cold_soup",
+ "by": "teo",
+ "light": "night_lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03559463967769814
+  ],
+  "height": 0.4484370980678681,
+  "distance": 0.3328661155754401,
+  "lean_deg": 2.031150084108795,
+  "mm": 27.986962209061197
+ },
+ "handheld": 0.4257198051145335,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    0.013783901124947939,
+    0.008557621129976458
+   ],
+   "r": 0.0949039401406545,
+   "h": 0.055640623180679805,
+   "rot": 80.86963711647273
+  },
+  {
+   "kind": "spoon",
+   "at": [
+    0.19733213664909507,
+    -0.08083458779558371
+   ],
+   "length": 0.23975876503693125,
+   "rot": 21.452214194688878
+  },
+  {
+   "kind": "board",
+   "at": [
+    -0.12372793801513897,
+    0.09444638057824672
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "pen",
+   "at": [
+    -0.05286929889082158,
+    -0.23314176482002016
+   ],
+   "as_kind": "pen",
+   "length": 0.1489368088097361,
+   "rot": 106.69805353829379
+  }
+ ],
+ "from_scene": "a wide shallow bowl of pale green cold soup on a steel kitchen bench, three cubes of ice still whole on the surface and a thin ring of oil around them, the bowl beaded with condensation and a wet ring under it, a spoon laid across the rim and a halved cucumber on a board behind, one bare bulb and an open window full of blue evening",
+ "not_built": []
+}

@@ -1,0 +1,70 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-02_carpark_snow",
+ "by": "teo",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   -0.9464766384613001,
+   9.867893318449442,
+   1.877868148467667
+  ],
+  "height": -0.4318763032007309,
+  "distance": 12.064812856883972,
+  "lean_deg": -8.974908591757368,
+  "mm": 25.735517442746207
+ },
+ "handheld": 0.25328820467903496,
+ "quality": 80,
+ "objects": [
+  {
+   "kind": "car",
+   "at": [
+    -0.2975002910912319,
+    5.644930332307273
+   ],
+   "rot": 9.46729715973715,
+   "colour": [
+    0.08437561091425422,
+    0.08437561091425422,
+    0.08437561091425422
+   ]
+  },
+  {
+   "kind": "bays",
+   "at": [
+    -0.7590463111150778,
+    7.612920405562539
+   ],
+   "rows": 2,
+   "cols": 4
+  },
+  {
+   "kind": "barrier",
+   "at": [
+    0.9291205873157402,
+    5.371067856406529
+   ],
+   "angle": 2.073083647144202
+  },
+  {
+   "kind": "railing",
+   "at": [
+    0.6891950562473967,
+    5.855762112997645
+   ],
+   "length": 7.870791289097713,
+   "height": 0.9146078577311111
+  }
+ ],
+ "from_scene": "a hospital car park at eight in the morning under fresh snow, unbroken white across the painted bays and along the tops of the barrier rails, one set of tyre tracks curving to the exit, a lit sodium lamp still burning and a low white sky, the hill falling away beyond the fence",
+ "not_built": []
+}

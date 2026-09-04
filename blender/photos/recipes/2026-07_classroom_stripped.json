@@ -1,0 +1,86 @@
+{
+ "mode": "room",
+ "ground": "carpet",
+ "room": false,
+ "interior": true,
+ "id": "2026-07_classroom_stripped",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   -0.44874542958786834,
+   2.7471034885492416,
+   0.8809201461993106
+  ],
+  "height": 0.018091193301740277,
+  "distance": 3.4237855871079255,
+  "lean_deg": 12.381193729501529,
+  "mm": 24.821652889386
+ },
+ "handheld": 0.39443140808987986,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "chair",
+   "at": [
+    2.612824821369568,
+    1.9037030761940605
+   ],
+   "rot": 28.061869336465698
+  },
+  {
+   "kind": "table",
+   "at": [
+    0.4928478119288944,
+    3.097709504509475
+   ],
+   "w": 1.1219117865966666,
+   "d": 0.7018270911786051,
+   "h": 0.4305819501709009,
+   "rot": 13.254216023632008
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.0,
+    4.927881056498823
+   ],
+   "as_kind": "painted",
+   "w": 7.0,
+   "h": 2.5975876503693125
+  },
+  {
+   "kind": "block",
+   "at": [
+    -1.797960543921489,
+    1.532007623207954
+   ],
+   "w": 0.86,
+   "d": 0.46,
+   "h": 0.16,
+   "tone": [
+    0.26,
+    0.19,
+    0.12
+   ],
+   "rot": -10.096059859345505
+  },
+  {
+   "kind": "window_light",
+   "at": [
+    1.1409817292471112,
+    3.624164929065692,
+    1.5376541904589316
+   ],
+   "w": 1.1979374490590344,
+   "h": 1.6391309141098183
+  }
+ ],
+ "from_scene": "an art room stripped for the summer, chairs upended on tables in rows, the display walls bare down to pinholes and a few strips of faded sugar paper still stapled at the corners, a plan chest with its top drawer half open, a mop bucket by the door and one window propped, harsh late light with dust in it and long shadows across a scarred lino floor",
+ "not_built": []
+}

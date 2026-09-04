@@ -1,0 +1,65 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.0589667024172502,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-12_parents_table",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04462688812900107
+  ],
+  "height": 0.3809240276238024,
+  "distance": 0.36463843758410286,
+  "lean_deg": 6.679485956676928,
+  "mm": 24.089902218117896
+ },
+ "handheld": 0.4107414457303185,
+ "quality": 82,
+ "objects": [
+  {
+   "kind": "sheet",
+   "at": [
+    0.011793410033249404,
+    -0.001319605579708845
+   ],
+   "w": 0.11823815107784702,
+   "h": 0.2753492947774677,
+   "rot": -7.66865413440399
+  },
+  {
+   "kind": "plate",
+   "at": [
+    0.17911996323001833,
+    -0.048040079116534976
+   ],
+   "r": 0.11642775584727065,
+   "rot": 88.36005938153417
+  },
+  {
+   "kind": "cloth",
+   "at": [
+    -0.15044495788982312,
+    -0.036467816120804575
+   ],
+   "w": 0.353017983490303,
+   "d": 0.2550553722338264,
+   "rot": 47.02291942356406
+  }
+ ],
+ "from_scene": "a long dining table after a meal, crumpled paper crowns and cracker debris among used plates, a candle burned two thirds down, eleven mismatched chairs pushed back at angles, a dog lead coiled on the corner of the cloth, warm lamplight",
+ "not_built": []
+}

@@ -1,0 +1,49 @@
+{
+ "mode": "outdoor",
+ "ground": "grass",
+ "room": false,
+ "sky": true,
+ "id": "2026-06_marquee_chairs",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.7971030470327274,
+   8.481907377769843,
+   1.6798451520859525
+  ],
+  "height": 0.5574723523894441,
+  "distance": 10.556601784609793,
+  "lean_deg": 8.270340674968761,
+  "mm": 28.283643169496468
+ },
+ "handheld": 0.01873317653854495,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "rope",
+   "at": [
+    -1.8717339373224129,
+    5.906777002954001
+   ],
+   "z": 0.0
+  },
+  {
+   "kind": "wood",
+   "at": [
+    -1.5144089789018258,
+    7.553749563363152
+   ],
+   "count": 9,
+   "height": 12.219117865966666,
+   "radius": 0.28109625470716304
+  }
+ ],
+ "from_scene": "a row of white plastic chairs set out on cut grass at the open edge of a marquee, one chair's front legs sunk into the turf and tilted, a printed order of service face down on a seat weighted by a small stone, guy ropes and a wooden peg in the foreground, striped canvas and a bright overcast sky behind",
+ "not_built": []
+}

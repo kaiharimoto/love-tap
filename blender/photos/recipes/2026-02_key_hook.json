@@ -1,0 +1,59 @@
+{
+ "mode": "room",
+ "ground": "carpet",
+ "room": false,
+ "interior": true,
+ "id": "2026-02_key_hook",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   -0.3036185244460311,
+   3.183876121668762,
+   1.182280146828935
+  ],
+  "height": 0.1463834820508161,
+  "distance": 3.7513560449979173,
+  "lean_deg": 5.990334790983521,
+  "mm": 22.1070467230774
+ },
+ "handheld": 0.3345875538191015,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "coat",
+   "at": [
+    2.2626552437061243,
+    0.7103956995229392
+   ],
+   "rot": 10.365418235721016
+  },
+  {
+   "kind": "window_light",
+   "at": [
+    -1.0096059859345505,
+    4.080999883563507,
+    1.5594206094065455
+   ],
+   "w": 1.5773884755921,
+   "h": 1.4219117865966666
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.0,
+    4.6
+   ],
+   "as_kind": "painted",
+   "w": 7.0,
+   "h": 2.8
+  }
+ ],
+ "from_scene": "a small brass hook screwed into a painted door frame with two keys hanging from it on separate rings, the paint chipped where the screw went in, a coat sleeve and the edge of a door in soft focus behind, flat daylight from a hallway window",
+ "not_built": []
+}

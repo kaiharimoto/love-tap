@@ -1,0 +1,90 @@
+{
+ "mode": "tabletop",
+ "surface": "steel",
+ "surface_size": 1.3502670043301463,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-07_hill_thermos",
+ "by": "teo",
+ "light": "night",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03629043598215547
+  ],
+  "height": 0.455216978886109,
+  "distance": 0.3234090205827851,
+  "lean_deg": -8.330241012435156,
+  "mm": 26.960335190813048
+ },
+ "handheld": 0.5971707698985376,
+ "quality": 80,
+ "objects": [
+  {
+   "kind": "flask",
+   "at": [
+    -0.014395876773357696,
+    0.013765419045893148
+   ],
+   "r": 0.04164560293657871,
+   "h": 0.2474213571281306,
+   "rot": 76.01377753113286
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.1800229039697836,
+    -0.05651561405873082
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.027602974477304337,
+    0.15881400770675855
+   ],
+   "w": 0.2289345943194743,
+   "h": 0.2723799251758181,
+   "folds": 3,
+   "rot": -1.7850017465473904,
+   "printed": 1.0
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.2884829162333101,
+    -0.03249130656829815
+   ],
+   "w": 0.1988406675868,
+   "h": 0.1795175300738625,
+   "rot": 9.19380608343809
+  },
+  {
+   "kind": "bag",
+   "at": [
+    0.019004438341862957,
+    -0.23920442012237833
+   ],
+   "w": 0.31139405282494115,
+   "d": 0.162140934461548,
+   "h": 0.31735786636898883,
+   "rot": 70.67208890806
+  }
+ ],
+ "from_scene": "a battered steel flask and two enamel cups standing on a low stone wall at the top of a hill at dusk, one cup steaming, a folded coat and a paper bag with a corner torn off beside them, the city spread out far below in dim orange grids with a river running black through it, the last blue of the sky above and no lamp nearby",
+ "not_built": []
+}

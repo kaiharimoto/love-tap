@@ -1,0 +1,98 @@
+{
+  "critic": "coherence",
+  "cycle": 1,
+  "score": 13,
+  "floor": 13,
+  "meets_floor": true,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "04_moments.png",
+      "where": "the whole body of the screen, below the filter row",
+      "what": "Moments is empty: one graph-paper note reading \"it fills in as it happens. everything either of you sends ends up here, by day and by kind.\" and nothing else, on a screen that is 9.5% paper by pixel area against 47% for Pulse and 67% for Settings.",
+      "why": "the rubric's first clause is the same event appearing consistently across Chat, Moments and Us; Moments is the only region that could demonstrate the regions are views over one log, and it shows no events at all, so two of the three cross-references the row names (a feeling in Chat and in Moments, a date in Us and in Moments) cannot be made from the evidence."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "17_setup_pwa.png",
+      "where": "the entire screen, ground, body and tab bar",
+      "what": "The PWA setup screen is drawn in a different visual language: a flat untextured RGB(76,62,50) fill instead of the shared table ground of RGB(92,81,72) used by all five regions and by 10_first_run; no paper anywhere (0.009% of body pixels above 200 luminance, against 47-67% elsewhere); and a tab bar whose five index cards are gone entirely (strip mean 77/63/52 and std 12 against 194/188/179 and std 58 on every other screen), leaving bare labels floating on brown. All headings and body sit at 1.99:1 contrast.",
+      "why": "the rubric requires one visual language and one navigation treatment to hold; this screen keeps the tab labels and the copy but loses the surface, the paper and the cards, so the first surface an Apple user meets reads as a different app with the stylesheet half missing."
+    },
+    {
+      "severity": "serious",
+      "artifact": "06_unfolding.mp4, 07_feeling_landing.mp4, 11_chat_scroll.mp4, 15_authored_feeling.mp4",
+      "where": "the tab bar, bottom of frame, at the real device size of 1080x2340",
+      "what": "The navigation breaks at phone width: the fifth card's label wraps to \"SETTING / S\", overflowing its card, and the MOMENTS and SETTINGS cards collide with no gap. This is visible in every clip on every tab; the 1440x3120 stills hide it because they were captured at a wider viewport.",
+      "why": "navigation is the element the rubric names as needing to hold across all five regions, and at the size the manifest itself declares as the phone minimum it is broken on all five."
+    },
+    {
+      "severity": "serious",
+      "artifact": "07_feeling_landing.mp4 vs 01_pulse.png",
+      "where": "the partner card, lower third of the card",
+      "what": "The two captures of the same Pulse card disagree about its contents. The 1440 still has eleven fields and no WARMTH row; the 1080 clip adds a \"WARMTH ACHE SHELTER MISCHIEF STATIC\" row which overprints the \"AT HOME / yes\" field (\"ACHE SHELTER\" is drawn directly on top of \"AT HOME\") and runs off the torn right edge of the paper onto the brown ground.",
+      "why": "the signature card of the signature region renders with text-on-text collision at the real device size, and the two artifacts of that region cannot both be true about what the card contains."
+    },
+    {
+      "severity": "serious",
+      "artifact": "05_settings.png",
+      "where": "the banner at the top and the pairing card 300px below it, in the same image",
+      "what": "The screen contradicts itself: the persistent banner shows a fully populated partner state (\"week one, and the room smells right again\", TRAVELLING, NEED |||, ENERGY |) while the card immediately below reads \"not paired yet.\" and \"LINK connecting - http://127.0.0.1:8480\". Pulse meanwhile reports the partner's battery at 72%, their clock at 11:00 and LAST UP \"just now\", and Chat shows read receipts.",
+      "why": "partner state is legible on every screen, which the rubric asks for, but one region asserts there is no partner link while the other four render live partner telemetry, so the screens are not agreeing about the state of the one system."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png, 03_us.png",
+      "where": "the scheduled-note row at 02_chat y~2400; the Us date note and the DATES THAT MATTER cards",
+      "what": "Five date formats across two regions, one of them a machine serialization. Chat renders \"Wed 22 Apr - 16:50\" and the raw \"2026-04-23T16:00:00+01:00\" on the same row. Us renders \"PLANNED 9/11\" (no year), \"ANNIVERSARY 9/11/2024\", \"ANNIVERSARY 14/3/1996\" (a different field order from the line above it) and the same date spelled out as \"noor, the fourteenth of march\".",
+      "why": "the rubric names the treatment of a date as a test of one visual language; here a date is stamped five ways across two regions and an ISO 8601 string with a timezone offset is shown to the reader."
+    },
+    {
+      "severity": "serious",
+      "artifact": "14_media_viewer.png",
+      "where": "the whole screen",
+      "what": "14_media_viewer is 13_messenger_states scrolled 376 pixels (mean absolute difference 14.6 after that shift, against 58.8 unshifted): the same four notes, the same Thu 3 Sep timestamps. There is no media viewer, and no photograph, video or voice note exists in any artifact in the evidence (saturation p99 is 0.23 or below on every capture).",
+      "why": "the rubric's named cross-reference, a photograph in Chat and in Moments, cannot be checked at all because no image content exists anywhere in the system as captured."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the filter row, y 300-500",
+      "what": "The person filter chips \"both\" and \"noor\" are flat hard-edged rectangles with square corners, the only non-paper surfaces in the app; the row overflows, with \"both\" cut by a hard vertical edge at x~985 and \"noor\" running off the right edge of the screen. The kind labels above them (\"WHAT WE SENT / WHAT HAPPENED / WHAT WE FELT\") sit at 1.17:1 contrast, against 3.75:1 for the equivalent section label in Settings and 2.46:1 in Us.",
+      "why": "the same element, a small-caps section label, is stamped at three different contrasts in three regions, and Moments is the one region that steps outside the paper material for its controls."
+    },
+    {
+      "severity": "minor",
+      "artifact": "13_messenger_states.png, 14_media_viewer.png, 03_us.png",
+      "where": "the top edge under the banner and the bottom edge above the tab bar",
+      "what": "Content is clipped mid-line with no mask or fade at both edges. The same note at Thu 3 Sep 16:55 reads \"I have already cut the end off.\" in 14 and only \"off.\" in 13, where the banner has sliced it; in 03_us the tab bar slices \"ANNIVERSARY 14/3/1996\" and \"DAYS\" through the middle of the glyphs.",
+      "why": "a truncated fragment reads as a whole message, so the same event renders as two different messages in two artifacts of the same region."
+    },
+    {
+      "severity": "minor",
+      "artifact": "MANIFEST.json",
+      "where": "the missing block",
+      "what": "Three of the seventeen expected artifacts are absent: 08_state_propagating.mp4, 09_two_devices.png and 16_setup_android.png, all attributed to no Android device being up. These are precisely the three that would have shown an event authored on one device arriving on the other, the same event on two devices side by side, and whether the Android surface shares the visual language.",
+      "why": "every artifact that would have evidenced coherence across the two devices is missing, so the claim that these are views over one shared log rests entirely on one device's local render."
+    },
+    {
+      "severity": "minor",
+      "artifact": "DIFF.json",
+      "where": "the artifacts block and evidence/.previous/",
+      "what": "All ten labels shipped null. More seriously, every file in evidence/.previous/ is byte-identical to its current counterpart (md5 matches on all ten), and SSIM against an identical image is 1.0, so none of the recorded values of 0.5677 to 0.8926 can be reproduced from the baseline that shipped. The 'reading' field is at least internally consistent with the numbers at a ~0.60 threshold, but 'reworked' spans 0.6027 to 0.8926 and so carries almost no information. Labels and a label_basis have now been written, with the unreproducible baseline recorded in the file.",
+      "why": "the build's own record of what changed between sessions cannot be checked against the baseline it shipped, and the one artifact it rates as least changed (04_moments at 0.8926, called 'reworked') is the region that fails this row."
+    }
+  ],
+  "what_is_working": [
+    "The partner banner is pixel-identical across all five regions: comparing 01, 02, 03, 04 and 05 over rows 0-250 gives a maximum channel difference of 1 and zero pixels differing by more than 2. It is one component carrying one state, not five copies, and it answers the rubric's partner-state question cleanly rather than confining partner state to Pulse.",
+    "That same banner survives into 10_first_run in a genuinely degraded pre-pairing state: white paper instead of yellow, no headline, NEED and ENERGY meters empty. One component, two states, drawn by the same hand.",
+    "The tab bar is the same five index cards in the same order with the same active treatment (white card, darker ink) on all five regions and on 10_first_run, and the ground colour is exactly RGB(92,81,72) on every one of them.",
+    "A feeling is genuinely the same object in two regions. The navy three-peak zigzag and the line-drawn chair that sit in the Pulse vocabulary row appear as authored notes inside the Chat log at Thu 3 Sep 16:58 (\"ugh\") and 17:19 (\"empty chair\"), drawn identically down to the stroke.",
+    "The single best proof of one shared log in the whole set: Chat carries state-change events as low-key inline rows, \"noor - travelling\" at Thu 3 Sep 17:09 and \"noor needs a lot\" at 17:27, and those two events are exactly the state the persistent banner shows (TRAVELLING, NEED |||) and exactly what the Pulse partner card reads (PLACE travelling, NEEDS a lot). An event in Chat, the resulting state on Pulse, and the same state stamped on every other screen all agree.",
+    "12_search shows written notes and ambient phone-state events (\"teo's phone is nearly out\", \"teo went out\", \"teo got in\", \"teo's phone went quiet\") interleaved in a single timeline, which is what one log of many event kinds should look like.",
+    "Settings names the event taxonomy in the app's own vocabulary rather than product language: something written, a picture, something to watch, their voice, a feeling, a date moving, the list moving, a day that matters, a note set to arrive later, a feeling one of you made. That list is the extensibility claim made visible, and the words match the module names in Us and the filter names in Moments.",
+    "Two distinct handwriting faces are used consistently to mean sender across 02, 12, 13 and 14, and the small-caps section-label scale is one size (30-34px cap height) in Pulse, Us and Settings.",
+    "The voice holds across all seven screens: no exclamation marks, no emoji, no reader addressed as a user, the app never names itself."
+  ],
+  "verdict": "The five regions do read as one system, and on the two narrower tests this row sets they pass well. The partner banner is literally the same pixels on all five screens and degrades correctly to a pre-pairing state on first run, so the other person's state is legible everywhere rather than only on Pulse; the tab bar, the ground colour, the paper, the two handwriting faces and the section-label scale all hold. There is one real cross-region event chain, and it is a good one: a state change logged in Chat at Thu 3 Sep 17:09 and 17:27 is the same state the banner stamps on every screen and the same state the Pulse card reads out. But the claim that these are views over one log is asserted far more than it is shown, and the reason is a single artifact: Moments is empty. The one region whose whole job is to gather what both people sent, by day and by kind, shows an empty-state note and 9.5% paper coverage against 47-67% for its neighbours, so a feeling cannot be traced from Chat to Moments, a date cannot be traced from Us to Moments, and since no photograph, video or voice note exists anywhere in the evidence, the rubric's third named cross-reference cannot be attempted either. Around that hole sit real fractures: the PWA setup screen abandons the table ground, the paper and the tab cards entirely and reads as the same app with its stylesheet half loaded; the navigation wraps to \"SETTING / S\" at the actual 1080-wide device size in every clip; the Pulse card overprints its WARMTH row on top of AT HOME at that same width and disagrees with the 1440 still about which fields it even has; Settings says \"not paired yet\" three hundred pixels below a banner reporting the partner's mood and battery; and a date is stamped five different ways across Chat and Us, one of them a raw ISO 8601 string with a timezone offset. The visual language is genuinely strong and genuinely shared, which is the harder half to earn; what is missing is the evidence that anything flows through it, and the three artifacts that would have supplied it (08, 09 and 16) are the three that were not captured. Held at the floor."
+}

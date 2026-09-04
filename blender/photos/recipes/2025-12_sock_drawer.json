@@ -1,0 +1,80 @@
+{
+ "mode": "room",
+ "ground": "carpet",
+ "room": false,
+ "interior": true,
+ "id": "2025-12_sock_drawer",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0.3530477920079339,
+   2.457595333940216,
+   0.7491389186810418
+  ],
+  "height": 0.2828361016125134,
+  "distance": 3.367392220990419,
+  "lean_deg": 11.311726577218,
+  "mm": 24.834935744584616
+ },
+ "handheld": 0.15258631053650532,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "block",
+   "at": [
+    1.970216574190982,
+    1.4096436824670426
+   ],
+   "w": 0.86,
+   "d": 0.46,
+   "h": 0.16,
+   "tone": [
+    0.26,
+    0.19,
+    0.12
+   ],
+   "rot": 6.5765667115151345
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -2.1041290238774226,
+    2.266467376180037
+   ],
+   "count": 7,
+   "rot": 9.686126586056858
+  },
+  {
+   "kind": "window_light",
+   "at": [
+    -0.13196055797088446,
+    3.682439648061584,
+    1.303781085471962
+   ],
+   "w": 1.556734507045981,
+   "h": 1.2567430647452136
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.0,
+    4.6
+   ],
+   "as_kind": "painted",
+   "w": 7.0,
+   "h": 2.8
+  }
+ ],
+ "from_scene": "a chest of drawers with the top drawer pulled fully out and set on the floor, empty except for a loose button and a folded receipt, its contents stacked in neat piles on the carpet beside it, flat afternoon light from one window",
+ "not_built": [
+  "button",
+  "carpet",
+  "receipt"
+ ]
+}

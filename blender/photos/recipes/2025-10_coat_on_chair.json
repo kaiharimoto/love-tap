@@ -1,0 +1,67 @@
+{
+ "mode": "room",
+ "ground": "carpet",
+ "room": false,
+ "interior": true,
+ "id": "2025-10_coat_on_chair",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   -0.28865674358411414,
+   3.353047792007934,
+   0.7239980558084234
+  ],
+  "height": -0.10086108131895818,
+  "distance": 3.7850755251600425,
+  "lean_deg": 2.9293638673323343,
+  "mm": 25.615960939602573
+ },
+ "handheld": 0.4961137553023078,
+ "quality": 86,
+ "objects": [
+  {
+   "kind": "coat",
+   "at": [
+    1.4778832237199868,
+    2.007093721348834
+   ],
+   "rot": -20.05191759390163
+  },
+  {
+   "kind": "chair",
+   "at": [
+    -1.5799700055404362,
+    2.959093036270605
+   ],
+   "rot": 9.864850067272698
+  },
+  {
+   "kind": "window_light",
+   "at": [
+    1.1793410033249403,
+    4.147215776811646,
+    1.270609912015396
+   ],
+   "w": 1.556734507045981,
+   "h": 1.2567430647452136
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.0,
+    4.6
+   ],
+   "as_kind": "painted",
+   "w": 7.0,
+   "h": 2.8
+  }
+ ],
+ "from_scene": "a dark green wool coat draped over the back of a bentwood chair on a market floor, one sleeve hanging, a hanger and a price ticket on the seat, cold daylight from a high window",
+ "not_built": []
+}

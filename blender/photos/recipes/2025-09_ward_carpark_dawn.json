@@ -1,0 +1,81 @@
+{
+ "mode": "outdoor",
+ "ground": "wet_tarmac",
+ "room": false,
+ "sky": true,
+ "fog": 0.03279177540271479,
+ "id": "2025-09_ward_carpark_dawn",
+ "by": "teo",
+ "light": "fog_dawn",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.417467872292308,
+   8.307882661741473,
+   1.5801602408506827
+  ],
+  "height": 0.4638326693823752,
+  "distance": 11.359943749686238,
+  "lean_deg": -6.255149483317311,
+  "mm": 24.15107299459346
+ },
+ "handheld": 0.4675371367944041,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "car",
+   "at": [
+    1.9271137502904079,
+    5.281923377909322
+   ],
+   "rot": -2.55621804480133,
+   "colour": [
+    0.17269370045089705,
+    0.17269370045089705,
+    0.17269370045089705
+   ]
+  },
+  {
+   "kind": "bays",
+   "at": [
+    -0.09897041847816324,
+    5.70609912015396
+   ],
+   "rows": 2,
+   "cols": 4
+  },
+  {
+   "kind": "barrier",
+   "at": [
+    -0.4810945726401903,
+    6.1768259733597795
+   ],
+   "angle": 5.258305835073958
+  },
+  {
+   "kind": "post",
+   "at": [
+    -4.520038883831533,
+    8.08105621098292
+   ],
+   "as_kind": "lamp",
+   "height": 6.328828335575757
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.7313444064500534,
+    5.418480552476048
+   ],
+   "as_kind": "brick",
+   "w": 7.567430647452135,
+   "h": 1.1487020601524591
+  }
+ ],
+ "from_scene": "a hospital car park at first light in fog, empty white-lined bays, a lowered barrier arm with a chevron stripe, three lamp posts fading into grey, wet tarmac holding the light, a low brick wall along the far edge",
+ "not_built": []
+}

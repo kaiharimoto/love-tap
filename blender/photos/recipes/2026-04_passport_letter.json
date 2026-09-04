@@ -1,0 +1,95 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.4232479334079005,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-04_passport_letter",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.032538937605135994
+  ],
+  "height": 0.4594784883624478,
+  "distance": 0.3173073840261791,
+  "lean_deg": 2.680906897607805,
+  "mm": 26.286304497769436
+ },
+ "handheld": 0.6832594261013815,
+ "quality": 80,
+ "objects": [
+  {
+   "kind": "folded",
+   "at": [
+    0.013783901124947939,
+    0.008557621129976458
+   ],
+   "w": 0.21,
+   "h": 0.297,
+   "folds": 1,
+   "rot": 9.46729715973715,
+   "printed": 1.0
+  },
+  {
+   "kind": "card",
+   "at": [
+    0.19733213664909507,
+    -0.08083458779558371
+   ],
+   "w": 0.088,
+   "h": 0.125,
+   "rot": -12.62007482418188,
+   "colour": [
+    0.02,
+    0.028,
+    0.045
+   ],
+   "thick": 0.005
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.04812254961757255,
+    0.13128414008231046
+   ],
+   "w": 0.17185531115296981,
+   "h": 0.2943296469852592,
+   "rot": 5.566017846097935
+  },
+  {
+   "kind": "envelope",
+   "at": [
+    -0.27881801321700395,
+    -0.07994195767423112
+   ],
+   "w": 0.23404999417817537,
+   "h": 0.18492757617581818,
+   "rot": -10.12061748153437
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.04011585037162664,
+    -0.19414935143172296
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  }
+ ],
+ "from_scene": "an official printed letter on a kitchen table with a small passport photograph paper-clipped to the top corner, a printed circle marking the wall behind the head in the photograph, the letter creased in three from the envelope, the torn envelope underneath and a cold mug on the corner, grey daylight from a window",
+ "not_built": []
+}

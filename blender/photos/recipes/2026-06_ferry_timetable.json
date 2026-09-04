@@ -1,0 +1,80 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.3839195951654721,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-06_ferry_timetable",
+ "by": "noor",
+ "light": "night",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04768741961357362
+  ],
+  "height": 0.40108264446930014,
+  "distance": 0.310155750420544,
+  "lean_deg": 15.916558137991647,
+  "mm": 26.040855750818096
+ },
+ "handheld": 0.40864483838517074,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "sheet",
+   "at": [
+    0.008557621129976458,
+    -0.018929532769226005
+   ],
+   "w": 0.20610163230236572,
+   "h": 0.23484271425626116,
+   "rot": 20.675851687421904
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.26772190826842746,
+    -0.00471647589715388
+   ],
+   "w": 0.22594206094065455,
+   "h": 0.27234922814808205,
+   "folds": 3,
+   "rot": 3.6775224333752377,
+   "printed": 1.0
+  },
+  {
+   "kind": "board",
+   "at": [
+    -0.045081278544214134,
+    0.21833769154919197
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "pen",
+   "at": [
+    -0.22955181761024812,
+    -0.1464625726516347
+   ],
+   "as_kind": "pen",
+   "length": 0.12742795510549088,
+   "rot": 76.61248690089457
+  }
+ ],
+ "from_scene": "a paper ferry timetable pinned to a weathered green noticeboard at the top of river steps, the sheet curled at both bottom corners and rippled from damp, four brass drawing pins, sailing times in a plain grid with the last crossing underlined by hand in biro, a strip of older torn paper still stapled beside it, low gold evening light raking across the board",
+ "not_built": []
+}

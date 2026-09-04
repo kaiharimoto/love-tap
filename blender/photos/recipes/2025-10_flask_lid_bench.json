@@ -1,0 +1,89 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.0068643291549206,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-10_flask_lid_bench",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.017159500390236837
+  ],
+  "height": 0.31220209882928157,
+  "distance": 0.23286408534076095,
+  "lean_deg": -11.220914596643876,
+  "mm": 27.71511658845636
+ },
+ "handheld": 0.3586639994099751,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "flask",
+   "at": [
+    0.014626888129001068,
+    0.004184805524760478
+   ],
+   "r": 0.039942064933399454,
+   "h": 0.20383968892934776,
+   "rot": 8.845005362587525
+  },
+  {
+   "kind": "pen",
+   "at": [
+    0.23567707557908235,
+    0.0806024456148508
+   ],
+   "as_kind": "pen",
+   "length": 0.1453779927707752,
+   "rot": 66.99403759678802
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.0662389048944585,
+    0.18289062996166283
+   ],
+   "w": 0.21349133853090724,
+   "h": 0.3090889218786301,
+   "folds": 3,
+   "rot": 7.0760460199496436,
+   "printed": 1.0
+  },
+  {
+   "kind": "cloth",
+   "at": [
+    -0.2431503084841281,
+    -0.07916995998615228
+   ],
+   "w": 0.32538138047101905,
+   "d": 0.1941219824030792,
+   "rot": 46.701488462382876
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.03879148386463234,
+    -0.1830799445361736
+   ],
+   "r": 0.042315313342303026,
+   "h": 0.1037638430584566,
+   "rot": 94.04583884712812,
+   "full": 0.55
+  }
+ ],
+ "from_scene": "a small dented vacuum flask standing open on a kitchen bench with its lid lying on its side in a ring of spilled liquid, a folded tea towel and two unmatched mugs behind, hard flash from close range",
+ "not_built": []
+}

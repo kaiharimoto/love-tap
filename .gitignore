@@ -25,3 +25,6 @@ node_modules/
 # derived from evidence/*.png so the next session can measure a diff; not an artifact
 /evidence/.previous/
 /evidence/frames/
+# clip frames: the intermediate the mp4 is assembled from, never the artifact
+/evidence/frames/
+/evidence/.previous/

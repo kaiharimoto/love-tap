@@ -1,0 +1,88 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.328457387180979,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-09_soup_bowl",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04807458043746512
+  ],
+  "height": 0.26228810971830685,
+  "distance": 0.24863800156094734,
+  "lean_deg": -7.647664187314948,
+  "mm": 23.402002666898778
+ },
+ "handheld": 0.1045424931984152,
+ "quality": 89,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    -0.016068886505516654,
+    0.014626888129001068
+   ],
+   "r": 0.11157656671151514,
+   "h": 0.06845480382307076,
+   "rot": 23.51145971178203
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.28403696905094633,
+    0.023859904989374847
+   ],
+   "r": 0.038326410987479784,
+   "h": 0.10191866184718347,
+   "rot": 133.98807519357604,
+   "full": 0.0
+  },
+  {
+   "kind": "spoon",
+   "at": [
+    -0.03785875716313981,
+    0.14298516315685555
+   ],
+   "length": 0.29854227500580816,
+   "rot": 41.27693511637291
+  },
+  {
+   "kind": "tin",
+   "at": [
+    -0.2819143867828936,
+    -0.019619424189240155
+   ],
+   "r": 0.08401029581521838,
+   "h": 0.0652957434011547,
+   "rot": 23.350744231191438,
+   "lid": "beside"
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -0.039626828964384714,
+    -0.11886671875134902
+   ],
+   "count": 5,
+   "rot": -12.656108874728293
+  }
+ ],
+ "from_scene": "a wide shallow bowl of dark brown soup on a wooden table, steam gone, a spoon resting in it at an angle, an empty second bowl stacked behind, two salt grains and a ring of spilled liquid on the wood",
+ "not_built": [
+  "steam"
+ ]
+}

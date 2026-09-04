@@ -113,8 +113,14 @@ def _aim(obj, direction):
     obj.rotation_euler = rot.to_euler()
 
 
-def add_daylight(scene):
-    """The daylight condition. Returns (sun, world)."""
+def add_daylight(scene, elevation=None, azimuth=None):
+    """The daylight condition. Returns (sun, world).
+
+    The elevation can be lowered for a photograph taken early or late, but the azimuth stays
+    where DIRECTION.md put it unless a caller has a reason: everything in this build agrees that
+    the light comes from the upper left, and a photograph lit from the other side would sit in
+    the thread arguing with the note beside it.
+    """
     sun_data = bpy.data.lights.new("window_sun", "SUN")
     sun_data.energy = DAY_STRENGTH
     sun_data.color = DAY_COLOR
@@ -123,7 +129,8 @@ def add_daylight(scene):
     scene.collection.objects.link(sun)
     sun.location = (0, 0, 2.0)
     # the sun sits at (azimuth, elevation) and shines toward the origin
-    src = _sun_direction(DAY_AZIMUTH_DEG, DAY_ELEVATION_DEG)
+    src = _sun_direction(DAY_AZIMUTH_DEG if azimuth is None else azimuth,
+                         DAY_ELEVATION_DEG if elevation is None else elevation)
     _aim(sun, (-src[0], -src[1], -src[2]))
     world = _world(scene, DAY_SKY, DAY_SKY_STRENGTH)
     return sun, world

@@ -1,0 +1,88 @@
+{
+ "mode": "tabletop",
+ "surface": "steel",
+ "surface_size": 1.0068643291549206,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-10_soup_orange",
+ "by": "teo",
+ "light": "kitchen_bulb",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.017159500390236837
+  ],
+  "height": 0.31220209882928157,
+  "distance": 0.23286408534076095,
+  "lean_deg": -11.220914596643876,
+  "mm": 27.71511658845636
+ },
+ "handheld": 0.3586639994099751,
+ "quality": 89,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    0.014626888129001068,
+    0.004184805524760478
+   ],
+   "r": 0.11157656671151514,
+   "h": 0.06845480382307076,
+   "rot": 23.51145971178203
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.23567707557908235,
+    0.0806024456148508
+   ],
+   "w": 0.20868039442029115,
+   "h": 0.2688262390019245,
+   "folds": 3,
+   "rot": -5.7731348716822835,
+   "printed": 1.0
+  },
+  {
+   "kind": "cloth",
+   "at": [
+    0.0662389048944585,
+    0.18289062996166283
+   ],
+   "w": 0.37118890906759233,
+   "d": 0.18383968892934774,
+   "rot": 17.69001072517505
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.2431503084841281,
+    -0.07916995998615228
+   ],
+   "r": 0.03997751278207946,
+   "h": 0.09674566926545362,
+   "rot": 353.4402375261367,
+   "full": 0.0
+  },
+  {
+   "kind": "pan",
+   "at": [
+    0.03879148386463234,
+    -0.1830799445361736
+   ],
+   "r": 0.0966320549373989,
+   "h": 0.10383732369436693
+  }
+ ],
+ "from_scene": "a wide shallow bowl of thick orange soup on a scratched steel kitchen bench, coarse black pepper on the surface, a folded tea towel behind it, a chipped enamel pan just out of focus at the edge, one warm bulb overhead",
+ "not_built": []
+}

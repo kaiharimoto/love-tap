@@ -1,0 +1,51 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-07_island_wall",
+ "by": "teo",
+ "light": "hard_sun",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.30646020278126973,
+   12.78736176194722,
+   1.5891504461524484
+  ],
+  "height": 0.41351703374843807,
+  "distance": 11.283643169496468,
+  "lean_deg": -11.3577196615356,
+  "mm": 26.86789331844944
+ },
+ "handheld": 0.5496718026182444,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "wall",
+   "at": [
+    -0.5048029929672753,
+    4.702499708908768
+   ],
+   "as_kind": "brick",
+   "w": 6.1923990940163804,
+   "h": 2.360047286980286
+  },
+  {
+   "kind": "wood",
+   "at": [
+    2.3913091410981817,
+    6.481907377769844
+   ],
+   "count": 9,
+   "height": 12.219117865966666,
+   "radius": 0.28109625470716304
+  }
+ ],
+ "from_scene": "a dry stone wall running along the top path of a small island, sheep cropped turf and thrift growing out of the gaps, a wooden stile with one worn step, the sea flat and pale beyond the drop and a single white house far off on the headland, high thin cloud and a wide bright sky with no sun in the frame",
+ "not_built": []
+}

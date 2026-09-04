@@ -1,0 +1,69 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.519403321935016,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-10_roster_paper",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03418480552476048
+  ],
+  "height": 0.4407980469801286,
+  "distance": 0.33339742978338466,
+  "lean_deg": -9.02462580404547,
+  "mm": 25.933867469502275
+ },
+ "handheld": 0.6205690571397189,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "folded",
+   "at": [
+    -0.001319605579708845,
+    -0.012939008798460399
+   ],
+   "w": 0.21349133853090724,
+   "h": 0.3090889218786301,
+   "folds": 3,
+   "rot": 7.0760460199496436,
+   "printed": 1.0
+  },
+  {
+   "kind": "pen",
+   "at": [
+    0.26138208448366107,
+    -0.05129295984564752
+   ],
+   "as_kind": "pencil",
+   "length": 0.1461339783123256,
+   "rot": 66.99403759678802
+  },
+  {
+   "kind": "tin",
+   "at": [
+    -0.14819727416224365,
+    0.057563252788131215
+   ],
+   "r": 0.08993242503363635,
+   "h": 0.08814576458768489,
+   "rot": 23.51145971178203,
+   "lid": "beside"
+  }
+ ],
+ "from_scene": "a printed shift rota folded into thirds and flattened out on a bare kitchen table, a grid of four weeks with pencil crosses on some squares, a stub of pencil beside it and an open biscuit tin at the top edge",
+ "not_built": []
+}

@@ -1,0 +1,97 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.3502670043301463,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-03_reports_table",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03629043598215547
+  ],
+  "height": 0.455216978886109,
+  "distance": 0.3234090205827851,
+  "lean_deg": -8.330241012435156,
+  "mm": 26.960335190813048
+ },
+ "handheld": 0.5971707698985376,
+ "quality": 87,
+ "objects": [
+  {
+   "kind": "sheet",
+   "at": [
+    0.008557621129976458,
+    -0.018929532769226005
+   ],
+   "w": 0.1271683019257805,
+   "h": 0.24451681622250157,
+   "rot": 27.873617619472206
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.26772190826842746,
+    -0.00471647589715388
+   ],
+   "w": 0.21,
+   "h": 0.297,
+   "folds": 1,
+   "rot": 7.971030470327275,
+   "printed": 1.0
+  },
+  {
+   "kind": "pen",
+   "at": [
+    0.17265539385410414,
+    0.17289796703813443
+   ],
+   "as_kind": "pen",
+   "length": 0.12742795510549088,
+   "rot": 76.61248690089457
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.15808059545742562,
+    0.1979449546334833
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  },
+  {
+   "kind": "plate",
+   "at": [
+    -0.20951519328389326,
+    -0.16193882214341124
+   ],
+   "r": 0.11667451338457345,
+   "rot": 76.01377753113286
+  },
+  {
+   "kind": "crumbs",
+   "at": [
+    0.11047208360783266,
+    -0.22279876695104228
+   ],
+   "spread": 0.10840189147921145,
+   "count": 72
+  }
+ ],
+ "from_scene": "a kitchen table covered end to end with school paperwork, a printed class list four pages long fanned out with rows ticked off in two different pens, a yellow highlighter uncapped and lying on its side, a closed laptop pushed to the back with a mug on top of it, a cold half drunk cup and a plate with crumbs, hard overhead kitchen light",
+ "not_built": []
+}

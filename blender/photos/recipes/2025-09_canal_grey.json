@@ -1,0 +1,79 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2025-09_canal_grey",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.7313444064500534,
+   10.627720828714072,
+   2.0559853523509646
+  ],
+  "height": 0.25048072337538474,
+  "distance": 8.307882661741473,
+  "lean_deg": 2.082563853610921,
+  "mm": 29.31916334691188
+ },
+ "handheld": 0.508660104130061,
+ "quality": 87,
+ "objects": [
+  {
+   "kind": "water",
+   "at": [
+    -0.3834327067201997,
+    7.3491338530907235
+   ],
+   "w": 16.0,
+   "d": 11.0
+  },
+  {
+   "kind": "post",
+   "at": [
+    4.817784375726021,
+    15.743187759143586
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  },
+  {
+   "kind": "rope",
+   "at": [
+    -0.13196055797088446,
+    3.117836730134715
+   ],
+   "z": 0.0
+  },
+  {
+   "kind": "limbs",
+   "at": [
+    -1.4432837179205709,
+    9.765238960039671
+   ],
+   "count": 9,
+   "length": 3.313469014091962
+  },
+  {
+   "kind": "trunk",
+   "at": [
+    -2.71202333029892,
+    5.589667024172502
+   ],
+   "height": 6.04495376496809,
+   "radius": 0.16652821974959567,
+   "lean": 0.04151197108310081
+  }
+ ],
+ "from_scene": "flat grey canal water under low cloud, a black iron mooring ring set in the stone edge, a coil of wet rope, the far bank a line of brick and one bare tree, no wind and no reflection to speak of",
+ "not_built": [
+  "reflection"
+ ]
+}

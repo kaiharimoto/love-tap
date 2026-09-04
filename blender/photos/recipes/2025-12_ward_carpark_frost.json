@@ -1,0 +1,53 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2025-12_ward_carpark_frost",
+ "by": "teo",
+ "light": "overcast",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.9635568751452039,
+   11.76901150498741,
+   1.4005147907609183
+  ],
+  "height": -0.38817026395381193,
+  "distance": 8.55671628207943,
+  "lean_deg": 7.06095584015868,
+  "mm": 24.28797666970108
+ },
+ "handheld": 0.06879448615345853,
+ "quality": 87,
+ "objects": [
+  {
+   "kind": "car",
+   "at": [
+    -1.3367945062601088,
+    5.460765823257107
+   ],
+   "rot": 8.763843058456597,
+   "colour": [
+    0.08792199472292588,
+    0.08792199472292588,
+    0.08792199472292588
+   ]
+  },
+  {
+   "kind": "bays",
+   "at": [
+    -0.3834327067201997,
+    7.3491338530907235
+   ],
+   "rows": 2,
+   "cols": 5
+  }
+ ],
+ "from_scene": "a hospital car park at eight in the morning in hard frost, white rime on every roof and on the painted bay lines, one small car buried under untouched frost while the bays around it are clear, a low grey sky and a sodium lamp still lit",
+ "not_built": []
+}

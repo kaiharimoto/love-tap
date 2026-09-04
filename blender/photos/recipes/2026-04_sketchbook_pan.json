@@ -1,0 +1,90 @@
+{
+ "mode": "tabletop",
+ "surface": "hob",
+ "surface_size": 1.5984354650873436,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-04_sketchbook_pan",
+ "by": "noor",
+ "light": "lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03432684600654477
+  ],
+  "height": 0.3767556681100488,
+  "distance": 0.3251617439286219,
+  "lean_deg": 15.23471662177744,
+  "mm": 26.231531893212033
+ },
+ "handheld": 0.16777597785298096,
+ "quality": 82,
+ "objects": [
+  {
+   "kind": "book",
+   "at": [
+    -0.018929532769226005,
+    -0.0008807112103370561
+   ],
+   "w": 0.18481907377769846,
+   "d": 0.2857261070973444,
+   "rot": 8.362085285841662,
+   "open_book": true
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.16410517510288805,
+    0.03849803969405807
+   ],
+   "w": 0.16520436605117955,
+   "h": 0.27513560449979174,
+   "rot": 12.836431694964688
+  },
+  {
+   "kind": "pen",
+   "at": [
+    -0.05698628481939376,
+    0.12720271097655828
+   ],
+   "as_kind": "pencil",
+   "length": 0.10830624345044729,
+   "rot": 161.73927423294546
+  },
+  {
+   "kind": "pan",
+   "at": [
+    -0.3168183642246478,
+    0.05421994052358797
+   ],
+   "r": 0.12870791289097713,
+   "h": 0.0914607857731111
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.10946598241709207,
+    -0.18496610633507027
+   ],
+   "r": 0.0423820557647628,
+   "h": 0.08564133031338794,
+   "rot": 350.4113488752687,
+   "full": 0.0
+  }
+ ],
+ "from_scene": "an open sketchbook page filled with a soft pencil drawing of a lidded cooking pan on a hob, the steam above it worked up so heavily in graphite that it has become cloud, smudged fingerprints down the margin, the book weighted flat with a stone, warm lamp light from the right",
+ "not_built": [
+  "graphite",
+  "steam"
+ ]
+}

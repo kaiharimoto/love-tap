@@ -1,0 +1,86 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.4232479334079005,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-07_reports_last",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.032538937605135994
+  ],
+  "height": 0.4594784883624478,
+  "distance": 0.3173073840261791,
+  "lean_deg": 2.680906897607805,
+  "mm": 26.286304497769436
+ },
+ "handheld": 0.6832594261013815,
+ "quality": 85,
+ "objects": [
+  {
+   "kind": "tray",
+   "at": [
+    0.013783901124947939,
+    0.008557621129976458
+   ],
+   "rows": 4,
+   "cols": 6,
+   "rot": -5.060308740767185
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.19733213664909507,
+    -0.08083458779558371
+   ],
+   "w": 0.17185531115296981,
+   "h": 0.2943296469852592,
+   "rot": 5.566017846097935
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -0.04812254961757255,
+    0.13128414008231046
+   ],
+   "count": 4,
+   "rot": -2.0825020376386227
+  },
+  {
+   "kind": "pen",
+   "at": [
+    -0.27881801321700395,
+    -0.07994195767423112
+   ],
+   "as_kind": "pen",
+   "length": 0.1492009457396057,
+   "rot": 44.56773063294523
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.04011585037162664,
+    -0.19414935143172296
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  }
+ ],
+ "from_scene": "an empty wire in-tray on a scuffed staff room desk, one paperclip and a curl of torn paper left in the bottom of it, a squared stack of finished school reports pushed away at the edge of the frame with a blue biro across them, a cold mug ringed inside, late afternoon sun coming in low and flat across the desk",
+ "not_built": []
+}

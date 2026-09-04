@@ -1,0 +1,61 @@
+{
+ "mode": "outdoor",
+ "ground": "wet_tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2026-03_carpark_light",
+ "by": "teo",
+ "light": "low_sun",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.18553392820326442,
+   12.067585168742191,
+   1.7709107923741172
+  ],
+  "height": -0.5678859830767801,
+  "distance": 9.867893318449442,
+  "lean_deg": 6.845890375482668,
+  "mm": 24.840618483996344
+ },
+ "handheld": 0.5908948333031301,
+ "quality": 84,
+ "objects": [
+  {
+   "kind": "car",
+   "at": [
+    -1.0096059859345505,
+    3.989687245295172
+   ],
+   "rot": -9.358669686612064,
+   "colour": [
+    0.27307486307658296,
+    0.27307486307658296,
+    0.27307486307658296
+   ]
+  },
+  {
+   "kind": "barrier",
+   "at": [
+    0.7971030470327274,
+    3.987938251846563
+   ],
+   "angle": 2.073083647144202
+  },
+  {
+   "kind": "railing",
+   "at": [
+    0.30646020278126973,
+    6.85824117463148
+   ],
+   "length": 7.870791289097713,
+   "height": 0.9146078577311111
+  }
+ ],
+ "from_scene": "a hospital car park at eight in the morning in early spring, low sun coming straight down the rows and throwing long shadows off the barrier posts, wet tarmac drying in patches, one lamp still lit on its column, a strip of grass with frost only in the shade and the hill and rooftops beyond the fence",
+ "not_built": []
+}

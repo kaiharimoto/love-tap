@@ -1,68 +1,49 @@
 {
- "surface": null,
- "light": "torch",
+ "mode": "room",
+ "ground": "carpet",
+ "room": false,
+ "interior": true,
+ "id": "2026-08_boiler_gauge",
+ "by": "noor",
+ "light": "night_lamp",
+ "seed": 9382,
  "size": [
   1200,
   1600
  ],
- "seed": 21,
  "camera": {
   "look_at": [
-   0,
-   0,
-   0.92
+   -0.30288179578036517,
+   2.9107499126726304,
+   1.1492757617581817
   ],
-  "height": 0.02,
-  "distance": 0.26,
-  "lean_deg": -14,
-  "mm": 26
+  "height": -0.02650771851917963,
+  "distance": 3.4451681622250154,
+  "lean_deg": 13.007688222420363,
+  "mm": 24.37106785640653
  },
+ "handheld": 0.5912182696865889,
+ "quality": 81,
  "objects": [
   {
    "kind": "wall",
-   "kind_": "",
-   "w": 0.9,
-   "h": 1.6,
-   "y": 0.02
-  },
-  {
-   "kind": "gauge",
    "at": [
-    0,
-    0,
-    0.92
+    0.0,
+    4.845513941190701
    ],
-   "r": 0.028,
-   "needle_deg": -52
+   "as_kind": "painted",
+   "w": 7.0,
+   "h": 3.174158257819543
   },
   {
-   "kind": "pipe",
-   "a": [
-    0.055,
-    0.0,
-    0.99
+   "kind": "coat",
+   "at": [
+    -2.262655243706124,
+    2.4896043004770614
    ],
-   "b": [
-    0.055,
-    0.0,
-    0.8
-   ],
-   "r": 0.007
-  },
-  {
-   "kind": "pipe",
-   "a": [
-    -0.07,
-    0.0,
-    0.86
-   ],
-   "b": [
-    0.02,
-    0.0,
-    0.86
-   ],
-   "r": 0.006
+   "rot": 2.1911786596666545
   }
  ],
- "id": "2026-08_boiler_gauge"
+ "from_scene": "the round pressure gauge of a wall boiler in a hall cupboard, the needle sitting below the green band, condensation inside the glass, a copper filling loop and a seized grey lever underneath, a coat sleeve and the edge of a hoover in the dark behind, the whole thing lit by a phone torch from one side",
+ "not_built": []
 }

@@ -72,6 +72,10 @@ class AppScope extends ChangeNotifier {
   String _lastStanding = '';
   String _lastArrival = '';
 
+  /// A feeling from them, the moment it lands, so the shell can drop it on the desk.
+  final StreamController<(String, double)> _landed = StreamController<(String, double)>.broadcast();
+  Stream<(String, double)> get landed => _landed.stream;
+
   void _refresh() {
     final all = spine.all;
     thread = projectThread(all, me: me);
@@ -96,7 +100,10 @@ class AppScope extends ChangeNotifier {
       _lastArrival = e.id;
       final f = FeelingRegistry(all).byId(e.payload['feeling_id'] as String? ?? '');
       final intensity = (e.payload['intensity'] as num?)?.toDouble() ?? 0.7;
-      if (f != null) unawaited(ambient.pocket(f, intensity));
+      if (f != null) {
+        unawaited(ambient.pocket(f, intensity));
+        if (!_landed.isClosed) _landed.add((f.id, intensity));
+      }
       break;
     }
   }

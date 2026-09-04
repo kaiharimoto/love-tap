@@ -14,6 +14,7 @@ import 'package:desk/spine/projections/state.dart';
 import 'package:desk/spine/types.dart';
 import 'package:desk/transport/transport.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:desk/feelings/landing.dart';
 
 void main() {
   test('at least thirty built-in feelings, in at least five named families', () {
@@ -123,5 +124,53 @@ void main() {
     // and back: the permission is asked of the phone every time, so a step cannot stay ticked
     expect(observe(steps, facts(home: false))['home'], StepState.doing);
     expect(settled(steps, facts(home: true, allowed: true)), isFalse);
+  });
+
+
+  test('a feeling arrives with weight rather than appearing', () {
+    // The whole difference between a feeling and a message in another colour. If this reduces to
+    // "the object is at rest from the first frame", the landing clip is a hard cut and rubric
+    // row 03 is at its floor whatever else is true.
+    const intensity = 0.85;
+    final heights = [
+      for (var ms = 0; ms <= 1600; ms += 16) Fall.heightAt(ms / 1000.0, intensity),
+    ];
+    expect(heights.first, greaterThan(0.5), reason: 'it starts off the desk');
+    expect(heights.any((h) => h == 0.0), isTrue, reason: 'it reaches the desk');
+
+    // it comes back up after the first contact, which is what weight looks like
+    final contacts = Fall.contacts(intensity);
+    expect(contacts.length, greaterThanOrEqualTo(3), reason: 'more than one bounce');
+    final between = Fall.heightAt((contacts[0] + contacts[1]) / 2, intensity);
+    expect(between, greaterThan(0.01), reason: 'it leaves the desk again between contacts');
+
+    // and the shadow does the opposite of the object the whole way down
+    final upShadow = Fall.shadowAt(0.0, intensity);
+    final downShadow = Fall.shadowAt(contacts[0], intensity);
+    expect(downShadow, greaterThan(upShadow * 1.6),
+        reason: 'the shadow draws in hard as the thing lands');
+
+    // something actually moves in every one of the first thirty frames
+    var moving = 0;
+    for (var i = 1; i < 30; i++) {
+      if ((heights[i] - heights[i - 1]).abs() > 0.001) moving++;
+    }
+    expect(moving, greaterThanOrEqualTo(28), reason: 'no still run at the start of the clip');
+  });
+
+  test('the page carries the pattern when there is no vibrator to carry it', () {
+    // On iOS Safari there is no vibration API at all, so the rhythm has to arrive through the
+    // paper instead. Same segments, same milliseconds; a different body.
+    final f = kBuiltInFeelings.firstWhere((f) => f.id == 'hold');
+    final segments = f.segments;
+    expect(segments, isNotEmpty);
+    final total = f.hapticLengthMs;
+    var moved = 0;
+    for (var ms = 0; ms < total; ms += 8) {
+      if (amplitudeAt(segments, ms) > 0) moved++;
+    }
+    expect(moved, greaterThan(0), reason: 'the surface moves at all');
+    expect(moved * 8, lessThan(total), reason: 'and it is a rhythm, not one long push');
+    expect(amplitudeAt(segments, total + 50), 0.0, reason: 'and it stops when the pattern does');
   });
 }

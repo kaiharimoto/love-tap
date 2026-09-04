@@ -1,0 +1,98 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.3877838271854441,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-06_wedding_cake_slice",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.019587198734456055
+  ],
+  "height": 0.4184134076325219,
+  "distance": 0.3564961759768086,
+  "lean_deg": 1.7834681916838733,
+  "mm": 27.068350972028206
+ },
+ "handheld": 0.35549335425125606,
+ "quality": 85,
+ "objects": [
+  {
+   "kind": "cake",
+   "at": [
+    -0.014395876773357696,
+    0.013765419045893148
+   ],
+   "r": 0.0708028504230805,
+   "layers": 3,
+   "lean": 10.067208890806
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.1800229039697836,
+    -0.05651561405873082
+   ],
+   "r": 0.09018270911786051,
+   "h": 0.0609619954700819,
+   "rot": 87.60283721881717,
+   "lid": "beside"
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.08759727290349692,
+    0.14421726634143345
+   ],
+   "w": 0.1999039401406545,
+   "h": 0.2812812463613596,
+   "folds": 3,
+   "rot": 9.565236564392727,
+   "printed": 1.0
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.2572599703552913,
+    0.1093667837770121
+   ],
+   "w": 0.16520436605117955,
+   "h": 0.27513560449979174,
+   "rot": 12.836431694964688
+  },
+  {
+   "kind": "cloth",
+   "at": [
+    -0.23073002267531223,
+    -0.1529007613008013
+   ],
+   "w": 0.29457783881462973,
+   "d": 0.23225840811125079,
+   "rot": 173.6208528584166
+  },
+  {
+   "kind": "crumbs",
+   "at": [
+    0.09633274567591822,
+    -0.18333193522974423
+   ],
+   "spread": 0.1080618693364657,
+   "count": 73
+  }
+ ],
+ "from_scene": "a slice of dark fruit cake with white icing sitting in a folded paper napkin on a coach seat, the napkin printed with two initials and a date, crumbs on the moquette beside it and a folded bus timetable, the window black with a smear of reflected interior light, dim yellow overhead reading lamp",
+ "not_built": []
+}

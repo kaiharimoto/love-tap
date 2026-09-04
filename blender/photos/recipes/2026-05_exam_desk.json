@@ -1,0 +1,78 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.0756272852060658,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-05_exam_desk",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.021570116284974718
+  ],
+  "height": 0.3323680584797243,
+  "distance": 0.2737891818565569,
+  "lean_deg": 4.475711742158509,
+  "mm": 27.7109274516967
+ },
+ "handheld": 0.4937892556425504,
+ "quality": 86,
+ "objects": [
+  {
+   "kind": "sheet",
+   "at": [
+    0.006129204055625396,
+    0.018582411746314805
+   ],
+   "w": 0.14681874199499112,
+   "h": 0.2837682437626182,
+   "rot": -15.180926222301556
+  },
+  {
+   "kind": "pen",
+   "at": [
+    0.2754999274682896,
+    0.020504686403937645
+   ],
+   "as_kind": "pencil",
+   "length": 0.15709280400469855,
+   "rot": 96.57353597899996
+  },
+  {
+   "kind": "card",
+   "at": [
+    -0.1035697677991041,
+    0.09119190508884058
+   ],
+   "w": 0.07192399094016381,
+   "h": 0.16786918863894862,
+   "rot": -17.668104753854635
+  },
+  {
+   "kind": "folded",
+   "at": [
+    -0.17873176619227418,
+    -0.2355258253822453
+   ],
+   "w": 0.21,
+   "h": 0.297,
+   "folds": 1,
+   "rot": 3.4551394119070054,
+   "printed": 1.0
+  }
+ ],
+ "from_scene": "a small table under a lamp with a fat ring binder open near the back of it, three pages torn out and squared in a row, a pencil laid parallel to the pages, a glass of water and a bus card with a printed number on it, the lamp pushed hard to one side so the light falls flat across the paper, dark flat behind",
+ "not_built": []
+}

@@ -1,0 +1,85 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.33808406407704,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-04_market_crate",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04989569767248956
+  ],
+  "height": 0.3816342300327239,
+  "distance": 0.313404534488039,
+  "lean_deg": 5.032348785724377,
+  "mm": 27.880424472152725
+ },
+ "handheld": 0.45241446504968463,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "pen",
+   "at": [
+    0.008557621129976458,
+    -0.018929532769226005
+   ],
+   "as_kind": "pen",
+   "length": 0.1469565457054909,
+   "rot": 44.45722133309533
+  },
+  {
+   "kind": "crate",
+   "at": [
+    0.26772190826842746,
+    -0.00471647589715388
+   ],
+   "rot": 13.783901124947931
+  },
+  {
+   "kind": "pan",
+   "at": [
+    0.09741952476387314,
+    0.20711849890293685
+   ],
+   "r": 0.0999039401406545,
+   "h": 0.08702499708908769
+  },
+  {
+   "kind": "card",
+   "at": [
+    -0.2733262945800486,
+    0.08580687810247614
+   ],
+   "w": 0.1091938060834381,
+   "h": 0.16716482349262962,
+   "rot": 6.493687487114258
+  },
+  {
+   "kind": "board",
+   "at": [
+    0.040614133210372806,
+    -0.2307863329866481
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  }
+ ],
+ "from_scene": "four open wooden crates of potatoes on a market trestle under a canvas awning, each crate with a hand-lettered card price sign pushed into the earth on the tubers, loose soil across the boards, a set of brass scales at the edge of frame and wet cobbles below, flat grey morning light",
+ "not_built": []
+}

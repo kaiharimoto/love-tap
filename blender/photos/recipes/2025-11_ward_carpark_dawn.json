@@ -1,0 +1,54 @@
+{
+ "mode": "outdoor",
+ "ground": "wet_tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2025-11_ward_carpark_dawn",
+ "by": "teo",
+ "light": "low_sun",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.5896705016624701,
+   9.802059163043673,
+   0.9647871700577351
+  ],
+  "height": -0.28865674358411414,
+  "distance": 11.765238960039671,
+  "lean_deg": -10.84809332119568,
+  "mm": 24.589667024172503
+ },
+ "handheld": 0.6059705422575187,
+ "quality": 88,
+ "objects": [
+  {
+   "kind": "car",
+   "at": [
+    1.3837323694366939,
+    3.8026618421597673
+   ],
+   "rot": -4.775231175159549,
+   "colour": [
+    0.06310835709309293,
+    0.06310835709309293,
+    0.06310835709309293
+   ]
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.174566926545362,
+    6.927113750290408
+   ],
+   "as_kind": "brick",
+   "w": 9.98648500672727,
+   "h": 2.3072882293842447
+  }
+ ],
+ "from_scene": "an almost empty multi-storey car park deck at first light, wet tarmac with white bay lines, one small car at the far end, a low concrete wall and a pale flat sky beyond it",
+ "not_built": []
+}

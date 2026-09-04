@@ -1,0 +1,100 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.5118606599130322,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-05_bread_counter",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03222933523960484
+  ],
+  "height": 0.42273403888112837,
+  "distance": 0.3012556238288585,
+  "lean_deg": 2.747784646700598,
+  "mm": 26.089743569056576
+ },
+ "handheld": 0.22998381305652105,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "card",
+   "at": [
+    -0.01495818098626228,
+    -0.008429883715025285
+   ],
+   "w": 0.08481907377769846,
+   "h": 0.1422584081112508,
+   "rot": 32.51922055605091
+  },
+  {
+   "kind": "board",
+   "at": [
+    0.19851750963344816,
+    -0.022082379581843448
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.05051978765953285,
+    0.2295312117578653
+   ],
+   "w": 0.19290572809360682,
+   "h": 0.2542304845199058,
+   "rot": -28.394299153839004
+  },
+  {
+   "kind": "bag",
+   "at": [
+    -0.21385981265866413,
+    0.0770001038308165
+   ],
+   "w": 0.2877982219741574,
+   "d": 0.22281963458494222,
+   "h": 0.2768123696799269,
+   "rot": 75.97219285325959
+  },
+  {
+   "kind": "folded",
+   "at": [
+    -0.17599680659439063,
+    -0.12765725433610375
+   ],
+   "w": 0.1999039401406545,
+   "h": 0.2812812463613596,
+   "folds": 3,
+   "rot": 9.565236564392727,
+   "printed": 1.0
+  },
+  {
+   "kind": "stack",
+   "at": [
+    0.24101487781677822,
+    -0.19095216839383594
+   ],
+   "count": 10,
+   "rot": 2.597474994845701
+  }
+ ],
+ "from_scene": "four dark round loaves left on a wooden bakery counter under a glass shelf, a small hand-lettered card propped against the front one, wire cooling racks and a scatter of flour on the boards, brown paper bags folded in a stack at the edge, a set of tongs, warm late afternoon light coming in low from a shop window",
+ "not_built": []
+}

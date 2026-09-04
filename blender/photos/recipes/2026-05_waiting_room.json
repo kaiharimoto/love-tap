@@ -1,0 +1,84 @@
+{
+ "mode": "room",
+ "ground": "gravel",
+ "room": false,
+ "interior": true,
+ "id": "2026-05_waiting_room",
+ "by": "noor",
+ "light": "strip",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   -0.4318763032007309,
+   3.4129625713767946,
+   0.7630227376717215
+  ],
+  "height": -0.00537354643781604,
+  "distance": 2.978944467837794,
+  "lean_deg": -4.586893175102546,
+  "mm": 24.559463967769815
+ },
+ "handheld": 0.6595298432375382,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "chair",
+   "at": [
+    2.0131898649843984,
+    1.2057853555945046
+   ],
+   "rot": 28.061869336465698
+  },
+  {
+   "kind": "table",
+   "at": [
+    -0.482626658505829,
+    2.815164859529518
+   ],
+   "w": 1.1219117865966666,
+   "d": 0.7018270911786051,
+   "h": 0.4305819501709009,
+   "rot": 13.254216023632008
+  },
+  {
+   "kind": "shelf_rack",
+   "at": [
+    1.1027120899958347,
+    4.1423048451990585
+   ],
+   "rows": 3
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.0,
+    3.5535233615386996
+   ],
+   "as_kind": "painted",
+   "w": 7.0,
+   "h": 2.7404999417817537
+  },
+  {
+   "kind": "stack",
+   "at": [
+    0.6646309162720668,
+    0.19640814408371488
+   ],
+   "count": 5,
+   "rot": 11.159442658458183
+  }
+ ],
+ "from_scene": "a small dental waiting room seen from a chair, a rectangular fish tank on a low table with two fish and a plastic castle in blue gravel, a rack of folded leaflets on the wall behind it, four grey stacking chairs and a low table with magazines squared into a pile, strip lighting and a carpet worn pale in a track to the door",
+ "not_built": [
+  "carpet",
+  "castle",
+  "fish",
+  "gravel",
+  "magazines",
+  "tank"
+ ]
+}

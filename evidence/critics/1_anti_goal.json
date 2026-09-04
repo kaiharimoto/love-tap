@@ -1,0 +1,65 @@
+{
+  "critic": "anti-goal",
+  "cycle": 1,
+  "score": 4,
+  "floor": 9,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "frame at t=0.5s, 1080x2340; a filled white heart at x 180-274, y 1353-1434, sitting on the torn lower edge of the pulse card, directly above the palette label \"a squeeze\". The same heart recurs in 15_authored_feeling.mp4 in every frame where the feeling palette is open (visible at the same place in the palette strip).",
+      "what": "A heart silhouette is the token for the feeling labelled \"a squeeze\" — a flat near-white fill (mean RGB 240,234,228; internal std 11 grey levels; max saturation 0.13) with two soft grey blobs in the lobes, hard aliased outline, no specular, no texture, no cast shadow of its own.",
+      "why": "Anti-goal 2 forbids \"an icon standing in for a feeling\"; a heart is the single most conventional such icon, and it is used here as the literal affordance for sending affection."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "17_setup_pwa.png",
+      "where": "the entire 1440x3120 screen. Measured at (200,700) over a 128x128 patch: std 0.000, range 0, one unique value — flat RGB(76,62,50). Only 3003 pixels in the whole file are brighter than L=140, and they are the dog-ear triangle at x 1363-1439, y 2857-2933.",
+      "what": "The whole setup screen is one flat fill. Every heading and paragraph sits directly on it, and the tab strip at y~2990 is bare text — \"PULSE CHAT US MOMENTS SETTINGS\" — with none of the ruled paper tab cards that carry the same strip on every other screen. The headings are drawn at RGB ~(58,58,60) on RGB(76,62,50), a contrast ratio near 1.05:1.",
+      "why": "Anti-goal 4's test includes \"any surface that is a flat colour where paper should be\"; this is a whole screen of it, in an app whose entire visual concept is that copy lives on paper."
+    },
+    {
+      "severity": "serious",
+      "artifact": "11_chat_scroll.mp4",
+      "where": "frame at t=4.6s, 1080x2340; the reply/react action sheet occupying x 0-1079, y 1965-2339 (full width, bottom 16% of the screen).",
+      "what": "The action sheet is a perfectly uniform rectangle at L=235 — 80x80 sample patches at (400,2050), (700,2200) and (200,2280) each return std 0.000, range 0, exactly one unique value — with sharp corners and a single hand-drawn rule at its top. The words \"reply\" and \"react\" sit on bare colour.",
+      "why": "Same clause of anti-goal 4: a flat-colour surface standing in for paper, in the one place the app asks the reader to act on a note."
+    },
+    {
+      "severity": "minor",
+      "artifact": "05_settings.png",
+      "where": "the tab strip at the foot of the screen, cards starting at x 36, 318, 594, 870, 1149; sampled y 2950-3010.",
+      "what": "The four inactive tab cards are the same texture repeated: pairwise Pearson correlation of their interiors is 0.991-1.000, and after removing the ruling the residual grain is only ~1.0 grey level (the torn notes carry ~4-6). The strip reads as five stamps of one printed swatch rather than five pieces of card.",
+      "why": "Anti-goal 4 names \"the same texture visibly repeating within one screen\"; this is the one place in the app where a surface repeats across a single screen with near-zero independent grain."
+    },
+    {
+      "severity": "minor",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "frame at t=0.5s, the lower palette row: three mint-green polygons at approximately x 195-285, y 1690-1740, tucked into the blue crescent stroke.",
+      "what": "The green shapes are flat unshaded fills with hard aliased edges and no highlight, texture or shadow — the same construction as the heart. They read as flat cut-out shapes rather than as objects.",
+      "why": "Anti-goal 2 rules out flat graphic stand-ins in the feeling vocabulary; these are not emoji and not stock art, but they are on the wrong side of the object/icon line and they sit in the same palette as the confirmed heart."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the empty-state note, x 180-1280, y 1400-1830; second and third lines.",
+      "what": "The string \"everything either of you sends ends up here, by day and by kind.\" addresses the reader in the second person, as does \"let it interrupt you\" (05_settings.png, y ~2470) and \"it will not hold on to anything until you do\" (17_setup_pwa.png).",
+      "why": "Anti-goal 3 bars addressing the reader as \"you the user\"; these address the two named people rather than a generic user and carry no sell, so this is noted as a pattern to watch rather than a breach."
+    }
+  ],
+  "what_is_working": [
+    "Anti-goal 1 is clean across every artifact. Nothing on any screen is a badge, a point, a score out of anything, or a progress bar. The only numbers displayed are 'BATTERY 72%' (01_pulse), 'TO DO 10 open' (03_us, a count of open tasks), and the anniversary countdowns '66 DAYS / 2 years' and '191 DAYS' (03_us). The NEED and ENERGY five-tick meters are state readouts, not achievements.",
+    "No streak machinery exists anywhere in the evidence. 03_us shows three modules — DATES (AHEAD / BEEN), TO DO (OPEN, 'add one'), and DATES THAT MATTER — and none of them counts consecutive days, names a best run, or reports a record broken. The only ritual trace visible is the system line '— kept · text when home' in 12_search, which records a kept thing with no tally and no guilt attached. No rituals module is rendered in any artifact, so there is nothing for the blocking streak test to fire on.",
+    "Not one exclamation mark appears in any displayed string across all ten screenshots and four clips, and there is no 'Oops', no onboarding cheer, and no empty state that sells. First-run reads 'first one's yours. / whatever it is. it only goes to one person.' and Moments reads 'it fills in as it happens.' — both plain, lowercase and declarative.",
+    "The app never names itself. Section labels are 'THE TWO PHONES', 'WHAT MAY INTERRUPT', 'WHAT WE SENT / WHAT HAPPENED / WHAT WE FELT'; the setup screen refers to itself only as 'the app is on the home screen'.",
+    "No colour emoji glyph exists anywhere. A saturation sweep of all ten screenshots, gated to pixels brighter than L=40, returns only two colours above 0.5 saturation: the dark-blue handwriting ink RGB(31,42,68) and the red ink mark; 05_settings and 17_setup_pwa return zero such pixels. The paperclip, waveform, magnifier and arrow marks are drawn shapes, not font glyphs.",
+    "Delivery state is words, not badges: 'sent', 'read', and system lines like 'noor's phone went quiet' and 'teo got in'. There is no unread counter on any tab.",
+    "Anti-goal 4's core is genuinely met on the note surfaces. Every torn note has an irregular fibrous deckle with individual strands (crops/02_chat_300_edge.png, 02_chat_300_shadow.png); the tab cards and the settings card have hard 90-degree corners with no radius and no blurred drop shadow; blank paper carries real aperiodic grain (std 4-6 grey levels, range ~40) whose autocorrelation shows no secondary peak, so there is no tiling; and eight blank patches sampled across 02_chat cross-correlate at |r| <= 0.4 with most near zero, so no two notes share a texture."
+  ],
+  "verdict": "On three of the four anti-goals this is disciplined work, and on the first and third it is close to exemplary: I read every legible string in ten screenshots and four clips and found no badge, no point, no score, no streak, no unread counter, no guilt, no exclamation mark, no 'Oops', and no place where the app names itself; delivery state is the word 'sent' or 'read' rather than a mark, and the two empty states are flat declarative sentences that sell nothing. The paper itself also survives the specific tests — sharp corners, no blurred drop shadow, aperiodic grain with no tiling peak, and no two notes sharing a texture — so the concept is not being faked with a beige rounded rectangle. It falls over on two counts. First, the feeling palette hands a white heart to the label 'a squeeze' (07_feeling_landing.mp4 at x 180-274, y 1353-1434, and again throughout 15_authored_feeling.mp4): a flat unlit silhouette with no texture and no shadow, which is precisely the icon-standing-in-for-a-feeling that anti-goal 2 exists to prevent, and it sits beside three equally flat green cut-outs. Second, two large surfaces are bare colour where paper belongs — the whole of 17_setup_pwa.png is a single fill measuring zero variance over a 128x128 patch, with the tab strip reduced to naked text and headings drawn at roughly 1.05:1 contrast, and the reply/react sheet in 11_chat_scroll.mp4 is a full-width L=235 rectangle with exactly one unique pixel value. Two blocking findings and one serious one; the category cannot meet its floor of 9 while the heart and the flat setup screen stand.",
+  "notes": [
+    "One mark I deliberately did not report: the red ink glyph in the Pulse marks row (01_pulse.png at x ~290-410, y ~1290-1440, and again in the palette of 07_feeling_landing.mp4) is two dots over a shallow upward arc with a stem and foot. It can be read as a stemmed glass or as a smiling face with a neck. It is hand-drawn ink, not a font glyph and not stock art, so I am not calling it a violation, but it is the one drawn mark whose reading is genuinely unstable and it should be checked against intent.",
+    "The desk ground behind everything measures 0.53-0.59 std over 128x128 (04_moments.png), i.e. effectively a flat colour with faint vertical seams. I have not counted this against anti-goal 4 because it is the ground, not a paper surface, but it is the reason the two flat panels above blend in rather than announcing themselves."
+  ]
+}

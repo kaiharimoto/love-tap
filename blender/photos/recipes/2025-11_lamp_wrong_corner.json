@@ -1,0 +1,70 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.5423941409403858,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-11_lamp_wrong_corner",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03834935744584616
+  ],
+  "height": 0.30359608872471583,
+  "distance": 0.31388375902407284,
+  "lean_deg": 12.368871183530008,
+  "mm": 26.633286458071865
+ },
+ "handheld": 0.16755814006991177,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "book",
+   "at": [
+    -0.009621891452803805,
+    0.0117682597335978
+   ],
+   "w": 0.21769011504987412,
+   "d": 0.2726906902355095,
+   "rot": -5.82255395930718,
+   "open_book": true
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.14819727416224365,
+    -0.057563252788131215
+   ],
+   "r": 0.08116567293279801,
+   "h": 0.07761850389818042,
+   "rot": 88.36005938153417,
+   "lid": "beside"
+  },
+  {
+   "kind": "board",
+   "at": [
+    -0.22477926652911479,
+    -0.06885305656967701
+   ],
+   "w": 0.3597297001345454,
+   "d": 0.26567345070459814,
+   "thick": 0.018612384412420226,
+   "rot": -9.357561543820761,
+   "scars": 12
+  }
+ ],
+ "from_scene": "an oversized floor lamp with a wide pale grey drum shade standing in the corner of a small living room, its light flat and institutional on the wall, a low bookshelf and a bare skirting board beside it, the rest of the room dark",
+ "not_built": []
+}

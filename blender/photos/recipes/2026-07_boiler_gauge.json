@@ -1,0 +1,69 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.2867893318449442,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-07_boiler_gauge",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04140981729247111
+  ],
+  "height": 0.2880206161332115,
+  "distance": 0.3550616761835726,
+  "lean_deg": -11.966544789009824,
+  "mm": 24.44626453562184
+ },
+ "handheld": 0.25328820467903496,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "gauge",
+   "at": [
+    0.006129204055625396,
+    0.018582411746314805
+   ],
+   "needle_deg": -42.83169807421952
+  },
+  {
+   "kind": "board",
+   "at": [
+    0.2754999274682896,
+    0.020504686403937645
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "tin",
+   "at": [
+    -0.15050301693259624,
+    -0.026159287438043473
+   ],
+   "r": 0.07742795510549087,
+   "h": 0.07276874781681576,
+   "rot": 80.86963711647273,
+   "lid": "beside"
+  }
+ ],
+ "from_scene": "the round pressure gauge of a wall boiler photographed close in a cramped hall cupboard, the needle sitting just under one on a scratched dial with a green band and a red band, condensation on the glass, a copper filling loop and a grey lever below it, a dusty skirting board and a lifted corner of carpet at the bottom of the frame, hard direct torchlight from one side and darkness behind",
+ "not_built": [
+  "carpet"
+ ]
+}

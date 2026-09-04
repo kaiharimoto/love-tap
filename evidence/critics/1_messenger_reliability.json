@@ -1,0 +1,110 @@
+{
+  "critic": "messenger-reliability",
+  "cycle": 1,
+  "score": 8,
+  "floor": 26,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "14_media_viewer.png",
+      "where": "the whole frame",
+      "what": "The artifact commissioned to show the media viewer contains no viewer at all - it is the ordinary chat list scrolled to almost exactly the position of 13_messenger_states.png (same 'Thu 3 Sep 16:55' message, same 'ugh' note, same 'empty chair' note), with no overlay, no full-bleed image, no zoom, pan, caption or close affordance, even though the scene log records an 'openViewer' step at 793ms followed by a 2505ms wait.",
+      "why": "The media viewer is one of the twelve required capabilities and it is not merely unproven but contradicted by the one artifact meant to prove it."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "14_media_viewer.png, 02_chat.png, 12_search.png, 13_messenger_states.png",
+      "where": "every message row in all four chat frames",
+      "what": "There is not one photograph, video frame, video poster, voice-note waveform or media thumbnail anywhere in the entire evidence set; a per-block HSV scan gives 99th-percentile saturation of 60/255 in 02_chat, 58 in 13_messenger_states, 58 in 14_media_viewer and 60 in 04_moments, with zero blocks above mean saturation 70 in any of them (the only saturated region in the whole set is the flat yellow search-hit note in 12_search).",
+      "why": "Photos, video and voice notes are three of the twelve required capabilities and the specific reason this couple currently uses Instagram DMs; a messenger evidenced as text-only gives both of them an immediate reason to open Instagram instead."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "11_chat_scroll.mp4",
+      "where": "the whole 5.00s / 300-frame clip",
+      "what": "The clip contains no scrolling. Frame-differencing all 299 pairs at 270x585 gives 294 pixel-identical pairs and only three pairs with any change at all: 0->1 (33.6 mean abs), 1->2 (1.85), 250->251 (0.19, 226 pixels). Frames 3-300 are one frozen picture in which the synthetic 570px vertical drag (from [180,660] to [180,90] per 11_chat_scroll.json) has opened a 'reply / react' action sheet that covers the composer, is cut off flush at the bottom of the 2340px viewport, and never dismisses for the remaining 4.97s. The build's own frames.json agrees: repeated_fraction 0.993, longest_still_run 297, ok:false.",
+      "why": "The rubric requires no scroll jank against the year-deep seeded history and no spinner that outstays its welcome; not only is scroll performance wholly unevidenced, the one gesture captured shows a scroll drag being swallowed by a long-press menu, which is a messenger that cannot be scrolled."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "13_messenger_states.png",
+      "where": "the meta line under each of the seven visible rows",
+      "what": "The artifact named for the messenger's states shows exactly one state token, the lowercase word 'sent', on three rows (16:55, 17:01, 17:19); the remaining rows carry a bare timestamp. There is no sending, no delivered, no read, no failed, no queued, no edited and no deleted anywhere in the frame. Across the whole evidence set only two tokens exist - 'sent' here and 'read' in 02_chat and 12_search - both rendered as grey lowercase words in the same size and colour as the timestamp beside them, with no icon, no colour and no shape to separate them. The grey discs at the left of two rows are punched looseleaf holes, not indicators.",
+      "why": "The row demands delivery and read state plus editing and deleting be present and dependable, and that no state be ambiguous or indistinguishable from another; a failed or queued message here would be visually identical to a delivered one, so neither person can ever tell whether something got through."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "12_search.png",
+      "where": "the whole frame",
+      "what": "The search artifact shows no search field, no query string, no result list, no hit count, no next/previous hit navigation and no type or date filters. It is the chat list with a single message ('Rain. The first in a month...') tinted yellow. That yellow measures (237,229,154) against the app's ordinary cream outbound stock at (235,229,195) - a difference of 41/255 in the blue channel only, identical in red and green. The message directly below it ('its raining here too') also contains the apparent query term and is not marked.",
+      "why": "Full-text and media search is a required capability; media search and filtering are entirely absent, the single result marker collides with the paper stock already used for ordinary outbound notes, and there is no way to reach the other hits in a 13,724-event history."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png",
+      "where": "the system row at y 2400-2500, left column, beneath the 16:44 note",
+      "what": "A row in the conversation reads 'one hour, then stop ·' on the first line and the raw machine string '2026-04-23T16:00:00+01:00' on the second, sitting directly beside a correctly humanised 'Wed 22 Apr · 16:50' on the same row.",
+      "why": "An unformatted ISO-8601 payload dumped into the message list is a visible correctness failure in the thread itself and undermines any claim that the messenger's rendering is dependable."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png, 12_search.png, 13_messenger_states.png, 14_media_viewer.png",
+      "where": "the twelve capabilities across all four chat frames",
+      "what": "Visible: text; read state ('read' in 02_chat and 12_search); sent state ('sent' in 13 and 14); a 'search' entry label; and reply/react as menu items in 11_chat_scroll only. Not visible anywhere: photos, video, voice notes, any reaction attached to a message, any reply rendered as a quote or link to its target, typing indication, any edited marker, any deleted stub, media search, filtering, and the media viewer. 02_chat, the flagship conversation frame, is seven rows of plain text.",
+      "why": "Eight of the twelve capabilities in the rubric row have no visual evidence at all, and 'present and dependable' cannot be granted to a capability that cannot be seen."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png, 12_search.png",
+      "where": "the composer bar at the bottom of the frame",
+      "what": "The scroll container reserves no bottom padding for the composer, so the last row is hard-clipped by it. In 02_chat the words 'do an hour.' are sliced mid-glyph at the composer's top edge; in 12_search the bottom-most note is reduced to a 15px band of torn paper fibres at y 2760-2790 with no readable content, no timestamp and no state.",
+      "why": "In a messenger the newest message is the one that matters most, and here it is routinely unreadable and its delivery state invisible."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/logs/*.json, all four chat frames",
+      "where": "the 'link' field of all eleven scene reports, and the header strip of every screenshot",
+      "what": "Every scene report records \"link\": \"connecting\" - the app never reached a connected link in any captured frame - while reliability.json simultaneously claims both peers are \"state\": \"connected\". The UI itself carries no connection indicator at all: the sticky header shows only the partner's state card ('week one, and the room smells right again' / TRAVELLING · NEED · ENERGY), with no link status, no peer presence and no offline banner anywhere on screen. Consistent with this, every outbound message in 13 and 14 is stuck at 'sent' hours after 'now' (2026-09-03T19:40Z vs messages at 16:55-17:19).",
+      "why": "On a peer-to-peer Tailscale channel the single most important reliability signal is whether the link is alive, and neither person can see it; a message stuck at 'sent' with no explanation is exactly the moment someone opens Instagram to check the other person is fine."
+    },
+    {
+      "severity": "serious",
+      "artifact": "MANIFEST.json (missing 08_state_propagating.mp4, 09_two_devices.png, 16_setup_android.png)",
+      "where": "the 'missing' block, all three attributed to 'no Android device was up in this session'",
+      "what": "Three of the seventeen expected artifacts are absent. 09_two_devices.png is the only artifact that would have shown the same conversation on both devices, so agreement of delivery and read state between the two people is unevidenced. 08_state_propagating.mp4 is the only artifact that would have shown anything crossing between devices, so end-to-end delivery in motion is unevidenced. 16_setup_android.png means the Android half of the product has zero visual evidence; every surviving artifact is webkit at 480x1040 or 360x780 dpr3.",
+      "why": "A two-person messenger whose two-device behaviour is entirely unphotographed cannot be called dependable, and one of the two named target platforms produced no evidence whatsoever."
+    },
+    {
+      "severity": "serious",
+      "artifact": "reliability.json",
+      "where": "the capabilities block and the transport field",
+      "what": "reliability.json asserts all_ok true across send, ack, read, reply, react, edit, delete, voice_note, video, viewer, search, draft_survival, kill_mid_send, offline_queue (26 events), reconnect_ordering and host_offline_outbox, with 174 events, 0 duplicates and monotonic ordering. Its transport is \"local\" and its addresses are 127.0.0.1:38379, so both 'devices' were one process pair on one machine and no Tailscale path was exercised. Not one of these behaviours - a queued message, a failed send, a retry, a restored draft, an edited or deleted row, a voice note, a video, a viewer - appears in any image or clip; the search claim specifically enumerates photo, video and voice_note hit types that 12_search.png does not show.",
+      "why": "The brief states a claim in a log that the artifacts do not show is worth less than nothing, and here the strongest reliability claims in the build are precisely the ones with no corresponding pixel."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.png, 12_search.png, 13_messenger_states.png, 14_media_viewer.png",
+      "where": "y 205-268, x 74-1391, immediately below the sticky header note - identical in all four frames",
+      "what": "A pure black (#010101) slab 64px tall spans nearly the full width on every screen, containing a small right-pointing play wedge at x 130-160. It reads as a video row collapsed to about 21 CSS px with no poster, no duration and no timestamp, and it hard-clips the top message row beneath it ('properly' in 02_chat, an apparently bodiless 'Thu 3 Sep · 16:52' row in 14_media_viewer).",
+      "why": "Whatever it is intended to be, on every screen of the messenger it looks like a broken media element and it amputates the row below it."
+    },
+    {
+      "severity": "minor",
+      "artifact": "12_search.png, 13_messenger_states.png",
+      "where": "the 'search' control at top right, x 1050-1440, y 270-380",
+      "what": "The only search entry point is drawn beneath the scrolling notes; in 12_search the torn right edge of the highlighted note eats the 'h' so it reads 'searc', and in 13 it is likewise partly occluded.",
+      "why": "The single doorway into a 13,724-event history is intermittently illegible depending on scroll position."
+    }
+  ],
+  "what_is_working": [
+    "The seeded history is genuinely deep and genuinely real: the scene reports show 13,724 events over 8,186 scroll positions, and the frames independently span Thu 26 Mar, Wed 22 Apr, Tue 4 Aug and Thu 3 Sep 2026 with plausible, specific, non-filler conversation ('The folder is open. It has been open on the table for nine days.').",
+    "Direction of speech is instantly legible without any bubble tail or avatar: inbound notes are left-set in a blue cursive hand on white lined stock, outbound are right-set in an upright dark hand, and it stays consistent across all four chat frames.",
+    "Read state, where it appears, is correctly one-sided: 'read' and 'sent' appear only on outbound rows in 02_chat, 12_search, 13 and 14, and never on an inbound row.",
+    "Timestamp formatting on message rows is human and consistent ('Wed 22 Apr · 16:34 · read', 'Thu 3 Sep · 17:19 · sent') - the one ISO-8601 leak is confined to a non-message system row.",
+    "Reply and react exist as real affordances, visible as menu items in frames 3-300 of 11_chat_scroll.mp4.",
+    "Ambient system rows ('teo's phone is nearly out', 'teo went out', 'noor · travelling') are set in a quieter weight and are clearly separated from messages, so the thread never confuses a signal with a sentence.",
+    "The scroll harness itself is honest: frames.json marks 11_chat_scroll.mp4 ok:false with the reason '99% of it is frames the app did not draw', which my own frame-differencing confirms exactly."
+  ],
+  "verdict": "This category fails hard and fails on its own terms. Of the twelve capabilities the row names, four are visible (text, read state, sent state, a search doorway), two exist only as menu labels in a clip (reply, react), and six are nowhere in the evidence at all: photos, video, voice notes, typing indication, editing and deleting, and media search with filtering. The three artifacts commissioned to close those gaps each disprove the thing they were meant to prove - 14_media_viewer.png is the chat list with no viewer, 12_search.png is the chat list with one note tinted a yellow 41/255 away from ordinary outbound stock and no field, query, count or filter, and 13_messenger_states.png offers a single state token, 'sent', where sending, delivered, read, failed, queued, edited and deleted were expected, all of which would render as the same grey lowercase word in the same place if they existed. 11_chat_scroll.mp4 does not scroll: 294 of 299 frame-pairs are pixel-identical and the only motion is the scroll drag being swallowed by a reply/react sheet that then sits open, clipped by the bottom of the viewport, for 4.97 seconds. Underneath all of that, the whole evidence set contains not one photograph (99th-percentile saturation 58-60/255 in every frame), every scene report records the link as 'connecting' while the UI shows no connection indicator at all, the composer slices the newest message mid-glyph, a raw '2026-04-23T16:00:00+01:00' is printed into the thread, and the three absent artifacts are exactly the ones that would have shown two devices agreeing. reliability.json asserts all sixteen capabilities pass, but it ran over 127.0.0.1 with transport 'local' and not a single one of its claims - queued, failed, retried, drafted, edited, deleted, voice, video, viewer - has a pixel behind it. Any of the media failures alone sends this couple back to Instagram on day one; taken together the messenger is evidenced as a pleasant text-only notes wall, not as the multimedia channel it has to replace, and it lands far below the floor."
+}

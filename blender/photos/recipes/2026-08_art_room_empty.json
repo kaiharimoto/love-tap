@@ -1,0 +1,60 @@
+{
+ "mode": "room",
+ "ground": "carpet",
+ "room": false,
+ "interior": true,
+ "id": "2026-08_art_room_empty",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.11132035692195863,
+   3.4135170337484384,
+   1.0569702641247056
+  ],
+  "height": -0.13661915961532503,
+  "distance": 3.164771551586518,
+  "lean_deg": 7.986872104729777,
+  "mm": 22.56041232266423
+ },
+ "handheld": 0.5908948333031301,
+ "quality": 84,
+ "objects": [
+  {
+   "kind": "chair",
+   "at": [
+    2.531335336681625,
+    1.4584226977957893
+   ],
+   "rot": 28.061869336465698
+  },
+  {
+   "kind": "table",
+   "at": [
+    -0.4603550979337853,
+    2.886778300776406
+   ],
+   "w": 1.1219117865966666,
+   "d": 0.7018270911786051,
+   "h": 0.4305819501709009,
+   "rot": 13.254216023632008
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.0,
+    5.42912058731574
+   ],
+   "as_kind": "painted",
+   "w": 7.0,
+   "h": 2.59807880281309
+  }
+ ],
+ "from_scene": "a school art room in the holidays, chairs upside down on the tables, blinds down and edged with hard white light, the display boards stripped back to bare cork with staples still in them, a trolley of empty trays against the wall, one tall stool missing from a row of four, the floor swept and dull",
+ "not_built": []
+}

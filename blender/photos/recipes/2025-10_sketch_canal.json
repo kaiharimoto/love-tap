@@ -1,0 +1,69 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.0589667024172502,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-10_sketch_canal",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04462688812900107
+  ],
+  "height": 0.3809240276238024,
+  "distance": 0.36463843758410286,
+  "lean_deg": 6.679485956676928,
+  "mm": 24.089902218117896
+ },
+ "handheld": 0.4107414457303185,
+ "quality": 82,
+ "objects": [
+  {
+   "kind": "pen",
+   "at": [
+    0.011793410033249404,
+    -0.001319605579708845
+   ],
+   "as_kind": "pen",
+   "length": 0.13993242503363634,
+   "rot": 168.87458752610937
+  },
+  {
+   "kind": "book",
+   "at": [
+    0.17911996323001833,
+    -0.048040079116534976
+   ],
+   "w": 0.18567430647452138,
+   "d": 0.2516060961404481,
+   "rot": 6.226795662465122,
+   "open_book": true
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.15044495788982312,
+    -0.036467816120804575
+   ],
+   "w": 0.14094080075359267,
+   "h": 0.23396535412362895,
+   "rot": 28.906706254356116
+  }
+ ],
+ "from_scene": "an open sketchbook lying on a low concrete wall beside still canal water, a soft graphite drawing of a brick bridge arch on the right page, the left page blank and dented, a ballpoint pen laid in the gutter of the spine, overcast grey light",
+ "not_built": [
+  "graphite"
+ ]
+}

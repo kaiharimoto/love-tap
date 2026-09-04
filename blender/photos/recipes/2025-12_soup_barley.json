@@ -1,0 +1,80 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.328457387180979,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-12_soup_barley",
+ "by": "teo",
+ "light": "kitchen_bulb",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04807458043746512
+  ],
+  "height": 0.26228810971830685,
+  "distance": 0.24863800156094734,
+  "lean_deg": -7.647664187314948,
+  "mm": 23.402002666898778
+ },
+ "handheld": 0.1045424931984152,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    0.004184805524760478,
+    0.016159609396025714
+   ],
+   "r": 0.10849133853090724,
+   "h": 0.06954446093931506,
+   "rot": 71.53517257481116
+  },
+  {
+   "kind": "loaf",
+   "at": [
+    0.17873145394606943,
+    0.03028700573051185
+   ],
+   "length": 0.2465089917451515,
+   "width": 0.1375276861169132,
+   "height": 0.08153096103105056,
+   "cut": 0.2414503433587432,
+   "rot": 20.75598554155041,
+   "flour": 0.42331345865596015
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.16219584308582788,
+    0.18550630442241822
+   ],
+   "w": 0.15137108465580068,
+   "h": 0.1682439648061584,
+   "rot": -14.432837179205709
+  },
+  {
+   "kind": "bag",
+   "at": [
+    -0.09561804483447049,
+    -0.24999143659621081
+   ],
+   "w": 0.3194206493339945,
+   "d": 0.16383968892934775,
+   "h": 0.27179334048345005,
+   "rot": 77.9104982902524
+  }
+ ],
+ "from_scene": "a deep bowl of thick orange soup with barley grains visible at the surface, on a bare kitchen table, a torn end of bread beside it on the wood, a paper bag of carrots tipped over behind, single overhead bulb, no other place set",
+ "not_built": []
+}

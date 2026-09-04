@@ -1,0 +1,106 @@
+{
+ "mode": "tabletop",
+ "surface": "steel",
+ "surface_size": 1.3047085893582195,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-07_soup_july",
+ "by": "teo",
+ "light": "night_lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03343473080837575
+  ],
+  "height": 0.383589742762263,
+  "distance": 0.2725677286986334,
+  "lean_deg": 15.144182056079899,
+  "mm": 25.068073229077278
+ },
+ "handheld": 0.1313275084308133,
+ "quality": 82,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    -0.01495818098626228,
+    -0.008429883715025285
+   ],
+   "r": 0.12370791289097713,
+   "h": 0.058412991108194444,
+   "rot": 60.54812735358152
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.19851750963344816,
+    -0.022082379581843448
+   ],
+   "w": 0.10294378488462849,
+   "h": 0.2164771551586518,
+   "rot": 17.11472593870667
+  },
+  {
+   "kind": "pan",
+   "at": [
+    0.10906858700378706,
+    0.21611248049684095
+   ],
+   "r": 0.09128266062677587,
+   "h": 0.1089345943194743
+  },
+  {
+   "kind": "plate",
+   "at": [
+    -0.15622220574082732,
+    0.13993079292433466
+   ],
+   "r": 0.09630463862997259,
+   "rot": 75.97219285325959
+  },
+  {
+   "kind": "tin",
+   "at": [
+    -0.23617822179922177,
+    -0.020518226319750088
+   ],
+   "r": 0.08959690304171905,
+   "h": 0.0889368088097361,
+   "rot": 53.349026769146896,
+   "lid": "on"
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.01611096348441217,
+    -0.27105910767299035
+   ],
+   "r": 0.038980788028130896,
+   "h": 0.09351249854454384,
+   "rot": 323.4785484658909,
+   "full": 0.55
+  },
+  {
+   "kind": "pen",
+   "at": [
+    0.1793679707877781,
+    -0.11942267521192106
+   ],
+   "as_kind": "pen",
+   "length": 0.14533792584371094,
+   "rot": 128.50929508489406
+  }
+ ],
+ "from_scene": "a deep bowl of thick orange soup on a steel kitchen bench, a swirl of oil across the surface and a scatter of black pepper, the emptied end of a marrow and a paper label with a name on it pushed to one side, a heavy pan behind with a dinner plate resting on top of it instead of a lid, one bare bulb and an open window of pale evening",
+ "not_built": []
+}

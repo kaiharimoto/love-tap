@@ -1,84 +1,93 @@
 {
- "surface": "worktop",
- "surface_size": 1.4,
- "light": "kitchen_bulb",
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.394356539732332,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-08_bread_loaf",
+ "by": "noor",
+ "light": "night_lamp",
+ "seed": 9382,
  "size": [
   1600,
   1200
  ],
- "seed": 41,
  "camera": {
   "look_at": [
    0,
    0,
-   0.03
+   0.049043395777221804
   ],
-  "height": 0.3,
-  "distance": 0.26,
-  "lean_deg": 4,
-  "mm": 26
+  "height": 0.38926127572848135,
+  "distance": 0.2583487949378242,
+  "lean_deg": 9.3461452212035,
+  "mm": 27.26550549927527
  },
+ "handheld": 0.38901336669308473,
+ "quality": 81,
  "objects": [
-  {
-   "kind": "board",
-   "at": [
-    -0.01,
-    0.0
-   ],
-   "w": 0.34,
-   "d": 0.23,
-   "thick": 0.021,
-   "rot": 8,
-   "scars": 16,
-   "seed": 41
-  },
   {
    "kind": "loaf",
    "at": [
-    -0.02,
-    0.01
+    0.1346595674249239,
+    -0.027456321663873285
    ],
-   "length": 0.25,
-   "width": 0.125,
-   "height": 0.09,
-   "rot": 14,
-   "cut": 0.34,
-   "seed": 41,
-   "on": 0.021
+   "length": 0.26773884755921,
+   "width": 0.12146078577311112,
+   "height": 0.09181892426488375,
+   "cut": 0.2080166289173492,
+   "rot": 28.40189147921145,
+   "flour": 0.34855910210981744,
+   "on": 0.018469845629616406
   },
   {
-   "kind": "knife",
+   "kind": "board",
    "at": [
-    0.07,
-    -0.1
+    0.1997564165520943,
+    -0.03418608972104844
    ],
-   "length": 0.22,
-   "rot": -18,
-   "on": 0.021
-  },
-  {
-   "kind": "mug",
-   "at": [
-    0.19,
-    0.11
-   ],
-   "r": 0.04,
-   "h": 0.093,
-   "full": 0.62,
-   "rot": -40
+   "w": 0.3310749912672631,
+   "d": 0.2628986066461455,
+   "thick": 0.018469845629616406,
+   "rot": 4.290442838937775,
+   "scars": 12
   },
   {
    "kind": "crumbs",
    "at": [
-    0.03,
-    -0.05
+    0.14388221838893064,
+    0.04573131468242155
    ],
-   "spread": 0.075,
-   "count": 110,
-   "seed": 41,
-   "on": 0.021
+   "spread": 0.09711472593870667,
+   "count": 112,
+   "on": 0.018469845629616406
+  },
+  {
+   "kind": "knife",
+   "at": [
+    0.04891899923726806,
+    -0.05287143339546727
+   ],
+   "length": 0.18160570084616098,
+   "rot": -2.6421336310111627,
+   "on": 0.018469845629616406
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.11509734724139509,
+    -0.1695970296775964
+   ],
+   "r": 0.04174213571281306,
+   "h": 0.10189195056247397,
+   "rot": 257.0185901697881,
+   "full": 0.66
   }
  ],
- "id": "2026-08_bread_loaf",
- "by": "noor"
+ "from_scene": "a dark sourdough loaf on a chopping board at night, one end already cut and eaten standing up, crumbs everywhere, the crust blistered and floured, a kitchen knife laid across the board and a mug behind it, the only light a warm bulb directly overhead throwing a hard shadow off the loaf",
+ "not_built": []
 }

@@ -1,0 +1,52 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "fog": 0.02178937332622542,
+ "id": "2026-09_ward_car_park",
+ "by": "teo",
+ "light": "fog_dawn",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.7971030470327274,
+   8.481907377769843,
+   1.6798451520859525
+  ],
+  "height": 0.5574723523894441,
+  "distance": 10.556601784609793,
+  "lean_deg": 8.270340674968761,
+  "mm": 28.283643169496468
+ },
+ "handheld": 0.01873317653854495,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "car",
+   "at": [
+    0.6910278823814009,
+    2.612232804842889
+   ],
+   "rot": 9.353956445488564,
+   "colour": [
+    0.15949510752522217,
+    0.15949510752522217,
+    0.15949510752522217
+   ]
+  },
+  {
+   "kind": "cone",
+   "at": [
+    1.8934594319474298,
+    3.366594762307268
+   ]
+  }
+ ],
+ "from_scene": "a hospital car park at eight in the morning from the top of the stairwell, cars in rows with the night's condensation still on the roofs, one space marked with a cone, a low mist over the grass bank behind and the sun just clearing the building, everything long-shadowed and blue-grey",
+ "not_built": []
+}

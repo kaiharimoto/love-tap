@@ -1,0 +1,58 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.2802059163043673,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2025-09_roster_paper",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9381,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.017060991201539602
+  ],
+  "height": 0.311890542735981,
+  "distance": 0.34707303893439123,
+  "lean_deg": -14.464124428260906,
+  "mm": 23.49138918681042
+ },
+ "handheld": 0.6059705422575187,
+ "quality": 88,
+ "objects": [
+  {
+   "kind": "folded",
+   "at": [
+    -0.005112436089602662,
+    0.0034913385309072384
+   ],
+   "w": 0.2004495376496809,
+   "h": 0.26829006867174865,
+   "folds": 3,
+   "rot": 8.302394216620165,
+   "printed": 1.0
+  },
+  {
+   "kind": "pen",
+   "at": [
+    0.23857998563937952,
+    0.09979770241494083
+   ],
+   "as_kind": "pencil",
+   "length": 0.12979727510090905,
+   "rot": 168.87458752610937
+  }
+ ],
+ "from_scene": "a printed shift rota on a kitchen table, folded in three and pressed flat again so the creases stand up, a grid of ruled boxes with short pencil marks in some of them, one corner turned down, the table a scratched pale laminate",
+ "not_built": []
+}

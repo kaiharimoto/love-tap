@@ -1,0 +1,52 @@
+{
+ "mode": "outdoor",
+ "ground": "tarmac",
+ "room": false,
+ "sky": true,
+ "id": "2025-11_canal_lamps_dark",
+ "by": "noor",
+ "light": "night",
+ "seed": 9381,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.6918661847183469,
+   9.2331345865596,
+   1.5809251949090215
+  ],
+  "height": 0.5781341250871223,
+  "distance": 11.76901150498741,
+  "lean_deg": -0.7917633478253059,
+  "mm": 25.05914868023094
+ },
+ "handheld": 0.18161689957593338,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "water",
+   "at": [
+    0.49324250336363495,
+    8.75276861169132
+   ],
+   "w": 16.0,
+   "d": 11.0
+  },
+  {
+   "kind": "post",
+   "at": [
+    -2.3876155875797744,
+    8.8238151077847
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  }
+ ],
+ "from_scene": "a black canal at night from the towpath, four sodium lamps and their long broken reflections lying flat on the water, a mooring ring and a bollard in the near dark, the far bank only a suggestion",
+ "not_built": [
+  "bollard"
+ ]
+}

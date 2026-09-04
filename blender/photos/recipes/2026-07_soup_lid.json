@@ -1,0 +1,98 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.3877838271854441,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-07_soup_lid",
+ "by": "teo",
+ "light": "night",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.019587198734456055
+  ],
+  "height": 0.4184134076325219,
+  "distance": 0.3564961759768086,
+  "lean_deg": 1.7834681916838733,
+  "mm": 27.068350972028206
+ },
+ "handheld": 0.35549335425125606,
+ "quality": 83,
+ "objects": [
+  {
+   "kind": "pan",
+   "at": [
+    -0.014395876773357696,
+    0.013765419045893148
+   ],
+   "r": 0.0999039401406545,
+   "h": 0.08702499708908769
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.1800229039697836,
+    -0.05651561405873082
+   ],
+   "r": 0.04418841218813091,
+   "h": 0.08993969125923282,
+   "rot": 235.16283650062854,
+   "full": 0.66
+  },
+  {
+   "kind": "card",
+   "at": [
+    0.08759727290349692,
+    0.14421726634143345
+   ],
+   "w": 0.1206758516874219,
+   "h": 0.14711524225995293,
+   "rot": -33.12668234614551
+  },
+  {
+   "kind": "board",
+   "at": [
+    -0.2572599703552913,
+    0.1093667837770121
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "spoon",
+   "at": [
+    -0.23073002267531223,
+    -0.1529007613008013
+   ],
+   "length": 0.2971648234926296,
+   "rot": 12.987374974228516
+  },
+  {
+   "kind": "plate",
+   "at": [
+    0.09633274567591822,
+    -0.18333193522974423
+   ],
+   "r": 0.11150919988837081,
+   "rot": 70.67208890806
+  }
+ ],
+ "from_scene": "a heavy pan on a hob with a brand new glass and steel lid seated on it, steam fogging the underside of the glass and a bead of water running down, the cardboard sleeve the lid came in propped against the tiles behind, a wooden spoon on a saucer and a chopping board with onion ends, warm kitchen light and a dark window",
+ "not_built": [
+  "steam"
+ ]
+}

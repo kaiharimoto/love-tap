@@ -1,69 +1,64 @@
 {
- "surface": "trestle",
- "surface_size": 2.4,
- "light": "overcast",
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.506758516874219,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-08_market_eggs",
+ "by": "noor",
+ "light": "low_sun",
+ "seed": 9382,
  "size": [
   1600,
   1200
  ],
- "seed": 63,
  "camera": {
   "look_at": [
    0,
    0,
-   0.02
+   0.03855762112997646
   ],
-  "height": 0.34,
-  "distance": 0.28,
-  "lean_deg": 10,
-  "mm": 24
+  "height": 0.26535233615387,
+  "distance": 0.2964771551586518,
+  "lean_deg": 9.12785383397689,
+  "mm": 23.70051540333029
  },
+ "handheld": 0.5908948333031301,
+ "quality": 84,
  "objects": [
   {
    "kind": "tray",
    "at": [
-    0,
-    0
+    -0.0029750029109123187,
+    0.015942060940654545
    ],
-   "rows": 5,
-   "cols": 6,
-   "cell": 0.046,
-   "rot": -4,
-   "seed": 63
+   "rows": 4,
+   "cols": 5,
+   "rot": 9.46729715973715
   },
   {
-   "kind": "sheet",
-   "w": 0.1,
-   "h": 0.07,
+   "kind": "card",
    "at": [
-    0.2,
-    -0.09
+    0.2400891809126215,
+    -0.04966128466770714
    ],
-   "rot": 16,
-   "curl": 0.006,
-   "colour": [
-    0.9,
-    0.87,
-    0.78
-   ],
-   "seed": 64
+   "w": 0.12806186933646568,
+   "h": 0.1329215715462222,
+   "rot": 12.092987941674515
   },
   {
    "kind": "crate",
    "at": [
-    -0.3,
-    0.14
+    -0.21359450649824074,
+    -0.08563283608439898
    ],
-   "w": 0.3,
-   "d": 0.22,
-   "h": 0.1,
-   "rot": 6,
-   "colour": [
-    0.48,
-    0.2,
-    0.16
-   ]
+   "rot": -10.096059859345505
   }
  ],
- "id": "2026-08_market_eggs"
+ "from_scene": "a fibre egg tray on a market trestle, twenty-nine eggs of unmatched sizes and four different browns, one with a feather still stuck to it, a hand-lettered price card leaning against the tray, a crate of tomatoes going soft at the edge of frame, morning sun coming in low and hard across the table under a canvas awning",
+ "not_built": []
 }

@@ -1,0 +1,72 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.01605700846161,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-05_sketchbook_fish",
+ "by": "noor",
+ "light": "lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.029119288789662946
+  ],
+  "height": 0.4170490864623556,
+  "distance": 0.24241649290656922,
+  "lean_deg": 11.01233523671452,
+  "mm": 23.630227376717215
+ },
+ "handheld": 0.20247703498705752,
+ "quality": 82,
+ "objects": [
+  {
+   "kind": "book",
+   "at": [
+    -0.010120617481534372,
+    0.006129204055625396
+   ],
+   "w": 0.21036541823572102,
+   "d": 0.24224465609685777,
+   "rot": 8.520567443763433,
+   "open_book": true
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.21359450649824074,
+    0.085632836084399
+   ],
+   "w": 0.12723583538679986,
+   "h": 0.20809998835635074,
+   "rot": 23.91309141098182
+  },
+  {
+   "kind": "pen",
+   "at": [
+    -0.24197707802076193,
+    -0.0694799734530344
+   ],
+   "as_kind": "pencil",
+   "length": 0.15709280400469855,
+   "rot": 96.57353597899996
+  }
+ ],
+ "from_scene": "an open sketchbook page carrying a soft pencil drawing of a fish tank with a plastic castle in it, the castle drawn slightly too large and slightly too straight, gravel done as hundreds of small marks, water suggested by an eraser lift across the whole page, the facing page blank with a pencil laid in the gutter, warm lamp light from the right",
+ "not_built": [
+  "castle",
+  "fish",
+  "gravel",
+  "tank"
+ ]
+}

@@ -1,0 +1,77 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.3839195951654721,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-01_soup_lentil",
+ "by": "teo",
+ "light": "kitchen_bulb",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04768741961357362
+  ],
+  "height": 0.40108264446930014,
+  "distance": 0.310155750420544,
+  "lean_deg": 15.916558137991647,
+  "mm": 26.040855750818096
+ },
+ "handheld": 0.40864483838517074,
+ "quality": 86,
+ "objects": [
+  {
+   "kind": "bowl",
+   "at": [
+    0.008557621129976458,
+    -0.018929532769226005
+   ],
+   "r": 0.10202499708908769,
+   "h": 0.0674637880879091,
+   "rot": 22.228610666547667
+  },
+  {
+   "kind": "spoon",
+   "at": [
+    0.26772190826842746,
+    -0.00471647589715388
+   ],
+   "length": 0.2674213571281306,
+   "rot": 48.243653937317774
+  },
+  {
+   "kind": "loaf",
+   "at": [
+    -0.045081278544214134,
+    0.21833769154919197
+   ],
+   "length": 0.26773884755921,
+   "width": 0.12146078577311112,
+   "height": 0.09181892426488375,
+   "cut": 0.2080166289173492,
+   "rot": 28.40189147921145,
+   "flour": 0.34855910210981744
+  },
+  {
+   "kind": "pan",
+   "at": [
+    -0.22955181761024812,
+    -0.1464625726516347
+   ],
+   "r": 0.11612920405562539,
+   "h": 0.1085824117463148
+  }
+ ],
+ "from_scene": "a deep bowl of dark brown lentil soup on a bare wooden table, a spoon standing upright in it, a torn crust of dark bread on the wood, an enamel pan with the lid tilted behind, one bare bulb overhead, a black window at the back",
+ "not_built": []
+}

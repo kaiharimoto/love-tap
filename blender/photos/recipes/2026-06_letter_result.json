@@ -1,0 +1,79 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.2017094319620885,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-06_letter_result",
+ "by": "teo",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03559463967769814
+  ],
+  "height": 0.4484370980678681,
+  "distance": 0.3328661155754401,
+  "lean_deg": 2.031150084108795,
+  "mm": 27.986962209061197
+ },
+ "handheld": 0.4257198051145335,
+ "quality": 80,
+ "objects": [
+  {
+   "kind": "pen",
+   "at": [
+    0.013783901124947939,
+    0.008557621129976458
+   ],
+   "as_kind": "pen",
+   "length": 0.1492009457396057,
+   "rot": 44.56773063294523
+  },
+  {
+   "kind": "envelope",
+   "at": [
+    0.19733213664909507,
+    -0.08083458779558371
+   ],
+   "w": 0.25225840811125083,
+   "h": 0.18822801468289352,
+   "rot": 3.71067856406529
+  },
+  {
+   "kind": "mug",
+   "at": [
+    -0.12372793801513897,
+    0.09444638057824672
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  },
+  {
+   "kind": "folded",
+   "at": [
+    -0.05286929889082158,
+    -0.23314176482002016
+   ],
+   "w": 0.2070249970890877,
+   "h": 0.30492757617581817,
+   "folds": 3,
+   "rot": -6.0723704889206225,
+   "printed": 1.0
+  }
+ ],
+ "from_scene": "an official exam result letter lying open on a kitchen table, the creases from three folds still standing up, a printed reference number and a single line of result across the middle, the slit envelope underneath it and a mug of cold tea with a skin on it at the corner, a folded roster sheet pushed to the edge, dull light from a window on the left",
+ "not_built": []
+}

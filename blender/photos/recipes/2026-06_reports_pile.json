@@ -1,0 +1,98 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.3502670043301463,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-06_reports_pile",
+ "by": "noor",
+ "light": "window_left",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03629043598215547
+  ],
+  "height": 0.455216978886109,
+  "distance": 0.3234090205827851,
+  "lean_deg": -8.330241012435156,
+  "mm": 26.960335190813048
+ },
+ "handheld": 0.5971707698985376,
+ "quality": 87,
+ "objects": [
+  {
+   "kind": "stack",
+   "at": [
+    0.008557621129976458,
+    -0.018929532769226005
+   ],
+   "count": 4,
+   "rot": 11.159442658458183
+  },
+  {
+   "kind": "folded",
+   "at": [
+    0.26772190826842746,
+    -0.00471647589715388
+   ],
+   "w": 0.21,
+   "h": 0.297,
+   "folds": 1,
+   "rot": -1.4875014554561599,
+   "printed": 1.0
+  },
+  {
+   "kind": "mug",
+   "at": [
+    0.17265539385410414,
+    0.17289796703813443
+   ],
+   "r": 0.044741582578195424,
+   "h": 0.09573039288655555,
+   "rot": 242.19250941432608,
+   "full": 0.0
+  },
+  {
+   "kind": "pen",
+   "at": [
+    -0.15808059545742562,
+    0.1979449546334833
+   ],
+   "as_kind": "pen",
+   "length": 0.1492009457396057,
+   "rot": 44.56773063294523
+  },
+  {
+   "kind": "tray",
+   "at": [
+    -0.20951519328389326,
+    -0.16193882214341124
+   ],
+   "rows": 5,
+   "cols": 5,
+   "rot": 3.064602027812697
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.11047208360783266,
+    -0.22279876695104228
+   ],
+   "w": 0.20610163230236572,
+   "h": 0.23484271425626116,
+   "rot": 20.675851687421904
+  }
+ ],
+ "from_scene": "a cleared kitchen table with a squared stack of printed school reports pushed to one side, the top sheet ruled into boxes and ticked in blue, a closed laptop with a cold mug standing on it, a cheap blue biro lying across the pile and an empty pen tray beside it, late morning light and the shadow of a window frame across the paper",
+ "not_built": []
+}

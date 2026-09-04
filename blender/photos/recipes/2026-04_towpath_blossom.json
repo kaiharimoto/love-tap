@@ -1,0 +1,98 @@
+{
+ "mode": "outdoor",
+ "ground": "gravel",
+ "room": false,
+ "sky": true,
+ "id": "2026-04_towpath_blossom",
+ "by": "noor",
+ "light": "overcast",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   -0.747909049313114,
+   8.735517442746207,
+   1.242760438597932
+  ],
+  "height": -0.19658113607582334,
+  "distance": 10.83919595165472,
+  "lean_deg": 10.612451768144169,
+  "mm": 28.232479334079002
+ },
+ "handheld": 0.39443140808987986,
+ "quality": 90,
+ "objects": [
+  {
+   "kind": "water",
+   "at": [
+    1.1956545705490909,
+    5.987938251846563
+   ],
+   "w": 16.0,
+   "d": 11.0
+  },
+  {
+   "kind": "canopy",
+   "at": [
+    0.9193806083438094,
+    10.78736176194722
+   ],
+   "radius": 3.3612373867293135,
+   "count": 420,
+   "leaf": 0.055,
+   "colour": [
+    0.72,
+    0.68,
+    0.62
+   ],
+   "centre_h": 5.258431430924444
+  },
+  {
+   "kind": "trunk",
+   "at": [
+    0.5566017846097933,
+    10.067585168742191
+   ],
+   "height": 7.691027882381401,
+   "radius": 0.1451306425071035,
+   "lean": 0.056803782958422894
+  },
+  {
+   "kind": "post",
+   "at": [
+    2.1394052824941143,
+    7.294378488462849
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  },
+  {
+   "kind": "wall",
+   "at": [
+    -0.044035560516852756,
+    6.140981729247111
+   ],
+   "as_kind": "brick",
+   "w": 7.485591021098174,
+   "h": 1.5384373908407882
+  },
+  {
+   "kind": "crumbs",
+   "at": [
+    -1.4395876773357696,
+    5.45447416651565
+   ],
+   "spread": 0.6,
+   "count": 60
+  }
+ ],
+ "from_scene": "a canal towpath in early april seen along its length, a low blossom tree leaning out over the water with half its petals already on the path, still brown-green water holding the reflection, a black iron mooring ring set into the wall, wet gravel and a painted white line, soft overcast light",
+ "not_built": [
+  "gravel",
+  "reflection"
+ ]
+}

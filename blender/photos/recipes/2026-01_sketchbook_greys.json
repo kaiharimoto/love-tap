@@ -1,0 +1,88 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.5984354650873436,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-01_sketchbook_greys",
+ "by": "noor",
+ "light": "night_lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03432684600654477
+  ],
+  "height": 0.3767556681100488,
+  "distance": 0.3251617439286219,
+  "lean_deg": 15.23471662177744,
+  "mm": 26.231531893212033
+ },
+ "handheld": 0.16777597785298096,
+ "quality": 81,
+ "objects": [
+  {
+   "kind": "pen",
+   "at": [
+    -0.018929532769226005,
+    -0.0008807112103370561
+   ],
+   "as_kind": "pen",
+   "length": 0.13276874781681575,
+   "rot": 161.73927423294546
+  },
+  {
+   "kind": "book",
+   "at": [
+    0.16410517510288805,
+    0.03849803969405807
+   ],
+   "w": 0.18481907377769846,
+   "d": 0.2857261070973444,
+   "rot": 8.362085285841662,
+   "open_book": true
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    -0.05698628481939376,
+    0.12720271097655828
+   ],
+   "w": 0.16520436605117955,
+   "h": 0.27513560449979174,
+   "rot": 12.836431694964688
+  },
+  {
+   "kind": "tin",
+   "at": [
+    -0.3168183642246478,
+    0.05421994052358797
+   ],
+   "r": 0.09903093466823285,
+   "h": 0.07609558932983332,
+   "rot": 60.54812735358152,
+   "lid": "on"
+  },
+  {
+   "kind": "jar",
+   "at": [
+    0.10946598241709207,
+    -0.18496610633507027
+   ],
+   "r": 0.04960047286980286,
+   "h": 0.10237992517581812,
+   "holds": 2
+  }
+ ],
+ "from_scene": "an open sketchbook page laid flat, twelve painted grey swatches in a hand-ruled grid, each one mixed slightly differently and labelled underneath in small handwriting, a paint-crusted palette and a jar of grey water at the top edge, evening lamplight",
+ "not_built": []
+}

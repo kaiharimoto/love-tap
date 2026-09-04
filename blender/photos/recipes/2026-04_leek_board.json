@@ -1,0 +1,67 @@
+{
+ "mode": "tabletop",
+ "surface": "board",
+ "surface_size": 1.2867893318449442,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-04_leek_board",
+ "by": "teo",
+ "light": "kitchen_bulb",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04140981729247111
+  ],
+  "height": 0.2880206161332115,
+  "distance": 0.3550616761835726,
+  "lean_deg": -11.966544789009824,
+  "mm": 24.44626453562184
+ },
+ "handheld": 0.25328820467903496,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "board",
+   "at": [
+    0.006129204055625396,
+    0.018582411746314805
+   ],
+   "w": 0.3961237386729314,
+   "d": 0.23755637510294444,
+   "thick": 0.0227275697059535,
+   "rot": -13.10213756125689,
+   "scars": 10
+  },
+  {
+   "kind": "knife",
+   "at": [
+    0.10040895725005786,
+    0.0192552078764828
+   ],
+   "length": 0.23391309141098182,
+   "rot": -30.361852444603112,
+   "on": 0.0227275697059535
+  },
+  {
+   "kind": "pan",
+   "at": [
+    -0.15050301693259624,
+    -0.026159287438043473
+   ],
+   "r": 0.0999039401406545,
+   "h": 0.08702499708908769
+  }
+ ],
+ "from_scene": "a scarred wooden chopping board on a steel kitchen bench with three trimmed leeks laid in a row, dark green tops cut off and pushed to one side, a stalky green vegetable of uncertain species beside them, a small knife with a worn handle, one potato at the back edge, a single warm bulb overhead",
+ "not_built": []
+}

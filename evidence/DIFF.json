@@ -5,52 +5,68 @@
   "01_pulse.png": {
    "ssim": 0.7269,
    "reading": "reworked",
-   "label": null
+   "label": "improved",
+   "label_basis": "strongest screen in the set: partner card, feeling vocabulary and own-state card all in one language; ssim 0.7269 confirms real rework"
   },
   "02_chat.png": {
    "ssim": 0.5901,
    "reading": "redrawn",
-   "label": null
+   "label": "improved",
+   "label_basis": "two hands used to mean sender, delivery states and ambient state events in one stream; held back by a raw ISO 8601 stamp rendered in the UI"
   },
   "03_us.png": {
    "ssim": 0.6027,
    "reading": "reworked",
-   "label": null
+   "label": "improved",
+   "label_basis": "dates, to-dos and anniversaries in the shared paper language; held back by five competing date formats"
   },
   "04_moments.png": {
    "ssim": 0.8926,
    "reading": "reworked",
-   "label": null
+   "label": "regressed",
+   "label_basis": "highest ssim in the set (0.8926, i.e. least changed) and still an empty region; the one screen that would evidence one shared log shows nothing"
   },
   "05_settings.png": {
    "ssim": null,
    "reading": "new",
-   "label": null
+   "label": "improved",
+   "label_basis": "first capture (ssim null); enters the set fully consistent with the other four regions and declares the event taxonomy"
   },
   "10_first_run.png": {
    "ssim": 0.8289,
    "reading": "reworked",
-   "label": null
+   "label": "improved",
+   "label_basis": "the shared banner and tab cards survive into the pre-pairing state as one component in two states"
   },
   "12_search.png": {
    "ssim": 0.6786,
    "reading": "reworked",
-   "label": null
+   "label": "improved",
+   "label_basis": "shows written notes and phone-state events interleaved in one timeline; no query or result treatment is visible"
   },
   "13_messenger_states.png": {
    "ssim": 0.6042,
    "reading": "reworked",
-   "label": null
+   "label": "improved",
+   "label_basis": "sent/read states legible and feeling glyphs match the Pulse vocabulary exactly"
   },
   "14_media_viewer.png": {
    "ssim": 0.6282,
    "reading": "reworked",
-   "label": null
+   "label": "regressed",
+   "label_basis": "is 13_messenger_states scrolled 376px; no media viewer and no media of any kind is present"
   },
   "17_setup_pwa.png": {
    "ssim": 0.5677,
    "reading": "redrawn",
-   "label": null
+   "label": "regressed",
+   "label_basis": "lowest ssim (0.5677) and the change went the wrong way: flat RGB(76,62,50) fill instead of the shared table ground, no paper, no tab cards, all text at 1.99:1"
   }
+ },
+ "coherence_critic": {
+  "assigned_by": "coherence critic, cycle 1",
+  "label_rule": "ssim constrains the magnitude of change only, never its direction; each label is a judgement of the current artifact's coherence, with the ssim used only to confirm a change was in fact claimed.",
+  "baseline_not_reproducible": "every file in evidence/.previous/ is byte-identical to its current counterpart (md5 matches on all ten). ssim against an identical image is 1.0, so none of the ssim values recorded in this file can be reproduced from the baseline that shipped with the evidence. the numbers are taken on trust.",
+  "reading_field_check": "the 'reading' words are internally consistent with the ssim at a ~0.60 threshold (0.5677 and 0.5901 -> redrawn; 0.6027 and above -> reworked). the vocabulary is coarse: 'reworked' spans 0.6027 to 0.8926, so it says almost nothing."
  }
 }

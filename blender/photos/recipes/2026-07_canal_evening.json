@@ -1,0 +1,72 @@
+{
+ "mode": "outdoor",
+ "ground": "cobbles",
+ "room": false,
+ "sky": true,
+ "id": "2026-07_canal_evening",
+ "by": "noor",
+ "light": "night",
+ "seed": 9382,
+ "size": [
+  1600,
+  1200
+ ],
+ "camera": {
+  "look_at": [
+   0.6891950562473967,
+   11.283643169496468,
+   0.7401425211540249
+  ],
+  "height": -0.026421336310111676,
+  "distance": 11.711472593870667,
+  "lean_deg": -8.637526064014619,
+  "mm": 29.06481285688397
+ },
+ "handheld": 0.0882318327404101,
+ "quality": 84,
+ "objects": [
+  {
+   "kind": "water",
+   "at": [
+    1.4200945739605721,
+    5.9903940140654495
+   ],
+   "w": 16.0,
+   "d": 11.0
+  },
+  {
+   "kind": "post",
+   "at": [
+    -0.7437507277280799,
+    16.88406675868
+   ],
+   "as_kind": "bollard",
+   "height": 0.85,
+   "radius": 0.075
+  },
+  {
+   "kind": "canopy",
+   "at": [
+    -1.5180926222301556,
+    8.91938060834381
+   ],
+   "radius": 3.5612373867293137,
+   "count": 360,
+   "centre_h": 6.341299110819444
+  },
+  {
+   "kind": "wall",
+   "at": [
+    0.9291205873157402,
+    5.371067856406529
+   ],
+   "as_kind": "brick",
+   "w": 10.036541823572101,
+   "h": 0.9480997735040952
+  }
+ ],
+ "from_scene": "the canal from the towpath in the evening after rain, the water risen and brown and holding a broken reflection of the far bank, only the top corner of a submerged shopping trolley breaking the surface, wet cobbles and a black mooring ring in the foreground, willow leaves overhead and a warm low light going orange along the far wall",
+ "not_built": [
+  "reflection"
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.428364316949647,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-01_boiler_gauge",
+ "by": "noor",
+ "light": "torch",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.011070467230773998
+  ],
+  "height": 0.35559644394831474,
+  "distance": 0.3456392691698844,
+  "lean_deg": -11.516701418686157,
+  "mm": 27.220677380736646
+ },
+ "handheld": 0.0882318327404101,
+ "quality": 80,
+ "objects": [
+  {
+   "kind": "gauge",
+   "at": [
+    0.015942060940654545,
+    -0.010120617481534372
+   ],
+   "needle_deg": -23.18125800500888
+  },
+  {
+   "kind": "tin",
+   "at": [
+    0.291231296012165,
+    0.03598237826456183
+   ],
+   "r": 0.09903093466823285,
+   "h": 0.07609558932983332,
+   "rot": 60.54812735358152,
+   "lid": "on"
+  },
+  {
+   "kind": "pen",
+   "at": [
+    -0.2754999274682896,
+    -0.02050468640393767
+   ],
+   "as_kind": "pencil",
+   "length": 0.15760283721881718,
+   "rot": 44.56773063294523
+  }
+ ],
+ "from_scene": "the pressure gauge of a wall-mounted boiler in close view, white dial with a red needle sitting just past one, a green band and a red band on the face, a pencil tick drawn on the white casing beside it, a copper filler pipe below, torch light from one side",
+ "not_built": []
+}

@@ -1,0 +1,68 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.2867893318449442,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-06_suit_hanger",
+ "by": "teo",
+ "light": "lamp",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.04140981729247111
+  ],
+  "height": 0.2880206161332115,
+  "distance": 0.3550616761835726,
+  "lean_deg": -11.966544789009824,
+  "mm": 24.44626453562184
+ },
+ "handheld": 0.25328820467903496,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "sheet",
+   "at": [
+    0.006129204055625396,
+    0.018582411746314805
+   ],
+   "w": 0.14681874199499112,
+   "h": 0.2837682437626182,
+   "rot": -15.180926222301556
+  },
+  {
+   "kind": "card",
+   "at": [
+    0.2754999274682896,
+    0.020504686403937645
+   ],
+   "w": 0.07192399094016381,
+   "h": 0.16786918863894862,
+   "rot": -17.668104753854635
+  },
+  {
+   "kind": "folded",
+   "at": [
+    -0.15050301693259624,
+    -0.026159287438043473
+   ],
+   "w": 0.22870791289097714,
+   "h": 0.2868259822163889,
+   "folds": 3,
+   "rot": 4.146167294288404,
+   "printed": 1.0
+  }
+ ],
+ "from_scene": "a grey suit on a wire hanger hooked over the top of a door frame, the dry cleaner's clear plastic pushed up to the shoulders and a small paper ticket safety pinned to the lapel, the trousers folded over the bar with a fresh crease, a pair of polished dark shoes together on the floor below, warm bedroom lamp light from one side",
+ "not_built": []
+}

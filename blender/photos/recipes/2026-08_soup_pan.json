@@ -1,64 +1,72 @@
 {
- "surface": "hob",
- "surface_size": 2.4,
+ "mode": "tabletop",
+ "surface": "steel",
+ "surface_size": 1.0840618483996345,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-08_soup_pan",
+ "by": "teo",
  "light": "window_left",
+ "seed": 9382,
  "size": [
   1600,
   1200
  ],
- "seed": 33,
  "camera": {
   "look_at": [
    0,
    0,
-   0.05
+   0.04376541904589315
   ],
-  "height": 0.46,
-  "distance": 0.1,
-  "lean_deg": 8,
-  "mm": 24
+  "height": 0.28520909506868863,
+  "distance": 0.2662804651398989,
+  "lean_deg": -4.421110643244116,
+  "mm": 24.680911933017402
  },
+ "handheld": 0.44790619435971735,
+ "quality": 90,
  "objects": [
   {
    "kind": "pan",
    "at": [
-    0,
-    0
+    -0.010120617481534372,
+    0.006129204055625396
    ],
-   "r": 0.115,
-   "h": 0.088,
-   "soup": [
-    0.86,
-    0.74,
-    0.46
-   ],
-   "level": 0.7
+   "r": 0.12870791289097713,
+   "h": 0.0914607857731111
+  },
+  {
+   "kind": "hob_ring",
+   "at": [
+    0.21359450649824074,
+    0.085632836084399
+   ]
   },
   {
    "kind": "spoon",
    "at": [
-    0.1,
-    -0.02
+    -0.1962028165911262,
+    0.13290665063309
    ],
-   "rot": 24,
-   "z": 0.086
+   "length": 0.273820557647628,
+   "rot": -65.51068780628445
   },
   {
-   "kind": "crate",
+   "kind": "tin",
    "at": [
-    -0.26,
-    0.16
+    -0.18617207649382142,
+    -0.09629842075915095
    ],
-   "w": 0.1,
-   "d": 0.07,
-   "h": 0.02,
-   "rot": 12,
-   "colour": [
-    0.55,
-    0.58,
-    0.36
-   ]
+   "r": 0.09920094573960572,
+   "h": 0.06742795510549086,
+   "rot": 38.30624345044728,
+   "lid": "on"
   }
  ],
- "id": "2026-08_soup_pan"
+ "from_scene": "a heavy pan of white bean and fennel soup seen from above on a gas hob, the surface still moving, a wooden spoon resting across the rim, fennel fronds and a dried chilli on the counter beside it, the hob steel scratched and clean, daylight from a window to the left",
+ "not_built": []
 }

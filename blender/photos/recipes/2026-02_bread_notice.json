@@ -1,0 +1,89 @@
+{
+ "mode": "tabletop",
+ "surface": "desk",
+ "surface_size": 1.5984354650873436,
+ "room": true,
+ "room_colour": [
+  0.055,
+  0.048,
+  0.042
+ ],
+ "id": "2026-02_bread_notice",
+ "by": "noor",
+ "light": "night",
+ "seed": 9382,
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "look_at": [
+   0,
+   0,
+   0.03432684600654477
+  ],
+  "height": 0.3767556681100488,
+  "distance": 0.3251617439286219,
+  "lean_deg": 15.23471662177744,
+  "mm": 26.231531893212033
+ },
+ "handheld": 0.16777597785298096,
+ "quality": 91,
+ "objects": [
+  {
+   "kind": "pen",
+   "at": [
+    -0.0008807112103370561,
+    0.011409817292471109
+   ],
+   "as_kind": "pen",
+   "length": 0.1274095368888492,
+   "rot": 117.58141825031427
+  },
+  {
+   "kind": "sheet",
+   "at": [
+    0.25889812362867104,
+    -0.07793561981109852
+   ],
+   "w": 0.19290572809360682,
+   "h": 0.2542304845199058,
+   "rot": -28.394299153839004
+  },
+  {
+   "kind": "loaf",
+   "at": [
+    0.07064451757341353,
+    0.14401832317582688
+   ],
+   "length": 0.26773884755921,
+   "width": 0.12146078577311112,
+   "height": 0.09181892426488375,
+   "cut": 0.2080166289173492,
+   "rot": 28.40189147921145,
+   "flour": 0.34855910210981744
+  },
+  {
+   "kind": "stack",
+   "at": [
+    -0.19851750963344816,
+    0.02208237958184348
+   ],
+   "count": 5,
+   "rot": 2.597474994845701
+  },
+  {
+   "kind": "pan",
+   "at": [
+    0.10946598241709207,
+    -0.18496610633507027
+   ],
+   "r": 0.10702499708908768,
+   "h": 0.10594206094065456
+  }
+ ],
+ "from_scene": "a handwritten biro notice taped inside a bakery window, the paper curled at one corner, the metal shutter half down across the glass above it, empty wire bread baskets stacked behind the pane, a wet pavement and a bollard reflected in the dark glass",
+ "not_built": [
+  "bollard"
+ ]
+}
