@@ -80,14 +80,28 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         await _scrollToAnchor(it.id);
       }
       if (!mounted) return;
-      await ViewerPage.open(context, it);
+      // Opened, not opened-and-closed: a Navigator.push does not complete until the page is
+      // popped, so awaiting it here left the capture harness waiting for somebody to close the
+      // viewer. The scene ran out of time with no shot taken and what shipped was the thread
+      // behind it — which is exactly what the artifact was accused of being.
+      unawaited(ViewerPage.open(context, it));
+      await Future<void>.delayed(const Duration(milliseconds: 300));
     };
     // The artifact of searching has to be a picture of searching: the sheet open, the words in
     // the field, the facets down the side and the hits under them. Jumping straight to the first
     // hit in the thread — which is what this did — produced a second picture of the thread.
     CaptureBus.search = (q) async {
-      final id = await SearchPage.open(context, query: q);
-      if (id != null && mounted) _goTo(id);
+      // Opened, not opened-and-closed. SearchPage.open is a Navigator.push, and a push does not
+      // complete until the page is popped — so awaiting it here meant the capture harness asked
+      // for search and then waited for somebody to close it, which nobody was going to do. The
+      // scene timed out with no shot taken, every time, and what that looked like from the
+      // outside was a search that never opened.
+      final opened = SearchPage.open(context, query: q);
+      unawaited(opened.then((id) {
+        if (id != null && mounted) _goTo(id);
+      }));
+      // the route's own transition is 160ms; this is long enough for the page to be on screen
+      await Future<void>.delayed(const Duration(milliseconds: 240));
     };
     CaptureBus.scrollBy = (dy) {
       // one nudge of the thread's own scroller, which is what a frame of the scroll clip is
