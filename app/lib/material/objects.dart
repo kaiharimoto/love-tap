@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../feelings/builtins.dart';
+import '../feelings/drawn.dart';
 import 'library.dart';
 import 'light.dart';
 
@@ -31,6 +32,30 @@ class FeelingObject extends StatelessWidget {
     final dusk = Light.of(context) == LightCondition.dusk;
     final scale = 0.88 + 0.24 * intensity.clamp(0.0, 1.0);
     final id = feeling.object;
+
+    // Some feelings are not things. A sun scribbled at the top of a page, a moon on the corner,
+    // rain, a tongue stuck out — those are marks somebody made, and rendering them as objects
+    // would give a thing with no thickness some. They are drawn, in the same hand as everything
+    // else the app draws (feelings/drawn.dart).
+    if (DrawnFeelingMark.has(id)) {
+      return SizedBox(
+        width: size,
+        height: size,
+        child: Transform.rotate(
+          angle: tilt,
+          child: Transform.scale(
+            scale: scale,
+            child: DrawnFeelingMark(
+              object: id,
+              colour: Color(int.parse(feeling.colour.substring(1), radix: 16) | 0xFF000000),
+              size: size,
+              seed: feeling.id.hashCode,
+            ),
+          ),
+        ),
+      );
+    }
+
     return SizedBox(
       width: size,
       height: size,

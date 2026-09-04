@@ -6,6 +6,7 @@
 // stops being produced and nobody notices until a critic counts them.
 import 'package:desk/ambient/ambient.dart';
 import 'package:desk/feelings/builtins.dart';
+import 'package:desk/feelings/drawn.dart';
 import 'package:desk/modules/registry.dart';
 import 'package:desk/setup/checklist.dart';
 import 'package:desk/spine/event.dart';
@@ -35,6 +36,23 @@ void main() {
     expect(kBuiltInFeelings.map((f) => f.sound).toSet().length, kBuiltInFeelings.length);
     for (final f in kBuiltInFeelings) {
       expect(f.segments, isNotEmpty, reason: '${f.id} has no rhythm at all');
+    }
+  });
+
+  test('every feeling resolves to something drawn or rendered, and never to a glyph', () {
+    // Some of the vocabulary is objects and some of it is marks. What matters is that none of it
+    // is a blank or a character from a font: a feeling that cannot be shown is a feeling that
+    // arrives as its own name, which is the thing the emotional layer is meant not to be.
+    final drawn = kDrawnFeelings.keys.toSet();
+    for (final f in kBuiltInFeelings) {
+      expect(f.object.startsWith('obj_'), isTrue, reason: '${f.id} has no object at all');
+      expect(f.name.codeUnits.every((c) => c < 0x2190), isTrue,
+          reason: '${f.id} has a glyph in its name');
+    }
+    // the ones that are marks are marks on purpose, and the list is closed
+    for (final id in drawn) {
+      expect(kBuiltInFeelings.any((f) => f.object == id), isTrue,
+          reason: '$id is drawn but no feeling uses it');
     }
   });
 
