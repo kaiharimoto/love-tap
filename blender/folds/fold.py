@@ -223,11 +223,20 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
         common.render(scene, path)
         if frame % 20 == 0:
             print(f"{name} {frame}/{frames}", flush=True)
-    manifest.record(out_dir, "blender/folds/fold.py", {
+    settings = {
         "sequence": name, "frames": frames, "resolution": res, "samples": samples,
         "sheet_mm": list(SHEET_MM), "crease_mm": CREASE_MM, "light": condition,
         "rig": "blender/rig/common.py",
-    }, kind="fold_sequence")
+    }
+    # The brief's rule is that every file in assets/ names its generator, so each frame gets its
+    # own entry rather than the directory getting one. They share the sequence's settings and add
+    # the frame number, which is the only thing that differs between them.
+    manifest.record(out_dir, "blender/folds/fold.py", settings, kind="fold_sequence")
+    for frame_file in sorted(os.listdir(out_dir)):
+        if frame_file.endswith((".png", ".webp")):
+            manifest.record(os.path.join(out_dir, frame_file), "blender/folds/fold.py",
+                            dict(settings, frame=int(os.path.splitext(frame_file)[0])),
+                            kind="fold_frame")
 
 
 def main():

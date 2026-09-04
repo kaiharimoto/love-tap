@@ -51,6 +51,9 @@ echo "· reading every displayed string against docs/VOICE.md"
 python3 tools/lint/strings.py --out "$LOG/strings.json" || note_missing "voice" "a displayed string is against docs/VOICE.md"
 echo "· checking both hands still have all their ink"
 python3 tools/handwriting/check.py --out "$LOG/fonts.json" || note_missing "handwriting" "a glyph variant has lost a stroke"
+echo "· checking every file in assets/ names what made it"
+python3 tools/check/manifest.py --out "$LOG/manifest.json" >/dev/null \
+  || note_missing "assets" "a file in assets/ has no manifest entry naming its generator"
 echo "· checking the push payload carries only kind and sender"
 python3 tools/push/webpush.py --self-test > "$LOG/webpush.txt" 2>&1 || note_missing "push" "the web push sender failed its own vectors"
 
