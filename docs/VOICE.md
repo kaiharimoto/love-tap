@@ -1,7 +1,17 @@
 # VOICE
 
-How anything in the app is allowed to speak. Every displayed string lives in `app/lib/voice/strings.dart`
-and passes `tools/lint/strings.py`.
+How anything in the app is allowed to speak.
+
+`tools/lint/strings.py` walks every Dart source under `app/lib/` and pulls out every literal that
+can reach a screen — whatever is passed to `Text`, `Stamped`, `Written` or `SelectableText`, every
+`hintText`, `title`, `label`, `detail`, `observedBy`, `message` and `body`, and every constant in
+`app/lib/voice/strings.dart` — and holds each one against the rules below. It runs in `capture.sh`
+before the screenshots are taken, because a string that fails here would be visible in them.
+
+The sentences two surfaces share, and the ones that carry the most weight, live in
+`app/lib/voice/strings.dart`. A line written once, where it is shown, stays where it is shown: the
+lint reads it either way, and moving it somewhere else to satisfy a rule about where strings live
+would not make it a better sentence.
 
 ## Rules
 
