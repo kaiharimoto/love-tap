@@ -9775,12 +9775,12 @@
    }
   },
   "assets/fonts/MANIFEST.fonts.json": {
-   "bytes": 11950,
+   "bytes": 12025,
    "generator": "tools/handwriting/build.py",
    "kind": "manifest",
    "settings": {
     "faces": [
-     "TeoHand"
+     "NoorHand"
     ],
     "inputs": {
      "tools/handwriting/hands.json": "8fadc6b1efe16f04a4e64056012d7b043000cd975c24f760297e1a1c1feb8e44",
@@ -9790,7 +9790,7 @@
    }
   },
   "assets/fonts/NoorHand.ttf": {
-   "bytes": 376908,
+   "bytes": 377480,
    "generator": "tools/handwriting/build.py",
    "kind": "font",
    "settings": {
@@ -10085,6 +10085,40 @@
     "light": "day",
     "object": "obj_bookmark",
     "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_bookmark_shadow.png": {
+   "bytes": 181537,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_bookmark",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_bookmark_shadow_dusk.png": {
+   "bytes": 117408,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_bookmark",
+    "pass": "shadow",
     "resolution": [
      1200,
      1200
@@ -10448,6 +10482,23 @@
     ],
     "rig": "blender/rig/common.py",
     "samples": 40
+   }
+  },
+  "assets/objects/obj_dog_ear.png": {
+   "bytes": 528401,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_dog_ear",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
    }
   },
   "assets/objects/obj_fortune_teller.png": {

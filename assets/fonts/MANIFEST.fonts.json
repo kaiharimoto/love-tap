@@ -334,11 +334,12 @@
    },
    "font": "assets/fonts/NoorHand.ttf",
    "glyphs": 155,
-   "max_variant_attempts": 14,
+   "max_variant_attempts": 19,
    "parameters": {
-    "baseline_wobble": 9,
+    "baseline_wobble": 14,
     "corner_deg": 92,
     "description": "fast, slanted ballpoint; loops open; crosses t late; light with heavy stops",
+    "distinct_min": 40,
     "exit_stretch": 1.15,
     "family": "NoorHand",
     "gap": 28,
@@ -346,12 +347,14 @@
     "jitter": {
      "alt_prob": 0.55,
      "field_wavelength": [
-      220,
-      520
+      90,
+      260
      ],
-     "point": 18,
-     "point_noise": 5,
-     "rotation_deg": 2.5
+     "point": 44,
+     "point_noise": 9,
+     "rotation_deg": 4.0,
+     "slant_var_deg": 2.5,
+     "width_var": 0.07
     },
     "loop_openness": 0.85,
     "paper": "#f1ecdf",
@@ -376,7 +379,7 @@
      "base": 0.3,
      "baseline_weight": 0.0,
      "down_weight": 0.12,
-     "jitter": 0.14,
+     "jitter": 0.22,
      "scale": 0.45,
      "start_weight": 0.25,
      "stop_weight": 0.55,
@@ -396,14 +399,409 @@
    },
    "preview": "assets/fonts/previews/NoorHand.png",
    "variants": 5
+  },
+  "TeoHand": {
+   "alt_usage": {
+    "A": [
+     "base",
+     "onestroke",
+     "base",
+     "onestroke",
+     "onestroke"
+    ],
+    "Aacute": [
+     "base",
+     "onestroke",
+     "base",
+     "onestroke",
+     "onestroke"
+    ],
+    "Acircumflex": [
+     "base",
+     "onestroke",
+     "base",
+     "onestroke",
+     "onestroke"
+    ],
+    "Adieresis": [
+     "base",
+     "onestroke",
+     "base",
+     "onestroke",
+     "onestroke"
+    ],
+    "Agrave": [
+     "base",
+     "onestroke",
+     "onestroke",
+     "onestroke",
+     "base"
+    ],
+    "E": [
+     "base",
+     "fast",
+     "base",
+     "fast",
+     "base"
+    ],
+    "Eacute": [
+     "base",
+     "fast",
+     "fast",
+     "fast",
+     "fast"
+    ],
+    "Ecircumflex": [
+     "base",
+     "fast",
+     "base",
+     "fast",
+     "base"
+    ],
+    "Edieresis": [
+     "base",
+     "fast",
+     "fast",
+     "fast",
+     "base"
+    ],
+    "Egrave": [
+     "base",
+     "fast",
+     "fast",
+     "fast",
+     "fast"
+    ],
+    "I": [
+     "base",
+     "plain",
+     "plain",
+     "plain",
+     "plain"
+    ],
+    "Iacute": [
+     "base",
+     "plain",
+     "base",
+     "plain",
+     "base"
+    ],
+    "Icircumflex": [
+     "base",
+     "plain",
+     "plain",
+     "plain",
+     "plain"
+    ],
+    "Idieresis": [
+     "base",
+     "plain",
+     "plain",
+     "plain",
+     "base"
+    ],
+    "Igrave": [
+     "base",
+     "plain",
+     "base",
+     "plain",
+     "plain"
+    ],
+    "a": [
+     "base",
+     "double",
+     "base",
+     "openbowl",
+     "double"
+    ],
+    "aacute": [
+     "base",
+     "double",
+     "base",
+     "openbowl",
+     "base"
+    ],
+    "acircumflex": [
+     "base",
+     "double",
+     "base",
+     "openbowl",
+     "base"
+    ],
+    "adieresis": [
+     "base",
+     "double",
+     "openbowl",
+     "openbowl",
+     "base"
+    ],
+    "agrave": [
+     "base",
+     "openbowl",
+     "base",
+     "double",
+     "base"
+    ],
+    "ampersand": [
+     "base",
+     "epsilon",
+     "base",
+     "epsilon",
+     "epsilon"
+    ],
+    "b": [
+     "base",
+     "loop",
+     "loop",
+     "loop",
+     "base"
+    ],
+    "d": [
+     "base",
+     "loopd",
+     "base",
+     "loopd",
+     "base"
+    ],
+    "e": [
+     "base",
+     "pinched",
+     "pinched",
+     "open",
+     "pinched"
+    ],
+    "eacute": [
+     "base",
+     "pinched",
+     "open",
+     "open",
+     "open"
+    ],
+    "ecircumflex": [
+     "base",
+     "pinched",
+     "base",
+     "open",
+     "open"
+    ],
+    "edieresis": [
+     "base",
+     "open",
+     "pinched",
+     "pinched",
+     "open"
+    ],
+    "egrave": [
+     "base",
+     "open",
+     "base",
+     "pinched",
+     "open"
+    ],
+    "f": [
+     "base",
+     "loop",
+     "base",
+     "loop",
+     "base"
+    ],
+    "four": [
+     "base",
+     "closed",
+     "stemfirst",
+     "stemfirst",
+     "stemfirst"
+    ],
+    "g": [
+     "base",
+     "closed",
+     "base",
+     "straight",
+     "closed"
+    ],
+    "h": [
+     "base",
+     "loop",
+     "base",
+     "loop",
+     "loop"
+    ],
+    "k": [
+     "base",
+     "loop",
+     "twostroke",
+     "twostroke",
+     "base"
+    ],
+    "l": [
+     "base",
+     "loop",
+     "base",
+     "loop",
+     "base"
+    ],
+    "o": [
+     "base",
+     "plain",
+     "plain",
+     "plain",
+     "base"
+    ],
+    "oacute": [
+     "base",
+     "plain",
+     "plain",
+     "plain",
+     "base"
+    ],
+    "ocircumflex": [
+     "base",
+     "plain",
+     "plain",
+     "plain",
+     "plain"
+    ],
+    "odieresis": [
+     "base",
+     "plain",
+     "plain",
+     "plain",
+     "base"
+    ],
+    "ograve": [
+     "base",
+     "plain",
+     "base",
+     "plain",
+     "base"
+    ],
+    "one": [
+     "base",
+     "bar",
+     "plain",
+     "plain",
+     "plain"
+    ],
+    "r": [
+     "base",
+     "twostroke",
+     "base",
+     "flick",
+     "twostroke"
+    ],
+    "s": [
+     "base",
+     "open",
+     "sharp",
+     "sharp",
+     "sharp"
+    ],
+    "seven": [
+     "base",
+     "curved",
+     "curved",
+     "crossed",
+     "base"
+    ],
+    "t": [
+     "base",
+     "hook",
+     "base",
+     "crossfirst",
+     "base"
+    ],
+    "y": [
+     "base",
+     "vee",
+     "base",
+     "loop",
+     "vee"
+    ],
+    "ydieresis": [
+     "base",
+     "vee",
+     "loop",
+     "loop",
+     "loop"
+    ],
+    "z": [
+     "base",
+     "crossed",
+     "base",
+     "tail",
+     "tail"
+    ]
+   },
+   "font": "assets/fonts/TeoHand.ttf",
+   "glyphs": 155,
+   "max_variant_attempts": 24,
+   "parameters": {
+    "baseline_wobble": 10,
+    "corner_deg": 100,
+    "description": "upright, rounded pencil; presses hard; heaviest on downstrokes; sits heavy on the line",
+    "distinct_min": 40,
+    "exit_stretch": 0.85,
+    "family": "TeoHand",
+    "gap": 46,
+    "ink": "#3a3a3c",
+    "jitter": {
+     "alt_prob": 0.5,
+     "field_wavelength": [
+      100,
+      280
+     ],
+     "point": 40,
+     "point_noise": 8,
+     "rotation_deg": 3.5,
+     "slant_var_deg": 1.5,
+     "width_var": 0.07
+    },
+    "loop_openness": 0.25,
+    "paper": "#f1ecdf",
+    "pen": {
+     "edge_noise_em": 0.012,
+     "edge_samples_per_em": 40,
+     "gamma": 1.2,
+     "model": "pencil",
+     "width_em": 0.075,
+     "width_max": 1.5,
+     "width_min": 0.55
+    },
+    "person": "Teo",
+    "pressure": {
+     "base": 0.62,
+     "baseline_weight": 0.28,
+     "down_weight": 0.38,
+     "jitter": 0.18,
+     "scale": 0.4,
+     "start_weight": 0.05,
+     "stop_weight": 0.08,
+     "turn_weight": 0.05
+    },
+    "rounding": 0.55,
+    "slant_deg": 0,
+    "space_em": 0.36,
+    "spacing_jitter": 12,
+    "start_overshoot": 4,
+    "style": "Regular",
+    "t_cross_late": 0.0,
+    "tension": 0.5,
+    "variants": 5,
+    "width_scale": 1.06,
+    "xheight_scale": 1.04
+   },
+   "preview": "assets/fonts/previews/TeoHand.png",
+   "variants": 5
   }
  },
  "generator": "tools/handwriting/build.py",
  "inputs": {
-  "tools/handwriting/hands.json": "8064eea99da0afa21e6da4fd9e117dc2e2377af64ff466e9168ccb1b2ab6088b",
+  "tools/handwriting/hands.json": "8fadc6b1efe16f04a4e64056012d7b043000cd975c24f760297e1a1c1feb8e44",
   "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
  },
  "outputs": [
+  "assets/fonts/TeoHand.ttf",
+  "assets/fonts/previews/TeoHand.png",
   "assets/fonts/NoorHand.ttf",
   "assets/fonts/previews/NoorHand.png"
  ],
