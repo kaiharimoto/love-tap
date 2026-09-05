@@ -140,6 +140,10 @@ class _ShellState extends State<Shell> {
       final scope = AppScope.of(context);
       final f = scope.feelings.byId(id);
       if (f == null) return;
+      // a feeling picked while the vocabulary is out is picked off the sheet, and the sheet goes
+      // back under the corner as it does for a thumb; the harness used to send past it and leave
+      // the sheet lying open over the whole clip
+      CaptureBus.openCorner?.call(false);
       // The handle returns as soon as the feeling is in the log, and leaves the sensation running.
       // Awaiting the whole thing would mean the harness only ever started taking frames after the
       // landing had finished, which is how a clip of a feeling arriving becomes a clip of a desk.

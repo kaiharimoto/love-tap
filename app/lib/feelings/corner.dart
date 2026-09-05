@@ -278,17 +278,24 @@ class _Fan extends StatelessWidget {
                         children: [
                           for (final f in Family.values)
                             GestureDetector(
+                              behavior: HitTestBehavior.opaque,
                               onTap: () => onFamily(f),
                               child: Padding(
                                 padding: const EdgeInsets.all(3),
-                                child: Slip(
-                                  id: 'family_${f.name}',
-                                  stock: 'index',
-                                  padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
-                                  child: Stamped(
-                                    f.label,
-                                    size: f == family ? 12 : 10.5,
-                                    colour: f == family ? Pen.stamp : Pen.margin,
+                                // as wide as its word: a slip given no width takes all the
+                                // width a Wrap offers, and six of them stacked into six bars
+                                // the height of the sheet with no room under them for a tile
+                                child: IntrinsicWidth(
+                                  child: Slip(
+                                    id: 'family_${f.name}',
+                                    stock: 'index',
+                                    torn: false,
+                                    padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
+                                    child: Stamped(
+                                      f.label,
+                                      size: f == family ? 12 : 10.5,
+                                      colour: f == family ? Pen.stamp : Pen.margin,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -301,6 +308,11 @@ class _Fan extends StatelessWidget {
                         children: [
                           for (var i = 0; i < members.length; i++)
                             GestureDetector(
+                              // the whole tile takes the tap. A detector that defers to its
+                              // child only hears a tap the child claims, and an object drawn
+                              // with a painter claims nothing: a drawn feeling could only be
+                              // picked by tapping its name
+                              behavior: HitTestBehavior.opaque,
                               onTapDown: (_) => onHover(members[i]),
                               onTap: () => onPick(members[i]),
                               child: Padding(
