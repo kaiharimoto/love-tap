@@ -146,7 +146,16 @@ class Note extends StatelessWidget {
           // A folded note is a letter: it opens, and the writing is on the sheet that opened. The
           // torn piece is what it would be if no sequence were baked.
           child: folded
-              ? FoldedNote(id: item.id, width: width, letter: writing, arriving: arrived, child: piece)
+              ? FoldedNote(
+                  id: item.id,
+                  width: width,
+                  letter: writing,
+                  // the name on the outside, in the hand of the one who folded it: a folded note
+                  // is addressed, and this is what the reader sees before opening it
+                  outside: Text(scope.me.name, style: Hands.of(e.author, size: 17)),
+                  arriving: arrived,
+                  child: piece,
+                )
               : piece,
         ),
       ),

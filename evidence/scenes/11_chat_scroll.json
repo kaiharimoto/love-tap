@@ -27,12 +27,25 @@
   {
    "do": "frames",
    "dir": "evidence/frames/11_chat_scroll",
-   "count": 330,
+   "count": 300,
    "ms": 16,
    "drive": {
-    "kind": "scrollBy",
-    "per": -11.0
+    "kind": "fling",
+    "velocity": -3000,
+    "at": [
+     0,
+     44,
+     88,
+     132,
+     176,
+     220,
+     264
+    ]
    }
+  },
+  {
+   "do": "timings",
+   "out": "evidence/logs/scroll_webkit.json"
   }
  ]
 }

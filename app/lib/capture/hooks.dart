@@ -7,6 +7,7 @@
 import 'dart:async';
 
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/widgets.dart' show ClampingScrollSimulation;
 
 import '../feelings/builtins.dart';
 import '../flags.dart';
@@ -80,6 +81,73 @@ class CaptureHooks {
     if (f == null) return 'chat is not on screen';
     f(dy);
     return 'ok';
+  }
+
+  /// Throw the thread the way a thumb does: a fling at [velocity] logical px/s that runs on the
+  /// driven clock through the thread's own scroller, decelerating on Flutter's clamping physics.
+  ///
+  /// The scroll clip used to be the scroller nudged eleven pixels a frame — a constant-speed
+  /// conveyor, which no thumb has ever produced. This is a real fling: the same simulation the
+  /// list would run for a real one, stepped at the clip's frame interval, so every frame is a
+  /// frame of the thread decelerating.
+  Future<String> fling(double velocity) async {
+    if (CaptureBus.scrollBy == null) return 'chat is not on screen';
+    _flingSub?.cancel();
+    final sim = ClampingScrollSimulation(position: 0, velocity: velocity);
+    final t0 = DrivenClock.now;
+    var moved = 0.0;
+    _flingSub = DrivenClock.ticks.listen((now) {
+      final t = (now - t0).inMicroseconds / 1e6;
+      final x = sim.x(t);
+      final dx = x - moved;
+      moved = x;
+      if (dx.abs() > 0.01) CaptureBus.scrollBy?.call(-dx);
+      if (sim.isDone(t)) {
+        _flingSub?.cancel();
+        _flingSub = null;
+      }
+    });
+    _watchTimings();
+    return 'ok';
+  }
+
+  StreamSubscription<Duration>? _flingSub;
+  static final List<Map<String, num>> _timings = [];
+  static bool _watching = false;
+
+  void _watchTimings() {
+    if (_watching) return;
+    _watching = true;
+    SchedulerBinding.instance.addTimingsCallback((frames) {
+      for (final f in frames) {
+        _timings.add({
+          'build_ms': f.buildDuration.inMicroseconds / 1000,
+          'raster_ms': f.rasterDuration.inMicroseconds / 1000,
+          'total_ms': f.totalSpan.inMicroseconds / 1000,
+        });
+      }
+    });
+  }
+
+  /// The frame timings recorded since the first fling: build and raster time per frame, from
+  /// the framework's own FrameTiming, under the browser the clip was captured in.
+  Map<String, dynamic> timings() {
+    final t = List<Map<String, num>>.from(_timings);
+    num pct(String k, double q) {
+      if (t.isEmpty) return 0;
+      final v = t.map((m) => m[k]!).toList()..sort();
+      return v[((v.length - 1) * q).round()];
+    }
+    return {
+      'frames': t.length,
+      'clock': 'driven',
+      'note': 'one frame per harness step, so these are the cost of drawing a frame, not a '
+          'measured refresh rate',
+      'build_ms': {'p50': pct('build_ms', 0.5), 'p95': pct('build_ms', 0.95), 'max': pct('build_ms', 1.0)},
+      'raster_ms': {'p50': pct('raster_ms', 0.5), 'p95': pct('raster_ms', 0.95), 'max': pct('raster_ms', 1.0)},
+      'over_16ms': t.where((m) => m['total_ms']! > 16).length,
+      'per_frame': t,
+    };
   }
 
   /// Pair with the phone at [base] using the six words it is showing.

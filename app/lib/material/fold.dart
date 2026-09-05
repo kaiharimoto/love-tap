@@ -341,6 +341,7 @@ class FoldedNote extends StatefulWidget {
     required this.width,
     required this.child,
     this.letter,
+    this.outside,
     this.seq = 'unfold_thirds',
     this.arriving = false,
   });
@@ -358,6 +359,12 @@ class FoldedNote extends StatefulWidget {
   /// on the creased sheet as it settles flat. Without it the sheet opens blank and [child] is shown
   /// in its place once it has.
   final Widget? letter;
+
+  /// What is written on the outside of the folded sheet — the name of the person it is for, in
+  /// the hand of the person who folded it, the way a note passed across a table has a name on it.
+  /// A folded sheet with nothing on the outside read as a blank rectangle; this is what says it is
+  /// a letter before it is opened. It fades as the sheet opens.
+  final Widget? outside;
   final String seq;
 
   /// This note has just arrived: it lands on the desk rather than being there already.
@@ -418,7 +425,12 @@ class _FoldedNoteState extends State<FoldedNote> {
       autoplay: _opening,
       startOpen: _open && Folds.wasOpened(widget.id),
       onOpen: _opened,
-      overlay: letter == null ? null : (ctx, p, size) => _ink(ctx, p, size, letter),
+      overlay: letter == null && widget.outside == null
+          ? null
+          : (ctx, p, size) => Stack(children: [
+                if (widget.outside != null) _name(ctx, p, size, widget.outside!),
+                if (letter != null) _ink(ctx, p, size, letter),
+              ]),
     );
     if (!_opening) {
       sheet = GestureDetector(onTap: () => setState(() => _opening = true), child: sheet);
@@ -441,6 +453,21 @@ class _FoldedNoteState extends State<FoldedNote> {
       );
     }
     return sheet;
+  }
+
+  /// The name on the outside: on the front panel, low and to the right, where a hand writes it
+  /// on a folded note; gone by the time the flap has lifted.
+  Widget _name(BuildContext context, double p, Size size, Widget name) {
+    final shown = (1.0 - p / 0.22).clamp(0.0, 1.0);
+    if (shown <= 0) return const SizedBox.shrink();
+    return Positioned(
+      right: size.width * 0.14,
+      bottom: size.height * 0.30,
+      child: Opacity(
+        opacity: shown,
+        child: Transform.rotate(angle: -0.035, child: name),
+      ),
+    );
   }
 
   Widget _ink(BuildContext context, double p, Size size, Widget letter) {

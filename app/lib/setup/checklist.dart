@@ -137,7 +137,8 @@ const List<SetupStep> kPwaSetup = [
   SetupStep(
     id: 'first',
     title: 'write the first thing',
-    detail: 'anything. it goes to one person.',
+    detail: 'anything. it goes to one person. when a feeling comes back, this phone cannot buzz: '
+        'the paper under your thumb lifts to its rhythm instead, and its sound carries the beat.',
     observedBy: 'waiting for something written here',
   ),
   SetupStep(

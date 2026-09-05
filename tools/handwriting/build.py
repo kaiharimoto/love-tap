@@ -821,6 +821,20 @@ def skeleton_bounds(glyph, plan=None):
     return a[:, 0].min(), a[:, 1].min(), a[:, 0].max(), a[:, 1].max()
 
 
+def net_area(contours):
+    """The filled area of the outline under the nonzero rule, in font units squared: the sum of
+    the contours' signed areas. Two overlapping contours wound against each other cancel here the
+    way they cancel on the page."""
+    total = 0.0
+    for c in contours:
+        a = np.asarray(c, float)
+        if len(a) < 3:
+            continue
+        x, y = a[:, 0], a[:, 1]
+        total += 0.5 * float(np.dot(x, np.roll(y, -1)) - np.dot(np.roll(x, -1), y))
+    return abs(total)
+
+
 def covers(contours, want, slack=0.22):
     """Did the built outline keep the ink the skeleton asked for?
 
@@ -856,7 +870,15 @@ def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
                 continue
             pts = contour_points(contours)
             whole = covers(contours, want)
-            made = {"contours": contours, "pts": pts, "alt": alt, "attempts": attempt + 1, "whole": whole}
+            # And the ink itself: a variant can keep its bounding box and lose most of its fill
+            # when the union leaves two contours wound against each other — TeoHand shipped a
+            # '9' with a fifth of its siblings' area that read as a faint ring in every timestamp.
+            # Against the first variant, which is the reference the others are re-rolled from.
+            area = net_area(contours)
+            if results and results[0].get("area", 0) > 0 and area < 0.6 * results[0]["area"]:
+                whole = False
+            made = {"contours": contours, "pts": pts, "alt": alt, "attempts": attempt + 1, "whole": whole,
+                    "area": area}
             if fallback is None or (whole and not fallback["whole"]):
                 fallback = made
             if not whole:

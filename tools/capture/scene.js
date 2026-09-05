@@ -53,19 +53,35 @@ function ensure(p) {
 (async () => {
   const vp = Object.assign({ width: 440, height: 956, dpr: 3 }, scene.viewport || {});
   const type = browserName === 'chromium' ? chromium : webkit;
-  const browser = await type.launch({
+  const launch = {
     headless: true,
     channel: browserName === 'chromium' ? 'chromium' : undefined,
     ...(proxy ? { proxy: { server: proxy, bypass: '127.0.0.1,localhost' } } : {}),
-  });
-  const context = await browser.newContext({
+  };
+  const contextOptions = {
     viewport: { width: vp.width, height: vp.height },
     deviceScaleFactor: vp.dpr,
     isMobile: true,
     hasTouch: true,
     reducedMotion: 'no-preference',
-  });
-  const page = await context.newPage();
+  };
+  // A kept profile: the browser's storage survives from one scene to the next, so the year is
+  // imported into IndexedDB once and every later scene opens on a phone that already has it —
+  // which is what a phone does. Without it every scene was a first launch, twelve to sixteen
+  // seconds of import each, and the capture log called each of them the cold start. The first
+  // scene on a fresh profile still is one, and the log says which kind it measured.
+  const profile = arg('profile', '');
+  const keptStore = !!(profile && fs.existsSync(profile));
+  let browser = null;
+  let context;
+  if (profile) {
+    fs.mkdirSync(profile, { recursive: true });
+    context = await type.launchPersistentContext(profile, { ...launch, ...contextOptions });
+  } else {
+    browser = await type.launch(launch);
+    context = await browser.newContext(contextOptions);
+  }
+  const page = context.pages()[0] || (await context.newPage());
   const problems = [];
   const log = { scene: scene.name, browser: browserName, viewport: vp, url, steps: [], shots: [], reports: [] };
   page.on('pageerror', (e) => problems.push('pageerror: ' + String(e).slice(0, 300)));
@@ -76,7 +92,10 @@ function ensure(p) {
   const t0 = Date.now();
   await page.goto(url, { waitUntil: 'load', timeout: 120000 });
   await page.waitForFunction('window.__deskReady === true', { timeout: scene.wait || 60000 });
+  // cold_ms is kept for the collectors that read it; store says whether it measured a first
+  // launch (the year importing) or a phone that already had the year
   log.cold_ms = Date.now() - t0;
+  log.load = { ms: log.cold_ms, store: keptStore ? 'kept' : 'fresh', profile: profile ? path.basename(profile) : null };
 
   // Paired before anything else, when a far phone was given and the scene does not pair itself:
   // every still is then a picture of a phone that is talking to the other one, on the real log,
@@ -257,6 +276,12 @@ function ensure(p) {
             // phone is told to send at a known frame rather than at a hopeful moment
             farSay(drive.line);
           }
+          if (drive && drive.kind === 'fling') {
+            // a thumb's throw, at the frames the scene names; the thread then runs on its own
+            // physics, a frame per step, until it stops or the thumb throws again
+            const at = drive.at || [0];
+            if (at.includes(i)) await hook('__deskFling', drive.velocity || -2600);
+          }
           if (drive && drive.kind === 'scrollBy') {
             // The thread's own scroller, a step per frame. Dragging a note is a long press as
             // far as the app is concerned, which is how a clip of the year scrolling past became
@@ -271,6 +296,48 @@ function ensure(p) {
         }
         if (drive && drive.kind === 'drag' && !drive.release) await page.mouse.up();
         log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms, drive: drive || null });
+        break;
+      }
+      case 'timings': {
+        // what each frame of the scroll cost to draw, from the framework's own FrameTiming
+        const raw = await page.evaluate(() => window.__deskTimings && window.__deskTimings());
+        const out = abs(step.out || 'evidence/logs/scroll_webkit.json');
+        ensure(out);
+        const body = raw ? JSON.parse(raw) : { missing: 'no timings handle' };
+        body.browser = browserName;
+        body.viewport = vp;
+        fs.writeFileSync(out, JSON.stringify(body, null, 1));
+        break;
+      }
+      case 'pwa': {
+        // what the page actually offers an iPhone: the manifest it links, what the manifest says,
+        // the touch icon, and whether the worker that carries pushes is registered — read from
+        // the page, not from the source tree
+        const facts = await page.evaluate(async () => {
+          const out = { manifest_link: null, manifest: null, apple_touch_icon: null, service_workers: [], display_mode_standalone: null };
+          const link = document.querySelector('link[rel="manifest"]');
+          out.manifest_link = link ? link.getAttribute('href') : null;
+          if (out.manifest_link) {
+            try {
+              const m = await (await fetch(out.manifest_link)).json();
+              out.manifest = { name: m.name, display: m.display, start_url: m.start_url, icons: (m.icons || []).length };
+            } catch (e) { out.manifest = 'unreadable: ' + e; }
+          }
+          const icon = document.querySelector('link[rel="apple-touch-icon"]');
+          out.apple_touch_icon = icon ? icon.getAttribute('href') : null;
+          try {
+            const regs = await navigator.serviceWorker.getRegistrations();
+            out.service_workers = regs.map((r) => (r.active || r.installing || r.waiting || {}).scriptURL || r.scope);
+          } catch (e) { out.service_workers = 'unavailable: ' + e; }
+          try { out.display_mode_standalone = window.matchMedia('(display-mode: standalone)').matches; } catch (e) {}
+          return out;
+        });
+        facts.browser = browserName;
+        facts.url = url;
+        const out = abs(step.out || 'evidence/logs/pwa.json');
+        ensure(out);
+        fs.writeFileSync(out, JSON.stringify(facts, null, 1));
+        log.pwa = facts;
         break;
       }
       case 'haptics': {
@@ -308,7 +375,7 @@ function ensure(p) {
     fs.writeFileSync(out, JSON.stringify(log, null, 1));
   }
   console.log(JSON.stringify(log, null, 1));
-  await browser.close();
+  if (browser) await browser.close(); else await context.close();
   if (!log.ok) process.exitCode = 1;
 })().catch((e) => {
   console.error(String(e && e.stack ? e.stack : e));

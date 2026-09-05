@@ -26,6 +26,8 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskStep(JSFunction f);
   external set __deskCount(JSFunction f);
   external set __deskHaptics(JSFunction f);
+  external set __deskFling(JSFunction f);
+  external set __deskTimings(JSFunction f);
 }
 
 /// A handle's answer, as a string the harness can read.
@@ -55,6 +57,8 @@ void expose(CaptureHooks hooks) {
   w.__deskStep = ((JSNumber ms) => DrivenClock.step(ms.toDartInt).toJS).toJS;
   w.__deskCount = (() => hooks.count().toJS).toJS;
   w.__deskHaptics = (() => jsonEncode(hooks.haptics()).toJS).toJS;
+  w.__deskFling = ((JSNumber v) => _said(hooks.fling(v.toDartDouble))).toJS;
+  w.__deskTimings = (() => jsonEncode(hooks.timings()).toJS).toJS;
 }
 
 /// Signal values arrive as strings on the wire; the numbers and flags among them are read back

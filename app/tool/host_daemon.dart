@@ -22,6 +22,7 @@
 // as missing rather than faked. 08_state_propagating does not need the far phone to be visible —
 // it needs a gesture on one device to become a sensation on the other, and that is exactly what
 // this makes happen.
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -128,6 +129,7 @@ Future<void> main(List<String> argv) async {
   // One instruction per line, taken and removed. This is how a clip makes something happen on the
   // far phone at the exact frame it wants it.
   final control = File('$out.do');
+  Timer? typingRepeat;
   // the built-ins and every feeling either of them has made, from the same log the near phone
   // reads them from: an authored feeling is sent the way a built-in is, because it is one
   final registry = FeelingRegistry(spine.all);
@@ -172,15 +174,22 @@ Future<void> main(List<String> argv) async {
           stdout.writeln('host-daemon: read up to $upto as ${e.id}');
         } else if (parts.first == 'typing') {
           // Not an event and never stored: the frame the near phone shows as `noor writing…`.
+          // While it is on the frame is sent again every three seconds, as the app's own composer
+          // does while somebody keeps writing; the near phone lets a frame lapse after six.
           final on = parts.length < 2 || parts[1] != 'off';
-          await transport.sendEphemeral(Ephemeral(
+          typingRepeat?.cancel();
+          typingRepeat = null;
+          Future<void> frame() => transport.sendEphemeral(Ephemeral(
               kind: 'typing', from: Person.noor, at: now().millisecondsSinceEpoch, data: {'on': on}));
+          await frame();
+          if (on) typingRepeat = Timer.periodic(const Duration(seconds: 3), (_) => frame());
           stdout.writeln('host-daemon: typing ${on ? 'on' : 'off'}');
         } else if (parts.first == 'pair') {
           await mint();
           stdout.writeln('host-daemon: six words minted again');
         } else if (parts.first == 'stop') {
           stdout.writeln('host-daemon: asked to stop');
+          typingRepeat?.cancel();
           await transport.stop();
           await spine.close();
           exit(0);

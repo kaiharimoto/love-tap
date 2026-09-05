@@ -34,13 +34,21 @@ class WebStore implements SpineStore {
     return sortStored(list.map((r) => Event.decode(r['json'] as String)));
   }
 
+  /// The next stored_order. Read once, from the count and the top of the stored_order index —
+  /// this used to getAll() every row inside the write transaction, fourteen thousand of them on a
+  /// phone that already had the year, before it wrote the first new one.
   Future<int> _order(Transaction txn) async {
     if (_nextOrder != null) return _nextOrder!;
-    final all = await txn.objectStore('events').getAll();
+    final store = txn.objectStore('events');
+    final count = await store.count();
+    if (count == 0) {
+      _nextOrder = 1;
+      return 1;
+    }
     var max = 0;
-    for (final r in all) {
-      final o = (r as Map)['stored_order'] as int;
-      if (o > max) max = o;
+    await for (final c in store.index('stored_order').openCursor(direction: 'prev', autoAdvance: false)) {
+      max = c.key as int;
+      break;
     }
     _nextOrder = max + 1;
     return _nextOrder!;
@@ -51,8 +59,11 @@ class WebStore implements SpineStore {
     final txn = _db.transaction('events', idbModeReadWrite);
     final store = txn.objectStore('events');
     var order = await _order(txn);
+    // Into an empty store nothing can already exist, so nothing is looked up first: the year's
+    // import was one get and one put per event, and the get was half the cold start.
+    final empty = order == 1;
     for (final e in events) {
-      final existing = await store.getObject(e.id);
+      final existing = empty ? null : await store.getObject(e.id);
       final storedOrder = existing == null ? order++ : (existing as Map)['stored_order'] as int;
       await store.put({'id': e.id, 'seq': e.seq, 'stored_order': storedOrder, 'json': e.encode()});
     }

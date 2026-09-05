@@ -66,6 +66,12 @@ class S {
   // settings
   static const emptyFeelings = 'the built-in ones are here. make one below.';
 
+  /// The PWA has no vibrator to play a feeling on. This says what happens instead, where a
+  /// reader would otherwise take the quiet for the feature being missing.
+  static const pageCarriesIt =
+      'this phone cannot buzz. when a feeling comes, the paper under your thumb lifts to its rhythm, '
+      'and its sound carries the same beat.';
+
   static String feelingFrom(String feelingName, String person) => '$feelingName from $person';
   static String aPhotoFrom(String person) => '$person, a photo';
 }

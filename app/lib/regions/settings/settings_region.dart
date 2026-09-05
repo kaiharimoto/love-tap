@@ -7,6 +7,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../../capture/bus.dart';
@@ -141,6 +142,10 @@ class _SettingsRegionState extends State<SettingsRegion> {
               setState(() => _prefs = p);
             },
           ),
+        if (kIsWeb) ...[
+          const SizedBox(height: 14),
+          Text(S.pageCarriesIt, style: Hands.onDesk(size: 14)),
+        ],
         const SizedBox(height: 22),
         Row(children: [
           const Stamped.onDesk('feelings you made', size: 11),

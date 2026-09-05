@@ -217,11 +217,17 @@ run_scene() { # name url [extra scene.js args...]
 
 # A scene on the seeded year: the near phone loads the page from the far phone, pairs with it, and
 # is connected before its first shot.
+# One kept browser profile for every seeded scene, emptied at the start of the run: the first
+# seeded scene is the cold start, with the year importing, and every one after it opens on a
+# phone that already has the year, which is the phone the reader is looking at. The fresh scenes
+# never touch it.
+PROFILE="$SCRATCH/profile_seeded"
+rm -rf "$PROFILE"
 run_far_scene() { # name
   local name="$1"
   wants "$name" || return 0
   remint || return 1
-  run_scene "$name" "$FAR_BASE/" --pair "$PAIR" ${FAR_PROXY:+--proxy "http://$FAR_PROXY"}
+  run_scene "$name" "$FAR_BASE/" --pair "$PAIR" --profile "$PROFILE" ${FAR_PROXY:+--proxy "http://$FAR_PROXY"}
 }
 
 FRESH_URL="http://127.0.0.1:$FRESH_PORT/"
@@ -341,6 +347,9 @@ fi
 # ---- derived: crops, strips, diffs, the capture log ------------------------------------------------
 if [ -f evidence/02_chat.png ]; then
   python3 tools/check/crops.py evidence/02_chat.png --out-dir evidence/crops --scale 3 >"$LOG/crops.json"
+  # and the letters on the hand crop laid over each other, the way the critic did it
+  python3 tools/check/hand.py evidence/02_chat.png --out "$LOG/hand.json" >/dev/null \
+    || note_missing "hand" "the letters on the thread repeat themselves like a font; see $LOG/hand.json"
   python3 tools/check/tears.py "$LOG/02_chat.report.json" --out "$LOG/tears.json" >/dev/null \
     || note_missing "02_chat.png" "$(python3 -c "import json;print(json.load(open('$LOG/tears.json')).get('why',''))" 2>/dev/null)"
 fi
