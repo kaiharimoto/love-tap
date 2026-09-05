@@ -10,6 +10,7 @@ import 'hands.dart';
 import 'library.dart';
 import 'light.dart';
 import 'palette.dart';
+import '../voice/strings.dart';
 import 'paper.dart';
 
 class Desk extends StatelessWidget {
@@ -86,6 +87,12 @@ class PartnerStrip extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        // before the other phone has said anything there is nothing to read
+                        // off it, and the strip says so in words rather than showing two dials
+                        // at zero, which is what a gauge with nothing behind it looks like
+                        if (state.signals.isEmpty)
+                          Text(S.nobodyYet, maxLines: 2, style: Hands.margin(size: 14))
+                        else
                         Text(
                           state.statusLine ?? _fallbackLine(state, asleep, headsDown),
                           maxLines: 1,
@@ -93,6 +100,7 @@ class PartnerStrip extends StatelessWidget {
                           style: Hands.of(partner, size: 17, colour: ink.withValues(alpha: weight)),
                         ),
                         const SizedBox(height: 2),
+                        if (state.signals.isNotEmpty)
                         Row(children: [
                           if (state.place != null) Stamped(state.place!, size: 10),
                           if (state.place != null) const SizedBox(width: 8),

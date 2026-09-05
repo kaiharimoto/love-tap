@@ -68,6 +68,10 @@ class S {
 
   /// The PWA has no vibrator to play a feeling on. This says what happens instead, where a
   /// reader would otherwise take the quiet for the feature being missing.
+  /// The strip at the top before the other phone has said anything at all. Two empty dials read
+  /// as a broken gauge; a line says what is actually the case.
+  static const nobodyYet = 'nothing from them yet. the six words are on the other phone.';
+
   static const pageCarriesIt =
       'this phone cannot buzz. when a feeling comes, the paper under your thumb lifts to its rhythm, '
       'and its sound carries the same beat.';

@@ -294,7 +294,7 @@ for s in 06_unfolding 07_feeling_landing 11_chat_scroll 15_authored_feeling; do
   [ -f "evidence/scenes/$s.json" ] && run_far_scene "$s"
 done
 make_clip 06_unfolding 60 4
-make_clip 07_feeling_landing 60 6
+make_clip 07_feeling_landing 60 5
 make_clip 11_chat_scroll 60 4
 make_clip 15_authored_feeling 60 4
 
