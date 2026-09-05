@@ -10,7 +10,7 @@
     "fd7a:115c:a1e0::fa38:fe1a"
    ],
    "os": "linux",
-   "online": false
+   "online": true
   },
   "client": {
    "hostname": "lovetap-b",
@@ -20,7 +20,7 @@
     "fd7a:115c:a1e0::b338:c66d"
    ],
    "os": "linux",
-   "online": false
+   "online": true
   }
  },
  "distinct_node_keys": true,
@@ -33,45 +33,45 @@
  "paired_with": "six spoken words, HKDF-SHA256; every request signed thereafter",
  "events": {
   "message_client_to_host": {
-   "id": "01M1Q2TW99C203T7M2F4Y2XR90",
+   "id": "01M1QCBZ4H5JG52G4YQD4HW882",
    "type": "message",
    "from": "teo",
-   "written_at": "2026-09-04T20:47:46.985Z",
+   "written_at": "2026-09-04T23:34:24.145Z",
    "arrived_seq": 1
   },
   "feeling_client_to_host": {
-   "id": "01M1Q2TW9RWP7BTNFH0H0XR30K",
+   "id": "01M1QCBZ4T3VEQK3BV4MS3YSJJ",
    "type": "feeling",
    "from": "teo",
-   "written_at": "2026-09-04T20:47:47.000Z",
+   "written_at": "2026-09-04T23:34:24.154Z",
    "arrived_seq": 2
   },
   "message_host_to_client": {
-   "id": "01M1Q2TWB9VD8MD7CRK8XSQD90",
+   "id": "01M1QCBZ5T1E2CDXJMDZH7WE98",
    "type": "message",
    "from": "noor",
-   "written_at": "2026-09-04T20:47:47.049Z",
+   "written_at": "2026-09-04T23:34:24.186Z",
    "arrived_seq": 3
   },
   "feeling_host_to_client": {
-   "id": "01M1Q2TWBB45FS9CPMQM7W8D6Y",
+   "id": "01M1QCBZ5VB9CHBGDYV3B2KND7",
    "type": "feeling",
    "from": "noor",
-   "written_at": "2026-09-04T20:47:47.051Z",
+   "written_at": "2026-09-04T23:34:24.187Z",
    "arrived_seq": 4
   }
  },
  "spine_host_order": [
-  "01M1Q2TW99C203T7M2F4Y2XR90",
-  "01M1Q2TW9RWP7BTNFH0H0XR30K",
-  "01M1Q2TWB9VD8MD7CRK8XSQD90",
-  "01M1Q2TWBB45FS9CPMQM7W8D6Y"
+  "01M1QCBZ4H5JG52G4YQD4HW882",
+  "01M1QCBZ4T3VEQK3BV4MS3YSJJ",
+  "01M1QCBZ5T1E2CDXJMDZH7WE98",
+  "01M1QCBZ5VB9CHBGDYV3B2KND7"
  ],
  "spine_client_order": [
-  "01M1Q2TW99C203T7M2F4Y2XR90",
-  "01M1Q2TW9RWP7BTNFH0H0XR30K",
-  "01M1Q2TWB9VD8MD7CRK8XSQD90",
-  "01M1Q2TWBB45FS9CPMQM7W8D6Y"
+  "01M1QCBZ4H5JG52G4YQD4HW882",
+  "01M1QCBZ4T3VEQK3BV4MS3YSJJ",
+  "01M1QCBZ5T1E2CDXJMDZH7WE98",
+  "01M1QCBZ5VB9CHBGDYV3B2KND7"
  ],
  "four_events_at": {
   "host": [
@@ -89,9 +89,9 @@
  },
  "same_order_both_sides": true,
  "counted_by_node_b": {
-  "tx_bytes": 4220,
-  "rx_bytes": 3516,
-  "path": "direct to 192.0.2.2:48859"
+  "tx_bytes": 19432,
+  "rx_bytes": 17080,
+  "path": "direct to 192.0.2.2:39582"
  },
- "written_at": "2026-09-04T20:47:47.085122Z"
+ "written_at": "2026-09-04T23:34:24.211456Z"
 }

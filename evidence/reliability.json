@@ -1,23 +1,23 @@
 {
  "transport": "local",
- "generated_at": "2026-09-04T20:47:49.751645Z",
+ "generated_at": "2026-09-04T23:34:26.136767Z",
  "host": {
   "transport": "local",
   "role": "host",
   "state": "connected",
-  "address": "127.0.0.1:37115",
+  "address": "127.0.0.1:35157",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-04T20:47:49.732205Z",
-  "last_contact": "2026-09-04T20:47:49.747496Z",
+  "since": "2026-09-04T23:34:26.125208Z",
+  "last_contact": "2026-09-04T23:34:26.134182Z",
   "device_id": "android-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-04T20:47:49.137950Z"
+   "paired_at": "2026-09-04T23:34:25.726160Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -30,19 +30,19 @@
   "transport": "local",
   "role": "client",
   "state": "connected",
-  "address": "http://127.0.0.1:37115",
+  "address": "http://127.0.0.1:35157",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-04T20:47:49.492986Z",
-  "last_contact": "2026-09-04T20:47:49.749606Z",
+  "since": "2026-09-04T23:34:25.949503Z",
+  "last_contact": "2026-09-04T23:34:26.135264Z",
   "device_id": "pwa-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-04T20:47:49.149444Z"
+   "paired_at": "2026-09-04T23:34:25.730244Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -142,9 +142,9 @@
   "counted_by_the_daemon": {
    "read": true,
    "peer": "lovetap-a",
-   "tx_bytes": 7956,
-   "rx_bytes": 6780,
-   "path": "direct to 192.0.2.2:48859",
+   "tx_bytes": 23168,
+   "rx_bytes": 20344,
+   "path": "direct to 192.0.2.2:39582",
    "active": true
   },
   "host_node": "100.68.254.25",
@@ -157,6 +157,6 @@
   "crossed_to_the_host": true,
   "crossed_to_the_client": true,
   "paired": true,
-  "checked_at": "2026-09-04T20:47:49.879188Z"
+  "checked_at": "2026-09-04T23:34:26.209538Z"
  }
 }

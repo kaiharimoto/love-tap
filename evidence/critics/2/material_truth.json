@@ -1,0 +1,75 @@
+{
+  "critic": "material-truth",
+  "cycle": 2,
+  "score": 16,
+  "floor": 22,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "06_unfolding.mp4",
+      "where": "the arriving note at x 60-770, y 1584-1963, frames 1-281 of 320",
+      "what": "There is no fold in the unfolding clip: for 281 of 320 frames (4.68 s of 5.33 s) the arriving note is a hard-edged flat cream rectangle whose right edge has a standard deviation of 0.32-0.47 px over 250 rows (range 1 px), corner radius 0-1 px, no crease, no tear, no text, and no contact shadow (wood 93-95 L below the bottom edge against a 97 L baseline, versus 30-55 L of shadow depth under the notes in 02_chat.png).",
+      "why": "The rubric row names Blender-rendered folds and creases as a requirement and says the category is judged in slow motion on the unfolding clip; the artifact designated to prove folds contains none, and a bare rectangle of stock stands in for the folded sheet."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "06_unfolding.mp4",
+      "where": "frames 281-300, corroborated by evidence/logs/06_unfolding.report.json and evidence/logs/manifest.json",
+      "what": "The transition is a single-frame pop followed by an alpha cross-fade, not geometry: global mean brightness steps -21.87 L between frames 281 and 282, then the note interior (x 300-800, y 1830-1900) ramps monotonically 92.8 -> 233.6 L over 18 frames while the silhouette never changes. The clip's own report says the 240-frame sequence unfold_thirds had only 13 frames decoded with the playhead parked at 239, and evidence/logs/manifest.json lists 'folds/unfold_thirds' under entries_without_a_file, i.e. the fold asset the sequence names is not on disk.",
+      "why": "A flat sprite dissolving in is precisely 'a flat image being transformed rather than rendered geometry catching light', and evidence/frames.json marks this clip ok:false with why 'the light jumps 1 times', so the row's 'one consistent light direction' fails on the project's own measurement."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png",
+      "where": "the outgoing note at y 1607-1989: the 'o' of 'open.' at bbox (1672-1704, 774-799) and the 'o' of 'open' at bbox (1762-1794, 370-395)",
+      "what": "Repeated glyphs are pixel-identical, so there are no glyph variants at render time. The two 'o' render at IoU 0.998 after best alignment, and printed as an ASCII map they differ by a single pixel on one row. In the incoming italic note at y 463-851 the 'w' of 'when' and the 'w' of 'want' give IoU 1.000 with identical ink counts (342 vs 342 px). Across one outgoing note, 48 of 193 size-comparable glyph pairs exceed 0.85 IoU. Whole words repeat too: the two instances of 'open' correlate at r=0.933 and their ink masks give IoU 0.873 (2089 vs 2091 ink px, 0.1% apart).",
+      "why": "The row requires 'handwriting with multiple variants per glyph and real pressure variance'; the ink-density variation that is present (core-stroke value spread 15-110 L) is frozen inside each glyph outline and repeats identically, which is a texture, not pressure."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png, 03_us.png, 05_settings.png",
+      "where": "the tab bar y 2958-3102; the DATES card y ~294-506 and the TO DO card y ~1965-2119 in 03_us.png",
+      "what": "Beige rectangles stand in for torn paper in the persistent chrome. The PULSE, CHAT, US and MOMENTS tab tiles have top edges with standard deviation exactly 0.000 px across 250+ columns each, 90-degree corners, and no contact shadow (wood at y 2940 measures 81-104 L against 78-107 L far from the tiles). In 03_us.png the TO DO card's top and bottom edges both have standard deviation 0.000 px over ~680 columns and the DATES card's four edges 0.60-1.26 px; wood 4-22 px above either card sits at 97-98 L against a 105 L baseline, i.e. no shadow, in the same frame where the notes 200 px away cast 30-55 L shadows.",
+      "why": "The anti-goal names a beige rounded rectangle standing in for paper as a failure of the visual concept; these are guillotine-straight beige rectangles of paper stock with no tear and no lighting, inside frames whose notes have both."
+    },
+    {
+      "severity": "serious",
+      "artifact": "05_settings.png",
+      "where": "x 1359-1398, y 375-975 (beside the pairing card) and x 1362-1396, y 1102-1238 (beside the 'let it interrupt you' bar)",
+      "what": "Two untextured flat-fill rectangles with no material at all: the first is RGB (158,144,131) with per-channel standard deviation 1.00 / 0.83 / 1.49 and only 90 unique colours across 19,040 pixels, hard vertical edges at x=1359 and x=1398 and hard horizontal edges at y=375 and y=975.",
+      "why": "A solid rectangle of flat colour carries no fibre, no lighting and no shadow, so it cannot read as photographed anything; it sits 20 px from paper that does."
+    },
+    {
+      "severity": "serious",
+      "artifact": "07_feeling_landing.mp4 frame 1, 15_authored_feeling.mp4 frame 150",
+      "where": "the feeling row at y 1500-1800",
+      "what": "Several feelings are line-drawn pictograms, not objects: a smiley face (two red dots and a red arc) on a yellow card at x ~250-440, a sun (circle plus radiating rays), a crescent moon, and a concentric spiral. Two of the cards are also composited translucent: the 'sun' card interior measures 106.9 L against bare wood at 96.5 L, and the wood's vertical grain bleeds through it at 62% of full amplitude (card column-profile std 9.61 vs bare wood 15.44, opaque card 6.32).",
+      "why": "The row asks for feelings as physical objects rather than icons; a hand-drawn smiley, sun and moon are the same symbolic vocabulary an icon set uses, and paper you can see the desk through is not photographed paper."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.png, 01_pulse.png, 04_moments.png",
+      "where": "blank paper across every note",
+      "what": "The scanned tooth survives compositing at roughly a tenth of its source amplitude. Median local standard deviation on masked blank paper is 0.83 (8x8 tiles) and 1.07 (16x16 tiles) in 02_chat.png, 0.82 in 01_pulse.png and 0.48 in 04_moments.png; 67% of 16x16 paper tiles in the Chat hero fall below the project's own declared paper floor of 1.2 in evidence/logs/surfaces.json, whose source stocks measure patch_std 6.79-11.56. The flattest 240x60 patch is std 1.39. Amplified 20x the structure is genuinely fibrous and directional, so the stock is real, but at 100% the sheet reads as a flat cream fill.",
+      "why": "The row asks the paper to read as photographed rather than simulated; at the size it is actually drawn the photographic origin is only recoverable under 20x amplification."
+    },
+    {
+      "severity": "minor",
+      "artifact": "evidence/MANIFEST.json",
+      "where": "the 'missing' block",
+      "what": "09_two_devices.png and 16_setup_android.png are absent and the reason given is now the bare phrase 'not captured this session'. An earlier version of the same file carried a measured reason (no /dev/kvm, the x86_64 image ran under QEMU instruction emulation, adbd answered after 113 minutes but the framework never came up, so there was no package service to install into). The surviving text is an assertion, not a reason.",
+      "why": "09_two_devices.png is the only artifact that would show paper rendered by the Android engine rather than WebKit, so this category's verdict covers the PWA render only and cannot speak for the Android build at all."
+    }
+  ],
+  "what_is_working": [
+    "No tear repeats on a single screen, measured rather than asserted: the ten top and bottom edge profiles of the five notes in 02_chat.png cross-correlate at a maximum of 0.272 after a +/-200 px shift search, and the notes carry visibly different roughness (detrended top-edge std 3.56 to 12.45 px). evidence/logs/tears.json reports 9 distinct masks for 9 visible notes from a pool of 56, and the pixels agree.",
+    "Contact shadows are directional and consistent, and they are not a uniform blur. Across all five notes in 02_chat.png the shadow depth is 0 L above the top edge, 13-25 L over 4-10 px on the left, 30-55 L over 4-19 px below, and 48-54 L over 16-25 px on the right: light from upper-left, one direction, every sheet. Penumbra width varies along a single edge (mean 21.4 px, sd 11.3 px on note 4), so it is not a constant offset blur.",
+    "The shadow is tinted by what it falls on rather than painted black: wood at RGB (122,100,81) becomes (90,75,62) under a note, a near-constant 0.74-0.77 multiply, and every edge carries a bright lit rim at 3 px out (137-153 L against a 93 L baseline).",
+    "The rendered feeling objects agree with the sheets' light. The wax cylinder in 07_feeling_landing.mp4 frame 1 (body 201 L) is darkest to its lower-right (75 L) against upper-left (89 L), the same direction the notes throw.",
+    "No tiled repeating texture in the desk: vertical autocorrelation of the wood in 02_chat.png peaks at r=0.198 for any lag above 50 px, horizontal at r=0.250, i.e. no tile period anywhere in a 2600 px run.",
+    "The 300% crop of the Pulse note's right edge (01_pulse.png, x 1040-1400 y 1980-2620) is the best material in the evidence: real torn fibre standing off the edge, a curl whose shadow deepens where the sheet lifts, and ruled lines that follow the sheet's warp rather than staying level."
+  ],
+  "verdict": "The still sheets are largely honest. Tear masks do not repeat on a screen (max edge cross-correlation 0.27 across ten edges), the contact shadows are anisotropic, vary in penumbra width along a single edge, multiply the wood's own colour, and agree in direction across every sheet and the rendered objects; the desk carries no tile period. What fails is everything the category is told to judge hardest. The unfolding clip contains no fold: for 4.68 of its 5.33 seconds the arriving note is a machine-straight cream rectangle (right-edge sigma 0.32-0.47 px) with no crease and no shadow, and the transition is a one-frame -21.87 L pop followed by an 18-frame alpha ramp of a fixed silhouette, which the clip's own report explains (13 of 240 fold frames decoded) and which evidence/logs/manifest.json confirms by listing folds/unfold_thirds as an entry with no file. The handwriting has no variants: two renderings of the same letter in the same note land at IoU 0.998-1.000 with ink counts a tenth of a percent apart, so 'multiple variants per glyph' does not reach the pixels. Around the notes, the shell reverts to the anti-goal: five tab tiles and two module headers with edge standard deviations of exactly 0.000 px and no contact shadow, plus two literal flat-fill rectangles of a single RGB in Settings. And the paper's scanned tooth survives compositing at about a tenth of its source amplitude, below the project's own stated floor for two thirds of the sheet. Real stock and real shadows are here; the folds, the hand and the shell are not, and the artifact the row nominates as its test is the one that is empty.",
+  "measurements_note": "All numbers above are reproducible from evidence/ with PIL and numpy, and from ffmpeg frame extraction of the mp4s at 60 fps; frame indices are 1-based as produced by 'ffmpeg -i <clip> -vsync 0 %04d.png'."
+}

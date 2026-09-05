@@ -1,0 +1,114 @@
+{
+  "critic": "emotional-transmission",
+  "cycle": 2,
+  "score": 6,
+  "floor": 17,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "08_state_propagating.mp4",
+      "where": "frame 256 through frame 487 (the last frame), the chat column at y 690-1180 of 2340",
+      "what": "The arriving feeling renders as a note in the message transcript reading the word \"hold\" in blue script, preceded by the separator line \"noor is restless  Fri 4 Sep 22:53\" and followed by a timestamp row - it is a chat message on a slightly different paper stock, and nothing else on the screen moves, blooms, breathes or changes when it lands.",
+      "why": "The row's first sentence requires a gesture on one device to arrive on the other as a sensation rather than as a message in a different colour; this is literally a message in a different colour."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "the family tab row at y 1090-1230 of 2340, measured on frame 264; identical on frames 40, 72, 128, 216 and on 15_authored_feeling.mp4 frame 200",
+      "what": "Exactly four named families exist: WARMTH, ACHE, SHELTER, MISCHIEF. Their paper spans x 55 to x 1037 of a 1080-wide frame (43 px of ground at the right, 55 px at the left), so no fifth tab is clipped off-screen, and no scroll cue, chevron or overflow shadow appears in any of the 384 frames.",
+      "why": "The row requires at least five named families; four are shown and no evidence anywhere in evidence/ names a fifth."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "evidence/logs/ (all 40 files) and evidence/*.json",
+      "where": "grep -ril 'haptic|vibrat|buzz|waveform' over evidence/ matches only critics/prompts/emotional_transmission.md, critics/1/* and SCORE.json - no capture log, no manifest, no report",
+      "what": "Not one haptic pattern is recorded anywhere: no per-feeling duration, no intensity envelope, no waveform table, no count of distinct patterns. logs/recipes.json reports only \"recipes: 129, objects: 501\" with no field describing a pattern.",
+      "why": "The row requires each of thirty-plus feelings to be identifiable by its haptic pattern alone with the screen face down; nothing in the evidence lets that be checked even once, so on the evidence it does not exist."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "the recent-feeling row on Pulse, y 1620-1740 of 2340, frame 0 compared with frame 383",
+      "what": "The capture log records two sendFeeling steps (07_feeling_landing.json steps at 2682 ms and 2400 ms), yet the row of recent feeling objects on Pulse holds the same five objects in the same five positions - moon note at x 45-215, red smiley note at x 230-450, white puck at x 520-590, bean pile at x 730-820, squiggle note at x 890-1035 - before the drawer opens and after it closes. No sixth object arrives, no object moves, and the clip named \"feeling landing\" contains no landing.",
+      "why": "The row is judged from the landing clip; the landing clip shows a feeling being sent and nothing at all happening as a consequence."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "08_state_propagating.mp4",
+      "where": "two rectangles at x 53-772, y 1454-1600 and y 1690-1800 of 2340, present from frame 216 (first) and frame 368 (second) to frame 487",
+      "what": "The two items that arrive after the two 'far' steps render as flat cream rectangles - mean RGB (247.0, 241.8, 232.5), luminance standard deviation 0.98 and 0.96, below the project's own paper floor of 1.2 declared in logs/surfaces.json - with hard edges and a soft drop shadow beneath, and they are still empty 4.5 seconds later on the final frame.",
+      "why": "Anti-goal four names a beige rectangle with a drop shadow as a failure of the entire visual concept, and here it is the surface on which an arriving feeling lands on the far device."
+    },
+    {
+      "severity": "serious",
+      "artifact": "15_authored_feeling.mp4",
+      "where": "frame 304: built-in note at y 250-500, authored notes at y 1160-1590 and y 1660-2000 of 2340",
+      "what": "In one column: the built-in \"chair\" carries a hand-drawn chair glyph, the word, and the state \"Thu 3 Sep 17:19 sent ✓\". The authored \"pigeon\" carries no glyph at all, the word set right on a note 430 px tall that is otherwise blank, and \"Thu 3 Sep  waiting to send\". The authored \"tuesday soup\" carries no glyph and no timestamp or state row whatsoever.",
+      "why": "The row requires user-authored feelings to behave identically to built-ins in every path; on the one path the evidence shows they differ in object, in layout and in delivery state."
+    },
+    {
+      "severity": "serious",
+      "artifact": "12_search.png",
+      "where": "the bottom 700 px of the 1440x3120 frame, y 2420-3120",
+      "what": "The search region has neither the corner fold triangle that opens the feeling drawer (present at roughly x 1300-1400, y 2760-2880 on 01_pulse, 02_chat, 03_us, 04_moments, 05_settings, 10_first_run and 17_setup_pwa) nor the five-item tab bar. The bottom of the frame is note paper and wood only.",
+      "why": "The row requires a feeling to be reachable in one gesture from any region of the app; from search it is reachable in none."
+    },
+    {
+      "severity": "serious",
+      "artifact": "07_feeling_landing.mp4 and 17_setup_pwa.png",
+      "where": "MANIFEST.json declares \"browser\": \"webkit\" for the whole capture; 17_setup_pwa.png is the iPhone checklist, headings \"add it to the home screen\", \"put this phone on the tailnet\", \"install the profile\", \"read the six words\", \"let it interrupt you\"",
+      "what": "The entire evidence set is the WebKit/PWA path, so this is the iOS path, and it contains no designed non-haptic substitute of any kind: no screen-wide bloom, no motion of the whole surface, no sound cue, no sustained visual pressure. The iPhone checklist never mentions that this phone cannot buzz or what stands in for it, and 05_settings.png offers no haptic or substitute control anywhere in its \"what may interrupt\" list.",
+      "why": "The row requires a deliberately designed non-haptic substitute on the iOS PWA that reads as equally physical rather than as a missing feature; what the evidence shows is the missing feature."
+    },
+    {
+      "severity": "serious",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "the drawer labels, frame 264, \"nuzzle\" measured over x 165-298, y 1842-1872",
+      "what": "The feeling names in the picker are drawn at RGB (109, 108, 109) over a ground of RGB (69, 63, 57): a contrast ratio of 1.95:1. \"thinking of y…\" is truncated mid-word. \"goodnight\" sits over bare wood at a comparable ratio.",
+      "why": "A feeling you cannot read the name of cannot be chosen deliberately, which breaks the one gesture the whole emotional layer rests on."
+    },
+    {
+      "severity": "serious",
+      "artifact": "07_feeling_landing.mp4 and 15_authored_feeling.mp4",
+      "where": "07 frame 264, y 1845-1905, and 15 frame 200, y 1440-1560 and y 1720-1900",
+      "what": "The drawer is a translucent wash over the live page rather than an opaque surface, so the page beneath collides with it: in 07 the word \"YOURS\" from the Pulse note sits directly under the label \"nuzzle\" in the same 60 px band; in 15 the chat string \"Thu 3 Sep · waiting to send\" runs straight through the labels \"a squeeze / forehead / warm palm\", the authored name \"pigeon\" is clipped to \"-igeon\" by the spiral tile, and \"tuesday soup\" overprints \"thinking of y… / goodnight\". In 07 frames 40-128 a white puck also drifts over the SHELTER tab and hides it entirely.",
+      "why": "The picker is the single surface where a feeling is chosen; it is rendered as overlapping debris, which is the opposite of a gesture that transmits a specific feeling."
+    },
+    {
+      "severity": "serious",
+      "artifact": "09_two_devices.png",
+      "where": "missing; MANIFEST.json gives the reason as no /dev/kvm, QEMU emulation reaching adbd after 113 minutes, \"No GTK either, so no desktop build can stand in for a second screen\"",
+      "what": "The two-device frame my row is explicitly to be judged from does not exist. The Android half of the reason is real, but the stated impossibility of a second screen is contradicted by the capture harness itself: 08_state_propagating.json records shots written to three separate directories (08_state_propagating, _b, _c) across two regions in one WebKit run, so two browser contexts side by side could have been composited into a two-device still with no device and no GTK.",
+      "why": "The one artifact that would show a gesture on one device becoming a sensation on the other in a single frame is absent, and the reason given covers only part of why."
+    },
+    {
+      "severity": "minor",
+      "artifact": "01_pulse.png",
+      "where": "the recent-feeling row, y 1180-1420 of 3120",
+      "what": "Six objects sit in the ambient row with no name, no time and no sender: a moon, a red crayon smiley, a white puck, a pile of nine pale beans, a squiggle and a chair. The puck and the bean pile are not identifiable as any feeling named anywhere else in the evidence.",
+      "why": "An ambient presence surface on which an arriving feeling is an unnameable object transmits that something happened, not what was felt."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the filter row at y 305-350 of 3120, \"WHAT WE FELT\" at x 930-1210",
+      "what": "The filter that would show the history of feelings is drawn at a measured contrast ratio of 1.62:1 against the wood (5th to 95th percentile luminance 0.0728 to 0.149), is never selected in any artifact, and its contents are shown nowhere in the evidence.",
+      "why": "The only surface that would let the couple look back at what was felt is illegible and unproven."
+    },
+    {
+      "severity": "minor",
+      "artifact": "evidence/logs/webpush.txt",
+      "where": "the whole file, four lines",
+      "what": "The only evidence for state being perceptible without opening the app is a crypto round-trip note: \"payload: {\\\"kind\\\":\\\"feeling\\\",\\\"from\\\":\\\"noor\\\"} (32 bytes)\", \"payload carries only ['kind','from']: yes\". No rendered notification, lock screen, widget or ambient surface outside the app appears in any of the fourteen present artifacts, and by its own admission the payload cannot name which feeling arrived.",
+      "why": "The row requires state changes to be perceptible without opening the app; a passing RFC 8291 test is not a perception."
+    }
+  ],
+  "what_is_working": [
+    "01_pulse.png shows exactly twelve labelled partner-state signals on one card - MOOD, HERE, PLACE, NEEDS, HAS LEFT, BATTERY, LAST UP, THEIR CLOCK, RINGER, MOVING, SIGNAL, AT HOME - which meets the twelve-signal requirement outright, and 08_state_propagating.mp4 frame 120 shows the same card correctly reduced to the four signals the far device actually reported.",
+    "The persistent header strip carrying the partner's line, TRAVELLING, NEED and ENERGY bars is present on every one of 01, 03, 04, 05, 10, 12, 14 and 17 and on every frame of every clip, so partner state genuinely is continuously in view rather than behind a tap.",
+    "The feeling objects themselves are real rendered things with baked contact shadows - the spiral, the rubber band, the drawn moon and chair read as objects on a desk, not as icons, and 06_unfolding.mp4 frame 191 shows an authored feeling (\"empty chair\") carrying its own drawn glyph, which is the right idea even though 15 shows it is not applied consistently.",
+    "08_state_propagating.mp4 does demonstrate a real state change crossing the wire: frames 24-40 show the far partner's card go from \"nothing from them yet\" to \"restless / open / nothing / some\", and 08_state_propagating.json records link \"connected\" over http://100.68.254.25:8443/, so propagation is not faked."
+  ],
+  "verdict": "Judged on the evidence alone, the emotional layer is a chat feature wearing paper. In 08_state_propagating.mp4 a feeling crosses the wire and arrives as a note in the transcript reading the word \"hold\" - a message in a different colour, which is precisely what the row forbids - and the two items that arrive after it never render at all, sitting as flat cream rectangles of RGB (247, 242, 233) with a drop shadow and a luminance standard deviation of 0.98, below the project's own paper floor, for the final 4.5 seconds of the clip. The clip named 07_feeling_landing contains no landing: two sendFeeling steps are logged and the recent-feeling row on Pulse holds the same five objects in the same five positions at frame 0 and frame 383. The picker offers four named families where five are required, spanning x 55 to 1037 of 1080 with no fifth clipped and no scroll cue, with roughly nine tiles and six legible names visible - against a requirement of thirty feelings - and those names are set at 1.95:1 contrast over a translucent wash through which the page beneath collides with them. Authored feelings are visibly second-class: in one frame of 15_authored_feeling.mp4, the built-in \"chair\" carries a glyph and \"sent\", \"pigeon\" carries neither glyph nor delivery, and \"tuesday soup\" carries no state row at all. The whole capture is WebKit, which means this is the iOS path, and it contains no designed substitute for the missing haptic - only its absence. And no file anywhere under evidence/ records a single haptic pattern, so the central claim of the row, that thirty feelings are each identifiable by touch alone with the screen face down, cannot be checked even once. Four blocking findings stand; the category cannot exceed its floor, and on what is actually visible it falls well short of it."
+}
