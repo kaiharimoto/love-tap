@@ -13,7 +13,10 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 /// The colours the paper stocks are. A widget filled with one of these is standing in for paper.
-final _paperColours = RegExp(r'0xFF(F1ECDF|F4F0E4|EFE9DA|F2EEE1|FAF7EC|F6F2E6)', caseSensitive: false);
+///
+/// It used to be the six named stock colours, and the next flat fill was a seventh one nobody had
+/// named — 0xFFF3EEE3 under a tap pad. Any fill light enough to pass for paper counts now.
+final _paperColours = RegExp(r'Color(0xFF[EF][0-9A-F]{5})', caseSensitive: false);
 
 List<File> _sources() => Directory('lib')
     .listSync(recursive: true)

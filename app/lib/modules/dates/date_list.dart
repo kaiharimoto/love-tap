@@ -67,7 +67,7 @@ class _Header extends StatelessWidget {
             Stamped.onDesk(label, size: 11),
             const Spacer(),
             if (onAdd != null)
-              GestureDetector(onTap: onAdd, child: Text('add one', style: Hands.margin(size: 14))),
+              GestureDetector(onTap: onAdd, child: Text('add one', style: Hands.onDesk(size: 15))),
           ],
         ),
       );

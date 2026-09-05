@@ -60,6 +60,7 @@ class PaperPiece extends StatelessWidget {
     this.child,
     this.stockAlignment = Alignment.center,
     this.stockScale = 1.0,
+    this.windowed = false,
     this.overlays = const [],
   });
 
@@ -92,6 +93,11 @@ class PaperPiece extends StatelessWidget {
   /// Tape, staples, clips: rendered bits laid over the piece.
   final List<Widget> overlays;
 
+  /// Show the stock at its own pixel density through a window at [stockAlignment], rather than
+  /// scaled to cover the piece. A forty-point card covered by a whole sheet scales the tooth
+  /// away to nothing; the same card looking through a window onto the sheet keeps it.
+  final bool windowed;
+
   static Widget none(BuildContext c, Object e, StackTrace? s) => const SizedBox.shrink();
 
 
@@ -119,6 +125,21 @@ class PaperPiece extends StatelessWidget {
     );
   }
 
+  /// The contact shadow of a cut piece. Nothing rendered it — the tear shadows came out of
+  /// Blender with the pieces they belong to, and a straight-cut card has no render of its own —
+  /// so it is the one shadow in the app that is drawn: the same warm colour as the baked ones,
+  /// as soft and as far as the lift says, under a sharp rectangle.
+  Widget _cutShadow(bool dusk) => Positioned.fill(
+        child: IgnorePointer(
+          child: CustomPaint(
+            painter: _CutShadow(
+              lift: liftMm,
+              alpha: (shadowOpacityFor(liftMm) * (dusk ? 0.9 : 1.0)).clamp(0.16, 0.42),
+            ),
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     final dusk = Light.of(context) == LightCondition.dusk;
@@ -132,11 +153,11 @@ class PaperPiece extends StatelessWidget {
         Positioned.fill(child: ColoredBox(color: Paper.forStock(stock))),
         Positioned.fill(
           child: Transform.scale(
-            scale: stockScale,
+            scale: windowed ? 1.0 : stockScale,
             alignment: stockAlignment,
             child: Image.asset(
               paperAsset(stock),
-              fit: BoxFit.cover,
+              fit: windowed ? BoxFit.none : BoxFit.cover,
               alignment: stockAlignment,
               gaplessPlayback: true,
               filterQuality: FilterQuality.medium,
@@ -147,7 +168,12 @@ class PaperPiece extends StatelessWidget {
         if (tearId != null)
           // sliced the same way the mask is, so the lit fibres on the torn edge keep the length
           // they were rendered at however tall the sheet turns out to be
-          Positioned.fill(child: NineSliced(asset: tearAsset('${tearId!}_edge'))),
+          Positioned.fill(child: NineSliced(asset: tearAsset('${tearId!}_edge')))
+        else
+          // a cut edge: card stock has thickness, and a straight cut catches the light along its
+          // top and left the way a torn one does along its fibres. Without it a whole sheet was a
+          // rectangle of texture that stopped dead — edge deviation measured at exactly zero.
+          const Positioned.fill(child: IgnorePointer(child: CustomPaint(painter: _CutEdge()))),
         _WithinTear(safe: safe, padding: padding, child: child ?? const SizedBox.shrink()),
         ...overlays,
       ],
@@ -177,7 +203,7 @@ class PaperPiece extends StatelessWidget {
               // render as the piece, already in the right place, already the right shape. All the
               // app does is put it back at the size it was framed at — wider than the piece, because
               // the part of a contact shadow anyone sees is the part the paper is not covering.
-              if (tearId != null) _bakedShadow(context, suffix),
+              if (tearId != null) _bakedShadow(context, suffix) else _cutShadow(dusk),
               piece,
             ],
           ),
@@ -462,4 +488,68 @@ class _NinePainter extends CustomPainter {
   @override
   bool shouldRepaint(_NinePainter old) =>
       !identical(old.image, image) || old.edge != edge || old.opacity != opacity;
+}
+
+/// The thickness of card stock along a straight cut: light on the top and left edges, a hair of
+/// shade on the bottom and right, the way the light falls on everything else on the desk.
+class _CutEdge extends CustomPainter {
+  const _CutEdge();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final r = Offset.zero & size;
+    canvas.drawLine(r.topLeft + const Offset(0, 0.5), r.topRight + const Offset(0, 0.5),
+        Paint()..color = const Color(0x8CFFFFFF)..strokeWidth = 1.0);
+    canvas.drawLine(r.topLeft + const Offset(0.5, 0), r.bottomLeft + const Offset(0.5, 0),
+        Paint()..color = const Color(0x66FFFFFF)..strokeWidth = 1.0);
+    canvas.drawLine(r.bottomLeft - const Offset(0, 0.5), r.bottomRight - const Offset(0, 0.5),
+        Paint()..color = Shadow.warm.withValues(alpha: 0.22)..strokeWidth = 1.0);
+    canvas.drawLine(r.topRight - const Offset(0.5, 0), r.bottomRight - const Offset(0.5, 0),
+        Paint()..color = Shadow.warm.withValues(alpha: 0.14)..strokeWidth = 1.0);
+    // and the tone of the stock itself falls off very slightly toward the bottom edge, as a
+    // lit card's does
+    canvas.drawRect(
+      r,
+      Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [const Color(0x00000000), Shadow.warm.withValues(alpha: 0.035)],
+        ).createShader(r),
+    );
+  }
+
+  @override
+  bool shouldRepaint(_CutEdge old) => false;
+}
+
+class _CutShadow extends CustomPainter {
+  const _CutShadow({required this.lift, required this.alpha});
+  final double lift;
+  final double alpha;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // the light comes from the top left, so the shadow falls down and to the right, further and
+    // softer the higher the piece sits
+    final dx = 0.6 + lift * 1.1, dy = 1.2 + lift * 2.2;
+    final blur = 1.4 + lift * 2.4;
+    final rect = (Offset(dx, dy) & size).deflate(0.5);
+    canvas.drawRect(
+      rect,
+      Paint()
+        ..color = Shadow.warm.withValues(alpha: alpha)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur),
+    );
+    // and the dense line of contact right under the bottom edge, where the card meets the desk
+    canvas.drawRect(
+      Rect.fromLTWH(dx * 0.5, size.height - 0.5, size.width, 1.6),
+      Paint()
+        ..color = Shadow.warm.withValues(alpha: alpha * 0.9)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 0.9),
+    );
+  }
+
+  @override
+  bool shouldRepaint(_CutShadow old) => old.lift != lift || old.alpha != alpha;
 }

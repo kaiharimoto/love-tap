@@ -28,22 +28,30 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskHaptics(JSFunction f);
 }
 
+/// A handle's answer, as a string the harness can read.
+///
+/// `Future<String>.toJS` picks the Future<void> conversion, so every sentence a handle answered
+/// with — 'ok', or what was missing — arrived in the browser as `undefined`, and the harness
+/// learnt to accept `undefined` as success. It is a failed step that is being hidden that way:
+/// the pairing step resolved to nothing for a whole capture and the scenes went on unpaired.
+JSPromise<JSString> _said(Future<String> answer) => answer.then((s) => s.toJS).toJS;
+
 void expose(CaptureHooks hooks) {
   final w = _Win(_window);
-  w.__deskGoTo = ((JSNumber i) => hooks.goToRegion(i.toDartInt).toJS).toJS;
-  w.__deskScrollTo = ((JSString a) => hooks.scrollTo(a.toDart).toJS).toJS;
-  w.__deskSendFeeling = ((JSString id, JSNumber v) => hooks.sendFeeling(id.toDart, v.toDartDouble).toJS).toJS;
-  w.__deskOpenCorner = ((JSBoolean open) => hooks.openCorner(open.toDart).toJS).toJS;
-  w.__deskSetSignal = ((JSString s, JSString v) => hooks.setSignal(s.toDart, _value(v.toDart)).toJS).toJS;
-  w.__deskOpenSender = ((JSBoolean open) => hooks.openSender(open.toDart).toJS).toJS;
-  w.__deskOpenViewer = ((JSString id) => hooks.openViewer(id.toDart).toJS).toJS;
-  w.__deskSearch = ((JSString q) => hooks.search(q.toDart).toJS).toJS;
-  w.__deskUnfold = (() => hooks.unfoldAll().toJS).toJS;
-  w.__deskShowWords = (() => hooks.showWords().toJS).toJS;
+  w.__deskGoTo = ((JSNumber i) => _said(hooks.goToRegion(i.toDartInt))).toJS;
+  w.__deskScrollTo = ((JSString a) => _said(hooks.scrollTo(a.toDart))).toJS;
+  w.__deskSendFeeling = ((JSString id, JSNumber v) => _said(hooks.sendFeeling(id.toDart, v.toDartDouble))).toJS;
+  w.__deskOpenCorner = ((JSBoolean open) => _said(hooks.openCorner(open.toDart))).toJS;
+  w.__deskSetSignal = ((JSString s, JSString v) => _said(hooks.setSignal(s.toDart, _value(v.toDart)))).toJS;
+  w.__deskOpenSender = ((JSBoolean open) => _said(hooks.openSender(open.toDart))).toJS;
+  w.__deskOpenViewer = ((JSString id) => _said(hooks.openViewer(id.toDart))).toJS;
+  w.__deskSearch = ((JSString q) => _said(hooks.search(q.toDart))).toJS;
+  w.__deskUnfold = (() => _said(hooks.unfoldAll())).toJS;
+  w.__deskShowWords = (() => _said(hooks.showWords())).toJS;
   w.__deskReport = (() => jsonEncode(hooks.report()).toJS).toJS;
-  w.__deskPair = ((JSString base, JSString words) => hooks.pair(base.toDart, words.toDart).toJS).toJS;
-  w.__deskScrollBy = ((JSNumber dy) => hooks.scrollBy(dy.toDartDouble).toJS).toJS;
-  w.__deskStage = (() => hooks.stageStates().toJS).toJS;
+  w.__deskPair = ((JSString base, JSString words) => _said(hooks.pair(base.toDart, words.toDart))).toJS;
+  w.__deskScrollBy = ((JSNumber dy) => _said(hooks.scrollBy(dy.toDartDouble))).toJS;
+  w.__deskStage = (() => _said(hooks.stageStates())).toJS;
   w.__deskStep = ((JSNumber ms) => DrivenClock.step(ms.toDartInt).toJS).toJS;
   w.__deskCount = (() => hooks.count().toJS).toJS;
   w.__deskHaptics = (() => jsonEncode(hooks.haptics()).toJS).toJS;

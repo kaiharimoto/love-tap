@@ -44,7 +44,9 @@ class Slip extends StatelessWidget {
   final String? stock;
   final double? width;
 
-  /// A whole sheet rather than a torn piece: a card, a stub, something that was cut.
+  /// A whole sheet rather than a torn piece: a card, a stub, something that was cut. It still has
+  /// an edge and a shadow — a cut edge, drawn straight — and shows its stock at the stock's own
+  /// pixel density.
   final bool torn;
   final EdgeInsets padding;
   final List<Widget> overlays;
@@ -77,6 +79,9 @@ class Slip extends StatelessWidget {
       width: width,
       stockAlignment: Alignment(((h >> 3) % 100) / 50.0 - 1, ((h >> 11) % 100) / 50.0 - 1),
       stockScale: 1.12,
+      // a cut card is small — a tab, a label, a stub — and covered by a whole sheet its tooth
+      // would average away; it looks through a window onto the sheet instead
+      windowed: !torn,
       padding: padding,
       safe: tear == null || lib == null ? const [0.05, 0.06, 0.05, 0.06] : lib.safeOf(tear),
       overlays: overlays,

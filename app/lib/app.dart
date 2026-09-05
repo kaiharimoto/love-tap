@@ -11,7 +11,7 @@ import 'material/desk.dart';
 import 'material/hands.dart';
 import 'material/library.dart';
 import 'material/light.dart';
-import 'material/paper.dart';
+import 'material/slip.dart';
 import 'material/motion.dart';
 import 'material/palette.dart';
 import 'feelings/builtins.dart';
@@ -318,8 +318,6 @@ class _Tabs extends StatelessWidget {
     // one: a number that goes up while you are not looking is the whole mechanism the brief
     // forbids, and a folded corner says the same true thing without keeping score.
     final waiting = scope.thread.unreadFor(scope.me) > 0;
-    final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
-    final card = lib?.stockVariants('index') ?? const <String>[];
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
       child: Row(
@@ -328,48 +326,42 @@ class _Tabs extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () => onPick(i),
+                behavior: HitTestBehavior.opaque,
                 child: Padding(
-                  padding: EdgeInsets.only(top: i == index ? 0 : 8, left: 2, right: 2),
-                  child: SizedBox(
-                    height: 44,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        // Five cards cut from a sheet of index card, and each one has to be a
-                        // different piece of it. Covering the card with the whole 1288x1800 sheet
-                        // scaled a sheet down to forty-four points and averaged its tooth away:
-                        // five stamps of one swatch, correlating at 0.99 with each other. So the
-                        // card shows a window onto the sheet at the sheet's own pixel density,
-                        // and each tab looks through a different window.
-                        Positioned.fill(child: ColoredBox(color: Paper.index)),
-                        if (card.isNotEmpty)
-                          Positioned.fill(
-                            child: Opacity(
-                              opacity: i == index ? 1.0 : 0.82,
-                              child: ClipRect(
-                                child: Image.asset(
-                                  paperAsset(card[i % card.length]),
-                                  fit: BoxFit.none,
-                                  alignment: _cardWindows[i % _cardWindows.length],
-                                  filterQuality: FilterQuality.medium,
-                                  gaplessPlayback: true,
-                                  errorBuilder: PaperPiece.none,
-                                ),
-                              ),
+                  padding: EdgeInsets.only(top: i == index ? 0 : 7, left: 2, right: 2),
+                  // Five cards cut from a sheet of index card, and each one a different piece of
+                  // it: a cut Slip looks through its own window onto the sheet at the sheet's
+                  // own density (a whole sheet scaled to forty points averaged the tooth away and
+                  // five tabs correlated at 0.99), and carries the cut edge and the contact
+                  // shadow every other piece of paper on the desk has. They used to be a
+                  // ColoredBox with a texture over it and no edge at all.
+                  child: Opacity(
+                    opacity: i == index ? 1.0 : 0.86,
+                    child: Slip(
+                      id: 'tab.${labels[i]}',
+                      row: i,
+                      stock: 'index',
+                      torn: false,
+                      padding: const EdgeInsets.fromLTRB(3, 2, 3, 2),
+                      child: SizedBox(
+                        height: i == index ? 36 : 33,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            // and the label shrinks to fit its card rather than wrapping: five
+                            // stamps across a 360-point screen leaves SETTINGS about a point short
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Stamped(labels[i],
+                                  size: i == index ? 12 : 11,
+                                  spacing: labels[i].length > 6 ? 1.0 : 1.6,
+                                  colour: i == index ? Pen.stamp : Pen.margin),
                             ),
-                          ),
-                        // and the label shrinks to fit its card rather than wrapping: five
-                        // stamps across a 360-point screen leaves SETTINGS about a point short
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Stamped(labels[i],
-                              size: i == index ? 12 : 11,
-                              spacing: labels[i].length > 6 ? 1.0 : 1.6,
-                              colour: i == index ? Pen.stamp : Pen.margin),
+                            if (i == 1 && waiting)
+                              const Positioned(top: -2, right: -3, child: _TurnedCorner()),
+                          ],
                         ),
-                        if (i == 1 && waiting)
-                          const Positioned(top: 0, right: 0, child: _TurnedCorner()),
-                      ],
+                      ),
                     ),
                   ),
                 ),
@@ -381,12 +373,3 @@ class _Tabs extends StatelessWidget {
   }
 }
 
-/// Where on the sheet each tab card was cut from. Spread over both axes so no two windows share a
-/// band of the ruling, and off the sheet's centre, where every stock is at its most uniform.
-const List<Alignment> _cardWindows = [
-  Alignment(-0.82, -0.64),
-  Alignment(0.41, -0.88),
-  Alignment(-0.35, 0.77),
-  Alignment(0.88, 0.22),
-  Alignment(-0.93, 0.09),
-];

@@ -1,4 +1,5 @@
 // Media from the blob store: images, voice notes, video posters.
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -18,20 +19,80 @@ import '../../material/assignment.dart';
 import '../../material/marks.dart';
 
 /// Process-wide cache of decoded blob bytes so scrolling never re-reads the store.
+///
+/// At most a few reads are in flight at once. The store answered every request it was given, in
+/// the order it was given them, and the gallery gave it a hundred and twenty-nine at once, so
+/// the pictures on screen queued behind the pictures a screen and a half below. Now the tiles
+/// that ask first are the tiles that are built first, which are the ones being looked at.
 class BlobCache {
   static final Map<String, Future<StoredBlob?>> _futures = {};
+  static final Set<String> _resolved = {};
+  static int _inFlight = 0;
+  static final List<Completer<void>> _waiting = [];
+  static const width = 6;
 
-  static Future<StoredBlob?> get(Spine spine, String hash) => _futures.putIfAbsent(hash, () => spine.blob(hash));
+  static Future<StoredBlob?> get(Spine spine, String hash) => _futures.putIfAbsent(hash, () async {
+        final b = await _limited(() => spine.blob(hash));
+        _resolved.add(hash);
+        return b;
+      });
 
-  static void forget(String hash) => _futures.remove(hash);
+  static Future<T> _limited<T>(Future<T> Function() read) async {
+    if (_inFlight >= width) {
+      final turn = Completer<void>();
+      _waiting.add(turn);
+      await turn.future; // the slot is handed over, not counted twice
+    } else {
+      _inFlight++;
+    }
+    try {
+      return await read();
+    } finally {
+      if (_waiting.isNotEmpty) {
+        _waiting.removeAt(0).complete();
+      } else {
+        _inFlight--;
+      }
+    }
+  }
+
+  static void forget(String hash) {
+    _futures.remove(hash);
+    _resolved.remove(hash);
+  }
+
+  /// For the capture report: how many pictures were asked for and how many have come.
+  static Map<String, int> stats() => {
+        'asked': _futures.length,
+        'arrived': _resolved.length,
+        'reading': _inFlight,
+        'waiting': _waiting.length,
+      };
 }
 
 class BlobImage extends StatelessWidget {
-  const BlobImage({super.key, required this.hash, this.width, this.height, this.fit = BoxFit.cover});
+  const BlobImage({
+    super.key,
+    required this.hash,
+    this.width,
+    this.height,
+    this.fit = BoxFit.cover,
+    this.cacheWidth,
+    this.quiet = false,
+  });
   final String hash;
   final double? width;
   final double? height;
   final BoxFit fit;
+
+  /// Decode the picture at about the size it is shown, not the size it was taken: a thumbnail
+  /// three hundred pixels wide has no use for a twelve-megapixel bitmap in memory.
+  final int? cacheWidth;
+
+  /// A picture that has not come yet is a blank print, not a sentence about fetching. In a
+  /// pile of prints the sentence was the only thing on five tiles at once, and it read as the
+  /// app announcing it was slow.
+  final bool quiet;
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +104,20 @@ class BlobImage extends StatelessWidget {
         if (b == null) {
           return SizedBox(
             width: width,
-            height: height ?? 160,
-            child: const Center(child: Text(S.fetching, style: TextStyle(fontSize: 12))),
+            height: height ?? (quiet ? null : 160),
+            child: quiet
+                ? const ColoredBox(color: Color(0x14000000))
+                : const Center(child: Text(S.fetching, style: TextStyle(fontSize: 12))),
           );
         }
-        return Image.memory(b.bytes, width: width, height: height, fit: fit, gaplessPlayback: true);
+        return Image.memory(
+          b.bytes,
+          width: width,
+          height: height,
+          fit: fit,
+          cacheWidth: cacheWidth,
+          gaplessPlayback: true,
+        );
       },
     );
   }

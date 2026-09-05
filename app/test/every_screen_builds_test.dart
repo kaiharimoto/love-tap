@@ -26,6 +26,7 @@ import 'package:desk/spine/store/store.dart';
 import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/sync.dart';
 import 'package:desk/transport/transport.dart';
+import 'package:desk/voice/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -77,6 +78,27 @@ void main() {
 
   screens.forEach((name, build) {
     testWidgets(name, (tester) async => _draw(tester, scope, build()));
+  });
+
+  testWidgets('moments builds the prints the viewport reaches, not the year', (tester) async {
+    // A hundred and eighty photographs in the log. The pile lays all of them out and builds the
+    // ones on screen: this used to be a Column of every tile, and the region opened by asking
+    // the store for every picture in the year at once.
+    for (var i = 0; i < 180; i++) {
+      await scope.spine.append(
+        'photo',
+        {'blob': 'blob-$i', 'w': 4 + (i % 3), 'h': 3 + (i % 5), 'mime': 'image/jpeg'},
+        at: DateTime.utc(2026, 1, 1).add(Duration(hours: i * 40)),
+      );
+    }
+    MomentsGalleryStats.reset();
+    await _draw(tester, scope, const MomentsRegion());
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(MomentsGalleryStats.built, greaterThan(6), reason: 'the pile is empty');
+    expect(MomentsGalleryStats.built, lessThan(90),
+        reason: 'the whole year of tiles was built for one screen: ${MomentsGalleryStats.built} of 180');
+    expect(find.text(S.fetching), findsNothing,
+        reason: 'a picture that has not come is a blank print, not a sentence');
   });
 
   testWidgets('the setup sheet, on either phone', (tester) async {

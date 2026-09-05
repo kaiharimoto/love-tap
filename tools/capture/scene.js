@@ -105,7 +105,11 @@ function ensure(p) {
       ([n, a]) => Promise.resolve(window[n] && window[n](...a)).then((r) => String(r)).catch((e) => 'threw: ' + e),
       [name, args],
     );
-    if (answer !== 'ok' && answer !== 'undefined') throw new Error(`${name}(${args.join(', ')}) -> ${answer}`);
+    // Every handle that does something answers 'ok' or a sentence saying what was missing. An
+    // `undefined` used to pass here, and it was hiding a build in which every answer came back as
+    // undefined — pairing included. Only the clock step answers nothing, by design.
+    if (answer === 'undefined' && name === '__deskStep') return;
+    if (answer !== 'ok') throw new Error(`${name}(${args.join(', ')}) -> ${answer}`);
   }
   async function settle(ms) {
     await page.waitForTimeout(ms === undefined ? (scene.settle || 700) : ms);

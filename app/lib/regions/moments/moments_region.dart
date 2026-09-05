@@ -3,8 +3,10 @@
 // There is no second store here and no separate index: every list on this screen is the same
 // List<Event> the thread reads, narrowed by person, by date, by type, or by a particular feeling.
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 
+import '../../capture/bus.dart';
 import '../../feelings/builtins.dart';
 import '../../feelings/registry.dart';
 import '../../material/hands.dart';
@@ -17,6 +19,13 @@ import '../../voice/strings.dart';
 import '../chat/blob_widgets.dart';
 
 enum MomentsView { media, milestones, feelings }
+
+/// How many tiles the pile has built since it was last reset: the capture report reads it, and
+/// the test that the pile is viewport-bound reads it.
+class MomentsGalleryStats {
+  static int get built => _Gallery.built;
+  static void reset() => _Gallery.built = 0;
+}
 
 class MomentsRegion extends StatefulWidget {
   const MomentsRegion({super.key});
@@ -37,6 +46,35 @@ class _MomentsRegionState extends State<MomentsRegion> {
   Person? _person;
   String? _feelingId;
   DateTimeRange? _range;
+
+  @override
+  void initState() {
+    super.initState();
+    CaptureBus.momentsReport = _report;
+  }
+
+  @override
+  void dispose() {
+    if (CaptureBus.momentsReport == _report) CaptureBus.momentsReport = null;
+    super.dispose();
+  }
+
+  Map<String, dynamic> _report() {
+    final all = AppScope.of(context).spine.all;
+    final counts = {for (final v in MomentsView.values) v.name: all.where((e) => _keepsIn(e, v)).length};
+    return {
+      'lens': _view.name,
+      'lenses': counts,
+      'filters': {
+        'person': _person?.name,
+        'feeling': _feelingId,
+        'range': _range == null ? null : [_range!.start.toIso8601String(), _range!.end.toIso8601String()],
+      },
+      'showing': all.where(_keeps).length,
+      'tiles_built': _Gallery.built,
+      'blobs': BlobCache.stats(),
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,14 +181,15 @@ class _Filters extends StatelessWidget {
                     onTap: () => onView(v),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 14),
-                      child: Stamped(
+                      // stamped straight on the wood, so in the ink that reads on wood: the
+                      // chosen lens was Pen.stamp on the desk at under 2:1 and the others fainter
+                      child: Stamped.onDesk(
                         switch (v) {
                           MomentsView.media => 'what we sent',
                           MomentsView.milestones => 'what happened',
                           MomentsView.feelings => 'what we felt',
                         },
                         size: v == view ? 12 : 10,
-                        colour: v == view ? Pen.stamp : Pen.margin,
                       ),
                     ),
                   ),
@@ -238,17 +277,16 @@ class _Chip extends StatelessWidget {
     // a filter is a tab on a sticky note: the one you are on is stuck down, the rest are
     // half-lifted and paler
     padding: EdgeInsets.only(right: 6, top: on ? 0 : 4, bottom: on ? 4 : 0),
-    child: Opacity(
-      opacity: on ? 1.0 : 0.72,
-      child: Slip(
-        id: 'moments.$label',
-        row: label.length,
-        stock: on ? 'sticky_yellow' : 'index',
-        torn: false,
-        padding: const EdgeInsets.fromLTRB(11, 5, 11, 6),
-        onTap: onTap,
-        child: Text(label, style: Hands.margin(size: 13).copyWith(color: on ? Pen.stamp : Pen.margin)),
-      ),
+    // the one that is on sits up on a yellow sticky; the others are index card, in the same ink:
+    // a label that was dimmed to say it was not chosen read at under 4.5:1 against its own paper
+    child: Slip(
+      id: 'moments.$label',
+      row: label.length,
+      stock: on ? 'sticky_yellow' : 'index',
+      torn: false,
+      padding: const EdgeInsets.fromLTRB(11, 5, 11, 6),
+      onTap: onTap,
+      child: Text(label, style: Hands.margin(size: 13).copyWith(color: Pen.stamp)),
     ),
   );
 }
@@ -263,87 +301,233 @@ class _Chip extends StatelessWidget {
 ///
 /// So: three columns, each print at its own shape, each new thing laid on whichever column is
 /// currently shortest. That is also how a pile actually grows.
+///
+/// And only the part of the pile that is on screen is built. It used to be a Column of every
+/// tile in the year inside one scroll view, which asked the store for a hundred and twenty-nine
+/// pictures at once the moment the region opened; fifteen seconds later the visible tiles still
+/// said they were fetching, because theirs were somewhere in the middle of the queue. The pile is
+/// laid out once, on paper, and a sliver builds the tiles the viewport reaches.
 class _Gallery extends StatelessWidget {
   const _Gallery({required this.events});
   final List<Event> events;
 
-  static const _columns = 3;
-  static const _gap = 7.0;
+  static const columns = 3;
+  static const gap = 7.0;
+
+  /// How many tiles have been built since the region opened — the capture report reads it, and
+  /// the test that fewer tiles than events are built reads it.
+  static int built = 0;
 
   @override
   Widget build(BuildContext context) {
     final media = events.reversed.toList();
-    final width = (MediaQuery.sizeOf(context).width - 16 - _gap * (_columns - 1)) / _columns;
-
-    final columns = List.generate(_columns, (_) => <Widget>[]);
-    final heights = List.filled(_columns, 0.0);
-    for (final (i, e) in media.indexed) {
-      final tall = _heightOf(e, width);
-      var shortest = 0;
-      for (var c = 1; c < _columns; c++) {
-        if (heights[c] < heights[shortest]) shortest = c;
-      }
-      heights[shortest] += tall + _gap;
-      columns[shortest].add(Padding(
-        padding: const EdgeInsets.only(bottom: _gap),
-        child: _One(event: e, row: i, width: width),
-      ));
-    }
-
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(8, 4, 8, 90),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (var c = 0; c < _columns; c++) ...[
-            if (c > 0) const SizedBox(width: _gap),
-            Expanded(child: Column(children: columns[c])),
-          ],
-        ],
-      ),
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(8, 4, 8, 90),
+          sliver: SliverGrid(
+            gridDelegate: _PileDelegate(media),
+            delegate: SliverChildBuilderDelegate(
+              (context, i) {
+                // the layout the delegate made is the one the tile is drawn at, so the two
+                // never disagree about a height (they did: the estimate clamped the ratio and
+                // the tile did not, and the columns drifted apart by a screen)
+                final layout = _PileDelegate.layoutFor(media, _PileDelegate.lastWidth);
+                final placed = layout.placed[i];
+                built++;
+                return _One(event: placed.event, row: placed.row, width: layout.tileWidth, height: placed.height);
+              },
+              childCount: media.length,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: true,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
-  /// Roughly how tall a thing will be, only so the columns end up about level. A print is its
-  /// own shape; a slip is the few lines that fit on it.
-  static double _heightOf(Event e, double width) {
+  /// Roughly how tall a thing will be. A print is its own shape; a slip is the few lines that
+  /// fit on it. This is the one estimate, and the tile is drawn at exactly this height.
+  static double heightOf(Event e, double width) {
     if (e.type == 'voice_note') return 74;
     final w = (e.payload['w'] as num?)?.toDouble() ?? 4;
     final h = (e.payload['h'] as num?)?.toDouble() ?? 3;
-    return width * (h / (w == 0 ? 4 : w)).clamp(0.6, 1.6);
+    return (width * (h / (w == 0 ? 4 : w)).clamp(0.6, 1.6)).roundToDouble();
   }
 }
 
+class _Placed {
+  const _Placed(this.event, this.row, this.column, this.top, this.height);
+  final Event event;
+  final int row;
+  final int column;
+  final double top;
+  final double height;
+  double get bottom => top + height;
+}
+
+class _PileLayoutData {
+  const _PileLayoutData(this.placed, this.tileWidth, this.tallest, this.extent);
+
+  /// In the order the sliver builds them: by top edge, so a scroll offset maps to a run of
+  /// indices.
+  final List<_Placed> placed;
+  final double tileWidth;
+  final double tallest;
+  final double extent;
+}
+
+/// Lays the pile once per width and answers the sliver's questions about it.
+class _PileDelegate extends SliverGridDelegate {
+  const _PileDelegate(this.events);
+  final List<Event> events;
+
+  static double lastWidth = 0;
+  static List<Event>? _forEvents;
+  static double _forWidth = -1;
+  static _PileLayoutData? _cached;
+
+  static _PileLayoutData layoutFor(List<Event> events, double crossAxisExtent) {
+    if (identical(events, _forEvents) && _forWidth == crossAxisExtent && _cached != null) return _cached!;
+    final width = ((crossAxisExtent - _Gallery.gap * (_Gallery.columns - 1)) / _Gallery.columns).floorToDouble();
+    final heights = List.filled(_Gallery.columns, 0.0);
+    final placed = <_Placed>[];
+    var tallest = 0.0;
+    for (final (i, e) in events.indexed) {
+      final tall = _Gallery.heightOf(e, width);
+      var shortest = 0;
+      for (var c = 1; c < _Gallery.columns; c++) {
+        if (heights[c] < heights[shortest]) shortest = c;
+      }
+      placed.add(_Placed(e, i, shortest, heights[shortest], tall));
+      heights[shortest] += tall + _Gallery.gap;
+      if (tall > tallest) tallest = tall;
+    }
+    placed.sort((a, b) => a.top.compareTo(b.top));
+    final extent = heights.fold(0.0, (m, h) => h > m ? h : m);
+    _forEvents = events;
+    _forWidth = crossAxisExtent;
+    lastWidth = crossAxisExtent;
+    return _cached = _PileLayoutData(placed, width, tallest, extent);
+  }
+
+  @override
+  SliverGridLayout getLayout(SliverConstraints constraints) =>
+      _PileLayout(layoutFor(events, constraints.crossAxisExtent));
+
+  @override
+  bool shouldRelayout(_PileDelegate old) => !identical(old.events, events);
+}
+
+class _PileLayout extends SliverGridLayout {
+  const _PileLayout(this.data);
+  final _PileLayoutData data;
+
+  @override
+  int getMinChildIndexForScrollOffset(double scrollOffset) {
+    // tiles are in top order, and no tile is taller than the tallest, so the first one that can
+    // still be on screen has its top after offset - tallest
+    final placed = data.placed;
+    var lo = 0, hi = placed.length;
+    final edge = scrollOffset - data.tallest - _Gallery.gap;
+    while (lo < hi) {
+      final mid = (lo + hi) >> 1;
+      if (placed[mid].top < edge) {
+        lo = mid + 1;
+      } else {
+        hi = mid;
+      }
+    }
+    return lo.clamp(0, placed.isEmpty ? 0 : placed.length - 1);
+  }
+
+  @override
+  int getMaxChildIndexForScrollOffset(double scrollOffset) {
+    final placed = data.placed;
+    if (placed.isEmpty) return 0;
+    var lo = 0, hi = placed.length;
+    while (lo < hi) {
+      final mid = (lo + hi) >> 1;
+      if (placed[mid].top <= scrollOffset) {
+        lo = mid + 1;
+      } else {
+        hi = mid;
+      }
+    }
+    return (lo - 1).clamp(0, placed.length - 1);
+  }
+
+  @override
+  SliverGridGeometry getGeometryForChildIndex(int index) {
+    final p = data.placed[index];
+    return SliverGridGeometry(
+      scrollOffset: p.top,
+      crossAxisOffset: p.column * (data.tileWidth + _Gallery.gap),
+      mainAxisExtent: p.height,
+      crossAxisExtent: data.tileWidth,
+    );
+  }
+
+  @override
+  double computeMaxScrollOffset(int childCount) => data.extent;
+}
+
 class _One extends StatelessWidget {
-  const _One({required this.event, required this.row, required this.width});
+  const _One({required this.event, required this.row, required this.width, required this.height});
   final Event event;
   final int row;
   final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     if (event.type == 'voice_note') {
       // a voice note in the gallery is the slip it was written on, with its length on it
-      return Slip(
-        id: event.id,
-        row: row,
-        stock: 'receipt',
-        width: width,
-        padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),
-        child: Center(
-          child: Text(
-            '${((event.payload['duration_ms'] as num) / 1000).round()}s',
-            style: Hands.margin(size: 14),
+      return Align(
+        alignment: Alignment.topCenter,
+        child: Slip(
+          id: event.id,
+          row: row,
+          stock: 'receipt',
+          width: width,
+          padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),
+          child: Center(
+            child: Text(
+              '${((event.payload['duration_ms'] as num) / 1000).round()}s',
+              style: Hands.margin(size: 14),
+            ),
           ),
         ),
       );
     }
     final hash = (event.payload['poster_blob'] ?? event.payload['blob']) as String;
-    final w = (event.payload['w'] as num?)?.toDouble() ?? 4;
-    final h = (event.payload['h'] as num?)?.toDouble() ?? 3;
-    return AspectRatio(
-      aspectRatio: (w == 0 ? 4 : w) / (h == 0 ? 3 : h),
-      child: BlobImage(hash: hash, fit: BoxFit.cover),
+    // A print: the picture with a white border of card around it, cut, with the edge and shadow
+    // every piece of paper on the desk has. The cut card's safe area and border are solved the
+    // way paper.dart solves them, so the print comes out exactly the height the pile laid it at.
+    const border = 3.0;
+    final inner = Size((width * 0.90 - border * 2).clamp(24.0, width), (height * 0.87 - border * 2).clamp(24.0, height));
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Slip(
+        id: event.id,
+        row: row,
+        stock: 'index',
+        torn: false,
+        width: width,
+        padding: const EdgeInsets.all(border),
+        child: SizedBox(
+          width: inner.width,
+          height: inner.height,
+          child: BlobImage(
+            hash: hash,
+            fit: BoxFit.cover,
+            cacheWidth: (inner.width * dpr).round(),
+            quiet: true,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -87,9 +87,9 @@ class TodoList extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.fromLTRB(12, 10, 12, 4),
         child: Row(children: [
-          const Stamped('open', size: 11),
+          const Stamped.onDesk('open', size: 11),
           const Spacer(),
-          GestureDetector(onTap: () => _add(context), child: Text('add one', style: Hands.margin(size: 14))),
+          GestureDetector(onTap: () => _add(context), child: Text('add one', style: Hands.onDesk(size: 15))),
         ]),
       ),
       if (open.isEmpty)

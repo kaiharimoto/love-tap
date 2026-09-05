@@ -173,14 +173,21 @@ class _AuthoringSheetState extends State<AuthoringSheet> {
                     _taps.add(ms);
                   });
                 },
-                child: Container(
-                  height: 64,
-                  alignment: Alignment.center,
-                  color: const Color(0xFFF3EEE3),
-                  child: Text(
-                    _taps.isEmpty ? 'tap out the rhythm here' : _haptic,
-                    style: Hands.margin(size: 14),
-                    textAlign: TextAlign.center,
+                child: Slip(
+                  id: 'authoring.rhythm',
+                  row: 1,
+                  stock: 'graph',
+                  padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 40,
+                    child: Center(
+                      child: Text(
+                        _taps.isEmpty ? 'tap out the rhythm here' : _haptic,
+                        style: Hands.margin(size: 14),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ),
               ),
