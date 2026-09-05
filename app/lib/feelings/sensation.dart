@@ -44,10 +44,16 @@ class SensationReport {
 }
 
 class Sensation {
-  Sensation({AudioPlayer? player}) : _player = player ?? AudioPlayer(playerId: 'feelings');
+  Sensation({AudioPlayer? player}) : _player = player;
 
   static const _channel = MethodChannel('lovetap/haptics');
-  final AudioPlayer _player;
+
+  /// Made the first time a sound is asked for, not when the scope is. Constructing an
+  /// AudioPlayer registers it over a platform channel, and there is exactly one Sensation per
+  /// AppScope now, so a scope built anywhere without the plugin (a widget test, a tool) would
+  /// otherwise fail before it had drawn anything.
+  AudioPlayer? _player;
+  AudioPlayer get _audio => _player ??= AudioPlayer(playerId: 'feelings');
 
   /// The last thing played, for the capture log and the haptic annotation on the clips.
   SensationReport? last;
@@ -98,8 +104,9 @@ class Sensation {
 
   Future<void> _playSound(Feeling feeling, double intensity) async {
     try {
-      await _player.setVolume((0.35 + 0.65 * intensity).clamp(0.0, 1.0));
-      await _player.play(AssetSource(soundAsset(feeling.sound).replaceFirst('assets/', '')));
+      final player = _audio;
+      await player.setVolume((0.35 + 0.65 * intensity).clamp(0.0, 1.0));
+      await player.play(AssetSource(soundAsset(feeling.sound).replaceFirst('assets/', '')));
     } catch (_) {}
   }
 
@@ -127,6 +134,6 @@ class Sensation {
   void dispose() {
     _timer?.cancel();
     _pulse.close();
-    _player.dispose();
+    _player?.dispose();
   }
 }

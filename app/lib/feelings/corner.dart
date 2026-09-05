@@ -242,88 +242,97 @@ class _Fan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final members = registry.family(family);
+    final width = MediaQuery.sizeOf(context).width;
     return GestureDetector(
       onTap: onDismiss,
       child: DecoratedBox(
-        // A scrim at eighteen per cent is not a scrim: the family names landed straight on top of
-        // whatever region was underneath and read as printing over it rather than as being held
-        // in front of it. It goes deep toward the bottom, where the fan is, and stays light at
-        // the top so you can still see where you were.
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.0, 0.38, 1.0],
-            colors: [Color(0x2E120D08), Color(0x8A120D08), Color(0xD6120D08)],
-          ),
-        ),
+        // A light scrim, even from top to bottom, so the page underneath is dimmed but still where
+        // you were. It used to be a wash that went to eighty-four per cent at the bottom with the
+        // vocabulary printed straight on it: the names sat over whatever the region had drawn
+        // there, at under two to one against the wood, and half the tiles came out on one side of
+        // the wash and half on the other. The vocabulary is on paper now — a sheet pulled up from
+        // under the corner — and paper is opaque.
+        decoration: const BoxDecoration(color: Color(0x46120D08)),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              // the families, on a torn strip: a stamp belongs on paper, not on the wood
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
+                padding: const EdgeInsets.fromLTRB(5, 0, 5, 66),
+                child: Slip(
+                  id: 'the.vocabulary.sheet',
+                  row: 3,
+                  stock: 'looseleaf',
+                  width: width - 10,
+                  padding: const EdgeInsets.fromLTRB(8, 12, 8, 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      for (final f in Family.values)
-                        Padding(
-                          padding: const EdgeInsets.all(4),
-                          child: GestureDetector(
-                            onTap: () => onFamily(f),
-                            child: Slip(
-                              id: 'family_${f.name}',
-                              stock: 'index',
-                              padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
-                              child: Stamped(
-                                f.label,
-                                size: f == family ? 12 : 10.5,
-                                colour: f == family ? Pen.stamp : Pen.margin,
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(8, 6, 8, 84),
-                child: Wrap(
-                  alignment: WrapAlignment.center,
-                  children: [
-                    for (var i = 0; i < members.length; i++)
-                      GestureDetector(
-                        onTapDown: (_) => onHover(members[i]),
-                        onTap: () => onPick(members[i]),
-                        child: Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              FeelingObject(
-                                feeling: members[i],
-                                size: under?.id == members[i].id ? 96 : 78,
-                                intensity: under?.id == members[i].id ? intensity : 0.6,
-                                tilt: math.sin(i * 1.7) * 0.09,
-                              ),
-                              SizedBox(
-                                width: 92,
-                                child: Text(
-                                  members[i].name,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Hands.margin(size: 12),
+                      // every family, on its own card, all of them on the sheet at once: the strip
+                      // this replaced scrolled sideways with nothing to say so, and two of the
+                      // six were off the edge of every frame anyone took
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 2,
+                        runSpacing: 2,
+                        children: [
+                          for (final f in Family.values)
+                            GestureDetector(
+                              onTap: () => onFamily(f),
+                              child: Padding(
+                                padding: const EdgeInsets.all(3),
+                                child: Slip(
+                                  id: 'family_${f.name}',
+                                  stock: 'index',
+                                  padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
+                                  child: Stamped(
+                                    f.label,
+                                    size: f == family ? 12 : 10.5,
+                                    colour: f == family ? Pen.stamp : Pen.margin,
+                                  ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
+                            ),
+                        ],
                       ),
-                  ],
+                      const SizedBox(height: 6),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        children: [
+                          for (var i = 0; i < members.length; i++)
+                            GestureDetector(
+                              onTapDown: (_) => onHover(members[i]),
+                              onTap: () => onPick(members[i]),
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(4, 4, 4, 2),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    FeelingObject(
+                                      feeling: members[i],
+                                      size: under?.id == members[i].id ? 92 : 76,
+                                      intensity: under?.id == members[i].id ? intensity : 0.6,
+                                      tilt: math.sin(i * 1.7) * 0.09,
+                                    ),
+                                    SizedBox(
+                                      width: 96,
+                                      // the whole name, on paper, in pencil: 'thinking of y…' is
+                                      // not a feeling anyone can choose
+                                      child: Text(
+                                        members[i].name,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        style: Hands.margin(size: 12),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

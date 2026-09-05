@@ -10,6 +10,7 @@ import 'package:desk/spine/projections/thread.dart';
 import 'package:desk/spine/spine.dart';
 import 'package:desk/spine/store/store_native.dart';
 import 'package:desk/transport/local/local_transport.dart';
+import 'package:desk/transport/transport.dart';
 import 'package:desk/transport/sync.dart';
 import 'package:desk/transport/protocol/http_transport.dart';
 import 'package:desk/transport/tailscale/tailnet.dart';
@@ -111,6 +112,21 @@ void main() {
     await sync.once();
     cap('delete').ok = projectThread(host.all).byId[m3.id]!.deleted;
     cap('delete').detail = 'the row became a stub on the host';
+
+    // typing: an ephemeral frame that reaches the host and is never stored. Named in the rubric
+    // row, present in the app end to end, and absent from this report for two cycles — which to a
+    // critic reading the evidence is the same as absent from the app.
+    final hostSaw = <Ephemeral>[];
+    final typingSub = hostT.ephemeral.listen(hostSaw.add);
+    final rowsBefore = host.length + client.length;
+    await clientT.sendEphemeral(Ephemeral(kind: 'typing', from: Person.teo, at: 1, data: const {'on': true}));
+    await Future<void>.delayed(const Duration(milliseconds: 120));
+    await typingSub.cancel();
+    cap('typing').ok = hostSaw.any((f) => f.kind == 'typing' && f.data['on'] == true) &&
+        host.length + client.length == rowsBefore;
+    cap('typing').detail = hostSaw.isEmpty
+        ? 'no typing frame reached the host'
+        : 'typing frame reached the host as an ephemeral; neither log grew by it';
 
     // voice note
     final voice = Uint8List.fromList(List<int>.generate(20000, (i) => (i * 13) & 255));

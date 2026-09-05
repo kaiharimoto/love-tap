@@ -52,11 +52,26 @@ void main() {
       expect(f.name.codeUnits.every((c) => c < 0x2190), isTrue,
           reason: '${f.id} has a glyph in its name');
     }
-    // the ones that are marks are marks on purpose, and the list is closed
+    // the ones that are marks are marks on purpose, and the list is closed. A drawn recipe named
+    // obj_user_* belongs to a feeling the couple authored (seed/year names it in a
+    // feeling_authored payload), so it is the one kind no built-in may claim.
     for (final id in drawn) {
+      if (id.startsWith('obj_user_')) {
+        expect(kBuiltInFeelings.any((f) => f.object == id), isFalse,
+            reason: '$id is an authored feeling\'s object and a built-in has taken it');
+        continue;
+      }
       expect(kBuiltInFeelings.any((f) => f.object == id), isTrue,
           reason: '$id is drawn but no feeling uses it');
     }
+    // and no two feelings arrive as the same thing: an object that stands for two feelings
+    // stands for neither
+    final byObject = <String, List<String>>{};
+    for (final f in kBuiltInFeelings) {
+      byObject.putIfAbsent(f.object, () => []).add(f.id);
+    }
+    final shared = {for (final e in byObject.entries) if (e.value.length > 1) e.key: e.value};
+    expect(shared, isEmpty, reason: 'feelings sharing an object: $shared');
   });
 
   test('at least twelve partner-state signals, all of them projected', () {

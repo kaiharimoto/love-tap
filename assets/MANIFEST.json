@@ -5230,16 +5230,17 @@
    }
   },
   "assets/fonts/NoorHand.ttf": {
-   "bytes": 319452,
+   "bytes": 376908,
    "generator": "tools/handwriting/build.py",
    "kind": "font",
    "settings": {
     "face": "NoorHand",
     "glyphs": 155,
     "hand": {
-     "baseline_wobble": 9,
+     "baseline_wobble": 14,
      "corner_deg": 92,
      "description": "fast, slanted ballpoint; loops open; crosses t late; light with heavy stops",
+     "distinct_min": 40,
      "exit_stretch": 1.15,
      "family": "NoorHand",
      "gap": 28,
@@ -5247,12 +5248,14 @@
      "jitter": {
       "alt_prob": 0.55,
       "field_wavelength": [
-       220,
-       520
+       90,
+       260
       ],
-      "point": 18,
-      "point_noise": 5,
-      "rotation_deg": 2.5
+      "point": 44,
+      "point_noise": 9,
+      "rotation_deg": 4.0,
+      "slant_var_deg": 2.5,
+      "width_var": 0.07
      },
      "loop_openness": 0.85,
      "paper": "#f1ecdf",
@@ -5277,7 +5280,7 @@
       "base": 0.3,
       "baseline_weight": 0.0,
       "down_weight": 0.12,
-      "jitter": 0.14,
+      "jitter": 0.22,
       "scale": 0.45,
       "start_weight": 0.25,
       "stop_weight": 0.55,
@@ -5296,7 +5299,7 @@
      "xheight_scale": 0.96
     },
     "inputs": {
-     "tools/handwriting/hands.json": "8064eea99da0afa21e6da4fd9e117dc2e2377af64ff466e9168ccb1b2ab6088b",
+     "tools/handwriting/hands.json": "8fadc6b1efe16f04a4e64056012d7b043000cd975c24f760297e1a1c1feb8e44",
      "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
     },
     "outline": "RDP + Schneider cubic fit + cu2qu",
@@ -5306,16 +5309,17 @@
    }
   },
   "assets/fonts/TeoHand.ttf": {
-   "bytes": 732744,
+   "bytes": 751816,
    "generator": "tools/handwriting/build.py",
    "kind": "font",
    "settings": {
     "face": "TeoHand",
     "glyphs": 155,
     "hand": {
-     "baseline_wobble": 6,
+     "baseline_wobble": 10,
      "corner_deg": 100,
      "description": "upright, rounded pencil; presses hard; heaviest on downstrokes; sits heavy on the line",
+     "distinct_min": 40,
      "exit_stretch": 0.85,
      "family": "TeoHand",
      "gap": 46,
@@ -5323,12 +5327,14 @@
      "jitter": {
       "alt_prob": 0.5,
       "field_wavelength": [
-       260,
-       600
+       100,
+       280
       ],
-      "point": 18,
-      "point_noise": 4,
-      "rotation_deg": 2.5
+      "point": 40,
+      "point_noise": 8,
+      "rotation_deg": 3.5,
+      "slant_var_deg": 1.5,
+      "width_var": 0.07
      },
      "loop_openness": 0.25,
      "paper": "#f1ecdf",
@@ -5346,7 +5352,7 @@
       "base": 0.62,
       "baseline_weight": 0.28,
       "down_weight": 0.38,
-      "jitter": 0.1,
+      "jitter": 0.18,
       "scale": 0.4,
       "start_weight": 0.05,
       "stop_weight": 0.08,
@@ -5365,7 +5371,7 @@
      "xheight_scale": 1.04
     },
     "inputs": {
-     "tools/handwriting/hands.json": "8064eea99da0afa21e6da4fd9e117dc2e2377af64ff466e9168ccb1b2ab6088b",
+     "tools/handwriting/hands.json": "8fadc6b1efe16f04a4e64056012d7b043000cd975c24f760297e1a1c1feb8e44",
      "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
     },
     "outline": "RDP + Schneider cubic fit + cu2qu",
@@ -5375,7 +5381,7 @@
    }
   },
   "assets/fonts/previews/NoorHand.png": {
-   "bytes": 307793,
+   "bytes": 323163,
    "generator": "tools/handwriting/build.py",
    "kind": "preview",
    "settings": {
@@ -5392,7 +5398,7 @@
    }
   },
   "assets/fonts/previews/TeoHand.png": {
-   "bytes": 329754,
+   "bytes": 347252,
    "generator": "tools/handwriting/build.py",
    "kind": "preview",
    "settings": {
@@ -5401,7 +5407,7 @@
      "calt"
     ],
     "font": "assets/fonts/TeoHand.ttf",
-    "height": 1176,
+    "height": 1267,
     "layout_engine": "raqm",
     "scale": 2,
     "seed": 20260903,

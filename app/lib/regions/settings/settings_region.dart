@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import '../../capture/bus.dart';
 import '../../feelings/builtins.dart';
 import '../../flags.dart';
-import '../../feelings/sensation.dart';
 import '../../material/hands.dart';
 import '../../material/marks.dart';
 import '../../material/objects.dart';
@@ -37,7 +36,6 @@ class _SettingsRegionState extends State<SettingsRegion> {
   final _words = TextEditingController();
   String? _result;
   NotificationPrefs? _prefs;
-  final Sensation _sensation = Sensation();
 
   @override
   void initState() {
@@ -68,7 +66,6 @@ class _SettingsRegionState extends State<SettingsRegion> {
     if (Flags.capture) CaptureBus.showWords = null;
     _address.dispose();
     _words.dispose();
-    _sensation.dispose();
     super.dispose();
   }
 
@@ -167,7 +164,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
             children: [
               for (final f in authored)
                 GestureDetector(
-                  onTap: () => _sensation.play(f, intensity: 0.8),
+                  onTap: () => AppScope.of(context).sensation.play(f, intensity: 0.8),
                   onLongPress: () => scope.emit('feeling_authored', {
                     'feeling_id': f.id,
                     'name': f.name,

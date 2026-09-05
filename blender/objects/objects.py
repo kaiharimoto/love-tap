@@ -514,6 +514,183 @@ def obj_coffee_ring(rng):
     return [base, ring]
 
 
+# ------------------------------------------------------------------ things, not symbols
+# The five below replace marks that read as the standard emoji set to a fresh eye — a sun with rays,
+# a crescent moon, a tongue-out face, rain, a firework — and two that read as prizes: a gold star
+# and a crown. Drawing an emoji by hand does not stop it being the emoji, and a badge is a badge
+# whatever it is made of. Each of these is a thing that would be on a desk between two people.
+
+
+def obj_bookmark(rng):
+    """Thinking of you: a strip torn for a bookmark, one end folded over on itself, lying where it
+    fell out of the book. The fold is the sign somebody's thumb was on it."""
+    mat = paper_mat("bookmark_paper", (0.93, 0.89, 0.78), tooth=1.1)
+    L, W = 0.058, 0.016
+    parts = []
+    body = sheet(L * 0.66, W, 40, 14, lambda u, v: 0.0004 * math.sin(u * 4.0) * (1 - abs(v - 0.5)))
+    b = solidify(new_mesh(body, "bookmark", mat))
+    b.location = (-L * 0.17, 0.0, 0.0)
+    parts.append(b)
+    # the folded end: a second piece hinged at the body's end, laid back over it, thickness apart
+    flap = sheet(L * 0.34, W * 0.96, 24, 12, lambda u, v: 0.0)
+    f = solidify(new_mesh(flap, "bookmark_flap", mat))
+    f.location = (L * 0.16, 0.0, PAPER_T * 2.2)
+    f.rotation_euler = (0.0, math.radians(-3.5), math.radians(float(rng.uniform(-2.5, 2.5))))
+    parts.append(f)
+    for part in parts:
+        part.rotation_euler[2] += math.radians(float(rng.uniform(-14, 14)))
+    return parts
+
+
+def obj_dog_ear(rng):
+    """Goodnight: a card with its corner turned down — the way a page is marked where you stopped
+    reading for the night. Nothing on it; the fold is the whole object."""
+    mat = paper_mat("dogear_card", (0.95, 0.93, 0.87), tooth=0.95)
+    W, H = 0.040, 0.030
+    card = sheet(W, H, 40, 30, lambda u, v: 0.0003 * math.sin(u * 3 + v * 2))
+    parts = [solidify(new_mesh(card, "dogear_card", mat), t=0.00024)]
+    # the corner: a triangle folded down over the card, lying a paper's thickness above it
+    bm = bmesh.new()
+    d = 0.013
+    vs = [bm.verts.new((W / 2 - d, H / 2, PAPER_T * 2.4)), bm.verts.new((W / 2, H / 2 - d, PAPER_T * 2.4)),
+          bm.verts.new((W / 2 - d, H / 2 - d, PAPER_T * 2.4 + 0.0009))]
+    bm.faces.new(vs)
+    ear = solidify(new_mesh(bm, "dogear_flap", mat, smooth=False), t=0.00024)
+    parts.append(ear)
+    for part in parts:
+        part.rotation_euler = (0.0, 0.0, math.radians(float(rng.uniform(-18, 18))))
+    return parts
+
+
+def obj_wrapper(rng):
+    """Nyeh: a sweet wrapper twisted at both ends, the way one is left on a desk after the sweet
+    has been eaten in front of you. Thin, a little translucent, pinched tight at the twists."""
+    mat = simple_mat("wrapper", (0.93, 0.62, 0.68), roughness=0.22, transmission=0.35, ior=1.3)
+    n = 40
+    pts = []
+    for k in range(n + 1):
+        t = k / n
+        x = (t - 0.5) * 0.052
+        y = 0.004 * math.sin(t * math.pi * 2.0) + 0.002 * math.sin(t * 9.0)
+        z = 0.0045 + 0.002 * math.sin(t * math.pi)
+        pts.append((x, y, z))
+
+    def taper(t):
+        # fat in the middle, pinched to a twist at each end
+        body = math.sin(t * math.pi) ** 0.55
+        return max(0.10, body)
+    tube_obj = tube(pts, 0.0058, 14, "wrapper", mat, taper=taper)
+    tube_obj.rotation_euler = (0.0, 0.0, math.radians(float(rng.uniform(-25, 25))))
+    return [tube_obj]
+
+
+def obj_pencil_smudge(rng):
+    """Grey: a graphite smudge on a scrap — the side of a hand dragged through pencil, which is
+    what a grey day leaves on the page."""
+    card = paper_mat("smudge_card", (0.92, 0.91, 0.87), tooth=1.0)
+    parts = [solidify(new_mesh(sheet(0.036, 0.028, 30, 24, lambda u, v: 0.0003 * math.sin(u * 4 + v * 3)),
+                                "smudge_card", card))]
+    graphite = simple_mat("graphite_smear", (0.30, 0.30, 0.31), roughness=0.55, metallic=0.25)
+    # the smear: a soft-edged streak, thicker where the hand came down and fading where it left
+    bm = bmesh.new()
+    verts = {}
+    nx, ny = 30, 10
+    for j in range(ny + 1):
+        for i in range(nx + 1):
+            u, v = i / nx, j / ny
+            x = (u - 0.5) * 0.026 + 0.004 * math.sin(v * 3.1)
+            y = (v - 0.5) * 0.007 * (0.5 + 0.5 * math.sin(u * math.pi)) - 0.002
+            verts[(i, j)] = bm.verts.new((x, y, PAPER_T * 1.6))
+    for j in range(ny):
+        for i in range(nx):
+            bm.faces.new((verts[(i, j)], verts[(i + 1, j)], verts[(i + 1, j + 1)], verts[(i, j + 1)]))
+    smear = new_mesh(bm, "smear", graphite)
+    parts.append(smear)
+    for part in parts:
+        part.rotation_euler = (0.0, 0.0, math.radians(float(rng.uniform(-12, 12))))
+    return parts
+
+
+def obj_bunting(rng):
+    """Yes: three triangles of bunting on a length of thread, the string sagging between them,
+    left on the desk from something worth putting up for."""
+    thread = simple_mat("bunting_thread", (0.55, 0.50, 0.42), roughness=0.9)
+    colours = [(0.94, 0.66, 0.72), (0.74, 0.85, 0.90), (0.95, 0.88, 0.55)]
+    pts = [((t - 0.5) * 0.062, 0.006 * math.sin(t * math.pi * 1.0) - 0.003, 0.0007 + 0.001 * math.sin(t * math.pi))
+           for t in [k / 24 for k in range(25)]]
+    parts = [tube(pts, 0.00035, 6, "bunting_thread", thread)]
+    for k in range(3):
+        t = 0.2 + 0.3 * k
+        cx = (t - 0.5) * 0.062
+        cy = 0.006 * math.sin(t * math.pi) - 0.003
+        mat = paper_mat(f"bunting_{k}", colours[k], tooth=0.9)
+        bm = bmesh.new()
+        w, h = 0.012, 0.015
+        lean = float(rng.uniform(-0.004, 0.004))
+        vs = [bm.verts.new((cx - w / 2, cy, 0.0005)), bm.verts.new((cx + w / 2, cy, 0.0005)),
+              bm.verts.new((cx + lean, cy - h, 0.0002))]
+        bm.faces.new(vs)
+        parts.append(solidify(new_mesh(bm, f"bunting_flag_{k}", mat, smooth=False), t=0.00018))
+    return parts
+
+
+def obj_cork(rng):
+    """Did it: a cork, out of the bottle and on its side, with the pull-marks of the corkscrew in
+    its top. Not a prize: the thing left over from having opened something."""
+    mat = simple_mat("cork", (0.76, 0.62, 0.42), roughness=0.92)
+    bm = bmesh.new()
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=28, radius1=0.0098, radius2=0.0105, depth=0.040)
+    for v in bm.verts:
+        # a cork is not a lathe part: it is a little dented and a little out of round
+        a = math.atan2(v.co.y, v.co.x)
+        r = 1.0 + 0.03 * math.sin(a * 3 + v.co.z * 90) + 0.02 * math.sin(a * 7)
+        v.co.x *= r
+        v.co.y *= r
+    cork = new_mesh(bm, "cork", mat)
+    cork.rotation_euler = (math.radians(90.0), 0.0, math.radians(float(rng.uniform(-30, 30))))
+    cork.location = (0.0, 0.0, 0.0102)
+    # the corkscrew's hole, a dark pit in the end
+    pit = simple_mat("cork_pit", (0.28, 0.20, 0.12), roughness=0.95)
+    bm2 = bmesh.new()
+    bmesh.ops.create_cone(bm2, cap_ends=True, segments=12, radius1=0.0016, radius2=0.0024, depth=0.006)
+    hole = new_mesh(bm2, "cork_pit", pit)
+    hole.rotation_euler = (math.radians(90.0), 0.0, cork.rotation_euler[2])
+    dx = 0.0195 * math.cos(cork.rotation_euler[2] + math.pi / 2)
+    dy = 0.0195 * math.sin(cork.rotation_euler[2] + math.pi / 2)
+    hole.location = (dx, dy, 0.0102)
+    return [cork, hole]
+
+
+def obj_party_hat(rng):
+    """A paper hat out of a cracker, lying on its side: the tissue crown nobody wears for more
+    than a minute. A cone of thin paper with a torn seam, not a ring of points."""
+    mat = paper_mat("party_hat", (0.92, 0.72, 0.36), tooth=0.8)
+    bm = bmesh.new()
+    bmesh.ops.create_cone(bm, cap_ends=False, segments=36, radius1=0.019, radius2=0.0012, depth=0.036)
+    for v in bm.verts:
+        # crumpled a little from being in the cracker
+        v.co.x *= 1.0 + 0.02 * math.sin(v.co.z * 400 + v.co.y * 300)
+        v.co.y *= 1.0 + 0.02 * math.cos(v.co.z * 350)
+    hat = solidify(new_mesh(bm, "party_hat", mat), t=0.00012)
+    hat.rotation_euler = (math.radians(80.0), 0.0, math.radians(float(rng.uniform(-40, 40))))
+    hat.location = (0.0, 0.0, 0.0112)
+    return [hat]
+
+
+def obj_user_soup(rng):
+    """tuesday soup, the feeling Teo made: the ring a bowl left on the recipe card, with a drip
+    where it was put down too fast. The same idea as the coffee ring, in soup."""
+    card = paper_mat("soup_card", (0.95, 0.92, 0.84))
+    bm = sheet(0.044, 0.034, 30, 24, lambda u, v: 0.0005 * math.sin(u * 4 + v * 3))
+    base = solidify(new_mesh(bm, "soup_card", card))
+    stain = simple_mat("soup_stain", (0.66, 0.36, 0.16), roughness=0.55)
+    ring = tube([(0.0135 * math.cos(2 * math.pi * k / 56) * 1.05, 0.0135 * math.sin(2 * math.pi * k / 56), 0.00016)
+                 for k in range(57)], 0.0011, 6, "soup_ring", stain)
+    drip = tube([(0.0135 * 1.05 + 0.0005 * k, -0.002 - 0.0016 * k, 0.00016) for k in range(5)],
+                0.0009, 6, "soup_drip", stain, taper=lambda t: 1.0 - 0.6 * t)
+    return [base, ring, drip]
+
+
 OBJECTS = {
     "obj_pinch": obj_pinch, "obj_crane": obj_crane, "obj_boat": obj_boat, "obj_plane": obj_plane,
     "obj_fortune_teller": obj_fortune_teller, "obj_crown": obj_crown, "obj_blanket_fold": obj_blanket_fold,
@@ -523,6 +700,9 @@ OBJECTS = {
     "obj_rubber_band": obj_rubber_band, "obj_staple_chain": obj_staple_chain, "obj_spitball": obj_spitball,
     "obj_stone": obj_stone, "obj_candle": obj_candle, "obj_mug": obj_mug,
     "obj_snapped_pencil": obj_snapped_pencil, "obj_clover": obj_clover, "obj_coffee_ring": obj_coffee_ring,
+    "obj_bookmark": obj_bookmark, "obj_dog_ear": obj_dog_ear, "obj_wrapper": obj_wrapper,
+    "obj_pencil_smudge": obj_pencil_smudge, "obj_bunting": obj_bunting, "obj_cork": obj_cork,
+    "obj_party_hat": obj_party_hat, "obj_user_soup": obj_user_soup,
 }
 
 

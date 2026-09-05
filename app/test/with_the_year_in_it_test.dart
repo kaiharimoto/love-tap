@@ -17,6 +17,7 @@ import 'package:desk/regions/moments/moments_region.dart';
 import 'package:desk/regions/pulse/pulse_region.dart';
 import 'package:desk/regions/us/us_region.dart';
 import 'package:desk/scope.dart';
+import 'package:desk/spine/seed_bundle.dart';
 import 'package:desk/spine/seed_loader.dart';
 import 'package:desk/spine/spine.dart';
 import 'package:desk/spine/store/store.dart';
@@ -51,7 +52,7 @@ void main() {
       SpineStore.memory(),
       const Identity(person: Person.teo, device: DeviceKind.pwa),
     );
-    report = (await SeedLoader(rootBundle).load(spine))!;
+    report = (await SeedLoader(BundleSeedSource(rootBundle)).load(spine))!;
     final transport = LocalTransport(role: TransportRole.client, spine: spine, deviceId: 'test');
     scope = AppScope(
       spine: spine,

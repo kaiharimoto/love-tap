@@ -9,6 +9,10 @@
 // no thickness and give it some, and it would put a rendered object where a hand should be. So
 // they are drawn here, in the same hand that draws every other mark in the app — a pen with a
 // wobble, pressing harder in the middle of a stroke than at either end.
+//
+// What is not drawn here any more: a sun with rays, a crescent moon, a tongue-out face, rain and a
+// firework. Drawn by hand they were still the standard emoji set — a critic seeing the vocabulary
+// for the first time named them as such — and those feelings are things now (blender/objects/).
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
@@ -67,22 +71,6 @@ final Map<String, DrawnFeeling> kDrawnFeelings = {
       h.arc(s.center(Offset.zero), r, -0.6 - i * 0.12, _tau * 0.78 - i * 0.1, wobble: 0.9);
     }
   },
-  'obj_margin_sun': (c, s, h) {
-    final centre = s.center(Offset.zero);
-    h.arc(centre, s.width * 0.20, 0, _tau, steps: 36);
-    for (var i = 0; i < 9; i++) {
-      final a = _tau * i / 9 + 0.2;
-      h.stroke([
-        Offset(centre.dx + s.width * 0.27 * math.cos(a), centre.dy + s.width * 0.27 * math.sin(a)),
-        Offset(centre.dx + s.width * 0.42 * math.cos(a), centre.dy + s.width * 0.42 * math.sin(a)),
-      ]);
-    }
-  },
-  'obj_corner_moon': (c, s, h) {
-    final centre = s.center(Offset.zero);
-    h.arc(centre, s.width * 0.30, -_tau * 0.20, _tau * 0.30, steps: 34);
-    h.arc(centre + Offset(s.width * 0.14, 0), s.width * 0.28, -_tau * 0.17, _tau * 0.27, steps: 30);
-  },
   'obj_chair': (c, s, h) {
     final w = s.width, ht = s.height;
     h.stroke([Offset(w * 0.32, ht * 0.22), Offset(w * 0.32, ht * 0.60)]);          // back
@@ -98,13 +86,27 @@ final Map<String, DrawnFeeling> kDrawnFeelings = {
     h.stroke([Offset(w * 0.51, ht * 0.21), Offset(w * 0.52, ht * 0.79)]);
     h.stroke([Offset(w * 0.25, ht * 0.50), Offset(w * 0.77, ht * 0.49)]);
   },
-  'obj_tongue_face': (c, s, h) {
+  'obj_user_pigeon': (c, s, h) {
+    // the pigeon: the feather it left on top of the cupboard, in pencil — a curved shaft with the
+    // barbs coming off it, longer in the middle, and the downy bit at the quill
     final w = s.width, ht = s.height;
-    h.dot(Offset(w * 0.38, ht * 0.40), s.width * 0.035);
-    h.dot(Offset(w * 0.62, ht * 0.39), s.width * 0.035);
-    h.arc(Offset(w * 0.50, ht * 0.52), w * 0.18, 0.35, math.pi - 0.35, steps: 22);
-    h.stroke([Offset(w * 0.50, ht * 0.66), Offset(w * 0.52, ht * 0.78), Offset(w * 0.44, ht * 0.80)],
-        width: 1.4);
+    final shaft = <Offset>[];
+    for (var i = 0; i <= 24; i++) {
+      final t = i / 24;
+      shaft.add(Offset(w * (0.22 + 0.58 * t), ht * (0.78 - 0.56 * t + 0.10 * math.sin(t * math.pi))));
+    }
+    h.stroke(shaft, wobble: 0.5, taper: 0.5, width: 1.3);
+    for (var i = 3; i < 22; i += 2) {
+      final t = i / 24;
+      final at = shaft[i];
+      final len = w * (0.06 + 0.13 * math.sin(t * math.pi));
+      final side = i.isEven ? 1.0 : -1.0;
+      h.stroke([at, at + Offset(-len * 0.55, side * len * 0.9 - len * 0.3)], taper: 0.7, width: 0.8);
+    }
+    for (var i = 0; i < 5; i++) {
+      final at = shaft[1] + Offset(w * 0.01 * i, ht * 0.01 * i);
+      h.stroke([at, at + Offset(-w * 0.05, ht * (0.03 + 0.02 * i))], taper: 0.8, width: 0.6);
+    }
   },
   'obj_scribble': (c, s, h) {
     final pts = <Offset>[];
@@ -114,23 +116,6 @@ final Map<String, DrawnFeeling> kDrawnFeelings = {
           s.height * (0.5 + 0.30 * math.sin(t * _tau * 2.6) * (1 - 0.4 * t))));
     }
     h.stroke(pts, wobble: 1.1, taper: 0.25, width: 1.2);
-  },
-  'obj_rain': (c, s, h) {
-    for (var i = 0; i < 7; i++) {
-      final x = s.width * (0.18 + (i % 4) * 0.21);
-      final y = s.height * (0.20 + (i ~/ 4) * 0.30 + (i % 3) * 0.06);
-      h.stroke([Offset(x, y), Offset(x - s.width * 0.05, y + s.height * 0.22)], taper: 0.6);
-    }
-  },
-  'obj_firework': (c, s, h) {
-    final centre = s.center(Offset.zero);
-    for (var i = 0; i < 12; i++) {
-      final a = _tau * i / 12 + 0.13;
-      final r = s.width * (0.16 + (i.isEven ? 0.28 : 0.20));
-      h.stroke([centre, Offset(centre.dx + r * math.cos(a), centre.dy + r * math.sin(a))], taper: 0.7);
-      h.dot(Offset(centre.dx + r * 1.14 * math.cos(a), centre.dy + r * 1.14 * math.sin(a)),
-          s.width * 0.018);
-    }
   },
 };
 

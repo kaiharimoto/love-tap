@@ -14,7 +14,7 @@
   },
   {
    "do": "wait",
-   "ms": 1600
+   "ms": 1200
   },
   {
    "do": "scrollTo",
@@ -22,12 +22,19 @@
   },
   {
    "do": "wait",
-   "ms": 1200
+   "ms": 900
+  },
+  {
+   "do": "far",
+   "arg": "message back by six. the pigeon is still on the cupboard, year nine have named it."
+  },
+  {
+   "do": "awaitArrival"
   },
   {
    "do": "frames",
    "dir": "evidence/frames/06_unfolding",
-   "count": 20,
+   "count": 24,
    "ms": 16
   },
   {
@@ -36,14 +43,15 @@
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/06_unfolding_b",
-   "count": 300,
+   "dir": "evidence/frames/06_unfolding",
+   "count": 242,
+   "from": 24,
    "ms": 16
   },
   {
    "do": "report",
    "out": "evidence/logs/06_unfolding.report.json",
-   "at": "06_unfolding_b"
+   "at": "06_unfolding"
   }
  ]
 }

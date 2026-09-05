@@ -10,68 +10,72 @@
  "steps": [
   {
    "do": "goTo",
-   "arg": 4
+   "arg": 1
   },
   {
    "do": "wait",
    "ms": 1400
   },
   {
-   "do": "goTo",
-   "arg": 1
+   "do": "scrollTo",
+   "arg": "end"
   },
   {
    "do": "wait",
-   "ms": 900
+   "ms": 700
   },
   {
-   "do": "openCorner",
-   "arg": true,
+   "do": "far",
+   "arg": "feeling pigeon 0.8"
+  },
+  {
+   "do": "awaitArrival"
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 110,
+   "ms": 16
+  },
+  {
+   "do": "far",
+   "arg": "feeling soup 0.55"
+  },
+  {
+   "do": "awaitArrival"
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 110,
+   "from": 110,
+   "ms": 16
+  },
+  {
+   "do": "goTo",
+   "arg": 4,
    "after": 0
   },
   {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 32,
-   "ms": 8
+   "count": 20,
+   "from": 220,
+   "ms": 16
   },
   {
-   "do": "sendFeeling",
-   "feeling": "pigeon",
-   "intensity": 0.8,
-   "after": 0
+   "do": "far",
+   "arg": "feeling soup 0.9"
   },
   {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 94,
-   "from": 32,
-   "ms": 8
-  },
-  {
-   "do": "sendFeeling",
-   "feeling": "soup",
-   "intensity": 0.55,
-   "after": 0
+   "do": "awaitArrival"
   },
   {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 150,
-   "from": 126,
-   "ms": 8
-  },
-  {
-   "do": "openCorner",
-   "arg": false,
-   "after": 0
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 32,
-   "from": 276,
-   "ms": 8
+   "count": 100,
+   "from": 240,
+   "ms": 16
   },
   {
    "do": "report",

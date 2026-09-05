@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'ambient/ambient.dart';
 import 'feelings/registry.dart';
+import 'feelings/sensation.dart';
 import 'flags.dart';
 import 'spine/projections/state.dart';
 import 'spine/projections/thread.dart';
@@ -34,7 +35,9 @@ class AppScope extends ChangeNotifier {
     required this.sync,
     required this.clock,
     Ambient? ambient,
-  }) : ambient = ambient ?? Ambient.of() {
+    Sensation? sensation,
+  })  : ambient = ambient ?? Ambient.of(),
+        sensation = sensation ?? Sensation() {
     _sub = spine.changes.listen((_) => _refresh());
     _tsub = transport.status.listen((s) {
       link = s;
@@ -52,6 +55,18 @@ class AppScope extends ChangeNotifier {
 
   /// The three surfaces the other person reaches without either of them opening anything.
   final Ambient ambient;
+
+  /// The one thing that plays a feeling on this phone — the vibrator, the sound, the page. One
+  /// rather than one per region: the capture report reads `sensation.last`, and a report that
+  /// asks the wrong instance is a clip with no haptic annotation.
+  final Sensation sensation;
+
+  /// What the ambient surfaces were last told, for the capture report: the surfaces themselves
+  /// (a standing notification, a push) cannot be photographed here, so what they were handed is
+  /// recorded as what it is — what was sent, never a picture of it arriving.
+  String? lastStandingLine;
+  String? lastPocketFeeling;
+  int? lastPocketAt;
 
   late ThreadState thread;
   late Map<Person, PersonState> state;
@@ -113,6 +128,7 @@ class AppScope extends ChangeNotifier {
     final line = standingLine(partner, partnerState, clock.now().millisecondsSinceEpoch);
     if (line != _lastStanding) {
       _lastStanding = line;
+      lastStandingLine = line;
       unawaited(ambient.standing(partner, line));
     }
     for (var i = all.length - 1; i >= 0 && i > all.length - 12; i--) {
@@ -123,6 +139,8 @@ class AppScope extends ChangeNotifier {
       final f = _feelings.byId(e.payload['feeling_id'] as String? ?? '');
       final intensity = (e.payload['intensity'] as num?)?.toDouble() ?? 0.7;
       if (f != null) {
+        lastPocketFeeling = f.id;
+        lastPocketAt = clock.now().millisecondsSinceEpoch;
         unawaited(ambient.pocket(f, intensity));
         if (!_landed.isClosed) _landed.add((f.id, intensity));
       }
@@ -179,6 +197,7 @@ class AppScope extends ChangeNotifier {
     _tsub?.cancel();
     _esub?.cancel();
     _typingTimer?.cancel();
+    sensation.dispose();
     super.dispose();
   }
 }

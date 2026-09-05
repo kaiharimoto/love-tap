@@ -17,7 +17,6 @@ cd "$(dirname "$0")"
 BROWSER="webkit"
 BUILD="yes"
 ONLY=""
-SEEDED_PORT=8799
 FRESH_PORT=8798
 DUSK_PORT=8797
 FROZEN_NOW="2026-09-03T19:40:00Z"
@@ -140,20 +139,73 @@ serve() { # dir port
 }
 stop() { [ -n "$1" ] && kill "$1" 2>/dev/null; wait "$1" 2>/dev/null; return 0; }
 
-serve "$SCRATCH/web_seeded" "$SEEDED_PORT" || { echo "no seeded build to serve"; exit 1; }
-SEEDED_PID="$SERVED"
 serve "$SCRATCH/web_fresh" "$FRESH_PORT" || { echo "no fresh build to serve"; exit 1; }
 FRESH_PID="$SERVED"
 serve "$SCRATCH/web_dusk" "$DUSK_PORT" || true
 DUSK_PID="$SERVED"
-trap 'stop "$SEEDED_PID"; stop "$FRESH_PID"; [ -n "$DUSK_PID" ] && stop "$DUSK_PID"' EXIT
+
+# ---- the far phone --------------------------------------------------------------------------------
+# Every seeded still used to be taken on one phone, unpaired, at `connecting`, so every `sent` and
+# `read` on it was a value the seed wrote. There is no Android phone in a container, but the far
+# end of the wire does not need a screen: app/tool/host_daemon.dart is the app's own spine in the
+# real host role with the real six-word pairing, carrying the same seeded year (same ids, same
+# seqs — pairing costs no pull), serving the PWA the near phone loads, and taking one instruction a
+# line: a message, a feeling, a state, a read marker, a typing frame. It is the tailnet host when
+# the two nodes are up and a loopback host when they are not, and the report says which.
+PAIR="$SCRATCH/pair.json"
+rm -f "$PAIR" "$PAIR.do"
+FAR_TRANSPORT="local"; FAR_ADDR=""; FAR_PROXY=""
+# The address files say a tailnet node was once brought up here. They do not say one is running:
+# after a container restart both files are still on disk and both daemons are gone, and the scene
+# then fails with `Could not connect to proxy server` — which reads as the app's fault and is not.
+# So the proxy is asked. A dead tailnet falls back to the local transport rather than failing,
+# and the report says which one carried it.
+if [ -f toolchain/ts/a/address ] && [ -f toolchain/ts/b/address ] \
+   && (exec 3<>/dev/tcp/127.0.0.1/1155) 2>/dev/null; then
+  FAR_TRANSPORT="tailscale"; FAR_ADDR="$(cat toolchain/ts/a/address)"; FAR_PROXY="127.0.0.1:1155"
+elif [ -f toolchain/ts/a/address ]; then
+  echo "  · the tailnet nodes are not running; the far phone will use the local transport." >&2
+  echo "    tools/tailscale/up.sh brings them back — their state survives, so no new key is needed." >&2
+fi
+# $PAIR is absolute, so it must not be joined to anything: "../$PAIR" made "..//tmp/..." and
+# the far phone died on its first write, which capture.sh then reported as "would not start"
+echo "· the far phone: the seeded year in the host role, over $FAR_TRANSPORT"
+( cd app && dart run tool/host_daemon.dart --out "$PAIR" \
+    --transport "$FAR_TRANSPORT" --address "$FAR_ADDR" --proxy "$FAR_PROXY" \
+    --pwa "$SCRATCH/web_seeded" --seed year --now "$FROZEN_NOW" --seconds 7200 \
+  ) >"$SCRATCH/host_daemon.log" 2>&1 &
+DAEMON_PID=$!
+for _ in $(seq 1 240); do [ -f "$PAIR" ] && break; sleep 0.5; done
+if [ ! -f "$PAIR" ]; then
+  echo "capture.sh: the far phone would not start; see $SCRATCH/host_daemon.log" >&2
+  tail -5 "$SCRATCH/host_daemon.log" >&2
+  exit 1
+fi
+FAR_BASE="$(python3 -c "import json;print(json.load(open('$PAIR'))['base'])")"
+echo "  · far phone up at $FAR_BASE ($(python3 -c "import json;print(json.load(open('$PAIR')).get('events'))") events)"
+trap 'echo stop >> "$PAIR.do" 2>/dev/null; stop "$FRESH_PID"; [ -n "$DUSK_PID" ] && stop "$DUSK_PID"; wait "$DAEMON_PID" 2>/dev/null' EXIT
+
+# Six words are good for ten minutes and every scene pairs a fresh near phone, so the far phone
+# mints again before each one and the scene waits for the new words to be on disk.
+remint() {
+  local was
+  was="$(python3 -c "import json;print(json.load(open('$PAIR')).get('minted_at',''))")"
+  echo pair >> "$PAIR.do"
+  for _ in $(seq 1 60); do
+    sleep 0.25
+    [ "$(python3 -c "import json;print(json.load(open('$PAIR')).get('minted_at',''))" 2>/dev/null)" != "$was" ] && return 0
+  done
+  echo "capture.sh: the far phone did not mint new words" >&2
+  return 1
+}
 sleep 2
 
-run_scene() { # name url
+run_scene() { # name url [extra scene.js args...]
   local name="$1" url="$2"
+  shift 2
   wants "$name" || return 0
   echo "· $name"
-  if node tools/capture/scene.js "evidence/scenes/$name.json" --url "$url" --browser "$BROWSER" \
+  if node tools/capture/scene.js "evidence/scenes/$name.json" --url "$url" --browser "$BROWSER" "$@" \
         >"$SCRATCH/$name.out" 2>"$SCRATCH/$name.err"; then
     echo "  ✓ $name"
   else
@@ -163,12 +215,20 @@ run_scene() { # name url
   fi
 }
 
-SEEDED_URL="http://127.0.0.1:$SEEDED_PORT/"
+# A scene on the seeded year: the near phone loads the page from the far phone, pairs with it, and
+# is connected before its first shot.
+run_far_scene() { # name
+  local name="$1"
+  wants "$name" || return 0
+  remint || return 1
+  run_scene "$name" "$FAR_BASE/" --pair "$PAIR" ${FAR_PROXY:+--proxy "http://$FAR_PROXY"}
+}
+
 FRESH_URL="http://127.0.0.1:$FRESH_PORT/"
 
-# ---- stills against the seeded year -------------------------------------------------------------
+# ---- stills against the seeded year, paired with the far phone ------------------------------------
 for s in 01_pulse 02_chat 03_us 04_moments 05_settings 12_search 13_messenger_states 14_media_viewer; do
-  [ -f "evidence/scenes/$s.json" ] && run_scene "$s" "$SEEDED_URL"
+  [ -f "evidence/scenes/$s.json" ] && run_far_scene "$s"
 done
 
 # ---- stills against a fresh install --------------------------------------------------------------
@@ -225,66 +285,35 @@ make_clip() { # name fps min_seconds
 }
 
 for s in 06_unfolding 07_feeling_landing 11_chat_scroll 15_authored_feeling; do
-  [ -f "evidence/scenes/$s.json" ] && run_scene "$s" "$SEEDED_URL"
+  [ -f "evidence/scenes/$s.json" ] && run_far_scene "$s"
 done
 make_clip 06_unfolding 60 4
 make_clip 07_feeling_landing 60 6
 make_clip 11_chat_scroll 60 4
 make_clip 15_authored_feeling 60 4
 
+# The feeling's own sound goes into the two clips that carry an arrival, at the frame the arrival
+# began, and the haptic vocabulary the app dumped during 07 is drawn to scale for the critics.
+for c in 07_feeling_landing 15_authored_feeling; do
+  if wants "$c" && [ -f "evidence/$c.mp4" ] && [ -f "$LOG/$c.json" ]; then
+    python3 tools/capture/mux_sound.py "evidence/$c.mp4" "$LOG/$c.json" --haptics "$LOG/haptics.json" \
+      > "$LOG/$c.sound.json" || echo "  ✗ $c: the sound did not go in; see $LOG/$c.sound.json"
+  fi
+done
+if [ -f "$LOG/haptics.json" ]; then
+  python3 tools/check/haptics.py "$LOG/haptics.json" --strip evidence/crops/haptics_strip.png \
+    --out "$LOG/haptics.check.json" >/dev/null || echo "  ✗ two feelings share a haptic pattern; see $LOG/haptics.check.json"
+fi
+
 # ---- the clip that needs a second device ---------------------------------------------------------
-# There is no Android phone in a container: no /dev/kvm, so the emulator will not boot, and no GTK,
-# so there is no desktop build either. But 08 does not need the far phone to be *visible* — it needs
-# a gesture on one device to become a sensation on the other. app/tool/host_daemon.dart is that far
-# device: a real spine, the real transport in its host role, the real six-word pairing, headless.
-# It is the tailnet host when the two nodes are up and a loopback host when they are not, and the
-# report says which. 09_two_devices does need both screens, so it stays missing.
-PAIR="$SCRATCH/pair.json"
+# 08 is a gesture on one device becoming a sensation on the other. The far phone is the same one
+# every seeded still was taken against, so the state change crosses on the fourteen-thousand-event
+# log rather than on an eight-event fixture. 09_two_devices does need both screens, so it stays
+# missing.
 if wants 08_state_propagating && [ -f evidence/scenes/08_state_propagating.json ]; then
-  rm -f "$PAIR" "$PAIR.do"
-  FAR_TRANSPORT="local"; FAR_ADDR=""; FAR_PROXY=""
-  # The address files say a tailnet node was once brought up here. They do not say one is running:
-  # after a container restart both files are still on disk and both daemons are gone, and the scene
-  # then fails with `Could not connect to proxy server` — which reads as the app's fault and is not.
-  # So the proxy is asked. A dead tailnet falls back to the local transport rather than failing,
-  # and the report says which one carried it.
-  if [ -f toolchain/ts/a/address ] && [ -f toolchain/ts/b/address ] \
-     && (exec 3<>/dev/tcp/127.0.0.1/1155) 2>/dev/null; then
-    FAR_TRANSPORT="tailscale"; FAR_ADDR="$(cat toolchain/ts/a/address)"; FAR_PROXY="127.0.0.1:1155"
-  elif [ -f toolchain/ts/a/address ]; then
-    echo "  · the tailnet nodes are not running; the far phone will use the local transport." >&2
-    echo "    tools/tailscale/up.sh brings them back — their state survives, so no new key is needed." >&2
+  if run_far_scene 08_state_propagating; then
+    make_clip 08_state_propagating 60 8
   fi
-  # The far phone serves the page the near one loads, which is how the two of them actually work:
-  # the host serves the conversation and the page that reads it, from one origin. It is also the
-  # only arrangement a browser will accept — a page served off the loopback file server is a
-  # different origin from the host, and nothing in this transport sends an
-  # Access-Control-Allow-Origin header, because on the phones there is nothing to allow.
-  # $PAIR is absolute, so it must not be joined to anything: "../$PAIR" made "..//tmp/..." and
-  # the far phone died on its first write, which capture.sh then reported as "would not start"
-  ( cd app && dart run tool/host_daemon.dart --out "$PAIR" \
-      --transport "$FAR_TRANSPORT" --address "$FAR_ADDR" --proxy "$FAR_PROXY" \
-      --pwa "$SCRATCH/web_fresh" --seconds 900 \
-    ) >"$SCRATCH/host_daemon.log" 2>&1 &
-  DAEMON_PID=$!
-  for _ in $(seq 1 60); do [ -f "$PAIR" ] && break; sleep 0.5; done
-  if [ -f "$PAIR" ]; then
-    FAR_BASE="$(python3 -c "import json;print(json.load(open('$PAIR'))['base'])")"
-    echo "· 08_state_propagating (the far phone is headless and serving, over $FAR_TRANSPORT)"
-    if node tools/capture/scene.js evidence/scenes/08_state_propagating.json \
-          --url "$FAR_BASE/" --browser "$BROWSER" --pair "$PAIR" \
-          ${FAR_PROXY:+--proxy "http://$FAR_PROXY"} \
-          >"$SCRATCH/08.out" 2>"$SCRATCH/08.err"; then
-      echo "  ✓ 08_state_propagating"
-      make_clip 08_state_propagating 60 8
-    else
-      note_missing "08_state_propagating.mp4" "$(head -1 "$SCRATCH/08.err" | cut -c1-160)"
-    fi
-    echo "stop" >> "$PAIR.do"
-  else
-    note_missing "08_state_propagating.mp4" "the far phone would not start; see $SCRATCH/host_daemon.log"
-  fi
-  wait "$DAEMON_PID" 2>/dev/null || true
 fi
 
 # ---- the two artifacts that need the Android phone -----------------------------------------------
@@ -302,7 +331,7 @@ if adb shell true >/dev/null 2>&1; then
         --dart-define=CAPTURE=true --dart-define=PROFILE=fresh) >"$SCRATCH/build_apk_fresh.log" 2>&1 \
       && cp app/build/app/outputs/flutter-apk/app-debug.apk "$SCRATCH/app-fresh.apk"
   fi
-  bash tools/capture/android.sh "$SEEDED_URL" "$FRESH_URL" || true
+  bash tools/capture/android.sh "$FAR_BASE/" "$FRESH_URL" || true
 else
   for s in 09_two_devices.png 16_setup_android.png; do
     wants "${s%.*}" && note_missing "$s" "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start — adbd answered after 113 minutes — but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA"

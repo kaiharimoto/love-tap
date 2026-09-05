@@ -1,23 +1,23 @@
 {
  "transport": "local",
- "generated_at": "2026-09-05T01:15:45.403768Z",
+ "generated_at": "2026-09-05T15:54:00.201757Z",
  "host": {
   "transport": "local",
   "role": "host",
   "state": "connected",
-  "address": "127.0.0.1:44907",
+  "address": "127.0.0.1:45761",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-05T01:15:45.388428Z",
-  "last_contact": "2026-09-05T01:15:45.400459Z",
+  "since": "2026-09-05T15:54:00.180838Z",
+  "last_contact": "2026-09-05T15:54:00.199621Z",
   "device_id": "android-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-05T01:15:44.835215Z"
+   "paired_at": "2026-09-05T15:53:59.002404Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -30,19 +30,19 @@
   "transport": "local",
   "role": "client",
   "state": "connected",
-  "address": "http://127.0.0.1:44907",
+  "address": "http://127.0.0.1:45761",
   "peer_cursor": 174,
   "our_cursor": 174,
   "last_error": null,
-  "since": "2026-09-05T01:15:45.149155Z",
-  "last_contact": "2026-09-05T01:15:45.402054Z",
+  "since": "2026-09-05T15:53:59.498294Z",
+  "last_contact": "2026-09-05T15:54:00.200743Z",
   "device_id": "pwa-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-05T01:15:44.841761Z"
+   "paired_at": "2026-09-05T15:53:59.009763Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -85,6 +85,10 @@
   "delete": {
    "ok": true,
    "detail": "the row became a stub on the host"
+  },
+  "typing": {
+   "ok": true,
+   "detail": "typing frame reached the host as an ephemeral; neither log grew by it"
   },
   "voice_note": {
    "ok": true,
@@ -161,7 +165,7 @@
   "later_check": {
    "status": "pending",
    "why": "the nodes were not answering when this was re-run; the run above stands",
-   "checked_at": "2026-09-05T01:15:47.483295Z"
+   "checked_at": "2026-09-05T15:54:00.243067Z"
   }
  }
 }

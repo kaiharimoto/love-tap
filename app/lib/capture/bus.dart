@@ -55,6 +55,11 @@ class CaptureBus {
   /// Chat: which rows are on screen, and where the thread is sitting.
   static Report Function()? chatReport;
 
+  /// Moments: which tiles are on screen and whether their pictures have arrived. The capture
+  /// report used to describe Chat's thread whatever region was showing, so five regions' logs
+  /// said the same seven notes were visible when four of them showed none.
+  static Report Function()? momentsReport;
+
   /// Chat: open every folded note on screen at once, for the unfolding clip.
   static void Function()? unfoldAll;
 
@@ -71,6 +76,7 @@ class CaptureBus {
     openViewer = null;
     search = null;
     chatReport = null;
+    momentsReport = null;
     scrollBy = null;
     stageStates = null;
     unfoldAll = null;

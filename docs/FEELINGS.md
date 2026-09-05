@@ -31,16 +31,24 @@ Intensity scales: haptic amplitude (×0.45 → ×1.0), object scale (×0.88 → 
 | Static | distress, frustration | jittery rapid buzz, uneven | crumpled anything | hard-pressed biro | crumples, scratches |
 | Sparkle | celebration | ascending bursts | legal pad | highlighter over ink | punches, foil, rustle |
 
+## What is never an object here
+
+No sun, moon, face, star, crown, heart or firework, however it is made. Drawn by hand or folded
+from card, those are the standard emoji set and a reader names them as such; a foil star and a
+crown are the two canonical reward tokens. Every object in the table is something that would be
+left on a desk between two people — a cork, a bookmark, a wrapper, bunting — and reads as that
+thing before it reads as a symbol.
+
 ## The table
 
 | id | family | shown as (in hand) | object asset | haptic sequence | sound | colour |
 |---|---|---|---|---|---|---|
-| `squeeze` | Warmth | a squeeze | `obj_heart_fold` — an origami heart | 80@90 off40 160@160 off40 320@230 | `snd_squeeze` press | `#1f2a44` |
+| `squeeze` | Warmth | a squeeze | `obj_pinch` — a strip of paper pinched between finger and thumb | 80@90 off40 160@160 off40 320@230 | `snd_squeeze` press | `#1f2a44` |
 | `forehead` | Warmth | forehead | `obj_thumbprint` — a blue-ink thumbprint | 200@120 off120 200@120 | `snd_forehead` two soft presses | `#1f2a44` |
 | `warm_palm` | Warmth | warm palm | `obj_coffee_ring` — a coffee ring with a heart drawn inside | 600@140 | `snd_palm` slow rub | `#a67c52` |
 | `nuzzle` | Warmth | nuzzle | `obj_clover` — a pressed clover | 90@150 off60 90@150 off60 90@150 off200 400@110 | `snd_nuzzle` three small rustles, one long | `#5d7a4a` |
-| `thinking_of_you` | Warmth | thinking of you | `obj_margin_sun` — a sun doodled in a margin | 40@80 off300 40@80 off300 260@170 | `snd_thinking` two ticks, a press | `#1f2a44` |
-| `goodnight` | Warmth | goodnight | `obj_corner_moon` — a folded corner with a moon | 500@120 off200 250@80 off200 120@50 | `snd_goodnight` fading press | `#2c3555` |
+| `thinking_of_you` | Warmth | thinking of you | `obj_bookmark` — a torn bookmark, one end folded over | 40@80 off300 40@80 off300 260@170 | `snd_thinking` two ticks, a press | `#1f2a44` |
+| `goodnight` | Warmth | goodnight | `obj_dog_ear` — a card with its corner turned down | 500@120 off200 250@80 off200 120@50 | `snd_goodnight` fading press | `#2c3555` |
 | `miss_you` | Ache | miss you | `obj_crane` — a paper crane | 150@220 off600 150@150 off600 150@90 | `snd_miss` page turned, slower each time | `#3a3a3c` |
 | `empty_chair` | Ache | empty chair | `obj_chair` — a pencil chair | 300@200 off900 300@100 | `snd_chair` two slow breaths | `#3a3a3c` |
 | `come_home` | Ache | come home | `obj_string_loop` — a loop of string | 60@255 off200 60@255 off200 60@255 off800 400@120 | `snd_home` three knocks, a sigh | `#6b5a3e` |
@@ -53,7 +61,7 @@ Intensity scales: haptic amplitude (×0.45 → ×1.0), object scale (×0.88 → 
 | `make_you_tea` | Shelter | i'll make you tea | `obj_mug` — a mug with steam | 100@120 off100 100@120 off100 500@150 | `snd_tea` two clinks, a pour | `#8b6b4a` |
 | `hold` | Shelter | hold | `obj_candle` — a candle stub | 900@150 off100 900@150 | `snd_hold` two long presses | `#b89a5a` |
 | `poke` | Mischief | poke | `obj_spitball` — a spitball | 30@255 | `snd_poke` one flick | `#a8322b` |
-| `nyeh` | Mischief | nyeh | `obj_tongue_face` — a biro tongue-out face | 30@200 off50 30@200 off50 90@255 | `snd_nyeh` two taps, a raspberry of paper | `#a8322b` |
+| `nyeh` | Mischief | nyeh | `obj_wrapper` — a sweet wrapper twisted at both ends | 30@200 off50 30@200 off50 90@255 | `snd_nyeh` two taps, a raspberry of paper | `#a8322b` |
 | `catch` | Mischief | catch | `obj_plane` — a paper plane | 40@120 off30 40@160 off30 40@200 off30 40@240 off30 120@255 | `snd_catch` rising flutter, a land | `#a8322b` |
 | `pick_one` | Mischief | pick one | `obj_fortune_teller` — a paper fortune teller | 50@180 off120 ×6 | `snd_pick` six folds | `#e0a8b8` |
 | `snap` | Mischief | snap | `obj_rubber_band` — a rubber band | 20@255 off40 60@255 off400 20@180 | `snd_snap` stretch, snap, drop | `#c98a5a` |
@@ -62,12 +70,12 @@ Intensity scales: haptic amplitude (×0.45 → ×1.0), object scale (×0.88 → 
 | `ugh` | Static | ugh | `obj_scribble` — a scribbled-out line | 180@255 off60 180@255 off60 180@255 | `snd_ugh` three hard scratches | `#141a2e` |
 | `snapped` | Static | snapped | `obj_snapped_pencil` — a snapped pencil | 15@255 off15 15@255 off15 15@255 off300 500@255 | `snd_snapped` three cracks, a long scrape | `#3a3a3c` |
 | `tangled` | Static | tangled | `obj_knot` — a knot of thread | 40@180 off20 80@220 off20 40@180 off20 120@255 off20 40@180 off20 80@220 | `snd_tangled` uneven thread pulls | `#6b5a3e` |
-| `grey` | Static | grey | `obj_rain` — rain in pencil | (60@70 off60) ×8 | `snd_grey` faint patter | `#8a8a8e` |
+| `grey` | Static | grey | `obj_pencil_smudge` — a graphite smudge on a scrap | (60@70 off60) ×8 | `snd_grey` faint patter | `#8a8a8e` |
 | `not_okay` | Static | not okay | `obj_torn_corner` — a torn-off corner | 400@255 off100 40@255 off100 40@255 off100 40@255 | `snd_notokay` one tear, three taps | `#141a2e` |
-| `did_it` | Sparkle | did it | `obj_gold_star` — a foil star sticker | 40@120 off60 40@170 off60 40@220 off60 200@255 | `snd_didit` three rising taps, a peel | `#c9a23a` |
+| `did_it` | Sparkle | did it | `obj_cork` — a popped cork on its side | 40@120 off60 40@170 off60 40@220 off60 200@255 | `snd_didit` three rising taps, a peel | `#c9a23a` |
 | `confetti` | Sparkle | confetti | `obj_confetti` — hole-punch circles | 30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150 | `snd_confetti` a handful of punches | `#f2a8c0` |
-| `yes` | Sparkle | yes | `obj_firework` — a biro firework | 60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255 | `snd_yes` rising, then two bursts | `#a8322b` |
-| `crown` | Sparkle | crown | `obj_crown` — a paper crown | 100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255 | `snd_crown` four rising folds, a flourish | `#f4ea6a` |
+| `yes` | Sparkle | yes | `obj_bunting` — three flags of bunting on a thread | 60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255 | `snd_yes` rising, then two bursts | `#a8322b` |
+| `crown` | Sparkle | paper hat | `obj_party_hat` — a tissue hat out of a cracker, on its side | 100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255 | `snd_crown` four rising folds, a flourish | `#f4ea6a` |
 | `treat` | Sparkle | treat | `obj_ribbon` — a curled ribbon | 50@200 off80 50@200 off80 300@150 off80 50@255 | `snd_treat` two snips, a curl, a tap | `#f2a8c0` |
 
 34 feelings · Warmth 6 · Ache 5 · Shelter 6 · Mischief 6 · Static 6 · Sparkle 5.

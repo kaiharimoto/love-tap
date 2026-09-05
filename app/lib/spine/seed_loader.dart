@@ -6,9 +6,17 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
-import 'package:flutter/services.dart' show AssetBundle;
 
 import 'spine.dart';
+
+/// Where the seed's files come from. The app reads them out of its asset bundle; the headless far
+/// phone (app/tool/host_daemon.dart) reads the same files off disk, so the two phones in a
+/// capture carry the same year — same ids, same seqs — before either has spoken to the other.
+/// Kept free of Flutter so a plain Dart program can hold one.
+abstract class SeedSource {
+  Future<String> loadString(String path);
+  Future<Uint8List> loadBytes(String path);
+}
 
 class SeedReport {
   SeedReport({required this.events, required this.blobs, required this.skipped, required this.anchors});
@@ -19,9 +27,9 @@ class SeedReport {
 }
 
 class SeedLoader {
-  SeedLoader(this.bundle, {this.prefix = 'assets/seed'});
+  SeedLoader(this.source, {this.prefix = 'assets/seed'});
 
-  final AssetBundle bundle;
+  final SeedSource source;
   final String prefix;
 
   static const metaKey = 'seed.loaded';
@@ -31,7 +39,7 @@ class SeedLoader {
   /// Loads every month listed in assets/seed/index.json. Idempotent: does nothing when loaded.
   Future<SeedReport?> load(Spine spine) async {
     if (await alreadyLoaded(spine)) return null;
-    final index = jsonDecode(await bundle.loadString('$prefix/index.json')) as Map<String, dynamic>;
+    final index = jsonDecode(await source.loadString('$prefix/index.json')) as Map<String, dynamic>;
     final months = (index['months'] as List).cast<String>();
     final voiceIndex = await _optionalJson('$prefix/voice/index.json');
     final waveforms = <String, List<double>>{};
@@ -56,7 +64,7 @@ class SeedLoader {
     var blobs = 0;
     var seq = 0;
     for (final month in months) {
-      final text = await bundle.loadString('$prefix/year/$month.jsonl');
+      final text = await source.loadString('$prefix/year/$month.jsonl');
       for (final raw in const LineSplitter().convert(text)) {
         if (raw.trim().isEmpty) continue;
         final j = jsonDecode(raw) as Map<String, dynamic>;
@@ -179,11 +187,11 @@ class SeedLoader {
     return UlidFactory(random: Random(x)).next(ts);
   }
 
-  Future<Uint8List> _bytes(String path) async => (await bundle.load(path)).buffer.asUint8List();
+  Future<Uint8List> _bytes(String path) => source.loadBytes(path);
 
   Future<dynamic> _optionalJson(String path) async {
     try {
-      return jsonDecode(await bundle.loadString(path));
+      return jsonDecode(await source.loadString(path));
     } catch (_) {
       return null;
     }

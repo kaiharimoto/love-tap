@@ -160,34 +160,81 @@ class _Fact extends StatelessWidget {
   }
 }
 
-/// The day's traffic: every feeling that crossed in the last day, laid along the desk in the order
-/// it arrived. A glance says how the day has gone.
+/// The day's traffic: every feeling that crossed in the last day, laid along the desk newest
+/// first, so the one that has just landed is the one under your eye. A glance says how the day
+/// has gone; a name and a time under each one says what was felt and when.
+///
+/// It used to be oldest first with no way to scroll, so a feeling that arrived while you watched
+/// was appended off the right-hand edge of the row and nothing on screen changed — a clip named
+/// for a feeling landing showed the same five objects in the same five places from first frame to
+/// last.
 class _Traffic extends StatelessWidget {
   const _Traffic({required this.events, required this.registry, required this.me});
   final List<Event> events;
   final FeelingRegistry registry;
   final Person me;
 
+  /// The ids that were already on the desk. Anything not in here when it is first drawn has just
+  /// arrived, and lands.
+  static final Set<String> _seen = {};
+  static bool _primed = false;
+
   @override
   Widget build(BuildContext context) {
     if (events.isEmpty) return const SizedBox.shrink();
+    final newestFirst = events.reversed.toList();
+    if (!_primed) {
+      _seen.addAll(newestFirst.map((e) => e.id));
+      _primed = true;
+    }
     return SizedBox(
-      height: 92,
+      height: 124,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: events.length,
+        itemCount: newestFirst.length,
         itemBuilder: (context, i) {
-          final e = events[i];
+          final e = newestFirst[i];
           final f = registry.byId(e.payload['feeling_id'] as String);
           if (f == null) return const SizedBox.shrink();
           final mine = e.author == me;
+          final landing = !_seen.contains(e.id);
+          _seen.add(e.id);
+          final when = DateTime.fromMillisecondsSinceEpoch(e.ts, isUtc: true).toLocal();
+          final hh = when.hour.toString().padLeft(2, '0');
+          final mm = when.minute.toString().padLeft(2, '0');
+          Widget object = FeelingObject(
+            feeling: f,
+            size: 66,
+            intensity: (e.payload['intensity'] as num).toDouble(),
+            tilt: ((hashOf(e.id) % 24) - 12) / 80,
+          );
+          if (landing) {
+            // it lands: from a little above, settling, its shadow already where it will end up
+            object = Settling(
+              key: ValueKey('land.${e.id}'),
+              duration: Motion.land,
+              curve: Motion.drop,
+              builder: (_, t, child) => Transform.translate(
+                offset: Offset(0, -22 * (1 - t)),
+                child: Opacity(opacity: (t * 3).clamp(0.0, 1.0), child: child),
+              ),
+              child: object,
+            );
+          }
           return Padding(
-            padding: EdgeInsets.only(right: 4, top: mine ? 14 : 0),
-            child: FeelingObject(
-              feeling: f,
-              size: 66,
-              intensity: (e.payload['intensity'] as num).toDouble(),
-              tilt: ((hashOf(e.id) % 24) - 12) / 80,
+            padding: EdgeInsets.only(right: 6, top: mine ? 10 : 0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                object,
+                const SizedBox(height: 2),
+                SizedBox(
+                  width: 72,
+                  child: Text(f.name, style: Hands.onDesk(size: 10), maxLines: 1,
+                      overflow: TextOverflow.ellipsis, textAlign: TextAlign.center),
+                ),
+                Text('$hh:$mm${mine ? '' : ' · ${e.author.name}'}', style: Hands.onDesk(size: 8.5)),
+              ],
             ),
           );
         },

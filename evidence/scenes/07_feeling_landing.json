@@ -17,53 +17,61 @@
    "ms": 1400
   },
   {
-   "do": "openCorner",
-   "arg": true,
+   "do": "haptics",
+   "out": "evidence/logs/haptics.json"
+  },
+  {
+   "do": "far",
+   "arg": "feeling hold 0.9"
+  },
+  {
+   "do": "awaitArrival"
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/07_feeling_landing",
+   "count": 132,
+   "ms": 16
+  },
+  {
+   "do": "far",
+   "arg": "feeling squeeze 0.75"
+  },
+  {
+   "do": "awaitArrival"
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/07_feeling_landing",
+   "count": 106,
+   "from": 132,
+   "ms": 16
+  },
+  {
+   "do": "goTo",
+   "arg": 1,
    "after": 0
   },
   {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing",
-   "count": 32,
-   "ms": 8
+   "count": 20,
+   "from": 238,
+   "ms": 16
   },
   {
-   "do": "sendFeeling",
-   "feeling": "hold",
-   "intensity": 0.85,
-   "after": 0
+   "do": "far",
+   "arg": "feeling nuzzle 0.8"
   },
   {
-   "do": "frames",
-   "dir": "evidence/frames/07_feeling_landing",
-   "count": 160,
-   "from": 32,
-   "ms": 8
-  },
-  {
-   "do": "sendFeeling",
-   "feeling": "squeeze",
-   "intensity": 0.6,
-   "after": 0
+   "do": "awaitArrival"
   },
   {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing",
-   "count": 160,
-   "from": 192,
-   "ms": 8
-  },
-  {
-   "do": "openCorner",
-   "arg": false,
-   "after": 0
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/07_feeling_landing",
-   "count": 32,
-   "from": 352,
-   "ms": 8
+   "count": 108,
+   "from": 258,
+   "ms": 16
   },
   {
    "do": "report",

@@ -78,6 +78,26 @@ function ensure(p) {
   await page.waitForFunction('window.__deskReady === true', { timeout: scene.wait || 60000 });
   log.cold_ms = Date.now() - t0;
 
+  // Paired before anything else, when a far phone was given and the scene does not pair itself:
+  // every still is then a picture of a phone that is talking to the other one, on the real log,
+  // rather than of one sitting unpaired at `connecting` with markers the seed wrote.
+  const pairsItself = scene.steps.some((s) => s.do === 'pair');
+  if (pairPath && !pairsItself) {
+    const started = Date.now();
+    const pair = JSON.parse(fs.readFileSync(abs(pairPath), 'utf8'));
+    const answer = await page.evaluate(
+      ([b, w]) => Promise.resolve(window.__deskPair && window.__deskPair(b, w)).then((r) => String(r)).catch((e) => 'threw: ' + e),
+      [pair.base, pair.words],
+    );
+    if (answer !== 'ok') throw new Error(`pairing with the far phone -> ${answer}`);
+    // and connected: one round of the sync engine has to have answered before the shot
+    await page.waitForFunction(() => {
+      const r = window.__deskReport && JSON.parse(window.__deskReport());
+      return r && r.link === 'connected';
+    }, { timeout: 20000 }).catch(() => {});
+    log.steps.push({ do: 'pair', ms: Date.now() - started, auto: true, far: pair.base });
+  }
+
   // Every handle answers with a sentence: 'ok', or what was missing. A step that did not land is
   // a failed scene, not a screenshot of the wrong screen.
   async function hook(name, ...args) {
@@ -97,6 +117,8 @@ function ensure(p) {
     return Number.isFinite(n) ? n : -1;
   }
   let countBeforeFar = -1;
+  let lastFarLine = '';
+  let framesSoFar = 0;
 
   for (const step of scene.steps) {
     const started = Date.now();
@@ -133,7 +155,10 @@ function ensure(p) {
         // The thread's length is noted first, so `awaitArrival` can tell when what was asked for
         // has actually crossed the wire and landed in this phone's log.
         countBeforeFar = await count();
+        lastFarLine = step.arg;
         farSay(step.arg);
+        log.far = log.far || [];
+        log.far.push({ line: step.arg, at_frame: framesSoFar });
         break;
       }
       case 'awaitArrival': {
@@ -151,7 +176,9 @@ function ensure(p) {
           now = await count();
         }
         log.arrivals = log.arrivals || [];
-        log.arrivals.push({ before: countBeforeFar, after: now, waited_ms: Date.now() - (deadline - (step.timeout || 30000)) });
+        // at_frame is where in the assembled clip this arrival begins: the frames grabbed so far
+        log.arrivals.push({ line: lastFarLine, before: countBeforeFar, after: now, at_frame: framesSoFar,
+                            waited_ms: Date.now() - (deadline - (step.timeout || 30000)) });
         break;
       }
       case 'showWords':
@@ -235,10 +262,19 @@ function ensure(p) {
           const name = path.join(dir, String(from + i).padStart(4, '0') + '.png');
           await page.screenshot({ path: name, fullPage: false, clip: step.clip });
           names.push(path.relative(ROOT, name));
+          framesSoFar += 1;
           await page.evaluate((m) => window.__deskStep(m), ms);
         }
         if (drive && drive.kind === 'drag' && !drive.release) await page.mouse.up();
         log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms, drive: drive || null });
+        break;
+      }
+      case 'haptics': {
+        // every feeling's pattern, from the app's own registry, written where a critic can read it
+        const raw = await page.evaluate(() => window.__deskHaptics && window.__deskHaptics());
+        const out = abs(step.out || 'evidence/logs/haptics.json');
+        ensure(out);
+        fs.writeFileSync(out, raw ? JSON.stringify(JSON.parse(raw), null, 1) : JSON.stringify({ missing: 'no haptics handle' }));
         break;
       }
       case 'report': {

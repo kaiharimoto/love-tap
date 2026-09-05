@@ -8,6 +8,7 @@
 // This loads the real bundle the same way the app does and insists on the whole thing.
 import 'dart:convert';
 
+import 'package:desk/spine/seed_bundle.dart';
 import 'package:desk/spine/seed_loader.dart';
 import 'package:desk/spine/spine.dart';
 import 'package:desk/spine/store/store.dart';
@@ -61,7 +62,7 @@ void main() {
       SpineStore.memory(),
       const Identity(person: Person.teo, device: DeviceKind.pwa),
     );
-    report = (await SeedLoader(rootBundle).load(spine))!;
+    report = (await SeedLoader(BundleSeedSource(rootBundle)).load(spine))!;
   });
 
   test('every line of the year is in the log', () async {

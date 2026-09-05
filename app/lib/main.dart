@@ -9,6 +9,7 @@ import 'flags.dart';
 import 'scope.dart';
 import 'material/library.dart';
 import 'ready.dart';
+import 'spine/seed_bundle.dart';
 import 'spine/seed_loader.dart';
 import 'spine/store/open_store.dart';
 import 'spine/spine.dart';
@@ -45,7 +46,7 @@ Future<AppScope> bootstrap() async {
   final spine = await Spine.open(store, identity);
 
   if (Flags.seeded) {
-    await SeedLoader(rootBundle).load(spine);
+    await SeedLoader(BundleSeedSource(rootBundle)).load(spine);
   }
 
   final clock = Clock(frozenAt: Flags.frozenNow.isEmpty ? null : DateTime.parse(Flags.frozenNow));

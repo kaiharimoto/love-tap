@@ -29,12 +29,28 @@
   },
   {
    "do": "wait",
-   "ms": 900
+   "ms": 1800
+  },
+  {
+   "do": "far",
+   "arg": "read"
+  },
+  {
+   "do": "wait",
+   "ms": 1600
+  },
+  {
+   "do": "far",
+   "arg": "typing on"
+  },
+  {
+   "do": "wait",
+   "ms": 1200
   },
   {
    "do": "shot",
    "out": "evidence/13_messenger_states.png",
-   "settle": 1200
+   "settle": 900
   },
   {
    "do": "report",

@@ -2,6 +2,14 @@
 //
 //   dart run tool/host_daemon.dart --out .../pair.json --transport tailscale \
 //       --address 100.68.254.25 --proxy 127.0.0.1:1155 --seconds 90
+//   dart run tool/host_daemon.dart --out .../pair.json --seed year --now 2026-09-03T19:40:00Z
+//
+// With --seed year the far phone carries the same seeded year the near one does, read off disk
+// from the packed app/assets/seed/ (the same files the app bundles), so both spines hold the same
+// fourteen thousand events with the same ids and seqs before they have exchanged a byte: pairing
+// costs no pull, and every still is taken paired and connected on the real log rather than on a
+// fixture. --now is the frozen clock the year is written against; what the far phone writes is
+// stamped from it plus the seconds that have passed, the way the near phone's driven clock is.
 //
 // The propagation clip and the two-device frame need a device at the other end of the wire. This
 // container has no Android phone — there is no /dev/kvm, so the emulator cannot boot — and no GTK,
@@ -16,12 +24,27 @@
 // this makes happen.
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
-import 'package:desk/feelings/builtins.dart';
+import 'package:desk/feelings/registry.dart';
+import 'package:desk/spine/seed_loader.dart';
 import 'package:desk/spine/spine.dart';
 import 'package:desk/spine/store/store_sqlite.dart';
 import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/tailscale/tailscale_transport.dart';
+
+/// The seed's files read off disk: the packed copy under app/assets/seed/, which is what the app
+/// bundles, so the two phones read the very same bytes.
+class FileSeedSource implements SeedSource {
+  FileSeedSource(this.root);
+  final String root;
+
+  @override
+  Future<String> loadString(String path) => File('$root/$path').readAsString();
+
+  @override
+  Future<Uint8List> loadBytes(String path) => File('$root/$path').readAsBytes();
+}
 
 String _arg(List<String> a, String name, String dflt) {
   final i = a.indexOf('--$name');
@@ -41,10 +64,27 @@ Future<void> main(List<String> argv) async {
   // server is a different origin from a host on the tailnet, and nothing in this transport sends
   // an Access-Control-Allow-Origin header, because on the phones there is nothing to allow.
   final pwa = _arg(argv, 'pwa', '');
+  final seed = _arg(argv, 'seed', '');
+  final nowArg = _arg(argv, 'now', '');
   final dir = await Directory.systemTemp.createTemp('host-daemon-');
 
   final spine = await Spine.open(NativeStore.openAt('${dir.path}/host.sqlite3'),
       const Identity(person: Person.noor, device: DeviceKind.android));
+
+  // The clock the far phone stamps with: the frozen now the year is written against, moving
+  // forward with the wall clock from the moment this started. Without it a message from the far
+  // phone carried today's date into a thread whose "now" is two days earlier.
+  final frozenAt = nowArg.isEmpty ? null : DateTime.parse(nowArg).toUtc();
+  final startedAt = DateTime.now().toUtc();
+  DateTime now() => frozenAt == null ? DateTime.now().toUtc() : frozenAt.add(DateTime.now().toUtc().difference(startedAt));
+
+  if (seed == 'year') {
+    final t0 = DateTime.now();
+    final report = await SeedLoader(FileSeedSource(Directory.current.path)).load(spine);
+    stdout.writeln('host-daemon: seeded year loaded: ${report?.events ?? 0} events, '
+        '${report?.blobs ?? 0} blobs, ${report?.skipped.length ?? 0} skipped, '
+        '${DateTime.now().difference(t0).inMilliseconds} ms');
+  }
 
   final Transport transport;
   if (kind == 'tailscale') {
@@ -57,18 +97,30 @@ Future<void> main(List<String> argv) async {
         pwaRoot: pwa.isEmpty ? null : pwa);
   }
   await transport.start();
-  final code = await (transport as dynamic).beginPairing();
 
   // Everything the far side needs to find this one and prove who it is. Written as a file rather
-  // than printed, so the capture harness reads it without parsing stdout.
-  await File(out).writeAsString(const JsonEncoder.withIndent(' ').convert({
-    'transport': kind,
-    'base': kind == 'tailscale' ? 'http://$address:$port' : 'http://127.0.0.1:$port',
-    'words': code.spoken,
-    'device_id': 'android-capture',
-    'person': 'noor',
-    'started_at': DateTime.now().toUtc().toIso8601String(),
-  }));
+  // than printed, so the capture harness reads it without parsing stdout. Minted again on request
+  // (`pair` on the control file): a pairing code has a window, and a capture that runs for an
+  // hour pairs a fresh near phone for every scene.
+  Future<void> mint() async {
+    final code = await (transport as dynamic).beginPairing();
+    final tmp = File('$out.tmp');
+    await tmp.writeAsString(const JsonEncoder.withIndent(' ').convert({
+      'transport': kind,
+      'base': kind == 'tailscale' ? 'http://$address:$port' : 'http://127.0.0.1:$port',
+      'words': code.spoken,
+      'device_id': 'android-capture',
+      'person': 'noor',
+      'seed': seed.isEmpty ? null : seed,
+      'events': spine.length,
+      'now': now().toIso8601String(),
+      'started_at': startedAt.toIso8601String(),
+      'minted_at': DateTime.now().toUtc().toIso8601String(),
+    }));
+    await tmp.rename(out);
+  }
+
+  await mint();
   stdout.writeln('host-daemon: up on ${kind == 'tailscale' ? address : '127.0.0.1'}:$port');
   stdout.writeln('host-daemon: six words written to $out');
 
@@ -76,7 +128,9 @@ Future<void> main(List<String> argv) async {
   // One instruction per line, taken and removed. This is how a clip makes something happen on the
   // far phone at the exact frame it wants it.
   final control = File('$out.do');
-  final feelings = {for (final f in kBuiltInFeelings) f.id: f};
+  // the built-ins and every feeling either of them has made, from the same log the near phone
+  // reads them from: an authored feeling is sent the way a built-in is, because it is one
+  final registry = FeelingRegistry(spine.all);
   final deadline = DateTime.now().add(Duration(seconds: seconds));
   while (DateTime.now().isBefore(deadline)) {
     if (await control.exists()) {
@@ -86,12 +140,15 @@ Future<void> main(List<String> argv) async {
         final parts = line.trim().split(' ');
         if (parts.isEmpty || parts.first.isEmpty) continue;
         if (parts.first == 'feeling' && parts.length >= 2) {
-          final f = feelings[parts[1]];
-          if (f == null) continue;
+          final f = registry.byId(parts[1]);
+          if (f == null) {
+            stdout.writeln('host-daemon: no feeling called ${parts[1]}');
+            continue;
+          }
           final e = await spine.append('feeling', {
             'feeling_id': f.id,
             'intensity': parts.length > 2 ? double.parse(parts[2]) : 0.85,
-          }, at: DateTime.now(), hostAssign: true);
+          }, at: now(), hostAssign: true);
           stdout.writeln('host-daemon: sent ${f.id} as ${e.id}');
         } else if (parts.first == 'state' && parts.length >= 3) {
           // What 08 is actually about: one of them says how they are, and the other one's phone
@@ -100,12 +157,28 @@ Future<void> main(List<String> argv) async {
           final e = await spine.append('state_declared', {
             'signal': parts[1],
             'value': parts.skip(2).join(' '),
-          }, at: DateTime.now(), hostAssign: true);
+          }, at: now(), hostAssign: true);
           stdout.writeln('host-daemon: said ${parts[1]} is ${parts.skip(2).join(' ')} as ${e.id}');
         } else if (parts.first == 'message') {
           final e = await spine.append('message', {'text': parts.skip(1).join(' ')},
-              at: DateTime.now(), hostAssign: true);
+              at: now(), hostAssign: true);
           stdout.writeln('host-daemon: sent a message as ${e.id}');
+        } else if (parts.first == 'read') {
+          // The far person opens the thread: a read marker over everything they have, which is
+          // what turns `sent` into `read` on the near phone — because they read it, not because
+          // the seed says so.
+          final upto = spine.ordered.isEmpty ? 0 : (spine.ordered.last.seq ?? 0);
+          final e = await spine.append('read_marker', {'upto_seq': upto}, at: now(), hostAssign: true);
+          stdout.writeln('host-daemon: read up to $upto as ${e.id}');
+        } else if (parts.first == 'typing') {
+          // Not an event and never stored: the frame the near phone shows as `noor writing…`.
+          final on = parts.length < 2 || parts[1] != 'off';
+          await transport.sendEphemeral(Ephemeral(
+              kind: 'typing', from: Person.noor, at: now().millisecondsSinceEpoch, data: {'on': on}));
+          stdout.writeln('host-daemon: typing ${on ? 'on' : 'off'}');
+        } else if (parts.first == 'pair') {
+          await mint();
+          stdout.writeln('host-daemon: six words minted again');
         } else if (parts.first == 'stop') {
           stdout.writeln('host-daemon: asked to stop');
           await transport.stop();

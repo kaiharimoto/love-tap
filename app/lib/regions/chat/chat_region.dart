@@ -20,7 +20,6 @@ import '../../media/local_uri.dart';
 import '../../media/read_bytes.dart';
 import '../../scope.dart';
 import '../../spine/projections/thread.dart';
-import '../../spine/spine.dart';
 import '../../voice/strings.dart';
 import 'note.dart';
 import 'search_page.dart';
@@ -117,38 +116,27 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       _scroll.jumpTo(index: first.index, alignment: first.itemLeadingEdge - dy / height);
     };
     CaptureBus.stageStates = () async {
-      // Real messages down the real path. Two go into the outbox, one of which the sync engine
-      // is told it is pushing and one of which is still waiting its turn; a third is refused the
-      // way the host refuses one. Nothing here draws a state that the app is not in.
+      // Real messages down the real path. The thread is paired with the far phone for this
+      // capture, so what is written here leaves through the outbox and comes back with a sequence
+      // the host gave it: `sent` is the host having taken it, and `read` is the far phone having
+      // read it (the scene tells it to), not a marker built here by hand. The two states the host
+      // would never produce on its own — a message still on its way, and one it refused — are the
+      // two that are staged: the sync engine is told it is pushing one, and the other is marked
+      // refused the way the host refuses one. Nothing here draws a state the app is not in.
+      //
+      // It used to append a read marker built by hand, with a sequence number it made up and an
+      // id from the ULID factory, straight into the spine as if the host had sent it. That was
+      // the one path in the app that minted an event for the other person, and it was the one
+      // that threw only in the web build.
       final scope = AppScope.of(context);
-      // read, first, because the artifact is of all five states and the other four are below it:
-      // one of ours that they have opened. The read mark is their event, arriving the way theirs
-      // arrive — a read_marker over our sequence — not a flag set on the row.
-      // host-assigned, because a row with no sequence has not been accepted anywhere yet and
-      // cannot have been read: this is the one message on the artifact that has been across and
-      // back, so it is the one that is given a sequence the way the host gives one
-      final seen = await scope.spine.append(
-        'message',
-        {'text': 'left the key under the pot'},
-        at: scope.clock.now(),
-        hostAssign: true,
-      );
-      await scope.spine.applyFromHost([
-        Event(
-          // a real id, because a spine row is keyed by one: 'stage_read_marker' is not a ULID and
-          // the store would not take it
-          id: UlidFactory().next(scope.clock.now()),
-          seq: (seen.seq ?? 0) + 1,
-          author: scope.partner,
-          device: DeviceKind.android,
-          ts: seen.ts + 1000,
-          type: 'read_marker',
-          payload: {'upto_seq': seen.seq ?? 0},
-        ),
-      ]);
+      await scope.emit('message', {'text': 'left the key under the pot'});
+      await scope.emit('message', {'text': 'and the bread, if there is any'});
+      // give the outbox a moment to cross: these two come back `sent`, and the far phone's read
+      // marker turns them `read`
+      scope.sync.kick();
+      await Future<void>.delayed(const Duration(milliseconds: 900));
       final going = await scope.emit('message', {'text': 'ok — leaving now'});
       scope.spine.markInFlight([going.id]);
-      await scope.emit('message', {'text': 'and the bread, if there is any'});
       final no = await scope.emit('message', {'text': 'sending you the roster'});
       scope.spine.markRefused(no.id, 'the other phone is on an older version');
       if (mounted) setState(() {});

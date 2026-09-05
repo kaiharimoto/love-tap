@@ -17,7 +17,6 @@ import 'material/palette.dart';
 import 'feelings/builtins.dart';
 import 'feelings/corner.dart';
 import 'feelings/landing.dart';
-import 'feelings/sensation.dart';
 import 'regions/chat/chat_region.dart';
 import 'regions/moments/moments_region.dart';
 import 'regions/pulse/pulse_region.dart';
@@ -70,10 +69,7 @@ class DeskApp extends StatelessWidget {
         // The hand's contextual alternates on every Text that falls through to the theme, not only
         // on the ones set through Hands: a theme family with the feature off is a hand whose five
         // variants of every letter are never asked for.
-        textTheme: Typography.blackCupertino.apply(
-          fontFamily: 'TeoHand',
-          fontFeatures: const [FontFeature.enable('calt'), FontFeature.enable('liga')],
-        ),
+        textTheme: _inTheHand(Typography.blackCupertino.apply(fontFamily: 'TeoHand')),
       ),
       // dusk only when the dusk half of the library is actually baked; see MaterialLibrary.hasDusk
       home: Light(
@@ -84,6 +80,20 @@ class DeskApp extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Every style of a text theme, asking the hand for its alternates. TextTheme.apply knows about
+/// families and colours and nothing about features, so this goes style by style.
+TextTheme _inTheHand(TextTheme t) {
+  const f = [FontFeature.enable('calt'), FontFeature.enable('liga')];
+  TextStyle? on(TextStyle? s) => s?.copyWith(fontFeatures: f);
+  return t.copyWith(
+    displayLarge: on(t.displayLarge), displayMedium: on(t.displayMedium), displaySmall: on(t.displaySmall),
+    headlineLarge: on(t.headlineLarge), headlineMedium: on(t.headlineMedium), headlineSmall: on(t.headlineSmall),
+    titleLarge: on(t.titleLarge), titleMedium: on(t.titleMedium), titleSmall: on(t.titleSmall),
+    bodyLarge: on(t.bodyLarge), bodyMedium: on(t.bodyMedium), bodySmall: on(t.bodySmall),
+    labelLarge: on(t.labelLarge), labelMedium: on(t.labelMedium), labelSmall: on(t.labelSmall),
+  );
 }
 
 class Shell extends StatefulWidget {
@@ -100,7 +110,6 @@ class _ShellState extends State<Shell> {
   /// Any tab still works — nothing is locked — and the list comes back from Settings.
   bool _showSetup = true;
   PhoneFacts? _phone;
-  final Sensation _sensation = Sensation();
 
   /// Everything that lands on this phone, whichever side let go of it.
   final StreamController<Arrival> _arrivals = StreamController<Arrival>.broadcast();
@@ -121,7 +130,7 @@ class _ShellState extends State<Shell> {
         final f = scope.feelings.byId(pair.$1);
         if (f == null || !mounted) return;
         _arrivals.add(Arrival(feeling: f, intensity: pair.$2, mine: false));
-        unawaited(_sensation.play(f, intensity: pair.$2));
+        unawaited(scope.sensation.play(f, intensity: pair.$2));
       });
     });
     if (!Flags.capture) return;
@@ -139,7 +148,7 @@ class _ShellState extends State<Shell> {
         'intensity': double.parse(intensity.toStringAsFixed(2)),
       });
       _arrivals.add(Arrival(feeling: f, intensity: intensity, mine: true));
-      unawaited(_sensation.play(f, intensity: intensity));
+      unawaited(scope.sensation.play(f, intensity: intensity));
     };
   }
 
@@ -148,7 +157,6 @@ class _ShellState extends State<Shell> {
     if (Flags.capture) CaptureBus.clear();
     _landings?.cancel();
     _arrivals.close();
-    _sensation.dispose();
     super.dispose();
   }
 
@@ -179,7 +187,7 @@ class _ShellState extends State<Shell> {
     final scope = AppScope.of(context);
     await scope.emit('feeling', {'feeling_id': f.id, 'intensity': double.parse(intensity.toStringAsFixed(2))});
     _arrivals.add(Arrival(feeling: f, intensity: intensity, mine: true));
-    await _sensation.play(f, intensity: intensity);
+    await scope.sensation.play(f, intensity: intensity);
   }
 
   @override
@@ -236,7 +244,7 @@ class _ShellState extends State<Shell> {
                     FeelingCorner(
                       registry: scope.feelings,
                       onSend: _send,
-                      onPreview: (f, i) => _sensation.play(f, intensity: i, sound: true),
+                      onPreview: (f, i) => scope.sensation.play(f, intensity: i, sound: true),
                     ),
                   ],
                 ),

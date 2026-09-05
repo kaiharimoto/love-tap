@@ -19,12 +19,15 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../capture/hooks.dart';
 import '../flags.dart';
+import '../material/hands.dart';
 import '../material/objects.dart';
+import '../material/palette.dart';
 import 'builtins.dart';
 
 /// One thing arriving: what it is, how hard it was thrown, and which way it came.
@@ -127,6 +130,36 @@ double amplitudeAt(List<HapticSegment> segments, int ms) {
   return 0.0;
 }
 
+/// How far off the desk the page is at [ms] into the pattern, 0..1: the sheet under your thumb
+/// lifts when the pattern is on and comes back down when it is off, the way a motor's buzz starts
+/// and stops, rather than following the amplitude as a step. The lift comes up over about twenty
+/// milliseconds and falls away over about fifty, and while a segment is on the paper trembles a
+/// little on top of the lift — a page held off a table by a running motor does not sit still.
+double pageLiftAt(List<HapticSegment> segments, int ms) {
+  var at = 0;
+  var previous = 0.0;
+  for (final s in segments) {
+    final amp = s.amp / 255.0;
+    if (ms < at + s.ms) {
+      final into = (ms - at).toDouble();
+      if (s.on) {
+        final rise = 1.0 - math.exp(-into / 18.0);
+        final tremor = 0.12 * math.sin(2 * math.pi * 18.0 * ms / 1000.0);
+        return (amp * rise * (1.0 + tremor)).clamp(0.0, 1.0);
+      }
+      return previous * math.exp(-into / 48.0);
+    }
+    at += s.ms;
+    previous = s.on ? amp : previous * math.exp(-s.ms / 48.0);
+  }
+  return 0.0;
+}
+
+/// How far the page moves at full amplitude, in logical pixels. On the PWA the page is the only
+/// body the pattern has, so it moves enough to be read as a thing being held out to you; on
+/// Android the vibrator is doing the same work to your hand and the paper only agrees with it.
+double get kPageLiftPx => kIsWeb ? 9.0 : 3.0;
+
 /// Wraps the shell. Moves everything under it on the feeling's own rhythm, and draws the thing
 /// that is arriving on top of it.
 class LandingStage extends StatefulWidget {
@@ -138,11 +171,6 @@ class LandingStage extends StatefulWidget {
   @override
   State<LandingStage> createState() => _LandingStageState();
 }
-
-/// How fast the surface moves under a feeling, in cycles a second. A phone's motor runs faster
-/// than this; a page that ran that fast would be a blur and then an alias. This is the rate a hand
-/// reads as one thing buzzing rather than as a page shaking.
-const double _kBuzzHz = 18.0;
 
 class _LandingStageState extends State<LandingStage> with SingleTickerProviderStateMixin {
   Arrival? _arrival;
@@ -208,28 +236,105 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final a = _arrival;
-    // The page rhythm: the surface lifts while the pattern is on and settles while it is off.
-    // On Android the vibrator is doing this to your hand at the same time and with the same
-    // numbers; on a phone with no vibrator this is the only body the feeling has.
+    // The page rhythm: the surface lifts while the pattern is on and settles while it is off, on
+    // the pattern's own timings. On Android the vibrator is doing this to your hand at the same
+    // time and with the same numbers; on a phone with no vibrator this is the only body the
+    // feeling has, so there it moves three times as far.
     var lift = 0.0;
+    var ms = 0;
     if (a != null) {
-      final ms = (_t * 1000).round();
-      // The amplitude is how hard, not how far. Taking it as a displacement held the page a fixed
-      // distance off its place for as long as a segment lasted — nine hundred milliseconds of a
-      // page that was not where it should be and was not moving either, which is not a vibration,
-      // it is a nudge that forgot to come back. It is an envelope on a buzz: eighteen a second,
-      // which is about what a hand feels.
-      final amp = amplitudeAt(a.feeling.segments, ms) * (0.55 + 0.45 * a.intensity);
-      lift = amp * math.sin(2 * math.pi * _kBuzzHz * _t);
+      ms = (_t * 1000).round();
+      lift = pageLiftAt(a.feeling.segments, ms) * (0.55 + 0.45 * a.intensity);
     }
     return Stack(
       fit: StackFit.expand,
       children: [
-        Transform.translate(offset: Offset(0, -lift * 3.4), child: widget.child),
+        Transform.translate(offset: Offset(0, -lift * kPageLiftPx), child: widget.child),
         if (a != null) IgnorePointer(child: _Landing(arrival: a, t: _t, seed: _seed)),
+        // the haptic pattern annotated on the clip, generated from the same segments that are
+        // moving the page and the motor: capture builds only, while a feeling is arriving
+        if (a != null && Flags.capture)
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: IgnorePointer(child: HapticLane(feeling: a.feeling, intensity: a.intensity, ms: ms)),
+          ),
       ],
     );
   }
+}
+
+/// The haptic pattern, drawn to scale along the bottom of the frame with a playhead: the
+/// annotation the evidence clips carry. It is drawn from the feeling's own segments — the list the
+/// vibrator is given and the page is moved by — so what it shows is what was played.
+class HapticLane extends StatelessWidget {
+  const HapticLane({super.key, required this.feeling, required this.intensity, required this.ms});
+  final Feeling feeling;
+  final double intensity;
+  final int ms;
+
+  static const double height = 30;
+
+  @override
+  Widget build(BuildContext context) {
+    final total = feeling.hapticLengthMs;
+    return SizedBox(
+      height: height,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: CustomPaint(painter: _LanePainter(feeling.segments, total, ms, intensity)),
+          ),
+          Positioned(
+            left: 8,
+            top: 1,
+            child: Text(
+              '${feeling.name} · ${total}ms · ${kIsWeb ? 'page' : 'vibration'}',
+              style: Hands.onDesk(size: 9),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LanePainter extends CustomPainter {
+  _LanePainter(this.segments, this.total, this.ms, this.intensity);
+  final List<HapticSegment> segments;
+  final int total;
+  final int ms;
+  final double intensity;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (total <= 0) return;
+    const inset = 8.0;
+    final w = size.width - 2 * inset;
+    final base = size.height - 4;
+    final scale = 0.55 + 0.45 * intensity.clamp(0.0, 1.0);
+    // the baseline: pencil on the desk
+    canvas.drawLine(Offset(inset, base), Offset(inset + w, base),
+        Paint()..color = Pen.onWood.withValues(alpha: 0.7)..strokeWidth = 1.0);
+    var at = 0;
+    final bar = Paint()..color = Pen.onWood.withValues(alpha: 0.85);
+    for (final s in segments) {
+      final x0 = inset + w * at / total;
+      final x1 = inset + w * (at + s.ms) / total;
+      if (s.on) {
+        final h = (size.height - 12) * (s.amp / 255.0) * scale;
+        canvas.drawRect(Rect.fromLTRB(x0 + 0.5, base - h, math.max(x0 + 1.5, x1 - 0.5), base), bar);
+      }
+      at += s.ms;
+    }
+    // the playhead, in red pen, where the pattern is now
+    final px = inset + w * (ms.clamp(0, total) / total);
+    canvas.drawLine(Offset(px, 2), Offset(px, base + 3), Paint()..color = Pen.red..strokeWidth = 1.5);
+  }
+
+  @override
+  bool shouldRepaint(_LanePainter old) => old.ms != ms || old.segments != segments;
 }
 
 class _Landing extends StatelessWidget {

@@ -9,10 +9,7 @@
 // So this builds all of them: the five regions, the setup sheet, the search page, the media
 // viewer, and each of the sheets that come up over a note. It is not looking at them — the
 // pictures are what look at them — it is only insisting that they can be drawn.
-import 'package:desk/app.dart';
-import 'package:desk/feelings/builtins.dart';
 import 'package:desk/feelings/corner.dart';
-import 'package:desk/feelings/registry.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/material/slip.dart';
 import 'package:desk/material/objects.dart';
