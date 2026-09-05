@@ -25,16 +25,27 @@
    "ms": 700
   },
   {
-   "do": "far",
-   "arg": "feeling pigeon 0.8"
-  },
-  {
-   "do": "awaitArrival"
+   "do": "openCorner",
+   "arg": true,
+   "after": 0
   },
   {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 110,
+   "count": 16,
+   "ms": 16
+  },
+  {
+   "do": "sendFeeling",
+   "feeling": "pigeon",
+   "intensity": 0.8,
+   "after": 0
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 94,
+   "from": 16,
    "ms": 16
   },
   {
@@ -47,7 +58,7 @@
   {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 110,
+   "count": 104,
    "from": 110,
    "ms": 16
   },
@@ -55,13 +66,6 @@
    "do": "goTo",
    "arg": 4,
    "after": 0
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 20,
-   "from": 220,
-   "ms": 16
   },
   {
    "do": "far",
@@ -73,8 +77,8 @@
   {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 100,
-   "from": 240,
+   "count": 104,
+   "from": 214,
    "ms": 16
   },
   {

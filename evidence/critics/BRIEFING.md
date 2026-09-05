@@ -22,6 +22,16 @@ who finds one anyway leaves it closed: a report that leans on another report is 
 Every clip is a directory of single frames taken one at a time with the app's own clock stepped
 between them, then assembled at 60 frames a second without re-encoding. The timebase of a clip is
 therefore **the app's time, not the wall clock**: one frame is one step of the driven clock, and
+Three of the logs are measurements taken the way a critic would take them, so they can be checked
+against the pictures rather than trusted: `evidence/logs/hand.json` lays every mark of ink on the
+thread still over every other and reports how many have a near-twin (a font repeats itself
+exactly, a hand a little); `evidence/logs/pwa.json` is what the served page offers an iPhone, read
+from the page; `evidence/logs/scroll_webkit.json` is the framework's own per-frame build and raster
+cost during the scroll clip, under a headless WebKit with no GPU, one frame per harness step — the
+cost of drawing a frame, not a refresh rate. Each scene log's `load` says whether its load time
+was a first launch with the year importing (`store: fresh`) or a phone that already had it
+(`store: kept`); the seeded scenes share one browser profile, and only the first is cold.
+
 `evidence/frames.json` records, per clip and per run, how many milliseconds each step was worth
 (`runs[].step_ms`), the total app time (`app_seconds`) and the ratio of playback to app time
 (`playback_over_app_time` — 1.0 means real time, 2.0 means the clip plays at half speed). A

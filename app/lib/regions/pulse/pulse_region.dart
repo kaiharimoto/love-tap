@@ -6,6 +6,7 @@
 // the sender reachable without leaving the screen.
 import 'package:flutter/material.dart';
 
+import '../../feelings/landing.dart';
 import '../../feelings/registry.dart';
 import '../../material/assignment.dart';
 import '../../material/hands.dart';
@@ -209,15 +210,24 @@ class _Traffic extends StatelessWidget {
             tilt: ((hashOf(e.id) % 24) - 12) / 80,
           );
           if (landing) {
-            // it lands: from a little above, settling, its shadow already where it will end up
+            // It lands here once the thing that was thrown has finished on the desk and been put
+            // away: the stage's object goes up the desk and shrinks, and this one arrives from a
+            // little above as it goes, so there is one object, not two. The wait is the same
+            // arithmetic the stage uses, so the two agree on the driven clock as on the wall.
+            final intensity = (e.payload['intensity'] as num).toDouble();
+            final wait = Fall.restSeconds(f, intensity) + Fall.putAwaySeconds * 0.7;
+            final total = wait + Motion.land.inMilliseconds / 1000.0;
             object = Settling(
               key: ValueKey('land.${e.id}'),
-              duration: Motion.land,
-              curve: Motion.drop,
-              builder: (_, t, child) => Transform.translate(
-                offset: Offset(0, -22 * (1 - t)),
-                child: Opacity(opacity: (t * 3).clamp(0.0, 1.0), child: child),
-              ),
+              duration: Duration(milliseconds: (total * 1000).round()),
+              curve: Curves.linear,
+              builder: (_, raw, child) {
+                final t = Motion.drop.transform(((raw * total - wait) / (total - wait)).clamp(0.0, 1.0));
+                return Transform.translate(
+                  offset: Offset(0, -22 * (1 - t)),
+                  child: Opacity(opacity: (t * 3).clamp(0.0, 1.0), child: child),
+                );
+              },
               child: object,
             );
           }

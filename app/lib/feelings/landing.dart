@@ -91,6 +91,14 @@ class Fall {
     return c.last + 0.55;
   }
 
+  /// How long the thing lies where it landed: until it has stopped bouncing and the pattern has
+  /// finished playing through the paper, whichever is later.
+  static double restSeconds(Feeling feeling, double intensity) =>
+      math.max(contacts(intensity).last + 0.55, feeling.hapticLengthMs / 1000.0);
+
+  /// How long it takes to be put away into the recent row once it has rested.
+  static const putAwaySeconds = 0.5;
+
   /// How much the thing is compressed at [t]: one over the first few hundredths of a second
   /// after each contact, biggest at the first.
   static double squashAt(double t, double intensity) {
@@ -163,10 +171,13 @@ double get kPageLiftPx => kIsWeb ? 9.0 : 3.0;
 /// Wraps the shell. Moves everything under it on the feeling's own rhythm, and draws the thing
 /// that is arriving on top of it.
 class LandingStage extends StatefulWidget {
-  const LandingStage({super.key, required this.arrivals, required this.child});
+  const LandingStage({super.key, required this.arrivals, required this.child, this.laneInset = 0});
 
   final Stream<Arrival> arrivals;
   final Widget child;
+
+  /// How far up from the bottom edge the capture lane sits, so it is not under the tab strip.
+  final double laneInset;
 
   @override
   State<LandingStage> createState() => _LandingStageState();
@@ -218,7 +229,7 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
   void _stopIfDone() {
     final a = _arrival;
     if (a == null) return;
-    final over = math.max(Fall.totalSeconds, a.feeling.hapticLengthMs / 1000.0) + 0.35;
+    final over = Fall.restSeconds(a.feeling, a.intensity) + Fall.putAwaySeconds + 0.05;
     if (_t >= over) {
       _ticker?.stop();
       setState(() => _arrival = null);
@@ -257,7 +268,7 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0,
+            bottom: widget.laneInset,
             child: IgnorePointer(child: HapticLane(feeling: a.feeling, intensity: a.intensity, ms: ms)),
           ),
       ],
@@ -353,20 +364,29 @@ class _Landing extends StatelessWidget {
     final shadow = Fall.shadowAt(t, arrival.intensity);
 
     // where on the desk it lands: never dead centre, and never the same place twice
-    final x = size.width * (arrival.mine ? 0.66 : 0.34) + (seed - 0.5) * size.width * 0.14;
-    final y = size.height * 0.52 + (seed - 0.5) * size.height * 0.10;
+    final x0 = size.width * (arrival.mine ? 0.66 : 0.34) + (seed - 0.5) * size.width * 0.14;
+    final y0 = size.height * 0.52 + (seed - 0.5) * size.height * 0.10;
 
-    // it fades out once it has stopped and the row in the thread has it
-    final over = math.max(Fall.totalSeconds, arrival.feeling.hapticLengthMs / 1000.0);
-    final fade = t <= over ? 1.0 : (1.0 - (t - over) / 0.35).clamp(0.0, 1.0);
+    // It lies where it landed while the pattern plays — that is the feeling being felt, the
+    // paper under it lifting to the rhythm — and then it is put away: it goes up the desk to
+    // where the recent row keeps it, getting smaller as it goes, and the row's copy lands at the
+    // moment this one is gone. It used to sit at full size for the whole pattern and then fade
+    // where it lay, which read as the thing vanishing.
+    final over = Fall.restSeconds(arrival.feeling, arrival.intensity);
+    final put = ((t - over) / Fall.putAwaySeconds).clamp(0.0, 1.0);
+    final ease = Curves.easeInOut.transform(put);
+    final x = x0 + (size.width * 0.5 - x0) * ease * 0.6;
+    final y = y0 + (size.height * 0.34 - y0) * ease;
+    final scale = 1.0 - 0.62 * ease;
+    final fade = put < 0.7 ? 1.0 : (1.0 - (put - 0.7) / 0.3).clamp(0.0, 1.0);
 
     return Stack(
       children: [
         Positioned(
-          left: x - s / 2,
-          top: y - s / 2,
-          width: s,
-          height: s,
+          left: x - s * scale / 2,
+          top: y - s * scale / 2,
+          width: s * scale,
+          height: s * scale,
           child: Opacity(
             opacity: fade,
             child: Transform.rotate(
@@ -376,7 +396,7 @@ class _Landing extends StatelessWidget {
                 transform: Matrix4.diagonal3Values(1.0 + squash * 0.6, 1.0 - squash, 1.0),
                 child: FeelingObject(
                   feeling: arrival.feeling,
-                  size: s,
+                  size: s * scale,
                   intensity: arrival.intensity,
                   shadowScale: shadow,
                   lift: h,

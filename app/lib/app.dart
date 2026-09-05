@@ -202,6 +202,7 @@ class _ShellState extends State<Shell> {
       body: Desk(
         child: LandingStage(
           arrivals: _arrivals.stream,
+          laneInset: kTabStrip + 6,
           child: SafeArea(
           child: Column(
             children: [
