@@ -131,9 +131,12 @@ class SearchIndex {
       if (toTs != null && e.ts > toTs) continue;
       hits.add(SearchHit(e, s.value));
     }
+    // Newest first, the way the thread itself reads. It was ordered by how many times the word
+    // occurred, which put a note from March above one from yesterday for saying the word twice,
+    // and read as random. The score still decides between two things from the same moment.
     hits.sort((a, b) {
-      final c = b.score.compareTo(a.score);
-      return c != 0 ? c : b.event.ts.compareTo(a.event.ts);
+      final c = b.event.ts.compareTo(a.event.ts);
+      return c != 0 ? c : b.score.compareTo(a.score);
     });
     return hits.length > limit ? hits.sublist(0, limit) : hits;
   }

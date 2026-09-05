@@ -88,8 +88,16 @@ void main() {
         reason: 'these are being drawn by the framework as an error, not by the app');
   }
 
-  testWidgets('the search page is not drawn by the error style', (tester) async {
-    await pushAndRead(tester, (c) => SearchPage.open(c, query: 'canal'));
+  testWidgets('the search surface is not drawn by the error style', (tester) async {
+    // the search is a surface in the Chat region now, not a route; it is put up the way the
+    // region puts it up, on a transparent Material with nothing of its own under the words
+    await pushAndRead(
+      tester,
+      (c) => Navigator.of(c).push(PageRouteBuilder<void>(
+        opaque: false,
+        pageBuilder: (_, _, _) => SearchPage(initialQuery: 'canal', onDone: (_) {}),
+      )),
+    );
   });
 
   testWidgets('the photograph viewer is not drawn by the error style', (tester) async {

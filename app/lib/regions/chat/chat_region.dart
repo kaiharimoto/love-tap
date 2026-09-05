@@ -54,6 +54,10 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   ThreadItem? _replyTo;
   ThreadItem? _editing;
   String? _highlightId;
+
+  /// The search open in the thread's place, and the words it opened with.
+  bool _searching = false;
+  String _searchQuery = '';
   bool _recording = false;
   int _lastCount = 0;
   bool _draftLoaded = false;
@@ -95,16 +99,13 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     // the field, the facets down the side and the hits under them. Jumping straight to the first
     // hit in the thread — which is what this did — produced a second picture of the thread.
     CaptureBus.search = (q) async {
-      // Opened, not opened-and-closed. SearchPage.open is a Navigator.push, and a push does not
-      // complete until the page is popped — so awaiting it here meant the capture harness asked
-      // for search and then waited for somebody to close it, which nobody was going to do. The
-      // scene timed out with no shot taken, every time, and what that looked like from the
-      // outside was a search that never opened.
-      final opened = SearchPage.open(context, query: q);
-      unawaited(opened.then((id) {
-        if (id != null && mounted) _goTo(id);
-      }));
-      // the route's own transition is 160ms; this is long enough for the page to be on screen
+      // Opened, not opened-and-closed: the search takes the thread's place in this region until
+      // a hit is tapped or it is put away, so the harness gets a picture of searching — the
+      // words in the field, the facets, the hits — with the shell still around it.
+      setState(() {
+        _searching = true;
+        _searchQuery = q;
+      });
       await Future<void>.delayed(const Duration(milliseconds: 240));
     };
     CaptureBus.scrollBy = (dy) {
@@ -390,10 +391,18 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         ),
       );
 
-  Future<void> _search() async {
-    final id = await SearchPage.open(context);
-    if (id == null || !mounted) return;
-    _goTo(id);
+  void _search() => setState(() {
+        _searching = true;
+        _searchQuery = '';
+      });
+
+  void _searchDone(String? id) {
+    setState(() => _searching = false);
+    if (id == null) return;
+    // the thread is being rebuilt in the search's place; it can be scrolled once it is there
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _goTo(id);
+    });
   }
 
   void _goTo(String id) {
@@ -418,6 +427,9 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       _lastCount = items.length;
       _scheduleRead();
       if (wasAtEnd) _scrollToEnd();
+    }
+    if (_searching) {
+      return SearchPage(key: ValueKey('search.$_searchQuery'), initialQuery: _searchQuery, onDone: _searchDone);
     }
     return Column(
       children: [

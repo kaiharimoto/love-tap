@@ -293,6 +293,10 @@ function ensure(p) {
           names.push(path.relative(ROOT, name));
           framesSoFar += 1;
           await page.evaluate((m) => window.__deskStep(m), ms);
+          // and let the browser composite what the app just drew before it is grabbed: the
+          // step resolves when the framework has finished its frame, which is a little before
+          // the compositor has shown it, and a grab in that gap is the previous frame again
+          await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
         }
         if (drive && drive.kind === 'drag' && !drive.release) await page.mouse.up();
         log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms, drive: drive || null });

@@ -7,13 +7,13 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../material/desk.dart';
 import '../../material/hands.dart';
 import '../../material/light.dart';
 import '../../material/marks.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../media/local_uri.dart';
-import '../../app.dart';
 import '../../scope.dart';
 import '../../spine/projections/thread.dart';
 import 'blob_widgets.dart';
@@ -22,10 +22,12 @@ class ViewerPage extends StatefulWidget {
   const ViewerPage({super.key, required this.item});
   final ThreadItem item;
 
+  /// A print held up to look at covers the desk: its own desk under it, nothing of the thread
+  /// showing through. It was a translucent page over the thread, and what came through the scrim
+  /// was the composer, the tabs and the same caption a second time under the print.
   static Future<void> open(BuildContext context, ThreadItem item) =>
       Navigator.of(context).push(PageRouteBuilder<void>(
-        opaque: false,
-        barrierColor: const Color(0xCC0E0A06),
+        opaque: true,
         transitionDuration: const Duration(milliseconds: 200),
         // Material, because there is no Scaffold on this route and a Text with no Material over
         // it anywhere is drawn by Flutter in red under a double yellow underline — a diagnostic,
@@ -35,7 +37,7 @@ class ViewerPage extends StatefulWidget {
         // Transparency, so the desk is still what is under the page.
         pageBuilder: (_, _, _) => Material(
           type: MaterialType.transparency,
-          child: ViewerPage(item: item),
+          child: Desk(child: ViewerPage(item: item)),
         ),
       ));
 
@@ -149,8 +151,7 @@ class _ViewerPageState extends State<ViewerPage> {
             GestureDetector(
               onTap: () => Navigator.of(context).maybePop(),
               child: Padding(
-                // clear of the tab strip: this sat on top of `chat` and `moments`
-                padding: const EdgeInsets.only(bottom: 18 + kTabStrip),
+                padding: const EdgeInsets.only(bottom: 26),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -8,7 +8,6 @@
 import 'package:flutter/material.dart';
 
 import '../../material/assignment.dart';
-import '../../material/desk.dart';
 import '../../material/hands.dart';
 import '../../material/library.dart';
 import '../../material/marks.dart';
@@ -21,25 +20,16 @@ import '../../voice/strings.dart';
 import 'renderers.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key, this.initialQuery = ''});
+  const SearchPage({super.key, this.initialQuery = '', required this.onDone});
   final String initialQuery;
 
-  /// Opens the search on its own desk and returns the id of the hit that was tapped, or null.
-  static Future<String?> open(BuildContext context, {String query = ''}) =>
-      Navigator.of(context).push<String>(PageRouteBuilder<String>(
-        opaque: true,
-        transitionDuration: const Duration(milliseconds: 160),
-        // Material, because there is no Scaffold on this route and a Text with no Material over
-        // it anywhere is drawn by Flutter in red under a double yellow underline — a diagnostic,
-        // painted in release too. It put sixty-three thousand pure #FFFF00 pixels through the
-        // search results and twelve thousand through the photograph's caption, two lines under
-        // every line of writing, and it read as a design decision rather than as the error it is.
-        // Transparency, so the desk is still what is under the page.
-        pageBuilder: (_, _, _) => Material(
-          type: MaterialType.transparency,
-          child: SearchPage(initialQuery: query),
-        ),
-      ));
+  /// Called with the id of the hit that was tapped, or null when the search is put away.
+  ///
+  /// The search used to be a route of its own, pushed over the whole app on an opaque page with
+  /// its own desk — so the region strip, the tabs and the feeling corner all went, and the
+  /// critics saw a different app. It is a surface in the Chat region now: the thread's place is
+  /// held by the region, the shell stays where it is, and the desk under the results is the desk.
+  final ValueChanged<String?> onDone;
 
   @override
   State<SearchPage> createState() => SearchPageState();
@@ -104,14 +94,11 @@ class SearchPageState extends State<SearchPage> {
     final scope = AppScope.of(context);
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
     final width = MediaQuery.sizeOf(context).width;
-    // The desk this is on is this page's own desk, not the thread's showing through a scrim.
-    //
-    // It was opaque: false with a forty per cent barrier, on the reasoning that a search is
-    // something you do while holding your place. What that actually produced was every note of the
-    // conversation legible *between* the results — `end off.`, `Thu 3 Sep 16:55 sent`, `you the
-    // better one, which is` — a year of somebody else's sentences interleaved with the eight this
-    // page found. Holding your place is what the Navigator does; it does not need to be visible.
-    return Desk(
+    // On the region's own desk, in the thread's place: not a translucent page with a year of
+    // somebody else's sentences legible between the results, and not an opaque page of its own
+    // that takes the shell with it.
+    return Material(
+      type: MaterialType.transparency,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -147,7 +134,7 @@ class SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
+                    onTap: () => widget.onDone(null),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10, bottom: 2),
                       child: Mark.cross(size: 15, seed: 12),
@@ -158,9 +145,10 @@ class SearchPageState extends State<SearchPage> {
             ),
           ),
 
-          // the tabs down the side of a card index: what kind, and whose
+          // the tabs down the side of a card index: what kind, and whose. Tall enough for a
+          // tilted slip with a torn edge: at forty-two the tabs were cut off top and bottom
           SizedBox(
-            height: 42,
+            height: 54,
             child: ListView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -223,7 +211,7 @@ class SearchPageState extends State<SearchPage> {
                           lib: lib,
                           me: scope.me,
                           query: _ctl.text,
-                          onTap: () => Navigator.of(context).pop(_hits[i].event.id),
+                          onTap: () => widget.onDone(_hits[i].event.id),
                         ),
                       ),
           ),
@@ -291,7 +279,22 @@ class _Hit extends StatelessWidget {
             children: [
               _Marked(text: summaryOf(e, me: me), query: query, by: e.author),
               const SizedBox(height: 3),
-              Text(timeLabel(e.ts), style: Hands.margin(size: 11)),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(timeLabel(e.ts), style: Hands.margin(size: 11)),
+                  // a hit whose line does not carry the words says where they were found: a
+                  // photograph found by its caption, a feeling found by its name, a date by its
+                  // title. Without this a result with nothing marked on it read as a mistake.
+                  if (reasonFor(e, query, me: me) case final why?) ...[
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(why, style: Hands.margin(size: 11), maxLines: 1,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                  ],
+                ],
+              ),
             ],
           ),
         ),
@@ -333,4 +336,31 @@ class _Marked extends StatelessWidget {
     return Text.rich(TextSpan(style: style, children: spans),
         maxLines: 3, overflow: TextOverflow.ellipsis);
   }
+}
+
+
+/// Why this event is a hit for [query], when the line shown for it does not contain the words.
+/// Null when it does — the highlighter is the reason then.
+String? reasonFor(Event e, String query, {required Person me}) {
+  final q = query.trim().toLowerCase();
+  if (q.isEmpty) return null;
+  if (summaryOf(e, me: me).toLowerCase().contains(q)) return null;
+  const words = {
+    'photo': 'a photograph', 'video': 'a video', 'voice_note': 'something said', 'feeling': 'a feeling',
+    'date_event': 'a date', 'todo_event': 'the list', 'state_declared': 'a state', 'message': 'written',
+    'milestone': 'a milestone', 'reaction': 'a reaction', 'ritual_kept': 'a ritual',
+  };
+  final kind = words[e.type] ?? e.type.replaceAll('_', ' ');
+  if (kind.toLowerCase().contains(q) || e.type.toLowerCase().contains(q)) return 'found as $kind';
+  for (final entry in e.payload.entries) {
+    final v = entry.value;
+    if (v is String && v.toLowerCase().contains(q)) {
+      final field = entry.key.replaceAll('_', ' ').replaceAll(' id', '');
+      return 'found in its $field: $v';
+    }
+    if (v is List && v.any((x) => x is String && x.toLowerCase().contains(q))) {
+      return 'found in its ${entry.key.replaceAll('_', ' ')}';
+    }
+  }
+  return 'found as $kind';
 }
