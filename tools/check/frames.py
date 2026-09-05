@@ -72,11 +72,14 @@ def main():
         print(json.dumps({"dir": args.dir, "frames": 0, "ok": False, "why": "no frames"}))
         return 1
 
-    prev = load(paths[0])
+    # The identity test is at full resolution: a frame is a repeat only if every pixel is the
+    # pixel before it. At a quarter scale a sheet turning by half a pixel averaged to the same
+    # image, and a clip that never stopped moving was failed for standing still.
+    prev = load(paths[0], 1.0)
     deltas = []
     means = []
     for p in paths[1:]:
-        cur = load(p)
+        cur = load(p, 1.0)
         deltas.append(float(np.abs(cur - prev).mean()))
         means.append(float(cur.mean()))
         prev = cur

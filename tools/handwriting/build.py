@@ -852,6 +852,18 @@ def covers(contours, want, slack=0.22):
     return got_w >= want_w * (1 - slack) and got_h >= want_h * (1 - slack)
 
 
+def ink_area(contours):
+    """The area the outline fills, with holes taken out: what a nonzero fill actually inks."""
+    total = 0.0
+    for c in contours:
+        pts = np.asarray(c, float)
+        if len(pts) < 3:
+            continue
+        x, y = pts[:, 0], pts[:, 1]
+        total += 0.5 * float(np.dot(x, np.roll(y, -1)) - np.dot(y, np.roll(x, -1)))
+    return abs(total)
+
+
 def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
     """All variants of a glyph, re-rolled until every pair is distinct (Hausdorff over the face's
     distinct_min) and every one of them still carries all of its ink."""
@@ -870,6 +882,12 @@ def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
                 continue
             pts = contour_points(contours)
             whole = covers(contours, want)
+            # A variant whose outline still reaches the corners of the box but has lost most of
+            # its fill — a union that came back inside out — passed as whole and printed hollow:
+            # the nine in every timestamp was a faint ring. It is measured against the first
+            # variant's ink.
+            if whole and results and results[0]["contours"]:
+                whole = ink_area(contours) >= 0.6 * ink_area(results[0]["contours"])
             # And the ink itself: a variant can keep its bounding box and lose most of its fill
             # when the union leaves two contours wound against each other — TeoHand shipped a
             # '9' with a fifth of its siblings' area that read as a faint ring in every timestamp.
@@ -1260,6 +1278,18 @@ def main(argv=None):
               "tools/handwriting/hands.json": sha256(os.path.join(HERE, "hands.json"))}
     log = lambda m: print(m, flush=True)  # noqa: E731
     fonts_manifest = {"generator": GENERATOR, "seed": args.seed, "inputs": inputs, "faces": {}, "outputs": []}
+    # A run that builds one face must not forget the others: the manifest on disk is carried
+    # forward and the faces built here replace their own entries.
+    mpath = os.path.join(out_dir, "MANIFEST.fonts.json")
+    if os.path.exists(mpath):
+        try:
+            with open(mpath, encoding="utf-8") as f:
+                previous = json.load(f)
+            fonts_manifest["faces"] = {k: v for k, v in previous.get("faces", {}).items() if k not in faces}
+            fonts_manifest["outputs"] = [o for o in previous.get("outputs", [])
+                                         if not any(o.endswith(f"{face}.ttf") or o.endswith(f"{face}.png") for face in faces)]
+        except (OSError, ValueError):
+            pass
     for face in faces:
         face_index = FACES.index(face)
         log(f"building {face} (seed {args.seed})")
@@ -1286,7 +1316,6 @@ def main(argv=None):
                                                        if any(a != "base" for a in v)},
                                          "parameters": hand}
         fonts_manifest["outputs"] += [os.path.relpath(path, ROOT), os.path.relpath(prev, ROOT)]
-    mpath = os.path.join(out_dir, "MANIFEST.fonts.json")
     with open(mpath, "w", encoding="utf-8") as f:
         json.dump(fonts_manifest, f, indent=1, sort_keys=True)
     if not args.no_manifest:

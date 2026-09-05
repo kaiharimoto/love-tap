@@ -201,7 +201,10 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
   /// blinking out, which is what a dropped frame would look like.
   ui.Image? _lastDrawn;
 
-  static const _frameRate = 60;
+  /// One rendered frame per sixteen-millisecond step of the driven clock. At sixty a second the
+  /// sequence took two hundred and fifty steps to show two hundred and forty frames, and every
+  /// twenty-fifth frame of the clip was the one before it again.
+  static const _frameRate = 62.5;
 
   @override
   void initState() {
