@@ -48,8 +48,13 @@ class FeelingObject extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dusk = Light.of(context) == LightCondition.dusk;
-    final scale = 0.88 + 0.24 * intensity.clamp(0.0, 1.0);
     final id = feeling.object;
+    // `size` is the size of the object, not of the square it was rendered into. A candle fills 27
+    // per cent of its frame and a paper crane 85, so before this the same number asked for a
+    // candle 29 points tall and a crane 82 — and the small ones read as a smudge beside their own
+    // name. tools/pack_assets.py measures each one's ink at pack time.
+    final ink = MaterialLibrary.loaded ? MaterialLibrary.instance.inkScaleOf(id) : 1.0;
+    final scale = (0.88 + 0.24 * intensity.clamp(0.0, 1.0)) * ink;
 
     // Some feelings are not things. A sun scribbled at the top of a page, a moon on the corner,
     // rain, a tongue stuck out — those are marks somebody made, and rendering them as objects

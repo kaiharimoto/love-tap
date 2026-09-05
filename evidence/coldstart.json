@@ -93,5 +93,10 @@
   "rx_bytes": 3388,
   "path": "direct to 192.0.2.2:52340"
  },
- "written_at": "2026-09-05T00:28:41.092154Z"
+ "written_at": "2026-09-05T00:28:41.092154Z",
+ "later_check": {
+  "status": "pending",
+  "why": "the nodes were not answering when this was re-run; the run above stands and is dated",
+  "checked_at": "2026-09-05T01:15:42.661352Z"
+ }
 }

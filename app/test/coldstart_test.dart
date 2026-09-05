@@ -49,16 +49,57 @@ Map<String, dynamic> _self(Map<String, dynamic> status) {
   };
 }
 
+/// Whether both daemons are actually answering, rather than whether they once wrote an address.
+Future<bool> _nodesAnswering() async {
+  for (final n in const ['a', 'b']) {
+    if (!await File('../toolchain/ts/$n/address').exists()) return false;
+    try {
+      final r = await Process.run('../toolchain/ts/bin/tailscale',
+          ['--socket=../toolchain/ts/$n/tailscaled.sock', 'status', '--json']);
+      if (r.exitCode != 0) return false;
+    } catch (_) {
+      return false;
+    }
+  }
+  return true;
+}
+
 void main() {
   test('cold start over the tailnet: four events, both directions, both spines agreeing', () async {
     final aFile = File('../toolchain/ts/a/address');
     final bFile = File('../toolchain/ts/b/address');
-    if (!await aFile.exists() || !await bFile.exists()) {
-      await File(_out).writeAsString(const JsonEncoder.withIndent(' ').convert({
+    // Asked of the daemon, not of the filesystem. The address files survive a container restart
+    // and the daemons do not, and a test that then fails on `would not report its status` reads as
+    // a defect in the app. The brief's rule for a tailnet that is not there is pending: not
+    // passing, not failing.
+    if (!await _nodesAnswering()) {
+      // A pending check does not overwrite a run that happened.
+      //
+      // It did once, and the loss was total: the tailnet cold start of this very session — two
+      // node keys, four events crossing in both directions, a direct path — was replaced by a
+      // sentence saying the nodes were not up, because a daemon had been reaped between the run
+      // and the next `flutter test`. Evidence of something that occurred is not invalidated by a
+      // later session being unable to repeat it; it is dated and kept.
+      final out = File(_out);
+      if (await out.exists()) {
+        final was = jsonDecode(await out.readAsString());
+        if (was is Map && was['status'] == 'ran') {
+          was['later_check'] = {
+            'status': 'pending',
+            'why': 'the nodes were not answering when this was re-run; the run above stands and '
+                'is dated',
+            'checked_at': DateTime.now().toUtc().toIso8601String(),
+          };
+          await out.writeAsString(const JsonEncoder.withIndent(' ').convert(was));
+          return;
+        }
+      }
+      await out.writeAsString(const JsonEncoder.withIndent(' ').convert({
         'transport': 'tailscale',
         'status': 'pending',
-        'why': 'the two tailnet nodes were not up in this session, so there was nothing to start '
-            'cold against. tools/tailscale/up.sh brings them up.',
+        'why': 'the two tailnet nodes were not answering in this session, so there was nothing '
+            'to start cold against. Their state survives in toolchain/ts/{a,b}/state, so '
+            'tools/tailscale/up.sh brings them back without a new key.',
       }));
       return;
     }

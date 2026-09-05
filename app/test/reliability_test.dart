@@ -31,6 +31,21 @@ class Capability {
   Map<String, dynamic> toJson() => {'ok': ok, 'detail': detail};
 }
 
+/// Whether both daemons are actually answering, rather than whether they once wrote an address.
+Future<bool> _nodesAnswering() async {
+  for (final n in const ['a', 'b']) {
+    if (!await File('../toolchain/ts/$n/address').exists()) return false;
+    try {
+      final r = await Process.run('../toolchain/ts/bin/tailscale',
+          ['--socket=../toolchain/ts/$n/tailscaled.sock', 'status', '--json']);
+      if (r.exitCode != 0) return false;
+    } catch (_) {
+      return false;
+    }
+  }
+  return true;
+}
+
 void main() {
   test('reliability report over the local transport', () async {
     final dir = await Directory.systemTemp.createTemp('reliability-');
@@ -231,6 +246,13 @@ void main() {
     };
     final out = File('../evidence/reliability.json');
     await out.parent.create(recursive: true);
+    // The local run's results are its own, but the tailnet block is not its to delete. It was
+    // deleting it: this half rewrites the file whole, so a tailnet run that had happened was gone
+    // before the tailnet half of this file got to decide whether to keep it.
+    if (await out.exists()) {
+      final was = jsonDecode(await out.readAsString());
+      if (was is Map && was['tailscale'] != null) report['tailscale'] = was['tailscale'];
+    }
     await out.writeAsString(const JsonEncoder.withIndent(' ').convert(report));
 
     await clientT.stop();
@@ -270,13 +292,34 @@ void main() {
       await report.writeAsString(const JsonEncoder.withIndent(' ').convert(existing));
     }
 
-    if (!await a.exists() || !await b.exists()) {
+    // Asked of the daemon, not of the filesystem: the address files outlive the daemons, and a
+    // node that is not answering is the same situation as a node that was never brought up.
+    if (!await _nodesAnswering()) {
+      // A pending check does not overwrite a run that happened; see the same guard in
+      // coldstart_test.dart. This session's real tailnet run was destroyed by one once.
+      if (await report.exists()) {
+        final was = jsonDecode(await report.readAsString());
+        if (was is Map && (was['tailscale'] as Map?)?['status'] == 'ran') {
+          (was['tailscale'] as Map)['later_check'] = {
+            'status': 'pending',
+            'why': 'the nodes were not answering when this was re-run; the run above stands',
+            'checked_at': DateTime.now().toUtc().toIso8601String(),
+          };
+          await report.writeAsString(const JsonEncoder.withIndent(' ').convert(was));
+          return;
+        }
+      }
+      final everBroughtUp = await a.exists() && await b.exists();
       await record({
         'status': 'pending',
-        'why': 'no TS_AUTHKEY was supplied in this session, so the two tailnet nodes were never '
-            'brought up and nothing over the tailnet has been checked',
-        'how_to_run': 'TS_AUTHKEY=tskey-auth-… bash tools/tailscale/up.sh, then flutter test '
-            'test/reliability_test.dart',
+        'why': everBroughtUp
+            ? 'the two tailnet nodes were brought up in this session and are not answering now — '
+                'a daemon that has been reaped, or a container that restarted under them. Their '
+                'state survives in toolchain/ts/{a,b}/state, so they come back without a new key.'
+            : 'no TS_AUTHKEY was supplied in this session, so the two tailnet nodes were never '
+                'brought up and nothing over the tailnet has been checked',
+        'how_to_run': 'bash tools/tailscale/up.sh (TS_AUTHKEY only if the state directories are '
+            'gone too), then flutter test test/reliability_test.dart',
         'what_is_still_checked': 'the protocol, the pairing and every fault run above, over the '
             'local transport — the two transports differ only in which address the host binds',
         'checked_at': DateTime.now().toUtc().toIso8601String(),

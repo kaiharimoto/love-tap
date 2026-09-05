@@ -244,6 +244,43 @@ def _fold_band(paths):
     return (left, right), rows
 
 
+def measure_object_ink(verbose=True):
+    """The opaque bounding box of each packed object, as fractions of its frame."""
+    import numpy as np
+    from PIL import Image
+
+    out = {}
+    d = os.path.join(DST, "objects")
+    if not os.path.isdir(d):
+        return out
+    for fn in sorted(os.listdir(d)):
+        if not fn.endswith(".webp") or "_shadow" in fn:
+            continue
+        path = os.path.join(d, fn)
+        with Image.open(path) as im:
+            if im.mode not in ("RGBA", "LA"):
+                continue
+            a = np.asarray(im.convert("RGBA"))[..., 3]
+        rows = np.where(a.max(axis=1) > 24)[0]
+        cols = np.where(a.max(axis=0) > 24)[0]
+        if not len(rows) or not len(cols):
+            continue
+        h, w = a.shape
+        out[os.path.splitext(fn)[0]] = [
+            round(float(cols.min()) / w, 5),
+            round(float(rows.min()) / h, 5),
+            round(float(cols.max() + 1) / w, 5),
+            round(float(rows.max() + 1) / h, 5),
+        ]
+    if verbose and out:
+        widest = max(out.items(), key=lambda kv: kv[1][2] - kv[1][0])
+        tightest = min(out.items(), key=lambda kv: kv[1][2] - kv[1][0])
+        print(f"objects: {len(out)} measured, ink fills "
+              f"{tightest[1][2] - tightest[1][0]:.0%} of its frame at {tightest[0]} and "
+              f"{widest[1][2] - widest[1][0]:.0%} at {widest[0]}")
+    return out
+
+
 def pack_folds(index, verbose=True):
     src_dir = os.path.join(SRC, "folds")
     if not os.path.isdir(src_dir):
@@ -356,6 +393,15 @@ def main(argv=None):
         # what the app has to scale the packed shadow by, which is the margin packing kept rather
         # than the frame the renderer used
         index["relief"]["shadow_frame"] = SHADOW_MARGIN
+    # How much of its own frame each feeling object actually fills.
+    #
+    # Every object render is a 420x420 frame with the thing somewhere inside it, and how much of
+    # the frame the thing fills is a property of the thing: a candle's ink is 27% of its frame,
+    # a paper crane's is 85%. The app asked for `size: 96` and got a candle 29 points tall beside
+    # a crane 82 points tall, so `size` meant a different physical size for every feeling and the
+    # smaller ones read as a smudge beside their own name. This is the number that makes `size`
+    # mean the object.
+    index["object_ink"] = measure_object_ink()
     pack_folds(index)
     copy_flat("fonts", index, exts=(".ttf",))
     copy_flat("sound", index, exts=(".ogg",))

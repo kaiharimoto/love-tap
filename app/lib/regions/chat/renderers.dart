@@ -70,22 +70,32 @@ Widget _stripWave(NoteContext c) => VoiceNotePlayer(
       waveform: (c.payload['waveform'] as List).map((x) => (x as num).toDouble()).toList(),
     );
 
-Widget _objectLanding(NoteContext c) {
+/// A feeling that arrived: the object itself, at the size a thing is, with its name underneath in
+/// the small hand a caption is written in.
+///
+/// It used to be the object at 96 points beside its name set in the author's own hand at 19 —
+/// which is byte for byte the call [_written] makes for a message body, in the same ink, on the
+/// same lined stock with the same tear and the same timestamp under it. A reader saw a message
+/// that happened to say "hold". The row's whole job is that a gesture on one device arrives as a
+/// sensation rather than as a sentence, so the object is now the row and the word is a caption.
+Widget objectLanding(NoteContext c) {
   final f = c.registry.byId(c.payload['feeling_id'] as String? ?? '');
-  return Row(
+  if (f == null) return const SizedBox.shrink();
+  final intensity = (c.payload['intensity'] as num?)?.toDouble() ?? 0.7;
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
     mainAxisSize: MainAxisSize.min,
     children: [
-      if (f != null)
-        FeelingObject(
-          feeling: f,
-          size: 96,
-          intensity: (c.payload['intensity'] as num?)?.toDouble() ?? 0.7,
-          // this one *is* the note: a drawn feeling is drawn on the sheet it arrived on, and a
-          // scrap laid over it would be a sticker on a letter
-          onPaper: false,
-        ),
-      const SizedBox(width: 10),
-      Flexible(child: Written(f?.name ?? '', by: c.item.author, size: 19)),
+      FeelingObject(
+        feeling: f,
+        size: 128,
+        intensity: intensity,
+        // this one *is* the note: a drawn feeling is drawn on the sheet it arrived on, and a
+        // scrap laid over it would be a sticker on a letter
+        onPaper: false,
+      ),
+      const SizedBox(height: 4),
+      Text(f.name, style: Hands.margin(size: 13), textAlign: TextAlign.center),
     ],
   );
 }
@@ -105,7 +115,7 @@ const Map<String, ThreadBody> kThreadRenderers = {
   'print': _print,
   'print_tab': _printTab,
   'strip_wave': _stripWave,
-  'object_landing': _objectLanding,
+  'object_landing': objectLanding,
   'stuck_object': _neverARow,
   'edit_mark': _neverARow,
   'stub': _neverARow,

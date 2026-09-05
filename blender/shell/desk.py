@@ -261,14 +261,35 @@ def build_top(seed, w, h, tmp):
     bpy.context.scene.collection.objects.link(obj)
     obj.scale = (WIDTH_M, HEIGHT_M, 1.0)
     bpy.context.view_layer.objects.active = obj
+    # Selected, not merely active. transform_apply acts on selected_editable_objects, and an object
+    # made with bpy.data.objects.new() and linked into a collection is active and *not* selected —
+    # so the operator returned {'CANCELLED'}, the scale stayed on the object, and the vertices below
+    # were still the unit grid's +/-0.5 rather than metres. Dividing +/-0.5 by 0.42 gave a u span of
+    # 2.381 against a texture set to REPEAT, so the whole three-plank desk was tiled two and a third
+    # times across its own top: a tiled repeating texture, which the brief names as a failure of the
+    # entire visual concept. The generator was always right; one unselected object undid it.
+    obj.select_set(True)
     bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
     for p in mesh.polygons:
         p.use_smooth = True
     mesh.uv_layers.new(name="UVMap")
     uv = mesh.uv_layers[0]
+    us, vs = [], []
     for loop in mesh.loops:
         co = mesh.vertices[loop.vertex_index].co
-        uv.data[loop.index].uv = (co.x / WIDTH_M + 0.5, co.y / HEIGHT_M + 0.5)
+        u, v = co.x / WIDTH_M + 0.5, co.y / HEIGHT_M + 0.5
+        uv.data[loop.index].uv = (u, v)
+        us.append(u)
+        vs.append(v)
+    # The desk covers its own map exactly once, in both directions, or it is tiled. Checked here
+    # rather than found later in a photograph of it.
+    for name, vals in (("u", us), ("v", vs)):
+        span = max(vals) - min(vals)
+        if abs(span - 1.0) > 1e-6:
+            raise SystemExit(
+                f"desk.py: the {name} span is {span:.4f}, not 1.0 — the top is tiled "
+                f"{span:.3f} times across itself rather than mapped once"
+            )
 
     mat = bpy.data.materials.new("desk_wood")
     mat.use_nodes = True

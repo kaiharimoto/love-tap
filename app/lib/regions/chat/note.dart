@@ -72,7 +72,13 @@ class Note extends StatelessWidget {
     // folded for longer than one frame: opening the thread writes a read marker over everything
     // in it, the note rebuilds unfolded, and it goes from folded to flat with nothing in between.
     // Which is why the unfolding clip was two hundred and forty identical frames.
-    final folded = !mine && (e.seq ?? 0) > unreadFrom;
+    // A thrown object is not a folded note. A feeling arrives by being thrown across the desk and
+    // landing on it; there is nothing to unfold, and folding it meant the row rendered as fold
+    // frame 0000 — a square-cornered blank cream slab — for as long as it was unread, which on
+    // 08_state_propagating was for ever, because nothing ever taps it. Two of the three things the
+    // far phone sent arrived as blank paper.
+    final thrown = kThreadRenderers[kEventTypeById[item.type]?.renderer] == objectLanding;
+    final folded = !mine && !thrown && (e.seq ?? 0) > unreadFrom;
 
     final piece = PaperPiece(
       stockId: stock,

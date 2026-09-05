@@ -2,7 +2,7 @@
 // builds the app's copy; this reads it once at startup so the app never guesses at a file name.
 import 'dart:convert';
 
-import 'package:flutter/painting.dart' show Size;
+import 'package:flutter/painting.dart' show Rect, Size;
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
 class LibraryEntry {
@@ -23,7 +23,7 @@ class LibraryEntry {
 
 class MaterialLibrary {
   MaterialLibrary._(this.paper, this.tears, this.objects, this.bits, this.shell, this.folds,
-      this.foldSize, this.fonts, this.sounds, this.shadowFrame);
+      this.foldSize, this.objectInk, this.fonts, this.sounds, this.shadowFrame);
 
   final List<LibraryEntry> paper;
   final List<LibraryEntry> tears;
@@ -36,6 +36,13 @@ class MaterialLibrary {
 
   /// sequence name -> the shape one frame is, so a note can take up its room before it has one
   final Map<String, Size> foldSize;
+
+  /// object id -> the box its ink actually fills, as fractions of its own frame.
+  ///
+  /// Every object is rendered into the same square, and how much of it the thing fills is a
+  /// property of the thing: a candle's ink is 27 per cent of its frame and a paper crane's is 85.
+  /// Without this, `size: 96` meant a different physical size for every feeling.
+  final Map<String, Rect> objectInk;
   final List<String> fonts;
   final List<String> sounds;
 
@@ -86,6 +93,18 @@ class MaterialLibrary {
         }
       });
     }
+    final objectInk = <String, Rect>{};
+    final oi = j['object_ink'];
+    if (oi is Map) {
+      oi.forEach((k, v) {
+        if (v is List && v.length == 4) {
+          objectInk[k as String] = Rect.fromLTRB(
+            (v[0] as num).toDouble(), (v[1] as num).toDouble(),
+            (v[2] as num).toDouble(), (v[3] as num).toDouble(),
+          );
+        }
+      });
+    }
     return _instance = MaterialLibrary._(
       family('paper'),
       family('tears'),
@@ -94,6 +113,7 @@ class MaterialLibrary {
       family('shell'),
       folds,
       foldSize,
+      objectInk,
       ((j['fonts'] as List?) ?? const []).cast<String>(),
       ((j['sound'] as List?) ?? const []).cast<String>(),
       ((j['relief'] as Map?)?['shadow_frame'] as num?)?.toDouble() ?? 1.0,
@@ -180,6 +200,16 @@ class MaterialLibrary {
       objects.map((e) => e.id).where((id) => !id.contains('_shadow')).toList()..sort();
 
   bool hasObject(String id) => objects.any((e) => e.id == id);
+
+  /// How much the render has to be scaled for [size] to mean the object rather than its frame.
+  /// 1.0 when nothing is known about it, which is what it did before.
+  double inkScaleOf(String id) {
+    final box = objectInk[id];
+    if (box == null) return 1.0;
+    final fill = box.width > box.height ? box.width : box.height;
+    if (fill <= 0.05) return 1.0;
+    return (1.0 / fill).clamp(1.0, 3.4);
+  }
 
   bool hasObjectShadow(String id, {bool dusk = false}) =>
       objects.any((e) => e.id == '${id}_shadow${dusk ? '_dusk' : ''}');
