@@ -372,6 +372,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                       children: [
                         for (final f in registry.family(fam))
                           GestureDetector(
+                            behavior: HitTestBehavior.opaque,
                             onTap: () => Navigator.pop(ctx, f),
                             child: SizedBox(
                               width: 62,

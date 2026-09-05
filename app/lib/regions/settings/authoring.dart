@@ -147,6 +147,7 @@ class _AuthoringSheetState extends State<AuthoringSheet> {
                   children: [
                     for (final o in _drawer.take(30))
                       GestureDetector(
+                        behavior: HitTestBehavior.opaque,
                         onTap: () => setState(() => _object = o),
                         child: Opacity(
                           opacity: (_object ?? _drawer.first) == o ? 1 : 0.5,

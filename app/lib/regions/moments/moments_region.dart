@@ -178,6 +178,7 @@ class _Filters extends StatelessWidget {
               children: [
                 for (final v in MomentsView.values)
                   GestureDetector(
+                    behavior: HitTestBehavior.opaque,
                     onTap: () => onView(v),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 14),
@@ -236,6 +237,7 @@ class _Filters extends StatelessWidget {
                             children: [
                               for (final f in registry.active)
                                 GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
                                   onTap: () => Navigator.pop(ctx, f),
                                   child: Column(
                                     children: [

@@ -134,6 +134,7 @@ class SearchPageState extends State<SearchPage> {
                     ),
                   ),
                   GestureDetector(
+                    behavior: HitTestBehavior.opaque,
                     onTap: () => widget.onDone(null),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10, bottom: 2),
@@ -230,6 +231,7 @@ class _Tab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 6),

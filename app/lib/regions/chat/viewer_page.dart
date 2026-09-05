@@ -149,6 +149,7 @@ class _ViewerPageState extends State<ViewerPage> {
               ),
             const Spacer(),
             GestureDetector(
+              behavior: HitTestBehavior.opaque,
               onTap: () => Navigator.of(context).maybePop(),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 26),

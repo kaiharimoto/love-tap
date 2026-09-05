@@ -61,6 +61,7 @@ class PartnerStrip extends StatelessWidget {
     final weight = 0.55 + 0.15 * energy;
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 6, 10, 2),
