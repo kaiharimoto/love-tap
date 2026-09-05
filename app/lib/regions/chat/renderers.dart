@@ -15,8 +15,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../feelings/builtins.dart';
 import '../../feelings/registry.dart';
 import '../../material/hands.dart';
+import '../../material/marks.dart';
 import '../../material/objects.dart';
 import '../../material/palette.dart';
 import '../../spine/projections/thread.dart';
@@ -110,6 +112,229 @@ Widget marginSentence(NoteContext c) =>
 /// says so rather than drawing nothing by accident.
 Widget _neverARow(NoteContext c) => const SizedBox.shrink();
 
+// ---- the module events: each its own kind of paper -----------------------------------------
+// A date, a line off the list, a day that matters, a ritual kept, a thing passed on, a nudge, a
+// feeling somebody made. They used to be one pencil sentence in the margin whatever they were,
+// which is to say the four modules had no presence in the thread at all; and the same event drew
+// as a torn slip in Us, a bare row in Moments and a margin line here — three surfaces for one
+// thing. Each of these is the body written on the event's own paper (material/assignment.dart
+// picks the stock by type: index for dates and days, looseleaf for the list, graph for rituals),
+// and Moments draws the same body on the same paper, so one event is one piece of paper wherever
+// it turns up.
+
+String _dayLabel(Object? iso) {
+  final t = iso is String ? DateTime.tryParse(iso) : null;
+  if (t == null) return '';
+  return DateFormat('EEE d MMM').format(t.toLocal());
+}
+
+/// A ticket stub: the plan stamped along the top, the title in the hand that wrote it, and the
+/// day and place under a perforation.
+Widget ticketStub(NoteContext c) {
+  final p = c.event.payload;
+  final when = p['when'] == null ? '' : _when(p['when']);
+  final place = (p['place'] as String?) ?? '';
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Row(children: [
+        Stamped(_verb(p['action']).trim().isEmpty ? 'a date' : _verb(p['action']).trim(), size: 9, colour: Pen.margin),
+        const Spacer(),
+        if (when.isNotEmpty) Text(when, style: Hands.margin(size: 12)),
+      ]),
+      const SizedBox(height: 4),
+      Written('${p['title'] ?? ''}', by: c.event.author, size: 18),
+      if (place.isNotEmpty) ...[
+        const SizedBox(height: 2),
+        Text(place, style: Hands.margin(size: 13)),
+      ],
+      const Padding(padding: EdgeInsets.only(top: 6), child: RuleLine(seed: 41, weight: 0.8)),
+    ],
+  );
+}
+
+/// A line off the list: a box drawn in pencil, ticked when it was done, and the line struck
+/// through when it came off.
+Widget listLine(NoteContext c) {
+  final p = c.event.payload;
+  final action = '${p['action']}';
+  final done = action == 'ticked';
+  final gone = action == 'dropped';
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(top: 3, right: 9),
+        child: SizedBox(
+          width: 16,
+          height: 16,
+          child: Stack(children: [
+            const Positioned.fill(child: CustomPaint(painter: _PencilBox())),
+            if (done) Positioned(left: 1, top: -4, child: Mark.tick(size: 18, colour: c.event.author == Person.noor ? Pen.ballpoint : Pen.graphite)),
+          ]),
+        ),
+      ),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              '${p['text'] ?? ''}',
+              style: Hands.of(c.event.author, size: 17).copyWith(
+                decoration: gone ? TextDecoration.lineThrough : null,
+                decorationColor: Pen.margin,
+                decorationThickness: 1.4,
+              ),
+            ),
+            Text(
+              switch (action) {
+                'ticked' => 'done',
+                'unticked' => 'back on the list',
+                'dropped' => 'off the list',
+                _ => 'put down',
+              },
+              style: Hands.margin(size: 11.5),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+class _PencilBox extends CustomPainter {
+  const _PencilBox();
+  @override
+  void paint(Canvas canvas, Size size) {
+    final r = Rect.fromLTWH(0.8, 0.8, size.width - 1.6, size.height - 1.6);
+    final path = Path()
+      ..moveTo(r.left, r.top + 0.6)
+      ..lineTo(r.right - 0.4, r.top)
+      ..lineTo(r.right, r.bottom - 0.5)
+      ..lineTo(r.left + 0.5, r.bottom)
+      ..close();
+    canvas.drawPath(path, Paint()..color = Pen.margin..style = PaintingStyle.stroke..strokeWidth = 1.1);
+  }
+
+  @override
+  bool shouldRepaint(_PencilBox old) => false;
+}
+
+/// A day that matters: stamped, with its date, the way a card is kept.
+Widget stampedCard(NoteContext c) {
+  final p = c.event.payload;
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Stamped('${p['title'] ?? ''}', size: 11.5),
+      const SizedBox(height: 5),
+      Text(_dayLabel(p['date']).isEmpty ? _when(p['date']) : _dayLabel(p['date']), style: Hands.margin(size: 13)),
+    ],
+  );
+}
+
+/// A ritual kept: the name in the hand, and a tally stroke for the keeping.
+Widget tallyMark(NoteContext c) {
+  final p = c.event.payload;
+  final n = ((p['streak'] as num?) ?? (p['count'] as num?) ?? 1).toInt().clamp(1, 7);
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Expanded(child: Written('${p['title'] ?? ''}', by: c.event.author, size: 17)),
+      const SizedBox(width: 8),
+      SizedBox(width: 6.0 * n + 8, height: 18, child: CustomPaint(painter: _Tally(n, c.event.author == Person.noor ? Pen.ballpoint : Pen.graphite))),
+      const SizedBox(width: 6),
+      Stamped('kept', size: 9, colour: Pen.margin),
+    ],
+  );
+}
+
+class _Tally extends CustomPainter {
+  const _Tally(this.n, this.colour);
+  final int n;
+  final Color colour;
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..color = colour..strokeWidth = 1.6..strokeCap = StrokeCap.round;
+    for (var i = 0; i < n; i++) {
+      final x = 4.0 + i * 6.0;
+      final lean = (i % 2 == 0 ? 0.6 : -0.4);
+      canvas.drawLine(Offset(x + lean, 2), Offset(x - lean, size.height - 2), paint);
+    }
+    if (n >= 5) {
+      canvas.drawLine(Offset(1, size.height - 4), Offset(4.0 + 5 * 6.0 - 2, 3), paint..strokeWidth = 1.3);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_Tally old) => old.n != n || old.colour != colour;
+}
+
+/// Something passed between them — a book, a film — as the card off a shelf.
+Widget shelfCard(NoteContext c) {
+  final p = c.event.payload;
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Written('${p['title'] ?? ''}', by: c.event.author, size: 18),
+      const SizedBox(height: 3),
+      Stamped(
+        switch ('${p['action']}') { 'started' => 'started', 'finished' => 'finished', _ => 'passed on' },
+        size: 9,
+        colour: Pen.margin,
+      ),
+    ],
+  );
+}
+
+/// A nudge for later: what it says, and when it will say it, on a corner turned down.
+Widget foldedClock(NoteContext c) {
+  final p = c.event.payload;
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Expanded(child: Written('${p['text'] ?? ''}', by: c.event.author, size: 17)),
+      const SizedBox(width: 10),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Stamped('later', size: 8.5, colour: Pen.margin),
+          Text(_when(p['fires_at']), style: Hands.margin(size: 12.5)),
+        ],
+      ),
+    ],
+  );
+}
+
+/// A feeling somebody made: the object itself, its name in their hand, and who made it.
+Widget newFeelingCard(NoteContext c) {
+  final p = c.event.payload;
+  final f = c.registry.byId('${p['feeling_id']}');
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      if (f != null) FeelingObject(feeling: f, size: 58, intensity: 0.7),
+      if (f != null) const SizedBox(width: 12),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Written('${p['name'] ?? f?.name ?? ''}', by: c.event.author, size: 18),
+            Text('a new one, ${c.event.author == c.me ? 'yours' : c.event.author.name}\'s · ${p['family'] ?? f?.family.label ?? ''}',
+                style: Hands.margin(size: 12)),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
 const Map<String, ThreadBody> kThreadRenderers = {
   'note': _written,
   'print': _print,
@@ -122,13 +347,13 @@ const Map<String, ThreadBody> kThreadRenderers = {
   'ink_dries': _neverARow,
   'margin_note': marginSentence,
   'margin_mark': marginSentence,
-  'ticket_stub': marginSentence,
-  'list_line': marginSentence,
-  'stamped_card': marginSentence,
-  'tally_mark': marginSentence,
-  'shelf_card': marginSentence,
-  'folded_clock': marginSentence,
-  'new_feeling_card': marginSentence,
+  'ticket_stub': ticketStub,
+  'list_line': listLine,
+  'stamped_card': stampedCard,
+  'tally_mark': tallyMark,
+  'shelf_card': shelfCard,
+  'folded_clock': foldedClock,
+  'new_feeling_card': newFeelingCard,
 };
 
 /// The one sentence an event reads as away from the thread.

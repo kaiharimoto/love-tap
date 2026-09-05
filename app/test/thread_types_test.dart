@@ -79,10 +79,14 @@ void main() {
       for (final s in kEventTypes)
         if (kThreadRenderers[s.renderer] == marginSentence) s.id,
     ];
-    expect(marginal, containsAll(<String>[
-      'state_declared', 'state_passive', 'ritual_kept', 'milestone',
-      'date_event', 'todo_event', 'ping', 'feeling_authored',
-    ]));
+    expect(marginal, containsAll(<String>['state_declared', 'state_passive']));
+    // The module events are their own kinds of paper now — a ticket stub, a line off the list, a
+    // stamped card, a tally, a shelf card, a folded clock, a card for a new feeling — so they are
+    // not in it either: one pencil sentence for all seven was the four modules having no presence
+    // in the thread at all.
+    for (final id in ['ritual_kept', 'milestone', 'date_event', 'todo_event', 'ping', 'feeling_authored', 'passed_on']) {
+      expect(marginal, isNot(contains(id)), reason: '$id is drawn as a margin sentence');
+    }
     // and the things that are sheets are not in it
     expect(marginal, isNot(contains('message')));
     expect(marginal, isNot(contains('photo')));
