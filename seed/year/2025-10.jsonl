@@ -182,7 +182,7 @@
 {"key": "2025-10-04-0018", "ts": "2025-10-04T23:01:02+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "nyeh", "intensity": 0.7}}
 {"key": "2025-10-04-0019", "ts": "2025-10-04T23:10:29+01:00", "author": "noor", "type": "message", "payload": {"text": "chips were the best bit tho"}}
 {"key": "2025-10-04-0020", "ts": "2025-10-04T23:12:14+01:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2025-10-04-0019", "feeling_id": "steady"}}
-{"key": "2025-10-05-0001", "ts": "2025-10-05T10:12:20+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_film", "action": "rated", "title": "the long film", "rating": 3, "note": "too long. good chips after."}}
+{"key": "2025-10-05-0001", "ts": "2025-10-05T10:12:20+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_film", "action": "said", "title": "the long film", "note": "too long. good chips after.", "verdict": "fine. nothing wrong with it"}}
 {"key": "2025-10-05-9020", "ts": "2025-10-05T11:25:48+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2025-10-04-0019"}, "gen": "finish"}
 {"key": "2025-10-05-0002", "ts": "2025-10-05T11:30:05+01:00", "author": "teo", "type": "message", "payload": {"text": "Making a stock. Whole day. Do not ask what for."}}
 {"key": "2025-10-05-0003", "ts": "2025-10-05T11:41:12+01:00", "author": "noor", "type": "message", "payload": {"text": "what for"}}
@@ -756,7 +756,7 @@
 {"key": "2025-10-18-0017", "ts": "2025-10-18T16:30:44+01:00", "author": "teo", "type": "date_event", "payload": {"date_id": "date_market", "action": "done", "title": "coat and the market"}}
 {"key": "2025-10-18-0018", "ts": "2025-10-18T16:32:10+01:00", "author": "noor", "type": "todo_event", "payload": {"todo_id": "todo_coat", "action": "done", "text": "a coat for teo, chosen with supervision"}}
 {"key": "2025-10-18-0019", "ts": "2025-10-18T16:50:26+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "home"}}
-{"key": "2025-10-18-0020", "ts": "2025-10-18T18:20:38+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market", "action": "rated", "title": "coat and the market", "rating": 4, "note": "cold hands. good coat. a point off for the queue."}}
+{"key": "2025-10-18-0020", "ts": "2025-10-18T18:20:38+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market", "action": "said", "title": "coat and the market", "note": "cold hands. good coat. a point off for the queue.", "verdict": "that was a good one"}}
 {"key": "2025-10-18-9108", "ts": "2025-10-18T18:24:02+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2025-10-18-0016"}, "gen": "finish"}
 {"key": "2025-10-18-0021", "ts": "2025-10-18T18:25:07+01:00", "author": "teo", "type": "message", "payload": {"text": "Four is fair. The queue was your idea."}}
 {"key": "2025-10-18-9109", "ts": "2025-10-18T18:25:15+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2025-10-18-0021"}, "gen": "finish"}

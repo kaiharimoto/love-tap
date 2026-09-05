@@ -297,7 +297,7 @@
 {"key": "2025-12-07-0009", "ts": "2025-12-07T17:40:51+00:00", "author": "noor", "type": "message", "payload": {"text": "it went in your pocket didnt it"}}
 {"key": "2025-12-07-0010", "ts": "2025-12-07T17:42:18+00:00", "author": "teo", "type": "message", "payload": {"text": "It went in my pocket."}}
 {"key": "2025-12-07-0011", "ts": "2025-12-07T19:20:05+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_lights_walk", "action": "done", "title": "the lights along the canal", "when": "2025-12-07T16:30:00+00:00", "place": "the towpath from the bridge"}}
-{"key": "2025-12-07-0012", "ts": "2025-12-07T19:22:47+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_lights_walk", "action": "rated", "title": "the lights along the canal", "rating": 4, "note": "the wind took a point. the tree by the lock gave two back"}}
+{"key": "2025-12-07-0012", "ts": "2025-12-07T19:22:47+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_lights_walk", "action": "said", "title": "the lights along the canal", "note": "the wind took a point. the tree by the lock gave two back", "verdict": "that was a good one"}}
 {"key": "2025-12-07-9042", "ts": "2025-12-07T19:38:11+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2025-12-07-0009"}, "gen": "finish"}
 {"key": "2025-12-07-0013", "ts": "2025-12-07T19:40:30+00:00", "author": "teo", "type": "message", "payload": {"text": "Four is generous. The last stretch was an assault."}}
 {"key": "2025-12-07-0014", "ts": "2025-12-07T19:42:11+00:00", "author": "noor", "type": "message", "payload": {"text": "the lock tree carried the whole evening on its back"}}
@@ -765,7 +765,7 @@
 {"key": "2025-12-18-9104", "ts": "2025-12-18T21:38:57+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2025-12-18-0014"}, "gen": "finish"}
 {"key": "2025-12-18-0016", "ts": "2025-12-18T21:40:03+00:00", "author": "teo", "type": "message", "payload": {"text": "The sky held. The shepherd did not. Your bit is the bit anyone will remember."}}
 {"key": "2025-12-18-0017", "ts": "2025-12-18T21:44:38+00:00", "author": "noor", "type": "message", "payload": {"text": "the shepherd came off the block and took the entire front row of year 7 with him in spirit"}}
-{"key": "2025-12-18-0018", "ts": "2025-12-18T21:50:11+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_winter_show", "action": "rated", "title": "the winter show", "rating": 4, "note": "the sky held. one shepherd lost. four"}}
+{"key": "2025-12-18-0018", "ts": "2025-12-18T21:50:11+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_winter_show", "action": "said", "title": "the winter show", "note": "the sky held. one shepherd lost. four", "verdict": "that was a good one"}}
 {"key": "2025-12-18-0019", "ts": "2025-12-18T22:05:44+00:00", "author": "teo", "type": "message", "payload": {"text": "Four is right. It loses the fifth to the recorder section."}}
 {"key": "2025-12-18-0020", "ts": "2025-12-18T22:08:19+00:00", "author": "noor", "type": "message", "payload": {"text": "the recorders were a decision made by someone braver than me"}}
 {"key": "2025-12-18-0021", "ts": "2025-12-18T22:30:52+00:00", "author": "noor", "type": "state_declared", "payload": {"signal": "mood", "value": "bright"}}

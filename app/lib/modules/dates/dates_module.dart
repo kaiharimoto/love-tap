@@ -1,11 +1,9 @@
-// Dates: planning, scheduling, doing, rating, remembering. Every step is a date_event in the
-// spine, so a date that was planned in May and rated in July is one thread of the same history.
-import 'dart:math' as math;
+// Dates: planning, scheduling, doing, saying what it was, remembering. Every step is a date_event in the
+// spine, so a date that was planned in May and written up in July is one thread of the same history.
 
 import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
-import '../../material/palette.dart';
 import '../../spine/spine.dart';
 import '../module.dart';
 import 'date_list.dart';
@@ -28,10 +26,10 @@ class DatesModule extends Module {
   @override
   String glance(List<Event> events) {
     final dates = projectDates(events);
-    final upcoming = dates.where((d) => d.when != null && d.state != 'done' && d.state != 'rated').toList()
+    final upcoming = dates.where((d) => d.when != null && d.state != 'done' && d.state != 'said').toList()
       ..sort((a, b) => a.when!.compareTo(b.when!));
     if (upcoming.isNotEmpty) return 'next: ${upcoming.first.title}';
-    final done = dates.where((d) => d.state == 'rated' || d.state == 'done').toList();
+    final done = dates.where((d) => d.state == 'said' || d.state == 'done').toList();
     if (done.isNotEmpty) return 'last: ${done.last.title}';
     return 'nothing planned';
   }
@@ -45,7 +43,13 @@ class DateItem {
   String? place;
   String? note;
   DateTime? when;
-  int? rating;
+  /// What they said about it afterwards, in words.
+  ///
+  /// Never a score. It was five pencil stars out of five on a ticket stub, and a review
+  /// widget attached to an evening you spent with someone quantifies the relationship,
+  /// which is the thing the first anti-goal exists to forbid. The seeded year's twenty-five
+  /// ratings were rewritten into the sentences a person would actually say.
+  String? verdict;
   String state = 'planned';
   Person? by;
   int lastTs = 0;
@@ -66,8 +70,8 @@ List<DateItem> projectDates(List<Event> events) {
     d.note = (e.payload['note'] as String?) ?? d.note;
     final when = e.payload['when'] as String?;
     if (when != null) d.when = DateTime.tryParse(when) ?? d.when;
-    final rating = e.payload['rating'];
-    if (rating is num) d.rating = rating.toInt();
+    final verdict = e.payload['verdict'];
+    if (verdict is String && verdict.isNotEmpty) d.verdict = verdict;
     d.state = (e.payload['action'] as String?) ?? d.state;
     d.by = e.author;
     d.lastTs = e.ts;
@@ -76,55 +80,11 @@ List<DateItem> projectDates(List<Event> events) {
   return list;
 }
 
-/// A rating drawn as pencil stars on a ticket stub, never as a number out of five.
-class Stars extends StatelessWidget {
-  const Stars({super.key, required this.rating});
-  final int rating;
-
-  @override
-  Widget build(BuildContext context) => Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (var i = 1; i <= 5; i++)
-            Padding(
-              padding: const EdgeInsets.only(right: 2),
-              child: CustomPaint(size: const Size(13, 13), painter: _StarPainter(filled: i <= rating)),
-            ),
-        ],
-      );
-}
-
-class _StarPainter extends CustomPainter {
-  _StarPainter({required this.filled});
-  final bool filled;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final p = Paint()
-      ..color = filled ? Pen.graphite : Pen.margin.withValues(alpha: 0.4)
-      ..style = filled ? PaintingStyle.fill : PaintingStyle.stroke
-      ..strokeWidth = 1.1;
-    final path = Path();
-    final c = size.center(Offset.zero);
-    for (var k = 0; k < 10; k++) {
-      final r = k.isEven ? size.width * 0.48 : size.width * 0.2;
-      final a = -math.pi / 2 + k * math.pi / 5;
-      final o = Offset(c.dx + r * math.cos(a), c.dy + r * math.sin(a));
-      k == 0 ? path.moveTo(o.dx, o.dy) : path.lineTo(o.dx, o.dy);
-    }
-    path.close();
-    canvas.drawPath(path, p);
-  }
-
-  @override
-  bool shouldRepaint(_StarPainter old) => old.filled != filled;
-}
-
 /// A date's line in the thread and in Us.
 String describeDate(DateItem d) {
   final bits = <String>[d.title];
   if (d.place != null) bits.add(d.place!);
-  if (d.rating != null) bits.add('${d.rating}/5');
+  if (d.verdict != null) bits.add(d.verdict!);
   if (d.note != null) bits.add(d.note!);
   return bits.join(' · ');
 }

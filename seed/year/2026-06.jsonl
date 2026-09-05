@@ -936,7 +936,7 @@
 {"key": "2026-06-27-9139", "ts": "2026-06-27T23:49:54+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-06-27-0020"}, "gen": "finish"}
 {"key": "2026-06-27-0022", "ts": "2026-06-27T23:52:03+01:00", "author": "noor", "type": "message", "payload": {"text": "on the bus with cake in a napkin on my knee and no shoes on at all"}}
 {"key": "2026-06-27-0023", "ts": "2026-06-27T23:58:19+01:00", "author": "teo", "type": "date_event", "payload": {"date_id": "date_wedding", "action": "done", "title": "the wedding", "when": "2026-06-27T14:30:00+01:00", "place": "a field an hour out"}}
-{"key": "2026-06-28-0001", "ts": "2026-06-28T11:12:40+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_wedding", "action": "rated", "title": "the wedding", "rating": 3, "note": "the chairs"}}
+{"key": "2026-06-28-0001", "ts": "2026-06-28T11:12:40+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_wedding", "action": "said", "title": "the wedding", "note": "the chairs", "verdict": "fine. nothing wrong with it"}}
 {"key": "2026-06-28-9140", "ts": "2026-06-28T11:14:41+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-06-27-0022"}, "gen": "finish"}
 {"key": "2026-06-28-0002", "ts": "2026-06-28T11:18:15+01:00", "author": "teo", "type": "message", "payload": {"text": "Three."}}
 {"key": "2026-06-28-0003", "ts": "2026-06-28T11:21:49+01:00", "author": "noor", "type": "message", "payload": {"text": "three. the food was a five, the band was a four, the speech about the dog was a six, and the chairs were a one"}}

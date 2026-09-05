@@ -19,7 +19,7 @@
 {"key": "2026-01-01-0007", "ts": "2026-01-01T10:41:33+00:00", "author": "teo", "type": "message", "payload": {"text": "There is a potato in the sink and neither of us put it there."}}
 {"key": "2026-01-01-0008", "ts": "2026-01-01T10:53:19+00:00", "author": "noor", "type": "message", "payload": {"text": "leave it. it got itself there, it can get itself out"}}
 {"key": "2026-01-01-0009", "ts": "2026-01-01T11:28:44+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_new_year", "action": "done", "title": "new year at noors", "when": "2025-12-31T21:00:00+00:00", "place": "the flat by the canal"}}
-{"key": "2026-01-01-0010", "ts": "2026-01-01T11:31:52+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_new_year", "action": "rated", "title": "new year at noors", "rating": 4, "note": "4. asleep by ten past one and neither of us apologised for it"}}
+{"key": "2026-01-01-0010", "ts": "2026-01-01T11:31:52+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_new_year", "action": "said", "title": "new year at noors", "note": "4. asleep by ten past one and neither of us apologised for it", "verdict": "that was a good one"}}
 {"key": "2026-01-01-9003", "ts": "2026-01-01T11:34:08+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-01-01-0008"}, "gen": "finish"}
 {"key": "2026-01-01-0011", "ts": "2026-01-01T11:36:10+00:00", "author": "teo", "type": "message", "payload": {"text": "Four. Tell me what lost the point."}}
 {"key": "2026-01-01-0012", "ts": "2026-01-01T11:39:27+00:00", "author": "noor", "type": "message", "payload": {"text": "the ice. you said it was optional and you were wrong and i am saying this once and never again"}}
@@ -1070,7 +1070,7 @@
 {"key": "2026-01-26-0011", "ts": "2026-01-26T19:40:09+00:00", "author": "teo", "type": "state_declared", "payload": {"signal": "place", "value": "travelling"}}
 {"key": "2026-01-26-0012", "ts": "2026-01-26T20:20:44+00:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "home"}}
 {"key": "2026-01-26-0013", "ts": "2026-01-26T20:40:16+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_warm_window", "action": "done", "title": "the warm place with the big window", "when": "2026-01-26T17:00:00+00:00", "place": "the corner by the bridge"}}
-{"key": "2026-01-26-0014", "ts": "2026-01-26T20:42:33+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_warm_window", "action": "rated", "title": "the warm place with the big window", "rating": 3, "note": "3. warm. you slept sitting up for four minutes with your eyes open"}}
+{"key": "2026-01-26-0014", "ts": "2026-01-26T20:42:33+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_warm_window", "action": "said", "title": "the warm place with the big window", "note": "3. warm. you slept sitting up for four minutes with your eyes open", "verdict": "fine. nothing wrong with it"}}
 {"key": "2026-01-26-9182", "ts": "2026-01-26T20:48:12+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-01-26-0007"}, "gen": "finish"}
 {"key": "2026-01-26-0015", "ts": "2026-01-26T20:50:08+00:00", "author": "teo", "type": "message", "payload": {"text": "Three out of five."}}
 {"key": "2026-01-26-0016", "ts": "2026-01-26T20:52:41+00:00", "author": "noor", "type": "message", "payload": {"text": "three. the window was right, the chairs were an attack, and one of us was asleep", "reply_to": "k:2026-01-26-0015"}}

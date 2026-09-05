@@ -186,9 +186,9 @@ const List<EventTypeSpec> kEventTypes = [
   EventTypeSpec(
     id: 'date_event',
     required: ['date_id', 'action', 'title'],
-    optional: ['when', 'place', 'rating', 'note'],
+    optional: ['when', 'place', 'verdict', 'note'],
     notify: Notify.quiet,
-    search: SearchSpec(textFields: ['title', 'place', 'note'], facets: ['us', 'dates']),
+    search: SearchSpec(textFields: ['title', 'place', 'note', 'verdict'], facets: ['us', 'dates']),
     renderer: 'ticket_stub',
   ),
   EventTypeSpec(

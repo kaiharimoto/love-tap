@@ -299,7 +299,7 @@
 {"key": "2025-11-09-9057", "ts": "2025-11-09T22:54:50+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2025-11-09-0020"}, "gen": "finish"}
 {"key": "2025-11-09-0026", "ts": "2025-11-09T22:55:19+00:00", "author": "teo", "type": "message", "payload": {"text": "Five out of five. There is nothing to take a point off for and you know I look."}}
 {"key": "2025-11-09-0027", "ts": "2025-11-09T22:57:31+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_bridge_one_year", "action": "done", "title": "one year, the place by the bridge", "when": "2025-11-09T19:00:00+00:00", "place": "the place by the bridge"}}
-{"key": "2025-11-09-0028", "ts": "2025-11-09T22:58:44+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_bridge_one_year", "action": "rated", "title": "one year, the place by the bridge", "rating": 5, "note": "obviously"}}
+{"key": "2025-11-09-0028", "ts": "2025-11-09T22:58:44+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_bridge_one_year", "action": "said", "title": "one year, the place by the bridge", "note": "obviously", "verdict": "we would do that again tomorrow"}}
 {"key": "2025-11-09-0029", "ts": "2025-11-09T23:00:20+00:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2025-11-09-0028", "feeling_id": "crown"}}
 {"key": "2025-11-09-0030", "ts": "2025-11-09T23:10:36+00:00", "author": "noor", "type": "voice_note", "payload": {"voice": "2025-11_noor_kitchen_ninth", "duration_ms": 22000}}
 {"key": "2025-11-09-0031", "ts": "2025-11-09T23:16:12+00:00", "author": "teo", "type": "message", "payload": {"text": "I have played that four times. I am going to play it again and then put the phone down."}}
@@ -507,7 +507,7 @@
 {"key": "2025-11-15-0009", "ts": "2025-11-15T21:50:31+00:00", "author": "noor", "type": "photo", "payload": {"photo": "2025-11_canal_lamps_dark", "caption": "no moon at all in the end. the lamps did the whole job"}}
 {"key": "2025-11-15-0010", "ts": "2025-11-15T21:54:07+00:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2025-11-15-0009", "feeling_id": "warm_palm"}}
 {"key": "2025-11-15-0011", "ts": "2025-11-15T21:56:22+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_dark_walk", "action": "done", "title": "the canal in the dark", "when": "2025-11-15T17:00:00+00:00", "place": "the towpath"}}
-{"key": "2025-11-15-0012", "ts": "2025-11-15T21:58:44+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_dark_walk", "action": "rated", "title": "the canal in the dark", "rating": 4, "note": "could not see a thing. that was the point. one off for the goose."}}
+{"key": "2025-11-15-0012", "ts": "2025-11-15T21:58:44+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_dark_walk", "action": "said", "title": "the canal in the dark", "note": "could not see a thing. that was the point. one off for the goose.", "verdict": "that was a good one"}}
 {"key": "2025-11-15-0013", "ts": "2025-11-15T22:00:16+00:00", "author": "teo", "type": "message", "payload": {"text": "The goose started it."}}
 {"key": "2025-11-15-0014", "ts": "2025-11-15T22:02:39+00:00", "author": "noor", "type": "message", "payload": {"text": "the goose was minding its own business until you spoke to it"}}
 {"key": "2025-11-15-0015", "ts": "2025-11-15T22:04:11+00:00", "author": "teo", "type": "message", "payload": {"text": "I said good evening. In an ordinary voice."}}

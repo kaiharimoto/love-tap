@@ -236,7 +236,7 @@
 {"key": "2025-09-06-0008", "ts": "2025-09-06T13:13:21+01:00", "author": "noor", "type": "reaction", "payload": {"target": "k:2025-09-06-0007", "feeling_id": "ugh"}}
 {"key": "2025-09-06-0009", "ts": "2025-09-06T13:40:02+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "out"}}
 {"key": "2025-09-06-0010", "ts": "2025-09-06T23:20:44+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_film", "action": "done", "title": "a film", "when": "2025-09-06"}}
-{"key": "2025-09-06-0011", "ts": "2025-09-06T23:22:18+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_film", "action": "rated", "title": "a film", "rating": 3, "note": "you slept through the middle. the shin was better than the film"}}
+{"key": "2025-09-06-0011", "ts": "2025-09-06T23:22:18+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_film", "action": "said", "title": "a film", "note": "you slept through the middle. the shin was better than the film", "verdict": "fine. nothing wrong with it"}}
 {"key": "2025-09-06-9037", "ts": "2025-09-06T23:23:36+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2025-09-06-0008"}, "gen": "finish"}
 {"key": "2025-09-06-0012", "ts": "2025-09-06T23:25:05+01:00", "author": "teo", "type": "message", "payload": {"text": "The middle was slow."}}
 {"key": "2025-09-06-0013", "ts": "2025-09-06T23:26:11+01:00", "author": "noor", "type": "message", "payload": {"text": "you were asleep. how would you know"}}
@@ -782,7 +782,7 @@
 {"key": "2025-09-20-0016", "ts": "2025-09-20T13:13:41+01:00", "author": "teo", "type": "message", "payload": {"text": "He called me son."}}
 {"key": "2025-09-20-0017", "ts": "2025-09-20T15:30:14+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market", "action": "done", "title": "the saturday market", "when": "2025-09-20"}}
 {"key": "2025-09-20-9120", "ts": "2025-09-20T15:31:57+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2025-09-20-0015"}, "gen": "finish"}
-{"key": "2025-09-20-0018", "ts": "2025-09-20T15:32:02+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market", "action": "rated", "title": "the saturday market", "rating": 4, "note": "one off for the queue at the bread stall. we already had bread"}}
+{"key": "2025-09-20-0018", "ts": "2025-09-20T15:32:02+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market", "action": "said", "title": "the saturday market", "note": "one off for the queue at the bread stall. we already had bread", "verdict": "that was a good one"}}
 {"key": "2025-09-20-0019", "ts": "2025-09-20T15:34:27+01:00", "author": "teo", "type": "message", "payload": {"text": "Four is fair. We did already have bread."}}
 {"key": "2025-09-20-9121", "ts": "2025-09-20T15:35:39+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2025-09-20-0019"}, "gen": "finish"}
 {"key": "2025-09-20-0020", "ts": "2025-09-20T15:36:10+01:00", "author": "noor", "type": "reaction", "payload": {"target": "k:2025-09-20-0019", "feeling_id": "warm_palm"}}

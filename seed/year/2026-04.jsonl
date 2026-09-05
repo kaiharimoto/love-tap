@@ -413,7 +413,7 @@
 {"key": "2026-04-11-0011", "ts": "2026-04-11T12:44:46+01:00", "author": "noor", "type": "message", "payload": {"text": "the second one is for flowers. the first one is for looking at. they are not in competition"}}
 {"key": "2026-04-11-0012", "ts": "2026-04-11T12:46:22+01:00", "author": "teo", "type": "message", "payload": {"text": "That is a system."}}
 {"key": "2026-04-11-0013", "ts": "2026-04-11T14:30:07+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market_bridge", "action": "done", "title": "the market by the bridge", "when": "2026-04-11T10:00:00+01:00", "place": "by the bridge"}}
-{"key": "2026-04-11-0014", "ts": "2026-04-11T14:34:29+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market_bridge", "action": "rated", "title": "the market by the bridge", "rating": 4, "note": "cold hands. good cheese. one jug too many"}}
+{"key": "2026-04-11-0014", "ts": "2026-04-11T14:34:29+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market_bridge", "action": "said", "title": "the market by the bridge", "note": "cold hands. good cheese. one jug too many", "verdict": "that was a good one"}}
 {"key": "2026-04-11-9072", "ts": "2026-04-11T14:37:24+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-04-11-0011"}, "gen": "finish"}
 {"key": "2026-04-11-0015", "ts": "2026-04-11T14:40:15+01:00", "author": "teo", "type": "message", "payload": {"text": "Four is generous. The queue was a queue."}}
 {"key": "2026-04-11-0016", "ts": "2026-04-11T14:44:38+01:00", "author": "noor", "type": "message", "payload": {"text": "the queue is part of it. you stand in it and you get to complain, thats the ticket price"}}
@@ -793,7 +793,7 @@
 {"key": "2026-04-22-9706", "ts": "2026-04-22T08:07:29+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "battery", "value": 100}, "gen": "finish"}
 {"key": "2026-04-22-9696", "ts": "2026-04-22T08:07:38+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "moving", "value": "still"}, "gen": "finish"}
 {"key": "2026-04-22-9707", "ts": "2026-04-22T08:09:47+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "ringer", "value": "normal"}, "gen": "finish"}
-{"key": "2026-04-22-0002", "ts": "2026-04-22T08:10:15+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_late_showing", "action": "rated", "title": "the late showing", "rating": 2, "note": "we slept. the seats were good. two is for the seats"}}
+{"key": "2026-04-22-0002", "ts": "2026-04-22T08:10:15+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_late_showing", "action": "said", "title": "the late showing", "note": "we slept. the seats were good. two is for the seats", "verdict": "we tried"}}
 {"key": "2026-04-22-0003", "ts": "2026-04-22T08:14:41+01:00", "author": "noor", "type": "message", "payload": {"text": "two out of five and one of those is upholstery"}}
 {"key": "2026-04-22-9697", "ts": "2026-04-22T08:55:13+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "ringer", "value": "silent"}, "gen": "finish"}
 {"key": "2026-04-22-9712", "ts": "2026-04-22T09:02:20+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "local_hour", "value": 9}, "gen": "finish"}

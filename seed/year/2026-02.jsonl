@@ -366,7 +366,7 @@
 {"key": "2026-02-08-9640", "ts": "2026-02-08T09:32:27+00:00", "author": "teo", "type": "state_passive", "payload": {"signal": "network", "value": "wifi"}, "gen": "finish"}
 {"key": "2026-02-08-9643", "ts": "2026-02-08T09:59:42+00:00", "author": "teo", "type": "state_passive", "payload": {"signal": "local_hour", "value": 9}, "gen": "finish"}
 {"key": "2026-02-08-0004", "ts": "2026-02-08T10:52:38+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_breakfast", "action": "done", "title": "breakfast at the bridge", "when": "2026-02-08T09:00:00+00:00", "place": "the place by the bridge"}}
-{"key": "2026-02-08-0005", "ts": "2026-02-08T10:55:26+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_breakfast", "action": "rated", "title": "breakfast at the bridge", "rating": 4, "note": "we got the window. the eggs were a rumour"}}
+{"key": "2026-02-08-0005", "ts": "2026-02-08T10:55:26+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_breakfast", "action": "said", "title": "breakfast at the bridge", "note": "we got the window. the eggs were a rumour", "verdict": "that was a good one"}}
 {"key": "2026-02-08-0006", "ts": "2026-02-08T12:20:00+00:00", "author": "teo", "type": "state_declared", "payload": {"signal": "place", "value": "home"}}
 {"key": "2026-02-08-9045", "ts": "2026-02-08T13:30:10+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-02-08-0001"}, "gen": "finish"}
 {"key": "2026-02-08-0007", "ts": "2026-02-08T13:32:15+00:00", "author": "teo", "type": "message", "payload": {"text": "Four is generous. The eggs were a rumour and you gave them a four."}}
@@ -839,7 +839,7 @@
 {"key": "2026-02-21-9116", "ts": "2026-02-21T18:38:42+00:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-02-21-0011"}, "gen": "finish"}
 {"key": "2026-02-21-0013", "ts": "2026-02-21T18:40:26+00:00", "author": "noor", "type": "photo", "payload": {"photo": "2026-02_hail_bench", "caption": "hail on the bench at the top. it came sideways for four minutes and then stopped like it had been asked to"}}
 {"key": "2026-02-21-0014", "ts": "2026-02-21T19:20:04+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_walk_feb", "action": "done", "title": "the long way round", "when": "2026-02-21T09:30:00+00:00", "place": "out past the locks to the reservoir"}}
-{"key": "2026-02-21-0015", "ts": "2026-02-21T19:24:38+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_walk_feb", "action": "rated", "title": "the long way round", "rating": 4, "note": "hail at the top. we did not turn back"}}
+{"key": "2026-02-21-0015", "ts": "2026-02-21T19:24:38+00:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_walk_feb", "action": "said", "title": "the long way round", "note": "hail at the top. we did not turn back", "verdict": "that was a good one"}}
 {"key": "2026-02-21-9117", "ts": "2026-02-21T19:39:14+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-02-21-0013"}, "gen": "finish"}
 {"key": "2026-02-21-0016", "ts": "2026-02-21T19:40:12+00:00", "author": "teo", "type": "message", "payload": {"text": "Four. You gave the eggs a four."}}
 {"key": "2026-02-21-9118", "ts": "2026-02-21T19:41:41+00:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-02-21-0016"}, "gen": "finish"}

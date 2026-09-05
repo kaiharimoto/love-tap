@@ -190,6 +190,9 @@ String _seconds(Object? ms) {
 /// The module verbs, in the words a person would use about their own list.
 String _verb(Object? action) => switch ('$action') {
       'planned' => 'planning',
+      'said' => 'said of',
+      'remembered' => 'remembering',
+      'scheduled' => 'booked',
       'moved' => 'moved',
       'done' || 'been' => 'went to',
       'cancelled' => 'called off',

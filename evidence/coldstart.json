@@ -33,45 +33,45 @@
  "paired_with": "six spoken words, HKDF-SHA256; every request signed thereafter",
  "events": {
   "message_client_to_host": {
-   "id": "01M1QCBZ4H5JG52G4YQD4HW882",
+   "id": "01M1QFFBPBHMPRMWZ9W05QDR4D",
    "type": "message",
    "from": "teo",
-   "written_at": "2026-09-04T23:34:24.145Z",
+   "written_at": "2026-09-05T00:28:41.035Z",
    "arrived_seq": 1
   },
   "feeling_client_to_host": {
-   "id": "01M1QCBZ4T3VEQK3BV4MS3YSJJ",
+   "id": "01M1QFFBPKH21TVVJK2QHQF2EH",
    "type": "feeling",
    "from": "teo",
-   "written_at": "2026-09-04T23:34:24.154Z",
+   "written_at": "2026-09-05T00:28:41.043Z",
    "arrived_seq": 2
   },
   "message_host_to_client": {
-   "id": "01M1QCBZ5T1E2CDXJMDZH7WE98",
+   "id": "01M1QFFBQF1Y2EDNM14RJM1BQ7",
    "type": "message",
    "from": "noor",
-   "written_at": "2026-09-04T23:34:24.186Z",
+   "written_at": "2026-09-05T00:28:41.071Z",
    "arrived_seq": 3
   },
   "feeling_host_to_client": {
-   "id": "01M1QCBZ5VB9CHBGDYV3B2KND7",
+   "id": "01M1QFFBQGHS3Y7MPRDF13072R",
    "type": "feeling",
    "from": "noor",
-   "written_at": "2026-09-04T23:34:24.187Z",
+   "written_at": "2026-09-05T00:28:41.072Z",
    "arrived_seq": 4
   }
  },
  "spine_host_order": [
-  "01M1QCBZ4H5JG52G4YQD4HW882",
-  "01M1QCBZ4T3VEQK3BV4MS3YSJJ",
-  "01M1QCBZ5T1E2CDXJMDZH7WE98",
-  "01M1QCBZ5VB9CHBGDYV3B2KND7"
+  "01M1QFFBPBHMPRMWZ9W05QDR4D",
+  "01M1QFFBPKH21TVVJK2QHQF2EH",
+  "01M1QFFBQF1Y2EDNM14RJM1BQ7",
+  "01M1QFFBQGHS3Y7MPRDF13072R"
  ],
  "spine_client_order": [
-  "01M1QCBZ4H5JG52G4YQD4HW882",
-  "01M1QCBZ4T3VEQK3BV4MS3YSJJ",
-  "01M1QCBZ5T1E2CDXJMDZH7WE98",
-  "01M1QCBZ5VB9CHBGDYV3B2KND7"
+  "01M1QFFBPBHMPRMWZ9W05QDR4D",
+  "01M1QFFBPKH21TVVJK2QHQF2EH",
+  "01M1QFFBQF1Y2EDNM14RJM1BQ7",
+  "01M1QFFBQGHS3Y7MPRDF13072R"
  ],
  "four_events_at": {
   "host": [
@@ -89,9 +89,9 @@
  },
  "same_order_both_sides": true,
  "counted_by_node_b": {
-  "tx_bytes": 19432,
-  "rx_bytes": 17080,
-  "path": "direct to 192.0.2.2:39582"
+  "tx_bytes": 3804,
+  "rx_bytes": 3388,
+  "path": "direct to 192.0.2.2:52340"
  },
- "written_at": "2026-09-04T23:34:24.211456Z"
+ "written_at": "2026-09-05T00:28:41.092154Z"
 }

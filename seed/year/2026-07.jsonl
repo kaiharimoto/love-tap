@@ -512,7 +512,7 @@
 {"key": "2026-07-11-9691", "ts": "2026-07-11T09:24:08+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "ringer", "value": "normal"}, "gen": "finish"}
 {"key": "2026-07-11-0001", "ts": "2026-07-11T10:20:28+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "home"}}
 {"key": "2026-07-11-9693", "ts": "2026-07-11T10:37:54+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "local_hour", "value": 10}, "gen": "finish"}
-{"key": "2026-07-11-0002", "ts": "2026-07-11T10:40:05+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_last_day", "action": "rated", "title": "the last day", "rating": 4, "note": "the bin. otherwise five. we stayed until the tide turned and there is sand in one shoe from nowhere"}}
+{"key": "2026-07-11-0002", "ts": "2026-07-11T10:40:05+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_last_day", "action": "said", "title": "the last day", "note": "the bin. otherwise five. we stayed until the tide turned and there is sand in one shoe from nowhere", "verdict": "that was a good one"}}
 {"key": "2026-07-11-9065", "ts": "2026-07-11T10:44:06+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-07-10-0031"}, "gen": "finish"}
 {"key": "2026-07-11-0003", "ts": "2026-07-11T10:46:42+01:00", "author": "teo", "type": "message", "payload": {"text": "Four, for a bin."}}
 {"key": "2026-07-11-0004", "ts": "2026-07-11T10:50:19+01:00", "author": "noor", "type": "message", "payload": {"text": "the bin was structural to the evening. it moved us twice"}}
@@ -839,7 +839,7 @@
 {"key": "2026-07-18-0039", "ts": "2026-07-18T21:20:31+01:00", "author": "noor", "type": "message", "payload": {"text": "the chips were the best thing i have eaten this year and im including the food at the wedding"}}
 {"key": "2026-07-18-0040", "ts": "2026-07-18T21:24:08+01:00", "author": "teo", "type": "message", "payload": {"text": "The chips were fine. The wall we ate them on was the best thing you have eaten this year."}}
 {"key": "2026-07-18-0041", "ts": "2026-07-18T21:28:45+01:00", "author": "noor", "type": "message", "payload": {"text": "youre right and i hate it"}}
-{"key": "2026-07-18-0042", "ts": "2026-07-18T21:50:22+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_ferry", "action": "rated", "title": "the ferry to the island", "rating": 5, "note": "cold. worth it."}, "anchor": "anchor_ferry"}
+{"key": "2026-07-18-0042", "ts": "2026-07-18T21:50:22+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_ferry", "action": "said", "title": "the ferry to the island", "note": "cold. worth it.", "verdict": "we would do that again tomorrow"}, "anchor": "anchor_ferry"}
 {"key": "2026-07-18-0043", "ts": "2026-07-18T21:56:59+01:00", "author": "teo", "type": "message", "payload": {"text": "A five with three words under it."}}
 {"key": "2026-07-18-0044", "ts": "2026-07-18T22:00:36+01:00", "author": "noor", "type": "message", "payload": {"text": "it was never going to be anything else and you knew that on the way out"}}
 {"key": "2026-07-18-0045", "ts": "2026-07-18T22:04:13+01:00", "author": "teo", "type": "message", "payload": {"text": "I knew it at twenty to nine, when you were standing on those steps in that coat."}}
@@ -1145,7 +1145,7 @@
 {"key": "2026-07-28-9843", "ts": "2026-07-28T09:20:31+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "charging", "value": false}, "gen": "finish"}
 {"key": "2026-07-28-9844", "ts": "2026-07-28T09:22:54+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "battery", "value": 100}, "gen": "finish"}
 {"key": "2026-07-28-9845", "ts": "2026-07-28T09:24:00+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "ringer", "value": "normal"}, "gen": "finish"}
-{"key": "2026-07-28-0001", "ts": "2026-07-28T10:20:22+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_birthday_hill", "action": "rated", "title": "the twenty seventh", "rating": 4, "note": "cold at the top and the last bus went without us. the walk down was the fifth point and im not giving it"}}
+{"key": "2026-07-28-0001", "ts": "2026-07-28T10:20:22+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_birthday_hill", "action": "said", "title": "the twenty seventh", "note": "cold at the top and the last bus went without us. the walk down was the fifth point and im not giving it", "verdict": "that was a good one"}}
 {"key": "2026-07-28-9176", "ts": "2026-07-28T10:23:17+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-07-27-0030"}, "gen": "finish"}
 {"key": "2026-07-28-0002", "ts": "2026-07-28T10:26:59+01:00", "author": "teo", "type": "message", "payload": {"text": "You are not giving the point and you have described it in full."}}
 {"key": "2026-07-28-0003", "ts": "2026-07-28T10:30:36+01:00", "author": "noor", "type": "message", "payload": {"text": "thats how it works. the note is where the truth goes and the number is where the pride goes"}}

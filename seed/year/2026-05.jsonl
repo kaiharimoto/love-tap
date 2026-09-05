@@ -99,7 +99,7 @@
 {"key": "2026-05-03-9016", "ts": "2026-05-03T12:36:06+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-05-03-0006"}, "gen": "finish"}
 {"key": "2026-05-03-0007", "ts": "2026-05-03T12:40:18+01:00", "author": "noor", "type": "photo", "payload": {"photo": "2026-05_bluebells_wood", "caption": "the whole floor of it. you can smell it before you can see it"}}
 {"key": "2026-05-03-0008", "ts": "2026-05-03T13:10:52+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_bluebells", "action": "done", "title": "the wood at the top of the hill", "when": "2026-05-03T10:30:00+01:00", "place": "the wood above the hospital"}}
-{"key": "2026-05-03-0009", "ts": "2026-05-03T13:20:29+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_bluebells", "action": "rated", "title": "the wood at the top of the hill", "rating": 4, "note": "two hours, one dog, one wrong path. the wrong path was the good part"}}
+{"key": "2026-05-03-0009", "ts": "2026-05-03T13:20:29+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_bluebells", "action": "said", "title": "the wood at the top of the hill", "note": "two hours, one dog, one wrong path. the wrong path was the good part", "verdict": "that was a good one"}}
 {"key": "2026-05-03-9017", "ts": "2026-05-03T14:37:14+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-05-03-0007"}, "gen": "finish"}
 {"key": "2026-05-03-0010", "ts": "2026-05-03T14:40:14+01:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2026-05-03-0007", "feeling_id": "nuzzle"}}
 {"key": "2026-05-03-0011", "ts": "2026-05-03T16:30:05+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "place", "value": "home"}}
@@ -927,7 +927,7 @@
 {"key": "2026-05-21-0025", "ts": "2026-05-21T14:20:07+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_after_exam", "action": "done", "title": "chips by the water", "when": "2026-05-21T13:00:00+01:00", "place": "the steps by the pier"}}
 {"key": "2026-05-21-9147", "ts": "2026-05-21T14:38:18+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-05-21-0023"}, "gen": "finish"}
 {"key": "2026-05-21-0026", "ts": "2026-05-21T14:40:34+01:00", "author": "noor", "type": "photo", "payload": {"photo": "2026-05_chips_steps", "caption": "half of these were mine at the start of it"}}
-{"key": "2026-05-21-0027", "ts": "2026-05-21T15:20:01+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_after_exam", "action": "rated", "title": "chips by the water", "rating": 4, "note": "he did not speak for forty minutes and that was the best part of the month"}}
+{"key": "2026-05-21-0027", "ts": "2026-05-21T15:20:01+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_after_exam", "action": "said", "title": "chips by the water", "note": "he did not speak for forty minutes and that was the best part of the month", "verdict": "that was a good one"}}
 {"key": "2026-05-21-9148", "ts": "2026-05-21T16:39:26+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-05-21-0026"}, "gen": "finish"}
 {"key": "2026-05-21-0028", "ts": "2026-05-21T16:40:28+01:00", "author": "teo", "type": "message", "payload": {"text": "Results in six weeks. I intend not to think about it and I will do that badly."}}
 {"key": "2026-05-21-9149", "ts": "2026-05-21T17:20:20+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-05-21-0028"}, "gen": "finish"}

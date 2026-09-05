@@ -318,7 +318,7 @@
 {"key": "2026-08-08-0009", "ts": "2026-08-08T11:08:20+01:00", "author": "teo", "type": "message", "payload": {"text": "Two of them are for drying. The third was a mistake I made in public."}}
 {"key": "2026-08-08-9588", "ts": "2026-08-08T11:59:03+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "local_hour", "value": 11}, "gen": "finish"}
 {"key": "2026-08-08-0010", "ts": "2026-08-08T12:40:15+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market", "action": "done", "title": "the saturday market", "when": "2026-08-08T09:30:00+01:00", "place": "the market by the water"}}
-{"key": "2026-08-08-0011", "ts": "2026-08-08T12:46:38+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market", "action": "rated", "title": "the saturday market", "rating": 4, "note": "eggs right, coffee wrong, home by twelve. one off for the man with the speaker"}}
+{"key": "2026-08-08-0011", "ts": "2026-08-08T12:46:38+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_market", "action": "said", "title": "the saturday market", "note": "eggs right, coffee wrong, home by twelve. one off for the man with the speaker", "verdict": "that was a good one"}}
 {"key": "2026-08-08-9058", "ts": "2026-08-08T12:49:55+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-08-08-0008"}, "gen": "finish"}
 {"key": "2026-08-08-0012", "ts": "2026-08-08T12:52:04+01:00", "author": "teo", "type": "message", "payload": {"text": "Four is fair. The man with the speaker has ruined better mornings than that one."}}
 {"key": "2026-08-08-9059", "ts": "2026-08-08T13:27:53+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-08-08-0012"}, "gen": "finish"}
@@ -514,7 +514,7 @@
 {"key": "2026-08-14-0009", "ts": "2026-08-14T19:20:05+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "out"}}
 {"key": "2026-08-14-0010", "ts": "2026-08-14T19:26:31+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "place", "value": "out"}}
 {"key": "2026-08-14-0011", "ts": "2026-08-14T23:38:57+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_open_air", "action": "done", "title": "the film in the yard", "when": "2026-08-14T20:30:00+01:00", "place": "the old yard by the arches"}}
-{"key": "2026-08-14-0012", "ts": "2026-08-14T23:42:24+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_open_air", "action": "rated", "title": "the film in the yard", "rating": 2, "note": "the sound went at the hour and never came back. we stayed. the two is for the wall"}}
+{"key": "2026-08-14-0012", "ts": "2026-08-14T23:42:24+01:00", "author": "noor", "type": "date_event", "payload": {"date_id": "date_open_air", "action": "said", "title": "the film in the yard", "note": "the sound went at the hour and never came back. we stayed. the two is for the wall", "verdict": "we tried"}}
 {"key": "2026-08-14-9100", "ts": "2026-08-14T23:45:51+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-08-14-0008"}, "gen": "finish"}
 {"key": "2026-08-14-0013", "ts": "2026-08-14T23:47:50+01:00", "author": "teo", "type": "message", "payload": {"text": "Two is generous. The wall was good. The last forty minutes were a silent film about people we did not know."}}
 {"key": "2026-08-14-0014", "ts": "2026-08-14T23:52:16+01:00", "author": "noor", "type": "message", "payload": {"text": "we made up the dialogue and i want it recorded that mine was better"}}

@@ -15,7 +15,7 @@ class DateList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dates = projectDates(ctx.events);
-    final upcoming = dates.where((d) => d.when != null && d.when!.isAfter(ctx.now) && d.state != 'done' && d.state != 'rated').toList()
+    final upcoming = dates.where((d) => d.when != null && d.when!.isAfter(ctx.now) && d.state != 'done' && d.state != 'said').toList()
       ..sort((a, b) => a.when!.compareTo(b.when!));
     final past = dates.where((d) => !upcoming.contains(d)).toList().reversed.toList();
     final ahead = ctx.few(upcoming);
@@ -73,7 +73,7 @@ class _Header extends StatelessWidget {
       );
 }
 
-/// One date as a ticket stub, with its rating in pencil stars.
+/// One date as a ticket stub, with what they said about it written underneath.
 class _Stub extends StatefulWidget {
   const _Stub({required this.item, required this.ctx, required this.row});
   final DateItem item;
@@ -99,7 +99,7 @@ class _StubState extends State<_Stub> {
         id: item.id,
         row: widget.row,
         width: width,
-        stock: item.rating != null ? 'index' : 'receipt',
+        stock: item.verdict != null ? 'index' : 'receipt',
         onTap: _act,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,10 +113,13 @@ class _StubState extends State<_Stub> {
                 const SizedBox(width: 8),
                 if (item.when != null)
                   Text(DateFormat('d MMM').format(item.when!), style: Hands.margin(size: 13)),
-                const Spacer(),
-                if (item.rating != null) Stars(rating: item.rating!),
               ],
             ),
+            if (item.verdict != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text(item.verdict!, style: dateStyle(by)),
+              ),
             if (item.note != null)
               Padding(padding: const EdgeInsets.only(top: 4), child: Text(item.note!, style: Hands.margin(size: 14))),
           ],
@@ -137,7 +140,7 @@ class _StubState extends State<_Stub> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            for (final a in const ['scheduled', 'done', 'rated', 'remembered'])
+            for (final a in const ['scheduled', 'done', 'said', 'remembered'])
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.pop(ctx, a),
@@ -159,10 +162,12 @@ class _StubState extends State<_Stub> {
     if (choice == 'scheduled') {
       payload['when'] = DateTime.now().add(const Duration(days: 7)).toIso8601String();
     }
-    if (choice == 'rated') {
-      final note = await _ask(context, 'a line about it');
-      payload['rating'] = 4;
-      if (note != null && note.trim().isNotEmpty) payload['note'] = note.trim();
+    if (choice == 'said') {
+      // What it was, in your own words. There is nothing to pick from and nothing to score: the
+      // question is the one a person asks, and whatever you write is what the date carries.
+      final said = await _ask(context, 'what was it');
+      if (said == null || said.trim().isEmpty) return;
+      payload['verdict'] = said.trim();
     }
     await ctx.emit('date_event', payload);
   }
