@@ -17,6 +17,9 @@ import '../../scope.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
 import '../chat/blob_widgets.dart';
+import '../../spine/projections/thread.dart';
+import '../chat/renderers.dart';
+import '../../material/assignment.dart';
 
 enum MomentsView { media, milestones, feelings }
 
@@ -535,34 +538,60 @@ class _One extends StatelessWidget {
 }
 
 /// What happened: milestones, dates, rituals and new feelings, in order.
+///
+/// Each one on the same piece of paper it is in the thread on, with the same thing written on it:
+/// the renderer the registry names for the type, on the stock material/assignment.dart picks for
+/// it, torn along the tear its id picks. It used to be a bare row of text on the wood here, a torn
+/// slip in Us and a pencil line in Chat — one event, three surfaces.
 class _Timeline extends StatelessWidget {
   const _Timeline({required this.events});
   final List<Event> events;
 
   @override
   Widget build(BuildContext context) {
+    final scope = AppScope.of(context);
     final list = events.reversed.toList();
+    final width = MediaQuery.sizeOf(context).width - 28;
     return ListView.builder(
-      padding: const EdgeInsets.fromLTRB(12, 4, 12, 90),
+      padding: const EdgeInsets.fromLTRB(14, 4, 14, 90),
       itemCount: list.length,
       itemBuilder: (context, i) {
         final e = list[i];
-        final title = (e.payload['title'] ?? e.payload['name'] ?? e.type) as String;
+        final spec = kEventTypeById[e.type];
+        final draw = spec == null ? null : kThreadRenderers[spec.renderer];
+        final item = ThreadItem(
+          event: e,
+          text: null,
+          edited: false,
+          deleted: false,
+          reactions: const [],
+          replyTo: null,
+          delivery: Delivery.values.first,
+          writtenEarlier: false,
+        );
+        final body = draw == null
+            ? Text((e.payload['title'] ?? e.payload['name'] ?? e.type) as String, style: Hands.of(e.author, size: 17))
+            : draw(NoteContext(item: item, registry: scope.feelings, me: scope.me, context: context));
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 86,
-                child: Text(
-                  DateFormat('d MMM yy').format(DateTime.fromMillisecondsSinceEpoch(e.ts)),
-                  style: Hands.margin(size: 12),
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: Slip(
+            id: e.id,
+            row: i,
+            stock: stockFor(e),
+            width: width,
+            padding: const EdgeInsets.fromLTRB(15, 10, 15, 9),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                body,
+                const SizedBox(height: 4),
+                Text(
+                  '${DateFormat('EEE d MMM yy').format(DateTime.fromMillisecondsSinceEpoch(e.ts).toLocal())} · ${e.author.name}',
+                  style: Hands.margin(size: 11),
                 ),
-              ),
-              Expanded(child: Text(title, style: Hands.of(e.author, size: 17))),
-              Stamped(e.type.replaceAll('_', ' '), size: 8, colour: Pen.margin),
-            ],
+              ],
+            ),
           ),
         );
       },
