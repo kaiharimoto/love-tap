@@ -7,7 +7,19 @@ prove: that no frame was dropped (a dropped frame shows up as two identical neig
 motion actually moves (a still clip is a failure), and that the light never changes direction
 mid-motion.
 
-  python3 tools/check/frames.py evidence/frames/06_unfolding --strip evidence/crops/06_strip.png
+The rule on repeated frames is the brief's, word for word: a clip in which any frame is
+pixel-identical to its predecessor is a failure. It used to be a tolerance — up to a third of a
+clip could be frames the app did not draw — and every clip in the set leaned on it: twenty held
+frames before a note opened, a hundred after a feeling had landed. A held frame is not a dropped
+frame, but a reader cannot tell the two apart, so the scenes are cut to the motion instead and
+this refuses the first still it finds.
+
+  python3 tools/check/frames.py evidence/frames/06_unfolding --strip evidence/crops/06_strip.png \
+      --log evidence/logs/06_unfolding.json
+
+With --log, the scene's own log is read for the size of each clock step, so the report says what
+one frame of the clip is worth in the app's time: these are app-time recordings, not wall-clock
+ones, and a critic who reads them as real time is wrong by the ratio recorded here.
 """
 import argparse
 import json
@@ -52,6 +64,7 @@ def main():
     ap.add_argument("--fps", type=float, default=60.0)
     ap.add_argument("--out", default="")
     ap.add_argument("--min-seconds", type=float, default=0.0)
+    ap.add_argument("--log", default="", help="the scene log, for the clock step behind each run")
     args = ap.parse_args()
 
     paths = sorted(pathlib.Path(args.dir).glob("*.png"))
@@ -91,19 +104,39 @@ def main():
     # the light must not swing about mid-motion: overall brightness may drift, not jump
     jumps = [i for i in range(1, len(means)) if abs(means[i] - means[i - 1]) > 0.06]
 
+    # What one frame is worth in the app's time, from the scene log: every `frames` run records
+    # how many milliseconds the driven clock was stepped between two grabs.
+    steps_ms = []
+    app_ms = None
+    if args.log and pathlib.Path(args.log).exists():
+        try:
+            scene_log = json.loads(pathlib.Path(args.log).read_text())
+            for shot in scene_log.get("shots", []):
+                if "frames" in shot:
+                    steps_ms.append({"frames": shot["frames"], "step_ms": shot.get("ms"),
+                                     "dir": shot.get("dir")})
+            app_ms = sum(int(s["frames"]) * int(s["step_ms"] or 0) for s in steps_ms)
+        except Exception:
+            steps_ms = []
+
     report = {
         "dir": args.dir,
         "frames": len(paths),
         "fps": args.fps,
         "seconds": round(seconds, 2),
+        "clock": "driven",
+        "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a "
+                    "time; wall-clock time between grabs is not in the clip",
+        "runs": steps_ms,
+        "app_seconds": None if app_ms is None else round(app_ms / 1000.0, 2),
+        "playback_over_app_time": None if not app_ms else round((seconds * 1000.0) / app_ms, 3),
         "mean_change_per_frame": round(moved, 5),
         "repeated_frames": len(still),
         "repeated_fraction": round(still_fraction, 3),
         "longest_still_run": longest_still,
-        "repeated_at": still[:12],
+        "repeated_at": still,
         "brightness_jumps": len(jumps),
-        "ok": (moved > 1e-4 and not jumps and seconds >= args.min_seconds
-               and still_fraction < 0.35 and longest_still <= args.fps),
+        "ok": (moved > 1e-4 and not jumps and seconds >= args.min_seconds and not still),
     }
     if not report["ok"]:
         why = []
@@ -113,10 +146,9 @@ def main():
             why.append(f"the light jumps {len(jumps)} times")
         if seconds < args.min_seconds:
             why.append(f"{seconds:.1f}s is short of {args.min_seconds}s")
-        if still_fraction >= 0.35:
-            why.append(f"{still_fraction:.0%} of it is frames the app did not draw")
-        if longest_still > args.fps:
-            why.append(f"it holds still for {longest_still / args.fps:.1f}s in one stretch")
+        if still:
+            why.append(f"{len(still)} frame(s) identical to the one before (first at {still[0]}); "
+                       f"the brief allows none")
         report["why"] = "; ".join(why)
     if args.strip:
         report["strip"] = args.strip

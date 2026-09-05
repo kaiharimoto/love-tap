@@ -30,7 +30,7 @@ bash blender/run.sh blender/videos/clip.py -- --all --res 320 --samples 8 --fps 
 python3 blender/videos/cut.py --all 2>&1 | tail -16
 
 say "4/5 the fold sequence, all two hundred and forty frames of it"
-bash blender/run.sh blender/folds/fold.py -- --seq unfold_thirds --frames 240 --res 540 \
+bash blender/run.sh blender/folds/fold.py -- --seq unfold_thirds --frames 240 --res 600 --samples 48 \
     2>&1 | grep -E "^fold:|Error|Traceback" || true
 
 say "5/5 paper stocks, dusk — the half the library has never had"

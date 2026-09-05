@@ -21,9 +21,13 @@ on the Chat hero — evidence/crops/ holds those — and in slow motion on the u
 
 ## What to open
 
-Everything under `evidence/`: the seventeen artifacts, `evidence/crops/` for the three-hundred
-per cent crops and the clip frame strips, and `evidence/logs/` for what each capture recorded
-about itself. Clips are `.mp4`; step through them rather than judging them on one frame.
+The artifacts under `evidence/`, `evidence/crops/` for the three-hundred per cent crops and the
+clip frame strips, `evidence/logs/` for what each capture recorded about itself, and
+`evidence/frames.json` for what each clip is made of. Clips are `.mp4`; step through them rather
+than judging them on one frame, and read them in **app time**: BRIEFING.md explains that every
+frame is one step of the app's own clock, and `frames.json` gives the step and the ratio of
+playback to app time. Do not open `evidence/SCORE.json` or `evidence/critics/<n>/`: they are
+another reader's conclusions, not evidence.
 
 An artifact that is missing is a finding. `evidence/frames.json` says which are missing and why —
 read the reason and judge whether it is a reason or an excuse.

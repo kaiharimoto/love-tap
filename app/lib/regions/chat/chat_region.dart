@@ -42,6 +42,10 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   final _text = TextEditingController();
   final _scroll = ItemScrollController();
   final _positions = ItemPositionsListener.create();
+
+  /// The ids the thread held when this region was first drawn. A row that is not among them came
+  /// across the wire while the region was open, and a folded one lands rather than being found.
+  Set<String>? _openedWith;
   final _media = MediaCapture();
   final _recorder = VoiceRecorder();
   Timer? _draftTimer;
@@ -455,6 +459,8 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                           unreadFrom: _arrivedAt ??= scope.thread.readUpto[scope.me] ?? 0,
                           registry: registry,
                           highlight: it.id == _highlightId,
+                          // not in the thread when it was opened: it has just arrived
+                          arrived: !(_openedWith ??= {for (final x in items) x.id}).contains(it.id),
                           onLongPress: () => _actions(it, registry),
                         );
                       },

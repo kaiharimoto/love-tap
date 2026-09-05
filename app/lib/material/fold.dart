@@ -5,6 +5,14 @@
 // the light breaks across the crease as the flap turns and the shadow moves with the paper. The
 // widget's whole job is to hold the frames in memory before the motion starts and then show them
 // in order, because a fold that stutters while it decodes is worse than no fold at all.
+//
+// A note that arrived folded is a letter, and it stays one. It used to turn into something else
+// at the end: the sequence played to its last frame, that frame was taken down, and the torn note
+// the event would otherwise have been faded up in its place — from nothing, on the wall clock, in
+// the gap between two screenshots. The clip ended on a blank rectangle and the frame checker
+// called the swap a jump in the light. Now the sheet that opens is the sheet the writing is on:
+// the ink comes up on the creased paper as it settles flat, and the row keeps that paper for as
+// long as it is on screen.
 import 'dart:async';
 import 'dart:ui' as ui;
 
@@ -13,7 +21,6 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart';
 
 import '../capture/hooks.dart';
-import '../flags.dart';
 import 'library.dart';
 import 'motion.dart';
 
@@ -90,6 +97,14 @@ class FoldFrames {
     return best < 0 ? null : _held[best];
   }
 
+  /// The last frame, decoded on demand: what a note that was opened earlier lies open as.
+  Future<ui.Image?> last() async {
+    if (length == 0) return null;
+    final i = length - 1;
+    if (!_held.containsKey(i)) await _decode(i);
+    return _held[i];
+  }
+
   Future<void> _fill(int from) async {
     // decoded together rather than one after another: a chain of twenty-four awaits is twenty-four
     // round trips through the event loop before the first frame after the playhead is ready
@@ -100,8 +115,9 @@ class FoldFrames {
       want.add(i);
     }
     await Future.wait(want.map(_decode));
-    // let go of everything well behind the playhead
-    final drop = _held.keys.where((i) => i < from - (window - _ahead)).toList();
+    // let go of everything well behind the playhead — except the last frame, which every opened
+    // letter on the screen is lying flat as
+    final drop = _held.keys.where((i) => i < from - (window - _ahead) && i != length - 1).toList();
     for (final i in drop) {
       _held.remove(i)?.dispose();
     }
@@ -131,10 +147,18 @@ class FoldFrames {
   }
 }
 
+/// What lies on the sheet: drawn over the frame, given how far open the sheet is (0 folded, 1
+/// flat) and the size the frame is being drawn at.
+typedef SheetOverlay = Widget Function(BuildContext context, double progress, Size sheet);
+
 /// Plays a fold sequence once and then calls [onOpen].
 ///
 /// In capture mode the frame is chosen by the driven clock rather than by a ticker, so a clip is
 /// a recording of the app at known times rather than whatever the browser managed.
+///
+/// One of these carries a letter through its whole life: lying folded ([autoplay] false), opening
+/// (autoplay turned on later, see [didUpdateWidget]), and lying open, which is the last frame held
+/// with [overlay] drawn on it. Nothing is swapped out on the way, so nothing jumps.
 class Unfolding extends StatefulWidget {
   const Unfolding({
     super.key,
@@ -143,6 +167,8 @@ class Unfolding extends StatefulWidget {
     this.autoplay = true,
     this.onOpen,
     this.holdFirst = Duration.zero,
+    this.startOpen = false,
+    this.overlay,
   });
 
   final String seq;
@@ -153,6 +179,12 @@ class Unfolding extends StatefulWidget {
   /// How long the note lies there folded before it starts to open.
   final Duration holdFirst;
 
+  /// Begin on the last frame, fully open: a letter that was opened earlier and is drawn again.
+  final bool startOpen;
+
+  /// What lies on the sheet, drawn over the frame.
+  final SheetOverlay? overlay;
+
   @override
   State<Unfolding> createState() => _UnfoldingState();
 }
@@ -162,6 +194,7 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
   Ticker? _ticker;
   StreamSubscription<Duration>? _driven;
   Duration _elapsed = Duration.zero;
+  bool _started = false;
   bool _done = false;
 
   /// The last frame actually drawn: if decoding falls a frame behind, the note holds rather than
@@ -173,14 +206,28 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    FoldFrames.load(widget.seq).then((f) {
+    _done = widget.startOpen;
+    FoldFrames.load(widget.seq).then((f) async {
       if (!mounted) return;
+      if (widget.startOpen) {
+        // straight to the sheet lying flat, with nothing to play
+        _lastDrawn = await f.last();
+        if (!mounted) return;
+      }
       setState(() => _frames = f);
-      if (widget.autoplay) _start();
+      if (widget.autoplay && !widget.startOpen) _start();
     });
   }
 
+  @override
+  void didUpdateWidget(Unfolding old) {
+    super.didUpdateWidget(old);
+    // the same widget, asked to open: the folded sheet starts to turn without being replaced
+    if (widget.autoplay && !old.autoplay && !_started && !_done && _frames != null) _start();
+  }
+
   void _start() {
+    _started = true;
     if (DrivenClock.enabled) {
       final from = DrivenClock.now;
       _driven = DrivenClock.ticks.listen((now) => _advance(now - from));
@@ -189,13 +236,19 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
     _ticker = createTicker(_advance)..start();
   }
 
+  Duration get _length {
+    final f = _frames;
+    if (f == null || f.length == 0) return Duration.zero;
+    return Duration(microseconds: f.length * 1000000 ~/ _frameRate);
+  }
+
   void _advance(Duration elapsed) {
     if (!mounted || _done) return;
     final f = _frames;
     if (f == null || f.length == 0) return;
     setState(() => _elapsed = elapsed);
     final after = elapsed - widget.holdFirst;
-    if (after.inMilliseconds >= f.length * 1000 / _frameRate) {
+    if (after >= _length) {
       _done = true;
       _ticker?.stop();
       _driven?.cancel();
@@ -224,19 +277,36 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
     return widget.width * size.height / size.width;
   }
 
+  /// How far open the sheet is, 0 to 1.
+  double get progress {
+    if (_done || widget.startOpen) return 1.0;
+    final total = _length;
+    if (total == Duration.zero || !_started) return 0.0;
+    final after = _elapsed - widget.holdFirst;
+    if (after.isNegative) return 0.0;
+    return (after.inMicroseconds / total.inMicroseconds).clamp(0.0, 1.0);
+  }
+
   @override
   Widget build(BuildContext context) {
     final f = _frames;
     if (f == null || f.length == 0) return SizedBox(width: widget.width, height: _height);
-    final after = _elapsed - widget.holdFirst;
-    final i = after.isNegative ? 0 : (after.inMilliseconds * _frameRate ~/ 1000).clamp(0, f.length - 1);
+    final p = progress;
+    final i = _done ? f.length - 1 : (p * (f.length - 1)).round().clamp(0, f.length - 1);
     final image = f.at(i) ?? _lastDrawn;
     if (image == null) return SizedBox(width: widget.width, height: _height);
     _lastDrawn = image;
+    final size = Size(widget.width, widget.width * image.height / image.width);
+    final overlay = widget.overlay;
     return SizedBox(
-      width: widget.width,
-      height: widget.width * image.height / image.width,
-      child: CustomPaint(painter: _FramePainter(image)),
+      width: size.width,
+      height: size.height,
+      child: Stack(
+        children: [
+          Positioned.fill(child: CustomPaint(painter: _FramePainter(image))),
+          if (overlay != null) overlay(context, p, size),
+        ],
+      ),
     );
   }
 }
@@ -259,22 +329,53 @@ class _FramePainter extends CustomPainter {
   bool shouldRepaint(_FramePainter old) => !identical(old.image, image);
 }
 
-/// A note that arrived and has not been opened yet: it lies folded until it is touched.
+/// A note that arrived and has not been opened yet: it lies folded until it is touched, and when
+/// it opens the writing is on the sheet that opened.
 ///
 /// This is the only place a fold sequence appears in the thread, and it is why the sequences exist:
 /// their notes arrive folded because that is what a note passed across a table is.
 class FoldedNote extends StatefulWidget {
-  const FoldedNote({super.key, required this.width, required this.child, this.seq = 'unfold_thirds'});
+  const FoldedNote({
+    super.key,
+    required this.id,
+    required this.width,
+    required this.child,
+    this.letter,
+    this.seq = 'unfold_thirds',
+    this.arriving = false,
+  });
 
+  /// The event this is the paper of. Opened once, it stays open however many times the row is
+  /// built: a lazy list throws a row away when it scrolls off and makes a new one when it comes
+  /// back, and a letter you had opened re-folding itself behind your back is a fault.
+  final String id;
   final double width;
+
+  /// The note as it would be drawn on its own torn paper: what is shown when no sequence is baked.
   final Widget child;
+
+  /// What is written on the letter — the same content as [child], without the torn paper — drawn
+  /// on the creased sheet as it settles flat. Without it the sheet opens blank and [child] is shown
+  /// in its place once it has.
+  final Widget? letter;
   final String seq;
+
+  /// This note has just arrived: it lands on the desk rather than being there already.
+  final bool arriving;
 
   /// Whether a fold sequence is on disk at all. Without one the note simply lies flat, which is
   /// honest: there is no substitute drawn in code for a render that has not been made.
   static bool get available =>
       MaterialLibrary.loaded && (MaterialLibrary.instance.folds[_defaultSeq] ?? 0) >= 60;
   static const _defaultSeq = 'unfold_thirds';
+
+  /// Where the writing goes on the open sheet, as fractions of the frame: inside the paper, clear
+  /// of the shadow that runs off its lower right. Measured against the packed frames.
+  static const inset = [0.075, 0.085, 0.095, 0.17];
+
+  /// The writing comes up over the last part of the sequence, while the sheet is settling flat.
+  /// Starting it only once the sequence had finished is what left the clip ending on blank paper.
+  static const inkFrom = 0.84;
 
   @override
   State<FoldedNote> createState() => _FoldedNoteState();
@@ -287,6 +388,10 @@ class _FoldedNoteState extends State<FoldedNote> {
   @override
   void initState() {
     super.initState();
+    if (Folds.wasOpened(widget.id)) {
+      _opening = true;
+      _open = true;
+    }
     Folds.whenAsked(_open2);
   }
 
@@ -294,56 +399,79 @@ class _FoldedNoteState extends State<FoldedNote> {
     if (mounted && !_opening) setState(() => _opening = true);
   }
 
+  void _opened() {
+    Folds.markOpened(widget.id);
+    if (mounted) setState(() => _open = true);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!FoldedNote.available) return widget.child;
-    // The three states are three different heights — a folded sheet, the sequence playing, the
-    // note with the writing on it — and swapping between them moved everything underneath by a
-    // hundred points in one frame. The note keeps its place in the thread while it changes shape.
-    return AnimatedSize(
-      duration: Motion.settle,
-      curve: Curves.easeOut,
-      alignment: Alignment.topCenter,
-      child: _face(context),
+    final letter = widget.letter;
+    // No letter to write on the sheet: the sheet opens and the torn note is shown once it has.
+    // Kept for callers that have nothing but a finished piece of paper.
+    if (letter == null && _open) return widget.child;
+
+    Widget sheet = Unfolding(
+      seq: widget.seq,
+      width: widget.width,
+      autoplay: _opening,
+      startOpen: _open && Folds.wasOpened(widget.id),
+      onOpen: _opened,
+      overlay: letter == null ? null : (ctx, p, size) => _ink(ctx, p, size, letter),
     );
+    if (!_opening) {
+      sheet = GestureDetector(onTap: () => setState(() => _opening = true), child: sheet);
+    }
+    if (widget.arriving) {
+      // It lands: a little above the desk and a little large, dropping and settling into its place
+      // on the clock the rest of the app moves on. Its shadow is in the frame, so what moves is
+      // the whole sheet, the way a folded note tossed onto a table does.
+      sheet = Settling(
+        duration: Motion.land,
+        curve: Motion.drop,
+        builder: (_, t, child) => Opacity(
+          opacity: (t * 4).clamp(0.0, 1.0),
+          child: Transform.translate(
+            offset: Offset(0, -18 * (1 - t)),
+            child: Transform.scale(scale: 1.06 - 0.06 * t, alignment: Alignment.topCenter, child: child),
+          ),
+        ),
+        child: sheet,
+      );
+    }
+    return sheet;
   }
 
-  Widget _face(BuildContext context) {
-    if (_open) {
-      // The last frame of the sequence is the sheet lying flat, and the note is the same sheet
-      // with the writing on it — but they are not the same height, and cutting from one to the
-      // other is a twitch at the end of every note anyone opens. In a clip it is a jump in the
-      // light, which is how a recording stitched out of two takes gives itself away. So the note
-      // arrives over the frame it is replacing rather than instead of it.
-      return Settling(
-        builder: (_, t, child) => Opacity(opacity: t, child: child),
-        child: widget.child,
-      );
-    }
-    if (_opening) {
-      return Unfolding(
-        seq: widget.seq,
-        width: widget.width,
-        // long enough for a reader to see the note lying folded, short enough that the clip
-        // is the note opening rather than the note sitting there
-        holdFirst: Flags.capture ? const Duration(milliseconds: 200) : Duration.zero,
-        onOpen: () => setState(() => _open = true),
-      );
-    }
-    return GestureDetector(
-      onTap: () => setState(() => _opening = true),
-      child: Settling(
-        builder: (_, t, child) => Transform.scale(scale: 0.98 + 0.02 * t, child: child),
-        child: Unfolding(seq: widget.seq, width: widget.width, autoplay: false),
+  Widget _ink(BuildContext context, double p, Size size, Widget letter) {
+    final ink = ((p - FoldedNote.inkFrom) / (1.0 - FoldedNote.inkFrom)).clamp(0.0, 1.0);
+    if (ink <= 0) return const SizedBox.shrink();
+    final i = FoldedNote.inset;
+    final inner = size.width * (1 - i[0] - i[2]);
+    return Positioned.fill(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(size.width * i[0], size.height * i[1], size.width * i[2], size.height * i[3]),
+        child: Opacity(
+          opacity: ink,
+          // a letter is the size it is; writing that will not fit is written smaller, the way a
+          // person running out of page writes smaller, rather than running off the paper
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.topLeft,
+            child: SizedBox(width: inner, child: letter),
+          ),
+        ),
       ),
     );
   }
 }
 
 /// Called from capture mode and from the thread: open every folded note on screen at once, so the
-/// unfolding clip is of the app rather than of a thumb.
+/// unfolding clip is of the app rather than of a thumb. Also the record of which letters have been
+/// opened, so a row that is rebuilt lies open rather than re-folding itself.
 class Folds {
   static final List<VoidCallback> _waiting = [];
+  static final Set<String> _opened = {};
 
   static void whenAsked(VoidCallback open) => _waiting.add(open);
 
@@ -354,6 +482,12 @@ class Folds {
     _waiting.clear();
   }
 
+  static bool wasOpened(String id) => _opened.contains(id);
+  static void markOpened(String id) => _opened.add(id);
+
   @visibleForTesting
-  static void reset() => _waiting.clear();
+  static void reset() {
+    _waiting.clear();
+    _opened.clear();
+  }
 }

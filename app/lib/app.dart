@@ -67,7 +67,13 @@ class DeskApp extends StatelessWidget {
           primary: Pen.ballpoint,
           secondary: Pen.graphite,
         ),
-        textTheme: Typography.blackCupertino.apply(fontFamily: 'TeoHand'),
+        // The hand's contextual alternates on every Text that falls through to the theme, not only
+        // on the ones set through Hands: a theme family with the feature off is a hand whose five
+        // variants of every letter are never asked for.
+        textTheme: Typography.blackCupertino.apply(
+          fontFamily: 'TeoHand',
+          fontFeatures: const [FontFeature.enable('calt'), FontFeature.enable('liga')],
+        ),
       ),
       // dusk only when the dusk half of the library is actually baked; see MaterialLibrary.hasDusk
       home: Light(

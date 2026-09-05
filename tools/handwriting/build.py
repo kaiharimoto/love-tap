@@ -39,7 +39,11 @@ GENERATOR = "tools/handwriting/build.py"
 DEFAULT_SEED = 20260903
 FACES = ["NoorHand", "TeoHand", "DeskStamp"]
 UPM = 1000
-HAUSDORFF_MIN = 12.0
+# Two variants of a glyph must be at least this far apart (Hausdorff, font units) — the default
+# when a face's hands.json entry has no distinct_min of its own. Twelve units was the bar for every
+# face, and twelve thousandths of an em is two thirds of a device pixel at the size a note is set:
+# the fonts carried five variants of every letter and the pixels showed one.
+HAUSDORFF_MIN = 40.0
 PUA_BASE = 0xE000  # variant glyphs also get private-use codepoints so plain renderers can reach them
 
 
@@ -304,13 +308,25 @@ def style_strokes(glyph, variant, hand, rng, plan=None):
     strokes = stretch_exit(strokes, hand.get("exit_stretch", 1.0))
     sx, sy = hand["width_scale"], hand["xheight_scale"]
     strokes = [s * np.array([sx, sy, 1.0]) for s in strokes]
+    J = hand["jitter"]
+    slant = hand["slant_deg"]
     if variant > 0:
         strokes = jitter_strokes(strokes, hand, rng)
         wob = hand["baseline_wobble"]
         dy = rng.uniform(-wob, wob)
         strokes = [s + np.array([0, dy, 0]) for s in strokes]
+        # Nobody writes a letter the same width or at the same lean twice. The field and the noise
+        # move points; these change the letter's proportions, which is what a second look at a page
+        # of handwriting actually sees.
+        wv = J.get("width_var", 0.0)
+        if wv:
+            k = rng.uniform(1.0 - wv, 1.0 + wv)
+            strokes = [s * np.array([k, 1.0, 1.0]) for s in strokes]
+        sv = J.get("slant_var_deg", 0.0)
+        if sv:
+            slant += rng.uniform(-sv, sv)
     strokes = overshoot_start(strokes, hand["start_overshoot"], roles)
-    sl = math.tan(math.radians(hand["slant_deg"]))
+    sl = math.tan(math.radians(slant))
     if sl:
         strokes = [s + np.column_stack([s[:, 1] * sl, np.zeros(len(s)), np.zeros(len(s))]) for s in strokes]
     return strokes, roles, alt
@@ -823,9 +839,10 @@ def covers(contours, want, slack=0.22):
 
 
 def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
-    """All variants of a glyph, re-rolled until every pair is distinct (Hausdorff > 12) and every
-    one of them still carries all of its ink."""
+    """All variants of a glyph, re-rolled until every pair is distinct (Hausdorff over the face's
+    distinct_min) and every one of them still carries all of its ink."""
     n = hand["variants"]
+    apart = float(hand.get("distinct_min", HAUSDORFF_MIN))
     results = []
     plan = plan_alts(glyph, hand, np.random.default_rng([seed, face_index, glyph_index, 7]))
     want = skeleton_bounds(glyph)
@@ -844,11 +861,16 @@ def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
                 fallback = made
             if not whole:
                 continue                                  # a letter missing a stroke is never kept
-            if v == 0 or not glyph["strokes"] or all(hausdorff(pts, r["pts"]) > HAUSDORFF_MIN for r in results):
+            apartness = min((hausdorff(pts, r["pts"]) for r in results), default=1e9)
+            made["apart"] = apartness
+            if fallback is not None and fallback.get("whole") and whole and apartness > fallback.get("apart", -1):
+                fallback = made      # among whole attempts, keep the one furthest from its siblings
+            if v == 0 or not glyph["strokes"] or apartness > apart:
                 chosen = made
                 break
         results.append(chosen or fallback or
-                       {"contours": [], "pts": np.zeros((0, 2)), "alt": None, "attempts": 24, "whole": True})
+                       {"contours": [], "pts": np.zeros((0, 2)), "alt": None, "attempts": 24, "whole": True,
+                        "apart": 0.0})
     return results
 
 
@@ -950,14 +972,27 @@ def feature_text(base_names, n):
         rot = [f"sub @v{k} by @v{(k + j) % n};" for k in range(n)]
         lines.append(f"lookup ROT{j} {{ " + " ".join(rot) + f" }} ROT{j};")
     lines.append("")
-    lines.append("feature calt {")
+    # Two passes means two lookups. Written as rules inside the feature block, feaLib folds them
+    # all into one chained lookup, and a shaper applies one lookup once per position — so a letter
+    # the cascade had already handled was never rotated, and the rotation only ever ran on letters
+    # the cascade had left alone. Named lookups referenced from the feature run in order, and the
+    # second sees the first's output.
+    lines.append("lookup CASCADE {")
     for k in range(n - 1):
         lines.append(f"  sub @v{k} @v0' lookup CYC{k + 1};")
+    lines.append("} CASCADE;")
+    lines.append("")
     all_v = " ".join(f"@v{k}" for k in range(n))
+    lines.append("lookup ROTATE {")
     for j in filled:
         if j == 0:
             continue
         lines.append(f"  sub @K{j} [{all_v}]' lookup ROT{j};")
+    lines.append("} ROTATE;")
+    lines.append("")
+    lines.append("feature calt {")
+    lines.append("  lookup CASCADE;")
+    lines.append("  lookup ROTATE;")
     lines.append("} calt;")
     lines.append("")
     for j in range(1, 6):

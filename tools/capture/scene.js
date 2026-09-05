@@ -90,6 +90,13 @@ function ensure(p) {
   async function settle(ms) {
     await page.waitForTimeout(ms === undefined ? (scene.settle || 700) : ms);
   }
+  // how many rows the thread holds right now, from the app itself; -1 when the build has no handle
+  async function count() {
+    const raw = await page.evaluate(() => (window.__deskCount ? String(window.__deskCount()) : '-1'));
+    const n = parseInt(raw, 10);
+    return Number.isFinite(n) ? n : -1;
+  }
+  let countBeforeFar = -1;
 
   for (const step of scene.steps) {
     const started = Date.now();
@@ -120,11 +127,33 @@ function ensure(p) {
         await hook('__deskPair', pair.base, pair.words);
         break;
       }
-      case 'far':
+      case 'far': {
         // Make the other phone do something. It is a headless process on the far end of the
         // transport (app/tool/host_daemon.dart) watching a file for one instruction a line.
+        // The thread's length is noted first, so `awaitArrival` can tell when what was asked for
+        // has actually crossed the wire and landed in this phone's log.
+        countBeforeFar = await count();
         farSay(step.arg);
         break;
+      }
+      case 'awaitArrival': {
+        // Wait until something the far phone was told to send has arrived here — the log has grown
+        // past where it stood at the last `far`. Frames grabbed before that would be frames in
+        // which nothing has happened yet, and a clip of an arrival that opens on a run of
+        // identical frames is a clip with a hole in the front of it. Fails rather than proceeding
+        // if nothing arrives: an arrival that never came is not something to photograph.
+        const deadline = Date.now() + (step.timeout || 30000);
+        const want = step.over === undefined ? countBeforeFar + 1 : step.over;
+        let now = await count();
+        while (now < want) {
+          if (Date.now() > deadline) throw new Error(`awaitArrival: the log stood at ${now} after ${step.timeout || 30000}ms, waiting for ${want}`);
+          await page.waitForTimeout(step.every || 100);
+          now = await count();
+        }
+        log.arrivals = log.arrivals || [];
+        log.arrivals.push({ before: countBeforeFar, after: now, waited_ms: Date.now() - (deadline - (step.timeout || 30000)) });
+        break;
+      }
       case 'showWords':
         await hook('__deskShowWords'); break;
       case 'step':

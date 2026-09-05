@@ -235,10 +235,17 @@ def add_shadow_catcher(scene, size_m=2.0):
 
 
 def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_image=None,
-                   fibre_scale=900.0, roughness=0.78, subsurface=0.012):
+                   fibre_scale=900.0, roughness=0.78, subsurface=0.012, mottle_scale=1.0):
     """The base paper material. Fibre relief is a bump from layered noise; the printed rules
     (an image texture generated in Python) are multiplied over the base colour; yellowing warms
-    the base toward the edges. tooth scales the relief. Returns the material."""
+    the base toward the edges. tooth scales the relief. Returns the material.
+
+    mottle_scale multiplies the spatial frequency of the four albedo layers. The scales below are
+    right for a sheet rendered at the stocks' density (about 8.7 px/mm); a sheet rendered at a
+    third of that — the fold frames — has to carry its fibres three times bigger, or they fall
+    under one pixel and Cycles averages them into a flat field. That is exactly what the fold
+    sequence was: 94 of 240 frames below the paper floor, with the same material the stocks pass
+    with. The generator that knows its own px/mm passes the ratio here."""
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
     nt = mat.node_tree
@@ -327,13 +334,13 @@ def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_i
     # across in the world, so a feature has to be bigger than about a fifth of a millimetre to
     # survive to a person's eye at all; the first pass put the speckle at a twelfth of that and it
     # averaged to nothing on the way down.
-    _mottle(120.0, 6.0, 0.62, 0.030 * tooth)                      # look-through, the cloudiness
-    _mottle(360.0, 8.0, 0.70, 0.034 * tooth)                       # individual fibres
-    _mottle(220.0, 6.0, 0.55, 0.028 * tooth, machine.outputs["Vector"])   # along the machine
+    _mottle(120.0 * mottle_scale, 6.0, 0.62, 0.030 * tooth)                      # look-through, the cloudiness
+    _mottle(360.0 * mottle_scale, 8.0, 0.70, 0.034 * tooth)                       # individual fibres
+    _mottle(220.0 * mottle_scale, 6.0, 0.55, 0.028 * tooth, machine.outputs["Vector"])   # along the machine
     speck = nodes.new("ShaderNodeTexWhiteNoise")
     speck.noise_dimensions = "2D"
     speck_map = nodes.new("ShaderNodeMapping")
-    speck_map.inputs["Scale"].default_value = (820.0, 820.0, 1.0)
+    speck_map.inputs["Scale"].default_value = (820.0 * mottle_scale, 820.0 * mottle_scale, 1.0)
     links.new(texco.outputs["UV"], speck_map.inputs["Vector"])
     links.new(speck_map.outputs["Vector"], speck.inputs["Vector"])
     speck_ramp = nodes.new("ShaderNodeValToRGB")

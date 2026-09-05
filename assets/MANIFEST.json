@@ -1,5 +1,43 @@
 {
  "files": {
+  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/foldtest/unfold_thirds/0120.png": {
+   "bytes": 188302,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "crease_ridge_mm": 0.27999999999999997,
+    "density_vs_stock": 0.373,
+    "frame": 120,
+    "frames": 240,
+    "grid": [
+     160,
+     180
+    ],
+    "light": "day",
+    "look": {
+     "fibre": 410.1,
+     "mottle_scale": 0.373,
+     "rgb": [
+      0.94,
+      0.91,
+      0.85
+     ],
+     "sheen": 0.24,
+     "tooth": 1.35,
+     "yellowing": 0.25
+    },
+    "px_per_mm": 3.243,
+    "resolution": 600,
+    "rig": "blender/rig/common.py",
+    "samples": 48,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
   "assets/bits/clip_01.png": {
    "bytes": 57426,
    "generator": "blender/bits/bits.py",
@@ -614,24 +652,6 @@
     "samples": 18,
     "seed": 53,
     "width_m": 0.038
-   }
-  },
-  "assets/folds/unfold_thirds": {
-   "bytes": 4096,
-   "generator": "blender/folds/fold.py",
-   "kind": "fold_sequence",
-   "settings": {
-    "crease_mm": 1.4,
-    "frames": 240,
-    "light": "day",
-    "resolution": 540,
-    "rig": "blender/rig/common.py",
-    "samples": 16,
-    "sequence": "unfold_thirds",
-    "sheet_mm": [
-     148.0,
-     105.0
-    ]
    }
   },
   "assets/folds/unfold_thirds/0000.png": {

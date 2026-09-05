@@ -59,7 +59,7 @@ python3 -c 'import sys; assert sys.version_info >= (3,10)' 2>/dev/null || die "p
 # guessed at, and a missing one stops here with its own name in the message instead of failing in
 # the middle of a three-hour render.
 py_missing=()
-for mod in numpy PIL fontTools cv2 skia_pathops cffi cryptography; do
+for mod in numpy PIL fontTools cv2 pathops cffi cryptography; do
   python3 -c "import $mod" >/dev/null 2>&1 || py_missing+=("$mod")
 done
 if [ ${#py_missing[@]} -gt 0 ]; then
@@ -77,11 +77,25 @@ fi
 export JAVA_HOME
 
 fetch() { # fetch <url> <dest>
-  local url="$1" dest="$2"
+  local url="$1" dest="$2" attempt
   if [ -s "$dest" ]; then echo "have $(basename "$dest")"; return; fi
   echo "fetch $url"
-  curl -fL --retry 5 --retry-delay 3 --connect-timeout 30 -o "$dest.part" "$url"
-  mv "$dest.part" "$dest"
+  # A host can answer 200 with a "one moment, please" page instead of the file — one did, and
+  # tar then failed on seven kilobytes of HTML while the log said the download had succeeded.
+  # An archive that begins with a doctype is not an archive; try again a few times, and stop
+  # with the file's real type in the message rather than a tar error three lines later.
+  for attempt in 1 2 3 4; do
+    curl -fL --retry 5 --retry-delay 3 --connect-timeout 30 -o "$dest.part" "$url"
+    if head -c 512 "$dest.part" | grep -qi '<!doctype\|<html'; then
+      echo "  the server sent a web page instead of $(basename "$dest") (attempt $attempt); waiting"
+      rm -f "$dest.part"
+      sleep $((attempt * 6))
+      continue
+    fi
+    mv "$dest.part" "$dest"
+    return 0
+  done
+  die "could not download $(basename "$dest"): the server kept answering with a web page"
 }
 
 # ---- Flutter -----------------------------------------------------------------------------

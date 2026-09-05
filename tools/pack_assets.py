@@ -31,7 +31,7 @@ SIZES = {
     "tears": 1024,        # masks are alpha only
     "objects": 420,       # a feeling object is at most ~140 dp
     "bits": 420,
-    "folds": 540,
+    "folds": 600,
     "shell": 1500,
 }
 QUALITY = {"paper": 88, "tears": 92, "objects": 92, "bits": 92, "folds": 90, "shell": 88}

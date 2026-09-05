@@ -3,23 +3,25 @@
 
   evidence/frames.json   what every clip actually is: frame count, rate, dropped frames, and the
                          scroll timings, with the device they came off
-  evidence/DIFF.json     each still against the same still from the previous session, by SSIM
   evidence/MANIFEST.json every artifact, its size, and — for the ones that are missing — why
 
 Nothing is invented here. An artifact that was not captured is listed as missing with the reason
 capture.sh gave, and the previous session's copy is left where it is rather than being passed off
 as this session's.
+
+DIFF.json and the baseline under evidence/.previous/ are not written here. tools/check/diff.py
+owns both: it measures each artifact against the baseline and, when asked, rotates the baseline
+afterwards. This used to do both as well, after diff.py had already rotated, which is how every
+SSIM in DIFF.json came to be a file compared with itself.
 """
 import argparse
 import json
 import pathlib
-import shutil
 import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 EVIDENCE = ROOT / "evidence"
-PREVIOUS = EVIDENCE / ".previous"
 LOGS = EVIDENCE / "logs"
 
 STILLS = [
@@ -81,30 +83,6 @@ def probe(path):
     }
 
 
-def ssim(a, b):
-    out = subprocess.run(
-        [sys.executable, str(ROOT / "tools" / "check" / "ssim.py"), str(a), str(b)],
-        capture_output=True, text=True,
-    )
-    try:
-        return json.loads(out.stdout).get("ssim")
-    except Exception:
-        return None
-
-
-def label_for(value):
-    """The coherence critic assigns the label; this is the reading the label has to agree with."""
-    if value is None:
-        return "new"
-    if value >= 0.995:
-        return "unchanged"
-    if value >= 0.90:
-        return "nudged"
-    if value >= 0.60:
-        return "reworked"
-    return "redrawn"
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stamp", required=True)
@@ -120,7 +98,6 @@ def main():
                 reasons[name.strip()] = why.strip()
 
     manifest = {"captured_at": args.stamp, "browser": args.browser, "artifacts": {}, "missing": {}}
-    diff = {"captured_at": args.stamp, "note": "ssim against the previous session; label assigned by the coherence critic", "artifacts": {}}
 
     stamp_s = None
     try:
@@ -170,10 +147,6 @@ def main():
             entry["long_enough"] = entry.get("seconds", 0) >= MIN_SECONDS[name]
         manifest["artifacts"][name] = entry
 
-        if name.endswith(".png"):
-            prev = PREVIOUS / name
-            value = ssim(path, prev) if prev.exists() else None
-            diff["artifacts"][name] = {"ssim": value, "reading": label_for(value), "label": None}
 
     # frames.json: what every clip is made of, and where the frames came from
     frames = {"captured_at": args.stamp, "source": args.browser, "clips": {}, "scroll": {}}
@@ -197,15 +170,7 @@ def main():
         frames["scroll_emulator"] = {"missing": reasons.get("frames.json") or "no Android device was up in this session"}
 
     (EVIDENCE / "frames.json").write_text(json.dumps(frames, indent=1) + "\n")
-    (EVIDENCE / "DIFF.json").write_text(json.dumps(diff, indent=1) + "\n")
     (EVIDENCE / "MANIFEST.json").write_text(json.dumps(manifest, indent=1) + "\n")
-
-    # keep this session's stills as the baseline the next session is measured against
-    PREVIOUS.mkdir(parents=True, exist_ok=True)
-    for name in STILLS:
-        p = EVIDENCE / name
-        if p.exists():
-            shutil.copy2(p, PREVIOUS / name)
 
     have = len(manifest["artifacts"])
     print(f"· {have} of {len(STILLS) + len(CLIPS)} artifacts present")

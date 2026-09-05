@@ -21,16 +21,32 @@ artifacts.
 
 ## What to open
 
-Everything under `evidence/`: the seventeen artifacts, `evidence/crops/` for the three-hundred
-per cent crops and the clip frame strips, and `evidence/logs/` for what each capture recorded
-about itself. Clips are `.mp4`; step through them rather than judging them on one frame.
+The artifacts under `evidence/`, `evidence/crops/` for the three-hundred per cent crops and the
+clip frame strips, `evidence/logs/` for what each capture recorded about itself, and
+`evidence/frames.json` for what each clip is made of. Clips are `.mp4`; step through them rather
+than judging them on one frame, and read them in **app time**: BRIEFING.md explains that every
+frame is one step of the app's own clock, and `frames.json` gives the step and the ratio of
+playback to app time. Do not open `evidence/SCORE.json` or `evidence/critics/<n>/`: they are
+another reader's conclusions, not evidence.
 
 An artifact that is missing is a finding. `evidence/frames.json` says which are missing and why —
 read the reason and judge whether it is a reason or an excuse.
 
+## One more thing you return: the change since the last capture
+
+`evidence/DIFF.json` measures each artifact against the previous capture (`label` is measured:
+new, gone, unchanged, changed, with the SSIM). Whether a change is an improvement is not something
+SSIM knows, so that is yours: add a `judgements` object to your report, one entry per artifact
+named in DIFF.json, each `"improved"`, `"unchanged"` or `"regressed"`, with one sentence of
+reason. Judge from the artifact and its `evidence/.previous/` counterpart when the label is
+`changed` (the previous file is beside it under `evidence/.previous/<name>`); an `unchanged`
+label is `"unchanged"`; a `new` artifact is `"improved"`; a `gone` one is `"regressed"`. The
+judgement must agree with the number: an artifact whose SSIM says nothing moved cannot be
+`improved`.
+
 ## What to return
 
 Write `evidence/critics/<cycle>/coherence.json` in the shape BRIEFING.md gives, with your score out
-of 15 and the floor at 13. Be specific: name the artifact, name the place in
+of 15 and the floor at 13, plus the `judgements` object above. Be specific: name the artifact, name the place in
 it, give the measurement you took. A finding that cannot be checked against the file is not a
 finding.

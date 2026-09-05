@@ -1,5 +1,5 @@
 {
-  "_doc": "Per-face hand parameters read by build.py. Units are font units (1000/em) unless the key ends in _em or _deg.",
+  "_doc": "Per-face hand parameters read by build.py. Units are font units (1000/em) unless the key ends in _em or _deg. distinct_min is the Hausdorff distance (units) two variants of one glyph must keep apart: 40 is four per cent of the em, about two device pixels at the size a note is set, which is the least a reader can see. It was 12 for every face, and two 'o's on one note came out at IoU 0.998.",
   "NoorHand": {
     "family": "NoorHand",
     "style": "Regular",
@@ -9,7 +9,7 @@
     "slant_deg": 12,
     "xheight_scale": 0.96,
     "width_scale": 0.98,
-    "baseline_wobble": 9,
+    "baseline_wobble": 14,
     "spacing_jitter": 12,
     "gap": 28,
     "space_em": 0.32,
@@ -29,29 +29,38 @@
       "pool_radius": 1.4,
       "pool_turn_deg": 70,
       "pool_prob": 0.75,
-      "skip_prob": 0.10,
-      "skip_len": [22, 44],
+      "skip_prob": 0.1,
+      "skip_len": [
+        22,
+        44
+      ],
       "edge_noise_em": 0.0
     },
     "pressure": {
-      "base": 0.30,
+      "base": 0.3,
       "scale": 0.45,
       "down_weight": 0.12,
       "baseline_weight": 0.0,
       "stop_weight": 0.55,
       "start_weight": 0.25,
       "turn_weight": 0.35,
-      "jitter": 0.14
+      "jitter": 0.22
     },
     "jitter": {
-      "point": 18,
-      "field_wavelength": [220, 520],
-      "point_noise": 5,
-      "rotation_deg": 2.5,
-      "alt_prob": 0.55
+      "point": 44,
+      "field_wavelength": [
+        90,
+        260
+      ],
+      "point_noise": 9,
+      "rotation_deg": 4.0,
+      "alt_prob": 0.55,
+      "width_var": 0.07,
+      "slant_var_deg": 2.5
     },
     "ink": "#1f2a44",
-    "paper": "#f1ecdf"
+    "paper": "#f1ecdf",
+    "distinct_min": 40
   },
   "TeoHand": {
     "family": "TeoHand",
@@ -62,7 +71,7 @@
     "slant_deg": 0,
     "xheight_scale": 1.04,
     "width_scale": 1.06,
-    "baseline_wobble": 6,
+    "baseline_wobble": 10,
     "spacing_jitter": 12,
     "gap": 46,
     "space_em": 0.36,
@@ -90,17 +99,23 @@
       "stop_weight": 0.08,
       "start_weight": 0.05,
       "turn_weight": 0.05,
-      "jitter": 0.10
+      "jitter": 0.18
     },
     "jitter": {
-      "point": 18,
-      "field_wavelength": [260, 600],
-      "point_noise": 4,
-      "rotation_deg": 2.5,
-      "alt_prob": 0.5
+      "point": 40,
+      "field_wavelength": [
+        100,
+        280
+      ],
+      "point_noise": 8,
+      "rotation_deg": 3.5,
+      "alt_prob": 0.5,
+      "width_var": 0.07,
+      "slant_var_deg": 1.5
     },
     "ink": "#3a3a3c",
-    "paper": "#f1ecdf"
+    "paper": "#f1ecdf",
+    "distinct_min": 40
   },
   "DeskStamp": {
     "family": "DeskStamp",
@@ -132,21 +147,34 @@
       "serif_thickness": 0.6,
       "erode_em": 0.014,
       "erode_samples_per_em": 40,
-      "misregister": [6, 4],
+      "misregister": [
+        6,
+        4
+      ],
       "tilt_deg": 0.8
     },
     "pressure": {
-      "base": 1.0, "scale": 0.0, "down_weight": 0.0, "baseline_weight": 0.0,
-      "stop_weight": 0.0, "start_weight": 0.0, "turn_weight": 0.0, "jitter": 0.0
+      "base": 1.0,
+      "scale": 0.0,
+      "down_weight": 0.0,
+      "baseline_weight": 0.0,
+      "stop_weight": 0.0,
+      "start_weight": 0.0,
+      "turn_weight": 0.0,
+      "jitter": 0.0
     },
     "jitter": {
       "point": 6,
-      "field_wavelength": [300, 700],
+      "field_wavelength": [
+        300,
+        700
+      ],
       "point_noise": 2,
       "rotation_deg": 0.8,
       "alt_prob": 0.0
     },
     "ink": "#1f2a44",
-    "paper": "#f6f1e6"
+    "paper": "#f6f1e6",
+    "distinct_min": 10
   }
 }

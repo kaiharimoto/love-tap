@@ -218,7 +218,7 @@ make_clip() { # name fps min_seconds
     "evidence/$name.mp4" </dev/null || { note_missing "$name.mp4" "ffmpeg refused the frames"; return 1; }
   # the check reads the frames the clip was actually assembled from, not just its first run:
   # judging 06 on its opening still is how four static clips came back marked as passing
-  python3 tools/check/frames.py "$staged" --fps "$fps" --min-seconds "$min" \
+  python3 tools/check/frames.py "$staged" --fps "$fps" --min-seconds "$min" --log "$LOG/$name.json" \
     --strip "evidence/crops/${name}_strip.png" --out "$LOG/${name}.frames.json" >/dev/null \
     || note_missing "$name.mp4" "the frame check failed; see $LOG/${name}.frames.json"
   echo "  ✓ $name.mp4 ($i frames at ${fps}fps)"

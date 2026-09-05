@@ -34,6 +34,7 @@ class Note extends StatelessWidget {
     required this.row,
     required this.unreadFrom,
     this.highlight = false,
+    this.arrived = false,
   });
 
   final ThreadItem item;
@@ -47,6 +48,10 @@ class Note extends StatelessWidget {
   final FeelingRegistry registry;
   final VoidCallback onLongPress;
   final bool highlight;
+
+  /// This note was not in the thread when it was opened: it has just come across the wire, and a
+  /// folded note that has just come across lands on the desk rather than being found there.
+  final bool arrived;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +84,18 @@ class Note extends StatelessWidget {
     // far phone sent arrived as blank paper.
     final thrown = kThreadRenderers[kEventTypeById[item.type]?.renderer] == objectLanding;
     final folded = !mine && !thrown && (e.seq ?? 0) > unreadFrom;
+
+    // what is written on the paper, whichever paper it turns out to be
+    final writing = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (item.replyTo != null) _ReplyStrip(target: item.replyTo!, registry: registry),
+        _body(context, scope),
+        const SizedBox(height: 3),
+        _Margin(item: item, mine: mine),
+      ],
+    );
 
     final piece = PaperPiece(
       stockId: stock,
@@ -117,16 +134,7 @@ class Note extends StatelessWidget {
             ),
           ),
       ],
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (item.replyTo != null) _ReplyStrip(target: item.replyTo!, registry: registry),
-          _body(context, scope),
-          const SizedBox(height: 3),
-          _Margin(item: item, mine: mine),
-        ],
-      ),
+      child: writing,
     );
 
     return Align(
@@ -135,7 +143,11 @@ class Note extends StatelessWidget {
         onLongPress: onLongPress,
         child: Padding(
           padding: EdgeInsets.fromLTRB(mine ? 40 : 14, 4, mine ? 14 : 40, 4),
-          child: folded ? FoldedNote(width: width, child: piece) : piece,
+          // A folded note is a letter: it opens, and the writing is on the sheet that opened. The
+          // torn piece is what it would be if no sequence were baked.
+          child: folded
+              ? FoldedNote(id: item.id, width: width, letter: writing, arriving: arrived, child: piece)
+              : piece,
         ),
       ),
     );

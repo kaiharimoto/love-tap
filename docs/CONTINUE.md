@@ -6,7 +6,7 @@ artifacts at their exact filenames, the family floors, the three commands, and t
 constraints. Everything in this file is *state*, not instruction — where the two disagree, the
 brief wins.
 
-**Repository** `kaiharimoto/love-tap` · **branch** `claude/new-session-vxz721` (develop, commit and
+**Repository** `kaiharimoto/love-tap` · **branch** `claude/new-session-f95s8n` (develop, commit and
 push only here) · **working directory** `/home/user/love-tap` · working tree is clean and pushed.
 
 Every reply must end with the fenced ```mpstate block the brief specifies (v, task, phase, step,

@@ -42,6 +42,54 @@ def load_reports(cycle):
     return out
 
 
+def write_judgements(coherence, problems):
+    """The coherence critic's improved/unchanged/regressed per artifact, into DIFF.json.
+
+    The brief says the label in DIFF.json is the coherence critic's to assign and that it must
+    agree with the SSIM. tools/check/diff.py writes the measured half (new, gone, unchanged,
+    changed) and leaves `judgement` null; this fills it from the critic's report and refuses a
+    judgement that contradicts the measurement — an `improved` on an `unchanged` file is a claim
+    about something that did not happen."""
+    judgements = coherence.get("judgements") if isinstance(coherence, dict) else None
+    diff_path = os.path.join(EVIDENCE, "DIFF.json")
+    if not isinstance(judgements, dict) or not os.path.exists(diff_path):
+        return None
+    with open(diff_path, encoding="utf-8") as f:
+        diff = json.load(f)
+    rows = diff.get("artifacts")
+    if not isinstance(rows, list):
+        return None
+    allowed = {"improved", "unchanged", "regressed"}
+    written = 0
+    for row in rows:
+        j = judgements.get(row.get("artifact"))
+        if isinstance(j, dict):
+            verdict, why = j.get("judgement") or j.get("verdict"), j.get("why") or j.get("reason")
+        else:
+            verdict, why = j, None
+        if verdict is None:
+            continue
+        if verdict not in allowed:
+            problems.append(f"DIFF.json: {row['artifact']} judged '{verdict}', which is not a label")
+            continue
+        if row.get("label") == "unchanged" and verdict != "unchanged":
+            problems.append(f"DIFF.json: {row['artifact']} is unchanged by SSIM but judged {verdict}")
+            continue
+        if row.get("label") == "gone" and verdict != "regressed":
+            problems.append(f"DIFF.json: {row['artifact']} is gone but judged {verdict}")
+            continue
+        row["judgement"] = verdict
+        if why:
+            row["judged_because"] = why
+        row["judged_by"] = "coherence critic"
+        written += 1
+    diff["judgements_from"] = "the coherence critic's report for this cycle"
+    with open(diff_path, "w", encoding="utf-8") as f:
+        json.dump(diff, f, indent=1)
+        f.write("\n")
+    return written
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cycle", type=int, required=True)
@@ -116,6 +164,9 @@ def main():
     with open(os.path.join(EVIDENCE, "SCORE.json"), "w", encoding="utf-8") as f:
         json.dump(out, f, indent=1)
         f.write("\n")
+    judged = write_judgements(reports.get("coherence", {}), problems)
+    if judged is not None:
+        print(f"DIFF.json: {judged} judgement(s) from the coherence critic")
     print(json.dumps({k: out[k] for k in
                       ("cycle", "total", "every_floor_met", "at_exit", "critic_count", "problems")}, indent=1))
     return 0 if not problems else 1

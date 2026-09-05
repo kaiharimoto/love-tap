@@ -37,6 +37,11 @@ FLOORS = {
     "paper": 1.2,      # tooth and fibre: quiet, but never nothing
     "shell": 4.0,      # a desk is wood, and wood has figure in it
     "objects": 2.0,    # a rendered thing has form; a flat one has not been lit
+    # A fold frame is paper too, and for a whole cycle nothing looked at it: this check read
+    # paper/, shell/ and objects/ and the one sequence the material row is judged on sat in a
+    # directory one level deeper, where a single-level glob never reached. 94 of its 240 frames
+    # were under the paper floor, and the unfolding clip was a flat cream rectangle.
+    "folds": 1.2,
 }
 PATCH = 200
 
@@ -86,8 +91,11 @@ def main():
     for family, floor in FLOORS.items():
         if args.floor:
             floor = args.floor
-        for path in sorted(glob.glob(os.path.join(ASSETS, family, "*.webp"))):
-            name = os.path.basename(path)
+        # folds/<sequence>/NNNN.webp is one level deeper than the flat families
+        found = sorted(glob.glob(os.path.join(ASSETS, family, "*.webp"))
+                       + glob.glob(os.path.join(ASSETS, family, "*", "*.webp")))
+        for path in found:
+            name = os.path.relpath(path, os.path.join(ASSETS, family))
             if "_shadow" in name or "_mask" in name:
                 continue      # a shadow is meant to be smooth; that is what a shadow is
             a = read(path)
@@ -104,6 +112,20 @@ def main():
             if best < floor:
                 report["flat"].append(f"{family}/{name}: {best:.3f} < {floor}")
 
+    # a sequence is two hundred and forty files; what a reader wants is the worst of them and the
+    # middle of them, per sequence, beside the per-frame rows
+    sequences = {}
+    for key, entry in report["surfaces"].items():
+        family, _, rest = key.partition("/")
+        if family != "folds" or "/" not in rest:
+            continue
+        seq = rest.split("/")[0]
+        sequences.setdefault(seq, []).append(entry["patch_std"])
+    report["fold_sequences"] = {
+        seq: {"frames": len(v), "worst": round(min(v), 3), "median": round(sorted(v)[len(v) // 2], 3),
+              "below_floor": sum(1 for x in v if x < FLOORS["folds"]), "floor": FLOORS["folds"]}
+        for seq, v in sorted(sequences.items())
+    }
     report["read"] = len(report["surfaces"])
     report["ok"] = not report["flat"]
     text = json.dumps(report, indent=1)

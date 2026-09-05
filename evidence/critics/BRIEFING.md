@@ -3,12 +3,32 @@
 Every critic is a fresh context. It receives three things and nothing else:
 
 1. **The mission goal** — the paragraph below, and nothing about how the thing was built.
-2. **The evidence** — the artifacts in `evidence/`, and the derived crops in `evidence/crops/`.
+2. **The evidence** — the artifacts in `evidence/`, the derived crops in `evidence/crops/`, and
+   the capture's own records in `evidence/logs/`, `evidence/frames.json`, `evidence/MANIFEST.json`,
+   `evidence/DIFF.json`, `evidence/reliability.json` and `evidence/coldstart.json`.
 3. **Its own rubric row**, quoted in full.
 
 It never receives the build history, the plan, the commit log, the task list, or any explanation
 of why something is the way it is. If a thing cannot be seen in the evidence, it does not exist
 as far as a critic is concerned, and a critic saying so is the finding.
+
+**Not part of the evidence, and not to be opened:** `evidence/SCORE.json` (the builder's own
+scoring and the builder's prose about earlier cycles) and `evidence/critics/<n>/` (earlier
+critics' reports). They are moved out of the directory while a cycle's critics run, and a critic
+who finds one anyway leaves it closed: a report that leans on another report is not a fresh look.
+
+## How to read a clip
+
+Every clip is a directory of single frames taken one at a time with the app's own clock stepped
+between them, then assembled at 60 frames a second without re-encoding. The timebase of a clip is
+therefore **the app's time, not the wall clock**: one frame is one step of the driven clock, and
+`evidence/frames.json` records, per clip and per run, how many milliseconds each step was worth
+(`runs[].step_ms`), the total app time (`app_seconds`) and the ratio of playback to app time
+(`playback_over_app_time` — 1.0 means real time, 2.0 means the clip plays at half speed). A
+statement about how long something took on screen is a statement in app time, read off those
+fields; the wall-clock interval between two grabs (`evidence/logs/<clip>.json`, `steps[].ms`) is
+the harness's cost of taking the frame and says nothing about the app. Two identical adjacent
+frames in a clip are a fault, and `frames.json` names them.
 
 ## The mission goal, as given to every critic
 

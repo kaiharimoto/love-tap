@@ -142,13 +142,20 @@ class CaptureHooks {
     return 'ok';
   }
 
+  /// Open every folded note on screen. No settle: the clip's frames begin on the very next step
+  /// of the clock, so the first frame grabbed is the first frame of the sequence rather than the
+  /// fourth, and the landing before it runs straight into the opening with nothing skipped.
   Future<String> unfoldAll() async {
     final f = CaptureBus.unfoldAll;
     if (f == null) return 'chat is not on screen';
     f();
-    await _settle();
+    await Future<void>.delayed(Duration.zero);
     return 'ok';
   }
+
+  /// How many rows the thread holds: what the harness watches to know that something the far
+  /// phone was told to send has actually arrived, so a clip of an arrival starts on the arrival.
+  int count() => scope.thread.items.length;
 
   Future<String> showWords() async {
     final f = CaptureBus.showWords;

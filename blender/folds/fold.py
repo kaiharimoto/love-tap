@@ -1,6 +1,6 @@
 """blender/folds/fold.py — the fold, unfold and crumple sequences, as rendered geometry.
 
-    bash blender/run.sh blender/folds/fold.py -- --seq unfold_thirds --frames 240 --res 540
+    bash blender/run.sh blender/folds/fold.py -- --seq unfold_thirds --frames 240 --res 600
     bash blender/run.sh blender/folds/fold.py -- --all
 
 A note opening is the clip that exposes a faked material system, so nothing here is a transform of
@@ -18,7 +18,15 @@ Sequences (60 unique frames per second, no frame equal to its predecessor):
   crumple_open   120 f  a crumpled ball relaxes into a creased sheet
   corner_curl     60 f  a corner lifts, curls and drops (the feeling corner, a loop)
 
-Frames are written as PNG with alpha and packed to WebP by tools/frames/pack.py.
+Frames are written as PNG with alpha and packed to WebP by tools/pack_assets.py.
+
+Density. A stock is rendered at about 8.7 px/mm; a fold frame at 600 px across a 185 mm field is
+3.24 px/mm, so the paper material's fibre layers — sized for the stocks — fall under one pixel
+here and Cycles averages them away: the sequence this replaces measured 94 of 240 frames below the
+paper floor with the very material the stocks pass with. The material is therefore told the
+ratio (mottle_scale, fibre_scale), so a fibre in a fold frame is the same fraction of a pixel it
+is in a stock, and the frame is rendered at 48 samples with the denoiser's albedo pass keeping
+the texture it would otherwise smooth.
 """
 import argparse
 import math
@@ -37,6 +45,11 @@ OUT = os.path.join(common.repo_root(), "assets", "folds")
 SHEET_MM = (148.0, 105.0)          # A6, the size of a note in the thread
 THICKNESS_M = 0.00011
 CREASE_MM = 1.4                     # width of the bevelled crease band
+CREASE_RIDGE_M = 0.00036            # how far the crease stands off the sheet: pulled fibres, not a line
+# What the material is told about the density it is rendered at. The stocks are 8.7 px/mm; the
+# ratio below is (frame px/mm) / 8.7 at the default --res, so a fibre is the same fraction of a
+# pixel here as it is on a stock. Recomputed from --res in render_sequence.
+STOCK_PX_PER_MM = 8.7
 SEQUENCES = {
     "unfold_thirds": dict(frames=240, kind="thirds"),
     "unfold_half": dict(frames=240, kind="half"),
@@ -109,6 +122,10 @@ def apply_thirds(verts_co, h, t, rng):
         # the whole sheet is not flat while it settles: the creases stay proud
         lift = settle * 0.0016 * math.exp(-((c[1] - y1) / (0.02)) ** 2)
         lift += settle * 0.0016 * math.exp(-((c[1] - y2) / (0.02)) ** 2)
+        # and a fold leaves a crease: a ridge of pulled fibres along the hinge, there from the
+        # first frame to the last, so the light breaks across it whichever way the flap lies
+        lift += CREASE_RIDGE_M * (crease_softness((c[1] - y1) * 1000.0)
+                                  + crease_softness((c[1] - y2) * 1000.0))
         out.append((c[0], c[1], c[2] + lift))
     return out
 
@@ -120,6 +137,7 @@ def apply_half(verts_co, h, t, rng):
     for co in verts_co:
         c = bend_about(co, 0.0, -a, sign=1.0) if co[1] > 0 else co
         lift = settle * 0.0022 * math.exp(-((c[1]) / 0.02) ** 2)
+        lift += CREASE_RIDGE_M * crease_softness(c[1] * 1000.0)
         out.append((c[0], c[1], c[2] + lift))
     return out
 
@@ -180,11 +198,17 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
     kind = cfg["kind"]
     rng = np.random.default_rng(20260903 + abs(hash(name)) % 1000)
     w, h = SHEET_MM[0] / 1000.0, SHEET_MM[1] / 1000.0
-    nx, ny = 120, 90
+    # rows of 0.58 mm, so the crease band (1.4 mm) is a ridge two or three rows wide rather than a
+    # single row that the light cannot break across
+    nx, ny = 160, 180
     os.makedirs(out_dir, exist_ok=True)
     end = frames if end is None else end
     base_co = None
     field = None
+    # the frame is res pixels across w*1.25 metres (see add_top_camera below), so this is the
+    # density the material has to be told about
+    px_per_mm = res / (w * 1.25 * 1000.0)
+    density = px_per_mm / STOCK_PX_PER_MM
     for frame in range(start, end):
         t = frame / max(1, frames - 1)
         scene = common.reset_scene()
@@ -214,8 +238,9 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
         solid = obj.modifiers.new("thickness", "SOLIDIFY")
         solid.thickness = THICKNESS_M
         solid.offset = -1.0
-        mat = common.paper_material(f"{name}_paper", (0.94, 0.91, 0.85), tooth=1.05, yellowing=0.25,
-                                    sheen=0.24, fibre_scale=1100.0)
+        mat = common.paper_material(f"{name}_paper", (0.94, 0.91, 0.85), tooth=1.55, yellowing=0.25,
+                                    sheen=0.24, fibre_scale=1100.0 * density,
+                                    mottle_scale=density)
         obj.data.materials.append(mat)
         common.add_shadow_catcher(scene, size_m=0.4)
         common.add_top_camera(scene, w * 1.25, h * 1.55, ortho=True, distance=0.5)
@@ -233,13 +258,16 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
             print(f"{name} {frame}/{frames}", flush=True)
     settings = {
         "sequence": name, "frames": frames, "resolution": res, "samples": samples,
-        "sheet_mm": list(SHEET_MM), "crease_mm": CREASE_MM, "light": condition,
-        "rig": "blender/rig/common.py",
+        "sheet_mm": list(SHEET_MM), "crease_mm": CREASE_MM, "crease_ridge_mm": CREASE_RIDGE_M * 1000.0,
+        "light": condition, "rig": "blender/rig/common.py",
+        "px_per_mm": round(px_per_mm, 3), "density_vs_stock": round(density, 3),
+        "look": {"rgb": [0.94, 0.91, 0.85], "tooth": 1.55, "yellowing": 0.25, "sheen": 0.24,
+                 "fibre": round(1100.0 * density, 1), "mottle_scale": round(density, 3)},
+        "grid": [nx, ny],
     }
     # The brief's rule is that every file in assets/ names its generator, so each frame gets its
-    # own entry rather than the directory getting one. They share the sequence's settings and add
-    # the frame number, which is the only thing that differs between them.
-    manifest.record(out_dir, "blender/folds/fold.py", settings, kind="fold_sequence")
+    # own entry and the directory gets none: a directory entry is an entry without a file, which
+    # tools/check/manifest.py rightly lists as stale, and a critic read as the asset being missing.
     for frame_file in sorted(os.listdir(out_dir)):
         if frame_file.endswith((".png", ".webp")):
             manifest.record(os.path.join(out_dir, frame_file), "blender/folds/fold.py",
@@ -253,8 +281,8 @@ def main():
     ap.add_argument("--seq", choices=list(SEQUENCES))
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--frames", type=int)
-    ap.add_argument("--res", type=int, default=540)
-    ap.add_argument("--samples", type=int, default=16)
+    ap.add_argument("--res", type=int, default=600)
+    ap.add_argument("--samples", type=int, default=48)
     ap.add_argument("--condition", default="day")
     ap.add_argument("--start", type=int, default=0)
     ap.add_argument("--end", type=int)
