@@ -10127,6 +10127,57 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_bunting.png": {
+   "bytes": 346214,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_bunting",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_bunting_shadow.png": {
+   "bytes": 187098,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_bunting",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_bunting_shadow_dusk.png": {
+   "bytes": 98429,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_bunting",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_candle.png": {
    "bytes": 212439,
    "generator": "blender/objects/objects.py",
@@ -10331,6 +10382,57 @@
     "samples": 28
    }
   },
+  "assets/objects/obj_cork.png": {
+   "bytes": 457170,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_cork",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_cork_shadow.png": {
+   "bytes": 335087,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_cork",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_cork_shadow_dusk.png": {
+   "bytes": 208053,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_cork",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_crane.png": {
    "bytes": 451634,
    "generator": "blender/objects/objects.py",
@@ -10493,6 +10595,40 @@
     "light": "day",
     "object": "obj_dog_ear",
     "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_dog_ear_shadow.png": {
+   "bytes": 189484,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_dog_ear",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_dog_ear_shadow_dusk.png": {
+   "bytes": 161109,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_dog_ear",
+    "pass": "shadow",
     "resolution": [
      1200,
      1200
@@ -10754,6 +10890,108 @@
     ],
     "rig": "blender/rig/common.py",
     "samples": 28
+   }
+  },
+  "assets/objects/obj_party_hat.png": {
+   "bytes": 461499,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_party_hat",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_party_hat_shadow.png": {
+   "bytes": 346551,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_party_hat",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_party_hat_shadow_dusk.png": {
+   "bytes": 191786,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_party_hat",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_pencil_smudge.png": {
+   "bytes": 488226,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_pencil_smudge",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_pencil_smudge_shadow.png": {
+   "bytes": 176819,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_pencil_smudge",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_pencil_smudge_shadow_dusk.png": {
+   "bytes": 130106,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_pencil_smudge",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
    }
   },
   "assets/objects/obj_pinch.png": {
@@ -11349,6 +11587,108 @@
     ],
     "rig": "blender/rig/common.py",
     "samples": 40
+   }
+  },
+  "assets/objects/obj_user_soup.png": {
+   "bytes": 627157,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_user_soup",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_user_soup_shadow.png": {
+   "bytes": 249552,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_user_soup",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_user_soup_shadow_dusk.png": {
+   "bytes": 162462,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_user_soup",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_wrapper.png": {
+   "bytes": 346383,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_wrapper",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_wrapper_shadow.png": {
+   "bytes": 288919,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "day",
+    "object": "obj_wrapper",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_wrapper_shadow_dusk.png": {
+   "bytes": 110075,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_wrapper",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
    }
   },
   "assets/paper/graph_01.webp": {
