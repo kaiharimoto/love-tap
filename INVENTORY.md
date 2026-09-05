@@ -33,7 +33,7 @@ Component families, sources, status, substitutions. Status: `planned` · `buildi
 | Modules: dates, todos, calendar, rituals + registry | `app/lib/modules/` | built (a fifth is a directory and one line) |
 | Moments, Settings, Pulse, Us | `app/lib/regions/` | built |
 | Setup checklists (observed, never claimed) | `app/lib/setup/` | built; the CA bootstrap page is not written yet |
-| Voice string table + lint | `app/lib/voice/`, `tools/lint/strings.py` | built (106 displayed strings, 0 against the voice) |
+| Voice string table + lint | `app/lib/voice/`, `tools/lint/strings.py` | built (107 displayed strings, 0 against the voice) |
 | Web Push sender (RFC 8291, VAPID) | `tools/push/webpush.py` | verified against the RFC's own §5 vector |
 
 ## Material families (`assets/`, every file in `assets/MANIFEST.json`)
@@ -42,9 +42,9 @@ Component families, sources, status, substitutions. Status: `planned` · `buildi
 |---|---:|---|---|
 | Paper stocks (+ dusk) | 23 sheets | `blender/paper/stocks.py` | rendering |
 | Tear masks, edge light, contact shadow | 139 masks, 41 lit | `tools/tears/tear.py` + `blender/paper/tear_relief.py` | masks verified distinct; relief rendering |
-| Fold / crumple sequences | 1 of 4 started | `blender/folds/fold.py` | partly rendered; the app plays a sequence only once it is whole |
-| Handwriting faces | 2 of 3 × 5 variants/glyph | `tools/handwriting/build.py` | verified (`tools/handwriting/check.py`: no glyph has lost a stroke) |
-| Feeling objects + shadows | 22 rendered | `blender/objects/objects.py` | rendering |
+| Fold / crumple sequences | 1 of 4 rendered (unfold_thirds, 240 frames at 600 px, 3.6 px/mm) | `blender/folds/fold.py` | verified: every frame above the paper floor in `tools/check/surfaces.py` (worst 2.1, median 3.0); the other three sequences are documented, not rendered |
+| Handwriting faces | 2 of 3 × 5 variants/glyph (DeskStamp building; the tabs use TeoHand until it lands) | `tools/handwriting/build.py` | verified (`tools/handwriting/check.py`: no variant hollow, no two variants of a letter or digit under 26 units apart) |
+| Feeling objects + shadows | 22 rendered + 8 replacing the emoji-shaped and reward-token ones (bookmark, dog-ear, wrapper, pencil smudge, bunting, cork, paper hat, soup) | `blender/objects/objects.py` | rendering; no two feelings share an object (`app/test/floors_test.dart`) |
 | Tape / staples / clips | 0 rendered of 11 | `blender/bits/bits.py` | queued |
 | Feeling sounds | 44 | `tools/sound/synth.py` | built |
 | The desk itself (day and dusk) | 2 | `blender/shell/desk.py` | rendered |
@@ -59,4 +59,6 @@ Component families, sources, status, substitutions. Status: `planned` · `buildi
 
 ## Evidence (`evidence/`)
 
-17 artifacts + SCORE.json, DIFF.json, reliability.json, frames.json, coldstart.json, crops/, critics/ — none yet.
+17 fixed artifacts (15 capturable here; 09 and 16 need an Android device, measured in `docs/PHONES.md`) + SCORE.json, DIFF.json,
+reliability.json, frames.json, coldstart.json, crops/, logs/ (per-scene logs, per-region reports, haptics.json, hand.json,
+pwa.json, scroll_webkit.json) and critics/<cycle>/. Cycle 2 scored 55.5; cycle 3 is this session's capture.

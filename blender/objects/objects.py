@@ -683,11 +683,15 @@ def obj_user_soup(rng):
     card = paper_mat("soup_card", (0.95, 0.92, 0.84))
     bm = sheet(0.044, 0.034, 30, 24, lambda u, v: 0.0005 * math.sin(u * 4 + v * 3))
     base = solidify(new_mesh(bm, "soup_card", card))
-    stain = simple_mat("soup_stain", (0.66, 0.36, 0.16), roughness=0.55)
-    ring = tube([(0.0135 * math.cos(2 * math.pi * k / 56) * 1.05, 0.0135 * math.sin(2 * math.pi * k / 56), 0.00016)
-                 for k in range(57)], 0.0011, 6, "soup_ring", stain)
-    drip = tube([(0.0135 * 1.05 + 0.0005 * k, -0.002 - 0.0016 * k, 0.00016) for k in range(5)],
-                0.0009, 6, "soup_drip", stain, taper=lambda t: 1.0 - 0.6 * t)
+    # a stain is flat and dull: the first render had the ring as a glossy tube standing off the
+    # card, and it read as a rubber ring lying on it rather than as something that had dried there
+    stain = simple_mat("soup_stain", (0.60, 0.31, 0.11), roughness=0.9)
+    ring = tube([(0.0135 * math.cos(2 * math.pi * k / 56) * 1.05, 0.0135 * math.sin(2 * math.pi * k / 56), 0.00012)
+                 for k in range(57)], 0.0013, 6, "soup_ring", stain)
+    ring.scale = (1.0, 1.0, 0.12)
+    drip = tube([(0.0135 * 1.05 + 0.0005 * k, -0.002 - 0.0016 * k, 0.00012) for k in range(5)],
+                0.0010, 6, "soup_drip", stain, taper=lambda t: 1.0 - 0.6 * t)
+    drip.scale = (1.0, 1.0, 0.12)
     return [base, ring, drip]
 
 

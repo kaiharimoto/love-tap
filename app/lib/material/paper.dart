@@ -28,7 +28,7 @@ class MaskCache {
     if (have != null) return Future.value(have);
     return _loading.putIfAbsent(asset, () async {
       final data = await rootBundle.load(asset);
-      final codec = await ui.instantiateImageCodec(data.buffer.asUint8List());
+      final codec = await ui.instantiateImageCodec(data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
       final frame = await codec.getNextFrame();
       _images[asset] = frame.image;
       _loading.remove(asset);

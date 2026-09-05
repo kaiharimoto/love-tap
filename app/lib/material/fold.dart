@@ -126,7 +126,7 @@ class FoldFrames {
   Future<void> _decode(int i) async {
     try {
       final data = await rootBundle.load(foldFrameAsset(seq, i));
-      final codec = await ui.instantiateImageCodec(data.buffer.asUint8List());
+      final codec = await ui.instantiateImageCodec(data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
       _held[i] = (await codec.getNextFrame()).image;
     } catch (_) {
       // a sequence that stops short plays as far as it goes rather than throwing under a note

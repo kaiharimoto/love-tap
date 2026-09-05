@@ -84,7 +84,13 @@ function ensure(p) {
   const page = context.pages()[0] || (await context.newPage());
   const problems = [];
   const log = { scene: scene.name, browser: browserName, viewport: vp, url, steps: [], shots: [], reports: [] };
-  page.on('pageerror', (e) => problems.push('pageerror: ' + String(e).slice(0, 300)));
+  page.on('pageerror', (e) => {
+    // the message, the name and the top of the stack: an error whose String() is empty (a Dart
+    // throw of a bare value) used to be recorded as 'pageerror: ' and nothing else
+    const text = (e && (e.message || e.name)) || String(e) || typeof e;
+    const stack = e && e.stack ? ' @ ' + String(e.stack).replace(/\s+/g, ' ').slice(0, 240) : '';
+    problems.push('pageerror: ' + String(text).slice(0, 300) + stack);
+  });
   page.on('console', (m) => {
     if (m.type() === 'error' && !m.text().includes('404')) problems.push('console: ' + m.text().slice(0, 300));
   });
@@ -233,6 +239,9 @@ function ensure(p) {
       case 'wait':
         await settle(step.ms); break;
       case 'shot': {
+        // no picture still coming out of the store: a still taken while the prints were being
+        // read was a wall of blank paper with the pictures a hundred milliseconds behind it
+        await page.waitForFunction(() => !window.__deskQuiet || window.__deskQuiet() === 'ok', { timeout: 10000 }).catch(() => {});
         const out = abs(step.out);
         ensure(out);
         await settle(step.settle);

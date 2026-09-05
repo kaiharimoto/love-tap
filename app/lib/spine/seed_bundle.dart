@@ -15,5 +15,12 @@ class BundleSeedSource implements SeedSource {
   Future<String> loadString(String path) => bundle.loadString(path);
 
   @override
-  Future<Uint8List> loadBytes(String path) async => (await bundle.load(path)).buffer.asUint8List();
+  Future<Uint8List> loadBytes(String path) async {
+    // The asset's own bytes, not the buffer they sit in. On the web an asset loaded from the
+    // bundle is a view into a larger buffer, and `.buffer.asUint8List()` hands back all of it
+    // from byte zero: every photograph in the seeded year went into the store as some other
+    // region of memory, decoded as nothing, and Moments was a wall of blank prints.
+    final d = await bundle.load(path);
+    return d.buffer.asUint8List(d.offsetInBytes, d.lengthInBytes);
+  }
 }

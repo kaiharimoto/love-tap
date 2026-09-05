@@ -33,7 +33,8 @@ class BlobCache {
 
   static Future<StoredBlob?> get(Spine spine, String hash) => _futures.putIfAbsent(hash, () async {
         final b = await _limited(() => spine.blob(hash));
-        _resolved.add(hash);
+        // arrived means arrived: a hash the store does not hold is answered, not delivered
+        if (b != null) _resolved.add(hash);
         return b;
       });
 

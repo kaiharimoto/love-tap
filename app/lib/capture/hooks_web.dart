@@ -25,6 +25,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskStage(JSFunction f);
   external set __deskStep(JSFunction f);
   external set __deskCount(JSFunction f);
+  external set __deskQuiet(JSFunction f);
   external set __deskHaptics(JSFunction f);
   external set __deskFling(JSFunction f);
   external set __deskTimings(JSFunction f);
@@ -56,6 +57,7 @@ void expose(CaptureHooks hooks) {
   w.__deskStage = (() => _said(hooks.stageStates())).toJS;
   w.__deskStep = ((JSNumber ms) => DrivenClock.step(ms.toDartInt).toJS).toJS;
   w.__deskCount = (() => hooks.count().toJS).toJS;
+  w.__deskQuiet = (() => hooks.quiet().toJS).toJS;
   w.__deskHaptics = (() => jsonEncode(hooks.haptics()).toJS).toJS;
   w.__deskFling = ((JSNumber v) => _said(hooks.fling(v.toDartDouble))).toJS;
   w.__deskTimings = (() => jsonEncode(hooks.timings()).toJS).toJS;

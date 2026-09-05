@@ -49,7 +49,7 @@ rendered as marks on messages, never as rows.
 | Paper stocks | — | 9 stocks, 4 variants of notebook stocks, dusk of each | `assets/paper/` |
 | Tear masks | dozens | 48+ distinct | `assets/tears/` |
 | Fold sequences | — | 4 (240/240/120/60 frames) | `assets/folds/` |
-| Handwriting fonts | multi-variant | 3 faces × 5 variants per glyph | `assets/fonts/` |
+| Handwriting fonts | multi-variant | 3 faces × 5 variants per glyph, contextual alternates as two GSUB lookups, variants ≥ 26 units apart and never hollow (`tools/handwriting/check.py`) | `assets/fonts/` |
 | Evidence artifacts | 17 | 17 + crops + 5 json | `evidence/` |
 
 ## Build order (from the brief) and session plan
@@ -76,7 +76,10 @@ rendered as marks on messages, never as rows.
 14_media_viewer.png · 15_authored_feeling.mp4 · 16_setup_android.png · 17_setup_pwa.png
 + SCORE.json, DIFF.json, reliability.json, frames.json, coldstart.json, crops/, critics/<cycle>/.
 
-PNG minimum 1440×3120 (09: 3840×2160); clips 1080×2340 at 60 fps, 06 ≥ 4 s, 07 ≥ 6 s, 08 ≥ 8 s.
+PNG minimum 1440×3120 (09: 3840×2160); clips 1080×2340 at 60 fps and at least 4 s each (the brief's
+minimum; `capture.sh` asks 8 s of 08 because a state has to be seen to cross and settle). A clip is
+cut to the frames in which something moves, and `tools/check/frames.py` fails any frame identical
+to its predecessor at full resolution.
 Captures use a driven clock and a recorded RNG seed; 09 is one grab of one X display holding the
 AVD window and the WebKit window, both window ids logged.
 

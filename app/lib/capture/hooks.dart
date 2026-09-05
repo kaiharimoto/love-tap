@@ -12,6 +12,7 @@ import 'package:flutter/widgets.dart' show ClampingScrollSimulation;
 import '../feelings/builtins.dart';
 import '../flags.dart';
 import '../material/assignment.dart';
+import '../regions/chat/blob_widgets.dart';
 import '../material/fold.dart';
 import '../material/library.dart';
 import '../modules/registry.dart';
@@ -227,6 +228,14 @@ class CaptureHooks {
   /// How many rows the thread holds: what the harness watches to know that something the far
   /// phone was told to send has actually arrived, so a clip of an arrival starts on the arrival.
   int count() => scope.thread.items.length;
+
+  /// 'ok' when no picture is still being read out of the store: what a shot waits for, so a still
+  /// of Moments is a still of the prints and not of the moment before they were decoded. The blob
+  /// reads are the slow part under capture; the decode after them is inside the shot's own settle.
+  String quiet() {
+    final b = BlobCache.stats();
+    return (b['reading'] ?? 0) == 0 && (b['waiting'] ?? 0) == 0 ? 'ok' : 'reading ${b['reading']}, waiting ${b['waiting']}';
+  }
 
   /// Every feeling this phone knows, with the pattern it plays: the evidence that thirty-odd
   /// feelings are each their own rhythm, written from the registry the app plays from rather than
