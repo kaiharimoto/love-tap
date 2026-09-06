@@ -447,23 +447,30 @@ String _stateSentence(String who, Map<String, dynamic> p, {required bool declare
   final signal = p['signal'] as String? ?? '';
   final value = p['value'];
   final words = '$value'.replaceAll('_', ' ');
+  // The line about the person reading it is about *you*, and you takes a plural verb. It read
+  // "you is heads down" and "you's phone is on normal", which is nobody's voice.
+  final youAre = who == 'you';
+  final are = youAre ? 'are' : 'is';
+  final has = youAre ? 'have' : 'has';
+  final was = youAre ? 'were' : 'was';
+  final theirs = youAre ? 'your' : "$who's";
   return switch (signal) {
-    'mood' => '$who is $words',
-    'availability' => '$who is $words',
+    'mood' => '$who $are $words',
+    'availability' => '$who $are $words',
     'place' => '$who · $words',
-    'need' => '$who needs ${_dial(value)}',
-    'energy' => '$who has ${_dial(value)} left',
+    'need' => youAre ? 'you need ${_dial(value)}' : '$who needs ${_dial(value)}',
+    'energy' => '$who $has ${_dial(value)} left',
     'status_line' => '$who: $words',
-    'battery' => value == 'low' ? "$who's phone is nearly out" : "$who's phone is on $words",
+    'battery' => value == 'low' ? '$theirs phone is nearly out' : '$theirs phone is on $words',
     // a passive notice is a change, so it reads as one: the phone noticed them arrive, it did
     // not take a reading of where they are
     'at_home' => value == true || value == 'true' ? '$who got in' : '$who went out',
-    'ringer' => "$who's phone is on $words",
-    'moving' => '$who is $words',
-    'network' => "$who's signal is $words",
-    'local_hour' => "it is $words where $who is",
-    'last_active' => '$who was up $words',
-    'charging' => '$who is charging',
+    'ringer' => '$theirs phone is on $words',
+    'moving' => '$who $are $words',
+    'network' => '$theirs signal is $words',
+    'local_hour' => 'it is $words where $who $are',
+    'last_active' => '$who $was up $words',
+    'charging' => '$who $are charging',
     _ => '$who · $signal $words',
   };
 }

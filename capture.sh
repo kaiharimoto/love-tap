@@ -359,7 +359,15 @@ fi
 # becomes the baseline for the next one. The rotation has to happen here rather than by hand:
 # nothing rotated it for a long time, so every SSIM in DIFF.json was unreproducible from the
 # baseline that shipped beside it.
-python3 tools/check/diff.py --rotate || true
+# Only a whole run may become the next baseline. A run of one scene used to rotate it too, so
+# after a few of those every artifact's baseline was itself: DIFF.json said ssim 1.0 and "byte for
+# byte the previous file" for the entire set, and a cycle's worth of change measured as nothing.
+if [ -z "$ONLY" ]; then
+  python3 tools/check/diff.py --rotate || true
+else
+  echo "· measuring against the baseline, and leaving it where it is (only $ONLY was captured)"
+  python3 tools/check/diff.py || true
+fi
 
 # the frames are the negative of a clip and run to hundreds of megabytes a run; the mp4 and the
 # strip in evidence/crops are what anybody looks at, so the frames go once they are folded in
