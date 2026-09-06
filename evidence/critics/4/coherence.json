@@ -1,0 +1,95 @@
+{
+  "critic": "coherence",
+  "cycle": 4,
+  "score": 11.5,
+  "floor": 13,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png",
+      "where": "the last row of the thread, a paper strip at y 2734-2795, x 161-1201, directly above the composer",
+      "what": "The video event in the visible set renders as an empty 62px strip: inside the paper only 495 of 43200 pixels are darker than luminance 150 (1.1%, and those are the ruled lines and the red margin rule), with no thumbnail, no duration, no timestamp and no delivery mark, while every other row in the same frame is 71-397px tall and carries ink.",
+      "why": "02_chat.report.json counts that row as kinds.video = 1 inside anchor 'types:voice_note,video at rows 7286 to 7290 of 8069' and reliability.json records video as ok ('video and poster blobs fetched by the client with the event'), so the log holds the event and the blobs arrive but the Chat view draws nothing for it: one event type in the one log has no view in the region that is supposed to be a view onto it. In evidence/.previous/02_chat.png the same row is a full video frame ~560px tall, and DIFF.json's ssim 0.6148 is the largest change in the whole capture, on the only artifact marked from_this_run."
+    },
+    {
+      "severity": "serious",
+      "artifact": "MANIFEST.json, frames.json, 09_two_devices.png, 16_setup_android.png",
+      "where": "MANIFEST.json 'missing' and 'browser', frames.json 'scroll_emulator'",
+      "what": "There is no Android artifact anywhere in the evidence: 09_two_devices.png and 16_setup_android.png are both absent (DIFF.json: 'not captured in this session or the last'), MANIFEST.json records browser 'webkit' for the whole capture and all 15 present artifacts, and frames.json says scroll_emulator is missing because 'no Android device was up in this session'.",
+      "why": "A quarter of the rubric row is 'both platforms serve the same regions, the same feelings, and the same event types from the one codebase', and nothing in the artifacts shows the second platform serving anything; the reasons given restate the absence rather than give a cause, so they read as excuses. reliability.json's device ids 'android-rel' and 'pwa-rel' and 05_settings.png's 'android-capture / pwa-mtq25j9m' are labels inside one webkit harness, not a second platform rendering the five regions."
+    },
+    {
+      "severity": "serious",
+      "artifact": "03_us.png, 04_moments.png",
+      "where": "03_us.png below the TO DO section; 04_moments.png the lens row at y 300-345",
+      "what": "Three of the five shared-life modules the app reports are never drawn: 03_us.report.json lists dates (81 events), todos (199), calendar (6), rituals (53) and shelf (12), but 03_us.png shows only the dates and todos sections and there is no Us scroll clip. The same holds in Moments: 04_moments.report.json lists lenses media 183, milestones 142, feelings 1340, and only the media lens is ever captured, in any artifact or clip.",
+      "why": "The clause 'a fifth shared-life module could be added without touching the existing four' can only be checked against module views, and two of five are visible; the 1340 feelings and 142 milestones that the emotional history lives in are advertised in the Moments chrome ('WHAT WE FELT', 'WHAT HAPPENED') and never shown, so whether a module or a lens beyond the first looks like the system cannot be seen at all."
+    },
+    {
+      "severity": "minor",
+      "artifact": "13_messenger_states.png",
+      "where": "the reply banner in the composer stack, y approx 2665, left of the x",
+      "what": "The banner reads 'answering state_declared' - the log's internal event-type identifier, snake_case underscore included - where 13_messenger_states.report.json records replying_to '0001M4ZQQ0H0PPVTKMMQEE268D'.",
+      "why": "Every other label in the same frame is the app's own lowercase prose or its small-caps register ('noor writing...', 'write something', 'a photo', 'KEPT', 'read'), so this is the one place where the one log's vocabulary is passed straight through to the surface instead of being translated by the view."
+    },
+    {
+      "severity": "minor",
+      "artifact": "12_search.png",
+      "where": "the twelve filter strips, y 692 to 2521, against 04_moments.png y 370-470",
+      "what": "Search renders its lenses as twelve full-width torn strips occupying 1829 of 3120 rows (58.6% of the screen), leaving room for exactly one result (the single band at y 2668-2942), while Moments puts the same kind of choice in four small paper chips 100px tall. Of the nine searchable types reliability.json reports (message, photo, todo_event, date_event, feeling, state_declared, milestone, video, voice_note), only milestone has no chip here, though Moments gives it a whole lens.",
+      "why": "One choice - which slice of the one log to look at - is drawn two different ways in two regions, and the search version crowds out the results it exists to filter; and the type set the two regions offer does not agree."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the lens row at y 300-345 and the filter chips at y 370-470",
+      "what": "Two adjacent control rows use two different selected-state idioms and one of them barely reads: the active lens (04_moments.report.json lens 'media') is marked only by cap height - 'WHAT WE SENT' 33px against 26px and 27px for 'WHAT HAPPENED' and 'WHAT WE FELT', with identical maximum luminance 180 for all three - while the person and range chips 25px below mark selection with a yellow card ('both' mean RGB 215,207,166 against 208,205,197 / 205,202,195 / 207,203,196).",
+      "why": "Within one 170px block of one region the system says 'this one is chosen' in two unrelated ways, and the weaker of the two is a 7px size difference at the same ink value."
+    },
+    {
+      "severity": "minor",
+      "artifact": "14_media_viewer.png",
+      "where": "the top 230 rows and the bottom 190 rows",
+      "what": "The media viewer carries neither the partner strip nor the five-region tab bar: its top 230 rows differ from the identical banner in the other seven region artifacts by a mean of 77/255 and average RGB 105,88,72 (bare wood), and its bottom strip differs from the tab bar by a mean of 71/255.",
+      "why": "It is the one screen where partner state is not legible, so 'legible on every screen rather than only on Pulse' has an exception; 14_media_viewer.report.json also shows ambient.pocket_feeling null here where every other report has 'ugh'."
+    },
+    {
+      "severity": "minor",
+      "artifact": "MANIFEST.json",
+      "where": "the 'stale' block",
+      "what": "Fourteen of the fifteen present artifacts are listed as stale (on disk from before the capture began at 18:13:19Z); only 02_chat.png is from_this_run, and it is the one that regressed.",
+      "why": "The set is not a picture of one moment, so a reader judging whether the regions form one system is comparing screens taken between 13:15 and 18:24 - the event counts in the reports already differ (14062, 14071, 14093) - and a fix visible in one artifact cannot be assumed present in the others."
+    }
+  ],
+  "what_is_working": [
+    "One partner-state strip, and it is the same component everywhere: the top 230 rows of 01_pulse.png, 02_chat.png, 03_us.png, 04_moments.png, 05_settings.png, 12_search.png and 13_messenger_states.png differ from each other by a mean of 0.001 of 255 - pixel-identical - so partner state is legible on all five regions and not only on Pulse.",
+    "That strip is live, not painted on: in 08_state_propagating.mp4 it reads TRAVELLING at frames 1, 150, 240 and 394 and OUT at 396, 410 and 502, flipping at exactly the frame 08_state_propagating.json names for 'state place out' (at_frame 395), and it does so while the app is showing Us, not Pulse.",
+    "One log, one cursor, one standing line: 01/02/03/04/05/12 report the same events count (14062), sync.cursor equal to peer_cursor, and byte-identical ambient.standing_line 'bright / week one, and the room smells right again / travelling / 7 hours ago' in all seven reports.",
+    "Module events are ordinary rows in Chat rather than a second stream: 02_chat.report.json gives the visible kinds as message 4, state_passive 1, voice_note 1, ritual_kept 1, video 1, and 02_chat.png draws the rituals event as 'text when home ... KEPT' on graph paper at y 1469-1667 and the state event as the quiet rule 'you went out - Tue 4 Aug 06:28' at y 1090, both carrying the same timestamp typography as the messages above and below them.",
+    "The one log is one index: reliability.json's search capability returns hits across nine event types (message, photo, todo_event, date_event, feeling, state_declared, milestone, video, voice_note), and coldstart.json shows a message and a feeling in each direction landing in the same order on both nodes (spine_host_order == spine_client_order, same_order_both_sides true, four_events_at 0-3 on both sides). reliability.json also keeps ephemerals out of it - typing 'neither log grew by it' - and folds reactions onto their target 'not a row'.",
+    "The Us modules report a uniform contract - {id, events, glance} for all five - and the two that are drawn use one section grammar: glance card, then a small-caps section label at the left with 'add one' at the right, then the entries (03_us.png, AHEAD/BEEN under dates and OPEN under todos).",
+    "One feeling vocabulary, and an authored feeling is not a special case: haptics.check.json counts 36 feelings, 34 built-in and 2 authored, across six families that match the picker's categories in 15_authored_feeling.mp4 (WARMTH/ACHE/SHELTER/MISCHIEF/STATIC/SPARKLE), and haptics_strip.png shows the two authored ones ('pigeon' mischief 750ms, 'tuesday soup' shelter 1200ms) on the same 3500ms scale and inside the same families as the built-in 34, with near_shapes empty.",
+    "A feeling is the same object wherever it appears: in 15_authored_feeling.mp4 the same modelled object is picked from the grid (frames 19-76), sent, drawn as a chat row 'pigeon / Thu 3 Sep 19:40 / going' (frame 151), and then lands over Settings (frames 289-363); in 07_feeling_landing.mp4 the same objects land over Pulse, over Chat and over the Us dates module without changing form."
+  ],
+  "judgements": {
+    "01_pulse.png": "unchanged - the diff is a sub-10px reflow of the feeling shelf and the YOURS note with identical content (mean absolute luminance difference 3.9/255, and rows 0-1040 pixel-identical), so nothing a reader would call better or worse moved.",
+    "02_chat.png": "regressed - the video row that the previous capture drew as a full ~560px frame is now a 62px empty strip at y 2734-2795 with 1.1% ink inside it, and this is the only artifact re-captured this cycle.",
+    "03_us.png": "unchanged - byte for byte the same file (ssim 1.0).",
+    "04_moments.png": "unchanged - byte for byte the same file (ssim 1.0).",
+    "05_settings.png": "unchanged - ssim 0.9989 with a mean absolute luminance difference of 0.05/255 confined to a 25-row band at y 651-675 on the link address line; nothing else in the frame moved.",
+    "06_unfolding.mp4": "unchanged - byte for byte the same file (ssim 1.0).",
+    "07_feeling_landing.mp4": "improved - same four-beat arc and still over the 6s minimum (421 frames / 6.736s against 446 / 7.136s), but the Chat leg now shows two distinct feelings arriving, 'a squeeze 19:44' then 'nuzzle 19:47', where the previous clip showed the same nuzzle twice at 20:20 and 20:21.",
+    "08_state_propagating.mp4": "improved - 502 frames / 8.032s, still over the 8s minimum, and the Chat leg now carries three event kinds sharing one thread - the ritual 'tuesday soup 20:00', the state rule 'noor is restless 20:05' and the feelings 'a squeeze 20:10' and 'here 20:12' - where the previous clip's Chat leg showed only feelings and a message.",
+    "09_two_devices.png": "unchanged - absent from this capture and the last alike; the absence itself is carried above as a finding, not as a neutral fact.",
+    "10_first_run.png": "unchanged - byte for byte the same file (ssim 1.0).",
+    "11_chat_scroll.mp4": "unchanged - byte for byte the same file (ssim 1.0).",
+    "12_search.png": "unchanged - byte for byte the same file (ssim 1.0).",
+    "13_messenger_states.png": "unchanged - byte for byte the same file (ssim 1.0).",
+    "14_media_viewer.png": "unchanged - byte for byte the same file (ssim 1.0).",
+    "15_authored_feeling.mp4": "improved - the previous file was 22 frames / 0.352s, far under its 4s minimum and too short to show anything; this one is 364 frames / 5.824s and carries the whole arc from the six-family picker through the sent row in Chat to the object landing over Settings.",
+    "16_setup_android.png": "unchanged - absent from this capture and the last alike; the absence itself is carried above as a finding, not as a neutral fact.",
+    "17_setup_pwa.png": "unchanged - byte for byte the same file (ssim 1.0)."
+  },
+  "verdict": "The strongest clause of this row is the one that is best shown. The partner strip is not merely similar across the five regions, it is pixel-identical - a mean difference of 0.001 of 255 across seven artifacts - and 08_state_propagating.mp4 proves it is live by flipping it from TRAVELLING to OUT at frame 395, the exact frame the scene log names, while the app is sitting in Us. Every region report reads the same event count and the same standing line off one cursor; a rituals event and a state event sit in the Chat thread as ordinary rows with the same timestamp typography as the messages beside them; reliability.json searches nine event types out of one index and coldstart.json puts a message and a feeling on the same spine in the same order on both nodes; the 36 feelings share six families and one haptic scale, and the two authored ones are indistinguishable in kind from the 34 built-in. That is a system, not an assembly. What it is missing is the showing of its own edges. The single artifact re-captured this cycle is the one that broke: the video row in 02_chat.png is now an empty 62px strip although the report still counts it and reliability says its blobs arrive, so a region that is meant to be a view onto the log has stopped drawing one of the log's types. Three of the five shared-life modules and two of the three Moments lenses - 1340 feelings and 142 milestones among them - are never drawn in any artifact or clip, so the claim that a fifth module would fit the pattern of the first four rests on a report field rather than on anything a reader can look at. And the second platform is absent outright: two missing artifacts, both of them the Android and two-device ones, a whole capture stamped webkit, and 'no Android device was up in this session' offered as the reason. Around that sit smaller seams - the internal identifier 'state_declared' surfacing in a reply banner, filter lenses drawn as twelve full-width strips in Search and as four small chips in Moments, an active lens marked only by seven pixels of cap height beside chips that use a yellow card. The architecture reads as one thing; the evidence shows about three fifths of it, and the fifth it did re-shoot came back worse."
+}

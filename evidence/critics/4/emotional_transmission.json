@@ -1,0 +1,85 @@
+{
+  "critic": "emotional_transmission",
+  "cycle": 4,
+  "score": 16.0,
+  "floor": 17,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "serious",
+      "artifact": "09_two_devices.png",
+      "where": "absent from evidence/; MANIFEST.json \"missing\" gives \"not captured this session\", DIFF.json gives \"not captured in this session or the last\"",
+      "what": "The one artifact that would show a gesture on one device and the sensation on the other in a single frame does not exist, and neither record gives a reason for the non-capture.",
+      "why": "The rubric row is about a gesture on one device arriving on the other; with this frame absent, everything about the sending half is inferred from harness lines in the logs (07_feeling_landing.json far[]: \"feeling hold 0.9\", \"feeling squeeze 0.75\") and never seen. frames.json does give a real reason where it has one (scroll_emulator: \"no Android device was up in this session\"), which shows the difference between a reason and \"not captured this session\"."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/logs/haptics.json and every *.report.json",
+      "where": "haptics.json header \"channel_here\": \"page\"; sensation.channel == \"page\" in 07_feeling_landing.report.json, 08_state_propagating.report.json and 15_authored_feeling.report.json, and sensation is null in the other twelve reports",
+      "what": "No capture in the evidence ever runs the haptic channel: all 36 waveforms exist only as a notation table and a bar chart, and the actual vibrator is never exercised or measured anywhere.",
+      "why": "The row requires each feeling to be \"identifiable by its haptic pattern alone with the screen face down\". I checked the notation myself and it holds up on paper — no two of the 36 share a rhythm even after quantising every segment to 40 ms, and durations run 30 ms (poke) to 3500 ms (breathe) — but nothing in evidence/ tests, plays, or records a haptic, and 16_setup_android.png is absent while frames.json says no Android device was up, so the claim rests entirely on a table of numbers."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/logs/webpush.txt, 05_settings.png, all *.report.json",
+      "where": "webpush.txt payload {\"kind\":\"feeling\",\"from\":\"noor\"} carrying only ['kind','from']; 05_settings.png \"WHAT MAY INTERRUPT\" sheet; ambient.allowed_to_interrupt == false in all fifteen reports",
+      "what": "\"State changes perceptible without opening the app\" is proven as a transport and never as a perception: the push crypto round-trips and the interrupt sheet exists, but no artifact shows a notification, lock screen, or widget, and the payload carries no waveform so the sensation itself does not survive the trip out of the app.",
+      "why": "The row asks for state changes to be perceptible with the app closed, and the mission goal names \"ambient widgets and scheduled pings\"; what the evidence shows is a generic alert whose body is two fields, and ambient.allowed_to_interrupt is false in every single captured scene, so the out-of-app path is never once exercised."
+    },
+    {
+      "severity": "minor",
+      "artifact": "01_pulse.png, 02_chat.png, 03_us.png, 04_moments.png, 05_settings.png",
+      "where": "three ambient presence surfaces: the standing strip at the top of every region (identical bytes of layout in all five: status line, TRAVELLING, NEED |||, ENERGY |); the Pulse desk card and its shelf of recent feeling objects; the in-thread state slip \"noor is restless · Thu 3 Sep · 20:05\" at frame 150 of 08_state_propagating.mp4",
+      "what": "Three surfaces carrying the partner's presence are visible, but all three live inside the app's own window; nothing ambient in the sense of existing while the app is not open appears anywhere in the evidence.",
+      "why": "\"Ambient\" in the row is what makes the other person legible without being looked for; three in-app panels are three views of one desk, and the surfaces that would earn the word — a widget, a lock screen, a glance — have no artifact."
+    },
+    {
+      "severity": "minor",
+      "artifact": "14_media_viewer.png and 15_authored_feeling.mp4",
+      "where": "14_media_viewer.png bottom-right, the band 100–380 px above the frame bottom: mean luminance 93.5 where every other screen reads 183–191 for the lifted-corner wedge; 15_authored_feeling.json steps: one openCorner, then three showFamily calls logged as __deskShowFamily(shelter|sparkle|mischief)",
+      "what": "The corner that reaches a feeling is present in all five regions (it survives even behind a photo tile in 04_moments) but is gone in the full-screen media viewer, and it is only ever shown being used once, on Chat; the picker's family sheets were switched by a debug hook across four shots of 19–20 frames (0.30–0.32 s of app time each), and the send itself is a sendFeeling harness step.",
+      "why": "\"Reachable in one gesture from any region\" is nearly met by the affordance being drawn everywhere, but the evidence never shows the gesture working anywhere but Chat, and the picker's own behaviour under a finger is never captured as motion at all."
+    },
+    {
+      "severity": "minor",
+      "artifact": "01_pulse.report.json and every other report",
+      "where": "partner_signals: 14 fields; only mood (bright → restless, 08_state_propagating.json far[]) and place (travelling → out, visible in the standing strip at frame 380 vs 420 of the same clip) and availability (heads_down) are ever seen to change",
+      "what": "Eleven of the fourteen partner signals — battery 72%, wifi, 11:00, ringer normal, moving still, at_home yes, last up just now, need, energy, charging, last_active — hold identical values in every artifact and every report in the set.",
+      "why": "Twelve signals are legible, which the row asks for, but \"each person's inner state is continuously legible\" is shown as a static card; only three of the fourteen are ever demonstrated to be live."
+    },
+    {
+      "severity": "minor",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "the shelf across the Pulse desk, frames 1–221, and 07_feeling_landing.json said_again: [{\"line\": \"feeling hold 0.9\", \"times\": 3}]",
+      "what": "The receiving desk in the flagship arrival clip carries four identical 'hold' candles side by side because the harness sent the same line three times.",
+      "why": "The clip that is supposed to show feeling arriving instead shows one feeling arriving repeatedly, so the desk reads as a repeat rather than as a record of distinct feelings — an avoidable weakening of the strongest artifact in the category."
+    },
+    {
+      "severity": "minor",
+      "artifact": "07_feeling_landing.sound.json and evidence/logs/surfaces.json",
+      "where": "sound.json: \"source\": \"assets/sound/<id>.ogg, the file the app plays, mixed over silence\", \"not\": \"a recording of the running app's audio output\"; surfaces.json objects_named_by_feelings: named 34 (30 measured + 4 drawn), against 36 feelings",
+      "what": "The audio half of the non-haptic substitute is asserted from the asset file rather than recorded from the running app, and the two authored feelings' objects (obj_user_pigeon, obj_user_soup) fall outside the object audit, whose count of 34 is exactly the built-in set.",
+      "why": "Both are honest labels rather than concealment, but they mean the sound at arrival and the material of an authored object are the two places where user-authored feelings are not actually shown behaving identically to built-ins."
+    },
+    {
+      "severity": "minor",
+      "artifact": "15_authored_feeling.mp4",
+      "where": "the whole clip; the seven runs are openCorner, three family sheets, sendFeeling, and two arrivals of the pre-seeded 'soup'",
+      "what": "Nothing anywhere in the evidence shows a feeling being authored — no one chooses an object, names a feeling, or lays down a waveform.",
+      "why": "The row's clause on user-authored feelings is carried entirely by two rows already sitting in the seeded store (pigeon by noor, soup by teo); their parity with built-ins is well shown, their creation is not shown at all."
+    }
+  ],
+  "what_is_working": [
+    "A feeling arrives as a bodily event and a message does not, and the difference is measurable. Stepping 08_state_propagating.mp4 frame by frame and phase-correlating the bottom nav band: the plain text message arriving in run 2 (frames 150–168, 'it is raining here too') moves the page by a mean of 0.00 px with zero frames above 0.15 px, while every feeling in the same clip moves it — hold 1.65 px, squeeze 1.73 px, here 1.12 px, soup 1.42 px mean per frame.",
+    "The iOS non-haptic substitute is waveform-locked, not decorative. Across all eight arrivals in 07_feeling_landing.mp4 and 08_state_propagating.mp4 the page motion stops on the exact frame the feeling's waveform ends: hold 119/119, squeeze 40/40, nuzzle 62/62, here 125/125, soup 75/75. Pooled over 417 frames the per-frame shift correlates with the notated amplitude envelope at r = 0.51, and mean |dy| is 2.19 px while the waveform is on against 0.43 px while it is off or over. Peak-to-peak travel is 15–24 device px (5–8 CSS px at dpr 3) — a shudder of the whole surface rather than a badge.",
+    "The sender's pressure survives the trip. soup sent at 0.85, 0.9 and 0.7 arrives with base amplitudes 119, 123 and 109 against a notated 130 (07, 15 and 08 reports), a clean linear map of roughly 62 + 67·intensity, so the same feeling can be said softly or hard.",
+    "The catalogue clears the count with room: haptics.json holds 36 feelings, 34 built-in across six named families (Warmth 6, Shelter 6, Mischief 6, Static 6, Ache 5, Sparkle 5). Every one has its own object, sound and colour with no gaps.",
+    "The waveforms are genuinely distinct, checked independently of the build's own log: no two of the 36 share a segment rhythm, and none collide even after quantising every segment duration to 40 ms — the coarsest grid at which a fingertip still separates two taps. Durations span 30 ms to 3500 ms and the shapes are structurally different in kind (single sustain, decaying train, accelerating ramp, buzz, long-gap triplet), not variations on one envelope.",
+    "Twelve partner-state signals are legible on the desk itself, counted off 01_pulse.png: MOOD bright, HERE open, PLACE travelling, NEEDS a lot, HAS LEFT a little, BATTERY 72%, LAST UP just now, THEIR CLOCK 11:00, RINGER normal, MOVING still, SIGNAL wifi, AT HOME yes — plus the standing status line above them.",
+    "Authored feelings sit inside the built-in families rather than in a drawer of their own. In 15_authored_feeling.mp4 the SHELTER sheet carries seven objects with 'tuesday soup' among here, breathe, it's okay, steady, i'll make you tea and hold, and the MISCHIEF sheet carries 'pigeon' among poke, nyeh, catch, pick one, snap and stuck with me — matching the family counts in haptics.check.json exactly. soup then travels every path I can check: its own waveform and page motion (07 run 4, ending on frame 75 of 75), its own sound file, arrival on the Us region, a place on the shelf, and ambient.pocket_feeling.",
+    "Feelings land in three different regions across the two clips — Pulse, Chat and Us — each as its own object with its own physics: the candle settles, the pinched strip tumbles, the clover leaves scatter down a note, the orange ring drops onto a date card. Each stays where it lands and becomes part of the record rather than scrolling away.",
+    "The picker is a physical sheet with six family tabs pulled from a lifted page corner, and the corner is drawn at the bottom-right of every region screenshot (mean luminance 183–191 against wood at 42–95).",
+    "The interrupt sheet in 05_settings.png is the right shape for this app: eleven kinds of event, three levels each (wake me / quietly / not at all), quiet hours 23:00–07:00, 'a feeling' set to wake me and 'something their phone notices' set to quietly. No badges, no counts, no guilt anywhere in the surface."
+  ],
+  "verdict": "The central claim of this row is met and I can put numbers on it: a feeling arriving moves the whole page for exactly the length of its own waveform and a text message arriving moves it by 0.00 px, so on the PWA the substitute for the missing haptic is a real physical event and not a coloured row — the best-evidenced thing in the whole set. The catalogue is also better than the row demands, with 34 built-ins across six families, 36 waveforms that survive my own collision test at a 40 ms grid, an intensity that maps cleanly into amplitude, and two authored feelings that sit in the built-in family sheets and travel every path I can follow. What it cannot show is as specific as what it can. The haptic channel is never once exercised — every report in evidence/ reads sensation.channel \"page\", so the row's face-down identification test is supported by a table and a bar chart and nothing else. The two-device frame, which is the one artifact that would show a gesture on one device becoming a sensation on the other, is simply absent with \"not captured this session\" where the same capture gives a real reason elsewhere, so the sending half is only ever a line in a harness log. And perception with the app closed is a transport proof, not a perception: the push crypto round-trips, the interrupt sheet is well made, but no notification, lock screen or widget appears anywhere, the payload carries two fields and no waveform, and allowed_to_interrupt is false in all fifteen captured scenes. Three of the nine clauses in the row are carried by assertion rather than by anything I can see, which is why this sits below the floor despite the quality of what is there."
+}

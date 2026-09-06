@@ -20,26 +20,32 @@
    "artifact": "02_chat.png",
    "label": "changed",
    "ssim": 0.6148,
-   "judgement": null,
+   "judgement": "regressed",
    "sha": "d7d017473c583829",
    "previous_sha": "4fd0a52db9325c7e",
-   "label_basis": "ssim 0.6148 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.6148 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "regressed - the video row that the previous capture drew as a full ~560px frame is now a 62px empty strip at y 2734-2795 with 1.1% ink inside it, and this is the only artifact re-captured this cycle.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "03_us.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "5b7fbee236901f78",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged - byte for byte the same file (ssim 1.0).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "04_moments.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "0de1b0488ad8bab8",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged - byte for byte the same file (ssim 1.0).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "05_settings.png",
@@ -54,96 +60,120 @@
    "artifact": "06_unfolding.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "5dd5241da59aaf27",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged - byte for byte the same file (ssim 1.0).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "changed",
    "ssim": 0.8964,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "2df6061ab2234a2c",
    "previous_sha": "357188de1a5ef22d",
-   "label_basis": "ssim 0.8964 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.8964 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "improved - same four-beat arc and still over the 6s minimum (421 frames / 6.736s against 446 / 7.136s), but the Chat leg now shows two distinct feelings arriving, 'a squeeze 19:44' then 'nuzzle 19:47', where the previous clip showed the same nuzzle twice at 20:20 and 20:21.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
    "ssim": 0.8613,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "9f09a1f123cbe5ea",
    "previous_sha": "7e15ca2f4e28941d",
-   "label_basis": "ssim 0.8613 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.8613 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "improved - 502 frames / 8.032s, still over the 8s minimum, and the Chat leg now carries three event kinds sharing one thread - the ritual 'tuesday soup 20:00', the state rule 'noor is restless 20:05' and the feelings 'a squeeze 20:10' and 'here 20:12' - where the previous clip's Chat leg showed only feelings and a message.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "not captured in this session or the last"
+   "judgement": "unchanged",
+   "why": "not captured in this session or the last",
+   "judged_because": "unchanged - absent from this capture and the last alike; the absence itself is carried above as a finding, not as a neutral fact.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "10_first_run.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "42320b8ba8e3aadc",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged - byte for byte the same file (ssim 1.0).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "cc1c7c7a779c82a3",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged - byte for byte the same file (ssim 1.0).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "12_search.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "6fbf377718c721b8",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged - byte for byte the same file (ssim 1.0).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "7396e942f2435fdf",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged - byte for byte the same file (ssim 1.0).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "08eea760651c26af",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged - byte for byte the same file (ssim 1.0).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "changed",
    "ssim": null,
-   "judgement": null,
-   "why": "the clips differ; no frame could be pulled to measure how"
+   "judgement": "improved",
+   "why": "the clips differ; no frame could be pulled to measure how",
+   "judged_because": "improved - the previous file was 22 frames / 0.352s, far under its 4s minimum and too short to show anything; this one is 364 frames / 5.824s and carries the whole arc from the six-family picker through the sent row in Chat to the object landing over Settings.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "not captured in this session or the last"
+   "judgement": "unchanged",
+   "why": "not captured in this session or the last",
+   "judged_because": "unchanged - absent from this capture and the last alike; the absence itself is carried above as a finding, not as a neutral fact.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "17_setup_pwa.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "f6ee05d5bce584d9",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged - byte for byte the same file (ssim 1.0).",
+   "judged_by": "coherence critic"
   }
  ],
  "counts": {
@@ -152,5 +182,6 @@
   "unchanged": 9,
   "changed": 6,
   "absent": 2
- }
+ },
+ "judgements_from": "the coherence critic's report for this cycle"
 }
