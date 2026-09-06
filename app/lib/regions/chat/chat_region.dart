@@ -219,8 +219,11 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       final window = _tightestWindow(items, wanted);
       if (window == null) return;
       _lastAnchor = 'types:${wanted.join(',')} at rows ${window.$1} to ${window.$2} of ${items.length}';
-      // the top of the stretch a little below the strip, so the whole of it is in the frame
-      _scroll.jumpTo(index: window.$1, alignment: 0.16);
+      // The stretch sits in the lower half of the screen, with the thread above it. Putting its
+      // top near the top of the frame filled the screen with two tall rows and a card — seven
+      // notes, where the standard for the chat hero is eight — and a frame of the rare kinds with
+      // nothing around them is not a picture of a thread.
+      _scroll.jumpTo(index: window.$1, alignment: 0.52);
       await Future<void>.delayed(const Duration(milliseconds: 40));
       return;
     } else {

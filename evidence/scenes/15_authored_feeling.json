@@ -32,8 +32,9 @@
   {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 22,
-   "ms": 16
+   "count": 20,
+   "ms": 16,
+   "from": 0
   },
   {
    "do": "showFamily",
@@ -41,10 +42,14 @@
    "after": 0
   },
   {
+   "do": "step",
+   "ms": 16
+  },
+  {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 20,
-   "from": 22,
+   "count": 19,
+   "from": 20,
    "ms": 16
   },
   {
@@ -53,10 +58,14 @@
    "after": 0
   },
   {
+   "do": "step",
+   "ms": 16
+  },
+  {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 20,
-   "from": 42,
+   "count": 19,
+   "from": 39,
    "ms": 16
   },
   {
@@ -65,10 +74,14 @@
    "after": 0
   },
   {
+   "do": "step",
+   "ms": 16
+  },
+  {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
-   "count": 20,
-   "from": 62,
+   "count": 19,
+   "from": 58,
    "ms": 16
   },
   {
@@ -81,7 +94,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 75,
-   "from": 82,
+   "from": 77,
    "ms": 16
   },
   {
@@ -95,7 +108,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 106,
-   "from": 157,
+   "from": 152,
    "ms": 16
   },
   {
@@ -114,7 +127,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 106,
-   "from": 263,
+   "from": 258,
    "ms": 16
   },
   {

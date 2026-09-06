@@ -139,8 +139,17 @@ function ensure(p) {
     // Every handle that does something answers 'ok' or a sentence saying what was missing. An
     // `undefined` used to pass here, and it was hiding a build in which every answer came back as
     // undefined — pairing included. Only the clock step answers nothing, by design.
+    //
+    // A handle may say 'ok' and then something worth writing down — how many feelings were on the
+    // vocabulary sheet it just turned to, say. That is not a failure, and treating it as one cost
+    // a whole capture of 15: the answer goes into the scene log and the step passes.
     if (answer === 'undefined' && name === '__deskStep') return;
-    if (answer !== 'ok') throw new Error(`${name}(${args.join(', ')}) -> ${answer}`);
+    if (answer === 'ok') return;
+    if (answer.startsWith('ok,') || answer.startsWith('ok ')) {
+      log.steps.push({ at: Date.now() - t0, said: `${name}(${args.join(', ')}) ${answer}` });
+      return;
+    }
+    throw new Error(`${name}(${args.join(', ')}) -> ${answer}`);
   }
   async function settle(ms) {
     await page.waitForTimeout(ms === undefined ? (scene.settle || 700) : ms);

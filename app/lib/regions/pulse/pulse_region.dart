@@ -195,11 +195,12 @@ class _Traffic extends StatelessWidget {
     for (final e in newestFirst) {
       final f = registry.byId(e.payload['feeling_id'] as String);
       if (f == null) continue;
-      final box = FeelingObject.boxFor(f, 66, intensity: (e.payload['intensity'] as num).toDouble());
+      final box = FeelingObject.boxFor(f, 66);
       if (box > tallest) tallest = box;
     }
     return SizedBox(
-      height: tallest + 32,
+      // the object, plus the name, the time, and the ten points a note of one's own is offset by
+      height: tallest + 40,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: newestFirst.length,

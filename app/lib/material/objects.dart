@@ -54,7 +54,12 @@ class FeelingObject extends StatelessWidget {
     // candle 29 points tall and a crane 82 — and the small ones read as a smudge beside their own
     // name. tools/pack_assets.py measures each one's ink at pack time.
     final ink = MaterialLibrary.loaded ? MaterialLibrary.instance.inkScaleOf(id) : 1.0;
-    final scale = (0.88 + 0.24 * intensity.clamp(0.0, 1.0)) * ink;
+    // The box is the room the thing needs; how hard it was thrown scales what is drawn inside it.
+    // Putting intensity in the box made a landing re-lay-out everything under it — 15 caught it as
+    // two light jumps a frame apart, and the frames show the whole of Settings shifting while a
+    // feeling arrived. A thing does not take up more room because it was sent harder.
+    final box = size * ink;
+    final scale = 0.88 + 0.24 * intensity.clamp(0.0, 1.0);
 
     // Some feelings are not things. A sun scribbled at the top of a page, a moon on the corner,
     // rain, a tongue stuck out — those are marks somebody made, and rendering them as objects
@@ -73,8 +78,8 @@ class FeelingObject extends StatelessWidget {
       if (!onPaper) {
         // the same rule as the rendered objects below: the box is what the drawing needs
         return SizedBox(
-          width: size * scale,
-          height: size * scale,
+          width: box,
+          height: box,
           child: Transform.rotate(angle: tilt, child: mark),
         );
       }
@@ -117,7 +122,6 @@ class FeelingObject extends StatelessWidget {
     // correction went at the source in the same change — tools/pack_assets.py now packs each
     // object and its shadows cropped to the box they share, so the frame is the thing rather than
     // the thing adrift in a square of nothing.
-    final box = size * scale;
     return SizedBox(
       width: box,
       height: box,
@@ -135,15 +139,18 @@ class FeelingObject extends StatelessWidget {
               id: '${id}_shadow${dusk ? '_dusk' : ''}',
               box: box,
               opacity: (0.75 * shadowScale).clamp(0.0, 1.0),
-              scale: 0.86 + 0.14 * shadowScale,
+              scale: scale * (0.86 + 0.14 * shadowScale),
             ),
             Transform.translate(
               offset: Offset(lift * size * 0.16, -lift * size * 0.62),
-              child: Image.asset(objectAsset(id),
-                  fit: BoxFit.contain,
-                  gaplessPlayback: true,
-                  filterQuality: FilterQuality.medium,
-                  errorBuilder: (c, e, s) => _Fallback(feeling: feeling)),
+              child: Transform.scale(
+                scale: scale,
+                child: Image.asset(objectAsset(id),
+                    fit: BoxFit.contain,
+                    gaplessPlayback: true,
+                    filterQuality: FilterQuality.medium,
+                    errorBuilder: (c, e, s) => _Fallback(feeling: feeling)),
+              ),
             ),
           ],
         ),
@@ -154,16 +161,16 @@ class FeelingObject extends StatelessWidget {
   /// The room a [FeelingObject] takes for this feeling at this size — larger than `size` for an
   /// object that sits small in its own render. A row or a grid that has to reserve space asks
   /// here rather than assuming `size`, which is what left the candle cut in half.
-  static double boxFor(Feeling feeling, double size, {double intensity = 0.7}) {
+  static double boxFor(Feeling feeling, double size) {
     final ink = MaterialLibrary.loaded ? MaterialLibrary.instance.inkScaleOf(feeling.object) : 1.0;
-    return size * (0.88 + 0.24 * intensity.clamp(0.0, 1.0)) * ink;
+    return size * ink;
   }
 
   /// The `size` to ask for so the whole drawing fits in [room]. For a fixed row: the object reads
   /// a little smaller rather than being cut off at the edge of the paper.
-  static double sizeToFit(Feeling feeling, double room, {double intensity = 0.7}) {
+  static double sizeToFit(Feeling feeling, double room) {
     final ink = MaterialLibrary.loaded ? MaterialLibrary.instance.inkScaleOf(feeling.object) : 1.0;
-    return room / ((0.88 + 0.24 * intensity.clamp(0.0, 1.0)) * ink);
+    return room / ink;
   }
 
   /// Which stock a scrap is torn from. Scraps come off whatever was to hand, so they are not all

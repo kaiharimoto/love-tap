@@ -387,6 +387,10 @@ class CaptureHooks {
           'replying_to': chat['replying_to'],
           'editing': chat['editing'],
           'partner_typing': scope.partnerTyping,
+          // where the thread was pointed and what kinds of paper are in the frame, so a claim
+          // that the messenger carries a voice note is answered by the picture
+          if (chat['anchor'] != null) 'anchor': chat['anchor'],
+          if (chat['kinds'] != null) 'kinds': chat['kinds'],
           if (chat['search'] != null) 'search': chat['search'],
           if (chat['viewer'] != null) 'viewer': chat['viewer'],
         };
