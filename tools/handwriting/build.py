@@ -1030,6 +1030,13 @@ def feature_text(base_names, n):
         lines.append(f"  sub @K{j} [{all_v}]' lookup ROT{j};")
     lines.append("} ROTATE;")
     lines.append("")
+    # KNOWN, AND NOT FIXED HERE: the cascade advances one variant per letter, so with five
+    # variants two of the same letter four apart get the same outline — measured on the hero as
+    # IoU 0.9954 for two 'e's, and about thirty per cent of repeated letters are twins. The
+    # rotation breaks some of that up but not enough. The lever is the variant count in
+    # hands.json: eight would put the twins near twelve per cent, at about a third more build
+    # time per face. A positional cascade cannot do better on its own, because it does not know
+    # which letter it is looking at.
     lines.append("feature calt {")
     lines.append("  lookup CASCADE;")
     lines.append("  lookup ROTATE;")
