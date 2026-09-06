@@ -203,31 +203,41 @@ def object_boxes(src_dir, margin=0.02, threshold=20):
         half = max(x1 - x0, y1 - y0) / 2.0 * (1.0 + pad * 2)
         return (cx - half, cy - half, cx + half, cy + half)
 
-    own, shadows = {}, {}
+    def base_of(stem):
+        """obj_x, obj_x_dusk, obj_x_shadow and obj_x_shadow_dusk are all the same thing."""
+        s = stem.split("_shadow")[0]
+        return s[:-5] if s.endswith("_dusk") else s
+
+    own, others = {}, {}
     for fn in sorted(os.listdir(src_dir)):
         if not fn.lower().endswith(".png"):
             continue
         stem = os.path.splitext(fn)[0]
-        base = stem.split("_shadow")[0]
+        base = base_of(stem)
         box = box_of(os.path.join(src_dir, fn))
         if box is None:
             continue
         if stem == base:
             own[base] = box
         else:
-            shadows[stem] = (base, box)
+            others[stem] = (base, box)
 
     tight, wide, spread = {}, {}, {}
     for base, obj in own.items():
         t_box = squared(obj, margin)
         side = t_box[2] - t_box[0]
         tight[base] = tuple(round(v * 2048.0, 2) for v in t_box)
-    for stem, (base, sh) in shadows.items():
+    for stem, (base, sh) in others.items():
         obj = own.get(base)
         if obj is None:
             continue
         t_box = squared(obj, margin)
         side = t_box[2] - t_box[0]
+        if "_shadow" not in stem:
+            # the dusk render of the object itself: the same box as its daylight twin, so the two
+            # are the same thing under two lights rather than two crops
+            wide[stem] = tight[base]
+            continue
         # each shadow gets its own frame: the daylight one falls down and to the right of the
         # thing, the dusk one falls the other way off the desk lamp, and one box holding both
         # would be half empty whichever was being drawn
@@ -269,8 +279,7 @@ def pack_family(name, index, verbose=True):
         plain_mask = name == "tears" and "_edge" not in stem and "_shadow" not in stem
         crop = None
         if name == "objects":
-            base = stem.split("_shadow")[0]
-            crop = shadow_boxes.get(stem) if "_shadow" in stem else boxes.get(base)
+            crop = shadow_boxes.get(stem) or boxes.get(stem)
         if name == "tears":
             base = stem.split("_edge")[0].split("_shadow")[0]
             crop = boxes.get(base)

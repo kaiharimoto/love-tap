@@ -80,12 +80,22 @@ String stockVariantFor(Event e, MaterialLibrary lib, {bool dusk = false, String?
 /// than unlikely, and the two phones agree because they agree about the order of the thread.
 ///
 /// The variation an id would have given is carried by the stock, the lift and the tilt instead.
+/// The torn edge a note has. A property of the note, like its lift and its tilt — not of the row
+/// it happens to be sitting in.
+///
+/// It was the row index alone, which is wrong in both directions at once. A surface that draws
+/// every row at the same index gave every piece the same edge: a completeness pass found one mask
+/// repeated twelve times down the search results, which is the tiled-texture failure the anti-goal
+/// forbids. And the same event torn one way in search and another way in the thread said the two
+/// surfaces were looking at two different pieces of paper. So the row does not come into it at
+/// all: the same note is the same piece of paper wherever you meet it, and two notes that happen
+/// to hash together is what happens when fifty edges are shared among fourteen thousand notes.
 String? tearFor(Event e, MaterialLibrary lib, {bool writable = true, int row = 0}) {
   final masks = writable ? lib.writableTears : lib.tearMasks;
   if (masks.isEmpty) return null;
   final n = masks.length;
   final stride = _coprimeStride(n);
-  return masks[((row % n) * stride) % n];
+  return masks[((hashOf(e.id) % n) * stride) % n];
 }
 
 int _coprimeStride(int n) {

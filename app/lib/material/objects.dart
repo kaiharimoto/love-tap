@@ -145,11 +145,19 @@ class FeelingObject extends StatelessWidget {
               offset: Offset(lift * size * 0.16, -lift * size * 0.62),
               child: Transform.scale(
                 scale: scale,
-                child: Image.asset(objectAsset(id),
+                // The object has its own render under the desk lamp. Drawing the daylight one at
+                // dusk made it the single thing on the desk that had not changed light: the paper
+                // beside it shifts thirty to forty levels and warms, and the object shifted eight.
+                // The fallback is the daylight render, for a library packed before the dusk pass.
+                child: Image.asset(objectAsset(dusk ? '${id}_dusk' : id),
                     fit: BoxFit.contain,
                     gaplessPlayback: true,
                     filterQuality: FilterQuality.medium,
-                    errorBuilder: (c, e, s) => _Fallback(feeling: feeling)),
+                    errorBuilder: (c, e, s) => Image.asset(objectAsset(id),
+                        fit: BoxFit.contain,
+                        gaplessPlayback: true,
+                        filterQuality: FilterQuality.medium,
+                        errorBuilder: (c, e, s) => _Fallback(feeling: feeling))),
               ),
             ),
           ],

@@ -22,6 +22,7 @@ import '../../scope.dart';
 import '../../spine/projections/thread.dart';
 import '../../voice/strings.dart';
 import 'note.dart';
+import 'renderers.dart';
 import 'search_page.dart';
 import 'viewer_page.dart';
 
@@ -167,8 +168,10 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       if (takeable.author == scope.me) {
         await scope.emit('message_delete', {'target': takeable.id});
       }
+      // something they actually said, so the banner shows words rather than whatever the last
+      // row happened to be
       final answerable = scope.thread.items.lastWhere(
-          (i) => i.author != scope.me && i.id != theirs.id,
+          (i) => i.author != scope.me && i.id != theirs.id && (i.text ?? '').trim().isNotEmpty,
           orElse: () => theirs);
       if (mounted) setState(() => _replyTo = answerable);
       _text.text = 'the second one, then';
@@ -219,11 +222,12 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       final window = _tightestWindow(items, wanted);
       if (window == null) return;
       _lastAnchor = 'types:${wanted.join(',')} at rows ${window.$1} to ${window.$2} of ${items.length}';
-      // The stretch sits in the lower half of the screen, with the thread above it. Putting its
-      // top near the top of the frame filled the screen with two tall rows and a card — seven
-      // notes, where the standard for the chat hero is eight — and a frame of the rare kinds with
-      // nothing around them is not a picture of a thread.
-      _scroll.jumpTo(index: window.$1, alignment: 0.34);
+      // The *last* row of the stretch is placed, not the first, and placed high enough that the
+      // whole of it clears the composer. A tall row anchored by the window's start ends up with
+      // only its top edge in frame: three critics read the top sliver of a video — the blank paper
+      // above the poster — as a video that renders as an empty strip, which is the framing and not
+      // the app. Whatever is put here has to fit underneath it.
+      _scroll.jumpTo(index: window.$2, alignment: 0.55);
       await Future<void>.delayed(const Duration(milliseconds: 40));
       return;
     } else {
@@ -586,7 +590,13 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
           ),
         if (_replyTo != null || _editing != null)
           _Answering(
-            label: _editing != null ? S.editHint : '${S.replyingTo} ${_replyTo!.text ?? _replyTo!.type}',
+            // A row without text — a state, a ritual, a day that mattered — still has a sentence
+            // in the couple's own words; what it must never show is its registry id. The banner
+            // read 'answering state_declared' on a captured frame, which is the app talking to
+            // itself in front of somebody.
+            label: _editing != null
+                ? S.editHint
+                : '${S.replyingTo} ${_replyTo!.text ?? summaryOf(_replyTo!.event, me: scope.me)}',
             onDrop: () => setState(() {
               _replyTo = null;
               if (_editing != null) _text.clear();

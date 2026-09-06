@@ -758,8 +758,6 @@ def render_object(name, res, samples, out_dir, conditions=("day", "dusk")):
     written = []
     for condition in conditions:
         for pass_kind in ("object", "shadow"):
-            if pass_kind == "object" and condition != "day":
-                continue
             scene = common.reset_scene()
             made = OBJECTS[name](rng)
             objs = made if isinstance(made, list) else [made]
@@ -776,7 +774,19 @@ def render_object(name, res, samples, out_dir, conditions=("day", "dusk")):
                 common.add_daylight(scene)
             else:
                 common.add_dusk(scene)
-            suffix = {"object": "", "shadow": "_shadow" if condition == "day" else "_shadow_dusk"}[pass_kind]
+                # the same aperture everything else lit at dusk is shot at, or the object is the
+                # one thing on the desk that did not stop down
+                common.stop_down_for_dusk(scene)
+            # The object used to be rendered under daylight only, and drawn under both. A
+            # completeness pass measured it: under the dusk light the paper beside it shifts
+            # thirty to forty levels and warms, and the object shifts eight and does not warm at
+            # all — a pre-lit sprite sitting on a photograph. It has its own dusk render now.
+            suffix = {
+                ("object", "day"): "",
+                ("object", "dusk"): "_dusk",
+                ("shadow", "day"): "_shadow",
+                ("shadow", "dusk"): "_shadow_dusk",
+            }[(pass_kind, condition)]
             path = os.path.join(out_dir, name + suffix + ".png")
             common.render(scene, path)
             if pass_kind == "shadow":
