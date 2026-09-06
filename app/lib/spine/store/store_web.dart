@@ -24,6 +24,19 @@ class WebStore implements SpineStore {
   final Database _db;
   int? _nextOrder;
 
+  /// One writer at a time. `stored_order` is a unique index, and the number to write into it is
+  /// read, held, and written by two separate awaits — so a pull applying events from the host
+  /// while the app is appending one of its own could allocate the same order twice and the second
+  /// transaction died with `ConstraintError: Index key is not unique`. The events in that batch
+  /// were simply lost: on the wire they had been delivered, and on the phone they never arrived.
+  Future<void> _writing = Future<void>.value();
+
+  Future<T> _oneAtATime<T>(Future<T> Function() write) {
+    final done = _writing.then((_) => write());
+    _writing = done.then((_) {}, onError: (Object _) {});
+    return done;
+  }
+
   @override
   Future<List<Event>> loadAll() async {
     final txn = _db.transaction('events', idbModeReadOnly);
@@ -55,7 +68,9 @@ class WebStore implements SpineStore {
   }
 
   @override
-  Future<void> upsertAll(Iterable<Event> events) async {
+  Future<void> upsertAll(Iterable<Event> events) => _oneAtATime(() => _upsertAll(events));
+
+  Future<void> _upsertAll(Iterable<Event> events) async {
     final txn = _db.transaction('events', idbModeReadWrite);
     final store = txn.objectStore('events');
     var order = await _order(txn);
@@ -68,7 +83,13 @@ class WebStore implements SpineStore {
       await store.put({'id': e.id, 'seq': e.seq, 'stored_order': storedOrder, 'json': e.encode()});
     }
     _nextOrder = order;
-    await txn.completed;
+    try {
+      await txn.completed;
+    } catch (_) {
+      // the cached number is no longer trustworthy if the write did not land
+      _nextOrder = null;
+      rethrow;
+    }
   }
 
   @override
