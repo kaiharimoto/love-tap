@@ -319,7 +319,7 @@ fi
 # missing.
 if wants 08_state_propagating && [ -f evidence/scenes/08_state_propagating.json ]; then
   if run_far_scene 08_state_propagating; then
-    make_clip 08_state_propagating 60 8
+    make_clip 08_state_propagating 60 4
   fi
 fi
 
