@@ -36,12 +36,17 @@
    "arg": "feeling hold 0.92"
   },
   {
-   "do": "awaitArrival"
+   "do": "awaitArrival",
+   "timeout": 90000
+  },
+  {
+   "do": "step",
+   "ms": 16
   },
   {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
-   "count": 150,
+   "count": 149,
    "ms": 16
   },
   {
@@ -54,13 +59,14 @@
    "arg": "message it is raining here too"
   },
   {
-   "do": "awaitArrival"
+   "do": "awaitArrival",
+   "timeout": 90000
   },
   {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
-   "count": 28,
-   "from": 150,
+   "count": 19,
+   "from": 149,
    "ms": 16
   },
   {
@@ -68,13 +74,29 @@
    "arg": "feeling squeeze 0.6"
   },
   {
-   "do": "awaitArrival"
+   "do": "awaitArrival",
+   "timeout": 90000
   },
   {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 71,
-   "from": 178,
+   "from": 168,
+   "ms": 16
+  },
+  {
+   "do": "far",
+   "arg": "feeling here 0.8"
+  },
+  {
+   "do": "awaitArrival",
+   "timeout": 90000
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 156,
+   "from": 239,
    "ms": 16
   },
   {
