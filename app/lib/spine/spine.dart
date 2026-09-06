@@ -219,6 +219,11 @@ class Spine {
 
   /// Host side: accepts events from the client, assigning the next seq to each new one.
   /// Duplicates (already known ids) are returned with their existing seq and not re-added.
+  /// Kinds of event the peer sent that this build does not know. Named in the reliability report
+  /// rather than swallowed: an empty set is the claim that both phones agree about what exists.
+  final Set<String> _unknown = {};
+  Set<String> get unknownTypes => Set.unmodifiable(_unknown);
+
   Future<List<Event>> accept(Iterable<Event> incoming) async {
     final out = <Event>[];
     final added = <Event>[];
@@ -228,7 +233,17 @@ class Spine {
         out.add(known);
         continue;
       }
-      final problem = specOf(e.type).validate(e.payload);
+      // A type this build has never heard of is skipped, not thrown on. specOf raises on an
+      // unknown type, and this is the one place a *peer* chooses the type: one event of a kind the
+      // other phone knows and this one does not — the far phone a version ahead — took the whole
+      // accept down with it, so nothing in the batch landed and the pull retried it forever.
+      // Skipping loses that one event and keeps the couple talking.
+      final spec = kEventTypeById[e.type];
+      if (spec == null) {
+        _unknown.add(e.type);
+        continue;
+      }
+      final problem = spec.validate(e.payload);
       if (problem != null) continue; // the host never stores an invalid event
       final assigned = e.withSeq(_maxSeq + 1);
       _ordered.add(assigned);

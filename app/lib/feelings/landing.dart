@@ -25,9 +25,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../capture/hooks.dart';
 import '../flags.dart';
-import '../material/hands.dart';
 import '../material/objects.dart';
-import '../material/palette.dart';
 import 'builtins.dart';
 
 /// One thing arriving: what it is, how hard it was thrown, and which way it came.
@@ -264,96 +262,23 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
       children: [
         Transform.translate(offset: Offset(0, -lift * kPageLiftPx), child: widget.child),
         if (a != null) IgnorePointer(child: _Landing(arrival: a, t: _t, seed: _seed)),
-        // the haptic pattern annotated on the clip, generated from the same segments that are
-        // moving the page and the motor: capture builds only, while a feeling is arriving
-        // The lane is an annotation on the recording, so it goes where nothing of the app is:
-        // along the very top of the frame, above the partner's strip. It sat across the bottom,
-        // over the composer, where 'here · 2000ms · page' and 'write something' were printed on
-        // top of each other — the one control you send a message with, unreadable. And it goes
-        // when the pattern does, not when the object has finished being put away.
-        if (a != null && Flags.capture && ms <= a.feeling.hapticLengthMs)
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 0,
-            child: IgnorePointer(child: HapticLane(feeling: a.feeling, intensity: a.intensity, ms: ms)),
-          ),
+        // NO INSTRUMENT ON THE PICTURE. A capture-only lane used to draw the pattern to scale
+        // across the frame with the feeling's name, its length in milliseconds and the channel it
+        // played on. It was added because a cycle said there was no haptic evidence, and the next
+        // cycle read it exactly as what it was: four critics called it a diagnostic readout
+        // printed over the app, and one of them counted it sitting on top of the composer's own
+        // words. A rhythm you can feel is not proved by writing its duration on the photograph.
+        //
+        // The evidence is where evidence belongs: evidence/crops/haptics_strip.png draws all
+        // thirty-six patterns to scale from the registry the app plays from, haptics.json has the
+        // segments, every scene report carries the sensation that was played, and the clip carries
+        // the feeling's own sound. What is left in the frame is the page moving on the pattern,
+        // which is the sensation itself.
       ],
     );
   }
 }
 
-/// The haptic pattern, drawn to scale along the bottom of the frame with a playhead: the
-/// annotation the evidence clips carry. It is drawn from the feeling's own segments — the list the
-/// vibrator is given and the page is moved by — so what it shows is what was played.
-class HapticLane extends StatelessWidget {
-  const HapticLane({super.key, required this.feeling, required this.intensity, required this.ms});
-  final Feeling feeling;
-  final double intensity;
-  final int ms;
-
-  static const double height = 30;
-
-  @override
-  Widget build(BuildContext context) {
-    final total = feeling.hapticLengthMs;
-    return SizedBox(
-      height: height,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: CustomPaint(painter: _LanePainter(feeling.segments, total, ms, intensity)),
-          ),
-          Positioned(
-            left: 8,
-            top: 1,
-            child: Text(
-              '${feeling.name} · ${total}ms · ${kIsWeb ? 'page' : 'vibration'}',
-              style: Hands.onDesk(size: 9),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LanePainter extends CustomPainter {
-  _LanePainter(this.segments, this.total, this.ms, this.intensity);
-  final List<HapticSegment> segments;
-  final int total;
-  final int ms;
-  final double intensity;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (total <= 0) return;
-    const inset = 8.0;
-    final w = size.width - 2 * inset;
-    final base = size.height - 4;
-    final scale = 0.55 + 0.45 * intensity.clamp(0.0, 1.0);
-    // the baseline: pencil on the desk
-    canvas.drawLine(Offset(inset, base), Offset(inset + w, base),
-        Paint()..color = Pen.onWood.withValues(alpha: 0.7)..strokeWidth = 1.0);
-    var at = 0;
-    final bar = Paint()..color = Pen.onWood.withValues(alpha: 0.85);
-    for (final s in segments) {
-      final x0 = inset + w * at / total;
-      final x1 = inset + w * (at + s.ms) / total;
-      if (s.on) {
-        final h = (size.height - 12) * (s.amp / 255.0) * scale;
-        canvas.drawRect(Rect.fromLTRB(x0 + 0.5, base - h, math.max(x0 + 1.5, x1 - 0.5), base), bar);
-      }
-      at += s.ms;
-    }
-    // the playhead, in red pen, where the pattern is now
-    final px = inset + w * (ms.clamp(0, total) / total);
-    canvas.drawLine(Offset(px, 2), Offset(px, base + 3), Paint()..color = Pen.red..strokeWidth = 1.5);
-  }
-
-  @override
-  bool shouldRepaint(_LanePainter old) => old.ms != ms || old.segments != segments;
-}
 
 class _Landing extends StatelessWidget {
   const _Landing({required this.arrival, required this.t, required this.seed});

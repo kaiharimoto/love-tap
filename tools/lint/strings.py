@@ -84,6 +84,7 @@ def main():
     args = ap.parse_args()
 
     findings = []
+    passed = []
     counted = 0
     for path in sorted(LIB.rglob("*.dart")):
         if any(part in SKIP_DIRS for part in path.parts):
@@ -100,8 +101,23 @@ def main():
                     findings.append({"where": where, "text": raw, "rule": why})
             if rituals and STREAK.search(spoken):
                 findings.append({"where": where, "text": raw, "rule": "streak language on the rituals surface"})
+            passed.append({"where": where, "text": raw})
 
-    report = {"strings_read": counted, "findings": findings, "ok": not findings}
+    # A check that reports only a count and an empty list is a check nobody can audit: a critic
+    # read `{"strings_read": 116, "findings": [], "ok": true}` and said, rightly, that it names no
+    # rule it applied and shows none of what it read. So the report carries the rules by name and
+    # every string it passed, and anybody can disagree with a particular one.
+    rules = [{"rule": "an emoji glyph in a displayed string", "pattern": EMOJI.pattern}]
+    rules += [{"rule": why, "pattern": pattern.pattern} for pattern, why in MARKETING]
+    rules.append({"rule": "streak language on the rituals surface", "pattern": STREAK.pattern,
+                  "only_in": "files whose path contains 'ritual'"})
+    report = {
+        "strings_read": counted,
+        "rules_applied": rules,
+        "findings": findings,
+        "read": passed,
+        "ok": not findings,
+    }
     if args.out:
         pathlib.Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         pathlib.Path(args.out).write_text(json.dumps(report, indent=1))
@@ -110,7 +126,8 @@ def main():
     else:
         for f in findings:
             print(f"{f['where']}: {f['rule']} — {f['text']!r}")
-        print(f"{counted} displayed strings read, {len(findings)} against the voice")
+        print(f"{counted} displayed strings read against {len(rules)} rules, "
+              f"{len(findings)} against the voice")
     return 0 if report["ok"] else 1
 
 

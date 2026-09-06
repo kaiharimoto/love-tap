@@ -90,14 +90,21 @@ def board_grain(h, w, seed, rings=17.0, cant=0.10):
     # narrow dark bands: most of the face is earlywood
     late = np.clip((ring - 0.66) / 0.34, 0, 1) ** 0.5
 
-    # medullary rays: short pale flecks lying across the rings, the tell of quarter-sawn oak
-    fleck = _periodic((h, w), [(37, 0.5), (61, 0.3), (89, 0.2)], seed + 2, axis=1)
-    fleck = fleck * _periodic((h, w), [(23, 0.6), (41, 0.4)], seed + 3, axis=0)
-    fleck = np.clip(fleck * 1.6 - 0.85, 0, 1)
+    # Medullary rays: short pale flecks lying across the rings, the tell of quarter-sawn oak.
+    #
+    # Two harmonics along the board put the flecks on a grid: a critic measured four bright
+    # hairlines at a pitch of exactly 67 pixels, which is the 23-cycle term over a 1500-pixel
+    # board, and read the whole desk as a tiled texture. A ray is a ray because of where a branch
+    # trace happened to cross the cut, so the run of them is not a frequency. Six terms, none a
+    # multiple of another and none dominant, put the flecks where no ruler finds them.
+    fleck = _periodic((h, w), [(37, 0.4), (53, 0.3), (61, 0.2), (89, 0.15)], seed + 2, axis=1)
+    fleck = fleck * _periodic((h, w), [(19, 0.34), (23, 0.3), (31, 0.24), (43, 0.18), (67, 0.12)],
+                              seed + 3, axis=0)
+    fleck = np.clip(fleck * 1.9 - 0.86, 0, 1)
 
     # the fibre itself, far finer than a ring
-    fibre = _periodic((h, w), [(211, 0.5), (307, 0.3), (419, 0.2)], seed + 4, axis=1) * 0.5
-    fibre = fibre * (0.6 + 0.4 * _periodic((h, w), [(7, 1.0)], seed + 5, axis=0))
+    fibre = _periodic((h, w), [(211, 0.4), (269, 0.25), (307, 0.2), (419, 0.15)], seed + 4, axis=1) * 0.5
+    fibre = fibre * (0.6 + 0.4 * _periodic((h, w), [(7, 0.6), (11, 0.4), (17, 0.25)], seed + 5, axis=0))
     return late, fleck, fibre
 
 
