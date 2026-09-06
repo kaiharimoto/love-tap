@@ -93,8 +93,13 @@ class Fall {
 
   /// How long the thing lies where it landed: until it has stopped bouncing and the pattern has
   /// finished playing through the paper, whichever is later.
+  /// How long the thing lies on the desk before it is put away: as long as the feeling lasts —
+  /// until it has stopped bouncing and the pattern has finished, and not a moment longer. It
+  /// used to hold for half a second after both, and in that window nothing on the screen moved
+  /// at all: the object still, the paper settled, the pattern over. Three frames of the landing
+  /// clip were the frame before them.
   static double restSeconds(Feeling feeling, double intensity) =>
-      math.max(contacts(intensity).last + 0.55, feeling.hapticLengthMs / 1000.0);
+      math.max(contacts(intensity).last, feeling.hapticLengthMs / 1000.0);
 
   /// How long it takes to be put away into the recent row once it has rested.
   static const putAwaySeconds = 0.5;

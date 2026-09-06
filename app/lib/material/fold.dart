@@ -295,7 +295,13 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
     final f = _frames;
     if (f == null || f.length == 0) return SizedBox(width: widget.width, height: _height);
     final p = progress;
-    final i = _done ? f.length - 1 : (p * (f.length - 1)).round().clamp(0, f.length - 1);
+    // One rendered frame per frame period, counted rather than interpolated: a ratio scaled to
+    // length-1 and rounded lands on the same index twice somewhere in every sequence, and that is
+    // one frame of the clip identical to the one before it.
+    final i = _done || widget.startOpen
+        ? f.length - 1
+        : (((_elapsed - widget.holdFirst).inMicroseconds * _frameRate) ~/ 1000000)
+            .clamp(0, f.length - 1);
     final image = f.at(i) ?? _lastDrawn;
     if (image == null) return SizedBox(width: widget.width, height: _height);
     _lastDrawn = image;
