@@ -136,8 +136,14 @@ Future<void> main(List<String> argv) async {
   final deadline = DateTime.now().add(Duration(seconds: seconds));
   while (DateTime.now().isBefore(deadline)) {
     if (await control.exists()) {
-      final lines = (await control.readAsString()).trim().split('\n');
-      await control.delete();
+      // Taken, then read. It used to read the file and then delete it, and a line written in
+      // between — the harness appends one whenever it wants the far phone to do something — went
+      // into the bin unread. That is how a feeling the scene had asked for never crossed, and the
+      // scene waited thirty seconds for an arrival nobody had been told to send.
+      final taken = File('$out.do.taken');
+      await control.rename(taken.path);
+      final lines = (await taken.readAsString()).trim().split('\n');
+      await taken.delete();
       for (final line in lines) {
         final parts = line.trim().split(' ');
         if (parts.isEmpty || parts.first.isEmpty) continue;

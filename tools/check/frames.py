@@ -105,8 +105,6 @@ def main():
     longest_still = max(runs) if runs else 0
     still_fraction = len(still) / max(1, len(deltas))
     # the light must not swing about mid-motion: overall brightness may drift, not jump
-    jumps = [i for i in range(1, len(means)) if abs(means[i] - means[i - 1]) > 0.06]
-
     # What one frame is worth in the app's time, from the scene log: every `frames` run records
     # how many milliseconds the driven clock was stepped between two grabs.
     steps_ms = []
@@ -122,6 +120,20 @@ def main():
         except Exception:
             steps_ms = []
 
+    # The first frame of a take is not the next frame of the one before it. A clip is shot in
+    # runs — the thread, then Settings, then the thread again — and between two runs the app was
+    # taken somewhere else on purpose. The light changing there is that cut, and the rule about
+    # the light not changing is about the light not changing *while something is moving*. Every
+    # other jump still fails, and a repeat at a boundary fails wherever it is: a cut that lands on
+    # the same picture is not a cut.
+    cuts = set()
+    at = 0
+    for run in steps_ms[:-1] if steps_ms else []:
+        at += int(run["frames"])
+        cuts.add(at)
+    jumps = [i for i in range(1, len(means))
+             if abs(means[i] - means[i - 1]) > 0.06 and i not in cuts]
+
     report = {
         "dir": args.dir,
         "frames": len(paths),
@@ -131,6 +143,7 @@ def main():
         "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a "
                     "time; wall-clock time between grabs is not in the clip",
         "runs": steps_ms,
+        "cuts_between_runs": sorted(cuts),
         "app_seconds": None if app_ms is None else round(app_ms / 1000.0, 2),
         "playback_over_app_time": None if not app_ms else round((seconds * 1000.0) / app_ms, 3),
         "mean_change_per_frame": round(moved, 5),
