@@ -99,7 +99,7 @@ const List<Feeling> kBuiltInFeelings = [
   Feeling(id: 'wish_you_were_here', name: 'wish you were here', family: Family.ache, object: 'obj_ticket', haptic: '250@180 off400 250@120 off400 250@70 off400 250@40', sound: 'snd_wish', colour: '#8a6a4a'),
   Feeling(id: 'long_day', name: 'long day', family: Family.ache, object: 'obj_window', haptic: '800@100 off300 800@60', sound: 'snd_longday', colour: '#3a3a3c'),
   Feeling(id: 'here', name: 'here', family: Family.shelter, object: 'obj_boat', haptic: '400@140 off400 400@140 off400 400@140', sound: 'snd_here', colour: '#4a4a4c'),
-  Feeling(id: 'breathe', name: 'breathe', family: Family.shelter, object: 'obj_blanket_fold', haptic: '1200@110 off800 1200@110', sound: 'snd_breathe', colour: '#4a4a4c'),
+  Feeling(id: 'breathe', name: 'breathe', family: Family.shelter, object: 'obj_blanket_fold', haptic: '500@60 700@130 off900 1400@90', sound: 'snd_breathe', colour: '#4a4a4c'),
   Feeling(id: 'its_okay', name: "it's okay", family: Family.shelter, object: 'obj_plaster', haptic: '200@160 off200 200@160 off200 200@160 off200 200@160', sound: 'snd_okay', colour: '#c9a98a'),
   Feeling(id: 'steady', name: 'steady', family: Family.shelter, object: 'obj_stone', haptic: '300@180 off300 300@180 off300 300@180 off300 300@180 off300 300@180', sound: 'snd_steady', colour: '#6d6d70'),
   Feeling(id: 'make_you_tea', name: "i'll make you tea", family: Family.shelter, object: 'obj_mug', haptic: '100@120 off100 100@120 off100 500@150', sound: 'snd_tea', colour: '#8b6b4a'),

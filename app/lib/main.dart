@@ -1,3 +1,5 @@
+import 'dart:ui' show PlatformDispatcher;
+
 import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -21,6 +23,19 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MaterialLibrary.load();
   final scope = await bootstrap();
+  if (Flags.capture) {
+    // Under capture an uncaught error has to be legible in the scene log: the harness records
+    // the browser's console, and a Dart exception that reaches the page as a bare object reads
+    // there as `pageerror: object` and nothing else. Both channels are written out in words.
+    FlutterError.onError = (details) {
+      FlutterError.presentError(details);
+      debugPrint('flutter error: ${details.exceptionAsString()}\n${details.stack}');
+    };
+    PlatformDispatcher.instance.onError = (error, stack) {
+      debugPrint('uncaught: $error\n$stack');
+      return true;
+    };
+  }
   runApp(AppScope.provide(scope: scope, child: const DeskApp()));
   CaptureHooks.install(scope);
   // the capture harness waits for this rather than guessing at a delay

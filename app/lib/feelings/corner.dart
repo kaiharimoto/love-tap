@@ -290,7 +290,9 @@ class _Fan extends StatelessWidget {
                                     id: 'family_${f.name}',
                                     stock: 'index',
                                     torn: false,
-                                    padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
+                                    // room for the stamp's letter-spacing, which the intrinsic
+                                    // width undercounts: SHELTER came out as SHELTE
+                                    padding: const EdgeInsets.fromLTRB(11, 5, 16, 5),
                                     child: Stamped(
                                       f.label,
                                       size: f == family ? 12 : 10.5,

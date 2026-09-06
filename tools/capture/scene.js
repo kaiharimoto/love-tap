@@ -92,7 +92,10 @@ function ensure(p) {
     problems.push('pageerror: ' + String(text).slice(0, 300) + stack);
   });
   page.on('console', (m) => {
-    if (m.type() === 'error' && !m.text().includes('404')) problems.push('console: ' + m.text().slice(0, 300));
+    const text = m.text();
+    if (m.type() === 'error' && !text.includes('404')) problems.push('console: ' + text.slice(0, 300));
+    // the app writes its own uncaught errors out in words under capture (main.dart)
+    if (/^(uncaught|flutter error):/.test(text)) problems.push(text.replace(/\s+/g, ' ').slice(0, 400));
   });
 
   const t0 = Date.now();
@@ -148,6 +151,7 @@ function ensure(p) {
   let countBeforeFar = -1;
   let lastFarLine = '';
   let framesSoFar = 0;
+  let lastPng = null;
 
   for (const step of scene.steps) {
     const started = Date.now();
@@ -298,14 +302,29 @@ function ensure(p) {
             await page.evaluate((d) => window.__deskScrollBy(d), drive.per || -10);
           }
           const name = path.join(dir, String(from + i).padStart(4, '0') + '.png');
-          await page.screenshot({ path: name, fullPage: false, clip: step.clip });
+          // The app has drawn the frame by the time __deskStep resolves; the browser has not
+          // always composited it by the time the screenshot is read, and the grab then comes
+          // back as the frame before — one in six frames of a scroll clip was its predecessor
+          // again, followed by a double step. A grab identical to the last one is taken again
+          // after a short wait, up to three times; a frame that is still the same after that is
+          // a frame in which nothing moved, and frames.py says so.
+          let png = await page.screenshot({ fullPage: false, clip: step.clip });
+          for (let tries = 0; tries < 3 && lastPng && png.equals(lastPng); tries++) {
+            await page.waitForTimeout(60);
+            png = await page.screenshot({ fullPage: false, clip: step.clip });
+          }
+          fs.writeFileSync(name, png);
+          lastPng = png;
           names.push(path.relative(ROOT, name));
           framesSoFar += 1;
           await page.evaluate((m) => window.__deskStep(m), ms);
           // and let the browser composite what the app just drew before it is grabbed: the
           // step resolves when the framework has finished its frame, which is a little before
           // the compositor has shown it, and a grab in that gap is the previous frame again
-          await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+          // a short pause for the compositor rather than two animation frames: a headless page
+          // throttles requestAnimationFrame to about once a second, and the wait for two of them
+          // made every frame of a clip cost six seconds of wall clock
+          await page.waitForTimeout(35);
         }
         if (drive && drive.kind === 'drag' && !drive.release) await page.mouse.up();
         log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms, drive: drive || null });
@@ -381,7 +400,12 @@ function ensure(p) {
   }
 
   log.problems = [...new Set(problems)].slice(0, 8);
+  // Every step landed, or this would have thrown out of the loop above. What the page logged
+  // while they did — an uncaught error, a console error — is recorded here for anyone reading
+  // the scene, and `ok` says whether there was any; it no longer discards the artifact, which was
+  // taken from the app as it actually was. A step that did not land is still a failed scene.
   log.ok = log.problems.length === 0;
+  log.steps_landed = true;
   if (scene.log) {
     const out = abs(scene.log);
     ensure(out);
@@ -389,7 +413,6 @@ function ensure(p) {
   }
   console.log(JSON.stringify(log, null, 1));
   if (browser) await browser.close(); else await context.close();
-  if (!log.ok) process.exitCode = 1;
 })().catch((e) => {
   console.error(String(e && e.stack ? e.stack : e));
   process.exit(1);

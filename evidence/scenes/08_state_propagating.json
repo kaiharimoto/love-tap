@@ -41,7 +41,8 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating_b",
    "count": 24,
-   "ms": 16
+   "ms": 16,
+   "from": 24
   },
   {
    "do": "far",
@@ -51,7 +52,7 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating_b",
    "count": 160,
-   "from": 24,
+   "from": 48,
    "ms": 8
   },
   {
@@ -62,7 +63,8 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating_c",
    "count": 40,
-   "ms": 16
+   "ms": 16,
+   "from": 208
   },
   {
    "do": "far",
@@ -72,7 +74,7 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating_c",
    "count": 120,
-   "from": 40,
+   "from": 248,
    "ms": 16,
    "drive": {
     "kind": "scrollBy",
@@ -87,7 +89,7 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating_c",
    "count": 120,
-   "from": 160,
+   "from": 368,
    "ms": 8
   },
   {

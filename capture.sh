@@ -40,7 +40,8 @@ MISSING="$SCRATCH/missing.txt"
 : > "$MISSING"
 note_missing() { echo "$1|$2" >> "$MISSING"; echo "  ✗ $1 — $2"; }
 
-wants() { [ -z "$ONLY" ] || [ "$ONLY" = "$1" ]; }
+# --only takes one scene or a comma-separated list of them
+wants() { [ -z "$ONLY" ] || [[ ",$ONLY," == *",$1,"* ]]; }
 
 # ---- what has to be true before a screenshot is worth taking -------------------------------------
 # Three of the four anti-goals are things only a reader catches, and a broken glyph or a widened

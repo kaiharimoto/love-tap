@@ -55,7 +55,7 @@ thing before it reads as a symbol.
 | `wish_you_were_here` | Ache | wish you were here | `obj_ticket` — a torn cinema ticket | 250@180 off400 250@120 off400 250@70 off400 250@40 | `snd_wish` four fading turns | `#8a6a4a` |
 | `long_day` | Ache | long day | `obj_window` — a rainy window doodle | 800@100 off300 800@60 | `snd_longday` two long slow breaths | `#3a3a3c` |
 | `here` | Shelter | here | `obj_boat` — a paper boat | 400@140 off400 400@140 off400 400@140 | `snd_here` three even smooths | `#4a4a4c` |
-| `breathe` | Shelter | breathe | `obj_blanket_fold` — a blanket-folded sheet | 1200@110 off800 1200@110 | `snd_breathe` in, out | `#4a4a4c` |
+| `breathe` | Shelter | breathe | `obj_blanket_fold` — a blanket-folded sheet | 500@60 700@130 off900 1400@90 | `snd_breathe` in, out | `#4a4a4c` |
 | `its_okay` | Shelter | it's okay | `obj_plaster` — a plaster strip | 200@160 off200 200@160 off200 200@160 off200 200@160 | `snd_okay` four gentle pats | `#c9a98a` |
 | `steady` | Shelter | steady | `obj_stone` — a smooth stone | 300@180 off300 300@180 off300 300@180 off300 300@180 off300 300@180 | `snd_steady` five slow taps | `#6d6d70` |
 | `make_you_tea` | Shelter | i'll make you tea | `obj_mug` — a mug with steam | 100@120 off100 100@120 off100 500@150 | `snd_tea` two clinks, a pour | `#8b6b4a` |
