@@ -126,11 +126,13 @@ def main():
     # the light not changing is about the light not changing *while something is moving*. Every
     # other jump still fails, and a repeat at a boundary fails wherever it is: a cut that lands on
     # the same picture is not a cut.
+    # means[i] is the mean of frame i+1, so the change between the last frame of one run and the
+    # first of the next shows up one index earlier than the frame number.
     cuts = set()
     at = 0
     for run in steps_ms[:-1] if steps_ms else []:
         at += int(run["frames"])
-        cuts.add(at)
+        cuts.add(at - 1)
     jumps = [i for i in range(1, len(means))
              if abs(means[i] - means[i - 1]) > 0.06 and i not in cuts]
 

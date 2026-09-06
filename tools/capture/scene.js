@@ -203,13 +203,28 @@ function ensure(p) {
         // which nothing has happened yet, and a clip of an arrival that opens on a run of
         // identical frames is a clip with a hole in the front of it. Fails rather than proceeding
         // if nothing arrives: an arrival that never came is not something to photograph.
-        const deadline = Date.now() + (step.timeout || 30000);
+        const timeout = step.timeout || 30000;
+        const deadline = Date.now() + timeout;
         const want = step.over === undefined ? countBeforeFar + 1 : step.over;
         let now = await count();
+        // The far phone is a process watching a file, and a line can go astray between the two
+        // of them. Rather than fail a whole capture over one lost instruction, the line is said
+        // again — and the log says it was, so nobody reads the clip as one clean exchange.
+        let saidAgain = 0;
+        let nextRetry = Date.now() + Math.min(8000, timeout / 3);
         while (now < want) {
-          if (Date.now() > deadline) throw new Error(`awaitArrival: the log stood at ${now} after ${step.timeout || 30000}ms, waiting for ${want}`);
+          if (Date.now() > deadline) throw new Error(`awaitArrival: the log stood at ${now} after ${timeout}ms, waiting for ${want} (said again ${saidAgain}x)`);
+          if (Date.now() > nextRetry && lastFarLine && saidAgain < 3) {
+            farSay(lastFarLine);
+            saidAgain += 1;
+            nextRetry = Date.now() + Math.min(8000, timeout / 3);
+          }
           await page.waitForTimeout(step.every || 100);
           now = await count();
+        }
+        if (saidAgain) {
+          log.said_again = log.said_again || [];
+          log.said_again.push({ line: lastFarLine, times: saidAgain });
         }
         log.arrivals = log.arrivals || [];
         // at_frame is where in the assembled clip this arrival begins: the frames grabbed so far
