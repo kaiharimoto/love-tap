@@ -126,9 +126,27 @@ class SyncEngine {
     }
   }
 
+  /// Why the loop last stopped short, if it ever did: the report carries it, so a phone that has
+  /// quietly stopped delivering says so instead of looking idle.
+  String? lastFault;
+  int faults = 0;
+
   Future<void> _run() async {
     while (_running) {
-      final ok = await once(wait: const Duration(seconds: 20));
+      final bool ok;
+      try {
+        ok = await once(wait: const Duration(seconds: 20));
+      } catch (e, st) {
+        // One unexpected error used to end the loop for good — the phone went on looking paired
+        // and connected and never pulled again, and a message sent to it after that never
+        // arrived. It is recorded, waited out, and the loop goes round.
+        faults += 1;
+        lastFault = '$e';
+        _log('fault: $e\n$st');
+        await _sleep(_backoff);
+        _backoff = Duration(milliseconds: min(_backoff.inMilliseconds * 2, 5000));
+        continue;
+      }
       if (!_running) break;
       if (ok) {
         // long-poll returned; go straight round again unless nothing is paired
@@ -156,6 +174,8 @@ class SyncEngine {
         'refused': _refused,
         'pulled': _pulled,
         'blobs_fetched': _blobsFetched,
+        'faults': faults,
+        if (lastFault != null) 'last_fault': lastFault,
         'pending': spine.pending.length,
         'cursor': spine.cursor,
         'link': transport.current.toJson(),

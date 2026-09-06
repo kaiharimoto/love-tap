@@ -343,6 +343,7 @@ class CaptureHooks {
       'sensation': scope.sensation.last?.toJson(),
       // what the off-app surfaces were handed — recorded as what was sent, never as a picture
       // of a notification this container cannot show
+      'sync': scope.sync.report(),
       'ambient': {
         'standing_line': scope.lastStandingLine,
         'pocket_feeling': scope.lastPocketFeeling,
