@@ -392,7 +392,11 @@ class FoldedNote extends StatefulWidget {
   /// finds the sheet in the last frame and prints these four numbers. The sheet moved when the
   /// camera was tilted off the vertical, and hand-tuned fractions would have gone on pointing at
   /// where it used to be. Re-run the tool whenever the rig changes.
-  static const inset = [0.14, 0.227, 0.14, 0.227];
+  ///
+  /// Measure the *packed* frames, not the render: pack_assets trims every fold frame to its own
+  /// content, so a note takes the room a folded letter takes and grows into the room an open one
+  /// does. The render and the asset are different pictures and only one of them is drawn.
+  static const inset = [0.064, 0.062, 0.148, 0.062];
 
   /// The writing comes up over the last part of the sequence, while the sheet is settling flat.
   /// Starting it only once the sequence had finished is what left the clip ending on blank paper.
