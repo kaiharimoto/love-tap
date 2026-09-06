@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 
 import '../spine/event.dart';
+import 'ink.dart';
 import 'palette.dart';
 
 const List<FontFeature> _handFeatures = [FontFeature.enable('calt'), FontFeature.enable('liga')];
@@ -77,12 +78,15 @@ class Written extends StatelessWidget {
   final int? maxLines;
 
   @override
-  Widget build(BuildContext context) => Text(
-        text,
-        style: Hands.of(by, size: size, colour: colour),
-        textAlign: align,
-        maxLines: maxLines,
-        overflow: maxLines == null ? null : TextOverflow.ellipsis,
+  Widget build(BuildContext context) => Inked(
+        pen: by == Person.noor ? 'ballpoint' : 'graphite',
+        child: Text(
+          text,
+          style: Hands.of(by, size: size, colour: colour),
+          textAlign: align,
+          maxLines: maxLines,
+          overflow: maxLines == null ? null : TextOverflow.ellipsis,
+        ),
       );
 }
 

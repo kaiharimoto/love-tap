@@ -23,13 +23,18 @@ class LibraryEntry {
 
 class MaterialLibrary {
   MaterialLibrary._(this.paper, this.tears, this.objects, this.bits, this.shell, this.folds,
-      this.foldSize, this.objectInk, this.objectShadow, this.fonts, this.sounds, this.shadowFrame);
+      this.ink, this.foldSize, this.objectInk, this.objectShadow, this.fonts, this.sounds,
+      this.shadowFrame);
 
   final List<LibraryEntry> paper;
   final List<LibraryEntry> tears;
   final List<LibraryEntry> objects;
   final List<LibraryEntry> bits;
   final List<LibraryEntry> shell;
+
+  /// The coverage plates: how much ink reached the paper, one per pen. Tiled under a letter's own
+  /// alpha, so a stroke is not one flat value from end to end. tools/ink_plate.py makes them.
+  final List<LibraryEntry> ink;
 
   /// sequence name -> frame count
   final Map<String, int> folds;
@@ -127,6 +132,7 @@ class MaterialLibrary {
       family('bits'),
       family('shell'),
       folds,
+      family('ink'),
       foldSize,
       objectInk,
       objectShadow,

@@ -33,8 +33,9 @@ SIZES = {
     "bits": 420,
     "folds": 600,
     "shell": 1500,
+    "ink": 512,          # a coverage plate, tiled: packed at its own size or the tiling shifts
 }
-QUALITY = {"paper": 88, "tears": 92, "objects": 92, "bits": 92, "folds": 90, "shell": 88}
+QUALITY = {"paper": 88, "tears": 92, "objects": 92, "bits": 92, "folds": 90, "shell": 88, "ink": 92}
 
 
 def convert(src, dst, long_side, quality, keep_alpha, luminance_to_alpha=False, crop=None):
@@ -473,11 +474,11 @@ def main(argv=None):
         shutil.rmtree(DST)
     os.makedirs(DST, exist_ok=True)
     # every directory declared in pubspec.yaml must exist, even before its family is baked
-    for fam in ("paper", "tears", "objects", "bits", "shell", "fonts", "sound", "seed",
+    for fam in ("paper", "tears", "objects", "bits", "shell", "ink", "fonts", "sound", "seed",
                 "seed/year", "seed/photos", "seed/videos", "seed/voice"):
         os.makedirs(os.path.join(DST, fam), exist_ok=True)
     index = {}
-    for fam in ("paper", "tears", "objects", "bits", "shell"):
+    for fam in ("paper", "tears", "objects", "bits", "shell", "ink"):
         pack_family(fam, index)
     # how the three tear layers line up, straight from the renderer that made them
     relief_path = os.path.join(SRC, "tears", "relief.json")
