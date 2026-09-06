@@ -7,7 +7,7 @@ constraints. Everything in this file is *state*, not instruction — where the t
 brief wins.
 
 **Repository** `kaiharimoto/love-tap` · **branch** `claude/new-session-f95s8n` (develop, commit and
-push only here) · **working directory** `/home/user/love-tap` · working tree is clean and pushed.
+push only here) · **working directory** `/home/user/love-tap`.
 
 Every reply must end with the fenced ```mpstate block the brief specifies (v, task, phase, step,
 cycle, score, next, blocked, ask).
@@ -16,163 +16,142 @@ cycle, score, next, blocked, ask).
 
 ## 1. Where the build is
 
-Two review cycles have run. Cycle 2 was six fresh-context critics plus a completeness pass, each
-measuring rather than asserting. Their reports are `evidence/critics/2/*.json`; the arithmetic is
-`evidence/SCORE.json`.
+Three review cycles have run. Cycle 3 scored **64 / 100**, up from 55.5 after cycle
+2 and 40 after cycle 1, with no floor met: messenger 19/30 (floor 26) · material 13/25 (22) ·
+emotional 15/20 (17) · coherence 10/15 (13) · anti-goal 7/10 (9). `evidence/SCORE.json` carries the
+arithmetic — the rule is the *lower* of the critic's number and the builder's, per category, so a
+category rises only when both see it rise. Fourteen of cycle 3's findings were fixed in the same
+session and are **in the code and in none of the artifacts**; the next capture is what shows them,
+and `TASK_STATE.md` lists them one by one.
 
-| category | critic | builder | taken | floor | weight |
-|---|---|---|---|---|---|
-| messenger reliability | 20 | 19 | **19** | 26 | 30 |
-| material truth | 16 | 15 | **15** | 22 | 25 |
-| emotional transmission | 6 | 7 | **6** | 17 | 20 |
-| coherence | 10.5 | 11 | **10.5** | 13 | 15 |
-| anti goal | 5.5 | 5 | **5** | 9 | 10 |
+`evidence/critics/3/` is your work list. Every finding carries the measurement that established
+it, so each one can be checked and each one can be shown fixed. `TASK_STATE.md` has the table of
+what cycle 2 said and what was done about each of its findings.
 
-**55.5 / 95, no floor met.** Cycle 1 was 40. The brief requires four or more complete cycles;
-cycles 3 and 4 have not run.
+## 2. What the evidence set is now
 
-`evidence/critics/2/` is your work list. Every finding carries the measurement that established it,
-so each one can be checked and each one can be shown fixed.
+Fifteen of the seventeen artifacts are present. **09_two_devices.png and 16_setup_android.png are
+not, and cannot be here**: they need an Android device and this container has no `/dev/kvm`. The
+three routes tried are measured in `docs/PHONES.md` — the x86_64 emulator under QEMU instruction
+emulation reached `adbd` after 113 minutes and never the framework, there is no GTK for a desktop
+build, and a `flutter_tester` render loads fonts but no material. Nothing was faked from the PWA.
+On a host with `/dev/kvm`, or on ARM64 where `arm64-v8a` runs natively, do those two first.
 
-## 2. What was fixed after cycle 2 was scored
+Every seeded still is taken on a phone **paired with the far phone over the whole seeded year**:
+`link: connected`, 14,062 events, in all eight reports. The far phone is
+`app/tool/host_daemon.dart --seed year` — the app's own spine in the host role with the real
+six-word pairing, serving the PWA the near phone loads, and taking one instruction a line
+(`message`, `feeling`, `state`, `read`, `typing on|off`, `pair`, `stop`) on `pair.json.do`.
 
-These are done, committed, and **not yet re-captured** — the artifacts in `evidence/` still show
-the old behaviour. Re-capturing is the first thing worth doing.
+All five clips pass `tools/check/frames.py`: no frame identical to its predecessor at full
+resolution, no light change inside a take.
 
-- **The five-of-five star rating is gone from the data model**, not just the pixels. A `date_event`
-  carries a `verdict` — words — and no longer a `rating`; the twenty-five ratings in the seeded
-  year were rewritten into sentences a person would say; the action is `said`, not `rated`.
-- **A feeling arriving is an object landing.** Three mechanisms: it was being wrapped in
-  `FoldedNote` (resting face = fold frame 0000, a blank cream slab nothing ever opens), its name
-  was set in the author's hand at 19pt — byte for byte the message-body call — and `size` meant the
-  420×420 frame rather than the object, so a candle drew at 29pt beside a crane at 82pt.
-  `tools/pack_assets.py` now measures every object's ink and writes `object_ink` into the index.
-- **The desk was a tiled repeating texture** — a named failure condition. `transform_apply` acts on
-  *selected* objects and the desk was active but not selected, so it returned `{'CANCELLED'}`, the
-  scale stayed on, and the UVs divided ±0.5 by 0.42: the three-plank top was tiled 2.381× across
-  itself, in every artifact, for the whole build. Fixed and re-rendered; correlation at the old
-  462px period is now −0.009 by day and −0.201 at dusk, and what remains is the plank pitch at
-  367px with the three boards differing by ~14 grey levels.
-- **A pending check no longer destroys evidence of a run that happened.** This session's real
-  tailnet cold start was overwritten by "the nodes were not up" because a daemon got reaped between
-  the run and the next `flutter test`. Two causes, both fixed: the tests asked the filesystem
-  whether a node existed rather than asking the daemon, and the local half of the reliability run
-  rewrote the file whole, deleting a tailnet block that was not its to delete.
+| clip | frames | seconds | what it films |
+|---|---:|---:|---|
+| 06_unfolding | 256 | 4.27 | a folded note arriving, opening, the ink coming up on the sheet |
+| 07_feeling_landing | 314 | 5.23 | three feelings landing on the phone they reached |
+| 08_state_propagating | 395 | 6.58 | a mood, a message and two feelings crossing between two phones |
+| 11_chat_scroll | 300 | 5.00 | the thread thrown and coming to rest on its own physics |
+| 15_authored_feeling | 304 | 5.07 | the vocabulary out, a feeling the couple made, sent and received |
 
-92 tests pass.
+## 3. Things that cost hours here, so that they cost you none
 
-## 3. What is left, in order of points on the table
+Everything in the previous handoff still holds. These are new.
 
-### emotional transmission · 6 → 17 · the largest single gap
-1. **Only four named families are visible** (WARMTH, ACHE, SHELTER, MISCHIEF) where the floor is
-   five. The registry has more; the corner shows four.
-2. **No haptic evidence exists anywhere in `evidence/`.** Thirty-plus feelings are meant to be
-   identifiable by pattern alone with the screen face down, and nothing in the set lets anyone
-   check it. Write the per-feeling pattern out as evidence — duration, envelope, a strip.
-3. **Sending a feeling changes nothing** — two `sendFeeling` steps in the `07` log and the recent
-   row holds the same five objects in the same order throughout.
-4. Feeling names in the picker measure ~1.9:1 contrast; the drawer is translucent over the live
-   page rather than opaque.
-5. No designed non-haptic substitute is visible on the PWA path, which is the whole evidence set.
+- **A clip is only as long as the motion in it.** Every run of a `frames` step must end where the
+  thing being filmed stops moving, or the tail is frame-identical and the check fails. The
+  arithmetic is in `app/lib/feelings/landing.dart`: a thrown object rests
+  `max(last bounce, pattern length)` and is put away over `putAwaySeconds`. A run that opens
+  exactly at the apex of a throw gives two identical grabs, because that is where the velocity is
+  zero — step the clock once before it.
+- **The headless compositor runs at about four frames a second.** A screenshot can come back as
+  the frame before, or half drawn. `scene.js` re-grabs when a frame is identical to the last one
+  and again when its size jumps, and the driven clock pumps two frames a step because a widget
+  that finishes in a post-frame callback is drawn a frame late. Do not put a `requestAnimationFrame`
+  wait in the frame loop: it is throttled to about a second and costs six seconds a frame.
+- **The far phone can lose an instruction.** It watches a file; it now renames the file before
+  reading it, and `awaitArrival` says the line again if nothing comes. Both are recorded in the
+  scene log, so nobody reads a clip as one clean exchange when it was not.
+- **The bug that ate a day: events from the other phone were silently dropped.** A message would
+  not arrive for over a minute while the near phone reported `link: connected` the whole time, about
+  one run in four. Three causes, in the order they were found and fixed: the sync loop ended for good
+  on any exception other than the transport's own; its backoff doubled to thirty seconds after every
+  empty long-poll; and — the one that mattered — `stored_order` is a unique index in the web store,
+  so two overlapping `upsertAll` calls allocated the same key, the transaction raised
+  `ConstraintError`, and the whole batch vanished with the failure swallowed. Writes are serialized
+  now (`app/lib/spine/store/store_web.dart`). If a pull ever goes quiet again, read
+  `evidence/logs/08_state_propagating.report.json`: the sync engine's own numbers are in it
+  (`rounds`, `pushed`, `pulled`, `faults`, `last_fault`) and a failed `awaitArrival` prints them.
+- **Keep the browser profile.** `capture.sh` gives every seeded scene one persistent profile,
+  emptied at the start of a run, so the year imports once (11-12 s) and every later scene opens on
+  a phone that already has it (2.7-3.4 s). The log says which kind of load it measured.
 
-### material truth · 15 → 22
-6. **The unfolding clip has no fold in it** — 281 of 320 frames are a flat cream rectangle, edge
-   std 0.32. **`tools/check/surfaces.py` reads `paper/`, `shell/` and `objects/` and not `folds/`**
-   — 94 of the 240 fold frames are below the paper floor of 1.2. Add the family, then re-render
-   `blender/folds/fold.py` with the tooth and fibre the paper stocks carry.
-7. The note cross-fades in *after* the unfold finishes, so the clip ends on blank paper. `Settling`
-   in `app/lib/material/motion.dart` is the mechanism; start it during the settle.
-8. Repeated glyphs render pixel-identical (IoU 0.998). The fonts carry contextual alternates and
-   `Hands` asks for `calt` — establish whether the TTFs actually contain the variants
-   (`fontTools`, or read `tools/handwriting/`). This one was never diagnosed; the agent hit a
-   usage limit.
-9. Tab tiles and two settings surfaces are flat fills.
+## 4. What is left, in order of points on the table
 
-### messenger reliability · 19 → 26
-10. **Moments renders five "still fetching the picture." rows and no thumbnail.** Diagnosed: the
-    masonry rewrite replaced `GridView.builder` with a `SingleChildScrollView`, which has no lazy
-    child model, so all 183 media tiles materialise at once — 129 concurrent IndexedDB reads during
-    one build, and `Image.memory` with no `cacheWidth`, decoding a 1000×750 photo at full size for
-    a 150pt chip. Put the viewport bound back: `_Gallery` already computes each tile's height, so
-    it knows each tile's `top`; build only what intersects the viewport plus a cache extent.
-11. **Typing indication has no evidence** — absent from every artifact and from the sixteen
-    capabilities in `evidence/reliability.json`.
-12. Every still was taken on a single unpaired device stuck in `connecting`, so `sent`/`read` are
-    seeded values rather than an observed round trip.
-13. **13_messenger_states is still missing.** `__deskStage()` throws *only in the web build*; it
-    passes in a widget test against the full seeded year. The handle now returns the real error and
-    four stack frames, so the next capture will name it.
-14. Search result order is neither ascending nor descending; one result carries no visible reason.
-15. The media viewer does not cover its own chrome, and its caption appears twice.
+### 1. 06 does not read as paper unfolding (material, 12 points below floor)
+The frames are right — 240 of them, every one above the paper floor, worst 2.1 against 1.2 — and the
+app plays them one per 16 ms step with the ink coming up on the sheet. The camera is the problem: a
+flap rotating about its crease foreshortens to nothing seen from directly overhead, so a top-down
+orthographic camera films a cream rectangle getting taller. Tilt the camera in
+`blender/rig/common.py`'s fold rig (25–35° off the normal is enough to show a flap's underside), then
+re-measure `FoldedNote.inset` in `app/lib/material/fold.dart` against the new framing, because the
+sheet's resting face moves in the frame. Both are written down at the top of `blender/folds/fold.py`.
+Budget one render (≈70 min at 240 frames) plus a capture of 06.
 
-### anti-goal · 5 → 9
-16. Flat notes in two clips — same root as 6.
-17. The drawn feelings read as the standard emoji set to a fresh eye (a sun with rays for
-    `forehead`, a crescent for `warm palm`).
+### 2. A third of repeated letters are twins (material)
+The cascade advances one variant per letter, so with five variants two of the same letter four apart
+land on the same outline: measured IoU 0.9954 on the hero crop, twin share 0.30 by
+`tools/check/hand.py`. The lever is the variant count in `tools/handwriting/hands.json`; eight
+variants put the share near twelve per cent. A face is about ninety minutes to build and the manifest
+carries the other faces forward, so build one face at a time (`--faces TeoHand`) and check with
+`tools/handwriting/check.py`. Written down in `tools/handwriting/build.py`.
 
-### coherence · 10.5 → 13
-18. The same class of row draws as torn paper in one region and a hard rectangle in another.
-19. Nine of eighteen event types name nine renderer ids that all resolve to one function.
+### 3. A feeling's object is clipped by the paper it arrives on (emotional)
+`app/lib/material/objects.dart` draws the image at an ink correction of up to 3.4 while the box stays
+at `size`, so the tallest objects lose their tops on a note. The fix is a frame-aware size the callers
+ask for — sizing the box to `size * scale` alone overflows the Pulse row by 102 px, which is recorded
+in the file. Every call site is listed there.
+
+### 4. DeskStamp is still not built (material, coherence)
+126 of 155 glyphs in eleven hours, slowing as it goes. `app/pubspec.yaml` points DeskStamp at TeoHand
+and says so in a comment. Resume with `tools/handwriting/build.py --faces DeskStamp` in the
+background at the start of a session, not the end.
+
+### 5. Four messenger capabilities have no picture (messenger, 7 points below floor)
+Edit, attach, voice and video work in the app and appear in no artifact: the sixteen scene scripts in
+`evidence/scenes/` have no step for any of them. The gap is in the capture plan, not the app. Reaction
+and reply were closed the same way — `stageStates` now stages a real one of each — so extend that
+handle rather than inventing a new surface.
+
+### 6. No two-device frame, no Android artifact, every transport line `local`
+09 and 16 as above. The tailnet run is pending for want of a key. This is the largest single block of
+points left on the messenger row and none of it can be moved from this container.
 
 ### Not fixable here
-**09_two_devices.png and 16_setup_android.png.** No `/dev/kvm`. Three routes tried and measured in
-`docs/PHONES.md`: the x86_64 emulator under QEMU instruction emulation (reached `adbd` after 113
-minutes, never the framework), a Linux desktop build (no GTK), and a `flutter_tester` render (fonts
-load, no material — `docs/far_screen_probe.png` is the output). The `android-34` system images were
-deleted to free 8.2 GB after a capture died on `ENOSPC`; `./bootstrap.sh` puts them back. On a host
-with `/dev/kvm`, or ARM64 where `arm64-v8a` runs natively, do that first and these two are cheap.
+09 and 16, as above. The tailnet run is recorded **pending**: no `TS_AUTHKEY` was in this
+session's environment, `toolchain/ts/AUTHKEY_STATUS` says `pending`, and the brief says the
+question may only be asked from the session in which the Tailscale phase began — which has
+happened, so it may not be asked again.
 
-## 4. How to run it
+## 5. How to run it
 
     ./bootstrap.sh                                    # pinned toolchain into ./toolchain
-    ./run.sh --seed=year --transport=local            # or --transport=tailscale
-    ./capture.sh                                      # the whole set, ~45 min
-    ./capture.sh --only=02_chat --no-build            # one scene against the builds on disk
-    cd app && ../toolchain/flutter/bin/flutter test   # 92 tests
+    tools/apt-prereqs.sh                              # and: apt install libevent-2.1-7t64 libwayland-server0
+    ./run.sh --seed=year --transport=local
+    ./capture.sh                                      # the whole set, about 90 minutes
+    ./capture.sh --no-build --only=06_unfolding,08_state_propagating   # a list, against the builds on disk
+    cd app && ../toolchain/flutter/bin/flutter test   # 96 tests
 
-Checks, all wired into `capture.sh` before it takes a screenshot: `tools/check/surfaces.py` (no
-rendered surface is a flat fill — **add `folds`**), `tools/check/manifest.py` (every file in
-`assets/` names its generator), `tools/check/recipes.py`, `tools/lint/strings.py` (every displayed
-string against `docs/VOICE.md`), `tools/check/frames.py` (a clip is not a still).
+`KEEP_FRAMES=yes ./capture.sh` keeps `evidence/frames/` so a clip can be measured frame by frame
+after the fact. `python3 tools/check/frames.py evidence/frames/<name> --fps 60` is the check.
 
 **Scoring.** Write your own sheet to `evidence/critics/<cycle>/builder.json` under a `scores` key
-*before* reading the critics, then `python3 tools/score.py --cycle <n>`. It takes the lower of
-critic and builder per category and refuses arithmetic that breaks the rule.
+*before* reading the critics, then `python3 tools/score.py --cycle <n>`.
 
-**Running the critics.** Use the Workflow tool: six agents in parallel plus a completeness pass
-asking what the six missed. `evidence/critics/prompts/*.md` are the rubric rows and
-`evidence/critics/BRIEFING.md` says what a critic is given. They must stay fresh contexts — tell
-them explicitly not to read the git log, the task list, `docs/BRIEF.md`, or a previous cycle's
-reports. Cycle 2 cost ~1.2M subagent tokens and 583 tool calls and was worth every one of them.
-
-## 5. Things that cost hours here, so that they cost you none
-
-- **Anything on the wall clock is invisible in the evidence.** Under capture the app's clock is
-  driven a frame at a time and screenshots are taken between steps, so a quarter-second of wall
-  clock passes between two frames of a clip: an implicit animation is either not started or already
-  finished at every frame that gets grabbed. Use `Turning` / `Settling` in
-  `app/lib/material/motion.dart`. `app/test/nothing_moves_on_the_wall_clock_test.dart` holds it.
-- **A test that passes with the bug put back is a claim, not a test.** Two in this build did.
-  Always re-break the thing and watch it fail.
-- **The filesystem is not the daemon, and the address file is not the node.** That same stale-state
-  trap bit three times: `capture.sh`, `coldstart_test.dart`, `reliability_test.dart`.
-- **`PaintingContext.paintChild` can leave the context on a different canvas** — a `saveLayer`
-  before it and a `restore` after it land on two different ones. That silently disabled every tear
-  mask in the app for a whole capture, then threw `call_indirect to a signature that does not
-  match`.
-- **A stale render looks exactly like a design decision.** The desk was flat for the entire build
-  because the plate on disk predated the wood being finished. Re-render before blaming a generator.
-- **Check an artifact's mtime before reading it.** I twice drew a conclusion from a PNG that
-  predated the fix I was checking.
-- **Disk.** A clip is 300 full-resolution frames and there are five. `capture.sh` refuses to start
-  under 6 GB free, because running out mid-run reports itself as "ffmpeg refused the frames" and
-  four artifacts missing for reasons that have nothing to do with the app.
-- **The tailnet nodes survive a container restart but not much else** — they get reaped. Their
-  state is in `toolchain/ts/{a,b}/state`; restart `tailscaled` with the flags
-  `tools/tailscale/up.sh` uses and they return on the same addresses with no new key.
-- **`pkill -f <pattern>` will match your own shell** if the pattern appears anywhere in the same
-  command line. It killed three of mine. Split the literal.
-- **Never edit a running bash script** — bash reads it incrementally and the run corrupts.
+**Running the critics.** The Workflow tool, six agents in parallel plus a completeness pass. The
+script that ran cycle 3 is worth reusing; it passes each critic its rubric prompt and forbids the
+git log, the docs, the task list and any other cycle's reports. Move `evidence/SCORE.json`,
+`evidence/critics/<earlier>/` and this cycle's `builder.json` out of `evidence/` while they run.
 
 ## 6. Secrets, which are failure conditions
 

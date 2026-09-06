@@ -11,11 +11,14 @@ and continue from **Next action**.
 | 2 | 2026-09-03 | tears, fonts, objects, seed year on disk; STEP 06 material on shell and Chat; STEP 07 feelings and signals; STEP 08 four modules; Moments and Settings | 0 |
 | 3 | 2026-09-04 | capture handles, `run.sh` and `capture.sh`, the scene driver and checks; Chat chrome in the material language; the fold player; setup checklists; the six critic prompts; first evidence pass | cycle 1: 40 |
 | 4 | 2026-09-04 | photograph pipeline fixed at the source; the unfolding clip fixed at four causes; every screen given a test; modal surfaces rebuilt as paper; second capture; six critics | cycle 2: 55.5, no floor met |
-| 5 | 2026-09-05 | fresh clone re-bootstrapped; the nineteen root causes behind cycle 2 fixed (below); fold sequence re-rendered; both hands rebuilt; eight objects replaced; paired year-deep capture; third capture and six critics | cycle 3: see `evidence/SCORE.json` |
+| 5 | 2026-09-05/06 | fresh clone re-bootstrapped; the nineteen root causes behind cycle 2 fixed (below); fold sequence re-rendered; both hands rebuilt; eight objects replaced; paired year-deep capture with every clip distinct frame by frame; cycle 3 critics and score; the first eleven cycle-3 findings fixed | **cycle 3: 64**, no floor met |
 
 ## Current position
 
-- phase: review (cycle 3 captured and scored this session; cycle 4 remains)
+- phase: review (cycle 3 scored at **64/100**, up from 55.5; cycle 4 remains)
+- rubric: messenger 19/30 (floor 26) · material 13/25 (22) · emotional 15/20 (17) · coherence
+  10/15 (13) · anti-goal 7/10 (9). `evidence/SCORE.json` has the arithmetic and every
+  builder line; `evidence/critics/3/` has the seven reports.
 - branch: `claude/new-session-f95s8n` (all work of session 5; pushed)
 - transport in use: local (`app/lib/transport/local/`), named in every report. The tailnet
   transport exists (`app/lib/transport/tailscale/`) and its checks are recorded **pending**: no
@@ -84,8 +87,51 @@ TeoHand until it lands); the within-stroke ink density plate.
    their own kinds of paper.
 4. DeskStamp is not built; the stamped furniture is set in TeoHand.
 
+## What cycle 3 said, and what was done about it in the same session
+
+Eleven of its findings were fixed after the reports landed and before this file was written. They
+are **not** in the captured artifacts: the next capture is what shows them.
+
+| finding | done |
+|---|---|
+| the capture-mode haptic lane sits over the composer and is still there in the last frame of three clips | it runs along the top of the frame and goes when the pattern goes |
+| the note that just arrived is clipped by the composer for the whole final run | the thread lands on the spacer under it, as it does when it opens |
+| events arriving from the other phone are intermittently dropped | the store's `stored_order` is a unique index and two overlapping writes allocated the same key; writes are serialized |
+| reply, edit, attach, reaction, voice and video appear in no artifact | the states frame stages a real reaction and a real reply; the other four are still uncovered |
+| eight presence lines in a row, two of them saying the same thing | a passive signal that repeats its own last word is not a transition and is not drawn |
+| a one-second rebuild every time a note comes into view | a mask is composed at a height rounded to sixteen device pixels, so notes of similar height share one |
+| the search's type filters run off the right edge | they wrap onto as many rows as it takes |
+| the family cards read WARMT, ACH, SHELTE | a slip asked how wide it wants to be was answering for its child, not for the whole piece |
+| "you is heads down", "you's phone is on normal" | you takes a plural verb, and the possessive is your |
+| the setup sheet is one flat colour over half the screen | it was one piece of paper too tall for the canvas to draw its stock; it is a sheet per step |
+| the persistence rule a double quote walks past | either quote, imports and exports, and the web's own storage library |
+| the vocabulary sheet is translucent | it slides out from under the corner instead of fading up |
+| feeling objects are untextured props | `simple_mat` gives them a fine mottle, a rough coat and a hair of relief: the candle measures 1.65 grey levels against 0.49 (re-rendering at the time of writing) |
+| the diff baseline was rotated by every partial run, so every artifact compared with itself | only a whole capture rotates it; the cycle-2 baseline was restored and the diff re-measured: fourteen changed, one new, two absent |
+
+## What cycle 3 said that is still open
+
+1. **06 does not read as paper unfolding.** The frames are right — 240 of them, every one above the
+   paper floor — and the app plays them one per step. A flap rotating about its crease foreshortens
+   to nothing from directly overhead, so a top-down orthographic camera sees a rectangle getting
+   taller. The rig needs a tilted camera, and `FoldedNote.inset` must be re-measured against the
+   new framing. Both are written down in `blender/folds/fold.py`.
+2. **A third of repeated letters are twins.** The cascade advances one variant per letter, so with
+   five variants two of the same letter four apart get the same outline (measured IoU 0.9954 on the
+   hero). The lever is the variant count in `tools/handwriting/hands.json`; eight would put it near
+   twelve per cent. Written down in `tools/handwriting/build.py`.
+3. **A feeling's object is clipped by the paper it arrives on** — the image is drawn at an ink
+   correction of up to 3.4 and the box stays at `size`. The fix is a frame-aware size the callers
+   ask for; written down in `app/lib/material/objects.dart`.
+4. **DeskStamp is still not built.** 126 of 155 glyphs in eleven hours, slowing as it went; the
+   tabs are set in TeoHand and `pubspec.yaml` says so.
+5. **Four messenger capabilities have no picture**: edit, attach, voice and video. The sixteen
+   scene scripts have no step for any of them — the gap is in the capture plan, not the app.
+6. **No two-device frame and no Android artifact**, and every transport line says `local`.
+
 ## Next action
 
-Read `evidence/SCORE.json` for cycle 3 and `evidence/critics/3/*.json`; fix what they name that
-cycle 2 did not; then the fourth capture and the fourth set of critics. The exit is 95 with every
-floor met; regressions against cycle 3 are read off `evidence/DIFF.json`.
+Capture again — the eleven fixes above are in the code and in none of the artifacts — then the
+fourth set of critics and `python3 tools/score.py --cycle 4`. The six open items above are the work
+list in front of that. The exit is 95 with every floor met; regressions against cycle 3 are read
+off `evidence/DIFF.json`, which is now measured against a baseline that only a whole run rotates.
