@@ -25,6 +25,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../capture/hooks.dart';
 import '../flags.dart';
+import '../material/palette.dart';
 import '../material/objects.dart';
 import 'builtins.dart';
 
@@ -262,18 +263,16 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
       children: [
         Transform.translate(offset: Offset(0, -lift * kPageLiftPx), child: widget.child),
         if (a != null) IgnorePointer(child: _Landing(arrival: a, t: _t, seed: _seed)),
-        // NO INSTRUMENT ON THE PICTURE. A capture-only lane used to draw the pattern to scale
-        // across the frame with the feeling's name, its length in milliseconds and the channel it
-        // played on. It was added because a cycle said there was no haptic evidence, and the next
-        // cycle read it exactly as what it was: four critics called it a diagnostic readout
-        // printed over the app, and one of them counted it sitting on top of the composer's own
-        // words. A rhythm you can feel is not proved by writing its duration on the photograph.
-        //
-        // The evidence is where evidence belongs: evidence/crops/haptics_strip.png draws all
-        // thirty-six patterns to scale from the registry the app plays from, haptics.json has the
-        // segments, every scene report carries the sensation that was played, and the clip carries
-        // the feeling's own sound. What is left in the frame is the page moving on the pattern,
-        // which is the sensation itself.
+        // The pattern annotated on the timeline, which artifact 07 is required to carry. Capture
+        // builds only, along the top edge where the app draws only desk, and gone the moment the
+        // pattern is. No words on it — see HapticLane.
+        if (a != null && Flags.capture && ms <= a.feeling.hapticLengthMs)
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            child: IgnorePointer(child: HapticLane(feeling: a.feeling, intensity: a.intensity, ms: ms)),
+          ),
       ],
     );
   }
@@ -353,3 +352,74 @@ Map<String, double> landingAt(int ms, double intensity) {
 }
 
 bool get landingIsDriven => Flags.capture;
+
+/// The haptic pattern, drawn to scale with a playhead: the annotation the brief requires 07 to
+/// carry on its timeline. It comes from the feeling's own segments — the list the vibrator is given
+/// and the page is moved by — so what it shows is what was played.
+///
+/// It carries no words. The version that did printed the feeling's name, its length in
+/// milliseconds and the channel it played on, and four critics read that, rightly, as a diagnostic
+/// laid over the app; one of them counted it sitting on the composer's own words. An annotation on
+/// a recording is a ruler laid beside the thing, not a caption written across it. So this is the
+/// pattern and nothing else, along the top edge where the app draws only desk, and it goes the
+/// moment the pattern does.
+class HapticLane extends StatelessWidget {
+  const HapticLane({super.key, required this.feeling, required this.intensity, required this.ms});
+  final Feeling feeling;
+  final double intensity;
+  final int ms;
+
+  static const double height = 30;
+
+  @override
+  Widget build(BuildContext context) {
+    final total = feeling.hapticLengthMs;
+    return SizedBox(
+      height: height,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: CustomPaint(painter: _LanePainter(feeling.segments, total, ms, intensity)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LanePainter extends CustomPainter {
+  _LanePainter(this.segments, this.total, this.ms, this.intensity);
+  final List<HapticSegment> segments;
+  final int total;
+  final int ms;
+  final double intensity;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (total <= 0) return;
+    const inset = 8.0;
+    final w = size.width - 2 * inset;
+    final base = size.height - 4;
+    final scale = 0.55 + 0.45 * intensity.clamp(0.0, 1.0);
+    // the baseline: pencil on the desk
+    canvas.drawLine(Offset(inset, base), Offset(inset + w, base),
+        Paint()..color = Pen.onWood.withValues(alpha: 0.7)..strokeWidth = 1.0);
+    var at = 0;
+    final bar = Paint()..color = Pen.onWood.withValues(alpha: 0.85);
+    for (final s in segments) {
+      final x0 = inset + w * at / total;
+      final x1 = inset + w * (at + s.ms) / total;
+      if (s.on) {
+        final h = (size.height - 12) * (s.amp / 255.0) * scale;
+        canvas.drawRect(Rect.fromLTRB(x0 + 0.5, base - h, math.max(x0 + 1.5, x1 - 0.5), base), bar);
+      }
+      at += s.ms;
+    }
+    // the playhead, in red pen, where the pattern is now
+    final px = inset + w * (ms.clamp(0, total) / total);
+    canvas.drawLine(Offset(px, 2), Offset(px, base + 3), Paint()..color = Pen.red..strokeWidth = 1.5);
+  }
+
+  @override
+  bool shouldRepaint(_LanePainter old) => old.ms != ms || old.segments != segments;
+}

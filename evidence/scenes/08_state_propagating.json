@@ -100,6 +100,38 @@
    "ms": 16
   },
   {
+   "do": "goTo",
+   "arg": 2,
+   "after": 0
+  },
+  {
+   "do": "far",
+   "arg": "state availability heads_down"
+  },
+  {
+   "do": "wait",
+   "ms": 1600
+  },
+  {
+   "do": "far",
+   "arg": "state place the bridge"
+  },
+  {
+   "do": "far",
+   "arg": "feeling soup 0.7"
+  },
+  {
+   "do": "awaitArrival",
+   "timeout": 90000
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 152,
+   "from": 395,
+   "ms": 16
+  },
+  {
    "do": "report",
    "out": "evidence/logs/08_state_propagating.report.json",
    "at": "08_state_propagating"

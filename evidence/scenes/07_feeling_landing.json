@@ -67,6 +67,25 @@
    "ms": 16
   },
   {
+   "do": "goTo",
+   "arg": 2,
+   "after": 0
+  },
+  {
+   "do": "far",
+   "arg": "feeling soup 0.85"
+  },
+  {
+   "do": "awaitArrival"
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/07_feeling_landing",
+   "count": 132,
+   "from": 314,
+   "ms": 16
+  },
+  {
    "do": "report",
    "out": "evidence/logs/07_feeling_landing.report.json",
    "at": "07_feeling_landing"
