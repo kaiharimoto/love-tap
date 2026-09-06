@@ -384,7 +384,12 @@ class SlicedMasks {
     // new mask every frame; and never larger than the mask itself, because upsampling a render is
     // not the same as having rendered it larger
     final w = (size.width * dpr).round().clamp(1, mask.width);
-    final h = (size.height * dpr).round().clamp(1, mask.height * 4);
+    // Height to the nearest sixteen device pixels. Every note is a slightly different height, so
+    // an exact key meant a fresh composition for each one as it came into view — a build of about
+    // a second, once every note's height of scrolling, against a median of fourteen milliseconds.
+    // A mask stretched by up to eight device pixels in its middle band is a mask nobody can tell
+    // from the exact one; it is the middle band that stretches, by construction.
+    final h = ((size.height * dpr / 16).round() * 16).clamp(1, mask.height * 4);
     final key = '$asset@${w}x$h';
     final have = _images[key];
     if (have != null) return have;

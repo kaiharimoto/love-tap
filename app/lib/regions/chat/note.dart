@@ -235,23 +235,21 @@ class _Margin extends StatelessWidget {
     ];
     return Opacity(
       opacity: 0.78,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      // The time, what happened to the note, and how far it got. On a narrow note with all three
+      // to say — a short line that would not go — the row ran thirty-three pixels off the edge of
+      // the paper and the delivery mark was the part that went, which is the one part that must
+      // never go. It wraps onto a second line instead.
+      child: Wrap(
+        alignment: WrapAlignment.start,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 7,
+        runSpacing: 1,
         children: [
-          // the time, and what happened to the note, and how far it got — on a narrow note with
-          // all three of those to say, this ran off the edge of the paper
-          Flexible(
-            child: Text(words.join(' · '),
-                style: Hands.margin(size: 12), maxLines: 1, overflow: TextOverflow.fade,
-                softWrap: false),
-          ),
-          if (item.edited)
-            const Padding(padding: EdgeInsets.only(left: 5), child: _EditCaret()),
-          if (mine) ...[
-            const SizedBox(width: 7),
-            _DeliveryMark(delivery: item.delivery, id: item.id),
-          ],
+          Text(words.join(' · '),
+              style: Hands.margin(size: 12), maxLines: 1, overflow: TextOverflow.fade,
+              softWrap: false),
+          if (item.edited) const _EditCaret(),
+          if (mine) _DeliveryMark(delivery: item.delivery, id: item.id),
         ],
       ),
     );
@@ -277,36 +275,41 @@ class _DeliveryMark extends StatelessWidget {
   final Delivery delivery;
   final String id;
 
+  /// The words and the mark, side by side, never wider than the paper they are on: on a short
+  /// note `it would not go ×` is wider than the note itself, and the part that ran off the edge
+  /// was the mark saying it had not gone.
+  static Widget _said(String words, Widget mark, {Color? ink}) =>
+      Row(mainAxisSize: MainAxisSize.min, children: [
+        // the words give way, never the mark: a Wrap hands its child a bounded width, so this
+        // fades rather than running off the paper
+        Flexible(
+          child: Text(words,
+              style: ink == null
+                  ? Hands.margin(size: 12)
+                  : Hands.margin(size: 12).copyWith(color: ink),
+              maxLines: 1,
+              overflow: TextOverflow.fade,
+              softWrap: false),
+        ),
+        const SizedBox(width: 4),
+        mark,
+      ]);
+
   @override
   Widget build(BuildContext context) {
     final seed = id.hashCode & 0x7fff;
     return switch (delivery) {
-      Delivery.queued => Row(mainAxisSize: MainAxisSize.min, children: [
-          Text(S.waitingToSend, style: Hands.margin(size: 12)),
-          const SizedBox(width: 4),
-          Mark.clip(size: 12, colour: Pen.margin, seed: seed),
-        ]),
-      Delivery.sending => Row(mainAxisSize: MainAxisSize.min, children: [
-          Text(S.sending, style: Hands.margin(size: 12)),
-          const SizedBox(width: 4),
-          Mark.ticks(size: 12, colour: Pen.margin, seed: seed),
-        ]),
-      Delivery.sent => Row(mainAxisSize: MainAxisSize.min, children: [
-          Text(S.sent, style: Hands.margin(size: 12)),
-          const SizedBox(width: 4),
-          Mark.tick(size: 12, colour: Pen.margin, seed: seed),
-        ]),
-      Delivery.read => Row(mainAxisSize: MainAxisSize.min, children: [
-          Text(S.read, style: Hands.margin(size: 12).copyWith(color: Pen.ballpoint)),
-          const SizedBox(width: 4),
-          Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed),
-          Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed + 1),
-        ]),
-      Delivery.refused => Row(mainAxisSize: MainAxisSize.min, children: [
-          Text(S.refused, style: Hands.margin(size: 12).copyWith(color: Pen.red)),
-          const SizedBox(width: 4),
-          Mark.cross(size: 12, colour: Pen.red, seed: seed),
-        ]),
+      Delivery.queued => _said(S.waitingToSend, Mark.clip(size: 12, colour: Pen.margin, seed: seed)),
+      Delivery.sending => _said(S.sending, Mark.ticks(size: 12, colour: Pen.margin, seed: seed)),
+      Delivery.sent => _said(S.sent, Mark.tick(size: 12, colour: Pen.margin, seed: seed)),
+      Delivery.read => _said(
+          S.read,
+          Row(mainAxisSize: MainAxisSize.min, children: [
+            Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed),
+            Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed + 1),
+          ]),
+          ink: Pen.ballpoint),
+      Delivery.refused => _said(S.refused, Mark.cross(size: 12, colour: Pen.red, seed: seed), ink: Pen.red),
     };
   }
 }

@@ -112,7 +112,7 @@ String _passiveKey(Event e) => '${e.author.name}.${e.payload['signal']}';
 
 /// The mark this signal would leave, or null if it leaves none. At most one an hour per signal
 /// per person, so a phone that flickers between two networks says nothing at all.
-String? _worthSaying(Event e, Map<String, int> last) {
+String? _worthSaying(Event e, Map<String, int> last, Map<String, String> said) {
   final signal = e.payload['signal'] as String?;
   final allowed = _saidPassive[signal];
   if (allowed == null) return null;
@@ -123,6 +123,10 @@ String? _worthSaying(Event e, Map<String, int> last) {
   if (word == null || !allowed.contains(word)) return null;
   final since = last[_passiveKey(e)];
   if (since != null && e.ts - since < 3600 * 1000) return null;
+  // Saying the same thing twice is not a transition. Eight of these ran down one screen of the
+  // thread with no message between them, two of them declaring the same ringer state with
+  // nothing in between that changed it back — the phone talking to itself.
+  if (said[_passiveKey(e)] == word) return null;
   return word;
 }
 
@@ -162,6 +166,9 @@ class ThreadProjector {
   final List<String> _order = [];
   final Map<Person, int> _readUpto = {};
   final Map<String, int> _lastPassive = {};
+
+  /// The last word each passive signal actually said in the thread, so it never says it twice.
+  final Map<String, String> _saidLast = {};
 
   /// Rows whose ThreadItem has to be built again: new ones, and ones an edit, a delete or a
   /// reaction has landed on since the last assembly.
@@ -256,9 +263,10 @@ class ThreadProjector {
         // conversation: docs/EVENT_TYPES.md says one margin mark per meaningful transition per
         // hour, and the rest folded into the partner strip only. A battery level is not a thing
         // either of them said.
-        final mark = _worthSaying(e, _lastPassive);
+        final mark = _worthSaying(e, _lastPassive, _saidLast);
         if (mark == null) return;
         _lastPassive[_passiveKey(e)] = e.ts;
+        _saidLast[_passiveKey(e)] = mark;
         _add(e);
         return;
       case 'read_marker':
