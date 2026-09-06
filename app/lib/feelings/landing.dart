@@ -176,13 +176,10 @@ double get kPageLiftPx => kIsWeb ? 9.0 : 3.0;
 /// Wraps the shell. Moves everything under it on the feeling's own rhythm, and draws the thing
 /// that is arriving on top of it.
 class LandingStage extends StatefulWidget {
-  const LandingStage({super.key, required this.arrivals, required this.child, this.laneInset = 0});
+  const LandingStage({super.key, required this.arrivals, required this.child});
 
   final Stream<Arrival> arrivals;
   final Widget child;
-
-  /// How far up from the bottom edge the capture lane sits, so it is not under the tab strip.
-  final double laneInset;
 
   @override
   State<LandingStage> createState() => _LandingStageState();
@@ -269,11 +266,16 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
         if (a != null) IgnorePointer(child: _Landing(arrival: a, t: _t, seed: _seed)),
         // the haptic pattern annotated on the clip, generated from the same segments that are
         // moving the page and the motor: capture builds only, while a feeling is arriving
-        if (a != null && Flags.capture)
+        // The lane is an annotation on the recording, so it goes where nothing of the app is:
+        // along the very top of the frame, above the partner's strip. It sat across the bottom,
+        // over the composer, where 'here · 2000ms · page' and 'write something' were printed on
+        // top of each other — the one control you send a message with, unreadable. And it goes
+        // when the pattern does, not when the object has finished being put away.
+        if (a != null && Flags.capture && ms <= a.feeling.hapticLengthMs)
           Positioned(
             left: 0,
             right: 0,
-            bottom: widget.laneInset,
+            top: 0,
             child: IgnorePointer(child: HapticLane(feeling: a.feeling, intensity: a.intensity, ms: ms)),
           ),
       ],
