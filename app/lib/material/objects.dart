@@ -71,9 +71,10 @@ class FeelingObject extends StatelessWidget {
         ),
       );
       if (!onPaper) {
+        // the same rule as the rendered objects below: the box is what the drawing needs
         return SizedBox(
-          width: size,
-          height: size,
+          width: size * scale,
+          height: size * scale,
           child: Transform.rotate(angle: tilt, child: mark),
         );
       }
@@ -103,40 +104,46 @@ class FeelingObject extends StatelessWidget {
       );
     }
 
-    // KNOWN, AND NOT FIXED HERE: the image is drawn at `size * scale`, and `scale` carries the
-    // ink correction, which reaches 3.4 for an object that fills a small part of its frame. The
-    // box stays `size`, so anything that clips its children — the paper a feeling arrives on —
-    // cuts the object off: in the thread the candle survives as a grey semicircle with its shadow
-    // beside it on the wood. Sizing the box to `size * scale` fixes that and overflows every
-    // layout that assumed `size` (the Pulse row by 102 px). The fix is to give the callers a
-    // frame-aware size — FeelingObject.boxFor(feeling, size, intensity) — and let each of them
-    // ask for the room it needs.
+    // The box is the room the drawing actually needs, not the size of the thing drawn in it.
+    //
+    // For three cycles this was a `size`-wide box with the image scaled up to `size * scale`
+    // inside it, and `scale` carries the ink correction — a candle that fills a quarter of its
+    // render was drawn nearly three times the width of its own box. Anything that clips its
+    // children then cuts the object off, and the paper a feeling arrives on clips: in the thread
+    // the candle came out as a grey semicircle with its shadow lying beside it on the wood.
+    //
+    // A widget that draws outside its box is the bug, so the box grew. `boxFor` is the same
+    // arithmetic, public, for a caller that has to reserve the room in a row or a grid. Half the
+    // correction went at the source in the same change — tools/pack_assets.py now packs each
+    // object and its shadows cropped to the box they share, so the frame is the thing rather than
+    // the thing adrift in a square of nothing.
+    final box = size * scale;
     return SizedBox(
-      width: size,
-      height: size,
+      width: box,
+      height: box,
       child: Transform.rotate(
         angle: tilt,
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Opacity(
+            // The shadow in its own frame, which is wider than the object's and off to one side:
+            // it falls down and to the right in daylight and the other way off the desk lamp at
+            // dusk. Drawn through an OverflowBox so it may reach past the box the object needs —
+            // a shadow running off the edge of a sheet is what a shadow does; the thing casting
+            // it being cut off at the same edge is what this whole arrangement exists to stop.
+            _Shadow(
+              id: '${id}_shadow${dusk ? '_dusk' : ''}',
+              box: box,
               opacity: (0.75 * shadowScale).clamp(0.0, 1.0),
-              child: Transform.scale(
-                scale: scale * (0.86 + 0.14 * shadowScale),
-                child: Image.asset(objectAsset('${id}_shadow${dusk ? '_dusk' : ''}'),
-                    fit: BoxFit.contain, gaplessPlayback: true, errorBuilder: _none),
-              ),
+              scale: 0.86 + 0.14 * shadowScale,
             ),
             Transform.translate(
               offset: Offset(lift * size * 0.16, -lift * size * 0.62),
-              child: Transform.scale(
-                scale: scale,
-                child: Image.asset(objectAsset(id),
-                    fit: BoxFit.contain,
-                    gaplessPlayback: true,
-                    filterQuality: FilterQuality.medium,
-                    errorBuilder: (c, e, s) => _Fallback(feeling: feeling)),
-              ),
+              child: Image.asset(objectAsset(id),
+                  fit: BoxFit.contain,
+                  gaplessPlayback: true,
+                  filterQuality: FilterQuality.medium,
+                  errorBuilder: (c, e, s) => _Fallback(feeling: feeling)),
             ),
           ],
         ),
@@ -144,7 +151,20 @@ class FeelingObject extends StatelessWidget {
     );
   }
 
-  static Widget _none(BuildContext c, Object e, StackTrace? s) => const SizedBox.shrink();
+  /// The room a [FeelingObject] takes for this feeling at this size — larger than `size` for an
+  /// object that sits small in its own render. A row or a grid that has to reserve space asks
+  /// here rather than assuming `size`, which is what left the candle cut in half.
+  static double boxFor(Feeling feeling, double size, {double intensity = 0.7}) {
+    final ink = MaterialLibrary.loaded ? MaterialLibrary.instance.inkScaleOf(feeling.object) : 1.0;
+    return size * (0.88 + 0.24 * intensity.clamp(0.0, 1.0)) * ink;
+  }
+
+  /// The `size` to ask for so the whole drawing fits in [room]. For a fixed row: the object reads
+  /// a little smaller rather than being cut off at the edge of the paper.
+  static double sizeToFit(Feeling feeling, double room, {double intensity = 0.7}) {
+    final ink = MaterialLibrary.loaded ? MaterialLibrary.instance.inkScaleOf(feeling.object) : 1.0;
+    return room / ((0.88 + 0.24 * intensity.clamp(0.0, 1.0)) * ink);
+  }
 
   /// Which stock a scrap is torn from. Scraps come off whatever was to hand, so they are not all
   /// the same paper, but they are all paper the app has actually baked.
@@ -197,4 +217,44 @@ class _ScribblePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_ScribblePainter old) => old.feeling.id != feeling.id;
+}
+
+
+Widget _none(BuildContext c, Object e, StackTrace? s) => const SizedBox.shrink();
+
+/// A baked contact shadow, drawn in the frame it was packed in.
+class _Shadow extends StatelessWidget {
+  const _Shadow({required this.id, required this.box, required this.opacity, required this.scale});
+
+  final String id;
+
+  /// The object's own box. The shadow's frame is a multiple of it.
+  final double box;
+  final double opacity;
+
+  /// How firmly the thing is resting: a shadow shrinks a little as something lifts off the desk.
+  final double scale;
+
+  @override
+  Widget build(BuildContext context) {
+    final f = MaterialLibrary.loaded ? MaterialLibrary.instance.objectShadow[id] : null;
+    final k = f == null ? 1.0 : f[0];
+    final dx = f == null ? 0.0 : f[1];
+    final dy = f == null ? 0.0 : f[2];
+    return OverflowBox(
+      maxWidth: box * k,
+      maxHeight: box * k,
+      child: Transform.translate(
+        offset: Offset(dx * box, dy * box),
+        child: Opacity(
+          opacity: opacity,
+          child: Transform.scale(
+            scale: scale,
+            child: Image.asset(objectAsset(id),
+                fit: BoxFit.contain, gaplessPlayback: true, errorBuilder: _none),
+          ),
+        ),
+      ),
+    );
+  }
 }

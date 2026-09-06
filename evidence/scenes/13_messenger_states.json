@@ -48,6 +48,14 @@
    "ms": 1200
   },
   {
+   "do": "openSender",
+   "arg": true
+  },
+  {
+   "do": "wait",
+   "ms": 500
+  },
+  {
    "do": "shot",
    "out": "evidence/13_messenger_states.png",
    "settle": 900

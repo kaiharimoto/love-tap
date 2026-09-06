@@ -131,7 +131,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // that threw only in the web build.
       final scope = AppScope.of(context);
       await scope.emit('message', {'text': 'left the key under the pot'});
-      await scope.emit('message', {'text': 'and the bread, if there is any'});
+      final second = await scope.emit('message', {'text': 'and the bread, if there is any'});
       // give the outbox a moment to cross: these two come back `sent`, and the far phone's read
       // marker turns them `read`
       scope.sync.kick();
@@ -146,6 +146,18 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       final theirs = scope.thread.items.lastWhere((i) => i.author != scope.me,
           orElse: () => scope.thread.items.first);
       await scope.emit('reaction', {'target': theirs.id, 'feeling_id': 'squeeze'});
+      // An edit, through the composer, the way a thumb makes one: the message goes back into the
+      // box with the edit banner over it and `_send` emits `message_edit` against its id. Not a
+      // hand-built event — the same call the person's own send makes, so what the frame shows is
+      // the path, not a drawing of it.
+      final editable = scope.thread.items.where((i) => i.id == second.id).firstOrNull;
+      if (mounted && editable != null) {
+        setState(() {
+          _editing = editable;
+          _text.text = 'and the bread — there is half a loaf in the tin';
+        });
+        await _send();
+      }
       final answerable = scope.thread.items.lastWhere(
           (i) => i.author != scope.me && i.id != theirs.id,
           orElse: () => theirs);
@@ -165,11 +177,24 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         'attaching': _attaching,
         'replying_to': _replyTo?.id,
         'editing': _editing?.id,
+        'anchor': _lastAnchor,
+        // what kinds of paper are actually in the frame, so a claim that the messenger can carry
+        // a voice note is answered by the picture rather than by this file
+        'kinds': {
+          for (final k in {for (final p in ps) if (p.index < items.length) items[p.index].type})
+            k: [for (final p in ps) if (p.index < items.length && items[p.index].type == k) items[p.index].id].length,
+        },
       };
     };
   }
 
-  /// Land the thread on an anchor: an event id, a fraction of the way through, or the end.
+  /// Land the thread on an anchor: an event id, a fraction of the way through, the end, or
+  /// `types:a,b` — the tightest stretch of the real thread that holds one of each of those kinds.
+  ///
+  /// The last form is how a capture frames a voice note beside a video without anybody writing
+  /// down a row number: a fraction is only ever right for one build of the seed, and the day a
+  /// row is added it points at bare desk instead. This asks the thread where those kinds actually
+  /// sit and goes there.
   Future<void> _scrollToAnchor(String anchor) async {
     final items = AppScope.of(context).thread.items;
     if (items.isEmpty || !_scroll.isAttached) return;
@@ -180,6 +205,15 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       _scroll.jumpTo(index: items.length, alignment: 0.985);
       await Future<void>.delayed(const Duration(milliseconds: 40));
       return;
+    } else if (anchor.startsWith('types:')) {
+      final wanted = anchor.substring(6).split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
+      final window = _tightestWindow(items, wanted);
+      if (window == null) return;
+      _lastAnchor = 'types:${wanted.join(',')} → rows ${window.$1}-${window.$2} of ${items.length}';
+      // the top of the stretch a little below the strip, so the whole of it is in the frame
+      _scroll.jumpTo(index: window.$1, alignment: 0.16);
+      await Future<void>.delayed(const Duration(milliseconds: 40));
+      return;
     } else {
       final fraction = double.tryParse(anchor);
       index = fraction != null
@@ -187,9 +221,31 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
           : items.indexWhere((it) => it.id == anchor);
     }
     if (index < 0) return;
+    _lastAnchor = 'row $index of ${items.length}';
     _scroll.jumpTo(index: index, alignment: 0.35);
     await Future<void>.delayed(const Duration(milliseconds: 40));
   }
+
+  /// The shortest run of rows holding at least one of every kind in [wanted], latest such run
+  /// first — a couple's year has several, and the most recent is the one that looks like now.
+  /// Null when the thread has no run holding all of them.
+  (int, int)? _tightestWindow(List<ThreadItem> items, List<String> wanted) {
+    if (wanted.isEmpty) return null;
+    final seen = <String, int>{};
+    (int, int)? best;
+    for (var i = 0; i < items.length; i++) {
+      final type = items[i].type;
+      if (!wanted.contains(type)) continue;
+      seen[type] = i;
+      if (seen.length < wanted.length) continue;
+      final lo = seen.values.reduce((a, b) => a < b ? a : b);
+      if (best == null || i - lo <= best.$2 - best.$1) best = (lo, i);
+    }
+    return best;
+  }
+
+  /// Where the last `scrollTo` put the thread, in the thread's own words, for the scene log.
+  String? _lastAnchor;
 
   @override
   void didChangeDependencies() {

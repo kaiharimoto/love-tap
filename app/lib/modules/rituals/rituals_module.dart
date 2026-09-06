@@ -6,6 +6,7 @@
 // Nothing nags: the only thing that ever arrives on the other phone is what one of them wrote.
 import 'package:flutter/material.dart';
 
+import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
@@ -116,7 +117,7 @@ class _Ritual extends StatelessWidget {
         child: Slip(
           id: r.id,
           row: row,
-          stock: 'graph',
+          stock: stockForType('ritual_kept'),
           width: MediaQuery.sizeOf(context).width - 30,
           padding: const EdgeInsets.fromLTRB(14, 11, 14, 12),
           child: Column(

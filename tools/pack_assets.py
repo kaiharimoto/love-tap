@@ -158,6 +158,89 @@ def render_frame():
     return 1.0
 
 
+def object_boxes(src_dir, margin=0.02, threshold=20):
+    """Two boxes per object, in the 2048-wide space `convert` crops in.
+
+    An object is rendered into a square frame it does not fill: a candle is 27 per cent of its
+    picture and the rest is transparent. The app corrected for that by drawing the image up to
+    three and a half times the size of the box it was given, which is why a candle arriving on a
+    note came out as a grey semicircle — the note clips its children, and most of the candle was
+    outside the box. Trimming the frame here is the same correction made once, in the pixels,
+    where nothing downstream has to know about it.
+
+    The object is cropped to its own ink and the shadow to the union of the two, because a shadow
+    is longer than the thing casting it. Cropping both to the union puts the candle back inside a
+    frame two and a third times its size and nothing is gained; cropping both to the object's box
+    cuts the shadow off at the candle's foot. So they are cropped differently and the app is told
+    how much bigger the shadow's frame is and where its centre sits — a shadow may run off the
+    edge of a sheet, which is what shadows do, and the thing casting it may not.
+
+    Returns (tight, wide, spread): the box per object, the box per shadow file, and per shadow
+    file how much wider its frame is than the object's and where its centre sits, in units of the
+    object's box.
+    """
+    import numpy as np
+    from PIL import Image
+
+    def box_of(path):
+        with Image.open(path) as im:
+            a = np.asarray(im.convert("RGBA"))[..., 3]
+        # Cycles leaves a whisker of alpha over the whole film — under a tenth of an alpha step,
+        # invisible, and enough to make every shadow measure as the full frame. The threshold is
+        # the one measure_object_ink uses, so the two agree about where a thing ends.
+        rows = np.where(a.max(axis=1) > threshold)[0]
+        cols = np.where(a.max(axis=0) > threshold)[0]
+        if not len(rows) or not len(cols):
+            return None
+        h, w = a.shape
+        return (float(cols.min()) / w, float(rows.min()) / h,
+                float(cols.max() + 1) / w, float(rows.max() + 1) / h)
+
+    def squared(box, pad):
+        x0, y0, x1, y1 = box
+        cx, cy = (x0 + x1) / 2.0, (y0 + y1) / 2.0
+        half = max(x1 - x0, y1 - y0) / 2.0 * (1.0 + pad * 2)
+        return (cx - half, cy - half, cx + half, cy + half)
+
+    own, shadows = {}, {}
+    for fn in sorted(os.listdir(src_dir)):
+        if not fn.lower().endswith(".png"):
+            continue
+        stem = os.path.splitext(fn)[0]
+        base = stem.split("_shadow")[0]
+        box = box_of(os.path.join(src_dir, fn))
+        if box is None:
+            continue
+        if stem == base:
+            own[base] = box
+        else:
+            shadows[stem] = (base, box)
+
+    tight, wide, spread = {}, {}, {}
+    for base, obj in own.items():
+        t_box = squared(obj, margin)
+        side = t_box[2] - t_box[0]
+        tight[base] = tuple(round(v * 2048.0, 2) for v in t_box)
+    for stem, (base, sh) in shadows.items():
+        obj = own.get(base)
+        if obj is None:
+            continue
+        t_box = squared(obj, margin)
+        side = t_box[2] - t_box[0]
+        # each shadow gets its own frame: the daylight one falls down and to the right of the
+        # thing, the dusk one falls the other way off the desk lamp, and one box holding both
+        # would be half empty whichever was being drawn
+        u = (min(obj[0], sh[0]), min(obj[1], sh[1]), max(obj[2], sh[2]), max(obj[3], sh[3]))
+        w_box = squared(u, margin)
+        wide[stem] = tuple(round(v * 2048.0, 2) for v in w_box)
+        spread[stem] = [
+            round((w_box[2] - w_box[0]) / side, 4),                                   # how much wider
+            round(((w_box[0] + w_box[2]) - (t_box[0] + t_box[2])) / 2.0 / side, 4),   # centre, x
+            round(((w_box[1] + w_box[3]) - (t_box[1] + t_box[3])) / 2.0 / side, 4),   # centre, y
+        ]
+    return tight, wide, spread
+
+
 def pack_family(name, index, verbose=True):
     src_dir = os.path.join(SRC, name)
     if not os.path.isdir(src_dir):
@@ -166,6 +249,9 @@ def pack_family(name, index, verbose=True):
     boxes = {}
     safes = {}
     frame = render_frame() if name == "tears" else 1.0
+    shadow_boxes, shadow_spread = {}, {}
+    if name == "objects":
+        boxes, shadow_boxes, shadow_spread = object_boxes(src_dir)
     if name == "tears":
         for fn in sorted(os.listdir(src_dir)):
             stem = os.path.splitext(fn)[0]
@@ -181,6 +267,9 @@ def pack_family(name, index, verbose=True):
         dst = os.path.join(DST, name, stem + ".webp")
         plain_mask = name == "tears" and "_edge" not in stem and "_shadow" not in stem
         crop = None
+        if name == "objects":
+            base = stem.split("_shadow")[0]
+            crop = shadow_boxes.get(stem) if "_shadow" in stem else boxes.get(base)
         if name == "tears":
             base = stem.split("_edge")[0].split("_shadow")[0]
             crop = boxes.get(base)
@@ -199,6 +288,11 @@ def pack_family(name, index, verbose=True):
             row["usable"] = round((1 - sf[0] - sf[2]) * (1 - sf[1] - sf[3]), 4)
         out.append(row)
     index[name] = out
+    if shadow_spread:
+        # [how much wider the shadow's frame is than the object's, and where its centre sits,
+        # in units of the object's box] — the app draws the shadow in that frame so a shadow can
+        # reach past the paper's edge without the thing casting it being cut off with it
+        index["object_shadow"] = shadow_spread
     if verbose:
         print(f"{name}: {len(out)} files")
 

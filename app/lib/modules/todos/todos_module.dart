@@ -3,6 +3,7 @@
 // being a message, and it is still just an event in the same spine.
 import 'package:flutter/material.dart';
 
+import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
@@ -151,7 +152,7 @@ class _Line extends StatelessWidget {
         child: Slip(
           id: item.id,
           row: row,
-          stock: 'looseleaf',
+          stock: stockForType('todo_event'),
           width: MediaQuery.sizeOf(context).width - 32,
           padding: const EdgeInsets.fromLTRB(13, 8, 13, 8),
           child: Row(

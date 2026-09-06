@@ -11,6 +11,7 @@
 // person passed it on, and the other one wrote back underneath.
 import 'package:flutter/material.dart';
 
+import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
@@ -135,7 +136,7 @@ class _Thing extends StatelessWidget {
       child: Slip(
         id: thing.id,
         row: row,
-        stock: 'index',
+        stock: stockForType('passed_on'),
         width: MediaQuery.sizeOf(context).width - 30,
         padding: const EdgeInsets.fromLTRB(14, 11, 14, 12),
         onTap: _next == null

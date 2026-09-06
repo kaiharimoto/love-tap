@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
@@ -99,7 +100,7 @@ class _StubState extends State<_Stub> {
         id: item.id,
         row: widget.row,
         width: width,
-        stock: item.verdict != null ? 'index' : 'receipt',
+        stock: stockForType('date_event'),
         onTap: _act,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

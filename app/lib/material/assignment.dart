@@ -18,14 +18,27 @@ int hashOf(String s) {
   return h;
 }
 
+/// The stock a kind of event is always on, wherever it is drawn — null for the kinds that take
+/// their paper from whoever wrote them.
+///
+/// The modules used to each pick their own: a date was a receipt in Us and an index card in the
+/// thread, so the same evening was two different pieces of paper depending on which way you had
+/// come to it. One list, read by both.
+String? stockForType(String type) => switch (type) {
+      'ping' => 'index',
+      'milestone' => 'index',
+      'date_event' => 'index',
+      'passed_on' => 'index',
+      'todo_event' => 'looseleaf',
+      'ritual_kept' => 'graph',
+      _ => null,
+    };
+
 /// The stock a note is torn from, by author and type.
 String stockFor(Event e) {
   final h = hashOf(e.id);
-  if (e.type == 'ping') return 'index';
-  if (e.type == 'milestone') return 'index';
-  if (e.type == 'date_event') return 'index';
-  if (e.type == 'todo_event') return 'looseleaf';
-  if (e.type == 'ritual_kept') return 'graph';
+  final byType = stockForType(e.type);
+  if (byType != null) return byType;
   if (e.author == Person.noor) {
     // Noor tears strips off whatever is nearest
     const pool = ['lined', 'graph', 'spiral', 'receipt'];

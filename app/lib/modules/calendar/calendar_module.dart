@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
@@ -122,7 +123,7 @@ class _Card extends StatelessWidget {
         id: m.id,
         row: row,
         torn: false,
-        stock: 'index',
+        stock: stockForType('milestone'),
         width: MediaQuery.sizeOf(context).width - 28,
         padding: const EdgeInsets.fromLTRB(15, 12, 15, 13),
         child: Row(

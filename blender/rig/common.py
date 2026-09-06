@@ -189,7 +189,16 @@ def _world(scene, color, strength):
 
 
 def add_top_camera(scene, width_m, height_m, ortho=True, tilt_deg=0.0, distance=1.0):
-    """A camera looking straight down at a width_m × height_m area centred on the origin."""
+    """A camera looking at a width_m × height_m area centred on the origin.
+
+    `tilt_deg` orbits the camera around the origin — it does not swing it on the spot. The
+    difference matters: rotating in place at (0, 0, d) points the camera off into the air past the
+    subject, and the first version of this did exactly that, which is why every caller left the
+    tilt at zero and every fold frame was shot from directly overhead. From overhead a flap
+    rotating about its crease foreshortens to nothing, so a letter opening films as a cream
+    rectangle getting taller. Orbited, the same geometry shows the flap standing and its shadow
+    crossing the sheet.
+    """
     cam_data = bpy.data.cameras.new("scan_cam")
     if ortho:
         cam_data.type = "ORTHO"
@@ -202,8 +211,9 @@ def add_top_camera(scene, width_m, height_m, ortho=True, tilt_deg=0.0, distance=
     cam_data.clip_end = 100.0
     cam = bpy.data.objects.new("scan_cam", cam_data)
     scene.collection.objects.link(cam)
-    cam.location = (0.0, 0.0, distance)
-    cam.rotation_euler = (math.radians(tilt_deg), 0.0, 0.0)
+    tilt = math.radians(tilt_deg)
+    cam.location = (0.0, -distance * math.sin(tilt), distance * math.cos(tilt))
+    cam.rotation_euler = (tilt, 0.0, 0.0)
     scene.camera = cam
     # an orthographic camera fills the frame to the *larger* axis; match the aspect
     scene.render.pixel_aspect_x = 1.0

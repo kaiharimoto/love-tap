@@ -23,7 +23,7 @@ class LibraryEntry {
 
 class MaterialLibrary {
   MaterialLibrary._(this.paper, this.tears, this.objects, this.bits, this.shell, this.folds,
-      this.foldSize, this.objectInk, this.fonts, this.sounds, this.shadowFrame);
+      this.foldSize, this.objectInk, this.objectShadow, this.fonts, this.sounds, this.shadowFrame);
 
   final List<LibraryEntry> paper;
   final List<LibraryEntry> tears;
@@ -43,6 +43,12 @@ class MaterialLibrary {
   /// property of the thing: a candle's ink is 27 per cent of its frame and a paper crane's is 85.
   /// Without this, `size: 96` meant a different physical size for every feeling.
   final Map<String, Rect> objectInk;
+
+  /// Per shadow file: how much wider its frame is than the object's own box, and where the frame's
+  /// centre sits, in units of that box. A shadow is longer than the thing casting it and falls the
+  /// other way at dusk, so each shadow is packed in its own frame rather than the object and the
+  /// shadow sharing one that is half empty whichever is being drawn.
+  final Map<String, List<double>> objectShadow;
   final List<String> fonts;
   final List<String> sounds;
 
@@ -105,6 +111,15 @@ class MaterialLibrary {
         }
       });
     }
+    final objectShadow = <String, List<double>>{};
+    final os = j['object_shadow'];
+    if (os is Map) {
+      os.forEach((k, v) {
+        if (v is List && v.length == 3) {
+          objectShadow[k as String] = [for (final n in v) (n as num).toDouble()];
+        }
+      });
+    }
     return _instance = MaterialLibrary._(
       family('paper'),
       family('tears'),
@@ -114,6 +129,7 @@ class MaterialLibrary {
       folds,
       foldSize,
       objectInk,
+      objectShadow,
       ((j['fonts'] as List?) ?? const []).cast<String>(),
       ((j['sound'] as List?) ?? const []).cast<String>(),
       ((j['relief'] as Map?)?['shadow_frame'] as num?)?.toDouble() ?? 1.0,

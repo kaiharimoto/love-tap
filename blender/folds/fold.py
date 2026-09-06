@@ -46,6 +46,11 @@ SHEET_MM = (148.0, 105.0)          # A6, the size of a note in the thread
 THICKNESS_M = 0.00011
 CREASE_MM = 1.4                     # width of the bevelled crease band
 CREASE_RIDGE_M = 0.00036            # how far the crease stands off the sheet: pulled fibres, not a line
+# How far off the vertical the camera sits. A flap standing at a right angle projects sin(tilt) of
+# its length into the frame — at twenty degrees a 35 mm flap is 12 mm of the picture, which reads
+# as a flap; below about fifteen it reads as a thick edge, and above about thirty the settled sheet
+# is foreshortened enough to argue with the note it becomes. Every fold frame is shot from here.
+TILT_DEG = 20.0
 # What the material is told about the density it is rendered at. The stocks are 8.7 px/mm; the
 # ratio below is (frame px/mm) / 8.7 at the default --res, so a fibre is the same fraction of a
 # pixel here as it is on a stock. Recomputed from --res in render_sequence.
@@ -106,7 +111,15 @@ FLAT = math.pi - 0.035
 
 
 def apply_thirds(verts_co, h, t, rng):
-    """A letter folded in thirds opening: the top flap first, then the bottom, then a settle."""
+    """A letter folded in thirds opening: the top flap first, then the bottom, then a settle.
+
+    The signs on the two bends matter and were both wrong. A flap rotated with the angle negated
+    swings *under* the sheet: at a quarter of the way open it points into the desk, and when it is
+    folded shut it lies a tenth of a millimetre below the third it is folded against instead of on
+    top of it. Filmed from directly overhead that is invisible — the outline is the same whichever
+    side of the plane the flap is on — so it survived a render, a packing and three review cycles.
+    The tilted camera is what shows it.
+    """
     y1, y2 = h / 6.0, -h / 6.0
     # phase 1: top flap 0 -> 1.6 s, phase 2: bottom flap 1.4 -> 3.2 s, settle to 4 s
     a_top = FLAT * (1.0 - ease(min(1.0, t / 0.40)))
@@ -116,9 +129,9 @@ def apply_thirds(verts_co, h, t, rng):
     for co in verts_co:
         c = co
         if c[1] > y1:
-            c = bend_about(c, y1, -a_top, sign=1.0)
+            c = bend_about(c, y1, a_top, sign=1.0)
         elif c[1] < y2:
-            c = bend_about(c, y2, a_bot, sign=-1.0)
+            c = bend_about(c, y2, -a_bot, sign=-1.0)
         # the whole sheet is not flat while it settles: the creases stay proud
         lift = settle * 0.0016 * math.exp(-((c[1] - y1) / (0.02)) ** 2)
         lift += settle * 0.0016 * math.exp(-((c[1] - y2) / (0.02)) ** 2)
@@ -135,7 +148,7 @@ def apply_half(verts_co, h, t, rng):
     settle = 1.0 - ease(min(1.0, max(0.0, (t - 0.7) / 0.3)))
     out = []
     for co in verts_co:
-        c = bend_about(co, 0.0, -a, sign=1.0) if co[1] > 0 else co
+        c = bend_about(co, 0.0, a, sign=1.0) if co[1] > 0 else co  # over the sheet, not under it
         lift = settle * 0.0022 * math.exp(-((c[1]) / 0.02) ** 2)
         lift += CREASE_RIDGE_M * crease_softness(c[1] * 1000.0)
         out.append((c[0], c[1], c[2] + lift))
@@ -243,23 +256,26 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
                                     mottle_scale=density)
         obj.data.materials.append(mat)
         common.add_shadow_catcher(scene, size_m=0.4)
-        # Straight down, orthographic. This is why the sequence reads as a cream rectangle
-        # growing taller rather than as a letter opening: a flap rotating about its crease
-        # foreshortens to nothing from directly overhead, so what the camera sees is the sheet's
-        # outline getting longer. It is geometrically honest and it does not look like paper.
-        # Tilting the camera ten or twelve degrees would show the flaps standing and their
-        # shadows crossing the sheet — and would need the frames re-measured, because
-        # FoldedNote.inset in app/lib/material/fold.dart places the writing against this framing.
-        common.add_top_camera(scene, w * 1.25, h * 1.55, ortho=True, distance=0.5)
-        rx = int(round(res * (w * 1.25) / (h * 1.55))) if h * 1.55 > w * 1.25 else res
-        ry = res if h * 1.55 > w * 1.25 else int(round(res * (h * 1.55) / (w * 1.25)))
+        # Orthographic, tilted off the vertical. Straight down was geometrically honest and it did
+        # not look like paper: a flap rotating about its crease foreshortens to nothing from
+        # directly overhead, so a letter opening filmed as a cream rectangle getting taller, which
+        # is what the material critic measured for three cycles. From TILT_DEG the flap stands in
+        # the frame and its shadow crosses the third below it.
+        #
+        # The field is shortened by cos(tilt) so the settled sheet ends the sequence at the same
+        # size in frame as it had from overhead. Without that the note would shrink by a tenth at
+        # the moment the app crossfades the last frame into the real widget, and the crossfade is
+        # the one place a viewer is looking straight at both.
+        vfield = h * 1.55 * math.cos(math.radians(TILT_DEG))
+        common.add_top_camera(scene, w * 1.25, vfield, ortho=True, tilt_deg=TILT_DEG, distance=0.5)
+        rx = int(round(res * (w * 1.25) / vfield)) if vfield > w * 1.25 else res
+        ry = res if vfield > w * 1.25 else int(round(res * vfield / (w * 1.25)))
         common.render_settings(scene, rx, ry, samples=samples, transparent=True, file_format="PNG",
                                seed=20260903 + frame)
         if condition == "day":
             # Lighting this from twenty-two degrees rather than fifty was tried: the crease reads
             # a little better and the paper goes cooler than every other stock in the library,
-            # which is worse. The reason 06 looks like a rectangle growing taller is the camera,
-            # not the light — see the note on add_top_camera below.
+            # which is worse. It was never the light.
             common.add_daylight(scene)
         else:
             common.add_dusk(scene)
@@ -270,7 +286,7 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
     settings = {
         "sequence": name, "frames": frames, "resolution": res, "samples": samples,
         "sheet_mm": list(SHEET_MM), "crease_mm": CREASE_MM, "crease_ridge_mm": CREASE_RIDGE_M * 1000.0,
-        "light": condition, "rig": "blender/rig/common.py",
+        "light": condition, "rig": "blender/rig/common.py", "camera_tilt_deg": TILT_DEG,
         "px_per_mm": round(px_per_mm, 3), "density_vs_stock": round(density, 3),
         "look": {"rgb": [0.94, 0.91, 0.85], "tooth": 1.55, "yellowing": 0.25, "sheen": 0.24,
                  "fibre": round(1100.0 * density, 1), "mottle_scale": round(density, 3)},
