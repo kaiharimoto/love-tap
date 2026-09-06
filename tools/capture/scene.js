@@ -220,6 +220,8 @@ function ensure(p) {
             nextRetry = Date.now() + Math.min(8000, timeout / 3);
           }
           await page.waitForTimeout(step.every || 100);
+          // ask for a round rather than waiting out a backoff
+          await page.evaluate(() => window.__deskSync && window.__deskSync()).catch(() => {});
           now = await count();
         }
         if (saidAgain) {
@@ -332,6 +334,15 @@ function ensure(p) {
           for (let tries = 0; tries < 4 && lastPng && png.equals(lastPng); tries++) {
             await page.waitForTimeout(90);
             png = await page.screenshot({ fullPage: false, clip: step.clip });
+          }
+          // A grab can land halfway through a composite: the frame comes back part drawn, much
+          // darker than its neighbours on both sides, and reads as the light jumping and jumping
+          // back. Such a frame compresses to a very different size from the one before it, so a
+          // large jump in size is taken again — a real cut in the picture costs one extra grab.
+          if (lastPng && Math.abs(png.length - lastPng.length) > lastPng.length * 0.2) {
+            await page.waitForTimeout(60);
+            const again = await page.screenshot({ fullPage: false, clip: step.clip });
+            if (!again.equals(lastPng)) png = again;
           }
           fs.writeFileSync(name, png);
           lastPng = png;

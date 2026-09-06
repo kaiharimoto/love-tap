@@ -229,6 +229,13 @@ class CaptureHooks {
   /// phone was told to send has actually arrived, so a clip of an arrival starts on the arrival.
   int count() => scope.thread.items.length;
 
+  /// Ask for a sync round now, the way opening the app does. The harness waits for something the
+  /// far phone sent, and a pull that has just backed off would otherwise leave it waiting.
+  String sync() {
+    scope.sync.kick();
+    return 'ok';
+  }
+
   /// 'ok' when no picture is still being read out of the store: what a shot waits for, so a still
   /// of Moments is a still of the prints and not of the moment before they were decoded. The blob
   /// reads are the slow part under capture; the decode after them is inside the shot's own settle.

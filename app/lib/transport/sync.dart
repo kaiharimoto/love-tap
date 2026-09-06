@@ -136,7 +136,10 @@ class SyncEngine {
         continue;
       }
       await _sleep(_backoff);
-      _backoff = Duration(milliseconds: min(_backoff.inMilliseconds * 2, 30000));
+      // Five seconds, not thirty. A long-poll that comes back empty is the ordinary case on a
+      // quiet wire, and doubling the wait after each one put the phone half a minute behind the
+      // other one: a message sent while it was asleep did not appear until long after it landed.
+      _backoff = Duration(milliseconds: min(_backoff.inMilliseconds * 2, 5000));
     }
   }
 
