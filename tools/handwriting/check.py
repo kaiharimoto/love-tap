@@ -152,6 +152,61 @@ def distinct_floor(font_name, hands_path):
     return 0.65 * float(entry.get("distinct_min", 40.0))
 
 
+def year_texts(limit=4000):
+    """What the couple actually wrote, for measuring how often a letter repeats itself. Falls back
+    to a pangram when the seed is not packed, so the check runs on a bare clone."""
+    import glob
+    out = []
+    for f in sorted(glob.glob(os.path.join(ROOT, "app", "assets", "seed", "year", "*.jsonl"))):
+        for line in open(f, encoding="utf-8"):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                e = json.loads(line)
+            except ValueError:
+                continue
+            body = e.get("body") or e.get("payload") or {}
+            if isinstance(body, dict) and isinstance(body.get("text"), str):
+                out.append(body["text"])
+            if len(out) >= limit:
+                return out
+    return out or ["the quick brown fox jumps over the lazy dog, and the dog lets it"]
+
+
+def twin_share(path, hands_path):
+    """How often two of the same letter in one piece of writing come out as the same outline.
+
+    Measured against the rules the builder writes, over the year's own messages, rather than
+    against a rendering — a rendering measures the renderer as much as the font. The floor is one
+    in `variants`: with that many outlines and an index that walks over them, that share of pairs
+    coincides however the rules are arranged, so the number to read is how close to the floor it
+    sits.
+    """
+    sys.path.insert(0, os.path.join(ROOT, "tools", "handwriting"))
+    try:
+        import build as builder
+    except ImportError:
+        return None
+    face = os.path.splitext(os.path.basename(path))[0]
+    with open(hands_path, encoding="utf-8") as f:
+        hand = json.load(f).get(face)
+    if not hand:
+        return None
+    n = int(hand.get("variants", 1))
+    if n < 2:
+        return {"variants": n, "share": None, "floor": None}
+    letters = set("abcdefghijklmnopqrstuvwxyz")
+    texts = year_texts()
+    return {
+        "variants": n,
+        "share": round(builder.twin_rate(texts, letters, n), 4),
+        "if_the_step_were_fixed": round(builder.twin_rate(texts, letters, n, fixed_step=True), 4),
+        "floor": round(1.0 / n, 4),
+        "texts": len(texts),
+    }
+
+
 def check(path, hands_path=os.path.join(ROOT, "tools", "handwriting", "hands.json")):
     font = TTFont(path)
     glyphs = font.getGlyphSet()
@@ -224,6 +279,7 @@ def check(path, hands_path=os.path.join(ROOT, "tools", "handwriting", "hands.jso
         "font": os.path.relpath(path, ROOT),
         "glyphs": len(order),
         "variants_checked": variants,
+        "twins": twin_share(path, hands_path),
         "findings": findings,
         "variants_apart": {
             "floor_units": apart_floor,

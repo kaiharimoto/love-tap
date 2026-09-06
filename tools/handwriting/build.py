@@ -967,6 +967,62 @@ def variant_name(name, v):
     return name if v == 0 else f"{name}.v{v}"
 
 
+def rotation_buckets(names, n):
+    """Which rotation class each base glyph belongs to, so the letter *before* decides how far the
+    whole thing turns. Spread by place in the sorted set as well as by name, so no bucket comes out
+    empty on a small alphabet and letters that occur together land in different ones."""
+    return {b: (i * 3 + sum(ord(c) * (m + 7) for m, c in enumerate(b))) % n
+            for i, b in enumerate(sorted(names))}
+
+
+def cascade_steps(names, n):
+    """How far the cascade advances when a given glyph is the one before it."""
+    steps = sorted({1 + (i % (n - 1)) for i in range(max(1, n - 1))}) or [1]
+    return {b: steps[(i * 5 + sum(ord(c) for c in b)) % len(steps)]
+            for i, b in enumerate(sorted(names))}
+
+
+def variant_sequence(text, names, n, fixed_step=False):
+    """The variant each letter of [text] comes out as, under the rules feature_text writes.
+
+    The cascade carries an index along a run, stepping by an amount taken from the letter before;
+    anything that is not one of [names] ends the run, because it is in none of the variant classes
+    and the chained rule has nothing to match. The rotation then adds the preceding glyph's bucket.
+    `fixed_step` is the old always-advance-by-one rule, kept so the change can be measured rather
+    than asserted.
+    """
+    bucket = rotation_buckets(names, n)
+    step = cascade_steps(names, n)
+    out, idx, prev = [], None, None
+    for ch in text:
+        if ch not in names:
+            out.append(None)
+            idx, prev = None, ch
+            continue
+        idx = 0 if idx is None else (idx + (1 if fixed_step else step[prev])) % n
+        out.append((ch, (idx + bucket.get(prev, 0)) % n))
+        prev = ch
+    return out
+
+
+def twin_rate(texts, names, n, fixed_step=False):
+    """Of every pair of the same letter inside one piece of writing, the share that came out as
+    the same outline. The floor is one in `n`: with n outlines and an index that walks over them,
+    that many pairs coincide however the rules are arranged."""
+    pairs = same = 0
+    for text in texts:
+        seen = {}
+        for item in variant_sequence(text.lower(), names, n, fixed_step):
+            if item is None:
+                continue
+            ch, v = item
+            for earlier in seen.setdefault(ch, []):
+                pairs += 1
+                same += earlier == v
+            seen[ch].append(v)
+    return same / pairs if pairs else 0.0
+
+
 def feature_text(base_names, n):
     """The contextual alternates, in two passes.
 
@@ -991,16 +1047,30 @@ def feature_text(base_names, n):
 
     # every glyph of a given base letter is in the same rotation class whichever variant it
     # became, so the second pass sees the letter rather than the variant
+    bucket_of = rotation_buckets(names, n)
     buckets = [[] for _ in range(n)]
-    for i, b in enumerate(sorted(names)):
-        # spread by position in the sorted set as well as by name, so no bucket comes out empty
-        # on a small alphabet and the letters that actually occur together land in different ones
-        j = (i * 3 + sum(ord(c) * (m + 7) for m, c in enumerate(b))) % n
+    for b in sorted(names):
         for k in range(n):
-            buckets[j].append(variant_name(b, k))
+            buckets[bucket_of[b]].append(variant_name(b, k))
     filled = [j for j in range(n) if buckets[j]]
     for j in filled:
         lines.append(f"@K{j} = [" + " ".join(buckets[j]) + "];")
+    lines.append("")
+
+    # How far the cascade steps when a given letter is the one before. A fixed step of one is what
+    # put two of the same letter four apart on the same outline: the variant a letter takes is then
+    # just its position in the run, so two occurrences collide whenever their distance is a
+    # multiple of the variant count, which for five variants is every fifth pair. With the step
+    # drawn from the preceding letter, the index is a running sum along the word, and two
+    # occurrences coincide only when the letters between them happen to sum to nothing modulo the
+    # count — about one pair in `n` rather than one in three.
+    step_of = cascade_steps(names, n)
+    steps = sorted(set(step_of.values()))
+    for s in steps:
+        for k in range(n):
+            members = [variant_name(b, k) for b in names if step_of[b] == s]
+            if members:
+                lines.append(f"@S{s}v{k} = [" + " ".join(members) + "];")
     lines.append("")
 
     for k in range(1, n):
@@ -1018,8 +1088,12 @@ def feature_text(base_names, n):
     # the cascade had left alone. Named lookups referenced from the feature run in order, and the
     # second sees the first's output.
     lines.append("lookup CASCADE {")
-    for k in range(n - 1):
-        lines.append(f"  sub @v{k} @v0' lookup CYC{k + 1};")
+    for s in steps:
+        for k in range(n):
+            if (k + s) % n == 0:
+                continue                       # back to the base outline: nothing to substitute
+            if any(step_of[b] == s for b in names):
+                lines.append(f"  sub @S{s}v{k} @v0' lookup CYC{(k + s) % n};")
     lines.append("} CASCADE;")
     lines.append("")
     all_v = " ".join(f"@v{k}" for k in range(n))
@@ -1030,13 +1104,10 @@ def feature_text(base_names, n):
         lines.append(f"  sub @K{j} [{all_v}]' lookup ROT{j};")
     lines.append("} ROTATE;")
     lines.append("")
-    # KNOWN, AND NOT FIXED HERE: the cascade advances one variant per letter, so with five
-    # variants two of the same letter four apart get the same outline — measured on the hero as
-    # IoU 0.9954 for two 'e's, and about thirty per cent of repeated letters are twins. The
-    # rotation breaks some of that up but not enough. The lever is the variant count in
-    # hands.json: eight would put the twins near twelve per cent, at about a third more build
-    # time per face. A positional cascade cannot do better on its own, because it does not know
-    # which letter it is looking at.
+    # The floor from here is the variant count: with n outlines and an index that is effectively
+    # a random walk over them, one repeated pair in n is a twin however clever the rules are. Five
+    # variants is a twenty per cent floor; eight would be twelve and a half, at about a third more
+    # build time per face. hands.json is the lever, and tools/handwriting/check.py measures it.
     lines.append("feature calt {")
     lines.append("  lookup CASCADE;")
     lines.append("  lookup ROTATE;")
@@ -1267,6 +1338,33 @@ def render_sheet(face, font_path, hand, out_path, order, n, scale=2):
     img.save(out_path)
 
 
+def rebuild_features(face, face_index, skel, hands, out_dir, log):
+    """Put freshly generated substitution rules on the face already on disk.
+
+    Building a face is an hour of outline work and the rules are a second of it, so iterating on
+    the rules by rebuilding the face means an hour a try, which in practice means not iterating.
+    The outlines are untouched: the glyph order is read back out of the font itself, so the rules
+    are generated for exactly the glyphs that are there.
+    """
+    from fontTools.ttLib import TTFont
+
+    path = os.path.join(out_dir, f"{face}.ttf")
+    if not os.path.exists(path):
+        raise SystemExit(f"{path} does not exist: build the face before rewriting its rules")
+    hand = hands[face]
+    n = hand["variants"]
+    tt = TTFont(path)
+    present = set(tt.getGlyphOrder())
+    order = [g for g in glyph_order_for(face_glyphs(skel, hand))
+             if g in present and all(variant_name(g, k) in present for k in range(n))]
+    if "GSUB" in tt:
+        del tt["GSUB"]
+    addOpenTypeFeaturesFromString(tt, feature_text(order, n))
+    tt.save(path)
+    log(f"  {face}: rewrote the rules over {len(order)} letters, {n} variants each")
+    return path, {"glyphs": len(order), "variants": n, "alt_usage": {}, "attempts_max": 0}
+
+
 # ============================================================================ main
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -1276,6 +1374,9 @@ def main(argv=None):
     ap.add_argument("--faces", default=",".join(FACES))
     ap.add_argument("--sheet", default=None, help="also write a debug glyph sheet per face into this dir")
     ap.add_argument("--no-manifest", action="store_true", help="do not touch assets/MANIFEST.json")
+    ap.add_argument("--features-only", action="store_true",
+                    help="rewrite the substitution rules on the faces already on disk and leave "
+                         "their outlines alone: a rule change costs a minute instead of an hour")
     args = ap.parse_args(argv)
     out_dir = os.path.abspath(args.out)
     prev_dir = os.path.abspath(args.preview or os.path.join(out_dir, "previews"))
@@ -1299,8 +1400,11 @@ def main(argv=None):
             pass
     for face in faces:
         face_index = FACES.index(face)
-        log(f"building {face} (seed {args.seed})")
-        path, info = build_face(face, face_index, skel, hands, args.seed, out_dir, log)
+        if args.features_only:
+            path, info = rebuild_features(face, face_index, skel, hands, out_dir, log)
+        else:
+            log(f"building {face} (seed {args.seed})")
+            path, info = build_face(face, face_index, skel, hands, args.seed, out_dir, log)
         hand = hands[face]
         settings = {"seed": args.seed, "face": face, "inputs": inputs, "hand": hand,
                     "glyphs": info["glyphs"], "variants": info["variants"],
