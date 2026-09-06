@@ -12,7 +12,9 @@ class SyncEngine {
 
   final Spine spine;
   final Transport transport;
-  final void Function(String line)? onLog;
+  /// Where the engine's own account of itself goes. Set by the scope under capture, so a fault
+  /// that would otherwise be silent is in the console the harness reads.
+  void Function(String line)? onLog;
 
   bool _running = false;
   Completer<void> _kick = Completer<void>();

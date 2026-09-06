@@ -213,7 +213,16 @@ function ensure(p) {
         let saidAgain = 0;
         let nextRetry = Date.now() + Math.min(8000, timeout / 3);
         while (now < want) {
-          if (Date.now() > deadline) throw new Error(`awaitArrival: the log stood at ${now} after ${timeout}ms, waiting for ${want} (said again ${saidAgain}x)`);
+          if (Date.now() > deadline) {
+            // say what the phone thought was happening, not only that nothing did
+            const rep = await page.evaluate(() => (window.__deskReport ? window.__deskReport() : '{}')).catch(() => '{}');
+            let where = '';
+            try {
+              const r = JSON.parse(rep);
+              where = ` — link ${r.link}, events ${r.events}, sync ${JSON.stringify(r.sync)}`;
+            } catch (e) {}
+            throw new Error(`awaitArrival: the log stood at ${now} after ${timeout}ms, waiting for ${want} (said again ${saidAgain}x)${where}`);
+          }
           if (Date.now() > nextRetry && lastFarLine && saidAgain < 3) {
             farSay(lastFarLine);
             saidAgain += 1;

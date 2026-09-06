@@ -2,6 +2,8 @@
 // widget tree; modules write through it. Nothing else holds state that could drift.
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show debugPrint;
+
 import 'package:flutter/widgets.dart';
 
 import 'ambient/ambient.dart';
@@ -38,6 +40,7 @@ class AppScope extends ChangeNotifier {
     Sensation? sensation,
   })  : ambient = ambient ?? Ambient.of(),
         sensation = sensation ?? Sensation() {
+    if (Flags.capture) sync.onLog = (line) => debugPrint('sync: $line');
     _sub = spine.changes.listen((_) => _refresh());
     _tsub = transport.status.listen((s) {
       link = s;
