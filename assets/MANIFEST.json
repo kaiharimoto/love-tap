@@ -10521,6 +10521,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_blanket_fold_dusk.png": {
+   "bytes": 475541,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_blanket_fold",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_blanket_fold_shadow.png": {
    "bytes": 266774,
    "generator": "blender/objects/objects.py",
@@ -10562,6 +10579,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_boat",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_boat_dusk.png": {
+   "bytes": 378808,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_boat",
     "pass": "object",
     "resolution": [
@@ -10623,6 +10657,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_bookmark_dusk.png": {
+   "bytes": 434439,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_bookmark",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_bookmark_shadow.png": {
    "bytes": 192416,
    "generator": "blender/objects/objects.py",
@@ -10641,7 +10692,7 @@
    }
   },
   "assets/objects/obj_bookmark_shadow_dusk.png": {
-   "bytes": 114909,
+   "bytes": 121007,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10674,6 +10725,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_bunting_dusk.png": {
+   "bytes": 348296,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_bunting",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_bunting_shadow.png": {
    "bytes": 204851,
    "generator": "blender/objects/objects.py",
@@ -10692,7 +10760,7 @@
    }
   },
   "assets/objects/obj_bunting_shadow_dusk.png": {
-   "bytes": 98765,
+   "bytes": 98361,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10715,6 +10783,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_candle",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_candle_dusk.png": {
+   "bytes": 385297,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_candle",
     "pass": "object",
     "resolution": [
@@ -10776,6 +10861,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_clover_dusk.png": {
+   "bytes": 354848,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_clover",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_clover_shadow.png": {
    "bytes": 294042,
    "generator": "blender/objects/objects.py",
@@ -10794,7 +10896,7 @@
    }
   },
   "assets/objects/obj_clover_shadow_dusk.png": {
-   "bytes": 104928,
+   "bytes": 99729,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10817,6 +10919,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_coffee_ring",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_coffee_ring_dusk.png": {
+   "bytes": 620889,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_coffee_ring",
     "pass": "object",
     "resolution": [
@@ -10878,6 +10997,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_confetti_dusk.png": {
+   "bytes": 337343,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_confetti",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_confetti_shadow.png": {
    "bytes": 106147,
    "generator": "blender/objects/objects.py",
@@ -10929,6 +11065,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_cork_dusk.png": {
+   "bytes": 507745,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_cork",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_cork_shadow.png": {
    "bytes": 361292,
    "generator": "blender/objects/objects.py",
@@ -10947,7 +11100,7 @@
    }
   },
   "assets/objects/obj_cork_shadow_dusk.png": {
-   "bytes": 205104,
+   "bytes": 206749,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10970,6 +11123,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_crane",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_crane_dusk.png": {
+   "bytes": 438645,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_crane",
     "pass": "object",
     "resolution": [
@@ -11031,6 +11201,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_crown_dusk.png": {
+   "bytes": 438348,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_crown",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_crown_shadow.png": {
    "bytes": 139994,
    "generator": "blender/objects/objects.py",
@@ -11049,7 +11236,7 @@
    }
   },
   "assets/objects/obj_crown_shadow_dusk.png": {
-   "bytes": 153375,
+   "bytes": 136639,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11072,6 +11259,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_crumple_ball",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_crumple_ball_dusk.png": {
+   "bytes": 407824,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_crumple_ball",
     "pass": "object",
     "resolution": [
@@ -11133,6 +11337,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_dog_ear_dusk.png": {
+   "bytes": 590049,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_dog_ear",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_dog_ear_shadow.png": {
    "bytes": 176577,
    "generator": "blender/objects/objects.py",
@@ -11151,7 +11372,7 @@
    }
   },
   "assets/objects/obj_dog_ear_shadow_dusk.png": {
-   "bytes": 153680,
+   "bytes": 158986,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11174,6 +11395,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_fortune_teller",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_fortune_teller_dusk.png": {
+   "bytes": 585242,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_fortune_teller",
     "pass": "object",
     "resolution": [
@@ -11235,6 +11473,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_gold_star_dusk.png": {
+   "bytes": 429744,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_gold_star",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_gold_star_shadow.png": {
    "bytes": 194855,
    "generator": "blender/objects/objects.py",
@@ -11253,7 +11508,7 @@
    }
   },
   "assets/objects/obj_gold_star_shadow_dusk.png": {
-   "bytes": 112745,
+   "bytes": 113126,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11337,6 +11592,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_knot_dusk.png": {
+   "bytes": 347221,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_knot",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_knot_shadow.png": {
    "bytes": 283508,
    "generator": "blender/objects/objects.py",
@@ -11378,6 +11650,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_mug",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_mug_dusk.png": {
+   "bytes": 495779,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_mug",
     "pass": "object",
     "resolution": [
@@ -11439,6 +11728,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_party_hat_dusk.png": {
+   "bytes": 467063,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_party_hat",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_party_hat_shadow.png": {
    "bytes": 333321,
    "generator": "blender/objects/objects.py",
@@ -11457,7 +11763,7 @@
    }
   },
   "assets/objects/obj_party_hat_shadow_dusk.png": {
-   "bytes": 195981,
+   "bytes": 203427,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11490,6 +11796,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_pencil_smudge_dusk.png": {
+   "bytes": 537509,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_pencil_smudge",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_pencil_smudge_shadow.png": {
    "bytes": 183098,
    "generator": "blender/objects/objects.py",
@@ -11508,7 +11831,7 @@
    }
   },
   "assets/objects/obj_pencil_smudge_shadow_dusk.png": {
-   "bytes": 134827,
+   "bytes": 133396,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11541,6 +11864,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_pinch_dusk.png": {
+   "bytes": 455679,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_pinch",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_pinch_shadow.png": {
    "bytes": 310312,
    "generator": "blender/objects/objects.py",
@@ -11559,7 +11899,7 @@
    }
   },
   "assets/objects/obj_pinch_shadow_dusk.png": {
-   "bytes": 146961,
+   "bytes": 148516,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11582,6 +11922,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_plane",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_plane_dusk.png": {
+   "bytes": 514229,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_plane",
     "pass": "object",
     "resolution": [
@@ -11643,6 +12000,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_plaster_dusk.png": {
+   "bytes": 340975,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_plaster",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_plaster_shadow.png": {
    "bytes": 109819,
    "generator": "blender/objects/objects.py",
@@ -11684,6 +12058,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_ribbon",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_ribbon_dusk.png": {
+   "bytes": 339383,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_ribbon",
     "pass": "object",
     "resolution": [
@@ -11745,6 +12136,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_rubber_band_dusk.png": {
+   "bytes": 315499,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_rubber_band",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_rubber_band_shadow.png": {
    "bytes": 176257,
    "generator": "blender/objects/objects.py",
@@ -11786,6 +12194,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_snapped_pencil",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_snapped_pencil_dusk.png": {
+   "bytes": 318847,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_snapped_pencil",
     "pass": "object",
     "resolution": [
@@ -11847,6 +12272,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_spitball_dusk.png": {
+   "bytes": 281897,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_spitball",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_spitball_shadow.png": {
    "bytes": 64896,
    "generator": "blender/objects/objects.py",
@@ -11888,6 +12330,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_staple_chain",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_staple_chain_dusk.png": {
+   "bytes": 319553,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_staple_chain",
     "pass": "object",
     "resolution": [
@@ -11949,6 +12408,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_stone_dusk.png": {
+   "bytes": 371083,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_stone",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_stone_shadow.png": {
    "bytes": 241148,
    "generator": "blender/objects/objects.py",
@@ -11990,6 +12466,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_string_loop",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_string_loop_dusk.png": {
+   "bytes": 319649,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_string_loop",
     "pass": "object",
     "resolution": [
@@ -12051,6 +12544,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_ticket_dusk.png": {
+   "bytes": 334879,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_ticket",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_ticket_shadow.png": {
    "bytes": 130182,
    "generator": "blender/objects/objects.py",
@@ -12092,6 +12602,23 @@
    "settings": {
     "frame_mm": 60,
     "light": "day",
+    "object": "obj_torn_corner",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
+  "assets/objects/obj_torn_corner_dusk.png": {
+   "bytes": 386001,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
     "object": "obj_torn_corner",
     "pass": "object",
     "resolution": [
@@ -12153,6 +12680,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_user_soup_dusk.png": {
+   "bytes": 689340,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_user_soup",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_user_soup_shadow.png": {
    "bytes": 237059,
    "generator": "blender/objects/objects.py",
@@ -12204,6 +12748,23 @@
     "samples": 48
    }
   },
+  "assets/objects/obj_wrapper_dusk.png": {
+   "bytes": 378295,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_object",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_wrapper",
+    "pass": "object",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_wrapper_shadow.png": {
    "bytes": 389667,
    "generator": "blender/objects/objects.py",
@@ -12222,7 +12783,7 @@
    }
   },
   "assets/objects/obj_wrapper_shadow_dusk.png": {
-   "bytes": 115070,
+   "bytes": 109741,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
