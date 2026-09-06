@@ -16,17 +16,19 @@ cycle, score, next, blocked, ask).
 
 ## 1. Where the build is
 
-Three review cycles have run. Cycle 3 scored **64 / 100**, up from 55.5 after cycle
-2 and 40 after cycle 1, with no floor met: messenger 19/30 (floor 26) · material 13/25 (22) ·
-emotional 15/20 (17) · coherence 10/15 (13) · anti-goal 7/10 (9). `evidence/SCORE.json` carries the
-arithmetic — the rule is the *lower* of the critic's number and the builder's, per category, so a
-category rises only when both see it rise. Fourteen of cycle 3's findings were fixed in the same
-session and are **in the code and in none of the artifacts**; the next capture is what shows them,
-and `TASK_STATE.md` lists them one by one.
+Four review cycles have run. Cycle 4 scored **68 / 100**, up from 64, 55.5 and 40, with no floor
+met: messenger 17/30 (floor 26) · material 16/25 (22) · emotional 16/20 (17) · coherence 11.5/15
+(13) · anti-goal 7.5/10 (9). The rule is the *lower* of the critic's number and the builder's per
+category, and in all five categories this cycle the critic's was lower.
 
-`evidence/critics/3/` is your work list. Every finding carries the measurement that established
-it, so each one can be checked and each one can be shown fixed. `TASK_STATE.md` has the table of
-what cycle 2 said and what was done about each of its findings.
+**Read `evidence/critics/4/completeness.json` before you read anything else, including this file.**
+It is the pass that checks the other six, and it is the most useful document in the build. Its
+verdict is that all six critics measured only inside the artifact each was pointed at, and it proves
+it: one torn edge repeated twelve times down the search results, the app's own tab strip carrying
+the exact shape the anti-goal forbids on ten of eleven stills, feeling objects that do not change
+under the dusk light while the paper beside them does. It would move anti-goal to 5.5, material to
+13 and coherence to 10.5 — which is a regression, not the rise the total shows. Four of its findings
+were fixed the same day and `TASK_STATE.md` lists them; the rest are the work list.
 
 ## 2. What the evidence set is now
 
@@ -48,11 +50,15 @@ resolution, no light change inside a take.
 
 | clip | frames | seconds | what it films |
 |---|---:|---:|---|
-| 06_unfolding | 256 | 4.27 | a folded note arriving, opening, the ink coming up on the sheet |
-| 07_feeling_landing | 314 | 5.23 | three feelings landing on the phone they reached |
-| 08_state_propagating | 395 | 6.58 | a mood, a message and two feelings crossing between two phones |
-| 11_chat_scroll | 300 | 5.00 | the thread thrown and coming to rest on its own physics |
-| 15_authored_feeling | 304 | 5.07 | the vocabulary out, a feeling the couple made, sent and received |
+| 06_unfolding | 256 | 4.10 | a folded letter opening: the packet, the flap standing with its shadow across the third below it, the creases catching light on the settled sheet |
+| 07_feeling_landing | 421 | 6.74 | four feelings landing on the phone they reached, across three surfaces, with the pattern annotated on the timeline |
+| 08_state_propagating | 502 | 8.03 | a mood, a message, a place, an availability and four feelings crossing between two phones |
+| 11_chat_scroll | 300 | 4.80 | the thread thrown and coming to rest on its own physics |
+| 15_authored_feeling | 364 | 5.82 | the vocabulary gone through family by family, ending on the couple's own, then sent and received |
+
+Every clip is assembled at **62.5 frames a second**, which is the rate its frames were taken at:
+the scenes step the app's clock 16 ms a frame. Assembling at 60 played every clip four per cent
+slow against the app time the same logs record, which a completeness pass measured.
 
 ## 3. Things that cost hours here, so that they cost you none
 
@@ -85,47 +91,70 @@ Everything in the previous handoff still holds. These are new.
 - **Keep the browser profile.** `capture.sh` gives every seeded scene one persistent profile,
   emptied at the start of a run, so the year imports once (11-12 s) and every later scene opens on
   a phone that already has it (2.7-3.4 s). The log says which kind of load it measured.
+- **A run of frames must stop one step short of the animation it films.** The last two grabs of a
+  20-step animation filmed in 20 frames are the same picture at t=1, and the check counts that as a
+  repeat. Nineteen frames of a twenty-step slide.
+- **A handle called with `after: 0` lands after the next grab.** The first frame of a run showed the
+  family before the one it had just turned to — a repeat at the cut and a brightness step one frame
+  into the run. One `{"do": "step", "ms": 16}` between them fixes both.
+- **A region change animates on the driven clock**, so a wall-clock wait does not advance it and the
+  frames that follow film the tail of the turn. `{"do": "step", "ms": 400}` after a `goTo` puts the
+  turn behind the camera.
+- **Anchor a tall row by where it ends, not where it starts.** A window anchored by its first row
+  leaves a 480-pixel video hanging under the composer, and three critics measured its blank top
+  sliver and reported that video renders as an empty strip. They were reading the framing.
+- **Measure the packed frames, not the render.** `pack_assets` trims every fold frame to its own
+  content, so `tools/check/fold_inset.py` has to be pointed at `app/assets/`, not `assets/`.
 
-## 4. What is left, in order of points on the table
+## 4. What is left, in order of what it costs to close
 
-### 1. 06 does not read as paper unfolding (material, 12 points below floor)
-The frames are right — 240 of them, every one above the paper floor, worst 2.1 against 1.2 — and the
-app plays them one per 16 ms step with the ink coming up on the sheet. The camera is the problem: a
-flap rotating about its crease foreshortens to nothing seen from directly overhead, so a top-down
-orthographic camera films a cream rectangle getting taller. Tilt the camera in
-`blender/rig/common.py`'s fold rig (25–35° off the normal is enough to show a flap's underside), then
-re-measure `FoldedNote.inset` in `app/lib/material/fold.dart` against the new framing, because the
-sheet's resting face moves in the frame. Both are written down at the top of `blender/folds/fold.py`.
-Budget one render (≈70 min at 240 frames) plus a capture of 06.
+Everything in this list is measured in `evidence/critics/4/`. The numbers are theirs; go and check
+them before you act on any of it.
 
-### 2. A third of repeated letters are twins (material)
-The cascade advances one variant per letter, so with five variants two of the same letter four apart
-land on the same outline: measured IoU 0.9954 on the hero crop, twin share 0.30 by
-`tools/check/hand.py`. The lever is the variant count in `tools/handwriting/hands.json`; eight
-variants put the share near twelve per cent. A face is about ninety minutes to build and the manifest
-carries the other faces forward, so build one face at a time (`--faces TeoHand`) and check with
-`tools/handwriting/check.py`. Written down in `tools/handwriting/build.py`.
+### 1. The app's own chrome is the forbidden shape (anti-goal, material)
+The SETTINGS tab slab has a top edge with a standard deviation of **0.00 px over 266 columns**, an
+interior of **1.20 grey levels** against 19-27 for the note paper beside it, and a drop shadow. It is
+on ten of eleven stills, and the Us glance card at 708x163 is the same. The tabs are already
+`Slip(torn: false, stock: 'index')`, so the window is not sampling the stock at a density that
+survives being eighty-nine points wide — measure that before changing anything. This is the single
+biggest anti-goal finding and it is in the furniture, which means it is in nearly every artifact.
 
-### 3. A feeling's object is clipped by the paper it arrives on (emotional)
-`app/lib/material/objects.dart` draws the image at an ink correction of up to 3.4 while the box stays
-at `size`, so the tallest objects lose their tops on a note. The fix is a frame-aware size the callers
-ask for — sizing the box to `size * scale` alone overflows the Pulse row by 102 px, which is recorded
-in the file. Every call site is listed there.
+### 2. Nothing in the chat hero casts a contact shadow (material)
+With the near-black tear ink excluded, the desk's median luminance is **95.7-102.7 in every
+direction at every distance from 2 to 120 px** from the paper. The notes are cut-outs pasted on a
+photograph. The baked shadow is rendered (`blender/paper/tear_relief.py`) and `relief.json` records
+how it registers, so something between the render and the screen is losing it. Two critics and the
+completeness pass agree on this one.
 
-### 4. DeskStamp is still not built (material, coherence)
-126 of 155 glyphs in eleven hours, slowing as it goes. `app/pubspec.yaml` points DeskStamp at TeoHand
-and says so in a comment. Resume with `tools/handwriting/build.py --faces DeskStamp` in the
-background at the start of a session, not the end.
+### 3. Thirty per cent of frames cost a second to build (messenger)
+243 of 809 frames cost **938-1651 ms** (median 1134) while the other 566 cost a median of 14 ms, and
+the heavy ones cluster. The log says these are draw costs rather than a refresh rate, so it is a
+paint that is being redone rather than a frame that is being missed. It is the difference between a
+thread that scrolls and one that stutters.
 
-### 5. Four messenger capabilities have no picture (messenger, 7 points below floor)
-Edit, attach, voice and video work in the app and appear in no artifact: the sixteen scene scripts in
-`evidence/scenes/` have no step for any of them. The gap is in the capture plan, not the app. Reaction
-and reply were closed the same way — `stageStates` now stages a real one of each — so extend that
-handle rather than inventing a new surface.
+### 4. Three of the five modules are never drawn (coherence)
+`03_us.report.json` lists all five with their event counts — dates 81, todos 199, calendar 6,
+rituals 53, shelf 12 — and the still shows two. A fifth module that is a directory and a line in a
+registry is the brief's own test of the architecture, and the artifact has to show it.
 
-### 6. No two-device frame, no Android artifact, every transport line `local`
-09 and 16 as above. The tailnet run is pending for want of a key. This is the largest single block of
-points left on the messenger row and none of it can be moved from this container.
+### 5. DeskStamp is still not built (material, coherence)
+About five hours on one core here, so every tab, stamp, module label and margin note is set in Teo's
+handwriting and `app/pubspec.yaml` says so. `app/lib/regions/settings/notifications.dart` also has
+seventeen arms for eighteen types, so the fifth module's `passed_on` falls through to a label made
+out of its own id. Start the build at the beginning of a session, not the end.
+
+### 6. The haptic channel is never exercised (emotional)
+`sensation.channel` reads `page` in all fifteen reports. The row asks for a feeling identifiable by
+its pattern with the screen face down, and nothing short of a phone will show that.
+
+### 7. The search still is not evidence of searching (messenger)
+`12_search.report.json` records no search at all. And 17_setup_pwa.png — the only evidence for the
+installable-PWA half of the mission, and the home of 42 of the 115 strings the voice lint reads —
+was opened by no critic in this cycle.
+
+### 8. The seeded photographs are renders (anti-goal)
+The darkest few read as exactly that. `blender/photos/` already models the lens, the sensor and the
+phone's own processing; it is the scenes that are thin.
 
 ### Not fixable here
 09 and 16, as above. The tailnet run is recorded **pending**: no `TS_AUTHKEY` was in this
