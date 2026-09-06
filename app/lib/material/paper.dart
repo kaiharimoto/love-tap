@@ -253,6 +253,26 @@ class _RenderWithinTear extends RenderShiftedBox {
     markNeedsLayout();
   }
 
+  /// What this piece would like to be, asked before it is laid out — by an IntrinsicWidth, which
+  /// is how a slip becomes as wide as its own word. The default answer is the child's width, and
+  /// that is wrong here by exactly the margin the tear cannot reach: the piece was then laid out
+  /// at the child's width and the child was given nine tenths of it, so SHELTER came out SHELTE.
+  @override
+  double computeMaxIntrinsicWidth(double height) {
+    final child = this.child;
+    if (child == null) return 0;
+    final horizontal = (1 - _safe[0] - _safe[2]).clamp(0.35, 1.0);
+    return (child.getMaxIntrinsicWidth(height) + _padding.horizontal) / horizontal;
+  }
+
+  @override
+  double computeMinIntrinsicWidth(double height) {
+    final child = this.child;
+    if (child == null) return 0;
+    final horizontal = (1 - _safe[0] - _safe[2]).clamp(0.35, 1.0);
+    return (child.getMinIntrinsicWidth(height) + _padding.horizontal) / horizontal;
+  }
+
   @override
   void performLayout() {
     final fL = _safe[0], fT = _safe[1], fR = _safe[2], fB = _safe[3];
