@@ -158,6 +158,15 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         });
         await _send();
       }
+      // And one taken back: a row somebody deleted is a stub, not a gap, and that is a different
+      // picture from a row that was never sent. It was the last delivery state with no frame
+      // anywhere in the evidence.
+      final takeable = scope.thread.items.lastWhere(
+          (i) => i.author == scope.me && i.type == 'message' && i.id != second.id && i.id != no.id,
+          orElse: () => going.id == second.id ? theirs : theirs);
+      if (takeable.author == scope.me) {
+        await scope.emit('message_delete', {'target': takeable.id});
+      }
       final answerable = scope.thread.items.lastWhere(
           (i) => i.author != scope.me && i.id != theirs.id,
           orElse: () => theirs);
@@ -537,19 +546,26 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                         );
                       },
                     ),
-              // finding something is a loop drawn round a word, up in the margin
+              // Finding something is a loop drawn round a word — on its own slip of paper, not
+              // straight onto whatever the thread has scrolled under it. Drawn as bare ink it
+              // overprinted the rows beneath: a completeness pass caught the word `search` and a
+              // signal divider's timestamp sharing the same pixels. A thing you can pick up is a
+              // thing that sits on something.
               Positioned(
-                top: 0,
+                top: 2,
                 right: 8,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: _search,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 4, 4, 10),
+                child: IntrinsicWidth(
+                  child: Slip(
+                    id: 'thread.search',
+                    row: 1,
+                    stock: 'index',
+                    torn: false,
+                    onTap: _search,
+                    padding: const EdgeInsets.fromLTRB(9, 4, 11, 5),
                     child: Row(mainAxisSize: MainAxisSize.min, children: [
-                      Mark.loop(size: 17, colour: Pen.margin),
+                      Mark.loop(size: 15, colour: Pen.margin),
                       const SizedBox(width: 5),
-                      Text(S.search, style: Hands.onDesk(size: 13)),
+                      Text(S.search, style: Hands.margin(size: 12.5)),
                     ]),
                   ),
                 ),

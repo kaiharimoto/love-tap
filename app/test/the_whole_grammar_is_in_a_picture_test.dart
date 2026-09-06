@@ -94,6 +94,8 @@ void main() {
         reason: 'the frame that is meant to show the whole grammar has no edit in it');
     expect(types, contains('reaction'),
         reason: 'a reaction was staged in cycle 3 and must stay staged');
+    expect(types, contains('message_delete'),
+        reason: 'a row taken back is a different picture from a row never sent');
     final report = CaptureBus.chatReport!();
     expect(report['replying_to'], isNotNull,
         reason: 'the reply banner is what makes replying visible in a still');
