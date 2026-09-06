@@ -146,13 +146,14 @@ class SearchPageState extends State<SearchPage> {
             ),
           ),
 
-          // the tabs down the side of a card index: what kind, and whose. Tall enough for a
-          // tilted slip with a torn edge: at forty-two the tabs were cut off top and bottom
-          SizedBox(
-            height: 54,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+          // The tabs down the side of a card index: what kind, and whose. They used to run off the
+          // right edge of the screen — TALKING cut through its last letter, four more never seen —
+          // with nothing to say there was more. A card index does not scroll sideways: every tab
+          // is on the box at once, in as many rows as it takes.
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Wrap(
+              alignment: WrapAlignment.start,
               children: [
                 _Tab(
                   label: 'everything',
