@@ -424,11 +424,16 @@ class DrivenClock {
   static Future<void> step(int ms) async {
     _now += Duration(milliseconds: ms);
     if (_ticks.hasListener) _ticks.add(_now);
-    final done = Completer<void>();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (!done.isCompleted) done.complete();
-    });
-    SchedulerBinding.instance.scheduleFrame();
-    await done.future.timeout(const Duration(seconds: 2), onTimeout: () {});
+    // Two frames, not one. A widget that finishes its work in a post-frame callback — the
+    // positioned list settles a jump that way — is drawn a frame late, and with one frame a step
+    // every other grab of a scroll clip was the grab before it, followed by a double step.
+    for (var pass = 0; pass < 2; pass++) {
+      final done = Completer<void>();
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (!done.isCompleted) done.complete();
+      });
+      SchedulerBinding.instance.scheduleFrame();
+      await done.future.timeout(const Duration(seconds: 2), onTimeout: () {});
+    }
   }
 }

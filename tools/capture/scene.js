@@ -91,8 +91,11 @@ function ensure(p) {
     const stack = e && e.stack ? ' @ ' + String(e.stack).replace(/\s+/g, ' ').slice(0, 240) : '';
     problems.push('pageerror: ' + String(text).slice(0, 300) + stack);
   });
+  const traceFile = arg('trace', '');
   page.on('console', (m) => {
     const text = m.text();
+    // every console line, in order, when asked: how a page that stopped answering is read
+    if (traceFile) { try { fs.appendFileSync(traceFile, text + '\n'); } catch (e) {} }
     if (m.type() === 'error' && !text.includes('404')) problems.push('console: ' + text.slice(0, 300));
     // the app writes its own uncaught errors out in words under capture (main.dart)
     if (/^(uncaught|flutter error):/.test(text)) problems.push(text.replace(/\s+/g, ' ').slice(0, 400));
@@ -309,8 +312,10 @@ function ensure(p) {
           // after a short wait, up to three times; a frame that is still the same after that is
           // a frame in which nothing moved, and frames.py says so.
           let png = await page.screenshot({ fullPage: false, clip: step.clip });
-          for (let tries = 0; tries < 3 && lastPng && png.equals(lastPng); tries++) {
-            await page.waitForTimeout(60);
+          // the headless compositor runs at about four frames a second, so the re-grabs have
+          // to span a quarter of a second between them to be sure of catching the next composite
+          for (let tries = 0; tries < 4 && lastPng && png.equals(lastPng); tries++) {
+            await page.waitForTimeout(90);
             png = await page.screenshot({ fullPage: false, clip: step.clip });
           }
           fs.writeFileSync(name, png);

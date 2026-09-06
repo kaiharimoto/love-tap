@@ -24,73 +24,58 @@
    "arg": 0
   },
   {
-   "do": "wait",
-   "ms": 1200
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 24,
-   "ms": 16
-  },
-  {
    "do": "far",
    "arg": "state mood restless"
   },
   {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating_b",
-   "count": 24,
-   "ms": 16,
-   "from": 24
+   "do": "wait",
+   "ms": 2500
   },
   {
    "do": "far",
    "arg": "feeling hold 0.92"
   },
   {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating_b",
-   "count": 160,
-   "from": 48,
-   "ms": 8
-  },
-  {
-   "do": "goTo",
-   "arg": 1
+   "do": "awaitArrival"
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/08_state_propagating_c",
-   "count": 40,
-   "ms": 16,
-   "from": 208
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 150,
+   "ms": 16
   },
   {
    "do": "far",
    "arg": "message it is raining here too"
   },
   {
+   "do": "awaitArrival"
+  },
+  {
    "do": "frames",
-   "dir": "evidence/frames/08_state_propagating_c",
+   "dir": "evidence/frames/08_state_propagating",
    "count": 120,
-   "from": 248,
-   "ms": 16,
-   "drive": {
-    "kind": "scrollBy",
-    "per": -4
-   }
+   "from": 150,
+   "ms": 16
+  },
+  {
+   "do": "goTo",
+   "arg": 1,
+   "after": 0
   },
   {
    "do": "far",
    "arg": "feeling squeeze 0.6"
   },
   {
+   "do": "awaitArrival"
+  },
+  {
    "do": "frames",
-   "dir": "evidence/frames/08_state_propagating_c",
-   "count": 120,
-   "from": 368,
-   "ms": 8
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 140,
+   "from": 270,
+   "ms": 16
   },
   {
    "do": "report",
