@@ -103,6 +103,14 @@ class FeelingObject extends StatelessWidget {
       );
     }
 
+    // KNOWN, AND NOT FIXED HERE: the image is drawn at `size * scale`, and `scale` carries the
+    // ink correction, which reaches 3.4 for an object that fills a small part of its frame. The
+    // box stays `size`, so anything that clips its children — the paper a feeling arrives on —
+    // cuts the object off: in the thread the candle survives as a grey semicircle with its shadow
+    // beside it on the wood. Sizing the box to `size * scale` fixes that and overflows every
+    // layout that assumed `size` (the Pulse row by 102 px). The fix is to give the callers a
+    // frame-aware size — FeelingObject.boxFor(feeling, size, intensity) — and let each of them
+    // ask for the room it needs.
     return SizedBox(
       width: size,
       height: size,
