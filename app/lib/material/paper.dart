@@ -157,6 +157,13 @@ class PaperPiece extends StatelessWidget {
             alignment: stockAlignment,
             child: Image.asset(
               paperAsset(stock),
+              // A window shows the sheet at ONE IMAGE PIXEL PER DEVICE PIXEL. Without the scale,
+              // BoxFit.none means one image pixel per *logical* point, which on a phone is three
+              // device pixels — so the tooth was magnified three times and smoothed by the
+              // sampler. A completeness pass measured the result on the tab strip: an interior of
+              // 1.20 grey levels against 19 to 27 for the note paper beside it, on ten of eleven
+              // stills. The shape the anti-goal forbids was sitting in the app's own chrome.
+              scale: windowed ? MediaQuery.devicePixelRatioOf(context) : 1.0,
               fit: windowed ? BoxFit.none : BoxFit.cover,
               alignment: stockAlignment,
               gaplessPlayback: true,

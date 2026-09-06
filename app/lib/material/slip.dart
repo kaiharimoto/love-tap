@@ -66,9 +66,12 @@ class Slip extends StatelessWidget {
 
     String? tear;
     if (torn && lib != null && lib.writableTears.isNotEmpty) {
+      // From the piece's own id, not from the row it sits in. Two surfaces that draw the same
+      // thing at different row indices were tearing it two different ways, and a surface that
+      // draws everything at row zero gave every piece one identical edge.
       final masks = lib.writableTears;
       final n = masks.length;
-      tear = masks[((row % n) * _stride(n)) % n];
+      tear = masks[((h % n) * _stride(n)) % n];
     }
 
     final piece = PaperPiece(
