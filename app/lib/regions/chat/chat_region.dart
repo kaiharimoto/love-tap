@@ -140,6 +140,17 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       scope.spine.markInFlight([going.id]);
       final no = await scope.emit('message', {'text': 'sending you the roster'});
       scope.spine.markRefused(no.id, 'the other phone is on an older version');
+      // A reaction and a reply, made the way a thumb makes them, so the states frame shows the
+      // whole grammar of the messenger rather than four delivery marks. Both were in the app and
+      // in no artifact: fifteen captures carried replying_to null and not one reaction.
+      final theirs = scope.thread.items.lastWhere((i) => i.author != scope.me,
+          orElse: () => scope.thread.items.first);
+      await scope.emit('reaction', {'target': theirs.id, 'feeling_id': 'squeeze'});
+      final answerable = scope.thread.items.lastWhere(
+          (i) => i.author != scope.me && i.id != theirs.id,
+          orElse: () => theirs);
+      if (mounted) setState(() => _replyTo = answerable);
+      _text.text = 'the second one, then';
       if (mounted) setState(() {});
       await _scrollToAnchor(no.id);
     };
