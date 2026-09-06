@@ -243,12 +243,23 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
                                     mottle_scale=density)
         obj.data.materials.append(mat)
         common.add_shadow_catcher(scene, size_m=0.4)
+        # Straight down, orthographic. This is why the sequence reads as a cream rectangle
+        # growing taller rather than as a letter opening: a flap rotating about its crease
+        # foreshortens to nothing from directly overhead, so what the camera sees is the sheet's
+        # outline getting longer. It is geometrically honest and it does not look like paper.
+        # Tilting the camera ten or twelve degrees would show the flaps standing and their
+        # shadows crossing the sheet — and would need the frames re-measured, because
+        # FoldedNote.inset in app/lib/material/fold.dart places the writing against this framing.
         common.add_top_camera(scene, w * 1.25, h * 1.55, ortho=True, distance=0.5)
         rx = int(round(res * (w * 1.25) / (h * 1.55))) if h * 1.55 > w * 1.25 else res
         ry = res if h * 1.55 > w * 1.25 else int(round(res * (h * 1.55) / (w * 1.25)))
         common.render_settings(scene, rx, ry, samples=samples, transparent=True, file_format="PNG",
                                seed=20260903 + frame)
         if condition == "day":
+            # Lighting this from twenty-two degrees rather than fifty was tried: the crease reads
+            # a little better and the paper goes cooler than every other stock in the library,
+            # which is worse. The reason 06 looks like a rectangle growing taller is the camera,
+            # not the light — see the note on add_top_camera below.
             common.add_daylight(scene)
         else:
             common.add_dusk(scene)
