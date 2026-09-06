@@ -167,6 +167,8 @@ function ensure(p) {
         await hook('__deskSendFeeling', step.feeling, step.intensity === undefined ? 0.7 : step.intensity); break;
       case 'openCorner':
         await hook('__deskOpenCorner', step.arg !== false); break;
+      case 'showFamily':
+        await hook('__deskShowFamily', String(step.arg)); break;
       case 'setSignal':
         await hook('__deskSetSignal', step.signal, String(step.value)); break;
       case 'openSender':

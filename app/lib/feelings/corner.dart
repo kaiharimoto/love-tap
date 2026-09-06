@@ -90,6 +90,13 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
     super.initState();
     if (Flags.capture) {
       CaptureBus.openCorner = (open) => open ? _openSender() : _close();
+      CaptureBus.showFamily = (name) {
+        final want = Family.values.firstWhere(
+            (f) => f.label.toLowerCase() == name.toLowerCase() || f.name.toLowerCase() == name.toLowerCase(),
+            orElse: () => _family);
+        setState(() => _family = want);
+        return widget.registry.all.where((f) => f.family == want).length;
+      };
       // A corner turning up takes a quarter of a second, and under the capture harness a quarter
       // of a second of wall clock passes between the first two frames of a take — so the whole
       // turn happened before the second one was grabbed, and ninety-four of ninety-five frames
@@ -109,7 +116,10 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
 
   @override
   void dispose() {
-    if (Flags.capture) CaptureBus.openCorner = null;
+    if (Flags.capture) {
+      CaptureBus.openCorner = null;
+      CaptureBus.showFamily = null;
+    }
     _driven?.cancel();
     _curl.dispose();
     super.dispose();
@@ -316,7 +326,22 @@ class _Fan extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 6),
-                      Wrap(
+                      // Turning to another family draws it across, the way a hand moves a sheet
+                      // rather than swapping it. It also means the clip of somebody going through
+                      // the vocabulary has motion in it: a family that changed on one frame and
+                      // then sat there gave the frame check nineteen identical grabs in a row, and
+                      // the vocabulary was in the evidence for a fifth of a second.
+                      Settling(
+                        key: ValueKey('fan.${family.name}'),
+                        duration: Motion.turn,
+                        curve: Curves.easeOutCubic,
+                        builder: (_, t, child) => ClipRect(
+                          child: FractionalTranslation(
+                            translation: Offset(0.10 * (1 - t), 0),
+                            child: Opacity(opacity: (0.35 + 0.65 * t).clamp(0.0, 1.0), child: child),
+                          ),
+                        ),
+                        child: Wrap(
                         alignment: WrapAlignment.center,
                         children: [
                           for (var i = 0; i < members.length; i++)
@@ -355,6 +380,7 @@ class _Fan extends StatelessWidget {
                               ),
                             ),
                         ],
+                      ),
                       ),
                     ],
                   ),

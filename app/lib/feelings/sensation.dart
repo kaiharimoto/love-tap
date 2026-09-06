@@ -44,7 +44,7 @@ class SensationReport {
 }
 
 class Sensation {
-  Sensation({AudioPlayer? player}) : _player = player;
+  Sensation({AudioPlayer? player}) : _player = player;  // ignore: prefer_initializing_formals
 
   static const _channel = MethodChannel('lovetap/haptics');
 

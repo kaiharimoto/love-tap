@@ -26,6 +26,10 @@ class CaptureBus {
   /// Shell: open or close the feeling corner's fan.
   static void Function(bool open)? openCorner;
 
+  /// Turn the vocabulary to a family, so a clip can be *of* the vocabulary rather than of a
+  /// sheet appearing for a fifth of a second. Returns the number of feelings now on the sheet.
+  static int Function(String family)? showFamily;
+
   /// Chat: scroll to an event id, or to a fraction of the thread ('0.5'), or 'end'.
   static Future<void> Function(String anchor)? scrollTo;
 
@@ -71,6 +75,7 @@ class CaptureBus {
     goToRegion = null;
     sendFeeling = null;
     openCorner = null;
+    showFamily = null;
     scrollTo = null;
     openSender = null;
     openViewer = null;

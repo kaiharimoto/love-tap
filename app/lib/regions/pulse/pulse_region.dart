@@ -188,8 +188,18 @@ class _Traffic extends StatelessWidget {
       _seen.addAll(newestFirst.map((e) => e.id));
       _primed = true;
     }
+    // The row is as tall as the tallest thing in it needs, not a number somebody typed. An object
+    // whose render frames it loosely asks for a wider box than its nominal size, and a fixed
+    // height cut the bottom off it — the layout said 124 and the drawing wanted 226.
+    var tallest = 66.0;
+    for (final e in newestFirst) {
+      final f = registry.byId(e.payload['feeling_id'] as String);
+      if (f == null) continue;
+      final box = FeelingObject.boxFor(f, 66, intensity: (e.payload['intensity'] as num).toDouble());
+      if (box > tallest) tallest = box;
+    }
     return SizedBox(
-      height: 124,
+      height: tallest + 32,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: newestFirst.length,

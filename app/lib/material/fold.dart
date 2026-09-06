@@ -386,8 +386,13 @@ class FoldedNote extends StatefulWidget {
   static const _defaultSeq = 'unfold_thirds';
 
   /// Where the writing goes on the open sheet, as fractions of the frame: inside the paper, clear
-  /// of the shadow that runs off its lower right. Measured against the packed frames.
-  static const inset = [0.075, 0.085, 0.095, 0.17];
+  /// of the shadow that runs off its lower right.
+  ///
+  /// Measured, not chosen — `python3 tools/check/fold_inset.py app/assets/folds/unfold_thirds`
+  /// finds the sheet in the last frame and prints these four numbers. The sheet moved when the
+  /// camera was tilted off the vertical, and hand-tuned fractions would have gone on pointing at
+  /// where it used to be. Re-run the tool whenever the rig changes.
+  static const inset = [0.14, 0.227, 0.14, 0.227];
 
   /// The writing comes up over the last part of the sequence, while the sheet is settling flat.
   /// Starting it only once the sequence had finished is what left the clip ending on blank paper.

@@ -13,6 +13,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskScrollTo(JSFunction f);
   external set __deskSendFeeling(JSFunction f);
   external set __deskOpenCorner(JSFunction f);
+  external set __deskShowFamily(JSFunction f);
   external set __deskSetSignal(JSFunction f);
   external set __deskOpenSender(JSFunction f);
   external set __deskOpenViewer(JSFunction f);
@@ -34,7 +35,7 @@ extension type _Win(JSObject o) implements JSObject {
 
 /// A handle's answer, as a string the harness can read.
 ///
-/// `Future<String>.toJS` picks the Future<void> conversion, so every sentence a handle answered
+/// `Future<String>.toJS` picks the `Future<void>` conversion, so every sentence a handle answered
 /// with — 'ok', or what was missing — arrived in the browser as `undefined`, and the harness
 /// learnt to accept `undefined` as success. It is a failed step that is being hidden that way:
 /// the pairing step resolved to nothing for a whole capture and the scenes went on unpaired.
@@ -46,6 +47,7 @@ void expose(CaptureHooks hooks) {
   w.__deskScrollTo = ((JSString a) => _said(hooks.scrollTo(a.toDart))).toJS;
   w.__deskSendFeeling = ((JSString id, JSNumber v) => _said(hooks.sendFeeling(id.toDart, v.toDartDouble))).toJS;
   w.__deskOpenCorner = ((JSBoolean open) => _said(hooks.openCorner(open.toDart))).toJS;
+  w.__deskShowFamily = ((JSString f) => _said(Future.value(hooks.showFamily(f.toDart)))).toJS;
   w.__deskSetSignal = ((JSString s, JSString v) => _said(hooks.setSignal(s.toDart, _value(v.toDart)))).toJS;
   w.__deskOpenSender = ((JSBoolean open) => _said(hooks.openSender(open.toDart))).toJS;
   w.__deskOpenViewer = ((JSString id) => _said(hooks.openViewer(id.toDart))).toJS;

@@ -209,7 +209,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       final wanted = anchor.substring(6).split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
       final window = _tightestWindow(items, wanted);
       if (window == null) return;
-      _lastAnchor = 'types:${wanted.join(',')} → rows ${window.$1}-${window.$2} of ${items.length}';
+      _lastAnchor = 'types:${wanted.join(',')} at rows ${window.$1} to ${window.$2} of ${items.length}';
       // the top of the stretch a little below the strip, so the whole of it is in the frame
       _scroll.jumpTo(index: window.$1, alignment: 0.16);
       await Future<void>.delayed(const Duration(milliseconds: 40));

@@ -186,6 +186,15 @@ class CaptureHooks {
     return 'ok';
   }
 
+  /// Turn the vocabulary to a family and say how many feelings are on the sheet. What lets a clip
+  /// hold the vocabulary open and go through it, rather than showing that a sheet exists.
+  String showFamily(String family) {
+    final f = CaptureBus.showFamily;
+    if (f == null) return 'the corner is not on screen';
+    final n = f(family);
+    return n > 0 ? 'ok, $n on the sheet' : 'no feelings in $family';
+  }
+
   Future<String> openSender(bool open) async {
     final f = CaptureBus.openSender;
     if (f == null) return 'chat is not on screen';
