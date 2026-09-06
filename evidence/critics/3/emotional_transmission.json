@@ -1,0 +1,91 @@
+{
+  "critic": "emotional_transmission",
+  "cycle": 3,
+  "score": 15,
+  "floor": 17,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "07_feeling_landing.mp4, 08_state_propagating.mp4, 15_authored_feeling.mp4",
+      "where": "a text line at y 2035-2100, x 30-620, printed over the YOURS mood card in 07/08 and over the 'write something' composer in 15, with a full-height red playhead that sweeps the screen width and parks at the right edge",
+      "what": "Every feeling arrival is captioned with an instrument readout naming the feeling, its duration in milliseconds and its transport channel: 07 frame 140 reads 'hold * 1900ms * page', frame 215 'a squeeze * 640ms * page', frame 313 'nuzzle * 990ms * page', 15 frame 40 reads 'pigeon * 750ms * page'; it is still on screen at frames 140, 215 and 313 after the sensation has ended, and it overprints the words 'bright calm tender' on the YOURS card and the composer placeholder in 15.",
+      "why": "The row's central sentence is that a feeling arrives as a sensation rather than as a message; here the sensation is accompanied, and outlasted, by a literal label of itself carrying the internal channel name 'page' and a millisecond count, which is the sensation delivered as a message with a spec sheet attached. Phase correlation on the readout band (y 2035-2105, x 20-620) against the page band (y 150-520, x 60-1020) gives the same per-frame displacement to within 1 px across frames 20-34, so the readout sits inside the app's own shifted layer, not on top of it, and no file in evidence/logs/ declares it as a capture annotation."
+    },
+    {
+      "severity": "serious",
+      "artifact": "09_two_devices.png",
+      "where": "absent; MANIFEST.json 'missing' says 'not captured this session', DIFF.json says 'not captured in this session or the last'",
+      "what": "The two-device frame the row turns on does not exist, and every clip in evidence is one device's screen: 07, 08 and 15 all report me: teo on a single surface.",
+      "why": "The row says a gesture on one device arrives on the other; nothing in the pictures shows the gesture and the sensation together, so the transmission is only ever inferred. The stated reason is an excuse rather than a reason: coldstart.json records two live tailscale nodes (100.68.254.25 / 100.72.198.108) carrying feeling_client_to_host and feeling_host_to_client in the same run, and reliability.json ran a host and a client to completion, so two devices were available to photograph."
+    },
+    {
+      "severity": "serious",
+      "artifact": "08_state_propagating.mp4",
+      "where": "the 'hold' card at the top of the thread, region y 300-380 / x 400-650, and the bare wood between the 'it is raining here too' card and the card below it, around y 740-900",
+      "what": "The candle that is the 'hold' object is clipped flat by the top edge of its card and survives only as a grey semicircle sitting on the word 'hold', while a detached translucent grey block floats on the wood with nothing casting it; mean luminance of the disc region falls from 212.5 at frame 239 to 133.4 by frame 260 and holds at 133.4 through frame 394, so this is a settled state lasting 135 frames (about 2.16 s of app time at 16 ms per step), not a transient of an arrival animation.",
+      "why": "The propagation clip's last two and a half seconds are the moment a feeling is meant to be legible as a real object resting on real paper; a hard-clipped disc and an orphan shadow read as a rendering fault, which is exactly the failure the row's 'sensation rather than a message in a different colour' test is guarding against."
+    },
+    {
+      "severity": "serious",
+      "artifact": "15_authored_feeling.mp4",
+      "where": "the family chips of the feeling picker, y 550-810, present unchanged across frames 17, 18, 22, 26 and 30",
+      "what": "All six family names are truncated in their chips: they read WARMT, ACH, SHELTE, MISCHI, STAT, SPARK, and the ACHE chip's left edge is overlapped by the WARMTH chip so that only three of its letters survive. This picker is the only surface anywhere in the evidence where the family names appear to a reader.",
+      "why": "The row requires at least five NAMED families; haptics.json names six, but in the product not one of the six names can be read in full, so the naming exists only in the log and not in the thing the couple uses."
+    },
+    {
+      "severity": "serious",
+      "artifact": "none",
+      "where": "no artifact shows a feeling being reached from the US, MOMENTS or SETTINGS regions",
+      "what": "The picker is shown opening only from the chat composer (15_authored_feeling.mp4, frames 17-33). A dog-eared page corner sits at the bottom right of the scroll in 01_pulse.png, 02_chat.png, 03_us.png and 12_search.png (crop x 1040-1440, y 2700-3010), but nothing shows it being pulled or what it does, and it is not in the same place in 05_settings.png.",
+      "why": "The row requires a feeling to be reachable in one gesture from any region; the evidence shows one gesture from one region and an unexplained corner elsewhere, which is a hypothesis rather than a demonstration."
+    },
+    {
+      "severity": "serious",
+      "artifact": "logs/webpush.txt, 05_settings.png",
+      "where": "webpush.txt line 4: payload {\"kind\":\"feeling\",\"from\":\"noor\"} (32 bytes), 'payload carries only [kind, from]: yes'",
+      "what": "The only out-of-app delivery in evidence carries the kind and the sender and nothing else, so it can say that noor sent a feeling but not which feeling, and for a state change ('something they say about themselves', 'something their phone notices' in the 05_settings.png interrupt list) it carries no state value at all. No artifact shows a notification, a widget, a lock screen or any surface outside the app.",
+      "why": "The row requires state changes to be perceptible without opening the app; what is evidenced is the encryption plumbing (RFC 8291 record matches, VAPID ES256 JWT in three parts) and a settings matrix, not a perception, and the payload as recorded cannot reproduce either the sensation or the state."
+    },
+    {
+      "severity": "minor",
+      "artifact": "logs/haptics.json, crops/haptics_strip.png",
+      "where": "confetti (Sparkle), stuck_with_me (Mischief), overwhelmed (Static); and the pair long_day (Ache) / hold (Shelter)",
+      "what": "Three feelings from three different families are pulse trains of the same length and frequency: confetti is 7 ticks in 450 ms (15.6 Hz), stuck_with_me 8 ticks in 480 ms (16.7 Hz), overwhelmed 10 ticks in 500 ms (20.0 Hz), and what separates them is amplitude modulation inside 25-30 ms pulses. Separately, long_day (800@100 off300 800@60) and hold (900@150 off100 900@150) are both exactly 1900 ms of two long slabs with one gap; quantising both at 10 ms and comparing on/off only gives 26.8 of 255 (10.5%), the closest pair in the set of 36.",
+      "why": "The row asks that each feeling be identifiable by its haptic pattern alone with the screen face down. haptics.check.json's 'near_shapes: []' is a distinctness test on the pattern strings (distinct_strings: 36), not a perceptual one, and nothing in the evidence tests a person's ability to tell two patterns apart; on an LRA a 15-20 Hz train of 25-30 ms pulses is one buzz, which collapses a joke, a distress signal and a celebration into the same sensation."
+    },
+    {
+      "severity": "minor",
+      "artifact": "07_feeling_landing.mp4, 08_state_propagating.mp4",
+      "where": "MANIFEST.json artifacts entries",
+      "what": "Both clips are shorter than the minimum the capture sets for itself: 07 is 5.23 s against minimum_seconds 6, 08 is 6.58 s against minimum_seconds 8, and both carry long_enough: false. Both are also stale against this capture (07 written 04:56, 08 is the only artifact from_this_run).",
+      "why": "The two clips the row is judged on are the two that fall short of their own declared length, which cuts the landing and the propagation off before either settles."
+    },
+    {
+      "severity": "minor",
+      "artifact": "08_state_propagating.mp4",
+      "where": "the 'a squeeze' object on its card, frame 300, rows y 1050, 1150 and 1250",
+      "what": "The object's bright pixels begin at x 88-90 on those rows while the card's left torn edge is at x 115-120 on rows without the object (y 980, y 1400), so roughly 30 px of the object hangs over bare wood with no shadow cast onto the wood beneath it.",
+      "why": "The object is the sensation's body; an object that leaves its paper without the desk registering it breaks the physical reading the row depends on."
+    },
+    {
+      "severity": "minor",
+      "artifact": "logs/08_state_propagating.report.json",
+      "where": "sync block: faults 1, last_fault 'ConstraintError: Index key is not unique'",
+      "what": "The clip whose job is to show state propagating recorded a sync fault during its own capture (rounds 40, pushed 6, pulled 4, faults 1).",
+      "why": "A fault logged inside the propagation demonstration weakens the one cross-device claim this category can lean on in the absence of 09_two_devices.png."
+    }
+  ],
+  "what_is_working": [
+    "A feeling arrives as a named physical object placed on real paper with a cast shadow, never as a coloured bubble: the candle for hold, the clover for nuzzle, the pinched slab for a squeeze, the thumbprint spiral for forehead, the ring for warm palm, each labelled with its name, time and sender on the Pulse shelf in 01_pulse.png and inline in the thread in 08_state_propagating.mp4.",
+    "The non-haptic substitute is measurably a real translation of the waveform, not a shrug. In 07_feeling_landing.mp4 the whole page displaces, and phase correlation of the note band (y 150-520, x 60-1020) against the clip's own rest frames reproduces each pattern gate to within a frame: hold (900@150 off100 900@150) drives frames 2-57 and 65-119 with a 7-frame return to rest between them; squeeze (80@90 off40 160@160 off40 320@230) drives 152-157, 160-170 and 172-190; nuzzle (90/90/90 off200 400) drives three 6-frame pulses at 223-228, 233-238, 243-248, an 11-frame gap, then a 24-frame tail.",
+    "The displacement scales with amplitude almost exactly linearly: squeeze's three stages at amplitude 90, 160 and 230 move the page 8.2, 15.7 and 23.2 px, i.e. 0.091, 0.098 and 0.101 px per amplitude unit; nuzzle's 150 and 110 stages give 14.3 and 11.3 px, 0.095 and 0.103. A pattern that is felt on Android is seen at the right size on the PWA.",
+    "Sound is a third channel carrying the same envelope, not decoration: logs/07_feeling_landing.sound.json places snd_hold, snd_squeeze and snd_nuzzle at frames 0, 150 and 221, and the decoded audio RMS at 8 kHz drops to -102 dB or lower across frames 248-256, matching nuzzle's off200 gap before the 400 ms tail.",
+    "The vocabulary clears the bar with room: 34 built-in feelings across six named families (Warmth 6, Ache 5, Shelter 7, Mischief 7, Static 6, Sparkle 5), each with its own object, sound file, colour and waveform, all 36 patterns distinct as strings, spanning 30 ms to 3500 ms; crops/haptics_strip.png draws every one on a single 3500 ms scale so the rhythms can be compared by eye.",
+    "Fourteen partner-state signals in 01_pulse.report.json, twelve of them legible as labelled fields on 01_pulse.png (MOOD, HERE, PLACE, NEEDS, HAS LEFT, BATTERY, LAST UP, THEIR CLOCK, RINGER, MOVING, SIGNAL, AT HOME) plus the standing line and the NEED and ENERGY meters in the header.",
+    "Three ambient presence surfaces are actually visible: the standing-line header card carried in every region (01, 02, 03, 04, 05, 12), the Pulse partner card, and state woven into the thread as quiet ledger lines rather than events ('noor went out' in 02_chat.png, 'noor is restless' at frame 200 and 'noor needs a lot' at frame 168 of 08_state_propagating.mp4, 'noor - travelling' in 15).",
+    "The interrupt design refuses engagement machinery and is legible: 05_settings.png gives quiet hours 23:00-07:00 and eleven kinds of event each set to wake me / quietly / not at all, with a feeling set to wake me and a partner's own words set to quietly.",
+    "Authored feelings sit in the same table as built-ins with nothing marking them as second class: pigeon (noor, Mischief, 750 ms) and soup (teo, Shelter, 1200 ms) each carry their own object, their own ogg and their own waveform, soup's sensation block in 15_authored_feeling.report.json has the same shape as any built-in, and logs/15_authored_feeling.sound.json places snd_user_soup.ogg on arrival exactly as the built-in sounds are placed."
+  ],
+  "verdict": "On the sensation itself this build is genuinely strong, and the part I expected to be hand-waved is the part that measures best: the iOS substitute is not an apology for a missing motor but a real translation, with the page's displacement reproducing every gate of the waveform to within a frame and scaling linearly with amplitude at about 0.1 px per unit, a per-feeling sound carrying the same gaps, and the feeling landing as a named object on paper rather than as a coloured bubble. Thirty-four built-ins across six families, fourteen partner signals, three ambient surfaces and two authored feelings that carry their own object, sound and waveform all clear the row's counts. What keeps it under the floor is that the surrounding evidence keeps turning the sensation back into a message. Every feeling clip prints 'hold * 1900ms * page' or 'pigeon * 750ms * page' across the mood card and the composer, still there long after the sensation has ended, naming the feeling, its duration and its internal transport in the same breath as delivering it; the six family names are truncated to WARMT, ACH, SHELTE, MISCHI, STAT, SPARK in the only place a reader ever sees them; the propagation clip ends with the hold candle clipped to a grey disc and an orphan shadow on the wood for its last 2.16 seconds; and the row's headline claim goes unwitnessed because 09_two_devices.png was not captured, in a session where coldstart.json and reliability.json both had two paired nodes running. Add the two unevidenced limbs, a one-gesture reach shown only from chat and an out-of-app payload that carries neither the feeling nor the state, and the category reads as an excellent sensation surrounded by its own instrumentation."
+}

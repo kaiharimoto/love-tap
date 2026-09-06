@@ -1,69 +1,69 @@
 {
- "cycle": 2,
+ "cycle": 3,
  "categories": {
   "messenger_reliability": {
    "weight": 30,
    "floor": 26,
-   "critic": 20,
+   "critic": 19,
    "critics": {
-    "messenger_reliability": 20
+    "messenger_reliability": 19
    },
-   "builder": 19,
-   "builder_why": "The critic is right and I had credited myself too much. Moments renders five 'still fetching the picture.' rows and not one thumbnail \u2014 that is my masonry rewrite, and the surface where photographs and video live now shows neither. 13_messenger_states is missing for the fourth run running. Typing indication is named in the row and appears in no artifact and in no capability in reliability.json. And the point I had not made against myself: every still was taken on a single seeded device that is unpaired and 'connecting', so the sent and read markers are seeded values rather than an observed round trip. 08 is the only artifact where a message actually crosses, and it crossed today for the first time.",
+   "builder": 22,
+   "builder_why": "Every seeded still is paired with the far phone and connected on the whole year: link connected and 14,062 events in each of the eight reports, against 'connecting' on a seeded fixture last cycle. 13_messenger_states shows read, going and refused produced by the real outbox and a real read marker from the far phone, with the far phone typing. Typing is a capability in reliability.json. Moments shows the photographs as prints with the store quiet before the shot, and the viewer holds one over the desk with its caption once. Search is newest first with a reason on every hit and the shell around it. Against that: 09 is missing, every transport line says local, the first launch still costs 11-12 s (later launches 2.7-3.4 s on the kept store), and the delivery stall above is real and unfixed \u2014 I found and fixed two of its causes (a sync loop that ended for good on any unexpected error, and a backoff that doubled to thirty seconds) and it still happens.",
    "score": 19,
    "meets_floor": false
   },
   "material_truth": {
    "weight": 25,
    "floor": 22,
-   "critic": 16,
+   "critic": 13,
    "critics": {
-    "material_truth": 16
+    "material_truth": 13
    },
-   "builder": 15,
-   "builder_why": "The unfolding clip is the row's own test and it fails it. 281 of 320 frames are a flat cream rectangle: I cropped the fold frames and re-rendered them for the z-fight, and never measured their paper. My own tools/check/surfaces.py would have caught it \u2014 it reads paper/, shell/ and objects/ and not folds/, so the one sequence the material row is judged on is the one surface the check does not look at. The tab tiles and two settings surfaces are flat fills. And repeated glyphs render pixel-identical at IoU 0.998, so the contextual alternates that the fonts carry are not varying at render time: the hands have the variants, the renderer is not asking for them.",
-   "score": 15,
+   "builder": 20,
+   "builder_why": "Every one of the 240 fold frames is above the paper floor \u2014 worst 2.125, median 3.003 against 1.2 \u2014 where 94 were under it last cycle, and the unfolding clip plays one rendered frame per step with the ink coming up on the sheet as it settles. The tabs and every cut card carry a cut edge and a contact shadow and show their stock at the stock's own density. Both hands were rebuilt: no variant is hollow and no two variants of a letter or digit are closer than the face's floor. 327 surfaces read, none flat. Held back by the twin share of 0.30 on the hero, by DeskStamp not being built, by the ink-density plate not being made, and because the folded resting face still reads as a plain rectangle at a glance.",
+   "score": 13,
    "meets_floor": false
   },
   "emotional_transmission": {
    "weight": 20,
    "floor": 17,
-   "critic": 6,
+   "critic": 15,
    "critics": {
-    "emotional_transmission": 6
+    "emotional_transmission": 15
    },
-   "builder": 7,
-   "builder_why": "A feeling arriving on the far phone renders as the word 'hold' in blue script in the transcript. The row's first sentence is that a gesture on one device becomes a sensation on the other, and what 08 shows is a message in a different colour. That is the central claim of the whole app and the artifact disproves it. Four named families are visible where the floor is five. No haptic pattern is recorded anywhere in evidence/ \u2014 thirty feelings are meant to be identifiable by pattern alone with the screen face down and there is nothing in the set that lets anyone check it. I score this one point above the critic only because the landing itself (07) is real geometry with a shadow that separates and meets; the lower of the two stands.",
-   "score": 6,
+   "builder": 15,
+   "builder_why": "07 is shot on the phone the feeling reaches: the far phone sends at a known frame, the page lifts to the pattern with the lane drawn from the same segments, the object lands on the desk, rests exactly as long as the feeling lasts and is put away into the recent row, which lands newest first. The clip carries the feeling's own sound. haptics_strip.png draws all 36 patterns to scale across six families and no two share a shape in time \u2014 breathe was two equal presses at forehead's speed and is now an in-breath, a pause and a long out-breath. The vocabulary sheet shows all six families and every tile on opaque paper, and a widget test opens the corner and reads that off the tree. The emoji-shaped and prize objects are gone. Held back because there is still no vibrator anywhere in the evidence \u2014 the PWA path is the whole set \u2014 and because a feeling arriving is shown three times but felt only through the page.",
+   "score": 15,
    "meets_floor": false
   },
   "coherence": {
    "weight": 15,
    "floor": 13,
-   "critic": 10.5,
+   "critic": 10,
    "critics": {
-    "code": 12.5,
-    "coherence": 10.5
+    "code": 13,
+    "coherence": 10
    },
-   "builder": 11,
-   "builder_why": "The same class of row draws as torn paper in one region and as a hard-edged rectangle in another, which is the coherence row's exact subject. Moments renders none of its content. Nine of eighteen types name nine renderer ids that all resolve to one function, which makes the registry's table wider than the thing it describes. The extensibility half is genuinely good \u2014 the fifth module went in as one directory and one line, and the commit shows it touched nothing under the other four.",
-   "score": 10.5,
+   "builder": 12,
+   "builder_why": "The module events are their own kinds of paper in the thread \u2014 a ticket stub, a line with its pencil box, a stamped card, a tally, a shelf card, a folded clock, a card carrying the new object \u2014 where all seven were one pencil sentence last cycle, and Moments draws the same event on the same stock with the same body. Every report carries a per-region view and the sync engine's own numbers. Search and the viewer stay inside the shell rather than replacing the app. Held back because Us still draws its rows with its own bodies rather than the shared renderers, and because the fifth-module claim is a directory and a line that was not exercised this session.",
+   "score": 10,
    "meets_floor": false
   },
   "anti_goal": {
    "weight": 10,
    "floor": 9,
-   "critic": 5.5,
+   "critic": 7,
    "critics": {
-    "anti_goal": 5.5
+    "anti_goal": 7
    },
-   "builder": 5,
-   "builder_why": "Two blocking failures and I accept both. A five-of-five star rating on a remembered date is the canonical review widget attached to a shared memory \u2014 it quantifies the relationship, which is the thing anti-goal one exists to forbid, and I wrote it. Notes in two clips are flat hard-cornered untextured rectangles, which is anti-goal four in the surface the whole visual concept rests on. The drawn feelings read as the standard emoji set to a fresh eye \u2014 a sun with rays for 'forehead', a crescent for 'warm palm' \u2014 and that they are hand-drawn strokes rather than font glyphs is a distinction the picture does not make.",
-   "score": 5,
+   "builder": 8,
+   "builder_why": "No flat fill in a paper colour anywhere outside the paper widget \u2014 the test reads the whole tree for any light fill now, not the six named stocks. No emoji shapes and no prize tokens among the objects. No counts, no badges, no streak numbers. Every displayed string passes the voice lint. Held back because the folded resting face is still close to a plain rectangle, and because the haptic lane, capture-only though it is, is a stripe of product furniture across two of the clips.",
+   "score": 7,
    "meets_floor": false
   }
  },
- "total": 55.5,
+ "total": 64,
  "exit_threshold": 95,
  "every_floor_met": false,
  "at_exit": false,

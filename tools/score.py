@@ -66,7 +66,13 @@ def write_judgements(coherence, problems):
         if isinstance(j, dict):
             verdict, why = j.get("judgement") or j.get("verdict"), j.get("why") or j.get("reason")
         else:
-            verdict, why = j, None
+            # A critic writes the way a person writes: "unchanged — ssim 1.0, byte for byte".
+            # The label is the first word and the rest is the reason, so a sentence is read
+            # rather than thrown away for not being one of three bare words.
+            text = str(j).strip()
+            head = text.split(None, 1)
+            verdict = head[0].strip(" —-:.,").lower() if head else None
+            why = text if len(head) > 1 else None
         if verdict is None:
             continue
         if verdict not in allowed:
@@ -74,6 +80,15 @@ def write_judgements(coherence, problems):
             continue
         if row.get("label") == "unchanged" and verdict != "unchanged":
             problems.append(f"DIFF.json: {row['artifact']} is unchanged by SSIM but judged {verdict}")
+            continue
+        # And the other way round, which is the one that was open: a reader who says nothing moved
+        # about a file that measurably did is telling us about their reading, not about the file.
+        if row.get("label") == "changed" and verdict == "unchanged":
+            problems.append(
+                f"DIFF.json: {row['artifact']} changed by SSIM ({row.get('ssim')}) but judged unchanged")
+            continue
+        if row.get("label") == "new" and verdict == "unchanged":
+            problems.append(f"DIFF.json: {row['artifact']} is new but judged unchanged")
             continue
         if row.get("label") == "gone" and verdict != "regressed":
             problems.append(f"DIFF.json: {row['artifact']} is gone but judged {verdict}")

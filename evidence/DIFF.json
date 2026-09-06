@@ -1,5 +1,5 @@
 {
- "commit": "1085172",
+ "commit": "05112fe",
  "baseline": {
   "dir": "evidence/.previous",
   "captured_at": "2026-09-04T20:20:00Z"
@@ -83,8 +83,10 @@
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "not captured in this session or the last"
+   "judgement": "unchanged",
+   "why": "not captured in this session or the last",
+   "judged_because": "unchanged \u2014 absent in this capture and the last; nothing moved, and the two-device view remains unevidenced.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "10_first_run.png",
@@ -144,8 +146,10 @@
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "not captured in this session or the last"
+   "judgement": "unchanged",
+   "why": "not captured in this session or the last",
+   "judged_because": "unchanged \u2014 absent in this capture and the last; nothing moved, and the Android install path remains unevidenced.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "17_setup_pwa.png",
@@ -163,5 +167,6 @@
   "unchanged": 0,
   "changed": 14,
   "absent": 2
- }
+ },
+ "judgements_from": "the coherence critic's report for this cycle"
 }
