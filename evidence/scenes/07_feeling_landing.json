@@ -54,6 +54,10 @@
    "after": 0
   },
   {
+   "do": "step",
+   "ms": 400
+  },
+  {
    "do": "far",
    "arg": "feeling nuzzle 0.8"
   },
@@ -71,6 +75,10 @@
    "do": "goTo",
    "arg": 2,
    "after": 0
+  },
+  {
+   "do": "step",
+   "ms": 400
   },
   {
    "do": "far",

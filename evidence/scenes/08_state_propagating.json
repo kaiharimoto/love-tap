@@ -56,6 +56,10 @@
    "after": 0
   },
   {
+   "do": "step",
+   "ms": 400
+  },
+  {
    "do": "far",
    "arg": "message it is raining here too"
   },
@@ -104,6 +108,10 @@
    "do": "goTo",
    "arg": 2,
    "after": 0
+  },
+  {
+   "do": "step",
+   "ms": 400
   },
   {
    "do": "far",
