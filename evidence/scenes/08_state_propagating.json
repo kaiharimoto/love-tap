@@ -41,8 +41,13 @@
   {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
-   "count": 150,
+   "count": 160,
    "ms": 16
+  },
+  {
+   "do": "goTo",
+   "arg": 1,
+   "after": 0
   },
   {
    "do": "far",
@@ -55,13 +60,8 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 120,
-   "from": 150,
+   "from": 160,
    "ms": 16
-  },
-  {
-   "do": "goTo",
-   "arg": 1,
-   "after": 0
   },
   {
    "do": "far",
@@ -74,7 +74,7 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 140,
-   "from": 270,
+   "from": 280,
    "ms": 16
   },
   {
