@@ -1,5 +1,502 @@
 {
- "strings_read": 116,
+ "strings_read": 115,
+ "rules_applied": [
+  {
+   "rule": "an emoji glyph in a displayed string",
+   "pattern": "[\ud83c\udf00-\ud83e\udeff\u2600-\u27bf\ud83c\udde6-\ud83c\uddff\u2190-\u21ff\u2b00-\u2bff\ufe0f]"
+  },
+  {
+   "rule": "an exclamation mark",
+   "pattern": "!"
+  },
+  {
+   "rule": "product cheer",
+   "pattern": "\\b(oops|whoops|uh oh|yay|awesome|amazing|great job|welcome to)\\b"
+  },
+  {
+   "rule": "the reader called a user",
+   "pattern": "\\buser(s)?\\b"
+  },
+  {
+   "rule": "the app naming itself",
+   "pattern": "\\b(love[ -]?tap|lovetap)\\b"
+  },
+  {
+   "rule": "onboarding voice",
+   "pattern": "\\b(get started|let's go|tap here to|you're all set)\\b"
+  },
+  {
+   "rule": "engagement machinery",
+   "pattern": "\\b(unlock|earn|reward|achievement|badge|level up|points)\\b"
+  },
+  {
+   "rule": "streak language on the rituals surface",
+   "pattern": "\\b(streak|best run|broken|reset|don't break|keep it up|days in a row)\\b",
+   "only_in": "files whose path contains 'ritual'"
+  }
+ ],
  "findings": [],
+ "read": [
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:96",
+   "text": "no dates that matter yet. add the first."
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:157",
+   "text": "${m.yearsAt(next!)} years"
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:26",
+   "text": "nowhere planned. that's fine."
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:71",
+   "text": "add one"
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:80",
+   "text": "nothing kept yet."
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:96",
+   "text": "nothing passed between you yet."
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:93",
+   "text": "add one"
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:97",
+   "text": "nothing to do. suspicious."
+  },
+  {
+   "where": "app/lib/regions/chat/blob_widgets.dart:212",
+   "text": "${secs ~/ 60}:${(secs % 60).toString().padLeft(2, "
+  },
+  {
+   "where": "app/lib/regions/chat/blob_widgets.dart:287",
+   "text": "${(durationMs! / 1000).round()}s"
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:584",
+   "text": "${scope.partner.name} ${S.typing}"
+  },
+  {
+   "where": "app/lib/regions/chat/renderers.dart:147",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/regions/chat/renderers.dart:183",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/regions/chat/renderers.dart:232",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/regions/chat/renderers.dart:246",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/regions/chat/renderers.dart:283",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/regions/chat/renderers.dart:300",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/regions/chat/renderers.dart:328",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/regions/chat/renderers.dart:329",
+   "text": "a new one, ${c.event.author == c.me ? "
+  },
+  {
+   "where": "app/lib/regions/chat/search_page.dart:115",
+   "text": "looking for"
+  },
+  {
+   "where": "app/lib/regions/chat/viewer_page.dart:161",
+   "text": "put it back"
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:501",
+   "text": "${((event.payload["
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:589",
+   "text": "${DateFormat("
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:257",
+   "text": "$hh:$mm${mine ? "
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:417",
+   "text": "a line about now"
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:109",
+   "text": "a feeling of your own"
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:116",
+   "text": "what it is called"
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:124",
+   "text": "which register"
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:142",
+   "text": "what it looks like"
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:164",
+   "text": "how it should feel"
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:214",
+   "text": "keep it"
+  },
+  {
+   "where": "app/lib/regions/settings/notifications.dart:122",
+   "text": "quiet from"
+  },
+  {
+   "where": "app/lib/regions/settings/notifications.dart:173",
+   "text": "${value.toString().padLeft(2, "
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:132",
+   "text": "let it interrupt you"
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:159",
+   "text": "make one"
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:203",
+   "text": "write the whole history out"
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:206",
+   "text": "everything either of you wrote is in one log on both phones. this copies it out."
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:293",
+   "text": "two phones, linked ${_ago(paired.pairedAt)}"
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:302",
+   "text": "read six words to them"
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:322",
+   "text": "replace one of the phones"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:67",
+   "text": "put this phone on the tailnet"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:68",
+   "text": "the same private network as the other phone, and nothing else on it."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:69",
+   "text": "waiting for an address on the tailnet"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:73",
+   "text": "trust the certificate the other phone holds"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:74",
+   "text": "so nothing between the two of you can read what goes across."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:75",
+   "text": "waiting for the first connection that verifies"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:79",
+   "text": "read the six words off the other phone"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:80",
+   "text": "say them out loud in the same room. they are only good once."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:81",
+   "text": "waiting for the pairing to complete"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:85",
+   "text": "let it interrupt you"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:86",
+   "text": "you choose which kinds, later, in settings. this only opens the door."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:87",
+   "text": "waiting for notifications to be allowed"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:91",
+   "text": "write the first thing"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:92",
+   "text": "anything. it goes to one person."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:93",
+   "text": "waiting for something written here"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:97",
+   "text": "wait for theirs to arrive"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:98",
+   "text": "when it lands, the two of you are done here."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:99",
+   "text": "waiting for the first thing from them"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:108",
+   "text": "add it to the home screen"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:109",
+   "text": "share, then add to home screen. it will not hold on to anything until you do."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:110",
+   "text": "waiting to be opened from the home screen rather than from a tab"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:114",
+   "text": "put this phone on the tailnet"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:115",
+   "text": "the same private network as the other phone, and nothing else on it."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:116",
+   "text": "waiting for an address on the tailnet"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:120",
+   "text": "install the profile the other phone is serving"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:121",
+   "text": "open its address in Safari, take the profile, then trust it in settings under about, "
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:123",
+   "text": "waiting for the first connection that verifies"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:127",
+   "text": "read the six words off the other phone"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:128",
+   "text": "say them out loud in the same room. they are only good once."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:129",
+   "text": "waiting for the pairing to complete"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:133",
+   "text": "let it interrupt you"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:134",
+   "text": "an iPhone only offers this once the app is on the home screen."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:135",
+   "text": "waiting for notifications to be allowed"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:139",
+   "text": "write the first thing"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:140",
+   "text": "anything. it goes to one person. when a feeling comes back, this phone cannot buzz: "
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:142",
+   "text": "waiting for something written here"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:146",
+   "text": "wait for theirs to arrive"
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:147",
+   "text": "when it lands, the two of you are done here."
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:148",
+   "text": "waiting for the first thing from them"
+  },
+  {
+   "where": "app/lib/setup/setup_region.dart:67",
+   "text": "two phones, one wire between them, nobody else on it."
+  },
+  {
+   "where": "app/lib/setup/setup_region.dart:91",
+   "text": "the other phone is at"
+  },
+  {
+   "where": "app/lib/setup/setup_region.dart:104",
+   "text": "read the six words out"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:12",
+   "text": "write something"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:17",
+   "text": "take it back"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:18",
+   "text": "change it"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:20",
+   "text": "took this back"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:22",
+   "text": "written earlier"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:23",
+   "text": "waiting to send"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:26",
+   "text": "writing\u2026"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:27",
+   "text": "a photo"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:28",
+   "text": "a video"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:29",
+   "text": "a voice note"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:30",
+   "text": "hold to record"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:31",
+   "text": "recording\u2026"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:33",
+   "text": "anything, any time"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:35",
+   "text": "it would not go"
+  },
+  {
+   "where": "app/lib/voice/strings.dart:36",
+   "text": "nothing with that in it."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:37",
+   "text": "a year of it, and every kind of thing in it."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:38",
+   "text": "try fewer words, or a different month."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:39",
+   "text": "first one's yours."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:40",
+   "text": "whatever it is. it only goes to one person."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:45",
+   "text": "still fetching the picture."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:48",
+   "text": "can't reach the other phone. it'll go when it can."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:49",
+   "text": "the other phone isn't answering. keeping this until it does."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:50",
+   "text": "not paired yet."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:53",
+   "text": "nothing from them yet. it will show here."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:54",
+   "text": "their phone tells this one where they are, once it can reach it."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:57",
+   "text": "nowhere planned. that's fine."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:58",
+   "text": "nothing to do. suspicious."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:59",
+   "text": "no dates that matter yet. add the first."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:60",
+   "text": "nothing kept yet."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:63",
+   "text": "it fills in as it happens."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:64",
+   "text": "everything either of you sends ends up here, by day and by kind."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:67",
+   "text": "the built-in ones are here. make one below."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:73",
+   "text": "nothing from them yet. the six words are on the other phone."
+  }
+ ],
  "ok": true
 }

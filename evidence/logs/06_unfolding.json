@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2552,
+   "ms": 2617,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3744
+   "ms": 5984
   },
   {
    "do": "wait",
@@ -24,35 +24,35 @@
   },
   {
    "do": "scrollTo",
-   "ms": 4740
+   "ms": 11882
   },
   {
    "do": "wait",
-   "ms": 1304
+   "ms": 1303
   },
   {
    "do": "far",
-   "ms": 404
+   "ms": 816
   },
   {
    "do": "awaitArrival",
-   "ms": 3046
+   "ms": 4383
   },
   {
    "do": "frames",
-   "ms": 33371
+   "ms": 84183
   },
   {
    "do": "unfold",
-   "ms": 9
+   "ms": 2154
   },
   {
    "do": "frames",
-   "ms": 345472
+   "ms": 1149078
   },
   {
    "do": "report",
-   "ms": 422
+   "ms": 414
   }
  ],
  "shots": [
@@ -74,45 +74,39 @@
    "region": 1,
    "view": {
     "region": "chat",
-    "composer": "",
+    "composer": "the second one, then",
     "attaching": false,
     "replying_to": null,
     "editing": null,
-    "partner_typing": false
+    "partner_typing": true
    },
    "visible": [
-    "0001M3F41R2APQC59QKBMZK4XF",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF",
-    "0001M4GW48FEW3M67XKAZT5051",
-    "0001M4ZQQ0H0PPVTKMMQEE268D",
-    "0001M59VY0YA13H9M86HTA6XNP",
-    "01M1MCJYV8QCZ1SBM42YTV2SJC"
+    "0001MCJ1M0TC6W483J2A1Z4B7F",
+    "0001MCJ1M0TC6W483J2A1Z4B7G",
+    "0001MCJ1M0TC6W483J2A1Z4B7H",
+    "01M1MCWTH1SR5JPBN615XS0Z3S"
    ],
    "tears": {
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
-    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "01M1MCJYV8QCZ1SBM42YTV2SJC": "tear_035"
+    "0001MCJ1M0TC6W483J2A1Z4B7F": "tear_054",
+    "0001MCJ1M0TC6W483J2A1Z4B7G": "tear_016",
+    "0001MCJ1M0TC6W483J2A1Z4B7H": "tear_039",
+    "01M1MCWTH1SR5JPBN615XS0Z3S": "tear_002"
    },
    "stocks": {
-    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
-    "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "01M1MCJYV8QCZ1SBM42YTV2SJC": "graph_04"
+    "0001MCJ1M0TC6W483J2A1Z4B7F": "lined_01",
+    "0001MCJ1M0TC6W483J2A1Z4B7G": "lined_04",
+    "0001MCJ1M0TC6W483J2A1Z4B7H": "legal_01",
+    "01M1MCWTH1SR5JPBN615XS0Z3S": "lined_03"
    },
    "scroll": {
-    "first": 8382,
-    "last": 8387,
-    "of": 8388
+    "first": 8070,
+    "last": 8074,
+    "of": 8074
    },
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 4240,
    "seed": 20260903,
-   "events": 14064,
+   "events": 14073,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -132,19 +126,42 @@
     "held_to": 239
    },
    "sensation": null,
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 419,
+    "pushed": 1,
+    "refused": 0,
+    "pulled": 1,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 0,
+    "cursor": 14073,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connected",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": 14073,
+     "our_cursor": 14073,
+     "last_error": null,
+     "since": "2026-09-06T13:19:51.261Z",
+     "last_contact": "2026-09-06T13:40:53.917Z"
+    }
+   },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-    "pocket_feeling": "ugh",
-    "pocket_at": 1788464400000,
+    "pocket_feeling": null,
+    "pocket_at": null,
     "allowed_to_interrupt": false
    },
    "at": "06_unfolding"
   }
  ],
- "cold_ms": 11024,
+ "cold_ms": 2540,
  "load": {
-  "ms": 11024,
-  "store": "fresh",
+  "ms": 2540,
+  "store": "kept",
   "profile": "profile_seeded"
  },
  "far": [
@@ -156,10 +173,10 @@
  "arrivals": [
   {
    "line": "message back by six. the pigeon is still on the cupboard, year nine have named it.",
-   "before": 8387,
-   "after": 8388,
+   "before": 8073,
+   "after": 8074,
    "at_frame": 0,
-   "waited_ms": 2645
+   "waited_ms": 3982
   }
  ],
  "problems": [],

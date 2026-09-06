@@ -10,65 +10,89 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2343,
+   "ms": 2555,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4262
+   "ms": 3442
   },
   {
    "do": "wait",
-   "ms": 1802
+   "ms": 1804
   },
   {
    "do": "haptics",
-   "ms": 650
+   "ms": 421
   },
   {
    "do": "far",
-   "ms": 509
+   "ms": 523
   },
   {
    "do": "awaitArrival",
-   "ms": 4459
+   "ms": 30559
   },
   {
    "do": "frames",
-   "ms": 244400
+   "ms": 235387
   },
   {
    "do": "far",
-   "ms": 406
+   "ms": 407
   },
   {
    "do": "awaitArrival",
-   "ms": 1475
+   "ms": 1272
   },
   {
    "do": "frames",
-   "ms": 170041
+   "ms": 139582
   },
   {
    "do": "goTo",
-   "ms": 8701
+   "ms": 5440
+  },
+  {
+   "do": "step",
+   "ms": 2076
   },
   {
    "do": "far",
-   "ms": 413
+   "ms": 459
   },
   {
    "do": "awaitArrival",
-   "ms": 2829
+   "ms": 3871
   },
   {
    "do": "frames",
-   "ms": 175184
+   "ms": 145547
+  },
+  {
+   "do": "goTo",
+   "ms": 5324
+  },
+  {
+   "do": "step",
+   "ms": 2088
+  },
+  {
+   "do": "far",
+   "ms": 419
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 3319
+  },
+  {
+   "do": "frames",
+   "ms": 151401
   },
   {
    "do": "report",
-   "ms": 417
+   "ms": 443
   }
  ],
  "shots": [
@@ -89,43 +113,55 @@
    "dir": "evidence/frames/07_feeling_landing",
    "ms": 16,
    "drive": null
+  },
+  {
+   "frames": 107,
+   "dir": "evidence/frames/07_feeling_landing",
+   "ms": 16,
+   "drive": null
   }
  ],
  "reports": [
   {
-   "region": 1,
+   "region": 2,
    "view": {
-    "region": "chat",
-    "composer": "",
-    "attaching": false,
-    "replying_to": null,
-    "editing": null,
-    "partner_typing": false
+    "region": "us",
+    "modules": [
+     {
+      "id": "dates",
+      "events": 81,
+      "glance": "next: the place by the bridge"
+     },
+     {
+      "id": "todos",
+      "events": 199,
+      "glance": "10 open"
+     },
+     {
+      "id": "calendar",
+      "events": 6,
+      "glance": "us in 63 days"
+     },
+     {
+      "id": "rituals",
+      "events": 53,
+      "glance": "last: tuesday soup"
+     },
+     {
+      "id": "shelf",
+      "events": 12,
+      "glance": "waiting on you: the one you said you stopped"
+     }
+    ]
    },
-   "visible": [
-    "01M1MCZ1HY0K340RKAR6B6D9W2",
-    "01M1MD6MXQFXJWXH9SBA089YHQ",
-    "01M1MDC5AR6J360PH7CXF1RCNE"
-   ],
-   "tears": {
-    "01M1MCZ1HY0K340RKAR6B6D9W2": "tear_055",
-    "01M1MD6MXQFXJWXH9SBA089YHQ": "tear_018",
-    "01M1MDC5AR6J360PH7CXF1RCNE": "tear_040"
-   },
-   "stocks": {
-    "01M1MCZ1HY0K340RKAR6B6D9W2": "lined_01",
-    "01M1MD6MXQFXJWXH9SBA089YHQ": "lined_01",
-    "01M1MDC5AR6J360PH7CXF1RCNE": "receipt_01"
-   },
-   "scroll": {
-    "first": 8388,
-    "last": 8390,
-    "of": 8391
-   },
+   "visible": [],
+   "tears": {},
+   "stocks": {},
+   "scroll": null,
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 5168,
+   "driven_ms": 7728,
    "seed": 20260903,
-   "events": 14070,
+   "events": 14075,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -136,57 +172,78 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": null
+    "sequence": "unfold_thirds",
+    "length": 240,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
    },
    "sensation": {
-    "feeling": "nuzzle",
+    "feeling": "soup",
     "channel": "page",
-    "total_ms": 990,
-    "started_at": "2026-09-06T04:38:05.745Z",
+    "total_ms": 1200,
+    "started_at": "2026-09-06T17:39:58.297Z",
     "pattern": [
      {
-      "ms": 90,
-      "amp": 134
+      "ms": 150,
+      "amp": 119
      },
      {
-      "ms": 60,
+      "ms": 150,
       "amp": 0
      },
      {
-      "ms": 90,
-      "amp": 134
+      "ms": 150,
+      "amp": 119
      },
      {
-      "ms": 60,
+      "ms": 150,
       "amp": 0
      },
      {
-      "ms": 90,
-      "amp": 134
-     },
-     {
-      "ms": 200,
-      "amp": 0
-     },
-     {
-      "ms": 400,
-      "amp": 98
+      "ms": 600,
+      "amp": 156
      }
     ]
    },
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 37,
+    "pushed": 7,
+    "refused": 0,
+    "pulled": 8,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 0,
+    "cursor": 14075,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connected",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": 14075,
+     "our_cursor": 14075,
+     "last_error": null,
+     "since": "2026-09-06T17:30:14.233Z",
+     "last_contact": "2026-09-06T17:42:23.751Z"
+    }
+   },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-    "pocket_feeling": "nuzzle",
+    "pocket_feeling": "soup",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false
    },
    "at": "07_feeling_landing"
   }
  ],
- "cold_ms": 2774,
+ "cold_ms": 12577,
  "load": {
-  "ms": 2774,
-  "store": "kept",
+  "ms": 12577,
+  "store": "fresh",
   "profile": "profile_seeded"
  },
  "far": [
@@ -201,34 +258,49 @@
   {
    "line": "feeling nuzzle 0.8",
    "at_frame": 221
+  },
+  {
+   "line": "feeling soup 0.85",
+   "at_frame": 314
+  }
+ ],
+ "said_again": [
+  {
+   "line": "feeling hold 0.9",
+   "times": 3
   }
  ],
  "arrivals": [
   {
    "line": "feeling hold 0.9",
-   "before": 8388,
-   "after": 8389,
+   "before": 8069,
+   "after": 8070,
    "at_frame": 0,
-   "waited_ms": 4059
+   "waited_ms": 30158
   },
   {
    "line": "feeling squeeze 0.75",
-   "before": 8389,
-   "after": 8390,
+   "before": 8070,
+   "after": 8071,
    "at_frame": 150,
-   "waited_ms": 1074
+   "waited_ms": 871
   },
   {
    "line": "feeling nuzzle 0.8",
-   "before": 8390,
-   "after": 8391,
+   "before": 8071,
+   "after": 8072,
    "at_frame": 221,
-   "waited_ms": 2428
+   "waited_ms": 3468
+  },
+  {
+   "line": "feeling soup 0.85",
+   "before": 8072,
+   "after": 8073,
+   "at_frame": 314,
+   "waited_ms": 2918
   }
  ],
- "problems": [
-  "pageerror: object @  at b42 (http://127.0.0.1:8480/main.dart.js:6563:8) at aSj (http://127.0.0.1:8480/main.dart.js:6705:6) at $0 (http://127.0.0.1:8480/main.dart.js:44602:11) at bcf (http://127.0.0.1:8480/main.dart.js:5660:7) at bcC (http://127.0.0.1:8480/main"
- ],
- "ok": false,
+ "problems": [],
+ "ok": true,
  "steps_landed": true
 }

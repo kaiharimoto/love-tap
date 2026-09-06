@@ -14,7 +14,7 @@
   },
   {
    "do": "pair",
-   "ms": 1892
+   "ms": 1696
   },
   {
    "do": "wait",
@@ -22,75 +22,111 @@
   },
   {
    "do": "goTo",
-   "ms": 3967
+   "ms": 3643
   },
   {
    "do": "far",
-   "ms": 670
+   "ms": 758
   },
   {
    "do": "wait",
-   "ms": 3004
+   "ms": 3002
   },
   {
    "do": "far",
-   "ms": 956
+   "ms": 667
   },
   {
    "do": "awaitArrival",
-   "ms": 2429
+   "ms": 1280
   },
   {
    "do": "step",
-   "ms": 5855
+   "ms": 3926
   },
   {
    "do": "frames",
-   "ms": 324555
+   "ms": 221901
   },
   {
    "do": "goTo",
-   "ms": 8781
+   "ms": 6740
+  },
+  {
+   "do": "step",
+   "ms": 2470
   },
   {
    "do": "far",
-   "ms": 518
+   "ms": 700
   },
   {
    "do": "awaitArrival",
-   "ms": 6102
+   "ms": 2840
   },
   {
    "do": "frames",
-   "ms": 81906
+   "ms": 29345
   },
   {
    "do": "far",
-   "ms": 855
+   "ms": 503
   },
   {
    "do": "awaitArrival",
-   "ms": 3097
+   "ms": 1382
   },
   {
    "do": "frames",
-   "ms": 128957
+   "ms": 142739
   },
   {
    "do": "far",
-   "ms": 513
+   "ms": 504
   },
   {
    "do": "awaitArrival",
-   "ms": 2510
+   "ms": 1507
   },
   {
    "do": "frames",
-   "ms": 271637
+   "ms": 244969
+  },
+  {
+   "do": "goTo",
+   "ms": 4841
+  },
+  {
+   "do": "step",
+   "ms": 2190
+  },
+  {
+   "do": "far",
+   "ms": 621
+  },
+  {
+   "do": "wait",
+   "ms": 2102
+  },
+  {
+   "do": "far",
+   "ms": 1154
+  },
+  {
+   "do": "far",
+   "ms": 2566
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1833
+  },
+  {
+   "do": "frames",
+   "ms": 156715
   },
   {
    "do": "report",
-   "ms": 524
+   "ms": 532
   }
  ],
  "shots": [
@@ -117,46 +153,55 @@
    "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
    "drive": null
+  },
+  {
+   "frames": 107,
+   "dir": "evidence/frames/08_state_propagating",
+   "ms": 16,
+   "drive": null
   }
  ],
  "reports": [
   {
-   "region": 1,
+   "region": 2,
    "view": {
-    "region": "chat",
-    "composer": "",
-    "attaching": false,
-    "replying_to": null,
-    "editing": null,
-    "partner_typing": false
+    "region": "us",
+    "modules": [
+     {
+      "id": "dates",
+      "events": 81,
+      "glance": "next: the place by the bridge"
+     },
+     {
+      "id": "todos",
+      "events": 199,
+      "glance": "10 open"
+     },
+     {
+      "id": "calendar",
+      "events": 6,
+      "glance": "us in 63 days"
+     },
+     {
+      "id": "rituals",
+      "events": 53,
+      "glance": "last: tuesday soup"
+     },
+     {
+      "id": "shelf",
+      "events": 12,
+      "glance": "waiting on you: the one you said you stopped"
+     }
+    ]
    },
-   "visible": [
-    "01M1MCK1R91G2MACRTDRCCV9EN",
-    "01M1MCXFWT99DAK21ZSK898827",
-    "01M1MD06JY57419S7RFC1YGK6N",
-    "01M1MD483VTAEH4NYZP4JZ3P2Q"
-   ],
-   "tears": {
-    "01M1MCK1R91G2MACRTDRCCV9EN": "tear_055",
-    "01M1MCXFWT99DAK21ZSK898827": "tear_018",
-    "01M1MD06JY57419S7RFC1YGK6N": "tear_040",
-    "01M1MD483VTAEH4NYZP4JZ3P2Q": "tear_003"
-   },
-   "stocks": {
-    "01M1MCK1R91G2MACRTDRCCV9EN": "lined_02",
-    "01M1MCXFWT99DAK21ZSK898827": "lined_03",
-    "01M1MD06JY57419S7RFC1YGK6N": "lined_04",
-    "01M1MD483VTAEH4NYZP4JZ3P2Q": "receipt_01"
-   },
-   "scroll": {
-    "first": 8388,
-    "last": 8391,
-    "of": 8392
-   },
+   "visible": [],
+   "tears": {},
+   "stocks": {},
+   "scroll": null,
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 6480,
+   "driven_ms": 9040,
    "seed": 20260903,
-   "events": 14072,
+   "events": 14093,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -176,70 +221,69 @@
     "held_to": 23
    },
    "sensation": {
-    "feeling": "here",
+    "feeling": "soup",
     "channel": "page",
-    "total_ms": 2000,
-    "started_at": "2026-09-06T08:32:10.561Z",
+    "total_ms": 1200,
+    "started_at": "2026-09-06T18:07:15.058Z",
     "pattern": [
      {
-      "ms": 400,
-      "amp": 125
+      "ms": 150,
+      "amp": 109
      },
      {
-      "ms": 400,
+      "ms": 150,
       "amp": 0
      },
      {
-      "ms": 400,
-      "amp": 125
+      "ms": 150,
+      "amp": 109
      },
      {
-      "ms": 400,
+      "ms": 150,
       "amp": 0
      },
      {
-      "ms": 400,
-      "amp": 125
+      "ms": 600,
+      "amp": 142
      }
     ]
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 40,
-    "pushed": 6,
+    "rounds": 45,
+    "pushed": 5,
     "refused": 0,
-    "pulled": 4,
+    "pulled": 8,
     "blobs_fetched": 0,
-    "faults": 1,
-    "last_fault": "ConstraintError: Index key is not unique",
+    "faults": 0,
     "pending": 0,
-    "cursor": 14072,
+    "cursor": 14093,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14072,
-     "our_cursor": 14072,
+     "peer_cursor": 14093,
+     "our_cursor": 14093,
      "last_error": null,
-     "since": "2026-09-06T08:22:29.720Z",
-     "last_contact": "2026-09-06T08:36:42.615Z"
+     "since": "2026-09-06T17:55:44.209Z",
+     "last_contact": "2026-09-06T18:09:42.766Z"
     }
    },
    "ambient": {
-    "standing_line": "restless · week one, and the room smells right again · travelling · 7 hours ago",
-    "pocket_feeling": "here",
+    "standing_line": "restless · week one, and the room smells right again · out · 7 hours ago",
+    "pocket_feeling": "soup",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false
    },
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 11612,
+ "cold_ms": 2599,
  "load": {
-  "ms": 11612,
-  "store": "fresh",
+  "ms": 2599,
+  "store": "kept",
   "profile": "profile_seeded"
  },
  "far": [
@@ -262,41 +306,58 @@
   {
    "line": "feeling here 0.8",
    "at_frame": 239
+  },
+  {
+   "line": "state availability heads_down",
+   "at_frame": 395
+  },
+  {
+   "line": "state place out",
+   "at_frame": 395
+  },
+  {
+   "line": "feeling soup 0.7",
+   "at_frame": 395
   }
  ],
  "arrivals": [
   {
    "line": "feeling hold 0.92",
-   "before": 8387,
-   "after": 8388,
+   "before": 8079,
+   "after": 8080,
    "at_frame": 0,
-   "waited_ms": 1928
+   "waited_ms": 779
   },
   {
    "line": "message it is raining here too",
-   "before": 8389,
-   "after": 8390,
+   "before": 8081,
+   "after": 8082,
    "at_frame": 149,
-   "waited_ms": 5601
+   "waited_ms": 2339
   },
   {
    "line": "feeling squeeze 0.6",
-   "before": 8390,
-   "after": 8391,
+   "before": 8082,
+   "after": 8083,
    "at_frame": 168,
-   "waited_ms": 2596
+   "waited_ms": 882
   },
   {
    "line": "feeling here 0.8",
-   "before": 8391,
-   "after": 8392,
+   "before": 8083,
+   "after": 8084,
    "at_frame": 239,
-   "waited_ms": 2007
+   "waited_ms": 1006
+  },
+  {
+   "line": "feeling soup 0.7",
+   "before": 8086,
+   "after": 8087,
+   "at_frame": 395,
+   "waited_ms": 1331
   }
  ],
- "problems": [
-  "pageerror: object @  at b44 (http://127.0.0.1:8480/main.dart.js:6563:8) at aSl (http://127.0.0.1:8480/main.dart.js:6705:6) at $0 (http://127.0.0.1:8480/main.dart.js:44608:11) at bch (http://127.0.0.1:8480/main.dart.js:5660:7) at bcE (http://127.0.0.1:8480/main"
- ],
- "ok": false,
+ "problems": [],
+ "ok": true,
  "steps_landed": true
 }

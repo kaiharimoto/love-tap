@@ -10,33 +10,33 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3191,
+   "ms": 3541,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4404
+   "ms": 4437
   },
   {
    "do": "wait",
-   "ms": 1704
+   "ms": 1707
   },
   {
    "do": "search",
-   "ms": 4732
+   "ms": 4990
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1906
   },
   {
    "do": "shot",
-   "ms": 4674
+   "ms": 4166
   },
   {
    "do": "report",
-   "ms": 743
+   "ms": 723
   }
  ],
  "shots": [
@@ -65,12 +65,12 @@
     "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
-    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
+    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_023",
+    "0001M3F41R2APQC59QKBMZK4XF": "tear_045",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_008",
+    "0001M4GW48FEW3M67XKAZT5051": "tear_029",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_050",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_012"
    },
    "stocks": {
     "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
@@ -81,9 +81,9 @@
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
    },
    "scroll": {
-    "first": 8381,
-    "last": 8387,
-    "of": 8387
+    "first": 8063,
+    "last": 8069,
+    "of": 8069
    },
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 144,
@@ -102,6 +102,29 @@
     "sequence": null
    },
    "sensation": null,
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 0,
+    "pushed": 0,
+    "refused": 0,
+    "pulled": 0,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 0,
+    "cursor": 14062,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connected",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": 14062,
+     "our_cursor": 14062,
+     "last_error": null,
+     "since": "2026-09-06T13:16:38.137Z",
+     "last_contact": "2026-09-06T13:16:58.159Z"
+    }
+   },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "ugh",
@@ -111,12 +134,13 @@
    "at": "12_search.png"
   }
  ],
- "cold_ms": 3146,
+ "cold_ms": 2615,
  "load": {
-  "ms": 3146,
+  "ms": 2615,
   "store": "kept",
   "profile": "profile_seeded"
  },
  "problems": [],
- "ok": true
+ "ok": true,
+ "steps_landed": true
 }

@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2254,
+   "ms": 3376,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4118
+   "ms": 4567
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1705
   },
   {
    "do": "scrollTo",
-   "ms": 4708
+   "ms": 4696
   },
   {
    "do": "wait",
@@ -32,35 +32,43 @@
   },
   {
    "do": "stage",
-   "ms": 20915
+   "ms": 40768
   },
   {
    "do": "wait",
-   "ms": 2505
+   "ms": 2503
   },
   {
    "do": "far",
-   "ms": 706
+   "ms": 707
   },
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2301
   },
   {
    "do": "far",
-   "ms": 704
+   "ms": 2777
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1903
+  },
+  {
+   "do": "openSender",
+   "ms": 10486
+  },
+  {
+   "do": "wait",
+   "ms": 1203
   },
   {
    "do": "shot",
-   "ms": 3392
+   "ms": 5914
   },
   {
    "do": "report",
-   "ms": 717
+   "ms": 728
   }
  ],
  "shots": [
@@ -74,9 +82,9 @@
    "region": 1,
    "view": {
     "region": "chat",
-    "composer": "",
-    "attaching": false,
-    "replying_to": null,
+    "composer": "the second one, then",
+    "attaching": true,
+    "replying_to": "0001M4ZQQ0H0PPVTKMMQEE268D",
     "editing": null,
     "partner_typing": true
    },
@@ -84,38 +92,38 @@
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8K",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8M",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8N",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8P"
+    "0001MCJ1M0TC6W483J2A1Z4B7E",
+    "0001MCJ1M0TC6W483J2A1Z4B7F",
+    "0001MCJ1M0TC6W483J2A1Z4B7G",
+    "0001MCJ1M0TC6W483J2A1Z4B7H"
    ],
    "tears": {
-    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8K": "tear_035",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8M": "tear_055",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8N": "tear_018",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8P": "tear_040"
+    "0001M4GW48FEW3M67XKAZT5051": "tear_023",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_045",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_008",
+    "0001MCJ1M0TC6W483J2A1Z4B7E": "tear_029",
+    "0001MCJ1M0TC6W483J2A1Z4B7F": "tear_050",
+    "0001MCJ1M0TC6W483J2A1Z4B7G": "tear_012",
+    "0001MCJ1M0TC6W483J2A1Z4B7H": "tear_034"
    },
    "stocks": {
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8K": "looseleaf_01",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8M": "looseleaf_04",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8N": "lined_02",
-    "0001MCJ1M0Z2P8BKKACS5XNZ8P": "lined_02"
+    "0001MCJ1M0TC6W483J2A1Z4B7E": "looseleaf_03",
+    "0001MCJ1M0TC6W483J2A1Z4B7F": "lined_01",
+    "0001MCJ1M0TC6W483J2A1Z4B7G": "lined_04",
+    "0001MCJ1M0TC6W483J2A1Z4B7H": "legal_01"
    },
    "scroll": {
-    "first": 8384,
-    "last": 8391,
-    "of": 8391
+    "first": 8063,
+    "last": 8070,
+    "of": 8070
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 192,
+   "driven_ms": 240,
    "seed": 20260903,
-   "events": 14067,
+   "events": 14071,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -129,6 +137,29 @@
     "sequence": null
    },
    "sensation": null,
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 7,
+    "pushed": 8,
+    "refused": 0,
+    "pulled": 1,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 0,
+    "cursor": 14071,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connected",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": 14071,
+     "our_cursor": 14071,
+     "last_error": null,
+     "since": "2026-09-06T13:17:03.578Z",
+     "last_contact": "2026-09-06T13:18:27.106Z"
+    }
+   },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "ugh",
@@ -138,9 +169,9 @@
    "at": "13_messenger_states.png"
   }
  ],
- "cold_ms": 2950,
+ "cold_ms": 2571,
  "load": {
-  "ms": 2950,
+  "ms": 2571,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -155,5 +186,6 @@
   }
  ],
  "problems": [],
- "ok": true
+ "ok": true,
+ "steps_landed": true
 }

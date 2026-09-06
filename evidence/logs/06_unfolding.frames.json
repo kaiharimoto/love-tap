@@ -1,8 +1,8 @@
 {
  "dir": "/tmp/lovetap-capture/06_unfolding",
  "frames": 256,
- "fps": 60.0,
- "seconds": 4.27,
+ "fps": 62.5,
+ "seconds": 4.1,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
@@ -17,9 +17,12 @@
    "dir": "evidence/frames/06_unfolding"
   }
  ],
+ "cuts_between_runs": [
+  15
+ ],
  "app_seconds": 4.1,
- "playback_over_app_time": 1.042,
- "mean_change_per_frame": 0.0058,
+ "playback_over_app_time": 1.0,
+ "mean_change_per_frame": 0.01067,
  "repeated_frames": 0,
  "repeated_fraction": 0.0,
  "longest_still_run": 0,

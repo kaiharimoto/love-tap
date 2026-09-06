@@ -223,7 +223,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // top near the top of the frame filled the screen with two tall rows and a card — seven
       // notes, where the standard for the chat hero is eight — and a frame of the rare kinds with
       // nothing around them is not a picture of a thread.
-      _scroll.jumpTo(index: window.$1, alignment: 0.52);
+      _scroll.jumpTo(index: window.$1, alignment: 0.34);
       await Future<void>.delayed(const Duration(milliseconds: 40));
       return;
     } else {

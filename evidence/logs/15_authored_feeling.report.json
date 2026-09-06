@@ -5,7 +5,7 @@
   "paired": true,
   "devices": [
    "android-capture",
-   "pwa-mtpf6m86"
+   "pwa-mtq37nfb"
   ],
   "link": "connected",
   "authored_feelings": 2
@@ -15,9 +15,9 @@
  "stocks": {},
  "scroll": null,
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 5152,
+ "driven_ms": 6560,
  "seed": 20260903,
- "events": 14067,
+ "events": 14080,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -28,19 +28,13 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": "unfold_thirds",
-  "length": 240,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  },
  "sensation": {
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-06T06:25:36.998Z",
+  "started_at": "2026-09-06T17:50:39.161Z",
   "pattern": [
    {
     "ms": 150,
@@ -63,6 +57,29 @@
     "amp": 161
    }
   ]
+ },
+ "sync": {
+  "transport": "local",
+  "role": "client",
+  "rounds": 30,
+  "pushed": 3,
+  "refused": 0,
+  "pulled": 2,
+  "blobs_fetched": 0,
+  "faults": 0,
+  "pending": 0,
+  "cursor": 14080,
+  "link": {
+   "transport": "local",
+   "role": "client",
+   "state": "connected",
+   "address": "http://127.0.0.1:8480",
+   "peer_cursor": 14080,
+   "our_cursor": 14080,
+   "last_error": null,
+   "since": "2026-09-06T17:42:34.606Z",
+   "last_contact": "2026-09-06T17:52:44.742Z"
+  }
  },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",

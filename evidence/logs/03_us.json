@@ -10,25 +10,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2793,
+   "ms": 3356,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4190
+   "ms": 4007
   },
   {
    "do": "wait",
-   "ms": 2106
+   "ms": 2104
   },
   {
    "do": "shot",
-   "ms": 4646
+   "ms": 4214
   },
   {
    "do": "report",
-   "ms": 744
+   "ms": 726
   }
  ],
  "shots": [
@@ -56,7 +56,7 @@
      {
       "id": "calendar",
       "events": 6,
-      "glance": "us in 64 days"
+      "glance": "us in 63 days"
      },
      {
       "id": "rituals",
@@ -91,6 +91,29 @@
     "sequence": null
    },
    "sensation": null,
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 0,
+    "pushed": 0,
+    "refused": 0,
+    "pulled": 0,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 0,
+    "cursor": 14062,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connected",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": null,
+     "our_cursor": 14062,
+     "last_error": null,
+     "since": "2026-09-06T13:15:39.859Z",
+     "last_contact": "2026-09-06T13:15:42.426Z"
+    }
+   },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "ugh",
@@ -100,12 +123,13 @@
    "at": "03_us.png"
   }
  ],
- "cold_ms": 3076,
+ "cold_ms": 2643,
  "load": {
-  "ms": 3076,
+  "ms": 2643,
   "store": "kept",
   "profile": "profile_seeded"
  },
  "problems": [],
- "ok": true
+ "ok": true,
+ "steps_landed": true
 }

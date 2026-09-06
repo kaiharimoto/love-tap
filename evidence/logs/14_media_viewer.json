@@ -10,33 +10,33 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2662,
+   "ms": 3613,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4394
+   "ms": 5725
   },
   {
    "do": "wait",
-   "ms": 3706
+   "ms": 3704
   },
   {
    "do": "openViewer",
-   "ms": 5094
+   "ms": 6117
   },
   {
    "do": "wait",
-   "ms": 3705
+   "ms": 3703
   },
   {
    "do": "shot",
-   "ms": 4543
+   "ms": 2748
   },
   {
    "do": "report",
-   "ms": 768
+   "ms": 715
   }
  ],
  "shots": [
@@ -50,11 +50,11 @@
    "region": 1,
    "view": {
     "region": "chat",
-    "composer": "",
+    "composer": "the second one, then",
     "attaching": false,
     "replying_to": null,
     "editing": null,
-    "partner_typing": false
+    "partner_typing": true
    },
    "visible": [
     "0003P4A218ZAJ17AQB86SG2SEV",
@@ -63,10 +63,10 @@
     "0003P9AZEGXQ38N9BVB70W8KDR"
    ],
    "tears": {
-    "0003P4A218ZAJ17AQB86SG2SEV": "tear_056",
-    "0003P6AZ60EBYC9RTMBCXWKR7R": "tear_019",
-    "0003P6X94080SW3FA6FBY8NKCB": "tear_042",
-    "0003P9AZEGXQ38N9BVB70W8KDR": "tear_004"
+    "0003P4A218ZAJ17AQB86SG2SEV": "tear_019",
+    "0003P6AZ60EBYC9RTMBCXWKR7R": "tear_042",
+    "0003P6X94080SW3FA6FBY8NKCB": "tear_004",
+    "0003P9AZEGXQ38N9BVB70W8KDR": "tear_024"
    },
    "stocks": {
     "0003P4A218ZAJ17AQB86SG2SEV": "spiral_02",
@@ -75,14 +75,14 @@
     "0003P9AZEGXQ38N9BVB70W8KDR": "lined_03"
    },
    "scroll": {
-    "first": 4382,
-    "last": 4385,
-    "of": 8387
+    "first": 4242,
+    "last": 4245,
+    "of": 8073
    },
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 144,
    "seed": 20260903,
-   "events": 14062,
+   "events": 14071,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -93,28 +93,45 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "sensation": null,
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 7,
+    "pushed": 0,
+    "refused": 0,
+    "pulled": 0,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 0,
+    "cursor": 14071,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connected",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": 14071,
+     "our_cursor": 14071,
+     "last_error": null,
+     "since": "2026-09-06T13:18:32.590Z",
+     "last_contact": "2026-09-06T13:18:56.854Z"
+    }
+   },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-    "pocket_feeling": "ugh",
-    "pocket_at": 1788464400000,
+    "pocket_feeling": null,
+    "pocket_at": null,
     "allowed_to_interrupt": false
    },
    "at": "14_media_viewer.png"
   }
  ],
- "cold_ms": 11374,
+ "cold_ms": 2698,
  "load": {
-  "ms": 11374,
-  "store": "fresh",
+  "ms": 2698,
+  "store": "kept",
   "profile": "profile_seeded"
  },
  "problems": [],

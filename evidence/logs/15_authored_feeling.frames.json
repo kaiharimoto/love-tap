@@ -1,13 +1,28 @@
 {
  "dir": "/tmp/lovetap-capture/15_authored_feeling",
- "frames": 304,
- "fps": 60.0,
- "seconds": 5.07,
+ "frames": 364,
+ "fps": 62.5,
+ "seconds": 5.82,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
   {
-   "frames": 17,
+   "frames": 20,
+   "step_ms": 16,
+   "dir": "evidence/frames/15_authored_feeling"
+  },
+  {
+   "frames": 19,
+   "step_ms": 16,
+   "dir": "evidence/frames/15_authored_feeling"
+  },
+  {
+   "frames": 19,
+   "step_ms": 16,
+   "dir": "evidence/frames/15_authored_feeling"
+  },
+  {
+   "frames": 19,
    "step_ms": 16,
    "dir": "evidence/frames/15_authored_feeling"
   },
@@ -28,13 +43,16 @@
   }
  ],
  "cuts_between_runs": [
-  16,
-  91,
-  197
+  19,
+  38,
+  57,
+  76,
+  151,
+  257
  ],
- "app_seconds": 4.86,
- "playback_over_app_time": 1.042,
- "mean_change_per_frame": 0.01413,
+ "app_seconds": 5.82,
+ "playback_over_app_time": 1.0,
+ "mean_change_per_frame": 0.01631,
  "repeated_frames": 0,
  "repeated_fraction": 0.0,
  "longest_still_run": 0,
@@ -44,10 +62,10 @@
  "strip": "evidence/crops/15_authored_feeling_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/15_authored_feeling/000000.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000061.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000121.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000182.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000242.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000303.png"
+  "/tmp/lovetap-capture/15_authored_feeling/000073.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000145.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000218.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000290.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000363.png"
  ]
 }

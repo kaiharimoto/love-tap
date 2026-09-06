@@ -6,42 +6,50 @@
   "attaching": false,
   "replying_to": null,
   "editing": null,
-  "partner_typing": false
+  "partner_typing": false,
+  "anchor": "types:voice_note,video at rows 7286 to 7290 of 8069",
+  "kinds": {
+   "message": 4,
+   "state_passive": 1,
+   "voice_note": 1,
+   "ritual_kept": 1,
+   "video": 1
+  }
  },
  "visible": [
-  "0002TXKD88ZJPQ3PXPG1DQ0CN8",
-  "0002TY53N816B1Y330XQS2B0AX",
-  "0002V0E6H000S96SY78DF5NFTE",
-  "0002V0PH48RXHYX3MJ7PZ1PMBG",
-  "0002V0SDX06FA58CJ9JXH23W7R",
-  "0002V11RG88S9FGS842FKJ9ZHQ",
-  "0002V17SVRQY5E5S69MJ3HT7NT",
-  "0002V1KKSGZBD11H39SVDW9WD5"
+  "00035D7DB0DVBY62TTFYGQRT5B",
+  "00035DFJ2RVAY9KNK0GR8WXBBN",
+  "00035QBS7834K6WJZ5GA9BB7X4",
+  "00035SVVQ8H4ZJ6PJHER30ZHDF",
+  "00035SYSF8VY7FDB5A9KVMFWBE",
+  "00035TAR98HM1YCSC72P57B58R",
+  "00035THC6GKTN6JK7V1X6SPKVM",
+  "00035TQX600XSKGE05FZJCV7ZX"
  ],
  "tears": {
-  "0002TXKD88ZJPQ3PXPG1DQ0CN8": "tear_003",
-  "0002TY53N816B1Y330XQS2B0AX": "tear_023",
-  "0002V0E6H000S96SY78DF5NFTE": "tear_045",
-  "0002V0PH48RXHYX3MJ7PZ1PMBG": "tear_008",
-  "0002V0SDX06FA58CJ9JXH23W7R": "tear_029",
-  "0002V11RG88S9FGS842FKJ9ZHQ": "tear_050",
-  "0002V17SVRQY5E5S69MJ3HT7NT": "tear_012",
-  "0002V1KKSGZBD11H39SVDW9WD5": "tear_034"
+  "00035D7DB0DVBY62TTFYGQRT5B": "tear_015",
+  "00035DFJ2RVAY9KNK0GR8WXBBN": "tear_037",
+  "00035QBS7834K6WJZ5GA9BB7X4": "tear_001",
+  "00035SVVQ8H4ZJ6PJHER30ZHDF": "tear_020",
+  "00035SYSF8VY7FDB5A9KVMFWBE": "tear_043",
+  "00035TAR98HM1YCSC72P57B58R": "tear_005",
+  "00035THC6GKTN6JK7V1X6SPKVM": "tear_026",
+  "00035TQX600XSKGE05FZJCV7ZX": "tear_048"
  },
  "stocks": {
-  "0002TXKD88ZJPQ3PXPG1DQ0CN8": "looseleaf_03",
-  "0002TY53N816B1Y330XQS2B0AX": "lined_04",
-  "0002V0E6H000S96SY78DF5NFTE": "lined_01",
-  "0002V0PH48RXHYX3MJ7PZ1PMBG": "looseleaf_02",
-  "0002V0SDX06FA58CJ9JXH23W7R": "lined_02",
-  "0002V11RG88S9FGS842FKJ9ZHQ": "looseleaf_02",
-  "0002V17SVRQY5E5S69MJ3HT7NT": "lined_04",
-  "0002V1KKSGZBD11H39SVDW9WD5": "index_02"
+  "00035D7DB0DVBY62TTFYGQRT5B": "lined_03",
+  "00035DFJ2RVAY9KNK0GR8WXBBN": "lined_04",
+  "00035QBS7834K6WJZ5GA9BB7X4": "lined_04",
+  "00035SVVQ8H4ZJ6PJHER30ZHDF": "legal_02",
+  "00035SYSF8VY7FDB5A9KVMFWBE": "graph_02",
+  "00035TAR98HM1YCSC72P57B58R": "legal_01",
+  "00035THC6GKTN6JK7V1X6SPKVM": "lined_03",
+  "00035TQX600XSKGE05FZJCV7ZX": "lined_03"
  },
  "scroll": {
-  "first": 5195,
-  "last": 5202,
-  "of": 8387
+  "first": 7283,
+  "last": 7290,
+  "of": 8069
  },
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 144,
@@ -57,9 +65,38 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": null
+  "sequence": "unfold_thirds",
+  "length": 240,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
  },
  "sensation": null,
+ "sync": {
+  "transport": "local",
+  "role": "client",
+  "rounds": 1,
+  "pushed": 1,
+  "refused": 0,
+  "pulled": 0,
+  "blobs_fetched": 0,
+  "faults": 0,
+  "pending": 0,
+  "cursor": 14062,
+  "link": {
+   "transport": "local",
+   "role": "client",
+   "state": "connected",
+   "address": "http://127.0.0.1:8480",
+   "peer_cursor": 14061,
+   "our_cursor": 14061,
+   "last_error": null,
+   "since": "2026-09-06T18:23:46.616Z",
+   "last_contact": "2026-09-06T18:24:11.488Z"
+  }
+ },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
   "pocket_feeling": "ugh",

@@ -1,8 +1,8 @@
 {
- "commit": "05112fe",
+ "commit": "e123014",
  "baseline": {
   "dir": "evidence/.previous",
-  "captured_at": "2026-09-04T20:20:00Z"
+  "captured_at": "2026-09-06T15:20:45.686542+00:00"
  },
  "unchanged_at": 0.999,
  "labels": "new, gone, unchanged, changed \u2014 measured. `judgement` (improved or regressed) is the coherence critic's to fill in; SSIM does not know whether a change is an improvement.",
@@ -10,163 +10,147 @@
   {
    "artifact": "01_pulse.png",
    "label": "changed",
-   "ssim": 0.5262,
+   "ssim": 0.8908,
    "judgement": null,
-   "sha": "894a817df7fedcd4",
-   "previous_sha": "b2a2cdd3f75bb5a2",
-   "label_basis": "ssim 0.5262 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "84088d8f211e9a17",
+   "previous_sha": "f499bff035749e34",
+   "label_basis": "ssim 0.8908 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "02_chat.png",
    "label": "changed",
-   "ssim": 0.4794,
+   "ssim": 0.6148,
    "judgement": null,
-   "sha": "4aba9bf4f9dde116",
-   "previous_sha": "2eddfe7d23a5a6ce",
-   "label_basis": "ssim 0.4794 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "d7d017473c583829",
+   "previous_sha": "4fd0a52db9325c7e",
+   "label_basis": "ssim 0.6148 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "03_us.png",
-   "label": "changed",
-   "ssim": 0.4829,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "sha": "7274a126b8b5db54",
-   "previous_sha": "57d701806814189d",
-   "label_basis": "ssim 0.4829 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "5b7fbee236901f78",
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "04_moments.png",
-   "label": "changed",
-   "ssim": 0.3844,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "sha": "c30b0e74ca5e19ae",
-   "previous_sha": "75c2bf727833dc95",
-   "label_basis": "ssim 0.3844 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "0de1b0488ad8bab8",
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "05_settings.png",
    "label": "changed",
-   "ssim": 0.5331,
+   "ssim": 0.9989,
    "judgement": null,
-   "sha": "8804abf989a9e6d7",
-   "previous_sha": "7d39af07414e3df3",
-   "label_basis": "ssim 0.5331 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "0d334b6c42e4db19",
+   "previous_sha": "9484a2ef83567c05",
+   "label_basis": "ssim 0.9989 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "06_unfolding.mp4",
-   "label": "changed",
-   "ssim": 0.3878,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "sha": "51525ac7a6f555ec",
-   "previous_sha": "9258a900e5542e43",
-   "label_basis": "ssim 0.3878 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "5dd5241da59aaf27",
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "changed",
-   "ssim": 0.404,
+   "ssim": 0.8964,
    "judgement": null,
-   "sha": "b971b20a815be57e",
-   "previous_sha": "4411296e95a466b6",
-   "label_basis": "ssim 0.404 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "2df6061ab2234a2c",
+   "previous_sha": "357188de1a5ef22d",
+   "label_basis": "ssim 0.8964 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
-   "ssim": 0.4032,
+   "ssim": 0.8613,
    "judgement": null,
-   "sha": "0e83bdcd4f20ac74",
-   "previous_sha": "f09d4f29522f4cd0",
-   "label_basis": "ssim 0.4032 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "9f09a1f123cbe5ea",
+   "previous_sha": "7e15ca2f4e28941d",
+   "label_basis": "ssim 0.8613 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": "unchanged",
-   "why": "not captured in this session or the last",
-   "judged_because": "unchanged \u2014 absent in this capture and the last; nothing moved, and the two-device view remains unevidenced.",
-   "judged_by": "coherence critic"
+   "judgement": null,
+   "why": "not captured in this session or the last"
   },
   {
    "artifact": "10_first_run.png",
-   "label": "changed",
-   "ssim": 0.38,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "sha": "8979ebffa1482d88",
-   "previous_sha": "a77ad342a3ca9a27",
-   "label_basis": "ssim 0.38 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "42320b8ba8e3aadc",
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "11_chat_scroll.mp4",
-   "label": "changed",
-   "ssim": 0.3403,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "sha": "6f8a4e835399fc4b",
-   "previous_sha": "e2cc084389d90629",
-   "label_basis": "ssim 0.3403 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "cc1c7c7a779c82a3",
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "12_search.png",
-   "label": "changed",
-   "ssim": 0.3401,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "sha": "8856eb05d9cacea3",
-   "previous_sha": "1530b4e94e1c2ac6",
-   "label_basis": "ssim 0.3401 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "6fbf377718c721b8",
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "13_messenger_states.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 3324969,
-   "sha": "640e4c94dfad9fd6",
-   "why": "there was no previous capture of this"
+   "sha": "7396e942f2435fdf",
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "14_media_viewer.png",
-   "label": "changed",
-   "ssim": 0.5781,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "sha": "598385204ed084e6",
-   "previous_sha": "c06f351b4d18d7ea",
-   "label_basis": "ssim 0.5781 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "08eea760651c26af",
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "changed",
-   "ssim": 0.3324,
+   "ssim": null,
    "judgement": null,
-   "sha": "4e0b1209f490a839",
-   "previous_sha": "fd60d829ec215418",
-   "label_basis": "ssim 0.3324 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "why": "the clips differ; no frame could be pulled to measure how"
   },
   {
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": "unchanged",
-   "why": "not captured in this session or the last",
-   "judged_because": "unchanged \u2014 absent in this capture and the last; nothing moved, and the Android install path remains unevidenced.",
-   "judged_by": "coherence critic"
+   "judgement": null,
+   "why": "not captured in this session or the last"
   },
   {
    "artifact": "17_setup_pwa.png",
-   "label": "changed",
-   "ssim": 0.7742,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "sha": "9263599e33ee8042",
-   "previous_sha": "e7e8b30102e62a92",
-   "label_basis": "ssim 0.7742 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "f6ee05d5bce584d9",
+   "why": "byte for byte the same file"
   }
  ],
  "counts": {
-  "new": 1,
+  "new": 0,
   "gone": 0,
-  "unchanged": 0,
-  "changed": 14,
+  "unchanged": 9,
+  "changed": 6,
   "absent": 2
- },
- "judgements_from": "the coherence critic's report for this cycle"
+ }
 }

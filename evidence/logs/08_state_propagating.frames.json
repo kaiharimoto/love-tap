@@ -1,8 +1,8 @@
 {
  "dir": "/tmp/lovetap-capture/08_state_propagating",
- "frames": 395,
- "fps": 60.0,
- "seconds": 6.58,
+ "frames": 502,
+ "fps": 62.5,
+ "seconds": 8.03,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
@@ -25,16 +25,22 @@
    "frames": 156,
    "step_ms": 16,
    "dir": "evidence/frames/08_state_propagating"
+  },
+  {
+   "frames": 107,
+   "step_ms": 16,
+   "dir": "evidence/frames/08_state_propagating"
   }
  ],
  "cuts_between_runs": [
   148,
   167,
-  238
+  238,
+  394
  ],
- "app_seconds": 6.32,
- "playback_over_app_time": 1.042,
- "mean_change_per_frame": 0.01253,
+ "app_seconds": 8.03,
+ "playback_over_app_time": 1.0,
+ "mean_change_per_frame": 0.01286,
  "repeated_frames": 0,
  "repeated_fraction": 0.0,
  "longest_still_run": 0,
@@ -44,10 +50,10 @@
  "strip": "evidence/crops/08_state_propagating_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/08_state_propagating/000000.png",
-  "/tmp/lovetap-capture/08_state_propagating/000079.png",
-  "/tmp/lovetap-capture/08_state_propagating/000158.png",
-  "/tmp/lovetap-capture/08_state_propagating/000236.png",
-  "/tmp/lovetap-capture/08_state_propagating/000315.png",
-  "/tmp/lovetap-capture/08_state_propagating/000394.png"
+  "/tmp/lovetap-capture/08_state_propagating/000100.png",
+  "/tmp/lovetap-capture/08_state_propagating/000200.png",
+  "/tmp/lovetap-capture/08_state_propagating/000301.png",
+  "/tmp/lovetap-capture/08_state_propagating/000401.png",
+  "/tmp/lovetap-capture/08_state_propagating/000501.png"
  ]
 }

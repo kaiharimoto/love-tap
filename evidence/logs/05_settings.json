@@ -10,25 +10,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2772,
+   "ms": 3715,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3800
+   "ms": 4334
   },
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2302
   },
   {
    "do": "shot",
-   "ms": 6422
+   "ms": 3240
   },
   {
    "do": "report",
-   "ms": 724
+   "ms": 716
   }
  ],
  "shots": [
@@ -45,7 +45,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtozrgad"
+     "pwa-mtq25j9m"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -71,6 +71,29 @@
     "sequence": null
    },
    "sensation": null,
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 0,
+    "pushed": 1,
+    "refused": 0,
+    "pulled": 0,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 0,
+    "cursor": 14062,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connected",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": null,
+     "our_cursor": 14061,
+     "last_error": null,
+     "since": "2026-09-06T17:00:56.533Z",
+     "last_contact": "2026-09-06T17:00:59.573Z"
+    }
+   },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "ugh",
@@ -80,12 +103,13 @@
    "at": "05_settings.png"
   }
  ],
- "cold_ms": 3003,
+ "cold_ms": 2646,
  "load": {
-  "ms": 3003,
+  "ms": 2646,
   "store": "kept",
   "profile": "profile_seeded"
  },
  "problems": [],
- "ok": true
+ "ok": true,
+ "steps_landed": true
 }

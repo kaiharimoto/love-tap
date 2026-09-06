@@ -5,7 +5,7 @@
   "paired": true,
   "devices": [
    "android-capture",
-   "pwa-mtozrgad"
+   "pwa-mtq25j9m"
   ],
   "link": "connected",
   "authored_feelings": 2
@@ -31,6 +31,29 @@
   "sequence": null
  },
  "sensation": null,
+ "sync": {
+  "transport": "local",
+  "role": "client",
+  "rounds": 0,
+  "pushed": 1,
+  "refused": 0,
+  "pulled": 0,
+  "blobs_fetched": 0,
+  "faults": 0,
+  "pending": 0,
+  "cursor": 14062,
+  "link": {
+   "transport": "local",
+   "role": "client",
+   "state": "connected",
+   "address": "http://127.0.0.1:8480",
+   "peer_cursor": null,
+   "our_cursor": 14061,
+   "last_error": null,
+   "since": "2026-09-06T17:00:56.533Z",
+   "last_contact": "2026-09-06T17:00:59.573Z"
+  }
+ },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
   "pocket_feeling": "ugh",

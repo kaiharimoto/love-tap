@@ -100,6 +100,29 @@
   "held_to": 23
  },
  "sensation": null,
+ "sync": {
+  "transport": "local",
+  "role": "client",
+  "rounds": 0,
+  "pushed": 0,
+  "refused": 0,
+  "pulled": 0,
+  "blobs_fetched": 0,
+  "faults": 0,
+  "pending": 1,
+  "cursor": 14061,
+  "link": {
+   "transport": "local",
+   "role": "client",
+   "state": "connecting",
+   "address": "http://127.0.0.1:8480",
+   "peer_cursor": null,
+   "our_cursor": 14061,
+   "last_error": null,
+   "since": "2026-09-06T13:19:32.825Z",
+   "last_contact": null
+  }
+ },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
   "pocket_feeling": "ugh",

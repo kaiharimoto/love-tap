@@ -1,40 +1,43 @@
 {
- "region": 1,
+ "region": 2,
  "view": {
-  "region": "chat",
-  "composer": "",
-  "attaching": false,
-  "replying_to": null,
-  "editing": null,
-  "partner_typing": false
+  "region": "us",
+  "modules": [
+   {
+    "id": "dates",
+    "events": 81,
+    "glance": "next: the place by the bridge"
+   },
+   {
+    "id": "todos",
+    "events": 199,
+    "glance": "10 open"
+   },
+   {
+    "id": "calendar",
+    "events": 6,
+    "glance": "us in 63 days"
+   },
+   {
+    "id": "rituals",
+    "events": 53,
+    "glance": "last: tuesday soup"
+   },
+   {
+    "id": "shelf",
+    "events": 12,
+    "glance": "waiting on you: the one you said you stopped"
+   }
+  ]
  },
- "visible": [
-  "01M1MCK1R91G2MACRTDRCCV9EN",
-  "01M1MCXFWT99DAK21ZSK898827",
-  "01M1MD06JY57419S7RFC1YGK6N",
-  "01M1MD483VTAEH4NYZP4JZ3P2Q"
- ],
- "tears": {
-  "01M1MCK1R91G2MACRTDRCCV9EN": "tear_055",
-  "01M1MCXFWT99DAK21ZSK898827": "tear_018",
-  "01M1MD06JY57419S7RFC1YGK6N": "tear_040",
-  "01M1MD483VTAEH4NYZP4JZ3P2Q": "tear_003"
- },
- "stocks": {
-  "01M1MCK1R91G2MACRTDRCCV9EN": "lined_02",
-  "01M1MCXFWT99DAK21ZSK898827": "lined_03",
-  "01M1MD06JY57419S7RFC1YGK6N": "lined_04",
-  "01M1MD483VTAEH4NYZP4JZ3P2Q": "receipt_01"
- },
- "scroll": {
-  "first": 8388,
-  "last": 8391,
-  "of": 8392
- },
+ "visible": [],
+ "tears": {},
+ "stocks": {},
+ "scroll": null,
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 6480,
+ "driven_ms": 9040,
  "seed": 20260903,
- "events": 14072,
+ "events": 14093,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -54,60 +57,59 @@
   "held_to": 23
  },
  "sensation": {
-  "feeling": "here",
+  "feeling": "soup",
   "channel": "page",
-  "total_ms": 2000,
-  "started_at": "2026-09-06T08:32:10.561Z",
+  "total_ms": 1200,
+  "started_at": "2026-09-06T18:07:15.058Z",
   "pattern": [
    {
-    "ms": 400,
-    "amp": 125
+    "ms": 150,
+    "amp": 109
    },
    {
-    "ms": 400,
+    "ms": 150,
     "amp": 0
    },
    {
-    "ms": 400,
-    "amp": 125
+    "ms": 150,
+    "amp": 109
    },
    {
-    "ms": 400,
+    "ms": 150,
     "amp": 0
    },
    {
-    "ms": 400,
-    "amp": 125
+    "ms": 600,
+    "amp": 142
    }
   ]
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 40,
-  "pushed": 6,
+  "rounds": 45,
+  "pushed": 5,
   "refused": 0,
-  "pulled": 4,
+  "pulled": 8,
   "blobs_fetched": 0,
-  "faults": 1,
-  "last_fault": "ConstraintError: Index key is not unique",
+  "faults": 0,
   "pending": 0,
-  "cursor": 14072,
+  "cursor": 14093,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14072,
-   "our_cursor": 14072,
+   "peer_cursor": 14093,
+   "our_cursor": 14093,
    "last_error": null,
-   "since": "2026-09-06T08:22:29.720Z",
-   "last_contact": "2026-09-06T08:36:42.615Z"
+   "since": "2026-09-06T17:55:44.209Z",
+   "last_contact": "2026-09-06T18:09:42.766Z"
   }
  },
  "ambient": {
-  "standing_line": "restless · week one, and the room smells right again · travelling · 7 hours ago",
-  "pocket_feeling": "here",
+  "standing_line": "restless · week one, and the room smells right again · out · 7 hours ago",
+  "pocket_feeling": "soup",
   "pocket_at": 1788464400000,
   "allowed_to_interrupt": false
  },

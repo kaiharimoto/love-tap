@@ -1,37 +1,43 @@
 {
- "region": 1,
+ "region": 2,
  "view": {
-  "region": "chat",
-  "composer": "",
-  "attaching": false,
-  "replying_to": null,
-  "editing": null,
-  "partner_typing": false
+  "region": "us",
+  "modules": [
+   {
+    "id": "dates",
+    "events": 81,
+    "glance": "next: the place by the bridge"
+   },
+   {
+    "id": "todos",
+    "events": 199,
+    "glance": "10 open"
+   },
+   {
+    "id": "calendar",
+    "events": 6,
+    "glance": "us in 63 days"
+   },
+   {
+    "id": "rituals",
+    "events": 53,
+    "glance": "last: tuesday soup"
+   },
+   {
+    "id": "shelf",
+    "events": 12,
+    "glance": "waiting on you: the one you said you stopped"
+   }
+  ]
  },
- "visible": [
-  "01M1MCZ1HY0K340RKAR6B6D9W2",
-  "01M1MD6MXQFXJWXH9SBA089YHQ",
-  "01M1MDC5AR6J360PH7CXF1RCNE"
- ],
- "tears": {
-  "01M1MCZ1HY0K340RKAR6B6D9W2": "tear_055",
-  "01M1MD6MXQFXJWXH9SBA089YHQ": "tear_018",
-  "01M1MDC5AR6J360PH7CXF1RCNE": "tear_040"
- },
- "stocks": {
-  "01M1MCZ1HY0K340RKAR6B6D9W2": "lined_01",
-  "01M1MD6MXQFXJWXH9SBA089YHQ": "lined_01",
-  "01M1MDC5AR6J360PH7CXF1RCNE": "receipt_01"
- },
- "scroll": {
-  "first": 8388,
-  "last": 8390,
-  "of": 8391
- },
+ "visible": [],
+ "tears": {},
+ "stocks": {},
+ "scroll": null,
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 5168,
+ "driven_ms": 7728,
  "seed": 20260903,
- "events": 14070,
+ "events": 14075,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -42,47 +48,68 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": null
+  "sequence": "unfold_thirds",
+  "length": 240,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
  },
  "sensation": {
-  "feeling": "nuzzle",
+  "feeling": "soup",
   "channel": "page",
-  "total_ms": 990,
-  "started_at": "2026-09-06T04:38:05.745Z",
+  "total_ms": 1200,
+  "started_at": "2026-09-06T17:39:58.297Z",
   "pattern": [
    {
-    "ms": 90,
-    "amp": 134
+    "ms": 150,
+    "amp": 119
    },
    {
-    "ms": 60,
+    "ms": 150,
     "amp": 0
    },
    {
-    "ms": 90,
-    "amp": 134
+    "ms": 150,
+    "amp": 119
    },
    {
-    "ms": 60,
+    "ms": 150,
     "amp": 0
    },
    {
-    "ms": 90,
-    "amp": 134
-   },
-   {
-    "ms": 200,
-    "amp": 0
-   },
-   {
-    "ms": 400,
-    "amp": 98
+    "ms": 600,
+    "amp": 156
    }
   ]
  },
+ "sync": {
+  "transport": "local",
+  "role": "client",
+  "rounds": 37,
+  "pushed": 7,
+  "refused": 0,
+  "pulled": 8,
+  "blobs_fetched": 0,
+  "faults": 0,
+  "pending": 0,
+  "cursor": 14075,
+  "link": {
+   "transport": "local",
+   "role": "client",
+   "state": "connected",
+   "address": "http://127.0.0.1:8480",
+   "peer_cursor": 14075,
+   "our_cursor": 14075,
+   "last_error": null,
+   "since": "2026-09-06T17:30:14.233Z",
+   "last_contact": "2026-09-06T17:42:23.751Z"
+  }
+ },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-  "pocket_feeling": "nuzzle",
+  "pocket_feeling": "soup",
   "pocket_at": 1788464400000,
   "allowed_to_interrupt": false
  },

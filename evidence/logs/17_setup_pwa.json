@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2903
+   "ms": 2905
   },
   {
    "do": "pwa",
-   "ms": 713
+   "ms": 712
   },
   {
    "do": "shot",
-   "ms": 1509
+   "ms": 2327
   },
   {
    "do": "report",
@@ -46,7 +46,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-05T23:09:58.331Z",
+   "now": "2026-09-06T13:19:21.079Z",
    "driven_ms": 0,
    "seed": 20260903,
    "events": 0,
@@ -63,6 +63,29 @@
     "sequence": null
    },
    "sensation": null,
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 0,
+    "pushed": 0,
+    "refused": 0,
+    "pulled": 0,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 0,
+    "cursor": 0,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connecting",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": null,
+     "our_cursor": 0,
+     "last_error": null,
+     "since": "2026-09-06T13:19:13.992Z",
+     "last_contact": null
+    }
+   },
    "ambient": {
     "standing_line": "nothing from them since you last looked",
     "pocket_feeling": null,
@@ -72,9 +95,9 @@
    "at": "17_setup_pwa.png"
   }
  ],
- "cold_ms": 1968,
+ "cold_ms": 1909,
  "load": {
-  "ms": 1968,
+  "ms": 1909,
   "store": "fresh",
   "profile": null
  },
@@ -95,5 +118,6 @@
   "url": "http://127.0.0.1:8798/"
  },
  "problems": [],
- "ok": true
+ "ok": true,
+ "steps_landed": true
 }

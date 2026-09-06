@@ -12,7 +12,7 @@
  "tears": {},
  "stocks": {},
  "scroll": null,
- "now": "2026-09-05T23:09:49.524Z",
+ "now": "2026-09-06T13:19:11.571Z",
  "driven_ms": 48,
  "seed": 20260903,
  "events": 0,
@@ -29,6 +29,29 @@
   "sequence": null
  },
  "sensation": null,
+ "sync": {
+  "transport": "local",
+  "role": "client",
+  "rounds": 0,
+  "pushed": 0,
+  "refused": 0,
+  "pulled": 0,
+  "blobs_fetched": 0,
+  "faults": 0,
+  "pending": 0,
+  "cursor": 0,
+  "link": {
+   "transport": "local",
+   "role": "client",
+   "state": "connecting",
+   "address": "http://127.0.0.1:8480",
+   "peer_cursor": null,
+   "our_cursor": 0,
+   "last_error": null,
+   "since": "2026-09-06T13:19:02.786Z",
+   "last_contact": null
+  }
+ },
  "ambient": {
   "standing_line": "nothing from them since you last looked",
   "pocket_feeling": null,

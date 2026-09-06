@@ -1,8 +1,8 @@
 {
  "dir": "/tmp/lovetap-capture/07_feeling_landing",
- "frames": 314,
- "fps": 60.0,
- "seconds": 5.23,
+ "frames": 421,
+ "fps": 62.5,
+ "seconds": 6.74,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
@@ -20,11 +20,21 @@
    "frames": 93,
    "step_ms": 16,
    "dir": "evidence/frames/07_feeling_landing"
+  },
+  {
+   "frames": 107,
+   "step_ms": 16,
+   "dir": "evidence/frames/07_feeling_landing"
   }
  ],
- "app_seconds": 5.02,
- "playback_over_app_time": 1.042,
- "mean_change_per_frame": 0.01433,
+ "cuts_between_runs": [
+  149,
+  220,
+  313
+ ],
+ "app_seconds": 6.74,
+ "playback_over_app_time": 1.0,
+ "mean_change_per_frame": 0.01496,
  "repeated_frames": 0,
  "repeated_fraction": 0.0,
  "longest_still_run": 0,
@@ -34,10 +44,10 @@
  "strip": "evidence/crops/07_feeling_landing_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/07_feeling_landing/000000.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000063.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000125.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000188.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000250.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000313.png"
+  "/tmp/lovetap-capture/07_feeling_landing/000084.png",
+  "/tmp/lovetap-capture/07_feeling_landing/000168.png",
+  "/tmp/lovetap-capture/07_feeling_landing/000252.png",
+  "/tmp/lovetap-capture/07_feeling_landing/000336.png",
+  "/tmp/lovetap-capture/07_feeling_landing/000420.png"
  ]
 }
