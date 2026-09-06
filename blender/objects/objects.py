@@ -36,16 +36,59 @@ def paper_mat(name, rgb=(0.94, 0.91, 0.85), tooth=0.9):
     return common.paper_material(name, rgb, tooth=tooth, yellowing=0.18, sheen=0.26, fibre_scale=1600.0)
 
 
-def simple_mat(name, rgb, roughness=0.5, metallic=0.0, transmission=0.0, ior=1.45):
+def simple_mat(name, rgb, roughness=0.5, metallic=0.0, transmission=0.0, ior=1.45, grain=1.0):
+    """A material for a small object on a desk.
+
+    Nothing on a desk is one colour. These were flat Principled fills — a patch inside the candle
+    measured 0.44 grey levels of variation against 6 for the paper it stands on, which is what
+    makes a rendered object read as a CG prop dropped into a photograph. The colour is broken up
+    by a fine noise and the roughness by a coarser one, so the light finds something to sit on:
+    a wax cylinder is not polished, and a cork is not a smooth brown pill.
+    """
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
-    b = mat.node_tree.nodes.get("Principled BSDF")
+    tree = mat.node_tree
+    b = tree.nodes.get("Principled BSDF")
     b.inputs["Base Color"].default_value = (*rgb, 1.0)
     b.inputs["Roughness"].default_value = roughness
     b.inputs["Metallic"].default_value = metallic
     b.inputs["IOR"].default_value = ior
     if transmission:
         b.inputs["Transmission Weight"].default_value = transmission
+    if grain > 0:
+        coords = tree.nodes.new("ShaderNodeTexCoord")
+        # the colour: a fine mottle, a few per cent either way
+        fine = tree.nodes.new("ShaderNodeTexNoise")
+        fine.inputs["Scale"].default_value = 420.0 * grain
+        fine.inputs["Detail"].default_value = 6.0
+        fine.inputs["Roughness"].default_value = 0.55
+        tree.links.new(coords.outputs["Object"], fine.inputs["Vector"])
+        mix = tree.nodes.new("ShaderNodeMix")
+        mix.data_type = "RGBA"
+        mix.inputs["Factor"].default_value = 0.26 * grain
+        mix.inputs[6].default_value = (*rgb, 1.0)
+        dark = tuple(max(0.0, c * 0.70) for c in rgb)
+        mix.inputs[7].default_value = (*dark, 1.0)
+        tree.links.new(fine.outputs["Fac"], mix.inputs["Factor"])
+        tree.links.new(mix.outputs[2], b.inputs["Base Color"])
+        # the surface: a coarser noise on the roughness, so the highlight is not a clean sweep
+        coarse = tree.nodes.new("ShaderNodeTexNoise")
+        coarse.inputs["Scale"].default_value = 90.0 * grain
+        coarse.inputs["Detail"].default_value = 3.0
+        tree.links.new(coords.outputs["Object"], coarse.inputs["Vector"])
+        rough = tree.nodes.new("ShaderNodeMapRange")
+        rough.inputs["From Min"].default_value = 0.0
+        rough.inputs["From Max"].default_value = 1.0
+        rough.inputs["To Min"].default_value = max(0.05, roughness - 0.24)
+        rough.inputs["To Max"].default_value = min(1.0, roughness + 0.24)
+        tree.links.new(coarse.outputs["Fac"], rough.inputs["Value"])
+        tree.links.new(rough.outputs["Result"], b.inputs["Roughness"])
+        # and a hair of relief, so an edge is not a mathematical edge
+        bump = tree.nodes.new("ShaderNodeBump")
+        bump.inputs["Strength"].default_value = 0.22 * grain
+        bump.inputs["Distance"].default_value = 0.0004
+        tree.links.new(fine.outputs["Fac"], bump.inputs["Height"])
+        tree.links.new(bump.outputs["Normal"], b.inputs["Normal"])
     return mat
 
 
