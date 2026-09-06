@@ -198,6 +198,14 @@ class PaperPiece extends StatelessWidget {
         child: SizedBox(
           width: width,
           child: Stack(
+            // A Stack clips to its own bounds by default, and the shadow is deliberately a
+            // quarter wider than the piece — so every visible part of every contact shadow in the
+            // app was being cut off, leaving only the part the paper itself covers. Two critics
+            // and a completeness pass measured the result: with the tear ink excluded, the desk's
+            // median luminance beside a note is the same in every direction at every distance
+            // from two to a hundred and twenty pixels. Notes were cut-outs pasted on a photograph
+            // for four review cycles because of this one default.
+            clipBehavior: Clip.none,
             children: [
               // The contact shadow is not drawn here so much as uncovered: it came out of the same
               // render as the piece, already in the right place, already the right shape. All the
