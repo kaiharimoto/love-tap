@@ -6,51 +6,65 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8799/",
+ "url": "http://127.0.0.1:8480/",
  "steps": [
   {
+   "do": "pair",
+   "ms": 2552,
+   "auto": true,
+   "far": "http://127.0.0.1:8480"
+  },
+  {
    "do": "goTo",
-   "ms": 3314
-  },
-  {
-   "do": "wait",
-   "ms": 2002
-  },
-  {
-   "do": "scrollTo",
-   "ms": 3798
+   "ms": 3744
   },
   {
    "do": "wait",
    "ms": 1604
   },
   {
+   "do": "scrollTo",
+   "ms": 4740
+  },
+  {
+   "do": "wait",
+   "ms": 1304
+  },
+  {
+   "do": "far",
+   "ms": 404
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 3046
+  },
+  {
    "do": "frames",
-   "ms": 18119
+   "ms": 33371
   },
   {
    "do": "unfold",
-   "ms": 406
+   "ms": 9
   },
   {
    "do": "frames",
-   "ms": 278290
+   "ms": 345472
   },
   {
    "do": "report",
-   "ms": 430
+   "ms": 422
   }
  ],
  "shots": [
   {
-   "frames": 20,
+   "frames": 16,
    "dir": "evidence/frames/06_unfolding",
    "ms": 16,
    "drive": null
   },
   {
-   "frames": 300,
-   "dir": "evidence/frames/06_unfolding_b",
+   "frames": 240,
+   "dir": "evidence/frames/06_unfolding",
    "ms": 16,
    "drive": null
   }
@@ -58,41 +72,49 @@
  "reports": [
   {
    "region": 1,
+   "view": {
+    "region": "chat",
+    "composer": "",
+    "attaching": false,
+    "replying_to": null,
+    "editing": null,
+    "partner_typing": false
+   },
    "visible": [
-    "0001M3AY8G83A3FBSRB1Y7W78Q",
     "0001M3F41R2APQC59QKBMZK4XF",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF",
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
-    "0001M59VY0YA13H9M86HTA6XNP"
+    "0001M59VY0YA13H9M86HTA6XNP",
+    "01M1MCJYV8QCZ1SBM42YTV2SJC"
    ],
    "tears": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
     "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
     "0001M4GW48FEW3M67XKAZT5051": "tear_031",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
+    "01M1MCJYV8QCZ1SBM42YTV2SJC": "tear_035"
    },
    "stocks": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
     "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
+    "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
+    "01M1MCJYV8QCZ1SBM42YTV2SJC": "graph_04"
    },
    "scroll": {
-    "first": 8381,
+    "first": 8382,
     "last": 8387,
-    "of": 8387
+    "of": 8388
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 5264,
+   "driven_ms": 4240,
    "seed": 20260903,
-   "events": 14062,
+   "events": 14064,
    "transport": "local",
-   "link": "connecting",
+   "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
    "writable_masks": 47,
@@ -109,10 +131,38 @@
     "held_from": 227,
     "held_to": 239
    },
-   "at": "06_unfolding_b"
+   "sensation": null,
+   "ambient": {
+    "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
+    "pocket_feeling": "ugh",
+    "pocket_at": 1788464400000,
+    "allowed_to_interrupt": false
+   },
+   "at": "06_unfolding"
   }
  ],
- "cold_ms": 13629,
+ "cold_ms": 11024,
+ "load": {
+  "ms": 11024,
+  "store": "fresh",
+  "profile": "profile_seeded"
+ },
+ "far": [
+  {
+   "line": "message back by six. the pigeon is still on the cupboard, year nine have named it.",
+   "at_frame": 0
+  }
+ ],
+ "arrivals": [
+  {
+   "line": "message back by six. the pigeon is still on the cupboard, year nine have named it.",
+   "before": 8387,
+   "after": 8388,
+   "at_frame": 0,
+   "waited_ms": 2645
+  }
+ ],
  "problems": [],
- "ok": true
+ "ok": true,
+ "steps_landed": true
 }

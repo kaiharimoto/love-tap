@@ -1,11 +1,11 @@
 {
- "captured_at": "2026-09-04T20:20:00Z",
+ "captured_at": "2026-09-06T08:21:10Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
-   "bytes": 3124936,
-   "written": "2026-09-04T20:22:17Z",
-   "from_this_run": true,
+   "bytes": 3212619,
+   "written": "2026-09-05T23:06:13Z",
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -17,9 +17,9 @@
    ]
   },
   "02_chat.png": {
-   "bytes": 3416835,
-   "written": "2026-09-04T20:22:46Z",
-   "from_this_run": true,
+   "bytes": 3484446,
+   "written": "2026-09-05T23:06:38Z",
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -31,9 +31,9 @@
    ]
   },
   "03_us.png": {
-   "bytes": 2967475,
-   "written": "2026-09-04T20:23:10Z",
-   "from_this_run": true,
+   "bytes": 3063796,
+   "written": "2026-09-05T23:06:56Z",
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -45,9 +45,9 @@
    ]
   },
   "04_moments.png": {
-   "bytes": 2660697,
-   "written": "2026-09-04T20:23:41Z",
-   "from_this_run": true,
+   "bytes": 3294553,
+   "written": "2026-09-05T23:07:16Z",
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -59,9 +59,9 @@
    ]
   },
   "05_settings.png": {
-   "bytes": 2185885,
-   "written": "2026-09-04T20:24:07Z",
-   "from_this_run": true,
+   "bytes": 2586714,
+   "written": "2026-09-05T23:07:37Z",
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -73,9 +73,9 @@
    ]
   },
   "10_first_run.png": {
-   "bytes": 2650558,
-   "written": "2026-09-04T20:25:59Z",
-   "from_this_run": true,
+   "bytes": 2675925,
+   "written": "2026-09-05T23:09:49Z",
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -87,9 +87,23 @@
    ]
   },
   "12_search.png": {
-   "bytes": 3684434,
-   "written": "2026-09-04T20:24:38Z",
-   "from_this_run": true,
+   "bytes": 3671799,
+   "written": "2026-09-05T23:08:03Z",
+   "from_this_run": false,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "13_messenger_states.png": {
+   "bytes": 3324969,
+   "written": "2026-09-05T23:08:54Z",
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -101,9 +115,9 @@
    ]
   },
   "14_media_viewer.png": {
-   "bytes": 2178559,
-   "written": "2026-09-04T20:25:50Z",
-   "from_this_run": true,
+   "bytes": 2544739,
+   "written": "2026-09-06T01:16:15Z",
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -115,9 +129,9 @@
    ]
   },
   "17_setup_pwa.png": {
-   "bytes": 1059474,
-   "written": "2026-09-04T20:26:06Z",
-   "from_this_run": true,
+   "bytes": 1108703,
+   "written": "2026-09-05T23:09:58Z",
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -129,16 +143,16 @@
    ]
   },
   "06_unfolding.mp4": {
-   "bytes": 2616470,
-   "written": "2026-09-04T20:53:00Z",
-   "from_this_run": true,
+   "bytes": 2105916,
+   "written": "2026-09-06T04:53:51Z",
+   "from_this_run": false,
    "size": [
     1080,
     2340
    ],
-   "frames": 320,
+   "frames": 256,
    "fps": 60.0,
-   "seconds": 5.33,
+   "seconds": 4.27,
    "meets_minimum": true,
    "minimum": [
     1080,
@@ -148,54 +162,54 @@
    "long_enough": true
   },
   "07_feeling_landing.mp4": {
-   "bytes": 5773509,
-   "written": "2026-09-04T22:46:24Z",
-   "from_this_run": true,
+   "bytes": 4924382,
+   "written": "2026-09-06T04:56:53Z",
+   "from_this_run": false,
    "size": [
     1080,
     2340
    ],
-   "frames": 384,
+   "frames": 314,
    "fps": 60.0,
-   "seconds": 6.4,
+   "seconds": 5.23,
    "meets_minimum": true,
    "minimum": [
     1080,
     2340
    ],
    "minimum_seconds": 6,
-   "long_enough": true
+   "long_enough": false
   },
   "08_state_propagating.mp4": {
-   "bytes": 4671982,
-   "written": "2026-09-04T23:01:44Z",
+   "bytes": 5380163,
+   "written": "2026-09-06T08:37:21Z",
    "from_this_run": true,
    "size": [
     1080,
     2340
    ],
-   "frames": 488,
+   "frames": 395,
    "fps": 60.0,
-   "seconds": 8.13,
+   "seconds": 6.58,
    "meets_minimum": true,
    "minimum": [
     1080,
     2340
    ],
    "minimum_seconds": 8,
-   "long_enough": true
+   "long_enough": false
   },
   "11_chat_scroll.mp4": {
-   "bytes": 6162308,
-   "written": "2026-09-04T22:47:59Z",
-   "from_this_run": true,
+   "bytes": 9544537,
+   "written": "2026-09-06T02:57:46Z",
+   "from_this_run": false,
    "size": [
     1080,
     2340
    ],
-   "frames": 330,
+   "frames": 300,
    "fps": 60.0,
-   "seconds": 5.5,
+   "seconds": 5.0,
    "meets_minimum": true,
    "minimum": [
     1080,
@@ -205,16 +219,16 @@
    "long_enough": true
   },
   "15_authored_feeling.mp4": {
-   "bytes": 4689770,
-   "written": "2026-09-04T22:49:24Z",
-   "from_this_run": true,
+   "bytes": 5083163,
+   "written": "2026-09-06T06:30:27Z",
+   "from_this_run": false,
    "size": [
     1080,
     2340
    ],
-   "frames": 308,
+   "frames": 304,
    "fps": 60.0,
-   "seconds": 5.13,
+   "seconds": 5.07,
    "meets_minimum": true,
    "minimum": [
     1080,
@@ -225,8 +239,23 @@
   }
  },
  "missing": {
-  "09_two_devices.png": "no Android device was up in this session: with no /dev/kvm the x86_64 image runs under QEMU instruction emulation, reaches adbd after 113 minutes and never brings the framework up. No GTK either, so no desktop build can stand in for a second screen. docs/PHONES.md records all three attempts. Not faked from the PWA",
-  "13_messenger_states.png": "__deskStage() threw; the handle now reports what it threw, so the next run will name it rather than reporting the Dart-to-JS bridge",
-  "16_setup_android.png": "no Android device was up in this session, for the same measured reason: see docs/PHONES.md"
+  "09_two_devices.png": "not captured this session",
+  "16_setup_android.png": "not captured this session"
+ },
+ "stale": {
+  "01_pulse.png": "on disk from 2026-09-05T23:06:13Z, before this capture began at 2026-09-06T08:21:10Z",
+  "02_chat.png": "on disk from 2026-09-05T23:06:38Z, before this capture began at 2026-09-06T08:21:10Z",
+  "03_us.png": "on disk from 2026-09-05T23:06:56Z, before this capture began at 2026-09-06T08:21:10Z",
+  "04_moments.png": "on disk from 2026-09-05T23:07:16Z, before this capture began at 2026-09-06T08:21:10Z",
+  "05_settings.png": "on disk from 2026-09-05T23:07:37Z, before this capture began at 2026-09-06T08:21:10Z",
+  "10_first_run.png": "on disk from 2026-09-05T23:09:49Z, before this capture began at 2026-09-06T08:21:10Z",
+  "12_search.png": "on disk from 2026-09-05T23:08:03Z, before this capture began at 2026-09-06T08:21:10Z",
+  "13_messenger_states.png": "on disk from 2026-09-05T23:08:54Z, before this capture began at 2026-09-06T08:21:10Z",
+  "14_media_viewer.png": "on disk from 2026-09-06T01:16:15Z, before this capture began at 2026-09-06T08:21:10Z",
+  "17_setup_pwa.png": "on disk from 2026-09-05T23:09:58Z, before this capture began at 2026-09-06T08:21:10Z",
+  "06_unfolding.mp4": "on disk from 2026-09-06T04:53:51Z, before this capture began at 2026-09-06T08:21:10Z",
+  "07_feeling_landing.mp4": "on disk from 2026-09-06T04:56:53Z, before this capture began at 2026-09-06T08:21:10Z",
+  "11_chat_scroll.mp4": "on disk from 2026-09-06T02:57:46Z, before this capture began at 2026-09-06T08:21:10Z",
+  "15_authored_feeling.mp4": "on disk from 2026-09-06T06:30:27Z, before this capture began at 2026-09-06T08:21:10Z"
  }
 }

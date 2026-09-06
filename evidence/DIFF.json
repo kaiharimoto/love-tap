@@ -1,51 +1,153 @@
 {
- "captured_at": "2026-09-04T20:20:00Z",
- "note": "ssim against the previous session; label assigned by the coherence critic",
- "artifacts": {
-  "01_pulse.png": {
+ "commit": "13330e8",
+ "baseline": {
+  "dir": "evidence/.previous",
+  "captured_at": "2026-09-06T08:19:27.731870+00:00"
+ },
+ "unchanged_at": 0.999,
+ "labels": "new, gone, unchanged, changed \u2014 measured. `judgement` (improved or regressed) is the coherence critic's to fill in; SSIM does not know whether a change is an improvement.",
+ "artifacts": [
+  {
+   "artifact": "01_pulse.png",
+   "label": "unchanged",
    "ssim": 1.0,
-   "reading": "unchanged",
-   "label": null
+   "judgement": null,
+   "sha": "894a817df7fedcd4",
+   "why": "byte for byte the same file"
   },
-  "02_chat.png": {
+  {
+   "artifact": "02_chat.png",
+   "label": "unchanged",
    "ssim": 1.0,
-   "reading": "unchanged",
-   "label": null
+   "judgement": null,
+   "sha": "4aba9bf4f9dde116",
+   "why": "byte for byte the same file"
   },
-  "03_us.png": {
+  {
+   "artifact": "03_us.png",
+   "label": "unchanged",
    "ssim": 1.0,
-   "reading": "unchanged",
-   "label": null
+   "judgement": null,
+   "sha": "7274a126b8b5db54",
+   "why": "byte for byte the same file"
   },
-  "04_moments.png": {
+  {
+   "artifact": "04_moments.png",
+   "label": "unchanged",
    "ssim": 1.0,
-   "reading": "unchanged",
-   "label": null
+   "judgement": null,
+   "sha": "c30b0e74ca5e19ae",
+   "why": "byte for byte the same file"
   },
-  "05_settings.png": {
+  {
+   "artifact": "05_settings.png",
+   "label": "unchanged",
    "ssim": 1.0,
-   "reading": "unchanged",
-   "label": null
+   "judgement": null,
+   "sha": "8804abf989a9e6d7",
+   "why": "byte for byte the same file"
   },
-  "10_first_run.png": {
+  {
+   "artifact": "06_unfolding.mp4",
+   "label": "unchanged",
    "ssim": 1.0,
-   "reading": "unchanged",
-   "label": null
+   "judgement": null,
+   "sha": "51525ac7a6f555ec",
+   "why": "byte for byte the same file"
   },
-  "12_search.png": {
+  {
+   "artifact": "07_feeling_landing.mp4",
+   "label": "unchanged",
    "ssim": 1.0,
-   "reading": "unchanged",
-   "label": null
+   "judgement": null,
+   "sha": "b971b20a815be57e",
+   "why": "byte for byte the same file"
   },
-  "14_media_viewer.png": {
-   "ssim": 1.0,
-   "reading": "unchanged",
-   "label": null
+  {
+   "artifact": "08_state_propagating.mp4",
+   "label": "changed",
+   "ssim": 0.9931,
+   "judgement": null,
+   "sha": "0e83bdcd4f20ac74",
+   "previous_sha": "20c5db779309edc0",
+   "label_basis": "ssim 0.9931 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
-  "17_setup_pwa.png": {
+  {
+   "artifact": "09_two_devices.png",
+   "label": "absent",
+   "ssim": null,
+   "judgement": null,
+   "why": "not captured in this session or the last"
+  },
+  {
+   "artifact": "10_first_run.png",
+   "label": "unchanged",
    "ssim": 1.0,
-   "reading": "unchanged",
-   "label": null
+   "judgement": null,
+   "sha": "8979ebffa1482d88",
+   "why": "byte for byte the same file"
+  },
+  {
+   "artifact": "11_chat_scroll.mp4",
+   "label": "unchanged",
+   "ssim": 1.0,
+   "judgement": null,
+   "sha": "6f8a4e835399fc4b",
+   "why": "byte for byte the same file"
+  },
+  {
+   "artifact": "12_search.png",
+   "label": "unchanged",
+   "ssim": 1.0,
+   "judgement": null,
+   "sha": "8856eb05d9cacea3",
+   "why": "byte for byte the same file"
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "label": "unchanged",
+   "ssim": 1.0,
+   "judgement": null,
+   "sha": "640e4c94dfad9fd6",
+   "why": "byte for byte the same file"
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "label": "unchanged",
+   "ssim": 1.0,
+   "judgement": null,
+   "sha": "598385204ed084e6",
+   "why": "byte for byte the same file"
+  },
+  {
+   "artifact": "15_authored_feeling.mp4",
+   "label": "unchanged",
+   "ssim": 1.0,
+   "judgement": null,
+   "sha": "4e0b1209f490a839",
+   "why": "byte for byte the same file"
+  },
+  {
+   "artifact": "16_setup_android.png",
+   "label": "absent",
+   "ssim": null,
+   "judgement": null,
+   "why": "not captured in this session or the last"
+  },
+  {
+   "artifact": "17_setup_pwa.png",
+   "label": "unchanged",
+   "ssim": 1.0,
+   "judgement": null,
+   "sha": "9263599e33ee8042",
+   "why": "byte for byte the same file"
   }
+ ],
+ "counts": {
+  "new": 0,
+  "gone": 0,
+  "unchanged": 14,
+  "changed": 1,
+  "absent": 2
  }
 }

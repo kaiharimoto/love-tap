@@ -1,119 +1,158 @@
 {
- "captured_at": "2026-09-04T20:20:00Z",
+ "captured_at": "2026-09-06T08:21:10Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
    "dir": "/tmp/lovetap-capture/06_unfolding",
-   "frames": 320,
+   "frames": 256,
    "fps": 60.0,
-   "seconds": 5.33,
-   "mean_change_per_frame": 0.00496,
-   "repeated_frames": 54,
-   "repeated_fraction": 0.169,
-   "longest_still_run": 24,
-   "repeated_at": [
-    0,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17
+   "seconds": 4.27,
+   "clock": "driven",
+   "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
+   "runs": [
+    {
+     "frames": 16,
+     "step_ms": 16,
+     "dir": "evidence/frames/06_unfolding"
+    },
+    {
+     "frames": 240,
+     "step_ms": 16,
+     "dir": "evidence/frames/06_unfolding"
+    }
    ],
-   "brightness_jumps": 1,
-   "ok": false,
-   "why": "the light jumps 1 times",
+   "app_seconds": 4.1,
+   "playback_over_app_time": 1.042,
+   "mean_change_per_frame": 0.0058,
+   "repeated_frames": 0,
+   "repeated_fraction": 0.0,
+   "longest_still_run": 0,
+   "repeated_at": [],
+   "brightness_jumps": 0,
+   "ok": true,
    "strip": "evidence/crops/06_unfolding_strip.png",
    "strip_frames": [
     "/tmp/lovetap-capture/06_unfolding/000000.png",
-    "/tmp/lovetap-capture/06_unfolding/000064.png",
-    "/tmp/lovetap-capture/06_unfolding/000128.png",
-    "/tmp/lovetap-capture/06_unfolding/000191.png",
-    "/tmp/lovetap-capture/06_unfolding/000255.png",
-    "/tmp/lovetap-capture/06_unfolding/000319.png"
+    "/tmp/lovetap-capture/06_unfolding/000051.png",
+    "/tmp/lovetap-capture/06_unfolding/000102.png",
+    "/tmp/lovetap-capture/06_unfolding/000153.png",
+    "/tmp/lovetap-capture/06_unfolding/000204.png",
+    "/tmp/lovetap-capture/06_unfolding/000255.png"
    ]
   },
   "07_feeling_landing.mp4": {
-   "dir": "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_07_feeling_landing",
-   "frames": 384,
+   "dir": "/tmp/lovetap-capture/07_feeling_landing",
+   "frames": 314,
    "fps": 60.0,
-   "seconds": 6.4,
-   "mean_change_per_frame": 0.01129,
-   "repeated_frames": 59,
-   "repeated_fraction": 0.154,
-   "longest_still_run": 33,
-   "repeated_at": [
-    1,
-    140,
-    141,
-    142,
-    143,
-    144,
-    145,
-    146,
-    147,
-    148,
-    149,
-    150
+   "seconds": 5.23,
+   "clock": "driven",
+   "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
+   "runs": [
+    {
+     "frames": 150,
+     "step_ms": 16,
+     "dir": "evidence/frames/07_feeling_landing"
+    },
+    {
+     "frames": 71,
+     "step_ms": 16,
+     "dir": "evidence/frames/07_feeling_landing"
+    },
+    {
+     "frames": 93,
+     "step_ms": 16,
+     "dir": "evidence/frames/07_feeling_landing"
+    }
    ],
+   "app_seconds": 5.02,
+   "playback_over_app_time": 1.042,
+   "mean_change_per_frame": 0.01433,
+   "repeated_frames": 0,
+   "repeated_fraction": 0.0,
+   "longest_still_run": 0,
+   "repeated_at": [],
    "brightness_jumps": 0,
    "ok": true,
    "strip": "evidence/crops/07_feeling_landing_strip.png",
    "strip_frames": [
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_07_feeling_landing/000000.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_07_feeling_landing/000077.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_07_feeling_landing/000153.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_07_feeling_landing/000230.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_07_feeling_landing/000306.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_07_feeling_landing/000383.png"
+    "/tmp/lovetap-capture/07_feeling_landing/000000.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000063.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000125.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000188.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000250.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000313.png"
    ]
   },
   "08_state_propagating.mp4": {
    "dir": "/tmp/lovetap-capture/08_state_propagating",
-   "frames": 488,
+   "frames": 395,
    "fps": 60.0,
-   "seconds": 8.13,
-   "mean_change_per_frame": 0.01056,
-   "repeated_frames": 97,
-   "repeated_fraction": 0.199,
-   "longest_still_run": 38,
-   "repeated_at": [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11
+   "seconds": 6.58,
+   "clock": "driven",
+   "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
+   "runs": [
+    {
+     "frames": 149,
+     "step_ms": 16,
+     "dir": "evidence/frames/08_state_propagating"
+    },
+    {
+     "frames": 19,
+     "step_ms": 16,
+     "dir": "evidence/frames/08_state_propagating"
+    },
+    {
+     "frames": 71,
+     "step_ms": 16,
+     "dir": "evidence/frames/08_state_propagating"
+    },
+    {
+     "frames": 156,
+     "step_ms": 16,
+     "dir": "evidence/frames/08_state_propagating"
+    }
    ],
+   "cuts_between_runs": [
+    148,
+    167,
+    238
+   ],
+   "app_seconds": 6.32,
+   "playback_over_app_time": 1.042,
+   "mean_change_per_frame": 0.01253,
+   "repeated_frames": 0,
+   "repeated_fraction": 0.0,
+   "longest_still_run": 0,
+   "repeated_at": [],
    "brightness_jumps": 0,
    "ok": true,
    "strip": "evidence/crops/08_state_propagating_strip.png",
    "strip_frames": [
     "/tmp/lovetap-capture/08_state_propagating/000000.png",
-    "/tmp/lovetap-capture/08_state_propagating/000097.png",
-    "/tmp/lovetap-capture/08_state_propagating/000195.png",
-    "/tmp/lovetap-capture/08_state_propagating/000292.png",
-    "/tmp/lovetap-capture/08_state_propagating/000390.png",
-    "/tmp/lovetap-capture/08_state_propagating/000487.png"
+    "/tmp/lovetap-capture/08_state_propagating/000079.png",
+    "/tmp/lovetap-capture/08_state_propagating/000158.png",
+    "/tmp/lovetap-capture/08_state_propagating/000236.png",
+    "/tmp/lovetap-capture/08_state_propagating/000315.png",
+    "/tmp/lovetap-capture/08_state_propagating/000394.png"
    ]
   },
   "11_chat_scroll.mp4": {
-   "dir": "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll",
-   "frames": 330,
+   "dir": "/tmp/lovetap-capture/11_chat_scroll",
+   "frames": 300,
    "fps": 60.0,
-   "seconds": 5.5,
-   "mean_change_per_frame": 0.05501,
+   "seconds": 5.0,
+   "clock": "driven",
+   "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
+   "runs": [
+    {
+     "frames": 300,
+     "step_ms": 16,
+     "dir": "evidence/frames/11_chat_scroll"
+    }
+   ],
+   "app_seconds": 4.8,
+   "playback_over_app_time": 1.042,
+   "mean_change_per_frame": 0.07972,
    "repeated_frames": 0,
    "repeated_fraction": 0.0,
    "longest_still_run": 0,
@@ -122,47 +161,65 @@
    "ok": true,
    "strip": "evidence/crops/11_chat_scroll_strip.png",
    "strip_frames": [
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000000.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000066.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000132.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000197.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000263.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000329.png"
+    "/tmp/lovetap-capture/11_chat_scroll/000000.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000060.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000120.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000179.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000239.png",
+    "/tmp/lovetap-capture/11_chat_scroll/000299.png"
    ]
   },
   "15_authored_feeling.mp4": {
-   "dir": "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling",
-   "frames": 308,
+   "dir": "/tmp/lovetap-capture/15_authored_feeling",
+   "frames": 304,
    "fps": 60.0,
-   "seconds": 5.13,
-   "mean_change_per_frame": 0.01021,
-   "repeated_frames": 98,
-   "repeated_fraction": 0.319,
-   "longest_still_run": 36,
-   "repeated_at": [
-    33,
-    34,
-    35,
-    36,
-    37,
-    38,
-    39,
-    45,
-    46,
-    47,
-    48,
-    49
+   "seconds": 5.07,
+   "clock": "driven",
+   "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
+   "runs": [
+    {
+     "frames": 17,
+     "step_ms": 16,
+     "dir": "evidence/frames/15_authored_feeling"
+    },
+    {
+     "frames": 75,
+     "step_ms": 16,
+     "dir": "evidence/frames/15_authored_feeling"
+    },
+    {
+     "frames": 106,
+     "step_ms": 16,
+     "dir": "evidence/frames/15_authored_feeling"
+    },
+    {
+     "frames": 106,
+     "step_ms": 16,
+     "dir": "evidence/frames/15_authored_feeling"
+    }
    ],
+   "cuts_between_runs": [
+    16,
+    91,
+    197
+   ],
+   "app_seconds": 4.86,
+   "playback_over_app_time": 1.042,
+   "mean_change_per_frame": 0.01413,
+   "repeated_frames": 0,
+   "repeated_fraction": 0.0,
+   "longest_still_run": 0,
+   "repeated_at": [],
    "brightness_jumps": 0,
    "ok": true,
    "strip": "evidence/crops/15_authored_feeling_strip.png",
    "strip_frames": [
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000000.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000061.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000123.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000184.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000246.png",
-    "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000307.png"
+    "/tmp/lovetap-capture/15_authored_feeling/000000.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000061.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000121.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000182.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000242.png",
+    "/tmp/lovetap-capture/15_authored_feeling/000303.png"
    ]
   }
  },
@@ -173,27 +230,37 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 13416,
+  "cold_ms": 2773,
   "steps": [
    {
+    "do": "pair",
+    "ms": 2590,
+    "auto": true,
+    "far": "http://127.0.0.1:8480"
+   },
+   {
     "do": "goTo",
-    "ms": 3628
+    "ms": 3754
    },
    {
     "do": "wait",
-    "ms": 2004
+    "ms": 2006
    },
    {
     "do": "scrollTo",
-    "ms": 3543
+    "ms": 4600
    },
    {
     "do": "wait",
-    "ms": 1101
+    "ms": 1102
    },
    {
     "do": "frames",
-    "ms": 366551
+    "ms": 473744
+   },
+   {
+    "do": "timings",
+    "ms": 425
    }
   ]
  },

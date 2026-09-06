@@ -1,32 +1,40 @@
 {
  "region": 1,
+ "view": {
+  "region": "chat",
+  "composer": "",
+  "attaching": false,
+  "replying_to": null,
+  "editing": null,
+  "partner_typing": false
+ },
  "visible": [
-  "01M1QA1JQEDHKBA6FDT35JDNXZ",
-  "01M1QA2BCPCS9DNG2P8FERJZGV",
-  "01M1QA82GNQVZ23RH0SS00QR1J",
-  "01M1QABRNFYDY1N1HDENF0SAYE"
+  "01M1MCK1R91G2MACRTDRCCV9EN",
+  "01M1MCXFWT99DAK21ZSK898827",
+  "01M1MD06JY57419S7RFC1YGK6N",
+  "01M1MD483VTAEH4NYZP4JZ3P2Q"
  ],
  "tears": {
-  "01M1QA1JQEDHKBA6FDT35JDNXZ": "tear_001",
-  "01M1QA2BCPCS9DNG2P8FERJZGV": "tear_020",
-  "01M1QA82GNQVZ23RH0SS00QR1J": "tear_043",
-  "01M1QABRNFYDY1N1HDENF0SAYE": "tear_005"
+  "01M1MCK1R91G2MACRTDRCCV9EN": "tear_055",
+  "01M1MCXFWT99DAK21ZSK898827": "tear_018",
+  "01M1MD06JY57419S7RFC1YGK6N": "tear_040",
+  "01M1MD483VTAEH4NYZP4JZ3P2Q": "tear_003"
  },
  "stocks": {
-  "01M1QA1JQEDHKBA6FDT35JDNXZ": "lined_01",
-  "01M1QA2BCPCS9DNG2P8FERJZGV": "lined_01",
-  "01M1QA82GNQVZ23RH0SS00QR1J": "lined_01",
-  "01M1QABRNFYDY1N1HDENF0SAYE": "lined_02"
+  "01M1MCK1R91G2MACRTDRCCV9EN": "lined_02",
+  "01M1MCXFWT99DAK21ZSK898827": "lined_03",
+  "01M1MD06JY57419S7RFC1YGK6N": "lined_04",
+  "01M1MD483VTAEH4NYZP4JZ3P2Q": "receipt_01"
  },
  "scroll": {
-  "first": 0,
-  "last": 4,
-  "of": 4
+  "first": 8388,
+  "last": 8391,
+  "of": 8392
  },
- "now": "2026-09-04T23:01:06.000Z",
- "driven_ms": 5712,
+ "now": "2026-09-03T19:40:00.000Z",
+ "driven_ms": 6480,
  "seed": 20260903,
- "events": 8,
+ "events": 14072,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -44,6 +52,64 @@
   "playhead": 0,
   "held_from": 0,
   "held_to": 23
+ },
+ "sensation": {
+  "feeling": "here",
+  "channel": "page",
+  "total_ms": 2000,
+  "started_at": "2026-09-06T08:32:10.561Z",
+  "pattern": [
+   {
+    "ms": 400,
+    "amp": 125
+   },
+   {
+    "ms": 400,
+    "amp": 0
+   },
+   {
+    "ms": 400,
+    "amp": 125
+   },
+   {
+    "ms": 400,
+    "amp": 0
+   },
+   {
+    "ms": 400,
+    "amp": 125
+   }
+  ]
+ },
+ "sync": {
+  "transport": "local",
+  "role": "client",
+  "rounds": 40,
+  "pushed": 6,
+  "refused": 0,
+  "pulled": 4,
+  "blobs_fetched": 0,
+  "faults": 1,
+  "last_fault": "ConstraintError: Index key is not unique",
+  "pending": 0,
+  "cursor": 14072,
+  "link": {
+   "transport": "local",
+   "role": "client",
+   "state": "connected",
+   "address": "http://127.0.0.1:8480",
+   "peer_cursor": 14072,
+   "our_cursor": 14072,
+   "last_error": null,
+   "since": "2026-09-06T08:22:29.720Z",
+   "last_contact": "2026-09-06T08:36:42.615Z"
+  }
+ },
+ "ambient": {
+  "standing_line": "restless · week one, and the room smells right again · travelling · 7 hours ago",
+  "pocket_feeling": "here",
+  "pocket_at": 1788464400000,
+  "allowed_to_interrupt": false
  },
  "at": "08_state_propagating"
 }

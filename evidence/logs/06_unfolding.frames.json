@@ -1,36 +1,38 @@
 {
  "dir": "/tmp/lovetap-capture/06_unfolding",
- "frames": 320,
+ "frames": 256,
  "fps": 60.0,
- "seconds": 5.33,
- "mean_change_per_frame": 0.00496,
- "repeated_frames": 54,
- "repeated_fraction": 0.169,
- "longest_still_run": 24,
- "repeated_at": [
-  0,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
-  13,
-  14,
-  15,
-  16,
-  17
+ "seconds": 4.27,
+ "clock": "driven",
+ "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
+ "runs": [
+  {
+   "frames": 16,
+   "step_ms": 16,
+   "dir": "evidence/frames/06_unfolding"
+  },
+  {
+   "frames": 240,
+   "step_ms": 16,
+   "dir": "evidence/frames/06_unfolding"
+  }
  ],
- "brightness_jumps": 1,
- "ok": false,
- "why": "the light jumps 1 times",
+ "app_seconds": 4.1,
+ "playback_over_app_time": 1.042,
+ "mean_change_per_frame": 0.0058,
+ "repeated_frames": 0,
+ "repeated_fraction": 0.0,
+ "longest_still_run": 0,
+ "repeated_at": [],
+ "brightness_jumps": 0,
+ "ok": true,
  "strip": "evidence/crops/06_unfolding_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/06_unfolding/000000.png",
-  "/tmp/lovetap-capture/06_unfolding/000064.png",
-  "/tmp/lovetap-capture/06_unfolding/000128.png",
-  "/tmp/lovetap-capture/06_unfolding/000191.png",
-  "/tmp/lovetap-capture/06_unfolding/000255.png",
-  "/tmp/lovetap-capture/06_unfolding/000319.png"
+  "/tmp/lovetap-capture/06_unfolding/000051.png",
+  "/tmp/lovetap-capture/06_unfolding/000102.png",
+  "/tmp/lovetap-capture/06_unfolding/000153.png",
+  "/tmp/lovetap-capture/06_unfolding/000204.png",
+  "/tmp/lovetap-capture/06_unfolding/000255.png"
  ]
 }

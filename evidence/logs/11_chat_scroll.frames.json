@@ -1,9 +1,20 @@
 {
- "dir": "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll",
- "frames": 330,
+ "dir": "/tmp/lovetap-capture/11_chat_scroll",
+ "frames": 300,
  "fps": 60.0,
- "seconds": 5.5,
- "mean_change_per_frame": 0.05501,
+ "seconds": 5.0,
+ "clock": "driven",
+ "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
+ "runs": [
+  {
+   "frames": 300,
+   "step_ms": 16,
+   "dir": "evidence/frames/11_chat_scroll"
+  }
+ ],
+ "app_seconds": 4.8,
+ "playback_over_app_time": 1.042,
+ "mean_change_per_frame": 0.07972,
  "repeated_frames": 0,
  "repeated_fraction": 0.0,
  "longest_still_run": 0,
@@ -12,11 +23,11 @@
  "ok": true,
  "strip": "evidence/crops/11_chat_scroll_strip.png",
  "strip_frames": [
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000000.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000066.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000132.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000197.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000263.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_11_chat_scroll/000329.png"
+  "/tmp/lovetap-capture/11_chat_scroll/000000.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000060.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000120.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000179.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000239.png",
+  "/tmp/lovetap-capture/11_chat_scroll/000299.png"
  ]
 }

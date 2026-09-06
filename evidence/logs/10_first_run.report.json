@@ -1,10 +1,18 @@
 {
  "region": 1,
+ "view": {
+  "region": "chat",
+  "composer": "",
+  "attaching": false,
+  "replying_to": null,
+  "editing": null,
+  "partner_typing": false
+ },
  "visible": [],
  "tears": {},
  "stocks": {},
  "scroll": null,
- "now": "2026-09-04T20:25:59.585Z",
+ "now": "2026-09-05T23:09:49.524Z",
  "driven_ms": 48,
  "seed": 20260903,
  "events": 0,
@@ -19,6 +27,13 @@
  "setup_showing": false,
  "fold": {
   "sequence": null
+ },
+ "sensation": null,
+ "ambient": {
+  "standing_line": "nothing from them since you last looked",
+  "pocket_feeling": null,
+  "pocket_at": null,
+  "allowed_to_interrupt": false
  },
  "at": "10_first_run.png"
 }

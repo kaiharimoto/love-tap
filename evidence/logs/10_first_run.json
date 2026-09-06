@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2010
+   "ms": 2386
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2106
   },
   {
    "do": "shot",
-   "ms": 2099
+   "ms": 2293
   },
   {
    "do": "report",
-   "ms": 707
+   "ms": 714
   }
  ],
  "shots": [
@@ -34,11 +34,19 @@
  "reports": [
   {
    "region": 1,
+   "view": {
+    "region": "chat",
+    "composer": "",
+    "attaching": false,
+    "replying_to": null,
+    "editing": null,
+    "partner_typing": false
+   },
    "visible": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-04T20:25:59.585Z",
+   "now": "2026-09-05T23:09:49.524Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -54,10 +62,22 @@
    "fold": {
     "sequence": null
    },
+   "sensation": null,
+   "ambient": {
+    "standing_line": "nothing from them since you last looked",
+    "pocket_feeling": null,
+    "pocket_at": null,
+    "allowed_to_interrupt": false
+   },
    "at": "10_first_run.png"
   }
  ],
- "cold_ms": 1513,
+ "cold_ms": 1988,
+ "load": {
+  "ms": 1988,
+  "store": "fresh",
+  "profile": null
+ },
  "problems": [],
  "ok": true
 }

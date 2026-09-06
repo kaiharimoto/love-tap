@@ -1,0 +1,16 @@
+{
+ "manifest_link": "manifest.json",
+ "manifest": {
+  "name": "the other phone",
+  "display": "standalone",
+  "start_url": ".",
+  "icons": 4
+ },
+ "apple_touch_icon": "icons/Icon-192.png",
+ "service_workers": [
+  "http://127.0.0.1:8798/push/sw.js"
+ ],
+ "display_mode_standalone": false,
+ "browser": "webkit",
+ "url": "http://127.0.0.1:8798/"
+}

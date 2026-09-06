@@ -6,42 +6,67 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8799/",
+ "url": "http://127.0.0.1:8480/",
  "steps": [
   {
+   "do": "pair",
+   "ms": 2590,
+   "auto": true,
+   "far": "http://127.0.0.1:8480"
+  },
+  {
    "do": "goTo",
-   "ms": 3628
+   "ms": 3754
   },
   {
    "do": "wait",
-   "ms": 2004
+   "ms": 2006
   },
   {
    "do": "scrollTo",
-   "ms": 3543
+   "ms": 4600
   },
   {
    "do": "wait",
-   "ms": 1101
+   "ms": 1102
   },
   {
    "do": "frames",
-   "ms": 366551
+   "ms": 473744
+  },
+  {
+   "do": "timings",
+   "ms": 425
   }
  ],
  "shots": [
   {
-   "frames": 330,
+   "frames": 300,
    "dir": "evidence/frames/11_chat_scroll",
    "ms": 16,
    "drive": {
-    "kind": "scrollBy",
-    "per": -11
+    "kind": "fling",
+    "velocity": -3000,
+    "at": [
+     0,
+     44,
+     88,
+     132,
+     176,
+     220,
+     264
+    ]
    }
   }
  ],
  "reports": [],
- "cold_ms": 13416,
+ "cold_ms": 2773,
+ "load": {
+  "ms": 2773,
+  "store": "kept",
+  "profile": "profile_seeded"
+ },
  "problems": [],
- "ok": true
+ "ok": true,
+ "steps_landed": true
 }

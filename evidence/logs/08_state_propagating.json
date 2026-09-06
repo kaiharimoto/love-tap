@@ -6,7 +6,7 @@
   "height": 780,
   "dpr": 3
  },
- "url": "http://100.68.254.25:8443/",
+ "url": "http://127.0.0.1:8480/",
  "steps": [
   {
    "do": "wait",
@@ -14,140 +14,149 @@
   },
   {
    "do": "pair",
-   "ms": 1182
+   "ms": 1892
   },
   {
    "do": "wait",
-   "ms": 3705
+   "ms": 3706
   },
   {
    "do": "goTo",
-   "ms": 1506
+   "ms": 3967
+  },
+  {
+   "do": "far",
+   "ms": 670
   },
   {
    "do": "wait",
-   "ms": 1704
-  },
-  {
-   "do": "frames",
-   "ms": 20482
+   "ms": 3004
   },
   {
    "do": "far",
-   "ms": 502
+   "ms": 956
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 2429
+  },
+  {
+   "do": "step",
+   "ms": 5855
   },
   {
    "do": "frames",
-   "ms": 24750
-  },
-  {
-   "do": "far",
-   "ms": 501
-  },
-  {
-   "do": "frames",
-   "ms": 144051
+   "ms": 324555
   },
   {
    "do": "goTo",
-   "ms": 1677
-  },
-  {
-   "do": "frames",
-   "ms": 41295
+   "ms": 8781
   },
   {
    "do": "far",
-   "ms": 501
+   "ms": 518
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 6102
   },
   {
    "do": "frames",
-   "ms": 120485
+   "ms": 81906
   },
   {
    "do": "far",
-   "ms": 501
+   "ms": 855
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 3097
   },
   {
    "do": "frames",
-   "ms": 105204
+   "ms": 128957
+  },
+  {
+   "do": "far",
+   "ms": 513
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 2510
+  },
+  {
+   "do": "frames",
+   "ms": 271637
   },
   {
    "do": "report",
-   "ms": 517
+   "ms": 524
   }
  ],
  "shots": [
   {
-   "frames": 24,
+   "frames": 149,
    "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
    "drive": null
   },
   {
-   "frames": 24,
-   "dir": "evidence/frames/08_state_propagating_b",
+   "frames": 19,
+   "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
    "drive": null
   },
   {
-   "frames": 160,
-   "dir": "evidence/frames/08_state_propagating_b",
-   "ms": 8,
-   "drive": null
-  },
-  {
-   "frames": 40,
-   "dir": "evidence/frames/08_state_propagating_c",
+   "frames": 71,
+   "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
    "drive": null
   },
   {
-   "frames": 120,
-   "dir": "evidence/frames/08_state_propagating_c",
+   "frames": 156,
+   "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
-   "drive": {
-    "kind": "scrollBy",
-    "per": -4
-   }
-  },
-  {
-   "frames": 120,
-   "dir": "evidence/frames/08_state_propagating_c",
-   "ms": 8,
    "drive": null
   }
  ],
  "reports": [
   {
    "region": 1,
+   "view": {
+    "region": "chat",
+    "composer": "",
+    "attaching": false,
+    "replying_to": null,
+    "editing": null,
+    "partner_typing": false
+   },
    "visible": [
-    "01M1QA1JQEDHKBA6FDT35JDNXZ",
-    "01M1QA2BCPCS9DNG2P8FERJZGV",
-    "01M1QA82GNQVZ23RH0SS00QR1J",
-    "01M1QABRNFYDY1N1HDENF0SAYE"
+    "01M1MCK1R91G2MACRTDRCCV9EN",
+    "01M1MCXFWT99DAK21ZSK898827",
+    "01M1MD06JY57419S7RFC1YGK6N",
+    "01M1MD483VTAEH4NYZP4JZ3P2Q"
    ],
    "tears": {
-    "01M1QA1JQEDHKBA6FDT35JDNXZ": "tear_001",
-    "01M1QA2BCPCS9DNG2P8FERJZGV": "tear_020",
-    "01M1QA82GNQVZ23RH0SS00QR1J": "tear_043",
-    "01M1QABRNFYDY1N1HDENF0SAYE": "tear_005"
+    "01M1MCK1R91G2MACRTDRCCV9EN": "tear_055",
+    "01M1MCXFWT99DAK21ZSK898827": "tear_018",
+    "01M1MD06JY57419S7RFC1YGK6N": "tear_040",
+    "01M1MD483VTAEH4NYZP4JZ3P2Q": "tear_003"
    },
    "stocks": {
-    "01M1QA1JQEDHKBA6FDT35JDNXZ": "lined_01",
-    "01M1QA2BCPCS9DNG2P8FERJZGV": "lined_01",
-    "01M1QA82GNQVZ23RH0SS00QR1J": "lined_01",
-    "01M1QABRNFYDY1N1HDENF0SAYE": "lined_02"
+    "01M1MCK1R91G2MACRTDRCCV9EN": "lined_02",
+    "01M1MCXFWT99DAK21ZSK898827": "lined_03",
+    "01M1MD06JY57419S7RFC1YGK6N": "lined_04",
+    "01M1MD483VTAEH4NYZP4JZ3P2Q": "receipt_01"
    },
    "scroll": {
-    "first": 0,
-    "last": 4,
-    "of": 4
+    "first": 8388,
+    "last": 8391,
+    "of": 8392
    },
-   "now": "2026-09-04T23:01:06.000Z",
-   "driven_ms": 5712,
+   "now": "2026-09-03T19:40:00.000Z",
+   "driven_ms": 6480,
    "seed": 20260903,
-   "events": 8,
+   "events": 14072,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -166,10 +175,128 @@
     "held_from": 0,
     "held_to": 23
    },
+   "sensation": {
+    "feeling": "here",
+    "channel": "page",
+    "total_ms": 2000,
+    "started_at": "2026-09-06T08:32:10.561Z",
+    "pattern": [
+     {
+      "ms": 400,
+      "amp": 125
+     },
+     {
+      "ms": 400,
+      "amp": 0
+     },
+     {
+      "ms": 400,
+      "amp": 125
+     },
+     {
+      "ms": 400,
+      "amp": 0
+     },
+     {
+      "ms": 400,
+      "amp": 125
+     }
+    ]
+   },
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 40,
+    "pushed": 6,
+    "refused": 0,
+    "pulled": 4,
+    "blobs_fetched": 0,
+    "faults": 1,
+    "last_fault": "ConstraintError: Index key is not unique",
+    "pending": 0,
+    "cursor": 14072,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connected",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": 14072,
+     "our_cursor": 14072,
+     "last_error": null,
+     "since": "2026-09-06T08:22:29.720Z",
+     "last_contact": "2026-09-06T08:36:42.615Z"
+    }
+   },
+   "ambient": {
+    "standing_line": "restless · week one, and the room smells right again · travelling · 7 hours ago",
+    "pocket_feeling": "here",
+    "pocket_at": 1788464400000,
+    "allowed_to_interrupt": false
+   },
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 4311,
- "problems": [],
- "ok": true
+ "cold_ms": 11612,
+ "load": {
+  "ms": 11612,
+  "store": "fresh",
+  "profile": "profile_seeded"
+ },
+ "far": [
+  {
+   "line": "state mood restless",
+   "at_frame": 0
+  },
+  {
+   "line": "feeling hold 0.92",
+   "at_frame": 0
+  },
+  {
+   "line": "message it is raining here too",
+   "at_frame": 149
+  },
+  {
+   "line": "feeling squeeze 0.6",
+   "at_frame": 168
+  },
+  {
+   "line": "feeling here 0.8",
+   "at_frame": 239
+  }
+ ],
+ "arrivals": [
+  {
+   "line": "feeling hold 0.92",
+   "before": 8387,
+   "after": 8388,
+   "at_frame": 0,
+   "waited_ms": 1928
+  },
+  {
+   "line": "message it is raining here too",
+   "before": 8389,
+   "after": 8390,
+   "at_frame": 149,
+   "waited_ms": 5601
+  },
+  {
+   "line": "feeling squeeze 0.6",
+   "before": 8390,
+   "after": 8391,
+   "at_frame": 168,
+   "waited_ms": 2596
+  },
+  {
+   "line": "feeling here 0.8",
+   "before": 8391,
+   "after": 8392,
+   "at_frame": 239,
+   "waited_ms": 2007
+  }
+ ],
+ "problems": [
+  "pageerror: object @  at b44 (http://127.0.0.1:8480/main.dart.js:6563:8) at aSl (http://127.0.0.1:8480/main.dart.js:6705:6) at $0 (http://127.0.0.1:8480/main.dart.js:44608:11) at bch (http://127.0.0.1:8480/main.dart.js:5660:7) at bcE (http://127.0.0.1:8480/main"
+ ],
+ "ok": false,
+ "steps_landed": true
 }

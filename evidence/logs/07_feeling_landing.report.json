@@ -1,40 +1,39 @@
 {
- "region": 0,
+ "region": 1,
+ "view": {
+  "region": "chat",
+  "composer": "",
+  "attaching": false,
+  "replying_to": null,
+  "editing": null,
+  "partner_typing": false
+ },
  "visible": [
-  "0001M3Y4GR5ZE8WDQ00S3NX0KF",
-  "0001M4GW48FEW3M67XKAZT5051",
-  "0001M4ZQQ0H0PPVTKMMQEE268D",
-  "0001M59VY0YA13H9M86HTA6XNP",
-  "0001MCJ1M007NG2A2F5HMXWP7M",
-  "0001MCJ1M007NG2A2F5HMXWP7N"
+  "01M1MCZ1HY0K340RKAR6B6D9W2",
+  "01M1MD6MXQFXJWXH9SBA089YHQ",
+  "01M1MDC5AR6J360PH7CXF1RCNE"
  ],
  "tears": {
-  "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
-  "0001M4GW48FEW3M67XKAZT5051": "tear_031",
-  "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-  "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-  "0001MCJ1M007NG2A2F5HMXWP7M": "tear_035",
-  "0001MCJ1M007NG2A2F5HMXWP7N": "tear_055"
+  "01M1MCZ1HY0K340RKAR6B6D9W2": "tear_055",
+  "01M1MD6MXQFXJWXH9SBA089YHQ": "tear_018",
+  "01M1MDC5AR6J360PH7CXF1RCNE": "tear_040"
  },
  "stocks": {
-  "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
-  "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
-  "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
-  "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-  "0001MCJ1M007NG2A2F5HMXWP7M": "looseleaf_03",
-  "0001MCJ1M007NG2A2F5HMXWP7N": "legal_01"
+  "01M1MCZ1HY0K340RKAR6B6D9W2": "lined_01",
+  "01M1MD6MXQFXJWXH9SBA089YHQ": "lined_01",
+  "01M1MDC5AR6J360PH7CXF1RCNE": "receipt_01"
  },
  "scroll": {
-  "first": 8383,
-  "last": 8388,
-  "of": 8389
+  "first": 8388,
+  "last": 8390,
+  "of": 8391
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 3312,
+ "driven_ms": 5168,
  "seed": 20260903,
- "events": 14064,
+ "events": 14070,
  "transport": "local",
- "link": "connecting",
+ "link": "connected",
  "me": "teo",
  "masks_in_pool": 56,
  "writable_masks": 47,
@@ -43,13 +42,49 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": "unfold_thirds",
-  "length": 240,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
+ },
+ "sensation": {
+  "feeling": "nuzzle",
+  "channel": "page",
+  "total_ms": 990,
+  "started_at": "2026-09-06T04:38:05.745Z",
+  "pattern": [
+   {
+    "ms": 90,
+    "amp": 134
+   },
+   {
+    "ms": 60,
+    "amp": 0
+   },
+   {
+    "ms": 90,
+    "amp": 134
+   },
+   {
+    "ms": 60,
+    "amp": 0
+   },
+   {
+    "ms": 90,
+    "amp": 134
+   },
+   {
+    "ms": 200,
+    "amp": 0
+   },
+   {
+    "ms": 400,
+    "amp": 98
+   }
+  ]
+ },
+ "ambient": {
+  "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
+  "pocket_feeling": "nuzzle",
+  "pocket_at": 1788464400000,
+  "allowed_to_interrupt": false
  },
  "at": "07_feeling_landing"
 }

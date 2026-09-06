@@ -1,0 +1,1613 @@
+{
+ "notation": "on@amp pairs separated by off gaps, in milliseconds, amplitude 0-255: the shape Android VibrationEffect.createWaveform takes; on the PWA the same segments move the page",
+ "channel_here": "page",
+ "feelings": [
+  {
+   "id": "squeeze",
+   "name": "a squeeze",
+   "family": "Warmth",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_pinch",
+   "sound": "snd_squeeze",
+   "colour": "#1f2a44",
+   "haptic": "80@90 off40 160@160 off40 320@230",
+   "segments": [
+    {
+     "ms": 80,
+     "amp": 90
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 160,
+     "amp": 160
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 320,
+     "amp": 230
+    }
+   ],
+   "total_ms": 640,
+   "on_ms": 560,
+   "pulses": 3
+  },
+  {
+   "id": "forehead",
+   "name": "forehead",
+   "family": "Warmth",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_thumbprint",
+   "sound": "snd_forehead",
+   "colour": "#1f2a44",
+   "haptic": "200@120 off120 200@120",
+   "segments": [
+    {
+     "ms": 200,
+     "amp": 120
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 120
+    }
+   ],
+   "total_ms": 520,
+   "on_ms": 400,
+   "pulses": 2
+  },
+  {
+   "id": "warm_palm",
+   "name": "warm palm",
+   "family": "Warmth",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_coffee_ring",
+   "sound": "snd_palm",
+   "colour": "#a67c52",
+   "haptic": "600@140",
+   "segments": [
+    {
+     "ms": 600,
+     "amp": 140
+    }
+   ],
+   "total_ms": 600,
+   "on_ms": 600,
+   "pulses": 1
+  },
+  {
+   "id": "nuzzle",
+   "name": "nuzzle",
+   "family": "Warmth",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_clover",
+   "sound": "snd_nuzzle",
+   "colour": "#5d7a4a",
+   "haptic": "90@150 off60 90@150 off60 90@150 off200 400@110",
+   "segments": [
+    {
+     "ms": 90,
+     "amp": 150
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 90,
+     "amp": 150
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 90,
+     "amp": 150
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 400,
+     "amp": 110
+    }
+   ],
+   "total_ms": 990,
+   "on_ms": 670,
+   "pulses": 4
+  },
+  {
+   "id": "thinking_of_you",
+   "name": "thinking of you",
+   "family": "Warmth",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_bookmark",
+   "sound": "snd_thinking",
+   "colour": "#1f2a44",
+   "haptic": "40@80 off300 40@80 off300 260@170",
+   "segments": [
+    {
+     "ms": 40,
+     "amp": 80
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 80
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 260,
+     "amp": 170
+    }
+   ],
+   "total_ms": 940,
+   "on_ms": 340,
+   "pulses": 3
+  },
+  {
+   "id": "goodnight",
+   "name": "goodnight",
+   "family": "Warmth",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_dog_ear",
+   "sound": "snd_goodnight",
+   "colour": "#2c3555",
+   "haptic": "500@120 off200 250@80 off200 120@50",
+   "segments": [
+    {
+     "ms": 500,
+     "amp": 120
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 250,
+     "amp": 80
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 120,
+     "amp": 50
+    }
+   ],
+   "total_ms": 1270,
+   "on_ms": 870,
+   "pulses": 3
+  },
+  {
+   "id": "miss_you",
+   "name": "miss you",
+   "family": "Ache",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_crane",
+   "sound": "snd_miss",
+   "colour": "#3a3a3c",
+   "haptic": "150@220 off600 150@150 off600 150@90",
+   "segments": [
+    {
+     "ms": 150,
+     "amp": 220
+    },
+    {
+     "ms": 600,
+     "amp": 0
+    },
+    {
+     "ms": 150,
+     "amp": 150
+    },
+    {
+     "ms": 600,
+     "amp": 0
+    },
+    {
+     "ms": 150,
+     "amp": 90
+    }
+   ],
+   "total_ms": 1650,
+   "on_ms": 450,
+   "pulses": 3
+  },
+  {
+   "id": "empty_chair",
+   "name": "empty chair",
+   "family": "Ache",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_chair",
+   "sound": "snd_chair",
+   "colour": "#3a3a3c",
+   "haptic": "300@200 off900 300@100",
+   "segments": [
+    {
+     "ms": 300,
+     "amp": 200
+    },
+    {
+     "ms": 900,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 100
+    }
+   ],
+   "total_ms": 1500,
+   "on_ms": 600,
+   "pulses": 2
+  },
+  {
+   "id": "come_home",
+   "name": "come home",
+   "family": "Ache",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_string_loop",
+   "sound": "snd_home",
+   "colour": "#6b5a3e",
+   "haptic": "60@255 off200 60@255 off200 60@255 off800 400@120",
+   "segments": [
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 800,
+     "amp": 0
+    },
+    {
+     "ms": 400,
+     "amp": 120
+    }
+   ],
+   "total_ms": 1780,
+   "on_ms": 580,
+   "pulses": 4
+  },
+  {
+   "id": "wish_you_were_here",
+   "name": "wish you were here",
+   "family": "Ache",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_ticket",
+   "sound": "snd_wish",
+   "colour": "#8a6a4a",
+   "haptic": "250@180 off400 250@120 off400 250@70 off400 250@40",
+   "segments": [
+    {
+     "ms": 250,
+     "amp": 180
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 250,
+     "amp": 120
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 250,
+     "amp": 70
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 250,
+     "amp": 40
+    }
+   ],
+   "total_ms": 2200,
+   "on_ms": 1000,
+   "pulses": 4
+  },
+  {
+   "id": "long_day",
+   "name": "long day",
+   "family": "Ache",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_window",
+   "sound": "snd_longday",
+   "colour": "#3a3a3c",
+   "haptic": "800@100 off300 800@60",
+   "segments": [
+    {
+     "ms": 800,
+     "amp": 100
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 800,
+     "amp": 60
+    }
+   ],
+   "total_ms": 1900,
+   "on_ms": 1600,
+   "pulses": 2
+  },
+  {
+   "id": "here",
+   "name": "here",
+   "family": "Shelter",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_boat",
+   "sound": "snd_here",
+   "colour": "#4a4a4c",
+   "haptic": "400@140 off400 400@140 off400 400@140",
+   "segments": [
+    {
+     "ms": 400,
+     "amp": 140
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 400,
+     "amp": 140
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 400,
+     "amp": 140
+    }
+   ],
+   "total_ms": 2000,
+   "on_ms": 1200,
+   "pulses": 3
+  },
+  {
+   "id": "breathe",
+   "name": "breathe",
+   "family": "Shelter",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_blanket_fold",
+   "sound": "snd_breathe",
+   "colour": "#4a4a4c",
+   "haptic": "500@60 700@130 off900 1400@90",
+   "segments": [
+    {
+     "ms": 500,
+     "amp": 60
+    },
+    {
+     "ms": 700,
+     "amp": 130
+    },
+    {
+     "ms": 900,
+     "amp": 0
+    },
+    {
+     "ms": 1400,
+     "amp": 90
+    }
+   ],
+   "total_ms": 3500,
+   "on_ms": 2600,
+   "pulses": 3
+  },
+  {
+   "id": "its_okay",
+   "name": "it's okay",
+   "family": "Shelter",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_plaster",
+   "sound": "snd_okay",
+   "colour": "#c9a98a",
+   "haptic": "200@160 off200 200@160 off200 200@160 off200 200@160",
+   "segments": [
+    {
+     "ms": 200,
+     "amp": 160
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 160
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 160
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 160
+    }
+   ],
+   "total_ms": 1400,
+   "on_ms": 800,
+   "pulses": 4
+  },
+  {
+   "id": "steady",
+   "name": "steady",
+   "family": "Shelter",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_stone",
+   "sound": "snd_steady",
+   "colour": "#6d6d70",
+   "haptic": "300@180 off300 300@180 off300 300@180 off300 300@180 off300 300@180",
+   "segments": [
+    {
+     "ms": 300,
+     "amp": 180
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 180
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 180
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 180
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 180
+    }
+   ],
+   "total_ms": 2700,
+   "on_ms": 1500,
+   "pulses": 5
+  },
+  {
+   "id": "make_you_tea",
+   "name": "i'll make you tea",
+   "family": "Shelter",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_mug",
+   "sound": "snd_tea",
+   "colour": "#8b6b4a",
+   "haptic": "100@120 off100 100@120 off100 500@150",
+   "segments": [
+    {
+     "ms": 100,
+     "amp": 120
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 100,
+     "amp": 120
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 500,
+     "amp": 150
+    }
+   ],
+   "total_ms": 900,
+   "on_ms": 700,
+   "pulses": 3
+  },
+  {
+   "id": "hold",
+   "name": "hold",
+   "family": "Shelter",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_candle",
+   "sound": "snd_hold",
+   "colour": "#b89a5a",
+   "haptic": "900@150 off100 900@150",
+   "segments": [
+    {
+     "ms": 900,
+     "amp": 150
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 900,
+     "amp": 150
+    }
+   ],
+   "total_ms": 1900,
+   "on_ms": 1800,
+   "pulses": 2
+  },
+  {
+   "id": "poke",
+   "name": "poke",
+   "family": "Mischief",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_spitball",
+   "sound": "snd_poke",
+   "colour": "#a8322b",
+   "haptic": "30@255",
+   "segments": [
+    {
+     "ms": 30,
+     "amp": 255
+    }
+   ],
+   "total_ms": 30,
+   "on_ms": 30,
+   "pulses": 1
+  },
+  {
+   "id": "nyeh",
+   "name": "nyeh",
+   "family": "Mischief",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_wrapper",
+   "sound": "snd_nyeh",
+   "colour": "#a8322b",
+   "haptic": "30@200 off50 30@200 off50 90@255",
+   "segments": [
+    {
+     "ms": 30,
+     "amp": 200
+    },
+    {
+     "ms": 50,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 200
+    },
+    {
+     "ms": 50,
+     "amp": 0
+    },
+    {
+     "ms": 90,
+     "amp": 255
+    }
+   ],
+   "total_ms": 250,
+   "on_ms": 150,
+   "pulses": 3
+  },
+  {
+   "id": "catch",
+   "name": "catch",
+   "family": "Mischief",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_plane",
+   "sound": "snd_catch",
+   "colour": "#a8322b",
+   "haptic": "40@120 off30 40@160 off30 40@200 off30 40@240 off30 120@255",
+   "segments": [
+    {
+     "ms": 40,
+     "amp": 120
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 160
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 200
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 240
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 120,
+     "amp": 255
+    }
+   ],
+   "total_ms": 400,
+   "on_ms": 280,
+   "pulses": 5
+  },
+  {
+   "id": "pick_one",
+   "name": "pick one",
+   "family": "Mischief",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_fortune_teller",
+   "sound": "snd_pick",
+   "colour": "#e0a8b8",
+   "haptic": "50@180 off120 ×6",
+   "segments": [
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    }
+   ],
+   "total_ms": 1020,
+   "on_ms": 300,
+   "pulses": 6
+  },
+  {
+   "id": "snap",
+   "name": "snap",
+   "family": "Mischief",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_rubber_band",
+   "sound": "snd_snap",
+   "colour": "#c98a5a",
+   "haptic": "20@255 off40 60@255 off400 20@180",
+   "segments": [
+    {
+     "ms": 20,
+     "amp": 255
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 20,
+     "amp": 180
+    }
+   ],
+   "total_ms": 540,
+   "on_ms": 100,
+   "pulses": 3
+  },
+  {
+   "id": "stuck_with_me",
+   "name": "stuck with me",
+   "family": "Mischief",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_staple_chain",
+   "sound": "snd_stuck",
+   "colour": "#7a7a7e",
+   "haptic": "30@220 off30 ×8",
+   "segments": [
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    }
+   ],
+   "total_ms": 480,
+   "on_ms": 240,
+   "pulses": 8
+  },
+  {
+   "id": "overwhelmed",
+   "name": "overwhelmed",
+   "family": "Static",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_crumple_ball",
+   "sound": "snd_overwhelmed",
+   "colour": "#141a2e",
+   "haptic": "(25@255 off25 25@200 off25) ×5",
+   "segments": [
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    }
+   ],
+   "total_ms": 500,
+   "on_ms": 250,
+   "pulses": 10
+  },
+  {
+   "id": "ugh",
+   "name": "ugh",
+   "family": "Static",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_scribble",
+   "sound": "snd_ugh",
+   "colour": "#141a2e",
+   "haptic": "180@255 off60 180@255 off60 180@255",
+   "segments": [
+    {
+     "ms": 180,
+     "amp": 255
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 180,
+     "amp": 255
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 180,
+     "amp": 255
+    }
+   ],
+   "total_ms": 660,
+   "on_ms": 540,
+   "pulses": 3
+  },
+  {
+   "id": "snapped",
+   "name": "snapped",
+   "family": "Static",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_snapped_pencil",
+   "sound": "snd_snapped",
+   "colour": "#3a3a3c",
+   "haptic": "15@255 off15 15@255 off15 15@255 off300 500@255",
+   "segments": [
+    {
+     "ms": 15,
+     "amp": 255
+    },
+    {
+     "ms": 15,
+     "amp": 0
+    },
+    {
+     "ms": 15,
+     "amp": 255
+    },
+    {
+     "ms": 15,
+     "amp": 0
+    },
+    {
+     "ms": 15,
+     "amp": 255
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 500,
+     "amp": 255
+    }
+   ],
+   "total_ms": 875,
+   "on_ms": 545,
+   "pulses": 4
+  },
+  {
+   "id": "tangled",
+   "name": "tangled",
+   "family": "Static",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_knot",
+   "sound": "snd_tangled",
+   "colour": "#6b5a3e",
+   "haptic": "40@180 off20 80@220 off20 40@180 off20 120@255 off20 40@180 off20 80@220",
+   "segments": [
+    {
+     "ms": 40,
+     "amp": 180
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 80,
+     "amp": 220
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 180
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 120,
+     "amp": 255
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 180
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 80,
+     "amp": 220
+    }
+   ],
+   "total_ms": 500,
+   "on_ms": 400,
+   "pulses": 6
+  },
+  {
+   "id": "grey",
+   "name": "grey",
+   "family": "Static",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_pencil_smudge",
+   "sound": "snd_grey",
+   "colour": "#8a8a8e",
+   "haptic": "(60@70 off60) ×8",
+   "segments": [
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    }
+   ],
+   "total_ms": 960,
+   "on_ms": 480,
+   "pulses": 8
+  },
+  {
+   "id": "not_okay",
+   "name": "not okay",
+   "family": "Static",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_torn_corner",
+   "sound": "snd_notokay",
+   "colour": "#141a2e",
+   "haptic": "400@255 off100 40@255 off100 40@255 off100 40@255",
+   "segments": [
+    {
+     "ms": 400,
+     "amp": 255
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 255
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 255
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 255
+    }
+   ],
+   "total_ms": 820,
+   "on_ms": 520,
+   "pulses": 4
+  },
+  {
+   "id": "did_it",
+   "name": "did it",
+   "family": "Sparkle",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_cork",
+   "sound": "snd_didit",
+   "colour": "#c9a23a",
+   "haptic": "40@120 off60 40@170 off60 40@220 off60 200@255",
+   "segments": [
+    {
+     "ms": 40,
+     "amp": 120
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 170
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 220
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 255
+    }
+   ],
+   "total_ms": 500,
+   "on_ms": 320,
+   "pulses": 4
+  },
+  {
+   "id": "confetti",
+   "name": "confetti",
+   "family": "Sparkle",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_confetti",
+   "sound": "snd_confetti",
+   "colour": "#f2a8c0",
+   "haptic": "30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150",
+   "segments": [
+    {
+     "ms": 30,
+     "amp": 150
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 190
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 230
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 255
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 230
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 190
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 150
+    }
+   ],
+   "total_ms": 450,
+   "on_ms": 210,
+   "pulses": 7
+  },
+  {
+   "id": "yes",
+   "name": "yes",
+   "family": "Sparkle",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_bunting",
+   "sound": "snd_yes",
+   "colour": "#a8322b",
+   "haptic": "60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255",
+   "segments": [
+    {
+     "ms": 60,
+     "amp": 100
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 180
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    }
+   ],
+   "total_ms": 620,
+   "on_ms": 300,
+   "pulses": 5
+  },
+  {
+   "id": "crown",
+   "name": "paper hat",
+   "family": "Sparkle",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_party_hat",
+   "sound": "snd_crown",
+   "colour": "#f4ea6a",
+   "haptic": "100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255",
+   "segments": [
+    {
+     "ms": 100,
+     "amp": 120
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 100,
+     "amp": 170
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 100,
+     "amp": 220
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 100,
+     "amp": 255
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 255
+    }
+   ],
+   "total_ms": 1300,
+   "on_ms": 700,
+   "pulses": 5
+  },
+  {
+   "id": "treat",
+   "name": "treat",
+   "family": "Sparkle",
+   "authored_by": null,
+   "retired": false,
+   "object": "obj_ribbon",
+   "sound": "snd_treat",
+   "colour": "#f2a8c0",
+   "haptic": "50@200 off80 50@200 off80 300@150 off80 50@255",
+   "segments": [
+    {
+     "ms": 50,
+     "amp": 200
+    },
+    {
+     "ms": 80,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 200
+    },
+    {
+     "ms": 80,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 150
+    },
+    {
+     "ms": 80,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 255
+    }
+   ],
+   "total_ms": 690,
+   "on_ms": 450,
+   "pulses": 4
+  },
+  {
+   "id": "pigeon",
+   "name": "pigeon",
+   "family": "Mischief",
+   "authored_by": "noor",
+   "retired": false,
+   "object": "obj_user_pigeon",
+   "sound": "snd_user_pigeon",
+   "colour": "#3a3a3c",
+   "haptic": "30@200 off80 30@200 off80 30@200 off300 200@160",
+   "segments": [
+    {
+     "ms": 30,
+     "amp": 200
+    },
+    {
+     "ms": 80,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 200
+    },
+    {
+     "ms": 80,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 200
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 160
+    }
+   ],
+   "total_ms": 750,
+   "on_ms": 290,
+   "pulses": 4
+  },
+  {
+   "id": "soup",
+   "name": "tuesday soup",
+   "family": "Shelter",
+   "authored_by": "teo",
+   "retired": false,
+   "object": "obj_user_soup",
+   "sound": "snd_user_soup",
+   "colour": "#8b6b4a",
+   "haptic": "150@130 off150 150@130 off150 600@170",
+   "segments": [
+    {
+     "ms": 150,
+     "amp": 130
+    },
+    {
+     "ms": 150,
+     "amp": 0
+    },
+    {
+     "ms": 150,
+     "amp": 130
+    },
+    {
+     "ms": 150,
+     "amp": 0
+    },
+    {
+     "ms": 600,
+     "amp": 170
+    }
+   ],
+   "total_ms": 1200,
+   "on_ms": 900,
+   "pulses": 3
+  }
+ ],
+ "built_in": 34,
+ "authored": 2,
+ "families": {
+  "Warmth": 6,
+  "Ache": 5,
+  "Shelter": 7,
+  "Mischief": 7,
+  "Static": 6,
+  "Sparkle": 5
+ },
+ "shared_patterns": {}
+}

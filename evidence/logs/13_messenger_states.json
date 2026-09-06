@@ -6,39 +6,61 @@
   "height": 1040,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8799/",
+ "url": "http://127.0.0.1:8480/",
  "steps": [
   {
+   "do": "pair",
+   "ms": 2254,
+   "auto": true,
+   "far": "http://127.0.0.1:8480"
+  },
+  {
    "do": "goTo",
-   "ms": 3796
+   "ms": 4118
   },
   {
    "do": "wait",
-   "ms": 1709
+   "ms": 1703
   },
   {
    "do": "scrollTo",
-   "ms": 2331
+   "ms": 4708
   },
   {
    "do": "wait",
-   "ms": 1304
+   "ms": 1303
   },
   {
    "do": "stage",
-   "ms": 4983
+   "ms": 20915
   },
   {
    "do": "wait",
-   "ms": 1603
+   "ms": 2505
+  },
+  {
+   "do": "far",
+   "ms": 706
+  },
+  {
+   "do": "wait",
+   "ms": 2304
+  },
+  {
+   "do": "far",
+   "ms": 704
+  },
+  {
+   "do": "wait",
+   "ms": 1904
   },
   {
    "do": "shot",
-   "ms": 2162
+   "ms": 3392
   },
   {
    "do": "report",
-   "ms": 718
+   "ms": 717
   }
  ],
  "shots": [
@@ -50,41 +72,52 @@
  "reports": [
   {
    "region": 1,
+   "view": {
+    "region": "chat",
+    "composer": "",
+    "attaching": false,
+    "replying_to": null,
+    "editing": null,
+    "partner_typing": true
+   },
    "visible": [
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M02P5A2TQQXGTKH59E",
-    "0001MCJ1M02P5A2TQQXGTKH59F",
-    "0001MCJ1M02P5A2TQQXGTKH59G"
+    "0001MCJ1M0Z2P8BKKACS5XNZ8K",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8M",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8N",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8P"
    ],
    "tears": {
-    "0001M4GW48FEW3M67XKAZT5051": "tear_010",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-    "0001MCJ1M02P5A2TQQXGTKH59E": "tear_014",
-    "0001MCJ1M02P5A2TQQXGTKH59F": "tear_036",
-    "0001MCJ1M02P5A2TQQXGTKH59G": "tear_056"
+    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8K": "tear_035",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8M": "tear_055",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8N": "tear_018",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8P": "tear_040"
    },
    "stocks": {
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M02P5A2TQQXGTKH59E": "looseleaf_02",
-    "0001MCJ1M02P5A2TQQXGTKH59F": "legal_01",
-    "0001MCJ1M02P5A2TQQXGTKH59G": "looseleaf_01"
+    "0001MCJ1M0Z2P8BKKACS5XNZ8K": "looseleaf_01",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8M": "looseleaf_04",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8N": "lined_02",
+    "0001MCJ1M0Z2P8BKKACS5XNZ8P": "lined_02"
    },
    "scroll": {
-    "first": 8372,
-    "last": 8377,
-    "of": 8378
+    "first": 8384,
+    "last": 8391,
+    "of": 8391
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 144,
+   "driven_ms": 192,
    "seed": 20260903,
-   "events": 14053,
+   "events": 14067,
    "transport": "local",
-   "link": "connecting",
+   "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
    "writable_masks": 47,
@@ -93,18 +126,34 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 240,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
+   },
+   "sensation": null,
+   "ambient": {
+    "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
+    "pocket_feeling": "ugh",
+    "pocket_at": 1788464400000,
+    "allowed_to_interrupt": false
    },
    "at": "13_messenger_states.png"
   }
  ],
- "cold_ms": 12450,
+ "cold_ms": 2950,
+ "load": {
+  "ms": 2950,
+  "store": "kept",
+  "profile": "profile_seeded"
+ },
+ "far": [
+  {
+   "line": "read",
+   "at_frame": 0
+  },
+  {
+   "line": "typing on",
+   "at_frame": 0
+  }
+ ],
  "problems": [],
  "ok": true
 }

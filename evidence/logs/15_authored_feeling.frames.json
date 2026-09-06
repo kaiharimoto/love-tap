@@ -1,35 +1,53 @@
 {
- "dir": "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling",
- "frames": 308,
+ "dir": "/tmp/lovetap-capture/15_authored_feeling",
+ "frames": 304,
  "fps": 60.0,
- "seconds": 5.13,
- "mean_change_per_frame": 0.01021,
- "repeated_frames": 98,
- "repeated_fraction": 0.319,
- "longest_still_run": 36,
- "repeated_at": [
-  33,
-  34,
-  35,
-  36,
-  37,
-  38,
-  39,
-  45,
-  46,
-  47,
-  48,
-  49
+ "seconds": 5.07,
+ "clock": "driven",
+ "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
+ "runs": [
+  {
+   "frames": 17,
+   "step_ms": 16,
+   "dir": "evidence/frames/15_authored_feeling"
+  },
+  {
+   "frames": 75,
+   "step_ms": 16,
+   "dir": "evidence/frames/15_authored_feeling"
+  },
+  {
+   "frames": 106,
+   "step_ms": 16,
+   "dir": "evidence/frames/15_authored_feeling"
+  },
+  {
+   "frames": 106,
+   "step_ms": 16,
+   "dir": "evidence/frames/15_authored_feeling"
+  }
  ],
+ "cuts_between_runs": [
+  16,
+  91,
+  197
+ ],
+ "app_seconds": 4.86,
+ "playback_over_app_time": 1.042,
+ "mean_change_per_frame": 0.01413,
+ "repeated_frames": 0,
+ "repeated_fraction": 0.0,
+ "longest_still_run": 0,
+ "repeated_at": [],
  "brightness_jumps": 0,
  "ok": true,
  "strip": "evidence/crops/15_authored_feeling_strip.png",
  "strip_frames": [
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000000.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000061.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000123.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000184.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000246.png",
-  "/tmp/claude-0/-home-user-love-tap/cfd996db-ef62-553e-b282-37a75c91ece3/scratchpad/clip_15_authored_feeling/000307.png"
+  "/tmp/lovetap-capture/15_authored_feeling/000000.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000061.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000121.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000182.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000242.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000303.png"
  ]
 }
