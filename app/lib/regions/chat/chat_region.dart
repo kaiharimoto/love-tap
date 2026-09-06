@@ -291,7 +291,11 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   void _scrollToEnd() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final n = AppScope.of(context).thread.items.length;
-      if (n > 0 && _scroll.isAttached) _scroll.jumpTo(index: n - 1, alignment: 0.8);
+      // Onto the spacer that sits under the newest note, exactly as the thread does when it
+      // opens. It used to put the newest note's *top* four fifths of the way down the screen, so
+      // anything more than a line of it ran off the bottom behind the composer: the thing that
+      // had just arrived was the one thing you could not read.
+      if (n > 0 && _scroll.isAttached) _scroll.jumpTo(index: n, alignment: 0.985);
     });
   }
 
@@ -533,6 +537,9 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     );
   }
 
+  /// Whether the thread is showing its own end — the spacer, or one of the last two notes. What
+  /// decides whether something arriving brings itself into view or waits where it is: a thread
+  /// somebody has scrolled back through does not yank itself away from them.
   bool _nearEnd() {
     final ps = _positions.itemPositions.value;
     if (ps.isEmpty) return true;
