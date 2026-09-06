@@ -10,8 +10,8 @@ import 'package:desk/material/library.dart';
 import 'package:desk/spine/event.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Event _at(String id) => Event(
-      id: id, seq: 1, author: Person.noor, device: DeviceKind.android,
+Event _at(String id, {int seq = 1}) => Event(
+      id: id, seq: seq, author: Person.noor, device: DeviceKind.android,
       ts: DateTime.utc(2026, 4, 22).millisecondsSinceEpoch,
       type: 'message', payload: const {'text': 'x'},
     );
@@ -34,12 +34,14 @@ void main() {
   test('a screen that draws every row at one index still gets many edges', () {
     final lib = MaterialLibrary.instance;
     // what a search result list does: twelve different events, all at row zero
-    final ids = [
-      for (var i = 0; i < 12; i++) '00035DFJ2RVAY9KNK0GR8WXBB${String.fromCharCode(65 + i)}',
+    // twelve events as they really sit in a thread: consecutive sequence numbers, all at row zero
+    final edges = [
+      for (var i = 0; i < 12; i++)
+        tearFor(_at('00035DFJ2RVAY9KNK0GR8WXBB${String.fromCharCode(65 + i)}', seq: 7280 + i),
+            lib, row: 0),
     ];
-    final edges = [for (final id in ids) tearFor(_at(id), lib, row: 0)];
     final distinct = edges.toSet().length;
-    expect(distinct, greaterThanOrEqualTo(8),
+    expect(distinct, 12,
         reason: 'twelve notes on one screen shared their edges down to $distinct: $edges');
   });
 }

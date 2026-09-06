@@ -95,7 +95,13 @@ String? tearFor(Event e, MaterialLibrary lib, {bool writable = true, int row = 0
   if (masks.isEmpty) return null;
   final n = masks.length;
   final stride = _coprimeStride(n);
-  return masks[((hashOf(e.id) % n) * stride) % n];
+  // The event's own sequence number, which is the same on both phones and on every surface that
+  // draws it. Hashing the id instead is just as stable and collides: fifty masks among eight
+  // notes on a screen is a coin flip, and the chat hero's standard is that no edge appears twice.
+  // Consecutive events cannot collide on a sequence number, and notes on a screen are nearly
+  // consecutive. A pending event has no sequence yet, so it falls back to its id.
+  final at = e.seq ?? hashOf(e.id);
+  return masks[((at % n) * stride) % n];
 }
 
 int _coprimeStride(int n) {
