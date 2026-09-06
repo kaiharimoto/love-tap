@@ -60,11 +60,16 @@ class _UsRegionState extends State<UsRegion> {
   /// the paper ends.
   ///
   /// The dates and the list are the two anyone reads standing up, so they get more of them.
+  ///
+  /// And every module has to be on the desk at once, which is the brief's own test of the
+  /// architecture: a fifth module is a directory and a line in a registry, and the artifact has to
+  /// show that it arrived. Two rows each for five modules ran the last three off the bottom of the
+  /// screen — a coherence critic counted 03_us.report.json listing all five with their event
+  /// counts while the still showed two.
   static int _rowsFor(String id) => switch (id) {
     'dates' => 2,
-    'todos' => 3,
-    'calendar' => 2,
-    _ => 2,
+    'todos' => 2,
+    _ => 1,
   };
 }
 
