@@ -262,8 +262,14 @@ fi
 # ---- clips ---------------------------------------------------------------------------------------
 # ffmpeg is handed the frames the app produced, one per output frame, at the rate the clock was
 # stepped at: no interpolation, no dropped frames, nothing invented between them.
+# A clip plays at the rate its frames were taken at. The scenes step the app's clock 16 ms a
+# frame, which is 62.5 frames a second, and assembling at 60 played every clip 4.2 per cent slow —
+# a completeness pass measured it against the app time the scene logs record. Nothing about the
+# frames changes; the container is told the truth about them.
+CLIP_FPS=62.5
+
 make_clip() { # name fps min_seconds
-  local name="$1" fps="${2:-60}" min="${3:-4}"
+  local name="$1" fps="${2:-$CLIP_FPS}" min="${3:-4}"
   wants "$name" || return 0
   local dir="evidence/frames/$name"
   [ -d "$dir" ] || { note_missing "$name.mp4" "no frames were captured"; return 1; }
@@ -294,10 +300,10 @@ make_clip() { # name fps min_seconds
 for s in 06_unfolding 07_feeling_landing 11_chat_scroll 15_authored_feeling; do
   [ -f "evidence/scenes/$s.json" ] && run_far_scene "$s"
 done
-make_clip 06_unfolding 60 4
-make_clip 07_feeling_landing 60 5
-make_clip 11_chat_scroll 60 4
-make_clip 15_authored_feeling 60 4
+make_clip 06_unfolding $CLIP_FPS 4
+make_clip 07_feeling_landing $CLIP_FPS 5
+make_clip 11_chat_scroll $CLIP_FPS 4
+make_clip 15_authored_feeling $CLIP_FPS 4
 
 # The feeling's own sound goes into the two clips that carry an arrival, at the frame the arrival
 # began, and the haptic vocabulary the app dumped during 07 is drawn to scale for the critics.
@@ -319,7 +325,7 @@ fi
 # missing.
 if wants 08_state_propagating && [ -f evidence/scenes/08_state_propagating.json ]; then
   if run_far_scene 08_state_propagating; then
-    make_clip 08_state_propagating 60 4
+    make_clip 08_state_propagating $CLIP_FPS 4
   fi
 fi
 

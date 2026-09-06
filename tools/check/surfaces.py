@@ -23,6 +23,7 @@ import argparse
 import glob
 import json
 import os
+import re
 import sys
 
 import numpy as np
@@ -81,13 +82,39 @@ def read(path):
     return grey[rows.min():rows.max() + 1, cols.min():cols.max() + 1]
 
 
+def object_coverage(surfaces):
+    """Every object a feeling names, split by whether there is a rendered surface to measure."""
+    lib = os.path.join(ROOT, "app", "lib", "feelings")
+    named = set()
+    try:
+        with open(os.path.join(lib, "builtins.dart"), encoding="utf-8") as f:
+            named = set(re.findall(r"object:\s*'([a-z0-9_]+)'", f.read()))
+    except OSError:
+        return {"why": "app/lib/feelings/builtins.dart is not readable from here"}
+    drawn = set()
+    try:
+        with open(os.path.join(lib, "drawn.dart"), encoding="utf-8") as f:
+            drawn = set(re.findall(r"'(obj_[a-z0-9_]+)'\s*:", f.read()))
+    except OSError:
+        pass
+    measured = {k.split("/", 1)[1].rsplit(".", 1)[0] for k in surfaces if k.startswith("objects/")}
+    return {
+        "named": len(named),
+        "measured": sorted(named & measured),
+        "drawn_in_the_app": sorted(named & drawn),
+        "named_but_neither": sorted(named - measured - drawn),
+        "note": "a drawn feeling is a mark the app makes with a pen, not a render, so it has no "
+                "surface to measure; anything under 'named_but_neither' is a hole",
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="")
     ap.add_argument("--floor", type=float, default=0.0, help="override every floor")
     args = ap.parse_args()
 
-    report = {"floors": FLOORS, "surfaces": {}, "flat": []}
+    report = {"floors": FLOORS, "surfaces": {}, "flat": [], "too_small_to_measure": []}
     for family, floor in FLOORS.items():
         if args.floor:
             floor = args.floor
@@ -100,6 +127,10 @@ def main():
                 continue      # a shadow is meant to be smooth; that is what a shadow is
             a = read(path)
             if a is None:
+                # Too little opaque material to measure — and until now that was a silent skip,
+                # which is how three objects a feeling names went unmeasured for three cycles
+                # while the report said "none of them flat".
+                report["too_small_to_measure"].append(f"{family}/{name}")
                 continue
             best = 0.0
             for p in patches(a):
@@ -126,6 +157,14 @@ def main():
               "below_floor": sum(1 for x in v if x < FLOORS["folds"]), "floor": FLOORS["folds"]}
         for seq, v in sorted(sequences.items())
     }
+    # Which feelings' objects were actually measured, and which were not and why. The report used
+    # to be an inventory of the files that happen to exist, which a reader takes for an inventory
+    # of the feelings: a completeness pass found eight objects named by feelings with no entry
+    # here, including two that other critics were arguing about, and had no way to tell whether
+    # they were missing or simply not rendered. Some feelings are marks the app draws rather than
+    # things it renders, and a mark has no surface to measure. That is now said rather than left
+    # as a gap.
+    report["objects_named_by_feelings"] = object_coverage(report["surfaces"])
     report["read"] = len(report["surfaces"])
     report["ok"] = not report["flat"]
     text = json.dumps(report, indent=1)

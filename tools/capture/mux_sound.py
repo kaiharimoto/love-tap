@@ -2,7 +2,7 @@
 """Put the feeling's own sound into a clip, where the feeling arrived.
 
     python3 tools/capture/mux_sound.py evidence/07_feeling_landing.mp4 evidence/logs/07_feeling_landing.json \
-        --haptics evidence/logs/haptics.json --fps 60
+        --haptics evidence/logs/haptics.json --fps 62.5
 
 The scene log records, for every arrival the harness waited for, the far phone's instruction (which
 names the feeling) and the frame of the clip at which the arrival began. The feeling's sound is the
@@ -27,7 +27,7 @@ def main():
     ap.add_argument("clip")
     ap.add_argument("log")
     ap.add_argument("--haptics", default=str(ROOT / "evidence" / "logs" / "haptics.json"))
-    ap.add_argument("--fps", type=float, default=60.0)
+    ap.add_argument("--fps", type=float, default=62.5)
     ap.add_argument("--out", default="")
     a = ap.parse_args()
     log = json.loads(pathlib.Path(a.log).read_text())
@@ -44,7 +44,17 @@ def main():
             continue
         placed.append({"feeling": parts[1], "sound": str(path.relative_to(ROOT)),
                        "at_frame": arr["at_frame"], "at_seconds": round(arr["at_frame"] / a.fps, 3)})
-    report = {"clip": a.clip, "placed": placed}
+    # Say plainly where the sound came from. A completeness pass had to work this out for itself
+    # and was right to: the audio is the asset file the app plays, placed at the frame the log says
+    # the arrival began. It is not a recording of the running app — nothing here captures the
+    # browser's audio output — and a clip with a soundtrack invites exactly that assumption.
+    report = {
+        "clip": a.clip,
+        "placed": placed,
+        "source": "assets/sound/<id>.ogg, the file the app plays, mixed over silence",
+        "not": "a recording of the running app's audio output",
+        "fps": a.fps,
+    }
     if not placed:
         report["why"] = "no arrival of a feeling in the scene log, so no sound belongs in this clip"
         print(json.dumps(report))
