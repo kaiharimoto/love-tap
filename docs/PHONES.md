@@ -148,3 +148,20 @@ clip and four artifacts recorded missing for a reason that had nothing to do wit
 `./bootstrap.sh` puts them back. On a host with `/dev/kvm`, or an ARM64 host where the `arm64-v8a`
 image runs natively, that is the first thing to do; `capture.sh` already checks `adb shell true`
 and records 09 and 16 with their reason when it fails.
+
+### What one screen also costs, beyond 09 and 16
+
+Two artifacts is the obvious price of a container with no second device. There is a third, quieter
+one: `08_state_propagating.mp4` is required to show **both devices' screens in sequence**, and it
+cannot. It shows the whole of the mechanism — one person changing their mood, their need and their
+place, and the other person's phone changing in response on three different surfaces, with the far
+phone's own events arriving over the real transport — on the one screen that exists.
+
+The far phone in every capture is `app/tool/host_daemon.dart`: the app's own spine running in the
+host role, with the real pairing, the real outbox and the same seeded year. It has no screen by
+construction, and it cannot be given one here. A browser page cannot take the host role either,
+because the host binds a listening socket and a page cannot. So the second screen in 08 is the same
+missing screen as in 09 and 16, and no arrangement of the pieces in this container produces it.
+
+The clip is captured and scored with that clause unmet, and it is written here rather than left for
+a reader to notice.
