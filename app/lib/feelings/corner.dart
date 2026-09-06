@@ -129,8 +129,13 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
         // blinked. _curl is the corner's own turn, so the two are the same movement.
         if (_open || _curl.value > 0.01)
           Positioned.fill(
-            child: Opacity(
-              opacity: _curl.value.clamp(0.0, 1.0),
+            // The sheet is pulled out from under the corner, not faded up. Paper does not fade:
+            // while this was an Opacity the thread underneath read straight through the
+            // vocabulary — the ink of the notes below colliding with the names of the feelings —
+            // which is the translucent drawer the material language is written against. The
+            // scrim still fades, because a scrim is light and not a thing.
+            child: FractionalTranslation(
+              translation: Offset(0, (1.0 - _curl.value.clamp(0.0, 1.0)) * 0.92),
               child: _Fan(
                 registry: widget.registry,
                 family: _family,
@@ -145,6 +150,7 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
                 onDismiss: () => _close(),
                 under: _under,
                 intensity: _intensity,
+                scrim: _curl.value.clamp(0.0, 1.0),
               ),
             ),
           ),
@@ -228,6 +234,7 @@ class _Fan extends StatelessWidget {
     required this.onDismiss,
     required this.under,
     required this.intensity,
+    required this.scrim,
   });
 
   final FeelingRegistry registry;
@@ -238,6 +245,10 @@ class _Fan extends StatelessWidget {
   final VoidCallback onDismiss;
   final Feeling? under;
   final double intensity;
+
+  /// How far out the sheet is, 0 to 1. The scrim comes up with it; the sheet itself does not
+  /// fade, it moves.
+  final double scrim;
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +263,7 @@ class _Fan extends StatelessWidget {
         // there, at under two to one against the wood, and half the tiles came out on one side of
         // the wash and half on the other. The vocabulary is on paper now — a sheet pulled up from
         // under the corner — and paper is opaque.
-        decoration: const BoxDecoration(color: Color(0x46120D08)),
+        decoration: BoxDecoration(color: Color(0x46120D08).withValues(alpha: 0.27 * scrim)),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
