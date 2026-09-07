@@ -230,11 +230,15 @@ def render_bit(name, res, samples, out_dir, conditions=("day", "dusk")):
             scene = common.reset_scene()
             if pass_name:
                 common.add_shadow_catcher(scene, size_m=0.20)
-            else:
-                # visible_camera, not hide_render: hide_render takes the desk out of the light as
-                # well as out of the frame, and then the bit is lit by the constant sky alone.
-                common.add_desk(scene, size_m=0.20).visible_camera = False
             BUILDERS[kind](name, width, seed)
+            if not pass_name:
+                # visible_camera, not hide_render: hide_render takes the desk out of the light as
+                # well as out of the frame, and then the bit is lit by the constant sky alone. And
+                # under the bit rather than at the default z, placed after the geometry exists: an
+                # opaque plane through a staple's legs would rule a line across it.
+                built = [o for o in scene.collection.objects if o.type == "MESH"]
+                common.add_desk(scene, size_m=0.20,
+                                z=common.lowest_z(built) - 0.002).visible_camera = False
             frame = width * 1.5
             common.add_top_camera(scene, frame, frame, ortho=True, tilt_deg=18.0, distance=0.40)
             common.render_settings(scene, res, res, samples=samples, transparent=True, file_format="PNG")

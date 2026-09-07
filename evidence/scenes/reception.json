@@ -55,13 +55,37 @@
    "ms": 300
   },
   {
+   "do": "report",
+   "out": "evidence/logs/reception.report.json",
+   "at": "crops/reception_open.png"
+  },
+  {
+   "do": "push",
+   "payload": {
+    "kind": "feeling",
+    "from": "noor"
+   }
+  },
+  {
+   "do": "wait",
+   "ms": 1400
+  },
+  {
+   "do": "screen",
+   "out": "evidence/crops/reception_open.png",
+   "size": "1180x1100"
+  },
+  {
+   "do": "closeApp"
+  },
+  {
    "do": "wait",
    "ms": 900
   },
   {
    "do": "push",
    "payload": {
-    "kind": "feeling",
+    "kind": "message",
     "from": "noor"
    }
   },
@@ -77,7 +101,7 @@
   {
    "do": "push",
    "payload": {
-    "kind": "message",
+    "kind": "feeling",
     "from": "noor"
    }
   },
@@ -92,12 +116,8 @@
   },
   {
    "do": "notifications",
-   "out": "evidence/logs/reception.json"
-  },
-  {
-   "do": "report",
-   "out": "evidence/logs/reception.report.json",
-   "at": "crops/reception.png"
+   "out": "evidence/logs/reception.json",
+   "from": "push/"
   }
  ]
 }

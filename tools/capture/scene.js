@@ -27,11 +27,21 @@ if (!scenePath) {
 }
 const scene = JSON.parse(fs.readFileSync(scenePath, 'utf8'));
 const url = arg('url', scene.url || 'http://127.0.0.1:8799/');
-// The scene wins, not the command line. Fourteen of the fifteen are shot in WebKit because that
-// is what an iPhone runs; one of them cannot be, because Playwright's WebKit build has no
-// `Notification` and no `PushManager` at all — the whole interruption surface is absent, so the
-// app's own code falls into its catch and nothing is ever created to photograph. That one scene
-// says which browser it needs, and says so in its own log.
+// The scene wins, not the command line. Fourteen of the fifteen are shot in WebKit because that is
+// what an iPhone runs; one of them cannot be, and the reason is worth stating exactly because it is
+// easy to state wrongly.
+//
+// This harness sets `isMobile: true` below, which puts WebKit into iPhone-Safari emulation, and in
+// that mode `Notification` and `PushManager` are absent — measured: with a plain context or with
+// deviceScaleFactor alone the same webkit-2336 build reports both present and
+// `Notification.permission === 'default'`; with `isMobile: true` both are undefined. That absence
+// is not a gap in the build. It is what a Safari tab on an iPhone actually has: iOS gives the push
+// API only to a web app installed to the home screen.
+//
+// Turning the flag off would not help either. Measured on the same build: `grantPermissions
+// (['notifications'])` resolves and changes nothing, `Notification.requestPermission()` returns
+// 'denied', and `Notification.permission` never leaves 'default'. So no WebKit scene can produce a
+// notification to photograph, and the one that has to says which browser it needs.
 const browserName = scene.browser || arg('browser', 'webkit');
 const outDir = arg('out-dir', ROOT);
 // The far phone: where it wrote its six words, and where to leave it an instruction.
@@ -432,6 +442,16 @@ function ensure(p) {
         log.steps.push({ push: step.payload || null, scope: target.scopeURL });
         break;
       }
+      case 'closeApp': {
+        // The claim is that something reaches a phone nobody is looking at, so the app has to not
+        // be on the glass. Navigating away is the closest a browser gets to that: the page is gone,
+        // the service worker is not — which is the whole point of a service worker.
+        await page.goto('about:blank', { waitUntil: 'load' });
+        const where = await page.evaluate(() => location.href);
+        log.app_open = where !== 'about:blank' ? where : false;
+        if (where !== 'about:blank') problems.push('closeApp: still on ' + where);
+        break;
+      }
       case 'screen': {
         // The notification is the browser's own chrome on the display, outside the page, so the
         // page cannot photograph it. This grabs the root window instead.
@@ -453,6 +473,15 @@ function ensure(p) {
       case 'notifications': {
         // What the browser is holding, read from the browser. The app's own record says what it
         // asked for; this says what arrived.
+        //
+        // `from` is a path on the app's own origin that is not the app: the worker's own scope
+        // directory. getNotifications() is origin-scoped, so after the app has been navigated away
+        // from there has to be some document on that origin to ask through — and it must not be
+        // the app, or reading the record would re-open the thing whose absence is the point.
+        if (step.from) {
+          await page.goto(new URL(step.from, url).href, { waitUntil: 'load' });
+          await page.waitForTimeout(400);
+        }
         const recs = await page.evaluate(async () => {
           const out = { permission: null, records: [] };
           try { out.permission = Notification.permission; } catch (e) { out.permission = 'no Notification: ' + e; }
@@ -467,9 +496,14 @@ function ensure(p) {
           return out;
         });
         recs.browser = browserName;
-        recs.note = "Chromium on a Linux virtual display, because Playwright's WebKit build has "
-          + 'no Notification and no PushManager at all. This is not an iPhone banner and there is '
-          + 'no lock screen in evidence.';
+        recs.app_open = log.app_open === undefined ? true : log.app_open;
+        recs.note = 'Chromium on a Linux virtual display. WebKit is what the other fourteen '
+          + 'scenes are shot in, and under the iPhone-Safari emulation this harness uses it has no '
+          + 'Notification and no PushManager — which is what a Safari tab on an iPhone has, since '
+          + 'iOS gives the push API only to a home-screen web app; and even without that emulation '
+          + 'the permission cannot be granted there. So this is not an iPhone banner, there is no '
+          + 'lock screen in evidence, and what an installed iOS web app does with the same call is '
+          + 'not shown anywhere in this build.';
         const out = abs(step.out || 'evidence/logs/reception.json');
         ensure(out);
         fs.writeFileSync(out, JSON.stringify(recs, null, 1));

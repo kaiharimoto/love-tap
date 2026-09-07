@@ -26,7 +26,17 @@ List<Event> _aYear({int count = 14000}) {
       'message' => {'text': 'a line of the year, number $i'},
       'feeling' => {'feeling_id': 'hold', 'intensity': 0.7},
       'reaction' => {'target': target, 'feeling_id': 'hold'},
-      'state_passive' => {'signal': 'battery', 'value': 'low'},
+      // Real transitions, and ones the projector will actually say something about. This used to
+      // be {'signal': 'battery', 'value': 'low'} for every passive event in the fixture, and
+      // _worthSaying wants a num for battery — so the whole 14,000-event year produced no margin
+      // marks at all, _saidLast stayed empty for the fixture's life, and the rebuild test below
+      // compared two projections neither of which had anything to lose. That is why a projector
+      // that dropped three rows of the real year on every reset passed this file.
+      'state_passive' => i % 2 == 0
+          // a phone that leaves home four times over the year and is home at both ends of it,
+          // which is what makes the rebuild test below able to see anything at all
+          ? {'signal': 'at_home', 'value': (i ~/ 3000) % 2 == 0}
+          : {'signal': 'ringer', 'value': (i ~/ 1100) % 2 == 0 ? 'silent' : 'normal'},
       'read_marker' => {'upto_seq': seq - 1},
       'message_edit' => {'target': target, 'text': 'a line of the year, corrected'},
       _ => <String, dynamic>{},
@@ -161,6 +171,27 @@ void main() {
             reason: 'delivery differs at $upto, row $i');
       }
       expect(folded.readUpto, fresh.readUpto);
+    }
+  });
+
+  test('a rebuild does not swallow the first mark of the year', () {
+    // The projector holds, per person and signal, the last word it said, so a phone that flickers
+    // between two networks does not narrate itself. _reset() cleared the hourly throttle and not
+    // that, so a rebuild began holding what the previous fold had ended saying and suppressed the
+    // first mark of every key whose opening word matched. It cost three rows of the seeded year,
+    // silently, and five attempts at the 06 capture, which waited for a send that never crossed.
+    //
+    // A shorter log forces the rebuild, which is what a device that has been rolled back or has
+    // caught up out of order hands the projector.
+    final projector = ThreadProjector(me: Person.teo);
+    projector.update(year);
+    final shorter = year.sublist(0, year.length - 1);
+    final folded = projector.update(shorter);
+    final fresh = projectThread(shorter, me: Person.teo);
+    expect(folded.items.length, fresh.items.length,
+        reason: 'the rebuild lost ${fresh.items.length - folded.items.length} rows');
+    for (var i = 0; i < fresh.items.length; i++) {
+      expect(folded.items[i].id, fresh.items[i].id, reason: 'order differs at row $i');
     }
   });
 

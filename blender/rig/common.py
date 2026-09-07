@@ -235,6 +235,36 @@ def add_desk(scene, size_m=2.0, z=-0.0005):
     return desk
 
 
+def lowest_z(objs):
+    """The lowest world-space point of these objects, after modifiers.
+
+    A bounce plane has to go under the thing it is bouncing off. The objects in this library are
+    modelled centred on the origin rather than seated on it — twenty-five of the thirty-three have
+    geometry below zero, one of them by 22 mm — so a plane at z=0 buries their lower half in its own
+    shadow and rules a hard horizontal line across them.
+    """
+    dg = bpy.context.evaluated_depsgraph_get()
+    lo = 0.0
+    for o in objs:
+        try:
+            ev = o.evaluated_get(dg)
+            mesh = ev.to_mesh()
+        except Exception:
+            continue
+        if mesh is None:
+            continue
+        m = o.matrix_world
+        for v in mesh.vertices:
+            z = (m @ v.co).z
+            if z < lo:
+                lo = z
+        try:
+            ev.to_mesh_clear()
+        except Exception:
+            pass
+    return lo
+
+
 def add_shadow_catcher(scene, size_m=2.0):
     """An invisible plane that only receives shadows: for baking contact shadows with alpha."""
     bpy.ops.mesh.primitive_plane_add(size=size_m, location=(0, 0, -0.0002))

@@ -771,6 +771,14 @@ def render_object(name, res, samples, out_dir, conditions=("day", "dusk")):
                 # Without it the object was rendered in an empty scene, which is the one place a
                 # thing on a desk never is.
                 #
+                # It goes under the object rather than at z=0. These objects are modelled centred
+                # on the origin rather than seated on it: twenty-five of the thirty-three have
+                # geometry below zero, crumple_ball by 22.1 mm, so a plane at z=0 buries their lower
+                # half in its own shadow and rules a hard horizontal line across them — which a
+                # left-to-right measurement reads as a gradient, and which would have been the worst
+                # kind of fix: one that moves the number by breaking the picture. Two millimetres
+                # under the lowest vertex the object actually has, measured after modifiers.
+                #
                 # Measured, on a 20 mm diffuse cylinder at this tilt, quarters of the camera-facing
                 # wall, left to right: no ground +6.7 grey levels of swing, this desk +12.6, the
                 # white shadow catcher +17.4. It roughly doubles a small gradient; it does not
@@ -784,7 +792,8 @@ def render_object(name, res, samples, out_dir, conditions=("day", "dusk")):
                 # What it cannot do is put a gradient on a plane: a flat-lying ticket or a
                 # coffee ring has one normal, and one normal under a distant sun and an
                 # orthographic camera has one value. Those read flat because of their geometry.
-                common.add_desk(scene, size_m=0.20, z=0.0).visible_camera = False
+                common.add_desk(scene, size_m=0.20,
+                                z=common.lowest_z(objs) - 0.002).visible_camera = False
             # a shallow angle, the way a note lies on a desk in front of you: an object seen from
             # straight above reads as a silhouette, and these have to read as things
             cam = common.add_top_camera(scene, 0.075, 0.075, ortho=True, tilt_deg=26.0, distance=0.42)

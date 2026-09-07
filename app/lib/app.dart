@@ -103,7 +103,7 @@ class Shell extends StatefulWidget {
   State<Shell> createState() => _ShellState();
 }
 
-class _ShellState extends State<Shell> {
+class _ShellState extends State<Shell> with WidgetsBindingObserver {
   int _index = 1;
 
   /// Until the two phones are actually set up, the list of what is left is the first thing shown.
@@ -119,9 +119,25 @@ class _ShellState extends State<Shell> {
   StreamSubscription<(String, double)>? _landings;
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // The standing line is what the phone says about them while nobody is looking at it. Once
+    // somebody is, it has been read: leaving it up is the app talking over its own screen, and the
+    // surface that says what is happening now would be saying what was happening earlier. It used
+    // to survive being opened, because Ambient.clear() on the web was an empty method and nothing
+    // called it either way.
+    if (state == AppLifecycleState.resumed) {
+      unawaited(AppScope.of(context).ambient.clear());
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // and once at start-up: opening the app is the first time anybody has looked at it
+      unawaited(AppScope.of(context).ambient.clear());
       _readPhone();
       // Something they sent lands here the same way something you sent does. This is the whole
       // point of the app, so it happens whichever region is open rather than only in Chat.
@@ -158,6 +174,7 @@ class _ShellState extends State<Shell> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     if (Flags.capture) CaptureBus.clear();
     _landings?.cancel();
     _arrivals.close();

@@ -169,12 +169,23 @@ a reader to notice.
 ### The interruption, and what a Linux container can and cannot show of it
 
 For five cycles nothing in the evidence pictured a state change reaching somebody who had not opened
-the app — no notification, no lock screen, no widget. The reason was not the app. Every artifact is
-shot in Playwright's WebKit, because that is what an iPhone runs, and in that build `Notification`
-and `PushManager` are **undefined**: not denied, absent. `ambient_web.dart`'s first line reads
-`Notification.permission`, throws, falls into its catch, and leaves `_allowed` false for the rest of
-the run, so `showNotification` is never reached and nothing is ever created. `grantPermissions`
-resolves and changes nothing. There was never anything to photograph.
+the app — no notification, no lock screen, no widget. The reason was not the app, and it is not quite
+the browser either.
+
+Every artifact is shot in Playwright's WebKit, because that is what an iPhone runs, and the harness
+asks for an iPhone: `tools/capture/scene.js` builds every context with `isMobile: true`. In that
+mode `Notification` and `PushManager` are **undefined** — measured on webkit-2336: a plain context
+reports both present with `Notification.permission === 'default'`, a context with
+`deviceScaleFactor: 3` the same, and a context with `isMobile: true` reports both undefined. That
+absence is not a defect in the build. It is what a Safari tab on an iPhone has: iOS gives the push
+API only to a web app installed to the home screen, which is the state `17_setup_pwa` walks through
+and which this harness cannot enter.
+
+So `ambient_web.dart`'s first line reads `Notification.permission`, throws, falls into its catch, and
+leaves `_allowed` false for the rest of the run. `showNotification` is never reached and nothing is
+ever created. Turning the flag off does not help: on the same build `grantPermissions` resolves and
+changes nothing, `Notification.requestPermission()` returns `denied`, and the permission never
+leaves `default`. There was never anything to photograph in WebKit, under emulation or without it.
 
 `evidence/crops/reception.png` is that gap closed as far as this machine allows, and no further. It
 is one scene outside the seventeen, in Chromium, headed, on an Xvfb display: a real push delivered

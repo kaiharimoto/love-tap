@@ -249,11 +249,13 @@ for s in 10_first_run 17_setup_pwa; do
 done
 
 # ---- reception: a state change reaching a phone nobody is looking at ------------------------------
-# Not one of the seventeen. Every artifact in the set is shot in WebKit, because that is what an
-# iPhone runs, and Playwright's WebKit build has no `Notification` and no `PushManager` at all —
-# the whole interruption surface is absent, so the app's own code falls into its catch and there
-# has never been anything to photograph. This one scene says it needs Chromium, and a notification
-# is drawn by the browser rather than by the page, so it needs a display: Xvfb, headed.
+# Not one of the seventeen. Every artifact in the set is shot in WebKit under iPhone-Safari
+# emulation, and in that mode WebKit has no `Notification` and no `PushManager` — which is what a
+# Safari tab on an iPhone has, since iOS gives the push API only to a home-screen web app. The app's
+# own code reads Notification.permission, throws, and leaves itself un-allowed, so there has never
+# been anything to photograph. Without the emulation the same build exposes both and still refuses
+# to grant the permission, so this scene says it needs Chromium; and a notification is drawn by the
+# browser rather than by the page, so it needs a display: Xvfb, headed.
 #
 # What it is and is not is written into evidence/logs/reception.json beside the record.
 if [ -f evidence/scenes/reception.json ] && wants reception; then
