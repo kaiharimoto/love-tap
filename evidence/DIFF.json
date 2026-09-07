@@ -11,138 +11,172 @@
    "artifact": "01_pulse.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "1e7357da664abf0f",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; the shelf and the two state cards are as they were.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "02_chat.png",
    "label": "changed",
    "ssim": 0.6364,
-   "judgement": null,
+   "judgement": "regressed",
    "sha": "88408c9c225cc181",
    "previous_sha": "04f8862c1769df0e",
-   "label_basis": "ssim 0.6364 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.6364 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "SSIM 0.6364: the re-anchored frame does add ritual_kept and video to the kinds on screen, but it trades the previous frame's fully rendered photo row for a video clipped to a 190 px blank strip under the composer, so this capture of Chat shows no media pixels at all where the last one did.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "03_us.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "611b2828d9934050",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; the same five modules with the same glance lines.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "04_moments.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "8020852a573864ec",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0, so the four blank tiles below y 2260 are exactly the ones that were there before.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "05_settings.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "ca5af52907079655",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; the pairing card and the per-event-type interrupt matrix are unmoved.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "8a35afa099747ad3",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0, so the blank sheet that closes the clip closes it exactly as before.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "c4ccc9b7410c8270",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; the Pulse-to-Chat-to-Us landing is the same run.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
    "ssim": 0.8903,
-   "judgement": null,
+   "judgement": "regressed",
    "sha": "a8ffec8ab7a6d8a1",
    "previous_sha": "9f09a1f123cbe5ea",
-   "label_basis": "ssim 0.8903 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.8903 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "SSIM 0.8903: the substance is unchanged - the strip still reads OUT on Us at the end - but the blank chat row above \"a squeeze\" is now held for 145 frames (2.32 s of app time) against 75 frames (1.20 s) in the previous file, measured in the same box of the same downscale.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "not captured in this session or the last"
+   "judgement": "unchanged",
+   "why": "not captured in this session or the last",
+   "judged_because": "labelled absent with SSIM null and absent in the previous capture too, so nothing moved - but it is still the missing artifact this row most needs, and that is the blocking finding above.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "10_first_run.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "0595f1f92c9ef025",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; the unpaired first frame still correctly carries no standing strip.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "445b922f1905e85d",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; the same year-deep scroll with 0 repeated frames.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "12_search.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "de1e4dc5247b422f",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; the same twelve facet strips and the same two results.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "b7f5c510897a12fb",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; reply, edit, typing, attach tray and read ticks are as they were.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "changed",
    "ssim": 0.6799,
-   "judgement": null,
+   "judgement": "regressed",
    "sha": "e69ec80e9a8ec48b",
    "previous_sha": "d9c316ca5d6284ff",
-   "label_basis": "ssim 0.6799 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.6799 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "SSIM 0.6799: the picture behind the viewer changed from a warm neutral still that sat inside the build's palette to one carrying 1.42 per cent blue-violet flat triangles, a hue band measured at 0.00 per cent in the previous file and in 01, 02 and 04.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "e6fe52c20f22c87a",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; the six-family picker and the Settings landing are the same run.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "not captured in this session or the last"
+   "judgement": "unchanged",
+   "why": "not captured in this session or the last",
+   "judged_because": "labelled absent with SSIM null and absent in the previous capture too, so nothing moved - it remains the second half of the blocking finding above.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "17_setup_pwa.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "7c86d0958c3b1bc4",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "byte for byte the same file at SSIM 1.0; the same iPhone setup sheet, and logs/pwa.json still reads a standalone manifest, four icons, an apple-touch-icon and a registered service worker off the served page.",
+   "judged_by": "coherence critic"
   }
  ],
  "counts": {
@@ -151,5 +185,6 @@
   "unchanged": 12,
   "changed": 3,
   "absent": 2
- }
+ },
+ "judgements_from": "the coherence critic's report for this cycle"
 }

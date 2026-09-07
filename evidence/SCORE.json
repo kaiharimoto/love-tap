@@ -1,69 +1,69 @@
 {
- "cycle": 4,
+ "cycle": 5,
  "categories": {
   "messenger_reliability": {
    "weight": 30,
    "floor": 26,
-   "critic": 17,
+   "critic": 22,
    "critics": {
-    "messenger_reliability": 17
+    "messenger_reliability": 22
    },
-   "builder": 24,
-   "builder_why": "Twelve of the thirteen seeded scenes are paired with the far phone and connected on the whole year (link connected, 14,062 events and up; the two unpaired are the fresh-install artifacts, which is what they are for). 13 stages the whole grammar down real paths: two messages that go sent then read by a marker the far phone sent, one still in flight, one refused, a reaction, a reply, an edit through the composer's own send, and a row taken back. 02 frames a voice note beside a video, found by asking the thread where those kinds are rather than by a row number. Search is newest first with a reason on every hit; the viewer covers the desk. Held back by the missing second device, by transport: local in every report, and by a first launch that still costs 12.3 s to import the year (2.5-2.7 s on a kept store).",
-   "score": 17,
+   "builder": 19,
+   "builder_why": "Twelve seeded scenes paired and connected on the whole year; 13 stages send, sent, read, in flight, refused, a reaction, a reply, an edit through the composer's own path and a row taken back; 02 carries nine notes on nine different torn edges with six kinds of paper among them, the voice note and the video included; 14 opens the video in the viewer and plays it. Held back by the missing second device, by transport: local, by a first launch that still costs twelve seconds, and by thirty per cent of frames costing a second to build, which nobody has yet found.",
+   "score": 19,
    "meets_floor": false
   },
   "material_truth": {
    "weight": 25,
    "floor": 22,
-   "critic": 16,
+   "critic": 15,
    "critics": {
-    "material_truth": 16
+    "material_truth": 15
    },
-   "builder": 21,
-   "builder_why": "The fold was the thing that cost this row for three cycles and it is fixed at both ends: the camera tilt parameter rotated the camera on the spot instead of orbiting, and under that the flaps were folding beneath the sheet, which only a top-down camera could hide. All 240 frames are above the paper floor (worst 2.26, median 3.58 against 1.2) and the clip shows the packet, the flap standing with its shadow across the third below it, and the creases catching light on the settled sheet. Repeated letters: the twin share on the hero crop is 0.092 against 0.30 last cycle, from a cascade whose step comes from the preceding letter. Ink is a colour through a coverage plate now, so a stroke is not one value end to end. Held back because DeskStamp is unbuilt, because the desk finding is unclosed by my own admission, and because I have not measured the fold against a real photograph of a real letter.",
-   "score": 16,
+   "builder": 19,
+   "builder_why": "Two defects that stood through four cycles are gone. Paper casts a shadow onto the desk again: a Stack clips to its bounds by default and the baked shadow is framed a quarter wider than the piece, so every visible part of every contact shadow in the app was being cut off. And a window onto a sheet is drawn at one image pixel per device pixel rather than per logical point, so the tab strip is no longer three-times-magnified and smoothed \u2014 the shape the anti-goal forbids was in the app's own permanent chrome. Repeated letters sit at a twin share of 0.102 on the hero, against 0.30 two cycles ago; all 240 fold frames are above the paper floor. Held back because the shadow is four grey levels, because DeskStamp is unbuilt, and because I have not compared any of it with a photograph of real paper.",
+   "score": 15,
    "meets_floor": false
   },
   "emotional_transmission": {
    "weight": 20,
    "floor": 17,
-   "critic": 16.0,
+   "critic": 15,
    "critics": {
-    "emotional_transmission": 16.0
+    "emotional_transmission": 15
    },
    "builder": 16,
-   "builder_why": "07 is shot on the receiving phone across four arrivals on three surfaces, 6.74 s, no repeated frame; the page lifts on the pattern, the object lands, rests and is put away, and the pattern is annotated on the timeline as the brief requires \u2014 with no words on it, because the caption was an instrument printed over the app and four critics said so. 15 goes through the vocabulary family by family and ends on the one the couple's own feeling is in. haptics.json has 36 feelings, no two alike. A feeling's object is no longer clipped by the paper it arrives on: object and shadow are packed in their own frames and the box is the object. Held back because there is still no vibrator anywhere in the evidence, because the clip's sound is the asset file placed at the arrival rather than the running app's output, and because the two-device frame this row turns on does not exist.",
-   "score": 16.0,
+   "builder_why": "07 is four arrivals on three surfaces over 6.74 s with the pattern annotated and no words on it. Every feeling's object now has its own render under the desk lamp \u2014 the candle drops 40.8 grey levels and its red-minus-blue goes from 22 to 57 \u2014 so an object at dusk is no longer the one thing in the frame lit by daylight. 15 goes through the vocabulary family by family and ends on the couple's own. Held back because there is still no vibrator in the evidence, because the clip's sound is the asset file rather than the app's output, and because the two-device frame this row turns on does not exist.",
+   "score": 15,
    "meets_floor": false
   },
   "coherence": {
    "weight": 15,
    "floor": 13,
-   "critic": 11.5,
+   "critic": 13,
    "critics": {
     "code": 13,
-    "coherence": 11.5
+    "coherence": 13
    },
    "builder": 12,
-   "builder_why": "One kind of event is one kind of paper wherever it is met: the stock a type is on lives in one place and every module asks it, with a test that fails when a module names its own. The module events are their own renderers in the thread and Moments draws the same event on the same stock. The search affordance is a slip with an edge and a shadow rather than ink over whatever scrolled under it. Held back because nothing in the capture shows the Android side at all, because Us still draws its rows from its own bodies even though they now agree about paper, and because the code half of this row is mine to judge and I am not the one who should.",
-   "score": 11.5,
+   "builder_why": "One stock per event type, with a test. A torn edge comes from the event's own sequence number, so the same note is the same paper on every surface \u2014 it was the row index, which tore one event two ways in two regions and gave twelve search results one identical edge. All five shared-life modules are on the Us desk at once, which is the brief's own test of the architecture and which the still showed two of. Held back because nothing in the capture shows the Android side, and because the code half of this row is not mine to judge.",
+   "score": 12,
    "meets_floor": false
   },
   "anti_goal": {
    "weight": 10,
    "floor": 9,
-   "critic": 7.5,
+   "critic": 9.2,
    "critics": {
-    "anti_goal": 7.5
+    "anti_goal": 9.2
    },
    "builder": 8,
-   "builder_why": "No flat fill in a paper colour outside the paper widget; no emoji shapes or prize tokens among the objects; no counts, no badges, no streaks; every displayed string passes a voice lint that now names the rules it applied and lists all 115 strings it read, because a check reporting a count and an empty list cannot be audited. The instrument readout is off the picture. Held back because the seeded photographs are still renders that read as renders, and because the haptic lane, capture-only, is furniture on the frame however carefully it is placed.",
-   "score": 7.5,
+   "builder_why": "The flat-rectangle-with-a-drop-shadow that sat in the tab strip on ten of eleven stills is gone at its cause. No emoji shapes, no prize tokens, no counts, no badges, no streaks; the voice lint names its rules and lists all 115 strings. The instrument readout is off the picture and the annotation that remains carries no words. Held back because the seeded photographs still read as renders, and because a capture-only lane on the frame is furniture however carefully it is placed.",
+   "score": 8,
    "meets_floor": false
   }
  },
- "total": 68.0,
+ "total": 69,
  "exit_threshold": 95,
  "every_floor_met": false,
  "at_exit": false,
