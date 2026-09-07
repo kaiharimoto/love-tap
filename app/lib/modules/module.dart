@@ -14,7 +14,10 @@
 //     one off the wire. A module inventing its own schema is exactly what a single spine forbids,
 //     so this one is not a cost to remove. What it means in practice: a new module writes its
 //     types there and in docs/EVENT_TYPES.md, which is the same act.
-// That is now the whole cost. The other shared file was `regions/chat/renderers.dart`, which drew
+// That is now the whole cost, and module_costs_test counts it by reading the source: it forbids
+// every handle a shared file could key a per-module table off — the event type, the renderer the
+// registry names for it, and the module's own id — anywhere outside the module's own directory
+// and the spine registry. The other shared file was `regions/chat/renderers.dart`, which drew
 // every module's rows in the thread and wrote every module's sentence for search and the lock
 // screen — two per-type switches in a region that has nothing to do with any module. A module
 // brings both itself now (`bodies` and `sentence` below), the table is assembled from `kModules`
