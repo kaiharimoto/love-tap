@@ -29,6 +29,22 @@ void main() {
     }
   });
 
+  test('a type is in one of the three piles Moments keeps, or in none', () {
+    // The lens is a field on the type because it is not a search facet: facet names are indexed
+    // as search terms, and naming the lens there made 'happened' a keyword that returned every
+    // date, ritual and shelf card in the year. A typo in it would be silent — the event would
+    // simply never appear in Moments — so the spelling is held here.
+    const piles = {'media', 'felt', 'happened'};
+    for (final spec in kEventTypes) {
+      if (spec.lens == null) continue;
+      expect(piles, contains(spec.lens),
+          reason: '${spec.id} says it belongs in "${spec.lens}", which is not a pile Moments keeps');
+    }
+    expect(kEventTypes.where((s) => s.lens == 'media'), isNotEmpty);
+    expect(kEventTypes.where((s) => s.lens == 'felt'), isNotEmpty);
+    expect(kEventTypes.where((s) => s.lens == 'happened'), isNotEmpty);
+  });
+
   test('every event type reads as a sentence away from the thread', () {
     // Search results, notification bodies and the standing line all come through summaryOf, so a
     // type that has not been given one shows its registry id to a person, which is the failure
