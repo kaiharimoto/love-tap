@@ -30,14 +30,20 @@ If you are picking this up cold:
    shared file a fifth module cost is gone and `module_costs_test` counts what is left; a video row
    says it is a video; a picture already in hand is not redrawn as a sentence about fetching; and
    the desk's rows are asserted to end inside the desk, not only to begin inside it.
-1. **The library is mid-re-render.** `tools/render_cycle6.sh` remakes everything two rig changes
-   touched — the paper stocks under the new cockle, the feeling objects and the bits with the desk
-   under them, the fifty-five tear shadows that have never had a dusk version, and the dusk stocks.
-   It is idempotent (`--skip-existing`) and safe to restart: `setsid bash tools/render_cycle6.sh >
-   /tmp/render6.log 2>&1 < /dev/null &`. Check what is on disk before assuming it is done.
-2. **Three feeling objects changed geometry after that queue had already started**, so the queue
-   rendered them from the old script. `tools/render_objects_again.sh` remakes obj_plane, obj_boat
-   and obj_candle and re-packs. Run it after the queue's object stage.
+1. **The library is mid-re-render.** `tools/render_cycle6.sh` did the paper stocks, the feeling
+   objects and the bits; it was killed on its last stage. `tools/render_cycle6b.sh` is what is
+   left: the dusk stocks (27), and the three objects that changed after the first queue read the
+   script — the wrapper and the confetti, which read as a tongue and as sugared almonds, and the
+   bookmark, which measured flatter than anything else in the library until it was curled. Both
+   are idempotent and safe to restart: `setsid bash tools/render_cycle6b.sh > /tmp/q.log 2>&1 <
+   /dev/null &`. Check what is on disk before assuming it is done.
+2. **Fifty-four dusk tear shadows are still missing, deliberately.** One costs five minutes and
+   nothing in the seventeen artifacts is lit at dusk, so they run after the capture:
+   `bash blender/run.sh blender/paper/tear_relief.py -- --all --res 1400 --samples 48 --conditions
+   dusk --skip-existing`. (`--skip-existing` used to look for a file only the day pass writes, so
+   asking for dusk skipped all fifty-six; that is fixed, and the queue's "1 of 56" line was the
+   symptom.) Without them a dusk piece falls back to its daylight shadow, which is wrong in one
+   crop and in nothing else.
 3. **Then `./capture.sh`**, then the builder sheet, then the six critics, then `tools/score.py
    --cycle 6`.
 
