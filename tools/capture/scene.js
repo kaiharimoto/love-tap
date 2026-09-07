@@ -192,6 +192,19 @@ function ensure(p) {
   let framesSoFar = 0;
   let lastPng = null;
 
+  // A frames directory belongs to the run, not to the disk. Takes append to it — the second take
+  // of a clip carries on where the first stopped, and now that a take can get its length from the
+  // packed library it works out that offset by counting what is already there. So anything left
+  // behind by an earlier run has to go before the first take, or a debugging run with KEEP_FRAMES
+  // set would silently push this run's frames past somebody else's and the clip would open on a
+  // build that is no longer here.
+  for (const dir of new Set(scene.steps.filter((s) => s.do === 'frames').map((s) => abs(s.dir)))) {
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir)) {
+      if (f.endsWith('.png')) fs.unlinkSync(path.join(dir, f));
+    }
+  }
+
   for (const step of scene.steps) {
     const started = Date.now();
     switch (step.do) {
@@ -332,11 +345,29 @@ function ensure(p) {
         // the app draws every frame of it, and none of them is invented afterwards.
         const dir = abs(step.dir);
         fs.mkdirSync(dir, { recursive: true });
-        const count = step.count || 30;
+        // `count: "fold:<sequence>"` means one grab per packed frame of that fold sequence, read
+        // from the manifest the packer wrote. The fold clip grabs one frame per frame of the
+        // sequence, so its length is a fact about the packed library and not a number to type into
+        // a scene: the packer trims each sequence where it stops moving, and a re-render that moves
+        // that point used to leave the scene either cutting the fold short or running it into held
+        // frames the frame check then fails the artifact on.
+        let count = step.count || 30;
+        if (typeof count === 'string' && count.startsWith('fold:')) {
+          const seq = count.slice(5);
+          const index = JSON.parse(fs.readFileSync(path.join(ROOT, 'app/assets/INDEX.json'), 'utf8'));
+          const n = (index.folds || {})[seq];
+          if (!n) throw new Error(`no packed fold sequence called ${seq}`);
+          count = n;
+          log.steps.push({ frames_from_index: seq, count: n });
+        }
         const ms = step.ms || 33;
-        // where this step's frames start in the directory, so one clip can be made of two takes:
-        // a note opening, and then the thread it opened in
-        const from = step.from || 0;
+        // Where this step's frames start in the directory, so one clip can be made of two takes: a
+        // note opening, and then the thread it opened in. Left out, it carries on from whatever is
+        // already in the directory — which is what a run whose length came from the index needs,
+        // because the take after it cannot know its own offset in advance.
+        const from = step.from !== undefined
+          ? step.from
+          : fs.readdirSync(dir).filter((f) => f.endsWith('.png')).length;
         const drive = step.drive;
         const names = [];
         if (drive && drive.kind === 'drag') {

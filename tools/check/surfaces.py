@@ -111,34 +111,52 @@ def shading(a, family):
     lo = _boxblur(a, 3)
     hp = a - lo
     h, w = a.shape
-    # the surface's own idea of clean: below the 60th percentile of what it is made of, a block
-    # has something printed on it or drawn on it
-    finite = a[~np.isnan(a)]
-    clean = float(np.percentile(finite, 60)) - 12.0 if finite.size else 200.0
-    means, hps = [], []
+    # Every block of the surface, and print taken out of each one from the inside rather than by
+    # throwing the block away. Requiring a block to be free of print measured nothing at all on
+    # graph paper — no 32-pixel square of a grid is ever clean — and nothing at all on any dark
+    # stock while the threshold was absolute. A block of ruled paper is mostly paper: its median is
+    # the paper's tone, and the pixels near that median are the paper.
+    # Two passes. The first reads every whole block's paper tone; the second keeps the blocks that
+    # are actually on the surface. A packed sheet carries the ground it was photographed against
+    # around its edge — lined_01's border sits at 147 against an interior of 233 — and a first
+    # attempt that measured every block reported an 88 grey level "shading field", which is the
+    # edge of the sheet, not the light on it. The cut is relative to the surface's own tone, so it
+    # works on a dusk stock as well as a daylight one, which an absolute floor of 200 did not: it
+    # rejected every block of every dark sheet and let twenty-four surfaces pass unmeasured.
+    tones = []
     for y in range(0, h - BLOCK + 1, BLOCK):
         for x in range(0, w - BLOCK + 1, BLOCK):
             t = a[y:y + BLOCK, x:x + BLOCK]
             if np.isnan(t).any():
                 continue
-            # Ink-free and rule-free: a block with print in it measures the print. The test is
-            # against the surface's own tone rather than against 200, because an absolute floor
-            # silently measured nothing at all on anything darker than that — every block of a
-            # dusk stock was rejected, the gate found no blocks, and the surface passed by not
-            # being looked at. That is the failure mode this whole file exists to catch.
-            if t.min() <= clean or (t.max() - t.min()) >= 14:
-                continue
-            means.append(float(t.mean()))
-            q = hp[y:y + BLOCK, x:x + BLOCK]
-            hps.append(float(np.nanstd(q)))
-    out["clean_above"] = round(clean, 1)
-    if len(means) < 10:
-        out["unmeasurable"] = f"only {len(means)} blocks of this surface are free of print"
+            # the 75th percentile, not the median: on a ruled stock a block whose median lands on a
+            # rule reports the rule. The paper is the bright end of the block, on a dark stock too.
+            tones.append((y, x, float(np.percentile(t, 75))))
+    if len(tones) < 10:
+        out["unmeasurable"] = f"only {len(tones)} whole blocks of this surface"
+        return out
+    body = float(np.median([v for _, _, v in tones]))
+    means, hps = [], []
+    for y, x, tone in tones:
+        if tone < body - 20.0:
+            continue                      # the ground around the sheet, not the sheet
+        t = a[y:y + BLOCK, x:x + BLOCK]
+        near = np.abs(t - tone) <= 6.0
+        if near.sum() < 200:
+            continue
+        # the mean of the paper in this block, not the percentile that found it: a percentile of
+        # 8-bit data lands on a data point, so the swing came out quantised to whole grey levels
+        means.append(float(t[near].mean()))
+        hps.append(float(np.std(hp[y:y + BLOCK, x:x + BLOCK][near])))
     if len(means) >= 10:
         m = np.array(means)
         out["blocks"] = len(means)
         out["field_swing"] = round(float(np.percentile(m, 95) - np.percentile(m, 5)), 3)
-        out["tooth"] = round(float(np.median(hps)), 3)
+        if hps:
+            out["tooth"] = round(float(np.median(hps)), 3)
+            out["tooth_from_blocks"] = len(hps)
+    else:
+        out["unmeasurable"] = f"only {len(means)} blocks of this surface are on the surface"
     if family == "objects":
         cols = np.nanmean(a, axis=0)
         k = max(1, len(cols) // 3)
@@ -246,10 +264,15 @@ def main():
             report["surfaces"][f"{family}/{name}"] = entry
             if best < floor:
                 report["flat"].append(f"{family}/{name}: {best:.3f} < {floor}")
-            for key, want in SHADING_FLOORS.get(family, {}).items():
+            wants = SHADING_FLOORS.get(family, {})
+            for key, want in wants.items():
                 got = entry.get(key)
                 if got is not None and got < want:
                     report["unlit"].append(f"{family}/{name}: {key} {got} < {want}")
+            # A surface in a family that carries a floor and that cannot be measured has not
+            # passed — it has not been looked at, which is the thing this file exists to stop.
+            if wants and "unmeasurable" in entry:
+                report["unlit"].append(f"{family}/{name}: {entry['unmeasurable']}")
 
     # a sequence is two hundred and forty files; what a reader wants is the worst of them and the
     # middle of them, per sequence, beside the per-frame rows

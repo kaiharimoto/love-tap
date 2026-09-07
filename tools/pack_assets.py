@@ -460,10 +460,18 @@ def _fold_rest(seq, rows=None, band=None, src_size=None):  # noqa: C901
     moving = [i for i, x in enumerate(deltas) if x > gate]
     last = moving[-1] if moving else len(deltas) - 1
     keep = last + 2
-    if keep < len(files) * 2 // 3:
+    # A floor against a measurement that has gone wrong, and nothing more. It was a third of what
+    # was rendered, which is the wrong shape of guard: on a sequence rendered well past its rest
+    # point most of the frames are quiet, so "more than a third is quiet" is the normal case rather
+    # than the alarm. With the frames registered by their own crops the measurement says 147 of
+    # unfold_thirds' 240 move, and a two-thirds floor refused to trim at all — which packed every
+    # noise frame, made the manifest disagree with the scene, and tripped the check that compares
+    # them on every run afterwards. Two fixes that cancelled each other.
+    if keep < 12 or keep < len(files) // 8:
         out.update({"frames": len(files), "gate": round(gate, 3),
-                    "why": f"the measurement says only {keep} of {len(files)} frames move, which is "
-                           "too much to throw away on one number; nothing is trimmed"})
+                    "why": f"the measurement says only {keep} of {len(files)} frames move, which "
+                           "reads as a broken measurement rather than a short sequence; nothing "
+                           "is trimmed"})
         return out
     out.update({
         "frames": keep,

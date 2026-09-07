@@ -34,7 +34,7 @@
   {
    "do": "frames",
    "dir": "evidence/frames/06_unfolding",
-   "count": 24,
+   "count": 40,
    "ms": 16
   },
   {
@@ -44,8 +44,7 @@
   {
    "do": "frames",
    "dir": "evidence/frames/06_unfolding",
-   "count": 209,
-   "from": 24,
+   "count": "fold:unfold_thirds",
    "ms": 16
   },
   {
@@ -59,8 +58,21 @@
    "do": "frames",
    "dir": "evidence/frames/06_unfolding",
    "count": 45,
-   "from": 233,
    "ms": 16
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/06_unfolding",
+   "count": 70,
+   "ms": 16,
+   "drive": {
+    "kind": "fling",
+    "velocity": -1500,
+    "at": [
+     0,
+     34
+    ]
+   }
   },
   {
    "do": "report",

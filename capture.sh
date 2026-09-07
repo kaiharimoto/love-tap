@@ -249,25 +249,6 @@ for s in 10_first_run 17_setup_pwa; do
   [ -f "evidence/scenes/$s.json" ] && run_scene "$s" "$FRESH_URL"
 done
 
-# ---- the fold clip's length is the packer's number, not a number typed into the scene ------------
-# 06 grabs one frame per packed fold frame, so its count has to equal what pack_assets.py measured
-# the sequence stops moving at. They were two numbers in two files that happened to agree; a
-# re-render that moves the rest point would have cut the fold short or run it into held frames
-# that the frame check then fails the artifact on, with nothing saying why.
-if [ -f evidence/scenes/06_unfolding.json ]; then
-  python3 - <<'PYEOF' || note_missing "06_unfolding" "the scene's frame count disagrees with the packed fold sequence"
-import json, sys
-idx = json.load(open("app/assets/INDEX.json"))
-want = (idx.get("folds") or {}).get("unfold_thirds")
-scene = json.load(open("evidence/scenes/06_unfolding.json"))
-runs = [s for s in scene["steps"] if s.get("do") == "frames"]
-if want is None or len(runs) < 2 or runs[1]["count"] != want:
-    print(f"06_unfolding: the scene grabs {runs[1]['count'] if len(runs) > 1 else '?'} fold frames "
-          f"and the packed sequence has {want}", file=sys.stderr)
-    sys.exit(1)
-PYEOF
-fi
-
 # ---- reception: a state change reaching a phone nobody is looking at ------------------------------
 # Not one of the seventeen. Every artifact in the set is shot in WebKit under iPhone-Safari
 # emulation, and in that mode WebKit has no `Notification` and no `PushManager` — which is what a
