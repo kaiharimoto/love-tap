@@ -267,12 +267,20 @@ def object_coverage(surfaces):
             drawn = set(re.findall(r"'(obj_[a-z0-9_]+)'\s*:", f.read()))
     except OSError:
         pass
-    measured = {k.split("/", 1)[1].rsplit(".", 1)[0] for k in surfaces if k.startswith("objects/")}
+    # An entry under objects/ is a file that was opened, not a surface that was measured: an object
+    # whose only shading output is `unmeasurable` was being reported as covered, in the field whose
+    # whole job is to separate what was looked at from the holes.
+    measured, unmeasured = set(), set()
+    for k, v in surfaces.items():
+        if not k.startswith("objects/"):
+            continue
+        (unmeasured if "unmeasurable" in v else measured).add(k.split("/", 1)[1].rsplit(".", 1)[0])
     return {
         "named": len(named),
         "measured": sorted(named & measured),
+        "read_but_not_measurable": sorted(named & unmeasured),
         "drawn_in_the_app": sorted(named & drawn),
-        "named_but_neither": sorted(named - measured - drawn),
+        "named_but_neither": sorted(named - measured - unmeasured - drawn),
         "note": "a drawn feeling is a mark the app makes with a pen, not a render, so it has no "
                 "surface to measure; anything under 'named_but_neither' is a hole",
     }
@@ -281,11 +289,18 @@ def object_coverage(surfaces):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="")
-    ap.add_argument("--floor", type=float, default=0.0, help="override every floor")
+    ap.add_argument("--floor", type=float, default=None,
+                    help="override the patch_std floor for every family, including with 0")
     args = ap.parse_args()
 
+    # What this run used, not what the file declares. `--floor` replaced the per-family number in
+    # the loop and the report went on echoing the module's own dict, so the summary a reader reads
+    # said one thing while the failure list in the same file said another; and `if args.floor:`
+    # silently ignored `--floor 0`, which is the one value somebody passes to turn a gate off.
+    floors = {f: (args.floor if args.floor is not None else v) for f, v in FLOORS.items()}
+
     report = {
-        "floors": FLOORS,
+        "floors": floors,
         "shading_floors": SHADING_FLOORS,
         "what_lit_across_is": "the left third's mean luminance minus the right third's, over a "
                               "cut-out object. Reported, never gated: it measures how much the "
@@ -301,9 +316,7 @@ def main():
         "unlit": [],
         "too_small_to_measure": [],
     }
-    for family, floor in FLOORS.items():
-        if args.floor:
-            floor = args.floor
+    for family, floor in floors.items():
         # folds/<sequence>/NNNN.webp is one level deeper than the flat families
         found = sorted(glob.glob(os.path.join(ASSETS, family, "*.webp"))
                        + glob.glob(os.path.join(ASSETS, family, "*", "*.webp")))
@@ -350,7 +363,7 @@ def main():
         sequences.setdefault(seq, []).append(entry["patch_std"])
     report["fold_sequences"] = {
         seq: {"frames": len(v), "worst": round(min(v), 3), "median": round(sorted(v)[len(v) // 2], 3),
-              "below_floor": sum(1 for x in v if x < FLOORS["folds"]), "floor": FLOORS["folds"]}
+              "below_floor": sum(1 for x in v if x < floors["folds"]), "floor": floors["folds"]}
         for seq, v in sorted(sequences.items())
     }
     # Which feelings' objects were actually measured, and which were not and why. The report used
