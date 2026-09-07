@@ -66,7 +66,8 @@ fi
 echo "· reading every displayed string against docs/VOICE.md"
 python3 tools/lint/strings.py --out "$LOG/strings.json" || note_missing "voice" "a displayed string is against docs/VOICE.md"
 echo "· checking both hands still have all their ink"
-python3 tools/handwriting/check.py --out "$LOG/fonts.json" || note_missing "handwriting" "a glyph variant has lost a stroke"
+python3 tools/handwriting/check.py --out "$LOG/fonts.json" \
+  || note_missing "handwriting" "$(python3 tools/handwriting/why_it_failed.py)"
 echo "· checking every file in assets/ names what made it"
 python3 tools/check/manifest.py --out "$LOG/manifest.json" >/dev/null \
   || note_missing "assets" "a file in assets/ has no manifest entry naming its generator"

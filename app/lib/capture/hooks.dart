@@ -413,6 +413,12 @@ class CaptureHooks {
           // that the messenger carries a voice note is answered by the picture
           if (chat['anchor'] != null) 'anchor': chat['anchor'],
           if (chat['kinds'] != null) 'kinds': chat['kinds'],
+          if (chat['delivery'] != null) 'delivery': chat['delivery'],
+          if (chat['states_on_the_glass'] != null)
+            'states_on_the_glass': chat['states_on_the_glass'],
+          if (chat['reactions'] != null) 'reactions': chat['reactions'],
+          if (chat['edited'] != null) 'edited': chat['edited'],
+          if (chat['taken_back'] != null) 'taken_back': chat['taken_back'],
         };
       case 2:
         return {

@@ -10,15 +10,11 @@
  "steps": [
   {
    "do": "goTo",
-   "arg": 1
+   "arg": 2
   },
   {
    "do": "wait",
    "ms": 1400
-  },
-  {
-   "do": "scrollTo",
-   "arg": "end"
   },
   {
    "do": "wait",
@@ -98,6 +94,36 @@
    "ms": 16
   },
   {
+   "do": "goTo",
+   "arg": 0,
+   "after": 0
+  },
+  {
+   "do": "step",
+   "ms": 400
+  },
+  {
+   "do": "openCorner",
+   "arg": true,
+   "after": 0
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 22,
+   "from": 152,
+   "ms": 16
+  },
+  {
+   "do": "openCorner",
+   "arg": false,
+   "after": 0
+  },
+  {
+   "do": "step",
+   "ms": 16
+  },
+  {
    "do": "far",
    "arg": "feeling soup 0.55"
   },
@@ -108,7 +134,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 106,
-   "from": 152,
+   "from": 174,
    "ms": 16
   },
   {
@@ -131,7 +157,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 106,
-   "from": 258,
+   "from": 280,
    "ms": 16
   },
   {

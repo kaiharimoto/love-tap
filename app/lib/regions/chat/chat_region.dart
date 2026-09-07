@@ -184,6 +184,41 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       final items = AppScope.of(context).thread.items;
       return {
         'visible': [for (final p in ps) if (p.index < items.length) items[p.index].id],
+        // What each row on the glass says about itself. The artifact named for the messenger's
+        // states carried no record of any row's state, so a critic could only read the marks off
+        // the picture and count them all the same; there was nothing to check the picture against.
+        'delivery': {
+          for (final p in ps)
+            if (p.index < items.length && items[p.index].event.author == AppScope.of(context).me)
+              items[p.index].id: items[p.index].delivery.name,
+        },
+        'states_on_the_glass': {
+          for (final d in {
+            for (final p in ps)
+              if (p.index < items.length && items[p.index].event.author == AppScope.of(context).me)
+                items[p.index].delivery.name
+          })
+            d: [
+              for (final p in ps)
+                if (p.index < items.length &&
+                    items[p.index].event.author == AppScope.of(context).me &&
+                    items[p.index].delivery.name == d)
+                  items[p.index].id
+            ].length,
+        },
+        'reactions': {
+          for (final p in ps)
+            if (p.index < items.length && items[p.index].reactions.isNotEmpty)
+              items[p.index].id: items[p.index].reactions.length,
+        },
+        'edited': [
+          for (final p in ps)
+            if (p.index < items.length && items[p.index].edited) items[p.index].id
+        ],
+        'taken_back': [
+          for (final p in ps)
+            if (p.index < items.length && items[p.index].deleted) items[p.index].id
+        ],
         'scroll': ps.isEmpty ? null : {'first': ps.first.index, 'last': ps.last.index, 'of': items.length},
         'composer': _text.text,
         'attaching': _attaching,

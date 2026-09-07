@@ -215,11 +215,32 @@ class HostServer {
       return;
     }
     final pairing = pairingFor();
-    // the client may only author as the person it paired as
-    final allowed = incoming.where((e) => e.author == pairing?.clientPerson).toList();
+    // The host answers about every event it was sent, rather than dropping the ones it will not
+    // take. Silently discarding them left the other phone re-pushing them for ever with the row
+    // on its screen looking as if it had gone, and left the refusal path — one of the five states
+    // a message can be in — unreachable over the wire, so no artifact could ever show it.
+    final refused = <String, String>{};
+    final allowed = <Event>[];
+    for (final e in incoming) {
+      // the client may only author as the person it paired as
+      if (e.author != pairing?.clientPerson) {
+        refused[e.id] = 'this phone is paired with ${pairing?.clientPerson.name ?? 'nobody'}, '
+            'so it cannot take something written as ${e.author.name}';
+        continue;
+      }
+      // and it can only take a kind of thing it knows about: a phone on an older version does not
+      // have the newer one's event types in its registry, and guessing at one would corrupt the
+      // log both of them share
+      if (!kEventTypeById.containsKey(e.type)) {
+        refused[e.id] = 'this phone does not know what a ${e.type} is; it is on an older version';
+        continue;
+      }
+      allowed.add(e);
+    }
     final accepted = await spine.accept(allowed);
     await _json(req, {
       'accepted': accepted.map((e) => {'id': e.id, 'seq': e.seq}).toList(),
+      'refused': [for (final e in refused.entries) {'id': e.key, 'why': e.value}],
       'cursor': spine.cursor,
     });
   }

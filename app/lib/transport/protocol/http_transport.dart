@@ -212,9 +212,14 @@ class HttpTransport implements Transport {
     final body = utf8.encode(jsonEncode({'events': outbox.map((e) => e.toJson()).toList()}));
     final res = await _send('POST', '/events', body: body, contentType: 'application/json');
     final j = jsonDecode(res.body) as Map<String, dynamic>;
-    return (j['accepted'] as List)
-        .map((a) => Accepted(id: (a as Map)['id'] as String, seq: a['seq'] as int))
-        .toList();
+    return [
+      for (final a in (j['accepted'] as List))
+        Accepted(id: (a as Map)['id'] as String, seq: a['seq'] as int),
+      // and the ones it will not take, with the host's own sentence about why: the answer to a
+      // push is about every event in it, not only the ones that got through
+      for (final r in ((j['refused'] as List?) ?? const []))
+        Accepted(id: (r as Map)['id'] as String, seq: 0, refused: r['why'] as String),
+    ];
   }
 
   @override

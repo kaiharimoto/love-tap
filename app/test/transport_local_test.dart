@@ -103,6 +103,45 @@ void main() {
     await r.closeHost();
   });
 
+  test('a kind of thing the host does not know is refused, said so, and not sent again', () async {
+    // The refusal was one of the five states a message can be in and the only one no artifact
+    // could ever show, because it was unreachable over the wire: the host dropped whatever it
+    // would not take without answering about it, so the other phone re-pushed it every round for
+    // ever with the row on its screen looking sent.
+    final r = await Rig.up();
+    await r.pair();
+    await r.client.append('message', {'text': 'this one is fine'});
+    // a kind of event from a newer version of the app, which this host's registry has never
+    // heard of. Appended past the schema check, the way it would arrive from a phone that has it.
+    final odd = Event(
+      id: '0001MZZZZZZZZZZZZZZZZZZZZZ',
+      seq: null,
+      author: Person.teo,
+      device: DeviceKind.pwa,
+      ts: DateTime.utc(2026, 9, 3, 19, 40).millisecondsSinceEpoch,
+      type: 'constellation',
+      payload: const {'shape': 'the plough'},
+    );
+    r.client.addPendingForTest(odd);
+
+    expect(await r.sync.once(), isTrue);
+    expect(r.host.ordered.length, 1, reason: 'the host takes the one it knows and not the other');
+    expect(r.client.refused.keys, contains(odd.id));
+    expect(r.client.refused[odd.id], contains('older version'));
+    expect(r.client.pending.map((e) => e.id), [odd.id],
+        reason: 'a refused event stays in the outbox where the person who wrote it can see it');
+    expect(r.client.pushable, isEmpty, reason: 'and it does not go back over the wire');
+    expect(r.sync.report()['refused'], 1);
+
+    // and a second round does not push it again
+    final before = r.host.length;
+    await r.sync.once();
+    expect(r.host.length, before);
+    expect(r.client.refused.keys, contains(odd.id));
+    await r.closeClient();
+    await r.closeHost();
+  });
+
   test('outbox survives an app restart', () async {
     final r = await Rig.up();
     await r.pair();

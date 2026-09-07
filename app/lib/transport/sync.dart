@@ -80,8 +80,8 @@ class SyncEngine {
   }
 
   Future<void> _drainOutbox() async {
-    while (spine.pending.isNotEmpty) {
-      final batch = spine.pending.take(100).toList();
+    while (spine.pushable.isNotEmpty) {
+      final batch = spine.pushable.take(100).toList();
       // blobs first, so the host never sees an event whose media it cannot serve
       for (final e in batch) {
         for (final h in e.blobs) {
@@ -179,6 +179,7 @@ class SyncEngine {
         'faults': faults,
         if (lastFault != null) 'last_fault': lastFault,
         'pending': spine.pending.length,
+        'refused_in_the_outbox': spine.refused.length,
         'cursor': spine.cursor,
         'link': transport.current.toJson(),
       };

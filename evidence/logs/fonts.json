@@ -1,27 +1,45 @@
 {
  "fonts": [
   {
-   "font": "assets/fonts/NoorHand.ttf",
-   "glyphs": 775,
-   "variants_checked": 360,
+   "font": "assets/fonts/DeskStamp.ttf",
+   "stroke": {
+    "measured_at_px_per_em": 54,
+    "samples": 1589,
+    "mean_px": 6.336,
+    "cv": 0.4839,
+    "p1_px": 2.0,
+    "p99_px": 28.0,
+    "floor_cv": null
+   },
+   "glyphs": 465,
+   "variants_checked": 216,
    "twins": {
-    "variants": 5,
-    "share": 0.3006,
-    "if_the_step_were_fixed": 0.4039,
-    "floor": 0.2,
+    "variants": 3,
+    "share": 0.4123,
+    "if_the_step_were_fixed": 0.4117,
+    "floor": 0.3333,
     "texts": 4000
    },
    "findings": [],
    "variants_apart": {
-    "floor_units": 26.0,
-    "min": 18.8,
-    "median": 41.4,
+    "floor_units": 6.5,
+    "min": 10.8,
+    "median": 16.9,
     "too_close": []
    },
    "ok": true
   },
   {
-   "font": "assets/fonts/TeoHand.ttf",
+   "font": "assets/fonts/NoorHand.ttf",
+   "stroke": {
+    "measured_at_px_per_em": 54,
+    "samples": 2070,
+    "mean_px": 3.873,
+    "cv": 0.3132,
+    "p1_px": 2.0,
+    "p99_px": 7.194,
+    "floor_cv": 0.22
+   },
    "glyphs": 775,
    "variants_checked": 360,
    "twins": {
@@ -34,8 +52,50 @@
    "findings": [],
    "variants_apart": {
     "floor_units": 26.0,
-    "min": 11.7,
-    "median": 41.0,
+    "min": 14.7,
+    "median": 42.0,
+    "too_close": [
+     {
+      "glyph": "i",
+      "nearest_variants_apart": 24.6,
+      "floor": 26.0,
+      "identical": false
+     },
+     {
+      "glyph": "0",
+      "nearest_variants_apart": 24.3,
+      "floor": 26.0,
+      "identical": false
+     }
+    ]
+   },
+   "ok": true
+  },
+  {
+   "font": "assets/fonts/TeoHand.ttf",
+   "stroke": {
+    "measured_at_px_per_em": 54,
+    "samples": 1777,
+    "mean_px": 6.838,
+    "cv": 0.2384,
+    "p1_px": 4.0,
+    "p99_px": 9.994,
+    "floor_cv": 0.22
+   },
+   "glyphs": 775,
+   "variants_checked": 360,
+   "twins": {
+    "variants": 5,
+    "share": 0.3006,
+    "if_the_step_were_fixed": 0.4039,
+    "floor": 0.2,
+    "texts": 4000
+   },
+   "findings": [],
+   "variants_apart": {
+    "floor_units": 26.0,
+    "min": 11.4,
+    "median": 40.5,
     "too_close": []
    },
    "ok": true

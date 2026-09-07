@@ -1,6 +1,8 @@
 // The single event spine. Every region reads from here; every module writes here. There is no
 // other store. Host order (seq) is the thread order; the author's clock rides along.
 import 'dart:async';
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -133,6 +135,30 @@ class Spine {
 
   /// Events minted here that the host has not accepted yet (the outbox).
   List<Event> get pending => List.unmodifiable(_pending);
+
+  /// Puts an event straight into the outbox, past the schema check.
+  ///
+  /// Only a test uses this, and only for the one thing that cannot be produced any other way: an
+  /// event of a kind this build has never heard of, which is what a phone on a newer version
+  /// sends to a phone on an older one. Everything else goes through [append].
+  @visibleForTesting
+  void addPendingForTest(Event e) {
+    _pending.add(e);
+    _changes.add(const SpineChange(added: [], assigned: []));
+  }
+
+  /// The outbox minus what the host has already refused.
+  ///
+  /// A refusal is an answer, not a failure: the host has read the event and will not take it, so
+  /// sending it again gets the same answer. The sync engine used to push the whole outbox every
+  /// round, so a refused event went back over the wire for ever — and any round in which the host
+  /// changed its mind, or in which a different host answered, would quietly clear the mark and
+  /// leave the row looking sent. It stays in the outbox where the person who wrote it can see it
+  /// did not go, and it stays out of the wire.
+  List<Event> get pushable =>
+      List.unmodifiable(_pending.where((e) => !_refused.containsKey(e.id)));
+
+
 
   /// Accepted events followed by pending ones: what the thread shows.
   List<Event> get all => [..._ordered, ..._pending];
