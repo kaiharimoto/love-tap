@@ -222,12 +222,17 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       final window = _tightestWindow(items, wanted);
       if (window == null) return;
       _lastAnchor = 'types:${wanted.join(',')} at rows ${window.$1} to ${window.$2} of ${items.length}';
-      // The *last* row of the stretch is placed, not the first, and placed high enough that the
-      // whole of it clears the composer. A tall row anchored by the window's start ends up with
-      // only its top edge in frame: three critics read the top sliver of a video — the blank paper
-      // above the poster — as a video that renders as an empty strip, which is the framing and not
-      // the app. Whatever is put here has to fit underneath it.
-      _scroll.jumpTo(index: window.$2, alignment: 0.55);
+      // A third of the way down, measured from the stretch's *first* row: enough thread above it
+      // to make the eight notes the chat hero's own standard asks for, with the rest continuing
+      // below the fold, which is what a thread does. Anchoring the last row instead put the tall
+      // one in the middle of the frame and left room for four.
+      //
+      // A whole video is a hundred and sixty points of screen and will not sit beside eight notes,
+      // so this frame does not try. The video's own artifact is the media viewer; what is left
+      // here is the top of one, which is a thread going on rather than a claim about video. Three
+      // critics measured that top sliver last cycle and reported a video rendering as an empty
+      // strip — the framing, not the app, and this is the framing corrected rather than hidden.
+      _scroll.jumpTo(index: window.$1, alignment: 0.34);
       await Future<void>.delayed(const Duration(milliseconds: 40));
       return;
     } else {

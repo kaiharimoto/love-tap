@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2349,
+   "ms": 2947,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3557
+   "ms": 5095
   },
   {
    "do": "wait",
@@ -24,75 +24,75 @@
   },
   {
    "do": "scrollTo",
-   "ms": 2073
+   "ms": 8215
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1106
   },
   {
    "do": "openCorner",
-   "ms": 1620
+   "ms": 2928
   },
   {
    "do": "frames",
-   "ms": 31879
+   "ms": 55149
   },
   {
-   "at": 46876,
+   "at": 80144,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 5
+   "ms": 6
   },
   {
    "do": "step",
-   "ms": 1143
+   "ms": 1204
   },
   {
    "do": "frames",
-   "ms": 29197
+   "ms": 54992
   },
   {
-   "at": 77220,
+   "at": 136346,
    "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 5
+   "ms": 6
   },
   {
    "do": "step",
-   "ms": 1040
+   "ms": 1068
   },
   {
    "do": "frames",
-   "ms": 30071
+   "ms": 53805
   },
   {
-   "at": 108336,
+   "at": 191225,
    "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 5
+   "ms": 6
   },
   {
    "do": "step",
-   "ms": 1154
+   "ms": 2376
   },
   {
    "do": "frames",
-   "ms": 29139
+   "ms": 48558
   },
   {
    "do": "sendFeeling",
-   "ms": 4296
+   "ms": 12531
   },
   {
    "do": "frames",
-   "ms": 163119
+   "ms": 248632
   },
   {
    "do": "far",
@@ -100,35 +100,35 @@
   },
   {
    "do": "awaitArrival",
-   "ms": 3261
+   "ms": 2835
   },
   {
    "do": "frames",
-   "ms": 164941
+   "ms": 326615
   },
   {
    "do": "goTo",
-   "ms": 6831
+   "ms": 11364
   },
   {
    "do": "step",
-   "ms": 2198
+   "ms": 2457
   },
   {
    "do": "far",
-   "ms": 592
+   "ms": 1356
   },
   {
    "do": "awaitArrival",
-   "ms": 3152
+   "ms": 5181
   },
   {
    "do": "frames",
-   "ms": 131880
+   "ms": 297377
   },
   {
    "do": "report",
-   "ms": 419
+   "ms": 586
   }
  ],
  "shots": [
@@ -183,7 +183,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtq37nfb"
+     "pwa-mtqaltmo"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -195,7 +195,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 6560,
    "seed": 20260903,
-   "events": 14080,
+   "events": 14089,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -212,7 +212,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-06T17:50:39.161Z",
+    "started_at": "2026-09-06T22:24:06.235Z",
     "pattern": [
      {
       "ms": 150,
@@ -239,24 +239,24 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 30,
+    "rounds": 374,
     "pushed": 3,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
-    "cursor": 14080,
+    "cursor": 14089,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14080,
-     "our_cursor": 14080,
+     "peer_cursor": 14089,
+     "our_cursor": 14089,
      "last_error": null,
-     "since": "2026-09-06T17:42:34.606Z",
-     "last_contact": "2026-09-06T17:52:44.742Z"
+     "since": "2026-09-06T22:09:56.247Z",
+     "last_contact": "2026-09-06T22:29:03.626Z"
     }
    },
    "ambient": {
@@ -268,9 +268,9 @@
    "at": "15_authored_feeling"
   }
  ],
- "cold_ms": 2487,
+ "cold_ms": 2895,
  "load": {
-  "ms": 2487,
+  "ms": 2895,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -287,17 +287,17 @@
  "arrivals": [
   {
    "line": "feeling soup 0.55",
-   "before": 8077,
-   "after": 8078,
+   "before": 8079,
+   "after": 8080,
    "at_frame": 152,
-   "waited_ms": 2860
+   "waited_ms": 2434
   },
   {
    "line": "feeling soup 0.9",
-   "before": 8078,
-   "after": 8079,
+   "before": 8080,
+   "after": 8081,
    "at_frame": 258,
-   "waited_ms": 2752
+   "waited_ms": 4780
   }
  ],
  "problems": [],

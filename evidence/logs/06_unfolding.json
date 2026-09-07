@@ -10,49 +10,49 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2617,
+   "ms": 2318,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 5984
+   "ms": 5995
   },
   {
    "do": "wait",
-   "ms": 1604
+   "ms": 1603
   },
   {
    "do": "scrollTo",
-   "ms": 11882
+   "ms": 12984
   },
   {
    "do": "wait",
-   "ms": 1303
+   "ms": 1302
   },
   {
    "do": "far",
-   "ms": 816
+   "ms": 627
   },
   {
    "do": "awaitArrival",
-   "ms": 4383
+   "ms": 5236
   },
   {
    "do": "frames",
-   "ms": 84183
+   "ms": 94424
   },
   {
    "do": "unfold",
-   "ms": 2154
+   "ms": 6
   },
   {
    "do": "frames",
-   "ms": 1149078
+   "ms": 1006697
   },
   {
    "do": "report",
-   "ms": 414
+   "ms": 419
   }
  ],
  "shots": [
@@ -78,25 +78,28 @@
     "attaching": false,
     "replying_to": null,
     "editing": null,
-    "partner_typing": true
+    "partner_typing": true,
+    "kinds": {
+     "message": 4
+    }
    },
    "visible": [
-    "0001MCJ1M0TC6W483J2A1Z4B7F",
-    "0001MCJ1M0TC6W483J2A1Z4B7G",
-    "0001MCJ1M0TC6W483J2A1Z4B7H",
-    "01M1MCWTH1SR5JPBN615XS0Z3S"
+    "0001MCJ1M0ABJDVVAJPAEYR0XN",
+    "0001MCJ1M0ABJDVVAJPAEYR0XP",
+    "0001MCJ1M0ABJDVVAJPAEYR0XQ",
+    "01M1MCWF7PMYYG0ZS398BE5KP4"
    ],
    "tears": {
-    "0001MCJ1M0TC6W483J2A1Z4B7F": "tear_054",
-    "0001MCJ1M0TC6W483J2A1Z4B7G": "tear_016",
-    "0001MCJ1M0TC6W483J2A1Z4B7H": "tear_039",
-    "01M1MCWTH1SR5JPBN615XS0Z3S": "tear_002"
+    "0001MCJ1M0ABJDVVAJPAEYR0XN": "tear_002",
+    "0001MCJ1M0ABJDVVAJPAEYR0XP": "tear_033",
+    "0001MCJ1M0ABJDVVAJPAEYR0XQ": "tear_055",
+    "01M1MCWF7PMYYG0ZS398BE5KP4": "tear_042"
    },
    "stocks": {
-    "0001MCJ1M0TC6W483J2A1Z4B7F": "lined_01",
-    "0001MCJ1M0TC6W483J2A1Z4B7G": "lined_04",
-    "0001MCJ1M0TC6W483J2A1Z4B7H": "legal_01",
-    "01M1MCWTH1SR5JPBN615XS0Z3S": "lined_03"
+    "0001MCJ1M0ABJDVVAJPAEYR0XN": "lined_01",
+    "0001MCJ1M0ABJDVVAJPAEYR0XP": "looseleaf_01",
+    "0001MCJ1M0ABJDVVAJPAEYR0XQ": "legal_01",
+    "01M1MCWF7PMYYG0ZS398BE5KP4": "lined_03"
    },
    "scroll": {
     "first": 8070,
@@ -129,7 +132,7 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 419,
+    "rounds": 374,
     "pushed": 1,
     "refused": 0,
     "pulled": 1,
@@ -145,8 +148,8 @@
      "peer_cursor": 14073,
      "our_cursor": 14073,
      "last_error": null,
-     "since": "2026-09-06T13:19:51.261Z",
-     "last_contact": "2026-09-06T13:40:53.917Z"
+     "since": "2026-09-06T21:02:12.447Z",
+     "last_contact": "2026-09-06T21:21:03.011Z"
     }
    },
    "ambient": {
@@ -158,9 +161,9 @@
    "at": "06_unfolding"
   }
  ],
- "cold_ms": 2540,
+ "cold_ms": 2704,
  "load": {
-  "ms": 2540,
+  "ms": 2704,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -176,7 +179,7 @@
    "before": 8073,
    "after": 8074,
    "at_frame": 0,
-   "waited_ms": 3982
+   "waited_ms": 4833
   }
  ],
  "problems": [],

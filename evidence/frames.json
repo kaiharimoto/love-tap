@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-06T18:13:19Z",
+ "captured_at": "2026-09-07T00:26:31Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -26,7 +26,7 @@
    ],
    "app_seconds": 4.1,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 0.01067,
+   "mean_change_per_frame": 0.01148,
    "repeated_frames": 0,
    "repeated_fraction": 0.0,
    "longest_still_run": 0,
@@ -79,7 +79,7 @@
    ],
    "app_seconds": 6.74,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 0.01496,
+   "mean_change_per_frame": 0.01548,
    "repeated_frames": 0,
    "repeated_fraction": 0.0,
    "longest_still_run": 0,
@@ -138,7 +138,7 @@
    ],
    "app_seconds": 8.03,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 0.01286,
+   "mean_change_per_frame": 0.01299,
    "repeated_frames": 0,
    "repeated_fraction": 0.0,
    "longest_still_run": 0,
@@ -172,7 +172,7 @@
    "cuts_between_runs": [],
    "app_seconds": 4.8,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 0.07264,
+   "mean_change_per_frame": 0.07329,
    "repeated_frames": 0,
    "repeated_fraction": 0.0,
    "longest_still_run": 0,
@@ -243,7 +243,7 @@
    ],
    "app_seconds": 5.82,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 0.01631,
+   "mean_change_per_frame": 0.01523,
    "repeated_frames": 0,
    "repeated_fraction": 0.0,
    "longest_still_run": 0,
@@ -268,37 +268,37 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 2586,
+  "cold_ms": 2531,
   "steps": [
    {
     "do": "pair",
-    "ms": 2733,
+    "ms": 2435,
     "auto": true,
     "far": "http://127.0.0.1:8480"
    },
    {
     "do": "goTo",
-    "ms": 6409
+    "ms": 4635
    },
    {
     "do": "wait",
-    "ms": 2002
+    "ms": 2003
    },
    {
     "do": "scrollTo",
-    "ms": 8560
+    "ms": 8832
    },
    {
     "do": "wait",
-    "ms": 1103
+    "ms": 1104
    },
    {
     "do": "frames",
-    "ms": 729390
+    "ms": 755741
    },
    {
     "do": "timings",
-    "ms": 419
+    "ms": 441
    }
   ]
  },

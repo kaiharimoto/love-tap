@@ -78,7 +78,7 @@
    "text": "${(durationMs! / 1000).round()}s"
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:584",
+   "where": "app/lib/regions/chat/chat_region.dart:593",
    "text": "${scope.partner.name} ${S.typing}"
   },
   {

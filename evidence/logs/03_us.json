@@ -10,25 +10,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3356,
+   "ms": 3546,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4007
+   "ms": 4130
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2103
   },
   {
    "do": "shot",
-   "ms": 4214
+   "ms": 4239
   },
   {
    "do": "report",
-   "ms": 726
+   "ms": 731
   }
  ],
  "shots": [
@@ -110,8 +110,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-06T13:15:39.859Z",
-     "last_contact": "2026-09-06T13:15:42.426Z"
+     "since": "2026-09-06T20:58:01.927Z",
+     "last_contact": "2026-09-06T20:58:04.727Z"
     }
    },
    "ambient": {
@@ -123,9 +123,9 @@
    "at": "03_us.png"
   }
  ],
- "cold_ms": 2643,
+ "cold_ms": 2763,
  "load": {
-  "ms": 2643,
+  "ms": 2763,
   "store": "kept",
   "profile": "profile_seeded"
  },

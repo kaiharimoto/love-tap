@@ -10,33 +10,33 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2733,
+   "ms": 2435,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 6409
+   "ms": 4635
   },
   {
    "do": "wait",
-   "ms": 2002
+   "ms": 2003
   },
   {
    "do": "scrollTo",
-   "ms": 8560
+   "ms": 8832
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1104
   },
   {
    "do": "frames",
-   "ms": 729390
+   "ms": 755741
   },
   {
    "do": "timings",
-   "ms": 419
+   "ms": 441
   }
  ],
  "shots": [
@@ -60,9 +60,9 @@
   }
  ],
  "reports": [],
- "cold_ms": 2586,
+ "cold_ms": 2531,
  "load": {
-  "ms": 2586,
+  "ms": 2531,
   "store": "kept",
   "profile": "profile_seeded"
  },

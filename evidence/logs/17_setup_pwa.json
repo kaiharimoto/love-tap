@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2905
+   "ms": 2904
   },
   {
    "do": "pwa",
-   "ms": 712
+   "ms": 713
   },
   {
    "do": "shot",
-   "ms": 2327
+   "ms": 2039
   },
   {
    "do": "report",
-   "ms": 708
+   "ms": 707
   }
  ],
  "shots": [
@@ -46,7 +46,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-06T13:19:21.079Z",
+   "now": "2026-09-06T21:01:39.114Z",
    "driven_ms": 0,
    "seed": 20260903,
    "events": 0,
@@ -82,7 +82,7 @@
      "peer_cursor": null,
      "our_cursor": 0,
      "last_error": null,
-     "since": "2026-09-06T13:19:13.992Z",
+     "since": "2026-09-06T21:01:32.332Z",
      "last_contact": null
     }
    },
@@ -95,9 +95,9 @@
    "at": "17_setup_pwa.png"
   }
  ],
- "cold_ms": 1909,
+ "cold_ms": 1880,
  "load": {
-  "ms": 1909,
+  "ms": 1880,
   "store": "fresh",
   "profile": null
  },

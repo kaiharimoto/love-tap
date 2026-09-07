@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3662,
+   "ms": 3770,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 5916
+   "ms": 6106
   },
   {
    "do": "wait",
@@ -24,11 +24,11 @@
   },
   {
    "do": "shot",
-   "ms": 4110
+   "ms": 4707
   },
   {
    "do": "report",
-   "ms": 726
+   "ms": 720
   }
  ],
  "shots": [
@@ -159,8 +159,8 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-06T17:00:35.916Z",
-     "last_contact": "2026-09-06T17:00:38.789Z"
+     "since": "2026-09-06T20:57:12.770Z",
+     "last_contact": "2026-09-06T20:57:15.876Z"
     }
    },
    "ambient": {
@@ -172,9 +172,9 @@
    "at": "01_pulse.png"
   }
  ],
- "cold_ms": 12289,
+ "cold_ms": 12317,
  "load": {
-  "ms": 12289,
+  "ms": 12317,
   "store": "fresh",
   "profile": "profile_seeded"
  },

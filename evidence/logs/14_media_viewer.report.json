@@ -2,39 +2,45 @@
  "region": 1,
  "view": {
   "region": "chat",
-  "composer": "the second one, then",
+  "composer": "",
   "attaching": false,
   "replying_to": null,
   "editing": null,
-  "partner_typing": true
+  "partner_typing": false,
+  "anchor": "row 4788 of 8069",
+  "kinds": {
+   "message": 2,
+   "state_declared": 1,
+   "video": 1
+  }
  },
  "visible": [
-  "0003P4A218ZAJ17AQB86SG2SEV",
-  "0003P6AZ60EBYC9RTMBCXWKR7R",
-  "0003P6X94080SW3FA6FBY8NKCB",
-  "0003P9AZEGXQ38N9BVB70W8KDR"
+  "00020D7VJGABF9604GW09166QN",
+  "00020DC680NM68W87ZT33ZDBXB",
+  "00020K9HT8N4QBZM8W3AF4J2CT",
+  "00020P5YV8GCMVBPX6W1HZ7HNT"
  ],
  "tears": {
-  "0003P4A218ZAJ17AQB86SG2SEV": "tear_019",
-  "0003P6AZ60EBYC9RTMBCXWKR7R": "tear_042",
-  "0003P6X94080SW3FA6FBY8NKCB": "tear_004",
-  "0003P9AZEGXQ38N9BVB70W8KDR": "tear_024"
+  "00020D7VJGABF9604GW09166QN": "tear_002",
+  "00020DC680NM68W87ZT33ZDBXB": "tear_021",
+  "00020K9HT8N4QBZM8W3AF4J2CT": "tear_044",
+  "00020P5YV8GCMVBPX6W1HZ7HNT": "tear_049"
  },
  "stocks": {
-  "0003P4A218ZAJ17AQB86SG2SEV": "spiral_02",
-  "0003P6AZ60EBYC9RTMBCXWKR7R": "lined_02",
-  "0003P6X94080SW3FA6FBY8NKCB": "index_02",
-  "0003P9AZEGXQ38N9BVB70W8KDR": "lined_03"
+  "00020D7VJGABF9604GW09166QN": "legal_02",
+  "00020DC680NM68W87ZT33ZDBXB": "lined_01",
+  "00020K9HT8N4QBZM8W3AF4J2CT": "lined_03",
+  "00020P5YV8GCMVBPX6W1HZ7HNT": "lined_01"
  },
  "scroll": {
-  "first": 4242,
-  "last": 4245,
-  "of": 8073
+  "first": 4785,
+  "last": 4788,
+  "of": 8069
  },
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 144,
  "seed": 20260903,
- "events": 14071,
+ "events": 14062,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -51,30 +57,30 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 7,
-  "pushed": 0,
+  "rounds": 1,
+  "pushed": 1,
   "refused": 0,
   "pulled": 0,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
-  "cursor": 14071,
+  "cursor": 14062,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14071,
-   "our_cursor": 14071,
+   "peer_cursor": 14062,
+   "our_cursor": 14062,
    "last_error": null,
-   "since": "2026-09-06T13:18:32.590Z",
-   "last_contact": "2026-09-06T13:18:56.854Z"
+   "since": "2026-09-06T23:55:10.539Z",
+   "last_contact": "2026-09-06T23:55:32.775Z"
   }
  },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-  "pocket_feeling": null,
-  "pocket_at": null,
+  "pocket_feeling": "ugh",
+  "pocket_at": 1788464400000,
   "allowed_to_interrupt": false
  },
  "at": "14_media_viewer.png"
