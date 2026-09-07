@@ -46,6 +46,13 @@ class FoldFrames {
   final Set<int> _loading = {};
   int _playhead = 0;
 
+  /// The frame last handed to somebody to draw. A widget keeps the last image it was given so it
+  /// has something to hold while the next one decodes, and the window used to drop that frame out
+  /// from under it and dispose it: the engine then draws a texture that is not there
+  /// (`texImage2D: no image`) and throws inside the paint. Nothing is disposed while it is on the
+  /// glass.
+  int? _drawn;
+
   static String? _current;
   static FoldFrames? _instance;
 
@@ -103,12 +110,17 @@ class FoldFrames {
       unawaited(_fill(i));
     }
     final exact = _held[i];
-    if (exact != null) return exact;
+    if (exact != null) {
+      _drawn = i;
+      return exact;
+    }
     var best = -1;
     for (final k in _held.keys) {
       if (k <= i && k > best) best = k;
     }
-    return best < 0 ? null : _held[best];
+    if (best < 0) return null;
+    _drawn = best;
+    return _held[best];
   }
 
   /// The last frame, decoded on demand: what a note that was opened earlier lies open as.
@@ -131,7 +143,9 @@ class FoldFrames {
     await Future.wait(want.map(_decode));
     // let go of everything well behind the playhead — except the last frame, which every opened
     // letter on the screen is lying flat as
-    final drop = _held.keys.where((i) => i < from - (window - _ahead) && i != length - 1).toList();
+    final drop = _held.keys
+        .where((i) => i < from - (window - _ahead) && i != length - 1 && i != _drawn)
+        .toList();
     for (final i in drop) {
       _held.remove(i)?.dispose();
     }
