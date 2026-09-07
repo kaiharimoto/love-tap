@@ -6,7 +6,9 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../capture/bus.dart';
 import '../capture/hooks.dart';
@@ -64,6 +66,25 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
     } else {
       _curl.forward();
     }
+  }
+
+  /// The feeling under a finger, wherever on the screen it is.
+  ///
+  /// The tiles are drawn by the sheet and the drag is owned by the corner, so the corner cannot
+  /// ask its own children what is under the thumb — it asks the view. Each tile carries itself as
+  /// metadata, which is what a hit test returns along the way.
+  Feeling? _feelingAt(Offset global) {
+    final view = View.maybeOf(context);
+    if (view == null) return null;
+    final result = HitTestResult();
+    WidgetsBinding.instance.hitTestInView(result, global, view.viewId);
+    for (final entry in result.path) {
+      final target = entry.target;
+      if (target is RenderMetaData && target.metaData is Feeling) {
+        return target.metaData as Feeling;
+      }
+    }
+    return null;
   }
 
   void _close({Feeling? send}) {
@@ -139,6 +160,7 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
         // blinked. _curl is the corner's own turn, so the two are the same movement.
         if (_open || _curl.value > 0.01)
           Positioned.fill(
+            key: const ValueKey('the.vocabulary'),
             // The sheet is pulled out from under the corner, not faded up. Paper does not fade:
             // while this was an Opacity the thread underneath read straight through the
             // vocabulary — the ink of the notes below colliding with the names of the feelings —
@@ -164,13 +186,38 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
               ),
             ),
           ),
+        // Keyed, both of them. A Stack's children are matched by position when they have no
+        // keys, and the sheet appears *before* the corner in the list — so opening it moved the
+        // corner from the first child to the second, Flutter tore its element down and built a
+        // new one, and the gesture recogniser holding the press went with it. The corner opened
+        // and then heard nothing more from the thumb that opened it, which is exactly the drag
+        // this is for.
         Positioned(
+          key: const ValueKey('the.corner'),
           right: 0,
           bottom: 0,
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: _open ? () => _close() : _openSender,
+            // One gesture, from any region: press the corner, the sheet comes up under your
+            // thumb, drag onto a feeling and let go. It was three taps — the corner, a family,
+            // the tile — and the row asks for a feeling reachable in one gesture from anywhere.
+            // The hold is already the intensity, so the thing that decides how hard it lands is
+            // the same movement that chooses it. Tapping still works for anyone who would rather.
             onLongPressStart: (_) => _openSender(),
+            onLongPressMoveUpdate: (d) {
+              if (!_open) return;
+              final f = _feelingAt(d.globalPosition);
+              if (f?.id != _under?.id) {
+                setState(() => _under = f);
+                if (f != null) widget.onPreview?.call(f, _intensity);
+              }
+            },
+            onLongPressEnd: (d) {
+              if (!_open) return;
+              final f = _feelingAt(d.globalPosition);
+              if (f != null) _close(send: f);
+            },
             child: AnimatedBuilder(
               animation: _curl,
               builder: (context, _) =>
@@ -345,7 +392,13 @@ class _Fan extends StatelessWidget {
                         alignment: WrapAlignment.center,
                         children: [
                           for (var i = 0; i < members.length; i++)
-                            GestureDetector(
+                            MetaData(
+                              // what this tile is, so a thumb dragged out of the corner and over
+                              // it can be told what it is on without the corner knowing anything
+                              // about how the sheet lays itself out
+                              metaData: members[i],
+                              behavior: HitTestBehavior.opaque,
+                              child: GestureDetector(
                               // the whole tile takes the tap. A detector that defers to its
                               // child only hears a tap the child claims, and an object drawn
                               // with a painter claims nothing: a drawn feeling could only be
@@ -378,6 +431,7 @@ class _Fan extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                            ),
                             ),
                         ],
                       ),
