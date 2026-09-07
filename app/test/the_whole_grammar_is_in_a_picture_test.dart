@@ -168,4 +168,64 @@ void main() {
     expect(report['anchor'], contains('types:voice_note,video'),
         reason: 'the report has to say where it was pointed, or a reader cannot check it');
   });
+
+  testWidgets('the thread can be asked for a row with something stuck to it', (tester) async {
+    // A reaction is not a row of its own — the registry says rowInThread: false — so no list of
+    // types can ask for one, and a critic stepping every row of three artifacts and three hundred
+    // frames of a clip found not one reaction in the evidence while four hundred and thirty sit
+    // in the seeded year. `reacted` is a kind a row can be rather than a kind it is of.
+    CaptureBus.wanted = true;
+    addTearDown(() => CaptureBus.wanted = false);
+    final spine = await Spine.open(
+      SpineStore.memory(),
+      const Identity(person: Person.teo, device: DeviceKind.pwa),
+    );
+    late String reactedRow;
+    await spine.applyFromHost(await _fromNoor((far) async {
+      for (var i = 0; i < 20; i++) {
+        await far.append('message', {'text': 'row $i'}, hostAssign: true);
+      }
+      final photo = await far.append(
+        'photo',
+        {'blob': 'sha256-none', 'w': 1200, 'h': 1600, 'caption': 'walls down'},
+        hostAssign: true,
+      );
+      reactedRow = photo.id;
+      await far.append('voice_note', {
+        'blob': 'sha256-none',
+        'duration_ms': 4200,
+        'waveform': [2, 7, 4, 9, 3],
+        'mime': 'audio/ogg',
+      }, hostAssign: true);
+      await far.append('reaction', {'target': photo.id, 'feeling_id': 'hold'}, hostAssign: true);
+      for (var i = 0; i < 30; i++) {
+        await far.append('message', {'text': 'tail $i'}, hostAssign: true);
+      }
+    }));
+    final transport = LocalTransport(role: TransportRole.client, spine: spine, deviceId: 'test');
+    final scope = AppScope(
+      spine: spine,
+      transport: transport,
+      sync: SyncEngine(spine: spine, transport: transport),
+      clock: Clock(frozenAt: DateTime.utc(2026, 9, 3, 19, 40)),
+    );
+    addTearDown(scope.dispose);
+    tester.view.physicalSize = const Size(1440, 3120);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(AppScope.provide(
+      scope: scope,
+      child: const MaterialApp(home: Scaffold(body: ChatRegion())),
+    ));
+    await tester.pump(const Duration(milliseconds: 400));
+
+    await _run(tester, () => CaptureBus.scrollTo!('types:photo,voice_note,reacted'));
+    await tester.pump(const Duration(milliseconds: 400));
+
+    final report = CaptureBus.chatReport!();
+    expect((report['kinds'] as Map).keys.toSet(), containsAll(<String>['photo', 'voice_note']));
+    expect((report['visible'] as List?) ?? const [], contains(reactedRow),
+        reason: 'the row the reaction is stuck to is the one the anchor exists to frame');
+    expect(report['anchor'], contains('reacted'));
+  });
 }

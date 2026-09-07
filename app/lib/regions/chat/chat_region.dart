@@ -291,11 +291,13 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // below the fold, which is what a thread does. Anchoring the last row instead put the tall
       // one in the middle of the frame and left room for four.
       //
-      // A whole video is a hundred and sixty points of screen and will not sit beside eight notes,
-      // so this frame does not try. The video's own artifact is the media viewer; what is left
-      // here is the top of one, which is a thread going on rather than a claim about video. Three
-      // critics measured that top sliver last cycle and reported a video rendering as an empty
-      // strip — the framing, not the app, and this is the framing corrected rather than hidden.
+      // A whole video is a hundred and sixty points of screen and will not sit beside eight notes.
+      // The hero used to ask for one anyway and got the top of it: three critics measured that
+      // sliver and reported a video rendering as an empty strip, which was the framing rather than
+      // the app. A video's own artifacts are the media viewer, where one is open and playing, and
+      // the pile, where one is a print with the mark you press on it. What the hero asks for
+      // instead is what a day of theirs looks like: a photograph with a reaction stuck to it, a
+      // voice note, and the writing on both sides of it.
       _scroll.jumpTo(index: window.$1, alignment: 0.34);
       await Future<void>.delayed(const Duration(milliseconds: 40));
       return;
@@ -314,14 +316,31 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   /// The shortest run of rows holding at least one of every kind in [wanted], latest such run
   /// first — a couple's year has several, and the most recent is the one that looks like now.
   /// Null when the thread has no run holding all of them.
+  ///
+  /// A kind is an event type, or one of two things a row *is* rather than is of:
+  ///
+  ///   - `reacted` — a row with something stuck to it. A reaction is not a row of its own (the
+  ///     registry says `rowInThread: false`), so no list of types can ask for one, and a critic
+  ///     stepping every row of three artifacts and three hundred frames found not one reaction in
+  ///     the evidence while four hundred and thirty sit in the seeded year.
+  ///   - `reply` — a row written in answer to another, which carries the strip of the one it
+  ///     answers pinned above it.
   (int, int)? _tightestWindow(List<ThreadItem> items, List<String> wanted) {
     if (wanted.isEmpty) return null;
     final seen = <String, int>{};
     (int, int)? best;
     for (var i = 0; i < items.length; i++) {
-      final type = items[i].type;
-      if (!wanted.contains(type)) continue;
-      seen[type] = i;
+      final it = items[i];
+      final kinds = <String>{
+        it.type,
+        if (it.reactions.isNotEmpty) 'reacted',
+        if (it.replyTo != null) 'reply',
+      };
+      final here = kinds.where(wanted.contains);
+      if (here.isEmpty) continue;
+      for (final k in here) {
+        seen[k] = i;
+      }
       if (seen.length < wanted.length) continue;
       final lo = seen.values.reduce((a, b) => a < b ? a : b);
       if (best == null || i - lo <= best.$2 - best.$1) best = (lo, i);
