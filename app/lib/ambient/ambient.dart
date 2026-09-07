@@ -56,6 +56,10 @@ abstract class Ambient {
   Future<PushSubscription?> subscribe(String vapidPublicKey);
 
   Future<void> clear();
+
+  /// What the phone is actually holding, read back from the platform rather than from what this
+  /// app asked for. A record of an intention is not evidence that anything arrived.
+  Future<List<Map<String, Object?>>> received();
 }
 
 /// What the standing line says. One sentence, in the couple's voice, made only of things that are

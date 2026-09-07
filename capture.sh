@@ -243,6 +243,26 @@ for s in 10_first_run 17_setup_pwa; do
   [ -f "evidence/scenes/$s.json" ] && run_scene "$s" "$FRESH_URL"
 done
 
+# ---- reception: a state change reaching a phone nobody is looking at ------------------------------
+# Not one of the seventeen. Every artifact in the set is shot in WebKit, because that is what an
+# iPhone runs, and Playwright's WebKit build has no `Notification` and no `PushManager` at all —
+# the whole interruption surface is absent, so the app's own code falls into its catch and there
+# has never been anything to photograph. This one scene says it needs Chromium, and a notification
+# is drawn by the browser rather than by the page, so it needs a display: Xvfb, headed.
+#
+# What it is and is not is written into evidence/logs/reception.json beside the record.
+if [ -f evidence/scenes/reception.json ] && wants reception; then
+  echo "· reception"
+  if xvfb-run -a -s "-screen 0 1600x1200x24" \
+      node tools/capture/scene.js evidence/scenes/reception.json \
+      --url "$FRESH_URL" --profile "$SCRATCH/profile_reception" \
+      >"$SCRATCH/reception.out" 2>"$SCRATCH/reception.err"; then
+    echo "  ✓ reception"
+  else
+    note_missing "reception" "$(head -1 "$SCRATCH/reception.err" | sed 's/^Error: //' | cut -c1-180)"
+  fi
+fi
+
 # ---- the dusk crop: not an artifact, but what the material critic is handed beside the hero ------
 # A dusk build whose library has no dusk paper in it renders exactly like the day build, and the
 # crop taken from it came back byte-identical to 01_pulse.png — which is worse than not having one,

@@ -30,10 +30,9 @@ not from caution.
 **Read `evidence/critics/5/completeness.json` before you read anything else, including this file.**
 It is the pass that checks the other six and it has been the most valuable document in the build
 two cycles running. This time it corrects one critic for reading the arriving message in 06 as "the
-composer card", shows another's photographic-paper proof failing to reproduce by a factor of eight,
-and finds the lead worth having: a stock measured at patch_std 9.4-10.3 in the library arrives on
-screen at 1.22. The paper is being flattened somewhere between the asset and the glass, and material
-is ten points below its floor.
+composer card" and shows another's photographic-paper proof failing to reproduce. Its headline lead
+— a stock at patch_std 9.4-10.3 in the library arriving on screen at 1.22 — **is a comparison of two
+different instruments, and cycle 6 established that nothing is being flattened.** See section 1.
 
 **One thing is committed and not captured.** The note arriving in 06 unfolded for four seconds and
 ended completely blank — three critics measured it, minimum luminance 223, not one pixel of ink.
@@ -135,14 +134,24 @@ Everything in the previous handoff still holds. These are new.
 Every number here is a critic's, from `evidence/critics/5/`. Check them before acting on them; two
 of the six did not reproduce this cycle and the completeness pass says which.
 
-### 1. The paper is flattened between the library and the glass (material, 7 below floor)
-`evidence/logs/surfaces.json` puts the source stocks at patch_std **9.36 to 10.28**. The
-completeness pass measures **1.22** arriving on screen, and under 1.5 across 3,656 ink-free patches
-on four stills. A factor of eight, in the category furthest below its floor, and it is one number to
-chase rather than a judgement to argue with. Start at `PaperPiece`'s composition in
-`app/lib/material/paper.dart` — the stock is drawn, masked, tinted and layered, and something in
-that chain is averaging it away. Note that the cut-card path was fixed this cycle by drawing the
-window at device rather than logical density; the torn path may want the same treatment.
+### 1. ~~The paper is flattened between the library and the glass~~ — it is not (closed, cycle 6)
+`surfaces.py`'s `patch_std` is the largest standard deviation among nine 200 px patches of the whole
+file, and on a ruled stock every one of those squares contains three or four printed rules at a
+55 px pitch. The 9.36-10.28 is a measurement of the ruling. The 1.22 is a median over ink-free 32 px
+blocks. Measured the same way at both ends the library reads 1.09-1.49 and the screen 1.24 — they
+agree. `BoxFit.cover` does not downscale either: the ruled pitch is 55 px in the asset and 70 on
+screen, so the stock is magnified 1.27x. Nothing in `PaperPiece` is averaging anything away.
+
+What was real underneath it, and is fixed: the packer made a second lossy pass over a render that
+was already lossy WebP. It copies the bytes when nothing needs doing — 13.91 MB and the render's own
+high-pass of 1.194, against 15.44 MB and 1.144 at quality 95.
+
+What is still open: `blender/paper/stocks.py` renders paper as WebP at Blender's default quality 92,
+so every number downstream is measured against an already-degraded ceiling. Rendering paper once,
+losslessly, and encoding once in the packer would recover more than any quality knob downstream.
+
+`surfaces.json` now reports `tooth` and `field_swing` beside `patch_std`, and says in the record
+what `patch_std` is, so this particular confusion cannot be had a second time.
 
 ### 2. The light the shadows describe touches nothing else (material)
 A note's interior swings 9 to 13 grey levels on 230 across its full width. The 'hold' cylinder on

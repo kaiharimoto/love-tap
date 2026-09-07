@@ -29,6 +29,15 @@ extension type _Registration(JSObject o) implements JSObject {
   external _PushManager? get pushManager;
   external _Worker? get active;
   external JSPromise<JSAny?> showNotification(JSString title, JSObject options);
+  external JSPromise<JSArray<_Notification>> getNotifications();
+}
+
+extension type _Notification(JSObject o) implements JSObject {
+  external JSString get title;
+  external JSString get body;
+  external JSString get tag;
+  external bool get silent;
+  external void close();
 }
 
 extension type _Worker(JSObject o) implements JSObject {
@@ -151,7 +160,39 @@ class _WebAmbient implements Ambient {
   }
 
   @override
-  Future<void> clear() async {}
+  Future<void> clear() async {
+    // This was an empty method, which meant a standing line survived the app being opened: the
+    // one thing the surface is for is that it says what is happening while nobody is looking, and
+    // it went on saying it afterwards.
+    final reg = _registration;
+    if (reg == null) return;
+    try {
+      for (final n in (await reg.getNotifications().toDart).toDart) {
+        n.close();
+      }
+    } catch (_) {}
+  }
+
+  @override
+  Future<List<Map<String, Object?>>> received() async {
+    // What the browser is holding, as opposed to what this class asked it to hold. The capture
+    // report used to be able to say only the second, which is a record of an intention.
+    final reg = _registration;
+    if (reg == null) return const [];
+    try {
+      return [
+        for (final n in (await reg.getNotifications().toDart).toDart)
+          {
+            'title': n.title.toDart,
+            'body': n.body.toDart,
+            'tag': n.tag.toDart,
+            'silent': n.silent,
+          },
+      ];
+    } catch (_) {
+      return const [];
+    }
+  }
 }
 
 Ambient ambient() => _WebAmbient();

@@ -27,7 +27,12 @@ if (!scenePath) {
 }
 const scene = JSON.parse(fs.readFileSync(scenePath, 'utf8'));
 const url = arg('url', scene.url || 'http://127.0.0.1:8799/');
-const browserName = arg('browser', scene.browser || 'webkit');
+// The scene wins, not the command line. Fourteen of the fifteen are shot in WebKit because that
+// is what an iPhone runs; one of them cannot be, because Playwright's WebKit build has no
+// `Notification` and no `PushManager` at all — the whole interruption surface is absent, so the
+// app's own code falls into its catch and nothing is ever created to photograph. That one scene
+// says which browser it needs, and says so in its own log.
+const browserName = scene.browser || arg('browser', 'webkit');
 const outDir = arg('out-dir', ROOT);
 // The far phone: where it wrote its six words, and where to leave it an instruction.
 const pairPath = arg('pair', '');
@@ -54,7 +59,9 @@ function ensure(p) {
   const vp = Object.assign({ width: 440, height: 956, dpr: 3 }, scene.viewport || {});
   const type = browserName === 'chromium' ? chromium : webkit;
   const launch = {
-    headless: true,
+    // A notification is drawn by the browser, not by the page, so there is no headless way to
+    // photograph one: the window has to exist on a display. That scene runs under Xvfb.
+    headless: scene.headed ? false : true,
     channel: browserName === 'chromium' ? 'chromium' : undefined,
     ...(proxy ? { proxy: { server: proxy, bypass: '127.0.0.1,localhost' } } : {}),
   };
@@ -83,6 +90,15 @@ function ensure(p) {
   }
   const page = context.pages()[0] || (await context.newPage());
   const problems = [];
+  // A scene that photographs an interruption has to be allowed to interrupt. Everything else asks
+  // for nothing, so the fourteen other scenes see the same default-denied browser they always did.
+  if (scene.permissions && context.grantPermissions) {
+    try {
+      await context.grantPermissions(scene.permissions, { origin: new URL(url).origin });
+    } catch (e) {
+      problems.push('permissions: ' + e);
+    }
+  }
   const log = { scene: scene.name, browser: browserName, viewport: vp, url, steps: [], shots: [], reports: [] };
   page.on('pageerror', (e) => {
     // the message, the name and the top of the stack: an error whose String() is empty (a Dart
@@ -390,6 +406,73 @@ function ensure(p) {
         body.browser = browserName;
         body.viewport = vp;
         fs.writeFileSync(out, JSON.stringify(body, null, 1));
+        break;
+      }
+      case 'push': {
+        // A real push, delivered to the real worker, with the app not in front of anyone. The
+        // browser draws the notification; nothing in the app is asked to draw a picture of one.
+        // CDP's Push is the only way in without a push service to mint an endpoint — the payload
+        // arrives at the worker's own `push` listener exactly as a subscribed one would.
+        const cdp = await context.newCDPSession(page);
+        await cdp.send('ServiceWorker.enable');
+        const seen = [];
+        cdp.on('ServiceWorker.workerRegistrationUpdated', (p) => seen.push(...(p.registrations || [])));
+        await page.waitForTimeout(step.settle || 1500);
+        const target = seen.find((r) => /\/push\/?$/.test(r.scopeURL || '')) || seen[0];
+        if (!target) {
+          problems.push('push: no service worker registration to deliver to');
+          break;
+        }
+        await cdp.send('ServiceWorker.deliverPushMessage', {
+          origin: new URL(target.scopeURL).origin,
+          registrationId: target.registrationId,
+          data: JSON.stringify(step.payload || { kind: 'message', from: 'noor' }),
+        });
+        log.steps.push({ push: step.payload || null, scope: target.scopeURL });
+        break;
+      }
+      case 'screen': {
+        // The notification is the browser's own chrome on the display, outside the page, so the
+        // page cannot photograph it. This grabs the root window instead.
+        const { execFileSync } = require('child_process');
+        const out = abs(step.out || 'evidence/crops/reception.png');
+        ensure(out);
+        try {
+          execFileSync(path.join(ROOT, 'toolchain', 'ffmpeg', 'ffmpeg'), [
+            '-y', '-loglevel', 'error', '-f', 'x11grab',
+            '-video_size', step.size || '1600x1200',
+            '-i', process.env.DISPLAY || ':99', '-frames:v', '1', out,
+          ]);
+          log.shots.push({ out: step.out, of: 'the display, not the page' });
+        } catch (e) {
+          problems.push('screen: ' + String(e).slice(0, 200));
+        }
+        break;
+      }
+      case 'notifications': {
+        // What the browser is holding, read from the browser. The app's own record says what it
+        // asked for; this says what arrived.
+        const recs = await page.evaluate(async () => {
+          const out = { permission: null, records: [] };
+          try { out.permission = Notification.permission; } catch (e) { out.permission = 'no Notification: ' + e; }
+          try {
+            for (const r of await navigator.serviceWorker.getRegistrations()) {
+              for (const n of await r.getNotifications()) {
+                out.records.push({ scope: r.scope, title: n.title, body: n.body, tag: n.tag,
+                                   silent: n.silent, data: n.data });
+              }
+            }
+          } catch (e) { out.records = 'unreadable: ' + e; }
+          return out;
+        });
+        recs.browser = browserName;
+        recs.note = "Chromium on a Linux virtual display, because Playwright's WebKit build has "
+          + 'no Notification and no PushManager at all. This is not an iPhone banner and there is '
+          + 'no lock screen in evidence.';
+        const out = abs(step.out || 'evidence/logs/reception.json');
+        ensure(out);
+        fs.writeFileSync(out, JSON.stringify(recs, null, 1));
+        log.reception = recs;
         break;
       }
       case 'pwa': {

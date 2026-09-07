@@ -68,6 +68,21 @@ class _AndroidAmbient implements Ambient {
       await _channel.invokeMethod<void>('clear');
     } catch (_) {}
   }
+
+  @override
+  Future<List<Map<String, Object?>>> received() async {
+    // Android's own record of what is in the shade, once there is a device to read it off. There
+    // is not one here (docs/PHONES.md), so this returns nothing rather than something invented.
+    try {
+      final held = await _channel.invokeListMethod<Object?>('received');
+      return [
+        for (final e in held ?? const <Object?>[])
+          if (e is Map) e.map((k, v) => MapEntry('$k', v)),
+      ];
+    } catch (_) {
+      return const [];
+    }
+  }
 }
 
 Ambient ambient() => _AndroidAmbient();

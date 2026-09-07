@@ -30,11 +30,21 @@ class CaptureHooks {
   static CaptureHooks? _installed;
   static CaptureHooks? get installed => _installed;
 
+  /// What the phone is holding in its own notification store, kept fresh so the synchronous
+  /// report can carry it. Real time rather than the driven clock: this is not an animation, and
+  /// the arrival being recorded happens while nothing in the app is being stepped.
+  static List<Map<String, Object?>> _heldByThePhone = const [];
+  static Timer? _ambientPoll;
+
   static void install(AppScope scope) {
     if (!Flags.capture) return;
     final hooks = CaptureHooks(scope);
     _installed = hooks;
     impl.expose(hooks);
+    _ambientPoll?.cancel();
+    _ambientPoll = Timer.periodic(const Duration(milliseconds: 400), (_) async {
+      _heldByThePhone = await scope.ambient.received();
+    });
   }
 
   Future<String> goToRegion(int index) async {
@@ -358,6 +368,9 @@ class CaptureHooks {
         'pocket_feeling': scope.lastPocketFeeling,
         'pocket_at': scope.lastPocketAt,
         'allowed_to_interrupt': scope.ambient.allowed,
+        // what this app asked for is above; what the phone is holding is below, read back from
+        // the platform, so the record is not four statements of intent
+        'held_by_the_phone': _heldByThePhone,
       },
     };
   }

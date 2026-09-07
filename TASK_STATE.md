@@ -29,10 +29,15 @@ and continue from **Next action**.
   next sheet should be written from measurements rather than from caution.
 - **Read `evidence/critics/5/completeness.json` before anything else.** As in cycle 4 it is the
   most useful document in the set: it corrects material_truth for reading the arriving message in 06
-  as "the composer card", shows anti_goal's photographic-paper proof failing to reproduce by a
-  factor of eight, and names a stock measured at patch_std 9.4-10.3 in the library arriving on
-  screen at 1.22 — the paper is being flattened between the asset and the glass, which is the
-  single most valuable lead in the build.
+  as "the composer card", and shows anti_goal's photographic-paper proof failing to reproduce.
+  **Its headline lead was wrong, and cycle 6 established why.** "patch_std 9.4-10.3 in the library
+  arriving on screen at 1.22" compares two different instruments: `surfaces.py` reports the largest
+  standard deviation among nine 200 px patches, and on a ruled stock every such patch contains three
+  or four printed rules, so that number measures the ruling. Measured the same way at both ends, the
+  library and the screen agree to within noise — nothing was being flattened between the asset and
+  the glass. What was real underneath it was smaller and in a different place: the packer was making
+  a second lossy pass over an already-lossy render. `surfaces.json` now carries `tooth` and
+  `field_swing` beside `patch_std`, and says in the record what `patch_std` actually is.
 - branch: `claude/new-session-f95s8n` (sessions 5-7; pushed)
 - transport: local in every report; `evidence/coldstart.json` holds a real two-node tailnet run from
   the session that had a key. No `TS_AUTHKEY` here and the question may not be asked again.
@@ -151,38 +156,61 @@ whole one. The fix itself is one line and has a test.
 
 Ordered by what it costs to close.
 
-1. **The paper is being flattened between the library and the glass.** `logs/surfaces.json` puts the
-   source stocks at patch_std 9.36-10.28; the completeness pass measures 1.22 arriving on screen,
-   and under 1.5 across 3,656 ink-free patches on four stills. That is a factor of eight, in the
-   category furthest below its floor, and it is one number to chase rather than a judgement to
-   argue with.
-2. **The light the shadows describe touches nothing else.** A note's interior swings 9-13 grey
-   levels on 230 across its full width; the 'hold' cylinder reads 148 on one side of its curve and
-   153 on the other while throwing a hard directional shadow; the fold's flap darkens 17 per cent
-   while foreshortening 90. The shadows are baked and the surfaces they fall on are not.
-3. **Nothing pictures a state change reaching somebody who has not opened the app** — no
-   notification, no lock screen, no widget, in any of the fifteen artifacts.
-4. **The rituals module appears in no artifact**, and it is the one surface the mission pairs with
-   the word streaks: the place engagement machinery would hide was never photographed. 03_us shows
-   three of the five its own report lists, so the Us layout still needs work beyond the row counts.
-5. **17_setup_pwa.png is 27.3 per cent one exact RGB value at zero variance** — 1,225,541 pixels —
-   while every other still sits on wood measuring about 11.
-6. **frames.json's `repeated_frames: 0` is defeated by a one-level dither.** 32 per cent of 06's
-   transitions are visually identical and the clip is frozen for its last 416 ms. The check needs a
-   perceptual floor, not bit equality.
-7. **Both tailnet records give their direct path as 192.0.2.2**, which is RFC 5737 documentation
-   space, and `reliability.json`'s search capability is an identity map with no hits in it.
-8. **A fifth module costs five shared files, not one line** — the registry, the type spec, two
-   renderer entries and the stock assignment. The build's own structural claim is not met.
+Eight of them were put to a fresh-context investigator each, told to reproduce the finding end to
+end and name the mechanism in code, and each investigation was then put to three refuters told to
+break it. Three came back refuted. What follows is what survived, and what the refuters corrected.
+
+1. ~~**The paper is being flattened between the library and the glass.**~~ **It is not.** The
+   "factor of eight" compares `patch_std` — the largest std among nine 200 px patches, which on a
+   ruled stock is a measurement of the printed rules — against a median over ink-free 32 px blocks.
+   Applied to the same shipped files, the second metric reads 1.09-1.49 in the library and 1.24 on
+   screen: nothing measurable is lost. `BoxFit.cover` does not even downscale — the ruled pitch is
+   55 px in the asset and 70 on screen, so the stock is magnified 1.27x.
+   *What was real:* the packer re-encoded an already-lossy WebP render. Fixed in cycle 6 by not
+   re-encoding when nothing needs doing (13.91 MB and the render's own 1.194, against 15.44 MB and
+   1.144 at quality 95). A deeper one is still open: `stocks.py` renders paper as WebP at Blender's
+   default quality 92, so every downstream number is measured against an already-degraded ceiling.
+2. **The light the shadows describe touches nothing else.** Half true, and the half that is true is
+   geometry rather than the rig. A sheet cockled by 0.15-0.35 mm has a peak slope of 0.7 degrees —
+   it is a plane, and a plane under a distant sun and an orthographic camera has one value. Cycle 6
+   scales the cockle to a fraction of the sheet's width instead: 3.2 degrees, and the re-rendered
+   lined_01's ink-free block field swings 5.86 grey levels where it swung 1.33.
+   Objects and bits are now rendered with the desk under them, invisible to the camera and present
+   to the light — worth +6.7 to +12.6 across a cylinder's wall, measured, not the +0.5 to +18.6 the
+   investigation promised. A refuter showed why: the ground buys most of that by occluding the
+   lower half of a constant sky, not by bounce, and the sun was never delivering nothing.
+   *Still open:* the constant `Background` world carries no direction at all. Halving
+   `DAY_SKY_STRENGTH` would buy as much as the ground did, and would change every family at once.
+   And eight of the objects are flat-lying sheets and stains: no lighting change puts a gradient on
+   a plane. Those want different objects, not a different rig.
+3. **Nothing pictures a state change reaching somebody who has not opened the app.** Root cause
+   found: every artifact is shot in Playwright's WebKit, where `Notification` and `PushManager` are
+   *undefined* — the app's own code falls into its catch, `_allowed` stays false, and nothing is
+   ever created to photograph. Cycle 6 adds one scene outside the seventeen, in Chromium under Xvfb,
+   which delivers a real push to the real worker and grabs the display the browser drew on.
+4. **The rituals module appears in no artifact.** Root cause found and fixed: Us budgeted the desk
+   in rows, which the shell cannot price. It budgets in points now.
+5. **17_setup_pwa.png is 27.3 per cent one exact RGB value.** Root cause found and fixed: that value
+   is `DeskColour.dusk`, the flat ground `Desk` paints under the wood render, and the render arrived
+   8.5 s after the only frame that screen ever draws. It is resolved before the first frame now.
+6. **frames.json's `repeated_frames: 0` is defeated by sub-perceptual motion.** Root cause found and
+   fixed. Nothing dithers on purpose: the gate was a fortieth of a grey level averaged over seven
+   million subpixels, and the fold sequence's own ease-out clears it while the sheet has stopped
+   moving. Three terms on luma now, and the tile term is the one that separates slow motion from a
+   frozen frame.
+7. **Both tailnet records give their direct path as 192.0.2.2**, and the search capability is an
+   identity map. Both fixed: the record names the endpoint, says it is this container's own address,
+   and says what that means; the search record carries the query, the hit count and the id.
+8. **A fifth module costs five shared files, not one line.** Open.
 9. **A host-rejected event is re-pushed forever unmarked**: the refusal path is unreachable over the
-   wire.
-10. **DeskStamp is unbuilt**; no Android artifact; transport local.
+   wire. Open.
+10. ~~DeskStamp is unbuilt~~ — built. One union over a few thousand overlapping ribbon quads cost
+    Skia 65 seconds; unioned in batches of thirty-two and folded pairwise, the whole face is 112
+    seconds. No Android artifact; transport local.
 
 ## Next action
 
-Capture 06 and confirm the letter has words on it. Then item 1 above — the factor of eight between
-the stock in the library and the stock on the screen — because material is ten points below its
-floor and that is one measurement, not a matter of taste. Then a sixth cycle.
+Capture the whole set on the re-rendered library, then the sixth cycle.
 
 Write the next builder sheet from measurements. Twice now the critics have scored a row at or above
 its floor and the builder's own caution has taken it back below.
