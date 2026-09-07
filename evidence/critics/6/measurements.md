@@ -84,7 +84,11 @@ somebody else's.
   **1.76 to 2.22** across its height (reproduced; the critic said 1.78/2.19/2.22). It is on paper
   now — to be re-measured on the new artifact.
 - scroll: build p50 20 ms, p95 1426, max 1785 against a raster of 166-212, spikes every third
-  frame. jumpTo(index:) per frame, which is a rebuild. Now a pixel scroll — to be re-measured.
+  frame. jumpTo(index:) per frame, which is a rebuild. Now a pixel scroll, and measured in rows
+  built rather than in milliseconds, because milliseconds on a busy machine are not a measurement:
+  twenty frames of the fling against a four-hundred-row thread build **17 rows** with six on the
+  glass — under one a frame, which is the rows coming into view and nothing else. The same twenty
+  frames driven by jumping to an index build **543**. Both taken here, by the new guard test.
 - Us: with the year's own 351 module events in the shell's own slot, the old row budget puts the
   dates section 956 pt and the rituals 1142 pt into an 884 pt slot, and the shelf is not built at
   all. The point budget puts all five headings inside it. (Measured by the new guard test, which

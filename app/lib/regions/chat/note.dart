@@ -25,6 +25,18 @@ import '../../thread/renderers.dart';
 /// The width a note takes on the desk, as a fraction of the region's width.
 const double _noteWidthFraction = 0.76;
 
+/// How many rows of the thread have been built since this was last reset.
+///
+/// A fling is measured in rows built, not in milliseconds: the fault a critic found was that
+/// every frame of the scroll clip re-entered the list at a new index, which tears the active
+/// sliver down and builds another — build cost p50 20 ms, p95 1426, max 1785, against a raster
+/// that never left 166-212. Rows built per frame says that in a number that does not depend on
+/// what else the machine is doing.
+class ThreadRowStats {
+  static int built = 0;
+  static void reset() => built = 0;
+}
+
 class Note extends StatelessWidget {
   const Note({
     super.key,
@@ -55,6 +67,7 @@ class Note extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThreadRowStats.built++;
     final scope = AppScope.of(context);
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
     final mine = item.author == scope.me;
