@@ -217,6 +217,11 @@ function ensure(p) {
         await hook('__deskUnfold'); break;
       case 'stage':
         await hook('__deskStage'); break;
+      case 'slowSend':
+        // One message written into a link that has been slowed for a few seconds, so the shot
+        // catches it while its push is actually in flight. `sending` lasts exactly as long as a
+        // push does, which on a loopback is nothing at all.
+        await hook('__deskSendSlowly', step.text || 'ok — leaving now', step.ms || 5000); break;
       case 'pair': {
         // The six words the far phone is showing, read out of the file it wrote.
         const pair = JSON.parse(fs.readFileSync(abs(step.from || pairPath), 'utf8'));

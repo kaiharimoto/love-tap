@@ -72,6 +72,19 @@ somebody else's.
   picture and drew nothing. Now drawn as what a video is.
 - the outbox: a refused event was re-pushed every round for ever, and the host never refused
   anything — it dropped what it would not take without answering. Both fixed, with a test.
+- the five delivery states. Measured on 13_messenger_states.png: one distinct mark on five rows.
+  The ink clusters into five bands 171-172 px wide, and the rightmost 78x48 px of each differ from
+  each other by 0.047-0.079 mean absolute — the same double tick five times. Zero refusal marks in
+  the frame. The cause was that the staging annotated rather than produced: `markInFlight` changes
+  nothing (a pending row already reads `sending` while the link is up) and the sync engine clears
+  it in its own `finally`; `markRefused` is cleared by the next round that pushes the same event
+  and gets a seq. And the scene's `far read` ran *after* the staging, covering everything.
+  Now: the far phone reads first (so what is written after comes back `sent` and everything under
+  it is `read`), the host refuses one on request in its own words, and the last message is written
+  into a link slowed to six seconds so its push is genuinely in flight when the shutter opens —
+  `sending` lasts exactly as long as a push does, which on a loopback is nothing at all.
+  `queued` is the one state not staged: it needs the link down, and a frame of a disconnected phone
+  would contradict every other artifact. The report says which states were on the glass.
 
 ## Still open, measured or named
 - paper is rendered as WebP at Blender's default quality 92 and then packed, so every downstream

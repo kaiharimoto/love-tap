@@ -64,6 +64,15 @@
    "ms": 500
   },
   {
+   "do": "slowSend",
+   "text": "ok \u2014 leaving now",
+   "ms": 6000
+  },
+  {
+   "do": "wait",
+   "ms": 300
+  },
+  {
    "do": "shot",
    "out": "evidence/13_messenger_states.png",
    "settle": 900

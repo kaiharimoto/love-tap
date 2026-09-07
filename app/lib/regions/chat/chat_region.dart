@@ -19,6 +19,7 @@ import '../../media/capture.dart';
 import '../../media/local_uri.dart';
 import '../../media/read_bytes.dart';
 import '../../scope.dart';
+import '../../transport/local/local_transport.dart';
 import '../../spine/projections/thread.dart';
 import '../../voice/strings.dart';
 import 'note.dart';
@@ -186,11 +187,6 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       if (takeable.author == scope.me) {
         await scope.emit('message_delete', {'target': takeable.id});
       }
-      // And the last one, written and not yet gone. Nothing marks it: it is pending and the link
-      // is up, which is what `sending` means, and it is left that way for the shot. If a sync
-      // round takes it first the report says `sent` and the record is still true — what is not
-      // allowed is the app drawing a state it is not in.
-      await scope.emit('message', {'text': 'ok — leaving now'});
       // something they actually said, so the banner shows words rather than whatever the last
       // row happened to be
       final answerable = scope.thread.items.lastWhere(
@@ -200,6 +196,16 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       _text.text = 'the second one, then';
       if (mounted) setState(() {});
       await _scrollToAnchor(no.id);
+    };
+    CaptureBus.sendSlowly = (text, slowMs) async {
+      final scope = AppScope.of(context);
+      final t = scope.transport;
+      if (t is LocalTransport) t.scriptedFaults.setLatency(Duration(milliseconds: slowMs));
+      await scope.emit('message', {'text': text});
+      // not awaited: the push is the thing being photographed, so the handle returns while it is
+      // still going and the harness takes the picture into it
+      scope.sync.kick();
+      await Future<void>.delayed(const Duration(milliseconds: 120));
     };
     CaptureBus.unfoldAll = Folds.openAll;
     CaptureBus.chatReport = () {

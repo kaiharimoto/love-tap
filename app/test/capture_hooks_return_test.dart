@@ -107,6 +107,9 @@ void _everyHandleRuns() {
       'stageStates': () async => CaptureBus.stageStates!(),
       'scrollTo end': () async => CaptureBus.scrollTo!('end'),
       'unfoldAll': () async => CaptureBus.unfoldAll!(),
+      // a short slow-down here: the scene asks for six seconds, and this only has to prove the
+      // handle exists, reaches the transport and comes back
+      'sendSlowly': () async => CaptureBus.sendSlowly!('ok — leaving now', 120),
     };
     for (final e in handles.entries) {
       // Started, then pumped, then awaited. Every one of these ends in a delay — the handles wait

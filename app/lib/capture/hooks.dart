@@ -236,6 +236,19 @@ class CaptureHooks {
   /// Open every folded note on screen. No settle: the clip's frames begin on the very next step
   /// of the clock, so the first frame grabbed is the first frame of the sequence rather than the
   /// fourth, and the landing before it runs straight into the opening with nothing skipped.
+  /// Write one and leave it on its way, so the picture catches a row that is sending.
+  Future<String> sendSlowly(String text, int slowMs) async {
+    final f = CaptureBus.sendSlowly;
+    if (f == null) return 'chat is not on screen';
+    try {
+      await f(text, slowMs);
+    } catch (e) {
+      return 'sending slowly threw: $e';
+    }
+    await _settle();
+    return 'ok';
+  }
+
   Future<String> unfoldAll() async {
     final f = CaptureBus.unfoldAll;
     if (f == null) return 'chat is not on screen';

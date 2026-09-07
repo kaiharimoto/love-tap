@@ -19,6 +19,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskOpenViewer(JSFunction f);
   external set __deskSearch(JSFunction f);
   external set __deskUnfold(JSFunction f);
+  external set __deskSendSlowly(JSFunction f);
   external set __deskShowWords(JSFunction f);
   external set __deskReport(JSFunction f);
   external set __deskPair(JSFunction f);
@@ -53,6 +54,8 @@ void expose(CaptureHooks hooks) {
   w.__deskOpenViewer = ((JSString id) => _said(hooks.openViewer(id.toDart))).toJS;
   w.__deskSearch = ((JSString q) => _said(hooks.search(q.toDart))).toJS;
   w.__deskUnfold = (() => _said(hooks.unfoldAll())).toJS;
+  w.__deskSendSlowly = ((JSString text, JSNumber ms) =>
+      _said(hooks.sendSlowly(text.toDart, ms.toDartInt))).toJS;
   w.__deskShowWords = (() => _said(hooks.showWords())).toJS;
   w.__deskReport = (() => jsonEncode(hooks.report()).toJS).toJS;
   w.__deskPair = ((JSString base, JSString words) => _said(hooks.pair(base.toDart, words.toDart))).toJS;

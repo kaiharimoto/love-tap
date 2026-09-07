@@ -59,6 +59,16 @@ class CaptureBus {
   /// Chat: which rows are on screen, and where the thread is sitting.
   static Report Function()? chatReport;
 
+  /// Chat: write one and let it be on its way when the picture is taken.
+  ///
+  /// `sending` is the one delivery state that is genuinely transient — a row is sending while its
+  /// push is in flight and for no longer — so the only honest way to photograph it is to make the
+  /// push actually take a moment. The link is slowed for a few seconds and a message is written
+  /// into it; the sync engine sets its own in-flight mark around the push and clears it in its own
+  /// finally, so the row reads `sending` because it is sending. Marking a row by hand did nothing:
+  /// a pending row already reads `sending` while the link is up, and the engine cleared the mark.
+  static Future<void> Function(String text, int slowMs)? sendSlowly;
+
   /// Search: what the search page is showing while it is the thing on the glass. Registered by
   /// the page itself, because the hooks dispatch on the region index and the search page is drawn
   /// inside Chat's slot — so without this the search artifact's record described the thread
@@ -90,6 +100,7 @@ class CaptureBus {
     openViewer = null;
     search = null;
     chatReport = null;
+    sendSlowly = null;
     searchReport = null;
     viewerReport = null;
     momentsReport = null;
