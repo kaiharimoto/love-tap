@@ -30,6 +30,10 @@ class ShelfModule extends Module {
   @override
   List<String> get eventTypes => const ['passed_on'];
 
+  /// a card with what it is, who has it, and since when — measured on the desk, not guessed.
+  @override
+  double get rowHeight => 82.0;
+
   @override
   Widget build(BuildContext context, ModuleContext ctx) => ShelfList(ctx: ctx);
 
@@ -100,10 +104,7 @@ class ShelfList extends StatelessWidget {
       for (final (i, t) in ctx.few(things).indexed) _Thing(thing: t, ctx: ctx, row: i),
     ];
     if (ctx.onTheDesk) {
-      return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: rows);
+      return ctx.fit(rows);
     }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 8, 4, 90), children: rows);
   }

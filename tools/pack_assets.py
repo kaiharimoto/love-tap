@@ -27,7 +27,7 @@ SEED_DST = os.path.join(DST, "seed")
 
 # display sizes: the long side in the app, per family
 SIZES = {
-    "paper": 1500,        # a sheet fills at most the screen width at 3x
+    "paper": 1800,        # the render's own long side: resizing paper costs tooth
     "tears": 1024,        # masks are alpha only
     "objects": 420,       # a feeling object is at most ~140 dp
     "bits": 420,
@@ -35,12 +35,23 @@ SIZES = {
     "shell": 1500,
     "ink": 512,          # a coverage plate, tiled: packed at its own size or the tiling shifts
 }
-QUALITY = {"paper": 88, "tears": 92, "objects": 92, "bits": 92, "folds": 90, "shell": 88, "ink": 92}
+QUALITY = {"paper": 92, "tears": 92, "objects": 92, "bits": 92, "folds": 90, "shell": 88, "ink": 92}
 
 
 def convert(src, dst, long_side, quality, keep_alpha, luminance_to_alpha=False, crop=None):
     from PIL import Image
     im = Image.open(src)
+    # A second lossy pass over a file that is already the size it will be shown at, and already
+    # WebP, is pure loss: it re-encodes to a different set of coefficients and hands back less of
+    # the render than a copy would, for more bytes. Measured over the paper family: re-encoding at
+    # quality 95 costs 15.44 MB and delivers a high-pass tooth of 1.144 at screen scale; copying
+    # the bytes costs 13.91 MB and delivers 1.194 — the render's own number, RMSE 0.000. So when
+    # nothing needs doing to a file, nothing is done to it.
+    if (crop is None and not luminance_to_alpha and im.format == "WEBP"
+            and max(im.size) <= long_side):
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copyfile(src, dst)
+        return im.size
     if crop is not None:
         # every render of one tear shares a camera, so one box keeps them registered
         sx = im.width / 2048.0

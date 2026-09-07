@@ -501,6 +501,49 @@ def _path_of(polys, snap=0.0):
     return path
 
 
+# How many ribbon pieces go into one call to Skia's simplify. The cost of simplify is strongly
+# superlinear in the number of overlapping contours: a stamp glyph is a ribbon of oriented squares
+# at every sample plus two triangles per segment, which is a few thousand heavily overlapping
+# quads, and one call over the pile cost 65 seconds a variant — 390 seconds a glyph, 14 hours for
+# the face. Unioned in batches and then folded together pairwise, every call sees a handful of
+# contours and the result is identical: union is associative, and the batch tree is only a
+# different order of the same operation.
+UNION_BATCH = 32
+
+
+def _union_two(a, b):
+    out = pathops.Path()
+    out.fillType = pathops.FillType.WINDING
+    pathops.union([a, b], out.getPen())
+    return out
+
+
+def _fold_paths(paths):
+    """Pairwise union up a balanced tree, so no call ever sees the whole pile."""
+    while len(paths) > 1:
+        nxt = []
+        for i in range(0, len(paths), 2):
+            if i + 1 == len(paths):
+                nxt.append(paths[i])
+            else:
+                nxt.append(_union_two(paths[i], paths[i + 1]))
+        paths = nxt
+    return paths[0]
+
+
+def _batched(pieces, snap):
+    """simplify() over batches of the pieces, folded together. Raises like simplify does."""
+    leaves = []
+    for i in range(0, len(pieces), UNION_BATCH):
+        chunk = _path_of(pieces[i:i + UNION_BATCH], snap)
+        if not list(chunk.contours):
+            continue
+        leaves.append(pathops.simplify(chunk, fix_winding=True, keep_starting_points=False))
+    if not leaves:
+        return _path_of([], snap)
+    return _fold_paths(leaves)
+
+
 def _simplified(pieces):
     """Union the ribbon polygons, and never lose ink doing it.
 
@@ -514,6 +557,8 @@ def _simplified(pieces):
     """
     for snap in (0.0, 0.5, 1.0):
         try:
+            if len(pieces) > UNION_BATCH:
+                return _batched(pieces, snap), []
             return pathops.simplify(_path_of(pieces, snap), fix_winding=True, keep_starting_points=False), []
         except pathops.PathOpsError:
             continue

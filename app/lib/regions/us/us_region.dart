@@ -34,43 +34,63 @@ class _UsRegionState extends State<UsRegion> {
     // populated at once, and that is also just what the surface should be: you do not tab between
     // the dates and the list when they are both on the table in front of you. Tapping a heading
     // pushes that one open on its own, for when you are actually working in it.
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(0, 4, 0, 96),
-      children: [
-        for (var i = 0; i < kModules.length; i++)
-          _Section(
-            module: kModules[i],
-            ctx: ctx,
-            row: i,
-            rows: _rowsFor(kModules[i].id),
-            onOpen: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                // opened on its own it gets the whole of itself: no limit, its own scroller
-              builder: (_) => _Alone(module: kModules[i], ctx: ctx.whole()),
+    return LayoutBuilder(builder: (context, constraints) {
+      final rooms = shareOfTheDesk(constraints.maxHeight);
+      return ListView(
+        padding: const EdgeInsets.fromLTRB(0, 4, 0, 96),
+        children: [
+          for (var i = 0; i < kModules.length; i++)
+            _Section(
+              module: kModules[i],
+              ctx: ctx.inRoom(rooms[i], kModules[i].rowHeight),
+              row: i,
+              onOpen: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  // opened on its own it gets the whole of itself: no limit, its own scroller
+                builder: (_) => _Alone(module: kModules[i], ctx: ctx.whole()),
+                ),
               ),
             ),
-          ),
-      ],
-    );
+        ],
+      );
+    });
   }
 
-  /// How much of each module is on the desk before you have to move something, counted in rows
-  /// rather than in points. It used to be a height, and a height cuts a row in half: a to-do read
-  /// `get someone out to look at the` and then stopped at a hard horizontal edge. Rows end where
-  /// the paper ends.
-  ///
-  /// The dates and the list are the two anyone reads standing up, so they get more of them.
-  ///
-  /// And every module has to be on the desk at once, which is the brief's own test of the
-  /// architecture: a fifth module is a directory and a line in a registry, and the artifact has to
-  /// show that it arrived. Two rows each for five modules ran the last three off the bottom of the
-  /// screen — a coherence critic counted 03_us.report.json listing all five with their event
-  /// counts while the still showed two.
-  static int _rowsFor(String id) => switch (id) {
-    'dates' => 2,
-    'todos' => 2,
-    _ => 1,
-  };
+}
+
+/// The stamped heading on each section: one fixed height, so the desk knows what its own chrome
+/// costs before it shares out what is left.
+const double kUsHeading = 72;
+
+/// The gap under each section.
+const double kUsSectionGap = 10;
+
+/// How much of the desk each module gets, in points, given the height of the slot Us is drawn in.
+///
+/// Us used to budget in rows: two for the dates, two for the list, one each for the rest. A row is
+/// not a unit the shell can price — with the seeded year's own events the dates cost 576.7 pt and
+/// the list 254.0 pt of the ~896 pt the shell leaves, so the calendar heading landed at 928 pt and
+/// the rituals and the shelf never reached the glass, while 03_us.report.json listed all five with
+/// their event counts. The guard that was supposed to catch it measured five one-field synthetic
+/// events in a bare Scaffold against the whole screen, and certified a layout 380 pt shorter than
+/// the one that was photographed.
+///
+/// So: take the chrome off the top, give every module one row of itself, and share what is left.
+/// The dates and the list are the two anyone reads standing up, so they get the larger shares.
+/// [Module.rowHeight] only decides fairness — [FitRows] enforces the budget by laying the rows
+/// out, so a module whose declared row height has drifted takes a wrong share of the desk rather
+/// than falling off the bottom of it.
+List<double> shareOfTheDesk(double slot) {
+  const weights = {'dates': 2.0, 'todos': 2.0};
+  final chrome = kModules.length * (kUsHeading + kUsSectionGap) + 4 + 8;
+  final minima = [for (final m in kModules) m.rowHeight];
+  final room = slot.isFinite ? slot - chrome : double.infinity;
+  if (!room.isFinite) return minima;
+  var extra = room - minima.fold<double>(0, (a, b) => a + b);
+  if (extra <= 0) return minima;
+  final w = [for (final m in kModules) weights[m.id] ?? 1.0];
+  final total = w.fold<double>(0, (a, b) => a + b);
+  return [for (var i = 0; i < kModules.length; i++) minima[i] + extra * w[i] / total];
 }
 
 /// One module on the desk: its name stamped on an index card laid over the top of it, and as much
@@ -80,26 +100,25 @@ class _Section extends StatelessWidget {
     required this.module,
     required this.ctx,
     required this.row,
-    required this.rows,
     required this.onOpen,
   });
 
   final Module module;
   final ModuleContext ctx;
   final int row;
-
-  /// How many of the module's own rows are on the desk. Whole rows, so nothing is sliced.
-  final int rows;
   final VoidCallback onOpen;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: kUsSectionGap),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          // one fixed height, so the desk can subtract its own chrome before it shares out the rest
+          SizedBox(
+            height: kUsHeading,
+            child: Padding(
             padding: const EdgeInsets.fromLTRB(14, 0, 14, 2),
             child: Slip(
               id: 'us.${module.id}',
@@ -132,7 +151,8 @@ class _Section extends StatelessWidget {
               ),
             ),
           ),
-          module.build(context, ctx.only(rows)),
+          ),
+          module.build(context, ctx),
         ],
       ),
     );

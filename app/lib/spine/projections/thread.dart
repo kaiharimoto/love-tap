@@ -214,6 +214,11 @@ class ThreadProjector {
     _order.clear();
     _readUpto.clear();
     _lastPassive.clear();
+    // A reset is a rebuild from nothing, so the projector has to forget what each
+    // (person, signal) key was last saying too. Holding those words across a rebuild
+    // suppressed the first passive mark of the year for every key whose opening word
+    // matched — three rows of this seed, and the send the capture was waiting on.
+    _saidLast.clear();
     _items.clear();
     _dirty.clear();
     _mineSeqs.clear();
@@ -224,6 +229,7 @@ class ThreadProjector {
     _assembledRead = 0;
     _assembledRefused = -1;
     _assembledInFlight = -1;
+    _assembledLinkUp = true;
   }
 
   void _apply(Event e) {

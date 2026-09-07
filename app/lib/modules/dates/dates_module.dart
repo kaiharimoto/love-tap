@@ -20,6 +20,10 @@ class DatesModule extends Module {
   @override
   List<String> get eventTypes => const ['date_event'];
 
+  /// a ticket stub: the title in a nineteen-point hand, then where, then what they said about it — measured on the desk, not guessed.
+  @override
+  double get rowHeight => 170.0;
+
   @override
   Widget build(BuildContext context, ModuleContext ctx) => DateList(ctx: ctx);
 

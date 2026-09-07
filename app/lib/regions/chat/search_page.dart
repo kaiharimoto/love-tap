@@ -7,6 +7,7 @@
 // down the side of a card index, and every hit is a torn strip with the line on it.
 import 'package:flutter/material.dart';
 
+import '../../capture/bus.dart';
 import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/library.dart';
@@ -57,6 +58,28 @@ class SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
+    // The search artifact's report used to be a stale snapshot of the thread underneath it: the
+    // capture hooks dispatch on the region index, which is still Chat while the search page is
+    // up, and the chat report reads the scroll positions of a list that is no longer mounted. So
+    // the record for 12_search said which nine notes were visible in a thread nobody was looking
+    // at. The page that is on the glass says what it is showing.
+    CaptureBus.searchReport = () => {
+          'query': _ctl.text,
+          'hits': _hits.length,
+          'type_filter': _typeFilter,
+          'author': _author?.name,
+          'range': _range == null
+              ? null
+              : {
+                  'from': _range!.start.toIso8601String(),
+                  'to': _range!.end.toIso8601String(),
+                },
+          'order': [for (final h in _hits.take(12)) h.event.id],
+          'kinds': {
+            for (final k in {for (final h in _hits) h.event.type})
+              k: _hits.where((h) => h.event.type == k).length,
+          },
+        };
     if (widget.initialQuery.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _run());
     }
@@ -64,6 +87,7 @@ class SearchPageState extends State<SearchPage> {
 
   @override
   void dispose() {
+    CaptureBus.searchReport = null;
     _ctl.dispose();
     super.dispose();
   }

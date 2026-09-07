@@ -21,6 +21,7 @@ import 'package:desk/transport/transport.dart';
 import 'package:desk/transport/tailscale/tailnet.dart';
 import 'package:desk/transport/tailscale/tailscale_transport.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'wire_path.dart';
 
 const _tsBin = '../toolchain/ts/bin/tailscale';
 const _out = '../evidence/coldstart.json';
@@ -191,6 +192,7 @@ void main() {
     final inClient = [for (final id in four) clientOrder.indexOf(id)];
 
     // what node b's daemon counted, so the wire is evidenced rather than assumed
+    final mine = await thisHostV4();
     final peerB = ((await _status('b'))?['Peer'] as Map<String, dynamic>?)?.values
         .cast<Map<String, dynamic>>()
         .where((p) => '${p['HostName']}'.contains('lovetap-a'))
@@ -212,8 +214,7 @@ void main() {
       'same_order_both_sides': inHost.toString() == inClient.toString(),
       'counted_by_node_b': peerB == null ? null : {
         'tx_bytes': peerB['TxBytes'], 'rx_bytes': peerB['RxBytes'],
-        'path': peerB['CurAddr'] != null && '${peerB['CurAddr']}'.isNotEmpty
-            ? 'direct to ${peerB['CurAddr']}' : 'relayed through ${peerB['Relay']}',
+        ...wirePath(peerB, mine),
       },
       'written_at': DateTime.now().toUtc().toIso8601String(),
     }));

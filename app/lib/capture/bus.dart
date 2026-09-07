@@ -59,6 +59,15 @@ class CaptureBus {
   /// Chat: which rows are on screen, and where the thread is sitting.
   static Report Function()? chatReport;
 
+  /// Search: what the search page is showing while it is the thing on the glass. Registered by
+  /// the page itself, because the hooks dispatch on the region index and the search page is drawn
+  /// inside Chat's slot — so without this the search artifact's record described the thread
+  /// underneath it, down to the scroll positions of a list that was no longer mounted.
+  static Report Function()? searchReport;
+
+  /// The viewer: what is open in it, and whether the video is actually running.
+  static Report Function()? viewerReport;
+
   /// Moments: which tiles are on screen and whether their pictures have arrived. The capture
   /// report used to describe Chat's thread whatever region was showing, so five regions' logs
   /// said the same seven notes were visible when four of them showed none.
@@ -81,6 +90,8 @@ class CaptureBus {
     openViewer = null;
     search = null;
     chatReport = null;
+    searchReport = null;
+    viewerReport = null;
     momentsReport = null;
     scrollBy = null;
     stageStates = null;

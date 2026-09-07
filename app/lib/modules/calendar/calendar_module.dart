@@ -21,6 +21,10 @@ class CalendarModule extends Module {
   @override
   List<String> get eventTypes => const ['milestone'];
 
+  /// a dated card: the date stamped, the thing under it — measured on the desk, not guessed.
+  @override
+  double get rowHeight => 66.0;
+
   @override
   Widget build(BuildContext context, ModuleContext ctx) => MilestoneList(ctx: ctx);
 
@@ -100,7 +104,7 @@ class MilestoneList extends StatelessWidget {
         _Card(m: m, next: next, now: ctx.now, row: i),
     ];
     if (ctx.onTheDesk) {
-      return Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+      return ctx.fit(rows);
     }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 8, 4, 90), children: rows);
   }

@@ -22,6 +22,10 @@ class TodosModule extends Module {
   @override
   List<String> get eventTypes => const ['todo_event'];
 
+  /// a line on a torn strip with a box in front of it — measured on the desk, not guessed.
+  @override
+  double get rowHeight => 60.0;
+
   @override
   Widget build(BuildContext context, ModuleContext ctx) => TodoList(ctx: ctx);
 
@@ -105,7 +109,7 @@ class TodoList extends StatelessWidget {
       ],
     ];
     if (ctx.onTheDesk) {
-      return Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+      return ctx.fit(rows);
     }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 4, 4, 90), children: rows);
   }

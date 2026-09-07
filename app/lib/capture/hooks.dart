@@ -379,6 +379,15 @@ class CaptureHooks {
           'my_signals': {for (final k in scope.myState.signals.keys) k: scope.myState.signals[k]?.value},
         };
       case 1:
+        // whichever of the three is actually on the glass
+        final viewing = CaptureBus.viewerReport?.call();
+        if (viewing != null) {
+          return {'region': 'viewer', 'over': 'chat', ...viewing};
+        }
+        final searching = CaptureBus.searchReport?.call();
+        if (searching != null) {
+          return {'region': 'search', 'over': 'chat', ...searching};
+        }
         final chat = CaptureBus.chatReport?.call() ?? const <String, dynamic>{};
         return {
           'region': 'chat',
@@ -391,8 +400,6 @@ class CaptureHooks {
           // that the messenger carries a voice note is answered by the picture
           if (chat['anchor'] != null) 'anchor': chat['anchor'],
           if (chat['kinds'] != null) 'kinds': chat['kinds'],
-          if (chat['search'] != null) 'search': chat['search'],
-          if (chat['viewer'] != null) 'viewer': chat['viewer'],
         };
       case 2:
         return {

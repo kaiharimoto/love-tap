@@ -7,6 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../capture/bus.dart';
 import '../../material/desk.dart';
 import '../../material/hands.dart';
 import '../../material/light.dart';
@@ -52,6 +53,24 @@ class _ViewerPageState extends State<ViewerPage> {
   @override
   void initState() {
     super.initState();
+    // Same reason as the search page: the viewer is a route over Chat's slot, the hooks dispatch
+    // on the region index, and Chat's report reads a list the viewer has covered. The thing on
+    // the glass says what it is showing.
+    CaptureBus.viewerReport = () => {
+          'item': widget.item.event.id,
+          'kind': widget.item.type,
+          'caption': widget.item.event.payload['caption'],
+          'blob': widget.item.event.payload['blob'],
+          'video': _video == null
+              ? null
+              : {
+                  'initialised': _video!.value.isInitialized,
+                  'playing': _video!.value.isPlaying,
+                  'position_ms': _video!.value.position.inMilliseconds,
+                  'duration_ms': _video!.value.duration.inMilliseconds,
+                },
+          if (_error != null) 'error': _error,
+        };
     if (widget.item.type == 'video') _loadVideo();
   }
 
@@ -76,6 +95,7 @@ class _ViewerPageState extends State<ViewerPage> {
 
   @override
   void dispose() {
+    CaptureBus.viewerReport = null;
     _video?.dispose();
     super.dispose();
   }

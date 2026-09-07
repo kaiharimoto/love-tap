@@ -231,8 +231,9 @@ def render_bit(name, res, samples, out_dir, conditions=("day", "dusk")):
             if pass_name:
                 common.add_shadow_catcher(scene, size_m=0.20)
             else:
-                common.add_desk(scene, size_m=0.20)
-                scene.collection.objects[0].hide_render = True
+                # visible_camera, not hide_render: hide_render takes the desk out of the light as
+                # well as out of the frame, and then the bit is lit by the constant sky alone.
+                common.add_desk(scene, size_m=0.20).visible_camera = False
             BUILDERS[kind](name, width, seed)
             frame = width * 1.5
             common.add_top_camera(scene, frame, frame, ortho=True, tilt_deg=18.0, distance=0.40)

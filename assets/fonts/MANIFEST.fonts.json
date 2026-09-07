@@ -1,5 +1,73 @@
 {
  "faces": {
+  "DeskStamp": {
+   "alt_usage": {},
+   "font": "assets/fonts/DeskStamp.ttf",
+   "glyphs": 155,
+   "max_variant_attempts": 2,
+   "parameters": {
+    "baseline_wobble": 5,
+    "corner_deg": 80,
+    "description": "upper-case stamp / typewriter furniture face; slab strokes, ink spread, misregistration",
+    "distinct_min": 10,
+    "exit_stretch": 1.0,
+    "family": "DeskStamp",
+    "gap": 90,
+    "ink": "#1f2a44",
+    "jitter": {
+     "alt_prob": 0.0,
+     "field_wavelength": [
+      300,
+      700
+     ],
+     "point": 6,
+     "point_noise": 2,
+     "rotation_deg": 0.8
+    },
+    "loop_openness": 0.0,
+    "lowercase_scale": 0.8,
+    "paper": "#f6f1e6",
+    "pen": {
+     "erode_em": 0.014,
+     "erode_samples_per_em": 40,
+     "ink_spread_em": 0.02,
+     "misregister": [
+      6,
+      4
+     ],
+     "model": "stamp",
+     "serif_length": 2.2,
+     "serif_thickness": 0.6,
+     "tilt_deg": 0.8,
+     "width_em": 0.07
+    },
+    "person": null,
+    "pressure": {
+     "base": 1.0,
+     "baseline_weight": 0.0,
+     "down_weight": 0.0,
+     "jitter": 0.0,
+     "scale": 0.0,
+     "start_weight": 0.0,
+     "stop_weight": 0.0,
+     "turn_weight": 0.0
+    },
+    "rounding": 0.0,
+    "slant_deg": 0,
+    "space_em": 0.5,
+    "spacing_jitter": 12,
+    "start_overshoot": 0,
+    "style": "Regular",
+    "t_cross_late": 0.0,
+    "tension": 0.5,
+    "uppercase_only": true,
+    "variants": 3,
+    "width_scale": 1.0,
+    "xheight_scale": 1.0
+   },
+   "preview": "assets/fonts/previews/DeskStamp.png",
+   "variants": 3
+  },
   "NoorHand": {
    "alt_usage": {},
    "font": "assets/fonts/NoorHand.ttf",
@@ -143,7 +211,9 @@
   "assets/fonts/NoorHand.ttf",
   "assets/fonts/previews/NoorHand.png",
   "assets/fonts/TeoHand.ttf",
-  "assets/fonts/previews/TeoHand.png"
+  "assets/fonts/previews/TeoHand.png",
+  "assets/fonts/DeskStamp.ttf",
+  "assets/fonts/previews/DeskStamp.png"
  ],
  "seed": 20260903
 }

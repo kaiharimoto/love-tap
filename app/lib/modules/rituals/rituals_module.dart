@@ -25,6 +25,10 @@ class RitualsModule extends Module {
   @override
   List<String> get eventTypes => const ['ritual_kept'];
 
+  /// a card with the tally of how many times it has been kept beside it — measured on the desk, not guessed.
+  @override
+  double get rowHeight => 78.0;
+
   @override
   Widget build(BuildContext context, ModuleContext ctx) => RitualList(ctx: ctx);
 
@@ -83,7 +87,7 @@ class RitualList extends StatelessWidget {
       for (final (i, r) in ctx.few(rituals).indexed) _Ritual(r: r, ctx: ctx, row: i),
     ];
     if (ctx.onTheDesk) {
-      return Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+      return ctx.fit(rows);
     }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 8, 4, 90), children: rows);
   }

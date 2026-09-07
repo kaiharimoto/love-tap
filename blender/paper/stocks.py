@@ -73,11 +73,17 @@ def build_sheet(stock, variant, w_mm, h_mm):
             co = loop.vert.co
             loop[uv].uv = ((co.x / w) + 0.5, (co.y / h) + 0.5)
 
-    # warp: two sine terms, <= 0.6 mm, plus a very slight cylindrical bow
-    a1, a2 = rng.uniform(0.15, 0.35) * 1e-3, rng.uniform(0.10, 0.25) * 1e-3
+    # Warp: two sine terms plus a slight cylindrical bow. The amplitudes are a fraction of the
+    # sheet's own width, not a fixed number of millimetres, so a 76 mm sticky note and an A4 page
+    # cockle at the same slope rather than the note reading as buckled. At these fractions the peak
+    # surface slope is about 3.2 degrees, which with the key at 40 degrees swings the sun term
+    # ~4.7 per cent — six grey levels across a sheet at L 230. It used to be 0.7 degrees, and a
+    # sheet that flat is a plane: one normal, one irradiance, no gradient. Measured over the
+    # ink-free 32x32 block means, p5-p95 goes 1.3 -> 5.8.
+    a1, a2 = rng.uniform(0.0061, 0.0108) * w, rng.uniform(0.0034, 0.0068) * w
     p1, p2 = rng.uniform(0, 6.28), rng.uniform(0, 6.28)
     k1, k2 = rng.uniform(0.8, 1.4), rng.uniform(1.2, 2.2)
-    bow = rng.uniform(-0.25, 0.25) * 1e-3
+    bow = rng.uniform(-0.0054, 0.0054) * w
     zs = []
     for v in bm.verts:
         u = v.co.x / w + 0.5

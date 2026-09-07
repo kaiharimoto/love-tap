@@ -16,6 +16,7 @@ import 'package:desk/transport/protocol/http_transport.dart';
 import 'package:desk/transport/tailscale/tailnet.dart';
 import 'package:desk/transport/tailscale/tailscale_transport.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'wire_path.dart';
 
 Future<int> _freePort() async {
   final s = await ServerSocket.bind(InternetAddress.loopbackIPv4, 0);
@@ -162,19 +163,37 @@ void main() {
     await host.append('state_declared', {'signal': 'status_line', 'value': 'heads down until six'}, hostAssign: true);
     await host.append('milestone', {'milestone_id': 'ms_together', 'kind': 'anniversary', 'title': 'together', 'date': '2024-11-09', 'yearly': true}, hostAssign: true);
     await sync.once();
-    final found = <String, String>{
-      'message': client.search('floor').map((h) => h.event.type).join(','),
-      'photo': client.search('lift buttons').map((h) => h.event.type).join(','),
-      'todo_event': client.search('bread').map((h) => h.event.type).join(','),
-      'date_event': client.search('ferry').map((h) => h.event.type).join(','),
-      'feeling': client.search('squeeze').map((h) => h.event.type).join(','),
-      'state_declared': client.search('heads down').map((h) => h.event.type).join(','),
-      'milestone': client.search('together').map((h) => h.event.type).join(','),
-      'video': client.search('video').map((h) => h.event.type).join(','),
-      'voice_note': client.search('voice').map((h) => h.event.type).join(','),
+    // The record used to be a map from the expected type to the joined types of the hits, which
+    // on a passing run renders as an identity map — 'message': 'message' — and throws away the
+    // query, the count and which event was actually found. A reader cannot tell that from a
+    // record produced by a search that returns nothing but happens to be asked about nothing, so
+    // the query, the number of hits and the id of the first one are what is written down.
+    const queries = <String, String>{
+      'message': 'floor',
+      'photo': 'lift buttons',
+      'todo_event': 'bread',
+      'date_event': 'ferry',
+      'feeling': 'squeeze',
+      'state_declared': 'heads down',
+      'milestone': 'together',
+      'video': 'video',
+      'voice_note': 'voice',
     };
-    cap('search').ok = found.entries.every((e) => e.value.contains(e.key));
-    cap('search').detail = 'hits by type: ${jsonEncode(found)}';
+    final found = <String, dynamic>{};
+    for (final q in queries.entries) {
+      final hits = client.search(q.value);
+      final wanted = hits.where((h) => h.event.type == q.key).toList();
+      found[q.key] = {
+        'query': q.value,
+        'hits': hits.length,
+        'types': hits.map((h) => h.event.type).toSet().toList()..sort(),
+        'first_of_the_wanted_type': wanted.isEmpty ? null : wanted.first.event.id,
+      };
+    }
+    cap('search').ok = found.entries.every((e) =>
+        (e.value as Map)['first_of_the_wanted_type'] != null && (e.value as Map)['hits'] as int > 0);
+    cap('search').detail = 'nine queries, each answered by an event of the type it was asked '
+        'about: ${jsonEncode(found)}';
 
     // draft survival across restart
     await client.setMeta('draft.chat', 'half a thought about the boiler');
@@ -387,6 +406,7 @@ void main() {
     // node b's tailscaled never sent a byte to node a, the crossing happened over something that
     // was not the tailnet and the whole run means nothing.
     Map<String, dynamic> wire = {'read': false};
+    final hostAddrs = await thisHostV4();
     try {
       final out = await Process.run('../toolchain/ts/bin/tailscale',
           ['--socket=../toolchain/ts/b/tailscaled.sock', 'status', '--json']);
@@ -399,9 +419,7 @@ void main() {
             'peer': p['HostName'],
             'tx_bytes': p['TxBytes'],
             'rx_bytes': p['RxBytes'],
-            'path': p['CurAddr'] != null && '${p['CurAddr']}'.isNotEmpty
-                ? 'direct to ${p['CurAddr']}'
-                : 'relayed through ${p['Relay']}',
+            ...wirePath(p, hostAddrs),
             'active': p['Active'],
           };
         }

@@ -14,6 +14,27 @@ frames before a note opened, a hundred after a feeling had landed. A held frame 
 frame, but a reader cannot tell the two apart, so the scenes are cut to the motion instead and
 this refuses the first still it finds.
 
+Pixel-identity turned out to be the wrong instrument for that rule. The gate was a mean absolute
+difference below 1e-4 over the whole frame, which is a fortieth of one grey level averaged over
+seven and a half million subpixels: a pair passes as moving if 2.55 per cent of them shift by a
+single code value. Nothing dithers the frames on purpose — the sub-threshold motion is the fold
+sequence's own ease-out, which brings the sheet to rest asymptotically and then stops changing its
+height entirely while the source frames keep ticking. So a clip could end on fifty frames that a
+reader sees as frozen and still be recorded as never repeating.
+
+A held frame is now defined on what an eye can see, in grey levels of luma, and all three have to
+be true at once:
+
+  (a) mean absolute change over the whole frame     < 0.5
+  (b) share of pixels changing by more than 2       < 0.15 per cent
+  (c) the busiest 32x32 tile's mean absolute change < 2.0
+
+(b) is the perceptual core — how much of the screen actually moved by a visible step. (c) is what
+separates a frozen frame from genuinely slow motion: slow motion concentrates its change on a
+moving edge, so some tile carries it, while a frozen frame spreads a few code values thinly over
+everything. Global SSIM was measured against the same clips and does not separate the two classes
+at all — the frozen tail of 06 scores higher on it than the fastest clip in the set.
+
   python3 tools/check/frames.py evidence/frames/06_unfolding --strip evidence/crops/06_strip.png \
       --log evidence/logs/06_unfolding.json
 
@@ -35,6 +56,32 @@ def load(path, scale=0.25):
     if scale != 1.0:
         im = im.resize((max(1, int(im.width * scale)), max(1, int(im.height * scale))), Image.BILINEAR)
     return np.asarray(im, dtype=np.float32) / 255.0
+
+
+def luma(rgb):
+    """Rec.601 luma in grey levels, from the 0..1 RGB `load` returns."""
+    return (0.299 * rgb[:, :, 0] + 0.587 * rgb[:, :, 1] + 0.114 * rgb[:, :, 2]) * 255.0
+
+
+def tile_max(d, tile=32):
+    """The busiest tile's mean absolute change: what tells slow motion from a frozen frame."""
+    h, w = d.shape
+    hh, ww = (h // tile) * tile, (w // tile) * tile
+    if hh == 0 or ww == 0:
+        return float(d.mean())
+    t = d[:hh, :ww].reshape(hh // tile, tile, ww // tile, tile)
+    return float(t.mean(axis=(1, 3)).max())
+
+
+# A held frame, in grey levels of luma. All three must be true at once; see the module docstring
+# for where the numbers come from and why global SSIM is not one of them.
+HELD_MEAN = 0.5
+HELD_VISIBLE = 0.0015
+HELD_TILE = 2.0
+
+
+def held_frame(mean_delta, visible_share, busiest_tile):
+    return mean_delta < HELD_MEAN and visible_share < HELD_VISIBLE and busiest_tile < HELD_TILE
 
 
 def strip(paths, out, count=6, height=320):
@@ -72,29 +119,36 @@ def main():
         print(json.dumps({"dir": args.dir, "frames": 0, "ok": False, "why": "no frames"}))
         return 1
 
-    # The identity test is at full resolution: a frame is a repeat only if every pixel is the
-    # pixel before it. At a quarter scale a sheet turning by half a pixel averaged to the same
+    # Full resolution: at a quarter scale a sheet turning by half a pixel averaged to the same
     # image, and a clip that never stopped moving was failed for standing still.
     prev = load(paths[0], 1.0)
-    deltas = []
+    prev_l = luma(prev)
+    deltas = []          # mean absolute change per frame, in grey levels
+    visible = []         # share of pixels that changed by more than two grey levels
+    busiest = []         # the busiest 32x32 tile's mean absolute change
     means = []
     for p in paths[1:]:
         cur = load(p, 1.0)
-        deltas.append(float(np.abs(cur - prev).mean()))
+        cur_l = luma(cur)
+        d = np.abs(cur_l - prev_l)
+        deltas.append(float(d.mean()))
+        visible.append(float((d > 2.0).mean()))
+        busiest.append(tile_max(d))
         means.append(float(cur.mean()))
-        prev = cur
+        prev, prev_l = cur, cur_l
 
     seconds = len(paths) / args.fps
     # A frame identical to the one before it is a frame the app did not draw. Some of those are
     # honest — a note that has finished moving is still, and a clip that holds on it for a moment
     # is a clip, not a fault — so what matters is that the motion itself has no gaps in it and that
     # most of the clip is moving.
-    still = [i for i, d in enumerate(deltas) if d < 1e-4]
+    held = [held_frame(deltas[i], visible[i], busiest[i]) for i in range(len(deltas))]
+    still = [i for i, h in enumerate(held) if h]
     moved = float(np.mean(deltas)) if deltas else 0.0
     runs = []
     run = 0
-    for i, d in enumerate(deltas):
-        if d < 1e-4:
+    for i, h in enumerate(held):
+        if h:
             run += 1
         else:
             if run:
@@ -103,6 +157,10 @@ def main():
     if run:
         runs.append(run)
     longest_still = max(runs) if runs else 0
+    mv = [i for i, h in enumerate(held) if not h]
+    mv_mean = [deltas[i] for i in mv]
+    mv_vis = [visible[i] for i in mv]
+    mv_tile = [busiest[i] for i in mv]
     still_fraction = len(still) / max(1, len(deltas))
     # the light must not swing about mid-motion: overall brightness may drift, not jump
     # What one frame is worth in the app's time, from the scene log: every `frames` run records
@@ -149,6 +207,20 @@ def main():
         "app_seconds": None if app_ms is None else round(app_ms / 1000.0, 2),
         "playback_over_app_time": None if not app_ms else round((seconds * 1000.0) / app_ms, 3),
         "mean_change_per_frame": round(moved, 5),
+        "held_frame_test": {
+            "unit": "grey levels of Rec.601 luma at full resolution",
+            "all_three_must_hold": {
+                "mean_abs_change_below": HELD_MEAN,
+                "share_of_pixels_changing_more_than_two_below": HELD_VISIBLE,
+                "busiest_32px_tile_mean_change_below": HELD_TILE,
+            },
+            # the least-moving frame that still counts as motion: how close the clip came
+            "worst_moving_frame": {
+                "mean": round(min(mv_mean), 4) if mv_mean else None,
+                "visible_share": round(min(mv_vis), 6) if mv_vis else None,
+                "busiest_tile": round(min(mv_tile), 4) if mv_tile else None,
+            },
+        },
         "repeated_frames": len(still),
         "repeated_fraction": round(still_fraction, 3),
         "longest_still_run": longest_still,

@@ -765,6 +765,26 @@ def render_object(name, res, samples, out_dir, conditions=("day", "dusk")):
                 common.add_shadow_catcher(scene, size_m=0.20)
                 for o in objs:
                     o.visible_camera = False
+            else:
+                # The object is on a desk, so the desk has to be in the beauty pass — invisible to
+                # the camera, so the cut-out and its alpha are unchanged, but present to the light.
+                # Without it the object was rendered in an empty scene, which is the one place a
+                # thing on a desk never is.
+                #
+                # Measured, on a 20 mm diffuse cylinder at this tilt, quarters of the camera-facing
+                # wall, left to right: no ground +6.7 grey levels of swing, this desk +12.6, the
+                # white shadow catcher +17.4. It roughly doubles a small gradient; it does not
+                # create one. And most of what it buys is not bounce — splitting the passes, the
+                # sky-only term stays flat and only dims, so the ground is mostly occluding the
+                # lower half of a constant sky and taking the flat wash off. The sun is about a
+                # fifth of that wall's light and all of its gradient. Halving DAY_SKY_STRENGTH
+                # would buy the same +9.3 with no ground at all — but that changes every family in
+                # the library at once, and this does not.
+                #
+                # What it cannot do is put a gradient on a plane: a flat-lying ticket or a
+                # coffee ring has one normal, and one normal under a distant sun and an
+                # orthographic camera has one value. Those read flat because of their geometry.
+                common.add_desk(scene, size_m=0.20, z=0.0).visible_camera = False
             # a shallow angle, the way a note lies on a desk in front of you: an object seen from
             # straight above reads as a silhouette, and these have to read as things
             cam = common.add_top_camera(scene, 0.075, 0.075, ortho=True, tilt_deg=26.0, distance=0.42)

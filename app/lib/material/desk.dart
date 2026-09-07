@@ -1,8 +1,11 @@
 // The desk the whole app sits on, and the strip of the partner's paper that sits at the top of
 // every region. The desk is a render (assets/shell/desk*.webp) when the library has been baked;
 // until then it is the flat colour the render was made against, never a gradient.
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
+import '../flags.dart';
 import '../spine/projections/state.dart';
 import '../spine/spine.dart';
 import 'assignment.dart';
@@ -34,6 +37,11 @@ class Desk extends StatelessWidget {
     );
   }
 }
+
+/// What the partner's strip costs at the top of every region: the shell subtracts this and the tab
+/// strip to know what slot it is leaving a region, and a test that measures a region against the
+/// whole screen instead is measuring a layout nobody was ever shown.
+const double kPartnerStrip = 6 + 86 + 2;
 
 /// The partner's state, on a torn strip of the paper their mood picks, in their hand, at the top
 /// of every region. docs/SIGNALS.md says what each signal does to it.
@@ -194,6 +202,31 @@ class _PencilPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_PencilPainter old) => old.charge != charge || old.charging != charging;
+}
+
+/// Resolves the desk render before the first frame, so `Desk`'s `Image.asset` is a synchronous
+/// cache hit and no screen can be photographed before the wood arrives. 17_setup_pwa.png was
+/// 27.3 per cent one exact RGB value — `DeskColour.dusk`, the flat ground under the render —
+/// because the surface landed 8.5 s after the only frame that screen ever draws.
+Future<void> warmDeskSurface() async {
+  if (!MaterialLibrary.loaded) return;
+  final id = Flags.dusk ? 'desk_dusk' : 'desk';
+  if (!MaterialLibrary.instance.shell.any((e) => e.id == id)) return;
+  final done = Completer<void>();
+  final stream = AssetImage(shellAsset(id)).resolve(ImageConfiguration.empty);
+  late final ImageStreamListener listener;
+  listener = ImageStreamListener(
+    (ImageInfo _, bool __) {
+      if (!done.isCompleted) done.complete();
+    },
+    onError: (Object e, StackTrace? s) {
+      debugPrint('the desk surface did not load: $e');
+      if (!done.isCompleted) done.complete();
+    },
+  );
+  stream.addListener(listener);
+  await done.future;
+  stream.removeListener(listener);
 }
 
 /// The desk colour, kept out of `Desk` so both can be const.

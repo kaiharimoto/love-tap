@@ -9,6 +9,7 @@ import 'app.dart';
 import 'capture/hooks.dart';
 import 'flags.dart';
 import 'scope.dart';
+import 'material/desk.dart';
 import 'material/ink.dart';
 import 'material/library.dart';
 import 'ready.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MaterialLibrary.load();
   await InkPlates.load();
+  await warmDeskSurface();
   final scope = await bootstrap();
   if (Flags.capture) {
     // Under capture an uncaught error has to be legible in the scene log: the harness records

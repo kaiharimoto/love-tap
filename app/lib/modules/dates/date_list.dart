@@ -25,15 +25,31 @@ class DateList extends StatelessWidget {
       if (upcoming.isEmpty)
         Padding(padding: const EdgeInsets.all(12), child: Text("nowhere planned. that's fine.", style: Hands.margin(size: 15))),
       for (var i = 0; i < ahead.length; i++) _Stub(item: ahead[i], ctx: ctx, row: i),
-      // where they have been is a long list; on the desk it is one stub under the heading, and
-      // the whole of it when the module is opened on its own
-      const SizedBox(height: 14),
-      const _Header(label: 'been'),
-      for (var i = 0; i < (ctx.onTheDesk ? past.take(1) : past.take(40)).length; i++)
-        _Stub(item: past[i], ctx: ctx, row: ahead.length + i),
+      // where they have been is a long list; on the desk it is one stub under the heading, kept or
+      // dropped as one piece so the desk never shows a heading with nothing under it, and the
+      // whole of it when the module is opened on its own
+      if (ctx.onTheDesk)
+        if (past.isNotEmpty)
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 14),
+              const _Header(label: 'been'),
+              _Stub(item: past[0], ctx: ctx, row: ahead.length),
+            ],
+          )
+        else
+          const SizedBox.shrink()
+      else ...[
+        const SizedBox(height: 14),
+        const _Header(label: 'been'),
+        for (var i = 0; i < past.take(40).length; i++)
+          _Stub(item: past[i], ctx: ctx, row: ahead.length + i),
+      ],
     ];
     if (ctx.onTheDesk) {
-      return Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: rows);
+      return ctx.fit(rows);
     }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 4, 4, 90), children: rows);
   }

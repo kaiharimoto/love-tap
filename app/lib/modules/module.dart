@@ -6,6 +6,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../spine/spine.dart';
+import 'fit_rows.dart';
 
 abstract class Module {
   const Module();
@@ -25,6 +26,15 @@ abstract class Module {
 
   /// A short line for the Us overview: what this module would tell you at a glance.
   String glance(List<Event> events);
+
+  /// What one whole row of this module costs on the shared desk, in logical points.
+  ///
+  /// Us budgets the desk in points, not in rows: it subtracts one row of every module from the
+  /// space it has and shares out what is left, so every module is on the glass with something
+  /// under its heading. The number only has to be close — [FitRows] enforces the real budget by
+  /// laying the rows out — but if it is badly wrong one module takes more of the desk than it
+  /// should, so it is measured, not guessed.
+  double get rowHeight;
 }
 
 /// What a module is given: the log, who is holding the phone, the clock, and the one way to write.
@@ -36,6 +46,7 @@ class ModuleContext {
     required this.now,
     required this.emit,
     this.limit,
+    this.room,
   });
 
   /// Every event in the spine, in order. A module filters for its own.
@@ -46,6 +57,11 @@ class ModuleContext {
 
   /// The only way anything is written.
   final Future<Event> Function(String type, Map<String, dynamic> payload) emit;
+
+  /// The points of desk this module has been given, when it is one of five on the Us desk. Null
+  /// when the module has been pushed open on its own. A module hands its rows to [fit], which
+  /// keeps the ones that fit whole.
+  final double? room;
 
   /// How many rows there is room for, when a module is one of four on the Us desk. Null when the
   /// module has been pushed open on its own and can run to whatever length it is.
@@ -69,6 +85,19 @@ class ModuleContext {
   ModuleContext only(int rows) => ModuleContext(
         events: events, me: me, partner: partner, now: now, emit: emit, limit: rows,
       );
+
+  /// The same context, given [points] of desk. The limit is a coarse cap on how many rows are
+  /// built at all — the exact cut is made by [fit], which can see what a row costs.
+  ModuleContext inRoom(double points, double rowHeight) => ModuleContext(
+        events: events, me: me, partner: partner, now: now, emit: emit,
+        limit: (points / rowHeight).ceil() + 2, room: points,
+      );
+
+  /// A module's rows on the shared desk: as many whole rows as its share of the desk pays for.
+  /// Outside the desk this is a plain column and every row is kept.
+  Widget fit(List<Widget> rows) => room == null
+      ? Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: rows)
+      : FitRows(maxHeight: room!, children: rows);
 
   /// The same context with no limit at all: the module opened on its own.
   ModuleContext whole() => ModuleContext(
