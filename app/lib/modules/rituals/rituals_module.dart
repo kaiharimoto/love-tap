@@ -11,6 +11,7 @@ import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../spine/spine.dart';
+import '../desk_line.dart';
 import '../module.dart';
 
 class RitualsModule extends Module {
@@ -25,9 +26,9 @@ class RitualsModule extends Module {
   @override
   List<String> get eventTypes => const ['ritual_kept'];
 
-  /// a card with the tally of how many times it has been kept beside it — measured on the desk, not guessed.
+  /// On the desk, a line and how many times it has been kept — measured at the width the shell leaves, not guessed.
   @override
-  double get rowHeight => 78.0;
+  double get rowHeight => 56.0;
 
   @override
   Map<String, String> get stocks => const {'ritual_kept': 'graph'};
@@ -86,12 +87,24 @@ class RitualList extends StatelessWidget {
     if (rituals.isEmpty) {
       return Center(child: Text('nothing kept yet.', style: Hands.margin(size: 15)));
     }
+    // On the desk a ritual is a line and its tally. The tally is the whole point of the surface —
+    // how many times, never how many in a row — so it comes with it; the notes and the dates are
+    // what it is when the module is opened on its own.
+    if (ctx.onTheDesk) {
+      return ctx.fit([
+        for (final (i, r) in ctx.few(rituals).indexed)
+          DeskLine(
+            id: r.id,
+            row: i,
+            type: 'ritual_kept',
+            text: r.title,
+            aside: '${r.marks.length} times',
+          ),
+      ]);
+    }
     final rows = [
       for (final (i, r) in ctx.few(rituals).indexed) _Ritual(r: r, ctx: ctx, row: i),
     ];
-    if (ctx.onTheDesk) {
-      return ctx.fit(rows);
-    }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 8, 4, 90), children: rows);
   }
 }

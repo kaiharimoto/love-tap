@@ -6,8 +6,22 @@ import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
+import '../desk_line.dart';
 import '../module.dart';
 import 'dates_module.dart';
+
+/// How far off, in the couple's own words rather than in a date format.
+String? _whenWord(DateTime? when, DateTime now) {
+  if (when == null) return null;
+  final days = when.difference(now).inDays;
+  if (days < 0) return null;
+  if (days == 0) return 'today';
+  if (days == 1) return 'tomorrow';
+  if (days < 7) return 'in $days days';
+  if (days < 14) return 'next week';
+  if (days < 60) return 'in ${(days / 7).round()} weeks';
+  return 'in ${(days / 30).round()} months';
+}
 
 class DateList extends StatelessWidget {
   const DateList({super.key, required this.ctx});
@@ -20,37 +34,41 @@ class DateList extends StatelessWidget {
       ..sort((a, b) => a.when!.compareTo(b.when!));
     final past = dates.where((d) => !upcoming.contains(d)).toList().reversed.toList();
     final ahead = ctx.few(upcoming);
+    // On the desk a date is a line: where, and when. The ticket stub is what it is when the module
+    // is opened on its own — a stub costs 216 points and there are five modules sharing 884.
+    if (ctx.onTheDesk) {
+      return ctx.fit([
+        for (var i = 0; i < ahead.length; i++)
+          DeskLine(
+            id: ahead[i].id,
+            row: i,
+            type: 'date_event',
+            text: ahead[i].place == null ? ahead[i].title : '${ahead[i].title} · ${ahead[i].place}',
+            aside: _whenWord(ahead[i].when, ctx.now),
+          ),
+        if (upcoming.isEmpty)
+          DeskLine(id: 'dates.none', row: 0, type: 'date_event', text: "nowhere planned. that's fine."),
+        if (past.isNotEmpty)
+          DeskLine(
+            id: past[0].id,
+            row: ahead.length,
+            type: 'date_event',
+            text: past[0].verdict ?? past[0].title,
+            aside: 'been',
+            struck: true,
+          ),
+      ]);
+    }
     final rows = <Widget>[
       _Header(label: 'ahead', onAdd: () => _plan(context)),
       if (upcoming.isEmpty)
         Padding(padding: const EdgeInsets.all(12), child: Text("nowhere planned. that's fine.", style: Hands.margin(size: 15))),
       for (var i = 0; i < ahead.length; i++) _Stub(item: ahead[i], ctx: ctx, row: i),
-      // where they have been is a long list; on the desk it is one stub under the heading, kept or
-      // dropped as one piece so the desk never shows a heading with nothing under it, and the
-      // whole of it when the module is opened on its own
-      if (ctx.onTheDesk)
-        if (past.isNotEmpty)
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 14),
-              const _Header(label: 'been'),
-              _Stub(item: past[0], ctx: ctx, row: ahead.length),
-            ],
-          )
-        else
-          const SizedBox.shrink()
-      else ...[
-        const SizedBox(height: 14),
-        const _Header(label: 'been'),
-        for (var i = 0; i < past.take(40).length; i++)
-          _Stub(item: past[i], ctx: ctx, row: ahead.length + i),
-      ],
+      const SizedBox(height: 14),
+      const _Header(label: 'been'),
+      for (var i = 0; i < past.take(40).length; i++)
+        _Stub(item: past[i], ctx: ctx, row: ahead.length + i),
     ];
-    if (ctx.onTheDesk) {
-      return ctx.fit(rows);
-    }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 4, 4, 90), children: rows);
   }
 

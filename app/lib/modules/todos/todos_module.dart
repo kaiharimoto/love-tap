@@ -8,6 +8,8 @@ import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../spine/spine.dart';
+import '../../material/marks.dart';
+import '../desk_line.dart';
 import '../module.dart';
 
 class TodosModule extends Module {
@@ -22,7 +24,7 @@ class TodosModule extends Module {
   @override
   List<String> get eventTypes => const ['todo_event'];
 
-  /// a line on a torn strip with a box in front of it — measured on the desk, not guessed.
+  /// On the desk, a line with a box in front of it and who it is for after it — measured at the width the shell leaves, not guessed.
   @override
   double get rowHeight => 60.0;
 
@@ -91,6 +93,25 @@ class TodoList extends StatelessWidget {
     final items = projectTodos(ctx.events);
     final open = items.where((t) => !t.done).toList();
     final done = items.where((t) => t.done).toList().reversed.toList();
+    // On the desk a line off the list is a line: the thing, and who it is for. The full row —
+    // the box, the hand, who added it, how many times it has come back — is what it is when the
+    // module is opened on its own.
+    if (ctx.onTheDesk) {
+      return ctx.fit([
+        for (final (i, t) in ctx.few(open).indexed)
+          DeskLine(
+            id: t.id,
+            row: i,
+            type: 'todo_event',
+            text: t.text,
+            aside: t.assignee?.name,
+            lead: Mark.cross(size: 11, colour: Pen.margin, seed: i),
+          ),
+        if (open.isEmpty)
+          const DeskLine(id: 'todos.none', row: 0, type: 'todo_event',
+              text: 'nothing to do. suspicious.'),
+      ]);
+    }
     final rows = <Widget>[
       Padding(
         padding: const EdgeInsets.fromLTRB(12, 10, 12, 4),
@@ -103,17 +124,10 @@ class TodoList extends StatelessWidget {
       if (open.isEmpty)
         Padding(padding: const EdgeInsets.all(12), child: Text('nothing to do. suspicious.', style: Hands.margin(size: 15))),
       for (final (i, t) in ctx.few(open).indexed) _Line(item: t, ctx: ctx, row: i),
-      // the done half is only for the module opened on its own; on the desk there is room for
-      // what is still to do and nothing else
-      if (!ctx.onTheDesk) ...[
-        const SizedBox(height: 14),
-        const Padding(padding: EdgeInsets.fromLTRB(12, 4, 12, 4), child: Stamped('done', size: 11)),
-        for (final (i, t) in done.take(30).indexed) _Line(item: t, ctx: ctx, row: open.length + i),
-      ],
+      const SizedBox(height: 14),
+      const Padding(padding: EdgeInsets.fromLTRB(12, 4, 12, 4), child: Stamped('done', size: 11)),
+      for (final (i, t) in done.take(30).indexed) _Line(item: t, ctx: ctx, row: open.length + i),
     ];
-    if (ctx.onTheDesk) {
-      return ctx.fit(rows);
-    }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 4, 4, 90), children: rows);
   }
 

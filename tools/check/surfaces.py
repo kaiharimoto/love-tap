@@ -111,18 +111,29 @@ def shading(a, family):
     lo = _boxblur(a, 3)
     hp = a - lo
     h, w = a.shape
+    # the surface's own idea of clean: below the 60th percentile of what it is made of, a block
+    # has something printed on it or drawn on it
+    finite = a[~np.isnan(a)]
+    clean = float(np.percentile(finite, 60)) - 12.0 if finite.size else 200.0
     means, hps = [], []
     for y in range(0, h - BLOCK + 1, BLOCK):
         for x in range(0, w - BLOCK + 1, BLOCK):
             t = a[y:y + BLOCK, x:x + BLOCK]
             if np.isnan(t).any():
                 continue
-            # ink-free and rule-free: a block with print in it measures the print
-            if t.min() <= 200 or (t.max() - t.min()) >= 14:
+            # Ink-free and rule-free: a block with print in it measures the print. The test is
+            # against the surface's own tone rather than against 200, because an absolute floor
+            # silently measured nothing at all on anything darker than that — every block of a
+            # dusk stock was rejected, the gate found no blocks, and the surface passed by not
+            # being looked at. That is the failure mode this whole file exists to catch.
+            if t.min() <= clean or (t.max() - t.min()) >= 14:
                 continue
             means.append(float(t.mean()))
             q = hp[y:y + BLOCK, x:x + BLOCK]
             hps.append(float(np.nanstd(q)))
+    out["clean_above"] = round(clean, 1)
+    if len(means) < 10:
+        out["unmeasurable"] = f"only {len(means)} blocks of this surface are free of print"
     if len(means) >= 10:
         m = np.array(means)
         out["blocks"] = len(means)
@@ -271,12 +282,22 @@ def main():
             f.write(text)
     else:
         print(text)
-    if report["flat"]:
-        print(f"{len(report['flat'])} surface(s) with nothing in them:", file=sys.stderr)
-        for line in report["flat"][:12]:
-            print("  " + line, file=sys.stderr)
+    # Both gates fail the run. The shading floors were added and then not wired to the exit, so a
+    # surface with no light on it at all was reported and returned 0 — a check that says the right
+    # thing and answers "fine" is worse than no check, because capture.sh believes the answer.
+    if report["flat"] or report["unlit"]:
+        if report["flat"]:
+            print(f"{len(report['flat'])} surface(s) with nothing in them:", file=sys.stderr)
+            for line in report["flat"][:12]:
+                print("  " + line, file=sys.stderr)
+        if report["unlit"]:
+            print(f"{len(report['unlit'])} surface(s) with no light across them:", file=sys.stderr)
+            for line in report["unlit"][:12]:
+                print("  " + line, file=sys.stderr)
         return 1
-    print(f"{report['read']} surfaces read, none of them flat")
+    unmeasured = [k for k, v in report["surfaces"].items() if "unmeasurable" in v]
+    print(f"{report['read']} surfaces read, none of them flat, none of them unlit"
+          + (f", {len(unmeasured)} too printed-on to measure" if unmeasured else ""))
     return 0
 
 

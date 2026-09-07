@@ -508,12 +508,15 @@ class _One extends StatelessWidget {
       );
     }
     final poster = event.payload['poster_blob'] as String?;
+    // A photograph has no poster_blob and never can — spine/types.dart gives the photo spec
+    // required ['blob','w','h'] and validate() rejects unknown keys — so branching on the poster
+    // alone sent every photograph in the gallery down the video path. Branch on what the thing is.
     // A video with no poster frame is not a picture, and drawing it as one gave the gallery four
     // blank prints: the report counted twenty-six tiles laid out and eighteen pictures asked for,
     // and the eight it never asked about were holes with nothing loading in them. Frame extraction
     // does not exist on both platforms yet (docs), so until it does a video is what a video is on a
     // desk — a strip with its length written on it and the mark you press.
-    if (poster == null || (poster).isEmpty) {
+    if (event.type == 'video' && (poster == null || poster.isEmpty)) {
       final ms = (event.payload['duration_ms'] as num?)?.toDouble();
       return Align(
         alignment: Alignment.topCenter,
@@ -536,7 +539,9 @@ class _One extends StatelessWidget {
         ),
       );
     }
-    final hash = poster;
+    final hash = (poster != null && poster.isNotEmpty)
+        ? poster
+        : event.payload['blob'] as String;
     // A print: the picture with a white border of card around it, cut, with the edge and shadow
     // every piece of paper on the desk has. The cut card's safe area and border are solved the
     // way paper.dart solves them, so the print comes out exactly the height the pile laid it at.

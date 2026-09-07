@@ -20,9 +20,9 @@ class DatesModule extends Module {
   @override
   List<String> get eventTypes => const ['date_event'];
 
-  /// a ticket stub: the title in a nineteen-point hand, then where, then what they said about it — measured on the desk, not guessed.
+  /// On the desk, a line: where, and how far off — measured at the width the shell leaves, not guessed.
   @override
-  double get rowHeight => 170.0;
+  double get rowHeight => 62.0;
 
   @override
   Map<String, String> get stocks => const {'date_event': 'index'};

@@ -129,6 +129,12 @@ def main():
     means = []
     for p in paths[1:]:
         cur = load(p, 1.0)
+        if cur.shape != prev.shape:
+            print(json.dumps({"dir": args.dir, "frames": len(paths), "ok": False,
+                              "why": f"{p.name} is {cur.shape[1]}x{cur.shape[0]} and the frame "
+                                     f"before it is {prev.shape[1]}x{prev.shape[0]}: a clip is one "
+                                     "size all the way through"}))
+            return 1
         cur_l = luma(cur)
         d = np.abs(cur_l - prev_l)
         deltas.append(float(d.mean()))
@@ -158,9 +164,21 @@ def main():
         runs.append(run)
     longest_still = max(runs) if runs else 0
     mv = [i for i, h in enumerate(held) if not h]
-    mv_mean = [deltas[i] for i in mv]
-    mv_vis = [visible[i] for i in mv]
-    mv_tile = [busiest[i] for i in mv]
+    # which moving frame came closest to being held, by how near it sits to all three thresholds
+    def _margin(i):
+        return min(deltas[i] / HELD_MEAN,
+                   (visible[i] / HELD_VISIBLE) if HELD_VISIBLE else 1e9,
+                   busiest[i] / HELD_TILE)
+    closest = None
+    if mv:
+        j = min(mv, key=_margin)
+        closest = {
+            "frame": j + 1,
+            "mean": round(deltas[j], 4),
+            "visible_share": round(visible[j], 6),
+            "busiest_tile": round(busiest[j], 4),
+            "note": "the frame nearest the held-frame test that still counts as motion",
+        }
     still_fraction = len(still) / max(1, len(deltas))
     # the light must not swing about mid-motion: overall brightness may drift, not jump
     # What one frame is worth in the app's time, from the scene log: every `frames` run records
@@ -214,12 +232,10 @@ def main():
                 "share_of_pixels_changing_more_than_two_below": HELD_VISIBLE,
                 "busiest_32px_tile_mean_change_below": HELD_TILE,
             },
-            # the least-moving frame that still counts as motion: how close the clip came
-            "worst_moving_frame": {
-                "mean": round(min(mv_mean), 4) if mv_mean else None,
-                "visible_share": round(min(mv_vis), 6) if mv_vis else None,
-                "busiest_tile": round(min(mv_tile), 4) if mv_tile else None,
-            },
+            # The least-moving frame that still counts as motion: how close the clip came. One
+            # frame's three numbers, not the minimum of each taken separately — that triple need
+            # not belong to any frame in the clip, and it understated how close the clip came.
+            "worst_moving_frame": closest,
         },
         "repeated_frames": len(still),
         "repeated_fraction": round(still_fraction, 3),

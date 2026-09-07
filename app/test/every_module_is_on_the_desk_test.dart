@@ -17,6 +17,7 @@ import 'package:desk/material/desk.dart' show kPartnerStrip;
 import 'package:desk/material/hands.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/modules/registry.dart';
+import 'package:desk/modules/fit_rows.dart';
 import 'package:desk/regions/us/us_region.dart';
 import 'package:desk/scope.dart';
 import 'package:desk/spine/spine.dart';
@@ -25,6 +26,7 @@ import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/sync.dart';
 import 'package:desk/transport/transport.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Every module event in the seeded year, in order. Not SeedLoader: this needs the 351 lines the
@@ -116,9 +118,13 @@ void main() {
   });
 
   testWidgets('every module has something under its heading', (tester) async {
-    // A heading on the glass with nothing under it is not the module being on the desk. Each
-    // section is the heading plus whatever FitRows kept, so a section no taller than its own
-    // heading is a module that was given a share too small to hold one of its rows.
+    // A heading on the glass with nothing under it is not the module being on the desk.
+    //
+    // The first version of this could not fail. It looked for the section by walking up from the
+    // heading to a Column and taking the last match — and ancestors come innermost first, so the
+    // last one was the test's own Column wrapping the whole screen, 1040 pt tall, for every
+    // module for ever. A guard that measures the harness instead of the thing is worse than no
+    // guard, because it reads as one. This asks each module's own FitRows how many rows it kept.
     final seeded = _seededModuleEvents();
     final spine = await Spine.open(
       SpineStore.memory(),
@@ -155,19 +161,30 @@ void main() {
     ));
     await tester.pump(const Duration(milliseconds: 400));
 
+    final pads = find.byType(FitRows, skipOffstage: false);
+    expect(pads.evaluate().length, kModules.length,
+        reason: 'one FitRows per module on the desk, in registry order');
+
     final bare = <String>[];
-    for (final module in kModules) {
-      final content = find.byWidgetPredicate((w) => w.runtimeType.toString() == 'FitRows',
-          skipOffstage: false);
-      expect(content, findsWidgets, reason: 'the desk lays its modules out with FitRows');
-      final section = find.ancestor(
-        of: find.byWidgetPredicate((w) => w is Stamped && w.text == module.label,
-            skipOffstage: false),
-        matching: find.byType(Column),
-      );
-      if (section.evaluate().isEmpty) continue;
-      final h = tester.getSize(section.last).height;
-      if (h <= kUsHeading + 1) bare.add('${module.label}: ${h.round()} pt, heading and nothing');
+    for (final (i, module) in kModules.indexed) {
+      final ro = tester.renderObject<RenderFitRows>(pads.at(i));
+      var child = ro.firstChild;
+      var shown = 0;
+      var height = 0.0;
+      while (child != null) {
+        final pd = child.parentData! as ContainerBoxParentData<RenderBox>;
+        // a row that was kept has been given a place; a dropped one sits at the origin
+        if (child.size.height > 0 && (shown == 0 || pd.offset.dy > 0)) {
+          shown++;
+          height += child.size.height;
+        }
+        child = ro.childAfter(child);
+      }
+      if (shown == 0 || ro.size.height <= 1) {
+        bare.add('${module.label}: ${shown} rows, ${ro.size.height.round()} pt');
+      } else if (height > ro.size.height + 1) {
+        bare.add('${module.label}: keeps ${height.round()} pt of rows in a ${ro.size.height.round()} pt box');
+      }
     }
     expect(bare, isEmpty, reason: 'a module on the desk with nothing under it:\n${bare.join('\n')}');
   });

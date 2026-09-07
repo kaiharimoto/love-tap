@@ -50,7 +50,11 @@ class RenderFitRows extends RenderBox
 
   @override
   void performLayout() {
-    final width = constraints.maxWidth.isFinite ? constraints.maxWidth : 0.0;
+    // Loud rather than invisible: collapsing to zero under an unbounded width turned a module
+    // into nothing rather than into an error somebody would see.
+    assert(constraints.maxWidth.isFinite,
+        'FitRows lays its rows out at the width it is given, so it needs a finite one');
+    final width = constraints.maxWidth.isFinite ? constraints.maxWidth : computeMaxIntrinsicWidth(0);
     var used = 0.0;
     var child = firstChild;
     var first = true;
@@ -77,6 +81,36 @@ class RenderFitRows extends RenderBox
       child = pd.nextSibling;
     }
     size = constraints.constrain(Size(width, used));
+  }
+
+  @override
+  Size computeDryLayout(BoxConstraints constraints) {
+    final width = constraints.maxWidth.isFinite ? constraints.maxWidth : computeMaxIntrinsicWidth(0);
+    var used = 0.0;
+    var child = firstChild;
+    var first = true;
+    while (child != null) {
+      final size = ChildLayoutHelper.dryLayoutChild(
+          child, BoxConstraints(minWidth: width, maxWidth: width));
+      if (!first && used + size.height > _maxHeight) break;
+      used += size.height;
+      first = false;
+      child = (child.parentData! as _FitRowsParentData).nextSibling;
+    }
+    return constraints.constrain(Size(width, used));
+  }
+
+  /// A row that was not kept is not on the glass, so it is not read out either. It is laid out
+  /// (its height is what decides whether it fits) but it is never painted, and without this a
+  /// screen reader read every dropped row stacked on top of the first visible one.
+  @override
+  void visitChildrenForSemantics(RenderObjectVisitor visitor) {
+    var child = firstChild;
+    while (child != null) {
+      final pd = child.parentData! as _FitRowsParentData;
+      if (pd.shown) visitor(child);
+      child = pd.nextSibling;
+    }
   }
 
   @override

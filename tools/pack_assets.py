@@ -54,7 +54,10 @@ def convert(src, dst, long_side, quality, keep_alpha, luminance_to_alpha=False, 
     # the bytes costs 13.91 MB and delivers 1.194 — the render's own number, RMSE 0.000. So when
     # nothing needs doing to a file, nothing is done to it.
     if (crop is None and not luminance_to_alpha and im.format == "WEBP"
-            and max(im.size) <= long_side):
+            and max(im.size) <= long_side
+            # and only when the file already is what this family ships: a copy skips both the
+            # RGBA conversion and the lossless save an alpha family depends on
+            and keep_alpha == ("A" in im.mode)):
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copyfile(src, dst)
         return im.size
@@ -402,47 +405,73 @@ def measure_object_ink(verbose=True):
     return out
 
 
-def _fold_rest(seq):  # noqa: C901
+def _fold_rest(seq, rows=None, band=None, src_size=None):  # noqa: C901
     """The last frame of a packed sequence that is still moving, and the noise it was told from.
 
-    The frames are cropped to their own alpha, so they change size as the sheet opens; they are
-    compared on one canvas anchored at the bottom, which is where the sheet sits. The floor is the
-    sequence's own: the median difference over its last ten transitions is what the renderer leaves
-    behind when nothing is happening, and a transition counts as motion at two and a half times
-    that, or 0.4 grey levels, whichever is larger.
+    The frames are cropped to their own alpha, so they change size as the sheet opens. Comparing
+    them anchored to their own bottom edge counts a one-row change in the crop as a whole-image
+    shift of a pixel — which is motion by any measure, and it put the cut point exactly where the
+    crop height went 329 to 328 rather than where the sheet stopped moving. Given the crops the
+    packer already knows, each frame goes back where it was on the source canvas first.
+
+    The floor is the sequence's own: the median difference over its last ten transitions is what
+    the renderer leaves behind when nothing is happening, and a transition counts as motion at two
+    and a half times that, or 0.4 grey levels, whichever is larger. That assumes the sequence ends
+    at rest, so it is checked: a sequence still moving at its last frame is not trimmed at all, and
+    neither is one where the cut would throw away more than a third of what was rendered.
     """
     import numpy as np
     from PIL import Image
     d = os.path.join(DST, "folds", seq)
     files = sorted(f for f in os.listdir(d) if f.endswith(".webp"))
-    if len(files) < 4:
+    if len(files) < 12:
         return {"frames": len(files), "rendered": len(files), "why": "too short to measure"}
     ims = [Image.open(os.path.join(d, f)).convert("L") for f in files]
     W = max(i.size[0] for i in ims)
-    H = max(i.size[1] for i in ims)
+    if rows is not None and src_size is not None and len(rows) == len(ims):
+        # back where each frame was on the source canvas, so a change of crop is not motion
+        scale = ims[-1].size[1] / max(1, (rows[-1][1] - rows[-1][0] + 1))
+        H = int(round(src_size[1] * scale)) + 2
+        tops = [int(round(t * scale)) for t, _ in rows]
+    else:
+        H = max(i.size[1] for i in ims)
+        tops = [H - i.size[1] for i in ims]
     deltas = []
     prev = None
-    for im in ims:
+    for im, top in zip(ims, tops):
         c = Image.new("L", (W, H), 0)
-        c.paste(im, (0, H - im.size[1]))
+        c.paste(im, (0, max(0, min(top, H - im.size[1]))))
         a = np.asarray(c, dtype=np.float32)
         if prev is not None:
             deltas.append(float(np.abs(a - prev).mean()))
         prev = a
     for im in ims:
         im.close()
-    floor = float(np.median(deltas[-10:])) if len(deltas) >= 10 else 0.0
+    floor = float(np.median(deltas[-10:]))
+    quietest = float(np.median(sorted(deltas)[: max(3, len(deltas) // 10)]))
+    out = {"rendered": len(files), "noise_floor": round(floor, 3),
+           "quietest_tenth": round(quietest, 3)}
+    if floor > max(3.0 * quietest, quietest + 0.5):
+        # the sequence is still moving when it ends: there is no tail to measure the noise from
+        out.update({"frames": len(files),
+                    "why": "the sequence is still moving at its last frame, so nothing is trimmed"})
+        return out
     gate = max(2.5 * floor, 0.4)
     moving = [i for i, x in enumerate(deltas) if x > gate]
     last = moving[-1] if moving else len(deltas) - 1
-    return {
-        "frames": last + 2,
-        "rendered": len(files),
-        "noise_floor": round(floor, 3),
+    keep = last + 2
+    if keep < len(files) * 2 // 3:
+        out.update({"frames": len(files), "gate": round(gate, 3),
+                    "why": f"the measurement says only {keep} of {len(files)} frames move, which is "
+                           "too much to throw away on one number; nothing is trimmed"})
+        return out
+    out.update({
+        "frames": keep,
         "gate": round(gate, 3),
         "why": "frames after this one are the same image re-sampled; the difference between them "
                "is the renderer's own noise, not motion",
-    }
+    })
+    return out
 
 
 def pack_folds(index, verbose=True):
@@ -479,7 +508,8 @@ def pack_folds(index, verbose=True):
         # them faithfully, so the clip ended on half a second a reader sees as frozen while the
         # frame check — a mean absolute difference over the whole frame — called it motion. Noise is
         # not motion. The packed sequence is the moving part, and what was dropped is recorded.
-        rest = _fold_rest(seq)
+        rest = _fold_rest(seq, rows=rows, band=band,
+                          src_size=Image.open(paths[0]).size if paths else None)
         seqs[seq] = rest["frames"]
         index.setdefault("fold_rest", {})[seq] = rest
         for i in range(rest["frames"], len(frames)):

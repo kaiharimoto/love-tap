@@ -16,6 +16,7 @@ import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../spine/spine.dart';
+import '../desk_line.dart';
 import '../module.dart';
 
 class ShelfModule extends Module {
@@ -30,9 +31,9 @@ class ShelfModule extends Module {
   @override
   List<String> get eventTypes => const ['passed_on'];
 
-  /// a card with what it is, who has it, and since when — measured on the desk, not guessed.
+  /// On the desk, a line, and who it came from — measured at the width the shell leaves, not guessed.
   @override
-  double get rowHeight => 82.0;
+  double get rowHeight => 53.0;
 
   @override
   Map<String, String> get stocks => const {'passed_on': 'index'};
@@ -103,12 +104,22 @@ class ShelfList extends StatelessWidget {
         child: Text('nothing passed between you yet.', style: Hands.margin(size: 15)),
       );
     }
+    if (ctx.onTheDesk) {
+      return ctx.fit([
+        for (final (i, t) in ctx.few(things).indexed)
+          DeskLine(
+            id: t.id,
+            row: i,
+            type: 'passed_on',
+            text: t.title,
+            aside: t.state == 'finished' ? 'read' : (t.from?.name),
+            struck: t.state == 'finished',
+          ),
+      ]);
+    }
     final rows = [
       for (final (i, t) in ctx.few(things).indexed) _Thing(thing: t, ctx: ctx, row: i),
     ];
-    if (ctx.onTheDesk) {
-      return ctx.fit(rows);
-    }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 8, 4, 90), children: rows);
   }
 }

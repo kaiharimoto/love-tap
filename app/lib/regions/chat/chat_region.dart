@@ -119,8 +119,11 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // every frame of the fling was a rebuild. The frame timings say what that cost — build p50
       // 20 ms, p95 1426, max 1785, against a raster that never leaves 166-212 — and the spikes
       // recur every third frame, which is the list swapping between its two children.
+      // A duration, not zero: DrivenScrollActivity asserts duration > Duration.zero, and the
+      // throw happens inside an async body where nothing sees it — the list simply did not move.
+      // One millisecond of the driven clock is the shortest honest step.
       if (dy == 0 || !_scroll.isAttached) return;
-      _offset.animateScroll(offset: dy, duration: Duration.zero);
+      unawaited(_offset.animateScroll(offset: dy, duration: const Duration(milliseconds: 1)));
     };
     CaptureBus.stageStates = () async {
       // Real messages down the real path. The thread is paired with the far phone for this

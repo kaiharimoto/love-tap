@@ -7,6 +7,7 @@ import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../spine/spine.dart';
+import '../desk_line.dart';
 import '../module.dart';
 
 class CalendarModule extends Module {
@@ -21,7 +22,7 @@ class CalendarModule extends Module {
   @override
   List<String> get eventTypes => const ['milestone'];
 
-  /// a dated card: the date stamped, the thing under it — measured on the desk, not guessed.
+  /// On the desk, a line and the day it falls on — measured at the width the shell leaves, not guessed.
   @override
   double get rowHeight => 66.0;
 
@@ -102,13 +103,22 @@ class MilestoneList extends StatelessWidget {
     if (all.isEmpty) {
       return Center(child: Text('no dates that matter yet. add the first.', style: Hands.margin(size: 15)));
     }
+    if (ctx.onTheDesk) {
+      return ctx.fit([
+        for (final (i, (m, next)) in ctx.few(withNext).indexed)
+          DeskLine(
+            id: m.id,
+            row: i,
+            type: 'milestone',
+            text: m.title,
+            aside: next == null ? null : DateFormat('d MMM').format(next.toLocal()),
+          ),
+      ]);
+    }
     final rows = [
       for (final (i, (m, next)) in ctx.few(withNext).indexed)
         _Card(m: m, next: next, now: ctx.now, row: i),
     ];
-    if (ctx.onTheDesk) {
-      return ctx.fit(rows);
-    }
     return ListView(padding: const EdgeInsets.fromLTRB(4, 8, 4, 90), children: rows);
   }
 }
