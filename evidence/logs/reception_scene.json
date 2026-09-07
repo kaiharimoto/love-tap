@@ -1,0 +1,307 @@
+{
+ "scene": "reception",
+ "browser": "chromium",
+ "viewport": {
+  "width": 400,
+  "height": 880,
+  "dpr": 3
+ },
+ "url": "http://127.0.0.1:8787/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 2904
+  },
+  {
+   "do": "goTo",
+   "ms": 4174
+  },
+  {
+   "do": "step",
+   "ms": 2072
+  },
+  {
+   "do": "step",
+   "ms": 1792
+  },
+  {
+   "do": "wait",
+   "ms": 1002
+  },
+  {
+   "do": "shot",
+   "ms": 1395
+  },
+  {
+   "do": "goTo",
+   "ms": 5525
+  },
+  {
+   "do": "step",
+   "ms": 2038
+  },
+  {
+   "do": "step",
+   "ms": 2686
+  },
+  {
+   "do": "wait",
+   "ms": 1003
+  },
+  {
+   "do": "report",
+   "ms": 711
+  },
+  {
+   "push": {
+    "kind": "feeling",
+    "from": "noor"
+   },
+   "scope": "http://127.0.0.1:8787/push/"
+  },
+  {
+   "do": "push",
+   "ms": 2208
+  },
+  {
+   "do": "wait",
+   "ms": 2102
+  },
+  {
+   "do": "screen",
+   "ms": 893
+  },
+  {
+   "do": "closeApp",
+   "ms": 742
+  },
+  {
+   "do": "wait",
+   "ms": 1604
+  },
+  {
+   "push": {
+    "kind": "message",
+    "from": "noor"
+   },
+   "scope": "http://127.0.0.1:8787/push/"
+  },
+  {
+   "do": "push",
+   "ms": 2207
+  },
+  {
+   "do": "wait",
+   "ms": 2102
+  },
+  {
+   "do": "screen",
+   "ms": 849
+  },
+  {
+   "push": {
+    "kind": "feeling",
+    "from": "noor"
+   },
+   "scope": "http://127.0.0.1:8787/push/"
+  },
+  {
+   "do": "push",
+   "ms": 2208
+  },
+  {
+   "do": "wait",
+   "ms": 2102
+  },
+  {
+   "do": "screen",
+   "ms": 809
+  },
+  {
+   "do": "notifications",
+   "ms": 1153
+  }
+ ],
+ "shots": [
+  {
+   "out": "evidence/crops/reception_allowed.png",
+   "clip": null
+  },
+  {
+   "out": "evidence/crops/reception_open.png",
+   "of": "the display, not the page"
+  },
+  {
+   "out": "evidence/crops/reception.png",
+   "of": "the display, not the page"
+  },
+  {
+   "out": "evidence/crops/reception_replaced.png",
+   "of": "the display, not the page"
+  }
+ ],
+ "reports": [
+  {
+   "region": 0,
+   "view": {
+    "region": "pulse",
+    "recent_feelings": [
+     {
+      "id": "0001J230S8D0RZR7VCHKPNXR4X",
+      "feeling": "goodnight",
+      "from": "teo",
+      "ts": 1788386313000
+     },
+     {
+      "id": "0001K035CR34HBD3FGW4DRZF68",
+      "feeling": "nyeh",
+      "from": "noor",
+      "ts": 1788417775000
+     },
+     {
+      "id": "0001KHXCF0KP9C06ZMN07EWAWW",
+      "feeling": "hold",
+      "from": "noor",
+      "ts": 1788436460000
+     },
+     {
+      "id": "0001M1A7YG6FF9MK3KBYQWYGT2",
+      "feeling": "confetti",
+      "from": "noor",
+      "ts": 1788452610000
+     },
+     {
+      "id": "0001M3AY8G83A3FBSRB1Y7W78Q",
+      "feeling": "ugh",
+      "from": "noor",
+      "ts": 1788454730000
+     },
+     {
+      "id": "0001M4GW48FEW3M67XKAZT5051",
+      "feeling": "empty_chair",
+      "from": "teo",
+      "ts": 1788455973000
+     }
+    ],
+    "partner_signals": {
+     "charging": false,
+     "battery": 72,
+     "mood": "bright",
+     "at_home": true,
+     "moving": "still",
+     "network": "wifi",
+     "place": "travelling",
+     "ringer": "normal",
+     "local_hour": 11,
+     "energy": 1,
+     "status_line": "week one, and the room smells right again",
+     "availability": "open",
+     "need": 3,
+     "last_active": 0
+    },
+    "my_signals": {
+     "charging": false,
+     "battery": 51,
+     "ringer": "normal",
+     "at_home": true,
+     "network": "wifi",
+     "local_hour": 9,
+     "status_line": "off until saturday, and doing this properly",
+     "place": "home",
+     "availability": "asleep",
+     "last_active": 0,
+     "mood": "calm",
+     "moving": "still",
+     "energy": 1,
+     "need": 3
+    }
+   },
+   "visible": [],
+   "tears": {},
+   "stocks": {},
+   "scroll": null,
+   "now": "2026-09-03T19:40:00.000Z",
+   "driven_ms": 2896,
+   "seed": 20260903,
+   "events": 14062,
+   "transport": "local",
+   "link": "connecting",
+   "me": "teo",
+   "masks_in_pool": 56,
+   "writable_masks": 47,
+   "light": "day",
+   "has_dusk_paper": true,
+   "paper_stocks": 54,
+   "setup_showing": false,
+   "fold": {
+    "sequence": "unfold_thirds",
+    "length": 240,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
+   },
+   "sensation": null,
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 0,
+    "pushed": 0,
+    "refused": 0,
+    "pulled": 0,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 1,
+    "cursor": 14061,
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connecting",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": null,
+     "our_cursor": 14061,
+     "last_error": null,
+     "since": "2026-09-07T05:16:16.711Z",
+     "last_contact": null
+    }
+   },
+   "ambient": {
+    "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
+    "pocket_feeling": "ugh",
+    "pocket_at": 1788464400000,
+    "allowed_to_interrupt": true
+   },
+   "at": "crops/reception_open.png"
+  }
+ ],
+ "cold_ms": 7926,
+ "load": {
+  "ms": 7926,
+  "store": "fresh",
+  "profile": "rx"
+ },
+ "app_open": false,
+ "reception": {
+  "permission": "granted",
+  "records": [
+   {
+    "scope": "http://127.0.0.1:8787/push/",
+    "title": "noor",
+    "body": "is holding something out",
+    "tag": "from-them",
+    "silent": false,
+    "data": {
+     "kind": "feeling",
+     "from": "noor"
+    }
+   }
+  ],
+  "browser": "chromium",
+  "app_open": false,
+  "note": "Chromium on a Linux virtual display. WebKit is what the other fourteen scenes are shot in, and under the iPhone-Safari emulation this harness uses it has no Notification and no PushManager — which is what a Safari tab on an iPhone has, since iOS gives the push API only to a home-screen web app; and even without that emulation the permission cannot be granted there. So this is not an iPhone banner, there is no lock screen in evidence, and what an installed iOS web app does with the same call is not shown anywhere in this build."
+ },
+ "problems": [],
+ "ok": true,
+ "steps_landed": true
+}

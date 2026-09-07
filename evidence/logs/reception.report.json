@@ -1,0 +1,133 @@
+{
+ "region": 0,
+ "view": {
+  "region": "pulse",
+  "recent_feelings": [
+   {
+    "id": "0001J230S8D0RZR7VCHKPNXR4X",
+    "feeling": "goodnight",
+    "from": "teo",
+    "ts": 1788386313000
+   },
+   {
+    "id": "0001K035CR34HBD3FGW4DRZF68",
+    "feeling": "nyeh",
+    "from": "noor",
+    "ts": 1788417775000
+   },
+   {
+    "id": "0001KHXCF0KP9C06ZMN07EWAWW",
+    "feeling": "hold",
+    "from": "noor",
+    "ts": 1788436460000
+   },
+   {
+    "id": "0001M1A7YG6FF9MK3KBYQWYGT2",
+    "feeling": "confetti",
+    "from": "noor",
+    "ts": 1788452610000
+   },
+   {
+    "id": "0001M3AY8G83A3FBSRB1Y7W78Q",
+    "feeling": "ugh",
+    "from": "noor",
+    "ts": 1788454730000
+   },
+   {
+    "id": "0001M4GW48FEW3M67XKAZT5051",
+    "feeling": "empty_chair",
+    "from": "teo",
+    "ts": 1788455973000
+   }
+  ],
+  "partner_signals": {
+   "charging": false,
+   "battery": 72,
+   "mood": "bright",
+   "at_home": true,
+   "moving": "still",
+   "network": "wifi",
+   "place": "travelling",
+   "ringer": "normal",
+   "local_hour": 11,
+   "energy": 1,
+   "status_line": "week one, and the room smells right again",
+   "availability": "open",
+   "need": 3,
+   "last_active": 0
+  },
+  "my_signals": {
+   "charging": false,
+   "battery": 51,
+   "ringer": "normal",
+   "at_home": true,
+   "network": "wifi",
+   "local_hour": 9,
+   "status_line": "off until saturday, and doing this properly",
+   "place": "home",
+   "availability": "asleep",
+   "last_active": 0,
+   "mood": "calm",
+   "moving": "still",
+   "energy": 1,
+   "need": 3
+  }
+ },
+ "visible": [],
+ "tears": {},
+ "stocks": {},
+ "scroll": null,
+ "now": "2026-09-03T19:40:00.000Z",
+ "driven_ms": 2896,
+ "seed": 20260903,
+ "events": 14062,
+ "transport": "local",
+ "link": "connecting",
+ "me": "teo",
+ "masks_in_pool": 56,
+ "writable_masks": 47,
+ "light": "day",
+ "has_dusk_paper": true,
+ "paper_stocks": 54,
+ "setup_showing": false,
+ "fold": {
+  "sequence": "unfold_thirds",
+  "length": 240,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
+ },
+ "sensation": null,
+ "sync": {
+  "transport": "local",
+  "role": "client",
+  "rounds": 0,
+  "pushed": 0,
+  "refused": 0,
+  "pulled": 0,
+  "blobs_fetched": 0,
+  "faults": 0,
+  "pending": 1,
+  "cursor": 14061,
+  "link": {
+   "transport": "local",
+   "role": "client",
+   "state": "connecting",
+   "address": "http://127.0.0.1:8480",
+   "peer_cursor": null,
+   "our_cursor": 14061,
+   "last_error": null,
+   "since": "2026-09-07T05:16:16.711Z",
+   "last_contact": null
+  }
+ },
+ "ambient": {
+  "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
+  "pocket_feeling": "ugh",
+  "pocket_at": 1788464400000,
+  "allowed_to_interrupt": true
+ },
+ "at": "crops/reception_open.png"
+}
