@@ -76,19 +76,19 @@ const double kUsSectionGap = 10;
 /// the one that was photographed.
 ///
 /// So: take the chrome off the top, give every module one row of itself, and share what is left.
-/// The dates and the list are the two anyone reads standing up, so they get the larger shares.
+/// The dates and the list are the two anyone reads standing up, so they ask for the larger shares
+/// — each module says what it wants ([Module.share]) rather than being named in a table here.
 /// [Module.rowHeight] only decides fairness — [FitRows] enforces the budget by laying the rows
 /// out, so a module whose declared row height has drifted takes a wrong share of the desk rather
 /// than falling off the bottom of it.
 List<double> shareOfTheDesk(double slot) {
-  const weights = {'dates': 2.0, 'todos': 2.0};
   final chrome = kModules.length * (kUsHeading + kUsSectionGap) + 4 + 8;
   final minima = [for (final m in kModules) m.rowHeight];
   final room = slot.isFinite ? slot - chrome : double.infinity;
   if (!room.isFinite) return minima;
   var extra = room - minima.fold<double>(0, (a, b) => a + b);
   if (extra <= 0) return minima;
-  final w = [for (final m in kModules) weights[m.id] ?? 1.0];
+  final w = [for (final m in kModules) m.share];
   final total = w.fold<double>(0, (a, b) => a + b);
   return [for (var i = 0; i < kModules.length; i++) minima[i] + extra * w[i] / total];
 }

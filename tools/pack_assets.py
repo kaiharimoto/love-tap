@@ -495,6 +495,17 @@ def pack_folds(index, verbose=True):
             continue
         frames = sorted(f for f in os.listdir(d) if f.endswith(".png"))
         paths = [os.path.join(d, f) for f in frames]
+        # Whatever a previous render left here goes before this one is measured. The rest point is
+        # read off the packed directory, and a shorter re-render used to leave the old tail behind:
+        # the frame count then disagreed with the frame list, the crop registration was skipped for
+        # the whole sequence, and the trim was measured over frames belonging to a render that no
+        # longer exists — silently, in the direction of packing everything.
+        packed_dir = os.path.join(DST, "folds", seq)
+        if os.path.isdir(packed_dir):
+            keep = {os.path.splitext(f)[0] + ".webp" for f in frames}
+            for stale in sorted(os.listdir(packed_dir)):
+                if stale.endswith(".webp") and stale not in keep:
+                    os.remove(os.path.join(packed_dir, stale))
         band, rows = _fold_band(paths)
         for i, f in enumerate(frames):
             src = paths[i]

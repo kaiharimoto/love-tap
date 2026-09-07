@@ -69,6 +69,14 @@ abstract class Module {
   /// a module never has to know who is holding the phone.
   String? sentence(Event e, String who) => null;
 
+  /// How much of what is left of the desk this module gets, once every module has one row.
+  ///
+  /// The dates and the list are what anyone reads standing up, so they ask for twice what the
+  /// others do. This was a table of two module ids in the Us region — the last place outside a
+  /// module's own directory that named one — so a sixth module was silently on the small share
+  /// whatever it was for.
+  double get share => 1.0;
+
   /// What one whole row of this module costs on the shared desk, in logical points.
   ///
   /// Us budgets the desk in points, not in rows: it subtracts one row of every module from the

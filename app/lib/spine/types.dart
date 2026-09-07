@@ -45,6 +45,7 @@ class EventTypeSpec {
     required this.renderer,
     required this.noun,
     required this.announced,
+    this.lens,
     this.refKeys = const [],
     this.blobKeys = const [],
     this.rowInThread = true,
@@ -76,6 +77,17 @@ class EventTypeSpec {
   /// was. They are declared here with the type now, which is where the promise says a type is
   /// declared.
   final String announced;
+
+  /// Which of Moments' three piles this event belongs in: 'media', 'felt', 'happened', or null
+  /// for the kinds that are not kept there at all.
+  ///
+  /// It was a pair of sets written into the region, and the "what happened" one named four of the
+  /// five kinds of thing that happen, so a book one of them handed the other appeared in no lens.
+  /// The first fix asked the search facets, which put a lens name into the search index: 'happened'
+  /// is a word two people write to each other, and typing it returned every date, ritual,
+  /// milestone and shelf card in the year as a keyword hit. A lens is not a search facet, so it is
+  /// its own field.
+  final String? lens;
 
   /// Payload keys whose values are event ids (become `refs`).
   final List<String> refKeys;
@@ -119,6 +131,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'print',
     noun: 'a photograph',
     announced: 'a picture',
+    lens: 'media',
     refKeys: ['reply_to'],
     blobKeys: ['blob'],
   ),
@@ -131,6 +144,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'print_tab',
     noun: 'a video',
     announced: 'something to watch',
+    lens: 'media',
     blobKeys: ['blob', 'poster_blob'],
   ),
   EventTypeSpec(
@@ -142,6 +156,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'strip_wave',
     noun: 'something said',
     announced: 'their voice',
+    lens: 'media',
     blobKeys: ['blob'],
   ),
   EventTypeSpec(
@@ -153,6 +168,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'stuck_object',
     noun: 'a reaction',
     announced: 'an answer to something of yours',
+    lens: 'felt',
     refKeys: ['target'],
     rowInThread: false,
   ),
@@ -200,6 +216,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'object_landing',
     noun: 'a feeling',
     announced: 'a feeling',
+    lens: 'felt',
   ),
   EventTypeSpec(
     id: 'state_declared',
@@ -226,10 +243,11 @@ const List<EventTypeSpec> kEventTypes = [
     required: ['date_id', 'action', 'title'],
     optional: ['when', 'place', 'verdict', 'note'],
     notify: Notify.quiet,
-    search: SearchSpec(textFields: ['title', 'place', 'note', 'verdict'], facets: ['us', 'dates', 'happened']),
+    search: SearchSpec(textFields: ['title', 'place', 'note', 'verdict'], facets: ['us', 'dates']),
     renderer: 'ticket_stub',
     noun: 'a date',
     announced: 'a date moving',
+    lens: 'happened',
   ),
   EventTypeSpec(
     id: 'todo_event',
@@ -246,30 +264,33 @@ const List<EventTypeSpec> kEventTypes = [
     required: ['milestone_id', 'kind', 'title', 'date', 'yearly'],
     optional: [],
     notify: Notify.quiet,
-    search: SearchSpec(textFields: ['title'], facets: ['us', 'calendar', 'milestone', 'happened']),
+    search: SearchSpec(textFields: ['title'], facets: ['us', 'calendar', 'milestone']),
     renderer: 'stamped_card',
     noun: 'a milestone',
     announced: 'a day that matters',
+    lens: 'happened',
   ),
   EventTypeSpec(
     id: 'ritual_kept',
     required: ['ritual_id', 'title', 'kept_at'],
     optional: ['note'],
     notify: Notify.none,
-    search: SearchSpec(textFields: ['title', 'note'], facets: ['us', 'rituals', 'happened']),
+    search: SearchSpec(textFields: ['title', 'note'], facets: ['us', 'rituals']),
     renderer: 'tally_mark',
     noun: 'a ritual',
     announced: 'one of the things you keep',
+    lens: 'happened',
   ),
   EventTypeSpec(
     id: 'passed_on',
     required: ['item_id', 'action', 'title', 'kind'],
     optional: ['note'],
     notify: Notify.quiet,
-    search: SearchSpec(textFields: ['title', 'note'], facets: ['us', 'shelf', 'happened']),
+    search: SearchSpec(textFields: ['title', 'note'], facets: ['us', 'shelf']),
     renderer: 'shelf_card',
     noun: 'something passed on',
     announced: 'something passed between you',
+    lens: 'happened',
   ),
   EventTypeSpec(
     id: 'ping',
@@ -286,10 +307,11 @@ const List<EventTypeSpec> kEventTypes = [
     required: ['feeling_id', 'name', 'family', 'colour', 'object_asset', 'haptic', 'sound', 'retired'],
     optional: [],
     notify: Notify.quiet,
-    search: SearchSpec(textFields: ['name'], facets: ['feeling', 'happened']),
+    search: SearchSpec(textFields: ['name'], facets: ['feeling']),
     renderer: 'new_feeling_card',
     noun: 'a feeling one of you made',
     announced: 'a feeling one of you made',
+    lens: 'happened',
   ),
 ];
 

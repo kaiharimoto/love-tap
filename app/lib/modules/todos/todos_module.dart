@@ -30,6 +30,10 @@ class TodosModule extends Module {
   @override
   double get rowHeight => 60.0;
 
+  /// What anyone reads standing up.
+  @override
+  double get share => 2.0;
+
   @override
   Map<String, ThreadBody> get bodies => const {'list_line': listLine};
 

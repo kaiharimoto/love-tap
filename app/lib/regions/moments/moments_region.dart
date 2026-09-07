@@ -123,14 +123,17 @@ class _MomentsRegionState extends State<MomentsRegion> {
   bool _keeps(Event e) => _keepsIn(e, _view);
 
   bool _keepsIn(Event e, MomentsView view) {
-    // Which lens an event belongs in is a facet the type declares, not a set kept here: the set
+    // Which lens an event belongs in is declared with the type, not kept in a set here: the set
     // named four of the five kinds of thing that happen and left the shelf out, so a book one of
-    // them handed the other was in no lens at all.
-    final facets = kEventTypeById[e.type]?.search.facets ?? const <String>[];
+    // them handed the other was in no lens at all. Asking the *search facets* instead was worse in
+    // two ways — it made 'happened' a search keyword, and it put a feeling one of them invented
+    // into the pile of feelings they had thrown at each other, where the row says nothing about
+    // which of the two it was.
+    final lens = kEventTypeById[e.type]?.lens;
     final typeOk = switch (view) {
-      MomentsView.media => facets.contains('media'),
-      MomentsView.milestones => facets.contains('happened'),
-      MomentsView.feelings => facets.contains('feeling'),
+      MomentsView.media => lens == 'media',
+      MomentsView.milestones => lens == 'happened',
+      MomentsView.feelings => lens == 'felt',
     };
     if (!typeOk) return false;
     if (_person != null && e.author != _person) return false;

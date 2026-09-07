@@ -353,12 +353,23 @@ function ensure(p) {
         // frames the frame check then fails the artifact on.
         let count = step.count || 30;
         if (typeof count === 'string' && count.startsWith('fold:')) {
+          // The number of frames to grab is the number the app is going to play, so it is asked of
+          // the app. Reading the repo's app/assets/INDEX.json instead was reading a different file
+          // from the one the build carries: the build is a copy taken when it was made, `--no-build`
+          // runs against builds already on disk, and app/assets is whatever the last pack left. An
+          // index one frame longer than the build gives held frames at the end of the fold; one
+          // frame shorter cuts it off mid-motion. Neither says anything.
           const seq = count.slice(5);
-          const index = JSON.parse(fs.readFileSync(path.join(ROOT, 'app/assets/INDEX.json'), 'utf8'));
-          const n = (index.folds || {})[seq];
-          if (!n) throw new Error(`no packed fold sequence called ${seq}`);
-          count = n;
-          log.steps.push({ frames_from_index: seq, count: n });
+          const n = await page.evaluate(() => {
+            const r = window.__deskReport && JSON.parse(window.__deskReport());
+            return r && r.fold ? { sequence: r.fold.sequence, length: r.fold.length } : null;
+          });
+          if (!n || !n.length) throw new Error(`the build has no fold sequence loaded to grab`);
+          if (n.sequence !== seq) {
+            throw new Error(`the build has ${n.sequence} loaded and the scene asks for ${seq}`);
+          }
+          count = n.length;
+          log.steps.push({ frames_from_the_build: seq, count });
         }
         const ms = step.ms || 33;
         // Where this step's frames start in the directory, so one clip can be made of two takes: a

@@ -29,24 +29,35 @@ void main() {
   test('nothing outside a module names that module\'s event types, except the spine registry', () {
     final offenders = <String>[];
     for (final m in kModules) {
-      final home = 'lib/modules/${m.id}/';
-      for (final type in m.eventTypes) {
-        // another module may share a type: it is then at home in that module's directory too
+      expect(Directory('lib/modules/${m.id}').existsSync(), isTrue,
+          reason: 'a module is a directory under modules/, and ${m.id} has not got one');
+      // Everything a shared file could key a per-module table off: the event type, the renderer id
+      // the registry names for it, and the module's own id, which is also its search facet. The
+      // first version of this forbade only the type id, and a set of renderer ids dropped back
+      // into the Moments lens reproduced the exact bug it was written against with the suite
+      // green.
+      final handles = <String>{
+        m.id,
+        for (final type in m.eventTypes) ...[type, kEventTypeById[type]!.renderer],
+      };
+      for (final handle in handles) {
         final homes = [
           for (final other in kModules)
-            if (other.eventTypes.contains(type)) 'lib/modules/${other.id}/',
+            if (other.eventTypes.contains(handle) ||
+                other.eventTypes.any((t) => kEventTypeById[t]!.renderer == handle) ||
+                other.id == handle)
+              'lib/modules/${other.id}/',
         ];
         for (final f in dart) {
           final path = f.path.replaceAll('\\', '/');
           if (path == 'lib/spine/types.dart') continue;
           if (homes.any(path.startsWith)) continue;
           final src = f.readAsStringSync();
-          if (src.contains("'$type'") || src.contains('"$type"')) {
-            offenders.add('$path names ${m.id}\'s "$type"');
+          if (src.contains("'$handle'") || src.contains('"$handle"')) {
+            offenders.add('$path names ${m.id}\'s "$handle"');
           }
         }
       }
-      expect(home, isNotEmpty);
     }
     expect(
       offenders,

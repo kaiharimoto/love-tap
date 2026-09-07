@@ -74,9 +74,6 @@ python3 tools/check/manifest.py --out "$LOG/manifest.json" >/dev/null \
 echo "· checking every recipe can actually be built"
 python3 tools/check/recipes.py --out "$LOG/recipes.json" >/dev/null \
   || note_missing "recipes" "a recipe names something the kit cannot build, or tells it something it cannot be told"
-echo "· checking no surface in the library is a flat fill"
-python3 tools/check/surfaces.py --out "$LOG/surfaces.json" \
-  || note_missing "surfaces" "a rendered surface in the library has nothing in it; see $LOG/surfaces.json"
 echo "· checking the push payload carries only kind and sender"
 python3 tools/push/webpush.py --self-test > "$LOG/webpush.txt" 2>&1 || note_missing "push" "the web push sender failed its own vectors"
 
@@ -86,6 +83,17 @@ python3 tools/push/webpush.py --self-test > "$LOG/webpush.txt" 2>&1 || note_miss
 if [ "$BUILD" = "yes" ]; then
   echo "· building the seeded PWA"
   python3 tools/pack_assets.py --seed=year >/dev/null || exit 1
+fi
+
+# ---- the library the build is about to carry -----------------------------------------------------
+# After the pack, not before it. app/assets is derived and gitignored and pack_assets.py is what
+# makes it, so running this first graded whatever the last pack left — and on a fresh clone it
+# graded an empty directory, found nothing, and said the library was fine.
+echo "· checking no surface in the library is a flat fill"
+python3 tools/check/surfaces.py --out "$LOG/surfaces.json" \
+  || note_missing "surfaces" "a rendered surface in the library has nothing in it; see $LOG/surfaces.json"
+
+if [ "$BUILD" = "yes" ]; then
   (cd app && flutter build web --release --no-web-resources-cdn \
       --dart-define=SEED=year --dart-define=TRANSPORT=local --dart-define=CAPTURE=true \
       --dart-define=ROLE=client --dart-define=PERSON=teo \
