@@ -169,6 +169,11 @@ refuted by two of three. Six of them were mine, from this session.
   messages in the year that say the word. A lens is its own field now.
 - `--skip-existing` in the tear rig looked for a file only the day pass writes, so
   `--conditions dusk` skipped all 56 and the queue recorded "1 of 56" as the job done.
+- One finding I looked at and left: the clip's four-second floor now depends on the packer's trim,
+  and the guard that used to bound the trim was loosened. It is true and it is reported rather than
+  hidden — 06 is 16 + 147 + 16 + 147 = 326 frames, and a fold trimmed to 40 would give 112 frames
+  and `frames.py` would say "1.8s is short of 4.0s" on the artifact. A second mechanism tying the
+  two numbers together would be a third place for them to disagree.
 
 ## Still open, measured or named
 - paper is rendered as WebP at Blender's default quality 92 and then packed, so every downstream
