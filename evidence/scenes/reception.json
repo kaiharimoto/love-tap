@@ -2,21 +2,102 @@
  "name": "reception",
  "browser": "chromium",
  "headed": true,
- "permissions": ["notifications"],
- "viewport": {"width": 440, "height": 900, "dpr": 3},
+ "permissions": [
+  "notifications"
+ ],
+ "viewport": {
+  "width": 400,
+  "height": 880,
+  "dpr": 3
+ },
  "settle": 700,
  "log": "evidence/logs/reception_scene.json",
  "steps": [
-  {"do": "wait", "ms": 2200},
-  {"do": "goTo", "arg": 4},
-  {"do": "shot", "out": "evidence/crops/reception_allowed.png", "settle": 600},
-  {"do": "push", "payload": {"kind": "feeling", "from": "noor"}},
-  {"do": "wait", "ms": 1400},
-  {"do": "screen", "out": "evidence/crops/reception.png", "size": "1600x1200"},
-  {"do": "push", "payload": {"kind": "message", "from": "noor"}},
-  {"do": "wait", "ms": 1400},
-  {"do": "screen", "out": "evidence/crops/reception_replaced.png", "size": "1600x1200"},
-  {"do": "notifications", "out": "evidence/logs/reception.json"},
-  {"do": "report", "out": "evidence/logs/reception.report.json", "at": "crops/reception.png"}
+  {
+   "do": "wait",
+   "ms": 2200
+  },
+  {
+   "do": "goTo",
+   "arg": 4
+  },
+  {
+   "do": "step",
+   "ms": 700
+  },
+  {
+   "do": "step",
+   "ms": 700
+  },
+  {
+   "do": "wait",
+   "ms": 300
+  },
+  {
+   "do": "shot",
+   "out": "evidence/crops/reception_allowed.png",
+   "settle": 600
+  },
+  {
+   "do": "goTo",
+   "arg": 0
+  },
+  {
+   "do": "step",
+   "ms": 700
+  },
+  {
+   "do": "step",
+   "ms": 700
+  },
+  {
+   "do": "wait",
+   "ms": 300
+  },
+  {
+   "do": "wait",
+   "ms": 900
+  },
+  {
+   "do": "push",
+   "payload": {
+    "kind": "feeling",
+    "from": "noor"
+   }
+  },
+  {
+   "do": "wait",
+   "ms": 1400
+  },
+  {
+   "do": "screen",
+   "out": "evidence/crops/reception.png",
+   "size": "1180x1100"
+  },
+  {
+   "do": "push",
+   "payload": {
+    "kind": "message",
+    "from": "noor"
+   }
+  },
+  {
+   "do": "wait",
+   "ms": 1400
+  },
+  {
+   "do": "screen",
+   "out": "evidence/crops/reception_replaced.png",
+   "size": "1180x1100"
+  },
+  {
+   "do": "notifications",
+   "out": "evidence/logs/reception.json"
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/reception.report.json",
+   "at": "crops/reception.png"
+  }
  ]
 }

@@ -19,6 +19,9 @@ BUILD="yes"
 ONLY=""
 FRESH_PORT=8798
 DUSK_PORT=8797
+# the seeded build, served for its own sake: the reception scene photographs a phone with the
+# year on it, and the only other place the seeded build is served is the far phone's own port
+SEEDED_PORT=8796
 FROZEN_NOW="2026-09-03T19:40:00Z"
 SCRATCH="${TMPDIR:-/tmp}/lovetap-capture"
 LOG="evidence/logs"
@@ -144,6 +147,8 @@ serve "$SCRATCH/web_fresh" "$FRESH_PORT" || { echo "no fresh build to serve"; ex
 FRESH_PID="$SERVED"
 serve "$SCRATCH/web_dusk" "$DUSK_PORT" || true
 DUSK_PID="$SERVED"
+serve "$SCRATCH/web_seeded" "$SEEDED_PORT" || true
+SEEDED_PID="$SERVED"
 
 # ---- the far phone --------------------------------------------------------------------------------
 # Every seeded still used to be taken on one phone, unpaired, at `connecting`, so every `sent` and
@@ -184,7 +189,7 @@ if [ ! -f "$PAIR" ]; then
 fi
 FAR_BASE="$(python3 -c "import json;print(json.load(open('$PAIR'))['base'])")"
 echo "  · far phone up at $FAR_BASE ($(python3 -c "import json;print(json.load(open('$PAIR')).get('events'))") events)"
-trap 'echo stop >> "$PAIR.do" 2>/dev/null; stop "$FRESH_PID"; [ -n "$DUSK_PID" ] && stop "$DUSK_PID"; wait "$DAEMON_PID" 2>/dev/null' EXIT
+trap 'echo stop >> "$PAIR.do" 2>/dev/null; stop "$FRESH_PID"; [ -n "$DUSK_PID" ] && stop "$DUSK_PID"; [ -n "$SEEDED_PID" ] && stop "$SEEDED_PID"; wait "$DAEMON_PID" 2>/dev/null' EXIT
 
 # Six words are good for ten minutes and every scene pairs a fresh near phone, so the far phone
 # mints again before each one and the scene waits for the new words to be on disk.
@@ -253,9 +258,9 @@ done
 # What it is and is not is written into evidence/logs/reception.json beside the record.
 if [ -f evidence/scenes/reception.json ] && wants reception; then
   echo "· reception"
-  if xvfb-run -a -s "-screen 0 1600x1200x24" \
+  if xvfb-run -a -s "-screen 0 1180x1100x24" \
       node tools/capture/scene.js evidence/scenes/reception.json \
-      --url "$FRESH_URL" --profile "$SCRATCH/profile_reception" \
+      --url "http://127.0.0.1:$SEEDED_PORT/" --profile "$SCRATCH/profile_reception" \
       >"$SCRATCH/reception.out" 2>"$SCRATCH/reception.err"; then
     echo "  ✓ reception"
   else

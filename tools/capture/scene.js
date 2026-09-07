@@ -62,6 +62,7 @@ function ensure(p) {
     // A notification is drawn by the browser, not by the page, so there is no headless way to
     // photograph one: the window has to exist on a display. That scene runs under Xvfb.
     headless: scene.headed ? false : true,
+    ...(scene.headed ? { args: ['--window-position=0,0'] } : {}),
     channel: browserName === 'chromium' ? 'chromium' : undefined,
     ...(proxy ? { proxy: { server: proxy, bypass: '127.0.0.1,localhost' } } : {}),
   };
