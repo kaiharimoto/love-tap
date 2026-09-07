@@ -6,6 +6,13 @@ Every critic is a fresh context. It receives three things and nothing else:
 2. **The evidence** — the artifacts in `evidence/`, the derived crops in `evidence/crops/`, and
    the capture's own records in `evidence/logs/`, `evidence/frames.json`, `evidence/MANIFEST.json`,
    `evidence/DIFF.json`, `evidence/reliability.json` and `evidence/coldstart.json`.
+
+   Not everything in `evidence/` is one of the seventeen artifacts, and what is not says what it
+   is: `crops/` holds derived measurements and one scene that is not an artifact at all
+   (`crops/reception*.png` and `logs/reception.json`, which say in the record what they are, on
+   what browser, and what they are not). `MANIFEST.json` says which files this capture wrote and
+   which predate it — a still that predates the run is a still of an older build, and saying so is
+   a finding.
 3. **Its own rubric row**, quoted in full.
 
 It never receives the build history, the plan, the commit log, the task list, or any explanation
@@ -20,8 +27,14 @@ who finds one anyway leaves it closed: a report that leans on another report is 
 ## How to read a clip
 
 Every clip is a directory of single frames taken one at a time with the app's own clock stepped
-between them, then assembled at 60 frames a second without re-encoding. The timebase of a clip is
-therefore **the app's time, not the wall clock**: one frame is one step of the driven clock, and
+between them, then assembled at 62.5 frames a second without re-encoding — which is the rate the
+clock is stepped at, sixteen milliseconds a frame, so a clip plays at the speed the app ran. The
+timebase of a clip is therefore **the app's time, not the wall clock**: one frame is one step of
+the driven clock, and the seconds between two grabs on a wall clock are the harness's cost of
+taking the picture, not the app's.
+
+## Three logs you can check against the pictures
+
 Three of the logs are measurements taken the way a critic would take them, so they can be checked
 against the pictures rather than trusted: `evidence/logs/hand.json` lays every mark of ink on the
 thread still over every other and reports how many have a near-twin (a font repeats itself
@@ -37,8 +50,15 @@ was a first launch with the year importing (`store: fresh`) or a phone that alre
 (`playback_over_app_time` — 1.0 means real time, 2.0 means the clip plays at half speed). A
 statement about how long something took on screen is a statement in app time, read off those
 fields; the wall-clock interval between two grabs (`evidence/logs/<clip>.json`, `steps[].ms`) is
-the harness's cost of taking the frame and says nothing about the app. Two identical adjacent
-frames in a clip are a fault, and `frames.json` names them.
+the harness's cost of taking the frame and says nothing about the app.
+
+**A frame a reader sees as held is a fault, and `frames.json` names them.** The test is three
+terms at once, on luma, in grey levels: the mean absolute change over the whole frame under 0.5,
+the share of pixels changing by more than two under 0.15 per cent, and the busiest 32-pixel tile's
+mean change under 2.0. It used to be bit-identity, which a fortieth of a grey level of renderer
+noise was enough to pass, so half a second of a frozen sheet counted as motion. `held_frame_test`
+in each entry carries the thresholds and the frame that came closest to failing. If your own eye
+disagrees with that number on a clip, say so and say where — the check is a floor, not a verdict.
 
 ## The mission goal, as given to every critic
 
