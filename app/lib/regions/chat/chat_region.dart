@@ -585,12 +585,19 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
             ],
           ),
         ),
+        // Everything you write and everything the app says about what you are writing sits on one
+        // sheet at the bottom of the desk. It used to be drawn straight onto the wood, and wood is
+        // dark: the reply banner measured 1.78:1, the attachment row 2.19:1 and the draft 2.22:1
+        // against a placeholder at 4.44:1 — the text you type was half as legible as the prompt
+        // telling you to type it. You write on paper. Everything under here is on paper.
+        _WritingPad(children: [
         if (scope.partnerTyping)
           Padding(
-            padding: const EdgeInsets.fromLTRB(18, 2, 18, 2),
+            padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text('${scope.partner.name} ${S.typing}', style: Hands.onDesk(size: 13)),
+              child: Text('${scope.partner.name} ${S.typing}',
+                  style: Hands.margin(size: 13).copyWith(color: Pen.margin)),
             ),
           ),
         if (_replyTo != null || _editing != null)
@@ -634,6 +641,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
           onRecordStart: _startRecording,
           onRecordStop: _stopRecording,
         ),
+        ]),
       ],
     );
   }
@@ -647,6 +655,28 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     final maxIndex = ps.map((p) => p.index).reduce((a, b) => a > b ? a : b);
     return maxIndex >= _lastCount - 2;
   }
+}
+
+/// The sheet at the bottom of the desk that everything you are writing sits on: the draft, the
+/// line saying what is being answered, what else can go in the envelope, and the note that they
+/// are writing too.
+///
+/// One piece of paper rather than four things on wood. Four surfaces drawn straight onto the desk
+/// measured 1.76 to 2.22 to 1 — a draft you could not read, under a placeholder you could.
+class _WritingPad extends StatelessWidget {
+  const _WritingPad({required this.children});
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.fromLTRB(8, 2, 8, 8),
+        child: Slip(
+          id: 'chat.writing',
+          stock: 'looseleaf',
+          padding: const EdgeInsets.fromLTRB(10, 8, 10, 6),
+          child: Column(mainAxisSize: MainAxisSize.min, children: children),
+        ),
+      );
 }
 
 /// The composer: a ruled line to write on, a clip for what else can go in the envelope, three
@@ -702,7 +732,7 @@ class _Composer extends StatelessWidget {
                     isDense: true,
                     contentPadding: const EdgeInsets.fromLTRB(0, 6, 0, 5),
                     hintText: recording ? S.recording : S.composerHint,
-                    hintStyle: Hands.onDesk(size: 16),
+                    hintStyle: Hands.margin(size: 16).copyWith(color: Pen.margin),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -730,7 +760,7 @@ class _Composer extends StatelessWidget {
             onTap: onSend,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(2, 6, 2, 8),
-              child: Text(S.send, style: Hands.onDesk(size: 16)),
+              child: Text(S.send, style: Hands.margin(size: 16).copyWith(color: Pen.ballpoint)),
             ),
           ),
         ],
@@ -787,7 +817,7 @@ class _AttachStrip extends StatelessWidget {
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onTap: () => onPick(id),
-                  child: Text(word, style: Hands.teo(size: 16)),
+                  child: Text(word, style: Hands.teo(size: 16).copyWith(color: Pen.ballpoint)),
                 ),
               ),
           ],

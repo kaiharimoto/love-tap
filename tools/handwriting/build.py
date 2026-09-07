@@ -909,6 +909,21 @@ def ink_area(contours):
     return abs(total)
 
 
+def _looser(hand, attempt):
+    """The same hand, written a little more loosely, for a glyph that will not separate."""
+    if attempt < 8:
+        return hand
+    k = min(1.5, 1.0 + (attempt - 7) * 0.035)
+    out = dict(hand)
+    j = dict(hand.get("jitter", {}))
+    for key in ("point", "point_noise", "rotation_deg", "slant_var_deg", "width_var"):
+        if key in j and isinstance(j[key], (int, float)):
+            j[key] = j[key] * k
+    out["jitter"] = j
+    out["baseline_wobble"] = hand.get("baseline_wobble", 0) * k
+    return out
+
+
 def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
     """All variants of a glyph, re-rolled until every pair is distinct (Hausdorff over the face's
     distinct_min) and every one of them still carries all of its ink."""
@@ -922,7 +937,13 @@ def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
         chosen = None
         for attempt in range(24):
             rng = np.random.default_rng([seed, face_index, glyph_index, v, attempt])
-            contours, alt = build_variant(glyph, v, hand, rng, plan)
+            # A narrow glyph has nowhere to go. An 'i' is a stem and a dot: at the hand's own
+            # jitter its five variants came out 24.6 units apart against a floor of 26, and no
+            # number of re-rolls at the same settings was going to do better, because the jitter
+            # is the whole budget. So after a third of the attempts the hand loosens — which is
+            # what a person does with a letter that keeps coming out the same — up to half again
+            # its own looseness, and stops there rather than turning the letter into another one.
+            contours, alt = build_variant(glyph, v, _looser(hand, attempt), rng, plan)
             if not contours and glyph["strokes"]:
                 continue
             pts = contour_points(contours)

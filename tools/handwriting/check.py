@@ -31,6 +31,13 @@ from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.recordingPen import RecordingPen
 from fontTools.ttLib import TTFont
 
+# How much a hand's stroke has to vary along its length, as a coefficient of variation over the
+# medial-axis widths of its lower case at the size it is shown at. Measured on the shipped faces
+# before the pressure model was widened: TeoHand 0.168, NoorHand 0.190, which a critic read off a
+# captured note as 0.186 and called pressureless. The floor is set under what the widened model
+# gives (0.249 and 0.259) and well over what it replaced.
+STROKE_CV_FLOOR = 0.22
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 FONTS = os.path.join(ROOT, "assets", "fonts")
 
@@ -97,6 +104,72 @@ def outline_points(glyphs, name, per_segment=6):
                 pts.append(start)
             cur = start = None
     return np.array(pts, dtype=float) if pts else np.zeros((0, 2))
+
+
+def _contours(glyphs, name):
+    """The glyph's closed contours as point lists, and the sign of its net area."""
+    pen = RecordingPen()
+    glyphs[name].draw(pen)
+    out, cur = [], []
+    for op, args in pen.value:
+        if op == "moveTo":
+            cur = [args[0]]
+        elif op == "lineTo":
+            cur.append(args[0])
+        elif op == "qCurveTo":
+            cur.extend(a for a in args if a is not None)
+        elif op == "curveTo":
+            cur.extend(args)
+        elif op in ("closePath", "endPath"):
+            if len(cur) > 2:
+                out.append(cur)
+            cur = []
+    return out
+
+
+def stroke_widths(glyphs, name, upm, px_per_em=54.0):
+    """The widths a stroke of this glyph actually has, in device pixels at [px_per_em].
+
+    A hand varies its stroke as it presses and lifts; a machine-set face does not. The pressure
+    model is authored in tools/handwriting/hands.json and turned into an outline by build.py, and
+    nothing until now measured whether any of it reached the outline — a critic measured a
+    coefficient of variation of 0.186 on a captured note and called the handwriting pressureless.
+
+    Measured on the built outline rather than on a rendering, so it is the font that is being
+    judged: the glyph is filled at the size it is shown at, and the medial axis is taken as the
+    ridge of the distance transform. Twice the distance at a ridge point is the width there.
+    """
+    import cv2
+    from PIL import Image, ImageDraw
+    cs = _contours(glyphs, name)
+    if not cs:
+        return np.zeros(0)
+    scale = px_per_em / upm
+    pts = np.vstack([np.asarray(c, float) for c in cs]) * scale
+    x0, y0 = pts.min(axis=0) - 3
+    x1, y1 = pts.max(axis=0) + 3
+    w, h = int(x1 - x0) + 1, int(y1 - y0) + 1
+    if w < 6 or h < 6 or w > 4000 or h > 4000:
+        return np.zeros(0)
+    areas = []
+    for c in cs:
+        a = np.asarray(c, float)
+        areas.append(0.5 * float(np.dot(a[:, 0], np.roll(a[:, 1], -1)) - np.dot(a[:, 1], np.roll(a[:, 0], -1))))
+    net = sum(areas)
+    im = Image.new("L", (w, h), 0)
+    d = ImageDraw.Draw(im)
+    # outers first, then the holes cut back out: PIL fills by scanline, not by winding
+    for c, a in sorted(zip(cs, areas), key=lambda t: -abs(t[1])):
+        poly = [((px * scale - x0), (h - (py * scale - y0))) for px, py in c]
+        d.polygon(poly, fill=255 if (a < 0) == (net < 0) else 0)
+    ink = (np.asarray(im) > 127).astype(np.uint8)
+    if ink.sum() < 20:
+        return np.zeros(0)
+    dt = cv2.distanceTransform(ink, cv2.DIST_L2, 5)
+    # the ridge: no neighbour is further from the edge than this pixel is
+    mx = cv2.dilate(dt, np.ones((3, 3), np.uint8))
+    ridge = (dt >= mx - 1e-6) & (dt > 0.9)
+    return 2.0 * dt[ridge]
 
 
 def ink_area(glyphs, name):
@@ -275,8 +348,34 @@ def check(path, hands_path=os.path.join(ROOT, "tools", "handwriting", "hands.jso
     # to keep every glyph's variants at least the floor apart, or the variants are decoration in
     # the font file and identical on the page.
     distances = [d for _, d in apart]
+    # How much the stroke varies as the hand presses and lifts. A stamp is meant to be even, so
+    # only the hands carry a floor.
+    upm = font["head"].unitsPerEm
+    letters = [n for ch, n in cmap.items()
+               if chr(ch).isalpha() and chr(ch).islower() and n in glyphs.keys()]
+    widths = np.concatenate([stroke_widths(glyphs, n, upm) for n in sorted(letters)[:40]]) \
+        if letters else np.zeros(0)
+    if widths.size > 200:
+        stroke = {
+            "measured_at_px_per_em": 54,
+            "samples": int(widths.size),
+            "mean_px": round(float(widths.mean()), 3),
+            "cv": round(float(widths.std() / widths.mean()), 4),
+            "p1_px": round(float(np.percentile(widths, 1)), 3),
+            "p99_px": round(float(np.percentile(widths, 99)), 3),
+            "floor_cv": STROKE_CV_FLOOR if "Hand" in os.path.basename(path) else None,
+        }
+        if stroke["floor_cv"] and stroke["cv"] < STROKE_CV_FLOOR:
+            findings.append({
+                "glyph": "(the face)",
+                "why": f"the stroke barely varies: coefficient of variation {stroke['cv']} "
+                       f"against a floor of {STROKE_CV_FLOOR}. A hand presses and lifts.",
+            })
+    else:
+        stroke = {"samples": int(widths.size), "why": "too little ink to measure"}
     return {
         "font": os.path.relpath(path, ROOT),
+        "stroke": stroke,
         "glyphs": len(order),
         "variants_checked": variants,
         "twins": twin_share(path, hands_path),

@@ -32,10 +32,16 @@ SIZES = {
     "objects": 420,       # a feeling object is at most ~140 dp
     "bits": 420,
     "folds": 600,
-    "shell": 1500,
+    # The desk is rendered at 1400x3067, which is the screen, and it was being packed down to
+    # 685x1500 and magnified 2.1x back up by BoxFit.cover — so the largest surface on every screen
+    # was a half-resolution image smoothed to fill the glass. At 300 per cent it resolved into
+    # hard-edged parallel bars of flat brown, and its radial power spectrum fell off a full order
+    # steeper than the paper's. Measured on the assets themselves the two are the same material
+    # (desk -2.92, paper -3.03); the difference the critic measured was the resampling.
+    "shell": 3100,
     "ink": 512,          # a coverage plate, tiled: packed at its own size or the tiling shifts
 }
-QUALITY = {"paper": 92, "tears": 92, "objects": 92, "bits": 92, "folds": 90, "shell": 88, "ink": 92}
+QUALITY = {"paper": 92, "tears": 92, "objects": 92, "bits": 92, "folds": 90, "shell": 92, "ink": 92}
 
 
 def convert(src, dst, long_side, quality, keep_alpha, luminance_to_alpha=False, crop=None):
