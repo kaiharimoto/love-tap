@@ -120,7 +120,7 @@ class Note extends StatelessWidget {
       liftMm: lift,
       tilt: tilt,
       width: width,
-      stockAlignment: _patchOf(e),
+      stockAlignment: _patchOf(e, stock),
       stockScale: 1.15,
       padding: const EdgeInsets.fromLTRB(14, 9, 14, 8),
       safe: lib == null || tear == null ? const [0.06, 0.07, 0.06, 0.07] : lib.safeOf(tear),
@@ -189,9 +189,18 @@ class Note extends StatelessWidget {
       kThreadRenderers[kEventTypeById[type]!.renderer] == marginSentence;
 
   /// Which square of the stock this note is torn from, so two notes never show the same paper.
-  static Alignment _patchOf(Event e) {
+  /// Which part of the sheet this piece was torn from.
+  ///
+  /// Never the bound edge. A spiral pad and a looseleaf sheet are rendered with their punched
+  /// holes as real geometry, and a piece cropped at random landed on that column about one time in
+  /// twenty — a row of coil holes down the left of a note with the writing running straight over
+  /// them, which is what the eye goes to first. A page pulled out of a pad keeps the fringe the
+  /// coil left and not the holes it tore through, so the crop starts past them.
+  static Alignment _patchOf(Event e, String stock) {
     final h = hashOf(e.id);
-    return Alignment(((h % 100) / 50.0) - 1.0, (((h >> 7) % 100) / 50.0) - 1.0);
+    final bound = stock.startsWith('spiral') || stock.startsWith('looseleaf');
+    final x = ((h % 100) / 50.0) - 1.0;
+    return Alignment(bound ? x.abs().clamp(0.15, 1.0) : x, (((h >> 7) % 100) / 50.0) - 1.0);
   }
 
   /// The thread's half of the registry's promise: a type names the renderer that draws it, and
