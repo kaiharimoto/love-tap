@@ -130,25 +130,35 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // capture, so what is written here leaves through the outbox and comes back with a sequence
       // the host gave it: `sent` is the host having taken it, and `read` is the far phone having
       // read it (the scene tells it to), not a marker built here by hand. The two states the host
-      // would never produce on its own — a message still on its way, and one it refused — are the
-      // two that are staged: the sync engine is told it is pushing one, and the other is marked
-      // refused the way the host refuses one. Nothing here draws a state the app is not in.
+      // would never produce on its own — a message still on its way, and one it refused — are
+      // produced rather than annotated now. The refusal is the host's: the scene tells the far
+      // phone to refuse the next thing it is pushed, and it answers with its own sentence. The one
+      // on its way is simply one that has been written and not yet gone. Nothing here marks a row
+      // with a state the app is not in — the marks were the fault: markInFlight changed nothing,
+      // because a pending row already reads `sending` while the link is up, and the sync engine
+      // cleared it in its own finally; and markRefused was cleared by the next round that pushed
+      // the same event and got a seq for it.
       //
       // It used to append a read marker built by hand, with a sequence number it made up and an
       // id from the ULID factory, straight into the spine as if the host had sent it. That was
       // the one path in the app that minted an event for the other person, and it was the one
       // that threw only in the web build.
       final scope = AppScope.of(context);
+      // The one the host will not take. The scene has already told the far phone `refuse 1`, so
+      // this is pushed, answered with a refusal in the host's own words, and stays in the outbox
+      // marked. It used to be `markRefused(id, 'the other phone is on an older version')` — the
+      // near phone writing the other phone's answer down for it, which is a picture of the state
+      // rather than the state.
+      final no = await scope.emit('message', {'text': 'sending you the roster'});
+      scope.sync.kick();
+      await Future<void>.delayed(const Duration(milliseconds: 1100));
+      // Two that cross. The far phone read the thread before any of this was written, so these
+      // sit above its read marker and come back `sent` — and everything under them in the frame
+      // is `read`, which is the pair a reader has to be able to tell apart.
       await scope.emit('message', {'text': 'left the key under the pot'});
       final second = await scope.emit('message', {'text': 'and the bread, if there is any'});
-      // give the outbox a moment to cross: these two come back `sent`, and the far phone's read
-      // marker turns them `read`
       scope.sync.kick();
       await Future<void>.delayed(const Duration(milliseconds: 900));
-      final going = await scope.emit('message', {'text': 'ok — leaving now'});
-      scope.spine.markInFlight([going.id]);
-      final no = await scope.emit('message', {'text': 'sending you the roster'});
-      scope.spine.markRefused(no.id, 'the other phone is on an older version');
       // A reaction and a reply, made the way a thumb makes them, so the states frame shows the
       // whole grammar of the messenger rather than four delivery marks. Both were in the app and
       // in no artifact: fifteen captures carried replying_to null and not one reaction.
@@ -168,14 +178,19 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         await _send();
       }
       // And one taken back: a row somebody deleted is a stub, not a gap, and that is a different
-      // picture from a row that was never sent. It was the last delivery state with no frame
-      // anywhere in the evidence.
+      // picture from a row that was never sent. Never the row that is still on its way — those
+      // were the same note, and it read `took this back · read` while trying to show `sending`.
       final takeable = scope.thread.items.lastWhere(
           (i) => i.author == scope.me && i.type == 'message' && i.id != second.id && i.id != no.id,
-          orElse: () => going.id == second.id ? theirs : theirs);
+          orElse: () => theirs);
       if (takeable.author == scope.me) {
         await scope.emit('message_delete', {'target': takeable.id});
       }
+      // And the last one, written and not yet gone. Nothing marks it: it is pending and the link
+      // is up, which is what `sending` means, and it is left that way for the shot. If a sync
+      // round takes it first the report says `sent` and the record is still true — what is not
+      // allowed is the app drawing a state it is not in.
+      await scope.emit('message', {'text': 'ok — leaving now'});
       // something they actually said, so the banner shows words rather than whatever the last
       // row happened to be
       final answerable = scope.thread.items.lastWhere(

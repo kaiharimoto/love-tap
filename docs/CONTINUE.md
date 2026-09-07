@@ -14,6 +14,31 @@ cycle, score, next, blocked, ask).
 
 ---
 
+## 0. What is in flight right now
+
+**Cycle 6's fixes are committed; its capture has not run.** The evidence set in `evidence/` is
+still cycle 5's and predates every change below. `evidence/critics/6/measurements.md` is the sheet
+the builder's scores are to be written from, and it was written before any critic was read, which
+is the brief's rule.
+
+If you are picking this up cold:
+
+1. **The library is mid-re-render.** `tools/render_cycle6.sh` remakes everything two rig changes
+   touched — the paper stocks under the new cockle, the feeling objects and the bits with the desk
+   under them, the fifty-five tear shadows that have never had a dusk version, and the dusk stocks.
+   It is idempotent (`--skip-existing`) and safe to restart: `setsid bash tools/render_cycle6.sh >
+   /tmp/render6.log 2>&1 < /dev/null &`. Check what is on disk before assuming it is done.
+2. **Three feeling objects changed geometry after that queue had already started**, so the queue
+   rendered them from the old script. `tools/render_objects_again.sh` remakes obj_plane, obj_boat
+   and obj_candle and re-packs. Run it after the queue's object stage.
+3. **Then `./capture.sh`**, then the builder sheet, then the six critics, then `tools/score.py
+   --cycle 6`.
+
+Do not capture against a half-rendered library: `tools/check/surfaces.py` will tell you, and it
+fails the run now rather than printing a complaint and returning zero.
+
+---
+
 ## 1. Where the build is
 
 Five review cycles have run. Cycle 5 scored **69 / 100**, from 68, 64, 55.5 and 40, with no floor

@@ -116,7 +116,10 @@ void _everyHandleRuns() {
       final running = e.value();
       var settled = false;
       unawaited(running.then((_) => settled = true, onError: (Object _) => settled = true));
-      for (var i = 0; i < 12 && !settled; i++) {
+      // stageStates now waits on two real round trips — the one the host refuses and the two
+      // that cross — so the budget here is what those cost plus room, not a number that happened
+      // to be enough when the staging only annotated rows.
+      for (var i = 0; i < 45 && !settled; i++) {
         await tester.pump(const Duration(milliseconds: 100));
       }
       try {

@@ -42,6 +42,7 @@ class HttpTransport implements Transport {
     required this.binding,
     required this.deviceId,
     this.pwaRoot,
+    this.refuses,
   }) : _status = TransportStatus(name: binding.name, role: role, state: LinkState.stopped);
 
   @override
@@ -53,6 +54,9 @@ class HttpTransport implements Transport {
 
   /// Host: directory of the built PWA to serve at /. Null until the web build is bundled.
   final String? pwaRoot;
+
+  /// Host: a rule of its own about what it will take. See [srv.HostServer.refuses].
+  final String? Function(Event e)? refuses;
 
   TransportStatus _status;
   final StreamController<TransportStatus> _statusCtl = StreamController.broadcast();
@@ -107,6 +111,7 @@ class HttpTransport implements Transport {
         onPeerContact: (cursor) => _set(_status.copyWith(
             state: LinkState.connected, peerCursor: cursor, ourCursor: spine.cursor, lastContact: DateTime.now().toUtc())),
         pwaRoot: pwaRoot,
+        refuses: refuses,
       );
       await _server!.listen(bind);
       _set(_status.copyWith(state: LinkState.listening, address: '${bind.address}:${bind.port}', ourCursor: spine.cursor));

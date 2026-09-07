@@ -87,7 +87,9 @@ void main() {
     final run = CaptureBus.stageStates!();
     var settled = false;
     unawaited(run.then((_) => settled = true, onError: (Object _) => settled = true));
-    for (var i = 0; i < 12 && !settled; i++) {
+    // stageStates waits on two real round trips now, so this pumps for four seconds rather
+    // than for one: the handle used to annotate rows and return, and it produces states now.
+    for (var i = 0; i < 45 && !settled; i++) {
       await tester.pump(const Duration(milliseconds: 100));
     }
     await run;                      // rethrows whatever it threw, with the real message

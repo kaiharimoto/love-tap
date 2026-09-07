@@ -446,10 +446,21 @@ class SlicedMasks {
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
     final mw = mask.width.toDouble(), mh = mask.height.toDouble();
+    // Painted one device pixel in from every side, so the composed mask has a transparent frame
+    // around it that no sampling phase can pull ink through.
+    //
+    // Without it a pale dead-straight hairline lay on the wood just outside every piece of paper —
+    // 45.7 per cent of the desk pixels on 02_chat's row 556 sitting four or more grey levels above
+    // the rows either side of them, in segments of about 265 px stepping one row every 555 px,
+    // which is the paper's own edge slope. A material critic read it as something in the wood; it
+    // was the piece's own bounding box. drawImageNine lands the mask flush against the edge of the
+    // texture, and the shader then samples half a texel outside it and finds the mask's own border
+    // rather than nothing, so a sliver of the sheet is drawn beyond the sheet.
     canvas.drawImageNine(
       mask,
       Rect.fromLTRB(mw * edge, mh * edge, mw * (1 - edge), mh * (1 - edge)),
-      Rect.fromLTWH(0, 0, w.toDouble(), h.toDouble()),
+      Rect.fromLTWH(1, 1, (w - 2).toDouble().clamp(1, w.toDouble()),
+          (h - 2).toDouble().clamp(1, h.toDouble())),
       Paint()..filterQuality = FilterQuality.medium,
     );
     final image = recorder.endRecording().toImageSync(w, h);

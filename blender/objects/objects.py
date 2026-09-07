@@ -228,31 +228,83 @@ def obj_crane(rng):
 
 
 def obj_boat(rng):
+    """Here: a folded paper boat, and what makes it one is its plan silhouette — pointed at the
+    prow and at the stern, flaring out amidships. It used to be a rectangular dish with a square
+    card standing in it called a sail, which a critic read, correctly, as a grey open box: box IoU
+    0.902 against its own minimum-area rectangle, and a folded paper boat has no sail. The hull is
+    double-ended now and the two gunwales are the folded triangles that stand up from it."""
     mat = paper_mat("boat_paper", (0.94, 0.92, 0.86))
-    hull = sheet(0.034, 0.016, 26, 14, lambda u, v: 0.006 * (abs(v - 0.5) * 2) ** 1.5 + 0.004 * (abs(u - 0.5) * 2) ** 2)
-    parts = [solidify(new_mesh(hull, "boat_hull", mat))]
-    sail = sheet(0.020, 0.020, 16, 16, lambda u, v: 0.0)
-    s = solidify(new_mesh(sail, "boat_sail", mat))
-    s.rotation_euler = (math.radians(78), 0.0, math.radians(8))
-    s.location = (0.0, 0.0, 0.010)
-    parts.append(s)
+    parts = []
+    L, B = 0.038, 0.019
+    # the hull, narrowing to a point at each end: the half-width is a smooth function of x
+    def plan(u):
+        return (math.sin(math.pi * u) ** 0.7)
+
+    bm = bmesh.new()
+    nx, ny = 30, 12
+    verts = {}
+    for i in range(nx + 1):
+        u = i / nx
+        half = B * 0.5 * plan(u)
+        for j in range(ny + 1):
+            v = j / ny
+            y = (v - 0.5) * 2 * half
+            # A folded paper boat is two peaks with a hollow between them: the prow and the stern
+            # rise to a point and the middle sits low and open. The sides come up as gunwales.
+            z = (0.0045 * (abs(v - 0.5) * 2) ** 1.6
+                 + 0.0130 * (abs(u - 0.5) * 2) ** 3.0
+                 - 0.0018 * math.sin(math.pi * u) ** 2)
+            verts[(i, j)] = bm.verts.new(((u - 0.5) * L, y, z))
+    for i in range(nx):
+        for j in range(ny):
+            bm.faces.new((verts[(i, j)], verts[(i + 1, j)], verts[(i + 1, j + 1)], verts[(i, j + 1)]))
+    uv = bm.loops.layers.uv.new("UVMap")
+    for f in bm.faces:
+        for loop in f.loops:
+            c = loop.vert.co
+            loop[uv].uv = (c.x / L + 0.5, c.y / B + 0.5)
+    parts.append(solidify(new_mesh(bm, "boat_hull", mat)))
+    # and the folded flap that runs along each side, turned down over the gunwale — the crease
+    # that is the whole of how a paper boat is made
+    for sign in (1, -1):
+        parts.append(_poly([
+            (-L * 0.34, B * 0.28 * sign, 0.0072),
+            (0.0, B * 0.47 * sign, 0.0040),
+            (L * 0.34, B * 0.28 * sign, 0.0072),
+            (0.0, B * 0.30 * sign, 0.0068),
+        ], f"boat_flap{sign}", mat))
     return parts
 
 
 def obj_plane(rng):
+    """Catch: a paper dart. What makes it one is the planform — a point at the nose and a trailing
+    edge swept back to two tips — and it had none: two constant-chord rectangular wings at
+    y = +/-8 mm, whose union in plan is a 40 by 31 mm rectangle. It measured a silhouette IoU of
+    0.995 against its own minimum-area rectangle, the highest number in the library and half a per
+    cent off a literal rectangle. Every panel here is planar, so the creases are real edges."""
     mat = paper_mat("plane_paper", (0.95, 0.94, 0.90))
     parts = []
+    nose, tail = 0.024, -0.018
+    # the keel: the fold down the middle, standing up, nose to tail
+    parts.append(_poly([
+        (nose, 0.0, 0.0015),
+        (tail, 0.0, 0.0015),
+        (tail, 0.0, 0.0085),
+        (nose * 0.35, 0.0, 0.0075),
+    ], "plane_keel", mat))
     for sign in (1, -1):
-        w = sheet(0.040, 0.016, 26, 12, lambda u, v: 0.003 * (1 - v))
-        o = solidify(new_mesh(w, f"wing{sign}", mat))
-        o.rotation_euler = (math.radians(12 * sign), 0.0, 0.0)
-        o.location = (0.0, 0.008 * sign, 0.002)
-        parts.append(o)
-    keel = sheet(0.040, 0.010, 26, 8, lambda u, v: 0.0)
-    k = solidify(new_mesh(keel, "keel", mat))
-    k.rotation_euler = (math.radians(90), 0.0, 0.0)
-    k.location = (0.0, 0.0, 0.004)
-    parts.append(k)
+        # the wing: a swept triangle from the nose back to a tip, with the trailing edge raked
+        parts.append(_poly([
+            (nose, 0.0, 0.0035),
+            (tail, 0.0125 * sign, 0.0015),
+            (tail * 0.55, 0.0035 * sign, 0.0030),
+        ], f"plane_wing{sign}", mat))
+        # and the winglet the fold leaves standing at the tip
+        parts.append(_poly([
+            (tail, 0.0125 * sign, 0.0015),
+            (tail * 0.35, 0.0072 * sign, 0.0026),
+            (tail, 0.0110 * sign, 0.0062),
+        ], f"plane_tip{sign}", mat))
     return parts
 
 
@@ -470,14 +522,55 @@ def obj_stone(rng):
 
 
 def obj_candle(rng):
-    wax = simple_mat("wax", (0.92, 0.86, 0.68), roughness=0.45, transmission=0.25)
-    wick = simple_mat("wick", (0.15, 0.13, 0.12), roughness=0.9)
+    """Hold: a candle stub that has been burning. It was a twenty-millimetre untapered cylinder
+    with a speck on top — an ellipse IoU of 0.948 and a mean saturation of 0.113, which is to say
+    a grey cylinder the caption had to rescue. What makes a stub a stub is what the flame did to
+    it: a melted rim that has run down one side, a hollow round the wick, and the burnt ring.
+
+    Its wax also carried 25 per cent transmission, which washed the body from behind and took more
+    than half of what little gradient it had; wax that thick is not translucent, and the light on
+    it should come off its surface."""
+    wax = simple_mat("wax", (0.93, 0.88, 0.72), roughness=0.42)
+    wick = simple_mat("wick", (0.10, 0.09, 0.08), roughness=0.95)
+    R, H = 0.0102, 0.019
     bm = bmesh.new()
-    bmesh.ops.create_cone(bm, cap_ends=True, segments=28, radius1=0.010, radius2=0.0095, depth=0.020)
+    bmesh.ops.create_cone(bm, cap_ends=True, segments=40, radius1=R, radius2=R * 0.94, depth=H)
+    r = np.random.default_rng(21)
+    lip = r.uniform(0, 2 * math.pi)
+    for v in bm.verts:
+        x, y, z = v.co
+        rr = math.hypot(x, y)
+        if z < H * 0.4:
+            continue
+        a = math.atan2(y, x)
+        # the rim has melted: it dips on the side the flame leaned, and scallops all the way round
+        dip = 0.0042 * (0.5 + 0.5 * math.cos(a - lip)) ** 1.6
+        scallop = 0.0007 * math.sin(3.7 * a + 1.1) + 0.0005 * math.sin(6.3 * a)
+        # and the middle of the top is hollow, burnt down round the wick
+        hollow = 0.0034 * max(0.0, 1.0 - (rr / (R * 0.66)) ** 2) if rr < R * 0.66 else 0.0
+        v.co = (x, y, z - (dip + scallop + hollow) * (z / (H * 0.5)))
+    # flat-shaded: the scallops the flame left are facets, and smoothing them turned the
+    # stub into an egg
     body = new_mesh(bm, "candle", wax, smooth=False)
-    body.location = (0.0, 0.0, 0.010)
-    w = tube([(0.0, 0.0, 0.020), (0.0006, 0.0, 0.024)], 0.0006, 6, "wick", wick)
-    return [body, w]
+    body.location = (0.0, 0.0, H * 0.5)
+    parts = [body]
+    # the runnel the wax made coming down the low side
+    run = tube([
+        (R * 0.97 * math.cos(lip), R * 0.97 * math.sin(lip), H - 0.0045),
+        (R * 1.00 * math.cos(lip), R * 1.00 * math.sin(lip), H * 0.55),
+        (R * 0.96 * math.cos(lip), R * 0.96 * math.sin(lip), H * 0.24),
+    ], 0.0013, 8, "runnel", wax)
+    parts.append(run)
+    # the burnt ring in the wax, and the wick leaning out of it
+    ring = bmesh.new()
+    bmesh.ops.create_cone(ring, cap_ends=True, segments=24, radius1=0.0028, radius2=0.0026,
+                          depth=0.0006)
+    burnt = new_mesh(ring, "burnt", wick, smooth=False)
+    burnt.location = (0.0, 0.0, H - 0.0038)
+    parts.append(burnt)
+    parts.append(tube([(0.0, 0.0, H - 0.0028), (0.0011, 0.0004, H + 0.0032)], 0.0006, 6,
+                      "wick", wick))
+    return parts
 
 
 def obj_mug(rng):

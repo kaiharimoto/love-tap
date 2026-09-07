@@ -41,6 +41,7 @@ class LocalTransport extends HttpTransport {
     required super.deviceId,
     LocalBinding? binding,
     super.pwaRoot,
+    super.refuses,
   }) : super(binding: binding ?? LocalBinding());
 
   ScriptedFaults get scriptedFaults => (binding as LocalBinding).faults;

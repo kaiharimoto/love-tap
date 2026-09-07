@@ -87,15 +87,26 @@ Future<void> main(List<String> argv) async {
         '${DateTime.now().difference(t0).inMilliseconds} ms');
   }
 
+  // What this host will not take, when the harness asks it not to. Consumed one event at a time,
+  // so `refuse 1` refuses exactly the next one the near phone pushes and everything after it
+  // crosses normally.
+  var refuseNext = 0;
+  var refuseReason = '';
+  String? refuses(Event e) {
+    if (refuseNext <= 0) return null;
+    refuseNext--;
+    return refuseReason;
+  }
+
   final Transport transport;
   if (kind == 'tailscale') {
     transport = tailscaleTransport(role: TransportRole.host, spine: spine,
         deviceId: 'android-capture', port: port, declaredAddress: address,
-        userspaceProxy: proxy, pwaRoot: pwa.isEmpty ? null : pwa);
+        userspaceProxy: proxy, pwaRoot: pwa.isEmpty ? null : pwa, refuses: refuses);
   } else {
     transport = LocalTransport(role: TransportRole.host, spine: spine,
         deviceId: 'android-capture', binding: LocalBinding(port: port),
-        pwaRoot: pwa.isEmpty ? null : pwa);
+        pwaRoot: pwa.isEmpty ? null : pwa, refuses: refuses);
   }
   await transport.start();
 
@@ -190,6 +201,16 @@ Future<void> main(List<String> argv) async {
           await frame();
           if (on) typingRepeat = Timer.periodic(const Duration(seconds: 3), (_) => frame());
           stdout.writeln('host-daemon: typing ${on ? 'on' : 'off'}');
+        } else if (parts.first == 'refuse') {
+          // The host says no to the next one, and says why. A refusal is one of the five states a
+          // message can be in and the only one that cannot be produced from the other phone's own
+          // composer — the near phone used to draw it by marking a row refused by hand, which is a
+          // picture of the state rather than the state. This is the host actually refusing.
+          refuseNext = parts.length > 1 ? int.tryParse(parts[1]) ?? 1 : 1;
+          refuseReason = parts.length > 2
+              ? parts.skip(2).join(' ')
+              : 'this phone is on an older version and cannot read that';
+          stdout.writeln('host-daemon: will refuse the next $refuseNext');
         } else if (parts.first == 'pair') {
           await mint();
           stdout.writeln('host-daemon: six words minted again');

@@ -26,8 +26,12 @@ class Rig {
   late LocalTransport clientT;
   late SyncEngine sync;
 
-  static Future<Rig> up({Directory? dir, int? port}) async {
+  /// A rule of the host's own about what it will take. See HostServer.refuses.
+  String? Function(Event e)? refuses;
+
+  static Future<Rig> up({Directory? dir, int? port, String? Function(Event e)? refuses}) async {
     final r = Rig(dir ?? await Directory.systemTemp.createTemp('lovetap-'), port ?? await _freePort());
+    r.refuses = refuses;
     await r.openHost();
     await r.openClient();
     return r;
@@ -37,7 +41,7 @@ class Rig {
     host = await Spine.open(NativeStore.openAt('${dir.path}/host.sqlite3'),
         const Identity(person: Person.noor, device: DeviceKind.android));
     hostT = LocalTransport(role: TransportRole.host, spine: host, deviceId: 'android-test',
-        binding: LocalBinding(port: port));
+        binding: LocalBinding(port: port), refuses: refuses);
     await hostT.start();
   }
 
@@ -138,6 +142,43 @@ void main() {
     await r.sync.once();
     expect(r.host.length, before);
     expect(r.client.refused.keys, contains(odd.id));
+    await r.closeClient();
+    await r.closeHost();
+  });
+
+  test('the host refuses one, says why, and the row says so', () async {
+    // The refusal is one of the five states a message can be in and it was the only one that
+    // could not be produced from the near phone's own composer — the staging used to mark a row
+    // refused by hand, which is the near phone writing the other phone's answer down for it.
+    // A host may have a rule of its own about what it will take; this is a host using one.
+    var refuseNext = 1;
+    final r = await Rig.up(refuses: (e) {
+      if (refuseNext <= 0) return null;
+      refuseNext--;
+      return 'this phone is on an older version and cannot read that';
+    });
+    await r.pair();
+
+    final no = await r.client.append('message', {'text': 'sending you the roster'});
+    await r.sync.once();
+    expect(r.client.refused[no.id], contains('older version'));
+    expect(r.client.pending.map((e) => e.id), [no.id]);
+    expect(r.client.pushable, isEmpty);
+
+    // and the next one crosses
+    final yes = await r.client.append('message', {'text': 'left the key under the pot'});
+    await r.sync.once();
+    expect(r.host.ordered.map((e) => e.payload['text']), contains('left the key under the pot'));
+    expect(r.client.refused.keys, contains(no.id));
+    expect(r.client.pending.map((e) => e.id), [no.id],
+        reason: 'the refused one stays in the outbox and the accepted one leaves it');
+    expect(yes.id, isNotEmpty);
+
+    // and a host that changes its mind clears the refusal rather than leaving the row saying two
+    // contradictory things
+    final again = r.client.pending.first;
+    await r.client.applyFromHost([again.withSeq(9999)]);
+    expect(r.client.refused.keys, isNot(contains(no.id)));
     await r.closeClient();
     await r.closeHost();
   });

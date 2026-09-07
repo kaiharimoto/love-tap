@@ -25,19 +25,27 @@
    "ms": 600
   },
   {
-   "do": "stage"
-  },
-  {
-   "do": "wait",
-   "ms": 1800
-  },
-  {
    "do": "far",
    "arg": "read"
   },
   {
    "do": "wait",
-   "ms": 1600
+   "ms": 1400
+  },
+  {
+   "do": "far",
+   "arg": "refuse 1 this phone is on an older version and cannot read that"
+  },
+  {
+   "do": "wait",
+   "ms": 400
+  },
+  {
+   "do": "stage"
+  },
+  {
+   "do": "wait",
+   "ms": 1200
   },
   {
    "do": "far",

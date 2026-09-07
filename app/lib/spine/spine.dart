@@ -305,6 +305,11 @@ class Spine {
       if (known != null) {
         if (known.seq == null) {
           _pending.removeWhere((p) => p.id == e.id);
+          // A seq and a refusal are contradictory, and the seq is the later answer: the host took
+          // it after all. Leaving the refusal behind left the row reading `sent` while the spine
+          // still held a reason it had not gone, for ever — and kept the id out of `pushable`, so
+          // a host that changed its mind could never be sent it again.
+          _refused.remove(e.id);
           _insertOrdered(e);
           _byId[e.id] = e;
           assigned.add(e);

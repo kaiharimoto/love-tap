@@ -17,6 +17,7 @@ class HostServer {
     required void Function(Ephemeral) onEphemeral,
     required void Function(int cursor) onPeerContact,
     String? pwaRoot,
+    String? Function(Event e)? refuses,
   });
 
   Future<void> listen(HostBind bind) async => throw UnsupportedError('the PWA does not host');

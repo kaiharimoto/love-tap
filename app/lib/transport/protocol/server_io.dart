@@ -25,6 +25,7 @@ class HostServer {
     required this.onEphemeral,
     required this.onPeerContact,
     this.pwaRoot,
+    this.refuses,
   });
 
   final Spine spine;
@@ -37,6 +38,16 @@ class HostServer {
   final void Function(Ephemeral) onEphemeral;
   final void Function(int cursor) onPeerContact;
   final String? pwaRoot;
+
+  /// Why this host will not take an event, or null if it will.
+  ///
+  /// A host refusing something is a real thing and it is one of the five states a message can be
+  /// in, and until now it was the only one unreachable over the wire — the two rules below (an
+  /// author the pairing does not cover, a kind this build has never heard of) are the ones any
+  /// host has, and neither can be produced from the other phone's own composer. This is where a
+  /// host puts a rule of its own; the far phone in the capture uses it to refuse one message on
+  /// request, so the artifact named for the messenger's states can show the state.
+  final String? Function(Event e)? refuses;
 
   HttpServer? _server;
   final NonceCache _nonces = NonceCache();
@@ -233,6 +244,11 @@ class HostServer {
       // log both of them share
       if (!kEventTypeById.containsKey(e.type)) {
         refused[e.id] = 'this phone does not know what a ${e.type} is; it is on an older version';
+        continue;
+      }
+      final why = refuses?.call(e);
+      if (why != null) {
+        refused[e.id] = why;
         continue;
       }
       allowed.add(e);
