@@ -61,7 +61,7 @@ thing before it reads as a symbol.
 | `make_you_tea` | Shelter | i'll make you tea | `obj_mug` — a mug with steam | 100@120 off100 100@120 off100 500@150 | `snd_tea` two clinks, a pour | `#8b6b4a` |
 | `hold` | Shelter | hold | `obj_candle` — a candle stub | 900@150 off100 900@150 | `snd_hold` two long presses | `#b89a5a` |
 | `poke` | Mischief | poke | `obj_spitball` — a spitball | 30@255 | `snd_poke` one flick | `#a8322b` |
-| `nyeh` | Mischief | nyeh | `obj_wrapper` — a sweet wrapper twisted at both ends | 30@200 off50 30@200 off50 90@255 | `snd_nyeh` two taps, a raspberry of paper | `#a8322b` |
+| `nyeh` | Mischief | nyeh | `obj_wrapper` — a sweet in its wrapper, wrung at both ends | 30@200 off50 30@200 off50 90@255 | `snd_nyeh` two taps, a raspberry of paper | `#a8322b` |
 | `catch` | Mischief | catch | `obj_plane` — a paper plane | 40@120 off30 40@160 off30 40@200 off30 40@240 off30 120@255 | `snd_catch` rising flutter, a land | `#a8322b` |
 | `pick_one` | Mischief | pick one | `obj_fortune_teller` — a paper fortune teller | 50@180 off120 ×6 | `snd_pick` six folds | `#e0a8b8` |
 | `snap` | Mischief | snap | `obj_rubber_band` — a rubber band | 20@255 off40 60@255 off400 20@180 | `snd_snap` stretch, snap, drop | `#c98a5a` |
@@ -73,7 +73,7 @@ thing before it reads as a symbol.
 | `grey` | Static | grey | `obj_pencil_smudge` — a graphite smudge on a scrap | (60@70 off60) ×8 | `snd_grey` faint patter | `#8a8a8e` |
 | `not_okay` | Static | not okay | `obj_torn_corner` — a torn-off corner | 400@255 off100 40@255 off100 40@255 off100 40@255 | `snd_notokay` one tear, three taps | `#141a2e` |
 | `did_it` | Sparkle | did it | `obj_cork` — a popped cork on its side | 40@120 off60 40@170 off60 40@220 off60 200@255 | `snd_didit` three rising taps, a peel | `#c9a23a` |
-| `confetti` | Sparkle | confetti | `obj_confetti` — hole-punch circles | 30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150 | `snd_confetti` a handful of punches | `#f2a8c0` |
+| `confetti` | Sparkle | confetti | `obj_confetti` — hole-punch circles, cut squares and strips, some of it curled | 30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150 | `snd_confetti` a handful of punches | `#f2a8c0` |
 | `yes` | Sparkle | yes | `obj_bunting` — three flags of bunting on a thread | 60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255 | `snd_yes` rising, then two bursts | `#a8322b` |
 | `crown` | Sparkle | paper hat | `obj_party_hat` — a tissue hat out of a cracker, on its side | 100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255 | `snd_crown` four rising folds, a flourish | `#f4ea6a` |
 | `treat` | Sparkle | treat | `obj_ribbon` — a curled ribbon | 50@200 off80 50@200 off80 300@150 off80 50@255 | `snd_treat` two snips, a curl, a tap | `#f2a8c0` |

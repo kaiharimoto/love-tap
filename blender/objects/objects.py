@@ -451,16 +451,50 @@ def obj_gold_star(rng):
 
 
 def obj_confetti(rng):
-    mat_a = paper_mat("conf_a", (0.95, 0.78, 0.80))
-    mat_b = paper_mat("conf_b", (0.90, 0.92, 0.72))
+    """Delight: paper punched and cut, lying where it fell.
+
+    It was fourteen discs of one size in two colours, and a critic read them as sugared almonds —
+    round, pastel, all alike, and flat enough that no light gets into them. Confetti off a desk is
+    what a hole punch and a pair of scissors leave: circles, squares, and thin strips, in the
+    colours of whatever paper was to hand, and half of it lands curled rather than flat, which is
+    the half the light finds.
+    """
+    stocks = [
+        paper_mat("conf_a", (0.90, 0.58, 0.62)),
+        paper_mat("conf_b", (0.78, 0.85, 0.55)),
+        paper_mat("conf_c", (0.58, 0.74, 0.86)),
+        paper_mat("conf_d", (0.94, 0.82, 0.44)),
+        paper_mat("conf_e", (0.90, 0.87, 0.82)),
+    ]
     parts = []
     r = np.random.default_rng(41)
-    for k in range(14):
-        bm = bmesh.new()
-        bmesh.ops.create_circle(bm, cap_ends=True, segments=16, radius=0.0022)
-        o = solidify(new_mesh(bm, f"conf{k}", mat_a if k % 2 else mat_b), t=0.00012)
-        o.location = (float(r.uniform(-0.016, 0.016)), float(r.uniform(-0.014, 0.014)), float(r.uniform(0, 0.0004)))
-        o.rotation_euler = (float(r.uniform(-0.4, 0.4)), float(r.uniform(-0.4, 0.4)), float(r.uniform(0, 3.14)))
+    for k in range(17):
+        mat = stocks[k % len(stocks)]
+        shape = k % 3
+        curl = float(r.uniform(0.0, 1.0)) < 0.45
+        if shape == 0:
+            # punched out of a page
+            bm = bmesh.new()
+            bmesh.ops.create_circle(bm, cap_ends=True, segments=14, radius=float(r.uniform(0.0016, 0.0024)))
+            o = solidify(new_mesh(bm, f"conf{k}", mat, smooth=False), t=0.00010)
+        else:
+            # cut with scissors: a square, or a strip off the edge
+            w = float(r.uniform(0.0026, 0.0042)) if shape == 1 else float(r.uniform(0.0060, 0.0090))
+            h = float(r.uniform(0.0024, 0.0038)) if shape == 1 else float(r.uniform(0.0012, 0.0018))
+            bend = float(r.uniform(0.0006, 0.0013)) if curl else 0.0
+            o = solidify(
+                new_mesh(
+                    sheet(w, h, 10, 6, lambda u, v, b=bend: b * math.sin(u * math.pi) * (1.0 - 0.4 * v)),
+                    f"conf{k}", mat, smooth=False),
+                t=0.00010)
+        o.location = (
+            float(r.uniform(-0.013, 0.013)),
+            float(r.uniform(-0.011, 0.011)),
+            float(r.uniform(0.0, 0.0006)),
+        )
+        # a piece that landed on an edge stands a little off the desk; a flat one lies down
+        tip = float(r.uniform(0.5, 1.1)) if curl else float(r.uniform(-0.25, 0.25))
+        o.rotation_euler = (tip, float(r.uniform(-0.3, 0.3)), float(r.uniform(0, 3.14)))
         parts.append(o)
     return parts
 
@@ -739,25 +773,61 @@ def obj_dog_ear(rng):
 
 
 def obj_wrapper(rng):
-    """Nyeh: a sweet wrapper twisted at both ends, the way one is left on a desk after the sweet
-    has been eaten in front of you. Thin, a little translucent, pinched tight at the twists."""
-    mat = simple_mat("wrapper", (0.93, 0.62, 0.68), roughness=0.22, transmission=0.35, ior=1.3)
-    n = 40
-    pts = []
-    for k in range(n + 1):
-        t = k / n
-        x = (t - 0.5) * 0.052
-        y = 0.004 * math.sin(t * math.pi * 2.0) + 0.002 * math.sin(t * 9.0)
-        z = 0.0045 + 0.002 * math.sin(t * math.pi)
-        pts.append((x, y, z))
+    """Nyeh: a sweet in its wrapper, wrung at both ends, of the kind that is unwrapped very slowly
+    in front of somebody who wants one.
 
-    def taper(t):
-        # fat in the middle, pinched to a twist at each end
-        body = math.sin(t * math.pi) ** 0.55
-        return max(0.10, body)
-    tube_obj = tube(pts, 0.0058, 14, "wrapper", mat, taper=taper)
-    tube_obj.rotation_euler = (0.0, 0.0, math.radians(float(rng.uniform(-25, 25))))
-    return [tube_obj]
+    Two goes at this. It was a tapered tube — fat in the middle, pinched at the ends, glossy — and
+    a critic read it as a stuck-out tongue, which it was. The first rebuild flattened it and put
+    creases round it, and the render came back a pale pink blob: 16 per cent of a 6 mm radius is a
+    ripple a millimetre deep under a soft light, which is nothing, and the ends still closed to a
+    rounded point rather than a twist.
+
+    What actually says wrapper is the shape of the ends. The paper is gathered and wrung, so each
+    end is a narrow throat that flares open again into a little fan, and the creases run out of the
+    body into that throat and turn with it. So: a pouch in the middle with deep folds down it, a
+    wrung throat at each end, and a fan beyond it. The empty version — the paper on the desk after
+    the sweet is gone — is flatter and reads better as rubbish than as a thing one of them would
+    send the other, so this one still has the sweet in it.
+    """
+    mat = simple_mat("wrapper", (0.90, 0.55, 0.60), roughness=0.50, transmission=0.10, ior=1.35)
+    nu, nv = 84, 26
+    length = 0.050
+    bm = bmesh.new()
+    verts = {}
+    for j in range(nv):
+        for i in range(nu + 1):
+            u = i / nu
+            th0 = 2.0 * math.pi * j / nv
+            # how far into the body we are: 1 in the middle, 0 at the throats
+            d = abs(u - 0.5) * 2.0            # 0 at the centre, 1 at the ends
+            body = max(0.0, 1.0 - (d / 0.62) ** 2.2)
+            # the fan past the throat: it opens again in the last twelfth
+            fan = max(0.0, (d - 0.80) / 0.20) ** 1.4
+            rad = 0.00055 + 0.0070 * body + 0.0032 * fan
+            # the folds: deep in the body, deeper still where the paper is gathered
+            gather = 1.0 - body
+            crease = (1.0
+                      + (0.34 + 0.34 * gather) * math.sin(th0 * 6.0)
+                      + 0.13 * math.sin(th0 * 3.0 + 1.1)
+                      + 0.10 * math.sin(th0 * 13.0 + u * 4.0)
+                      + 0.06 * math.sin(u * 17.0))
+            rad *= max(0.25, crease)
+            # the wring: the folds turn as they leave the body, a couple of turns into each throat
+            th = th0 + 5.0 * (u - 0.5) * gather
+            x = (u - 0.5) * length
+            y = rad * math.cos(th)
+            # flattened, because there is nothing inside it any more
+            z = 0.0010 + rad * 0.42 * math.sin(th) + 0.0008 * math.sin(u * math.pi * 3.0)
+            verts[(i, j)] = bm.verts.new((x, y, z))
+    for j in range(nv):
+        for i in range(nu):
+            bm.faces.new((
+                verts[(i, j)], verts[(i + 1, j)],
+                verts[(i + 1, (j + 1) % nv)], verts[(i, (j + 1) % nv)],
+            ))
+    obj = solidify(new_mesh(bm, "wrapper", mat, smooth=True), t=0.00008)
+    obj.rotation_euler = (0.0, 0.0, math.radians(float(rng.uniform(-25, 25))))
+    return [obj]
 
 
 def obj_pencil_smudge(rng):
