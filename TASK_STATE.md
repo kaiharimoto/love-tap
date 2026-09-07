@@ -98,9 +98,10 @@ TeoHand until it lands); the within-stroke ink density plate.
 
 1. Two of the seventeen artifacts need an Android device this container cannot boot.
 2. The tailnet run is pending for want of a key, so every reliability report says `local`.
-3. Module rows share the thread's renderers: a date, a to-do and a calendar card are not yet
-   their own kinds of paper.
-4. DeskStamp is not built; the stamped furniture is set in TeoHand.
+3. The evidence set is five cycles old in fifteen of its seventeen files: everything above and
+   everything in `evidence/critics/6/measurements.md` is committed and uncaptured.
+4. The library is mid-re-render, and a capture against a half-rendered one is refused by
+   `tools/check/surfaces.py` rather than quietly scored.
 
 ## What cycle 3 said, and what was done about it in the same session
 
@@ -201,7 +202,15 @@ break it. Three came back refuted. What follows is what survived, and what the r
 7. **Both tailnet records give their direct path as 192.0.2.2**, and the search capability is an
    identity map. Both fixed: the record names the endpoint, says it is this container's own address,
    and says what that means; the search record carries the query, the hit count and the id.
-8. **A fifth module costs five shared files, not one line.** Open.
+8. ~~**A fifth module costs five shared files, not one line.**~~ **Closed.** The last two were the
+   thread row and the sentence, both written for the module in the chat region; a module declares
+   both now (`Module.bodies`, `Module.sentence`) and the table is assembled from `kModules`. Two
+   more per-type switches went with them and both were short as well as duplicated: search's
+   "found as ..." named 11 of the 18 types and Moments' "what happened" lens named 4 of the 5 kinds
+   of thing that happen, so a thing passed on read as its own registry id in one and appeared in no
+   lens at all in the other. `module_costs_test` reads the source: no file outside a module's own
+   directory may name that module's event types, except the spine registry, which is a principle
+   and not a cost.
 9. **A host-rejected event is re-pushed forever unmarked**: the refusal path is unreachable over the
    wire. Open.
 10. ~~DeskStamp is unbuilt~~ — built. One union over a few thousand overlapping ribbon quads cost

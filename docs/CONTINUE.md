@@ -23,6 +23,13 @@ is the brief's rule.
 
 If you are picking this up cold:
 
+0. **What has been fixed since the sheet was written**, none of it captured: the fold clip's
+   length is read from the packed library rather than typed into the scene (the packer was
+   registering a sequence's frames by their crop offsets, so it refused to trim: 147 frames, not
+   209); a module brings its own thread row, its own sentence and its own words, so the last
+   shared file a fifth module cost is gone and `module_costs_test` counts what is left; a video row
+   says it is a video; a picture already in hand is not redrawn as a sentence about fetching; and
+   the desk's rows are asserted to end inside the desk, not only to begin inside it.
 1. **The library is mid-re-render.** `tools/render_cycle6.sh` remakes everything two rig changes
    touched — the paper stocks under the new cockle, the feeling objects and the bits with the desk
    under them, the fifty-five tear shadows that have never had a dusk version, and the dusk stocks.
