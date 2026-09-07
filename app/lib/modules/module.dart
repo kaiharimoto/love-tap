@@ -1,8 +1,24 @@
 // A shared-life module.
 //
 // A module owns nothing: it writes its events into the single spine and reads them back as a
-// projection, so its history is the couple's history and cannot drift. Adding one is a directory
-// under modules/ and one line in registry.dart — the existing modules are not touched.
+// projection, so its history is the couple's history and cannot drift.
+//
+// What a module actually costs, counted rather than claimed. This file used to say "a directory
+// under modules/ and one line in registry.dart", and a coherence critic counted the fifth module's
+// own diff and found five shared files. Three of them are gone: the module declares its own paper
+// (`stocks`, below), its own share of the desk (`rowHeight`), and Search builds its facets from
+// the registry. Two are left, and one of them is deliberate:
+//
+//   - `app/lib/spine/types.dart`. A module's event types go in the spine's own registry, because
+//     the spine validates every payload against one list before it writes it and before it takes
+//     one off the wire. A module inventing its own schema is exactly what a single spine forbids,
+//     so this one is not a cost to remove. What it means in practice: a new module writes its
+//     types there and in docs/EVENT_TYPES.md, which is the same act.
+//   - `app/lib/regions/chat/renderers.dart`. A module's rows are drawn by functions that live in
+//     the chat region rather than in the module's own directory. That one is a cost and not a
+//     principle, and it is the next thing to move: `NoteContext` and `ThreadBody` want their own
+//     file under material/, the five bodies want to move into their modules, and the renderer
+//     table wants to be built from `kModules` the way the facets and the stocks now are.
 import 'package:flutter/widgets.dart';
 
 import '../spine/spine.dart';
@@ -26,6 +42,13 @@ abstract class Module {
 
   /// A short line for the Us overview: what this module would tell you at a glance.
   String glance(List<Event> events);
+
+  /// The paper each of this module's event types is written on, by type id.
+  ///
+  /// A module brings its own paper. The assignment used to be a switch in material/assignment.dart
+  /// that every module had to be added to by hand, which is one of the shared files a fifth module
+  /// cost; the switch reads this now.
+  Map<String, String> get stocks => const {};
 
   /// What one whole row of this module costs on the shared desk, in logical points.
   ///

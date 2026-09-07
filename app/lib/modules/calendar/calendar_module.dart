@@ -26,6 +26,9 @@ class CalendarModule extends Module {
   double get rowHeight => 66.0;
 
   @override
+  Map<String, String> get stocks => const {'milestone': 'index'};
+
+  @override
   Widget build(BuildContext context, ModuleContext ctx) => MilestoneList(ctx: ctx);
 
   @override

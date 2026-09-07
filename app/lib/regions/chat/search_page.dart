@@ -14,6 +14,7 @@ import '../../material/library.dart';
 import '../../material/marks.dart';
 import '../../material/paper.dart';
 import '../../material/palette.dart';
+import '../../modules/registry.dart';
 import '../../material/slip.dart';
 import '../../scope.dart';
 import '../../spine/spine.dart';
@@ -39,21 +40,26 @@ class SearchPage extends StatefulWidget {
 class SearchPageState extends State<SearchPage> {
   late final TextEditingController _ctl = TextEditingController(text: widget.initialQuery);
   List<SearchHit> _hits = const [];
+  /// The facet that is lit, by its label. Null is everything.
   String? _typeFilter;
   Person? _author;
   DateTimeRange? _range;
 
   /// The facets, in the words the app uses for them elsewhere.
-  static const Map<String, String> _facets = {
-    'written': 'message',
-    'photographs': 'photo',
-    'video': 'video',
-    'talking': 'voice_note',
-    'feelings': 'feeling',
-    'dates': 'date_event',
-    'the list': 'todo_event',
-    'state': 'state_declared',
-  };
+  ///
+  /// The shared-life half of them comes from the module registry rather than from a list here, so
+  /// a module's own events are searchable the day it is added. They were written out by hand, and
+  /// the hand missed three: rituals (53 events in the seeded year), the shelf (12) and the days
+  /// that matter — the three surfaces you would go looking for something in.
+  static Map<String, List<String>> get _facets => {
+        'written': const ['message'],
+        'photographs': const ['photo'],
+        'video': const ['video'],
+        'talking': const ['voice_note'],
+        'feelings': const ['feeling'],
+        'state': const ['state_declared'],
+        for (final m in kModules) m.label: m.eventTypes,
+      };
 
   @override
   void initState() {
@@ -101,7 +107,8 @@ class SearchPageState extends State<SearchPage> {
   void _run() {
     final scope = AppScope.of(context);
     var hits = scope.spine.search(_ctl.text,
-        types: _typeFilter == null ? null : {_typeFilter!}, author: _author);
+        types: _typeFilter == null ? null : (_facets[_typeFilter!] ?? const []).toSet(),
+        author: _author);
     final r = _range;
     if (r != null) {
       hits = hits
@@ -190,9 +197,9 @@ class SearchPageState extends State<SearchPage> {
                 for (final f in _facets.entries)
                   _Tab(
                     label: f.key,
-                    on: _typeFilter == f.value,
+                    on: _typeFilter == f.key,
                     onTap: () {
-                      _typeFilter = _typeFilter == f.value ? null : f.value;
+                      _typeFilter = _typeFilter == f.key ? null : f.key;
                       _run();
                     },
                   ),

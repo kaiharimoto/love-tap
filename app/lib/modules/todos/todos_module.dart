@@ -27,6 +27,9 @@ class TodosModule extends Module {
   double get rowHeight => 60.0;
 
   @override
+  Map<String, String> get stocks => const {'todo_event': 'looseleaf'};
+
+  @override
   Widget build(BuildContext context, ModuleContext ctx) => TodoList(ctx: ctx);
 
   @override

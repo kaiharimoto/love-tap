@@ -5,6 +5,7 @@
 // walked by a stride derived from each event's id so that consecutive events never land on the
 // same mask, and a screenful is checked by tools/check/tear_repeat.py against the capture log.
 import '../spine/event.dart';
+import '../modules/registry.dart';
 import 'library.dart';
 
 /// A deterministic 32-bit hash of an event id (FNV-1a): the same note gets the same paper on both
@@ -24,14 +25,19 @@ int hashOf(String s) {
 /// The modules used to each pick their own: a date was a receipt in Us and an index card in the
 /// thread, so the same evening was two different pieces of paper depending on which way you had
 /// come to it. One list, read by both.
+/// The paper a kind of event is written on, when its kind decides rather than its author.
+///
+/// The shared-life half comes from the modules themselves: a module declares the paper its own
+/// events are written on, so adding one does not mean editing this file. It used to be a switch
+/// here that every module had to be added to by hand, which is one of the five shared files a
+/// coherence critic counted a fifth module costing.
+final Map<String, String> _moduleStocks = {
+  for (final m in kModules) ...m.stocks,
+};
+
 String? stockForType(String type) => switch (type) {
       'ping' => 'index',
-      'milestone' => 'index',
-      'date_event' => 'index',
-      'passed_on' => 'index',
-      'todo_event' => 'looseleaf',
-      'ritual_kept' => 'graph',
-      _ => null,
+      _ => _moduleStocks[type],
     };
 
 /// The stock a note is torn from, by author and type.

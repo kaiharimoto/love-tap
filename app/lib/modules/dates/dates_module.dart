@@ -25,6 +25,9 @@ class DatesModule extends Module {
   double get rowHeight => 170.0;
 
   @override
+  Map<String, String> get stocks => const {'date_event': 'index'};
+
+  @override
   Widget build(BuildContext context, ModuleContext ctx) => DateList(ctx: ctx);
 
   @override

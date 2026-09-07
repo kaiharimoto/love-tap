@@ -35,6 +35,9 @@ class ShelfModule extends Module {
   double get rowHeight => 82.0;
 
   @override
+  Map<String, String> get stocks => const {'passed_on': 'index'};
+
+  @override
   Widget build(BuildContext context, ModuleContext ctx) => ShelfList(ctx: ctx);
 
   @override

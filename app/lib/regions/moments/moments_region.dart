@@ -10,6 +10,7 @@ import '../../capture/bus.dart';
 import '../../feelings/builtins.dart';
 import '../../feelings/registry.dart';
 import '../../material/hands.dart';
+import '../../material/marks.dart';
 import '../../material/objects.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
@@ -506,7 +507,36 @@ class _One extends StatelessWidget {
         ),
       );
     }
-    final hash = (event.payload['poster_blob'] ?? event.payload['blob']) as String;
+    final poster = event.payload['poster_blob'] as String?;
+    // A video with no poster frame is not a picture, and drawing it as one gave the gallery four
+    // blank prints: the report counted twenty-six tiles laid out and eighteen pictures asked for,
+    // and the eight it never asked about were holes with nothing loading in them. Frame extraction
+    // does not exist on both platforms yet (docs), so until it does a video is what a video is on a
+    // desk — a strip with its length written on it and the mark you press.
+    if (poster == null || (poster).isEmpty) {
+      final ms = (event.payload['duration_ms'] as num?)?.toDouble();
+      return Align(
+        alignment: Alignment.topCenter,
+        child: Slip(
+          id: event.id,
+          row: row,
+          stock: 'index',
+          torn: false,
+          width: width,
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 11),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Mark.play(size: 22, colour: Pen.graphite, seed: row),
+              const SizedBox(height: 6),
+              Text(ms == null ? S.video : '${(ms / 1000).round()}s',
+                  style: Hands.margin(size: 14)),
+            ],
+          ),
+        ),
+      );
+    }
+    final hash = poster;
     // A print: the picture with a white border of card around it, cut, with the edge and shadow
     // every piece of paper on the desk has. The cut card's safe area and border are solved the
     // way paper.dart solves them, so the print comes out exactly the height the pile laid it at.

@@ -30,6 +30,9 @@ class RitualsModule extends Module {
   double get rowHeight => 78.0;
 
   @override
+  Map<String, String> get stocks => const {'ritual_kept': 'graph'};
+
+  @override
   Widget build(BuildContext context, ModuleContext ctx) => RitualList(ctx: ctx);
 
   @override

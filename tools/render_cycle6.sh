@@ -16,21 +16,26 @@ cd "$(dirname "$0")/.."
 STAMP() { date -u +%H:%M:%S; }
 say() { echo "[$(STAMP)] $*"; }
 
-say "1/4 paper stocks, daylight — the ground of every screen"
+say "1/5 paper stocks, daylight — the ground of every screen"
 bash blender/run.sh blender/paper/stocks.py -- --all --res 1800 --samples 48 \
     --condition day --threads 4 --skip-existing 2>&1 | grep -E "^paper:|Error|Traceback" || true
 say "paper day: $(ls assets/paper/*.webp 2>/dev/null | grep -vc dusk) on disk"
 
-say "2/4 the feeling objects — day and dusk, beauty and shadow"
+say "2/5 the feeling objects — day and dusk, beauty and shadow"
 bash blender/run.sh blender/objects/objects.py -- --all --res 1200 --samples 48 \
     2>&1 | grep -E "^object:|Error|Traceback" || true
 say "objects: $(ls assets/objects/*.png 2>/dev/null | wc -l) on disk"
 
-say "3/4 the bits — tape, staples, clips, pins, glue"
+say "3/5 the bits — tape, staples, clips, pins, glue"
 bash blender/run.sh blender/bits/bits.py -- --all --res 900 --samples 48 \
     2>&1 | grep -E "^bit:|Error|Traceback" || true
 
-say "4/4 paper stocks, dusk"
+say "4/5 the dusk shadows — 55 of the 56 tears have never had one"
+bash blender/run.sh blender/paper/tear_relief.py -- --all --res 1400 --samples 48 \
+    --conditions dusk --skip-existing 2>&1 | grep -E "^tear:|Error|Traceback" || true
+say "dusk shadows: $(ls assets/tears/*_shadow_dusk.png 2>/dev/null | wc -l) of 56"
+
+say "5/5 paper stocks, dusk"
 bash blender/run.sh blender/paper/stocks.py -- --all --res 1800 --samples 48 \
     --condition dusk --threads 4 --skip-existing 2>&1 | grep -E "^paper:|Error|Traceback" || true
 say "paper dusk: $(ls assets/paper/*_dusk.webp 2>/dev/null | wc -l) on disk"
