@@ -84,6 +84,20 @@ class FoldFrames {
   /// had been decoded — so the note sat on frame zero for the whole take and then jumped open.
   /// A note that opens a little behind is a note opening. A note that holds still is not.
   ui.Image? at(int i) {
+    // A note that is already open asks for the last frame for as long as it is on the screen, and
+    // that is not a playhead. One sequence serves every folded note in the thread, so an open note
+    // and an opening one were moving the decode window back and forth between the end of the
+    // sequence and wherever the opening one had got to — the fill at 146 drops everything below
+    // 134, which is precisely the frames the opening note had just decoded. The opening note then
+    // missed about one frame in seven: fifteen isolated duplicates in a clip whose whole subject
+    // is a sheet opening, and only in the *second* fold of the take, because the first one had
+    // nothing already open beside it.
+    if (i == length - 1 && i != _playhead) {
+      final held = _held[i];
+      if (held != null) return held;
+      if (_loading.add(i)) unawaited(_decode(i));
+      return null;
+    }
     if (i != _playhead) {
       _playhead = i;
       unawaited(_fill(i));
