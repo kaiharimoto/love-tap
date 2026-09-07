@@ -54,10 +54,12 @@ Eighteen types. The floor is fourteen.
 ## Adding a nineteenth
 
 1. Add one entry to `kEventTypes` in `app/lib/spine/types.dart` — id, payload codec, search fields
-   and facets, notification treatment, the renderer id, and the two words a person uses for it:
-   `noun` (what one of these is, which search says "found as" with) and `announced` (what it reads
-   as when it lands, on the Settings row that says whether it may interrupt). And one row to the
-   table above.
+   and facets, notification treatment, the renderer id, which of Moments' three piles it belongs in
+   (`lens`: media, felt, happened, or nothing), and the two words a person uses for it: `noun`
+   (what one of these is, which search says "found as" with) and `announced` (what it reads as when
+   it lands, on the Settings row that says whether it may interrupt). And one row to the table
+   above. A lens is not a search facet: facet names are indexed as search terms, so naming the lens
+   there made 'happened' a keyword that returned every date, ritual and shelf card in the year.
 2. Add one body, registered by the renderer id the entry names — or point at one that is already
    there, the way the shelf points at the margin sentence. Where it goes depends on whose event it
    is: a module's goes in the module's own directory and is declared by `Module.bodies`, the
