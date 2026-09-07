@@ -1,5 +1,5 @@
 {
- "strings_read": 115,
+ "strings_read": 117,
  "rules_applied": [
   {
    "rule": "an emoji glyph in a displayed string",
@@ -38,95 +38,95 @@
  "findings": [],
  "read": [
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:96",
-   "text": "no dates that matter yet. add the first."
-  },
-  {
-   "where": "app/lib/modules/calendar/calendar_module.dart:157",
-   "text": "${m.yearsAt(next!)} years"
-  },
-  {
-   "where": "app/lib/modules/dates/date_list.dart:26",
-   "text": "nowhere planned. that's fine."
-  },
-  {
-   "where": "app/lib/modules/dates/date_list.dart:71",
-   "text": "add one"
-  },
-  {
-   "where": "app/lib/modules/rituals/rituals_module.dart:80",
-   "text": "nothing kept yet."
-  },
-  {
-   "where": "app/lib/modules/shelf/shelf_module.dart:96",
-   "text": "nothing passed between you yet."
-  },
-  {
-   "where": "app/lib/modules/todos/todos_module.dart:93",
-   "text": "add one"
-  },
-  {
-   "where": "app/lib/modules/todos/todos_module.dart:97",
-   "text": "nothing to do. suspicious."
-  },
-  {
-   "where": "app/lib/regions/chat/blob_widgets.dart:212",
-   "text": "${secs ~/ 60}:${(secs % 60).toString().padLeft(2, "
-  },
-  {
-   "where": "app/lib/regions/chat/blob_widgets.dart:287",
-   "text": "${(durationMs! / 1000).round()}s"
-  },
-  {
-   "where": "app/lib/regions/chat/chat_region.dart:593",
-   "text": "${scope.partner.name} ${S.typing}"
-  },
-  {
-   "where": "app/lib/regions/chat/renderers.dart:147",
+   "where": "app/lib/feelings/authored_row.dart:24",
    "text": "${p["
   },
   {
-   "where": "app/lib/regions/chat/renderers.dart:183",
-   "text": "${p["
-  },
-  {
-   "where": "app/lib/regions/chat/renderers.dart:232",
-   "text": "${p["
-  },
-  {
-   "where": "app/lib/regions/chat/renderers.dart:246",
-   "text": "${p["
-  },
-  {
-   "where": "app/lib/regions/chat/renderers.dart:283",
-   "text": "${p["
-  },
-  {
-   "where": "app/lib/regions/chat/renderers.dart:300",
-   "text": "${p["
-  },
-  {
-   "where": "app/lib/regions/chat/renderers.dart:328",
-   "text": "${p["
-  },
-  {
-   "where": "app/lib/regions/chat/renderers.dart:329",
+   "where": "app/lib/feelings/authored_row.dart:25",
    "text": "a new one, ${c.event.author == c.me ? "
   },
   {
-   "where": "app/lib/regions/chat/search_page.dart:115",
+   "where": "app/lib/modules/calendar/calendar_module.dart:112",
+   "text": "no dates that matter yet. add the first."
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:182",
+   "text": "${m.yearsAt(next!)} years"
+  },
+  {
+   "where": "app/lib/modules/calendar/thread_row.dart:14",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:65",
+   "text": "nowhere planned. that's fine."
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:105",
+   "text": "add one"
+  },
+  {
+   "where": "app/lib/modules/dates/thread_row.dart:34",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:96",
+   "text": "nothing kept yet."
+  },
+  {
+   "where": "app/lib/modules/rituals/thread_row.dart:18",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:112",
+   "text": "nothing passed between you yet."
+  },
+  {
+   "where": "app/lib/modules/shelf/thread_row.dart:16",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:45",
+   "text": "${p["
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:133",
+   "text": "add one"
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:137",
+   "text": "nothing to do. suspicious."
+  },
+  {
+   "where": "app/lib/regions/chat/blob_widgets.dart:252",
+   "text": "${secs ~/ 60}:${(secs % 60).toString().padLeft(2, "
+  },
+  {
+   "where": "app/lib/regions/chat/blob_widgets.dart:341",
+   "text": "${(durationMs! / 1000).round()}s"
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:713",
+   "text": "${scope.partner.name} ${S.typing}"
+  },
+  {
+   "where": "app/lib/regions/chat/search_page.dart:146",
    "text": "looking for"
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:161",
+   "where": "app/lib/regions/chat/viewer_page.dart:181",
    "text": "put it back"
   },
   {
-   "where": "app/lib/regions/moments/moments_region.dart:501",
+   "where": "app/lib/regions/moments/moments_region.dart:507",
    "text": "${((event.payload["
   },
   {
-   "where": "app/lib/regions/moments/moments_region.dart:589",
+   "where": "app/lib/regions/moments/moments_region.dart:587",
+   "text": "${((event.payload["
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:650",
    "text": "${DateFormat("
   },
   {
@@ -162,11 +162,11 @@
    "text": "keep it"
   },
   {
-   "where": "app/lib/regions/settings/notifications.dart:122",
+   "where": "app/lib/regions/settings/notifications.dart:106",
    "text": "quiet from"
   },
   {
-   "where": "app/lib/regions/settings/notifications.dart:173",
+   "where": "app/lib/regions/settings/notifications.dart:157",
    "text": "${value.toString().padLeft(2, "
   },
   {
@@ -364,6 +364,14 @@
   {
    "where": "app/lib/setup/setup_region.dart:104",
    "text": "read the six words out"
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:72",
+   "text": "${(ms / 1000).round()}s"
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:147",
+   "text": "${p["
   },
   {
    "where": "app/lib/voice/strings.dart:12",
