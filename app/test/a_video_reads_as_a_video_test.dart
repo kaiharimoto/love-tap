@@ -15,6 +15,7 @@ import 'dart:typed_data';
 
 import 'package:desk/material/library.dart';
 import 'package:desk/material/marks.dart';
+import 'package:desk/material/objects.dart';
 import 'package:desk/regions/chat/blob_widgets.dart';
 import 'package:desk/regions/chat/chat_region.dart';
 import 'package:desk/regions/moments/moments_region.dart';
@@ -172,5 +173,27 @@ void main() {
             'sends every one of them down the video path');
     expect(find.byType(Mark), findsOneWidget, reason: 'the video is a print like any other');
     expect(find.text('7s'), findsOneWidget);
+  });
+
+  testWidgets('a note taken back does not say how far it got', (tester) async {
+    // "The row whose text is 'took this back' is rendered as an ordinary message with a read
+    // marker rather than the deleted stub." A delivery state describes writing on its way to
+    // somebody; when the writing is gone there is nothing for it to be about, and `read` under
+    // the words "took this back" is the app contradicting itself on the one artifact named for
+    // messenger states.
+    final scope = await _aScope();
+    addTearDown(scope.dispose);
+    final note = await scope.spine.append('message', {'text': 'the pigeon again'}, hostAssign: true);
+    await scope.spine.append('reaction', {'target': note.id, 'feeling_id': 'hold'}, hostAssign: true);
+    await scope.spine.append('message_delete', {'target': note.id}, hostAssign: true);
+
+    await _draw(tester, scope, const ChatRegion());
+
+    expect(find.text(S.tookBack), findsOneWidget);
+    final marks = find.byWidgetPredicate((w) => w.runtimeType.toString() == '_DeliveryMark');
+    expect(marks, findsNothing,
+        reason: 'the row still reports a delivery state for writing that is not there');
+    expect(find.byType(FeelingObject), findsNothing,
+        reason: 'what the reaction was stuck to is gone');
   });
 }

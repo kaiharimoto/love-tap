@@ -93,7 +93,11 @@ class Note extends StatelessWidget {
         if (item.replyTo != null) _ReplyStrip(target: item.replyTo!, registry: registry),
         _body(context, scope),
         const SizedBox(height: 3),
-        _Margin(item: item, mine: mine),
+        // A note that was taken back does not report how far it got. It said `read ✓✓` under the
+        // words "took it back", which is a delivery state for writing that is not there any more,
+        // and a critic reading the states artifact found the taken-back row indistinguishable
+        // from an ordinary message. The time stays: the thread's order is still a fact.
+        _Margin(item: item, mine: mine && !item.deleted),
       ],
     );
 
@@ -108,7 +112,8 @@ class Note extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(14, 9, 14, 8),
       safe: lib == null || tear == null ? const [0.06, 0.07, 0.06, 0.07] : lib.safeOf(tear),
       overlays: [
-        if (item.reactions.isNotEmpty)
+        // and nothing is stuck to it any more either: what they were stuck to is gone
+        if (item.reactions.isNotEmpty && !item.deleted)
           Positioned(
             right: 14,
             bottom: -6,
