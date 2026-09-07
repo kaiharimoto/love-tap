@@ -165,3 +165,32 @@ missing screen as in 09 and 16, and no arrangement of the pieces in this contain
 
 The clip is captured and scored with that clause unmet, and it is written here rather than left for
 a reader to notice.
+
+### The interruption, and what a Linux container can and cannot show of it
+
+For five cycles nothing in the evidence pictured a state change reaching somebody who had not opened
+the app — no notification, no lock screen, no widget. The reason was not the app. Every artifact is
+shot in Playwright's WebKit, because that is what an iPhone runs, and in that build `Notification`
+and `PushManager` are **undefined**: not denied, absent. `ambient_web.dart`'s first line reads
+`Notification.permission`, throws, falls into its catch, and leaves `_allowed` false for the rest of
+the run, so `showNotification` is never reached and nothing is ever created. `grantPermissions`
+resolves and changes nothing. There was never anything to photograph.
+
+`evidence/crops/reception.png` is that gap closed as far as this machine allows, and no further. It
+is one scene outside the seventeen, in Chromium, headed, on an Xvfb display: a real push delivered
+through the debugging protocol to the app's own service worker at `/push/`, which draws the
+notification the same way a subscribed push would. `reception_replaced.png` is the second arrival
+taking the place of the first — one tag, one record after two pushes, which is the anti-goal's
+clause about counts and badges, photographed rather than asserted.
+
+What it is not:
+
+- It is not an iPhone banner. It is Chromium's own notification on a Linux virtual display, drawn in
+  a desktop's idiom, at a desktop's size, in the corner of a screen rather than at the top of a lock
+  screen. What an iOS home-screen web app does with the same `showNotification` call is not shown
+  here and is not evidenced anywhere in this build.
+- There is no lock screen and no home-screen widget in evidence, on either platform.
+- `pushManager.subscribe()` still cannot mint an endpoint, because there is no push service to mint
+  one against, so the third surface's subscription tick stays honestly un-ticked. What is exercised
+  is the worker's `push` handler, which is the half that runs on the receiving phone.
+- The vibration motor remains untested, for the same reason as 09 and 16.
