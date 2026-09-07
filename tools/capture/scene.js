@@ -210,6 +210,53 @@ function ensure(p) {
     switch (step.do) {
       case 'goTo':
         await hook('__deskGoTo', step.arg); break;
+      // Ask for a sync round now rather than waiting out a backoff. An ephemeral frame — the
+      // partner typing — is delivered on a pull like anything else, and a scene that says
+      // `typing on` and then takes the picture is racing the poll: the record said the partner
+      // was writing over a frame that did not show it.
+      case 'sync':
+        await hook('__deskSync'); break;
+      // Wait for the app to say a thing is true before the shutter opens, rather than waiting a
+      // number of milliseconds and hoping. The partner typing is an ephemeral frame delivered on a
+      // pull, so `typing on` followed by a wait is a race the record loses in a particular way: it
+      // says the partner was writing over a frame that does not show it.
+      case 'awaitView': {
+        const key = step.key;
+        const want = step.value === undefined ? true : step.value;
+        const until = Date.now() + (step.timeout || 8000);
+        let got = null;
+        while (Date.now() < until) {
+          got = await page.evaluate((k) => {
+            const r = window.__deskReport && JSON.parse(window.__deskReport());
+            return r && r.view ? r.view[k] : null;
+          }, key);
+          if (got === want) break;
+          await page.evaluate(() => window.__deskSync && window.__deskSync()).catch(() => {});
+          await page.waitForTimeout(step.every || 250);
+        }
+        log.steps.push({ awaited: key, want, got });
+        // Not fatal by default. The thing waited for is something the app is *also* showing —
+        // a partner typing, a picture decoded — and a scene that throws here loses the whole
+        // artifact over a detail of it. What the record says is what was actually waited for and
+        // what it got, so a reader can see that the frame does not carry it. `required: true` for
+        // a scene whose whole subject is the thing.
+        if (got !== want) {
+          if (step.required) throw new Error(`${key} never became ${want} (it is ${got})`);
+          log.not_shown = log.not_shown || [];
+          log.not_shown.push(`${key} never became ${want} before the shutter (it is ${got})`);
+          break;
+        }
+        // The app knowing a thing and the glass showing it are two moments. In capture mode a
+        // frame is drawn when the clock is stepped, so a scene that waits for the report to say
+        // the partner is writing and then opens the shutter photographs the frame before it: the
+        // record said writing over a picture that did not. Give it a beat and two frames.
+        await page.waitForTimeout(step.settle || 600);
+        for (let i = 0; i < 2; i++) {
+          await page.evaluate(() => window.__deskStep && window.__deskStep(16));
+          await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+        }
+        break;
+      }
       case 'scrollTo':
         await hook('__deskScrollTo', String(step.arg)); break;
       case 'sendFeeling':
