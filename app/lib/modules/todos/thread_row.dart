@@ -11,8 +11,8 @@ import '../../thread/note_body.dart';
 Widget listLine(NoteContext c) {
   final p = c.event.payload;
   final action = '${p['action']}';
-  final done = action == 'ticked';
-  final gone = action == 'dropped';
+  final done = action == 'done';
+  final gone = action == 'removed';
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -51,9 +51,10 @@ Widget listLine(NoteContext c) {
               ),
             ),
             Text(switch (action) {
-              'ticked' => 'done',
-              'unticked' => 'back on the list',
-              'dropped' => 'off the list',
+              'done' => 'done',
+              'reopened' => 'back on the list',
+              'removed' => 'off the list',
+              'assigned' => p['assignee'] == null ? 'passed over' : 'for ${p['assignee']}',
               _ => 'put down',
             }, style: Hands.margin(size: 11.5)),
           ],
@@ -88,12 +89,25 @@ class _PencilBox extends CustomPainter {
 }
 
 /// What was done to the list, in the words a person would use about their own list.
+///
+/// These are the module's own five actions — the ones `projectTodos` folds and the ones
+/// docs/EVENT_TYPES.md declares. The words here were `ticked`/`unticked`/`dropped` for most of
+/// this build, which the module has never written: they came from a table shared with the dates
+/// module and nobody had checked them against either module's vocabulary. Ninety-five of the
+/// seeded year's hundred and ninety-nine list events are `done`, and every one of them read as
+/// its own text with a space in front of it — in search, in a notification, and on the lock
+/// screen. The fall-through says something rather than nothing for the same reason.
 String todoVerb(Object? action) => switch ('$action') {
-  'added' => 'put down',
-  'ticked' => 'done:',
-  'unticked' => 'back on the list:',
-  'dropped' => 'off the list:',
-  _ => '',
-};
+      'added' => 'put down',
+      'done' => 'done:',
+      'reopened' => 'back on the list:',
+      'removed' => 'off the list:',
+      'assigned' => 'passed over:',
+      _ => 'on the list:',
+    };
 
-String todoSentence(Event e) => '${todoVerb(e.payload['action'])} ${e.payload['text']}';
+String todoSentence(Event e) {
+  final assignee = e.payload['assignee'];
+  final tail = e.payload['action'] == 'assigned' && assignee != null ? ' · for $assignee' : '';
+  return '${todoVerb(e.payload['action'])} ${e.payload['text']}$tail';
+}

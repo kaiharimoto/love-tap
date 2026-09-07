@@ -28,8 +28,12 @@ Widget shelfCard(NoteContext c) {
   );
 }
 
+/// Every action the shelf declares says its own thing, and an action nobody writes says something
+/// else again: a word shared between a declared action and the fall-through hides the
+/// fall-through, and hiding it is how the list module's three wrong verbs survived five cycles.
 String shelfSentence(Event e, String who) => switch ('${e.payload['action']}') {
+  'passed' => '$who passed on ${e.payload['title']}',
   'started' => '$who started ${e.payload['title']}',
   'finished' => '$who finished ${e.payload['title']}',
-  _ => '$who passed on ${e.payload['title']}',
+  _ => '$who put ${e.payload['title']} on the shelf',
 };

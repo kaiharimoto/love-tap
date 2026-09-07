@@ -300,6 +300,33 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // voice note, and the writing on both sides of it.
       _scroll.jumpTo(index: window.$1, alignment: 0.34);
       await Future<void>.delayed(const Duration(milliseconds: 40));
+      // Then look at where the last row of the stretch actually landed, and take it again if it
+      // is under the composer. The first take framed the stretch's *first* row and hoped: on the
+      // day the last row was a photograph seven hundred pixels tall, the shot came out with its
+      // caption cut in half by the composer and the reaction stuck to its bottom corner — the one
+      // thing the anchor had been asked for — entirely below the fold. What a row costs cannot be
+      // known before it is laid out, so this measures rather than guesses.
+      final last = _positions.itemPositions.value
+          .where((p) => p.index == window.$2)
+          .firstOrNull;
+      if (last == null || last.itemTrailingEdge > _theComposersEdge) {
+        _scroll.jumpTo(index: window.$2, alignment: 0.30);
+        await Future<void>.delayed(const Duration(milliseconds: 40));
+        // ...and if that pushed the row the stretch starts at off the top, it is the wrong shot:
+        // a frame holding the last of the kinds and not the first is not the stretch. A whole
+        // video is a hundred and sixty points and will not sit beside a voice note and eight
+        // notes, so for that pair there is no framing that holds both whole and the first take
+        // is the honest one. The record says which of the two this was.
+        final startsHere =
+            _positions.itemPositions.value.any((p) => p.index == window.$1);
+        if (startsHere) {
+          _lastAnchor = '$_lastAnchor, framed on its last row';
+        } else {
+          _scroll.jumpTo(index: window.$1, alignment: 0.34);
+          _lastAnchor = '$_lastAnchor, framed on its first row: the stretch is taller than a frame';
+          await Future<void>.delayed(const Duration(milliseconds: 40));
+        }
+      }
       return;
     } else {
       final fraction = double.tryParse(anchor);
@@ -312,6 +339,9 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     _scroll.jumpTo(index: index, alignment: 0.35);
     await Future<void>.delayed(const Duration(milliseconds: 40));
   }
+
+  /// Where the thread stops being visible: the composer sits over the bottom of it.
+  static const double _theComposersEdge = 0.84;
 
   /// The shortest run of rows holding at least one of every kind in [wanted], latest such run
   /// first — a couple's year has several, and the most recent is the one that looks like now.
