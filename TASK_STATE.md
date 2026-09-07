@@ -13,30 +13,31 @@ and continue from **Next action**.
 | 4 | 2026-09-04 | photograph pipeline fixed at the source; the unfolding clip fixed at four causes; every screen given a test; modal surfaces rebuilt as paper; second capture; six critics | cycle 2: 55.5, no floor met |
 | 5 | 2026-09-05/06 | fresh clone re-bootstrapped; the nineteen root causes behind cycle 2 fixed (below); fold sequence re-rendered; both hands rebuilt; eight objects replaced; paired year-deep capture with every clip distinct frame by frame; cycle 3 critics and score; the first eleven cycle-3 findings fixed | **cycle 3: 64**, no floor met |
 | 6 | 2026-09-06 | the fold camera and the flap direction; the cascade step; the ink plate; object and shadow packed in their own frames; the whole messenger grammar in a picture; one stock per event type; clips at their own frame rate; fourth capture; cycle 4 critics, completeness pass and score; four of its findings fixed | **cycle 4: 68**, no floor met |
+| 7 | 2026-09-06/07 | the contact shadow every piece of paper had been drawing invisibly for four cycles; the window density behind the tab strip; thirty-three objects under the desk lamp; the tear from the event's own sequence; five modules on the desk; fifth capture; cycle 5 critics, completeness pass and score; the blank letter found and fixed | **cycle 5: 69**, no floor met |
 
 ## Current position
 
-- phase: review (cycle 4 scored at **68/100**, up from 64; the brief asks for 95 with every floor met)
-- rubric: messenger 17/30 (floor 26) · material 16/25 (22) · emotional 16/20 (17) · coherence
-  11.5/15 (13) · anti-goal 7.5/10 (9). Every category is the lower of the critic's number and the
-  builder's, and in all five this cycle the critic's was lower. `evidence/SCORE.json` has the
-  arithmetic; `evidence/critics/4/` has the seven reports.
-- **read `evidence/critics/4/completeness.json` before anything else.** It is the most useful
-  document in the set. All six critics measured only inside the artifact each was pointed at, and
-  it says so with numbers: it would move anti-goal to 5.5, material to 13 and coherence to 10.5,
-  which is a regression rather than the rise the total shows. Four of its findings were fixed the
-  same day (below); the rest are the work list.
-- branch: `claude/new-session-f95s8n` (all work of sessions 5 and 6; pushed)
-- transport in use: local (`app/lib/transport/local/`), named in every report. The tailnet
-  transport exists (`app/lib/transport/tailscale/`) and `evidence/coldstart.json` records a real
-  two-node run from the session that had a key; this session had none, `toolchain/ts/AUTHKEY_STATUS`
-  says `pending`, and the question was already asked in the session the phase began, so it is not
-  asked again.
-- Android: no `/dev/kvm`, so `09_two_devices.png` and `16_setup_android.png` stay missing with the
-  measured reason in `docs/PHONES.md`. The same missing screen also costs 08 its "both devices'
-  screens in sequence" clause, which is written down there too. Nothing stands in for any of it.
-- `toolchain/android-sdk/emulator` was deleted mid-session to keep a capture from running out of
-  disk. It cannot boot here and `./bootstrap.sh` puts it back.
+- phase: review (cycle 5 scored at **69/100**, from 68, 64, 55.5, 40; the brief asks 95 with every
+  floor met)
+- rubric: messenger 19/30 (floor 26) · material 15/25 (22) · emotional 15/20 (17) · coherence 12/15
+  (13) · anti-goal 8/10 (9).
+- **Two floors were met by the critics and lost to the builder's own sheet.** The critics put
+  coherence at 13 and anti-goal at 9.2 — at and above their floors for the first time in five
+  cycles. My sheet, written before reading them, said 12 and 8, and the rule takes the lower. That
+  is the mechanism working; it was not revised after the fact and it must not be next time either.
+  What it means in practice: on those two rows the builder is now the binding constraint, so the
+  next sheet should be written from measurements rather than from caution.
+- **Read `evidence/critics/5/completeness.json` before anything else.** As in cycle 4 it is the
+  most useful document in the set: it corrects material_truth for reading the arriving message in 06
+  as "the composer card", shows anti_goal's photographic-paper proof failing to reproduce by a
+  factor of eight, and names a stock measured at patch_std 9.4-10.3 in the library arriving on
+  screen at 1.22 — the paper is being flattened between the asset and the glass, which is the
+  single most valuable lead in the build.
+- branch: `claude/new-session-f95s8n` (sessions 5-7; pushed)
+- transport: local in every report; `evidence/coldstart.json` holds a real two-node tailnet run from
+  the session that had a key. No `TS_AUTHKEY` here and the question may not be asked again.
+- Android: no `/dev/kvm`. 09 and 16 stay missing, and 08 cannot show both devices' screens, all for
+  the one reason measured in `docs/PHONES.md`.
 
 ## What cycle 2 said, and what was done about each
 
@@ -118,48 +119,70 @@ are **not** in the captured artifacts: the next capture is what shows them.
 | feeling objects are untextured props | `simple_mat` gives them a fine mottle, a rough coat and a hair of relief: the candle measures 1.65 grey levels against 0.49 (re-rendering at the time of writing) |
 | the diff baseline was rotated by every partial run, so every artifact compared with itself | only a whole capture rotates it; the cycle-2 baseline was restored and the diff re-measured: fourteen changed, one new, two absent |
 
-## What cycle 4 said, and what was done about it the same day
+## What cycle 5 said, and what was done about it the same day
 
 | finding | done |
 |---|---|
-| one torn edge repeated twelve times down the search results, and the same event torn differently in two surfaces | a tear is chosen from the event's own id, never from the row it sits in; two tests |
-| the feeling objects are pre-lit sprites: under the dusk light the paper shifts thirty to forty levels and warms, the object shifts eight and does not | the object pass was skipped at dusk in the generator. It is rendered under both lights now, stopped down to the same aperture as everything else at dusk, and the app draws the dusk one at dusk |
-| the reply banner reads `answering state_declared` | a row without text has a sentence in the couple's own words; the registry id never reaches a person |
-| the video renders as an empty strip of paper (three critics) | it renders at 480 px. What they measured was its top sliver: the anchor placed the window's *first* row and left the tall last row hanging under the composer. The anchor places the last row now. That one was the framing, not the app |
+| the note arriving in 06 unfolds for four seconds and ends completely blank — minimum luminance 223, not one pixel below 150, no text, no timestamp, no author, no delivery mark (three critics; the completeness pass called it the build's worst messenger defect) | a Stack whose children are all positioned sizes to nothing under loose constraints, so the overlay carrying the name and the ink filled nothing. It is given a size now. **Committed and not captured** — see below |
 
-## What cycle 4 said that is still open
+## The one thing this session could not finish
 
-Ordered by what it would cost to close, not by how loud it is.
+The blank-letter fix is in the code and in none of the artifacts. Three attempts to re-capture 06
+failed at the same place: the far phone sends its message (`host_daemon.log` shows three sends, the
+scene's own re-says), the near phone stays `link: connected` and its event count rises by six, and
+its thread never grows by one. The scene times out waiting for a row that the spine appears to have
+taken.
 
-1. **The app's permanent chrome is the forbidden shape.** The SETTINGS tab slab has a top edge with
-   a standard deviation of 0.00 px over 266 columns, an interior of 1.20 grey levels against 19-27
-   for the note paper beside it, and a drop shadow — on ten of eleven stills, with a Us glance card
-   at 708x163 the same. The tabs are already `Slip(torn: false, stock: 'index')`, so the window is
-   not sampling the stock at a density that survives being 89 points wide. Measure before changing.
-2. **Nothing in 02_chat.png casts a contact shadow.** With the tear ink excluded the desk's median
-   luminance is 95.7-102.7 in every direction at every distance from 2 to 120 px: the notes are
-   cut-outs on a photograph. The baked shadow exists (`blender/paper/tear_relief.py`) and something
-   between it and the screen is losing it.
-3. **The haptic channel is never exercised.** `sensation.channel` reads `page` in all fifteen
-   reports. The row asks for a feeling identifiable by its pattern with the screen face down, and
-   that needs a phone.
-4. **Thirty per cent of frames cost 938-1651 ms to build** (243 of 809, median 1134 ms) while the
-   rest cost 14 ms. The heavy ones cluster; the log says these are draw costs rather than a refresh
-   rate. Worth finding: it is the difference between a thread that scrolls and one that stutters.
-5. **Three of the five modules are never drawn** in 03_us.png, though the report lists all five with
-   their event counts.
-6. **DeskStamp is not built** — about five hours on one core here — so every tab, stamp and module
-   label is set in Teo's handwriting, and `notifications.dart` has seventeen arms for eighteen types
-   so `passed_on` falls through to a label made from its own id.
-7. **12_search.report.json records no search at all**, and 17_setup_pwa.png — the only evidence for
-   the installable-PWA half of the mission — was read by no critic.
-8. **The seeded photographs are renders** and the darkest few read as renders.
-9. **No two-device frame, no Android artifact**, and every transport line says `local`.
+What is known about it:
+
+- It is not the persisted profile. `capture.sh` empties `$SCRATCH/profile_seeded` at the top of
+  every run, partial ones included.
+- It is not the app under normal conditions: the same code path captured 06, 07, 08 and 15 in the
+  fifth capture an hour earlier.
+- The near phone's sync report reads `rounds: 3, pushed: 3, refused: 0` over thirty seconds, which
+  is very few rounds for that window and worth starting from.
+- A full `./capture.sh` is the configuration that has always worked. A partial `--only` run against
+  the far phone is the one that fails, and the difference between them is the place to look.
+
+Whoever picks this up: capture 06 first, before anything else, and if a partial run fails again do a
+whole one. The fix itself is one line and has a test.
+
+## What cycle 5 said that is still open
+
+Ordered by what it costs to close.
+
+1. **The paper is being flattened between the library and the glass.** `logs/surfaces.json` puts the
+   source stocks at patch_std 9.36-10.28; the completeness pass measures 1.22 arriving on screen,
+   and under 1.5 across 3,656 ink-free patches on four stills. That is a factor of eight, in the
+   category furthest below its floor, and it is one number to chase rather than a judgement to
+   argue with.
+2. **The light the shadows describe touches nothing else.** A note's interior swings 9-13 grey
+   levels on 230 across its full width; the 'hold' cylinder reads 148 on one side of its curve and
+   153 on the other while throwing a hard directional shadow; the fold's flap darkens 17 per cent
+   while foreshortening 90. The shadows are baked and the surfaces they fall on are not.
+3. **Nothing pictures a state change reaching somebody who has not opened the app** — no
+   notification, no lock screen, no widget, in any of the fifteen artifacts.
+4. **The rituals module appears in no artifact**, and it is the one surface the mission pairs with
+   the word streaks: the place engagement machinery would hide was never photographed. 03_us shows
+   three of the five its own report lists, so the Us layout still needs work beyond the row counts.
+5. **17_setup_pwa.png is 27.3 per cent one exact RGB value at zero variance** — 1,225,541 pixels —
+   while every other still sits on wood measuring about 11.
+6. **frames.json's `repeated_frames: 0` is defeated by a one-level dither.** 32 per cent of 06's
+   transitions are visually identical and the clip is frozen for its last 416 ms. The check needs a
+   perceptual floor, not bit equality.
+7. **Both tailnet records give their direct path as 192.0.2.2**, which is RFC 5737 documentation
+   space, and `reliability.json`'s search capability is an identity map with no hits in it.
+8. **A fifth module costs five shared files, not one line** — the registry, the type spec, two
+   renderer entries and the stock assignment. The build's own structural claim is not met.
+9. **A host-rejected event is re-pushed forever unmarked**: the refusal path is unreachable over the
+   wire.
+10. **DeskStamp is unbuilt**; no Android artifact; transport local.
 
 ## Next action
 
-Read `evidence/critics/4/completeness.json`, then take items 1 and 2 above: both are measured, both
-are in the material and anti-goal rows that are furthest below their floors, and both are the same
-kind of defect — a piece of paper that is not behaving like paper. Then capture again and run the
-fifth cycle. The exit is 95 with every floor met; two artifacts and the tailnet run cannot be had in
-this container, and `docs/CONTINUE.md` says what that costs.
+Capture 06 and confirm the letter has words on it. Then item 1 above — the factor of eight between
+the stock in the library and the stock on the screen — because material is ten points below its
+floor and that is one measurement, not a matter of taste. Then a sixth cycle.
+
+Write the next builder sheet from measurements. Twice now the critics have scored a row at or above
+its floor and the builder's own caution has taken it back below.
