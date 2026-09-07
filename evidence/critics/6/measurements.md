@@ -175,6 +175,24 @@ refuted by two of three. Six of them were mine, from this session.
   and `frames.py` would say "1.8s is short of 4.0s" on the artifact. A second mechanism tying the
   two numbers together would be a third place for them to disagree.
 
+## What rehearsing 06 against the real far phone found, before the capture
+
+The scene was run end to end against `host_daemon --seed year` and the frames put through
+`frames.py`, three times, because the artifact has failed five captures.
+
+- **326 frames, 5.22 s**, and the fold length came from the app (`__deskReport().fold.length` =
+  147, twice) rather than from the repo's index.
+- **15 isolated held frames, first at 199** — every one of them in the *second* fold of the take
+  and none in the first. One `FoldFrames` serves every folded note in the thread and `at()` treated
+  any request as the playhead, so an open note (drawing the last frame for as long as it is on the
+  glass) and an opening one moved the decode window between the two ends of the sequence. Measured
+  on the running app after one fold: `decoded 13, held_from 134, held_to 146` — the far end, while
+  the opening note needs the near end. Fixed; the last frame is answered without moving the
+  playhead.
+- The same rehearsal's console carried `WebGL: INVALID_VALUE: texImage2D: no image` and a null
+  check thrown inside a paint: the window was disposing the frame a widget was still holding while
+  the next one decoded. Nothing on the glass is disposed now.
+
 ## Still open, measured or named
 - paper is rendered as WebP at Blender's default quality 92 and then packed, so every downstream
   number is measured against an already-degraded ceiling.
