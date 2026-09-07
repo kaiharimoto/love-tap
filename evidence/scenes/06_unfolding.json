@@ -34,7 +34,7 @@
   {
    "do": "frames",
    "dir": "evidence/frames/06_unfolding",
-   "count": 16,
+   "count": 24,
    "ms": 16
   },
   {
@@ -44,8 +44,22 @@
   {
    "do": "frames",
    "dir": "evidence/frames/06_unfolding",
-   "count": 240,
-   "from": 16,
+   "count": 209,
+   "from": 24,
+   "ms": 16
+  },
+  {
+   "do": "far",
+   "arg": "message and the bread"
+  },
+  {
+   "do": "awaitArrival"
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/06_unfolding",
+   "count": 45,
+   "from": 233,
    "ms": 16
   },
   {

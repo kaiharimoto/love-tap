@@ -396,6 +396,49 @@ def measure_object_ink(verbose=True):
     return out
 
 
+def _fold_rest(seq):  # noqa: C901
+    """The last frame of a packed sequence that is still moving, and the noise it was told from.
+
+    The frames are cropped to their own alpha, so they change size as the sheet opens; they are
+    compared on one canvas anchored at the bottom, which is where the sheet sits. The floor is the
+    sequence's own: the median difference over its last ten transitions is what the renderer leaves
+    behind when nothing is happening, and a transition counts as motion at two and a half times
+    that, or 0.4 grey levels, whichever is larger.
+    """
+    import numpy as np
+    from PIL import Image
+    d = os.path.join(DST, "folds", seq)
+    files = sorted(f for f in os.listdir(d) if f.endswith(".webp"))
+    if len(files) < 4:
+        return {"frames": len(files), "rendered": len(files), "why": "too short to measure"}
+    ims = [Image.open(os.path.join(d, f)).convert("L") for f in files]
+    W = max(i.size[0] for i in ims)
+    H = max(i.size[1] for i in ims)
+    deltas = []
+    prev = None
+    for im in ims:
+        c = Image.new("L", (W, H), 0)
+        c.paste(im, (0, H - im.size[1]))
+        a = np.asarray(c, dtype=np.float32)
+        if prev is not None:
+            deltas.append(float(np.abs(a - prev).mean()))
+        prev = a
+    for im in ims:
+        im.close()
+    floor = float(np.median(deltas[-10:])) if len(deltas) >= 10 else 0.0
+    gate = max(2.5 * floor, 0.4)
+    moving = [i for i, x in enumerate(deltas) if x > gate]
+    last = moving[-1] if moving else len(deltas) - 1
+    return {
+        "frames": last + 2,
+        "rendered": len(files),
+        "noise_floor": round(floor, 3),
+        "gate": round(gate, 3),
+        "why": "frames after this one are the same image re-sampled; the difference between them "
+               "is the renderer's own noise, not motion",
+    }
+
+
 def pack_folds(index, verbose=True):
     src_dir = os.path.join(SRC, "folds")
     if not os.path.isdir(src_dir):
@@ -424,7 +467,19 @@ def pack_folds(index, verbose=True):
                 cut.save(tmp)
             convert(tmp, dst, SIZES["folds"], QUALITY["folds"], keep_alpha=True)
             os.remove(tmp)
-        seqs[seq] = len(frames)
+        # Where the sequence actually comes to rest. `unfold_thirds` renders 240 frames and stops
+        # moving at 208: its last thirty-one are the same still image re-sampled, and Cycles at 48
+        # samples leaves 0.70 grey levels of frame-to-frame noise on it. The app played every one of
+        # them faithfully, so the clip ended on half a second a reader sees as frozen while the
+        # frame check — a mean absolute difference over the whole frame — called it motion. Noise is
+        # not motion. The packed sequence is the moving part, and what was dropped is recorded.
+        rest = _fold_rest(seq)
+        seqs[seq] = rest["frames"]
+        index.setdefault("fold_rest", {})[seq] = rest
+        for i in range(rest["frames"], len(frames)):
+            surplus = os.path.join(DST, "folds", seq, os.path.splitext(frames[i])[0] + ".webp")
+            if os.path.exists(surplus):
+                os.remove(surplus)
         if frames:
             # the shape of the *first* frame, so a note that is about to open is the size it is
             # while it is still folded, before that frame has decoded. Without it the note is zero
