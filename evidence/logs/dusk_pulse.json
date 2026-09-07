@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 7658
+   "ms": 8877
   },
   {
    "do": "wait",
@@ -18,7 +18,7 @@
   },
   {
    "do": "shot",
-   "ms": 6544
+   "ms": 5350
   },
   {
    "do": "report",
@@ -126,7 +126,7 @@
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 240,
+    "length": 147,
     "decoded": 24,
     "decoding": 0,
     "playhead": 0,
@@ -144,6 +144,7 @@
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 1,
+    "refused_in_the_outbox": 0,
     "cursor": 14061,
     "link": {
      "transport": "local",
@@ -153,7 +154,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-06T21:01:50.876Z",
+     "since": "2026-09-07T22:26:47.464Z",
      "last_contact": null
     }
    },
@@ -161,14 +162,15 @@
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
-    "allowed_to_interrupt": false
+    "allowed_to_interrupt": false,
+    "held_by_the_phone": []
    },
    "at": "crops/dusk_pulse.png"
   }
  ],
- "cold_ms": 11322,
+ "cold_ms": 12344,
  "load": {
-  "ms": 11322,
+  "ms": 12344,
   "store": "fresh",
   "profile": null
  },

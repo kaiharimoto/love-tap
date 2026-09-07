@@ -12,7 +12,7 @@
  "tears": {},
  "stocks": {},
  "scroll": null,
- "now": "2026-09-06T21:01:39.114Z",
+ "now": "2026-09-07T22:25:14.656Z",
  "driven_ms": 0,
  "seed": 20260903,
  "events": 0,
@@ -39,6 +39,7 @@
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
+  "refused_in_the_outbox": 0,
   "cursor": 0,
   "link": {
    "transport": "local",
@@ -48,7 +49,7 @@
    "peer_cursor": null,
    "our_cursor": 0,
    "last_error": null,
-   "since": "2026-09-06T21:01:32.332Z",
+   "since": "2026-09-07T22:25:07.101Z",
    "last_contact": null
   }
  },
@@ -56,7 +57,8 @@
   "standing_line": "nothing from them since you last looked",
   "pocket_feeling": null,
   "pocket_at": null,
-  "allowed_to_interrupt": false
+  "allowed_to_interrupt": false,
+  "held_by_the_phone": []
  },
  "at": "17_setup_pwa.png"
 }

@@ -10,89 +10,89 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2206,
+   "ms": 2490,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 5842
+   "ms": 6028
   },
   {
    "do": "wait",
-   "ms": 1802
+   "ms": 1807
   },
   {
    "do": "haptics",
-   "ms": 474
+   "ms": 558
   },
   {
    "do": "far",
-   "ms": 443
+   "ms": 577
   },
   {
    "do": "awaitArrival",
-   "ms": 5940
+   "ms": 6045
   },
   {
    "do": "frames",
-   "ms": 900730
+   "ms": 572057
   },
   {
    "do": "far",
-   "ms": 548
+   "ms": 555
   },
   {
    "do": "awaitArrival",
-   "ms": 4441
+   "ms": 4630
   },
   {
    "do": "frames",
-   "ms": 454290
+   "ms": 273282
   },
   {
    "do": "goTo",
-   "ms": 15426
+   "ms": 15568
   },
   {
    "do": "step",
-   "ms": 4930
+   "ms": 5358
   },
   {
    "do": "far",
-   "ms": 435
+   "ms": 1988
   },
   {
    "do": "awaitArrival",
-   "ms": 7087
+   "ms": 5061
   },
   {
    "do": "frames",
-   "ms": 358185
+   "ms": 380465
   },
   {
    "do": "goTo",
-   "ms": 15318
+   "ms": 27785
   },
   {
    "do": "step",
-   "ms": 3937
+   "ms": 2776
   },
   {
    "do": "far",
-   "ms": 486
+   "ms": 1641
   },
   {
    "do": "awaitArrival",
-   "ms": 4694
+   "ms": 3092
   },
   {
    "do": "frames",
-   "ms": 357097
+   "ms": 441832
   },
   {
    "do": "report",
-   "ms": 461
+   "ms": 430
   }
  ],
  "shots": [
@@ -140,7 +140,7 @@
      {
       "id": "calendar",
       "events": 6,
-      "glance": "us in 63 days"
+      "glance": "us in 62 days"
      },
      {
       "id": "rituals",
@@ -161,7 +161,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 7728,
    "seed": 20260903,
-   "events": 14084,
+   "events": 14089,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -178,7 +178,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-06T21:50:55.881Z",
+    "started_at": "2026-09-07T23:11:17.126Z",
     "pattern": [
      {
       "ms": 150,
@@ -205,38 +205,40 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 682,
-    "pushed": 7,
+    "rounds": 556,
+    "pushed": 6,
     "refused": 0,
     "pulled": 4,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
-    "cursor": 14084,
+    "refused_in_the_outbox": 0,
+    "cursor": 14089,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14084,
-     "our_cursor": 14084,
+     "peer_cursor": 14089,
+     "our_cursor": 14089,
      "last_error": null,
-     "since": "2026-09-06T21:21:08.074Z",
-     "last_contact": "2026-09-06T21:56:51.387Z"
+     "since": "2026-09-07T22:49:26.094Z",
+     "last_contact": "2026-09-07T23:18:38.883Z"
     }
    },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "soup",
     "pocket_at": 1788464400000,
-    "allowed_to_interrupt": false
+    "allowed_to_interrupt": false,
+    "held_by_the_phone": []
    },
    "at": "07_feeling_landing"
   }
  ],
- "cold_ms": 2539,
+ "cold_ms": 2948,
  "load": {
-  "ms": 2539,
+  "ms": 2948,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -261,31 +263,31 @@
  "arrivals": [
   {
    "line": "feeling hold 0.9",
-   "before": 8074,
-   "after": 8075,
+   "before": 8075,
+   "after": 8076,
    "at_frame": 0,
-   "waited_ms": 5539
+   "waited_ms": 5644
   },
   {
    "line": "feeling squeeze 0.75",
-   "before": 8075,
-   "after": 8076,
+   "before": 8076,
+   "after": 8077,
    "at_frame": 150,
-   "waited_ms": 4040
+   "waited_ms": 4227
   },
   {
    "line": "feeling nuzzle 0.8",
-   "before": 8076,
-   "after": 8077,
+   "before": 8077,
+   "after": 8078,
    "at_frame": 221,
-   "waited_ms": 6687
+   "waited_ms": 4660
   },
   {
    "line": "feeling soup 0.85",
-   "before": 8077,
-   "after": 8078,
+   "before": 8078,
+   "after": 8079,
    "at_frame": 314,
-   "waited_ms": 4293
+   "waited_ms": 2691
   }
  ],
  "problems": [],

@@ -10,33 +10,33 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3492,
+   "ms": 3858,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4254
+   "ms": 5674
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1706
   },
   {
    "do": "search",
-   "ms": 5562
+   "ms": 5439
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1903
   },
   {
    "do": "shot",
-   "ms": 3869
+   "ms": 4118
   },
   {
    "do": "report",
-   "ms": 747
+   "ms": 722
   }
  ],
  "shots": [
@@ -49,16 +49,29 @@
   {
    "region": 1,
    "view": {
-    "region": "chat",
-    "composer": "",
-    "attaching": false,
-    "replying_to": null,
-    "editing": null,
-    "partner_typing": false,
+    "region": "search",
+    "over": "chat",
+    "query": "rain",
+    "hits": 10,
+    "type_filter": null,
+    "author": null,
+    "range": null,
+    "order": [
+     "00035THC6GKTN6JK7V1X6SPKVM",
+     "00035TAR98HM1YCSC72P57B58R",
+     "00035SYSF8VY7FDB5A9KVMFWBE",
+     "0002RP1BQ0ZRM9VF2GWFH89TVJ",
+     "00013W80B8AFCBMABQYAKE0SXW",
+     "0002PQVGGGZE962R8MGXHHFRMQ",
+     "0002DK3MM8RNMZ8NV6MW8MMR35",
+     "0002DEZNZ8ZYT6P4CCDT8B257K",
+     "00005CGDY8G25WR170XZC9VGD9",
+     "0003248ZCRGE7PPKVPR5DEWMHC"
+    ],
     "kinds": {
-     "feeling": 2,
-     "message": 2,
-     "state_declared": 2
+     "message": 8,
+     "ritual_kept": 1,
+     "todo_event": 1
     }
    },
    "visible": [
@@ -70,12 +83,12 @@
     "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_036",
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_031",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_039",
-    "0001M4GW48FEW3M67XKAZT5051": "tear_051",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_033",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_020"
+    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_043",
+    "0001M3F41R2APQC59QKBMZK4XF": "tear_026",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_048",
+    "0001M4GW48FEW3M67XKAZT5051": "tear_010",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_052"
    },
    "stocks": {
     "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
@@ -117,6 +130,7 @@
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
+    "refused_in_the_outbox": 0,
     "cursor": 14062,
     "link": {
      "transport": "local",
@@ -126,22 +140,23 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-06T20:58:59.834Z",
-     "last_contact": "2026-09-06T20:59:20.198Z"
+     "since": "2026-09-07T22:21:44.977Z",
+     "last_contact": "2026-09-07T22:22:05.275Z"
     }
    },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
-    "allowed_to_interrupt": false
+    "allowed_to_interrupt": false,
+    "held_by_the_phone": []
    },
    "at": "12_search.png"
   }
  ],
- "cold_ms": 2662,
+ "cold_ms": 3025,
  "load": {
-  "ms": 2662,
+  "ms": 3025,
   "store": "kept",
   "profile": "profile_seeded"
  },

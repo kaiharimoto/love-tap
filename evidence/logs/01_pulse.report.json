@@ -92,7 +92,7 @@
  "setup_showing": false,
  "fold": {
   "sequence": "unfold_thirds",
-  "length": 240,
+  "length": 147,
   "decoded": 24,
   "decoding": 0,
   "playhead": 0,
@@ -110,6 +110,7 @@
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 1,
+  "refused_in_the_outbox": 0,
   "cursor": 14061,
   "link": {
    "transport": "local",
@@ -119,15 +120,16 @@
    "peer_cursor": null,
    "our_cursor": 14061,
    "last_error": null,
-   "since": "2026-09-06T20:57:12.770Z",
-   "last_contact": "2026-09-06T20:57:15.876Z"
+   "since": "2026-09-07T22:19:47.901Z",
+   "last_contact": "2026-09-07T22:19:51.005Z"
   }
  },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
   "pocket_feeling": "ugh",
   "pocket_at": 1788464400000,
-  "allowed_to_interrupt": false
+  "allowed_to_interrupt": false,
+  "held_by_the_phone": []
  },
  "at": "01_pulse.png"
 }

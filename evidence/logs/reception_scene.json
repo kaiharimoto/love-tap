@@ -6,7 +6,7 @@
   "height": 880,
   "dpr": 3
  },
- "url": "http://127.0.0.1:8787/",
+ "url": "http://127.0.0.1:8796/",
  "steps": [
   {
    "do": "wait",
@@ -14,66 +14,66 @@
   },
   {
    "do": "goTo",
-   "ms": 4174
+   "ms": 4739
   },
   {
    "do": "step",
-   "ms": 2072
+   "ms": 1682
   },
   {
    "do": "step",
-   "ms": 1792
-  },
-  {
-   "do": "wait",
-   "ms": 1002
-  },
-  {
-   "do": "shot",
-   "ms": 1395
-  },
-  {
-   "do": "goTo",
-   "ms": 5525
-  },
-  {
-   "do": "step",
-   "ms": 2038
-  },
-  {
-   "do": "step",
-   "ms": 2686
+   "ms": 1499
   },
   {
    "do": "wait",
    "ms": 1003
   },
   {
+   "do": "shot",
+   "ms": 1913
+  },
+  {
+   "do": "goTo",
+   "ms": 5253
+  },
+  {
+   "do": "step",
+   "ms": 2152
+  },
+  {
+   "do": "step",
+   "ms": 1630
+  },
+  {
+   "do": "wait",
+   "ms": 1002
+  },
+  {
    "do": "report",
-   "ms": 711
+   "ms": 715
   },
   {
    "push": {
     "kind": "feeling",
     "from": "noor"
    },
-   "scope": "http://127.0.0.1:8787/push/"
+   "scope": "http://127.0.0.1:8796/push/"
   },
   {
    "do": "push",
-   "ms": 2208
+   "ms": 2211
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 893
+   "ms": 4152
   },
   {
    "do": "closeApp",
-   "ms": 742
+   "ms": 736
   },
   {
    "do": "wait",
@@ -84,42 +84,42 @@
     "kind": "message",
     "from": "noor"
    },
-   "scope": "http://127.0.0.1:8787/push/"
+   "scope": "http://127.0.0.1:8796/push/"
   },
   {
    "do": "push",
-   "ms": 2207
+   "ms": 2209
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 849
+   "ms": 813
   },
   {
    "push": {
     "kind": "feeling",
     "from": "noor"
    },
-   "scope": "http://127.0.0.1:8787/push/"
+   "scope": "http://127.0.0.1:8796/push/"
   },
   {
    "do": "push",
-   "ms": 2208
+   "ms": 2209
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 809
+   "ms": 813
   },
   {
    "do": "notifications",
-   "ms": 1153
+   "ms": 1150
   }
  ],
  "shots": [
@@ -235,7 +235,7 @@
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 240,
+    "length": 147,
     "decoded": 24,
     "decoding": 0,
     "playhead": 0,
@@ -253,6 +253,7 @@
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 1,
+    "refused_in_the_outbox": 0,
     "cursor": 14061,
     "link": {
      "transport": "local",
@@ -262,7 +263,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-07T05:16:16.711Z",
+     "since": "2026-09-07T22:25:47.542Z",
      "last_contact": null
     }
    },
@@ -270,23 +271,24 @@
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
-    "allowed_to_interrupt": true
+    "allowed_to_interrupt": true,
+    "held_by_the_phone": []
    },
    "at": "crops/reception_open.png"
   }
  ],
- "cold_ms": 7926,
+ "cold_ms": 8799,
  "load": {
-  "ms": 7926,
+  "ms": 8799,
   "store": "fresh",
-  "profile": "rx"
+  "profile": "profile_reception"
  },
  "app_open": false,
  "reception": {
   "permission": "granted",
   "records": [
    {
-    "scope": "http://127.0.0.1:8787/push/",
+    "scope": "http://127.0.0.1:8796/push/",
     "title": "noor",
     "body": "is holding something out",
     "tag": "from-them",

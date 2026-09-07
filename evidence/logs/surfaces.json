@@ -5,1830 +5,3190 @@
   "objects": 2.0,
   "folds": 1.2
  },
+ "shading_floors": {
+  "paper": {
+   "tooth": 0.45,
+   "field_swing": 3.0
+  },
+  "folds": {
+   "tooth": 0.6
+  }
+ },
+ "what_lit_across_is": "the left third's mean luminance minus the right third's, over a cut-out object. Reported, never gated: it measures how much the surface normal turns across the frame, not how well the object is lit, so a flat-lying sheet reads near zero under any light.",
+ "what_patch_std_is": "the largest standard deviation among nine 200 px patches of the whole file. On a ruled stock every such patch contains three or four printed rules, so this number is dominated by the ruling and the margin line and is not a measurement of the paper's tooth. Read `tooth` and `field_swing` for the material and for the light.",
  "surfaces": {
   "paper/graph_01.webp": {
    "family": "paper",
-   "patch_std": 9.79,
-   "floor": 1.2
+   "patch_std": 9.922,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 239.0,
+   "field_swing_raw": 6.173,
+   "field_swing": 6.018,
+   "tooth_raw": 0.83,
+   "tooth": 0.81,
+   "tooth_from_blocks": 2052
   },
   "paper/graph_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 10.28,
-   "floor": 1.2
+   "patch_std": 10.489,
+   "floor": 1.2,
+   "blocks": 1879,
+   "body": 206.0,
+   "field_swing_raw": 40.878,
+   "field_swing": 46.236,
+   "tooth_raw": 1.865,
+   "tooth": 2.109,
+   "tooth_from_blocks": 80
   },
   "paper/graph_02.webp": {
    "family": "paper",
-   "patch_std": 9.361,
-   "floor": 1.2
+   "patch_std": 9.874,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 238.0,
+   "field_swing_raw": 7.212,
+   "field_swing": 7.06,
+   "tooth_raw": 0.812,
+   "tooth": 0.795,
+   "tooth_from_blocks": 2052
   },
   "paper/graph_02_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.415,
-   "floor": 1.2
+   "patch_std": 9.852,
+   "floor": 1.2,
+   "blocks": 1665,
+   "body": 209.0,
+   "field_swing_raw": 35.654,
+   "field_swing": 39.748,
+   "tooth_raw": 1.715,
+   "tooth": 1.912,
+   "tooth_from_blocks": 104
   },
   "paper/graph_03.webp": {
    "family": "paper",
-   "patch_std": 9.765,
-   "floor": 1.2
+   "patch_std": 10.189,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 238.0,
+   "field_swing_raw": 6.548,
+   "field_swing": 6.41,
+   "tooth_raw": 0.786,
+   "tooth": 0.77,
+   "tooth_from_blocks": 2052
   },
   "paper/graph_03_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.636,
-   "floor": 1.2
+   "patch_std": 10.481,
+   "floor": 1.2,
+   "blocks": 2020,
+   "body": 200.0,
+   "field_swing_raw": 50.825,
+   "field_swing": 59.212,
+   "tooth_raw": 1.58,
+   "tooth": 1.841,
+   "tooth_from_blocks": 263
   },
   "paper/graph_04.webp": {
    "family": "paper",
-   "patch_std": 9.638,
-   "floor": 1.2
+   "patch_std": 10.234,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 237.0,
+   "field_swing_raw": 6.402,
+   "field_swing": 6.294,
+   "tooth_raw": 0.867,
+   "tooth": 0.852,
+   "tooth_from_blocks": 2052
   },
   "paper/graph_04_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.804,
-   "floor": 1.2
+   "patch_std": 10.21,
+   "floor": 1.2,
+   "blocks": 1922,
+   "body": 200.0,
+   "field_swing_raw": 51.979,
+   "field_swing": 60.556,
+   "tooth_raw": 1.642,
+   "tooth": 1.913,
+   "tooth_from_blocks": 265
   },
   "paper/index_01.webp": {
    "family": "paper",
-   "patch_std": 11.557,
-   "floor": 1.2
+   "patch_std": 12.738,
+   "floor": 1.2,
+   "blocks": 1691,
+   "body": 232.0,
+   "field_swing_raw": 11.705,
+   "field_swing": 11.755,
+   "tooth_raw": 1.345,
+   "tooth": 1.35,
+   "tooth_from_blocks": 1660
   },
   "paper/index_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 10.676,
-   "floor": 1.2
+   "patch_std": 11.426,
+   "floor": 1.2,
+   "blocks": 1342,
+   "body": 204.0,
+   "field_swing_raw": 30.518,
+   "field_swing": 34.856,
+   "tooth_raw": 1.569,
+   "tooth": 1.793,
+   "tooth_from_blocks": 664
   },
   "paper/index_02.webp": {
    "family": "paper",
-   "patch_std": 11.385,
-   "floor": 1.2
+   "patch_std": 12.59,
+   "floor": 1.2,
+   "blocks": 1694,
+   "body": 230.0,
+   "field_swing_raw": 9.901,
+   "field_swing": 10.03,
+   "tooth_raw": 1.364,
+   "tooth": 1.382,
+   "tooth_from_blocks": 1649
   },
   "paper/index_02_dusk.webp": {
    "family": "paper",
-   "patch_std": 10.681,
-   "floor": 1.2
+   "patch_std": 11.537,
+   "floor": 1.2,
+   "blocks": 1276,
+   "body": 203.0,
+   "field_swing_raw": 33.191,
+   "field_swing": 38.096,
+   "tooth_raw": 1.616,
+   "tooth": 1.855,
+   "tooth_from_blocks": 631
   },
   "paper/legal_01.webp": {
    "family": "paper",
-   "patch_std": 11.486,
-   "floor": 1.2
+   "patch_std": 12.559,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 231.0,
+   "field_swing_raw": 4.74,
+   "field_swing": 4.782,
+   "tooth_raw": 1.319,
+   "tooth": 1.331,
+   "tooth_from_blocks": 2052
   },
   "paper/legal_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 10.026,
-   "floor": 1.2
+   "patch_std": 10.843,
+   "floor": 1.2,
+   "blocks": 1984,
+   "body": 195.0,
+   "field_swing_raw": 47.187,
+   "field_swing": 56.383,
+   "tooth_raw": 1.607,
+   "tooth": 1.92,
+   "tooth_from_blocks": 150
   },
   "paper/legal_02.webp": {
    "family": "paper",
-   "patch_std": 11.238,
-   "floor": 1.2
+   "patch_std": 12.285,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 229.0,
+   "field_swing_raw": 4.786,
+   "field_swing": 4.869,
+   "tooth_raw": 1.268,
+   "tooth": 1.29,
+   "tooth_from_blocks": 2052
   },
   "paper/legal_02_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.944,
-   "floor": 1.2
+   "patch_std": 10.58,
+   "floor": 1.2,
+   "blocks": 1902,
+   "body": 196.0,
+   "field_swing_raw": 45.969,
+   "field_swing": 54.647,
+   "tooth_raw": 1.655,
+   "tooth": 1.968,
+   "tooth_from_blocks": 103
   },
   "paper/lined_01.webp": {
    "family": "paper",
-   "patch_std": 10.158,
-   "floor": 1.2
+   "patch_std": 10.676,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 233.0,
+   "field_swing_raw": 5.791,
+   "field_swing": 5.791,
+   "tooth_raw": 1.388,
+   "tooth": 1.388,
+   "tooth_from_blocks": 2052
   },
   "paper/lined_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 8.992,
-   "floor": 1.2
+   "patch_std": 9.123,
+   "floor": 1.2,
+   "blocks": 1884,
+   "body": 197.0,
+   "field_swing_raw": 49.998,
+   "field_swing": 59.134,
+   "tooth_raw": 1.561,
+   "tooth": 1.847,
+   "tooth_from_blocks": 96
   },
   "paper/lined_02.webp": {
    "family": "paper",
-   "patch_std": 10.177,
-   "floor": 1.2
+   "patch_std": 10.647,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 232.0,
+   "field_swing_raw": 5.493,
+   "field_swing": 5.516,
+   "tooth_raw": 1.343,
+   "tooth": 1.349,
+   "tooth_from_blocks": 2052
   },
   "paper/lined_02_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.383,
-   "floor": 1.2
+   "patch_std": 10.132,
+   "floor": 1.2,
+   "blocks": 1701,
+   "body": 204.0,
+   "field_swing_raw": 34.898,
+   "field_swing": 39.859,
+   "tooth_raw": 1.848,
+   "tooth": 2.111,
+   "tooth_from_blocks": 10
   },
   "paper/lined_03.webp": {
    "family": "paper",
-   "patch_std": 10.198,
-   "floor": 1.2
+   "patch_std": 10.837,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 232.0,
+   "field_swing_raw": 4.768,
+   "field_swing": 4.789,
+   "tooth_raw": 1.195,
+   "tooth": 1.201,
+   "tooth_from_blocks": 2052
   },
   "paper/lined_03_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.21,
-   "floor": 1.2
+   "patch_std": 10.076,
+   "floor": 1.2,
+   "blocks": 1582,
+   "body": 203.0,
+   "field_swing_raw": 36.143,
+   "field_swing": 41.484,
+   "tooth_raw": 1.836,
+   "tooth": 2.107,
+   "tooth_from_blocks": 18
   },
   "paper/lined_04.webp": {
    "family": "paper",
-   "patch_std": 10.122,
-   "floor": 1.2
+   "patch_std": 10.644,
+   "floor": 1.2,
+   "blocks": 2052,
+   "body": 230.0,
+   "field_swing_raw": 6.795,
+   "field_swing": 6.884,
+   "tooth_raw": 1.322,
+   "tooth": 1.339,
+   "tooth_from_blocks": 2052
   },
   "paper/lined_04_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.011,
-   "floor": 1.2
+   "patch_std": 9.172,
+   "floor": 1.2,
+   "blocks": 1898,
+   "body": 195.0,
+   "field_swing_raw": 49.077,
+   "field_swing": 58.641,
+   "tooth_raw": 1.614,
+   "tooth": 1.928,
+   "tooth_from_blocks": 131
   },
   "paper/looseleaf_01.webp": {
    "family": "paper",
-   "patch_std": 7.661,
-   "floor": 1.2
+   "patch_std": 6.809,
+   "floor": 1.2,
+   "blocks": 2050,
+   "body": 238.0,
+   "field_swing_raw": 5.354,
+   "field_swing": 5.242,
+   "tooth_raw": 1.066,
+   "tooth": 1.043,
+   "tooth_from_blocks": 2050
   },
   "paper/looseleaf_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 7.896,
-   "floor": 1.2
+   "patch_std": 7.848,
+   "floor": 1.2,
+   "blocks": 1775,
+   "body": 207.0,
+   "field_swing_raw": 37.304,
+   "field_swing": 41.99,
+   "tooth_raw": 1.782,
+   "tooth": 2.005,
+   "tooth_from_blocks": 73
   },
   "paper/looseleaf_02.webp": {
    "family": "paper",
-   "patch_std": 6.789,
-   "floor": 1.2
+   "patch_std": 7.438,
+   "floor": 1.2,
+   "blocks": 2050,
+   "body": 237.0,
+   "field_swing_raw": 6.707,
+   "field_swing": 6.594,
+   "tooth_raw": 1.2,
+   "tooth": 1.18,
+   "tooth_from_blocks": 2050
   },
   "paper/looseleaf_02_dusk.webp": {
    "family": "paper",
-   "patch_std": 7.593,
-   "floor": 1.2
+   "patch_std": 8.49,
+   "floor": 1.2,
+   "blocks": 1752,
+   "body": 207.0,
+   "field_swing_raw": 36.85,
+   "field_swing": 41.478,
+   "tooth_raw": 1.681,
+   "tooth": 1.892,
+   "tooth_from_blocks": 92
   },
   "paper/looseleaf_03.webp": {
    "family": "paper",
-   "patch_std": 7.84,
-   "floor": 1.2
+   "patch_std": 6.904,
+   "floor": 1.2,
+   "blocks": 2050,
+   "body": 237.0,
+   "field_swing_raw": 6.299,
+   "field_swing": 6.193,
+   "tooth_raw": 1.073,
+   "tooth": 1.055,
+   "tooth_from_blocks": 2050
   },
   "paper/looseleaf_03_dusk.webp": {
    "family": "paper",
-   "patch_std": 8.368,
-   "floor": 1.2
+   "patch_std": 8.478,
+   "floor": 1.2,
+   "blocks": 1905,
+   "body": 203.0,
+   "field_swing_raw": 43.456,
+   "field_swing": 49.878,
+   "tooth_raw": 1.75,
+   "tooth": 2.008,
+   "tooth_from_blocks": 61
   },
   "paper/looseleaf_04.webp": {
    "family": "paper",
-   "patch_std": 7.381,
-   "floor": 1.2
+   "patch_std": 7.633,
+   "floor": 1.2,
+   "blocks": 2050,
+   "body": 236.0,
+   "field_swing_raw": 5.977,
+   "field_swing": 5.901,
+   "tooth_raw": 1.009,
+   "tooth": 0.997,
+   "tooth_from_blocks": 2050
   },
   "paper/looseleaf_04_dusk.webp": {
    "family": "paper",
-   "patch_std": 7.638,
-   "floor": 1.2
+   "patch_std": 8.693,
+   "floor": 1.2,
+   "blocks": 1467,
+   "body": 207.0,
+   "field_swing_raw": 35.168,
+   "field_swing": 39.586,
+   "tooth_raw": 1.888,
+   "tooth": 2.125,
+   "tooth_from_blocks": 54
   },
   "paper/receipt_01.webp": {
    "family": "paper",
-   "patch_std": 11.323,
-   "floor": 1.2
+   "patch_std": 11.025,
+   "floor": 1.2,
+   "blocks": 1294,
+   "body": 247.0,
+   "field_swing_raw": 3.757,
+   "field_swing": 3.544,
+   "tooth_raw": 0.615,
+   "tooth": 0.58,
+   "tooth_from_blocks": 1287
   },
   "paper/receipt_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 10.244,
-   "floor": 1.2
+   "patch_std": 10.492,
+   "floor": 1.2,
+   "blocks": 1218,
+   "body": 217.0,
+   "field_swing_raw": 27.72,
+   "field_swing": 29.764,
+   "tooth_raw": 1.695,
+   "tooth": 1.82,
+   "tooth_from_blocks": 543
   },
   "paper/spiral_01.webp": {
    "family": "paper",
-   "patch_std": 10.009,
-   "floor": 1.2
+   "patch_std": 10.669,
+   "floor": 1.2,
+   "blocks": 1957,
+   "body": 232.0,
+   "field_swing_raw": 5.085,
+   "field_swing": 5.106,
+   "tooth_raw": 1.376,
+   "tooth": 1.382,
+   "tooth_from_blocks": 1929
   },
   "paper/spiral_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.128,
-   "floor": 1.2
+   "patch_std": 9.984,
+   "floor": 1.2,
+   "blocks": 1825,
+   "body": 202.0,
+   "field_swing_raw": 38.293,
+   "field_swing": 44.169,
+   "tooth_raw": 1.881,
+   "tooth": 2.17,
+   "tooth_from_blocks": 20
   },
   "paper/spiral_02.webp": {
    "family": "paper",
-   "patch_std": 10.153,
-   "floor": 1.2
+   "patch_std": 10.563,
+   "floor": 1.2,
+   "blocks": 1940,
+   "body": 230.0,
+   "field_swing_raw": 5.764,
+   "field_swing": 5.839,
+   "tooth_raw": 1.379,
+   "tooth": 1.397,
+   "tooth_from_blocks": 1925
   },
   "paper/spiral_02_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.459,
-   "floor": 1.2
+   "patch_std": 10.092,
+   "floor": 1.2,
+   "blocks": 1848,
+   "body": 200.0,
+   "field_swing_raw": 43.305,
+   "field_swing": 50.45,
+   "tooth_raw": 1.75,
+   "tooth": 2.039,
+   "tooth_from_blocks": 46
   },
   "paper/spiral_03.webp": {
    "family": "paper",
-   "patch_std": 10.267,
-   "floor": 1.2
+   "patch_std": 10.834,
+   "floor": 1.2,
+   "blocks": 1996,
+   "body": 230.0,
+   "field_swing_raw": 4.594,
+   "field_swing": 4.654,
+   "tooth_raw": 1.414,
+   "tooth": 1.433,
+   "tooth_from_blocks": 1988
   },
   "paper/spiral_03_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.549,
-   "floor": 1.2
+   "patch_std": 10.012,
+   "floor": 1.2,
+   "blocks": 1705,
+   "body": 201.0,
+   "field_swing_raw": 39.087,
+   "field_swing": 45.309,
+   "tooth_raw": 1.808,
+   "tooth": 2.096,
+   "tooth_from_blocks": 25
   },
   "paper/spiral_04.webp": {
    "family": "paper",
-   "patch_std": 9.997,
-   "floor": 1.2
+   "patch_std": 10.422,
+   "floor": 1.2,
+   "blocks": 1966,
+   "body": 228.0,
+   "field_swing_raw": 9.103,
+   "field_swing": 9.302,
+   "tooth_raw": 1.337,
+   "tooth": 1.367,
+   "tooth_from_blocks": 1930
   },
   "paper/spiral_04_dusk.webp": {
    "family": "paper",
-   "patch_std": 9.135,
-   "floor": 1.2
+   "patch_std": 9.595,
+   "floor": 1.2,
+   "blocks": 1926,
+   "body": 198.0,
+   "field_swing_raw": 44.713,
+   "field_swing": 52.616,
+   "tooth_raw": 1.56,
+   "tooth": 1.835,
+   "tooth_from_blocks": 73
   },
   "paper/sticky_blue_01.webp": {
    "family": "paper",
-   "patch_std": 2.59,
-   "floor": 1.2
+   "patch_std": 2.702,
+   "floor": 1.2,
+   "blocks": 2546,
+   "body": 214.0,
+   "field_swing_raw": 12.816,
+   "field_swing": 13.954,
+   "tooth_raw": 1.4,
+   "tooth": 1.525,
+   "tooth_from_blocks": 2516
   },
   "paper/sticky_blue_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 3.976,
-   "floor": 1.2
+   "patch_std": 4.012,
+   "floor": 1.2,
+   "blocks": 2504,
+   "body": 184.0,
+   "field_swing_raw": 21.266,
+   "field_swing": 26.93,
+   "tooth_raw": 1.304,
+   "tooth": 1.651,
+   "tooth_from_blocks": 331
   },
   "paper/sticky_blue_02.webp": {
    "family": "paper",
-   "patch_std": 2.641,
-   "floor": 1.2
+   "patch_std": 2.637,
+   "floor": 1.2,
+   "blocks": 2545,
+   "body": 215.0,
+   "field_swing_raw": 17.878,
+   "field_swing": 19.374,
+   "tooth_raw": 1.379,
+   "tooth": 1.494,
+   "tooth_from_blocks": 2499
   },
   "paper/sticky_blue_02_dusk.webp": {
    "family": "paper",
-   "patch_std": 3.67,
-   "floor": 1.2
+   "patch_std": 4.284,
+   "floor": 1.2,
+   "blocks": 2369,
+   "body": 184.0,
+   "field_swing_raw": 25.936,
+   "field_swing": 32.843,
+   "tooth_raw": 1.372,
+   "tooth": 1.738,
+   "tooth_from_blocks": 344
   },
   "paper/sticky_pink_01.webp": {
    "family": "paper",
-   "patch_std": 2.839,
-   "floor": 1.2
+   "patch_std": 2.873,
+   "floor": 1.2,
+   "blocks": 2551,
+   "body": 213.0,
+   "field_swing_raw": 12.944,
+   "field_swing": 14.16,
+   "tooth_raw": 1.335,
+   "tooth": 1.46,
+   "tooth_from_blocks": 2519
   },
   "paper/sticky_pink_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 3.766,
-   "floor": 1.2
+   "patch_std": 4.162,
+   "floor": 1.2,
+   "blocks": 2549,
+   "body": 180.0,
+   "field_swing_raw": 30.304,
+   "field_swing": 39.227,
+   "tooth_raw": 1.312,
+   "tooth": 1.698,
+   "tooth_from_blocks": 318
   },
   "paper/sticky_pink_02.webp": {
    "family": "paper",
-   "patch_std": 2.734,
-   "floor": 1.2
+   "patch_std": 2.695,
+   "floor": 1.2,
+   "blocks": 2545,
+   "body": 213.0,
+   "field_swing_raw": 13.813,
+   "field_swing": 15.11,
+   "tooth_raw": 1.273,
+   "tooth": 1.393,
+   "tooth_from_blocks": 2509
   },
   "paper/sticky_pink_02_dusk.webp": {
    "family": "paper",
-   "patch_std": 3.998,
-   "floor": 1.2
+   "patch_std": 4.226,
+   "floor": 1.2,
+   "blocks": 2499,
+   "body": 183.0,
+   "field_swing_raw": 22.688,
+   "field_swing": 28.888,
+   "tooth_raw": 1.332,
+   "tooth": 1.696,
+   "tooth_from_blocks": 259
   },
   "paper/sticky_yellow_01.webp": {
    "family": "paper",
-   "patch_std": 2.804,
-   "floor": 1.2
+   "patch_std": 2.651,
+   "floor": 1.2,
+   "blocks": 2547,
+   "body": 218.0,
+   "field_swing_raw": 13.347,
+   "field_swing": 14.266,
+   "tooth_raw": 1.137,
+   "tooth": 1.216,
+   "tooth_from_blocks": 2518
   },
   "paper/sticky_yellow_01_dusk.webp": {
    "family": "paper",
-   "patch_std": 3.881,
-   "floor": 1.2
+   "patch_std": 4.112,
+   "floor": 1.2,
+   "blocks": 2548,
+   "body": 184.0,
+   "field_swing_raw": 29.972,
+   "field_swing": 37.954,
+   "tooth_raw": 1.287,
+   "tooth": 1.629,
+   "tooth_from_blocks": 491
   },
   "paper/sticky_yellow_02.webp": {
    "family": "paper",
-   "patch_std": 2.288,
-   "floor": 1.2
+   "patch_std": 1.985,
+   "floor": 1.2,
+   "blocks": 2544,
+   "body": 218.0,
+   "field_swing_raw": 13.009,
+   "field_swing": 13.904,
+   "tooth_raw": 1.128,
+   "tooth": 1.205,
+   "tooth_from_blocks": 2523
   },
   "paper/sticky_yellow_02_dusk.webp": {
    "family": "paper",
-   "patch_std": 4.022,
-   "floor": 1.2
+   "patch_std": 3.89,
+   "floor": 1.2,
+   "blocks": 2498,
+   "body": 187.0,
+   "field_swing_raw": 24.188,
+   "field_swing": 30.139,
+   "tooth_raw": 1.282,
+   "tooth": 1.598,
+   "tooth_from_blocks": 472
   },
   "shell/desk.webp": {
    "family": "shell",
-   "patch_std": 14.889,
-   "floor": 4.0
+   "patch_std": 15.38,
+   "floor": 4.0,
+   "blocks": 3924,
+   "body": 105.0,
+   "field_swing_raw": 6.951,
+   "field_swing": 15.425,
+   "tooth_raw": 0.498,
+   "tooth": 1.106,
+   "tooth_from_blocks": 2253
   },
   "shell/desk_dusk.webp": {
    "family": "shell",
-   "patch_std": 19.368,
-   "floor": 4.0
+   "patch_std": 17.157,
+   "floor": 4.0,
+   "blocks": 1202,
+   "body": 69.0,
+   "field_swing_raw": 20.163,
+   "field_swing": 68.086,
+   "tooth_raw": 0.48,
+   "tooth": 1.62,
+   "tooth_from_blocks": 126
   },
   "objects/obj_blanket_fold.webp": {
    "family": "objects",
-   "patch_std": 14.233,
-   "floor": 2.0
+   "patch_std": 14.692,
+   "floor": 2.0,
+   "blocks": 72,
+   "body": 187.0,
+   "field_swing_raw": 30.354,
+   "field_swing": 37.82,
+   "tooth_raw": 0.817,
+   "tooth": 1.017,
+   "tooth_from_blocks": 67,
+   "lit_across": 0.153
   },
   "objects/obj_blanket_fold_dusk.webp": {
    "family": "objects",
-   "patch_std": 24.839,
-   "floor": 2.0
+   "patch_std": 24.764,
+   "floor": 2.0,
+   "blocks": 55,
+   "body": 173.0,
+   "field_swing_raw": 30.061,
+   "field_swing": 40.486,
+   "tooth_raw": 0.866,
+   "tooth": 1.166,
+   "tooth_from_blocks": 35,
+   "lit_across": 7.392
   },
   "objects/obj_boat.webp": {
    "family": "objects",
-   "patch_std": 30.398,
-   "floor": 2.0
+   "patch_std": 28.458,
+   "floor": 2.0,
+   "blocks": 21,
+   "body": 197.0,
+   "field_swing_raw": 37.942,
+   "field_swing": 44.876,
+   "tooth_raw": 0.798,
+   "tooth": 0.944,
+   "tooth_from_blocks": 17,
+   "lit_across": 38.814
   },
   "objects/obj_boat_dusk.webp": {
    "family": "objects",
-   "patch_std": 61.485,
-   "floor": 2.0
+   "patch_std": 56.299,
+   "floor": 2.0,
+   "blocks": 17,
+   "body": 194.5,
+   "field_swing_raw": 35.092,
+   "field_swing": 42.038,
+   "tooth_raw": 0.628,
+   "tooth": 0.752,
+   "tooth_from_blocks": 14,
+   "lit_across": 122.536
   },
   "objects/obj_bookmark.webp": {
    "family": "objects",
-   "patch_std": 8.931,
-   "floor": 2.0
+   "patch_std": 5.673,
+   "floor": 2.0,
+   "blocks": 29,
+   "body": 190.0,
+   "field_swing_raw": 4.249,
+   "field_swing": 5.21,
+   "tooth_raw": 0.602,
+   "tooth": 0.738,
+   "tooth_from_blocks": 29,
+   "lit_across": 2.941
   },
   "objects/obj_bookmark_dusk.webp": {
    "family": "objects",
-   "patch_std": 8.412,
-   "floor": 2.0
+   "patch_std": 6.793,
+   "floor": 2.0,
+   "blocks": 29,
+   "body": 175.0,
+   "field_swing_raw": 3.635,
+   "field_swing": 4.84,
+   "tooth_raw": 0.583,
+   "tooth": 0.776,
+   "tooth_from_blocks": 29,
+   "lit_across": 10.769
   },
   "objects/obj_bunting.webp": {
    "family": "objects",
-   "patch_std": 30.41,
-   "floor": 2.0
+   "patch_std": 31.304,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_bunting_dusk.webp": {
    "family": "objects",
-   "patch_std": 30.265,
-   "floor": 2.0
+   "patch_std": 30.85,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_candle.webp": {
    "family": "objects",
-   "patch_std": 29.639,
-   "floor": 2.0
+   "patch_std": 39.415,
+   "floor": 2.0,
+   "blocks": 53,
+   "body": 217.0,
+   "field_swing_raw": 14.606,
+   "field_swing": 15.683,
+   "tooth_raw": 0.81,
+   "tooth": 0.87,
+   "tooth_from_blocks": 51,
+   "lit_across": 9.584
   },
   "objects/obj_candle_dusk.webp": {
    "family": "objects",
-   "patch_std": 58.846,
-   "floor": 2.0
+   "patch_std": 66.062,
+   "floor": 2.0,
+   "blocks": 59,
+   "body": 217.0,
+   "field_swing_raw": 12.04,
+   "field_swing": 12.928,
+   "tooth_raw": 1.063,
+   "tooth": 1.142,
+   "tooth_from_blocks": 54,
+   "lit_across": 68.454
   },
   "objects/obj_clover.webp": {
    "family": "objects",
-   "patch_std": 11.917,
-   "floor": 2.0
+   "patch_std": 20.652,
+   "floor": 2.0,
+   "blocks": 27,
+   "body": 143.5,
+   "field_swing_raw": 19.857,
+   "field_swing": 32.241,
+   "tooth_raw": 0.561,
+   "tooth": 0.91,
+   "tooth_from_blocks": 13,
+   "lit_across": 10.59
   },
   "objects/obj_clover_dusk.webp": {
    "family": "objects",
-   "patch_std": 22.055,
-   "floor": 2.0
+   "patch_std": 27.674,
+   "floor": 2.0,
+   "blocks": 20,
+   "body": 125.5,
+   "field_swing_raw": 32.01,
+   "field_swing": 59.43,
+   "tooth_raw": 0.612,
+   "tooth": 1.136,
+   "tooth_from_blocks": 5,
+   "lit_across": 9.996
   },
   "objects/obj_coffee_ring.webp": {
    "family": "objects",
-   "patch_std": 29.921,
-   "floor": 2.0
+   "patch_std": 29.986,
+   "floor": 2.0,
+   "blocks": 82,
+   "body": 212.0,
+   "field_swing_raw": 3.952,
+   "field_swing": 4.344,
+   "tooth_raw": 0.873,
+   "tooth": 0.96,
+   "tooth_from_blocks": 80,
+   "lit_across": 4.276
   },
   "objects/obj_coffee_ring_dusk.webp": {
    "family": "objects",
-   "patch_std": 46.81,
-   "floor": 2.0
+   "patch_std": 46.859,
+   "floor": 2.0,
+   "blocks": 79,
+   "body": 192.0,
+   "field_swing_raw": 12.293,
+   "field_swing": 14.918,
+   "tooth_raw": 1.124,
+   "tooth": 1.364,
+   "tooth_from_blocks": 70,
+   "lit_across": 10.408
   },
   "objects/obj_confetti.webp": {
    "family": "objects",
-   "patch_std": 30.064,
-   "floor": 2.0
+   "patch_std": 41.672,
+   "floor": 2.0,
+   "unmeasurable": "only 1 whole blocks of this surface"
   },
   "objects/obj_confetti_dusk.webp": {
    "family": "objects",
-   "patch_std": 67.552,
-   "floor": 2.0
+   "patch_std": 48.082,
+   "floor": 2.0,
+   "unmeasurable": "only 1 whole blocks of this surface"
   },
   "objects/obj_cork.webp": {
    "family": "objects",
-   "patch_std": 25.757,
-   "floor": 2.0
+   "patch_std": 22.949,
+   "floor": 2.0,
+   "blocks": 32,
+   "body": 187.0,
+   "field_swing_raw": 37.436,
+   "field_swing": 46.645,
+   "tooth_raw": 0.776,
+   "tooth": 0.967,
+   "tooth_from_blocks": 25,
+   "lit_across": 65.372
   },
   "objects/obj_cork_dusk.webp": {
    "family": "objects",
-   "patch_std": 65.353,
-   "floor": 2.0
+   "patch_std": 61.171,
+   "floor": 2.0,
+   "blocks": 24,
+   "body": 173.0,
+   "field_swing_raw": 55.932,
+   "field_swing": 75.33,
+   "tooth_raw": 0.833,
+   "tooth": 1.122,
+   "tooth_from_blocks": 4,
+   "lit_across": 146.745
   },
   "objects/obj_crane.webp": {
    "family": "objects",
-   "patch_std": 29.67,
-   "floor": 2.0
+   "patch_std": 32.77,
+   "floor": 2.0,
+   "unmeasurable": "only 9 blocks of this surface are on the surface",
+   "lit_across": 12.723
   },
   "objects/obj_crane_dusk.webp": {
    "family": "objects",
-   "patch_std": 61.902,
-   "floor": 2.0
+   "patch_std": 52.173,
+   "floor": 2.0,
+   "unmeasurable": "only 9 blocks of this surface are on the surface",
+   "lit_across": 28.223
   },
   "objects/obj_crown.webp": {
    "family": "objects",
-   "patch_std": 36.349,
-   "floor": 2.0
+   "patch_std": 25.517,
+   "floor": 2.0,
+   "blocks": 15,
+   "body": 252.0,
+   "field_swing_raw": 11.888,
+   "field_swing": 10.991,
+   "tooth_raw": 0.375,
+   "tooth": 0.347,
+   "tooth_from_blocks": 14,
+   "lit_across": 11.322
   },
   "objects/obj_crown_dusk.webp": {
    "family": "objects",
-   "patch_std": 98.489,
-   "floor": 2.0
+   "patch_std": 95.785,
+   "floor": 2.0,
+   "unmeasurable": "only 7 blocks of this surface are on the surface",
+   "lit_across": 35.24
   },
   "objects/obj_crumple_ball.webp": {
    "family": "objects",
-   "patch_std": 34.552,
-   "floor": 2.0
+   "patch_std": 39.164,
+   "floor": 2.0,
+   "blocks": 52,
+   "body": 241.0,
+   "field_swing_raw": 32.549,
+   "field_swing": 31.469,
+   "tooth_raw": 0.485,
+   "tooth": 0.469,
+   "tooth_from_blocks": 48,
+   "lit_across": 37.774
   },
   "objects/obj_crumple_ball_dusk.webp": {
    "family": "objects",
-   "patch_std": 74.361,
-   "floor": 2.0
+   "patch_std": 65.155,
+   "floor": 2.0,
+   "blocks": 45,
+   "body": 209.5,
+   "field_swing_raw": 57.491,
+   "field_swing": 63.94,
+   "tooth_raw": 0.397,
+   "tooth": 0.442,
+   "tooth_from_blocks": 43,
+   "lit_across": 155.576
   },
   "objects/obj_dog_ear.webp": {
    "family": "objects",
-   "patch_std": 24.348,
-   "floor": 2.0
+   "patch_std": 25.538,
+   "floor": 2.0,
+   "blocks": 64,
+   "body": 210.0,
+   "field_swing_raw": 45.533,
+   "field_swing": 50.52,
+   "tooth_raw": 0.849,
+   "tooth": 0.941,
+   "tooth_from_blocks": 64,
+   "lit_across": 1.284
   },
   "objects/obj_dog_ear_dusk.webp": {
    "family": "objects",
-   "patch_std": 35.712,
-   "floor": 2.0
+   "patch_std": 33.453,
+   "floor": 2.0,
+   "blocks": 59,
+   "body": 190.0,
+   "field_swing_raw": 46.656,
+   "field_swing": 57.215,
+   "tooth_raw": 0.941,
+   "tooth": 1.154,
+   "tooth_from_blocks": 58,
+   "lit_across": 26.751
   },
   "objects/obj_fortune_teller.webp": {
    "family": "objects",
-   "patch_std": 28.651,
-   "floor": 2.0
+   "patch_std": 29.571,
+   "floor": 2.0,
+   "blocks": 64,
+   "body": 210.0,
+   "field_swing_raw": 24.685,
+   "field_swing": 27.389,
+   "tooth_raw": 0.657,
+   "tooth": 0.729,
+   "tooth_from_blocks": 64,
+   "lit_across": 21.186
   },
   "objects/obj_fortune_teller_dusk.webp": {
    "family": "objects",
-   "patch_std": 56.227,
-   "floor": 2.0
+   "patch_std": 53.836,
+   "floor": 2.0,
+   "blocks": 50,
+   "body": 192.0,
+   "field_swing_raw": 37.771,
+   "field_swing": 45.837,
+   "tooth_raw": 0.692,
+   "tooth": 0.839,
+   "tooth_from_blocks": 42,
+   "lit_across": 71.495
   },
   "objects/obj_gold_star.webp": {
    "family": "objects",
-   "patch_std": 30.338,
-   "floor": 2.0
+   "patch_std": 31.273,
+   "floor": 2.0,
+   "blocks": 76,
+   "body": 204.0,
+   "field_swing_raw": 7.4,
+   "field_swing": 8.452,
+   "tooth_raw": 0.768,
+   "tooth": 0.877,
+   "tooth_from_blocks": 75,
+   "lit_across": 8.218
   },
   "objects/obj_gold_star_dusk.webp": {
    "family": "objects",
-   "patch_std": 77.47,
-   "floor": 2.0
+   "patch_std": 82.484,
+   "floor": 2.0,
+   "blocks": 73,
+   "body": 185.0,
+   "field_swing_raw": 10.138,
+   "field_swing": 12.768,
+   "tooth_raw": 0.951,
+   "tooth": 1.198,
+   "tooth_from_blocks": 70,
+   "lit_across": 10.506
   },
   "objects/obj_heart_fold.webp": {
    "family": "objects",
    "patch_std": 14.036,
-   "floor": 2.0
+   "floor": 2.0,
+   "blocks": 71,
+   "body": 240.0,
+   "field_swing_raw": 26.607,
+   "field_swing": 25.831,
+   "tooth_raw": 0.505,
+   "tooth": 0.49,
+   "tooth_from_blocks": 69,
+   "lit_across": 11.678
   },
   "objects/obj_knot.webp": {
    "family": "objects",
-   "patch_std": 25.563,
-   "floor": 2.0
+   "patch_std": 27.783,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_knot_dusk.webp": {
    "family": "objects",
-   "patch_std": 61.698,
-   "floor": 2.0
+   "patch_std": 58.434,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_mug.webp": {
    "family": "objects",
-   "patch_std": 35.659,
-   "floor": 2.0
+   "patch_std": 45.501,
+   "floor": 2.0,
+   "blocks": 55,
+   "body": 217.0,
+   "field_swing_raw": 5.165,
+   "field_swing": 5.546,
+   "tooth_raw": 0.955,
+   "tooth": 1.026,
+   "tooth_from_blocks": 55,
+   "lit_across": 38.765
   },
   "objects/obj_mug_dusk.webp": {
    "family": "objects",
-   "patch_std": 60.497,
-   "floor": 2.0
+   "patch_std": 42.224,
+   "floor": 2.0,
+   "blocks": 61,
+   "body": 188.0,
+   "field_swing_raw": 11.536,
+   "field_swing": 14.298,
+   "tooth_raw": 1.236,
+   "tooth": 1.531,
+   "tooth_from_blocks": 56,
+   "lit_across": 42.837
   },
   "objects/obj_party_hat.webp": {
    "family": "objects",
-   "patch_std": 28.598,
-   "floor": 2.0
+   "patch_std": 25.388,
+   "floor": 2.0,
+   "blocks": 52,
+   "body": 216.5,
+   "field_swing_raw": 35.793,
+   "field_swing": 38.521,
+   "tooth_raw": 0.429,
+   "tooth": 0.461,
+   "tooth_from_blocks": 50,
+   "lit_across": 39.393
   },
   "objects/obj_party_hat_dusk.webp": {
    "family": "objects",
-   "patch_std": 70.968,
-   "floor": 2.0
+   "patch_std": 64.931,
+   "floor": 2.0,
+   "blocks": 34,
+   "body": 201.0,
+   "field_swing_raw": 49.601,
+   "field_swing": 57.498,
+   "tooth_raw": 0.407,
+   "tooth": 0.472,
+   "tooth_from_blocks": 28,
+   "lit_across": 153.828
   },
   "objects/obj_pencil_smudge.webp": {
    "family": "objects",
-   "patch_std": 26.006,
-   "floor": 2.0
+   "patch_std": 26.987,
+   "floor": 2.0,
+   "blocks": 65,
+   "body": 203.0,
+   "field_swing_raw": 1.223,
+   "field_swing": 1.403,
+   "tooth_raw": 0.886,
+   "tooth": 1.017,
+   "tooth_from_blocks": 64,
+   "lit_across": 10.041
   },
   "objects/obj_pencil_smudge_dusk.webp": {
    "family": "objects",
-   "patch_std": 32.827,
-   "floor": 2.0
+   "patch_std": 32.614,
+   "floor": 2.0,
+   "blocks": 75,
+   "body": 183.0,
+   "field_swing_raw": 8.962,
+   "field_swing": 11.411,
+   "tooth_raw": 1.076,
+   "tooth": 1.37,
+   "tooth_from_blocks": 71,
+   "lit_across": 10.286
   },
   "objects/obj_pinch.webp": {
    "family": "objects",
-   "patch_std": 24.083,
-   "floor": 2.0
+   "patch_std": 28.425,
+   "floor": 2.0,
+   "blocks": 20,
+   "body": 200.0,
+   "field_swing_raw": 16.123,
+   "field_swing": 18.783,
+   "tooth_raw": 0.626,
+   "tooth": 0.73,
+   "tooth_from_blocks": 17,
+   "lit_across": 0.355
   },
   "objects/obj_pinch_dusk.webp": {
    "family": "objects",
-   "patch_std": 83.341,
-   "floor": 2.0
+   "patch_std": 76.348,
+   "floor": 2.0,
+   "blocks": 14,
+   "body": 187.0,
+   "field_swing_raw": 48.437,
+   "field_swing": 60.352,
+   "tooth_raw": 0.74,
+   "tooth": 0.922,
+   "tooth_from_blocks": 10,
+   "lit_across": 20.947
   },
   "objects/obj_plane.webp": {
    "family": "objects",
-   "patch_std": 42.049,
-   "floor": 2.0
+   "patch_std": 45.995,
+   "floor": 2.0,
+   "unmeasurable": "only 3 whole blocks of this surface"
   },
   "objects/obj_plane_dusk.webp": {
    "family": "objects",
-   "patch_std": 15.294,
-   "floor": 2.0
+   "patch_std": 33.685,
+   "floor": 2.0,
+   "unmeasurable": "only 3 whole blocks of this surface"
   },
   "objects/obj_plaster.webp": {
    "family": "objects",
-   "patch_std": 28.923,
-   "floor": 2.0
+   "patch_std": 29.277,
+   "floor": 2.0,
+   "blocks": 31,
+   "body": 220.5,
+   "field_swing_raw": 23.203,
+   "field_swing": 24.518,
+   "tooth_raw": 0.831,
+   "tooth": 0.878,
+   "tooth_from_blocks": 31,
+   "lit_across": 10.545
   },
   "objects/obj_plaster_dusk.webp": {
    "family": "objects",
-   "patch_std": 9.291,
-   "floor": 2.0
+   "patch_std": 8.749,
+   "floor": 2.0,
+   "blocks": 33,
+   "body": 191.5,
+   "field_swing_raw": 32.145,
+   "field_swing": 39.111,
+   "tooth_raw": 1.132,
+   "tooth": 1.377,
+   "tooth_from_blocks": 26,
+   "lit_across": 29.424
   },
   "objects/obj_ribbon.webp": {
    "family": "objects",
-   "patch_std": 34.618,
-   "floor": 2.0
+   "patch_std": 36.846,
+   "floor": 2.0,
+   "unmeasurable": "only 9 whole blocks of this surface"
   },
   "objects/obj_ribbon_dusk.webp": {
    "family": "objects",
-   "patch_std": 72.29,
-   "floor": 2.0
+   "patch_std": 66.456,
+   "floor": 2.0,
+   "unmeasurable": "only 9 whole blocks of this surface"
   },
   "objects/obj_rubber_band.webp": {
    "family": "objects",
-   "patch_std": 28.004,
-   "floor": 2.0
+   "patch_std": 31.897,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_rubber_band_dusk.webp": {
    "family": "objects",
-   "patch_std": 48.224,
-   "floor": 2.0
+   "patch_std": 38.122,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_snapped_pencil.webp": {
    "family": "objects",
-   "patch_std": 33.088,
-   "floor": 2.0
+   "patch_std": 35.762,
+   "floor": 2.0,
+   "unmeasurable": "only 6 whole blocks of this surface"
   },
   "objects/obj_snapped_pencil_dusk.webp": {
    "family": "objects",
-   "patch_std": 48.887,
-   "floor": 2.0
+   "patch_std": 42.924,
+   "floor": 2.0,
+   "unmeasurable": "only 6 whole blocks of this surface"
   },
   "objects/obj_spitball.webp": {
    "family": "objects",
-   "patch_std": 29.552,
-   "floor": 2.0
+   "patch_std": 30.81,
+   "floor": 2.0,
+   "blocks": 12,
+   "body": 215.5,
+   "field_swing_raw": 45.082,
+   "field_swing": 48.743,
+   "tooth_raw": 0.361,
+   "tooth": 0.391,
+   "tooth_from_blocks": 8,
+   "lit_across": 44.757
   },
   "objects/obj_spitball_dusk.webp": {
    "family": "objects",
-   "patch_std": 77.082,
-   "floor": 2.0
+   "patch_std": 68.729,
+   "floor": 2.0,
+   "blocks": 11,
+   "body": 227.6,
+   "field_swing_raw": 23.225,
+   "field_swing": 23.773,
+   "tooth_raw": 0.382,
+   "tooth": 0.391,
+   "tooth_from_blocks": 8,
+   "lit_across": 168.829
   },
   "objects/obj_staple_chain.webp": {
    "family": "objects",
-   "patch_std": 56.163,
-   "floor": 2.0
+   "patch_std": 62.152,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_staple_chain_dusk.webp": {
    "family": "objects",
-   "patch_std": 50.989,
-   "floor": 2.0
+   "patch_std": 49.997,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_stone.webp": {
    "family": "objects",
-   "patch_std": 18.542,
-   "floor": 2.0
+   "patch_std": 19.978,
+   "floor": 2.0,
+   "blocks": 58,
+   "body": 162.5,
+   "field_swing_raw": 37.76,
+   "field_swing": 54.142,
+   "tooth_raw": 0.684,
+   "tooth": 0.981,
+   "tooth_from_blocks": 50,
+   "lit_across": 32.528
   },
   "objects/obj_stone_dusk.webp": {
    "family": "objects",
-   "patch_std": 40.606,
-   "floor": 2.0
+   "patch_std": 36.009,
+   "floor": 2.0,
+   "blocks": 43,
+   "body": 147.5,
+   "field_swing_raw": 38.415,
+   "field_swing": 60.683,
+   "tooth_raw": 0.811,
+   "tooth": 1.281,
+   "tooth_from_blocks": 18,
+   "lit_across": 108.709
   },
   "objects/obj_string_loop.webp": {
    "family": "objects",
-   "patch_std": 31.456,
-   "floor": 2.0
+   "patch_std": 35.491,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_string_loop_dusk.webp": {
    "family": "objects",
-   "patch_std": 60.499,
-   "floor": 2.0
+   "patch_std": 49.901,
+   "floor": 2.0,
+   "unmeasurable": "only 0 whole blocks of this surface"
   },
   "objects/obj_ticket.webp": {
    "family": "objects",
-   "patch_std": 3.337,
-   "floor": 2.0
+   "patch_std": 3.354,
+   "floor": 2.0,
+   "blocks": 49,
+   "body": 234.0,
+   "field_swing_raw": 12.834,
+   "field_swing": 12.779,
+   "tooth_raw": 0.616,
+   "tooth": 0.614,
+   "tooth_from_blocks": 49,
+   "lit_across": 1.606
   },
   "objects/obj_ticket_dusk.webp": {
    "family": "objects",
-   "patch_std": 10.495,
-   "floor": 2.0
+   "patch_std": 10.522,
+   "floor": 2.0,
+   "blocks": 45,
+   "body": 199.0,
+   "field_swing_raw": 35.159,
+   "field_swing": 41.166,
+   "tooth_raw": 0.591,
+   "tooth": 0.692,
+   "tooth_from_blocks": 45,
+   "lit_across": 8.798
   },
   "objects/obj_torn_corner.webp": {
    "family": "objects",
-   "patch_std": 3.954,
-   "floor": 2.0
+   "patch_std": 4.05,
+   "floor": 2.0,
+   "blocks": 80,
+   "body": 209.0,
+   "field_swing_raw": 9.852,
+   "field_swing": 10.983,
+   "tooth_raw": 0.737,
+   "tooth": 0.822,
+   "tooth_from_blocks": 80,
+   "lit_across": 7.996
   },
   "objects/obj_torn_corner_dusk.webp": {
    "family": "objects",
-   "patch_std": 9.205,
-   "floor": 2.0
+   "patch_std": 9.21,
+   "floor": 2.0,
+   "blocks": 60,
+   "body": 192.0,
+   "field_swing_raw": 23.402,
+   "field_swing": 28.399,
+   "tooth_raw": 0.976,
+   "tooth": 1.184,
+   "tooth_from_blocks": 57,
+   "lit_across": 30.162
   },
   "objects/obj_user_soup.webp": {
    "family": "objects",
-   "patch_std": 30.2,
-   "floor": 2.0
+   "patch_std": 30.187,
+   "floor": 2.0,
+   "blocks": 78,
+   "body": 213.0,
+   "field_swing_raw": 2.263,
+   "field_swing": 2.475,
+   "tooth_raw": 0.91,
+   "tooth": 0.995,
+   "tooth_from_blocks": 78,
+   "lit_across": 11.239
   },
   "objects/obj_user_soup_dusk.webp": {
    "family": "objects",
-   "patch_std": 39.996,
-   "floor": 2.0
+   "patch_std": 39.976,
+   "floor": 2.0,
+   "blocks": 80,
+   "body": 191.0,
+   "field_swing_raw": 12.433,
+   "field_swing": 15.167,
+   "tooth_raw": 1.156,
+   "tooth": 1.41,
+   "tooth_from_blocks": 78,
+   "lit_across": 4.941
   },
   "objects/obj_wrapper.webp": {
    "family": "objects",
-   "patch_std": 27.314,
-   "floor": 2.0
+   "patch_std": 32.254,
+   "floor": 2.0,
+   "blocks": 14,
+   "body": 194.0,
+   "field_swing_raw": 10.539,
+   "field_swing": 12.658,
+   "tooth_raw": 0.849,
+   "tooth": 1.02,
+   "tooth_from_blocks": 9,
+   "lit_across": 2.201
   },
   "objects/obj_wrapper_dusk.webp": {
    "family": "objects",
-   "patch_std": 36.571,
-   "floor": 2.0
+   "patch_std": 51.545,
+   "floor": 2.0,
+   "blocks": 10,
+   "body": 171.5,
+   "field_swing_raw": 25.236,
+   "field_swing": 34.285,
+   "tooth_raw": 1.16,
+   "tooth": 1.576,
+   "tooth_from_blocks": 3,
+   "lit_across": 44.197
   },
   "folds/unfold_thirds/0000.webp": {
    "family": "folds",
    "patch_std": 2.732,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 43,
+   "body": 240.0,
+   "field_swing_raw": 4.234,
+   "field_swing": 4.11,
+   "tooth_raw": 1.501,
+   "tooth": 1.457,
+   "tooth_from_blocks": 43
   },
   "folds/unfold_thirds/0001.webp": {
    "family": "folds",
    "patch_std": 3.144,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 43,
+   "body": 244.0,
+   "field_swing_raw": 5.088,
+   "field_swing": 4.859,
+   "tooth_raw": 1.524,
+   "tooth": 1.455,
+   "tooth_from_blocks": 43
   },
   "folds/unfold_thirds/0002.webp": {
    "family": "folds",
    "patch_std": 2.791,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 44,
+   "body": 246.0,
+   "field_swing_raw": 2.789,
+   "field_swing": 2.642,
+   "tooth_raw": 1.481,
+   "tooth": 1.403,
+   "tooth_from_blocks": 44
   },
   "folds/unfold_thirds/0003.webp": {
    "family": "folds",
    "patch_std": 2.257,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 43,
+   "body": 247.0,
+   "field_swing_raw": 1.578,
+   "field_swing": 1.488,
+   "tooth_raw": 1.539,
+   "tooth": 1.452,
+   "tooth_from_blocks": 43
   },
   "folds/unfold_thirds/0004.webp": {
    "family": "folds",
    "patch_std": 27.303,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 43,
+   "body": 249.0,
+   "field_swing_raw": 0.877,
+   "field_swing": 0.821,
+   "tooth_raw": 1.517,
+   "tooth": 1.42,
+   "tooth_from_blocks": 43
   },
   "folds/unfold_thirds/0005.webp": {
    "family": "folds",
    "patch_std": 38.934,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 43,
+   "body": 249.0,
+   "field_swing_raw": 0.894,
+   "field_swing": 0.836,
+   "tooth_raw": 1.513,
+   "tooth": 1.415,
+   "tooth_from_blocks": 43
   },
   "folds/unfold_thirds/0006.webp": {
    "family": "folds",
    "patch_std": 45.908,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 43,
+   "body": 250.0,
+   "field_swing_raw": 0.957,
+   "field_swing": 0.892,
+   "tooth_raw": 1.519,
+   "tooth": 1.416,
+   "tooth_from_blocks": 43
   },
   "folds/unfold_thirds/0007.webp": {
    "family": "folds",
    "patch_std": 49.544,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 43,
+   "body": 251.0,
+   "field_swing_raw": 1.414,
+   "field_swing": 1.312,
+   "tooth_raw": 1.425,
+   "tooth": 1.323,
+   "tooth_from_blocks": 43
   },
   "folds/unfold_thirds/0008.webp": {
    "family": "folds",
    "patch_std": 50.781,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 29,
+   "body": 251.0,
+   "field_swing_raw": 1.286,
+   "field_swing": 1.194,
+   "tooth_raw": 1.422,
+   "tooth": 1.32,
+   "tooth_from_blocks": 29
   },
   "folds/unfold_thirds/0009.webp": {
    "family": "folds",
    "patch_std": 49.28,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 29,
+   "body": 251.0,
+   "field_swing_raw": 1.353,
+   "field_swing": 1.256,
+   "tooth_raw": 1.367,
+   "tooth": 1.269,
+   "tooth_from_blocks": 29
   },
   "folds/unfold_thirds/0010.webp": {
    "family": "folds",
    "patch_std": 49.747,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 29,
+   "body": 250.0,
+   "field_swing_raw": 1.401,
+   "field_swing": 1.306,
+   "tooth_raw": 1.327,
+   "tooth": 1.236,
+   "tooth_from_blocks": 29
   },
   "folds/unfold_thirds/0011.webp": {
    "family": "folds",
    "patch_std": 48.939,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 29,
+   "body": 249.0,
+   "field_swing_raw": 1.844,
+   "field_swing": 1.726,
+   "tooth_raw": 1.338,
+   "tooth": 1.252,
+   "tooth_from_blocks": 29
   },
   "folds/unfold_thirds/0012.webp": {
    "family": "folds",
    "patch_std": 48.205,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 29,
+   "body": 248.0,
+   "field_swing_raw": 2.16,
+   "field_swing": 2.029,
+   "tooth_raw": 1.306,
+   "tooth": 1.227,
+   "tooth_from_blocks": 29
   },
   "folds/unfold_thirds/0013.webp": {
    "family": "folds",
    "patch_std": 48.127,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 28,
+   "body": 160.0,
+   "field_swing_raw": 8.201,
+   "field_swing": 11.942,
+   "tooth_raw": 1.081,
+   "tooth": 1.574,
+   "tooth_from_blocks": 16
   },
   "folds/unfold_thirds/0014.webp": {
    "family": "folds",
    "patch_std": 45.256,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 27,
+   "body": 160.0,
+   "field_swing_raw": 7.769,
+   "field_swing": 11.314,
+   "tooth_raw": 1.147,
+   "tooth": 1.671,
+   "tooth_from_blocks": 27
   },
   "folds/unfold_thirds/0015.webp": {
    "family": "folds",
    "patch_std": 39.682,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 27,
+   "body": 161.0,
+   "field_swing_raw": 6.276,
+   "field_swing": 9.082,
+   "tooth_raw": 1.141,
+   "tooth": 1.651,
+   "tooth_from_blocks": 27
   },
   "folds/unfold_thirds/0016.webp": {
    "family": "folds",
    "patch_std": 29.384,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 27,
+   "body": 162.0,
+   "field_swing_raw": 6.052,
+   "field_swing": 8.704,
+   "tooth_raw": 1.062,
+   "tooth": 1.527,
+   "tooth_from_blocks": 27
   },
   "folds/unfold_thirds/0017.webp": {
    "family": "folds",
    "patch_std": 4.46,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 27,
+   "body": 162.0,
+   "field_swing_raw": 5.086,
+   "field_swing": 7.316,
+   "tooth_raw": 1.101,
+   "tooth": 1.584,
+   "tooth_from_blocks": 27
   },
   "folds/unfold_thirds/0018.webp": {
    "family": "folds",
    "patch_std": 3.932,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 40,
+   "body": 160.0,
+   "field_swing_raw": 8.454,
+   "field_swing": 12.311,
+   "tooth_raw": 1.072,
+   "tooth": 1.561,
+   "tooth_from_blocks": 28
   },
   "folds/unfold_thirds/0019.webp": {
    "family": "folds",
    "patch_std": 9.034,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 40,
+   "body": 161.0,
+   "field_swing_raw": 9.157,
+   "field_swing": 13.251,
+   "tooth_raw": 1.083,
+   "tooth": 1.567,
+   "tooth_from_blocks": 38
   },
   "folds/unfold_thirds/0020.webp": {
    "family": "folds",
    "patch_std": 17.05,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 41,
+   "body": 161.0,
+   "field_swing_raw": 8.536,
+   "field_swing": 12.353,
+   "tooth_raw": 1.105,
+   "tooth": 1.599,
+   "tooth_from_blocks": 27
   },
   "folds/unfold_thirds/0021.webp": {
    "family": "folds",
    "patch_std": 22.929,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 28,
+   "body": 164.0,
+   "field_swing_raw": 3.74,
+   "field_swing": 5.313,
+   "tooth_raw": 1.115,
+   "tooth": 1.584,
+   "tooth_from_blocks": 27
   },
   "folds/unfold_thirds/0022.webp": {
    "family": "folds",
    "patch_std": 27.147,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 42,
+   "body": 164.0,
+   "field_swing_raw": 20.013,
+   "field_swing": 28.433,
+   "tooth_raw": 1.079,
+   "tooth": 1.533,
+   "tooth_from_blocks": 28
   },
   "folds/unfold_thirds/0023.webp": {
    "family": "folds",
    "patch_std": 30.792,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 27,
+   "body": 178.0,
+   "field_swing_raw": 18.625,
+   "field_swing": 24.381,
+   "tooth_raw": 1.102,
+   "tooth": 1.443,
+   "tooth_from_blocks": 15
   },
   "folds/unfold_thirds/0024.webp": {
    "family": "folds",
    "patch_std": 32.733,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 27,
+   "body": 179.0,
+   "field_swing_raw": 20.581,
+   "field_swing": 26.79,
+   "tooth_raw": 1.045,
+   "tooth": 1.361,
+   "tooth_from_blocks": 27
   },
   "folds/unfold_thirds/0025.webp": {
    "family": "folds",
    "patch_std": 34.066,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 15,
+   "body": 180.5,
+   "field_swing_raw": 4.296,
+   "field_swing": 5.545,
+   "tooth_raw": 1.106,
+   "tooth": 1.427,
+   "tooth_from_blocks": 15
   },
   "folds/unfold_thirds/0026.webp": {
    "family": "folds",
    "patch_std": 35.274,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 15,
+   "body": 181.0,
+   "field_swing_raw": 3.286,
+   "field_swing": 4.23,
+   "tooth_raw": 1.219,
+   "tooth": 1.569,
+   "tooth_from_blocks": 15
   },
   "folds/unfold_thirds/0027.webp": {
    "family": "folds",
    "patch_std": 35.807,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 17,
+   "body": 181.0,
+   "field_swing_raw": 17.359,
+   "field_swing": 22.346,
+   "tooth_raw": 1.141,
+   "tooth": 1.469,
+   "tooth_from_blocks": 15
   },
   "folds/unfold_thirds/0028.webp": {
    "family": "folds",
    "patch_std": 35.989,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 28,
+   "body": 181.0,
+   "field_swing_raw": 11.297,
+   "field_swing": 14.542,
+   "tooth_raw": 1.104,
+   "tooth": 1.421,
+   "tooth_from_blocks": 13
   },
   "folds/unfold_thirds/0029.webp": {
    "family": "folds",
    "patch_std": 35.692,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 30,
+   "body": 181.0,
+   "field_swing_raw": 8.431,
+   "field_swing": 10.853,
+   "tooth_raw": 1.193,
+   "tooth": 1.536,
+   "tooth_from_blocks": 21
   },
   "folds/unfold_thirds/0030.webp": {
    "family": "folds",
    "patch_std": 35.316,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 31,
+   "body": 209.0,
+   "field_swing_raw": 1.282,
+   "field_swing": 1.429,
+   "tooth_raw": 1.421,
+   "tooth": 1.584,
+   "tooth_from_blocks": 31
   },
   "folds/unfold_thirds/0031.webp": {
    "family": "folds",
    "patch_std": 35.372,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 29,
+   "body": 181.0,
+   "field_swing_raw": 4.02,
+   "field_swing": 5.175,
+   "tooth_raw": 1.138,
+   "tooth": 1.466,
+   "tooth_from_blocks": 28
   },
   "folds/unfold_thirds/0032.webp": {
    "family": "folds",
    "patch_std": 35.606,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 38,
+   "body": 181.0,
+   "field_swing_raw": 16.567,
+   "field_swing": 21.326,
+   "tooth_raw": 1.13,
+   "tooth": 1.455,
+   "tooth_from_blocks": 28
   },
   "folds/unfold_thirds/0033.webp": {
    "family": "folds",
    "patch_std": 35.468,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 30,
+   "body": 183.0,
+   "field_swing_raw": 1.898,
+   "field_swing": 2.417,
+   "tooth_raw": 1.204,
+   "tooth": 1.533,
+   "tooth_from_blocks": 30
   },
   "folds/unfold_thirds/0034.webp": {
    "family": "folds",
    "patch_std": 34.742,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 61,
+   "body": 194.0,
+   "field_swing_raw": 60.596,
+   "field_swing": 72.778,
+   "tooth_raw": 1.264,
+   "tooth": 1.518,
+   "tooth_from_blocks": 61
   },
   "folds/unfold_thirds/0035.webp": {
    "family": "folds",
    "patch_std": 33.613,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 31,
+   "body": 211.8,
+   "field_swing_raw": 1.915,
+   "field_swing": 2.107,
+   "tooth_raw": 1.455,
+   "tooth": 1.601,
+   "tooth_from_blocks": 31
   },
   "folds/unfold_thirds/0036.webp": {
    "family": "folds",
    "patch_std": 31.955,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 32,
+   "body": 227.2,
+   "field_swing_raw": 2.302,
+   "field_swing": 2.36,
+   "tooth_raw": 1.441,
+   "tooth": 1.477,
+   "tooth_from_blocks": 31
   },
   "folds/unfold_thirds/0037.webp": {
    "family": "folds",
    "patch_std": 30.403,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 57,
+   "body": 233.5,
+   "field_swing_raw": 4.58,
+   "field_swing": 4.571,
+   "tooth_raw": 1.503,
+   "tooth": 1.5,
+   "tooth_from_blocks": 43
   },
   "folds/unfold_thirds/0038.webp": {
    "family": "folds",
    "patch_std": 28.554,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 50,
+   "body": 234.5,
+   "field_swing_raw": 6.546,
+   "field_swing": 6.504,
+   "tooth_raw": 1.495,
+   "tooth": 1.485,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0039.webp": {
    "family": "folds",
    "patch_std": 26.851,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 45,
+   "body": 225.2,
+   "field_swing_raw": 1.79,
+   "field_swing": 1.851,
+   "tooth_raw": 1.442,
+   "tooth": 1.492,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0040.webp": {
    "family": "folds",
    "patch_std": 25.378,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 45,
+   "body": 215.0,
+   "field_swing_raw": 1.551,
+   "field_swing": 1.681,
+   "tooth_raw": 1.442,
+   "tooth": 1.562,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0041.webp": {
    "family": "folds",
    "patch_std": 24.126,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 45,
+   "body": 216.0,
+   "field_swing_raw": 1.569,
+   "field_swing": 1.692,
+   "tooth_raw": 1.421,
+   "tooth": 1.533,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0042.webp": {
    "family": "folds",
    "patch_std": 22.921,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 45,
+   "body": 217.0,
+   "field_swing_raw": 1.756,
+   "field_swing": 1.886,
+   "tooth_raw": 1.413,
+   "tooth": 1.517,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0043.webp": {
    "family": "folds",
    "patch_std": 21.723,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 45,
+   "body": 218.0,
+   "field_swing_raw": 1.694,
+   "field_swing": 1.811,
+   "tooth_raw": 1.456,
+   "tooth": 1.556,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0044.webp": {
    "family": "folds",
    "patch_std": 20.67,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 45,
+   "body": 239.0,
+   "field_swing_raw": 1.81,
+   "field_swing": 1.765,
+   "tooth_raw": 1.481,
+   "tooth": 1.443,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0045.webp": {
    "family": "folds",
    "patch_std": 19.531,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 70,
+   "body": 220.0,
+   "field_swing_raw": 39.1,
+   "field_swing": 41.411,
+   "tooth_raw": 1.441,
+   "tooth": 1.526,
+   "tooth_from_blocks": 70
   },
   "folds/unfold_thirds/0046.webp": {
    "family": "folds",
    "patch_std": 18.425,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 221.5,
+   "field_swing_raw": 37.639,
+   "field_swing": 39.593,
+   "tooth_raw": 1.45,
+   "tooth": 1.526,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0047.webp": {
    "family": "folds",
    "patch_std": 17.413,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 45,
+   "body": 238.0,
+   "field_swing_raw": 2.118,
+   "field_swing": 2.073,
+   "tooth_raw": 1.459,
+   "tooth": 1.428,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0048.webp": {
    "family": "folds",
    "patch_std": 16.308,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 223.5,
+   "field_swing_raw": 33.457,
+   "field_swing": 34.879,
+   "tooth_raw": 1.473,
+   "tooth": 1.536,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0049.webp": {
    "family": "folds",
    "patch_std": 15.332,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 224.5,
+   "field_swing_raw": 31.415,
+   "field_swing": 32.604,
+   "tooth_raw": 1.473,
+   "tooth": 1.529,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0050.webp": {
    "family": "folds",
    "patch_std": 14.364,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 224.5,
+   "field_swing_raw": 29.682,
+   "field_swing": 30.806,
+   "tooth_raw": 1.475,
+   "tooth": 1.53,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0051.webp": {
    "family": "folds",
    "patch_std": 13.447,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 45,
+   "body": 237.0,
+   "field_swing_raw": 2.068,
+   "field_swing": 2.033,
+   "tooth_raw": 1.535,
+   "tooth": 1.509,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0052.webp": {
    "family": "folds",
    "patch_std": 12.559,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 226.5,
+   "field_swing_raw": 25.91,
+   "field_swing": 26.654,
+   "tooth_raw": 1.531,
+   "tooth": 1.575,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0053.webp": {
    "family": "folds",
    "patch_std": 11.617,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 227.5,
+   "field_swing_raw": 24.231,
+   "field_swing": 24.817,
+   "tooth_raw": 1.537,
+   "tooth": 1.575,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0054.webp": {
    "family": "folds",
    "patch_std": 10.776,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 228.0,
+   "field_swing_raw": 22.718,
+   "field_swing": 23.216,
+   "tooth_raw": 1.508,
+   "tooth": 1.541,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0055.webp": {
    "family": "folds",
    "patch_std": 9.988,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 229.0,
+   "field_swing_raw": 21.15,
+   "field_swing": 21.519,
+   "tooth_raw": 1.553,
+   "tooth": 1.58,
+   "tooth_from_blocks": 89
   },
   "folds/unfold_thirds/0056.webp": {
    "family": "folds",
    "patch_std": 9.241,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 229.0,
+   "field_swing_raw": 19.458,
+   "field_swing": 19.798,
+   "tooth_raw": 1.535,
+   "tooth": 1.562,
+   "tooth_from_blocks": 89
   },
   "folds/unfold_thirds/0057.webp": {
    "family": "folds",
    "patch_std": 8.491,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 230.5,
+   "field_swing_raw": 18.211,
+   "field_swing": 18.408,
+   "tooth_raw": 1.508,
+   "tooth": 1.524,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0058.webp": {
    "family": "folds",
    "patch_std": 7.804,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 75,
+   "body": 237.0,
+   "field_swing_raw": 16.204,
+   "field_swing": 15.93,
+   "tooth_raw": 1.607,
+   "tooth": 1.58,
+   "tooth_from_blocks": 75
   },
   "folds/unfold_thirds/0059.webp": {
    "family": "folds",
    "patch_std": 7.223,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 88,
+   "body": 236.0,
+   "field_swing_raw": 15.579,
+   "field_swing": 15.381,
+   "tooth_raw": 1.645,
+   "tooth": 1.624,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0060.webp": {
    "family": "folds",
    "patch_std": 6.575,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 88,
+   "body": 236.0,
+   "field_swing_raw": 14.377,
+   "field_swing": 14.194,
+   "tooth_raw": 1.572,
+   "tooth": 1.552,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0061.webp": {
    "family": "folds",
    "patch_std": 6.025,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 89,
+   "body": 236.0,
+   "field_swing_raw": 13.33,
+   "field_swing": 13.161,
+   "tooth_raw": 1.592,
+   "tooth": 1.572,
+   "tooth_from_blocks": 89
   },
   "folds/unfold_thirds/0062.webp": {
    "family": "folds",
    "patch_std": 5.5,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 89,
+   "body": 236.0,
+   "field_swing_raw": 12.224,
+   "field_swing": 12.069,
+   "tooth_raw": 1.573,
+   "tooth": 1.553,
+   "tooth_from_blocks": 89
   },
   "folds/unfold_thirds/0063.webp": {
    "family": "folds",
    "patch_std": 5.05,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 76,
+   "body": 237.0,
+   "field_swing_raw": 10.485,
+   "field_swing": 10.308,
+   "tooth_raw": 1.565,
+   "tooth": 1.538,
+   "tooth_from_blocks": 76
   },
   "folds/unfold_thirds/0064.webp": {
    "family": "folds",
    "patch_std": 4.612,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 234.0,
+   "field_swing_raw": 10.329,
+   "field_swing": 10.285,
+   "tooth_raw": 1.58,
+   "tooth": 1.573,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0065.webp": {
    "family": "folds",
    "patch_std": 4.21,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 234.0,
+   "field_swing_raw": 9.374,
+   "field_swing": 9.334,
+   "tooth_raw": 1.567,
+   "tooth": 1.56,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0066.webp": {
    "family": "folds",
    "patch_std": 3.867,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 235.0,
+   "field_swing_raw": 8.442,
+   "field_swing": 8.37,
+   "tooth_raw": 1.584,
+   "tooth": 1.571,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0067.webp": {
    "family": "folds",
    "patch_std": 3.639,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 235.5,
+   "field_swing_raw": 7.752,
+   "field_swing": 7.669,
+   "tooth_raw": 1.584,
+   "tooth": 1.567,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0068.webp": {
    "family": "folds",
    "patch_std": 3.345,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 88,
+   "body": 237.0,
+   "field_swing_raw": 6.811,
+   "field_swing": 6.696,
+   "tooth_raw": 1.592,
+   "tooth": 1.565,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0069.webp": {
    "family": "folds",
    "patch_std": 3.175,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 236.0,
+   "field_swing_raw": 6.284,
+   "field_swing": 6.204,
+   "tooth_raw": 1.591,
+   "tooth": 1.571,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0070.webp": {
    "family": "folds",
    "patch_std": 3.016,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 236.5,
+   "field_swing_raw": 5.532,
+   "field_swing": 5.45,
+   "tooth_raw": 1.581,
+   "tooth": 1.557,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0071.webp": {
    "family": "folds",
    "patch_std": 2.854,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 237.0,
+   "field_swing_raw": 4.882,
+   "field_swing": 4.799,
+   "tooth_raw": 1.596,
+   "tooth": 1.569,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0072.webp": {
    "family": "folds",
    "patch_std": 2.728,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 76,
+   "body": 238.0,
+   "field_swing_raw": 3.434,
+   "field_swing": 3.362,
+   "tooth_raw": 1.529,
+   "tooth": 1.496,
+   "tooth_from_blocks": 76
   },
   "folds/unfold_thirds/0073.webp": {
    "family": "folds",
    "patch_std": 2.64,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 238.0,
+   "field_swing_raw": 3.75,
+   "field_swing": 3.671,
+   "tooth_raw": 1.576,
+   "tooth": 1.543,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0074.webp": {
    "family": "folds",
    "patch_std": 2.614,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 238.0,
+   "field_swing_raw": 3.223,
+   "field_swing": 3.155,
+   "tooth_raw": 1.558,
+   "tooth": 1.526,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0075.webp": {
    "family": "folds",
    "patch_std": 2.559,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 88,
+   "body": 238.0,
+   "field_swing_raw": 2.659,
+   "field_swing": 2.603,
+   "tooth_raw": 1.536,
+   "tooth": 1.504,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0076.webp": {
    "family": "folds",
    "patch_std": 2.557,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 239.0,
+   "field_swing_raw": 2.323,
+   "field_swing": 2.265,
+   "tooth_raw": 1.528,
+   "tooth": 1.49,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0077.webp": {
    "family": "folds",
    "patch_std": 2.594,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 239.0,
+   "field_swing_raw": 1.989,
+   "field_swing": 1.939,
+   "tooth_raw": 1.531,
+   "tooth": 1.493,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0078.webp": {
    "family": "folds",
    "patch_std": 2.629,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 89,
+   "body": 239.0,
+   "field_swing_raw": 1.687,
+   "field_swing": 1.645,
+   "tooth_raw": 1.554,
+   "tooth": 1.515,
+   "tooth_from_blocks": 89
   },
   "folds/unfold_thirds/0079.webp": {
    "family": "folds",
    "patch_std": 2.734,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 75,
+   "body": 240.0,
+   "field_swing_raw": 1.902,
+   "field_swing": 1.847,
+   "tooth_raw": 1.515,
+   "tooth": 1.471,
+   "tooth_from_blocks": 75
   },
   "folds/unfold_thirds/0080.webp": {
    "family": "folds",
    "patch_std": 2.739,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 240.0,
+   "field_swing_raw": 2.054,
+   "field_swing": 1.994,
+   "tooth_raw": 1.531,
+   "tooth": 1.486,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0081.webp": {
    "family": "folds",
    "patch_std": 2.851,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 240.0,
+   "field_swing_raw": 2.414,
+   "field_swing": 2.343,
+   "tooth_raw": 1.548,
+   "tooth": 1.503,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0082.webp": {
    "family": "folds",
    "patch_std": 2.918,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 88,
+   "body": 240.0,
+   "field_swing_raw": 2.627,
+   "field_swing": 2.55,
+   "tooth_raw": 1.521,
+   "tooth": 1.476,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0083.webp": {
    "family": "folds",
    "patch_std": 2.999,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 240.0,
+   "field_swing_raw": 2.792,
+   "field_swing": 2.71,
+   "tooth_raw": 1.528,
+   "tooth": 1.483,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0084.webp": {
    "family": "folds",
    "patch_std": 3.158,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 239.5,
+   "field_swing_raw": 3.766,
+   "field_swing": 3.664,
+   "tooth_raw": 1.533,
+   "tooth": 1.491,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0085.webp": {
    "family": "folds",
    "patch_std": 3.826,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 238.5,
+   "field_swing_raw": 6.325,
+   "field_swing": 6.179,
+   "tooth_raw": 1.544,
+   "tooth": 1.508,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0086.webp": {
    "family": "folds",
    "patch_std": 4.827,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 237.0,
+   "field_swing_raw": 9.015,
+   "field_swing": 8.863,
+   "tooth_raw": 1.504,
+   "tooth": 1.478,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0087.webp": {
    "family": "folds",
    "patch_std": 6.153,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 79,
+   "body": 231.0,
+   "field_swing_raw": 12.296,
+   "field_swing": 12.403,
+   "tooth_raw": 1.464,
+   "tooth": 1.476,
+   "tooth_from_blocks": 77
   },
   "folds/unfold_thirds/0088.webp": {
    "family": "folds",
    "patch_std": 7.688,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 234.5,
+   "field_swing_raw": 15.418,
+   "field_swing": 15.32,
+   "tooth_raw": 1.585,
+   "tooth": 1.575,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0089.webp": {
    "family": "folds",
    "patch_std": 9.466,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 233.5,
+   "field_swing_raw": 19.013,
+   "field_swing": 18.972,
+   "tooth_raw": 1.57,
+   "tooth": 1.567,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0090.webp": {
    "family": "folds",
    "patch_std": 11.189,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 231.5,
+   "field_swing_raw": 22.913,
+   "field_swing": 23.061,
+   "tooth_raw": 1.476,
+   "tooth": 1.486,
+   "tooth_from_blocks": 89
   },
   "folds/unfold_thirds/0091.webp": {
    "family": "folds",
    "patch_std": 13.037,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 230.0,
+   "field_swing_raw": 26.598,
+   "field_swing": 26.945,
+   "tooth_raw": 1.475,
+   "tooth": 1.494,
+   "tooth_from_blocks": 89
   },
   "folds/unfold_thirds/0092.webp": {
    "family": "folds",
    "patch_std": 14.898,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 228.0,
+   "field_swing_raw": 30.281,
+   "field_swing": 30.945,
+   "tooth_raw": 1.479,
+   "tooth": 1.512,
+   "tooth_from_blocks": 88
   },
   "folds/unfold_thirds/0093.webp": {
    "family": "folds",
    "patch_std": 16.858,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 89,
+   "body": 228.5,
+   "field_swing_raw": 34.108,
+   "field_swing": 34.78,
+   "tooth_raw": 1.457,
+   "tooth": 1.485,
+   "tooth_from_blocks": 83
   },
   "folds/unfold_thirds/0094.webp": {
    "family": "folds",
    "patch_std": 18.746,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 45,
+   "body": 234.8,
+   "field_swing_raw": 2.36,
+   "field_swing": 2.342,
+   "tooth_raw": 1.595,
+   "tooth": 1.583,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0095.webp": {
    "family": "folds",
    "patch_std": 20.607,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 60,
+   "body": 242.0,
+   "field_swing_raw": 3.179,
+   "field_swing": 3.061,
+   "tooth_raw": 1.541,
+   "tooth": 1.484,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0096.webp": {
    "family": "folds",
    "patch_std": 22.129,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 60,
+   "body": 242.0,
+   "field_swing_raw": 3.2,
+   "field_swing": 3.081,
+   "tooth_raw": 1.592,
+   "tooth": 1.533,
+   "tooth_from_blocks": 47
   },
   "folds/unfold_thirds/0097.webp": {
    "family": "folds",
    "patch_std": 23.728,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 60,
+   "body": 242.0,
+   "field_swing_raw": 2.77,
+   "field_swing": 2.667,
+   "tooth_raw": 1.587,
+   "tooth": 1.528,
+   "tooth_from_blocks": 45
   },
   "folds/unfold_thirds/0098.webp": {
    "family": "folds",
    "patch_std": 25.296,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 60,
+   "body": 242.0,
+   "field_swing_raw": 2.735,
+   "field_swing": 2.633,
+   "tooth_raw": 1.599,
+   "tooth": 1.54,
+   "tooth_from_blocks": 51
   },
   "folds/unfold_thirds/0099.webp": {
    "family": "folds",
    "patch_std": 26.878,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 59,
+   "body": 243.0,
+   "field_swing_raw": 2.838,
+   "field_swing": 2.721,
+   "tooth_raw": 1.58,
+   "tooth": 1.515,
+   "tooth_from_blocks": 58
   },
   "folds/unfold_thirds/0100.webp": {
    "family": "folds",
    "patch_std": 28.624,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 60,
+   "body": 243.0,
+   "field_swing_raw": 2.889,
+   "field_swing": 2.77,
+   "tooth_raw": 1.572,
+   "tooth": 1.508,
+   "tooth_from_blocks": 60
   },
   "folds/unfold_thirds/0101.webp": {
    "family": "folds",
    "patch_std": 31.514,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 60,
+   "body": 243.0,
+   "field_swing_raw": 2.847,
+   "field_swing": 2.73,
+   "tooth_raw": 1.552,
+   "tooth": 1.488,
+   "tooth_from_blocks": 60
   },
   "folds/unfold_thirds/0102.webp": {
    "family": "folds",
    "patch_std": 32.8,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 59,
+   "body": 243.0,
+   "field_swing_raw": 3.518,
+   "field_swing": 3.373,
+   "tooth_raw": 1.542,
+   "tooth": 1.478,
+   "tooth_from_blocks": 59
   },
   "folds/unfold_thirds/0103.webp": {
    "family": "folds",
    "patch_std": 33.023,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 60,
+   "body": 243.0,
+   "field_swing_raw": 4.164,
+   "field_swing": 3.992,
+   "tooth_raw": 1.563,
+   "tooth": 1.499,
+   "tooth_from_blocks": 60
   },
   "folds/unfold_thirds/0104.webp": {
    "family": "folds",
    "patch_std": 33.035,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 60,
+   "body": 243.1,
+   "field_swing_raw": 4.294,
+   "field_swing": 4.115,
+   "tooth_raw": 1.582,
+   "tooth": 1.516,
+   "tooth_from_blocks": 60
   },
   "folds/unfold_thirds/0105.webp": {
    "family": "folds",
    "patch_std": 32.895,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 75,
+   "body": 245.0,
+   "field_swing_raw": 5.369,
+   "field_swing": 5.106,
+   "tooth_raw": 1.548,
+   "tooth": 1.473,
+   "tooth_from_blocks": 75
   },
   "folds/unfold_thirds/0106.webp": {
    "family": "folds",
    "patch_std": 32.487,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 75,
+   "body": 245.0,
+   "field_swing_raw": 5.59,
+   "field_swing": 5.316,
+   "tooth_raw": 1.548,
+   "tooth": 1.472,
+   "tooth_from_blocks": 75
   },
   "folds/unfold_thirds/0107.webp": {
    "family": "folds",
    "patch_std": 31.79,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 75,
+   "body": 245.0,
+   "field_swing_raw": 6.063,
+   "field_swing": 5.766,
+   "tooth_raw": 1.546,
+   "tooth": 1.47,
+   "tooth_from_blocks": 75
   },
   "folds/unfold_thirds/0108.webp": {
    "family": "folds",
    "patch_std": 30.757,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 75,
+   "body": 245.0,
+   "field_swing_raw": 6.362,
+   "field_swing": 6.051,
+   "tooth_raw": 1.548,
+   "tooth": 1.472,
+   "tooth_from_blocks": 75
   },
   "folds/unfold_thirds/0109.webp": {
    "family": "folds",
    "patch_std": 29.545,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 75,
+   "body": 245.0,
+   "field_swing_raw": 6.756,
+   "field_swing": 6.425,
+   "tooth_raw": 1.537,
+   "tooth": 1.462,
+   "tooth_from_blocks": 75
   },
   "folds/unfold_thirds/0110.webp": {
    "family": "folds",
    "patch_std": 27.808,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 75,
+   "body": 245.0,
+   "field_swing_raw": 6.783,
+   "field_swing": 6.451,
+   "tooth_raw": 1.564,
+   "tooth": 1.488,
+   "tooth_from_blocks": 75
   },
   "folds/unfold_thirds/0111.webp": {
    "family": "folds",
    "patch_std": 25.647,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 75,
+   "body": 245.0,
+   "field_swing_raw": 6.862,
+   "field_swing": 6.526,
+   "tooth_raw": 1.544,
+   "tooth": 1.468,
+   "tooth_from_blocks": 75
   },
   "folds/unfold_thirds/0112.webp": {
    "family": "folds",
    "patch_std": 23.138,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.6,
+   "field_swing_raw": 8.628,
+   "field_swing": 8.184,
+   "tooth_raw": 1.531,
+   "tooth": 1.452,
+   "tooth_from_blocks": 89
   },
   "folds/unfold_thirds/0113.webp": {
    "family": "folds",
    "patch_std": 19.359,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 246.0,
+   "field_swing_raw": 8.762,
+   "field_swing": 8.299,
+   "tooth_raw": 1.556,
+   "tooth": 1.474,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0114.webp": {
    "family": "folds",
    "patch_std": 14.148,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 246.0,
+   "field_swing_raw": 8.931,
+   "field_swing": 8.459,
+   "tooth_raw": 1.541,
+   "tooth": 1.459,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0115.webp": {
    "family": "folds",
    "patch_std": 3.928,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.5,
+   "field_swing_raw": 8.877,
+   "field_swing": 8.425,
+   "tooth_raw": 1.544,
+   "tooth": 1.465,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0116.webp": {
    "family": "folds",
    "patch_std": 3.366,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.0,
+   "field_swing_raw": 8.835,
+   "field_swing": 8.403,
+   "tooth_raw": 1.539,
+   "tooth": 1.463,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0117.webp": {
    "family": "folds",
    "patch_std": 3.357,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.0,
+   "field_swing_raw": 8.861,
+   "field_swing": 8.427,
+   "tooth_raw": 1.547,
+   "tooth": 1.471,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0118.webp": {
    "family": "folds",
    "patch_std": 3.33,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.0,
+   "field_swing_raw": 8.66,
+   "field_swing": 8.236,
+   "tooth_raw": 1.55,
+   "tooth": 1.474,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0119.webp": {
    "family": "folds",
    "patch_std": 3.277,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.0,
+   "field_swing_raw": 8.344,
+   "field_swing": 7.936,
+   "tooth_raw": 1.537,
+   "tooth": 1.462,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0120.webp": {
    "family": "folds",
    "patch_std": 3.221,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.0,
+   "field_swing_raw": 8.12,
+   "field_swing": 7.722,
+   "tooth_raw": 1.549,
+   "tooth": 1.474,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0121.webp": {
    "family": "folds",
    "patch_std": 3.181,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.0,
+   "field_swing_raw": 7.681,
+   "field_swing": 7.305,
+   "tooth_raw": 1.534,
+   "tooth": 1.459,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0122.webp": {
    "family": "folds",
    "patch_std": 3.215,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.0,
+   "field_swing_raw": 7.482,
+   "field_swing": 7.116,
+   "tooth_raw": 1.533,
+   "tooth": 1.458,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0123.webp": {
    "family": "folds",
    "patch_std": 3.361,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 90,
+   "body": 245.0,
+   "field_swing_raw": 7.151,
+   "field_swing": 6.801,
+   "tooth_raw": 1.549,
+   "tooth": 1.473,
+   "tooth_from_blocks": 90
   },
   "folds/unfold_thirds/0124.webp": {
    "family": "folds",
    "patch_std": 3.316,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 105,
+   "body": 245.0,
+   "field_swing_raw": 8.046,
+   "field_swing": 7.652,
+   "tooth_raw": 1.529,
+   "tooth": 1.454,
+   "tooth_from_blocks": 105
   },
   "folds/unfold_thirds/0125.webp": {
    "family": "folds",
    "patch_std": 3.357,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 105,
+   "body": 245.0,
+   "field_swing_raw": 7.919,
+   "field_swing": 7.531,
+   "tooth_raw": 1.532,
+   "tooth": 1.457,
+   "tooth_from_blocks": 105
   },
   "folds/unfold_thirds/0126.webp": {
    "family": "folds",
    "patch_std": 3.281,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 105,
+   "body": 244.0,
+   "field_swing_raw": 7.93,
+   "field_swing": 7.572,
+   "tooth_raw": 1.509,
+   "tooth": 1.441,
+   "tooth_from_blocks": 105
   },
   "folds/unfold_thirds/0127.webp": {
    "family": "folds",
    "patch_std": 3.465,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 105,
+   "body": 244.0,
+   "field_swing_raw": 8.045,
+   "field_swing": 7.682,
+   "tooth_raw": 1.506,
+   "tooth": 1.438,
+   "tooth_from_blocks": 105
   },
   "folds/unfold_thirds/0128.webp": {
    "family": "folds",
    "patch_std": 3.54,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 105,
+   "body": 244.0,
+   "field_swing_raw": 7.877,
+   "field_swing": 7.522,
+   "tooth_raw": 1.527,
+   "tooth": 1.458,
+   "tooth_from_blocks": 105
   },
   "folds/unfold_thirds/0129.webp": {
    "family": "folds",
    "patch_std": 3.534,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 105,
+   "body": 244.0,
+   "field_swing_raw": 7.983,
+   "field_swing": 7.623,
+   "tooth_raw": 1.518,
+   "tooth": 1.449,
+   "tooth_from_blocks": 105
   },
   "folds/unfold_thirds/0130.webp": {
    "family": "folds",
    "patch_std": 3.553,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 105,
+   "body": 244.0,
+   "field_swing_raw": 7.872,
+   "field_swing": 7.517,
+   "tooth_raw": 1.526,
+   "tooth": 1.457,
+   "tooth_from_blocks": 105
   },
   "folds/unfold_thirds/0131.webp": {
    "family": "folds",
    "patch_std": 3.616,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 105,
+   "body": 244.0,
+   "field_swing_raw": 7.977,
+   "field_swing": 7.617,
+   "tooth_raw": 1.512,
+   "tooth": 1.444,
+   "tooth_from_blocks": 105
   },
   "folds/unfold_thirds/0132.webp": {
    "family": "folds",
    "patch_std": 3.743,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 119,
+   "body": 244.0,
+   "field_swing_raw": 8.146,
+   "field_swing": 7.778,
+   "tooth_raw": 1.501,
+   "tooth": 1.433,
+   "tooth_from_blocks": 119
   },
   "folds/unfold_thirds/0133.webp": {
    "family": "folds",
    "patch_std": 3.841,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 244.0,
+   "field_swing_raw": 8.437,
+   "field_swing": 8.056,
+   "tooth_raw": 1.51,
+   "tooth": 1.442,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0134.webp": {
    "family": "folds",
    "patch_std": 3.976,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 244.0,
+   "field_swing_raw": 8.597,
+   "field_swing": 8.209,
+   "tooth_raw": 1.517,
+   "tooth": 1.449,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0135.webp": {
    "family": "folds",
    "patch_std": 4.062,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.06,
+   "field_swing": 8.687,
+   "tooth_raw": 1.498,
+   "tooth": 1.437,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0136.webp": {
    "family": "folds",
    "patch_std": 4.144,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.07,
+   "field_swing": 8.697,
+   "tooth_raw": 1.506,
+   "tooth": 1.444,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0137.webp": {
    "family": "folds",
    "patch_std": 4.287,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.379,
+   "field_swing": 8.993,
+   "tooth_raw": 1.508,
+   "tooth": 1.446,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0138.webp": {
    "family": "folds",
    "patch_std": 4.386,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.379,
+   "field_swing": 8.993,
+   "tooth_raw": 1.503,
+   "tooth": 1.441,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0139.webp": {
    "family": "folds",
    "patch_std": 4.457,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.658,
+   "field_swing": 9.261,
+   "tooth_raw": 1.495,
+   "tooth": 1.434,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0140.webp": {
    "family": "folds",
    "patch_std": 4.539,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.599,
+   "field_swing": 9.204,
+   "tooth_raw": 1.517,
+   "tooth": 1.455,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0141.webp": {
    "family": "folds",
    "patch_std": 4.455,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.611,
+   "field_swing": 9.215,
+   "tooth_raw": 1.503,
+   "tooth": 1.442,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0142.webp": {
    "family": "folds",
    "patch_std": 4.418,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.589,
+   "field_swing": 9.195,
+   "tooth_raw": 1.516,
+   "tooth": 1.454,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0143.webp": {
    "family": "folds",
    "patch_std": 4.45,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.579,
+   "field_swing": 9.185,
+   "tooth_raw": 1.517,
+   "tooth": 1.455,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0144.webp": {
    "family": "folds",
    "patch_std": 4.401,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 120,
+   "body": 243.0,
+   "field_swing_raw": 9.448,
+   "field_swing": 9.059,
+   "tooth_raw": 1.52,
+   "tooth": 1.458,
+   "tooth_from_blocks": 120
   },
   "folds/unfold_thirds/0145.webp": {
    "family": "folds",
    "patch_std": 4.367,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 135,
+   "body": 243.0,
+   "field_swing_raw": 9.305,
+   "field_swing": 8.922,
+   "tooth_raw": 1.515,
+   "tooth": 1.452,
+   "tooth_from_blocks": 135
   },
   "folds/unfold_thirds/0146.webp": {
    "family": "folds",
    "patch_std": 4.325,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0147.webp": {
-   "family": "folds",
-   "patch_std": 4.286,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0148.webp": {
-   "family": "folds",
-   "patch_std": 4.254,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0149.webp": {
-   "family": "folds",
-   "patch_std": 4.168,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0150.webp": {
-   "family": "folds",
-   "patch_std": 4.126,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0151.webp": {
-   "family": "folds",
-   "patch_std": 3.975,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0152.webp": {
-   "family": "folds",
-   "patch_std": 3.884,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0153.webp": {
-   "family": "folds",
-   "patch_std": 3.776,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0154.webp": {
-   "family": "folds",
-   "patch_std": 3.701,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0155.webp": {
-   "family": "folds",
-   "patch_std": 3.581,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0156.webp": {
-   "family": "folds",
-   "patch_std": 3.447,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0157.webp": {
-   "family": "folds",
-   "patch_std": 3.372,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0158.webp": {
-   "family": "folds",
-   "patch_std": 3.209,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0159.webp": {
-   "family": "folds",
-   "patch_std": 3.117,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0160.webp": {
-   "family": "folds",
-   "patch_std": 3.053,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0161.webp": {
-   "family": "folds",
-   "patch_std": 3.046,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0162.webp": {
-   "family": "folds",
-   "patch_std": 2.939,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0163.webp": {
-   "family": "folds",
-   "patch_std": 2.904,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0164.webp": {
-   "family": "folds",
-   "patch_std": 2.883,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0165.webp": {
-   "family": "folds",
-   "patch_std": 2.88,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0166.webp": {
-   "family": "folds",
-   "patch_std": 2.902,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0167.webp": {
-   "family": "folds",
-   "patch_std": 2.824,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0168.webp": {
-   "family": "folds",
-   "patch_std": 2.815,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0169.webp": {
-   "family": "folds",
-   "patch_std": 2.859,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0170.webp": {
-   "family": "folds",
-   "patch_std": 2.83,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0171.webp": {
-   "family": "folds",
-   "patch_std": 2.863,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0172.webp": {
-   "family": "folds",
-   "patch_std": 2.832,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0173.webp": {
-   "family": "folds",
-   "patch_std": 2.845,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0174.webp": {
-   "family": "folds",
-   "patch_std": 2.892,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0175.webp": {
-   "family": "folds",
-   "patch_std": 2.891,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0176.webp": {
-   "family": "folds",
-   "patch_std": 2.885,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0177.webp": {
-   "family": "folds",
-   "patch_std": 2.944,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0178.webp": {
-   "family": "folds",
-   "patch_std": 2.935,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0179.webp": {
-   "family": "folds",
-   "patch_std": 2.964,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0180.webp": {
-   "family": "folds",
-   "patch_std": 2.985,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0181.webp": {
-   "family": "folds",
-   "patch_std": 3.0,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0182.webp": {
-   "family": "folds",
-   "patch_std": 3.013,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0183.webp": {
-   "family": "folds",
-   "patch_std": 3.069,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0184.webp": {
-   "family": "folds",
-   "patch_std": 3.05,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0185.webp": {
-   "family": "folds",
-   "patch_std": 3.047,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0186.webp": {
-   "family": "folds",
-   "patch_std": 3.081,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0187.webp": {
-   "family": "folds",
-   "patch_std": 3.094,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0188.webp": {
-   "family": "folds",
-   "patch_std": 3.109,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0189.webp": {
-   "family": "folds",
-   "patch_std": 3.101,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0190.webp": {
-   "family": "folds",
-   "patch_std": 3.138,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0191.webp": {
-   "family": "folds",
-   "patch_std": 3.11,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0192.webp": {
-   "family": "folds",
-   "patch_std": 3.113,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0193.webp": {
-   "family": "folds",
-   "patch_std": 3.109,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0194.webp": {
-   "family": "folds",
-   "patch_std": 3.091,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0195.webp": {
-   "family": "folds",
-   "patch_std": 3.078,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0196.webp": {
-   "family": "folds",
-   "patch_std": 3.097,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0197.webp": {
-   "family": "folds",
-   "patch_std": 3.078,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0198.webp": {
-   "family": "folds",
-   "patch_std": 3.08,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0199.webp": {
-   "family": "folds",
-   "patch_std": 3.019,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0200.webp": {
-   "family": "folds",
-   "patch_std": 3.049,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0201.webp": {
-   "family": "folds",
-   "patch_std": 3.007,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0202.webp": {
-   "family": "folds",
-   "patch_std": 3.043,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0203.webp": {
-   "family": "folds",
-   "patch_std": 3.012,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0204.webp": {
-   "family": "folds",
-   "patch_std": 3.006,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0205.webp": {
-   "family": "folds",
-   "patch_std": 2.976,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0206.webp": {
-   "family": "folds",
-   "patch_std": 3.002,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0207.webp": {
-   "family": "folds",
-   "patch_std": 2.989,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0208.webp": {
-   "family": "folds",
-   "patch_std": 2.976,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0209.webp": {
-   "family": "folds",
-   "patch_std": 2.953,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0210.webp": {
-   "family": "folds",
-   "patch_std": 2.961,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0211.webp": {
-   "family": "folds",
-   "patch_std": 2.966,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0212.webp": {
-   "family": "folds",
-   "patch_std": 2.974,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0213.webp": {
-   "family": "folds",
-   "patch_std": 2.948,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0214.webp": {
-   "family": "folds",
-   "patch_std": 2.957,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0215.webp": {
-   "family": "folds",
-   "patch_std": 2.929,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0216.webp": {
-   "family": "folds",
-   "patch_std": 2.932,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0217.webp": {
-   "family": "folds",
-   "patch_std": 2.925,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0218.webp": {
-   "family": "folds",
-   "patch_std": 2.925,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0219.webp": {
-   "family": "folds",
-   "patch_std": 2.926,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0220.webp": {
-   "family": "folds",
-   "patch_std": 2.944,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0221.webp": {
-   "family": "folds",
-   "patch_std": 2.916,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0222.webp": {
-   "family": "folds",
-   "patch_std": 2.911,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0223.webp": {
-   "family": "folds",
-   "patch_std": 2.919,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0224.webp": {
-   "family": "folds",
-   "patch_std": 2.926,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0225.webp": {
-   "family": "folds",
-   "patch_std": 2.925,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0226.webp": {
-   "family": "folds",
-   "patch_std": 2.92,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0227.webp": {
-   "family": "folds",
-   "patch_std": 2.953,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0228.webp": {
-   "family": "folds",
-   "patch_std": 2.916,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0229.webp": {
-   "family": "folds",
-   "patch_std": 2.912,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0230.webp": {
-   "family": "folds",
-   "patch_std": 2.923,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0231.webp": {
-   "family": "folds",
-   "patch_std": 2.912,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0232.webp": {
-   "family": "folds",
-   "patch_std": 2.876,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0233.webp": {
-   "family": "folds",
-   "patch_std": 2.908,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0234.webp": {
-   "family": "folds",
-   "patch_std": 2.918,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0235.webp": {
-   "family": "folds",
-   "patch_std": 2.918,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0236.webp": {
-   "family": "folds",
-   "patch_std": 2.906,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0237.webp": {
-   "family": "folds",
-   "patch_std": 2.934,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0238.webp": {
-   "family": "folds",
-   "patch_std": 2.937,
-   "floor": 1.2
-  },
-  "folds/unfold_thirds/0239.webp": {
-   "family": "folds",
-   "patch_std": 2.907,
-   "floor": 1.2
+   "floor": 1.2,
+   "blocks": 135,
+   "body": 243.0,
+   "field_swing_raw": 9.182,
+   "field_swing": 8.804,
+   "tooth_raw": 1.523,
+   "tooth": 1.46,
+   "tooth_from_blocks": 135
   }
  },
  "flat": [],
+ "unlit": [],
  "too_small_to_measure": [],
  "fold_sequences": {
   "unfold_thirds": {
-   "frames": 240,
+   "frames": 147,
    "worst": 2.257,
-   "median": 3.581,
+   "median": 9.988,
    "below_floor": 0,
    "floor": 1.2
   }
@@ -1839,33 +3199,35 @@
    "obj_blanket_fold",
    "obj_boat",
    "obj_bookmark",
-   "obj_bunting",
    "obj_candle",
    "obj_clover",
    "obj_coffee_ring",
-   "obj_confetti",
    "obj_cork",
-   "obj_crane",
    "obj_crumple_ball",
    "obj_dog_ear",
    "obj_fortune_teller",
-   "obj_knot",
    "obj_mug",
    "obj_party_hat",
    "obj_pencil_smudge",
    "obj_pinch",
-   "obj_plane",
    "obj_plaster",
-   "obj_ribbon",
-   "obj_rubber_band",
-   "obj_snapped_pencil",
    "obj_spitball",
-   "obj_staple_chain",
    "obj_stone",
-   "obj_string_loop",
    "obj_ticket",
    "obj_torn_corner",
    "obj_wrapper"
+  ],
+  "read_but_not_measurable": [
+   "obj_bunting",
+   "obj_confetti",
+   "obj_crane",
+   "obj_knot",
+   "obj_plane",
+   "obj_ribbon",
+   "obj_rubber_band",
+   "obj_snapped_pencil",
+   "obj_staple_chain",
+   "obj_string_loop"
   ],
   "drawn_in_the_app": [
    "obj_chair",
@@ -1876,6 +3238,13 @@
   "named_but_neither": [],
   "note": "a drawn feeling is a mark the app makes with a pen, not a render, so it has no surface to measure; anything under 'named_but_neither' is a hole"
  },
- "read": 363,
+ "read": 270,
+ "by_family": {
+  "paper": 54,
+  "shell": 2,
+  "objects": 67,
+  "folds": 147
+ },
+ "empty": [],
  "ok": true
 }

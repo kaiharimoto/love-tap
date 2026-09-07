@@ -5,7 +5,7 @@
   "lens": "media",
   "lenses": {
    "media": 183,
-   "milestones": 142,
+   "milestones": 154,
    "feelings": 1340
   },
   "filters": {
@@ -53,6 +53,7 @@
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
+  "refused_in_the_outbox": 0,
   "cursor": 14062,
   "link": {
    "transport": "local",
@@ -62,15 +63,16 @@
    "peer_cursor": null,
    "our_cursor": 14062,
    "last_error": null,
-   "since": "2026-09-06T20:58:20.742Z",
-   "last_contact": "2026-09-06T20:58:23.474Z"
+   "since": "2026-09-07T22:21:02.257Z",
+   "last_contact": "2026-09-07T22:21:05.431Z"
   }
  },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
   "pocket_feeling": "ugh",
   "pocket_at": 1788464400000,
-  "allowed_to_interrupt": false
+  "allowed_to_interrupt": false,
+  "held_by_the_phone": []
  },
  "at": "04_moments.png"
 }

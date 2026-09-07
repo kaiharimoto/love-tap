@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3420
+   "ms": 3473
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2106
   },
   {
    "do": "shot",
-   "ms": 2236
+   "ms": 2975
   },
   {
    "do": "report",
-   "ms": 708
+   "ms": 710
   }
  ],
  "shots": [
@@ -41,13 +41,18 @@
     "replying_to": null,
     "editing": null,
     "partner_typing": false,
-    "kinds": {}
+    "kinds": {},
+    "delivery": {},
+    "states_on_the_glass": {},
+    "reactions": {},
+    "edited": [],
+    "taken_back": []
    },
    "visible": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-06T21:01:29.883Z",
+   "now": "2026-09-07T22:25:04.420Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -74,6 +79,7 @@
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
+    "refused_in_the_outbox": 0,
     "cursor": 0,
     "link": {
      "transport": "local",
@@ -83,7 +89,7 @@
      "peer_cursor": null,
      "our_cursor": 0,
      "last_error": null,
-     "since": "2026-09-06T21:01:21.045Z",
+     "since": "2026-09-07T22:24:54.685Z",
      "last_contact": null
     }
    },
@@ -91,14 +97,15 @@
     "standing_line": "nothing from them since you last looked",
     "pocket_feeling": null,
     "pocket_at": null,
-    "allowed_to_interrupt": false
+    "allowed_to_interrupt": false,
+    "held_by_the_phone": []
    },
    "at": "10_first_run.png"
   }
  ],
- "cold_ms": 1862,
+ "cold_ms": 2101,
  "load": {
-  "ms": 1862,
+  "ms": 2101,
   "store": "fresh",
   "profile": null
  },

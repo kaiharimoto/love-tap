@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3667,
+   "ms": 3991,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4371
+   "ms": 4490
   },
   {
    "do": "wait",
@@ -24,11 +24,11 @@
   },
   {
    "do": "shot",
-   "ms": 3955
+   "ms": 4249
   },
   {
    "do": "report",
-   "ms": 714
+   "ms": 727
   }
  ],
  "shots": [
@@ -45,7 +45,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtqaltmo"
+     "pwa-mtrszvp7"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -81,6 +81,7 @@
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
+    "refused_in_the_outbox": 0,
     "cursor": 14062,
     "link": {
      "transport": "local",
@@ -90,22 +91,23 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-06T20:58:40.872Z",
-     "last_contact": "2026-09-06T20:58:43.529Z"
+     "since": "2026-09-07T22:21:24.885Z",
+     "last_contact": "2026-09-07T22:21:28.163Z"
     }
    },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
-    "allowed_to_interrupt": false
+    "allowed_to_interrupt": false,
+    "held_by_the_phone": []
    },
    "at": "05_settings.png"
   }
  ],
- "cold_ms": 2677,
+ "cold_ms": 3042,
  "load": {
-  "ms": 2677,
+  "ms": 3042,
   "store": "kept",
   "profile": "profile_seeded"
  },

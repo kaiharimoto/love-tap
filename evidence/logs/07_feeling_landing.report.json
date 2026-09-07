@@ -16,7 +16,7 @@
    {
     "id": "calendar",
     "events": 6,
-    "glance": "us in 63 days"
+    "glance": "us in 62 days"
    },
    {
     "id": "rituals",
@@ -37,7 +37,7 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 7728,
  "seed": 20260903,
- "events": 14084,
+ "events": 14089,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -54,7 +54,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-06T21:50:55.881Z",
+  "started_at": "2026-09-07T23:11:17.126Z",
   "pattern": [
    {
     "ms": 150,
@@ -81,31 +81,33 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 682,
-  "pushed": 7,
+  "rounds": 556,
+  "pushed": 6,
   "refused": 0,
   "pulled": 4,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
-  "cursor": 14084,
+  "refused_in_the_outbox": 0,
+  "cursor": 14089,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14084,
-   "our_cursor": 14084,
+   "peer_cursor": 14089,
+   "our_cursor": 14089,
    "last_error": null,
-   "since": "2026-09-06T21:21:08.074Z",
-   "last_contact": "2026-09-06T21:56:51.387Z"
+   "since": "2026-09-07T22:49:26.094Z",
+   "last_contact": "2026-09-07T23:18:38.883Z"
   }
  },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
   "pocket_feeling": "soup",
   "pocket_at": 1788464400000,
-  "allowed_to_interrupt": false
+  "allowed_to_interrupt": false,
+  "held_by_the_phone": []
  },
  "at": "07_feeling_landing"
 }

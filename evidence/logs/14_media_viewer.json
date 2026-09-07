@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3851,
+   "ms": 4179,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4801
+   "ms": 8276
   },
   {
    "do": "wait",
-   "ms": 3704
+   "ms": 3705
   },
   {
    "do": "openViewer",
-   "ms": 4061
+   "ms": 6194
   },
   {
    "do": "wait",
@@ -32,11 +32,11 @@
   },
   {
    "do": "shot",
-   "ms": 3692
+   "ms": 5498
   },
   {
    "do": "report",
-   "ms": 811
+   "ms": 838
   }
  ],
  "shots": [
@@ -49,17 +49,17 @@
   {
    "region": 1,
    "view": {
-    "region": "chat",
-    "composer": "",
-    "attaching": false,
-    "replying_to": null,
-    "editing": null,
-    "partner_typing": false,
-    "anchor": "row 4788 of 8069",
-    "kinds": {
-     "message": 2,
-     "state_declared": 1,
-     "video": 1
+    "region": "viewer",
+    "over": "chat",
+    "item": "00020P5YV8GCMVBPX6W1HZ7HNT",
+    "kind": "video",
+    "caption": "sunday on the water. nobody is in a hurry and one of them is going backwards",
+    "blob": "aba5de46c039cde2575b467ba36ed320a84a2a39cef8eee819ab8ce8532afd37",
+    "video": {
+     "initialised": true,
+     "playing": true,
+     "position_ms": 1530,
+     "duration_ms": 2500
     }
    },
    "visible": [
@@ -83,12 +83,12 @@
    "scroll": {
     "first": 4785,
     "last": 4788,
-    "of": 8069
+    "of": 8073
    },
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 144,
    "seed": 20260903,
-   "events": 14062,
+   "events": 14073,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -105,42 +105,46 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 1,
-    "pushed": 1,
+    "rounds": 9,
+    "pushed": 2,
     "refused": 0,
     "pulled": 0,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
-    "cursor": 14062,
+    "refused_in_the_outbox": 0,
+    "cursor": 14073,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14062,
-     "our_cursor": 14062,
+     "peer_cursor": 14073,
+     "our_cursor": 14073,
      "last_error": null,
-     "since": "2026-09-06T23:55:10.539Z",
-     "last_contact": "2026-09-06T23:55:32.775Z"
+     "since": "2026-09-07T22:24:19.052Z",
+     "last_contact": "2026-09-07T22:24:50.332Z"
     }
    },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-    "pocket_feeling": "ugh",
-    "pocket_at": 1788464400000,
-    "allowed_to_interrupt": false
+    "pocket_feeling": null,
+    "pocket_at": null,
+    "allowed_to_interrupt": false,
+    "held_by_the_phone": []
    },
    "at": "14_media_viewer.png"
   }
  ],
- "cold_ms": 2660,
+ "cold_ms": 2993,
  "load": {
-  "ms": 2660,
+  "ms": 2993,
   "store": "kept",
   "profile": "profile_seeded"
  },
- "problems": [],
- "ok": true,
+ "problems": [
+  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+ ],
+ "ok": false,
  "steps_landed": true
 }
