@@ -1,913 +1,651 @@
 {
  "files": {
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/fold_test/unfold_thirds/0090.png": {
-   "bytes": 198316,
-   "generator": "blender/folds/fold.py",
-   "kind": "fold_frame",
-   "settings": {
-    "crease_mm": 1.4,
-    "crease_ridge_mm": 0.36000000000000004,
-    "density_vs_stock": 0.373,
-    "frame": 90,
-    "frames": 240,
-    "grid": [
-     160,
-     180
-    ],
-    "light": "day",
-    "look": {
-     "fibre": 410.1,
-     "mottle_scale": 0.373,
-     "rgb": [
-      0.94,
-      0.91,
-      0.85
-     ],
-     "sheen": 0.24,
-     "tooth": 1.55,
-     "yellowing": 0.25
-    },
-    "px_per_mm": 3.243,
-    "resolution": 600,
-    "rig": "blender/rig/common.py",
-    "samples": 48,
-    "sequence": "unfold_thirds",
-    "sheet_mm": [
-     148.0,
-     105.0
-    ]
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/foldtest/unfold_thirds/0000.png": {
-   "bytes": 43059,
-   "generator": "blender/folds/fold.py",
-   "kind": "fold_frame",
-   "settings": {
-    "camera_tilt_deg": 20.0,
-    "crease_mm": 1.4,
-    "crease_ridge_mm": 0.36000000000000004,
-    "density_vs_stock": 0.186,
-    "frame": 0,
-    "frames": 240,
-    "grid": [
-     160,
-     180
-    ],
-    "light": "day",
-    "look": {
-     "fibre": 205.0,
-     "mottle_scale": 0.186,
-     "rgb": [
-      0.94,
-      0.91,
-      0.85
-     ],
-     "sheen": 0.24,
-     "tooth": 1.55,
-     "yellowing": 0.25
-    },
-    "px_per_mm": 1.622,
-    "resolution": 300,
-    "rig": "blender/rig/common.py",
-    "samples": 12,
-    "sequence": "unfold_thirds",
-    "sheet_mm": [
-     148.0,
-     105.0
-    ]
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/foldtest/unfold_thirds/0060.png": {
-   "bytes": 56182,
-   "generator": "blender/folds/fold.py",
-   "kind": "fold_frame",
-   "settings": {
-    "camera_tilt_deg": 20.0,
-    "crease_mm": 1.4,
-    "crease_ridge_mm": 0.36000000000000004,
-    "density_vs_stock": 0.186,
-    "frame": 60,
-    "frames": 240,
-    "grid": [
-     160,
-     180
-    ],
-    "light": "day",
-    "look": {
-     "fibre": 205.0,
-     "mottle_scale": 0.186,
-     "rgb": [
-      0.94,
-      0.91,
-      0.85
-     ],
-     "sheen": 0.24,
-     "tooth": 1.55,
-     "yellowing": 0.25
-    },
-    "px_per_mm": 1.622,
-    "resolution": 300,
-    "rig": "blender/rig/common.py",
-    "samples": 12,
-    "sequence": "unfold_thirds",
-    "sheet_mm": [
-     148.0,
-     105.0
-    ]
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/foldtest/unfold_thirds/0120.png": {
-   "bytes": 47922,
-   "generator": "blender/folds/fold.py",
-   "kind": "fold_frame",
-   "settings": {
-    "camera_tilt_deg": 20.0,
-    "crease_mm": 1.4,
-    "crease_ridge_mm": 0.36000000000000004,
-    "density_vs_stock": 0.186,
-    "frame": 120,
-    "frames": 240,
-    "grid": [
-     160,
-     180
-    ],
-    "light": "day",
-    "look": {
-     "fibre": 205.0,
-     "mottle_scale": 0.186,
-     "rgb": [
-      0.94,
-      0.91,
-      0.85
-     ],
-     "sheen": 0.24,
-     "tooth": 1.55,
-     "yellowing": 0.25
-    },
-    "px_per_mm": 1.622,
-    "resolution": 300,
-    "rig": "blender/rig/common.py",
-    "samples": 12,
-    "sequence": "unfold_thirds",
-    "sheet_mm": [
-     148.0,
-     105.0
-    ]
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/foldtest/unfold_thirds/0239.png": {
-   "bytes": 62299,
-   "generator": "blender/folds/fold.py",
-   "kind": "fold_frame",
-   "settings": {
-    "camera_tilt_deg": 20.0,
-    "crease_mm": 1.4,
-    "crease_ridge_mm": 0.36000000000000004,
-    "density_vs_stock": 0.186,
-    "frame": 239,
-    "frames": 240,
-    "grid": [
-     160,
-     180
-    ],
-    "light": "day",
-    "look": {
-     "fibre": 205.0,
-     "mottle_scale": 0.186,
-     "rgb": [
-      0.94,
-      0.91,
-      0.85
-     ],
-     "sheen": 0.24,
-     "tooth": 1.55,
-     "yellowing": 0.25
-    },
-    "px_per_mm": 1.622,
-    "resolution": 300,
-    "rig": "blender/rig/common.py",
-    "samples": 12,
-    "sequence": "unfold_thirds",
-    "sheet_mm": [
-     148.0,
-     105.0
-    ]
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/obj_test/obj_candle.png": {
-   "bytes": 367606,
+  "../../../tmp/objprobe/obj_bookmark.png": {
+   "bytes": 114760,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
     "frame_mm": 60,
     "light": "day",
-    "object": "obj_candle",
+    "object": "obj_bookmark",
     "pass": "object",
     "resolution": [
-     1200,
-     1200
+     600,
+     600
     ],
     "rig": "blender/rig/common.py",
-    "samples": 48
+    "samples": 10
    }
   },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/obj_test/obj_candle_shadow.png": {
-   "bytes": 266260,
+  "../../../tmp/objprobe/obj_bookmark_shadow.png": {
+   "bytes": 83892,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
     "frame_mm": 60,
     "light": "day",
-    "object": "obj_candle",
+    "object": "obj_bookmark",
     "pass": "shadow",
     "resolution": [
-     1200,
-     1200
+     600,
+     600
     ],
     "rig": "blender/rig/common.py",
-    "samples": 48
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/obj_test/obj_candle_shadow_dusk.png": {
-   "bytes": 133086,
-   "generator": "blender/objects/objects.py",
-   "kind": "feeling_shadow",
-   "settings": {
-    "frame_mm": 60,
-    "light": "dusk",
-    "object": "obj_candle",
-    "pass": "shadow",
-    "resolution": [
-     1200,
-     1200
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 48
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/obj_test2/obj_candle.png": {
-   "bytes": 373017,
-   "generator": "blender/objects/objects.py",
-   "kind": "feeling_object",
-   "settings": {
-    "frame_mm": 60,
-    "light": "day",
-    "object": "obj_candle",
-    "pass": "object",
-    "resolution": [
-     1200,
-     1200
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 48
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/obj_test2/obj_candle_shadow.png": {
-   "bytes": 276361,
-   "generator": "blender/objects/objects.py",
-   "kind": "feeling_shadow",
-   "settings": {
-    "frame_mm": 60,
-    "light": "day",
-    "object": "obj_candle",
-    "pass": "shadow",
-    "resolution": [
-     1200,
-     1200
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 48
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad/obj_test2/obj_candle_shadow_dusk.png": {
-   "bytes": 132612,
-   "generator": "blender/objects/objects.py",
-   "kind": "feeling_shadow",
-   "settings": {
-    "frame_mm": 60,
-    "light": "dusk",
-    "object": "obj_candle",
-    "pass": "shadow",
-    "resolution": [
-     1200,
-     1200
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 48
+    "samples": 10
    }
   },
   "assets/bits/clip_01.png": {
-   "bytes": 57426,
+   "bytes": 246937,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "clip",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 5,
     "width_m": 0.03
    }
   },
   "assets/bits/clip_01_dusk.png": {
-   "bytes": 57426,
+   "bytes": 242523,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "clip",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 5,
     "width_m": 0.03
    }
   },
   "assets/bits/clip_01_dusk_shadow.png": {
-   "bytes": 9148,
+   "bytes": 86185,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "clip",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 5,
     "width_m": 0.03
    }
   },
   "assets/bits/clip_01_shadow.png": {
-   "bytes": 9148,
+   "bytes": 164859,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "clip",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 5,
     "width_m": 0.03
    }
   },
   "assets/bits/clip_02.png": {
-   "bytes": 57426,
+   "bytes": 233724,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "clip",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 29,
     "width_m": 0.03
    }
   },
   "assets/bits/clip_02_dusk.png": {
-   "bytes": 57426,
+   "bytes": 235045,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "clip",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 29,
     "width_m": 0.03
    }
   },
   "assets/bits/clip_02_dusk_shadow.png": {
-   "bytes": 9148,
+   "bytes": 77977,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "clip",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 29,
     "width_m": 0.03
    }
   },
   "assets/bits/clip_02_shadow.png": {
-   "bytes": 9148,
+   "bytes": 152033,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "clip",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 29,
     "width_m": 0.03
    }
   },
   "assets/bits/glue_01.png": {
-   "bytes": 57426,
+   "bytes": 310619,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "glue",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 17,
     "width_m": 0.034
    }
   },
   "assets/bits/glue_01_dusk.png": {
-   "bytes": 57426,
+   "bytes": 123571,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "glue",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 17,
     "width_m": 0.034
    }
   },
   "assets/bits/glue_01_dusk_shadow.png": {
-   "bytes": 9148,
+   "bytes": 29544,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "glue",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 17,
     "width_m": 0.034
    }
   },
   "assets/bits/glue_01_shadow.png": {
-   "bytes": 9148,
+   "bytes": 189115,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "glue",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 17,
     "width_m": 0.034
    }
   },
   "assets/bits/pin_01.png": {
-   "bytes": 57426,
+   "bytes": 229381,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "pin",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 13,
     "width_m": 0.02
    }
   },
   "assets/bits/pin_01_dusk.png": {
-   "bytes": 57426,
+   "bytes": 241916,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "pin",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 13,
     "width_m": 0.02
    }
   },
   "assets/bits/pin_01_dusk_shadow.png": {
-   "bytes": 9148,
+   "bytes": 104732,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "pin",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 13,
     "width_m": 0.02
    }
   },
   "assets/bits/pin_01_shadow.png": {
-   "bytes": 9148,
+   "bytes": 245618,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "pin",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 13,
     "width_m": 0.02
    }
   },
   "assets/bits/pin_02.png": {
-   "bytes": 57426,
+   "bytes": 228878,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "pin",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 41,
     "width_m": 0.02
    }
   },
   "assets/bits/pin_02_dusk.png": {
-   "bytes": 57426,
+   "bytes": 241179,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "pin",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 41,
     "width_m": 0.02
    }
   },
   "assets/bits/pin_02_dusk_shadow.png": {
-   "bytes": 9148,
+   "bytes": 104661,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "pin",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 41,
     "width_m": 0.02
    }
   },
   "assets/bits/pin_02_shadow.png": {
-   "bytes": 9148,
+   "bytes": 246329,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "pin",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 41,
     "width_m": 0.02
    }
   },
   "assets/bits/staple_01.png": {
-   "bytes": 57426,
+   "bytes": 163518,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "staple",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 7,
     "width_m": 0.016
    }
   },
   "assets/bits/staple_01_dusk.png": {
-   "bytes": 57426,
+   "bytes": 167826,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "staple",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 7,
     "width_m": 0.016
    }
   },
   "assets/bits/staple_01_dusk_shadow.png": {
-   "bytes": 9148,
+   "bytes": 51295,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "staple",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 7,
     "width_m": 0.016
    }
   },
   "assets/bits/staple_01_shadow.png": {
-   "bytes": 9148,
+   "bytes": 134471,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "staple",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 7,
     "width_m": 0.016
    }
   },
   "assets/bits/staple_02.png": {
-   "bytes": 57426,
+   "bytes": 165961,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "staple",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 19,
     "width_m": 0.016
    }
   },
   "assets/bits/staple_02_dusk.png": {
-   "bytes": 57426,
+   "bytes": 166908,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "staple",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 19,
     "width_m": 0.016
    }
   },
   "assets/bits/staple_02_dusk_shadow.png": {
-   "bytes": 9148,
+   "bytes": 53023,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "staple",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 19,
     "width_m": 0.016
    }
   },
   "assets/bits/staple_02_shadow.png": {
-   "bytes": 9148,
+   "bytes": 130496,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "staple",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 19,
     "width_m": 0.016
    }
   },
   "assets/bits/tape_01.png": {
-   "bytes": 57426,
+   "bytes": 141974,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "tape",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 11,
     "width_m": 0.052
    }
   },
   "assets/bits/tape_01_dusk.png": {
-   "bytes": 57426,
+   "bytes": 142834,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "tape",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 11,
     "width_m": 0.052
    }
   },
   "assets/bits/tape_01_dusk_shadow.png": {
-   "bytes": 9358,
+   "bytes": 71548,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "tape",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 11,
     "width_m": 0.052
    }
   },
   "assets/bits/tape_01_shadow.png": {
-   "bytes": 9358,
+   "bytes": 94568,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "tape",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 11,
     "width_m": 0.052
    }
   },
   "assets/bits/tape_02.png": {
-   "bytes": 57426,
+   "bytes": 145348,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "tape",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 23,
     "width_m": 0.044
    }
   },
   "assets/bits/tape_02_dusk.png": {
-   "bytes": 57426,
+   "bytes": 145816,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "tape",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 23,
     "width_m": 0.044
    }
   },
   "assets/bits/tape_02_dusk_shadow.png": {
-   "bytes": 9299,
+   "bytes": 72375,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "tape",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 23,
     "width_m": 0.044
    }
   },
   "assets/bits/tape_02_shadow.png": {
-   "bytes": 9299,
+   "bytes": 97367,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "tape",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 23,
     "width_m": 0.044
    }
   },
   "assets/bits/tape_03.png": {
-   "bytes": 57426,
+   "bytes": 143054,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "tape",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 37,
     "width_m": 0.061
    }
   },
   "assets/bits/tape_03_dusk.png": {
-   "bytes": 57426,
+   "bytes": 143476,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "tape",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 37,
     "width_m": 0.061
    }
   },
   "assets/bits/tape_03_dusk_shadow.png": {
-   "bytes": 9782,
+   "bytes": 70642,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "tape",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 37,
     "width_m": 0.061
    }
   },
   "assets/bits/tape_03_shadow.png": {
-   "bytes": 9782,
+   "bytes": 90673,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "tape",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 37,
     "width_m": 0.061
    }
   },
   "assets/bits/tape_04.png": {
-   "bytes": 57426,
+   "bytes": 142571,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "tape",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 53,
     "width_m": 0.038
    }
   },
   "assets/bits/tape_04_dusk.png": {
-   "bytes": 57426,
+   "bytes": 143140,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "tape",
     "pass": "colour",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 53,
     "width_m": 0.038
    }
   },
   "assets/bits/tape_04_dusk_shadow.png": {
-   "bytes": 9207,
+   "bytes": 72793,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "dusk",
     "kind": "tape",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 53,
     "width_m": 0.038
    }
   },
   "assets/bits/tape_04_shadow.png": {
-   "bytes": 9207,
+   "bytes": 110428,
    "generator": "blender/bits/bits.py",
    "kind": "bit",
    "settings": {
     "condition": "day",
     "kind": "tape",
     "pass": "shadow",
-    "res": 600,
-    "samples": 18,
+    "res": 900,
+    "samples": 48,
     "seed": 53,
     "width_m": 0.038
    }
@@ -10272,23 +10010,102 @@
     ]
    }
   },
+  "assets/fonts/DeskStamp.ttf": {
+   "bytes": 262360,
+   "generator": "tools/handwriting/build.py",
+   "kind": "font",
+   "settings": {
+    "face": "DeskStamp",
+    "glyphs": 155,
+    "hand": {
+     "baseline_wobble": 5,
+     "corner_deg": 80,
+     "description": "upper-case stamp / typewriter furniture face; slab strokes, ink spread, misregistration",
+     "distinct_min": 10,
+     "exit_stretch": 1.0,
+     "family": "DeskStamp",
+     "gap": 90,
+     "ink": "#1f2a44",
+     "jitter": {
+      "alt_prob": 0.0,
+      "field_wavelength": [
+       300,
+       700
+      ],
+      "point": 6,
+      "point_noise": 2,
+      "rotation_deg": 0.8
+     },
+     "loop_openness": 0.0,
+     "lowercase_scale": 0.8,
+     "paper": "#f6f1e6",
+     "pen": {
+      "erode_em": 0.014,
+      "erode_samples_per_em": 40,
+      "ink_spread_em": 0.02,
+      "misregister": [
+       6,
+       4
+      ],
+      "model": "stamp",
+      "serif_length": 2.2,
+      "serif_thickness": 0.6,
+      "tilt_deg": 0.8,
+      "width_em": 0.07
+     },
+     "person": null,
+     "pressure": {
+      "base": 1.0,
+      "baseline_weight": 0.0,
+      "down_weight": 0.0,
+      "jitter": 0.0,
+      "scale": 0.0,
+      "start_weight": 0.0,
+      "stop_weight": 0.0,
+      "turn_weight": 0.0
+     },
+     "rounding": 0.0,
+     "slant_deg": 0,
+     "space_em": 0.5,
+     "spacing_jitter": 12,
+     "start_overshoot": 0,
+     "style": "Regular",
+     "t_cross_late": 0.0,
+     "tension": 0.5,
+     "uppercase_only": true,
+     "variants": 3,
+     "width_scale": 1.0,
+     "xheight_scale": 1.0
+    },
+    "inputs": {
+     "tools/handwriting/hands.json": "b793c05103ebc98fa4c691dc3d381228b3ed2b9fa0e86deb8e3ed2416585e6a6",
+     "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
+    },
+    "outline": "RDP + Schneider cubic fit + cu2qu",
+    "seed": 20260903,
+    "union": "skia-pathops",
+    "variants": 3
+   }
+  },
   "assets/fonts/MANIFEST.fonts.json": {
-   "bytes": 3467,
+   "bytes": 13624,
    "generator": "tools/handwriting/build.py",
    "kind": "manifest",
    "settings": {
     "faces": [
-     "TeoHand"
+     "TeoHand",
+     "NoorHand",
+     "DeskStamp"
     ],
     "inputs": {
-     "tools/handwriting/hands.json": "8fadc6b1efe16f04a4e64056012d7b043000cd975c24f760297e1a1c1feb8e44",
+     "tools/handwriting/hands.json": "b793c05103ebc98fa4c691dc3d381228b3ed2b9fa0e86deb8e3ed2416585e6a6",
      "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
     },
     "seed": 20260903
    }
   },
   "assets/fonts/NoorHand.ttf": {
-   "bytes": 378988,
+   "bytes": 411156,
    "generator": "tools/handwriting/build.py",
    "kind": "font",
    "settings": {
@@ -10319,7 +10136,7 @@
      "paper": "#f1ecdf",
      "pen": {
       "edge_noise_em": 0.0,
-      "gamma": 1.6,
+      "gamma": 1.4,
       "model": "ballpoint",
       "pool_prob": 0.75,
       "pool_radius": 1.4,
@@ -10331,7 +10148,7 @@
       "skip_prob": 0.1,
       "width_em": 0.055,
       "width_max": 1.45,
-      "width_min": 0.62
+      "width_min": 0.48
      },
      "person": "Noor",
      "pressure": {
@@ -10339,7 +10156,7 @@
       "baseline_weight": 0.0,
       "down_weight": 0.12,
       "jitter": 0.22,
-      "scale": 0.45,
+      "scale": 0.65,
       "start_weight": 0.25,
       "stop_weight": 0.55,
       "turn_weight": 0.35
@@ -10357,7 +10174,7 @@
      "xheight_scale": 0.96
     },
     "inputs": {
-     "tools/handwriting/hands.json": "8fadc6b1efe16f04a4e64056012d7b043000cd975c24f760297e1a1c1feb8e44",
+     "tools/handwriting/hands.json": "b793c05103ebc98fa4c691dc3d381228b3ed2b9fa0e86deb8e3ed2416585e6a6",
      "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
     },
     "outline": "RDP + Schneider cubic fit + cu2qu",
@@ -10367,7 +10184,7 @@
    }
   },
   "assets/fonts/TeoHand.ttf": {
-   "bytes": 753308,
+   "bytes": 772340,
    "generator": "tools/handwriting/build.py",
    "kind": "font",
    "settings": {
@@ -10399,7 +10216,7 @@
      "pen": {
       "edge_noise_em": 0.012,
       "edge_samples_per_em": 40,
-      "gamma": 1.2,
+      "gamma": 1.6,
       "model": "pencil",
       "width_em": 0.075,
       "width_max": 1.5,
@@ -10407,11 +10224,11 @@
      },
      "person": "Teo",
      "pressure": {
-      "base": 0.62,
+      "base": 0.54,
       "baseline_weight": 0.28,
       "down_weight": 0.38,
       "jitter": 0.18,
-      "scale": 0.4,
+      "scale": 0.45,
       "start_weight": 0.05,
       "stop_weight": 0.08,
       "turn_weight": 0.05
@@ -10429,7 +10246,7 @@
      "xheight_scale": 1.04
     },
     "inputs": {
-     "tools/handwriting/hands.json": "8fadc6b1efe16f04a4e64056012d7b043000cd975c24f760297e1a1c1feb8e44",
+     "tools/handwriting/hands.json": "b793c05103ebc98fa4c691dc3d381228b3ed2b9fa0e86deb8e3ed2416585e6a6",
      "tools/handwriting/skeletons.json": "9108c61bbfcac2e1640fc7d3364243eaf99ebc5392de2560ce2cd58d0d7e08d5"
     },
     "outline": "RDP + Schneider cubic fit + cu2qu",
@@ -10438,8 +10255,25 @@
     "variants": 5
    }
   },
+  "assets/fonts/previews/DeskStamp.png": {
+   "bytes": 251308,
+   "generator": "tools/handwriting/build.py",
+   "kind": "preview",
+   "settings": {
+    "face": "DeskStamp",
+    "features": [
+     "calt"
+    ],
+    "font": "assets/fonts/DeskStamp.ttf",
+    "height": 1284,
+    "layout_engine": "raqm",
+    "scale": 2,
+    "seed": 20260903,
+    "width": 2200
+   }
+  },
   "assets/fonts/previews/NoorHand.png": {
-   "bytes": 317474,
+   "bytes": 317459,
    "generator": "tools/handwriting/build.py",
    "kind": "preview",
    "settings": {
@@ -10448,7 +10282,7 @@
      "calt"
     ],
     "font": "assets/fonts/NoorHand.ttf",
-    "height": 1079,
+    "height": 1176,
     "layout_engine": "raqm",
     "scale": 2,
     "seed": 20260903,
@@ -10456,7 +10290,7 @@
    }
   },
   "assets/fonts/previews/TeoHand.png": {
-   "bytes": 344255,
+   "bytes": 341842,
    "generator": "tools/handwriting/build.py",
    "kind": "preview",
    "settings": {
@@ -10505,7 +10339,7 @@
    }
   },
   "assets/objects/obj_blanket_fold.png": {
-   "bytes": 457026,
+   "bytes": 456006,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10522,7 +10356,7 @@
    }
   },
   "assets/objects/obj_blanket_fold_dusk.png": {
-   "bytes": 475541,
+   "bytes": 474715,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10539,7 +10373,7 @@
    }
   },
   "assets/objects/obj_blanket_fold_shadow.png": {
-   "bytes": 266774,
+   "bytes": 265694,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10556,7 +10390,7 @@
    }
   },
   "assets/objects/obj_blanket_fold_shadow_dusk.png": {
-   "bytes": 104844,
+   "bytes": 105185,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10573,7 +10407,7 @@
    }
   },
   "assets/objects/obj_boat.png": {
-   "bytes": 372873,
+   "bytes": 361656,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10590,7 +10424,7 @@
    }
   },
   "assets/objects/obj_boat_dusk.png": {
-   "bytes": 378808,
+   "bytes": 365086,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10607,7 +10441,7 @@
    }
   },
   "assets/objects/obj_boat_shadow.png": {
-   "bytes": 292229,
+   "bytes": 263543,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10624,7 +10458,7 @@
    }
   },
   "assets/objects/obj_boat_shadow_dusk.png": {
-   "bytes": 113453,
+   "bytes": 107444,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10641,7 +10475,7 @@
    }
   },
   "assets/objects/obj_bookmark.png": {
-   "bytes": 414375,
+   "bytes": 419704,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10658,7 +10492,7 @@
    }
   },
   "assets/objects/obj_bookmark_dusk.png": {
-   "bytes": 434439,
+   "bytes": 429615,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10675,7 +10509,7 @@
    }
   },
   "assets/objects/obj_bookmark_shadow.png": {
-   "bytes": 192416,
+   "bytes": 199481,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10692,7 +10526,7 @@
    }
   },
   "assets/objects/obj_bookmark_shadow_dusk.png": {
-   "bytes": 121007,
+   "bytes": 130457,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10709,7 +10543,7 @@
    }
   },
   "assets/objects/obj_bunting.png": {
-   "bytes": 345789,
+   "bytes": 347659,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10726,7 +10560,7 @@
    }
   },
   "assets/objects/obj_bunting_dusk.png": {
-   "bytes": 348296,
+   "bytes": 349065,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10743,7 +10577,7 @@
    }
   },
   "assets/objects/obj_bunting_shadow.png": {
-   "bytes": 204851,
+   "bytes": 203962,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10760,7 +10594,7 @@
    }
   },
   "assets/objects/obj_bunting_shadow_dusk.png": {
-   "bytes": 98361,
+   "bytes": 98883,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10777,7 +10611,7 @@
    }
   },
   "assets/objects/obj_candle.png": {
-   "bytes": 373017,
+   "bytes": 383401,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10794,7 +10628,7 @@
    }
   },
   "assets/objects/obj_candle_dusk.png": {
-   "bytes": 385297,
+   "bytes": 398882,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10811,7 +10645,7 @@
    }
   },
   "assets/objects/obj_candle_shadow.png": {
-   "bytes": 276361,
+   "bytes": 206597,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10828,7 +10662,7 @@
    }
   },
   "assets/objects/obj_candle_shadow_dusk.png": {
-   "bytes": 132612,
+   "bytes": 131477,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10845,7 +10679,7 @@
    }
   },
   "assets/objects/obj_clover.png": {
-   "bytes": 350698,
+   "bytes": 341381,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10862,7 +10696,7 @@
    }
   },
   "assets/objects/obj_clover_dusk.png": {
-   "bytes": 354848,
+   "bytes": 353352,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10879,7 +10713,7 @@
    }
   },
   "assets/objects/obj_clover_shadow.png": {
-   "bytes": 294042,
+   "bytes": 287416,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10896,7 +10730,7 @@
    }
   },
   "assets/objects/obj_clover_shadow_dusk.png": {
-   "bytes": 99729,
+   "bytes": 106163,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10913,7 +10747,7 @@
    }
   },
   "assets/objects/obj_coffee_ring.png": {
-   "bytes": 550526,
+   "bytes": 552543,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10930,7 +10764,7 @@
    }
   },
   "assets/objects/obj_coffee_ring_dusk.png": {
-   "bytes": 620889,
+   "bytes": 601939,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10947,7 +10781,7 @@
    }
   },
   "assets/objects/obj_coffee_ring_shadow.png": {
-   "bytes": 238049,
+   "bytes": 237038,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10964,7 +10798,7 @@
    }
   },
   "assets/objects/obj_coffee_ring_shadow_dusk.png": {
-   "bytes": 139865,
+   "bytes": 139594,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10981,7 +10815,7 @@
    }
   },
   "assets/objects/obj_confetti.png": {
-   "bytes": 326373,
+   "bytes": 326627,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10998,7 +10832,7 @@
    }
   },
   "assets/objects/obj_confetti_dusk.png": {
-   "bytes": 337343,
+   "bytes": 336631,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11015,7 +10849,7 @@
    }
   },
   "assets/objects/obj_confetti_shadow.png": {
-   "bytes": 106147,
+   "bytes": 106213,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11032,7 +10866,7 @@
    }
   },
   "assets/objects/obj_confetti_shadow_dusk.png": {
-   "bytes": 80876,
+   "bytes": 80931,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11049,7 +10883,7 @@
    }
   },
   "assets/objects/obj_cork.png": {
-   "bytes": 488564,
+   "bytes": 488703,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11066,7 +10900,7 @@
    }
   },
   "assets/objects/obj_cork_dusk.png": {
-   "bytes": 507745,
+   "bytes": 515098,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11083,7 +10917,7 @@
    }
   },
   "assets/objects/obj_cork_shadow.png": {
-   "bytes": 361292,
+   "bytes": 387037,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11100,7 +10934,7 @@
    }
   },
   "assets/objects/obj_cork_shadow_dusk.png": {
-   "bytes": 206749,
+   "bytes": 206675,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11117,7 +10951,7 @@
    }
   },
   "assets/objects/obj_crane.png": {
-   "bytes": 436447,
+   "bytes": 438850,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11134,7 +10968,7 @@
    }
   },
   "assets/objects/obj_crane_dusk.png": {
-   "bytes": 438645,
+   "bytes": 438376,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11151,7 +10985,7 @@
    }
   },
   "assets/objects/obj_crane_shadow.png": {
-   "bytes": 164838,
+   "bytes": 164821,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11168,7 +11002,7 @@
    }
   },
   "assets/objects/obj_crane_shadow_dusk.png": {
-   "bytes": 165751,
+   "bytes": 165699,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11185,7 +11019,7 @@
    }
   },
   "assets/objects/obj_crown.png": {
-   "bytes": 438141,
+   "bytes": 431492,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11202,7 +11036,7 @@
    }
   },
   "assets/objects/obj_crown_dusk.png": {
-   "bytes": 438348,
+   "bytes": 440668,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11219,7 +11053,7 @@
    }
   },
   "assets/objects/obj_crown_shadow.png": {
-   "bytes": 139994,
+   "bytes": 138711,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11236,7 +11070,7 @@
    }
   },
   "assets/objects/obj_crown_shadow_dusk.png": {
-   "bytes": 136639,
+   "bytes": 141523,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11253,7 +11087,7 @@
    }
   },
   "assets/objects/obj_crumple_ball.png": {
-   "bytes": 386642,
+   "bytes": 389634,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11270,7 +11104,7 @@
    }
   },
   "assets/objects/obj_crumple_ball_dusk.png": {
-   "bytes": 407824,
+   "bytes": 406349,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11287,7 +11121,7 @@
    }
   },
   "assets/objects/obj_crumple_ball_shadow.png": {
-   "bytes": 101764,
+   "bytes": 101696,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11304,7 +11138,7 @@
    }
   },
   "assets/objects/obj_crumple_ball_shadow_dusk.png": {
-   "bytes": 92783,
+   "bytes": 92745,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11321,7 +11155,7 @@
    }
   },
   "assets/objects/obj_dog_ear.png": {
-   "bytes": 529291,
+   "bytes": 530985,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11338,7 +11172,7 @@
    }
   },
   "assets/objects/obj_dog_ear_dusk.png": {
-   "bytes": 590049,
+   "bytes": 585561,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11355,7 +11189,7 @@
    }
   },
   "assets/objects/obj_dog_ear_shadow.png": {
-   "bytes": 176577,
+   "bytes": 202255,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11372,7 +11206,7 @@
    }
   },
   "assets/objects/obj_dog_ear_shadow_dusk.png": {
-   "bytes": 158986,
+   "bytes": 165117,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11389,7 +11223,7 @@
    }
   },
   "assets/objects/obj_fortune_teller.png": {
-   "bytes": 548445,
+   "bytes": 544348,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11406,7 +11240,7 @@
    }
   },
   "assets/objects/obj_fortune_teller_dusk.png": {
-   "bytes": 585242,
+   "bytes": 579746,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11423,7 +11257,7 @@
    }
   },
   "assets/objects/obj_fortune_teller_shadow.png": {
-   "bytes": 443678,
+   "bytes": 441472,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11440,7 +11274,7 @@
    }
   },
   "assets/objects/obj_fortune_teller_shadow_dusk.png": {
-   "bytes": 197390,
+   "bytes": 197230,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11457,7 +11291,7 @@
    }
   },
   "assets/objects/obj_gold_star.png": {
-   "bytes": 424135,
+   "bytes": 420336,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11474,7 +11308,7 @@
    }
   },
   "assets/objects/obj_gold_star_dusk.png": {
-   "bytes": 429744,
+   "bytes": 432103,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11491,7 +11325,7 @@
    }
   },
   "assets/objects/obj_gold_star_shadow.png": {
-   "bytes": 194855,
+   "bytes": 195446,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11508,7 +11342,7 @@
    }
   },
   "assets/objects/obj_gold_star_shadow_dusk.png": {
-   "bytes": 113126,
+   "bytes": 117305,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11576,7 +11410,7 @@
    }
   },
   "assets/objects/obj_knot.png": {
-   "bytes": 342189,
+   "bytes": 341128,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11593,7 +11427,7 @@
    }
   },
   "assets/objects/obj_knot_dusk.png": {
-   "bytes": 347221,
+   "bytes": 349221,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11610,7 +11444,7 @@
    }
   },
   "assets/objects/obj_knot_shadow.png": {
-   "bytes": 283508,
+   "bytes": 283648,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11627,7 +11461,7 @@
    }
   },
   "assets/objects/obj_knot_shadow_dusk.png": {
-   "bytes": 95788,
+   "bytes": 95852,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11644,7 +11478,7 @@
    }
   },
   "assets/objects/obj_mug.png": {
-   "bytes": 468279,
+   "bytes": 470631,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11661,7 +11495,7 @@
    }
   },
   "assets/objects/obj_mug_dusk.png": {
-   "bytes": 495779,
+   "bytes": 497590,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11678,7 +11512,7 @@
    }
   },
   "assets/objects/obj_mug_shadow.png": {
-   "bytes": 294160,
+   "bytes": 294094,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11695,7 +11529,7 @@
    }
   },
   "assets/objects/obj_mug_shadow_dusk.png": {
-   "bytes": 163035,
+   "bytes": 162992,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11712,7 +11546,7 @@
    }
   },
   "assets/objects/obj_party_hat.png": {
-   "bytes": 471635,
+   "bytes": 454427,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11729,7 +11563,7 @@
    }
   },
   "assets/objects/obj_party_hat_dusk.png": {
-   "bytes": 467063,
+   "bytes": 472473,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11746,7 +11580,7 @@
    }
   },
   "assets/objects/obj_party_hat_shadow.png": {
-   "bytes": 333321,
+   "bytes": 353956,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11763,7 +11597,7 @@
    }
   },
   "assets/objects/obj_party_hat_shadow_dusk.png": {
-   "bytes": 203427,
+   "bytes": 215110,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11780,7 +11614,7 @@
    }
   },
   "assets/objects/obj_pencil_smudge.png": {
-   "bytes": 496493,
+   "bytes": 493382,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11797,7 +11631,7 @@
    }
   },
   "assets/objects/obj_pencil_smudge_dusk.png": {
-   "bytes": 537509,
+   "bytes": 527259,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11814,7 +11648,7 @@
    }
   },
   "assets/objects/obj_pencil_smudge_shadow.png": {
-   "bytes": 183098,
+   "bytes": 185035,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11831,7 +11665,7 @@
    }
   },
   "assets/objects/obj_pencil_smudge_shadow_dusk.png": {
-   "bytes": 133396,
+   "bytes": 134412,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11848,7 +11682,7 @@
    }
   },
   "assets/objects/obj_pinch.png": {
-   "bytes": 452636,
+   "bytes": 444402,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11865,7 +11699,7 @@
    }
   },
   "assets/objects/obj_pinch_dusk.png": {
-   "bytes": 455679,
+   "bytes": 474881,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11882,7 +11716,7 @@
    }
   },
   "assets/objects/obj_pinch_shadow.png": {
-   "bytes": 310312,
+   "bytes": 377492,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11899,7 +11733,7 @@
    }
   },
   "assets/objects/obj_pinch_shadow_dusk.png": {
-   "bytes": 148516,
+   "bytes": 140870,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11916,7 +11750,7 @@
    }
   },
   "assets/objects/obj_plane.png": {
-   "bytes": 501037,
+   "bytes": 332191,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11933,7 +11767,7 @@
    }
   },
   "assets/objects/obj_plane_dusk.png": {
-   "bytes": 514229,
+   "bytes": 337475,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -11950,7 +11784,7 @@
    }
   },
   "assets/objects/obj_plane_shadow.png": {
-   "bytes": 401705,
+   "bytes": 128927,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11967,7 +11801,7 @@
    }
   },
   "assets/objects/obj_plane_shadow_dusk.png": {
-   "bytes": 177614,
+   "bytes": 105197,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -11984,7 +11818,7 @@
    }
   },
   "assets/objects/obj_plaster.png": {
-   "bytes": 330928,
+   "bytes": 331112,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12001,7 +11835,7 @@
    }
   },
   "assets/objects/obj_plaster_dusk.png": {
-   "bytes": 340975,
+   "bytes": 341049,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12018,7 +11852,7 @@
    }
   },
   "assets/objects/obj_plaster_shadow.png": {
-   "bytes": 109819,
+   "bytes": 109818,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12035,7 +11869,7 @@
    }
   },
   "assets/objects/obj_plaster_shadow_dusk.png": {
-   "bytes": 69227,
+   "bytes": 69151,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12052,7 +11886,7 @@
    }
   },
   "assets/objects/obj_ribbon.png": {
-   "bytes": 333712,
+   "bytes": 334523,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12069,7 +11903,7 @@
    }
   },
   "assets/objects/obj_ribbon_dusk.png": {
-   "bytes": 339383,
+   "bytes": 339204,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12086,7 +11920,7 @@
    }
   },
   "assets/objects/obj_ribbon_shadow.png": {
-   "bytes": 266189,
+   "bytes": 266206,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12103,7 +11937,7 @@
    }
   },
   "assets/objects/obj_ribbon_shadow_dusk.png": {
-   "bytes": 98018,
+   "bytes": 97981,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12120,7 +11954,7 @@
    }
   },
   "assets/objects/obj_rubber_band.png": {
-   "bytes": 312134,
+   "bytes": 312169,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12137,7 +11971,7 @@
    }
   },
   "assets/objects/obj_rubber_band_dusk.png": {
-   "bytes": 315499,
+   "bytes": 315600,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12154,7 +11988,7 @@
    }
   },
   "assets/objects/obj_rubber_band_shadow.png": {
-   "bytes": 176257,
+   "bytes": 176207,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12171,7 +12005,7 @@
    }
   },
   "assets/objects/obj_rubber_band_shadow_dusk.png": {
-   "bytes": 81148,
+   "bytes": 81145,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12188,7 +12022,7 @@
    }
   },
   "assets/objects/obj_snapped_pencil.png": {
-   "bytes": 306891,
+   "bytes": 306836,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12205,7 +12039,7 @@
    }
   },
   "assets/objects/obj_snapped_pencil_dusk.png": {
-   "bytes": 318847,
+   "bytes": 318530,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12222,7 +12056,7 @@
    }
   },
   "assets/objects/obj_snapped_pencil_shadow.png": {
-   "bytes": 258169,
+   "bytes": 258209,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12239,7 +12073,7 @@
    }
   },
   "assets/objects/obj_snapped_pencil_shadow_dusk.png": {
-   "bytes": 80797,
+   "bytes": 80793,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12256,7 +12090,7 @@
    }
   },
   "assets/objects/obj_spitball.png": {
-   "bytes": 279681,
+   "bytes": 279161,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12273,7 +12107,7 @@
    }
   },
   "assets/objects/obj_spitball_dusk.png": {
-   "bytes": 281897,
+   "bytes": 282479,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12290,7 +12124,7 @@
    }
   },
   "assets/objects/obj_spitball_shadow.png": {
-   "bytes": 64896,
+   "bytes": 64933,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12307,7 +12141,7 @@
    }
   },
   "assets/objects/obj_spitball_shadow_dusk.png": {
-   "bytes": 66097,
+   "bytes": 66112,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12324,7 +12158,7 @@
    }
   },
   "assets/objects/obj_staple_chain.png": {
-   "bytes": 327315,
+   "bytes": 329667,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12341,7 +12175,7 @@
    }
   },
   "assets/objects/obj_staple_chain_dusk.png": {
-   "bytes": 319553,
+   "bytes": 326187,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12358,7 +12192,7 @@
    }
   },
   "assets/objects/obj_staple_chain_shadow.png": {
-   "bytes": 195645,
+   "bytes": 195587,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12375,7 +12209,7 @@
    }
   },
   "assets/objects/obj_staple_chain_shadow_dusk.png": {
-   "bytes": 88134,
+   "bytes": 88077,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12392,7 +12226,7 @@
    }
   },
   "assets/objects/obj_stone.png": {
-   "bytes": 353898,
+   "bytes": 355887,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12409,7 +12243,7 @@
    }
   },
   "assets/objects/obj_stone_dusk.png": {
-   "bytes": 371083,
+   "bytes": 370064,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12426,7 +12260,7 @@
    }
   },
   "assets/objects/obj_stone_shadow.png": {
-   "bytes": 241148,
+   "bytes": 241100,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12443,7 +12277,7 @@
    }
   },
   "assets/objects/obj_stone_shadow_dusk.png": {
-   "bytes": 101073,
+   "bytes": 101035,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12460,7 +12294,7 @@
    }
   },
   "assets/objects/obj_string_loop.png": {
-   "bytes": 316580,
+   "bytes": 316437,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12477,7 +12311,7 @@
    }
   },
   "assets/objects/obj_string_loop_dusk.png": {
-   "bytes": 319649,
+   "bytes": 319895,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12494,7 +12328,7 @@
    }
   },
   "assets/objects/obj_string_loop_shadow.png": {
-   "bytes": 164625,
+   "bytes": 164658,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12511,7 +12345,7 @@
    }
   },
   "assets/objects/obj_string_loop_shadow_dusk.png": {
-   "bytes": 78372,
+   "bytes": 78334,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12528,7 +12362,7 @@
    }
   },
   "assets/objects/obj_ticket.png": {
-   "bytes": 335828,
+   "bytes": 335633,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12545,7 +12379,7 @@
    }
   },
   "assets/objects/obj_ticket_dusk.png": {
-   "bytes": 334879,
+   "bytes": 334476,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12562,7 +12396,7 @@
    }
   },
   "assets/objects/obj_ticket_shadow.png": {
-   "bytes": 130182,
+   "bytes": 130656,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12579,7 +12413,7 @@
    }
   },
   "assets/objects/obj_ticket_shadow_dusk.png": {
-   "bytes": 70703,
+   "bytes": 70651,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12596,7 +12430,7 @@
    }
   },
   "assets/objects/obj_torn_corner.png": {
-   "bytes": 379814,
+   "bytes": 381475,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12613,7 +12447,7 @@
    }
   },
   "assets/objects/obj_torn_corner_dusk.png": {
-   "bytes": 386001,
+   "bytes": 397914,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12630,7 +12464,7 @@
    }
   },
   "assets/objects/obj_torn_corner_shadow.png": {
-   "bytes": 190355,
+   "bytes": 190308,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12647,7 +12481,7 @@
    }
   },
   "assets/objects/obj_torn_corner_shadow_dusk.png": {
-   "bytes": 89811,
+   "bytes": 89989,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12664,7 +12498,7 @@
    }
   },
   "assets/objects/obj_user_soup.png": {
-   "bytes": 618750,
+   "bytes": 623149,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12681,7 +12515,7 @@
    }
   },
   "assets/objects/obj_user_soup_dusk.png": {
-   "bytes": 689340,
+   "bytes": 692723,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12698,7 +12532,7 @@
    }
   },
   "assets/objects/obj_user_soup_shadow.png": {
-   "bytes": 237059,
+   "bytes": 236291,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12715,7 +12549,7 @@
    }
   },
   "assets/objects/obj_user_soup_shadow_dusk.png": {
-   "bytes": 165331,
+   "bytes": 165600,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12732,7 +12566,7 @@
    }
   },
   "assets/objects/obj_wrapper.png": {
-   "bytes": 361999,
+   "bytes": 405986,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12749,7 +12583,7 @@
    }
   },
   "assets/objects/obj_wrapper_dusk.png": {
-   "bytes": 378295,
+   "bytes": 415532,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12766,7 +12600,7 @@
    }
   },
   "assets/objects/obj_wrapper_shadow.png": {
-   "bytes": 389667,
+   "bytes": 327417,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12783,7 +12617,7 @@
    }
   },
   "assets/objects/obj_wrapper_shadow_dusk.png": {
-   "bytes": 109741,
+   "bytes": 110217,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12800,7 +12634,7 @@
    }
   },
   "assets/paper/graph_01.webp": {
-   "bytes": 185576,
+   "bytes": 182504,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -12876,7 +12710,7 @@
    }
   },
   "assets/paper/graph_01_dusk.webp": {
-   "bytes": 415992,
+   "bytes": 418630,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -12952,7 +12786,7 @@
    }
   },
   "assets/paper/graph_02.webp": {
-   "bytes": 178436,
+   "bytes": 169702,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -13028,7 +12862,7 @@
    }
   },
   "assets/paper/graph_02_dusk.webp": {
-   "bytes": 404984,
+   "bytes": 408842,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -13104,7 +12938,7 @@
    }
   },
   "assets/paper/graph_03.webp": {
-   "bytes": 170954,
+   "bytes": 176208,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -13180,7 +13014,7 @@
    }
   },
   "assets/paper/graph_03_dusk.webp": {
-   "bytes": 407524,
+   "bytes": 405536,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -13256,7 +13090,7 @@
    }
   },
   "assets/paper/graph_04.webp": {
-   "bytes": 173712,
+   "bytes": 169776,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -13332,7 +13166,7 @@
    }
   },
   "assets/paper/graph_04_dusk.webp": {
-   "bytes": 397928,
+   "bytes": 400666,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -13408,7 +13242,7 @@
    }
   },
   "assets/paper/index_01.webp": {
-   "bytes": 132444,
+   "bytes": 137324,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -13606,7 +13440,7 @@
    }
   },
   "assets/paper/index_02.webp": {
-   "bytes": 130424,
+   "bytes": 133926,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -13804,7 +13638,7 @@
    }
   },
   "assets/paper/legal_01.webp": {
-   "bytes": 159804,
+   "bytes": 156024,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14004,7 +13838,7 @@
    }
   },
   "assets/paper/legal_02.webp": {
-   "bytes": 156116,
+   "bytes": 154606,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14204,7 +14038,7 @@
    }
   },
   "assets/paper/lined_01.webp": {
-   "bytes": 153348,
+   "bytes": 157940,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14303,7 +14137,7 @@
    }
   },
   "assets/paper/lined_01_dusk.webp": {
-   "bytes": 382886,
+   "bytes": 378444,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14402,7 +14236,7 @@
    }
   },
   "assets/paper/lined_02.webp": {
-   "bytes": 157484,
+   "bytes": 160230,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14501,7 +14335,7 @@
    }
   },
   "assets/paper/lined_02_dusk.webp": {
-   "bytes": 386872,
+   "bytes": 395444,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14600,7 +14434,7 @@
    }
   },
   "assets/paper/lined_03.webp": {
-   "bytes": 156602,
+   "bytes": 155794,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14699,7 +14533,7 @@
    }
   },
   "assets/paper/lined_03_dusk.webp": {
-   "bytes": 394990,
+   "bytes": 398664,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14798,7 +14632,7 @@
    }
   },
   "assets/paper/lined_04.webp": {
-   "bytes": 159292,
+   "bytes": 160512,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14897,7 +14731,7 @@
    }
   },
   "assets/paper/lined_04_dusk.webp": {
-   "bytes": 384724,
+   "bytes": 385790,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -14996,7 +14830,7 @@
    }
   },
   "assets/paper/looseleaf_01.webp": {
-   "bytes": 135124,
+   "bytes": 137502,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -15142,7 +14976,7 @@
    }
   },
   "assets/paper/looseleaf_02.webp": {
-   "bytes": 134950,
+   "bytes": 135318,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -15288,7 +15122,7 @@
    }
   },
   "assets/paper/looseleaf_03.webp": {
-   "bytes": 138284,
+   "bytes": 138254,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -15434,7 +15268,7 @@
    }
   },
   "assets/paper/looseleaf_04.webp": {
-   "bytes": 140834,
+   "bytes": 136598,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -15580,7 +15414,7 @@
    }
   },
   "assets/paper/receipt_01.webp": {
-   "bytes": 63802,
+   "bytes": 62732,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -15704,7 +15538,7 @@
    }
   },
   "assets/paper/spiral_01.webp": {
-   "bytes": 170694,
+   "bytes": 169610,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -15803,7 +15637,7 @@
    }
   },
   "assets/paper/spiral_01_dusk.webp": {
-   "bytes": 398642,
+   "bytes": 398846,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -15902,7 +15736,7 @@
    }
   },
   "assets/paper/spiral_02.webp": {
-   "bytes": 171132,
+   "bytes": 170282,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16001,7 +15835,7 @@
    }
   },
   "assets/paper/spiral_02_dusk.webp": {
-   "bytes": 392780,
+   "bytes": 399276,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16100,7 +15934,7 @@
    }
   },
   "assets/paper/spiral_03.webp": {
-   "bytes": 174052,
+   "bytes": 175130,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16199,7 +16033,7 @@
    }
   },
   "assets/paper/spiral_03_dusk.webp": {
-   "bytes": 404390,
+   "bytes": 404798,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16298,7 +16132,7 @@
    }
   },
   "assets/paper/spiral_04.webp": {
-   "bytes": 169260,
+   "bytes": 168464,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16397,7 +16231,7 @@
    }
   },
   "assets/paper/spiral_04_dusk.webp": {
-   "bytes": 393406,
+   "bytes": 397870,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16496,7 +16330,7 @@
    }
   },
   "assets/paper/sticky_blue_01.webp": {
-   "bytes": 189924,
+   "bytes": 186582,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16604,7 +16438,7 @@
    }
   },
   "assets/paper/sticky_blue_02.webp": {
-   "bytes": 178480,
+   "bytes": 180888,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16712,7 +16546,7 @@
    }
   },
   "assets/paper/sticky_pink_01.webp": {
-   "bytes": 174826,
+   "bytes": 180238,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16820,7 +16654,7 @@
    }
   },
   "assets/paper/sticky_pink_02.webp": {
-   "bytes": 176472,
+   "bytes": 177730,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16928,7 +16762,7 @@
    }
   },
   "assets/paper/sticky_yellow_01.webp": {
-   "bytes": 169336,
+   "bytes": 170680,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -17036,7 +16870,7 @@
    }
   },
   "assets/paper/sticky_yellow_02.webp": {
-   "bytes": 173674,
+   "bytes": 171030,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -19719,6 +19553,30 @@
     ],
     "rig": "blender/rig/common.py",
     "samples": 10,
+    "thickness_m": 0.00011
+   }
+  },
+  "assets/tears/tear_002_shadow_dusk.png": {
+   "bytes": 599159,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "dusk",
+    "mask": "assets/tears/tear_002.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     1680,
+     1680
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
