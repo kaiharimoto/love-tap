@@ -164,6 +164,8 @@ void main() {
     final pads = find.byType(FitRows, skipOffstage: false);
     expect(pads.evaluate().length, kModules.length,
         reason: 'one FitRows per module on the desk, in registry order');
+    final slotTop = tester.getTopLeft(find.byType(UsRegion)).dy;
+    final slot = tester.getSize(find.byType(UsRegion)).height;
 
     final bare = <String>[];
     for (final (i, module) in kModules.indexed) {
@@ -179,6 +181,13 @@ void main() {
           height += child.size.height;
         }
         child = ro.childAfter(child);
+      }
+      // and the last row of the last module has to be inside the slot as well as begun inside it:
+      // FitRows always keeps a first row, so five first rows can between them run past the bottom
+      // of the screen and the fifth module's one row is then cut by a hard horizontal edge.
+      final bottom = tester.getBottomLeft(pads.at(i)).dy - slotTop;
+      if (bottom > slot + 1) {
+        bare.add('${module.label}: its rows end ${bottom.round()} pt into a ${slot.round()} pt slot');
       }
       if (shown == 0 || ro.size.height <= 1) {
         bare.add('${module.label}: ${shown} rows, ${ro.size.height.round()} pt');
