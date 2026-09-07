@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import 'assignment.dart';
 import 'library.dart';
 import 'palette.dart';
 import 'light.dart';
@@ -186,8 +187,18 @@ class PaperPiece extends StatelessWidget {
       ],
     );
     // the stock is drawn larger than the piece so two notes never show the same patch of paper;
-    // clip it to the piece before masking, or it paints over its neighbours
-    final clipped = ClipRect(child: content);
+    // clip it to the piece before masking, or it paints over its neighbours.
+    //
+    // A whole sheet is clipped to a *cut*, not to a rectangle. A guillotine is a straight blade
+    // and a card is still not a rectangle when it comes off one: the edge wanders by a fraction
+    // of a millimetre and the corners are nicked. The DATES card measured its right edge at
+    // exactly x=1072 for sixteen rows running and its top at exactly y=292 for every column, with
+    // corner radius zero — which is the shape the anti-goal forbids, reached by clipping. The
+    // wander is deterministic in the piece's own stock id, so a card is the same card every time
+    // it is drawn and on both phones.
+    final clipped = tearId == null
+        ? ClipPath(clipper: _CutShape(hashOf(stockId)), child: content)
+        : ClipRect(child: content);
     final piece = tearId == null ? clipped : MaskedLayer(maskAsset: tearAsset(tearId!), child: clipped);
     return Transform.rotate(
       angle: tilt,
@@ -532,6 +543,41 @@ class _NinePainter extends CustomPainter {
 
 /// The thickness of card stock along a straight cut: light on the top and left edges, a hair of
 /// shade on the bottom and right, the way the light falls on everything else on the desk.
+/// The silhouette of a cut card: the rectangle, with the blade's own wander along each edge and
+/// a nick off each corner. Under a millimetre in all, which is what a guillotine leaves.
+class _CutShape extends CustomClipper<Path> {
+  const _CutShape(this.seed);
+  final int seed;
+
+  double _w(int i, double amp) {
+    // a small deterministic hash: the same card is the same shape on both phones
+    final h = (seed * 2654435761 + i * 40503) & 0xFFFF;
+    return (h / 0xFFFF - 0.5) * 2 * amp;
+  }
+
+  @override
+  Path getClip(Size size) {
+    const amp = 0.55;      // logical points: about a millimetre and a half at three times
+    const nick = 1.6;
+    final p = Path();
+    final l = _w(1, amp), t = _w(2, amp), r = size.width + _w(3, amp), b = size.height + _w(4, amp);
+    final n = [for (var i = 0; i < 4; i++) nick * (0.5 + (_w(10 + i, 1.0) + 1) / 2 * 0.5)];
+    p.moveTo(l + n[0], t + _w(5, amp * 0.6));
+    p.lineTo(r - n[1], t + _w(6, amp * 0.6));
+    p.lineTo(r + _w(7, amp * 0.4), t + n[1]);
+    p.lineTo(r + _w(8, amp * 0.4), b - n[2]);
+    p.lineTo(r - n[2], b + _w(9, amp * 0.6));
+    p.lineTo(l + n[3], b + _w(11, amp * 0.6));
+    p.lineTo(l + _w(12, amp * 0.4), b - n[3]);
+    p.lineTo(l + _w(13, amp * 0.4), t + n[0]);
+    p.close();
+    return p;
+  }
+
+  @override
+  bool shouldReclip(_CutShape old) => old.seed != seed;
+}
+
 class _CutEdge extends CustomPainter {
   const _CutEdge();
 
