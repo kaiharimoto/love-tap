@@ -1,39 +1,5 @@
 {
  "files": {
-  "../../../tmp/objprobe/obj_bookmark.png": {
-   "bytes": 114760,
-   "generator": "blender/objects/objects.py",
-   "kind": "feeling_object",
-   "settings": {
-    "frame_mm": 60,
-    "light": "day",
-    "object": "obj_bookmark",
-    "pass": "object",
-    "resolution": [
-     600,
-     600
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 10
-   }
-  },
-  "../../../tmp/objprobe/obj_bookmark_shadow.png": {
-   "bytes": 83892,
-   "generator": "blender/objects/objects.py",
-   "kind": "feeling_shadow",
-   "settings": {
-    "frame_mm": 60,
-    "light": "day",
-    "object": "obj_bookmark",
-    "pass": "shadow",
-    "resolution": [
-     600,
-     600
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 10
-   }
-  },
   "assets/bits/clip_01.png": {
    "bytes": 246937,
    "generator": "blender/bits/bits.py",
@@ -10475,7 +10441,7 @@
    }
   },
   "assets/objects/obj_bookmark.png": {
-   "bytes": 419704,
+   "bytes": 422056,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10492,7 +10458,7 @@
    }
   },
   "assets/objects/obj_bookmark_dusk.png": {
-   "bytes": 429615,
+   "bytes": 442846,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10509,7 +10475,7 @@
    }
   },
   "assets/objects/obj_bookmark_shadow.png": {
-   "bytes": 199481,
+   "bytes": 278795,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10526,7 +10492,7 @@
    }
   },
   "assets/objects/obj_bookmark_shadow_dusk.png": {
-   "bytes": 130457,
+   "bytes": 143162,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10815,7 +10781,7 @@
    }
   },
   "assets/objects/obj_confetti.png": {
-   "bytes": 326627,
+   "bytes": 324744,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10832,7 +10798,7 @@
    }
   },
   "assets/objects/obj_confetti_dusk.png": {
-   "bytes": 336631,
+   "bytes": 327613,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -10849,7 +10815,7 @@
    }
   },
   "assets/objects/obj_confetti_shadow.png": {
-   "bytes": 106213,
+   "bytes": 164447,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -10866,7 +10832,7 @@
    }
   },
   "assets/objects/obj_confetti_shadow_dusk.png": {
-   "bytes": 80931,
+   "bytes": 82037,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12566,7 +12532,7 @@
    }
   },
   "assets/objects/obj_wrapper.png": {
-   "bytes": 405986,
+   "bytes": 406411,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12583,7 +12549,7 @@
    }
   },
   "assets/objects/obj_wrapper_dusk.png": {
-   "bytes": 415532,
+   "bytes": 424789,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_object",
    "settings": {
@@ -12600,7 +12566,7 @@
    }
   },
   "assets/objects/obj_wrapper_shadow.png": {
-   "bytes": 327417,
+   "bytes": 324879,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -12617,7 +12583,7 @@
    }
   },
   "assets/objects/obj_wrapper_shadow_dusk.png": {
-   "bytes": 110217,
+   "bytes": 127060,
    "generator": "blender/objects/objects.py",
    "kind": "feeling_shadow",
    "settings": {
@@ -15476,7 +15442,7 @@
    }
   },
   "assets/paper/receipt_01_dusk.webp": {
-   "bytes": 182940,
+   "bytes": 183666,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16384,7 +16350,7 @@
    }
   },
   "assets/paper/sticky_blue_01_dusk.webp": {
-   "bytes": 332210,
+   "bytes": 333752,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16492,7 +16458,7 @@
    }
   },
   "assets/paper/sticky_blue_02_dusk.webp": {
-   "bytes": 322776,
+   "bytes": 319778,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16600,7 +16566,7 @@
    }
   },
   "assets/paper/sticky_pink_01_dusk.webp": {
-   "bytes": 337680,
+   "bytes": 344678,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16708,7 +16674,7 @@
    }
   },
   "assets/paper/sticky_pink_02_dusk.webp": {
-   "bytes": 331526,
+   "bytes": 345626,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
