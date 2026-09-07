@@ -313,7 +313,12 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
       child: Stack(
         children: [
           Positioned.fill(child: CustomPaint(painter: _FramePainter(image))),
-          if (overlay != null) overlay(context, p, size),
+          // Positioned.fill, because what the overlay returns is itself a Stack of positioned
+          // children. A Stack with no non-positioned child sizes to nothing under loose
+          // constraints, and everything positioned inside it then fills nothing: the letter
+          // opened and stayed blank, which three critics measured as a sheet with a minimum
+          // luminance of 223 and not one pixel of ink on it.
+          if (overlay != null) Positioned.fill(child: overlay(context, p, size)),
         ],
       ),
     );
