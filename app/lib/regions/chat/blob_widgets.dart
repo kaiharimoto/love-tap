@@ -27,6 +27,20 @@ import '../../material/marks.dart';
 class BlobCache {
   static final Map<String, Future<StoredBlob?>> _futures = {};
   static final Set<String> _resolved = {};
+
+  /// What has already come, kept so a picture that is on the desk can be drawn on the frame the
+  /// row is rebuilt on rather than on the one after it.
+  ///
+  /// A `FutureBuilder` handed a future that is already finished still builds once with no data:
+  /// the callback runs on the next microtask, and the frame in between is a real frame. A fling
+  /// rebuilds a row every time it comes back into view, so the picture in the thread blinked out
+  /// to the sentence about fetching on three isolated frames of a three-hundred-frame clip — a
+  /// critic measured it, and it reads as the app losing a photograph it is holding.
+  static final Map<String, StoredBlob> _have = {};
+
+  /// Hashes the store has answered about and does not hold. Not the same as one that has not
+  /// come yet, and it must not be drawn as one: waiting says the picture is on its way.
+  static final Set<String> _absent = {};
   static int _inFlight = 0;
   static final List<Completer<void>> _waiting = [];
   static const width = 6;
@@ -34,9 +48,20 @@ class BlobCache {
   static Future<StoredBlob?> get(Spine spine, String hash) => _futures.putIfAbsent(hash, () async {
         final b = await _limited(() => spine.blob(hash));
         // arrived means arrived: a hash the store does not hold is answered, not delivered
-        if (b != null) _resolved.add(hash);
+        if (b != null) {
+          _resolved.add(hash);
+          _have[hash] = b;
+        } else {
+          _absent.add(hash);
+        }
         return b;
       });
+
+  /// What is already in hand for [hash], or null if it has not come or is not held.
+  static StoredBlob? peek(String hash) => _have[hash];
+
+  /// Whether the store has answered about [hash] and does not have it.
+  static bool missing(String hash) => _absent.contains(hash);
 
   static Future<T> _limited<T>(Future<T> Function() read) async {
     if (_inFlight >= width) {
@@ -60,6 +85,8 @@ class BlobCache {
   static void forget(String hash) {
     _futures.remove(hash);
     _resolved.remove(hash);
+    _have.remove(hash);
+    _absent.remove(hash);
   }
 
   /// For the capture report: how many pictures were asked for and how many have come.
@@ -100,15 +127,20 @@ class BlobImage extends StatelessWidget {
     final spine = AppScope.of(context).spine;
     return FutureBuilder<StoredBlob?>(
       future: BlobCache.get(spine, hash),
+      // a picture already in hand is drawn on this frame, not on the next one
+      initialData: BlobCache.peek(hash),
       builder: (context, snap) {
         final b = snap.data;
         if (b == null) {
+          // A picture the store has answered about and does not hold is not on its way, and
+          // saying it is fetching for ever is a lie a reader can see. It is a blank print.
+          final waiting = !quiet && !BlobCache.missing(hash);
           return SizedBox(
             width: width,
             height: height ?? (quiet ? null : 160),
-            child: quiet
-                ? const ColoredBox(color: Color(0x14000000))
-                : const Center(child: Text(S.fetching, style: TextStyle(fontSize: 12))),
+            child: waiting
+                ? const Center(child: Text(S.fetching, style: TextStyle(fontSize: 12)))
+                : const ColoredBox(color: Color(0x14000000)),
           );
         }
         return Image.memory(
@@ -246,12 +278,25 @@ Future<Uint8List?> blobBytes(BuildContext context, String hash) async =>
 
 /// A photograph or a video still, taped to the note at two corners.
 class Print extends StatelessWidget {
-  const Print({super.key, required this.item, required this.hash, required this.aspect, this.caption, this.durationMs});
+  const Print({
+    super.key,
+    required this.item,
+    required this.hash,
+    required this.aspect,
+    this.caption,
+    this.durationMs,
+    this.play = false,
+  });
   final ThreadItem item;
   final String hash;
   final double aspect;
   final String? caption;
   final int? durationMs;
+
+  /// Whether this is a frame off a film rather than a photograph. A video row carried its length
+  /// and nothing else, so a critic stepping the thread found a poster with no play control, no
+  /// duration visible against it and nothing saying it was a video at all.
+  final bool play;
 
   @override
   Widget build(BuildContext context) {
@@ -280,6 +325,7 @@ class Print extends StatelessWidget {
                     child: Image.asset(bitAsset(tape), width: 60, errorBuilder: PaperPiece.none),
                   ),
                 ),
+              if (play) Mark.play(size: 34, colour: Pen.graphite, seed: hashOf(item.id) % 40),
               if (durationMs != null)
                 Positioned(
                   right: 8,

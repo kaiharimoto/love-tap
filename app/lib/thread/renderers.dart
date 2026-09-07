@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 
 import '../feelings/authored_row.dart';
 import '../material/hands.dart';
+import '../material/marks.dart';
 import '../material/objects.dart';
 import '../material/palette.dart';
 import '../modules/registry.dart';
@@ -42,13 +43,46 @@ Widget _print(NoteContext c) => Print(
   caption: c.item.text,
 );
 
-Widget _printTab(NoteContext c) => Print(
-  item: c.item,
-  hash: c.payload['poster_blob'] as String,
-  aspect: (c.payload['w'] as num) / (c.payload['h'] as num),
-  caption: c.item.text,
-  durationMs: (c.payload['duration_ms'] as num).toInt(),
-);
+/// A video in the thread: the frame it opens on, the mark you press, and how long it runs.
+///
+/// Fourteen of the seeded year's videos have no poster frame — frame extraction is not on both
+/// platforms yet — and drawing one of those as a picture gave a row asking the store for a hash it
+/// does not hold and then sitting on `still fetching the picture.` for ever. A critic stepping the
+/// thread found the video row as a blank sliver of paper with no poster, no play control, no
+/// duration and nothing saying it was a video at all. A video with no frame off it is what a video
+/// is on a desk: a strip with its length written on it and the mark you press.
+Widget _printTab(NoteContext c) {
+  final poster = c.payload['poster_blob'] as String?;
+  final ms = (c.payload['duration_ms'] as num).toInt();
+  if (poster == null || poster.isEmpty) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: [
+            Mark.play(size: 22, colour: Pen.graphite, seed: (c.event.seq ?? 0) % 40),
+            const SizedBox(width: 10),
+            Text('${(ms / 1000).round()}s', style: Hands.margin(size: 14)),
+          ],
+        ),
+        if (c.item.text != null && c.item.text!.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Written(c.item.text!, by: c.item.author, size: 17),
+          ),
+      ],
+    );
+  }
+  return Print(
+    item: c.item,
+    hash: poster,
+    aspect: (c.payload['w'] as num) / (c.payload['h'] as num),
+    caption: c.item.text,
+    durationMs: ms,
+    play: true,
+  );
+}
 
 Widget _stripWave(NoteContext c) => VoiceNotePlayer(
   hash: c.payload['blob'] as String,
