@@ -45,12 +45,18 @@ Widget _print(NoteContext c) => Print(
 
 /// A video in the thread: the frame it opens on, the mark you press, and how long it runs.
 ///
-/// Fourteen of the seeded year's videos have no poster frame — frame extraction is not on both
-/// platforms yet — and drawing one of those as a picture gave a row asking the store for a hash it
-/// does not hold and then sitting on `still fetching the picture.` for ever. A critic stepping the
-/// thread found the video row as a blank sliver of paper with no poster, no play control, no
-/// duration and nothing saying it was a video at all. A video with no frame off it is what a video
-/// is on a desk: a strip with its length written on it and the mark you press.
+/// A critic stepping the thread found the video row as a blank sliver of paper with no poster, no
+/// play control, no duration and nothing saying it was a video at all. Half of that was the
+/// framing — the video is the last row of the stretch the hero anchors on, so most of it is below
+/// the fold — and half was this: the row drew the poster and its length and nothing else, so the
+/// part of it that is on the glass says nothing about what it is. The mark you press is on it now.
+///
+/// The other branch is for a video with no frame off it. Every video in the seeded year has a
+/// poster (`seed_loader.dart` puts both, and drops the event if either is missing), so this is
+/// not what the year shows — but frame extraction is not on both platforms yet, so a video written
+/// on a phone can arrive without one, and asking the store for a hash it does not hold left the
+/// row on `still fetching the picture.` for ever. A video with no frame off it is what a video is
+/// on a desk: a strip with its length written on it and the mark you press.
 Widget _printTab(NoteContext c) {
   final poster = c.payload['poster_blob'] as String?;
   final ms = (c.payload['duration_ms'] as num).toInt();

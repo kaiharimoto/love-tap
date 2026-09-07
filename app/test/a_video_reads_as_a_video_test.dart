@@ -17,6 +17,7 @@ import 'package:desk/material/library.dart';
 import 'package:desk/material/marks.dart';
 import 'package:desk/regions/chat/blob_widgets.dart';
 import 'package:desk/regions/chat/chat_region.dart';
+import 'package:desk/regions/moments/moments_region.dart';
 import 'package:desk/scope.dart';
 import 'package:desk/spine/spine.dart';
 import 'package:desk/spine/store/store.dart';
@@ -146,5 +147,30 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(S.fetching), findsNothing,
         reason: 'the store has answered and does not have it: it is not still coming');
+  });
+
+  testWidgets('a video in the pile is not a photograph', (tester) async {
+    // In the gallery a video with a poster was a print of one frame and nothing else: the same
+    // card, the same border, and nothing saying it moves. Six photographs and one video built
+    // seven prints and no marks.
+    final scope = await _aScope();
+    addTearDown(scope.dispose);
+    for (var i = 0; i < 6; i++) {
+      await scope.spine.append('photo', {'blob': 'p$i', 'w': 1200, 'h': 1600},
+          at: DateTime.utc(2026, 3, i + 1), hostAssign: true);
+    }
+    await scope.spine.append(
+      'video',
+      {'blob': 'v', 'poster_blob': 'vp', 'duration_ms': 7000, 'w': 1920, 'h': 1080},
+      at: DateTime.utc(2026, 3, 9),
+      hostAssign: true,
+    );
+    await _draw(tester, scope, const MomentsRegion());
+
+    expect(find.byType(BlobImage).evaluate().length, 7,
+        reason: 'a photograph can never carry a poster, and a gallery that branches on the poster '
+            'sends every one of them down the video path');
+    expect(find.byType(Mark), findsOneWidget, reason: 'the video is a print like any other');
+    expect(find.text('7s'), findsOneWidget);
   });
 }

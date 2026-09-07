@@ -513,11 +513,11 @@ class _One extends StatelessWidget {
     // A photograph has no poster_blob and never can — spine/types.dart gives the photo spec
     // required ['blob','w','h'] and validate() rejects unknown keys — so branching on the poster
     // alone sent every photograph in the gallery down the video path. Branch on what the thing is.
-    // A video with no poster frame is not a picture, and drawing it as one gave the gallery four
-    // blank prints: the report counted twenty-six tiles laid out and eighteen pictures asked for,
-    // and the eight it never asked about were holes with nothing loading in them. Frame extraction
-    // does not exist on both platforms yet (docs), so until it does a video is what a video is on a
-    // desk — a strip with its length written on it and the mark you press.
+    // A video with no poster frame is not a picture. Every video in the seeded year has one, so
+    // this branch is not what the artifacts show; frame extraction does not exist on both
+    // platforms yet (docs), so a video written on a phone can arrive without a frame off it, and
+    // until then a video is what a video is on a desk — a strip with its length written on it and
+    // the mark you press.
     if (event.type == 'video' && (poster == null || poster.isEmpty)) {
       final ms = (event.payload['duration_ms'] as num?)?.toDouble();
       return Align(
@@ -562,11 +562,32 @@ class _One extends StatelessWidget {
         child: SizedBox(
           width: inner.width,
           height: inner.height,
-          child: BlobImage(
-            hash: hash,
-            fit: BoxFit.cover,
-            cacheWidth: (inner.width * dpr).round(),
-            quiet: true,
+          // A video that does have a frame off it is a print of that frame and nothing else, so
+          // in the pile it is a photograph: same card, same border, nothing saying it moves. The
+          // mark you press and its length go on it, the way they go on the row in the thread.
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned.fill(
+                child: BlobImage(
+                  hash: hash,
+                  fit: BoxFit.cover,
+                  cacheWidth: (inner.width * dpr).round(),
+                  quiet: true,
+                ),
+              ),
+              if (event.type == 'video') ...[
+                Mark.play(size: 26, colour: Pen.graphite, seed: row),
+                Positioned(
+                  right: 4,
+                  bottom: 3,
+                  child: Text(
+                    '${((event.payload['duration_ms'] as num?) ?? 0) ~/ 1000}s',
+                    style: Hands.margin(size: 11),
+                  ),
+                ),
+              ],
+            ],
           ),
         ),
       ),

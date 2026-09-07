@@ -90,8 +90,15 @@ somebody else's.
   all. The point budget puts all five headings inside it. (Measured by the new guard test, which
   fails on the old layout.)
 - projector: the rebuild test loses one row of 7018 on the code of two commits ago.
-- 04_moments: 14 of the seeded year's videos have no poster frame; those tiles asked for no
-  picture and drew nothing. Now drawn as what a video is.
+- 04_moments: the gallery branched on whether an event had a `poster_blob`, and a photograph can
+  never have one — the spec is required ['blob','w','h'] and validate() rejects unknown keys — so
+  **every photograph went down the video path**: a probe with six photos and one video built one
+  BlobImage and six play-mark cards. On the seeded year (115 photos, 14 videos) that is 129 cards
+  and no pictures at all. It branches on the type now.
+  I wrote in an earlier draft of this sheet that 14 of the year's videos have no poster frame.
+  That is wrong and it is corrected here: `seed_loader.dart` puts both blobs and drops the event
+  if either is missing, and all 14 posters are on disk. The no-poster row exists because frame
+  extraction is not on both platforms yet, not because the year has one.
 - the outbox: a refused event was re-pushed every round for ever, and the host never refused
   anything — it dropped what it would not take without answering. Both fixed, with a test.
 - the five delivery states. Measured on 13_messenger_states.png: one distinct mark on five rows.
