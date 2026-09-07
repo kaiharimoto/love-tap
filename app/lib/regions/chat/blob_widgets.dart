@@ -241,7 +241,10 @@ class _VoiceNotePlayerState extends State<VoiceNotePlayer> {
         SizedBox(
           width: 160,
           height: 28,
-          child: CustomPaint(painter: _WavePainter(widget.waveform, _progress, Theme.of(context).colorScheme.onSurface)),
+          // the waveform is drawn in ink, not in the platform's own on-surface colour: it is the
+          // one mark on the desk that was taking its colour from Material's theme
+          child: CustomPaint(
+              painter: _WavePainter(widget.waveform, _progress, Pen.graphite)),
         ),
         const SizedBox(width: 8),
         // the length of the recording, in the margin hand: this and the fetching line were the
