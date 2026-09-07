@@ -42,6 +42,8 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   final _text = TextEditingController();
   final _scroll = ItemScrollController();
   final _positions = ItemPositionsListener.create();
+  /// A real pixel offset into the list, for the fling. See [CaptureBus.scrollBy].
+  final _offset = ScrollOffsetController();
 
   /// The ids the thread held when this region was first drawn. A row that is not among them came
   /// across the wire while the region was open, and a folded one lands rather than being found.
@@ -110,12 +112,15 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       await Future<void>.delayed(const Duration(milliseconds: 240));
     };
     CaptureBus.scrollBy = (dy) {
-      // one nudge of the thread's own scroller, which is what a frame of the scroll clip is
-      final ps = _positions.itemPositions.value;
-      if (ps.isEmpty || !_scroll.isAttached) return;
-      final first = ps.reduce((a, b) => a.index <= b.index ? a : b);
-      final height = MediaQuery.sizeOf(context).height;
-      _scroll.jumpTo(index: first.index, alignment: first.itemLeadingEdge - dy / height);
+      // One nudge of the thread's own scroller, which is what a frame of the scroll clip is:
+      // a real scroll, by pixels, on the list's own controller. It used to re-enter the list at
+      // a new index and alignment every step, and jumping to an index is not a scroll: the
+      // positioned list tears down its active sliver and builds another one at the new index, so
+      // every frame of the fling was a rebuild. The frame timings say what that cost — build p50
+      // 20 ms, p95 1426, max 1785, against a raster that never leaves 166-212 — and the spikes
+      // recur every third frame, which is the list swapping between its two children.
+      if (dy == 0 || !_scroll.isAttached) return;
+      _offset.animateScroll(offset: dy, duration: Duration.zero);
     };
     CaptureBus.stageStates = () async {
       // Real messages down the real path. The thread is paired with the far phone for this
@@ -568,6 +573,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                   ? const EmptySurface(id: 'chat', line: S.emptyChat, aside: S.emptyChatAside)
                   : ScrollablePositionedList.builder(
                       itemScrollController: _scroll,
+                      scrollOffsetController: _offset,
                       itemPositionsListener: _positions,
                       // one more than there are notes: the last index is a hand's width of bare
                       // desk under the newest note. Without it there is nothing to scroll the
