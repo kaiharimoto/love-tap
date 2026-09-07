@@ -62,8 +62,13 @@ somebody else's.
   These six were measured at 10 render samples against the shipped 48, so the internal-contrast
   numbers are not like for like — the silhouette ones are.
   And obj_ticket measures worse than two of the six the critic named, and is not done.
-- fold sequence: unfold_thirds stops moving at frame 208 of 240; its noise floor is 0.708 grey
-  levels. Packed at 209 frames, and what was dropped is in the manifest.
+- fold sequence: unfold_thirds stops moving at frame **146** of 240; its noise floor is 0.527 grey
+  levels and its gate 1.318. Packed at 147 frames, and what was dropped is in the manifest.
+  The first number I wrote here was 208 of 240, and it was wrong: the packer registered a
+  sequence's frames by their crop offsets, so the rest detector was differencing a frame against
+  one that was not its neighbour and found motion in the difference between two crops. Corrected,
+  the sequence is 2.35 s, not 3.34, and the 06 clip makes its four seconds out of two more takes
+  rather than out of a longer hold.
 
 ## The hands
 - stroke width along a stroke, coefficient of variation over twenty lower-case letters, at
@@ -103,6 +108,16 @@ somebody else's.
   `queued` is the one state not staged: it needs the link down, and a frame of a disconnected phone
   would contradict every other artifact. The report says which states were on the glass.
 
+- what a fifth module costs, counted by reading the source: five shared files at cycle 2, two at
+  cycle 5, one now (the spine registry, which is a principle — one list validates every payload
+  written or taken off the wire). The two that went this cycle were the thread body and the
+  sentence, both of which lived in the chat region. Two more per-type switches went with them and
+  they were not merely duplicated, they were short: the search page's "found as ..." table named
+  **11 of the 18** types, so a thing passed on told the reader `passed on` — its own registry id
+  with the underscore taken out — and Moments' "what happened" lens named **4 of the 5** kinds of
+  thing that happen, so the shelf appeared in no lens at all. Both read the type's own declaration
+  now. `module_costs_test` fails on a table with 'date_event' in it, checked.
+
 ## Still open, measured or named
 - paper is rendered as WebP at Blender's default quality 92 and then packed, so every downstream
   number is measured against an already-degraded ceiling.
@@ -110,5 +125,4 @@ somebody else's.
   would buy as much as the bounce plane did and would change every family at once.
 - eight of the feeling objects are flat-lying sheets and stains: no lighting change puts a
   gradient on a plane, and those want different objects.
-- a module's renderer bodies still live in the chat region.
 - 09 and 16 need an Android device; the vibrator is untested; transport is local.
