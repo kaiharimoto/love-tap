@@ -192,6 +192,12 @@ The scene was run end to end against `host_daemon --seed year` and the frames pu
 - The same rehearsal's console carried `WebGL: INVALID_VALUE: texImage2D: no image` and a null
   check thrown inside a paint: the window was disposing the frame a widget was still holding while
   the next one decoded. Nothing on the glass is disposed now.
+- **After both fixes the third rehearsal is clean**: 326 frames, 5.22 s, `ok: true`, **0 repeated
+  frames**, 0 brightness jumps, and the scene log's `problems` list is empty — no console error at
+  all, where the first two runs carried four. The frame nearest the held-frame test that still
+  counts as motion is frame 16 (mean 0.067, busiest tile 4.6 against a floor of 2.0). The last
+  frame shows both notes open, with their ink, their hands and their timestamps: the blank letter
+  three critics measured is not there.
 
 ## Still open, measured or named
 - paper is rendered as WebP at Blender's default quality 92 and then packed, so every downstream
