@@ -16,7 +16,7 @@ import 'package:desk/spine/types.dart';
 import 'package:desk/transport/transport.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:desk/feelings/landing.dart';
-import 'package:desk/regions/chat/renderers.dart';
+import 'package:desk/thread/renderers.dart';
 
 void main() {
   test('at least thirty built-in feelings, in at least five named families', () {
@@ -84,7 +84,7 @@ void main() {
   test('at least fourteen event types, each with a renderer and a notification treatment', () {
     // This test used to assert that a non-nullable List was not null, which is to say it asserted
     // nothing at all while carrying a name that said otherwise. The renderer half now has to
-    // exist in regions/chat/renderers.dart, and thread_types_test holds the other end.
+    // exist in thread/renderers.dart, and thread_types_test holds the other end.
     expect(kEventTypes.length, greaterThanOrEqualTo(14));
     for (final spec in kEventTypes) {
       expect(spec.renderer.trim(), isNotEmpty, reason: '${spec.id} names no renderer');

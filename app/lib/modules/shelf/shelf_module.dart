@@ -17,7 +17,9 @@ import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../spine/spine.dart';
 import '../desk_line.dart';
+import '../../thread/note_body.dart';
 import '../module.dart';
+import 'thread_row.dart';
 
 class ShelfModule extends Module {
   const ShelfModule();
@@ -34,6 +36,12 @@ class ShelfModule extends Module {
   /// On the desk, a line, and who it came from — measured at the width the shell leaves, not guessed.
   @override
   double get rowHeight => 53.0;
+
+  @override
+  Map<String, ThreadBody> get bodies => const {'shelf_card': shelfCard};
+
+  @override
+  String? sentence(Event e, String who) => e.type == 'passed_on' ? shelfSentence(e, who) : null;
 
   @override
   Map<String, String> get stocks => const {'passed_on': 'index'};

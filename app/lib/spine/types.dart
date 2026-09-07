@@ -1,7 +1,7 @@
 // The event type registry. docs/EVENT_TYPES.md lists the same seventeen types; the schema test
 // fails if the two disagree.
 //
-// Adding a type is one entry here and one renderer in regions/chat/renderers.dart, and
+// Adding a type is one entry here and one renderer in thread/renderers.dart, and
 // app/test/thread_types_test.dart holds both ends of that to it: every renderer named here has to
 // exist, every renderer there has to be named here, and every type has to read as a sentence in
 // search and in a notification. For most of this build's life the field below named a directory
@@ -43,6 +43,8 @@ class EventTypeSpec {
     required this.notify,
     required this.search,
     required this.renderer,
+    required this.noun,
+    required this.announced,
     this.refKeys = const [],
     this.blobKeys = const [],
     this.rowInThread = true,
@@ -58,8 +60,22 @@ class EventTypeSpec {
   final Notify notify;
   final SearchSpec search;
 
-  /// The renderer id in regions/chat/renderers.dart (one per type; the map is keyed by this).
+  /// The renderer id in thread/renderers.dart (one per type; the map is keyed by this).
   final String renderer;
+
+  /// What one of these is, in the words a person would use about it: 'a date', 'the list', 'a
+  /// photograph'. Search says "found as a date" with it when the words are in the type rather
+  /// than in the line.
+  final String noun;
+
+  /// What it reads as when it arrives, on the row in Settings that says whether it may interrupt.
+  /// A different register from [noun] — what landed, not what it is.
+  ///
+  /// Both used to be switches, one in the search page and one in the settings region, so a new
+  /// type had two more shared files to be added to and read as its own bare id in both until it
+  /// was. They are declared here with the type now, which is where the promise says a type is
+  /// declared.
+  final String announced;
 
   /// Payload keys whose values are event ids (become `refs`).
   final List<String> refKeys;
@@ -90,6 +106,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.interruptive,
     search: SearchSpec(textFields: ['text'], facets: ['message']),
     renderer: 'note',
+    noun: 'written',
+    announced: 'something written',
     refKeys: ['reply_to'],
   ),
   EventTypeSpec(
@@ -99,6 +117,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.interruptive,
     search: SearchSpec(textFields: ['caption'], facets: ['media', 'photo']),
     renderer: 'print',
+    noun: 'a photograph',
+    announced: 'a picture',
     refKeys: ['reply_to'],
     blobKeys: ['blob'],
   ),
@@ -109,6 +129,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.interruptive,
     search: SearchSpec(textFields: ['caption'], facets: ['media', 'video']),
     renderer: 'print_tab',
+    noun: 'a video',
+    announced: 'something to watch',
     blobKeys: ['blob', 'poster_blob'],
   ),
   EventTypeSpec(
@@ -118,6 +140,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.interruptive,
     search: SearchSpec(facets: ['media', 'voice']),
     renderer: 'strip_wave',
+    noun: 'something said',
+    announced: 'their voice',
     blobKeys: ['blob'],
   ),
   EventTypeSpec(
@@ -127,6 +151,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.quiet,
     search: SearchSpec(facets: ['feeling']),
     renderer: 'stuck_object',
+    noun: 'a reaction',
+    announced: 'an answer to something of yours',
     refKeys: ['target'],
     rowInThread: false,
   ),
@@ -137,6 +163,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.none,
     search: SearchSpec(textFields: ['text'], facets: ['message']),
     renderer: 'edit_mark',
+    noun: 'a change',
+    announced: 'a change to something already said',
     refKeys: ['target'],
     rowInThread: false,
   ),
@@ -147,6 +175,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.none,
     search: SearchSpec(excluded: true),
     renderer: 'stub',
+    noun: 'something taken back',
+    announced: 'something taken back',
     refKeys: ['target'],
     rowInThread: false,
   ),
@@ -157,6 +187,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.none,
     search: SearchSpec(excluded: true),
     renderer: 'ink_dries',
+    noun: 'them catching up',
+    announced: 'them catching up',
     rowInThread: false,
   ),
   EventTypeSpec(
@@ -166,6 +198,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.interruptive,
     search: SearchSpec(facets: ['feeling']),
     renderer: 'object_landing',
+    noun: 'a feeling',
+    announced: 'a feeling',
   ),
   EventTypeSpec(
     id: 'state_declared',
@@ -174,6 +208,8 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.quiet,
     search: SearchSpec(textFields: ['value'], facets: ['state']),
     renderer: 'margin_note',
+    noun: 'a state',
+    announced: 'something they say about themselves',
   ),
   EventTypeSpec(
     id: 'state_passive',
@@ -182,14 +218,18 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.quiet,
     search: SearchSpec(facets: ['state']),
     renderer: 'margin_mark',
+    noun: 'something their phone noticed',
+    announced: 'something their phone notices',
   ),
   EventTypeSpec(
     id: 'date_event',
     required: ['date_id', 'action', 'title'],
     optional: ['when', 'place', 'verdict', 'note'],
     notify: Notify.quiet,
-    search: SearchSpec(textFields: ['title', 'place', 'note', 'verdict'], facets: ['us', 'dates']),
+    search: SearchSpec(textFields: ['title', 'place', 'note', 'verdict'], facets: ['us', 'dates', 'happened']),
     renderer: 'ticket_stub',
+    noun: 'a date',
+    announced: 'a date moving',
   ),
   EventTypeSpec(
     id: 'todo_event',
@@ -198,30 +238,38 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.quiet,
     search: SearchSpec(textFields: ['text'], facets: ['us', 'todos']),
     renderer: 'list_line',
+    noun: 'the list',
+    announced: 'the list moving',
   ),
   EventTypeSpec(
     id: 'milestone',
     required: ['milestone_id', 'kind', 'title', 'date', 'yearly'],
     optional: [],
     notify: Notify.quiet,
-    search: SearchSpec(textFields: ['title'], facets: ['us', 'calendar', 'milestone']),
+    search: SearchSpec(textFields: ['title'], facets: ['us', 'calendar', 'milestone', 'happened']),
     renderer: 'stamped_card',
+    noun: 'a milestone',
+    announced: 'a day that matters',
   ),
   EventTypeSpec(
     id: 'ritual_kept',
     required: ['ritual_id', 'title', 'kept_at'],
     optional: ['note'],
     notify: Notify.none,
-    search: SearchSpec(textFields: ['title', 'note'], facets: ['us', 'rituals']),
+    search: SearchSpec(textFields: ['title', 'note'], facets: ['us', 'rituals', 'happened']),
     renderer: 'tally_mark',
+    noun: 'a ritual',
+    announced: 'one of the things you keep',
   ),
   EventTypeSpec(
     id: 'passed_on',
     required: ['item_id', 'action', 'title', 'kind'],
     optional: ['note'],
     notify: Notify.quiet,
-    search: SearchSpec(textFields: ['title', 'note'], facets: ['us', 'shelf']),
+    search: SearchSpec(textFields: ['title', 'note'], facets: ['us', 'shelf', 'happened']),
     renderer: 'shelf_card',
+    noun: 'something passed on',
+    announced: 'something passed between you',
   ),
   EventTypeSpec(
     id: 'ping',
@@ -230,14 +278,18 @@ const List<EventTypeSpec> kEventTypes = [
     notify: Notify.interruptive,
     search: SearchSpec(textFields: ['text'], facets: ['ping']),
     renderer: 'folded_clock',
+    noun: 'a note set to arrive later',
+    announced: 'a note set to arrive later',
   ),
   EventTypeSpec(
     id: 'feeling_authored',
     required: ['feeling_id', 'name', 'family', 'colour', 'object_asset', 'haptic', 'sound', 'retired'],
     optional: [],
     notify: Notify.quiet,
-    search: SearchSpec(textFields: ['name'], facets: ['feeling']),
+    search: SearchSpec(textFields: ['name'], facets: ['feeling', 'happened']),
     renderer: 'new_feeling_card',
+    noun: 'a feeling one of you made',
+    announced: 'a feeling one of you made',
   ),
 ];
 

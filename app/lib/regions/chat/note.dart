@@ -20,7 +20,7 @@ import '../../scope.dart';
 import '../../spine/projections/thread.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
-import 'renderers.dart';
+import '../../thread/renderers.dart';
 
 /// The width a note takes on the desk, as a fraction of the region's width.
 const double _noteWidthFraction = 0.76;
@@ -177,7 +177,7 @@ class Note extends StatelessWidget {
   }
 
   /// The thread's half of the registry's promise: a type names the renderer that draws it, and
-  /// renderers.dart is where they live. There is no switch on the type here and no second one in
+  /// thread/renderers.dart is where they live. There is no switch on the type here and no second one in
   /// search, so the two cannot drift apart the way they had.
   Widget _body(BuildContext context, AppScope scope) {
     if (item.deleted) {

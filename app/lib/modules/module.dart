@@ -14,14 +14,17 @@
 //     one off the wire. A module inventing its own schema is exactly what a single spine forbids,
 //     so this one is not a cost to remove. What it means in practice: a new module writes its
 //     types there and in docs/EVENT_TYPES.md, which is the same act.
-//   - `app/lib/regions/chat/renderers.dart`. A module's rows are drawn by functions that live in
-//     the chat region rather than in the module's own directory. That one is a cost and not a
-//     principle, and it is the next thing to move: `NoteContext` and `ThreadBody` want their own
-//     file under material/, the five bodies want to move into their modules, and the renderer
-//     table wants to be built from `kModules` the way the facets and the stocks now are.
+// That is now the whole cost. The other shared file was `regions/chat/renderers.dart`, which drew
+// every module's rows in the thread and wrote every module's sentence for search and the lock
+// screen — two per-type switches in a region that has nothing to do with any module. A module
+// brings both itself now (`bodies` and `sentence` below), the table is assembled from `kModules`
+// the way the facets and the stocks already were, and `module_costs_test` counts what is left: no
+// file outside a module's own directory may name that module's event types, except the spine
+// registry.
 import 'package:flutter/widgets.dart';
 
 import '../spine/spine.dart';
+import '../thread/note_body.dart';
 import 'fit_rows.dart';
 
 abstract class Module {
@@ -49,6 +52,22 @@ abstract class Module {
   /// that every module had to be added to by hand, which is one of the shared files a fifth module
   /// cost; the switch reads this now.
   Map<String, String> get stocks => const {};
+
+  /// How this module's events are drawn in the thread, by the renderer id the spine registry
+  /// names for each type.
+  ///
+  /// A module's events are not a separate feed: they are written into the one spine and they turn
+  /// up in the thread with everything else, on the paper the module chose. What they must not be
+  /// is a pencil line in the margin saying what happened — that is what four modules had for most
+  /// of this build, which is to say no presence at all.
+  Map<String, ThreadBody> get bodies => const {};
+
+  /// The one sentence one of this module's events reads as away from the thread — in search
+  /// results, in a notification, and in the standing line — or null if this is not its event.
+  ///
+  /// [who] is already resolved to the reader's own word for the author ('you', or their name), so
+  /// a module never has to know who is holding the phone.
+  String? sentence(Event e, String who) => null;
 
   /// What one whole row of this module costs on the shared desk, in logical points.
   ///

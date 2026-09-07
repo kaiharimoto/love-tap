@@ -53,19 +53,31 @@ Eighteen types. The floor is fourteen.
 
 ## Adding a nineteenth
 
-1. Add one entry to `kEventTypes` in `app/lib/spine/types.dart` (id, payload codec, search fields,
-   notification treatment), and one row to the table above.
-2. Add one renderer under `app/lib/regions/chat/renderers.dart`, registered by the id the entry
-   names — or point at one that is already there, the way the shelf points at the margin sentence.
-3. Add one arm to `summaryOf` in the same file: the one sentence the type reads as away from the
-   thread, which is what search results, notification bodies and the ambient standing line all
-   show.
+1. Add one entry to `kEventTypes` in `app/lib/spine/types.dart` — id, payload codec, search fields
+   and facets, notification treatment, the renderer id, and the two words a person uses for it:
+   `noun` (what one of these is, which search says "found as" with) and `announced` (what it reads
+   as when it lands, on the Settings row that says whether it may interrupt). And one row to the
+   table above.
+2. Add one body, registered by the renderer id the entry names — or point at one that is already
+   there, the way the shelf points at the margin sentence. Where it goes depends on whose event it
+   is: a module's goes in the module's own directory and is declared by `Module.bodies`, the
+   feelings' in `app/lib/feelings/`, and the messenger's own in `app/lib/thread/renderers.dart`,
+   which assembles the table out of all three.
+3. Add the one sentence the type reads as away from the thread — what search results, notification
+   bodies and the ambient standing line all show. A module's is `Module.sentence`; everything else
+   is an arm of `summaryOf` in `app/lib/thread/renderers.dart`, which asks the modules last.
 
 Three, not two, and it used to say two. That was not a rounding error — it was the reason a
 scheduled ping read `one hour, then stop · 2026-04-23T16:00:00+01:00` in the thread and
 `one hour, then stop · Thu 23 Apr` in search: the thread kept a second sentence of its own, the two
 drifted, and a person was shown a stored field. There is one sentence now, and the third step is
 the price of that.
+
+Steps 2 and 3 used to be two edits in the chat region for every type, a module's included, and the
+words in step 1 were two more switches — one in the search page, one in Settings — that between
+them covered eleven of the eighteen types and showed the other seven their own registry id.
+`module_costs_test` holds the new arrangement to it: no file outside a module's own directory may
+name that module's event types, except this registry.
 
 Nothing else changes: persistence is schema-less per type (payload is JSON), search fields are
 declared by the registry entry, Moments filters by `type` generically, and notifications read the

@@ -12,7 +12,9 @@ import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../spine/spine.dart';
 import '../desk_line.dart';
+import '../../thread/note_body.dart';
 import '../module.dart';
+import 'thread_row.dart';
 
 class RitualsModule extends Module {
   const RitualsModule();
@@ -29,6 +31,12 @@ class RitualsModule extends Module {
   /// On the desk, a line and how many times it has been kept — measured at the width the shell leaves, not guessed.
   @override
   double get rowHeight => 56.0;
+
+  @override
+  Map<String, ThreadBody> get bodies => const {'tally_mark': tallyMark};
+
+  @override
+  String? sentence(Event e, String who) => e.type == 'ritual_kept' ? ritualSentence(e) : null;
 
   @override
   Map<String, String> get stocks => const {'ritual_kept': 'graph'};

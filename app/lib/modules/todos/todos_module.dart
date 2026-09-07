@@ -10,7 +10,9 @@ import '../../material/slip.dart';
 import '../../spine/spine.dart';
 import '../../material/marks.dart';
 import '../desk_line.dart';
+import '../../thread/note_body.dart';
 import '../module.dart';
+import 'thread_row.dart';
 
 class TodosModule extends Module {
   const TodosModule();
@@ -27,6 +29,12 @@ class TodosModule extends Module {
   /// On the desk, a line with a box in front of it and who it is for after it — measured at the width the shell leaves, not guessed.
   @override
   double get rowHeight => 60.0;
+
+  @override
+  Map<String, ThreadBody> get bodies => const {'list_line': listLine};
+
+  @override
+  String? sentence(Event e, String who) => e.type == 'todo_event' ? todoSentence(e) : null;
 
   @override
   Map<String, String> get stocks => const {'todo_event': 'looseleaf'};

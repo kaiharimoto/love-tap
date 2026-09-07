@@ -19,7 +19,7 @@ import '../../material/slip.dart';
 import '../../scope.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
-import 'renderers.dart';
+import '../../thread/renderers.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key, this.initialQuery = '', required this.onDone});
@@ -379,12 +379,10 @@ String? reasonFor(Event e, String query, {required Person me}) {
   final q = query.trim().toLowerCase();
   if (q.isEmpty) return null;
   if (summaryOf(e, me: me).toLowerCase().contains(q)) return null;
-  const words = {
-    'photo': 'a photograph', 'video': 'a video', 'voice_note': 'something said', 'feeling': 'a feeling',
-    'date_event': 'a date', 'todo_event': 'the list', 'state_declared': 'a state', 'message': 'written',
-    'milestone': 'a milestone', 'reaction': 'a reaction', 'ritual_kept': 'a ritual',
-  };
-  final kind = words[e.type] ?? e.type.replaceAll('_', ' ');
+  // What a person calls one of these is declared with the type, not here: this was a table of
+  // eleven of the eighteen, and the other seven — a thing passed on among them — told the reader
+  // their own registry id with the underscore taken out.
+  final kind = kEventTypeById[e.type]?.noun ?? e.type.replaceAll('_', ' ');
   if (kind.toLowerCase().contains(q) || e.type.toLowerCase().contains(q)) return 'found as $kind';
   for (final entry in e.payload.entries) {
     final v = entry.value;

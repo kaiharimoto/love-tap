@@ -19,7 +19,7 @@ import '../../spine/spine.dart';
 import '../../voice/strings.dart';
 import '../chat/blob_widgets.dart';
 import '../../spine/projections/thread.dart';
-import '../chat/renderers.dart';
+import '../../thread/renderers.dart';
 import '../../material/assignment.dart';
 
 enum MomentsView { media, milestones, feelings }
@@ -123,12 +123,14 @@ class _MomentsRegionState extends State<MomentsRegion> {
   bool _keeps(Event e) => _keepsIn(e, _view);
 
   bool _keepsIn(Event e, MomentsView view) {
-    const media = {'photo', 'video', 'voice_note'};
-    const marks = {'milestone', 'date_event', 'ritual_kept', 'feeling_authored'};
+    // Which lens an event belongs in is a facet the type declares, not a set kept here: the set
+    // named four of the five kinds of thing that happen and left the shelf out, so a book one of
+    // them handed the other was in no lens at all.
+    final facets = kEventTypeById[e.type]?.search.facets ?? const <String>[];
     final typeOk = switch (view) {
-      MomentsView.media => media.contains(e.type),
-      MomentsView.milestones => marks.contains(e.type),
-      MomentsView.feelings => e.type == 'feeling' || e.type == 'reaction',
+      MomentsView.media => facets.contains('media'),
+      MomentsView.milestones => facets.contains('happened'),
+      MomentsView.feelings => facets.contains('feeling'),
     };
     if (!typeOk) return false;
     if (_person != null && e.author != _person) return false;

@@ -7,7 +7,7 @@
 // rendered correctly in the thread and as a bare registry id in search, and nothing failed.
 //
 // These are the cheapest guards against that coming back.
-import 'package:desk/regions/chat/renderers.dart';
+import 'package:desk/thread/renderers.dart';
 import 'package:desk/spine/event.dart';
 import 'package:desk/spine/types.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +17,7 @@ void main() {
     for (final spec in kEventTypes) {
       expect(kThreadRenderers.containsKey(spec.renderer), isTrue,
           reason: '${spec.id} names the renderer "${spec.renderer}", which is not in '
-              'regions/chat/renderers.dart');
+              'thread/renderers.dart');
     }
   });
 

@@ -8,7 +8,9 @@ import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../spine/spine.dart';
 import '../desk_line.dart';
+import '../../thread/note_body.dart';
 import '../module.dart';
+import 'thread_row.dart';
 
 class CalendarModule extends Module {
   const CalendarModule();
@@ -25,6 +27,12 @@ class CalendarModule extends Module {
   /// On the desk, a line and the day it falls on — measured at the width the shell leaves, not guessed.
   @override
   double get rowHeight => 66.0;
+
+  @override
+  Map<String, ThreadBody> get bodies => const {'stamped_card': stampedCard};
+
+  @override
+  String? sentence(Event e, String who) => e.type == 'milestone' ? milestoneSentence(e) : null;
 
   @override
   Map<String, String> get stocks => const {'milestone': 'index'};

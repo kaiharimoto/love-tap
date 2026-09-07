@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
 import '../../spine/spine.dart';
+import '../../thread/note_body.dart';
 import '../module.dart';
+import 'thread_row.dart';
 import 'date_list.dart';
 
 class DatesModule extends Module {
@@ -23,6 +25,12 @@ class DatesModule extends Module {
   /// On the desk, a line: where, and how far off — measured at the width the shell leaves, not guessed.
   @override
   double get rowHeight => 62.0;
+
+  @override
+  Map<String, ThreadBody> get bodies => const {'ticket_stub': ticketStub};
+
+  @override
+  String? sentence(Event e, String who) => e.type == 'date_event' ? dateSentence(e) : null;
 
   @override
   Map<String, String> get stocks => const {'date_event': 'index'};

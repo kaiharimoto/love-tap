@@ -23,7 +23,7 @@ import '../../transport/local/local_transport.dart';
 import '../../spine/projections/thread.dart';
 import '../../voice/strings.dart';
 import 'note.dart';
-import 'renderers.dart';
+import '../../thread/renderers.dart';
 import 'search_page.dart';
 import 'viewer_page.dart';
 
