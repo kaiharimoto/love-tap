@@ -129,6 +129,47 @@ somebody else's.
   thing that happen, so the shelf appeared in no lens at all. Both read the type's own declaration
   now. `module_costs_test` fails on a table with 'date_event' in it, checked.
 
+## What an adversarial pass over this session's own diff found, and what it measured
+
+Fifteen findings, each put to three refuters with a different lens; none of the fifteen was
+refuted by two of three. Six of them were mine, from this session.
+
+- **06 would have failed its own frame check.** I widened the first take from 24 grabs to 40, and
+  the only thing moving in it is the arriving note's landing at `Motion.land` = 420 ms — 26 grabs.
+  Reproduced end to end by a refuter who rebuilt the seeded PWA and ran the take: 43 frames,
+  **16 identical to the one before**, longest still run 15, `ok false`. The 45-grab take after the
+  second arrival had the same shape. And the fling take I added had nowhere to go: 06 opens with
+  `scrollTo: end` and every arrival re-pins it there, so a forward fling at 1500 px/s has about one
+  logical pixel of extent. 06 is now the landing (16), the fold (147), the second landing (16) and
+  the second fold (147): 326 frames, 5.22 s, every take as long as the motion in it.
+- **`tooth` was measuring the halo the printed rules cast on the paper, not the paper.** The
+  high-pass was taken over the whole image and then sampled through a mask that removes the rule's
+  own pixels but not the pixels beside it. A refuter replaced the paper of every stock with its own
+  box mean, leaving the rules untouched — a sheet with mathematically no tooth — and **35 of 54
+  files still passed the floor**. With the mask eroded by the blur radius: graph_01 3.743 -> 0.810
+  and its flattened control 0.410; receipt_01 0.580 against 0.016; lined_01 1.388 against 0.276;
+  legal_01 1.331 against 0.258. Floors recalibrated to the corrected instrument (0.45 and 3.0).
+- Both shading numbers are linear in exposure and both floors were grey levels: receipt_01 at 0.7
+  of its light fails both with nothing about the paper changed. They are reported at a reference
+  exposure now. And the cut that separates sheet from ground was `body - 20` while its own comment
+  said it was relative — 8.6 per cent at body 233, 37 per cent at a quarter of the light, at which
+  point the sheet's dark border is inside the cut and field_swing is the sheet edge again.
+- **The check passed vacuously on an empty tree**, and capture.sh ran it before the pack that
+  builds the tree. A fresh clone would have greenlit the library without opening a file.
+- With the instrument corrected, **obj_bookmark measured patch_std 0.913 against a floor of 2.0** —
+  the flattest thing in the library, because it was two plates 0.4 mm apart and a plane under a
+  soft window light has one value. Curled (the torn head 3 mm off the desk): **16.1**.
+- **The list module's sentence knew three words the module has never written.** `ticked`,
+  `unticked`, `dropped` against the module's own `added/assigned/done/reopened/removed`: 95 `done`
+  and 43 `reopened` events in the seeded year read as their own text with a space in front of it,
+  and the thread drew a finished job as an empty pencil box captioned "put down" while Us showed it
+  ticked and struck through.
+- **The Moments lens read the search facets, so 'happened' became a search term.** Typing it
+  returned 81 dates, 53 rituals, 12 shelf cards and 6 milestones as keyword hits beside the 49
+  messages in the year that say the word. A lens is its own field now.
+- `--skip-existing` in the tear rig looked for a file only the day pass writes, so
+  `--conditions dusk` skipped all 56 and the queue recorded "1 of 56" as the job done.
+
 ## Still open, measured or named
 - paper is rendered as WebP at Blender's default quality 92 and then packed, so every downstream
   number is measured against an already-degraded ceiling.
