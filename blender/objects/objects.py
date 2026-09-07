@@ -714,7 +714,17 @@ def obj_bookmark(rng):
     # warped grid made a flat ramp and took the fold away entirely — 2.3 grey levels of internal
     # contrast against 4.3 for the two slabs it replaced, which is the wrong direction. What a fold
     # actually is, is a step with a spine on it.
-    body = sheet(L * 0.66, W, 40, 14, lambda u, v: 0.0004 * math.sin(u * 4.0) * (1 - abs(v - 0.5)))
+    # It has to be curled, not laid flat. Under the day rig — soft light from one window, an
+    # orthographic camera — a plane has one normal and therefore one value, and this was two plates
+    # 0.4 mm proud of each other: patch_std 0.913 against a floor of 2.0, the flattest thing in the
+    # library. A strip that has been in a book and fallen out of it is bowed, and the end that is
+    # not weighed down by the fold is the end that lifts. Three millimetres over fifty-eight is a
+    # curl a hand would not remark on and a light rakes right across.
+    def bow(u, v):
+        lift = 0.0030 * (1.0 - u) ** 2.2                    # the torn head, off the desk
+        trough = 0.0005 * (1.0 - math.cos((v - 0.5) * 2.6))  # and the strip cupped across itself
+        return lift + trough + 0.00025 * math.sin(u * 9.0)
+    body = sheet(L * 0.66, W, 48, 18, bow)
     # and the head it was torn from the sheet at: ragged, which is the one silhouette a bookmark
     # has, and it was a clean rectangle
     for v in body.verts:

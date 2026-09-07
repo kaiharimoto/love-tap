@@ -226,7 +226,16 @@ def main():
         if not os.path.exists(path):
             print(f"missing {path}")
             continue
-        if a.skip_existing and os.path.exists(os.path.join(a.dir, mid + "_edge.png")):
+        # What --skip-existing skips is what *this* run would have written, not whatever some
+        # earlier run left behind. It looked for `_edge.png`, which only the day pass writes and
+        # every tear has had since the first cycle — so `--conditions dusk` skipped all fifty-six
+        # and the queue reported "1 of 56 dusk shadows" as if that were the job done.
+        wanted = []
+        for condition in conditions:
+            wanted.append(mid + ("_shadow.png" if condition == "day" else "_shadow_dusk.png"))
+            if condition == "day":
+                wanted.append(mid + "_edge.png")
+        if a.skip_existing and all(os.path.exists(os.path.join(a.dir, w)) for w in wanted):
             print(f"skip {mid}")
             continue
         import time

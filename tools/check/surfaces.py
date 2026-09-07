@@ -64,8 +64,24 @@ PATCH = 200
 # much the normal turns across the frame. A floor on it would fail eight objects for being flat
 # things, which is what they are, and would have to be silenced — which is how a check stops
 # meaning anything.
+# The exposure the floors are calibrated at: the body tone of the daylight stocks as they ship.
+# A sheet's tooth and its shading field are both read at this brightness whatever it was rendered
+# at, so the same material gives the same number in daylight and at dusk.
+REFERENCE_BODY = 233.0
+
+# The radius the high-pass is taken over, and the distance from print a pixel has to be to count.
+TOOTH_RADIUS = 3
+
+# Recalibrated against the corrected instrument. The tooth floor was 0.60 and the field floor 3.5,
+# both set against a high-pass that was mostly the halo the printed rules cast on the paper beside
+# them: with the halo out, the shipped stocks read 0.58 to 2.22 rather than 0.7 to 3.8. The control
+# is a sheet with its paper replaced by its own box mean and its rules left untouched — a sheet with
+# mathematically no tooth in it: receipt_01 0.580 -> 0.016, lined_01 1.388 -> 0.276, legal_01 1.331
+# -> 0.258, graph_01 0.810 -> 0.410 (a grid every forty pixels leaves narrow strips of halo the
+# erosion cannot reach). 0.45 is the number that passes every real stock and fails every flattened
+# one. The field floor sits just under the lowest real reading, 3.544 on the receipt.
 SHADING_FLOORS = {
-    "paper": {"tooth": 0.60, "field_swing": 3.5},
+    "paper": {"tooth": 0.45, "field_swing": 3.0},
     "folds": {"tooth": 0.60},
 }
 BLOCK = 32
@@ -106,10 +122,17 @@ def _boxblur(a, r=3):
 
 
 def shading(a, family):
-    """The light across a surface, and the material inside it, as two separate numbers."""
+    """The light across a surface, and the material inside it, as two separate numbers.
+
+    Both numbers are reported at a reference exposure. They are linear in how brightly the sheet
+    was lit — halve the key and the tooth amplitude and the swing across the sheet halve with it —
+    and the floors they are gated against are grey levels, so a good sheet rendered darker used to
+    fail and a poor one rendered brighter used to pass. receipt_01 passes today with 19 and 8 per
+    cent of margin; the same file at 0.7 of its exposure fails both floors with no material
+    changed. So what is gated is the number the sheet would give at the reference exposure, and the raw
+    reading is reported beside it.
+    """
     out = {}
-    lo = _boxblur(a, 3)
-    hp = a - lo
     h, w = a.shape
     # Every block of the surface, and print taken out of each one from the inside rather than by
     # throwing the block away. Requiring a block to be free of print measured nothing at all on
@@ -120,9 +143,7 @@ def shading(a, family):
     # are actually on the surface. A packed sheet carries the ground it was photographed against
     # around its edge — lined_01's border sits at 147 against an interior of 233 — and a first
     # attempt that measured every block reported an 88 grey level "shading field", which is the
-    # edge of the sheet, not the light on it. The cut is relative to the surface's own tone, so it
-    # works on a dusk stock as well as a daylight one, which an absolute floor of 200 did not: it
-    # rejected every block of every dark sheet and let twenty-four surfaces pass unmeasured.
+    # edge of the sheet, not the light on it.
     tones = []
     for y in range(0, h - BLOCK + 1, BLOCK):
         for x in range(0, w - BLOCK + 1, BLOCK):
@@ -136,25 +157,69 @@ def shading(a, family):
         out["unmeasurable"] = f"only {len(tones)} whole blocks of this surface"
         return out
     body = float(np.median([v for _, _, v in tones]))
-    means, hps = [], []
+    if body <= 1.0:
+        out["unmeasurable"] = "the surface is black"
+        return out
+    # The cut is a fraction of the surface's own tone, so it means the same thing on a dusk stock
+    # as on a daylight one. It was `body - 20` and the comment above it said it was relative: on a
+    # sheet at body 233 that is 8.6 per cent and the ground is cleanly outside it, but on the same
+    # sheet at a quarter of the light it is 37 per cent, the sheet's own dark border sits inside
+    # the cut, and field_swing goes back to being the sheet-edge contrast the two passes exist to
+    # remove — in the passing direction. It is also two-sided now: a sheet on a lighter ground had
+    # its ground counted as surface at any exposure, because only the dark side was ever cut.
+    dark_cut = body * (1.0 - 20.0 / REFERENCE_BODY)
+    light_cut = body * 1.25
+    window = 6.0 * body / REFERENCE_BODY
+    kept = []
     for y, x, tone in tones:
-        if tone < body - 20.0:
+        if tone < dark_cut or tone > light_cut:
             continue                      # the ground around the sheet, not the sheet
+        kept.append((y, x, tone))
+    # Where the paper is, pixel by pixel, so the high-pass can be read off the paper alone.
+    #
+    # The high-pass used to be taken over the whole image and then sampled through the same
+    # per-block mask. The mask takes out the rule's own pixels and cannot take out the halo it
+    # casts: every paper pixel within the blur radius of a rule has its neighbourhood mean pulled
+    # toward the rule, so its high-pass reads ten to twenty grey levels instead of nothing. On a
+    # stock ruled every forty pixels that is most of the reading — a reviewer replaced the paper of
+    # every stock with its own box mean, leaving the rules untouched, and 35 of 54 files still
+    # passed the tooth floor with mathematically zero tooth in them. So the mask is eroded by the
+    # blur radius: a pixel counts only when everything its own neighbourhood mean was made of is
+    # paper too.
+    paper = np.zeros(a.shape, dtype=bool)
+    for y, x, tone in kept:
         t = a[y:y + BLOCK, x:x + BLOCK]
-        near = np.abs(t - tone) <= 6.0
+        paper[y:y + BLOCK, x:x + BLOCK] = np.abs(t - tone) <= window
+    inner = _boxblur(paper.astype(float), TOOTH_RADIUS) >= 0.999
+    lo = _boxblur(a, TOOTH_RADIUS)
+    hp = a - lo
+    means, hps = [], []
+    for y, x, tone in kept:
+        near = paper[y:y + BLOCK, x:x + BLOCK]
         if near.sum() < 200:
             continue
         # the mean of the paper in this block, not the percentile that found it: a percentile of
         # 8-bit data lands on a data point, so the swing came out quantised to whole grey levels
+        t = a[y:y + BLOCK, x:x + BLOCK]
         means.append(float(t[near].mean()))
-        hps.append(float(np.std(hp[y:y + BLOCK, x:x + BLOCK][near])))
+        clean = inner[y:y + BLOCK, x:x + BLOCK]
+        if clean.sum() >= 120:
+            hps.append(float(np.std(hp[y:y + BLOCK, x:x + BLOCK][clean])))
+    scale = REFERENCE_BODY / body
     if len(means) >= 10:
         m = np.array(means)
         out["blocks"] = len(means)
-        out["field_swing"] = round(float(np.percentile(m, 95) - np.percentile(m, 5)), 3)
+        out["body"] = round(body, 1)
+        swing = float(np.percentile(m, 95) - np.percentile(m, 5))
+        out["field_swing_raw"] = round(swing, 3)
+        out["field_swing"] = round(swing * scale, 3)
         if hps:
-            out["tooth"] = round(float(np.median(hps)), 3)
+            tooth = float(np.median(hps))
+            out["tooth_raw"] = round(tooth, 3)
+            out["tooth"] = round(tooth * scale, 3)
             out["tooth_from_blocks"] = len(hps)
+        else:
+            out["unmeasurable"] = "no block of this surface is clear of print"
     else:
         out["unmeasurable"] = f"only {len(means)} blocks of this surface are on the surface"
     if family == "objects":
@@ -297,7 +362,20 @@ def main():
     # as a gap.
     report["objects_named_by_feelings"] = object_coverage(report["surfaces"])
     report["read"] = len(report["surfaces"])
-    report["ok"] = not report["flat"] and not report["unlit"]
+    # A family that carries a floor and has nothing in it has not passed either. app/assets is
+    # derived and gitignored, and capture.sh used to run this before pack_assets.py built it: on a
+    # fresh clone the globs found nothing, `flat` and `unlit` stayed empty, and the check
+    # greenlit the whole library without opening a file. Coverage is part of the answer now.
+    report["by_family"] = {
+        family: sum(1 for k in report["surfaces"] if k.startswith(family + "/"))
+        for family in FLOORS
+    }
+    report["empty"] = [
+        f"{family}: nothing to measure — has {os.path.join('app/assets', family)} been packed?"
+        for family in SHADING_FLOORS
+        if report["by_family"].get(family, 0) == 0
+    ]
+    report["ok"] = not report["flat"] and not report["unlit"] and not report["empty"]
     text = json.dumps(report, indent=1)
     if args.out:
         os.makedirs(os.path.dirname(args.out), exist_ok=True)
@@ -308,7 +386,9 @@ def main():
     # Both gates fail the run. The shading floors were added and then not wired to the exit, so a
     # surface with no light on it at all was reported and returned 0 — a check that says the right
     # thing and answers "fine" is worse than no check, because capture.sh believes the answer.
-    if report["flat"] or report["unlit"]:
+    if report["flat"] or report["unlit"] or report["empty"]:
+        for line in report["empty"]:
+            print(line, file=sys.stderr)
         if report["flat"]:
             print(f"{len(report['flat'])} surface(s) with nothing in them:", file=sys.stderr)
             for line in report["flat"][:12]:
