@@ -41,10 +41,27 @@ somebody else's.
   contrast: luminance sd **30.4 -> 37.9**, saturation 0.113 -> 0.119. Its wax also carried 25 per
   cent transmission, which washed the body from behind and took more than half of the gradient it
   had; wax that thick is not translucent.
-  Three more are named and not done: obj_dog_ear (box IoU 0.946, 4 per cent of the object carrying
-  all of its identity), obj_bookmark (luminance sd 4.0, the lowest in the library) and obj_pinch
-  (box IoU 0.809, a 4 mm pucker on a 52 mm slab). And obj_ticket measures worse than two of the six
-  the critic named.
+  And the other three, which the same measure named:
+  **obj_dog_ear** (`goodnight`) was a blank card with a 13 mm triangle on it — four per cent of the
+  object carrying all of its identity and the other ninety-six a rectangle, box IoU 0.946. It is a
+  page torn from a book now, with the ragged edge that is the only silhouette a page has and the
+  turned corner lifted a millimetre off the card so it throws its own triangle of shadow: 0.925.
+  **obj_bookmark** (`thinking_of_you`) had the lowest internal contrast in the library, 4.3 grey
+  levels, because the body and the flap were two plain rectangles and the fold read as a second
+  slab. It has the head it was torn from the sheet at, and a rounded spine where the paper turns
+  back so the crease catches a highlight instead of ending in a butt edge: box IoU 0.724 -> 0.689.
+  I tried folding it as one continuous warped sheet first and that was worse in both directions —
+  a smooth ramp with no fold at all, 2.3 grey levels — which is written down here because it is
+  the kind of thing that looks like the tidier answer.
+  **obj_pinch** (`squeeze`) was a 7.5 mm bump over 4 mm of a 52 mm strip: four millimetres of
+  gesture on a slab. The pinch is wider and deeper, the ends lift off the desk, and the two creases
+  converge in plan so the waist is in the silhouette and not only in the shading — luminance sd
+  15.5 -> 20.0. Its box IoU goes the wrong way (0.809 -> 0.839) because a waisted strip fills more
+  of its own bounding rectangle than a straight one does; the silhouette measure is a curvature
+  meter and it disagrees with the picture here.
+  These six were measured at 10 render samples against the shipped 48, so the internal-contrast
+  numbers are not like for like — the silhouette ones are.
+  And obj_ticket measures worse than two of the six the critic named, and is not done.
 - fold sequence: unfold_thirds stops moving at frame 208 of 240; its noise floor is 0.708 grey
   levels. Packed at 209 frames, and what was dropped is in the manifest.
 

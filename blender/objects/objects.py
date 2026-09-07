@@ -176,15 +176,28 @@ def obj_pinch(rng):
     two ends drop back down to the desk.
     """
     L, W = 0.052, 0.017
+
+    def peak_at(u):
+        return math.exp(-(abs(u - 0.5) / 0.10) ** 2)
+
     def warp(u, v):
-        # u runs along the strip. The pinch is at the middle: two creases about four millimetres
-        # apart, with the paper standing between them and settling away either side.
+        # u runs along the strip. The pinch is at the middle: the paper stands between the two
+        # creases and settles away either side. It used to be a 7.5 mm bump over 4 mm of a 52 mm
+        # strip — four millimetres of gesture on a slab — so it is wider and deeper now, and the
+        # ends lift off the desk the way a pinched strip does.
         d = abs(u - 0.5)
-        peak = math.exp(-(d / 0.055) ** 2)
-        pleat = 0.0028 * math.cos((v - 0.5) * math.pi * 3.0) * peak
-        settle = 0.0011 * math.exp(-((d - 0.22) / 0.13) ** 2)
-        return 0.0075 * peak + pleat + settle
+        peak = peak_at(u)
+        pleat = 0.0034 * math.cos((v - 0.5) * math.pi * 3.0) * peak
+        settle = 0.0013 * math.exp(-((d - 0.24) / 0.12) ** 2)
+        ends = 0.0022 * max(0.0, (d - 0.34) / 0.16) ** 2
+        return 0.0105 * peak + pleat + settle + ends
     bm = sheet(L, W, 90, 34, warp)
+    # and the strip necks in where the fingers were: the two creases converge in plan, so the
+    # waist is in the silhouette and not only in the shading. A left-to-right measurement of a
+    # strip with a bump on it reads a slab; a waisted one reads a pinch.
+    for v in bm.verts:
+        u = v.co.x / L + 0.5
+        v.co.y *= 1.0 - 0.42 * peak_at(u)
     # the strip is torn off, not cut: its two ends are ragged
     for v in bm.verts:
         u = v.co.x / L + 0.5
@@ -663,7 +676,18 @@ def obj_bookmark(rng):
     mat = paper_mat("bookmark_paper", (0.93, 0.89, 0.78), tooth=1.1)
     L, W = 0.058, 0.016
     parts = []
+    # Two pieces with a rounded spine between them, not one smoothed sheet. Folding it as a single
+    # warped grid made a flat ramp and took the fold away entirely — 2.3 grey levels of internal
+    # contrast against 4.3 for the two slabs it replaced, which is the wrong direction. What a fold
+    # actually is, is a step with a spine on it.
     body = sheet(L * 0.66, W, 40, 14, lambda u, v: 0.0004 * math.sin(u * 4.0) * (1 - abs(v - 0.5)))
+    # and the head it was torn from the sheet at: ragged, which is the one silhouette a bookmark
+    # has, and it was a clean rectangle
+    for v in body.verts:
+        u = v.co.x / (L * 0.66) + 0.5
+        if u < 0.05:
+            v.co.x -= 0.0012 * abs(math.sin(v.co.y * 900.0)) + 0.0006 * abs(math.sin(v.co.y * 2400.0))
+            v.co.z += 0.00025 * math.sin(v.co.y * 1500.0)
     b = solidify(new_mesh(body, "bookmark", mat))
     b.location = (-L * 0.17, 0.0, 0.0)
     parts.append(b)
@@ -673,6 +697,11 @@ def obj_bookmark(rng):
     f.location = (L * 0.16, 0.0, PAPER_T * 2.2)
     f.rotation_euler = (0.0, math.radians(-3.5), math.radians(float(rng.uniform(-2.5, 2.5))))
     parts.append(f)
+    # the spine of the crease: a half-round running across the strip where the paper turns back,
+    # so the fold catches a highlight instead of ending in a butt edge
+    spine = tube([(L * 0.335, -W * 0.48, PAPER_T * 1.1), (L * 0.335, W * 0.48, PAPER_T * 1.1)],
+                 PAPER_T * 1.15, 8, "bookmark_spine", mat)
+    parts.append(spine)
     for part in parts:
         part.rotation_euler[2] += math.radians(float(rng.uniform(-14, 14)))
     return parts
@@ -684,12 +713,23 @@ def obj_dog_ear(rng):
     mat = paper_mat("dogear_card", (0.95, 0.93, 0.87), tooth=0.95)
     W, H = 0.040, 0.030
     card = sheet(W, H, 40, 30, lambda u, v: 0.0003 * math.sin(u * 3 + v * 2))
+    # A page, not a blank. Four per cent of the object carried all of its identity and the other
+    # ninety-six was a rectangle of the same near-white paper — box IoU 0.946. The left edge is the
+    # edge it was torn from the book at, which is the one silhouette feature a page has.
+    for v in card.verts:
+        u = v.co.x / W + 0.5
+        if u < 0.04:
+            v.co.x += 0.0013 * math.sin(v.co.y * 900.0) + 0.0007 * math.sin(v.co.y * 2400.0)
+            v.co.z += 0.00025 * math.sin(v.co.y * 1500.0)
     parts = [solidify(new_mesh(card, "dogear_card", mat), t=0.00024)]
-    # the corner: a triangle folded down over the card, lying a paper's thickness above it
+    # the corner: a triangle folded down over the card, its free tip lifted a millimetre off it so
+    # it throws a triangle of its own shadow — which is the cue that says turned down rather than
+    # printed on
     bm = bmesh.new()
     d = 0.013
-    vs = [bm.verts.new((W / 2 - d, H / 2, PAPER_T * 2.4)), bm.verts.new((W / 2, H / 2 - d, PAPER_T * 2.4)),
-          bm.verts.new((W / 2 - d, H / 2 - d, PAPER_T * 2.4 + 0.0009))]
+    vs = [bm.verts.new((W / 2 - d, H / 2, PAPER_T * 2.4)),
+          bm.verts.new((W / 2, H / 2 - d, PAPER_T * 2.4)),
+          bm.verts.new((W / 2 - d * 0.92, H / 2 - d * 0.92, PAPER_T * 2.4 + 0.0016))]
     bm.faces.new(vs)
     ear = solidify(new_mesh(bm, "dogear_flap", mat, smooth=False), t=0.00024)
     parts.append(ear)
