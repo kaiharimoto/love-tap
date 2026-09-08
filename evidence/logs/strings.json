@@ -106,7 +106,7 @@
    "text": "${(durationMs! / 1000).round()}s"
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:809",
+   "where": "app/lib/regions/chat/chat_region.dart:899",
    "text": "${scope.partner.name} ${S.typing}"
   },
   {

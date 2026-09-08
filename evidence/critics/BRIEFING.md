@@ -33,7 +33,7 @@ timebase of a clip is therefore **the app's time, not the wall clock**: one fram
 the driven clock, and the seconds between two grabs on a wall clock are the harness's cost of
 taking the picture, not the app's.
 
-## Three logs you can check against the pictures
+## Four logs you can check against the pictures
 
 Three of the logs are measurements taken the way a critic would take them, so they can be checked
 against the pictures rather than trusted: `evidence/logs/hand.json` lays every mark of ink on the
@@ -41,7 +41,9 @@ thread still over every other and reports how many have a near-twin (a font repe
 exactly, a hand a little); `evidence/logs/pwa.json` is what the served page offers an iPhone, read
 from the page; `evidence/logs/scroll_webkit.json` is the framework's own per-frame build and raster
 cost during the scroll clip, under a headless WebKit with no GPU, one frame per harness step — the
-cost of drawing a frame, not a refresh rate. Each scene log's `load` says whether its load time
+cost of drawing a frame, not a refresh rate; and `evidence/logs/11_chat_scroll.fling.json` is the
+thread's own record of that clip — for every frame of every throw, how far the simulation asked the
+thread to move, how far it actually moved, and where it was sitting when it did. Each scene log's `load` says whether its load time
 was a first launch with the year importing (`store: fresh`) or a phone that already had it
 (`store: kept`); the seeded scenes share one browser profile, and only the first is cold.
 

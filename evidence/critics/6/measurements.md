@@ -225,12 +225,46 @@ Taken from the artifacts and the records the app wrote at the shutter, on this m
   minutes, and the near phone went `link offline` in the last scene of the set.
   **15_authored_feeling**: 376 frames, 6.02 s, zero held frames, once its two corner takes were cut
   from twenty and twenty-two grabs to sixteen — the corner finishes turning in sixteen.
-- **11_chat_scroll is the one that does not settle**: three held frames of three hundred on the
-  first pass, five on the second, **at different frames each time**. That is a race and not a
-  picture that did not change: the headless compositor runs at about four frames a second and the
-  harness gave a stuck grab four tries ninety milliseconds apart, which is less than one of its
-  frames. Ten tries a fifth of a second apart now. (The second pass was also shot while I was
-  running the test suite twice over, which is my fault and not the app's.)
+- **11_chat_scroll and 02_chat, the two that did not settle, and what they turned out to be.**
+  Both were a guess standing in for a measurement, and both took four passes to say so.
+
+  *The clip.* Held frames went three, five, six, thirteen of three hundred across four shots, at
+  different frames each time, always clustered a few frames after a throw. I read that as a race in
+  the grab and made the harness more patient — ten tries a fifth of a second apart, which is two
+  seconds a frame and longer than any compositor lag — and it did not help, which was the finding.
+  A frame of the fling was a one-millisecond animation of the scroller. An animation moves on its
+  ticker, and the ticker is stepped by the browser's frame timestamp rather than by the driven
+  clock: two frames the clock pumps inside one step can carry the same timestamp, the controller's
+  value stays at zero, and the thread does not move on a frame it was told to move on. Queueing the
+  nudges so none was dropped made it worse (thirteen), because each one then waited for a ticker
+  that had not run. The pixels are set now, on the list's own scroll position, inside the tick that
+  asks for them. What the throw actually does, measured off Flutter's own clamping simulation at
+  the velocity the scene uses: 44 logical pixels on the first frame, 10 by the frame the next throw
+  lands on, and 0.13 at the point it would stop — which the scene never reaches. So no frame of the
+  clip is a thread standing still, and every frame that comes back identical to the one before it
+  is now the grab and not the app. The fling writes down what it did, per frame — asked, moved,
+  where the thread was sitting — in `evidence/logs/11_chat_scroll.fling.json`, so the two can be
+  told apart without another four passes.
+
+  *The hero.* Its standard is eight notes on eight different torn edges. The framing estimated a
+  row's height from how much writing was on it and got six notes, then seven. A row's height cannot
+  be known before it is laid out, so the app measures instead: it goes to a stretch, lets it lay
+  out, counts the paper that actually landed on the glass, and keeps the best framing it has seen.
+  Three things fell out of doing that. The sheet you write on is a sibling *below* the list rather
+  than a layer over it, so framing a third of the way down had been throwing away a row's worth of
+  room. Asking for a voice note and a reaction found six places in a year, because it read that as
+  one row being both; a voice note with a photograph two rows below it that somebody has stuck a
+  reaction to is the same day, and there are forty-eight of those. And the check counted every
+  visible row, while a tear id is computed for rows that draw no torn edge at all — so a frame with
+  five notes and three pencil lines in the margin could pass a standard about torn edges. It counts
+  paper now, and the app names which rows are paper in the report, by renderer.
+  Measured on the real year in the app's own shell at the size the scene shoots (`app/test/
+  the_hero_holds_eight_notes_test.dart`, which fails on the old framing): **eight sheets on the
+  glass and seven of them whole**, the best of 42 framings of 48 stretches, in a viewport 792.2
+  logical pixels tall where the year's own message rows run 83 to 148. Eight of those do not fit in
+  792 pixels; eight sheets with the top one crossed by the edge of the frame do, and a thread that
+  runs off the top of a phone is what a thread looks like.
+
 - **The hand**: 273 marks of ink on the hero, twin share **0.147**, best-fit IoU median 0.655 and
   p90 0.866. A font repeats itself exactly; this does not.
 - What I could not measure myself: the hairline the completeness pass found (a sliver of paper

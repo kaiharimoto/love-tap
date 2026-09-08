@@ -9,7 +9,7 @@
 # everything under evidence/ will open them — so they are moved out of the tree while the critics
 # work and put back afterwards. The cycle's own directory has to stay (they write into it), so what
 # moves out of it is the builder's own sheet, which is the most contaminating document of all: it
-# says what was fixed and what it measured.
+# says what was fixed and what it measured, and the builder's own scores beside it.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 action="${1:-}"
@@ -24,8 +24,11 @@ case "$action" in
     for n in $(seq 1 $((cycle - 1))); do
       [ -d "evidence/critics/$n" ] && mv "evidence/critics/$n" "$hold/critics_$n"
     done
-    [ -f "evidence/critics/$cycle/measurements.md" ] && \
-      mv "evidence/critics/$cycle/measurements.md" "$hold/measurements.md"
+    for own in measurements.md builder.json; do
+      if [ -f "evidence/critics/$cycle/$own" ]; then
+        mv "evidence/critics/$cycle/$own" "$hold/$own"
+      fi
+    done
     mkdir -p "evidence/critics/$cycle"
     echo "held: $(ls -A "$hold" | tr '\n' ' ')"
     ;;
@@ -36,7 +39,11 @@ case "$action" in
       [ -d "$d" ] || continue
       mv "$d" "evidence/critics/$(basename "$d" | sed 's/^critics_//')"
     done
-    [ -f "$hold/measurements.md" ] && mv "$hold/measurements.md" "evidence/critics/$cycle/"
+    for own in measurements.md builder.json; do
+      if [ -f "$hold/$own" ]; then
+        mv "$hold/$own" "evidence/critics/$cycle/"
+      fi
+    done
     rmdir "$hold" 2>/dev/null || true
     echo "restored"
     ;;
