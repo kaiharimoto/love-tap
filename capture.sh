@@ -63,6 +63,13 @@ if [ "${FREE_MB:-0}" -lt "$NEED_MB" ]; then
   exit 3
 fi
 
+# How long the run has been going, in minutes and seconds. A capture is a couple of hours of
+# somebody's evening and it used to say nothing about where it had got to: whoever started it could
+# not tell a scene that was working from one that had hung without opening the log and counting the
+# ticks. Every stage it finishes now carries the clock.
+STARTED_AT=$(date +%s)
+since() { local t=$(( $(date +%s) - STARTED_AT )); printf '%d:%02d' $((t / 60)) $((t % 60)); }
+
 echo "· reading every displayed string against docs/VOICE.md"
 python3 tools/lint/strings.py --out "$LOG/strings.json" || note_missing "voice" "a displayed string is against docs/VOICE.md"
 echo "· checking both hands still have all their ink"
@@ -81,7 +88,7 @@ python3 tools/push/webpush.py --self-test > "$LOG/webpush.txt" 2>&1 || note_miss
 # One carries the seeded year; the other is a genuinely fresh install. 10_first_run, 16_setup_android
 # and 17_setup_pwa may only come from the fresh one.
 if [ "$BUILD" = "yes" ]; then
-  echo "· building the seeded PWA"
+  echo "· building the seeded PWA ($(since))"
   python3 tools/pack_assets.py --seed=year >/dev/null || exit 1
 fi
 
@@ -101,7 +108,7 @@ if [ "$BUILD" = "yes" ]; then
     || { tail -20 "$SCRATCH/build_seeded.log"; exit 1; }
   rm -rf "$SCRATCH/web_seeded" && cp -r app/build/web "$SCRATCH/web_seeded"
 
-  echo "· building the fresh PWA (no seed compiled in)"
+  echo "· building the fresh PWA, no seed compiled in ($(since))"
   python3 tools/pack_assets.py >/dev/null || exit 1
   (cd app && flutter build web --release --no-web-resources-cdn \
       --dart-define=TRANSPORT=local --dart-define=CAPTURE=true \
@@ -184,7 +191,7 @@ elif [ -f toolchain/ts/a/address ]; then
 fi
 # $PAIR is absolute, so it must not be joined to anything: "../$PAIR" made "..//tmp/..." and
 # the far phone died on its first write, which capture.sh then reported as "would not start"
-echo "· the far phone: the seeded year in the host role, over $FAR_TRANSPORT"
+echo "· the far phone: the seeded year in the host role, over $FAR_TRANSPORT ($(since))"
 ( cd app && dart run tool/host_daemon.dart --out "$PAIR" \
     --transport "$FAR_TRANSPORT" --address "$FAR_ADDR" --proxy "$FAR_PROXY" \
     --pwa "$SCRATCH/web_seeded" --seed year --now "$FROZEN_NOW" --seconds 7200 \
@@ -219,13 +226,15 @@ run_scene() { # name url [extra scene.js args...]
   local name="$1" url="$2"
   shift 2
   wants "$name" || return 0
+  local at=$(date +%s)
   echo "· $name"
   if node tools/capture/scene.js "evidence/scenes/$name.json" --url "$url" --browser "$BROWSER" "$@" \
         >"$SCRATCH/$name.out" 2>"$SCRATCH/$name.err"; then
-    echo "  ✓ $name"
+    echo "  ✓ $name — $(( $(date +%s) - at ))s, $(since) into the run"
   else
     # the first line of the error is the sentence; the rest is a stack trace nobody reads
     note_missing "$name" "$(head -1 "$SCRATCH/$name.err" | sed 's/^Error: //' | cut -c1-180)"
+    echo "  ✗ $name — $(( $(date +%s) - at ))s, $(since) into the run" >&2
     return 1
   fi
 }
@@ -330,7 +339,7 @@ make_clip() { # name fps min_seconds
   python3 tools/check/frames.py "$staged" --fps "$fps" --min-seconds "$min" --log "$LOG/$name.json" \
     --strip "evidence/crops/${name}_strip.png" --out "$LOG/${name}.frames.json" >/dev/null \
     || note_missing "$name.mp4" "the frame check failed; see $LOG/${name}.frames.json"
-  echo "  ✓ $name.mp4 ($i frames at ${fps}fps)"
+  echo "  ✓ $name.mp4 ($i frames at ${fps}fps, $(since) into the run)"
 }
 
 for s in 06_unfolding 07_feeling_landing 11_chat_scroll 15_authored_feeling; do

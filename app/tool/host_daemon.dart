@@ -217,15 +217,28 @@ Future<void> main(List<String> argv) async {
         } else if (parts.first == 'stop') {
           stdout.writeln('host-daemon: asked to stop');
           typingRepeat?.cancel();
-          await transport.stop();
-          await spine.close();
-          exit(0);
+          await _closeDown(transport, spine);
         }
       }
     }
     await Future<void>.delayed(const Duration(milliseconds: 120));
   }
   stdout.writeln('host-daemon: ${spine.length} events written; stopping');
-  await transport.stop();
-  await spine.close();
+  await _closeDown(transport, spine);
+}
+
+/// Put the server and the log down, and go — with a bound on the putting down.
+///
+/// The daemon reached its deadline at the end of a capture, printed that it was stopping, and then
+/// sat inside `transport.stop()` with the process alive: capture.sh's own trap waits for it, so a
+/// run that had finished all its work held the terminal for another two hours. A close that has
+/// not happened in five seconds is not going to.
+Future<void> _closeDown(Transport transport, Spine spine) async {
+  try {
+    await transport.stop().timeout(const Duration(seconds: 5));
+  } catch (_) {}
+  try {
+    await spine.close().timeout(const Duration(seconds: 5));
+  } catch (_) {}
+  exit(0);
 }
