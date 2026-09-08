@@ -53,18 +53,46 @@ Committed and pushed, each with the measurement that says it worked:
 - 08 drives its state changes inside a frames run, so a partner-state change is visible happening;
 - the crops the material row is judged on land on writing (23.7 per cent ink, against none).
 
-**The four-cycle desk hairline is a rotation without a filter.** Not the desk (zero one-row spikes
-in the render at any threshold), not the baked shadows (same), not the piece's bounding box, and
-not the denoiser — that one is written up as a wrong turn on the cycle-7 sheet. In the artifact the
-rules step one row down for every 166 px along, which is a third of a degree, which is exactly the
-tilt a `Slip` gives a piece; `Transform.rotate` with no `filterQuality` is nearest-neighbour, so
-every hard edge inside a piece comes out a row at a time.
+**The five-cycle desk hairline is closed: it was the mask's own edge.** Every earlier explanation
+is wrong and each was wrong by measurement — the desk render (zero one-row spikes at any
+threshold), the baked shadows (same), the denoiser, the shadow's bounding box, the mask's own
+inset, and the one this file used to assert, an unfiltered rotation staircasing the lit edge.
+`ShaderMask` multiplies a tear mask in by drawing a rectangle *the size of the child* in `dstIn`,
+and that rectangle is antialiased: on the row where a piece's box falls between two device pixels
+the blend lands at partial coverage and a fraction of the sheet survives where the tear had erased
+it. The fraction is a third — wood + 0.334 × paper, solved on all three channels at 02_chat y=200,
+x=1200. A bisect in the browser, six builds against a far phone of its own, is what settled it:
+mask shader without mipmaps 29 runs, mask composed at the piece's exact height 29, rotation
+filtered differently 29, lit-fibre overlay removed 29, **mask removed altogether 1**, and with the
+mask rectangle drawn two pixels wider than the piece, **0** — with the torn edge and its contact
+shadow unchanged beside it. `tools/check/hairline.py` measures it on the photographs and
+`capture.sh` runs it, because the test binding cannot draw the fault: 66 piece heights at three
+densities, zero spikes.
 
 **Three render queues ran and are packed**: 112 contact shadows without the denoiser (1 h 43 m),
 the fold sequence at 240 frames (1 h 07 m, packed to 139), and the desk. The fold's own tool
 re-measured where the writing goes on the open sheet.
 
-**What is left in cycle 7**: read the capture, write `evidence/critics/7/builder.json` from the
+**The seventh capture was taken and then answered rather than reviewed.** It came back 13 of 17,
+with two clips failing their own frame check, and both causes were in the app:
+
+- 07 jumped +11.6 grey levels of the whole screen between frames 220 and 222 because a feeling
+  landed on a sheet whose tear mask was still decoding, and `MaskedLayer` handed the child back
+  unmasked over the flat stock colour — a pale grey slab with square corners and no shadow, which
+  is the shape the anti-goal names, shipped inside an artifact. A mask still decoding is not a
+  missing mask: a piece keeps its room and paints nothing (shadow included) until its paper is
+  there, and falls back the old way only if the mask never comes.
+- 08 had 61 frames identical to the one before them, all in the run named for the thing the clip
+  is named for: their sheet swapped between two frames. It lands now, from a little above, over
+  the sheet it replaces, which stays on the desk until it is covered.
+- the year told the app its clips were 7–12 seconds long when every render is 2.5, and four voice
+  notes were out by 20–40 seconds; 20 payloads corrected and `seed/tools/validate.py` fails on the
+  next drift.
+
+None of that was in the build the artifacts came from, so **the set is being re-captured whole**
+rather than one scene re-shot into it — mixing builds is what cycle 6 was rightly marked down for.
+
+**What is left in cycle 7**: read the re-capture, write `evidence/critics/7/builder.json` from the
 sheet *before* any critic runs, `bash tools/critics.sh hide 7`, the six critics and the
 completeness pass, `show 7`, `python3 tools/score.py --cycle 7`, docs, push.
 
