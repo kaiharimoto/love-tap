@@ -13,6 +13,7 @@ import 'dart:typed_data';
 import 'package:desk/app.dart';
 import 'package:desk/capture/bus.dart';
 import 'package:desk/material/library.dart';
+import 'package:desk/material/paper.dart';
 import 'package:desk/regions/chat/chat_region.dart';
 import 'package:desk/scope.dart';
 import 'package:desk/spine/seed_loader.dart';
@@ -26,7 +27,8 @@ import 'package:flutter/services.dart' show FontLoader;
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('the hero framing puts eight rows on the glass', timeout: const Timeout(Duration(minutes: 25)), (tester) async {
+  _plainPieceComposesNothing();
+  testWidgets('a thread scrolls without stopping to bake a mask', timeout: const Timeout(Duration(minutes: 25)), (tester) async {
     final began = DateTime.now();
     void mark(String what) => debugPrint('[${DateTime.now().difference(began).inSeconds}s] $what');
     await MaterialLibrary.load();
@@ -40,6 +42,15 @@ void main() {
             File('assets/fonts/$face.ttf').readAsBytesSync().buffer.asByteData()));
       await loader.load();
     }
+    // The masks, in the cache before anything draws. A widget test runs inside a fake-async zone,
+    // so MaskedLayer's own asynchronous load never completes and every piece is drawn whole: the
+    // thing this test is about would then never happen, and the test would pass by not looking.
+    await tester.runAsync(() async {
+      for (final tear in MaterialLibrary.instance.writableTears) {
+        await MaskCache.load(tearAsset(tear));
+        await MaskCache.load(tearAsset('${tear}_edge'));
+      }
+    });
     CaptureBus.wanted = true;
     addTearDown(() => CaptureBus.wanted = false);
 
@@ -88,8 +99,13 @@ void main() {
     expect(settled, isTrue, reason: 'the framing search never finished');
     await tester.pump(const Duration(milliseconds: 200));
 
-    // and now the thing 11's timings are about: what one frame of a scroll costs to build once
-    // the list is settled, measured the way the browser's own timings measure it.
+    // and now the thing 11's timings are about: a thread that scrolls without stopping to bake a
+    // mask. SlicedMasks.composed counts the masks actually composed into an image — 16.1 ms each
+    // on the Dart VM and hundreds of milliseconds in CanvasKit, on the build thread. It was one
+    // per note as the thread scrolled, which is what put 52 of 189 frames of 11_chat_scroll over
+    // 400 ms to build, at p95 807 and max 2142 against a raster that never left 133-199. The
+    // pieces draw their tear as a nine-patch now: same picture, no image made.
+    final bakedBefore = SlicedMasks.composed;
     final costs = <int>[];
     for (var i = 0; i < 24; i++) {
       final moved = CaptureBus.scrollBy!(200);
@@ -102,6 +118,12 @@ void main() {
     costs.sort();
     debugPrint('one scrolled frame: median ${costs[costs.length ~/ 2]} ms, worst ${costs.last} ms, '
         'over ${costs.length} frames: $costs');
+    // What is left composing one is the fallback: a row whose subtree needs a compositing layer
+    // of its own — a photograph fading in, a video — cannot be painted inside the saveLayer the
+    // nine-patch needs, so it goes through the composed mask instead. Written down rather than
+    // asserted, because the number is a property of what is on the glass.
+    debugPrint('masks composed: $bakedBefore before the scroll, '
+        '${SlicedMasks.composed - bakedBefore} during it, over ${costs.length} frames');
 
     // and what the same list costs when nothing moved, for a floor
     final still = <int>[];
@@ -112,6 +134,9 @@ void main() {
       still.add(sw.elapsedMilliseconds);
     }
     debugPrint('a still frame: $still ms');
+    expect(costs.last, lessThan(120),
+        reason: 'one frame of a scroll costs ${costs.last} ms to build here, and the browser is '
+            'slower than this by two orders of magnitude');
   });
 }
 
@@ -127,4 +152,43 @@ class _OffDisk implements SeedSource {
 
   @override
   Future<Uint8List> loadBytes(String path) async => File('$root/$path').readAsBytesSync();
+}
+
+/// One piece of paper with writing on it: the case every note in the thread is, and the case the
+/// nine-patch is for. It composes nothing.
+void _plainPieceComposesNothing() {
+  testWidgets('a plain piece draws its tear without baking it', (tester) async {
+    await MaterialLibrary.load();
+    final tear = MaterialLibrary.instance.writableTears.first;
+    await tester.runAsync(() async {
+      await MaskCache.load(tearAsset(tear));
+      await MaskCache.load(tearAsset('${tear}_edge'));
+    });
+    final was = SlicedMasks.composed;
+    tester.view.physicalSize = const Size(1200, 900);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MaterialApp(
+      home: ColoredBox(
+        color: const Color(0xFF62503C),
+        child: Center(
+          child: SizedBox(
+            width: 340,
+            child: PaperPiece(
+              stockId: 'lined_02',
+              tearId: tear,
+              liftMm: 0.9,
+              tilt: 0.006,
+              child: const Text('back by six. the pigeon is still on the cupboard'),
+            ),
+          ),
+        ),
+      ),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(SlicedMasks.composed - was, 0,
+        reason: 'a plain note baked its tear into an image — 16 ms on this machine and hundreds of '
+            'milliseconds in CanvasKit, on the build thread, once per note as the thread scrolls');
+  });
 }

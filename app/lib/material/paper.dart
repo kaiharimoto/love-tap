@@ -500,6 +500,8 @@ class _MaskedLayerState extends State<MaskedLayer> {
     // on exactly this. The shader scales it back down.
     final dpr = MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0;
     return _MaskedBox(
+      mask: mask,
+      dpr: dpr,
       shaderFor: (Rect rect) {
         final sliced = SlicedMasks.at(widget.maskAsset, mask, rect.size, dpr);
         final m = Matrix4.identity()
@@ -539,24 +541,88 @@ class _MaskedLayerState extends State<MaskedLayer> {
 typedef _ShaderFor = ui.Shader Function(Rect rect);
 
 class _MaskedBox extends SingleChildRenderObjectWidget {
-  const _MaskedBox({required this.shaderFor, required Widget super.child});
+  const _MaskedBox({
+    required this.mask,
+    required this.dpr,
+    required this.shaderFor,
+    required Widget super.child,
+  });
 
+  /// The tear itself, as it was rendered. Drawn straight into the piece as a nine-patch when the
+  /// piece paints into the canvas it was given, which is nearly always.
+  final ui.Image mask;
+
+  /// The screen's own density. The tear is drawn at one render pixel per device pixel — the same
+  /// thing SlicedMasks composed it at — because a tear sampled at logical scale is a tear three
+  /// times too coarse.
+  final double dpr;
+
+  /// The fallback: the same tear composed to this piece's size as an image, for the rare piece
+  /// whose subtree needs a compositing layer of its own and so cannot be painted inside a
+  /// saveLayer here.
   final _ShaderFor shaderFor;
 
-  /// How far outside the piece the mask rectangle is drawn, in logical pixels.
-  static const double air = 2.0;
+  /// How far outside the piece the mask is drawn, in logical pixels.
+  ///
+  /// Half a point — a pixel and a half on a phone. It only has to be enough that the mask
+  /// rectangle's own antialiased edge lands where the piece has already been clipped away and
+  /// there is nothing left to erase. Two points was enough for that too, and it moved the tear
+  /// two points down the desk: the sheet came out bigger than its own shadow, with plain stock
+  /// where the lit fibres had been.
+  static const double air = 0.5;
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderMaskedBox(shaderFor);
+  RenderObject createRenderObject(BuildContext context) => _RenderMaskedBox(mask, dpr, shaderFor);
 
   @override
   void updateRenderObject(BuildContext context, _RenderMaskedBox renderObject) {
-    renderObject.shaderFor = shaderFor;
+    renderObject
+      ..mask = mask
+      ..dpr = dpr
+      ..shaderFor = shaderFor;
   }
 }
 
+/// The piece, with its tear multiplied in.
+///
+/// Two ways of doing the same thing, and which one runs is decided by whether the piece needs a
+/// compositing layer of its own:
+///
+/// * **the nine-patch, straight in.** `saveLayer`, paint the piece, then `drawImageNine` of the
+///   tear in `dstIn`. One draw call, no image made, nothing kept. This is what runs for every
+///   piece in the app.
+/// * **the composed mask**, through a `ShaderMaskLayer`, for a piece whose subtree pushes a layer
+///   — `super.paint` would then paint outside the `saveLayer` and the mask would land on the wrong
+///   pixels.
+///
+/// The first way exists because of what the second one costs. `SlicedMasks.at` composes the
+/// nine-patch into a picture and calls `toImageSync`, and that is 16.1 ms on the Dart VM and
+/// hundreds of milliseconds in CanvasKit — on the build thread, once per note, as the thread
+/// scrolls. Measured on 11_chat_scroll: 52 frames of 189 cost more than 400 ms to build, at p95
+/// 807 and max 2142, against a raster that never left 133-199; with the mask taken out of the
+/// piece altogether, 4 of 146 at p95 34. The nine-patch is the same picture without the image.
+///
+/// Both ways draw the mask two pixels wider than the piece. That is the fix for the pale
+/// hairline four material critics measured on the desk for five cycles: a mask rectangle the size
+/// of the child is antialiased at its own edge, so on the row where the piece's box falls between
+/// two device pixels the blend lands at partial coverage and a third of a pixel of sheet survives
+/// where the tear had erased it. Out on the desk there is nothing to erase.
 class _RenderMaskedBox extends RenderProxyBox {
-  _RenderMaskedBox(this._shaderFor);
+  _RenderMaskedBox(this._mask, this._dpr, this._shaderFor);
+
+  ui.Image _mask;
+  set mask(ui.Image value) {
+    if (value == _mask) return;
+    _mask = value;
+    markNeedsPaint();
+  }
+
+  double _dpr;
+  set dpr(double value) {
+    if (value == _dpr) return;
+    _dpr = value;
+    markNeedsPaint();
+  }
 
   _ShaderFor _shaderFor;
   set shaderFor(_ShaderFor value) {
@@ -565,8 +631,10 @@ class _RenderMaskedBox extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  bool get _needsALayer => child != null && child!.needsCompositing;
+
   @override
-  bool get alwaysNeedsCompositing => child != null;
+  bool get alwaysNeedsCompositing => _needsALayer;
 
   @override
   ShaderMaskLayer? get layer => super.layer as ShaderMaskLayer?;
@@ -578,13 +646,40 @@ class _RenderMaskedBox extends RenderProxyBox {
       return;
     }
     const air = _MaskedBox.air;
-    final wide = Size(size.width + air * 2, size.height + air * 2);
-    layer ??= ShaderMaskLayer();
-    layer!
-      ..shader = _shaderFor(const Offset(air, air) & size)
-      ..maskRect = (offset - const Offset(air, air)) & wide
-      ..blendMode = BlendMode.dstIn;
-    context.pushLayer(layer!, super.paint, offset);
+    final wide = (offset - const Offset(air, air)) & Size(size.width + air * 2, size.height + air * 2);
+    if (_needsALayer) {
+      layer ??= ShaderMaskLayer();
+      layer!
+        ..shader = _shaderFor(const Offset(air, air) & size)
+        ..maskRect = wide
+        ..blendMode = BlendMode.dstIn;
+      context.pushLayer(layer!, super.paint, offset);
+      return;
+    }
+    layer = null;
+    final canvas = context.canvas;
+    canvas.saveLayer(wide, Paint());
+    super.paint(context, offset);
+    final w = _mask.width.toDouble(), h = _mask.height.toDouble();
+    const e = SlicedMasks.edge;
+    // Drawn in device pixels, not logical ones. drawImageNine keeps the four corners and the four
+    // edges at the size they were rendered — in whatever unit the canvas is in — and the tear is
+    // in the edges. In logical units at three device pixels to one the fibres come out three times
+    // too coarse and the sheet is a smooth line with a blur on it, which is the one thing this
+    // material is not allowed to be.
+    final d = _dpr;
+    canvas.save();
+    canvas.scale(1 / d);
+    canvas.drawImageNine(
+      _mask,
+      Rect.fromLTRB(w * e, h * e, w * (1 - e), h * (1 - e)),
+      Rect.fromLTRB(wide.left * d, wide.top * d, wide.right * d, wide.bottom * d),
+      Paint()
+        ..blendMode = BlendMode.dstIn
+        ..filterQuality = FilterQuality.medium,
+    );
+    canvas.restore();
+    canvas.restore();
   }
 }
 
@@ -593,6 +688,16 @@ class _RenderMaskedBox extends RenderProxyBox {
 class SlicedMasks {
   static final Map<String, ui.Image> _images = {};
   static const _keep = 64;
+
+  /// How many masks have actually been composed into an image since the app started.
+  ///
+  /// A number rather than a flag because the point is that it should not move: composing one is
+  /// 16 ms on the Dart VM and hundreds of milliseconds in CanvasKit, on the build thread, and a
+  /// thread that composes one per note as it scrolls spends more time making masks than drawing.
+  /// The pieces draw their tear as a nine-patch now and this is only the fallback for a piece
+  /// whose subtree needs a compositing layer of its own. a_thread_scrolls_without_baking_test
+  /// watches it.
+  static int composed = 0;
 
   /// How much of a mask, in from each edge, is the torn edge itself rather than the paper inside
   /// it. Measured off the masks: the fibres reach about a fifth of the way in and the middle fifth
@@ -638,6 +743,7 @@ class SlicedMasks {
       Paint()..filterQuality = FilterQuality.medium,
     );
     final image = recorder.endRecording().toImageSync(w, h);
+    composed += 1;
     _images[key] = image;
     return image;
   }
