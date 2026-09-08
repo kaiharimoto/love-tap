@@ -1,0 +1,75 @@
+{
+  "critic": "anti-goal",
+  "cycle": 2,
+  "score": 5.5,
+  "floor": 9,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "03_us.png",
+      "where": "the BEEN date card 'the boat to the island', right of the REMEMBERED 18 Jul line, bounding box x=1065..1278, y=1653..1685",
+      "what": "A five-of-five star rating sits on the remembered-date card: five identical black star glyphs, each 33 px wide on a 45 px pitch, mean absolute pixel difference between star 0 and stars 1-4 of only 1.5, 2.0, 2.6 and 3.2 out of 255, i.e. one glyph stamped five times.",
+      "why": "Anti-goal 1 forbids engagement machinery including points; a score out of five attached to a shared memory is the canonical review widget, it quantifies the relationship, and by showing a maxed five it establishes a scale on which a date can silently come out at two."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "06_unfolding.mp4, 08_state_propagating.mp4, 04_moments.png",
+      "where": "06: the note in flight, x=48..770 y=1578..1962, frames 126-280 of 320. 08: two rectangles at x=48..775, y=1520..1622 and y=1700..1852, frames 368-487 of 488. 04: cards at x968..1412/y872..1004, x40..456/y1144..1284, x512..928/y1060..1184, x512..920/y524..664",
+      "what": "Notes are drawn as flat, hard-cornered, untextured off-white rectangles. Interior luminance std measured on text-free strips: 0.73-1.15 across 06_unfolding frames 150-275 (sampled x120..680, y1640..1880), 0.78 and 0.88 in 08_state_propagating frame 420, and 0.54 / 0.57 / 0.63 / 1.07 for four of the six moment cards in 04_moments.png. Every one of those is below the build's own paper floor of patch_std 1.2 recorded in evidence/logs/surfaces.json. No fibre, no tooth, no ruling, no torn edge, no fold crease, no cast shadow. 06_unfolding spends 155 of its 320 frames (48 per cent, 2.58 s) showing this rectangle; 08_state_propagating shows two of them for its last 120 frames and ends on them.",
+      "why": "Anti-goal 4 says a surface that reads as an approximation of paper rather than as a photograph of real paper is wrong, and it is scored here as well as under material truth; a flat rectangle with square corners and a fill flatter than the build's own stated paper floor is exactly that approximation, and it is what the unfolding animation - the one moment that is supposed to sell the material - actually shows."
+    },
+    {
+      "severity": "serious",
+      "artifact": "01_pulse.png",
+      "where": "the desk shell everywhere the paper does not cover it; measured on 120x90 px patches at x=60..180 for y=1400, y=2600 and y=2850",
+      "what": "The desk texture tiles horizontally with a period of exactly 605 px: normalised cross-correlation between the patch and the same patch shifted 605 px is 0.988 at y=1400, 0.985 at y=2600 and 0.984 at y=2850, and two 600 px wide crops taken 605 px apart are visually indistinguishable. The grain itself is evenly spaced vertical vector strokes over a flat brown with no knots, pores or photographic detail; the same tiled desk carries every screen and both light states (dusk_pulse.png).",
+      "why": "Anti-goal 4 names a tiled repeating texture as a failure of the entire visual concept, and the desk is the ground every paper surface is judged against; a texture that visibly repeats twice per screen width reads as CG, not as a photograph of a real surface."
+    },
+    {
+      "severity": "serious",
+      "artifact": "07_feeling_landing.mp4, 11_chat_scroll.mp4, 01_pulse.png",
+      "where": "07 frame 300, the WARMTH picker at y=1180..1760: sun centred x=538 under 'forehead', crescent moon centred x=878 under 'warm palm', second crescent moon at x=128 by 'a squeeze', red smiley sticky at x=232..443. 11 at x=816..945, frames 72-138 and 210-276. 01_pulse.png at x=240..443, y=1210..1372",
+      "what": "The emotional layer's pictures are the standard emoji set. 'forehead' is a sun with rays, 'warm palm' is a crescent moon, and the same crescent-moon motif appears a second time beside 'a squeeze' in the same open picker, so one drawing stands for two different feelings. The only reaction visible anywhere in 330 frames of chat scroll is a yellow sticky bearing a red two-dot-and-curve smiley, and it is the identical sticky on both messages that carry one; that same smiley is also the token on the Pulse desk. Sun, crescent moon, smiley and green sprig account for four of the eleven feeling tokens the evidence shows.",
+      "why": "Anti-goal 2 forbids emoji standing in for feeling in the emotional layer; drawing the sun, the moon and the smiley by hand changes their rendering but not what they are, and using one crescent moon for two feelings shows the vocabulary is a pictogram set rather than the couple's own material."
+    },
+    {
+      "severity": "serious",
+      "artifact": "13_messenger_states.png (missing)",
+      "where": "evidence/MANIFEST.json 'missing', and the contradicting evidence/logs/13_messenger_states.json",
+      "what": "The one artifact that would show delivery, read, typing, edited, deleted and failed states is absent. The stated reason is '__deskStage() threw; the handle now reports what it threw, so the next run will name it' - an unresolved bug whose cause is still unknown. The bundle's own log for that scene, evidence/logs/13_messenger_states.json, records the opposite: 'problems': [], 'ok': true, and a shot written to evidence/13_messenger_states.png.",
+      "why": "Failure and retry states are precisely where 'Oops!' copy lives, so the only screen that could have tested anti-goal 3 under pressure is the screen that is missing; and a manifest that says the capture threw sitting beside a log that says it succeeded is not a reason, it is an unreconciled contradiction in the evidence."
+    },
+    {
+      "severity": "minor",
+      "artifact": "16_setup_android.png (missing)",
+      "where": "evidence/MANIFEST.json 'missing', read against evidence/logs/17_setup_pwa.json",
+      "what": "The Android setup checklist is blamed on 'no Android device was up in this session', but 17_setup_pwa.png is the sibling checklist and was produced entirely inside webkit at viewport 480x1040 dpr 3 with setup_showing true and no device involved. The Android checklist is a route in the same PWA and would have rendered the same way.",
+      "why": "The strings on that checklist are unchecked against anti-goal 3, and the absent phone does not explain the absence of a page that does not need a phone to render."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the full column, six occurrences of the same string at x=968..1400 and the five duration cards",
+      "what": "The Moments module renders as six repetitions of 'still fetching the picture.' and five cards carrying nothing but a duration ('41s', '21s', '38s', '63s', '47s'). Not one photograph or moment is visible in the artifact.",
+      "why": "The module that would carry the couple's own images is empty in the only artifact that shows it, so nothing in it can be checked against anti-goal 2 or anti-goal 4; the four flat cards counted above are all it actually demonstrates."
+    },
+    {
+      "severity": "minor",
+      "artifact": "evidence/logs/surfaces.json",
+      "where": "the 'objects' family, entries objects/obj_gold_star.webp (patch_std 28.591) and objects/obj_crown.webp (patch_std 24.89)",
+      "what": "The shipped feeling-object set contains a gold star and a crown. No artifact anywhere in the bundle shows either one placed in the interface, so what they are for cannot be seen.",
+      "why": "A gold star and a crown are the two canonical reward tokens; anti-goal 1 forbids badges, and with no artifact showing their use their compliance cannot be cleared either way."
+    }
+  ],
+  "what_is_working": [
+    "Anti-goal 3 is met outright and is the strongest thing in the build. Across nine stills and five clips there is not one exclamation mark, not one 'Oops!', the reader is never addressed as a user, and the app never names itself - the closest it comes is the generic 'the app' in 17_setup_pwa.png. The copy is plain and lowercase throughout: 'not paired yet.', 'the six words', 'let it interrupt you', 'wake me / quietly / not at all' (05_settings.png); \"first one's yours.\" and 'whatever it is. it only goes to one person.' (10_first_run.png); 'PUT IT BACK' (14_media_viewer.png); 'two phones, one wire between them, nobody else on it.' and 'say them out loud in the same room. they are only good once.' (17_setup_pwa.png); 'nothing from them yet. it will show here.' (08_state_propagating.mp4).",
+    "Apart from the five-star row there is no engagement machinery of any kind visible: no points total, no level, no badge, no streak counter, no streak-breakage warning, no guilt string. The to-do module header in 03_us.png reads '10 open', a plain count rather than a score.",
+    "The names given to feelings are idiosyncratic and specific rather than a generic taxonomy - 'a squeeze', 'forehead', 'warm palm', 'goodnight', 'nuzzle', 'thinking of you', and the authored ones 'empty chair', 'pigeon', 'tuesday soup' in 15_authored_feeling.mp4 - and the authoring flow lets the couple add their own.",
+    "No stock illustration in the commercial sense anywhere: no vector people, no gradient blobs, no illustration-library look on any screen.",
+    "The quiet-hours block and the thirteen per-signal 'wake me / quietly / not at all' rows in 05_settings.png are the anti-engagement stance made concrete rather than merely claimed.",
+    "The messenger's own copy under pressure stays plain where it does exist: 'still fetching the picture.' (04_moments.png) is a loading string with no apology voice and no personality in it."
+  ],
+  "verdict": "Anti-goal 3 is not just met, it is the best-executed part of what I was given: 104 strings' worth of screen copy across fourteen artifacts without a single exclamation mark, self-reference or address to a 'user', and with real writing where a product would have put reassurance. The other three do not hold. Anti-goal 1 is breached once and unmistakably: the remembered-date card in 03_us.png carries a five-of-five star rating, one stock glyph stamped five times at 45 px pitch, which is a score attached to a shared memory on a card where every other mark is handwritten. Anti-goal 4 is breached repeatedly and measurably: the note in flight through 06_unfolding.mp4 is a plain hard-cornered rectangle with an interior standard deviation of 0.73 to 1.15 out of 255 for 155 of the clip's 320 frames, 08_state_propagating.mp4 ends on two more at 0.78 and 0.88, and four of the six cards in 04_moments.png measure 0.54 to 1.07 - every one of those below the 1.2 floor the build sets for paper in its own surfaces.json - while the desk they all sit on tiles horizontally at exactly 605 px with a correlation of 0.988. Anti-goal 2 is breached more arguably but still visibly: the sun stands for 'forehead', the crescent moon for 'warm palm' and again for 'a squeeze', and the single reaction the evidence ever shows is a red smiley. Drawing the emoji by hand does not stop them being the emoji. Add to that the missing 13_messenger_states.png, whose absence removes the one screen where failure copy would have been tested and whose stated cause is contradicted by the bundle's own log claiming 'ok': true, and this category cannot approach its floor of 9.",
+  "notes": "Score 5.5 of 10 against a floor of 9."
+}

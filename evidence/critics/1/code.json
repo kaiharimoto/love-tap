@@ -1,0 +1,115 @@
+{
+  "critic": "code",
+  "cycle": 1,
+  "score": 13,
+  "floor": 13,
+  "meets_floor": true,
+  "rules": [
+    {
+      "rule": "one event log, no second store",
+      "verdict": "PASS",
+      "evidence": "app/lib/spine/store/store_native.dart:7 (sqlite3) and app/lib/spine/store/store_web.dart:4 (idb_shim) are the only storage-driver imports in the tree; app/test/persistence_boundary_test.dart:8-19 fails the build if any file outside lib/spine/ imports one of 19 named drivers, and a second test (:22-33) confines them to lib/spine/store/. The only other persistence-adjacent import is path_provider at app/lib/media/local_uri_io.dart:5 and app/lib/media/read_bytes_io.dart:5, which resolves a temp path for a content-addressed decode cache of blob bytes that already live in the spine (local_uri_io.dart:20-29) — a derived cache keyed by the blob's own sha256, not a store. Every projection is a pure function of List<Event> recomputed at read time: projectThread (spine/projections/thread.dart:119), projectState (state.dart:43), SearchIndex (search.dart:30, rebuilt in Spine._replay at spine.dart:77-82), FeelingRegistry (feelings/registry.dart:8), projectDates/projectTodos/projectMilestones/projectRituals (modules/*/​*.dart:54/47/60/51). No module or region holds a table. The only key-value rows beside the events (SpineStore.getMeta/setMeta, store.dart:34-35) hold the chat draft, notification prefs, the seed guard and the pairing record — device-local settings, not projections."
+    },
+    {
+      "rule": "at least fourteen event types, doc and code agree, each with thread rendering + notification + search, asserted by a test",
+      "verdict": "PASS",
+      "evidence": "17 types in app/lib/spine/types.dart:78-227, 17 rows in docs/EVENT_TYPES.md:33-49. app/test/spine_schema_test.dart:9-17 parses the doc's table with a regex and asserts `expect(documented, registered)` plus length >= 14 and uniqueness — a real assertion, not a restatement. Every spec carries a required `notify` (types.dart:51) and `search` (:52). Notification treatment is derived generically from the registry at settings/notifications.dart:41-52 and the settings list iterates kEventTypes at :131. Search: 15 types are indexed (search.dart:56-83 indexes textFields, the type id and every facet), and read_marker and message_delete are `excluded: true` (types.dart:141,151) — the documented behaviour, not an omission. Thread placement covers all 17: 5 have bespoke bodies (note.dart:151-187), 8 are marginal (note.dart:128-137 + _MarginLine switch at :345-353), and reaction/message_edit/message_delete/read_marker fold into their target (thread.dart:127-167). All 17 appear in the seeded year (seed/year/*.jsonl, verified by histogram: 4251 message … 2 feeling_authored)."
+    },
+    {
+      "rule": "a fifth module is a directory plus one line",
+      "verdict": "PASS",
+      "evidence": "True for the module registry itself. app/lib/modules/registry.dart:9-14 is a const list; app/lib/regions/us/us_region.dart:41-50 iterates kModules with no knowledge of any id; grep for the four module class names and ids finds them nowhere outside their own directories except us_region.dart:57-62 (_windowFor, which has a `_ => 190` default) and search_page.dart:33-34 (an optional filter chip). A fifth module that reuses an existing event type is genuinely modules/<name>/ plus one import and one line. BUT every one of the four existing modules declares its own event type (dates->date_event, todos->todo_event, calendar->milestone, rituals->ritual_kept), and floors_test.dart:83-86 requires a module's types to be in the registry — so a realistic fifth module needs a new type, and that touches five existing files, not one: (1) lib/spine/types.dart (+1 entry), (2) docs/EVENT_TYPES.md (+1 row, test-enforced), (3) lib/regions/chat/note.dart:128 _isMarginal, (4) lib/regions/chat/note.dart:345 _MarginLine switch, (5) lib/regions/chat/rows.dart:156 _summary (search results), and optionally lib/regions/settings/notifications.dart:85 _said. Skip (3)/(4) and the row renders its raw registry id in a handwriting font (note.dart:186 `Written(item.text ?? item.type, ...)`)."
+    },
+    {
+      "rule": "typing and presence ticks are never events",
+      "verdict": "PASS",
+      "evidence": "Typing leaves the device only as an Ephemeral frame: app/lib/scope.dart:125-129 calls transport.sendEphemeral, never spine.append; it is received at scope.dart:104-117 into a plain bool with a 6-second timer and never written. The host's /v1/ephemeral handler (transport/protocol/server_io.dart:227-232) calls onEphemeral and returns 204 without touching the spine. transport/transport.dart:117-118 documents PullResponse.ephemeral as 'Never stored'. app/test/transport_local_test.dart 'ephemeral frames are delivered and never stored' passes. There is no heartbeat writer: grep shows the only emitter of state_passive anywhere in lib/ is capture/hooks.dart:68 (the capture harness), and the seeded year's last_active events number 132 across twelve months — transitions, not ticks."
+    },
+    {
+      "rule": "read markers are never rendered as rows",
+      "verdict": "PASS",
+      "evidence": "app/lib/spine/projections/thread.dart:160-166 handles 'read_marker' by folding upto_seq into readUpto and `continue`ing before any row is created; the generic guard at thread.dart:168 (`if (!spec.rowInThread) continue;`) is a second net. types.dart:153 sets rowInThread: false, and app/test/spine_schema_test.dart:31-34 asserts it for read_marker and reaction. Read state surfaces only as a word in the margin of the sender's own note (Delivery.read, thread.dart:179-181)."
+    },
+    {
+      "rule": "no secret in any committed file",
+      "verdict": "PASS",
+      "evidence": "None found — stated explicitly. Scanned all 856 tracked files for PEM/OpenSSH/RSA/EC private-key headers, AKIA*, ghp_/github_pat_, sk-*, xox[baprs]-, AIza*, JWT prefixes: zero hits. No tracked file has a .pem/.key/.p12/.jks/.keystore/.env/.authkey extension and none exists untracked either. The pairing key is never stored as a literal: it is derived at runtime by HKDF-SHA256 from six spoken words plus the host id (transport/protocol/wire.dart:67-71) and the words themselves are never persisted (:65-66). kPairingWords (wire.dart:17-41) is a 256-word public dictionary, not a secret. TS_AUTHKEY is read from the environment and deliberately never written to disk (bootstrap.sh:12,203-207 record only 'present'/'pending'). .gitignore:12-15 excludes .env, *.authkey and /toolchain/ts/. evidence/logs/webpush.txt records a VAPID self-test result with no key material in it."
+    },
+    {
+      "rule": "host binds only its tailnet address and authenticates every request with the pairing key",
+      "verdict": "PARTIAL — auth implemented and enforced; tailnet bind NOT YET IMPLEMENTED",
+      "evidence": "Authentication holds. transport/protocol/server_io.dart:87-93 reads the body, parses the Authorization header and returns 401 with no body for every /v1 route except GET /v1/pair/nonce and POST /v1/pair. _authenticated (:119-130) checks the device id against the stored pairing, a 5-minute clock skew, an HMAC-SHA256 over method + path + query + ts + nonce + sha256(body) (wire.dart:83-87) compared in constant time (:89-96), then a replay-blocking nonce cache (:129, wire.dart:129-143). Pairing itself is proof-of-key, not a bearer token (server_io.dart:163). transport_local_test.dart 'pairing: unauthenticated requests are refused, wrong words are refused, right words pair' passes. The tailnet bind does NOT hold: there is no lib/transport/tailscale/ directory, contrary to transport/transport.dart:3. The only Binding is LocalBinding, which binds 127.0.0.1 (local/local_transport.dart:14,27), and main.dart:37-38 throws UnsupportedError('transport ... is not built yet') for anything else. The seam is designed (http_transport.dart:19 'For Tailscale this MUST be the tailnet address and nothing else'; HostServer.listen takes the address from HostBind at server_io.dart:48-53) but nothing implements it. Note also that _serveStatic (server_io.dart:267-292) serves the PWA bundle to any unauthenticated caller — correct, since the browser must fetch the app before it can pair, and the guard at :276 blocks traversal — but it means reachability alone exposes the bundle."
+    },
+    {
+      "rule": "every file in assets/ has an entry in assets/MANIFEST.json naming its generator",
+      "verdict": "PASS with two exempted sidecars",
+      "evidence": "514 files under assets/ excluding MANIFEST.json itself; 512 have an entry, and every one of the 516 entries names a generator (0 without). The 2 without an entry are assets/sound/MANIFEST.sound.json and assets/tears/relief.json — both sidecar index files written by the generators, and both on the deliberate EXEMPT list at tools/check/manifest.py:22-23. The project's own checker reports '510 files in assets/, 0 without an entry naming their generator'. Eleven generators are named, all repo scripts (blender/folds/fold.py 151, blender/paper/tear_relief.py 113, blender/objects/objects.py 74, tools/tears/tear.py 57, blender/bits/bits.py 44, tools/sound/synth.py 44, blender/paper/stocks.py 23, tools/handwriting/build.py 5, blender/shell/desk.py 3, blender/photos/* 2). Counter-finding: 4 entries point at nothing — assets/MANIFEST.json:3 and :30 are absolute-ish paths into a build machine's scratch directory, plus 'assets/folds/unfold_thirds' (a directory) and 'seed/photos/2026-08_bread_loaf.jpg' (outside assets/). tools/check/manifest.py:59 explicitly filters '../' keys out of its stale report rather than failing on them."
+    },
+    {
+      "rule": "tests",
+      "verdict": "PASS",
+      "evidence": "`flutter test` exits 0: 'All tests passed!', 28 tests across all six suites. The compact reporter names only the suite whose test is currently running, so floors_test.dart, spine_schema_test.dart and reliability_test.dart never appear by name in the full run; re-running those three explicitly gives 13 passing tests (schema 4, floors 8, reliability 1), and 2+4+4+8+1+9 = 28 accounts for every test. No skips, no flakes over two runs. The suites are load-bearing rather than decorative: persistence_boundary_test.dart greps the source tree for driver imports, spine_schema_test.dart parses the markdown contract, transport_local_test.dart exercises kill-mid-send, long offline gaps, host restart and blob transfer for duplicate-freedom and monotonic ordering."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "serious",
+      "file": "app/lib/spine/types.dart:2-3, :38, :54-55 and docs/EVENT_TYPES.md:53-61",
+      "what": "The documented extension contract is false. types.dart:2-3 says 'Adding a type: one entry here and one renderer in regions/chat/renderers/. Nothing else.' and EVENT_TYPES.md:57 says 'Add one renderer under app/lib/regions/chat/renderers/, registered by id. Nothing else changes.' That directory does not exist, and the `renderer` field that every one of the 17 specs sets (types.dart:85,94,104,113,122,132,142,152,161,169,177,185,193,201,209,217,225) is never read by any code in the repository — grep for it finds only its own declaration and the 17 assignments.",
+      "why": "This row is judged on whether new modules can be added without rework. The mechanism the code advertises for that does not exist; the real mechanism is three additive switch cases in two files (note.dart:128, note.dart:345, rows.dart:156). A dead field in a registry that calls itself 'the single place a type is declared' is the exact opposite of coherence, and the next person to add a type will follow the comment into a directory that isn't there."
+    },
+    {
+      "severity": "serious",
+      "file": "app/lib/regions/chat/rows.dart:15-188",
+      "what": "ThreadRow — 174 lines, a complete second implementation of the thread row including its own type-to-body switch (:108-153) and its own duplicate marginal-type set (:28) — is never instantiated. grep for 'ThreadRow' finds only its declaration and rows.dart:190. The live renderer is note.dart, which carries its own copies of the same set (:128) and the same dispatch (:151, :345). Only timeLabel and summaryOf are actually imported from this file (note.dart:23, search_page.dart:7).",
+      "why": "Two parallel renderers with duplicated per-type knowledge is the drift the single-spine design exists to prevent: a type added to note.dart and forgotten in rows.dart:156 renders correctly in the thread and as a bare id in search results. The file's own header comment (:1-2) still describes a refactor that was never done."
+    },
+    {
+      "severity": "serious",
+      "file": "app/lib/scope.dart:75-81",
+      "what": "AppScope._refresh() calls projectThread(all) and projectState(all) over the entire log on every single SpineChange, and spine.all (spine.dart:94) allocates a fresh copy of the whole list each time. Nothing is memoised or incremental. Compounding it, four regions construct a FeelingRegistry — itself a full scan of the log (feelings/registry.dart:8-31) — inside build(): chat_region.dart:359, pulse_region.dart:32, moments_region.dart:37, settings_region.dart:81; moments_region.dart:37-39 walks the log three times per frame. Us re-projects the whole log eight times per build (four module.glance + four module.build: us_region.dart:105,112).",
+      "why": "With the seeded year already at 14,049 events, scrolling the thread emits a read_marker (scope.dart:132-137), which is a spine change, which triggers a full 14k reprojection, a full rebuild and a fresh 14k FeelingRegistry. The architecture is right — projections rebuilt from the log — but nothing bounds the cost of that choice, and a couple replacing Instagram DMs will pass 100k events inside two years."
+    },
+    {
+      "severity": "minor",
+      "file": "app/test/floors_test.dart:66-76",
+      "what": "The test named 'at least fourteen event types, each with a renderer and a notification treatment' asserts neither. It checks the count, that ids are non-empty, that `t.required` isNotNull (a non-nullable List — always true), and that the id map is complete. `t.renderer` and `t.notify` are never referenced in the test body.",
+      "why": "The one guard that would have caught the dead `renderer` field is named for that job and does not do it."
+    },
+    {
+      "severity": "minor",
+      "file": "docs/EVENT_TYPES.md:66",
+      "what": "'app/test/spine_replay_golden_test.dart replays the seeded year and compares every region's view to a golden; a projection that cannot be rebuilt from the log alone fails the build.' No such file exists in app/test/. The same claim is repeated at spine/projections/thread.dart:3 ('the golden test replays it').",
+      "why": "The document asserts a build-enforced guarantee that nothing enforces. Rebuilding-from-the-log is in fact true here, but it is true by discipline, not by test."
+    },
+    {
+      "severity": "minor",
+      "file": "assets/MANIFEST.json:3, :30",
+      "what": "Two manifest entries are keyed by paths into a build machine's scratch directory ('../../../tmp/claude-0/-home-user-love-tap/<session-uuid>/scratchpad/desk.png' and '.../scratchpad/voice/2026-08_bread_loaf.jpg'), committed to the repository. Two further entries name a directory and a file outside assets/. tools/check/manifest.py:59 filters '../' keys out of its stale report rather than failing on them.",
+      "why": "A manifest whose purpose is that 'nothing can arrive in the material library from somewhere unaccounted for' (tools/check/manifest.py:4-6) has four entries accounting for nothing, and two of them leak a host path and a session id into a committed file."
+    },
+    {
+      "severity": "minor",
+      "file": "app/lib/spine/spine.dart:206-230",
+      "what": "applyFromHost updates _ordered, _byId and the store when a pending event comes back with its seq, but does not re-add it to the search index (contrast the added branch at :223). SearchIndex._byId keeps the stale copy whose seq is null.",
+      "why": "Latent rather than live — search_page only reads type, payload and id — but any future consumer that reads hit.event.seq gets null for events the host has already accepted."
+    },
+    {
+      "severity": "minor",
+      "file": "app/lib/transport/sync.dart:90-100",
+      "what": "_drainOutbox breaks out of the loop when the host accepts nothing (`if (assigned.isEmpty) break;`). The host silently drops events whose author is not the paired client person (server_io.dart:219) and events that fail validation (spine.dart:188). A permanently-rejected event therefore stays at the head of the outbox and is re-pushed on every sync round forever, with no log line and no visible state.",
+      "why": "Unreachable in the current wiring — emit always authors as identity.person — but it is a silent-poison-pill shape in the one loop that is supposed to guarantee nothing is lost."
+    }
+  ],
+  "what_is_working": [
+    "One log, enforced rather than asserted: app/test/persistence_boundary_test.dart greps the source tree for 19 named storage drivers and fails the build if one appears outside lib/spine/. The boundary is a test, not a convention.",
+    "The doc is a contract the test parses: spine_schema_test.dart:9-15 reads the markdown table out of docs/EVENT_TYPES.md and compares it row-for-row to kEventTypes. The two cannot drift.",
+    "The cursor is gap-safe by construction. Spine._noteSeq (spine.dart:106-112) advances the pull cursor only while every seq below it is held, with the reasoning written down at :98-100 — so a pushed event returning with a later seq can never skip what the host wrote in between. The reliability suite kills a client mid-send and reconnects after a long gap and finds nothing lost or duplicated.",
+    "Modules own nothing. ModuleContext (modules/module.dart:31-49) hands a module the log, the two people, the clock and one emit function, and every module is a pure projection over that list. The four module ids appear nowhere outside their own directories except one switch with a default and one optional filter chip.",
+    "Notification treatment is generated from the registry (settings/notifications.dart:41-52, :131) rather than hand-listed, so a new type gets a sensible default announcement with no edit.",
+    "Ephemeral frames are a separate channel end to end — a distinct type (transport/transport.dart:122-137), a distinct endpoint (server_io.dart:96, 227-232), and a test that asserts they are delivered and never stored.",
+    "The pairing protocol is proof-of-key rather than bearer-token: HKDF from six spoken words, HMAC over method+path+ts+nonce+body-hash, constant-time compare, clock-skew window and a replay nonce cache (wire.dart:51-143, server_io.dart:119-130).",
+    "Product judgement is encoded, not just described. thread.dart:88-116 coalesces passive phone signals to at most one margin mark per signal per person per hour and admits only three of them to the conversation at all; floors_test.dart:90-107 asserts the standing line can never contain 'unread', 'behind', 'owe' or a digit followed by 'new'. The anti-goals are guarded by tests."
+  ],
+  "verdict": "The spine is the work of someone who knew what they were building. There is exactly one log; the two storage drivers are quarantined in lib/spine/store/ by a test that greps the source tree rather than by a convention anyone can forget; every region, every module and the search index are pure functions of List<Event> recomputed at read time, so nothing can drift out of agreement with history. Seventeen event types each carry a notification treatment and a search behaviour as required constructor fields, read markers and reactions fold into the row they point at and are asserted never to become rows of their own, typing and presence live on a separate ephemeral channel with a test that says so, and the pull cursor refuses to advance past a gap with the reasoning written above it. A fifth module really is a directory and one line in modules/registry.dart. Twenty-eight tests pass and several of them are load-bearing — one parses the markdown contract, one greps for forbidden imports, one kills a client mid-send. No secret is committed anywhere, and the pairing key is derived at runtime and never written down. What keeps this at the floor rather than above it is that the extension story the code tells about itself is not true. types.dart:2-3 and EVENT_TYPES.md:57 both send the next engineer to app/lib/regions/chat/renderers/, which does not exist; the `renderer` field that all seventeen specs dutifully set is read by nothing; the floors test named 'each with a renderer and a notification treatment' checks neither; EVENT_TYPES.md:66 cites a golden replay test that was never written; and 174 lines of an older, unreachable thread renderer still sit in rows.dart carrying their own duplicate copy of the per-type dispatch, so a new type added to note.dart and forgotten in rows.dart:156 will render correctly in the thread and as a bare id in search. Underneath that, the honest architectural cost has not been paid: every projection is rebuilt over the entire log on every change with no memoisation, and scrolling the thread emits a read marker that triggers a full reprojection of what is already 14,049 events. This is good structure with a contract it does not keep and a cost it has not bounded — a careful engineer would be pleased with the spine and embarrassed by the comment above it."
+}

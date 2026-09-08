@@ -14,31 +14,41 @@ and continue from **Next action**.
 | 5 | 2026-09-05/06 | fresh clone re-bootstrapped; the nineteen root causes behind cycle 2 fixed (below); fold sequence re-rendered; both hands rebuilt; eight objects replaced; paired year-deep capture with every clip distinct frame by frame; cycle 3 critics and score; the first eleven cycle-3 findings fixed | **cycle 3: 64**, no floor met |
 | 6 | 2026-09-06 | the fold camera and the flap direction; the cascade step; the ink plate; object and shadow packed in their own frames; the whole messenger grammar in a picture; one stock per event type; clips at their own frame rate; fourth capture; cycle 4 critics, completeness pass and score; four of its findings fixed | **cycle 4: 68**, no floor met |
 | 7 | 2026-09-06/07 | the contact shadow every piece of paper had been drawing invisibly for four cycles; the window density behind the tab strip; thirty-three objects under the desk lamp; the tear from the event's own sequence; five modules on the desk; fifth capture; cycle 5 critics, completeness pass and score; the blank letter found and fixed | **cycle 5: 69**, no floor met |
+| 8 | 2026-09-07/08 | the fold's paper and the tooth halo; the module rows given their own bodies; the hero framed by measuring rather than estimating; the fling made a jump per frame; sixth capture; cycle 6 critics, completeness pass and score; the denoiser found behind the four-cycle desk hairline | **cycle 6: 73**, three floors met |
 
 ## Current position
 
-- phase: review (cycle 5 scored at **69/100**, from 68, 64, 55.5, 40; the brief asks 95 with every
-  floor met)
-- rubric: messenger 19/30 (floor 26) · material 15/25 (22) · emotional 15/20 (17) · coherence 12/15
-  (13) · anti-goal 8/10 (9).
-- **Two floors were met by the critics and lost to the builder's own sheet.** The critics put
-  coherence at 13 and anti-goal at 9.2 — at and above their floors for the first time in five
-  cycles. My sheet, written before reading them, said 12 and 8, and the rule takes the lower. That
-  is the mechanism working; it was not revised after the fact and it must not be next time either.
-  What it means in practice: on those two rows the builder is now the binding constraint, so the
-  next sheet should be written from measurements rather than from caution.
-- **Read `evidence/critics/5/completeness.json` before anything else.** As in cycle 4 it is the
-  most useful document in the set: it corrects material_truth for reading the arriving message in 06
-  as "the composer card", and shows anti_goal's photographic-paper proof failing to reproduce.
-  **Its headline lead was wrong, and cycle 6 established why.** "patch_std 9.4-10.3 in the library
-  arriving on screen at 1.22" compares two different instruments: `surfaces.py` reports the largest
-  standard deviation among nine 200 px patches, and on a ruled stock every such patch contains three
-  or four printed rules, so that number measures the ruling. Measured the same way at both ends, the
-  library and the screen agree to within noise — nothing was being flattened between the asset and
-  the glass. What was real underneath it was smaller and in a different place: the packer was making
-  a second lossy pass over an already-lossy render. `surfaces.json` now carries `tooth` and
-  `field_swing` beside `patch_std`, and says in the record what `patch_std` actually is.
-- branch: `claude/new-session-f95s8n` (sessions 5-7; pushed)
+- phase: review (cycle 6 scored at **73/100**, from 69, 68, 64, 55.5, 40; the brief asks 95 with
+  every floor met)
+- rubric: messenger 19/30 (floor 26) · material 15/25 (22) · emotional 17/20 (17, **met**) ·
+  coherence 13/15 (13, **met**) · anti-goal 9/10 (9, **met**).
+- **Three floors are met for the first time in six cycles**, and on all three the critic and the
+  builder agreed to the point. The two that are left are the two the whole build turns on, and
+  both are held down by the critic rather than by my own sheet: messenger 19 against my 24,
+  material 15 against my 20.
+- **Read `evidence/critics/6/completeness.json` before anything else.** It is again the most useful
+  document in the set, and it took two blocking findings apart:
+  - the scroll's 26 build spikes of 916-1462 ms are real but they are **periodic on the wall clock
+    at 20.4 s**, which is the sync engine's twenty-second long poll — not periodic in app time. The
+    capture spends 531 s of wall clock on 4.8 s of app time, so anything periodic in real time is
+    oversampled about 111 times. "Every 0.4 s of scrolling" was an artifact of the harness. What is
+    left underneath it and is worth fixing is that a sync poll costs a second of build.
+  - "a flat image being transformed" (the fold) is **falsified as a mechanism and confirmed as a
+    fault**: the straight edges and the slab shadow are in the Cycles render itself, which is where
+    they have now been fixed.
+  It also names what nobody looked at: `17_setup_pwa.png`, `crops/dusk_pulse.png` — the entire
+  second lighting condition — `logs/hand.json` (which reports a 16.7 per cent twin share where the
+  one hand measurement taken reported 8.9), `webpush.txt`, `strings.json`, the shadow crop and the
+  haptics strip.
+- **A process fault to not repeat: the tree moved under the review.** I started cycle-7 fixes once
+  the six critics had filed, while the completeness pass was still running, and it noticed —
+  `search_page.dart` and `viewer_page.dart` carried fixes for two of the findings it was checking,
+  one quoting the finding in a comment. Nothing is written until the whole review has landed.
+- `SCORE.json` carries one open problem: the coherence critic labelled `15_authored_feeling.mp4`
+  unchanged where the SSIM against the baseline is 0.9389. The measurement is right and the label
+  is wrong; a critic's judgement is not mine to rewrite, so it stands recorded and cycle 7's
+  coherence pass re-makes it against a fresh baseline.
+- branch: `claude/new-session-f95s8n` (sessions 5-8; pushed)
 - transport: local in every report; `evidence/coldstart.json` holds a real two-node tailnet run from
   the session that had a key. No `TS_AUTHKEY` here and the question may not be asked again.
 - Android: no `/dev/kvm`. 09 and 16 stay missing, and 08 cannot show both devices' screens, all for

@@ -1,0 +1,89 @@
+{
+  "critic": "messenger_reliability",
+  "cycle": 5,
+  "score": 22,
+  "floor": 26,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "06_unfolding.mp4",
+      "where": "the last row of the thread, frame 256 of 256 (the final frame), note box x 70-760, y 1500-1890",
+      "what": "The message the far side sends at frame 0 ('back by six. the pigeon is still on the cupboard, year nine have named it.', per logs/06_unfolding.json far[]) finishes its 240-frame unfold as a completely blank sheet: I measured minimum luminance 223, standard deviation 2.52, and zero pixels below L=150 inside the note, against 36% of pixels below 150 in the 'and the bread' note in the same frame, and the sheet carries no text, no author, no timestamp and no delivery marker.",
+      "why": "A message that arrives, animates open for 4.1 s of app time and then shows nothing is a dropped message as far as the reader is concerned, and the rubric row scores the category at or below its floor for any single failure that would send either person back to Instagram."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "06_unfolding.mp4",
+      "where": "the unfold step itself: logs/06_unfolding.json steps[] runs 'unfold' and then grabs 240 frames, and crops/06_unfolding_strip.png shows the same blank sheet in its last three panels",
+      "what": "The blank sheet cannot be explained as an unread note waiting to be tapped, because the capture's own step list opens it and the builder's own strip ends on the empty page; the same empty rectangle also sits at the tail of 08_state_propagating.mp4 from frame 150 (where far[] records 'message it is raining here too' at frame 149) through frame 501, 5.6 s of app time.",
+      "why": "Two independent clips show an arriving message that never renders its text, so this is the app's steady state for a newly delivered message and not a one-frame timing accident."
+    },
+    {
+      "severity": "serious",
+      "artifact": "13_messenger_states.png",
+      "where": "the composer stack, y 2588-2882: typing line, reply preview, attachment row and draft, all drawn straight onto the wood with no surface behind them",
+      "what": "Measured WCAG contrast (3rd/97th luminance percentiles) is 1.78:1 for the reply preview '↵ answering leaving now. dont cut the end off before… ✕', 2.19:1 for the attachment row 'a photo take one a video film something', and 2.22:1 for the draft being typed, 'the second one, then'; the placeholder in 02_chat.png ('write something') is light-on-wood at 4.44:1, so the text you actually type is half as legible as the prompt telling you to type it.",
+      "why": "The rubric requires dependable replies and no lost drafts; a reply target you cannot read and a draft you cannot read are functionally the same failure, and the four states overprint each other in a single unreadable band."
+    },
+    {
+      "severity": "serious",
+      "artifact": "logs/scroll_webkit.json",
+      "where": "per_frame[], 817 frames of the scroll against the seeded year",
+      "what": "Build cost is p50 20 ms but p95 1426 ms and max 1785 ms, a 71x spread; 252 of 817 frames (30.8%) build in over 500 ms, 248 (30.4%) in over 1000 ms, the spikes recur with a median gap of 3 frames, and those spike frames account for 76.3% of the run's total frame cost. Raster cost over the same frames is flat (p50 166 ms, max 212 ms), so the spikes are the app's own build work, not the headless environment's constant tax.",
+      "why": "Nearly one frame in three costing sixty times the median to build is the signature of scroll jank against the year-deep history, and it is the only quantitative record of frame cost in the evidence — 11_chat_scroll.mp4 is captured one frame per driven clock step and so cannot show jank by construction."
+    },
+    {
+      "severity": "serious",
+      "artifact": "11_chat_scroll.mp4",
+      "where": "the 'Sun 26 Apr · 02:10' photo row, frames 73, 75 and 91 of 300",
+      "what": "The photo is fully rendered from frame 64 to frame 92 (~70,000 bluish photo pixels per frame) and on exactly three isolated frames it vanishes to ~1,400-1,900 pixels and the row reads 'still fetching the picture.' instead; template match against that phrase scores 0.97, 1.00 and 0.98 on those three frames and never above 0.39 on any of the other 297.",
+      "why": "A photograph already on screen blinking back to a fetching placeholder three times while it is being scrolled past is a media load that cannot be trusted, and the rubric asks for no spinner that outstays its welcome."
+    },
+    {
+      "severity": "serious",
+      "artifact": "13_messenger_states.png",
+      "where": "all four staged rows, y 1400-2560: 'left the key under the pot', 'and the bread — there is half a loaf in the tin', 'took this back', 'sending you the roster'",
+      "what": "Every outgoing row in the artifact named for messenger states carries the identical marker 'read ✓✓' (measured 6.51:1 contrast, legible); no row anywhere in any artifact shows a sending, sent or delivered state, and the row whose text is 'took this back' is rendered as an ordinary message with a read marker rather than the deleted stub that reliability.json claims ('the row became a stub on the host').",
+      "why": "Delivery and read state are named capabilities of this rubric row; with only one rung of the ladder ever visible there is no way to tell from the evidence that a message left the phone, and deletion has no visible form at all."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/ as a whole",
+      "where": "every report's view.kinds across logs/*.json aggregates to {message 17, state_declared 4, feeling 4, video 2, state_passive 1, voice_note 1, ritual_kept 1}",
+      "what": "No reaction appears in any capture report or on any of the ~130 thread rows I stepped through in 02_chat.png, 13_messenger_states.png and the 300 frames of 11_chat_scroll.mp4; and although two reports count a video event, no artifact shows a video row rendered — in 02_chat.png the report's own anchor is 'types:voice_note,video at rows 7286 to 7290' yet the video row is clipped to a blank 50-logical-pixel sliver of paper at y 2645-2790 with no poster, play control, duration, timestamp or marker, and in 14_media_viewer.png the video row is behind the photo viewer overlay.",
+      "why": "Reactions and video are both named in the rubric row; reliability.json asserts them at the transport layer ('reaction folded onto the target', 'video and poster blobs fetched') but nothing in the pictures shows either one, and a capability with no visible form is not a capability the couple can use."
+    },
+    {
+      "severity": "minor",
+      "artifact": "09_two_devices.png",
+      "where": "MANIFEST.json missing{} and DIFF.json, which label it 'not captured this session' and 'not captured in this session or the last'",
+      "what": "The one artifact that would show delivery and read state as both people see them at the same time is absent, and the only reason offered is that it was not captured; frames.json gives a real reason for the other gap it records ('no Android device was up in this session' for scroll_emulator) but none for this one.",
+      "why": "'Not captured' is a restatement, not a reason, and it leaves the two-device half of delivery and read state resting entirely on JSON assertions."
+    },
+    {
+      "severity": "minor",
+      "artifact": "reliability.json and coldstart.json",
+      "where": "reliability.json transport 'local', address 127.0.0.1:35699, and tailscale.later_check / coldstart.later_check, both 'pending', 'the nodes were not answering when this was re-run'",
+      "what": "The whole fault-injection suite that carries the no-duplicates, gapless-reconnect and offline-queue claims ran over loopback on 2026-09-06T23:10:34Z; the only run that actually crossed between two Tailscale nodes is dated 2026-09-05T00:28:43Z and carries four events, and the attempt to reproduce it during this cycle failed.",
+      "why": "Ordering after going offline and reconnecting is a rubric requirement, and the evidence proves it on a loopback socket with a scripted fault injector rather than on the transport the couple will actually use."
+    },
+    {
+      "severity": "minor",
+      "artifact": "MANIFEST.json",
+      "where": "the stale{} block: fourteen of the fifteen present artifacts",
+      "what": "Only 02_chat.png was written by this capture (2026-09-07T00:37:44Z); every other still and every clip predates the run that began at 2026-09-07T00:26:31Z, including all four clips and 13_messenger_states.png, 12_search.png and 14_media_viewer.png.",
+      "why": "The messenger evidence for this cycle is almost entirely carried over, so the defects above are recorded against builds that were not re-verified, and a reader cannot tell which of them the current code still has."
+    }
+  ],
+  "what_is_working": [
+    "Ordering across the year-deep history is exact. Stepping all 300 frames of 11_chat_scroll.mp4 through seven flings (velocity -3000, restarts at frames 0/44/88/132/176/220/264 per logs/11_chat_scroll.json), phase correlation gives a per-frame vertical displacement that decays smoothly from -102 px to -22 px and back, with zero stalled frames (no |dy| < 0.5) and no reversals; timestamps read monotonically forward, Sun 26 Apr 07:18 through 21:34 and on into Mon 27 Apr 06:35, with no row appearing twice. frames.json records repeated_frames 0 and longest_still_run 0 for every clip, and ffprobe confirms the coded frame counts (300, 256, 421, 502, 364) match what frames.json claims.",
+    "Voice notes render completely: 02_chat.png shows a play triangle, a full waveform, a 0:47 duration, a timestamp and a read marker in one row (measured 2.4% ink coverage inside the row, versus 0% in the blank rows above).",
+    "Editing is visible and honest — 'Thu 3 Sep · 19:40 · edited ↵ read ✓✓' on the bread note in both 13_messenger_states.png and 06_unfolding.mp4 — and typing indication reaches the near side as 'noor writing…' in three separate captures.",
+    "Search is real and typed: 12_search.png shows the query 'rain', twelve scope chips including PHOTOGRAPHS, VIDEO, TALKING, FEELINGS, DATES, THE LIST and STATE, and results with the matched substring highlighted in place inside the note ('raining', 'Rain', 'rain' in one result), which is full-text search over the seeded year rather than a title match.",
+    "The media viewer opens to a full-bleed photograph with its caption note and a way back ('put it back'), and reliability.json records that the full-resolution bytes on the other device hash to the same blob.",
+    "The fault-injection suite in reliability.json is genuinely thorough for a JSON record: five injected faults (one lost response, two offline/online cycles), 174 events on both sides, 0 duplicates, same_order_both_sides true, 26 events queued offline and all delivered, a kill mid-send that the host received once and the retry did not duplicate, and a draft that survived the client process closing and reopening.",
+    "The empty first-run state (10_first_run.png) shows no spinner at all — 'nothing from them yet. the six words are on the other phone.' — rather than a loader that outstays its welcome."
+  ],
+  "verdict": "The substrate under this messenger is better than the pictures of it. Ordering is exact across a year of history and seven flings, search is full-text and typed, voice notes and edit markers and typing indication all render properly, and reliability.json documents a real fault-injection run with no duplicates, a gapless reconnect and a draft that survives a process kill. But the rubric row is decided by what either person would see, and what they see in 06_unfolding.mp4 is a message arriving from the other phone, unfolding for 4.1 seconds, and finishing as a blank sheet: minimum luminance 223, not one pixel of ink, no timestamp, no author, no marker — and the same empty rectangle sits at the tail of 08_state_propagating.mp4 for 5.6 seconds after the far side sends. That alone is a reason to open Instagram, and it does not stand alone: the composer stack renders the reply target at 1.78:1 and the draft you are typing at 2.22:1 straight onto the wood, a photograph already on screen blinks back to 'still fetching the picture.' on three frames of the scroll, one scroll frame in three builds at sixty times the median cost, and reactions, video-in-thread and every delivery state before 'read' appear nowhere in any artifact while 09_two_devices.png is absent with 'not captured this session' as its only reason. The category cannot exceed its floor while a delivered message renders empty, and it sits below it because three more of the named capabilities have no visible form at all."
+}

@@ -1,0 +1,110 @@
+{
+  "critic": "coherence",
+  "cycle": 2,
+  "score": 10.5,
+  "floor": 13,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "04_moments.png",
+      "where": "the right-hand column, five bands at y 660, 1290, 1730, 2080 and 2790 of the 1440x3120 frame, plus the five duration scraps at 41s/21s/38s/63s/47s",
+      "what": "The Moments region renders none of its content: the string \"still fetching the picture.\" appears five times as bare text sitting directly on the wood with no paper surface under it, and every media item is reduced to a blank scrap carrying only a duration - no author, no date, no waveform, no thumbnail; evidence/logs/04_moments.report.json records fold.decoded = 0 where all eight other region captures record 24.",
+      "why": "The row requires that every region be a view onto the one log; the region whose entire purpose is to be a second view onto that log shows none of it in the shipped capture, so the claim cannot be checked in the one place it is most testable."
+    },
+    {
+      "severity": "serious",
+      "artifact": "04_moments.png, 03_us.png, 08_state_propagating.mp4, 06_unfolding.mp4",
+      "where": "04_moments 21s tile at x 966-1424, y 880-1000; 03_us \"get someone out to look at the...\" at y 2850-2920; 08 frames 400-487 at y 1680-1850; 06 frames ~40-283",
+      "what": "The same class of row draws as torn paper in one place and as an untextured hard-edged rectangle in another. Measuring the standard deviation of the first bright pixel per row: the 04_moments 21s tile is 0.00 px over 120 rows while its immediate neighbours (41s, 63s) are 33.58 px and 22.12 px; the 03_us row is 0.00 px over 70 rows with a top edge of 2.14 px over 1319 columns while the row directly above it is 19.21 px; 08 frames 400-487 are 0.14 px and still blank in the final frame 487; 06 spends frames ~40-283 (4.0 s of a 5.33 s clip) growing a blank sharp-cornered box before the note appears.",
+      "why": "One visual language is supposed to hold across all five regions; instead the pending/undecoded state of a row is drawn in a second, non-material vocabulary that leaks into three regions and four artifacts, and in 08 it never resolves."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/logs/01_pulse.report.json, 03_us.report.json, 04_moments.report.json, 05_settings.report.json, 12_search.report.json",
+      "where": "the \"visible\", \"tears\", \"stocks\" and \"scroll\" keys of all five files",
+      "what": "All five report the identical seven event ids (0001M34C9R04NVG11H0AJ4SFDZ ... 0001M59VY0YA13H9M86HTA6XNP), the identical tear assignments (tear_004/024/047/009/031/051/013), the identical stocks and the identical scroll {first: 8380, last: 8387, of: 8387} - although the five screenshots share no content at all. 04_moments.report.json asserts seven torn notes are visible; the screenshot contains none of them.",
+      "why": "The prompt directs a critic to evidence/logs/ for what each capture recorded about itself; the probe is wired only to Chat and reused verbatim for four other regions, so the instrumentation that would show one log serving every region does not in fact observe four of the five regions."
+    },
+    {
+      "severity": "serious",
+      "artifact": "08_state_propagating.mp4",
+      "where": "evidence/logs/08_state_propagating.report.json: \"events\": 8, \"scroll\": {\"first\": 0, \"last\": 4, \"of\": 4}, \"link\": \"connected\"",
+      "what": "The one artifact that demonstrates a state change written in one region appearing in another runs on an 8-event fixture with a 4-row list, while every other artifact on the real log reports 14,053-14,064 events. It is also the only artifact whose transport reports \"connected\"; every year-deep capture reports \"connecting\".",
+      "why": "The central claim of this row - one log, every region a view onto it - is demonstrated only on a synthetic eight-event store, and never on the fourteen-thousand-event store the rest of the evidence runs on."
+    },
+    {
+      "severity": "serious",
+      "artifact": "09_two_devices.png (missing), 16_setup_android.png (missing), evidence/frames.json scroll_emulator (missing)",
+      "where": "evidence/MANIFEST.json \"missing\" block",
+      "what": "There is no Android evidence anywhere in the fourteen delivered artifacts - no second screen, no Android setup checklist, no Android scroll trace. The stated reason (no /dev/kvm, so the x86_64 image runs under QEMU instruction emulation and reaches adbd after 113 minutes without bringing the framework up) is specific and measured, and I accept it as a reason rather than an excuse.",
+      "why": "The row explicitly requires that both platforms serve the same regions, the same feelings and the same event types from one codebase; a reason for the absence is not the evidence, and that half of the row is entirely unevidenced."
+    },
+    {
+      "severity": "serious",
+      "artifact": "13_messenger_states.png (missing)",
+      "where": "evidence/MANIFEST.json \"missing\" block, against evidence/logs/13_messenger_states.report.json written at 17:30",
+      "what": "The reason given is \"__deskStage() threw; the handle now reports what it threw, so the next run will name it rather than reporting the Dart-to-JS bridge\" - i.e. the cause is still unidentified. A report file for this artifact exists from 17:30 listing six visible notes on six distinct tears, so the capture worked earlier in the same day and then regressed.",
+      "why": "This is an excuse, not a reason, and it removes the only artifact that would have shown delivery, read, typing, edit and delete state rendering consistently for one event across the messenger."
+    },
+    {
+      "severity": "serious",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "frame 1 versus frame 384, Pulse below the picker",
+      "what": "The feeling picker (WARMTH / ACHE / SHELTER / MISCHIEF) opens over Pulse, a cursor passes across the feeling objects, the picker closes - and the Pulse state below is unchanged between the first and last frame (\"bright / calm / tender / restless low\" identical, only a small scroll offset). No feeling event appears on Pulse, in Chat or in Moments.",
+      "why": "The row requires that every module writes into the one log; the clip named for a feeling landing shows the feeling module writing nowhere that any region can see."
+    },
+    {
+      "severity": "minor",
+      "artifact": "14_media_viewer.png",
+      "where": "the enlarged note at y 2130-2600 and a second copy beginning at y 2620",
+      "what": "The same caption event is rendered twice in one frame - the opened torn note, and beneath it a dimmed, unscrimmed duplicate of the identical string (\"three layers. it leans. i am / not saying that as a / criticism, i am saying it as\") clipped horizontally mid-line at y approximately 2790 by the PUT IT BACK bar.",
+      "why": "One event appearing twice, in two treatments, in a single frame is the inconsistency this row is looking for; one piece of paper cannot be in two places."
+    },
+    {
+      "severity": "minor",
+      "artifact": "10_first_run.png, 17_setup_pwa.png",
+      "where": "the always-on banner, ENERGY ticks at x 630-690, y 150-190",
+      "what": "The banner draws ENERGY with two of four ticks filled (filled tick RGB min 126, empty tick min 195) and NEED with four empty ticks, while evidence/logs/10_first_run.report.json reports \"events\": 0 and 05_settings.png reads \"not paired yet.\"; the headline and place slots that carry \"week one, and the room smells right again\" / \"TRAVELLING\" on every other region are simply blank.",
+      "why": "A view onto the log is showing a value no event in the log can supply, and the empty state is a hole in the strip rather than an authored absence."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the three lens labels at y 310-348: WHAT WE SENT (x 200-530), WHAT HAPPENED, WHAT WE FELT (x 930-1210)",
+      "what": "The three lenses reach only 2.28:1 and 2.11:1 luminance contrast against the wood (p3/p97 of the band), and the row is clipped from above by the partner banner. Only WHAT WE SENT is actually shown, and it is the broken one.",
+      "why": "WHAT HAPPENED and WHAT WE FELT are the two lenses that would show Us-module events and feeling events sharing the log with messages; they are unreadable and uncaptured, so cross-module coherence in Moments cannot be seen."
+    },
+    {
+      "severity": "minor",
+      "artifact": "03_us.png",
+      "where": "the section-label row at y 570-610 and the row at y 2170-2225",
+      "what": "Sibling chrome in one row is drawn two ways: \"AHEAD\" (x 40-180) measures 4.20:1 and \"BEEN\" 4.57:1, while \"add one\" on the same row (x 1220-1410) measures 1.66:1 and \"OPEN\" in the to-do module measures 1.79:1.",
+      "why": "The section-label treatment is not shared between the dates module and the to-do module, which is the visible symptom of modules that do not draw from one shared vocabulary."
+    },
+    {
+      "severity": "minor",
+      "artifact": "12_search.png",
+      "where": "the top of the frame, y 0-420, and the bottom of the frame",
+      "what": "Search carries neither the partner-state banner nor the five-chip bottom nav; the search sheet replaces the banner entirely.",
+      "why": "The row asks for partner state legible on every screen rather than only on Pulse, and this screen - one of the fourteen delivered artifacts - drops it."
+    },
+    {
+      "severity": "minor",
+      "artifact": "06_unfolding.mp4",
+      "where": "frames 280 to 281, and the still run ending at frame 165",
+      "what": "evidence/frames.json marks this clip ok: false with why \"the light jumps 1 times\" and it was shipped unchanged. Measured: whole-frame mean luminance steps 162.07 -> 140.19 between frames 280 and 281, a 13.5% step inside one 1/60 s frame, at the moment the blank placeholder box is swapped out; the longest run of identical frames is 30 (0.50 s of a 5.33 s clip).",
+      "why": "The evidence set ships a clip that its own checker fails, and the failing moment is the same placeholder swap that produces the bare rectangles elsewhere."
+    }
+  ],
+  "what_is_working": [
+    "The partner-state banner is one shared component, not five: the 1320x130 band at y 60-190 is pixel-identical (mean absolute difference 0.00) across 01_pulse.png, 02_chat.png, 03_us.png, 04_moments.png and 05_settings.png.",
+    "The bottom nav is the same five chips in the same order (PULSE CHAT US MOMENTS SETTINGS) in every screenshot and every clip, with the current region raised.",
+    "08_state_propagating.mp4 does show the real mechanism: setting the mood on Pulse around frame 40 writes a quiet timeline line \"noor is restless - Fri 4 Sep - 22:53\" into Chat and updates the always-on banner on both regions - one write, two views, no second store visible.",
+    "05_settings.png's quiet-hours matrix (y 1680-2900) lists thirteen event types in one table spanning the messenger (something written, a picture, something to watch, their voice), feelings (a feeling), partner state (something their phone notices, something they say about themselves) and the Us modules (a date moving, the list moving, a day that matters) - one event vocabulary reaching one module.",
+    "12_search.png returns a to-do event, \"text when home - kept\" on graph-paper stock at y approximately 1500, inside a list of message results - a module event surfacing in a messenger view of the same log.",
+    "15_authored_feeling.mp4 ends with authored feelings (\"pigeon\", \"tuesday soup\") sitting in the Chat timeline on legal stock carrying ordinary delivery state (\"waiting to send\"), interleaved with a drawn feeling object and plain text notes in one list.",
+    "dusk_pulse.png reproduces 01_pulse.png's layout item-for-item under a warmer light rig, so the region reads as a view rendered under one light model rather than a bespoke painting."
+  ],
+  "verdict": "Where the evidence shows the system, it genuinely is one system: an identical banner component across five regions, one nav, a mood set on Pulse arriving as a timeline line in Chat, a to-do turning up in message search, authored feelings sitting in the chat list with ordinary delivery state, and a single notification table that names thirteen event types from four different modules. That is real coherence and it is measurable. But three things stand between this and the floor. Moments, the region whose whole job is to be a second view onto the log, renders none of it - five bare \"still fetching the picture.\" strings on wood and five blank duration scraps, with its own log recording fold.decoded 0 against 24 everywhere else. The pending state of a row is drawn as a hard-edged untextured rectangle (left-edge standard deviation 0.00 px against 19-34 px for its neighbours) and that second vocabulary leaks into three regions and four artifacts, never resolving at all in 08. And the two supports that would carry the rest of the claim are absent or substituted: there is no Android evidence of any kind, for a stated and credible reason that is nonetheless not evidence, and the one clip that demonstrates propagation runs on an eight-event fixture rather than the fourteen-thousand-event log every other artifact uses - while the per-capture reports for four of the five regions are a Chat-scoped probe copied verbatim, describing notes that appear in none of those screenshots."
+}

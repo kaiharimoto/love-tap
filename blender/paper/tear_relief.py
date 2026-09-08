@@ -157,12 +157,12 @@ def keep_edge_band(path, mask, band_mm=EDGE_BAND_MM):
     return path
 
 
-def render_one(mask_path, meta, out_dir, res, samples, conditions):
+def render_one(mask_path, meta, out_dir, res, samples, conditions, passes=("edge", "shadow")):
     name = os.path.splitext(os.path.basename(mask_path))[0]
     mask = load_mask(mask_path)
     written = []
     for condition in conditions:
-        for pass_kind in ("edge", "shadow"):
+        for pass_kind in passes:
             if pass_kind == "edge" and condition != "day":
                 continue          # the edge light is baked once, under daylight
             scene = common.reset_scene()
@@ -178,7 +178,13 @@ def render_one(mask_path, meta, out_dir, res, samples, conditions):
             rx = res if span_x >= span_y else int(round(res * span_x / span_y))
             ry = res if span_y > span_x else int(round(res * span_y / span_x))
             rx, ry = int(round(rx * frame)), int(round(ry * frame))
-            common.render_settings(scene, rx, ry, samples=samples, transparent=True, file_format="PNG")
+            # The shadow pass is a gradient and nothing else, so it is rendered without the
+            # denoiser and with enough samples to be smooth on its own; the edge pass keeps it,
+            # because what it carries is fibre and the denoiser is what makes fibre out of noise.
+            common.render_settings(scene, rx, ry,
+                                   samples=samples * (4 if pass_kind == "shadow" else 1),
+                                   transparent=True, file_format="PNG",
+                                   denoise=pass_kind != "shadow")
             if condition == "day":
                 common.add_daylight(scene)
             else:
@@ -193,7 +199,9 @@ def render_one(mask_path, meta, out_dir, res, samples, conditions):
                 keep_edge_band(path, mask)
             manifest.record(path, "blender/paper/tear_relief.py", {
                 "mask": os.path.relpath(mask_path, common.repo_root()).replace(os.sep, "/"),
-                "pass": pass_kind, "light": condition, "samples": samples, "resolution": [rx, ry],
+                "pass": pass_kind, "light": condition,
+                "samples": samples * (4 if pass_kind == "shadow" else 1),
+                "denoised": pass_kind != "shadow", "resolution": [rx, ry],
                 "fibre_band_mm": FIBRE_BAND_MM, "lift_mm": LIFT_MM, "thickness_m": THICKNESS_M,
                     "curl_mm": CURL_MM, "cockle_mm": COCKLE_MM, "mesh": MESH,
                 "edge_band_mm": EDGE_BAND_MM, "frame": frame,
@@ -212,6 +220,9 @@ def main():
     ap.add_argument("--res", type=int, default=1400)
     ap.add_argument("--samples", type=int, default=48)
     ap.add_argument("--conditions", default="day,dusk")
+    ap.add_argument("--passes", default="edge,shadow",
+                    help="which passes to render; the shadow alone is what a re-render of the "
+                         "contact shadows costs, and the edge is untouched by it")
     ap.add_argument("--skip-existing", action="store_true")
     a = ap.parse_args(argv)
     index_path = os.path.join(a.dir, "tears.json")
@@ -232,15 +243,17 @@ def main():
         # and the queue reported "1 of 56 dusk shadows" as if that were the job done.
         wanted = []
         for condition in conditions:
-            wanted.append(mid + ("_shadow.png" if condition == "day" else "_shadow_dusk.png"))
-            if condition == "day":
+            if "shadow" in a.passes:
+                wanted.append(mid + ("_shadow.png" if condition == "day" else "_shadow_dusk.png"))
+            if condition == "day" and "edge" in a.passes:
                 wanted.append(mid + "_edge.png")
         if a.skip_existing and all(os.path.exists(os.path.join(a.dir, w)) for w in wanted):
             print(f"skip {mid}")
             continue
         import time
         t0 = time.time()
-        render_one(path, metas.get(mid, {}), a.dir, a.res, a.samples, conditions)
+        render_one(path, metas.get(mid, {}), a.dir, a.res, a.samples, conditions,
+                   passes=tuple(p for p in a.passes.split(",") if p))
         print(f"{mid} in {time.time() - t0:.0f}s", flush=True)
 
     # what the app needs to lay the three layers on top of each other correctly

@@ -11,115 +11,143 @@
    "artifact": "01_pulse.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "311c5236e35319a8",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "02_chat.png",
    "label": "changed",
    "ssim": 0.648,
-   "judgement": null,
+   "judgement": "regressed",
    "sha": "e4d3e4dec50254d9",
    "previous_sha": "842a7650cc4368c4",
-   "label_basis": "ssim 0.648 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.648 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "regressed \u2014 for this row: at ssim 0.648 the frame that used to carry five event kinds from the one log (a feeling, a passive state line, a declared state line, a voice note and a captioned photo) now carries three (seven messages, one voice note, one reaction), so the flagship chat still no longer shows Pulse's events living in the thread, even though its note craft, paper variety and delivery states improved.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "03_us.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "14f7c536fb51eaff",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "04_moments.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "0b26035ead2fdef0",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "05_settings.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "4d63b10a1e429d7e",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "35d8a50dd36880c3",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "ea9538b796a3ca79",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
    "ssim": 0.8278,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "fe1d833976414b31",
    "previous_sha": "a8ffec8ab7a6d8a1",
-   "label_basis": "ssim 0.8278 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.8278 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "improved \u2014 at ssim 0.8278 the clip now ends on the five-module Us overview with the header's place word changed from TRAVELLING to OUT (header band 9.4 grey levels apart between frame 0 and frame 501, the change confined to that word), where the previous version ended inside one module's own detail card and never showed the propagated state on a second region.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "not captured in this session or the last"
+   "judgement": "unchanged",
+   "why": "not captured in this session or the last",
+   "judged_because": "unchanged \u2014 absent from this capture and the last, so nothing moved; that it is still absent is the standing gap named in the first finding, not a change.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "10_first_run.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "81a093dc50f6b13c",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "changed",
    "ssim": 0.5926,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "df4f81690b770481",
    "previous_sha": "bfd4f5d5e8663908",
-   "label_basis": "ssim 0.5926 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.5926 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "improved \u2014 at ssim 0.5926 the new clip is 300 frames in which the thread moved exactly what the simulation asked on every one (max |asked \u2212 moved| 0.0000 logical px over seven throws, smallest step 10.4 px, no frame under a device pixel), and feelings and state lines are visible inline in the thread in five of the six strip frames, where the previous clip held the same typing indicator and the same unsent draft in every sampled frame.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "12_search.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "df45b5781b439849",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "6d5a1eb7e72ed255",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "9108931ef11804c9",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "15_authored_feeling.mp4",
@@ -134,16 +162,20 @@
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "not captured in this session or the last"
+   "judgement": "unchanged",
+   "why": "not captured in this session or the last",
+   "judged_because": "unchanged \u2014 absent from this capture and the last, so nothing moved; its absence is part of the missing-platform finding.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "17_setup_pwa.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "fad97eb2d604fe21",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 byte for byte the same file, ssim 1.0.",
+   "judged_by": "coherence critic"
   }
  ],
  "counts": {
@@ -152,5 +184,6 @@
   "unchanged": 11,
   "changed": 4,
   "absent": 2
- }
+ },
+ "judgements_from": "the coherence critic's report for this cycle"
 }

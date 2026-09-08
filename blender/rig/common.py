@@ -62,13 +62,20 @@ def reset_scene():
     return scene
 
 
-def render_settings(scene, width, height, samples=128, transparent=False, seed=20260903, file_format="PNG", webp_quality=92):
+def render_settings(scene, width, height, samples=128, transparent=False, seed=20260903,
+                    file_format="PNG", webp_quality=92, denoise=True):
     scene.render.engine = "CYCLES"
     scene.cycles.device = "CPU"
     scene.cycles.samples = samples
     scene.cycles.use_adaptive_sampling = True
     scene.cycles.adaptive_threshold = 0.02
-    scene.cycles.use_denoising = True
+    # Denoising is what makes 48 samples look like a scan rather than like sand. It also draws
+    # straight lines: OpenImageDenoise works in tiles, and a pass whose only content is a soft
+    # gradient — a contact shadow's alpha — comes back with one-pixel steps along the tile
+    # boundaries. Fifty-one of the fifty-six baked shadows carried them, up to 81 of 255 in a
+    # single row, which is the bright hairline a critic measured on the desk of nine of ten stills
+    # for four cycles. A pass that is nothing but a gradient is rendered without it.
+    scene.cycles.use_denoising = denoise
     scene.cycles.denoiser = "OPENIMAGEDENOISE"
     scene.cycles.seed = seed
     scene.cycles.max_bounces = 6

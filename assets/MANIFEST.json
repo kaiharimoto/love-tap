@@ -1,5 +1,155 @@
 {
  "files": {
+  "../../../tmp/tearA/tear_002_edge.png": {
+   "bytes": 479117,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_edge",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": true,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.0,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "../../../tmp/tearA/tear_002.png",
+    "mesh": 340,
+    "pass": "edge",
+    "resolution": [
+     640,
+     640
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48,
+    "thickness_m": 0.00011
+   }
+  },
+  "../../../tmp/tearA/tear_002_shadow.png": {
+   "bytes": 373750,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": false,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "../../../tmp/tearA/tear_002.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     768,
+     768
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 192,
+    "thickness_m": 0.00011
+   }
+  },
+  "../../../tmp/tearB/tear_002_edge.png": {
+   "bytes": 479117,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_edge",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": true,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.0,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "../../../tmp/tearB/tear_002.png",
+    "mesh": 340,
+    "pass": "edge",
+    "resolution": [
+     640,
+     640
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48,
+    "thickness_m": 0.00011
+   }
+  },
+  "../../../tmp/tearB/tear_002_shadow.png": {
+   "bytes": 177977,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": false,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "../../../tmp/tearB/tear_002.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     768,
+     768
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 192,
+    "thickness_m": 0.00011
+   }
+  },
+  "../../../tmp/tearteset/tear_002_edge.png": {
+   "bytes": 2205524,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_edge",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": true,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.0,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "../../../tmp/tearteset/tear_002.png",
+    "mesh": 340,
+    "pass": "edge",
+    "resolution": [
+     1400,
+     1400
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48,
+    "thickness_m": 0.00011
+   }
+  },
+  "../../../tmp/tearteset/tear_002_shadow.png": {
+   "bytes": 1767445,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": false,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "../../../tmp/tearteset/tear_002.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     1680,
+     1680
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 192,
+    "thickness_m": 0.00011
+   }
+  },
   "assets/bits/clip_01.png": {
    "bytes": 246937,
    "generator": "blender/bits/bits.py",
@@ -19413,12 +19563,13 @@
    }
   },
   "assets/tears/tear_001_shadow.png": {
-   "bytes": 163596,
+   "bytes": 277976,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": false,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.2,
@@ -19432,7 +19583,7 @@
      768
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 192,
     "thickness_m": 0.00011
    }
   },

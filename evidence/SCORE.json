@@ -1,0 +1,101 @@
+{
+ "cycle": 6,
+ "categories": {
+  "messenger_reliability": {
+   "weight": 30,
+   "floor": 26,
+   "critic": 19,
+   "critics": {
+    "messenger_reliability": 19
+   },
+   "builder": 24,
+   "builder_why": "Seventeen capabilities in evidence/reliability.json, all ok, zero duplicates, same order on both sides, with a kill mid-send, an offline queue, a reconnect and a host-offline outbox among them. 13_messenger_states carries the whole grammar in one frame \u2014 four read, one sent, one refused in red, an edit with its caret, a row taken back with no delivery mark on it, a reply banner, the attachment row, a draft and 'noor writing\u2026' \u2014 and every row of the sheet you write on is over 4.5:1 against what it sits on (8.71, 4.66, 12.45). 14 has the video playing rather than a poster, by its own record: kind video, initialised, playing, 1530 ms of 2500. 04 builds 26 tiles for a viewport onto 183 media and asks for 18 pictures and gets 18, with no 'still fetching' anywhere. 02 frames eight rows, all eight of them paper, on eight distinct torn edges out of a pool of fifty-six. And the scroll: 11 is 300 frames with none of them identical to the one before, every frame moved (47.5 pixels at the most, 10.4 at the least), and the build cost the rubric calls jank went from p95 1050 ms to p95 54 with the raster unchanged \u2014 two cycles of critics measured that number and it was a one-millisecond animation racing a compositor. Held back by the second device, which is missing; by transport: local; by a first launch that costs thirteen seconds; and by a push that has been delivered to a real service worker but never to an iPhone.",
+   "score": 19,
+   "meets_floor": false
+  },
+  "material_truth": {
+   "weight": 25,
+   "floor": 22,
+   "critic": 15,
+   "critics": {
+    "material_truth": 15
+   },
+   "builder": 20,
+   "builder_why": "The paper carries its own surface again: every day stock measures a field swing of 3.5 to 19.4 grey levels against a floor of 3.0 and a tooth of 0.58 to 1.53 against 0.45, where the flagship stock measured 1.33 before the cockle was scaled to a fraction of the sheet rather than of the texture. The packer was making a second lossy pass over an already-lossy render \u2014 15.44 MB at quality 95 for a high-pass of 1.144, against 13.91 MB and 1.194 for the render's own bytes \u2014 and copies now. The desk was packed at 685x1500 from a 1400x3067 render and magnified 2.1x on the glass; packed at its own size, the desk and the paper measure the same material (radial power-spectrum slope -2.92 and -3.03), which is what the critic's -3.88 against -2.53 had been measuring. The hairline three cycles could not place is the paper piece's own bounding box: drawImageNine lands the mask flush with the edge of the composed texture and the shader samples half a texel outside it, so a sliver of sheet is drawn beyond the sheet; the mask is composed one device pixel in from every side now. Six feeling objects that measured as near-neutral geometric forms are different objects, with the silhouette numbers in the sheet: the paper plane 0.995 -> 0.368 against its own bounding rectangle, the boat 0.902 -> 0.713, the bookmark's internal contrast 4.3 -> a fold that catches a highlight. The hand's twin share on the hero is 0.147. Held back by the WebP ceiling under all of it, by eight objects that are still flat-lying sheets, and because I have never compared any of it with a photograph.",
+   "score": 15,
+   "meets_floor": false
+  },
+  "emotional_transmission": {
+   "weight": 20,
+   "floor": 17,
+   "critic": 17,
+   "critics": {
+    "emotional_transmission": 17
+   },
+   "builder": 17,
+   "builder_why": "Thirty-four feelings across the named families, each with its own object rendered under the same desk lamp as the paper \u2014 a bounce plane two millimetres under each object's lowest vertex, which took obj_crumple_ball to 37.6 grey levels left to right with no burial line and the crane to -13.9 and +28.8 at dusk where the whole library had read near zero. 07 is the arrival on the receiving phone: 421 frames, none of them held, the partner strip first, then the page, then the object landing in the recent row, with the pattern annotated to scale and no words on it. 15 goes through the vocabulary family by family and ends on the couple's own authored feeling, 376 frames, none held. Twelve partner signals and three ambient surfaces are recorded in the logs as what was sent. Held back because nobody has felt a buzz \u2014 there is no vibrator in this session \u2014 because the substitute on the web is the page's own rhythm and a drawn lane rather than something a reader has judged, and because eight of the objects are flat.",
+   "score": 17,
+   "meets_floor": true
+  },
+  "coherence": {
+   "weight": 15,
+   "floor": 13,
+   "critic": 13,
+   "critics": {
+    "code": 13,
+    "coherence": 13
+   },
+   "builder": 13,
+   "builder_why": "One spine, one store, and every region a projection of it: the thread, the pulse, the gallery, the search and all five modules read the same log, and module_costs_test now counts what a sixth module would cost \u2014 a module brings its own thread row, its own sentence and its own words, so the last shared file a new one had to touch is gone. The same build serves the PWA and the Android host from one codebase, with the role decided at launch. The capture reports are per region rather than the thread's rows reported for every screen, which is what made four of last cycle's logs describe notes that were not in the frame. Held back because the two platforms are one codebase but only one of them has been run on a phone this session, and because a fifth module was added to prove the claim rather than a sixth being added cold by somebody who had not written the other five.",
+   "score": 13,
+   "meets_floor": true
+  },
+  "anti_goal": {
+   "weight": 10,
+   "floor": 9,
+   "critic": 9,
+   "critics": {
+    "anti_goal": 9
+   },
+   "builder": 9,
+   "builder_why": "No engagement machinery of any kind: no counts to keep, no streak that punishes, no badge, nothing that asks for a return. The emotional layer is thirty-four rendered objects and no emoji \u2014 the seven that were shaped like one, or like a reward, were replaced and are measured in the sheet. 117 displayed strings read against the eight rules in docs/VOICE.md with none against the voice. And the paper: 270 surfaces in the library, none of them a flat fill, none unlit; the shape the anti-goal forbids is not in the app's permanent chrome any more, because a window onto a sheet is drawn at one image pixel per device pixel rather than per logical point. Held back by the one place I cannot check myself: whether a reader sees photographed paper or a very good simulation of it, which is the whole of this row and is not a number I can take.",
+   "score": 9,
+   "meets_floor": true
+  }
+ },
+ "total": 73,
+ "exit_threshold": 95,
+ "every_floor_met": false,
+ "at_exit": false,
+ "critics_run": [
+  "anti_goal",
+  "code",
+  "coherence",
+  "completeness",
+  "emotional_transmission",
+  "material_truth",
+  "messenger_reliability"
+ ],
+ "critic_count": 7,
+ "declined": [
+  {
+   "finding": "Give the hero a taller frame, or tighten the space between notes, so eight whole notes fit on the glass.",
+   "why": "Both change the app to fit a check. The frame is a phone; the space between notes is the design. Eight sheets are on the glass with the top one crossed by the edge, which is what a thread that continues off the top of a phone looks like, and the sheet says so: eight on the glass, seven whole, in a viewport 792 pixels tall where the year's own message rows run 83 to 148.",
+   "artifact": "evidence/02_chat.png",
+   "reason": "Both change the app to fit a check. The frame is a phone; the space between notes is the design. Eight sheets are on the glass with the top one crossed by the edge, which is what a thread that continues off the top of a phone looks like, and the sheet says so: eight on the glass, seven whole, in a viewport 792 pixels tall where the year's own message rows run 83 to 148."
+  },
+  {
+   "finding": "Re-run the tailnet checks so reliability.json does not say transport: local.",
+   "why": "There is no key in this environment and the brief allows the question to be asked once, in the session where the phase began. It was. A tailnet run with no tailnet would be a fabricated artifact.",
+   "artifact": "evidence/reliability.json",
+   "reason": "There is no key in this environment and the brief allows the question to be asked once, in the session where the phase began. It was. A tailnet run with no tailnet would be a fabricated artifact."
+  },
+  {
+   "finding": "Re-render the paper without the lossy first pass.",
+   "why": "Not declined on the merits \u2014 it is the right change and it is named as still open. It is twenty-seven stocks at about four minutes each on this machine plus the dusk half, and it would have to land before a capture rather than between two, so it belongs to the next cycle rather than to this one.",
+   "artifact": "assets/paper/",
+   "reason": "Not declined on the merits \u2014 it is the right change and it is named as still open. It is twenty-seven stocks at about four minutes each on this machine plus the dusk half, and it would have to land before a capture rather than between two, so it belongs to the next cycle rather than to this one."
+  }
+ ],
+ "problems": []
+}

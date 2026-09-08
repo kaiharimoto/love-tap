@@ -1,0 +1,73 @@
+{
+  "critic": "emotional-transmission",
+  "cycle": 1,
+  "score": 7,
+  "floor": 17,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "frames 0000->0001, the feeling row at x180..276/x787..916, y1350..1440",
+      "what": "The feeling does not land, it cuts in: I extracted all 390 frames and the entire arrival happens in one 1/60s step (17,431 pixels change by >12 levels between frame 0 and frame 1), after which the object region has ZERO pixels changing by more than 12 levels for the next 39 frames, and across the whole remaining 6.47s the maximum deviation from frame 1 anywhere on the 2,527,200-pixel screen is 41 levels on 81 pixels.",
+      "why": "The row asks whether a feeling arrives with weight - settling, bouncing, casting a moving shadow, disturbing what is around it - and the measurement says the object appears at final size, final position and full opacity in a single frame and is then frozen, which is a static thing appearing, not a sensation."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "08_state_propagating.mp4 and 09_two_devices.png",
+      "where": "absent from evidence/; MANIFEST.json lists both under \"missing\" with the reason \"no Android device was up in this session\"",
+      "what": "Two of the three artifacts this row is explicitly judged on do not exist, so there is no evidence anywhere in evidence/ of a gesture on one device becoming anything at all on the other; reliability.json proves events replicate between two processes but that is a JSON log of delivery, not a sensation.",
+      "why": "The row is defined as being judged from the landing clip, the propagation clip and the two-device frame, and with two of three missing the app's central claim - a gesture on one device becomes a sensation on the other - is simply unevidenced."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "frame 0001+, the glyph at x180..276, y1353..1435, above the label \"a squeeze\"",
+      "what": "The object that lands is the system emoji: a puffy white heart with the characteristic Apple Color Emoji lobe shading and a scaled bitmap-glyph staircase edge, sitting with no contact shadow while straddling a torn paper edge and the dark ground beneath it.",
+      "why": "This is the anti-goal \"no emoji soup or stock illustration standing in for feeling\" landing on the single most important object in my row - the feeling itself - and an emoji with no shadow is an icon, not a physical object."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "evidence/ as a whole",
+      "where": "05_settings.png \"WHAT MAY INTERRUPT\", and logs/strings.json",
+      "what": "There is no iOS haptic substitute anywhere in the evidence: grepping every file in evidence/logs/ for haptic, vibrat or taptic returns nothing, and the only related surface is a per-type wake me / quietly / not at all interrupt policy, which is a notification setting rather than a physical sensation.",
+      "why": "The row explicitly requires judging whether the iOS substitute for the missing haptic reads as equally physical rather than as an absence, and in the evidence it is exactly an absence."
+    },
+    {
+      "severity": "serious",
+      "artifact": "15_authored_feeling.mp4",
+      "where": "hard cuts at frames 0059->0060 (2,065,422 px change, 82% of screen) and 0129->0130 (1,002,767 px, 40%)",
+      "what": "The clip never shows a feeling being made: it is three unrelated still screens hard-cut together - Settings (\"THE TWO PHONES\", \"not paired yet\", quiet hours) for 1.0s, then Chat at one scroll position, then Chat at another - with 297 of 309 transitions having fewer than 10 pixels changed, and no drawing canvas, no authoring gesture and no send action anywhere in it.",
+      "why": "The row needs a feeling one of them made themselves being made and then sent; a slideshow of a settings page and two chat scroll positions evidences neither the making nor the sending."
+    },
+    {
+      "severity": "serious",
+      "artifact": "15_authored_feeling.mp4",
+      "where": "frames 0060 and 0200, the whole middle of the screen",
+      "what": "The Pulse layer is composited through the Chat screen: \"WARMTH ACHE SHELTER MISCHIEF STATIC\", the labels \"a squeeze / forehead / warm palm\", the emoji heart, the blue spiral, the ring card, the sun and the crescent are all drawn over the chat notes at the identical y-coordinates they occupy on Pulse, with the spiral drawn straight through the words of the message \"two stops. put the kettle on the way...\".",
+      "why": "Feelings floating as a stuck translucent overlay across unrelated text is the opposite of a feeling being a physical object in a scene, and it makes both the feeling and the message illegible."
+    },
+    {
+      "severity": "serious",
+      "artifact": "01_pulse.png",
+      "where": "the partner's torn note, y ~600..1200",
+      "what": "The partner's inner state is a 13-field typographic table (MOOD bright, HERE open, PLACE travelling, NEEDS a lot, HAS LEFT a little, BATTERY 72%, LAST UP just now, THEIR CLOCK 11:00, RINGER normal, MOVING still, SIGNAL wifi, AT HOME yes, plus one handwritten line), of which 7 fields are phone telemetry rather than feeling, and only the NEED and ENERGY tick meters encode anything non-verbally.",
+      "why": "The row requires each person's inner state to be continuously legible as a sensation rather than as a message in a different colour, and a label-and-value table that must be read word by word - majority device diagnostics - is precisely a message, not a sensation."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the body, roughly y 400..2700",
+      "what": "The Moments screen carries the partner header but is otherwise an empty brown expanse with a single note reading \"it fills in as it happens\", so there is no felt trace of the other person on this screen beyond the header strip.",
+      "why": "Continuous legibility is thinner here than on Pulse, Chat and Us, where notes and state give the partner some presence."
+    }
+  ],
+  "what_is_working": [
+    "The partner-state header is genuinely persistent: the same torn strip carrying their handwritten line (\"week one, and the room smells right again\"), PLACE (TRAVELLING) and two tick meters (NEED, ENERGY) sits at the top of 01_pulse.png, 02_chat.png, 03_us.png, 04_moments.png and 05_settings.png, so the other person is never entirely off-screen. This is a real answer to the continuous-legibility half of the row.",
+    "The drawn-marks row in 01_pulse.png (y ~1250..1500) is the strongest material in the whole set: a double-stroke blue ink crescent, a red drawn face, a cream candle rendered as a solid object with a genuine soft cast shadow falling to its lower-right, scattered pale beads each with their own contact shadow, a blue zigzag scribble and a grey drawn chair. These sit on the ground plane as objects rather than in chips as icons, and the shadows do the physical work the emoji heart does not.",
+    "The YOURS block in 01_pulse.png authors state the right way: word menus (bright / calm / tender / restless / low / flat) with the chosen word underlined in ink, plus NEED and ENERGY as hand-ticked meters. Declaring your state by underlining a word on a paper form is a material gesture rather than a picker.",
+    "The authored feeling itself, where it survives, is correct in kind: the \"empty chair\" note in 15_authored_feeling.mp4 is a hand-drawn chair with the words beside it, sent as a note at 17:19, and \"pigeon\" at 17:33. These are made marks, not stock symbols - the concept is right even though the clip never shows one being made.",
+    "05_settings.png treats a feeling as a first-class thing that can interrupt, with \"a feeling\" and \"a feeling one of you made\" as separate rows in the WHAT MAY INTERRUPT list alongside quiet hours."
+  ],
+  "verdict": "This row turns on one question - does a feeling arrive as a sensation - and the measurement answers it flatly. Across all 390 extracted frames of 07_feeling_landing.mp4 the entire arrival occupies a single 1/60s step, and for the following 6.47 seconds the maximum deviation anywhere on a 2.5-megapixel screen is 41 levels on 81 pixels, which is encoder noise on a frozen image; in the object's own region not one pixel moves by more than 12 levels after the cut. Nothing settles, overshoots, disturbs a neighbour or drags a shadow. Worse, the thing that pops into place is the Apple white-heart emoji, unmistakable from its lobe shading and scaled-bitmap edge, floating shadowless across a torn paper edge - the anti-goal landing squarely on the one object this row exists to judge. The two artifacts that would have shown the app's actual claim, 08_state_propagating.mp4 and 09_two_devices.png, are absent by the manifest's own admission, so a gesture on one device becoming a sensation on the other is unevidenced in every form; and the iOS substitute for the missing haptic, which the row names explicitly, appears nowhere in any image or log - it is an absence, not a substitute. 15_authored_feeling.mp4 does not rescue it: it is three hard-cut stills of Settings and two chat scroll positions with no authoring shown at all, and in two of those states the Pulse layer bleeds through the Chat screen with the spiral drawn straight across a message's words. There is real quality here and it should be said plainly - the persistent partner strip on every screen, the underline-on-paper way you declare your own state, and above all the marks row where a candle and a scatter of beads cast honest contact shadows onto the ground, which is exactly what a feeling-as-object should look like. But that vocabulary is only ever shown at rest. The feelings that transmit are an emoji that cuts in and a table of thirteen fields, seven of them battery, ringer and signal strength, that must be read word by word. On this evidence a feeling is still a message in a different colour, and the category cannot approach its floor."
+}

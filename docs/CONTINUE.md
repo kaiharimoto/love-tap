@@ -16,23 +16,64 @@ cycle, score, next, blocked, ask).
 
 ## 0. What is in flight right now
 
-**Cycle 6's capture is done and its review is running.** The evidence set in `evidence/` is cycle
-6's: fifteen artifacts, taken against the seeded year with the far phone up, and every clip and
-every check passing. `evidence/critics/6/measurements.md` is the sheet, and
-`evidence/critics/6/builder.json` the builder's own scores written from it before any critic was
-read, which is the brief's rule. `bash tools/critics.sh hide 6` holds both of those out of the tree
-while critics work, along with `SCORE.json` and the earlier cycles' reports; `show 6` puts them
-back, and it must be run before scoring.
+**Cycle 6 is scored: 73/100, from 69, and three floors are met for the first time** — emotional
+17/17, coherence 13/13, anti-goal 9/9, with critic and builder agreeing to the point on all three.
+The two that are left are the two the build turns on: messenger 19 of 30 against a floor of 26, and
+material 15 of 25 against 22, both held down by the critic rather than by my own sheet (24 and 20).
 
-If you are picking this up cold, the order is: `bash tools/critics.sh show 6` (if a `.critics-hold`
-directory exists), then `python3 tools/score.py --cycle 6`, then read
-`evidence/critics/6/completeness.json` first of all the reports.
+**Read `evidence/critics/6/completeness.json` first.** It falsified two blocking mechanisms and
+confirmed the faults underneath them — the scroll's build spikes are periodic on the wall clock at
+the sync engine's twenty-second poll rather than in app time, and the fold's straight edges and
+slab shadow are in the Cycles render itself rather than in any transform the app applies.
 
-**`evidence/SCORE.json` and `evidence/critics/1` to `5` are missing from HEAD as of the commit that
-wrote this line, and that is the hold, not a loss.** They were moved to `.critics-hold/` (which is
-gitignored) while the critics worked, and a commit made in that window recorded their removal.
-`bash tools/critics.sh show 6` puts them back in the working tree; commit that. Everything is in
-the history either way — `git log -- evidence/SCORE.json` finds it.
+**Cycle 7 is under way and this is where it stands.** Committed and pushed:
+
+- the media viewer has a film strip — play and hold marks, a pencil rule with the played part
+  inked in and a tick at the playhead, the times in the margin hand, seek on tap or drag;
+- the search page's chrome went from 66 per cent of the page to 29, with six hits on it instead of
+  three, because a `Slip` takes the room it is given and each of fifteen tabs was taking the whole
+  width; the tab that is chosen now stands proud, is stamped in ink and is underlined;
+- the delivery record uses the words on the paper rather than the enum's names, and counts only
+  rows that draw a mark;
+- the service worker obeys the treatment and the quiet hours a person set, read out of the app's
+  own store, and keeps no per-type table at all: the words a phone says live in the registry;
+- `module_costs_test` walks `web/` as well as `lib/`;
+- the fold sheet is torn rather than machine-cut, cockled rather than flat, and its shadow is
+  scaled to the ceiling the app's own baked shadows are drawn at.
+
+**The four-cycle desk hairline is the denoiser.** Nine of ten stills carry one-pixel bright rules
+across the wood, up to +48 grey and 440 px long, and three hypotheses had been wrong. Measured this
+session: 51 of the 56 baked contact shadows carry a one-row alpha step, and at the same resolution
+and the same sample count, OpenImageDenoise on 192 samples leaves two of them and no denoiser
+leaves none. A contact shadow's alpha pass is nothing but a soft gradient, which is exactly what
+OIDN has nothing to work with and tiles anyway. `blender/rig/common.py` takes `denoise=` and
+`tear_relief.py` renders the shadow pass without it at four times the samples.
+
+**A re-render of all 112 contact shadows is running in the background** (`/tmp/shadows.log`, about
+three and a half minutes each, so roughly six hours). It writes into `assets/tears/`. Nothing
+should be captured until it finishes and `python3 tools/pack_assets.py` has run.
+
+**Still to do in cycle 7**, in the order they are worth doing:
+
+1. the fold sequence re-render (240 frames, about an hour and three quarters) — the code change is
+   in and verified on three frames, the frames themselves are not re-rendered yet;
+2. the five module cards on 03: machine-cut plates on a uniform blurred shadow, 0.00 px of edge
+   roughness on all four sides;
+3. the hero's bottom sheet, sliced by the viewport with a 138-grey step in one un-antialiased row
+   and no shadow under it — the writing pad should sit *over* the bottom of the thread, so a note
+   running under it is occluded by paper with its own edge and its own shadow;
+4. the desk has no cross-grain structure at all (mean |dx| 3.146 against |dy| 0.618 on the asset
+   itself, a ratio of 5.09) — it reads as painted rather than as wood;
+5. the crops the material row is judged on land on tear, desk and the composer's placeholder
+   rather than on handwriting;
+6. a sync poll costs about a second of build time on a year-deep thread;
+7. **a full `./capture.sh`, not `--only`** — the messenger critic is right that a set where four
+   stills predate the run by most of a day, and the one that was re-shot moved SSIM 0.648, is not
+   one picture of one build.
+
+**A process fault not to repeat:** the tree moved under the review. Cycle-7 fixes went in once the
+six critics had filed while the completeness pass was still running, and it noticed. Nothing is
+written until the whole review has landed.
 
 **What was fixed in this session and is in the captured evidence:**
 
