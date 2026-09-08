@@ -97,12 +97,13 @@ class _TheirSheet extends StatelessWidget {
             spacing: 18,
             runSpacing: 8,
             children: [
-              _Fact('mood', state.mood),
-              _Fact('here', _words(state.availability)),
-              _Fact('place', _words(state.place)),
+              _Fact(signalLabel('mood'), state.mood),
+              _Fact(signalLabel('availability'), _words(state.availability)),
+              _Fact(signalLabel('place'), _words(state.place)),
               // never a score out of anything: a dial is how much, said in words
-              _Fact('needs', _dial(state.need)),
-              _Fact('has left', _dial(state.energy)),
+              // the same word the strip and the picker use: two fields, two names
+              _Fact(signalLabel('need'), _dial(state.need)),
+              _Fact(signalLabel('energy'), _dial(state.energy)),
               if (state.battery != null)
                 _Fact('battery', '${state.battery}%${state.charging ? ' on charge' : ''}'),
               if (state.lastActiveMinutes != null) _Fact('last up', _ago(state.lastActiveMinutes!)),
@@ -295,11 +296,12 @@ class _MySheet extends StatelessWidget {
         children: [
           Stamped('yours', size: 10),
           const SizedBox(height: 6),
-          _Row(label: 'mood', options: moods, value: state.mood, onPick: (v) => onSet('mood', v)),
-          _Row(label: 'here', options: availability, value: state.availability, onPick: (v) => onSet('availability', v)),
-          _Row(label: 'place', options: places, value: state.place, onPick: (v) => onSet('place', v)),
-          _Dial(label: 'need', value: state.need, onPick: (v) => onSet('need', v)),
-          _Dial(label: 'energy', value: state.energy, onPick: (v) => onSet('energy', v)),
+          _Row(label: signalLabel('mood'), options: moods, value: state.mood, onPick: (v) => onSet('mood', v)),
+          _Row(label: signalLabel('availability'), options: availability, value: state.availability,
+              onPick: (v) => onSet('availability', v)),
+          _Row(label: signalLabel('place'), options: places, value: state.place, onPick: (v) => onSet('place', v)),
+          _Dial(label: signalLabel('need'), value: state.need, onPick: (v) => onSet('need', v)),
+          _Dial(label: signalLabel('energy'), value: state.energy, onPick: (v) => onSet('energy', v)),
           const SizedBox(height: 6),
           _StatusField(me: me, current: state.statusLine, onSet: (v) => onSet('status_line', v)),
         ],

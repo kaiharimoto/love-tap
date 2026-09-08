@@ -112,9 +112,9 @@ class PartnerStrip extends StatelessWidget {
                         Row(children: [
                           if (state.place != null) Stamped(state.place!, size: 10),
                           if (state.place != null) const SizedBox(width: 8),
-                          _Dial(label: 'need', value: state.need),
+                          _Dial(label: signalLabel('need'), value: state.need),
                           const SizedBox(width: 10),
-                          _Dial(label: 'energy', value: state.energy),
+                          _Dial(label: signalLabel('energy'), value: state.energy),
                           const SizedBox(width: 10),
                           if (state.battery != null) _Pencil(charge: state.battery! / 100.0, charging: state.charging),
                         ]),

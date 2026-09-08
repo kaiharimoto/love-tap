@@ -36,6 +36,24 @@ class PersonState {
 }
 
 const List<String> kDeclaredSignals = ['mood', 'status_line', 'availability', 'need', 'energy', 'place'];
+
+/// What a signal is called wherever it is labelled, in one place.
+///
+/// Two scalars carried three names on one screen: the standing strip called them `need` and
+/// `energy`, the partner card four hundred and sixty pixels below called the same two fields
+/// `needs` and `has left`, and the picker a thousand pixels below that went back to `need`. A
+/// reader counting fields on that screen finds three, and there are two. Sentences about a signal
+/// still conjugate — `noor needs a lot` is a sentence and not a label — but a label is a label.
+const Map<String, String> kSignalLabels = {
+  'mood': 'mood',
+  'status_line': 'the line',
+  'availability': 'here',
+  'need': 'need',
+  'energy': 'energy',
+  'place': 'where',
+};
+
+String signalLabel(String id) => kSignalLabels[id] ?? id.replaceAll('_', ' ');
 const List<String> kPassiveSignals = [
   'battery', 'charging', 'last_active', 'local_hour', 'ringer', 'moving', 'network', 'at_home',
 ];
