@@ -46,13 +46,23 @@ object Haptics {
         val amps = if (amplitudes.size == timings.size) {
             amplitudes.map { it.coerceIn(0, 255) }.toIntArray()
         } else {
-            IntArray(timings.size) { if (it % 2 == 0) 0 else 180 }
+            // The app writes a pattern that *starts* on: `80@90 off40 160@160`. The first version
+            // of this filled in 0, 180, 0, 180 — assuming the array starts with a wait — so with
+            // no amplitudes it played every feeling inside out.
+            IntArray(timings.size) { if (it % 2 == 0) 180 else 0 }
         }
         if (v.hasAmplitudeControl()) {
             v.vibrate(VibrationEffect.createWaveform(timings, amps, -1))
         } else {
-            // no pressure to work with: the rhythm alone still has to be recognisable
-            v.vibrate(VibrationEffect.createWaveform(timings, -1))
+            // No pressure to work with: the rhythm alone still has to be recognisable — and the
+            // two-argument createWaveform reads its array as *wait, buzz, wait, buzz*, while every
+            // pattern in this app begins with a buzz. Handed straight over, the whole vocabulary
+            // played inverted: the silences buzzed and the buzzes were silence, on exactly the
+            // phones that have no amplitude control to tell the feelings apart with. A zero-length
+            // wait in front puts it the right way round.
+            val waitFirst = LongArray(timings.size + 1)
+            timings.copyInto(waitFirst, destinationOffset = 1)
+            v.vibrate(VibrationEffect.createWaveform(waitFirst, -1))
         }
     }
 }

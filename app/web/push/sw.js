@@ -19,6 +19,11 @@
 // them there. No copy, no second table, nothing new to keep in step.
 const PROFILE = new URL(self.location.href).searchParams.get('profile') || 'default';
 
+// Wait, buzz, wait, buzz: the pocket's own two beats, in the notation the platform reads. Not a
+// feeling's rhythm — the worker does not know which feeling it was and must not — but a knock
+// rather than a ringtone.
+const ARRIVAL = [0, 45, 70, 30];
+
 function fromTheStore(key) {
   return new Promise((resolve) => {
     let open;
@@ -107,8 +112,14 @@ self.addEventListener('push', (event) => {
       // one tag, so a second arrival replaces the first instead of stacking into a pile
       tag: 'from-them',
       renotify: how === 'interrupt',
-      // quiet is quiet: it is there when the phone is looked at and it does not ask to be
-      silent: how !== 'interrupt',
+      // Felt, not heard. An arrival used to carry the system's own notification sound, which is
+      // the one sound on the phone that belongs to every other app as well. What the pocket says
+      // is a short rhythm in the app's own hand — the same two-beat the standing line settles on —
+      // and nothing else. Which feeling it was is not in the push and never will be: a push
+      // carries the kind and who sent it, and the feeling plays in full, in its own rhythm and its
+      // own sound, the moment the app is opened.
+      silent: true,
+      vibrate: how === 'interrupt' ? ARRIVAL : undefined,
       requireInteraction: false,
       icon: '../icons/Icon-192.png',
       badge: '../icons/Icon-maskable-192.png',

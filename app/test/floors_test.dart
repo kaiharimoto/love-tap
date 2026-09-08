@@ -14,6 +14,8 @@ import 'package:desk/spine/projections/state.dart';
 import 'package:desk/spine/projections/thread.dart';
 import 'package:desk/spine/types.dart';
 import 'package:desk/transport/transport.dart';
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:desk/feelings/landing.dart';
 import 'package:desk/thread/renderers.dart';
@@ -39,7 +41,25 @@ void main() {
     expect(kBuiltInFeelings.map((f) => f.sound).toSet().length, kBuiltInFeelings.length);
     for (final f in kBuiltInFeelings) {
       expect(f.segments, isNotEmpty, reason: '${f.id} has no rhythm at all');
+      // Every pattern begins with a buzz, not a wait. The Android side depends on it: the
+      // two-argument VibrationEffect.createWaveform reads its array as wait, buzz, wait, buzz, so
+      // on a phone with no amplitude control — which is where the rhythm has to do all the work —
+      // handing it a pattern that starts on plays the whole vocabulary inside out.
+      expect(f.segments.first.on, isTrue,
+          reason: '${f.id} begins with a silence, and Haptics.kt assumes it does not');
     }
+  });
+
+  test('a phone with no amplitude control is handed the rhythm the right way round', () {
+    // Kotlin, so it is read rather than run: the fallback branch has to put a zero-length wait in
+    // front, and the fallback amplitudes have to start at full rather than at nothing.
+    final src = File('android/app/src/main/kotlin/io/lovetap/desk/Haptics.kt').readAsStringSync();
+    final play = src.substring(src.indexOf('fun play('));
+    expect(play, contains('waitFirst'),
+        reason: 'the no-amplitude branch hands the pattern over as it stands, and the two-argument '
+            'createWaveform reads the first number as a wait');
+    expect(play, contains('if (it % 2 == 0) 180 else 0'),
+        reason: 'the filled-in amplitudes start at nothing, which is the same inversion again');
   });
 
   test('every feeling resolves to something drawn or rendered, and never to a glyph', () {
