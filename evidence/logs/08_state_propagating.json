@@ -14,122 +14,128 @@
   },
   {
    "do": "pair",
-   "ms": 2291
+   "ms": 1365
   },
   {
    "do": "wait",
-   "ms": 3705
+   "ms": 3704
   },
   {
    "do": "goTo",
-   "ms": 3881
+   "ms": 3367
   },
   {
-   "do": "far",
-   "ms": 736
+   "do": "frames",
+   "ms": 1136940
   },
   {
    "do": "wait",
-   "ms": 3005
+   "ms": 3002
   },
   {
    "do": "far",
-   "ms": 668
+   "ms": 505
   },
   {
    "do": "awaitArrival",
-   "ms": 2626
+   "ms": 1257
   },
   {
    "do": "step",
-   "ms": 4719
+   "ms": 4350
   },
   {
    "do": "frames",
-   "ms": 339125
+   "ms": 284705
   },
   {
    "do": "goTo",
-   "ms": 4831
+   "ms": 4603
   },
   {
    "do": "step",
-   "ms": 2225
+   "ms": 2312
   },
   {
    "do": "far",
-   "ms": 646
+   "ms": 504
   },
   {
    "do": "awaitArrival",
-   "ms": 1522
+   "ms": 923
   },
   {
    "do": "frames",
-   "ms": 47297
+   "ms": 43674
   },
   {
    "do": "far",
-   "ms": 671
+   "ms": 505
   },
   {
    "do": "awaitArrival",
-   "ms": 3508
+   "ms": 1090
   },
   {
    "do": "frames",
-   "ms": 160417
+   "ms": 168783
   },
   {
    "do": "far",
-   "ms": 683
+   "ms": 654
   },
   {
    "do": "awaitArrival",
-   "ms": 3040
+   "ms": 2028
   },
   {
    "do": "frames",
-   "ms": 360186
+   "ms": 310236
   },
   {
    "do": "goTo",
-   "ms": 7992
+   "ms": 6863
   },
   {
    "do": "step",
-   "ms": 2548
-  },
-  {
-   "do": "far",
-   "ms": 588
+   "ms": 1782
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2101
   },
   {
    "do": "far",
-   "ms": 1588
+   "ms": 507
   },
   {
    "do": "far",
-   "ms": 1895
+   "ms": 740
   },
   {
    "do": "awaitArrival",
-   "ms": 2638
+   "ms": 1558
   },
   {
    "do": "frames",
-   "ms": 222401
+   "ms": 220648
   },
   {
    "do": "report",
-   "ms": 534
+   "ms": 525
   }
  ],
  "shots": [
+  {
+   "frames": 64,
+   "dir": "evidence/frames/08_state_propagating",
+   "ms": 16,
+   "drive": {
+    "kind": "far",
+    "line": "state mood restless",
+    "at": 12
+   }
+  },
   {
    "frames": 149,
    "dir": "evidence/frames/08_state_propagating",
@@ -158,7 +164,11 @@
    "frames": 107,
    "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
-   "drive": null
+   "drive": {
+    "kind": "far",
+    "line": "state availability heads_down",
+    "at": 10
+   }
   }
  ],
  "reports": [
@@ -195,13 +205,14 @@
     ]
    },
    "visible": [],
+   "paper": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 9040,
+   "driven_ms": 10064,
    "seed": 20260903,
-   "events": 14087,
+   "events": 14111,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -213,7 +224,7 @@
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 147,
+    "length": 139,
     "decoded": 24,
     "decoding": 0,
     "playhead": 0,
@@ -224,7 +235,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-08T04:01:29.717Z",
+    "started_at": "2026-09-08T18:14:36.165Z",
     "pattern": [
      {
       "ms": 150,
@@ -251,25 +262,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 56,
-    "pushed": 12,
+    "rounds": 743,
+    "pushed": 8,
     "refused": 0,
-    "pulled": 13,
+    "pulled": 8,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14087,
+    "cursor": 14111,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14087,
-     "our_cursor": 14087,
+     "peer_cursor": 14111,
+     "our_cursor": 14111,
      "last_error": null,
-     "since": "2026-09-08T03:44:49.385Z",
-     "last_contact": "2026-09-08T04:04:21.966Z"
+     "since": "2026-09-08T17:41:25.981Z",
+     "last_contact": "2026-09-08T18:18:16.604Z"
     }
    },
    "ambient": {
@@ -279,84 +290,77 @@
     "allowed_to_interrupt": false,
     "held_by_the_phone": []
    },
-   "at": "08_state_propagating"
+   "at": "08_state_propagating",
+   "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 3356,
+ "cold_ms": 2484,
  "load": {
-  "ms": 3356,
+  "ms": 2484,
   "store": "kept",
   "profile": "profile_seeded"
  },
  "far": [
   {
-   "line": "state mood restless",
-   "at_frame": 0
-  },
-  {
    "line": "feeling hold 0.92",
-   "at_frame": 0
+   "at_frame": 64
   },
   {
    "line": "message it is raining here too",
-   "at_frame": 149
+   "at_frame": 213
   },
   {
    "line": "feeling squeeze 0.6",
-   "at_frame": 168
+   "at_frame": 232
   },
   {
    "line": "feeling here 0.8",
-   "at_frame": 239
-  },
-  {
-   "line": "state availability heads_down",
-   "at_frame": 395
+   "at_frame": 303
   },
   {
    "line": "state place out",
-   "at_frame": 395
+   "at_frame": 459
   },
   {
    "line": "feeling soup 0.7",
-   "at_frame": 395
+   "at_frame": 459
   }
  ],
  "arrivals": [
   {
    "line": "feeling hold 0.92",
-   "before": 8072,
-   "after": 8073,
-   "at_frame": 0,
-   "waited_ms": 2125
+   "before": 8083,
+   "after": 8084,
+   "at_frame": 64,
+   "waited_ms": 756
   },
   {
    "line": "message it is raining here too",
-   "before": 8074,
-   "after": 8075,
-   "at_frame": 149,
-   "waited_ms": 1020
+   "before": 8084,
+   "after": 8085,
+   "at_frame": 213,
+   "waited_ms": 421
   },
   {
    "line": "feeling squeeze 0.6",
-   "before": 8075,
-   "after": 8076,
-   "at_frame": 168,
-   "waited_ms": 3008
+   "before": 8085,
+   "after": 8086,
+   "at_frame": 232,
+   "waited_ms": 590
   },
   {
    "line": "feeling here 0.8",
-   "before": 8076,
-   "after": 8077,
-   "at_frame": 239,
-   "waited_ms": 2539
+   "before": 8086,
+   "after": 8087,
+   "at_frame": 303,
+   "waited_ms": 1527
   },
   {
    "line": "feeling soup 0.7",
-   "before": 8078,
-   "after": 8079,
-   "at_frame": 395,
-   "waited_ms": 2137
+   "before": 8088,
+   "after": 8089,
+   "at_frame": 459,
+   "waited_ms": 1057
   }
  ],
  "problems": [],

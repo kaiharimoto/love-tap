@@ -5,19 +5,20 @@
   "paired": true,
   "devices": [
    "android-capture",
-   "pwa-mts3n7tm"
+   "pwa-mtsw9gjf"
   ],
   "link": "connected",
   "authored_feelings": 2
  },
  "visible": [],
+ "paper": [],
  "tears": {},
  "stocks": {},
  "scroll": null,
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 7264,
  "seed": 20260903,
- "events": 14067,
+ "events": 14095,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -34,7 +35,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-08T03:38:24.836Z",
+  "started_at": "2026-09-08T17:33:51.135Z",
   "pattern": [
    {
     "ms": 150,
@@ -61,25 +62,25 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 38,
-  "pushed": 3,
+  "rounds": 289,
+  "pushed": 4,
   "refused": 0,
   "pulled": 2,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14067,
+  "cursor": 14095,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14067,
-   "our_cursor": 14067,
+   "peer_cursor": 14095,
+   "our_cursor": 14095,
    "last_error": null,
-   "since": "2026-09-08T03:27:58.696Z",
-   "last_contact": "2026-09-08T03:41:20.641Z"
+   "since": "2026-09-08T17:22:32.244Z",
+   "last_contact": "2026-09-08T17:36:58.054Z"
   }
  },
  "ambient": {
@@ -89,5 +90,6 @@
   "allowed_to_interrupt": false,
   "held_by_the_phone": []
  },
- "at": "15_authored_feeling"
+ "at": "15_authored_feeling",
+ "read_at": "the end of the scene"
 }

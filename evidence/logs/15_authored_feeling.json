@@ -10,17 +10,17 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2425,
+   "ms": 1482,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3404
+   "ms": 2936
   },
   {
    "do": "wait",
-   "ms": 1803
+   "ms": 1804
   },
   {
    "do": "wait",
@@ -28,15 +28,31 @@
   },
   {
    "do": "openCorner",
-   "ms": 2265
+   "ms": 3545
   },
   {
    "do": "frames",
-   "ms": 27689
+   "ms": 37722
   },
   {
-   "at": 41447,
+   "at": 51894,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
+  },
+  {
+   "do": "showFamily",
+   "ms": 951
+  },
+  {
+   "do": "step",
+   "ms": 1359
+  },
+  {
+   "do": "frames",
+   "ms": 46997
+  },
+  {
+   "at": 100255,
+   "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
@@ -44,111 +60,95 @@
   },
   {
    "do": "step",
-   "ms": 1139
+   "ms": 1187
   },
   {
    "do": "frames",
-   "ms": 33308
+   "ms": 50004
   },
   {
-   "at": 75901,
-   "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
-  },
-  {
-   "do": "showFamily",
-   "ms": 7
-  },
-  {
-   "do": "step",
-   "ms": 1090
-  },
-  {
-   "do": "frames",
-   "ms": 32750
-  },
-  {
-   "at": 109751,
+   "at": 151452,
    "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 9
+   "ms": 5
   },
   {
    "do": "step",
-   "ms": 1149
+   "ms": 1040
   },
   {
    "do": "frames",
-   "ms": 31978
+   "ms": 35202
   },
   {
    "do": "sendFeeling",
-   "ms": 8694
+   "ms": 6217
   },
   {
    "do": "frames",
-   "ms": 169795
+   "ms": 176190
   },
   {
    "do": "goTo",
-   "ms": 6561
+   "ms": 4549
   },
   {
    "do": "step",
-   "ms": 2774
+   "ms": 2307
   },
   {
    "do": "openCorner",
-   "ms": 1460
+   "ms": 2170
   },
   {
    "do": "frames",
-   "ms": 36866
+   "ms": 38810
   },
   {
    "do": "openCorner",
-   "ms": 3438
+   "ms": 1605
   },
   {
    "do": "step",
-   "ms": 988
+   "ms": 812
   },
   {
    "do": "far",
-   "ms": 579
+   "ms": 974
   },
   {
    "do": "awaitArrival",
-   "ms": 2433
+   "ms": 2352
   },
   {
    "do": "frames",
-   "ms": 242964
+   "ms": 247121
   },
   {
    "do": "goTo",
-   "ms": 4384
+   "ms": 5728
   },
   {
    "do": "step",
-   "ms": 2110
+   "ms": 1496
   },
   {
    "do": "far",
-   "ms": 566
+   "ms": 1237
   },
   {
    "do": "awaitArrival",
-   "ms": 2915
+   "ms": 2450
   },
   {
    "do": "frames",
-   "ms": 194052
+   "ms": 187057
   },
   {
    "do": "report",
-   "ms": 425
+   "ms": 421
   }
  ],
  "shots": [
@@ -209,19 +209,20 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mts3n7tm"
+     "pwa-mtsw9gjf"
     ],
     "link": "connected",
     "authored_feelings": 2
    },
    "visible": [],
+   "paper": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 7264,
    "seed": 20260903,
-   "events": 14067,
+   "events": 14095,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -238,7 +239,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-08T03:38:24.836Z",
+    "started_at": "2026-09-08T17:33:51.135Z",
     "pattern": [
      {
       "ms": 150,
@@ -265,25 +266,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 38,
-    "pushed": 3,
+    "rounds": 289,
+    "pushed": 4,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14067,
+    "cursor": 14095,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14067,
-     "our_cursor": 14067,
+     "peer_cursor": 14095,
+     "our_cursor": 14095,
      "last_error": null,
-     "since": "2026-09-08T03:27:58.696Z",
-     "last_contact": "2026-09-08T03:41:20.641Z"
+     "since": "2026-09-08T17:22:32.244Z",
+     "last_contact": "2026-09-08T17:36:58.054Z"
     }
    },
    "ambient": {
@@ -293,12 +294,13 @@
     "allowed_to_interrupt": false,
     "held_by_the_phone": []
    },
-   "at": "15_authored_feeling"
+   "at": "15_authored_feeling",
+   "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2754,
+ "cold_ms": 2354,
  "load": {
-  "ms": 2754,
+  "ms": 2354,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -315,17 +317,17 @@
  "arrivals": [
   {
    "line": "feeling soup 0.55",
-   "before": 8070,
-   "after": 8071,
+   "before": 8080,
+   "after": 8081,
    "at_frame": 164,
-   "waited_ms": 2033
+   "waited_ms": 1948
   },
   {
    "line": "feeling soup 0.9",
-   "before": 8071,
-   "after": 8072,
+   "before": 8081,
+   "after": 8082,
    "at_frame": 270,
-   "waited_ms": 2514
+   "waited_ms": 2049
   }
  ],
  "problems": [],

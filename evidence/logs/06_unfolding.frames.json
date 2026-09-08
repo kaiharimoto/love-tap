@@ -1,8 +1,8 @@
 {
  "dir": "/tmp/lovetap-capture/06_unfolding",
- "frames": 326,
+ "frames": 310,
  "fps": 62.5,
- "seconds": 5.22,
+ "seconds": 4.96,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
@@ -12,7 +12,7 @@
    "dir": "evidence/frames/06_unfolding"
   },
   {
-   "frames": 147,
+   "frames": 139,
    "step_ms": 16,
    "dir": "evidence/frames/06_unfolding"
   },
@@ -22,19 +22,19 @@
    "dir": "evidence/frames/06_unfolding"
   },
   {
-   "frames": 147,
+   "frames": 139,
    "step_ms": 16,
    "dir": "evidence/frames/06_unfolding"
   }
  ],
  "cuts_between_runs": [
   15,
-  162,
-  178
+  154,
+  170
  ],
- "app_seconds": 5.22,
+ "app_seconds": 4.96,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 3.6821,
+ "mean_change_per_frame": 2.73774,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -43,10 +43,10 @@
    "busiest_32px_tile_mean_change_below": 2.0
   },
   "worst_moving_frame": {
-   "frame": 16,
-   "mean": 0.0739,
-   "visible_share": 0.005078,
-   "busiest_tile": 10.1789,
+   "frame": 155,
+   "mean": 0.0417,
+   "visible_share": 0.006307,
+   "busiest_tile": 5.9749,
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },
@@ -59,10 +59,10 @@
  "strip": "evidence/crops/06_unfolding_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/06_unfolding/000000.png",
-  "/tmp/lovetap-capture/06_unfolding/000065.png",
-  "/tmp/lovetap-capture/06_unfolding/000130.png",
-  "/tmp/lovetap-capture/06_unfolding/000195.png",
-  "/tmp/lovetap-capture/06_unfolding/000260.png",
-  "/tmp/lovetap-capture/06_unfolding/000325.png"
+  "/tmp/lovetap-capture/06_unfolding/000062.png",
+  "/tmp/lovetap-capture/06_unfolding/000124.png",
+  "/tmp/lovetap-capture/06_unfolding/000185.png",
+  "/tmp/lovetap-capture/06_unfolding/000247.png",
+  "/tmp/lovetap-capture/06_unfolding/000309.png"
  ]
 }
