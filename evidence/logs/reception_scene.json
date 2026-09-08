@@ -14,43 +14,43 @@
   },
   {
    "do": "goTo",
-   "ms": 3064
+   "ms": 3814
   },
   {
    "do": "step",
-   "ms": 1252
+   "ms": 1255
   },
   {
    "do": "step",
-   "ms": 1480
-  },
-  {
-   "do": "wait",
-   "ms": 1004
-  },
-  {
-   "do": "shot",
-   "ms": 1540
-  },
-  {
-   "do": "goTo",
-   "ms": 3653
-  },
-  {
-   "do": "step",
-   "ms": 1574
-  },
-  {
-   "do": "step",
-   "ms": 1216
+   "ms": 1483
   },
   {
    "do": "wait",
    "ms": 1003
   },
   {
+   "do": "shot",
+   "ms": 1563
+  },
+  {
+   "do": "goTo",
+   "ms": 3975
+  },
+  {
+   "do": "step",
+   "ms": 1698
+  },
+  {
+   "do": "step",
+   "ms": 1222
+  },
+  {
+   "do": "wait",
+   "ms": 1002
+  },
+  {
    "do": "report",
-   "ms": 711
+   "ms": 712
   },
   {
    "push": {
@@ -61,23 +61,23 @@
   },
   {
    "do": "push",
-   "ms": 2211
+   "ms": 2213
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 845
+   "ms": 816
   },
   {
    "do": "closeApp",
-   "ms": 729
+   "ms": 732
   },
   {
    "do": "wait",
-   "ms": 1604
+   "ms": 1601
   },
   {
    "push": {
@@ -88,7 +88,7 @@
   },
   {
    "do": "push",
-   "ms": 2209
+   "ms": 2210
   },
   {
    "do": "wait",
@@ -96,7 +96,7 @@
   },
   {
    "do": "screen",
-   "ms": 779
+   "ms": 781
   },
   {
    "push": {
@@ -107,7 +107,7 @@
   },
   {
    "do": "push",
-   "ms": 2210
+   "ms": 2209
   },
   {
    "do": "wait",
@@ -115,11 +115,11 @@
   },
   {
    "do": "screen",
-   "ms": 812
+   "ms": 779
   },
   {
    "do": "notifications",
-   "ms": 1143
+   "ms": 1137
   }
  ],
  "shots": [
@@ -235,7 +235,13 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": null
+    "sequence": "unfold_thirds",
+    "length": 139,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
    },
    "sensation": null,
    "sync": {
@@ -258,7 +264,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-08T16:44:31.406Z",
+     "since": "2026-09-08T18:53:29.190Z",
      "last_contact": null
     }
    },
@@ -269,13 +275,14 @@
     "allowed_to_interrupt": true,
     "held_by_the_phone": []
    },
-   "at": "crops/reception_open.png"
+   "at": "crops/reception_open.png",
+   "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 6121,
+ "cold_ms": 6956,
  "load": {
-  "ms": 6121,
-  "store": "kept",
+  "ms": 6956,
+  "store": "fresh",
   "profile": "profile_reception"
  },
  "app_open": false,
