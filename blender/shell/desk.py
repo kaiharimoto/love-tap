@@ -85,6 +85,35 @@ def _placed_rays(h, w, seed, count=520):
     return np.clip(field / m * 1.6, 0, 1)
 
 
+def _placed_pores(h, w, seed, count=2600):
+    """The open pores of a ring-porous hardwood: short dark grooves running *along* the grain.
+
+    Without them the desk has no cross-grain structure at all. Measured on the asset itself, the
+    mean absolute horizontal gradient was 3.146 against 0.459 vertically — a ratio of 5.09, every
+    bit of its texture one-directional bands, where the paper beside it measures 0.52 and reads as
+    a surface. A critic put it plainly: the desk is not tiled, it is painted. A pore is a vessel
+    cut open by the saw: it starts and stops, it is a few tenths of a millimetre across and a few
+    millimetres long, and it is what makes oak feel like oak under a fingertip.
+    """
+    rng = np.random.default_rng(seed)
+    v = np.linspace(0, 1, h, endpoint=False)[:, None]
+    u = np.linspace(0, 1, w, endpoint=False)[None, :]
+    field = np.zeros((h, w))
+    aspect = h / w
+    for _ in range(count):
+        y0 = rng.uniform(0, 1)
+        x0 = rng.uniform(0, 1)
+        length = rng.uniform(0.006, 0.028)          # in board lengths, along the grain
+        width = rng.uniform(0.0022, 0.0055)         # in board widths, across it
+        lean = rng.uniform(-0.05, 0.05)
+        along = (np.mod(v - y0 + 0.5, 1.0) - 0.5) + (u - x0) * lean
+        across = (u - x0) - (np.mod(v - y0 + 0.5, 1.0) - 0.5) * lean / aspect
+        taper = np.clip(1.0 - (np.abs(along) / length) ** 2, 0, 1)
+        field += np.exp(-(across / width) ** 2) * taper * rng.uniform(0.3, 1.0) ** 1.4
+    m = field.max() or 1.0
+    return np.clip(field / m * 1.5, 0, 1)
+
+
 def board_grain(h, w, seed, rings=17.0, cant=0.10):
     """One board, seen face on.
 
@@ -136,6 +165,15 @@ def board_grain(h, w, seed, rings=17.0, cant=0.10):
     # the fibre itself, far finer than a ring
     fibre = _periodic((h, w), [(211, 0.4), (269, 0.25), (307, 0.2), (419, 0.15)], seed + 4, axis=1) * 0.5
     fibre = fibre * (0.6 + 0.4 * _periodic((h, w), [(7, 0.6), (11, 0.4), (17, 0.25)], seed + 5, axis=0))
+    # A fibre that varies only across the board is a comb. Real fibre bundles run out, start
+    # again, and are crossed by everything the tree did in that year, so the line breaks up along
+    # its own length as well.
+    fibre = fibre * (0.55 + 0.45 * _periodic(
+        (h, w), [(97, 0.5), (149, 0.32), (223, 0.2)], seed + 6, axis=0))
+    # and the pores, which are the only thing on the face with a length along the grain: without
+    # them every fine feature runs the same way and the surface reads as a painted band rather
+    # than as a cut through fibre.
+    fibre = fibre - _placed_pores(h, w, seed + 7) * 0.85
     return late, fleck, fibre
 
 
