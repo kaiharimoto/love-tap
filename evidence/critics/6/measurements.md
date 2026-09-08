@@ -219,7 +219,18 @@ Taken from the artifacts and the records the app wrote at the shutter, on this m
 - **03_us**: all five modules on the desk with their own counts — dates 81, the list 199, calendar
   6, rituals 53, the shelf 12 — each with the line it would tell you at a glance.
 - **06_unfolding**: 326 frames, 5.22 s, **zero held frames**, no brightness jump.
-  **07_feeling_landing**: 421 frames, zero held frames.
+  **07_feeling_landing**: 421 frames, zero held frames. **08_state_propagating**: 502 frames,
+  8.03 s, zero held frames, `link: connected` on 14,087 events — it had failed the first pass
+  because the far phone's two-hour deadline expired inside a run that took three hours and twenty
+  minutes, and the near phone went `link offline` in the last scene of the set.
+  **15_authored_feeling**: 376 frames, 6.02 s, zero held frames, once its two corner takes were cut
+  from twenty and twenty-two grabs to sixteen — the corner finishes turning in sixteen.
+- **11_chat_scroll is the one that does not settle**: three held frames of three hundred on the
+  first pass, five on the second, **at different frames each time**. That is a race and not a
+  picture that did not change: the headless compositor runs at about four frames a second and the
+  harness gave a stuck grab four tries ninety milliseconds apart, which is less than one of its
+  frames. Ten tries a fifth of a second apart now. (The second pass was also shot while I was
+  running the test suite twice over, which is my fault and not the app's.)
 - **The hand**: 273 marks of ink on the hero, twin share **0.147**, best-fit IoU median 0.655 and
   p90 0.866. A font repeats itself exactly; this does not.
 - What I could not measure myself: the hairline the completeness pass found (a sliver of paper
