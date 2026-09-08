@@ -5,7 +5,7 @@ somebody else's. Written as the work is done, before any cycle-7 critic has run.
 
 ## What cycle 6's reports said, and what was done about each
 
-### The pale rule on the wood: five cycles, six hypotheses, still open
+### The pale rule on the wood: five cycles, six wrong hypotheses, closed
 Nine of ten stills carry one-pixel bright rules across the wood, up to +48 grey and 440 px long.
 This is the honest state of it, because five of the six explanations tried have been mine.
 
@@ -38,6 +38,66 @@ edge a second time by the same mask, and a bilinear sampler on the baked shadow.
 real cost per note per frame and the second I kept, because bilinear is the cheaper and safer
 sampler for an image that is only ever stretched — with a comment saying plainly that it is not the
 explanation.
+
+**What it was, measured after the seventh capture.** The mask's own edge. `ShaderMask` multiplies a
+tear mask in by drawing a rectangle *the size of the child* in `dstIn`, and that rectangle is
+antialiased: on the row where a piece's box falls between two device pixels the blend lands at
+partial coverage, so a fraction of the sheet survives where the tear had erased it. The fraction is
+a third — at 02_chat y=200, x=1200 the rule is (137,126,108) over wood (85,72,62) and paper
+(237,231,197), which solves to α = 0.333 / 0.335 / 0.336 on the three channels.
+
+A bisect in the browser settled it, six builds against a far phone of its own, counting bright
+one-row runs of 40 px or more on the hero:
+
+| build | runs |
+|---|---|
+| as captured | 29 |
+| mask shader without mipmaps | 29 |
+| mask composed at the piece's exact height, no 16-px rounding | 29 |
+| rotation filtered `low` instead of `medium` | 29 |
+| lit-fibre edge overlay removed | 29 |
+| **tear mask removed from the piece altogether** | **1** |
+| **mask rectangle drawn two pixels wider than the piece** | **0** |
+
+The fix is the last row: the mask rectangle carries two pixels of air, so its own antialiased edge
+falls out on the desk where there is nothing to erase, and the piece's edge is covered at full
+coverage. The torn edge and its contact shadow are unchanged beside it — at y=200 the wood reads
+(85,72,62) where it read (137,126,108). `tools/check/hairline.py` measures it on the photographs
+and `capture.sh` runs it, because the test binding cannot draw the fault: 66 piece heights at three
+densities, zero spikes.
+
+Three things this closes that were written down wrong: the code comment in `paper.dart` that said
+the rules were an unfiltered rotation, the test that asserted it, and the paragraph in
+`docs/CONTINUE.md` that repeated it.
+
+### Answered after the seventh capture, and not in it
+
+The seventh capture came back 13 of 17 with two clips failing their own frame check. Both causes
+were in the app, so the set was re-captured whole rather than one scene re-shot into it.
+
+- **07, "the light jumps 1 times".** Mean luma of the whole screen, frames 220 → 221 → 222: 168.87
+  → 180.44 → 165.28. A feeling landed on a sheet whose tear mask was still decoding, and
+  `MaskedLayer` handed the child back unmasked over the flat stock colour — a pale grey slab, square
+  corners, no tear, no shadow. A mask still decoding is not a missing mask; a piece keeps its room
+  and paints nothing until its paper is there. The test warms the *shadow* render first so that
+  "nothing is drawn" has something to disprove it: without the wait the darkest pixel in the piece's
+  box is 6.7 against a desk of 79.3.
+- **08, 61 frames identical to the one before.** All in the run named for the thing the clip is
+  named for. Their sheet swapped between two frames; it lands now, from a little above, over the
+  sheet it replaces, which stays on the desk until it is covered and is then off the tree rather
+  than left in it invisible.
+- **Clip lengths the year invented.** Every video event declared 7000–12000 ms against renders that
+  are all 2500, and four voice notes were out by 20–40 s against their own recordings — so the
+  thread read "a video, 0:11" over two and a half seconds of footage. The index is written from the
+  render and the recording, so the index wins: 20 payloads corrected, and `seed/tools/validate.py`
+  fails on the next drift (it found all 20 before a line was touched).
+- **14 was photographed at 0:00 of a length it had not read yet.** The scene waits for the player to
+  say it is playing now; `awaitView` takes a dotted key for that.
+- **A record of a picture is read at the picture.** 13's report said the partner was not writing
+  over a picture in which she is: `awaitView` saw `partner_typing` true, the shutter opened 1.5 s
+  later, and the report step ran four seconds after that — past the six-second lapse on a typing
+  frame. `shot` reads the report immediately before it opens the shutter and keeps it under the
+  picture's name.
 
 ### The fold, on all four of its blocking measurements
 - silhouette: the settled sheet's left edge had **0.00 px** of deviation over 320 rows against
