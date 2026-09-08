@@ -229,7 +229,23 @@ break it. Three came back refuted. What follows is what survived, and what the r
 
 ## Next action
 
-Capture the whole set on the re-rendered library, then the sixth cycle.
+Read the eighth capture — the seventh was taken, answered rather than reviewed, and re-shot whole
+with the four fixes it produced in the build. Then the seventh review: the builder sheet from
+measurements *before* any critic runs, `bash tools/critics.sh hide 7`, six critics and the
+completeness pass, `show 7`, `python3 tools/score.py --cycle 7`.
 
-Write the next builder sheet from measurements. Twice now the critics have scored a row at or above
+Write the builder sheet from measurements. Twice now the critics have scored a row at or above
 its floor and the builder's own caution has taken it back below.
+
+### Closed this session, after the seventh capture and not in it
+
+- **The desk hairline, open for five cycles.** It was the tear mask's own edge: `ShaderMask` draws
+  a dstIn rectangle the size of the child, that rectangle is antialiased, and on the row where a
+  piece's box falls between two device pixels a third of a pixel of sheet survives where the tear
+  had erased it (wood + 0.334 × paper, solved on all three channels). A six-build bisect in the
+  browser: mask shader without mipmaps 29 runs, exact-height mask 29, rotation filtered differently
+  29, lit edge removed 29, **mask removed 1**, mask rectangle two pixels wider **0**. Six earlier
+  explanations were wrong, including the one the code and the docs asserted.
+- **A sheet drawn before its paper arrived** — the +11.6 grey-level light jump that failed 07.
+- **A mood that changed between two frames** — the 61 identical frames that failed 08.
+- **Clip lengths the year invented** — 20 payloads that claimed 7–12 s over 2.5 s of footage.
