@@ -429,7 +429,7 @@ class FoldedNote extends StatefulWidget {
   /// Measure the *packed* frames, not the render: pack_assets trims every fold frame to its own
   /// content, so a note takes the room a folded letter takes and grows into the room an open one
   /// does. The render and the asset are different pictures and only one of them is drawn.
-  static const inset = [0.064, 0.062, 0.148, 0.062];
+  static const inset = [0.067, 0.064, 0.15, 0.259];
 
   /// The writing comes up over the last part of the sequence, while the sheet is settling flat.
   /// Starting it only once the sequence had finished is what left the clip ending on blank paper.
