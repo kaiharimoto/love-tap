@@ -1,5 +1,5 @@
 {
- "strings_read": 117,
+ "strings_read": 119,
  "rules_applied": [
   {
    "rule": "an emoji glyph in a displayed string",
@@ -102,11 +102,15 @@
    "text": "${secs ~/ 60}:${(secs % 60).toString().padLeft(2, "
   },
   {
-   "where": "app/lib/regions/chat/blob_widgets.dart:341",
+   "where": "app/lib/regions/chat/blob_widgets.dart:283",
+   "text": "${secs ~/ 60}:${(secs % 60).toString().padLeft(2, "
+  },
+  {
+   "where": "app/lib/regions/chat/blob_widgets.dart:372",
    "text": "${(durationMs! / 1000).round()}s"
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:899",
+   "where": "app/lib/regions/chat/chat_region.dart:909",
    "text": "${scope.partner.name} ${S.typing}"
   },
   {
@@ -114,27 +118,31 @@
    "text": "looking for"
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:181",
+   "where": "app/lib/regions/chat/viewer_page.dart:225",
    "text": "put it back"
   },
   {
-   "where": "app/lib/regions/moments/moments_region.dart:507",
+   "where": "app/lib/regions/chat/viewer_page.dart:296",
+   "text": "${_clock(at)} / ${_clock(total)}"
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:542",
+   "text": "${event.author.name} \u00b7 ${dayLabel(event.ts)}"
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:621",
    "text": "${((event.payload["
   },
   {
-   "where": "app/lib/regions/moments/moments_region.dart:587",
-   "text": "${((event.payload["
-  },
-  {
-   "where": "app/lib/regions/moments/moments_region.dart:650",
+   "where": "app/lib/regions/moments/moments_region.dart:684",
    "text": "${DateFormat("
   },
   {
-   "where": "app/lib/regions/pulse/pulse_region.dart:257",
+   "where": "app/lib/regions/pulse/pulse_region.dart:258",
    "text": "$hh:$mm${mine ? "
   },
   {
-   "where": "app/lib/regions/pulse/pulse_region.dart:417",
+   "where": "app/lib/regions/pulse/pulse_region.dart:419",
    "text": "a line about now"
   },
   {

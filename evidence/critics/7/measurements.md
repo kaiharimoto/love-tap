@@ -120,8 +120,18 @@ the right way round; the filled-in amplitudes had the same inversion in the othe
   that was also paper — a contradiction, since paper_mask says paper is light — so the box never
   moved. The record carries how much ink the crop holds: **0.2373 of it, against nothing before**.
 
+### The renders, as they came back
+- **112 contact shadows**, day and dusk, without the denoiser at 96 samples: 1 h 43 m.
+- **the fold sequence**, 240 frames, 1 h 07 m, packed to 139. Measured on the packed frames the app
+  actually plays: left edge deviation **1.18 px** on the folded packet, **4.39** on the settled
+  sheet, against 0.00 before; lateral shading 3.4 to 3.9 grey levels across the sheet.
+- **the desk**, day and dusk.
+- and `tools/check/fold_inset.py` re-measured where the writing goes on the open sheet, because the
+  sheet is torn now and its shadow grades further below it: the paper occupies 0.027/0.014/0.110/
+  0.209 of the packed frame, so the inset moved from [0.064, 0.062, 0.148, 0.062] to
+  [0.067, 0.064, 0.15, 0.259]. fold.dart has always said to re-run that tool when the rig changes.
+
 ## Still open
-- the fold sequence itself is not re-rendered yet; the code change is verified on three frames.
 - 09 and 16 need an Android device; the vibrator is untested; transport is local.
 - the hand still repeats: 8.9 per cent of marks have a near-twin at 0.99 by the critic's method.
 - the ink's core darkness varies by 3.52 grey levels — the plate is in the outline, not in the ink.
