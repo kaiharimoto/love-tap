@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2905
+   "ms": 2909
   },
   {
    "do": "pwa",
-   "ms": 713
+   "ms": 715
   },
   {
    "do": "shot",
-   "ms": 2574
+   "ms": 2447
   },
   {
    "do": "report",
-   "ms": 708
+   "ms": 701
   }
  ],
  "shots": [
@@ -47,7 +47,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-08T16:43:58.746Z",
+   "now": "2026-09-08T18:53:20.007Z",
    "driven_ms": 0,
    "seed": 20260903,
    "events": 0,
@@ -84,7 +84,7 @@
      "peer_cursor": null,
      "our_cursor": 0,
      "last_error": null,
-     "since": "2026-09-08T16:43:51.529Z",
+     "since": "2026-09-08T18:53:14.514Z",
      "last_contact": null
     }
    },
@@ -95,12 +95,13 @@
     "allowed_to_interrupt": false,
     "held_by_the_phone": []
    },
-   "at": "17_setup_pwa.png"
+   "at": "17_setup_pwa.png",
+   "read_at": "the shutter"
   }
  ],
- "cold_ms": 1724,
+ "cold_ms": 1688,
  "load": {
-  "ms": 1724,
+  "ms": 1688,
   "store": "fresh",
   "profile": null
  },

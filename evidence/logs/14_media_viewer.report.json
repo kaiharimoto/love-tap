@@ -10,7 +10,7 @@
   "video": {
    "initialised": true,
    "playing": true,
-   "position_ms": 1218,
+   "position_ms": 921,
    "duration_ms": 2500
   }
  },
@@ -43,9 +43,9 @@
   "of": 8073
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 144,
+ "driven_ms": 176,
  "seed": 20260903,
- "events": 14073,
+ "events": 14074,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -62,25 +62,25 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 7,
-  "pushed": 1,
+  "rounds": 10,
+  "pushed": 3,
   "refused": 0,
   "pulled": 0,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14073,
+  "cursor": 14074,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14073,
-   "our_cursor": 14073,
+   "peer_cursor": 14074,
+   "our_cursor": 14074,
    "last_error": null,
-   "since": "2026-09-08T16:43:11.188Z",
-   "last_contact": "2026-09-08T16:43:37.134Z"
+   "since": "2026-09-08T18:52:31.939Z",
+   "last_contact": "2026-09-08T18:52:58.832Z"
   }
  },
  "ambient": {
@@ -90,5 +90,6 @@
   "allowed_to_interrupt": false,
   "held_by_the_phone": []
  },
- "at": "14_media_viewer.png"
+ "at": "14_media_viewer.png",
+ "read_at": "the shutter"
 }

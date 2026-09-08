@@ -91,12 +91,13 @@
    "do": "awaitView",
    "key": "partner_typing",
    "value": true,
-   "timeout": 10000
+   "timeout": 15000,
+   "settle": 250
   },
   {
    "do": "shot",
    "out": "evidence/13_messenger_states.png",
-   "settle": 900
+   "settle": 300
   },
   {
    "do": "report",

@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2908,
+   "ms": 2676,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3811
+   "ms": 3270
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1702
   },
   {
    "do": "scrollTo",
-   "ms": 3546
+   "ms": 3300
   },
   {
    "do": "wait",
@@ -44,11 +44,19 @@
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1104
   },
   {
    "do": "stage",
-   "ms": 21076
+   "ms": 13493
+  },
+  {
+   "do": "wait",
+   "ms": 1905
+  },
+  {
+   "do": "far",
+   "ms": 706
   },
   {
    "do": "wait",
@@ -56,19 +64,11 @@
   },
   {
    "do": "far",
-   "ms": 3129
-  },
-  {
-   "do": "wait",
-   "ms": 1908
-  },
-  {
-   "do": "far",
-   "ms": 867
+   "ms": 888
   },
   {
    "do": "sync",
-   "ms": 2554
+   "ms": 1405
   },
   {
    "do": "wait",
@@ -76,15 +76,15 @@
   },
   {
    "do": "openSender",
-   "ms": 12916
+   "ms": 6021
   },
   {
    "do": "wait",
-   "ms": 1204
+   "ms": 1203
   },
   {
    "do": "slowSend",
-   "ms": 8802
+   "ms": 4498
   },
   {
    "do": "wait",
@@ -92,7 +92,7 @@
   },
   {
    "do": "far",
-   "ms": 1466
+   "ms": 706
   },
   {
    "awaited": "partner_typing",
@@ -101,15 +101,15 @@
   },
   {
    "do": "awaitView",
-   "ms": 10515
+   "ms": 5031
   },
   {
    "do": "shot",
-   "ms": 4185
+   "ms": 6163
   },
   {
    "do": "report",
-   "ms": 734
+   "ms": 702
   }
  ],
  "shots": [
@@ -139,67 +139,67 @@
       "state": "read",
       "says": "read"
      },
-     "0001MCJ1M0AZ08RJV96R1X6MV7": {
-      "state": "read",
-      "says": "read"
-     },
-     "0001MCJ1M0AZ08RJV96R1X6MVC": {
+     "0001MCJ1M0S0VR39GWWF2VKQXJ": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M0AZ08RJV96R1X6MV5": {
+     "0001MCJ1M0S0VR39GWWF2VKQXQ": {
+      "state": "sent",
+      "says": "sent"
+     },
+     "0001MCJ1M0S0VR39GWWF2VKQXG": {
       "state": "refused",
       "says": "it would not go"
      }
     },
     "states_on_the_glass": {
-     "read": 2,
-     "sent": 1,
+     "read": 1,
+     "sent": 2,
      "it would not go": 1
     },
     "reactions": {
      "0001M59VY0YA13H9M86HTA6XNP": 1
     },
     "edited": [
-     "0001MCJ1M0AZ08RJV96R1X6MV7"
+     "0001MCJ1M0S0VR39GWWF2VKQXJ"
     ],
     "taken_back": [
-     "0001MCJ1M0AZ08RJV96R1X6MV6"
+     "0001MCJ1M0S0VR39GWWF2VKQXH"
     ]
    },
    "visible": [
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0AZ08RJV96R1X6MV6",
-    "0001MCJ1M0AZ08RJV96R1X6MV7",
-    "0001MCJ1M0AZ08RJV96R1X6MVC",
-    "0001MCJ1M0AZ08RJV96R1X6MV5"
+    "0001MCJ1M0S0VR39GWWF2VKQXH",
+    "0001MCJ1M0S0VR39GWWF2VKQXJ",
+    "0001MCJ1M0S0VR39GWWF2VKQXQ",
+    "0001MCJ1M0S0VR39GWWF2VKQXG"
    ],
    "paper": [
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0AZ08RJV96R1X6MV6",
-    "0001MCJ1M0AZ08RJV96R1X6MV7",
-    "0001MCJ1M0AZ08RJV96R1X6MVC",
-    "0001MCJ1M0AZ08RJV96R1X6MV5"
+    "0001MCJ1M0S0VR39GWWF2VKQXH",
+    "0001MCJ1M0S0VR39GWWF2VKQXJ",
+    "0001MCJ1M0S0VR39GWWF2VKQXQ",
+    "0001MCJ1M0S0VR39GWWF2VKQXG"
    ],
    "tears": {
     "0001M4GW48FEW3M67XKAZT5051": "tear_010",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-    "0001MCJ1M0AZ08RJV96R1X6MV6": "tear_056",
-    "0001MCJ1M0AZ08RJV96R1X6MV7": "tear_019",
-    "0001MCJ1M0AZ08RJV96R1X6MVC": "tear_031",
-    "0001MCJ1M0AZ08RJV96R1X6MV5": "tear_042"
+    "0001MCJ1M0S0VR39GWWF2VKQXH": "tear_019",
+    "0001MCJ1M0S0VR39GWWF2VKQXJ": "tear_042",
+    "0001MCJ1M0S0VR39GWWF2VKQXQ": "tear_031",
+    "0001MCJ1M0S0VR39GWWF2VKQXG": "tear_036"
    },
    "stocks": {
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M0AZ08RJV96R1X6MV6": "lined_04",
-    "0001MCJ1M0AZ08RJV96R1X6MV7": "legal_02",
-    "0001MCJ1M0AZ08RJV96R1X6MVC": "lined_01",
-    "0001MCJ1M0AZ08RJV96R1X6MV5": "legal_01"
+    "0001MCJ1M0S0VR39GWWF2VKQXH": "legal_02",
+    "0001MCJ1M0S0VR39GWWF2VKQXJ": "legal_02",
+    "0001MCJ1M0S0VR39GWWF2VKQXQ": "legal_02",
+    "0001MCJ1M0S0VR39GWWF2VKQXG": "lined_04"
    },
    "scroll": {
     "first": 8066,
@@ -209,7 +209,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 320,
    "seed": 20260903,
-   "events": 14073,
+   "events": 14074,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -226,25 +226,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 12,
+    "rounds": 7,
     "pushed": 7,
     "refused": 1,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
-    "pending": 1,
+    "pending": 3,
     "refused_in_the_outbox": 1,
-    "cursor": 14072,
+    "cursor": 14071,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14071,
-     "our_cursor": 14071,
+     "peer_cursor": 14070,
+     "our_cursor": 14070,
      "last_error": null,
-     "since": "2026-09-08T16:41:34.692Z",
-     "last_contact": "2026-09-08T16:43:05.550Z"
+     "since": "2026-09-08T18:51:23.881Z",
+     "last_contact": "2026-09-08T18:52:18.703Z"
     }
    },
    "ambient": {
@@ -254,12 +254,13 @@
     "allowed_to_interrupt": false,
     "held_by_the_phone": []
    },
-   "at": "13_messenger_states.png"
+   "at": "13_messenger_states.png",
+   "read_at": "the shutter"
   }
  ],
- "cold_ms": 2514,
+ "cold_ms": 2332,
  "load": {
-  "ms": 2514,
+  "ms": 2332,
   "store": "kept",
   "profile": "profile_seeded"
  },

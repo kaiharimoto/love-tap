@@ -92,7 +92,13 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": null
+  "sequence": "unfold_thirds",
+  "length": 139,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
  },
  "sensation": null,
  "sync": {
@@ -115,7 +121,7 @@
    "peer_cursor": null,
    "our_cursor": 14061,
    "last_error": null,
-   "since": "2026-09-08T16:44:31.406Z",
+   "since": "2026-09-08T18:53:29.190Z",
    "last_contact": null
   }
  },
@@ -126,5 +132,6 @@
   "allowed_to_interrupt": true,
   "held_by_the_phone": []
  },
- "at": "crops/reception_open.png"
+ "at": "crops/reception_open.png",
+ "read_at": "the end of the scene"
 }
