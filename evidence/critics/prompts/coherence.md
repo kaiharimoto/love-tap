@@ -44,6 +44,16 @@ label is `"unchanged"`; a `new` artifact is `"improved"`; a `gone` one is `"regr
 judgement must agree with the number: an artifact whose SSIM says nothing moved cannot be
 `improved`.
 
+## What you opened
+
+Every report carries an `opened` list: the exact path of every artifact, crop and log you actually
+looked at, and nothing you did not. It is not a formality — the last cycle's completeness pass
+found that nobody had opened `17_setup_pwa.png`, `crops/dusk_pulse.png` (the entire second lighting
+condition), `logs/hand.json`, `webpush.txt`, `strings.json`, the shadow crop or the haptics strip,
+and a rubric row scored without them is a row scored on part of the evidence. If a file is not
+worth opening for your row, say so in `not_worth_opening` with the reason, which is a judgement
+somebody can disagree with. Silence is not.
+
 ## What to return
 
 Write `evidence/critics/<cycle>/coherence.json` in the shape BRIEFING.md gives, with your score out

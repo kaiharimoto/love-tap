@@ -80,8 +80,16 @@ def ballpoint(size, seed):
         along = 0.5 + 0.5 * np.sin(2 * np.pi * int(rng.integers(2, 6)) * (x + rng.uniform(0, 1)))
         skip += np.exp(-(across / width) ** 2) * along * rng.uniform(0.35, 0.8)
     tooth = periodic(size, [(60, 0.6), (97, 0.3)], seed + 2)
-    coverage = 1.0 - 0.16 * (1 - flow) - np.clip(skip, 0, 1) * 0.55 - 0.05 * (1 - tooth)
-    return np.clip(coverage, 0.30, 1.0)
+    # The flow term used to take at most 0.16 off, so the *core* of every mark landed at very
+    # nearly full coverage and only the outlines carried the pressure: a critic measured the core
+    # darkness of 157 marks on one screen varying by 3.52 grey levels, which is a flat fill with
+    # a ragged edge. A ballpoint runs rich and then dry across a word, and what a reader sees is
+    # whole words going lighter, not edges.
+    # Skewed toward full: most of a page is a pen writing properly, and the dry patches are
+    # occasional. A flat 0.34 off everywhere made every word grey.
+    dry = np.clip(1 - flow, 0, 1) ** 1.9
+    coverage = 1.0 - 0.42 * dry - np.clip(skip, 0, 1) * 0.55 - 0.05 * (1 - tooth)
+    return np.clip(coverage, 0.26, 1.0)
 
 
 def graphite(size, seed):
@@ -90,8 +98,10 @@ def graphite(size, seed):
     press = 0.5 + 0.5 * periodic(size, [(1, 1.0), (2, 0.6)], seed + 4)
     # the pits: where the tooth is low the pencil misses altogether
     missed = np.clip((0.16 - tooth) / 0.5, 0, 1)
-    coverage = 0.92 - 0.30 * missed - 0.13 * (1 - press) + 0.06 * np.clip(tooth, 0, 1)
-    return np.clip(coverage, 0.34, 1.0)
+    # as above: a pencil presses harder at the start of a word than at the end of one
+    light = np.clip(1 - press, 0, 1) ** 1.7
+    coverage = 1.0 - 0.28 * missed - 0.34 * light + 0.06 * np.clip(tooth, 0, 1)
+    return np.clip(coverage, 0.30, 1.0)
 
 
 def write(name, coverage, args):

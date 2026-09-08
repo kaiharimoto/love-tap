@@ -10448,13 +10448,13 @@
    }
   },
   "assets/ink/plate_ballpoint.png": {
-   "bytes": 167833,
+   "bytes": 167996,
    "generator": "tools/ink_plate.py",
    "kind": "ink_plate",
    "settings": {
-    "coverage_mean": 0.861,
-    "coverage_min": 0.3358,
-    "coverage_std": 0.0511,
+    "coverage_mean": 0.8133,
+    "coverage_min": 0.26,
+    "coverage_std": 0.0989,
     "seamless": true,
     "seed": 20260906,
     "size": [
@@ -10464,13 +10464,13 @@
    }
   },
   "assets/ink/plate_graphite.png": {
-   "bytes": 249152,
+   "bytes": 244954,
    "generator": "tools/ink_plate.py",
    "kind": "ink_plate",
    "settings": {
-    "coverage_mean": 0.7455,
-    "coverage_min": 0.5079,
-    "coverage_std": 0.1178,
+    "coverage_mean": 0.7839,
+    "coverage_min": 0.4557,
+    "coverage_std": 0.1259,
     "seamless": true,
     "seed": 20260906,
     "size": [
@@ -21702,12 +21702,13 @@
    }
   },
   "assets/tears/tear_025_shadow.png": {
-   "bytes": 134112,
+   "bytes": 206668,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": false,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.2,
@@ -21721,7 +21722,32 @@
      768
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 96,
+    "thickness_m": 0.00011
+   }
+  },
+  "assets/tears/tear_025_shadow_dusk.png": {
+   "bytes": 110086,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": false,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "dusk",
+    "mask": "assets/tears/tear_025.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     768,
+     768
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 96,
     "thickness_m": 0.00011
    }
   },
@@ -21769,12 +21795,13 @@
    }
   },
   "assets/tears/tear_026_shadow.png": {
-   "bytes": 184377,
+   "bytes": 366337,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": false,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.2,
@@ -21788,7 +21815,7 @@
      768
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 96,
     "thickness_m": 0.00011
    }
   },

@@ -33,6 +33,13 @@ timebase of a clip is therefore **the app's time, not the wall clock**: one fram
 the driven clock, and the seconds between two grabs on a wall clock are the harness's cost of
 taking the picture, not the app's.
 
+## What a report has to carry about itself
+
+Alongside your score and your findings, `opened` — every artifact, crop and log you opened, by
+path — and `not_worth_opening`, for anything in the set you decided your row did not need, with
+the reason. A row scored without opening half the evidence is a row scored on half the evidence,
+and the only way anyone can tell is if the report says.
+
 ## Four logs you can check against the pictures
 
 Three of the logs are measurements taken the way a critic would take them, so they can be checked
