@@ -28,6 +28,12 @@ If you are picking this up cold, the order is: `bash tools/critics.sh show 6` (i
 directory exists), then `python3 tools/score.py --cycle 6`, then read
 `evidence/critics/6/completeness.json` first of all the reports.
 
+**`evidence/SCORE.json` and `evidence/critics/1` to `5` are missing from HEAD as of the commit that
+wrote this line, and that is the hold, not a loss.** They were moved to `.critics-hold/` (which is
+gitignored) while the critics worked, and a commit made in that window recorded their removal.
+`bash tools/critics.sh show 6` puts them back in the working tree; commit that. Everything is in
+the history either way — `git log -- evidence/SCORE.json` finds it.
+
 **What was fixed in this session and is in the captured evidence:**
 
 - The fling is a jump, not an animation. A frame of the scroll clip used to be a one-millisecond
