@@ -244,7 +244,7 @@ class _VoiceNotePlayerState extends State<VoiceNotePlayer> {
           // the waveform is drawn in ink, not in the platform's own on-surface colour: it is the
           // one mark on the desk that was taking its colour from Material's theme
           child: CustomPaint(
-              painter: _WavePainter(widget.waveform, _progress, Pen.graphite)),
+              painter: WavePainter(widget.waveform, _progress, Pen.graphite)),
         ),
         const SizedBox(width: 8),
         // the length of the recording, in the margin hand: this and the fetching line were the
@@ -255,8 +255,39 @@ class _VoiceNotePlayerState extends State<VoiceNotePlayer> {
   }
 }
 
-class _WavePainter extends CustomPainter {
-  _WavePainter(this.wave, this.progress, this.colour);
+/// A voice note's own line, drawn small: the mark you press, the shape of what was said, and how
+/// long it runs. The pile drew a voice note as a bare slip with `41s` on it and nothing else —
+/// no author, no date, no waveform, no play — while the thread drew the same event as a player.
+/// One event drawn two incompatible ways is two events as far as a reader is concerned.
+class VoiceLine extends StatelessWidget {
+  const VoiceLine({super.key, required this.waveform, required this.durationMs, this.height = 22});
+  final List<double> waveform;
+  final int durationMs;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    final secs = (durationMs / 1000).round();
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Mark.play(size: height * 0.8, colour: Pen.graphite),
+        const SizedBox(width: 6),
+        Expanded(
+          child: SizedBox(
+            height: height,
+            child: CustomPaint(painter: WavePainter(waveform, 0, Pen.graphite)),
+          ),
+        ),
+        const SizedBox(width: 6),
+        Text('${secs ~/ 60}:${(secs % 60).toString().padLeft(2, '0')}', style: Hands.margin(size: 11)),
+      ],
+    );
+  }
+}
+
+class WavePainter extends CustomPainter {
+  WavePainter(this.wave, this.progress, this.colour);
   final List<double> wave;
   final double progress;
   final Color colour;
@@ -276,7 +307,7 @@ class _WavePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_WavePainter old) => old.progress != progress || old.wave != wave;
+  bool shouldRepaint(WavePainter old) => old.progress != progress || old.wave != wave;
 }
 
 /// Bytes of a blob for the viewer (photo full-res, video).

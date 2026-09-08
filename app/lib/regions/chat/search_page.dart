@@ -295,7 +295,7 @@ class _Tab extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 2),
                       child: SizedBox(
                         height: 2,
-                        child: CustomPaint(painter: _Underline(label.hashCode)),
+                        child: CustomPaint(painter: Underline(label.hashCode, Pen.graphite)),
                       ),
                     ),
                 ],
@@ -304,28 +304,6 @@ class _Tab extends StatelessWidget {
           ),
         ),
       );
-}
-
-/// The line you draw under the word you mean: pencil, not a rule, so it wanders a little.
-class _Underline extends CustomPainter {
-  _Underline(this.seed);
-  final int seed;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final p = Paint()
-      ..color = Pen.graphite
-      ..strokeWidth = 1.3
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
-    final path = Path()..moveTo(0, size.height * 0.6);
-    final wobble = ((seed % 7) - 3) / 6.0;
-    path.quadraticBezierTo(size.width / 2, size.height * 0.6 + wobble, size.width, size.height * 0.4);
-    canvas.drawPath(path, p);
-  }
-
-  @override
-  bool shouldRepaint(_Underline old) => old.seed != seed;
 }
 
 /// One hit: a torn strip with the line on it and the day it was written in the margin.

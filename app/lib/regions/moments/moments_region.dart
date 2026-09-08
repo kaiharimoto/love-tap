@@ -191,16 +191,34 @@ class _Filters extends StatelessWidget {
                     onTap: () => onView(v),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 14),
-                      // stamped straight on the wood, so in the ink that reads on wood: the
-                      // chosen lens was Pen.stamp on the desk at under 2:1 and the others fainter
-                      child: Stamped.onDesk(
-                        switch (v) {
-                          MomentsView.media => 'what we sent',
-                          MomentsView.milestones => 'what happened',
-                          MomentsView.feelings => 'what we felt',
-                        },
-                        size: v == view ? 12 : 10,
-                      ),
+                      // Stamped straight on the wood, so in the ink that reads on wood — and the
+                      // one that is chosen is underlined, which is the same mark the search's own
+                      // tabs use. It used to be marked by glyph size alone, 12 point against 10,
+                      // which a coherence critic measured as "two selection idioms ninety pixels
+                      // apart" beside the chips below it. One app, one way of saying *this one*.
+                      child: IntrinsicWidth(
+                        child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Stamped.onDesk(
+                            switch (v) {
+                              MomentsView.media => 'what we sent',
+                              MomentsView.milestones => 'what happened',
+                              MomentsView.feelings => 'what we felt',
+                            },
+                            size: v == view ? 12 : 10,
+                          ),
+                          if (v == view)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 2),
+                              child: SizedBox(
+                                height: 2,
+                                child: CustomPaint(painter: Underline(v.index, Hands.onDesk().color ?? Pen.stamp)),
+                              ),
+                            ),
+                        ],
+                      )),
                     ),
                   ),
               ],
@@ -361,7 +379,8 @@ class _Gallery extends StatelessWidget {
   /// Roughly how tall a thing will be. A print is its own shape; a slip is the few lines that
   /// fit on it. This is the one estimate, and the tile is drawn at exactly this height.
   static double heightOf(Event e, double width) {
-    if (e.type == 'voice_note') return 74;
+    // the mark, the waveform, and who said it and when, on two lines
+    if (e.type == 'voice_note') return 86;
     final w = (e.payload['w'] as num?)?.toDouble() ?? 4;
     final h = (e.payload['h'] as num?)?.toDouble() ?? 3;
     return (width * (h / (w == 0 ? 4 : w)).clamp(0.6, 1.6)).roundToDouble();
@@ -494,7 +513,14 @@ class _One extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (event.type == 'voice_note') {
-      // a voice note in the gallery is the slip it was written on, with its length on it
+      // A voice note in the pile is the slip it was written on, and what is on it is what the
+      // thread draws: the mark you press, the shape of what was said, how long it runs, and whose
+      // voice it is. It used to carry `41s` and nothing else — no author, no date, no waveform,
+      // no play — which a coherence critic measured as one event drawn two incompatible ways
+      // ninety pixels apart, and which left eight tiles on the pile with no ink on them at all.
+      final wave = [
+        for (final v in (event.payload['waveform'] as List? ?? const [])) (v as num).toDouble(),
+      ];
       return Align(
         alignment: Alignment.topCenter,
         child: Slip(
@@ -502,12 +528,20 @@ class _One extends StatelessWidget {
           row: row,
           stock: 'receipt',
           width: width,
-          padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),
-          child: Center(
-            child: Text(
-              '${((event.payload['duration_ms'] as num) / 1000).round()}s',
-              style: Hands.margin(size: 14),
-            ),
+          padding: const EdgeInsets.fromLTRB(8, 8, 8, 9),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              VoiceLine(
+                waveform: wave,
+                durationMs: (event.payload['duration_ms'] as num).toInt(),
+                height: 18,
+              ),
+              const SizedBox(height: 4),
+              Text('${event.author.name} · ${dayLabel(event.ts)}',
+                  style: Hands.margin(size: 10), maxLines: 1, overflow: TextOverflow.fade),
+            ],
           ),
         ),
       );

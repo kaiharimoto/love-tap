@@ -234,3 +234,31 @@ class _RulePainter extends CustomPainter {
   @override
   bool shouldRepaint(_RulePainter old) => old.colour != colour || old.seed != seed;
 }
+
+
+/// The line you draw under the word you mean: pencil, not a rule, so it wanders a little.
+///
+/// One drawing, used wherever something is chosen — the search's card-index tabs and the pile's
+/// lenses — because two ways of saying *this one* on two screens of the same app is two apps.
+class Underline extends CustomPainter {
+  const Underline(this.seed, this.colour);
+  final int seed;
+  final Color colour;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final p = Paint()
+      ..color = colour
+      ..strokeWidth = 1.3
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+    final wobble = ((seed % 7) - 3) / 6.0;
+    final path = Path()
+      ..moveTo(0, size.height * 0.6)
+      ..quadraticBezierTo(size.width / 2, size.height * 0.6 + wobble, size.width, size.height * 0.4);
+    canvas.drawPath(path, p);
+  }
+
+  @override
+  bool shouldRepaint(Underline old) => old.seed != seed || old.colour != colour;
+}
