@@ -45,6 +45,7 @@ class EventTypeSpec {
     required this.renderer,
     required this.noun,
     required this.announced,
+    this.pushed,
     this.lens,
     this.refKeys = const [],
     this.blobKeys = const [],
@@ -63,6 +64,17 @@ class EventTypeSpec {
 
   /// The renderer id in thread/renderers.dart (one per type; the map is keyed by this).
   final String renderer;
+
+  /// What a phone in a pocket says when one of these arrives and the app is shut, in the words one
+  /// of them would use: 'wrote something', 'left their voice'. Null for a kind that never
+  /// announces itself.
+  ///
+  /// Here rather than in the service worker. The worker had a table of its own — it is JavaScript
+  /// and cannot import this file — and the two drifted: a word for a kind the registry says never
+  /// announces itself, and none for three that do. The app writes this table into its own store
+  /// at startup and the worker reads it there, so there is one list and the worker keeps no
+  /// per-type knowledge at all.
+  final String? pushed;
 
   /// What one of these is, in the words a person would use about it: 'a date', 'the list', 'a
   /// photograph'. Search says "found as a date" with it when the words are in the type rather
@@ -120,6 +132,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'note',
     noun: 'written',
     announced: 'something written',
+    pushed: 'wrote something',
     refKeys: ['reply_to'],
   ),
   EventTypeSpec(
@@ -131,6 +144,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'print',
     noun: 'a photograph',
     announced: 'a picture',
+    pushed: 'sent a picture',
     lens: 'media',
     refKeys: ['reply_to'],
     blobKeys: ['blob'],
@@ -144,6 +158,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'print_tab',
     noun: 'a video',
     announced: 'something to watch',
+    pushed: 'sent something to watch',
     lens: 'media',
     blobKeys: ['blob', 'poster_blob'],
   ),
@@ -156,6 +171,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'strip_wave',
     noun: 'something said',
     announced: 'their voice',
+    pushed: 'left their voice',
     lens: 'media',
     blobKeys: ['blob'],
   ),
@@ -168,6 +184,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'stuck_object',
     noun: 'a reaction',
     announced: 'an answer to something of yours',
+    pushed: 'answered something of yours',
     lens: 'felt',
     refKeys: ['target'],
     rowInThread: false,
@@ -216,6 +233,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'object_landing',
     noun: 'a feeling',
     announced: 'a feeling',
+    pushed: 'is holding something out',
     lens: 'felt',
   ),
   EventTypeSpec(
@@ -227,6 +245,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'margin_note',
     noun: 'a state',
     announced: 'something they say about themselves',
+    pushed: 'said how they are',
   ),
   EventTypeSpec(
     id: 'state_passive',
@@ -237,6 +256,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'margin_mark',
     noun: 'something their phone noticed',
     announced: 'something their phone notices',
+    pushed: 'their phone noticed something',
   ),
   EventTypeSpec(
     id: 'date_event',
@@ -247,6 +267,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'ticket_stub',
     noun: 'a date',
     announced: 'a date moving',
+    pushed: 'moved something in dates',
     lens: 'happened',
   ),
   EventTypeSpec(
@@ -258,6 +279,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'list_line',
     noun: 'the list',
     announced: 'the list moving',
+    pushed: 'moved something on the list',
   ),
   EventTypeSpec(
     id: 'milestone',
@@ -268,6 +290,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'stamped_card',
     noun: 'a milestone',
     announced: 'a day that matters',
+    pushed: 'marked a day',
     lens: 'happened',
   ),
   EventTypeSpec(
@@ -290,6 +313,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'shelf_card',
     noun: 'something passed on',
     announced: 'something passed between you',
+    pushed: 'passed something on',
     lens: 'happened',
   ),
   EventTypeSpec(
@@ -301,6 +325,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'folded_clock',
     noun: 'a note set to arrive later',
     announced: 'a note set to arrive later',
+    pushed: 'is asking for you',
   ),
   EventTypeSpec(
     id: 'feeling_authored',
@@ -311,6 +336,7 @@ const List<EventTypeSpec> kEventTypes = [
     renderer: 'new_feeling_card',
     noun: 'a feeling one of you made',
     announced: 'a feeling one of you made',
+    pushed: 'made a new feeling',
     lens: 'happened',
   ),
 ];

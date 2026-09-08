@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'dart:js_interop';
 
 import '../feelings/builtins.dart';
+import '../flags.dart';
 import '../spine/event.dart';
 import 'ambient.dart';
 
@@ -82,9 +83,13 @@ class _WebAmbient implements Ambient {
     if (container == null) return;
     try {
       // registered under /push/ so it sits beside the worker Flutter installs to cache the app
-      // rather than fighting it for the root scope
+      // rather than fighting it for the root scope, and carrying the profile so the worker can
+      // find this phone's own store: what a person allowed each kind of arrival to do, and the
+      // hours nothing may interrupt, are written in the app's meta store, and the worker is where
+      // that question is actually asked — it is what decides whether a phone in a pocket makes a
+      // sound. A worker cannot be told at push time; it has to be able to look it up.
       _registration = await container
-          .register('push/sw.js'.toJS, _opts({'scope': 'push/'}))
+          .register('push/sw.js?profile=${Flags.profile}'.toJS, _opts({'scope': 'push/'}))
           .toDart;
     } catch (_) {
       _registration = null;

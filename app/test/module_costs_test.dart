@@ -20,11 +20,17 @@ import 'package:desk/thread/renderers.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final dart = Directory('lib')
-      .listSync(recursive: true)
-      .whereType<File>()
-      .where((f) => f.path.endsWith('.dart'))
-      .toList();
+  // Everything the app is made of, not only the Dart. The first version of this walked lib/ and
+  // ended in .dart, and a per-type table had been sitting in app/web/push/sw.js the whole time —
+  // naming four modules' event types outside those modules' directories, with a word for a type
+  // the registry says never announces itself and none for the fifth module's own. A file the app
+  // ships and runs is a file this counts, whatever language it is in.
+  final dart = [
+    ...Directory('lib').listSync(recursive: true).whereType<File>().where(
+        (f) => f.path.endsWith('.dart')),
+    ...Directory('web').listSync(recursive: true).whereType<File>().where(
+        (f) => f.path.endsWith('.js') || f.path.endsWith('.json') || f.path.endsWith('.html')),
+  ];
 
   test('nothing outside a module names that module\'s event types, except the spine registry', () {
     final offenders = <String>[];

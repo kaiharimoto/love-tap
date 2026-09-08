@@ -9,20 +9,78 @@
 // phone, when the app is opened. If a payload ever arrives with more in it than kind and from,
 // the extra is dropped here as well as never being sent — the rule is kept at both ends.
 
-const WORDS = {
-  message: 'wrote something',
-  photo: 'sent a picture',
-  video: 'sent something to watch',
-  voice_note: 'left their voice',
-  feeling: 'is holding something out',
-  ping: 'is asking for you',
-  reaction: 'answered something of yours',
-  date_event: 'moved something in dates',
-  todo_event: 'moved something on the list',
-  milestone: 'marked a day',
-  ritual_kept: 'kept it',
-  feeling_authored: 'made a new feeling',
-};
+// What a person allowed, read from the phone's own store rather than from anything in the push.
+//
+// Every event type declares a treatment and a person can set one per type and a pair of quiet
+// hours, and for five cycles nothing read either: a code critic grepped for the two functions
+// that answer the question and found no caller outside the file that defines them. The place the
+// question is actually asked is here — this is what decides whether the phone in a pocket makes a
+// sound — and the answers are already written down in the app's own meta store, so this reads
+// them there. No copy, no second table, nothing new to keep in step.
+const PROFILE = new URL(self.location.href).searchParams.get('profile') || 'default';
+
+function fromTheStore(key) {
+  return new Promise((resolve) => {
+    let open;
+    try {
+      open = indexedDB.open('spine_' + PROFILE);
+    } catch (_) {
+      return resolve(null);
+    }
+    open.onerror = () => resolve(null);
+    open.onsuccess = () => {
+      const db = open.result;
+      let got;
+      try {
+        got = db.transaction('meta', 'readonly').objectStore('meta').get(key);
+      } catch (_) {
+        db.close();
+        return resolve(null);
+      }
+      got.onerror = () => { db.close(); resolve(null); };
+      got.onsuccess = () => { db.close(); resolve(got.result || null); };
+    };
+    // a store that does not exist yet is not an error worth waking anybody over
+    open.onupgradeneeded = () => { try { open.transaction.abort(); } catch (_) {} };
+  });
+}
+
+function readPrefs() {
+  return fromTheStore('notify.prefs').then((raw) => {
+    try {
+      return raw ? JSON.parse(raw) : null;
+    } catch (_) {
+      return null;
+    }
+  });
+}
+
+/// interrupt | quiet | off, for this kind, at this hour, on this phone.
+function treatmentFor(prefs, kind, hour) {
+  if (!prefs || !prefs.by_type) return 'interrupt';
+  const want = prefs.by_type[kind] || 'quiet';
+  if (want !== 'interrupt') return want;
+  const from = typeof prefs.quiet_from === 'number' ? prefs.quiet_from : 23;
+  const to = typeof prefs.quiet_to === 'number' ? prefs.quiet_to : 7;
+  const quiet = from <= to ? (hour >= from && hour < to) : (hour >= from || hour < to);
+  return quiet ? 'quiet' : 'interrupt';
+}
+
+// What each kind of arrival says, read from the phone's own store rather than kept here.
+//
+// This file is JavaScript and cannot import the registry, so it used to hold a table of its own —
+// and the two drifted: a word for a kind the registry says never announces itself, and none for
+// three that do. The app writes the registry's own lines into its meta store at startup and this
+// reads them there, so the worker knows nothing per-type and there is one list.
+function readWords() {
+  return fromTheStore('push.words').then((raw) => {
+    try {
+      return raw ? JSON.parse(raw) : null;
+    } catch (_) {
+      return null;
+    }
+  });
+}
 
 self.addEventListener('install', (e) => self.skipWaiting());
 self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
@@ -38,18 +96,25 @@ self.addEventListener('push', (event) => {
   } catch (_) {
     // an unreadable payload is still an arrival: say that much and no more
   }
-  const said = WORDS[kind] || 'left something';
-  event.waitUntil(self.registration.showNotification(from || 'the other phone', {
-    body: said,
-    // one tag, so a second arrival replaces the first instead of stacking into a pile
-    tag: 'from-them',
-    renotify: true,
-    silent: false,
-    requireInteraction: false,
-    icon: '../icons/Icon-192.png',
-    badge: '../icons/Icon-maskable-192.png',
-    data: { kind: kind, from: from },
-  }));
+  event.waitUntil((async () => {
+    const [prefs, words] = await Promise.all([readPrefs(), readWords()]);
+    const said = (words && words[kind]) || 'left something';
+    const how = treatmentFor(prefs, kind, new Date().getHours());
+    // off means off: nothing is shown, and nothing is counted anywhere for later either
+    if (how === 'off') return;
+    await self.registration.showNotification(from || 'the other phone', {
+      body: said,
+      // one tag, so a second arrival replaces the first instead of stacking into a pile
+      tag: 'from-them',
+      renotify: how === 'interrupt',
+      // quiet is quiet: it is there when the phone is looked at and it does not ask to be
+      silent: how !== 'interrupt',
+      requireInteraction: false,
+      icon: '../icons/Icon-192.png',
+      badge: '../icons/Icon-maskable-192.png',
+      data: { kind: kind, from: from, how: how },
+    });
+  })());
 });
 
 // The standing line: what the other phone is doing, kept up to date while this one sleeps. It is

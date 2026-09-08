@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui' show PlatformDispatcher;
 
 import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
@@ -98,5 +99,12 @@ Future<AppScope> bootstrap() async {
   await sync.start();
   final ambient = Ambient.of();
   await ambient.start();
+  // What a phone in a pocket says for each kind of arrival, written where the service worker can
+  // read it. The worker runs when the app does not and cannot import the registry, so it used to
+  // keep a table of its own and the two drifted. There is one list, and this is how it gets there.
+  await spine.setMeta('push.words', jsonEncode({
+    for (final t in kEventTypes)
+      if (t.pushed != null) t.id: t.pushed,
+  }));
   return AppScope(spine: spine, transport: transport, sync: sync, clock: clock, ambient: ambient);
 }
