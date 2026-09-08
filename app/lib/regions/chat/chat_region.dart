@@ -978,14 +978,48 @@ class _WritingPad extends StatelessWidget {
   final List<Widget> children;
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(8, 2, 8, 8),
-        child: Slip(
-          id: 'chat.writing',
-          stock: 'looseleaf',
-          padding: const EdgeInsets.fromLTRB(10, 8, 10, 6),
-          child: Column(mainAxisSize: MainAxisSize.min, children: children),
-        ),
+  Widget build(BuildContext context) => Stack(
+        // the shadow this sheet throws falls on the thread above it, which is outside this box
+        clipBehavior: Clip.none,
+        children: [
+          // The sheet you write on lies over the bottom of the thread, and a sheet lying over
+          // another one throws a shadow onto it. Without this the thread simply stopped: measured
+          // on the hero, the last note ended in "a 138-grey step in a single un-antialiased pixel
+          // row across 804 columns", with the desk two pixels beneath it reading 94.64 against
+          // 94.61 twelve pixels away — a 0.03-grey difference where every other sheet on the
+          // screen carries a shadow about forty grey deep. A cut with no shadow under it is a
+          // hole in the picture, not a sheet in front of another sheet.
+          Positioned(
+            left: 8,
+            right: 8,
+            top: -13,
+            height: 14,
+            child: IgnorePointer(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Shadow.warm.withValues(alpha: 0.0),
+                      Shadow.warm.withValues(alpha: 0.30),
+                    ],
+                    stops: const [0.0, 1.0],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+            child: Slip(
+              id: 'chat.writing',
+              stock: 'looseleaf',
+              padding: const EdgeInsets.fromLTRB(10, 8, 10, 6),
+              child: Column(mainAxisSize: MainAxisSize.min, children: children),
+            ),
+          ),
+        ],
       );
 }
 
