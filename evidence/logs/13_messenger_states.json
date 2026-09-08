@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2676,
+   "ms": 2817,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3270
+   "ms": 3735
   },
   {
    "do": "wait",
-   "ms": 1702
+   "ms": 1704
   },
   {
    "do": "scrollTo",
-   "ms": 3300
+   "ms": 5228
   },
   {
    "do": "wait",
@@ -36,7 +36,23 @@
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2104
+  },
+  {
+   "do": "far",
+   "ms": 727
+  },
+  {
+   "do": "wait",
+   "ms": 1103
+  },
+  {
+   "do": "stage",
+   "ms": 10217
+  },
+  {
+   "do": "wait",
+   "ms": 1903
   },
   {
    "do": "far",
@@ -44,47 +60,31 @@
   },
   {
    "do": "wait",
-   "ms": 1104
-  },
-  {
-   "do": "stage",
-   "ms": 13493
-  },
-  {
-   "do": "wait",
    "ms": 1905
   },
   {
    "do": "far",
-   "ms": 706
-  },
-  {
-   "do": "wait",
-   "ms": 1902
-  },
-  {
-   "do": "far",
-   "ms": 888
+   "ms": 1935
   },
   {
    "do": "sync",
-   "ms": 1405
+   "ms": 1709
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 1904
   },
   {
    "do": "openSender",
-   "ms": 6021
+   "ms": 16314
   },
   {
    "do": "wait",
-   "ms": 1203
+   "ms": 1202
   },
   {
    "do": "slowSend",
-   "ms": 4498
+   "ms": 6537
   },
   {
    "do": "wait",
@@ -92,7 +92,7 @@
   },
   {
    "do": "far",
-   "ms": 706
+   "ms": 704
   },
   {
    "awaited": "partner_typing",
@@ -101,11 +101,11 @@
   },
   {
    "do": "awaitView",
-   "ms": 5031
+   "ms": 9111
   },
   {
    "do": "shot",
-   "ms": 6163
+   "ms": 3981
   },
   {
    "do": "report",
@@ -139,15 +139,15 @@
       "state": "read",
       "says": "read"
      },
-     "0001MCJ1M0S0VR39GWWF2VKQXJ": {
+     "0001MCJ1M0QPW3T7KEKH1CD1N7": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M0S0VR39GWWF2VKQXQ": {
+     "0001MCJ1M0QPW3T7KEKH1CD1NC": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M0S0VR39GWWF2VKQXG": {
+     "0001MCJ1M0QPW3T7KEKH1CD1N5": {
       "state": "refused",
       "says": "it would not go"
      }
@@ -161,45 +161,45 @@
      "0001M59VY0YA13H9M86HTA6XNP": 1
     },
     "edited": [
-     "0001MCJ1M0S0VR39GWWF2VKQXJ"
+     "0001MCJ1M0QPW3T7KEKH1CD1N7"
     ],
     "taken_back": [
-     "0001MCJ1M0S0VR39GWWF2VKQXH"
+     "0001MCJ1M0QPW3T7KEKH1CD1N6"
     ]
    },
    "visible": [
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0S0VR39GWWF2VKQXH",
-    "0001MCJ1M0S0VR39GWWF2VKQXJ",
-    "0001MCJ1M0S0VR39GWWF2VKQXQ",
-    "0001MCJ1M0S0VR39GWWF2VKQXG"
+    "0001MCJ1M0QPW3T7KEKH1CD1N6",
+    "0001MCJ1M0QPW3T7KEKH1CD1N7",
+    "0001MCJ1M0QPW3T7KEKH1CD1NC",
+    "0001MCJ1M0QPW3T7KEKH1CD1N5"
    ],
    "paper": [
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0S0VR39GWWF2VKQXH",
-    "0001MCJ1M0S0VR39GWWF2VKQXJ",
-    "0001MCJ1M0S0VR39GWWF2VKQXQ",
-    "0001MCJ1M0S0VR39GWWF2VKQXG"
+    "0001MCJ1M0QPW3T7KEKH1CD1N6",
+    "0001MCJ1M0QPW3T7KEKH1CD1N7",
+    "0001MCJ1M0QPW3T7KEKH1CD1NC",
+    "0001MCJ1M0QPW3T7KEKH1CD1N5"
    ],
    "tears": {
     "0001M4GW48FEW3M67XKAZT5051": "tear_010",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-    "0001MCJ1M0S0VR39GWWF2VKQXH": "tear_019",
-    "0001MCJ1M0S0VR39GWWF2VKQXJ": "tear_042",
-    "0001MCJ1M0S0VR39GWWF2VKQXQ": "tear_031",
-    "0001MCJ1M0S0VR39GWWF2VKQXG": "tear_036"
+    "0001MCJ1M0QPW3T7KEKH1CD1N6": "tear_019",
+    "0001MCJ1M0QPW3T7KEKH1CD1N7": "tear_042",
+    "0001MCJ1M0QPW3T7KEKH1CD1NC": "tear_031",
+    "0001MCJ1M0QPW3T7KEKH1CD1N5": "tear_054"
    },
    "stocks": {
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M0S0VR39GWWF2VKQXH": "legal_02",
-    "0001MCJ1M0S0VR39GWWF2VKQXJ": "legal_02",
-    "0001MCJ1M0S0VR39GWWF2VKQXQ": "legal_02",
-    "0001MCJ1M0S0VR39GWWF2VKQXG": "lined_04"
+    "0001MCJ1M0QPW3T7KEKH1CD1N6": "looseleaf_01",
+    "0001MCJ1M0QPW3T7KEKH1CD1N7": "lined_03",
+    "0001MCJ1M0QPW3T7KEKH1CD1NC": "looseleaf_01",
+    "0001MCJ1M0QPW3T7KEKH1CD1N5": "lined_03"
    },
    "scroll": {
     "first": 8066,
@@ -209,7 +209,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 320,
    "seed": 20260903,
-   "events": 14074,
+   "events": 14073,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -220,19 +220,25 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": null
+    "sequence": "unfold_thirds",
+    "length": 139,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
    },
    "sensation": null,
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 7,
-    "pushed": 7,
+    "rounds": 11,
+    "pushed": 8,
     "refused": 1,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
-    "pending": 3,
+    "pending": 2,
     "refused_in_the_outbox": 1,
     "cursor": 14071,
     "link": {
@@ -243,8 +249,8 @@
      "peer_cursor": 14070,
      "our_cursor": 14070,
      "last_error": null,
-     "since": "2026-09-08T18:51:23.881Z",
-     "last_contact": "2026-09-08T18:52:18.703Z"
+     "since": "2026-09-08T20:14:05.874Z",
+     "last_contact": "2026-09-08T20:15:14.793Z"
     }
    },
    "ambient": {
@@ -258,10 +264,10 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2332,
+ "cold_ms": 8834,
  "load": {
-  "ms": 2332,
-  "store": "kept",
+  "ms": 8834,
+  "store": "fresh",
   "profile": "profile_seeded"
  },
  "far": [

@@ -204,7 +204,21 @@ the right way round; the filled-in amplitudes had the same inversion in the othe
   [0.067, 0.064, 0.15, 0.259]. fold.dart has always said to re-run that tool when the rig changes.
 
 ## Still open
-- **the pale rule on the wood**, above: open, with six explanations ruled out and one lead
+- **A frame from the other phone takes nine seconds to cross a loopback socket.** 13's scene tells
+  the far phone to start typing and then asks the near phone every 250 ms whether it knows: it took
+  **9111 ms**, and the six-second lapse on a typing frame had run out again by the time the shutter
+  opened — so 13 shows no `noor writing…` and its record, read at the shutter, says so. The cost is
+  the sync engine's own round on a year-deep spine: `_fetchMissingBlobs` walks all 14,073 events
+  every round, so the phone spends most of each cycle not listening. The same round is what puts
+  the build spikes in 11's timings — p95 773 ms, max 1109, against a raster that never leaves
+  117-200 ms. This is a messenger-reliability defect, it is measured, and it is the first thing in
+  the next cycle.
+- **07 still fails its own frame check, on the other side of the same moment.** The pale slab is
+  gone; the frame it was in is now a hole — 168.83 → 147.33 mean luma, the note's row present with
+  no paper on it. The app is right to wait for its paper: a run that opens on the frame the note was
+  inserted in opens before the tear is decoded, which is the harness filming too early. Every frames
+  run that follows an arrival now waits for the app to finish putting the sheet down, and 07 is
+  re-shot against the same build.
 - 09 and 16 need an Android device; the vibrator is untested; transport is local.
 - the hand still repeats: 8.9 per cent of marks have a near-twin at 0.99 by the critic's method.
 - the ink's core darkness varies by 3.52 grey levels — the plate is in the outline, not in the ink.
