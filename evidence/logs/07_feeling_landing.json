@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1877,
+   "ms": 2680,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3070
+   "ms": 4988
   },
   {
    "do": "wait",
@@ -24,75 +24,91 @@
   },
   {
    "do": "haptics",
-   "ms": 542
+   "ms": 685
   },
   {
    "do": "far",
-   "ms": 888
+   "ms": 496
   },
   {
    "do": "awaitArrival",
-   "ms": 3026
+   "ms": 6208
+  },
+  {
+   "do": "wait",
+   "ms": 1102
   },
   {
    "do": "frames",
-   "ms": 287280
+   "ms": 234466
   },
   {
    "do": "far",
-   "ms": 1396
+   "ms": 405
   },
   {
    "do": "awaitArrival",
-   "ms": 1262
+   "ms": 987
+  },
+  {
+   "do": "wait",
+   "ms": 1103
   },
   {
    "do": "frames",
-   "ms": 174109
+   "ms": 142775
   },
   {
    "do": "goTo",
-   "ms": 4741
+   "ms": 3124
   },
   {
    "do": "step",
-   "ms": 1653
+   "ms": 1600
   },
   {
    "do": "far",
-   "ms": 966
+   "ms": 493
   },
   {
    "do": "awaitArrival",
-   "ms": 1979
+   "ms": 3224
+  },
+  {
+   "do": "wait",
+   "ms": 1103
   },
   {
    "do": "frames",
-   "ms": 224236
+   "ms": 144044
   },
   {
    "do": "goTo",
-   "ms": 8481
+   "ms": 3797
   },
   {
    "do": "step",
-   "ms": 2976
+   "ms": 1764
   },
   {
    "do": "far",
-   "ms": 473
+   "ms": 407
   },
   {
    "do": "awaitArrival",
-   "ms": 1180
+   "ms": 1940
+  },
+  {
+   "do": "wait",
+   "ms": 1104
   },
   {
    "do": "frames",
-   "ms": 254180
+   "ms": 161398
   },
   {
    "do": "report",
-   "ms": 534
+   "ms": 432
   }
  ],
  "shots": [
@@ -162,7 +178,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 7728,
    "seed": 20260903,
-   "events": 14091,
+   "events": 14070,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -173,13 +189,19 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": null
+    "sequence": "unfold_thirds",
+    "length": 139,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
    },
    "sensation": {
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-08T19:16:55.956Z",
+    "started_at": "2026-09-08T22:14:21.899Z",
     "pattern": [
      {
       "ms": 150,
@@ -206,7 +228,7 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 325,
+    "rounds": 34,
     "pushed": 5,
     "refused": 0,
     "pulled": 4,
@@ -214,17 +236,17 @@
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14091,
+    "cursor": 14070,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14091,
-     "our_cursor": 14091,
+     "peer_cursor": 14070,
+     "our_cursor": 14070,
      "last_error": null,
-     "since": "2026-09-08T19:04:53.534Z",
-     "last_contact": "2026-09-08T19:21:07.803Z"
+     "since": "2026-09-08T22:04:58.982Z",
+     "last_contact": "2026-09-08T22:16:47.578Z"
     }
    },
    "ambient": {
@@ -238,10 +260,10 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2263,
+ "cold_ms": 25878,
  "load": {
-  "ms": 2263,
-  "store": "kept",
+  "ms": 25878,
+  "store": "fresh",
   "profile": "profile_seeded"
  },
  "far": [
@@ -265,31 +287,31 @@
  "arrivals": [
   {
    "line": "feeling hold 0.9",
-   "before": 8075,
-   "after": 8076,
+   "before": 8069,
+   "after": 8070,
    "at_frame": 0,
-   "waited_ms": 2624
+   "waited_ms": 5808
   },
   {
    "line": "feeling squeeze 0.75",
-   "before": 8076,
-   "after": 8077,
+   "before": 8070,
+   "after": 8071,
    "at_frame": 150,
-   "waited_ms": 862
+   "waited_ms": 586
   },
   {
    "line": "feeling nuzzle 0.8",
-   "before": 8077,
-   "after": 8078,
+   "before": 8071,
+   "after": 8072,
    "at_frame": 221,
-   "waited_ms": 1578
+   "waited_ms": 2824
   },
   {
    "line": "feeling soup 0.85",
-   "before": 8078,
-   "after": 8079,
+   "before": 8072,
+   "after": 8073,
    "at_frame": 314,
-   "waited_ms": 779
+   "waited_ms": 1539
   }
  ],
  "problems": [],
