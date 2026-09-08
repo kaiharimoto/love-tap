@@ -499,9 +499,8 @@ class _MaskedLayerState extends State<MaskedLayer> {
     // anybody saw it — and the row this material is judged on is judged at three hundred per cent
     // on exactly this. The shader scales it back down.
     final dpr = MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0;
-    return ShaderMask(
-      blendMode: BlendMode.dstIn,
-      shaderCallback: (Rect rect) {
+    return _MaskedBox(
+      shaderFor: (Rect rect) {
         final sliced = SlicedMasks.at(widget.maskAsset, mask, rect.size, dpr);
         final m = Matrix4.identity()
           ..translateByDouble(rect.left, rect.top, 0, 1)
@@ -511,6 +510,81 @@ class _MaskedLayerState extends State<MaskedLayer> {
       },
       child: widget.child,
     );
+  }
+}
+
+/// A piece with its tear mask multiplied into it — with the mask's own edge kept clear of the
+/// piece's edge.
+///
+/// This is Flutter's ShaderMask with two pixels of air around it, and the two pixels are the whole
+/// point. A ShaderMask multiplies the mask in by drawing a rectangle the size of the child in
+/// dstIn, and that rectangle has an antialiased edge: on the row where the piece's box lands
+/// between two device pixels, the blend is applied at partial coverage, so a fraction of the sheet
+/// survives where the tear had erased it. That fraction is a third — solved on all three channels
+/// off 02_chat, wood + 0.334 x paper — and it is the pale dead-straight hairline four material
+/// critics have measured lying on the desk beside every piece of paper in the app, in nine of ten
+/// stills, for five cycles. Six explanations were tried and measured and are all wrong: the desk
+/// render, the baked shadows, the denoiser, the shadow's bounding box, the mask's own inset, and
+/// an unfiltered rotation. What settled it was a bisect in the browser: with the mask taken out of
+/// the piece altogether the hairline goes from twenty-nine runs to one, and with the mask's own
+/// sampling and composition changed every way that was left — a shader without mipmaps, a mask
+/// composed at the piece's exact height, a rotation filtered differently, the lit edge taken off —
+/// it does not move at all.
+///
+/// So the mask rectangle is drawn two pixels larger than the piece in every direction. Its
+/// antialiased edge is then out on the desk where there is nothing to erase, the piece's own edge
+/// is covered at full coverage, and the tear is the only thing that decides what is paper. The
+/// composed mask is transparent for a pixel around its border and clamps outward, so the two
+/// pixels of air erase rather than smear.
+typedef _ShaderFor = ui.Shader Function(Rect rect);
+
+class _MaskedBox extends SingleChildRenderObjectWidget {
+  const _MaskedBox({required this.shaderFor, required Widget super.child});
+
+  final _ShaderFor shaderFor;
+
+  /// How far outside the piece the mask rectangle is drawn, in logical pixels.
+  static const double air = 2.0;
+
+  @override
+  RenderObject createRenderObject(BuildContext context) => _RenderMaskedBox(shaderFor);
+
+  @override
+  void updateRenderObject(BuildContext context, _RenderMaskedBox renderObject) {
+    renderObject.shaderFor = shaderFor;
+  }
+}
+
+class _RenderMaskedBox extends RenderProxyBox {
+  _RenderMaskedBox(this._shaderFor);
+
+  _ShaderFor _shaderFor;
+  set shaderFor(_ShaderFor value) {
+    if (value == _shaderFor) return;
+    _shaderFor = value;
+    markNeedsPaint();
+  }
+
+  @override
+  bool get alwaysNeedsCompositing => child != null;
+
+  @override
+  ShaderMaskLayer? get layer => super.layer as ShaderMaskLayer?;
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    if (child == null) {
+      layer = null;
+      return;
+    }
+    const air = _MaskedBox.air;
+    final wide = Size(size.width + air * 2, size.height + air * 2);
+    layer ??= ShaderMaskLayer();
+    layer!
+      ..shader = _shaderFor(const Offset(air, air) & size)
+      ..maskRect = (offset - const Offset(air, air)) & wide
+      ..blendMode = BlendMode.dstIn;
+    context.pushLayer(layer!, super.paint, offset);
   }
 }
 

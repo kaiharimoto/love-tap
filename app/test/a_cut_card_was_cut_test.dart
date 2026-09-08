@@ -115,24 +115,37 @@ void main() {
             '$n columns), which is a rectangle drawn by a program rather than a card that was cut');
   });
 
-  test('a tilted piece is rotated with a filter', () {
+  test('the mask is drawn wider than the piece it cuts', () {
     // "One-pixel bright rules are drawn across the desk: at 02_chat y=650, x=1100 three
     // consecutive rows read 78.9 / 127.3 / 80.2, a +48-grey spike one pixel tall running 254 px.
-    // Nine of the ten stills carry them." Not a line drawn on the wood, and not in any asset —
-    // the desk render carries zero one-row spikes at any threshold and so does every baked shadow.
-    // It is the piece's own lit edge, tilted by a third of a degree and rotated *without* a
-    // filter, which is nearest-neighbour: a hard edge then comes out one row at a time and steps,
-    // about a hundred and sixty pixels per row, in dashes of sixty to three hundred, which is what
-    // the artifact measures.
+    // Nine of the ten stills carry them." Five cycles and six wrong explanations: the desk render,
+    // the baked shadows, the denoiser, the shadow's bounding box, the mask's own inset, and — the
+    // one this test used to assert — an unfiltered rotation staircasing the piece's lit edge. That
+    // last one was measured and is wrong: with the rotation filtered every way it can be, the
+    // count does not move.
     //
-    // Read off the source rather than rasterised: the picture that shows it needs a piece nine
-    // hundred pixels wide, and rasterising one under the test binding takes longer than the whole
-    // rest of the suite.
+    // What it is: ShaderMask multiplies the mask in by drawing a rectangle the size of the child
+    // in dstIn, and that rectangle is antialiased. On the row where the piece's box falls between
+    // two device pixels the blend lands at partial coverage, and a fraction of the sheet survives
+    // where the tear had erased it — a third of it, solved on all three channels off the hero.
+    // A bisect in the browser settled it: twenty-nine runs with the mask, one without it, and
+    // twenty-nine with every other part of the mask path changed. The mask rectangle is drawn two
+    // pixels larger than the piece now, so its own edge is out on the desk where there is nothing
+    // to erase.
+    //
+    // Read off the source: the artifact that shows it is a screenshot from CanvasKit, and the
+    // test binding's rasteriser does not draw the fault at any size or density — sixty-six piece
+    // heights at three device pixel ratios, zero one-row spikes. tools/check/hairline.py is what
+    // measures it, on the pictures, where it happens.
     final src = File('lib/material/paper.dart').readAsStringSync();
-    final at = src.indexOf('Transform.rotate');
-    expect(at, greaterThan(0), reason: 'nothing tilts a piece any more');
-    expect(src.substring(at, (at + 900).clamp(0, src.length)), contains('filterQuality:'),
-        reason: 'a piece is rotated without a filter, so every hard edge inside it staircases');
+    expect(src, contains('class _RenderMaskedBox'),
+        reason: 'the tear mask is applied by something else again; whatever it is, it has to keep '
+            'its own antialiased edge off the piece');
+    final at = src.indexOf('..maskRect =');
+    expect(at, greaterThan(0), reason: 'nothing sets a mask rectangle');
+    expect(src.substring(at - 400, at + 200), contains('air'),
+        reason: 'the mask rectangle is the size of the piece again, so a third of a pixel of sheet '
+            'survives on the row where the piece lands between two device pixels');
   });
 }
 

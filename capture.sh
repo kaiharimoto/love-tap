@@ -412,6 +412,13 @@ if [ -f evidence/02_chat.png ]; then
     || note_missing "02_chat.png" "$(python3 -c "import json;print(json.load(open('$LOG/tears.json')).get('why',''))" 2>/dev/null)"
 fi
 
+# and no pale one-pixel rule lying on the desk beside the paper: the mask rectangle catching the
+# edge of the piece it cuts. Measured on the photographs because the fault is drawn by CanvasKit
+# and the test binding's rasteriser cannot see it.
+echo "· checking nothing draws a line on the wood"
+python3 tools/check/hairline.py --out "$LOG/hairline.json" \
+  || note_missing "hairline" "a bright one-pixel rule is lying on the desk; see $LOG/hairline.json"
+
 # What moved since the last capture, measured against evidence/.previous, and then this capture
 # becomes the baseline for the next one. The rotation has to happen here rather than by hand:
 # nothing rotated it for a long time, so every SSIM in DIFF.json was unreproducible from the
