@@ -50,6 +50,28 @@ MIN_SECONDS = {
 }
 
 
+_STANDING = None
+
+
+def _standing_reason(name):
+    """Why this artifact is absent, when the reason is a standing fact about the machine.
+
+    A run of one scene records nothing about the scenes it did not attempt, so everything else
+    came out as "not captured this session" — which is a statement of what happened and not a
+    reason, as an emotional critic said of exactly these two files. The standing reasons live in
+    evidence/WHY_MISSING.json; anything a run reports about itself still wins over them.
+    """
+    global _STANDING
+    if _STANDING is None:
+        path = EVIDENCE / "WHY_MISSING.json"
+        try:
+            _STANDING = json.loads(path.read_text())
+        except Exception:
+            _STANDING = {}
+    key = name.rsplit(".", 1)[0]
+    return _STANDING.get(name) or _STANDING.get(key)
+
+
 def _stamp_of(path):
     import datetime as dt
     return dt.datetime.fromtimestamp(path.stat().st_mtime, dt.timezone.utc).strftime(
@@ -124,7 +146,9 @@ def main():
                     f"{_stamp_of(path)}; it is not this session's and is not counted)")
             continue
         if not path.exists():
-            manifest["missing"][name] = reasons.get("__default__") or "not captured this session"
+            manifest["missing"][name] = (
+                reasons.get("__default__") or _standing_reason(name)
+                or "not captured this session")
             continue
         entry = {"bytes": path.stat().st_size, "written": _stamp_of(path)}
         # and one that nothing reported on, but which predates this run, is stale rather than fresh

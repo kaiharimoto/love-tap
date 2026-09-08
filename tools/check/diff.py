@@ -85,13 +85,28 @@ def digest(path):
     return h.hexdigest()[:16]
 
 
+_STANDING = None
+
+
+def _standing_reason(name):
+    """The standing reason an artifact is absent, if there is one. See evidence/WHY_MISSING.json."""
+    global _STANDING
+    if _STANDING is None:
+        try:
+            with open(os.path.join(EVIDENCE, "WHY_MISSING.json"), encoding="utf-8") as f:
+                _STANDING = json.load(f)
+        except Exception:
+            _STANDING = {}
+    return _STANDING.get(name) or _STANDING.get(name.rsplit(".", 1)[0])
+
+
 def compare(name, scratch):
     now = os.path.join(EVIDENCE, name)
     was = os.path.join(PREVIOUS, name)
     here, there = os.path.exists(now), os.path.exists(was)
     if not here and not there:
         return {"artifact": name, "label": "absent", "ssim": None, "judgement": None,
-                "why": "not captured in this session or the last"}
+                "why": _standing_reason(name) or "not captured in this session or the last"}
     if here and not there:
         return {"artifact": name, "label": "new", "ssim": None, "judgement": None,
                 "bytes": os.path.getsize(now), "sha": digest(now),
