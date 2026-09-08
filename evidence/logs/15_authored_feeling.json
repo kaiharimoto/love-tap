@@ -10,17 +10,17 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2759,
+   "ms": 2425,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 5695
+   "ms": 3404
   },
   {
    "do": "wait",
-   "ms": 1807
+   "ms": 1803
   },
   {
    "do": "wait",
@@ -28,15 +28,47 @@
   },
   {
    "do": "openCorner",
-   "ms": 7091
+   "ms": 2265
   },
   {
    "do": "frames",
-   "ms": 88009
+   "ms": 27689
   },
   {
-   "at": 109486,
+   "at": 41447,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
+  },
+  {
+   "do": "showFamily",
+   "ms": 5
+  },
+  {
+   "do": "step",
+   "ms": 1139
+  },
+  {
+   "do": "frames",
+   "ms": 33308
+  },
+  {
+   "at": 75901,
+   "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
+  },
+  {
+   "do": "showFamily",
+   "ms": 7
+  },
+  {
+   "do": "step",
+   "ms": 1090
+  },
+  {
+   "do": "frames",
+   "ms": 32750
+  },
+  {
+   "at": 109751,
+   "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
@@ -44,116 +76,84 @@
   },
   {
    "do": "step",
-   "ms": 2985
+   "ms": 1149
   },
   {
    "do": "frames",
-   "ms": 66738
-  },
-  {
-   "at": 180540,
-   "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
-  },
-  {
-   "do": "showFamily",
-   "ms": 1330
-  },
-  {
-   "do": "step",
-   "ms": 1062
-  },
-  {
-   "do": "frames",
-   "ms": 57623
-  },
-  {
-   "at": 240529,
-   "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
-  },
-  {
-   "do": "showFamily",
-   "ms": 1304
-  },
-  {
-   "do": "step",
-   "ms": 1173
-  },
-  {
-   "do": "frames",
-   "ms": 57568
+   "ms": 31978
   },
   {
    "do": "sendFeeling",
-   "ms": 13034
+   "ms": 8694
   },
   {
    "do": "frames",
-   "ms": 262846
+   "ms": 169795
   },
   {
    "do": "goTo",
-   "ms": 19770
+   "ms": 6561
   },
   {
    "do": "step",
-   "ms": 3928
+   "ms": 2774
   },
   {
    "do": "openCorner",
-   "ms": 6273
+   "ms": 1460
   },
   {
    "do": "frames",
-   "ms": 115934
+   "ms": 36866
   },
   {
    "do": "openCorner",
-   "ms": 3295
+   "ms": 3438
   },
   {
    "do": "step",
-   "ms": 1030
+   "ms": 988
   },
   {
    "do": "far",
-   "ms": 1800
+   "ms": 579
   },
   {
    "do": "awaitArrival",
-   "ms": 3573
+   "ms": 2433
   },
   {
    "do": "frames",
-   "ms": 395505
+   "ms": 242964
   },
   {
    "do": "goTo",
-   "ms": 38870
+   "ms": 4384
   },
   {
    "do": "step",
-   "ms": 3121
+   "ms": 2110
   },
   {
    "do": "far",
-   "ms": 2705
+   "ms": 566
   },
   {
    "do": "awaitArrival",
-   "ms": 10103
+   "ms": 2915
   },
   {
    "do": "frames",
-   "ms": 467152
+   "ms": 194052
   },
   {
    "do": "report",
-   "ms": 639
+   "ms": 425
   }
  ],
  "shots": [
   {
-   "frames": 20,
+   "frames": 16,
    "dir": "evidence/frames/15_authored_feeling",
    "ms": 16,
    "drive": null
@@ -183,7 +183,7 @@
    "drive": null
   },
   {
-   "frames": 22,
+   "frames": 16,
    "dir": "evidence/frames/15_authored_feeling",
    "ms": 16,
    "drive": null
@@ -209,7 +209,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtrszvp7"
+     "pwa-mts3n7tm"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -219,9 +219,9 @@
    "stocks": {},
    "scroll": null,
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 7424,
+   "driven_ms": 7264,
    "seed": 20260903,
-   "events": 14095,
+   "events": 14067,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -238,7 +238,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-08T00:03:38.026Z",
+    "started_at": "2026-09-08T03:38:24.836Z",
     "pattern": [
      {
       "ms": 150,
@@ -265,25 +265,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 526,
-    "pushed": 4,
+    "rounds": 38,
+    "pushed": 3,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14095,
+    "cursor": 14067,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14095,
-     "our_cursor": 14095,
+     "peer_cursor": 14067,
+     "our_cursor": 14067,
      "last_error": null,
-     "since": "2026-09-07T23:44:01.662Z",
-     "last_contact": "2026-09-08T00:11:25.961Z"
+     "since": "2026-09-08T03:27:58.696Z",
+     "last_contact": "2026-09-08T03:41:20.641Z"
     }
    },
    "ambient": {
@@ -296,36 +296,36 @@
    "at": "15_authored_feeling"
   }
  ],
- "cold_ms": 3017,
+ "cold_ms": 2754,
  "load": {
-  "ms": 3017,
+  "ms": 2754,
   "store": "kept",
   "profile": "profile_seeded"
  },
  "far": [
   {
    "line": "feeling soup 0.55",
-   "at_frame": 174
+   "at_frame": 164
   },
   {
    "line": "feeling soup 0.9",
-   "at_frame": 280
+   "at_frame": 270
   }
  ],
  "arrivals": [
   {
    "line": "feeling soup 0.55",
-   "before": 8080,
-   "after": 8081,
-   "at_frame": 174,
-   "waited_ms": 3171
+   "before": 8070,
+   "after": 8071,
+   "at_frame": 164,
+   "waited_ms": 2033
   },
   {
    "line": "feeling soup 0.9",
-   "before": 8081,
-   "after": 8082,
-   "at_frame": 280,
-   "waited_ms": 9702
+   "before": 8071,
+   "after": 8072,
+   "at_frame": 270,
+   "waited_ms": 2514
   }
  ],
  "problems": [],
