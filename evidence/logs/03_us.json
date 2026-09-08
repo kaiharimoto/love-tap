@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3515,
+   "ms": 2602,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4400
+   "ms": 4027
   },
   {
    "do": "wait",
@@ -24,11 +24,11 @@
   },
   {
    "do": "shot",
-   "ms": 5184
+   "ms": 3574
   },
   {
    "do": "report",
-   "ms": 723
+   "ms": 719
   }
  ],
  "shots": [
@@ -56,7 +56,7 @@
      {
       "id": "calendar",
       "events": 6,
-      "glance": "us in 62 days"
+      "glance": "us in 61 days"
      },
      {
       "id": "rituals",
@@ -71,6 +71,7 @@
     ]
    },
    "visible": [],
+   "paper": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
@@ -111,8 +112,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-07T22:20:41.923Z",
-     "last_contact": "2026-09-07T22:20:44.798Z"
+     "since": "2026-09-08T16:40:19.519Z",
+     "last_contact": "2026-09-08T16:40:21.941Z"
     }
    },
    "ambient": {
@@ -125,9 +126,9 @@
    "at": "03_us.png"
   }
  ],
- "cold_ms": 2999,
+ "cold_ms": 2699,
  "load": {
-  "ms": 2999,
+  "ms": 2699,
   "store": "kept",
   "profile": "profile_seeded"
  },

@@ -13,10 +13,22 @@
    "voice_note": 1
   },
   "delivery": {
-   "00015W9WM8JY1VGBMS8YZ3BCWZ": "read",
-   "000161B7Q01T45RZGBNY27TZW9": "read",
-   "0001639QQ0RNJ1WVAGNKSKRVRC": "read",
-   "00016B8TSRR2PAD5PG1ER1V70J": "read"
+   "00015W9WM8JY1VGBMS8YZ3BCWZ": {
+    "state": "read",
+    "says": "read"
+   },
+   "000161B7Q01T45RZGBNY27TZW9": {
+    "state": "read",
+    "says": "read"
+   },
+   "0001639QQ0RNJ1WVAGNKSKRVRC": {
+    "state": "read",
+    "says": "read"
+   },
+   "00016B8TSRR2PAD5PG1ER1V70J": {
+    "state": "read",
+    "says": "read"
+   }
   },
   "states_on_the_glass": {
    "read": 4
@@ -86,13 +98,7 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": "unfold_thirds",
-  "length": 147,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  },
  "sensation": null,
  "sync": {
@@ -115,8 +121,8 @@
    "peer_cursor": 14062,
    "our_cursor": 14062,
    "last_error": null,
-   "since": "2026-09-08T06:17:01.531Z",
-   "last_contact": "2026-09-08T06:17:59.738Z"
+   "since": "2026-09-08T16:39:28.583Z",
+   "last_contact": "2026-09-08T16:40:15.778Z"
   }
  },
  "ambient": {

@@ -14,11 +14,11 @@
   },
   {
    "do": "pwa",
-   "ms": 712
+   "ms": 713
   },
   {
    "do": "shot",
-   "ms": 2769
+   "ms": 2574
   },
   {
    "do": "report",
@@ -43,10 +43,11 @@
     "partner_typing": false
    },
    "visible": [],
+   "paper": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-07T22:25:14.656Z",
+   "now": "2026-09-08T16:43:58.746Z",
    "driven_ms": 0,
    "seed": 20260903,
    "events": 0,
@@ -83,7 +84,7 @@
      "peer_cursor": null,
      "our_cursor": 0,
      "last_error": null,
-     "since": "2026-09-07T22:25:07.101Z",
+     "since": "2026-09-08T16:43:51.529Z",
      "last_contact": null
     }
    },
@@ -97,9 +98,9 @@
    "at": "17_setup_pwa.png"
   }
  ],
- "cold_ms": 2141,
+ "cold_ms": 1724,
  "load": {
-  "ms": 2141,
+  "ms": 1724,
   "store": "fresh",
   "profile": null
  },
@@ -113,7 +114,7 @@
   },
   "apple_touch_icon": "icons/Icon-192.png",
   "service_workers": [
-   "http://127.0.0.1:8798/push/sw.js"
+   "http://127.0.0.1:8798/push/sw.js?profile=fresh"
   ],
   "display_mode_standalone": false,
   "browser": "webkit",

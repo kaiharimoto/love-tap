@@ -5,27 +5,39 @@ somebody else's. Written as the work is done, before any cycle-7 critic has run.
 
 ## What cycle 6's reports said, and what was done about each
 
-### The desk hairline, four cycles old, and what it actually is
-Nine of ten stills carried one-pixel bright rules across the wood, up to +48 grey and 440 px long,
-and four hypotheses had been wrong — the desk asset, the paper piece's bounding box, the mask
-inset, and (this session) the denoiser.
+### The pale rule on the wood: five cycles, six hypotheses, still open
+Nine of ten stills carry one-pixel bright rules across the wood, up to +48 grey and 440 px long.
+This is the honest state of it, because five of the six explanations tried have been mine.
 
-**What ruled out the assets.** The desk render carries **zero** one-row spikes at any threshold I
-tried, and so does every baked contact shadow once the true spike test is used — a row brighter
-than *both* its neighbours, which is what the artifact shows (78.9 / 127.3 / 80.2). The denoiser
-hypothesis came from a looser test that also flags a steep edge; measured properly, the shipped
-shadows had none either. The re-render without the denoiser stands on its own merits (a shadow's
-alpha pass is a gradient and nothing else, which is what OIDN has nothing to work with) but it was
-**not** the hairline, and this sheet says so because the commit that made it said otherwise.
+**Ruled out, by measurement, this session:**
+- *the desk asset* — the render carries **zero** one-row spikes at any threshold I tried, and
+  resampling it by nearest, bilinear, bicubic or Lanczos to the size the app draws it at produces
+  none either;
+- *the baked contact shadows* — none carries a one-row spike, using the test the artifact actually
+  shows (a row brighter than **both** neighbours). A looser test — a row differing from their mean
+  — flags 51 of 56, but every one of those is a steep edge of the shadow itself, and that looser
+  test is what sent me at the denoiser;
+- *the denoiser* — the shadow pass renders without it now, at four times the samples, and the
+  rules are unchanged. Kept on its own merits; **it was not the cause**, and the commit that made
+  it said otherwise;
+- *the piece's bounding box* and *the mask inset* — fixed in earlier cycles, and the rules survived
+  both;
+- *an unfiltered rotation* — `Transform.rotate` now passes `filterQuality`, and the rules survived
+  that too. One still came back with a longer one than before.
 
-**What it is.** In the artifact the rules step: y=199 at x 1340-1406, y=200 at 1176-1239, y=201 at
-1009-1072 — one row down for every 166 px along, which is a slope of a third of a degree, which is
-exactly what `Slip` gives a piece as its tilt. A piece is drawn inside `Transform.rotate`, and a
-rotation with no `filterQuality` is nearest-neighbour: every hard edge inside the piece — the lit
-line along a torn edge, the white line along a cut one — comes out one row at a time and steps,
-in dashes wherever the edge's own brightness crosses the threshold. It is filtered now. A test
-reads the source for it, because the picture that shows it needs a piece nine hundred pixels wide
-and rasterising one under the test binding outruns the whole rest of the suite.
+**What is known about it.** On the hero the rules step one row down for every ~170 px along: a
+slope of 0.006 radians, which is exactly the tilt `Slip` gives a piece, and the strip it sits under
+is tilted -0.006. They lie just outside the paper, where the tear's own fibres are feathered. So it
+is a piece's own edge, one device pixel of it, drawn where the paper is only a few per cent opaque.
+
+**And the lead for next cycle.** A widget-test rasterisation of the same drawing at device pixel
+ratio one *and* three, over a flat desk, produces **no such row at all** — 0 px of 1140, with and
+without the change I tried. Whatever makes it is something CanvasKit does in the browser and the
+test binding does not. Two things I tried and reverted rather than ship unverified: masking the lit
+edge a second time by the same mask, and a bilinear sampler on the baked shadow. The first is a
+real cost per note per frame and the second I kept, because bilinear is the cheaper and safer
+sampler for an image that is only ever stretched — with a comment saying plainly that it is not the
+explanation.
 
 ### The fold, on all four of its blocking measurements
 - silhouette: the settled sheet's left edge had **0.00 px** of deviation over 320 rows against
@@ -132,6 +144,7 @@ the right way round; the filled-in amplitudes had the same inversion in the othe
   [0.067, 0.064, 0.15, 0.259]. fold.dart has always said to re-run that tool when the rig changes.
 
 ## Still open
+- **the pale rule on the wood**, above: open, with six explanations ruled out and one lead
 - 09 and 16 need an Android device; the vibrator is untested; transport is local.
 - the hand still repeats: 8.9 per cent of marks have a near-twin at 0.99 by the critic's method.
 - the ink's core darkness varies by 3.52 grey levels — the plate is in the outline, not in the ink.

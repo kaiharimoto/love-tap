@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 4438,
+   "ms": 2702,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 6598
+   "ms": 4733
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1903
   },
   {
    "do": "scrollTo",
-   "ms": 56986
+   "ms": 31432
   },
   {
    "do": "wait",
@@ -32,11 +32,11 @@
   },
   {
    "do": "shot",
-   "ms": 3481
+   "ms": 3329
   },
   {
    "do": "report",
-   "ms": 729
+   "ms": 716
   }
  ],
  "shots": [
@@ -61,10 +61,22 @@
      "voice_note": 1
     },
     "delivery": {
-     "00015W9WM8JY1VGBMS8YZ3BCWZ": "read",
-     "000161B7Q01T45RZGBNY27TZW9": "read",
-     "0001639QQ0RNJ1WVAGNKSKRVRC": "read",
-     "00016B8TSRR2PAD5PG1ER1V70J": "read"
+     "00015W9WM8JY1VGBMS8YZ3BCWZ": {
+      "state": "read",
+      "says": "read"
+     },
+     "000161B7Q01T45RZGBNY27TZW9": {
+      "state": "read",
+      "says": "read"
+     },
+     "0001639QQ0RNJ1WVAGNKSKRVRC": {
+      "state": "read",
+      "says": "read"
+     },
+     "00016B8TSRR2PAD5PG1ER1V70J": {
+      "state": "read",
+      "says": "read"
+     }
     },
     "states_on_the_glass": {
      "read": 4
@@ -134,13 +146,7 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 147,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "sensation": null,
    "sync": {
@@ -163,8 +169,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-08T06:17:01.531Z",
-     "last_contact": "2026-09-08T06:17:59.738Z"
+     "since": "2026-09-08T16:39:28.583Z",
+     "last_contact": "2026-09-08T16:40:15.778Z"
     }
    },
    "ambient": {
@@ -177,10 +183,10 @@
    "at": "02_chat.png"
   }
  ],
- "cold_ms": 13712,
+ "cold_ms": 2857,
  "load": {
-  "ms": 13712,
-  "store": "fresh",
+  "ms": 2857,
+  "store": "kept",
   "profile": "profile_seeded"
  },
  "problems": [],

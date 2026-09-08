@@ -10,7 +10,7 @@
   "video": {
    "initialised": true,
    "playing": true,
-   "position_ms": 1530,
+   "position_ms": 1218,
    "duration_ms": 2500
   }
  },
@@ -18,6 +18,11 @@
   "00020D7VJGABF9604GW09166QN",
   "00020DC680NM68W87ZT33ZDBXB",
   "00020K9HT8N4QBZM8W3AF4J2CT",
+  "00020P5YV8GCMVBPX6W1HZ7HNT"
+ ],
+ "paper": [
+  "00020D7VJGABF9604GW09166QN",
+  "00020DC680NM68W87ZT33ZDBXB",
   "00020P5YV8GCMVBPX6W1HZ7HNT"
  ],
  "tears": {
@@ -57,8 +62,8 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 9,
-  "pushed": 2,
+  "rounds": 7,
+  "pushed": 1,
   "refused": 0,
   "pulled": 0,
   "blobs_fetched": 0,
@@ -74,8 +79,8 @@
    "peer_cursor": 14073,
    "our_cursor": 14073,
    "last_error": null,
-   "since": "2026-09-07T22:24:19.052Z",
-   "last_contact": "2026-09-07T22:24:50.332Z"
+   "since": "2026-09-08T16:43:11.188Z",
+   "last_contact": "2026-09-08T16:43:37.134Z"
   }
  },
  "ambient": {

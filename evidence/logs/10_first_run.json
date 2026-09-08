@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3473
+   "ms": 3359
   },
   {
    "do": "wait",
-   "ms": 2106
+   "ms": 2105
   },
   {
    "do": "shot",
-   "ms": 2975
+   "ms": 2613
   },
   {
    "do": "report",
-   "ms": 710
+   "ms": 709
   }
  ],
  "shots": [
@@ -49,10 +49,11 @@
     "taken_back": []
    },
    "visible": [],
+   "paper": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-07T22:25:04.420Z",
+   "now": "2026-09-08T16:43:49.374Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -89,7 +90,7 @@
      "peer_cursor": null,
      "our_cursor": 0,
      "last_error": null,
-     "since": "2026-09-07T22:24:54.685Z",
+     "since": "2026-09-08T16:43:40.239Z",
      "last_contact": null
     }
    },
@@ -103,9 +104,9 @@
    "at": "10_first_run.png"
   }
  ],
- "cold_ms": 2101,
+ "cold_ms": 1799,
  "load": {
-  "ms": 2101,
+  "ms": 1799,
   "store": "fresh",
   "profile": null
  },

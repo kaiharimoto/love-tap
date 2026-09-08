@@ -25,4 +25,22 @@ void main() {
         reason: 'the piece is composed in a Stack that clips, so the part of the contact shadow '
             'that falls on the desk — the only part anyone sees — is cut off:\n$head');
   });
+
+  test('the baked shadow is sampled with a filter that cannot overshoot', () {
+    // A shadow render is a dark shape inside a transparent border. A mipmapped or cubic sampler
+    // rings at a boundary like that and lands a *bright* row just outside the dark one — which is
+    // the pale straight rule that lay on the wood a few tens of pixels under every sheet, full
+    // width, parallel to the paper, in nine of ten stills for five cycles. It outlived being
+    // blamed on the desk asset, on the piece's bounding box, on the mask inset, on the denoiser
+    // and on the rotation, because none of those is where it comes from. Bilinear cannot
+    // overshoot.
+    final src = File('lib/material/paper.dart').readAsStringSync();
+    final at = src.indexOf("tearAsset('\${tearId!}_shadow");
+    expect(at, greaterThan(0), reason: 'the baked shadow is not drawn where this test looks');
+    final block = src.substring(at, (at + 900).clamp(0, src.length));
+    expect(block, contains('FilterQuality.low'),
+        reason: 'the shadow is sampled with a filter that can ring, and a ring outside a dark '
+            'edge is a bright line on the desk');
+  });
+
 }

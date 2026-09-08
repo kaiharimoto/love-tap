@@ -10,25 +10,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3837,
+   "ms": 5013,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4561
+   "ms": 6265
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2107
   },
   {
    "do": "shot",
-   "ms": 8321
+   "ms": 7901
   },
   {
    "do": "report",
-   "ms": 736
+   "ms": 722
   }
  ],
  "shots": [
@@ -114,6 +114,7 @@
     }
    },
    "visible": [],
+   "paper": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
@@ -132,7 +133,7 @@
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 147,
+    "length": 139,
     "decoded": 24,
     "decoding": 0,
     "playhead": 0,
@@ -160,8 +161,8 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-07T22:19:47.901Z",
-     "last_contact": "2026-09-07T22:19:51.005Z"
+     "since": "2026-09-08T16:38:59.845Z",
+     "last_contact": "2026-09-08T16:39:07.658Z"
     }
    },
    "ambient": {
@@ -174,9 +175,9 @@
    "at": "01_pulse.png"
   }
  ],
- "cold_ms": 13209,
+ "cold_ms": 12695,
  "load": {
-  "ms": 13209,
+  "ms": 12695,
   "store": "fresh",
   "profile": "profile_seeded"
  },

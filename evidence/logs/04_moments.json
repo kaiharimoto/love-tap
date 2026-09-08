@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3754,
+   "ms": 2717,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 5110
+   "ms": 4407
   },
   {
    "do": "wait",
@@ -24,11 +24,11 @@
   },
   {
    "do": "shot",
-   "ms": 3748
+   "ms": 2931
   },
   {
    "do": "report",
-   "ms": 1745
+   "ms": 1986
   }
  ],
  "shots": [
@@ -63,6 +63,7 @@
     }
    },
    "visible": [],
+   "paper": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
@@ -103,8 +104,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-07T22:21:02.257Z",
-     "last_contact": "2026-09-07T22:21:05.431Z"
+     "since": "2026-09-08T16:40:36.110Z",
+     "last_contact": "2026-09-08T16:40:38.585Z"
     }
    },
    "ambient": {
@@ -117,9 +118,9 @@
    "at": "04_moments.png"
   }
  ],
- "cold_ms": 3126,
+ "cold_ms": 2428,
  "load": {
-  "ms": 3126,
+  "ms": 2428,
   "store": "kept",
   "profile": "profile_seeded"
  },

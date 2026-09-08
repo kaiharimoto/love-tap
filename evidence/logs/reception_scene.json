@@ -14,43 +14,43 @@
   },
   {
    "do": "goTo",
-   "ms": 4739
+   "ms": 3064
   },
   {
    "do": "step",
-   "ms": 1682
+   "ms": 1252
   },
   {
    "do": "step",
-   "ms": 1499
+   "ms": 1480
+  },
+  {
+   "do": "wait",
+   "ms": 1004
+  },
+  {
+   "do": "shot",
+   "ms": 1540
+  },
+  {
+   "do": "goTo",
+   "ms": 3653
+  },
+  {
+   "do": "step",
+   "ms": 1574
+  },
+  {
+   "do": "step",
+   "ms": 1216
   },
   {
    "do": "wait",
    "ms": 1003
   },
   {
-   "do": "shot",
-   "ms": 1913
-  },
-  {
-   "do": "goTo",
-   "ms": 5253
-  },
-  {
-   "do": "step",
-   "ms": 2152
-  },
-  {
-   "do": "step",
-   "ms": 1630
-  },
-  {
-   "do": "wait",
-   "ms": 1002
-  },
-  {
    "do": "report",
-   "ms": 715
+   "ms": 711
   },
   {
    "push": {
@@ -65,15 +65,15 @@
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2103
   },
   {
    "do": "screen",
-   "ms": 4152
+   "ms": 845
   },
   {
    "do": "closeApp",
-   "ms": 736
+   "ms": 729
   },
   {
    "do": "wait",
@@ -92,11 +92,11 @@
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2105
   },
   {
    "do": "screen",
-   "ms": 813
+   "ms": 779
   },
   {
    "push": {
@@ -107,7 +107,7 @@
   },
   {
    "do": "push",
-   "ms": 2209
+   "ms": 2210
   },
   {
    "do": "wait",
@@ -115,11 +115,11 @@
   },
   {
    "do": "screen",
-   "ms": 813
+   "ms": 812
   },
   {
    "do": "notifications",
-   "ms": 1150
+   "ms": 1143
   }
  ],
  "shots": [
@@ -217,6 +217,7 @@
     }
    },
    "visible": [],
+   "paper": [],
    "tears": {},
    "stocks": {},
    "scroll": null,
@@ -234,13 +235,7 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 147,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "sensation": null,
    "sync": {
@@ -263,7 +258,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-07T22:25:47.542Z",
+     "since": "2026-09-08T16:44:31.406Z",
      "last_contact": null
     }
    },
@@ -277,28 +272,16 @@
    "at": "crops/reception_open.png"
   }
  ],
- "cold_ms": 8799,
+ "cold_ms": 6121,
  "load": {
-  "ms": 8799,
-  "store": "fresh",
+  "ms": 6121,
+  "store": "kept",
   "profile": "profile_reception"
  },
  "app_open": false,
  "reception": {
   "permission": "granted",
-  "records": [
-   {
-    "scope": "http://127.0.0.1:8796/push/",
-    "title": "noor",
-    "body": "is holding something out",
-    "tag": "from-them",
-    "silent": false,
-    "data": {
-     "kind": "feeling",
-     "from": "noor"
-    }
-   }
-  ],
+  "records": [],
   "browser": "chromium",
   "app_open": false,
   "note": "Chromium on a Linux virtual display. WebKit is what the other fourteen scenes are shot in, and under the iPhone-Safari emulation this harness uses it has no Notification and no PushManager — which is what a Safari tab on an iPhone has, since iOS gives the push API only to a home-screen web app; and even without that emulation the permission cannot be granted there. So this is not an iPhone banner, there is no lock screen in evidence, and what an installed iOS web app does with the same call is not shown anywhere in this build."

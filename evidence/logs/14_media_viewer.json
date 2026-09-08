@@ -10,33 +10,33 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 4179,
+   "ms": 2940,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 8276
+   "ms": 4307
   },
   {
    "do": "wait",
-   "ms": 3705
+   "ms": 3704
   },
   {
    "do": "openViewer",
-   "ms": 6194
+   "ms": 5145
   },
   {
    "do": "wait",
-   "ms": 3702
+   "ms": 3704
   },
   {
    "do": "shot",
-   "ms": 5498
+   "ms": 5084
   },
   {
    "do": "report",
-   "ms": 838
+   "ms": 1459
   }
  ],
  "shots": [
@@ -58,7 +58,7 @@
     "video": {
      "initialised": true,
      "playing": true,
-     "position_ms": 1530,
+     "position_ms": 1218,
      "duration_ms": 2500
     }
    },
@@ -66,6 +66,11 @@
     "00020D7VJGABF9604GW09166QN",
     "00020DC680NM68W87ZT33ZDBXB",
     "00020K9HT8N4QBZM8W3AF4J2CT",
+    "00020P5YV8GCMVBPX6W1HZ7HNT"
+   ],
+   "paper": [
+    "00020D7VJGABF9604GW09166QN",
+    "00020DC680NM68W87ZT33ZDBXB",
     "00020P5YV8GCMVBPX6W1HZ7HNT"
    ],
    "tears": {
@@ -105,8 +110,8 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 9,
-    "pushed": 2,
+    "rounds": 7,
+    "pushed": 1,
     "refused": 0,
     "pulled": 0,
     "blobs_fetched": 0,
@@ -122,8 +127,8 @@
      "peer_cursor": 14073,
      "our_cursor": 14073,
      "last_error": null,
-     "since": "2026-09-07T22:24:19.052Z",
-     "last_contact": "2026-09-07T22:24:50.332Z"
+     "since": "2026-09-08T16:43:11.188Z",
+     "last_contact": "2026-09-08T16:43:37.134Z"
     }
    },
    "ambient": {
@@ -136,15 +141,13 @@
    "at": "14_media_viewer.png"
   }
  ],
- "cold_ms": 2993,
+ "cold_ms": 2339,
  "load": {
-  "ms": 2993,
+  "ms": 2339,
   "store": "kept",
   "profile": "profile_seeded"
  },
- "problems": [
-  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
- ],
- "ok": false,
+ "problems": [],
+ "ok": true,
  "steps_landed": true
 }

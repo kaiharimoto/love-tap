@@ -128,6 +128,13 @@ class PaperPiece extends StatelessWidget {
           child: Image.asset(
             tearAsset('${tearId!}_shadow$suffix'),
             fit: BoxFit.fill,
+            // Bilinear rather than the default. A shadow render is a dark shape inside a
+            // transparent border and a cubic sampler can ring at a boundary like that; bilinear
+            // cannot. Tried as an explanation for the pale rule on the wood and it is *not* the
+            // explanation — resampling this asset by either filter and compositing it over a flat
+            // desk produces no bright row at all, measured. Kept as the cheaper and safer sampler
+            // for an image that is only ever stretched.
+            filterQuality: FilterQuality.low,
             gaplessPlayback: true,
             errorBuilder: none,
           ),
@@ -185,8 +192,8 @@ class PaperPiece extends StatelessWidget {
           ),
         ),
         if (tearId != null)
-          // sliced the same way the mask is, so the lit fibres on the torn edge keep the length
-          // they were rendered at however tall the sheet turns out to be
+          // Sliced the same way the mask is, so the lit fibres on the torn edge keep the length
+          // they were rendered at however tall the sheet turns out to be.
           Positioned.fill(child: NineSliced(asset: tearAsset('${tearId!}_edge')))
         else
           // a cut edge: card stock has thickness, and a straight cut catches the light along its

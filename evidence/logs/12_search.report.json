@@ -34,6 +34,10 @@
   "0001M4ZQQ0H0PPVTKMMQEE268D",
   "0001M59VY0YA13H9M86HTA6XNP"
  ],
+ "paper": [
+  "0001M3F41R2APQC59QKBMZK4XF",
+  "0001M59VY0YA13H9M86HTA6XNP"
+ ],
  "tears": {
   "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_043",
   "0001M3F41R2APQC59QKBMZK4XF": "tear_026",
@@ -75,7 +79,7 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 1,
+  "rounds": 0,
   "pushed": 0,
   "refused": 0,
   "pulled": 0,
@@ -89,11 +93,11 @@
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14062,
+   "peer_cursor": null,
    "our_cursor": 14062,
    "last_error": null,
-   "since": "2026-09-07T22:21:44.977Z",
-   "last_contact": "2026-09-07T22:22:05.275Z"
+   "since": "2026-09-08T16:41:11.773Z",
+   "last_contact": "2026-09-08T16:41:14.245Z"
   }
  },
  "ambient": {
