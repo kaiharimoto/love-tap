@@ -20525,12 +20525,13 @@
    }
   },
   "assets/tears/tear_011_shadow.png": {
-   "bytes": 142906,
+   "bytes": 236371,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": false,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.2,
@@ -20544,7 +20545,32 @@
      768
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 96,
+    "thickness_m": 0.00011
+   }
+  },
+  "assets/tears/tear_011_shadow_dusk.png": {
+   "bytes": 131717,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": false,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "dusk",
+    "mask": "assets/tears/tear_011.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     768,
+     768
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 96,
     "thickness_m": 0.00011
    }
   },
@@ -20594,12 +20620,13 @@
    }
   },
   "assets/tears/tear_012_shadow.png": {
-   "bytes": 168701,
+   "bytes": 297724,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": false,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.2,
@@ -20613,7 +20640,32 @@
      768
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 96,
+    "thickness_m": 0.00011
+   }
+  },
+  "assets/tears/tear_012_shadow_dusk.png": {
+   "bytes": 180224,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": false,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "dusk",
+    "mask": "assets/tears/tear_012.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     768,
+     768
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 96,
     "thickness_m": 0.00011
    }
   },
@@ -20663,12 +20715,13 @@
    }
   },
   "assets/tears/tear_013_shadow.png": {
-   "bytes": 148099,
+   "bytes": 236755,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": false,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.2,
@@ -20682,7 +20735,32 @@
      768
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 96,
+    "thickness_m": 0.00011
+   }
+  },
+  "assets/tears/tear_013_shadow_dusk.png": {
+   "bytes": 132276,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": false,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "dusk",
+    "mask": "assets/tears/tear_013.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     768,
+     768
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 96,
     "thickness_m": 0.00011
    }
   },
@@ -20730,12 +20808,13 @@
    }
   },
   "assets/tears/tear_014_shadow.png": {
-   "bytes": 135086,
+   "bytes": 216795,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": false,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.2,
@@ -20749,7 +20828,32 @@
      768
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 96,
+    "thickness_m": 0.00011
+   }
+  },
+  "assets/tears/tear_014_shadow_dusk.png": {
+   "bytes": 119048,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "denoised": false,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "dusk",
+    "mask": "assets/tears/tear_014.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     768,
+     768
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 96,
     "thickness_m": 0.00011
    }
   },

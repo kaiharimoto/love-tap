@@ -88,8 +88,23 @@ class HttpTransport implements Transport {
   Pairing? get pairing => _pairing;
 
   void _set(TransportStatus s) {
+    // Everything a listener could act on, and not the clock. The status is set on every
+    // successful request, and a long poll makes one every twenty seconds, so every twenty seconds
+    // the whole app was told the link had changed when the only thing that had was the time of
+    // the last contact — which nothing on the glass draws. The scope's listeners include every
+    // region, so the thread was rebuilt, and a completeness pass found the cost of it: 26 build
+    // spikes of 916 to 1462 ms in the scroll clip, 87 per cent of all build time, spaced exactly
+    // 20.4 seconds apart on the wall clock. The status itself is still kept up to the second,
+    // because the reports read it directly.
+    final was = _status;
     _status = s;
-    if (!_statusCtl.isClosed) _statusCtl.add(s);
+    final worthSaying = was.state != s.state ||
+        was.address != s.address ||
+        was.peerCursor != s.peerCursor ||
+        was.ourCursor != s.ourCursor ||
+        was.lastError != s.lastError ||
+        was.since != s.since;
+    if (worthSaying && !_statusCtl.isClosed) _statusCtl.add(s);
   }
 
   // ---- lifecycle --------------------------------------------------------------------------

@@ -301,6 +301,36 @@ void main() {
     await r.closeHost();
   });
 
+  test('a poll that changes nothing does not tell the app the link has changed', () async {
+    // "26 build spikes of 916-1462 ms, 87 per cent of all build time, spaced exactly 20.4 s apart
+    // on the wall clock" — which is the long poll. The status was set on every successful request
+    // and the only thing that had changed was the time of the last contact, which nothing on the
+    // glass draws; the scope listens to that stream and every region under it was rebuilt.
+    final r = await Rig.up();
+    await r.pair();
+    final said = <TransportStatus>[];
+    final sub = r.clientT.status.listen(said.add);
+    // two to settle: the first poll learns the peer's cursor, which is a real change and is said
+    await r.clientT.pull(0, wait: Duration.zero);
+    await r.clientT.pull(r.client.cursor, wait: Duration.zero);
+    said.clear();
+    for (var i = 0; i < 6; i++) {
+      await r.clientT.pull(r.client.cursor, wait: Duration.zero);
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 40));
+    expect(said, isEmpty,
+        reason: 'six polls that carried nothing told the app the link had changed '
+            '${said.length} times');
+    // and one that does change something still says so
+    await r.host.append('message', {'text': 'still here'}, hostAssign: true);
+    await r.clientT.pull(r.client.cursor, wait: Duration.zero);
+    await Future<void>.delayed(const Duration(milliseconds: 40));
+    expect(said, isNotEmpty, reason: 'the link went quiet about a cursor that moved');
+    await sub.cancel();
+    await r.closeClient();
+    await r.closeHost();
+  });
+
   test('the local transport names itself in every report', () async {
     final r = await Rig.up();
     await r.pair();
