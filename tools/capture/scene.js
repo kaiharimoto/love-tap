@@ -111,6 +111,13 @@ function ensure(p) {
     }
   }
   const log = { scene: scene.name, browser: browserName, viewport: vp, url, steps: [], shots: [], reports: [] };
+  // What the app said about itself at the instant each shutter opened, kept by the name of the
+  // picture. A report is written after the picture is on disk — encoding a full-page PNG takes
+  // seconds — and in those seconds the phone goes on being a phone: 13's record said the partner
+  // was not writing over a picture in which she is, because the six-second lapse on a typing frame
+  // ran out between the two. A record that says `at: 13_messenger_states.png` should be an account
+  // of that picture, so it is taken with it.
+  const saidAtTheShutter = new Map();
   page.on('pageerror', (e) => {
     // the message, the name and the top of the stack: an error whose String() is empty (a Dart
     // throw of a bare value) used to be recorded as 'pageerror: ' and nothing else
@@ -381,7 +388,13 @@ function ensure(p) {
         const out = abs(step.out);
         ensure(out);
         await settle(step.settle);
+        // read first, photograph second: nothing between them steps the clock or touches the app
+        const said = await page.evaluate(() => window.__deskReport && window.__deskReport()).catch(() => null);
         await page.screenshot({ path: out, fullPage: false, clip: step.clip });
+        if (said) {
+          saidAtTheShutter.set(path.relative(ROOT, out), said);
+          saidAtTheShutter.set(path.basename(out), said);
+        }
         log.shots.push({ out: path.relative(ROOT, out), clip: step.clip || null });
         break;
       }
@@ -662,9 +675,12 @@ function ensure(p) {
         break;
       }
       case 'report': {
-        const raw = await page.evaluate(() => window.__deskReport && window.__deskReport());
+        const named = step.at ? saidAtTheShutter.get(step.at) : null;
+        const raw = named || await page.evaluate(() => window.__deskReport && window.__deskReport());
         const report = raw ? JSON.parse(raw) : { missing: 'no report handle' };
         report.at = step.at || step.out || 'report';
+        // a record of a picture is read at the picture; a record of the run is read now
+        report.read_at = named ? 'the shutter' : 'the end of the scene';
         log.reports.push(report);
         if (step.out) {
           const out = abs(step.out);
