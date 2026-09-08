@@ -10,27 +10,43 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2305
   },
   {
    "do": "pair",
-   "ms": 1365
+   "ms": 1345
   },
   {
    "do": "wait",
-   "ms": 3704
+   "ms": 3705
   },
   {
    "do": "goTo",
-   "ms": 3367
+   "ms": 3076
   },
   {
-   "do": "frames",
-   "ms": 1136940
+   "do": "far",
+   "ms": 516
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 7012
   },
   {
    "do": "wait",
-   "ms": 3002
+   "ms": 1202
+  },
+  {
+   "do": "step",
+   "ms": 3752
+  },
+  {
+   "do": "frames",
+   "ms": 32860
+  },
+  {
+   "do": "wait",
+   "ms": 3004
   },
   {
    "do": "far",
@@ -38,103 +54,119 @@
   },
   {
    "do": "awaitArrival",
-   "ms": 1257
-  },
-  {
-   "do": "step",
-   "ms": 4350
-  },
-  {
-   "do": "frames",
-   "ms": 284705
-  },
-  {
-   "do": "goTo",
-   "ms": 4603
-  },
-  {
-   "do": "step",
-   "ms": 2312
-  },
-  {
-   "do": "far",
-   "ms": 504
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 923
-  },
-  {
-   "do": "frames",
-   "ms": 43674
-  },
-  {
-   "do": "far",
-   "ms": 505
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1090
-  },
-  {
-   "do": "frames",
-   "ms": 168783
-  },
-  {
-   "do": "far",
-   "ms": 654
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 2028
-  },
-  {
-   "do": "frames",
-   "ms": 310236
-  },
-  {
-   "do": "goTo",
-   "ms": 6863
-  },
-  {
-   "do": "step",
-   "ms": 1782
+   "ms": 1235
   },
   {
    "do": "wait",
-   "ms": 2101
+   "ms": 1203
   },
   {
-   "do": "far",
-   "ms": 507
-  },
-  {
-   "do": "far",
-   "ms": 740
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1558
+   "do": "step",
+   "ms": 3192
   },
   {
    "do": "frames",
-   "ms": 220648
+   "ms": 360194
+  },
+  {
+   "do": "goTo",
+   "ms": 5969
+  },
+  {
+   "do": "step",
+   "ms": 1650
+  },
+  {
+   "do": "far",
+   "ms": 1107
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 2416
+  },
+  {
+   "do": "wait",
+   "ms": 1202
+  },
+  {
+   "do": "frames",
+   "ms": 50264
+  },
+  {
+   "do": "far",
+   "ms": 532
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1020
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 163776
+  },
+  {
+   "do": "far",
+   "ms": 1651
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1337
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 300641
+  },
+  {
+   "do": "goTo",
+   "ms": 6423
+  },
+  {
+   "do": "step",
+   "ms": 2143
+  },
+  {
+   "do": "wait",
+   "ms": 2103
+  },
+  {
+   "do": "far",
+   "ms": 780
+  },
+  {
+   "do": "far",
+   "ms": 1145
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 2068
+  },
+  {
+   "do": "wait",
+   "ms": 1204
+  },
+  {
+   "do": "frames",
+   "ms": 210121
   },
   {
    "do": "report",
-   "ms": 525
+   "ms": 526
   }
  ],
  "shots": [
   {
-   "frames": 64,
+   "frames": 16,
    "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
-   "drive": {
-    "kind": "far",
-    "line": "state mood restless",
-    "at": 12
-   }
+   "drive": null
   },
   {
    "frames": 149,
@@ -210,9 +242,9 @@
    "stocks": {},
    "scroll": null,
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 10064,
+   "driven_ms": 9312,
    "seed": 20260903,
-   "events": 14111,
+   "events": 14114,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -235,7 +267,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-08T18:14:36.165Z",
+    "started_at": "2026-09-08T20:05:52.993Z",
     "pattern": [
      {
       "ms": 150,
@@ -262,25 +294,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 743,
-    "pushed": 8,
+    "rounds": 399,
+    "pushed": 10,
     "refused": 0,
     "pulled": 8,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14111,
+    "cursor": 14114,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14111,
-     "our_cursor": 14111,
+     "peer_cursor": 14114,
+     "our_cursor": 14114,
      "last_error": null,
-     "since": "2026-09-08T17:41:25.981Z",
-     "last_contact": "2026-09-08T18:18:16.604Z"
+     "since": "2026-09-08T19:49:39.819Z",
+     "last_contact": "2026-09-08T20:09:23.148Z"
     }
    },
    "ambient": {
@@ -294,73 +326,84 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2484,
+ "cold_ms": 2166,
  "load": {
-  "ms": 2484,
+  "ms": 2166,
   "store": "kept",
   "profile": "profile_seeded"
  },
  "far": [
   {
+   "line": "state mood restless",
+   "at_frame": 0
+  },
+  {
    "line": "feeling hold 0.92",
-   "at_frame": 64
+   "at_frame": 16
   },
   {
    "line": "message it is raining here too",
-   "at_frame": 213
+   "at_frame": 165
   },
   {
    "line": "feeling squeeze 0.6",
-   "at_frame": 232
+   "at_frame": 184
   },
   {
    "line": "feeling here 0.8",
-   "at_frame": 303
+   "at_frame": 255
   },
   {
    "line": "state place out",
-   "at_frame": 459
+   "at_frame": 411
   },
   {
    "line": "feeling soup 0.7",
-   "at_frame": 459
+   "at_frame": 411
   }
  ],
  "arrivals": [
   {
+   "line": "state mood restless",
+   "before": 8082,
+   "after": 8083,
+   "at_frame": 0,
+   "waited_ms": 6510
+  },
+  {
    "line": "feeling hold 0.92",
    "before": 8083,
    "after": 8084,
-   "at_frame": 64,
-   "waited_ms": 756
+   "at_frame": 16,
+   "waited_ms": 733
   },
   {
    "line": "message it is raining here too",
    "before": 8084,
    "after": 8085,
-   "at_frame": 213,
-   "waited_ms": 421
+   "at_frame": 165,
+   "waited_ms": 1916
   },
   {
    "line": "feeling squeeze 0.6",
    "before": 8085,
    "after": 8086,
-   "at_frame": 232,
-   "waited_ms": 590
+   "at_frame": 184,
+   "waited_ms": 519
   },
   {
    "line": "feeling here 0.8",
    "before": 8086,
    "after": 8087,
-   "at_frame": 303,
-   "waited_ms": 1527
+   "at_frame": 255,
+   "waited_ms": 837
   },
   {
    "line": "feeling soup 0.7",
    "before": 8088,
    "after": 8089,
-   "at_frame": 459,
-   "waited_ms": 1057
+   "at_frame": 411,
+   "waited_ms": 1567
   }
  ],
  "problems": [],

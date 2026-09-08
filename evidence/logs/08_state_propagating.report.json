@@ -36,9 +36,9 @@
  "stocks": {},
  "scroll": null,
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 10064,
+ "driven_ms": 9312,
  "seed": 20260903,
- "events": 14111,
+ "events": 14114,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -61,7 +61,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-08T18:14:36.165Z",
+  "started_at": "2026-09-08T20:05:52.993Z",
   "pattern": [
    {
     "ms": 150,
@@ -88,25 +88,25 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 743,
-  "pushed": 8,
+  "rounds": 399,
+  "pushed": 10,
   "refused": 0,
   "pulled": 8,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14111,
+  "cursor": 14114,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14111,
-   "our_cursor": 14111,
+   "peer_cursor": 14114,
+   "our_cursor": 14114,
    "last_error": null,
-   "since": "2026-09-08T17:41:25.981Z",
-   "last_contact": "2026-09-08T18:18:16.604Z"
+   "since": "2026-09-08T19:49:39.819Z",
+   "last_contact": "2026-09-08T20:09:23.148Z"
   }
  },
  "ambient": {
