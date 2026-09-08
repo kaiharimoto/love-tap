@@ -24,15 +24,22 @@
    "arg": 0
   },
   {
+   "do": "far",
+   "arg": "state mood restless"
+  },
+  {
+   "do": "awaitArrival",
+   "timeout": 90000
+  },
+  {
+   "do": "step",
+   "ms": 16
+  },
+  {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
-   "count": 64,
-   "ms": 16,
-   "drive": {
-    "kind": "far",
-    "line": "state mood restless",
-    "at": 12
-   }
+   "count": 16,
+   "ms": 16
   },
   {
    "do": "wait",

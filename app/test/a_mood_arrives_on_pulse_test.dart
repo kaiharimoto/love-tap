@@ -69,6 +69,33 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('a mood that arrives lands over the sheet it replaces', (tester) async {
+    // 08_state_propagating is the clip named for a state reaching the other phone, and the moment
+    // it is named for used to be one frame: the same sheet rebuilt with new words on new stock.
+    // Sixty-two frames of that clip were identical to the frame before them because after the swap
+    // there was nothing left moving to film. A sheet lands the way paper lands, over the one it
+    // replaces, and both are on the desk while it does.
+    await scope.spine.applyFromHost([_theirs('state_declared', {'signal': 'mood', 'value': 'bright'}, 1)]);
+    await draw(tester, const PulseRegion());
+    final theirs = find.byKey(const ValueKey('pulse.their.sheet'));
+    Finder onTheirSheet(String word) => find.descendant(of: theirs, matching: find.text(word));
+    expect(onTheirSheet('bright'), findsWidgets);
+
+    await scope.spine.applyFromHost([_theirs('state_declared', {'signal': 'mood', 'value': 'restless'}, 2)]);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 120));
+    expect(onTheirSheet('restless'), findsWidgets, reason: 'the new sheet is not there');
+    expect(onTheirSheet('bright'), findsWidgets,
+        reason: 'the sheet it replaced went between two frames, so nothing of the change is on the '
+            'glass long enough to see or to film');
+
+    await tester.pump(const Duration(milliseconds: 600));
+    await tester.pump();
+    expect(onTheirSheet('restless'), findsWidgets);
+    expect(onTheirSheet('bright'), findsNothing,
+        reason: 'the old sheet is still in the tree after it landed');
+  });
+
   testWidgets('the strip takes the new mood', (tester) async {
     await draw(tester, PartnerStrip(partner: scope.partner, state: scope.partnerState, nowMs: 0));
     await scope.spine.applyFromHost([_theirs('state_declared', {'signal': 'mood', 'value': 'restless'}, 1)]);

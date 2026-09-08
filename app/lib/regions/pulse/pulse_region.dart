@@ -55,7 +55,7 @@ class PulseRegion extends StatelessWidget {
       key: const ValueKey('pulse.theirs'),
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 96),
       children: [
-        _TheirSheet(partner: scope.partner, state: them, lib: lib),
+        _TheirSheet(key: const ValueKey('pulse.their.sheet'), partner: scope.partner, state: them, lib: lib),
         const SizedBox(height: 14),
         _Traffic(events: today, registry: registry, me: scope.me),
         const SizedBox(height: 14),
@@ -67,14 +67,80 @@ class PulseRegion extends StatelessWidget {
 }
 
 /// Their state, whole, on one sheet.
-class _TheirSheet extends StatelessWidget {
-  const _TheirSheet({required this.partner, required this.state, required this.lib});
+/// Their whole state, on the paper their mood picks — and when that state changes, a new sheet
+/// going down on the desk over the old one.
+///
+/// It used to swap: the same widget rebuilt with new words on new stock, in one frame. That is the
+/// wrong thing twice over. A mood changing is the one moment this screen exists for, and it went
+/// past in a sixtieth of a second with nothing to see; and 08_state_propagating — the clip named
+/// for a state reaching the other phone — had sixty-two identical frames in it, because after the
+/// swap there was nothing moving to film. A sheet lands the way every other piece of paper in the
+/// app lands: from a little above, over the one it replaces.
+class _TheirSheet extends StatefulWidget {
+  const _TheirSheet({super.key, required this.partner, required this.state, required this.lib});
   final Person partner;
   final PersonState state;
   final MaterialLibrary? lib;
 
   @override
+  State<_TheirSheet> createState() => _TheirSheetState();
+}
+
+class _TheirSheetState extends State<_TheirSheet> {
+  /// The state that was on the desk before this one, kept only until the new sheet has landed.
+  PersonState? _under;
+
+  /// What makes this a different sheet from the last one: what it says, not when it was said.
+  static String _saying(PersonState s) => [
+        s.statusLine, s.mood, s.availability, s.place, s.need, s.energy,
+        s.battery, s.charging, s.lastActiveMinutes, s.localHour, s.ringer, s.moving,
+        s.network, s.atHome,
+      ].join('|');
+
+  @override
+  void didUpdateWidget(_TheirSheet old) {
+    super.didUpdateWidget(old);
+    if (_saying(old.state) != _saying(widget.state)) {
+      setState(() => _under = old.state);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final fresh = _sheet(context, widget.state);
+    final under = _under;
+    if (under == null) return fresh;
+    return Settling(
+      key: ValueKey('their.${_saying(widget.state)}'),
+      duration: Motion.land,
+      curve: Curves.linear,
+      builder: (_, raw, _) {
+        // and once it is down, the one underneath is off the desk: an invisible sheet left in the
+        // tree is a second copy of every word on this screen for anything that reads it
+        if (raw >= 1.0 && _under != null) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted && _under != null) setState(() => _under = null);
+          });
+        }
+        final t = Motion.drop.transform(raw);
+        return Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            // the sheet it lands on, still there under it until it is covered
+            Opacity(opacity: 1 - t * t, child: _sheet(context, under)),
+            Transform.translate(
+              offset: Offset(0, -18 * (1 - t)),
+              child: Opacity(opacity: (t * 2).clamp(0.0, 1.0), child: fresh),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _sheet(BuildContext context, PersonState state) {
+    final partner = widget.partner;
+    final lib = widget.lib;
     final stock = stockForMood(state.mood);
     final variants = lib?.stockVariants(stock) ?? const <String>[];
     final id = variants.isEmpty ? '' : variants[(state.mood?.length ?? 1) % variants.length];
@@ -85,7 +151,7 @@ class _TheirSheet extends StatelessWidget {
       tearId: tear,
       liftMm: 1.1,
       tilt: -0.008,
-      safe: tear == null || lib == null ? const [0.07, 0.08, 0.07, 0.08] : lib!.safeOf(tear),
+      safe: tear == null || lib == null ? const [0.07, 0.08, 0.07, 0.08] : lib.safeOf(tear),
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
