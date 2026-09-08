@@ -470,10 +470,15 @@ function ensure(p) {
           // after a short wait, up to three times; a frame that is still the same after that is
           // a frame in which nothing moved, and frames.py says so.
           let png = await page.screenshot({ fullPage: false, clip: step.clip });
-          // the headless compositor runs at about four frames a second, so the re-grabs have
-          // to span a quarter of a second between them to be sure of catching the next composite
-          for (let tries = 0; tries < 4 && lastPng && png.equals(lastPng); tries++) {
-            await page.waitForTimeout(90);
+          // The headless compositor runs at about four frames a second and slower when the
+          // machine is busy: four tries ninety milliseconds apart is a third of a second, which is
+          // less than one of its frames. Two clips of the same scroll, shot an hour apart on the
+          // same build, came back with three and then five frames identical to the one before —
+          // and at different frames each time, which is what a race looks like rather than a
+          // picture that did not change. Ten tries a fifth of a second apart is two seconds, and a
+          // frame still identical after that is a frame in which nothing moved; frames.py says so.
+          for (let tries = 0; tries < 10 && lastPng && png.equals(lastPng); tries++) {
+            await page.waitForTimeout(200);
             png = await page.screenshot({ fullPage: false, clip: step.clip });
           }
           // A grab can land halfway through a composite: the frame comes back part drawn, much
