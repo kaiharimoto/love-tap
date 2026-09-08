@@ -94,6 +94,24 @@ class CaptureHooks {
     return 'ok';
   }
 
+  /// Every frame of every throw: what the simulation asked for, what the thread actually moved,
+  /// and where it was sitting when it did. A clip with a frame identical to the one before it is
+  /// either a race in the grab or a thread that stood still, and this is how they are told apart.
+  static final List<Map<String, Object?>> _flingFrames = [];
+
+  Map<String, dynamic> flingLog() {
+    final f = List<Map<String, Object?>>.from(_flingFrames);
+    final still = f.where((m) => (m['moved'] as double).abs() < 0.34).toList();
+    return {
+      'unit': 'logical pixels; a frame that moved less than a third of one is under a device '
+          'pixel at the clip\'s scale and can come back as the frame before it',
+      'frames': f,
+      'throws': f.where((m) => m['throw'] == true).length,
+      'frames_under_a_device_pixel': still.length,
+      'at': still.map((m) => m['tick']).toList(),
+    };
+  }
+
   /// Throw the thread the way a thumb does: a fling at [velocity] logical px/s that runs on the
   /// driven clock through the thread's own scroller, decelerating on Flutter's clamping physics.
   ///
@@ -107,12 +125,24 @@ class CaptureHooks {
     final sim = ClampingScrollSimulation(position: 0, velocity: velocity);
     final t0 = DrivenClock.now;
     var moved = 0.0;
+    var first = true;
     _flingSub = DrivenClock.ticks.listen((now) {
       final t = (now - t0).inMicroseconds / 1e6;
       final x = sim.x(t);
       final dx = x - moved;
       moved = x;
-      if (dx.abs() > 0.01) CaptureBus.scrollBy?.call(-dx);
+      final at = CaptureBus.scrollWhere?.call() ?? const <double>[];
+      final went = dx.abs() > 0.001 ? (CaptureBus.scrollBy?.call(-dx) ?? 0.0) : 0.0;
+      _flingFrames.add({
+        'tick': DrivenClock.steps,
+        'throw': first,
+        't_ms': (t * 1000).round(),
+        'asked': double.parse((-dx).toStringAsFixed(3)),
+        'moved': double.parse(went.toStringAsFixed(3)),
+        'from': at.isEmpty ? null : double.parse(at[0].toStringAsFixed(1)),
+        'end': at.isEmpty ? null : double.parse(at[2].toStringAsFixed(1)),
+      });
+      first = false;
       if (sim.isDone(t)) {
         _flingSub?.cancel();
         _flingSub = null;
@@ -348,6 +378,11 @@ class CaptureHooks {
       // region for a whole cycle, and the logs for four of them described notes not in the frame
       'view': _viewOf(region),
       'visible': visible,
+      // which of those rows are a piece of paper with a torn edge, as against a pencil line in
+      // the margin or a thrown object. tools/check/tears.py counts the hero's notes off this:
+      // the tear ids are recomputed for every visible row, and counting a margin line among them
+      // would let the frame meet a standard about torn edges without carrying one.
+      'paper': chat['paper'] ?? const <String>[],
       'tears': tears,
       'stocks': stocks,
       'scroll': chat['scroll'],
@@ -475,6 +510,10 @@ class CaptureHooks {
 class DrivenClock {
   static bool get enabled => Flags.capture;
   static Duration _now = Duration.zero;
+
+  /// How many steps have been taken. A clip grabs one frame per step, so this is the frame the
+  /// fling's log is talking about.
+  static int steps = 0;
   static final StreamController<Duration> _ticks = StreamController.broadcast();
 
   static Duration get now => _now;
@@ -483,6 +522,7 @@ class DrivenClock {
   /// Advance by [ms] and let the framework produce exactly one frame.
   static Future<void> step(int ms) async {
     _now += Duration(milliseconds: ms);
+    steps += 1;
     if (_ticks.hasListener) _ticks.add(_now);
     // Two frames, not one. A widget that finishes its work in a post-frame callback — the
     // positioned list settles a jump that way — is drawn a frame late, and with one frame a step

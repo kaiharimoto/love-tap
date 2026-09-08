@@ -1,5 +1,5 @@
 {
- "commit": "3db7b91",
+ "commit": "c7566ae",
  "baseline": {
   "dir": "evidence/.previous",
   "captured_at": "2026-09-08T00:27:34.888907+00:00"
@@ -18,11 +18,11 @@
   {
    "artifact": "02_chat.png",
    "label": "changed",
-   "ssim": 0.6907,
+   "ssim": 0.6814,
    "judgement": null,
-   "sha": "f49a4013a1d81009",
+   "sha": "81eb6b9c2f2b67bf",
    "previous_sha": "842a7650cc4368c4",
-   "label_basis": "ssim 0.6907 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.6814 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "03_us.png",
@@ -91,11 +91,11 @@
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "changed",
-   "ssim": 0.5902,
+   "ssim": 0.5903,
    "judgement": null,
-   "sha": "0cd4102738bf4215",
+   "sha": "ac17a65afccf257d",
    "previous_sha": "bfd4f5d5e8663908",
-   "label_basis": "ssim 0.5902 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.5903 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "12_search.png",

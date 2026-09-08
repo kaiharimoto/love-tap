@@ -46,9 +46,18 @@ class CaptureBus {
   /// bare wood once, and nothing in the report said whether the sheet under it had drawn.
   static bool setupShowing = false;
 
-  /// Chat: move the thread by this many logical pixels, once, right now. One of these per frame
-  /// is a scroll; a pointer drag down the middle of the desk is a long press on a note.
-  static void Function(double dy)? scrollBy;
+  /// Chat: move the thread by this many logical pixels, once, right now, and answer with the
+  /// pixels it actually moved. One of these per frame is a scroll; a pointer drag down the middle
+  /// of the desk is a long press on a note.
+  ///
+  /// It answers because a fling has to be able to say whether the thread moved on the frame it
+  /// asked it to. A clip with a frame identical to the one before it is either a race in the
+  /// grab or a thread that stood still, and those are different faults with different fixes.
+  static double Function(double dy)? scrollBy;
+
+  /// Chat: where the thread is sitting — pixels, and the two ends it can reach. For the fling's
+  /// log, so a frame that did not move can be told apart from a list that has run out of room.
+  static List<double> Function()? scrollWhere;
 
   /// Chat: put one of everything on the desk — a message on its way, one waiting for the link,
   /// one the host refused — beside the sent, read, edited, deleted, replied and reacted-to rows
@@ -105,6 +114,7 @@ class CaptureBus {
     viewerReport = null;
     momentsReport = null;
     scrollBy = null;
+    scrollWhere = null;
     stageStates = null;
     unfoldAll = null;
     showWords = null;

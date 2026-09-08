@@ -20,8 +20,8 @@ import '../../media/local_uri.dart';
 import '../../media/read_bytes.dart';
 import '../../scope.dart';
 import '../../transport/local/local_transport.dart';
-import '../../spine/projections/thread.dart';
 import '../../spine/types.dart';
+import '../../spine/projections/thread.dart';
 import '../../voice/strings.dart';
 import 'note.dart';
 import '../../thread/renderers.dart';
@@ -47,6 +47,9 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   /// A real pixel offset into the list, for the fling. See [CaptureBus.scrollBy].
   final _offset = ScrollOffsetController();
 
+  /// The list itself, so the fling can reach the scroller underneath it.
+  final _listKey = GlobalKey();
+
   /// The ids the thread held when this region was first drawn. A row that is not among them came
   /// across the wire while the region was open, and a folded one lands rather than being found.
   Set<String>? _openedWith;
@@ -58,8 +61,6 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   bool _typingSent = false;
   ThreadItem? _replyTo;
 
-  /// The scroller runs one animation at a time, so the fling's nudges go in a queue.
-  Future<void> _scrollChain = Future<void>.value();
   ThreadItem? _editing;
   String? _highlightId;
 
@@ -70,6 +71,32 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   int _lastCount = 0;
   bool _draftLoaded = false;
   bool _attaching = false;
+
+  /// The live scroll position of the thread's list.
+  ///
+  /// The positioned list keeps its scroller to itself — it takes an [ItemScrollController] and a
+  /// [ScrollOffsetController], neither of which can set a pixel offset without an animation, and
+  /// it hands out no [ScrollController]. The position is in the tree under it all the same: the
+  /// first scrollable below the list's own element is the one it is drawing (the second exists
+  /// only while it is crossfading between two indices, and is behind the first). Reaching it is
+  /// what makes a driven fling a jump per frame rather than three hundred one-millisecond
+  /// animations racing a compositor.
+  ScrollPosition? _livePosition() {
+    final ctx = _listKey.currentContext;
+    if (ctx == null) return null;
+    ScrollPosition? found;
+    void look(Element e) {
+      if (found != null) return;
+      if (e is StatefulElement && e.state is ScrollableState) {
+        final st = e.state as ScrollableState;
+        if (st.position.hasPixels) found = st.position;
+        return;
+      }
+      e.visitChildren(look);
+    }
+    ctx.visitChildElements(look);
+    return found;
+  }
 
   @override
   void initState() {
@@ -118,26 +145,40 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     };
     CaptureBus.scrollBy = (dy) {
       // One nudge of the thread's own scroller, which is what a frame of the scroll clip is:
-      // a real scroll, by pixels, on the list's own controller. It used to re-enter the list at
-      // a new index and alignment every step, and jumping to an index is not a scroll: the
+      // a real scroll, by pixels, on the list's own position. It used to re-enter the list at a
+      // new index and alignment every step, and jumping to an index is not a scroll: the
       // positioned list tears down its active sliver and builds another one at the new index, so
       // every frame of the fling was a rebuild. The frame timings say what that cost — build p50
       // 20 ms, p95 1426, max 1785, against a raster that never leaves 166-212 — and the spikes
       // recur every third frame, which is the list swapping between its two children.
-      // A duration, not zero: DrivenScrollActivity asserts duration > Duration.zero, and the
-      // throw happens inside an async body where nothing sees it — the list simply did not move.
-      // One millisecond of the driven clock is the shortest honest step.
-      // Queued, never dropped and never deferred to a later frame. The offset controller runs one
-      // animation at a time and a call that arrives while one is in flight goes nowhere; the
-      // fling asks for a nudge every frame, and the frames that came back identical to the one
-      // before were always a few frames after a throw — which is exactly where the old fling's
-      // last nudge and the new one's first overlap. Holding the pixels back for the next frame
-      // made it worse (three, then five, then six of three hundred), because the frame that gave
-      // them up did not move at all. Chained instead: each nudge starts when the one before it
-      // has finished, and both run inside the two frames the driven clock's step pumps.
-      if (dy == 0 || !_scroll.isAttached) return;
-      _scrollChain = _scrollChain.then((_) =>
-          _offset.animateScroll(offset: dy, duration: const Duration(milliseconds: 1)));
+      //
+      // Then it was an animation a millisecond long, and that is why frames of the scroll clip
+      // came back identical to the one before them. An animation moves on its ticker, and the
+      // ticker is stepped by the browser's frame timestamp, not by the driven clock: on a
+      // headless compositor running at about four frames a second, two frames the clock pumped
+      // in one step can carry the same timestamp, the controller's value stays at zero, and the
+      // thread does not move on a frame it was told to move on. Queueing the nudges made it
+      // worse (three, five, six, then thirteen frames of three hundred), because each one then
+      // waited for a ticker that had not run.
+      //
+      // The pixels are set, not animated. A jump is exactly what a frame of a fling is: the
+      // simulation says how far the thread travelled since the last frame, and this puts it
+      // there, inside the tick, before the frame is laid out. Nothing in the path depends on
+      // wall-clock time, so a frame that did not move is now a thread that had nowhere to go —
+      // and it says so, in the pixels it answers with.
+      if (dy == 0) return 0.0;
+      final p = _livePosition();
+      if (p == null) return 0.0;
+      final to = (p.pixels + dy).clamp(p.minScrollExtent, p.maxScrollExtent);
+      final moved = to - p.pixels;
+      if (moved == 0) return 0.0;
+      p.jumpTo(to);
+      return moved;
+    };
+    CaptureBus.scrollWhere = () {
+      final p = _livePosition();
+      if (p == null) return const <double>[];
+      return [p.pixels, p.minScrollExtent, p.maxScrollExtent];
     };
     CaptureBus.stageStates = () async {
       // Real messages down the real path. The thread is paired with the far phone for this
@@ -262,6 +303,27 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
             if (p.index < items.length && items[p.index].deleted) items[p.index].id
         ],
         'scroll': ps.isEmpty ? null : {'first': ps.first.index, 'last': ps.last.index, 'of': items.length},
+        // how many of those rows are a piece of paper with most of itself on the glass, as against
+        // a pencil line in the margin or a row peeking in at the edge
+        'paper': [
+          for (final p in ps)
+            if (p.index < items.length && _isPaper(items[p.index].type)) items[p.index].id,
+        ],
+        'paper_whole_on_the_glass': _paperOnTheGlass(items).$2,
+        // and what each of them cost, in logical pixels of the thread's own viewport, so a claim
+        // about how much fits in a frame is answered by the frame
+        'rows_cost': [
+          for (final p in ps)
+            if (p.index < items.length)
+              {
+                'row': p.index,
+                'type': items[p.index].type,
+                'tall': double.parse(
+                    ((p.itemTrailingEdge - p.itemLeadingEdge) * _viewportTall).toStringAsFixed(1)),
+                'top': double.parse((p.itemLeadingEdge * _viewportTall).toStringAsFixed(1)),
+              },
+        ],
+        'viewport_tall': double.parse(_viewportTall.toStringAsFixed(1)),
         'composer': _text.text,
         'attaching': _attaching,
         'replying_to': _replyTo?.id,
@@ -296,54 +358,63 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       return;
     } else if (anchor.startsWith('types:')) {
       final wanted = anchor.substring(6).split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
-      final window = _tightestWindow(items, wanted);
-      if (window == null) return;
-      _lastAnchor = 'types:${wanted.join(',')} at rows ${window.$1} to ${window.$2} of ${items.length}';
-      // A third of the way down, measured from the stretch's *first* row: enough thread above it
-      // to make the eight notes the chat hero's own standard asks for, with the rest continuing
-      // below the fold, which is what a thread does. Anchoring the last row instead put the tall
-      // one in the middle of the frame and left room for four.
+      final windows = _tightestWindows(items, wanted);
+      if (windows.isEmpty) return;
+      // Every equally tight stretch, tried and *measured*, latest first, until one of them holds
+      // the hero's own standard.
       //
-      // The hero's own standard is eight notes on eight different torn edges — it is the frame the
-      // material row is judged on at three hundred per cent — so the stretch it anchors on has to
-      // be short. A photograph is seven hundred pixels of it: asking for one left six notes on the
-      // glass and the artifact was recorded missing on its own standard.
-      // A whole video is a hundred and sixty points of screen and will not sit beside eight notes.
-      // The hero used to ask for one anyway and got the top of it: three critics measured that
-      // sliver and reported a video rendering as an empty strip, which was the framing rather than
-      // the app. A video's own artifacts are the media viewer, where one is open and playing, and
-      // the pile, where one is a print with the mark you press on it. What the hero asks for
-      // instead is what a day of theirs looks like: a photograph with a reaction stuck to it, a
-      // voice note, and the writing on both sides of it.
-      _scroll.jumpTo(index: window.$1, alignment: 0.34);
-      await Future<void>.delayed(const Duration(milliseconds: 40));
-      // Then look at where the last row of the stretch actually landed, and take it again if it
-      // is under the composer. The first take framed the stretch's *first* row and hoped: on the
-      // day the last row was a photograph seven hundred pixels tall, the shot came out with its
-      // caption cut in half by the composer and the reaction stuck to its bottom corner — the one
-      // thing the anchor had been asked for — entirely below the fold. What a row costs cannot be
-      // known before it is laid out, so this measures rather than guesses.
-      final last = _positions.itemPositions.value
-          .where((p) => p.index == window.$2)
-          .firstOrNull;
-      if (last == null || last.itemTrailingEdge > _theComposersEdge) {
-        _scroll.jumpTo(index: window.$2, alignment: 0.30);
-        await Future<void>.delayed(const Duration(milliseconds: 40));
-        // ...and if that pushed the row the stretch starts at off the top, it is the wrong shot:
-        // a frame holding the last of the kinds and not the first is not the stretch. A whole
-        // video is a hundred and sixty points and will not sit beside a voice note and eight
-        // notes, so for that pair there is no framing that holds both whole and the first take
-        // is the honest one. The record says which of the two this was.
-        final startsHere =
-            _positions.itemPositions.value.any((p) => p.index == window.$1);
-        if (startsHere) {
-          _lastAnchor = '$_lastAnchor, framed on its last row';
-        } else {
-          _scroll.jumpTo(index: window.$1, alignment: 0.34);
-          _lastAnchor = '$_lastAnchor, framed on its first row: the stretch is taller than a frame';
+      // The hero's standard is eight notes on eight different torn edges — it is the frame the
+      // material row is judged on at three hundred per cent. Which stretch of a year does that
+      // cannot be worked out in advance: it depends on how tall each row turns out, and a row's
+      // height is how much writing is on it, how many words wrapped, whether something is stuck
+      // to it. Guessing it from the text length got six notes, then seven. So this asks the
+      // thread. It goes to a stretch, lets it lay out, counts what actually landed on the glass,
+      // and keeps the best framing it has seen — stopping at the first that meets the standard,
+      // which is the most recent one, because the most recent is what now looks like.
+      (int, int)? chosen;
+      var chosenAlign = _wheresToStand.first;
+      var most = -1;
+      var mostWhole = -1;
+      var tried = 0;
+      for (final w in windows) {
+        if (tried >= _framingsToTry) break;
+        for (final align in _wheresToStand) {
+          tried++;
+          _scroll.jumpTo(index: w.$1, alignment: align);
           await Future<void>.delayed(const Duration(milliseconds: 40));
+          // the rows that were asked for have to be whole in the frame, or the framing is not a
+          // picture of them: a photograph seven hundred pixels tall once came out as a sliver
+          // with its caption cut in half by the edge, and three critics measured the sliver
+          if (!_wholeOnTheGlass(w)) continue;
+          // How much paper is on the glass, and how much of it is whole. The first is the
+          // standard's own count — a thread runs off the top of the frame, and a note the edge
+          // crosses is a note on the screen. The second is what the picture is worth looking at:
+          // between two framings that show the same amount of paper, the one that shows more of
+          // it whole is the better photograph.
+          final (onIt, whole) = _paperOnTheGlass(items);
+          if (onIt > most || (onIt == most && whole > mostWhole)) {
+            most = onIt;
+            mostWhole = whole;
+            chosen = w;
+            chosenAlign = align;
+          }
         }
+        if (most >= _theHerosStandard && mostWhole >= _theHerosStandard - 1) break;
       }
+      if (chosen == null) {
+        // nothing framed the stretch whole; the first one, framed from the top, is the honest shot
+        chosen = windows.first;
+        _scroll.jumpTo(index: chosen.$1, alignment: _wheresToStand.first);
+        await Future<void>.delayed(const Duration(milliseconds: 40));
+        _lastAnchor = 'types:${wanted.join(',')} at rows ${chosen.$1} to ${chosen.$2} of '
+            '${items.length}: no framing held the stretch whole';
+        return;
+      }
+      _scroll.jumpTo(index: chosen.$1, alignment: chosenAlign);
+      await Future<void>.delayed(const Duration(milliseconds: 40));
+      _lastAnchor = 'types:${wanted.join(',')} at rows ${chosen.$1} to ${chosen.$2} of '
+          '${items.length}, $most sheets on the glass and $mostWhole of them whole, the best of '
+          '$tried framings of ${windows.length} stretches';
       return;
     } else {
       final fraction = double.tryParse(anchor);
@@ -357,8 +428,74 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     await Future<void>.delayed(const Duration(milliseconds: 40));
   }
 
-  /// Where the thread stops being visible: the composer sits over the bottom of it.
-  static const double _theComposersEdge = 0.84;
+  /// The hero's own standard: eight rows on the glass, each on its own torn edge.
+  static const int _theHerosStandard = 8;
+
+  /// How many framings the search will try before it settles for the best it has seen. Each one
+  /// is a jump and a layout of the whole viewport, which is a few hundredths of a second.
+  static const int _framingsToTry = 400;
+
+  /// How many rows longer than the shortest a stretch may be and still be worth framing.
+  static const int _slack = 10;
+
+  /// Where the stretch's first row sits in the frame. The thread you write on is a sheet *below*
+  /// the list, not over it, so the whole viewport is thread: framing a third of the way down was
+  /// throwing away a row's worth of room. Three of them, because where a row lands decides
+  /// whether the row after it is whole on the glass or half under the edge.
+  static const List<double> _wheresToStand = [0.02, 0.14, 0.28, 0.45, 0.62, 0.78];
+
+  /// Whether every row of [w] is whole in the frame.
+  bool _wholeOnTheGlass((int, int) w) {
+    for (var i = w.$1; i <= w.$2; i++) {
+      final p = _positions.itemPositions.value.where((x) => x.index == i).firstOrNull;
+      if (p == null || p.itemLeadingEdge < 0 || p.itemTrailingEdge > 1) return false;
+    }
+    return true;
+  }
+
+  /// How many pieces of paper landed on the glass, and how many of those are mostly whole.
+  ///
+  /// Not every row is paper: a pencil line in the margin has no torn edge and is not a note to
+  /// anyone looking at the picture, and the hero's standard is eight notes on eight different
+  /// torn edges. A note the top of the frame crosses is still a note on the screen — a thread
+  /// runs off the frame in both directions, which is what a thread does — so it counts for the
+  /// first number and not for the second.
+  (int, int) _paperOnTheGlass(List<ThreadItem> items) {
+    var onIt = 0;
+    var whole = 0;
+    for (final p in _positions.itemPositions.value) {
+      if (p.index >= items.length) continue;
+      if (!_isPaper(items[p.index].type)) continue;
+      final tall = p.itemTrailingEdge - p.itemLeadingEdge;
+      if (tall <= 0) continue;
+      onIt++;
+      final shown = p.itemTrailingEdge.clamp(0.0, 1.0) - p.itemLeadingEdge.clamp(0.0, 1.0);
+      if (shown / tall >= 0.6) whole++;
+    }
+    return (onIt, whole);
+  }
+
+  /// How tall the thread's own viewport is, in logical pixels. Item positions are fractions of
+  /// it, and a fraction says nothing about whether another note would have fitted.
+  double get _viewportTall => _livePosition()?.viewportDimension ?? 0;
+
+  /// Whether a row of this kind is a piece of paper with a torn edge.
+  ///
+  /// Said by naming what is not one, and by the renderer rather than the type. The first version
+  /// of this listed the seven types that are notes and five of them belonged to modules — which is
+  /// a per-module table in a region, the thing `module_costs_test` exists to stop, and it stopped
+  /// it. A module's row is paper by default, which is what a module's row is: a ticket stub, a
+  /// line on a list, a stamped card. What is not paper is a mark made on something else — a thrown
+  /// object, a reaction stuck to a note, a pencil line in the margin, the mark left where a note
+  /// was taken back.
+  static bool _isPaper(String type) {
+    final renderer = kEventTypeById[type]?.renderer;
+    return renderer != null &&
+        !const {
+          'object_landing', 'stuck_object', 'margin_note', 'margin_mark',
+          'edit_mark', 'stub', 'ink_dries',
+        }.contains(renderer);
+  }
 
   /// The shortest run of rows holding at least one of every kind in [wanted], latest such run
   /// first — a couple's year has several, and the most recent is the one that looks like now.
@@ -372,8 +509,8 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   ///     the evidence while four hundred and thirty sit in the seeded year.
   ///   - `reply` — a row written in answer to another, which carries the strip of the one it
   ///     answers pinned above it.
-  (int, int)? _tightestWindow(List<ThreadItem> items, List<String> wanted) {
-    if (wanted.isEmpty) return null;
+  List<(int, int)> _tightestWindows(List<ThreadItem> items, List<String> wanted) {
+    if (wanted.isEmpty) return const [];
     final seen = <String, int>{};
     final tight = <(int, int)>[];
     var shortest = 1 << 30;
@@ -392,86 +529,38 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       if (seen.length < wanted.length) continue;
       final lo = seen.values.reduce((a, b) => a < b ? a : b);
       final span = i - lo;
-      if (span < shortest) {
-        shortest = span;
-        tight.clear();
-      }
-      if (span == shortest) tight.add((lo, i));
+      if (span < shortest) shortest = span;
+      tight.add((lo, i));
     }
-    if (tight.isEmpty) return null;
-    // Of the stretches that are equally tight, the one with the most paper around it.
+    // Not only the shortest: every stretch within a few rows of it.
     //
-    // A year has several, and they are not alike: one is surrounded by short notes and another by
-    // photographs and thrown objects, which are three and seven hundred pixels of the glass. The
-    // hero's own standard is eight notes on eight different torn edges — it is the frame the
-    // material row is judged on at three hundred per cent — and framing the same two kinds beside
-    // two feelings and a photograph left five. So the stretch is chosen for what a reader will see
-    // around it: how many of the ten rows from its start are a note rather than a picture, an
-    // object or a line in the margin.
-    (int, int) best = tight.last;
-    var bestScore = -1;
-    // roughly what the thread has to itself: the screen less the standing line, the tab strip and
-    // the sheet you write on
-    final room = (MediaQuery.maybeSizeOf(context)?.height ?? 780) - 306;
-    for (final w in tight) {
-      var used = 0.0;
-      var score = 0;
-      for (var i = w.$1; i < items.length && used < room; i++) {
-        final h = _roughlyTall(items[i]);
-        used += h;
-        if (used <= room && _isANote(items[i].type)) score++;
+    // Asking for a voice note and a reaction found six stretches in a year, because it read that
+    // as one row being both, and six framings of six places is not a search. A voice note with a
+    // photograph two rows below it that somebody has stuck a reaction to is the same day and a
+    // truer picture of one. What the slack buys is room to look: dozens of stretches instead of
+    // six, and the standard is eight notes on the glass, which is a property of what surrounds a
+    // stretch rather than of the stretch itself.
+    tight.removeWhere((w) => w.$2 - w.$1 > shortest + _slack);
+    // Latest first, but paper first of all.
+    //
+    // A couple's year has dozens of stretches holding one of each kind and the most recent is the
+    // one that looks like now, so recency is how ties are broken. What decides the order is how
+    // much paper surrounds a stretch: the standard is eight notes on eight torn edges, a stretch
+    // sitting among pencil lines in the margin and thrown objects cannot meet it however it is
+    // framed, and every framing tried is a jump and a layout of a viewport onto eight thousand
+    // rows. Ordered by recency alone the search laid out a hundred and ninety-eight framings
+    // before it found the one; this is the same search with the promising places first.
+    final ordered = tight.reversed.toList();
+    int paperAround((int, int) w) {
+      var n = 0;
+      for (var i = w.$1 - 2; i <= w.$1 + 8 && i < items.length; i++) {
+        if (i >= 0 && _isPaper(items[i].type)) n++;
       }
-      // the latest of the equally good ones: a couple's year has many, and the most recent is the
-      // one that looks like now
-      if (score >= bestScore) {
-        bestScore = score;
-        best = w;
-      }
+      return n;
     }
-    return best;
-  }
-
-  /// About how much of the glass a row will take, before anything is laid out.
-  ///
-  /// Counting rows was not enough: six long notes fill the same screen nine short ones do, and the
-  /// hero's standard is eight. Nobody can know a row's height without laying it out, but the thing
-  /// that decides it is how much writing is on it, and that is known before.
-  static double _roughlyTall(ThreadItem it) {
-    final renderer = kEventTypeById[it.type]?.renderer;
-    switch (renderer) {
-      case 'margin_note':
-      case 'margin_mark':
-        return 40.0;
-      case 'print':
-      case 'print_tab':
-        return 700.0;
-      case 'object_landing':
-        return 190.0;
-      case 'stuck_object':
-      case 'edit_mark':
-      case 'stub':
-      case 'ink_dries':
-        return 0.0;
-      default:
-        final words = (it.text ?? '').length;
-        return 62.0 + 24.0 * (1 + words ~/ 30);
-    }
-  }
-
-  /// A row that is a piece of paper about the size of a note: not a print, not a thrown object,
-  /// not a pencil line in the margin.
-  ///
-  /// Said by naming what is *not* one, and by the renderer rather than the type. The first version
-  /// listed the seven types that are notes and five of them belonged to modules — which is a
-  /// per-module table in a region, the thing `module_costs_test` exists to stop, and it stopped it.
-  /// A module's row is a note by default, which is what a module's row is.
-  static bool _isANote(String type) {
-    final renderer = kEventTypeById[type]?.renderer;
-    return renderer != null &&
-        !const {
-          'print', 'print_tab', 'object_landing', 'new_feeling_card',
-          'margin_note', 'margin_mark', 'stuck_object', 'edit_mark', 'stub', 'ink_dries',
-        }.contains(renderer);
+    final promise = {for (final w in ordered) w: paperAround(w)};
+    ordered.sort((a, b) => promise[b]!.compareTo(promise[a]!));
+    return ordered;
   }
 
   /// Where the last `scrollTo` put the thread, in the thread's own words, for the scene log.
@@ -741,6 +830,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
               items.isEmpty
                   ? const EmptySurface(id: 'chat', line: S.emptyChat, aside: S.emptyChatAside)
                   : ScrollablePositionedList.builder(
+                      key: _listKey,
                       itemScrollController: _scroll,
                       scrollOffsetController: _offset,
                       itemPositionsListener: _positions,

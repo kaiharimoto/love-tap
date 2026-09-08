@@ -518,6 +518,19 @@ function ensure(p) {
         fs.writeFileSync(out, JSON.stringify(body, null, 1));
         break;
       }
+      case 'flingLog': {
+        // Every frame of every throw: what the simulation asked the thread to move, what it
+        // actually moved, and where it was sitting. A frame of the clip identical to the one
+        // before it is either a race in the grab or a thread that stood still, and only this
+        // says which.
+        const raw = await page.evaluate(() => window.__deskFlingLog && window.__deskFlingLog());
+        const out = abs(step.out || 'evidence/logs/fling.json');
+        ensure(out);
+        const body = raw ? JSON.parse(raw) : { missing: 'no fling handle' };
+        body.browser = browserName;
+        fs.writeFileSync(out, JSON.stringify(body, null, 1));
+        break;
+      }
       case 'push': {
         // A real push, delivered to the real worker, with the app not in front of anyone. The
         // browser draws the notification; nothing in the app is asked to draw a picture of one.

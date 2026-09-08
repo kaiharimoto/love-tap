@@ -15,7 +15,7 @@
  "cuts_between_runs": [],
  "app_seconds": 4.8,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 20.98036,
+ "mean_change_per_frame": 20.52257,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -31,20 +31,27 @@
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },
- "repeated_frames": 6,
- "repeated_fraction": 0.02,
+ "repeated_frames": 13,
+ "repeated_fraction": 0.043,
  "longest_still_run": 1,
  "repeated_at": [
   2,
-  18,
-  55,
-  123,
-  126,
-  179
+  5,
+  9,
+  48,
+  81,
+  120,
+  124,
+  181,
+  184,
+  233,
+  261,
+  264,
+  267
  ],
  "brightness_jumps": 0,
  "ok": false,
- "why": "6 frame(s) identical to the one before (first at 2); the brief allows none",
+ "why": "13 frame(s) identical to the one before (first at 2); the brief allows none",
  "strip": "evidence/crops/11_chat_scroll_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/11_chat_scroll/000000.png",

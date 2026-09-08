@@ -60,10 +60,22 @@ void main() {
     // twenty frames of a fling, the way the scene drives it
     ThreadRowStats.reset();
     const steps = 20;
+    final began = CaptureBus.scrollWhere!()[0];
+    var asked = 0.0;
     for (var i = 0; i < steps; i++) {
-      CaptureBus.scrollBy!(-120);
+      // The pixels move on the frame they are asked for, not on whichever later frame a ticker
+      // happens to run on. A millisecond-long animation per nudge is what put frames identical
+      // to the one before them into the scroll clip: the animation's ticker is stepped by the
+      // browser's frame timestamp, and two frames the driven clock pumped could carry the same
+      // one. What comes back here is the pixels the thread actually travelled.
+      final moved = CaptureBus.scrollBy!(-120);
+      expect(moved, closeTo(-120, 0.01),
+          reason: 'frame $i asked for 120 pixels and the thread moved ${moved.abs()}');
+      asked += moved;
       await tester.pump(const Duration(milliseconds: 16));
     }
+    expect(CaptureBus.scrollWhere!()[0], closeTo(began + asked, 0.01),
+        reason: 'the thread is not where the frames it drew say it should be');
     final built = ThreadRowStats.built;
 
     // Measured on this machine: 17 rows built over 20 frames, with six on the glass — under one

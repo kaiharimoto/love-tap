@@ -46,6 +46,10 @@
   {
    "do": "timings",
    "out": "evidence/logs/scroll_webkit.json"
+  },
+  {
+   "do": "flingLog",
+   "out": "evidence/logs/11_chat_scroll.fling.json"
   }
  ]
 }

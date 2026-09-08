@@ -149,7 +149,10 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
         unawaited(scope.sensation.play(f, intensity: pair.$2));
       });
     });
-    if (!Flags.capture) return;
+    // The same gate the thread uses: a build made for capture, or a test that has asked for the
+    // handles. A widget test cannot set a --dart-define, and the shell is where the room the
+    // thread has to itself is decided, so measuring that room needed the shell.
+    if (!Flags.capture && !CaptureBus.wanted) return;
     CaptureBus.regionIndex = _index;
     CaptureBus.goToRegion = _go;
     CaptureBus.sendFeeling = (id, intensity) async {
@@ -175,7 +178,7 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    if (Flags.capture) CaptureBus.clear();
+    if (Flags.capture || CaptureBus.wanted) CaptureBus.clear();
     _landings?.cancel();
     _arrivals.close();
     super.dispose();
@@ -217,7 +220,7 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
     final facts = _setupFacts(scope);
     final platform = scope.transport.role == TransportRole.host ? 'android' : 'pwa';
     final setup = _showSetup && !settled(stepsFor(platform), facts) ? facts : null;
-    if (Flags.capture) CaptureBus.setupShowing = setup != null;
+    if (Flags.capture || CaptureBus.wanted) CaptureBus.setupShowing = setup != null;
     return Scaffold(
       backgroundColor: Flags.dusk ? DeskColour.dusk : DeskColour.day,
       body: Desk(
