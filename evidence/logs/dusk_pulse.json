@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 7273
+   "ms": 5269
   },
   {
    "do": "wait",
-   "ms": 2302
+   "ms": 2308
   },
   {
    "do": "shot",
-   "ms": 3840
+   "ms": 5167
   },
   {
    "do": "report",
-   "ms": 718
+   "ms": 717
   }
  ],
  "shots": [
@@ -155,7 +155,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-08T16:45:18.621Z",
+     "since": "2026-09-08T18:54:19.122Z",
      "last_contact": null
     }
    },
@@ -166,12 +166,13 @@
     "allowed_to_interrupt": false,
     "held_by_the_phone": []
    },
-   "at": "crops/dusk_pulse.png"
+   "at": "crops/dusk_pulse.png",
+   "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 8027,
+ "cold_ms": 9756,
  "load": {
-  "ms": 8027,
+  "ms": 9756,
   "store": "fresh",
   "profile": null
  },
