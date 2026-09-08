@@ -18,6 +18,7 @@ import 'package:desk/material/marks.dart';
 import 'package:desk/material/objects.dart';
 import 'package:desk/regions/chat/blob_widgets.dart';
 import 'package:desk/regions/chat/chat_region.dart';
+import 'package:desk/regions/chat/viewer_page.dart';
 import 'package:desk/regions/moments/moments_region.dart';
 import 'package:desk/scope.dart';
 import 'package:desk/spine/spine.dart';
@@ -89,6 +90,34 @@ void main() {
     expect(find.text(S.fetching), findsNothing,
         reason: 'a video with no poster frame asked the store for a hash it does not hold');
     expect(find.text('the canal at the turn'), findsOneWidget);
+  });
+
+  testWidgets('a film held up to look at says it is a film', (tester) async {
+    // "logs/14_media_viewer.report.json records this frame as kind video, initialised and
+    // playing, at position_ms 1530 of duration_ms 2500. Nothing on the glass says it is a video,
+    // where a photograph would look the same." The viewer had no mark to press, no length, no
+    // playhead and nothing to tell a still frame of a film from a photograph.
+    final scope = await _aScope();
+    addTearDown(scope.dispose);
+    await scope.spine.append('video', {
+      'blob': 'the-film',
+      'poster_blob': '',
+      'duration_ms': 154000,
+      'w': 1920,
+      'h': 1080,
+      'caption': 'the canal at the turn',
+    }, hostAssign: true);
+    // the thread is projected off a listener, so it is drawn once before the row is taken from it
+    await _draw(tester, scope, const ChatRegion());
+    final item = scope.thread.items.last;
+    await _draw(tester, scope, ViewerPage(item: item));
+
+    // the length it runs, in the margin hand, beside a playhead and a mark to press. The video
+    // itself cannot initialise in a widget test — there is no platform player — so what is
+    // asserted is what the glass says with none: the strip is there and it is honest about zero.
+    expect(find.text('0:00 / 2:34'), findsOneWidget,
+        reason: 'the viewer does not say how long the film is or where it has got to');
+    expect(find.byType(Mark), findsWidgets, reason: 'no mark to press');
   });
 
   testWidgets('a picture already in hand is handed to the frame that draws it', (tester) async {

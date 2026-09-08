@@ -17,6 +17,7 @@ import '../../material/slip.dart';
 import '../../media/local_uri.dart';
 import '../../scope.dart';
 import '../../spine/projections/thread.dart';
+import '../../voice/strings.dart';
 import 'blob_widgets.dart';
 
 class ViewerPage extends StatefulWidget {
@@ -85,6 +86,8 @@ class _ViewerPageState extends State<ViewerPage> {
       await c.setLooping(true);
       await c.play();
       if (!mounted) return;
+      // the strip under the print says where the film is, so it has to be told when that moves
+      c.addListener(_moved);
       setState(() => _video = c);
     } catch (e) {
       if (mounted) setState(() => _error = e.toString());
@@ -93,9 +96,26 @@ class _ViewerPageState extends State<ViewerPage> {
 
   static dynamic _fileOf(Uri uri) => _FileShim.of(uri);
 
+  /// The playhead moved: redraw the strip, and no oftener than a tenth of a second, because a
+  /// video player notifies on every frame it decodes and the strip is a pencil line.
+  void _moved() {
+    final v = _video;
+    if (!mounted || v == null) return;
+    final at = v.value.position.inMilliseconds ~/ 100;
+    if (at == _shownAt && v.value.isPlaying == _shownPlaying) return;
+    setState(() {
+      _shownAt = at;
+      _shownPlaying = v.value.isPlaying;
+    });
+  }
+
+  int _shownAt = -1;
+  bool _shownPlaying = false;
+
   @override
   void dispose() {
     CaptureBus.viewerReport = null;
+    _video?.removeListener(_moved);
     _video?.dispose();
     super.dispose();
   }
@@ -158,6 +178,30 @@ class _ViewerPageState extends State<ViewerPage> {
               ),
             ),
             const SizedBox(height: 14),
+            // What a film says about itself. A critic stepping this frame found a video playing —
+            // the app's own record said kind video, initialised, playing, at 1530 ms of 2500 —
+            // with nothing on the glass saying so: no mark to press, no length, no playhead, and
+            // nothing to tell it from a photograph. A film in a drawer of prints is the one that
+            // has a strip of frames down its edge.
+            if (widget.item.type == 'video')
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 26),
+                child: _FilmStrip(
+                  video: _video,
+                  fallbackMs: (widget.item.event.payload['duration_ms'] as num?)?.toInt() ?? 0,
+                  onTap: () {
+                    final v = _video;
+                    if (v == null) return;
+                    v.value.isPlaying ? v.pause() : v.play();
+                  },
+                  onSeek: (fraction) {
+                    final v = _video;
+                    if (v == null || !v.value.isInitialized) return;
+                    v.seekTo(v.value.duration * fraction.clamp(0.0, 1.0));
+                  },
+                ),
+              ),
+            if (widget.item.type == 'video') const SizedBox(height: 12),
             if ((widget.item.text ?? '').isNotEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 26),
@@ -188,6 +232,98 @@ class _ViewerPageState extends State<ViewerPage> {
       ),
     );
   }
+}
+
+/// The strip under a film: the mark you press, where the playhead is, and how long it runs.
+///
+/// Drawn, not set: a pencil rule with the part that has played inked in, the same play and hold
+/// marks the voice note carries, and the times in the margin hand. On its own slip, because a
+/// thing you can press is a thing that sits on something.
+class _FilmStrip extends StatelessWidget {
+  const _FilmStrip({required this.video, required this.fallbackMs, required this.onTap, required this.onSeek});
+  final VideoPlayerController? video;
+  final int fallbackMs;
+  final VoidCallback onTap;
+  final void Function(double fraction) onSeek;
+
+  static String _clock(int ms) {
+    final s = (ms / 1000).round();
+    return '${s ~/ 60}:${(s % 60).toString().padLeft(2, '0')}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final v = video?.value;
+    final ready = v != null && v.isInitialized && v.duration.inMilliseconds > 0;
+    final total = ready ? v.duration.inMilliseconds : fallbackMs;
+    final at = ready ? v.position.inMilliseconds : 0;
+    final progress = total == 0 ? 0.0 : (at / total).clamp(0.0, 1.0);
+    return Slip(
+      id: 'viewer.film',
+      row: 3,
+      stock: 'index',
+      padding: const EdgeInsets.fromLTRB(12, 8, 14, 9),
+      child: Row(
+        children: [
+          Semantics(
+            button: true,
+            label: ready && v.isPlaying ? S.pause : S.play,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onTap,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(2, 2, 10, 2),
+                child: ready && v.isPlaying
+                    ? Mark.hold(size: 19, colour: Pen.graphite)
+                    : Mark.play(size: 19, colour: Pen.graphite),
+              ),
+            ),
+          ),
+          Expanded(
+            child: LayoutBuilder(
+              builder: (context, box) => GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTapDown: (d) => onSeek(d.localPosition.dx / box.maxWidth),
+                onHorizontalDragUpdate: (d) => onSeek(d.localPosition.dx / box.maxWidth),
+                child: SizedBox(
+                  height: 20,
+                  child: CustomPaint(painter: _Playhead(progress)),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Text('${_clock(at)} / ${_clock(total)}', style: Hands.margin(size: 12)),
+        ],
+      ),
+    );
+  }
+}
+
+class _Playhead extends CustomPainter {
+  _Playhead(this.progress);
+  final double progress;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final y = size.height / 2;
+    final rest = Paint()
+      ..color = Pen.graphite.withValues(alpha: 0.30)
+      ..strokeWidth = 1.6
+      ..strokeCap = StrokeCap.round;
+    final done = Paint()
+      ..color = Pen.graphite
+      ..strokeWidth = 2.4
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(Offset(0, y), Offset(size.width, y), rest);
+    final x = size.width * progress;
+    if (x > 0) canvas.drawLine(Offset(0, y), Offset(x, y), done);
+    // where it is now: a pencil tick standing on the rule rather than a dot on a track
+    canvas.drawLine(Offset(x, y - 6), Offset(x, y + 6), done);
+  }
+
+  @override
+  bool shouldRepaint(_Playhead old) => old.progress != progress;
 }
 
 // dart:io File without importing dart:io into a file the web build compiles.

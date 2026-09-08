@@ -70,13 +70,81 @@ def ease(t, power=2.0):
     return e + 0.06 * math.sin(math.pi * t) * (1.0 - t)
 
 
+# How deep the torn edge bites into the sheet, and the two wavelengths it bites at. A tear is not
+# a wobble: it is fibre giving way along the grain, so it wants a long run and a short one at once.
+TEAR_DEEP_M = 0.0032
+TEAR_LONG_MM = 12.0
+TEAR_SHORT_MM = 2.2
+# How far the sheet lies off flat where nothing is bending it, and over what distance. Paper that
+# has been folded and opened does not lie flat: it cockles. Under the crease ridge (0.36 mm) so
+# the crease stays the sharpest thing on the sheet.
+COCKLE_M = 0.00045
+COCKLE_LONG_MM = 34.0
+COCKLE_SHORT_MM = 17.0
+
+
+def _tear_bite(u_mm, rng_phase, deep_m=TEAR_DEEP_M):
+    """How far the torn edge has eaten into the sheet at [u_mm] along it, in metres, never out.
+
+    Two runs at once — one about a finger's width, one about a fibre bundle's — raised to a
+    power so most of the edge is nearly whole and the bites are occasional, which is what a tear
+    looks like and what a sine wave does not.
+    """
+    a, b = rng_phase
+    d = (0.62 * (0.5 + 0.5 * math.sin(2.0 * math.pi * u_mm / TEAR_LONG_MM + a))
+         + 0.38 * (0.5 + 0.5 * math.sin(2.0 * math.pi * u_mm / TEAR_SHORT_MM + b)))
+    return (d ** 1.4) * deep_m
+
+
+def _cockle(x, y, phases):
+    """The undulation of a sheet that has been folded and opened, in metres, never below zero.
+
+    Never below, because the shadow catcher is a real plane 0.2 mm under the sheet and a shadow
+    catcher is invisible to the camera: where the paper dipped under it the render came back
+    transparent, and the settled sheet was a grid of twenty black holes in the cockle's own
+    pattern. Paper resting on a desk cockles upward from where it touches, which is what this is.
+    """
+    p1, p2, p3 = phases
+    xm, ym = x * 1000.0, y * 1000.0
+    wave = (0.6 * math.sin(2.0 * math.pi * xm / COCKLE_LONG_MM + p1)
+            * math.cos(2.0 * math.pi * ym / (COCKLE_LONG_MM * 1.2) + p2)
+            + 0.4 * math.sin(2.0 * math.pi * xm / COCKLE_SHORT_MM + p3))
+    return COCKLE_M * (1.0 + wave)
+
+
 def build_sheet(nx, ny, w, h, rng):
-    """A flat sheet with UVs, at real size, plus the vertex grid for later bending."""
+    """A torn sheet with UVs, at real size, plus the vertex grid for later bending.
+
+    Torn, not cut. The sheet used to be a rectangle to the last decimal, and it is the one thing in
+    the app whose silhouette a critic could measure without any judgement in it: the left edge of
+    the arriving sheet occupied a single column over ninety rows, standard deviation 0.00 px, while
+    the notes lying beside it in the same frame wandered 22 to 35. Every note in the thread is torn;
+    the one that arrives folded was not.
+
+    Cockled, not flat. Away from the hinges the sheet was a plane, so its shading was a
+    one-dimensional gradient: the per-row standard deviation across its 580-pixel width measured
+    1.50 grey levels, which is a ramp rather than a surface. Paper that has been folded and opened
+    does not lie flat.
+    """
+    # one phase pair per edge, one triple for the cockle, so no two sheets tear or lie alike
+    ph = [(rng.random() * 6.28, rng.random() * 6.28) for _ in range(4)]
+    cph = (rng.random() * 6.28, rng.random() * 6.28, rng.random() * 6.28)
     bm = bmesh.new()
     verts = {}
     for j in range(ny + 1):
         for i in range(nx + 1):
-            verts[(i, j)] = bm.verts.new(((i / nx - 0.5) * w, (j / ny - 0.5) * h, 0.0))
+            x = (i / nx - 0.5) * w
+            y = (j / ny - 0.5) * h
+            # the two edges this vertex is on, if any, bite inward
+            if i == 0:
+                x += _tear_bite(y * 1000.0, ph[0])
+            elif i == nx:
+                x -= _tear_bite(y * 1000.0, ph[1])
+            if j == 0:
+                y += _tear_bite(x * 1000.0, ph[2])
+            elif j == ny:
+                y -= _tear_bite(x * 1000.0, ph[3])
+            verts[(i, j)] = bm.verts.new((x, y, _cockle(x, y, cph)))
     for j in range(ny):
         for i in range(nx):
             bm.faces.new((verts[(i, j)], verts[(i + 1, j)], verts[(i + 1, j + 1)], verts[(i, j + 1)]))
@@ -206,6 +274,27 @@ def crumple_field(verts_co, rng, w, h):
     return field
 
 
+# How much of the rendered shadow is kept. A shadow catcher's alpha is the fraction of the light
+# the sheet blocks, and here that is 0.70: the sun is most of the light in this rig. Composited as
+# black at 0.70 over the app's own desk it comes out at 30 grey levels against a desk at 80, which
+# a critic measured as "a hard slab, not a contact shadow" — and it is not a shadow, it is a hole.
+# The app's own baked tear shadows are drawn between 0.16 and 0.42 for the same reason: the desk a
+# note lies on is lit by more than the sun this rig models. Scaled to land at the same ceiling.
+SHADOW_KEEP = 0.6
+
+
+def _soften_shadow(path):
+    """Scale the shadow's alpha in a rendered frame, leaving the sheet's own alpha alone."""
+    img = bpy.data.images.load(path)
+    px = np.array(img.pixels[:], dtype=np.float32).reshape(-1, 4)
+    shadow = px[:, 3] < 0.995
+    px[shadow, 3] *= SHADOW_KEEP
+    img.pixels = px.reshape(-1).tolist()
+    img.file_format = "PNG"
+    img.save()
+    bpy.data.images.remove(img)
+
+
 def render_sequence(name, frames, res, samples, out_dir, condition="day", start=0, end=None):
     cfg = SEQUENCES[name]
     kind = cfg["kind"]
@@ -256,6 +345,13 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
                                     mottle_scale=density)
         obj.data.materials.append(mat)
         common.add_shadow_catcher(scene, size_m=0.4)
+        # A bounce plane under the sheet, as the object queue got. Without one nothing lights the
+        # underside of the shadow: it fell 247.8 -> 30.0 grey levels across four rows and then held
+        # flat at 30-37 for sixty pixels, which is a slab with a sheet on it rather than paper
+        # resting on a desk. Two millimetres under the lowest point the sheet reaches, so a flap
+        # standing on its crease is not buried in its own bounce.
+        common.add_desk(scene, size_m=0.30,
+                        z=common.lowest_z([obj]) - 0.002).visible_camera = False
         # Orthographic, tilted off the vertical. Straight down was geometrically honest and it did
         # not look like paper: a flap rotating about its crease foreshortens to nothing from
         # directly overhead, so a letter opening filmed as a cream rectangle getting taller, which
@@ -281,6 +377,7 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
             common.add_dusk(scene)
         path = os.path.join(out_dir, f"{frame:04d}.png")
         common.render(scene, path)
+        _soften_shadow(path)
         if frame % 20 == 0:
             print(f"{name} {frame}/{frames}", flush=True)
     settings = {
@@ -291,6 +388,11 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
         "look": {"rgb": [0.94, 0.91, 0.85], "tooth": 1.55, "yellowing": 0.25, "sheen": 0.24,
                  "fibre": round(1100.0 * density, 1), "mottle_scale": round(density, 3)},
         "grid": [nx, ny],
+        "tear_mm": {"deep": TEAR_DEEP_M * 1000.0, "long": TEAR_LONG_MM, "short": TEAR_SHORT_MM},
+        "cockle_mm": {"amplitude": COCKLE_M * 1000.0, "long": COCKLE_LONG_MM,
+                      "short": COCKLE_SHORT_MM},
+        "bounce_plane": "an invisible desk 2 mm under the sheet's lowest point",
+        "shadow_keep": SHADOW_KEEP,
     }
     # The brief's rule is that every file in assets/ names its generator, so each frame gets its
     # own entry and the directory gets none: a directory entry is an entry without a file, which

@@ -255,6 +255,18 @@ class SearchPageState extends State<SearchPage> {
 }
 
 /// One stamped tab. Never a count on it: what a filter narrows to is the list under it.
+///
+/// As wide as its own word. A `Slip` is a piece of paper and a piece of paper takes the room it is
+/// given, so fifteen tabs each took the whole width of the phone and the wrap put one on every
+/// row: a band 566 logical pixels deep, two thirds of the page, with the first of ten hits
+/// starting at 66 per cent of the way down and the second cut in half by the tab bar. A tab on a
+/// card index is the width of the word stamped on it.
+///
+/// And the one that is out is out. On and off were the same tab in the same stock at the same
+/// size, differing only in the ink they were stamped in — which is not a state anyone can read.
+/// The chosen tab is lifted out of the box: it stands a little proud of the others, its word is
+/// stamped in the ink the app stamps with rather than the margin's pencil, and it is underlined
+/// the way you underline the one you mean.
 class _Tab extends StatelessWidget {
   const _Tab({required this.label, required this.on, required this.onTap});
   final String label;
@@ -266,15 +278,54 @@ class _Tab extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 6),
-          child: Slip(
-            id: 'facet_$label',
-            stock: 'index',
-            padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-            child: Stamped(label, size: 9.5, colour: on ? Pen.stamp : Pen.margin),
+          padding: EdgeInsets.fromLTRB(5, on ? 1 : 6, 5, on ? 11 : 6),
+          child: IntrinsicWidth(
+            child: Slip(
+              id: 'facet_$label',
+              stock: 'index',
+              lift: on ? 1.4 : 0.4,
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Stamped(label, size: 9.5, colour: on ? Pen.stamp : Pen.margin),
+                  if (on)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: SizedBox(
+                        height: 2,
+                        child: CustomPaint(painter: _Underline(label.hashCode)),
+                      ),
+                    ),
+                ],
+              ),
+            ),
           ),
         ),
       );
+}
+
+/// The line you draw under the word you mean: pencil, not a rule, so it wanders a little.
+class _Underline extends CustomPainter {
+  _Underline(this.seed);
+  final int seed;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final p = Paint()
+      ..color = Pen.graphite
+      ..strokeWidth = 1.3
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
+    final path = Path()..moveTo(0, size.height * 0.6);
+    final wobble = ((seed % 7) - 3) / 6.0;
+    path.quadraticBezierTo(size.width / 2, size.height * 0.6 + wobble, size.width, size.height * 0.4);
+    canvas.drawPath(path, p);
+  }
+
+  @override
+  bool shouldRepaint(_Underline old) => old.seed != seed;
 }
 
 /// One hit: a torn strip with the line on it and the day it was written in the margin.

@@ -27,6 +27,7 @@ class Slip extends StatelessWidget {
     this.stock,
     this.width,
     this.torn = true,
+    this.lift,
     this.padding = const EdgeInsets.fromLTRB(15, 11, 15, 11),
     this.overlays = const [],
     this.onTap,
@@ -48,6 +49,12 @@ class Slip extends StatelessWidget {
   /// an edge and a shadow — a cut edge, drawn straight — and shows its stock at the stock's own
   /// pixel density.
   final bool torn;
+
+  /// How far this piece stands off the desk, in millimetres, when it is not whatever its own id
+  /// says. A piece that has been picked out of a set — the tab that is out of the card index —
+  /// lifts, and its shadow says so. Null leaves the lift to the id, which is what gives a pile of
+  /// slips their unequal shadows.
+  final double? lift;
   final EdgeInsets padding;
   final List<Widget> overlays;
   final VoidCallback? onTap;
@@ -77,7 +84,7 @@ class Slip extends StatelessWidget {
     final piece = PaperPiece(
       stockId: stockId,
       tearId: tear,
-      liftMm: 0.5 + (h % 5) * 0.24,
+      liftMm: lift ?? 0.5 + (h % 5) * 0.24,
       tilt: ((h >> 16) % 100 - 50) / 100.0 * 0.016,
       width: width,
       stockAlignment: Alignment(((h >> 3) % 100) / 50.0 - 1, ((h >> 11) % 100) / 50.0 - 1),
