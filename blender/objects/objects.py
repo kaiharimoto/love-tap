@@ -334,38 +334,6 @@ def obj_fortune_teller(rng):
     return parts
 
 
-def obj_crown(rng):
-    """A paper crown, cut from a strip and taped into a ring, lying over on its side.
-
-    Stood upright and seen from above it is a ring of triangles, which is a graphic. Tipped over
-    the way one actually ends up on a table, it is a band of paper with points on it, and you can
-    see the thickness of the card at every cut edge and where the two ends overlap at the join.
-    """
-    mat = paper_mat("crown_paper", (0.95, 0.92, 0.72))
-    bm = bmesh.new()
-    n = 7
-    r = 0.019
-    ring, top = [], []
-    for k in range(n * 2):
-        a = 2 * math.pi * k / (n * 2)
-        rr = r if k % 2 == 0 else r * 0.88
-        # the band is not a true circle: it has been squashed by being sat on
-        squash = 1.0 - 0.22 * abs(math.sin(a))
-        ring.append((rr * math.cos(a) * squash, rr * math.sin(a), 0.0))
-        h = 0.015 if k % 2 == 0 else 0.005
-        top.append((rr * math.cos(a) * squash * 1.03, rr * math.sin(a) * 1.03, h))
-    vb = [bm.verts.new(p) for p in ring]
-    vt = [bm.verts.new(p) for p in top]
-    for k in range(len(vb)):
-        k2 = (k + 1) % len(vb)
-        bm.faces.new((vb[k], vb[k2], vt[k2], vt[k]))
-    obj = solidify(new_mesh(bm, "crown", mat, smooth=False), t=0.00035)
-    # tipped over onto the desk, resting on its rim
-    obj.rotation_euler = (math.radians(76.0), 0.0, math.radians(float(rng.uniform(-20, 20))))
-    obj.location = (0.0, 0.0, r * 0.94)
-    return obj
-
-
 def obj_blanket_fold(rng):
     mat = paper_mat("blanket_paper", (0.93, 0.91, 0.87), tooth=1.2)
     bm = sheet(0.034, 0.026, 40, 32, lambda u, v: 0.004 * math.sin(v * 6.0) + 0.002 * math.sin(u * 9.0))
@@ -416,37 +384,6 @@ def obj_plaster(rng):
     p = solidify(new_mesh(bm2, "gauze_pad", pad), t=0.0006)
     p.location = (0.0, 0.0, 0.0006)
     parts.append(p)
-    return parts
-
-
-def obj_gold_star(rng):
-    """A foil star, stuck on a scrap of paper with one point lifting off it.
-
-    A five-pointed star lying flat and dead-on is a glyph. What makes it a sticker is that it is
-    stuck to something, that it is not quite flat, and that the foil throws a hard highlight in
-    one place while the paper under it does not.
-    """
-    parts = []
-    backing = sheet(0.026, 0.024, 20, 20, lambda u, v: 0.0003 * math.sin(u * 5 + v * 3))
-    parts.append(solidify(new_mesh(backing, "star_backing",
-                                   paper_mat("star_backing", (0.90, 0.87, 0.80))), t=0.00016))
-
-    mat = simple_mat("foil", (0.86, 0.68, 0.24), roughness=0.14, metallic=1.0)
-    bm = bmesh.new()
-    lift_at = int(rng.integers(0, 5)) * 2
-    pts = []
-    for k in range(10):
-        a = math.pi / 2 + 2 * math.pi * k / 10
-        r = 0.011 if k % 2 == 0 else 0.0048
-        # one point has been picked at and stands off the paper, curling as it goes
-        z = 0.0009 + (0.0042 if k == lift_at else 0.0)
-        pts.append(bm.verts.new((r * math.cos(a), r * math.sin(a), z)))
-    centre = bm.verts.new((0.0, 0.0, 0.0009))
-    for k in range(10):
-        bm.faces.new((centre, pts[k], pts[(k + 1) % 10]))
-    star = solidify(new_mesh(bm, "gold_star", mat, smooth=False), t=0.00022)
-    star.rotation_euler = (0.0, 0.0, math.radians(float(rng.uniform(-25, 25))))
-    parts.append(star)
     return parts
 
 
@@ -953,9 +890,9 @@ def obj_user_soup(rng):
 
 OBJECTS = {
     "obj_pinch": obj_pinch, "obj_crane": obj_crane, "obj_boat": obj_boat, "obj_plane": obj_plane,
-    "obj_fortune_teller": obj_fortune_teller, "obj_crown": obj_crown, "obj_blanket_fold": obj_blanket_fold,
+    "obj_fortune_teller": obj_fortune_teller, "obj_blanket_fold": obj_blanket_fold,
     "obj_crumple_ball": obj_crumple_ball, "obj_torn_corner": obj_torn_corner, "obj_ticket": obj_ticket,
-    "obj_plaster": obj_plaster, "obj_gold_star": obj_gold_star, "obj_confetti": obj_confetti,
+    "obj_plaster": obj_plaster, "obj_confetti": obj_confetti,
     "obj_ribbon": obj_ribbon, "obj_string_loop": obj_string_loop, "obj_knot": obj_knot,
     "obj_rubber_band": obj_rubber_band, "obj_staple_chain": obj_staple_chain, "obj_spitball": obj_spitball,
     "obj_stone": obj_stone, "obj_candle": obj_candle, "obj_mug": obj_mug,
