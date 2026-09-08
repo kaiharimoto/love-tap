@@ -1,11 +1,25 @@
 {
- "captured_at": "2026-09-08T04:41:42Z",
+ "captured_at": "2026-09-08T06:05:04Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
    "bytes": 4314169,
    "written": "2026-09-07T22:20:07Z",
    "from_this_run": false,
+   "size": [
+    1440,
+    3120
+   ],
+   "meets_minimum": true,
+   "minimum": [
+    1440,
+    3120
+   ]
+  },
+  "02_chat.png": {
+   "bytes": 4737870,
+   "written": "2026-09-08T06:18:18Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -185,6 +199,25 @@
    "minimum_seconds": 8,
    "long_enough": true
   },
+  "11_chat_scroll.mp4": {
+   "bytes": 11361653,
+   "written": "2026-09-08T06:28:02Z",
+   "from_this_run": true,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 300,
+   "fps": 62.5,
+   "seconds": 4.8,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
+   "minimum_seconds": 4,
+   "long_enough": true
+  },
   "15_authored_feeling.mp4": {
    "bytes": 6678540,
    "written": "2026-09-08T03:44:45Z",
@@ -206,24 +239,22 @@
   }
  },
  "missing": {
-  "02_chat.png": "only 7 notes on screen (a copy from an earlier run is still on disk, written 2026-09-08T04:54:02Z; it is not this session's and is not counted)",
   "09_two_devices.png": "not captured this session",
-  "16_setup_android.png": "not captured this session",
-  "11_chat_scroll.mp4": "the frame check failed; see evidence/logs/11_chat_scroll.frames.json (a copy from an earlier run is still on disk, written 2026-09-08T05:07:17Z; it is not this session's and is not counted)"
+  "16_setup_android.png": "not captured this session"
  },
  "stale": {
-  "01_pulse.png": "on disk from 2026-09-07T22:20:07Z, before this capture began at 2026-09-08T04:41:42Z",
-  "03_us.png": "on disk from 2026-09-07T22:20:58Z, before this capture began at 2026-09-08T04:41:42Z",
-  "04_moments.png": "on disk from 2026-09-07T22:21:20Z, before this capture began at 2026-09-08T04:41:42Z",
-  "05_settings.png": "on disk from 2026-09-07T22:21:41Z, before this capture began at 2026-09-08T04:41:42Z",
-  "10_first_run.png": "on disk from 2026-09-07T22:25:04Z, before this capture began at 2026-09-08T04:41:42Z",
-  "12_search.png": "on disk from 2026-09-07T22:22:09Z, before this capture began at 2026-09-08T04:41:42Z",
-  "13_messenger_states.png": "on disk from 2026-09-07T22:24:14Z, before this capture began at 2026-09-08T04:41:42Z",
-  "14_media_viewer.png": "on disk from 2026-09-07T22:24:51Z, before this capture began at 2026-09-08T04:41:42Z",
-  "17_setup_pwa.png": "on disk from 2026-09-07T22:25:14Z, before this capture began at 2026-09-08T04:41:42Z",
-  "06_unfolding.mp4": "on disk from 2026-09-08T00:11:52Z, before this capture began at 2026-09-08T04:41:42Z",
-  "07_feeling_landing.mp4": "on disk from 2026-09-08T00:16:58Z, before this capture began at 2026-09-08T04:41:42Z",
-  "08_state_propagating.mp4": "on disk from 2026-09-08T04:05:20Z, before this capture began at 2026-09-08T04:41:42Z",
-  "15_authored_feeling.mp4": "on disk from 2026-09-08T03:44:45Z, before this capture began at 2026-09-08T04:41:42Z"
+  "01_pulse.png": "on disk from 2026-09-07T22:20:07Z, before this capture began at 2026-09-08T06:05:04Z",
+  "03_us.png": "on disk from 2026-09-07T22:20:58Z, before this capture began at 2026-09-08T06:05:04Z",
+  "04_moments.png": "on disk from 2026-09-07T22:21:20Z, before this capture began at 2026-09-08T06:05:04Z",
+  "05_settings.png": "on disk from 2026-09-07T22:21:41Z, before this capture began at 2026-09-08T06:05:04Z",
+  "10_first_run.png": "on disk from 2026-09-07T22:25:04Z, before this capture began at 2026-09-08T06:05:04Z",
+  "12_search.png": "on disk from 2026-09-07T22:22:09Z, before this capture began at 2026-09-08T06:05:04Z",
+  "13_messenger_states.png": "on disk from 2026-09-07T22:24:14Z, before this capture began at 2026-09-08T06:05:04Z",
+  "14_media_viewer.png": "on disk from 2026-09-07T22:24:51Z, before this capture began at 2026-09-08T06:05:04Z",
+  "17_setup_pwa.png": "on disk from 2026-09-07T22:25:14Z, before this capture began at 2026-09-08T06:05:04Z",
+  "06_unfolding.mp4": "on disk from 2026-09-08T00:11:52Z, before this capture began at 2026-09-08T06:05:04Z",
+  "07_feeling_landing.mp4": "on disk from 2026-09-08T00:16:58Z, before this capture began at 2026-09-08T06:05:04Z",
+  "08_state_propagating.mp4": "on disk from 2026-09-08T04:05:20Z, before this capture began at 2026-09-08T06:05:04Z",
+  "15_authored_feeling.mp4": "on disk from 2026-09-08T03:44:45Z, before this capture began at 2026-09-08T06:05:04Z"
  }
 }

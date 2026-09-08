@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-08T04:41:42Z",
+ "captured_at": "2026-09-08T06:05:04Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -229,7 +229,7 @@
    "cuts_between_runs": [],
    "app_seconds": 4.8,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 20.52257,
+   "mean_change_per_frame": 21.32055,
    "held_frame_test": {
     "unit": "grey levels of Rec.601 luma at full resolution",
     "all_three_must_hold": {
@@ -238,34 +238,19 @@
      "busiest_32px_tile_mean_change_below": 2.0
     },
     "worst_moving_frame": {
-     "frame": 44,
+     "frame": 43,
      "mean": 10.5365,
      "visible_share": 0.221211,
      "busiest_tile": 162.2606,
      "note": "the frame nearest the held-frame test that still counts as motion"
     }
    },
-   "repeated_frames": 13,
-   "repeated_fraction": 0.043,
-   "longest_still_run": 1,
-   "repeated_at": [
-    2,
-    5,
-    9,
-    48,
-    81,
-    120,
-    124,
-    181,
-    184,
-    233,
-    261,
-    264,
-    267
-   ],
+   "repeated_frames": 0,
+   "repeated_fraction": 0.0,
+   "longest_still_run": 0,
+   "repeated_at": [],
    "brightness_jumps": 0,
-   "ok": false,
-   "why": "13 frame(s) identical to the one before (first at 2); the brief allows none",
+   "ok": true,
    "strip": "evidence/crops/11_chat_scroll_strip.png",
    "strip_frames": [
     "/tmp/lovetap-capture/11_chat_scroll/000000.png",
@@ -376,37 +361,41 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 2874,
+  "cold_ms": 3077,
   "steps": [
    {
     "do": "pair",
-    "ms": 2368,
+    "ms": 2425,
     "auto": true,
     "far": "http://127.0.0.1:8480"
    },
    {
     "do": "goTo",
-    "ms": 3806
+    "ms": 3923
    },
    {
     "do": "wait",
-    "ms": 2002
+    "ms": 2005
    },
    {
     "do": "scrollTo",
-    "ms": 4190
+    "ms": 4483
    },
    {
     "do": "wait",
-    "ms": 1101
+    "ms": 1102
    },
    {
     "do": "frames",
-    "ms": 742076
+    "ms": 531790
    },
    {
     "do": "timings",
-    "ms": 421
+    "ms": 422
+   },
+   {
+    "do": "flingLog",
+    "ms": 410
    }
   ]
  },

@@ -265,6 +265,18 @@ Taken from the artifacts and the records the app wrote at the shutter, on this m
   792 pixels; eight sheets with the top one crossed by the edge of the frame do, and a thread that
   runs off the top of a phone is what a thread looks like.
 
+  *What the fourth pass came back with.* **11: 300 frames, `ok: true`, zero repeated frames**, zero
+  brightness jumps, mean change 21.3 grey levels a frame. The thread's own record of the clip says
+  why: seven throws, three hundred frames, **every one of them moved** — 47.5 logical pixels at the
+  most, 10.4 at the least, median 27.6, and not one frame under the third of a pixel that a device
+  pixel is at this scale. And the framework's frame timings over the same clip say the animation was
+  costing more than the held frames: **build p95 1050 ms -> 54 ms**, max 1578 -> 1462, against a
+  raster unchanged at 176/198. That number is the one the row-01 rubric calls scroll jank, and two
+  cycles of critics measured it without either of us finding it; it was the same millisecond-long
+  animation, and setting the pixels instead took it away. **02: eight rows on the glass, all eight
+  of them paper, eight distinct tears out of a pool of fifty-six**, rows 2353 to 2360 of 8069, the
+  best of 66 framings of 48 stretches. Both artifacts pass their own standards for the first time.
+
 - **The hand**: 273 marks of ink on the hero, twin share **0.147**, best-fit IoU median 0.655 and
   p90 0.866. A font repeats itself exactly; this does not.
 - What I could not measure myself: the hairline the completeness pass found (a sliver of paper

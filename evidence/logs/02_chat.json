@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 4079,
+   "ms": 4438,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 6203
+   "ms": 6598
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 1904
   },
   {
    "do": "scrollTo",
-   "ms": 12454
+   "ms": 56986
   },
   {
    "do": "wait",
@@ -32,11 +32,11 @@
   },
   {
    "do": "shot",
-   "ms": 8954
+   "ms": 3481
   },
   {
    "do": "report",
-   "ms": 762
+   "ms": 729
   }
  ],
  "shots": [
@@ -55,56 +55,69 @@
     "replying_to": null,
     "editing": null,
     "partner_typing": false,
-    "anchor": "types:voice_note,reacted at rows 1226 to 1226 of 8069",
+    "anchor": "types:voice_note,reacted at rows 2354 to 2355 of 8069, 8 sheets on the glass and 7 of them whole, the best of 66 framings of 48 stretches",
     "kinds": {
-     "message": 6,
+     "message": 7,
      "voice_note": 1
     },
     "delivery": {
-     "0000G1WM58GY0QCDYZR4BS0KS1": "read",
-     "0000G7D7H09ZVEVY6R0JSZAV7A": "read",
-     "0000G7W70RRC0VZ7RXXZMEZYRJ": "read",
-     "0000GCTZ38TN6QJ7FBW1RWTE4F": "read"
+     "00015W9WM8JY1VGBMS8YZ3BCWZ": "read",
+     "000161B7Q01T45RZGBNY27TZW9": "read",
+     "0001639QQ0RNJ1WVAGNKSKRVRC": "read",
+     "00016B8TSRR2PAD5PG1ER1V70J": "read"
     },
     "states_on_the_glass": {
      "read": 4
     },
     "reactions": {
-     "0000G7D7H09ZVEVY6R0JSZAV7A": 1
+     "00015WD17011152HXP55ZPFPYA": 1
     },
     "edited": [],
     "taken_back": []
    },
    "visible": [
-    "0000G1SPD8Q47VDR3THXX6DZB8",
-    "0000G1WM58GY0QCDYZR4BS0KS1",
-    "0000G7D7H09ZVEVY6R0JSZAV7A",
-    "0000G7Q5WGWFQ6Q4BMB8RRQD9X",
-    "0000G7W70RRC0VZ7RXXZMEZYRJ",
-    "0000GCH2P8AK4N9BD823EYSPWH",
-    "0000GCTZ38TN6QJ7FBW1RWTE4F"
+    "00015W9WM8JY1VGBMS8YZ3BCWZ",
+    "00015WD17011152HXP55ZPFPYA",
+    "000161B7Q01T45RZGBNY27TZW9",
+    "0001631C4GP4TCC5Y0MVRH1G27",
+    "0001639QQ0RNJ1WVAGNKSKRVRC",
+    "00016B1Z2GPA1TCFPJWS2WAVX0",
+    "00016B8TSRR2PAD5PG1ER1V70J",
+    "00016BDCA0Z379V0R10S13Y9Q3"
+   ],
+   "paper": [
+    "00015W9WM8JY1VGBMS8YZ3BCWZ",
+    "00015WD17011152HXP55ZPFPYA",
+    "000161B7Q01T45RZGBNY27TZW9",
+    "0001631C4GP4TCC5Y0MVRH1G27",
+    "0001639QQ0RNJ1WVAGNKSKRVRC",
+    "00016B1Z2GPA1TCFPJWS2WAVX0",
+    "00016B8TSRR2PAD5PG1ER1V70J",
+    "00016BDCA0Z379V0R10S13Y9Q3"
    ],
    "tears": {
-    "0000G1SPD8Q47VDR3THXX6DZB8": "tear_034",
-    "0000G1WM58GY0QCDYZR4BS0KS1": "tear_054",
-    "0000G7D7H09ZVEVY6R0JSZAV7A": "tear_039",
-    "0000G7Q5WGWFQ6Q4BMB8RRQD9X": "tear_002",
-    "0000G7W70RRC0VZ7RXXZMEZYRJ": "tear_021",
-    "0000GCH2P8AK4N9BD823EYSPWH": "tear_027",
-    "0000GCTZ38TN6QJ7FBW1RWTE4F": "tear_049"
+    "00015W9WM8JY1VGBMS8YZ3BCWZ": "tear_012",
+    "00015WD17011152HXP55ZPFPYA": "tear_034",
+    "000161B7Q01T45RZGBNY27TZW9": "tear_039",
+    "0001631C4GP4TCC5Y0MVRH1G27": "tear_002",
+    "0001639QQ0RNJ1WVAGNKSKRVRC": "tear_021",
+    "00016B1Z2GPA1TCFPJWS2WAVX0": "tear_007",
+    "00016B8TSRR2PAD5PG1ER1V70J": "tear_027",
+    "00016BDCA0Z379V0R10S13Y9Q3": "tear_049"
    },
    "stocks": {
-    "0000G1SPD8Q47VDR3THXX6DZB8": "lined_02",
-    "0000G1WM58GY0QCDYZR4BS0KS1": "lined_01",
-    "0000G7D7H09ZVEVY6R0JSZAV7A": "lined_02",
-    "0000G7Q5WGWFQ6Q4BMB8RRQD9X": "lined_04",
-    "0000G7W70RRC0VZ7RXXZMEZYRJ": "legal_02",
-    "0000GCH2P8AK4N9BD823EYSPWH": "lined_04",
-    "0000GCTZ38TN6QJ7FBW1RWTE4F": "lined_04"
+    "00015W9WM8JY1VGBMS8YZ3BCWZ": "looseleaf_03",
+    "00015WD17011152HXP55ZPFPYA": "lined_03",
+    "000161B7Q01T45RZGBNY27TZW9": "legal_01",
+    "0001631C4GP4TCC5Y0MVRH1G27": "lined_01",
+    "0001639QQ0RNJ1WVAGNKSKRVRC": "looseleaf_02",
+    "00016B1Z2GPA1TCFPJWS2WAVX0": "lined_01",
+    "00016B8TSRR2PAD5PG1ER1V70J": "legal_01",
+    "00016BDCA0Z379V0R10S13Y9Q3": "lined_01"
    },
    "scroll": {
-    "first": 1224,
-    "last": 1230,
+    "first": 2353,
+    "last": 2360,
     "of": 8069
    },
    "now": "2026-09-03T19:40:00.000Z",
@@ -133,7 +146,7 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 1,
+    "rounds": 2,
     "pushed": 1,
     "refused": 0,
     "pulled": 0,
@@ -147,11 +160,11 @@
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14061,
-     "our_cursor": 14061,
+     "peer_cursor": 14062,
+     "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-08T04:53:26.143Z",
-     "last_contact": "2026-09-08T04:53:56.861Z"
+     "since": "2026-09-08T06:17:01.531Z",
+     "last_contact": "2026-09-08T06:17:59.738Z"
     }
    },
    "ambient": {
@@ -164,9 +177,9 @@
    "at": "02_chat.png"
   }
  ],
- "cold_ms": 12538,
+ "cold_ms": 13712,
  "load": {
-  "ms": 12538,
+  "ms": 13712,
   "store": "fresh",
   "profile": "profile_seeded"
  },
