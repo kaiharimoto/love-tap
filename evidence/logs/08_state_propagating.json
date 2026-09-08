@@ -10,119 +10,119 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2303
+   "ms": 2304
   },
   {
    "do": "pair",
-   "ms": 1671
+   "ms": 2291
   },
   {
    "do": "wait",
-   "ms": 3706
+   "ms": 3705
   },
   {
    "do": "goTo",
-   "ms": 3557
+   "ms": 3881
   },
   {
    "do": "far",
-   "ms": 660
+   "ms": 736
   },
   {
    "do": "wait",
-   "ms": 3004
+   "ms": 3005
   },
   {
    "do": "far",
-   "ms": 1773
+   "ms": 668
   },
   {
    "do": "awaitArrival",
-   "ms": 5959
+   "ms": 2626
   },
   {
    "do": "step",
-   "ms": 9015
+   "ms": 4719
   },
   {
    "do": "frames",
-   "ms": 219928
+   "ms": 339125
   },
   {
    "do": "goTo",
-   "ms": 4931
+   "ms": 4831
   },
   {
    "do": "step",
-   "ms": 3623
+   "ms": 2225
   },
   {
    "do": "far",
-   "ms": 552
+   "ms": 646
   },
   {
    "do": "awaitArrival",
-   "ms": 3135
+   "ms": 1522
   },
   {
    "do": "frames",
-   "ms": 34339
+   "ms": 47297
   },
   {
    "do": "far",
-   "ms": 505
+   "ms": 671
   },
   {
    "do": "awaitArrival",
-   "ms": 1331
+   "ms": 3508
   },
   {
    "do": "frames",
-   "ms": 145832
+   "ms": 160417
   },
   {
    "do": "far",
-   "ms": 707
+   "ms": 683
   },
   {
    "do": "awaitArrival",
-   "ms": 3349
+   "ms": 3040
   },
   {
    "do": "frames",
-   "ms": 233590
+   "ms": 360186
   },
   {
    "do": "goTo",
-   "ms": 5133
+   "ms": 7992
   },
   {
    "do": "step",
-   "ms": 2859
+   "ms": 2548
   },
   {
    "do": "far",
-   "ms": 552
+   "ms": 588
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2103
   },
   {
    "do": "far",
-   "ms": 1066
+   "ms": 1588
   },
   {
    "do": "far",
-   "ms": 1693
+   "ms": 1895
   },
   {
    "do": "awaitArrival",
-   "ms": 32632
+   "ms": 2638
   },
   {
    "do": "frames",
-   "ms": 160593
+   "ms": 222401
   },
   {
    "do": "report",
@@ -180,7 +180,7 @@
      {
       "id": "calendar",
       "events": 6,
-      "glance": "us in 63 days"
+      "glance": "us in 61 days"
      },
      {
       "id": "rituals",
@@ -201,7 +201,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 9040,
    "seed": 20260903,
-   "events": 14082,
+   "events": 14087,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -213,7 +213,7 @@
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 240,
+    "length": 147,
     "decoded": 24,
     "decoding": 0,
     "playhead": 0,
@@ -224,7 +224,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-06T23:37:37.529Z",
+    "started_at": "2026-09-08T04:01:29.717Z",
     "pattern": [
      {
       "ms": 150,
@@ -251,38 +251,40 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 47,
-    "pushed": 10,
+    "rounds": 56,
+    "pushed": 12,
     "refused": 0,
-    "pulled": 11,
+    "pulled": 13,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
-    "cursor": 14082,
+    "refused_in_the_outbox": 0,
+    "cursor": 14087,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14082,
-     "our_cursor": 14082,
+     "peer_cursor": 14087,
+     "our_cursor": 14087,
      "last_error": null,
-     "since": "2026-09-06T23:25:29.357Z",
-     "last_contact": "2026-09-06T23:40:07.844Z"
+     "since": "2026-09-08T03:44:49.385Z",
+     "last_contact": "2026-09-08T04:04:21.966Z"
     }
    },
    "ambient": {
     "standing_line": "restless · week one, and the room smells right again · out · 7 hours ago",
     "pocket_feeling": "soup",
     "pocket_at": 1788464400000,
-    "allowed_to_interrupt": false
+    "allowed_to_interrupt": false,
+    "held_by_the_phone": []
    },
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 2545,
+ "cold_ms": 3356,
  "load": {
-  "ms": 2545,
+  "ms": 3356,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -323,44 +325,38 @@
  "arrivals": [
   {
    "line": "feeling hold 0.92",
-   "before": 8070,
-   "after": 8071,
+   "before": 8072,
+   "after": 8073,
    "at_frame": 0,
-   "waited_ms": 5456
+   "waited_ms": 2125
   },
   {
    "line": "message it is raining here too",
-   "before": 8071,
-   "after": 8072,
+   "before": 8074,
+   "after": 8075,
    "at_frame": 149,
-   "waited_ms": 2632
+   "waited_ms": 1020
   },
   {
    "line": "feeling squeeze 0.6",
-   "before": 8072,
-   "after": 8073,
+   "before": 8075,
+   "after": 8076,
    "at_frame": 168,
-   "waited_ms": 830
+   "waited_ms": 3008
   },
   {
    "line": "feeling here 0.8",
-   "before": 8073,
-   "after": 8074,
+   "before": 8076,
+   "after": 8077,
    "at_frame": 239,
-   "waited_ms": 2849
+   "waited_ms": 2539
   },
   {
    "line": "feeling soup 0.7",
-   "before": 8076,
-   "after": 8077,
+   "before": 8078,
+   "after": 8079,
    "at_frame": 395,
-   "waited_ms": 32131
-  }
- ],
- "said_again": [
-  {
-   "line": "feeling soup 0.7",
-   "times": 3
+   "waited_ms": 2137
   }
  ],
  "problems": [],

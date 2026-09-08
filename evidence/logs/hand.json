@@ -1,14 +1,14 @@
 {
  "crop": "evidence/02_chat.png",
- "marks": 273,
+ "marks": 401,
  "best_fit_iou": {
-  "median": 0.655,
-  "p90": 0.866,
-  "max": 0.963
+  "median": 0.648,
+  "p90": 0.849,
+  "max": 0.92
  },
- "marks_with_a_twin": 40,
- "twin_share": 0.147,
- "pairs_over_twin": 51,
+ "marks_with_a_twin": 39,
+ "twin_share": 0.097,
+ "pairs_over_twin": 29,
  "twin_iou": 0.85,
  "note": "marks are connected components of ink, normalised to one box; a font repeats itself exactly, a hand a little",
  "ok": true

@@ -16,7 +16,7 @@
    {
     "id": "calendar",
     "events": 6,
-    "glance": "us in 63 days"
+    "glance": "us in 61 days"
    },
    {
     "id": "rituals",
@@ -37,7 +37,7 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 9040,
  "seed": 20260903,
- "events": 14082,
+ "events": 14087,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -49,7 +49,7 @@
  "setup_showing": false,
  "fold": {
   "sequence": "unfold_thirds",
-  "length": 240,
+  "length": 147,
   "decoded": 24,
   "decoding": 0,
   "playhead": 0,
@@ -60,7 +60,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-06T23:37:37.529Z",
+  "started_at": "2026-09-08T04:01:29.717Z",
   "pattern": [
    {
     "ms": 150,
@@ -87,31 +87,33 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 47,
-  "pushed": 10,
+  "rounds": 56,
+  "pushed": 12,
   "refused": 0,
-  "pulled": 11,
+  "pulled": 13,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
-  "cursor": 14082,
+  "refused_in_the_outbox": 0,
+  "cursor": 14087,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14082,
-   "our_cursor": 14082,
+   "peer_cursor": 14087,
+   "our_cursor": 14087,
    "last_error": null,
-   "since": "2026-09-06T23:25:29.357Z",
-   "last_contact": "2026-09-06T23:40:07.844Z"
+   "since": "2026-09-08T03:44:49.385Z",
+   "last_contact": "2026-09-08T04:04:21.966Z"
   }
  },
  "ambient": {
   "standing_line": "restless · week one, and the room smells right again · out · 7 hours ago",
   "pocket_feeling": "soup",
   "pocket_at": 1788464400000,
-  "allowed_to_interrupt": false
+  "allowed_to_interrupt": false,
+  "held_by_the_phone": []
  },
  "at": "08_state_propagating"
 }

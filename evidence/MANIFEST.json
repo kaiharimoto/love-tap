@@ -1,11 +1,11 @@
 {
- "captured_at": "2026-09-07T22:08:04Z",
+ "captured_at": "2026-09-08T03:06:27Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
    "bytes": 4314169,
    "written": "2026-09-07T22:20:07Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -19,7 +19,7 @@
   "03_us.png": {
    "bytes": 4250154,
    "written": "2026-09-07T22:20:58Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -33,7 +33,7 @@
   "04_moments.png": {
    "bytes": 4503944,
    "written": "2026-09-07T22:21:20Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -47,7 +47,7 @@
   "05_settings.png": {
    "bytes": 3813881,
    "written": "2026-09-07T22:21:41Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -61,7 +61,7 @@
   "10_first_run.png": {
    "bytes": 4006932,
    "written": "2026-09-07T22:25:04Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -75,7 +75,7 @@
   "12_search.png": {
    "bytes": 4538264,
    "written": "2026-09-07T22:22:09Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -89,7 +89,7 @@
   "13_messenger_states.png": {
    "bytes": 4589961,
    "written": "2026-09-07T22:24:14Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -103,7 +103,7 @@
   "14_media_viewer.png": {
    "bytes": 3463840,
    "written": "2026-09-07T22:24:51Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -117,7 +117,7 @@
   "17_setup_pwa.png": {
    "bytes": 4262994,
    "written": "2026-09-07T22:25:14Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -131,7 +131,7 @@
   "06_unfolding.mp4": {
    "bytes": 3623982,
    "written": "2026-09-08T00:11:52Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1080,
     2340
@@ -150,7 +150,7 @@
   "07_feeling_landing.mp4": {
    "bytes": 6611964,
    "written": "2026-09-08T00:16:58Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1080,
     2340
@@ -165,14 +165,63 @@
    ],
    "minimum_seconds": 6,
    "long_enough": true
+  },
+  "08_state_propagating.mp4": {
+   "bytes": 7087325,
+   "written": "2026-09-08T04:05:20Z",
+   "from_this_run": true,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 502,
+   "fps": 62.5,
+   "seconds": 8.03,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
+   "minimum_seconds": 8,
+   "long_enough": true
+  },
+  "15_authored_feeling.mp4": {
+   "bytes": 6678540,
+   "written": "2026-09-08T03:44:45Z",
+   "from_this_run": true,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 376,
+   "fps": 62.5,
+   "seconds": 6.02,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
+   "minimum_seconds": 4,
+   "long_enough": true
   }
  },
  "missing": {
-  "02_chat.png": "only 6 notes on screen (a copy from an earlier run is still on disk, written 2026-09-07T22:20:38Z; it is not this session's and is not counted)",
-  "09_two_devices.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "08_state_propagating.mp4": "awaitArrival: the log stood at 8084 after 90000ms, waiting for 8085 (said again 3x) \u2014 link offline, events 14098, sync {\"transport\":\"local\",\"role\":\"client\",\"rounds\":47,\"pushed\":1 (a copy from an earlier run is still on disk, written 2026-09-06T23:40:56Z; it is not this session's and is not counted)",
-  "11_chat_scroll.mp4": "the frame check failed; see evidence/logs/11_chat_scroll.frames.json (a copy from an earlier run is still on disk, written 2026-09-08T00:14:42Z; it is not this session's and is not counted)",
-  "15_authored_feeling.mp4": "the frame check failed; see evidence/logs/15_authored_feeling.frames.json (a copy from an earlier run is still on disk, written 2026-09-08T00:16:58Z; it is not this session's and is not counted)"
+  "02_chat.png": "only 5 notes on screen (a copy from an earlier run is still on disk, written 2026-09-08T03:18:26Z; it is not this session's and is not counted)",
+  "09_two_devices.png": "not captured this session",
+  "16_setup_android.png": "not captured this session",
+  "11_chat_scroll.mp4": "the frame check failed; see evidence/logs/11_chat_scroll.frames.json (a copy from an earlier run is still on disk, written 2026-09-08T03:42:27Z; it is not this session's and is not counted)"
+ },
+ "stale": {
+  "01_pulse.png": "on disk from 2026-09-07T22:20:07Z, before this capture began at 2026-09-08T03:06:27Z",
+  "03_us.png": "on disk from 2026-09-07T22:20:58Z, before this capture began at 2026-09-08T03:06:27Z",
+  "04_moments.png": "on disk from 2026-09-07T22:21:20Z, before this capture began at 2026-09-08T03:06:27Z",
+  "05_settings.png": "on disk from 2026-09-07T22:21:41Z, before this capture began at 2026-09-08T03:06:27Z",
+  "10_first_run.png": "on disk from 2026-09-07T22:25:04Z, before this capture began at 2026-09-08T03:06:27Z",
+  "12_search.png": "on disk from 2026-09-07T22:22:09Z, before this capture began at 2026-09-08T03:06:27Z",
+  "13_messenger_states.png": "on disk from 2026-09-07T22:24:14Z, before this capture began at 2026-09-08T03:06:27Z",
+  "14_media_viewer.png": "on disk from 2026-09-07T22:24:51Z, before this capture began at 2026-09-08T03:06:27Z",
+  "17_setup_pwa.png": "on disk from 2026-09-07T22:25:14Z, before this capture began at 2026-09-08T03:06:27Z",
+  "06_unfolding.mp4": "on disk from 2026-09-08T00:11:52Z, before this capture began at 2026-09-08T03:06:27Z",
+  "07_feeling_landing.mp4": "on disk from 2026-09-08T00:16:58Z, before this capture began at 2026-09-08T03:06:27Z"
  }
 }
