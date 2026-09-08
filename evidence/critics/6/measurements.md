@@ -199,6 +199,35 @@ The scene was run end to end against `host_daemon --seed year` and the frames pu
   frame shows both notes open, with their ink, their hands and their timestamps: the blank letter
   three critics measured is not there.
 
+## The sixth capture, measured
+
+Taken from the artifacts and the records the app wrote at the shutter, on this machine.
+
+- **The composer band, the thing three critics measured at 1.78, 2.19 and 2.22 to one against the
+  wood.** WCAG between the 3rd and 97th luminance percentiles of each row of the writing pad on
+  13_messenger_states.png: reply banner **8.71:1**, attachment row **4.66:1**, the draft being
+  typed **12.45:1**. It is on paper now, and every row of it is over the 4.5 the row asks for.
+- **13 carries the whole grammar in one frame**: read 4, sent 1, refused 1 — `it would not go` in
+  red — an edit with its caret, a row taken back with no delivery mark on it (a delivery state is
+  about writing on its way, and there is none), a reply banner, the attachment row, a draft, and
+  `noor writing…`.
+- **14_media_viewer**: the viewer's own record says `kind: video, initialised: true, playing:
+  true, position_ms: 1530 of 2500`. A video playing, not a poster.
+- **04_moments**: three lenses populated at once — 183 media, 154 things that happened, 1340
+  feelings — with **26 tiles built** for a viewport onto 183, and **18 pictures asked for and 18
+  arrived**. Zero "still fetching".
+- **03_us**: all five modules on the desk with their own counts — dates 81, the list 199, calendar
+  6, rituals 53, the shelf 12 — each with the line it would tell you at a glance.
+- **06_unfolding**: 326 frames, 5.22 s, **zero held frames**, no brightness jump.
+  **07_feeling_landing**: 421 frames, zero held frames.
+- **The hand**: 273 marks of ink on the hero, twin share **0.147**, best-fit IoU median 0.655 and
+  p90 0.866. A font repeats itself exactly; this does not.
+- What I could not measure myself: the hairline the completeness pass found (a sliver of paper
+  outside a sheet's own edge). My sweep for rows that are mostly desk with a thin bright streak
+  cannot tell that from the standing line's own edge — it reports the same rows on every artifact.
+  The mask is composed one device pixel in from every side; whether that closed it is for a reader
+  with the critic's own method.
+
 ## Still open, measured or named
 - paper is rendered as WebP at Blender's default quality 92 and then packed, so every downstream
   number is measured against an already-degraded ceiling.
