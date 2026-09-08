@@ -388,6 +388,10 @@ class MaskedLayer extends StatefulWidget {
 class _MaskedLayerState extends State<MaskedLayer> {
   ui.Image? _mask;
 
+  /// Whether the mask is never coming. A piece whose mask has not arrived *yet* and a piece whose
+  /// mask does not exist are two different things, and they used to be the same thing here.
+  bool _lost = false;
+
   @override
   void initState() {
     super.initState();
@@ -413,14 +417,26 @@ class _MaskedLayerState extends State<MaskedLayer> {
     unawaited(
       MaskCache.load(widget.maskAsset).then((img) {
         if (mounted) setState(() => _mask = img);
-      }, onError: (Object _) {}),
+      }, onError: (Object _) {
+        if (mounted) setState(() => _lost = true);
+      }),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final mask = _mask;
-    if (mask == null) return widget.child;
+    // A mask that is still being decoded is not a missing mask. Handing the child back unmasked
+    // while it loads drew the piece as a flat rectangle of stock colour with square corners and no
+    // shadow — the shape the whole material system exists to not be — and 07's clip carries one
+    // frame of exactly that: a feeling arrives, and for a sixteenth of a second the sheet it lands
+    // on is a pale grey slab, which is a +11.6 grey-level jump on the whole screen and the light
+    // jump the frame check failed the clip on. The piece keeps its room and paints nothing until
+    // its paper is there, which is the next frame. If the mask never arrives — a build with a mask
+    // missing from the bundle — the old behaviour is what is wanted, and _lost says so.
+    if (mask == null) {
+      return _lost ? widget.child : Opacity(opacity: 0, child: widget.child);
+    }
     // Composed at device pixels, not logical ones. A note is about 340 points wide and the screen
     // it is on is three times that, so a mask composed at 340 would be upsampled threefold before
     // anybody saw it — and the row this material is judged on is judged at three hundred per cent
