@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-08T03:06:27Z",
+ "captured_at": "2026-09-08T04:07:30Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -229,7 +229,7 @@
    "cuts_between_runs": [],
    "app_seconds": 4.8,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 20.96078,
+   "mean_change_per_frame": 20.98036,
    "held_frame_test": {
     "unit": "grey levels of Rec.601 luma at full resolution",
     "all_three_must_hold": {
@@ -245,19 +245,20 @@
      "note": "the frame nearest the held-frame test that still counts as motion"
     }
    },
-   "repeated_frames": 5,
-   "repeated_fraction": 0.017,
+   "repeated_frames": 6,
+   "repeated_fraction": 0.02,
    "longest_still_run": 1,
    "repeated_at": [
     2,
-    131,
-    180,
-    184,
-    222
+    18,
+    55,
+    123,
+    126,
+    179
    ],
    "brightness_jumps": 0,
    "ok": false,
-   "why": "5 frame(s) identical to the one before (first at 2); the brief allows none",
+   "why": "6 frame(s) identical to the one before (first at 2); the brief allows none",
    "strip": "evidence/crops/11_chat_scroll_strip.png",
    "strip_frames": [
     "/tmp/lovetap-capture/11_chat_scroll/000000.png",
@@ -372,33 +373,33 @@
   "steps": [
    {
     "do": "pair",
-    "ms": 2395,
+    "ms": 2332,
     "auto": true,
     "far": "http://127.0.0.1:8480"
    },
    {
     "do": "goTo",
-    "ms": 3663
+    "ms": 3681
    },
    {
     "do": "wait",
-    "ms": 2004
+    "ms": 2003
    },
    {
     "do": "scrollTo",
-    "ms": 4066
+    "ms": 4512
    },
    {
     "do": "wait",
-    "ms": 1102
+    "ms": 1103
    },
    {
     "do": "frames",
-    "ms": 550670
+    "ms": 614121
    },
    {
     "do": "timings",
-    "ms": 417
+    "ms": 419
    }
   ]
  },

@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-08T03:06:27Z",
+ "captured_at": "2026-09-08T04:07:30Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
@@ -169,7 +169,7 @@
   "08_state_propagating.mp4": {
    "bytes": 7087325,
    "written": "2026-09-08T04:05:20Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1080,
     2340
@@ -188,7 +188,7 @@
   "15_authored_feeling.mp4": {
    "bytes": 6678540,
    "written": "2026-09-08T03:44:45Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1080,
     2340
@@ -206,22 +206,24 @@
   }
  },
  "missing": {
-  "02_chat.png": "only 5 notes on screen (a copy from an earlier run is still on disk, written 2026-09-08T03:18:26Z; it is not this session's and is not counted)",
+  "02_chat.png": "only 6 notes on screen (a copy from an earlier run is still on disk, written 2026-09-08T04:19:42Z; it is not this session's and is not counted)",
   "09_two_devices.png": "not captured this session",
   "16_setup_android.png": "not captured this session",
-  "11_chat_scroll.mp4": "the frame check failed; see evidence/logs/11_chat_scroll.frames.json (a copy from an earlier run is still on disk, written 2026-09-08T03:42:27Z; it is not this session's and is not counted)"
+  "11_chat_scroll.mp4": "the frame check failed; see evidence/logs/11_chat_scroll.frames.json (a copy from an earlier run is still on disk, written 2026-09-08T04:30:47Z; it is not this session's and is not counted)"
  },
  "stale": {
-  "01_pulse.png": "on disk from 2026-09-07T22:20:07Z, before this capture began at 2026-09-08T03:06:27Z",
-  "03_us.png": "on disk from 2026-09-07T22:20:58Z, before this capture began at 2026-09-08T03:06:27Z",
-  "04_moments.png": "on disk from 2026-09-07T22:21:20Z, before this capture began at 2026-09-08T03:06:27Z",
-  "05_settings.png": "on disk from 2026-09-07T22:21:41Z, before this capture began at 2026-09-08T03:06:27Z",
-  "10_first_run.png": "on disk from 2026-09-07T22:25:04Z, before this capture began at 2026-09-08T03:06:27Z",
-  "12_search.png": "on disk from 2026-09-07T22:22:09Z, before this capture began at 2026-09-08T03:06:27Z",
-  "13_messenger_states.png": "on disk from 2026-09-07T22:24:14Z, before this capture began at 2026-09-08T03:06:27Z",
-  "14_media_viewer.png": "on disk from 2026-09-07T22:24:51Z, before this capture began at 2026-09-08T03:06:27Z",
-  "17_setup_pwa.png": "on disk from 2026-09-07T22:25:14Z, before this capture began at 2026-09-08T03:06:27Z",
-  "06_unfolding.mp4": "on disk from 2026-09-08T00:11:52Z, before this capture began at 2026-09-08T03:06:27Z",
-  "07_feeling_landing.mp4": "on disk from 2026-09-08T00:16:58Z, before this capture began at 2026-09-08T03:06:27Z"
+  "01_pulse.png": "on disk from 2026-09-07T22:20:07Z, before this capture began at 2026-09-08T04:07:30Z",
+  "03_us.png": "on disk from 2026-09-07T22:20:58Z, before this capture began at 2026-09-08T04:07:30Z",
+  "04_moments.png": "on disk from 2026-09-07T22:21:20Z, before this capture began at 2026-09-08T04:07:30Z",
+  "05_settings.png": "on disk from 2026-09-07T22:21:41Z, before this capture began at 2026-09-08T04:07:30Z",
+  "10_first_run.png": "on disk from 2026-09-07T22:25:04Z, before this capture began at 2026-09-08T04:07:30Z",
+  "12_search.png": "on disk from 2026-09-07T22:22:09Z, before this capture began at 2026-09-08T04:07:30Z",
+  "13_messenger_states.png": "on disk from 2026-09-07T22:24:14Z, before this capture began at 2026-09-08T04:07:30Z",
+  "14_media_viewer.png": "on disk from 2026-09-07T22:24:51Z, before this capture began at 2026-09-08T04:07:30Z",
+  "17_setup_pwa.png": "on disk from 2026-09-07T22:25:14Z, before this capture began at 2026-09-08T04:07:30Z",
+  "06_unfolding.mp4": "on disk from 2026-09-08T00:11:52Z, before this capture began at 2026-09-08T04:07:30Z",
+  "07_feeling_landing.mp4": "on disk from 2026-09-08T00:16:58Z, before this capture began at 2026-09-08T04:07:30Z",
+  "08_state_propagating.mp4": "on disk from 2026-09-08T04:05:20Z, before this capture began at 2026-09-08T04:07:30Z",
+  "15_authored_feeling.mp4": "on disk from 2026-09-08T03:44:45Z, before this capture began at 2026-09-08T04:07:30Z"
  }
 }
