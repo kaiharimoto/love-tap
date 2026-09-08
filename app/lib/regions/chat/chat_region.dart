@@ -58,9 +58,8 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   bool _typingSent = false;
   ThreadItem? _replyTo;
 
-  /// Pixels a driven frame asked for while the scroller was busy with the frame before it.
-  double _owedScroll = 0;
-  bool _scrollInFlight = false;
+  /// The scroller runs one animation at a time, so the fling's nudges go in a queue.
+  Future<void> _scrollChain = Future<void>.value();
   ThreadItem? _editing;
   String? _highlightId;
 
@@ -128,21 +127,17 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // A duration, not zero: DrivenScrollActivity asserts duration > Duration.zero, and the
       // throw happens inside an async body where nothing sees it — the list simply did not move.
       // One millisecond of the driven clock is the shortest honest step.
-      // Never dropped, only deferred. The offset controller runs one animation at a time and a
-      // call that arrives while one is in flight goes nowhere: the fling asks for a nudge every
-      // frame, so three frames of a three-hundred-frame clip came back identical to the one before
-      // — scattered, each a few frames after a throw, which is where two of them overlap. What a
-      // frame is owed is added to the next call instead, so the list is always moving by
-      // something while there is anything left to move.
+      // Queued, never dropped and never deferred to a later frame. The offset controller runs one
+      // animation at a time and a call that arrives while one is in flight goes nowhere; the
+      // fling asks for a nudge every frame, and the frames that came back identical to the one
+      // before were always a few frames after a throw — which is exactly where the old fling's
+      // last nudge and the new one's first overlap. Holding the pixels back for the next frame
+      // made it worse (three, then five, then six of three hundred), because the frame that gave
+      // them up did not move at all. Chained instead: each nudge starts when the one before it
+      // has finished, and both run inside the two frames the driven clock's step pumps.
       if (dy == 0 || !_scroll.isAttached) return;
-      _owedScroll += dy;
-      if (_scrollInFlight) return;
-      _scrollInFlight = true;
-      final go = _owedScroll;
-      _owedScroll = 0;
-      unawaited(_offset
-          .animateScroll(offset: go, duration: const Duration(milliseconds: 1))
-          .whenComplete(() => _scrollInFlight = false));
+      _scrollChain = _scrollChain.then((_) =>
+          _offset.animateScroll(offset: dy, duration: const Duration(milliseconds: 1)));
     };
     CaptureBus.stageStates = () async {
       // Real messages down the real path. The thread is paired with the far phone for this
@@ -415,10 +410,16 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     // object or a line in the margin.
     (int, int) best = tight.last;
     var bestScore = -1;
+    // roughly what the thread has to itself: the screen less the standing line, the tab strip and
+    // the sheet you write on
+    final room = (MediaQuery.maybeSizeOf(context)?.height ?? 780) - 306;
     for (final w in tight) {
+      var used = 0.0;
       var score = 0;
-      for (var i = w.$1; i < w.$1 + 10 && i < items.length; i++) {
-        if (_isANote(items[i].type)) score++;
+      for (var i = w.$1; i < items.length && used < room; i++) {
+        final h = _roughlyTall(items[i]);
+        used += h;
+        if (used <= room && _isANote(items[i].type)) score++;
       }
       // the latest of the equally good ones: a couple's year has many, and the most recent is the
       // one that looks like now
@@ -428,6 +429,33 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       }
     }
     return best;
+  }
+
+  /// About how much of the glass a row will take, before anything is laid out.
+  ///
+  /// Counting rows was not enough: six long notes fill the same screen nine short ones do, and the
+  /// hero's standard is eight. Nobody can know a row's height without laying it out, but the thing
+  /// that decides it is how much writing is on it, and that is known before.
+  static double _roughlyTall(ThreadItem it) {
+    final renderer = kEventTypeById[it.type]?.renderer;
+    switch (renderer) {
+      case 'margin_note':
+      case 'margin_mark':
+        return 40.0;
+      case 'print':
+      case 'print_tab':
+        return 700.0;
+      case 'object_landing':
+        return 190.0;
+      case 'stuck_object':
+      case 'edit_mark':
+      case 'stub':
+      case 'ink_dries':
+        return 0.0;
+      default:
+        final words = (it.text ?? '').length;
+        return 62.0 + 24.0 * (1 + words ~/ 30);
+    }
   }
 
   /// A row that is a piece of paper about the size of a note: not a print, not a thrown object,
