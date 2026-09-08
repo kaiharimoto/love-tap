@@ -56,6 +56,10 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   Timer? _readTimer;
   bool _typingSent = false;
   ThreadItem? _replyTo;
+
+  /// Pixels a driven frame asked for while the scroller was busy with the frame before it.
+  double _owedScroll = 0;
+  bool _scrollInFlight = false;
   ThreadItem? _editing;
   String? _highlightId;
 
@@ -123,8 +127,21 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // A duration, not zero: DrivenScrollActivity asserts duration > Duration.zero, and the
       // throw happens inside an async body where nothing sees it — the list simply did not move.
       // One millisecond of the driven clock is the shortest honest step.
+      // Never dropped, only deferred. The offset controller runs one animation at a time and a
+      // call that arrives while one is in flight goes nowhere: the fling asks for a nudge every
+      // frame, so three frames of a three-hundred-frame clip came back identical to the one before
+      // — scattered, each a few frames after a throw, which is where two of them overlap. What a
+      // frame is owed is added to the next call instead, so the list is always moving by
+      // something while there is anything left to move.
       if (dy == 0 || !_scroll.isAttached) return;
-      unawaited(_offset.animateScroll(offset: dy, duration: const Duration(milliseconds: 1)));
+      _owedScroll += dy;
+      if (_scrollInFlight) return;
+      _scrollInFlight = true;
+      final go = _owedScroll;
+      _owedScroll = 0;
+      unawaited(_offset
+          .animateScroll(offset: go, duration: const Duration(milliseconds: 1))
+          .whenComplete(() => _scrollInFlight = false));
     };
     CaptureBus.stageStates = () async {
       // Real messages down the real path. The thread is paired with the far phone for this
@@ -291,6 +308,10 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // below the fold, which is what a thread does. Anchoring the last row instead put the tall
       // one in the middle of the frame and left room for four.
       //
+      // The hero's own standard is eight notes on eight different torn edges — it is the frame the
+      // material row is judged on at three hundred per cent — so the stretch it anchors on has to
+      // be short. A photograph is seven hundred pixels of it: asking for one left six notes on the
+      // glass and the artifact was recorded missing on its own standard.
       // A whole video is a hundred and sixty points of screen and will not sit beside eight notes.
       // The hero used to ask for one anyway and got the top of it: three critics measured that
       // sliver and reported a video rendering as an empty strip, which was the framing rather than

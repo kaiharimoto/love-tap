@@ -191,10 +191,16 @@ elif [ -f toolchain/ts/a/address ]; then
 fi
 # $PAIR is absolute, so it must not be joined to anything: "../$PAIR" made "..//tmp/..." and
 # the far phone died on its first write, which capture.sh then reported as "would not start"
+# Eight hours, not two. This capture's clips are 1,433 frames and each is a real screenshot with
+# the clock stepped between: the run took three hours and twenty minutes, the far phone reached its
+# two-hour deadline and stopped, and 08_state_propagating — the last scene, which needs it — was
+# recorded missing with `link offline` while everything else was already on disk. The daemon exits
+# the moment it is told to stop, so the deadline is only there to stop an abandoned one running for
+# ever; it has no business being shorter than a capture.
 echo "· the far phone: the seeded year in the host role, over $FAR_TRANSPORT ($(since))"
 ( cd app && dart run tool/host_daemon.dart --out "$PAIR" \
     --transport "$FAR_TRANSPORT" --address "$FAR_ADDR" --proxy "$FAR_PROXY" \
-    --pwa "$SCRATCH/web_seeded" --seed year --now "$FROZEN_NOW" --seconds 7200 \
+    --pwa "$SCRATCH/web_seeded" --seed year --now "$FROZEN_NOW" --seconds 28800 \
   ) >"$SCRATCH/host_daemon.log" 2>&1 &
 DAEMON_PID=$!
 for _ in $(seq 1 240); do [ -f "$PAIR" ] && break; sleep 0.5; done
