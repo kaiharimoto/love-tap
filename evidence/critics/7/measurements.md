@@ -1,0 +1,106 @@
+# Cycle 7 — what was measured, before and after
+
+Taken by me, on this machine, with the tool named. Numbers I did not take myself are marked as
+somebody else's. Written as the work is done, before any cycle-7 critic has run.
+
+## What cycle 6's reports said, and what was done about each
+
+### The desk hairline, four cycles old, closed at the cause
+Nine of ten stills carried one-pixel bright rules across the wood, up to +48 grey and 440 px long;
+three hypotheses had been wrong (the desk asset, the paper piece's bounding box, the mask inset).
+Measured this session: **51 of the 56 baked contact shadows carry a one-row alpha step**, and at
+the same resolution and the same sample count OpenImageDenoise leaves two of them and no denoiser
+leaves none. A contact shadow's alpha pass is a soft gradient and nothing else, which is what OIDN
+has nothing to work with and tiles anyway. The shadow pass renders without it at four times the
+samples; the noise that buys is 12.96 against 8.82 of high-frequency alpha standard deviation
+inside the penumbra, which is a fifth of a grey level once composited.
+
+### The fold, on all four of its blocking measurements
+- silhouette: the settled sheet's left edge had **0.00 px** of deviation over 320 rows against
+  22-35 on the notes beside it. The sheet is torn now — the boundary bites inward on two runs at
+  once, one about a finger's width and one about a fibre bundle's: **1.17 px** on the left and
+  **1.75** on the top, measured the way a critic separates paper from wood.
+- shading: the face was a one-dimensional gradient, per-row standard deviation across the width
+  1.50 grey. Cockled now: **3.12 -> 4.87** grey levels of lateral variation in render space.
+- shadow: composited over the app's own desk it went to 23 grey against a desk at 80 — "a hard
+  slab, not a contact shadow". The rendered alpha is the true occlusion (0.70 of the light) and
+  the desk a note lies on is lit by more than the sun this rig models, so it is scaled to the
+  ceiling the app's own baked shadows are drawn at: **23 -> 45 grey**.
+- and the cockle is lifted so it never dips below the shadow catcher. At 0.45 mm it went under the
+  plane, and a shadow catcher is invisible to the camera, so the settled sheet came back as a grid
+  of twenty black holes in the cockle's own pattern. That is written down because it looked like a
+  material change and was a rendering mistake.
+
+### The module cards
+"0.00 to 0.81 px of edge roughness on all four sides, one exactly 673x164 with 0.00 on every side."
+There was already a cut outline; it moved the four corners and drew straight lines between them,
+which is a quadrilateral with wobbly corners. Each edge is walked now. Measured by rasterising a
+card and finding its bottom edge to a fraction of a pixel, then removing the line it runs on:
+**0.030 px of wander over 536 columns before, 0.269 after**.
+
+### The desk's grain
+"All of its texture is one-directional bands: mean absolute horizontal gradient 5.58x the vertical
+one, where paper measures 0.52." Two things were missing — the open pores of a ring-porous
+hardwood, which are the only feature with a length along the grain, and any break-up of the fibre
+along its own length. Measured on the grain map, which is pure numpy and needs no render: the face
+was **8.08** times more variable across than along, and is **3.94**; the fibre map alone goes from
+91 to 6.6.
+
+### The scroll's build spikes
+The completeness pass established these are periodic on the wall clock at 20.4 s — the sync
+engine's long poll — not in app time, and that the capture oversamples anything real-time about
+111 times. So it was never scroll jank. What it is instead: the transport set its status on every
+successful request, and the only thing that had changed was the time of the last contact, which
+nothing draws. The scope listens to that stream and every region under it rebuilds, so a year-deep
+thread was rebuilt every twenty seconds for nothing. Six polls that carry nothing now say nothing.
+
+### The messenger's three blocking findings
+- the media viewer had no play, no pause, no scrubber, no duration and nothing saying it was a
+  video. It has a film strip: the same marks the voice note uses, a pencil rule with the played
+  part inked in and a tick at the playhead, the times in the margin hand, seek on tap or drag.
+- search chrome filled 67.1 per cent of the screen with one hit readable. A `Slip` takes the room
+  it is given, so each of fifteen tabs took the whole width and the wrap put one on every row.
+  Measured on the laid-out page at the size the scene shoots: **66 per cent with three hits, and
+  29 per cent with six**. The tab that is chosen stands proud, is stamped in ink rather than
+  pencil, and is underlined.
+- the record said `sent` for a row with no `sent` in the frame and never recorded `sending`, whose
+  word is `going`. One table now, read by the mark that draws a state and the record that reports
+  it, and rows that draw no mark are not counted.
+
+### The code row's two "declared and never read"
+Every event type declared a notification treatment and a person could set one per type, and nothing
+at runtime read either. The service worker is where that question is actually asked — it is what
+decides whether a phone in a pocket makes a sound, and it runs when the app does not — so it reads
+the answer out of the app's own store: off shows nothing, quiet does not ask to be looked at, and
+the quiet hours turn interrupt into quiet. And the worker's per-type word table is gone: the words
+live in the registry beside the treatments, the app writes them into its store at startup, and the
+worker names one event type — the kind a payload defaults to when it cannot be read.
+
+### The anti-goal row's two
+The icon on the home screen and on every arrival banner was the unaltered Flutter logo. It is made
+now out of the app's own material: a torn note off the same stock the thread is written on, masked
+by one of the same tear masks, on the same desk. And the gold star and the crown — the two objects
+in the library that mean *you have earned something* — are out of the recipes, out of assets, and
+out of the manifest.
+
+### The vocabulary, playing inside out
+"On a phone without amplitude control the whole vocabulary plays inverted." Right, and in the worst
+place: a phone with no amplitude control is where the rhythm has to do all the work of telling
+thirty-six feelings apart, and there the silences were buzzing. A zero-length wait in front puts it
+the right way round; the filled-in amplitudes had the same inversion in the other branch.
+
+### Two scenes that were photographing the wrong moment
+- 08: "no partner-state change is ever visible happening" — both state lines were pushed before the
+  camera rolled, so the mood already read `restless` in frame one. They are driven inside a frames
+  run now, at a named frame, the way an arriving message already was.
+- the 300 per cent crops the material row is judged on landed on the composer's placeholder and on
+  bare desk. The finder took the densest band of paper and called it the note, and the densest band
+  on a chat screen is the sheet you write on. It searches the thread now, and it looked for ink
+  that was also paper — a contradiction, since paper_mask says paper is light — so the box never
+  moved. The record carries how much ink the crop holds: **0.2373 of it, against nothing before**.
+
+## Still open
+- the fold sequence itself is not re-rendered yet; the code change is verified on three frames.
+- 09 and 16 need an Android device; the vibrator is untested; transport is local.
+- the hand still repeats: 8.9 per cent of marks have a near-twin at 0.99 by the critic's method.
+- the ink's core darkness varies by 3.52 grey levels — the plate is in the outline, not in the ink.

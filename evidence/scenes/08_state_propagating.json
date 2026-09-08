@@ -24,8 +24,15 @@
    "arg": 0
   },
   {
-   "do": "far",
-   "arg": "state mood restless"
+   "do": "frames",
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 64,
+   "ms": 16,
+   "drive": {
+    "kind": "far",
+    "line": "state mood restless",
+    "at": 12
+   }
   },
   {
    "do": "wait",
@@ -47,8 +54,7 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 149,
-   "ms": 16,
-   "from": 0
+   "ms": 16
   },
   {
    "do": "goTo",
@@ -71,7 +77,6 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 19,
-   "from": 149,
    "ms": 16
   },
   {
@@ -86,7 +91,6 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 71,
-   "from": 168,
    "ms": 16
   },
   {
@@ -101,7 +105,6 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 156,
-   "from": 239,
    "ms": 16
   },
   {
@@ -112,10 +115,6 @@
   {
    "do": "step",
    "ms": 400
-  },
-  {
-   "do": "far",
-   "arg": "state availability heads_down"
   },
   {
    "do": "wait",
@@ -137,8 +136,12 @@
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 107,
-   "from": 395,
-   "ms": 16
+   "ms": 16,
+   "drive": {
+    "kind": "far",
+    "line": "state availability heads_down",
+    "at": 10
+   }
   },
   {
    "do": "report",
