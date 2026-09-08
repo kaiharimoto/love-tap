@@ -26,50 +26,52 @@ confirmed the faults underneath them — the scroll's build spikes are periodic 
 the sync engine's twenty-second poll rather than in app time, and the fold's straight edges and
 slab shadow are in the Cycles render itself rather than in any transform the app applies.
 
-**Cycle 7 is under way and this is where it stands.** Committed and pushed:
+**Cycle 7's fixes are all in, the renders are done, and the seventh capture is running.**
+Committed and pushed, each with the measurement that says it worked:
 
 - the media viewer has a film strip — play and hold marks, a pencil rule with the played part
   inked in and a tick at the playhead, the times in the margin hand, seek on tap or drag;
-- the search page's chrome went from 66 per cent of the page to 29, with six hits on it instead of
-  three, because a `Slip` takes the room it is given and each of fifteen tabs was taking the whole
-  width; the tab that is chosen now stands proud, is stamped in ink and is underlined;
-- the delivery record uses the words on the paper rather than the enum's names, and counts only
-  rows that draw a mark;
-- the service worker obeys the treatment and the quiet hours a person set, read out of the app's
-  own store, and keeps no per-type table at all: the words a phone says live in the registry;
-- `module_costs_test` walks `web/` as well as `lib/`;
-- the fold sheet is torn rather than machine-cut, cockled rather than flat, and its shadow is
-  scaled to the ceiling the app's own baked shadows are drawn at.
+- search chrome went from 66 per cent of the page to 29, with six hits on it instead of three,
+  because a `Slip` takes the room it is given and each of fifteen tabs was taking the whole width;
+  the chosen tab stands proud, is stamped in ink and is underlined;
+- the delivery record uses the words on the paper, and counts only rows that draw a mark;
+- the service worker obeys the treatment and quiet hours a person set, read out of the app's own
+  store, and keeps no per-type table: the words a phone says live in the registry;
+- the whole feeling vocabulary was playing **inside out** on any phone without amplitude control —
+  `createWaveform(long[], int)` reads its first number as a wait and every pattern starts on;
+- the icon on the home screen and on every arrival banner was the Flutter logo, and is now made of
+  the app's own material; the gold star and the crown are gone from the library;
+- two fields carried three names; there is one table now;
+- a voice note in the pile carries what the thread gives it, which also fills the eight tiles that
+  had no ink on them at all;
+- the ink plate: the core of a mark varied by 3.52 grey levels and now varies by 53.7 (biro) and
+  32.3 (pencil), because a pen runs dry across a word rather than only along an outline;
+- a cut card's edge wanders (0.030 px → 0.269 over 536 columns) and its contact shadow varies
+  along its length;
+- the transport stopped announcing the time of day, which was rebuilding every region every twenty
+  seconds;
+- 08 drives its state changes inside a frames run, so a partner-state change is visible happening;
+- the crops the material row is judged on land on writing (23.7 per cent ink, against none).
 
-**The four-cycle desk hairline is the denoiser.** Nine of ten stills carry one-pixel bright rules
-across the wood, up to +48 grey and 440 px long, and three hypotheses had been wrong. Measured this
-session: 51 of the 56 baked contact shadows carry a one-row alpha step, and at the same resolution
-and the same sample count, OpenImageDenoise on 192 samples leaves two of them and no denoiser
-leaves none. A contact shadow's alpha pass is nothing but a soft gradient, which is exactly what
-OIDN has nothing to work with and tiles anyway. `blender/rig/common.py` takes `denoise=` and
-`tear_relief.py` renders the shadow pass without it at four times the samples.
+**The four-cycle desk hairline is a rotation without a filter.** Not the desk (zero one-row spikes
+in the render at any threshold), not the baked shadows (same), not the piece's bounding box, and
+not the denoiser — that one is written up as a wrong turn on the cycle-7 sheet. In the artifact the
+rules step one row down for every 166 px along, which is a third of a degree, which is exactly the
+tilt a `Slip` gives a piece; `Transform.rotate` with no `filterQuality` is nearest-neighbour, so
+every hard edge inside a piece comes out a row at a time.
 
-**A re-render of all 112 contact shadows is running in the background** (`/tmp/shadows.log`, about
-three and a half minutes each, so roughly six hours). It writes into `assets/tears/`. Nothing
-should be captured until it finishes and `python3 tools/pack_assets.py` has run.
+**Three render queues ran and are packed**: 112 contact shadows without the denoiser (1 h 43 m),
+the fold sequence at 240 frames (1 h 07 m, packed to 139), and the desk. The fold's own tool
+re-measured where the writing goes on the open sheet.
 
-**Still to do in cycle 7**, in the order they are worth doing:
+**What is left in cycle 7**: read the capture, write `evidence/critics/7/builder.json` from the
+sheet *before* any critic runs, `bash tools/critics.sh hide 7`, the six critics and the
+completeness pass, `show 7`, `python3 tools/score.py --cycle 7`, docs, push.
 
-1. the fold sequence re-render (240 frames, about an hour and three quarters) — the code change is
-   in and verified on three frames, the frames themselves are not re-rendered yet;
-2. the five module cards on 03: machine-cut plates on a uniform blurred shadow, 0.00 px of edge
-   roughness on all four sides;
-3. the hero's bottom sheet, sliced by the viewport with a 138-grey step in one un-antialiased row
-   and no shadow under it — the writing pad should sit *over* the bottom of the thread, so a note
-   running under it is occluded by paper with its own edge and its own shadow;
-4. the desk has no cross-grain structure at all (mean |dx| 3.146 against |dy| 0.618 on the asset
-   itself, a ratio of 5.09) — it reads as painted rather than as wood;
-5. the crops the material row is judged on land on tear, desk and the composer's placeholder
-   rather than on handwriting;
-6. a sync poll costs about a second of build time on a year-deep thread;
-7. **a full `./capture.sh`, not `--only`** — the messenger critic is right that a set where four
-   stills predate the run by most of a day, and the one that was re-shot moved SSIM 0.648, is not
-   one picture of one build.
+**Known and not yet closed**: the hand still repeats (8.9 per cent of marks have a near-twin at
+0.99 by the critic's method, 16.7 by the app's own log) — the fix is more variants per glyph and a
+font rebuild; the desk's anisotropy is 5.18 against paper's 0.63 and I do not think that comparison
+is a defect to close, for the reason on the sheet; 09 and 16 need an Android device.
 
 **A process fault not to repeat:** the tree moved under the review. Cycle-7 fixes went in once the
 six critics had filed while the completeness pass was still running, and it noticed. Nothing is
