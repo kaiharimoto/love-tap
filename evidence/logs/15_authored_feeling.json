@@ -10,125 +10,145 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2947,
+   "ms": 2759,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 5095
+   "ms": 5695
   },
   {
    "do": "wait",
-   "ms": 1803
-  },
-  {
-   "do": "scrollTo",
-   "ms": 8215
+   "ms": 1807
   },
   {
    "do": "wait",
-   "ms": 1106
+   "ms": 1102
   },
   {
    "do": "openCorner",
-   "ms": 2928
+   "ms": 7091
   },
   {
    "do": "frames",
-   "ms": 55149
+   "ms": 88009
   },
   {
-   "at": 80144,
+   "at": 109486,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 6
+   "ms": 9
   },
   {
    "do": "step",
-   "ms": 1204
+   "ms": 2985
   },
   {
    "do": "frames",
-   "ms": 54992
+   "ms": 66738
   },
   {
-   "at": 136346,
+   "at": 180540,
    "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 6
+   "ms": 1330
   },
   {
    "do": "step",
-   "ms": 1068
+   "ms": 1062
   },
   {
    "do": "frames",
-   "ms": 53805
+   "ms": 57623
   },
   {
-   "at": 191225,
+   "at": 240529,
    "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 6
+   "ms": 1304
   },
   {
    "do": "step",
-   "ms": 2376
+   "ms": 1173
   },
   {
    "do": "frames",
-   "ms": 48558
+   "ms": 57568
   },
   {
    "do": "sendFeeling",
-   "ms": 12531
+   "ms": 13034
   },
   {
    "do": "frames",
-   "ms": 248632
-  },
-  {
-   "do": "far",
-   "ms": 588
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 2835
-  },
-  {
-   "do": "frames",
-   "ms": 326615
+   "ms": 262846
   },
   {
    "do": "goTo",
-   "ms": 11364
+   "ms": 19770
   },
   {
    "do": "step",
-   "ms": 2457
+   "ms": 3928
   },
   {
-   "do": "far",
-   "ms": 1356
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 5181
+   "do": "openCorner",
+   "ms": 6273
   },
   {
    "do": "frames",
-   "ms": 297377
+   "ms": 115934
+  },
+  {
+   "do": "openCorner",
+   "ms": 3295
+  },
+  {
+   "do": "step",
+   "ms": 1030
+  },
+  {
+   "do": "far",
+   "ms": 1800
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 3573
+  },
+  {
+   "do": "frames",
+   "ms": 395505
+  },
+  {
+   "do": "goTo",
+   "ms": 38870
+  },
+  {
+   "do": "step",
+   "ms": 3121
+  },
+  {
+   "do": "far",
+   "ms": 2705
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 10103
+  },
+  {
+   "do": "frames",
+   "ms": 467152
   },
   {
    "do": "report",
-   "ms": 586
+   "ms": 639
   }
  ],
  "shots": [
@@ -163,6 +183,12 @@
    "drive": null
   },
   {
+   "frames": 22,
+   "dir": "evidence/frames/15_authored_feeling",
+   "ms": 16,
+   "drive": null
+  },
+  {
    "frames": 106,
    "dir": "evidence/frames/15_authored_feeling",
    "ms": 16,
@@ -183,7 +209,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtqaltmo"
+     "pwa-mtrszvp7"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -193,9 +219,9 @@
    "stocks": {},
    "scroll": null,
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 6560,
+   "driven_ms": 7424,
    "seed": 20260903,
-   "events": 14089,
+   "events": 14095,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -212,7 +238,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-06T22:24:06.235Z",
+    "started_at": "2026-09-08T00:03:38.026Z",
     "pattern": [
      {
       "ms": 150,
@@ -239,65 +265,67 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 374,
-    "pushed": 3,
+    "rounds": 526,
+    "pushed": 4,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
-    "cursor": 14089,
+    "refused_in_the_outbox": 0,
+    "cursor": 14095,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14089,
-     "our_cursor": 14089,
+     "peer_cursor": 14095,
+     "our_cursor": 14095,
      "last_error": null,
-     "since": "2026-09-06T22:09:56.247Z",
-     "last_contact": "2026-09-06T22:29:03.626Z"
+     "since": "2026-09-07T23:44:01.662Z",
+     "last_contact": "2026-09-08T00:11:25.961Z"
     }
    },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
     "pocket_feeling": "soup",
     "pocket_at": 1788464400000,
-    "allowed_to_interrupt": false
+    "allowed_to_interrupt": false,
+    "held_by_the_phone": []
    },
    "at": "15_authored_feeling"
   }
  ],
- "cold_ms": 2895,
+ "cold_ms": 3017,
  "load": {
-  "ms": 2895,
+  "ms": 3017,
   "store": "kept",
   "profile": "profile_seeded"
  },
  "far": [
   {
    "line": "feeling soup 0.55",
-   "at_frame": 152
+   "at_frame": 174
   },
   {
    "line": "feeling soup 0.9",
-   "at_frame": 258
+   "at_frame": 280
   }
  ],
  "arrivals": [
   {
    "line": "feeling soup 0.55",
-   "before": 8079,
-   "after": 8080,
-   "at_frame": 152,
-   "waited_ms": 2434
+   "before": 8080,
+   "after": 8081,
+   "at_frame": 174,
+   "waited_ms": 3171
   },
   {
    "line": "feeling soup 0.9",
-   "before": 8080,
-   "after": 8081,
-   "at_frame": 258,
-   "waited_ms": 4780
+   "before": 8081,
+   "after": 8082,
+   "at_frame": 280,
+   "waited_ms": 9702
   }
  ],
  "problems": [],

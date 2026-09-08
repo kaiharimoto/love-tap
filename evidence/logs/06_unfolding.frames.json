@@ -1,8 +1,8 @@
 {
  "dir": "/tmp/lovetap-capture/06_unfolding",
- "frames": 256,
+ "frames": 326,
  "fps": 62.5,
- "seconds": 4.1,
+ "seconds": 5.22,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
@@ -12,17 +12,44 @@
    "dir": "evidence/frames/06_unfolding"
   },
   {
-   "frames": 240,
+   "frames": 147,
+   "step_ms": 16,
+   "dir": "evidence/frames/06_unfolding"
+  },
+  {
+   "frames": 16,
+   "step_ms": 16,
+   "dir": "evidence/frames/06_unfolding"
+  },
+  {
+   "frames": 147,
    "step_ms": 16,
    "dir": "evidence/frames/06_unfolding"
   }
  ],
  "cuts_between_runs": [
-  15
+  15,
+  162,
+  178
  ],
- "app_seconds": 4.1,
+ "app_seconds": 5.22,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 0.01148,
+ "mean_change_per_frame": 3.6821,
+ "held_frame_test": {
+  "unit": "grey levels of Rec.601 luma at full resolution",
+  "all_three_must_hold": {
+   "mean_abs_change_below": 0.5,
+   "share_of_pixels_changing_more_than_two_below": 0.0015,
+   "busiest_32px_tile_mean_change_below": 2.0
+  },
+  "worst_moving_frame": {
+   "frame": 16,
+   "mean": 0.0739,
+   "visible_share": 0.005078,
+   "busiest_tile": 10.1789,
+   "note": "the frame nearest the held-frame test that still counts as motion"
+  }
+ },
  "repeated_frames": 0,
  "repeated_fraction": 0.0,
  "longest_still_run": 0,
@@ -32,10 +59,10 @@
  "strip": "evidence/crops/06_unfolding_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/06_unfolding/000000.png",
-  "/tmp/lovetap-capture/06_unfolding/000051.png",
-  "/tmp/lovetap-capture/06_unfolding/000102.png",
-  "/tmp/lovetap-capture/06_unfolding/000153.png",
-  "/tmp/lovetap-capture/06_unfolding/000204.png",
-  "/tmp/lovetap-capture/06_unfolding/000255.png"
+  "/tmp/lovetap-capture/06_unfolding/000065.png",
+  "/tmp/lovetap-capture/06_unfolding/000130.png",
+  "/tmp/lovetap-capture/06_unfolding/000195.png",
+  "/tmp/lovetap-capture/06_unfolding/000260.png",
+  "/tmp/lovetap-capture/06_unfolding/000325.png"
  ]
 }

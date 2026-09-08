@@ -1,24 +1,10 @@
 {
- "captured_at": "2026-09-07T00:26:31Z",
+ "captured_at": "2026-09-07T22:08:04Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
-   "bytes": 3219130,
-   "written": "2026-09-06T20:57:30Z",
-   "from_this_run": false,
-   "size": [
-    1440,
-    3120
-   ],
-   "meets_minimum": true,
-   "minimum": [
-    1440,
-    3120
-   ]
-  },
-  "02_chat.png": {
-   "bytes": 3643292,
-   "written": "2026-09-07T00:37:44Z",
+   "bytes": 4314169,
+   "written": "2026-09-07T22:20:07Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -31,9 +17,9 @@
    ]
   },
   "03_us.png": {
-   "bytes": 3212879,
-   "written": "2026-09-06T20:58:17Z",
-   "from_this_run": false,
+   "bytes": 4250154,
+   "written": "2026-09-07T22:20:58Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -45,9 +31,9 @@
    ]
   },
   "04_moments.png": {
-   "bytes": 3681857,
-   "written": "2026-09-06T20:58:36Z",
-   "from_this_run": false,
+   "bytes": 4503944,
+   "written": "2026-09-07T22:21:20Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -59,9 +45,9 @@
    ]
   },
   "05_settings.png": {
-   "bytes": 2829700,
-   "written": "2026-09-06T20:58:56Z",
-   "from_this_run": false,
+   "bytes": 3813881,
+   "written": "2026-09-07T22:21:41Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -73,9 +59,9 @@
    ]
   },
   "10_first_run.png": {
-   "bytes": 2645802,
-   "written": "2026-09-06T21:01:29Z",
-   "from_this_run": false,
+   "bytes": 4006932,
+   "written": "2026-09-07T22:25:04Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -87,9 +73,9 @@
    ]
   },
   "12_search.png": {
-   "bytes": 3475886,
-   "written": "2026-09-06T20:59:21Z",
-   "from_this_run": false,
+   "bytes": 4538264,
+   "written": "2026-09-07T22:22:09Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -101,9 +87,9 @@
    ]
   },
   "13_messenger_states.png": {
-   "bytes": 3496212,
-   "written": "2026-09-06T21:00:44Z",
-   "from_this_run": false,
+   "bytes": 4589961,
+   "written": "2026-09-07T22:24:14Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -115,9 +101,9 @@
    ]
   },
   "14_media_viewer.png": {
-   "bytes": 2971239,
-   "written": "2026-09-06T23:55:35Z",
-   "from_this_run": false,
+   "bytes": 3463840,
+   "written": "2026-09-07T22:24:51Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -129,9 +115,9 @@
    ]
   },
   "17_setup_pwa.png": {
-   "bytes": 2629693,
-   "written": "2026-09-06T21:01:39Z",
-   "from_this_run": false,
+   "bytes": 4262994,
+   "written": "2026-09-07T22:25:14Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -143,16 +129,16 @@
    ]
   },
   "06_unfolding.mp4": {
-   "bytes": 2988846,
-   "written": "2026-09-06T22:29:24Z",
-   "from_this_run": false,
+   "bytes": 3623982,
+   "written": "2026-09-08T00:11:52Z",
+   "from_this_run": true,
    "size": [
     1080,
     2340
    ],
-   "frames": 256,
+   "frames": 326,
    "fps": 62.5,
-   "seconds": 4.1,
+   "seconds": 5.22,
    "meets_minimum": true,
    "minimum": [
     1080,
@@ -162,9 +148,9 @@
    "long_enough": true
   },
   "07_feeling_landing.mp4": {
-   "bytes": 6047711,
-   "written": "2026-09-06T22:34:01Z",
-   "from_this_run": false,
+   "bytes": 6611964,
+   "written": "2026-09-08T00:16:58Z",
+   "from_this_run": true,
    "size": [
     1080,
     2340
@@ -179,83 +165,14 @@
    ],
    "minimum_seconds": 6,
    "long_enough": true
-  },
-  "08_state_propagating.mp4": {
-   "bytes": 6203452,
-   "written": "2026-09-06T23:40:56Z",
-   "from_this_run": false,
-   "size": [
-    1080,
-    2340
-   ],
-   "frames": 502,
-   "fps": 62.5,
-   "seconds": 8.03,
-   "meets_minimum": true,
-   "minimum": [
-    1080,
-    2340
-   ],
-   "minimum_seconds": 8,
-   "long_enough": true
-  },
-  "11_chat_scroll.mp4": {
-   "bytes": 8882916,
-   "written": "2026-09-06T22:32:00Z",
-   "from_this_run": false,
-   "size": [
-    1080,
-    2340
-   ],
-   "frames": 300,
-   "fps": 62.5,
-   "seconds": 4.8,
-   "meets_minimum": true,
-   "minimum": [
-    1080,
-    2340
-   ],
-   "minimum_seconds": 4,
-   "long_enough": true
-  },
-  "15_authored_feeling.mp4": {
-   "bytes": 5344469,
-   "written": "2026-09-06T22:34:01Z",
-   "from_this_run": false,
-   "size": [
-    1080,
-    2340
-   ],
-   "frames": 364,
-   "fps": 62.5,
-   "seconds": 5.82,
-   "meets_minimum": true,
-   "minimum": [
-    1080,
-    2340
-   ],
-   "minimum_seconds": 4,
-   "long_enough": true
   }
  },
  "missing": {
-  "09_two_devices.png": "not captured this session",
-  "16_setup_android.png": "not captured this session"
- },
- "stale": {
-  "01_pulse.png": "on disk from 2026-09-06T20:57:30Z, before this capture began at 2026-09-07T00:26:31Z",
-  "03_us.png": "on disk from 2026-09-06T20:58:17Z, before this capture began at 2026-09-07T00:26:31Z",
-  "04_moments.png": "on disk from 2026-09-06T20:58:36Z, before this capture began at 2026-09-07T00:26:31Z",
-  "05_settings.png": "on disk from 2026-09-06T20:58:56Z, before this capture began at 2026-09-07T00:26:31Z",
-  "10_first_run.png": "on disk from 2026-09-06T21:01:29Z, before this capture began at 2026-09-07T00:26:31Z",
-  "12_search.png": "on disk from 2026-09-06T20:59:21Z, before this capture began at 2026-09-07T00:26:31Z",
-  "13_messenger_states.png": "on disk from 2026-09-06T21:00:44Z, before this capture began at 2026-09-07T00:26:31Z",
-  "14_media_viewer.png": "on disk from 2026-09-06T23:55:35Z, before this capture began at 2026-09-07T00:26:31Z",
-  "17_setup_pwa.png": "on disk from 2026-09-06T21:01:39Z, before this capture began at 2026-09-07T00:26:31Z",
-  "06_unfolding.mp4": "on disk from 2026-09-06T22:29:24Z, before this capture began at 2026-09-07T00:26:31Z",
-  "07_feeling_landing.mp4": "on disk from 2026-09-06T22:34:01Z, before this capture began at 2026-09-07T00:26:31Z",
-  "08_state_propagating.mp4": "on disk from 2026-09-06T23:40:56Z, before this capture began at 2026-09-07T00:26:31Z",
-  "11_chat_scroll.mp4": "on disk from 2026-09-06T22:32:00Z, before this capture began at 2026-09-07T00:26:31Z",
-  "15_authored_feeling.mp4": "on disk from 2026-09-06T22:34:01Z, before this capture began at 2026-09-07T00:26:31Z"
+  "02_chat.png": "only 6 notes on screen (a copy from an earlier run is still on disk, written 2026-09-07T22:20:38Z; it is not this session's and is not counted)",
+  "09_two_devices.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
+  "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
+  "08_state_propagating.mp4": "awaitArrival: the log stood at 8084 after 90000ms, waiting for 8085 (said again 3x) \u2014 link offline, events 14098, sync {\"transport\":\"local\",\"role\":\"client\",\"rounds\":47,\"pushed\":1 (a copy from an earlier run is still on disk, written 2026-09-06T23:40:56Z; it is not this session's and is not counted)",
+  "11_chat_scroll.mp4": "the frame check failed; see evidence/logs/11_chat_scroll.frames.json (a copy from an earlier run is still on disk, written 2026-09-08T00:14:42Z; it is not this session's and is not counted)",
+  "15_authored_feeling.mp4": "the frame check failed; see evidence/logs/15_authored_feeling.frames.json (a copy from an earlier run is still on disk, written 2026-09-08T00:16:58Z; it is not this session's and is not counted)"
  }
 }

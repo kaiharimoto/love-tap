@@ -15,13 +15,33 @@
  "cuts_between_runs": [],
  "app_seconds": 4.8,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 0.07329,
- "repeated_frames": 0,
- "repeated_fraction": 0.0,
- "longest_still_run": 0,
- "repeated_at": [],
+ "mean_change_per_frame": 18.41898,
+ "held_frame_test": {
+  "unit": "grey levels of Rec.601 luma at full resolution",
+  "all_three_must_hold": {
+   "mean_abs_change_below": 0.5,
+   "share_of_pixels_changing_more_than_two_below": 0.0015,
+   "busiest_32px_tile_mean_change_below": 2.0
+  },
+  "worst_moving_frame": {
+   "frame": 44,
+   "mean": 8.5621,
+   "visible_share": 0.216986,
+   "busiest_tile": 152.2623,
+   "note": "the frame nearest the held-frame test that still counts as motion"
+  }
+ },
+ "repeated_frames": 3,
+ "repeated_fraction": 0.01,
+ "longest_still_run": 1,
+ "repeated_at": [
+  7,
+  50,
+  135
+ ],
  "brightness_jumps": 0,
- "ok": true,
+ "ok": false,
+ "why": "3 frame(s) identical to the one before (first at 7); the brief allows none",
  "strip": "evidence/crops/11_chat_scroll_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/11_chat_scroll/000000.png",
