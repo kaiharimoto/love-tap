@@ -218,7 +218,9 @@ class PaperPiece extends StatelessWidget {
         ? ClipPath(clipper: _CutShape(hashOf(stockId)), child: content)
         : ClipRect(child: content);
     final piece = tearId == null ? clipped : MaskedLayer(maskAsset: tearAsset(tearId!), child: clipped);
-    return Transform.rotate(
+    return _WhenThePaperArrives(
+      asset: tearId == null ? null : tearAsset(tearId!),
+      child: Transform.rotate(
       angle: tilt,
       // Filtered, because a rotation without a filter is nearest-neighbour and every hard edge
       // inside the piece comes out as a staircase. That is the pale one-pixel rule a material
@@ -262,8 +264,63 @@ class PaperPiece extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
+}
+
+/// Nothing of a piece is drawn — not its sheet, and not the shadow it casts — until the mask that
+/// gives it its shape is out of the cache.
+///
+/// Gating the sheet alone left the shadow: a torn dark shape lying on the desk with no paper on
+/// it, which is a worse frame than the one it fixed. A piece keeps its room in the row and paints
+/// nothing; a mask that never arrives (missing from the bundle) draws the piece the old way rather
+/// than leaving a hole in the thread.
+class _WhenThePaperArrives extends StatefulWidget {
+  const _WhenThePaperArrives({required this.asset, required this.child});
+  final String? asset;
+  final Widget child;
+
+  @override
+  State<_WhenThePaperArrives> createState() => _WhenThePaperArrivesState();
+}
+
+class _WhenThePaperArrivesState extends State<_WhenThePaperArrives> {
+  bool _here = false;
+  bool _lost = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _look();
+  }
+
+  @override
+  void didUpdateWidget(_WhenThePaperArrives old) {
+    super.didUpdateWidget(old);
+    if (old.asset != widget.asset) {
+      _here = false;
+      _lost = false;
+      _look();
+    }
+  }
+
+  void _look() {
+    final asset = widget.asset;
+    if (asset == null || MaskCache.peek(asset) != null) {
+      _here = true;
+      return;
+    }
+    unawaited(MaskCache.load(asset).then((_) {
+      if (mounted) setState(() => _here = true);
+    }, onError: (Object _) {
+      if (mounted) setState(() => _lost = true);
+    }));
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      _here || _lost ? widget.child : Opacity(opacity: 0, child: widget.child);
 }
 
 /// Lays the writing inside the part of the piece the tear cannot reach.
