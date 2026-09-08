@@ -16,41 +16,49 @@ cycle, score, next, blocked, ask).
 
 ## 0. What is in flight right now
 
-**Cycle 6's fixes are committed; its capture has not run.** The evidence set in `evidence/` is
-still cycle 5's and predates every change below. `evidence/critics/6/measurements.md` is the sheet
-the builder's scores are to be written from, and it was written before any critic was read, which
-is the brief's rule.
+**Cycle 6's capture is done and its review is running.** The evidence set in `evidence/` is cycle
+6's: fifteen artifacts, taken against the seeded year with the far phone up, and every clip and
+every check passing. `evidence/critics/6/measurements.md` is the sheet, and
+`evidence/critics/6/builder.json` the builder's own scores written from it before any critic was
+read, which is the brief's rule. `bash tools/critics.sh hide 6` holds both of those out of the tree
+while critics work, along with `SCORE.json` and the earlier cycles' reports; `show 6` puts them
+back, and it must be run before scoring.
 
-If you are picking this up cold:
+If you are picking this up cold, the order is: `bash tools/critics.sh show 6` (if a `.critics-hold`
+directory exists), then `python3 tools/score.py --cycle 6`, then read
+`evidence/critics/6/completeness.json` first of all the reports.
 
-0. **What has been fixed since the sheet was written**, none of it captured: the fold clip's
-   length is read from the packed library rather than typed into the scene (the packer was
-   registering a sequence's frames by their crop offsets, so it refused to trim: 147 frames, not
-   209); a module brings its own thread row, its own sentence and its own words, so the last
-   shared file a fifth module cost is gone and `module_costs_test` counts what is left; a video row
-   says it is a video; a picture already in hand is not redrawn as a sentence about fetching; and
-   the desk's rows are asserted to end inside the desk, not only to begin inside it.
-1. **The library is mid-re-render.** `tools/render_cycle6.sh` did the paper stocks, the feeling
-   objects and the bits; it was killed on its last stage. `tools/render_cycle6b.sh` is what is
-   left: the dusk stocks (27), and the three objects that changed after the first queue read the
-   script — the wrapper and the confetti, which read as a tongue and as sugared almonds, and the
-   bookmark, which measured flatter than anything else in the library until it was curled. Both
-   are idempotent and safe to restart: `setsid bash tools/render_cycle6b.sh > /tmp/q.log 2>&1 <
-   /dev/null &`. Check what is on disk before assuming it is done.
-2. **Fifty-four dusk tear shadows are still missing, deliberately.** One costs five minutes and
-   nothing in the seventeen artifacts is lit at dusk, so they run after the capture:
-   `bash blender/run.sh blender/paper/tear_relief.py -- --all --res 1400 --samples 48 --conditions
-   dusk --skip-existing`. (`--skip-existing` used to look for a file only the day pass writes, so
-   asking for dusk skipped all fifty-six; that is fixed, and the queue's "1 of 56" line was the
-   symptom.) Without them a dusk piece falls back to its daylight shadow, which is wrong in one
-   crop and in nothing else.
-3. **Then `./capture.sh`**, then the builder sheet, then the six critics, then `tools/score.py
-   --cycle 6`.
+**What was fixed in this session and is in the captured evidence:**
 
-Do not capture against a half-rendered library: `tools/check/surfaces.py` will tell you, and it
-fails the run now rather than printing a complaint and returning zero.
+- The fling is a jump, not an animation. A frame of the scroll clip used to be a one-millisecond
+  animation of the scroller, and an animation moves on its ticker — which is stepped by the
+  browser's frame timestamp rather than by the driven clock, so two frames the clock pumped inside
+  one step could carry the same timestamp and the thread did not move on a frame it was told to.
+  Held frames went 3, 5, 6, 13 of 300 across four passes while I made the harness more patient, and
+  the patience was not the fix. The pixels are set on the list's own scroll position inside the
+  tick now. **300 frames, zero held**, every frame moved (47.5 logical pixels at the most, 10.4 at
+  the least), and the frame timings say the animation had been costing more than the held frames:
+  **build p95 1050 ms -> 54**, which is the number rubric row 01 calls scroll jank.
+- The hero is framed by measuring. It used to estimate a row's height from how much writing was on
+  it and framed six notes, then seven, against a standard of eight. It goes to a stretch now, lets
+  it lay out, counts the paper that actually landed and keeps the best framing it has seen — and
+  three things fell out of doing that: the sheet you write on is a sibling *below* the list rather
+  than a layer over it (a row's worth of room was being thrown away), asking for a voice note and a
+  reaction found six places in a year because it read that as one row being both (48 now), and
+  `tears.py` counted every visible row although a tear id is computed for rows that draw no torn
+  edge at all. **Eight rows on the glass, all eight paper, eight distinct tears.**
 
----
+Both are guarded by tests that fail on the old code: `app/test/a_fling_is_a_scroll_test.dart` and
+`app/test/the_hero_holds_eight_notes_test.dart`. The second one loads the real year through the
+real `SeedLoader`, loads the three real faces with `FontLoader` (a widget test lays text out in
+Ahem otherwise, and Ahem's metrics change the answer), and builds the app's own `Shell` — so it
+measures the room the thread actually has rather than a guess at the chrome.
+
+**Named and not fixed, for the next cycle:** paper is rendered as WebP at Blender's default quality
+92 before it is packed, so every material number in the build is measured against an already-lossy
+ceiling. The packer's own second pass is gone; the render's is not. That is twenty-seven stocks at
+about four minutes each plus the dusk half, and it has to land before a capture rather than between
+two.
 
 ## 1. Where the build is
 
@@ -99,11 +107,11 @@ resolution, no light change inside a take.
 
 | clip | frames | seconds | what it films |
 |---|---:|---:|---|
-| 06_unfolding | 256 | 4.10 | a folded letter opening: the packet, the flap standing with its shadow across the third below it, the creases catching light on the settled sheet |
+| 06_unfolding | 326 | 5.22 | a folded letter opening, twice: the packet landing, the flap standing with its shadow across the third below it, the creases catching light on the settled sheet, and the ink on it |
 | 07_feeling_landing | 421 | 6.74 | four feelings landing on the phone they reached, across three surfaces, with the pattern annotated on the timeline |
 | 08_state_propagating | 502 | 8.03 | a mood, a message, a place, an availability and four feelings crossing between two phones |
-| 11_chat_scroll | 300 | 4.80 | the thread thrown and coming to rest on its own physics |
-| 15_authored_feeling | 364 | 5.82 | the vocabulary gone through family by family, ending on the couple's own, then sent and received |
+| 11_chat_scroll | 300 | 4.80 | the thread thrown seven times and running down on its own physics; `evidence/logs/11_chat_scroll.fling.json` is what it did, frame by frame |
+| 15_authored_feeling | 376 | 6.02 | the vocabulary gone through family by family, ending on the couple's own, then sent and received |
 
 Every clip is assembled at **62.5 frames a second**, which is the rate its frames were taken at:
 the scenes step the app's clock 16 ms a frame. Assembling at 60 played every clip four per cent
