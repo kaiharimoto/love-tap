@@ -213,6 +213,15 @@ class PaperPiece extends StatelessWidget {
     final piece = tearId == null ? clipped : MaskedLayer(maskAsset: tearAsset(tearId!), child: clipped);
     return Transform.rotate(
       angle: tilt,
+      // Filtered, because a rotation without a filter is nearest-neighbour and every hard edge
+      // inside the piece comes out as a staircase. That is the pale one-pixel rule a material
+      // critic has measured lying on the wood in nine of ten stills for four cycles: not a line
+      // drawn on the desk but the piece's own lit edge, tilted by a third of a degree and
+      // rasterised one row at a time — which is why it steps left about a hundred and sixty
+      // pixels per row and runs in dashes of sixty to three hundred. The desk asset carries no
+      // such row (measured: zero one-row spikes at any threshold) and neither does any baked
+      // shadow, which is what ruled out the other three explanations.
+      filterQuality: FilterQuality.medium,
       // The shadow is Positioned.fill, so it is the size of the Stack; the Stack is the size of
       // the piece, except where something hands the piece tight constraints — a square cell in a
       // grid — and then the shadow stretches to fill the cell while the piece stays the height of

@@ -5,15 +5,27 @@ somebody else's. Written as the work is done, before any cycle-7 critic has run.
 
 ## What cycle 6's reports said, and what was done about each
 
-### The desk hairline, four cycles old, closed at the cause
-Nine of ten stills carried one-pixel bright rules across the wood, up to +48 grey and 440 px long;
-three hypotheses had been wrong (the desk asset, the paper piece's bounding box, the mask inset).
-Measured this session: **51 of the 56 baked contact shadows carry a one-row alpha step**, and at
-the same resolution and the same sample count OpenImageDenoise leaves two of them and no denoiser
-leaves none. A contact shadow's alpha pass is a soft gradient and nothing else, which is what OIDN
-has nothing to work with and tiles anyway. The shadow pass renders without it at four times the
-samples; the noise that buys is 12.96 against 8.82 of high-frequency alpha standard deviation
-inside the penumbra, which is a fifth of a grey level once composited.
+### The desk hairline, four cycles old, and what it actually is
+Nine of ten stills carried one-pixel bright rules across the wood, up to +48 grey and 440 px long,
+and four hypotheses had been wrong — the desk asset, the paper piece's bounding box, the mask
+inset, and (this session) the denoiser.
+
+**What ruled out the assets.** The desk render carries **zero** one-row spikes at any threshold I
+tried, and so does every baked contact shadow once the true spike test is used — a row brighter
+than *both* its neighbours, which is what the artifact shows (78.9 / 127.3 / 80.2). The denoiser
+hypothesis came from a looser test that also flags a steep edge; measured properly, the shipped
+shadows had none either. The re-render without the denoiser stands on its own merits (a shadow's
+alpha pass is a gradient and nothing else, which is what OIDN has nothing to work with) but it was
+**not** the hairline, and this sheet says so because the commit that made it said otherwise.
+
+**What it is.** In the artifact the rules step: y=199 at x 1340-1406, y=200 at 1176-1239, y=201 at
+1009-1072 — one row down for every 166 px along, which is a slope of a third of a degree, which is
+exactly what `Slip` gives a piece as its tilt. A piece is drawn inside `Transform.rotate`, and a
+rotation with no `filterQuality` is nearest-neighbour: every hard edge inside the piece — the lit
+line along a torn edge, the white line along a cut one — comes out one row at a time and steps,
+in dashes wherever the edge's own brightness crosses the threshold. It is filtered now. A test
+reads the source for it, because the picture that shows it needs a piece nine hundred pixels wide
+and rasterising one under the test binding outruns the whole rest of the suite.
 
 ### The fold, on all four of its blocking measurements
 - silhouette: the settled sheet's left edge had **0.00 px** of deviation over 320 rows against
@@ -38,13 +50,22 @@ which is a quadrilateral with wobbly corners. Each edge is walked now. Measured 
 card and finding its bottom edge to a fraction of a pixel, then removing the line it runs on:
 **0.030 px of wander over 536 columns before, 0.269 after**.
 
-### The desk's grain
+### The desk's grain, and where I disagree
 "All of its texture is one-directional bands: mean absolute horizontal gradient 5.58x the vertical
-one, where paper measures 0.52." Two things were missing — the open pores of a ring-porous
-hardwood, which are the only feature with a length along the grain, and any break-up of the fibre
-along its own length. Measured on the grain map, which is pure numpy and needs no render: the face
-was **8.08** times more variable across than along, and is **3.94**; the fibre map alone goes from
-91 to 6.6.
+one, where paper measures 0.52." Two things were missing and are there now — the open pores of a
+ring-porous hardwood, which the saw cuts along the grain, and any break-up of the fibre along its
+own length. On the grain map that moves a lot: the face was **8.08** times more variable across
+than along and is **3.94**, the fibre map alone 91 to 6.6.
+
+**On the render it moves almost nothing: 5.23 to 5.18**, measured the critic's way, on eighty
+64-pixel windows of bare desk. I tried the two levers that could move it further — a stronger ray
+fleck and a stronger fibre — and predicted both on the albedo before spending a render: 5.53 as
+shipped, 5.28 with the fleck at half again, 5.75 with the fibre. Nothing reaches paper's 0.63
+without weakening the growth rings, and the growth rings are what make it read as oak. A quartered
+board is directional by construction and a sheet of paper is not, so I do not think the comparison
+to paper is a defect to close. What was a defect, and is fixed, is that the ray fleck was a
+Gaussian one to three pixels across with hard ends — a scratch, not a fleck. It is a lens now,
+three to seven across, fading at both ends and both sides, and there are fewer of them.
 
 ### The scroll's build spikes
 The completeness pass established these are periodic on the wall clock at 20.4 s — the sync
