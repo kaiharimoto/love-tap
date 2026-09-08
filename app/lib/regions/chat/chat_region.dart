@@ -379,7 +379,8 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   (int, int)? _tightestWindow(List<ThreadItem> items, List<String> wanted) {
     if (wanted.isEmpty) return null;
     final seen = <String, int>{};
-    (int, int)? best;
+    final tight = <(int, int)>[];
+    var shortest = 1 << 30;
     for (var i = 0; i < items.length; i++) {
       final it = items[i];
       final kinds = <String>{
@@ -394,9 +395,54 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       }
       if (seen.length < wanted.length) continue;
       final lo = seen.values.reduce((a, b) => a < b ? a : b);
-      if (best == null || i - lo <= best.$2 - best.$1) best = (lo, i);
+      final span = i - lo;
+      if (span < shortest) {
+        shortest = span;
+        tight.clear();
+      }
+      if (span == shortest) tight.add((lo, i));
+    }
+    if (tight.isEmpty) return null;
+    // Of the stretches that are equally tight, the one with the most paper around it.
+    //
+    // A year has several, and they are not alike: one is surrounded by short notes and another by
+    // photographs and thrown objects, which are three and seven hundred pixels of the glass. The
+    // hero's own standard is eight notes on eight different torn edges — it is the frame the
+    // material row is judged on at three hundred per cent — and framing the same two kinds beside
+    // two feelings and a photograph left five. So the stretch is chosen for what a reader will see
+    // around it: how many of the ten rows from its start are a note rather than a picture, an
+    // object or a line in the margin.
+    (int, int) best = tight.last;
+    var bestScore = -1;
+    for (final w in tight) {
+      var score = 0;
+      for (var i = w.$1; i < w.$1 + 10 && i < items.length; i++) {
+        if (_isANote(items[i].type)) score++;
+      }
+      // the latest of the equally good ones: a couple's year has many, and the most recent is the
+      // one that looks like now
+      if (score >= bestScore) {
+        bestScore = score;
+        best = w;
+      }
     }
     return best;
+  }
+
+  /// A row that is a piece of paper about the size of a note: not a print, not a thrown object,
+  /// not a pencil line in the margin.
+  ///
+  /// Said by naming what is *not* one, and by the renderer rather than the type. The first version
+  /// listed the seven types that are notes and five of them belonged to modules — which is a
+  /// per-module table in a region, the thing `module_costs_test` exists to stop, and it stopped it.
+  /// A module's row is a note by default, which is what a module's row is.
+  static bool _isANote(String type) {
+    final renderer = kEventTypeById[type]?.renderer;
+    return renderer != null &&
+        !const {
+          'print', 'print_tab', 'object_landing', 'new_feeling_card',
+          'margin_note', 'margin_mark', 'stuck_object', 'edit_mark', 'stub', 'ink_dries',
+        }.contains(renderer);
   }
 
   /// Where the last `scrollTo` put the thread, in the thread's own words, for the scene log.
