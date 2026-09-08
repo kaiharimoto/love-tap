@@ -8,6 +8,8 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -63,6 +65,7 @@ class PaperPiece extends StatelessWidget {
     this.stockScale = 1.0,
     this.windowed = false,
     this.overlays = const [],
+    this.seed = 0,
   });
 
   /// A paper stock variant id, e.g. `lined_02`.
@@ -93,6 +96,13 @@ class PaperPiece extends StatelessWidget {
 
   /// Tape, staples, clips: rendered bits laid over the piece.
   final List<Widget> overlays;
+
+  /// This piece's own number, so no two cut cards are cut alike. A guillotine is not a straight
+  /// line at the scale a photograph is read at. Left at zero it comes from what the piece is made
+  /// of, which is different for every piece on a screen.
+  final int seed;
+
+  int get _seed => seed != 0 ? seed : (stockId.hashCode ^ (tearId ?? '').hashCode) & 0x7fffffff;
 
   /// Show the stock at its own pixel density through a window at [stockAlignment], rather than
   /// scaled to cover the piece. A forty-point card covered by a whole sheet scales the tooth
@@ -136,6 +146,7 @@ class PaperPiece extends StatelessWidget {
             painter: _CutShadow(
               lift: liftMm,
               alpha: (shadowOpacityFor(liftMm) * (dusk ? 0.9 : 1.0)).clamp(0.16, 0.42),
+              seed: _seed,
             ),
           ),
         ),
@@ -181,7 +192,7 @@ class PaperPiece extends StatelessWidget {
           // a cut edge: card stock has thickness, and a straight cut catches the light along its
           // top and left the way a torn one does along its fibres. Without it a whole sheet was a
           // rectangle of texture that stopped dead — edge deviation measured at exactly zero.
-          const Positioned.fill(child: IgnorePointer(child: CustomPaint(painter: _CutEdge()))),
+          Positioned.fill(child: IgnorePointer(child: CustomPaint(painter: _CutEdge(_seed)))),
         _WithinTear(safe: safe, padding: padding, child: child ?? const SizedBox.shrink()),
         ...overlays,
       ],
@@ -556,31 +567,62 @@ class _NinePainter extends CustomPainter {
 /// shade on the bottom and right, the way the light falls on everything else on the desk.
 /// The silhouette of a cut card: the rectangle, with the blade's own wander along each edge and
 /// a nick off each corner. Under a millimetre in all, which is what a guillotine leaves.
+/// The outline of a piece that was cut rather than torn: the four edges, as they actually run.
+///
+/// Each edge is walked rather than ruled. The first version moved the four corners and drew
+/// straight lines between them, which is a quadrilateral with wobbly corners — measured on the
+/// artifact, every module card still had 0.00 to 0.81 px of edge roughness on all four sides and
+/// one was exactly 673x164 with 0.00 on every side. A guillotine leaves a line that wanders by a
+/// fraction of a millimetre along its whole length, because the blade meets fibre and not butter.
+/// Deterministic in the piece's own number, so a card is the same card every time it is drawn and
+/// on both phones.
+List<Offset> cutOutline(Size size, int seed, {double amp = 0.55, double nick = 1.6}) {
+  double w(int i, double a) {
+    final h = (seed * 2654435761 + i * 40503) & 0xFFFF;
+    return (h / 0xFFFF - 0.5) * 2 * a;
+  }
+
+  // two runs along each edge, one about a card's width and one about a letter's, so the cut is
+  // neither a ripple nor noise
+  double along(int id, double t, double a) {
+    final p1 = w(70 + id * 3, 3.14), p2 = w(71 + id * 3, 3.14);
+    return a * (0.6 * math.sin(t * 3.7 + p1) + 0.4 * math.sin(t * 11.3 + p2));
+  }
+
+  final l = w(1, amp), t = w(2, amp);
+  final r = size.width + w(3, amp), b = size.height + w(4, amp);
+  final n = [for (var i = 0; i < 4; i++) nick * (0.5 + (w(10 + i, 1.0) + 1) / 2 * 0.5)];
+  const steps = 14;
+  final out = <Offset>[];
+  void run(int id, Offset from, Offset to) {
+    final d = to - from;
+    final len = d.distance;
+    if (len <= 0) return;
+    final across = Offset(-d.dy / len, d.dx / len);
+    for (var i = 0; i <= steps; i++) {
+      final f = i / steps;
+      out.add(from + d * f + across * along(id, f * 6.28, amp));
+    }
+  }
+
+  run(0, Offset(l + n[0], t), Offset(r - n[1], t));
+  run(1, Offset(r, t + n[1]), Offset(r, b - n[2]));
+  run(2, Offset(r - n[2], b), Offset(l + n[3], b));
+  run(3, Offset(l, b - n[3]), Offset(l, t + n[0]));
+  return out;
+}
+
 class _CutShape extends CustomClipper<Path> {
   const _CutShape(this.seed);
   final int seed;
 
-  double _w(int i, double amp) {
-    // a small deterministic hash: the same card is the same shape on both phones
-    final h = (seed * 2654435761 + i * 40503) & 0xFFFF;
-    return (h / 0xFFFF - 0.5) * 2 * amp;
-  }
-
   @override
   Path getClip(Size size) {
-    const amp = 0.55;      // logical points: about a millimetre and a half at three times
-    const nick = 1.6;
-    final p = Path();
-    final l = _w(1, amp), t = _w(2, amp), r = size.width + _w(3, amp), b = size.height + _w(4, amp);
-    final n = [for (var i = 0; i < 4; i++) nick * (0.5 + (_w(10 + i, 1.0) + 1) / 2 * 0.5)];
-    p.moveTo(l + n[0], t + _w(5, amp * 0.6));
-    p.lineTo(r - n[1], t + _w(6, amp * 0.6));
-    p.lineTo(r + _w(7, amp * 0.4), t + n[1]);
-    p.lineTo(r + _w(8, amp * 0.4), b - n[2]);
-    p.lineTo(r - n[2], b + _w(9, amp * 0.6));
-    p.lineTo(l + n[3], b + _w(11, amp * 0.6));
-    p.lineTo(l + _w(12, amp * 0.4), b - n[3]);
-    p.lineTo(l + _w(13, amp * 0.4), t + n[0]);
+    final pts = cutOutline(size, seed);
+    final p = Path()..moveTo(pts.first.dx, pts.first.dy);
+    for (final o in pts.skip(1)) {
+      p.lineTo(o.dx, o.dy);
+    }
     p.close();
     return p;
   }
@@ -589,22 +631,42 @@ class _CutShape extends CustomClipper<Path> {
   bool shouldReclip(_CutShape old) => old.seed != seed;
 }
 
+/// The light along the four edges of a piece that was cut.
+///
+/// Drawn on the cut the piece is actually clipped to, so the lit edge sits on the edge rather than
+/// beside it: the top and left catch the light, the bottom and right hold the piece's own shade.
 class _CutEdge extends CustomPainter {
-  const _CutEdge();
+  const _CutEdge(this.seed);
+  final int seed;
 
   @override
   void paint(Canvas canvas, Size size) {
+    final pts = cutOutline(size, seed);
+    final per = pts.length ~/ 4;
+    for (var e = 0; e < 4; e++) {
+      final from = e * per;
+      final to = (e == 3) ? pts.length : (e + 1) * per;
+      final path = Path()..moveTo(pts[from].dx, pts[from].dy);
+      for (var i = from + 1; i < to; i++) {
+        path.lineTo(pts[i].dx, pts[i].dy);
+      }
+      final colour = switch (e) {
+        0 => const Color(0x8CFFFFFF),
+        1 => Shadow.warm.withValues(alpha: 0.14),
+        2 => Shadow.warm.withValues(alpha: 0.22),
+        _ => const Color(0x66FFFFFF),
+      };
+      canvas.drawPath(
+        path,
+        Paint()
+          ..color = colour
+          ..strokeWidth = 1.0
+          ..style = PaintingStyle.stroke,
+      );
+    }
+    // and the tone of the stock itself falls off very slightly toward the bottom edge, as a lit
+    // card's does
     final r = Offset.zero & size;
-    canvas.drawLine(r.topLeft + const Offset(0, 0.5), r.topRight + const Offset(0, 0.5),
-        Paint()..color = const Color(0x8CFFFFFF)..strokeWidth = 1.0);
-    canvas.drawLine(r.topLeft + const Offset(0.5, 0), r.bottomLeft + const Offset(0.5, 0),
-        Paint()..color = const Color(0x66FFFFFF)..strokeWidth = 1.0);
-    canvas.drawLine(r.bottomLeft - const Offset(0, 0.5), r.bottomRight - const Offset(0, 0.5),
-        Paint()..color = Shadow.warm.withValues(alpha: 0.22)..strokeWidth = 1.0);
-    canvas.drawLine(r.topRight - const Offset(0.5, 0), r.bottomRight - const Offset(0.5, 0),
-        Paint()..color = Shadow.warm.withValues(alpha: 0.14)..strokeWidth = 1.0);
-    // and the tone of the stock itself falls off very slightly toward the bottom edge, as a
-    // lit card's does
     canvas.drawRect(
       r,
       Paint()
@@ -617,13 +679,14 @@ class _CutEdge extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_CutEdge old) => false;
+  bool shouldRepaint(_CutEdge old) => old.seed != seed;
 }
 
 class _CutShadow extends CustomPainter {
-  const _CutShadow({required this.lift, required this.alpha});
+  const _CutShadow({required this.lift, required this.alpha, this.seed = 0});
   final double lift;
   final double alpha;
+  final int seed;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -638,15 +701,25 @@ class _CutShadow extends CustomPainter {
         ..color = Shadow.warm.withValues(alpha: alpha)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, blur),
     );
-    // and the dense line of contact right under the bottom edge, where the card meets the desk
-    canvas.drawRect(
-      Rect.fromLTWH(dx * 0.5, size.height - 0.5, size.width, 1.6),
-      Paint()
-        ..color = Shadow.warm.withValues(alpha: alpha * 0.9)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 0.9),
-    );
+    // and the dense line of contact under the bottom edge, in segments: where the card is down on
+    // the desk the line is dark and tight, and where it lifts the shadow opens and fades
+    final a = (seed % 53) / 53.0 * 6.28;
+    final b = ((seed >> 5) % 41) / 41.0 * 6.28;
+    const steps = 18;
+    for (var i = 0; i < steps; i++) {
+      final t = i / steps;
+      final near = 0.5 + 0.5 * (0.6 * math.sin(t * 7.4 + a) + 0.4 * math.sin(t * 2.3 + b));
+      final w = size.width / steps + 1;
+      canvas.drawRect(
+        Rect.fromLTWH(dx * 0.5 + t * size.width, size.height - 0.5, w, 1.2 + (1 - near) * 2.4),
+        Paint()
+          ..color = Shadow.warm.withValues(alpha: alpha * (0.45 + 0.55 * near))
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, 0.7 + (1 - near) * 1.6),
+      );
+    }
   }
 
   @override
-  bool shouldRepaint(_CutShadow old) => old.lift != lift || old.alpha != alpha;
+  bool shouldRepaint(_CutShadow old) =>
+      old.lift != lift || old.alpha != alpha || old.seed != seed;
 }

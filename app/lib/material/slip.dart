@@ -92,6 +92,8 @@ class Slip extends StatelessWidget {
       // a cut card is small — a tab, a label, a stub — and covered by a whole sheet its tooth
       // would average away; it looks through a window onto the sheet instead
       windowed: !torn,
+      // the piece's own number, so no two cut cards are cut alike
+      seed: h,
       padding: padding,
       safe: tear == null || lib == null ? const [0.05, 0.06, 0.05, 0.06] : lib.safeOf(tear),
       overlays: overlays,
