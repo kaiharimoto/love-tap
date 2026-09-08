@@ -270,22 +270,28 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         // What each row on the glass says about itself. The artifact named for the messenger's
         // states carried no record of any row's state, so a critic could only read the marks off
         // the picture and count them all the same; there was nothing to check the picture against.
+        // Only the rows that actually draw one. A delivery mark is about writing on its way, so a
+        // row that has been taken back draws none — and the record used to count it anyway, which
+        // is a record of something that is not in the frame. The word is the word on the paper.
         'delivery': {
           for (final p in ps)
-            if (p.index < items.length && items[p.index].event.author == AppScope.of(context).me)
-              items[p.index].id: items[p.index].delivery.name,
+            if (p.index < items.length && _drawsADeliveryMark(items[p.index]))
+              items[p.index].id: {
+                'state': items[p.index].delivery.name,
+                'says': deliverySays(items[p.index].delivery),
+              },
         },
         'states_on_the_glass': {
           for (final d in {
             for (final p in ps)
-              if (p.index < items.length && items[p.index].event.author == AppScope.of(context).me)
-                items[p.index].delivery.name
+              if (p.index < items.length && _drawsADeliveryMark(items[p.index]))
+                deliverySays(items[p.index].delivery)
           })
             d: [
               for (final p in ps)
                 if (p.index < items.length &&
-                    items[p.index].event.author == AppScope.of(context).me &&
-                    items[p.index].delivery.name == d)
+                    _drawsADeliveryMark(items[p.index]) &&
+                    deliverySays(items[p.index].delivery) == d)
                   items[p.index].id
             ].length,
         },
@@ -478,6 +484,10 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   /// How tall the thread's own viewport is, in logical pixels. Item positions are fractions of
   /// it, and a fraction says nothing about whether another note would have fitted.
   double get _viewportTall => _livePosition()?.viewportDimension ?? 0;
+
+  /// Whether this row draws a delivery mark: mine, and not taken back.
+  bool _drawsADeliveryMark(ThreadItem it) =>
+      it.event.author == AppScope.of(context).me && !it.deleted;
 
   /// Whether a row of this kind is a piece of paper with a torn edge.
   ///

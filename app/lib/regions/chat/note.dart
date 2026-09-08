@@ -290,6 +290,21 @@ class _EditCaret extends StatelessWidget {
   Widget build(BuildContext context) => Mark.turnback(size: 11, colour: Pen.margin, seed: 3);
 }
 
+/// The word the glass puts on a delivery state.
+///
+/// One table, read by the mark that draws it and by the capture report that says what was drawn.
+/// They were two: the report wrote the state's own name — `sent`, `sending` — while the paper said
+/// `sent`, `going`, `it would not go`, so a critic reading the record against the picture found a
+/// row recorded as `sent` with no `sent` anywhere in the frame and no record at all of the state
+/// whose word is `going`. A record of a picture has to use the picture's words.
+String deliverySays(Delivery d) => switch (d) {
+      Delivery.queued => S.waitingToSend,
+      Delivery.sending => S.sending,
+      Delivery.sent => S.sent,
+      Delivery.read => S.read,
+      Delivery.refused => S.refused,
+    };
+
 /// What happened to something you wrote, as a mark rather than a word alone.
 ///
 ///   queued   a dash, unfinished: it has not left
@@ -326,17 +341,18 @@ class _DeliveryMark extends StatelessWidget {
   Widget build(BuildContext context) {
     final seed = id.hashCode & 0x7fff;
     return switch (delivery) {
-      Delivery.queued => _said(S.waitingToSend, Mark.clip(size: 12, colour: Pen.margin, seed: seed)),
-      Delivery.sending => _said(S.sending, Mark.ticks(size: 12, colour: Pen.margin, seed: seed)),
-      Delivery.sent => _said(S.sent, Mark.tick(size: 12, colour: Pen.margin, seed: seed)),
+      Delivery.queued => _said(deliverySays(delivery), Mark.clip(size: 12, colour: Pen.margin, seed: seed)),
+      Delivery.sending => _said(deliverySays(delivery), Mark.ticks(size: 12, colour: Pen.margin, seed: seed)),
+      Delivery.sent => _said(deliverySays(delivery), Mark.tick(size: 12, colour: Pen.margin, seed: seed)),
       Delivery.read => _said(
-          S.read,
+          deliverySays(delivery),
           Row(mainAxisSize: MainAxisSize.min, children: [
             Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed),
             Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed + 1),
           ]),
           ink: Pen.ballpoint),
-      Delivery.refused => _said(S.refused, Mark.cross(size: 12, colour: Pen.red, seed: seed), ink: Pen.red),
+      Delivery.refused =>
+        _said(deliverySays(delivery), Mark.cross(size: 12, colour: Pen.red, seed: seed), ink: Pen.red),
     };
   }
 }
