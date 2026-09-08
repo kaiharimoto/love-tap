@@ -10,33 +10,33 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2702,
+   "ms": 2833,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4733
+   "ms": 4350
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 1906
   },
   {
    "do": "scrollTo",
-   "ms": 31432
+   "ms": 28152
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 1904
   },
   {
    "do": "shot",
-   "ms": 3329
+   "ms": 3110
   },
   {
    "do": "report",
-   "ms": 716
+   "ms": 702
   }
  ],
  "shots": [
@@ -152,7 +152,7 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 2,
+    "rounds": 1,
     "pushed": 1,
     "refused": 0,
     "pulled": 0,
@@ -169,8 +169,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-08T16:39:28.583Z",
-     "last_contact": "2026-09-08T16:40:15.778Z"
+     "since": "2026-09-08T18:49:23.837Z",
+     "last_contact": "2026-09-08T18:49:45.955Z"
     }
    },
    "ambient": {
@@ -180,12 +180,13 @@
     "allowed_to_interrupt": false,
     "held_by_the_phone": []
    },
-   "at": "02_chat.png"
+   "at": "02_chat.png",
+   "read_at": "the shutter"
   }
  ],
- "cold_ms": 2857,
+ "cold_ms": 2378,
  "load": {
-  "ms": 2857,
+  "ms": 2378,
   "store": "kept",
   "profile": "profile_seeded"
  },

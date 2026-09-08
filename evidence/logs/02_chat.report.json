@@ -104,7 +104,7 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 2,
+  "rounds": 1,
   "pushed": 1,
   "refused": 0,
   "pulled": 0,
@@ -121,8 +121,8 @@
    "peer_cursor": 14062,
    "our_cursor": 14062,
    "last_error": null,
-   "since": "2026-09-08T16:39:28.583Z",
-   "last_contact": "2026-09-08T16:40:15.778Z"
+   "since": "2026-09-08T18:49:23.837Z",
+   "last_contact": "2026-09-08T18:49:45.955Z"
   }
  },
  "ambient": {
@@ -132,5 +132,6 @@
   "allowed_to_interrupt": false,
   "held_by_the_phone": []
  },
- "at": "02_chat.png"
+ "at": "02_chat.png",
+ "read_at": "the shutter"
 }
