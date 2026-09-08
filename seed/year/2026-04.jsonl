@@ -444,7 +444,7 @@
 {"key": "2026-04-12-0004", "ts": "2026-04-12T11:20:13+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "out"}}
 {"key": "2026-04-12-9623", "ts": "2026-04-12T11:22:54+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "local_hour", "value": 11}, "gen": "finish"}
 {"key": "2026-04-12-9077", "ts": "2026-04-12T12:07:06+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-04-12-0002"}, "gen": "finish"}
-{"key": "2026-04-12-0005", "ts": "2026-04-12T12:10:41+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-04_canal_boats_pass", "duration_ms": 11000, "caption": "sunday on the water. nobody is in a hurry and one of them is going backwards"}}
+{"key": "2026-04-12-0005", "ts": "2026-04-12T12:10:41+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-04_canal_boats_pass", "duration_ms": 2500, "caption": "sunday on the water. nobody is in a hurry and one of them is going backwards"}}
 {"key": "2026-04-12-9078", "ts": "2026-04-12T12:18:37+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-04-12-0005"}, "gen": "finish"}
 {"key": "2026-04-12-0006", "ts": "2026-04-12T12:22:07+01:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2026-04-12-0005", "feeling_id": "warm_palm"}}
 {"key": "2026-04-12-0007", "ts": "2026-04-12T12:26:35+01:00", "author": "teo", "type": "message", "payload": {"text": "The one going backwards is the only one enjoying himself."}}
@@ -971,7 +971,7 @@
 {"key": "2026-04-28-0006", "ts": "2026-04-28T12:48:50+01:00", "author": "noor", "type": "message", "payload": {"text": "whether it would be better cold. that is the one that finishes most soups"}}
 {"key": "2026-04-28-0007", "ts": "2026-04-28T12:52:27+01:00", "author": "teo", "type": "message", "payload": {"text": "That is a trap and I am walking into it with my eyes open."}}
 {"key": "2026-04-28-9166", "ts": "2026-04-28T16:19:11+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-04-28-0007"}, "gen": "finish"}
-{"key": "2026-04-28-0008", "ts": "2026-04-28T16:20:39+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-04_washing_line_wind", "duration_ms": 9000, "caption": "the wind has been doing this since three and the sheet has not touched the ground once"}}
+{"key": "2026-04-28-0008", "ts": "2026-04-28T16:20:39+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-04_washing_line_wind", "duration_ms": 2500, "caption": "the wind has been doing this since three and the sheet has not touched the ground once"}}
 {"key": "2026-04-28-0009", "ts": "2026-04-28T16:30:16+01:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2026-04-28-0008", "feeling_id": "warm_palm"}}
 {"key": "2026-04-28-0010", "ts": "2026-04-28T18:40:22+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "out"}}
 {"key": "2026-04-28-9167", "ts": "2026-04-28T20:07:43+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-04-28-0009"}, "gen": "finish"}

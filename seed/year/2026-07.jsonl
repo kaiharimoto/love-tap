@@ -801,7 +801,7 @@
 {"key": "2026-07-18-0017", "ts": "2026-07-18T09:22:57+01:00", "author": "noor", "type": "photo", "payload": {"photo": "2026-07_ferry_rail", "caption": "quarter past and moving"}}
 {"key": "2026-07-18-9766", "ts": "2026-07-18T09:24:35+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "ringer", "value": "normal"}, "gen": "finish"}
 {"key": "2026-07-18-9772", "ts": "2026-07-18T09:30:23+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "at_home", "value": true}, "gen": "finish"}
-{"key": "2026-07-18-0018", "ts": "2026-07-18T09:31:34+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-07_boat_wake", "duration_ms": 12000, "caption": "the back of it"}}
+{"key": "2026-07-18-0018", "ts": "2026-07-18T09:31:34+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-07_boat_wake", "duration_ms": 2500, "caption": "the back of it"}}
 {"key": "2026-07-18-9773", "ts": "2026-07-18T09:32:08+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "network", "value": "wifi"}, "gen": "finish"}
 {"key": "2026-07-18-0019", "ts": "2026-07-18T09:44:11+01:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "squeeze", "intensity": 0.7}}
 {"key": "2026-07-18-9113", "ts": "2026-07-18T10:05:13+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-07-18-0019"}, "gen": "finish"}

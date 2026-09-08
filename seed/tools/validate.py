@@ -184,6 +184,19 @@ def main(paths):
             if typ == "photo" and pl.get("photo") not in photos: errors.append(f"{where}: photo {pl.get('photo')!r} not in seed/photos/index.{month}.json")
             if typ == "voice_note" and pl.get("voice") not in voices: errors.append(f"{where}: voice {pl.get('voice')!r} not in seed/voice/index.{month}.json")
             if typ == "video" and pl.get("video") not in videos: errors.append(f"{where}: video {pl.get('video')!r} not in seed/videos/index.{month}.json")
+            # A month says how long a clip is and the index says how long the file is, and they were
+            # not the same number: every video in the year declared seven to twelve seconds against
+            # renders that are all two and a half, so the thread read "a video, 0:11" over two and a
+            # half seconds of footage and the viewer's strip drew a playhead against a length nothing
+            # had. The index is written from the render, so the index wins.
+            for _t, _key, _idx, _where in (("video", "video", videos, "seed/videos"),
+                                           ("voice_note", "voice", voices, "seed/voice")):
+                if typ != _t: continue
+                entry = _idx.get(pl.get(_key))
+                if not isinstance(entry, dict) or "duration_ms" not in entry: continue
+                if pl.get("duration_ms") != entry["duration_ms"]:
+                    errors.append(f"{where}: {_t} says {pl.get('duration_ms')} ms and "
+                                  f"{_where}/index.{month}.json says {entry['duration_ms']} ms")
             if typ == "date_event" and pl.get("action") not in DATE_ACTIONS: errors.append(f"{where}: bad date action")
             if typ == "todo_event" and pl.get("action") not in TODO_ACTIONS: errors.append(f"{where}: bad todo action")
             if typ == "todo_event" and pl.get("assignee") not in (None,"noor","teo"): errors.append(f"{where}: bad assignee")

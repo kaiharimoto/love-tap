@@ -68,7 +68,7 @@
 {"key": "2026-06-02-0020", "ts": "2026-06-02T16:11:15+01:00", "author": "noor", "type": "message", "payload": {"text": "youll eat toast"}}
 {"key": "2026-06-02-0021", "ts": "2026-06-02T16:14:38+01:00", "author": "teo", "type": "message", "payload": {"text": "I will eat toast."}}
 {"key": "2026-06-02-9007", "ts": "2026-06-02T17:27:10+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-06-02-0021"}, "gen": "finish"}
-{"key": "2026-06-02-0022", "ts": "2026-06-02T17:30:26+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-06_fan_ribbon", "duration_ms": 8000, "caption": "proof of movement"}}
+{"key": "2026-06-02-0022", "ts": "2026-06-02T17:30:26+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-06_fan_ribbon", "duration_ms": 2500, "caption": "proof of movement"}}
 {"key": "2026-06-02-0023", "ts": "2026-06-02T17:36:50+01:00", "author": "teo", "type": "message", "payload": {"text": "The ribbon is doing more work than the fan is."}}
 {"key": "2026-06-02-0024", "ts": "2026-06-02T19:19:11+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "place", "value": "work"}}
 {"key": "2026-06-02-0025", "ts": "2026-06-02T19:25:00+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "availability", "value": "heads_down"}}

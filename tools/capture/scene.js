@@ -235,7 +235,15 @@ function ensure(p) {
         while (Date.now() < until) {
           got = await page.evaluate((k) => {
             const r = window.__deskReport && JSON.parse(window.__deskReport());
-            return r && r.view ? r.view[k] : null;
+            // `video.playing` as well as `partner_typing`: a region reports what it is showing in
+            // whatever shape that thing has, and a scene should be able to wait for a thing two
+            // deep without the report having to flatten itself for the harness.
+            let v = r && r.view;
+            for (const part of String(k).split('.')) {
+              if (v == null) return null;
+              v = v[part];
+            }
+            return v === undefined ? null : v;
           }, key);
           if (got === want) break;
           await page.evaluate(() => window.__deskSync && window.__deskSync()).catch(() => {});

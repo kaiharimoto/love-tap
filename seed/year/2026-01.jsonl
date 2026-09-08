@@ -410,7 +410,7 @@
 {"key": "2026-01-09-0016", "ts": "2026-01-09T16:20:31+00:00", "author": "noor", "type": "message", "payload": {"text": "the boiler has started making a sound when it fires. like a kettle with an opinion"}}
 {"key": "2026-01-09-9066", "ts": "2026-01-09T16:22:08+00:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-01-09-0016"}, "gen": "finish"}
 {"key": "2026-01-09-0017", "ts": "2026-01-09T16:24:09+00:00", "author": "teo", "type": "message", "payload": {"text": "Record it for me."}}
-{"key": "2026-01-09-0018", "ts": "2026-01-09T16:40:55+00:00", "author": "noor", "type": "video", "payload": {"video": "2026-01_boiler_noise", "duration_ms": 9000, "caption": "listen to the second half of it"}}
+{"key": "2026-01-09-0018", "ts": "2026-01-09T16:40:55+00:00", "author": "noor", "type": "video", "payload": {"video": "2026-01_boiler_noise", "duration_ms": 2500, "caption": "listen to the second half of it"}}
 {"key": "2026-01-09-9612", "ts": "2026-01-09T16:50:40+00:00", "author": "noor", "type": "state_passive", "payload": {"signal": "at_home", "value": false}, "gen": "finish"}
 {"key": "2026-01-09-0019", "ts": "2026-01-09T16:52:20+00:00", "author": "teo", "type": "message", "payload": {"text": "That is not a noise a boiler makes when it is content."}}
 {"key": "2026-01-09-9613", "ts": "2026-01-09T16:52:29+00:00", "author": "noor", "type": "state_passive", "payload": {"signal": "moving", "value": "walking"}, "gen": "finish"}

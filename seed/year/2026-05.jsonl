@@ -379,7 +379,7 @@
 {"key": "2026-05-09-9066", "ts": "2026-05-09T12:17:05+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-05-09-0005"}, "gen": "finish"}
 {"key": "2026-05-09-0006", "ts": "2026-05-09T12:20:33+01:00", "author": "teo", "type": "message", "payload": {"text": "I am coming to yours later for the pressure. Do not touch the grey lever before I get there."}}
 {"key": "2026-05-09-9067", "ts": "2026-05-09T14:37:26+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-05-09-0006"}, "gen": "finish"}
-{"key": "2026-05-09-0007", "ts": "2026-05-09T14:40:19+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-05_boiler_gauge", "duration_ms": 8000, "caption": "one point four on tuesday. this is it now, and nothing has been on"}}
+{"key": "2026-05-09-0007", "ts": "2026-05-09T14:40:19+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-05_boiler_gauge", "duration_ms": 2500, "caption": "one point four on tuesday. this is it now, and nothing has been on"}}
 {"key": "2026-05-09-0008", "ts": "2026-05-09T14:52:44+01:00", "author": "teo", "type": "message", "payload": {"text": "That is not a boiler losing pressure. That is a boiler with a hole in it somewhere."}}
 {"key": "2026-05-09-0009", "ts": "2026-05-09T15:40:10+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "place", "value": "out"}}
 {"key": "2026-05-09-0010", "ts": "2026-05-09T17:20:36+01:00", "author": "teo", "type": "todo_event", "payload": {"todo_id": "todo_boiler", "action": "done", "text": "topped to one point two, and found the wet patch under the hall board. the joint at the back is weeping", "assignee": "teo"}}
@@ -1175,7 +1175,7 @@
 {"key": "2026-05-29-9195", "ts": "2026-05-29T17:29:55+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-05-29-0011"}, "gen": "finish"}
 {"key": "2026-05-29-0012", "ts": "2026-05-29T17:30:31+01:00", "author": "noor", "type": "reaction", "payload": {"target": "k:2026-05-29-0011", "feeling_id": "nyeh"}}
 {"key": "2026-05-29-9828", "ts": "2026-05-29T19:40:09+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "ringer", "value": "normal"}, "gen": "finish"}
-{"key": "2026-05-29-0013", "ts": "2026-05-29T19:40:58+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-05_canal_dusk_rings", "duration_ms": 12000, "caption": "it started at half seven and the whole surface went like this in about four seconds"}}
+{"key": "2026-05-29-0013", "ts": "2026-05-29T19:40:58+01:00", "author": "noor", "type": "video", "payload": {"video": "2026-05_canal_dusk_rings", "duration_ms": 2500, "caption": "it started at half seven and the whole surface went like this in about four seconds"}}
 {"key": "2026-05-29-0014", "ts": "2026-05-29T19:50:25+01:00", "author": "teo", "type": "reaction", "payload": {"target": "k:2026-05-29-0013", "feeling_id": "breathe"}}
 {"key": "2026-05-29-9829", "ts": "2026-05-29T20:15:51+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "at_home", "value": false}, "gen": "finish"}
 {"key": "2026-05-29-9830", "ts": "2026-05-29T20:17:52+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "moving", "value": "walking"}, "gen": "finish"}

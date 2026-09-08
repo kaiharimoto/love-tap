@@ -775,7 +775,7 @@
 {"key": "2025-09-20-0011", "ts": "2025-09-20T11:09:20+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "status_line", "value": "market"}}
 {"key": "2025-09-20-9118", "ts": "2025-09-20T12:39:56+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2025-09-20-0009"}, "gen": "finish"}
 {"key": "2025-09-20-0012", "ts": "2025-09-20T12:40:55+01:00", "author": "noor", "type": "photo", "payload": {"photo": "2025-09_market_crates", "caption": "the stall at the end that only ever sells three things"}}
-{"key": "2025-09-20-0013", "ts": "2025-09-20T12:44:18+01:00", "author": "noor", "type": "video", "payload": {"video": "2025-09_market_awning", "duration_ms": 7000, "caption": "wind"}}
+{"key": "2025-09-20-0013", "ts": "2025-09-20T12:44:18+01:00", "author": "noor", "type": "video", "payload": {"video": "2025-09_market_awning", "duration_ms": 2500, "caption": "wind"}}
 {"key": "2025-09-20-9119", "ts": "2025-09-20T13:09:57+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2025-09-20-0013"}, "gen": "finish"}
 {"key": "2025-09-20-0014", "ts": "2025-09-20T13:10:26+01:00", "author": "teo", "type": "message", "payload": {"text": "The cheese man overcharged us and I let him."}}
 {"key": "2025-09-20-0015", "ts": "2025-09-20T13:12:09+01:00", "author": "noor", "type": "message", "payload": {"text": "you let him because he called you son"}}

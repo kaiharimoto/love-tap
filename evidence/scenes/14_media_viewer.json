@@ -25,6 +25,13 @@
    "ms": 3000
   },
   {
+   "do": "awaitView",
+   "key": "video.playing",
+   "value": true,
+   "timeout": 20000,
+   "settle": 700
+  },
+  {
    "do": "shot",
    "out": "evidence/14_media_viewer.png",
    "settle": 1200
