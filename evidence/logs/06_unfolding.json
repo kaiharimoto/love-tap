@@ -10,37 +10,61 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1714,
+   "ms": 1887,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3568
+   "ms": 3667
   },
   {
    "do": "wait",
-   "ms": 1605
+   "ms": 1607
   },
   {
    "do": "scrollTo",
-   "ms": 4176
+   "ms": 5921
   },
   {
    "do": "wait",
-   "ms": 1301
+   "ms": 1303
   },
   {
    "do": "far",
-   "ms": 1412
+   "ms": 1572
   },
   {
    "do": "awaitArrival",
-   "ms": 3632
+   "ms": 2789
   },
   {
    "do": "frames",
-   "ms": 35036
+   "ms": 34665
+  },
+  {
+   "do": "unfold",
+   "ms": 11
+  },
+  {
+   "frames_from_the_build": "unfold_thirds",
+   "count": 139
+  },
+  {
+   "do": "frames",
+   "ms": 260946
+  },
+  {
+   "do": "far",
+   "ms": 405
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 2041
+  },
+  {
+   "do": "frames",
+   "ms": 35494
   },
   {
    "do": "unfold",
@@ -52,35 +76,11 @@
   },
   {
    "do": "frames",
-   "ms": 257509
-  },
-  {
-   "do": "far",
-   "ms": 403
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1751
-  },
-  {
-   "do": "frames",
-   "ms": 28198
-  },
-  {
-   "do": "unfold",
-   "ms": 5
-  },
-  {
-   "frames_from_the_build": "unfold_thirds",
-   "count": 139
-  },
-  {
-   "do": "frames",
-   "ms": 246551
+   "ms": 260224
   },
   {
    "do": "report",
-   "ms": 417
+   "ms": 1192
   }
  ],
  "shots": [
@@ -123,7 +123,7 @@
      "message": 3
     },
     "delivery": {
-     "0001MCJ1M0AZ08RJV96R1X6MV5": {
+     "0001MCJ1M0S0VR39GWWF2VKQXG": {
       "state": "sent",
       "says": "sent"
      }
@@ -136,24 +136,24 @@
     "taken_back": []
    },
    "visible": [
-    "0001MCJ1M0AZ08RJV96R1X6MV5",
-    "01M1MCZGMFC3N3WQ7QVHA6BRP8",
-    "01M1MD8JAR6F3XXANP5SH6A76D"
+    "0001MCJ1M0S0VR39GWWF2VKQXG",
+    "01M1MCXBH1AQ7JQDKQQ1EFA14H",
+    "01M1MD6FAGEE0TZPXGVW180K4B"
    ],
    "paper": [
-    "0001MCJ1M0AZ08RJV96R1X6MV5",
-    "01M1MCZGMFC3N3WQ7QVHA6BRP8",
-    "01M1MD8JAR6F3XXANP5SH6A76D"
+    "0001MCJ1M0S0VR39GWWF2VKQXG",
+    "01M1MCXBH1AQ7JQDKQQ1EFA14H",
+    "01M1MD6FAGEE0TZPXGVW180K4B"
    ],
    "tears": {
-    "0001MCJ1M0AZ08RJV96R1X6MV5": "tear_013",
-    "01M1MCZGMFC3N3WQ7QVHA6BRP8": "tear_018",
-    "01M1MD8JAR6F3XXANP5SH6A76D": "tear_003"
+    "0001MCJ1M0S0VR39GWWF2VKQXG": "tear_051",
+    "01M1MCXBH1AQ7JQDKQQ1EFA14H": "tear_040",
+    "01M1MD6FAGEE0TZPXGVW180K4B": "tear_045"
    },
    "stocks": {
-    "0001MCJ1M0AZ08RJV96R1X6MV5": "legal_01",
-    "01M1MCZGMFC3N3WQ7QVHA6BRP8": "lined_04",
-    "01M1MD8JAR6F3XXANP5SH6A76D": "lined_04"
+    "0001MCJ1M0S0VR39GWWF2VKQXG": "lined_04",
+    "01M1MCXBH1AQ7JQDKQQ1EFA14H": "lined_03",
+    "01M1MD6FAGEE0TZPXGVW180K4B": "lined_01"
    },
    "scroll": {
     "first": 8072,
@@ -163,7 +163,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 5104,
    "seed": 20260903,
-   "events": 14079,
+   "events": 14082,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -186,25 +186,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 196,
-    "pushed": 4,
+    "rounds": 206,
+    "pushed": 6,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14079,
+    "cursor": 14082,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14079,
-     "our_cursor": 14079,
+     "peer_cursor": 14082,
+     "our_cursor": 14082,
      "last_error": null,
-     "since": "2026-09-08T16:45:36.484Z",
-     "last_contact": "2026-09-08T16:55:21.952Z"
+     "since": "2026-09-08T18:54:36.366Z",
+     "last_contact": "2026-09-08T19:04:49.844Z"
     }
    },
    "ambient": {
@@ -214,12 +214,13 @@
     "allowed_to_interrupt": false,
     "held_by_the_phone": []
    },
-   "at": "06_unfolding"
+   "at": "06_unfolding",
+   "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2413,
+ "cold_ms": 2475,
  "load": {
-  "ms": 2413,
+  "ms": 2475,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -239,19 +240,17 @@
    "before": 8073,
    "after": 8074,
    "at_frame": 0,
-   "waited_ms": 3231
+   "waited_ms": 2388
   },
   {
    "line": "message and the bread",
    "before": 8074,
    "after": 8075,
    "at_frame": 155,
-   "waited_ms": 1350
+   "waited_ms": 1638
   }
  ],
- "problems": [
-  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
- ],
- "ok": false,
+ "problems": [],
+ "ok": true,
  "steps_landed": true
 }
