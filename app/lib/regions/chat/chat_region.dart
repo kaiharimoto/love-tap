@@ -21,6 +21,7 @@ import '../../media/read_bytes.dart';
 import '../../scope.dart';
 import '../../transport/local/local_transport.dart';
 import '../../spine/projections/thread.dart';
+import '../../spine/types.dart';
 import '../../voice/strings.dart';
 import 'note.dart';
 import '../../thread/renderers.dart';
