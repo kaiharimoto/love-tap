@@ -10,33 +10,33 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2425,
+   "ms": 1655,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3923
+   "ms": 3768
   },
   {
    "do": "wait",
-   "ms": 2005
+   "ms": 2003
   },
   {
    "do": "scrollTo",
-   "ms": 4483
+   "ms": 3951
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1103
   },
   {
    "do": "frames",
-   "ms": 531790
+   "ms": 626601
   },
   {
    "do": "timings",
-   "ms": 422
+   "ms": 416
   },
   {
    "do": "flingLog",
@@ -64,9 +64,9 @@
   }
  ],
  "reports": [],
- "cold_ms": 3077,
+ "cold_ms": 2269,
  "load": {
-  "ms": 3077,
+  "ms": 2269,
   "store": "kept",
   "profile": "profile_seeded"
  },

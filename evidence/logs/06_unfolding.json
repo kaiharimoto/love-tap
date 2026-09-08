@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2633,
+   "ms": 1714,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 6143
+   "ms": 3568
   },
   {
    "do": "wait",
@@ -24,47 +24,23 @@
   },
   {
    "do": "scrollTo",
-   "ms": 12767
+   "ms": 4176
   },
   {
    "do": "wait",
-   "ms": 1303
-  },
-  {
-   "do": "far",
-   "ms": 986
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 10487
-  },
-  {
-   "do": "frames",
-   "ms": 81630
-  },
-  {
-   "do": "unfold",
-   "ms": 2056
-  },
-  {
-   "frames_from_the_build": "unfold_thirds",
-   "count": 147
-  },
-  {
-   "do": "frames",
-   "ms": 627021
-  },
-  {
-   "do": "far",
-   "ms": 405
-  },
-  {
-   "do": "awaitArrival",
    "ms": 1301
   },
   {
+   "do": "far",
+   "ms": 1412
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 3632
+  },
+  {
    "do": "frames",
-   "ms": 57429
+   "ms": 35036
   },
   {
    "do": "unfold",
@@ -72,15 +48,39 @@
   },
   {
    "frames_from_the_build": "unfold_thirds",
-   "count": 147
+   "count": 139
   },
   {
    "do": "frames",
-   "ms": 526235
+   "ms": 257509
+  },
+  {
+   "do": "far",
+   "ms": 403
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1751
+  },
+  {
+   "do": "frames",
+   "ms": 28198
+  },
+  {
+   "do": "unfold",
+   "ms": 5
+  },
+  {
+   "frames_from_the_build": "unfold_thirds",
+   "count": 139
+  },
+  {
+   "do": "frames",
+   "ms": 246551
   },
   {
    "do": "report",
-   "ms": 423
+   "ms": 417
   }
  ],
  "shots": [
@@ -91,7 +91,7 @@
    "drive": null
   },
   {
-   "frames": 147,
+   "frames": 139,
    "dir": "evidence/frames/06_unfolding",
    "ms": 16,
    "drive": null
@@ -103,7 +103,7 @@
    "drive": null
   },
   {
-   "frames": 147,
+   "frames": 139,
    "dir": "evidence/frames/06_unfolding",
    "ms": 16,
    "drive": null
@@ -123,7 +123,10 @@
      "message": 3
     },
     "delivery": {
-     "0001MCJ1M05XHMK2H3SFK8E6R9": "sent"
+     "0001MCJ1M0AZ08RJV96R1X6MV5": {
+      "state": "sent",
+      "says": "sent"
+     }
     },
     "states_on_the_glass": {
      "sent": 1
@@ -133,19 +136,24 @@
     "taken_back": []
    },
    "visible": [
-    "0001MCJ1M05XHMK2H3SFK8E6R9",
-    "01M1MD0VPE0V43QNY9QFH56SE2",
-    "01M1MDPW9H3WTJR65CQ4YE7W37"
+    "0001MCJ1M0AZ08RJV96R1X6MV5",
+    "01M1MCZGMFC3N3WQ7QVHA6BRP8",
+    "01M1MD8JAR6F3XXANP5SH6A76D"
+   ],
+   "paper": [
+    "0001MCJ1M0AZ08RJV96R1X6MV5",
+    "01M1MCZGMFC3N3WQ7QVHA6BRP8",
+    "01M1MD8JAR6F3XXANP5SH6A76D"
    ],
    "tears": {
-    "0001MCJ1M05XHMK2H3SFK8E6R9": "tear_051",
-    "01M1MD0VPE0V43QNY9QFH56SE2": "tear_055",
-    "01M1MDPW9H3WTJR65CQ4YE7W37": "tear_003"
+    "0001MCJ1M0AZ08RJV96R1X6MV5": "tear_013",
+    "01M1MCZGMFC3N3WQ7QVHA6BRP8": "tear_018",
+    "01M1MD8JAR6F3XXANP5SH6A76D": "tear_003"
    },
    "stocks": {
-    "0001MCJ1M05XHMK2H3SFK8E6R9": "looseleaf_04",
-    "01M1MD0VPE0V43QNY9QFH56SE2": "receipt_01",
-    "01M1MDPW9H3WTJR65CQ4YE7W37": "lined_03"
+    "0001MCJ1M0AZ08RJV96R1X6MV5": "legal_01",
+    "01M1MCZGMFC3N3WQ7QVHA6BRP8": "lined_04",
+    "01M1MD8JAR6F3XXANP5SH6A76D": "lined_04"
    },
    "scroll": {
     "first": 8072,
@@ -153,7 +161,7 @@
     "of": 8075
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 5360,
+   "driven_ms": 5104,
    "seed": 20260903,
    "events": 14079,
    "transport": "local",
@@ -167,21 +175,21 @@
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 147,
+    "length": 139,
     "decoded": 14,
     "decoding": 0,
-    "playhead": 145,
-    "held_from": 133,
-    "held_to": 146
+    "playhead": 137,
+    "held_from": 125,
+    "held_to": 138
    },
    "sensation": null,
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 435,
+    "rounds": 196,
     "pushed": 4,
     "refused": 0,
-    "pulled": 3,
+    "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
@@ -195,8 +203,8 @@
      "peer_cursor": 14079,
      "our_cursor": 14079,
      "last_error": null,
-     "since": "2026-09-07T22:27:09.289Z",
-     "last_contact": "2026-09-07T22:49:20.300Z"
+     "since": "2026-09-08T16:45:36.484Z",
+     "last_contact": "2026-09-08T16:55:21.952Z"
     }
    },
    "ambient": {
@@ -209,9 +217,9 @@
    "at": "06_unfolding"
   }
  ],
- "cold_ms": 2895,
+ "cold_ms": 2413,
  "load": {
-  "ms": 2895,
+  "ms": 2413,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -222,7 +230,7 @@
   },
   {
    "line": "message and the bread",
-   "at_frame": 163
+   "at_frame": 155
   }
  ],
  "arrivals": [
@@ -231,14 +239,14 @@
    "before": 8073,
    "after": 8074,
    "at_frame": 0,
-   "waited_ms": 10085
+   "waited_ms": 3231
   },
   {
    "line": "message and the bread",
    "before": 8074,
    "after": 8075,
-   "at_frame": 163,
-   "waited_ms": 900
+   "at_frame": 155,
+   "waited_ms": 1350
   }
  ],
  "problems": [

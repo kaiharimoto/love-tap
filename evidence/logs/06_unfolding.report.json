@@ -11,7 +11,10 @@
    "message": 3
   },
   "delivery": {
-   "0001MCJ1M05XHMK2H3SFK8E6R9": "sent"
+   "0001MCJ1M0AZ08RJV96R1X6MV5": {
+    "state": "sent",
+    "says": "sent"
+   }
   },
   "states_on_the_glass": {
    "sent": 1
@@ -21,19 +24,24 @@
   "taken_back": []
  },
  "visible": [
-  "0001MCJ1M05XHMK2H3SFK8E6R9",
-  "01M1MD0VPE0V43QNY9QFH56SE2",
-  "01M1MDPW9H3WTJR65CQ4YE7W37"
+  "0001MCJ1M0AZ08RJV96R1X6MV5",
+  "01M1MCZGMFC3N3WQ7QVHA6BRP8",
+  "01M1MD8JAR6F3XXANP5SH6A76D"
+ ],
+ "paper": [
+  "0001MCJ1M0AZ08RJV96R1X6MV5",
+  "01M1MCZGMFC3N3WQ7QVHA6BRP8",
+  "01M1MD8JAR6F3XXANP5SH6A76D"
  ],
  "tears": {
-  "0001MCJ1M05XHMK2H3SFK8E6R9": "tear_051",
-  "01M1MD0VPE0V43QNY9QFH56SE2": "tear_055",
-  "01M1MDPW9H3WTJR65CQ4YE7W37": "tear_003"
+  "0001MCJ1M0AZ08RJV96R1X6MV5": "tear_013",
+  "01M1MCZGMFC3N3WQ7QVHA6BRP8": "tear_018",
+  "01M1MD8JAR6F3XXANP5SH6A76D": "tear_003"
  },
  "stocks": {
-  "0001MCJ1M05XHMK2H3SFK8E6R9": "looseleaf_04",
-  "01M1MD0VPE0V43QNY9QFH56SE2": "receipt_01",
-  "01M1MDPW9H3WTJR65CQ4YE7W37": "lined_03"
+  "0001MCJ1M0AZ08RJV96R1X6MV5": "legal_01",
+  "01M1MCZGMFC3N3WQ7QVHA6BRP8": "lined_04",
+  "01M1MD8JAR6F3XXANP5SH6A76D": "lined_04"
  },
  "scroll": {
   "first": 8072,
@@ -41,7 +49,7 @@
   "of": 8075
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 5360,
+ "driven_ms": 5104,
  "seed": 20260903,
  "events": 14079,
  "transport": "local",
@@ -55,21 +63,21 @@
  "setup_showing": false,
  "fold": {
   "sequence": "unfold_thirds",
-  "length": 147,
+  "length": 139,
   "decoded": 14,
   "decoding": 0,
-  "playhead": 145,
-  "held_from": 133,
-  "held_to": 146
+  "playhead": 137,
+  "held_from": 125,
+  "held_to": 138
  },
  "sensation": null,
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 435,
+  "rounds": 196,
   "pushed": 4,
   "refused": 0,
-  "pulled": 3,
+  "pulled": 2,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
@@ -83,8 +91,8 @@
    "peer_cursor": 14079,
    "our_cursor": 14079,
    "last_error": null,
-   "since": "2026-09-07T22:27:09.289Z",
-   "last_contact": "2026-09-07T22:49:20.300Z"
+   "since": "2026-09-08T16:45:36.484Z",
+   "last_contact": "2026-09-08T16:55:21.952Z"
   }
  },
  "ambient": {
