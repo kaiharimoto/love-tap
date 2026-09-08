@@ -28,6 +28,10 @@
    "do": "awaitArrival"
   },
   {
+   "do": "wait",
+   "ms": 700
+  },
+  {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing",
    "count": 150,
@@ -40,6 +44,10 @@
   },
   {
    "do": "awaitArrival"
+  },
+  {
+   "do": "wait",
+   "ms": 700
   },
   {
    "do": "frames",
@@ -65,6 +73,10 @@
    "do": "awaitArrival"
   },
   {
+   "do": "wait",
+   "ms": 700
+  },
+  {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing",
    "count": 93,
@@ -86,6 +98,10 @@
   },
   {
    "do": "awaitArrival"
+  },
+  {
+   "do": "wait",
+   "ms": 700
   },
   {
    "do": "frames",

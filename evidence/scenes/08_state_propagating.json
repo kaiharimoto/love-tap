@@ -32,6 +32,10 @@
    "timeout": 90000
   },
   {
+   "do": "wait",
+   "ms": 700
+  },
+  {
    "do": "step",
    "ms": 16
   },
@@ -52,6 +56,10 @@
   {
    "do": "awaitArrival",
    "timeout": 90000
+  },
+  {
+   "do": "wait",
+   "ms": 700
   },
   {
    "do": "step",
@@ -81,6 +89,10 @@
    "timeout": 90000
   },
   {
+   "do": "wait",
+   "ms": 700
+  },
+  {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 19,
@@ -95,6 +107,10 @@
    "timeout": 90000
   },
   {
+   "do": "wait",
+   "ms": 700
+  },
+  {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
    "count": 71,
@@ -107,6 +123,10 @@
   {
    "do": "awaitArrival",
    "timeout": 90000
+  },
+  {
+   "do": "wait",
+   "ms": 700
   },
   {
    "do": "frames",
@@ -138,6 +158,10 @@
   {
    "do": "awaitArrival",
    "timeout": 90000
+  },
+  {
+   "do": "wait",
+   "ms": 700
   },
   {
    "do": "frames",
