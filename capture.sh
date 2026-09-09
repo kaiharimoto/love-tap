@@ -438,6 +438,9 @@ fi
 # and the test binding's rasteriser cannot see it.
 # and no pale rectangle standing in for paper: flat where the material has tooth. Recorded, not
 # gated — see the head of tools/check/flat.py for why, and for when that changes.
+echo "· measuring the desk in both directions"
+python3 tools/check/grain.py --out "$LOG/grain.json" >/dev/null || true
+
 echo "· measuring how flat the palest paper on each still is"
 python3 tools/check/flat.py --out "$LOG/flat.json" >/dev/null || true
 
