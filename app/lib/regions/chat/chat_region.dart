@@ -873,30 +873,6 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                         );
                       },
                     ),
-              // Finding something is a loop drawn round a word — on its own slip of paper, not
-              // straight onto whatever the thread has scrolled under it. Drawn as bare ink it
-              // overprinted the rows beneath: a completeness pass caught the word `search` and a
-              // signal divider's timestamp sharing the same pixels. A thing you can pick up is a
-              // thing that sits on something.
-              Positioned(
-                top: 2,
-                right: 8,
-                child: IntrinsicWidth(
-                  child: Slip(
-                    id: 'thread.search',
-                    row: 1,
-                    stock: 'index',
-                    torn: false,
-                    onTap: _search,
-                    padding: const EdgeInsets.fromLTRB(9, 4, 11, 5),
-                    child: Row(mainAxisSize: MainAxisSize.min, children: [
-                      Mark.loop(size: 15, colour: Pen.margin),
-                      const SizedBox(width: 5),
-                      Text(S.search, style: Hands.margin(size: 12.5)),
-                    ]),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
@@ -952,6 +928,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
           recording: _recording,
           attaching: _attaching,
           onAttach: () => setState(() => _attaching = !_attaching),
+          onSearch: _search,
           onSend: _send,
           onRecordStart: _startRecording,
           onRecordStop: _stopRecording,
@@ -1037,6 +1014,7 @@ class _Composer extends StatelessWidget {
     required this.recording,
     required this.attaching,
     required this.onAttach,
+    required this.onSearch,
     required this.onSend,
     required this.onRecordStart,
     required this.onRecordStop,
@@ -1046,6 +1024,7 @@ class _Composer extends StatelessWidget {
   final bool recording;
   final bool attaching;
   final VoidCallback onAttach;
+  final VoidCallback onSearch;
   final VoidCallback onSend;
   final VoidCallback onRecordStart;
   final VoidCallback onRecordStop;
@@ -1057,11 +1036,28 @@ class _Composer extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          // Finding something lives on the sheet at the bottom of the desk, beside the clip and
+          // the ticks, rather than pinned over the thread.
+          //
+          // It used to be a slip floating top right with the year scrolling under it, and opaque
+          // paper over a message is a message you cannot read: a completeness pass measured it
+          // covering thread text in 84 of the scroll clip's 300 frames. A strip of its own above
+          // the list costs a row of desk — the hero framing went from seven whole sheets to six —
+          // and this costs none: the composer is already there, and it is already the row of marks
+          // this thread is worked from.
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onSearch,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 8, 6, 8),
+              child: Mark.loop(size: 19, colour: Pen.margin),
+            ),
+          ),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: onAttach,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(2, 8, 8, 8),
+              padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
               child: Mark.clip(size: 21, colour: attaching ? Pen.ballpoint : Pen.margin),
             ),
           ),

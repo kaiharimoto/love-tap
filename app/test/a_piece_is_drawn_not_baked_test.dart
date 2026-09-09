@@ -1,0 +1,71 @@
+// What a piece costs to draw, and where the search mark is allowed to sit.
+//
+// tools/check/tears.py fails 02_chat.png unless eight rows were on the glass, each on its own
+// torn edge. Which stretch of a year does that cannot be worked out from the text: it depends on
+// how tall each row lays out — how many words wrapped, what is stuck to it, whether it carries a
+// waveform. Estimating it from the length of the writing framed six notes, then seven, and the
+// artifact was recorded missing on its own standard twice. So the app measures instead, and so
+// does this: the same seeded year, on a surface the size of the one the scene shoots, through
+// the same handle the harness pulls.
+import 'dart:io';
+
+import 'package:desk/material/library.dart';
+import 'package:desk/material/paper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  _plainPieceComposesNothing();
+  _searchDoesNotCoverTheThread();
+}
+
+/// One piece of paper with writing on it: the case every note in the thread is, and the case the
+/// nine-patch is for. It composes nothing.
+void _plainPieceComposesNothing() {
+  testWidgets('a plain piece draws its tear without baking it', (tester) async {
+    await MaterialLibrary.load();
+    final tear = MaterialLibrary.instance.writableTears.first;
+    await tester.runAsync(() async {
+      await MaskCache.load(tearAsset(tear));
+      await MaskCache.load(tearAsset('${tear}_edge'));
+    });
+    final was = SlicedMasks.composed;
+    tester.view.physicalSize = const Size(1200, 900);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MaterialApp(
+      home: ColoredBox(
+        color: const Color(0xFF62503C),
+        child: Center(
+          child: SizedBox(
+            width: 340,
+            child: PaperPiece(
+              stockId: 'lined_02',
+              tearId: tear,
+              liftMm: 0.9,
+              tilt: 0.006,
+              child: const Text('back by six. the pigeon is still on the cupboard'),
+            ),
+          ),
+        ),
+      ),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(SlicedMasks.composed - was, 0,
+        reason: 'a plain note baked its tear into an image — 16 ms on this machine and hundreds of '
+            'milliseconds in CanvasKit, on the build thread, once per note as the thread scrolls');
+  });
+}
+
+/// Chrome that covers what it is chrome for.
+void _searchDoesNotCoverTheThread() {
+  testWidgets('the search mark is not over the thread', (tester) async {
+    final src = File('lib/regions/chat/chat_region.dart').readAsStringSync();
+    expect(src.contains('onTap: onSearch'), isTrue, reason: 'nothing reaches the search any more');
+    expect(src.contains("id: 'thread.search'"), isFalse,
+        reason: 'the search mark is a slip of its own again. Pinned over the list it covered thread '
+            'text in 84 of the scroll clip’s 300 frames; in a strip above the list it cost the hero '
+            'framing a whole sheet. It lives on the composer, beside the clip and the ticks.');
+  });
+}

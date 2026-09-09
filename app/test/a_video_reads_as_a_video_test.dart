@@ -201,7 +201,8 @@ void main() {
         reason: 'a photograph can never carry a poster, and a gallery that branches on the poster '
             'sends every one of them down the video path');
     expect(find.byType(Mark), findsOneWidget, reason: 'the video is a print like any other');
-    expect(find.text('7s'), findsOneWidget);
+    // one grammar for a length of time, everywhere: 0:07, not 7s here and 0:07 in the viewer
+    expect(find.text('0:07'), findsOneWidget);
   });
 
   testWidgets('a note taken back does not say how far it got', (tester) async {

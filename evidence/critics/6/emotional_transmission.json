@@ -1,0 +1,90 @@
+{
+  "critic": "emotional-transmission",
+  "cycle": 6,
+  "score": 17,
+  "floor": 17,
+  "meets_floor": true,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "08_state_propagating.mp4",
+      "where": "the cut between run 4 and run 5, frames 394 and 395, and the first frame of run 1",
+      "what": "No partner-state change is ever visible happening: logs/08_state_propagating.json pushes three state lines (state mood restless at_frame 0, state availability heads_down and state place out at_frame 395) and every one of them lands off-screen — the mood already reads 'restless' in the clip's very first frame, and the standing line reads TRAVELLING at frame 394 and OUT with the energy dial one bar lower at frame 395, which frames.json cuts_between_runs [148,167,238,394] shows is a splice, not a transition; the same log's arrivals list carries an entry for every feeling and for the plain message and none for any of the three state lines.",
+      "why": "The row requires state changes to be perceptible without opening the app, and the clip built to show state propagating shows the values before and after a cut instead of a change arriving — so a state change is legible but never perceptible, in the only artifact that could have shown it."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "crops/reception_replaced.png",
+      "where": "the notification banner at the bottom right, and its icon",
+      "what": "With the app closed a feeling arrives as one of twelve fixed sentences — 'is holding something out', identical for all 36 feelings in logs/haptics.json — carrying the system's own sound rather than the feeling's (app/web/push/sw.js:47 sets silent:false and never plays the feeling's ogg) and the unmodified stock Flutter logo as its icon (app/web/push/sw.js:49 points at app/web/icons/Icon-192.png, which is the Flutter mark and is also the PWA's home-screen icon in app/web/manifest.json); on Android both ambient notifications use android.R.drawable.ic_dialog_info, the platform's stock info glyph. Nothing about which of 36 feelings arrived crosses the closed-app boundary on the PWA, and sw.js's WORDS map has no entry for any partner-state signal at all, while its standing-line branch listens for a postMessage from an already-open page — so on the PWA a state change reaches nothing while the app is shut.",
+      "why": "The row asks for state changes perceptible without opening the app and for an iOS substitute that reads as equally physical rather than as a missing feature; in the closed-app case there is no substitute, a framework's logo stands in where the feeling should be, and the state channel has no delivery path at all."
+    },
+    {
+      "severity": "serious",
+      "artifact": "09_two_devices.png",
+      "where": "absent from evidence/ entirely",
+      "what": "The two-device frame does not exist. MANIFEST.json gives the reason as 'not captured this session' and DIFF.json as 'not captured in this session or the last' — a statement of what happened, not a reason why it could not, given that four scenes demonstrably drove a far device (07/08/15 logs carry far lines, link 'connected', peer_cursor equal to our_cursor).",
+      "why": "The row's central claim is a gesture on one device becoming a sensation on the other, and my prompt names the two-device frame as one of the three things to judge it from; no single frame in the evidence shows both ends of a transmission."
+    },
+    {
+      "severity": "serious",
+      "artifact": "logs/haptics.json",
+      "where": "the whole table, set against MANIFEST.json's missing list",
+      "what": "The vibration channel is never exercised anywhere in the evidence. MANIFEST.json lists 16_setup_android.png as 'not captured this session', frames.json records scroll_emulator as 'no Android device was up in this session', and each of the three scene reports that recorded a sensation at all (07, 08 and 15) records sensation.channel as 'page' — 'vibration' appears in no report. The 36 patterns are excellent on paper: my own perceptual binning (on-segments by duration tick/tap/pulse/press/hold and by amplitude faint/soft/firm/hard, gaps by duration) gives 36 distinct signatures out of 36 with no collisions, and discarding amplitude entirely and quantising the timings to 30 ms still leaves 36 of 36 distinct. But a table of milliseconds is not a demonstration.",
+      "why": "The row asks that each feeling be identifiable by its haptic pattern alone with the screen face down, and the only evidence for the haptic is a list of numbers on the primary platform where no artifact was captured at all."
+    },
+    {
+      "severity": "serious",
+      "artifact": "01_pulse.png",
+      "where": "the shell strip at the top, set against every scene report's ambient block",
+      "what": "Only one of the three ambient presence surfaces appears in any of the seventeen artifacts. The standing line is visible in-app at the top of every region still; the pocket and background delivery appear only in crops/reception*.png, which logs/reception.json itself states is Chromium on a Linux virtual display, is 'not an iPhone banner', has 'no lock screen in evidence', and that 'what an installed iOS web app does with the same call is not shown anywhere in this build'. Across all fifteen WebKit scene reports, ambient.allowed_to_interrupt is false and held_by_the_phone is [] — the pocket is empty in every artifact.",
+      "why": "The row requires three ambient presence surfaces, and the evidence shows one of them, in the form that only exists while the app is already open."
+    },
+    {
+      "severity": "serious",
+      "artifact": "logs/haptics.json",
+      "where": "app/android/app/src/main/kotlin/io/lovetap/desk/Haptics.kt:49 and :55, against the segments in the log",
+      "what": "On a phone without amplitude control the whole vocabulary plays inverted. Every pattern in haptics.json begins with an on-segment, and the fallback branch hands that array to VibrationEffect.createWaveform(long[], int), whose first element is a wait before the vibrator turns on — so each buzz is played as a silence and each silence as a buzz. The amplitude-mismatch branch at :49 makes the same off-by-one assumption (even index = 0, odd index = 180). Two feelings then produce no vibration at all: warm_palm (600@140, one segment) and poke (30@255, one segment); across the vocabulary the 23275 ms of on-time the patterns ask for becomes 16860 ms of buzz falling in the gaps instead.",
+      "why": "The row rests on each feeling being identifiable by its haptic pattern; on any device lacking amplitude control the pattern that is felt is the photographic negative of the one designed, and two of the thirty-six are not felt at all."
+    },
+    {
+      "severity": "minor",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "the sound placed at each arrival, per logs/07_feeling_landing.sound.json",
+      "what": "The audio in the clips is not the app's output: the sound log states 'not: a recording of the running app's audio output' — each feeling's ogg is mixed over silence at the arrival frame. And the sound does not carry the whole envelope for the longest feelings: measured with ffprobe, snd_breathe.ogg is 2500 ms against breathe's 3500 ms pattern (0.71x) and snd_steady.ogg is 2500 ms against steady's 2700 ms; the files appear capped at 2500 ms, so on iOS the last second of the longest feeling in the vocabulary is carried by page motion alone.",
+      "why": "sensation.dart's substitute is the rhythm split between sound and page motion, and for the two longest feelings the sound half stops before the pattern does — a small hole in the channel that stands in for the missing haptic."
+    },
+    {
+      "severity": "minor",
+      "artifact": "01_pulse.png",
+      "where": "the fact grid on the partner's note, under the standing line",
+      "what": "Exactly twelve partner-state signals are rendered — mood/bright, here/open, place/travelling, needs/a lot, has left/a little, battery/72%, last up/just now, their clock/11:00, ringer/normal, moving/still, signal/wifi, at home/yes — against the fourteen keys logs/reception_scene.json lists under partner_signals. The requirement is met with nothing spare, and two of the modelled signals (charging, and status_line, which is folded into the headline) never appear as facts of their own.",
+      "why": "The row asks for at least twelve partner-state signals; twelve is the floor exactly, and the projection already carries fourteen."
+    },
+    {
+      "severity": "minor",
+      "artifact": "14_media_viewer.png",
+      "where": "the bottom-right corner, box (1365,2867)-(1440,2943)",
+      "what": "The folded feeling corner is absent here. Measured on that same 75x76 px box, the fold is byte-identical between 01_pulse.png and 03_us.png (mean absolute difference 0.000) and present in 02_chat.png, 04_moments.png, 05_settings.png, 12_search.png, 13_messenger_states.png and 10_first_run.png (differences of 8-33 grey levels, all from the paper behind it); in 14_media_viewer.png the same box differs by 55.4 and has a mean luma of 92.4 against roughly 148 elsewhere — bare wood, no fold.",
+      "why": "The row asks for a feeling in one gesture from any region; the five regions all carry it, but the full-screen media viewer is a place in the app from which no feeling is reachable."
+    },
+    {
+      "severity": "minor",
+      "artifact": "MANIFEST.json",
+      "where": "the from_this_run and stale blocks",
+      "what": "Not one of the artifacts this row is judged on comes from this capture. 07_feeling_landing.mp4 (written 00:16:58Z), 08_state_propagating.mp4 (04:05:20Z), 15_authored_feeling.mp4 (03:44:45Z), 01_pulse.png and 03_us.png (previous day, 22:20-22:21Z) are all marked from_this_run: false against a capture that began at 06:05:04Z; only 02_chat.png and 11_chat_scroll.mp4 are from this run and neither belongs to this row.",
+      "why": "Every measurement I took of the emotional layer is a measurement of an older build than the one the capture ran, and the record says so."
+    }
+  ],
+  "what_is_working": [
+    "A feeling arrives as a bodily event, and I can prove it frame by frame. Across nine arrivals in 07_feeling_landing.mp4 and 08_state_propagating.mp4 the whole receiving page is displaced vertically, and the displacement envelope reproduces the feeling's haptic waveform exactly: 'here' (400@140 off400 x3, 2000 ms) gives three 25-frame lifts separated by two 25-frame settles with its last non-zero frame at index 124 = 1984 ms; 'soup' (150/off150/150/off150/600) gives two short lifts and one long one, last non-zero at 1184-1216 ms against a declared 1200; 'hold' (900@150 off100 900@150) holds for 56 frames, dips for six at 912-992 ms, holds again and stops at 1888 ms against 1900.",
+    "The substitute is not a token but a proportional one. Peak displacement is linear in the played amplitude at 0.118 to 0.125 device pixels per amplitude unit across eleven arrivals spanning amplitudes 70 to 198 (squeeze at intensity 0.75 gives peaks of 9, 17 and 24 px for its three bursts of amplitude 78, 138 and 198). The sender's hold is transmitted: sensation.play scales every amplitude by 0.45 + 0.55 x intensity, and the reports confirm it — soup's base 130/170 arrives as 109/142 at intensity 0.7, 119/156 at 0.85, 123/161 at 0.9.",
+    "The discriminator the row asks for is in the same clip. In 08_state_propagating.mp4 a plain text message arrives at frame 149 and produces a measured vertical displacement of zero across all nineteen frames of its run, while every feeling in the same clip owns 40 to 125 frames of whole-page motion. A feeling moves the page; a message does not.",
+    "It lands as a thing, not a colour. In 07 the arrivals are photographed objects under one light with their own contact shadows — a pale ceramic form for 'hold' over the pulse note, a pinched sheet for 'a squeeze', a clover for 'nuzzle', an orange arc for the authored 'soup' — and they land in whichever region is open (pulse, chat and us all receive one in the same clip), then take a place on a shelf of recent arrivals rather than becoming a bubble in a list.",
+    "The vocabulary is larger than asked and genuinely shaped for skin. haptics.check.json's 34 built-ins plus 2 authored across six named families (Warmth 6, Ache 5, Shelter 7, Mischief 7, Static 6, Sparkle 5) check out against haptics.json entry by entry — every entry's segments sum to its declared total_ms, on_ms and pulse count with zero mismatches — and against app/lib/feelings/builtins.dart with zero mismatches. Durations run 30 ms to 3500 ms, pulse counts 1 to 10, contours 11 flat, 9 rising, 9 falling, 5 mixed, 2 single.",
+    "Authored feelings really are the same object. The authored 'soup' arrives in the landing clip alongside three built-ins, again in 08, and twice in 15_authored_feeling.mp4 at intensities 0.55 and 0.90 where its page rhythm shows the same three-burst shape and the same 0.12 px-per-amplitude constant as the built-ins (peaks 12/16 and 15/19). It carries its own object, its own 1286 ms sound and its own waveform, and it is the pocket_feeling in five scene reports.",
+    "One gesture from anywhere is real and measurable. A folded paper corner occupies exactly (1365,2867)-(1440,2943) device pixels, 75x76 px, in all five region stills, byte-identical between 01_pulse.png and 03_us.png; 15_authored_feeling.mp4 frames 54-147 show it opened over the 'us' region, the vocabulary rising as a sheet of named physical objects (poke, nyeh, catch, pick one, snap, stuck with me, did it, confetti, yes, paper hat, treat) with the six family names as torn paper tabs. No emoji anywhere in it.",
+    "The settings screen treats interruption as something the couple owns rather than something the app decides: a per-kind table (something written, a picture, something to watch, their voice, an answer to something of yours, a feeling, something they say about themselves, something their phone notices, a date moving) each set to wake me, quietly or not at all, with quiet hours from 23:00 to 07:00, and no count, badge or streak anywhere near it."
+  ],
+  "verdict": "On the thing this row is actually about, the build is better than good and I can put numbers on it: a feeling does not arrive as a message in a different colour, it arrives as the page itself moving under the reader's thumb in the exact rhythm of the feeling's waveform — three lifts and two settles for 'here', ending at 1984 ms against a declared 2000; two short lifts and a long one for 'soup', ending at 1184 ms against 1200 — with peak displacement linear in amplitude at 0.12 device pixels per unit and with the sender's hold carried through as a real amplitude scale. In the same clip a plain text message moves the page by zero pixels in every one of its nineteen frames. That is the row's central claim, demonstrated rather than asserted, and the vocabulary behind it is 34 built-ins in six families whose patterns stay mutually distinct even after I throw amplitude away and quantise the timings to the resolution of skin. Authored feelings are the same object down to the same displacement constant, and the folded corner sits in the same 75x76 pixels of every region. What is missing is everything on the far side of the screen going dark. The two-device frame the row names does not exist. No Android artifact was captured at all, so the vibrator — the channel these thirty-six patterns were written for — is a table of milliseconds and nothing more, and in the one code path that would play them without amplitude control the waveform is handed to an API that reads its first element as a wait, so every buzz becomes a silence and 'poke' and 'warm palm' do not fire. Two of the three ambient surfaces appear only in a Chromium scene whose own log says it is not an iPhone and has no lock screen in it, and in all fifteen real scenes the pocket is empty and the phone is not allowed to interrupt. Worst, the clause about state changes fails twice: the clip built to show state propagating shows TRAVELLING on frame 394 and OUT on frame 395 across its own splice, so no state change is ever seen arriving even with the app open, and with it closed the service worker has no word for a state signal at all and refreshes its standing line only from a page that is already running. Where the closed app does speak, it says one of twelve fixed sentences under the stock Flutter logo. The feeling crosses beautifully while someone is looking; the person does not."
+}

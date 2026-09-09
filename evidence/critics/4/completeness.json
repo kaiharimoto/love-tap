@@ -1,0 +1,227 @@
+{
+  "critic": "completeness",
+  "cycle": 4,
+  "reviewed": [
+    "anti_goal.json",
+    "code.json",
+    "coherence.json",
+    "emotional_transmission.json",
+    "material_truth.json",
+    "messenger_reliability.json"
+  ],
+  "method": "I read the six reports, then re-opened evidence/ myself and re-measured every load-bearing number with python3 (PIL 12.3.0, numpy 2.4.6, cv2 5.0.0) and toolchain/ffmpeg/ffprobe. Clips were decoded to PNG with ffmpeg -vsync 0 and read on the app's timebase declared in frames.json (step_ms 16 for every run of every clip, playback_over_app_time 1.0; ffprobe confirms r_frame_rate 125/2 = 62.5 fps and nb_frames matching MANIFEST for all five clips, so frame index = app step). Specific re-measurements: (a) the anti-goal 'simulated paper' detector re-implemented at its own stated thresholds and at looser ones, on all ten stills plus crops/dusk_pulse.png; (b) edge straightness as the standard deviation of the first bright row per column / first bright column per row over a component's full extent; (c) interior texture as the standard deviation of the image minus a sigma-4 Gaussian blur; (d) contact shadow by the same recipe material_truth used - paper mask at luminance>170, morphological close 9x9, hole-fill, near-black tear ink at luminance<65 excluded, cv2.distanceTransform bands at 2-5 / 5-10 / 10-20 / 60-120 px - run on all ten stills plus dusk_pulse rather than two; (e) tear-mask repetition by detrending each paper element's top-edge profile and cross-correlating every pair within a screen, with two real notes in 02_chat.png as the control; (f) day-versus-dusk lighting response by applying a fixed day-derived mask to both 01_pulse.png and crops/dusk_pulse.png and comparing mean RGB and R/B ratio per object; (g) page motion by cv2.phaseCorrelate on the bottom nav band (rows 2180-2340) of consecutive frames of 08_state_propagating.mp4; (h) repeated frames by adjacent mean-absolute-difference over all 502 frames of 08 and all 256 of 06; (i) contrast as WCAG sRGB relative luminance with the percentile pairs the report named; (j) scroll_webkit.json recomputed from per_frame; (k) hand.json's method re-implemented from scratch (connected components of ink, each normalised to 32x32, pairwise IoU); (l) haptics.json's 36 waveforms re-tested for collision at 1/20/40/60/80 ms grids and under a harder same-pulse-count/same-duration test; (m) audio streams of 07 and 15 demuxed to 8 kHz mono and RMS-enveloped against their sound.json placements. Every number below is reproducible from evidence/ alone. I did not open evidence/SCORE.json, any other evidence/critics/ directory, docs/, source, or git.",
+  "gaps": [
+    {
+      "kind": "affirmative claim the evidence contradicts",
+      "severity": "blocking",
+      "which_critic": "material_truth (and anti_goal)",
+      "what": "One torn-edge mask is repeated twelve times down 12_search.png, which is the 'tiled repeating texture' clause of the no-simulated-paper anti-goal, and it stands directly against material_truth's what_is_working #1 ('Tear masks do not repeat on a single screen ... the largest normalised match is 0.305; no pair exceeds 0.31') and anti_goal's 'Real notes carry irregular torn contours (evidence/logs/tears.json: 8 visible, 8 distinct, no repeats)'. Both statements were measured only on 02_chat.png's event notes; neither critic looked at chrome paper or at any other screen. 03_us.png carries the same defect once.",
+      "measurement": "12_search.png: twelve full-width filter strips at y 680-774, 838-937, 997-1094, 1156-1254, 1314-1414, 1473-1573, 1633-1729, 1792-1888, 1951-2048, 2110-2206, 2267-2368, 2428-2524. Detrending each strip's top-edge profile over columns x=100-1349 gives per-strip standard deviations of 10.2-12.8 px and ranges of 30-38 px, so these are genuinely ragged edges, not flat ones. Pairwise Pearson correlation of the detrended profiles: median 0.994 over 66 pairs, 102 of the 105 pairs formed among all 15 ragged bands exceed r=0.80, the pair (2110-2206, 2428-2524) reaches r=1.000, and strip 0 against strip 6 gives r=0.9944 with a mean absolute difference of 1.117 px and a maximum of 2.7 px. Control: the two real notes in 02_chat.png at y 541-991 and y 1780-2274 give r=0.208 with a mean absolute difference of 13.13 px. 03_us.png: the date card at y 689-1248 and the todo card at y 2420-2722 correlate at r=0.998. Same detector on 02_chat, 13_messenger_states, 04_moments, 01_pulse, 17_setup_pwa and dusk_pulse: zero pairs above r=0.74.",
+      "where": "evidence/12_search.png y 680-2524 full width; evidence/03_us.png y 689-1248 against y 2420-2722; control evidence/02_chat.png"
+    },
+    {
+      "kind": "detector that cannot see what it was pointed at",
+      "severity": "blocking",
+      "which_critic": "anti_goal",
+      "what": "anti_goal cleared every still of the simulated-paper anti-goal on the strength of a detector ('an axis-aligned near-uniform bright rectangle, bounding-box fill above 0.985, wider than 300 px, taller than 80 px') that returns nothing because two of its three thresholds exclude the app's permanent chrome: the fill test rejects any card that carries a label, and the 300 px width test rejects a 267 px tab slab. The forbidden shape is not a transient composing placeholder in one clip; it is the five-tab bar at the foot of ten of the eleven stills, the search chip, and the Us glance cards.",
+      "measurement": "02_chat.png SETTINGS tab slab, 266x126 px at x 1144-1409 y 2976-3101: top edge standard deviation 0.00 px over 266 columns and left edge 0.00 px over 124 rows (range 0 in both); interior high-pass standard deviation 1.20 grey levels against 19.27 and 27.28 for two blank patches of real note paper in the same frame; a soft drop shadow below it running 78.4 -> 91.1 over 11 px against a desk median of 101-104. The same five slabs, 266-267 px wide with a top-edge standard deviation of 0.00 over 266 columns, are present in 01_pulse, 02_chat, 03_us, 04_moments, 05_settings, 10_first_run, 12_search, 13_messenger_states, 17_setup_pwa and crops/dusk_pulse (absent only from 14_media_viewer). 03_us.png TO DO glance card, 708x163 px: top edge standard deviation 0.00 over 708 columns, left edge 0.00 over 163 rows, shadow below running 74.4 -> 83.1 against a desk at 94.0. 04_moments.png 'noor' filter chip: top and left edge standard deviation 0.00, shadow 72.3 -> 85.1. Running anti_goal's own thresholds (fill>=0.985, w>300, h>80) over all eleven stills reproduces its null result exactly - 0 hits everywhere - confirming the null is a threshold artefact, since the same detector finds the composing card in 207 of 256 frames of 06_unfolding.mp4.",
+      "where": "evidence/02_chat.png y 2960-3102; evidence/03_us.png y 2060-2280; evidence/04_moments.png y 370-485; and the tab bar of nine further stills"
+    },
+    {
+      "kind": "artifact nobody opened, carrying a defect",
+      "severity": "major",
+      "which_critic": "material_truth (and all)",
+      "what": "The modelled feeling objects do not take the scene's light. evidence/crops/dusk_pulse.png is a second, genuinely different render of the Pulse desk under dusk (it is not a colour grade of the day frame: binning day values in 32-level buckets, the dusk value within a bucket still varies by 21-62 levels per channel, so the mapping is spatially varying). Under that light every paper surface shifts and warms, but the two fully modelled objects barely move and take no warm cast at all - they are pre-lit sprites composited into both lightings. This contradicts material_truth's what_is_working #4 ('the landing object is real geometry ... one light from upper-left').",
+      "measurement": "Fixed day-derived masks applied to both images. Paper: status note mean RGB (222.4,216.9,206.6) -> (198.3,180.2,156.1), delta 37.1, R/B ratio 1.077 -> 1.270; YOURS note (231.8,229.6,223.4) -> (211.5,187.4,157.0), delta 43.0, R/B 1.038 -> 1.347; empty_chair paper object delta 31.4, R/B 1.039 -> 1.316; bare desk delta 46.0. Modelled objects: 'goodnight' card (213.6,211.4,203.2) -> (206.9,203.4,194.5), delta 7.8, R/B 1.051 -> 1.064; 'hold' candle (208.4,202.3,182.2) -> (192.2,185.0,165.3), delta 16.8, R/B 1.144 -> 1.163. Whole-frame mean absolute difference between the two images is 34.85 with 94.4% of pixels differing by more than 10, so the two renders are not the same picture. Both files also carry the black-plane defect material_truth found: in dusk_pulse the 'goodnight' quadrilateral is still there at a different rotation from the card it sits under.",
+      "where": "evidence/crops/dusk_pulse.png against evidence/01_pulse.png, the shelf at y 1200-1400"
+    },
+    {
+      "kind": "artifact nobody opened",
+      "severity": "major",
+      "which_critic": "material_truth",
+      "what": "crops/02_chat_300_edge.png is one of the three 300% crops logs/crops.json says were cut from the paper in the frame, and it is the one named for edge judgement. No critic opened it. It shows a note whose top edge is a dead-straight horizontal line against the desk with no shadow at all - the same defect material_truth proved statistically, sitting in the crop the rubric sends a critic to, and stronger evidence than the box it did open (crops/02_chat_300_hand.png, which I confirm contains no handwriting: its left half is blank ruled paper, its right half the 'Q search' chip).",
+      "measurement": "crops.json box [574,226,994,486] at scale 3. In 02_chat.png the corresponding note's top edge over 1260 columns has a standard deviation of 2.29 px and takes only the values 22, 23, 24, 28, 29, 31, 41. The desk immediately above it: 94.3 at 1 px, 94.3 at 5 px, 94.4 at 9 px, and 94.2 at 42 px away - flat to 0.2 grey levels.",
+      "where": "evidence/crops/02_chat_300_edge.png"
+    },
+    {
+      "kind": "the same thing is not the same thing everywhere",
+      "severity": "major",
+      "which_critic": "coherence (and material_truth)",
+      "what": "A note's torn edge is not a property of the note. Three events appear in both 12_search and 13_messenger_states, and all three are given a different tear mask in the two artifacts while their paper stock stays identical. The tear sequence is byte-identical in positional order in the two reports, so the mask is assigned by row index rather than by event id. Coherence proved 'a feeling is the same object wherever it appears' and never asked the question of a note; material_truth read tears.json's clean bill without noticing it is scoped to one screen.",
+      "measurement": "logs/12_search.report.json tear order: tear_023, tear_045, tear_008, tear_029, tear_050, tear_012. logs/13_messenger_states.report.json: tear_023, tear_045, tear_008, tear_029, tear_050, tear_012, tear_034 - the same list, one longer. Per event: 0001M4GW48FEW3M67XKAZT5051 is tear_029 in 12_search and tear_023 in 13 (stock looseleaf_03 in both); 0001M4ZQQ0H0PPVTKMMQEE268D is tear_050 then tear_045 (stock lined_01 in both); 0001M59VY0YA13H9M86HTA6XNP is tear_012 then tear_008 (stock lined_02 in both).",
+      "where": "evidence/logs/12_search.report.json and evidence/logs/13_messenger_states.report.json, the tears and stocks blocks"
+    },
+    {
+      "kind": "log that cannot corroborate the picture",
+      "severity": "major",
+      "which_critic": "messenger_reliability and coherence",
+      "what": "12_search.report.json records no search at all, and neither critic noticed. Its view block is {region: chat, composer: '', attaching: false, replying_to: null, editing: null, partner_typing: false} with scroll first 8063 last 8069 of 8069 and six visible ids that are the tail of the ordinary thread - while 12_search.png plainly shows 'LOOKING FOR rain' and one highlighted hit. The region reporter has no query, no hit count, no active-filter field, so every statement about search in this cycle rests on reading one picture, and the log's 'visible: 6' actively disagrees with the picture's single result.",
+      "measurement": "scenes/12_search.json step 3 is {do: search, arg: rain}; logs/12_search.json records the step landing in 4990 ms and steps_landed true; the report emitted at the end of that scene contains none of it. The picture: twelve filter strips occupying y 680-2524 of 3120 (59.1% of the screen), one result band at y 2668-2942, no numeral anywhere between the query note and the tab bar. The twelve strips' text bands span mean grey 209.2 to 219.5 out of 255, a range of 10.3 levels, so no selected scope is readable - which reproduces messenger_reliability's 218.1-224.8 in shape if not in the exact band chosen.",
+      "where": "evidence/logs/12_search.report.json against evidence/12_search.png"
+    },
+    {
+      "kind": "rubric requirement no critic checked",
+      "severity": "major",
+      "which_critic": "messenger_reliability (and anti_goal)",
+      "what": "'An Apple-compatible installable PWA' is a mission requirement and 17_setup_pwa.png is the only artifact that shows the install path. No critic read it (one passing mention in coherence's list of files). It shows, on torn paper in the app's own voice: 'this one, the iphone / two phones, one wire between them, nobody else on it'; 'add it to the home screen / share, then add to home screen. it will not hold on to anything until you do'; 'put this phone on the tailnet'; 'install the profile the other phone is serving / open its address in Safari, take the profile, then trust it in settings under about, certificate trust settings'; 'read the six words off the other phone'. It is also where 42 of the 115 strings in logs/strings.json live, so anti_goal swept the surface's strings without ever looking at the surface. Nobody reconciled it with logs/pwa.json's display_mode_standalone: false.",
+      "measurement": "logs/strings.json 'read' by directory: setup 42, voice 33, regions 32, modules 8 of 115. logs/pwa.json: manifest name 'the other phone', display 'standalone', start_url '.', icons 4, apple_touch_icon icons/Icon-192.png, one service worker, display_mode_standalone false, browser webkit. logs/17_setup_pwa.report.json: setup_showing true, events 0, link 'connecting', load 1909 ms store 'fresh' profile null.",
+      "where": "evidence/17_setup_pwa.png, evidence/logs/17_setup_pwa.report.json, evidence/logs/pwa.json"
+    },
+    {
+      "kind": "record whose stated reason is false",
+      "severity": "major",
+      "which_critic": "coherence",
+      "what": "DIFF.json says of 15_authored_feeling.mp4: 'the clips differ; no frame could be pulled to measure how'. Frames pull from both files without error. What actually happened is the largest improvement in the capture: the clip went from 22 frames to 364. Coherence built its narrative on DIFF ('the fifth it did re-shoot came back worse') without testing the one row DIFF declined to measure, and nobody else opened evidence/.previous/ at all.",
+      "measurement": "ffprobe: evidence/.previous/15_authored_feeling.mp4 is 1080x2340, r_frame_rate 125/2, nb_frames 22, duration 0.352 s, 612,527 bytes; evidence/15_authored_feeling.mp4 is 1080x2340, 125/2, nb_frames 364, duration 5.824 s, 5,401,204 bytes. ffmpeg -frames:v 1 pulls a 1080x2340 PNG from the previous file. MANIFEST minimum_seconds for this clip is 4, so the previous version was an order of magnitude under the floor and the current one clears it.",
+      "where": "evidence/DIFF.json artifacts[14]; evidence/.previous/15_authored_feeling.mp4"
+    },
+    {
+      "kind": "blocking verdict resting on an inference the log warns against",
+      "severity": "major",
+      "which_critic": "messenger_reliability",
+      "what": "Every number in the scroll-jank blocking finding reproduces exactly, but the log cannot carry the conclusion. logs/scroll_webkit.json's own note reads 'one frame per harness step, so these are the cost of drawing a frame, not a measured refresh rate', and its over_16ms field is 809 of 809 - every frame, including the 14 ms ones, because raster alone is 164 ms with no GPU. Nothing in evidence/ separates an app-side rebuild on every third frame from a harness that forces a relayout on every third driven step, and the critic itself says 11_chat_scroll.mp4 cannot corroborate it. A blocking severity is more than this single log can support; serious is what it can.",
+      "measurement": "Recomputed from per_frame (809 entries): 243 frames at build_ms >= 900 (30.0%), range 938-1651, median 1134; the other 566 have a median of 14; inter-heavy gaps are 3 in 173 of 242 cases, 4 in 36, 5 in 24; heavy frames account for 283,567 of 293,356 total build ms (96.67%); raster p50 164, p95 188, max 226. Heavy indices are spread evenly over the modulus (h%3 counts 75/82/86), and the cadence is present from frame 1 (build_ms 2, 1109, 80, 2, 1117, 21, 2, 1096, 20 ...), i.e. before any fling has developed.",
+      "where": "evidence/logs/scroll_webkit.json per_frame"
+    },
+    {
+      "kind": "number that does not reproduce",
+      "severity": "minor",
+      "which_critic": "coherence",
+      "what": "The video-row finding is correct - I confirm the row is an empty torn sliver with no poster frame, no duration, no play control, no timestamp and no delivery mark - but its pixel count does not reproduce from the box it names, and the box it names is not the size it claims.",
+      "measurement": "Coherence: 'only 495 of 43200 pixels are darker than luminance 150 (1.1%)' at y 2734-2795, x 161-1201. That box is 62 x 1041 = 64,542 px, not 43,200. Measured over exactly that box: 3,104 px below 150 = 4.81% (below 170: 5.57%; below 120: 3.75%; below 100: 1.48%). Over the full paper band y 2718-2795, x 159-1203: 10,994 of 81,510 = 13.49%. Control, the text note at y 1780-2274 over the same columns: 20.05% below 150. The strip is empty; the figure is not the one printed.",
+      "where": "evidence/02_chat.png y 2718-2795"
+    },
+    {
+      "kind": "number that does not reproduce",
+      "severity": "minor",
+      "which_critic": "material_truth",
+      "what": "'its left edge sits at x=61 and its right edge at x=773 in every sampled frame from 56 to 255 - width exactly 712px with zero variation'. The silhouette does vary, in fourteen frames. anti_goal's independent count of the same object reproduces to the frame.",
+      "measurement": "Re-implementing the detector over all 256 decoded frames of 06_unfolding.mp4 (bright rectangle, bounding-box fill >= 0.985, below y=1200): present in exactly 207 frames, first frame 4, last frame 256 - anti_goal's '207 of 256 (80.9%) ... including the final frame' exactly. Left edge is 62 in 193 frames and 48, 51, 59, 60 or 61 in the rest; width is 711 in 193 frames and 712, 713, 714, 716 or 736 in the other 14; height runs 158 to 474 (material_truth's 160 -> 475).",
+      "where": "evidence/06_unfolding.mp4, all 256 frames"
+    },
+    {
+      "kind": "claim contradicted by the report's own measurement",
+      "severity": "minor",
+      "which_critic": "material_truth",
+      "what": "'The hand is monoline with no pressure signature' is stated over numbers that show a two-fold spread inside a single line, and the sharper reading of the same evidence is available in a log no critic set beside hand.json. The repeat half of the finding is sound and I confirm it independently; the pressure half is not carried by what is printed.",
+      "measurement": "The report's own figures are p10 4.0, p50 6.0, p90 8.0 device px on each of two lines - p90 is twice p10, which is variation, not a constant weight. My independent re-implementation of hand.json's method on 02_chat.png (ink < 120, connected components, each normalised to 32x32, pairwise IoU) gives 388 marks, median best-fit IoU 0.653, p90 0.867, max 1.000, and 45 marks with a twin at IoU >= 0.85 - against hand.json's 491 marks, 0.628, 0.843, 1.0 and 45 twins, so the log reproduces. The identical pair is a 13 x 23 px glyph of 91 ink pixels, not a dot, so 'at least one pair of marks is identical once normalised' stands. logs/fonts.json, opened only by the code critic and only for the DeskStamp issue, gives the diagnosis: both faces carry 775 glyphs with 5 variants, and over 4,000 texts the share of glyphs drawing a repeated variant is 0.3006 against a floor of 0.2 (0.4039 if the step were fixed). The finding is 'five variants per glyph is too few', not 'this is a font'.",
+      "where": "evidence/logs/hand.json and evidence/logs/fonts.json against evidence/02_chat.png"
+    },
+    {
+      "kind": "finding true but under-scoped",
+      "severity": "minor",
+      "which_critic": "material_truth",
+      "what": "The no-contact-shadow finding is right and generalises to every still, not just the two measured - and the inversion is sharper than the report says: the only surfaces in the whole set that cast a drop shadow are the machine-cut chrome cards.",
+      "measurement": "material_truth's own recipe run on eleven stills, median desk luminance at 2-5 px from paper against 60-120 px away: 02_chat 104.0 / 103.0, 01_pulse 104.0 / 101.0, 03_us 105.0 / 100.0, 04_moments and 13_messenger_states 102.0 / 103.0, 12_search 102.0 / 96.0, 10_first_run 98.0 / 101.0, 17_setup_pwa 110.0 / 99.0, dusk_pulse 116.0 / 93.0. On no screen is the desk beside a note darker than the desk far from it; on most it is brighter. Directional bands on 02_chat: BELOW 2-5 px 105.0, 5-10 101.0, 10-20 100.0, 60-120 103.0; ABOVE 105.0, 102.0, 101.0, 103.0. Meanwhile below the SETTINGS tab slab the desk runs 78.4 -> 91.1 over 11 px and below the 'noor' chip in 04_moments 72.3 -> 85.1 over 10 px.",
+      "where": "all ten stills plus evidence/crops/dusk_pulse.png"
+    },
+    {
+      "kind": "staleness over-read",
+      "severity": "minor",
+      "which_critic": "material_truth and coherence",
+      "what": "Both leaned on MANIFEST's 'fourteen of fifteen are stale' as though the set were one old picture, but staleness is measured against a capture window that opened at 18:13:19Z, and DIFF.json shows six artifacts changed against the 15:20:45Z baseline. Three of the four clips and two stills were re-rendered within the same afternoon, one of them three minutes before the window opened. Only 06_unfolding.mp4 is genuinely old, and it is the one the rubric names for slow-motion judgement.",
+      "measurement": "MANIFEST written times against DIFF labels: 08_state_propagating 18:10:31Z, changed, ssim 0.8613; 07_feeling_landing 17:55:41Z, changed, 0.8964; 15_authored_feeling 17:55:41Z, changed; 05_settings 17:01:11Z, changed, 0.9989; 01_pulse 17:00:52Z, changed, 0.8908; 02_chat 18:24:15Z, from_this_run true, changed, 0.6148. Genuinely unchanged since the baseline and byte-identical: 03_us, 04_moments, 06_unfolding (14:26:49Z), 10_first_run, 11_chat_scroll, 12_search, 13_messenger_states, 14_media_viewer, 17_setup_pwa.",
+      "where": "evidence/MANIFEST.json stale block against evidence/DIFF.json artifacts"
+    },
+    {
+      "kind": "log whose clean result covers almost nothing",
+      "severity": "minor",
+      "which_critic": "material_truth and anti_goal",
+      "what": "logs/surfaces.json reports flat: [] and too_small_to_measure: [] over 330 surfaces with ok true, and neither critic checked what it covers. Its shell family is two files. That is why the build's own surface audit can report nothing flat while five tab slabs measure a high-pass standard deviation of 1.20 grey levels: the chrome the anti-goal is about was never in the audit.",
+      "measurement": "logs/surfaces.json family counts: folds 240, paper 54, objects 34, shell 2. The two shell entries are shell/desk.webp (patch_std 14.89) and shell/desk_dusk.webp (19.37), both far above the shell floor of 4.0. No entry corresponds to a tab slab, a search chip, a glance card, a filter chip, the composer or the reply strip. Zero of the 330 surfaces sit within 35% of their own floor.",
+      "where": "evidence/logs/surfaces.json"
+    },
+    {
+      "kind": "checker that passes with dangling entries",
+      "severity": "minor",
+      "which_critic": "code",
+      "what": "code.json credits '674 manifest entries naming ten local generators with their full settings, a checker that exits non-zero on an uncovered file'. The artifact of that checker in evidence/ passes with thirteen entries that point at no file, eleven of which are absolute paths into a scratchpad directory that will not exist again, and reports ok true anyway.",
+      "measurement": "logs/manifest.json: files 661, entries 674, without_an_entry [], entries_without_a_file 13 - 'fonts/MANIFEST.fonts.json', 'tears/tears.json', and eleven paths under /tmp/claude-0/.../scratchpad/{fold_test,foldtest,obj_test,obj_test2}/. ok: true.",
+      "where": "evidence/logs/manifest.json"
+    },
+    {
+      "kind": "internal inconsistency in a report",
+      "severity": "minor",
+      "which_critic": "emotional_transmission",
+      "what": "The family counts quoted in what_is_working ('Warmth 6, Shelter 6, Mischief 6, Static 6, Ache 5, Sparkle 5') appear nowhere in evidence and are wrong for two families; the same report later quotes the correct number and says it matches. The substance is unaffected - I re-tested the catalogue independently and it holds up under a harder test than the one the report ran.",
+      "measurement": "logs/haptics.check.json and logs/haptics.json both give Warmth 6, Ache 5, Shelter 7, Mischief 7, Static 6, Sparkle 5 = 36, with the two authored feelings inside Shelter ('soup', 1200 ms) and Mischief ('pigeon', 750 ms). My own collision test on the 36 segment sequences: 36 distinct at grids of 1, 20, 40, 60 and 80 ms, and 36 distinct on rhythm alone (amplitude discarded) at 40 ms. Harder test: seven pairs share pulse count and total duration within 10% (squeeze/ugh 640 vs 660 ms, long_day/hold 1900 vs 1900, thinking_of_you/make_you_tea 940 vs 900, treat/pigeon, not_okay/pigeon, snapped/not_okay, goodnight/soup), and even the closest of them differs by 140 ms in a single segment. Durations span 30 to 3500 ms.",
+      "where": "evidence/logs/haptics.json, evidence/logs/haptics.check.json"
+    },
+    {
+      "kind": "finding true but under-stated",
+      "severity": "minor",
+      "which_critic": "anti_goal",
+      "what": "The string sweep's blind spot is wider than the report said, and its own breakdown shows why: it reads four source directories and never reads a rendered surface. Two of the four attach-sheet labels visible in 13_messenger_states.png are missing from it, alongside the four items anti_goal named.",
+      "measurement": "logs/strings.json: strings_read 115, findings [], ok true; by directory setup 42, voice 33, regions 32, modules 8. Present: 'a photo', 'a video', 'write something', 'put it back', 'waiting to send', \"can't reach the other phone. it'll go when it can.\". Absent although on screen: 'take one', 'film something', 'send', 'search', 'state_declared', 'tuesday soup', 'us in 63 days', 'waiting on you: the one you said you stopped'.",
+      "where": "evidence/logs/strings.json against evidence/13_messenger_states.png y 2735-2790"
+    },
+    {
+      "kind": "headline claim confirmed, with a caveat the report did not state",
+      "severity": "minor",
+      "which_critic": "emotional_transmission",
+      "what": "The best-evidenced claim in the whole set reproduces to three decimal places, and I could not break it - the frames in the message window are not repeats, so the null is a real null. But it rests on one message arrival in five clips, observed over a 19-frame window against 71-156 frames for the feelings, and the report presents it without that asymmetry.",
+      "measurement": "cv2.phaseCorrelate on rows 2180-2340 of consecutive frames of 08_state_propagating.mp4: run 1 'hold' mean |dy| 1.639 px over 148 pairs (report 1.65); run 2 'message it is raining here too' 0.000 px over 18 pairs, max 0.002, zero frames above 0.15 (report 0.00, zero frames above 0.15); run 3 'squeeze' 1.747 (1.73); run 4 'here' 1.138 (1.12); run 5 'soup' 1.426 (1.42). frames.json's runs for this clip are 149, 19, 71, 156, 107 and 08_state_propagating.json puts the message arrival at frame 149 and the next feeling at 168, so the message is observed for 19 frames = 0.304 s of app time. The window is not dead: adjacent mean-absolute-difference across it falls 45.85, 4.43, 3.44, 0.94 ... 0.043, and across all 501 adjacent pairs of the clip the minimum is 0.0397 with no pair under 0.02, which independently confirms frames.json's repeated_frames 0.",
+      "where": "evidence/08_state_propagating.mp4 frames 150-168 against runs 1, 3, 4, 5"
+    },
+    {
+      "kind": "evidence nobody credited",
+      "severity": "minor",
+      "which_critic": "emotional_transmission",
+      "what": "The sound placement is honestly labelled as a mix rather than a recording, which the report noted, but nobody checked whether the mix matches the arrivals it claims. It does, which is worth something the report did not give it.",
+      "measurement": "ffprobe: 07_feeling_landing.mp4 and 15_authored_feeling.mp4 each carry an aac stream matching the video duration; 08_state_propagating.mp4 carries none. Demuxing 07 to 8 kHz mono and taking a 50 ms RMS envelope at a 0.02 threshold gives audible segments starting at 0.05, 2.40, 3.55, 4.15 and 5.00 s against 07_feeling_landing.sound.json's declared placements of 0.0, 2.4, 3.536 and 5.024 s.",
+      "where": "evidence/07_feeling_landing.mp4 audio stream against evidence/logs/07_feeling_landing.sound.json"
+    },
+    {
+      "kind": "boilerplate that contradicts its own label",
+      "severity": "minor",
+      "which_critic": "coherence",
+      "what": "Every 'changed' row in DIFF.json carries a label_basis sentence describing the unchanged case, pasted verbatim. Coherence quoted DIFF's ssim numbers without noticing that the sentence beneath each one says the opposite of the label above it.",
+      "measurement": "DIFF.json 01_pulse.png: label 'changed', ssim 0.8908, label_basis 'ssim 0.8908 against 0.999 - at or above it, nothing a person would see has moved'. The same sentence form appears on 02_chat (0.6148), 05_settings (0.9989), 07 (0.8964) and 08 (0.8613). Only 05_settings is actually at or above the threshold.",
+      "where": "evidence/DIFF.json, the label_basis field of every changed row"
+    },
+    {
+      "kind": "report not checkable from the evidence",
+      "severity": "minor",
+      "which_critic": "code",
+      "what": "code.json is the only report of the six whose findings cannot be verified from evidence/ at all: every citation is a path under app/, docs/ or app/test/, none of which is in the evidence directory. Two of its claims do have corroboration in evidence and both hold; the rest, including the 103 passing tests, the 114 commits and the 674-entry asset manifest's generator coverage, are unreachable from where the other five critics stand. I am not adjusting its score, only recording that its floor pass rests on material the evidence set does not contain.",
+      "measurement": "Corroborated: the DeskStamp finding - logs/fonts.json lists exactly two faces, assets/fonts/NoorHand.ttf and assets/fonts/TeoHand.ttf, with no third; and the rule-9 finding about a test that writes 'pending' and returns - reliability.json tailscale.later_check and coldstart.json later_check both read status 'pending', why 'the nodes were not answering when this was re-run', checked_at 2026-09-06T19:07. Not corroborable from evidence/: rules 1, 2, 3, 4, 5, 6, 7, 8 and the notifications.dart, registry.dart, server_io.dart, spine_schema_test.dart and persistence_boundary_test.dart findings.",
+      "where": "evidence/critics/4/code.json, all rule evidence blocks"
+    }
+  ],
+  "reports_i_would_adjust": {
+    "anti_goal": {
+      "from": 7.5,
+      "to": 5.5,
+      "why": "The fourth anti-goal does not fail only in a transient composing placeholder; it fails in the app's permanent chrome on every screen, and the report cleared the stills using a detector that structurally cannot see it. Five tab slabs sit at the foot of ten of eleven stills with a top-edge standard deviation of 0.00 px over 266 columns, a left edge of 0.00 over 124 rows, an interior high-pass standard deviation of 1.20 grey levels against 19.3-27.3 for the note paper in the same frame, and a drop shadow running 78.4 -> 91.1 over 11 px; the Us glance card is 708x163 with a 0.00 top edge and its own shadow; the Moments chips and the search chip are the same shape. Separately, the 'tiled repeating texture' clause fails outright: twelve filter strips on 12_search.png share one torn-edge mask at a median pairwise correlation of 0.994 with one pair at 1.000, against a control of 0.21 between two real notes. The report's placeholder finding is correct and reproduces to the frame (207 of 256), and its emoji, voice and self-naming work is sound and I confirm it, but the paper anti-goal is failed by the permanent furniture of the app rather than by one card in one clip."
+    },
+    "material_truth": {
+      "from": 16,
+      "to": 13,
+      "why": "Its blocking findings hold and I confirm and extend them - no contact shadow on any of eleven stills, and the 'goodnight' black plane is present in a second lighting too - but one of its what_is_working items is false and a second is unsupported. Tear masks do repeat on a single screen: twelve on 12_search.png at a median r of 0.994 and one pair on 03_us.png at 0.998; the report's 'no pair exceeds 0.31' was measured on 02_chat.png alone. And the feeling objects are not lit by the scene: under dusk, paper shifts 30-43 mean RGB levels and warms (status note R/B 1.077 -> 1.270) while the 'goodnight' card shifts 7.8 and does not warm at all (1.051 -> 1.064), so 'real geometry ... one light from upper-left' describes a pre-lit sprite. Two of its own numbers also do not survive - the 712 px constant width (711 in 193 of 207 frames, six distinct widths overall) and 'monoline with no pressure signature' over a p10-to-p90 spread of 2x."
+    },
+    "messenger_reliability": {
+      "from": 17,
+      "to": 18,
+      "why": "Everything it measured reproduces - the reply chip at 1.35:1 and the attach sheet at 2.05:1 to two decimals, the empty video sliver, the twelve filter strips over one hit, the 12,289 / 12,363 / 12,577 ms fresh loads against 2,487-2,739 kept, and every scroll_webkit figure exactly. Two adjustments pull in opposite directions and net upward by a point. Down: the scroll-jank finding is scored blocking on a log whose own note says these are the cost of drawing a frame and not a refresh rate, whose over_16ms is 809 of 809 because raster alone is 164 ms with no GPU, and which cannot distinguish an app rebuild from a harness relayout on every third driven step - serious, not blocking. Up: it marked the messenger down partly for un-evidenced setup and pairing while 17_setup_pwa.png sat unopened, and that artifact shows the iPhone home-screen install, the tailnet step, the certificate-trust step and the six-word pairing on paper in the app's own voice, which is real evidence for a named mission requirement."
+    },
+    "coherence": {
+      "from": 11.5,
+      "to": 10.5,
+      "why": "Its strongest claim reproduces exactly - the top 230 rows of the seven region artifacts differ pairwise by a mean of at most 0.0009 of 255 - and its video-row and missing-Android findings are right. But two coherence questions went unasked and both fail. The same note carries a different torn edge in two artifacts while its paper stock stays the same, and the tear list is identical in positional order in both reports, so a note's edge is assigned by row index rather than by identity. And 12_search.report.json records no search at all - region 'chat', empty composer, the ordinary tail of the thread as its six visible ids - so the region reporter has no view onto the one thing that scene exists to show. Its video-row pixel count also does not reproduce from the box it names (3,104 of 64,542 measured, not 495 of 43,200), and it read MANIFEST's 'fourteen stale' as one old picture when DIFF shows six artifacts re-rendered since the baseline, one of them three minutes before the window opened."
+    }
+  },
+  "artifacts_nobody_opened": [
+    "evidence/crops/dusk_pulse.png - a full 1440x3120 second-lighting render of the Pulse region, 4.0 MB, zero mentions across all six reports; it carries the 'goodnight' black-plane defect, the five machine-cut tab slabs, and the proof that the modelled feeling objects do not take the scene's light",
+    "evidence/logs/dusk_pulse.json and evidence/logs/dusk_pulse.report.json - including a fourth 'fresh' load of 11,321 ms that the messenger critic's twelve-second finding did not count",
+    "evidence/crops/02_chat_300_edge.png - one of the three 300% crops logs/crops.json cut for edge, hand and shadow judgement; material_truth opened hand and shadow and not this one, which is the strongest single picture of the missing contact shadow",
+    "evidence/crops/06_unfolding_strip.png, 07_feeling_landing_strip.png, 08_state_propagating_strip.png, 11_chat_scroll_strip.png, 15_authored_feeling_strip.png - the five six-frame contact strips frames.json names for each clip; not one was opened, although three critics stepped the clips frame by frame",
+    "evidence/.previous/ in full except one mention of .previous/02_chat.png - including .previous/15_authored_feeling.mp4, whose 22 frames against the current 364 are the change DIFF.json declared unmeasurable, and .previous/CAPTURED_AT (2026-09-06T15:20:45)",
+    "evidence/17_setup_pwa.png - listed once by coherence and read by nobody; the only evidence in the set for 'an Apple-compatible installable PWA' and the home of 42 of the 115 swept strings",
+    "evidence/10_first_run.png and evidence/logs/10_first_run.{json,report.json} - the empty-store state (events 0, link 'connecting', load 1,883 ms), the one artifact that could have shown what a person sees while the twelve-second seeded import runs",
+    "evidence/logs/manifest.json - the asset provenance audit, cited second-hand by the code critic and opened by nobody; it reports ok true with thirteen entries pointing at no file",
+    "evidence/logs/surfaces.json - opened only by emotional_transmission and only for the object count; its shell family is two files, which is why its flat: [] does not cover any chrome",
+    "evidence/logs/12_search.report.json, 05_settings.json/.report.json, 06_unfolding.json/.report.json/.frames.json, 11_chat_scroll.json/.frames.json, 14_media_viewer.json, 15_authored_feeling.sound.json, 07_feeling_landing.frames.json, 08_state_propagating.frames.json, 15_authored_feeling.frames.json - scene and per-clip logs never quoted by any report",
+    "evidence/scenes/ - all sixteen scene scripts; no report quotes a step list, which is how the 'search rain' step in scenes/12_search.json came to be absent from its own report without anyone noticing",
+    "the audio streams of evidence/07_feeling_landing.mp4 and evidence/15_authored_feeling.mp4 - present, aac, matching the declared placements to within 50 ms; discussed from the sound.json label only, never listened to"
+  ]
+}

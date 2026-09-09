@@ -11,137 +11,171 @@
    "artifact": "01_pulse.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "7856cd3c1d8619b9",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file as evidence/.previous/01_pulse.png.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "02_chat.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "405ed66bd132f5fd",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "03_us.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "cf96d793125bf81d",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "04_moments.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "27e5e4078424223e",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "05_settings.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "2d4637e6cdb9d69b",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "b6b9c19f94562c77",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "changed",
    "ssim": 0.9866,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "db0e78ec53b716c7",
    "previous_sha": "8321a6f37c82b19c",
-   "label_basis": "ssim 0.9866 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.9866 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "improved \u2014 comparing decoded frames against evidence/.previous/07_feeling_landing.mp4, seven of the eight I sampled differ by a mean of about 1.4 grey levels and one, frame 260, by 26.8 with a quarter of its pixels moving: at that frame the previous clip drew the feeling's name and time under the object's stem ('nuzzle / Thu 3 Sep \u00b7 20:04' crossed by the green stalk) and the new one sets them clear of it, and the note carrying the object is torn on both sides instead of ending in a straight cut.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "ebef3dcb90b30a7e",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried."
+   "judgement": "unchanged",
+   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried.",
+   "judged_because": "unchanged \u2014 absent in this capture and in the previous one, for a standing fact about the machine rather than anything that moved; there is no ssim because there is nothing to compare.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "10_first_run.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "0e34447e8d2fb6a5",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "dadddd3120e0bec5",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "12_search.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "8af33ce820b58863",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "changed",
    "ssim": 0.7088,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "9431309b6ed338f4",
    "previous_sha": "b7664674bc4a410c",
-   "label_basis": "ssim 0.7088 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.7088 against 0.999 \u2014 at or above it, nothing a person would see has moved",
+   "judged_because": "improved \u2014 at ssim 0.7088 the top of the thread changed from a torn sheet carrying only 'Thu 3 Sep \u00b7 17:19 read' to one that names the event, 'empty chair / Thu 3 Sep \u00b7 17:19 read', so the feeling is legible as itself in Chat; and the row below the state line is now a folded, unopened note signed 'teo' where it was a plain message, which adds a state to a still whose whole job is to show the messenger's states.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "c6199f7a6e3bb49e",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "ae5340df6508a8af",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got."
+   "judgement": "unchanged",
+   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got.",
+   "judged_because": "unchanged \u2014 absent in this capture and in the previous one, for the same standing fact about the machine; nothing to compare.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "17_setup_pwa.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "34424b9afdde9ef4",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   }
  ],
  "counts": {
@@ -150,5 +184,6 @@
   "unchanged": 13,
   "changed": 2,
   "absent": 2
- }
+ },
+ "judgements_from": "the coherence critic's report for this cycle"
 }
