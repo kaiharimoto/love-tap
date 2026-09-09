@@ -3,13 +3,22 @@
  "view": {
   "region": "search",
   "over": "chat",
-  "query": "canal",
-  "hits": 0,
+  "query": "morning",
+  "hits": 6,
   "type_filter": "photographs",
   "author": null,
   "range": null,
-  "order": [],
-  "kinds": {}
+  "order": [
+   "0003YHEY1REM6W6ZYBMJD2R7C0",
+   "0000MKPMRRA7K8KSDMKAWMBGFB",
+   "0003QH6B8G1HR6ZZJB137K88SY",
+   "0000K3KS6RD25P4ZG6DES75ZD3",
+   "0001VSWBYRVTKZAC4JSCZ178FH",
+   "0003KTYCXR1341PSFBWPP4B5DK"
+  ],
+  "kinds": {
+   "photo": 6
+  }
  },
  "visible": [
   "0001M3AY8G83A3FBSRB1Y7W78Q",
@@ -81,8 +90,8 @@
    "peer_cursor": null,
    "our_cursor": 14062,
    "last_error": null,
-   "since": "2026-09-09T02:15:11.522Z",
-   "last_contact": "2026-09-09T02:15:13.429Z"
+   "since": "2026-09-09T04:04:03.059Z",
+   "last_contact": "2026-09-09T04:04:05.184Z"
   }
  },
  "ambient": {

@@ -6,7 +6,7 @@
   "attaching": true,
   "replying_to": "0001M2ZNX8AF4811Y2F7FNAGMG",
   "editing": null,
-  "partner_typing": false,
+  "partner_typing": true,
   "anchor": "row 8069 of 8072",
   "kinds": {
    "feeling": 1,
@@ -24,15 +24,15 @@
     "state": "read",
     "says": "read"
    },
-   "0001MCJ1M0257E2XHYJTT1NEBA": {
+   "0001MCJ1M0DSSV0Y5HZMSFB9WX": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0257E2XHYJTT1NEBG": {
+   "0001MCJ1M0DSSV0Y5HZMSFB9X3": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0257E2XHYJTT1NEB8": {
+   "0001MCJ1M0DSSV0Y5HZMSFB9WV": {
     "state": "refused",
     "says": "it would not go"
    }
@@ -46,45 +46,45 @@
    "0001M59VY0YA13H9M86HTA6XNP": 1
   },
   "edited": [
-   "0001MCJ1M0257E2XHYJTT1NEBA"
+   "0001MCJ1M0DSSV0Y5HZMSFB9WX"
   ],
   "taken_back": [
-   "0001MCJ1M0257E2XHYJTT1NEB9"
+   "0001MCJ1M0DSSV0Y5HZMSFB9WW"
   ]
  },
  "visible": [
   "0001M4GW48FEW3M67XKAZT5051",
   "0001M4ZQQ0H0PPVTKMMQEE268D",
   "0001M59VY0YA13H9M86HTA6XNP",
-  "0001MCJ1M0257E2XHYJTT1NEB9",
-  "0001MCJ1M0257E2XHYJTT1NEBA",
-  "0001MCJ1M0257E2XHYJTT1NEBG",
-  "0001MCJ1M0257E2XHYJTT1NEB8"
+  "0001MCJ1M0DSSV0Y5HZMSFB9WW",
+  "0001MCJ1M0DSSV0Y5HZMSFB9WX",
+  "0001MCJ1M0DSSV0Y5HZMSFB9X3",
+  "0001MCJ1M0DSSV0Y5HZMSFB9WV"
  ],
  "paper": [
   "0001M59VY0YA13H9M86HTA6XNP",
-  "0001MCJ1M0257E2XHYJTT1NEB9",
-  "0001MCJ1M0257E2XHYJTT1NEBA",
-  "0001MCJ1M0257E2XHYJTT1NEBG",
-  "0001MCJ1M0257E2XHYJTT1NEB8"
+  "0001MCJ1M0DSSV0Y5HZMSFB9WW",
+  "0001MCJ1M0DSSV0Y5HZMSFB9WX",
+  "0001MCJ1M0DSSV0Y5HZMSFB9X3",
+  "0001MCJ1M0DSSV0Y5HZMSFB9WV"
  ],
  "tears": {
   "0001M4GW48FEW3M67XKAZT5051": "tear_010",
   "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
   "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-  "0001MCJ1M0257E2XHYJTT1NEB9": "tear_019",
-  "0001MCJ1M0257E2XHYJTT1NEBA": "tear_042",
-  "0001MCJ1M0257E2XHYJTT1NEBG": "tear_051",
-  "0001MCJ1M0257E2XHYJTT1NEB8": "tear_044"
+  "0001MCJ1M0DSSV0Y5HZMSFB9WW": "tear_019",
+  "0001MCJ1M0DSSV0Y5HZMSFB9WX": "tear_042",
+  "0001MCJ1M0DSSV0Y5HZMSFB9X3": "tear_051",
+  "0001MCJ1M0DSSV0Y5HZMSFB9WV": "tear_008"
  },
  "stocks": {
   "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
   "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
   "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-  "0001MCJ1M0257E2XHYJTT1NEB9": "looseleaf_02",
-  "0001MCJ1M0257E2XHYJTT1NEBA": "lined_03",
-  "0001MCJ1M0257E2XHYJTT1NEBG": "lined_01",
-  "0001MCJ1M0257E2XHYJTT1NEB8": "lined_04"
+  "0001MCJ1M0DSSV0Y5HZMSFB9WW": "looseleaf_01",
+  "0001MCJ1M0DSSV0Y5HZMSFB9WX": "lined_03",
+  "0001MCJ1M0DSSV0Y5HZMSFB9X3": "looseleaf_04",
+  "0001MCJ1M0DSSV0Y5HZMSFB9WV": "lined_03"
  },
  "scroll": {
   "first": 8066,
@@ -94,7 +94,7 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 320,
  "seed": 20260903,
- "events": 14073,
+ "events": 14074,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -117,7 +117,7 @@
   "pulled": 2,
   "blobs_fetched": 0,
   "faults": 0,
-  "pending": 1,
+  "pending": 2,
   "refused_in_the_outbox": 1,
   "cursor": 14072,
   "link": {
@@ -125,11 +125,11 @@
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14071,
-   "our_cursor": 14071,
+   "peer_cursor": 14072,
+   "our_cursor": 14072,
    "last_error": null,
-   "since": "2026-09-09T02:15:34.689Z",
-   "last_contact": "2026-09-09T02:16:29.336Z"
+   "since": "2026-09-09T04:04:26.259Z",
+   "last_contact": "2026-09-09T04:05:35.657Z"
   }
  },
  "ambient": {

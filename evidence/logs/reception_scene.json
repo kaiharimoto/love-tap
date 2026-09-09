@@ -14,43 +14,43 @@
   },
   {
    "do": "goTo",
-   "ms": 3674
+   "ms": 3109
   },
   {
    "do": "step",
-   "ms": 1532
+   "ms": 1471
   },
   {
    "do": "step",
-   "ms": 1203
-  },
-  {
-   "do": "wait",
-   "ms": 1002
-  },
-  {
-   "do": "shot",
-   "ms": 1554
-  },
-  {
-   "do": "goTo",
-   "ms": 3608
-  },
-  {
-   "do": "step",
-   "ms": 1579
-  },
-  {
-   "do": "step",
-   "ms": 1219
+   "ms": 1225
   },
   {
    "do": "wait",
    "ms": 1003
   },
   {
+   "do": "shot",
+   "ms": 1577
+  },
+  {
+   "do": "goTo",
+   "ms": 3751
+  },
+  {
+   "do": "step",
+   "ms": 1707
+  },
+  {
+   "do": "step",
+   "ms": 1356
+  },
+  {
+   "do": "wait",
+   "ms": 1002
+  },
+  {
    "do": "report",
-   "ms": 710
+   "ms": 711
   },
   {
    "push": {
@@ -69,15 +69,15 @@
   },
   {
    "do": "screen",
-   "ms": 819
+   "ms": 824
   },
   {
    "do": "closeApp",
-   "ms": 725
+   "ms": 726
   },
   {
    "do": "wait",
-   "ms": 1602
+   "ms": 1604
   },
   {
    "push": {
@@ -88,15 +88,15 @@
   },
   {
    "do": "push",
-   "ms": 2206
+   "ms": 2207
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2101
   },
   {
    "do": "screen",
-   "ms": 775
+   "ms": 778
   },
   {
    "push": {
@@ -107,7 +107,7 @@
   },
   {
    "do": "push",
-   "ms": 2209
+   "ms": 2207
   },
   {
    "do": "wait",
@@ -115,11 +115,11 @@
   },
   {
    "do": "screen",
-   "ms": 776
+   "ms": 778
   },
   {
    "do": "notifications",
-   "ms": 1186
+   "ms": 1139
   }
  ],
  "shots": [
@@ -242,13 +242,7 @@
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 139,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "sensation": null,
    "sync": {
@@ -271,7 +265,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-09T02:17:32.202Z",
+     "since": "2026-09-09T04:06:36.842Z",
      "last_contact": null
     }
    },
@@ -286,10 +280,10 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 6072,
+ "cold_ms": 2121,
  "load": {
-  "ms": 6072,
-  "store": "fresh",
+  "ms": 2121,
+  "store": "kept",
   "profile": "profile_reception"
  },
  "app_open": false,
@@ -332,6 +326,36 @@
    },
    {
     "at": 1788920287327,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1788926819168,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1788926826633,
+    "kind": "message",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "wrote something",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1788926831806,
     "kind": "feeling",
     "from": "noor",
     "how": "quiet",

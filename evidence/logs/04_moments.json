@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2261,
+   "ms": 2340,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 5762
+   "ms": 4144
   },
   {
    "do": "wait",
-   "ms": 3705
+   "ms": 3703
   },
   {
    "do": "shot",
-   "ms": 3458
+   "ms": 4008
   },
   {
    "do": "report",
@@ -109,8 +109,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-09T02:14:37.379Z",
-     "last_contact": "2026-09-09T02:14:39.454Z"
+     "since": "2026-09-09T04:03:29.630Z",
+     "last_contact": "2026-09-09T04:03:31.565Z"
     }
    },
    "ambient": {
@@ -124,9 +124,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2245,
+ "cold_ms": 2168,
  "load": {
-  "ms": 2245,
+  "ms": 2168,
   "store": "kept",
   "profile": "profile_seeded"
  },
