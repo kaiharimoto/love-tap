@@ -187,7 +187,7 @@ def solidify(obj, t=PAPER_T):
     return obj
 
 
-def tube(points, radius, sections=12, name="tube", mat=None, taper=None):
+def tube(points, radius, sections=32, name="tube", mat=None, taper=None):
     """A tube along a polyline (thread, string, ribbon core, staple wire)."""
     bm = bmesh.new()
     pts = [np.array(p, float) for p in points]
@@ -465,7 +465,7 @@ def obj_confetti(rng):
         if shape == 0:
             # punched out of a page
             bm = bmesh.new()
-            bmesh.ops.create_circle(bm, cap_ends=True, segments=14, radius=float(r.uniform(0.0016, 0.0024)))
+            bmesh.ops.create_circle(bm, cap_ends=True, segments=56, radius=float(r.uniform(0.0016, 0.0024)))
             o = solidify(new_mesh(bm, f"conf{k}", mat, smooth=False), t=0.00010)
         else:
             # cut with scissors: a square, or a strip off the edge
@@ -497,14 +497,14 @@ def obj_ribbon(rng):
         a = t * 4.4 * math.pi
         r = 0.012 * (1 - 0.55 * t)
         pts.append((r * math.cos(a), r * math.sin(a) * 0.8, 0.0016 + 0.010 * t))
-    return tube(pts, 0.0016, 8, "ribbon", mat, taper=lambda t: 1.0 - 0.35 * t)
+    return tube(pts, 0.0016, 32, "ribbon", mat, taper=lambda t: 1.0 - 0.35 * t)
 
 
 def obj_string_loop(rng):
     mat = simple_mat("string", (0.80, 0.72, 0.56), roughness=0.9)
     pts = [(0.016 * math.cos(2 * math.pi * k / 60), 0.011 * math.sin(2 * math.pi * k / 60),
             0.0009 + 0.0016 * math.sin(4 * math.pi * k / 60)) for k in range(61)]
-    return tube(pts, 0.0008, 8, "string_loop", mat)
+    return tube(pts, 0.0008, 32, "string_loop", mat)
 
 
 def obj_knot(rng):
@@ -513,13 +513,13 @@ def obj_knot(rng):
     for k in range(160):
         t = k / 159 * 2 * math.pi
         pts.append((0.010 * math.sin(2 * t), 0.010 * math.cos(3 * t) * 0.8, 0.0018 + 0.004 * math.sin(3 * t)))
-    return tube(pts, 0.0007, 8, "knot", mat)
+    return tube(pts, 0.0007, 32, "knot", mat)
 
 
 def obj_rubber_band(rng):
     mat = simple_mat("rubber", (0.82, 0.56, 0.36), roughness=0.75)
     pts = [(0.018 * math.cos(2 * math.pi * k / 70), 0.009 * math.sin(2 * math.pi * k / 70), 0.0008) for k in range(71)]
-    return tube(pts, 0.0009, 8, "rubber_band", mat)
+    return tube(pts, 0.0009, 32, "rubber_band", mat)
 
 
 def obj_staple_chain(rng):
@@ -571,7 +571,14 @@ def obj_candle(rng):
     wick = simple_mat("wick", (0.10, 0.09, 0.08), roughness=0.95)
     R, H = 0.0102, 0.019
     bm = bmesh.new()
-    bmesh.ops.create_cone(bm, cap_ends=True, segments=40, radius1=R, radius2=R * 0.94, depth=H)
+    # cap_tris, and then the cap subdivided: the top is where the wax melted, and an n-gon cap with
+    # its vertices displaced triangulates as a fan from one corner — so the scallops came out as a
+    # dozen large triangles radiating from a point, which is what four critics have read as a
+    # low-poly render. A fan of small triangles from a centre vertex takes displacement the way a
+    # surface does.
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=True, segments=160,
+                          radius1=R, radius2=R * 0.94, depth=H)
+    bmesh.ops.subdivide_edges(bm, edges=bm.edges[:], cuts=2, use_grid_fill=True)
     r = np.random.default_rng(21)
     lip = r.uniform(0, 2 * math.pi)
     for v in bm.verts:
@@ -596,11 +603,11 @@ def obj_candle(rng):
         (R * 0.97 * math.cos(lip), R * 0.97 * math.sin(lip), H - 0.0045),
         (R * 1.00 * math.cos(lip), R * 1.00 * math.sin(lip), H * 0.55),
         (R * 0.96 * math.cos(lip), R * 0.96 * math.sin(lip), H * 0.24),
-    ], 0.0013, 8, "runnel", wax)
+    ], 0.0013, 32, "runnel", wax)
     parts.append(run)
     # the burnt ring in the wax, and the wick leaning out of it
     ring = bmesh.new()
-    bmesh.ops.create_cone(ring, cap_ends=True, segments=24, radius1=0.0028, radius2=0.0026,
+    bmesh.ops.create_cone(ring, cap_ends=True, segments=96, radius1=0.0028, radius2=0.0026,
                           depth=0.0006)
     burnt = new_mesh(ring, "burnt", wick, smooth=False)
     burnt.location = (0.0, 0.0, H - 0.0038)
@@ -613,13 +620,13 @@ def obj_candle(rng):
 def obj_mug(rng):
     mat = simple_mat("mug", (0.78, 0.74, 0.70), roughness=0.35)
     bm = bmesh.new()
-    bmesh.ops.create_cone(bm, cap_ends=True, segments=32, radius1=0.013, radius2=0.014, depth=0.022)
+    bmesh.ops.create_cone(bm, cap_ends=True, segments=128, radius1=0.013, radius2=0.014, depth=0.022)
     body = new_mesh(bm, "mug", mat, smooth=False)
     body.location = (0.0, 0.0, 0.011)
-    handle = tube([(0.014, 0.0, 0.008), (0.021, 0.0, 0.011), (0.021, 0.0, 0.016), (0.014, 0.0, 0.018)], 0.0016, 8, "handle", mat)
+    handle = tube([(0.014, 0.0, 0.008), (0.021, 0.0, 0.011), (0.021, 0.0, 0.016), (0.014, 0.0, 0.018)], 0.0016, 32, "handle", mat)
     tea = simple_mat("tea", (0.30, 0.18, 0.10), roughness=0.15)
     bm2 = bmesh.new()
-    bmesh.ops.create_circle(bm2, cap_ends=True, segments=32, radius=0.0122)
+    bmesh.ops.create_circle(bm2, cap_ends=True, segments=128, radius=0.0122)
     surf = new_mesh(bm2, "tea", tea, smooth=False)
     surf.location = (0.0, 0.0, 0.019)
     return [body, handle, surf]
@@ -631,12 +638,12 @@ def obj_snapped_pencil(rng):
     parts = []
     for k, (x, ang) in enumerate(((-0.011, -0.10), (0.013, 0.22))):
         bm = bmesh.new()
-        bmesh.ops.create_cone(bm, cap_ends=True, segments=6, radius1=0.0032, radius2=0.0032, depth=0.020)
+        bmesh.ops.create_cone(bm, cap_ends=True, segments=96, radius1=0.0032, radius2=0.0032, depth=0.020)
         o = new_mesh(bm, f"pencil{k}", wood, smooth=False)
         o.rotation_euler = (0.0, math.radians(90), ang)
         o.location = (x, 0.001 * k, 0.0032)
         parts.append(o)
-    tip = tube([(0.003, 0.0006, 0.0032), (0.0075, 0.0012, 0.0032)], 0.0009, 6, "lead", lead)
+    tip = tube([(0.003, 0.0006, 0.0032), (0.0075, 0.0012, 0.0032)], 0.0009, 24, "lead", lead)
     parts.append(tip)
     return parts
 
@@ -680,9 +687,9 @@ def obj_coffee_ring(rng):
     base = solidify(new_mesh(bm, "ring_card", card))
     stain = simple_mat("stain", (0.52, 0.36, 0.22), roughness=0.7)
     bm2 = bmesh.new()
-    bmesh.ops.create_circle(bm2, cap_ends=False, segments=48, radius=0.011)
+    bmesh.ops.create_circle(bm2, cap_ends=False, segments=192, radius=0.011)
     ring = tube([(0.011 * math.cos(2 * math.pi * k / 48), 0.011 * math.sin(2 * math.pi * k / 48), 0.00016) for k in range(49)],
-                0.0009, 6, "ring", stain)
+                0.0009, 24, "ring", stain)
     bm2.free()
     return [base, ring]
 
@@ -864,7 +871,7 @@ def obj_bunting(rng):
     colours = [(0.94, 0.66, 0.72), (0.74, 0.85, 0.90), (0.95, 0.88, 0.55)]
     pts = [((t - 0.5) * 0.062, 0.006 * math.sin(t * math.pi * 1.0) - 0.003, 0.0007 + 0.001 * math.sin(t * math.pi))
            for t in [k / 24 for k in range(25)]]
-    parts = [tube(pts, 0.00035, 6, "bunting_thread", thread)]
+    parts = [tube(pts, 0.00035, 24, "bunting_thread", thread)]
     for k in range(3):
         t = 0.2 + 0.3 * k
         cx = (t - 0.5) * 0.062
@@ -885,7 +892,7 @@ def obj_cork(rng):
     its top. Not a prize: the thing left over from having opened something."""
     mat = simple_mat("cork", (0.76, 0.62, 0.42), roughness=0.92)
     bm = bmesh.new()
-    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=28, radius1=0.0098, radius2=0.0105, depth=0.040)
+    bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=112, radius1=0.0098, radius2=0.0105, depth=0.040)
     for v in bm.verts:
         # a cork is not a lathe part: it is a little dented and a little out of round
         a = math.atan2(v.co.y, v.co.x)
@@ -898,7 +905,7 @@ def obj_cork(rng):
     # the corkscrew's hole, a dark pit in the end
     pit = simple_mat("cork_pit", (0.28, 0.20, 0.12), roughness=0.95)
     bm2 = bmesh.new()
-    bmesh.ops.create_cone(bm2, cap_ends=True, segments=12, radius1=0.0016, radius2=0.0024, depth=0.006)
+    bmesh.ops.create_cone(bm2, cap_ends=True, segments=48, radius1=0.0016, radius2=0.0024, depth=0.006)
     hole = new_mesh(bm2, "cork_pit", pit)
     hole.rotation_euler = (math.radians(90.0), 0.0, cork.rotation_euler[2])
     dx = 0.0195 * math.cos(cork.rotation_euler[2] + math.pi / 2)
@@ -912,7 +919,7 @@ def obj_party_hat(rng):
     than a minute. A cone of thin paper with a torn seam, not a ring of points."""
     mat = paper_mat("party_hat", (0.92, 0.72, 0.36), tooth=0.8)
     bm = bmesh.new()
-    bmesh.ops.create_cone(bm, cap_ends=False, segments=36, radius1=0.019, radius2=0.0012, depth=0.036)
+    bmesh.ops.create_cone(bm, cap_ends=False, segments=144, radius1=0.019, radius2=0.0012, depth=0.036)
     for v in bm.verts:
         # crumpled a little from being in the cracker
         v.co.x *= 1.0 + 0.02 * math.sin(v.co.z * 400 + v.co.y * 300)
