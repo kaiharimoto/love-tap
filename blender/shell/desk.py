@@ -95,7 +95,7 @@ def _placed_rays(h, w, seed, count=340):
     return np.clip(field / m * 1.6, 0, 1)
 
 
-def _placed_pores(h, w, seed, count=9000):
+def _placed_pores(h, w, seed, count=15000):
     """The open pores of a ring-porous hardwood: short dark grooves running *along* the grain.
 
     Without them the desk has no cross-grain structure at all. Measured on the asset itself, the
@@ -295,7 +295,10 @@ def desk_maps(w, h, seed):
         early = EARLY * warmth
         col = early[None, None, :] * (1 - late[..., None]) + LATE[None, None, :] * late[..., None]
         col = col * (1 + 0.10 * fibre[..., None])
-        col = col * (1 - 0.46 * pores[..., None])
+        # Oak pores are dark. Seven per cent below the wood round them is a smudge; a vessel
+        # cut open by a saw is twenty to thirty-five per cent down, and it is the thing an
+        # eye uses to tell a photograph of oak from a drawing of one.
+        col = col * (1 - 0.80 * pores[..., None])
         col = col * (1 - 0.55 * fleck[..., None]) + RAY[None, None, :] * 0.55 * fleck[..., None]
         hgt = late * -0.55 + fibre * 0.25 + fleck * 0.1 - pores * 0.62
 
