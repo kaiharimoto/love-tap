@@ -13,6 +13,30 @@ import '../transport.dart';
 import 'http_transport.dart';
 import 'wire.dart';
 
+/// The file inside [root] that a request for [urlPath] may have, or null if it may have none.
+///
+/// The bundle is served without authentication on purpose: it is how the other phone gets the app
+/// at all, and a phone that had to be paired before it could fetch the thing that does the pairing
+/// could never be paired. What must not happen is that it serves anything else, and it did.
+/// `p.join(root, rel)` returns `rel` whole when `rel` is absolute, and `req.uri.path.substring(1)`
+/// leaves a leading slash on `//etc/passwd`, which normalize keeps — so that request walked out of
+/// the bundle and read the machine. Everything here is decided on the resolved path rather than on
+/// the one that was asked for.
+String? insideTheBundle(String root, String urlPath) {
+  // [urlPath] is req.uri.path, which Dart has already percent-decoded. Decoding again
+  // here would turn `%252e%252e` into `..` and open the hole this closes.
+  var rel = p.normalize(urlPath).replaceAll('\\', '/');
+  while (rel.startsWith('/')) {
+    rel = rel.substring(1);
+  }
+  if (rel.isEmpty) rel = 'index.html';
+  if (rel.startsWith('..')) return null;
+  final within = p.normalize(p.absolute(root));
+  final asked = p.normalize(p.join(within, rel));
+  if (asked != within && !p.isWithin(within, asked)) return null;
+  return asked;
+}
+
 class HostServer {
   HostServer({
     required this.spine,
@@ -308,15 +332,14 @@ class HostServer {
       await req.response.close();
       return;
     }
-    var rel = req.uri.path == '/' ? 'index.html' : req.uri.path.substring(1);
-    rel = p.normalize(rel);
-    if (rel.startsWith('..')) {
+    final asked = insideTheBundle(root, req.uri.path);
+    if (asked == null) {
       req.response.statusCode = HttpStatus.forbidden;
       await req.response.close();
       return;
     }
-    var file = File(p.join(root, rel));
-    if (!await file.exists()) file = File(p.join(root, 'index.html'));
+    var file = File(asked);
+    if (!await file.exists()) file = File(p.join(p.normalize(p.absolute(root)), 'index.html'));
     if (!await file.exists()) {
       req.response.statusCode = HttpStatus.notFound;
       await req.response.close();

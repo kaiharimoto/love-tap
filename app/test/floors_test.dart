@@ -116,13 +116,22 @@ void main() {
           reason: '${spec.id} can neither be searched nor filtered nor is it excluded, so it '
               'would be invisible in Moments and in search both');
     }
-    // and the eighteen the registry holds are all of them present
-    for (final id in ['message', 'photo', 'video', 'voice_note', 'reaction', 'message_edit',
-                      'message_delete', 'read_marker', 'feeling', 'state_declared',
-                      'state_passive', 'date_event', 'todo_event', 'milestone', 'ritual_kept',
-                      'ping', 'feeling_authored']) {
+    // and every type the registry holds is one this list names. A code critic found the comment
+    // saying eighteen over a hand-written list of seventeen, with `passed_on` missing — which is
+    // the failure a hand-written list always has: it agrees with the code on the day it is written
+    // and never again. The list is still written out, because naming them is the point of the
+    // test, but it is now checked both ways against the registry.
+    const named = ['message', 'photo', 'video', 'voice_note', 'reaction', 'message_edit',
+                   'message_delete', 'read_marker', 'feeling', 'state_declared',
+                   'state_passive', 'passed_on', 'date_event', 'todo_event', 'milestone',
+                   'ritual_kept', 'ping', 'feeling_authored'];
+    for (final id in named) {
       expect(kEventTypeById[id], isNotNull, reason: '$id is not in the registry');
     }
+    final unnamed = kEventTypeById.keys.where((k) => !named.contains(k)).toList();
+    expect(unnamed, isEmpty,
+        reason: 'the registry holds ${kEventTypeById.length} types and this list names '
+            '${named.length}; these are not named: $unnamed');
   });
 
   test('at least four shared-life modules, each writing into the one log', () {

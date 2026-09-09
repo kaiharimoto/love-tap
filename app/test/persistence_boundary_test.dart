@@ -36,6 +36,33 @@ void main() {
     expect(offenders, isEmpty, reason: 'storage drivers may only be imported under lib/spine/: $offenders');
   });
 
+  test('only lib/spine/store/ may reach the browser\'s own storage', () {
+    // The package list above names thirteen pub packages, and a Dart web app does not need any
+    // of them to open IndexedDB: `package:web` and `dart:js_interop` reach it directly, and
+    // `dart:indexed_db` and `dart:html` used to. A code critic found the rule blind to all four,
+    // which means the rule the brief says must fail the build could be walked around by writing
+    // the thing it forbids in the way the platform actually offers.
+    //
+    // Reaching the *platform* is not the offence — five files do it for notifications, blob URLs,
+    // capture handles and readiness, and none of them stores anything. Reaching the platform's
+    // *storage* is.
+    final web = RegExp(r'''(import|export)\s[^;]*['"](dart:indexed_db|dart:html|dart:js_interop'''
+        r'''|package:web)[/.'"][^;]*;''', dotAll: true);
+    final storage = RegExp(r'\b(indexedDB|IDBFactory|IDBDatabase|localStorage|sessionStorage'
+        r'|openDatabase|caches)\b');
+    final offenders = <String>[];
+    for (final f in Directory('lib').listSync(recursive: true).whereType<File>()) {
+      if (!f.path.endsWith('.dart')) continue;
+      final normalized = f.path.replaceAll('\\', '/');
+      if (normalized.startsWith('lib/spine/store/')) continue;
+      final src = f.readAsStringSync();
+      if (web.hasMatch(src) && storage.hasMatch(src)) offenders.add(normalized);
+    }
+    expect(offenders, isEmpty,
+        reason: 'the browser\'s own storage may only be reached under lib/spine/store/: '
+            '$offenders');
+  });
+
   test('inside lib/spine/, drivers live under store/ only', () {
     final drivers = _drivers('sqlite3|sqlite3_flutter_libs|idb_shim');
     final offenders = <String>[];
