@@ -10,10 +10,49 @@
   "Static": 6,
   "Sparkle": 5
  },
- "longest_ms": 3500,
+ "longest_ms": 2700,
  "shortest_ms": 30,
  "distinct_strings": 36,
  "near_shapes": [],
+ "felt_distance": {
+  "how": "forty-millisecond bins of real time, amplitude to the power 0.6, mean absolute difference times a hundred. Two patterns a finger cannot separate score near zero however different their strings are.",
+  "floor": 18.0,
+  "median": 58.94,
+  "smallest": 26.49,
+  "closest_pairs": [
+   {
+    "a": "make_you_tea",
+    "b": "snapped",
+    "felt_distance": 26.49
+   },
+   {
+    "a": "thinking_of_you",
+    "b": "pick_one",
+    "felt_distance": 26.85
+   },
+   {
+    "a": "long_day",
+    "b": "hold",
+    "felt_distance": 26.94
+   },
+   {
+    "a": "pick_one",
+    "b": "grey",
+    "felt_distance": 27.11
+   },
+   {
+    "a": "miss_you",
+    "b": "wish_you_were_here",
+    "felt_distance": 27.87
+   },
+   {
+    "a": "catch",
+    "b": "overwhelmed",
+    "felt_distance": 29.63
+   }
+  ],
+  "under_the_floor": []
+ },
  "problems": [],
  "strip": "evidence/crops/haptics_strip.png",
  "ok": true
