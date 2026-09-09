@@ -16,6 +16,7 @@ import '../../material/marks.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
 import '../../media/local_uri.dart';
+import '../../feelings/corner.dart';
 import '../../scope.dart';
 import '../../spine/projections/thread.dart';
 import '../../voice/strings.dart';
@@ -140,7 +141,10 @@ class _ViewerPageState extends State<ViewerPage> {
     }
     final dusk = Light.of(context) == LightCondition.dusk;
     final tilt = ((widget.item.id.hashCode % 21) - 10) / 420.0;
-    return GestureDetector(
+    final scope = AppScope.of(context);
+    return Stack(
+      children: [
+        GestureDetector(
       onTap: () {
         final v = _video;
         if (v != null) {
@@ -231,6 +235,21 @@ class _ViewerPageState extends State<ViewerPage> {
           ],
         ),
       ),
+        ),
+        // A print held up is still a moment two people are in: the corner that
+        // reaches a feeling stays reachable over it. The viewer is an opaque route over the
+        // shell, so the shell's corner is covered by it — one gesture from anywhere stopped at
+        // the one screen where a picture is being looked at together.
+        FeelingCorner(
+          registry: scope.feelings,
+          onSend: (f, i) async {
+            await scope.emit('feeling',
+                {'feeling_id': f.id, 'intensity': double.parse(i.toStringAsFixed(2))});
+            await scope.sensation.play(f, intensity: i);
+          },
+          onPreview: (f, i) => scope.sensation.play(f, intensity: i, sound: true),
+        ),
+      ],
     );
   }
 }

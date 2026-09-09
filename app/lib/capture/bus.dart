@@ -84,6 +84,10 @@ class CaptureBus {
   /// underneath it, down to the scroll positions of a list that was no longer mounted.
   static Report Function()? searchReport;
 
+  /// Put a facet on in the search, by the label it is drawn with: `photographs`, `talking`, a
+  /// module's own name. Answers 'ok' or what it did not know.
+  static String Function(String? facet)? searchFacet;
+
   /// The viewer: what is open in it, and whether the video is actually running.
   static Report Function()? viewerReport;
 

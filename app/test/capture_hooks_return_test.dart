@@ -9,6 +9,7 @@
 // Nothing here can see a Navigator, so this reads the source: a handle registered on CaptureBus
 // may not await a push.
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:desk/capture/bus.dart';
@@ -132,5 +133,31 @@ void _everyHandleRuns() {
       }
       expect(tester.takeException(), isNull, reason: '${e.key} left an exception behind');
     }
+  });
+
+  test('every step the scenes ask for is one the driver knows', () {
+    // A scene is JSON and the driver is JavaScript, and nothing checked that the two agree: a verb
+    // with a typo in it throws in the middle of a run, after the far phone is up and the year is
+    // imported, and the artifact comes back missing for a reason that has nothing to do with the
+    // app.
+    final driver = File('../tools/capture/scene.js').readAsStringSync();
+    final known = RegExp(r"case '([a-zA-Z]+)':")
+        .allMatches(driver)
+        .map((m) => m.group(1)!)
+        .toSet();
+    final asked = <String, String>{};
+    for (final f in Directory('../evidence/scenes').listSync().whereType<File>()) {
+      if (!f.path.endsWith('.json')) continue;
+      final scene = jsonDecode(f.readAsStringSync()) as Map<String, dynamic>;
+      for (final step in (scene['steps'] as List).cast<Map<String, dynamic>>()) {
+        asked[step['do'] as String] = f.uri.pathSegments.last;
+      }
+    }
+    final unknown = {
+      for (final e in asked.entries)
+        if (!known.contains(e.key)) e.key: e.value,
+    };
+    expect(unknown, isEmpty,
+        reason: 'the driver has no case for ${unknown.entries.map((e) => '${e.key} (${e.value})').join(', ')}');
   });
 }

@@ -69,6 +69,16 @@ class SearchPageState extends State<SearchPage> {
     // up, and the chat report reads the scroll positions of a list that is no longer mounted. So
     // the record for 12_search said which nine notes were visible in a thread nobody was looking
     // at. The page that is on the glass says what it is showing.
+    // and the harness can put a facet on, because a search that offers to find photographs and is
+    // only ever photographed finding messages is a claim with no picture behind it. The ten most
+    // recent things that mention a word in a year are messages, which is honest and is also why
+    // the artifact never showed the media path.
+    CaptureBus.searchFacet = (String? facet) {
+      if (facet != null && !_facets.containsKey(facet)) return 'no facet called $facet';
+      setState(() => _typeFilter = facet);
+      _run();
+      return 'ok';
+    };
     CaptureBus.searchReport = () => {
           'query': _ctl.text,
           'hits': _hits.length,
@@ -94,6 +104,7 @@ class SearchPageState extends State<SearchPage> {
   @override
   void dispose() {
     CaptureBus.searchReport = null;
+    CaptureBus.searchFacet = null;
     _ctl.dispose();
     super.dispose();
   }

@@ -1,3 +1,4 @@
+import 'dart:io';
 // A feeling is one gesture from any region.
 //
 // The rubric row asks for "a feeling reachable in one gesture from any region of the app", and a
@@ -95,5 +96,13 @@ void main() {
     await gesture.up();
     await tester.pump();
     expect(sent, isNull, reason: 'a feeling was sent by a thumb that was not on one');
+  });
+
+  test('a print held up still has the corner over it', () {
+    // The viewer is an opaque route over the shell, so the shell's own corner is under it: one
+    // gesture from anywhere stopped at the one screen where two people look at a picture together.
+    final src = File('lib/regions/chat/viewer_page.dart').readAsStringSync();
+    expect(src.contains('FeelingCorner('), isTrue,
+        reason: 'the viewer covers the corner and puts nothing in its place');
   });
 }

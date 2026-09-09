@@ -302,6 +302,13 @@ class CaptureHooks {
   /// 'ok' when no picture is still being read out of the store: what a shot waits for, so a still
   /// of Moments is a still of the prints and not of the moment before they were decoded. The blob
   /// reads are the slow part under capture; the decode after them is inside the shot's own settle.
+  /// Put a facet on in the search that is open: `photographs`, `talking`, a module's own name.
+  String searchFacet(String facet) {
+    final f = CaptureBus.searchFacet;
+    if (f == null) return 'no search is open';
+    return f(facet.isEmpty ? null : facet);
+  }
+
   String quiet() {
     final b = BlobCache.stats();
     return (b['reading'] ?? 0) == 0 && (b['waiting'] ?? 0) == 0 ? 'ok' : 'reading ${b['reading']}, waiting ${b['waiting']}';

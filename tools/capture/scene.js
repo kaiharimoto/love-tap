@@ -744,6 +744,11 @@ function ensure(p) {
         fs.writeFileSync(out, raw ? JSON.stringify(JSON.parse(raw), null, 1) : JSON.stringify({ missing: 'no haptics handle' }));
         break;
       }
+      case 'searchFacet': {
+        await hook('__deskSearchFacet', step.arg || '');
+        await settle(step.settle || 500);
+        break;
+      }
       case 'report': {
         const named = step.at ? saidAtTheShutter.get(step.at) : null;
         const raw = named || await page.evaluate(() => window.__deskReport && window.__deskReport());

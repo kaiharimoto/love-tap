@@ -18,11 +18,19 @@
   },
   {
    "do": "search",
-   "arg": "rain"
+   "arg": "canal"
   },
   {
    "do": "wait",
    "ms": 1200
+  },
+  {
+   "do": "searchFacet",
+   "arg": "photographs"
+  },
+  {
+   "do": "wait",
+   "ms": 900
   },
   {
    "do": "shot",
