@@ -2,6 +2,13 @@
  "region": 2,
  "view": {
   "region": "us",
+  "kinds": {
+   "todo_event": 199,
+   "date_event": 81,
+   "milestone": 6,
+   "passed_on": 12,
+   "ritual_kept": 53
+  },
   "modules": [
    {
     "id": "dates",
@@ -16,7 +23,7 @@
    {
     "id": "calendar",
     "events": 6,
-    "glance": "us in 61 days"
+    "glance": "us in 60 days"
    },
    {
     "id": "rituals",
@@ -38,7 +45,7 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 7728,
  "seed": 20260903,
- "events": 14070,
+ "events": 14089,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -49,19 +56,13 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": "unfold_thirds",
-  "length": 139,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  },
  "sensation": {
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-08T22:14:21.899Z",
+  "started_at": "2026-09-09T02:39:26.492Z",
   "pattern": [
    {
     "ms": 150,
@@ -88,7 +89,7 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 34,
+  "rounds": 294,
   "pushed": 5,
   "refused": 0,
   "pulled": 4,
@@ -96,17 +97,17 @@
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14070,
+  "cursor": 14089,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14070,
-   "our_cursor": 14070,
+   "peer_cursor": 14089,
+   "our_cursor": 14089,
    "last_error": null,
-   "since": "2026-09-08T22:04:58.982Z",
-   "last_contact": "2026-09-08T22:16:47.578Z"
+   "since": "2026-09-09T02:28:25.033Z",
+   "last_contact": "2026-09-09T02:42:55.865Z"
   }
  },
  "ambient": {
