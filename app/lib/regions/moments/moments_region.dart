@@ -78,6 +78,13 @@ class _MomentsRegionState extends State<MomentsRegion> {
       'showing': all.where(_keeps).length,
       'tiles_built': _Gallery.built,
       'blobs': BlobCache.stats(),
+      // How many tiles on the glass are still an undeveloped print. Two cells of the gallery were
+      // blank in a capture and the record beside them said `asked 18, arrived 18`, which a reader
+      // reasonably took to mean nothing was outstanding — those two had not been asked for yet at
+      // the shutter, and there was no field that said so.
+      'tiles_without_a_picture': _Gallery.builtHashes
+          .where((h) => BlobCache.peek(h) == null)
+          .length,
       // what kinds of thing this lens is showing. The capture could name seven of the registry's
       // eighteen types across every scene report, and photo was one of the eleven it could not —
       // on the one screen whose whole subject is photographs.
@@ -358,6 +365,10 @@ class _Gallery extends StatelessWidget {
   /// the test that fewer tiles than events are built reads it.
   static int built = 0;
 
+  /// The blob each built tile is showing, so the record can say how many of them are still an
+  /// undeveloped print rather than leaving a reader to infer it from a cache statistic.
+  static final Set<String> builtHashes = <String>{};
+
   @override
   Widget build(BuildContext context) {
     final media = events.reversed.toList();
@@ -375,6 +386,10 @@ class _Gallery extends StatelessWidget {
                 final layout = _PileDelegate.layoutFor(media, _PileDelegate.lastWidth);
                 final placed = layout.placed[i];
                 built++;
+                final showing = (placed.event.payload['poster_blob'] as String?)?.isNotEmpty == true
+                    ? placed.event.payload['poster_blob'] as String
+                    : placed.event.payload['blob'] as String?;
+                if (showing != null) builtHashes.add(showing);
                 return _One(event: placed.event, row: placed.row, width: layout.tileWidth, height: placed.height);
               },
               childCount: media.length,

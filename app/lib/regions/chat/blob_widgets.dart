@@ -144,7 +144,21 @@ class BlobImage extends StatelessWidget {
                 // drawn in the system's own sans-serif, on the one surface where a picture is
                 // still on its way
                 ? Center(child: Text(S.fetching, style: Hands.margin(size: 12)))
-                : const ColoredBox(color: Color(0x14000000)),
+                // An undeveloped print, not a hole in the pile. Eight per cent of black over the
+                // card underneath it left two cells of the gallery reading as bare ruled paper to
+                // a reader counting surfaces; photographic stock is a flatter, cooler grey than
+                // the paper it is lying on, and it has a sheen down it.
+                : const DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [Color(0xFFD8D6D2), Color(0xFFC9C7C4), Color(0xFFD2D0CC)],
+                        stops: [0.0, 0.55, 1.0],
+                      ),
+                    ),
+                    child: SizedBox.expand(),
+                  ),
           );
         }
         return Image.memory(
