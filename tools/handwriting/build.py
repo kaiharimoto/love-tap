@@ -578,6 +578,53 @@ def _simplified(pieces):
     return acc, leftovers
 
 
+def _contours_of(path, leftovers=()):
+    """The polylines of a pathops result, dropping specks."""
+    contours = []
+    for c in path.contours:
+        pts = []
+        for verb, args in c.segments:
+            if verb == "moveTo":
+                pts.append(args[0])
+            elif verb == "lineTo":
+                pts.append(args[0])
+            elif verb == "qCurveTo":
+                pts.extend(args[:-1] if args[-1] is None else args)
+            elif verb == "curveTo":
+                pts.extend(args)
+        pts = np.array(pts, float)
+        if len(pts) >= 3 and abs(signed_area(pts)) > 40:
+            if np.allclose(pts[0], pts[-1]):
+                pts = pts[:-1]
+            contours.append(pts)
+    for poly in leftovers:
+        if len(poly) >= 3 and abs(signed_area(poly)) > 40:
+            contours.append(poly)
+    return contours
+
+
+def cut_holes(outers, holes):
+    """Solid minus holes: what a letter with a counter in it is.
+
+    The stamp face lost every counter it had. After eroding, the code re-unioned the eroded
+    contours with every one of them turned positive — and a hole turned positive is not a hole, it
+    is a disc, and a disc unioned into the shape it was cut from fills it. So DeskStamp's O, D, B,
+    P, R, A, Q and 0 were solid blobs, and the tabs read `T● D●` and `M●MENTS` in every capture
+    for eight cycles. Measured on the built font: the O had one contour where the hands' O has two.
+    """
+    solid = _path_of([c if signed_area(c) > 0 else c[::-1] for c in outers], 0.5)
+    if not holes:
+        return _contours_of(pathops.simplify(solid, fix_winding=True, keep_starting_points=False))
+    cut = _path_of([c if signed_area(c) > 0 else c[::-1] for c in holes], 0.5)
+    out = pathops.Path()
+    out.fillType = pathops.FillType.WINDING
+    try:
+        pathops.difference([solid], [cut], out.getPen())
+    except pathops.PathOpsError:
+        return _contours_of(pathops.simplify(solid, fix_winding=True, keep_starting_points=False))
+    return _contours_of(out)
+
+
 def union_pieces(pieces):
     """Union of consistently-wound polygons with skia-pathops -> list of (N,2) polylines."""
     result, leftovers = _simplified(pieces)
@@ -822,12 +869,15 @@ def build_variant(glyph, variant, hand, rng, plan=None):
         amp = pen.get("erode_em", 0) * UPM
         spacing = UPM / pen.get("erode_samples_per_em", 40)
         eroded = []
+        depths = []
         for c, depth in oriented:
-            c = erode_contour(c, rng, amp, spacing)
-            eroded.append(c)
-        # erosion can pinch slivers; re-union to clean up
-        contours = union_pieces([c if signed_area(c) > 0 else c[::-1] for c in eroded]) if eroded else []
-        # holes were reversed above, re-orient with proper nesting
+            eroded.append(erode_contour(c, rng, amp, spacing))
+            depths.append(depth)
+        # Erosion can pinch slivers, so the pieces are put back together — but a hole is put back
+        # as a hole. See cut_holes: turning every contour positive and unioning them filled every
+        # counter in the face.
+        contours = cut_holes([c for c, d in zip(eroded, depths) if d % 2 == 0],
+                             [c for c, d in zip(eroded, depths) if d % 2 == 1]) if eroded else []
         oriented = orient_contours(contours)
         if variant > 0:
             mx, my = pen["misregister"]
