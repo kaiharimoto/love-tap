@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1607,
+   "ms": 1544,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3205
+   "ms": 2906
   },
   {
    "do": "wait",
-   "ms": 1605
+   "ms": 1606
   },
   {
    "do": "scrollTo",
-   "ms": 3364
+   "ms": 5133
   },
   {
    "do": "wait",
@@ -32,19 +32,19 @@
   },
   {
    "do": "far",
-   "ms": 405
+   "ms": 1023
   },
   {
    "do": "awaitArrival",
-   "ms": 1702
+   "ms": 935
   },
   {
    "do": "frames",
-   "ms": 32828
+   "ms": 30999
   },
   {
    "do": "unfold",
-   "ms": 6
+   "ms": 746
   },
   {
    "frames_from_the_build": "unfold_thirds",
@@ -52,23 +52,23 @@
   },
   {
    "do": "frames",
-   "ms": 285834
+   "ms": 246047
   },
   {
    "do": "far",
-   "ms": 405
+   "ms": 404
   },
   {
    "do": "awaitArrival",
-   "ms": 1283
+   "ms": 860
   },
   {
    "do": "frames",
-   "ms": 51383
+   "ms": 32563
   },
   {
    "do": "unfold",
-   "ms": 6
+   "ms": 14
   },
   {
    "frames_from_the_build": "unfold_thirds",
@@ -76,11 +76,11 @@
   },
   {
    "do": "frames",
-   "ms": 283516
+   "ms": 246371
   },
   {
    "do": "report",
-   "ms": 1353
+   "ms": 443
   }
  ],
  "shots": [
@@ -129,51 +129,50 @@
      "read_marker": 0
     },
     "delivery": {
-     "0001MCJ1M0DSSV0Y5HZMSFB9WV": {
-      "state": "sent",
-      "says": "sent"
+     "0001MCJ1M0YWHZ0WP8GE4M7T93": {
+      "state": "sending",
+      "says": "going"
      }
     },
-    "states_on_the_glass": {
-     "sent": 1
-    },
+    "states_on_the_glass": {},
     "reactions": {},
     "edited": [],
     "taken_back": []
    },
    "visible": [
-    "0001MCJ1M0DSSV0Y5HZMSFB9WV",
-    "01M1MCWMM5TWNWYTNFE2SBNGR5",
-    "01M1MD6DZ7B6MCF75X77EP0XR7"
+    "0001MCJ1M0YWHZ0WP8GE4M7T93",
+    "01M1MCZ2X01DK4992A15Q6R5KN",
+    "01M1MD7KDVKH1KX9VHYVH8DCBX"
    ],
    "paper": [
-    "0001MCJ1M0DSSV0Y5HZMSFB9WV",
-    "01M1MCWMM5TWNWYTNFE2SBNGR5",
-    "01M1MD6DZ7B6MCF75X77EP0XR7"
+    "0001MCJ1M0YWHZ0WP8GE4M7T93",
+    "01M1MCZ2X01DK4992A15Q6R5KN",
+    "01M1MD7KDVKH1KX9VHYVH8DCBX"
    ],
    "tears": {
-    "0001MCJ1M0DSSV0Y5HZMSFB9WV": "tear_035",
-    "01M1MCWMM5TWNWYTNFE2SBNGR5": "tear_040",
-    "01M1MD6DZ7B6MCF75X77EP0XR7": "tear_023"
+    "0001MCJ1M0YWHZ0WP8GE4M7T93": "tear_055",
+    "01M1MCZ2X01DK4992A15Q6R5KN": "tear_018",
+    "01M1MD7KDVKH1KX9VHYVH8DCBX": "tear_003"
    },
    "stocks": {
-    "0001MCJ1M0DSSV0Y5HZMSFB9WV": "lined_03",
-    "01M1MCWMM5TWNWYTNFE2SBNGR5": "receipt_01",
-    "01M1MD6DZ7B6MCF75X77EP0XR7": "lined_02"
+    "0001MCJ1M0YWHZ0WP8GE4M7T93": "lined_03",
+    "01M1MCZ2X01DK4992A15Q6R5KN": "lined_04",
+    "01M1MD7KDVKH1KX9VHYVH8DCBX": "lined_01"
    },
    "scroll": {
-    "first": 8072,
-    "last": 8075,
-    "of": 8075
+    "first": 8074,
+    "last": 8077,
+    "of": 8077
    },
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 5104,
    "seed": 20260903,
-   "events": 14080,
+   "events": 14079,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
+   "masks_composed": 1,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
@@ -192,25 +191,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 225,
-    "pushed": 2,
+    "rounds": 193,
+    "pushed": 3,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14080,
+    "cursor": 14079,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14080,
-     "our_cursor": 14080,
+     "peer_cursor": 14079,
+     "our_cursor": 14079,
      "last_error": null,
-     "since": "2026-09-09T04:07:40.220Z",
-     "last_contact": "2026-09-09T04:18:49.474Z"
+     "since": "2026-09-09T17:59:11.955Z",
+     "last_contact": "2026-09-09T18:08:43.134Z"
     }
    },
    "ambient": {
@@ -224,9 +223,9 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2106,
+ "cold_ms": 2176,
  "load": {
-  "ms": 2106,
+  "ms": 2176,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -243,17 +242,17 @@
  "arrivals": [
   {
    "line": "message back by six. the pigeon is still on the cupboard, year nine have named it.",
-   "before": 8073,
-   "after": 8074,
+   "before": 8075,
+   "after": 8076,
    "at_frame": 0,
-   "waited_ms": 1301
+   "waited_ms": 528
   },
   {
    "line": "message and the bread",
-   "before": 8074,
-   "after": 8075,
+   "before": 8076,
+   "after": 8077,
    "at_frame": 155,
-   "waited_ms": 882
+   "waited_ms": 460
   }
  ],
  "problems": [],
