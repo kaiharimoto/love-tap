@@ -94,6 +94,29 @@ kind can be added later without rework.
   a procedural noise overlay is a failure of the entire visual concept. If a surface reads as an
   approximation of paper rather than as a photograph of real paper, it is wrong.
 
+## Two rows, one score, and what `blocking` means
+
+Row 04 is read twice: once from the artifacts by the coherence critic and once from the source by
+the code critic. `tools/score.py` folds the code reading into coherence and takes **the lower of
+the two**, for the same reason it takes the lower of critic and builder — a row cannot be talked up
+by whichever reader liked it more. Neither critic needs to know what the other said; the rule is
+here so that nobody has to guess at it afterwards.
+
+`blocking` is the severity that caps a category at its floor. It is not a synonym for "bad": a
+serious finding is a serious finding. If your row does **not** meet its floor, say in your verdict
+which finding is the one holding it there, and mark that finding `blocking`. A review in which
+three rows fail their floors and not one finding is marked blocking — which is what the last cycle
+produced — leaves the arithmetic and the vocabulary disagreeing, and a builder cannot tell from it
+what would have to change for the row to pass.
+
+## The recipe that made an artifact
+
+`evidence/scenes/*.json` is the script each clip and still was shot to: the steps, in order, with
+the app's clock stepped between them. It is not one of the artifacts and it is not a claim about
+the build — it is the framing. Reading it is how you tell a fault in the app from a fault in how
+the picture was taken, and the last cycle's review filed at least one of the second kind as the
+first.
+
 ## What a critic returns
 
 A JSON object written to `evidence/critics/<cycle>_<name>.json`:

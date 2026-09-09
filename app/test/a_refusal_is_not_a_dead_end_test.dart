@@ -69,7 +69,9 @@ void main() {
         reason: 'the menu offers ${S.reply}, ${S.react}, ${S.edit} and ${S.delete}, and none of '
             'those sends it');
 
-    await tester.tap(find.text(S.sendAgain).first);
+    // The menu is a sheet over the thread, so the margin's copy is behind it now and the one that
+    // can be tapped is the menu's. Both are asserted above; this taps the one on top.
+    await tester.tap(find.text(S.sendAgain).last);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
     expect(scope.spine.refused, isEmpty, reason: 'the mark stayed on the row');

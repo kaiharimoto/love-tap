@@ -55,7 +55,7 @@ thing before it reads as a symbol.
 | `wish_you_were_here` | Ache | wish you were here | `obj_ticket` — a torn cinema ticket | 250@180 off400 250@120 off400 250@70 off400 250@40 | `snd_wish` four fading turns | `#8a6a4a` |
 | `long_day` | Ache | long day | `obj_window` — a rainy window doodle | 800@100 off300 800@60 | `snd_longday` two long slow breaths | `#3a3a3c` |
 | `here` | Shelter | here | `obj_boat` — a paper boat | 400@140 off400 400@140 off400 400@140 | `snd_here` three even smooths | `#4a4a4c` |
-| `breathe` | Shelter | breathe | `obj_blanket_fold` — a blanket-folded sheet | 500@60 700@130 off900 1400@90 | `snd_breathe` in, out | `#4a4a4c` |
+| `breathe` | Shelter | breathe | `obj_blanket_fold` — a blanket-folded sheet | 1200@110 off800 500@110 | `snd_breathe` in, out | `#4a4a4c` |
 | `its_okay` | Shelter | it's okay | `obj_plaster` — a plaster strip | 200@160 off200 200@160 off200 200@160 off200 200@160 | `snd_okay` four gentle pats | `#c9a98a` |
 | `steady` | Shelter | steady | `obj_stone` — a smooth stone | 300@180 off300 300@180 off300 300@180 off300 300@180 off300 300@180 | `snd_steady` five slow taps | `#6d6d70` |
 | `make_you_tea` | Shelter | i'll make you tea | `obj_mug` — a mug with steam | 100@120 off100 100@120 off100 500@150 | `snd_tea` two clinks, a pour | `#8b6b4a` |
@@ -65,15 +65,15 @@ thing before it reads as a symbol.
 | `catch` | Mischief | catch | `obj_plane` — a paper plane | 40@120 off30 40@160 off30 40@200 off30 40@240 off30 120@255 | `snd_catch` rising flutter, a land | `#a8322b` |
 | `pick_one` | Mischief | pick one | `obj_fortune_teller` — a paper fortune teller | 50@180 off120 ×6 | `snd_pick` six folds | `#e0a8b8` |
 | `snap` | Mischief | snap | `obj_rubber_band` — a rubber band | 20@255 off40 60@255 off400 20@180 | `snd_snap` stretch, snap, drop | `#c98a5a` |
-| `stuck_with_me` | Mischief | stuck with me | `obj_staple_chain` — a chain of staples | 30@220 off30 ×8 | `snd_stuck` eight staple clicks | `#7a7a7e` |
-| `overwhelmed` | Static | overwhelmed | `obj_crumple_ball` — a crumpled ball | (25@255 off25 25@200 off25) ×5 | `snd_overwhelmed` continuous crumple | `#141a2e` |
+| `stuck_with_me` | Mischief | stuck with me | `obj_staple_chain` — a chain of staples | 40@200 off60 40@200 off60 1200@150 | `snd_stuck` eight staple clicks | `#7a7a7e` |
+| `overwhelmed` | Static | overwhelmed | `obj_crumple_ball` — a crumpled ball | (18@255 off14) ×14 | `snd_overwhelmed` continuous crumple | `#141a2e` |
 | `ugh` | Static | ugh | `obj_scribble` — a scribbled-out line | 180@255 off60 180@255 off60 180@255 | `snd_ugh` three hard scratches | `#141a2e` |
 | `snapped` | Static | snapped | `obj_snapped_pencil` — a snapped pencil | 15@255 off15 15@255 off15 15@255 off300 500@255 | `snd_snapped` three cracks, a long scrape | `#3a3a3c` |
 | `tangled` | Static | tangled | `obj_knot` — a knot of thread | 40@180 off20 80@220 off20 40@180 off20 120@255 off20 40@180 off20 80@220 | `snd_tangled` uneven thread pulls | `#6b5a3e` |
 | `grey` | Static | grey | `obj_pencil_smudge` — a graphite smudge on a scrap | (60@70 off60) ×8 | `snd_grey` faint patter | `#8a8a8e` |
 | `not_okay` | Static | not okay | `obj_torn_corner` — a torn-off corner | 400@255 off100 40@255 off100 40@255 off100 40@255 | `snd_notokay` one tear, three taps | `#141a2e` |
 | `did_it` | Sparkle | did it | `obj_cork` — a popped cork on its side | 40@120 off60 40@170 off60 40@220 off60 200@255 | `snd_didit` three rising taps, a peel | `#c9a23a` |
-| `confetti` | Sparkle | confetti | `obj_confetti` — hole-punch circles, cut squares and strips, some of it curled | 30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150 | `snd_confetti` a handful of punches | `#f2a8c0` |
+| `confetti` | Sparkle | confetti | `obj_confetti` — hole-punch circles, cut squares and strips, some of it curled | 20@140 off90 20@200 off40 20@120 off150 20@230 off60 20@160 | `snd_confetti` a handful of punches | `#f2a8c0` |
 | `yes` | Sparkle | yes | `obj_bunting` — three flags of bunting on a thread | 60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255 | `snd_yes` rising, then two bursts | `#a8322b` |
 | `crown` | Sparkle | paper hat | `obj_party_hat` — a tissue hat out of a cracker, on its side | 100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255 | `snd_crown` four rising folds, a flourish | `#f4ea6a` |
 | `treat` | Sparkle | treat | `obj_ribbon` — a curled ribbon | 50@200 off80 50@200 off80 300@150 off80 50@255 | `snd_treat` two snips, a curl, a tap | `#f2a8c0` |

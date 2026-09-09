@@ -20,6 +20,7 @@ import '../../scope.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
 import '../../thread/renderers.dart';
+import 'blob_widgets.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key, this.initialQuery = '', required this.onDone});
@@ -351,7 +352,29 @@ class _Hit extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _Marked(text: summaryOf(e, me: me), query: query, by: e.author),
+              // A search filtered to photographs that shows no photograph is a list of sentences
+              // about pictures. Three rows of it read "you sent a photograph — Eight in the
+              // morning." one under the other with nothing to tell them apart. The print goes on
+              // the row, small, at the size a contact sheet is.
+              if (_thumbOf(e) case final hash?) ...[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRect(
+                      child: SizedBox(
+                        width: 54,
+                        height: 40,
+                        child: BlobImage(hash: hash, cacheWidth: 162, quiet: true),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _Marked(text: summaryOf(e, me: me), query: query, by: e.author),
+                    ),
+                  ],
+                ),
+              ] else
+                _Marked(text: summaryOf(e, me: me), query: query, by: e.author),
               const SizedBox(height: 3),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -378,6 +401,21 @@ class _Hit extends StatelessWidget {
 }
 
 /// The line, with the words you were looking for gone over in highlighter.
+/// The blob a hit can show as a print: a photograph's own, a video's poster frame. Everything
+/// else — talking, writing, a feeling, a day that matters — has nothing to show and shows nothing.
+String? _thumbOf(Event e) {
+  final p = e.payload;
+  if (e.type == 'photo') {
+    final h = p['blob'] as String?;
+    return (h == null || h.isEmpty) ? null : h;
+  }
+  if (e.type == 'video') {
+    final h = p['poster_blob'] as String?;
+    return (h == null || h.isEmpty) ? null : h;
+  }
+  return null;
+}
+
 class _Marked extends StatelessWidget {
   const _Marked({required this.text, required this.query, required this.by});
   final String text;

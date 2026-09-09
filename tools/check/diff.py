@@ -100,6 +100,15 @@ def _standing_reason(name):
     return _STANDING.get(name) or _STANDING.get(name.rsplit(".", 1)[0])
 
 
+def _written(path):
+    import datetime as dt
+    try:
+        return dt.datetime.fromtimestamp(os.path.getmtime(path), dt.timezone.utc).strftime(
+            "%Y-%m-%dT%H:%M:%SZ")
+    except OSError:
+        return None
+
+
 def compare(name, scratch):
     now = os.path.join(EVIDENCE, name)
     was = os.path.join(PREVIOUS, name)
@@ -117,7 +126,9 @@ def compare(name, scratch):
 
     if digest(now) == digest(was):
         return {"artifact": name, "label": "unchanged", "ssim": 1.0, "judgement": None,
-                "sha": digest(now), "why": "byte for byte the same file"}
+                "sha": digest(now), "previous_sha": digest(was),
+            "previous_written": _written(was),
+                "previous_written": _written(was), "why": "byte for byte the same file"}
 
     a_path, b_path = now, was
     if name.endswith(".mp4"):
@@ -132,6 +143,7 @@ def compare(name, scratch):
     label = "unchanged" if value >= UNCHANGED_AT else "changed"
     return {"artifact": name, "label": label, "ssim": value, "judgement": None,
             "sha": digest(now), "previous_sha": digest(was),
+            "previous_written": _written(was),
             # The sentence says what happened, not what would have happened in the other case.
             # It used to read "at or above it, nothing a person would see has moved" on artifacts
             # that were *below* it — explaining the case that did not occur, on the two rows a
@@ -170,7 +182,19 @@ def main():
 
     out = {
         "commit": head(),
-        "baseline": {"dir": "evidence/.previous", "captured_at": baseline_at},
+        "baseline": {
+            "dir": "evidence/.previous",
+            "captured_at": baseline_at,
+            # Said plainly, because a reader found it out the hard way: with --rotate this same run
+            # then copies the new capture into that directory, so by the time anybody opens
+            # DIFF.json the files it measured against are gone and every number in it looks
+            # unreproducible. Each row carries `previous_sha` and `previous_written` for the file
+            # it actually compared with, which is what identifies it after the rotation.
+            "note": "the numbers below were measured against the capture that was in this "
+                    "directory when the run started; if the run rotated, the directory now holds "
+                    "this capture instead. Each row names the hash and the time of the file it "
+                    "was measured against.",
+        },
         "unchanged_at": UNCHANGED_AT,
         "labels": "new, gone, unchanged, changed, absent — all measured. `absent` is an artifact "
                   "that is not here and has a standing reason in evidence/WHY_MISSING.json, which "

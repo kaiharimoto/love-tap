@@ -238,7 +238,12 @@ class _CornerPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final curl = 0.35 + 0.65 * t;
+    // At rest the turned-up corner was 35 per cent of its box — twenty-six logical pixels of
+    // triangle, which an emotional critic measured at 3.5 grey levels of contrast against the
+    // sheet it lies on and could not find at all over the viewer's dark ground (93.3 inside its
+    // own footprint against 96.0 just outside). It is the one gesture the whole emotional layer
+    // is reached by; it has to be visible on both grounds.
+    final curl = 0.5 + 0.5 * t;
     final w = size.width * curl;
     final h = size.height * curl;
     // The two sides of one sheet: the back of the paper, which is where the light is not, and the
@@ -258,13 +263,23 @@ class _CornerPainter extends CustomPainter {
       ..close();
     canvas.drawPath(path, under);
     canvas.drawPath(path, shade);
-    // the crease
+    // The crease, and a lit edge just inside it. The dark line alone disappears against anything
+    // dark — a photograph open in the viewer, the desk at dusk — and the pale one alone disappears
+    // against paper. Together the fold has an edge on any ground, which is what a real fold has:
+    // one side of it is in the light.
     canvas.drawLine(
       Offset(size.width - w, size.height),
       Offset(size.width, size.height - h),
       Paint()
         ..color = Pen.margin.withValues(alpha: 0.35)
         ..strokeWidth = 1.0,
+    );
+    canvas.drawLine(
+      Offset(size.width - w + 1.4, size.height),
+      Offset(size.width, size.height - h + 1.4),
+      Paint()
+        ..color = const Color(0xFFF6F1E6).withValues(alpha: 0.55)
+        ..strokeWidth = 1.2,
     );
     if (t > 0.05) {
       final lift = Path()
