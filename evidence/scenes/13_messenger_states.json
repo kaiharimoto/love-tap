@@ -75,6 +75,10 @@
    "ms": 500
   },
   {
+   "do": "scrollTo",
+   "arg": "end"
+  },
+  {
    "do": "far",
    "arg": "typing on"
   },
@@ -82,8 +86,8 @@
    "do": "awaitView",
    "key": "partner_typing",
    "value": true,
-   "timeout": 15000,
-   "settle": 250
+   "timeout": 20000,
+   "settle": 150
   },
   {
    "do": "slowSend",
@@ -91,21 +95,9 @@
    "ms": 20000
   },
   {
-   "do": "wait",
-   "ms": 300
-  },
-  {
-   "do": "scrollTo",
-   "arg": "end"
-  },
-  {
-   "do": "wait",
-   "ms": 400
-  },
-  {
    "do": "shot",
    "out": "evidence/13_messenger_states.png",
-   "settle": 300
+   "settle": 200
   },
   {
    "do": "report",

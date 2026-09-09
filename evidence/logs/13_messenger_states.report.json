@@ -17,75 +17,77 @@
    "read_marker": 1
   },
   "delivery": {
-   "0001MCJ1M0YWHZ0WP8GE4M7T93": {
-    "state": "sending",
-    "says": "going"
+   "0001MCJ1M0FWQQ54RXEEMR1128": {
+    "state": "sent",
+    "says": "sent"
    },
-   "0001MCJ1M0YWHZ0WP8GE4M7T95": {
-    "state": "sending",
-    "says": "going"
+   "0001MCJ1M0FWQQ54RXEEMR112C": {
+    "state": "sent",
+    "says": "sent"
    },
-   "0001MCJ1M0YWHZ0WP8GE4M7T99": {
-    "state": "sending",
-    "says": "going"
+   "0001MCJ1M0FWQQ54RXEEMR112D": {
+    "state": "sent",
+    "says": "sent"
    },
-   "0001MCJ1M0YWHZ0WP8GE4M7T9A": {
-    "state": "sending",
-    "says": "going"
+   "0001MCJ1M0FWQQ54RXEEMR1126": {
+    "state": "refused",
+    "says": "it would not go"
    },
-   "0001MCJ1M0YWHZ0WP8GE4M7T9B": {
+   "0001MCJ1M0FWQQ54RXEEMR112G": {
     "state": "sending",
     "says": "going"
    }
   },
   "states_on_the_glass": {
-   "going": 5
+   "sent": 3,
+   "it would not go": 1,
+   "going": 1
   },
   "reactions": {
    "0001M59VY0YA13H9M86HTA6XNP": 1
   },
   "edited": [
-   "0001MCJ1M0YWHZ0WP8GE4M7T95"
+   "0001MCJ1M0FWQQ54RXEEMR1128"
   ],
   "taken_back": [
-   "0001MCJ1M0YWHZ0WP8GE4M7T94"
+   "0001MCJ1M0FWQQ54RXEEMR1127"
   ]
  },
  "visible": [
   "0001M59VY0YA13H9M86HTA6XNP",
-  "0001MCJ1M0YWHZ0WP8GE4M7T93",
-  "0001MCJ1M0YWHZ0WP8GE4M7T94",
-  "0001MCJ1M0YWHZ0WP8GE4M7T95",
-  "0001MCJ1M0YWHZ0WP8GE4M7T99",
-  "0001MCJ1M0YWHZ0WP8GE4M7T9A",
-  "0001MCJ1M0YWHZ0WP8GE4M7T9B"
+  "0001MCJ1M0FWQQ54RXEEMR1127",
+  "0001MCJ1M0FWQQ54RXEEMR1128",
+  "0001MCJ1M0FWQQ54RXEEMR112C",
+  "0001MCJ1M0FWQQ54RXEEMR112D",
+  "0001MCJ1M0FWQQ54RXEEMR1126",
+  "0001MCJ1M0FWQQ54RXEEMR112G"
  ],
  "paper": [
   "0001M59VY0YA13H9M86HTA6XNP",
-  "0001MCJ1M0YWHZ0WP8GE4M7T93",
-  "0001MCJ1M0YWHZ0WP8GE4M7T94",
-  "0001MCJ1M0YWHZ0WP8GE4M7T95",
-  "0001MCJ1M0YWHZ0WP8GE4M7T99",
-  "0001MCJ1M0YWHZ0WP8GE4M7T9A",
-  "0001MCJ1M0YWHZ0WP8GE4M7T9B"
+  "0001MCJ1M0FWQQ54RXEEMR1127",
+  "0001MCJ1M0FWQQ54RXEEMR1128",
+  "0001MCJ1M0FWQQ54RXEEMR112C",
+  "0001MCJ1M0FWQQ54RXEEMR112D",
+  "0001MCJ1M0FWQQ54RXEEMR1126",
+  "0001MCJ1M0FWQQ54RXEEMR112G"
  ],
  "tears": {
   "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-  "0001MCJ1M0YWHZ0WP8GE4M7T93": "tear_034",
-  "0001MCJ1M0YWHZ0WP8GE4M7T94": "tear_031",
-  "0001MCJ1M0YWHZ0WP8GE4M7T95": "tear_020",
-  "0001MCJ1M0YWHZ0WP8GE4M7T99": "tear_023",
-  "0001MCJ1M0YWHZ0WP8GE4M7T9A": "tear_009",
-  "0001MCJ1M0YWHZ0WP8GE4M7T9B": "tear_033"
+  "0001MCJ1M0FWQQ54RXEEMR1127": "tear_019",
+  "0001MCJ1M0FWQQ54RXEEMR1128": "tear_042",
+  "0001MCJ1M0FWQQ54RXEEMR112C": "tear_009",
+  "0001MCJ1M0FWQQ54RXEEMR112D": "tear_031",
+  "0001MCJ1M0FWQQ54RXEEMR1126": "tear_048",
+  "0001MCJ1M0FWQQ54RXEEMR112G": "tear_003"
  },
  "stocks": {
   "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-  "0001MCJ1M0YWHZ0WP8GE4M7T93": "lined_03",
-  "0001MCJ1M0YWHZ0WP8GE4M7T94": "looseleaf_04",
-  "0001MCJ1M0YWHZ0WP8GE4M7T95": "looseleaf_02",
-  "0001MCJ1M0YWHZ0WP8GE4M7T99": "lined_03",
-  "0001MCJ1M0YWHZ0WP8GE4M7T9A": "lined_01",
-  "0001MCJ1M0YWHZ0WP8GE4M7T9B": "looseleaf_03"
+  "0001MCJ1M0FWQQ54RXEEMR1127": "looseleaf_04",
+  "0001MCJ1M0FWQQ54RXEEMR1128": "legal_01",
+  "0001MCJ1M0FWQQ54RXEEMR112C": "lined_04",
+  "0001MCJ1M0FWQQ54RXEEMR112D": "looseleaf_01",
+  "0001MCJ1M0FWQQ54RXEEMR1126": "lined_03",
+  "0001MCJ1M0FWQQ54RXEEMR112G": "legal_02"
  },
  "scroll": {
   "first": 8068,
@@ -93,9 +95,9 @@
   "of": 8075
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 336,
+ "driven_ms": 368,
  "seed": 20260903,
- "events": 14072,
+ "events": 14075,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -107,31 +109,37 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": null
+  "sequence": "unfold_thirds",
+  "length": 139,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
  },
  "sensation": null,
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 2,
-  "pushed": 0,
-  "refused": 0,
-  "pulled": 1,
+  "rounds": 6,
+  "pushed": 10,
+  "refused": 1,
+  "pulled": 2,
   "blobs_fetched": 0,
   "faults": 0,
-  "pending": 9,
-  "refused_in_the_outbox": 0,
-  "cursor": 14063,
+  "pending": 2,
+  "refused_in_the_outbox": 1,
+  "cursor": 14073,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14063,
-   "our_cursor": 14063,
+   "peer_cursor": 14073,
+   "our_cursor": 14073,
    "last_error": null,
-   "since": "2026-09-09T17:55:05.072Z",
-   "last_contact": "2026-09-09T17:55:40.245Z"
+   "since": "2026-09-09T19:25:37.763Z",
+   "last_contact": "2026-09-09T19:26:44.244Z"
   }
  },
  "ambient": {
