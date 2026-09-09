@@ -75,7 +75,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("files", nargs="*")
     ap.add_argument("--max-ratio", type=float, default=3.6,
-                    help="reported, not gated: see high_frequency() for why")
+                    help="reported for information only; the gate is --min-fine")
     ap.add_argument("--min-fine", type=float, default=1.6,
                     help="the share of spectral power above 35 per cent of Nyquist, as a "
                          "percentage. The desk measures 1.83 with its pores in and 1.23 without "
@@ -87,10 +87,16 @@ def main():
     files = [f for f in files if os.path.exists(f)] or [
         os.path.join(ROOT, "app", "assets", "shell", n) for n in ("desk.webp", "desk_dusk.webp")]
     report = {
+        "gate": "fine_detail_share, against min_fine. The ratio below is reported and not gated: "
+                "an anti-goal critic read a max_ratio of 3.6 beside a measured 5.13 and an ok of "
+                "true as a check contradicting itself, and they were right to. A pore adds to the "
+                "gradient across the grain as much as along it, so anisotropy cannot see the "
+                "difference between painted stripes and visible oak — five renders moved it from "
+                "5.76 to 5.13 while the surface changed completely.",
         "tile": 128,
         "how": "mean absolute first difference inside 128 px tiles, column to column (across the "
                "grain) and row to row (along it), median over the tiles",
-        "max_ratio": a.max_ratio,
+        "ratio_reported_not_gated": a.max_ratio,
         "why": "a board with only rings on it is a comb. Vessels and rays are what happens along "
                "the grain, and without them the surface reads as stripes rather than as a cut "
                "through fibre.",

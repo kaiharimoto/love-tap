@@ -75,6 +75,13 @@ class SyncEngine {
       return true;
     } on TransportException catch (e) {
       _log('${e.offline ? 'offline' : 'error'}: ${e.message}');
+      // A round the other phone refused is a fault, and it was not being counted. A messenger
+      // critic found `401 GET /v1/events` in two scene logs while the same runs' records read
+      // `faults: 0, last_error: null, connected` — the wire and the report disagreeing about the
+      // same second. The round is retried and usually succeeds, which is why nobody noticed; a
+      // record that says nothing went wrong when something did is worse than the fault.
+      faults += 1;
+      lastFault = '${e.status ?? ''} ${e.message}'.trim();
       return false;
     }
   }
@@ -181,6 +188,13 @@ class SyncEngine {
         'pending': spine.pending.length,
         'refused_in_the_outbox': spine.refused.length,
         'cursor': spine.cursor,
+        // The cursor is the highest seq with no gap under it; `events` in the region report counts
+        // what is held *and* what is still in the outbox with no seq yet. They differ by exactly
+        // the pending count, and a coherence critic read five reports where they differed and
+        // asserted an identity that does not hold. Said here so a reader can check it rather than
+        // assume it.
+        'cursor_is': 'the highest seq with nothing missing under it; events minus cursor is '
+            'whatever is still in the outbox',
         'link': transport.current.toJson(),
       };
 }

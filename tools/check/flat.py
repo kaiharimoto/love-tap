@@ -82,6 +82,13 @@ def main():
     files = a.files or sorted(glob.glob(os.path.join(EVIDENCE, "*.png")))
     report = {
         "box": a.box, "pale": a.pale, "floor": a.floor,
+        "known_false_positive": "the sky of the photograph open in 14_media_viewer. It is pale, "
+                "warm enough to pass the colour test, and genuinely flat, and it is content rather "
+                "than a surface this build answers for. An anti-goal critic reproduced these "
+                "numbers and disagreed with that one verdict, correctly. A filter that excluded it "
+                "by looking at how busy the surroundings are also excluded every real slab — a "
+                "pale card beside a torn note has exactly the same neighbourhood — so it is named "
+                "here rather than hidden by a test that costs more than it saves.",
         "note": "a pale window flatter than the floor is a flat fill standing in for paper. The "
                 "floor is measured: over a full screen of paper the flattest real 80 px window "
                 "reads 4.58 and the median 33.6, so 2.0 is well under anything the material makes.",
