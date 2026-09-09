@@ -50,6 +50,11 @@
   {
    "do": "flingLog",
    "out": "evidence/logs/11_chat_scroll.fling.json"
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/11_chat_scroll.report.json",
+   "at": "11_chat_scroll"
   }
  ]
 }
