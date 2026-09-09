@@ -1,6 +1,55 @@
 {
  "permission": "granted",
- "records": [],
+ "records": [
+  {
+   "scope": "http://127.0.0.1:8796/push/",
+   "title": "noor",
+   "body": "is holding something out",
+   "tag": "from-them",
+   "silent": false,
+   "data": {
+    "kind": "feeling",
+    "from": "noor",
+    "how": "interrupt"
+   }
+  }
+ ],
+ "shown_by_the_worker": [
+  {
+   "at": 1788913502333,
+   "kind": "feeling",
+   "from": "noor",
+   "how": "interrupt",
+   "title": "noor",
+   "body": "is holding something out",
+   "shown": true,
+   "why": null
+  },
+  {
+   "at": 1788913509850,
+   "kind": "message",
+   "from": "noor",
+   "how": "interrupt",
+   "title": "noor",
+   "body": "wrote something",
+   "shown": true,
+   "why": null
+  },
+  {
+   "at": 1788913514942,
+   "kind": "feeling",
+   "from": "noor",
+   "how": "interrupt",
+   "title": "noor",
+   "body": "is holding something out",
+   "shown": true,
+   "why": null
+  }
+ ],
+ "settings": {
+  "prefs": null,
+  "words_for_kinds": 14
+ },
  "browser": "chromium",
  "app_open": false,
  "note": "Chromium on a Linux virtual display. WebKit is what the other fourteen scenes are shot in, and under the iPhone-Safari emulation this harness uses it has no Notification and no PushManager — which is what a Safari tab on an iPhone has, since iOS gives the push API only to a home-screen web app; and even without that emulation the permission cannot be granted there. So this is not an iPhone banner, there is no lock screen in evidence, and what an installed iOS web app does with the same call is not shown anywhere in this build."

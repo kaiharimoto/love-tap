@@ -292,6 +292,10 @@ if [ -f evidence/scenes/reception.json ] && wants reception; then
   else
     note_missing "reception" "$(head -1 "$SCRATCH/reception.err" | sed 's/^Error: //' | cut -c1-180)"
   fi
+  # and whether the phone could actually draw what it was told: a browser with no notification
+  # presenter draws nothing, and that is not the same as nothing having arrived.
+  python3 tools/check/reception.py "$LOG/reception.json" \
+    || note_missing "reception" "the worker could not draw what it was told to show; see $LOG/reception.json"
 fi
 
 # ---- the dusk crop: not an artifact, but what the material critic is handed beside the hero ------

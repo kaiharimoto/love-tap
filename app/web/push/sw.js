@@ -50,6 +50,56 @@ function fromTheStore(key) {
   });
 }
 
+// What this phone actually announced, written where the app can read it.
+//
+// A notification is drawn by the browser and a capture cannot photograph one on a machine with no
+// notification presenter: the reception scene delivered three pushes to this worker and the
+// browser's own getNotifications() came back empty, so the evidence said nothing had reached a
+// closed phone when what had happened is that nothing had drawn it. This is the phone's own side
+// of it — what it was asked to show, what it decided, and what it showed — kept as the last twenty
+// arrivals so the harness, and the app, can read back what the pocket said.
+function remember(record) {
+  return new Promise((resolve) => {
+    let open;
+    try {
+      open = indexedDB.open('spine_' + PROFILE);
+    } catch (_) {
+      return resolve();
+    }
+    open.onerror = () => resolve();
+    open.onupgradeneeded = () => { try { open.transaction.abort(); } catch (_) {} };
+    open.onsuccess = () => {
+      const db = open.result;
+      let txn;
+      try {
+        txn = db.transaction('meta', 'readwrite');
+      } catch (_) {
+        db.close();
+        return resolve();
+      }
+      const store = txn.objectStore('meta');
+      const got = store.get('push.shown');
+      got.onerror = () => { db.close(); resolve(); };
+      got.onsuccess = () => {
+        let all = [];
+        try {
+          all = got.result ? JSON.parse(got.result) : [];
+        } catch (_) {
+          all = [];
+        }
+        if (!Array.isArray(all)) all = [];
+        all.push(record);
+        while (all.length > 20) all.shift();
+        try {
+          store.put(JSON.stringify(all), 'push.shown');
+        } catch (_) {}
+        txn.oncomplete = () => { db.close(); resolve(); };
+        txn.onerror = () => { db.close(); resolve(); };
+      };
+    };
+  });
+}
+
 function readPrefs() {
   return fromTheStore('notify.prefs').then((raw) => {
     try {
@@ -107,24 +157,37 @@ self.addEventListener('push', (event) => {
     const how = treatmentFor(prefs, kind, new Date().getHours());
     // off means off: nothing is shown, and nothing is counted anywhere for later either
     if (how === 'off') return;
-    await self.registration.showNotification(from || 'the other phone', {
-      body: said,
-      // one tag, so a second arrival replaces the first instead of stacking into a pile
-      tag: 'from-them',
-      renotify: how === 'interrupt',
-      // Felt, not heard. An arrival used to carry the system's own notification sound, which is
-      // the one sound on the phone that belongs to every other app as well. What the pocket says
-      // is a short rhythm in the app's own hand — the same two-beat the standing line settles on —
-      // and nothing else. Which feeling it was is not in the push and never will be: a push
-      // carries the kind and who sent it, and the feeling plays in full, in its own rhythm and its
-      // own sound, the moment the app is opened.
-      silent: true,
-      vibrate: how === 'interrupt' ? ARRIVAL : undefined,
-      requireInteraction: false,
-      icon: '../icons/Icon-192.png',
-      badge: '../icons/Icon-maskable-192.png',
-      data: { kind: kind, from: from, how: how },
-    });
+    const title = from || 'the other phone';
+    let failed = null;
+    try {
+      await self.registration.showNotification(title, {
+        body: said,
+        // one tag, so a second arrival replaces the first instead of stacking into a pile
+        tag: 'from-them',
+        renotify: how === 'interrupt',
+        // Which feeling it was is not in the push and never will be: a push carries the kind and
+        // who sent it, and the feeling plays in full, in its own rhythm and its own sound, the
+        // moment the app is opened.
+        // Felt, not heard — as far as the platform allows it. `silent: true` means no sound and
+        // no vibration, and a browser refuses outright a silent notification that also carries a
+        // pattern: "Silent notifications must not specify vibration patterns", a TypeError, and
+        // nothing is drawn at all. That is what the reception scene had been recording as three
+        // pushes and no notification. So: one that is meant to interrupt knocks, in the pocket's
+        // own two beats, and takes whatever the platform's channel does about sound with it; one
+        // that is not stays silent and does not knock.
+        silent: how !== 'interrupt',
+        vibrate: how === 'interrupt' ? ARRIVAL : undefined,
+        requireInteraction: false,
+        icon: '../icons/Icon-192.png',
+        badge: '../icons/Icon-maskable-192.png',
+        data: { kind: kind, from: from, how: how },
+      });
+    } catch (e) {
+      // a phone that could not draw it is not a phone that was not told
+      failed = String(e);
+    }
+    await remember({ at: Date.now(), kind: kind, from: from, how: how, title: title, body: said,
+                     shown: failed === null, why: failed });
   })());
 });
 

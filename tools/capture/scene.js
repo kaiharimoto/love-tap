@@ -626,6 +626,57 @@ function ensure(p) {
               }
             }
           } catch (e) { out.records = 'unreadable: ' + e; }
+          // and the phone's own side of it: what the worker was asked to show, what it decided,
+          // and what it showed. The browser draws the notification and a machine with no
+          // notification presenter draws nothing, which is not the same as nothing having
+          // arrived — this is the difference, written by the worker itself.
+          try {
+            const profile = new URL(location.href).searchParams.get('profile') || 'default';
+            out.shown_by_the_worker = await new Promise((resolve) => {
+              const open = indexedDB.open('spine_' + profile);
+              open.onerror = () => resolve('no store');
+              open.onupgradeneeded = () => { try { open.transaction.abort(); } catch (_) {} };
+              open.onsuccess = () => {
+                const db = open.result;
+                let got;
+                try { got = db.transaction('meta', 'readonly').objectStore('meta').get('push.shown'); }
+                catch (e) { db.close(); return resolve('no meta: ' + e); }
+                got.onerror = () => { db.close(); resolve('unreadable'); };
+                got.onsuccess = () => {
+                  db.close();
+                  try { resolve(got.result ? JSON.parse(got.result) : []); } catch (_) { resolve([]); }
+                };
+              };
+            });
+          } catch (e) { out.shown_by_the_worker = 'unreadable: ' + e; }
+          // and what this phone was set to, which is what decides whether it says anything at all
+          try {
+            const profile = new URL(location.href).searchParams.get('profile') || 'default';
+            out.settings = await new Promise((resolve) => {
+              const open = indexedDB.open('spine_' + profile);
+              open.onerror = () => resolve('no store');
+              open.onupgradeneeded = () => { try { open.transaction.abort(); } catch (_) {} };
+              open.onsuccess = () => {
+                const db = open.result;
+                let store;
+                try { store = db.transaction('meta', 'readonly').objectStore('meta'); }
+                catch (e) { db.close(); return resolve('no meta'); }
+                const prefs = store.get('notify.prefs');
+                const words = store.get('push.words');
+                prefs.onsuccess = () => {
+                  words.onsuccess = () => {
+                    db.close();
+                    let p = null, w = null;
+                    try { p = prefs.result ? JSON.parse(prefs.result) : null; } catch (_) {}
+                    try { w = words.result ? JSON.parse(words.result) : null; } catch (_) {}
+                    resolve({ prefs: p, words_for_kinds: w ? Object.keys(w).length : 0 });
+                  };
+                  words.onerror = () => { db.close(); resolve('unreadable'); };
+                };
+                prefs.onerror = () => { db.close(); resolve('unreadable'); };
+              };
+            });
+          } catch (e) { out.settings = 'unreadable: ' + e; }
           return out;
         });
         recs.browser = browserName;

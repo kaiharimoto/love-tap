@@ -9,6 +9,7 @@ import 'ambient/ambient.dart';
 import 'app.dart';
 import 'capture/hooks.dart';
 import 'flags.dart';
+import 'regions/settings/notifications.dart';
 import 'scope.dart';
 import 'material/desk.dart';
 import 'material/ink.dart';
@@ -106,5 +107,14 @@ Future<AppScope> bootstrap() async {
     for (final t in kEventTypes)
       if (t.pushed != null) t.id: t.pushed,
   }));
+  // And what each kind is allowed to do about it. The registry declares a treatment per type and
+  // Settings lets a person change any of them, but nothing wrote the answer down until they did:
+  // `notify.prefs` was absent on a phone nobody had been into Settings on, and the worker reads an
+  // absent preference as `interrupt` — so a type the registry says never announces itself would
+  // have announced itself, and the quiet hours were not in force either. The defaults are the
+  // registry's own treatments, written once, and a person's changes overwrite them.
+  if (await spine.meta('notify.prefs') == null) {
+    await NotificationPrefs.defaults().save(spine);
+  }
   return AppScope(spine: spine, transport: transport, sync: sync, clock: clock, ambient: ambient);
 }
