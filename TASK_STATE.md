@@ -14,45 +14,56 @@ and continue from **Next action**.
 | 5 | 2026-09-05/06 | fresh clone re-bootstrapped; the nineteen root causes behind cycle 2 fixed (below); fold sequence re-rendered; both hands rebuilt; eight objects replaced; paired year-deep capture with every clip distinct frame by frame; cycle 3 critics and score; the first eleven cycle-3 findings fixed | **cycle 3: 64**, no floor met |
 | 6 | 2026-09-06 | the fold camera and the flap direction; the cascade step; the ink plate; object and shadow packed in their own frames; the whole messenger grammar in a picture; one stock per event type; clips at their own frame rate; fourth capture; cycle 4 critics, completeness pass and score; four of its findings fixed | **cycle 4: 68**, no floor met |
 | 7 | 2026-09-06/07 | the contact shadow every piece of paper had been drawing invisibly for four cycles; the window density behind the tab strip; thirty-three objects under the desk lamp; the tear from the event's own sequence; five modules on the desk; fifth capture; cycle 5 critics, completeness pass and score; the blank letter found and fixed | **cycle 5: 69**, no floor met |
+| 9 | 2026-09-08/09 | the pale rule on the wood closed by a six-build bisect (the mask's own antialiased edge); the record read at the shutter; her mood landing rather than swapping; a sheet that waits for its paper; seventh and eighth captures, fifteen of seventeen; cycle 7 critics, completeness pass and score; six of the cycle-7 findings fixed the same night | **cycle 7: 85**, four floors met |
 | 8 | 2026-09-07/08 | the fold's paper and the tooth halo; the module rows given their own bodies; the hero framed by measuring rather than estimating; the fling made a jump per frame; sixth capture; cycle 6 critics, completeness pass and score; the denoiser found behind the four-cycle desk hairline | **cycle 6: 73**, three floors met |
 
 ## Current position
 
-- phase: review (cycle 6 scored at **73/100**, from 69, 68, 64, 55.5, 40; the brief asks 95 with
-  every floor met)
-- rubric: messenger 19/30 (floor 26) · material 15/25 (22) · emotional 17/20 (17, **met**) ·
-  coherence 13/15 (13, **met**) · anti-goal 9/10 (9, **met**).
-- **Three floors are met for the first time in six cycles**, and on all three the critic and the
-  builder agreed to the point. The two that are left are the two the whole build turns on, and
-  both are held down by the critic rather than by my own sheet: messenger 19 against my 24,
-  material 15 against my 20.
-- **Read `evidence/critics/6/completeness.json` before anything else.** It is again the most useful
-  document in the set, and it took two blocking findings apart:
-  - the scroll's 26 build spikes of 916-1462 ms are real but they are **periodic on the wall clock
-    at 20.4 s**, which is the sync engine's twenty-second long poll — not periodic in app time. The
-    capture spends 531 s of wall clock on 4.8 s of app time, so anything periodic in real time is
-    oversampled about 111 times. "Every 0.4 s of scrolling" was an artifact of the harness. What is
-    left underneath it and is worth fixing is that a sync poll costs a second of build.
-  - "a flat image being transformed" (the fold) is **falsified as a mechanism and confirmed as a
-    fault**: the straight edges and the slab shadow are in the Cycles render itself, which is where
-    they have now been fixed.
-  It also names what nobody looked at: `17_setup_pwa.png`, `crops/dusk_pulse.png` — the entire
-  second lighting condition — `logs/hand.json` (which reports a 16.7 per cent twin share where the
-  one hand measurement taken reported 8.9), `webpush.txt`, `strings.json`, the shadow crop and the
-  haptics strip.
-- **A process fault to not repeat: the tree moved under the review.** I started cycle-7 fixes once
-  the six critics had filed, while the completeness pass was still running, and it noticed —
-  `search_page.dart` and `viewer_page.dart` carried fixes for two of the findings it was checking,
-  one quoting the finding in a comment. Nothing is written until the whole review has landed.
-- `SCORE.json` carries one open problem: the coherence critic labelled `15_authored_feeling.mp4`
-  unchanged where the SSIM against the baseline is 0.9389. The measurement is right and the label
-  is wrong; a critic's judgement is not mine to rewrite, so it stands recorded and cycle 7's
-  coherence pass re-makes it against a fresh baseline.
-- branch: `claude/new-session-f95s8n` (sessions 5-8; pushed)
-- transport: local in every report; `evidence/coldstart.json` holds a real two-node tailnet run from
-  the session that had a key. No `TS_AUTHKEY` here and the question may not be asked again.
-- Android: no `/dev/kvm`. 09 and 16 stay missing, and 08 cannot show both devices' screens, all for
-  the one reason measured in `docs/PHONES.md`.
+- phase: build (cycle 7 scored at **85/100**, from 73, 69, 68, 64, 55.5, 40; the brief asks 95
+  with every floor met)
+- rubric: messenger 23/30 (floor 26) · material **22/25 (22, met)** · emotional 18/20 (17, met) ·
+  coherence 13/15 (13, met) · anti-goal 9/10 (9, met).
+- **Four floors of five are met, and material is met for the first time** — it was 15 last cycle.
+  Messenger is the only one left, three points short, and builder and critic agree to the point on
+  every other row.
+- The evidence set is **15 of 17** for the first time: only 09_two_devices.png and
+  16_setup_android.png are missing, both for the one reason this machine cannot argue with.
+
+**Read `evidence/critics/7/completeness.json` before anything else.** It is the most useful
+document in the set again, and this time it found the thing six critics wrote around:
+
+- **`app/web/push/sw.js` sent `silent: true` and `vibrate` in the same call**, which Chromium
+  refuses outright, so every arrival whose treatment is `interrupt` — the default — was dropped
+  inside the push handler and no notification was ever created. Fixed, with the worker now writing
+  down what it was asked, what it decided and whether the platform drew it, and
+  `tools/check/reception.py` failing the capture on an arrival the phone could not draw.
+- **material_truth's handwriting finding is wrong**: the three `t`s it named differ by 3.5-4.8 grey
+  levels after sub-pixel alignment, and two genuinely different TeoHand variants score IoU 0.844
+  against each other, so the 0.80-0.86 it measured cannot separate one outline from two.
+- **Five more are overstated**: the desk is 6 per cent across-grain, not 0.2; the search chip
+  covers thread text in 84 of 300 frames, not 171 or 220; the twin share is 22.4 per cent at IoU
+  0.90 against `logs/hand.json`'s own 0.061 at 0.85, and neither document acknowledges the other;
+  the 26-second cold start is a seeded profile, not the photographed first run.
+- **13's lost typing indicator is the harness, not the build.** A probe on a freshly paired phone
+  notices a typing frame after 261 ms and holds it lit for the twenty seconds it was watched.
+  `awaitView` was polling the whole report four times a second to read one boolean.
+
+### What is still open, and owned
+
+1. **The record covers seven of eighteen event types.** photo, reaction, message_edit,
+   message_delete, read_marker, state_passive, date_event, milestone, passed_on, ping and
+   feeling_authored are never recorded in any scene report, so the picture cannot be checked
+   against the record for any of them.
+2. **No rubric row owns the shared-life modules** — a third of the mission — or the push path,
+   or pairing as a journey, or accessibility. Row 04 asks only whether a *sixth* module could be
+   added.
+3. `logs/hand.json` reports one twin share at one threshold; it should report the curve.
+4. `DIFF.json`'s `label_basis` explains the case that did not happen, and uses a fifth label its
+   own `labels` field does not declare.
+5. The heart-fold object is a heart-emoji silhouette that ships in the bundle and is inside the
+   authoring picker's first thirty.
+6. Nothing on Android; no haptic ever executed; no two devices in one frame; the PWA never
+   measured as an installed home-screen app.
 
 ## What cycle 2 said, and what was done about each
 

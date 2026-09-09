@@ -16,126 +16,40 @@ cycle, score, next, blocked, ask).
 
 ## 0. What is in flight right now
 
-**Cycle 6 is scored: 73/100, from 69, and three floors are met for the first time** — emotional
-17/17, coherence 13/13, anti-goal 9/9, with critic and builder agreeing to the point on all three.
-The two that are left are the two the build turns on: messenger 19 of 30 against a floor of 26, and
-material 15 of 25 against 22, both held down by the critic rather than by my own sheet (24 and 20).
+**Cycle 7 is scored: 85/100, from 73, and four floors of five are met** — material 22/22 for the
+first time (it was 15), emotional 18/17, coherence 13/13, anti-goal 9/9. Messenger is the only one
+short: 23 of 30 against a floor of 26. Builder and critic agree to the point on every row but that
+one.
 
-**Read `evidence/critics/6/completeness.json` first.** It falsified two blocking mechanisms and
-confirmed the faults underneath them — the scroll's build spikes are periodic on the wall clock at
-the sync engine's twenty-second poll rather than in app time, and the fold's straight edges and
-slab shadow are in the Cycles render itself rather than in any transform the app applies.
+The evidence set is **15 of 17**, the first time it has been whole apart from the two that need an
+Android device: every clip passes its own frame check, and `tools/check/hairline.py` reads all ten
+stills and finds zero bright one-row rules on the desk, where nine of ten carried them for five
+cycles.
 
-**Cycle 7's fixes are all in, the renders are done, and the seventh capture is running.**
-Committed and pushed, each with the measurement that says it worked:
+**Read `evidence/critics/7/completeness.json` first.** It found what six critics wrote around —
+`app/web/push/sw.js` sending `silent: true` and a vibration pattern in the same call, which
+Chromium refuses outright, so every arrival marked `interrupt` was dropped inside the push handler.
+It also falsified one serious finding outright (the handwriting one) and cut five more down to
+size, with its own numbers each time.
 
-- the media viewer has a film strip — play and hold marks, a pencil rule with the played part
-  inked in and a tick at the playhead, the times in the margin hand, seek on tap or drag;
-- search chrome went from 66 per cent of the page to 29, with six hits on it instead of three,
-  because a `Slip` takes the room it is given and each of fifteen tabs was taking the whole width;
-  the chosen tab stands proud, is stamped in ink and is underlined;
-- the delivery record uses the words on the paper, and counts only rows that draw a mark;
-- the service worker obeys the treatment and quiet hours a person set, read out of the app's own
-  store, and keeps no per-type table: the words a phone says live in the registry;
-- the whole feeling vocabulary was playing **inside out** on any phone without amplitude control —
-  `createWaveform(long[], int)` reads its first number as a wait and every pattern starts on;
-- the icon on the home screen and on every arrival banner was the Flutter logo, and is now made of
-  the app's own material; the gold star and the crown are gone from the library;
-- two fields carried three names; there is one table now;
-- a voice note in the pile carries what the thread gives it, which also fills the eight tiles that
-  had no ink on them at all;
-- the ink plate: the core of a mark varied by 3.52 grey levels and now varies by 53.7 (biro) and
-  32.3 (pencil), because a pen runs dry across a word rather than only along an outline;
-- a cut card's edge wanders (0.030 px → 0.269 over 536 columns) and its contact shadow varies
-  along its length;
-- the transport stopped announcing the time of day, which was rebuilding every region every twenty
-  seconds;
-- 08 drives its state changes inside a frames run, so a partner-state change is visible happening;
-- the crops the material row is judged on land on writing (23.7 per cent ink, against none).
+**Six of cycle 7's findings were fixed the same night**, each with a test that fails when the fix
+is reverted:
 
-**The five-cycle desk hairline is closed: it was the mask's own edge.** Every earlier explanation
-is wrong and each was wrong by measurement — the desk render (zero one-row spikes at any
-threshold), the baked shadows (same), the denoiser, the shadow's bounding box, the mask's own
-inset, and the one this file used to assert, an unfiltered rotation staircasing the lit edge.
-`ShaderMask` multiplies a tear mask in by drawing a rectangle *the size of the child* in `dstIn`,
-and that rectangle is antialiased: on the row where a piece's box falls between two device pixels
-the blend lands at partial coverage and a fraction of the sheet survives where the tear had erased
-it. The fraction is a third — wood + 0.334 × paper, solved on all three channels at 02_chat y=200,
-x=1200. A bisect in the browser, six builds against a far phone of its own, is what settled it:
-mask shader without mipmaps 29 runs, mask composed at the piece's exact height 29, rotation
-filtered differently 29, lit-fibre overlay removed 29, **mask removed altogether 1**, and with the
-mask rectangle drawn two pixels wider than the piece, **0** — with the torn edge and its contact
-shadow unchanged beside it. `tools/check/hairline.py` measures it on the photographs and
-`capture.sh` runs it, because the test binding cannot draw the fault: 66 piece heights at three
-densities, zero spikes.
-
-**Three render queues ran and are packed**: 112 contact shadows without the denoiser (1 h 43 m),
-the fold sequence at 240 frames (1 h 07 m, packed to 139), and the desk. The fold's own tool
-re-measured where the writing goes on the open sheet.
-
-**The seventh capture was taken and then answered rather than reviewed.** It came back 13 of 17,
-with two clips failing their own frame check, and both causes were in the app:
-
-- 07 jumped +11.6 grey levels of the whole screen between frames 220 and 222 because a feeling
-  landed on a sheet whose tear mask was still decoding, and `MaskedLayer` handed the child back
-  unmasked over the flat stock colour — a pale grey slab with square corners and no shadow, which
-  is the shape the anti-goal names, shipped inside an artifact. A mask still decoding is not a
-  missing mask: a piece keeps its room and paints nothing (shadow included) until its paper is
-  there, and falls back the old way only if the mask never comes.
-- 08 had 61 frames identical to the one before them, all in the run named for the thing the clip
-  is named for: their sheet swapped between two frames. It lands now, from a little above, over
-  the sheet it replaces, which stays on the desk until it is covered.
-- the year told the app its clips were 7–12 seconds long when every render is 2.5, and four voice
-  notes were out by 20–40 seconds; 20 payloads corrected and `seed/tools/validate.py` fails on the
-  next drift.
-
-None of that was in the build the artifacts came from, so **the set is being re-captured whole**
-rather than one scene re-shot into it — mixing builds is what cycle 6 was rightly marked down for.
-
-**What is left in cycle 7**: read the re-capture, write `evidence/critics/7/builder.json` from the
-sheet *before* any critic runs, `bash tools/critics.sh hide 7`, the six critics and the
-completeness pass, `show 7`, `python3 tools/score.py --cycle 7`, docs, push.
-
-**Known and not yet closed**: the hand still repeats (8.9 per cent of marks have a near-twin at
-0.99 by the critic's method, 16.7 by the app's own log) — the fix is more variants per glyph and a
-font rebuild; the desk's anisotropy is 5.18 against paper's 0.63 and I do not think that comparison
-is a defect to close, for the reason on the sheet; 09 and 16 need an Android device.
-
-**A process fault not to repeat:** the tree moved under the review. Cycle-7 fixes went in once the
-six critics had filed while the completeness pass was still running, and it noticed. Nothing is
-written until the whole review has landed.
-
-**What was fixed in this session and is in the captured evidence:**
-
-- The fling is a jump, not an animation. A frame of the scroll clip used to be a one-millisecond
-  animation of the scroller, and an animation moves on its ticker — which is stepped by the
-  browser's frame timestamp rather than by the driven clock, so two frames the clock pumped inside
-  one step could carry the same timestamp and the thread did not move on a frame it was told to.
-  Held frames went 3, 5, 6, 13 of 300 across four passes while I made the harness more patient, and
-  the patience was not the fix. The pixels are set on the list's own scroll position inside the
-  tick now. **300 frames, zero held**, every frame moved (47.5 logical pixels at the most, 10.4 at
-  the least), and the frame timings say the animation had been costing more than the held frames:
-  **build p95 1050 ms -> 54**, which is the number rubric row 01 calls scroll jank.
-- The hero is framed by measuring. It used to estimate a row's height from how much writing was on
-  it and framed six notes, then seven, against a standard of eight. It goes to a stretch now, lets
-  it lay out, counts the paper that actually landed and keeps the best framing it has seen — and
-  three things fell out of doing that: the sheet you write on is a sibling *below* the list rather
-  than a layer over it (a row's worth of room was being thrown away), asking for a voice note and a
-  reaction found six places in a year because it read that as one row being both (48 now), and
-  `tears.py` counted every visible row although a tear id is computed for rows that draw no torn
-  edge at all. **Eight rows on the glass, all eight paper, eight distinct tears.**
-
-Both are guarded by tests that fail on the old code: `app/test/a_fling_is_a_scroll_test.dart` and
-`app/test/the_hero_holds_eight_notes_test.dart`. The second one loads the real year through the
-real `SeedLoader`, loads the three real faces with `FontLoader` (a widget test lays text out in
-Ahem otherwise, and Ahem's metrics change the answer), and builds the app's own `Shell` — so it
-measures the room the thread actually has rather than a guess at the chrome.
-
-**Named and not fixed, for the next cycle:** paper is rendered as WebP at Blender's default quality
-92 before it is packed, so every material number in the build is measured against an already-lossy
-ceiling. The packer's own second pass is gone; the render's is not. That is twenty-seven stocks at
-about four minutes each plus the dusk half, and it has to land before a capture rather than between
-two.
+1. **A piece draws its tear, it does not bake it.** `SlicedMasks.at` composed a nine-patch into a
+   picture and called `toImageSync` on the build thread — 16.1 ms on the Dart VM, hundreds of
+   milliseconds in CanvasKit, once per note as the thread scrolled. Drawn straight in with
+   `drawImageNine` in `dstIn`: 1 frame of 148 over 400 ms against 52 of 189, build p95 26 ms
+   against 807, and the raster fell too.
+2. **A refusal is not a dead end.** Send it again — the mark comes off and the event is back in the
+   outbox. An eighteenth reliability capability exercises the whole path over the wire.
+3. **The push that could never be drawn**, above; and `notify.prefs` was never written until
+   somebody opened Settings, so the registry's declared treatments and the quiet hours were in
+   force on no phone.
+4. **`awaitView` asks one question** (`__deskView`) instead of polling the whole report.
+5. **The search mark is off the thread** — it covered thread text in 84 of 300 frames pinned over
+   the list, and cost the hero a whole sheet in a strip of its own, so it sits on the composer.
+6. **One clock and one day label** — a clip had three lengths in one evidence set, and Moments read
+   `teo · ` with the separator drawn and nothing after it.
 
 ## 1. Where the build is
 
