@@ -10,48 +10,48 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1599,
+   "ms": 1338,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 2740
+   "ms": 3717
   },
   {
    "do": "wait",
-   "ms": 1807
+   "ms": 1804
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1101
   },
   {
    "do": "openCorner",
-   "ms": 1884
+   "ms": 2162
   },
   {
    "do": "frames",
-   "ms": 32397
+   "ms": 29188
   },
   {
-   "at": 43631,
+   "at": 41496,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 21
+   "ms": 6
   },
   {
    "do": "step",
-   "ms": 952
+   "ms": 979
   },
   {
    "do": "frames",
-   "ms": 38011
+   "ms": 35227
   },
   {
-   "at": 82599,
+   "at": 77708,
    "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
   },
   {
@@ -60,95 +60,95 @@
   },
   {
    "do": "step",
-   "ms": 973
+   "ms": 930
   },
   {
    "do": "frames",
-   "ms": 38044
+   "ms": 33192
   },
   {
-   "at": 121623,
+   "at": 112624,
    "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 6
+   "ms": 795
   },
   {
    "do": "step",
-   "ms": 1887
+   "ms": 1152
   },
   {
    "do": "frames",
-   "ms": 35956
+   "ms": 33441
   },
   {
    "do": "sendFeeling",
-   "ms": 7190
+   "ms": 7001
   },
   {
    "do": "frames",
-   "ms": 221854
+   "ms": 170115
   },
   {
    "do": "goTo",
-   "ms": 12364
+   "ms": 5420
   },
   {
    "do": "step",
-   "ms": 2466
+   "ms": 3279
   },
   {
    "do": "openCorner",
-   "ms": 2168
+   "ms": 3738
   },
   {
    "do": "frames",
-   "ms": 40001
+   "ms": 37194
   },
   {
    "do": "openCorner",
-   "ms": 2240
+   "ms": 1529
   },
   {
    "do": "step",
-   "ms": 772
+   "ms": 813
   },
   {
    "do": "far",
-   "ms": 554
+   "ms": 838
   },
   {
    "do": "awaitArrival",
-   "ms": 2502
+   "ms": 2212
   },
   {
    "do": "frames",
-   "ms": 302068
+   "ms": 245075
   },
   {
    "do": "goTo",
-   "ms": 4001
+   "ms": 5773
   },
   {
    "do": "step",
-   "ms": 2565
+   "ms": 2104
   },
   {
    "do": "far",
-   "ms": 471
+   "ms": 482
   },
   {
    "do": "awaitArrival",
-   "ms": 2690
+   "ms": 1756
   },
   {
    "do": "frames",
-   "ms": 305362
+   "ms": 219658
   },
   {
    "do": "report",
-   "ms": 530
+   "ms": 521
   }
  ],
  "shots": [
@@ -209,7 +209,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mttko632"
+     "pwa-mtuec711"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -222,11 +222,12 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 7264,
    "seed": 20260903,
-   "events": 14094,
+   "events": 14092,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
+   "masks_composed": 5,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
@@ -239,7 +240,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-09T04:57:23.033Z",
+    "started_at": "2026-09-09T18:44:24.825Z",
     "pattern": [
      {
       "ms": 150,
@@ -266,7 +267,7 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 357,
+    "rounds": 284,
     "pushed": 3,
     "refused": 0,
     "pulled": 2,
@@ -274,17 +275,17 @@
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14094,
+    "cursor": 14092,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14094,
-     "our_cursor": 14094,
+     "peer_cursor": 14092,
+     "our_cursor": 14092,
      "last_error": null,
-     "since": "2026-09-09T04:44:42.497Z",
-     "last_contact": "2026-09-09T05:02:28.901Z"
+     "since": "2026-09-09T18:33:52.603Z",
+     "last_contact": "2026-09-09T18:48:04.653Z"
     }
    },
    "ambient": {
@@ -298,9 +299,9 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2079,
+ "cold_ms": 2182,
  "load": {
-  "ms": 2079,
+  "ms": 2182,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -317,17 +318,17 @@
  "arrivals": [
   {
    "line": "feeling soup 0.55",
-   "before": 8080,
-   "after": 8081,
+   "before": 8082,
+   "after": 8083,
    "at_frame": 164,
-   "waited_ms": 2101
+   "waited_ms": 1811
   },
   {
    "line": "feeling soup 0.9",
-   "before": 8081,
-   "after": 8082,
+   "before": 8083,
+   "after": 8084,
    "at_frame": 270,
-   "waited_ms": 2290
+   "waited_ms": 1355
   }
  ],
  "problems": [],
