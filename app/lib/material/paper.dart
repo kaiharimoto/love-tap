@@ -886,22 +886,65 @@ class _NinePainter extends CustomPainter {
 /// fraction of a millimetre along its whole length, because the blade meets fibre and not butter.
 /// Deterministic in the piece's own number, so a card is the same card every time it is drawn and
 /// on both phones.
-List<Offset> cutOutline(Size size, int seed, {double amp = 0.55, double nick = 1.6}) {
-  double w(int i, double a) {
-    final h = (seed * 2654435761 + i * 40503) & 0xFFFF;
-    return (h / 0xFFFF - 0.5) * 2 * a;
-  }
+/// Sixteen bits in, sixteen bits out, mixed.
+///
+/// Sixteen and not thirty-two on purpose: on the web an int is a double, and a 32-bit multiply
+/// overflows fifty-three bits of mantissa and rounds. The two phones have to cut the same card,
+/// and one of them is a browser. Every intermediate here stays under 2^31.
+int _mix16(int x) {
+  var h = x & 0xFFFF;
+  h = (h ^ (h >> 8)) & 0xFFFF;
+  h = (h * 0x2C9F) & 0xFFFF;
+  h = (h ^ (h >> 7)) & 0xFFFF;
+  h = (h * 0x5D1B) & 0xFFFF;
+  h = (h ^ (h >> 9)) & 0xFFFF;
+  return h;
+}
 
-  // two runs along each edge, one about a card's width and one about a letter's, so the cut is
-  // neither a ripple nor noise
-  double along(int id, double t, double a) {
-    final p1 = w(70 + id * 3, 3.14), p2 = w(71 + id * 3, 3.14);
-    return a * (0.6 * math.sin(t * 3.7 + p1) + 0.4 * math.sin(t * 11.3 + p2));
+List<Offset> cutOutline(Size size, int seed, {double amp = 2.6, double nick = 1.6}) {
+  // `(seed * 2654435761 + i * 40503) & 0xFFFF` is not a hash: taking the low sixteen bits of a
+  // linear function of i leaves an arithmetic progression mod 65536, which is a sawtooth in i.
+  // Every octave of the wander was therefore built out of a ramp, and the outline self-correlated
+  // 0.54 at lag 294 on a long edge. This mixes.
+  double w(int i, double a) => (_mix16(seed ^ (i * 0x9E37)) / 0xFFFF - 0.5) * 2 * a;
+
+  // How far the cut wanders off the line at [t] along the edge, t in 0..1.
+  //
+  // This was two runs of a sine, one about a card's width and one about a letter's, and the note
+  // under it said that made the cut neither a ripple nor noise. Two sines are two periods however
+  // they are weighted: a material critic measured the 'let it interrupt you' bar's top edge at an
+  // rms of 0.34 px and a peak-to-peak of 2.7 over 1,300 px, which is dead straight with a ripple
+  // in it, and autocorrelated the same shape on the rig's torn edges at 0.50 and 0.72.
+  //
+  // Four octaves of seeded value noise instead, smoothstepped between knots so the outline is
+  // continuous, so no stretch of the edge repeats any other. A guillotine is a straight blade;
+  // what wanders is the paper.
+  double along(int id, double t, double a, int octaves) {
+    var v = 0.0;
+    var weight = 1.0;
+    var total = 0.0;
+    for (var k = 0; k < octaves; k++) {
+      final knots = 3 << k; // 3, 6, 12, 24 ... knots along the edge
+      final x = t * knots;
+      final i = x.floor();
+      final f = x - i;
+      final e = f * f * (3 - 2 * f);
+      final a0 = w(200 + id * 97 + (i % knots), 1.0);
+      final a1 = w(200 + id * 97 + ((i + 1) % knots), 1.0);
+      v += weight * (a0 * (1 - e) + a1 * e);
+      total += weight;
+      // 0.85, not a half: at a half the coarse octaves are the whole edge and the fine wander,
+      // which is the only part that survives a high-pass and so the only part a critic measures,
+      // is a twentieth of a pixel.
+      weight *= 0.85;
+    }
+    return a * v / total;
   }
 
   final l = w(1, amp), t = w(2, amp);
   final r = size.width + w(3, amp), b = size.height + w(4, amp);
   final n = [for (var i = 0; i < 4; i++) nick * (0.5 + (w(10 + i, 1.0) + 1) / 2 * 0.5)];
+  // the fewest points any edge gets; a long one gets one every two logical points
   const steps = 14;
   final out = <Offset>[];
   void run(int id, Offset from, Offset to) {
@@ -909,9 +952,15 @@ List<Offset> cutOutline(Size size, int seed, {double amp = 0.55, double nick = 1
     final len = d.distance;
     if (len <= 0) return;
     final across = Offset(-d.dy / len, d.dx / len);
-    for (var i = 0; i <= steps; i++) {
-      final f = i / steps;
-      out.add(from + d * f + across * along(id, f * 6.28, amp));
+    // As many points and as many octaves as the edge is long. A fixed fourteen described a
+    // 448-point bar with fourteen points, so whatever the wander did between them was drawn as a
+    // straight line; and four octaves put the finest knot 112 points apart, which no high-pass
+    // measurement of a cut edge can see.
+    final n = (len / 2).round().clamp(steps, 260);
+    final octaves = (math.log(len / 4.0) / math.ln2).ceil().clamp(4, 8);
+    for (var i = 0; i <= n; i++) {
+      final f = i / n;
+      out.add(from + d * f + across * along(id, f, amp, octaves));
     }
   }
 

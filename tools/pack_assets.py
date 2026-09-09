@@ -27,7 +27,12 @@ SEED_DST = os.path.join(DST, "seed")
 
 # display sizes: the long side in the app, per family
 SIZES = {
-    "paper": 1800,        # the render's own long side: resizing paper costs tooth
+    # The render's own long side: resizing paper costs tooth, so this is a cap that nothing
+    # should reach rather than a target. It was 1800, which was the size the stocks were rendered
+    # at; they are bigger now (see tools/render_stocks_bigger.sh) because a full-width piece is
+    # 1,356 device pixels across and a 1,288-wide stock had to be enlarged to cover it, which took
+    # the Settings sheet's tooth from 2.52 grey levels to 1.26.
+    "paper": 3500,
     "tears": 1024,        # masks are alpha only
     "objects": 420,       # a feeling object is at most ~140 dp
     "bits": 420,
