@@ -234,6 +234,17 @@ function ensure(p) {
         let got = null;
         while (Date.now() < until) {
           got = await page.evaluate((k) => {
+            // One field, not the whole report. The report is the region's own account of every row
+            // on the glass, and asking for it four times a second made this wait seconds long: the
+            // shutter then opened well after the moment the scene had waited for, and 13's record
+            // said the partner was not writing over a picture in which she was.
+            if (window.__deskView) {
+              try {
+                return JSON.parse(window.__deskView(k));
+              } catch (e) {
+                return null;
+              }
+            }
             const r = window.__deskReport && JSON.parse(window.__deskReport());
             // `video.playing` as well as `partner_typing`: a region reports what it is showing in
             // whatever shape that thing has, and a scene should be able to wait for a thing two

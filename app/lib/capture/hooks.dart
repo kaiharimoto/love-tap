@@ -5,6 +5,7 @@
 // video of a browser trying to keep up. The handles exist only when the build was started with
 // CAPTURE=true, so a real build has nothing to reach.
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart' show ClampingScrollSimulation;
@@ -357,6 +358,37 @@ class CaptureHooks {
   /// Everything the capture log needs: what is on screen and what produced it. The tear and stock
   /// ids are recomputed from the same assignment the renderer used, so tools/check/tear_repeat.py
   /// is checking the frame rather than trusting a note the app left itself.
+  /// One field of what the app is showing, without building the rest of the report.
+  ///
+  /// A scene that waits for something on the glass — the partner writing, a player playing —
+  /// used to poll the whole report every quarter second, and the whole report is the region's own
+  /// account of every row on it. So the wait was measured in seconds, and the shutter opened on a
+  /// moment several of them after the one the scene had waited for: 13's record said the partner
+  /// was not writing because the six-second lapse on a typing frame had run out in between. This
+  /// answers the one question.
+  String view(String key) {
+    final v = switch (key) {
+      'partner_typing' => scope.partnerTyping,
+      'region' => CaptureBus.regionIndex,
+      'link' => scope.link.state.name,
+      'setup_showing' => CaptureBus.setupShowing,
+      _ => _fromTheRegion(key),
+    };
+    return jsonEncode(v);
+  }
+
+  Object? _fromTheRegion(String key) {
+    Object? at = _viewOf(CaptureBus.regionIndex);
+    for (final part in key.split('.')) {
+      if (at is Map && at.containsKey(part)) {
+        at = at[part];
+      } else {
+        return null;
+      }
+    }
+    return at;
+  }
+
   Map<String, dynamic> report() {
     final region = CaptureBus.regionIndex;
     final chat = region == 1 ? (CaptureBus.chatReport?.call() ?? const <String, dynamic>{}) : const <String, dynamic>{};
