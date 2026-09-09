@@ -34,7 +34,7 @@
  ],
  "app_seconds": 6.74,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 4.08353,
+ "mean_change_per_frame": 4.15376,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -54,8 +54,9 @@
  "repeated_fraction": 0.0,
  "longest_still_run": 0,
  "repeated_at": [],
- "brightness_jumps": 0,
- "ok": true,
+ "brightness_jumps": 1,
+ "ok": false,
+ "why": "the light jumps 1 times",
  "strip": "evidence/crops/07_feeling_landing_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/07_feeling_landing/000000.png",

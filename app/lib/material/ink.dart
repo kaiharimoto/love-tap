@@ -52,7 +52,35 @@ const double kInkTileLogicalPx = 46;
 
 double _k(ui.Image plate) => kInkTileLogicalPx / plate.width;
 
+/// The pen's coverage, as the paint a letter is drawn with.
+///
+/// The plate used to be a ShaderMask over the words: the letters drawn into a layer, the plate
+/// multiplied into that layer in dstIn. It gave the same ink and it cost a compositing layer for
+/// every piece of handwriting in the app — and a piece of paper whose subtree needs a layer of its
+/// own cannot have its tear drawn straight into the canvas, so every note in the thread fell back
+/// to baking its mask into an image on the build thread. That is 189 of 789 frames of a scroll
+/// over 400 ms to build, at p95 688, from one widget.
+///
+/// A glyph run is drawn with a Paint like anything else, so the plate can be that Paint's shader:
+/// the pen's colour through a colour filter, the plate's coverage as the alpha. No layer, one draw.
+Paint? inkPaint(String pen, Color colour) {
+  final plate = InkPlates.of(pen);
+  if (plate == null) return null;
+  return Paint()
+    ..shader = ui.ImageShader(
+      plate,
+      TileMode.repeated,
+      TileMode.repeated,
+      (Matrix4.identity()..scaleByDouble(_k(plate), _k(plate), 1, 1)).storage,
+    )
+    // srcIn keeps the plate's coverage and takes the letter's colour: where the pen laid less
+    // down, less of the letter arrives.
+    ..colorFilter = ColorFilter.mode(colour, BlendMode.srcIn);
+}
+
 /// Text with the pen's coverage multiplied into it.
+///
+/// Kept for whatever is not a single run of text in one colour — a widget rather than a style.
 class Inked extends StatelessWidget {
   const Inked({super.key, required this.pen, required this.child});
 

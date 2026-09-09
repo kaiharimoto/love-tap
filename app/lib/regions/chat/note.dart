@@ -260,34 +260,46 @@ class _Margin extends StatelessWidget {
       if (item.writtenEarlier) S.writtenEarlier,
       if (item.edited) S.edited,
     ];
-    return Opacity(
-      opacity: 0.78,
-      // The time, what happened to the note, and how far it got. On a narrow note with all three
-      // to say — a short line that would not go — the row ran thirty-three pixels off the edge of
-      // the paper and the delivery mark was the part that went, which is the one part that must
-      // never go. It wraps onto a second line instead.
-      child: Wrap(
-        alignment: WrapAlignment.start,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 7,
-        runSpacing: 1,
-        children: [
-          Text(words.join(' · '),
-              style: Hands.margin(size: 12), maxLines: 1, overflow: TextOverflow.fade,
-              softWrap: false),
-          if (item.edited) const _EditCaret(),
-          if (mine) _DeliveryMark(delivery: item.delivery, id: item.id),
-        ],
-      ),
+    // Paler ink, not a paler layer.
+    //
+    // This row used to be an Opacity, and an Opacity between zero and one is a compositing layer:
+    // every note that says the time needed one, and a piece whose subtree needs a layer of its own
+    // cannot have its tear drawn straight in — it falls back to baking the mask into an image, on
+    // the build thread, once per note. That is 189 of 789 frames of a scroll costing more than
+    // 400 ms to build, at p95 688. The marginal hand is already a colour; this is the same colour,
+    // lighter, and it costs nothing.
+    const fade = 0.78;
+    final ink = Hands.margin(size: 12);
+    return Wrap(
+      alignment: WrapAlignment.start,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: 7,
+      runSpacing: 1,
+      children: [
+        // The time, what happened to the note, and how far it got. On a narrow note with all three
+        // to say — a short line that would not go — the row ran thirty-three pixels off the edge of
+        // the paper and the delivery mark was the part that went, which is the one part that must
+        // never go. It wraps onto a second line instead.
+        Text(words.join(' · '),
+            style: ink.copyWith(
+                color: (ink.color ?? Pen.margin).withValues(alpha: (ink.color?.a ?? 1.0) * fade)),
+            maxLines: 1,
+            overflow: TextOverflow.fade,
+            softWrap: false),
+        if (item.edited) const _EditCaret(fade: fade),
+        if (mine) _DeliveryMark(delivery: item.delivery, id: item.id, fade: fade),
+      ],
     );
   }
 }
 
 /// The caret a person puts in when they change a word.
 class _EditCaret extends StatelessWidget {
-  const _EditCaret();
+  const _EditCaret({this.fade = 1.0});
+  final double fade;
   @override
-  Widget build(BuildContext context) => Mark.turnback(size: 11, colour: Pen.margin, seed: 3);
+  Widget build(BuildContext context) =>
+      Mark.turnback(size: 11, colour: Pen.margin.withValues(alpha: Pen.margin.a * fade), seed: 3);
 }
 
 /// The word the glass puts on a delivery state.
@@ -313,9 +325,14 @@ String deliverySays(Delivery d) => switch (d) {
 ///   read     one tick and the word, in the ink of the person who read it
 ///   refused  a cross, in red, and the reason on the paper
 class _DeliveryMark extends StatelessWidget {
-  const _DeliveryMark({required this.delivery, required this.id});
+  const _DeliveryMark({required this.delivery, required this.id, this.fade = 1.0});
   final Delivery delivery;
   final String id;
+
+  /// How much of the ink this row is written in. The margin row is paler than the writing, and it
+  /// is paler by being paler ink rather than by sitting under an Opacity — which is a compositing
+  /// layer, and a piece whose subtree needs one cannot have its tear drawn straight in.
+  final double fade;
 
   /// The words and the mark, side by side, never wider than the paper they are on: on a short
   /// note `it would not go ×` is wider than the note itself, and the part that ran off the edge
@@ -340,19 +357,21 @@ class _DeliveryMark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final seed = id.hashCode & 0x7fff;
+    Color pale(Color c) => c.withValues(alpha: c.a * fade);
+    final margin = pale(Pen.margin), ballpoint = pale(Pen.ballpoint), red = pale(Pen.red);
     return switch (delivery) {
-      Delivery.queued => _said(deliverySays(delivery), Mark.clip(size: 12, colour: Pen.margin, seed: seed)),
-      Delivery.sending => _said(deliverySays(delivery), Mark.ticks(size: 12, colour: Pen.margin, seed: seed)),
-      Delivery.sent => _said(deliverySays(delivery), Mark.tick(size: 12, colour: Pen.margin, seed: seed)),
+      Delivery.queued => _said(deliverySays(delivery), Mark.clip(size: 12, colour: margin, seed: seed), ink: margin),
+      Delivery.sending => _said(deliverySays(delivery), Mark.ticks(size: 12, colour: margin, seed: seed), ink: margin),
+      Delivery.sent => _said(deliverySays(delivery), Mark.tick(size: 12, colour: margin, seed: seed), ink: margin),
       Delivery.read => _said(
           deliverySays(delivery),
           Row(mainAxisSize: MainAxisSize.min, children: [
-            Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed),
-            Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed + 1),
+            Mark.tick(size: 12, colour: ballpoint, seed: seed),
+            Mark.tick(size: 12, colour: ballpoint, seed: seed + 1),
           ]),
-          ink: Pen.ballpoint),
+          ink: ballpoint),
       Delivery.refused =>
-        _said(deliverySays(delivery), Mark.cross(size: 12, colour: Pen.red, seed: seed), ink: Pen.red),
+        _said(deliverySays(delivery), Mark.cross(size: 12, colour: red, seed: seed), ink: red),
     };
   }
 }

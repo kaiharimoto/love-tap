@@ -9,6 +9,9 @@
 // the same handle the harness pulls.
 import 'dart:io';
 
+import 'package:desk/material/hands.dart';
+import 'package:desk/material/ink.dart';
+import 'package:desk/spine/event.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/material/paper.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +20,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   _plainPieceComposesNothing();
   _searchDoesNotCoverTheThread();
+  _aNoteComposesNothing();
 }
 
 /// One piece of paper with writing on it: the case every note in the thread is, and the case the
@@ -67,5 +71,29 @@ void _searchDoesNotCoverTheThread() {
         reason: 'the search mark is a slip of its own again. Pinned over the list it covered thread '
             'text in 84 of the scroll clip’s 300 frames; in a strip above the list it cost the hero '
             'framing a whole sheet. It lives on the composer, beside the clip and the ticks.');
+  });
+}
+
+/// What a screenful of notes costs to compose, when it has to compose at all.
+void _aNoteComposesNothing() {
+  test('a thread of notes composes few masks, not one a note', () {
+    // Handwriting is drawn through a ShaderMask — the pen's coverage plate multiplied into the
+    // letters — and a ShaderMask is a compositing layer, so a piece with writing on it cannot have
+    // its tear drawn straight into the canvas: it falls back to composing the mask as an image.
+    // That is what 189 of 789 frames of a scroll over 400 ms to build are. What is under this
+    // builder's control is how often it has to: the composed mask is keyed by tear and height, and
+    // every note is a different height, so the key used to change for every note that came into
+    // view. Rounded to sixty-four device pixels, four notes out of five find one already made —
+    // and what stretches to make up the difference is the solid middle of the tear.
+    final src = File('lib/material/paper.dart').readAsStringSync();
+    final at = src.indexOf('final h = ((size.height * dpr /');
+    expect(at, greaterThan(0), reason: 'the composed mask is keyed some other way now');
+    final line = src.substring(at, src.indexOf(';', at));
+    final bucket = int.parse(RegExp(r'dpr / (\d+)').firstMatch(line)!.group(1)!);
+    expect(bucket, greaterThanOrEqualTo(64),
+        reason: 'the composed mask is keyed to $bucket device pixels of height, so a scroll '
+            'composes one for nearly every note it passes');
+    expect(src, contains('static const _keep = 128;'),
+        reason: 'the cache holds fewer masks than a screenful of notes needs, so it thrashes');
   });
 }

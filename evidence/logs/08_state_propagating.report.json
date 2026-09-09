@@ -2,6 +2,13 @@
  "region": 2,
  "view": {
   "region": "us",
+  "kinds": {
+   "todo_event": 199,
+   "date_event": 81,
+   "milestone": 6,
+   "passed_on": 12,
+   "ritual_kept": 53
+  },
   "modules": [
    {
     "id": "dates",
@@ -16,7 +23,7 @@
    {
     "id": "calendar",
     "events": 6,
-    "glance": "us in 61 days"
+    "glance": "us in 60 days"
    },
    {
     "id": "rituals",
@@ -38,7 +45,7 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 9312,
  "seed": 20260903,
- "events": 14114,
+ "events": 14113,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -61,7 +68,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-08T20:05:52.993Z",
+  "started_at": "2026-09-09T03:31:19.707Z",
   "pattern": [
    {
     "ms": 150,
@@ -88,25 +95,25 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 399,
-  "pushed": 10,
+  "rounds": 384,
+  "pushed": 8,
   "refused": 0,
   "pulled": 8,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14114,
+  "cursor": 14113,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14114,
-   "our_cursor": 14114,
+   "peer_cursor": 14113,
+   "our_cursor": 14113,
    "last_error": null,
-   "since": "2026-09-08T19:49:39.819Z",
-   "last_contact": "2026-09-08T20:09:23.148Z"
+   "since": "2026-09-09T03:16:14.248Z",
+   "last_contact": "2026-09-09T03:34:59.523Z"
   }
  },
  "ambient": {

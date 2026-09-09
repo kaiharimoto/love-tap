@@ -1,189 +1,167 @@
 {
- "commit": "fa62b18",
+ "commit": "8941a8e",
  "baseline": {
   "dir": "evidence/.previous",
   "captured_at": "2026-09-08T20:11:24.708969+00:00"
  },
  "unchanged_at": 0.999,
- "labels": "new, gone, unchanged, changed \u2014 measured. `judgement` (improved or regressed) is the coherence critic's to fill in; SSIM does not know whether a change is an improvement.",
+ "labels": "new, gone, unchanged, changed, absent \u2014 all measured. `absent` is an artifact that is not here and has a standing reason in evidence/WHY_MISSING.json, which is not the same as `gone`: gone means it was in the last capture and is not in this one. `judgement` (improved or regressed) is the coherence critic's to fill in; SSIM does not know whether a change is an improvement.",
  "artifacts": [
   {
    "artifact": "01_pulse.png",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "7856cd3c1d8619b9",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file as evidence/.previous/01_pulse.png.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9701,
+   "judgement": null,
+   "sha": "b4bda2c9fcf9a284",
+   "previous_sha": "7856cd3c1d8619b9",
+   "label_basis": "ssim 0.9701, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "02_chat.png",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "405ed66bd132f5fd",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9851,
+   "judgement": null,
+   "sha": "25a20ce1f4ac519f",
+   "previous_sha": "405ed66bd132f5fd",
+   "label_basis": "ssim 0.9851, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "03_us.png",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "cf96d793125bf81d",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9618,
+   "judgement": null,
+   "sha": "c203a17109577976",
+   "previous_sha": "cf96d793125bf81d",
+   "label_basis": "ssim 0.9618, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "04_moments.png",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "27e5e4078424223e",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9779,
+   "judgement": null,
+   "sha": "f4913a59d992f08e",
+   "previous_sha": "27e5e4078424223e",
+   "label_basis": "ssim 0.9779, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "05_settings.png",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "2d4637e6cdb9d69b",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9744,
+   "judgement": null,
+   "sha": "1f910886ef5bc53c",
+   "previous_sha": "2d4637e6cdb9d69b",
+   "label_basis": "ssim 0.9744, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "06_unfolding.mp4",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "b6b9c19f94562c77",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.7979,
+   "judgement": null,
+   "sha": "27156cfa88579777",
+   "previous_sha": "b6b9c19f94562c77",
+   "label_basis": "ssim 0.7979, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "changed",
-   "ssim": 0.9866,
-   "judgement": "improved",
-   "sha": "db0e78ec53b716c7",
+   "ssim": 0.9615,
+   "judgement": null,
+   "sha": "ec4b9bb367ac77c6",
    "previous_sha": "8321a6f37c82b19c",
-   "label_basis": "ssim 0.9866 against 0.999 \u2014 at or above it, nothing a person would see has moved",
-   "judged_because": "improved \u2014 comparing decoded frames against evidence/.previous/07_feeling_landing.mp4, seven of the eight I sampled differ by a mean of about 1.4 grey levels and one, frame 260, by 26.8 with a quarter of its pixels moving: at that frame the previous clip drew the feeling's name and time under the object's stem ('nuzzle / Thu 3 Sep \u00b7 20:04' crossed by the green stalk) and the new one sets them clear of it, and the note carrying the object is torn on both sides instead of ending in a straight cut.",
-   "judged_by": "coherence critic"
+   "label_basis": "ssim 0.9615, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "08_state_propagating.mp4",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "ebef3dcb90b30a7e",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9599,
+   "judgement": null,
+   "sha": "ea9bc99ae35c431d",
+   "previous_sha": "ebef3dcb90b30a7e",
+   "label_basis": "ssim 0.9599, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": "unchanged",
-   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried.",
-   "judged_because": "unchanged \u2014 absent in this capture and in the previous one, for a standing fact about the machine rather than anything that moved; there is no ssim because there is nothing to compare.",
-   "judged_by": "coherence critic"
+   "judgement": null,
+   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried."
   },
   {
    "artifact": "10_first_run.png",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "0e34447e8d2fb6a5",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9775,
+   "judgement": null,
+   "sha": "4a4a2e75b159c094",
+   "previous_sha": "0e34447e8d2fb6a5",
+   "label_basis": "ssim 0.9775, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "11_chat_scroll.mp4",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "dadddd3120e0bec5",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9636,
+   "judgement": null,
+   "sha": "0d3d060e87224c5f",
+   "previous_sha": "dadddd3120e0bec5",
+   "label_basis": "ssim 0.9636, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "12_search.png",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "8af33ce820b58863",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.6038,
+   "judgement": null,
+   "sha": "eb0f286c928d4ea8",
+   "previous_sha": "8af33ce820b58863",
+   "label_basis": "ssim 0.6038, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "changed",
-   "ssim": 0.7088,
-   "judgement": "improved",
-   "sha": "9431309b6ed338f4",
+   "ssim": 0.7008,
+   "judgement": null,
+   "sha": "c03725381538c1dc",
    "previous_sha": "b7664674bc4a410c",
-   "label_basis": "ssim 0.7088 against 0.999 \u2014 at or above it, nothing a person would see has moved",
-   "judged_because": "improved \u2014 at ssim 0.7088 the top of the thread changed from a torn sheet carrying only 'Thu 3 Sep \u00b7 17:19 read' to one that names the event, 'empty chair / Thu 3 Sep \u00b7 17:19 read', so the feeling is legible as itself in Chat; and the row below the state line is now a folded, unopened note signed 'teo' where it was a plain message, which adds a state to a still whose whole job is to show the messenger's states.",
-   "judged_by": "coherence critic"
+   "label_basis": "ssim 0.7008, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "14_media_viewer.png",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "c6199f7a6e3bb49e",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9723,
+   "judgement": null,
+   "sha": "265bd7e2881973c6",
+   "previous_sha": "c6199f7a6e3bb49e",
+   "label_basis": "ssim 0.9723, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "15_authored_feeling.mp4",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "ae5340df6508a8af",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9515,
+   "judgement": null,
+   "sha": "9077b60072514644",
+   "previous_sha": "ae5340df6508a8af",
+   "label_basis": "ssim 0.9515, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": "unchanged",
-   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got.",
-   "judged_because": "unchanged \u2014 absent in this capture and in the previous one, for the same standing fact about the machine; nothing to compare.",
-   "judged_by": "coherence critic"
+   "judgement": null,
+   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got."
   },
   {
    "artifact": "17_setup_pwa.png",
-   "label": "unchanged",
-   "ssim": 1.0,
-   "judgement": "unchanged",
-   "sha": "34424b9afdde9ef4",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged \u2014 DIFF.json ssim 1.0, byte for byte the same file.",
-   "judged_by": "coherence critic"
+   "label": "changed",
+   "ssim": 0.9275,
+   "judgement": null,
+   "sha": "315594257949a7d5",
+   "previous_sha": "34424b9afdde9ef4",
+   "label_basis": "ssim 0.9275, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   }
  ],
  "counts": {
   "new": 0,
   "gone": 0,
-  "unchanged": 13,
-  "changed": 2,
+  "unchanged": 0,
+  "changed": 15,
   "absent": 2
- },
- "judgements_from": "the coherence critic's report for this cycle"
+ }
 }

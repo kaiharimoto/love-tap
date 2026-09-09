@@ -687,7 +687,7 @@ class _RenderMaskedBox extends RenderProxyBox {
 /// each shape once rather than once a frame.
 class SlicedMasks {
   static final Map<String, ui.Image> _images = {};
-  static const _keep = 64;
+  static const _keep = 128;
 
   /// How many masks have actually been composed into an image since the app started.
   ///
@@ -709,12 +709,16 @@ class SlicedMasks {
     // new mask every frame; and never larger than the mask itself, because upsampling a render is
     // not the same as having rendered it larger
     final w = (size.width * dpr).round().clamp(1, mask.width);
-    // Height to the nearest sixteen device pixels. Every note is a slightly different height, so
-    // an exact key meant a fresh composition for each one as it came into view — a build of about
-    // a second, once every note's height of scrolling, against a median of fourteen milliseconds.
-    // A mask stretched by up to eight device pixels in its middle band is a mask nobody can tell
-    // from the exact one; it is the middle band that stretches, by construction.
-    final h = ((size.height * dpr / 16).round() * 16).clamp(1, mask.height * 4);
+    // Height to the nearest sixty-four device pixels, and what stretches to make up the difference
+    // is the middle band — which is the solid interior of the tear, where stretching is not a
+    // thing anybody can see. The bands that carry the torn edge keep the size they were rendered
+    // at, by construction.
+    //
+    // It was sixteen, and every note in a scroll is a different height: composing one costs 16 ms
+    // on the Dart VM and hundreds of milliseconds in CanvasKit, and a piece whose subtree needs a
+    // compositing layer of its own has to be composed rather than drawn. Sixty-four is a quarter
+    // as many compositions for a stretch nobody can point at.
+    final h = ((size.height * dpr / 64).round() * 64).clamp(1, mask.height * 4);
     final key = '$asset@${w}x$h';
     final have = _images[key];
     if (have != null) return have;

@@ -10,105 +10,105 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1796,
+   "ms": 1442,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3936
+   "ms": 2699
   },
   {
    "do": "wait",
-   "ms": 1804
+   "ms": 1803
   },
   {
    "do": "wait",
-   "ms": 1108
+   "ms": 1102
   },
   {
    "do": "openCorner",
-   "ms": 2522
+   "ms": 1964
   },
   {
    "do": "frames",
-   "ms": 33094
+   "ms": 31323
   },
   {
-   "at": 46448,
+   "at": 43011,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 21
+   "ms": 714
   },
   {
    "do": "step",
-   "ms": 1012
+   "ms": 967
   },
   {
    "do": "frames",
-   "ms": 35762
+   "ms": 35559
   },
   {
-   "at": 84091,
+   "at": 79543,
    "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 869
+   "ms": 4
   },
   {
    "do": "step",
-   "ms": 1096
+   "ms": 868
   },
   {
    "do": "frames",
-   "ms": 35119
+   "ms": 36579
   },
   {
-   "at": 120310,
+   "at": 116994,
    "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 5
+   "ms": 6
   },
   {
    "do": "step",
-   "ms": 1156
+   "ms": 948
   },
   {
    "do": "frames",
-   "ms": 35546
+   "ms": 37162
   },
   {
    "do": "sendFeeling",
-   "ms": 6502
+   "ms": 12036
   },
   {
    "do": "frames",
-   "ms": 168419
+   "ms": 207240
   },
   {
    "do": "goTo",
-   "ms": 4640
+   "ms": 14166
   },
   {
    "do": "step",
-   "ms": 2797
+   "ms": 2484
   },
   {
    "do": "openCorner",
-   "ms": 1480
+   "ms": 1974
   },
   {
    "do": "frames",
-   "ms": 38441
+   "ms": 53435
   },
   {
    "do": "openCorner",
-   "ms": 2287
+   "ms": 2614
   },
   {
    "do": "step",
@@ -120,35 +120,35 @@
   },
   {
    "do": "awaitArrival",
-   "ms": 1297
+   "ms": 3726
   },
   {
    "do": "frames",
-   "ms": 246340
+   "ms": 318317
   },
   {
    "do": "goTo",
-   "ms": 4647
+   "ms": 9170
   },
   {
    "do": "step",
-   "ms": 1861
+   "ms": 5104
   },
   {
    "do": "far",
-   "ms": 428
+   "ms": 2310
   },
   {
    "do": "awaitArrival",
-   "ms": 2771
+   "ms": 3946
   },
   {
    "do": "frames",
-   "ms": 229845
+   "ms": 342438
   },
   {
    "do": "report",
-   "ms": 557
+   "ms": 514
   }
  ],
  "shots": [
@@ -209,7 +209,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtt0wq2v"
+     "pwa-mttgs28u"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -222,7 +222,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 7264,
    "seed": 20260903,
-   "events": 14096,
+   "events": 14097,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -239,7 +239,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-08T19:41:29.250Z",
+    "started_at": "2026-09-09T03:05:51.464Z",
     "pattern": [
      {
       "ms": 150,
@@ -266,25 +266,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 291,
-    "pushed": 3,
+    "rounds": 362,
+    "pushed": 6,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14096,
+    "cursor": 14097,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14096,
-     "our_cursor": 14096,
+     "peer_cursor": 14097,
+     "our_cursor": 14097,
      "last_error": null,
-     "since": "2026-09-08T19:30:52.095Z",
-     "last_contact": "2026-09-08T19:45:19.795Z"
+     "since": "2026-09-09T02:52:41.979Z",
+     "last_contact": "2026-09-09T03:11:34.972Z"
     }
    },
    "ambient": {
@@ -298,9 +298,9 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2167,
+ "cold_ms": 1964,
  "load": {
-  "ms": 2167,
+  "ms": 1964,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -320,14 +320,14 @@
    "before": 8080,
    "after": 8081,
    "at_frame": 164,
-   "waited_ms": 897
+   "waited_ms": 3325
   },
   {
    "line": "feeling soup 0.9",
    "before": 8081,
    "after": 8082,
    "at_frame": 270,
-   "waited_ms": 2369
+   "waited_ms": 3545
   }
  ],
  "problems": [],
