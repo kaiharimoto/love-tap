@@ -75,15 +75,6 @@
    "ms": 500
   },
   {
-   "do": "slowSend",
-   "text": "ok \u2014 leaving now",
-   "ms": 25000
-  },
-  {
-   "do": "wait",
-   "ms": 300
-  },
-  {
    "do": "far",
    "arg": "typing on"
   },
@@ -93,6 +84,15 @@
    "value": true,
    "timeout": 15000,
    "settle": 250
+  },
+  {
+   "do": "slowSend",
+   "text": "ok \u2014 leaving now",
+   "ms": 20000
+  },
+  {
+   "do": "wait",
+   "ms": 300
   },
   {
    "do": "scrollTo",
