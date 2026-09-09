@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5269
+   "ms": 5775
   },
   {
    "do": "wait",
-   "ms": 2308
+   "ms": 2304
   },
   {
    "do": "shot",
-   "ms": 5167
+   "ms": 4297
   },
   {
    "do": "report",
-   "ms": 717
+   "ms": 713
   }
  ],
  "shots": [
@@ -74,6 +74,13 @@
       "ts": 1788455973000
      }
     ],
+    "kinds": {
+     "state_passive": 4120,
+     "state_declared": 1522,
+     "feeling": 910,
+     "feeling_authored": 2,
+     "ping": 13
+    },
     "partner_signals": {
      "charging": false,
      "battery": 72,
@@ -155,7 +162,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-08T18:54:19.122Z",
+     "since": "2026-09-09T02:18:19.238Z",
      "last_contact": null
     }
    },
@@ -170,9 +177,9 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 9756,
+ "cold_ms": 7541,
  "load": {
-  "ms": 9756,
+  "ms": 7541,
   "store": "fresh",
   "profile": null
  },

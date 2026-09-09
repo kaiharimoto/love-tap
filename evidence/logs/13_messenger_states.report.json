@@ -13,20 +13,26 @@
    "state_declared": 1,
    "message": 5
   },
+  "folded_in": {
+   "reaction": 1,
+   "message_edit": 1,
+   "message_delete": 1,
+   "read_marker": 3
+  },
   "delivery": {
    "0001M4GW48FEW3M67XKAZT5051": {
     "state": "read",
     "says": "read"
    },
-   "0001MCJ1M0QPW3T7KEKH1CD1N7": {
+   "0001MCJ1M0257E2XHYJTT1NEBA": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0QPW3T7KEKH1CD1NC": {
+   "0001MCJ1M0257E2XHYJTT1NEBG": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0QPW3T7KEKH1CD1N5": {
+   "0001MCJ1M0257E2XHYJTT1NEB8": {
     "state": "refused",
     "says": "it would not go"
    }
@@ -40,45 +46,45 @@
    "0001M59VY0YA13H9M86HTA6XNP": 1
   },
   "edited": [
-   "0001MCJ1M0QPW3T7KEKH1CD1N7"
+   "0001MCJ1M0257E2XHYJTT1NEBA"
   ],
   "taken_back": [
-   "0001MCJ1M0QPW3T7KEKH1CD1N6"
+   "0001MCJ1M0257E2XHYJTT1NEB9"
   ]
  },
  "visible": [
   "0001M4GW48FEW3M67XKAZT5051",
   "0001M4ZQQ0H0PPVTKMMQEE268D",
   "0001M59VY0YA13H9M86HTA6XNP",
-  "0001MCJ1M0QPW3T7KEKH1CD1N6",
-  "0001MCJ1M0QPW3T7KEKH1CD1N7",
-  "0001MCJ1M0QPW3T7KEKH1CD1NC",
-  "0001MCJ1M0QPW3T7KEKH1CD1N5"
+  "0001MCJ1M0257E2XHYJTT1NEB9",
+  "0001MCJ1M0257E2XHYJTT1NEBA",
+  "0001MCJ1M0257E2XHYJTT1NEBG",
+  "0001MCJ1M0257E2XHYJTT1NEB8"
  ],
  "paper": [
   "0001M59VY0YA13H9M86HTA6XNP",
-  "0001MCJ1M0QPW3T7KEKH1CD1N6",
-  "0001MCJ1M0QPW3T7KEKH1CD1N7",
-  "0001MCJ1M0QPW3T7KEKH1CD1NC",
-  "0001MCJ1M0QPW3T7KEKH1CD1N5"
+  "0001MCJ1M0257E2XHYJTT1NEB9",
+  "0001MCJ1M0257E2XHYJTT1NEBA",
+  "0001MCJ1M0257E2XHYJTT1NEBG",
+  "0001MCJ1M0257E2XHYJTT1NEB8"
  ],
  "tears": {
   "0001M4GW48FEW3M67XKAZT5051": "tear_010",
   "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
   "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-  "0001MCJ1M0QPW3T7KEKH1CD1N6": "tear_019",
-  "0001MCJ1M0QPW3T7KEKH1CD1N7": "tear_042",
-  "0001MCJ1M0QPW3T7KEKH1CD1NC": "tear_031",
-  "0001MCJ1M0QPW3T7KEKH1CD1N5": "tear_054"
+  "0001MCJ1M0257E2XHYJTT1NEB9": "tear_019",
+  "0001MCJ1M0257E2XHYJTT1NEBA": "tear_042",
+  "0001MCJ1M0257E2XHYJTT1NEBG": "tear_051",
+  "0001MCJ1M0257E2XHYJTT1NEB8": "tear_044"
  },
  "stocks": {
   "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
   "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
   "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-  "0001MCJ1M0QPW3T7KEKH1CD1N6": "looseleaf_01",
-  "0001MCJ1M0QPW3T7KEKH1CD1N7": "lined_03",
-  "0001MCJ1M0QPW3T7KEKH1CD1NC": "looseleaf_01",
-  "0001MCJ1M0QPW3T7KEKH1CD1N5": "lined_03"
+  "0001MCJ1M0257E2XHYJTT1NEB9": "looseleaf_02",
+  "0001MCJ1M0257E2XHYJTT1NEBA": "lined_03",
+  "0001MCJ1M0257E2XHYJTT1NEBG": "lined_01",
+  "0001MCJ1M0257E2XHYJTT1NEB8": "lined_04"
  },
  "scroll": {
   "first": 8066,
@@ -99,37 +105,31 @@
  "paper_stocks": 54,
  "setup_showing": false,
  "fold": {
-  "sequence": "unfold_thirds",
-  "length": 139,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  },
  "sensation": null,
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 11,
+  "rounds": 7,
   "pushed": 8,
   "refused": 1,
   "pulled": 2,
   "blobs_fetched": 0,
   "faults": 0,
-  "pending": 2,
+  "pending": 1,
   "refused_in_the_outbox": 1,
-  "cursor": 14071,
+  "cursor": 14072,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14070,
-   "our_cursor": 14070,
+   "peer_cursor": 14071,
+   "our_cursor": 14071,
    "last_error": null,
-   "since": "2026-09-08T20:14:05.874Z",
-   "last_contact": "2026-09-08T20:15:14.793Z"
+   "since": "2026-09-09T02:15:34.689Z",
+   "last_contact": "2026-09-09T02:16:29.336Z"
   }
  },
  "ambient": {

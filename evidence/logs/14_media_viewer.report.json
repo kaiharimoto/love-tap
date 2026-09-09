@@ -10,7 +10,7 @@
   "video": {
    "initialised": true,
    "playing": true,
-   "position_ms": 921,
+   "position_ms": 1028,
    "duration_ms": 2500
   }
  },
@@ -45,7 +45,7 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 176,
  "seed": 20260903,
- "events": 14074,
+ "events": 14075,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -62,7 +62,7 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 10,
+  "rounds": 9,
   "pushed": 3,
   "refused": 0,
   "pulled": 0,
@@ -70,17 +70,17 @@
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14074,
+  "cursor": 14075,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14074,
-   "our_cursor": 14074,
+   "peer_cursor": 14075,
+   "our_cursor": 14075,
    "last_error": null,
-   "since": "2026-09-08T18:52:31.939Z",
-   "last_contact": "2026-09-08T18:52:58.832Z"
+   "since": "2026-09-09T02:16:36.256Z",
+   "last_contact": "2026-09-09T02:17:01.859Z"
   }
  },
  "ambient": {

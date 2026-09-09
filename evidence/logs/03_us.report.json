@@ -2,6 +2,13 @@
  "region": 2,
  "view": {
   "region": "us",
+  "kinds": {
+   "todo_event": 199,
+   "date_event": 81,
+   "milestone": 6,
+   "passed_on": 12,
+   "ritual_kept": 53
+  },
   "modules": [
    {
     "id": "dates",
@@ -16,7 +23,7 @@
    {
     "id": "calendar",
     "events": 6,
-    "glance": "us in 61 days"
+    "glance": "us in 60 days"
    },
    {
     "id": "rituals",
@@ -72,8 +79,8 @@
    "peer_cursor": null,
    "our_cursor": 14062,
    "last_error": null,
-   "since": "2026-09-08T18:50:10.228Z",
-   "last_contact": "2026-09-08T18:50:12.361Z"
+   "since": "2026-09-09T02:14:22.570Z",
+   "last_contact": "2026-09-09T02:14:24.620Z"
   }
  },
  "ambient": {

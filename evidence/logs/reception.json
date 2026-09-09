@@ -6,40 +6,40 @@
    "title": "noor",
    "body": "is holding something out",
    "tag": "from-them",
-   "silent": false,
+   "silent": true,
    "data": {
     "kind": "feeling",
     "from": "noor",
-    "how": "interrupt"
+    "how": "quiet"
    }
   }
  ],
  "shown_by_the_worker": [
   {
-   "at": 1788913502333,
+   "at": 1788920274766,
    "kind": "feeling",
    "from": "noor",
-   "how": "interrupt",
+   "how": "quiet",
    "title": "noor",
    "body": "is holding something out",
    "shown": true,
    "why": null
   },
   {
-   "at": 1788913509850,
+   "at": 1788920282282,
    "kind": "message",
    "from": "noor",
-   "how": "interrupt",
+   "how": "quiet",
    "title": "noor",
    "body": "wrote something",
    "shown": true,
    "why": null
   },
   {
-   "at": 1788913514942,
+   "at": 1788920287327,
    "kind": "feeling",
    "from": "noor",
-   "how": "interrupt",
+   "how": "quiet",
    "title": "noor",
    "body": "is holding something out",
    "shown": true,
@@ -47,7 +47,30 @@
   }
  ],
  "settings": {
-  "prefs": null,
+  "prefs": {
+   "by_type": {
+    "message": "interrupt",
+    "photo": "interrupt",
+    "video": "interrupt",
+    "voice_note": "interrupt",
+    "reaction": "quiet",
+    "message_edit": "off",
+    "message_delete": "off",
+    "read_marker": "off",
+    "feeling": "interrupt",
+    "state_declared": "quiet",
+    "state_passive": "quiet",
+    "date_event": "quiet",
+    "todo_event": "quiet",
+    "milestone": "quiet",
+    "ritual_kept": "off",
+    "passed_on": "quiet",
+    "ping": "interrupt",
+    "feeling_authored": "quiet"
+   },
+   "quiet_from": 23,
+   "quiet_to": 7
+  },
   "words_for_kinds": 14
  },
  "browser": "chromium",

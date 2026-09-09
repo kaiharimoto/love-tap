@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3300,
+   "ms": 2248,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 5893
+   "ms": 3674
   },
   {
    "do": "wait",
@@ -24,7 +24,7 @@
   },
   {
    "do": "openViewer",
-   "ms": 5667
+   "ms": 9258
   },
   {
    "do": "wait",
@@ -37,15 +37,15 @@
   },
   {
    "do": "awaitView",
-   "ms": 2921
+   "ms": 1978
   },
   {
    "do": "shot",
-   "ms": 2767
+   "ms": 2633
   },
   {
    "do": "report",
-   "ms": 702
+   "ms": 701
   }
  ],
  "shots": [
@@ -67,7 +67,7 @@
     "video": {
      "initialised": true,
      "playing": true,
-     "position_ms": 921,
+     "position_ms": 1028,
      "duration_ms": 2500
     }
    },
@@ -102,7 +102,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 176,
    "seed": 20260903,
-   "events": 14074,
+   "events": 14075,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -119,7 +119,7 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 10,
+    "rounds": 9,
     "pushed": 3,
     "refused": 0,
     "pulled": 0,
@@ -127,17 +127,17 @@
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14074,
+    "cursor": 14075,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14074,
-     "our_cursor": 14074,
+     "peer_cursor": 14075,
+     "our_cursor": 14075,
      "last_error": null,
-     "since": "2026-09-08T18:52:31.939Z",
-     "last_contact": "2026-09-08T18:52:58.832Z"
+     "since": "2026-09-09T02:16:36.256Z",
+     "last_contact": "2026-09-09T02:17:01.859Z"
     }
    },
    "ambient": {
@@ -151,9 +151,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2632,
+ "cold_ms": 2180,
  "load": {
-  "ms": 2632,
+  "ms": 2180,
   "store": "kept",
   "profile": "profile_seeded"
  },

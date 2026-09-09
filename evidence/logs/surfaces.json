@@ -987,19 +987,6 @@
    "tooth_from_blocks": 42,
    "lit_across": 71.495
   },
-  "objects/obj_heart_fold.webp": {
-   "family": "objects",
-   "patch_std": 14.036,
-   "floor": 2.0,
-   "blocks": 71,
-   "body": 240.0,
-   "field_swing_raw": 26.607,
-   "field_swing": 25.831,
-   "tooth_raw": 0.505,
-   "tooth": 0.49,
-   "tooth_from_blocks": 69,
-   "lit_across": 11.678
-  },
   "objects/obj_knot.webp": {
    "family": "objects",
    "patch_std": 27.783,
@@ -3096,11 +3083,11 @@
   "named_but_neither": [],
   "note": "a drawn feeling is a mark the app makes with a pen, not a render, so it has no surface to measure; anything under 'named_but_neither' is a hole"
  },
- "read": 258,
+ "read": 257,
  "by_family": {
   "paper": 54,
   "shell": 2,
-  "objects": 63,
+  "objects": 62,
   "folds": 139
  },
  "empty": [],

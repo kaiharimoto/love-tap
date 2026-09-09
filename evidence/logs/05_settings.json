@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2692,
+   "ms": 2277,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4072
+   "ms": 3549
   },
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2305
   },
   {
    "do": "shot",
-   "ms": 3382
+   "ms": 3021
   },
   {
    "do": "report",
@@ -45,7 +45,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtt0wq2v"
+     "pwa-mttgs28u"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -92,8 +92,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-08T18:50:45.096Z",
-     "last_contact": "2026-09-08T18:50:47.384Z"
+     "since": "2026-09-09T02:14:56.539Z",
+     "last_contact": "2026-09-09T02:14:58.470Z"
     }
    },
    "ambient": {
@@ -107,9 +107,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2447,
+ "cold_ms": 2070,
  "load": {
-  "ms": 2447,
+  "ms": 2070,
   "store": "kept",
   "profile": "profile_seeded"
  },

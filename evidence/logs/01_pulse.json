@@ -10,25 +10,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3197,
+   "ms": 2528,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3876
+   "ms": 3308
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2102
   },
   {
    "do": "shot",
-   "ms": 5761
+   "ms": 6040
   },
   {
    "do": "report",
-   "ms": 703
+   "ms": 702
   }
  ],
  "shots": [
@@ -80,6 +80,13 @@
       "ts": 1788455973000
      }
     ],
+    "kinds": {
+     "state_passive": 4120,
+     "state_declared": 1522,
+     "feeling": 910,
+     "feeling_authored": 2,
+     "ping": 13
+    },
     "partner_signals": {
      "charging": false,
      "battery": 72,
@@ -161,8 +168,8 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-08T18:49:03.753Z",
-     "last_contact": "2026-09-08T18:49:07.489Z"
+     "since": "2026-09-09T02:13:20.096Z",
+     "last_contact": "2026-09-09T02:13:22.292Z"
     }
    },
    "ambient": {
@@ -176,9 +183,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 10002,
+ "cold_ms": 7943,
  "load": {
-  "ms": 10002,
+  "ms": 7943,
   "store": "fresh",
   "profile": "profile_seeded"
  },

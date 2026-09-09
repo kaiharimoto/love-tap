@@ -1,5 +1,5 @@
 {
- "strings_read": 119,
+ "strings_read": 116,
  "rules_applied": [
   {
    "rule": "an emoji glyph in a displayed string",
@@ -98,43 +98,27 @@
    "text": "nothing to do. suspicious."
   },
   {
-   "where": "app/lib/regions/chat/blob_widgets.dart:252",
-   "text": "${secs ~/ 60}:${(secs % 60).toString().padLeft(2, "
-  },
-  {
-   "where": "app/lib/regions/chat/blob_widgets.dart:283",
-   "text": "${secs ~/ 60}:${(secs % 60).toString().padLeft(2, "
-  },
-  {
-   "where": "app/lib/regions/chat/blob_widgets.dart:372",
+   "where": "app/lib/regions/chat/blob_widgets.dart:373",
    "text": "${(durationMs! / 1000).round()}s"
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:909",
+   "where": "app/lib/regions/chat/chat_region.dart:913",
    "text": "${scope.partner.name} ${S.typing}"
   },
   {
-   "where": "app/lib/regions/chat/search_page.dart:146",
+   "where": "app/lib/regions/chat/search_page.dart:157",
    "text": "looking for"
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:225",
+   "where": "app/lib/regions/chat/viewer_page.dart:230",
    "text": "put it back"
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:296",
-   "text": "${_clock(at)} / ${_clock(total)}"
+   "where": "app/lib/regions/chat/viewer_page.dart:313",
+   "text": "${_clock(at)} / ${_clock(total, total: true)}"
   },
   {
-   "where": "app/lib/regions/moments/moments_region.dart:542",
-   "text": "${event.author.name} \u00b7 ${dayLabel(event.ts)}"
-  },
-  {
-   "where": "app/lib/regions/moments/moments_region.dart:621",
-   "text": "${((event.payload["
-  },
-  {
-   "where": "app/lib/regions/moments/moments_region.dart:684",
+   "where": "app/lib/regions/moments/moments_region.dart:696",
    "text": "${DateFormat("
   },
   {
@@ -439,78 +423,82 @@
   },
   {
    "where": "app/lib/voice/strings.dart:36",
-   "text": "nothing with that in it."
+   "text": "send it again"
   },
   {
    "where": "app/lib/voice/strings.dart:37",
-   "text": "a year of it, and every kind of thing in it."
+   "text": "nothing with that in it."
   },
   {
    "where": "app/lib/voice/strings.dart:38",
-   "text": "try fewer words, or a different month."
+   "text": "a year of it, and every kind of thing in it."
   },
   {
    "where": "app/lib/voice/strings.dart:39",
-   "text": "first one's yours."
+   "text": "try fewer words, or a different month."
   },
   {
    "where": "app/lib/voice/strings.dart:40",
+   "text": "first one's yours."
+  },
+  {
+   "where": "app/lib/voice/strings.dart:41",
    "text": "whatever it is. it only goes to one person."
   },
   {
-   "where": "app/lib/voice/strings.dart:45",
+   "where": "app/lib/voice/strings.dart:46",
    "text": "still fetching the picture."
   },
   {
-   "where": "app/lib/voice/strings.dart:48",
+   "where": "app/lib/voice/strings.dart:49",
    "text": "can't reach the other phone. it'll go when it can."
   },
   {
-   "where": "app/lib/voice/strings.dart:49",
+   "where": "app/lib/voice/strings.dart:50",
    "text": "the other phone isn't answering. keeping this until it does."
   },
   {
-   "where": "app/lib/voice/strings.dart:50",
+   "where": "app/lib/voice/strings.dart:51",
    "text": "not paired yet."
   },
   {
-   "where": "app/lib/voice/strings.dart:53",
+   "where": "app/lib/voice/strings.dart:54",
    "text": "nothing from them yet. it will show here."
   },
   {
-   "where": "app/lib/voice/strings.dart:54",
+   "where": "app/lib/voice/strings.dart:55",
    "text": "their phone tells this one where they are, once it can reach it."
   },
   {
-   "where": "app/lib/voice/strings.dart:57",
+   "where": "app/lib/voice/strings.dart:58",
    "text": "nowhere planned. that's fine."
   },
   {
-   "where": "app/lib/voice/strings.dart:58",
+   "where": "app/lib/voice/strings.dart:59",
    "text": "nothing to do. suspicious."
   },
   {
-   "where": "app/lib/voice/strings.dart:59",
+   "where": "app/lib/voice/strings.dart:60",
    "text": "no dates that matter yet. add the first."
   },
   {
-   "where": "app/lib/voice/strings.dart:60",
+   "where": "app/lib/voice/strings.dart:61",
    "text": "nothing kept yet."
   },
   {
-   "where": "app/lib/voice/strings.dart:63",
+   "where": "app/lib/voice/strings.dart:64",
    "text": "it fills in as it happens."
   },
   {
-   "where": "app/lib/voice/strings.dart:64",
+   "where": "app/lib/voice/strings.dart:65",
    "text": "everything either of you sends ends up here, by day and by kind."
   },
   {
-   "where": "app/lib/voice/strings.dart:67",
+   "where": "app/lib/voice/strings.dart:68",
    "text": "the built-in ones are here. make one below."
   },
   {
-   "where": "app/lib/voice/strings.dart:73",
+   "where": "app/lib/voice/strings.dart:74",
    "text": "nothing from them yet. the six words are on the other phone."
   }
  ],

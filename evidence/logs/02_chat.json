@@ -10,33 +10,33 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2833,
+   "ms": 2304,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4350
-  },
-  {
-   "do": "wait",
-   "ms": 1906
-  },
-  {
-   "do": "scrollTo",
-   "ms": 28152
+   "ms": 3451
   },
   {
    "do": "wait",
    "ms": 1904
   },
   {
+   "do": "scrollTo",
+   "ms": 27560
+  },
+  {
+   "do": "wait",
+   "ms": 1902
+  },
+  {
    "do": "shot",
-   "ms": 3110
+   "ms": 3355
   },
   {
    "do": "report",
-   "ms": 702
+   "ms": 701
   }
  ],
  "shots": [
@@ -59,6 +59,12 @@
     "kinds": {
      "message": 7,
      "voice_note": 1
+    },
+    "folded_in": {
+     "reaction": 1,
+     "message_edit": 0,
+     "message_delete": 0,
+     "read_marker": 8
     },
     "delivery": {
      "00015W9WM8JY1VGBMS8YZ3BCWZ": {
@@ -169,8 +175,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-08T18:49:23.837Z",
-     "last_contact": "2026-09-08T18:49:45.955Z"
+     "since": "2026-09-09T02:13:38.126Z",
+     "last_contact": "2026-09-09T02:13:59.773Z"
     }
    },
    "ambient": {
@@ -184,9 +190,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2378,
+ "cold_ms": 2211,
  "load": {
-  "ms": 2378,
+  "ms": 2211,
   "store": "kept",
   "profile": "profile_seeded"
  },

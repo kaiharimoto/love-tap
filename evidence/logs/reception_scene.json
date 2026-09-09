@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2903
+   "ms": 2904
   },
   {
    "do": "goTo",
-   "ms": 3615
+   "ms": 3674
   },
   {
    "do": "step",
-   "ms": 1385
+   "ms": 1532
   },
   {
    "do": "step",
-   "ms": 1233
+   "ms": 1203
   },
   {
    "do": "wait",
@@ -30,19 +30,19 @@
   },
   {
    "do": "shot",
-   "ms": 1613
+   "ms": 1554
   },
   {
    "do": "goTo",
-   "ms": 3823
+   "ms": 3608
   },
   {
    "do": "step",
-   "ms": 1617
+   "ms": 1579
   },
   {
    "do": "step",
-   "ms": 1252
+   "ms": 1219
   },
   {
    "do": "wait",
@@ -50,7 +50,7 @@
   },
   {
    "do": "report",
-   "ms": 712
+   "ms": 710
   },
   {
    "push": {
@@ -69,15 +69,15 @@
   },
   {
    "do": "screen",
-   "ms": 824
+   "ms": 819
   },
   {
    "do": "closeApp",
-   "ms": 728
+   "ms": 725
   },
   {
    "do": "wait",
-   "ms": 1603
+   "ms": 1602
   },
   {
    "push": {
@@ -88,15 +88,15 @@
   },
   {
    "do": "push",
-   "ms": 2208
+   "ms": 2206
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2105
   },
   {
    "do": "screen",
-   "ms": 776
+   "ms": 775
   },
   {
    "push": {
@@ -111,15 +111,15 @@
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2103
   },
   {
    "do": "screen",
-   "ms": 778
+   "ms": 776
   },
   {
    "do": "notifications",
-   "ms": 1159
+   "ms": 1186
   }
  ],
  "shots": [
@@ -183,6 +183,13 @@
       "ts": 1788455973000
      }
     ],
+    "kinds": {
+     "state_passive": 4120,
+     "state_declared": 1522,
+     "feeling": 910,
+     "feeling_authored": 2,
+     "ping": 13
+    },
     "partner_signals": {
      "charging": false,
      "battery": 72,
@@ -264,7 +271,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-09T00:24:39.514Z",
+     "since": "2026-09-09T02:17:32.202Z",
      "last_contact": null
     }
    },
@@ -279,11 +286,11 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 6273,
+ "cold_ms": 6072,
  "load": {
-  "ms": 6273,
+  "ms": 6072,
   "store": "fresh",
-  "profile": "prof_recv"
+  "profile": "profile_reception"
  },
  "app_open": false,
  "reception": {
@@ -294,40 +301,40 @@
     "title": "noor",
     "body": "is holding something out",
     "tag": "from-them",
-    "silent": false,
+    "silent": true,
     "data": {
      "kind": "feeling",
      "from": "noor",
-     "how": "interrupt"
+     "how": "quiet"
     }
    }
   ],
   "shown_by_the_worker": [
    {
-    "at": 1788913502333,
+    "at": 1788920274766,
     "kind": "feeling",
     "from": "noor",
-    "how": "interrupt",
+    "how": "quiet",
     "title": "noor",
     "body": "is holding something out",
     "shown": true,
     "why": null
    },
    {
-    "at": 1788913509850,
+    "at": 1788920282282,
     "kind": "message",
     "from": "noor",
-    "how": "interrupt",
+    "how": "quiet",
     "title": "noor",
     "body": "wrote something",
     "shown": true,
     "why": null
    },
    {
-    "at": 1788913514942,
+    "at": 1788920287327,
     "kind": "feeling",
     "from": "noor",
-    "how": "interrupt",
+    "how": "quiet",
     "title": "noor",
     "body": "is holding something out",
     "shown": true,
@@ -335,7 +342,30 @@
    }
   ],
   "settings": {
-   "prefs": null,
+   "prefs": {
+    "by_type": {
+     "message": "interrupt",
+     "photo": "interrupt",
+     "video": "interrupt",
+     "voice_note": "interrupt",
+     "reaction": "quiet",
+     "message_edit": "off",
+     "message_delete": "off",
+     "read_marker": "off",
+     "feeling": "interrupt",
+     "state_declared": "quiet",
+     "state_passive": "quiet",
+     "date_event": "quiet",
+     "todo_event": "quiet",
+     "milestone": "quiet",
+     "ritual_kept": "off",
+     "passed_on": "quiet",
+     "ping": "interrupt",
+     "feeling_authored": "quiet"
+    },
+    "quiet_from": 23,
+    "quiet_to": 7
+   },
    "words_for_kinds": 14
   },
   "browser": "chromium",

@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3179
+   "ms": 2804
   },
   {
    "do": "wait",
-   "ms": 2106
+   "ms": 2105
   },
   {
    "do": "shot",
-   "ms": 2685
+   "ms": 2830
   },
   {
    "do": "report",
@@ -42,6 +42,12 @@
     "editing": null,
     "partner_typing": false,
     "kinds": {},
+    "folded_in": {
+     "reaction": 0,
+     "message_edit": 0,
+     "message_delete": 0,
+     "read_marker": 0
+    },
     "delivery": {},
     "states_on_the_glass": {},
     "reactions": {},
@@ -53,7 +59,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-08T18:53:10.554Z",
+   "now": "2026-09-09T02:17:13.976Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -90,7 +96,7 @@
      "peer_cursor": null,
      "our_cursor": 0,
      "last_error": null,
-     "since": "2026-09-08T18:53:03.346Z",
+     "since": "2026-09-09T02:17:07.246Z",
      "last_contact": null
     }
    },
@@ -105,9 +111,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 1750,
+ "cold_ms": 1634,
  "load": {
-  "ms": 1750,
+  "ms": 1634,
   "store": "fresh",
   "profile": null
  },
