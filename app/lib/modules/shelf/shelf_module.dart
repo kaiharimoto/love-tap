@@ -50,12 +50,13 @@ class ShelfModule extends Module {
   Widget build(BuildContext context, ModuleContext ctx) => ShelfList(ctx: ctx);
 
   @override
+  /// How many, not which one: the rows underneath are the which. See DatesModule.glance.
   String glance(List<Event> events) {
     final things = projectShelf(events);
     if (things.isEmpty) return 'nothing passed on yet';
-    final waiting = things.where((t) => t.state == 'passed').toList();
-    if (waiting.isEmpty) return 'last: ${things.last.title}';
-    return 'waiting on you: ${waiting.last.title}';
+    final waiting = things.where((t) => t.state == 'passed').length;
+    if (waiting == 0) return '${things.length} between you';
+    return '$waiting waiting on you · ${things.length} between you';
   }
 }
 

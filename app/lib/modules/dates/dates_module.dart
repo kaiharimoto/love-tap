@@ -43,14 +43,25 @@ class DatesModule extends Module {
   Widget build(BuildContext context, ModuleContext ctx) => DateList(ctx: ctx);
 
   @override
+  /// What the rows underneath cannot say: how many, and how far off.
+  ///
+  /// This said `next: the place by the bridge` on a card sitting directly above a row reading
+  /// `the second one · the place by th... · in 2 months`. A coherence critic found three of the
+  /// five modules printing the same sentence twice inside one block. A glance is for the shape of
+  /// the pile; the pile is right there for the rest.
   String glance(List<Event> events) {
     final dates = projectDates(events);
+    final now = DateTime.now();
     final upcoming = dates.where((d) => d.when != null && d.state != 'done' && d.state != 'said').toList()
       ..sort((a, b) => a.when!.compareTo(b.when!));
-    if (upcoming.isNotEmpty) return 'next: ${upcoming.first.title}';
-    final done = dates.where((d) => d.state == 'said' || d.state == 'done').toList();
-    if (done.isNotEmpty) return 'last: ${done.last.title}';
-    return 'nothing planned';
+    if (upcoming.isNotEmpty) {
+      final when = whenWord(upcoming.first.when, now);
+      return when == null
+          ? '${upcoming.length} ahead'
+          : '${upcoming.length} ahead · the next $when';
+    }
+    final done = dates.where((d) => d.state == 'said' || d.state == 'done').length;
+    return done == 0 ? 'nothing planned' : 'nothing ahead · $done behind you';
   }
 }
 

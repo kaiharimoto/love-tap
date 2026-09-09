@@ -48,8 +48,11 @@ class TodosModule extends Module {
 
   @override
   String glance(List<Event> events) {
-    final open = projectTodos(events).where((t) => !t.done && !t.removed).length;
-    return open == 0 ? 'nothing to do' : '$open open';
+    final all = projectTodos(events).where((t) => !t.removed).toList();
+    final open = all.where((t) => !t.done).length;
+    if (all.isEmpty) return 'nothing to do';
+    if (open == 0) return 'all ${all.length} done';
+    return '$open open · ${all.length - open} done';
   }
 }
 

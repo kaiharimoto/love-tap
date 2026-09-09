@@ -45,12 +45,19 @@ class RitualsModule extends Module {
   Widget build(BuildContext context, ModuleContext ctx) => RitualList(ctx: ctx);
 
   @override
+  /// How many and how lately, not which one: the rows underneath are the which.
   String glance(List<Event> events) {
     final r = projectRituals(events);
     if (r.isEmpty) return 'nothing kept yet';
     final recent = r.where((x) => x.marks.isNotEmpty).toList()
       ..sort((a, b) => b.marks.last.compareTo(a.marks.last));
-    return recent.isEmpty ? 'nothing kept yet' : 'last: ${recent.first.title}';
+    if (recent.isEmpty) return 'nothing kept yet';
+    final marks = r.fold<int>(0, (a, x) => a + x.marks.length);
+    final days = DateTime.now()
+        .difference(recent.first.marks.last)
+        .inDays;
+    final lately = days <= 0 ? 'today' : (days == 1 ? 'yesterday' : '$days days ago');
+    return '${recent.length} kept · $marks times · the last $lately';
   }
 }
 

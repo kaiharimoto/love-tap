@@ -11,7 +11,10 @@ import '../module.dart';
 import 'dates_module.dart';
 
 /// How far off, in the couple's own words rather than in a date format.
-String? _whenWord(DateTime? when, DateTime now) {
+///
+/// Public because the card at the top of the module says how far off the next one is, and a
+/// glance and a row saying the same thing in two different formats is worse than either.
+String? whenWord(DateTime? when, DateTime now) {
   if (when == null) return null;
   final days = when.difference(now).inDays;
   if (days < 0) return null;
@@ -44,7 +47,7 @@ class DateList extends StatelessWidget {
             row: i,
             type: 'date_event',
             text: ahead[i].place == null ? ahead[i].title : '${ahead[i].title} · ${ahead[i].place}',
-            aside: _whenWord(ahead[i].when, ctx.now),
+            aside: whenWord(ahead[i].when, ctx.now),
           ),
         if (upcoming.isEmpty)
           DeskLine(id: 'dates.none', row: 0, type: 'date_event', text: "nowhere planned. that's fine."),

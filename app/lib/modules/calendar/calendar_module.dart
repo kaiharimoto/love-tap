@@ -49,8 +49,10 @@ class CalendarModule extends Module {
         .toList()
       ..sort((a, b) => a.$2!.compareTo(b.$2!));
     if (next.isEmpty) return 'nothing marked';
+    // how many and how far, not which: the row for `which` is directly underneath
     final days = next.first.$2!.difference(now).inDays;
-    return '${next.first.$1.title} in $days days';
+    final soon = days <= 0 ? 'today' : (days == 1 ? 'tomorrow' : 'in $days days');
+    return '${next.length} marked · the next $soon';
   }
 }
 
