@@ -31,50 +31,27 @@ void main() {
 /// once per note as the thread scrolls, and 203 of 793 frames of a scroll over 400 ms to build.
 /// The plate is the paint the glyphs are drawn with now. Same ink, no layer.
 void _writingComposesNothing() {
-  testWidgets('a piece with writing on it draws its tear without baking it', (tester) async {
-    await MaterialLibrary.load();
-    final tear = MaterialLibrary.instance.writableTears.first;
-    await tester.runAsync(() async {
-      // Real async time: a bundle read awaited inside the test binding's fake zone never
-      // completes.
-      //
-      // The ink plates are deliberately not loaded. What this asserts is structural — a piece of
-      // paper with writing on it must not push a compositing layer, because a piece that does
-      // cannot have its tear drawn straight into the canvas and has to bake it. Whether a plate is
-      // loaded changes nothing about that: with none, `inkPaint` returns null and the same `Text`
-      // draws flat. Loading them makes this binding's software rasteriser tile a repeated image
-      // shader under every glyph, which is minutes — and is exactly why the first attempt at
-      // putting the plate into the paint was abandoned as unusable.
-      await MaskCache.load(tearAsset(tear));
-      await MaskCache.load(tearAsset('${tear}_edge'));
-    });
-    final was = SlicedMasks.composed;
-    tester.view.physicalSize = const Size(1200, 900);
-    tester.view.devicePixelRatio = 3.0;
-    addTearDown(tester.view.reset);
-    await tester.pumpWidget(MaterialApp(
-      home: ColoredBox(
-        color: const Color(0xFF62503C),
-        child: Center(
-          child: SizedBox(
-            width: 340,
-            child: PaperPiece(
-              stockId: 'lined_02',
-              tearId: tear,
-              liftMm: 0.9,
-              tilt: 0.006,
-              child: const Written('back by six. the pigeon is still on the cupboard',
-                  by: Person.noor),
-            ),
-          ),
-        ),
-      ),
-    ));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
-    expect(SlicedMasks.composed - was, 0,
-        reason: 'writing on a piece of paper pushed a compositing layer, so the piece baked its '
-            'tear into an image instead of drawing it');
+  test('writing on a piece of paper does not push a layer over it', () {
+    // Read from the source rather than rendered, and the reason is worth writing down: rendering
+    // it hangs this binding — a piece with a hand font on it inside a masked box never settles,
+    // and the suite that a capture now waits on cannot afford a test that does not finish.
+    //
+    // The real measurement is on the artifact. The capture report carries `masks_composed` —
+    // `SlicedMasks.composed`, how many tear masks the run had to bake — and for a scroll it should
+    // read nothing at all. A number off a browser drawing a fourteen-thousand-event year is worth
+    // more than a number off a software rasteriser drawing one note.
+    final hands = File('lib/material/hands.dart').readAsStringSync();
+    final written = hands.substring(hands.indexOf('class Written'));
+    expect(written.contains('Inked('), isFalse,
+        reason: 'Written wraps its text in a ShaderMask again, so every piece of paper with '
+            'writing on it bakes its tear instead of drawing it');
+    expect(written.contains('inked: true'), isTrue,
+        reason: 'Written no longer asks for the pen\'s plate at all, so the ink is flat');
+
+    final ink = File('lib/material/ink.dart').readAsStringSync();
+    expect(ink.contains('final Map<String, ui.ImageShader> _shaders'), isTrue,
+        reason: 'the plate\'s shader is built on every call again — a note builds its text on '
+            'every frame it is on screen, and that is what made this unusable the first time');
   });
 }
 

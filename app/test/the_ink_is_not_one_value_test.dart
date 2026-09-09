@@ -63,8 +63,12 @@ void main() {
             color: const Color(0xFFF1ECDF),
             child: Padding(
               padding: const EdgeInsets.all(8),
-              child: Written('the boiler is sulking again, so is the boiler',
-                  by: who, size: 34),
+              // Short, because this is rasterised. The plate goes into the glyphs' own paint as a
+              // repeated image shader, and this binding rasterises in software: a long line at 34
+              // point through `toImage` at three times scale took the suite from ninety seconds to
+              // over eight minutes, and the suite is what a capture waits on now. Four hundred ink
+              // pixels is what the assertion needs and this gives thousands.
+              child: Written('the boiler is sulking', by: who, size: 34),
             ),
           ),
         ),
@@ -73,7 +77,7 @@ void main() {
       late List<int> core;
       await tester.runAsync(() async {
         final boundary = key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
-        final image = await boundary.toImage(pixelRatio: 3);
+        final image = await boundary.toImage(pixelRatio: 2);
         final bytes = (await image.toByteData(format: ui.ImageByteFormat.rawRgba))!;
         core = inkCore(image, bytes);
       });
