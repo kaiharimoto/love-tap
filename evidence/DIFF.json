@@ -1,5 +1,5 @@
 {
- "commit": "bbfd662",
+ "commit": "8049893",
  "baseline": {
   "dir": "evidence/.previous",
   "captured_at": "2026-09-09T19:16:36.983567+00:00",
@@ -80,13 +80,13 @@
   },
   {
    "artifact": "08_state_propagating.mp4",
-   "label": "unchanged",
-   "ssim": 1.0,
+   "label": "changed",
+   "ssim": 0.9492,
    "judgement": null,
-   "sha": "c7b2e162b4d685aa",
+   "sha": "10d4d4329943dc09",
    "previous_sha": "c7b2e162b4d685aa",
    "previous_written": "2026-09-09T19:14:58Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.9492, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "09_two_devices.png",
@@ -176,8 +176,8 @@
  "counts": {
   "new": 0,
   "gone": 0,
-  "unchanged": 13,
-  "changed": 2,
+  "unchanged": 12,
+  "changed": 3,
   "absent": 2
  }
 }
