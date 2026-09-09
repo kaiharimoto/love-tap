@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5822
+   "ms": 7057
   },
   {
    "do": "wait",
-   "ms": 2302
+   "ms": 2304
   },
   {
    "do": "shot",
-   "ms": 3977
+   "ms": 3723
   },
   {
    "do": "report",
-   "ms": 714
+   "ms": 716
   }
  ],
  "shots": [
@@ -127,6 +127,7 @@
    "link": "connecting",
    "me": "teo",
    "masks_in_pool": 56,
+   "masks_composed": 1,
    "writable_masks": 47,
    "light": "dusk",
    "has_dusk_paper": true,
@@ -162,7 +163,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-09T04:07:23.959Z",
+     "since": "2026-09-09T17:58:54.855Z",
      "last_contact": null
     }
    },
@@ -177,13 +178,16 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 7813,
+ "cold_ms": 8099,
  "load": {
-  "ms": 7813,
+  "ms": 8099,
   "store": "fresh",
   "profile": null
  },
  "problems": [],
+ "refused_requests": [
+  "404 GET http://127.0.0.1:8797/assets/assets/seed/voice/index.json"
+ ],
  "ok": true,
  "steps_landed": true
 }

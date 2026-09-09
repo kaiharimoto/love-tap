@@ -14,15 +14,15 @@
   },
   {
    "do": "goTo",
-   "ms": 3109
+   "ms": 3491
   },
   {
    "do": "step",
-   "ms": 1471
+   "ms": 1275
   },
   {
    "do": "step",
-   "ms": 1225
+   "ms": 1188
   },
   {
    "do": "wait",
@@ -30,19 +30,19 @@
   },
   {
    "do": "shot",
-   "ms": 1577
+   "ms": 1570
   },
   {
    "do": "goTo",
-   "ms": 3751
+   "ms": 3935
   },
   {
    "do": "step",
-   "ms": 1707
+   "ms": 1574
   },
   {
    "do": "step",
-   "ms": 1356
+   "ms": 1198
   },
   {
    "do": "wait",
@@ -65,19 +65,19 @@
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 824
+   "ms": 4429
   },
   {
    "do": "closeApp",
-   "ms": 726
+   "ms": 728
   },
   {
    "do": "wait",
-   "ms": 1604
+   "ms": 1603
   },
   {
    "push": {
@@ -88,11 +88,11 @@
   },
   {
    "do": "push",
-   "ms": 2207
+   "ms": 2209
   },
   {
    "do": "wait",
-   "ms": 2101
+   "ms": 2102
   },
   {
    "do": "screen",
@@ -107,7 +107,7 @@
   },
   {
    "do": "push",
-   "ms": 2207
+   "ms": 2208
   },
   {
    "do": "wait",
@@ -118,8 +118,27 @@
    "ms": 778
   },
   {
+   "push": {
+    "kind": "state_declared",
+    "from": "noor"
+   },
+   "scope": "http://127.0.0.1:8796/push/"
+  },
+  {
+   "do": "push",
+   "ms": 2208
+  },
+  {
+   "do": "wait",
+   "ms": 2104
+  },
+  {
+   "do": "screen",
+   "ms": 777
+  },
+  {
    "do": "notifications",
-   "ms": 1139
+   "ms": 1168
   }
  ],
  "shots": [
@@ -137,6 +156,10 @@
   },
   {
    "out": "evidence/crops/reception_replaced.png",
+   "of": "the display, not the page"
+  },
+  {
+   "out": "evidence/crops/reception_state.png",
    "of": "the display, not the page"
   }
  ],
@@ -236,13 +259,20 @@
    "link": "connecting",
    "me": "teo",
    "masks_in_pool": 56,
+   "masks_composed": 1,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
    "setup_showing": false,
    "fold": {
-    "sequence": null
+    "sequence": "unfold_thirds",
+    "length": 139,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
    },
    "sensation": null,
    "sync": {
@@ -265,7 +295,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-09T04:06:36.842Z",
+     "since": "2026-09-09T17:57:58.510Z",
      "last_contact": null
     }
    },
@@ -280,10 +310,10 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2121,
+ "cold_ms": 7347,
  "load": {
-  "ms": 2121,
-  "store": "kept",
+  "ms": 7347,
+  "store": "fresh",
   "profile": "profile_reception"
  },
  "app_open": false,
@@ -293,11 +323,11 @@
    {
     "scope": "http://127.0.0.1:8796/push/",
     "title": "noor",
-    "body": "is holding something out",
+    "body": "said how they are",
     "tag": "from-them",
     "silent": true,
     "data": {
-     "kind": "feeling",
+     "kind": "state_declared",
      "from": "noor",
      "how": "quiet"
     }
@@ -305,62 +335,42 @@
   ],
   "shown_by_the_worker": [
    {
-    "at": 1788920274766,
+    "at": 1788976700977,
     "kind": "feeling",
     "from": "noor",
-    "how": "quiet",
+    "how": "interrupt",
     "title": "noor",
     "body": "is holding something out",
     "shown": true,
     "why": null
    },
    {
-    "at": 1788920282282,
+    "at": 1788976712066,
     "kind": "message",
     "from": "noor",
-    "how": "quiet",
+    "how": "interrupt",
     "title": "noor",
     "body": "wrote something",
     "shown": true,
     "why": null
    },
    {
-    "at": 1788920287327,
+    "at": 1788976717192,
     "kind": "feeling",
     "from": "noor",
-    "how": "quiet",
+    "how": "interrupt",
     "title": "noor",
     "body": "is holding something out",
     "shown": true,
     "why": null
    },
    {
-    "at": 1788926819168,
-    "kind": "feeling",
+    "at": 1788976722243,
+    "kind": "state_declared",
     "from": "noor",
     "how": "quiet",
     "title": "noor",
-    "body": "is holding something out",
-    "shown": true,
-    "why": null
-   },
-   {
-    "at": 1788926826633,
-    "kind": "message",
-    "from": "noor",
-    "how": "quiet",
-    "title": "noor",
-    "body": "wrote something",
-    "shown": true,
-    "why": null
-   },
-   {
-    "at": 1788926831806,
-    "kind": "feeling",
-    "from": "noor",
-    "how": "quiet",
-    "title": "noor",
-    "body": "is holding something out",
+    "body": "said how they are",
     "shown": true,
     "why": null
    }
@@ -397,6 +407,9 @@
   "note": "Chromium on a Linux virtual display. WebKit is what the other fourteen scenes are shot in, and under the iPhone-Safari emulation this harness uses it has no Notification and no PushManager — which is what a Safari tab on an iPhone has, since iOS gives the push API only to a home-screen web app; and even without that emulation the permission cannot be granted there. So this is not an iPhone banner, there is no lock screen in evidence, and what an installed iOS web app does with the same call is not shown anywhere in this build."
  },
  "problems": [],
+ "refused_requests": [
+  "404 GET http://127.0.0.1:8796/assets/assets/seed/voice/index.json"
+ ],
  "ok": true,
  "steps_landed": true
 }

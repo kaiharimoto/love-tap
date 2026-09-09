@@ -4,11 +4,11 @@
   {
    "scope": "http://127.0.0.1:8796/push/",
    "title": "noor",
-   "body": "is holding something out",
+   "body": "said how they are",
    "tag": "from-them",
    "silent": true,
    "data": {
-    "kind": "feeling",
+    "kind": "state_declared",
     "from": "noor",
     "how": "quiet"
    }
@@ -16,62 +16,42 @@
  ],
  "shown_by_the_worker": [
   {
-   "at": 1788920274766,
+   "at": 1788976700977,
    "kind": "feeling",
    "from": "noor",
-   "how": "quiet",
+   "how": "interrupt",
    "title": "noor",
    "body": "is holding something out",
    "shown": true,
    "why": null
   },
   {
-   "at": 1788920282282,
+   "at": 1788976712066,
    "kind": "message",
    "from": "noor",
-   "how": "quiet",
+   "how": "interrupt",
    "title": "noor",
    "body": "wrote something",
    "shown": true,
    "why": null
   },
   {
-   "at": 1788920287327,
+   "at": 1788976717192,
    "kind": "feeling",
    "from": "noor",
-   "how": "quiet",
+   "how": "interrupt",
    "title": "noor",
    "body": "is holding something out",
    "shown": true,
    "why": null
   },
   {
-   "at": 1788926819168,
-   "kind": "feeling",
+   "at": 1788976722243,
+   "kind": "state_declared",
    "from": "noor",
    "how": "quiet",
    "title": "noor",
-   "body": "is holding something out",
-   "shown": true,
-   "why": null
-  },
-  {
-   "at": 1788926826633,
-   "kind": "message",
-   "from": "noor",
-   "how": "quiet",
-   "title": "noor",
-   "body": "wrote something",
-   "shown": true,
-   "why": null
-  },
-  {
-   "at": 1788926831806,
-   "kind": "feeling",
-   "from": "noor",
-   "how": "quiet",
-   "title": "noor",
-   "body": "is holding something out",
+   "body": "said how they are",
    "shown": true,
    "why": null
   }
