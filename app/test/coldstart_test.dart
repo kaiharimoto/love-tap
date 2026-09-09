@@ -92,6 +92,13 @@ void main() {
             'checked_at': DateTime.now().toUtc().toIso8601String(),
           };
           await out.writeAsString(const JsonEncoder.withIndent(' ').convert(was));
+          // Skipped, not passed. The brief's rule is that a tailnet run with no key is *pending* —
+          // not passing, not failing — and a test that returns before any expect() is counted by
+          // the runner as one more green line, which tells a reader something untrue about what
+          // was checked. A code critic read the whole suite and found this one: it "reports as a
+          // pass" and "cannot fail". It says what it is now.
+          markTestSkipped('the tailnet nodes were not answering; the dated run above stands and '
+              'this check is pending, which is neither passing nor failing');
           return;
         }
       }
@@ -102,6 +109,8 @@ void main() {
             'to start cold against. Their state survives in toolchain/ts/{a,b}/state, so '
             'tools/tailscale/up.sh brings them back without a new key.',
       }));
+      markTestSkipped('the two tailnet nodes were not answering in this session, so there was '
+          'nothing to start cold against: pending, which is neither passing nor failing');
       return;
     }
 

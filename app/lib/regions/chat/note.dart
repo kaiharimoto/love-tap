@@ -288,6 +288,23 @@ class _Margin extends StatelessWidget {
             softWrap: false),
         if (item.edited) const _EditCaret(fade: fade),
         if (mine) _DeliveryMark(delivery: item.delivery, id: item.id, fade: fade),
+        // A refusal is not a dead end, and the way out has to be where the refusal is. It was in
+        // the long-press menu — which is exactly where a reader was told, on the artifact named
+        // for the messenger's states, that there was nothing. The row says "it would not go" and
+        // then, in the same margin, what to do about it.
+        if (mine && item.delivery == Delivery.refused)
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              final scope = AppScope.of(context);
+              scope.spine.sendAgain(item.id);
+              scope.sync.kick();
+            },
+            child: Text(S.sendAgain,
+                style: Hands.margin(size: 12).copyWith(
+                    color: Pen.red, decoration: TextDecoration.underline,
+                    decorationColor: Pen.red.withValues(alpha: 0.45))),
+          ),
       ],
     );
   }

@@ -438,6 +438,13 @@ class CaptureHooks {
       'link': scope.link.state.name,
       'me': scope.me.name,
       'masks_in_pool': lib?.tearMasks.length ?? 0,
+      // How many tear masks this run has had to bake into an image rather than draw. It
+      // should be nothing: a piece draws its tear as a nine-patch straight into the
+      // canvas, and only a piece whose subtree pushes a compositing layer of its own has
+      // to compose one — hundreds of milliseconds in CanvasKit, on the build thread, once
+      // a note as the thread scrolls. Three cycles of claims about the scroll rested on a
+      // probe; this is the artifact saying it.
+      'masks_composed': SlicedMasks.composed,
       'writable_masks': lib?.writableTears.length ?? 0,
       // What the app is lit by, and whether the library it is drawing from actually has that
       // half baked. A dusk build with no dusk paper in it looks exactly like a day build, and

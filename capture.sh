@@ -70,6 +70,23 @@ fi
 STARTED_AT=$(date +%s)
 since() { local t=$(( $(date +%s) - STARTED_AT )); printf '%d:%02d' $((t / 60)) $((t % 60)); }
 
+# The suite first, because an artifact taken from a build whose tests are red is not evidence of
+# anything. A code critic read the whole repository and found that nothing in it — not capture.sh,
+# not run.sh, not bootstrap.sh, and there is no CI — ever ran `flutter test`, so every structural
+# guarantee the coherence row rests on was held by a suite no script had to pass. It does now.
+# SKIP_TESTS=yes is for re-running one scene against artifacts already taken; a whole run does not
+# take it.
+if [ "${SKIP_TESTS:-no}" != "yes" ]; then
+  echo "· running the test suite before anything is photographed"
+  if (cd app && flutter test) > "$LOG/tests.log" 2>&1; then
+    tail -1 "$LOG/tests.log"
+  else
+    tail -20 "$LOG/tests.log"
+    echo "the suite is red; nothing was captured. evidence/logs/tests.log has it." >&2
+    exit 1
+  fi
+fi
+
 echo "· reading every displayed string against docs/VOICE.md"
 python3 tools/lint/strings.py --out "$LOG/strings.json" || note_missing "voice" "a displayed string is against docs/VOICE.md"
 echo "· checking both hands still have all their ink"
@@ -419,6 +436,11 @@ fi
 # and no pale one-pixel rule lying on the desk beside the paper: the mask rectangle catching the
 # edge of the piece it cuts. Measured on the photographs because the fault is drawn by CanvasKit
 # and the test binding's rasteriser cannot see it.
+# and no pale rectangle standing in for paper: flat where the material has tooth. Recorded, not
+# gated — see the head of tools/check/flat.py for why, and for when that changes.
+echo "· measuring how flat the palest paper on each still is"
+python3 tools/check/flat.py --out "$LOG/flat.json" >/dev/null || true
+
 echo "· checking nothing draws a line on the wood"
 python3 tools/check/hairline.py --out "$LOG/hairline.json" \
   || note_missing "hairline" "a bright one-pixel rule is lying on the desk; see $LOG/hairline.json"

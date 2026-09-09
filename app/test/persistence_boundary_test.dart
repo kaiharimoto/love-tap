@@ -3,11 +3,19 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// An import or export of one of these packages, however it is quoted — plus the web's own
-/// storage library, which needs no package at all.
+/// An import or export of one of these packages, however it is quoted and wherever in the
+/// directive it appears — plus the web's own storage library, which needs no package at all.
+///
+/// It used to require the package URI to follow `import` or `export` directly, which a
+/// conditional import walks straight past: `import 'stub.dart' if (dart.library.io)
+/// 'package:sqlite3/sqlite3.dart';` is exactly how this codebase reaches a platform's driver, and
+/// exactly the form the rule could not see. A code critic probed it with nine shapes of directive
+/// and found this the one that got through. The URI is looked for anywhere in the directive now,
+/// up to its semicolon, so a conditional, a deferred one and one broken over lines all count.
 RegExp _drivers(String packages) => RegExp(
-      '(import|export)\\s+[\'"]package:($packages)[/\'"]'
-      '|(import|export)\\s+[\'"]dart:(indexed_db|html)[\'"]',
+      '(import|export)\\s[^;]*[\'"]package:($packages)[/\'"][^;]*;'
+      '|(import|export)\\s[^;]*[\'"]dart:(indexed_db|html)[\'"][^;]*;',
+      dotAll: true,
     );
 
 void main() {

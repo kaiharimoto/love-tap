@@ -27,7 +27,17 @@ def _load():
 
 
 def record(path, generator, settings, kind=None):
+    """Record one asset. A path outside assets/ is not an asset and is not recorded.
+
+    A generator run with --out pointing at a scratch directory — a smoke test, a probe, one
+    object re-rendered to measure it — used to write its scratch path into the manifest and
+    leave it there. Eight such entries were in the file, seven of them from tear smoke tests
+    months old, and `tools/manifest.py` reported them as assets with no file. The manifest is a
+    record of what is in assets/; anything else is somebody's experiment.
+    """
     rel = os.path.relpath(os.path.abspath(path), ROOT).replace(os.sep, "/")
+    if not rel.startswith("assets/"):
+        return rel
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
     for _ in range(20):
         try:

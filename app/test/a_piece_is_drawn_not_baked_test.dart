@@ -19,8 +19,55 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   _plainPieceComposesNothing();
+  _writingComposesNothing();
   _searchDoesNotCoverTheThread();
   _aNoteComposesNothing();
+}
+
+/// A piece with handwriting on it: the case every note in the thread actually is.
+///
+/// The pen's coverage plate used to go on as a `ShaderMask` over the words, which is a compositing
+/// layer, so the piece under it could not have its tear drawn straight into the canvas and had to
+/// bake it into an image instead — hundreds of milliseconds in CanvasKit, on the build thread,
+/// once per note as the thread scrolls, and 203 of 793 frames of a scroll over 400 ms to build.
+/// The plate is the paint the glyphs are drawn with now. Same ink, no layer.
+void _writingComposesNothing() {
+  testWidgets('a piece with writing on it draws its tear without baking it', (tester) async {
+    await MaterialLibrary.load();
+    await InkPlates.load();
+    final tear = MaterialLibrary.instance.writableTears.first;
+    await tester.runAsync(() async {
+      await MaskCache.load(tearAsset(tear));
+      await MaskCache.load(tearAsset('${tear}_edge'));
+    });
+    final was = SlicedMasks.composed;
+    tester.view.physicalSize = const Size(1200, 900);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MaterialApp(
+      home: ColoredBox(
+        color: const Color(0xFF62503C),
+        child: Center(
+          child: SizedBox(
+            width: 340,
+            child: PaperPiece(
+              stockId: 'lined_02',
+              tearId: tear,
+              liftMm: 0.9,
+              tilt: 0.006,
+              child: const Written('back by six. the pigeon is still on the cupboard',
+                  by: Person.noor),
+            ),
+          ),
+        ),
+      ),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(SlicedMasks.composed - was, 0,
+        reason: 'writing on a piece of paper pushed a compositing layer, so the piece baked its '
+            'tear into an image instead of drawing it');
+  });
 }
 
 /// One piece of paper with writing on it: the case every note in the thread is, and the case the

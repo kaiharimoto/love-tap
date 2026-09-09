@@ -249,7 +249,28 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       if (mounted) setState(() => _replyTo = answerable);
       _text.text = 'the second one, then';
       if (mounted) setState(() {});
-      await _scrollToAnchor(no.id);
+      // The two states nobody has ever seen: one still going, and one that has not left.
+      //
+      // `queued` and `sending` are the two a person sees when the wire is bad, and they appeared
+      // in no artifact and in no report field in eight captures — which is the half of delivery
+      // that matters most on a link between two phones in two houses. Neither is drawn here: the
+      // transport is slowed so a push is genuinely in flight when the shutter opens, and then the
+      // next few requests are dropped so a row is genuinely sitting in the outbox. The link stays
+      // up, so the record still says connected; a phone that has gone offline would say so.
+      final t = scope.transport;
+      if (t is LocalTransport) {
+        t.scriptedFaults.setLatency(const Duration(milliseconds: 6000));
+        await scope.emit('message', {'text': 'ringing the vet at four'});
+        scope.sync.kick();
+        await Future<void>.delayed(const Duration(milliseconds: 260));
+        t.scriptedFaults.dropNext(40);
+        await scope.emit('message', {'text': 'and the thing for the door'});
+        scope.sync.kick();
+        await Future<void>.delayed(const Duration(milliseconds: 260));
+      }
+      // pinned to the bottom, so the five states are the five rows above the composer rather than
+      // whichever three fitted above the anchor
+      await _scrollToAnchor('end');
     };
     CaptureBus.sendSlowly = (text, slowMs) async {
       final scope = AppScope.of(context);
@@ -265,8 +286,26 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     CaptureBus.chatReport = () {
       final ps = _positions.itemPositions.value.toList()..sort((a, b) => a.index.compareTo(b.index));
       final items = AppScope.of(context).thread.items;
+      // A row the list reports as visible may be a sliver of itself with its writing above the top
+      // edge or below the bottom one, and the record used to count that as a state on the glass:
+      // 13 said `read: 1` for a row that is 125 device pixels of blank paper in the frame, and
+      // there is no read mark anywhere in the picture. A row counts as on the glass only when the
+      // whole of it is; anything clipped is listed separately with how much of it is showing, so
+      // the record says what is in the frame and what is only nearly in it.
+      bool whole(ItemPosition p) => p.itemLeadingEdge >= 0.0 && p.itemTrailingEdge <= 1.0;
+      final shown = [for (final p in ps) if (p.index < items.length && whole(p)) p];
+      final clipped = [for (final p in ps) if (p.index < items.length && !whole(p)) p];
       return {
         'visible': [for (final p in ps) if (p.index < items.length) items[p.index].id],
+        'whole_on_the_glass': [for (final p in shown) items[p.index].id],
+        'clipped_at_an_edge': {
+          for (final p in clipped)
+            items[p.index].id: double.parse(
+                (((p.itemTrailingEdge.clamp(0.0, 1.0) - p.itemLeadingEdge.clamp(0.0, 1.0)) /
+                        (p.itemTrailingEdge - p.itemLeadingEdge))
+                    .clamp(0.0, 1.0)
+                    .toStringAsFixed(3))),
+        },
         // What each row on the glass says about itself. The artifact named for the messenger's
         // states carried no record of any row's state, so a critic could only read the marks off
         // the picture and count them all the same; there was nothing to check the picture against.
@@ -281,16 +320,16 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                 'says': deliverySays(items[p.index].delivery),
               },
         },
+        // counted over the rows that are wholly in the frame, because this number is a claim
+        // about the picture
         'states_on_the_glass': {
           for (final d in {
-            for (final p in ps)
-              if (p.index < items.length && _drawsADeliveryMark(items[p.index]))
-                deliverySays(items[p.index].delivery)
+            for (final p in shown)
+              if (_drawsADeliveryMark(items[p.index])) deliverySays(items[p.index].delivery)
           })
             d: [
-              for (final p in ps)
-                if (p.index < items.length &&
-                    _drawsADeliveryMark(items[p.index]) &&
+              for (final p in shown)
+                if (_drawsADeliveryMark(items[p.index]) &&
                     deliverySays(items[p.index].delivery) == d)
                   items[p.index].id
             ].length,

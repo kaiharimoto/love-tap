@@ -11,22 +11,34 @@ const List<FontFeature> _handFeatures = [FontFeature.enable('calt'), FontFeature
 
 class Hands {
   /// Noor: fast, slanted ballpoint.
-  static TextStyle noor({double size = 19, Color? colour, double height = 1.42}) => TextStyle(
-        fontFamily: 'NoorHand',
-        fontSize: size,
-        height: height,
-        color: colour ?? Pen.ballpoint,
-        fontFeatures: _handFeatures,
-      );
+  static TextStyle noor({double size = 19, Color? colour, double height = 1.42, bool inked = false}) {
+    final c = colour ?? Pen.ballpoint;
+    final paint = inked ? inkPaint('ballpoint', c) : null;
+    return TextStyle(
+      fontFamily: 'NoorHand',
+      fontSize: size,
+      height: height,
+      // A TextStyle carries a colour or a paint, never both. The paint is the same colour with
+      // the pen's coverage in its shader, so the letters are the colour they were.
+      color: paint == null ? c : null,
+      foreground: paint,
+      fontFeatures: _handFeatures,
+    );
+  }
 
   /// Teo: upright, heavy pencil.
-  static TextStyle teo({double size = 19, Color? colour, double height = 1.46}) => TextStyle(
-        fontFamily: 'TeoHand',
-        fontSize: size,
-        height: height,
-        color: colour ?? Pen.graphite,
-        fontFeatures: _handFeatures,
-      );
+  static TextStyle teo({double size = 19, Color? colour, double height = 1.46, bool inked = false}) {
+    final c = colour ?? Pen.graphite;
+    final paint = inked ? inkPaint('graphite', c) : null;
+    return TextStyle(
+      fontFamily: 'TeoHand',
+      fontSize: size,
+      height: height,
+      color: paint == null ? c : null,
+      foreground: paint,
+      fontFeatures: _handFeatures,
+    );
+  }
 
   /// Furniture: tabs, stamps, dates.
   static TextStyle stamp({double size = 12, Color? colour, double spacing = 1.6}) => TextStyle(
@@ -59,8 +71,10 @@ class Hands {
         fontFeatures: _handFeatures,
       );
 
-  static TextStyle of(Person p, {double size = 19, Color? colour}) =>
-      p == Person.noor ? noor(size: size, colour: colour) : teo(size: size, colour: colour);
+  static TextStyle of(Person p, {double size = 19, Color? colour, bool inked = false}) =>
+      p == Person.noor
+          ? noor(size: size, colour: colour, inked: inked)
+          : teo(size: size, colour: colour, inked: inked);
 
   /// The second pen a person reaches for (Noor: red; Teo: a hard biro).
   static TextStyle second(Person p, {double size = 19}) =>
@@ -78,15 +92,16 @@ class Written extends StatelessWidget {
   final int? maxLines;
 
   @override
-  Widget build(BuildContext context) => Inked(
-        pen: by == Person.noor ? 'ballpoint' : 'graphite',
-        child: Text(
-          text,
-          style: Hands.of(by, size: size, colour: colour),
-          textAlign: align,
-          maxLines: maxLines,
-          overflow: maxLines == null ? null : TextOverflow.ellipsis,
-        ),
+  Widget build(BuildContext context) => Text(
+        text,
+        // The plate goes in as the paint the glyphs are drawn with rather than as a ShaderMask
+        // over them. Same ink; no compositing layer — and a piece of paper whose subtree needs a
+        // layer of its own cannot have its tear drawn straight into the canvas, so every note in
+        // the thread was baking its mask into an image on the build thread.
+        style: Hands.of(by, size: size, colour: colour, inked: true),
+        textAlign: align,
+        maxLines: maxLines,
+        overflow: maxLines == null ? null : TextOverflow.ellipsis,
       );
 }
 

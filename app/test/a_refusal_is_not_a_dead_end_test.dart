@@ -55,14 +55,21 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
 
+    // On the row itself, before anybody long-presses anything. It was only on the long-press menu,
+    // which is exactly where a reader was told — on the artifact named for the messenger's states —
+    // that there was nothing: the picture showed "it would not go" in red and no way out of it. A
+    // way out behind a gesture with no hint is not a way out.
+    expect(find.text(S.sendAgain), findsOneWidget,
+        reason: 'a refused row says what went wrong and nothing about what to do');
+
     await tester.longPress(find.text('the roster'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
-    expect(find.text(S.sendAgain), findsOneWidget,
-        reason: 'the only thing to be done about a row that did not go is not on the menu: '
-            'it offers ${S.reply}, ${S.react}, ${S.edit} and ${S.delete}, and none of those sends it');
+    expect(find.text(S.sendAgain), findsNWidgets(2),
+        reason: 'the menu offers ${S.reply}, ${S.react}, ${S.edit} and ${S.delete}, and none of '
+            'those sends it');
 
-    await tester.tap(find.text(S.sendAgain));
+    await tester.tap(find.text(S.sendAgain).first);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
     expect(scope.spine.refused, isEmpty, reason: 'the mark stayed on the row');

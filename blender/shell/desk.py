@@ -120,8 +120,13 @@ def _placed_pores(h, w, seed, count=2600):
         across = (u - x0) - (np.mod(v - y0 + 0.5, 1.0) - 0.5) * lean / aspect
         taper = np.clip(1.0 - (np.abs(along) / length) ** 2, 0, 1)
         field += np.exp(-(across / width) ** 2) * taper * rng.uniform(0.3, 1.0) ** 1.4
-    m = field.max() or 1.0
-    return np.clip(field / m * 1.5, 0, 1)
+    # Normalised on a high percentile rather than on the maximum. With twenty-six hundred pores
+    # some of them land on top of each other, and dividing by that one hot spot took every
+    # ordinary pore down to a few per cent — which is why the along-grain gradient only moved from
+    # 0.459 to 0.662 when these were added. Clipping the few that overlap costs nothing; a pore is
+    # a hole, and two holes in the same place are one hole.
+    m = float(np.percentile(field, 99.7)) or 1.0
+    return np.clip(field / m, 0, 1)
 
 
 def board_grain(h, w, seed, rings=17.0, cant=0.10):
@@ -183,8 +188,15 @@ def board_grain(h, w, seed, rings=17.0, cant=0.10):
     # and the pores, which are the only thing on the face with a length along the grain: without
     # them every fine feature runs the same way and the surface reads as a painted band rather
     # than as a cut through fibre.
-    fibre = fibre - _placed_pores(h, w, seed + 7) * 0.85
-    return late, fleck, fibre
+    # The pores are their own term rather than a dent in the fibre. Folded into `fibre` they were
+    # multiplied by the fibre's own along-board modulation and then by 0.10 in the colour, so what
+    # reached the surface was two or three per cent: measured on the artifact, the desk's mean
+    # absolute gradient was 3.005 across the grain and 0.662 along it, a ratio of 4.54, where the
+    # paper in the same picture measures 4.13 and 4.37 and reads as a surface rather than as a set
+    # of stripes. A pore is a groove cut open by the saw: it takes the light out of the wood where
+    # it is, and it is the only thing on a flat-sawn face that varies along the grain.
+    pores = _placed_pores(h, w, seed + 7)
+    return late, fleck, fibre, pores
 
 
 def knot(h, w, cx, cy, r, seed):
@@ -252,7 +264,7 @@ def desk_maps(w, h, seed):
     for p in range(PLANKS):
         a, b = edges[p], edges[p + 1]
         bw = b - a
-        late, fleck, fibre = board_grain(h, bw, seed + p * 101,
+        late, fleck, fibre, pores = board_grain(h, bw, seed + p * 101,
                                          rings=float(rng.uniform(12, 23)),
                                          cant=float(rng.uniform(0.05, 0.16)))
         # each board is off a different tree and has taken the wax differently
@@ -260,8 +272,9 @@ def desk_maps(w, h, seed):
         early = EARLY * warmth
         col = early[None, None, :] * (1 - late[..., None]) + LATE[None, None, :] * late[..., None]
         col = col * (1 + 0.10 * fibre[..., None])
+        col = col * (1 - 0.34 * pores[..., None])
         col = col * (1 - 0.55 * fleck[..., None]) + RAY[None, None, :] * 0.55 * fleck[..., None]
-        hgt = late * -0.55 + fibre * 0.25 + fleck * 0.1
+        hgt = late * -0.55 + fibre * 0.25 + fleck * 0.1 - pores * 0.45
 
         for j in range(int(rng.integers(0, 3))):
             core, whorl, _sweep = knot(h, bw, float(rng.uniform(0.2, 0.8)),

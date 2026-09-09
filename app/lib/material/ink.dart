@@ -64,18 +64,43 @@ double _k(ui.Image plate) => kInkTileLogicalPx / plate.width;
 /// A glyph run is drawn with a Paint like anything else, so the plate can be that Paint's shader:
 /// the pen's colour through a colour filter, the plate's coverage as the alpha. No layer, one draw.
 Paint? inkPaint(String pen, Color colour) {
-  final plate = InkPlates.of(pen);
-  if (plate == null) return null;
-  return Paint()
-    ..shader = ui.ImageShader(
-      plate,
-      TileMode.repeated,
-      TileMode.repeated,
-      (Matrix4.identity()..scaleByDouble(_k(plate), _k(plate), 1, 1)).storage,
-    )
+  final key = '$pen|${colour.toARGB32()}';
+  final had = _paints[key];
+  if (had != null) return had;
+  final shader = _shaderFor(pen);
+  if (shader == null) return null;
+  final paint = Paint()
+    ..shader = shader
     // srcIn keeps the plate's coverage and takes the letter's colour: where the pen laid less
     // down, less of the letter arrives.
     ..colorFilter = ColorFilter.mode(colour, BlendMode.srcIn);
+  _paints[key] = paint;
+  return paint;
+}
+
+/// One shader per pen and one Paint per pen and colour, kept for the life of the app.
+///
+/// Both halves of this matter. Building a `ui.ImageShader` on every call is what made the first
+/// attempt at this unusable — a note builds its text on every frame it is on screen, and the test
+/// binding took ten minutes over a screenful. And a Paint that is a new object every build makes
+/// the `TextStyle` holding it unequal to the last one, so the paragraph lays out again for a
+/// change that is not a change.
+final Map<String, ui.ImageShader> _shaders = {};
+final Map<String, Paint> _paints = {};
+
+ui.ImageShader? _shaderFor(String pen) {
+  final had = _shaders[pen];
+  if (had != null) return had;
+  final plate = InkPlates.of(pen);
+  if (plate == null) return null;  // not decoded yet, or no ink packed: the text is drawn flat
+  final shader = ui.ImageShader(
+    plate,
+    TileMode.repeated,
+    TileMode.repeated,
+    (Matrix4.identity()..scaleByDouble(_k(plate), _k(plate), 1, 1)).storage,
+  );
+  _shaders[pen] = shader;
+  return shader;
 }
 
 /// Text with the pen's coverage multiplied into it.

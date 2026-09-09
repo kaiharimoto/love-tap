@@ -32,8 +32,31 @@ PAPER_T = 0.00012
 
 
 # ------------------------------------------------------------------ materials
-def paper_mat(name, rgb=(0.94, 0.91, 0.85), tooth=0.9):
-    return common.paper_material(name, rgb, tooth=tooth, yellowing=0.18, sheen=0.26, fibre_scale=1600.0)
+def paper_mat(name, rgb=(0.94, 0.91, 0.85), tooth=0.9, span_mm=40.0):
+    """Paper for a thing that is a few centimetres across, not a sheet that is twenty-one.
+
+    The material's grain is written in UV cycles, and an object's UV spans its own width. A stock
+    sheet is 210 mm across, so its 120-cycle mottle is a feature every 1.75 mm; the same number on
+    a 40 mm card is a feature every third of a millimetre, and its relief — fibre_scale/3 — is a
+    fourteenth of one, which is under a pixel at any density this is rendered at. Measured on a
+    plain card in the object rig, 40 px windows of its own surface: 0.91 grey levels of local
+    standard deviation, against 2.56 and 4.24 for the two unruled card stocks measured the same
+    way, and 0.97 for thermal receipt paper, which is the one deliberately smooth stock in the
+    build. Four critics and this builder have read that as a flat slab with a drop shadow, which is
+    the brief's own words for a failure of the whole visual concept.
+
+    So the grain is written in millimetres here and converted: an object's paper has the same
+    feature size as a sheet's. Measured the same way, that alone takes the card from 0.91 to 1.77,
+    and the amplitude — which is a separate knob now, because raising `tooth` also raises a relief
+    that is already sub-pixel — takes it to 2.42 at two and a half. That is inside the band the
+    unruled stocks measure, which is the only number worth aiming at.
+    """
+    span = max(8.0, float(span_mm))
+    ratio = span / 210.0
+    return common.paper_material(name, rgb, tooth=tooth, yellowing=0.18, sheen=0.26,
+                                 fibre_scale=1600.0 * ratio,
+                                 mottle_scale=ratio,
+                                 mottle_amount=2.5)
 
 
 def simple_mat(name, rgb, roughness=0.5, metallic=0.0, transmission=0.0, ior=1.45, grain=1.0):
