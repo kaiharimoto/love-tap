@@ -47,7 +47,30 @@ String whenLabel(Object? at) {
 }
 
 /// The same, but empty rather than echoed when there is no day at all.
-String dayLabel(Object? iso) {
-  final t = iso is String ? DateTime.tryParse(iso) : null;
+/// A length of time, said the way a player says it: `0:41`.
+///
+/// One grammar and one rounding, because there were three of each. The viewer rounded 2500 ms to
+/// `0:03` while the gallery truncated the same recording to `2s` and the thread row wrote `0:02`,
+/// so one clip had three lengths in one evidence set. A position is how far in you are, so it
+/// truncates — 2.9 seconds in is still 0:02 until it is three. A total is how long the thing is,
+/// so it rounds up: a two-and-a-half-second clip is not over at 0:02.
+String clockOf(int ms, {bool total = false}) {
+  final s = ms <= 0 ? 0 : (total ? (ms + 999) ~/ 1000 : ms ~/ 1000);
+  return '${s ~/ 60}:${(s % 60).toString().padLeft(2, '0')}';
+}
+
+/// A day, said the way a person says it: `Tue 4 Aug`.
+///
+/// Takes whatever the thing it is labelling keeps its time in — an ISO string out of a payload,
+/// milliseconds off an event, a DateTime. It used to take only a string, and Moments passed it an
+/// event's own `ts`, which is an integer: every voice note on that screen read `teo · ` with the
+/// separator drawn and nothing after it.
+String dayLabel(Object? when) {
+  final t = switch (when) {
+    String s => DateTime.tryParse(s),
+    int ms => DateTime.fromMillisecondsSinceEpoch(ms),
+    DateTime d => d,
+    _ => null,
+  };
   return t == null ? '' : DateFormat('EEE d MMM').format(t.toLocal());
 }

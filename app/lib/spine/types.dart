@@ -1,4 +1,4 @@
-// The event type registry. docs/EVENT_TYPES.md lists the same seventeen types; the schema test
+// The event type registry. docs/EVENT_TYPES.md lists the same eighteen types; the schema test
 // fails if the two disagree.
 //
 // Adding a type is one entry here and one renderer in thread/renderers.dart, and

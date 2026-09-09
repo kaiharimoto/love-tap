@@ -1,4 +1,5 @@
 // Media from the blob store: images, voice notes, video posters.
+import '../../thread/note_body.dart';
 import 'dart:async';
 import 'dart:typed_data';
 
@@ -249,7 +250,7 @@ class _VoiceNotePlayerState extends State<VoiceNotePlayer> {
         const SizedBox(width: 8),
         // the length of the recording, in the margin hand: this and the fetching line were the
         // only two strings in the app set in the system's own sans-serif
-        Text('${secs ~/ 60}:${(secs % 60).toString().padLeft(2, '0')}', style: Hands.margin(size: 12)),
+        Text(clockOf(secs * 1000, total: true), style: Hands.margin(size: 12)),
       ],
     );
   }
@@ -280,7 +281,7 @@ class VoiceLine extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 6),
-        Text('${secs ~/ 60}:${(secs % 60).toString().padLeft(2, '0')}', style: Hands.margin(size: 11)),
+        Text(clockOf(secs * 1000, total: true), style: Hands.margin(size: 11)),
       ],
     );
   }

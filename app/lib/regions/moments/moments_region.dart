@@ -2,6 +2,7 @@
 //
 // There is no second store here and no separate index: every list on this screen is the same
 // List<Event> the thread reads, narrowed by person, by date, by type, or by a particular feeling.
+import '../../thread/note_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
@@ -539,7 +540,8 @@ class _One extends StatelessWidget {
                 height: 18,
               ),
               const SizedBox(height: 4),
-              Text('${event.author.name} · ${dayLabel(event.ts)}',
+              // never a separator with nothing after it
+              Text([event.author.name, dayLabel(event.ts)].where((w) => w.isNotEmpty).join(' · '),
                   style: Hands.margin(size: 10), maxLines: 1, overflow: TextOverflow.fade),
             ],
           ),
@@ -571,7 +573,7 @@ class _One extends StatelessWidget {
             children: [
               Mark.play(size: 22, colour: Pen.graphite, seed: row),
               const SizedBox(height: 6),
-              Text(ms == null ? S.video : '${(ms / 1000).round()}s',
+              Text(ms == null ? S.video : clockOf(ms.toInt(), total: true),
                   style: Hands.margin(size: 14)),
             ],
           ),
@@ -619,7 +621,7 @@ class _One extends StatelessWidget {
                   right: 4,
                   bottom: 3,
                   child: Text(
-                    '${((event.payload['duration_ms'] as num?) ?? 0) ~/ 1000}s',
+                    clockOf(((event.payload['duration_ms'] as num?) ?? 0).toInt(), total: true),
                     style: Hands.margin(size: 11),
                   ),
                 ),

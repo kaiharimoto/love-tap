@@ -4,6 +4,7 @@
 // does and which has nothing to do with the rest of this app. Here the desk stays under it and
 // goes dark, the print comes up off the paper it was taped to, and what was written with it is on
 // a slip underneath in the hand that wrote it. Pinch still zooms; a video still plays and loops.
+import '../../thread/note_body.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -246,10 +247,7 @@ class _FilmStrip extends StatelessWidget {
   final VoidCallback onTap;
   final void Function(double fraction) onSeek;
 
-  static String _clock(int ms) {
-    final s = (ms / 1000).round();
-    return '${s ~/ 60}:${(s % 60).toString().padLeft(2, '0')}';
-  }
+  static String _clock(int ms, {bool total = false}) => clockOf(ms, total: total);
 
   @override
   Widget build(BuildContext context) {
@@ -293,7 +291,7 @@ class _FilmStrip extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          Text('${_clock(at)} / ${_clock(total)}', style: Hands.margin(size: 12)),
+          Text('${_clock(at)} / ${_clock(total, total: true)}', style: Hands.margin(size: 12)),
         ],
       ),
     );

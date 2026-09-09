@@ -116,7 +116,7 @@ void main() {
           reason: '${spec.id} can neither be searched nor filtered nor is it excluded, so it '
               'would be invisible in Moments and in search both');
     }
-    // and the seventeen the brief names are all of them present
+    // and the eighteen the registry holds are all of them present
     for (final id in ['message', 'photo', 'video', 'voice_note', 'reaction', 'message_edit',
                       'message_delete', 'read_marker', 'feeling', 'state_declared',
                       'state_passive', 'date_event', 'todo_event', 'milestone', 'ritual_kept',

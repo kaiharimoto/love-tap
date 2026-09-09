@@ -14,7 +14,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   setUpAll(() async { await MaterialLibrary.load(); });
-  testWidgets('how tall is one desk row', (tester) async {
+  // What a module says one of its rows costs, against what a row of it actually measures.
+  //
+  // Us shares the desk out by these numbers — every module gets one row of itself and then a share
+  // of what is left, weighted by what it declares — so a declared height that has drifted from the
+  // real one takes a wrong share of the desk from every other module. This used to print the two
+  // numbers and assert nothing at all, which is a probe rather than a test: it could not fail.
+  testWidgets('a module knows what one of its rows costs', (tester) async {
     final types = {for (final m in kModules) ...m.eventTypes};
     final dir = Directory('${Directory.current.parent.path}/seed/year');
     final seeded = <Map<String, dynamic>>[];
@@ -54,6 +60,18 @@ void main() {
       final hs = <double>[];
       while (child != null) { hs.add(child.size.height); child = ro.childAfter(child); }
       debugPrint('MODULE ${m.id}: declared ${m.rowHeight}  actual rows ${hs.map((h) => h.round()).toList()}  total ${hs.fold<double>(0,(a,b)=>a+b).round()}');
+      if (hs.isEmpty) continue;
+      final sorted = [...hs]..sort();
+      final tallest = sorted.last;
+      // The declared height is what a row of this module costs at its tallest — the first row is
+      // the fullest one — so it may not be under what one actually measures, and it may not be so
+      // far over that the module takes room it does not use.
+      expect(m.rowHeight, greaterThanOrEqualTo(tallest - 2),
+          reason: '${m.id} says a row costs ${m.rowHeight} and its tallest measures $tallest, so '
+              'it takes less of the desk than it needs and its last row falls off the bottom');
+      expect(m.rowHeight, lessThanOrEqualTo(tallest * 1.35 + 4),
+          reason: '${m.id} says a row costs ${m.rowHeight} against a tallest of $tallest, so it '
+              'takes room from every other module on the desk');
     }
   });
 }
