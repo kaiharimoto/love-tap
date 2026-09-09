@@ -120,6 +120,7 @@ def new_mesh(bm, name, mat=None, smooth=True):
     mesh = bpy.data.meshes.new(name)
     bm.to_mesh(mesh)
     bm.free()
+    _ensure_uv(mesh)
     obj = bpy.data.objects.new(name, mesh)
     bpy.context.scene.collection.objects.link(obj)
     if smooth:
@@ -128,6 +129,35 @@ def new_mesh(bm, name, mat=None, smooth=True):
     if mat:
         obj.data.materials.append(mat)
     return obj
+
+
+def _ensure_uv(mesh):
+    """A mesh with no UV map has no paper on it, whatever material it is given.
+
+    Every fibre, mottle and speck in `paper_material` is driven from the Texture Coordinate node's
+    UV output, and a mesh built from explicit vertices has no UV layer, so that output is (0,0)
+    over the whole surface and the material resolves to one flat colour. `sheet()` writes its own
+    UVs and every object built from one came out with paper on it; the ones folded out of raw
+    polygons — the crane among them — measured 0.49 grey levels of local standard deviation
+    against 9.0 for a paper stock, and read to four critics as untextured low-poly renders. They
+    were: not for want of tooth in the material but for want of anywhere to put it.
+
+    The projection is planar over the mesh's own bounding box in xy, which is what `span_mm`
+    already assumes — an object's paper spans the object.
+    """
+    if mesh.uv_layers:
+        return
+    xs = [v.co.x for v in mesh.vertices]
+    ys = [v.co.y for v in mesh.vertices]
+    if not xs:
+        return
+    w = (max(xs) - min(xs)) or 1.0
+    h = (max(ys) - min(ys)) or 1.0
+    x0, y0 = min(xs), min(ys)
+    uv = mesh.uv_layers.new(name="UVMap")
+    for loop in mesh.loops:
+        co = mesh.vertices[loop.vertex_index].co
+        uv.data[loop.index].uv = ((co.x - x0) / w, (co.y - y0) / h)
 
 
 def sheet(w, h, nx=40, ny=40, warp=None):
