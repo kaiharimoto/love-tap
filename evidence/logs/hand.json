@@ -1,19 +1,19 @@
 {
  "crop": "evidence/02_chat.png",
- "marks": 513,
+ "marks": 500,
  "best_fit_iou": {
-  "median": 0.669,
-  "p90": 0.833,
+  "median": 0.693,
+  "p90": 0.86,
   "max": 0.97
  },
- "marks_with_a_twin": 30,
- "twin_share": 0.058,
- "pairs_over_twin": 21,
+ "marks_with_a_twin": 58,
+ "twin_share": 0.116,
+ "pairs_over_twin": 36,
  "twin_iou": 0.85,
  "twin_share_at": {
-  "0.8": 0.166,
-  "0.85": 0.058,
-  "0.9": 0.012,
+  "0.8": 0.212,
+  "0.85": 0.116,
+  "0.9": 0.044,
   "0.95": 0.004,
   "0.99": 0.0
  },

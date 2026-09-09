@@ -1,0 +1,244 @@
+{
+ "box": 80,
+ "pale": 190.0,
+ "floor": 2.0,
+ "note": "a pale window flatter than the floor is a flat fill standing in for paper. The floor is measured: over a full screen of paper the flattest real 80 px window reads 4.58 and the median 33.6, so 2.0 is well under anything the material makes.",
+ "stills": {
+  "01_pulse.png": {
+   "flattest": 2.402,
+   "where": [
+    1240,
+    1280
+   ],
+   "windows_under_the_floor": 0,
+   "worst_few": []
+  },
+  "02_chat.png": {
+   "flattest": 4.339,
+   "where": [
+    1120,
+    2240
+   ],
+   "windows_under_the_floor": 0,
+   "worst_few": []
+  },
+  "03_us.png": {
+   "flattest": 1.461,
+   "where": [
+    960,
+    400
+   ],
+   "windows_under_the_floor": 20,
+   "worst_few": [
+    {
+     "at": [
+      960,
+      400
+     ],
+     "std": 1.461
+    },
+    {
+     "at": [
+      920,
+      400
+     ],
+     "std": 1.477
+    },
+    {
+     "at": [
+      880,
+      400
+     ],
+     "std": 1.567
+    },
+    {
+     "at": [
+      1000,
+      1400
+     ],
+     "std": 1.749
+    },
+    {
+     "at": [
+      1040,
+      1400
+     ],
+     "std": 1.767
+    }
+   ]
+  },
+  "04_moments.png": {
+   "flattest": 5.345,
+   "where": [
+    760,
+    3000
+   ],
+   "windows_under_the_floor": 0,
+   "worst_few": []
+  },
+  "05_settings.png": {
+   "flattest": 1.409,
+   "where": [
+    600,
+    2560
+   ],
+   "windows_under_the_floor": 32,
+   "worst_few": [
+    {
+     "at": [
+      600,
+      2560
+     ],
+     "std": 1.409
+    },
+    {
+     "at": [
+      560,
+      2560
+     ],
+     "std": 1.439
+    },
+    {
+     "at": [
+      520,
+      2560
+     ],
+     "std": 1.449
+    },
+    {
+     "at": [
+      480,
+      2560
+     ],
+     "std": 1.523
+    },
+    {
+     "at": [
+      1240,
+      1640
+     ],
+     "std": 1.551
+    }
+   ]
+  },
+  "10_first_run.png": {
+   "flattest": 3.438,
+   "where": [
+    960,
+    160
+   ],
+   "windows_under_the_floor": 0,
+   "worst_few": []
+  },
+  "12_search.png": {
+   "flattest": 3.171,
+   "where": [
+    1200,
+    1200
+   ],
+   "windows_under_the_floor": 0,
+   "worst_few": []
+  },
+  "13_messenger_states.png": {
+   "flattest": 4.625,
+   "where": [
+    1160,
+    1280
+   ],
+   "windows_under_the_floor": 0,
+   "worst_few": []
+  },
+  "14_media_viewer.png": {
+   "flattest": 0.619,
+   "where": [
+    240,
+    720
+   ],
+   "windows_under_the_floor": 13,
+   "worst_few": [
+    {
+     "at": [
+      240,
+      720
+     ],
+     "std": 0.619
+    },
+    {
+     "at": [
+      400,
+      720
+     ],
+     "std": 0.652
+    },
+    {
+     "at": [
+      440,
+      720
+     ],
+     "std": 0.702
+    },
+    {
+     "at": [
+      280,
+      720
+     ],
+     "std": 0.724
+    },
+    {
+     "at": [
+      360,
+      720
+     ],
+     "std": 0.745
+    }
+   ]
+  },
+  "17_setup_pwa.png": {
+   "flattest": 1.048,
+   "where": [
+    1200,
+    400
+   ],
+   "windows_under_the_floor": 20,
+   "worst_few": [
+    {
+     "at": [
+      1200,
+      400
+     ],
+     "std": 1.048
+    },
+    {
+     "at": [
+      1040,
+      480
+     ],
+     "std": 1.142
+    },
+    {
+     "at": [
+      1200,
+      440
+     ],
+     "std": 1.15
+    },
+    {
+     "at": [
+      1040,
+      440
+     ],
+     "std": 1.246
+    },
+    {
+     "at": [
+      1160,
+      480
+     ],
+     "std": 1.246
+    }
+   ]
+  }
+ },
+ "ok": false,
+ "files_with_a_flat_fill": 4
+}

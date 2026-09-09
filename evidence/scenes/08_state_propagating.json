@@ -89,7 +89,15 @@
    "timeout": 90000
   },
   {
+   "do": "wait",
+   "ms": 700
+  },
+  {
    "do": "unfold"
+  },
+  {
+   "do": "wait",
+   "ms": 250
   },
   {
    "do": "wait",

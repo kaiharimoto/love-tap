@@ -1,0 +1,26 @@
+{
+ "tile": 128,
+ "how": "mean absolute first difference inside 128 px tiles, column to column (across the grain) and row to row (along it), median over the tiles",
+ "max_ratio": 3.6,
+ "why": "a board with only rings on it is a comb. Vessels and rays are what happens along the grain, and without them the surface reads as stripes rather than as a cut through fibre.",
+ "surfaces": {
+  "desk.png": {
+   "fine_detail_share": 1.83,
+   "across_the_grain": 4.039,
+   "along_the_grain": 0.787,
+   "ratio": 5.13,
+   "tiles": 230
+  },
+  "desk_dusk.png": {
+   "fine_detail_share": 2.2,
+   "across_the_grain": 3.698,
+   "along_the_grain": 0.673,
+   "ratio": 5.49,
+   "tiles": 230
+  }
+ },
+ "worst_ratio": 5.49,
+ "least_fine_detail": 1.83,
+ "min_fine": 1.6,
+ "ok": true
+}
