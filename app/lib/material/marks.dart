@@ -37,6 +37,16 @@ class Mark extends StatelessWidget {
   factory Mark.cross({double size = 18, Color colour = Pen.margin, int seed = 5}) =>
       Mark._(_cross, size: size, colour: colour, weight: 1.2, seed: seed);
 
+  /// An empty box, drawn in four strokes that do not quite meet: a line off a list that has not
+  /// been done yet.
+  ///
+  /// The Us desk used to lead an *open* to-do with a cross, while the same kind of item in the
+  /// thread carried an empty box — the same event marked two ways in one build, and the desk's
+  /// way said the opposite of what it meant, because a cross through a line is how anyone strikes
+  /// one off. A coherence critic put the two pictures side by side.
+  factory Mark.box({double size = 13, Color colour = Pen.margin, int seed = 11}) =>
+      Mark._(_box, size: size, colour: colour, weight: 1.2, seed: seed);
+
   /// A tick: two strokes, the second longer than the first, the way anyone strikes a list.
   factory Mark.tick({double size = 18, Color colour = Pen.graphite, int seed = 19}) =>
       Mark._(_tick, size: size, colour: colour, weight: 1.5, seed: seed);
@@ -166,6 +176,15 @@ void _cross(Canvas canvas, Size size, _Hand hand) {
   final w = size.width, h = size.height;
   hand.stroke([Offset(w * 0.22, h * 0.24), Offset(w * 0.78, h * 0.78)], wobble: 0.5);
   hand.stroke([Offset(w * 0.78, h * 0.22), Offset(w * 0.22, h * 0.80)], wobble: 0.5);
+}
+
+void _box(Canvas canvas, Size size, _Hand hand) {
+  final w = size.width, h = size.height;
+  // four strokes, each overshooting a little, because nobody draws a closed rectangle by hand
+  hand.stroke([Offset(w * 0.14, h * 0.20), Offset(w * 0.88, h * 0.16)], wobble: 0.5);
+  hand.stroke([Offset(w * 0.86, h * 0.14), Offset(w * 0.90, h * 0.86)], wobble: 0.5);
+  hand.stroke([Offset(w * 0.90, h * 0.84), Offset(w * 0.16, h * 0.88)], wobble: 0.5);
+  hand.stroke([Offset(w * 0.18, h * 0.86), Offset(w * 0.13, h * 0.18)], wobble: 0.5);
 }
 
 void _tick(Canvas canvas, Size size, _Hand hand) {

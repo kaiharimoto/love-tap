@@ -117,7 +117,7 @@ class TodoList extends StatelessWidget {
             type: 'todo_event',
             text: t.text,
             aside: t.assignee?.name,
-            lead: Mark.cross(size: 11, colour: Pen.margin, seed: i),
+            lead: Mark.box(size: 11, colour: Pen.margin, seed: i),
           ),
         if (open.isEmpty)
           const DeskLine(id: 'todos.none', row: 0, type: 'todo_event',
