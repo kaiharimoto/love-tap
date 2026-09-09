@@ -10,7 +10,6 @@
 import 'dart:io';
 
 import 'package:desk/material/hands.dart';
-import 'package:desk/material/ink.dart';
 import 'package:desk/spine/event.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/material/paper.dart';
@@ -34,9 +33,18 @@ void main() {
 void _writingComposesNothing() {
   testWidgets('a piece with writing on it draws its tear without baking it', (tester) async {
     await MaterialLibrary.load();
-    await InkPlates.load();
     final tear = MaterialLibrary.instance.writableTears.first;
     await tester.runAsync(() async {
+      // Real async time: a bundle read awaited inside the test binding's fake zone never
+      // completes.
+      //
+      // The ink plates are deliberately not loaded. What this asserts is structural — a piece of
+      // paper with writing on it must not push a compositing layer, because a piece that does
+      // cannot have its tear drawn straight into the canvas and has to bake it. Whether a plate is
+      // loaded changes nothing about that: with none, `inkPaint` returns null and the same `Text`
+      // draws flat. Loading them makes this binding's software rasteriser tile a repeated image
+      // shader under every glyph, which is minutes — and is exactly why the first attempt at
+      // putting the plate into the paint was abandoned as unusable.
       await MaskCache.load(tearAsset(tear));
       await MaskCache.load(tearAsset('${tear}_edge'));
     });
