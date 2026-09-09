@@ -177,7 +177,13 @@ def main():
     for name in CLIPS:
         log = LOGS / f"{name.rsplit('.', 1)[0]}.frames.json"
         if log.exists():
-            frames["clips"][name] = json.loads(log.read_text())
+            entry = json.loads(log.read_text())
+            # when the verdict was written, and whether it is this capture's. A frame check that
+            # a half-finished run never reached leaves the last run's verdict sitting in the same
+            # file under the same name, and it reads as fresh: I believed one for an hour.
+            entry["checked_at"] = _stamp_of(log)
+            entry["from_this_run"] = stamp_s is None or log.stat().st_mtime >= stamp_s - 5
+            frames["clips"][name] = entry
     scroll_log = LOGS / "11_chat_scroll.json"
     if scroll_log.exists():
         s = json.loads(scroll_log.read_text())
@@ -192,6 +198,18 @@ def main():
         frames["scroll_emulator"] = json.loads(emulator.read_text())
     else:
         frames["scroll_emulator"] = {"missing": reasons.get("frames.json") or "no Android device was up in this session"}
+
+    # and the same for every check written beside the artifacts: hairline, hand, tears, surfaces,
+    # haptics, reception, the per-scene records. Nothing here is a verdict on the check — only on
+    # whether it was written during this capture.
+    checks = {}
+    for log in sorted(LOGS.glob("*.json")):
+        fresh = stamp_s is None or log.stat().st_mtime >= stamp_s - 5
+        checks[log.name] = {"written": _stamp_of(log), "from_this_run": fresh}
+    manifest["checks"] = checks
+    behind = sorted(n for n, c in checks.items() if not c["from_this_run"])
+    if behind:
+        manifest["checks_from_an_earlier_run"] = behind
 
     (EVIDENCE / "frames.json").write_text(json.dumps(frames, indent=1) + "\n")
     (EVIDENCE / "MANIFEST.json").write_text(json.dumps(manifest, indent=1) + "\n")
