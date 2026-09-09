@@ -112,6 +112,36 @@ slow against the app time the same logs record, which a completeness pass measur
 
 Everything in the previous handoff still holds. These are new.
 
+### Why a session stops, and how not to
+
+Three causes, all of them measured in this session rather than guessed at. None of them is the
+work running out.
+
+1. **Ending a turn parks the session.** A reply is a full stop: nothing else happens until a hook,
+   a notification or a person wakes it. Reporting progress and then waiting is the single largest
+   source of dead time here — a capture that takes ninety minutes costs ninety minutes *plus*
+   however long the session sits idle after the reply that announced it. Stay inside one turn:
+   chain the tool calls, wait with a blocking `until` loop (`timeout: 600000` is the ceiling, and
+   the harness backgrounds anything longer — just issue it again), and reply when there is a
+   result, not when there is a wait.
+2. **The container restarts and takes every background process with it.** `uptime` said 26 minutes
+   in the middle of this session: the running capture, its far phone and a probe daemon all died
+   at once, the log simply stopped mid-scene with no error, and `nohup` did not help. The disk
+   survives, so nothing committed was lost and `/tmp` was still there. After any gap, check
+   `uptime` and whether the process is still alive before believing a log that has stopped moving.
+   Commit and push before anything long: a restart then costs minutes rather than work.
+3. **A waiter outlives the thing it waits for, and silence looks like progress.** Five background
+   `until grep -q "^EXIT" ...` loops were still spinning an hour after their runs had been killed,
+   because the marker they were waiting for could never be written. A waiter must watch something
+   that fails as well as something that succeeds, and when a run dies its waiter has to be stopped
+   (`TaskStop`) rather than left to poll a file nobody is writing.
+
+And one that is not about stopping but wastes as much: **do not rebuild or edit the tree while
+critics are reading it.** The cycle-7 completeness pass caught `app/build/web` being rebuilt
+between two reports and named it: the evidence moved under the review. Capture, write the builder
+sheet, hide, review, show, score — and keep your hands off the tree between the second and the
+fifth of those.
+
 - **A clip is only as long as the motion in it.** Every run of a `frames` step must end where the
   thing being filmed stops moving, or the tail is frame-identical and the check fails. The
   arithmetic is in `app/lib/feelings/landing.dart`: a thrown object rests
