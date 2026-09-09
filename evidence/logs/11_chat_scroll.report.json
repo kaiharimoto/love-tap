@@ -1,0 +1,108 @@
+{
+ "region": 1,
+ "view": {
+  "region": "chat",
+  "composer": "the second one, then",
+  "attaching": false,
+  "replying_to": null,
+  "editing": null,
+  "partner_typing": true,
+  "anchor": "row 5006 of 8075",
+  "kinds": {
+   "feeling": 1,
+   "message": 1,
+   "todo_event": 1
+  },
+  "folded_in": {
+   "reaction": 0,
+   "message_edit": 0,
+   "message_delete": 0,
+   "read_marker": 3
+  },
+  "delivery": {
+   "00038325DREVTCWTEXF1M4T42M": {
+    "state": "read",
+    "says": "read"
+   }
+  },
+  "states_on_the_glass": {},
+  "reactions": {},
+  "edited": [],
+  "taken_back": []
+ },
+ "visible": [
+  "00037X77087KZGXXSYD7V79SM9",
+  "000382R07GXTQ636388XM2H3QG",
+  "00038325DREVTCWTEXF1M4T42M"
+ ],
+ "paper": [
+  "000382R07GXTQ636388XM2H3QG",
+  "00038325DREVTCWTEXF1M4T42M"
+ ],
+ "tears": {
+  "00037X77087KZGXXSYD7V79SM9": "tear_008",
+  "000382R07GXTQ636388XM2H3QG": "tear_050",
+  "00038325DREVTCWTEXF1M4T42M": "tear_012"
+ },
+ "stocks": {
+  "00037X77087KZGXXSYD7V79SM9": "lined_04",
+  "000382R07GXTQ636388XM2H3QG": "lined_04",
+  "00038325DREVTCWTEXF1M4T42M": "looseleaf_01"
+ },
+ "scroll": {
+  "first": 5064,
+  "last": 5066,
+  "of": 8075
+ },
+ "now": "2026-09-03T19:40:00.000Z",
+ "driven_ms": 4944,
+ "seed": 20260903,
+ "events": 14075,
+ "transport": "local",
+ "link": "connected",
+ "me": "teo",
+ "masks_in_pool": 56,
+ "masks_composed": 12,
+ "writable_masks": 47,
+ "light": "day",
+ "has_dusk_paper": true,
+ "paper_stocks": 54,
+ "setup_showing": false,
+ "fold": {
+  "sequence": null
+ },
+ "sensation": null,
+ "sync": {
+  "transport": "local",
+  "role": "client",
+  "rounds": 184,
+  "pushed": 2,
+  "refused": 0,
+  "pulled": 0,
+  "blobs_fetched": 0,
+  "faults": 0,
+  "pending": 0,
+  "refused_in_the_outbox": 0,
+  "cursor": 14075,
+  "link": {
+   "transport": "local",
+   "role": "client",
+   "state": "connected",
+   "address": "http://127.0.0.1:8480",
+   "peer_cursor": 14075,
+   "our_cursor": 14075,
+   "last_error": null,
+   "since": "2026-09-09T19:26:59.152Z",
+   "last_contact": "2026-09-09T19:36:08.144Z"
+  }
+ },
+ "ambient": {
+  "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
+  "pocket_feeling": null,
+  "pocket_at": null,
+  "allowed_to_interrupt": false,
+  "held_by_the_phone": []
+ },
+ "at": "11_chat_scroll",
+ "read_at": "the end of the scene"
+}
