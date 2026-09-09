@@ -10,25 +10,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2356,
+   "ms": 2322,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3204
+   "ms": 6437
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2107
   },
   {
    "do": "shot",
-   "ms": 4833
+   "ms": 4026
   },
   {
    "do": "report",
-   "ms": 703
+   "ms": 702
   }
  ],
  "shots": [
@@ -133,6 +133,7 @@
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
+   "masks_composed": 1,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
@@ -168,8 +169,8 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-09T04:02:16.912Z",
-     "last_contact": "2026-09-09T04:02:18.997Z"
+     "since": "2026-09-09T17:52:46.744Z",
+     "last_contact": "2026-09-09T17:52:49.339Z"
     }
    },
    "ambient": {
@@ -183,9 +184,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 8240,
+ "cold_ms": 8865,
  "load": {
-  "ms": 8240,
+  "ms": 8865,
   "store": "fresh",
   "profile": "profile_seeded"
  },

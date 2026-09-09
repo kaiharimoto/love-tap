@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2303,
+   "ms": 2583,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3136
+   "ms": 3314
   },
   {
    "do": "wait",
@@ -24,15 +24,15 @@
   },
   {
    "do": "scrollTo",
-   "ms": 24181
+   "ms": 26827
   },
   {
    "do": "wait",
-   "ms": 1902
+   "ms": 1904
   },
   {
    "do": "shot",
-   "ms": 3360
+   "ms": 3291
   },
   {
    "do": "report",
@@ -85,7 +85,7 @@
      }
     },
     "states_on_the_glass": {
-     "read": 4
+     "read": 3
     },
     "reactions": {
      "00015WD17011152HXP55ZPFPYA": 1
@@ -146,6 +146,7 @@
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
+   "masks_composed": 11,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
@@ -175,8 +176,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-09T04:02:33.587Z",
-     "last_contact": "2026-09-09T04:02:55.293Z"
+     "since": "2026-09-09T17:53:06.484Z",
+     "last_contact": "2026-09-09T17:53:28.316Z"
     }
    },
    "ambient": {
@@ -190,9 +191,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2316,
+ "cold_ms": 2240,
  "load": {
-  "ms": 2316,
+  "ms": 2240,
   "store": "kept",
   "profile": "profile_seeded"
  },

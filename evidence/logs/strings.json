@@ -1,5 +1,8 @@
 {
  "strings_read": 116,
+ "literals_in_lib": 3672,
+ "share_of_literals_read": 0.032,
+ "what_it_cannot_see": "a sentence a function returns, a string built by interpolation at the point of use, and anything a module composes from the registry. Those are read by the tests that assert on their words rather than by this.",
  "rules_applied": [
   {
    "rule": "an emoji glyph in a displayed string",
@@ -98,15 +101,15 @@
    "text": "nothing to do. suspicious."
   },
   {
-   "where": "app/lib/regions/chat/blob_widgets.dart:373",
+   "where": "app/lib/regions/chat/blob_widgets.dart:387",
    "text": "${(durationMs! / 1000).round()}s"
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:913",
+   "where": "app/lib/regions/chat/chat_region.dart:952",
    "text": "${scope.partner.name} ${S.typing}"
   },
   {
-   "where": "app/lib/regions/chat/search_page.dart:157",
+   "where": "app/lib/regions/chat/search_page.dart:158",
    "text": "looking for"
   },
   {
@@ -118,7 +121,7 @@
    "text": "${_clock(at)} / ${_clock(total, total: true)}"
   },
   {
-   "where": "app/lib/regions/moments/moments_region.dart:696",
+   "where": "app/lib/regions/moments/moments_region.dart:711",
    "text": "${DateFormat("
   },
   {

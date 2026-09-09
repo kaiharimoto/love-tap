@@ -263,10 +263,22 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         await scope.emit('message', {'text': 'ringing the vet at four'});
         scope.sync.kick();
         await Future<void>.delayed(const Duration(milliseconds: 260));
-        t.scriptedFaults.dropNext(40);
+        // A handful of dropped requests, not forty: enough to keep this one row in the outbox
+        // while the shutter opens, few enough that the rounds carrying everything else get
+        // through. Forty starved the whole engine.
+        t.scriptedFaults.dropNext(8);
         await scope.emit('message', {'text': 'and the thing for the door'});
         scope.sync.kick();
         await Future<void>.delayed(const Duration(milliseconds: 260));
+        // And the wire goes back to normal. The latency is on every request, not on the one
+        // message that asked for it, so leaving it set meant nothing else could settle either:
+        // the record came back with five rows all reading `going` and no typing indicator, because
+        // the far phone's own frame could not cross in the time the step waited for it. The row
+        // that has to look like it is still going is the one the scene sends last, and it gets its
+        // own latency then.
+        t.scriptedFaults.setLatency(Duration.zero);
+        scope.sync.kick();
+        await Future<void>.delayed(const Duration(milliseconds: 900));
       }
       // pinned to the bottom, so the five states are the five rows above the composer rather than
       // whichever three fitted above the anchor

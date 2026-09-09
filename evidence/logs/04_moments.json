@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2340,
+   "ms": 2549,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4144
+   "ms": 4093
   },
   {
    "do": "wait",
-   "ms": 3703
+   "ms": 3701
   },
   {
    "do": "shot",
-   "ms": 4008
+   "ms": 4435
   },
   {
    "do": "report",
@@ -61,6 +61,7 @@
      "reading": 0,
      "waiting": 0
     },
+    "tiles_without_a_picture": 8,
     "kinds": {
      "photo": 115,
      "voice_note": 54,
@@ -80,6 +81,7 @@
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
+   "masks_composed": 0,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
@@ -109,8 +111,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-09T04:03:29.630Z",
-     "last_contact": "2026-09-09T04:03:31.565Z"
+     "since": "2026-09-09T17:54:06.232Z",
+     "last_contact": "2026-09-09T17:54:08.446Z"
     }
    },
    "ambient": {
@@ -124,9 +126,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2168,
+ "cold_ms": 2320,
  "load": {
-  "ms": 2168,
+  "ms": 2320,
   "store": "kept",
   "profile": "profile_seeded"
  },

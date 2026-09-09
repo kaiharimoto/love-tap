@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2479,
+   "ms": 2480,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3125
+   "ms": 3306
   },
   {
    "do": "wait",
@@ -24,27 +24,27 @@
   },
   {
    "do": "search",
-   "ms": 3498
+   "ms": 3810
   },
   {
    "do": "wait",
-   "ms": 1902
+   "ms": 1904
   },
   {
    "do": "searchFacet",
-   "ms": 1325
+   "ms": 1367
   },
   {
    "do": "wait",
-   "ms": 1606
+   "ms": 1603
   },
   {
    "do": "shot",
-   "ms": 2945
+   "ms": 3173
   },
   {
    "do": "report",
-   "ms": 702
+   "ms": 703
   }
  ],
  "shots": [
@@ -117,6 +117,7 @@
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
+   "masks_composed": 2,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
@@ -146,8 +147,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-09T04:04:03.059Z",
-     "last_contact": "2026-09-09T04:04:05.184Z"
+     "since": "2026-09-09T17:54:40.628Z",
+     "last_contact": "2026-09-09T17:54:42.718Z"
     }
    },
    "ambient": {
@@ -161,9 +162,9 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2137,
+ "cold_ms": 2187,
  "load": {
-  "ms": 2137,
+  "ms": 2187,
   "store": "kept",
   "profile": "profile_seeded"
  },

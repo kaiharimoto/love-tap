@@ -10,7 +10,7 @@
   "video": {
    "initialised": true,
    "playing": true,
-   "position_ms": 18,
+   "position_ms": 32,
    "duration_ms": 2500
   }
  },
@@ -40,16 +40,17 @@
  "scroll": {
   "first": 4785,
   "last": 4788,
-  "of": 8073
+  "of": 8075
  },
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 176,
  "seed": 20260903,
- "events": 14076,
+ "events": 14075,
  "transport": "local",
  "link": "connected",
  "me": "teo",
  "masks_in_pool": 56,
+ "masks_composed": 4,
  "writable_masks": 47,
  "light": "day",
  "has_dusk_paper": true,
@@ -62,25 +63,25 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 6,
-  "pushed": 3,
-  "refused": 0,
-  "pulled": 0,
+  "rounds": 8,
+  "pushed": 10,
+  "refused": 1,
+  "pulled": 9,
   "blobs_fetched": 0,
   "faults": 0,
-  "pending": 0,
-  "refused_in_the_outbox": 0,
-  "cursor": 14076,
+  "pending": 1,
+  "refused_in_the_outbox": 1,
+  "cursor": 14074,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14076,
-   "our_cursor": 14076,
+   "peer_cursor": 14074,
+   "our_cursor": 14074,
    "last_error": null,
-   "since": "2026-09-09T04:05:47.302Z",
-   "last_contact": "2026-09-09T04:06:10.398Z"
+   "since": "2026-09-09T17:56:31.107Z",
+   "last_contact": "2026-09-09T17:57:04.162Z"
   }
  },
  "ambient": {
