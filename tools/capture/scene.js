@@ -118,6 +118,19 @@ function ensure(p) {
   // ran out between the two. A record that says `at: 13_messenger_states.png` should be an account
   // of that picture, so it is taken with it.
   const saidAtTheShutter = new Map();
+  // A console line that says a request failed does not say which request. The one console error
+  // in a whole capture was `Failed to load resource: the server responded with a status of 401`
+  // and nobody — including the builder — could say what had asked for what. The response itself
+  // knows, so it is written down beside the message.
+  const refusals = [];
+  page.on('response', (r) => {
+    const code = r.status();
+    if (code > 399) {
+      const line = code + ' ' + r.request().method() + ' ' + r.url().slice(0, 200);
+      refusals.push(line);
+      if (code !== 404) problems.push('http: ' + line);
+    }
+  });
   page.on('pageerror', (e) => {
     // the message, the name and the top of the stack: an error whose String() is empty (a Dart
     // throw of a bare value) used to be recorded as 'pageerror: ' and nothing else
@@ -779,6 +792,9 @@ function ensure(p) {
   }
 
   log.problems = [...new Set(problems)].slice(0, 8);
+  // every request the server refused, in full, whatever its status: a 404 is not a problem
+  // worth failing a scene over but it is worth being able to name.
+  if (refusals.length) log.refused_requests = [...new Set(refusals)].slice(0, 20);
   // Every step landed, or this would have thrown out of the loop above. What the page logged
   // while they did — an uncaught error, a console error — is recorded here for anyone reading
   // the scene, and `ok` says whether there was any; it no longer discards the artifact, which was
