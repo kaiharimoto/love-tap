@@ -197,6 +197,17 @@ class CaptureHooks {
       'clock': 'driven',
       'note': 'one frame per harness step, so these are the cost of drawing a frame, not a '
           'measured refresh rate',
+      // A messenger critic read `over_16ms: 778 of 778` as the app never once drawing a frame in
+      // under sixteen milliseconds, which is what the number says and not what it means. The
+      // capture runs headless WebKit in a container with no GPU: CanvasKit falls back to a
+      // software rasteriser, and raster time here is a property of that, not of a phone. Build
+      // time is the app's own work and is the number worth reading.
+      'build_is_the_app': 'build_ms is the framework laying out and painting: the app\'s own '
+          'work, and comparable between runs',
+      'raster_is_the_machine': 'raster_ms is CanvasKit turning that into pixels. This capture has '
+          'no GPU — headless WebKit in a container falls back to a software rasteriser — so '
+          'raster_ms says what this machine costs, not what a phone would. over_16ms counts '
+          'build plus raster and is therefore about the machine as much as the app.',
       'build_ms': {'p50': pct('build_ms', 0.5), 'p95': pct('build_ms', 0.95), 'max': pct('build_ms', 1.0)},
       'raster_ms': {'p50': pct('raster_ms', 0.5), 'p95': pct('raster_ms', 0.95), 'max': pct('raster_ms', 1.0)},
       'over_16ms': t.where((m) => m['total_ms']! > 16).length,
@@ -524,24 +535,17 @@ class CaptureHooks {
           return {'region': 'search', 'over': 'chat', ...searching};
         }
         final chat = CaptureBus.chatReport?.call() ?? const <String, dynamic>{};
+        // Everything the region recorded, not a hand-copied list of it. This used to name
+        // thirteen keys one at a time, and the two the last cycle added — `replies_on_the_glass`,
+        // which exists because a messenger critic capped the row on there being no delivered
+        // reply in any record, and `clipped_at_an_edge`, which exists because a report counted a
+        // read mark on a row that was 125 device pixels of blank paper — were written by the
+        // region and dropped here. A record that knows less than the build does is worse than no
+        // record: it is a record that can be believed.
         return {
           'region': 'chat',
-          'composer': chat['composer'],
-          'attaching': chat['attaching'],
-          'replying_to': chat['replying_to'],
-          'editing': chat['editing'],
+          ...chat,
           'partner_typing': scope.partnerTyping,
-          // where the thread was pointed and what kinds of paper are in the frame, so a claim
-          // that the messenger carries a voice note is answered by the picture
-          if (chat['anchor'] != null) 'anchor': chat['anchor'],
-          if (chat['kinds'] != null) 'kinds': chat['kinds'],
-          if (chat['folded_in'] != null) 'folded_in': chat['folded_in'],
-          if (chat['delivery'] != null) 'delivery': chat['delivery'],
-          if (chat['states_on_the_glass'] != null)
-            'states_on_the_glass': chat['states_on_the_glass'],
-          if (chat['reactions'] != null) 'reactions': chat['reactions'],
-          if (chat['edited'] != null) 'edited': chat['edited'],
-          if (chat['taken_back'] != null) 'taken_back': chat['taken_back'],
         };
       case 2:
         return {

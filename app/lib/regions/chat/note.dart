@@ -126,7 +126,9 @@ class Note extends StatelessWidget {
       stockScale: 1.15,
       padding: const EdgeInsets.fromLTRB(14, 9, 14, 8),
       safe: lib == null || tear == null ? const [0.06, 0.07, 0.06, 0.07] : lib.safeOf(tear),
-      overlays: [
+      // stuck on, not printed in: outside the clip, so an object that overhangs the sheet is not
+      // sliced off at the box edge
+      stuckOn: [
         // and nothing is stuck to it any more either: what they were stuck to is gone
         if (item.reactions.isNotEmpty && !item.deleted)
           Positioned(
@@ -147,6 +149,8 @@ class Note extends StatelessWidget {
               ],
             ),
           ),
+      ],
+      overlays: [
         if (highlight)
           Positioned.fill(
             child: IgnorePointer(

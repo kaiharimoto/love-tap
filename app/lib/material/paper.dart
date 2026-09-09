@@ -73,6 +73,7 @@ class PaperPiece extends StatelessWidget {
     this.stockScale = 1.0,
     this.windowed = false,
     this.overlays = const [],
+    this.stuckOn = const [],
     this.seed = 0,
   });
 
@@ -104,6 +105,16 @@ class PaperPiece extends StatelessWidget {
 
   /// Tape, staples, clips: rendered bits laid over the piece.
   final List<Widget> overlays;
+
+  /// Things stuck to the sheet rather than printed on it: a reaction object, a paper clip.
+  ///
+  /// Drawn over the piece and outside its clip, because that is where they are. A reaction was in
+  /// [overlays], which sits inside the clip, so the object and its cast shadow were cut off by a
+  /// hard vertical line at the piece's box edge — a material critic measured it at x 1216 in
+  /// 02_chat, well to the right of the sheet's torn edge, which is exactly where the ClipRect is
+  /// and nowhere the paper is. A thing stuck to a piece of paper overhangs it; that is what makes
+  /// it read as stuck on rather than printed in.
+  final List<Widget> stuckOn;
 
   /// This piece's own number, so no two cut cards are cut alike. A guillotine is not a straight
   /// line at the scale a photograph is read at. Left at zero it comes from what the piece is made
@@ -297,6 +308,7 @@ class PaperPiece extends StatelessWidget {
               // the part of a contact shadow anyone sees is the part the paper is not covering.
               if (tearId != null) _bakedShadow(context, suffix) else _cutShadow(dusk),
               piece,
+              ...stuckOn,
             ],
           ),
         ),

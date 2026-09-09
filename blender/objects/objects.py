@@ -606,21 +606,42 @@ def obj_candle(rng):
     body.location = (0.0, 0.0, H * 0.5)
     parts = [body]
     # the runnel the wax made coming down the low side
+    # A wax run is fat where it came over the rim and it thins as it cools on the way down; a
+    # constant-radius tube reads as a peg glued to the side.
     run = tube([
         (R * 0.97 * math.cos(lip), R * 0.97 * math.sin(lip), H - 0.0045),
         (R * 1.00 * math.cos(lip), R * 1.00 * math.sin(lip), H * 0.55),
-        (R * 0.96 * math.cos(lip), R * 0.96 * math.sin(lip), H * 0.24),
-    ], 0.0013, 32, "runnel", wax)
+        (R * 0.96 * math.cos(lip), R * 0.96 * math.sin(lip), H * 0.30),
+        (R * 0.94 * math.cos(lip), R * 0.94 * math.sin(lip), H * 0.20),
+    ], 0.0016, 48, "runnel", wax, taper=lambda t: 1.0 - 0.62 * t ** 1.4)
     parts.append(run)
-    # the burnt ring in the wax, and the wick leaning out of it
+    # The burnt ring in the wax. It was a 5.6 mm disc of the wick's own material sitting flat in
+    # the pool, and flat plus circular plus one tone is a plastic washer however dark it is told to
+    # be — it came out at luminance 110 under the sun. Soot is darker than a wick and it is not
+    # flat: this is the same pool floor with its rim pulled up unevenly and a scorch that fades
+    # outward, so what reads is a stain rather than a part.
+    soot = simple_mat("soot", (0.035, 0.032, 0.030), roughness=1.0)
     ring = bmesh.new()
-    bmesh.ops.create_cone(ring, cap_ends=True, segments=96, radius1=0.0028, radius2=0.0026,
-                          depth=0.0006)
-    burnt = new_mesh(ring, "burnt", wick, smooth=False)
-    burnt.location = (0.0, 0.0, H - 0.0038)
+    bmesh.ops.create_cone(ring, cap_ends=True, cap_tris=True, segments=96,
+                          radius1=0.0031, radius2=0.0027, depth=0.0005)
+    bmesh.ops.subdivide_edges(ring, edges=ring.edges[:], cuts=1, use_grid_fill=True)
+    rr = np.random.default_rng(517)
+    for v in ring.verts:
+        a = math.atan2(v.co.y, v.co.x)
+        d = math.hypot(v.co.x, v.co.y)
+        # the rim of a burn is ragged and it is not level
+        k = 1.0 + 0.16 * math.sin(3.1 * a + 0.7) + 0.10 * math.sin(7.3 * a + 2.1)
+        v.co.x *= k
+        v.co.y *= k
+        if v.co.z > 0:
+            v.co.z += 0.00022 * (0.5 + 0.5 * math.sin(5.0 * a + 1.3)) * (d / 0.0031)
+    burnt = new_mesh(ring, "burnt", soot, smooth=True)
+    burnt.location = (0.0, 0.0, H - 0.0039)
     parts.append(burnt)
-    parts.append(tube([(0.0, 0.0, H - 0.0028), (0.0011, 0.0004, H + 0.0032)], 0.0006, 6,
-                      "wick", wick))
+    # the wick: charred and thicker at the tip, where it has burnt and curled
+    parts.append(tube([(0.0, 0.0, H - 0.0030), (0.0006, 0.0002, H + 0.0006),
+                       (0.0013, 0.0005, H + 0.0032)], 0.00075, 16, "wick", soot,
+                      taper=lambda t: 1.0 - 0.45 * t))
     return parts
 
 
