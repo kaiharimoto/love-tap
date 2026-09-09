@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5775
+   "ms": 5822
   },
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2302
   },
   {
    "do": "shot",
-   "ms": 4297
+   "ms": 3977
   },
   {
    "do": "report",
-   "ms": 713
+   "ms": 714
   }
  ],
  "shots": [
@@ -162,7 +162,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-09T02:18:19.238Z",
+     "since": "2026-09-09T04:07:23.959Z",
      "last_contact": null
     }
    },
@@ -177,9 +177,9 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 7541,
+ "cold_ms": 7813,
  "load": {
-  "ms": 7541,
+  "ms": 7813,
   "store": "fresh",
   "profile": null
  },

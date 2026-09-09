@@ -17,7 +17,7 @@
    "read_marker": 0
   },
   "delivery": {
-   "0001MCJ1M0257E2XHYJTT1NEB8": {
+   "0001MCJ1M0DSSV0Y5HZMSFB9WV": {
     "state": "sent",
     "says": "sent"
    }
@@ -30,24 +30,24 @@
   "taken_back": []
  },
  "visible": [
-  "0001MCJ1M0257E2XHYJTT1NEB8",
-  "01M1MCWDNEEV75ZEE3P2EW8YFX",
-  "01M1MD5D8ETH9MAQ1C7W5V6G7Q"
+  "0001MCJ1M0DSSV0Y5HZMSFB9WV",
+  "01M1MCWMM5TWNWYTNFE2SBNGR5",
+  "01M1MD6DZ7B6MCF75X77EP0XR7"
  ],
  "paper": [
-  "0001MCJ1M0257E2XHYJTT1NEB8",
-  "01M1MCWDNEEV75ZEE3P2EW8YFX",
-  "01M1MD5D8ETH9MAQ1C7W5V6G7Q"
+  "0001MCJ1M0DSSV0Y5HZMSFB9WV",
+  "01M1MCWMM5TWNWYTNFE2SBNGR5",
+  "01M1MD6DZ7B6MCF75X77EP0XR7"
  ],
  "tears": {
-  "0001MCJ1M0257E2XHYJTT1NEB8": "tear_013",
-  "01M1MCWDNEEV75ZEE3P2EW8YFX": "tear_040",
-  "01M1MD5D8ETH9MAQ1C7W5V6G7Q": "tear_023"
+  "0001MCJ1M0DSSV0Y5HZMSFB9WV": "tear_035",
+  "01M1MCWMM5TWNWYTNFE2SBNGR5": "tear_040",
+  "01M1MD6DZ7B6MCF75X77EP0XR7": "tear_023"
  },
  "stocks": {
-  "0001MCJ1M0257E2XHYJTT1NEB8": "lined_04",
-  "01M1MCWDNEEV75ZEE3P2EW8YFX": "lined_03",
-  "01M1MD5D8ETH9MAQ1C7W5V6G7Q": "receipt_01"
+  "0001MCJ1M0DSSV0Y5HZMSFB9WV": "lined_03",
+  "01M1MCWMM5TWNWYTNFE2SBNGR5": "receipt_01",
+  "01M1MD6DZ7B6MCF75X77EP0XR7": "lined_02"
  },
  "scroll": {
   "first": 8072,
@@ -80,8 +80,8 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 198,
-  "pushed": 3,
+  "rounds": 225,
+  "pushed": 2,
   "refused": 0,
   "pulled": 2,
   "blobs_fetched": 0,
@@ -97,8 +97,8 @@
    "peer_cursor": 14080,
    "our_cursor": 14080,
    "last_error": null,
-   "since": "2026-09-09T02:18:35.689Z",
-   "last_contact": "2026-09-09T02:28:20.096Z"
+   "since": "2026-09-09T04:07:40.220Z",
+   "last_contact": "2026-09-09T04:18:49.474Z"
   }
  },
  "ambient": {
