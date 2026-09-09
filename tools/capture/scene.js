@@ -418,6 +418,13 @@ function ensure(p) {
         break;
       }
       case 'frames': {
+        // Nothing still being decoded before the first grab. A piece keeps its room and paints
+        // nothing until its paper has arrived, so a run that opens on the frame a note was
+        // inserted in opens on a hole where the note should be — which is the light jump 07 has
+        // failed on from both sides. This waits for the app to say it is ready rather than for a
+        // number of milliseconds somebody guessed at.
+        await page.waitForFunction(() => !window.__deskQuiet || window.__deskQuiet() === 'ok',
+            { timeout: 15000 }).catch(() => {});
         // One frame at a time, with the clock stepped between them, and — when the clip is of
         // something being done rather than something happening — the thumb moved a little between
         // each one too. A drag spread across three hundred frames is a real recording of a scroll:

@@ -26,6 +26,14 @@ class MaskCache {
 
   static ui.Image? peek(String asset) => _images[asset];
 
+  /// How many masks are being decoded right now.
+  ///
+  /// A piece keeps its room and paints nothing until its paper has arrived, so a frame grabbed
+  /// while one is still decoding is a frame with a hole in it where a note should be — which is
+  /// the light jump 07 failed on twice, from the two sides of the same moment. The harness waits
+  /// on this rather than on a number of milliseconds somebody guessed at.
+  static int get decoding => _loading.length;
+
   static Future<ui.Image> load(String asset) {
     final have = _images[asset];
     if (have != null) return Future.value(have);
