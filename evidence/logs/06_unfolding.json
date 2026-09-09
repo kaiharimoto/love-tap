@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1887,
+   "ms": 1482,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3667
+   "ms": 2494
   },
   {
    "do": "wait",
-   "ms": 1607
+   "ms": 1604
   },
   {
    "do": "scrollTo",
-   "ms": 5921
+   "ms": 4963
   },
   {
    "do": "wait",
@@ -32,39 +32,15 @@
   },
   {
    "do": "far",
-   "ms": 1572
+   "ms": 404
   },
   {
    "do": "awaitArrival",
-   "ms": 2789
+   "ms": 786
   },
   {
    "do": "frames",
-   "ms": 34665
-  },
-  {
-   "do": "unfold",
-   "ms": 11
-  },
-  {
-   "frames_from_the_build": "unfold_thirds",
-   "count": 139
-  },
-  {
-   "do": "frames",
-   "ms": 260946
-  },
-  {
-   "do": "far",
-   "ms": 405
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 2041
-  },
-  {
-   "do": "frames",
-   "ms": 35494
+   "ms": 30190
   },
   {
    "do": "unfold",
@@ -76,11 +52,35 @@
   },
   {
    "do": "frames",
-   "ms": 260224
+   "ms": 263177
+  },
+  {
+   "do": "far",
+   "ms": 404
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1005
+  },
+  {
+   "do": "frames",
+   "ms": 32229
+  },
+  {
+   "do": "unfold",
+   "ms": 17
+  },
+  {
+   "frames_from_the_build": "unfold_thirds",
+   "count": 139
+  },
+  {
+   "do": "frames",
+   "ms": 245797
   },
   {
    "do": "report",
-   "ms": 1192
+   "ms": 412
   }
  ],
  "shots": [
@@ -122,8 +122,14 @@
     "kinds": {
      "message": 3
     },
+    "folded_in": {
+     "reaction": 0,
+     "message_edit": 0,
+     "message_delete": 0,
+     "read_marker": 0
+    },
     "delivery": {
-     "0001MCJ1M0S0VR39GWWF2VKQXG": {
+     "0001MCJ1M0257E2XHYJTT1NEB8": {
       "state": "sent",
       "says": "sent"
      }
@@ -136,24 +142,24 @@
     "taken_back": []
    },
    "visible": [
-    "0001MCJ1M0S0VR39GWWF2VKQXG",
-    "01M1MCXBH1AQ7JQDKQQ1EFA14H",
-    "01M1MD6FAGEE0TZPXGVW180K4B"
+    "0001MCJ1M0257E2XHYJTT1NEB8",
+    "01M1MCWDNEEV75ZEE3P2EW8YFX",
+    "01M1MD5D8ETH9MAQ1C7W5V6G7Q"
    ],
    "paper": [
-    "0001MCJ1M0S0VR39GWWF2VKQXG",
-    "01M1MCXBH1AQ7JQDKQQ1EFA14H",
-    "01M1MD6FAGEE0TZPXGVW180K4B"
+    "0001MCJ1M0257E2XHYJTT1NEB8",
+    "01M1MCWDNEEV75ZEE3P2EW8YFX",
+    "01M1MD5D8ETH9MAQ1C7W5V6G7Q"
    ],
    "tears": {
-    "0001MCJ1M0S0VR39GWWF2VKQXG": "tear_051",
-    "01M1MCXBH1AQ7JQDKQQ1EFA14H": "tear_040",
-    "01M1MD6FAGEE0TZPXGVW180K4B": "tear_045"
+    "0001MCJ1M0257E2XHYJTT1NEB8": "tear_013",
+    "01M1MCWDNEEV75ZEE3P2EW8YFX": "tear_040",
+    "01M1MD5D8ETH9MAQ1C7W5V6G7Q": "tear_023"
    },
    "stocks": {
-    "0001MCJ1M0S0VR39GWWF2VKQXG": "lined_04",
-    "01M1MCXBH1AQ7JQDKQQ1EFA14H": "lined_03",
-    "01M1MD6FAGEE0TZPXGVW180K4B": "lined_01"
+    "0001MCJ1M0257E2XHYJTT1NEB8": "lined_04",
+    "01M1MCWDNEEV75ZEE3P2EW8YFX": "lined_03",
+    "01M1MD5D8ETH9MAQ1C7W5V6G7Q": "receipt_01"
    },
    "scroll": {
     "first": 8072,
@@ -163,7 +169,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 5104,
    "seed": 20260903,
-   "events": 14082,
+   "events": 14080,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -186,25 +192,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 206,
-    "pushed": 6,
+    "rounds": 198,
+    "pushed": 3,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14082,
+    "cursor": 14080,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14082,
-     "our_cursor": 14082,
+     "peer_cursor": 14080,
+     "our_cursor": 14080,
      "last_error": null,
-     "since": "2026-09-08T18:54:36.366Z",
-     "last_contact": "2026-09-08T19:04:49.844Z"
+     "since": "2026-09-09T02:18:35.689Z",
+     "last_contact": "2026-09-09T02:28:20.096Z"
     }
    },
    "ambient": {
@@ -218,9 +224,9 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2475,
+ "cold_ms": 2007,
  "load": {
-  "ms": 2475,
+  "ms": 2007,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -240,14 +246,14 @@
    "before": 8073,
    "after": 8074,
    "at_frame": 0,
-   "waited_ms": 2388
+   "waited_ms": 385
   },
   {
    "line": "message and the bread",
    "before": 8074,
    "after": 8075,
    "at_frame": 155,
-   "waited_ms": 1638
+   "waited_ms": 604
   }
  ],
  "problems": [],
