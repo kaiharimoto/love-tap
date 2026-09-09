@@ -147,6 +147,18 @@ class Spine {
     _changes.add(const SpineChange(added: [], assigned: []));
   }
 
+  /// The person who wrote it asks for it to go again.
+  ///
+  /// A refusal is an answer and the event stays in the outbox marked, out of the wire — which left
+  /// the only one of the five delivery states with no way out of it. The other phone may have been
+  /// on an older version an hour ago and not now; the person can say try it again, and the mark
+  /// comes off and the event is back in the outbox. The host may refuse it again, and say why
+  /// again.
+  void sendAgain(String id) {
+    if (_refused.remove(id) == null) return;
+    _changes.add(const SpineChange(added: [], assigned: []));
+  }
+
   /// The outbox minus what the host has already refused.
   ///
   /// A refusal is an answer, not a failure: the host has read the event and will not take it, so

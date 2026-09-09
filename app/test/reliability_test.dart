@@ -246,6 +246,30 @@ void main() {
     cap('reconnect_ordering').ok = monotonic && client.pending.isEmpty;
     cap('reconnect_ordering').detail = 'client holds seq 1..${seqs.last} gapless and monotonic after the gap';
 
+    // a refusal, and the way out of one. The host says no to one message the way a phone on an
+    // older version does; the row is marked and stays out of the wire; then the person who wrote
+    // it asks for it to go again, and it goes.
+    var refuseOnce = true;
+    hostT.refuses = (Event e) {
+      if (!refuseOnce || e.type != 'message' || (e.payload['text'] as String?) != 'the roster') return null;
+      refuseOnce = false;
+      return 'this phone is on an older version and cannot read that';
+    };
+    final no = await client.append('message', {'text': 'the roster'});
+    await sync.once();
+    final wasRefused = client.refused[no.id];
+    final heldBack = !client.pushable.any((e) => e.id == no.id) && client.pending.any((e) => e.id == no.id);
+    await sync.once();
+    final stillNotSent = host.byId(no.id) == null;
+    client.sendAgain(no.id);
+    await sync.once();
+    cap('refusal_and_retry').ok = wasRefused != null && heldBack && stillNotSent &&
+        host.byId(no.id) != null && client.byId(no.id)!.seq != null && client.refused.isEmpty;
+    cap('refusal_and_retry').detail = wasRefused == null
+        ? 'the host took a message it was told to refuse'
+        : 'refused with "$wasRefused", kept out of the wire for a round, and delivered as seq '
+            '${client.byId(no.id)!.seq} when the person asked for it again';
+
     // host-offline outbox
     await hostT.stop();
     await host.close();

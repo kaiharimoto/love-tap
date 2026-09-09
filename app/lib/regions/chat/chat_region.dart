@@ -700,6 +700,8 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     final scope = AppScope.of(context);
     final mine = item.author == scope.me;
     final choices = <String>[
+      // first, because it is the only thing to be done about a row that did not go
+      if (mine && item.delivery == Delivery.refused) S.sendAgain,
       S.reply,
       S.react,
       if (mine && item.type == 'message' && !item.deleted) S.edit,
@@ -719,6 +721,9 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       });
     } else if (picked == S.delete) {
       await AppScope.of(context).emit('message_delete', {'target': item.id});
+    } else if (picked == S.sendAgain) {
+      scope.spine.sendAgain(item.id);
+      scope.sync.kick();
     }
   }
 

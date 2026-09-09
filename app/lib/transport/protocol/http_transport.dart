@@ -56,7 +56,12 @@ class HttpTransport implements Transport {
   final String? pwaRoot;
 
   /// Host: a rule of its own about what it will take. See [srv.HostServer.refuses].
-  final String? Function(Event e)? refuses;
+  ///
+  /// Not final, and read through a closure by the server, so a host can change its mind while it
+  /// is listening — which is what the far phone in a capture does when the harness tells it to
+  /// refuse the next one, and what the reliability run does to exercise a refusal and the way out
+  /// of one.
+  String? Function(Event e)? refuses;
 
   TransportStatus _status;
   final StreamController<TransportStatus> _statusCtl = StreamController.broadcast();
@@ -126,7 +131,7 @@ class HttpTransport implements Transport {
         onPeerContact: (cursor) => _set(_status.copyWith(
             state: LinkState.connected, peerCursor: cursor, ourCursor: spine.cursor, lastContact: DateTime.now().toUtc())),
         pwaRoot: pwaRoot,
-        refuses: refuses,
+        refuses: (e) => refuses?.call(e),
       );
       await _server!.listen(bind);
       _set(_status.copyWith(state: LinkState.listening, address: '${bind.address}:${bind.port}', ourCursor: spine.cursor));
