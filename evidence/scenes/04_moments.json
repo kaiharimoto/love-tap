@@ -17,6 +17,40 @@
    "ms": 3000
   },
   {
+   "do": "lens",
+   "arg": "milestones"
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "shot",
+   "out": "evidence/crops/04_moments_what_happened.png",
+   "settle": 600
+  },
+  {
+   "do": "lens",
+   "arg": "feelings"
+  },
+  {
+   "do": "wait",
+   "ms": 1200
+  },
+  {
+   "do": "shot",
+   "out": "evidence/crops/04_moments_what_we_felt.png",
+   "settle": 600
+  },
+  {
+   "do": "lens",
+   "arg": "media"
+  },
+  {
+   "do": "wait",
+   "ms": 2400
+  },
+  {
    "do": "shot",
    "out": "evidence/04_moments.png",
    "settle": 900

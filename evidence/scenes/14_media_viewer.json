@@ -32,6 +32,14 @@
    "settle": 700
   },
   {
+   "do": "seek",
+   "arg": 0.42
+  },
+  {
+   "do": "wait",
+   "ms": 700
+  },
+  {
    "do": "shot",
    "out": "evidence/14_media_viewer.png",
    "settle": 1200

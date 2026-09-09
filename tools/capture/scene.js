@@ -304,6 +304,14 @@ function ensure(p) {
         await hook('__deskOpenCorner', step.arg !== false); break;
       case 'showFamily':
         await hook('__deskShowFamily', String(step.arg)); break;
+      case 'lens':
+        await hook('__deskShowLens', String(step.arg)); break;
+      case 'seek':
+        await hook('__deskSeek', Number(step.arg)); break;
+      case 'holdOver':
+        await hook('__deskHoldOver', String(step.arg)); break;
+      case 'letGo':
+        await hook('__deskLetGo'); break;
       case 'setSignal':
         await hook('__deskSetSignal', step.signal, String(step.value)); break;
       case 'openSender':

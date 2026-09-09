@@ -81,16 +81,26 @@
    "ms": 16
   },
   {
-   "do": "sendFeeling",
-   "feeling": "pigeon",
-   "intensity": 0.8,
+   "do": "holdOver",
+   "arg": "pigeon",
+   "after": 0
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 44,
+   "from": 73,
+   "ms": 32
+  },
+  {
+   "do": "letGo",
    "after": 0
   },
   {
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 75,
-   "from": 73,
+   "from": 117,
    "ms": 16
   },
   {
@@ -111,7 +121,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 16,
-   "from": 148,
+   "from": 192,
    "ms": 16
   },
   {
@@ -134,7 +144,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 106,
-   "from": 164,
+   "from": 208,
    "ms": 16
   },
   {
@@ -157,7 +167,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 106,
-   "from": 270,
+   "from": 314,
    "ms": 16
   },
   {

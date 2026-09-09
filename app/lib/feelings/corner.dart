@@ -43,14 +43,29 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
     reverseDuration: Motion.settle,
   );
   bool _open = false;
-  DateTime? _heldSince;
+  /// When the hold began, on the driven clock (capture) — see [_held].
+  Duration? _heldSince;
+  DateTime? _wallFrom;
   Feeling? _under;
   Family _family = Family.warmth;
 
-  double get _intensity {
+  /// How long the corner has been held, in the clock the app is actually running on.
+  ///
+  /// This read the wall clock. Under the capture harness the app runs on a driven clock — a frame
+  /// is a step, and a step is sixteen milliseconds of app time however long the browser took over
+  /// it — so the intensity a held corner produced depended on how busy the machine was, and a clip
+  /// of a hold was a clip of the harness's own latency. An emotional critic stepped ten frames of
+  /// 15_authored_feeling and found no gesture producing anything: the object lifted off the grid
+  /// and flew. This is the half of that which is a bug.
+  Duration get _held {
     final since = _heldSince;
-    if (since == null) return 0.5;
-    final ms = DateTime.now().difference(since).inMilliseconds;
+    if (since == null) return Duration.zero;
+    return DrivenClock.enabled ? DrivenClock.now - since : DateTime.now().difference(_wallFrom!);
+  }
+
+  double get _intensity {
+    if (_heldSince == null) return 0.5;
+    final ms = _held.inMilliseconds;
     // 0.2 s -> 0.3, 2 s -> 1.0 (docs/FEELINGS.md)
     return (0.3 + (ms - 200) / 1800 * 0.7).clamp(0.25, 1.0);
   }
@@ -58,7 +73,8 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
   void _openSender() {
     setState(() {
       _open = true;
-      _heldSince = DateTime.now();
+      _heldSince = DrivenClock.now;
+      _wallFrom = DateTime.now();
     });
     if (DrivenClock.enabled) {
       _curlFrom = DrivenClock.now;
@@ -93,6 +109,7 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
       _open = false;
       _under = null;
       _heldSince = null;
+      _wallFrom = null;
     });
     if (DrivenClock.enabled) {
       _curlFrom = DrivenClock.now;
@@ -118,6 +135,28 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
         setState(() => _family = want);
         return widget.registry.all.where((f) => f.family == want).length;
       };
+      // Put the finger on a tile and start the hold, so a clip can film the gesture producing the
+      // feeling rather than the feeling appearing. An emotional critic stepped frames 68 to 105
+      // of 15_authored_feeling and found the object simply lifting off the grid and flying: the
+      // scene called sendFeeling, which is the end of the gesture with the gesture missing.
+      CaptureBus.holdOver = (id) {
+        final f = widget.registry.byId(id);
+        if (f == null) return false;
+        setState(() {
+          _open = true;
+          _under = f;
+          _heldSince = DrivenClock.now;
+          _wallFrom = DateTime.now();
+        });
+        return true;
+      };
+      // and lift it: whatever is under the finger goes, at whatever the hold has grown to
+      CaptureBus.letGo = () {
+        final f = _under;
+        final held = _intensity;
+        _close(send: f);
+        return f == null ? -1.0 : held;
+      };
       // A corner turning up takes a quarter of a second, and under the capture harness a quarter
       // of a second of wall clock passes between the first two frames of a take — so the whole
       // turn happened before the second one was grabbed, and ninety-four of ninety-five frames
@@ -140,6 +179,8 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
     if (Flags.capture) {
       CaptureBus.openCorner = null;
       CaptureBus.showFamily = null;
+      CaptureBus.holdOver = null;
+      CaptureBus.letGo = null;
     }
     _driven?.cancel();
     _curl.dispose();

@@ -74,6 +74,14 @@ class _ViewerPageState extends State<ViewerPage> {
                 },
           if (_error != null) 'error': _error,
         };
+    CaptureBus.seekViewer = (fraction) async {
+      final v = _video;
+      if (v == null || !v.value.isInitialized) return -1;
+      await v.seekTo(v.value.duration * fraction.clamp(0.0, 1.0));
+      await Future<void>.delayed(const Duration(milliseconds: 120));
+      if (mounted) setState(() {});
+      return v.value.position.inMilliseconds;
+    };
     if (widget.item.type == 'video') _loadVideo();
   }
 
@@ -117,6 +125,7 @@ class _ViewerPageState extends State<ViewerPage> {
   @override
   void dispose() {
     CaptureBus.viewerReport = null;
+    CaptureBus.seekViewer = null;
     _video?.removeListener(_moved);
     _video?.dispose();
     super.dispose();

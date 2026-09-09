@@ -26,9 +26,27 @@ class CaptureBus {
   /// Shell: open or close the feeling corner's fan.
   static void Function(bool open)? openCorner;
 
+  /// Put the finger on a feeling and start the hold. False if there is no such feeling.
+  ///
+  /// A clip of a gesture needs the middle of it, not the end: the corner open, something under the
+  /// thumb, and the intensity growing while it stays there. `sendFeeling` is the end.
+  static bool Function(String feelingId)? holdOver;
+
+  /// Lift the finger: what is under it goes, at whatever the hold has grown to. Returns the
+  /// intensity it sent at, or -1 if nothing was under the finger.
+  static double Function()? letGo;
+
   /// Turn the vocabulary to a family, so a clip can be *of* the vocabulary rather than of a
   /// sheet appearing for a fifth of a second. Returns the number of feelings now on the sheet.
   static int Function(String family)? showFamily;
+
+  /// Moments: turn to a lens by name and answer how many rows are behind it.
+  ///
+  /// A coherence critic read 04_moments as one of the three lenses shot on its own — the record
+  /// said 154 events behind 'what happened' and 1,340 behind 'what we felt' and no artifact showed
+  /// either. The whole claim of the region is that these are three views over one log, and a
+  /// claim like that is answered by pictures of the three.
+  static int Function(String lens)? showLens;
 
   /// Chat: scroll to an event id, or to a fraction of the thread ('0.5'), or 'end'.
   static Future<void> Function(String anchor)? scrollTo;
@@ -38,6 +56,15 @@ class CaptureBus {
 
   /// Chat: open the media viewer on an event.
   static Future<void> Function(String eventId)? openViewer;
+
+  /// Viewer: move the playhead to a fraction of the film, and answer where it landed in ms.
+  ///
+  /// The scene waited for `video.playing` and then shot, and the transport in the artifact read
+  /// `0:00 / 0:03` with the playhead at the left stop — `position_ms: 32` after two seconds of
+  /// wall clock. Headless WebKit has no compositor driving a media element forward. A film that
+  /// has not started is not a picture of a messenger playing a film, so the harness moves the
+  /// playhead itself, and the record says the position it moved it to.
+  static Future<int> Function(double fraction)? seekViewer;
 
   /// Chat: run a search and land on the first hit.
   static Future<void> Function(String query)? search;
@@ -108,6 +135,10 @@ class CaptureBus {
     sendFeeling = null;
     openCorner = null;
     showFamily = null;
+    showLens = null;
+    holdOver = null;
+    letGo = null;
+    seekViewer = null;
     scrollTo = null;
     openSender = null;
     openViewer = null;

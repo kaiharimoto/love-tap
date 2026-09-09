@@ -135,6 +135,27 @@ void _everyHandleRuns() {
     }
   });
 
+  test('every handle the driver calls is one the web build installs', () {
+    // The step-name check below catches a typo in a scene. It does not catch a typo one layer
+    // down: a `case 'lens'` that calls `__deskShowLens` when the build installs `__deskLens`
+    // throws in the middle of a run, an hour in, with the far phone up and the year imported, and
+    // the artifact comes back missing for a reason that has nothing to do with the app. Four new
+    // handles went in for this cycle's scenes and nothing but a capture would have found that.
+    final driver = File('../tools/capture/scene.js').readAsStringSync();
+    final web = File('lib/capture/hooks_web.dart').readAsStringSync();
+    final called = RegExp(r"hook\('(__desk[A-Za-z]+)'")
+        .allMatches(driver)
+        .map((m) => m.group(1)!)
+        .toSet();
+    final installed = RegExp(r'w\.(__desk[A-Za-z]+)\s*=')
+        .allMatches(web)
+        .map((m) => m.group(1)!)
+        .toSet();
+    final missing = called.difference(installed).toList()..sort();
+    expect(missing, isEmpty,
+        reason: 'the driver calls $missing, which hooks_web.dart does not install');
+  });
+
   test('every step the scenes ask for is one the driver knows', () {
     // A scene is JSON and the driver is JavaScript, and nothing checked that the two agree: a verb
     // with a typo in it throws in the middle of a run, after the far phone is up and the year is

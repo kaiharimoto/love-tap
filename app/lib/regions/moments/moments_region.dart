@@ -56,12 +56,26 @@ class _MomentsRegionState extends State<MomentsRegion> {
   void initState() {
     super.initState();
     CaptureBus.momentsReport = _report;
+    CaptureBus.showLens = _showLens;
   }
 
   @override
   void dispose() {
     if (CaptureBus.momentsReport == _report) CaptureBus.momentsReport = null;
+    if (CaptureBus.showLens == _showLens) CaptureBus.showLens = null;
     super.dispose();
+  }
+
+  /// Turn to a lens by name, and answer how many rows are behind it; -1 if there is no such lens.
+  int _showLens(String name) {
+    for (final v in MomentsView.values) {
+      if (v.name == name) {
+        final all = AppScope.of(context).spine.all;
+        setState(() => _view = v);
+        return all.where((e) => _keepsIn(e, v)).length;
+      }
+    }
+    return -1;
   }
 
   Map<String, dynamic> _report() {

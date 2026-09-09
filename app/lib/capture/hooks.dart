@@ -112,6 +112,16 @@ class CaptureHooks {
       'throws': f.where((m) => m['throw'] == true).length,
       'frames_under_a_device_pixel': still.length,
       'at': still.map((m) => m['tick']).toList(),
+      // How much of the thread the throws actually covered. A messenger critic worked this out
+      // from two numbers in two files and read one to three per cent; it belongs in the log that
+      // records the throws.
+      'travelled': f.fold<double>(0.0, (a, m) => a + ((m['moved'] as double?) ?? 0).abs()).round(),
+      'the_thread_is': f.isEmpty ? null : (f.last['end'] as num?)?.round(),
+      'share_of_the_thread': f.isEmpty || (f.last['end'] as num? ?? 0) <= 0
+          ? null
+          : double.parse((f.fold<double>(0.0, (a, m) => a + ((m['moved'] as double?) ?? 0).abs()) /
+                  (f.last['end'] as num) * 100)
+              .toStringAsFixed(2)),
       'rows_built_total': f.fold<int>(0, (a, m) => a + ((m['rows_built'] as int?) ?? 0)),
       'rows_built_worst_tick': f.fold<int>(0, (a, m) {
         final n = (m['rows_built'] as int?) ?? 0;
@@ -257,6 +267,38 @@ class CaptureHooks {
     if (f == null) return 'the corner is not on screen';
     final n = f(family);
     return n > 0 ? 'ok, $n on the sheet' : 'no feelings in $family';
+  }
+
+  /// Put the finger on a feeling and start the hold.
+  String holdOver(String id) {
+    final f = CaptureBus.holdOver;
+    if (f == null) return 'the corner is not on screen';
+    return f(id) ? 'ok, holding $id' : 'no feeling called $id';
+  }
+
+  /// Lift the finger; whatever was under it goes.
+  String letGo() {
+    final f = CaptureBus.letGo;
+    if (f == null) return 'the corner is not on screen';
+    final at = f();
+    return at < 0 ? 'nothing was under the finger' : 'ok, sent at ${at.toStringAsFixed(2)}';
+  }
+
+  /// Turn Moments to a lens and say how many rows are behind it.
+  String showLens(String lens) {
+    final f = CaptureBus.showLens;
+    if (f == null) return 'moments is not on screen';
+    final n = f(lens);
+    return n >= 0 ? 'ok, $n behind $lens' : 'no lens called $lens';
+  }
+
+  /// Move the film's playhead to a fraction of its length.
+  Future<String> seekViewer(double fraction) async {
+    final f = CaptureBus.seekViewer;
+    if (f == null) return 'no film is open';
+    final at = await f(fraction);
+    await _settle();
+    return at < 0 ? 'the film is not ready' : 'ok, at ${at}ms';
   }
 
   Future<String> openSender(bool open) async {
