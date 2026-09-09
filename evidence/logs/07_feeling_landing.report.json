@@ -45,11 +45,12 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 7728,
  "seed": 20260903,
- "events": 14089,
+ "events": 14087,
  "transport": "local",
  "link": "connected",
  "me": "teo",
  "masks_in_pool": 56,
+ "masks_composed": 6,
  "writable_masks": 47,
  "light": "day",
  "has_dusk_paper": true,
@@ -62,7 +63,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-09T04:30:30.561Z",
+  "started_at": "2026-09-09T18:20:25.840Z",
   "pattern": [
    {
     "ms": 150,
@@ -89,25 +90,25 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 308,
-  "pushed": 5,
+  "rounds": 317,
+  "pushed": 4,
   "refused": 0,
   "pulled": 4,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14089,
+  "cursor": 14087,
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14089,
-   "our_cursor": 14089,
+   "peer_cursor": 14087,
+   "our_cursor": 14087,
    "last_error": null,
-   "since": "2026-09-09T04:18:53.349Z",
-   "last_contact": "2026-09-09T04:34:07.782Z"
+   "since": "2026-09-09T18:08:48.138Z",
+   "last_contact": "2026-09-09T18:24:32.178Z"
   }
  },
  "ambient": {

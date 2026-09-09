@@ -10,29 +10,45 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1601,
+   "ms": 1536,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 2924
+   "ms": 3443
   },
   {
    "do": "wait",
-   "ms": 1802
+   "ms": 1803
   },
   {
    "do": "haptics",
-   "ms": 482
+   "ms": 488
   },
   {
    "do": "far",
-   "ms": 1027
+   "ms": 444
   },
   {
    "do": "awaitArrival",
-   "ms": 2896
+   "ms": 2676
+  },
+  {
+   "do": "wait",
+   "ms": 1102
+  },
+  {
+   "do": "frames",
+   "ms": 285281
+  },
+  {
+   "do": "far",
+   "ms": 408
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1023
   },
   {
    "do": "wait",
@@ -40,39 +56,23 @@
   },
   {
    "do": "frames",
-   "ms": 304087
-  },
-  {
-   "do": "far",
-   "ms": 404
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 946
-  },
-  {
-   "do": "wait",
-   "ms": 1102
-  },
-  {
-   "do": "frames",
-   "ms": 173482
+   "ms": 169679
   },
   {
    "do": "goTo",
-   "ms": 5907
+   "ms": 4631
   },
   {
    "do": "step",
-   "ms": 1465
+   "ms": 2345
   },
   {
    "do": "far",
-   "ms": 1288
+   "ms": 476
   },
   {
    "do": "awaitArrival",
-   "ms": 2206
+   "ms": 2091
   },
   {
    "do": "wait",
@@ -80,35 +80,35 @@
   },
   {
    "do": "frames",
-   "ms": 185125
+   "ms": 207238
   },
   {
    "do": "goTo",
-   "ms": 4030
+   "ms": 6028
   },
   {
    "do": "step",
-   "ms": 1575
+   "ms": 2718
   },
   {
    "do": "far",
-   "ms": 1191
+   "ms": 470
   },
   {
    "do": "awaitArrival",
-   "ms": 1866
+   "ms": 2289
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1101
   },
   {
    "do": "frames",
-   "ms": 217392
+   "ms": 244931
   },
   {
    "do": "report",
-   "ms": 427
+   "ms": 527
   }
  ],
  "shots": [
@@ -185,11 +185,12 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 7728,
    "seed": 20260903,
-   "events": 14089,
+   "events": 14087,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
+   "masks_composed": 6,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
@@ -202,7 +203,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-09T04:30:30.561Z",
+    "started_at": "2026-09-09T18:20:25.840Z",
     "pattern": [
      {
       "ms": 150,
@@ -229,25 +230,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 308,
-    "pushed": 5,
+    "rounds": 317,
+    "pushed": 4,
     "refused": 0,
     "pulled": 4,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14089,
+    "cursor": 14087,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14089,
-     "our_cursor": 14089,
+     "peer_cursor": 14087,
+     "our_cursor": 14087,
      "last_error": null,
-     "since": "2026-09-09T04:18:53.349Z",
-     "last_contact": "2026-09-09T04:34:07.782Z"
+     "since": "2026-09-09T18:08:48.138Z",
+     "last_contact": "2026-09-09T18:24:32.178Z"
     }
    },
    "ambient": {
@@ -261,9 +262,9 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2207,
+ "cold_ms": 2112,
  "load": {
-  "ms": 2207,
+  "ms": 2112,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -288,34 +289,40 @@
  "arrivals": [
   {
    "line": "feeling hold 0.9",
-   "before": 8075,
-   "after": 8076,
+   "before": 8077,
+   "after": 8078,
    "at_frame": 0,
-   "waited_ms": 2495
+   "waited_ms": 2275
   },
   {
    "line": "feeling squeeze 0.75",
-   "before": 8076,
-   "after": 8077,
+   "before": 8078,
+   "after": 8079,
    "at_frame": 150,
-   "waited_ms": 545
+   "waited_ms": 621
   },
   {
    "line": "feeling nuzzle 0.8",
-   "before": 8077,
-   "after": 8078,
+   "before": 8079,
+   "after": 8080,
    "at_frame": 221,
-   "waited_ms": 1805
+   "waited_ms": 1690
   },
   {
    "line": "feeling soup 0.85",
-   "before": 8078,
-   "after": 8079,
+   "before": 8080,
+   "after": 8081,
    "at_frame": 314,
-   "waited_ms": 1465
+   "waited_ms": 1888
   }
  ],
- "problems": [],
- "ok": true,
+ "problems": [
+  "http: 401 GET http://127.0.0.1:8480/v1/events?after=14079&wait=20",
+  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+ ],
+ "refused_requests": [
+  "401 GET http://127.0.0.1:8480/v1/events?after=14079&wait=20"
+ ],
+ "ok": false,
  "steps_landed": true
 }
