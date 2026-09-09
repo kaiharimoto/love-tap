@@ -252,11 +252,13 @@ def obj_pinch(rng):
         u = v.co.x / L + 0.5
         v.co.y *= 1.0 - 0.42 * peak_at(u)
     # the strip is torn off, not cut: its two ends are ragged
+    end_bite = common.torn_edge(0x91C4A, W * 1000.0, deep_mm=0.8)
+    end_fray = common.torn_edge(0x91C4B, W * 1000.0, deep_mm=0.5)
     for v in bm.verts:
         u = v.co.x / L + 0.5
         if u < 0.03 or u > 0.97:
-            v.co.y += 0.0006 * math.sin(v.co.y * 900.0 + u * 60.0)
-            v.co.z += 0.0004 * math.sin(v.co.y * 1400.0)
+            v.co.y += end_bite(v.co.y * 1000.0) * (1.0 if v.co.y >= 0 else -1.0)
+            v.co.z += end_fray(v.co.y * 1000.0) * 0.8
     obj = solidify(new_mesh(bm, "pinch", paper_mat("pinch_paper", (0.93, 0.90, 0.84), tooth=1.0)))
     obj.rotation_euler = (0.0, 0.0, math.radians(float(rng.uniform(-16, 16))))
     return obj
@@ -729,11 +731,13 @@ def obj_bookmark(rng):
     body = sheet(L * 0.66, W, 48, 18, bow)
     # and the head it was torn from the sheet at: ragged, which is the one silhouette a bookmark
     # has, and it was a clean rectangle
+    head_bite = common.torn_edge(0xB00C1, W * 1000.0, deep_mm=1.4)
+    head_fray = common.torn_edge(0xB00C2, W * 1000.0, deep_mm=0.4)
     for v in body.verts:
         u = v.co.x / (L * 0.66) + 0.5
         if u < 0.05:
-            v.co.x -= 0.0012 * abs(math.sin(v.co.y * 900.0)) + 0.0006 * abs(math.sin(v.co.y * 2400.0))
-            v.co.z += 0.00025 * math.sin(v.co.y * 1500.0)
+            v.co.x -= head_bite(v.co.y * 1000.0)
+            v.co.z += head_fray(v.co.y * 1000.0) * 0.6
     b = solidify(new_mesh(body, "bookmark", mat))
     b.location = (-L * 0.17, 0.0, 0.0)
     parts.append(b)
@@ -762,11 +766,15 @@ def obj_dog_ear(rng):
     # A page, not a blank. Four per cent of the object carried all of its identity and the other
     # ninety-six was a rectangle of the same near-white paper — box IoU 0.946. The left edge is the
     # edge it was torn from the book at, which is the one silhouette feature a page has.
+    # torn, not waved: see common.torn_edge. This edge used to be two sines and a critic
+    # autocorrelated it at 0.50 on lag 31 px and 0.49 on lag 60 — one period and two.
+    bite = common.torn_edge(0xD09EA2, H * 1000.0, deep_mm=1.5)
+    fray = common.torn_edge(0xD09EA3, H * 1000.0, deep_mm=0.4)
     for v in card.verts:
         u = v.co.x / W + 0.5
         if u < 0.04:
-            v.co.x += 0.0013 * math.sin(v.co.y * 900.0) + 0.0007 * math.sin(v.co.y * 2400.0)
-            v.co.z += 0.00025 * math.sin(v.co.y * 1500.0)
+            v.co.x += bite(v.co.y * 1000.0)
+            v.co.z += fray(v.co.y * 1000.0) * 0.6
     parts = [solidify(new_mesh(card, "dogear_card", mat), t=0.00024)]
     # the corner: a triangle folded down over the card, its free tip lifted a millimetre off it so
     # it throws a triangle of its own shadow — which is the cue that says turned down rather than

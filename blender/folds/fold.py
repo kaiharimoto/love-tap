@@ -74,7 +74,7 @@ def ease(t, power=2.0):
 
 # How deep the torn edge bites into the sheet, and the two wavelengths it bites at. A tear is not
 # a wobble: it is fibre giving way along the grain, so it wants a long run and a short one at once.
-TEAR_DEEP_M = 0.0032
+TEAR_DEEP_M = 0.0042
 TEAR_LONG_MM = 12.0
 TEAR_SHORT_MM = 2.2
 # How far the sheet lies off flat where nothing is bending it, and over what distance. Paper that
@@ -88,14 +88,27 @@ COCKLE_SHORT_MM = 17.0
 def _tear_bite(u_mm, rng_phase, deep_m=TEAR_DEEP_M):
     """How far the torn edge has eaten into the sheet at [u_mm] along it, in metres, never out.
 
-    Two runs at once — one about a finger's width, one about a fibre bundle's — raised to a
-    power so most of the edge is nearly whole and the bites are occasional, which is what a tear
-    looks like and what a sine wave does not.
+    It used to be two sines with random phases — one about a finger's width, one about a fibre
+    bundle's — and the note under it said that is what a tear looks like and what a sine wave does
+    not. Two sines are still two periods however they are weighted, and a material critic proved it
+    on an object built the same way: self-correlation 0.50 at lag 31 px and 0.49 at lag 60, one
+    period and two, with four V-notches over 125 px. So it now goes through common.torn_edge, which
+    is six octaves of seeded value noise with a random weight on each and a handful of deeper bites
+    where the tear crossed a bundle. The phases the caller passes seed it, so every edge of every
+    sheet still tears its own way and tears it the same way on both phones.
     """
     a, b = rng_phase
-    d = (0.62 * (0.5 + 0.5 * math.sin(2.0 * math.pi * u_mm / TEAR_LONG_MM + a))
-         + 0.38 * (0.5 + 0.5 * math.sin(2.0 * math.pi * u_mm / TEAR_SHORT_MM + b)))
-    return (d ** 1.4) * deep_m
+    key = (int(a * 100003.0) ^ (int(b * 7919.0) << 7)) & 0x7FFFFFFF
+    f = _bites.get(key)
+    if f is None:
+        f = common.torn_edge(key, max(SHEET_MM), deep_mm=deep_m * 1000.0)
+        _bites[key] = f
+    return f(u_mm)
+
+
+# One profile per edge, kept for the run: build_sheet is called once a frame and 240 frames of the
+# same sheet must tear the same way.
+_bites = {}
 
 
 def _cockle(x, y, phases):

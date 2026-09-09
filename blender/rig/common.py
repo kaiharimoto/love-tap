@@ -281,6 +281,67 @@ def add_shadow_catcher(scene, size_m=2.0):
     return catcher
 
 
+def torn_edge(seed, span_mm, deep_mm=1.6, step_mm=0.08):
+    """How far a torn edge has eaten in at each point along it. Returns metres, never negative.
+
+    Not a sine, and that is the whole point. A material critic autocorrelated one object's left
+    edge at 0.50 on lag 31 px and 0.49 on lag 60 — one period and two — and counted four V-notches
+    with straight sides over 125 px, which is what `0.0013 * sin(y * 900) + 0.0007 * sin(y * 2400)`
+    draws, because two sines are two periods however you weight them. Paper does not tear on a
+    period: a tear runs along the weakest fibres it can find, and where it crosses a bundle it
+    jumps.
+
+    Six octaves of seeded value noise, each with its own random weight, normalised to its own range
+    so the edge uses all the depth it is given, raised to a power so most of it is nearly whole,
+    with a handful of deeper bites where the tear crossed a bundle. Deterministic in [seed]: a
+    piece tears the same way every time it is rendered, and on both phones, and no two pieces tear
+    alike.
+
+    The profile is precomputed on a [step_mm] grid and interpolated, because this is called once
+    per vertex per frame and a fold sequence is 240 frames of 58,000 vertices.
+    """
+    rng = np.random.default_rng(int(seed) & 0x7FFFFFFF)
+    span = max(float(span_mm), 1.0)
+    n = max(16, int(span / max(step_mm, 0.005)) + 1)
+    u = np.linspace(0.0, span, n)
+    d = np.zeros(n)
+    base = max(span / 2.5, 0.5)
+    for k in range(6):
+        cell = base / (2.0 ** k)
+        m = max(3, int(span / cell) + 2)
+        vals = rng.random(m)
+        vals[-1] = vals[0]          # the loop closes: no seam where the edge wraps
+        t = (u / cell) % (m - 1)
+        i0 = t.astype(int)
+        f = t - i0
+        # 0.8, not 0.5: at a half the coarsest octave is the whole edge and the fibre-scale
+        # detail is squashed out of it. Measured on the fold sheet, a half gave an edge with a
+        # peak-to-peak of 1.6 px where the old sine gave 6.7 and a real torn note reads 8 to 10.
+        w = (0.8 ** k) * float(rng.uniform(0.75, 1.25))
+        d += w * (vals[i0] * (1.0 - f) + vals[i0 + 1] * f)
+    lo, hi = float(d.min()), float(d.max())
+    d = (d - lo) / (hi - lo) if hi > lo else d * 0.0
+    d = d ** 1.15
+    for _ in range(max(2, int(span / 6.0))):
+        where = float(rng.uniform(0.0, span))
+        depth = float(rng.uniform(0.8, 1.0))
+        # wide enough that the mesh can resolve the notch: a bite narrower than three
+        # rows comes out as a V with straight sides, which is the shape a critic counted
+        width = float(rng.uniform(0.6, 2.2))
+        d = np.maximum(d, depth * np.exp(-((u - where) / width) ** 2))
+    d *= deep_mm / 1000.0
+
+    def at(u_mm):
+        t = (float(u_mm) % span) / span * (n - 1)
+        i0 = int(t)
+        if i0 >= n - 1:
+            return float(d[n - 1])
+        f = t - i0
+        return float(d[i0] * (1.0 - f) + d[i0 + 1] * f)
+
+    return at
+
+
 def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_image=None,
                    fibre_scale=900.0, roughness=0.78, subsurface=0.012, mottle_scale=1.0,
                    mottle_amount=1.0):
