@@ -593,9 +593,14 @@ def obj_candle(rng):
         # and the middle of the top is hollow, burnt down round the wick
         hollow = 0.0034 * max(0.0, 1.0 - (rr / (R * 0.66)) ** 2) if rr < R * 0.66 else 0.0
         v.co = (x, y, z - (dip + scallop + hollow) * (z / (H * 0.5)))
-    # flat-shaded: the scallops the flame left are facets, and smoothing them turned the
-    # stub into an egg
-    body = new_mesh(bm, "candle", wax, smooth=False)
+    # Smooth-shaded now, and the comment that used to sit here said the opposite: "the scallops
+    # the flame left are facets, and smoothing them turned the stub into an egg". That was written
+    # when the cone had forty segments, where one scallop was six faces and smoothing did erase it.
+    # At a hundred and sixty plus two subdivisions a scallop spans forty faces, so it survives
+    # shading, and what flat shading was leaving instead was the fault a material critic measured:
+    # a luminance gradient inside the body with p99 28.6 and max 62.5 grey levels per pixel, and a
+    # rim they could count the sides of. Wax has no facets.
+    body = new_mesh(bm, "candle", wax, smooth=True)
     body.location = (0.0, 0.0, H * 0.5)
     parts = [body]
     # the runnel the wax made coming down the low side

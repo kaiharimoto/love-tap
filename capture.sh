@@ -436,13 +436,14 @@ fi
 # and no pale one-pixel rule lying on the desk beside the paper: the mask rectangle catching the
 # edge of the piece it cuts. Measured on the photographs because the fault is drawn by CanvasKit
 # and the test binding's rasteriser cannot see it.
-# and no pale rectangle standing in for paper: flat where the material has tooth. Recorded, not
-# gated — see the head of tools/check/flat.py for why, and for when that changes.
+# and no pale rectangle standing in for paper: flat where the material has tooth. Gated now, on a
+# floor the library gives rather than one read off a screenshot — see the head of flat.py.
 echo "· measuring the desk in both directions"
 python3 tools/check/grain.py --out "$LOG/grain.json" >/dev/null || true
 
 echo "· measuring how flat the palest paper on each still is"
-python3 tools/check/flat.py --out "$LOG/flat.json" >/dev/null || true
+python3 tools/check/flat.py --out "$LOG/flat.json" >/dev/null \
+  || note_missing "flat" "a pale window on a still is flatter than any stock in the library; see $LOG/flat.json"
 
 echo "· checking nothing draws a line on the wood"
 python3 tools/check/hairline.py --out "$LOG/hairline.json" \

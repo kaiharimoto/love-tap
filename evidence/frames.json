@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-09T17:43:03Z",
+ "captured_at": "2026-09-09T22:40:10Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -70,7 +70,7 @@
     "/tmp/lovetap-capture/06_unfolding/000309.png"
    ],
    "checked_at": "2026-09-09T18:49:01Z",
-   "from_this_run": true
+   "from_this_run": false
   },
   "07_feeling_landing.mp4": {
    "dir": "/tmp/lovetap-capture/07_feeling_landing",
@@ -140,7 +140,7 @@
     "/tmp/lovetap-capture/07_feeling_landing/000420.png"
    ],
    "checked_at": "2026-09-09T18:50:16Z",
-   "from_this_run": true
+   "from_this_run": false
   },
   "08_state_propagating.mp4": {
    "dir": "/tmp/lovetap-capture/08_state_propagating",
@@ -223,7 +223,7 @@
     "/tmp/lovetap-capture/08_state_propagating/000638.png"
    ],
    "checked_at": "2026-09-09T20:17:02Z",
-   "from_this_run": true
+   "from_this_run": false
   },
   "11_chat_scroll.mp4": {
    "dir": "/tmp/lovetap-capture/11_chat_scroll",
@@ -242,7 +242,7 @@
    "cuts_between_runs": [],
    "app_seconds": 4.8,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 19.27519,
+   "mean_change_per_frame": 19.25406,
    "held_frame_test": {
     "unit": "grey levels of Rec.601 luma at full resolution",
     "all_three_must_hold": {
@@ -252,9 +252,9 @@
     },
     "worst_moving_frame": {
      "frame": 44,
-     "mean": 7.7825,
-     "visible_share": 0.195153,
-     "busiest_tile": 153.3611,
+     "mean": 7.8225,
+     "visible_share": 0.194011,
+     "busiest_tile": 151.3745,
      "note": "the frame nearest the held-frame test that still counts as motion"
     }
    },
@@ -273,7 +273,7 @@
     "/tmp/lovetap-capture/11_chat_scroll/000239.png",
     "/tmp/lovetap-capture/11_chat_scroll/000299.png"
    ],
-   "checked_at": "2026-09-09T19:37:09Z",
+   "checked_at": "2026-09-09T22:58:28Z",
    "from_this_run": true
   },
   "15_authored_feeling.mp4": {
@@ -368,7 +368,7 @@
     "/tmp/lovetap-capture/15_authored_feeling/000375.png"
    ],
    "checked_at": "2026-09-09T18:52:19Z",
-   "from_this_run": true
+   "from_this_run": false
   }
  },
  "scroll": {
@@ -378,45 +378,45 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 2078,
+  "cold_ms": 2852,
   "steps": [
    {
     "do": "pair",
-    "ms": 1880,
+    "ms": 2683,
     "auto": true,
     "far": "http://127.0.0.1:8480"
    },
    {
     "do": "goTo",
-    "ms": 3676
+    "ms": 3754
    },
    {
     "do": "wait",
-    "ms": 2003
+    "ms": 2004
    },
    {
     "do": "scrollTo",
-    "ms": 3558
+    "ms": 7695
    },
    {
     "do": "wait",
-    "ms": 1102
+    "ms": 1101
    },
    {
     "do": "frames",
-    "ms": 536695
+    "ms": 803641
    },
    {
     "do": "timings",
-    "ms": 416
+    "ms": 425
    },
    {
     "do": "flingLog",
-    "ms": 410
+    "ms": 417
    },
    {
     "do": "report",
-    "ms": 415
+    "ms": 1162
    }
   ]
  },

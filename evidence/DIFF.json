@@ -1,5 +1,5 @@
 {
- "commit": "41db3d4",
+ "commit": "8601a51",
  "baseline": {
   "dir": "evidence/.previous",
   "captured_at": "2026-09-09T19:16:36.983567+00:00",
@@ -108,12 +108,12 @@
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "changed",
-   "ssim": 0.721,
+   "ssim": 0.7089,
    "judgement": null,
-   "sha": "b8fe3851fd1e934b",
+   "sha": "68d247465f5d5f25",
    "previous_sha": "0698b2e478d714e4",
    "previous_written": "2026-09-09T18:50:38Z",
-   "label_basis": "ssim 0.721, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.7089, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "12_search.png",
@@ -128,12 +128,12 @@
   {
    "artifact": "13_messenger_states.png",
    "label": "changed",
-   "ssim": 0.5968,
+   "ssim": 0.6128,
    "judgement": null,
-   "sha": "8bddc4fa7a9c3317",
+   "sha": "e432c29b359aa6f7",
    "previous_sha": "77acdfaab829f1dc",
    "previous_written": "2026-09-09T17:56:28Z",
-   "label_basis": "ssim 0.5968, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.6128, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "14_media_viewer.png",

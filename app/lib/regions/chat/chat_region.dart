@@ -42,6 +42,19 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   int? _arrivedAt;
 
   final _text = TextEditingController();
+  /// The rows that are on the glass, so a sync round does not rebuild them.
+  ///
+  /// Keyed by event id and capped: only what is in the viewport and its cache extent can be
+  /// reused, and the thread is eight thousand rows long. Insertion-ordered, oldest evicted.
+  final Map<String, _RowOnTheGlass> _rows = <String, _RowOnTheGlass>{};
+
+  void _remember(String id, _RowOnTheGlass row) {
+    _rows[id] = row;
+    while (_rows.length > 96) {
+      _rows.remove(_rows.keys.first);
+    }
+  }
+
   final _scroll = ItemScrollController();
   final _positions = ItemPositionsListener.create();
   /// A real pixel offset into the list, for the fling. See [CaptureBus.scrollBy].
@@ -957,17 +970,30 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                       itemBuilder: (context, i) {
                         if (i == items.length) return const SizedBox(height: 10);
                         final it = items[i];
-                        return Note(
+                        final highlight = it.id == _highlightId;
+                        // The row already on the glass, if it would draw the same. Returning the
+                        // *identical* widget is what stops the framework rebuilding the subtree:
+                        // Element.updateChild short-circuits on identity. See _RowOnTheGlass.
+                        final had = _rows[it.id];
+                        if (had != null &&
+                            had.row == i &&
+                            had.highlight == highlight &&
+                            had.item.drawsTheSameAs(it)) {
+                          return had.widget;
+                        }
+                        final w = Note(
                           key: ValueKey(it.id),
                           item: it,
                           row: i,
                           unreadFrom: _arrivedAt ??= scope.thread.readUpto[scope.me] ?? 0,
                           registry: registry,
-                          highlight: it.id == _highlightId,
+                          highlight: highlight,
                           // not in the thread when it was opened: it has just arrived
                           arrived: !(_openedWith ??= {for (final x in items) x.id}).contains(it.id),
                           onLongPress: () => _actions(it, registry),
                         );
+                        _remember(it.id, _RowOnTheGlass(it, i, highlight, w));
+                        return w;
                       },
                     ),
             ],
@@ -1278,3 +1304,16 @@ final Uint8List kPosterPng = Uint8List.fromList([
 // unused import guard for platforms without file paths
 // ignore: unused_element
 final _keep = isWebPlatform;
+
+
+/// One row as it currently stands on the glass: the item it was built from, where it sat, whether
+/// it was lit, and the widget itself. Handing the same widget instance back is what tells the
+/// framework the subtree has not changed — Element.updateChild returns the existing child
+/// untouched when the new widget is identical to the old one, and Note.build is never called.
+class _RowOnTheGlass {
+  const _RowOnTheGlass(this.item, this.row, this.highlight, this.widget);
+  final ThreadItem item;
+  final int row;
+  final bool highlight;
+  final Widget widget;
+}

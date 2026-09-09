@@ -191,6 +191,27 @@ class AppScope extends ChangeNotifier {
     return w!.scope;
   }
 
+  /// Whose phone this is, read *without* subscribing to the scope.
+  ///
+  /// `of` registers a dependency on the InheritedNotifier, so every widget that calls it is marked
+  /// dirty by every `notifyListeners` — and the spine notifies on every sync round. A thread row
+  /// called `of` for one thing, and that thing is a constant for the life of the app: `me`. So
+  /// every visible note was a listener of every round the other phone answered, and no amount of
+  /// caching the row widget helped, because the framework was dirtying the row's own element
+  /// rather than rebuilding it from above.
+  ///
+  /// Measured over the same twenty frames of the same fling: 38 rows built with nothing arriving,
+  /// 595 with a message landing on each frame. In the capture, the same scene shot on its own
+  /// built 135 rows over 300 frames and shot with the far phone up built 5,028.
+  ///
+  /// Safe because the provider is built once with one scope and `me` never changes inside it; a
+  /// widget that needs anything that *does* change must still use `of`.
+  static Person meOf(BuildContext context) {
+    final w = context.getInheritedWidgetOfExactType<_ScopeProvider>();
+    assert(w != null, 'AppScope missing');
+    return w!.scope.me;
+  }
+
   static Widget provide({required AppScope scope, required Widget child}) => _ScopeProvider(scope: scope, child: child);
 
   @override

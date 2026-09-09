@@ -7,7 +7,7 @@
   "replying_to": null,
   "editing": null,
   "partner_typing": true,
-  "anchor": "row 5006 of 8075",
+  "anchor": "row 5007 of 8076",
   "kinds": {
    "feeling": 1,
    "message": 1,
@@ -52,17 +52,17 @@
  "scroll": {
   "first": 5064,
   "last": 5066,
-  "of": 8075
+  "of": 8076
  },
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 4944,
  "seed": 20260903,
- "events": 14075,
+ "events": 14076,
  "transport": "local",
  "link": "connected",
  "me": "teo",
  "masks_in_pool": 56,
- "masks_composed": 12,
+ "masks_composed": 13,
  "writable_masks": 47,
  "light": "day",
  "has_dusk_paper": true,
@@ -75,25 +75,26 @@
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 184,
-  "pushed": 2,
+  "rounds": 273,
+  "pushed": 3,
   "refused": 0,
   "pulled": 0,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14075,
+  "cursor": 14076,
+  "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14075,
-   "our_cursor": 14075,
+   "peer_cursor": 14076,
+   "our_cursor": 14076,
    "last_error": null,
-   "since": "2026-09-09T19:26:59.152Z",
-   "last_contact": "2026-09-09T19:36:08.144Z"
+   "since": "2026-09-09T22:43:42.369Z",
+   "last_contact": "2026-09-09T22:57:24.895Z"
   }
  },
  "ambient": {

@@ -1,7 +1,7 @@
 {
  "strings_read": 116,
- "literals_in_lib": 3672,
- "share_of_literals_read": 0.032,
+ "literals_in_lib": 3692,
+ "share_of_literals_read": 0.031,
  "what_it_cannot_see": "a sentence a function returns, a string built by interpolation at the point of use, and anything a module composes from the registry. Those are read by the tests that assert on their words rather than by this.",
  "rules_applied": [
   {
@@ -105,7 +105,7 @@
    "text": "${(durationMs! / 1000).round()}s"
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:964",
+   "where": "app/lib/regions/chat/chat_region.dart:988",
    "text": "${scope.partner.name} ${S.typing}"
   },
   {
@@ -361,11 +361,11 @@
    "text": "read the six words out"
   },
   {
-   "where": "app/lib/thread/renderers.dart:72",
+   "where": "app/lib/thread/renderers.dart:73",
    "text": "${(ms / 1000).round()}s"
   },
   {
-   "where": "app/lib/thread/renderers.dart:147",
+   "where": "app/lib/thread/renderers.dart:148",
    "text": "${p["
   },
   {

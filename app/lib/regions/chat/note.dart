@@ -68,13 +68,15 @@ class Note extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThreadRowStats.built++;
-    final scope = AppScope.of(context);
+    // meOf, not of: see AppScope.meOf. A row needs `me` and nothing else from the scope, and
+    // taking it through `of` subscribed every note on the glass to every sync round.
+    final me = AppScope.meOf(context);
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
-    final mine = item.author == scope.me;
+    final mine = item.author == me;
     final e = item.event;
 
     // margin events: a pencil line beside the thread, not a piece of paper
-    if (_isMarginal(item.type)) return _MarginLine(item: item, me: scope.me);
+    if (_isMarginal(item.type)) return _MarginLine(item: item, me: me);
 
     final width = MediaQuery.sizeOf(context).width * _noteWidthFraction;
     final stock = lib == null ? '' : stockVariantFor(e, lib);
@@ -104,7 +106,7 @@ class Note extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (item.replyTo != null) _ReplyStrip(target: item.replyTo!, registry: registry),
-        _body(context, scope),
+        _body(context, me),
         const SizedBox(height: 3),
         // A note that was taken back does not report how far it got. It said `read ✓✓` under the
         // words "took it back", which is a delivery state for writing that is not there any more,
@@ -170,7 +172,7 @@ class Note extends StatelessWidget {
                   letter: writing,
                   // the name on the outside, in the hand of the one who folded it: a folded note
                   // is addressed, and this is what the reader sees before opening it
-                  outside: Text(scope.me.name, style: Hands.of(e.author, size: 17)),
+                  outside: Text(me.name, style: Hands.of(e.author, size: 17)),
                   arriving: arrived,
                   child: piece,
                 )
@@ -206,14 +208,14 @@ class Note extends StatelessWidget {
   /// The thread's half of the registry's promise: a type names the renderer that draws it, and
   /// thread/renderers.dart is where they live. There is no switch on the type here and no second one in
   /// search, so the two cannot drift apart the way they had.
-  Widget _body(BuildContext context, AppScope scope) {
+  Widget _body(BuildContext context, Person me) {
     if (item.deleted) {
       return Written(S.tookBack, by: item.author, size: 17, colour: Pen.margin);
     }
     final spec = kEventTypeById[item.type];
     final draw = spec == null ? null : kThreadRenderers[spec.renderer];
     if (draw == null) return Written(item.text ?? item.type, by: item.author, size: 18);
-    return draw(NoteContext(item: item, registry: registry, me: scope.me, context: context));
+    return draw(NoteContext(item: item, registry: registry, me: me, context: context));
   }
 }
 

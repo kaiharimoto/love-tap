@@ -20,6 +20,7 @@ import '../material/paper.dart';
 import '../modules/registry.dart';
 import '../scope.dart';
 import '../spine/projections/state.dart';
+import '../regions/chat/note.dart' show ThreadRowStats;
 import 'bus.dart';
 import 'hooks_stub.dart' if (dart.library.js_interop) 'hooks_web.dart' as impl;
 
@@ -111,6 +112,11 @@ class CaptureHooks {
       'throws': f.where((m) => m['throw'] == true).length,
       'frames_under_a_device_pixel': still.length,
       'at': still.map((m) => m['tick']).toList(),
+      'rows_built_total': f.fold<int>(0, (a, m) => a + ((m['rows_built'] as int?) ?? 0)),
+      'rows_built_worst_tick': f.fold<int>(0, (a, m) {
+        final n = (m['rows_built'] as int?) ?? 0;
+        return n > a ? n : a;
+      }),
     };
   }
 
@@ -128,6 +134,7 @@ class CaptureHooks {
     final t0 = DrivenClock.now;
     var moved = 0.0;
     var first = true;
+    var builtBefore = ThreadRowStats.built;
     _flingSub = DrivenClock.ticks.listen((now) {
       final t = (now - t0).inMicroseconds / 1e6;
       final x = sim.x(t);
@@ -143,7 +150,11 @@ class CaptureHooks {
         'moved': double.parse(went.toStringAsFixed(3)),
         'from': at.isEmpty ? null : double.parse(at[0].toStringAsFixed(1)),
         'end': at.isEmpty ? null : double.parse(at[2].toStringAsFixed(1)),
+        // how many thread rows the framework asked for on this tick. A viewport holds about
+        // eight notes: eight means the cost is per row, thousands means the list is not lazy.
+        'rows_built': ThreadRowStats.built - builtBefore,
       });
+      builtBefore = ThreadRowStats.built;
       first = false;
       if (sim.isDone(t)) {
         _flingSub?.cancel();

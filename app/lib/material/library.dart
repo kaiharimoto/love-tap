@@ -144,6 +144,14 @@ class MaterialLibrary {
 
   /// Whether the dusk half of the library exists at all.
   ///
+  /// The pixel size of a paper stock, or null if the library has never heard of it.
+  Size? stockSize(String id) {
+    for (final e in paper) {
+      if (e.id == id) return Size(e.w.toDouble(), e.h.toDouble());
+    }
+    return null;
+  }
+
   /// The desk, the paper and every baked shadow were rendered under two conditions, and the app
   /// shows one of them at a time. A build lit at dusk with only the daylight paper baked would put
   /// a lamp on the desk and leave the notes in the afternoon — contact shadows disagreeing about

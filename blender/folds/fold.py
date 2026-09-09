@@ -46,6 +46,8 @@ SHEET_MM = (148.0, 105.0)          # A6, the size of a note in the thread
 THICKNESS_M = 0.00011
 CREASE_MM = 1.4                     # width of the bevelled crease band
 CREASE_RIDGE_M = 0.00036            # how far the crease stands off the sheet: pulled fibres, not a line
+HINGE_M = 0.0022                    # the radius band a fold turns through: paper bends, it does not hinge
+BOW_RAD = 0.20                      # how much further a standing flap curls over its own length
 # How far off the vertical the camera sits. A flap standing at a right angle projects sin(tilt) of
 # its length into the frame — at twenty degrees a 35 mm flap is 12 mm of the picture, which reads
 # as a flap; below about fifteen it reads as a thick edge, and above about thirty the settled sheet
@@ -161,13 +163,52 @@ def crease_softness(distance_mm, width_mm=CREASE_MM):
     return float(np.clip(1.0 - abs(distance_mm) / width_mm, 0.0, 1.0))
 
 
-def bend_about(co, hinge_y, angle, sign=1.0):
-    """Rotate a point about a hinge line running along x at hinge_y."""
+def _arc(length, turn, a0):
+    """Walk `length` of inextensible paper whose tangent turns by `turn`, starting at angle a0.
+
+    Returns (along, up, ending angle). A constant turn rate over a length is a circular arc, which
+    is what paper does: it has no hinges in it, only radii.
+    """
+    a1 = a0 + turn
+    if abs(turn) < 1e-9:
+        return length * math.cos(a0), length * math.sin(a0), a1
+    r = length / turn
+    return r * (math.sin(a1) - math.sin(a0)), -r * (math.cos(a1) - math.cos(a0)), a1
+
+
+def bend_about(co, hinge_y, angle, sign=1.0, flap_m=None):
+    """Bend a point about a hinge line running along x at hinge_y.
+
+    This used to be a rigid rotation, and a rigidly rotated flap is a plane. A plane under one
+    light is one tone, so the fold frames came out as two flat fills meeting at a step: measured
+    over 46 frames and 59 panels, the end-to-end ramp inside a panel was 11.3 grey levels against
+    a crease step of 24.2, and the thirty rows nearest a crease were 0.37 levels *darker* than the
+    thirty farthest — no highlight on the ridge, no valley beside it. That is a picture being
+    transformed, which is the one thing the fold render exists not to be.
+
+    Paper has no corners. The bend runs over a band HINGE_M wide, so the surface through the fold
+    is an arc of radius HINGE_M/angle: the light climbs it on the outside and is occluded on the
+    inside, both of them shading rather than drawing. Past the band the flap keeps turning, very
+    slowly, over its own length — a raised flap sags under its own weight, and a sheet that has
+    been folded and opened keeps some of the fold — so the panel is a shallow cylinder and its
+    tone ramps across it instead of sitting flat.
+    """
     y = co[1] - hinge_y
     if sign * y <= 0:
         return co
-    c, s = math.cos(angle), math.sin(angle)
-    return (co[0], hinge_y + y * c, co[2] + y * s)
+    d = abs(y)
+    sy = 1.0 if y >= 0 else -1.0
+    band = HINGE_M
+    p, q, a1 = _arc(min(d, band), angle * min(1.0, d / band), 0.0)
+    if d > band:
+        run = max((flap_m or band) - band, 1e-6)
+        # the tail's curvature, in radians over the whole flap: nothing when the flap lies flat,
+        # most when it stands up
+        bow = BOW_RAD * math.sin(min(abs(angle), math.pi)) * (1.0 if angle >= 0 else -1.0)
+        dp, dq, _ = _arc(d - band, bow * (d - band) / run, a1)
+        p += dp
+        q += dq
+    return (co[0], hinge_y + sy * p, co[2] + sy * q)
 
 
 # A flap folded back on itself never reaches a full half turn: the paper it is folded against is
@@ -197,9 +238,9 @@ def apply_thirds(verts_co, h, t, rng):
     for co in verts_co:
         c = co
         if c[1] > y1:
-            c = bend_about(c, y1, a_top, sign=1.0)
+            c = bend_about(c, y1, a_top, sign=1.0, flap_m=h / 3.0)
         elif c[1] < y2:
-            c = bend_about(c, y2, -a_bot, sign=-1.0)
+            c = bend_about(c, y2, -a_bot, sign=-1.0, flap_m=h / 3.0)
         # the whole sheet is not flat while it settles: the creases stay proud
         lift = settle * 0.0016 * math.exp(-((c[1] - y1) / (0.02)) ** 2)
         lift += settle * 0.0016 * math.exp(-((c[1] - y2) / (0.02)) ** 2)
@@ -216,7 +257,7 @@ def apply_half(verts_co, h, t, rng):
     settle = 1.0 - ease(min(1.0, max(0.0, (t - 0.7) / 0.3)))
     out = []
     for co in verts_co:
-        c = bend_about(co, 0.0, a, sign=1.0) if co[1] > 0 else co  # over the sheet, not under it
+        c = bend_about(co, 0.0, a, sign=1.0, flap_m=h / 2.0) if co[1] > 0 else co  # over, not under
         lift = settle * 0.0022 * math.exp(-((c[1]) / 0.02) ** 2)
         lift += CREASE_RIDGE_M * crease_softness(c[1] * 1000.0)
         out.append((c[0], c[1], c[2] + lift))
@@ -300,9 +341,10 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
     kind = cfg["kind"]
     rng = np.random.default_rng(20260903 + abs(hash(name)) % 1000)
     w, h = SHEET_MM[0] / 1000.0, SHEET_MM[1] / 1000.0
-    # rows of 0.58 mm, so the crease band (1.4 mm) is a ridge two or three rows wide rather than a
-    # single row that the light cannot break across
-    nx, ny = 160, 180
+    # rows of 0.29 mm, so the 2.2 mm the fold turns through is an arc seven or eight rows long
+    # rather than three. At 180 rows the bend was four quads and read as a chamfer; the light has
+    # to climb it, and it cannot climb what it can count.
+    nx, ny = 160, 360
     os.makedirs(out_dir, exist_ok=True)
     end = frames if end is None else end
     base_co = None

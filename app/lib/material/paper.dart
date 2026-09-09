@@ -119,6 +119,32 @@ class PaperPiece extends StatelessWidget {
 
   static Widget none(BuildContext c, Object e, StackTrace? s) => const SizedBox.shrink();
 
+  /// Which sampler to draw a stock with, from how big it is being drawn.
+  ///
+  /// Paper being *shrunk* wants a smoothing filter: the ruled lines are a pixel wide at their own
+  /// density and point-sampling them down makes them break into dashes. Paper being *enlarged*
+  /// wants no filter at all, and that is not a preference — it is measured. A material critic
+  /// found the large Settings sheet 47 per cent texture-free, flattest window 0.61 grey levels
+  /// against 6.9 to 19 on the notes in the same picture. Reproducing the pipeline on the stock
+  /// itself: index_01's own tooth is 2.52, the same stock minified is 4.43, and the same stock
+  /// magnified 1.17 times with a smoothing filter is 1.29 — which is what the glass measured to
+  /// two decimal places. A full-width piece is 1356 device pixels across and the stock is 1288,
+  /// so every full-width sheet in the app was being enlarged and averaged. Nearest-neighbour at
+  /// that scale reads 1.64 instead of 1.29: it cannot put back the detail that is not there, but
+  /// it stops the sampler taking away the detail that is.
+  ///
+  /// The rest of the answer is more paper, and that is a re-render, not a flag.
+  static FilterQuality stockFilter(String stock, Size box, double dpr, double stockScale) {
+    if (!MaterialLibrary.loaded) return FilterQuality.medium;
+    final px = MaterialLibrary.instance.stockSize(stock);
+    if (px == null || px.width <= 0 || px.height <= 0) return FilterQuality.medium;
+    // BoxFit.cover over a box of `box` logical points, drawn at `dpr` device pixels per point,
+    // with the whole layer scaled by stockScale. The image's logical size is its pixel size,
+    // because it is loaded at scale 1.
+    final cover = math.max(box.width / px.width, box.height / px.height);
+    return cover * dpr * stockScale > 1.0 ? FilterQuality.none : FilterQuality.medium;
+  }
+
 
 
   Widget _bakedShadow(BuildContext context, String suffix) {
@@ -179,25 +205,28 @@ class PaperPiece extends StatelessWidget {
         // image is missing from the bundle, is still a sheet.
         Positioned.fill(child: ColoredBox(color: Paper.forStock(stock))),
         Positioned.fill(
-          child: Transform.scale(
-            scale: windowed ? 1.0 : stockScale,
-            alignment: stockAlignment,
-            child: Image.asset(
-              paperAsset(stock),
-              // A window shows the sheet at ONE IMAGE PIXEL PER DEVICE PIXEL. Without the scale,
-              // BoxFit.none means one image pixel per *logical* point, which on a phone is three
-              // device pixels — so the tooth was magnified three times and smoothed by the
-              // sampler. A completeness pass measured the result on the tab strip: an interior of
-              // 1.20 grey levels against 19 to 27 for the note paper beside it, on ten of eleven
-              // stills. The shape the anti-goal forbids was sitting in the app's own chrome.
-              scale: windowed ? MediaQuery.devicePixelRatioOf(context) : 1.0,
-              fit: windowed ? BoxFit.none : BoxFit.cover,
+          child: LayoutBuilder(builder: (context, box) {
+            final dpr = MediaQuery.devicePixelRatioOf(context);
+            return Transform.scale(
+              scale: windowed ? 1.0 : stockScale,
               alignment: stockAlignment,
-              gaplessPlayback: true,
-              filterQuality: FilterQuality.medium,
-              errorBuilder: PaperPiece.none,
-            ),
-          ),
+              child: Image.asset(
+                paperAsset(stock),
+                // A window shows the sheet at ONE IMAGE PIXEL PER DEVICE PIXEL. Without the scale,
+                // BoxFit.none means one image pixel per *logical* point, which on a phone is three
+                // device pixels — so the tooth was magnified three times and smoothed by the
+                // sampler. A completeness pass measured the result on the tab strip: an interior of
+                // 1.20 grey levels against 19 to 27 for the note paper beside it, on ten of eleven
+                // stills. The shape the anti-goal forbids was sitting in the app's own chrome.
+                scale: windowed ? dpr : 1.0,
+                fit: windowed ? BoxFit.none : BoxFit.cover,
+                alignment: stockAlignment,
+                gaplessPlayback: true,
+                filterQuality: PaperPiece.stockFilter(stock, box.biggest, dpr, stockScale),
+                errorBuilder: PaperPiece.none,
+              ),
+            );
+          }),
         ),
         if (tearId != null)
           // Sliced the same way the mask is, so the lit fibres on the torn edge keep the length
