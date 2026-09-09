@@ -111,8 +111,22 @@ def main():
     rules += [{"rule": why, "pattern": pattern.pattern} for pattern, why in MARKETING]
     rules.append({"rule": "streak language on the rituals surface", "pattern": STREAK.pattern,
                   "only_in": "files whose path contains 'ritual'"})
+    # And how much of the app it read. A code critic counted 3,568 string literals in lib/ against
+    # this check's 116 and was right to: `strings_read: 116` with no denominator reads as coverage
+    # and is not. What it reads is a literal in an immediate display position or a `static const`
+    # in the voice file — which is most of the app's fixed words and none of the sentences a
+    # function returns. The number that is missing is the interesting one, so it is here.
+    literal_count = 0
+    for f in sorted(pathlib.Path("app/lib").rglob("*.dart")):
+        literal_count += len(re.findall(r"'[^'\\\n]*'|\"[^\"\\\n]*\"", f.read_text(encoding="utf-8")))
     report = {
         "strings_read": counted,
+        "literals_in_lib": literal_count,
+        "share_of_literals_read": round(counted / literal_count, 3) if literal_count else None,
+        "what_it_cannot_see": "a sentence a function returns, a string built by interpolation at "
+                              "the point of use, and anything a module composes from the registry. "
+                              "Those are read by the tests that assert on their words rather than "
+                              "by this.",
         "rules_applied": rules,
         "findings": findings,
         "read": passed,

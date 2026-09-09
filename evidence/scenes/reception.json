@@ -115,6 +115,22 @@
    "size": "1180x1100"
   },
   {
+   "do": "push",
+   "payload": {
+    "kind": "state_declared",
+    "from": "noor"
+   }
+  },
+  {
+   "do": "wait",
+   "ms": 1400
+  },
+  {
+   "do": "screen",
+   "out": "evidence/crops/reception_state.png",
+   "size": "1180x1100"
+  },
+  {
    "do": "notifications",
    "out": "evidence/logs/reception.json",
    "from": "push/"

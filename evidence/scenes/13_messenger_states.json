@@ -77,7 +77,7 @@
   {
    "do": "slowSend",
    "text": "ok \u2014 leaving now",
-   "ms": 6000
+   "ms": 25000
   },
   {
    "do": "wait",
@@ -93,6 +93,14 @@
    "value": true,
    "timeout": 15000,
    "settle": 250
+  },
+  {
+   "do": "scrollTo",
+   "arg": "end"
+  },
+  {
+   "do": "wait",
+   "ms": 400
   },
   {
    "do": "shot",

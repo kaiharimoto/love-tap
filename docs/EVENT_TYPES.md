@@ -41,8 +41,8 @@ cursor acknowledgement, blob transfer progress.
 | 9 | `feeling` | `feeling_id`, `intensity` (0–1), `hold_ms` | the object landing on the desk between notes, shadow first | object + haptic pattern (PWA: page rhythm), interruptive | by feeling, by family, by intensity |
 | 10 | `state_declared` | `signal`, `value` | a marginal note in the author's hand ("heads down until 6") | ambient surfaces update; a mood change is quiet | by signal |
 | 11 | `state_passive` | `signal`, `value` | coalesced: one margin mark per meaningful transition per hour ("phone died"), otherwise folded into the partner strip only | ambient surfaces update | by signal |
-| 12 | `date_event` | `date_id`, `action` (planned/scheduled/done/said/remembered), `title`, `when?`, `place?`, `verdict?`, `note?` | a ticket-stub note; what they said about it afterwards is written on the stub in their hand, never scored | per action; quiet for planned, interruptive for scheduled | title, place, note, verdict |
-| 13 | `todo_event` | `todo_id`, `action` (added/assigned/done/reopened/removed), `text`, `assignee?` | a checklist line torn from a list, ticked in the author's ink when done | quiet; interruptive when assigned to you | text |
+| 12 | `date_event` | `date_id`, `action` (planned/scheduled/done/said/remembered), `title`, `when?`, `place?`, `verdict?`, `note?` | a ticket-stub note; what they said about it afterwards is written on the stub in their hand, never scored | quiet | title, place, note, verdict |
+| 13 | `todo_event` | `todo_id`, `action` (added/assigned/done/reopened/removed), `text`, `assignee?` | a checklist line torn from a list, ticked in the author's ink when done | quiet | text |
 | 14 | `milestone` | `milestone_id`, `kind` (anniversary/first/custom), `title`, `date`, `yearly` | a stamped card | on the day, interruptive, via a `ping` scheduled by a person | title |
 | 15 | `ritual_kept` | `ritual_id`, `title`, `kept_at`, `note?` | a small tally mark in the margin; never a count, never a run | none | title, note |
 | 16 | `passed_on` | `item_id`, `action` (passed/started/finished), `title`, `kind` (book/film/record), `note?` | an index card in the hand of whoever passed it on, with what the other one wrote underneath | quiet | title, note |
@@ -50,6 +50,16 @@ cursor acknowledgement, blob transfer progress.
 | 18 | `feeling_authored` | `feeling_id`, `name`, `family`, `colour`, `object_asset`, `haptic`, `sound`, `retired` | a card announcing a new feeling in the author's hand | quiet | name |
 
 Eighteen types. The floor is fourteen.
+
+
+Two rows in this table used to promise a treatment that branches on what happened — quiet for a
+date somebody planned and interruptive for one they scheduled, quiet for a task added and
+interruptive for one assigned to you. The registry says `Notify.quiet` flat for both and
+`NotificationPrefs.forType` keys on the type's id with no branch anywhere on the payload, so the
+promise was never kept. It also cannot be, on the path that matters: a push carries the event's
+kind and who sent it and nothing else, on purpose, so the phone that is asleep does not learn from
+the notification what the event said. A treatment that depends on the action would have to put the
+action in the push. The rows say what the build does.
 
 ## Adding a nineteenth
 
