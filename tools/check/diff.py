@@ -132,8 +132,14 @@ def compare(name, scratch):
     label = "unchanged" if value >= UNCHANGED_AT else "changed"
     return {"artifact": name, "label": label, "ssim": value, "judgement": None,
             "sha": digest(now), "previous_sha": digest(was),
-            "label_basis": f"ssim {value} against {UNCHANGED_AT} — at or above it, nothing a "
-                           f"person would see has moved"}
+            # The sentence says what happened, not what would have happened in the other case.
+            # It used to read "at or above it, nothing a person would see has moved" on artifacts
+            # that were *below* it — explaining the case that did not occur, on the two rows a
+            # reader would actually look at.
+            "label_basis": (f"ssim {value}, at or above {UNCHANGED_AT}: nothing a person would see "
+                            f"has moved" if label == "unchanged" else
+                            f"ssim {value}, under {UNCHANGED_AT}: something a person would see has "
+                            f"moved, and SSIM does not know whether for the better")}
 
 
 def head():
@@ -166,9 +172,11 @@ def main():
         "commit": head(),
         "baseline": {"dir": "evidence/.previous", "captured_at": baseline_at},
         "unchanged_at": UNCHANGED_AT,
-        "labels": "new, gone, unchanged, changed — measured. `judgement` (improved or regressed) "
-                  "is the coherence critic's to fill in; SSIM does not know whether a change is "
-                  "an improvement.",
+        "labels": "new, gone, unchanged, changed, absent — all measured. `absent` is an artifact "
+                  "that is not here and has a standing reason in evidence/WHY_MISSING.json, which "
+                  "is not the same as `gone`: gone means it was in the last capture and is not in "
+                  "this one. `judgement` (improved or regressed) is the coherence critic's to fill "
+                  "in; SSIM does not know whether a change is an improvement.",
         "artifacts": rows,
         "counts": {k: sum(1 for r in rows if r["label"] == k)
                    for k in ("new", "gone", "unchanged", "changed", "absent")},

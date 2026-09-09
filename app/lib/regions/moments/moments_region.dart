@@ -78,6 +78,16 @@ class _MomentsRegionState extends State<MomentsRegion> {
       'showing': all.where(_keeps).length,
       'tiles_built': _Gallery.built,
       'blobs': BlobCache.stats(),
+      // what kinds of thing this lens is showing. The capture could name seven of the registry's
+      // eighteen types across every scene report, and photo was one of the eleven it could not —
+      // on the one screen whose whole subject is photographs.
+      'kinds': () {
+        final counts = <String, int>{};
+        for (final e in all.where(_keeps)) {
+          counts[e.type] = (counts[e.type] ?? 0) + 1;
+        }
+        return counts;
+      }(),
     };
   }
 

@@ -341,6 +341,29 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
           for (final k in {for (final p in ps) if (p.index < items.length) items[p.index].type})
             k: [for (final p in ps) if (p.index < items.length && items[p.index].type == k) items[p.index].id].length,
         },
+        // and the kinds that are on the glass without a row of their own: a reaction is an object
+        // stuck to the note it answers, an edit is a caret on the row it changed, a delete is the
+        // stub left behind, a read marker is a pair of ticks. A completeness pass counted the types
+        // the capture can show against the eighteen the registry holds and found seven, because
+        // these four are only ever folded onto somebody else's row and the record never named them.
+        'folded_in': {
+          'reaction': [
+            for (final p in ps)
+              if (p.index < items.length) ...items[p.index].reactions,
+          ].length,
+          'message_edit': [
+            for (final p in ps)
+              if (p.index < items.length && items[p.index].edited) items[p.index].id,
+          ].length,
+          'message_delete': [
+            for (final p in ps)
+              if (p.index < items.length && items[p.index].deleted) items[p.index].id,
+          ].length,
+          'read_marker': [
+            for (final p in ps)
+              if (p.index < items.length && items[p.index].delivery == Delivery.read) items[p.index].id,
+          ].length,
+        },
       };
     };
   }

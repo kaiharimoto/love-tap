@@ -171,8 +171,18 @@ def main():
             "twin_share": round(share, 3),
             "pairs_over_twin": pairs_over,
             "twin_iou": args.twin,
+            # The whole curve, not one point on it. Two documents in one review cycle gave this
+            # measurement six times apart and neither said so: this file reported 0.061 at 0.85
+            # and a critic reported 0.358 at 0.90, both correct, both about the same hero. A share
+            # only means something beside the threshold it was taken at, and the shape of the curve
+            # is what says whether the hand repeats — a font's would fall off a cliff at 1.0.
+            "twin_share_at": {
+                str(t): round(sum(1 for b in best if b >= t) / len(best), 3) if best else None
+                for t in (0.80, 0.85, 0.90, 0.95, 0.99)
+            },
             "note": "marks are connected components of ink, normalised to one box; a font repeats "
-                    "itself exactly, a hand a little",
+                    "itself exactly, a hand a little. twin_share is at twin_iou; twin_share_at is "
+                    "the same count at five thresholds, because a share means nothing without one",
             "ok": len(marks) >= 12 and share <= args.max_twin_share,
         }
     text = json.dumps(report, indent=1)

@@ -468,6 +468,18 @@ class CaptureHooks {
             for (final e in recent)
               {'id': e.id, 'feeling': e.payload['feeling_id'], 'from': e.author.name, 'ts': e.ts}
           ],
+          // and what the two sheets are made of: a signal either of them declared, and one their
+          // phone reported on its own
+          'kinds': () {
+            final counts = <String, int>{};
+            for (final e in all) {
+              if (e.type == 'state_declared' || e.type == 'state_passive' || e.type == 'feeling' ||
+                  e.type == 'feeling_authored' || e.type == 'ping') {
+                counts[e.type] = (counts[e.type] ?? 0) + 1;
+              }
+            }
+            return counts;
+          }(),
           'partner_signals': {for (final k in scope.partnerState.signals.keys) k: scope.partnerState.signals[k]?.value},
           'my_signals': {for (final k in scope.myState.signals.keys) k: scope.myState.signals[k]?.value},
         };
@@ -493,6 +505,7 @@ class CaptureHooks {
           // that the messenger carries a voice note is answered by the picture
           if (chat['anchor'] != null) 'anchor': chat['anchor'],
           if (chat['kinds'] != null) 'kinds': chat['kinds'],
+          if (chat['folded_in'] != null) 'folded_in': chat['folded_in'],
           if (chat['delivery'] != null) 'delivery': chat['delivery'],
           if (chat['states_on_the_glass'] != null)
             'states_on_the_glass': chat['states_on_the_glass'],
@@ -503,6 +516,16 @@ class CaptureHooks {
       case 2:
         return {
           'region': 'us',
+          // what kinds of thing the five modules are drawing between them, so the record names the
+          // eleven types that live outside the thread rather than leaving them to the eye
+          'kinds': () {
+            final mine = {for (final m in kModules) ...m.eventTypes};
+            final counts = <String, int>{};
+            for (final e in all) {
+              if (mine.contains(e.type)) counts[e.type] = (counts[e.type] ?? 0) + 1;
+            }
+            return counts;
+          }(),
           'modules': [
             for (final m in kModules)
               {
@@ -514,6 +537,7 @@ class CaptureHooks {
         };
       case 3:
         return {'region': 'moments', ...?CaptureBus.momentsReport?.call()};
+
       case 4:
         final pairing = scope.transport.pairing;
         return {
