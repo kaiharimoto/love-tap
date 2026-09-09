@@ -95,7 +95,7 @@ def _placed_rays(h, w, seed, count=340):
     return np.clip(field / m * 1.6, 0, 1)
 
 
-def _placed_pores(h, w, seed, count=2600):
+def _placed_pores(h, w, seed, count=9000):
     """The open pores of a ring-porous hardwood: short dark grooves running *along* the grain.
 
     Without them the desk has no cross-grain structure at all. Measured on the asset itself, the
@@ -106,20 +106,43 @@ def _placed_pores(h, w, seed, count=2600):
     millimetres long, and it is what makes oak feel like oak under a fingertip.
     """
     rng = np.random.default_rng(seed)
-    v = np.linspace(0, 1, h, endpoint=False)[:, None]
-    u = np.linspace(0, 1, w, endpoint=False)[None, :]
     field = np.zeros((h, w))
     aspect = h / w
+    # Drawn into a window round each pore rather than over the whole board.
+    #
+    # It used to evaluate two full-size arrays per pore — an exp and a taper over every one of the
+    # four million pixels — so the cost was the pore count times the whole image, and raising the
+    # count took map generation from a minute to longer than the render. A pore is a few pixels
+    # wide and a few dozen long; everything outside that is a multiplication by nothing.
     for _ in range(count):
         y0 = rng.uniform(0, 1)
         x0 = rng.uniform(0, 1)
-        length = rng.uniform(0.006, 0.028)          # in board lengths, along the grain
-        width = rng.uniform(0.0022, 0.0055)         # in board widths, across it
+        # Shorter and far more numerous than they were. What reads as wood rather than as stripes
+        # is how often the surface starts and stops along the grain, and that is a gradient, not an
+        # amplitude: modulating a ring's darkness down the board with a hundred-pixel period moved
+        # the measured along-grain gradient by a thousandth. Two thousand six hundred pores five to
+        # twenty-six millimetres long gave 0.56 — the same ink spent on ten times as many edges is
+        # what a fingertip would find.
+        length = rng.uniform(0.0015, 0.0075)        # in board lengths, along the grain
+        width = rng.uniform(0.0016, 0.0042)         # in board widths, across it
         lean = rng.uniform(-0.05, 0.05)
-        along = (np.mod(v - y0 + 0.5, 1.0) - 0.5) + (u - x0) * lean
-        across = (u - x0) - (np.mod(v - y0 + 0.5, 1.0) - 0.5) * lean / aspect
+        depth = rng.uniform(0.3, 1.0) ** 1.4
+
+        py = int(round(y0 * h))
+        px = int(round(x0 * w))
+        ry = int(np.ceil(length * h)) + 2
+        rx = int(np.ceil(width * 3.0 * w + abs(lean) * length * h)) + 2
+        rows = np.arange(py - ry, py + ry + 1)
+        ys = rows % h
+        xs = np.arange(max(0, px - rx), min(w, px + rx + 1))
+        if xs.size == 0:
+            continue
+        dv = ((rows / h) - y0)[:, None]
+        du = ((xs / w) - x0)[None, :]
+        along = dv + du * lean
+        across = du - dv * lean / aspect
         taper = np.clip(1.0 - (np.abs(along) / length) ** 2, 0, 1)
-        field += np.exp(-(across / width) ** 2) * taper * rng.uniform(0.3, 1.0) ** 1.4
+        field[np.ix_(ys, xs)] += np.exp(-(across / width) ** 2) * taper * depth
     # Normalised on a high percentile rather than on the maximum. With twenty-six hundred pores
     # some of them land on top of each other, and dividing by that one hot spot took every
     # ordinary pore down to a few per cent — which is why the along-grain gradient only moved from
@@ -272,9 +295,9 @@ def desk_maps(w, h, seed):
         early = EARLY * warmth
         col = early[None, None, :] * (1 - late[..., None]) + LATE[None, None, :] * late[..., None]
         col = col * (1 + 0.10 * fibre[..., None])
-        col = col * (1 - 0.34 * pores[..., None])
+        col = col * (1 - 0.46 * pores[..., None])
         col = col * (1 - 0.55 * fleck[..., None]) + RAY[None, None, :] * 0.55 * fleck[..., None]
-        hgt = late * -0.55 + fibre * 0.25 + fleck * 0.1 - pores * 0.45
+        hgt = late * -0.55 + fibre * 0.25 + fleck * 0.1 - pores * 0.62
 
         for j in range(int(rng.integers(0, 3))):
             core, whorl, _sweep = knot(h, bw, float(rng.uniform(0.2, 0.8)),
@@ -434,7 +457,16 @@ def render(res, condition, out_dir, samples, seed):
     tmp = tempfile.mkdtemp(prefix="desk-")
     build_top(seed, res, ry, tmp)
     common.add_top_camera(scene, WIDTH_M, HEIGHT_M, ortho=True, distance=0.9)
-    common.render_settings(scene, res, ry, samples=samples, transparent=False, file_format="PNG")
+    # Four times the samples and no denoiser.
+    #
+    # The pores, the rays and the fibre are all a few pixels across, and OpenImageDenoise is very
+    # good at deciding that a few pixels of variation is noise. Measured: the share of spectral
+    # power above 35 per cent of Nyquist is 1.12 per cent with nine thousand vessels in the map and
+    # 1.23 with none — so they were rendered and then averaged away, which is why adding them moved
+    # nothing. A material critic read the same number from the other side and called the desk drawn
+    # rather than photographed. Denoising is for a surface whose detail is larger than its noise.
+    common.render_settings(scene, res, ry, samples=samples * 4, transparent=False,
+                           file_format="PNG", denoise=False)
     if condition == "day":
         common.add_daylight(scene)
     else:
@@ -445,6 +477,15 @@ def render(res, condition, out_dir, samples, seed):
         common.stop_down_for_dusk(scene)
     name = "desk" if condition == "day" else "desk_dusk"
     path = os.path.join(out_dir, name + ".png")
+    # Rendered without the denoiser, at four times the samples.
+    #
+    # The pores, the rays and the fibre are all a few pixels across, and OpenImageDenoise is very
+    # good at deciding that a few pixels of variation is noise. Measured: the share of spectral
+    # power above 35 per cent of Nyquist is 1.12 per cent with the pores in and 1.23 without them,
+    # so nine thousand vessels changed the surface by less than nothing — they were rendered and
+    # then averaged away. A material critic read the same number from the other side and called the
+    # desk drawn rather than photographed. Denoising is for a surface whose detail is larger than
+    # its noise; this one's is not.
     common.render(scene, path)
     manifest.record(path, "blender/shell/desk.py", {
         "width_m": WIDTH_M, "height_m": HEIGHT_M, "planks": PLANKS, "join_mm": JOIN_MM,
