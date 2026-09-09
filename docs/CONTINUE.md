@@ -1,116 +1,41 @@
-# love-tap — continue the build
+# CONTINUE
 
-**Read `docs/BRIEF.md` first, all of it.** It is the mission and it is authoritative: the rubric,
-the five categories with their weights and floors, the four anti-goals, the seventeen evidence
-artifacts at their exact filenames, the family floors, the three commands, and the secret
-constraints. Everything in this file is *state*, not instruction — where the two disagree, the
-brief wins.
+The state handed to the next session. `docs/BRIEF.md` is the mission and wins over this file.
+Branch: `claude/new-session-f95s8n`.
 
-**Repository** `kaiharimoto/love-tap` · **branch** `claude/new-session-f95s8n` (develop, commit and
-push only here) · **working directory** `/home/user/love-tap`.
+## 0. Where it stands
 
-Every reply must end with the fenced ```mpstate block the brief specifies (v, task, phase, step,
-cycle, score, next, blocked, ask).
+**Cycle 8 scored 83**, from 85 the cycle before, and the drop is the review getting better rather
+than the build getting worse. Two floors of five are met (emotional 17/17, coherence 13/13).
+Messenger is 24 against a floor of 26, material 21 against 22, the anti-goal 8 against 9.
 
----
+The tenth capture is 15 of 17 artifacts and the first in which **every clip passes its own frame
+check** — 06 at 310 frames, 07 at 421, 08 at 518, 11 at 300, 15 at 376, none held, no jump in the
+light. Every check written beside the artifacts records which run wrote it, and all fifty-five of
+this capture's are this capture's.
 
-## 0. What is in flight right now
+Three things to know before touching anything:
 
-**Cycle 7 is scored: 85/100, from 73, and four floors of five are met** — material 22/22 for the
-first time (it was 15), emotional 18/17, coherence 13/13, anti-goal 9/9. Messenger is the only one
-short: 23 of 30 against a floor of 26. Builder and critic agree to the point on every row but that
-one.
-
-The evidence set is **15 of 17**, the first time it has been whole apart from the two that need an
-Android device: every clip passes its own frame check, and `tools/check/hairline.py` reads all ten
-stills and finds zero bright one-row rules on the desk, where nine of ten carried them for five
-cycles.
-
-**Read `evidence/critics/7/completeness.json` first.** It found what six critics wrote around —
-`app/web/push/sw.js` sending `silent: true` and a vibration pattern in the same call, which
-Chromium refuses outright, so every arrival marked `interrupt` was dropped inside the push handler.
-It also falsified one serious finding outright (the handwriting one) and cut five more down to
-size, with its own numbers each time.
-
-**Six of cycle 7's findings were fixed the same night**, each with a test that fails when the fix
-is reverted:
-
-1. **A piece draws its tear, it does not bake it.** `SlicedMasks.at` composed a nine-patch into a
-   picture and called `toImageSync` on the build thread — 16.1 ms on the Dart VM, hundreds of
-   milliseconds in CanvasKit, once per note as the thread scrolled. Drawn straight in with
-   `drawImageNine` in `dstIn`: 1 frame of 148 over 400 ms against 52 of 189, build p95 26 ms
-   against 807, and the raster fell too.
-2. **A refusal is not a dead end.** Send it again — the mark comes off and the event is back in the
-   outbox. An eighteenth reliability capability exercises the whole path over the wire.
-3. **The push that could never be drawn**, above; and `notify.prefs` was never written until
-   somebody opened Settings, so the registry's declared treatments and the quiet hours were in
-   force on no phone.
-4. **`awaitView` asks one question** (`__deskView`) instead of polling the whole report.
-5. **The search mark is off the thread** — it covered thread text in 84 of 300 frames pinned over
-   the list, and cost the hero a whole sheet in a strip of its own, so it sits on the composer.
-6. **One clock and one day label** — a clip had three lengths in one evidence set, and Moments read
-   `teo · ` with the separator drawn and nothing after it.
-
-## 1. Where the build is
-
-Five review cycles have run. Cycle 5 scored **69 / 100**, from 68, 64, 55.5 and 40, with no floor
-met: messenger 19/30 (floor 26) · material 15/25 (22) · emotional 15/20 (17) · coherence 12/15 (13)
-· anti-goal 8/10 (9).
-
-**Two floors were met by the critics and lost to the builder's own sheet.** The critics put
-coherence at 13 and anti-goal at 9.2 — at and above their floors for the first time. My sheet,
-written before reading them, said 12 and 8, and the rule is the lower of the two. That is the
-mechanism working and it was not revised afterwards. The practical consequence for you: on those
-two rows the builder is now the binding constraint. Write your sheet from measurements you took,
-not from caution.
-
-**Read `evidence/critics/5/completeness.json` before you read anything else, including this file.**
-It is the pass that checks the other six and it has been the most valuable document in the build
-two cycles running. This time it corrects one critic for reading the arriving message in 06 as "the
-composer card" and shows another's photographic-paper proof failing to reproduce. Its headline lead
-— a stock at patch_std 9.4-10.3 in the library arriving on screen at 1.22 — **is a comparison of two
-different instruments, and cycle 6 established that nothing is being flattened.** See section 1.
-
-**One thing is committed and not captured.** The note arriving in 06 unfolded for four seconds and
-ended completely blank — three critics measured it, minimum luminance 223, not one pixel of ink.
-A Stack whose children are all positioned sizes to nothing under loose constraints, so the overlay
-carrying the name and the ink filled nothing. Fixed, with a test. Three attempts to re-capture 06
-then failed in the harness rather than the app; `TASK_STATE.md` has everything known about that.
-Capture 06 first.
-
-## 2. What the evidence set is now
-
-Fifteen of the seventeen artifacts are present. **09_two_devices.png and 16_setup_android.png are
-not, and cannot be here**: they need an Android device and this container has no `/dev/kvm`. The
-three routes tried are measured in `docs/PHONES.md` — the x86_64 emulator under QEMU instruction
-emulation reached `adbd` after 113 minutes and never the framework, there is no GTK for a desktop
-build, and a `flutter_tester` render loads fonts but no material. Nothing was faked from the PWA.
-On a host with `/dev/kvm`, or on ARM64 where `arm64-v8a` runs natively, do those two first.
-
-Every seeded still is taken on a phone **paired with the far phone over the whole seeded year**:
-`link: connected`, 14,062 events, in all eight reports. The far phone is
-`app/tool/host_daemon.dart --seed year` — the app's own spine in the host role with the real
-six-word pairing, serving the PWA the near phone loads, and taking one instruction a line
-(`message`, `feeling`, `state`, `read`, `typing on|off`, `pair`, `stop`) on `pair.json.do`.
-
-All five clips pass `tools/check/frames.py`: no frame identical to its predecessor at full
-resolution, no light change inside a take.
-
-| clip | frames | seconds | what it films |
-|---|---:|---:|---|
-| 06_unfolding | 326 | 5.22 | a folded letter opening, twice: the packet landing, the flap standing with its shadow across the third below it, the creases catching light on the settled sheet, and the ink on it |
-| 07_feeling_landing | 421 | 6.74 | four feelings landing on the phone they reached, across three surfaces, with the pattern annotated on the timeline |
-| 08_state_propagating | 502 | 8.03 | a mood, a message, a place, an availability and four feelings crossing between two phones |
-| 11_chat_scroll | 300 | 4.80 | the thread thrown seven times and running down on its own physics; `evidence/logs/11_chat_scroll.fling.json` is what it did, frame by frame |
-| 15_authored_feeling | 376 | 6.02 | the vocabulary gone through family by family, ending on the couple's own, then sent and received |
-
-Every clip is assembled at **62.5 frames a second**, which is the rate its frames were taken at:
-the scenes step the app's clock 16 ms a frame. Assembling at 60 played every clip four per cent
-slow against the app time the same logs record, which a completeness pass measured.
-
-## 3. Things that cost hours here, so that they cost you none
-
-Everything in the previous handoff still holds. These are new.
+1. **The paper-shaped feeling objects have no surface.** Measured inside the packed renders and
+   inside the 1200 px sources, 80 px windows of an object's own interior read a median local
+   standard deviation of 0.89 (`obj_dog_ear`), 1.08 (`obj_bookmark`), 1.36 (`obj_torn_corner`),
+   2.49 (`obj_ticket`), against 9.0-9.6 for the paper stocks measured the same way. The material
+   critic found the same thing from the other end — countable facet steps of 14-25 grey levels,
+   1.67 per cent of spectral power above 35 per cent of Nyquist against 23.65 for the sheet behind
+   it — and their shadow is a uniform blur that is *lightest at the contact*. On the glass that is
+   a pale card with a drop shadow under it, which is the brief's own words for a failure of the
+   whole visual concept.
+2. **The scroll is not fixed and the claim that it was has been withdrawn.** A commit said "1 of
+   621 frames over 400 ms"; the capture measured 203 of 793, p95 897, against 189 of 793 at p95
+   688 the run before. The cause is read from the code and not guessed: `Written` wraps its text in
+   `Inked`, a `ShaderMask`, so every note's subtree needs a compositing layer, so its tear cannot
+   be drawn straight into the canvas and is composed as an image keyed by `tear@WxH` — one tear per
+   note out of a pool of 56, so the height bucket saves nothing. `inkPaint` already exists for
+   this; what it needs is a cached shader and a cached Paint.
+3. **Never quote a check you have not dated.** `evidence/logs/<clip>.frames.json` keeps its name
+   between runs, so half way through a capture the previous run's verdict is sitting in the file
+   under the file's own name and reads as fresh. That cost an hour. `MANIFEST.json` now stamps
+   every check; read `from_this_run` before you believe a number.
 
 ### Why a session stops, and how not to
 

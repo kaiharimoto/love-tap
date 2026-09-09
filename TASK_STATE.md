@@ -14,39 +14,44 @@ and continue from **Next action**.
 | 5 | 2026-09-05/06 | fresh clone re-bootstrapped; the nineteen root causes behind cycle 2 fixed (below); fold sequence re-rendered; both hands rebuilt; eight objects replaced; paired year-deep capture with every clip distinct frame by frame; cycle 3 critics and score; the first eleven cycle-3 findings fixed | **cycle 3: 64**, no floor met |
 | 6 | 2026-09-06 | the fold camera and the flap direction; the cascade step; the ink plate; object and shadow packed in their own frames; the whole messenger grammar in a picture; one stock per event type; clips at their own frame rate; fourth capture; cycle 4 critics, completeness pass and score; four of its findings fixed | **cycle 4: 68**, no floor met |
 | 7 | 2026-09-06/07 | the contact shadow every piece of paper had been drawing invisibly for four cycles; the window density behind the tab strip; thirty-three objects under the desk lamp; the tear from the event's own sequence; five modules on the desk; fifth capture; cycle 5 critics, completeness pass and score; the blank letter found and fixed | **cycle 5: 69**, no floor met |
-| 9 | 2026-09-08/09 | the pale rule on the wood closed by a six-build bisect (the mask's own antialiased edge); the record read at the shutter; her mood landing rather than swapping; a sheet that waits for its paper; seventh and eighth captures, fifteen of seventeen; cycle 7 critics, completeness pass and score; six of the cycle-7 findings fixed the same night | **cycle 7: 85**, four floors met |
 | 8 | 2026-09-07/08 | the fold's paper and the tooth halo; the module rows given their own bodies; the hero framed by measuring rather than estimating; the fling made a jump per frame; sixth capture; cycle 6 critics, completeness pass and score; the denoiser found behind the four-cycle desk hairline | **cycle 6: 73**, three floors met |
+| 9 | 2026-09-08/09 | the pale rule on the wood closed by a six-build bisect (the mask's own antialiased edge); the record read at the shutter; her mood landing rather than swapping; a sheet that waits for its paper; seventh and eighth captures, fifteen of seventeen; cycle 7 critics, completeness pass and score; six of the cycle-7 findings fixed the same night | **cycle 7: 85**, four floors met |
+| 10 | 2026-09-09 | fifteen fixes on the cycle-7 reports; the tenth capture, the first with all five clips passing their own check; a check that says which run wrote it; a scroll claim withdrawn by the capture that measured it; the paper-shaped objects found to have no tooth at all | **cycle 8: 83**, two floors met |
 
 ## Current position
 
-- phase: build (cycle 7 scored at **85/100**, from 73, 69, 68, 64, 55.5, 40; the brief asks 95
+- phase: build (cycle 8 scored at **83/100**, from 85, 73, 69, 68, 64, 55.5, 40; the brief asks 95
   with every floor met)
-- rubric: messenger 23/30 (floor 26) · material **22/25 (22, met)** · emotional 18/20 (17, met) ·
-  coherence 13/15 (13, met) · anti-goal 9/10 (9, met).
-- **Four floors of five are met, and material is met for the first time** — it was 15 last cycle.
-  Messenger is the only one left, three points short, and builder and critic agree to the point on
-  every other row.
-- The evidence set is **15 of 17** for the first time: only 09_two_devices.png and
-  16_setup_android.png are missing, both for the one reason this machine cannot argue with.
+- rubric: messenger 24/30 (floor 26, short 2) · material 21/25 (22, short 1) ·
+  emotional **17/20 (17, met)** · coherence **13/15 (13, met)** · anti-goal 8/10 (9, short 1).
+- **It went down, and it went down for the right reason.** Two floors are met against four last
+  cycle. Material fell a point and the anti-goal fell two because the builder and the material
+  critic, independently and before either read the other, found the same thing: the paper-shaped
+  feeling objects are rendered with no surface at all. Messenger rose a point. Nothing regressed
+  in the build between the two captures; the review got better at looking.
+- The evidence set is **15 of 17** again, and for the first time **every clip passes its own check
+  on one capture's frames** — 310, 421, 518, 300 and 376 frames, none held, no jump in the light.
+- Every check written beside the artifacts now says which run wrote it. All fifty-five of this
+  capture's are this capture's. That is there because a verdict left over from the previous run
+  reads exactly like a fresh one and cost an hour before it was caught.
 
-**Read `evidence/critics/7/completeness.json` before anything else.** It is the most useful
-document in the set again, and this time it found the thing six critics wrote around:
+**Read `evidence/critics/8/completeness.json` before anything else.** It reproduced twenty-four
+load-bearing claims; twenty-one came out as written or tighter, three overstated. What it found
+that nobody else did:
 
-- **`app/web/push/sw.js` sent `silent: true` and `vibrate` in the same call**, which Chromium
-  refuses outright, so every arrival whose treatment is `interrupt` — the default — was dropped
-  inside the push handler and no notification was ever created. Fixed, with the worker now writing
-  down what it was asked, what it decided and whether the platform drew it, and
-  `tools/check/reception.py` failing the capture on an arrival the phone could not draw.
-- **material_truth's handwriting finding is wrong**: the three `t`s it named differ by 3.5-4.8 grey
-  levels after sub-pixel alignment, and two genuinely different TeoHand variants score IoU 0.844
-  against each other, so the 0.80-0.86 it measured cannot separate one outline from two.
-- **Five more are overstated**: the desk is 6 per cent across-grain, not 0.2; the search chip
-  covers thread text in 84 of 300 frames, not 171 or 220; the twin share is 22.4 per cent at IoU
-  0.90 against `logs/hand.json`'s own 0.061 at 0.85, and neither document acknowledges the other;
-  the 26-second cold start is a seeded profile, not the photographed first run.
-- **13's lost typing indicator is the harness, not the build.** A probe on a freshly paired phone
-  notices a typing frame after 261 ms and holds it lit for the twenty seconds it was watched.
-  `awaitView` was polling the whole report four times a second to read one boolean.
+- **`evidence/.previous/` is byte-identical to this capture**, so every SSIM in DIFF.json is
+  measured against files that no longer exist beside it. The rotation is correct and the record of
+  it is not: DIFF.json has to carry the baseline's own hash and time, or nobody can reproduce a
+  number in it.
+- **Nothing in the review is blocking.** Forty-three findings — thirteen serious, thirty minor,
+  zero blocking — and three rows fail their floor anyway. BRIEFING.md defines `blocking` as the
+  severity that caps a row at its floor, so the vocabulary and the arithmetic disagree.
+- **Row 04 has two scores and no stated rule for combining them.** `tools/score.py` folds `code`
+  into coherence as the lower of the two; BRIEFING.md never says so.
+- **Nothing in the set shows the app loading**, and the fresh-store loads are 8,240 ms and
+  7,813 ms against warm loads of about 2,100.
+- **Two of the five delivery states — `queued` and `sending` — appear in no artifact and in no
+  report field**, and they are exactly the two a person sees when the link is down.
 
 ### What is still open, and owned
 

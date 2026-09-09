@@ -1,0 +1,214 @@
+{
+  "critic": "code",
+  "cycle": 8,
+  "score": 13,
+  "floor": 13,
+  "meets_floor": true,
+  "how_i_measured": [
+    "Copied app/, docs/, assets/, seed/, tools/, evidence/scenes+coldstart.json to /tmp/lt-code-critic and ran the suite there so nothing in the repository moved: `flutter test --no-pub` from /tmp/lt-code-critic/app. Result: 160 test cases, exit 0, 'All tests passed!' (/tmp/lt-test-final.txt:229). This matters because two tests write into ../evidence/ when the suite runs in place (coldstart_test.dart:27, reliability_test.dart:344).",
+    "Re-ran module_costs_test's scan myself in Python over lib/**.dart + web/**{js,json,html} for every module id, event type and renderer id: zero offenders in scope. Extended it to android/**.kt|xml, tools/**.py and seed/**.py, which the test does not scan: the only hits are seed/tools/validate.py:54-55,200-202.",
+    "Compared docs/EVENT_TYPES.md's table to kEventTypes by regex, element by element: 18 == 18, identical order, identical ids.",
+    "Scanned every blob in git history under 1.5 MB (4,731 of them, via `git cat-file --batch-all-objects`) for tskey-*, TS_AUTHKEY=, BEGIN * PRIVATE KEY, BEGIN CERTIFICATE, AWS_SECRET. Zero matches. Also swept all 623 tracked non-binary files for base64 runs of 60+ chars. Zero. Commit history was read as file-path lists only (`git log --format=%H --name-only`), never as messages.",
+    "Walked assets/ on disk (745 files) against assets/MANIFEST.json (749 entries), applying tools/check/manifest.py's own exemption list.",
+    "Probed the persistence_boundary_test regex against nine import forms in Python to find what it catches and what it does not."
+  ],
+  "rules": [
+    {
+      "rule": "1. One event log and no second store: any file outside app/lib/spine/ that imports a storage driver fails the build",
+      "verdict": "PARTIAL",
+      "evidence": "The boundary itself is real and correctly drawn. sqlite3 is imported in exactly one file (app/lib/spine/store/store_sqlite.dart:10), idb_shim in exactly one (app/lib/spine/store/store_web.dart:4); everything above them sees only the abstract SpineStore (app/lib/spine/store/store.dart:17-40), and app/lib/spine/store/open_store.dart:8-10 is the single place that names a platform. My own grep for sqflite|sqlite|hive|shared_preferences|idb_shim|indexed_db|localStorage|isar|objectbox|drift across app/lib found no driver import outside lib/spine/store/; path_provider appears in app/lib/media/local_uri_io.dart:5 and read_bytes_io.dart:5 but that is a directory lookup, not a store. app/test/persistence_boundary_test.dart:16-30 enforces it, and enforces it twice (a second test at :32-42 keeps drivers under store/ even inside spine/). Two gaps. (a) The regex at persistence_boundary_test.dart:7-10 requires the package URI to follow `import`/`export` immediately: I fed it nine forms and it catches plain single- and double-quoted imports, exports, `deferred as`, a line-broken import and `dart:html`, but MISSES `import 'stub.dart' if (dart.library.io) 'package:sqlite3/sqlite3.dart';`. That is not a hypothetical shape — it is the idiom this codebase uses in ten places (app/lib/media/read_bytes.dart:4, media/local_uri.dart:4, ready.dart:2, capture/hooks.dart:24, transport/tailscale/proxy_client.dart:9, transport/protocol/http_transport.dart:12, setup/platform.dart:6, ambient/ambient.dart:23, spine/store/open_store.dart:9-10), so it is the first thing anyone adding a platform-specific driver would reach for, and it would pass. (b) Nothing in the repository runs the suite: there is no .github/ or other CI directory, and `flutter test` appears in none of run.sh, capture.sh, bootstrap.sh or tools/critics.sh. 'Fails the build' is true only if a person types it."
+    },
+    {
+      "rule": "2. At least fourteen event types, docs and code agreeing, each with a thread rendering, a notification treatment and a search behaviour, and a test asserting the same list",
+      "verdict": "PARTIAL",
+      "evidence": "Eighteen types, comfortably over the floor: app/lib/spine/types.dart:127-331 (ids at lines 127,139,153,166,179,193,205,217,228,240,251,262,274,285,297,308,320,331). I extracted every EventTypeSpec and confirmed all eighteen carry a non-null renderer, notify, search, noun and announced — none missing. Doc and code agree on the list: docs/EVENT_TYPES.md rows 1-18 parsed by the same regex the test uses give exactly the registry's ids in exactly the registry's order. app/test/spine_schema_test.dart:8-18 asserts equality of the two lists plus >= 14 plus uniqueness; app/test/thread_types_test.dart:17-24 and :26-32 close the renderer loop in both directions against kThreadRenderers (app/lib/thread/renderers.dart:165-180); :50-68 asserts every type reads as a sentence rather than a registry id; :90-108 derives 'is this a margin line' from the registry rather than from a fourth list. Search is registry-driven for real: app/lib/spine/search.dart:31,51,58,69,76 index off spec.search.textFields / .facets / .excluded, and the search page's 'found as' line reads spec.noun (app/lib/regions/chat/search_page.dart:425). The service worker keeps no per-type table of its own — app/web/push/sw.js:144-153 reads only `kind` and `from` off the push and looks the words up in a table the app writes into the store (sw.js:130-138). The failure: two rows of the doc's notification column describe behaviour the code does not have. docs/EVENT_TYPES.md:44 says date_event is 'per action; quiet for planned, interruptive for scheduled' and :45 says todo_event is 'quiet; interruptive when assigned to you'. The registry says Notify.quiet flat for both (app/lib/spine/types.dart:265, :277), and the only consumer, NotificationPrefs.forType (app/lib/regions/settings/notifications.dart:78-82), keys on the type id alone — there is no branch anywhere on action or on assignee (`assignee` appears in app/lib only in the todos module's own rendering and payload, never in a notification path). spine_schema_test compares the id lists and nothing else, so the drift in the treatment column is unheld. Smaller: app/lib/regions/chat/chat_region.dart:526-531 still keeps a hand-written set of seven renderer ids to decide what is paper — the polarity is right (new types default to paper, so a module costs nothing) but it is a fourth place a new mark-shaped messenger type must be added, and docs/EVENT_TYPES.md:55-70 says three steps and 'Nothing else changes'."
+    },
+    {
+      "rule": "3. A fifth shared-life module is a directory plus one line; the commit that added the fourth touched nothing under the first three",
+      "verdict": "PASS",
+      "evidence": "The registry is one const list of five (app/lib/modules/registry.dart:10-16). Every consumer iterates it generically and none names a module: thread bodies are spread from kModules (app/lib/thread/renderers.dart:179), the sentence table asks the modules last (:223), paper stock comes from the module (app/lib/material/assignment.dart:35), the Us desk budget is built from m.rowHeight and m.share (app/lib/regions/us/us_region.dart:42-45,85-93), search facets from m.label/m.eventTypes (app/lib/regions/chat/search_page.dart:61), and the capture hooks from m.eventTypes (app/lib/capture/hooks.dart:534,542). The interface carries everything that used to be a shared table: stocks, bodies, sentence, share, rowHeight (app/lib/modules/module.dart:63-107). app/test/module_costs_test.dart:35-77 forbids every handle a shared file could key off — the module id, its event types, and the renderer the registry names for each — anywhere outside that module's directory, over .dart and over web/*.js|json|html; I re-ran that scan independently and got zero offenders in scope. app/test/module_costs_test.dart:79-99 additionally asserts each module's own body is the one the thread actually uses (identical(), not just non-null), and :101-127 that its sentence is what summaryOf returns. On the historical half: the fourth module has no commit of its own to check — calendar and rituals are both present in the initial commit d2be5a3d. The fifth does: shelf arrived in ffc5821d, whose complete file list is app/lib/modules/shelf/shelf_module.dart (new, +180), app/lib/modules/registry.dart (+2), app/lib/regions/chat/renderers.dart (+7), app/lib/spine/types.dart (+8), docs/EVENT_TYPES.md, seed/tools/validate.py and eleven seed/year/*.jsonl. Nothing under dates/, todos/, calendar/ or rituals/ — the rule's actual test, and it passes. Of the three shared code files it touched then, one is gone (regions/chat/renderers.dart no longer exists; the table moved to app/lib/thread/renderers.dart and is assembled from kModules), one is registry.dart's one line, and one is the spine registry, which app/lib/modules/module.dart:12-16 argues is a principle rather than a cost and I agree: a module inventing its own schema is what a single spine forbids. The only remaining out-of-repo-code cost I found is seed/tools/validate.py:54-55, which carries a per-type payload table the module_costs scan does not cover — and it is a corpus validator, not shipped code."
+    },
+    {
+      "rule": "4. Typing and presence ticks are never events",
+      "verdict": "PASS",
+      "evidence": "They are a different type in a different place. Ephemeral (app/lib/transport/transport.dart:131-146) is not an Event and has no path into the spine: the host's handler passes it straight to a callback and returns 204 (app/lib/transport/protocol/server_io.dart:264-269), the pull response carries it in a field the client drains into a stream (server_io.dart:211-217, http_transport.dart:250-255), and AppScope._onEphemeral (app/lib/scope.dart:153-165) sets a bool with a six-second timer and calls notifyListeners — it never touches spine.append. The one way anything is written is AppScope.emit → Spine.append (scope.dart:170-171), and Spine.append's first act is `specOf(type)` (app/lib/spine/spine.dart:220), which throws ArgumentError for any id not in the registry (app/lib/spine/types.dart:346-350). 'typing' and 'presence' are not in the registry, so they cannot be appended even by mistake. Two tests hold it: app/test/transport_local_test.dart:287-303 sends a typing frame client→host and a presence frame host→client, checks both arrive, then asserts `r.host.length == 0` and `r.client.length == 0` — the strong form; and app/test/reliability_test.dart:119-130 records the same as a capability and reliability_test.dart:352 asserts every capability's ok is true. docs/EVENT_TYPES.md:28-29 names the four ephemeral kinds explicitly."
+    },
+    {
+      "rule": "5. Read markers are never rendered as rows in the thread",
+      "verdict": "PASS",
+      "evidence": "Three independent things would each have to break. (a) The projection returns before the row is added: app/lib/spine/projections/thread.dart:279-286 handles 'read_marker' by moving _readUpto and returning, and the generic guard `if (!spec.rowInThread) return;` at :286 catches it again from the registry. (b) The registry says so: rowInThread: false at app/lib/spine/types.dart:225 (and for reaction, message_edit, message_delete at :190, :202, :214). (c) The renderer it names is a no-op: 'ink_dries' maps to _neverARow in app/lib/thread/renderers.dart:174. Tests: app/test/spine_schema_test.dart:31-34 asserts rowInThread is false for read_marker and reaction; app/test/thread_types_test.dart:112-120 asserts it again from the registry; app/test/spine_replay_golden_test.dart:55-59 replays a log containing a read_marker and asserts no thread item has that type while readUpto is populated — which is the behavioural form, not just the flag."
+    },
+    {
+      "rule": "6. No secret in any committed file, history included",
+      "verdict": "PASS",
+      "evidence": "Nothing. I read every blob in the object database under 1.5 MB — 4,731 of them, covering every tracked text file that has ever existed — through grep for `tskey-auth-*`, `tskey-` runs, `TS_AUTHKEY=<value>`, `BEGIN (RSA|EC|ENCRYPTED|OPENSSH)? PRIVATE KEY`, `BEGIN CERTIFICATE` and AWS_SECRET: zero matches. A separate sweep of all 623 tracked non-binary files for base64-looking runs of 60+ characters returned one hit, a URL comment in app/pubspec.yaml:16. TS_AUTHKEY appears by name only as an environment variable and as a status word: bootstrap.sh:217-221 writes 'present'/'pending' to a file and never the value, tools/tailscale/up.sh:48-60,109 reads it from the environment. The only PEM material on this disk is under toolchain/ (vendored Flutter and pub test fixtures), and /toolchain/ is the first line of .gitignore; `git ls-files toolchain` is empty. The pairing secret is minted at runtime from Random.secure (app/lib/transport/protocol/wire.dart:44-47) and the six words are never stored — only the derived key (wire.dart:75-79); the capture harness writes them to $TMPDIR/lovetap-capture/pair.json (capture.sh:26,177), outside the tree, and no path matching pair.json has ever been committed. The VAPID private key comes from an env var (tools/push/webpush.py:211); evidence/logs/webpush.txt records that a header was formed, not the key. coldstart_test.dart:39-40 says in a comment that the auth key is not in tailscaled's status output and must never be committed, and evidence/coldstart.json carries node public keys only."
+    },
+    {
+      "rule": "7. The host binds only its tailnet address and refuses any request not authenticated with the pairing key",
+      "verdict": "PASS",
+      "evidence": "The bind is the strongest thing in the transport. app/lib/transport/tailscale/tailnet.dart:22-32 defines a tailnet address as 100.64.0.0/10 or fd7a:115c:a1e0::/48 and nothing else; addressToServeOn (:57-74) checks a declared address rather than trusting it and throws NotOnTheTailnet when there is none — there is no fallback branch, and TailscaleBinding.hostBind (app/lib/transport/tailscale/tailscale_transport.dart:70-77) is the only producer of a HostBind for that transport. The client refuses to talk to a non-tailnet host too (tailscale_transport.dart:82-93). app/test/tailnet_test.dart:12-31 asserts 0.0.0.0, 127.0.0.1, 192.168.x, 10.x, '::', fe80::, 100.63.255.255 and 100.128.0.0 are all rejected; :33-45 that declaring any of the first four throws; :47-63 that with no tailnet there is a reason and not a fallback. evidence/reliability.json's tailscale block records a real run: host_reachable_at 100.68.254.25, host_reachable_at_is_tailnet true, and the loopback listener explained as the userspace-tailscaled case, which is narrower than the tailnet address rather than wider. Auth: app/lib/transport/protocol/server_io.dart:96-102 rejects with 401 and an empty body before dispatching anything, for every /v1 route except the two pairing calls, which cannot be signed by construction; _authenticated (:126-141) checks the device id against the pairing, a five-minute skew, an HMAC-SHA256 over method+path+ts+nonce+sha256(body) compared in constant time (wire.dart:96-107), and a replay-nonce cache (wire.dart:128-145). The push path additionally refuses an event authored as somebody the pairing does not cover (server_io.dart:232-236). app/test/transport_local_test.dart:74-91 asserts an unpaired pull throws, that wrong words are refused, and that right words pair. One note rather than a fault: _serveStatic (server_io.dart:304-328) answers unauthenticated GETs, but only from pwaRoot, and pwaRoot is null in the shipped app (app/lib/main.dart:76-88 never sets it) — only the capture daemon passes one (app/tool/host_daemon.dart:105,109). In the app as built, every non-/v1 request is a 404. Traversal is guarded at server_io.dart:312-317."
+    },
+    {
+      "rule": "8. Every file in assets/ has an entry in assets/MANIFEST.json naming its generator, and no asset or font came off the internet",
+      "verdict": "PASS",
+      "evidence": "745 files under assets/ on disk; 749 entries in assets/MANIFEST.json; every entry has a non-empty generator field (I checked all 749). The only three files with no entry are assets/MANIFEST.json itself, assets/sound/MANIFEST.sound.json and assets/tears/relief.json, which are the manifest and two generator sidecars and are named in tools/check/manifest.py:24-25's exemption list; that leaves 740 real assets, 740 covered, which is what evidence/logs/manifest.json records ('files': 740, 'without_an_entry': [], 'ok': true) and what I get independently. The generators are ten scripts, all in this repository: blender/{bits/bits.py, folds/fold.py, objects/objects.py, paper/stocks.py, paper/tear_relief.py, shell/desk.py} and tools/{handwriting/build.py, ink_plate.py, sound/synth.py, tears/tear.py}. The three fonts are generated, not downloaded: assets/fonts/MANIFEST.fonts.json names tools/handwriting/build.py as generator and its inputs as two hashed JSON files in the repo (tools/handwriting/hands.json, tools/handwriting/skeletons.json), with per-face skeleton and pen parameters rather than a source face. No generator touches the network — my grep for urllib/requests/socket./http.client/wget/curl across tools/ and blender/ returned only the word 'curl' meaning curled paper (blender/paper/tear_relief.py:41,87, blender/folds/fold.py:249, etc.); the single real network user is tools/push/webpush.py, which sends a push and downloads nothing (its self-test posts to https://push.example.net). Two blemishes, neither a rule breach: seven entries name files written to /tmp/tear* scratch directories that are not and never were part of the library (assets/MANIFEST.json, keys beginning '../../../tmp/'), and tools/check/manifest.py:76-96's --fill mode can synthesise an entry for a file by copying its parent directory's entry, so a generator that recorded only the directory gets coverage it did not itself write."
+    },
+    {
+      "rule": "9. The tests pass, and they test what they claim to",
+      "verdict": "PARTIAL",
+      "evidence": "They pass. I ran them: 160 cases, exit 0, no skips (`skip:` appears nowhere in app/test/), and the suite is substantial — 53 test files, 156 test/testWidgets declarations, 465 expect()/expectLater() calls, and no file with zero assertions (lowest density is nothing_is_drawn_by_the_diagnostic_test.dart at two tests and one shared assertion, and that one is a real check on resolved TextStyle decoration). Several are stronger than their names: nothing_moves_on_the_wall_clock_test.dart:52-72 greps the source for thirteen implicit-animation widgets and for AnimationController in files that have never heard of DrivenClock; module_costs_test.dart reads the source because the claim is about the source; reliability_test.dart:352 asserts every one of nineteen capabilities is ok rather than merely reporting them. Three failures of the second clause. (a) app/test/coldstart_test.dart:68-107 — 'cold start over the tailnet: four events, both directions, both spines agreeing' — returns after writing a 'pending' JSON file, with zero assertions executed, whenever the two tailscaled sockets do not answer. It is green in that state; it was green in my run, where toolchain/ts/ did not exist at all. The reasoning at :75-90 for not overwriting a dated run is sound, but the test should be skipped, not passed. (b) app/test/spine_replay_golden_test.dart:62-69 — 'every module reads the same log and says something from it' — passes for the shelf module against a fixture log (:96-140) that contains no passed_on event at all; ShelfModule.glance returns the empty-state string 'nothing passed on yet' (app/lib/modules/shelf/shelf_module.dart:53-55), which is non-empty, so the assertion holds while proving nothing about that module. The fixture covers 13 of the 18 types; video, voice_note, passed_on, ping and feeling_authored are absent. (c) docs/EVENT_TYPES.md:98 states that this test 'replays the seeded year and compares every region's view to a golden'. It replays a sixteen-event hand-written log against a second replay of itself; there is no seeded year in it and no golden file anywhere in app/test/. The test's own header is honest about what it does; the document is not. Fourth, smaller: running the suite in place writes ../evidence/coldstart.json (coldstart_test.dart:27,98) and ../evidence/reliability.json (reliability_test.dart:344) — the suite is also an evidence generator, so a test run and a capture are not separable by timestamp."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "serious",
+      "artifact": "repository",
+      "where": "app/lib/setup/bootstrap_page.dart:19 and :64; docs/PHONES.md:31-40; app/lib/main.dart:76-88",
+      "what": "bootstrap_page.dart's two functions — mobileConfig() and bootstrapPage(), 105 lines that build the iPhone's CA profile and the page that hands it over — are called by nothing: grep for 'bootstrap_page', 'bootstrapPage' and 'mobileConfig' across app/lib, app/test and app/tool returns only their own definitions, no route serves /setup/profile.mobileconfig, no SecurityContext is ever constructed so server_io.dart:62 always takes the plain HttpServer.bind branch, and main.dart never passes pwaRoot, so the shipped app 404s every request outside /v1.",
+      "why": "docs/PHONES.md step 3 tells the reader to open the host's address in Safari to add the web app, and step 4 says 'The host serves over HTTPS with a certificate it made itself' — an install path for the Apple half of the brief that no code in the app performs; the only thing that serves the PWA is python3 -m http.server on the dev machine (run.sh:110-112), so the coherence between what the app is documented to do and what it does is broken at the seam where the second device gets the app."
+    },
+    {
+      "severity": "minor",
+      "artifact": "repository",
+      "where": "docs/EVENT_TYPES.md:44-45 against app/lib/spine/types.dart:265,277 and app/lib/regions/settings/notifications.dart:78-82",
+      "what": "The registry table says date_event announces itself 'per action; quiet for planned, interruptive for scheduled' and todo_event 'quiet; interruptive when assigned to you'; the registry entries are Notify.quiet flat, and NotificationPrefs.forType keys on the type id alone with no branch anywhere on action or assignee.",
+      "why": "Rule 2 requires the document and the code to agree on each type's notification treatment, and the test that is cited as holding them together (spine_schema_test.dart:8-18) compares only the list of ids, so two cells of that column can drift and have."
+    },
+    {
+      "severity": "minor",
+      "artifact": "repository",
+      "where": "app/test/persistence_boundary_test.dart:7-10",
+      "what": "The driver regex requires the package URI to follow `import`/`export` directly, so it misses `import 'stub.dart' if (dart.library.io) 'package:sqlite3/sqlite3.dart';` — I probed it with nine forms and this is the one that gets through — while the codebase reaches every platform-specific implementation with exactly that idiom in ten files.",
+      "why": "The single-store rule is the one the brief says must fail the build, and the guard has a hole shaped precisely like the way somebody would add a second store."
+    },
+    {
+      "severity": "minor",
+      "artifact": "repository",
+      "where": "app/test/coldstart_test.dart:68-107",
+      "what": "The test named 'cold start over the tailnet: four events, both directions, both spines agreeing' writes a 'pending' file and returns before any expect() runs when the two tailscaled sockets do not answer, and reports as a pass.",
+      "why": "A green test that asserted nothing is the case rule 9 names; markTestSkipped would say the same thing honestly, and evidence/coldstart.json already carries the dated real run it is protecting."
+    },
+    {
+      "severity": "minor",
+      "artifact": "repository",
+      "where": "app/test/spine_replay_golden_test.dart:62-69 and :96-140; docs/EVENT_TYPES.md:98",
+      "what": "'every module reads the same log and says something from it' passes for the shelf module on a fixture log containing no passed_on event, because ShelfModule.glance returns 'nothing passed on yet' (shelf_module.dart:55); and the document claims this test 'replays the seeded year and compares every region's view to a golden' when it replays a sixteen-event hand-written log against itself and there is no golden file in the repository.",
+      "why": "The assertion is weaker than its name for one of five modules, and the document's description is weaker still — a reader checking the projection claim would find a citation that does not do what it says."
+    },
+    {
+      "severity": "minor",
+      "artifact": "repository",
+      "where": "run.sh, capture.sh, bootstrap.sh, tools/critics.sh; app/test/coldstart_test.dart:27; app/test/reliability_test.dart:344",
+      "what": "Nothing in the repository runs the test suite — there is no CI directory and `flutter test` appears in none of the four scripts — and when it is run in place two tests write into ../evidence/.",
+      "why": "Rules 1, 2, 4, 5 and the extensibility guard in module_costs_test all rest on the suite being run, so 'fails the build' is a claim about a human habit rather than about the build; and a suite that writes artifacts makes a test run and a capture indistinguishable in evidence/MANIFEST.json."
+    },
+    {
+      "severity": "minor",
+      "artifact": "assets/MANIFEST.json",
+      "where": "the seven entries whose keys begin '../../../tmp/tear'",
+      "what": "Seven manifest entries name files written into /tmp scratch directories during tear smoke tests; they are records of things that were never in assets/, and evidence/logs/manifest.json lists them under entries_without_a_file alongside two false positives (fonts/MANIFEST.fonts.json and tears/tears.json, which exist but are exempt, so the stale check reports them as missing).",
+      "why": "The manifest is the record that nothing in the library arrived from somewhere unaccounted for; entries for files that were never in it make the record say more than it knows, and tools/check/manifest.py:60-71 already has a --fill path that would drop them."
+    }
+  ],
+  "what_is_working": [
+    "The single spine is real, not asserted. One driver per platform in one directory (store_sqlite.dart:10, store_web.dart:4), one abstract interface above it, one append path that validates every payload against the registry before it writes (spine.dart:220-222) and before it takes one off the wire (server_io.dart:239-242), and a projection layer that spine_replay_golden_test shows is order-independent, prefix-composable, and loses everything an event loses.",
+    "The module registry genuinely costs a directory and a line now. I re-ran module_costs_test's source scan myself over lib/ and web/ for every module id, event type and renderer id and got zero offenders; every consumer of kModules iterates it (renderers.dart:179,223, assignment.dart:35, us_region.dart:42-93, search_page.dart:61, hooks.dart:534,542) and the interface carries stocks, bodies, sentence, share and rowHeight so none of those is a shared table any more. The test also checks identity, not just presence — identical(kThreadRenderers[r], m.bodies[r]) — which is the version that cannot be satisfied by declaring a body nothing uses.",
+    "Eighteen event types against a floor of fourteen, with the document and the registry byte-identical on ids and order, and three tests holding renderer, sentence and marginality to the registry from three directions so no fourth list can appear.",
+    "The tailnet bind is the tightest code in the repository: one predicate for what a tailnet address is, no fallback path to anything else, a declared address checked rather than trusted, the client refusing off-tailnet peers too, and eight named wrong answers asserted in tailnet_test.",
+    "The pairing auth is properly built — HKDF-SHA256 from six spoken words, per-request HMAC over method, path, timestamp, nonce and body hash, constant-time compare, a bounded nonce cache against replay, and a 401 with an empty body before any handler is reached.",
+    "No secret anywhere, in the tree or in 4,731 history blobs, and the harness keeps the pairing words in a scratch directory outside the repository.",
+    "740 assets, 740 entries, ten generators all in this repository, three fonts built from parameters rather than downloaded, and no generator that can reach the network.",
+    "160 tests pass, none skipped, and the suite reaches for source-level guards (the wall-clock animation grep, the module-handle scan, the storage-driver scan) rather than only widget assertions — which is the right instinct for rules that are structural."
+  ],
+  "verdict": "The architecture the brief asks for is here and it is measurably here rather than claimed: one event log with one driver per platform behind one interface, eighteen types in a registry the document matches element for element, five shared-life modules that a sixth could join with a directory and a line — I re-ran the test's own source scan and found nothing outside a module's directory naming that module, and the fifth module's actual commit touched nothing under the first four. Typing never reaches the log and two tests say so behaviourally; read markers cannot become rows through any of the three places that would have to fail; the host binds a tailnet address or refuses to start; every /v1 request is signed and replay-protected; there is no secret in the working tree or in any of 4,731 blobs of history; and every one of 740 assets names one of ten in-repo generators, none of which can reach the network. The suite runs green at 160 cases with nothing skipped. What keeps this at the floor rather than above it is a set of seams where the claim is ahead of the code. The largest is that docs/PHONES.md describes the Android phone serving the iPhone its web app over HTTPS with a self-made certificate, and the file that would do half of that — bootstrap_page.dart, 105 lines of CA profile and handover page — is imported by nothing, no SecurityContext is ever constructed, and the shipped app never sets pwaRoot, so it answers 404 to everything outside /v1; the only thing that serves the PWA is a python http.server in run.sh. Around it: two rows of the registry's notification column promise per-action and per-assignee interruption that no code implements, and the test cited as holding document and code together compares only the list of ids; the storage-driver guard misses the conditional-import form this codebase itself uses in ten files; the tailnet cold-start test passes with zero assertions executed when there is no tailnet; the replay test's 'every module says something' passes for the shelf on a log with none of the shelf's events; and nothing in the repository actually runs the suite, so 'fails the build' names a habit rather than a gate. None of that is structural rot — the spine, the registry and the module boundary are the best things in this build and they would survive a sixth module without rework. It is the difference between a system that is coherent and a system whose documents are coherent with it.",
+  "opened": [
+    "evidence/critics/BRIEFING.md",
+    "evidence/critics/prompts/code.md",
+    "evidence/MANIFEST.json",
+    "evidence/coldstart.json",
+    "evidence/reliability.json",
+    "evidence/logs/manifest.json",
+    "evidence/logs/fonts.json",
+    "evidence/logs/recipes.json",
+    "evidence/logs/webpush.txt",
+    "evidence/logs/pwa.json",
+    "evidence/logs/haptics.check.json",
+    "evidence/logs/strings.json",
+    "assets/MANIFEST.json",
+    "assets/fonts/MANIFEST.fonts.json",
+    "docs/EVENT_TYPES.md",
+    "docs/PHONES.md",
+    "app/lib/spine/types.dart",
+    "app/lib/spine/spine.dart",
+    "app/lib/spine/search.dart",
+    "app/lib/spine/projections/thread.dart",
+    "app/lib/spine/store/store.dart",
+    "app/lib/spine/store/open_store.dart",
+    "app/lib/spine/store/store_native.dart",
+    "app/lib/spine/store/store_sqlite.dart",
+    "app/lib/spine/store/store_web.dart",
+    "app/lib/modules/registry.dart",
+    "app/lib/modules/module.dart",
+    "app/lib/modules/dates/dates_module.dart",
+    "app/lib/modules/todos/todos_module.dart",
+    "app/lib/modules/todos/thread_row.dart",
+    "app/lib/modules/calendar/calendar_module.dart",
+    "app/lib/modules/rituals/rituals_module.dart",
+    "app/lib/modules/shelf/shelf_module.dart",
+    "app/lib/thread/renderers.dart",
+    "app/lib/scope.dart",
+    "app/lib/main.dart",
+    "app/lib/material/assignment.dart",
+    "app/lib/regions/chat/chat_region.dart",
+    "app/lib/regions/chat/search_page.dart",
+    "app/lib/regions/us/us_region.dart",
+    "app/lib/regions/settings/notifications.dart",
+    "app/lib/setup/bootstrap_page.dart",
+    "app/lib/setup/checklist.dart",
+    "app/lib/transport/transport.dart",
+    "app/lib/transport/protocol/wire.dart",
+    "app/lib/transport/protocol/server_io.dart",
+    "app/lib/transport/protocol/http_transport.dart",
+    "app/lib/transport/local/local_transport.dart",
+    "app/lib/transport/tailscale/tailnet.dart",
+    "app/lib/transport/tailscale/tailscale_transport.dart",
+    "app/web/push/sw.js",
+    "app/analysis_options.yaml",
+    "app/tool/host_daemon.dart",
+    "app/test/persistence_boundary_test.dart",
+    "app/test/spine_schema_test.dart",
+    "app/test/thread_types_test.dart",
+    "app/test/module_costs_test.dart",
+    "app/test/the_record_names_every_kind_test.dart",
+    "app/test/spine_replay_golden_test.dart",
+    "app/test/transport_local_test.dart",
+    "app/test/reliability_test.dart",
+    "app/test/coldstart_test.dart",
+    "app/test/tailnet_test.dart",
+    "app/test/a_search_shows_what_it_found_test.dart",
+    "app/test/nothing_moves_on_the_wall_clock_test.dart",
+    "app/test/nothing_is_drawn_by_the_diagnostic_test.dart",
+    "app/test/ (all 53 test files executed: flutter test, 160 cases, exit 0)",
+    "tools/check/manifest.py",
+    "tools/push/webpush.py",
+    "tools/critics.sh",
+    "seed/tools/validate.py",
+    "capture.sh",
+    "run.sh",
+    "bootstrap.sh",
+    ".gitignore",
+    "git object database (4,731 blobs under 1.5MB scanned for secret patterns; commits d2be5a3d and ffc5821d read as file-path lists only, never as messages)"
+  ],
+  "not_worth_opening": [
+    "evidence/01_pulse.png, 02_chat.png, 03_us.png, 04_moments.png, 05_settings.png, 10_first_run.png, 12_search.png, 13_messenger_states.png, 14_media_viewer.png, 17_setup_pwa.png — the nine stills. My row is the structural half of the brief, the part that cannot be photographed; a still cannot show whether a storage driver is imported outside the spine or whether a module costs one line. I did read their entries in evidence/MANIFEST.json, which is where the code row's question about them lives: all fifteen artifacts are from_this_run true, none predates the capture, and the two absent ones (09_two_devices.png, 16_setup_android.png) carry a measured reason.",
+    "evidence/06_unfolding.mp4, 07_feeling_landing.mp4, 08_state_propagating.mp4, 11_chat_scroll.mp4, 15_authored_feeling.mp4 and evidence/frames.json — same reason; held-frame thresholds and playback-over-app-time are the motion critic's measurements, and nothing in my nine rules turns on them.",
+    "evidence/crops/*.png, including dusk_pulse.png, 02_chat_300_shadow.png, 02_chat_300_hand.png, 02_chat_300_edge.png, haptics_strip.png, the four clip strips and the reception crops — derived pixel measurements of the second lighting condition, the contact shadow, the hand and the notification scene. All of them answer questions about how a surface looks, not about how the code is arranged. I opened evidence/logs/haptics.check.json instead, because the number of distinct haptic strings bears on whether the feeling registry is one list rather than several.",
+    "evidence/logs/*.report.json and the per-scene evidence/logs/NN_*.json — the capture's own per-scene records of what each artifact was shot against. I did open evidence/scenes/ as a directory (capture_hooks_return_test.dart reads it, so the suite needed it present to run) but not the reports themselves: they describe what was on screen, not how the source is organised.",
+    "evidence/logs/surfaces.json, hairline.json, hand.json, tears.json — surface, edge, handwriting-repetition and tear measurements. hand.json in particular is the font critic's floor (how many marks of ink have a near-twin); the code row's font question is provenance, which I answered from assets/fonts/MANIFEST.fonts.json and evidence/logs/fonts.json instead.",
+    "evidence/logs/scroll_webkit.json and 11_chat_scroll.fling.json — per-frame build and raster cost and the fling simulation's own record. Performance under a headless WebKit is a real finding for somebody, but none of my nine rules is about frame cost; I read app/test/scroll_cost_test.dart's assertions in the run output instead, which is the code-side version of the same question.",
+    "evidence/DIFF.json — what changed between this capture and the previous one. It is a comparison against an earlier build, which is closer to an account of how the build got here than to a measurement of what it is now, and my row is about the current source.",
+    "evidence/WHY_MISSING.json — I read the same content in evidence/MANIFEST.json's 'missing' block, which is where the capture records it.",
+    "evidence/SCORE.json, TASK_STATE.md, PLAN.md, docs/CONTINUE.md, evidence/critics/1..7/ (found under .critics-hold/), and the other cycle-8 reports sitting beside this one in evidence/critics/8/ — left closed. They are other readers' conclusions, and the harness's own task list surfaced itself unbidden several times during this session; I did not use it. Commit history was read only as file-path lists, never as commit messages, for the same reason.",
+    "docs/BRIEF.md, DIRECTION.md, INVENTORY.md, README.md — I grepped BRIEF.md and README.md only for the TS_AUTHKEY secret sweep and did not read them for their content; they state intentions, and my row is what the source does."
+  ]
+}

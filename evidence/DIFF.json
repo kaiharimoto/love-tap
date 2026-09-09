@@ -11,148 +11,182 @@
    "artifact": "01_pulse.png",
    "label": "changed",
    "ssim": 0.995,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "6ae63bea3fea11bc",
    "previous_sha": "b4bda2c9fcf9a284",
-   "label_basis": "ssim 0.995, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.995, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 the baseline in evidence/.previous/ is byte-identical to this file so no before-and-after was possible; judged on the artifact, the Pulse sheet now carries every declared and passive signal as a labelled word (mood, here, where, need, energy, battery, last up, their clock, ringer, moving, signal, at home) matching partner_signals in the record field for field, which is what the row wants of the region that owns state.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "02_chat.png",
    "label": "changed",
    "ssim": 0.9948,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "1e58cad6caad3580",
    "previous_sha": "25a20ce1f4ac519f",
-   "label_basis": "ssim 0.9948, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9948, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); judged on the artifact, the thread shows a message, a voice note with a waveform and duration, delivery ticks on my rows only, and a reaction object landed on the correct target per the record's single reaction id, which is one log rendered as one conversation.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "03_us.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "c203a17109577976",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json labels it unchanged at SSIM 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "04_moments.png",
    "label": "changed",
    "ssim": 0.9827,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "4d3ef23044aadb80",
    "previous_sha": "f4913a59d992f08e",
-   "label_basis": "ssim 0.9827, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9827, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); SSIM 0.9827 says something a person would see moved, and the current file shows all three lenses in one frame with WHAT WE SENT underlined and the media lens count on the glass matching the registry's lens field exactly (183 = 115 + 14 + 54).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "05_settings.png",
    "label": "unchanged",
    "ssim": 0.999,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "0d9b7104c62f097f",
    "previous_sha": "1f910886ef5bc53c",
-   "label_basis": "ssim 0.999, at or above 0.999: nothing a person would see has moved"
+   "label_basis": "ssim 0.999, at or above 0.999: nothing a person would see has moved",
+   "judged_because": "unchanged \u2014 DIFF.json labels it unchanged at SSIM 0.999; nothing a person would see has moved.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "changed",
    "ssim": 0.8469,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "52ee0e5f2f642481",
    "previous_sha": "27156cfa88579777",
-   "label_basis": "ssim 0.8469, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.8469, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); SSIM 0.8469 is the largest move of any clip, and what is on the glass is a folded sheet opening over 139 fold frames with 0 repeated frames and mean change 2.95 grey levels a frame, which is a letter opening rather than a card fading in.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "changed",
    "ssim": 0.9887,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "0560c9f04b8084fa",
    "previous_sha": "ec4b9bb367ac77c6",
-   "label_basis": "ssim 0.9887, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9887, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); judged on the artifact, the same object model lands over Pulse, Chat and Us in one clip, and the record carries the landing's own haptic pattern (5 segments, 1200 ms) rather than a claim that one played.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
    "ssim": 0.9685,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "697fbadf0fd87621",
    "previous_sha": "ea9bc99ae35c431d",
-   "label_basis": "ssim 0.9685, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9685, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); judged on the artifact, both a feeling and a declared state cross to this phone and reach three different regions, with the strip's place word and paper stock both changing at frame 411, which is the row's clause about every region being a view onto the one log shown in motion.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried."
+   "judgement": "unchanged",
+   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried.",
+   "judged_because": "unchanged \u2014 labelled `absent`, not `gone`: it was not in the last capture either and WHY_MISSING.json carries a standing, measured reason for it, so nothing has moved either way.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "10_first_run.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "4564272255e43bfa",
    "previous_sha": "4a4a2e75b159c094",
-   "label_basis": "ssim 1.0, at or above 0.999: nothing a person would see has moved"
+   "label_basis": "ssim 1.0, at or above 0.999: nothing a person would see has moved",
+   "judged_because": "unchanged \u2014 DIFF.json labels it unchanged at SSIM 1.0.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "changed",
    "ssim": 0.9742,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "9ad9054cc15ce31f",
    "previous_sha": "0d3d060e87224c5f",
-   "label_basis": "ssim 0.9742, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9742, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); judged on the artifact, 300 frames traverse 8455 of the thread's 230799 logical pixels with asked and moved identical to 0.000 on every frame and 0 frames under a device pixel, and a to-do, a photo, feeling objects and state marks all pass through as rows of the same thread.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "12_search.png",
    "label": "changed",
    "ssim": 0.6698,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "ba8fbf735980cb8d",
    "previous_sha": "eb0f286c928d4ea8",
-   "label_basis": "ssim 0.6698, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.6698, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); SSIM 0.6698 is the largest move of any still, and the current file shows a facet actually applied (PHOTOGRAPHS, six photo hits) with the five module labels in the facet row, against a record that now describes the search page rather than the thread beneath it \u2014 though the results themselves still show no photographs (see findings).",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "changed",
    "ssim": 0.6636,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "a7157fe9eddc53bf",
    "previous_sha": "c03725381538c1dc",
-   "label_basis": "ssim 0.6636, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.6636, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); SSIM 0.6636, and the current file puts four delivery states on one screen (read, sent, sent, 'it would not go') plus an edit, a taken-back stub, the partner typing and the attach row, which is the messenger half of the mission legible in a single frame.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "changed",
    "ssim": 0.9782,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "228d61f8d4358830",
    "previous_sha": "265bd7e2881973c6",
-   "label_basis": "ssim 0.9782, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9782, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); judged on the artifact, the viewer is a full-bleed print on the desk with a torn-strip transport, a caption in the sender's hand and 'PUT IT BACK' rather than a close button, and the record shows the video genuinely playing (position 18 ms of 2500); it is the one screen with no partner strip, which is defensible for a modal.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "changed",
    "ssim": 0.9588,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "5848fe620ac98716",
    "previous_sha": "9077b60072514644",
-   "label_basis": "ssim 0.9588, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9588, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 baseline unusable (byte-identical); judged on the artifact, the picker's six family tabs and the couple's own 'pigeon' sitting in the mischief grid beside the built-ins, landing on Us and then appearing on Pulse's shelf, is the strongest single demonstration in the set that nothing downstream asks whether a feeling was made here \u2014 though the clip never shows one being authored and the record's authored_feelings stays at 2 throughout, so the name overpromises.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got."
+   "judgement": "unchanged",
+   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got.",
+   "judged_because": "unchanged \u2014 labelled `absent`, not `gone`: absent last capture too, for the same standing reason recorded in WHY_MISSING.json.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "17_setup_pwa.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "315594257949a7d5",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json labels it unchanged at SSIM 1.0, byte for byte the same file.",
+   "judged_by": "coherence critic"
   }
  ],
  "counts": {
@@ -161,5 +195,6 @@
   "unchanged": 4,
   "changed": 11,
   "absent": 2
- }
+ },
+ "judgements_from": "the coherence critic's report for this cycle"
 }
