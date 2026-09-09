@@ -569,6 +569,39 @@ def copy_flat(name, index, exts=(".ttf", ".ogg", ".json"), verbose=True):
         print(f"{name}: {len(out)} files")
 
 
+def _merge_voice_index():
+    """One voice index out of the per-month ones the recorder writes.
+
+    `seed_loader.dart` asks for `seed/voice/index.json`; the recorder writes
+    `seed/voice/index.2025-09.json` and eleven siblings. So the app has been asking for a file
+    nobody wrote — every launch of the seeded year fetched it, took a 404 and fell back, which is
+    why a critic found a 404 in two scene logs, and why the waveform drawn on a voice note has
+    never been the one measured off the recording.
+    """
+    src = os.path.join(SEED_SRC, "voice")
+    if not os.path.isdir(src):
+        return 0
+    merged = {}
+    for fn in sorted(os.listdir(src)):
+        if not (fn.startswith("index.") and fn.endswith(".json")) or fn == "index.json":
+            continue
+        with open(os.path.join(src, fn), encoding="utf-8") as f:
+            part = json.load(f)
+        if isinstance(part, dict):
+            merged.update(part)
+        elif isinstance(part, list):
+            for e in part:
+                if isinstance(e, dict) and e.get("id"):
+                    merged[e["id"]] = e
+    if not merged:
+        return 0
+    out = os.path.join(SEED_DST, "voice")
+    os.makedirs(out, exist_ok=True)
+    with open(os.path.join(out, "index.json"), "w", encoding="utf-8") as f:
+        json.dump(merged, f)
+    return len(merged)
+
+
 def pack_seed(verbose=True):
     """The seeded year, only when asked for."""
     months = []
@@ -590,8 +623,10 @@ def pack_seed(verbose=True):
     shutil.copy2(os.path.join(SEED_SRC, "people.json"), os.path.join(SEED_DST, "people.json"))
     with open(os.path.join(SEED_DST, "index.json"), "w", encoding="utf-8") as f:
         json.dump({"months": months}, f, indent=1)
+    voices = _merge_voice_index()
     if verbose:
-        print(f"seed: {len(months)} months")
+        print(f"seed: {len(months)} months"
+              + (f", {voices} voice notes with a measured waveform" if voices else ""))
     return months
 
 
