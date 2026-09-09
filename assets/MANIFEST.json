@@ -14243,57 +14243,6 @@
     "samples": 48
    }
   },
-  "assets/objects/obj_heart_fold.png": {
-   "bytes": 401714,
-   "generator": "blender/objects/objects.py",
-   "kind": "feeling_object",
-   "settings": {
-    "frame_mm": 60,
-    "light": "day",
-    "object": "obj_heart_fold",
-    "pass": "object",
-    "resolution": [
-     1200,
-     1200
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 40
-   }
-  },
-  "assets/objects/obj_heart_fold_shadow.png": {
-   "bytes": 144160,
-   "generator": "blender/objects/objects.py",
-   "kind": "feeling_shadow",
-   "settings": {
-    "frame_mm": 60,
-    "light": "day",
-    "object": "obj_heart_fold",
-    "pass": "shadow",
-    "resolution": [
-     1200,
-     1200
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 40
-   }
-  },
-  "assets/objects/obj_heart_fold_shadow_dusk.png": {
-   "bytes": 171526,
-   "generator": "blender/objects/objects.py",
-   "kind": "feeling_shadow",
-   "settings": {
-    "frame_mm": 60,
-    "light": "dusk",
-    "object": "obj_heart_fold",
-    "pass": "shadow",
-    "resolution": [
-     1200,
-     1200
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 40
-   }
-  },
   "assets/objects/obj_knot.png": {
    "bytes": 341128,
    "generator": "blender/objects/objects.py",

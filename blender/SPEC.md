@@ -77,7 +77,7 @@ same frame, daylight and dusk. Materials: paper (from `common.paper_material`), 
 0.9, roughness 0.25, gold), thread/string (a curve with a fibre bump), rubber, pencil (wood +
 graphite core), steel (staples), wax (candle), thermal paper (ticket), plaster (fabric + gauze pad).
 
-Objects: `obj_heart_fold`, `obj_crane`, `obj_boat`, `obj_blanket_fold`, `obj_crumple_ball`,
+Objects: `obj_crane`, `obj_boat`, `obj_blanket_fold`, `obj_crumple_ball`,
 `obj_plane`, `obj_fortune_teller`, `obj_crown`, `obj_ribbon`, `obj_string_loop`, `obj_knot`,
 `obj_rubber_band`, `obj_stone`, `obj_candle`, `obj_snapped_pencil`, `obj_staple_chain`,
 `obj_spitball`, `obj_torn_corner`, `obj_ticket`, `obj_plaster`, `obj_gold_star`, `obj_confetti`,
