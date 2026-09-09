@@ -34,11 +34,11 @@ cursor acknowledgement, blob transfer progress.
 | 2 | `photo` | `blob`, `w`, `h`, `caption?`, `reply_to?` | a print taped at two corners, caption underneath in hand | "a photo", interruptive | caption text; media facet |
 | 3 | `video` | `blob`, `poster_blob`, `duration_ms`, `w`, `h`, `caption?` | a print with a tape tab and a pencilled duration; tap opens the viewer | "a video", interruptive | caption text; media facet |
 | 4 | `voice_note` | `blob`, `duration_ms`, `waveform` (list of 0–1) | a strip with the waveform drawn in pencil, a small play mark | "a voice note", interruptive | media facet, duration; no transcript |
-| 5 | `reaction` | `target`, `feeling_id` | the feeling object stuck to the target note, never a row | quiet (no sound) | by feeling, by family |
+| 5 | `reaction` | `target`, `feeling_id` | the feeling object stuck to the target note, never a row | quiet (no sound) | by feeling, by its name, by family |
 | 6 | `message_edit` | `target`, `text` | the target's text replaced, with a small pencil "edited" in the margin; the original stays in the spine | none | latest text indexed, original de-indexed |
 | 7 | `message_delete` | `target` | the target becomes a torn stub reading "took this back", in the author's hand | none | excluded |
 | 8 | `read_marker` | `upto_seq` | a mark on the last read note (the ink dries), never a row | none | excluded |
-| 9 | `feeling` | `feeling_id`, `intensity` (0–1), `hold_ms` | the object landing on the desk between notes, shadow first | object + haptic pattern (PWA: page rhythm), interruptive | by feeling, by family, by intensity |
+| 9 | `feeling` | `feeling_id`, `intensity` (0–1), `hold_ms` | the object landing on the desk between notes, shadow first | object + haptic pattern (PWA: page rhythm), interruptive | by feeling, by its name, by family |
 | 10 | `state_declared` | `signal`, `value` | a marginal note in the author's hand ("heads down until 6") | ambient surfaces update; a mood change is quiet | by signal |
 | 11 | `state_passive` | `signal`, `value` | coalesced: one margin mark per meaningful transition per hour ("phone died"), otherwise folded into the partner strip only | ambient surfaces update | by signal |
 | 12 | `date_event` | `date_id`, `action` (planned/scheduled/done/said/remembered), `title`, `when?`, `place?`, `verdict?`, `note?` | a ticket-stub note; what they said about it afterwards is written on the stub in their hand, never scored | quiet | title, place, note, verdict |
@@ -60,6 +60,14 @@ promise was never kept. It also cannot be, on the path that matters: a push carr
 kind and who sent it and nothing else, on purpose, so the phone that is asleep does not learn from
 the notification what the event said. A treatment that depends on the action would have to put the
 action in the push. The rows say what the build does.
+
+
+The search column used to promise "by intensity" for a feeling. Nothing indexed it and nothing
+could sensibly have: an intensity is a number between nought and one that a hold's length decides,
+and there is no word a person would type for it. A code critic found the promise and found that
+`spine_schema_test.dart` compares only the type-id column, so the other four were asserted by
+nothing at all. Feeling and reaction rows index the feeling's id, its name and its family now,
+which is what the other half of that promise meant.
 
 ## Adding a nineteenth
 

@@ -23,6 +23,7 @@
 import 'package:flutter/material.dart';
 
 import '../feelings/authored_row.dart';
+import '../feelings/builtins.dart';
 import '../material/hands.dart';
 import '../material/marks.dart';
 import '../material/objects.dart';
@@ -198,9 +199,9 @@ String summaryOf(Event e, {Person? me}) {
     case 'voice_note':
       return '$who left ${_seconds(p['duration_ms'])} of talking';
     case 'feeling':
-      return '$who sent ${p['feeling_id']}';
+      return '$who sent ${_feelingCalled(p['feeling_id'])}';
     case 'reaction':
-      return '$who put ${p['feeling_id']} on it';
+      return '$who put ${_feelingCalled(p['feeling_id'])} on it';
     case 'message_edit':
       return '$who changed it to ${p['text']}';
     case 'message_delete':
@@ -226,6 +227,25 @@ String summaryOf(Event e, {Person? me}) {
       }
       return (p['text'] as String?) ?? e.type;
   }
+}
+
+/// What a feeling is called, rather than the id it is filed under.
+///
+/// This line reads out in three places that are not the thread — a search result, the strip over
+/// the composer that says what you are replying to, and a notification body — and in all three it
+/// used to print the raw id: `noor sent warm_palm`, `teo put stuck_with_me on it`. Three hundred
+/// and ninety of the year's 1,340 feeling and reaction events carry an underscored id, and the
+/// search index tokenises on non-alphanumerics, so searching `warm` returned exactly those rows
+/// with the underscore showing. A code critic found it and also found why nothing caught it: the
+/// test that asserts this line has no underscore in it is handed `feeling_id: 'hold'`, which is
+/// the one value shape that cannot fail.
+String _feelingCalled(Object? id) {
+  final key = (id as String?) ?? '';
+  final known = kBuiltInById[key];
+  if (known != null) return known.name;
+  // an authored feeling the registry here does not hold: its id is the only thing there is, and
+  // an id with underscores in it is not a name, so at least say it the way a person would
+  return key.replaceAll('_', ' ');
 }
 
 String _seconds(Object? ms) {

@@ -1,5 +1,6 @@
 // Full-text search over the spine: one inverted index over every searchable event type, plus
 // facets, so search reaches every type rather than only text. In memory, rebuilt from the log.
+import '../feelings/builtins.dart';
 import 'event.dart';
 import 'types.dart';
 
@@ -76,7 +77,19 @@ class SearchIndex {
     for (final f in spec.search.facets) {
       addText(f);
     }
-    if (e.type == 'feeling' || e.type == 'reaction') addText(e.payload['feeling_id'] as String?);
+    if (e.type == 'feeling' || e.type == 'reaction') {
+      final id = e.payload['feeling_id'] as String?;
+      addText(id);
+      // and what it is called and what family it belongs to, because docs/EVENT_TYPES.md has
+      // promised search "by feeling, by family" for both of these rows since the registry was
+      // written and neither word appeared anywhere in this file. A person looking for the time
+      // they were sent something mischievous does not know it is filed as `nyeh`.
+      final f = kBuiltInById[id ?? ''];
+      if (f != null) {
+        addText(f.name);
+        addText(f.family.name);
+      }
+    }
     if (e.type == 'state_declared') addText(e.payload['signal'] as String?);
     for (final entry in counts.entries) {
       (_postings[entry.key] ??= {})[e.id] = entry.value;

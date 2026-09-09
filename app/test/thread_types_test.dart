@@ -128,7 +128,13 @@ Object _plausible(String key) => switch (key) {
       'intensity' => 0.8,
       'signal' => 'mood',
       'value' => 'tender',
-      'feeling_id' => 'hold',
+      // An id with an underscore in it, deliberately. This fixture used to be 'hold' — the one
+      // value shape that cannot trip the assertion three lines above it, which is that a
+      // sentence must not show a key rather than words. Three hundred and ninety of the
+      // year's 1,340 feeling and reaction events carry an underscored id and every one of
+      // them printed raw in search, in the replying-to strip and in a notification body,
+      // while this test passed.
+      'feeling_id' => 'warm_palm',
       'title' => 'the ferry',
       'name' => 'empty chair',
       'ritual' => 'text when home',
