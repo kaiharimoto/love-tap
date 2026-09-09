@@ -162,6 +162,26 @@ def head():
         return None
 
 
+def _rotation_would_be_onto_itself(baseline_at, artifacts):
+    """True when the baseline directory already holds files from the run we are measuring.
+
+    Rotating makes this capture the baseline for the next one. If a scene is then re-shot, it is
+    measured against a copy of itself and DIFF.json fills up with "unchanged — byte for byte the
+    same file", which is true and says nothing. It happened: the baseline was stamped 19:16 inside
+    a run that began at 17:43 and three scenes were shot after it.
+    """
+    if not baseline_at:
+        return False
+    real = [r for r in artifacts if r.get("label") != "absent"]
+    if not real:
+        return False
+    same = sum(1 for r in real if r.get("label") == "unchanged" and r.get("ssim") == 1.0)
+    # Three fifths of a set byte-identical to its own baseline is not a quiet cycle; it is a
+    # baseline that already holds this run. A cycle that genuinely changed nothing would have to
+    # have skipped every fix in it, and the builder would know.
+    return same >= 0.6 * len(real)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--rotate", action="store_true",
@@ -210,6 +230,14 @@ def main():
         f.write("\n")
     print(f"diff: {out['counts']}")
 
+    if args.rotate and _rotation_would_be_onto_itself(baseline_at, rows):
+        report["rotated"] = False
+        report["not_rotated_because"] = (
+            "all but a handful of these rows read unchanged with an SSIM of exactly 1.0, which "
+            "means the baseline already holds this capture's own files. Rotating again would keep "
+            "it that way and every number here would go on comparing a file with itself. Shoot a "
+            "whole run, then rotate.")
+        args.rotate = False
     if args.rotate:
         os.makedirs(PREVIOUS, exist_ok=True)
         for name in ARTIFACTS:

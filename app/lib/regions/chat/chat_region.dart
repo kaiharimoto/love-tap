@@ -246,6 +246,20 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       final answerable = scope.thread.items.lastWhere(
           (i) => i.author != scope.me && i.id != theirs.id && (i.text ?? '').trim().isNotEmpty,
           orElse: () => theirs);
+      // One reply that lands, made the way a thumb makes one: the banner goes up over the
+      // composer and `_send` carries `reply_to` with the text. Every capture until now has shown
+      // the *composer* holding a reply and no artifact has ever shown a delivered one tied to its
+      // parent — `replying_to` was the only reply-shaped field in any of the seventeen reports,
+      // and a messenger critic capped the whole row on that absence. The row that draws a landed
+      // reply has existed since note.dart:106 and nothing ever photographed it.
+      if (mounted) {
+        setState(() {
+          _replyTo = answerable;
+          _text.text = 'the one by the door, i think';
+        });
+        await _send();
+        await Future<void>.delayed(const Duration(milliseconds: 700));
+      }
       if (mounted) setState(() => _replyTo = answerable);
       _text.text = 'the second one, then';
       if (mounted) setState(() {});
@@ -384,6 +398,15 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         'composer': _text.text,
         'attaching': _attaching,
         'replying_to': _replyTo?.id,
+        // and the replies that have actually landed and are on the glass, each with the row it
+        // answers. `replying_to` alone is the composer holding one, which is a different thing:
+        // a messenger critic read every report in the set, found the composer field six times and
+        // a delivered reply nowhere, and capped the row on it.
+        'replies_on_the_glass': {
+          for (final p in shown)
+            if (items[p.index].replyTo != null)
+              items[p.index].id: items[p.index].replyTo,
+        },
         'editing': _editing?.id,
         'anchor': _lastAnchor,
         // what kinds of paper are actually in the frame, so a claim that the messenger can carry

@@ -1,5 +1,5 @@
 {
- "commit": "8049893",
+ "commit": "41db3d4",
  "baseline": {
   "dir": "evidence/.previous",
   "captured_at": "2026-09-09T19:16:36.983567+00:00",
@@ -12,199 +12,165 @@
    "artifact": "01_pulse.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "0ff7b7317e1d984d",
    "previous_sha": "0ff7b7317e1d984d",
    "previous_written": "2026-09-09T17:53:03Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "02_chat.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "3637fd8ef7a5b7e6",
    "previous_sha": "3637fd8ef7a5b7e6",
    "previous_written": "2026-09-09T17:53:47Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "03_us.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "3cddfe289fa33b38",
    "previous_sha": "3cddfe289fa33b38",
    "previous_written": "2026-09-09T17:54:03Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "04_moments.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "a52bda3e1bc9e1f4",
    "previous_sha": "a52bda3e1bc9e1f4",
    "previous_written": "2026-09-09T17:54:21Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "05_settings.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "6e2b8a46eaa4cbef",
    "previous_sha": "6e2b8a46eaa4cbef",
    "previous_written": "2026-09-09T17:54:37Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "f0e2a4edf447f438",
    "previous_sha": "f0e2a4edf447f438",
    "previous_written": "2026-09-09T18:48:23Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "eac9c1304ea75b12",
    "previous_sha": "eac9c1304ea75b12",
    "previous_written": "2026-09-09T18:52:23Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
    "ssim": 0.9492,
-   "judgement": "improved",
+   "judgement": null,
    "sha": "10d4d4329943dc09",
    "previous_sha": "c7b2e162b4d685aa",
    "previous_written": "2026-09-09T19:14:58Z",
-   "label_basis": "ssim 0.9492, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "improved - at SSIM 0.9492 the clip has grown from 518 to 639 frames and the added Chat leg now carries the propagation itself: the partner's declared mood arrives as the thread row 'noor is restless' and the message 'it is raining here too' lands beside a whole, unclipped 'hold' object, where the previous cut showed a blank strip labelled only 'teo' and a 'squeeze' row whose caption was cut off by the sheet's edge.",
-   "judged_by": "coherence critic"
+   "label_basis": "ssim 0.9492, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": "unchanged",
-   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried.",
-   "judged_because": "unchanged - absent in this capture and absent in the last, for the same standing reason in WHY_MISSING.json; nothing about it moved, and DIFF.json gives no number that could say otherwise.",
-   "judged_by": "coherence critic"
+   "judgement": null,
+   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried."
   },
   {
    "artifact": "10_first_run.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "690fc9352b0a1dea",
    "previous_sha": "690fc9352b0a1dea",
    "previous_written": "2026-09-09T17:57:18Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "changed",
    "ssim": 0.721,
-   "judgement": "improved",
+   "judgement": null,
    "sha": "b8fe3851fd1e934b",
    "previous_sha": "0698b2e478d714e4",
    "previous_written": "2026-09-09T18:50:38Z",
-   "label_basis": "ssim 0.721, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "improved - at SSIM 0.721 the throw now runs through a stretch of thread that shows what the thread is for: a photo, a feeling drawn as the pink sweet, a to-do with a checkbox and a passive state line among the written notes, where the previous cut through an almost purely textual run; the fling itself holds, with 7 throws and 0 frames under a device pixel in the fling log.",
-   "judged_by": "coherence critic"
+   "label_basis": "ssim 0.721, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "12_search.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "a59452b7f034914b",
    "previous_sha": "a59452b7f034914b",
    "previous_written": "2026-09-09T17:55:00Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "changed",
    "ssim": 0.5968,
-   "judgement": "improved",
+   "judgement": null,
    "sha": "8bddc4fa7a9c3317",
    "previous_sha": "77acdfaab829f1dc",
    "previous_written": "2026-09-09T17:56:28Z",
-   "label_basis": "ssim 0.5968, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "improved - at SSIM 0.5968 the still now shows five distinct delivery states on one screen (sent, edited-and-sent, 'it would not go' with 'send it again', 'going', and a taken-back row reading 'took this back') plus 'noor writing\u2026' above the composer; the previous capture showed the identical thread with every one of its six rows reading 'going', which is one state photographed six times.",
-   "judged_by": "coherence critic"
+   "label_basis": "ssim 0.5968, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "1ee4fb84897b11b2",
    "previous_sha": "1ee4fb84897b11b2",
    "previous_written": "2026-09-09T17:57:06Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "dd7b5007dd7a802a",
    "previous_sha": "dd7b5007dd7a802a",
    "previous_written": "2026-09-09T18:52:23Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": "unchanged",
-   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got.",
-   "judged_because": "unchanged - absent in this capture and absent in the last, for the same standing reason in WHY_MISSING.json; there is no number and nothing moved.",
-   "judged_by": "coherence critic"
+   "judgement": null,
+   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got."
   },
   {
    "artifact": "17_setup_pwa.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
+   "judgement": null,
    "sha": "c97e27d1b71d885e",
    "previous_sha": "c97e27d1b71d885e",
    "previous_written": "2026-09-09T17:57:27Z",
-   "why": "byte for byte the same file",
-   "judged_because": "unchanged - byte for byte the same file, SSIM 1.0.",
-   "judged_by": "coherence critic"
+   "why": "byte for byte the same file"
   }
  ],
  "counts": {
@@ -213,6 +179,5 @@
   "unchanged": 12,
   "changed": 3,
   "absent": 2
- },
- "judgements_from": "the coherence critic's report for this cycle"
+ }
 }

@@ -456,7 +456,17 @@ python3 tools/check/hairline.py --out "$LOG/hairline.json" \
 # after a few of those every artifact's baseline was itself: DIFF.json said ssim 1.0 and "byte for
 # byte the previous file" for the entire set, and a cycle's worth of change measured as nothing.
 if [ -z "$ONLY" ]; then
-  python3 tools/check/diff.py --rotate || true
+  # NO_ROTATE=yes when a scene is going to be re-shot after this run. Rotating makes this capture
+  # the baseline for the next one, and anything shot afterwards is then measured against a copy of
+  # itself: a completeness pass found evidence/.previous/CAPTURED_AT stamped 19:16 inside a run
+  # that began at 17:43, with three scenes re-shot after it, and twelve of DIFF.json's seventeen
+  # rows reading "unchanged — byte for byte the same file" because they were.
+  if [ "${NO_ROTATE:-no}" = "yes" ]; then
+    echo "· measuring against the baseline and leaving it there (NO_ROTATE: something is still to be shot)"
+    python3 tools/check/diff.py || true
+  else
+    python3 tools/check/diff.py --rotate || true
+  fi
 else
   echo "· measuring against the baseline, and leaving it where it is (only $ONLY was captured)"
   python3 tools/check/diff.py || true
