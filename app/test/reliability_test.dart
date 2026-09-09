@@ -129,6 +129,35 @@ void main() {
         ? 'no typing frame reached the host'
         : 'typing frame reached the host as an ephemeral; neither log grew by it';
 
+    // A feeling crossing, and a state. Nineteen capabilities and every one of them a messenger
+    // path: an emotional critic counted the word `feeling` twice in the whole report, both inside
+    // a search string, and was right that the row the app exists for was certified by nothing. A
+    // feeling is an event like any other on the spine — that is the architecture's own claim — so
+    // the way to show it is to make one cross and read it on the other side with its intensity and
+    // its haptic intact, because an intensity that does not survive the wire is a feeling that
+    // arrives as a different feeling.
+    final f1 = await client.append('feeling', {'feeling_id': 'squeeze', 'intensity': 0.62});
+    await sync.once();
+    final gotFeeling = host.byId(f1.id);
+    cap('feeling').ok = gotFeeling != null &&
+        gotFeeling.payload['feeling_id'] == 'squeeze' &&
+        ((gotFeeling.payload['intensity'] as num) - 0.62).abs() < 1e-9;
+    cap('feeling').detail = gotFeeling == null
+        ? 'the feeling did not reach the other phone'
+        : 'squeeze reached the host at intensity '
+            '${gotFeeling.payload['intensity']}, the number it was sent at';
+
+    final s1 = await client.append('state_declared', {'signal': 'mood', 'value': 'restless'});
+    await sync.once();
+    final gotState = host.byId(s1.id);
+    cap('state').ok = gotState != null &&
+        gotState.payload['signal'] == 'mood' &&
+        gotState.payload['value'] == 'restless';
+    cap('state').detail = gotState == null
+        ? 'the state did not reach the other phone'
+        : 'mood: restless reached the host, so what one person says about themselves is legible '
+            'on the other phone without either of them writing a sentence';
+
     // voice note
     final voice = Uint8List.fromList(List<int>.generate(20000, (i) => (i * 13) & 255));
     final vh = await client.putBlob(voice, 'audio/mp4');

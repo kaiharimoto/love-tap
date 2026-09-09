@@ -1,23 +1,23 @@
 {
  "transport": "local",
- "generated_at": "2026-09-09T15:44:41.578091Z",
+ "generated_at": "2026-09-09T16:04:07.101141Z",
  "host": {
   "transport": "local",
   "role": "host",
   "state": "connected",
-  "address": "127.0.0.1:38073",
-  "peer_cursor": 175,
-  "our_cursor": 175,
+  "address": "127.0.0.1:34873",
+  "peer_cursor": 177,
+  "our_cursor": 177,
   "last_error": null,
-  "since": "2026-09-09T15:44:41.561418Z",
-  "last_contact": "2026-09-09T15:44:41.573490Z",
+  "since": "2026-09-09T16:04:07.087145Z",
+  "last_contact": "2026-09-09T16:04:07.098134Z",
   "device_id": "android-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-09T15:44:41.527489Z"
+   "paired_at": "2026-09-09T16:04:07.065269Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -30,19 +30,19 @@
   "transport": "local",
   "role": "client",
   "state": "connected",
-  "address": "http://127.0.0.1:38073",
-  "peer_cursor": 175,
-  "our_cursor": 175,
+  "address": "http://127.0.0.1:34873",
+  "peer_cursor": 177,
+  "our_cursor": 177,
   "last_error": null,
-  "since": "2026-09-09T15:44:41.181174Z",
-  "last_contact": "2026-09-09T15:44:41.575024Z",
+  "since": "2026-09-09T16:04:06.739625Z",
+  "last_contact": "2026-09-09T16:04:07.099906Z",
   "device_id": "pwa-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-09T15:44:41.531191Z"
+   "paired_at": "2026-09-09T16:04:07.068102Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -90,6 +90,14 @@
    "ok": true,
    "detail": "typing frame reached the host as an ephemeral; neither log grew by it"
   },
+  "feeling": {
+   "ok": true,
+   "detail": "squeeze reached the host at intensity 0.62, the number it was sent at"
+  },
+  "state": {
+   "ok": true,
+   "detail": "mood: restless reached the host, so what one person says about themselves is legible on the other phone without either of them writing a sentence"
+  },
   "voice_note": {
    "ok": true,
    "detail": "voice blob and event reached the host"
@@ -104,7 +112,7 @@
   },
   "search": {
    "ok": true,
-   "detail": "nine queries, each answered by an event of the type it was asked about: {\"message\":{\"query\":\"floor\",\"hits\":1,\"types\":[\"message\"],\"first_of_the_wanted_type\":\"01M23DFFAMTJ4J5PJZWVVA6YRQ\"},\"photo\":{\"query\":\"lift buttons\",\"hits\":1,\"types\":[\"photo\"],\"first_of_the_wanted_type\":\"01M23DFFMEGBE7QJ40ERKCVG42\"},\"todo_event\":{\"query\":\"bread\",\"hits\":1,\"types\":[\"todo_event\"],\"first_of_the_wanted_type\":\"01M23DFFNVT0YAXHJ412F2T8JW\"},\"date_event\":{\"query\":\"ferry\",\"hits\":1,\"types\":[\"date_event\"],\"first_of_the_wanted_type\":\"01M23DFFNXTKDV5NVNR338GBN1\"},\"feeling\":{\"query\":\"squeeze\",\"hits\":1,\"types\":[\"feeling\"],\"first_of_the_wanted_type\":\"01M23DFFNYGRSX79BED3QWS3J1\"},\"state_declared\":{\"query\":\"heads down\",\"hits\":1,\"types\":[\"state_declared\"],\"first_of_the_wanted_type\":\"01M23DFFNZ75C09KPFC6J5RPKG\"},\"milestone\":{\"query\":\"together\",\"hits\":1,\"types\":[\"milestone\"],\"first_of_the_wanted_type\":\"01M23DFFP095S3RWQKB8ERD8HN\"},\"video\":{\"query\":\"video\",\"hits\":1,\"types\":[\"video\"],\"first_of_the_wanted_type\":\"01M23DFFKRK2908H47003B43KJ\"},\"voice_note\":{\"query\":\"voice\",\"hits\":1,\"types\":[\"voice_note\"],\"first_of_the_wanted_type\":\"01M23DFFJ4R5BCC1XY7Y2T4C4G\"}}"
+   "detail": "nine queries, each answered by an event of the type it was asked about: {\"message\":{\"query\":\"floor\",\"hits\":1,\"types\":[\"message\"],\"first_of_the_wanted_type\":\"01M23EK1HV207RWXR1YN8XXZNW\"},\"photo\":{\"query\":\"lift buttons\",\"hits\":1,\"types\":[\"photo\"],\"first_of_the_wanted_type\":\"01M23EK1WV5A2ZGN53RQ976MW6\"},\"todo_event\":{\"query\":\"bread\",\"hits\":1,\"types\":[\"todo_event\"],\"first_of_the_wanted_type\":\"01M23EK1XNZCM6081QHD2FY6RG\"},\"date_event\":{\"query\":\"ferry\",\"hits\":1,\"types\":[\"date_event\"],\"first_of_the_wanted_type\":\"01M23EK1XP6NCD62RSKD4ZEEBJ\"},\"feeling\":{\"query\":\"squeeze\",\"hits\":2,\"types\":[\"feeling\"],\"first_of_the_wanted_type\":\"01M23EK1XQ0JFWF4EDABJS6BZC\"},\"state_declared\":{\"query\":\"heads down\",\"hits\":1,\"types\":[\"state_declared\"],\"first_of_the_wanted_type\":\"01M23EK1XRWWZK90GY6RJNAG5T\"},\"milestone\":{\"query\":\"together\",\"hits\":1,\"types\":[\"milestone\"],\"first_of_the_wanted_type\":\"01M23EK1XSDXT31Z3RR911JTC5\"},\"video\":{\"query\":\"video\",\"hits\":1,\"types\":[\"video\"],\"first_of_the_wanted_type\":\"01M23EK1W0D73Y3ZC0CNECNES7\"},\"voice_note\":{\"query\":\"voice\",\"hits\":1,\"types\":[\"voice_note\"],\"first_of_the_wanted_type\":\"01M23EK1TBG0P324FS4GV7F6HG\"}}"
   },
   "draft_survival": {
    "ok": true,
@@ -120,11 +128,11 @@
   },
   "reconnect_ordering": {
    "ok": true,
-   "detail": "client holds seq 1..173 gapless and monotonic after the gap"
+   "detail": "client holds seq 1..175 gapless and monotonic after the gap"
   },
   "refusal_and_retry": {
    "ok": true,
-   "detail": "refused with \"this phone is on an older version and cannot read that\", kept out of the wire for a round, and delivered as seq 174 when the person asked for it again"
+   "detail": "refused with \"this phone is on an older version and cannot read that\", kept out of the wire for a round, and delivered as seq 176 when the person asked for it again"
   },
   "pairing_refused": {
    "ok": true,
@@ -136,8 +144,8 @@
   }
  },
  "all_ok": true,
- "events_host": 175,
- "events_client": 175,
+ "events_host": 177,
+ "events_client": 177,
  "duplicates": 0,
  "same_order_both_sides": true,
  "ordering": "monotonic",
@@ -173,7 +181,7 @@
   "later_check": {
    "status": "pending",
    "why": "the nodes were not answering when this was re-run; the run above stands",
-   "checked_at": "2026-09-09T15:44:41.627708Z"
+   "checked_at": "2026-09-09T16:04:07.142030Z"
   }
  }
 }
