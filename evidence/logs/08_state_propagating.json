@@ -14,35 +14,35 @@
   },
   {
    "do": "pair",
-   "ms": 1279
+   "ms": 1275
   },
   {
    "do": "wait",
-   "ms": 3704
+   "ms": 3703
   },
   {
    "do": "goTo",
-   "ms": 3499
+   "ms": 2526
   },
   {
    "do": "far",
-   "ms": 551
+   "ms": 562
   },
   {
    "do": "awaitArrival",
-   "ms": 3847
+   "ms": 4953
   },
   {
    "do": "wait",
-   "ms": 1203
+   "ms": 1201
   },
   {
    "do": "step",
-   "ms": 2200
+   "ms": 3135
   },
   {
    "do": "frames",
-   "ms": 35674
+   "ms": 31763
   },
   {
    "do": "wait",
@@ -50,39 +50,39 @@
   },
   {
    "do": "far",
-   "ms": 505
+   "ms": 1253
   },
   {
    "do": "awaitArrival",
-   "ms": 1245
+   "ms": 1184
   },
   {
    "do": "wait",
-   "ms": 1205
+   "ms": 1206
   },
   {
    "do": "step",
-   "ms": 2293
+   "ms": 2012
   },
   {
    "do": "frames",
-   "ms": 298743
+   "ms": 297210
   },
   {
    "do": "goTo",
-   "ms": 6339
+   "ms": 5501
   },
   {
    "do": "step",
-   "ms": 2229
+   "ms": 1699
   },
   {
    "do": "far",
-   "ms": 507
+   "ms": 915
   },
   {
    "do": "awaitArrival",
-   "ms": 1041
+   "ms": 1989
   },
   {
    "do": "wait",
@@ -90,7 +90,7 @@
   },
   {
    "do": "frames",
-   "ms": 39225
+   "ms": 44049
   },
   {
    "do": "far",
@@ -98,23 +98,7 @@
   },
   {
    "do": "awaitArrival",
-   "ms": 2162
-  },
-  {
-   "do": "wait",
-   "ms": 1206
-  },
-  {
-   "do": "frames",
-   "ms": 166260
-  },
-  {
-   "do": "far",
-   "ms": 511
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1060
+   "ms": 1943
   },
   {
    "do": "wait",
@@ -122,15 +106,31 @@
   },
   {
    "do": "frames",
-   "ms": 307972
+   "ms": 171357
+  },
+  {
+   "do": "far",
+   "ms": 626
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1288
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 316626
   },
   {
    "do": "goTo",
-   "ms": 6158
+   "ms": 6377
   },
   {
    "do": "step",
-   "ms": 1561
+   "ms": 1989
   },
   {
    "do": "wait",
@@ -138,27 +138,27 @@
   },
   {
    "do": "far",
-   "ms": 507
+   "ms": 504
   },
   {
    "do": "far",
-   "ms": 777
+   "ms": 1159
   },
   {
    "do": "awaitArrival",
-   "ms": 658
+   "ms": 4758
   },
   {
    "do": "wait",
-   "ms": 1201
+   "ms": 1202
   },
   {
    "do": "frames",
-   "ms": 219967
+   "ms": 217724
   },
   {
    "do": "report",
-   "ms": 531
+   "ms": 521
   }
  ],
  "shots": [
@@ -251,7 +251,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 9312,
    "seed": 20260903,
-   "events": 14113,
+   "events": 14110,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -274,7 +274,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-09T03:31:19.707Z",
+    "started_at": "2026-09-09T05:22:33.264Z",
     "pattern": [
      {
       "ms": 150,
@@ -301,25 +301,25 @@
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 384,
+    "rounds": 388,
     "pushed": 8,
     "refused": 0,
-    "pulled": 8,
+    "pulled": 9,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14113,
+    "cursor": 14110,
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14113,
-     "our_cursor": 14113,
+     "peer_cursor": 14110,
+     "our_cursor": 14110,
      "last_error": null,
-     "since": "2026-09-09T03:16:14.248Z",
-     "last_contact": "2026-09-09T03:34:59.523Z"
+     "since": "2026-09-09T05:07:09.290Z",
+     "last_contact": "2026-09-09T05:26:10.642Z"
     }
    },
    "ambient": {
@@ -333,9 +333,9 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2201,
+ "cold_ms": 2137,
  "load": {
-  "ms": 2201,
+  "ms": 2137,
   "store": "kept",
   "profile": "profile_seeded"
  },
@@ -375,42 +375,42 @@
    "before": 8082,
    "after": 8083,
    "at_frame": 0,
-   "waited_ms": 3345
+   "waited_ms": 4452
   },
   {
    "line": "feeling hold 0.92",
    "before": 8083,
    "after": 8084,
    "at_frame": 16,
-   "waited_ms": 743
+   "waited_ms": 684
   },
   {
    "line": "message it is raining here too",
    "before": 8084,
    "after": 8085,
    "at_frame": 165,
-   "waited_ms": 540
+   "waited_ms": 1488
   },
   {
    "line": "feeling squeeze 0.6",
    "before": 8085,
    "after": 8086,
    "at_frame": 184,
-   "waited_ms": 1662
+   "waited_ms": 1433
   },
   {
    "line": "feeling here 0.8",
    "before": 8086,
    "after": 8087,
    "at_frame": 255,
-   "waited_ms": 560
+   "waited_ms": 786
   },
   {
    "line": "feeling soup 0.7",
-   "before": 8087,
-   "after": 8088,
+   "before": 8088,
+   "after": 8089,
    "at_frame": 411,
-   "waited_ms": 156
+   "waited_ms": 4257
   }
  ],
  "problems": [],
