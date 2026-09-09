@@ -241,7 +241,7 @@
    "cuts_between_runs": [],
    "app_seconds": 4.8,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 19.31281,
+   "mean_change_per_frame": 19.27519,
    "held_frame_test": {
     "unit": "grey levels of Rec.601 luma at full resolution",
     "all_three_must_hold": {
@@ -251,9 +251,9 @@
     },
     "worst_moving_frame": {
      "frame": 44,
-     "mean": 9.2386,
-     "visible_share": 0.245939,
-     "busiest_tile": 184.4866,
+     "mean": 7.7825,
+     "visible_share": 0.195153,
+     "busiest_tile": 153.3611,
      "note": "the frame nearest the held-frame test that still counts as motion"
     }
    },
@@ -272,7 +272,7 @@
     "/tmp/lovetap-capture/11_chat_scroll/000239.png",
     "/tmp/lovetap-capture/11_chat_scroll/000299.png"
    ],
-   "checked_at": "2026-09-09T18:51:14Z",
+   "checked_at": "2026-09-09T19:37:09Z",
    "from_this_run": true
   },
   "15_authored_feeling.mp4": {
@@ -377,17 +377,17 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 2200,
+  "cold_ms": 2078,
   "steps": [
    {
     "do": "pair",
-    "ms": 1549,
+    "ms": 1880,
     "auto": true,
     "far": "http://127.0.0.1:8480"
    },
    {
     "do": "goTo",
-    "ms": 3328
+    "ms": 3676
    },
    {
     "do": "wait",
@@ -395,7 +395,7 @@
    },
    {
     "do": "scrollTo",
-    "ms": 4257
+    "ms": 3558
    },
    {
     "do": "wait",
@@ -403,15 +403,19 @@
    },
    {
     "do": "frames",
-    "ms": 539602
+    "ms": 536695
    },
    {
     "do": "timings",
-    "ms": 433
+    "ms": 416
    },
    {
     "do": "flingLog",
-    "ms": 756
+    "ms": 410
+   },
+   {
+    "do": "report",
+    "ms": 415
    }
   ]
  },

@@ -101,8 +101,8 @@
    ]
   },
   "13_messenger_states.png": {
-   "bytes": 4892154,
-   "written": "2026-09-09T17:56:28Z",
+   "bytes": 4762746,
+   "written": "2026-09-09T19:56:19Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -200,8 +200,8 @@
    "long_enough": true
   },
   "11_chat_scroll.mp4": {
-   "bytes": 9681905,
-   "written": "2026-09-09T18:50:38Z",
+   "bytes": 9607607,
+   "written": "2026-09-09T19:36:32Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -239,8 +239,8 @@
   }
  },
  "missing": {
-  "09_two_devices.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA"
+  "09_two_devices.png": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried.",
+  "16_setup_android.png": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got."
  },
  "checks": {
   "01_pulse.json": {
@@ -332,15 +332,19 @@
    "from_this_run": true
   },
   "11_chat_scroll.fling.json": {
-   "written": "2026-09-09T18:33:49Z",
+   "written": "2026-09-09T19:36:09Z",
    "from_this_run": true
   },
   "11_chat_scroll.frames.json": {
-   "written": "2026-09-09T18:51:14Z",
+   "written": "2026-09-09T19:37:09Z",
    "from_this_run": true
   },
   "11_chat_scroll.json": {
-   "written": "2026-09-09T18:33:50Z",
+   "written": "2026-09-09T19:36:10Z",
+   "from_this_run": true
+  },
+  "11_chat_scroll.report.json": {
+   "written": "2026-09-09T19:36:09Z",
    "from_this_run": true
   },
   "12_search.json": {
@@ -352,11 +356,11 @@
    "from_this_run": true
   },
   "13_messenger_states.json": {
-   "written": "2026-09-09T17:56:28Z",
+   "written": "2026-09-09T19:56:19Z",
    "from_this_run": true
   },
   "13_messenger_states.report.json": {
-   "written": "2026-09-09T17:56:28Z",
+   "written": "2026-09-09T19:56:19Z",
    "from_this_run": true
   },
   "14_media_viewer.json": {
@@ -392,7 +396,7 @@
    "from_this_run": true
   },
   "crops.json": {
-   "written": "2026-09-09T19:16:00Z",
+   "written": "2026-09-09T19:56:20Z",
    "from_this_run": true
   },
   "dusk_pulse.json": {
@@ -404,27 +408,27 @@
    "from_this_run": true
   },
   "flat.json": {
-   "written": "2026-09-09T19:16:12Z",
+   "written": "2026-09-09T19:56:33Z",
    "from_this_run": true
   },
   "fonts.json": {
-   "written": "2026-09-09T17:44:03Z",
+   "written": "2026-09-09T19:46:45Z",
    "from_this_run": true
   },
   "grain.json": {
-   "written": "2026-09-09T19:16:09Z",
+   "written": "2026-09-09T19:56:30Z",
    "from_this_run": true
   },
   "hairline.json": {
-   "written": "2026-09-09T19:16:15Z",
+   "written": "2026-09-09T19:56:36Z",
    "from_this_run": true
   },
   "hand.json": {
-   "written": "2026-09-09T19:16:08Z",
+   "written": "2026-09-09T19:56:29Z",
    "from_this_run": true
   },
   "haptics.check.json": {
-   "written": "2026-09-09T18:52:23Z",
+   "written": "2026-09-09T19:56:20Z",
    "from_this_run": true
   },
   "haptics.json": {
@@ -432,7 +436,7 @@
    "from_this_run": true
   },
   "manifest.json": {
-   "written": "2026-09-09T17:44:03Z",
+   "written": "2026-09-09T19:46:45Z",
    "from_this_run": true
   },
   "pwa.json": {
@@ -452,23 +456,23 @@
    "from_this_run": true
   },
   "recipes.json": {
-   "written": "2026-09-09T17:44:03Z",
+   "written": "2026-09-09T19:46:46Z",
    "from_this_run": true
   },
   "scroll_webkit.json": {
-   "written": "2026-09-09T18:33:49Z",
+   "written": "2026-09-09T19:36:08Z",
    "from_this_run": true
   },
   "strings.json": {
-   "written": "2026-09-09T17:43:03Z",
+   "written": "2026-09-09T19:45:52Z",
    "from_this_run": true
   },
   "surfaces.json": {
-   "written": "2026-09-09T17:46:24Z",
+   "written": "2026-09-09T19:48:56Z",
    "from_this_run": true
   },
   "tears.json": {
-   "written": "2026-09-09T19:16:08Z",
+   "written": "2026-09-09T19:56:29Z",
    "from_this_run": true
   }
  }
