@@ -270,6 +270,35 @@ void main() {
         : 'refused with "$wasRefused", kept out of the wire for a round, and delivered as seq '
             '${client.byId(no.id)!.seq} when the person asked for it again';
 
+    // a pairing the other phone no longer knows. A pairing is a single slot on the host, so the
+    // moment a second phone pairs the first one's key stops working — and it used to poll with the
+    // dead key for ever, saying only `error`.
+    final second = await Spine.open(
+        NativeStore.openAt('${dir.path}/second.sqlite3'),
+        const Identity(person: Person.teo, device: DeviceKind.pwa));
+    final secondT = LocalTransport(
+        role: TransportRole.client, spine: second, deviceId: 'pwa-second', binding: LocalBinding(port: port));
+    await secondT.start();
+    final again = await hostT.beginPairing();
+    await secondT.completePairing('http://127.0.0.1:$port', again.spoken);
+    for (var i = 0; i < 4; i++) {
+      await sync.once();
+    }
+    cap('pairing_refused').ok = clientT.pairingRefused &&
+        clientT.current.lastError == 'the other phone does not know this pairing';
+    cap('pairing_refused').detail =
+        'after a second phone paired, the first says "${clientT.current.lastError}" rather than '
+        'polling with a key the host has forgotten';
+    await secondT.stop();
+    await second.close();
+    // and this phone pairs again, which is the way back: the person reads what it says and does
+    // the six words once more.
+    final back = await hostT.beginPairing();
+    await clientT.completePairing('http://127.0.0.1:$port', back.spoken);
+    await sync.once();
+    cap('pairing_refused').ok = cap('pairing_refused').ok && !clientT.pairingRefused;
+    cap('pairing_refused').detail = '${cap('pairing_refused').detail}, and pairing again clears it';
+
     // host-offline outbox
     await hostT.stop();
     await host.close();

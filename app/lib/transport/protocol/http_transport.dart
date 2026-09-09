@@ -63,6 +63,13 @@ class HttpTransport implements Transport {
   /// of one.
   String? Function(Event e)? refuses;
 
+  /// How many times in a row the other phone has refused this pairing.
+  int _refusals = 0;
+  static const int _refusalsBeforeSaying = 3;
+
+  /// Whether the other phone has stopped accepting this pairing altogether.
+  bool get pairingRefused => _refusals >= _refusalsBeforeSaying;
+
   TransportStatus _status;
   final StreamController<TransportStatus> _statusCtl = StreamController.broadcast();
   final StreamController<Ephemeral> _ephemeralCtl = StreamController.broadcast();
@@ -211,9 +218,26 @@ class HttpTransport implements Transport {
       throw TransportException(f.what, offline: true);
     }
     if (res.statusCode >= 400) {
-      _set(_status.copyWith(state: res.statusCode == 401 ? LinkState.error : _status.state, lastError: 'HTTP ${res.statusCode}'));
+      // A 401 is the other phone saying it does not know this pairing — not that the wire is down.
+      // One of them is ordinary: a pairing is a single slot on the host, so the moment somebody
+      // pairs a second phone the first one's key stops working and its next poll is refused. It
+      // used to look like an error and keep polling with the dead key for ever, which is what put
+      // the capture's one console error in 14's log. Three in a row is not a blip, and then the
+      // phone says so in words a person can act on rather than going quiet.
+      if (res.statusCode == 401) {
+        _refusals += 1;
+        _set(_status.copyWith(
+          state: LinkState.error,
+          lastError: _refusals >= _refusalsBeforeSaying
+              ? 'the other phone does not know this pairing'
+              : 'HTTP 401',
+        ));
+      } else {
+        _set(_status.copyWith(lastError: 'HTTP ${res.statusCode}'));
+      }
       throw TransportException(res.body, status: res.statusCode);
     }
+    _refusals = 0;
     _set(_status.copyWith(state: LinkState.connected, lastContact: DateTime.now().toUtc(), ourCursor: spine.cursor, clearError: true));
     return res;
   }
