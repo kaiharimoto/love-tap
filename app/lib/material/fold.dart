@@ -429,7 +429,12 @@ class FoldedNote extends StatefulWidget {
   /// Measure the *packed* frames, not the render: pack_assets trims every fold frame to its own
   /// content, so a note takes the room a folded letter takes and grows into the room an open one
   /// does. The render and the asset are different pictures and only one of them is drawn.
-  static const inset = [0.067, 0.064, 0.15, 0.259];
+  ///
+  /// Re-measured after the fold rig grew a bend radius and a deeper tear: the sheet stands a
+  /// little taller in the frame and eats a little further in on the left, so the left inset goes
+  /// from 0.067 to 0.074 and the bottom from 0.259 to 0.248. The left one mattered — the code's
+  /// was *smaller* than the paper's, which is ink over a torn edge.
+  static const inset = [0.074, 0.064, 0.149, 0.248];
 
   /// The writing comes up over the last part of the sequence, while the sheet is settling flat.
   /// Starting it only once the sequence had finished is what left the clip ending on blank paper.

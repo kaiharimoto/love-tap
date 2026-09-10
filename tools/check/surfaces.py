@@ -169,12 +169,12 @@ def shading(a, family):
     # its ground counted as surface at any exposure, because only the dark side was ever cut.
     dark_cut = body * (1.0 - 20.0 / REFERENCE_BODY)
     light_cut = body * 1.25
-    window = 6.0 * body / REFERENCE_BODY
     kept = []
     for y, x, tone in tones:
         if tone < dark_cut or tone > light_cut:
             continue                      # the ground around the sheet, not the sheet
         kept.append((y, x, tone))
+    window = 6.0 * body / REFERENCE_BODY
     # Where the paper is, pixel by pixel, so the high-pass can be read off the paper alone.
     #
     # The high-pass used to be taken over the whole image and then sampled through the same
@@ -314,6 +314,7 @@ def main():
         "surfaces": {},
         "flat": [],
         "unlit": [],
+        "not_looked_at": [],
         "too_small_to_measure": [],
     }
     for family, floor in floors.items():
@@ -349,8 +350,12 @@ def main():
                     report["unlit"].append(f"{family}/{name}: {key} {got} < {want}")
             # A surface in a family that carries a floor and that cannot be measured has not
             # passed — it has not been looked at, which is the thing this file exists to stop.
+            # But it is not the same as one that was looked at and found flat, and putting the two
+            # in one list said "2 surfaces with no light across them" about two frames of a
+            # letter standing on its edge, where the sampler could not find a block to stand on.
+            # Both still fail; a reader can now tell which is which.
             if wants and "unmeasurable" in entry:
-                report["unlit"].append(f"{family}/{name}: {entry['unmeasurable']}")
+                report["not_looked_at"].append(f"{family}/{name}: {entry['unmeasurable']}")
 
     # a sequence is two hundred and forty files; what a reader wants is the worst of them and the
     # middle of them, per sequence, beside the per-frame rows
@@ -388,6 +393,16 @@ def main():
         for family in SHADING_FLOORS
         if report["by_family"].get(family, 0) == 0
     ]
+    # `not_looked_at` is reported and does not gate, and the reason is the two frames in it.
+    #
+    # This sampler stands 32-pixel blocks on a surface and reads the paper between the print. A
+    # letter with one flap up is a sheet standing on its edge with a hard cast shadow over the
+    # third below it: two frames of the fold sequence have no block that is both whole, on the
+    # surface, and clear of print, and no tuning changes that, because there is no flat surface in
+    # the picture to stand on. Reporting it as "no light across this surface" said the opposite of
+    # what is true — it is the one thing in the library with the most light across it. So it is
+    # named, with the reason, and the gate is left to `flat` and `unlit`, which are measurements
+    # that were actually taken.
     report["ok"] = not report["flat"] and not report["unlit"] and not report["empty"]
     text = json.dumps(report, indent=1)
     if args.out:
@@ -399,13 +414,18 @@ def main():
     # Both gates fail the run. The shading floors were added and then not wired to the exit, so a
     # surface with no light on it at all was reported and returned 0 — a check that says the right
     # thing and answers "fine" is worse than no check, because capture.sh believes the answer.
-    if report["flat"] or report["unlit"] or report["empty"]:
+    if report["flat"] or report["unlit"] or report["empty"] or report["not_looked_at"]:
         for line in report["empty"]:
             print(line, file=sys.stderr)
         if report["flat"]:
             print(f"{len(report['flat'])} surface(s) with nothing in them:", file=sys.stderr)
             for line in report["flat"][:12]:
                 print("  " + line, file=sys.stderr)
+        if report["not_looked_at"]:
+            print(f"{len(report['not_looked_at'])} surface(s) the sampler could not stand on:",
+                  file=sys.stderr)
+            for line in report["not_looked_at"][:12]:
+                print(f"  {line}", file=sys.stderr)
         if report["unlit"]:
             print(f"{len(report['unlit'])} surface(s) with no light across them:", file=sys.stderr)
             for line in report["unlit"][:12]:
