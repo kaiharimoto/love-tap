@@ -130,6 +130,15 @@ class PaperPiece extends StatelessWidget {
 
   static Widget none(BuildContext c, Object e, StackTrace? s) => const SizedBox.shrink();
 
+  /// How many pieces have been drawn at the stock's own density, and how many stretched to fit.
+  ///
+  /// The capture reads both. A stretched piece is paper at the wrong size, which is the fault
+  /// behind three separate measurements — the tooth spread thin on a wide sheet, the same ruled
+  /// stock at rule pitches 2.9 times apart across the set, and writing that cannot sit on lines
+  /// whose spacing is different on every screen.
+  static int drawnNative = 0;
+  static int drawnStretched = 0;
+
   /// Which sampler to draw a stock with, from how big it is being drawn.
   ///
   /// Paper being *shrunk* wants a smoothing filter: the ruled lines are a pixel wide at their own
@@ -218,22 +227,55 @@ class PaperPiece extends StatelessWidget {
         Positioned.fill(
           child: LayoutBuilder(builder: (context, box) {
             final dpr = MediaQuery.devicePixelRatioOf(context);
+            // ONE IMAGE PIXEL PER DEVICE PIXEL, wherever there is enough paper for it.
+            //
+            // The app did not know how big a millimetre was. Every stock is printed at 8.57 pixels
+            // to the millimetre, and every piece drew its stock at whatever scale that piece
+            // happened to be — so the same ruled paper appeared at rule pitches from 61.5 to 178.5
+            // device pixels across ten stills, a ratio of 2.9 (logs/lines.json), and the tooth on
+            // a wide sheet was averaged away by the sampler that magnified it (2.52 grey levels
+            // native, 1.26 on the large Settings sheet).
+            //
+            // A sheet of paper is a sheet of paper wherever you meet it. So a piece now takes a
+            // *window* of its stock at the stock's own density, positioned by the seeded patch
+            // offset so no two pieces show the same patch — which is what `windowed` has always
+            // meant, and it was only ever used by the tab strip. At three device pixels to the
+            // point that puts an A5 sheet at 423 logical points across, which is about the width
+            // of a phone, which is the size a note is.
+            //
+            // A piece with more glass than there is paper falls back to covering, because a sheet
+            // with a hole in it is worse than a sheet at the wrong size. `native` says which
+            // happened; the capture counts them.
+            final px = MaterialLibrary.loaded
+                ? MaterialLibrary.instance.stockSize(stock)
+                : null;
+            final native = !windowed &&
+                px != null &&
+                box.maxWidth.isFinite &&
+                box.maxHeight.isFinite &&
+                box.maxWidth * dpr <= px.width &&
+                box.maxHeight * dpr <= px.height;
+            // Counted off the decision that is actually drawn with, not off the one that feeds
+            // it: the first version read `native` while the draw read `atOwnSize`, so breaking the
+            // draw left the counter — and the test that watches it — perfectly happy.
+            final atOwnSize = windowed || native;
+            if (atOwnSize) {
+              PaperPiece.drawnNative += 1;
+            } else {
+              PaperPiece.drawnStretched += 1;
+            }
             return Transform.scale(
-              scale: windowed ? 1.0 : stockScale,
+              scale: atOwnSize ? 1.0 : stockScale,
               alignment: stockAlignment,
               child: Image.asset(
                 paperAsset(stock),
-                // A window shows the sheet at ONE IMAGE PIXEL PER DEVICE PIXEL. Without the scale,
-                // BoxFit.none means one image pixel per *logical* point, which on a phone is three
-                // device pixels — so the tooth was magnified three times and smoothed by the
-                // sampler. A completeness pass measured the result on the tab strip: an interior of
-                // 1.20 grey levels against 19 to 27 for the note paper beside it, on ten of eleven
-                // stills. The shape the anti-goal forbids was sitting in the app's own chrome.
-                scale: windowed ? dpr : 1.0,
-                fit: windowed ? BoxFit.none : BoxFit.cover,
+                scale: atOwnSize ? dpr : 1.0,
+                fit: atOwnSize ? BoxFit.none : BoxFit.cover,
                 alignment: stockAlignment,
                 gaplessPlayback: true,
-                filterQuality: PaperPiece.stockFilter(stock, box.biggest, dpr, stockScale),
+                filterQuality: atOwnSize
+                    ? FilterQuality.none
+                    : PaperPiece.stockFilter(stock, box.biggest, dpr, stockScale),
                 errorBuilder: PaperPiece.none,
               ),
             );

@@ -518,6 +518,13 @@ class CaptureHooks {
       'light': Flags.light,
       'has_dusk_paper': lib?.hasDusk ?? false,
       'paper_stocks': lib?.paper.length ?? 0,
+      // How many pieces on this screen were drawn at the stock's own density and how many were
+      // stretched to fit. A stretched piece is paper at the wrong size, which is the fault behind
+      // three measurements: the tooth spread thin on a wide sheet, the same ruled stock at pitches
+      // 2.9 times apart across the set, and writing that cannot sit on lines whose spacing is
+      // different on every screen.
+      'paper_at_its_own_size': PaperPiece.drawnNative,
+      'paper_stretched_to_fit': PaperPiece.drawnStretched,
       'setup_showing': CaptureBus.setupShowing,
       // a clip of a note opening that does not open is either a sequence nothing asked to play
       // or a sequence whose frames never decoded, and from the outside they look the same
