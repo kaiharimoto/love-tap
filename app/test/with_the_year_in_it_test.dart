@@ -15,6 +15,7 @@ import 'package:desk/material/slip.dart';
 import 'package:desk/regions/chat/chat_region.dart';
 import 'package:desk/regions/moments/moments_region.dart';
 import 'package:desk/regions/pulse/pulse_region.dart';
+import 'package:desk/modules/registry.dart';
 import 'package:desk/regions/us/us_region.dart';
 import 'package:desk/scope.dart';
 import 'package:desk/spine/seed_bundle.dart';
@@ -120,8 +121,35 @@ void main() {
 
   testWidgets('the pulse and the modules have something to say', (tester) async {
     if (absent != null) return markTestSkipped(absent!);
+    // "Asserts only that two regions build without throwing" — a code critic, and they were right:
+    // a region that drew nothing at all passed this. A year of history behind a screen that says
+    // nothing is the failure this test is named for, so it now reads the words on the glass.
+    String words(WidgetTester t) => t
+        .widgetList<Text>(find.byType(Text))
+        .map((w) => w.data ?? '')
+        .where((s) => s.trim().length > 2)
+        .join(' | ');
+
     await draw(tester, const PulseRegion());
+    final pulse = words(tester);
+    expect(pulse.length, greaterThan(40),
+        reason: 'the pulse drew a year of history and said "$pulse"');
+    expect(pulse.toLowerCase(), contains(scope.partner.name.toLowerCase()),
+        reason: 'the pulse never names the person it is about: "$pulse"');
+
     await draw(tester, const UsRegion());
+    final us = words(tester).toLowerCase();
+    // Every module has a sentence for a year of history, and most of them are on the glass at
+    // once — Us is a list and the last of five may be under the fold, which is a layout fact and
+    // not a fault, so the standard is four of the five rather than all of them.
+    var shown = 0;
+    for (final m in kModules) {
+      final glance = m.glance(scope.spine.all);
+      expect(glance.trim(), isNotEmpty, reason: '${m.id} glances nothing over a year');
+      if (us.contains(m.label.toLowerCase()) || us.contains(glance.toLowerCase())) shown++;
+    }
+    expect(shown, greaterThanOrEqualTo(4),
+        reason: 'only $shown of ${kModules.length} modules put anything on the desk: "$us"');
   });
 
   testWidgets('every feeling the year refers to is in the vocabulary', (tester) async {

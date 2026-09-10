@@ -10,26 +10,42 @@
 import 'dart:io';
 
 import 'package:desk/material/assignment.dart';
+import 'package:desk/modules/registry.dart';
 import 'package:desk/spine/types.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// The event kind each module writes and draws.
-const _moduleTypes = {
-  'lib/modules/dates/date_list.dart': 'date_event',
-  'lib/modules/todos/todos_module.dart': 'todo_event',
-  'lib/modules/calendar/calendar_module.dart': 'milestone',
-  'lib/modules/rituals/rituals_module.dart': 'ritual_kept',
-  'lib/modules/shelf/shelf_module.dart': 'passed_on',
-};
+/// Every dart file under lib/modules/, and the event kinds the module it belongs to writes.
+///
+/// This was a hand-written map of five paths to five types, which a code critic read as the
+/// failure it is: a sixth module, or a module that grows a second file, is not in the map and is
+/// therefore not checked, and nothing says so. `kModules` is what the app runs on, and the files
+/// are on the disk; both are read rather than restated.
+Map<String, Set<String>> moduleFiles() {
+  final out = <String, Set<String>>{};
+  for (final dir in Directory('lib/modules').listSync().whereType<Directory>()) {
+    final id = dir.path.split(Platform.pathSeparator).last;
+    final module = kModules.where((m) => m.id == id || dir.path.contains(m.id));
+    if (module.isEmpty) continue;
+    final types = {for (final m in module) ...m.eventTypes};
+    for (final f in dir.listSync(recursive: true).whereType<File>()) {
+      if (f.path.endsWith('.dart')) out[f.path] = types;
+    }
+  }
+  return out;
+}
 
 void main() {
   test('no module names its own stock', () {
+    final files = moduleFiles();
+    expect(files.length, greaterThanOrEqualTo(kModules.length),
+        reason: 'found ${files.length} module files for ${kModules.length} modules');
     final offenders = <String>[];
-    for (final entry in _moduleTypes.entries) {
+    for (final entry in files.entries) {
       final src = File(entry.key).readAsStringSync();
       final literal = RegExp(r"""stock:\s*'([a-z_]+)'""");
       for (final m in literal.allMatches(src)) {
-        offenders.add('${entry.key}: stock: \'${m.group(1)}\' — ask stockForType(\'${entry.value}\')');
+        offenders.add('${entry.key}: stock: \'${m.group(1)}\' — ask stockForType for one of '
+            '${entry.value}');
       }
     }
     expect(offenders, isEmpty,
@@ -49,8 +65,18 @@ void main() {
 
   test('a module type is a real registry type', () {
     final known = {for (final s in kEventTypes) s.id};
-    for (final type in _moduleTypes.values) {
-      expect(known, contains(type), reason: '$type is not in the registry');
+    for (final m in kModules) {
+      for (final type in m.eventTypes) {
+        expect(known, contains(type), reason: '${m.id} writes $type, which is not in the registry');
+      }
+    }
+  });
+
+  test('every module has files under lib/modules and every one of them is read', () {
+    final files = moduleFiles();
+    for (final m in kModules) {
+      expect(files.keys.any((p) => p.contains('/${m.id}/')), isTrue,
+          reason: '${m.id} has no directory under lib/modules, so nothing checks its paper');
     }
   });
 }
