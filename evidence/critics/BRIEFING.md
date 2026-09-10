@@ -54,6 +54,19 @@ thread to move, how far it actually moved, and where it was sitting when it did.
 was a first launch with the year importing (`store: fresh`) or a phone that already had it
 (`store: kept`); the seeded scenes share one browser profile, and only the first is cold.
 
+Five more records are new this cycle, each written because a report last cycle rested on a number
+that was not anywhere. `logs/torn.json` measures the profile every torn edge in the rig is built
+from — self-correlation past the central lobe, against the two-sine shape it replaced, which is
+measured in the same file as a control. `logs/flat.json` takes its floor from the packed library
+rather than from one screenshot, and carries the derivation and a negative control. Each scene log's
+`load.made_of` breaks the first launch into the framework, the library index, the ink plates, the
+desk, the log and the first frame. Each region report may carry `asked_a_motor_for` — every ask the
+app made of a vibration motor, with what answered, which on this machine is nothing, because there
+is no motor in a browser and no phone in this environment; the ask and the answer are different
+things and both are written down. And the chat report carries `replies_on_the_glass`,
+`refusals_on_the_glass` and `clipped_at_an_edge`: a delivered reply with the row it answers, the
+words the other phone refused in, and any row whose ink is outside the frame.
+
 `evidence/frames.json` records, per clip and per run, how many milliseconds each step was worth
 (`runs[].step_ms`), the total app time (`app_seconds`) and the ratio of playback to app time
 (`playback_over_app_time` — 1.0 means real time, 2.0 means the clip plays at half speed). A
