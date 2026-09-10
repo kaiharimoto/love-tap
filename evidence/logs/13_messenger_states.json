@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3576,
+   "ms": 2810,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 6938
+   "ms": 3453
   },
   {
    "do": "wait",
-   "ms": 1706
+   "ms": 1703
   },
   {
    "do": "scrollTo",
-   "ms": 5861
+   "ms": 3772
   },
   {
    "do": "wait",
@@ -32,23 +32,23 @@
   },
   {
    "do": "far",
-   "ms": 706
+   "ms": 705
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2104
   },
   {
    "do": "far",
-   "ms": 1603
+   "ms": 705
   },
   {
    "do": "wait",
-   "ms": 1104
+   "ms": 1103
   },
   {
    "do": "stage",
-   "ms": 25422
+   "ms": 16736
   },
   {
    "do": "wait",
@@ -56,7 +56,7 @@
   },
   {
    "do": "far",
-   "ms": 713
+   "ms": 1954
   },
   {
    "do": "wait",
@@ -64,31 +64,31 @@
   },
   {
    "do": "far",
-   "ms": 1345
+   "ms": 705
   },
   {
    "do": "sync",
-   "ms": 730
+   "ms": 719
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1905
   },
   {
    "do": "openSender",
-   "ms": 3063
+   "ms": 2010
   },
   {
    "do": "wait",
-   "ms": 1203
+   "ms": 1201
   },
   {
    "do": "scrollTo",
-   "ms": 3510
+   "ms": 2818
   },
   {
    "do": "far",
-   "ms": 2328
+   "ms": 705
   },
   {
    "awaited": "partner_typing",
@@ -97,19 +97,19 @@
   },
   {
    "do": "awaitView",
-   "ms": 17223
+   "ms": 16258
   },
   {
    "do": "slowSend",
-   "ms": 7184
+   "ms": 5910
   },
   {
    "do": "shot",
-   "ms": 3603
+   "ms": 3129
   },
   {
    "do": "report",
-   "ms": 703
+   "ms": 702
   }
  ],
  "shots": [
@@ -123,11 +123,136 @@
    "region": 1,
    "view": {
     "region": "chat",
+    "visible": [
+     "0001MCJ1M02W5ESYRSNWK82NX1",
+     "0001MCJ1M02W5ESYRSNWK82NX5",
+     "0001MCJ1M02W5ESYRSNWK82NX6",
+     "0001MCJ1M02W5ESYRSNWK82NX7",
+     "0001MCJ1M02W5ESYRSNWK82NWZ",
+     "0001MCJ1M02W5ESYRSNWK82NX9"
+    ],
+    "whole_on_the_glass": [
+     "0001MCJ1M02W5ESYRSNWK82NX5",
+     "0001MCJ1M02W5ESYRSNWK82NX6",
+     "0001MCJ1M02W5ESYRSNWK82NX7",
+     "0001MCJ1M02W5ESYRSNWK82NWZ",
+     "0001MCJ1M02W5ESYRSNWK82NX9"
+    ],
+    "clipped_at_an_edge": {
+     "0001MCJ1M02W5ESYRSNWK82NX1": 0.008
+    },
+    "delivery": {
+     "0001MCJ1M02W5ESYRSNWK82NX1": {
+      "state": "sent",
+      "says": "sent"
+     },
+     "0001MCJ1M02W5ESYRSNWK82NX5": {
+      "state": "sent",
+      "says": "sent"
+     },
+     "0001MCJ1M02W5ESYRSNWK82NX6": {
+      "state": "sent",
+      "says": "sent"
+     },
+     "0001MCJ1M02W5ESYRSNWK82NX7": {
+      "state": "sent",
+      "says": "sent"
+     },
+     "0001MCJ1M02W5ESYRSNWK82NWZ": {
+      "state": "refused",
+      "says": "it would not go"
+     },
+     "0001MCJ1M02W5ESYRSNWK82NX9": {
+      "state": "sending",
+      "says": "going"
+     }
+    },
+    "refusals_on_the_glass": {
+     "0001MCJ1M02W5ESYRSNWK82NWZ": "this phone is on an older version and cannot read that"
+    },
+    "states_on_the_glass": {
+     "sent": 3,
+     "it would not go": 1,
+     "going": 1
+    },
+    "reactions": {},
+    "edited": [
+     "0001MCJ1M02W5ESYRSNWK82NX1"
+    ],
+    "taken_back": [],
+    "scroll": {
+     "first": 8070,
+     "last": 8076,
+     "of": 8076
+    },
+    "paper": [
+     "0001MCJ1M02W5ESYRSNWK82NX1",
+     "0001MCJ1M02W5ESYRSNWK82NX5",
+     "0001MCJ1M02W5ESYRSNWK82NX6",
+     "0001MCJ1M02W5ESYRSNWK82NX7",
+     "0001MCJ1M02W5ESYRSNWK82NWZ",
+     "0001MCJ1M02W5ESYRSNWK82NX9"
+    ],
+    "paper_whole_on_the_glass": 5,
+    "rows_cost": [
+     {
+      "row": 8070,
+      "type": "message",
+      "tall": 129,
+      "top": -128
+     },
+     {
+      "row": 8071,
+      "type": "message",
+      "tall": 198,
+      "top": 1
+     },
+     {
+      "row": 8072,
+      "type": "message",
+      "tall": 80,
+      "top": 199
+     },
+     {
+      "row": 8073,
+      "type": "message",
+      "tall": 122,
+      "top": 279
+     },
+     {
+      "row": 8074,
+      "type": "message",
+      "tall": 137,
+      "top": 401
+     },
+     {
+      "row": 8075,
+      "type": "message",
+      "tall": 116,
+      "top": 538
+     }
+    ],
+    "viewport_tall": 663.5,
     "composer": "the second one, then",
     "attaching": true,
     "replying_to": "0001M2ZNX8AF4811Y2F7FNAGMG",
+    "replies_on_the_glass": {
+     "0001MCJ1M02W5ESYRSNWK82NX5": {
+      "id": "0001M2ZNX8AF4811Y2F7FNAGMG",
+      "seq": 14053,
+      "author": "noor",
+      "device": "android",
+      "ts": 1788454361000,
+      "type": "message",
+      "refs": [],
+      "blobs": [],
+      "payload": {
+       "text": "leaving now. dont cut the end off before i get there"
+      }
+     }
+    },
     "editing": null,
-    "partner_typing": true,
+    "anchor": null,
     "kinds": {
      "message": 6
     },
@@ -137,74 +262,39 @@
      "message_delete": 0,
      "read_marker": 0
     },
-    "delivery": {
-     "0001MCJ1M0MK55X942MB9ZNJBC": {
-      "state": "sent",
-      "says": "sent"
-     },
-     "0001MCJ1M0MK55X942MB9ZNJBG": {
-      "state": "sent",
-      "says": "sent"
-     },
-     "0001MCJ1M0MK55X942MB9ZNJBH": {
-      "state": "sent",
-      "says": "sent"
-     },
-     "0001MCJ1M0MK55X942MB9ZNJBJ": {
-      "state": "sent",
-      "says": "sent"
-     },
-     "0001MCJ1M0MK55X942MB9ZNJBA": {
-      "state": "refused",
-      "says": "it would not go"
-     },
-     "0001MCJ1M0MK55X942MB9ZNJBM": {
-      "state": "sending",
-      "says": "going"
-     }
-    },
-    "states_on_the_glass": {
-     "sent": 3,
-     "it would not go": 1,
-     "going": 1
-    },
-    "reactions": {},
-    "edited": [
-     "0001MCJ1M0MK55X942MB9ZNJBC"
-    ],
-    "taken_back": []
+    "partner_typing": true
    },
    "visible": [
-    "0001MCJ1M0MK55X942MB9ZNJBC",
-    "0001MCJ1M0MK55X942MB9ZNJBG",
-    "0001MCJ1M0MK55X942MB9ZNJBH",
-    "0001MCJ1M0MK55X942MB9ZNJBJ",
-    "0001MCJ1M0MK55X942MB9ZNJBA",
-    "0001MCJ1M0MK55X942MB9ZNJBM"
+    "0001MCJ1M02W5ESYRSNWK82NX1",
+    "0001MCJ1M02W5ESYRSNWK82NX5",
+    "0001MCJ1M02W5ESYRSNWK82NX6",
+    "0001MCJ1M02W5ESYRSNWK82NX7",
+    "0001MCJ1M02W5ESYRSNWK82NWZ",
+    "0001MCJ1M02W5ESYRSNWK82NX9"
    ],
    "paper": [
-    "0001MCJ1M0MK55X942MB9ZNJBC",
-    "0001MCJ1M0MK55X942MB9ZNJBG",
-    "0001MCJ1M0MK55X942MB9ZNJBH",
-    "0001MCJ1M0MK55X942MB9ZNJBJ",
-    "0001MCJ1M0MK55X942MB9ZNJBA",
-    "0001MCJ1M0MK55X942MB9ZNJBM"
+    "0001MCJ1M02W5ESYRSNWK82NX1",
+    "0001MCJ1M02W5ESYRSNWK82NX5",
+    "0001MCJ1M02W5ESYRSNWK82NX6",
+    "0001MCJ1M02W5ESYRSNWK82NX7",
+    "0001MCJ1M02W5ESYRSNWK82NWZ",
+    "0001MCJ1M02W5ESYRSNWK82NX9"
    ],
    "tears": {
-    "0001MCJ1M0MK55X942MB9ZNJBC": "tear_042",
-    "0001MCJ1M0MK55X942MB9ZNJBG": "tear_009",
-    "0001MCJ1M0MK55X942MB9ZNJBH": "tear_031",
-    "0001MCJ1M0MK55X942MB9ZNJBJ": "tear_051",
-    "0001MCJ1M0MK55X942MB9ZNJBA": "tear_016",
-    "0001MCJ1M0MK55X942MB9ZNJBM": "tear_048"
+    "0001MCJ1M02W5ESYRSNWK82NX1": "tear_042",
+    "0001MCJ1M02W5ESYRSNWK82NX5": "tear_009",
+    "0001MCJ1M02W5ESYRSNWK82NX6": "tear_031",
+    "0001MCJ1M02W5ESYRSNWK82NX7": "tear_051",
+    "0001MCJ1M02W5ESYRSNWK82NWZ": "tear_023",
+    "0001MCJ1M02W5ESYRSNWK82NX9": "tear_014"
    },
    "stocks": {
-    "0001MCJ1M0MK55X942MB9ZNJBC": "legal_02",
-    "0001MCJ1M0MK55X942MB9ZNJBG": "legal_01",
-    "0001MCJ1M0MK55X942MB9ZNJBH": "legal_02",
-    "0001MCJ1M0MK55X942MB9ZNJBJ": "legal_01",
-    "0001MCJ1M0MK55X942MB9ZNJBA": "legal_01",
-    "0001MCJ1M0MK55X942MB9ZNJBM": "looseleaf_03"
+    "0001MCJ1M02W5ESYRSNWK82NX1": "legal_01",
+    "0001MCJ1M02W5ESYRSNWK82NX5": "lined_01",
+    "0001MCJ1M02W5ESYRSNWK82NX6": "looseleaf_03",
+    "0001MCJ1M02W5ESYRSNWK82NX7": "looseleaf_04",
+    "0001MCJ1M02W5ESYRSNWK82NWZ": "lined_02",
+    "0001MCJ1M02W5ESYRSNWK82NX9": "lined_02"
    },
    "scroll": {
     "first": 8070,
@@ -224,22 +314,27 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 2282,
+   "paper_stretched_to_fit": 33,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 139,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "sensation": null,
+   "the_launch_took": {
+    "the framework": 7,
+    "the library index": 22,
+    "the ink plates": 40,
+    "the desk": 133,
+    "the log": 618,
+    "the first frame": 376,
+    "everything": 1196
+   },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 6,
-    "pushed": 10,
+    "rounds": 7,
+    "pushed": 9,
     "refused": 1,
     "pulled": 10,
     "blobs_fetched": 0,
@@ -257,8 +352,8 @@
      "peer_cursor": 14073,
      "our_cursor": 14073,
      "last_error": null,
-     "since": "2026-09-09T22:42:00.272Z",
-     "last_contact": "2026-09-09T22:43:29.419Z"
+     "since": "2026-09-10T03:40:23.597Z",
+     "last_contact": "2026-09-10T03:41:32.302Z"
     }
    },
    "ambient": {
@@ -266,17 +361,31 @@
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "13_messenger_states.png",
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 8827,
+ "cold_ms": 2330,
  "load": {
-  "ms": 8827,
-  "store": "fresh",
-  "profile": "profile_seeded"
+  "ms": 2330,
+  "store": "kept",
+  "profile": "profile_seeded",
+  "made_of": {
+   "the framework": 7,
+   "the library index": 22,
+   "the ink plates": 40,
+   "the desk": 133,
+   "the log": 618,
+   "the first frame": 376,
+   "everything": 1196
+  }
  },
  "far": [
   {

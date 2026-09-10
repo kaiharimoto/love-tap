@@ -10,41 +10,41 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2480,
+   "ms": 2618,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3306
+   "ms": 3419
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1702
   },
   {
    "do": "search",
-   "ms": 3810
+   "ms": 4694
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1903
   },
   {
    "do": "searchFacet",
-   "ms": 1367
+   "ms": 1209
   },
   {
    "do": "wait",
-   "ms": 1603
+   "ms": 1602
   },
   {
    "do": "shot",
-   "ms": 3173
+   "ms": 3668
   },
   {
    "do": "report",
-   "ms": 703
+   "ms": 702
   }
  ],
  "shots": [
@@ -122,11 +122,22 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 230,
+   "paper_stretched_to_fit": 2,
    "setup_showing": false,
    "fold": {
     "sequence": null
    },
    "sensation": null,
+   "the_launch_took": {
+    "the framework": 6,
+    "the library index": 12,
+    "the ink plates": 43,
+    "the desk": 121,
+    "the log": 634,
+    "the first frame": 366,
+    "everything": 1182
+   },
    "sync": {
     "transport": "local",
     "role": "client",
@@ -139,6 +150,7 @@
     "pending": 0,
     "refused_in_the_outbox": 0,
     "cursor": 14062,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
@@ -147,8 +159,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-09T17:54:40.628Z",
-     "last_contact": "2026-09-09T17:54:42.718Z"
+     "since": "2026-09-10T03:39:58.670Z",
+     "last_contact": "2026-09-10T03:40:00.831Z"
     }
    },
    "ambient": {
@@ -156,17 +168,31 @@
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "12_search.png",
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2187,
+ "cold_ms": 2350,
  "load": {
-  "ms": 2187,
+  "ms": 2350,
   "store": "kept",
-  "profile": "profile_seeded"
+  "profile": "profile_seeded",
+  "made_of": {
+   "the framework": 6,
+   "the library index": 12,
+   "the ink plates": 43,
+   "the desk": 121,
+   "the log": 634,
+   "the first frame": 366,
+   "everything": 1182
+  }
  },
  "problems": [],
  "ok": true,

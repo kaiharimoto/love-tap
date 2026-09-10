@@ -98,10 +98,12 @@
  "light": "dusk",
  "has_dusk_paper": true,
  "paper_stocks": 54,
+ "paper_at_its_own_size": 208,
+ "paper_stretched_to_fit": 3,
  "setup_showing": false,
  "fold": {
   "sequence": "unfold_thirds",
-  "length": 139,
+  "length": 142,
   "decoded": 24,
   "decoding": 0,
   "playhead": 0,
@@ -109,6 +111,15 @@
   "held_to": 23
  },
  "sensation": null,
+ "the_launch_took": {
+  "the framework": 7,
+  "the library index": 18,
+  "the ink plates": 33,
+  "the desk": 121,
+  "the log": 5949,
+  "the first frame": 400,
+  "everything": 6528
+ },
  "sync": {
   "transport": "local",
   "role": "client",
@@ -121,6 +132,7 @@
   "pending": 1,
   "refused_in_the_outbox": 0,
   "cursor": 14061,
+  "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
@@ -129,7 +141,7 @@
    "peer_cursor": null,
    "our_cursor": 14061,
    "last_error": null,
-   "since": "2026-09-09T17:58:54.855Z",
+   "since": "2026-09-10T03:45:48.120Z",
    "last_contact": null
   }
  },
@@ -138,6 +150,11 @@
   "pocket_feeling": "ugh",
   "pocket_at": 1788464400000,
   "allowed_to_interrupt": false,
+  "what_each_surface_may_say": {
+   "standing_line": "their state, in the couple's own words, assembled here from the log",
+   "pocket": "the feeling's own name and its sound, because the app is running and has it",
+   "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+  },
   "held_by_the_phone": []
  },
  "at": "crops/dusk_pulse.png",

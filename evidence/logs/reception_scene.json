@@ -10,47 +10,47 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2904
+   "ms": 2902
   },
   {
    "do": "goTo",
-   "ms": 3491
+   "ms": 3136
   },
   {
    "do": "step",
-   "ms": 1275
+   "ms": 1408
   },
   {
    "do": "step",
-   "ms": 1188
-  },
-  {
-   "do": "wait",
-   "ms": 1003
-  },
-  {
-   "do": "shot",
-   "ms": 1570
-  },
-  {
-   "do": "goTo",
-   "ms": 3935
-  },
-  {
-   "do": "step",
-   "ms": 1574
-  },
-  {
-   "do": "step",
-   "ms": 1198
+   "ms": 1222
   },
   {
    "do": "wait",
    "ms": 1002
   },
   {
+   "do": "shot",
+   "ms": 1536
+  },
+  {
+   "do": "goTo",
+   "ms": 4322
+  },
+  {
+   "do": "step",
+   "ms": 1624
+  },
+  {
+   "do": "step",
+   "ms": 1269
+  },
+  {
+   "do": "wait",
+   "ms": 1004
+  },
+  {
    "do": "report",
-   "ms": 711
+   "ms": 714
   },
   {
    "push": {
@@ -61,7 +61,7 @@
   },
   {
    "do": "push",
-   "ms": 2211
+   "ms": 2213
   },
   {
    "do": "wait",
@@ -69,15 +69,15 @@
   },
   {
    "do": "screen",
-   "ms": 4429
+   "ms": 3870
   },
   {
    "do": "closeApp",
-   "ms": 728
+   "ms": 729
   },
   {
    "do": "wait",
-   "ms": 1603
+   "ms": 1602
   },
   {
    "push": {
@@ -92,7 +92,7 @@
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2103
   },
   {
    "do": "screen",
@@ -107,7 +107,7 @@
   },
   {
    "do": "push",
-   "ms": 2208
+   "ms": 2210
   },
   {
    "do": "wait",
@@ -115,7 +115,7 @@
   },
   {
    "do": "screen",
-   "ms": 778
+   "ms": 777
   },
   {
    "push": {
@@ -126,11 +126,11 @@
   },
   {
    "do": "push",
-   "ms": 2208
+   "ms": 2209
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2105
   },
   {
    "do": "screen",
@@ -138,7 +138,7 @@
   },
   {
    "do": "notifications",
-   "ms": 1168
+   "ms": 1142
   }
  ],
  "shots": [
@@ -264,17 +264,22 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 343,
+   "paper_stretched_to_fit": 5,
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 139,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "sensation": null,
+   "the_launch_took": {
+    "the framework": 6,
+    "the library index": 17,
+    "the ink plates": 23,
+    "the desk": 83,
+    "the log": 470,
+    "the first frame": 241,
+    "everything": 840
+   },
    "sync": {
     "transport": "local",
     "role": "client",
@@ -287,6 +292,7 @@
     "pending": 1,
     "refused_in_the_outbox": 0,
     "cursor": 14061,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
@@ -295,7 +301,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-09T17:57:58.510Z",
+     "since": "2026-09-10T03:44:52.828Z",
      "last_contact": null
     }
    },
@@ -304,17 +310,31 @@
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": true,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "crops/reception_open.png",
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 7347,
+ "cold_ms": 2290,
  "load": {
-  "ms": 7347,
-  "store": "fresh",
-  "profile": "profile_reception"
+  "ms": 2290,
+  "store": "kept",
+  "profile": "profile_reception",
+  "made_of": {
+   "the framework": 6,
+   "the library index": 17,
+   "the ink plates": 23,
+   "the desk": 83,
+   "the log": 470,
+   "the first frame": 241,
+   "everything": 840
+  }
  },
  "app_open": false,
  "reception": {
@@ -373,6 +393,46 @@
     "body": "said how they are",
     "shown": true,
     "why": null
+   },
+   {
+    "at": 1789011915442,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789011925953,
+    "kind": "message",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "wrote something",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789011931148,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789011936201,
+    "kind": "state_declared",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "said how they are",
+    "shown": true,
+    "why": null
    }
   ],
   "settings": {
@@ -407,9 +467,6 @@
   "note": "Chromium on a Linux virtual display. WebKit is what the other fourteen scenes are shot in, and under the iPhone-Safari emulation this harness uses it has no Notification and no PushManager — which is what a Safari tab on an iPhone has, since iOS gives the push API only to a home-screen web app; and even without that emulation the permission cannot be granted there. So this is not an iPhone banner, there is no lock screen in evidence, and what an installed iOS web app does with the same call is not shown anywhere in this build."
  },
  "problems": [],
- "refused_requests": [
-  "404 GET http://127.0.0.1:8796/assets/assets/seed/voice/index.json"
- ],
  "ok": true,
  "steps_landed": true
 }

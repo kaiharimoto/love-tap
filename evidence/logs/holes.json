@@ -1,0 +1,116 @@
+{
+ "how": "a pixel under luma 30.0 that is not on paper, nor within 3 pixels of it. Writing is on paper; a shadow leaking past the piece it belongs to is beside it",
+ "why": "the baked contact shadows are black at alpha 255 over a third of their area, because that third is under the paper. Anywhere the shadow does not line up with the piece it belongs to, that black is on the desk.",
+ "dark": 30.0,
+ "allow": 200,
+ "what_it_still_counts_that_is_not_a_hole": "ink at the very edge of a sheet. 05_settings reads 130 pixels at luma 0, and they are the rule under the emphasised word `quietly` \u2014 an 84-pixel horizontal stroke on the last line of a sheet, at (953-1037, 2941). A closing fills a letter-shaped hole inside a sheet, which is why 01_pulse's candle went from 5 to 0, but it cannot fill a notch that is open to the outside, and a dark stroke at a sheet's boundary has the same neighbourhood as a shadow just past it. This is what the allowance is for, and the densest-writing control measures 51 by the same code.",
+ "controls": {
+  "the_densest_handwriting_in_the_set": {
+   "pixels_darker_than_ink": 432,
+   "beside_the_paper": 51,
+   "darkest": 21.67,
+   "darkest_beside_a_sheet": 23.0,
+   "ring_pixels": 3411,
+   "worst_at": [
+    1254,
+    501
+   ],
+   "spread": [
+    1206,
+    429,
+    1256,
+    503
+   ],
+   "measured_at": "three times the radius, because the crop is at three times the scale"
+  },
+  "a_shadow_out_from_under_its_sheet": {
+   "beside_the_paper": 300,
+   "of": 600,
+   "note": "a six-pixel black band along a sheet's edge. The first three pixels are inside the grown paper mask and are not counted, which is the point of growing it: the soft edge of a real sheet is not a fault."
+  }
+ },
+ "stills": {
+  "01_pulse.png": {
+   "pixels_darker_than_ink": 701,
+   "beside_the_paper": 0,
+   "darkest": 0.0,
+   "darkest_beside_a_sheet": 48.0,
+   "ring_pixels": 185778
+  },
+  "02_chat.png": {
+   "pixels_darker_than_ink": 517,
+   "beside_the_paper": 0,
+   "darkest": 7.67,
+   "darkest_beside_a_sheet": 36.0,
+   "ring_pixels": 232614
+  },
+  "03_us.png": {
+   "pixels_darker_than_ink": 0,
+   "beside_the_paper": 0,
+   "darkest": 46.0,
+   "darkest_beside_a_sheet": 47.0,
+   "ring_pixels": 256909
+  },
+  "04_moments.png": {
+   "pixels_darker_than_ink": 0,
+   "beside_the_paper": 0,
+   "darkest": 30.33,
+   "darkest_beside_a_sheet": 34.67,
+   "ring_pixels": 336753
+  },
+  "05_settings.png": {
+   "pixels_darker_than_ink": 2124,
+   "beside_the_paper": 130,
+   "darkest": 0.0,
+   "darkest_beside_a_sheet": 0.0,
+   "ring_pixels": 176256,
+   "worst_at": [
+    986,
+    2941
+   ],
+   "spread": [
+    953,
+    2941,
+    1037,
+    2942
+   ]
+  },
+  "10_first_run.png": {
+   "pixels_darker_than_ink": 0,
+   "beside_the_paper": 0,
+   "darkest": 46.0,
+   "darkest_beside_a_sheet": 47.33,
+   "ring_pixels": 122094
+  },
+  "12_search.png": {
+   "pixels_darker_than_ink": 0,
+   "beside_the_paper": 0,
+   "darkest": 36.67,
+   "darkest_beside_a_sheet": 39.0,
+   "ring_pixels": 384272
+  },
+  "13_messenger_states.png": {
+   "pixels_darker_than_ink": 0,
+   "beside_the_paper": 0,
+   "darkest": 46.0,
+   "darkest_beside_a_sheet": 46.0,
+   "ring_pixels": 244440
+  },
+  "14_media_viewer.png": {
+   "pixels_darker_than_ink": 0,
+   "beside_the_paper": 0,
+   "darkest": 38.33,
+   "darkest_beside_a_sheet": 46.67,
+   "ring_pixels": 121203
+  },
+  "17_setup_pwa.png": {
+   "pixels_darker_than_ink": 0,
+   "beside_the_paper": 0,
+   "darkest": 48.67,
+   "darkest_beside_a_sheet": 48.67,
+   "ring_pixels": 239274
+  }
+ },
+ "ok": true,
+ "stills_with_a_hole_in_them": 0
+}

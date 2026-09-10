@@ -2,10 +2,6 @@
  "region": 1,
  "view": {
   "region": "chat",
-  "composer": null,
-  "attaching": null,
-  "replying_to": null,
-  "editing": null,
   "partner_typing": false
  },
  "visible": [],
@@ -13,7 +9,7 @@
  "tears": {},
  "stocks": {},
  "scroll": null,
- "now": "2026-09-09T17:57:25.936Z",
+ "now": "2026-09-10T03:44:26.040Z",
  "driven_ms": 0,
  "seed": 20260903,
  "events": 0,
@@ -26,11 +22,22 @@
  "light": "day",
  "has_dusk_paper": true,
  "paper_stocks": 54,
+ "paper_at_its_own_size": 34,
+ "paper_stretched_to_fit": 0,
  "setup_showing": true,
  "fold": {
   "sequence": null
  },
  "sensation": null,
+ "the_launch_took": {
+  "the framework": 8,
+  "the library index": 19,
+  "the ink plates": 39,
+  "the desk": 144,
+  "the log": 66,
+  "the first frame": 388,
+  "everything": 664
+ },
  "sync": {
   "transport": "local",
   "role": "client",
@@ -43,6 +50,7 @@
   "pending": 0,
   "refused_in_the_outbox": 0,
   "cursor": 0,
+  "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
@@ -51,7 +59,7 @@
    "peer_cursor": null,
    "our_cursor": 0,
    "last_error": null,
-   "since": "2026-09-09T17:57:20.499Z",
+   "since": "2026-09-10T03:44:20.552Z",
    "last_contact": null
   }
  },
@@ -60,6 +68,11 @@
   "pocket_feeling": null,
   "pocket_at": null,
   "allowed_to_interrupt": false,
+  "what_each_surface_may_say": {
+   "standing_line": "their state, in the couple's own words, assembled here from the log",
+   "pocket": "the feeling's own name and its sound, because the app is running and has it",
+   "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+  },
   "held_by_the_phone": []
  },
  "at": "17_setup_pwa.png",

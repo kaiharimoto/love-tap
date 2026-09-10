@@ -5,7 +5,7 @@
   "paired": true,
   "devices": [
    "android-capture",
-   "pwa-mtuec711"
+   "pwa-mtuz8crk"
   ],
   "link": "connected",
   "authored_feelings": 2
@@ -28,11 +28,22 @@
  "light": "day",
  "has_dusk_paper": true,
  "paper_stocks": 54,
+ "paper_at_its_own_size": 160,
+ "paper_stretched_to_fit": 2,
  "setup_showing": false,
  "fold": {
   "sequence": null
  },
  "sensation": null,
+ "the_launch_took": {
+  "the framework": 8,
+  "the library index": 16,
+  "the ink plates": 45,
+  "the desk": 146,
+  "the log": 620,
+  "the first frame": 374,
+  "everything": 1209
+ },
  "sync": {
   "transport": "local",
   "role": "client",
@@ -45,6 +56,7 @@
   "pending": 0,
   "refused_in_the_outbox": 0,
   "cursor": 14062,
+  "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
@@ -53,8 +65,8 @@
    "peer_cursor": null,
    "our_cursor": 14062,
    "last_error": null,
-   "since": "2026-09-09T17:54:25.222Z",
-   "last_contact": "2026-09-09T17:54:27.454Z"
+   "since": "2026-09-10T03:39:42.776Z",
+   "last_contact": "2026-09-10T03:39:45.033Z"
   }
  },
  "ambient": {
@@ -62,6 +74,11 @@
   "pocket_feeling": "ugh",
   "pocket_at": 1788464400000,
   "allowed_to_interrupt": false,
+  "what_each_surface_may_say": {
+   "standing_line": "their state, in the couple's own words, assembled here from the log",
+   "pocket": "the feeling's own name and its sound, because the app is running and has it",
+   "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+  },
   "held_by_the_phone": []
  },
  "at": "05_settings.png",
