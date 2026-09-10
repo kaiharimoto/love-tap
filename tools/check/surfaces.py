@@ -414,7 +414,13 @@ def main():
     # Both gates fail the run. The shading floors were added and then not wired to the exit, so a
     # surface with no light on it at all was reported and returned 0 — a check that says the right
     # thing and answers "fine" is worse than no check, because capture.sh believes the answer.
-    if report["flat"] or report["unlit"] or report["empty"] or report["not_looked_at"]:
+    # The exit code is `ok`, and it did not used to be: `not_looked_at` was split out of `unlit`
+    # and taken out of the verdict, and this line was left gating on it. So the twelfth capture
+    # recorded `surfaces` as missing with the reason "a rendered surface in the library has nothing
+    # in it" while the report it wrote in the same breath said ok: true, 260 surfaces read, none of
+    # them flat — over two fold frames the sampler could not stand a block on. A check whose exit
+    # code disagrees with its own verdict is worse than no check.
+    if not report["ok"] or report["not_looked_at"]:
         for line in report["empty"]:
             print(line, file=sys.stderr)
         if report["flat"]:
@@ -430,7 +436,8 @@ def main():
             print(f"{len(report['unlit'])} surface(s) with no light across them:", file=sys.stderr)
             for line in report["unlit"][:12]:
                 print("  " + line, file=sys.stderr)
-        return 1
+        if not report["ok"]:
+            return 1
     unmeasured = [k for k, v in report["surfaces"].items() if "unmeasurable" in v]
     print(f"{report['read']} surfaces read, none of them flat, none of them unlit"
           + (f", {len(unmeasured)} too printed-on to measure" if unmeasured else ""))
