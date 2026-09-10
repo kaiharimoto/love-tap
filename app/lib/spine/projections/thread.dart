@@ -45,6 +45,7 @@ class ThreadItem {
     required this.replyTo,
     required this.delivery,
     required this.writtenEarlier,
+    this.refusedBecause,
   });
 
   final Event event;
@@ -64,6 +65,15 @@ class ThreadItem {
   /// Authored well before it arrived (sent from the outbox after a gap).
   final bool writtenEarlier;
 
+  /// Why the other phone would not take it, in its own words.
+  ///
+  /// The far side refuses with a reason — "this phone is on an older version and cannot read
+  /// that" — and the spine has kept it since refusals were added. The row said `it would not go`
+  /// and offered `send it again` and never said why, so a messenger critic read the reason in the
+  /// scene script and in the log and nowhere on the glass. A refusal a person cannot act on is a
+  /// dead end however many ways out you draw beside it.
+  final String? refusedBecause;
+
   String get id => event.id;
   String get type => event.type;
   Person get author => event.author;
@@ -82,6 +92,7 @@ class ThreadItem {
   bool drawsTheSameAs(ThreadItem other) {
     if (identical(this, other)) return true;
     if (event.id != other.event.id ||
+        refusedBecause != other.refusedBecause ||
         event.seq != other.event.seq ||
         text != other.text ||
         edited != other.edited ||
@@ -405,6 +416,7 @@ class ThreadProjector {
         replyTo: replyTo,
         delivery: delivery,
         writtenEarlier: e.seq == null ? false : (_arrivalHint(e) ?? false),
+        refusedBecause: delivery == Delivery.refused ? refused[e.id] : null,
       );
     }
     _dirty.clear();

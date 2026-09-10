@@ -361,6 +361,12 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         },
         // counted over the rows that are wholly in the frame, because this number is a claim
         // about the picture
+        // and the words the other phone refused in, where a row carries them
+        'refusals_on_the_glass': {
+          for (final p in shown)
+            if (items[p.index].refusedBecause != null)
+              items[p.index].id: items[p.index].refusedBecause,
+        },
         'states_on_the_glass': {
           for (final d in {
             for (final p in shown)

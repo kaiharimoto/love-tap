@@ -311,6 +311,18 @@ class _Margin extends StatelessWidget {
                     color: Pen.red, decoration: TextDecoration.underline,
                     decorationColor: Pen.red.withValues(alpha: 0.45))),
           ),
+        // and what the other phone said about it. The far side refuses with a reason in its own
+        // words and the spine has kept it since refusals were added; the row said `it would not
+        // go`, offered `send it again`, and never said why, so a messenger critic found the
+        // reason in the scene script and in the log and nowhere on the glass.
+        if (mine && item.refusedBecause != null)
+          Padding(
+            padding: const EdgeInsets.only(left: 6),
+            child: Text(item.refusedBecause!,
+                style: Hands.margin(size: 12).copyWith(color: Pen.margin),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis),
+          ),
       ],
     );
   }
