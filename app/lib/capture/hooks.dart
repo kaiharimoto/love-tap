@@ -8,6 +8,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/painting.dart' show PaintingBinding;
 import 'package:flutter/widgets.dart' show ClampingScrollSimulation;
 
 import '../feelings/builtins.dart';
@@ -382,8 +383,20 @@ class CaptureHooks {
     // and no paper still on its way: a piece keeps its room and paints nothing until its mask has
     // decoded, so a frame grabbed now is a frame with a hole in it where a note should be.
     final masks = MaskCache.decoding;
-    if ((b['reading'] ?? 0) == 0 && (b['waiting'] ?? 0) == 0 && masks == 0) return 'ok';
-    return 'reading ${b['reading']}, waiting ${b['waiting']}, decoding $masks';
+    // And no *stock* still on its way, which is not the same thing and was not being waited for.
+    //
+    // A piece's tear mask goes through MaskCache and its stock goes through Flutter's own image
+    // cache, and only the first was counted here. So a piece whose mask had arrived and whose
+    // stock had not drew its torn edge over the flat fallback colour — a perfectly flat cream
+    // shape with a real fringe on it, which is the exact shape the material row fails a build for.
+    // Measured on the twelfth capture: one 80-pixel window of 04_moments at standard deviation
+    // 0.017 grey levels, inside a voice-note tile whose fringe is plainly drawn. It is not a fill
+    // standing in for paper; it is paper that had not arrived when the shutter opened.
+    final stock = PaintingBinding.instance.imageCache.pendingImageCount;
+    if ((b['reading'] ?? 0) == 0 && (b['waiting'] ?? 0) == 0 && masks == 0 && stock == 0) {
+      return 'ok';
+    }
+    return 'reading ${b['reading']}, waiting ${b['waiting']}, decoding $masks, stock $stock';
   }
 
   /// Every feeling this phone knows, with the pattern it plays: the evidence that thirty-odd
