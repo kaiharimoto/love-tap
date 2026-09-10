@@ -29,9 +29,14 @@ void main() {
     expect(page, contains('id="boot"'));
     expect(page, contains('assets/assets/shell/desk.webp'),
         reason: 'the boot surface is not the desk the app draws');
-    // The line is on paper, in a hand, not set in the browser's default face on the wood.
-    expect(page, contains('assets/assets/paper/'));
+    // In a hand, and in the colour the app writes on wood in. It is not on a slip: a slip here
+    // would be a rectangle with a drop shadow, which is the shape the material system exists not
+    // to be, and the page cannot cut paper.
     expect(page, contains("font-family: 'NoorHand'"));
+    expect(page, contains('#BFB2A0'), reason: 'Pen.onWood is what anything written on the desk uses');
+    expect(page, isNot(contains('box-shadow')),
+        reason: 'a drop shadow under a rectangle is the anti-goal, on the one surface a person '
+            'sees before the app can draw one');
   });
 
   test('and it says one thing, in the voice', () {

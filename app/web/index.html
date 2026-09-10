@@ -43,18 +43,18 @@
       src: url("assets/assets/fonts/NoorHand.ttf") format('truetype');
       font-display: swap;
     }
+    /* Written straight onto the wood, not on a slip.
+       A slip here would be a rectangle with a drop shadow and square corners, which is the one
+       shape the material system exists not to be: the page cannot cut paper, and a stretched tear
+       mask on an element of a shape nothing was rendered at is the same fault this cycle fixed in
+       the app's own shadows. Anything written on the desk rather than on paper uses Hands.onDesk
+       and Pen.onWood, so this does. */
     #boot p {
-      margin: 0; padding: 14px 20px 16px;
+      margin: 0; padding: 0 28px;
       font-family: 'NoorHand', 'Segoe Print', cursive;
-      font-size: 19px; line-height: 1.42; color: #2A2622; text-align: center;
-      /* a slip of the same stock, torn nowhere: the page cannot cut paper, so it does not
-         pretend to — it is a rectangle of the real scan, and the app's own sheets take over the
-         moment there is a Flutter frame to take over with */
-      background: url("assets/assets/paper/index_01.webp") center / cover no-repeat;
-      box-shadow: 0 2px 5px rgba(30, 22, 14, 0.30), 0 10px 22px rgba(30, 22, 14, 0.18);
-      transform: rotate(-0.6deg);
+      font-size: 20px; line-height: 1.42; color: #BFB2A0; text-align: center;
     }
-    #boot small { display: block; margin-top: 5px; font-size: 12.5px; color: #6B6B6E; }
+    #boot small { display: block; margin-top: 6px; font-size: 13px; color: #8C8274; }
   </style>
 </head>
 <body>

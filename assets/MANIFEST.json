@@ -16196,7 +16196,7 @@
    }
   },
   "assets/paper/index_02_dusk.webp": {
-   "bytes": 223954,
+   "bytes": 306250,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -16213,10 +16213,10 @@
      "sheen": 0.28,
      "tooth": 0.8
     },
-    "px_per_mm": 8.82,
+    "px_per_mm": 12.54,
     "resolution": [
-     1800,
-     1120
+     2560,
+     1593
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -16283,7 +16283,7 @@
      "stock": "index",
      "variant": 2
     },
-    "samples": 48,
+    "samples": 24,
     "seed": 571475318,
     "sheet_mm": [
      127.0,
@@ -18071,7 +18071,7 @@
    }
   },
   "assets/paper/receipt_01.webp": {
-   "bytes": 62732,
+   "bytes": 313328,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -18088,10 +18088,10 @@
      "sheen": 0.35,
      "tooth": 0.55
     },
-    "px_per_mm": 10.0,
+    "px_per_mm": 19.0,
     "resolution": [
-     843,
-     1800
+     1601,
+     3420
     ],
     "rig": "blender/rig/common.py",
     "rules": {
@@ -18121,7 +18121,7 @@
      "stock": "receipt",
      "variant": 1
     },
-    "samples": 48,
+    "samples": 24,
     "seed": 1472711998,
     "sheet_mm": [
      80.0,
