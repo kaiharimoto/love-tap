@@ -1,6 +1,6 @@
 {
  "strings_read": 525,
- "literals_in_lib": 3822,
+ "literals_in_lib": 3824,
  "share_of_literals_read": 0.137,
  "in_a_display_position": 111,
  "the_rest_are_judged": "every other literal in a line of code that has a space in it or a mark a wire key would never carry. It used to read only a fixed list of call sites \u2014 Text(, Written(, hintText:, and six more \u2014 which is why a code critic counted 116 strings against 3,672 in lib. Reading them all costs some false positives (an asset query string, a fragment of an interpolation) and those are cheap: a string that is not shown to anybody still must not contain an exclamation mark.",
@@ -433,7 +433,7 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/objects.dart:152",
+   "where": "app/lib/material/objects.dart:153",
    "text": "${id}_dusk",
    "in_a_display_position": false
   },
