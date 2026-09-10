@@ -17,13 +17,30 @@ and continue from **Next action**.
 | 8 | 2026-09-07/08 | the fold's paper and the tooth halo; the module rows given their own bodies; the hero framed by measuring rather than estimating; the fling made a jump per frame; sixth capture; cycle 6 critics, completeness pass and score; the denoiser found behind the four-cycle desk hairline | **cycle 6: 73**, three floors met |
 | 9 | 2026-09-08/09 | the pale rule on the wood closed by a six-build bisect (the mask's own antialiased edge); the record read at the shutter; her mood landing rather than swapping; a sheet that waits for its paper; seventh and eighth captures, fifteen of seventeen; cycle 7 critics, completeness pass and score; six of the cycle-7 findings fixed the same night | **cycle 7: 85**, four floors met |
 | 10 | 2026-09-09 | fifteen fixes on the cycle-7 reports; the tenth capture, the first with all five clips passing their own check; a check that says which run wrote it; a scroll claim withdrawn by the capture that measured it; the paper-shaped objects found to have no tooth at all | **cycle 8: 83**, two floors met |
+| 11 | 2026-09-09 | the objects given a surface at the source (no UV map, no paper), the ink made paint, the desk given pores; the ninth review | **cycle 9: 82**, three floors met |
+| 12 | 2026-09-09/10 | the scroll's real cause found by shooting one scene twice (every note was a listener of every sync round: 595 row builds over twenty frames became 16); the fold made to bend rather than hinge; four two-sine "torn" edges replaced; the sawtooth hash under every cut card; DeskStamp's counters, absent for eight cycles; the app taught how big a millimetre is; nine records that did not exist | cycle 10: not yet reviewed |
 
 ## Current position
 
-- phase: build (cycle 8 scored at **83/100**, from 85, 73, 69, 68, 64, 55.5, 40; the brief asks 95
-  with every floor met)
-- rubric: messenger 24/30 (floor 26, short 2) · material 21/25 (22, short 1) ·
-  emotional **17/20 (17, met)** · coherence **13/15 (13, met)** · anti-goal 8/10 (9, short 1).
+- phase: build (cycle 9 scored at **82/100**, from 83, 85, 73, 69, 68, 64, 55.5, 40; the brief asks
+  95 with every floor met). Cycle 10's fixes are in and its capture has not run.
+- rubric at cycle 9: messenger 24/30 (floor 26, short 2) · material 19/25 (22, short 3) ·
+  emotional **17/20 (17, met)** · coherence **13/15 (13, met)** · anti-goal **9/10 (9, met)**.
+- **Three diagnoses of the scroll have now been made and two disproved by instruments built to
+  test them.** The tear mask baked per note: disproved by a counter that read twelve masks across
+  a fling through 8,075 rows. The hand fonts' contextual alternates: disproved by a test that
+  shapes a note in 0.074 ms. What it actually was: `Note.build` opened with `AppScope.of(context)`,
+  which subscribes to an InheritedNotifier, and the spine notifies on every sync round — so every
+  note on the glass was a listener of every round the other phone answered. Shooting the same
+  scene alone and then with the far phone up: 135 row builds against 5,028.
+- **Three material measurements turned out to be one fault.** The tooth spread thin on a wide
+  sheet, the same ruled stock at rule pitches 2.9 times apart across ten stills, and writing that
+  cannot sit on lines whose spacing differs on every screen: every stock is printed at 8.57 pixels
+  to the millimetre and every piece drew its stock at whatever scale that piece happened to be.
+  A piece takes a window of its stock at the stock's own density now.
+- Two things measured this cycle and deliberately not fixed, both written into the evidence so the
+  next cycle starts from a number: half the tear library's masks have a contour under 2 px rms
+  (`logs/torn.json`), and the writing sits 0.33 of a rule pitch off the line (`logs/lines.json`).
 - **It went down, and it went down for the right reason.** Two floors are met against four last
   cycle. Material fell a point and the anti-goal fell two because the builder and the material
   critic, independently and before either read the other, found the same thing: the paper-shaped

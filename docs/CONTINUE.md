@@ -5,121 +5,78 @@ Branch: `claude/new-session-f95s8n`.
 
 ## 0. Where it stands
 
-**Cycle 8 scored 83**, from 85 the cycle before, and the drop is the review getting better rather
-than the build getting worse. Two floors of five are met (emotional 17/17, coherence 13/13).
-Messenger is 24 against a floor of 26, material 21 against 22, the anti-goal 8 against 9.
+**Cycle 9 scored 82**, from 83 and 85 before it. Three floors of five are met (emotional 17/17,
+coherence 13/13, anti-goal 9/9). Messenger is 24 against a floor of 26; material 19 against 22.
+Both drops across the last two cycles came from the review sharpening, not the build regressing —
+in cycle 9 the completeness pass found *both* blocking findings overstated.
 
-The tenth capture is 15 of 17 artifacts and the first in which **every clip passes its own frame
-check** — 06 at 310 frames, 07 at 421, 08 at 518, 11 at 300, 15 at 376, none held, no jump in the
-light. Every check written beside the artifacts records which run wrote it, and all fifty-five of
-this capture's are this capture's.
+**Cycle 10's fixes are in and its capture has not run.** What follows is what changed and, more
+importantly, how it was found, because two of the three biggest fixes this cycle corrected a
+diagnosis an earlier cycle had been confident about.
 
-Three things to know before touching anything:
+### The scroll: two diagnoses disproved by the instruments built to test them
 
-1. **The paper-shaped feeling objects have no surface.** Measured inside the packed renders and
-   inside the 1200 px sources, 80 px windows of an object's own interior read a median local
-   standard deviation of 0.89 (`obj_dog_ear`), 1.08 (`obj_bookmark`), 1.36 (`obj_torn_corner`),
-   2.49 (`obj_ticket`), against 9.0-9.6 for the paper stocks measured the same way. The material
-   critic found the same thing from the other end — countable facet steps of 14-25 grey levels,
-   1.67 per cent of spectral power above 35 per cent of Nyquist against 23.65 for the sheet behind
-   it — and their shadow is a uniform blur that is *lightest at the contact*. On the glass that is
-   a pale card with a drop shadow under it, which is the brief's own words for a failure of the
-   whole visual concept.
-2. **The scroll is not fixed and the claim that it was has been withdrawn.** A commit said "1 of
-   621 frames over 400 ms"; the capture measured 203 of 793, p95 897, against 189 of 793 at p95
-   688 the run before. The cause is read from the code and not guessed: `Written` wraps its text in
-   `Inked`, a `ShaderMask`, so every note's subtree needs a compositing layer, so its tear cannot
-   be drawn straight into the canvas and is composed as an image keyed by `tear@WxH` — one tear per
-   note out of a pool of 56, so the height bucket saves nothing. `inkPaint` already exists for
-   this; what it needs is a cached shader and a cached Paint.
-3. **Never quote a check you have not dated.** `evidence/logs/<clip>.frames.json` keeps its name
-   between runs, so half way through a capture the previous run's verdict is sitting in the file
-   under the file's own name and reads as fresh. That cost an hour. `MANIFEST.json` now stamps
-   every check; read `from_this_run` before you believe a number.
+Three cycles blamed the tear mask being baked per note. A counter put on `SlicedMasks.composed`
+read **twelve masks across a fling through 8,075 rows in seven throws** — the baking was gone and
+the spikes were not the baking. The next hypothesis, named so it could be killed cleanly, was the
+hand fonts' contextual alternates shaping a paragraph per new note;
+`the_hands_are_not_what_the_scroll_costs_test` shapes a note of handwriting in **0.074 ms**, three
+orders of magnitude short.
 
-### Why a session stops, and how not to
+What it was, found by shooting the same scene twice against the same build. Alone: 135 rows built
+over 300 driven frames, build p50 3 ms and p95 26. In a run where the far phone was up and
+syncing, which is how the capture actually runs: **5,028 rows over the same 300 frames**, p95
+1,562, 269 frames over 400 ms. `Note.build` opened with `AppScope.of(context)`, which registers a
+dependency on an InheritedNotifier, and the spine notifies on every sync round — so every note on
+the glass was a listener of every round the other phone answered, and the framework dirtied each
+row's own element. Caching the row widget did nothing, because the rebuild was not coming from
+above. `AppScope.meOf` reads the one thing a row needs — whose phone this is, a constant for the
+life of the app — without subscribing. Twenty frames with a message landing on every one: **595
+row builds became 16**.
 
-Three causes, all of them measured in this session rather than guessed at. None of them is the
-work running out.
+### The material: three measurements that turned out to be one fault
 
-1. **Ending a turn parks the session.** A reply is a full stop: nothing else happens until a hook,
-   a notification or a person wakes it. Reporting progress and then waiting is the single largest
-   source of dead time here — a capture that takes ninety minutes costs ninety minutes *plus*
-   however long the session sits idle after the reply that announced it. Stay inside one turn:
-   chain the tool calls, wait with a blocking `until` loop (`timeout: 600000` is the ceiling, and
-   the harness backgrounds anything longer — just issue it again), and reply when there is a
-   result, not when there is a wait.
-2. **The container restarts and takes every background process with it.** `uptime` said 26 minutes
-   in the middle of this session: the running capture, its far phone and a probe daemon all died
-   at once, the log simply stopped mid-scene with no error, and `nohup` did not help. The disk
-   survives, so nothing committed was lost and `/tmp` was still there. After any gap, check
-   `uptime` and whether the process is still alive before believing a log that has stopped moving.
-   Commit and push before anything long: a restart then costs minutes rather than work.
-3. **A waiter outlives the thing it waits for, and silence looks like progress.** Five background
-   `until grep -q "^EXIT" ...` loops were still spinning an hour after their runs had been killed,
-   because the marker they were waiting for could never be written. A waiter must watch something
-   that fails as well as something that succeeds, and when a run dies its waiter has to be stopped
-   (`TaskStop`) rather than left to poll a file nobody is writing.
+The tooth spread thin on a wide sheet (2.52 grey levels at the stock's own density, 1.26 on the
+large Settings sheet). The same ruled stock at rule pitches from **61.5 to 178.5 device pixels**
+across ten stills, a ratio of 2.9. Writing that cannot sit on the lines, 0.33 of a pitch off,
+where writing with no relation to the rules would be 0.25.
 
-And one that is not about stopping but wastes as much: **do not rebuild or edit the tree while
-critics are reading it.** The cycle-7 completeness pass caught `app/build/web` being rebuilt
-between two reports and named it: the evidence moved under the review. Capture, write the builder
-sheet, hide, review, show, score — and keep your hands off the tree between the second and the
-fifth of those.
+Every stock is printed at 8.57 pixels to the millimetre and every piece drew its stock at whatever
+scale that piece happened to be. **The app did not know how big a millimetre was.** A piece takes
+a window of its stock at the stock's own density now, positioned by the seeded patch offset and
+clamped so the window lands on paper and on the part of the sheet that is ruled; a piece with more
+glass than there is paper falls back to covering, and `paper_at_its_own_size` against
+`paper_stretched_to_fit` in the capture record says how many of each were on the glass. The paper
+stocks were re-rendered at 1574x2200 so a full-width piece fits inside one.
 
-- **A clip is only as long as the motion in it.** Every run of a `frames` step must end where the
-  thing being filmed stops moving, or the tail is frame-identical and the check fails. The
-  arithmetic is in `app/lib/feelings/landing.dart`: a thrown object rests
-  `max(last bounce, pattern length)` and is put away over `putAwaySeconds`. A run that opens
-  exactly at the apex of a throw gives two identical grabs, because that is where the velocity is
-  zero — step the clock once before it.
-- **The headless compositor runs at about four frames a second.** A screenshot can come back as
-  the frame before, or half drawn. `scene.js` re-grabs when a frame is identical to the last one
-  and again when its size jumps, and the driven clock pumps two frames a step because a widget
-  that finishes in a post-frame callback is drawn a frame late. Do not put a `requestAnimationFrame`
-  wait in the frame loop: it is throttled to about a second and costs six seconds a frame.
-- **The far phone can lose an instruction.** It watches a file; it now renames the file before
-  reading it, and `awaitArrival` says the line again if nothing comes. Both are recorded in the
-  scene log, so nobody reads a clip as one clean exchange when it was not.
-- **The bug that ate a day: events from the other phone were silently dropped.** A message would
-  not arrive for over a minute while the near phone reported `link: connected` the whole time, about
-  one run in four. Three causes, in the order they were found and fixed: the sync loop ended for good
-  on any exception other than the transport's own; its backoff doubled to thirty seconds after every
-  empty long-poll; and — the one that mattered — `stored_order` is a unique index in the web store,
-  so two overlapping `upsertAll` calls allocated the same key, the transaction raised
-  `ConstraintError`, and the whole batch vanished with the failure swallowed. Writes are serialized
-  now (`app/lib/spine/store/store_web.dart`). If a pull ever goes quiet again, read
-  `evidence/logs/08_state_propagating.report.json`: the sync engine's own numbers are in it
-  (`rounds`, `pushed`, `pulled`, `faults`, `last_fault`) and a failed `awaitArrival` prints them.
-- **Keep the browser profile.** `capture.sh` gives every seeded scene one persistent profile,
-  emptied at the start of a run, so the year imports once (11-12 s) and every later scene opens on
-  a phone that already has it (2.7-3.4 s). The log says which kind of load it measured.
-- **A run of frames must stop one step short of the animation it films.** The last two grabs of a
-  20-step animation filmed in 20 frames are the same picture at t=1, and the check counts that as a
-  repeat. Nineteen frames of a twenty-step slide.
-- **A handle called with `after: 0` lands after the next grab.** The first frame of a run showed the
-  family before the one it had just turned to — a repeat at the cut and a brightness step one frame
-  into the run. One `{"do": "step", "ms": 16}` between them fixes both.
-- **A region change animates on the driven clock**, so a wall-clock wait does not advance it and the
-  frames that follow film the tail of the turn. `{"do": "step", "ms": 400}` after a `goTo` puts the
-  turn behind the camera.
-- **Anchor a tall row by where it ends, not where it starts.** A window anchored by its first row
-  leaves a 480-pixel video hanging under the composer, and three critics measured its blank top
-  sliver and reported that video renders as an empty strip. They were reading the framing.
-- **Measure the packed frames, not the render.** `pack_assets` trims every fold frame to its own
-  content, so `tools/check/fold_inset.py` has to be pointed at `app/assets/`, not `assets/`.
-- **A Stack whose children are all positioned sizes to nothing.** Under loose constraints it
-  collapses, and everything inside it fills nothing — silently, with no error. It cost the fold its
-  ink for a whole cycle, and it is the same rule behind a Stack clipping a shadow that is
-  deliberately wider than its child. Any time something composed in a Stack is invisible, check its
-  size and its `clipBehavior` before anything else.
-- **A widget test cannot see the fold.** The frames decode asynchronously off the bundle, so a test
-  draws an empty box and passes. Two of this session's most valuable tests read the composition out
-  of the source instead, which is worth doing when the pixels are out of reach.
-- **The far phone and a partial capture do not always agree.** A full `./capture.sh` has always
-  worked; three `--only` runs against the far phone failed with the near phone connected, its event
-  count rising, and its thread not growing. It is not the browser profile — that is emptied on every
-  run, partial ones included. When a partial run stalls at `awaitArrival`, do a whole one.
+### And the rest of cycle 10
+
+- The fold **bends** instead of hinging: a 2.2 mm radius band and a flap that keeps turning over
+  its own length. The crease measurement the completeness pass used goes from **-0.37 to +1.60 and
+  +1.52** grey levels. A taller ridge was tried, measured worse (0.88, 0.62), and put back.
+- `common.torn_edge` replaces four two-sine "torn" edges. Self-correlation past the central lobe:
+  **0.80 to 0.16-0.34**, with the shape it replaced measured in the same report as a control.
+- The hash under every cut card was **a sawtooth** — the low sixteen bits of a linear function of
+  the index. Every octave of every outline was built out of a ramp.
+- **DeskStamp had no counters.** The tabs read `T● D●` and `M●MENTS` in eight captures. A hole
+  turned positive and re-unioned is a disc.
+- The last literal fill in lib, the search highlighter, became a pen.
+- Nine records that did not exist: what the launch was made of, every ask the app made of a motor
+  and what answered, which of five checks a 401 failed, the words the other phone refused in, a
+  delivered reply with its parent, the tear library's own straightness, whether the writing is on
+  the lines, and what each ambient surface may say.
+
+### Two things measured and deliberately not fixed
+
+Both are in the evidence so the next cycle starts from a number rather than an impression.
+
+1. **Half the tear library is too straight.** Fifty-six masks: min 1.15 px rms, median 2.00,
+   28 under 2.0 (`logs/torn.json`). The cause is in `tools/tears/tear.py` — the fracture's Hurst
+   exponent runs to 1.15, and 1.15 is a clean pull. The fix is fifty-six masks and their relief
+   and their shadows.
+2. **The writing is not on the rules**, 0.33 of a pitch off (`logs/lines.json`). Fixing it means
+   laying text out against the paper it is drawn on — the pitch, and the phase of the first rule
+   under the seeded patch offset — which is a change to every note in the app.
 
 ## 4. What is left, in order of what it costs to close
 
