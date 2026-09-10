@@ -78,6 +78,25 @@ Paint? inkPaint(String pen, Color colour) {
   return paint;
 }
 
+/// A stroking Paint with the pen's coverage in it, or null if the plate is not decoded yet.
+///
+/// [inkPaint] hands back a cached, shared Paint, so a caller that needs a width or a cap on it
+/// cannot have that one. This makes a fresh Paint around the same cached shader — cheap, because
+/// the shader is the expensive half — for the drawn feelings, whose marks were flat colour while
+/// every built-in object beside them was a photograph of a thing. An emotional critic put it
+/// exactly: "a drawn mark on a torn card, while all thirty-six built-ins are rendered objects".
+/// A mark somebody made is allowed to look like a mark; it is not allowed to look like a vector.
+Paint? inkStroke(String pen, Color colour, {required double width, StrokeCap cap = StrokeCap.round}) {
+  final shader = _shaderFor(pen);
+  if (shader == null) return null;
+  return Paint()
+    ..shader = shader
+    ..colorFilter = ColorFilter.mode(colour, BlendMode.srcIn)
+    ..strokeWidth = width
+    ..strokeCap = cap
+    ..style = PaintingStyle.stroke;
+}
+
 /// One shader per pen and one Paint per pen and colour, kept for the life of the app.
 ///
 /// Both halves of this matter. Building a `ui.ImageShader` on every call is what made the first

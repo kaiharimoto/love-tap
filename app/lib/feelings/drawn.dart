@@ -14,6 +14,7 @@
 // firework. Drawn by hand they were still the standard emoji set — a critic seeing the vocabulary
 // for the first time named them as such — and those feelings are things now (blender/objects/).
 import 'dart:math' as math;
+import '../material/ink.dart';
 
 import 'package:flutter/widgets.dart';
 
@@ -38,14 +39,19 @@ class DrawingHand {
     for (var i = 0; i < n; i++) {
       final t = n == 1 ? 0.5 : i / (n - 1);
       final swell = 1 - taper * (2 * t - 1).abs();
-      canvas.drawLine(
-        pts[i],
-        pts[i + 1],
-        Paint()
-          ..color = colour.withValues(alpha: colour.a * (0.7 + 0.3 * swell))
-          ..strokeWidth = weight * width * (0.7 + 0.6 * swell)
-          ..strokeCap = StrokeCap.round,
-      );
+      final w = weight * width * (0.7 + 0.6 * swell);
+      final tone = colour.withValues(alpha: colour.a * (0.7 + 0.3 * swell));
+      // The pen's own coverage, the same plate the handwriting is drawn through. These marks were
+      // flat colour while every built-in object beside them was a photograph of a thing, and an
+      // emotional critic said so: "a drawn mark on a torn card, while all thirty-six built-ins are
+      // rendered objects". A mark somebody made is allowed to look like a mark. It is not allowed
+      // to look like a vector.
+      canvas.drawLine(pts[i], pts[i + 1],
+          inkStroke('ballpoint', tone, width: w) ??
+              (Paint()
+                ..color = tone
+                ..strokeWidth = w
+                ..strokeCap = StrokeCap.round));
     }
   }
 
@@ -57,7 +63,8 @@ class DrawingHand {
     ], wobble: wobble);
   }
 
-  void dot(Offset at, double r) => canvas.drawCircle(at, r, Paint()..color = colour);
+  void dot(Offset at, double r) => canvas.drawCircle(
+      at, r, inkPaint('ballpoint', colour) ?? (Paint()..color = colour));
 }
 
 const double _tau = math.pi * 2;
