@@ -4,12 +4,15 @@
 // with the contact shadow that came out of its own render. Replies are pinned over a torn strip of
 // the note they answer; reactions are objects stuck to the paper; delivery and read are marks in
 // the margin rather than rows.
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../../feelings/builtins.dart';
 import '../../feelings/registry.dart';
 import '../../material/assignment.dart';
 import '../../material/hands.dart';
+import '../../material/ink.dart';
 import '../../material/library.dart';
 import '../../material/marks.dart';
 import '../../material/objects.dart';
@@ -151,12 +154,12 @@ class Note extends StatelessWidget {
           ),
       ],
       overlays: [
+        // A highlighter is a wet pen dragged across a page, not a rectangle of yellow. It laid one
+        // flat 45-per-cent fill edge to edge — the only literal fill left in the app, and the one
+        // shape the anti-goal names. Drawn through the same coverage plate the handwriting uses,
+        // it varies where the pen pressed and stops short of the edges the way a hand does.
         if (highlight)
-          Positioned.fill(
-            child: IgnorePointer(
-              child: DecoratedBox(decoration: const BoxDecoration(color: Accent.highlighterYellow)),
-            ),
-          ),
+          Positioned.fill(child: IgnorePointer(child: CustomPaint(painter: _Highlighter(_seedOf(e.id))))),
       ],
       child: writing,
     );
@@ -438,4 +441,53 @@ class _MarginLine extends StatelessWidget {
       ),
     );
   }
+}
+
+
+/// The wash a highlighter leaves: the pen's own coverage, dragged in two or three strokes that
+/// overlap in the middle and run out before the edges.
+///
+/// The mark used to be `BoxDecoration(color: Accent.highlighterYellow)` over the whole note — one
+/// flat translucent rectangle, which is the shape the anti-goal names and the last literal fill in
+/// the app. A highlighter is wet: it is darker where two passes crossed, it skips where the paper's
+/// tooth was high, and it stops where the hand stopped.
+class _Highlighter extends CustomPainter {
+  const _Highlighter(this.seed);
+  final int seed;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rng = math.Random(seed);
+    // three passes of a wide nib, each starting and stopping short of the paper's edge
+    final band = size.height / 3.2;
+    for (var i = 0; i < 3; i++) {
+      final y = band * (i + 0.5) + (rng.nextDouble() - 0.5) * band * 0.3;
+      // far enough in that the square nib, which reaches half its own width past the point it is
+      // drawn to, still stops short of the paper: a highlighter that runs off both edges is a fill
+      final from = size.width * (0.10 + rng.nextDouble() * 0.05);
+      final to = size.width * (0.84 + rng.nextDouble() * 0.06);
+      final w = band * (0.85 + rng.nextDouble() * 0.3);
+      final paint = inkStroke('ballpoint', Accent.highlighterYellow, width: w, cap: StrokeCap.square) ??
+          (Paint()
+            ..color = Accent.highlighterYellow
+            ..strokeWidth = w
+            ..strokeCap = StrokeCap.square);
+      canvas.drawLine(Offset(from, y), Offset(to, y + (rng.nextDouble() - 0.5) * 2.5), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_Highlighter old) => old.seed != seed;
+}
+
+/// The highlighter mark for a note, by its event id. Public so a test can rasterise it.
+CustomPainter highlighterFor(String eventId) => _Highlighter(_seedOf(eventId));
+
+/// A small stable number from an event id, so a note is highlighted the same way twice.
+int _seedOf(String id) {
+  var h = 0;
+  for (final c in id.codeUnits) {
+    h = (h * 31 + c) & 0xFFFF;
+  }
+  return h;
 }
