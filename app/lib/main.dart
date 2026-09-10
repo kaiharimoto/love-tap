@@ -43,6 +43,23 @@ Future<void> main() async {
   }
 
   WidgetsFlutterBinding.ensureInitialized();
+  // The paper has to stay in memory, because a stock that has been evicted paints as a flat fill.
+  //
+  // Flutter's image cache holds 100 MB by default. The packed stocks decode to **763 MB** across
+  // 54 files — an A5 sheet at 1574x2200 is 13.8 MB and the receipt at 1601x3420 is 21.9 — because
+  // a piece now takes a window of its stock at the stock's own density and the stocks were
+  // re-rendered big enough for that. So the cache thrashes: a piece whose stock has just been
+  // evicted draws its real torn mask over `Paper.forStock`, which is a flat colour, and that is
+  // exactly what 04_moments' voice-note tile is — 233.3 grey levels at a standard deviation of
+  // 0.000 over four 40-pixel cells, inside a tile whose fringe is plainly drawn, while the receipt
+  // stock's own windows measure 0.82 to 1.45.
+  //
+  // This is a floor under the fault rather than the fix for it. The fix is not to decode a
+  // 1574x2200 sheet to draw a 450x195 window of it: a stock wants packing as a patch at its own
+  // density and tiling, the way the ink plates already are, which is 56 MB for the whole library
+  // instead of 763. Until then the cache is told to hold the working set, and this number is a
+  // thing to be embarrassed about on a phone.
+  PaintingBinding.instance.imageCache.maximumSizeBytes = 384 << 20;
   took('the framework');
   await MaterialLibrary.load();
   took('the library index');
