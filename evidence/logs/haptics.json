@@ -1,5 +1,6 @@
 {
  "notation": "on@amp pairs separated by off gaps, in milliseconds, amplitude 0-255: the shape Android VibrationEffect.createWaveform takes; on the PWA the same segments move the page",
+ "how_the_page_moves": "the same envelope, as a push in the direction under knocks_the_desk and a turn of the whole board with it. Sideways is never further than up, because a page that slides as far as it lifts reads as a swipe; the turn is under a quarter of a degree, which is enough that a corner travels further than the middle.",
  "channel_here": "page",
  "feelings": [
   {
@@ -36,7 +37,13 @@
    ],
    "total_ms": 640,
    "on_ms": 560,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": 0.3012,
+    "y": -0.6946,
+    "turns_it_by_radians": 0.0032,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "forehead",
@@ -64,7 +71,13 @@
    ],
    "total_ms": 520,
    "on_ms": 400,
-   "pulses": 2
+   "pulses": 2,
+   "knocks_the_desk": {
+    "x": 0.2264,
+    "y": -0.9716,
+    "turns_it_by_radians": 0.0017,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "warm_palm",
@@ -84,7 +97,13 @@
    ],
    "total_ms": 600,
    "on_ms": 600,
-   "pulses": 1
+   "pulses": 1,
+   "knocks_the_desk": {
+    "x": -0.2434,
+    "y": -0.9667,
+    "turns_it_by_radians": -0.00272,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "nuzzle",
@@ -128,7 +147,13 @@
    ],
    "total_ms": 990,
    "on_ms": 670,
-   "pulses": 4
+   "pulses": 4,
+   "knocks_the_desk": {
+    "x": -0.1321,
+    "y": -0.6491,
+    "turns_it_by_radians": -0.00076,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "thinking_of_you",
@@ -164,7 +189,13 @@
    ],
    "total_ms": 940,
    "on_ms": 340,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": 0.4003,
+    "y": -0.7655,
+    "turns_it_by_radians": 0.00394,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "goodnight",
@@ -200,7 +231,13 @@
    ],
    "total_ms": 1270,
    "on_ms": 870,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": 0.0034,
+    "y": -1,
+    "turns_it_by_radians": -0.00048,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "miss_you",
@@ -236,7 +273,13 @@
    ],
    "total_ms": 1650,
    "on_ms": 450,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": -0.2594,
+    "y": -0.6784,
+    "turns_it_by_radians": -0.00204,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "empty_chair",
@@ -264,7 +307,13 @@
    ],
    "total_ms": 1500,
    "on_ms": 600,
-   "pulses": 2
+   "pulses": 2,
+   "knocks_the_desk": {
+    "x": -0.1831,
+    "y": -0.982,
+    "turns_it_by_radians": -0.00219,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "come_home",
@@ -308,7 +357,13 @@
    ],
    "total_ms": 1780,
    "on_ms": 580,
-   "pulses": 4
+   "pulses": 4,
+   "knocks_the_desk": {
+    "x": 0.4199,
+    "y": -0.8233,
+    "turns_it_by_radians": 0.00396,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "wish_you_were_here",
@@ -352,7 +407,13 @@
    ],
    "total_ms": 2200,
    "on_ms": 1000,
-   "pulses": 4
+   "pulses": 4,
+   "knocks_the_desk": {
+    "x": -0.2013,
+    "y": -0.978,
+    "turns_it_by_radians": -0.00235,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "long_day",
@@ -380,7 +441,13 @@
    ],
    "total_ms": 1900,
    "on_ms": 1600,
-   "pulses": 2
+   "pulses": 2,
+   "knocks_the_desk": {
+    "x": 0.0005,
+    "y": -1,
+    "turns_it_by_radians": -0.00051,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "here",
@@ -416,7 +483,13 @@
    ],
    "total_ms": 2000,
    "on_ms": 1200,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": -0.4083,
+    "y": -0.7779,
+    "turns_it_by_radians": -0.00374,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "breathe",
@@ -444,7 +517,13 @@
    ],
    "total_ms": 2500,
    "on_ms": 1700,
-   "pulses": 2
+   "pulses": 2,
+   "knocks_the_desk": {
+    "x": -0.2538,
+    "y": -0.9634,
+    "turns_it_by_radians": -0.00281,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "its_okay",
@@ -488,7 +567,13 @@
    ],
    "total_ms": 1400,
    "on_ms": 800,
-   "pulses": 4
+   "pulses": 4,
+   "knocks_the_desk": {
+    "x": -0.1547,
+    "y": -0.9873,
+    "turns_it_by_radians": -0.00194,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "steady",
@@ -540,7 +625,13 @@
    ],
    "total_ms": 2700,
    "on_ms": 1500,
-   "pulses": 5
+   "pulses": 5,
+   "knocks_the_desk": {
+    "x": 0.4161,
+    "y": -0.7956,
+    "turns_it_by_radians": 0.004,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "make_you_tea",
@@ -576,7 +667,13 @@
    ],
    "total_ms": 900,
    "on_ms": 700,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": -0.4188,
+    "y": -0.8062,
+    "turns_it_by_radians": -0.00392,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "hold",
@@ -604,7 +701,13 @@
    ],
    "total_ms": 1900,
    "on_ms": 1800,
-   "pulses": 2
+   "pulses": 2,
+   "knocks_the_desk": {
+    "x": -0.409,
+    "y": -0.779,
+    "turns_it_by_radians": -0.00375,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "poke",
@@ -624,7 +727,13 @@
    ],
    "total_ms": 30,
    "on_ms": 30,
-   "pulses": 1
+   "pulses": 1,
+   "knocks_the_desk": {
+    "x": 0.4069,
+    "y": -0.8646,
+    "turns_it_by_radians": 0.00371,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "nyeh",
@@ -660,7 +769,13 @@
    ],
    "total_ms": 250,
    "on_ms": 150,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": -0.295,
+    "y": -0.9481,
+    "turns_it_by_radians": -0.00315,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "catch",
@@ -712,7 +827,13 @@
    ],
    "total_ms": 400,
    "on_ms": 280,
-   "pulses": 5
+   "pulses": 5,
+   "knocks_the_desk": {
+    "x": -0.4115,
+    "y": -0.8561,
+    "turns_it_by_radians": -0.00399,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "pick_one",
@@ -776,7 +897,13 @@
    ],
    "total_ms": 1020,
    "on_ms": 300,
-   "pulses": 6
+   "pulses": 6,
+   "knocks_the_desk": {
+    "x": -0.1234,
+    "y": -0.9921,
+    "turns_it_by_radians": -0.00166,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "snap",
@@ -812,7 +939,13 @@
    ],
    "total_ms": 540,
    "on_ms": 100,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": -0.3895,
+    "y": -0.7527,
+    "turns_it_by_radians": -0.00349,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "stuck_with_me",
@@ -848,7 +981,13 @@
    ],
    "total_ms": 1400,
    "on_ms": 1280,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": -0.1205,
+    "y": -0.6476,
+    "turns_it_by_radians": -0.00064,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "overwhelmed",
@@ -976,7 +1115,13 @@
    ],
    "total_ms": 448,
    "on_ms": 252,
-   "pulses": 14
+   "pulses": 14,
+   "knocks_the_desk": {
+    "x": -0.3865,
+    "y": -0.7495,
+    "turns_it_by_radians": -0.00345,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "ugh",
@@ -1012,7 +1157,13 @@
    ],
    "total_ms": 660,
    "on_ms": 540,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": 0.1688,
+    "y": -0.9848,
+    "turns_it_by_radians": 0.00112,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "snapped",
@@ -1056,7 +1207,13 @@
    ],
    "total_ms": 875,
    "on_ms": 545,
-   "pulses": 4
+   "pulses": 4,
+   "knocks_the_desk": {
+    "x": -0.3043,
+    "y": -0.9441,
+    "turns_it_by_radians": -0.00323,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "tangled",
@@ -1116,7 +1273,13 @@
    ],
    "total_ms": 500,
    "on_ms": 400,
-   "pulses": 6
+   "pulses": 6,
+   "knocks_the_desk": {
+    "x": 0.3149,
+    "y": -0.7009,
+    "turns_it_by_radians": 0.00331,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "grey",
@@ -1196,7 +1359,13 @@
    ],
    "total_ms": 960,
    "on_ms": 480,
-   "pulses": 8
+   "pulses": 8,
+   "knocks_the_desk": {
+    "x": 0.3441,
+    "y": -0.9232,
+    "turns_it_by_radians": 0.00295,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "not_okay",
@@ -1240,7 +1409,13 @@
    ],
    "total_ms": 820,
    "on_ms": 520,
-   "pulses": 4
+   "pulses": 4,
+   "knocks_the_desk": {
+    "x": 0.2519,
+    "y": -0.964,
+    "turns_it_by_radians": 0.00197,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "did_it",
@@ -1284,7 +1459,13 @@
    ],
    "total_ms": 500,
    "on_ms": 320,
-   "pulses": 4
+   "pulses": 4,
+   "knocks_the_desk": {
+    "x": -0.416,
+    "y": -0.7951,
+    "turns_it_by_radians": -0.00386,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "confetti",
@@ -1336,7 +1517,13 @@
    ],
    "total_ms": 440,
    "on_ms": 100,
-   "pulses": 5
+   "pulses": 5,
+   "knocks_the_desk": {
+    "x": 0.0315,
+    "y": -0.6405,
+    "turns_it_by_radians": 0.00081,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "yes",
@@ -1388,7 +1575,13 @@
    ],
    "total_ms": 620,
    "on_ms": 300,
-   "pulses": 5
+   "pulses": 5,
+   "knocks_the_desk": {
+    "x": -0.3728,
+    "y": -0.9029,
+    "turns_it_by_radians": -0.00376,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "crown",
@@ -1440,7 +1633,13 @@
    ],
    "total_ms": 1300,
    "on_ms": 700,
-   "pulses": 5
+   "pulses": 5,
+   "knocks_the_desk": {
+    "x": -0.0307,
+    "y": -0.6405,
+    "turns_it_by_radians": 0.00022,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "treat",
@@ -1484,7 +1683,13 @@
    ],
    "total_ms": 690,
    "on_ms": 450,
-   "pulses": 4
+   "pulses": 4,
+   "knocks_the_desk": {
+    "x": -0.3003,
+    "y": -0.9459,
+    "turns_it_by_radians": -0.0032,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "pigeon",
@@ -1528,7 +1733,13 @@
    ],
    "total_ms": 750,
    "on_ms": 290,
-   "pulses": 4
+   "pulses": 4,
+   "knocks_the_desk": {
+    "x": -0.3433,
+    "y": -0.9237,
+    "turns_it_by_radians": -0.00354,
+    "at_full_lift_px": 9
+   }
   },
   {
    "id": "soup",
@@ -1564,7 +1775,13 @@
    ],
    "total_ms": 1200,
    "on_ms": 900,
-   "pulses": 3
+   "pulses": 3,
+   "knocks_the_desk": {
+    "x": 0.281,
+    "y": -0.6862,
+    "turns_it_by_radians": 0.00304,
+    "at_full_lift_px": 9
+   }
   }
  ],
  "built_in": 34,

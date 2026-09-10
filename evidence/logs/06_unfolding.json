@@ -10,49 +10,49 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1544,
+   "ms": 1777,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 2906
+   "ms": 3225
   },
   {
    "do": "wait",
-   "ms": 1606
+   "ms": 1602
   },
   {
    "do": "scrollTo",
-   "ms": 5133
+   "ms": 6779
   },
   {
    "do": "wait",
-   "ms": 1302
+   "ms": 1303
   },
   {
    "do": "far",
-   "ms": 1023
+   "ms": 924
   },
   {
    "do": "awaitArrival",
-   "ms": 935
+   "ms": 1997
   },
   {
    "do": "frames",
-   "ms": 30999
+   "ms": 258794
   },
   {
    "do": "unfold",
-   "ms": 746
+   "ms": 691
   },
   {
    "frames_from_the_build": "unfold_thirds",
-   "count": 139
+   "count": 142
   },
   {
    "do": "frames",
-   "ms": 246047
+   "ms": 246267
   },
   {
    "do": "far",
@@ -60,27 +60,27 @@
   },
   {
    "do": "awaitArrival",
-   "ms": 860
+   "ms": 1185
   },
   {
    "do": "frames",
-   "ms": 32563
+   "ms": 29620
   },
   {
    "do": "unfold",
-   "ms": 14
+   "ms": 6
   },
   {
    "frames_from_the_build": "unfold_thirds",
-   "count": 139
+   "count": 142
   },
   {
    "do": "frames",
-   "ms": 246371
+   "ms": 237779
   },
   {
    "do": "report",
-   "ms": 443
+   "ms": 1177
   }
  ],
  "shots": [
@@ -91,7 +91,7 @@
    "drive": null
   },
   {
-   "frames": 139,
+   "frames": 142,
    "dir": "evidence/frames/06_unfolding",
    "ms": 16,
    "drive": null
@@ -103,7 +103,7 @@
    "drive": null
   },
   {
-   "frames": 139,
+   "frames": 142,
    "dir": "evidence/frames/06_unfolding",
    "ms": 16,
    "drive": null
@@ -114,13 +114,84 @@
    "region": 1,
    "view": {
     "region": "chat",
+    "visible": [
+     "0001MCJ1M02W5ESYRSNWK82NWZ",
+     "0001MCJ1M02W5ESYRSNWK82NX9",
+     "01M1MD29GJVMAX85851PH2NJND",
+     "01M1MDHSQ284WQW5AYHQ8JFYMD"
+    ],
+    "whole_on_the_glass": [
+     "0001MCJ1M02W5ESYRSNWK82NX9",
+     "01M1MD29GJVMAX85851PH2NJND",
+     "01M1MDHSQ284WQW5AYHQ8JFYMD"
+    ],
+    "clipped_at_an_edge": {
+     "0001MCJ1M02W5ESYRSNWK82NWZ": 0.085
+    },
+    "delivery": {
+     "0001MCJ1M02W5ESYRSNWK82NWZ": {
+      "state": "sent",
+      "says": "sent"
+     },
+     "0001MCJ1M02W5ESYRSNWK82NX9": {
+      "state": "sent",
+      "says": "sent"
+     }
+    },
+    "refusals_on_the_glass": {},
+    "states_on_the_glass": {
+     "sent": 1
+    },
+    "reactions": {},
+    "edited": [],
+    "taken_back": [],
+    "scroll": {
+     "first": 8074,
+     "last": 8078,
+     "of": 8078
+    },
+    "paper": [
+     "0001MCJ1M02W5ESYRSNWK82NWZ",
+     "0001MCJ1M02W5ESYRSNWK82NX9",
+     "01M1MD29GJVMAX85851PH2NJND",
+     "01M1MDHSQ284WQW5AYHQ8JFYMD"
+    ],
+    "paper_whole_on_the_glass": 3,
+    "rows_cost": [
+     {
+      "row": 8074,
+      "type": "message",
+      "tall": 129,
+      "top": -118
+     },
+     {
+      "row": 8075,
+      "type": "message",
+      "tall": 82,
+      "top": 11
+     },
+     {
+      "row": 8076,
+      "type": "message",
+      "tall": 179,
+      "top": 93
+     },
+     {
+      "row": 8077,
+      "type": "message",
+      "tall": 179,
+      "top": 272
+     }
+    ],
+    "viewport_tall": 457.7,
     "composer": "the second one, then",
     "attaching": false,
     "replying_to": null,
+    "replies_on_the_glass": {},
     "editing": null,
-    "partner_typing": true,
+    "anchor": null,
     "kinds": {
-     "message": 3
+     "message": 4
     },
     "folded_in": {
      "reaction": 0,
@@ -128,88 +199,96 @@
      "message_delete": 0,
      "read_marker": 0
     },
-    "delivery": {
-     "0001MCJ1M0YWHZ0WP8GE4M7T93": {
-      "state": "sending",
-      "says": "going"
-     }
-    },
-    "states_on_the_glass": {},
-    "reactions": {},
-    "edited": [],
-    "taken_back": []
+    "partner_typing": true
    },
    "visible": [
-    "0001MCJ1M0YWHZ0WP8GE4M7T93",
-    "01M1MCZ2X01DK4992A15Q6R5KN",
-    "01M1MD7KDVKH1KX9VHYVH8DCBX"
+    "0001MCJ1M02W5ESYRSNWK82NWZ",
+    "0001MCJ1M02W5ESYRSNWK82NX9",
+    "01M1MD29GJVMAX85851PH2NJND",
+    "01M1MDHSQ284WQW5AYHQ8JFYMD"
    ],
    "paper": [
-    "0001MCJ1M0YWHZ0WP8GE4M7T93",
-    "01M1MCZ2X01DK4992A15Q6R5KN",
-    "01M1MD7KDVKH1KX9VHYVH8DCBX"
+    "0001MCJ1M02W5ESYRSNWK82NWZ",
+    "0001MCJ1M02W5ESYRSNWK82NX9",
+    "01M1MD29GJVMAX85851PH2NJND",
+    "01M1MDHSQ284WQW5AYHQ8JFYMD"
    ],
    "tears": {
-    "0001MCJ1M0YWHZ0WP8GE4M7T93": "tear_055",
-    "01M1MCZ2X01DK4992A15Q6R5KN": "tear_018",
-    "01M1MD7KDVKH1KX9VHYVH8DCBX": "tear_003"
+    "0001MCJ1M02W5ESYRSNWK82NWZ": "tear_035",
+    "0001MCJ1M02W5ESYRSNWK82NX9": "tear_055",
+    "01M1MD29GJVMAX85851PH2NJND": "tear_003",
+    "01M1MDHSQ284WQW5AYHQ8JFYMD": "tear_045"
    },
    "stocks": {
-    "0001MCJ1M0YWHZ0WP8GE4M7T93": "lined_03",
-    "01M1MCZ2X01DK4992A15Q6R5KN": "lined_04",
-    "01M1MD7KDVKH1KX9VHYVH8DCBX": "lined_01"
+    "0001MCJ1M02W5ESYRSNWK82NWZ": "lined_02",
+    "0001MCJ1M02W5ESYRSNWK82NX9": "lined_02",
+    "01M1MD29GJVMAX85851PH2NJND": "lined_03",
+    "01M1MDHSQ284WQW5AYHQ8JFYMD": "lined_02"
    },
    "scroll": {
     "first": 8074,
-    "last": 8077,
-    "of": 8077
+    "last": 8078,
+    "of": 8078
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 5104,
+   "driven_ms": 5200,
    "seed": 20260903,
-   "events": 14079,
+   "events": 14081,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 1,
+   "masks_composed": 2,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 16273,
+   "paper_stretched_to_fit": 275,
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 139,
+    "length": 142,
     "decoded": 14,
     "decoding": 0,
-    "playhead": 137,
-    "held_from": 125,
-    "held_to": 138
+    "playhead": 140,
+    "held_from": 128,
+    "held_to": 141
    },
    "sensation": null,
+   "the_launch_took": {
+    "the framework": 7,
+    "the library index": 12,
+    "the ink plates": 39,
+    "the desk": 143,
+    "the log": 613,
+    "the first frame": 341,
+    "everything": 1155
+   },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 193,
-    "pushed": 3,
+    "rounds": 266,
+    "pushed": 4,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
-    "faults": 0,
+    "faults": 1,
+    "last_fault": "401 the signature does not match",
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14079,
+    "cursor": 14081,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14079,
-     "our_cursor": 14079,
+     "peer_cursor": 14081,
+     "our_cursor": 14081,
      "last_error": null,
-     "since": "2026-09-09T17:59:11.955Z",
-     "last_contact": "2026-09-09T18:08:43.134Z"
+     "since": "2026-09-10T03:46:04.021Z",
+     "last_contact": "2026-09-10T03:59:17.174Z"
     }
    },
    "ambient": {
@@ -217,17 +296,31 @@
     "pocket_feeling": null,
     "pocket_at": null,
     "allowed_to_interrupt": false,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "06_unfolding",
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2176,
+ "cold_ms": 2213,
  "load": {
-  "ms": 2176,
+  "ms": 2213,
   "store": "kept",
-  "profile": "profile_seeded"
+  "profile": "profile_seeded",
+  "made_of": {
+   "the framework": 7,
+   "the library index": 12,
+   "the ink plates": 39,
+   "the desk": 143,
+   "the log": 613,
+   "the first frame": 341,
+   "everything": 1155
+  }
  },
  "far": [
   {
@@ -236,26 +329,32 @@
   },
   {
    "line": "message and the bread",
-   "at_frame": 155
+   "at_frame": 158
   }
  ],
  "arrivals": [
   {
    "line": "message back by six. the pigeon is still on the cupboard, year nine have named it.",
-   "before": 8075,
-   "after": 8076,
+   "before": 8076,
+   "after": 8077,
    "at_frame": 0,
-   "waited_ms": 528
+   "waited_ms": 1596
   },
   {
    "line": "message and the bread",
-   "before": 8076,
-   "after": 8077,
-   "at_frame": 155,
-   "waited_ms": 460
+   "before": 8077,
+   "after": 8078,
+   "at_frame": 158,
+   "waited_ms": 778
   }
  ],
- "problems": [],
- "ok": true,
+ "problems": [
+  "http: 401 GET http://127.0.0.1:8480/v1/events?after=14075&wait=20",
+  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+ ],
+ "refused_requests": [
+  "401 GET http://127.0.0.1:8480/v1/events?after=14075&wait=20"
+ ],
+ "ok": false,
  "steps_landed": true
 }
