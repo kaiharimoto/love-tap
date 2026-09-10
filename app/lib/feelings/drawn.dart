@@ -46,11 +46,12 @@ class DrawingHand {
     final k2 = 2.1 + _rng.nextDouble() * 3.4;
     final p1 = _rng.nextDouble() * _tau;
     final p2 = _rng.nextDouble() * _tau;
-    // How far the line leaves its aim, as a fraction of the mark: a person drawing a 300-pixel
-    // square freehand wanders a couple of per cent of it, not a couple of tenths of a per cent.
-    // Measured on the rendered mark, the first attempt left the top of `obj_window` straight to
-    // 0.40 px about its own trend, which is a ruler with a tremor.
-    final amp = wobble * (2.0 + weight * 1.1);
+    // How far the line leaves its aim, as a fraction of the *mark*: a person drawing a square
+    // freehand wanders a couple of per cent of it whatever size they draw it, and the first two
+    // attempts at this were tied to the pen instead — 0.13 per cent of the mark at one size and
+    // 3.2 per cent at another, so the same window was a ruler on one screen and a scrawl on the
+    // next. The hand's weight is the mark's width over forty-four, so this recovers the width.
+    final amp = wobble * (weight * 44.0) * 0.021;
     var walked = 0.0;
     final total = () {
       var d = 0.0;
@@ -88,8 +89,16 @@ class DrawingHand {
     for (var i = 0; i < n; i++) {
       final t = n == 1 ? 0.5 : i / (n - 1);
       final swell = 1 - taper * (2 * t - 1).abs();
-      final w = weight * width * (0.7 + 0.6 * swell);
-      final tone = colour.withValues(alpha: colour.a * (0.7 + 0.3 * swell));
+      final w = weight * width * (0.62 + 0.76 * swell);
+      // Opaque, and the pressure is in the width and in the plate.
+      //
+      // Each segment used to be laid down at 0.7 to 1.0 alpha, which was survivable while a stroke
+      // was two points and became a string of beads the moment a stroke was walked: every junction
+      // between two segments is two round caps over each other, and 0.7 over 0.7 is 0.91. On the
+      // chat hero the drawn window came out as a dotted line. A ballpoint does not vary its
+      // opacity — it varies its width, it skips, and its ink has a texture, which is what the
+      // plate is for. The mark's own weight is applied once, by the layer this is drawn into.
+      final tone = colour.withValues(alpha: 1.0);
       // The pen's own coverage, the same plate the handwriting is drawn through. These marks were
       // flat colour while every built-in object beside them was a photograph of a thing, and an
       // emotional critic said so: "a drawn mark on a torn card, while all thirty-six built-ins are

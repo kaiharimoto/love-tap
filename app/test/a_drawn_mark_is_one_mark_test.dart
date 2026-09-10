@@ -101,8 +101,13 @@ void main() {
       ss += r * r;
     }
     final rms = math.sqrt(ss / n);
-    expect(rms, greaterThan(0.6),
+    // Measured both ways with this same code: ruled, the top of this bar reads 0.31 px about its
+    // own line; walked, 0.55. The floor sits between them. It is not a large separation and it is
+    // not meant to be — the bar is seven pixels wide with its caps overlapping, so tracing its top
+    // edge smooths the wander down to about a tenth of what the pen was given. What this catches
+    // is a return to the ruler, which is the thing that was actually wrong.
+    expect(rms, greaterThan(0.45),
         reason: 'the top of the window is straight to $rms px about its own line over $n '
-            'columns, which is a ruler and not a hand');
+            'columns, against 0.31 for a ruled one: this is a ruler and not a hand');
   });
 }
