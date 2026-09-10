@@ -10,29 +10,29 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1536,
+   "ms": 1941,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3443
+   "ms": 3024
   },
   {
    "do": "wait",
-   "ms": 1803
+   "ms": 1802
   },
   {
    "do": "haptics",
-   "ms": 488
+   "ms": 438
   },
   {
    "do": "far",
-   "ms": 444
+   "ms": 1068
   },
   {
    "do": "awaitArrival",
-   "ms": 2676
+   "ms": 3513
   },
   {
    "do": "wait",
@@ -40,75 +40,75 @@
   },
   {
    "do": "frames",
-   "ms": 285281
+   "ms": 273006
   },
   {
    "do": "far",
-   "ms": 408
+   "ms": 404
   },
   {
    "do": "awaitArrival",
-   "ms": 1023
+   "ms": 1128
   },
   {
    "do": "wait",
-   "ms": 1104
+   "ms": 1106
   },
   {
    "do": "frames",
-   "ms": 169679
+   "ms": 152083
   },
   {
    "do": "goTo",
-   "ms": 4631
+   "ms": 6900
   },
   {
    "do": "step",
-   "ms": 2345
+   "ms": 2496
   },
   {
    "do": "far",
-   "ms": 476
+   "ms": 456
   },
   {
    "do": "awaitArrival",
-   "ms": 2091
+   "ms": 1511
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1103
   },
   {
    "do": "frames",
-   "ms": 207238
+   "ms": 186443
   },
   {
    "do": "goTo",
-   "ms": 6028
+   "ms": 6512
   },
   {
    "do": "step",
-   "ms": 2718
+   "ms": 2103
   },
   {
    "do": "far",
-   "ms": 470
+   "ms": 432
   },
   {
    "do": "awaitArrival",
-   "ms": 2289
+   "ms": 1832
   },
   {
    "do": "wait",
-   "ms": 1101
+   "ms": 1103
   },
   {
    "do": "frames",
-   "ms": 244931
+   "ms": 251996
   },
   {
    "do": "report",
-   "ms": 527
+   "ms": 533
   }
  ],
  "shots": [
@@ -153,27 +153,27 @@
      {
       "id": "dates",
       "events": 81,
-      "glance": "next: the place by the bridge"
+      "glance": "3 ahead"
      },
      {
       "id": "todos",
       "events": 199,
-      "glance": "10 open"
+      "glance": "10 open · 16 done"
      },
      {
       "id": "calendar",
       "events": 6,
-      "glance": "us in 60 days"
+      "glance": "3 marked · the next in 59 days"
      },
      {
       "id": "rituals",
       "events": 53,
-      "glance": "last: tuesday soup"
+      "glance": "3 kept · 53 times · the last 7 days ago"
      },
      {
       "id": "shelf",
       "events": 12,
-      "glance": "waiting on you: the one you said you stopped"
+      "glance": "2 waiting on you · 6 between you"
      }
     ]
    },
@@ -185,16 +185,18 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 7728,
    "seed": 20260903,
-   "events": 14087,
+   "events": 14090,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 6,
+   "masks_composed": 7,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 19525,
+   "paper_stretched_to_fit": 320,
    "setup_showing": false,
    "fold": {
     "sequence": null
@@ -203,7 +205,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-09T18:20:25.840Z",
+    "started_at": "2026-09-10T04:10:10.978Z",
     "pattern": [
      {
       "ms": 150,
@@ -227,28 +229,38 @@
      }
     ]
    },
+   "the_launch_took": {
+    "the framework": 8,
+    "the library index": 14,
+    "the ink plates": 37,
+    "the desk": 134,
+    "the log": 676,
+    "the first frame": 350,
+    "everything": 1219
+   },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 317,
-    "pushed": 4,
+    "rounds": 298,
+    "pushed": 5,
     "refused": 0,
     "pulled": 4,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14087,
+    "cursor": 14090,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14087,
-     "our_cursor": 14087,
+     "peer_cursor": 14090,
+     "our_cursor": 14090,
      "last_error": null,
-     "since": "2026-09-09T18:08:48.138Z",
-     "last_contact": "2026-09-09T18:24:32.178Z"
+     "since": "2026-09-10T03:59:21.002Z",
+     "last_contact": "2026-09-10T04:14:23.269Z"
     }
    },
    "ambient": {
@@ -256,17 +268,31 @@
     "pocket_feeling": "soup",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "07_feeling_landing",
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2112,
+ "cold_ms": 2290,
  "load": {
-  "ms": 2112,
+  "ms": 2290,
   "store": "kept",
-  "profile": "profile_seeded"
+  "profile": "profile_seeded",
+  "made_of": {
+   "the framework": 8,
+   "the library index": 14,
+   "the ink plates": 37,
+   "the desk": 134,
+   "the log": 676,
+   "the first frame": 350,
+   "everything": 1219
+  }
  },
  "far": [
   {
@@ -289,40 +315,34 @@
  "arrivals": [
   {
    "line": "feeling hold 0.9",
-   "before": 8077,
-   "after": 8078,
+   "before": 8078,
+   "after": 8079,
    "at_frame": 0,
-   "waited_ms": 2275
+   "waited_ms": 3111
   },
   {
    "line": "feeling squeeze 0.75",
-   "before": 8078,
-   "after": 8079,
+   "before": 8079,
+   "after": 8080,
    "at_frame": 150,
-   "waited_ms": 621
+   "waited_ms": 727
   },
   {
    "line": "feeling nuzzle 0.8",
-   "before": 8079,
-   "after": 8080,
+   "before": 8080,
+   "after": 8081,
    "at_frame": 221,
-   "waited_ms": 1690
+   "waited_ms": 1109
   },
   {
    "line": "feeling soup 0.85",
-   "before": 8080,
-   "after": 8081,
+   "before": 8081,
+   "after": 8082,
    "at_frame": 314,
-   "waited_ms": 1888
+   "waited_ms": 1431
   }
  ],
- "problems": [
-  "http: 401 GET http://127.0.0.1:8480/v1/events?after=14079&wait=20",
-  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
- ],
- "refused_requests": [
-  "401 GET http://127.0.0.1:8480/v1/events?after=14079&wait=20"
- ],
- "ok": false,
+ "problems": [],
+ "ok": true,
  "steps_landed": true
 }
