@@ -146,14 +146,20 @@ def main():
             "smallest": round(float(vals.min()), 1),
             "largest": round(float(vals.max()), 1),
             "ratio": round(float(vals.max() / vals.min()), 2),
-            "what_it_means": "every ruled stock in the library is printed at eight millimetres a "
-                             "rule. A sheet of it is a sheet of it wherever you meet it, and these "
-                             "are pictures of the same paper at pitches from the smallest to the "
-                             "largest above. The cause is the same one behind the tooth being "
-                             "spread thin on a wide sheet: a stock is drawn at whatever scale the "
-                             "piece it is cut for turns out to be, so a note and a settings sheet "
-                             "are cut from paper ruled at different sizes. Nothing in the app says "
-                             "how big a millimetre is.",
+            "the_library_does_not_rule_them_all_alike": {
+                "mm_per_rule": {"lined": 8.0, "graph": 5.0, "spiral": 7.0, "looseleaf": 8.7,
+                                "legal": 8.7, "index": 6.0},
+                "ratio_the_library_itself_implies": round(8.7 / 5.0, 2),
+                "read_off": "blender/paper/rules.py",
+            },
+            "what_it_means": "This measured 2.9 before a piece knew how big a millimetre was, "
+                             "against the 1.74 the library's own rulings imply — graph paper is "
+                             "ruled at five millimetres and looseleaf at 8.7, so some spread is "
+                             "correct and this check used to claim they were all eight. It is 1.86 "
+                             "now. What is left of the gap is the overscan a piece takes over its "
+                             "stock and the fallback for a piece wider than the sheet it is cut "
+                             "from; what closed is the rest. The number to watch is this ratio "
+                             "against 1.74, not against 1.",
         }
     text = json.dumps(report, indent=1) + "\n"
     if a.out:
