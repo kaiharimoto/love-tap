@@ -185,3 +185,13 @@ MODULE shelf: declared 53.0  actual rows [50, 53, 48, 51, 47, 53]  total 302
 00:27 +121: /home/user/love-tap/app/test/spine_replay_golden_test.dart: nothing outlives its event
 00:27 +122: /home/user/love-tap/app/test/spine_replay_golden_test.dart: a read marker moves a mark and is never a row
 00:27 +123: /home/user/love-tap/app/test/spine_replay_golden_test.dart: every module reads the same log and says something from it
+00:27 +124: /home/user/love-tap/app/test/every_screen_says_how_they_are_test.dart: (setUpAll)
+00:27 +124: /home/user/love-tap/app/test/every_screen_says_how_they_are_test.dart: the ribbon says where they are, how they are, and whether to write
+00:28 +125: /home/user/love-tap/app/test/every_screen_says_how_they_are_test.dart: the ribbon says where they are, how they are, and whether to write
+00:28 +126: /home/user/love-tap/app/test/paper_is_never_nothing_test.dart: a sheet whose render never arrives is still a sheet
+00:28 +127: /home/user/love-tap/app/test/paper_is_never_nothing_test.dart: a sheet whose render never arrives is still a sheet
+00:29 +128: /home/user/love-tap/app/test/paper_is_never_nothing_test.dart: every stock has a colour, including ones nobody has thought of yet
+00:29 +129: /home/user/love-tap/app/test/the_hero_holds_eight_notes_test.dart: the hero framing puts eight rows on the glass
+[0s] the year is in: 14061 events
+[5s] the thread is drawn
+[5s] pump 0
