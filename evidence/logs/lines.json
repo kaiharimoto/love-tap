@@ -1,0 +1,121 @@
+{
+ "what": "how far the writing sits from the ruled line nearest it, as a fraction of the pitch: nought is on the line, a half is exactly between two",
+ "why_it_is_not_gated": "the stock is drawn at whatever scale the piece turns out to be, so its rule pitch on the glass follows the piece's width, while the text's line height follows its point size. Nothing makes them agree. Making them agree means laying the text out against the paper it is drawn on \u2014 the pitch, and the phase of the first rule under the seeded patch offset \u2014 which is a change to every note in the app and wants a cycle of its own.",
+ "stills": {
+  "01_pulse.png": {
+   "ruled_lines": 15,
+   "written_lines": 35,
+   "rule_pitch_px": 61.5,
+   "lines_measured": 9,
+   "off_the_line": {
+    "median": 0.26,
+    "p90": 0.433
+   }
+  },
+  "02_chat.png": {
+   "ruled_lines": 5,
+   "written_lines": 41,
+   "rule_pitch_px": 147.5,
+   "lines_measured": 13,
+   "off_the_line": {
+    "median": 0.434,
+    "p90": 0.752
+   }
+  },
+  "03_us.png": {
+   "ruled_lines": 15,
+   "written_lines": 48,
+   "rule_pitch_px": 93.5,
+   "lines_measured": 35,
+   "off_the_line": {
+    "median": 0.326,
+    "p90": 0.857
+   }
+  },
+  "04_moments.png": {
+   "ruled_lines": 7,
+   "written_lines": 40,
+   "rule_pitch_px": 178.5,
+   "lines_measured": 16,
+   "off_the_line": {
+    "median": 0.32,
+    "p90": 0.651
+   }
+  },
+  "05_settings.png": {
+   "ruled_lines": 24,
+   "written_lines": 36,
+   "rule_pitch_px": 88.0,
+   "lines_measured": 24,
+   "off_the_line": {
+    "median": 0.282,
+    "p90": 0.411
+   }
+  },
+  "10_first_run.png": {
+   "ruled_lines": 3,
+   "written_lines": 17,
+   "why": "not enough ruled paper or not enough writing on this still to measure"
+  },
+  "12_search.png": {
+   "ruled_lines": 13,
+   "written_lines": 48,
+   "rule_pitch_px": 80.8,
+   "lines_measured": 24,
+   "off_the_line": {
+    "median": 0.427,
+    "p90": 0.807
+   }
+  },
+  "13_messenger_states.png": {
+   "ruled_lines": 9,
+   "written_lines": 38,
+   "rule_pitch_px": 70.2,
+   "lines_measured": 9,
+   "off_the_line": {
+    "median": 0.356,
+    "p90": 0.799
+   }
+  },
+  "14_media_viewer.png": {
+   "ruled_lines": 9,
+   "written_lines": 11,
+   "rule_pitch_px": 81.8,
+   "lines_measured": 6,
+   "off_the_line": {
+    "median": 0.316,
+    "p90": 0.659
+   }
+  },
+  "17_setup_pwa.png": {
+   "ruled_lines": 12,
+   "written_lines": 37,
+   "rule_pitch_px": 133.5,
+   "lines_measured": 23,
+   "off_the_line": {
+    "median": 0.326,
+    "p90": 0.658
+   }
+  }
+ },
+ "median_across_the_set": 0.326,
+ "what_that_number_means": "writing laid out with no relation to the rules under it lands uniformly between them, which averages 0.25. On the line is 0. The set reads 0.33, so the writing is not on the rules and is not even accidentally near them: the beat between the text's line height and the paper's pitch pushes it past random.",
+ "stills_measured": 9,
+ "the_same_paper_is_not_the_same_size": {
+  "rule_pitch_px": {
+   "01_pulse.png": 61.5,
+   "02_chat.png": 147.5,
+   "03_us.png": 93.5,
+   "04_moments.png": 178.5,
+   "05_settings.png": 88.0,
+   "12_search.png": 80.8,
+   "13_messenger_states.png": 70.2,
+   "14_media_viewer.png": 81.8,
+   "17_setup_pwa.png": 133.5
+  },
+  "smallest": 61.5,
+  "largest": 178.5,
+  "ratio": 2.9,
+  "what_it_means": "every ruled stock in the library is printed at eight millimetres a rule. A sheet of it is a sheet of it wherever you meet it, and these are pictures of the same paper at pitches from the smallest to the largest above. The cause is the same one behind the tooth being spread thin on a wide sheet: a stock is drawn at whatever scale the piece it is cut for turns out to be, so a note and a settings sheet are cut from paper ruled at different sizes. Nothing in the app says how big a millimetre is."
+ }
+}

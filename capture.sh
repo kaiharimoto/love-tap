@@ -445,6 +445,9 @@ echo "· checking a torn edge does not repeat"
 python3 tools/check/torn.py --out "$LOG/torn.json" >/dev/null \
   || note_missing "torn" "a torn edge in the rig repeats; see $LOG/torn.json"
 
+echo "· measuring whether the writing sits on the ruled lines"
+python3 tools/check/lines.py --out "$LOG/lines.json" >/dev/null || true
+
 echo "· measuring how flat the palest paper on each still is"
 python3 tools/check/flat.py --out "$LOG/flat.json" >/dev/null \
   || note_missing "flat" "a pale window on a still is flatter than any stock in the library; see $LOG/flat.json"

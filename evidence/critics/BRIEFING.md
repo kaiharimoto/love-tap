@@ -67,6 +67,15 @@ things and both are written down. And the chat report carries `replies_on_the_gl
 `refusals_on_the_glass` and `clipped_at_an_edge`: a delivered reply with the row it answers, the
 words the other phone refused in, and any row whose ink is outside the frame.
 
+`logs/lines.json` is a measurement the build makes of itself and does not pass: how far the writing
+sits from the ruled line nearest it, as a fraction of the pitch. Nought is on the line, a half is
+exactly between two, and writing laid out with no relation to the rules lands uniformly and
+averages 0.25. The set reads **0.33**. The same file records a second thing found on the way — the
+same ruled stock, printed at eight millimetres a rule, appears at pitches from 61 to 178 pixels
+across the ten stills, a ratio of 2.9, because a stock is drawn at whatever scale the piece cut
+from it turns out to be. Both are reported and neither is gated; both are named in the builder's
+own sheet.
+
 `evidence/frames.json` records, per clip and per run, how many milliseconds each step was worth
 (`runs[].step_ms`), the total app time (`app_seconds`) and the ratio of playback to app time
 (`playback_over_app_time` — 1.0 means real time, 2.0 means the clip plays at half speed). A
