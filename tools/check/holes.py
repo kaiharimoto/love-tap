@@ -93,7 +93,19 @@ def _holes(rgb, dark, grow, reach=12):
     # only says which pale regions are sheets, and the sheet's own boundary is where the pale
     # region is: the cores are grown back out and intersected with pale again.
     core = pale & (_share(pale, 20) > 0.90)
-    paper = pale & _grown(core, 26)
+    sheet = pale & _grown(core, 26)
+    # And the writing on it is still on it. Ink is not pale, so every letter punches a hole in the
+    # sheet, and the ring three to twelve pixels outside a hole is the paper around the letter:
+    # 05_settings' emphasised word `quietly`, underlined and sitting near the foot of a sheet, put
+    # 130 pixels of pure black into a check that is looking for shadows on the desk.
+    #
+    # Closed, not grown: dilate by twelve and erode by twelve again. That fills a hole up to about
+    # twenty-four pixels across — which is every letter on these screens — and leaves the sheet's
+    # outer boundary exactly where it was, so a black band lying *beside* the sheet is not filled
+    # in with it. Growing by a radius and asking what share of the neighbourhood is paper cannot
+    # tell those two apart: a letter at the foot of a sheet and a shadow just past its edge have
+    # the same neighbourhood.
+    paper = ~_grown(~_grown(sheet, 12), 12)
     ring = _grown(paper, reach) & ~_grown(paper, grow)
     return (lum < dark) & ring, lum
 
@@ -174,6 +186,14 @@ def main():
                "the piece it belongs to, that black is on the desk.",
         "dark": a.dark,
         "allow": a.allow,
+        "what_it_still_counts_that_is_not_a_hole": "ink at the very edge of a sheet. 05_settings "
+                "reads 130 pixels at luma 0, and they are the rule under the emphasised word "
+                "`quietly` — an 84-pixel horizontal stroke on the last line of a sheet, at "
+                "(953-1037, 2941). A closing fills a letter-shaped hole inside a sheet, which is "
+                "why 01_pulse's candle went from 5 to 0, but it cannot fill a notch that is open "
+                "to the outside, and a dark stroke at a sheet's boundary has the same "
+                "neighbourhood as a shadow just past it. This is what the allowance is for, and "
+                "the densest-writing control measures 51 by the same code.",
         "controls": controls(a.dark, a.grow),
         "stills": {},
     }
