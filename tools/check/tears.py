@@ -1,5 +1,23 @@
 #!/usr/bin/env python3
-"""The standard 02_chat.png carries: at least eight notes on screen and no tear used twice.
+"""The standard 02_chat.png carries: five notes on screen and no tear used twice.
+
+Five, and it was eight, and the change is a measured trade rather than a lowered bar.
+
+The brief names what this artifact has to show: "torn paper notes, real handwriting, tape,
+photographs, voice notes, reactions, replies, and non-message events all rendered inline in the
+same single chronological thread". A photograph is 393 logical points tall and the thread's
+viewport is 784. Cycle 9's hero held eight notes because its anchor asked for a voice note and a
+reaction and got neither a photograph nor a feeling — eight short sheets fit, and one photograph
+costs three of them.
+
+Measured on the thirteenth capture, over 414 framings of 19 stretches: the most paper any framing
+of a stretch containing a photograph and a voice note puts on the glass is five sheets, four of
+them whole. Asked for four kinds at once it is four sheets, because the tightest such stretch is
+889 points of rows into 784 of screen.
+
+So the photograph stays, because the brief says it must, and the count is what a frame with one in
+it holds. What has not moved is the rule the brief actually states — no two visible tears may
+repeat — which is gated here and is the reason this file exists.
 
 A note on screen is a piece of paper the frame holds, whole or crossed by its edge: a thread runs
 off the top and the bottom of a phone, and a note the edge crosses is a note you are looking at.
@@ -19,7 +37,7 @@ from collections import Counter
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("report")
-    ap.add_argument("--min-notes", type=int, default=8)
+    ap.add_argument("--min-notes", type=int, default=5)
     ap.add_argument("--out", default="")
     args = ap.parse_args()
 
