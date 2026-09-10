@@ -149,8 +149,23 @@ def stroke_length(pts):
     return float(np.sum(np.linalg.norm(np.diff(np.asarray(pts)[:, :2], axis=0), axis=1)))
 
 
-def apply_roles(strokes, roles, hand):
+def apply_roles(strokes, roles, hand, rng=None):
+    """The marks a hand makes after the letter: the cross on a t, the dot on an i.
+
+    They move per *variant*, not just per hand. Nothing else in this file can make a small glyph
+    look different twice: the field, the point noise and the per-stroke rotation are all relative
+    to the glyph, so a dot-high mark moves a fraction of what an ascender moves, while the check's
+    floor is an absolute 26 units — 1.4 device pixels at the size a note is written, which is the
+    distance at which two glyphs stop being the same glyph whatever their size. Measured, NoorHand
+    came out with `i` at 24.6 and `0` at 24.3 against that floor while its median was 42.
+
+    Where the dot lands is also the most recognisable thing about a person's handwriting, and
+    nobody puts it in the same place twice, so this is the variation to have rather than a
+    displacement invented to satisfy a number.
+    """
     late = hand.get("t_cross_late", 0.0)
+    # How far the mark wanders between one writing of the letter and the next, in font units.
+    wander = hand.get("mark_wander", 34.0)
     out = []
     for s, role in zip(strokes, roles):
         s = np.array(s, float)
@@ -163,7 +178,47 @@ def apply_roles(strokes, roles, hand):
         if role == "dot" and late > 0:     # fast hands drop the dot a little late and high
             s[:, 0] += late * 40
             s[:, 1] += late * 25
+        if role in ("dot", "cross") and rng is not None and wander > 0:
+            s[:, 0] += rng.uniform(-wander, wander)
+            s[:, 1] += rng.uniform(-wander * 0.7, wander * 0.7)
         out.append(s)
+    return out
+
+
+def roll_closed(strokes, rng, amount):
+    """Where a round letter is started and stopped, which is never twice the same place.
+
+    A closed stroke — an o, an a's bowl, a zero — is drawn from somewhere on the loop back round to
+    where it began, and the join is where the pen came down and where it lifted: the entry is
+    heavier, the exit trails, and the two overlap or leave a hair of a gap. A person does not put
+    that join in the same place twice.
+
+    Nothing else in this file could tell one zero from another. The field, the point noise and the
+    per-stroke rotation are all relative to the glyph, so a short round letter moves a fraction of
+    what an ascender moves, and the check's floor is an absolute 26 units — 1.4 device pixels at
+    the size a note is written. NoorHand's `0` came out at 24.3 against it.
+    """
+    out = []
+    for s in strokes:
+        n = len(s)
+        if n < 12 or amount <= 0:
+            out.append(s)
+            continue
+        span = max(np.ptp(s[:, 0]), np.ptp(s[:, 1]))
+        # closed: the two ends are within a tenth of the letter's own size of each other
+        if span <= 0 or np.hypot(*(s[0, :2] - s[-1, :2])) > 0.10 * span:
+            out.append(s)
+            continue
+        k = int(rng.uniform(-amount, amount) * n)
+        if k == 0:
+            out.append(s)
+            continue
+        # roll the loop, keeping the pressure profile with the *place* rather than with the sample,
+        # so the entry is heavy wherever the pen actually came down
+        xy = np.roll(s[:, :2], -k, axis=0)
+        rolled = s.copy()
+        rolled[:, :2] = xy
+        out.append(rolled)
     return out
 
 
@@ -304,13 +359,15 @@ def style_strokes(glyph, variant, hand, rng, plan=None):
     if hand.get("uppercase_only") and glyph.get("_lower_scale"):
         k = glyph["_lower_scale"]
         strokes = [s * np.array([k, k, 1.0]) for s in strokes]
-    strokes = apply_roles(strokes, roles, hand)
+    # The marks wander per variant; the base letter is the base letter.
+    strokes = apply_roles(strokes, roles, hand, rng if variant > 0 else None)
     strokes = stretch_exit(strokes, hand.get("exit_stretch", 1.0))
     sx, sy = hand["width_scale"], hand["xheight_scale"]
     strokes = [s * np.array([sx, sy, 1.0]) for s in strokes]
     J = hand["jitter"]
     slant = hand["slant_deg"]
     if variant > 0:
+        strokes = roll_closed(strokes, rng, hand.get("loop_join_roll", 0.10))
         strokes = jitter_strokes(strokes, hand, rng)
         wob = hand["baseline_wobble"]
         dy = rng.uniform(-wob, wob)
