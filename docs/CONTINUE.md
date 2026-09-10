@@ -131,6 +131,25 @@ than ink in the ring beside a sheet: 02_chat 4,070 → 0, 03_us 3,896 → 0, 12_
 04_moments 2,071 → 0, and the darkest pixel beside a sheet from 5.3–17.3 up to 34.7–48.3.
 `paper_at_its_own_size` reads 222 against 3 stretched.
 
+### And two the twelfth capture found in its own clips
+
+- **The folded note's landing does not move under the driven clock.** Scene 06 grabs sixteen frames
+  of the note that has just arrived before opening it, and on the frames that capture wrote all
+  sixteen are *byte-identical* — mean absolute change 0.0000 between each pair, then 6.68 on the
+  frame the unfold starts. The landing is real code (`FoldedNote` wraps its sheet in
+  `Settling(duration: Motion.land, curve: Motion.drop)` when `arriving`), the curve moves 2.77
+  pixels on its first frame and 17.5 over sixteen, and `awaitArrival` does not step the clock — so
+  a frame of it should differ from the one before by more than two grey levels and none of them
+  does. Something between `Settling` subscribing to `DrivenClock.ticks` and the note being rebuilt
+  is not connected. The scene's pre-roll is one frame now, so the clip has no hole in the front of
+  it, and this is written down rather than papered over.
+- **Two corners fight over the capture handles.** `FeelingCorner` registered `openCorner`,
+  `showFamily`, `holdOver` and `letGo` in `initState` and cleared them unconditionally in
+  `dispose`. When the region changes, Flutter builds the new corner before it disposes the old one,
+  so the new registration was torn down behind it and the next `__deskOpenCorner` answered `no
+  shell`. That is what stopped 15_authored_feeling at its second `goTo`, sixty-six minutes into a
+  capture. Whoever mounted last owns them now.
+
 One thing was found on the way and not chased: **a second `AppScope` built inside a second
 `testWidgets` in one file never returns.** Reduced to a scratch test that builds one, pumps it,
 and does it again — the first case passes in under a second and the second never reaches its first

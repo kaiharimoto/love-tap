@@ -36,6 +36,9 @@ class FeelingCorner extends StatefulWidget {
   State<FeelingCorner> createState() => _FeelingCornerState();
 }
 
+/// Which corner's handles are on the bus. See the note in initState.
+_FeelingCornerState? _owner;
+
 class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProviderStateMixin {
   late final AnimationController _curl = AnimationController(
     vsync: this,
@@ -127,6 +130,14 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
   void initState() {
     super.initState();
     if (Flags.capture) {
+      // Whoever mounted last owns the handles.
+      //
+      // When the region changes, Flutter builds the new corner before it disposes the old one, and
+      // `dispose` used to clear these unconditionally — so the new corner registered, the old one
+      // tore the registration down behind it, and the next `__deskOpenCorner` answered `no shell`.
+      // That is what stopped 15_authored_feeling at its second `goTo`, sixty-six minutes into a
+      // capture.
+      _owner = this;
       CaptureBus.openCorner = (open) => open ? _openSender() : _close();
       CaptureBus.showFamily = (name) {
         final want = Family.values.firstWhere(
@@ -176,7 +187,8 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
 
   @override
   void dispose() {
-    if (Flags.capture) {
+    if (Flags.capture && identical(_owner, this)) {
+      _owner = null;
       CaptureBus.openCorner = null;
       CaptureBus.showFamily = null;
       CaptureBus.holdOver = null;

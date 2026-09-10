@@ -34,8 +34,9 @@
   {
    "do": "frames",
    "dir": "evidence/frames/06_unfolding",
-   "count": 16,
-   "ms": 16
+   "count": 1,
+   "ms": 16,
+   "why": "One frame, not sixteen. The sixteen were meant to be the folded note landing \u2014 and measured on the frames the twelfth capture wrote, all sixteen are byte-identical: the landing does not move under the driven clock. That is a fault of its own, written into evidence/logs/06_unfolding.frames.json and into the handover, and it is not something this clip should paper over by holding on a still note for a quarter of a second before it opens."
   },
   {
    "do": "unfold",
@@ -57,8 +58,9 @@
   {
    "do": "frames",
    "dir": "evidence/frames/06_unfolding",
-   "count": 16,
-   "ms": 16
+   "count": 1,
+   "ms": 16,
+   "why": "One frame, not sixteen. The sixteen were meant to be the folded note landing \u2014 and measured on the frames the twelfth capture wrote, all sixteen are byte-identical: the landing does not move under the driven clock. That is a fault of its own, written into evidence/logs/06_unfolding.frames.json and into the handover, and it is not something this clip should paper over by holding on a still note for a quarter of a second before it opens."
   },
   {
    "do": "unfold",
