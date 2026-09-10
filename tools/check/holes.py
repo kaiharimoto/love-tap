@@ -61,7 +61,12 @@ def _holes(rgb, dark, grow, reach=12):
     """
     lum = rgb.mean(axis=2)
     warm = rgb[..., 0] - rgb[..., 2]
-    paper = (lum > 150.0) & (warm > 2.0) & (warm < 60.0)
+    # Pale, and not the wood. Not "pale and warm": a blue sticky note has its blue channel *above*
+    # its red, so a warmth test throws away the paper it is written on and then counts the writing
+    # on it as a hole in the desk. The desk is dark enough (84 to 103 across the set) that
+    # brightness alone separates it, and the warmth ceiling only keeps out anything more orange
+    # than paper ever is.
+    paper = (lum > 150.0) & (warm < 60.0)
     ring = _grown(paper, reach) & ~_grown(paper, grow)
     return (lum < dark) & ring, lum
 
@@ -102,11 +107,20 @@ def controls(dark, grow):
         got["the_densest_handwriting_in_the_set"] = measure(crop, dark, grow * 3)
         got["the_densest_handwriting_in_the_set"]["measured_at"] = \
             "three times the radius, because the crop is at three times the scale"
-    # a black square dropped on bare desk, by the same code
+    # The fault itself, drawn by hand: a desk, a sheet on it, and a six-pixel black band along the
+    # sheet's right edge — which is what a contact shadow that has come out from under its paper
+    # looks like. Measured by the same code, so the gate can be seen to catch the thing it is for.
     desk = np.full((200, 200, 3), (110.0, 88.0, 66.0), dtype=np.float32)
-    desk[70:130, 70:130] = 0.0
+    desk[50:150, 50:150] = (243.0, 238.0, 227.0)       # the sheet
+    desk[50:150, 150:156] = 0.0                        # its shadow, out from under it
     holes, _ = _holes(desk, dark, grow)
-    got["a_60_px_square_of_black_on_the_desk"] = {"beside_the_paper": int(holes.sum())}
+    got["a_shadow_out_from_under_its_sheet"] = {
+        "beside_the_paper": int(holes.sum()),
+        "of": 100 * 6,
+        "note": "a six-pixel black band along a sheet's edge. The first three pixels are inside "
+                "the grown paper mask and are not counted, which is the point of growing it: the "
+                "soft edge of a real sheet is not a fault.",
+    }
     return got
 
 
