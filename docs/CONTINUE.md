@@ -107,6 +107,30 @@ at a picture.
   scene grabs 48 of its own frames and they are folded into `crops/14_media_viewer_strip.png` and
   the frame record — not an eighteenth artifact.
 
+### And two the capture itself found, fourteen minutes in
+
+The twelfth capture was stopped after five stills because its first artifact carried two faults
+worth more than the fourteen minutes.
+
+- **A black quadrilateral behind every feeling object.** The same fault as the paper's contact
+  shadows, in the object path, and the same fix. Those renders are RGB 0,0,0 through their alpha
+  with an opaque core nearly the object's own silhouette — `obj_dog_ear_shadow` is 17.4 per cent
+  alpha above 240 against the object's 18.7 — so wherever the packed offset puts the core beside
+  the thing instead of under it, black lands on the desk. On 01_pulse's object row it reads as a
+  hole cut in the wood behind a torn card.
+- **A drawn feeling was six translucent rectangles.** Every stroke composited separately at under
+  full alpha, so a crossing carried two and came out 46 grey levels darker than the ink; and the
+  wobble was one offset per named point, so `obj_window` — six strokes of two points each — drew
+  dead straight and uniform. The whole mark goes into one layer now, and a stroke is walked at
+  about a pen's width a step with two slow terms and the ends pinned. Four built-ins are drawn
+  marks rather than rendered props (`obj_window`, `obj_chair`, `obj_scribble`, `obj_thumbprint`)
+  and every critic so far has assumed all thirty-four were props.
+
+**The paper half of the shadow fix is confirmed on the artifacts that run did take.** Pixels darker
+than ink in the ring beside a sheet: 02_chat 4,070 → 0, 03_us 3,896 → 0, 12_search 10,995 → 0,
+04_moments 2,071 → 0, and the darkest pixel beside a sheet from 5.3–17.3 up to 34.7–48.3.
+`paper_at_its_own_size` reads 222 against 3 stretched.
+
 One thing was found on the way and not chased: **a second `AppScope` built inside a second
 `testWidgets` in one file never returns.** Reduced to a scratch test that builds one, pumps it,
 and does it again — the first case passes in under a second and the second never reaches its first
