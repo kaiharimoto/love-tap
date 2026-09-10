@@ -26,6 +26,34 @@ void main() {
             'that falls on the desk — the only part anyone sees — is cut off:\n$head');
   });
 
+  test('every baked shadow is warm, because a shadow on a wooden desk is not black', () {
+    // The renders are RGB 0,0,0 through their alpha, and a large part of each one is fully
+    // opaque, because that part is meant to be under the thing casting it: measured,
+    // obj_dog_ear_shadow is 17.4 per cent alpha above 240 against the object's own 18.7, and 35
+    // to 47 per cent of each tear shadow is above 240. Wherever the offset or the stretch puts
+    // that core beside the paper instead of under it, what lands on the desk is black — luma 4.3
+    // beside a chip in 12_search, and a hard black quadrilateral behind the torn card in
+    // 01_pulse's object row, where the desk either side reads 84 to 103.
+    //
+    // A contact shadow is the desk with the light taken out of it. It is warm and it is dark and
+    // it is never a hole, so both paths put the render through Shadow.warm and keep only its
+    // alpha. tools/check/holes.py measures the result on the glass.
+    // Anchored on the call that actually draws the render, not on the word: in objects.dart the
+    // first `_shadow` is the widget being *asked* for, three hundred lines above the draw.
+    final draws = {
+      'lib/material/paper.dart': 'Widget _bakedShadow(',
+      'lib/material/objects.dart': 'class _Shadow extends StatelessWidget',
+    };
+    draws.forEach((f, anchor) {
+      final src = File(f).readAsStringSync();
+      final at = src.indexOf(anchor);
+      expect(at, greaterThan(0), reason: '$f no longer draws a baked shadow where this looks');
+      final block = src.substring(at, (at + 2600).clamp(0, src.length));
+      expect(block, contains('ColorFilter.mode(Shadow.warm, BlendMode.srcIn)'),
+          reason: '$f draws its baked shadow in the colour it was rendered in, which is black');
+    });
+  });
+
   test('the baked shadow is sampled with a filter that cannot overshoot', () {
     // A shadow render is a dark shape inside a transparent border. A mipmapped or cubic sampler
     // rings at a boundary like that and lands a *bright* row just outside the dark one — which is

@@ -7,6 +7,7 @@ import '../feelings/drawn.dart';
 import 'library.dart';
 import 'paper.dart';
 import 'light.dart';
+import 'palette.dart';
 
 class FeelingObject extends StatelessWidget {
   const FeelingObject({
@@ -265,8 +266,19 @@ class _Shadow extends StatelessWidget {
           opacity: opacity,
           child: Transform.scale(
             scale: scale,
-            child: Image.asset(objectAsset(id),
-                fit: BoxFit.contain, gaplessPlayback: true, errorBuilder: _none),
+            // Warm, not black. These renders are RGB 0,0,0 through their alpha and the opaque part
+            // of one is nearly the object's own silhouette — measured, obj_dog_ear's shadow is
+            // 17.4 per cent alpha above 240 against the object's 18.7 — so wherever the offset
+            // puts that core beside the thing instead of under it, what lands on the desk is a
+            // black quadrilateral with straight edges. On 01_pulse's object row it reads as a hole
+            // cut in the wood behind a torn card, which is the shape the material system exists
+            // not to be. A contact shadow is the desk with the light taken out of it: at full
+            // alpha this now composites to luma 62 against the desk's 100, where black gave 25.
+            child: ColorFiltered(
+              colorFilter: const ColorFilter.mode(Shadow.warm, BlendMode.srcIn),
+              child: Image.asset(objectAsset(id),
+                  fit: BoxFit.contain, gaplessPlayback: true, errorBuilder: _none),
+            ),
           ),
         ),
       ),

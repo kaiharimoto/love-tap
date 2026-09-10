@@ -30,11 +30,56 @@ class DrawingHand {
   final double weight;
   final math.Random _rng;
 
-  double _wobble(double amount) => (_rng.nextDouble() - 0.5) * amount;
+  /// A hand's line between two points it meant to join.
+  ///
+  /// It drifts; it does not jitter. The wobble used to be one random offset applied to each point
+  /// the shape names, so `obj_window` — six strokes of two points each — came out as six dead
+  /// straight bars of uniform width, and at three hundred per cent on the chat hero it read as
+  /// vector art laid on the paper rather than as something somebody drew. A stroke is walked at
+  /// about a pen's width a step now, with two slow terms across its length: the line leaves where
+  /// it was aimed and comes back, the way a line drawn without a ruler does.
+  List<Offset> _walk(List<Offset> points, double wobble) {
+    final step = math.max(2.0, weight * 2.2);
+    final out = <Offset>[];
+    // one drift per stroke, so a line bows rather than shivering
+    final k1 = 0.6 + _rng.nextDouble() * 1.9;
+    final k2 = 2.1 + _rng.nextDouble() * 3.4;
+    final p1 = _rng.nextDouble() * _tau;
+    final p2 = _rng.nextDouble() * _tau;
+    final amp = wobble * (1.4 + weight * 0.35);
+    var walked = 0.0;
+    final total = () {
+      var d = 0.0;
+      for (var i = 0; i < points.length - 1; i++) {
+        d += (points[i + 1] - points[i]).distance;
+      }
+      return d;
+    }();
+    for (var i = 0; i < points.length - 1; i++) {
+      final a = points[i], b = points[i + 1];
+      final len = (b - a).distance;
+      if (len < 1e-6) continue;
+      final n = math.max(1, (len / step).ceil());
+      final normal = Offset(-(b.dy - a.dy) / len, (b.dx - a.dx) / len);
+      for (var j = 0; j < n; j++) {
+        final t = j / n;
+        final at = Offset.lerp(a, b, t)!;
+        final u = total <= 0 ? 0.0 : (walked + len * t) / total;
+        // ends are pinned: a person hits the corner they were aiming for
+        final ease = math.sin(u * math.pi);
+        final off = amp * ease *
+            (math.sin(u * _tau * k1 + p1) * 0.65 + math.sin(u * _tau * k2 + p2) * 0.35);
+        out.add(at + normal * off);
+      }
+      walked += len;
+    }
+    out.add(points.last);
+    return out;
+  }
 
   void stroke(List<Offset> points, {double wobble = 0.7, double taper = 0.4, double width = 1.0}) {
     if (points.length < 2) return;
-    final pts = [for (final p in points) p + Offset(_wobble(wobble), _wobble(wobble))];
+    final pts = _walk(points, wobble);
     final n = pts.length - 1;
     for (var i = 0; i < n; i++) {
       final t = n == 1 ? 0.5 : i / (n - 1);
@@ -152,8 +197,20 @@ class _DrawnPainter extends CustomPainter {
   final int seed;
 
   @override
-  void paint(Canvas canvas, Size s) =>
-      draw(canvas, s, DrawingHand(canvas, colour, math.max(1.0, s.width / 44), seed + 7));
+  void paint(Canvas canvas, Size s) {
+    // The whole mark into one layer, and composited once.
+    //
+    // Ink does not get darker where a line crosses another line, and it does not get darker
+    // between one segment of a stroke and the next — but every segment here is drawn under the
+    // pen's own coverage at less than full alpha, so both were happening: the crossings of
+    // `obj_window` came out visibly darker than its bars, which is what six translucent
+    // rectangles laid over each other looks like and is not what a pen does.
+    canvas.saveLayer(
+        Offset.zero & s, Paint()..color = const Color(0xFF000000).withValues(alpha: colour.a));
+    draw(canvas, s, DrawingHand(canvas, colour.withValues(alpha: 1.0),
+        math.max(1.0, s.width / 44), seed + 7));
+    canvas.restore();
+  }
 
   @override
   bool shouldRepaint(_DrawnPainter old) => old.colour != colour || old.seed != seed;
