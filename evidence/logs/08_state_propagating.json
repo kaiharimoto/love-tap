@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2306
+   "ms": 2303
   },
   {
    "do": "pair",
-   "ms": 1344
+   "ms": 1387
   },
   {
    "do": "wait",
-   "ms": 3705
+   "ms": 3704
   },
   {
    "do": "goTo",
-   "ms": 4111
+   "ms": 3761
   },
   {
    "do": "far",
-   "ms": 583
+   "ms": 534
   },
   {
    "do": "awaitArrival",
-   "ms": 5461
+   "ms": 3617
   },
   {
    "do": "wait",
@@ -38,51 +38,51 @@
   },
   {
    "do": "step",
-   "ms": 2554
+   "ms": 2269
   },
   {
    "do": "frames",
-   "ms": 25951
+   "ms": 39854
   },
   {
    "do": "wait",
-   "ms": 3003
+   "ms": 3004
   },
   {
    "do": "far",
-   "ms": 506
+   "ms": 505
   },
   {
    "do": "awaitArrival",
-   "ms": 980
+   "ms": 1189
   },
   {
    "do": "wait",
-   "ms": 1202
+   "ms": 1203
   },
   {
    "do": "step",
-   "ms": 1037
+   "ms": 3054
   },
   {
    "do": "frames",
-   "ms": 204511
+   "ms": 270437
   },
   {
    "do": "goTo",
-   "ms": 2818
+   "ms": 5459
   },
   {
    "do": "step",
-   "ms": 1602
+   "ms": 1643
   },
   {
    "do": "far",
-   "ms": 504
+   "ms": 778
   },
   {
    "do": "awaitArrival",
-   "ms": 1032
+   "ms": 884
   },
   {
    "do": "wait",
@@ -90,39 +90,7 @@
   },
   {
    "do": "unfold",
-   "ms": 928
-  },
-  {
-   "do": "wait",
-   "ms": 1202
-  },
-  {
-   "do": "frames",
-   "ms": 185542
-  },
-  {
-   "do": "far",
-   "ms": 504
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1804
-  },
-  {
-   "do": "wait",
-   "ms": 1204
-  },
-  {
-   "do": "frames",
-   "ms": 97557
-  },
-  {
-   "do": "far",
-   "ms": 504
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1649
+   "ms": 730
   },
   {
    "do": "wait",
@@ -130,31 +98,15 @@
   },
   {
    "do": "frames",
-   "ms": 217294
-  },
-  {
-   "do": "goTo",
-   "ms": 3167
-  },
-  {
-   "do": "step",
-   "ms": 1944
-  },
-  {
-   "do": "wait",
-   "ms": 2102
+   "ms": 253991
   },
   {
    "do": "far",
-   "ms": 506
-  },
-  {
-   "do": "far",
-   "ms": 993
+   "ms": 505
   },
   {
    "do": "awaitArrival",
-   "ms": 3372
+   "ms": 1243
   },
   {
    "do": "wait",
@@ -162,11 +114,59 @@
   },
   {
    "do": "frames",
-   "ms": 190264
+   "ms": 178463
+  },
+  {
+   "do": "far",
+   "ms": 626
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 2130
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 301061
+  },
+  {
+   "do": "goTo",
+   "ms": 7261
+  },
+  {
+   "do": "step",
+   "ms": 1671
+  },
+  {
+   "do": "wait",
+   "ms": 2103
+  },
+  {
+   "do": "far",
+   "ms": 506
+  },
+  {
+   "do": "far",
+   "ms": 767
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 2621
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 259805
   },
   {
    "do": "report",
-   "ms": 636
+   "ms": 664
   }
  ],
  "shots": [
@@ -227,27 +227,27 @@
      {
       "id": "dates",
       "events": 81,
-      "glance": "next: the place by the bridge"
+      "glance": "3 ahead"
      },
      {
       "id": "todos",
       "events": 199,
-      "glance": "10 open"
+      "glance": "10 open · 16 done"
      },
      {
       "id": "calendar",
       "events": 6,
-      "glance": "us in 60 days"
+      "glance": "3 marked · the next in 59 days"
      },
      {
       "id": "rituals",
       "events": 53,
-      "glance": "last: tuesday soup"
+      "glance": "3 kept · 53 times · the last 7 days ago"
      },
      {
       "id": "shelf",
       "events": 12,
-      "glance": "waiting on you: the one you said you stopped"
+      "glance": "2 waiting on you · 6 between you"
      }
     ]
    },
@@ -259,31 +259,33 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 11248,
    "seed": 20260903,
-   "events": 14081,
+   "events": 14109,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 5,
+   "masks_composed": 7,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 29586,
+   "paper_stretched_to_fit": 491,
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 139,
+    "length": 142,
     "decoded": 14,
     "decoding": 0,
-    "playhead": 137,
-    "held_from": 125,
-    "held_to": 138
+    "playhead": 140,
+    "held_from": 128,
+    "held_to": 141
    },
    "sensation": {
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-09T20:11:54.367Z",
+    "started_at": "2026-09-10T04:56:41.123Z",
     "pattern": [
      {
       "ms": 150,
@@ -307,28 +309,38 @@
      }
     ]
    },
+   "the_launch_took": {
+    "the framework": 7,
+    "the library index": 16,
+    "the ink plates": 37,
+    "the desk": 146,
+    "the log": 714,
+    "the first frame": 322,
+    "everything": 1242
+   },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 50,
-    "pushed": 12,
+    "rounds": 454,
+    "pushed": 10,
     "refused": 0,
     "pulled": 8,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14081,
+    "cursor": 14109,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14081,
-     "our_cursor": 14081,
+     "peer_cursor": 14109,
+     "our_cursor": 14109,
      "last_error": null,
-     "since": "2026-09-09T19:58:48.700Z",
-     "last_contact": "2026-09-09T20:14:51.177Z"
+     "since": "2026-09-10T04:38:16.699Z",
+     "last_contact": "2026-09-10T05:01:02.763Z"
     }
    },
    "ambient": {
@@ -336,17 +348,31 @@
     "pocket_feeling": "soup",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "08_state_propagating",
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 9733,
+ "cold_ms": 2332,
  "load": {
-  "ms": 9733,
-  "store": "fresh",
-  "profile": "profile_seeded"
+  "ms": 2332,
+  "store": "kept",
+  "profile": "profile_seeded",
+  "made_of": {
+   "the framework": 7,
+   "the library index": 16,
+   "the ink plates": 37,
+   "the desk": 146,
+   "the log": 714,
+   "the first frame": 322,
+   "everything": 1242
+  }
  },
  "far": [
   {
@@ -381,45 +407,45 @@
  "arrivals": [
   {
    "line": "state mood restless",
-   "before": 8069,
-   "after": 8070,
+   "before": 8083,
+   "after": 8084,
    "at_frame": 0,
-   "waited_ms": 4960
+   "waited_ms": 3115
   },
   {
    "line": "feeling hold 0.92",
-   "before": 8070,
-   "after": 8071,
+   "before": 8084,
+   "after": 8085,
    "at_frame": 16,
-   "waited_ms": 479
+   "waited_ms": 688
   },
   {
    "line": "message it is raining here too",
-   "before": 8071,
-   "after": 8072,
+   "before": 8085,
+   "after": 8086,
    "at_frame": 165,
-   "waited_ms": 531
+   "waited_ms": 383
   },
   {
    "line": "feeling squeeze 0.6",
-   "before": 8072,
-   "after": 8073,
+   "before": 8086,
+   "after": 8087,
    "at_frame": 305,
-   "waited_ms": 1302
+   "waited_ms": 742
   },
   {
    "line": "feeling here 0.8",
-   "before": 8073,
-   "after": 8074,
+   "before": 8087,
+   "after": 8088,
    "at_frame": 376,
-   "waited_ms": 1148
+   "waited_ms": 1629
   },
   {
    "line": "feeling soup 0.7",
-   "before": 8075,
-   "after": 8076,
+   "before": 8089,
+   "after": 8090,
    "at_frame": 532,
-   "waited_ms": 2871
+   "waited_ms": 2120
   }
  ],
  "problems": [],

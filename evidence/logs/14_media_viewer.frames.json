@@ -1,21 +1,21 @@
 {
- "dir": "/tmp/lovetap-capture/11_chat_scroll",
- "frames": 300,
- "fps": 62.5,
- "seconds": 4.8,
+ "dir": "evidence/frames/14_media_viewer",
+ "frames": 48,
+ "fps": 12.0,
+ "seconds": 4.0,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
   {
-   "frames": 300,
-   "step_ms": 16,
-   "dir": "evidence/frames/11_chat_scroll"
+   "frames": 48,
+   "step_ms": 33,
+   "dir": "evidence/frames/14_media_viewer"
   }
  ],
  "cuts_between_runs": [],
- "app_seconds": 4.8,
- "playback_over_app_time": 1.0,
- "mean_change_per_frame": 27.61556,
+ "app_seconds": 1.58,
+ "playback_over_app_time": 2.525,
+ "mean_change_per_frame": 1.15136,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -24,10 +24,10 @@
    "busiest_32px_tile_mean_change_below": 2.0
   },
   "worst_moving_frame": {
-   "frame": 199,
-   "mean": 17.4972,
-   "visible_share": 0.316714,
-   "busiest_tile": 144.2901,
+   "frame": 28,
+   "mean": 0.0097,
+   "visible_share": 9.2e-05,
+   "busiest_tile": 30.5672,
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },
@@ -37,13 +37,13 @@
  "repeated_at": [],
  "brightness_jumps": 0,
  "ok": true,
- "strip": "evidence/crops/11_chat_scroll_strip.png",
+ "strip": "evidence/crops/14_media_viewer_strip.png",
  "strip_frames": [
-  "/tmp/lovetap-capture/11_chat_scroll/000000.png",
-  "/tmp/lovetap-capture/11_chat_scroll/000060.png",
-  "/tmp/lovetap-capture/11_chat_scroll/000120.png",
-  "/tmp/lovetap-capture/11_chat_scroll/000179.png",
-  "/tmp/lovetap-capture/11_chat_scroll/000239.png",
-  "/tmp/lovetap-capture/11_chat_scroll/000299.png"
+  "evidence/frames/14_media_viewer/0000.png",
+  "evidence/frames/14_media_viewer/0009.png",
+  "evidence/frames/14_media_viewer/0019.png",
+  "evidence/frames/14_media_viewer/0028.png",
+  "evidence/frames/14_media_viewer/0038.png",
+  "evidence/frames/14_media_viewer/0047.png"
  ]
 }

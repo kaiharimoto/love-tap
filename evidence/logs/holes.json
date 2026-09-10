@@ -6,21 +6,11 @@
  "what_it_still_counts_that_is_not_a_hole": "ink at the very edge of a sheet. 05_settings reads 130 pixels at luma 0, and they are the rule under the emphasised word `quietly` \u2014 an 84-pixel horizontal stroke on the last line of a sheet, at (953-1037, 2941). A closing fills a letter-shaped hole inside a sheet, which is why 01_pulse's candle went from 5 to 0, but it cannot fill a notch that is open to the outside, and a dark stroke at a sheet's boundary has the same neighbourhood as a shadow just past it. This is what the allowance is for, and the densest-writing control measures 51 by the same code.",
  "controls": {
   "the_densest_handwriting_in_the_set": {
-   "pixels_darker_than_ink": 432,
-   "beside_the_paper": 51,
-   "darkest": 21.67,
-   "darkest_beside_a_sheet": 23.0,
-   "ring_pixels": 3411,
-   "worst_at": [
-    1254,
-    501
-   ],
-   "spread": [
-    1206,
-    429,
-    1256,
-    503
-   ],
+   "pixels_darker_than_ink": 0,
+   "beside_the_paper": 0,
+   "darkest": 53.33,
+   "darkest_beside_a_sheet": 68.67,
+   "ring_pixels": 11190,
    "measured_at": "three times the radius, because the crop is at three times the scale"
   },
   "a_shadow_out_from_under_its_sheet": {

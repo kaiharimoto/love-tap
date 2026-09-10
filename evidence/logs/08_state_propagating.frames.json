@@ -46,7 +46,7 @@
  ],
  "app_seconds": 10.22,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 3.4714,
+ "mean_change_per_frame": 2.87845,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -55,10 +55,10 @@
    "busiest_32px_tile_mean_change_below": 2.0
   },
   "worst_moving_frame": {
-   "frame": 304,
-   "mean": 0.016,
-   "visible_share": 0.002897,
-   "busiest_tile": 1.8425,
+   "frame": 474,
+   "mean": 0.0281,
+   "visible_share": 0.000546,
+   "busiest_tile": 15.8552,
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },
@@ -66,9 +66,8 @@
  "repeated_fraction": 0.0,
  "longest_still_run": 0,
  "repeated_at": [],
- "brightness_jumps": 1,
- "ok": false,
- "why": "the light jumps 1 times",
+ "brightness_jumps": 0,
+ "ok": true,
  "strip": "evidence/crops/08_state_propagating_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/08_state_propagating/000000.png",

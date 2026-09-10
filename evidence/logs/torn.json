@@ -1,0 +1,143 @@
+{
+ "what": "blender/rig/common.torn_edge, the profile every torn edge in the rig is built from, measured the way a critic measures a silhouette",
+ "max_corr": 0.45,
+ "min_span": 0.7,
+ "the_shape_this_replaced": {
+  "what": "two sines with random phases, one about a finger's width and one about a fibre bundle's, raised to a power \u2014 what the fold rig and three objects drew their torn edges with. On the rendered silhouettes it self-correlated 0.72 at lag 34 (the fold sheet) and 0.50 at lag 31 with 0.49 at lag 60 (the dog-eared card, a critic's measurement): one period and its harmonic.",
+  "measured_here_by_the_same_code": [
+   {
+    "seed": 12345,
+    "peak_to_peak_mm": 4.185,
+    "uses_of_its_depth": 0.996,
+    "worst_self_correlation": 0.804,
+    "at_lag": 33,
+    "central_lobe_ends_at_lag": 9
+   },
+   {
+    "seed": 999,
+    "peak_to_peak_mm": 4.176,
+    "uses_of_its_depth": 0.994,
+    "worst_self_correlation": 0.81,
+    "at_lag": 33,
+    "central_lobe_ends_at_lag": 9
+   },
+   {
+    "seed": 7,
+    "peak_to_peak_mm": 4.179,
+    "uses_of_its_depth": 0.995,
+    "worst_self_correlation": 0.811,
+    "at_lag": 33,
+    "central_lobe_ends_at_lag": 9
+   }
+  ]
+ },
+ "edges": [
+  {
+   "seed": 13672098,
+   "peak_to_peak_mm": 1.478,
+   "uses_of_its_depth": 0.986,
+   "worst_self_correlation": 0.155,
+   "at_lag": 86,
+   "central_lobe_ends_at_lag": 8
+  },
+  {
+   "seed": 721089,
+   "peak_to_peak_mm": 1.358,
+   "uses_of_its_depth": 0.97,
+   "worst_self_correlation": 0.19,
+   "at_lag": 70,
+   "central_lobe_ends_at_lag": 7
+  },
+  {
+   "seed": 597066,
+   "peak_to_peak_mm": 0.756,
+   "uses_of_its_depth": 0.945,
+   "worst_self_correlation": 0.161,
+   "at_lag": 78,
+   "central_lobe_ends_at_lag": 7
+  },
+  {
+   "seed": 12345,
+   "peak_to_peak_mm": 3.939,
+   "uses_of_its_depth": 0.938,
+   "worst_self_correlation": 0.219,
+   "at_lag": 84,
+   "central_lobe_ends_at_lag": 5
+  },
+  {
+   "seed": 999,
+   "peak_to_peak_mm": 4.185,
+   "uses_of_its_depth": 0.996,
+   "worst_self_correlation": 0.257,
+   "at_lag": 61,
+   "central_lobe_ends_at_lag": 4
+  },
+  {
+   "seed": 7,
+   "peak_to_peak_mm": 4.116,
+   "uses_of_its_depth": 0.98,
+   "worst_self_correlation": 0.339,
+   "at_lag": 21,
+   "central_lobe_ends_at_lag": 6
+  }
+ ],
+ "worst_self_correlation": 0.339,
+ "least_of_its_depth_used": 0.938,
+ "deterministic": true,
+ "the_library_the_app_holds": {
+  "masks": 56,
+  "how": "the first opaque pixel down each column of the middle sixty per cent, high-passed over 31 columns, on whichever of the top and bottom edges wanders less",
+  "rms_px": {
+   "min": 1.15,
+   "p25": 1.69,
+   "median": 2.0,
+   "max": 4.69
+  },
+  "under_2px": 28,
+  "quietest_ten": [
+   [
+    "tear_007",
+    1.15
+   ],
+   [
+    "tear_044",
+    1.24
+   ],
+   [
+    "tear_014",
+    1.26
+   ],
+   [
+    "tear_031",
+    1.4
+   ],
+   [
+    "tear_018",
+    1.41
+   ],
+   [
+    "tear_048",
+    1.41
+   ],
+   [
+    "tear_047",
+    1.42
+   ],
+   [
+    "tear_054",
+    1.49
+   ],
+   [
+    "tear_040",
+    1.5
+   ],
+   [
+    "tear_027",
+    1.57
+   ]
+  ],
+  "what_it_means": "a critic measured the note edges they were content with at rms 2.88 to 5.14 on the glass and the ones they were not at 0.36 to 0.59. Half this library is under 2. The cause is in tools/tears/tear.py: the fracture's Hurst exponent runs to 1.15, and 1.15 is a clean pull, and a clean pull is too clean. Not re-rendered this cycle \u2014 it is fifty-six masks and their relief and their shadows, behind a capture already waiting on thirty-six stock renders \u2014 and it is written here so the next cycle starts from a number instead of from an impression."
+ },
+ "the_control_is_caught": true,
+ "ok": true
+}

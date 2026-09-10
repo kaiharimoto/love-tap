@@ -1,13 +1,13 @@
 {
  "box": 80,
  "pale": 190.0,
- "floor": 0.363,
+ "floor": 0.461,
  "floor_from": {
   "stock": "receipt_01.webp",
-  "windows_measured_on_it": 104,
-  "first_percentile": 0.726,
-  "quietest_window": 0.718,
-  "floor": 0.363,
+  "windows_measured_on_it": 324,
+  "first_percentile": 0.922,
+  "quietest_window": 0.823,
+  "floor": 0.461,
   "why_halved": "a stock drawn larger than life is resampled and a resample only smooths: magnifying the same stock by three takes 0.671 to 0.508, a factor of 0.76"
  },
  "negative_control": {
@@ -18,116 +18,124 @@
  "quiet_is_not_flat": "windows_quieter_than_2 is what this check used to gate on, kept because four cycles of reports carry it. It is not a fault: receipt stock's own median window is under it, and the 05_settings windows it names are lined writing paper with its tooth plainly in the crop.",
  "stills": {
   "01_pulse.png": {
-   "flattest": 2.402,
+   "flattest": 1.613,
    "where": [
-    1240,
-    1280
+    760,
+    560
    ],
-   "pale_windows": 1194,
+   "pale_windows": 1216,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 0,
+   "windows_quieter_than_2": 1,
    "worst_few": []
   },
   "02_chat.png": {
-   "flattest": 4.339,
+   "flattest": 1.224,
    "where": [
-    1120,
-    2240
+    400,
+    1240
    ],
-   "pale_windows": 1195,
+   "pale_windows": 1075,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 0,
+   "windows_quieter_than_2": 26,
    "worst_few": []
   },
   "03_us.png": {
-   "flattest": 1.461,
+   "flattest": 1.366,
    "where": [
-    960,
-    400
+    880,
+    2000
    ],
-   "pale_windows": 703,
+   "pale_windows": 682,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 20,
+   "windows_quieter_than_2": 29,
    "worst_few": []
   },
   "04_moments.png": {
-   "flattest": 5.345,
+   "flattest": 0.017,
    "where": [
-    760,
-    3000
+    1280,
+    2640
    ],
-   "pale_windows": 335,
-   "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 0,
-   "worst_few": []
+   "pale_windows": 563,
+   "windows_under_the_floor": 1,
+   "windows_quieter_than_2": 54,
+   "worst_few": [
+    {
+     "at": [
+      1280,
+      2640
+     ],
+     "std": 0.017
+    }
+   ]
   },
   "05_settings.png": {
-   "flattest": 1.409,
+   "flattest": 1.279,
    "where": [
-    600,
-    2560
+    1200,
+    680
    ],
-   "pale_windows": 1798,
+   "pale_windows": 1823,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 32,
+   "windows_quieter_than_2": 45,
    "worst_few": []
   },
   "10_first_run.png": {
-   "flattest": 3.438,
+   "flattest": 1.486,
    "where": [
-    960,
-    160
+    1080,
+    1440
    ],
-   "pale_windows": 450,
+   "pale_windows": 466,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 0,
+   "windows_quieter_than_2": 16,
    "worst_few": []
   },
   "12_search.png": {
-   "flattest": 3.171,
+   "flattest": 5.133,
    "where": [
-    1200,
-    1200
+    1240,
+    80
    ],
-   "pale_windows": 1198,
+   "pale_windows": 1187,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
    "worst_few": []
   },
   "13_messenger_states.png": {
-   "flattest": 4.073,
+   "flattest": 3.716,
    "where": [
-    480,
+    400,
     2360
    ],
-   "pale_windows": 1182,
+   "pale_windows": 1340,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
    "worst_few": []
   },
   "14_media_viewer.png": {
-   "flattest": 0.619,
+   "flattest": 0.505,
    "where": [
-    240,
+    400,
     720
    ],
-   "pale_windows": 304,
+   "pale_windows": 280,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 13,
+   "windows_quieter_than_2": 4,
    "worst_few": []
   },
   "17_setup_pwa.png": {
-   "flattest": 1.048,
+   "flattest": 3.157,
    "where": [
-    1200,
-    400
+    920,
+    2680
    ],
-   "pale_windows": 1391,
+   "pale_windows": 1626,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 20,
+   "windows_quieter_than_2": 0,
    "worst_few": []
   }
  },
- "ok": true,
- "files_with_a_flat_fill": 0
+ "ok": false,
+ "files_with_a_flat_fill": 1
 }

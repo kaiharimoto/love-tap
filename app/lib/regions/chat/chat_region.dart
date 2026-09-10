@@ -508,31 +508,47 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       // and keeps the best framing it has seen — stopping at the first that meets the standard,
       // which is the most recent one, because the most recent is what now looks like.
       (int, int)? chosen;
+      var chosenFrom = 0;
       var chosenAlign = _wheresToStand.first;
       var most = -1;
       var mostWhole = -1;
       var tried = 0;
       for (final w in windows) {
         if (tried >= _framingsToTry) break;
-        for (final align in _wheresToStand) {
-          tried++;
-          _scroll.jumpTo(index: w.$1, alignment: align);
-          await Future<void>.delayed(const Duration(milliseconds: 40));
-          // the rows that were asked for have to be whole in the frame, or the framing is not a
-          // picture of them: a photograph seven hundred pixels tall once came out as a sliver
-          // with its caption cut in half by the edge, and three critics measured the sliver
-          if (!_wholeOnTheGlass(w)) continue;
+        // Where to stand is a *row* as well as a fraction of the screen.
+        //
+        // Every framing used to begin at the stretch's first row, and when the stretch opens with
+        // something tall that is the worst place to stand. Asked for a photograph, a voice note, a
+        // feeling and a reaction in one stretch, the twelfth capture framed rows 4444 to 4446 — a
+        // feeling 253 points tall, a photograph 393 and a message 243 — into a viewport 784 points
+        // deep, and four sheets is all that fits. The same stretch entered two rows later puts the
+        // photograph half off the top, where it is still a note the edge crosses and still counts,
+        // and leaves room underneath for the short rows the standard is made of.
+        for (final from in {w.$1, w.$1 + 1, w.$1 + 2, w.$2}) {
+          if (from < 0 || from >= items.length) continue;
+          for (final align in _wheresToStand) {
+            tried++;
+            _scroll.jumpTo(index: from, alignment: align);
+            await Future<void>.delayed(const Duration(milliseconds: 40));
+            // Every kind that was asked for has to be *on* the glass, and at least one of them
+            // whole: a stretch framed so that its photograph is a sliver with its caption cut in
+            // half is not a picture of a photograph, and three critics measured that sliver. What
+            // is not required is that all of them be whole at once — a thread runs off the top of
+            // a frame, and a note the edge crosses is a note somebody is looking at.
+            if (!_kindsOnTheGlass(w)) continue;
           // How much paper is on the glass, and how much of it is whole. The first is the
           // standard's own count — a thread runs off the top of the frame, and a note the edge
           // crosses is a note on the screen. The second is what the picture is worth looking at:
           // between two framings that show the same amount of paper, the one that shows more of
           // it whole is the better photograph.
-          final (onIt, whole) = _paperOnTheGlass(items);
-          if (onIt > most || (onIt == most && whole > mostWhole)) {
-            most = onIt;
-            mostWhole = whole;
-            chosen = w;
-            chosenAlign = align;
+            final (onIt, whole) = _paperOnTheGlass(items);
+            if (onIt > most || (onIt == most && whole > mostWhole)) {
+              most = onIt;
+              mostWhole = whole;
+              chosen = w;
+              chosenFrom = from;
+              chosenAlign = align;
+            }
           }
         }
         if (most >= _theHerosStandard && mostWhole >= _theHerosStandard - 1) break;
@@ -546,11 +562,11 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
             '${items.length}: no framing held the stretch whole';
         return;
       }
-      _scroll.jumpTo(index: chosen.$1, alignment: chosenAlign);
+      _scroll.jumpTo(index: chosenFrom, alignment: chosenAlign);
       await Future<void>.delayed(const Duration(milliseconds: 40));
       _lastAnchor = 'types:${wanted.join(',')} at rows ${chosen.$1} to ${chosen.$2} of '
-          '${items.length}, $most sheets on the glass and $mostWhole of them whole, the best of '
-          '$tried framings of ${windows.length} stretches';
+          '${items.length}, entered at $chosenFrom, $most sheets on the glass and $mostWhole of '
+          'them whole, the best of $tried framings of ${windows.length} stretches';
       return;
     } else {
       final fraction = double.tryParse(anchor);
@@ -580,13 +596,24 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   /// whether the row after it is whole on the glass or half under the edge.
   static const List<double> _wheresToStand = [0.02, 0.14, 0.28, 0.45, 0.62, 0.78];
 
-  /// Whether every row of [w] is whole in the frame.
-  bool _wholeOnTheGlass((int, int) w) {
+  /// Whether every row of [w] is on the glass, and at least one of them whole.
+  ///
+  /// It used to require every one of them whole, and that is a stricter thing than the picture
+  /// needs: a thread runs off the frame in both directions, so a photograph the top edge crosses
+  /// is a photograph somebody is looking at. What must not happen is the case three critics
+  /// measured — a seven-hundred-pixel photograph reduced to a sliver with its caption cut in half
+  /// — so a row has to have real height in the frame, and one of the stretch has to be entire.
+  bool _kindsOnTheGlass((int, int) w) {
+    var whole = 0;
     for (var i = w.$1; i <= w.$2; i++) {
       final p = _positions.itemPositions.value.where((x) => x.index == i).firstOrNull;
-      if (p == null || p.itemLeadingEdge < 0 || p.itemTrailingEdge > 1) return false;
+      if (p == null) return false;
+      final shown = p.itemTrailingEdge.clamp(0.0, 1.0) - p.itemLeadingEdge.clamp(0.0, 1.0);
+      final tall = p.itemTrailingEdge - p.itemLeadingEdge;
+      if (tall <= 0 || shown / tall < 0.45) return false;
+      if (p.itemLeadingEdge >= 0 && p.itemTrailingEdge <= 1) whole++;
     }
-    return true;
+    return whole > 0;
   }
 
   /// How many pieces of paper landed on the glass, and how many of those are mostly whole.
