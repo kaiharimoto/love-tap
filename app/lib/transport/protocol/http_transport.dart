@@ -387,6 +387,10 @@ class HttpTransport implements Transport {
         ...current.toJson(),
         'device_id': deviceId,
         'paired': _pairing?.toJson(),
+        // Host side: every request it turned away, and which of the five checks each one failed.
+        // A 401 with no reason is a fault nobody can fix — a messenger critic found two in the
+        // scene logs and there was nothing anywhere saying why.
+        if (_server != null && _server!.refusals.isNotEmpty) 'refused': _server!.refusals,
         ...faults.describe(),
       };
 }

@@ -121,8 +121,13 @@ class HostServer {
       if (sub == '/pair' && req.method == 'POST') { await _pair(req); return; }
       final body = await _readBody(req);
       final auth = AuthHeader.parse(req.headers.value('authorization'));
-      if (!_authenticated(auth, req.method, req.uri, body)) {
+      final why = _refuseReason(auth, req.method, req.uri, body);
+      if (why != null) {
+        refusals.add('${req.method} ${req.uri.path}: $why');
+        if (refusals.length > 20) refusals.removeAt(0);
         req.response.statusCode = HttpStatus.unauthorized;
+        req.response.headers.set('x-desk-refused', why);
+        req.response.write(why);
         await req.response.close();
         return;
       }
@@ -151,18 +156,39 @@ class HostServer {
     return chunks;
   }
 
-  bool _authenticated(AuthHeader? auth, String method, Uri uri, List<int> body) {
+  /// Why a request was refused, or null if it was not.
+  ///
+  /// It used to answer yes or no, and a 401 with no reason is a fault nobody can fix: a messenger
+  /// critic found `401 GET /v1/events?after=14079&wait=20` in two of fifteen scene logs and there
+  /// was nothing anywhere saying which of the five checks it failed. The five are a stale
+  /// timestamp, an unknown device, a bad signature, a replayed nonce, and no pairing at all, and
+  /// they have completely different causes.
+  ///
+  /// This says which, in the response and in the log. On a link between two phones that already
+  /// share a key, telling the caller which check it failed tells an attacker nothing they could
+  /// not learn by trying — and it is the difference between a bug that can be found and one that
+  /// cannot.
+  String? _refuseReason(AuthHeader? auth, String method, Uri uri, List<int> body) {
     final pairing = pairingFor();
     final key = keyFor();
-    if (auth == null || pairing == null || key == null) return false;
-    if (auth.deviceId != pairing.clientId) return false;
+    if (auth == null) return 'no authorization header';
+    if (pairing == null || key == null) return 'this phone is not paired with anybody';
+    if (auth.deviceId != pairing.clientId) return 'a device this pairing does not cover';
     final now = DateTime.now().toUtc().millisecondsSinceEpoch;
-    if ((now - auth.ts).abs() > kAuthSkew.inMilliseconds) return false;
+    final skew = now - auth.ts;
+    if (skew.abs() > kAuthSkew.inMilliseconds) {
+      return 'signed ${(skew / 1000).round()} seconds from now, and the window is '
+          '${kAuthSkew.inSeconds}';
+    }
     final signedPath = uri.path + (uri.hasQuery ? '?${uri.query}' : '');
     final expected = sign(key, method, signedPath, auth.ts, auth.nonce, body);
-    if (!constantTimeEquals(expected, auth.mac)) return false;
-    return _nonces.checkAndAdd(auth.nonce, auth.ts);
+    if (!constantTimeEquals(expected, auth.mac)) return 'the signature does not match';
+    if (!_nonces.checkAndAdd(auth.nonce, auth.ts)) return 'this request has already been made';
+    return null;
   }
+
+  /// The last few refusals, newest last, for the capture record and for a person debugging a link.
+  final List<String> refusals = [];
 
   Future<void> _json(HttpRequest req, Object body, {int status = 200}) async {
     req.response.statusCode = status;

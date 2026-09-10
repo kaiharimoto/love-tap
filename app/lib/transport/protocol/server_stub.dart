@@ -20,6 +20,10 @@ class HostServer {
     String? Function(Event e)? refuses,
   });
 
+  /// Requests turned away, and which check each one failed. Always empty here: the PWA does not
+  /// host, so nothing ever knocks on it.
+  final List<String> refusals = const [];
+
   Future<void> listen(HostBind bind) async => throw UnsupportedError('the PWA does not host');
 
   void queueForClient(Ephemeral frame) {}
