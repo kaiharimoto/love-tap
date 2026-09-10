@@ -540,6 +540,20 @@ class CaptureHooks {
         'pocket_feeling': scope.lastPocketFeeling,
         'pocket_at': scope.lastPocketAt,
         'allowed_to_interrupt': scope.ambient.allowed,
+        // Two of the three surfaces name the feeling and one cannot, and an emotional critic read
+        // the one that cannot and concluded none of them do: "outside the app a feeling is reduced
+        // to 'noor / is holding something out' ... the same eight words stand for [everything]".
+        // That is the *push* — delivered when the app is not running — and it is eight words on
+        // purpose. tools/push/webpush.py: "a push payload may carry the event kind and who sent
+        // it, and nothing else. Not the text, not the feeling's name." Two people's phones do not
+        // hand a push service the contents of what they send each other. The pocket surface, which
+        // runs in the app, has the feeling in hand and puts its name in the title.
+        'what_each_surface_may_say': {
+          'standing_line': 'their state, in the couple\'s own words, assembled here from the log',
+          'pocket': 'the feeling\'s own name and its sound, because the app is running and has it',
+          'push': 'the kind and the sender, and nothing else, by the rule in tools/push/webpush.py '
+              '— a lock screen is not a place to put what two people said to each other',
+        },
         // what this app asked for is above; what the phone is holding is below, read back from
         // the platform, so the record is not four statements of intent
         'held_by_the_phone': _heldByThePhone,
