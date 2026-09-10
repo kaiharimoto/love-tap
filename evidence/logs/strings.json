@@ -1,6 +1,6 @@
 {
  "strings_read": 525,
- "literals_in_lib": 3824,
+ "literals_in_lib": 3826,
  "share_of_literals_read": 0.137,
  "in_a_display_position": 111,
  "the_rest_are_judged": "every other literal in a line of code that has a space in it or a mark a wire key would never carry. It used to read only a fixed list of call sites \u2014 Text(, Written(, hintText:, and six more \u2014 which is why a code critic counted 116 strings against 3,672 in lib. Reading them all costs some false positives (an asset query string, a fragment of an interpolation) and those are cheap: a string that is not shown to anybody still must not contain an exclamation mark.",
@@ -338,12 +338,12 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:414",
+   "where": "app/lib/feelings/corner.dart:426",
    "text": "family_${f.name}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:438",
+   "where": "app/lib/feelings/corner.dart:450",
    "text": "fan.${family.name}",
    "in_a_display_position": false
   },
@@ -878,82 +878,82 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:546",
+   "where": "app/lib/regions/chat/chat_region.dart:562",
    "text": "${items.length}: no framing held the stretch whole",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:552",
-   "text": "${items.length}, $most sheets on the glass and $mostWhole of them whole, the best of ",
+   "where": "app/lib/regions/chat/chat_region.dart:568",
+   "text": "${items.length}, entered at $chosenFrom, $most sheets on the glass and $mostWhole of ",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:553",
-   "text": "$tried framings of ${windows.length} stretches",
+   "where": "app/lib/regions/chat/chat_region.dart:569",
+   "text": "them whole, the best of $tried framings of ${windows.length} stretches",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:562",
+   "where": "app/lib/regions/chat/chat_region.dart:578",
    "text": "row $index of ${items.length}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1043",
+   "where": "app/lib/regions/chat/chat_region.dart:1070",
    "text": "${scope.partner.name} ${S.typing}",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1055",
+   "where": "app/lib/regions/chat/chat_region.dart:1082",
    "text": "${S.replyingTo} ${_replyTo!.text ?? summaryOf(_replyTo!.event, me: scope.me)}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1205",
+   "where": "app/lib/regions/chat/chat_region.dart:1232",
    "text": "${(d.inDays / 30).round()} ${S.monthsUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1206",
+   "where": "app/lib/regions/chat/chat_region.dart:1233",
    "text": "${(d.inDays / 7).round()} ${S.weeksUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1207",
+   "where": "app/lib/regions/chat/chat_region.dart:1234",
    "text": "${d.inDays} ${S.daysUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1208",
+   "where": "app/lib/regions/chat/chat_region.dart:1235",
    "text": "$rows ${S.rowsUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1222",
+   "where": "app/lib/regions/chat/chat_region.dart:1249",
    "text": "${d.day} $month",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1222",
+   "where": "app/lib/regions/chat/chat_region.dart:1249",
    "text": "${d.day} $month ${d.year}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1469",
+   "where": "app/lib/regions/chat/chat_region.dart:1496",
    "text": "a photo",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1470",
+   "where": "app/lib/regions/chat/chat_region.dart:1497",
    "text": "take one",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1471",
+   "where": "app/lib/regions/chat/chat_region.dart:1498",
    "text": "a video",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1472",
+   "where": "app/lib/regions/chat/chat_region.dart:1499",
    "text": "film something",
    "in_a_display_position": false
   },

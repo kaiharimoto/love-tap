@@ -5,7 +5,7 @@
   "paired": true,
   "devices": [
    "android-capture",
-   "pwa-mtuec711"
+   "pwa-mtv2s8t1"
   ],
   "link": "connected",
   "authored_feelings": 2
@@ -16,9 +16,9 @@
  "stocks": {},
  "scroll": null,
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 7264,
+ "driven_ms": 8624,
  "seed": 20260903,
- "events": 14092,
+ "events": 14071,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -28,6 +28,8 @@
  "light": "day",
  "has_dusk_paper": true,
  "paper_stocks": 54,
+ "paper_at_its_own_size": 2127,
+ "paper_stretched_to_fit": 30,
  "setup_showing": false,
  "fold": {
   "sequence": null
@@ -36,7 +38,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-09T18:44:24.825Z",
+  "started_at": "2026-09-10T05:40:36.969Z",
   "pattern": [
    {
     "ms": 150,
@@ -60,10 +62,19 @@
    }
   ]
  },
+ "the_launch_took": {
+  "the framework": 7,
+  "the library index": 12,
+  "the ink plates": 39,
+  "the desk": 154,
+  "the log": 631,
+  "the first frame": 318,
+  "everything": 1161
+ },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 284,
+  "rounds": 51,
   "pushed": 3,
   "refused": 0,
   "pulled": 2,
@@ -71,17 +82,18 @@
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14092,
+  "cursor": 14071,
+  "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14092,
-   "our_cursor": 14092,
+   "peer_cursor": 14071,
+   "our_cursor": 14071,
    "last_error": null,
-   "since": "2026-09-09T18:33:52.603Z",
-   "last_contact": "2026-09-09T18:48:04.653Z"
+   "since": "2026-09-10T05:25:35.102Z",
+   "last_contact": "2026-09-10T05:42:43.458Z"
   }
  },
  "ambient": {
@@ -89,6 +101,11 @@
   "pocket_feeling": "soup",
   "pocket_at": 1788464400000,
   "allowed_to_interrupt": false,
+  "what_each_surface_may_say": {
+   "standing_line": "their state, in the couple's own words, assembled here from the log",
+   "pocket": "the feeling's own name and its sound, because the app is running and has it",
+   "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+  },
   "held_by_the_phone": []
  },
  "at": "15_authored_feeling",

@@ -1,8 +1,8 @@
 {
  "dir": "/tmp/lovetap-capture/15_authored_feeling",
- "frames": 192,
+ "frames": 420,
  "fps": 62.5,
- "seconds": 3.07,
+ "seconds": 6.72,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
@@ -24,6 +24,11 @@
   {
    "frames": 19,
    "step_ms": 16,
+   "dir": "evidence/frames/15_authored_feeling"
+  },
+  {
+   "frames": 44,
+   "step_ms": 32,
    "dir": "evidence/frames/15_authored_feeling"
   },
   {
@@ -52,13 +57,14 @@
   34,
   53,
   72,
-  147,
-  163,
-  269
+  116,
+  191,
+  207,
+  313
  ],
- "app_seconds": 6.02,
- "playback_over_app_time": 0.511,
- "mean_change_per_frame": 3.29618,
+ "app_seconds": 7.42,
+ "playback_over_app_time": 0.905,
+ "mean_change_per_frame": 3.67224,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -67,29 +73,70 @@
    "busiest_32px_tile_mean_change_below": 2.0
   },
   "worst_moving_frame": {
-   "frame": 76,
-   "mean": 0.0038,
-   "visible_share": 0.000431,
-   "busiest_tile": 2.0612,
+   "frame": 313,
+   "mean": 0.0366,
+   "visible_share": 0.003254,
+   "busiest_tile": 5.1816,
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },
- "repeated_frames": 1,
- "repeated_fraction": 0.005,
- "longest_still_run": 1,
+ "repeated_frames": 42,
+ "repeated_fraction": 0.1,
+ "longest_still_run": 42,
  "repeated_at": [
-  74
+  74,
+  75,
+  76,
+  77,
+  78,
+  79,
+  80,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87,
+  88,
+  89,
+  90,
+  91,
+  92,
+  93,
+  94,
+  95,
+  96,
+  97,
+  98,
+  99,
+  100,
+  101,
+  102,
+  103,
+  104,
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115
  ],
- "brightness_jumps": 1,
+ "brightness_jumps": 0,
  "ok": false,
- "why": "the light jumps 1 times; 3.1s is short of 4.0s; 1 frame(s) identical to the one before (first at 74); the brief allows none",
+ "why": "42 frame(s) identical to the one before (first at 74); the brief allows none",
  "strip": "evidence/crops/15_authored_feeling_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/15_authored_feeling/000000.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000038.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000076.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000115.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000153.png",
-  "/tmp/lovetap-capture/15_authored_feeling/000191.png"
+  "/tmp/lovetap-capture/15_authored_feeling/000084.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000168.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000251.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000335.png",
+  "/tmp/lovetap-capture/15_authored_feeling/000419.png"
  ]
 }

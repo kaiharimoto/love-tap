@@ -10,32 +10,32 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1338,
+   "ms": 1887,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3717
+   "ms": 2808
   },
   {
    "do": "wait",
-   "ms": 1804
+   "ms": 1803
   },
   {
    "do": "wait",
-   "ms": 1101
+   "ms": 1102
   },
   {
    "do": "openCorner",
-   "ms": 2162
+   "ms": 1489
   },
   {
    "do": "frames",
-   "ms": 29188
+   "ms": 23671
   },
   {
-   "at": 41496,
+   "at": 35051,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
   },
   {
@@ -44,15 +44,31 @@
   },
   {
    "do": "step",
-   "ms": 979
+   "ms": 1287
   },
   {
    "do": "frames",
-   "ms": 35227
+   "ms": 25783
   },
   {
-   "at": 77708,
+   "at": 62128,
    "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
+  },
+  {
+   "do": "showFamily",
+   "ms": 5
+  },
+  {
+   "do": "step",
+   "ms": 977
+  },
+  {
+   "do": "frames",
+   "ms": 26189
+  },
+  {
+   "at": 89300,
+   "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
@@ -60,95 +76,95 @@
   },
   {
    "do": "step",
-   "ms": 930
+   "ms": 1013
   },
   {
    "do": "frames",
-   "ms": 33192
+   "ms": 26289
   },
   {
-   "at": 112624,
-   "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
+   "at": 116608,
+   "said": "__deskHoldOver(pigeon) ok, holding pigeon"
   },
   {
-   "do": "showFamily",
-   "ms": 795
-  },
-  {
-   "do": "step",
-   "ms": 1152
+   "do": "holdOver",
+   "ms": 6
   },
   {
    "do": "frames",
-   "ms": 33441
+   "ms": 473937
   },
   {
-   "do": "sendFeeling",
-   "ms": 7001
+   "at": 590555,
+   "said": "__deskLetGo() ok, sent at 0.77"
+  },
+  {
+   "do": "letGo",
+   "ms": 10
   },
   {
    "do": "frames",
-   "ms": 170115
+   "ms": 123058
   },
   {
    "do": "goTo",
-   "ms": 5420
+   "ms": 3263
   },
   {
    "do": "step",
-   "ms": 3279
+   "ms": 1560
   },
   {
    "do": "openCorner",
-   "ms": 3738
+   "ms": 1147
   },
   {
    "do": "frames",
-   "ms": 37194
+   "ms": 29434
   },
   {
    "do": "openCorner",
-   "ms": 1529
+   "ms": 1600
   },
   {
    "do": "step",
-   "ms": 813
+   "ms": 839
   },
   {
    "do": "far",
-   "ms": 838
+   "ms": 435
   },
   {
    "do": "awaitArrival",
-   "ms": 2212
+   "ms": 2242
   },
   {
    "do": "frames",
-   "ms": 245075
+   "ms": 144459
   },
   {
    "do": "goTo",
-   "ms": 5773
+   "ms": 3134
   },
   {
    "do": "step",
-   "ms": 2104
+   "ms": 1493
   },
   {
    "do": "far",
-   "ms": 482
+   "ms": 404
   },
   {
    "do": "awaitArrival",
-   "ms": 1756
+   "ms": 1020
   },
   {
    "do": "frames",
-   "ms": 219658
+   "ms": 131800
   },
   {
    "do": "report",
-   "ms": 521
+   "ms": 420
   }
  ],
  "shots": [
@@ -174,6 +190,12 @@
    "frames": 19,
    "dir": "evidence/frames/15_authored_feeling",
    "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 44,
+   "dir": "evidence/frames/15_authored_feeling",
+   "ms": 32,
    "drive": null
   },
   {
@@ -209,7 +231,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtuec711"
+     "pwa-mtv2s8t1"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -220,9 +242,9 @@
    "stocks": {},
    "scroll": null,
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 7264,
+   "driven_ms": 8624,
    "seed": 20260903,
-   "events": 14092,
+   "events": 14071,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -232,6 +254,8 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 2127,
+   "paper_stretched_to_fit": 30,
    "setup_showing": false,
    "fold": {
     "sequence": null
@@ -240,7 +264,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-09T18:44:24.825Z",
+    "started_at": "2026-09-10T05:40:36.969Z",
     "pattern": [
      {
       "ms": 150,
@@ -264,10 +288,19 @@
      }
     ]
    },
+   "the_launch_took": {
+    "the framework": 7,
+    "the library index": 12,
+    "the ink plates": 39,
+    "the desk": 154,
+    "the log": 631,
+    "the first frame": 318,
+    "everything": 1161
+   },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 284,
+    "rounds": 51,
     "pushed": 3,
     "refused": 0,
     "pulled": 2,
@@ -275,17 +308,18 @@
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14092,
+    "cursor": 14071,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14092,
-     "our_cursor": 14092,
+     "peer_cursor": 14071,
+     "our_cursor": 14071,
      "last_error": null,
-     "since": "2026-09-09T18:33:52.603Z",
-     "last_contact": "2026-09-09T18:48:04.653Z"
+     "since": "2026-09-10T05:25:35.102Z",
+     "last_contact": "2026-09-10T05:42:43.458Z"
     }
    },
    "ambient": {
@@ -293,42 +327,56 @@
     "pocket_feeling": "soup",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "15_authored_feeling",
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2182,
+ "cold_ms": 2271,
  "load": {
-  "ms": 2182,
+  "ms": 2271,
   "store": "kept",
-  "profile": "profile_seeded"
+  "profile": "profile_seeded",
+  "made_of": {
+   "the framework": 7,
+   "the library index": 12,
+   "the ink plates": 39,
+   "the desk": 154,
+   "the log": 631,
+   "the first frame": 318,
+   "everything": 1161
+  }
  },
  "far": [
   {
    "line": "feeling soup 0.55",
-   "at_frame": 164
+   "at_frame": 208
   },
   {
    "line": "feeling soup 0.9",
-   "at_frame": 270
+   "at_frame": 314
   }
  ],
  "arrivals": [
   {
    "line": "feeling soup 0.55",
-   "before": 8082,
-   "after": 8083,
-   "at_frame": 164,
-   "waited_ms": 1811
+   "before": 8072,
+   "after": 8073,
+   "at_frame": 208,
+   "waited_ms": 1842
   },
   {
    "line": "feeling soup 0.9",
-   "before": 8083,
-   "after": 8084,
-   "at_frame": 270,
-   "waited_ms": 1355
+   "before": 8073,
+   "after": 8074,
+   "at_frame": 314,
+   "waited_ms": 619
   }
  ],
  "problems": [],

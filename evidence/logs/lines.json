@@ -13,14 +13,9 @@
    }
   },
   "02_chat.png": {
-   "ruled_lines": 8,
-   "written_lines": 35,
-   "rule_pitch_px": 81.0,
-   "lines_measured": 13,
-   "off_the_line": {
-    "median": 0.333,
-    "p90": 0.774
-   }
+   "ruled_lines": 2,
+   "written_lines": 41,
+   "why": "not enough ruled paper or not enough writing on this still to measure"
   },
   "03_us.png": {
    "ruled_lines": 15,
@@ -103,13 +98,12 @@
    }
   }
  },
- "median_across_the_set": 0.332,
+ "median_across_the_set": 0.331,
  "what_that_number_means": "writing laid out with no relation to the rules under it lands uniformly between them, which averages 0.25. On the line is 0. The set reads 0.33, so the writing is not on the rules and is not even accidentally near them: the beat between the text's line height and the paper's pitch pushes it past random.",
- "stills_measured": 10,
+ "stills_measured": 9,
  "the_same_paper_is_not_the_same_size": {
   "rule_pitch_px": {
    "01_pulse.png": 71.0,
-   "02_chat.png": 81.0,
    "03_us.png": 132.0,
    "04_moments.png": 96.5,
    "05_settings.png": 89.0,

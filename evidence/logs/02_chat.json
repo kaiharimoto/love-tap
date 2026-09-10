@@ -10,29 +10,29 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2514,
+   "ms": 2610,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3291
+   "ms": 3330
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1903
   },
   {
    "do": "scrollTo",
-   "ms": 41960
+   "ms": 114407
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1905
   },
   {
    "do": "shot",
-   "ms": 3099
+   "ms": 3191
   },
   {
    "do": "report",
@@ -51,39 +51,35 @@
    "view": {
     "region": "chat",
     "visible": [
-     "0000MKF1KG9H8D9NKN4APBCRA1",
-     "0000MKHXD0HS2Z5K8RDR1VFRER",
-     "0000MKPMRRA7K8KSDMKAWMBGFB",
-     "0000MKTVH8DA3C968F6E306KV2",
-     "0000MKZA3R00GV3G1N4GXZZ8ZP"
+     "00009S6SDRJR8JQWFMBP1Y9RC9",
+     "00009SBAY02T5JM0YE69DZVXW0",
+     "00009SDXY88E1E098XMV6Y8KAZ",
+     "00009SFKN01ZN80T01DQ147DM0",
+     "00009SRTJGRJE9E86YC272G707"
     ],
     "whole_on_the_glass": [
-     "0000MKHXD0HS2Z5K8RDR1VFRER",
-     "0000MKPMRRA7K8KSDMKAWMBGFB",
-     "0000MKTVH8DA3C968F6E306KV2"
+     "00009SBAY02T5JM0YE69DZVXW0",
+     "00009SDXY88E1E098XMV6Y8KAZ",
+     "00009SFKN01ZN80T01DQ147DM0"
     ],
     "clipped_at_an_edge": {
-     "0000MKF1KG9H8D9NKN4APBCRA1": 0.066,
-     "0000MKZA3R00GV3G1N4GXZZ8ZP": 0.243
+     "00009S6SDRJR8JQWFMBP1Y9RC9": 0.489,
+     "00009SRTJGRJE9E86YC272G707": 0.15
     },
     "delivery": {
-     "0000MKF1KG9H8D9NKN4APBCRA1": {
+     "00009S6SDRJR8JQWFMBP1Y9RC9": {
       "state": "read",
       "says": "read"
      },
-     "0000MKHXD0HS2Z5K8RDR1VFRER": {
+     "00009SBAY02T5JM0YE69DZVXW0": {
       "state": "read",
       "says": "read"
      },
-     "0000MKPMRRA7K8KSDMKAWMBGFB": {
+     "00009SDXY88E1E098XMV6Y8KAZ": {
       "state": "read",
       "says": "read"
      },
-     "0000MKTVH8DA3C968F6E306KV2": {
-      "state": "read",
-      "says": "read"
-     },
-     "0000MKZA3R00GV3G1N4GXZZ8ZP": {
+     "00009SFKN01ZN80T01DQ147DM0": {
       "state": "read",
       "says": "read"
      }
@@ -93,52 +89,52 @@
      "read": 3
     },
     "reactions": {
-     "0000MKPMRRA7K8KSDMKAWMBGFB": 1
+     "00009S6SDRJR8JQWFMBP1Y9RC9": 1
     },
     "edited": [],
     "taken_back": [],
     "scroll": {
-     "first": 4443,
-     "last": 4447,
+     "first": 83,
+     "last": 87,
      "of": 8069
     },
     "paper": [
-     "0000MKF1KG9H8D9NKN4APBCRA1",
-     "0000MKPMRRA7K8KSDMKAWMBGFB",
-     "0000MKTVH8DA3C968F6E306KV2",
-     "0000MKZA3R00GV3G1N4GXZZ8ZP"
+     "00009S6SDRJR8JQWFMBP1Y9RC9",
+     "00009SBAY02T5JM0YE69DZVXW0",
+     "00009SDXY88E1E098XMV6Y8KAZ",
+     "00009SRTJGRJE9E86YC272G707"
     ],
     "paper_whole_on_the_glass": 2,
     "rows_cost": [
      {
-      "row": 4443,
-      "type": "message",
-      "tall": 243,
-      "top": -227
-     },
-     {
-      "row": 4444,
-      "type": "feeling",
-      "tall": 253,
-      "top": 16
-     },
-     {
-      "row": 4445,
+      "row": 83,
       "type": "photo",
-      "tall": 393,
-      "top": 269
+      "tall": 450,
+      "top": -230
      },
      {
-      "row": 4446,
+      "row": 84,
       "type": "voice_note",
-      "tall": 97,
-      "top": 662
+      "tall": 136,
+      "top": 220
      },
      {
-      "row": 4447,
-      "type": "ritual_kept",
-      "tall": 103,
-      "top": 759
+      "row": 85,
+      "type": "message",
+      "tall": 135,
+      "top": 356
+     },
+     {
+      "row": 86,
+      "type": "feeling",
+      "tall": 281,
+      "top": 491
+     },
+     {
+      "row": 87,
+      "type": "message",
+      "tall": 80,
+      "top": 772
      }
     ],
     "viewport_tall": 784,
@@ -147,13 +143,12 @@
     "replying_to": null,
     "replies_on_the_glass": {},
     "editing": null,
-    "anchor": "types:photo,voice_note,feeling,reacted at rows 4444 to 4446 of 8069, 4 sheets on the glass and 2 of them whole, the best of 138 framings of 23 stretches",
+    "anchor": "types:photo,voice_note,feeling,reacted at rows 83 to 86 of 8069, entered at 84, 4 sheets on the glass and 2 of them whole, the best of 408 framings of 23 stretches",
     "kinds": {
-     "message": 1,
-     "feeling": 1,
      "photo": 1,
      "voice_note": 1,
-     "ritual_kept": 1
+     "message": 2,
+     "feeling": 1
     },
     "folded_in": {
      "reaction": 1,
@@ -164,35 +159,35 @@
     "partner_typing": false
    },
    "visible": [
-    "0000MKF1KG9H8D9NKN4APBCRA1",
-    "0000MKHXD0HS2Z5K8RDR1VFRER",
-    "0000MKPMRRA7K8KSDMKAWMBGFB",
-    "0000MKTVH8DA3C968F6E306KV2",
-    "0000MKZA3R00GV3G1N4GXZZ8ZP"
+    "00009S6SDRJR8JQWFMBP1Y9RC9",
+    "00009SBAY02T5JM0YE69DZVXW0",
+    "00009SDXY88E1E098XMV6Y8KAZ",
+    "00009SFKN01ZN80T01DQ147DM0",
+    "00009SRTJGRJE9E86YC272G707"
    ],
    "paper": [
-    "0000MKF1KG9H8D9NKN4APBCRA1",
-    "0000MKPMRRA7K8KSDMKAWMBGFB",
-    "0000MKTVH8DA3C968F6E306KV2",
-    "0000MKZA3R00GV3G1N4GXZZ8ZP"
+    "00009S6SDRJR8JQWFMBP1Y9RC9",
+    "00009SBAY02T5JM0YE69DZVXW0",
+    "00009SDXY88E1E098XMV6Y8KAZ",
+    "00009SRTJGRJE9E86YC272G707"
    ],
    "tears": {
-    "0000MKF1KG9H8D9NKN4APBCRA1": "tear_013",
-    "0000MKHXD0HS2Z5K8RDR1VFRER": "tear_035",
-    "0000MKPMRRA7K8KSDMKAWMBGFB": "tear_055",
-    "0000MKTVH8DA3C968F6E306KV2": "tear_018",
-    "0000MKZA3R00GV3G1N4GXZZ8ZP": "tear_040"
+    "00009S6SDRJR8JQWFMBP1Y9RC9": "tear_037",
+    "00009SBAY02T5JM0YE69DZVXW0": "tear_001",
+    "00009SDXY88E1E098XMV6Y8KAZ": "tear_020",
+    "00009SFKN01ZN80T01DQ147DM0": "tear_043",
+    "00009SRTJGRJE9E86YC272G707": "tear_026"
    },
    "stocks": {
-    "0000MKF1KG9H8D9NKN4APBCRA1": "lined_04",
-    "0000MKHXD0HS2Z5K8RDR1VFRER": "legal_02",
-    "0000MKPMRRA7K8KSDMKAWMBGFB": "lined_01",
-    "0000MKTVH8DA3C968F6E306KV2": "looseleaf_02",
-    "0000MKZA3R00GV3G1N4GXZZ8ZP": "graph_04"
+    "00009S6SDRJR8JQWFMBP1Y9RC9": "legal_02",
+    "00009SBAY02T5JM0YE69DZVXW0": "legal_01",
+    "00009SDXY88E1E098XMV6Y8KAZ": "looseleaf_02",
+    "00009SFKN01ZN80T01DQ147DM0": "legal_01",
+    "00009SRTJGRJE9E86YC272G707": "lined_03"
    },
    "scroll": {
-    "first": 4443,
-    "last": 4447,
+    "first": 83,
+    "last": 87,
     "of": 8069
    },
    "now": "2026-09-03T19:40:00.000Z",
@@ -203,31 +198,37 @@
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 13,
+   "masks_composed": 22,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
-   "paper_at_its_own_size": 676,
-   "paper_stretched_to_fit": 3,
+   "paper_at_its_own_size": 2136,
+   "paper_stretched_to_fit": 7,
    "setup_showing": false,
    "fold": {
-    "sequence": null
+    "sequence": "unfold_thirds",
+    "length": 142,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
    },
    "sensation": null,
    "the_launch_took": {
-    "the framework": 6,
-    "the library index": 14,
-    "the ink plates": 45,
-    "the desk": 144,
-    "the log": 705,
-    "the first frame": 386,
-    "everything": 1300
+    "the framework": 9,
+    "the library index": 24,
+    "the ink plates": 39,
+    "the desk": 150,
+    "the log": 6858,
+    "the first frame": 403,
+    "everything": 7483
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 2,
+    "rounds": 5,
     "pushed": 1,
     "refused": 0,
     "pulled": 0,
@@ -245,8 +246,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-10T03:37:57.018Z",
-     "last_contact": "2026-09-10T03:38:39.199Z"
+     "since": "2026-09-10T05:17:06.328Z",
+     "last_contact": "2026-09-10T05:18:56.328Z"
     }
    },
    "ambient": {
@@ -265,19 +266,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2365,
+ "cold_ms": 8815,
  "load": {
-  "ms": 2365,
-  "store": "kept",
+  "ms": 8815,
+  "store": "fresh",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 6,
-   "the library index": 14,
-   "the ink plates": 45,
-   "the desk": 144,
-   "the log": 705,
-   "the first frame": 386,
-   "everything": 1300
+   "the framework": 9,
+   "the library index": 24,
+   "the ink plates": 39,
+   "the desk": 150,
+   "the log": 6858,
+   "the first frame": 403,
+   "everything": 7483
   }
  },
  "problems": [],
