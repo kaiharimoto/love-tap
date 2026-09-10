@@ -12,6 +12,15 @@ class SearchHit {
 
 class SearchIndex {
   final Map<String, Map<String, int>> _postings = {}; // term -> id -> count
+
+  /// What a feeling the couple made up is called, and what family they put it in.
+  ///
+  /// `kBuiltInById` knows the thirty-six the app ships with and nothing about `pigeon` or
+  /// `tuesday soup`, so a search for a name or a family found the built-ins and silently missed
+  /// the ones they wrote themselves — which are the ones a person is most likely to go looking
+  /// for by name. The log knows: a `feeling_authored` event carries both, and it is in the log
+  /// before anything that uses it, because you cannot send a feeling you have not made.
+  final Map<String, (String, String)> _authored = {};
   final Map<String, Event> _byId = {};
   final Map<String, String> _editedText = {}; // target id -> latest edited text
   final Set<String> _deleted = {};
@@ -23,6 +32,7 @@ class SearchIndex {
 
   void clear() {
     _postings.clear();
+    _authored.clear();
     _byId.clear();
     _editedText.clear();
     _deleted.clear();
@@ -77,6 +87,12 @@ class SearchIndex {
     for (final f in spec.search.facets) {
       addText(f);
     }
+    if (e.type == 'feeling_authored') {
+      final id = e.payload['feeling_id'] as String?;
+      final name = e.payload['name'] as String?;
+      final family = e.payload['family'] as String?;
+      if (id != null) _authored[id] = (name ?? id, family ?? '');
+    }
     if (e.type == 'feeling' || e.type == 'reaction') {
       final id = e.payload['feeling_id'] as String?;
       addText(id);
@@ -88,6 +104,12 @@ class SearchIndex {
       if (f != null) {
         addText(f.name);
         addText(f.family.name);
+      } else {
+        final made = _authored[id ?? ''];
+        if (made != null) {
+          addText(made.$1);
+          addText(made.$2);
+        }
       }
     }
     if (e.type == 'state_declared') addText(e.payload['signal'] as String?);
