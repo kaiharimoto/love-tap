@@ -310,7 +310,7 @@
 {"key": "2026-09-03-9025", "ts": "2026-09-03T17:13:49+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-09-03-0017"}, "gen": "finish"}
 {"key": "2026-09-03-0021", "ts": "2026-09-03T17:14:47+01:00", "author": "teo", "type": "message", "payload": {"text": "There is bread. I went at four because the sign said friday and the sign is a liar."}}
 {"key": "2026-09-03-0022", "ts": "2026-09-03T17:17:22+01:00", "author": "noor", "type": "message", "payload": {"text": "the sign has been a liar since august and you keep believing it"}}
-{"key": "2026-09-03-0023", "ts": "2026-09-03T17:19:56+01:00", "author": "teo", "type": "message", "payload": {"text": "I believe the sign. The sign has never lied to me twice in the same week."}}
+{"key": "2026-09-03-0023", "ts": "2026-09-03T17:19:56+01:00", "author": "teo", "type": "message", "payload": {"text": "I believe the sign. The sign has never lied to me twice in the same week.", "reply_to": "k:2026-09-03-0021"}}
 {"key": "2026-09-03-9600", "ts": "2026-09-03T17:20:27+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "battery", "value": 51}, "gen": "finish"}
 {"key": "2026-09-03-0024", "ts": "2026-09-03T17:23:30+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "confetti", "intensity": 0.8}}
 {"key": "2026-09-03-9586", "ts": "2026-09-03T17:25:08+01:00", "author": "noor", "type": "state_passive", "payload": {"signal": "at_home", "value": true}, "gen": "finish"}
@@ -322,7 +322,7 @@
 {"key": "2026-09-03-0027", "ts": "2026-09-03T17:55:15+01:00", "author": "teo", "type": "message", "payload": {"text": "I have already cut the end off."}}
 {"key": "2026-09-03-0028", "ts": "2026-09-03T17:58:50+01:00", "author": "noor", "type": "feeling", "payload": {"feeling_id": "ugh", "intensity": 0.5}}
 {"key": "2026-09-03-9026", "ts": "2026-09-03T18:00:20+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-09-03-0028"}, "gen": "finish"}
-{"key": "2026-09-03-0029", "ts": "2026-09-03T18:01:07+01:00", "author": "teo", "type": "message", "payload": {"text": "It was the good end. I left you the better one, which is a different thing and you know it."}}
+{"key": "2026-09-03-0029", "ts": "2026-09-03T18:01:07+01:00", "author": "teo", "type": "message", "payload": {"text": "It was the good end. I left you the better one, which is a different thing and you know it.", "reply_to": "k:2026-09-03-0026"}}
 {"key": "2026-09-03-0030", "ts": "2026-09-03T18:09:19+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "place", "value": "travelling"}}
 {"key": "2026-09-03-0031", "ts": "2026-09-03T18:19:33+01:00", "author": "teo", "type": "feeling", "payload": {"feeling_id": "empty_chair", "intensity": 0.7}}
 {"key": "2026-09-03-0032", "ts": "2026-09-03T18:27:40+01:00", "author": "noor", "type": "state_declared", "payload": {"signal": "need", "value": 3}}

@@ -423,6 +423,19 @@ else
   done
 fi
 
+# The video advancing. A messenger critic wrote that the set proves the file decoded and the
+# transport is wired and nothing more: motion is the whole of video and no artifact in the set
+# showed a frame of it move. 14 is a still and the set holds exactly seventeen artifacts, so this
+# is not an eighteenth — it is the same scene's own frames, folded into the strip and the frame
+# record beside the crops of 02.
+if [ -d evidence/frames/14_media_viewer ] && \
+   [ "$(ls evidence/frames/14_media_viewer/*.png 2>/dev/null | wc -l)" -gt 8 ]; then
+  python3 tools/check/frames.py evidence/frames/14_media_viewer --fps 12 --min-seconds 2 \
+    --log "$LOG/14_media_viewer.json" --strip evidence/crops/14_media_viewer_strip.png \
+    --out "$LOG/14_media_viewer.frames.json" >/dev/null \
+    || note_missing "14_media_viewer.png" "the video did not advance; see $LOG/14_media_viewer.frames.json"
+fi
+
 # ---- derived: crops, strips, diffs, the capture log ------------------------------------------------
 if [ -f evidence/02_chat.png ]; then
   python3 tools/check/crops.py evidence/02_chat.png --out-dir evidence/crops --scale 3 >"$LOG/crops.json"
@@ -449,6 +462,11 @@ echo "· measuring whether the writing sits on the ruled lines"
 python3 tools/check/lines.py --out "$LOG/lines.json" >/dev/null || true
 
 echo "· measuring how flat the palest paper on each still is"
+# and no hole in the desk beside a sheet: a contact shadow that has come out from under the paper
+# it belongs to. Nine of the seventeen stills had one, with the desk reading luma 5 to 18 within a
+# dozen pixels of a torn edge against 84 to 103 elsewhere on the same board.
+python3 tools/check/holes.py --out "$LOG/holes.json" >/dev/null \
+  || note_missing "holes" "a shadow is lying on the desk beside the paper it belongs to; see $LOG/holes.json"
 python3 tools/check/flat.py --out "$LOG/flat.json" >/dev/null \
   || note_missing "flat" "a pale window on a still is flatter than any stock in the library; see $LOG/flat.json"
 

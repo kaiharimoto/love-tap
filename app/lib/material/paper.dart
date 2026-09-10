@@ -174,23 +174,38 @@ class PaperPiece extends StatelessWidget {
     return Positioned.fill(
       child: Transform.scale(
         scale: frame,
-        child: Opacity(
-          // One lift was modelled, and the render is as dark as this shadow gets: a note that
-          // lies flatter than the model cannot press harder than the render already did, so the
-          // reference is the flattest lift and every other note lifts away from it, lighter.
-          opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(0.0)).clamp(0.6, 1.0),
-          child: Image.asset(
-            tearAsset('${tearId!}_shadow$suffix'),
-            fit: BoxFit.fill,
-            // Bilinear rather than the default. A shadow render is a dark shape inside a
-            // transparent border and a cubic sampler can ring at a boundary like that; bilinear
-            // cannot. Tried as an explanation for the pale rule on the wood and it is *not* the
-            // explanation — resampling this asset by either filter and compositing it over a flat
-            // desk produces no bright row at all, measured. Kept as the cheaper and safer sampler
-            // for an image that is only ever stretched.
+        // Nine-sliced, like the mask it belongs to, and warm rather than black.
+        //
+        // A coherence critic found 758 pixels under luma 30 beside one chip in 12_search, minimum
+        // 4.3, where the desk immediately beside it reads 84 to 103 — a hole in the desk at the
+        // right-hand edge of a torn sheet. Two faults, and both are here.
+        //
+        // The first is the geometry. The paper's tear is nine-sliced (SlicedMasks), so its fibres
+        // keep the size they were rendered at whatever shape the piece turns out to be. This
+        // shadow was stretched with BoxFit.fill instead, so on a piece far from the render's own
+        // proportions — a search chip 457 points wide and fifty tall, out of a render 451 by 799 —
+        // the shadow's edge no longer lay under the paper's edge. What stuck out was the middle of
+        // the render, which is not a penumbra: 35 to 47 per cent of every one of these assets is
+        // alpha above 240, because the part under the paper is fully occluded and never meant to
+        // be seen.
+        //
+        // The second is the colour. The renders are black at that alpha — measured, RGB 0,0,0 —
+        // so anywhere the paper did not cover them the composite went to black. A contact shadow
+        // on a wooden desk is the desk with the light taken out of it, which is warm and dark; it
+        // is never neutral and it is never a hole. Tinted to Shadow.warm through the alpha, the
+        // densest possible contact now reads 49 against the desk's 84 to 103.
+        child: ColorFiltered(
+          colorFilter: const ColorFilter.mode(Shadow.warm, BlendMode.srcIn),
+          child: NineSliced(
+            asset: tearAsset('${tearId!}_shadow$suffix'),
+            // Bilinear, never mipmapped: see NineSliced.filterQuality. This is the one asset in
+            // the app where a sampler's overshoot is visible, because it is dark inside a
+            // transparent border and it is drawn straight onto the wood.
             filterQuality: FilterQuality.low,
-            gaplessPlayback: true,
-            errorBuilder: none,
+            // One lift was modelled, and the render is as dark as this shadow gets: a note that
+            // lies flatter than the model cannot press harder than the render already did, so the
+            // reference is the flattest lift and every other note lifts away from it, lighter.
+            opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(0.0)).clamp(0.6, 1.0),
           ),
         ),
       ),
@@ -873,7 +888,8 @@ class SlicedMasks {
 /// visible, and every one of these is drawn into a box of a different shape from the render. So
 /// the image is decoded through the same cache the masks use and drawn straight.
 class NineSliced extends StatefulWidget {
-  const NineSliced({super.key, required this.asset, this.edge = 0.4, this.opacity = 1.0});
+  const NineSliced({super.key, required this.asset, this.edge = 0.4, this.opacity = 1.0,
+      this.filterQuality = FilterQuality.medium});
 
   final String asset;
 
@@ -882,6 +898,17 @@ class NineSliced extends StatefulWidget {
   /// middle fifth is always solid, so four tenths is comfortably outside them.
   final double edge;
   final double opacity;
+
+  /// Medium for a mask, low for a shadow.
+  ///
+  /// Medium is bilinear with mipmaps, and a mipmapped sampler overshoots at a hard boundary — it
+  /// lands a *bright* row just outside a dark one, which is the pale straight rule that lay on
+  /// the wood under every sheet in nine of ten stills for five cycles and outlived being blamed
+  /// on the desk asset, the bounding box, the mask inset, the denoiser and the rotation. A mask
+  /// is alpha and a ring in it is invisible; a shadow render is a dark shape inside a transparent
+  /// border and a ring in that is a line on the desk. `paper_rests_on_the_desk_test` holds the
+  /// shadow to low.
+  final FilterQuality filterQuality;
 
   @override
   State<NineSliced> createState() => _NineSlicedState();
@@ -920,15 +947,17 @@ class _NineSlicedState extends State<NineSliced> {
   Widget build(BuildContext context) {
     final image = _image;
     if (image == null) return const SizedBox.shrink();
-    return CustomPaint(painter: _NinePainter(image, widget.edge, widget.opacity));
+    return CustomPaint(
+        painter: _NinePainter(image, widget.edge, widget.opacity, widget.filterQuality));
   }
 }
 
 class _NinePainter extends CustomPainter {
-  _NinePainter(this.image, this.edge, this.opacity);
+  _NinePainter(this.image, this.edge, this.opacity, this.filterQuality);
   final ui.Image image;
   final double edge;
   final double opacity;
+  final FilterQuality filterQuality;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -939,14 +968,17 @@ class _NinePainter extends CustomPainter {
       Rect.fromLTRB(w * edge, h * edge, w * (1 - edge), h * (1 - edge)),
       Offset.zero & size,
       Paint()
-        ..filterQuality = FilterQuality.medium
+        ..filterQuality = filterQuality
         ..color = Color.fromRGBO(0, 0, 0, opacity),
     );
   }
 
   @override
   bool shouldRepaint(_NinePainter old) =>
-      !identical(old.image, image) || old.edge != edge || old.opacity != opacity;
+      !identical(old.image, image) ||
+      old.edge != edge ||
+      old.opacity != opacity ||
+      old.filterQuality != filterQuality;
 }
 
 /// The thickness of card stock along a straight cut: light on the top and left edges, a hair of

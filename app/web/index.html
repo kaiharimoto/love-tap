@@ -22,9 +22,69 @@
        runs off the top of the screen does not end in white */
     html, body { margin: 0; padding: 0; background: #4C3E32; height: 100%; overscroll-behavior: none; }
     body { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+
+    /* The first launch reads a year out of the browser's own store, and on this machine that
+       takes between eight and ten seconds — measured, in five scene logs, against two seconds on
+       a phone that already has it. Until now the page was a flat #4C3E32 rectangle for the whole
+       of it, because runApp is not called until the log is open, so nothing Flutter draws exists
+       yet. A messenger critic wrote that no artifact in the set shows what is on the screen
+       during either, and the answer was: nothing is.
+       So the desk is put out first, by the page itself, with one line on it and no spinner. It
+       is the same photograph the app draws, fetched from the same bundle. */
+    #boot {
+      position: fixed; inset: 0; z-index: 2;
+      background: #4C3E32 url("assets/assets/shell/desk.webp") center / cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 160ms ease-out;
+    }
+    #boot.gone { opacity: 0; pointer-events: none; }
+    @font-face {
+      font-family: 'NoorHand';
+      src: url("assets/assets/fonts/NoorHand.ttf") format('truetype');
+      font-display: swap;
+    }
+    #boot p {
+      margin: 0; padding: 14px 20px 16px;
+      font-family: 'NoorHand', 'Segoe Print', cursive;
+      font-size: 19px; line-height: 1.42; color: #2A2622; text-align: center;
+      /* a slip of the same stock, torn nowhere: the page cannot cut paper, so it does not
+         pretend to — it is a rectangle of the real scan, and the app's own sheets take over the
+         moment there is a Flutter frame to take over with */
+      background: url("assets/assets/paper/index_01.webp") center / cover no-repeat;
+      box-shadow: 0 2px 5px rgba(30, 22, 14, 0.30), 0 10px 22px rgba(30, 22, 14, 0.18);
+      transform: rotate(-0.6deg);
+    }
+    #boot small { display: block; margin-top: 5px; font-size: 12.5px; color: #6B6B6E; }
   </style>
 </head>
 <body>
+  <div id="boot"><p>putting the year back on the desk<small id="boot-count"></small></p></div>
+  <script>
+    // What Dart reports while it reads the log back, so the line says how far in it is rather
+    // than sitting there. Nothing here spins: a count that is not moving is information.
+    window.__deskBoot = function (done, total) {
+      var el = document.getElementById('boot-count');
+      if (el && total > 0) el.textContent = done + ' of ' + total + ' months';
+    };
+    // Taken away on the app's first frame, not on a timer.
+    window.__deskDrawn = function () {
+      var el = document.getElementById('boot');
+      if (!el) return;
+      el.className = 'gone';
+      setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 200);
+    };
+    // And taken away by the app being on the screen, for the case where the call above never
+    // comes: a page that puts a desk out and cannot put it away is worse than one that never put
+    // it out. This is not a timer counting down to a guess — it is watching for the app's own
+    // canvas and going the moment it is there.
+    var watch = setInterval(function () {
+      if (!document.getElementById('boot')) { clearInterval(watch); return; }
+      if (document.querySelector('flt-glass-pane, flutter-view, flt-scene-host')) {
+        clearInterval(watch);
+        window.__deskDrawn();
+      }
+    }, 200);
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

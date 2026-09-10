@@ -40,6 +40,16 @@ class S {
   static const emptyChat = "first one's yours.";
   static const emptyChatAside = 'whatever it is. it only goes to one person.';
   static const replyingTo = 'answering';
+
+  // where in the year the thread is standing, and the way back out of it
+  static const backToNow = 'back to now';
+  static const monthsUp = 'months up';
+  static const weeksUp = 'weeks up';
+  static const daysUp = 'days up';
+  static const rowsUp = 'notes up';
+  static const aLittleUp = 'a little way up';
+  static const today = 'today';
+  static const yesterday = 'yesterday';
   static const cancel = 'cancel';
   static const play = 'play';
   static const pause = 'pause';

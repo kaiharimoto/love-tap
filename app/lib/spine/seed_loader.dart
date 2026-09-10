@@ -7,6 +7,7 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 
+import '../boot.dart';
 import 'spine.dart';
 
 /// Where the seed's files come from. The app reads them out of its asset bundle; the headless far
@@ -63,6 +64,8 @@ class SeedLoader {
     final anchors = <String, String>{};
     var blobs = 0;
     var seq = 0;
+    var monthsIn = 0;
+    bootProgress(0, months.length);
     for (final month in months) {
       final text = await source.loadString('$prefix/year/$month.jsonl');
       for (final raw in const LineSplitter().convert(text)) {
@@ -170,6 +173,11 @@ class SeedLoader {
         final anchor = j['anchor'];
         if (anchor is String) anchors[anchor] = id;
       }
+      // The page put the desk out before any of this started and it is still what is on the
+      // screen; this is how far in the reading has got. It is a count and not a bar: a number
+      // that has not moved for four seconds is information, and a bar that has not moved is a
+      // lie about how long is left.
+      bootProgress(++monthsIn, months.length);
     }
     await spine.importSeed(out);
     await spine.setMeta(metaKey, 'year');

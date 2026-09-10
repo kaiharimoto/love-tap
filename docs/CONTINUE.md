@@ -66,6 +66,54 @@ stocks were re-rendered at 1574x2200 so a full-width piece fits inside one.
   delivered reply with its parent, the tear library's own straightness, whether the writing is on
   the lines, and what each ambient surface may say.
 
+### And what the twelfth capture was waiting on
+
+Six more, all found by reading cycle 9's own reports back against the code rather than by looking
+at a picture.
+
+- **A hole in the desk beside every sheet.** A coherence critic measured 758 pixels under luma 30
+  at one chip's right edge in 12_search, minimum 4.3, against a desk reading 84-103 either side of
+  it. Two faults in one: the paper's tear is nine-sliced so its fibres keep their rendered size,
+  and the baked contact shadow under it was stretched with `BoxFit.fill`, so on a piece far from
+  the render's proportions the two no longer coincided — and what came out from under the paper is
+  black at alpha 255 over a third of every one of those assets, because that third is meant to be
+  occluded. Nine-sliced and tinted to `Shadow.warm` now. `tools/check/holes.py` measures the ring
+  from three to twelve pixels outside every sheet and gates on it: **nine of the seventeen stills
+  had one**, worst 11,346 pixels in 17_setup_pwa.
+- **The long poll may be asked for twice.** `401 GET /v1/events?after=14075&wait=20` in two of
+  fifteen scene logs, both of them the long clips, with the client's own sync recording `faults:
+  0` in the same file. A browser retries an idempotent GET when the connection closes before the
+  first response byte, with the header already on the wire; the nonce cache refused the second
+  one. The nonce is spent on writes now — a replayed read re-reads events the caller already
+  holds — and every refusal names the device it refused and the pairing it held.
+- **The first ten seconds are not blank.** `runApp` is not called until the log is open, and on a
+  first launch that is 8.9-10.0 seconds in five scene logs. For all of it the page was a flat
+  `#4C3E32` rectangle, which is why no artifact showed what is on the screen during it: nothing
+  was. The page puts the desk out itself now, with one line on a piece of the real stock in the
+  real hand and the month count Dart reports as it reads, and takes it away on the frame that
+  replaces it.
+- **A way back to now, and the day at the top of the glass.** One hard fling covers 1.2 to 3.1 per
+  cent of an 8,075-row thread and there was no scrollbar, no date rail and no way back. Two slips
+  now: the day the top row belongs to, and a torn tab saying `back to now` with how far up in the
+  units somebody says out loud. Both read from the list's own item positions through a
+  `ValueNotifier` with an `==` that compares what would be *written*, so a fling rebuilds two small
+  widgets and not eight thousand rows.
+- **A reply that has landed.** Every capture carried `replying_to` — the composer's pending target
+  — and no artifact ever showed a delivered reply tied to its parent. 13 stages one through the
+  composer now, and four answers in the seed that genuinely reach back past what came between them
+  were tied (`k:` keys, 2026-08 and 2026-09), because the last four months of the authored year
+  had no reply in them and every scene opens at the end of it.
+- **The video advancing.** 14 is a still and the set holds exactly seventeen artifacts, so the
+  scene grabs 48 of its own frames and they are folded into `crops/14_media_viewer_strip.png` and
+  the frame record — not an eighteenth artifact.
+
+One thing was found on the way and not chased: **a second `AppScope` built inside a second
+`testWidgets` in one file never returns.** Reduced to a scratch test that builds one, pumps it,
+and does it again — the first case passes in under a second and the second never reaches its first
+statement. Every widget test in this build that needs a scope makes it in `setUpAll`, so nothing
+had ever asked for two. It is written down in the head of
+`app/test/a_year_says_where_you_are_test.dart`.
+
 ### Two things measured and deliberately not fixed
 
 Both are in the evidence so the next cycle starts from a number rather than an impression.

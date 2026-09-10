@@ -45,6 +45,12 @@
    "settle": 1200
   },
   {
+   "do": "frames",
+   "dir": "evidence/frames/14_media_viewer",
+   "count": 48,
+   "ms": 33
+  },
+  {
    "do": "report",
    "out": "evidence/logs/14_media_viewer.report.json",
    "at": "14_media_viewer.png"

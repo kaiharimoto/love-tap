@@ -41,6 +41,20 @@ and continue from **Next action**.
 - Two things measured this cycle and deliberately not fixed, both written into the evidence so the
   next cycle starts from a number: half the tear library's masks have a contour under 2 px rms
   (`logs/torn.json`), and the writing sits 0.33 of a rule pitch off the line (`logs/lines.json`).
+- **A hole in the desk beside every sheet, and it had been there all along.** A coherence critic
+  measured 758 pixels under luma 30 at one chip's edge in 12_search against a desk reading 84-103.
+  The paper's tear is nine-sliced and the baked contact shadow under it was stretched with
+  `BoxFit.fill`, so on a piece far from the render's proportions the two stopped coinciding — and
+  what came out is black at alpha 255 over a third of each of those assets, because that third is
+  meant to be under the paper. Nine-sliced and tinted warm now, and `tools/check/holes.py` gates
+  on the ring three to twelve pixels outside every sheet: **nine of seventeen stills had one**.
+  The existing `paper_rests_on_the_desk_test` caught the first attempt at the fix routing the
+  shadow through a mipmapped sampler, which is the pale hairline five cycles were spent finding.
+- Also this session: the nonce replay window scoped to writes (the `401` on the twenty-second long
+  poll was a transparent browser retry of an idempotent GET); the page puts the desk out for the
+  eight-to-ten-second first launch instead of showing a flat brown rectangle; a way back to now and
+  the day at the top of the glass; four reach-back reply ties in the seed's last two months; and 48
+  frames of the media viewer folded into a strip, so something in the set shows a video advance.
 - **It went down, and it went down for the right reason.** Two floors are met against four last
   cycle. Material fell a point and the anti-goal fell two because the builder and the material
   critic, independently and before either read the other, found the same thing: the paper-shaped

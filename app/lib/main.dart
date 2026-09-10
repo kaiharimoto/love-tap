@@ -14,6 +14,7 @@ import 'scope.dart';
 import 'material/desk.dart';
 import 'material/ink.dart';
 import 'material/library.dart';
+import 'boot.dart';
 import 'ready.dart';
 import 'spine/seed_bundle.dart';
 import 'spine/seed_loader.dart';
@@ -71,6 +72,9 @@ Future<void> main() async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       took('the first frame');
       bootPhases['everything'] = DateTime.now().difference(began).inMilliseconds;
+      // The desk the *page* put out goes now, on the frame that replaces it, rather than on a
+      // timer that would either flash or overstay.
+      bootDone();
       markReady();
     });
   });

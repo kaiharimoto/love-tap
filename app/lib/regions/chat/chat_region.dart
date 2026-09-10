@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../capture/bus.dart';
@@ -57,6 +58,18 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
 
   final _scroll = ItemScrollController();
   final _positions = ItemPositionsListener.create();
+
+  /// Where in the year the thread is standing, for the two marks that say so.
+  ///
+  /// A `ValueNotifier` and not `setState`: this changes on every frame of a fling, and a region
+  /// that rebuilt itself on every frame of a fling is the fault three cycles of the messenger row
+  /// were spent finding. Only the two small widgets listening to it are rebuilt.
+  final ValueNotifier<_Standing> _standing = ValueNotifier(const _Standing.atTheEnd());
+
+  /// The rows the last build drew. The scroll listener runs outside build and must not subscribe
+  /// to the scope to find out what row 4,102 is.
+  List<ThreadItem> _drawn = const [];
+  bool _standingQueued = false;
   /// A real pixel offset into the list, for the fling. See [CaptureBus.scrollBy].
   final _offset = ScrollOffsetController();
 
@@ -116,6 +129,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _text.addListener(_onTextChanged);
+    _positions.itemPositions.addListener(_readStanding);
     if (Flags.capture || CaptureBus.wanted) _offerHandles();
   }
 
@@ -707,6 +721,8 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _positions.itemPositions.removeListener(_readStanding);
+    _standing.dispose();
     _text.dispose();
     _draftTimer?.cancel();
     _typingTimer?.cancel();
@@ -944,6 +960,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     final scope = AppScope.of(context);
     final items = scope.thread.items;
     final registry = scope.feelings;
+    _drawn = items;
     if (items.length != _lastCount) {
       final wasAtEnd = _lastCount == 0 || _nearEnd();
       _lastCount = items.length;
@@ -1002,6 +1019,13 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                         return w;
                       },
                     ),
+              // The two marks that say where in the year the thread is standing. Both listen to
+              // `_standing` rather than to the region, so a fling rebuilds two small widgets and
+              // not eight thousand rows.
+              ValueListenableBuilder<_Standing>(
+                valueListenable: _standing,
+                builder: (context, at, _) => _WhereWeAre(at: at, onBack: _scrollToEnd),
+              ),
             ],
           ),
         ),
@@ -1075,6 +1099,174 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     if (ps.isEmpty) return true;
     final maxIndex = ps.map((p) => p.index).reduce((a, b) => a > b ? a : b);
     return maxIndex >= _lastCount - 2;
+  }
+
+  /// What the top row on the glass is, and how far back from now it is.
+  ///
+  /// A messenger critic timed a hard fling at 1.2 to 3.1 per cent of the thread and wrote: there
+  /// is no scrollbar, no date rail and no way back to the newest message, so a person who looks
+  /// something up in an eight-thousand-row year is given neither a control nor any sense of where
+  /// they are. Both marks are read from here.
+  void _readStanding() {
+    final ps = _positions.itemPositions.value;
+    if (ps.isEmpty || !mounted) return;
+    // The list notifies its positions from inside its own layout, and setting a notifier there
+    // marks a widget dirty while the frame it belongs to is being laid out. Read now, publish on
+    // the frame boundary.
+    if (SchedulerBinding.instance.schedulerPhase != SchedulerPhase.idle) {
+      if (_standingQueued) return;
+      _standingQueued = true;
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _standingQueued = false;
+        if (mounted) _readStanding();
+      });
+      return;
+    }
+    var first = ps.first;
+    var last = ps.first;
+    for (final p in ps) {
+      if (p.index < first.index) first = p;
+      if (p.index > last.index) last = p;
+    }
+    final items = _drawn;
+    if (items.isEmpty) return;
+    final i = first.index.clamp(0, items.length - 1);
+    final behind = (items.length - 1) - last.index;
+    _standing.value = _Standing(
+      day: DateTime.fromMillisecondsSinceEpoch(items[i].event.ts).toLocal(),
+      rowsBehind: behind < 0 ? 0 : behind,
+      // Two rows of slack, the same margin _nearEnd uses, so the tab does not flicker on at the
+      // bottom of the thread when a note arrives and pushes the spacer half a line.
+      atTheEnd: last.index >= items.length - 1,
+    );
+  }
+
+}
+
+/// Where the thread is standing: the day at the top of the glass and the distance back to now.
+class _Standing {
+  const _Standing({required this.day, required this.rowsBehind, required this.atTheEnd});
+  const _Standing.atTheEnd() : day = null, rowsBehind = 0, atTheEnd = true;
+  final DateTime? day;
+  final int rowsBehind;
+  final bool atTheEnd;
+
+  /// Two of these are the same mark if they would be written the same. A `ValueNotifier` does not
+  /// notify when the value is equal, and without this every frame of a fling would publish a new
+  /// object saying `14 june` again — a rebuild a frame, for a slip that has not changed a letter.
+  /// Rows are counted to the nearest ten for the same reason: the words never say the units.
+  @override
+  bool operator ==(Object other) =>
+      other is _Standing &&
+      other.atTheEnd == atTheEnd &&
+      other.rowsBehind ~/ 10 == rowsBehind ~/ 10 &&
+      other.day?.year == day?.year &&
+      other.day?.month == day?.month &&
+      other.day?.day == day?.day;
+
+  @override
+  int get hashCode => Object.hash(atTheEnd, rowsBehind ~/ 10, day?.year, day?.month, day?.day);
+}
+
+/// The two marks, built against a standing a test can name, so what they say can be read off the
+/// glass without driving eight thousand rows of list to get there.
+Widget whereWeAreForTest({DateTime? day, int rowsBehind = 0, bool atTheEnd = false,
+        VoidCallback? onBack}) =>
+    _WhereWeAre(
+      at: _Standing(day: day, rowsBehind: rowsBehind, atTheEnd: atTheEnd),
+      onBack: onBack ?? () {},
+    );
+
+/// How far up the thread is standing, in words. Named at the top level so the wording can be
+/// tested without a widget: the units are the whole point of it.
+String whereWeAreHowFarBack(int rows, DateTime? day, DateTime now) =>
+    _WhereWeAre.howFarBack(rows, day, now);
+
+/// What day the top of the glass is, in words.
+String whereWeAreDayLine(DateTime day, DateTime now) => _WhereWeAre.dayLine(day, now);
+
+/// The day at the top of the glass, and the way back to now.
+///
+/// Two pieces of paper, not two controls. The day is a torn corner pinned at the top of the
+/// thread, the way you would leave a finger in a diary; the way back is a tab at the bottom
+/// corner, torn off the same stock, with how far up you are written under it in the margin hand.
+/// Neither is drawn while the thread is at its end, because then there is nowhere to go back to
+/// and no day but today.
+class _WhereWeAre extends StatelessWidget {
+  const _WhereWeAre({required this.at, required this.onBack});
+  final _Standing at;
+  final VoidCallback onBack;
+
+  /// How far up, in the units a person would say it in. Rows, then days, then weeks, then months:
+  /// "three weeks up" is a thing somebody says about a thread and "4,102 messages" is not.
+  static String howFarBack(int rows, DateTime? day, DateTime now) {
+    if (day == null) return S.backToNow;
+    final d = now.difference(day);
+    if (d.inDays >= 60) return '${(d.inDays / 30).round()} ${S.monthsUp}';
+    if (d.inDays >= 14) return '${(d.inDays / 7).round()} ${S.weeksUp}';
+    if (d.inDays >= 2) return '${d.inDays} ${S.daysUp}';
+    if (rows >= 40) return '$rows ${S.rowsUp}';
+    return S.aLittleUp;
+  }
+
+  static const _months = ['january', 'february', 'march', 'april', 'may', 'june', 'july',
+      'august', 'september', 'october', 'november', 'december'];
+
+  static String dayLine(DateTime d, DateTime now) {
+    final today = DateTime(now.year, now.month, now.day);
+    final that = DateTime(d.year, d.month, d.day);
+    final apart = today.difference(that).inDays;
+    if (apart == 0) return S.today;
+    if (apart == 1) return S.yesterday;
+    final month = _months[d.month - 1];
+    return apart < 300 ? '${d.day} $month' : '${d.day} $month ${d.year}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (at.atTheEnd || at.day == null) return const SizedBox.shrink();
+    final now = AppScope.of(context).clock.now();
+    // In the reader's own hand: this is their finger in the diary, not something the app said.
+    final mine = AppScope.meOf(context);
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Slip(
+              id: 'thread.day',
+              row: 3,
+              stock: 'index',
+              padding: const EdgeInsets.fromLTRB(12, 5, 12, 6),
+              child: Text(dayLine(at.day!, now), style: Hands.margin(size: 12)),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 10, 12),
+            child: Slip(
+                id: 'thread.back',
+                row: 5,
+                stock: 'index',
+                onTap: onBack,
+                padding: const EdgeInsets.fromLTRB(12, 6, 12, 7),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(S.backToNow, style: Hands.of(mine, size: 15)),
+                    Text(howFarBack(at.rowsBehind, at.day, now),
+                        style: Hands.margin(size: 11).copyWith(color: Pen.margin)),
+                  ],
+                ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 

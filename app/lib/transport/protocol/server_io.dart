@@ -123,7 +123,11 @@ class HostServer {
       final auth = AuthHeader.parse(req.headers.value('authorization'));
       final why = _refuseReason(auth, req.method, req.uri, body);
       if (why != null) {
-        refusals.add('${req.method} ${req.uri.path}: $why');
+        // With the device, because two of the five reasons are about *which* phone asked, and a
+        // refusal line that does not say who was refused cannot tell a stale client from a wrong
+        // key.
+        refusals.add('${req.method} ${req.uri.path}: $why '
+            '(${auth?.deviceId ?? 'unsigned'}, pairing covers ${pairingFor()?.clientId ?? 'nobody'})');
         if (refusals.length > 20) refusals.removeAt(0);
         req.response.statusCode = HttpStatus.unauthorized;
         req.response.headers.set('x-desk-refused', why);
@@ -183,7 +187,26 @@ class HostServer {
     final signedPath = uri.path + (uri.hasQuery ? '?${uri.query}' : '');
     final expected = sign(key, method, signedPath, auth.ts, auth.nonce, body);
     if (!constantTimeEquals(expected, auth.mac)) return 'the signature does not match';
-    if (!_nonces.checkAndAdd(auth.nonce, auth.ts)) return 'this request has already been made';
+    // The replay window guards writes. A read is not replay-protected, and this is why.
+    //
+    // The refusal a critic found was on `GET /v1/events?after=14075&wait=20` — the twenty-second
+    // long poll, and the only request in this protocol that is held open long enough for the
+    // network under it to do anything interesting. A browser transparently retries an idempotent
+    // GET when the connection is closed before the first response byte arrives, and the retry
+    // carries the same signed header, because the header is what was already written to the
+    // socket. The nonce cache sees the same nonce twice and refuses the second one. That matches
+    // what the evidence shows and nothing else in the evidence does: it happened on two of
+    // fifteen scenes and both are the long clips, where the poll cycles for minutes; the client's
+    // own sync recorded `faults: 0`, because from the client's side the retry is the same request
+    // it is still waiting on.
+    //
+    // Replaying a GET reveals nothing the original did not: it re-reads events the caller has
+    // already been given, at a cursor it already holds, with a signature only the paired key can
+    // make and a timestamp that must be inside `kAuthSkew`. Replaying a POST appends to the log
+    // twice, which is a different thing entirely, so that is what the nonce is spent on.
+    if (method != 'GET' && !_nonces.checkAndAdd(auth.nonce, auth.ts)) {
+      return 'this request has already been made';
+    }
     return null;
   }
 

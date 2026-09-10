@@ -13,7 +13,7 @@
 {"key": "2026-08-01-9003", "ts": "2026-08-01T12:37:31+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-08-01-0006"}, "gen": "finish"}
 {"key": "2026-08-01-0008", "ts": "2026-08-01T12:38:44+01:00", "author": "noor", "type": "message", "payload": {"text": "the canal has gone the colour of a pool that gave up. one swan doing lengths in it anyway, completely committed"}}
 {"key": "2026-08-01-0009", "ts": "2026-08-01T12:44:16+01:00", "author": "teo", "type": "message", "payload": {"text": "The swan has not read anything about the water."}}
-{"key": "2026-08-01-0010", "ts": "2026-08-01T12:49:33+01:00", "author": "noor", "type": "message", "payload": {"text": "the swan cannot read. thats the entire charm of the swan"}}
+{"key": "2026-08-01-0010", "ts": "2026-08-01T12:49:33+01:00", "author": "noor", "type": "message", "payload": {"text": "the swan cannot read. thats the entire charm of the swan", "reply_to": "k:2026-08-01-0008"}}
 {"key": "2026-08-01-0011", "ts": "2026-08-01T16:10:28+01:00", "author": "teo", "type": "state_declared", "payload": {"signal": "place", "value": "out"}}
 {"key": "2026-08-01-9004", "ts": "2026-08-01T16:20:35+01:00", "author": "teo", "type": "read_marker", "payload": {"upto_key": "2026-08-01-0010"}, "gen": "finish"}
 {"key": "2026-08-01-0012", "ts": "2026-08-01T16:22:50+01:00", "author": "teo", "type": "message", "payload": {"text": "Bought ice. Two bags. The freezer on the ward has been dead since june and nobody will write it in the book."}}
@@ -37,7 +37,7 @@
 {"key": "2026-08-02-0002", "ts": "2026-08-02T08:16:12+01:00", "author": "teo", "type": "message", "payload": {"text": "Home. One down. Somebody had put the ice in the drinks fridge, which is the most predictable sentence in the world."}}
 {"key": "2026-08-02-9008", "ts": "2026-08-02T08:19:47+01:00", "author": "noor", "type": "read_marker", "payload": {"upto_key": "2026-08-02-0002"}, "gen": "finish"}
 {"key": "2026-08-02-0003", "ts": "2026-08-02T08:20:35+01:00", "author": "noor", "type": "message", "payload": {"text": "the ice"}}
-{"key": "2026-08-02-0004", "ts": "2026-08-02T08:23:51+01:00", "author": "teo", "type": "message", "payload": {"text": "The ice is gone. The ice was a gift to the wrong people."}}
+{"key": "2026-08-02-0004", "ts": "2026-08-02T08:23:51+01:00", "author": "teo", "type": "message", "payload": {"text": "The ice is gone. The ice was a gift to the wrong people.", "reply_to": "k:2026-08-01-0012"}}
 {"key": "2026-08-02-0006", "ts": "2026-08-02T08:34:27+01:00", "author": "noor", "type": "message", "payload": {"text": "call at nine. im making the coffee first and then im sitting on the step with it"}}
 {"key": "2026-08-02-9510", "ts": "2026-08-02T08:35:50+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "at_home", "value": true}, "gen": "finish"}
 {"key": "2026-08-02-9511", "ts": "2026-08-02T08:36:39+01:00", "author": "teo", "type": "state_passive", "payload": {"signal": "network", "value": "wifi"}, "gen": "finish"}
