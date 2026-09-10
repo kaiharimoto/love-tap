@@ -3,11 +3,15 @@
 // except where a real machine did the printing (the receipt).
 import 'package:flutter/material.dart';
 
+import '../flags.dart';
 import '../spine/event.dart';
 import 'ink.dart';
 import 'palette.dart';
 
-const List<FontFeature> _handFeatures = [FontFeature.enable('calt'), FontFeature.enable('liga')];
+// Off only under Flags.plainFonts, which exists to measure what they cost and is never set in a
+// build anybody uses. See the flag.
+const List<FontFeature> _allFeatures = [FontFeature.enable('calt'), FontFeature.enable('liga')];
+final List<FontFeature> _handFeatures = Flags.plainFonts ? const [] : _allFeatures;
 
 class Hands {
   /// Noor: fast, slanted ballpoint.

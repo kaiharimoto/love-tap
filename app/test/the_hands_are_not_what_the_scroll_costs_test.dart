@@ -1,4 +1,18 @@
-// Shaping handwriting is not what a thread row costs.
+// WHAT THIS TEST CANNOT SEE, written at the top because it matters more than what it can.
+//
+// `flutter test` runs the engine with `--use-test-fonts --disable-asset-fonts`. Every paragraph
+// laid out in here is laid out in Ahem, which has no contextual alternates and no ligatures, so
+// the 0.074 ms below is the cost of shaping a note *in a font with nothing to shape*. It was read
+// as ruling the hand fonts out of the scroll's cost and it does not rule anything out.
+//
+// What the twelfth capture measured, in the browser, against the real faces: a fling frame that
+// builds nothing costs 4 ms and a fling frame that builds two and a half rows costs 688 — about
+// 276 ms a row. The row count itself fell from 5,028 over three hundred frames to 167 when
+// Note.build stopped subscribing to the scope, so the rows are no longer being rebuilt for
+// nothing; what one costs to build the first time is a separate question and this file has never
+// been able to answer it. `Flags.plainFonts` and a second capture of the same fling can.
+//
+// The claim this file was written to make, which stands only for a font with nothing to shape:
 //
 // The scroll's build spikes were attributed to the tear mask being baked per note; a counter
 // disproved it (twelve masks across a fling through 8,075 rows). The next hypothesis, named so it

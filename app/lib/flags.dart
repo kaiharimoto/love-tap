@@ -16,6 +16,17 @@ class Flags {
   /// Separates two instances on one machine and the seeded profile from the empty one.
   static const String profile = String.fromEnvironment('PROFILE', defaultValue: 'default');
 
+  /// An experiment, and nothing else: the hands' contextual alternates off.
+  ///
+  /// Three cycles have blamed the scroll on something and been wrong twice. The hand fonts were
+  /// the third guess and a test said no — a note of handwriting shapes in 0.074 ms — but that test
+  /// runs under `flutter test`, which passes `--use-test-fonts --disable-asset-fonts`, so it was
+  /// measuring a font with no `calt` in it and could not have seen this whatever the answer was.
+  ///
+  /// The capture can answer it: build twice, shoot the same fling twice, read build_ms. This flag
+  /// is what makes the second build. It is never set in a build anybody uses.
+  static const bool plainFonts = bool.fromEnvironment('PLAIN_FONTS', defaultValue: false);
+
   /// Capture mode: driven clock, fixed RNG seed, no real-time animation timing.
   static const bool capture = bool.fromEnvironment('CAPTURE', defaultValue: false);
   static const int captureSeed = int.fromEnvironment('CAPTURE_SEED', defaultValue: 20260903);
