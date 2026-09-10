@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1618,
+   "ms": 1667,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3392
+   "ms": 3424
   },
   {
    "do": "wait",
@@ -24,7 +24,7 @@
   },
   {
    "do": "scrollTo",
-   "ms": 4188
+   "ms": 3361
   },
   {
    "do": "wait",
@@ -32,19 +32,19 @@
   },
   {
    "do": "frames",
-   "ms": 535508
+   "ms": 545872
   },
   {
    "do": "timings",
-   "ms": 421
+   "ms": 418
   },
   {
    "do": "flingLog",
-   "ms": 410
+   "ms": 413
   },
   {
    "do": "report",
-   "ms": 1134
+   "ms": 1091
   }
  ],
  "shots": [
@@ -192,18 +192,18 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 4944,
    "seed": 20260903,
-   "events": 14090,
+   "events": 14088,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 17,
+   "masks_composed": 19,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
-   "paper_at_its_own_size": 11086,
-   "paper_stretched_to_fit": 183,
+   "paper_at_its_own_size": 11279,
+   "paper_stretched_to_fit": 187,
    "setup_showing": false,
    "fold": {
     "sequence": null
@@ -211,36 +211,37 @@
    "sensation": null,
    "the_launch_took": {
     "the framework": 8,
-    "the library index": 20,
-    "the ink plates": 42,
-    "the desk": 188,
-    "the log": 605,
-    "the first frame": 345,
-    "everything": 1208
+    "the library index": 13,
+    "the ink plates": 39,
+    "the desk": 190,
+    "the log": 662,
+    "the first frame": 380,
+    "everything": 1292
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 184,
+    "rounds": 187,
     "pushed": 0,
     "refused": 0,
     "pulled": 0,
     "blobs_fetched": 0,
-    "faults": 0,
+    "faults": 1,
+    "last_fault": "401 the signature does not match",
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14090,
+    "cursor": 14088,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14090,
-     "our_cursor": 14090,
+     "peer_cursor": 14088,
+     "our_cursor": 14088,
      "last_error": null,
-     "since": "2026-09-10T04:14:28.682Z",
-     "last_contact": "2026-09-10T04:23:38.158Z"
+     "since": "2026-09-10T18:17:38.146Z",
+     "last_contact": "2026-09-10T18:26:57.408Z"
     }
    },
    "ambient": {
@@ -259,22 +260,28 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2349,
+ "cold_ms": 2602,
  "load": {
-  "ms": 2349,
+  "ms": 2602,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 8,
-   "the library index": 20,
-   "the ink plates": 42,
-   "the desk": 188,
-   "the log": 605,
-   "the first frame": 345,
-   "everything": 1208
+   "the library index": 13,
+   "the ink plates": 39,
+   "the desk": 190,
+   "the log": 662,
+   "the first frame": 380,
+   "everything": 1292
   }
  },
- "problems": [],
- "ok": true,
+ "problems": [
+  "http: 401 GET http://127.0.0.1:8480/v1/events?after=14088&wait=20",
+  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+ ],
+ "refused_requests": [
+  "401 GET http://127.0.0.1:8480/v1/events?after=14088&wait=20"
+ ],
+ "ok": false,
  "steps_landed": true
 }

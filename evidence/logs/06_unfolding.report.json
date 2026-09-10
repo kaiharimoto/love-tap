@@ -3,141 +3,136 @@
  "view": {
   "region": "chat",
   "visible": [
-   "0001M4GW48FEW3M67XKAZT5051",
-   "0001M4ZQQ0H0PPVTKMMQEE268D",
-   "0001M59VY0YA13H9M86HTA6XNP",
-   "01M1MCPRJVEE61GNH6XTVJKV20",
-   "01M1MCWAFK020BKYAQD9R35B8V"
+   "0001MCJ1M0TM1AH3BRGTH8Q39M",
+   "0001MCJ1M0TM1AH3BRGTH8Q39Y",
+   "01M1MD3VDZF9B5XRBJQ010J3AN",
+   "01M1MDC9MXTW0AVCNKG5DAW26E"
   ],
   "whole_on_the_glass": [
-   "0001M4ZQQ0H0PPVTKMMQEE268D",
-   "0001M59VY0YA13H9M86HTA6XNP",
-   "01M1MCPRJVEE61GNH6XTVJKV20",
-   "01M1MCWAFK020BKYAQD9R35B8V"
+   "0001MCJ1M0TM1AH3BRGTH8Q39Y",
+   "01M1MD3VDZF9B5XRBJQ010J3AN",
+   "01M1MDC9MXTW0AVCNKG5DAW26E"
   ],
   "clipped_at_an_edge": {
-   "0001M4GW48FEW3M67XKAZT5051": 0.027
+   "0001MCJ1M0TM1AH3BRGTH8Q39M": 0.085
   },
   "delivery": {
-   "0001M4GW48FEW3M67XKAZT5051": {
+   "0001MCJ1M0TM1AH3BRGTH8Q39M": {
+    "state": "sent",
+    "says": "sent"
+   },
+   "0001MCJ1M0TM1AH3BRGTH8Q39Y": {
     "state": "sent",
     "says": "sent"
    }
   },
   "refusals_on_the_glass": {},
-  "states_on_the_glass": {},
+  "states_on_the_glass": {
+   "sent": 1
+  },
   "reactions": {},
   "edited": [],
   "taken_back": [],
   "scroll": {
-   "first": 8066,
-   "last": 8071,
-   "of": 8071
+   "first": 8074,
+   "last": 8078,
+   "of": 8078
   },
   "paper": [
-   "0001M59VY0YA13H9M86HTA6XNP",
-   "01M1MCPRJVEE61GNH6XTVJKV20",
-   "01M1MCWAFK020BKYAQD9R35B8V"
+   "0001MCJ1M0TM1AH3BRGTH8Q39M",
+   "0001MCJ1M0TM1AH3BRGTH8Q39Y",
+   "01M1MD3VDZF9B5XRBJQ010J3AN",
+   "01M1MDC9MXTW0AVCNKG5DAW26E"
   ],
   "paper_whole_on_the_glass": 3,
   "rows_cost": [
    {
-    "row": 8066,
-    "type": "feeling",
-    "tall": 255,
-    "top": -248
-   },
-   {
-    "row": 8067,
-    "type": "state_declared",
-    "tall": 31,
-    "top": 7
-   },
-   {
-    "row": 8068,
+    "row": 8074,
     "type": "message",
-    "tall": 181,
-    "top": 38
+    "tall": 129,
+    "top": -118
    },
    {
-    "row": 8069,
+    "row": 8075,
+    "type": "message",
+    "tall": 82,
+    "top": 11
+   },
+   {
+    "row": 8076,
     "type": "message",
     "tall": 179,
-    "top": 219
+    "top": 93
    },
    {
-    "row": 8070,
+    "row": 8077,
     "type": "message",
-    "tall": 96,
-    "top": 398
+    "tall": 179,
+    "top": 272
    }
   ],
-  "viewport_tall": 501.4,
-  "composer": "",
+  "viewport_tall": 457.7,
+  "composer": "the second one, then",
   "attaching": false,
   "replying_to": null,
   "replies_on_the_glass": {},
   "editing": null,
   "anchor": null,
   "kinds": {
-   "feeling": 1,
-   "state_declared": 1,
-   "message": 3
+   "message": 4
   },
   "folded_in": {
    "reaction": 0,
    "message_edit": 0,
    "message_delete": 0,
-   "read_marker": 2
+   "read_marker": 0
   },
-  "partner_typing": false
+  "partner_typing": true
  },
  "visible": [
-  "0001M4GW48FEW3M67XKAZT5051",
-  "0001M4ZQQ0H0PPVTKMMQEE268D",
-  "0001M59VY0YA13H9M86HTA6XNP",
-  "01M1MCPRJVEE61GNH6XTVJKV20",
-  "01M1MCWAFK020BKYAQD9R35B8V"
+  "0001MCJ1M0TM1AH3BRGTH8Q39M",
+  "0001MCJ1M0TM1AH3BRGTH8Q39Y",
+  "01M1MD3VDZF9B5XRBJQ010J3AN",
+  "01M1MDC9MXTW0AVCNKG5DAW26E"
  ],
  "paper": [
-  "0001M59VY0YA13H9M86HTA6XNP",
-  "01M1MCPRJVEE61GNH6XTVJKV20",
-  "01M1MCWAFK020BKYAQD9R35B8V"
+  "0001MCJ1M0TM1AH3BRGTH8Q39M",
+  "0001MCJ1M0TM1AH3BRGTH8Q39Y",
+  "01M1MD3VDZF9B5XRBJQ010J3AN",
+  "01M1MDC9MXTW0AVCNKG5DAW26E"
  ],
  "tears": {
-  "0001M4GW48FEW3M67XKAZT5051": "tear_010",
-  "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
-  "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-  "01M1MCPRJVEE61GNH6XTVJKV20": "tear_036",
-  "01M1MCWAFK020BKYAQD9R35B8V": "tear_019"
+  "0001MCJ1M0TM1AH3BRGTH8Q39M": "tear_035",
+  "0001MCJ1M0TM1AH3BRGTH8Q39Y": "tear_055",
+  "01M1MD3VDZF9B5XRBJQ010J3AN": "tear_040",
+  "01M1MDC9MXTW0AVCNKG5DAW26E": "tear_023"
  },
  "stocks": {
-  "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
-  "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
-  "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-  "01M1MCPRJVEE61GNH6XTVJKV20": "lined_03",
-  "01M1MCWAFK020BKYAQD9R35B8V": "lined_04"
+  "0001MCJ1M0TM1AH3BRGTH8Q39M": "lined_02",
+  "0001MCJ1M0TM1AH3BRGTH8Q39Y": "lined_01",
+  "01M1MD3VDZF9B5XRBJQ010J3AN": "receipt_01",
+  "01M1MDC9MXTW0AVCNKG5DAW26E": "lined_04"
  },
  "scroll": {
-  "first": 8066,
-  "last": 8071,
-  "of": 8071
+  "first": 8074,
+  "last": 8078,
+  "of": 8078
  },
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 4720,
  "seed": 20260903,
- "events": 14066,
+ "events": 14080,
  "transport": "local",
  "link": "connected",
  "me": "teo",
  "masks_in_pool": 56,
- "masks_composed": 1,
+ "masks_composed": 2,
  "writable_masks": 47,
  "light": "day",
  "has_dusk_paper": true,
  "paper_stocks": 54,
- "paper_at_its_own_size": 853,
- "paper_stretched_to_fit": 14,
+ "paper_at_its_own_size": 12549,
+ "paper_stretched_to_fit": 212,
  "setup_showing": false,
  "fold": {
   "sequence": "unfold_thirds",
@@ -151,42 +146,42 @@
  "sensation": null,
  "the_launch_took": {
   "the framework": 7,
-  "the library index": 15,
-  "the ink plates": 35,
-  "the desk": 138,
-  "the log": 603,
-  "the first frame": 335,
-  "everything": 1133
+  "the library index": 20,
+  "the ink plates": 34,
+  "the desk": 131,
+  "the log": 668,
+  "the first frame": 384,
+  "everything": 1244
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 18,
-  "pushed": 2,
+  "rounds": 204,
+  "pushed": 3,
   "refused": 0,
   "pulled": 2,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14066,
+  "cursor": 14080,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14066,
-   "our_cursor": 14066,
+   "peer_cursor": 14080,
+   "our_cursor": 14080,
    "last_error": null,
-   "since": "2026-09-10T05:19:17.940Z",
-   "last_contact": "2026-09-10T05:25:18.429Z"
+   "since": "2026-09-10T17:49:28.208Z",
+   "last_contact": "2026-09-10T17:59:39.406Z"
   }
  },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-  "pocket_feeling": "ugh",
-  "pocket_at": 1788464400000,
+  "pocket_feeling": null,
+  "pocket_at": null,
   "allowed_to_interrupt": false,
   "what_each_surface_may_say": {
    "standing_line": "their state, in the couple's own words, assembled here from the log",

@@ -1,21 +1,21 @@
 {
  "crop": "evidence/02_chat.png",
- "marks": 397,
+ "marks": 506,
  "best_fit_iou": {
-  "median": 0.644,
-  "p90": 0.857,
+  "median": 0.719,
+  "p90": 0.898,
   "max": 1.0
  },
- "marks_with_a_twin": 53,
- "twin_share": 0.134,
- "pairs_over_twin": 46,
+ "marks_with_a_twin": 106,
+ "twin_share": 0.209,
+ "pairs_over_twin": 110,
  "twin_iou": 0.85,
  "twin_share_at": {
-  "0.8": 0.199,
-  "0.85": 0.134,
-  "0.9": 0.055,
-  "0.95": 0.01,
-  "0.99": 0.005
+  "0.8": 0.306,
+  "0.85": 0.209,
+  "0.9": 0.097,
+  "0.95": 0.03,
+  "0.99": 0.004
  },
  "note": "marks are connected components of ink, normalised to one box; a font repeats itself exactly, a hand a little. twin_share is at twin_iou; twin_share_at is the same count at five thresholds, because a share means nothing without one",
  "ok": true

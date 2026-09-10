@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4877
+   "ms": 5202
   },
   {
    "do": "wait",
@@ -18,11 +18,11 @@
   },
   {
    "do": "shot",
-   "ms": 4548
+   "ms": 5123
   },
   {
    "do": "report",
-   "ms": 712
+   "ms": 716
   }
  ],
  "shots": [
@@ -146,13 +146,13 @@
    },
    "sensation": null,
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 18,
-    "the ink plates": 33,
-    "the desk": 121,
-    "the log": 5949,
-    "the first frame": 400,
-    "everything": 6528
+    "the framework": 6,
+    "the library index": 17,
+    "the ink plates": 45,
+    "the desk": 160,
+    "the log": 7199,
+    "the first frame": 406,
+    "everything": 7833
    },
    "sync": {
     "transport": "local",
@@ -175,7 +175,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-10T03:45:48.120Z",
+     "since": "2026-09-10T17:49:11.329Z",
      "last_contact": null
     }
    },
@@ -195,19 +195,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 7609,
+ "cold_ms": 9021,
  "load": {
-  "ms": 7609,
+  "ms": 9021,
   "store": "fresh",
   "profile": null,
   "made_of": {
-   "the framework": 7,
-   "the library index": 18,
-   "the ink plates": 33,
-   "the desk": 121,
-   "the log": 5949,
-   "the first frame": 400,
-   "everything": 6528
+   "the framework": 6,
+   "the library index": 17,
+   "the ink plates": 45,
+   "the desk": 160,
+   "the log": 7199,
+   "the first frame": 406,
+   "everything": 7833
   }
  },
  "problems": [],

@@ -28,7 +28,7 @@
    {
     "id": "rituals",
     "events": 53,
-    "glance": "3 kept · 53 times · the last 7 days ago"
+    "glance": "3 kept · 53 times · the last 8 days ago"
    },
    {
     "id": "shelf",
@@ -45,18 +45,18 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 11248,
  "seed": 20260903,
- "events": 14109,
+ "events": 14114,
  "transport": "local",
  "link": "connected",
  "me": "teo",
  "masks_in_pool": 56,
- "masks_composed": 7,
+ "masks_composed": 8,
  "writable_masks": 47,
  "light": "day",
  "has_dusk_paper": true,
  "paper_stocks": 54,
- "paper_at_its_own_size": 29586,
- "paper_stretched_to_fit": 491,
+ "paper_at_its_own_size": 32288,
+ "paper_stretched_to_fit": 544,
  "setup_showing": false,
  "fold": {
   "sequence": "unfold_thirds",
@@ -71,7 +71,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-10T04:56:41.123Z",
+  "started_at": "2026-09-10T19:09:27.952Z",
   "pattern": [
    {
     "ms": 150,
@@ -96,37 +96,37 @@
   ]
  },
  "the_launch_took": {
-  "the framework": 7,
+  "the framework": 6,
   "the library index": 16,
-  "the ink plates": 37,
-  "the desk": 146,
-  "the log": 714,
-  "the first frame": 322,
-  "everything": 1242
+  "the ink plates": 34,
+  "the desk": 184,
+  "the log": 646,
+  "the first frame": 321,
+  "everything": 1207
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 454,
-  "pushed": 10,
+  "rounds": 505,
+  "pushed": 12,
   "refused": 0,
   "pulled": 8,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14109,
+  "cursor": 14114,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14109,
-   "our_cursor": 14109,
+   "peer_cursor": 14114,
+   "our_cursor": 14114,
    "last_error": null,
-   "since": "2026-09-10T04:38:16.699Z",
-   "last_contact": "2026-09-10T05:01:02.763Z"
+   "since": "2026-09-10T18:47:55.716Z",
+   "last_contact": "2026-09-10T19:13:27.566Z"
   }
  },
  "ambient": {

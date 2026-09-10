@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2902
+   "ms": 2905
   },
   {
    "do": "goTo",
-   "ms": 3136
+   "ms": 3131
   },
   {
    "do": "step",
-   "ms": 1408
+   "ms": 1473
   },
   {
    "do": "step",
-   "ms": 1222
+   "ms": 1250
   },
   {
    "do": "wait",
@@ -30,27 +30,27 @@
   },
   {
    "do": "shot",
-   "ms": 1536
+   "ms": 1528
   },
   {
    "do": "goTo",
-   "ms": 4322
+   "ms": 3906
   },
   {
    "do": "step",
-   "ms": 1624
+   "ms": 1666
   },
   {
    "do": "step",
-   "ms": 1269
+   "ms": 1279
   },
   {
    "do": "wait",
-   "ms": 1004
+   "ms": 1002
   },
   {
    "do": "report",
-   "ms": 714
+   "ms": 713
   },
   {
    "push": {
@@ -61,23 +61,23 @@
   },
   {
    "do": "push",
-   "ms": 2213
+   "ms": 2211
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2103
   },
   {
    "do": "screen",
-   "ms": 3870
+   "ms": 851
   },
   {
    "do": "closeApp",
-   "ms": 729
+   "ms": 726
   },
   {
    "do": "wait",
-   "ms": 1602
+   "ms": 1603
   },
   {
    "push": {
@@ -92,11 +92,11 @@
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2102
   },
   {
    "do": "screen",
-   "ms": 778
+   "ms": 779
   },
   {
    "push": {
@@ -107,15 +107,15 @@
   },
   {
    "do": "push",
-   "ms": 2210
+   "ms": 2209
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 777
+   "ms": 778
   },
   {
    "push": {
@@ -126,19 +126,19 @@
   },
   {
    "do": "push",
-   "ms": 2209
+   "ms": 2208
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 777
+   "ms": 779
   },
   {
    "do": "notifications",
-   "ms": 1142
+   "ms": 1201
   }
  ],
  "shots": [
@@ -273,12 +273,12 @@
    "sensation": null,
    "the_launch_took": {
     "the framework": 6,
-    "the library index": 17,
-    "the ink plates": 23,
-    "the desk": 83,
-    "the log": 470,
-    "the first frame": 241,
-    "everything": 840
+    "the library index": 12,
+    "the ink plates": 27,
+    "the desk": 81,
+    "the log": 626,
+    "the first frame": 263,
+    "everything": 1015
    },
    "sync": {
     "transport": "local",
@@ -301,7 +301,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-10T03:44:52.828Z",
+     "since": "2026-09-10T17:48:17.772Z",
      "last_contact": null
     }
    },
@@ -321,19 +321,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2290,
+ "cold_ms": 2611,
  "load": {
-  "ms": 2290,
+  "ms": 2611,
   "store": "kept",
   "profile": "profile_reception",
   "made_of": {
    "the framework": 6,
-   "the library index": 17,
-   "the ink plates": 23,
-   "the desk": 83,
-   "the log": 470,
-   "the first frame": 241,
-   "everything": 840
+   "the library index": 12,
+   "the ink plates": 27,
+   "the desk": 81,
+   "the log": 626,
+   "the first frame": 263,
+   "everything": 1015
   }
  },
  "app_open": false,
@@ -426,6 +426,46 @@
    },
    {
     "at": 1789011936201,
+    "kind": "state_declared",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "said how they are",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789062520179,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "interrupt",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789062527668,
+    "kind": "message",
+    "from": "noor",
+    "how": "interrupt",
+    "title": "noor",
+    "body": "wrote something",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789062532758,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "interrupt",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789062537847,
     "kind": "state_declared",
     "from": "noor",
     "how": "quiet",

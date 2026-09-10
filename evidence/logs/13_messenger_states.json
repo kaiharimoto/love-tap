@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2810,
+   "ms": 2804,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3453
+   "ms": 3457
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1701
   },
   {
    "do": "scrollTo",
-   "ms": 3772
+   "ms": 3523
   },
   {
    "do": "wait",
@@ -32,7 +32,7 @@
   },
   {
    "do": "far",
-   "ms": 705
+   "ms": 706
   },
   {
    "do": "wait",
@@ -40,7 +40,7 @@
   },
   {
    "do": "far",
-   "ms": 705
+   "ms": 703
   },
   {
    "do": "wait",
@@ -48,35 +48,35 @@
   },
   {
    "do": "stage",
-   "ms": 16736
+   "ms": 25510
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 1904
   },
   {
    "do": "far",
-   "ms": 1954
+   "ms": 1366
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 1904
   },
   {
    "do": "far",
-   "ms": 705
+   "ms": 703
   },
   {
    "do": "sync",
-   "ms": 719
+   "ms": 721
   },
   {
    "do": "wait",
-   "ms": 1905
+   "ms": 1904
   },
   {
    "do": "openSender",
-   "ms": 2010
+   "ms": 2046
   },
   {
    "do": "wait",
@@ -84,7 +84,7 @@
   },
   {
    "do": "scrollTo",
-   "ms": 2818
+   "ms": 2647
   },
   {
    "do": "far",
@@ -97,19 +97,19 @@
   },
   {
    "do": "awaitView",
-   "ms": 16258
+   "ms": 9804
   },
   {
    "do": "slowSend",
-   "ms": 5910
+   "ms": 5200
   },
   {
    "do": "shot",
-   "ms": 3129
+   "ms": 3440
   },
   {
    "do": "report",
-   "ms": 702
+   "ms": 703
   }
  ],
  "shots": [
@@ -124,51 +124,51 @@
    "view": {
     "region": "chat",
     "visible": [
-     "0001MCJ1M02W5ESYRSNWK82NX1",
-     "0001MCJ1M02W5ESYRSNWK82NX5",
-     "0001MCJ1M02W5ESYRSNWK82NX6",
-     "0001MCJ1M02W5ESYRSNWK82NX7",
-     "0001MCJ1M02W5ESYRSNWK82NWZ",
-     "0001MCJ1M02W5ESYRSNWK82NX9"
+     "0001MCJ1M0TM1AH3BRGTH8Q39P",
+     "0001MCJ1M0TM1AH3BRGTH8Q39T",
+     "0001MCJ1M0TM1AH3BRGTH8Q39V",
+     "0001MCJ1M0TM1AH3BRGTH8Q39W",
+     "0001MCJ1M0TM1AH3BRGTH8Q39M",
+     "0001MCJ1M0TM1AH3BRGTH8Q39Y"
     ],
     "whole_on_the_glass": [
-     "0001MCJ1M02W5ESYRSNWK82NX5",
-     "0001MCJ1M02W5ESYRSNWK82NX6",
-     "0001MCJ1M02W5ESYRSNWK82NX7",
-     "0001MCJ1M02W5ESYRSNWK82NWZ",
-     "0001MCJ1M02W5ESYRSNWK82NX9"
+     "0001MCJ1M0TM1AH3BRGTH8Q39T",
+     "0001MCJ1M0TM1AH3BRGTH8Q39V",
+     "0001MCJ1M0TM1AH3BRGTH8Q39W",
+     "0001MCJ1M0TM1AH3BRGTH8Q39M",
+     "0001MCJ1M0TM1AH3BRGTH8Q39Y"
     ],
     "clipped_at_an_edge": {
-     "0001MCJ1M02W5ESYRSNWK82NX1": 0.008
+     "0001MCJ1M0TM1AH3BRGTH8Q39P": 0.217
     },
     "delivery": {
-     "0001MCJ1M02W5ESYRSNWK82NX1": {
+     "0001MCJ1M0TM1AH3BRGTH8Q39P": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M02W5ESYRSNWK82NX5": {
+     "0001MCJ1M0TM1AH3BRGTH8Q39T": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M02W5ESYRSNWK82NX6": {
+     "0001MCJ1M0TM1AH3BRGTH8Q39V": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M02W5ESYRSNWK82NX7": {
+     "0001MCJ1M0TM1AH3BRGTH8Q39W": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M02W5ESYRSNWK82NWZ": {
+     "0001MCJ1M0TM1AH3BRGTH8Q39M": {
       "state": "refused",
       "says": "it would not go"
      },
-     "0001MCJ1M02W5ESYRSNWK82NX9": {
+     "0001MCJ1M0TM1AH3BRGTH8Q39Y": {
       "state": "sending",
       "says": "going"
      }
     },
     "refusals_on_the_glass": {
-     "0001MCJ1M02W5ESYRSNWK82NWZ": "this phone is on an older version and cannot read that"
+     "0001MCJ1M0TM1AH3BRGTH8Q39M": "this phone is on an older version and cannot read that"
     },
     "states_on_the_glass": {
      "sent": 3,
@@ -177,7 +177,7 @@
     },
     "reactions": {},
     "edited": [
-     "0001MCJ1M02W5ESYRSNWK82NX1"
+     "0001MCJ1M0TM1AH3BRGTH8Q39P"
     ],
     "taken_back": [],
     "scroll": {
@@ -186,12 +186,12 @@
      "of": 8076
     },
     "paper": [
-     "0001MCJ1M02W5ESYRSNWK82NX1",
-     "0001MCJ1M02W5ESYRSNWK82NX5",
-     "0001MCJ1M02W5ESYRSNWK82NX6",
-     "0001MCJ1M02W5ESYRSNWK82NX7",
-     "0001MCJ1M02W5ESYRSNWK82NWZ",
-     "0001MCJ1M02W5ESYRSNWK82NX9"
+     "0001MCJ1M0TM1AH3BRGTH8Q39P",
+     "0001MCJ1M0TM1AH3BRGTH8Q39T",
+     "0001MCJ1M0TM1AH3BRGTH8Q39V",
+     "0001MCJ1M0TM1AH3BRGTH8Q39W",
+     "0001MCJ1M0TM1AH3BRGTH8Q39M",
+     "0001MCJ1M0TM1AH3BRGTH8Q39Y"
     ],
     "paper_whole_on_the_glass": 5,
     "rows_cost": [
@@ -199,45 +199,45 @@
       "row": 8070,
       "type": "message",
       "tall": 129,
-      "top": -128
+      "top": -101
      },
      {
       "row": 8071,
       "type": "message",
       "tall": 198,
-      "top": 1
+      "top": 28
      },
      {
       "row": 8072,
       "type": "message",
       "tall": 80,
-      "top": 199
+      "top": 226
      },
      {
       "row": 8073,
       "type": "message",
       "tall": 122,
-      "top": 279
+      "top": 306
      },
      {
       "row": 8074,
       "type": "message",
-      "tall": 137,
-      "top": 401
+      "tall": 153,
+      "top": 428
      },
      {
       "row": 8075,
       "type": "message",
-      "tall": 116,
-      "top": 538
+      "tall": 107,
+      "top": 581
      }
     ],
-    "viewport_tall": 663.5,
+    "viewport_tall": 698.1,
     "composer": "the second one, then",
     "attaching": true,
     "replying_to": "0001M2ZNX8AF4811Y2F7FNAGMG",
     "replies_on_the_glass": {
-     "0001MCJ1M02W5ESYRSNWK82NX5": {
+     "0001MCJ1M0TM1AH3BRGTH8Q39T": {
       "id": "0001M2ZNX8AF4811Y2F7FNAGMG",
       "seq": 14053,
       "author": "noor",
@@ -262,39 +262,39 @@
      "message_delete": 0,
      "read_marker": 0
     },
-    "partner_typing": true
+    "partner_typing": false
    },
    "visible": [
-    "0001MCJ1M02W5ESYRSNWK82NX1",
-    "0001MCJ1M02W5ESYRSNWK82NX5",
-    "0001MCJ1M02W5ESYRSNWK82NX6",
-    "0001MCJ1M02W5ESYRSNWK82NX7",
-    "0001MCJ1M02W5ESYRSNWK82NWZ",
-    "0001MCJ1M02W5ESYRSNWK82NX9"
+    "0001MCJ1M0TM1AH3BRGTH8Q39P",
+    "0001MCJ1M0TM1AH3BRGTH8Q39T",
+    "0001MCJ1M0TM1AH3BRGTH8Q39V",
+    "0001MCJ1M0TM1AH3BRGTH8Q39W",
+    "0001MCJ1M0TM1AH3BRGTH8Q39M",
+    "0001MCJ1M0TM1AH3BRGTH8Q39Y"
    ],
    "paper": [
-    "0001MCJ1M02W5ESYRSNWK82NX1",
-    "0001MCJ1M02W5ESYRSNWK82NX5",
-    "0001MCJ1M02W5ESYRSNWK82NX6",
-    "0001MCJ1M02W5ESYRSNWK82NX7",
-    "0001MCJ1M02W5ESYRSNWK82NWZ",
-    "0001MCJ1M02W5ESYRSNWK82NX9"
+    "0001MCJ1M0TM1AH3BRGTH8Q39P",
+    "0001MCJ1M0TM1AH3BRGTH8Q39T",
+    "0001MCJ1M0TM1AH3BRGTH8Q39V",
+    "0001MCJ1M0TM1AH3BRGTH8Q39W",
+    "0001MCJ1M0TM1AH3BRGTH8Q39M",
+    "0001MCJ1M0TM1AH3BRGTH8Q39Y"
    ],
    "tears": {
-    "0001MCJ1M02W5ESYRSNWK82NX1": "tear_042",
-    "0001MCJ1M02W5ESYRSNWK82NX5": "tear_009",
-    "0001MCJ1M02W5ESYRSNWK82NX6": "tear_031",
-    "0001MCJ1M02W5ESYRSNWK82NX7": "tear_051",
-    "0001MCJ1M02W5ESYRSNWK82NWZ": "tear_023",
-    "0001MCJ1M02W5ESYRSNWK82NX9": "tear_014"
+    "0001MCJ1M0TM1AH3BRGTH8Q39P": "tear_042",
+    "0001MCJ1M0TM1AH3BRGTH8Q39T": "tear_009",
+    "0001MCJ1M0TM1AH3BRGTH8Q39V": "tear_031",
+    "0001MCJ1M0TM1AH3BRGTH8Q39W": "tear_051",
+    "0001MCJ1M0TM1AH3BRGTH8Q39M": "tear_011",
+    "0001MCJ1M0TM1AH3BRGTH8Q39Y": "tear_004"
    },
    "stocks": {
-    "0001MCJ1M02W5ESYRSNWK82NX1": "legal_01",
-    "0001MCJ1M02W5ESYRSNWK82NX5": "lined_01",
-    "0001MCJ1M02W5ESYRSNWK82NX6": "looseleaf_03",
-    "0001MCJ1M02W5ESYRSNWK82NX7": "looseleaf_04",
-    "0001MCJ1M02W5ESYRSNWK82NWZ": "lined_02",
-    "0001MCJ1M02W5ESYRSNWK82NX9": "lined_02"
+    "0001MCJ1M0TM1AH3BRGTH8Q39P": "legal_02",
+    "0001MCJ1M0TM1AH3BRGTH8Q39T": "lined_02",
+    "0001MCJ1M0TM1AH3BRGTH8Q39V": "looseleaf_01",
+    "0001MCJ1M0TM1AH3BRGTH8Q39W": "looseleaf_03",
+    "0001MCJ1M0TM1AH3BRGTH8Q39M": "lined_02",
+    "0001MCJ1M0TM1AH3BRGTH8Q39Y": "lined_01"
    },
    "scroll": {
     "first": 8070,
@@ -314,26 +314,26 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
-   "paper_at_its_own_size": 2282,
-   "paper_stretched_to_fit": 33,
+   "paper_at_its_own_size": 2152,
+   "paper_stretched_to_fit": 31,
    "setup_showing": false,
    "fold": {
     "sequence": null
    },
    "sensation": null,
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 22,
-    "the ink plates": 40,
-    "the desk": 133,
-    "the log": 618,
-    "the first frame": 376,
-    "everything": 1196
+    "the framework": 8,
+    "the library index": 16,
+    "the ink plates": 42,
+    "the desk": 163,
+    "the log": 583,
+    "the first frame": 374,
+    "everything": 1187
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 7,
+    "rounds": 6,
     "pushed": 9,
     "refused": 1,
     "pulled": 10,
@@ -349,11 +349,11 @@
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14073,
-     "our_cursor": 14073,
+     "peer_cursor": 14072,
+     "our_cursor": 14072,
      "last_error": null,
-     "since": "2026-09-10T03:40:23.597Z",
-     "last_contact": "2026-09-10T03:41:32.302Z"
+     "since": "2026-09-10T17:44:20.136Z",
+     "last_contact": "2026-09-10T17:45:29.271Z"
     }
    },
    "ambient": {
@@ -372,19 +372,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2330,
+ "cold_ms": 2370,
  "load": {
-  "ms": 2330,
+  "ms": 2370,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
-   "the library index": 22,
-   "the ink plates": 40,
-   "the desk": 133,
-   "the log": 618,
-   "the first frame": 376,
-   "everything": 1196
+   "the framework": 8,
+   "the library index": 16,
+   "the ink plates": 42,
+   "the desk": 163,
+   "the log": 583,
+   "the first frame": 374,
+   "everything": 1187
   }
  },
  "far": [

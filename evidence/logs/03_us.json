@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2238,
+   "ms": 2670,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3469
+   "ms": 3766
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2102
   },
   {
    "do": "shot",
-   "ms": 3821
+   "ms": 3740
   },
   {
    "do": "report",
@@ -95,7 +95,7 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
-   "paper_at_its_own_size": 158,
+   "paper_at_its_own_size": 159,
    "paper_stretched_to_fit": 2,
    "setup_showing": false,
    "fold": {
@@ -103,13 +103,13 @@
    },
    "sensation": null,
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 14,
-    "the ink plates": 41,
-    "the desk": 168,
-    "the log": 553,
-    "the first frame": 332,
-    "everything": 1115
+    "the framework": 8,
+    "the library index": 16,
+    "the ink plates": 44,
+    "the desk": 143,
+    "the log": 571,
+    "the first frame": 367,
+    "everything": 1149
    },
    "sync": {
     "transport": "local",
@@ -132,8 +132,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-10T03:38:55.794Z",
-     "last_contact": "2026-09-10T03:38:57.797Z"
+     "since": "2026-09-10T17:42:50.650Z",
+     "last_contact": "2026-09-10T17:42:52.811Z"
     }
    },
    "ambient": {
@@ -152,19 +152,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2416,
+ "cold_ms": 2323,
  "load": {
-  "ms": 2416,
+  "ms": 2323,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
-   "the library index": 14,
-   "the ink plates": 41,
-   "the desk": 168,
-   "the log": 553,
-   "the first frame": 332,
-   "everything": 1115
+   "the framework": 8,
+   "the library index": 16,
+   "the ink plates": 44,
+   "the desk": 143,
+   "the log": 571,
+   "the first frame": 367,
+   "everything": 1149
   }
  },
  "problems": [],

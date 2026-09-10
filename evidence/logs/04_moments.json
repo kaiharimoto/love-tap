@@ -10,25 +10,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2826,
+   "ms": 2666,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4363
+   "ms": 4264
   },
   {
    "do": "wait",
-   "ms": 3702
+   "ms": 3703
   },
   {
-   "at": 13140,
+   "at": 13215,
    "said": "__deskShowLens(milestones) ok, 154 behind milestones"
   },
   {
    "do": "lens",
-   "ms": 759
+   "ms": 724
   },
   {
    "do": "wait",
@@ -36,15 +36,15 @@
   },
   {
    "do": "shot",
-   "ms": 2070
+   "ms": 2336
   },
   {
-   "at": 17819,
+   "at": 18162,
    "said": "__deskShowLens(feelings) ok, 1340 behind feelings"
   },
   {
    "do": "lens",
-   "ms": 709
+   "ms": 706
   },
   {
    "do": "wait",
@@ -52,27 +52,27 @@
   },
   {
    "do": "shot",
-   "ms": 2707
+   "ms": 2721
   },
   {
-   "at": 23153,
+   "at": 23520,
    "said": "__deskShowLens(media) ok, 183 behind media"
   },
   {
    "do": "lens",
-   "ms": 718
+   "ms": 733
   },
   {
    "do": "wait",
-   "ms": 3102
+   "ms": 3103
   },
   {
    "do": "shot",
-   "ms": 2276
+   "ms": 2382
   },
   {
    "do": "report",
-   "ms": 703
+   "ms": 702
   }
  ],
  "shots": [
@@ -138,7 +138,7 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
-   "paper_at_its_own_size": 258,
+   "paper_at_its_own_size": 257,
    "paper_stretched_to_fit": 3,
    "setup_showing": false,
    "fold": {
@@ -146,13 +146,13 @@
    },
    "sensation": null,
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 15,
-    "the ink plates": 37,
-    "the desk": 145,
-    "the log": 541,
-    "the first frame": 344,
-    "everything": 1089
+    "the framework": 9,
+    "the library index": 19,
+    "the ink plates": 51,
+    "the desk": 168,
+    "the log": 589,
+    "the first frame": 409,
+    "everything": 1245
    },
    "sync": {
     "transport": "local",
@@ -175,8 +175,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-10T03:39:11.670Z",
-     "last_contact": "2026-09-10T03:39:33.107Z"
+     "since": "2026-09-10T17:43:07.037Z",
+     "last_contact": "2026-09-10T17:43:28.731Z"
     }
    },
    "ambient": {
@@ -195,19 +195,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2184,
+ "cold_ms": 2542,
  "load": {
-  "ms": 2184,
+  "ms": 2542,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
-   "the library index": 15,
-   "the ink plates": 37,
-   "the desk": 145,
-   "the log": 541,
-   "the first frame": 344,
-   "everything": 1089
+   "the framework": 9,
+   "the library index": 19,
+   "the ink plates": 51,
+   "the desk": 168,
+   "the log": 589,
+   "the first frame": 409,
+   "everything": 1245
   }
  },
  "problems": [],

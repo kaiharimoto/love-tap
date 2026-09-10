@@ -10,25 +10,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2974,
+   "ms": 2875,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4700
+   "ms": 4259
   },
   {
    "do": "wait",
-   "ms": 3702
+   "ms": 3703
   },
   {
    "do": "openViewer",
-   "ms": 6214
+   "ms": 4514
   },
   {
    "do": "wait",
-   "ms": 3704
+   "ms": 3705
   },
   {
    "awaited": "video.playing",
@@ -37,31 +37,31 @@
   },
   {
    "do": "awaitView",
-   "ms": 5448
+   "ms": 2882
   },
   {
-   "at": 31330,
-   "said": "__deskSeek(0.42) ok, at 1059ms"
+   "at": 26307,
+   "said": "__deskSeek(0.42) ok, at 0ms"
   },
   {
    "do": "seek",
-   "ms": 2984
+   "ms": 2660
   },
   {
    "do": "wait",
-   "ms": 1402
+   "ms": 1403
   },
   {
    "do": "shot",
-   "ms": 3226
+   "ms": 2679
   },
   {
    "do": "frames",
-   "ms": 108521
+   "ms": 102931
   },
   {
    "do": "report",
-   "ms": 707
+   "ms": 702
   }
  ],
  "shots": [
@@ -89,7 +89,7 @@
     "video": {
      "initialised": true,
      "playing": true,
-     "position_ms": 223,
+     "position_ms": 625,
      "duration_ms": 2500
     }
    },
@@ -134,32 +134,31 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
-   "paper_at_its_own_size": 906,
-   "paper_stretched_to_fit": 11,
+   "paper_at_its_own_size": 871,
+   "paper_stretched_to_fit": 10,
    "setup_showing": false,
    "fold": {
     "sequence": null
    },
    "sensation": null,
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 22,
-    "the ink plates": 35,
-    "the desk": 136,
-    "the log": 602,
-    "the first frame": 392,
-    "everything": 1194
+    "the framework": 6,
+    "the library index": 16,
+    "the ink plates": 43,
+    "the desk": 162,
+    "the log": 595,
+    "the first frame": 412,
+    "everything": 1234
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 10,
+    "rounds": 9,
     "pushed": 2,
     "refused": 0,
     "pulled": 0,
     "blobs_fetched": 0,
-    "faults": 1,
-    "last_fault": "401 the signature does not match",
+    "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
     "cursor": 14075,
@@ -172,8 +171,8 @@
      "peer_cursor": 14075,
      "our_cursor": 14075,
      "last_error": null,
-     "since": "2026-09-10T03:41:43.085Z",
-     "last_contact": "2026-09-10T03:42:14.167Z"
+     "since": "2026-09-10T17:45:40.777Z",
+     "last_contact": "2026-09-10T17:46:06.407Z"
     }
    },
    "ambient": {
@@ -192,28 +191,22 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2299,
+ "cold_ms": 2395,
  "load": {
-  "ms": 2299,
+  "ms": 2395,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
-   "the library index": 22,
-   "the ink plates": 35,
-   "the desk": 136,
-   "the log": 602,
-   "the first frame": 392,
-   "everything": 1194
+   "the framework": 6,
+   "the library index": 16,
+   "the ink plates": 43,
+   "the desk": 162,
+   "the log": 595,
+   "the first frame": 412,
+   "everything": 1234
   }
  },
- "problems": [
-  "http: 401 GET http://127.0.0.1:8480/v1/events?after=14075&wait=20",
-  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
- ],
- "refused_requests": [
-  "401 GET http://127.0.0.1:8480/v1/events?after=14075&wait=20"
- ],
- "ok": false,
+ "problems": [],
+ "ok": true,
  "steps_landed": true
 }

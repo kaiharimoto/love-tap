@@ -1,5 +1,5 @@
 {
- "commit": "3204c61",
+ "commit": "dee8622",
  "baseline": {
   "dir": "evidence/.previous",
   "captured_at": "2026-09-10T05:04:10.356866+00:00",
@@ -21,12 +21,12 @@
   {
    "artifact": "02_chat.png",
    "label": "changed",
-   "ssim": 0.7006,
+   "ssim": 0.6355,
    "judgement": null,
-   "sha": "498163f480e5e591",
+   "sha": "6a371f422e9ce5d2",
    "previous_sha": "2068bd6958da1fd7",
    "previous_written": "2026-09-10T03:38:52Z",
-   "label_basis": "ssim 0.7006, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.6355, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "03_us.png",
@@ -40,53 +40,53 @@
   },
   {
    "artifact": "04_moments.png",
-   "label": "unchanged",
-   "ssim": 1.0,
+   "label": "changed",
+   "ssim": 0.9662,
    "judgement": null,
-   "sha": "d6ba36c7f63a6860",
+   "sha": "14ada69da204dd6c",
    "previous_sha": "d6ba36c7f63a6860",
    "previous_written": "2026-09-10T03:39:39Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.9662, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "05_settings.png",
    "label": "unchanged",
-   "ssim": 1.0,
+   "ssim": 0.999,
    "judgement": null,
-   "sha": "4df18e932e136a94",
+   "sha": "d996f46a09124aa0",
    "previous_sha": "4df18e932e136a94",
    "previous_written": "2026-09-10T03:39:55Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.999, at or above 0.999: nothing a person would see has moved"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "changed",
-   "ssim": 0.6353,
+   "ssim": 0.8324,
    "judgement": null,
-   "sha": "5bdf32016adf7c70",
+   "sha": "c4c9fb8a24649eaa",
    "previous_sha": "2bdc04992273d9ec",
    "previous_written": "2026-09-10T04:34:41Z",
-   "label_basis": "ssim 0.6353, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.8324, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "07_feeling_landing.mp4",
-   "label": "unchanged",
-   "ssim": 1.0,
+   "label": "changed",
+   "ssim": 0.9953,
    "judgement": null,
-   "sha": "84a0f3a9da562ae1",
+   "sha": "f28974f12f9008a9",
    "previous_sha": "84a0f3a9da562ae1",
    "previous_written": "2026-09-10T04:38:14Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.9953, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "08_state_propagating.mp4",
-   "label": "unchanged",
-   "ssim": 1.0,
+   "label": "changed",
+   "ssim": 0.9527,
    "judgement": null,
-   "sha": "ab7c1d4861bd01fb",
+   "sha": "38959a27828e5a58",
    "previous_sha": "ab7c1d4861bd01fb",
    "previous_written": "2026-09-10T05:01:40Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.9527, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "09_two_devices.png",
@@ -107,50 +107,50 @@
   },
   {
    "artifact": "11_chat_scroll.mp4",
-   "label": "unchanged",
-   "ssim": 1.0,
+   "label": "changed",
+   "ssim": 0.9916,
    "judgement": null,
-   "sha": "7ac62613273f68a0",
+   "sha": "06f83ae2411e47e7",
    "previous_sha": "7ac62613273f68a0",
    "previous_written": "2026-09-10T04:37:00Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.9916, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "12_search.png",
    "label": "unchanged",
-   "ssim": 1.0,
+   "ssim": 0.9998,
    "judgement": null,
-   "sha": "39780aeed7a2bde0",
+   "sha": "7dda2dd6fb238170",
    "previous_sha": "39780aeed7a2bde0",
    "previous_written": "2026-09-10T03:40:20Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.9998, at or above 0.999: nothing a person would see has moved"
   },
   {
    "artifact": "13_messenger_states.png",
-   "label": "unchanged",
-   "ssim": 1.0,
+   "label": "changed",
+   "ssim": 0.7682,
    "judgement": null,
-   "sha": "3c2f92aa402d590b",
+   "sha": "6077843ce191c461",
    "previous_sha": "3c2f92aa402d590b",
    "previous_written": "2026-09-10T03:41:40Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.7682, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "14_media_viewer.png",
-   "label": "unchanged",
-   "ssim": 1.0,
+   "label": "changed",
+   "ssim": 0.9826,
    "judgement": null,
-   "sha": "a70803d5dcb30f35",
+   "sha": "515a10ab274e21ca",
    "previous_sha": "a70803d5dcb30f35",
    "previous_written": "2026-09-10T03:42:18Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.9826, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "changed",
    "ssim": 0.9916,
    "judgement": null,
-   "sha": "97d4cc4bb054d7f6",
+   "sha": "b60594799f3f1464",
    "previous_sha": "81263f1c9cc0d1e3",
    "previous_written": "2026-09-10T04:38:14Z",
    "label_basis": "ssim 0.9916, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
@@ -164,20 +164,20 @@
   },
   {
    "artifact": "17_setup_pwa.png",
-   "label": "unchanged",
-   "ssim": 1.0,
+   "label": "changed",
+   "ssim": 0.9314,
    "judgement": null,
-   "sha": "44f0bbdc9d238ae2",
+   "sha": "4d0306f70e36a94a",
    "previous_sha": "44f0bbdc9d238ae2",
    "previous_written": "2026-09-10T03:44:27Z",
-   "why": "byte for byte the same file"
+   "label_basis": "ssim 0.9314, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   }
  ],
  "counts": {
   "new": 0,
   "gone": 0,
-  "unchanged": 12,
-  "changed": 3,
+  "unchanged": 5,
+  "changed": 10,
   "absent": 2
  }
 }

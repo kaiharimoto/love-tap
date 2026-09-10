@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2618,
+   "ms": 2497,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3419
+   "ms": 3308
   },
   {
    "do": "wait",
@@ -24,7 +24,7 @@
   },
   {
    "do": "search",
-   "ms": 4694
+   "ms": 4396
   },
   {
    "do": "wait",
@@ -32,15 +32,15 @@
   },
   {
    "do": "searchFacet",
-   "ms": 1209
+   "ms": 1208
   },
   {
    "do": "wait",
-   "ms": 1602
+   "ms": 1603
   },
   {
    "do": "shot",
-   "ms": 3668
+   "ms": 3443
   },
   {
    "do": "report",
@@ -130,13 +130,13 @@
    },
    "sensation": null,
    "the_launch_took": {
-    "the framework": 6,
-    "the library index": 12,
-    "the ink plates": 43,
-    "the desk": 121,
-    "the log": 634,
-    "the first frame": 366,
-    "everything": 1182
+    "the framework": 8,
+    "the library index": 17,
+    "the ink plates": 50,
+    "the desk": 170,
+    "the log": 601,
+    "the first frame": 388,
+    "everything": 1234
    },
    "sync": {
     "transport": "local",
@@ -159,8 +159,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-10T03:39:58.670Z",
-     "last_contact": "2026-09-10T03:40:00.831Z"
+     "since": "2026-09-10T17:43:55.804Z",
+     "last_contact": "2026-09-10T17:43:57.809Z"
     }
    },
    "ambient": {
@@ -179,19 +179,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2350,
+ "cold_ms": 2364,
  "load": {
-  "ms": 2350,
+  "ms": 2364,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 6,
-   "the library index": 12,
-   "the ink plates": 43,
-   "the desk": 121,
-   "the log": 634,
-   "the first frame": 366,
-   "everything": 1182
+   "the framework": 8,
+   "the library index": 17,
+   "the ink plates": 50,
+   "the desk": 170,
+   "the log": 601,
+   "the first frame": 388,
+   "everything": 1234
   }
  },
  "problems": [],
