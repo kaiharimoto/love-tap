@@ -46,7 +46,11 @@ class DrawingHand {
     final k2 = 2.1 + _rng.nextDouble() * 3.4;
     final p1 = _rng.nextDouble() * _tau;
     final p2 = _rng.nextDouble() * _tau;
-    final amp = wobble * (1.4 + weight * 0.35);
+    // How far the line leaves its aim, as a fraction of the mark: a person drawing a 300-pixel
+    // square freehand wanders a couple of per cent of it, not a couple of tenths of a per cent.
+    // Measured on the rendered mark, the first attempt left the top of `obj_window` straight to
+    // 0.40 px about its own trend, which is a ruler with a tremor.
+    final amp = wobble * (2.0 + weight * 1.1);
     var walked = 0.0;
     final total = () {
       var d = 0.0;
