@@ -34,6 +34,21 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 EVIDENCE = os.path.join(ROOT, "evidence")
 
 
+def _share(mask, r):
+    """What share of each pixel's (2r+1) square neighbourhood is set."""
+    import numpy as np
+    d = mask.astype(np.float32)
+    s = np.pad(d, ((1, 0), (1, 0))).cumsum(axis=0).cumsum(axis=1)
+    h, w = d.shape
+    y0 = np.clip(np.arange(h) - r, 0, h)
+    y1 = np.clip(np.arange(h) + r + 1, 0, h)
+    x0 = np.clip(np.arange(w) - r, 0, w)
+    x1 = np.clip(np.arange(w) + r + 1, 0, w)
+    tot = (s[np.ix_(y1, x1)] - s[np.ix_(y0, x1)] - s[np.ix_(y1, x0)] + s[np.ix_(y0, x0)])
+    area = np.outer(y1 - y0, x1 - x0).astype(np.float32)
+    return tot / area
+
+
 def _grown(mask, r):
     """A boolean mask grown by r pixels, by a box filter on its own integral."""
     import numpy as np
@@ -66,7 +81,19 @@ def _holes(rgb, dark, grow, reach=12):
     # on it as a hole in the desk. The desk is dark enough (84 to 103 across the set) that
     # brightness alone separates it, and the warmth ceiling only keeps out anything more orange
     # than paper ever is.
-    paper = (lum > 150.0) & (warm < 60.0)
+    pale = (lum > 150.0) & (warm < 60.0)
+    # A *sheet*, not any pale thing. A candle is pale, and its wick and the soot in its pool are
+    # black and sit within a dozen pixels of it — so with any pale pixel counting as paper,
+    # 01_pulse's object row read as four hundred pixels of hole in a desk that has none. A sheet
+    # is large: a pixel is on one when its own forty-one-pixel neighbourhood is nine-tenths pale,
+    # which nothing in the object library is anywhere except its own middle.
+    # ...but the share test on its own erodes a sheet by its own radius, and then the "ring outside
+    # the paper" lands *inside* the sheet: the control — a hundred-pixel sheet with a six-pixel
+    # black band down its edge — went from catching 300 of 600 to catching none. So the share test
+    # only says which pale regions are sheets, and the sheet's own boundary is where the pale
+    # region is: the cores are grown back out and intersected with pale again.
+    core = pale & (_share(pale, 20) > 0.90)
+    paper = pale & _grown(core, 26)
     ring = _grown(paper, reach) & ~_grown(paper, grow)
     return (lum < dark) & ring, lum
 
