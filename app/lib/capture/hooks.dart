@@ -551,6 +551,7 @@ class CaptureHooks {
       // three measurements: the tooth spread thin on a wide sheet, the same ruled stock at pitches
       // 2.9 times apart across the set, and writing that cannot sit on lines whose spacing is
       // different on every screen.
+      'the_smallest_patch_of_a_stock_anything_took': PaperPiece.smallestWindow,
       'paper_at_its_own_size': PaperPiece.drawnNative,
       'paper_stretched_to_fit': PaperPiece.drawnStretched,
       'setup_showing': CaptureBus.setupShowing,

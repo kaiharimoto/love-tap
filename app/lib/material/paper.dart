@@ -139,6 +139,13 @@ class PaperPiece extends StatelessWidget {
   static int drawnNative = 0;
   static int drawnStretched = 0;
 
+  /// The smallest patch of a stock any piece has taken, in the stock's own pixels, and what took
+  /// it. A window of a few source pixels blown up across a tile is a flat fill however real the
+  /// paper it came from: 04_moments' voice-note tile measures 0.017 grey levels of tooth against
+  /// the receipt stock's own 0.82 to 1.45 at every scale it could be drawn at, so something is
+  /// not drawing the stock and this is the number that will say what.
+  static List<Object>? smallestWindow;
+
   /// Which sampler to draw a stock with, from how big it is being drawn.
   ///
   /// Paper being *shrunk* wants a smoothing filter: the ruled lines are a pixel wide at their own
@@ -278,6 +285,18 @@ class PaperPiece extends StatelessWidget {
               PaperPiece.drawnNative += 1;
             } else {
               PaperPiece.drawnStretched += 1;
+            }
+            if (px != null && box.maxWidth.isFinite && box.maxHeight.isFinite) {
+              final w = box.maxWidth * dpr, h = box.maxHeight * dpr;
+              final took = atOwnSize ? w * h : px.width * px.height;
+              final had = PaperPiece.smallestWindow;
+              if (had == null || took < (had[2] as double)) {
+                PaperPiece.smallestWindow = <Object>[
+                  '$stock ${px.width.round()}x${px.height.round()}',
+                  '${w.round()}x${h.round()} of it, ${atOwnSize ? 'at its own size' : 'stretched'}',
+                  took,
+                ];
+              }
             }
             // A packed stock carries the surface it was photographed against in a border about
             // forty pixels wide — lined_01's first twenty rows sit at 145 against an interior of
