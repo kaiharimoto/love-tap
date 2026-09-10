@@ -264,14 +264,36 @@ class PaperPiece extends StatelessWidget {
             } else {
               PaperPiece.drawnStretched += 1;
             }
+            // A packed stock carries the surface it was photographed against in a border about
+            // forty pixels wide — lined_01's first twenty rows sit at 145 against an interior of
+            // 233. Covering scaled that out of the frame; a window at the stock's own density will
+            // show it if the patch offset is anywhere near the edge, and the offsets run to the
+            // edge because nothing needed them not to. So the alignment is pulled in far enough
+            // that the window always lands on paper, in the units alignment is measured in: the
+            // fraction of the slack between the image and the box.
+            var align = stockAlignment;
+            if (atOwnSize && px != null) {
+              const margin = 44.0;                       // the border, and a little
+              final slackX = px.width - box.maxWidth * dpr;
+              final slackY = px.height - box.maxHeight * dpr;
+              // and no further than four fifths of the way out in any case. A stock is ruled
+              // over its middle and blank at its head and foot — lined_01 rules rows 220 to 1673
+              // of 1800 — so a window free to sit anywhere would sometimes land on lined paper
+              // with no lines on it, which is a worse picture than a slightly less varied one.
+              const reach = 0.8;
+              final limX = (slackX > 2 * margin ? 1.0 - 2 * margin / slackX : 0.0).clamp(0.0, reach);
+              final limY = (slackY > 2 * margin ? 1.0 - 2 * margin / slackY : 0.0).clamp(0.0, reach);
+              align = Alignment(stockAlignment.x.clamp(-limX, limX),
+                  stockAlignment.y.clamp(-limY, limY));
+            }
             return Transform.scale(
               scale: atOwnSize ? 1.0 : stockScale,
-              alignment: stockAlignment,
+              alignment: align,
               child: Image.asset(
                 paperAsset(stock),
                 scale: atOwnSize ? dpr : 1.0,
                 fit: atOwnSize ? BoxFit.none : BoxFit.cover,
-                alignment: stockAlignment,
+                alignment: align,
                 gaplessPlayback: true,
                 filterQuality: atOwnSize
                     ? FilterQuality.none
