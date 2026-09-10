@@ -10,28 +10,80 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2549,
+   "ms": 2826,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4093
+   "ms": 4363
   },
   {
    "do": "wait",
-   "ms": 3701
+   "ms": 3702
+  },
+  {
+   "at": 13140,
+   "said": "__deskShowLens(milestones) ok, 154 behind milestones"
+  },
+  {
+   "do": "lens",
+   "ms": 759
+  },
+  {
+   "do": "wait",
+   "ms": 1904
   },
   {
    "do": "shot",
-   "ms": 4435
+   "ms": 2070
+  },
+  {
+   "at": 17819,
+   "said": "__deskShowLens(feelings) ok, 1340 behind feelings"
+  },
+  {
+   "do": "lens",
+   "ms": 709
+  },
+  {
+   "do": "wait",
+   "ms": 1905
+  },
+  {
+   "do": "shot",
+   "ms": 2707
+  },
+  {
+   "at": 23153,
+   "said": "__deskShowLens(media) ok, 183 behind media"
+  },
+  {
+   "do": "lens",
+   "ms": 718
+  },
+  {
+   "do": "wait",
+   "ms": 3102
+  },
+  {
+   "do": "shot",
+   "ms": 2276
   },
   {
    "do": "report",
-   "ms": 702
+   "ms": 703
   }
  ],
  "shots": [
+  {
+   "out": "evidence/crops/04_moments_what_happened.png",
+   "clip": null
+  },
+  {
+   "out": "evidence/crops/04_moments_what_we_felt.png",
+   "clip": null
+  },
   {
    "out": "evidence/04_moments.png",
    "clip": null
@@ -54,7 +106,7 @@
      "range": null
     },
     "showing": 183,
-    "tiles_built": 26,
+    "tiles_built": 52,
     "blobs": {
      "asked": 18,
      "arrived": 18,
@@ -86,15 +138,26 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 258,
+   "paper_stretched_to_fit": 3,
    "setup_showing": false,
    "fold": {
     "sequence": null
    },
    "sensation": null,
+   "the_launch_took": {
+    "the framework": 7,
+    "the library index": 15,
+    "the ink plates": 37,
+    "the desk": 145,
+    "the log": 541,
+    "the first frame": 344,
+    "everything": 1089
+   },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 0,
+    "rounds": 1,
     "pushed": 0,
     "refused": 0,
     "pulled": 0,
@@ -103,16 +166,17 @@
     "pending": 0,
     "refused_in_the_outbox": 0,
     "cursor": 14062,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": null,
+     "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-09T17:54:06.232Z",
-     "last_contact": "2026-09-09T17:54:08.446Z"
+     "since": "2026-09-10T03:39:11.670Z",
+     "last_contact": "2026-09-10T03:39:33.107Z"
     }
    },
    "ambient": {
@@ -120,17 +184,31 @@
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "04_moments.png",
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2320,
+ "cold_ms": 2184,
  "load": {
-  "ms": 2320,
+  "ms": 2184,
   "store": "kept",
-  "profile": "profile_seeded"
+  "profile": "profile_seeded",
+  "made_of": {
+   "the framework": 7,
+   "the library index": 15,
+   "the ink plates": 37,
+   "the desk": 145,
+   "the log": 541,
+   "the first frame": 344,
+   "everything": 1089
+  }
  },
  "problems": [],
  "ok": true,

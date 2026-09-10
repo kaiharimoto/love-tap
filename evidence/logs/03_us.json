@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2618,
+   "ms": 2238,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3723
+   "ms": 3469
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2105
   },
   {
    "do": "shot",
-   "ms": 3269
+   "ms": 3821
   },
   {
    "do": "report",
@@ -53,27 +53,27 @@
      {
       "id": "dates",
       "events": 81,
-      "glance": "next: the place by the bridge"
+      "glance": "3 ahead"
      },
      {
       "id": "todos",
       "events": 199,
-      "glance": "10 open"
+      "glance": "10 open · 16 done"
      },
      {
       "id": "calendar",
       "events": 6,
-      "glance": "us in 60 days"
+      "glance": "3 marked · the next in 59 days"
      },
      {
       "id": "rituals",
       "events": 53,
-      "glance": "last: tuesday soup"
+      "glance": "3 kept · 53 times · the last 7 days ago"
      },
      {
       "id": "shelf",
       "events": 12,
-      "glance": "waiting on you: the one you said you stopped"
+      "glance": "2 waiting on you · 6 between you"
      }
     ]
    },
@@ -95,11 +95,22 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 158,
+   "paper_stretched_to_fit": 2,
    "setup_showing": false,
    "fold": {
     "sequence": null
    },
    "sensation": null,
+   "the_launch_took": {
+    "the framework": 7,
+    "the library index": 14,
+    "the ink plates": 41,
+    "the desk": 168,
+    "the log": 553,
+    "the first frame": 332,
+    "everything": 1115
+   },
    "sync": {
     "transport": "local",
     "role": "client",
@@ -112,6 +123,7 @@
     "pending": 0,
     "refused_in_the_outbox": 0,
     "cursor": 14062,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
@@ -120,8 +132,8 @@
      "peer_cursor": null,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-09T17:53:50.441Z",
-     "last_contact": "2026-09-09T17:53:52.625Z"
+     "since": "2026-09-10T03:38:55.794Z",
+     "last_contact": "2026-09-10T03:38:57.797Z"
     }
    },
    "ambient": {
@@ -129,17 +141,31 @@
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "03_us.png",
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2308,
+ "cold_ms": 2416,
  "load": {
-  "ms": 2308,
+  "ms": 2416,
   "store": "kept",
-  "profile": "profile_seeded"
+  "profile": "profile_seeded",
+  "made_of": {
+   "the framework": 7,
+   "the library index": 14,
+   "the ink plates": 41,
+   "the desk": 168,
+   "the log": 553,
+   "the first frame": 332,
+   "everything": 1115
+  }
  },
  "problems": [],
  "ok": true,
