@@ -11,6 +11,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart' show ClampingScrollSimulation;
 
 import '../feelings/builtins.dart';
+import '../feelings/landing.dart';
 import '../flags.dart';
 import '../material/assignment.dart';
 import '../regions/chat/blob_widgets.dart';
@@ -407,6 +408,16 @@ class CaptureHooks {
           'total_ms': f.hapticLengthMs,
           'on_ms': f.segments.where((s) => s.on).fold<int>(0, (n, s) => n + s.ms),
           'pulses': f.segments.where((s) => s.on).length,
+          // Which way this one knocks the desk on a phone with no vibrator, and how far it turns
+          // it. An emotional critic measured the page translation in all 421 frames of 07 and
+          // found the horizontal component exactly zero in every one: the substitute was a
+          // bounce. It is the feeling's own direction now, and here is the number for it.
+          'knocks_the_desk': {
+            'x': double.parse(knockDirection(f.id).dx.toStringAsFixed(4)),
+            'y': double.parse(knockDirection(f.id).dy.toStringAsFixed(4)),
+            'turns_it_by_radians': double.parse(knockTilt(f.id).toStringAsFixed(5)),
+            'at_full_lift_px': double.parse((kPageLiftPx).toStringAsFixed(1)),
+          },
         }
     ];
     final byPattern = <String, List<String>>{};
@@ -416,6 +427,10 @@ class CaptureHooks {
     return {
       'notation': 'on@amp pairs separated by off gaps, in milliseconds, amplitude 0-255: the shape '
           'Android VibrationEffect.createWaveform takes; on the PWA the same segments move the page',
+      'how_the_page_moves': 'the same envelope, as a push in the direction under knocks_the_desk '
+          'and a turn of the whole board with it. Sideways is never further than up, because a '
+          'page that slides as far as it lifts reads as a swipe; the turn is under a quarter of a '
+          'degree, which is enough that a corner travels further than the middle.',
       'channel_here': scope.transport.role.name == 'host' ? 'vibration' : 'page',
       'feelings': rows,
       'built_in': all.where((f) => f.builtIn).length,

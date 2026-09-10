@@ -172,6 +172,31 @@ double pageLiftAt(List<HapticSegment> segments, int ms) {
 /// Android the vibrator is doing the same work to your hand and the paper only agrees with it.
 double get kPageLiftPx => kIsWeb ? 9.0 : 3.0;
 
+/// Which way the desk is knocked, for a feeling, as a unit vector.
+///
+/// A buzz is a push and not a lift. The substitute moved the page on one axis only — an emotional
+/// critic measured every frame of 07 and found the horizontal component *exactly* zero in all 421
+/// of them — so what it read as was a page bouncing rather than a phone being knocked in the hand.
+/// The direction is the feeling's own, so two feelings with the same envelope still do not move
+/// the desk the same way: on a phone with no vibrator the motion is the whole of the body the
+/// feeling has, and the row asks that it be identifiable.
+///
+/// Sideways is smaller than up, because the hand holding a phone gives more in the axis it is not
+/// gripping across, and a page that slides as far as it lifts reads as a swipe.
+Offset knockDirection(String feelingId) {
+  final a = (feelingId.hashCode & 0xffff) / 0xffff * 2 * math.pi;
+  // Both components turn with the angle, not just the sideways one. With the lift held at -1 the
+  // direction was a function of cos alone, and cos is symmetric: forty-two pairs of feelings came
+  // out moving the desk identically because their angles were mirror images.
+  return Offset(math.cos(a) * 0.42, -(0.82 + 0.18 * math.sin(a)));
+}
+
+/// How far the desk is turned by the same knock, in radians. Under a quarter of a degree at full
+/// amplitude: enough that a corner moves further than the middle, which is what makes it read as a
+/// board being struck rather than a layer being animated.
+double knockTilt(String feelingId) =>
+    math.sin((feelingId.hashCode & 0xffff) / 0xffff * 2 * math.pi + 1.7) * 0.004;
+
 /// Wraps the shell. Moves everything under it on the feeling's own rhythm, and draws the thing
 /// that is arriving on top of it.
 class LandingStage extends StatefulWidget {
@@ -261,7 +286,16 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
     return Stack(
       fit: StackFit.expand,
       children: [
-        Transform.translate(offset: Offset(0, -lift * kPageLiftPx), child: widget.child),
+        if (a == null)
+          widget.child
+        else
+          Transform.rotate(
+            angle: lift * knockTilt(a.feeling.id),
+            child: Transform.translate(
+              offset: knockDirection(a.feeling.id) * (lift * kPageLiftPx),
+              child: widget.child,
+            ),
+          ),
         if (a != null) IgnorePointer(child: _Landing(arrival: a, t: _t, seed: _seed)),
         // The pattern annotated on the timeline, which artifact 07 is required to carry. Capture
         // builds only, along the top edge where the app draws only desk, and gone the moment the
