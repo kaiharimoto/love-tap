@@ -21,6 +21,7 @@ import '../modules/registry.dart';
 import '../scope.dart';
 import '../spine/projections/state.dart';
 import '../feelings/sensation.dart' show Sensation;
+import '../main.dart' show bootPhases;
 import '../regions/chat/note.dart' show ThreadRowStats;
 import 'bus.dart';
 import 'hooks_stub.dart' if (dart.library.js_interop) 'hooks_web.dart' as impl;
@@ -529,6 +530,8 @@ class CaptureHooks {
       // haptic channel not being exercised at all. It is exercised; nothing answers. Those are
       // different, and this is where the difference is written down.
       if (Sensation.asks.isNotEmpty) 'asked_a_motor_for': List.of(Sensation.asks),
+      // what the first launch was made of, rather than one number for all of it
+      if (bootPhases.isNotEmpty) 'the_launch_took': Map.of(bootPhases),
       // what the off-app surfaces were handed — recorded as what was sent, never as a picture
       // of a notification this container cannot show
       'sync': scope.sync.report(),

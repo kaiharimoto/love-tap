@@ -154,7 +154,21 @@ function ensure(p) {
   // cold_ms is kept for the collectors that read it; store says whether it measured a first
   // launch (the year importing) or a phone that already had the year
   log.cold_ms = Date.now() - t0;
-  log.load = { ms: log.cold_ms, store: keptStore ? 'kept' : 'fresh', profile: profile ? path.basename(profile) : null };
+  // What the launch was made of, straight from the app's own clock. A messenger critic read the
+  // first launch at 8.9 to 10.0 seconds across the set and could say nothing about what it was
+  // made of, because neither could this: one number for the framework, the library, the ink, the
+  // desk, the year, and the first frame, which have six different fixes between them.
+  let phases = null;
+  try {
+    phases = await page.evaluate(() => window.__deskBoot && window.__deskBoot());
+    if (typeof phases === 'string') phases = JSON.parse(phases);
+  } catch (e) { phases = null; }
+  log.load = {
+    ms: log.cold_ms,
+    store: keptStore ? 'kept' : 'fresh',
+    profile: profile ? path.basename(profile) : null,
+    ...(phases ? { made_of: phases } : {}),
+  };
 
   // Paired before anything else, when a far phone was given and the scene does not pair itself:
   // every still is then a picture of a phone that is talking to the other one, on the real log,

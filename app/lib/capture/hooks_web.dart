@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:js_interop';
 
+import '../main.dart' show bootPhases;
 import 'hooks.dart';
 
 @JS('window')
@@ -18,6 +19,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskSeek(JSFunction f);
   external set __deskHoldOver(JSFunction f);
   external set __deskLetGo(JSFunction f);
+  external set __deskBoot(JSFunction f);
   external set __deskSetSignal(JSFunction f);
   external set __deskOpenSender(JSFunction f);
   external set __deskOpenViewer(JSFunction f);
@@ -60,6 +62,7 @@ void expose(CaptureHooks hooks) {
   w.__deskSeek = ((JSNumber f) => _said(hooks.seekViewer(f.toDartDouble))).toJS;
   w.__deskHoldOver = ((JSString id) => _said(Future.value(hooks.holdOver(id.toDart)))).toJS;
   w.__deskLetGo = (() => _said(Future.value(hooks.letGo()))).toJS;
+  w.__deskBoot = (() => jsonEncode(bootPhases).toJS).toJS;
   w.__deskSetSignal = ((JSString s, JSString v) => _said(hooks.setSignal(s.toDart, _value(v.toDart)))).toJS;
   w.__deskOpenSender = ((JSBoolean open) => _said(hooks.openSender(open.toDart))).toJS;
   w.__deskOpenViewer = ((JSString id) => _said(hooks.openViewer(id.toDart))).toJS;

@@ -23,12 +23,34 @@ import 'transport/local/local_transport.dart';
 import 'transport/tailscale/tailscale_transport.dart';
 import 'transport/sync.dart';
 
+/// How long each part of the first launch took, in milliseconds.
+///
+/// A messenger critic read the first launch at 8.9 to 10.0 seconds across the set and could say
+/// nothing about what it was made of, because neither could the record: `load: {ms: 8827}` and no
+/// parts. Nine seconds might be the bundle arriving over the wire, the year being parsed, the year
+/// being written into IndexedDB, or the first frame — and those have four different fixes. Timed
+/// here rather than guessed at from the outside.
+final Map<String, int> bootPhases = {};
+
 Future<void> main() async {
+  final began = DateTime.now();
+  var mark = began;
+  void took(String what) {
+    final now = DateTime.now();
+    bootPhases[what] = now.difference(mark).inMilliseconds;
+    mark = now;
+  }
+
   WidgetsFlutterBinding.ensureInitialized();
+  took('the framework');
   await MaterialLibrary.load();
+  took('the library index');
   await InkPlates.load();
+  took('the ink plates');
   await warmDeskSurface();
+  took('the desk');
   final scope = await bootstrap();
+  took('the log');
   if (Flags.capture) {
     // Under capture an uncaught error has to be legible in the scene log: the harness records
     // the browser's console, and a Dart exception that reaches the page as a bare object reads
@@ -46,7 +68,11 @@ Future<void> main() async {
   CaptureHooks.install(scope);
   // the capture harness waits for this rather than guessing at a delay
   WidgetsBinding.instance.addPostFrameCallback((_) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => markReady());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      took('the first frame');
+      bootPhases['everything'] = DateTime.now().difference(began).inMilliseconds;
+      markReady();
+    });
   });
 }
 
