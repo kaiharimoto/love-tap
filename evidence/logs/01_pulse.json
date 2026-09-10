@@ -10,25 +10,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2322,
+   "ms": 2459,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 6437
+   "ms": 3248
   },
   {
    "do": "wait",
-   "ms": 2107
+   "ms": 2106
   },
   {
    "do": "shot",
-   "ms": 4026
+   "ms": 5172
   },
   {
    "do": "report",
-   "ms": 702
+   "ms": 703
   }
  ],
  "shots": [
@@ -138,10 +138,12 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
+   "paper_at_its_own_size": 221,
+   "paper_stretched_to_fit": 3,
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
-    "length": 139,
+    "length": 142,
     "decoded": 24,
     "decoding": 0,
     "playhead": 0,
@@ -149,6 +151,15 @@
     "held_to": 23
    },
    "sensation": null,
+   "the_launch_took": {
+    "the framework": 7,
+    "the library index": 19,
+    "the ink plates": 43,
+    "the desk": 150,
+    "the log": 6984,
+    "the first frame": 397,
+    "everything": 7600
+   },
    "sync": {
     "transport": "local",
     "role": "client",
@@ -161,6 +172,7 @@
     "pending": 1,
     "refused_in_the_outbox": 0,
     "cursor": 14061,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
@@ -169,8 +181,8 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-09T17:52:46.744Z",
-     "last_contact": "2026-09-09T17:52:49.339Z"
+     "since": "2026-09-10T03:06:56.454Z",
+     "last_contact": "2026-09-10T03:06:58.586Z"
     }
    },
    "ambient": {
@@ -178,17 +190,31 @@
     "pocket_feeling": "ugh",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
     "held_by_the_phone": []
    },
    "at": "01_pulse.png",
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 8865,
+ "cold_ms": 8988,
  "load": {
-  "ms": 8865,
+  "ms": 8988,
   "store": "fresh",
-  "profile": "profile_seeded"
+  "profile": "profile_seeded",
+  "made_of": {
+   "the framework": 7,
+   "the library index": 19,
+   "the ink plates": 43,
+   "the desk": 150,
+   "the log": 6984,
+   "the first frame": 397,
+   "everything": 7600
+  }
  },
  "problems": [],
  "ok": true,
