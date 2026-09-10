@@ -91,15 +91,36 @@ class Sensation {
     return report;
   }
 
+  /// Every ask the app has made of a motor, whether or not there was one to answer.
+  ///
+  /// An emotional critic wrote "nothing in the evidence ever vibrated. All 36 waveforms exist only
+  /// as specified strings; the single channel actually exercised is visual." The first half is
+  /// true and cannot be otherwise here — there is no phone in this environment and no motor in a
+  /// browser — but the second half conflates two things: a channel that is not wired, and a
+  /// channel that is wired to a machine with nothing on the other end. This is the difference,
+  /// written down: what was asked for, in milliseconds and amplitudes, and what answered.
+  static final List<Map<String, Object?>> asks = [];
+
   Future<void> _vibrate(List<HapticSegment> segments) async {
+    final ask = <String, Object?>{
+      'timings': [for (final s in segments) s.ms],
+      'amplitudes': [for (final s in segments) s.amp],
+      'answered_by': 'nothing yet',
+    };
+    asks.add(ask);
+    if (asks.length > 64) asks.removeAt(0);
     try {
       await _channel.invokeMethod<void>('waveform', {
-        'timings': [for (final s in segments) s.ms],
-        'amplitudes': [for (final s in segments) s.amp],
+        'timings': ask['timings'],
+        'amplitudes': ask['amplitudes'],
       });
+      ask['answered_by'] = 'the platform took it';
     } on MissingPluginException {
       // the plugin is only registered on Android; elsewhere the page rhythm is the sensation
-    } catch (_) {}
+      ask['answered_by'] = 'no motor on this platform: the page rhythm carries it instead';
+    } catch (e) {
+      ask['answered_by'] = 'the platform refused it: $e';
+    }
   }
 
   Future<void> _playSound(Feeling feeling, double intensity) async {

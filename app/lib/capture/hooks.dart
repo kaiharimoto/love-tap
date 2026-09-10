@@ -20,6 +20,7 @@ import '../material/paper.dart';
 import '../modules/registry.dart';
 import '../scope.dart';
 import '../spine/projections/state.dart';
+import '../feelings/sensation.dart' show Sensation;
 import '../regions/chat/note.dart' show ThreadRowStats;
 import 'bus.dart';
 import 'hooks_stub.dart' if (dart.library.js_interop) 'hooks_web.dart' as impl;
@@ -523,6 +524,11 @@ class CaptureHooks {
       // the last feeling this phone played, pattern and channel: the haptic annotation on the
       // clips is generated from this, not drawn from the docs
       'sensation': scope.sensation.last?.toJson(),
+      // and every ask the app made of a motor on this run, with what answered. There is no motor
+      // in a browser and no phone in this environment, and an emotional critic read that as the
+      // haptic channel not being exercised at all. It is exercised; nothing answers. Those are
+      // different, and this is where the difference is written down.
+      if (Sensation.asks.isNotEmpty) 'asked_a_motor_for': List.of(Sensation.asks),
       // what the off-app surfaces were handed — recorded as what was sent, never as a picture
       // of a notification this container cannot show
       'sync': scope.sync.report(),
