@@ -1,8 +1,10 @@
 {
- "strings_read": 116,
- "literals_in_lib": 3692,
- "share_of_literals_read": 0.031,
- "what_it_cannot_see": "a sentence a function returns, a string built by interpolation at the point of use, and anything a module composes from the registry. Those are read by the tests that assert on their words rather than by this.",
+ "strings_read": 525,
+ "literals_in_lib": 3822,
+ "share_of_literals_read": 0.137,
+ "in_a_display_position": 111,
+ "the_rest_are_judged": "every other literal in a line of code that has a space in it or a mark a wire key would never carry. It used to read only a fixed list of call sites \u2014 Text(, Written(, hintText:, and six more \u2014 which is why a code critic counted 116 strings against 3,672 in lib. Reading them all costs some false positives (an asset query string, a fragment of an interpolation) and those are cheap: a string that is not shown to anybody still must not contain an exclamation mark.",
+ "what_it_still_cannot_see": "a sentence assembled from parts at the point of use, and anything a module composes from the registry. Those are read by the tests that assert on their words rather than by this.",
  "rules_applied": [
   {
    "rule": "an emoji glyph in a displayed string",
@@ -10,7 +12,7 @@
   },
   {
    "rule": "an exclamation mark",
-   "pattern": "!"
+   "pattern": "(?<![=<>!])!(?![=])"
   },
   {
    "rule": "product cheer",
@@ -41,468 +43,2629 @@
  "findings": [],
  "read": [
   {
-   "where": "app/lib/feelings/authored_row.dart:24",
-   "text": "${p["
+   "where": "app/lib/ambient/ambient.dart:79",
+   "text": "there now",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/authored_row.dart:25",
-   "text": "a new one, ${c.event.author == c.me ? "
+   "where": "app/lib/ambient/ambient.dart:81",
+   "text": "$minutes minutes ago",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:112",
-   "text": "no dates that matter yet. add the first."
+   "where": "app/lib/ambient/ambient.dart:83",
+   "text": "${minutes ~/ 60} hours ago",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:182",
-   "text": "${m.yearsAt(next!)} years"
+   "where": "app/lib/ambient/ambient.dart:87",
+   "text": "nearly out of battery",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/calendar/thread_row.dart:14",
-   "text": "${p["
+   "where": "app/lib/ambient/ambient.dart:88",
+   "text": "nothing from them since you last looked",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/dates/date_list.dart:65",
-   "text": "nowhere planned. that's fine."
+   "where": "app/lib/ambient/ambient.dart:89",
+   "text": " \u00b7 ",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/dates/date_list.dart:105",
-   "text": "add one"
+   "where": "app/lib/ambient/ambient_web.dart:92",
+   "text": "push/sw.js?profile=${Flags.profile}",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/dates/thread_row.dart:34",
-   "text": "${p["
+   "where": "app/lib/ambient/ambient_web.dart:137",
+   "text": "held out to you",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:96",
-   "text": "nothing kept yet."
+   "where": "app/lib/app.dart:365",
+   "text": "tab.${labels[i]}",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/thread_row.dart:18",
-   "text": "${p["
+   "where": "app/lib/feelings/authored_row.dart:26",
+   "text": "s \u00b7 ",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:112",
-   "text": "nothing passed between you yet."
+   "where": "app/lib/feelings/builtins.dart:90",
+   "text": "a squeeze",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/thread_row.dart:16",
-   "text": "${p["
+   "where": "app/lib/feelings/builtins.dart:90",
+   "text": "80@90 off40 160@160 off40 320@230",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/todos/thread_row.dart:45",
-   "text": "${p["
+   "where": "app/lib/feelings/builtins.dart:91",
+   "text": "200@120 off120 200@120",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:133",
-   "text": "add one"
+   "where": "app/lib/feelings/builtins.dart:92",
+   "text": "warm palm",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:137",
-   "text": "nothing to do. suspicious."
+   "where": "app/lib/feelings/builtins.dart:92",
+   "text": "600@140",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:93",
+   "text": "90@150 off60 90@150 off60 90@150 off200 400@110",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:94",
+   "text": "thinking of you",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:94",
+   "text": "40@80 off300 40@80 off300 260@170",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:95",
+   "text": "500@120 off200 250@80 off200 120@50",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:96",
+   "text": "miss you",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:96",
+   "text": "150@220 off600 150@150 off600 150@90",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:97",
+   "text": "empty chair",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:97",
+   "text": "300@200 off900 300@100",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:98",
+   "text": "come home",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:98",
+   "text": "60@255 off200 60@255 off200 60@255 off800 400@120",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:99",
+   "text": "wish you were here",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:99",
+   "text": "250@180 off400 250@120 off400 250@70 off400 250@40",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:100",
+   "text": "long day",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:100",
+   "text": "800@100 off300 800@60",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:101",
+   "text": "400@140 off400 400@140 off400 400@140",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:102",
+   "text": "1200@110 off800 500@110",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:103",
+   "text": "it's okay",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:103",
+   "text": "200@160 off200 200@160 off200 200@160 off200 200@160",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:104",
+   "text": "300@180 off300 300@180 off300 300@180 off300 300@180 off300 300@180",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:105",
+   "text": "i'll make you tea",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:105",
+   "text": "100@120 off100 100@120 off100 500@150",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:106",
+   "text": "900@150 off100 900@150",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:107",
+   "text": "30@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:108",
+   "text": "30@200 off50 30@200 off50 90@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:109",
+   "text": "40@120 off30 40@160 off30 40@200 off30 40@240 off30 120@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:110",
+   "text": "pick one",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:110",
+   "text": "50@180 off120 \u00d76",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:111",
+   "text": "20@255 off40 60@255 off400 20@180",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:112",
+   "text": "stuck with me",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:112",
+   "text": "40@200 off60 40@200 off60 1200@150",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:113",
+   "text": "(18@255 off14) \u00d714",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:114",
+   "text": "180@255 off60 180@255 off60 180@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:115",
+   "text": "15@255 off15 15@255 off15 15@255 off300 500@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:116",
+   "text": "40@180 off20 80@220 off20 40@180 off20 120@255 off20 40@180 off20 80@220",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:117",
+   "text": "(60@70 off60) \u00d78",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:118",
+   "text": "not okay",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:118",
+   "text": "400@255 off100 40@255 off100 40@255 off100 40@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:119",
+   "text": "did it",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:119",
+   "text": "40@120 off60 40@170 off60 40@220 off60 200@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:120",
+   "text": "20@140 off90 20@200 off40 20@120 off150 20@230 off60 20@160",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:121",
+   "text": "60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:122",
+   "text": "paper hat",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:122",
+   "text": "100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/builtins.dart:123",
+   "text": "50@200 off80 50@200 off80 300@150 off80 50@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/corner.dart:414",
+   "text": "family_${f.name}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/corner.dart:438",
+   "text": "fan.${family.name}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/sensation.dart:108",
+   "text": "nothing yet",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/sensation.dart:117",
+   "text": "the platform took it",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/sensation.dart:120",
+   "text": "no motor on this platform: the page rhythm carries it instead",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/sensation.dart:122",
+   "text": "the platform refused it: $e",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/main.dart:46",
+   "text": "the framework",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/main.dart:48",
+   "text": "the library index",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/main.dart:50",
+   "text": "the ink plates",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/main.dart:52",
+   "text": "the desk",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/main.dart:54",
+   "text": "the log",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/main.dart:73",
+   "text": "the first frame",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/main.dart:120",
+   "text": "transport ${Flags.transport} is not built yet",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/desk.dart:148",
+   "text": "heads down",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/desk.dart:149",
+   "text": "heads down",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/desk.dart:162",
+   "text": "heads down",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/desk.dart:250",
+   "text": "the desk surface did not load: $e",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/ink.dart:67",
+   "text": "$pen|${colour.toARGB32()}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/library.dart:68",
+   "text": "MaterialLibrary.load() has not run",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/objects.dart:152",
+   "text": "${id}_dusk",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/paper.dart:200",
+   "text": "${tearId!}_shadow$suffix",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/paper.dart:235",
+   "text": "${stockId}_dusk",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/paper.dart:324",
+   "text": "${tearId!}_edge",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/paper.dart:850",
+   "text": "$asset@${w}x$h",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/media/local_uri_io.dart:24",
+   "text": "$hash.${_ext(mime)}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/media/local_uri_stub.dart:3",
+   "text": "no platform",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/media/read_bytes_io.dart:19",
+   "text": "voice_${DateTime.now().millisecondsSinceEpoch}.m4a",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:22",
+   "text": "dates that matter",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:51",
+   "text": "nothing marked",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:54",
+   "text": "in $days days",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:55",
+   "text": "${next.length} marked \u00b7 the next $soon",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:114",
+   "text": "no dates that matter yet. add the first.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:124",
+   "text": "d MMM",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:172",
+   "text": "d MMM y",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/calendar/calendar_module.dart:184",
+   "text": "${m.yearsAt(next!)} years",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:23",
+   "text": "in $days days",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:24",
+   "text": "next week",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:25",
+   "text": "in ${(days / 7).round()} weeks",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:26",
+   "text": "in ${(days / 30).round()} months",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:49",
+   "text": "${ahead[i].title} \u00b7 ${ahead[i].place}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:53",
+   "text": "nowhere planned. that's fine.",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:68",
+   "text": "nowhere planned. that's fine.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:79",
+   "text": "what, and where",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:81",
+   "text": "date_${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:92",
+   "text": "leave it",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:108",
+   "text": "add one",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:153",
+   "text": "d MMM",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/date_list.dart:206",
+   "text": "what was it",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/dates_module.dart:60",
+   "text": "${upcoming.length} ahead",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/dates_module.dart:61",
+   "text": "${upcoming.length} ahead \u00b7 the next $when",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/dates_module.dart:64",
+   "text": "nothing planned",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/dates_module.dart:64",
+   "text": "nothing ahead \u00b7 $done behind you",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/dates_module.dart:119",
+   "text": " \u00b7 ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/thread_row.dart:16",
+   "text": " : whenLabel(p[",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/thread_row.dart:25",
+   "text": "a date",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/thread_row.dart:47",
+   "text": "said of",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/thread_row.dart:51",
+   "text": "went to",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/thread_row.dart:52",
+   "text": "called off",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/thread_row.dart:59",
+   "text": " : ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/dates/thread_row.dart:60",
+   "text": " : ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/fit_rows.dart:56",
+   "text": "FitRows lays its rows out at the width it is given, so it needs a finite one",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:51",
+   "text": "nothing kept yet",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:54",
+   "text": "nothing kept yet",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:59",
+   "text": "$days days ago",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:60",
+   "text": "${recent.length} kept \u00b7 $marks times \u00b7 the last $lately",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:103",
+   "text": "nothing kept yet.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:116",
+   "text": "${r.marks.length} times",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:31",
+   "text": "the shelf",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:56",
+   "text": "nothing passed on yet",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:58",
+   "text": "${things.length} between you",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:59",
+   "text": "$waiting waiting on you \u00b7 ${things.length} between you",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:113",
+   "text": "nothing passed between you yet.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:154",
+   "text": "not started",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:154",
+   "text": "they have not started it",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:155",
+   "text": "part way in",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:155",
+   "text": "they are part way in",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:156",
+   "text": "they finished it",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/shelf_module.dart:191",
+   "text": "${thing.from!.name} passed it on \u00b7 $where",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/shelf/thread_row.dart:22",
+   "text": "passed on",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:55",
+   "text": "back on the list",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:56",
+   "text": "off the list",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:57",
+   "text": "passed over",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:58",
+   "text": "put down",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:101",
+   "text": "put down",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:103",
+   "text": "back on the list:",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:104",
+   "text": "off the list:",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:105",
+   "text": "passed over:",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:106",
+   "text": "on the list:",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/thread_row.dart:111",
+   "text": " \u00b7 for $assignee",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:24",
+   "text": "to do",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:53",
+   "text": "nothing to do",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:54",
+   "text": "all ${all.length} done",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:55",
+   "text": "$open open \u00b7 ${all.length - open} done",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:127",
+   "text": "nothing to do. suspicious.",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:136",
+   "text": "add one",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:140",
+   "text": "nothing to do. suspicious.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:153",
+   "text": "what needs doing",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/todos/todos_module.dart:158",
+   "text": "todo_${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/chat/blob_widgets.dart:387",
-   "text": "${(durationMs! / 1000).round()}s"
+   "text": "${(durationMs! / 1000).round()}s",
+   "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:988",
-   "text": "${scope.partner.name} ${S.typing}"
+   "where": "app/lib/regions/chat/chat_region.dart:148",
+   "text": "there is no $idOrType in the thread to open",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:234",
+   "text": "sending you the roster",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:240",
+   "text": "left the key under the pot",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:241",
+   "text": "and the bread, if there is any",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:258",
+   "text": "and the bread \u2014 there is half a loaf in the tin",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:285",
+   "text": "the one by the door, i think",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:291",
+   "text": "the second one, then",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:304",
+   "text": "ringing the vet at four",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:311",
+   "text": "and the thing for the door",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:546",
+   "text": "${items.length}: no framing held the stretch whole",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:552",
+   "text": "${items.length}, $most sheets on the glass and $mostWhole of them whole, the best of ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:553",
+   "text": "$tried framings of ${windows.length} stretches",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:562",
+   "text": "row $index of ${items.length}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1043",
+   "text": "${scope.partner.name} ${S.typing}",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1055",
+   "text": "${S.replyingTo} ${_replyTo!.text ?? summaryOf(_replyTo!.event, me: scope.me)}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1205",
+   "text": "${(d.inDays / 30).round()} ${S.monthsUp}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1206",
+   "text": "${(d.inDays / 7).round()} ${S.weeksUp}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1207",
+   "text": "${d.inDays} ${S.daysUp}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1208",
+   "text": "$rows ${S.rowsUp}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1222",
+   "text": "${d.day} $month",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1222",
+   "text": "${d.day} $month ${d.year}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1469",
+   "text": "a photo",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1470",
+   "text": "take one",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1471",
+   "text": "a video",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/chat_region.dart:1472",
+   "text": "film something",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/note.dart:292",
+   "text": " \u00b7 ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/search_page.dart:78",
+   "text": "no facet called $facet",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/chat/search_page.dart:158",
-   "text": "looking for"
+   "text": "looking for",
+   "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:230",
-   "text": "put it back"
+   "where": "app/lib/regions/chat/search_page.dart:229",
+   "text": "this year",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:313",
-   "text": "${_clock(at)} / ${_clock(total, total: true)}"
+   "where": "app/lib/regions/chat/search_page.dart:229",
+   "text": "that month",
+   "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/moments/moments_region.dart:711",
-   "text": "${DateFormat("
+   "where": "app/lib/regions/chat/search_page.dart:464",
+   "text": "found as $kind",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/search_page.dart:468",
+   "text": ").replaceAll(",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/search_page.dart:469",
+   "text": "found in its $field: $v",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/search_page.dart:475",
+   "text": "found as $kind",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/viewer_page.dart:223",
+   "text": "viewer_${widget.item.id}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/chat/viewer_page.dart:239",
+   "text": "put it back",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/chat/viewer_page.dart:322",
+   "text": "${_clock(at)} / ${_clock(total, total: true)}",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/chat/viewer_page.dart:360",
+   "text": "replaced per platform",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:238",
+   "text": "what we sent",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:239",
+   "text": "what happened",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:240",
+   "text": "what we felt",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:270",
+   "text": "all year",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:271",
+   "text": "d MMM",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:282",
+   "text": "any feeling",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:583",
+   "text": " \u00b7 ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:769",
+   "text": "EEE d MMM \u00b7 HH:mm",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:114",
+   "text": "their.${_saying(widget.state)}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:175",
+   "text": "last up",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:176",
+   "text": "their clock",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:176",
+   "text": "${state.localHour}:00",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:180",
+   "text": "at home",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:197",
+   "text": "a little",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:199",
+   "text": "a lot",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:204",
+   "text": "just now",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:205",
+   "text": "$minutes minutes ago",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:207",
+   "text": "an hour ago",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:207",
+   "text": "$hours hours ago",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:209",
+   "text": "$days days ago",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/pulse/pulse_region.dart:299",
+   "text": "land.${e.id}",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/pulse/pulse_region.dart:324",
-   "text": "$hh:$mm${mine ? "
+   "text": " : ",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/pulse/pulse_region.dart:485",
-   "text": "a line about now"
+   "text": "a line about now",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:59",
+   "text": "80@90 off40 160@160 off40 320@230",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:60",
+   "text": "150@200 off600 150@140 off600 150@90",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:61",
+   "text": "400@140 off400 400@140 off400 400@140",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:62",
+   "text": "30@220 off60 30@220 off60 90@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:63",
+   "text": "(25@240 off25) \u00d76",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:64",
+   "text": "40@120 off60 40@180 off60 200@255",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:70",
+   "text": "$ms@${(120 + (i * 25)).clamp(60, 255)}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:85",
+   "text": "no name yet",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:89",
+   "text": "snd_${_family.label.toLowerCase()}_made",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/settings/authoring.dart:109",
-   "text": "a feeling of your own"
+   "text": "a feeling of your own",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/regions/settings/authoring.dart:116",
-   "text": "what it is called"
+   "text": "what it is called",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/regions/settings/authoring.dart:124",
-   "text": "which register"
+   "text": "which register",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/regions/settings/authoring.dart:142",
-   "text": "what it looks like"
+   "text": "what it looks like",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/regions/settings/authoring.dart:164",
-   "text": "how it should feel"
+   "text": "how it should feel",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:187",
+   "text": "tap out the rhythm here",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/authoring.dart:205",
+   "text": "made_${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/settings/authoring.dart:214",
-   "text": "keep it"
+   "text": "keep it",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/regions/settings/notifications.dart:106",
-   "text": "quiet from"
+   "text": "quiet from",
+   "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/settings/notifications.dart:157",
-   "text": "${value.toString().padLeft(2, "
+   "where": "app/lib/regions/settings/notifications.dart:129",
+   "text": "wake me",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/notifications.dart:131",
+   "text": "not at all",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:83",
+   "text": "the two phones",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:99",
+   "text": "paired with ${p.hostPerson.name}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:102",
+   "text": "those aren't the words. try again.",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:107",
+   "text": "unpaired. the other phone will need the words again.",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:111",
+   "text": "what may interrupt",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/settings/settings_region.dart:132",
-   "text": "let it interrupt you"
+   "text": "let it interrupt you",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:151",
+   "text": "feelings you made",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/settings/settings_region.dart:159",
-   "text": "make one"
+   "text": "make one",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:187",
+   "text": "put away",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:187",
+   "text": "by ${f.authoredBy}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:194",
+   "text": "the two of you",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:196",
+   "text": "this phone",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:196",
+   "text": "${scope.me.name} \u00b7 ${t.role.name} \u00b7 ${t.name}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:197",
+   "text": "their phone",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:198",
+   "text": "${scope.spine.length} events, ${scope.spine.pending.length} waiting to send",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:199",
+   "text": "${registry.active.length} to send, ${authored.length} made here",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/settings/settings_region.dart:203",
-   "text": "write the whole history out"
+   "text": "write the whole history out",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/regions/settings/settings_region.dart:206",
-   "text": "everything either of you wrote is in one log on both phones. this copies it out."
+   "text": "everything either of you wrote is in one log on both phones. this copies it out.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/regions/settings/settings_region.dart:293",
-   "text": "two phones, linked ${_ago(paired.pairedAt)}"
+   "text": "two phones, linked ${_ago(paired.pairedAt)}",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:295",
+   "text": "${paired.hostId} \u00b7 holds the log",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:299",
+   "text": " : ",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/settings/settings_region.dart:302",
-   "text": "read six words to them"
+   "text": "read six words to them",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:309",
+   "text": "their address",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:312",
+   "text": "the six words",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/settings/settings_region.dart:322",
-   "text": "replace one of the phones"
+   "text": "replace one of the phones",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:342",
+   "text": "${d.inDays} days ago",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:343",
+   "text": "${d.inHours} hours ago",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/settings/settings_region.dart:344",
+   "text": "just now",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/us/us_region.dart:124",
+   "text": "us.${module.id}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/scope.dart:42",
+   "text": "sync: $line",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/scope.dart:190",
+   "text": "AppScope missing",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/scope.dart:211",
+   "text": "AppScope missing",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/setup/bootstrap_page.dart:31",
+   "text": "-//Apple//DTD PLIST 1.0//EN",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/setup/bootstrap_page.dart:81",
+   "text": "width=device-width, initial-scale=1",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/setup/checklist.dart:67",
-   "text": "put this phone on the tailnet"
+   "text": "put this phone on the tailnet",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:68",
-   "text": "the same private network as the other phone, and nothing else on it."
+   "text": "the same private network as the other phone, and nothing else on it.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:69",
-   "text": "waiting for an address on the tailnet"
+   "text": "waiting for an address on the tailnet",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:73",
-   "text": "trust the certificate the other phone holds"
+   "text": "trust the certificate the other phone holds",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:74",
-   "text": "so nothing between the two of you can read what goes across."
+   "text": "so nothing between the two of you can read what goes across.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:75",
-   "text": "waiting for the first connection that verifies"
+   "text": "waiting for the first connection that verifies",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:79",
-   "text": "read the six words off the other phone"
+   "text": "read the six words off the other phone",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:80",
-   "text": "say them out loud in the same room. they are only good once."
+   "text": "say them out loud in the same room. they are only good once.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:81",
-   "text": "waiting for the pairing to complete"
+   "text": "waiting for the pairing to complete",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:85",
-   "text": "let it interrupt you"
+   "text": "let it interrupt you",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:86",
-   "text": "you choose which kinds, later, in settings. this only opens the door."
+   "text": "you choose which kinds, later, in settings. this only opens the door.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:87",
-   "text": "waiting for notifications to be allowed"
+   "text": "waiting for notifications to be allowed",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:91",
-   "text": "write the first thing"
+   "text": "write the first thing",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:92",
-   "text": "anything. it goes to one person."
+   "text": "anything. it goes to one person.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:93",
-   "text": "waiting for something written here"
+   "text": "waiting for something written here",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:97",
-   "text": "wait for theirs to arrive"
+   "text": "wait for theirs to arrive",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:98",
-   "text": "when it lands, the two of you are done here."
+   "text": "when it lands, the two of you are done here.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:99",
-   "text": "waiting for the first thing from them"
+   "text": "waiting for the first thing from them",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:108",
-   "text": "add it to the home screen"
+   "text": "add it to the home screen",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:109",
-   "text": "share, then add to home screen. it will not hold on to anything until you do."
+   "text": "share, then add to home screen. it will not hold on to anything until you do.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:110",
-   "text": "waiting to be opened from the home screen rather than from a tab"
+   "text": "waiting to be opened from the home screen rather than from a tab",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:114",
-   "text": "put this phone on the tailnet"
+   "text": "put this phone on the tailnet",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:115",
-   "text": "the same private network as the other phone, and nothing else on it."
+   "text": "the same private network as the other phone, and nothing else on it.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:116",
-   "text": "waiting for an address on the tailnet"
+   "text": "waiting for an address on the tailnet",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:120",
-   "text": "install the profile the other phone is serving"
+   "text": "install the profile the other phone is serving",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:121",
-   "text": "open its address in Safari, take the profile, then trust it in settings under about, "
+   "text": "open its address in Safari, take the profile, then trust it in settings under about, ",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:122",
+   "text": "certificate trust settings.",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/setup/checklist.dart:123",
-   "text": "waiting for the first connection that verifies"
+   "text": "waiting for the first connection that verifies",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:127",
-   "text": "read the six words off the other phone"
+   "text": "read the six words off the other phone",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:128",
-   "text": "say them out loud in the same room. they are only good once."
+   "text": "say them out loud in the same room. they are only good once.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:129",
-   "text": "waiting for the pairing to complete"
+   "text": "waiting for the pairing to complete",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:133",
-   "text": "let it interrupt you"
+   "text": "let it interrupt you",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:134",
-   "text": "an iPhone only offers this once the app is on the home screen."
+   "text": "an iPhone only offers this once the app is on the home screen.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:135",
-   "text": "waiting for notifications to be allowed"
+   "text": "waiting for notifications to be allowed",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:139",
-   "text": "write the first thing"
+   "text": "write the first thing",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:140",
-   "text": "anything. it goes to one person. when a feeling comes back, this phone cannot buzz: "
+   "text": "anything. it goes to one person. when a feeling comes back, this phone cannot buzz: ",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/setup/checklist.dart:141",
+   "text": "the paper under your thumb lifts to its rhythm instead, and its sound carries the beat.",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/setup/checklist.dart:142",
-   "text": "waiting for something written here"
+   "text": "waiting for something written here",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:146",
-   "text": "wait for theirs to arrive"
+   "text": "wait for theirs to arrive",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:147",
-   "text": "when it lands, the two of you are done here."
+   "text": "when it lands, the two of you are done here.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/checklist.dart:148",
-   "text": "waiting for the first thing from them"
+   "text": "waiting for the first thing from them",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/setup/platform_web.dart:24",
+   "text": "(display-mode: standalone)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/setup/setup_region.dart:63",
+   "text": "this phone",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/setup/setup_region.dart:63",
+   "text": "this one, the iphone",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/setup/setup_region.dart:67",
-   "text": "two phones, one wire between them, nobody else on it."
+   "text": "two phones, one wire between them, nobody else on it.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/setup/setup_region.dart:73",
+   "text": "setup.${st.id}",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/setup/setup_region.dart:91",
-   "text": "the other phone is at"
+   "text": "the other phone is at",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/setup/setup_region.dart:104",
-   "text": "read the six words out"
+   "text": "read the six words out",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/spine/event.dart:97",
+   "text": "Event($type ${author.name} seq=$seq id=$id)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/projections/state.dart:49",
+   "text": "the line",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/seed_loader.dart:80",
+   "text": "$key: unknown type $type",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/seed_loader.dart:91",
+   "text": "$key: unresolved ref $v",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/seed_loader.dart:105",
+   "text": "$key: unresolved read marker $upto",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/seed_loader.dart:139",
+   "text": "$key: media missing ($e)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/seed_loader.dart:144",
+   "text": "$key: $problem",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/spine.dart:313",
+   "text": "event id ${e.id} is not a ULID",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/spine.dart:363",
+   "text": "seed import needs an empty spine",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/spine.dart:388",
+   "text": "blob hash mismatch",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:22",
+   "text": "PRAGMA journal_mode=WAL",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:23",
+   "text": "PRAGMA synchronous=FULL",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:31",
+   "text": "CREATE INDEX IF NOT EXISTS events_seq ON events(seq)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:32",
+   "text": "CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:45",
+   "text": "SELECT json FROM events ORDER BY stored_order",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:51",
+   "text": "SELECT COALESCE(MAX(stored_order), 0) AS m FROM events",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:72",
+   "text": "SELECT value FROM meta WHERE key = ?",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:79",
+   "text": "DELETE FROM meta WHERE key = ?",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:81",
+   "text": "INSERT INTO meta (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:88",
+   "text": "INSERT OR REPLACE INTO blobs (hash, mime, length, data) VALUES (?, ?, ?, ?)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:94",
+   "text": "SELECT mime, length, data FROM blobs WHERE hash = ?",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:102",
+   "text": "SELECT 1 FROM blobs WHERE hash = ?",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:106",
+   "text": "SELECT hash FROM blobs",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:110",
+   "text": "DELETE FROM events",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:111",
+   "text": "DELETE FROM meta",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/store/store_sqlite.dart:112",
+   "text": "DELETE FROM blobs",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:116",
+   "text": "$id: missing $k",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:119",
+   "text": "$id: unknown key $k",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:134",
+   "text": "something written",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:135",
+   "text": "wrote something",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:145",
+   "text": "a photograph",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:146",
+   "text": "a picture",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:147",
+   "text": "sent a picture",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:159",
+   "text": "a video",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:160",
+   "text": "something to watch",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:161",
+   "text": "sent something to watch",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:172",
+   "text": "something said",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:173",
+   "text": "their voice",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:174",
+   "text": "left their voice",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:185",
+   "text": "a reaction",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:186",
+   "text": "an answer to something of yours",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:187",
+   "text": "answered something of yours",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:199",
+   "text": "a change",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:200",
+   "text": "a change to something already said",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:211",
+   "text": "something taken back",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:212",
+   "text": "something taken back",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:223",
+   "text": "them catching up",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:224",
+   "text": "them catching up",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:234",
+   "text": "a feeling",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:235",
+   "text": "a feeling",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:236",
+   "text": "is holding something out",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:246",
+   "text": "a state",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:247",
+   "text": "something they say about themselves",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:248",
+   "text": "said how they are",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:257",
+   "text": "something their phone noticed",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:258",
+   "text": "something their phone notices",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:259",
+   "text": "their phone noticed something",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:268",
+   "text": "a date",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:269",
+   "text": "a date moving",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:270",
+   "text": "moved something in dates",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:280",
+   "text": "the list",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:281",
+   "text": "the list moving",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:282",
+   "text": "moved something on the list",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:291",
+   "text": "a milestone",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:292",
+   "text": "a day that matters",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:293",
+   "text": "marked a day",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:303",
+   "text": "a ritual",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:304",
+   "text": "one of the things you keep",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:314",
+   "text": "something passed on",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:315",
+   "text": "something passed between you",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:316",
+   "text": "passed something on",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:326",
+   "text": "a note set to arrive later",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:327",
+   "text": "a note set to arrive later",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:328",
+   "text": "is asking for you",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:337",
+   "text": "a feeling one of you made",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:338",
+   "text": "a feeling one of you made",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:339",
+   "text": "made a new feeling",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/spine/types.dart:348",
+   "text": "unknown event type $type",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/note_body.dart:40",
+   "text": "EEE d MMM \u00b7 HH:mm",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/note_body.dart:46",
+   "text": "EEE d MMM",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/note_body.dart:75",
+   "text": " : DateFormat(",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/thread/renderers.dart:73",
-   "text": "${(ms / 1000).round()}s"
+   "text": "${(ms / 1000).round()}s",
+   "in_a_display_position": true
   },
   {
-   "where": "app/lib/thread/renderers.dart:148",
-   "text": "${p["
+   "where": "app/lib/thread/renderers.dart:196",
+   "text": "$who sent a photograph",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:208",
+   "text": "$who took it back",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:210",
+   "text": "$who has read up to here",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:254",
+   "text": "$s seconds",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:257",
+   "text": "$m minutes",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:257",
+   "text": "$m minutes ${rest}s",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:270",
+   "text": "$who's",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:272",
+   "text": "$who $are $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:273",
+   "text": "$who $are $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:274",
+   "text": "$who \u00b7 $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:275",
+   "text": "you need ${_dial(value)}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:275",
+   "text": "$who needs ${_dial(value)}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:276",
+   "text": "$who $has ${_dial(value)} left",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:277",
+   "text": "$who: $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:278",
+   "text": "$theirs phone is nearly out",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:278",
+   "text": "$theirs phone is on $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:281",
+   "text": "$who got in",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:281",
+   "text": "$who went out",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:282",
+   "text": "$theirs phone is on $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:283",
+   "text": "$who $are $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:284",
+   "text": "$theirs signal is $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:285",
+   "text": "it is $words where $who $are",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:286",
+   "text": "$who $was up $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:287",
+   "text": "$who $are charging",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:288",
+   "text": "$who \u00b7 $signal $words",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:296",
+   "text": "a little",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/thread/renderers.dart:298",
+   "text": "a lot",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/faults.dart:10",
+   "text": "InjectedFault($what)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/faults.dart:70",
+   "text": "drop $n",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/faults.dart:76",
+   "text": "lose-response $n",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/faults.dart:81",
+   "text": "latency ${d.inMilliseconds}ms",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/faults.dart:88",
+   "text": "offline ($op)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/faults.dart:91",
+   "text": "dropped ($op)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/faults.dart:100",
+   "text": "response lost ($op)",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/local/local_transport.dart:54",
+   "text": "${spine.identity.device.name}-${DateTime.now().toUtc().millisecondsSinceEpoch.toRadixString(36)}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:144",
+   "text": "${bind.address}:${bind.port}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:187",
+   "text": "client not started",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:189",
+   "text": "not paired",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:192",
+   "text": "?${uri.query}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:194",
+   "text": "$method $path",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:215",
+   "text": "$method $path",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:232",
+   "text": "the other phone does not know this pairing",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:233",
+   "text": "HTTP 401",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:236",
+   "text": "HTTP ${res.statusCode}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:247",
+   "text": "${wait.inSeconds}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:321",
+   "text": "only the host mints a pairing code",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:331",
+   "text": "only the client completes pairing",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:348",
+   "text": "no pairing open",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/http_transport.dart:363",
+   "text": "pairing refused",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:28",
+   "text": ", ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:129",
+   "text": "${req.method} ${req.uri.path}: $why ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:178",
+   "text": "no authorization header",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:179",
+   "text": "this phone is not paired with anybody",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:180",
+   "text": "a device this pairing does not cover",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:184",
+   "text": "signed ${(skew / 1000).round()} seconds from now, and the window is ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:185",
+   "text": "${kAuthSkew.inSeconds}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:187",
+   "text": "?${uri.query}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:189",
+   "text": "the signature does not match",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:208",
+   "text": "this request has already been made",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:312",
+   "text": "so it cannot take something written as ${e.author.name}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:319",
+   "text": "this phone does not know what a ${e.type} is; it is on an older version",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:426",
+   "text": "manifest+json",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_io.dart:428",
+   "text": "svg+xml",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/server_stub.dart:27",
+   "text": "the PWA does not host",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/wire.dart:49",
+   "text": "), ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/wire.dart:49",
+   "text": ").split(RegExp(r",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/wire.dart:49",
+   "text": ")).where((w) => w.isNotEmpty).join(",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/protocol/wire.dart:106",
+   "text": "Pair $deviceId $ts $nonce $mac",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/sync.dart:36",
+   "text": "[sync ${transport.name} ${transport.role.name}] $s",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/sync.dart:196",
+   "text": "the highest seq with nothing missing under it; events minus cursor is ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/sync.dart:197",
+   "text": "whatever is still in the outbox",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/tailscale/proxy_client_io.dart:9",
+   "text": "PROXY $proxy",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/tailscale/tailnet.dart:60",
+   "text": "$declared is not a tailnet address, and this only ever serves on one of those",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/tailscale/tailnet.dart:67",
+   "text": "this phone is not on the tailnet yet, so there is nowhere safe to serve from",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/tailscale/tailnet.dart:70",
+   "text": ") ? 1 : (b.contains(",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/tailscale/tailscale_transport.dart:88",
+   "text": "the other phone has not been paired yet, so there is no address to reach it at",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/tailscale/tailscale_transport.dart:93",
+   "text": "$host is not a tailnet address; this only talks over the tailnet",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/transport/tailscale/tailscale_transport.dart:99",
+   "text": ") ? ",
+   "in_a_display_position": false
   },
   {
    "where": "app/lib/voice/strings.dart:12",
-   "text": "write something"
+   "text": "write something",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:17",
-   "text": "take it back"
+   "text": "take it back",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:18",
-   "text": "change it"
+   "text": "change it",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:20",
-   "text": "took this back"
+   "text": "took this back",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:22",
-   "text": "written earlier"
+   "text": "written earlier",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:23",
-   "text": "waiting to send"
+   "text": "waiting to send",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:26",
-   "text": "writing\u2026"
+   "text": "writing\u2026",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:27",
-   "text": "a photo"
+   "text": "a photo",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:28",
-   "text": "a video"
+   "text": "a video",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:29",
-   "text": "a voice note"
+   "text": "a voice note",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:30",
-   "text": "hold to record"
+   "text": "hold to record",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:31",
-   "text": "recording\u2026"
+   "text": "recording\u2026",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:33",
-   "text": "anything, any time"
+   "text": "anything, any time",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:35",
-   "text": "it would not go"
+   "text": "it would not go",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:36",
-   "text": "send it again"
+   "text": "send it again",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:37",
-   "text": "nothing with that in it."
+   "text": "nothing with that in it.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:38",
-   "text": "a year of it, and every kind of thing in it."
+   "text": "a year of it, and every kind of thing in it.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:39",
-   "text": "try fewer words, or a different month."
+   "text": "try fewer words, or a different month.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:40",
-   "text": "first one's yours."
+   "text": "first one's yours.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:41",
-   "text": "whatever it is. it only goes to one person."
+   "text": "whatever it is. it only goes to one person.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:45",
+   "text": "back to now",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:46",
-   "text": "still fetching the picture."
+   "text": "months up",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:47",
+   "text": "weeks up",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:48",
+   "text": "days up",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:49",
-   "text": "can't reach the other phone. it'll go when it can."
+   "text": "notes up",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:50",
-   "text": "the other phone isn't answering. keeping this until it does."
+   "text": "a little way up",
+   "in_a_display_position": true
   },
   {
-   "where": "app/lib/voice/strings.dart:51",
-   "text": "not paired yet."
-  },
-  {
-   "where": "app/lib/voice/strings.dart:54",
-   "text": "nothing from them yet. it will show here."
-  },
-  {
-   "where": "app/lib/voice/strings.dart:55",
-   "text": "their phone tells this one where they are, once it can reach it."
-  },
-  {
-   "where": "app/lib/voice/strings.dart:58",
-   "text": "nowhere planned. that's fine."
+   "where": "app/lib/voice/strings.dart:56",
+   "text": "still fetching the picture.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:59",
-   "text": "nothing to do. suspicious."
+   "text": "can't reach the other phone. it'll go when it can.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:60",
-   "text": "no dates that matter yet. add the first."
+   "text": "the other phone isn't answering. keeping this until it does.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:61",
-   "text": "nothing kept yet."
+   "text": "not paired yet.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:64",
-   "text": "it fills in as it happens."
+   "text": "nothing from them yet. it will show here.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:65",
-   "text": "everything either of you sends ends up here, by day and by kind."
+   "text": "their phone tells this one where they are, once it can reach it.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:68",
-   "text": "the built-in ones are here. make one below."
+   "text": "nowhere planned. that's fine.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:69",
+   "text": "nothing to do. suspicious.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:70",
+   "text": "no dates that matter yet. add the first.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:71",
+   "text": "nothing kept yet.",
+   "in_a_display_position": true
   },
   {
    "where": "app/lib/voice/strings.dart:74",
-   "text": "nothing from them yet. the six words are on the other phone."
+   "text": "it fills in as it happens.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:75",
+   "text": "everything either of you sends ends up here, by day and by kind.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:78",
+   "text": "the built-in ones are here. make one below.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:84",
+   "text": "nothing from them yet. the six words are on the other phone.",
+   "in_a_display_position": true
+  },
+  {
+   "where": "app/lib/voice/strings.dart:87",
+   "text": "this phone cannot buzz. when a feeling comes, the paper under your thumb lifts to its rhythm, ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/voice/strings.dart:88",
+   "text": "and its sound carries the same beat.",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/voice/strings.dart:90",
+   "text": "$feelingName from $person",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/voice/strings.dart:91",
+   "text": "$person, a photo",
+   "in_a_display_position": false
   }
  ],
  "ok": true
