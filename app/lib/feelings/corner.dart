@@ -177,6 +177,14 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
   }
 
   void _onDriven(Duration now) {
+    // A finger on a tile is a thing that is happening, so the frame has to change while it is.
+    //
+    // The hold grows the intensity from 0.3 to 1.0 over 1.8 seconds and nothing asked for a
+    // repaint while it did, so under the driven clock the ring simply sat there: 42 consecutive
+    // frames of 15_authored_feeling, byte-identical, exactly the run where the scene puts a finger
+    // on `pigeon` and holds it. An emotional critic asked to see a gesture produce a feeling and
+    // what the clip showed was a still picture of a finger.
+    if (_heldSince != null && mounted) setState(() {});
     final from = _curlFrom;
     if (from == null) return;
     final span = _open ? Motion.turn : Motion.settle;
