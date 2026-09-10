@@ -85,6 +85,72 @@ def measure(fn, seed, span_mm, deep_mm, samples):
     }
 
 
+def library_contours(box=31):
+    """How far the packed tear masks' own contours wander, in pixels of the mask.
+
+    The profile above is what the *rig* draws. This is what the *library* holds, which is a
+    different question and one a material critic asked on the glass: "those edges deviate by rms
+    0.36-0.59 px ... only three of fourteen edges on this screen have contour excursions worth the
+    name". Measured here at the source: the first opaque pixel down each column of the middle sixty
+    per cent of a mask, high-passed over a 31-column window, on whichever of the top and bottom
+    edges is the quieter.
+
+    Reported and not gated, because the fix is fifty-six Blender renders of the relief and the
+    shadow behind them, and a gate nobody can turn green is a gate that gets ignored.
+    """
+    import glob as _glob
+    from PIL import Image
+    out = []
+    for path in sorted(_glob.glob(os.path.join(ROOT, "app", "assets", "tears", "tear_*.webp"))):
+        name = os.path.basename(path)
+        if "_edge" in name or "_shadow" in name:
+            continue
+        with Image.open(path) as im:
+            al = np.asarray(im.convert("RGBA"))[..., 3].astype(float)
+        h, w = al.shape
+        got = []
+        for side in ("top", "bottom"):
+            prof = []
+            whole = True
+            for x in range(int(w * 0.2), int(w * 0.8)):
+                col = al[:, x] if side == "top" else al[::-1, x]
+                if col.max() <= 127:
+                    whole = False
+                    break
+                prof.append(int(np.argmax(col > 127)))
+            if not whole or len(prof) < 50:
+                continue
+            v = np.array(prof, float)
+            pad = np.pad(v, (box // 2, box // 2), mode="edge")
+            smooth = np.convolve(pad, np.ones(box) / box, "valid")[:len(v)]
+            got.append(float((v - smooth).std()))
+        if got:
+            out.append((name.rsplit(".", 1)[0], round(min(got), 2)))
+    if not out:
+        return None
+    vals = np.array([v for _, v in out])
+    out.sort(key=lambda r: r[1])
+    return {
+        "masks": len(out),
+        "how": "the first opaque pixel down each column of the middle sixty per cent, high-passed "
+               "over 31 columns, on whichever of the top and bottom edges wanders less",
+        "rms_px": {"min": round(float(vals.min()), 2),
+                   "p25": round(float(np.percentile(vals, 25)), 2),
+                   "median": round(float(np.median(vals)), 2),
+                   "max": round(float(vals.max()), 2)},
+        "under_2px": int((vals < 2.0).sum()),
+        "quietest_ten": out[:10],
+        "what_it_means": "a critic measured the note edges they were content with at rms 2.88 to "
+                         "5.14 on the glass and the ones they were not at 0.36 to 0.59. Half this "
+                         "library is under 2. The cause is in tools/tears/tear.py: the fracture's "
+                         "Hurst exponent runs to 1.15, and 1.15 is a clean pull, and a clean pull "
+                         "is too clean. Not re-rendered this cycle — it is fifty-six masks and "
+                         "their relief and their shadows, behind a capture already waiting on "
+                         "thirty-six stock renders — and it is written here so the next cycle "
+                         "starts from a number instead of from an impression.",
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-corr", type=float, default=0.45,
@@ -140,6 +206,7 @@ def main():
         "worst_self_correlation": worst,
         "least_of_its_depth_used": least,
         "deterministic": deterministic,
+        "the_library_the_app_holds": library_contours(),
     }
     report["the_control_is_caught"] = min(c["worst_self_correlation"] for c in control) > a.max_corr
     report["ok"] = (worst <= a.max_corr and least >= a.min_span and deterministic
