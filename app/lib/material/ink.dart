@@ -107,6 +107,21 @@ Paint? inkStroke(String pen, Color colour, {required double width, StrokeCap cap
 final Map<String, ui.ImageShader> _shaders = {};
 final Map<String, Paint> _paints = {};
 
+/// The pen's coverage as a mask to punch into something already drawn.
+///
+/// For a mark made of many strokes rather than of glyphs. Drawing each stroke *through* the plate
+/// draws each of them at the plate's own alpha — which is 0.81 on average, not 1.0 — so every
+/// place two strokes touch is 0.81 over 0.81, and a stroke walked into forty segments touches
+/// itself thirty-nine times. On the chat hero that came out as a dotted line. The strokes go down
+/// solid and this goes over the lot of them, once.
+Paint? inkMask(String pen) {
+  final shader = _shaderFor(pen);
+  if (shader == null) return null;
+  return Paint()
+    ..shader = shader
+    ..blendMode = BlendMode.dstIn;
+}
+
 ui.ImageShader? _shaderFor(String pen) {
   final had = _shaders[pen];
   if (had != null) return had;

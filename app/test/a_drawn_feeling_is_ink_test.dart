@@ -17,18 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class _Mark extends CustomPainter {
-  const _Mark(this.draw);
-  final DrawnFeeling draw;
-
-  @override
-  void paint(Canvas canvas, Size size) =>
-      draw(canvas, size, DrawingHand(canvas, const Color(0xFF2B2B2E), 3.0, 7));
-
-  @override
-  bool shouldRepaint(_Mark old) => false;
-}
-
 /// Every dark pixel whose four neighbours are also dark: the critic's erosion.
 List<int> _core(ui.Image image, ByteData bytes) {
   final w = image.width, h = image.height;
@@ -75,7 +63,15 @@ void main() {
             child: SizedBox(
               width: 220,
               height: 220,
-              child: CustomPaint(painter: _Mark(kDrawnFeelings[id]!)),
+              // Through the widget the app draws, not through a painter of this test's own.
+              //
+              // It used to call the recipe directly with a DrawingHand, and when the pen's
+              // coverage moved off the individual strokes and onto the finished mark — because a
+              // stroke drawn through the plate is drawn at the plate's own alpha, so every
+              // junction inside a walked stroke doubled and the mark beaded — this test kept
+              // measuring the path the app had stopped using, and read one distinct value.
+              child: DrawnFeelingMark(
+                  object: id, colour: const Color(0xFF2B2B2E), size: 220, seed: 7),
             ),
           ),
         ),

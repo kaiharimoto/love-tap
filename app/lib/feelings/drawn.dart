@@ -104,12 +104,14 @@ class DrawingHand {
       // emotional critic said so: "a drawn mark on a torn card, while all thirty-six built-ins are
       // rendered objects". A mark somebody made is allowed to look like a mark. It is not allowed
       // to look like a vector.
-      canvas.drawLine(pts[i], pts[i + 1],
-          inkStroke('ballpoint', tone, width: w) ??
-              (Paint()
-                ..color = tone
-                ..strokeWidth = w
-                ..strokeCap = StrokeCap.round));
+      // Solid. The pen's coverage goes over the whole mark once, in _DrawnPainter — see inkMask.
+      canvas.drawLine(
+          pts[i],
+          pts[i + 1],
+          Paint()
+            ..color = tone
+            ..strokeWidth = w
+            ..strokeCap = StrokeCap.round);
     }
   }
 
@@ -121,8 +123,7 @@ class DrawingHand {
     ], wobble: wobble);
   }
 
-  void dot(Offset at, double r) => canvas.drawCircle(
-      at, r, inkPaint('ballpoint', colour) ?? (Paint()..color = colour));
+  void dot(Offset at, double r) => canvas.drawCircle(at, r, Paint()..color = colour);
 }
 
 const double _tau = math.pi * 2;
@@ -222,6 +223,12 @@ class _DrawnPainter extends CustomPainter {
         Offset.zero & s, Paint()..color = const Color(0xFF000000).withValues(alpha: colour.a));
     draw(canvas, s, DrawingHand(canvas, colour.withValues(alpha: 1.0),
         math.max(1.0, s.width / 44), seed + 7));
+    // The pen's own coverage, punched into the finished mark rather than carried by every stroke
+    // that makes it. A stroke drawn through the plate is drawn at the plate's alpha — 0.81 on
+    // average — so every junction inside a walked stroke was 0.81 over 0.81, and the drawn window
+    // on the chat hero came out beaded like a dotted line. Once, over the lot.
+    final mask = inkMask('ballpoint');
+    if (mask != null) canvas.drawRect(Offset.zero & s, mask);
     canvas.restore();
   }
 
