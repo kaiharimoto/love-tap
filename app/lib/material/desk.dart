@@ -112,6 +112,15 @@ class PartnerStrip extends StatelessWidget {
                         Row(children: [
                           if (state.place != null) Stamped(state.place!, size: 10),
                           if (state.place != null) const SizedBox(width: 8),
+                          // Mood and availability were legible on Pulse and nowhere else. A
+                          // coherence critic drove `state mood restless` and `state availability
+                          // heads_down` through 08 and neither moved this ribbon: only place did.
+                          // So on Moments and Settings a reader got three of the five signals,
+                          // and the two they were missing are the two that decide whether to
+                          // write to somebody. They are words, so they go where the words are —
+                          // and only when the line above is not already saying them, because a
+                          // strip that says `restless` twice is worse than one that says it once.
+                          ..._alsoSay(state, asleep, headsDown),
                           _Dial(label: signalLabel('need'), value: state.need),
                           const SizedBox(width: 10),
                           _Dial(label: signalLabel('energy'), value: state.energy),
@@ -128,6 +137,24 @@ class PartnerStrip extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// The signals the line above is not carrying, stamped beside the place.
+  static List<Widget> _alsoSay(PersonState state, bool asleep, bool headsDown) {
+    final line = (state.statusLine ?? _fallbackLine(state, asleep, headsDown)).toLowerCase();
+    final words = <String>[];
+    if (asleep && !line.contains('asleep')) {
+      words.add('asleep');
+    } else if (headsDown && !line.contains('heads down')) {
+      words.add('heads down');
+    }
+    final mood = state.mood;
+    if (mood != null && mood.trim().isNotEmpty && !line.contains(mood.toLowerCase())) {
+      words.add(mood);
+    }
+    return [
+      for (final w in words) ...[Stamped(w, size: 10), const SizedBox(width: 8)],
+    ];
   }
 
   static String _fallbackLine(PersonState s, bool asleep, bool headsDown) {
