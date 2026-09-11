@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2804,
+   "ms": 3447,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3457
+   "ms": 4507
   },
   {
    "do": "wait",
@@ -24,7 +24,7 @@
   },
   {
    "do": "scrollTo",
-   "ms": 3523
+   "ms": 4134
   },
   {
    "do": "wait",
@@ -32,15 +32,15 @@
   },
   {
    "do": "far",
-   "ms": 706
+   "ms": 705
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2101
   },
   {
    "do": "far",
-   "ms": 703
+   "ms": 704
   },
   {
    "do": "wait",
@@ -48,7 +48,7 @@
   },
   {
    "do": "stage",
-   "ms": 25510
+   "ms": 24476
   },
   {
    "do": "wait",
@@ -56,7 +56,7 @@
   },
   {
    "do": "far",
-   "ms": 1366
+   "ms": 705
   },
   {
    "do": "wait",
@@ -68,7 +68,7 @@
   },
   {
    "do": "sync",
-   "ms": 721
+   "ms": 1740
   },
   {
    "do": "wait",
@@ -76,19 +76,19 @@
   },
   {
    "do": "openSender",
-   "ms": 2046
+   "ms": 2188
   },
   {
    "do": "wait",
-   "ms": 1201
+   "ms": 1203
   },
   {
    "do": "scrollTo",
-   "ms": 2647
+   "ms": 7591
   },
   {
    "do": "far",
-   "ms": 705
+   "ms": 1283
   },
   {
    "awaited": "partner_typing",
@@ -97,19 +97,19 @@
   },
   {
    "do": "awaitView",
-   "ms": 9804
+   "ms": 10740
   },
   {
    "do": "slowSend",
-   "ms": 5200
+   "ms": 5848
   },
   {
    "do": "shot",
-   "ms": 3440
+   "ms": 32173
   },
   {
    "do": "report",
-   "ms": 703
+   "ms": 702
   }
  ],
  "shots": [
@@ -124,60 +124,59 @@
    "view": {
     "region": "chat",
     "visible": [
-     "0001MCJ1M0TM1AH3BRGTH8Q39P",
-     "0001MCJ1M0TM1AH3BRGTH8Q39T",
-     "0001MCJ1M0TM1AH3BRGTH8Q39V",
-     "0001MCJ1M0TM1AH3BRGTH8Q39W",
-     "0001MCJ1M0TM1AH3BRGTH8Q39M",
-     "0001MCJ1M0TM1AH3BRGTH8Q39Y"
+     "0001MCJ1M0RH0PC6JX2E0R8TN9",
+     "0001MCJ1M0RH0PC6JX2E0R8TND",
+     "0001MCJ1M0RH0PC6JX2E0R8TNE",
+     "0001MCJ1M0RH0PC6JX2E0R8TNF",
+     "0001MCJ1M0RH0PC6JX2E0R8TNK",
+     "0001MCJ1M0RH0PC6JX2E0R8TN7"
     ],
     "whole_on_the_glass": [
-     "0001MCJ1M0TM1AH3BRGTH8Q39T",
-     "0001MCJ1M0TM1AH3BRGTH8Q39V",
-     "0001MCJ1M0TM1AH3BRGTH8Q39W",
-     "0001MCJ1M0TM1AH3BRGTH8Q39M",
-     "0001MCJ1M0TM1AH3BRGTH8Q39Y"
+     "0001MCJ1M0RH0PC6JX2E0R8TND",
+     "0001MCJ1M0RH0PC6JX2E0R8TNE",
+     "0001MCJ1M0RH0PC6JX2E0R8TNF",
+     "0001MCJ1M0RH0PC6JX2E0R8TNK",
+     "0001MCJ1M0RH0PC6JX2E0R8TN7"
     ],
     "clipped_at_an_edge": {
-     "0001MCJ1M0TM1AH3BRGTH8Q39P": 0.217
+     "0001MCJ1M0RH0PC6JX2E0R8TN9": 0.124
     },
     "delivery": {
-     "0001MCJ1M0TM1AH3BRGTH8Q39P": {
+     "0001MCJ1M0RH0PC6JX2E0R8TN9": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M0TM1AH3BRGTH8Q39T": {
+     "0001MCJ1M0RH0PC6JX2E0R8TND": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M0TM1AH3BRGTH8Q39V": {
+     "0001MCJ1M0RH0PC6JX2E0R8TNE": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M0TM1AH3BRGTH8Q39W": {
+     "0001MCJ1M0RH0PC6JX2E0R8TNF": {
       "state": "sent",
       "says": "sent"
      },
-     "0001MCJ1M0TM1AH3BRGTH8Q39M": {
+     "0001MCJ1M0RH0PC6JX2E0R8TNK": {
+      "state": "sent",
+      "says": "sent"
+     },
+     "0001MCJ1M0RH0PC6JX2E0R8TN7": {
       "state": "refused",
       "says": "it would not go"
-     },
-     "0001MCJ1M0TM1AH3BRGTH8Q39Y": {
-      "state": "sending",
-      "says": "going"
      }
     },
     "refusals_on_the_glass": {
-     "0001MCJ1M0TM1AH3BRGTH8Q39M": "this phone is on an older version and cannot read that"
+     "0001MCJ1M0RH0PC6JX2E0R8TN7": "this phone is on an older version and cannot read that"
     },
     "states_on_the_glass": {
-     "sent": 3,
-     "it would not go": 1,
-     "going": 1
+     "sent": 4,
+     "it would not go": 1
     },
     "reactions": {},
     "edited": [
-     "0001MCJ1M0TM1AH3BRGTH8Q39P"
+     "0001MCJ1M0RH0PC6JX2E0R8TN9"
     ],
     "taken_back": [],
     "scroll": {
@@ -186,12 +185,12 @@
      "of": 8076
     },
     "paper": [
-     "0001MCJ1M0TM1AH3BRGTH8Q39P",
-     "0001MCJ1M0TM1AH3BRGTH8Q39T",
-     "0001MCJ1M0TM1AH3BRGTH8Q39V",
-     "0001MCJ1M0TM1AH3BRGTH8Q39W",
-     "0001MCJ1M0TM1AH3BRGTH8Q39M",
-     "0001MCJ1M0TM1AH3BRGTH8Q39Y"
+     "0001MCJ1M0RH0PC6JX2E0R8TN9",
+     "0001MCJ1M0RH0PC6JX2E0R8TND",
+     "0001MCJ1M0RH0PC6JX2E0R8TNE",
+     "0001MCJ1M0RH0PC6JX2E0R8TNF",
+     "0001MCJ1M0RH0PC6JX2E0R8TNK",
+     "0001MCJ1M0RH0PC6JX2E0R8TN7"
     ],
     "paper_whole_on_the_glass": 5,
     "rows_cost": [
@@ -199,37 +198,37 @@
       "row": 8070,
       "type": "message",
       "tall": 129,
-      "top": -101
+      "top": -113
      },
      {
       "row": 8071,
       "type": "message",
       "tall": 198,
-      "top": 28
+      "top": 16
      },
      {
       "row": 8072,
       "type": "message",
       "tall": 80,
-      "top": 226
+      "top": 214
      },
      {
       "row": 8073,
       "type": "message",
       "tall": 122,
-      "top": 306
+      "top": 294
      },
      {
       "row": 8074,
       "type": "message",
-      "tall": 153,
-      "top": 428
+      "tall": 92,
+      "top": 416
      },
      {
       "row": 8075,
       "type": "message",
-      "tall": 107,
-      "top": 581
+      "tall": 180,
+      "top": 508
      }
     ],
     "viewport_tall": 698.1,
@@ -237,7 +236,7 @@
     "attaching": true,
     "replying_to": "0001M2ZNX8AF4811Y2F7FNAGMG",
     "replies_on_the_glass": {
-     "0001MCJ1M0TM1AH3BRGTH8Q39T": {
+     "0001MCJ1M0RH0PC6JX2E0R8TND": {
       "id": "0001M2ZNX8AF4811Y2F7FNAGMG",
       "seq": 14053,
       "author": "noor",
@@ -265,36 +264,36 @@
     "partner_typing": false
    },
    "visible": [
-    "0001MCJ1M0TM1AH3BRGTH8Q39P",
-    "0001MCJ1M0TM1AH3BRGTH8Q39T",
-    "0001MCJ1M0TM1AH3BRGTH8Q39V",
-    "0001MCJ1M0TM1AH3BRGTH8Q39W",
-    "0001MCJ1M0TM1AH3BRGTH8Q39M",
-    "0001MCJ1M0TM1AH3BRGTH8Q39Y"
+    "0001MCJ1M0RH0PC6JX2E0R8TN9",
+    "0001MCJ1M0RH0PC6JX2E0R8TND",
+    "0001MCJ1M0RH0PC6JX2E0R8TNE",
+    "0001MCJ1M0RH0PC6JX2E0R8TNF",
+    "0001MCJ1M0RH0PC6JX2E0R8TNK",
+    "0001MCJ1M0RH0PC6JX2E0R8TN7"
    ],
    "paper": [
-    "0001MCJ1M0TM1AH3BRGTH8Q39P",
-    "0001MCJ1M0TM1AH3BRGTH8Q39T",
-    "0001MCJ1M0TM1AH3BRGTH8Q39V",
-    "0001MCJ1M0TM1AH3BRGTH8Q39W",
-    "0001MCJ1M0TM1AH3BRGTH8Q39M",
-    "0001MCJ1M0TM1AH3BRGTH8Q39Y"
+    "0001MCJ1M0RH0PC6JX2E0R8TN9",
+    "0001MCJ1M0RH0PC6JX2E0R8TND",
+    "0001MCJ1M0RH0PC6JX2E0R8TNE",
+    "0001MCJ1M0RH0PC6JX2E0R8TNF",
+    "0001MCJ1M0RH0PC6JX2E0R8TNK",
+    "0001MCJ1M0RH0PC6JX2E0R8TN7"
    ],
    "tears": {
-    "0001MCJ1M0TM1AH3BRGTH8Q39P": "tear_042",
-    "0001MCJ1M0TM1AH3BRGTH8Q39T": "tear_009",
-    "0001MCJ1M0TM1AH3BRGTH8Q39V": "tear_031",
-    "0001MCJ1M0TM1AH3BRGTH8Q39W": "tear_051",
-    "0001MCJ1M0TM1AH3BRGTH8Q39M": "tear_011",
-    "0001MCJ1M0TM1AH3BRGTH8Q39Y": "tear_004"
+    "0001MCJ1M0RH0PC6JX2E0R8TN9": "tear_042",
+    "0001MCJ1M0RH0PC6JX2E0R8TND": "tear_009",
+    "0001MCJ1M0RH0PC6JX2E0R8TNE": "tear_031",
+    "0001MCJ1M0RH0PC6JX2E0R8TNF": "tear_051",
+    "0001MCJ1M0RH0PC6JX2E0R8TNK": "tear_018",
+    "0001MCJ1M0RH0PC6JX2E0R8TN7": "tear_029"
    },
    "stocks": {
-    "0001MCJ1M0TM1AH3BRGTH8Q39P": "legal_02",
-    "0001MCJ1M0TM1AH3BRGTH8Q39T": "lined_02",
-    "0001MCJ1M0TM1AH3BRGTH8Q39V": "looseleaf_01",
-    "0001MCJ1M0TM1AH3BRGTH8Q39W": "looseleaf_03",
-    "0001MCJ1M0TM1AH3BRGTH8Q39M": "lined_02",
-    "0001MCJ1M0TM1AH3BRGTH8Q39Y": "lined_01"
+    "0001MCJ1M0RH0PC6JX2E0R8TN9": "legal_02",
+    "0001MCJ1M0RH0PC6JX2E0R8TND": "legal_01",
+    "0001MCJ1M0RH0PC6JX2E0R8TNE": "looseleaf_01",
+    "0001MCJ1M0RH0PC6JX2E0R8TNF": "legal_02",
+    "0001MCJ1M0RH0PC6JX2E0R8TNK": "legal_01",
+    "0001MCJ1M0RH0PC6JX2E0R8TN7": "looseleaf_04"
    },
    "scroll": {
     "first": 8070,
@@ -304,7 +303,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 368,
    "seed": 20260903,
-   "events": 14075,
+   "events": 14078,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -314,27 +313,46 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
-   "paper_at_its_own_size": 2152,
-   "paper_stretched_to_fit": 31,
+   "the_smallest_patch_of_a_stock_anything_took": [
+    "index_01 2560x1593",
+    "143x102 of it, at its own size",
+    14669.3229675293
+   ],
+   "paper_at_its_own_size": 2485,
+   "paper_stretched_to_fit": 36,
+   "stocks_the_paper_had_not_arrived_for": [
+    "sticky_blue_02"
+   ],
+   "paper_that_arrived_after_the_piece_was_drawn": 12,
+   "masks_held": 48,
+   "masks_dropped_to_stay_inside_the_pool": 29,
+   "image_cache": {
+    "held": 83,
+    "bytes": 342054332,
+    "budget": 402653184,
+    "live": 74,
+    "still_decoding": 0
+   },
    "setup_showing": false,
    "fold": {
     "sequence": null
    },
    "sensation": null,
+   "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 8,
-    "the library index": 16,
-    "the ink plates": 42,
-    "the desk": 163,
-    "the log": 583,
-    "the first frame": 374,
-    "everything": 1187
+    "the library index": 21,
+    "the ink plates": 47,
+    "the desk": 161,
+    "the log": 835,
+    "the first frame": 423,
+    "everything": 1495
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 6,
-    "pushed": 9,
+    "rounds": 7,
+    "pushed": 12,
     "refused": 1,
     "pulled": 10,
     "blobs_fetched": 0,
@@ -342,18 +360,20 @@
     "last_fault": "dropped (POST /events)",
     "pending": 2,
     "refused_in_the_outbox": 1,
-    "cursor": 14073,
+    "cursor": 14076,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14072,
-     "our_cursor": 14072,
+     "peer_cursor": 14075,
+     "our_cursor": 14075,
      "last_error": null,
-     "since": "2026-09-10T17:44:20.136Z",
-     "last_contact": "2026-09-10T17:45:29.271Z"
+     "since": "2026-09-11T21:24:03.705Z",
+     "last_contact": "2026-09-11T21:25:44.115Z",
+     "certificate": null,
+     "setup_address": null
     }
    },
    "ambient": {
@@ -372,19 +392,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2370,
+ "cold_ms": 3129,
  "load": {
-  "ms": 2370,
+  "ms": 3129,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 8,
-   "the library index": 16,
-   "the ink plates": 42,
-   "the desk": 163,
-   "the log": 583,
-   "the first frame": 374,
-   "everything": 1187
+   "the library index": 21,
+   "the ink plates": 47,
+   "the desk": 161,
+   "the log": 835,
+   "the first frame": 423,
+   "everything": 1495
   }
  },
  "far": [

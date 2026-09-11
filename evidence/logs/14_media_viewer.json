@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2875,
+   "ms": 2932,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4259
+   "ms": 4371
   },
   {
    "do": "wait",
-   "ms": 3703
+   "ms": 3702
   },
   {
    "do": "openViewer",
-   "ms": 4514
+   "ms": 8730
   },
   {
    "do": "wait",
@@ -37,27 +37,27 @@
   },
   {
    "do": "awaitView",
-   "ms": 2882
+   "ms": 3273
   },
   {
-   "at": 26307,
+   "at": 30694,
    "said": "__deskSeek(0.42) ok, at 0ms"
   },
   {
    "do": "seek",
-   "ms": 2660
+   "ms": 2179
   },
   {
    "do": "wait",
-   "ms": 1403
+   "ms": 1402
   },
   {
    "do": "shot",
-   "ms": 2679
+   "ms": 33736
   },
   {
    "do": "frames",
-   "ms": 102931
+   "ms": 180828
   },
   {
    "do": "report",
@@ -89,7 +89,7 @@
     "video": {
      "initialised": true,
      "playing": true,
-     "position_ms": 625,
+     "position_ms": 843,
      "duration_ms": 2500
     }
    },
@@ -124,7 +124,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 224,
    "seed": 20260903,
-   "events": 14075,
+   "events": 14079,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -134,45 +134,67 @@
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
-   "paper_at_its_own_size": 871,
-   "paper_stretched_to_fit": 10,
+   "the_smallest_patch_of_a_stock_anything_took": [
+    "index_01 2560x1593",
+    "143x102 of it, at its own size",
+    14669.3229675293
+   ],
+   "paper_at_its_own_size": 2155,
+   "paper_stretched_to_fit": 24,
+   "stocks_the_paper_had_not_arrived_for": [
+    "sticky_blue_02"
+   ],
+   "paper_that_arrived_after_the_piece_was_drawn": 9,
+   "masks_held": 48,
+   "masks_dropped_to_stay_inside_the_pool": 38,
+   "image_cache": {
+    "held": 97,
+    "bytes": 381952140,
+    "budget": 402653184,
+    "live": 5,
+    "still_decoding": 0
+   },
    "setup_showing": false,
    "fold": {
     "sequence": null
    },
    "sensation": null,
+   "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 6,
-    "the library index": 16,
-    "the ink plates": 43,
-    "the desk": 162,
-    "the log": 595,
-    "the first frame": 412,
-    "everything": 1234
+    "the framework": 8,
+    "the library index": 17,
+    "the ink plates": 39,
+    "the desk": 165,
+    "the log": 623,
+    "the first frame": 380,
+    "everything": 1232
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 9,
-    "pushed": 2,
+    "rounds": 19,
+    "pushed": 3,
     "refused": 0,
     "pulled": 0,
     "blobs_fetched": 0,
-    "faults": 0,
+    "faults": 1,
+    "last_fault": "401 the signature does not match",
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14075,
+    "cursor": 14079,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14075,
-     "our_cursor": 14075,
+     "peer_cursor": 14079,
+     "our_cursor": 14079,
      "last_error": null,
-     "since": "2026-09-10T17:45:40.777Z",
-     "last_contact": "2026-09-10T17:46:06.407Z"
+     "since": "2026-09-11T21:26:02.597Z",
+     "last_contact": "2026-09-11T21:27:03.837Z",
+     "certificate": null,
+     "setup_address": null
     }
    },
    "ambient": {
@@ -191,22 +213,28 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2395,
+ "cold_ms": 2480,
  "load": {
-  "ms": 2395,
+  "ms": 2480,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 6,
-   "the library index": 16,
-   "the ink plates": 43,
-   "the desk": 162,
-   "the log": 595,
-   "the first frame": 412,
-   "everything": 1234
+   "the framework": 8,
+   "the library index": 17,
+   "the ink plates": 39,
+   "the desk": 165,
+   "the log": 623,
+   "the first frame": 380,
+   "everything": 1232
   }
  },
- "problems": [],
- "ok": true,
+ "problems": [
+  "http: 401 GET http://127.0.0.1:8480/v1/events?after=14078&wait=20",
+  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+ ],
+ "refused_requests": [
+  "401 GET http://127.0.0.1:8480/v1/events?after=14078&wait=20"
+ ],
+ "ok": false,
  "steps_landed": true
 }

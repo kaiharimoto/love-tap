@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5202
+   "ms": 4276
   },
   {
    "do": "wait",
-   "ms": 2303
+   "ms": 2304
   },
   {
    "do": "shot",
-   "ms": 5123
+   "ms": 33207
   },
   {
    "do": "report",
-   "ms": 716
+   "ms": 718
   }
  ],
  "shots": [
@@ -132,8 +132,26 @@
    "light": "dusk",
    "has_dusk_paper": true,
    "paper_stocks": 54,
-   "paper_at_its_own_size": 208,
+   "the_smallest_patch_of_a_stock_anything_took": [
+    "index_01_dusk 2560x1593",
+    "143x102 of it, at its own size",
+    14669.3229675293
+   ],
+   "paper_at_its_own_size": 209,
    "paper_stretched_to_fit": 3,
+   "stocks_the_paper_had_not_arrived_for": [
+    "sticky_blue_02_dusk"
+   ],
+   "paper_that_arrived_after_the_piece_was_drawn": 11,
+   "masks_held": 48,
+   "masks_dropped_to_stay_inside_the_pool": 14,
+   "image_cache": {
+    "held": 77,
+    "bytes": 322783472,
+    "budget": 402653184,
+    "live": 71,
+    "still_decoding": 0
+   },
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
@@ -145,14 +163,15 @@
     "held_to": 23
    },
    "sensation": null,
+   "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 6,
-    "the library index": 17,
-    "the ink plates": 45,
-    "the desk": 160,
-    "the log": 7199,
-    "the first frame": 406,
-    "everything": 7833
+    "the framework": 9,
+    "the library index": 20,
+    "the ink plates": 41,
+    "the desk": 170,
+    "the log": 6382,
+    "the first frame": 432,
+    "everything": 7054
    },
    "sync": {
     "transport": "local",
@@ -175,8 +194,10 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-10T17:49:11.329Z",
-     "last_contact": null
+     "since": "2026-09-11T21:32:22.629Z",
+     "last_contact": null,
+     "certificate": null,
+     "setup_address": null
     }
    },
    "ambient": {
@@ -195,19 +216,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 9021,
+ "cold_ms": 8328,
  "load": {
-  "ms": 9021,
+  "ms": 8328,
   "store": "fresh",
   "profile": null,
   "made_of": {
-   "the framework": 6,
-   "the library index": 17,
-   "the ink plates": 45,
-   "the desk": 160,
-   "the log": 7199,
-   "the first frame": 406,
-   "everything": 7833
+   "the framework": 9,
+   "the library index": 20,
+   "the ink plates": 41,
+   "the desk": 170,
+   "the log": 6382,
+   "the first frame": 432,
+   "everything": 7054
   }
  },
  "problems": [],

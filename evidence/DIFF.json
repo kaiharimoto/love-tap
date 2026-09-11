@@ -12,165 +12,199 @@
    "artifact": "01_pulse.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "d1074ddaf85d5b1c",
    "previous_sha": "d1074ddaf85d5b1c",
    "previous_written": "2026-09-10T03:37:53Z",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 DIFF.json reports SSIM 1.0 and byte identity, and I confirmed the sha256 match myself.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "02_chat.png",
    "label": "changed",
    "ssim": 0.6355,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "6a371f422e9ce5d2",
    "previous_sha": "2068bd6958da1fd7",
    "previous_written": "2026-09-10T03:38:52Z",
-   "label_basis": "ssim 0.6355, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.6355, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 the baseline file is a copy of this one so this is a reading of the artifact, not a comparison; at SSIM 0.6355 this is the largest movement in the set, and what it now carries is six row types in a single thread (photo, voice_note, ritual_kept, message, two state_declared, state_passive) with delivery state and a reaction, which is the clearest single demonstration of the one-log claim anywhere in the evidence.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "03_us.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "37fac064241219a9",
    "previous_sha": "37fac064241219a9",
    "previous_written": "2026-09-10T03:39:08Z",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 SSIM 1.0, byte identical, confirmed by sha256.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "04_moments.png",
    "label": "changed",
    "ssim": 0.9662,
-   "judgement": null,
+   "judgement": "regressed",
    "sha": "14ada69da204dd6c",
    "previous_sha": "d6ba36c7f63a6860",
    "previous_written": "2026-09-10T03:39:39Z",
-   "label_basis": "ssim 0.9662, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9662, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "regressed \u2014 judged on the artifact alone for want of a baseline; at SSIM 0.9662 it now carries the one flat fill in the whole set (4 colours, luma sd 0.0253 at 1280,2640) inside a voice-note slip whose twin in the same still has real tooth, and its own report names tiles_without_a_picture 8 of 52 tiles built, which read on the glass as blank ruled cards with no content and no indication of what they are.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "05_settings.png",
    "label": "unchanged",
    "ssim": 0.999,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "d996f46a09124aa0",
    "previous_sha": "4df18e932e136a94",
    "previous_written": "2026-09-10T03:39:55Z",
-   "label_basis": "ssim 0.999, at or above 0.999: nothing a person would see has moved"
+   "label_basis": "ssim 0.999, at or above 0.999: nothing a person would see has moved",
+   "judged_because": "unchanged \u2014 SSIM 0.999, at the threshold DIFF itself calls 'nothing a person would see has moved'.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "changed",
    "ssim": 0.8324,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "c4c9fb8a24649eaa",
    "previous_sha": "2bdc04992273d9ec",
    "previous_written": "2026-09-10T04:34:41Z",
-   "label_basis": "ssim 0.8324, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.8324, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 no baseline to compare, so this is the artifact's own merit; at SSIM 0.8324 it shows an arriving message folding and unfolding in place in the thread, labelled with its time and with no delivery mark (correctly, since it is theirs), which is the same in-flow treatment the rest of Chat uses.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "changed",
    "ssim": 0.9953,
-   "judgement": null,
+   "judgement": "regressed",
    "sha": "f28974f12f9008a9",
    "previous_sha": "84a0f3a9da562ae1",
    "previous_written": "2026-09-10T04:38:14Z",
-   "label_basis": "ssim 0.9953, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9953, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "regressed \u2014 judged on the artifact alone; at SSIM 0.9953 almost nothing moved, and what the clip contains is the split this report's blocking finding names: the built-in feelings 'hold' and 'squeeze' arriving on Pulse as labelled objects that file themselves into the shelf, against the authored 'soup' arriving on Us as an unlabelled straight-edged card that covers three module rows for 107 frames.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
    "ssim": 0.9527,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "38959a27828e5a58",
    "previous_sha": "ab7c1d4861bd01fb",
    "previous_written": "2026-09-10T05:01:40Z",
-   "label_basis": "ssim 0.9527, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9527, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 judged on the artifact alone; at SSIM 0.9527 it is now the best evidence in the set for the row's core claim, showing one state event reaching the strip, the Pulse card and the Chat thread, and one feeling reaching the shelf and the thread with the same name and timestamp \u2014 notwithstanding the strip overflow and the Us card, both of which are filed above.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried."
+   "judgement": "unchanged",
+   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried.",
+   "judged_because": "unchanged \u2014 absent now and absent from the baseline, with no ssim and no previous_sha; DIFF's own labels note distinguishes 'absent' from 'gone', so nothing about it moved.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "10_first_run.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "5a2a5d913fc21c2b",
    "previous_sha": "5a2a5d913fc21c2b",
    "previous_written": "2026-09-10T03:44:18Z",
-   "why": "byte for byte the same file"
+   "why": "byte for byte the same file",
+   "judged_because": "unchanged \u2014 SSIM 1.0, byte identical, confirmed by sha256.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "changed",
    "ssim": 0.9916,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "06f83ae2411e47e7",
    "previous_sha": "7ac62613273f68a0",
    "previous_written": "2026-09-10T04:37:00Z",
-   "label_basis": "ssim 0.9916, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9916, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 judged on the artifact alone; at SSIM 0.9916 it shows a year of thread in which messages, passive and declared state lines, a feeling object and a PLANNING date card all scroll past in one flow with one paper treatment, which is the one-log claim shown at length rather than asserted.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "12_search.png",
    "label": "unchanged",
    "ssim": 0.9998,
-   "judgement": null,
+   "judgement": "unchanged",
    "sha": "7dda2dd6fb238170",
    "previous_sha": "39780aeed7a2bde0",
    "previous_written": "2026-09-10T03:40:20Z",
-   "label_basis": "ssim 0.9998, at or above 0.999: nothing a person would see has moved"
+   "label_basis": "ssim 0.9998, at or above 0.999: nothing a person would see has moved",
+   "judged_because": "unchanged \u2014 SSIM 0.9998, above DIFF's own 0.999 threshold.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "changed",
    "ssim": 0.7682,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "6077843ce191c461",
    "previous_sha": "3c2f92aa402d590b",
    "previous_written": "2026-09-10T03:41:40Z",
-   "label_basis": "ssim 0.7682, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.7682, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 judged on the artifact alone; at SSIM 0.7682, the second largest movement in the set, it now puts the whole delivery vocabulary in one frame \u2014 sent \u2713, going \u21ca, 'it would not go \u2717 / send it again' with the reason spelled out, a quoted reply, an edit, a typing line and the attach row \u2014 in one voice with no product cheer.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "changed",
    "ssim": 0.9826,
-   "judgement": null,
+   "judgement": "regressed",
    "sha": "515a10ab274e21ca",
    "previous_sha": "a70803d5dcb30f35",
    "previous_written": "2026-09-10T03:42:18Z",
-   "label_basis": "ssim 0.9826, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9826, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "regressed \u2014 judged on the artifact alone; at SSIM 0.9826 it remains the only screen in the set with neither the standing strip nor the tab strip, so it is the one place partner state is absent entirely, and its readout shows 0:00 / 0:03 for a position of 625 ms in a 2500 ms video.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "changed",
    "ssim": 0.9916,
-   "judgement": null,
+   "judgement": "regressed",
    "sha": "b60594799f3f1464",
    "previous_sha": "81263f1c9cc0d1e3",
    "previous_written": "2026-09-10T04:38:14Z",
-   "label_basis": "ssim 0.9916, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9916, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "regressed \u2014 judged on the artifact alone; at SSIM 0.9916 it shows the authored feeling first-class in the model (its own family tab, its own object, its own sound) and second-class on arrival, as the unlabelled card that lies across the Pulse state card and the Settings link card, and frames.json marks it ok:false for one repeated frame at 74 and one brightness jump, which is why MANIFEST.json lists it under 'missing' rather than among the artifacts.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": null,
-   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got."
+   "judgement": "unchanged",
+   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got.",
+   "judged_because": "unchanged \u2014 absent now and absent from the baseline, with no ssim and no previous_sha.",
+   "judged_by": "coherence critic"
   },
   {
    "artifact": "17_setup_pwa.png",
    "label": "changed",
    "ssim": 0.9314,
-   "judgement": null,
+   "judgement": "improved",
    "sha": "4d0306f70e36a94a",
    "previous_sha": "44f0bbdc9d238ae2",
    "previous_written": "2026-09-10T03:44:27Z",
-   "label_basis": "ssim 0.9314, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "label_basis": "ssim 0.9314, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
+   "judged_because": "improved \u2014 judged on the artifact alone; at SSIM 0.9314 it is the only platform-setup artifact that exists, and it spells out the iPhone path \u2014 home screen, tailnet, the served profile and certificate trust \u2014 in the app's own lowercase voice with no exclamation, no 'user' and no name for itself.",
+   "judged_by": "coherence critic"
   }
  ],
  "counts": {
@@ -179,5 +213,6 @@
   "unchanged": 5,
   "changed": 10,
   "absent": 2
- }
+ },
+ "judgements_from": "the coherence critic's report for this cycle"
 }
