@@ -70,6 +70,9 @@ void main() {
 
   test('an IPv6 tailnet address is bracketed in a URL', () async {
     final b = TailscaleBinding(peerAddress: 'fd7a:115c:a1e0::9', port: 8443);
-    expect((await b.clientBase(null)).toString(), 'http://[fd7a:115c:a1e0::9]:8443');
+    // https, not http: the host binds with a certificate now, and a page served in the clear at a
+    // 100.64/10 address is not a secure context, so Safari would give the iPhone no service worker
+    // and the push surface could not exist. This line read http until the host actually had one.
+    expect((await b.clientBase(null)).toString(), 'https://[fd7a:115c:a1e0::9]:8443');
   });
 }

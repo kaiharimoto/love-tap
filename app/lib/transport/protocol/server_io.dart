@@ -8,8 +8,10 @@ import 'dart:typed_data';
 
 import 'package:path/path.dart' as p;
 
+import '../../setup/bootstrap_page.dart';
 import '../../spine/spine.dart';
 import '../transport.dart';
+import '../tailscale/proxy_client_io.dart' show derOf, fingerprintOfDer;
 import 'http_transport.dart';
 import 'wire.dart';
 
@@ -50,6 +52,7 @@ class HostServer {
     required this.onPeerContact,
     this.pwaRoot,
     this.refuses,
+    this.certificatePem,
   });
 
   final Spine spine;
@@ -63,6 +66,13 @@ class HostServer {
   final void Function(int cursor) onPeerContact;
   final String? pwaRoot;
 
+  /// The certificate this host is presenting, as PEM — the public half and nothing else. It is
+  /// served, unauthenticated, at /setup, because an iPhone cannot pair before it trusts the
+  /// certificate and cannot trust it before it has been given it. What crosses here is a name and
+  /// a public key; the private key never leaves the phone's own storage, and the six words are
+  /// still what authenticates the two devices to each other.
+  final String Function()? certificatePem;
+
   /// Why this host will not take an event, or null if it will.
   ///
   /// A host refusing something is a real thing and it is one of the five states a message can be
@@ -74,6 +84,7 @@ class HostServer {
   final String? Function(Event e)? refuses;
 
   HttpServer? _server;
+  HttpServer? _setup;
   final NonceCache _nonces = NonceCache();
   final List<Ephemeral> _forClient = [];
   final Set<String> _pairNonces = {};
@@ -88,7 +99,49 @@ class HostServer {
         : await HttpServer.bindSecure(addr, bind.port, ctx as SecurityContext, shared: false);
     _sub = spine.changes.listen((_) => _wakeWaiters());
     _server!.listen(_handle, onError: (_) {});
+    // The port above the app's, except when the app took whatever was free (port 0, which is what
+    // a test does) — then this takes whatever is free too, rather than port 1.
+    if (ctx != null) await _listenForSetup(addr, bind.port == 0 ? 0 : bind.port + 1);
   }
+
+  /// One more listener, in the clear, on the next port up, serving the setup page and the profile
+  /// and nothing else.
+  ///
+  /// Without it the certificate is behind the certificate: Safari reaching the https address has
+  /// nothing to check it against yet, so the person meets a full-page security warning before the
+  /// page that exists to remove it. Clicking through that warning is a bad thing to teach anybody,
+  /// and on a phone it is how people end up trusting the wrong thing later.
+  ///
+  /// What crosses here is a public key and a name — no key material, no events, no blobs, and no
+  /// authenticated route at all: every other path is 404 before it is parsed. Someone on the wire
+  /// could substitute their own certificate here, and the answer to that is the same as it has
+  /// always been: the six words are said out loud in one room, and both phones show the
+  /// fingerprint so it can be compared by eye.
+  Future<void> _listenForSetup(InternetAddress addr, int port) async {
+    try {
+      _setup = await HttpServer.bind(addr, port, shared: false);
+    } catch (_) {
+      return;   // the port is taken; the https page still works, warning and all
+    }
+    _setup!.listen((req) async {
+      try {
+        final path = req.uri.path;
+        if (path == '/setup' || path == '/setup/') {
+          await _setupPage(req);
+        } else if (path == '/setup/profile.mobileconfig') {
+          await _setupProfile(req);
+        } else {
+          req.response.statusCode = HttpStatus.notFound;
+          await req.response.close();
+        }
+      } catch (_) {}
+    }, onError: (_) {});
+  }
+
+  /// The address to open on the other phone before anything is trusted, or null when the host is
+  /// not serving one (the local transport, where there is no certificate to hand over).
+  String? get setupAddress =>
+      _setup == null ? null : 'http://${_setup!.address.address}:${_setup!.port}/setup';
 
   int get port => _server?.port ?? 0;
 
@@ -96,6 +149,8 @@ class HostServer {
     await _sub?.cancel();
     await _server?.close(force: true);
     _server = null;
+    await _setup?.close(force: true);
+    _setup = null;
   }
 
   void queueForClient(Ephemeral frame) {
@@ -112,6 +167,10 @@ class HostServer {
   Future<void> _handle(HttpRequest req) async {
     try {
       final path = req.uri.path;
+      // Before anything else, and before any authentication: the one page an iPhone can reach
+      // when it has nothing yet. It hands over the certificate and says what to do with it.
+      if (path == '/setup' || path == '/setup/') { await _setupPage(req); return; }
+      if (path == '/setup/profile.mobileconfig') { await _setupProfile(req); return; }
       if (!path.startsWith(kApiPrefix)) {
         await _serveStatic(req);
         return;
@@ -150,6 +209,47 @@ class HostServer {
         await req.response.close();
       } catch (_) {}
     }
+  }
+
+  String get _hostName {
+    final p = spine.identity.person.name;
+    return "${p[0].toUpperCase()}${p.substring(1)}'s phone";
+  }
+
+  Future<void> _setupPage(HttpRequest req) async {
+    final pem = certificatePem?.call();
+    req.response.headers.contentType = ContentType.html;
+    req.response.headers.set('cache-control', 'no-store');
+    req.response.write(bootstrapPage(
+      hostName: _hostName,
+      address: 'https://${_server?.address.address ?? ''}:${_server?.port ?? 0}',
+      profileReady: pem != null && pem.isNotEmpty,
+    ));
+    await req.response.close();
+  }
+
+  Future<void> _setupProfile(HttpRequest req) async {
+    final pem = certificatePem?.call();
+    if (pem == null || pem.isEmpty) {
+      req.response.statusCode = HttpStatus.notFound;
+      await req.response.close();
+      return;
+    }
+    // The content type is what makes iOS treat it as a profile rather than a download; without it
+    // Safari saves a file nobody can open.
+    req.response.headers.contentType = ContentType('application', 'x-apple-aspen-config');
+    req.response.headers.set('cache-control', 'no-store');
+    final der = derOf(pem);
+    final fingerprint = fingerprintOfDer(der);
+    req.response.write(mobileConfig(
+      certificateDer: der,
+      hostName: _hostName,
+      // Derived from the certificate, so installing it twice replaces one profile rather than
+      // leaving a phone with a list of near-identical ones.
+      profileUuid: uuidFor(fingerprint, 'profile'),
+      payloadUuid: uuidFor(fingerprint, 'payload'),
+    ));
+    await req.response.close();
   }
 
   Future<List<int>> _readBody(HttpRequest req) async {

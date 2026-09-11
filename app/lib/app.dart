@@ -205,6 +205,7 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
         pairing: scope.transport.pairing,
         notificationsAllowed: _phone?.notificationsAllowed ?? false,
         installedToHome: _phone?.installedToHome ?? false,
+        secureOrigin: _phone?.secureOrigin ?? false,
       );
 
   Future<void> _send(Feeling f, double intensity) async {
@@ -242,6 +243,7 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
                         platform: scope.transport.role == TransportRole.host ? 'android' : 'pwa',
                         facts: setup,
                         hostAddress: scope.link.address,
+                        setupAddress: scope.link.setupAddress,
                       )
                     else
                       // Every region keeps its state and its scroll, so they are all built and

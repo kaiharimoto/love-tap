@@ -35,7 +35,8 @@ class SetupFacts {
     required this.paired,
     required this.notificationsAllowed,
     required this.installedToHome,
-    required this.certificateVerified,
+    required this.certificate,
+    this.secureOrigin = false,
     required this.mineInSpine,
     required this.theirsInSpine,
   });
@@ -49,8 +50,23 @@ class SetupFacts {
   /// PWA only: running from the Home Screen rather than from a browser tab.
   final bool installedToHome;
 
-  /// The link came up over a certificate this device actually trusts.
-  final bool certificateVerified;
+  /// The fingerprint of the certificate the link is actually running on: what the host is
+  /// serving, or what the client pinned when the two people said the six words in one room.
+  ///
+  /// This used to be a bool derived from `link.state == connected || listening`, and the host was
+  /// serving plain HTTP, so the step ticked for every connection that had no certificate in it at
+  /// all. A checklist that can tick for a thing that did not happen is worse than one step short,
+  /// and a code critic was right to call it the worst thing in the transport.
+  final String? certificate;
+
+  /// The link came up over a certificate this device can name. On the PWA this stays false even
+  /// when Safari is perfectly happy, because Safari does not hand the page what it validated —
+  /// there [secureOrigin] is what the browser will say for itself.
+  bool get certificateVerified => (certificate ?? '').isNotEmpty || secureOrigin;
+
+  /// PWA only: `window.isSecureContext`. The one thing the browser will tell the page about its
+  /// own origin, and the thing the service worker actually turns on.
+  final bool secureOrigin;
   final bool mineInSpine;
   final bool theirsInSpine;
 
@@ -100,15 +116,14 @@ const List<SetupStep> kAndroidSetup = [
   ),
 ];
 
-/// The PWA list. An iPhone needs two things Android does not: the app has to leave Safari, and the
-/// certificate goes in through a profile rather than a prompt.
+/// The PWA list. An iPhone needs two things Android does not: the certificate goes in through a
+/// profile rather than a prompt, and the app has to leave Safari.
+///
+/// In that order, and it is not arbitrary. A page served on an origin the phone does not trust is
+/// not a secure context: no service worker, so no push, and storage the browser feels free to
+/// evict. Adding *that* to the home screen gets you a home-screen app with those properties baked
+/// in. The profile first, then the home screen.
 const List<SetupStep> kPwaSetup = [
-  SetupStep(
-    id: 'home',
-    title: 'add it to the home screen',
-    detail: 'share, then add to home screen. it will not hold on to anything until you do.',
-    observedBy: 'waiting to be opened from the home screen rather than from a tab',
-  ),
   SetupStep(
     id: 'tailnet',
     title: 'put this phone on the tailnet',
@@ -118,9 +133,15 @@ const List<SetupStep> kPwaSetup = [
   SetupStep(
     id: 'certificate',
     title: 'install the profile the other phone is serving',
-    detail: 'open its address in Safari, take the profile, then trust it in settings under about, '
-        'certificate trust settings.',
+    detail: 'the other phone shows a second address for this one thing. open it in safari, take '
+        'the profile, then turn it on in settings under about, certificate trust settings.',
     observedBy: 'waiting for the first connection that verifies',
+  ),
+  SetupStep(
+    id: 'home',
+    title: 'add it to the home screen',
+    detail: 'share, then add to home screen. it will not hold on to anything until you do.',
+    observedBy: 'waiting to be opened from the home screen rather than from a tab',
   ),
   SetupStep(
     id: 'pair',
@@ -192,6 +213,7 @@ SetupFacts factsFrom({
   required Pairing? pairing,
   required bool notificationsAllowed,
   required bool installedToHome,
+  bool secureOrigin = false,
 }) {
   final all = spine.all;
   final me = spine.identity.person;
@@ -201,7 +223,8 @@ SetupFacts factsFrom({
     paired: pairing,
     notificationsAllowed: notificationsAllowed,
     installedToHome: installedToHome,
-    certificateVerified: link.state == LinkState.connected || link.state == LinkState.listening,
+    certificate: link.certificate,
+    secureOrigin: secureOrigin,
     mineInSpine: all.any((e) => e.author == me && _counts(e.type)),
     theirsInSpine: all.any((e) => e.author != me && _counts(e.type)),
   );
@@ -211,3 +234,14 @@ SetupFacts factsFrom({
 bool _counts(String type) => const {
       'message', 'photo', 'video', 'voice_note', 'feeling', 'ping', 'reaction',
     }.contains(type);
+
+/// The certificate's fingerprint in the form a person can actually read out loud.
+///
+/// Thirty-two pairs of hex is not something anybody says correctly, and a comparison nobody
+/// completes is a comparison that always passes. The two ends are what a substituted certificate
+/// would have to match, so they are what gets shown on both phones and compared by eye.
+String spokenFingerprint(String fingerprint) {
+  final parts = fingerprint.split(':');
+  if (parts.length <= 8) return parts.join(' ');
+  return '${parts.take(4).join(' ')} … ${parts.skip(parts.length - 4).join(' ')}';
+}

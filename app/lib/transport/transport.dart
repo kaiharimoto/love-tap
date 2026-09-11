@@ -44,6 +44,8 @@ class TransportStatus {
     this.lastError,
     this.since,
     this.lastContact,
+    this.certificate,
+    this.setupAddress,
   });
 
   /// 'local' or 'tailscale'. Appears in every report.
@@ -63,6 +65,19 @@ class TransportStatus {
   final DateTime? since;
   final DateTime? lastContact;
 
+  /// The fingerprint of the certificate actually in use on this link — the one the host is
+  /// serving, or the one the client pinned when it paired. Null means there is none, which is the
+  /// truth on the local transport and was the truth everywhere until the host learned to bind
+  /// with one. The setup list reads this and nothing else for its certificate step: it used to
+  /// tick on `state == connected`, which is to say it ticked for a connection with no certificate
+  /// in it at all.
+  final String? certificate;
+
+  /// Host only: the plain address the *other* phone opens before anything is trusted, which hands
+  /// over the certificate and nothing else. Null everywhere else, and null on a host with no
+  /// certificate to hand over.
+  final String? setupAddress;
+
   TransportStatus copyWith({
     LinkState? state,
     String? address,
@@ -71,6 +86,8 @@ class TransportStatus {
     String? lastError,
     DateTime? since,
     DateTime? lastContact,
+    String? certificate,
+    String? setupAddress,
     bool clearError = false,
   }) =>
       TransportStatus(
@@ -83,6 +100,8 @@ class TransportStatus {
         lastError: clearError ? null : (lastError ?? this.lastError),
         since: since ?? this.since,
         lastContact: lastContact ?? this.lastContact,
+        certificate: certificate ?? this.certificate,
+        setupAddress: setupAddress ?? this.setupAddress,
       );
 
   Map<String, dynamic> toJson() => {
@@ -95,6 +114,8 @@ class TransportStatus {
         'last_error': lastError,
         'since': since?.toIso8601String(),
         'last_contact': lastContact?.toIso8601String(),
+        'certificate': certificate,
+        'setup_address': setupAddress,
       };
 }
 

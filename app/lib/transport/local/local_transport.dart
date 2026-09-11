@@ -32,6 +32,18 @@ class LocalBinding implements Binding {
 
   @override
   http.Client makeClient() => http.Client();
+
+  /// There is no certificate on the loopback and there is not supposed to be one. Saying so is
+  /// the point: the setup list's certificate step reads this, so a development build tells the
+  /// truth about itself rather than ticking a step it has not done.
+  @override
+  String? certificateSeen() => null;
+
+  @override
+  void pinCertificate(String? fingerprint) {}
+
+  @override
+  String Function()? get certificatePem => null;
 }
 
 class LocalTransport extends HttpTransport {

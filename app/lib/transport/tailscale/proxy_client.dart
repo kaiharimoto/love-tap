@@ -10,3 +10,12 @@ import 'proxy_client_stub.dart' if (dart.library.io) 'proxy_client_io.dart';
 
 /// A client that reaches the tailnet. An empty [proxy] means the platform routes there itself.
 http.Client tailnetClient({String proxy = ''}) => makeTailnetClient(proxy);
+
+/// Accept this certificate and no other. Null clears the pin.
+void pinTailnetCertificate(String? fingerprint) => setPinnedFingerprint(fingerprint);
+
+/// The certificate the last connection actually presented, if this platform lets us see it.
+String? tailnetCertificateSeen() => lastSeenFingerprint();
+
+/// The pin in force, for the report. Never a key, and never enough to impersonate anything.
+String? tailnetCertificatePinned() => pinnedFingerprint;

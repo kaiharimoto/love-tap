@@ -18,9 +18,12 @@
 // authentication — it is only the reason nobody else can see the traffic.
 import 'package:http/http.dart' as http;
 
+import 'dart:io';
+
 import '../protocol/http_transport.dart';
 import '../transport.dart';
 import '../../spine/spine.dart';
+import 'certificate.dart';
 import 'proxy_client.dart';
 import 'tailnet.dart';
 
@@ -30,6 +33,7 @@ class TailscaleBinding implements Binding {
     this.declaredAddress = '',
     this.peerAddress = '',
     this.userspaceProxy = '',
+    this.certificateDir,
     ScriptedFaults? faults,
   }) : faults = faults ?? ScriptedFaults();
 
@@ -68,6 +72,15 @@ class TailscaleBinding implements Binding {
   /// The tailnet address this host answers on, whichever address the socket is bound to.
   String? reachableAt;
 
+  /// The certificate this host is serving on, once it has one. Its fingerprint goes into the
+  /// status and the capture record so the tick on the setup list is about a thing that happened.
+  HostCertificate? certificate;
+
+  /// Where the key and certificate live. Injected so a test can put them in a temp directory and
+  /// the capture can put them in its own scratch; on a phone it is the app's private storage,
+  /// which the manifest excludes from every backup.
+  final Future<Directory> Function()? certificateDir;
+
   @override
   Future<HostBind> hostBind() async {
     // Checked first and in both modes: a node that is not on the tailnet does not serve, and a
@@ -75,7 +88,22 @@ class TailscaleBinding implements Binding {
     final address = await addressToServeOn(declared: declaredAddress);
     reachableAt = address;
     boundTo = isUserspace ? '127.0.0.1' : address;
-    return HostBind(address: boundTo!, port: port);
+    // And it serves over TLS, which it did not before: `HostBind` has carried a `securityContext`
+    // since the protocol was written and nothing ever passed one, so the host answered plain HTTP
+    // while the setup list ticked a certificate step and the docs told the reader to open https.
+    // A page served over http at a 100.64/10 address is not a secure context, so Safari gives the
+    // iPhone no `navigator.serviceWorker` and the push surface cannot exist at all.
+    //
+    // The certificate is made on the phone, for the address it is actually serving on, and kept in
+    // the app's own storage. Nothing here is a certificate authority: it signs itself, and what
+    // authenticates the two phones to each other is still the six spoken words and the key they
+    // derive. This only makes the origin secure.
+    final where = certificateDir;
+    if (where != null) {
+      certificate = await certificateIn(await where(), reachableAt ?? boundTo!);
+    }
+    return HostBind(
+        address: boundTo!, port: port, securityContext: certificate?.context);
   }
 
   @override
@@ -95,11 +123,28 @@ class TailscaleBinding implements Binding {
     return uri;
   }
 
+  // https, because the host binds securely now. A client that reaches an older host over http is
+  // reaching a build that predates this and the link simply will not come up, which is the honest
+  // failure: the two phones are updated together or not at all.
   String _url(String address) =>
-      address.contains(':') ? 'http://[$address]:$port' : 'http://$address:$port';
+      address.contains(':') ? 'https://[$address]:$port' : 'https://$address:$port';
 
   @override
   http.Client makeClient() => tailnetClient(proxy: userspaceProxy);
+
+  /// Host: the certificate this phone is serving. Client: the one the other phone presented on
+  /// the last connection. Either way it is read off the thing that happened, which is the whole
+  /// point — the setup list's certificate step used to tick on `state == connected`, and a
+  /// connection with no certificate in it satisfied that perfectly.
+  @override
+  String? certificateSeen() => certificate?.fingerprint ?? tailnetCertificateSeen();
+
+  @override
+  void pinCertificate(String? fingerprint) => pinTailnetCertificate(fingerprint);
+
+  @override
+  String Function()? get certificatePem =>
+      certificate == null ? null : () => certificate!.certificatePem;
 }
 
 /// The transport the two phones use. Nothing here but the binding: the protocol is the one in
@@ -114,6 +159,7 @@ Transport tailscaleTransport({
   String userspaceProxy = '',
   String? pwaRoot,
   String? Function(Event e)? refuses,
+  Future<Directory> Function()? certificateDir,
 }) =>
     HttpTransport(
       role: role,
@@ -123,6 +169,7 @@ Transport tailscaleTransport({
       refuses: refuses,
       binding: TailscaleBinding(
         port: port,
+        certificateDir: certificateDir,
         declaredAddress: declaredAddress,
         peerAddress: peerAddress,
         userspaceProxy: userspaceProxy,

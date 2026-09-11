@@ -114,7 +114,7 @@ void main() {
             paired: null,
             notificationsAllowed: false,
             installedToHome: platform == 'android',
-            certificateVerified: false,
+            certificate: null,
             mineInSpine: false,
             theirsInSpine: false,
           ),

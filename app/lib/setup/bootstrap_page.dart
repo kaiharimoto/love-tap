@@ -2,13 +2,21 @@
 //
 // An iPhone will not trust a certificate it has not been given, and it will not take one from
 // inside an app: it has to come as a configuration profile, opened in Safari, and then trusted by
-// hand in Settings. So the host serves one page over plain HTTP on its tailnet address, and that
-// page hands over exactly one thing — the certificate the host will present, as a profile.
+// hand in Settings. So the host keeps one small listener in the clear, on the port above the one
+// it serves the app on, and that page hands over exactly one thing — the certificate the host
+// will present, as a profile.
+//
+// In the clear on purpose, and it is the only thing that is. Behind the certificate, the page
+// that exists to get the certificate trusted would itself be untrusted: the person would meet a
+// full-page security warning and have to click through it to reach the fix. Teaching somebody to
+// click through that warning on their own phone is worse than serving a public key in the open.
 //
 // Nothing secret crosses here and nothing needs to. A certificate is a public key and a name; it
 // is not a credential. The six words are what proves the two phones to each other, and they are
 // said out loud in the same room, never served.
 import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 
 /// A configuration profile carrying one certificate authority, for iOS and macOS.
 ///
@@ -22,6 +30,7 @@ String mobileConfig({
   required String profileUuid,
   required String payloadUuid,
 }) {
+  assert(profileUuid != payloadUuid, 'the profile and its payload are two different things');
   final der = base64.encode(certificateDer);
   final wrapped = <String>[];
   for (var i = 0; i < der.length; i += 64) {
@@ -102,4 +111,17 @@ String bootstrapPage({required String hostName, required String address, require
      in between. Nothing either of you has written goes through here.</p>
 </main></body></html>
 ''';
+}
+
+/// A UUID derived from the certificate rather than drawn at random.
+///
+/// iOS replaces a profile that has the same identifier and UUID and adds a second one otherwise,
+/// so a random UUID would leave a phone with a list of near-identical profiles after every
+/// reinstall and no way to tell which is live. [salt] separates the profile's own UUID from its
+/// payload's, which must not be equal.
+String uuidFor(String fingerprint, String salt) {
+  final d = sha256.convert(utf8.encode('$salt:$fingerprint')).bytes;
+  String hex(int from, int to) =>
+      d.sublist(from, to).map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+  return '${hex(0, 4)}-${hex(4, 6)}-${hex(6, 8)}-${hex(8, 10)}-${hex(10, 16)}'.toUpperCase();
 }

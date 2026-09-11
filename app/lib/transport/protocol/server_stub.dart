@@ -18,6 +18,7 @@ class HostServer {
     required void Function(int cursor) onPeerContact,
     String? pwaRoot,
     String? Function(Event e)? refuses,
+    String Function()? certificatePem,
   });
 
   /// Requests turned away, and which check each one failed. Always empty here: the PWA does not
@@ -25,6 +26,9 @@ class HostServer {
   final List<String> refusals = const [];
 
   Future<void> listen(HostBind bind) async => throw UnsupportedError('the PWA does not host');
+
+  /// Nothing to open before anything is trusted: the PWA is the phone doing the opening.
+  String? get setupAddress => null;
 
   void queueForClient(Ephemeral frame) {}
 

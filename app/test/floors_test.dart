@@ -168,11 +168,20 @@ void main() {
   test('a setup step ticks on something observed, and un-ticks when it goes away', () {
     SetupFacts facts({bool allowed = false, bool home = false}) => SetupFacts(
           platform: 'pwa',
-          link: const TransportStatus(name: 'local', role: TransportRole.client, state: LinkState.stopped),
+          // On the tailnet and carrying a certificate, so the two steps before this one are done
+          // and 'home' is the one being worked on. The PWA list is in the order it has to happen:
+          // the profile before the home screen, because adding an untrusted origin to the home
+          // screen bakes in a home-screen app with no service worker and evictable storage.
+          link: const TransportStatus(
+              name: 'tailscale',
+              role: TransportRole.client,
+              state: LinkState.connected,
+              address: '100.72.198.108:8443'),
           paired: null,
           notificationsAllowed: allowed,
           installedToHome: home,
-          certificateVerified: false,
+          certificate: null,
+          secureOrigin: true,
           mineInSpine: false,
           theirsInSpine: false,
         );

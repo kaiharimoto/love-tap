@@ -25,6 +25,21 @@ abstract class Binding {
   /// An HTTP client for the client role (may carry a TLS context or a SOCKS proxy).
   http.Client makeClient();
 
+  /// Host: the fingerprint of the certificate this device is serving, once it is bound.
+  /// Client: the fingerprint of the certificate the last connection actually presented.
+  ///
+  /// Null where there is no TLS, which is the honest answer on the local transport. The point of
+  /// reading it rather than storing it is that the pin is then a thing that was seen on the wire
+  /// and not a thing somebody configured.
+  String? certificateSeen() => null;
+
+  /// Client: accept this certificate and no other from here on. Null clears the pin.
+  void pinCertificate(String? fingerprint) {}
+
+  /// Host: the certificate being served, as PEM — the public half, which is what the other phone
+  /// has to be given before it can trust anything. Null where there is none.
+  String Function()? get certificatePem => null;
+
   FaultInjector get faults;
 }
 
@@ -139,13 +154,28 @@ class HttpTransport implements Transport {
             state: LinkState.connected, peerCursor: cursor, ourCursor: spine.cursor, lastContact: DateTime.now().toUtc())),
         pwaRoot: pwaRoot,
         refuses: (e) => refuses?.call(e),
+        certificatePem: binding.certificatePem,
       );
       await _server!.listen(bind);
-      _set(_status.copyWith(state: LinkState.listening, address: '${bind.address}:${bind.port}', ourCursor: spine.cursor));
+      _set(_status.copyWith(
+          state: LinkState.listening,
+          address: '${bind.address}:${bind.port}',
+          ourCursor: spine.cursor,
+          certificate: binding.certificateSeen(),
+          setupAddress: _server!.setupAddress));
     } else {
+      // The pin comes back before the client is made, so the very first request of the session is
+      // checked against it too. A phone that has paired and then meets a different certificate at
+      // the same address is meeting a different phone, and it refuses rather than asks.
+      final pinned = await spine.meta('transport.certificate');
+      binding.pinCertificate(pinned);
       _client = binding.makeClient();
       _base = await binding.clientBase(await spine.meta('transport.host_address'));
-      _set(_status.copyWith(state: _pairing == null ? LinkState.connecting : LinkState.connecting, address: _base.toString(), ourCursor: spine.cursor));
+      _set(_status.copyWith(
+          state: _pairing == null ? LinkState.connecting : LinkState.connecting,
+          address: _base.toString(),
+          ourCursor: spine.cursor,
+          certificate: pinned));
     }
   }
 
@@ -370,7 +400,21 @@ class HttpTransport implements Transport {
       pairedAt: DateTime.now().toUtc(),
     );
     await _storePairing(p, key);
-    _set(_status.copyWith(state: LinkState.connected, address: base.toString(), lastContact: DateTime.now().toUtc(), clearError: true));
+    // The six words authenticate the phone; the phone is presenting a certificate; so the words
+    // are what vouches for the certificate, and this is the one moment where that is true. It is
+    // written down here and checked on every request after — the client is trust-on-first-use, and
+    // the first use is the one time two people are in the same room saying words out loud.
+    final seen = binding.certificateSeen();
+    if (seen != null && seen.isNotEmpty) {
+      await spine.setMeta('transport.certificate', seen);
+      binding.pinCertificate(seen);
+    }
+    _set(_status.copyWith(
+        state: LinkState.connected,
+        address: base.toString(),
+        lastContact: DateTime.now().toUtc(),
+        certificate: seen,
+        clearError: true));
     return p;
   }
 
@@ -380,6 +424,10 @@ class HttpTransport implements Transport {
     _key = null;
     await spine.setMeta('transport.pairing', null);
     await spine.setMeta('transport.key', null);
+    // And the certificate: replacing a device means the next one presents its own, and a stale pin
+    // would refuse it forever with an error about a certificate nobody could see.
+    await spine.setMeta('transport.certificate', null);
+    binding.pinCertificate(null);
   }
 
   @override

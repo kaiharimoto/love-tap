@@ -28,16 +28,33 @@ everything, writes into it while offline, and pushes what it wrote when the host
    the app says so and does not start serving on anything else — there is no fallback in the code
    and `app/test/tailnet_test.dart` is there to keep it that way.
 
-3. **The web app added to the iPhone's home screen.**
-   Open the host's address in Safari, share, add to home screen. It will not hold on to anything
-   until it is opened from the home screen rather than from a tab — an iOS rule, not ours, and the
-   setup list waits for it rather than pretending.
+3. **The profile trusted.**
+   The host serves over HTTPS with a certificate it made on the phone, at first start, for the
+   tailnet address it is actually serving on. The key is written into the app's own storage, which
+   the manifest excludes from the cloud backup and from the phone-to-phone transfer, and it never
+   leaves there.
 
-4. **The profile trusted.**
-   The host serves over HTTPS with a certificate it made itself. Open its address in Safari, take
-   the profile, then trust it under Settings → General → About → Certificate Trust Settings. This
-   is the fiddliest step and there is no way round it: the alternative is a certificate authority
-   that has heard of your phones, and none has.
+   Nothing has heard of that certificate, so it has to be handed over before it can be trusted,
+   and it cannot be handed over from behind itself. So the host keeps one small listener in the
+   clear on the port above the app's — `http://100.x.y.z:8444/setup` — which serves two things and
+   404s everything else: a page saying what to do, and the certificate as a configuration profile.
+   Take the profile, install it from the top of Settings, then turn it on under Settings → General
+   → About → Certificate Trust Settings. iOS will not offer that switch until the profile is in.
+
+   Both phones show the two ends of the certificate's fingerprint on the setup sheet. They are
+   the same digest Safari will show you. If they do not match, something is in between: stop, and
+   do not say the six words.
+
+   This is the fiddliest step and there is no way round it: the alternative is a certificate
+   authority that has heard of your phones, and none has.
+
+4. **The web app added to the iPhone's home screen.**
+   Open the host's address — `https://100.x.y.z:8443` — in Safari, share, add to home screen. It
+   will not hold on to anything until it is opened from the home screen rather than from a tab —
+   an iOS rule, not ours, and the setup list waits for it rather than pretending. Doing this after
+   the profile rather than before it matters: a page served over plain HTTP at a 100.64/10 address
+   is not a secure context, so Safari gives it no `navigator.serviceWorker` at all and the push
+   surface simply does not exist.
 
 5. **The six words, read out loud.**
    The host shows six words. Say them in the same room; type them into the iPhone. They are good
@@ -111,14 +128,17 @@ before every build you install over the last one, or Android refuses the update.
 ### The iPhone
 
 There is nothing to install and nothing to sideload. With both phones on the tailnet and the
-Android app running, open the address it shows in Safari — `https://100.x.y.z:8443` — and use
-**Share → Add to Home Screen**. What that adds is the app: it runs full screen with no browser
-chrome, keeps its own copy of the log in the browser's storage, and works with the other phone
-switched off.
+Android app running, first open the setup address the Android phone shows —
+`http://100.x.y.z:8444/setup` — and take the profile from it (step 3 above). Then open
+`https://100.x.y.z:8443` and use **Share → Add to Home Screen**. What that adds is the app: it
+runs full screen with no browser chrome, keeps its own copy of the log in the browser's storage,
+and works with the other phone switched off.
 
-Safari will warn about the certificate the first time, because the Android phone signs its own —
-there is no certificate authority that has heard of your phones, and there is nothing for one to
-verify that the six words do not verify better. Accept it once.
+Do the profile first. Safari will otherwise warn about the certificate, because the Android phone
+signs its own — there is no certificate authority that has heard of your phones, and there is
+nothing for one to verify that the six words do not verify better. Clicking through that warning
+does reach the app, but the origin stays untrusted, and an untrusted origin is not a secure
+context: no service worker, no push, and storage the browser feels free to evict.
 
 Two things the iPhone cannot do, and what it does instead:
 

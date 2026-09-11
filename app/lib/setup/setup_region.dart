@@ -18,6 +18,7 @@ class SetupSheet extends StatelessWidget {
     required this.platform,
     required this.facts,
     this.hostAddress,
+    this.setupAddress,
     this.onShowWords,
   });
 
@@ -26,6 +27,11 @@ class SetupSheet extends StatelessWidget {
 
   /// The address the other phone is serving its certificate and its six words from.
   final String? hostAddress;
+
+  /// Host only: the address to open on the *other* phone before anything is trusted. It is not
+  /// the same address as [hostAddress] and it is deliberately not encrypted — see the comment at
+  /// the top of bootstrap_page.dart.
+  final String? setupAddress;
   final VoidCallback? onShowWords;
 
   @override
@@ -93,10 +99,55 @@ class SetupSheet extends StatelessWidget {
               ],
             ),
           ),
+        if (facts.certificate != null)
+          _Sheet(
+            id: 'setup.fingerprint',
+            row: steps.length + 2,
+            width: width,
+            stock: stock,
+            lib: lib,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  platform == 'android'
+                      ? 'the certificate this phone is presenting'
+                      : 'the certificate the other phone presented',
+                  style: Hands.margin(size: 13),
+                ),
+                const SizedBox(height: 2),
+                // Both ends of the digest, which is what a person can hold in their head long
+                // enough to compare with the other screen. It is shown on both phones; if the two
+                // do not match, something is in between and the six words should not be said.
+                Text(spokenFingerprint(facts.certificate!),
+                    style: Hands.stamp(size: 15, spacing: 0.6)),
+              ],
+            ),
+          ),
+        if (setupAddress != null)
+          _Sheet(
+            id: 'setup.bootstrap',
+            row: steps.length + 3,
+            width: width,
+            stock: stock,
+            lib: lib,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('open this on the iphone first', style: Hands.margin(size: 13)),
+                Text(setupAddress!, style: Hands.stamp(size: 15, spacing: 0.6)),
+                const SizedBox(height: 4),
+                Text('it hands over the certificate and nothing else.',
+                    style: Hands.margin(size: 13)),
+              ],
+            ),
+          ),
         if (onShowWords != null)
           _Sheet(
             id: 'setup.words',
-            row: steps.length + 2,
+            row: steps.length + 4,
             width: width,
             stock: stock,
             lib: lib,

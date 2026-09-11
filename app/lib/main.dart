@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:ui' show PlatformDispatcher;
 
 import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
 
 import 'ambient/ambient.dart';
 import 'app.dart';
@@ -132,6 +134,11 @@ Future<AppScope> bootstrap() async {
         port: Flags.port == 8480 ? 8443 : Flags.port,
         declaredAddress: Flags.tailnetAddress,
         peerAddress: Flags.peerAddress,
+        // The key and certificate live in the app's own storage, which the Android manifest
+        // excludes from the cloud backup and from the phone-to-phone transfer. They are made once,
+        // on the phone, for the address it is actually serving on.
+        certificateDir: () async =>
+            Directory('${(await getApplicationSupportDirectory()).path}/tls'),
       );
     default:
       throw UnsupportedError('transport ${Flags.transport} is not built yet');
