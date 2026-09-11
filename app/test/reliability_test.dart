@@ -4,6 +4,8 @@
 // suite over 'tailscale'.
 import 'dart:convert';
 import 'dart:io';
+
+import 'where_the_evidence_goes.dart';
 import 'dart:typed_data';
 
 import 'package:desk/spine/projections/thread.dart';
@@ -361,7 +363,7 @@ void main() {
       'ordering': monotonic ? 'monotonic' : 'broken',
       'faults_injected': faultLog,
     };
-    final out = File('../evidence/reliability.json');
+    final out = recordAt('../evidence/reliability.json');
     await out.parent.create(recursive: true);
     // The local run's results are its own, but the tailnet block is not its to delete. It was
     // deleting it: this half rewrites the file whole, so a tailnet run that had happened was gone
@@ -397,7 +399,7 @@ void main() {
   test('reliability report over the tailscale transport', () async {
     final a = File('../toolchain/ts/a/address');
     final b = File('../toolchain/ts/b/address');
-    final report = File('../evidence/reliability.json');
+    final report = recordAt('../evidence/reliability.json');
     Map<String, dynamic> existing = {};
     if (await report.exists()) {
       existing = jsonDecode(await report.readAsString()) as Map<String, dynamic>;

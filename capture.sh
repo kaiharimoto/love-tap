@@ -94,6 +94,13 @@ since() { local t=$(( $(date +%s) - STARTED_AT )); printf '%d:%02d' $((t / 60)) 
 # SKIP_TESTS=yes is for re-running one scene against artifacts already taken; a whole run does not
 # take it.
 if [ "${SKIP_TESTS:-no}" != "yes" ]; then
+  # DESK_WRITE_EVIDENCE: this run's numbers are the set's, so reliability.json and coldstart.json
+  # are written here and by nothing else. Two tests write those files and they used to write them
+  # on every run — a completeness critic ran `flutter test` once to check a rule and had to restore
+  # both with `git checkout` afterwards, and said so in its own report. Anything that runs the
+  # suite after a capture otherwise replaces them with a record of a different run, and the set
+  # that ships then says it was written by a capture that did not write it.
+  export DESK_WRITE_EVIDENCE=1
   echo "· running the test suite before anything is photographed"
   if (cd app && flutter test) > "$LOG/tests.log" 2>&1; then
     tail -1 "$LOG/tests.log"

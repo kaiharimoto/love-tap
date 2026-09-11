@@ -21,10 +21,11 @@ import 'package:desk/transport/transport.dart';
 import 'package:desk/transport/tailscale/tailnet.dart';
 import 'package:desk/transport/tailscale/tailscale_transport.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'where_the_evidence_goes.dart';
 import 'wire_path.dart';
 
 const _tsBin = '../toolchain/ts/bin/tailscale';
-const _out = '../evidence/coldstart.json';
+const _outPath = '../evidence/coldstart.json';
 
 Future<Map<String, dynamic>?> _status(String node) async {
   try {
@@ -81,7 +82,7 @@ void main() {
       // sentence saying the nodes were not up, because a daemon had been reaped between the run
       // and the next `flutter test`. Evidence of something that occurred is not invalidated by a
       // later session being unable to repeat it; it is dated and kept.
-      final out = File(_out);
+      final out = recordAt(_outPath);
       if (await out.exists()) {
         final was = jsonDecode(await out.readAsString());
         if (was is Map && was['status'] == 'ran') {
@@ -207,7 +208,7 @@ void main() {
         .where((p) => '${p['HostName']}'.contains('lovetap-a'))
         .firstOrNull;
 
-    await File(_out).writeAsString(const JsonEncoder.withIndent(' ').convert({
+    await recordAt(_outPath).writeAsString(const JsonEncoder.withIndent(' ').convert({
       'transport': 'tailscale',
       'status': 'ran',
       'nodes': {'host': aSelf, 'client': bSelf},
