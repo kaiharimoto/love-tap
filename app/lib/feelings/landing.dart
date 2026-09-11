@@ -26,6 +26,7 @@ import 'package:flutter/scheduler.dart';
 import '../capture/hooks.dart';
 import '../flags.dart';
 import '../material/hands.dart';
+import '../material/slip.dart';
 import '../spine/spine.dart' show Person;
 import '../material/palette.dart';
 import '../material/objects.dart';
@@ -407,23 +408,39 @@ class _Landing extends StatelessWidget {
         ),
         if (written > 0)
           Positioned(
-            left: x - box * 0.75,
-            top: y + box / 2 + 2,
-            width: box * 1.5,
+            left: x - box * 0.6,
+            top: y + box / 2 - 4,
+            width: box * 1.2,
             child: Opacity(
               opacity: written,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(arrival.feeling.name,
-                      style: Hands.onDesk(size: 10 * scale.clamp(0.6, 1.4)),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center),
-                  Text('$hh:$mm${arrival.mine ? '' : ' · ${arrival.from.name}'}',
-                      style: Hands.onDesk(size: 8.5 * scale.clamp(0.6, 1.4)),
-                      textAlign: TextAlign.center),
-                ],
+              // On a slip, not on whatever it landed on.
+              //
+              // Written straight onto the ground it was the hand the *desk* is written in, which
+              // is a pale warm grey: legible on wood and a ghost on paper. The landing lands
+              // wherever the region has put its cards, so the name came out drawn through the
+              // rituals card's own writing — measured on 07 frame 360, which is exactly as bad as
+              // carrying no name at all. No one colour reads on both grounds, so the label brings
+              // its own: a thing that arrives with who it is from written on it is a parcel, which
+              // is what a feeling sent from one phone to another is.
+              child: Slip(
+                id: 'landing.${arrival.feeling.id}',
+                row: 1,
+                stock: 'receipt',
+                width: box * 1.2,
+                padding: const EdgeInsets.fromLTRB(6, 3, 6, 4),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(arrival.feeling.name,
+                        style: Hands.margin(size: 10 * scale.clamp(0.6, 1.4)),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center),
+                    Text('$hh:$mm${arrival.mine ? '' : ' · ${arrival.from.name}'}',
+                        style: Hands.margin(size: 8.5 * scale.clamp(0.6, 1.4)),
+                        textAlign: TextAlign.center),
+                  ],
+                ),
               ),
             ),
           ),
