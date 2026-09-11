@@ -294,14 +294,17 @@ def main():
         "floor": floor,
         "floor_from": derived or "the packed library was not on disk; fell back to 2.0",
         "negative_control": negative_control(a.box),
-        "the_one_it_used_to_get_wrong": "the sky of the photograph open in 14_media_viewer. It is "
-                "pale, warm enough to pass the colour test, and it is content rather than a surface "
-                "this build answers for; an anti-goal critic reproduced the old numbers and "
-                "disagreed with that verdict, correctly. A filter that excluded it by how busy its "
-                "surroundings are also excluded every real slab, so it was named here instead. "
-                "Against the derived floor it no longer trips: the sky's flattest window reads "
-                "0.619, which is above 0.363, because a photograph of the sky through a lens still "
-                "carries sensor grain and a flat fill carries nothing.",
+        "the_one_it_used_to_get_wrong": "the sky of the photograph open in 14_media_viewer. This "
+                "file used to say the sky no longer tripped the check because its flattest window "
+                "read 0.619 — and an anti-goal critic measured the same still over the same "
+                "windows and found sixty-one under 0.5, one of them a hundred per cent a single "
+                "RGB triple at standard deviation exactly zero. The claim was wrong and the "
+                "sampling was the reason: a window grid at step 40 lands where it lands. "
+                "`flat_areas` finds the flat shapes directly now and 14_media_viewer has eight of "
+                "them covering thirteen per cent of the frame, which is what a photograph of a sky "
+                "actually is. What separates that from a fault is not how flat it is but what "
+                "colour it is: `sheets_with_no_paper_on_them` names only the shapes whose colour "
+                "is one of the app's own paper fallback fills, and none of the sky's is.",
         "quiet_is_not_flat": "windows_quieter_than_2 is what this check used to gate on, kept "
                 "because four cycles of reports carry it. It is not a fault: receipt stock's own "
                 "median window is under it, and the 05_settings windows it names are lined writing "
