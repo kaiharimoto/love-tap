@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 
 import 'ambient/ambient.dart';
+import 'capture/hooks.dart' show DrivenClock;
 import 'feelings/registry.dart';
 import 'feelings/sensation.dart';
 import 'flags.dart';
@@ -77,6 +78,19 @@ class AppScope extends ChangeNotifier {
   /// Partner typing, from ephemeral frames; expires on its own.
   bool partnerTyping = false;
   Timer? _typingTimer;
+
+  /// When the typing frame runs out, on the clock the app is actually running on.
+  ///
+  /// This was a six-second `Timer`, which is the wall clock, and under capture the app runs on a
+  /// driven one: a screenshot of a 1080 by 2340 page at three times scale and the round trip that
+  /// writes the report take seconds of wall time between two steps of app time. A messenger critic
+  /// caught the result — 13_messenger_states shows 'noor writing…' on the glass at full resolution
+  /// and its own report, claiming to have been read at the shutter, records partner_typing false.
+  /// Both were true, four wall-clock seconds apart, which makes every other field in that record
+  /// one degree less checkable.
+  Duration? _typingUntil;
+  StreamSubscription<Duration>? _typingTicks;
+  static const _typingLasts = Duration(seconds: 6);
   StreamSubscription<SpineChange>? _sub;
   StreamSubscription<TransportStatus>? _tsub;
   StreamSubscription<Ephemeral>? _esub;
@@ -161,11 +175,23 @@ class AppScope extends ChangeNotifier {
     if (e.kind == 'typing') {
       partnerTyping = e.data['on'] == true;
       _typingTimer?.cancel();
+      _typingUntil = null;
       if (partnerTyping) {
-        _typingTimer = Timer(const Duration(seconds: 6), () {
-          partnerTyping = false;
-          notifyListeners();
-        });
+        if (DrivenClock.enabled) {
+          _typingUntil = DrivenClock.now + _typingLasts;
+          _typingTicks ??= DrivenClock.ticks.listen((now) {
+            final until = _typingUntil;
+            if (until == null || now < until) return;
+            _typingUntil = null;
+            partnerTyping = false;
+            notifyListeners();
+          });
+        } else {
+          _typingTimer = Timer(_typingLasts, () {
+            partnerTyping = false;
+            notifyListeners();
+          });
+        }
       }
       notifyListeners();
     }
@@ -226,6 +252,7 @@ class AppScope extends ChangeNotifier {
     _tsub?.cancel();
     _esub?.cancel();
     _typingTimer?.cancel();
+    _typingTicks?.cancel();
     sensation.dispose();
     super.dispose();
   }

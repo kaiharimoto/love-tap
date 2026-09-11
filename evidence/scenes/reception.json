@@ -134,6 +134,25 @@
    "do": "notifications",
    "out": "evidence/logs/reception.json",
    "from": "push/"
+  },
+  {
+   "do": "reopenApp",
+   "settle": 1200,
+   "why": "Somebody picks the phone up again. Everything before this is the phone holding things while nobody is looking; what it is holding can only be read from the app, through the platform's own getNotifications, and after closeApp there is no app to ask \u2014 so `held_by_the_phone` was empty in all nineteen reports and an emotional critic read the pocket surface as never shown anywhere in the set."
+  },
+  {
+   "do": "wait",
+   "ms": 900
+  },
+  {
+   "do": "shot",
+   "out": "evidence/crops/reception_picked_up.png",
+   "settle": 400
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/reception_picked_up.report.json",
+   "at": "crops/reception_picked_up.png"
   }
  ]
 }

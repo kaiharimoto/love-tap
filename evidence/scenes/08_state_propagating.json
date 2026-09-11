@@ -182,6 +182,97 @@
    }
   },
   {
+   "do": "goTo",
+   "arg": 4,
+   "why": "Settings is where the app says what the link is doing. The row asks for correct ordering after going offline and reconnecting and the only thing in the set that showed it was a headless harness on loopback \u2014 twenty-six events queued and delivered gapless, in a log, with nothing on any glass. A messenger critic said so."
+  },
+  {
+   "do": "step",
+   "ms": 16
+  },
+  {
+   "do": "wait",
+   "ms": 700
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 20,
+   "ms": 16
+  },
+  {
+   "do": "cut",
+   "arg": "on"
+  },
+  {
+   "do": "wait",
+   "ms": 1500
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 26,
+   "ms": 16
+  },
+  {
+   "do": "far",
+   "arg": "state mood quiet"
+  },
+  {
+   "do": "far",
+   "arg": "message the bus is late, dont wait up"
+  },
+  {
+   "do": "wait",
+   "ms": 1600
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 20,
+   "ms": 16,
+   "why": "Two things written on the far phone while this one cannot reach it. Nothing of them is on this glass yet, which is the half of the claim that is usually left out."
+  },
+  {
+   "do": "cut",
+   "arg": "off"
+  },
+  {
+   "do": "sync"
+  },
+  {
+   "do": "awaitArrival"
+  },
+  {
+   "do": "wait",
+   "ms": 900
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 16,
+   "ms": 16
+  },
+  {
+   "do": "goTo",
+   "arg": 1
+  },
+  {
+   "do": "step",
+   "ms": 16
+  },
+  {
+   "do": "wait",
+   "ms": 700
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 34,
+   "ms": 16,
+   "why": "Both of them are here now, under the notes that were already on the desk, in the order they were written."
+  },
+  {
    "do": "report",
    "out": "evidence/logs/08_state_propagating.report.json",
    "at": "08_state_propagating"

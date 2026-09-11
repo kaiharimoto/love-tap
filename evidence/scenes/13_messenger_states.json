@@ -1,9 +1,10 @@
 {
  "name": "13_messenger_states",
  "viewport": {
-  "width": 480,
-  "height": 1040,
-  "dpr": 3
+  "width": 360,
+  "height": 780,
+  "dpr": 4,
+  "why": "360 by 780 of CSS at four times scale: a 1440 by 3120 Android, which is a phone somebody owns. The stills were shot at 480 by 1040 at three times scale \u2014 the same 1440 by 3120 the brief asks for, but laid out at a logical width no phone has and 120 points wider than every clip in the set. A coherence critic found what that hid: two Us rows that read fully at 480 truncate to 'the second one \u00b7 the\u2026' and 'tape the gap in the bac\u2026' at the clip's width, and the calendar glance wraps into a line the card cuts. Same pixels, same minimum, same layout width as the clips and as the phone."
  },
  "settle": 700,
  "log": "evidence/logs/13_messenger_states.json",
@@ -42,6 +43,22 @@
   },
   {
    "do": "stage"
+  },
+  {
+   "do": "wait",
+   "ms": 600
+  },
+  {
+   "do": "far",
+   "arg": "unsend",
+   "why": "Noor takes back the last thing she sent. `taken_back` was empty and `message_delete` zero in every region report in the set, so the scrollTo below was asking to frame a mark that was nowhere in the data \u2014 a messenger critic counted taking a note back as one of two capabilities this artifact enumerates and no artifact shows. The withdrawal happens on the far phone, so what the near phone draws is a note that was really taken away from it."
+  },
+  {
+   "do": "sync"
+  },
+  {
+   "do": "wait",
+   "ms": 900
   },
   {
    "do": "wait",

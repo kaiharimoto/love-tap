@@ -182,6 +182,31 @@ Future<void> main(List<String> argv) async {
           final e = await spine.append('message', {'text': parts.skip(1).join(' ')},
               at: now(), hostAssign: true);
           stdout.writeln('host-daemon: sent a message as ${e.id}');
+        } else if (parts.first == 'unsend') {
+          // Noor changes her mind about the last thing she sent. Taking a note back is one of the
+          // eleven capabilities 13_messenger_states enumerates and the only one no artifact showed:
+          // `taken_back` was empty and `message_delete` zero in every region report in the set, so
+          // the scene could not frame a withdrawn row because there was never one to frame. This
+          // is the far phone actually withdrawing, the way the refusal is the host actually
+          // refusing — not a row marked withdrawn by hand on the near phone.
+          final gone = <String>{
+            for (final e in spine.ordered)
+              if (e.type == 'message_delete') e.payload['target'] as String,
+          };
+          Event? mine;
+          for (final e in spine.ordered) {
+            if (e.type != 'message') continue;
+            if (e.author != Person.noor) continue;
+            if (gone.contains(e.id)) continue;
+            mine = e;
+          }
+          if (mine == null) {
+            stdout.writeln('host-daemon: nothing of noor\'s left to take back');
+            continue;
+          }
+          final e = await spine.append('message_delete', {'target': mine.id},
+              at: now(), hostAssign: true);
+          stdout.writeln('host-daemon: took back ${mine.id} as ${e.id}');
         } else if (parts.first == 'read') {
           // The far person opens the thread: a read marker over everything they have, which is
           // what turns `sent` into `read` on the near phone — because they read it, not because

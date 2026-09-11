@@ -46,19 +46,13 @@ String whenLabel(Object? at) {
   return t == null ? '$at' : DateFormat('EEE d MMM').format(t.toLocal());
 }
 
-/// The same, but empty rather than echoed when there is no day at all.
-/// A length of time, said the way a player says it: `0:41`.
+/// A length of time, said one way everywhere: `m:ss`.
 ///
 /// One grammar and one rounding, because there were three of each. The viewer rounded 2500 ms to
 /// `0:03` while the gallery truncated the same recording to `2s` and the thread row wrote `0:02`,
-/// so one clip had three lengths in one evidence set. A position is how far in you are, so it
-/// truncates — 2.9 seconds in is still 0:02 until it is three. A total is how long the thing is,
-/// so it rounds up: a two-and-a-half-second clip is not over at 0:02.
-/// A length of time, said one way everywhere: `m:ss`.
-///
-/// [total] is the length of a thing rather than a position in it, and it rounds up — a
-/// two-and-a-half-second clip is not over at 0:02. A position floors, because you are not three
-/// seconds in until you are.
+/// so one clip had three lengths in one evidence set. [total] is the length of a thing rather than
+/// a position in it, and it rounds up — a two-and-a-half-second clip is not over at 0:02; a
+/// position floors, because you are not three seconds in until you are.
 ///
 /// A messenger critic read `0:00 / 0:03` off the viewer for a position of 625 ms in 2500 and
 /// called the two ends of one readout inconsistent. They are, and deliberately: an elapsed clock
@@ -71,7 +65,8 @@ String clockOf(int ms, {bool total = false}) {
   return '${s ~/ 60}:${(s % 60).toString().padLeft(2, '0')}';
 }
 
-/// A day, said the way a person says it: `Tue 4 Aug`.
+/// A day, said the way a person says it: `Tue 4 Aug` — and empty rather than echoed back when
+/// there is no day at all.
 ///
 /// Takes whatever the thing it is labelling keeps its time in — an ISO string out of a payload,
 /// milliseconds off an event, a DateTime. It used to take only a string, and Moments passed it an

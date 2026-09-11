@@ -310,6 +310,12 @@ function ensure(p) {
         }
         break;
       }
+      // Cut the link to the far phone, or put it back. The app's own fault injector, flipped
+      // through a handle: what the clip then shows is the near phone losing the far one and the
+      // order the far one's writing arrives in when it is reconnected — which the set had only in
+      // a headless harness's log.
+      case 'cut':
+        await hook('__deskCut', step.arg === false || step.arg === 'off' ? false : true); break;
       case 'scrollTo':
         await hook('__deskScrollTo', String(step.arg)); break;
       case 'sendFeeling':
@@ -626,6 +632,17 @@ function ensure(p) {
           data: JSON.stringify(step.payload || { kind: 'message', from: 'noor' }),
         });
         log.steps.push({ push: step.payload || null, scope: target.scopeURL });
+        break;
+      }
+      case 'reopenApp': {
+        // Somebody picks the phone up again. What the pocket surface leaves behind is only
+        // readable from the app — `received()` asks the platform what it is still holding — and
+        // after closeApp there is no app to ask, so `held_by_the_phone` was empty in every report
+        // in the set and an emotional critic could only conclude the pocket was never shown.
+        await page.goto(url, { waitUntil: 'load', timeout: 120000 });
+        await page.waitForFunction('window.__deskReady === true', { timeout: scene.wait || 60000 });
+        await page.waitForTimeout(step.settle || 900);
+        log.app_open = await page.evaluate(() => location.href);
         break;
       }
       case 'closeApp': {

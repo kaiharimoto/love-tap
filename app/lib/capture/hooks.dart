@@ -22,6 +22,7 @@ import '../material/paper.dart';
 import '../modules/registry.dart';
 import '../scope.dart';
 import '../spine/projections/state.dart';
+import '../transport/local/local_transport.dart' show LocalTransport;
 import '../feelings/sensation.dart' show Sensation;
 import '../main.dart' show bootPhases;
 import '../regions/chat/note.dart' show ThreadRowStats;
@@ -332,6 +333,21 @@ class CaptureHooks {
     if (f == null) return 'the corner is not on screen';
     final at = f();
     return at < 0 ? 'nothing was under the finger' : 'ok, sent at ${at.toStringAsFixed(2)}';
+  }
+
+  /// Cut the link to the other phone, or put it back.
+  ///
+  /// The row asks for correct ordering after going offline and reconnecting, and the only thing in
+  /// the set that showed it was a headless harness on loopback: twenty-six events queued and
+  /// delivered gapless, in a log, with nothing on any glass. A messenger critic said so. This is
+  /// the same cut made to the app the clip is of, so what the clip shows is the near phone losing
+  /// the far one, the far one going on writing, and the order the writing arrives in when the link
+  /// comes back.
+  String cutTheLink(bool cut) {
+    final t = scope.transport;
+    if (t is! LocalTransport) return 'this transport cannot be cut';
+    cut ? t.scriptedFaults.goOffline() : t.scriptedFaults.goOnline();
+    return 'ok, the link is ${cut ? 'cut' : 'back'}';
   }
 
   /// Turn Moments to a lens and say how many rows are behind it.

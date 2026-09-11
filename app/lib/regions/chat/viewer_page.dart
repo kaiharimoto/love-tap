@@ -166,6 +166,15 @@ class _ViewerPageState extends State<ViewerPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // How they are, here too. A coherence critic counted this the one screen in the whole
+            // set with no standing strip and no tab strip — no partner state of any kind — and the
+            // row asks for partner state legible on every screen rather than on Pulse alone. The
+            // print is held up off the desk; the strip is still on the desk above it.
+            PartnerStrip(
+              partner: scope.partner,
+              state: scope.partnerState,
+              nowMs: scope.clock.now().millisecondsSinceEpoch,
+            ),
             const Spacer(),
             // the print itself, lifted: a real drop under it because it is being held up off
             // the desk rather than lying on it
