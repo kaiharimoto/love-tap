@@ -1,0 +1,49 @@
+{
+ "what": "the same fling, the same seeded year, the same driven clock, against builds of one commit that differ only in the flag named. Both arms are built here rather than reading the capture's own record as a control, because a capture taken before this commit differs by more than the fonts.",
+ "why": "a fling frame that builds no rows costs 4 ms and one that builds two and a half costs 688 \u2014 about 276 ms a row. The test that was read as ruling the fonts out runs under flutter test, which passes --use-test-fonts --disable-asset-fonts, so it laid its paragraphs out in a font with nothing to shape.",
+ "with_the_alternates": {
+  "frames": 628,
+  "build_ms": {
+   "p50": 5,
+   "p90": 19,
+   "p95": 35,
+   "max": 1323
+  },
+  "the_fling_alone": {
+   "frames": 300,
+   "p50": 4,
+   "over_400_ms": 0,
+   "median_of_those": null
+  }
+ },
+ "without_them": {
+  "frames": 627,
+  "build_ms": {
+   "p50": 4,
+   "p90": 17,
+   "p95": 34,
+   "max": 2429
+  },
+  "the_fling_alone": {
+   "frames": 300,
+   "p50": 4,
+   "over_400_ms": 0,
+   "median_of_those": null
+  }
+ },
+ "rows_with_the_alternates": {
+  "rows_built_total": 170,
+  "rows_built_worst_tick": 3,
+  "travelled": 27645
+ },
+ "rows_without_them": {
+  "rows_built_total": 170,
+  "rows_built_worst_tick": 3,
+  "travelled": 27645
+ },
+ "heavy_frames": {
+  "with": 0,
+  "without": 0,
+  "of": 300
+ }
+}

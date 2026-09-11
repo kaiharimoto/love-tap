@@ -1,0 +1,3166 @@
+{
+ "frames": 628,
+ "clock": "driven",
+ "note": "one frame per harness step, so these are the cost of drawing a frame, not a measured refresh rate",
+ "build_is_the_app": "build_ms is the framework laying out and painting: the app's own work, and comparable between runs",
+ "raster_is_the_machine": "raster_ms is CanvasKit turning that into pixels. This capture has no GPU — headless WebKit in a container falls back to a software rasteriser — so raster_ms says what this machine costs, not what a phone would. over_16ms counts build plus raster and is therefore about the machine as much as the app.",
+ "build_ms": {
+  "p50": 5,
+  "p95": 35,
+  "max": 1323
+ },
+ "raster_ms": {
+  "p50": 113,
+  "p95": 141,
+  "max": 418
+ },
+ "over_16ms": 628,
+ "per_frame": [
+  {
+   "build_ms": 74,
+   "raster_ms": 109,
+   "total_ms": 189
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 123,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 28,
+   "raster_ms": 124,
+   "total_ms": 155
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 300,
+   "total_ms": 317
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 124,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 19,
+   "raster_ms": 119,
+   "total_ms": 144
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 123,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 124,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 29,
+   "raster_ms": 139,
+   "total_ms": 170
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 106,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 115,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 103,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 36,
+   "raster_ms": 139,
+   "total_ms": 177
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 115,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 1177,
+   "raster_ms": 104,
+   "total_ms": 1283
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 118,
+   "total_ms": 138
+  },
+  {
+   "build_ms": 1323,
+   "raster_ms": 134,
+   "total_ms": 1460
+  },
+  {
+   "build_ms": 742,
+   "raster_ms": 107,
+   "total_ms": 852
+  },
+  {
+   "build_ms": 708,
+   "raster_ms": 120,
+   "total_ms": 830
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 121,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 127,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 288,
+   "total_ms": 300
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 121,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 108,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 114,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 106,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 111,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 418,
+   "total_ms": 422
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 110,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 45,
+   "raster_ms": 141,
+   "total_ms": 187
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 105,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 126,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 122,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 122,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 117,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 28,
+   "raster_ms": 113,
+   "total_ms": 156
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 106,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 116,
+   "raster_ms": 125,
+   "total_ms": 246
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 100,
+   "total_ms": 110
+  },
+  {
+   "build_ms": 24,
+   "raster_ms": 109,
+   "total_ms": 136
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 99,
+   "total_ms": 106
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 95,
+   "total_ms": 99
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 97,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 106,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 1024,
+   "raster_ms": 95,
+   "total_ms": 1121
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 116,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 106,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 104,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 112,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 103,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 118,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 115,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 139,
+   "total_ms": 146
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 124,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 116,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 102,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 100,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 133,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 115,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 280,
+   "total_ms": 289
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 111,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 115,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 113,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 105,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 185,
+   "total_ms": 196
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 161,
+   "total_ms": 164
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 103,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 113,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 193,
+   "total_ms": 206
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 187,
+   "total_ms": 190
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 128,
+   "total_ms": 132
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 115,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 117,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 116,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 111,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 113,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 37,
+   "raster_ms": 154,
+   "total_ms": 203
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 144,
+   "total_ms": 155
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 212,
+   "total_ms": 235
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 179,
+   "total_ms": 195
+  },
+  {
+   "build_ms": 82,
+   "raster_ms": 243,
+   "total_ms": 328
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 127,
+   "total_ms": 132
+  },
+  {
+   "build_ms": 26,
+   "raster_ms": 272,
+   "total_ms": 304
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 138,
+   "total_ms": 157
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 159,
+   "total_ms": 163
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 146,
+   "total_ms": 168
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 147,
+   "total_ms": 158
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 217,
+   "total_ms": 224
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 254,
+   "total_ms": 258
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 150,
+   "total_ms": 173
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 143,
+   "total_ms": 149
+  },
+  {
+   "build_ms": 27,
+   "raster_ms": 181,
+   "total_ms": 211
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 135,
+   "total_ms": 143
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 111,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 105,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 131,
+   "total_ms": 134
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 110,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 122,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 130,
+   "total_ms": 140
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 118,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 142,
+   "total_ms": 153
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 121,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 114,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 121,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 116,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 110,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 122,
+   "total_ms": 132
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 102,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 116,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 108,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 128,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 128,
+   "total_ms": 134
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 120,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 135,
+   "total_ms": 140
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 112,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 68,
+   "raster_ms": 140,
+   "total_ms": 221
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 117,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 121,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 125,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 107,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 111,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 116,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 137,
+   "total_ms": 142
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 114,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 112,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 100,
+   "total_ms": 103
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 97,
+   "total_ms": 104
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 112,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 39,
+   "raster_ms": 112,
+   "total_ms": 152
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 110,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 125,
+   "total_ms": 136
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 132,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 103,
+   "total_ms": 108
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 110,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 122,
+   "total_ms": 136
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 121,
+   "total_ms": 126
+  },
+  {
+   "build_ms": 36,
+   "raster_ms": 114,
+   "total_ms": 153
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 123,
+   "total_ms": 126
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 109,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 126,
+   "total_ms": 140
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 118,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 114,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 128,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 118,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 111,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 100,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 102,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 122,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 100
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 111,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 104,
+   "total_ms": 110
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 97,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 103,
+   "total_ms": 106
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 97,
+   "total_ms": 102
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 104,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 25,
+   "raster_ms": 91,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 104,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 105,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 104,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 43,
+   "raster_ms": 103,
+   "total_ms": 148
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 115,
+   "total_ms": 126
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 115,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 117,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 35,
+   "raster_ms": 107,
+   "total_ms": 145
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 128,
+   "total_ms": 132
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 120,
+   "total_ms": 136
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 127,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 129,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 122,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 22,
+   "raster_ms": 124,
+   "total_ms": 149
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 109,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 122,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 116,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 114,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 100
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 108,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 88,
+   "total_ms": 91
+  },
+  {
+   "build_ms": 18,
+   "raster_ms": 128,
+   "total_ms": 147
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 100,
+   "total_ms": 102
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 104,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 123,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 118,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 128,
+   "total_ms": 141
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 93,
+   "total_ms": 99
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 104,
+   "total_ms": 108
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 107,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 104,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 98,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 38,
+   "raster_ms": 123,
+   "total_ms": 163
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 113,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 104,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 101,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 118,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 115,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 119,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 125,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 67,
+   "raster_ms": 146,
+   "total_ms": 226
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 135,
+   "total_ms": 146
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 127,
+   "total_ms": 136
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 115,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 112,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 99,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 536,
+   "raster_ms": 123,
+   "total_ms": 663
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 100,
+   "total_ms": 104
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 106,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 110,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 115,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 21,
+   "raster_ms": 110,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 97,
+   "total_ms": 104
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 111,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 145,
+   "total_ms": 158
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 128,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 100
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 95,
+   "total_ms": 98
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 114,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 97,
+   "total_ms": 101
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 116,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 102,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 106,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 101,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 115,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 118,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 111,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 106,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 132,
+   "total_ms": 137
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 121,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 114,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 98,
+   "total_ms": 106
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 110,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 106,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 114,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 134,
+   "total_ms": 141
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 122,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 110,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 103,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 128,
+   "total_ms": 144
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 122,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 117,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 74,
+   "raster_ms": 127,
+   "total_ms": 211
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 123,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 121,
+   "total_ms": 139
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 108,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 19,
+   "raster_ms": 119,
+   "total_ms": 142
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 120,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 132,
+   "total_ms": 149
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 98,
+   "total_ms": 103
+  },
+  {
+   "build_ms": 25,
+   "raster_ms": 122,
+   "total_ms": 150
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 100,
+   "total_ms": 104
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 144,
+   "total_ms": 159
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 123,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 127,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 116,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 118,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 110,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 185,
+   "total_ms": 196
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 161,
+   "total_ms": 170
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 111,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 112,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 29,
+   "raster_ms": 124,
+   "total_ms": 155
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 113,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 124,
+   "total_ms": 137
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 111,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 107,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 116,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 114,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 117,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 128,
+   "total_ms": 134
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 127,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 30,
+   "raster_ms": 130,
+   "total_ms": 162
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 109,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 110,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 119,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 101,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 118,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 118,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 127,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 127,
+   "total_ms": 142
+  },
+  {
+   "build_ms": 19,
+   "raster_ms": 121,
+   "total_ms": 148
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 113,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 108,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 120,
+   "total_ms": 126
+  },
+  {
+   "build_ms": 28,
+   "raster_ms": 107,
+   "total_ms": 142
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 118,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 26,
+   "raster_ms": 126,
+   "total_ms": 159
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 109,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 127,
+   "total_ms": 137
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 149,
+   "total_ms": 153
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 107,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 100,
+   "total_ms": 103
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 122,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 96,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 104,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 123,
+   "total_ms": 126
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 105,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 104,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 105,
+   "total_ms": 112
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 97,
+   "total_ms": 103
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 114,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 110,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 125,
+   "total_ms": 145
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 119,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 111,
+   "total_ms": 132
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 99,
+   "total_ms": 106
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 115,
+   "total_ms": 126
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 112,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 95,
+   "total_ms": 102
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 118,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 115,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 103,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 95,
+   "total_ms": 106
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 110,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 110,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 99,
+   "total_ms": 108
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 105,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 36,
+   "raster_ms": 101,
+   "total_ms": 139
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 24,
+   "raster_ms": 108,
+   "total_ms": 144
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 104,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 44,
+   "raster_ms": 120,
+   "total_ms": 169
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 122,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 105,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 114,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 111,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 108,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 103,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 105,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 99,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 113,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 109,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 110,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 101,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 86,
+   "total_ms": 91
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 104,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 121,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 108,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 115,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 119,
+   "total_ms": 134
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 96,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 101,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 104,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 95,
+   "total_ms": 103
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 100,
+   "total_ms": 102
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 94,
+   "total_ms": 104
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 96,
+   "total_ms": 103
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 96,
+   "total_ms": 102
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 112,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 98,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 112,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 95,
+   "total_ms": 102
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 93,
+   "total_ms": 101
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 105,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 95,
+   "total_ms": 98
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 113,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 116,
+   "total_ms": 132
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 115,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 73,
+   "raster_ms": 102,
+   "total_ms": 184
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 113,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 22,
+   "raster_ms": 119,
+   "total_ms": 148
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 125,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 98,
+   "total_ms": 106
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 110,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 107,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 117,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 160,
+   "total_ms": 169
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 121,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 104,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 116,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 115,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 112,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 33,
+   "raster_ms": 127,
+   "total_ms": 162
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 109,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 114,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 119,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 111,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 115,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 113,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 117,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 116,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 104,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 120,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 103,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 127,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 118,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 116,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 104,
+   "total_ms": 108
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 96,
+   "total_ms": 99
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 107,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 96,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 100,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 91,
+   "total_ms": 101
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 98,
+   "total_ms": 100
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 115,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 121,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 115,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 113,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 68,
+   "raster_ms": 103,
+   "total_ms": 186
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 104,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 27,
+   "raster_ms": 114,
+   "total_ms": 145
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 104,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 104,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 123,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 128,
+   "total_ms": 132
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 114,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 98,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 103,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 133,
+   "total_ms": 139
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 97,
+   "total_ms": 102
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 101,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 108,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 87,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 108
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 106,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 107,
+   "total_ms": 110
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 103,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 101,
+   "total_ms": 104
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 90,
+   "total_ms": 97
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 99,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 99,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 106,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 90,
+   "total_ms": 103
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 100,
+   "total_ms": 103
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 124,
+   "total_ms": 140
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 111,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 112,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 60,
+   "raster_ms": 113,
+   "total_ms": 175
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 104,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 123,
+   "total_ms": 136
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 121,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 93,
+   "total_ms": 100
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 120,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 113,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 116,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 114,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 108,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 113,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 107,
+   "total_ms": 110
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 107,
+   "total_ms": 109
+  },
+  {
+   "build_ms": 77,
+   "raster_ms": 109,
+   "total_ms": 196
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 126,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 107,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 95,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 109,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 108,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 115,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 18,
+   "raster_ms": 107,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 111,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 105,
+   "total_ms": 112
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 112,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 108,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 105,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 104,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 116,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 108,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 112,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 115,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 105,
+   "total_ms": 108
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 112,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 99,
+   "total_ms": 102
+  },
+  {
+   "build_ms": 38,
+   "raster_ms": 109,
+   "total_ms": 148
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 114,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 117,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 123,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 98,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 97,
+   "total_ms": 99
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 114,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 108,
+   "total_ms": 112
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 111,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 110,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 133,
+   "total_ms": 146
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 103,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 112,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 93,
+   "total_ms": 99
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 109,
+   "total_ms": 112
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 111,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 51,
+   "raster_ms": 158,
+   "total_ms": 227
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 126,
+   "total_ms": 134
+  },
+  {
+   "build_ms": 39,
+   "raster_ms": 112,
+   "total_ms": 155
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 112,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 118,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 102,
+   "total_ms": 108
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 100,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 106,
+   "total_ms": 110
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 105,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 117,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 99,
+   "total_ms": 104
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 109,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 26,
+   "raster_ms": 101,
+   "total_ms": 130
+  },
+  {
+   "build_ms": 21,
+   "raster_ms": 100,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 130,
+   "total_ms": 140
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 106,
+   "total_ms": 112
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 107,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 112,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 110,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 110,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 113,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 110,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 99,
+   "total_ms": 104
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 113,
+   "total_ms": 126
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 95,
+   "total_ms": 103
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 111,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 111,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 109,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 113,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 101,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 120,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 103,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 113,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 115,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 116,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 103,
+   "total_ms": 106
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 111,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 122,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 115,
+   "total_ms": 126
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 107,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 59,
+   "raster_ms": 126,
+   "total_ms": 193
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 98,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 116,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 117,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 124,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 120,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 119,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 119,
+   "total_ms": 126
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 108,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 125,
+   "total_ms": 132
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 104,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 103,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 104,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 105,
+   "total_ms": 112
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 117,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 122,
+   "total_ms": 132
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 110,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 18,
+   "raster_ms": 120,
+   "total_ms": 140
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 114,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 104,
+   "total_ms": 118
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 119,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 124,
+   "total_ms": 136
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 104,
+   "total_ms": 107
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 121,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 107,
+   "total_ms": 114
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 114,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 117,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 121,
+   "total_ms": 124
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 101,
+   "total_ms": 106
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 118,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 111,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 108,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 95,
+   "total_ms": 100
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 101,
+   "total_ms": 106
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 97,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 103,
+   "total_ms": 105
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 91,
+   "total_ms": 113
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 109,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 110,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 95,
+   "total_ms": 108
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 96,
+   "total_ms": 99
+  },
+  {
+   "build_ms": 24,
+   "raster_ms": 115,
+   "total_ms": 152
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 99,
+   "total_ms": 111
+  },
+  {
+   "build_ms": 43,
+   "raster_ms": 127,
+   "total_ms": 174
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 122,
+   "total_ms": 133
+  },
+  {
+   "build_ms": 66,
+   "raster_ms": 133,
+   "total_ms": 201
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 125,
+   "total_ms": 134
+  },
+  {
+   "build_ms": 27,
+   "raster_ms": 119,
+   "total_ms": 150
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 101
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 122,
+   "total_ms": 145
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 119,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 114,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 117,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 111,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 109,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 110,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 119,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 114,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 124,
+   "total_ms": 127
+  },
+  {
+   "build_ms": 19,
+   "raster_ms": 139,
+   "total_ms": 161
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 128,
+   "total_ms": 131
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 114,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 116,
+   "total_ms": 119
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 110,
+   "total_ms": 122
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 127,
+   "total_ms": 135
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 118,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 122,
+   "total_ms": 125
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 108,
+   "total_ms": 121
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 117,
+   "total_ms": 120
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 117,
+   "total_ms": 128
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 102,
+   "total_ms": 108
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 96,
+   "total_ms": 100
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 107,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 108,
+   "total_ms": 117
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 109,
+   "total_ms": 115
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 120,
+   "total_ms": 129
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 104,
+   "total_ms": 116
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 120,
+   "total_ms": 123
+  }
+ ],
+ "browser": "webkit",
+ "viewport": {
+  "width": 360,
+  "height": 780,
+  "dpr": 3
+ }
+}
