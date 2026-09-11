@@ -109,7 +109,20 @@ class PartnerStrip extends StatelessWidget {
                         ),
                         const SizedBox(height: 2),
                         if (state.signals.isNotEmpty)
-                        Row(children: [
+                        // Scaled down rather than cut off.
+                        //
+                        // The row had no answer for running out of width, so when the far phone
+                        // sent `availability heads_down` the two extra words pushed the right end
+                        // off the paper: a coherence critic read `OUT HEADS DOWN RESTLESS NEED |||
+                        // E` at 08 frame 560 — ENERGY down to one letter with its meter and its
+                        // trend arrow gone — and it was still like that ninety-eight frames later.
+                        // A meter with no reading is worse than a smaller one, and the two dials
+                        // are the part of this strip a reader cannot reconstruct from the line
+                        // above.
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: Row(children: [
                           if (state.place != null) Stamped(state.place!, size: 10),
                           if (state.place != null) const SizedBox(width: 8),
                           // Mood and availability were legible on Pulse and nowhere else. A
@@ -126,7 +139,8 @@ class PartnerStrip extends StatelessWidget {
                           _Dial(label: signalLabel('energy'), value: state.energy),
                           const SizedBox(width: 10),
                           if (state.battery != null) _Pencil(charge: state.battery! / 100.0, charging: state.charging),
-                        ]),
+                          ]),
+                        ),
                       ],
                     ),
                   ),

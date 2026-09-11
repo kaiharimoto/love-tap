@@ -185,9 +185,19 @@ def _rotation_would_be_onto_itself(baseline_at, artifacts):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--rotate", action="store_true",
-                    help="after measuring, make this capture the baseline for the next one")
+                    help="after measuring, make this capture the baseline for the next one. "
+                         "Deprecated in favour of --adopt: rotating at the end of a run leaves the "
+                         "shipped .previous/ byte-identical to the shipped capture, so nothing in "
+                         "DIFF.json can be reproduced from the tree it ships in.")
+    ap.add_argument("--adopt", action="store_true",
+                    help="before a run: take the capture that is on disk now as the baseline, and "
+                         "then leave it alone. What ships is then the genuinely previous capture "
+                         "and every number in DIFF.json can be checked against it.")
     ap.add_argument("--out", default=os.path.join(EVIDENCE, "DIFF.json"))
     args = ap.parse_args()
+
+    if args.adopt:
+        return adopt()
 
     scratch = os.path.join(EVIDENCE, ".diffscratch")
     os.makedirs(scratch, exist_ok=True)
@@ -225,14 +235,11 @@ def main():
         "counts": {k: sum(1 for r in rows if r["label"] == k)
                    for k in ("new", "gone", "unchanged", "changed", "absent")},
     }
-    with open(args.out, "w", encoding="utf-8") as f:
-        json.dump(out, f, indent=1)
-        f.write("\n")
     print(f"diff: {out['counts']}")
 
     if args.rotate and _rotation_would_be_onto_itself(baseline_at, rows):
-        report["rotated"] = False
-        report["not_rotated_because"] = (
+        out["rotated"] = False
+        out["not_rotated_because"] = (
             "all but a handful of these rows read unchanged with an SSIM of exactly 1.0, which "
             "means the baseline already holds this capture's own files. Rotating again would keep "
             "it that way and every number here would go on comparing a file with itself. Shoot a "
@@ -250,7 +257,53 @@ def main():
         import datetime
         with open(stamp, "w", encoding="utf-8") as f:
             f.write(datetime.datetime.now(datetime.timezone.utc).isoformat() + "\n")
-        print(f"diff: this capture is the baseline for the next one")
+        out["rotated"] = True
+        print("diff: this capture is the baseline for the next one")
+    with open(args.out, "w", encoding="utf-8") as f:
+        json.dump(out, f, indent=1)
+        f.write("\n")
+    return 0
+
+
+def adopt():
+    """Take what is on disk now as the baseline for the run that is about to happen.
+
+    Rotating at the *end* of a run is what a completeness pass and a coherence critic both caught:
+    the run measures against .previous/, then copies itself into .previous/, so by the time anybody
+    opens the tree every file in there is byte-identical to its counterpart and none of the
+    `previous_sha` values in DIFF.json exists anywhere on disk. The numbers were real when they were
+    taken and unverifiable by the time they shipped, which for a document whose whole job is to be
+    checkable is the same as being wrong.
+
+    Adopting at the start fixes it by moving one copy: the baseline is the capture that was here
+    before this run, it is written down before a single frame is shot, and nothing touches it
+    afterwards. The stamp is the previous capture's own `captured_at` out of its MANIFEST, not the
+    time of the copy.
+    """
+    os.makedirs(PREVIOUS, exist_ok=True)
+    kept = 0
+    for name in ARTIFACTS:
+        src = os.path.join(EVIDENCE, name)
+        dst = os.path.join(PREVIOUS, name)
+        if os.path.exists(src):
+            shutil.copy2(src, dst)
+            kept += 1
+        elif os.path.exists(dst):
+            os.unlink(dst)
+    when = None
+    manifest = os.path.join(EVIDENCE, "MANIFEST.json")
+    if os.path.exists(manifest):
+        try:
+            with open(manifest, encoding="utf-8") as f:
+                when = json.load(f).get("captured_at")
+        except Exception:
+            when = None
+    if not when:
+        import datetime
+        when = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    with open(os.path.join(PREVIOUS, "CAPTURED_AT"), "w", encoding="utf-8") as f:
+        f.write(str(when).strip() + "\n")
+    print(f"diff: baseline adopted — {kept} artifacts from {when}")
     return 0
 
 

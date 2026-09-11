@@ -72,9 +72,8 @@ String standingLine(Person who, PersonState state, int nowMs) {
   if (status != null && status.isNotEmpty) bits.add(status);
   final place = state.place;
   if (place != null && place != 'unknown') bits.add(place);
-  final seen = state['last_active'];
-  if (seen != null) {
-    final minutes = (nowMs - seen.at) ~/ 60000;
+  final minutes = state.lastActiveMinutesAt(nowMs);
+  if (minutes != null) {
     if (minutes < 3) {
       bits.add('there now');
     } else if (minutes < 90) {

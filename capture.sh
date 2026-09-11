@@ -63,6 +63,23 @@ if [ "${FREE_MB:-0}" -lt "$NEED_MB" ]; then
   exit 3
 fi
 
+# The baseline for this run's DIFF, taken before anything is shot.
+#
+# It used to be taken at the *end* — measure against .previous/, then copy this capture into it —
+# and a completeness pass and a coherence critic both caught what that does to the tree that
+# ships: every file in .previous/ ends up byte-identical to its counterpart, and none of the
+# `previous_sha` values DIFF.json names exists anywhere on disk. The numbers were real when they
+# were taken and unverifiable by the time anybody could read them.
+#
+# Adopted here instead, from the capture that is on disk now, stamped with that capture's own time
+# out of its MANIFEST. Nothing touches it afterwards, so a scene re-shot after the run is measured
+# against the same baseline as the run itself, and NO_ROTATE has nothing left to guard.
+if [ -z "$ONLY" ]; then
+  python3 tools/check/diff.py --adopt || true
+else
+  echo "· keeping the baseline where it is (only $ONLY is being captured)"
+fi
+
 # How long the run has been going, in minutes and seconds. A capture is a couple of hours of
 # somebody's evening and it used to say nothing about where it had got to: whoever started it could
 # not tell a scene that was working from one that had hung without opening the log and counting the
@@ -481,22 +498,10 @@ python3 tools/check/hairline.py --out "$LOG/hairline.json" \
 # Only a whole run may become the next baseline. A run of one scene used to rotate it too, so
 # after a few of those every artifact's baseline was itself: DIFF.json said ssim 1.0 and "byte for
 # byte the previous file" for the entire set, and a cycle's worth of change measured as nothing.
-if [ -z "$ONLY" ]; then
-  # NO_ROTATE=yes when a scene is going to be re-shot after this run. Rotating makes this capture
-  # the baseline for the next one, and anything shot afterwards is then measured against a copy of
-  # itself: a completeness pass found evidence/.previous/CAPTURED_AT stamped 19:16 inside a run
-  # that began at 17:43, with three scenes re-shot after it, and twelve of DIFF.json's seventeen
-  # rows reading "unchanged — byte for byte the same file" because they were.
-  if [ "${NO_ROTATE:-no}" = "yes" ]; then
-    echo "· measuring against the baseline and leaving it there (NO_ROTATE: something is still to be shot)"
-    python3 tools/check/diff.py || true
-  else
-    python3 tools/check/diff.py --rotate || true
-  fi
-else
-  echo "· measuring against the baseline, and leaving it where it is (only $ONLY was captured)"
-  python3 tools/check/diff.py || true
-fi
+# The baseline was adopted before a frame was shot (see the top of this script), so nothing here
+# touches it: what ships in evidence/.previous/ is the capture that came before this one, and every
+# number in DIFF.json can be checked against the files it names.
+python3 tools/check/diff.py || true
 
 # the frames are the negative of a clip and run to hundreds of megabytes a run; the mp4 and the
 # strip in evidence/crops are what anybody looks at, so the frames go once they are folded in

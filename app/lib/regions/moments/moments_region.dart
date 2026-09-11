@@ -764,10 +764,18 @@ class _FeelingHistory extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: mine ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                   children: [
-                    Text(f.name, style: Hands.of(e.author, size: 16)),
+                    // On the desk, in the hand the desk is written in — not in the author's own
+                    // ink, which is a pen for paper.
+                    //
+                    // The same six feelings are in the Pulse shelf with the same names and the
+                    // same times; a coherence critic measured them at 3.16:1 there against the
+                    // desk and 2.10:1 here, because this wrote them in dark navy on wood, and the
+                    // date line at 1.23:1, which is a line nobody can read. Whose feeling it is
+                    // is said by which side of the row it is on, as it is in the thread.
+                    Text(f.name, style: Hands.onDesk(size: 16)),
                     Text(
                       DateFormat('EEE d MMM · HH:mm').format(DateTime.fromMillisecondsSinceEpoch(e.ts)),
-                      style: Hands.margin(size: 11),
+                      style: Hands.onDesk(size: 11),
                     ),
                   ],
                 ),

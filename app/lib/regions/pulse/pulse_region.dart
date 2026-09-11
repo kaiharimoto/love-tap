@@ -55,7 +55,12 @@ class PulseRegion extends StatelessWidget {
       key: const ValueKey('pulse.theirs'),
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 96),
       children: [
-        _TheirSheet(key: const ValueKey('pulse.their.sheet'), partner: scope.partner, state: them, lib: lib),
+        _TheirSheet(
+            key: const ValueKey('pulse.their.sheet'),
+            partner: scope.partner,
+            state: them,
+            lib: lib,
+            nowMs: scope.clock.now().millisecondsSinceEpoch),
         const SizedBox(height: 14),
         _Traffic(events: today, registry: registry, me: scope.me),
         const SizedBox(height: 14),
@@ -77,10 +82,19 @@ class PulseRegion extends StatelessWidget {
 /// swap there was nothing moving to film. A sheet lands the way every other piece of paper in the
 /// app lands: from a little above, over the one it replaces.
 class _TheirSheet extends StatefulWidget {
-  const _TheirSheet({super.key, required this.partner, required this.state, required this.lib});
+  const _TheirSheet({
+    super.key,
+    required this.partner,
+    required this.state,
+    required this.lib,
+    required this.nowMs,
+  });
   final Person partner;
   final PersonState state;
   final MaterialLibrary? lib;
+
+  /// The clock the region is drawn against, so "last up" is counted from now.
+  final int nowMs;
 
   @override
   State<_TheirSheet> createState() => _TheirSheetState();
@@ -172,7 +186,10 @@ class _TheirSheetState extends State<_TheirSheet> {
               _Fact(signalLabel('energy'), _dial(state.energy)),
               if (state.battery != null)
                 _Fact('battery', '${state.battery}%${state.charging ? ' on charge' : ''}'),
-              if (state.lastActiveMinutes != null) _Fact('last up', _ago(state.lastActiveMinutes!)),
+              // counted from now, not from when they said it — the same arithmetic the standing
+              // line uses, because it is the same fact and they used to disagree by seven hours
+              if (state.lastActiveMinutesAt(widget.nowMs) != null)
+                _Fact('last up', _ago(state.lastActiveMinutesAt(widget.nowMs)!)),
               if (state.localHour != null) _Fact('their clock', '${state.localHour}:00'),
               if (state.ringer != null) _Fact('ringer', _words(state.ringer)),
               if (state.moving != null) _Fact('moving', _words(state.moving)),

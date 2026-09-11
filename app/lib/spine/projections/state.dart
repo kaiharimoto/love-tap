@@ -28,6 +28,24 @@ class PersonState {
   int? get battery => (signals['battery']?.value as num?)?.toInt();
   bool get charging => signals['charging']?.value == true;
   int? get lastActiveMinutes => (signals['last_active']?.value as num?)?.toInt();
+
+  /// How long ago they were last up, counted from now rather than from when the signal was sent.
+  ///
+  /// The raw value is what the other phone reported at the moment it reported it: `0` means "up
+  /// just now" *then*. Two surfaces read that number two different ways and disagreed in every
+  /// seeded artifact — the Pulse card read the value and said "LAST UP just now" while the
+  /// standing line read the event's timestamp and said "· 7 hours ago", from the same signal, on
+  /// the same screen. A coherence critic found it in all seventeen reports.
+  ///
+  /// They are the same fact and this is the arithmetic: what they said, plus how long ago they
+  /// said it. Null when nothing has been said at all, which is different from zero.
+  int? lastActiveMinutesAt(int nowMs) {
+    final v = signals['last_active'];
+    if (v == null) return null;
+    final reported = (v.value as num?)?.toInt() ?? 0;
+    final since = ((nowMs - v.at) ~/ 60000).clamp(0, 1 << 30);
+    return reported + since;
+  }
   int? get localHour => (signals['local_hour']?.value as num?)?.toInt();
   String? get ringer => signals['ringer']?.value as String?;
   String? get moving => signals['moving']?.value as String?;
