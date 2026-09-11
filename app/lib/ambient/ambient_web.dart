@@ -22,6 +22,9 @@ external JSPromise<JSString> _requestPermission();
 @JS('navigator.serviceWorker')
 external _ServiceWorkerContainer? get _serviceWorker;
 
+@JS('window.isSecureContext')
+external JSBoolean? get _isSecureContext;
+
 extension type _ServiceWorkerContainer(JSObject o) implements JSObject {
   external JSPromise<_Registration> register(JSString url, JSObject options);
 }
@@ -176,6 +179,33 @@ class _WebAmbient implements Ambient {
         n.close();
       }
     } catch (_) {}
+  }
+
+  @override
+  Future<Map<String, Object?>> whatThePhoneCanHold() async {
+    bool secure;
+    try {
+      secure = _isSecureContext?.toDart ?? false;
+    } catch (_) {
+      secure = false;
+    }
+    String permission;
+    try {
+      permission = _permission?.toDart ?? 'unknown';
+    } catch (_) {
+      permission = 'unknown';
+    }
+    return {
+      'platform': 'a browser',
+      // The one that decides all the others. A page served over http at a 100.64/10 address is not
+      // a secure context, and Safari then gives it no `navigator.serviceWorker` at all — no worker,
+      // no push subscription, no pocket. It is the reason the host serves over TLS.
+      'a_secure_origin': secure,
+      'service_worker_offered_by_the_browser': _serviceWorker != null,
+      'a_worker_is_registered': _registration != null,
+      'the_person_has_allowed_it': permission,
+      'a_push_manager': _registration?.pushManager != null,
+    };
   }
 
   @override

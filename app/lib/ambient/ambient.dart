@@ -60,6 +60,15 @@ abstract class Ambient {
   /// What the phone is actually holding, read back from the platform rather than from what this
   /// app asked for. A record of an intention is not evidence that anything arrived.
   Future<List<Map<String, Object?>>> received();
+
+  /// What this platform will let the app hold at all, asked of the platform.
+  ///
+  /// `received()` returning nothing is two different facts wearing one face: a phone that is
+  /// holding nothing because nothing was sent, and a page that could not register a worker in the
+  /// first place. An emotional critic read `held_by_the_phone: []` in all nineteen reports and
+  /// could only conclude that no artifact anywhere shows the pocket surface — which is true, and
+  /// says nothing about why. This is why.
+  Future<Map<String, Object?>> whatThePhoneCanHold();
 }
 
 /// What the standing line says. One sentence, in the couple's voice, made only of things that are

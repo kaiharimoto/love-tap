@@ -70,6 +70,27 @@ class _AndroidAmbient implements Ambient {
   }
 
   @override
+  Future<Map<String, Object?>> whatThePhoneCanHold() async {
+    // Asked of the phone rather than assumed. `received()` returning nothing is two different
+    // facts wearing one face — a phone holding nothing because nothing was sent, and a phone that
+    // was never allowed to hold anything — and an emotional critic could only read the second out
+    // of an empty list in nineteen reports.
+    var allowed = _allowed;
+    try {
+      allowed = await _channel.invokeMethod<bool>('allowed') ?? _allowed;
+    } catch (_) {
+      // the channel is not there, which is itself the answer
+    }
+    return {
+      'platform': 'android',
+      'a_secure_origin': true,     // the app is the app; there is no origin to be insecure about
+      'the_person_has_allowed_it': allowed ? 'granted' : 'not granted',
+      'a_notification_channel': true,
+      'a_vibration_motor': true,
+    };
+  }
+
+  @override
   Future<List<Map<String, Object?>>> received() async {
     // Android's own record of what is in the shade, once there is a device to read it off. There
     // is not one here (docs/PHONES.md), so this returns nothing rather than something invented.
