@@ -413,9 +413,18 @@ class _Gallery extends StatelessWidget {
                 final layout = _PileDelegate.layoutFor(media, _PileDelegate.lastWidth);
                 final placed = layout.placed[i];
                 built++;
-                final showing = (placed.event.payload['poster_blob'] as String?)?.isNotEmpty == true
-                    ? placed.event.payload['poster_blob'] as String
-                    : placed.event.payload['blob'] as String?;
+                // Only tiles that are supposed to show a picture.
+                //
+                // A voice note in the pile is a slip with a waveform on it and it never asks for
+                // its blob, so counting its hash here made `tiles_without_a_picture` read 8 when
+                // the answer was 0 — and the record then said all eight had been "asked for and
+                // not back yet", which was true of a request nothing had made. A messenger critic
+                // read that number beside three blank tiles and drew the obvious conclusion.
+                final showing = placed.event.type == 'voice_note'
+                    ? null
+                    : (placed.event.payload['poster_blob'] as String?)?.isNotEmpty == true
+                        ? placed.event.payload['poster_blob'] as String
+                        : placed.event.payload['blob'] as String?;
                 if (showing != null) builtHashes.add(showing);
                 return _One(event: placed.event, row: placed.row, width: layout.tileWidth, height: placed.height);
               },
