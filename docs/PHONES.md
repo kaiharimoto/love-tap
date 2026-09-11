@@ -125,6 +125,12 @@ ask once whether you trust the source.
 `versionCode` comes from `version:` in `app/pubspec.yaml` — the number after the `+`. Raise it
 before every build you install over the last one, or Android refuses the update.
 
+The first start is slower than the ones after it, by a second or two, and that is the certificate:
+the phone makes a 2048-bit key and signs itself a certificate for the tailnet address it is serving
+on. It happens once. If the phone later moves to a different tailnet address it makes another one
+for the new address — and the iPhone will need the new profile, because a certificate for an
+address the phone no longer has is a certificate for somebody else.
+
 ### The iPhone
 
 There is nothing to install and nothing to sideload. With both phones on the tailnet and the
