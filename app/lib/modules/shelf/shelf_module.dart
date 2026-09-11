@@ -51,7 +51,7 @@ class ShelfModule extends Module {
 
   @override
   /// How many, not which one: the rows underneath are the which. See DatesModule.glance.
-  String glance(List<Event> events) {
+  String glance(List<Event> events, DateTime now) {
     final things = projectShelf(events);
     if (things.isEmpty) return 'nothing passed on yet';
     final waiting = things.where((t) => t.state == 'passed').length;

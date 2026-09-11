@@ -18,6 +18,10 @@ import 'package:desk/spine/projections/state.dart';
 import 'package:desk/spine/projections/thread.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+/// A glance is asked at a moment, and a test that asks at the wall clock gets a different answer
+/// every day it runs. This is the same instant the seeded year is written against.
+final DateTime _now = DateTime.utc(2026, 9, 3, 19, 40);
+
 void main() {
   final log = _log();
 
@@ -59,7 +63,7 @@ void main() {
 
   test('every module reads the same log and says something from it', () {
     for (final m in kModules) {
-      final line = m.glance(log);
+      final line = m.glance(log, _now);
       expect(line.trim(), isNotEmpty, reason: 'the ${m.id} module says nothing about a log '
           'that carries its own event types');
       expect(m.eventTypes, isNotEmpty);
@@ -84,7 +88,7 @@ String _snapshot(List<Event> log) {
         e.key.name: {'mood': e.value.mood, 'place': e.value.place, 'need': e.value.need,
                      'energy': e.value.energy, 'signals': e.value.signals.length},
     },
-    'modules': {for (final m in kModules) m.id: m.glance(log)},
+    'modules': {for (final m in kModules) m.id: m.glance(log, _now)},
   });
 }
 

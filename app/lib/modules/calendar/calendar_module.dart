@@ -41,8 +41,8 @@ class CalendarModule extends Module {
   Widget build(BuildContext context, ModuleContext ctx) => MilestoneList(ctx: ctx);
 
   @override
-  String glance(List<Event> events) {
-    final now = DateTime.now();
+  String glance(List<Event> events, DateTime now) {
+    // the app's clock, handed in — see Module.glance
     final next = projectMilestones(events)
         .map((m) => (m, m.nextOccurrence(now)))
         .where((p) => p.$2 != null)

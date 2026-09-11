@@ -49,9 +49,9 @@ class DatesModule extends Module {
   /// `the second one · the place by th... · in 2 months`. A coherence critic found three of the
   /// five modules printing the same sentence twice inside one block. A glance is for the shape of
   /// the pile; the pile is right there for the rest.
-  String glance(List<Event> events) {
+  String glance(List<Event> events, DateTime now) {
     final dates = projectDates(events);
-    final now = DateTime.now();
+    // the app's clock, handed in — see Module.glance
     final upcoming = dates.where((d) => d.when != null && d.state != 'done' && d.state != 'said').toList()
       ..sort((a, b) => a.when!.compareTo(b.when!));
     if (upcoming.isNotEmpty) {

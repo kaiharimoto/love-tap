@@ -47,7 +47,7 @@ class TodosModule extends Module {
   Widget build(BuildContext context, ModuleContext ctx) => TodoList(ctx: ctx);
 
   @override
-  String glance(List<Event> events) {
+  String glance(List<Event> events, DateTime now) {
     final all = projectTodos(events).where((t) => !t.removed).toList();
     final open = all.where((t) => !t.done).length;
     if (all.isEmpty) return 'nothing to do';

@@ -47,7 +47,15 @@ abstract class Module {
   Widget build(BuildContext context, ModuleContext ctx);
 
   /// A short line for the Us overview: what this module would tell you at a glance.
-  String glance(List<Event> events);
+  /// One line, at [now] — the app's clock, never the wall's.
+  ///
+  /// It used to take only the events and read `DateTime.now()` inside. A coherence critic found
+  /// the rituals glance reading '3 kept · 53 times · the last 7 days ago' in 03_us.report.json and
+  /// '… 8 days ago' in both clips' reports and on the glass — same `now` of 2026-09-03T19:40:00Z,
+  /// same seed, same count of 53 — because the still and the clips were shot hours apart on the
+  /// wall clock inside one capture. It is a fault on a phone too: a glance that changes because
+  /// the app has been open past midnight while nothing happened.
+  String glance(List<Event> events, DateTime now);
 
   /// The paper each of this module's event types is written on, by type id.
   ///

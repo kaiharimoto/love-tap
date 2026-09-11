@@ -29,6 +29,10 @@ Set<String> _runs(String text, int n) {
   return out;
 }
 
+/// A glance is asked at a moment, and a test that asks at the wall clock gets a different answer
+/// every day it runs. This is the same instant the seeded year is written against.
+final DateTime _now = DateTime.utc(2026, 9, 3, 19, 40);
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -42,7 +46,7 @@ void main() {
     expect(all.length, greaterThan(1000), reason: 'the year did not load');
 
     for (final m in kModules) {
-      final glance = m.glance(all);
+      final glance = m.glance(all, _now);
       // The rows this module would draw, as the words they carry: every event of its own types,
       // with whatever title or text it holds.
       final rows = <String>[];
@@ -66,9 +70,42 @@ void main() {
     );
     await SeedLoader(BundleSeedSource(rootBundle)).load(spine);
     for (final m in kModules) {
-      final glance = m.glance(spine.all);
+      final glance = m.glance(spine.all, _now);
       expect(glance.trim(), isNotEmpty, reason: '${m.id} glances nothing');
       expect(glance.length, lessThan(60), reason: '${m.id} glances a paragraph: "$glance"');
     }
+  });
+
+  test('a glance says the same thing at the same moment, whenever it is asked', () async {
+    // The rituals glance read '3 kept · 53 times · the last 7 days ago' in 03_us.report.json and
+    // '… 8 days ago' in both clips' reports — same `now` of 2026-09-03T19:40:00Z, same seed, same
+    // count of 53 — because the still and the clips were shot hours apart on the wall clock inside
+    // one capture, and the glance read the wall. A coherence critic found it.
+    final spine = await Spine.open(
+        SpineStore.memory(), const Identity(person: Person.noor, device: DeviceKind.android));
+    for (var i = 0; i < 6; i++) {
+      await spine.append(
+          'ritual_kept',
+          {
+            'ritual_id': 'tea',
+            'title': 'tea at the same hour',
+            'kept_at': DateTime.utc(2026, 8, 20 + i).toIso8601String(),
+          },
+          at: DateTime.utc(2026, 8, 20 + i),
+          hostAssign: true);
+    }
+    for (final m in kModules) {
+      final at = m.glance(spine.all, _now);
+      final laterSameMoment = m.glance(spine.all, _now);
+      expect(laterSameMoment, at, reason: '${m.id} answers differently at the same moment');
+      // and a day later it may differ, which is the point of taking the moment at all
+      final aDayOn = m.glance(spine.all, _now.add(const Duration(days: 1)));
+      if (m.id == 'rituals') {
+        expect(aDayOn, isNot(at),
+            reason: 'the rituals glance is the same a day later, so it is not reading the clock '
+                'it was handed');
+      }
+    }
+    await spine.close();
   });
 }

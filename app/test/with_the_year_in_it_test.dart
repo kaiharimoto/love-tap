@@ -29,6 +29,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_test/flutter_test.dart';
 
+/// A glance is asked at a moment, and a test that asks at the wall clock gets a different answer
+/// every day it runs. This is the same instant the seeded year is written against.
+final DateTime _now = DateTime.utc(2026, 9, 3, 19, 40);
+
 void main() {
   String? absent;
   late AppScope scope;
@@ -144,7 +148,7 @@ void main() {
     // not a fault, so the standard is four of the five rather than all of them.
     var shown = 0;
     for (final m in kModules) {
-      final glance = m.glance(scope.spine.all);
+      final glance = m.glance(scope.spine.all, _now);
       expect(glance.trim(), isNotEmpty, reason: '${m.id} glances nothing over a year');
       if (us.contains(m.label.toLowerCase()) || us.contains(glance.toLowerCase())) shown++;
     }

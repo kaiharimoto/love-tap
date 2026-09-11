@@ -143,7 +143,7 @@ class _Section extends StatelessWidget {
                   ),
                   const SizedBox(height: 3),
                   Text(
-                    module.glance(ctx.events),
+                    module.glance(ctx.events, ctx.now),
                     style: Hands.margin(size: 12.5),
                     maxLines: 2,
                   ),

@@ -746,7 +746,7 @@ class CaptureHooks {
               {
                 'id': m.id,
                 'events': all.where((e) => m.eventTypes.contains(e.type)).length,
-                'glance': m.glance(all),
+                'glance': m.glance(all, scope.clock.now()),
               }
           ],
         };
