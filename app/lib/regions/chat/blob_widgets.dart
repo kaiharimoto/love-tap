@@ -96,7 +96,19 @@ class BlobCache {
         'arrived': _resolved.length,
         'reading': _inFlight,
         'waiting': _waiting.length,
+        // A hash the store answered about and does not hold. Counted separately because it is not
+        // a slow fetch and must not be read as one: `asked 18, arrived 18, reading 0, waiting 0`
+        // beside three blank cards told a reader nothing was outstanding, which was true, and left
+        // the blank cards unexplained.
+        'the_store_does_not_have': _absent.length,
       };
+
+  /// Which hashes the store does not hold, for the record.
+  static List<String> absent() => _absent.toList()..sort();
+
+  /// Which hashes have been asked for and have not come back yet.
+  static List<String> stillComing() =>
+      (_futures.keys.toSet()..removeAll(_resolved)..removeAll(_absent)).toList()..sort();
 }
 
 class BlobImage extends StatelessWidget {

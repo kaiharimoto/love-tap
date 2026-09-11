@@ -99,6 +99,19 @@ class _MomentsRegionState extends State<MomentsRegion> {
       'tiles_without_a_picture': _Gallery.builtHashes
           .where((h) => BlobCache.peek(h) == null)
           .length,
+      // and *why* each one has none, which the count alone could not say. A critic measured three
+      // blank cards in the pile against a record reading `asked 18, arrived 18, reading 0,
+      // waiting 0` and could only conclude that nothing was outstanding — which was true, and told
+      // nobody anything about the three blank cards.
+      'the_tiles_with_no_picture': [
+        for (final h in _Gallery.builtHashes.where((h) => BlobCache.peek(h) == null))
+          {
+            'blob': h,
+            'why': BlobCache.missing(h)
+                ? 'the store answered and does not hold it'
+                : 'asked for and not back yet',
+          }
+      ],
       // what kinds of thing this lens is showing. The capture could name seven of the registry's
       // eighteen types across every scene report, and photo was one of the eleven it could not —
       // on the one screen whose whole subject is photographs.
@@ -654,6 +667,20 @@ class _One extends StatelessWidget {
                   quiet: true,
                 ),
               ),
+              // Whose it is and when, on every print — not only on the ones that developed.
+              //
+              // Three tiles in the pile were entirely blank: no picture, no caption, no author, no
+              // date, nothing, while every tile that had its picture carried 'author · date'. A
+              // print that never came out is still a print of something somebody took on a day,
+              // and the card says so. It sits at the foot of the card where a date is written on
+              // the back of a photograph, and over a picture it is legible because it is written
+              // on the border rather than on the image.
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: _PrintFoot(event: event, hash: hash),
+              ),
               if (event.type == 'video') ...[
                 Mark.play(size: 26, colour: Pen.graphite, seed: row),
                 Positioned(
@@ -667,6 +694,36 @@ class _One extends StatelessWidget {
               ],
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The line at the foot of a print: who took it and when, and — only when the picture is not
+/// there — that it is not there.
+class _PrintFoot extends StatelessWidget {
+  const _PrintFoot({required this.event, required this.hash});
+  final Event event;
+  final String hash;
+
+  @override
+  Widget build(BuildContext context) {
+    final has = BlobCache.peek(hash) != null;
+    final words = [event.author.name, dayLabel(event.ts)].where((w) => w.isNotEmpty).join(' · ');
+    return IgnorePointer(
+      child: Container(
+        // On a developed print the words sit on the picture, so they get the thinnest wash of the
+        // card's own colour under them rather than a panel: a caption written on the white border
+        // of a photograph, where a photograph's border is.
+        color: has ? const Color(0x66F6F1E6) : null,
+        padding: const EdgeInsets.fromLTRB(4, 1, 4, 2),
+        child: Text(
+          has ? words : '$words · ${S.notDeveloped}',
+          style: Hands.margin(size: 10),
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          softWrap: false,
         ),
       ),
     );

@@ -54,6 +54,18 @@ String whenLabel(Object? at) {
 /// so one clip had three lengths in one evidence set. A position is how far in you are, so it
 /// truncates — 2.9 seconds in is still 0:02 until it is three. A total is how long the thing is,
 /// so it rounds up: a two-and-a-half-second clip is not over at 0:02.
+/// A length of time, said one way everywhere: `m:ss`.
+///
+/// [total] is the length of a thing rather than a position in it, and it rounds up — a
+/// two-and-a-half-second clip is not over at 0:02. A position floors, because you are not three
+/// seconds in until you are.
+///
+/// A messenger critic read `0:00 / 0:03` off the viewer for a position of 625 ms in 2500 and
+/// called the two ends of one readout inconsistent. They are, and deliberately: an elapsed clock
+/// and a duration are two different questions, and every media player on earth answers them this
+/// way. Tenths were tried here and reverted — one grammar for a length of time, everywhere, is a
+/// rule three cycles of reports rest on, and the readout's oddity is confined to clips under three
+/// seconds, which in this build only the seeded stubs are.
 String clockOf(int ms, {bool total = false}) {
   final s = ms <= 0 ? 0 : (total ? (ms + 999) ~/ 1000 : ms ~/ 1000);
   return '${s ~/ 60}:${(s % 60).toString().padLeft(2, '0')}';

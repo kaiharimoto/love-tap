@@ -55,6 +55,11 @@ class S {
   static const pause = 'pause';
   static const fetching = 'still fetching the picture.';
 
+  /// A print whose picture the store does not hold. Said on the card itself, under whose it is and
+  /// when — because a blank card that says nothing is the one thing a pile of prints must not have
+  /// in it, and three of them were in one.
+  static const notDeveloped = 'not developed';
+
   // link
   static const offlineQueued = "can't reach the other phone. it'll go when it can.";
   static const hostDown = "the other phone isn't answering. keeping this until it does.";

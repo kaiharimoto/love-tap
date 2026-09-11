@@ -179,6 +179,24 @@ void main() {
         reason: 'the store has answered and does not have it: it is not still coming');
   });
 
+  testWidgets('a print that never came out still says whose it is and when', (tester) async {
+    // Three tiles in the pile were entirely blank: no picture, no caption, no author, no date,
+    // nothing, while every tile that had its picture carried 'author · date'. A print that never
+    // developed is still a print of something somebody took on a day.
+    final scope = await _aScope();
+    addTearDown(scope.dispose);
+    await scope.spine.append('photo', {'blob': 'never-had-it', 'w': 1200, 'h': 1600},
+        at: DateTime.utc(2026, 3, 4), hostAssign: true);
+    BlobCache.forget('never-had-it');
+    await _draw(tester, scope, const MomentsRegion());
+    await tester.pumpAndSettle();
+
+    final feet = find.textContaining(RegExp(r'(noor|teo) · '));
+    expect(feet, findsWidgets, reason: 'the card says nothing about itself at all');
+    expect(find.textContaining(S.notDeveloped), findsOneWidget,
+        reason: 'a blank card that does not say it is blank is a card that has failed silently');
+  });
+
   testWidgets('a video in the pile is not a photograph', (tester) async {
     // In the gallery a video with a poster was a print of one frame and nothing else: the same
     // card, the same border, and nothing saying it moves. Six photographs and one video built

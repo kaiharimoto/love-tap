@@ -47,4 +47,5 @@ void main() {
     expect(standingLine(Person.noor, here, now), contains('there now'));
     expect(here.lastActiveMinutesAt(now), 0);
   });
+
 }
