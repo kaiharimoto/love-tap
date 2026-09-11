@@ -177,7 +177,16 @@ double pageLiftAt(List<HapticSegment> segments, int ms) {
     at += s.ms;
     previous = s.on ? amp : previous * math.exp(-s.ms / 48.0);
   }
-  return 0.0;
+  // And after the last segment the page does not stop dead.
+  //
+  // This returned zero the moment the pattern ended, so the substitute had an arrival and a
+  // sustain and no release: an emotional critic tracked the board against each run's own rest
+  // frame and found hold at dy -12 on frame 118 and dy 0 on frame 119, squeeze at -17 then 0,
+  // soup at -13 then 0 — full deflection to rest in a single sixteen-millisecond frame, three
+  // times out of three, with the whole frame then reading 0.000 grey levels of change for the
+  // next thirty. A hand that has been pushed comes back over about a tenth of a second, and this
+  // is the same fifty-millisecond fall the pattern's own gaps already use.
+  return previous * math.exp(-(ms - at) / 48.0);
 }
 
 /// How far the page moves at full amplitude, in logical pixels. On the PWA the page is the only

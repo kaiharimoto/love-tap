@@ -81,6 +81,39 @@
    "ms": 16
   },
   {
+   "do": "showFamily",
+   "arg": "ache",
+   "after": 0,
+   "why": "ACHE and STATIC appear as tabs in every picker frame and the picker is never shown open on either, so the five Ache feelings and the six Static ones are in no artifact at all \u2014 an emotional critic counted them. Opening them is what puts thirty-four feelings in the evidence rather than twenty-three."
+  },
+  {
+   "do": "step",
+   "ms": 16
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 14,
+   "from": 73,
+   "ms": 16
+  },
+  {
+   "do": "showFamily",
+   "arg": "static",
+   "after": 0
+  },
+  {
+   "do": "step",
+   "ms": 16
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/15_authored_feeling",
+   "count": 14,
+   "from": 87,
+   "ms": 16
+  },
+  {
    "do": "holdOver",
    "arg": "pigeon",
    "after": 0
@@ -89,7 +122,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 44,
-   "from": 73,
+   "from": 101,
    "ms": 32
   },
   {
@@ -100,7 +133,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 75,
-   "from": 117,
+   "from": 145,
    "ms": 16
   },
   {
@@ -121,7 +154,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 16,
-   "from": 192,
+   "from": 220,
    "ms": 16
   },
   {
@@ -144,7 +177,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 106,
-   "from": 208,
+   "from": 236,
    "ms": 16
   },
   {
@@ -167,7 +200,7 @@
    "do": "frames",
    "dir": "evidence/frames/15_authored_feeling",
    "count": 106,
-   "from": 314,
+   "from": 342,
    "ms": 16
   },
   {

@@ -55,6 +55,19 @@ void main() {
 
   test('and the whole of it goes when the pattern does', () {
     final f = kBuiltInFeelings.first;
+    // and it lets go over about a tenth of a second rather than in one frame. An emotional critic
+    // tracked the board through 07 against each run's own rest frame: hold at dy -12 on frame 118
+    // and dy 0 on frame 119, squeeze -17 then 0, soup -13 then 0 — full deflection to rest in one
+    // sixteen-millisecond step, three times out of three, and then 0.000 grey levels of change for
+    // thirty frames. An arrival and a sustain with no release.
+    final end = f.hapticLengthMs;
+    final atEnd = pageLiftAt(f.segments, end);
+    if (atEnd > 0.05) {
+      expect(pageLiftAt(f.segments, end + 16), greaterThan(atEnd * 0.5),
+          reason: '${f.id} is at rest one frame after its pattern ends');
+      expect(pageLiftAt(f.segments, end + 96), lessThan(atEnd * 0.5),
+          reason: '${f.id} is still deflected a tenth of a second after its pattern ends');
+    }
     expect(pageLiftAt(f.segments, f.hapticLengthMs + 400), lessThan(0.02),
         reason: 'the desk is still moving after the pattern has finished');
   });

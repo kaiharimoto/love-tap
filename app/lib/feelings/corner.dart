@@ -357,6 +357,33 @@ class _CornerPainter extends CustomPainter {
 }
 
 /// The vocabulary fanned across the desk, by family. Objects, never a grid of icons.
+/// The vocabulary sheet on its own, for a test that has to measure where its tiles land. Nothing
+/// in the app builds this: the corner builds `_Fan` directly.
+class FanForTest extends StatelessWidget {
+  const FanForTest({
+    super.key,
+    required this.registry,
+    required this.family,
+    this.intensity = 0.7,
+  });
+  final FeelingRegistry registry;
+  final Family family;
+  final double intensity;
+
+  @override
+  Widget build(BuildContext context) => _Fan(
+        registry: registry,
+        family: family,
+        onFamily: (_) {},
+        onHover: (_) {},
+        onPick: (_) {},
+        onDismiss: () {},
+        under: null,
+        intensity: intensity,
+        scrim: 1.0,
+      );
+}
+
 class _Fan extends StatelessWidget {
   const _Fan({
     required this.registry,
@@ -401,7 +428,17 @@ class _Fan extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Padding(
+              // Flexible, so a family with more members than fit shortens the sheet instead of
+              // drawing past the bottom of the screen.
+              //
+              // An emotional critic found the two authored feelings the only two of the
+              // thirty-six whose entry is cut off: `tuesday soup` is the seventh tile in Shelter
+              // and its card is cut by the tab strip at about y 2180 with its name drawn at 2310,
+              // legible *behind* CHAT and US rather than below them; `pigeon` is the seventh in
+              // Mischief and does the same. Six tiles fit and the seventh did not, and a Column
+              // whose child is taller than its constraints paints outside them.
+              Flexible(
+                child: Padding(
                 padding: const EdgeInsets.fromLTRB(5, 0, 5, 66),
                 child: Slip(
                   id: 'the.vocabulary.sheet',
@@ -489,7 +526,15 @@ class _Fan extends StatelessWidget {
                                   children: [
                                     FeelingObject(
                                       feeling: members[i],
-                                      size: under?.id == members[i].id ? 92 : 76,
+                                      // A family the couple has added a feeling to has one more
+                                      // tile than the sheet was drawn for, and the seventh one
+                                      // landed 4.6 points behind the tab strip — measured, at the
+                                      // clip's own 360 by 780: Shelter's last name at 718.6
+                                      // against a strip that starts at 714. The tiles step down
+                                      // rather than the last one falling off the bottom, because a
+                                      // feeling somebody made is not a lesser feeling.
+                                      size: (under?.id == members[i].id ? 92 : 76) -
+                                          (members.length > 6 ? 10 : 0),
                                       intensity: under?.id == members[i].id ? intensity : 0.6,
                                       tilt: math.sin(i * 1.7) * 0.09,
                                     ),
@@ -514,6 +559,7 @@ class _Fan extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
                 ),
               ),
             ],
