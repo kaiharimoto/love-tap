@@ -16,7 +16,7 @@
 #
 #   bash tools/plain_fonts_experiment.sh
 #
-# Writes evidence/logs/what_the_alternates_cost.json.
+# Writes evidence/experiments/what_the_alternates_cost/what_the_alternates_cost.json.
 set -uo pipefail
 cd "$(dirname "$0")/.."
 . ./toolchain/env.sh
@@ -24,7 +24,7 @@ cd "$(dirname "$0")/.."
 SCRATCH="${TMPDIR:-/tmp}/lovetap-plain"
 FROZEN_NOW="2026-09-03T19:40:00Z"
 mkdir -p "$SCRATCH"
-OUT="evidence/logs/what_the_alternates_cost.json"
+OUT="evidence/experiments/what_the_alternates_cost/what_the_alternates_cost.json"
 
 run_arm() { # name  extra-dart-defines
   local name="$1" extra="${2:-}"

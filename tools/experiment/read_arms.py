@@ -49,10 +49,10 @@ def main():
                'costs 688 — about 276 ms a row. The test that was read as ruling the fonts out '
                'runs under flutter test, which passes --use-test-fonts --disable-asset-fonts, so '
                'it laid its paragraphs out in a font with nothing to shape.',
-        'with_the_alternates': read(f'{ROOT}/evidence/logs/scroll_webkit_alternates.json'),
-        'without_them': read(f'{ROOT}/evidence/logs/scroll_webkit_plain.json'),
-        'rows_with_the_alternates': rows(f'{ROOT}/evidence/logs/11_alternates.fling.json'),
-        'rows_without_them': rows(f'{ROOT}/evidence/logs/11_plain.fling.json'),
+        'with_the_alternates': read(f'{ROOT}/evidence/experiments/what_the_alternates_cost/scroll_webkit_alternates.json'),
+        'without_them': read(f'{ROOT}/evidence/experiments/what_the_alternates_cost/scroll_webkit_plain.json'),
+        'rows_with_the_alternates': rows(f'{ROOT}/evidence/experiments/what_the_alternates_cost/11_alternates.fling.json'),
+        'rows_without_them': rows(f'{ROOT}/evidence/experiments/what_the_alternates_cost/11_plain.fling.json'),
     }
     a = out['with_the_alternates'].get('the_fling_alone') or {}
     b = out['without_them'].get('the_fling_alone') or {}
