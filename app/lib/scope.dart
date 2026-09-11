@@ -90,8 +90,14 @@ class AppScope extends ChangeNotifier {
   String _lastArrival = '';
 
   /// A feeling from them, the moment it lands, so the shell can drop it on the desk.
-  final StreamController<(String, double)> _landed = StreamController<(String, double)>.broadcast();
-  Stream<(String, double)> get landed => _landed.stream;
+  // The feeling, how hard it was sent, who sent it and when. The last two were not carried, and
+  // the thing that landed on the desk was therefore the only drawing of a feeling anywhere in the
+  // app with no name, no time and no sender on it — while the shelf row two inches above it wrote
+  // all three. A coherence critic found the same feeling on the glass twice at once, labelled in
+  // one place and anonymous in the other.
+  final StreamController<(String, double, Person, int)> _landed =
+      StreamController<(String, double, Person, int)>.broadcast();
+  Stream<(String, double, Person, int)> get landed => _landed.stream;
 
   /// Kept between refreshes: the thread is a function of the log, but that does not mean
   /// recomputing it from the first event of the year every time somebody scrolls. Scrolling emits
@@ -144,7 +150,7 @@ class AppScope extends ChangeNotifier {
         lastPocketFeeling = f.id;
         lastPocketAt = clock.now().millisecondsSinceEpoch;
         unawaited(ambient.pocket(f, intensity));
-        if (!_landed.isClosed) _landed.add((f.id, intensity));
+        if (!_landed.isClosed) _landed.add((f.id, intensity, e.author, e.ts));
       }
       break;
     }

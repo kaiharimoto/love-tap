@@ -25,18 +25,31 @@ import 'package:flutter/scheduler.dart';
 
 import '../capture/hooks.dart';
 import '../flags.dart';
+import '../material/hands.dart';
+import '../spine/spine.dart' show Person;
 import '../material/palette.dart';
 import '../material/objects.dart';
 import 'builtins.dart';
 
 /// One thing arriving: what it is, how hard it was thrown, and which way it came.
 class Arrival {
-  const Arrival({required this.feeling, required this.intensity, required this.mine});
+  const Arrival({
+    required this.feeling,
+    required this.intensity,
+    required this.mine,
+    required this.from,
+    required this.at,
+  });
   final Feeling feeling;
   final double intensity;
 
   /// Something you sent lands too — you feel it leave — but it lands lighter and off to the side.
   final bool mine;
+
+  /// Who sent it, and when it was sent — the two things the shelf writes under its copy of the
+  /// same object and this one did not write at all.
+  final Person from;
+  final DateTime at;
 }
 
 /// The ballistics. Distances are in object-heights, time in seconds, and the numbers are the
@@ -345,13 +358,26 @@ class _Landing extends StatelessWidget {
     final scale = 1.0 - 0.62 * ease;
     final fade = put < 0.7 ? 1.0 : (1.0 - (put - 0.7) / 0.3).clamp(0.0, 1.0);
 
+    // Whose it is and when, written on the desk under it, in the hand and at the sizes the shelf
+    // writes its copy of the same object in.
+    //
+    // This carried nothing. The same feeling was on the glass twice at once in 15 — 'tuesday soup
+    // / 20:35 · noor' in the shelf, and lying across the state card above it with no name, no time
+    // and no sender at all — which is one event drawn two incompatible ways, the thing the
+    // coherence row exists to catch. It comes in as the object touches the desk and goes with it.
+    final when = arrival.at.toLocal();
+    final hh = when.hour.toString().padLeft(2, '0');
+    final mm = when.minute.toString().padLeft(2, '0');
+    final written = (h <= 0.001 ? 1.0 : 0.0) * fade;
+    final box = s * scale;
+
     return Stack(
       children: [
         Positioned(
-          left: x - s * scale / 2,
-          top: y - s * scale / 2,
-          width: s * scale,
-          height: s * scale,
+          left: x - box / 2,
+          top: y - box / 2,
+          width: box,
+          height: box,
           child: Opacity(
             opacity: fade,
             child: Transform.rotate(
@@ -361,7 +387,7 @@ class _Landing extends StatelessWidget {
                 transform: Matrix4.diagonal3Values(1.0 + squash * 0.6, 1.0 - squash, 1.0),
                 child: FeelingObject(
                   feeling: arrival.feeling,
-                  size: s * scale,
+                  size: box,
                   intensity: arrival.intensity,
                   shadowScale: shadow,
                   lift: h,
@@ -370,6 +396,28 @@ class _Landing extends StatelessWidget {
             ),
           ),
         ),
+        if (written > 0)
+          Positioned(
+            left: x - box * 0.75,
+            top: y + box / 2 + 2,
+            width: box * 1.5,
+            child: Opacity(
+              opacity: written,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(arrival.feeling.name,
+                      style: Hands.onDesk(size: 10 * scale.clamp(0.6, 1.4)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center),
+                  Text('$hh:$mm${arrival.mine ? '' : ' · ${arrival.from.name}'}',
+                      style: Hands.onDesk(size: 8.5 * scale.clamp(0.6, 1.4)),
+                      textAlign: TextAlign.center),
+                ],
+              ),
+            ),
+          ),
       ],
     );
   }

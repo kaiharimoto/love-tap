@@ -180,6 +180,45 @@ def sheet(w, h, nx=40, ny=40, warp=None):
     return bm
 
 
+def tear_all_round(bm, w, h, seed, deep_mm=1.3, fray_mm=0.35):
+    """Eat a torn edge into all four sides of a sheet, in place.
+
+    A card with four straight sides and square corners is the one shape this material is defined
+    against, and three feeling objects were exactly that: a rectangle of near-white paper with a
+    mark on it. A coherence critic read the authored feeling's object, on the glass at 190 points
+    across, as "an unlabelled, straight-edged card with a drop shadow" — and it was, because the
+    render is one. It is not the app drawing it wrongly; it is what came out of Blender.
+
+    The same `common.torn_edge` the folds and the dog-ear use, four times with four seeds, plus a
+    little z fray so the light catches the fibres at the boundary. Deterministic in [seed], so the
+    object tears the same way every render.
+    """
+    bite_x0 = common.torn_edge(seed ^ 0x01, h * 1000.0, deep_mm=deep_mm)
+    bite_x1 = common.torn_edge(seed ^ 0x02, h * 1000.0, deep_mm=deep_mm)
+    bite_y0 = common.torn_edge(seed ^ 0x03, w * 1000.0, deep_mm=deep_mm)
+    bite_y1 = common.torn_edge(seed ^ 0x04, w * 1000.0, deep_mm=deep_mm)
+    fray = common.torn_edge(seed ^ 0x05, (w + h) * 1000.0, deep_mm=fray_mm)
+    for v in bm.verts:
+        u = v.co.x / w + 0.5
+        t = v.co.y / h + 0.5
+        edge = False
+        if u < 0.04:
+            v.co.x += bite_x0(v.co.y * 1000.0)
+            edge = True
+        elif u > 0.96:
+            v.co.x -= bite_x1(v.co.y * 1000.0)
+            edge = True
+        if t < 0.04:
+            v.co.y += bite_y0(v.co.x * 1000.0)
+            edge = True
+        elif t > 0.96:
+            v.co.y -= bite_y1(v.co.x * 1000.0)
+            edge = True
+        if edge:
+            v.co.z += fray((v.co.x + v.co.y) * 1000.0) * 0.6
+    return bm
+
+
 def solidify(obj, t=PAPER_T):
     m = obj.modifiers.new("thickness", "SOLIDIFY")
     m.thickness = t
@@ -711,7 +750,9 @@ def obj_clover(rng):
 
 def obj_coffee_ring(rng):
     card = paper_mat("ring_card", (0.94, 0.92, 0.87))
-    bm = sheet(0.040, 0.030, 30, 24, lambda u, v: 0.0006 * math.sin(u * 5 + v * 3))
+    bm = sheet(0.040, 0.030, 44, 34, lambda u, v: 0.0006 * math.sin(u * 5 + v * 3))
+    # torn out of something, like every other piece of paper on this desk
+    tear_all_round(bm, 0.040, 0.030, 0xC0FFEE)
     base = solidify(new_mesh(bm, "ring_card", card))
     stain = simple_mat("stain", (0.52, 0.36, 0.22), roughness=0.7)
     bm2 = bmesh.new()
@@ -875,8 +916,9 @@ def obj_pencil_smudge(rng):
     """Grey: a graphite smudge on a scrap — the side of a hand dragged through pencil, which is
     what a grey day leaves on the page."""
     card = paper_mat("smudge_card", (0.92, 0.91, 0.87), tooth=1.0)
-    parts = [solidify(new_mesh(sheet(0.036, 0.028, 30, 24, lambda u, v: 0.0003 * math.sin(u * 4 + v * 3)),
-                                "smudge_card", card))]
+    smudge_sheet = sheet(0.036, 0.028, 44, 34, lambda u, v: 0.0003 * math.sin(u * 4 + v * 3))
+    tear_all_round(smudge_sheet, 0.036, 0.028, 0x5A11D6)
+    parts = [solidify(new_mesh(smudge_sheet, "smudge_card", card))]
     graphite = simple_mat("graphite_smear", (0.30, 0.30, 0.31), roughness=0.55, metallic=0.25)
     # the smear: a soft-edged streak, thicker where the hand came down and fading where it left
     bm = bmesh.new()
@@ -968,7 +1010,11 @@ def obj_user_soup(rng):
     """tuesday soup, the feeling Teo made: the ring a bowl left on the recipe card, with a drip
     where it was put down too fast. The same idea as the coffee ring, in soup."""
     card = paper_mat("soup_card", (0.95, 0.92, 0.84))
-    bm = sheet(0.044, 0.034, 30, 24, lambda u, v: 0.0005 * math.sin(u * 4 + v * 3))
+    bm = sheet(0.044, 0.034, 48, 38, lambda u, v: 0.0005 * math.sin(u * 4 + v * 3))
+    # A recipe card torn out of a notebook. It was a clean rectangle, and at 190 points across on
+    # the glass that is a square-cornered card with a drop shadow floating over the region — which
+    # is what a coherence critic measured in three clips and what the anti-goal forbids outright.
+    tear_all_round(bm, 0.044, 0.034, 0x503D11)
     base = solidify(new_mesh(bm, "soup_card", card))
     # a stain is flat and dull: the first render had the ring as a glossy tube standing off the
     # card, and it read as a rubber ring lying on it rather than as something that had dried there

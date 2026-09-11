@@ -84,8 +84,25 @@ class Sensation {
     if (sound) {
       unawaited(_playSound(feeling, intensity));
     }
+    // The ask is recorded whichever platform this is, and so is what answered it.
+    //
+    // It used to be recorded inside _vibrate, and _vibrate only ran off the web — so on the phone
+    // the record existed and in every artifact this build can actually produce it did not, and
+    // `asked_a_motor_for` appeared in none of nineteen region reports. An emotional critic read
+    // that, correctly, as no artifact showing the app asking a motor for anything. A browser
+    // having no motor is an answer; leaving the key out is not.
+    final ask = <String, Object?>{
+      'feeling': feeling.id,
+      'timings': [for (final s in scaled) s.ms],
+      'amplitudes': [for (final s in scaled) s.amp],
+      'answered_by': kIsWeb
+          ? 'no motor in a browser: the page rhythm carries it instead'
+          : 'waiting on the platform',
+    };
+    asks.add(ask);
+    if (asks.length > 64) asks.removeAt(0);
     if (!kIsWeb) {
-      unawaited(_vibrate(scaled));
+      unawaited(_vibrate(scaled, ask));
     }
     await _movePaper(scaled);
     return report;
@@ -101,14 +118,7 @@ class Sensation {
   /// written down: what was asked for, in milliseconds and amplitudes, and what answered.
   static final List<Map<String, Object?>> asks = [];
 
-  Future<void> _vibrate(List<HapticSegment> segments) async {
-    final ask = <String, Object?>{
-      'timings': [for (final s in segments) s.ms],
-      'amplitudes': [for (final s in segments) s.amp],
-      'answered_by': 'nothing yet',
-    };
-    asks.add(ask);
-    if (asks.length > 64) asks.removeAt(0);
+  Future<void> _vibrate(List<HapticSegment> segments, Map<String, Object?> ask) async {
     try {
       await _channel.invokeMethod<void>('waveform', {
         'timings': ask['timings'],

@@ -131,6 +131,147 @@ def negative_control(box):
     }
 
 
+def _frame_px(path):
+    try:
+        from PIL import Image
+        w, h = Image.open(path).size
+        return w * h
+    except Exception:
+        return 1
+
+
+# The colours a PaperPiece falls back to when its render has not arrived, read off
+# app/lib/material/palette.dart. A flat area of one of these exact values is a sheet with no paper
+# on it; a flat area of anything else is a photograph of something flat, which is not this build's
+# fault. That distinction is the whole reason 14_media_viewer's sky is not counted: it is 219 to
+# 230 and slightly blue, and none of these.
+FALLBACKS = {
+    (0xF1, 0xEC, 0xDF): "Paper.lined",
+    (0xEC, 0xE0, 0xC2): "Paper.aged",
+    (0xE9, 0xEC, 0xEC): "Paper.graph",
+    (0xF3, 0xE6, 0xA8): "Paper.legal",
+    (0xF6, 0xF1, 0xE6): "Paper.index",
+    (0xF2, 0xED, 0xE2): "Paper.looseleaf",
+    (0xEF, 0xEA, 0xDC): "Paper.spiral",
+    (0xF3, 0xE0, 0x8A): "Paper.stickyYellow",
+    (0xF2, 0xC1, 0xC1): "Paper.stickyPink",
+    (0xE7, 0xE0, 0xCE): "Paper.underside",
+    (0xF3, 0xEE, 0xE3): "the literal Container fill authoring.dart used to use",
+}
+
+
+def _fallback_name(rgb, tol=2):
+    for k, name in FALLBACKS.items():
+        if all(abs(a - b) <= tol for a, b in zip(rgb, k)):
+            return name
+    return None
+
+
+def plateaus(path, pale=190.0, span=1.0, smallest=2000):
+    """Every pale patch of the frame that is flat, found directly rather than through a window.
+
+    The 80-pixel window is the gate and it under-counts: a voice-note tile is 410 by 170 with a
+    waveform and a line of writing across the middle of it, so only one of six identical cards had
+    an 80-pixel square of nothing in it and the report said `windows_under_the_floor: 1` for five
+    point eight per cent of the frame. This says what is actually there — a pixel whose five-by-five
+    neighbourhood spans no more than [span] grey levels is flat, and the connected regions of those
+    that are at least [smallest] pixels are the shapes a reader can go and look at.
+    """
+    try:
+        import numpy as np
+        from PIL import Image
+    except Exception:
+        return []
+    a = np.asarray(Image.open(path).convert("RGB")).astype(np.float32)
+    lum = 0.2126 * a[..., 0] + 0.7152 * a[..., 1] + 0.0722 * a[..., 2]
+    h, w = lum.shape
+    k = 5
+    lo = np.full(lum.shape, np.inf, dtype=np.float32)
+    hi = np.full(lum.shape, -np.inf, dtype=np.float32)
+    for dy in range(-(k // 2), k // 2 + 1):
+        for dx in range(-(k // 2), k // 2 + 1):
+            sh = np.roll(np.roll(lum, dy, axis=0), dx, axis=1)
+            lo = np.minimum(lo, sh)
+            hi = np.maximum(hi, sh)
+    flat = (hi - lo <= span) & (lum >= pale)
+    flat[: k // 2, :] = flat[-(k // 2):, :] = False
+    flat[:, : k // 2] = flat[:, -(k // 2):] = False
+    try:
+        from scipy import ndimage
+        lab, n = ndimage.label(flat)
+        out = []
+        for i in range(1, n + 1):
+            ys, xs = np.where(lab == i)
+            if len(ys) < smallest:
+                continue
+            rgb = tuple(int(v) for v in a[ys[0], xs[0]])
+            out.append({
+                "area_px": int(len(ys)),
+                "box": [int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())],
+                "luma": round(float(lum[ys[0], xs[0]]), 1),
+                "rgb": "#%02X%02X%02X" % rgb,
+                # named only when it is one of the app's own fallback fills
+                "a_sheet_with_no_paper_on_it": _fallback_name(rgb),
+            })
+    except Exception:
+        return []
+    out.sort(key=lambda r: -r["area_px"])
+    return out
+
+
+def extents(path, offenders, tol=1.0):
+    """How big each flat area actually is, not just the window that found it.
+
+    A window is 80 pixels and the shape it lands in is a card. `windows_under_the_floor: 1` was the
+    whole of what this check said about six cream rectangles covering 260,907 pixels — 5.8 per cent
+    of the frame — which is a number a reader has to go and measure for themselves before they can
+    tell a sampling artefact from a fifth of the screen. So each offending window is grown over
+    everything within `tol` grey levels of it, four-connected, and what comes back is the area and
+    the box it sits in.
+    """
+    if not offenders:
+        return []
+    try:
+        import numpy as np
+        from PIL import Image
+    except Exception:
+        return []
+    a = np.asarray(Image.open(path).convert("RGB")).astype(np.float32)
+    lum = 0.2126 * a[..., 0] + 0.7152 * a[..., 1] + 0.0722 * a[..., 2]
+    h, w = lum.shape
+    seen = np.zeros(lum.shape, dtype=bool)
+    out = []
+    for o in offenders:
+        x0, y0 = o["at"]
+        cx, cy = min(x0 + 40, w - 1), min(y0 + 40, h - 1)
+        if seen[cy, cx]:
+            continue
+        target = lum[cy, cx]
+        near = (np.abs(lum - target) <= tol) & ~seen
+        # four-connected region containing (cx, cy), by repeated dilation inside `near`
+        region = np.zeros(lum.shape, dtype=bool)
+        region[cy, cx] = True
+        while True:
+            grown = region.copy()
+            grown[1:, :] |= region[:-1, :]
+            grown[:-1, :] |= region[1:, :]
+            grown[:, 1:] |= region[:, :-1]
+            grown[:, :-1] |= region[:, 1:]
+            grown &= near
+            if grown.sum() == region.sum():
+                break
+            region = grown
+        seen |= region
+        ys, xs = np.where(region)
+        out.append({
+            "area_px": int(region.sum()),
+            "box": [int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())],
+            "luma": round(float(target), 1),
+        })
+    out.sort(key=lambda r: -r["area_px"])
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("files", nargs="*")
@@ -174,6 +315,8 @@ def main():
         worst, flat = windows(f, a.box, a.step, a.pale)
         offenders = [{"at": [x, y], "std": round(s, 3)} for s, x, y in flat if s < floor]
         offenders.sort(key=lambda o: o["std"])
+        # every flat shape in the frame, and then the ones the window gate actually landed in
+        areas = plateaus(f) or extents(f, offenders)
         report["stills"][os.path.basename(f)] = {
             "flattest": round(worst[0], 3) if worst[1] else None,
             "where": worst[1],
@@ -181,8 +324,20 @@ def main():
             "windows_under_the_floor": len(offenders),
             "windows_quieter_than_2": sum(1 for s, _, _ in flat if s < QUIET),
             "worst_few": offenders[:5],
+            # what the flat windows are *part of*: the shape, its size, and how much of the frame
+            "flat_areas": areas[:8],
+            "flat_px": sum(r["area_px"] for r in areas),
+            "flat_share_of_the_frame": round(
+                sum(r["area_px"] for r in areas) / max(1, _frame_px(f)), 4),
         }
-        if len(offenders) > a.allow:
+        # A window under the floor, or any flat shape of one of the app's own fallback colours.
+        # The window gate under-counts badly: a voice-note tile is 410 by 170 with a waveform and a
+        # line of writing across the middle, so only one of six identical cream cards had an
+        # 80-pixel square of nothing in it, and the report said `windows_under_the_floor: 1` for
+        # five per cent of the frame.
+        unpapered = [r for r in areas if r.get("a_sheet_with_no_paper_on_it")]
+        report["stills"][os.path.basename(f)]["sheets_with_no_paper_on_them"] = unpapered[:8]
+        if len(offenders) > a.allow or unpapered:
             bad += 1
     report["ok"] = bad == 0
     report["files_with_a_flat_fill"] = bad

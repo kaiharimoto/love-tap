@@ -24,7 +24,34 @@ class MaskCache {
   static final Map<String, ui.Image> _images = {};
   static final Map<String, Future<ui.Image>> _loading = {};
 
-  static ui.Image? peek(String asset) => _images[asset];
+  /// How many decoded masks to hold, and never more.
+  ///
+  /// This was unbounded, and it is a strong reference: nothing Flutter does can reclaim what is in
+  /// here. There are 224 tear files and a decoded mask is 1024 x 578 x 4 bytes, so an app that had
+  /// scrolled past enough notes held about half a gigabyte of alpha that nothing could take back —
+  /// on top of the image cache's own budget for the stocks, which is what then had to give. That
+  /// is the shape of the fault behind six flat cream cards in 04_moments: their torn fringe drew,
+  /// because the mask was held here, and their paper did not, because the stock had been evicted
+  /// from the cache the mask was crowding out.
+  ///
+  /// Forty-eight is about a screenful and a half of distinct tears on either phone.
+  static const int keep = 48;
+
+  /// How many masks are held, for the record. The capture reads it; so does anyone wondering
+  /// where the memory went.
+  static int get held => _images.length;
+
+  /// How many were dropped to stay inside [keep] since the app started.
+  static int dropped = 0;
+
+  static ui.Image? peek(String asset) {
+    final have = _images[asset];
+    if (have == null) return null;
+    // touched: least-recently-used is the front of the map, so re-inserting moves it to the back
+    _images.remove(asset);
+    _images[asset] = have;
+    return have;
+  }
 
   /// How many masks are being decoded right now.
   ///
@@ -35,7 +62,7 @@ class MaskCache {
   static int get decoding => _loading.length;
 
   static Future<ui.Image> load(String asset) {
-    final have = _images[asset];
+    final have = peek(asset);
     if (have != null) return Future.value(have);
     return _loading.putIfAbsent(asset, () async {
       final data = await rootBundle.load(asset);
@@ -43,8 +70,19 @@ class MaskCache {
       final frame = await codec.getNextFrame();
       _images[asset] = frame.image;
       _loading.remove(asset);
+      _trim();
       return frame.image;
     });
+  }
+
+  /// Drop the least recently used down to [keep]. Not disposed: a piece that is on the glass
+  /// right now may still be drawing with one, and a mask that comes back is decoded again.
+  static void _trim() {
+    while (_images.length > keep) {
+      final oldest = _images.keys.first;
+      _images.remove(oldest);
+      dropped += 1;
+    }
   }
 
   /// Decode a set of masks up front (capture mode does this so no frame waits on a decode).
@@ -145,6 +183,19 @@ class PaperPiece extends StatelessWidget {
   /// the receipt stock's own 0.82 to 1.45 at every scale it could be drawn at, so something is
   /// not drawing the stock and this is the number that will say what.
   static List<Object>? smallestWindow;
+
+  /// Stocks that a piece asked for and was still waiting for at the moment the frame was taken.
+  ///
+  /// A stock that has not arrived paints as the flat colour underneath it, and that is
+  /// indistinguishable in a still from paper with no tooth in it — six cream rectangles in
+  /// 04_moments, 260,907 pixels of one exact value, with their torn fringe drawn perfectly around
+  /// them, because the mask is held in MaskCache and the stock was in the image cache and had
+  /// been evicted. Nothing said so: the counters said 257 pieces drew at their own density, and
+  /// they had all *decided* to. This is the decision's outcome rather than the decision.
+  static final Set<String> waitingForPaper = <String>{};
+
+  /// How many times a stock has arrived after the piece asking for it was already on the glass.
+  static int paperArrivedLate = 0;
 
   /// Which sampler to draw a stock with, from how big it is being drawn.
   ///
@@ -354,6 +405,15 @@ class PaperPiece extends StatelessWidget {
                 filterQuality: atOwnSize
                     ? FilterQuality.none
                     : PaperPiece.stockFilter(stock, box.biggest, dpr, stockScale),
+                // Whether the paper is actually there, as against whether it was asked for.
+                frameBuilder: (context, child, frame, wasSynchronous) {
+                  if (frame == null) {
+                    PaperPiece.waitingForPaper.add(stock);
+                  } else if (PaperPiece.waitingForPaper.remove(stock) && !wasSynchronous) {
+                    PaperPiece.paperArrivedLate += 1;
+                  }
+                  return child;
+                },
                 errorBuilder: PaperPiece.none,
               ),
             );
@@ -829,8 +889,6 @@ class _RenderMaskedBox extends RenderProxyBox {
     final canvas = context.canvas;
     canvas.saveLayer(wide, Paint());
     super.paint(context, offset);
-    final w = _mask.width.toDouble(), h = _mask.height.toDouble();
-    const e = SlicedMasks.edge;
     // Drawn in device pixels, not logical ones. drawImageNine keeps the four corners and the four
     // edges at the size they were rendered — in whatever unit the canvas is in — and the tear is
     // in the edges. In logical units at three device pixels to one the fibres come out three times
@@ -839,9 +897,9 @@ class _RenderMaskedBox extends RenderProxyBox {
     final d = _dpr;
     canvas.save();
     canvas.scale(1 / d);
-    canvas.drawImageNine(
+    SlicedMasks.paintNine(
+      canvas,
       _mask,
-      Rect.fromLTRB(w * e, h * e, w * (1 - e), h * (1 - e)),
       Rect.fromLTRB(wide.left * d, wide.top * d, wide.right * d, wide.bottom * d),
       Paint()
         ..blendMode = BlendMode.dstIn
@@ -873,6 +931,55 @@ class SlicedMasks {
   /// is always solid, so four tenths is comfortably outside them.
   static const double edge = 0.4;
 
+  /// How much to shrink a tear render by so its torn borders fit the piece it is drawn into.
+  ///
+  /// `drawImageNine` draws the four corners at their *source* pixel size. Ask for a border wider
+  /// than the destination can hold and Skia squeezes the two corners until they meet in the
+  /// middle — and the left corner's inner edge and the right corner's inner edge are different
+  /// columns of the render, so what lands is a dead-straight butt seam at the piece's exact
+  /// mid-width, with a step in it. A material critic measured one: a 21-pixel step at x=1190, the
+  /// exact middle of a 04_moments tile.
+  ///
+  /// Every mask is 1024 pixels on its long side. A Moments tile is 450 device pixels wide and a
+  /// chat note is 360 tall, so four tenths of the render is 410 pixels *per corner* on a card one
+  /// corner wide, and 231 per corner on a note one and a half corners tall. Neither fits, and the
+  /// short axis of an ordinary note has not fitted since the piece started drawing its tear
+  /// straight in.
+  ///
+  /// Narrowing the band instead is worse: the band has to contain the whole wander of the torn
+  /// edge, which is about a fifth of the render, and a band narrower than that puts wandering
+  /// fibre in the middle slice, where the nine-patch stretches it across the piece.
+  ///
+  /// So the render is shrunk, whole, until its borders fit with a fifth of the piece left in the
+  /// middle to stretch. A sheet the render's own size or larger is untouched and keeps its fibres
+  /// at the size they were rendered; a small card gets a smaller tear, which is what a small card
+  /// has.
+  static double fitFor(ui.Image image, Size dst) {
+    final bw = image.width * 2 * edge, bh = image.height * 2 * edge;
+    if (bw <= 0 || bh <= 0 || dst.width <= 0 || dst.height <= 0) return 1.0;
+    const room = 0.8;      // the borders may take four fifths of the piece; the rest stretches
+    return math.min(1.0, math.min(dst.width * room / bw, dst.height * room / bh));
+  }
+
+  /// One tear, drawn as a nine-patch into [dst], shrunk by [fitFor] when it has to be.
+  ///
+  /// [dst] and the canvas are in device pixels: a nine-patch keeps its corners at their source
+  /// size *in whatever unit the canvas is in*, so drawing this in logical points on a phone at
+  /// three device pixels to the point makes every fibre three times too coarse.
+  static void paintNine(Canvas canvas, ui.Image image, Rect dst, Paint paint) {
+    final w = image.width.toDouble(), h = image.height.toDouble();
+    final k = fitFor(image, dst.size);
+    canvas.save();
+    canvas.scale(k);
+    canvas.drawImageNine(
+      image,
+      Rect.fromLTRB(w * edge, h * edge, w * (1 - edge), h * (1 - edge)),
+      Rect.fromLTRB(dst.left / k, dst.top / k, dst.right / k, dst.bottom / k),
+      paint,
+    );
+    canvas.restore();
+  }
+
   static ui.Image at(String asset, ui.Image mask, Size size, double dpr) {
     // rounded, so a note whose height moves by a pixel while its text lays out does not compose a
     // new mask every frame; and never larger than the mask itself, because upsampling a render is
@@ -897,7 +1004,6 @@ class SlicedMasks {
     }
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
-    final mw = mask.width.toDouble(), mh = mask.height.toDouble();
     // Painted one device pixel in from every side, so the composed mask has a transparent frame
     // around it that no sampling phase can pull ink through.
     //
@@ -908,9 +1014,9 @@ class SlicedMasks {
     // was the piece's own bounding box. drawImageNine lands the mask flush against the edge of the
     // texture, and the shader then samples half a texel outside it and finds the mask's own border
     // rather than nothing, so a sliver of the sheet is drawn beyond the sheet.
-    canvas.drawImageNine(
+    paintNine(
+      canvas,
       mask,
-      Rect.fromLTRB(mw * edge, mh * edge, mw * (1 - edge), mh * (1 - edge)),
       Rect.fromLTWH(1, 1, (w - 2).toDouble().clamp(1, w.toDouble()),
           (h - 2).toDouble().clamp(1, h.toDouble())),
       Paint()..filterQuality = FilterQuality.medium,
@@ -989,29 +1095,48 @@ class _NineSlicedState extends State<NineSliced> {
     final image = _image;
     if (image == null) return const SizedBox.shrink();
     return CustomPaint(
-        painter: _NinePainter(image, widget.edge, widget.opacity, widget.filterQuality));
+        painter: _NinePainter(image, widget.edge, widget.opacity, widget.filterQuality,
+            MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0));
   }
 }
 
 class _NinePainter extends CustomPainter {
-  _NinePainter(this.image, this.edge, this.opacity, this.filterQuality);
+  _NinePainter(this.image, this.edge, this.opacity, this.filterQuality, this.dpr);
   final ui.Image image;
   final double edge;
   final double opacity;
   final FilterQuality filterQuality;
 
+  /// Device pixels per logical point. The draw happens in device pixels — see below.
+  final double dpr;
+
   @override
   void paint(Canvas canvas, Size size) {
     if (size.isEmpty) return;
-    final w = image.width.toDouble(), h = image.height.toDouble();
-    canvas.drawImageNine(
+    // In device pixels, like the mask this sits on top of.
+    //
+    // A nine-patch keeps its corners at their source pixel size *in whatever unit the canvas is
+    // in*. This canvas was in logical points, so on a phone at three device pixels to the point
+    // every fibre of the lit edge came out three times the size of the fibre in the tear
+    // underneath it — the mask has been drawn in device pixels since the piece stopped composing
+    // one, and this never followed. The two never lined up, which is the whole reason for
+    // rendering a lit edge and a silhouette from the same tear.
+    //
+    // And the band is narrowed to what the piece can hold, for the same reason the mask's is:
+    // four tenths of a 639-pixel render is 256 pixels per corner, and a Moments tile is 410
+    // pixels wide altogether.
+    final d = dpr;
+    canvas.save();
+    canvas.scale(1 / d);
+    SlicedMasks.paintNine(
+      canvas,
       image,
-      Rect.fromLTRB(w * edge, h * edge, w * (1 - edge), h * (1 - edge)),
-      Offset.zero & size,
+      Rect.fromLTWH(0, 0, size.width * d, size.height * d),
       Paint()
         ..filterQuality = filterQuality
         ..color = Color.fromRGBO(0, 0, 0, opacity),
     );
+    canvas.restore();
   }
 
   @override
@@ -1019,6 +1144,7 @@ class _NinePainter extends CustomPainter {
       !identical(old.image, image) ||
       old.edge != edge ||
       old.opacity != opacity ||
+      old.dpr != dpr ||
       old.filterQuality != filterQuality;
 }
 

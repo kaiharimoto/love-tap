@@ -393,10 +393,18 @@ class CaptureHooks {
     // 0.017 grey levels, inside a voice-note tile whose fringe is plainly drawn. It is not a fill
     // standing in for paper; it is paper that had not arrived when the shutter opened.
     final stock = PaintingBinding.instance.imageCache.pendingImageCount;
-    if ((b['reading'] ?? 0) == 0 && (b['waiting'] ?? 0) == 0 && masks == 0 && stock == 0) {
+    // And the outcome as well as the queue: `pendingImageCount` counts what is being decoded, and
+    // a piece can be on the glass waiting for a stock whose load has not been started yet.
+    final without = PaperPiece.waitingForPaper;
+    if ((b['reading'] ?? 0) == 0 &&
+        (b['waiting'] ?? 0) == 0 &&
+        masks == 0 &&
+        stock == 0 &&
+        without.isEmpty) {
       return 'ok';
     }
-    return 'reading ${b['reading']}, waiting ${b['waiting']}, decoding $masks, stock $stock';
+    return 'reading ${b['reading']}, waiting ${b['waiting']}, decoding $masks, stock $stock'
+        '${without.isEmpty ? '' : ', no paper yet for ${(without.toList()..sort()).join(', ')}'}';
   }
 
   /// Every feeling this phone knows, with the pattern it plays: the evidence that thirty-odd
@@ -554,6 +562,23 @@ class CaptureHooks {
       'the_smallest_patch_of_a_stock_anything_took': PaperPiece.smallestWindow,
       'paper_at_its_own_size': PaperPiece.drawnNative,
       'paper_stretched_to_fit': PaperPiece.drawnStretched,
+      // Which stocks a piece had asked for and not got when the frame was taken, and where the
+      // memory that decides that went. A stock that has not arrived paints as the flat colour
+      // underneath it, and in a still that is indistinguishable from paper with no tooth: six
+      // cream rectangles in 04_moments, 260,907 pixels of one exact value, torn fringe drawn
+      // perfectly around every one of them. Nothing in this report said so, because every counter
+      // here recorded a decision rather than its outcome.
+      'stocks_the_paper_had_not_arrived_for': PaperPiece.waitingForPaper.toList()..sort(),
+      'paper_that_arrived_after_the_piece_was_drawn': PaperPiece.paperArrivedLate,
+      'masks_held': MaskCache.held,
+      'masks_dropped_to_stay_inside_the_pool': MaskCache.dropped,
+      'image_cache': {
+        'held': PaintingBinding.instance.imageCache.currentSize,
+        'bytes': PaintingBinding.instance.imageCache.currentSizeBytes,
+        'budget': PaintingBinding.instance.imageCache.maximumSizeBytes,
+        'live': PaintingBinding.instance.imageCache.liveImageCount,
+        'still_decoding': PaintingBinding.instance.imageCache.pendingImageCount,
+      },
       'setup_showing': CaptureBus.setupShowing,
       // a clip of a note opening that does not open is either a sequence nothing asked to play
       // or a sequence whose frames never decoded, and from the outside they look the same
@@ -565,7 +590,10 @@ class CaptureHooks {
       // in a browser and no phone in this environment, and an emotional critic read that as the
       // haptic channel not being exercised at all. It is exercised; nothing answers. Those are
       // different, and this is where the difference is written down.
-      if (Sensation.asks.isNotEmpty) 'asked_a_motor_for': List.of(Sensation.asks),
+      // Always present, even when it is empty and even on a platform with no motor: the point of
+      // the record is that the ask and the answer are both written down, and a key that vanishes
+      // when there is nothing to say is a record that only ever reports success.
+      'asked_a_motor_for': List.of(Sensation.asks),
       // what the first launch was made of, rather than one number for all of it
       if (bootPhases.isNotEmpty) 'the_launch_took': Map.of(bootPhases),
       // what the off-app surfaces were handed — recorded as what was sent, never as a picture

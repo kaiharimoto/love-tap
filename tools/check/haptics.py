@@ -68,6 +68,45 @@ def felt_distance(x, y, bin_ms=40):
     return bins + length
 
 
+def stretched(segments, k):
+    """The same pattern played [k] times as slowly."""
+    return [{"ms": max(1, s["ms"] * k), "amp": s["amp"]} for s in segments]
+
+
+def felt_apart(a, b, bin_ms=40):
+    """How far apart two patterns are to a hand — tolerating a tempo difference it cannot detect.
+
+    `felt_distance` compares two fixed bin grids, and that makes it sensitive to something a finger
+    is not: playing the same rhythm seven per cent slower slides every pulse out of its bin and
+    scores as a large difference. Measured — the derivation below, on this build's own vocabulary —
+    that put a pair nobody could separate (`crown` against itself at half the duration Weber
+    fraction) at 32.94, above a pair anybody could separate (`poke` against itself at twice it) at
+    22.50. The bands crossed, which means the number was not measuring what it was gating on.
+
+    A tempo change inside the duration Weber fraction is not detectable, so it is quotiented out:
+    the bin term is the best alignment over uniform stretches within that fraction. The overall
+    length of the pattern *is* felt, so it keeps its own term — with the same fraction as a
+    deadband, because the first fifteen per cent of a length difference is not felt either.
+    """
+    da = sum(s["ms"] for s in a) or 1
+    db = sum(s["ms"] for s in b) or 1
+    best = None
+    for step in range(-4, 5):
+        k = 1.0 + step * (JND_DURATION / 4.0)
+        if k <= 0:
+            continue
+        x = felt(a, bin_ms)
+        y = felt(stretched(b, k), bin_ms)
+        n = max(len(x), len(y))
+        p1 = np.zeros(n); p1[:len(x)] = x
+        p2 = np.zeros(n); p2[:len(y)] = y
+        d = float(np.abs(p1 - p2).mean()) * 100.0
+        best = d if best is None else min(best, d)
+    gap = abs(da - db) / max(da, db)
+    length = 40.0 * max(0.0, gap - JND_DURATION) / (1.0 - JND_DURATION)
+    return (best or 0.0) + length
+
+
 def shape(segments, n=64):
     """The pattern as amplitude over normalised time, so two patterns compare as shapes."""
     total = sum(s["ms"] for s in segments) or 1
@@ -81,14 +120,112 @@ def shape(segments, n=64):
     return out
 
 
+# What a finger can actually resolve, as the vibrotactile literature usually reports it. These are
+# the three numbers the floor is derived from, and they are here rather than in a comment because
+# the derivation is run every time the check is.
+#
+#   amplitude   Weber fraction of about 0.15-0.20 for suprathreshold vibrotactile intensity
+#               (Craig 1972; Gescheider and colleagues, repeatedly since)
+#   duration    Weber fraction of about 0.15-0.25 for the length of a burst (Gescheider 1966)
+#   fusion      two pulses less than about 25 ms apart are felt as one event
+#
+# They are used conservatively: the pair that *cannot* be told apart is built at half the Weber
+# fraction, which is comfortably inside anybody's threshold, and the pair that can is built at
+# twice it, which is comfortably outside.
+JND_AMPLITUDE = 0.15
+JND_DURATION = 0.15
+FUSION_MS = 25.0
+
+
+def twin(segments, amp_change, dur_change):
+    """The same pattern, changed by a stated fraction in amplitude and in duration."""
+    out = []
+    for s in segments:
+        out.append({
+            "ms": max(1, int(round(s["ms"] * (1.0 + dur_change)))),
+            "amp": int(round(min(255, max(0, s["amp"] * (1.0 + amp_change))))),
+        })
+    return out
+
+
+def derive_floor(patterns, bin_ms=40):
+    """What number separates 'two rhythms' from 'one rhythm twice'.
+
+    The floor was a bare 18.0 — a number with nothing behind it, which an emotional critic said
+    plainly: unlike logs/torn.json and logs/flat.json there was no derivation and no negative
+    control saying what two patterns a finger genuinely cannot separate would score. A threshold
+    nobody can check is a threshold that passes whatever it is given.
+
+    So it is measured, by this code, in these units, on this build's own vocabulary. For every
+    pattern in the registry:
+
+      * a twin changed by *half* the amplitude and duration Weber fractions — a pair a finger
+        cannot separate, by any published figure. The largest distance any such pair scores is the
+        highest number that still means "the same pattern".
+      * a twin changed by *twice* those fractions — a pair a finger can separate. The smallest
+        distance any such pair scores is the lowest number that already means "two patterns".
+
+    The floor is the geometric midpoint of those two, which puts it as far from a false pass as
+    from a false fail. If the two bands cross, the measure is not separating what it claims to and
+    the report says so instead of picking a number out of the overlap.
+    """
+    same, different = [], []
+    for name, segs in patterns:
+        if not segs:
+            continue
+        near = twin(segs, JND_AMPLITUDE / 2, JND_DURATION / 2)
+        far = twin(segs, JND_AMPLITUDE * 2, JND_DURATION * 2)
+        same.append((felt_apart(segs, near, bin_ms), name))
+        different.append((felt_apart(segs, far, bin_ms), name))
+    if not same:
+        return None
+    same.sort()
+    different.sort()
+    worst_same, worst_same_of = same[-1]
+    best_diff, best_diff_of = different[0]
+    crossed = worst_same >= best_diff
+    floor = float(np.sqrt(max(worst_same, 1e-6) * best_diff)) if not crossed else None
+    return {
+        "floor": None if floor is None else round(floor, 2),
+        "how": "the geometric midpoint of the two bands below, measured by this code on this "
+               "build's own patterns",
+        "thresholds_used": {
+            "amplitude_weber_fraction": JND_AMPLITUDE,
+            "duration_weber_fraction": JND_DURATION,
+            "two_pulses_fuse_below_ms": FUSION_MS,
+            "source": "the figures vibrotactile psychophysics usually reports — Craig 1972 and "
+                      "Gescheider 1966 onwards for the two Weber fractions, and the ~25 ms at "
+                      "which successive pulses stop being felt as two events",
+        },
+        "a_pair_a_finger_cannot_separate": {
+            "built_by": "changing every segment by half the Weber fraction in both amplitude and "
+                        "duration, which is inside anybody's threshold",
+            "largest": round(worst_same, 2),
+            "on": worst_same_of,
+            "median": round(float(np.median([d for d, _ in same])), 2),
+        },
+        "a_pair_a_finger_can_separate": {
+            "built_by": "changing every segment by twice the Weber fraction in both",
+            "smallest": round(best_diff, 2),
+            "on": best_diff_of,
+            "median": round(float(np.median([d for d, _ in different])), 2),
+        },
+        "the_bands_overlap": crossed,
+        "two_copies_of_one_pattern": round(
+            felt_apart(patterns[0][1], list(patterns[0][1]), bin_ms), 2),
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("src")
     ap.add_argument("--strip", default="")
     ap.add_argument("--out", default="")
-    ap.add_argument("--felt-floor", type=float, default=18.0,
+    ap.add_argument("--felt-floor", type=float, default=0.0,
                     help="two patterns closer than this are one pattern as far as a hand is "
-                         "concerned; calibrated on the vocabulary, whose median pair is about 130")
+                         "concerned. Zero means derive it — see derive_floor, which measures it "
+                         "on this build's own patterns against published vibrotactile thresholds. "
+                         "A number given here overrides that and is reported as an override.")
     a = ap.parse_args()
     data = json.loads(pathlib.Path(a.src).read_text())
     feelings = data.get("feelings", [])
@@ -103,8 +240,18 @@ def main():
         if len(ids) > 1:
             problems.append(f"same pattern string: {', '.join(ids)}")
     shapes = {f["id"]: shape(f["segments"]) for f in rows}
-    felts = {f["id"]: felt(f["segments"]) for f in rows}
+    segs = {f["id"]: f["segments"] for f in rows}
     ids = list(shapes)
+
+    derived = derive_floor([(f["id"], f["segments"]) for f in rows])
+    if a.felt_floor > 0:
+        floor = a.felt_floor
+    elif derived and derived["floor"]:
+        floor = derived["floor"]
+    else:
+        # the bands crossed, or there was nothing to measure: fall back to the old bare number and
+        # say in the report that that is what happened
+        floor = 18.0
     near = []
     close = []
     all_felt = []
@@ -113,9 +260,9 @@ def main():
             d = float(np.abs(shapes[ids[i]] - shapes[ids[j]]).mean())
             if d < 0.04:
                 near.append({"a": ids[i], "b": ids[j], "shape_distance": round(d, 4)})
-            fd = felt_distance(felts[ids[i]], felts[ids[j]])
+            fd = felt_apart(segs[ids[i]], segs[ids[j]])
             all_felt.append(fd)
-            if fd < a.felt_floor:
+            if fd < floor:
                 close.append({"a": ids[i], "b": ids[j], "felt_distance": round(fd, 2)})
     for n in near:
         problems.append(f"same shape in time: {n['a']} and {n['b']} ({n['shape_distance']})")
@@ -163,14 +310,21 @@ def main():
         "near_shapes": near,
         "felt_distance": {
             "how": "forty-millisecond bins of real time, amplitude to the power 0.6, mean absolute "
-                   "difference times a hundred. Two patterns a finger cannot separate score near "
-                   "zero however different their strings are.",
-            "floor": a.felt_floor,
+                   "difference times a hundred — at the best alignment over the tempo changes a "
+                   "finger cannot detect — plus a term for the difference in overall length, with "
+                   "the same fraction as a deadband. Two patterns a finger cannot separate score "
+                   "near zero however different their strings are.",
+            "floor": floor,
+            "floor_is": ("an override given on the command line" if a.felt_floor > 0
+                         else "derived, below" if derived and derived["floor"]
+                         else "the old bare 18.0: the derivation's two bands overlapped, which "
+                              "means this measure is not separating what it claims to"),
+            "derived": derived,
             "median": round(float(np.median(all_felt)), 2) if all_felt else None,
             "smallest": round(float(min(all_felt)), 2) if all_felt else None,
             "closest_pairs": sorted(
                 [{"a": ids[i], "b": ids[j],
-                  "felt_distance": round(felt_distance(felts[ids[i]], felts[ids[j]]), 2)}
+                  "felt_distance": round(felt_apart(segs[ids[i]], segs[ids[j]]), 2)}
                  for i in range(len(ids)) for j in range(i + 1, len(ids))],
                 key=lambda c: c["felt_distance"])[:6],
             "under_the_floor": close,

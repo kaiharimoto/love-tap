@@ -23,6 +23,7 @@ import 'regions/pulse/pulse_region.dart';
 import 'regions/settings/settings_region.dart';
 import 'regions/us/us_region.dart';
 import 'scope.dart';
+import 'spine/spine.dart' show Person;
 import 'setup/checklist.dart';
 import 'transport/transport.dart';
 import 'setup/platform.dart';
@@ -116,7 +117,7 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
 
   static const _labels = [S.pulse, S.chat, S.us, S.moments, S.settings];
 
-  StreamSubscription<(String, double)>? _landings;
+  StreamSubscription<(String, double, Person, int)>? _landings;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -142,11 +143,17 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
       // Something they sent lands here the same way something you sent does. This is the whole
       // point of the app, so it happens whichever region is open rather than only in Chat.
       final scope = AppScope.of(context);
-      _landings = scope.landed.listen((pair) {
-        final f = scope.feelings.byId(pair.$1);
+      _landings = scope.landed.listen((landed) {
+        final f = scope.feelings.byId(landed.$1);
         if (f == null || !mounted) return;
-        _arrivals.add(Arrival(feeling: f, intensity: pair.$2, mine: false));
-        unawaited(scope.sensation.play(f, intensity: pair.$2));
+        _arrivals.add(Arrival(
+          feeling: f,
+          intensity: landed.$2,
+          mine: false,
+          from: landed.$3,
+          at: DateTime.fromMillisecondsSinceEpoch(landed.$4, isUtc: true),
+        ));
+        unawaited(scope.sensation.play(f, intensity: landed.$2));
       });
     });
     // The same gate the thread uses: a build made for capture, or a test that has asked for the
@@ -170,7 +177,12 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
         'feeling_id': f.id,
         'intensity': double.parse(intensity.toStringAsFixed(2)),
       });
-      _arrivals.add(Arrival(feeling: f, intensity: intensity, mine: true));
+      _arrivals.add(Arrival(
+          feeling: f,
+          intensity: intensity,
+          mine: true,
+          from: scope.me,
+          at: scope.clock.now()));
       unawaited(scope.sensation.play(f, intensity: intensity));
     };
   }
@@ -211,7 +223,8 @@ class _ShellState extends State<Shell> with WidgetsBindingObserver {
   Future<void> _send(Feeling f, double intensity) async {
     final scope = AppScope.of(context);
     await scope.emit('feeling', {'feeling_id': f.id, 'intensity': double.parse(intensity.toStringAsFixed(2))});
-    _arrivals.add(Arrival(feeling: f, intensity: intensity, mine: true));
+    _arrivals.add(Arrival(
+        feeling: f, intensity: intensity, mine: true, from: scope.me, at: scope.clock.now()));
     await scope.sensation.play(f, intensity: intensity);
   }
 
