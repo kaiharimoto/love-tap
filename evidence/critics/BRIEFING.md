@@ -67,6 +67,25 @@ things and both are written down. And the chat report carries `replies_on_the_gl
 `refusals_on_the_glass` and `clipped_at_an_edge`: a delivered reply with the row it answers, the
 words the other phone refused in, and any row whose ink is outside the frame.
 
+Six records are new this cycle, and every one of them exists because a report last cycle could
+only say what a number was, not what it meant. `logs/haptics.check.json` derives its
+`felt_distance` floor instead of stating it — for every pattern in the vocabulary, a twin changed
+by half the published amplitude and duration Weber fractions (a pair a finger cannot separate) and
+a twin changed by twice them (a pair it can), with two copies of one pattern as the zero. Running
+that derivation is what found the measure it gates on was itself wrong, and the file says so and
+what changed. `logs/flat.json` finds flat shapes directly rather than through an 80-pixel window,
+and names the ones whose colour is one of the app's own paper fallback fills — a sheet with no
+paper on it, as against a photograph of something flat. Each region report carries
+`stocks_the_paper_had_not_arrived_for`, `paper_that_arrived_after_the_piece_was_drawn`,
+`masks_held` and `image_cache`: a piece whose stock has not arrived paints the flat colour under
+it, and nothing in the record used to say that had happened. The Moments report carries
+`the_tiles_with_no_picture` with, for each, whether the store answered and does not hold it or it
+is still coming. `logs/scroll_webkit.json` carries, per frame, the rows that frame built, the paper
+pieces it drew and the masks it composed, and a `the_heavy_frames` summary of what the frames over
+400 ms were doing against what every frame was doing. And `evidence/.previous/` is now the capture
+that came *before* this one rather than a copy of this one, so `DIFF.json`'s `previous_sha` values
+name files that are on disk.
+
 `logs/lines.json` is a measurement the build makes of itself and does not pass: how far the writing
 sits from the ruled line nearest it, as a fraction of the pitch. Nought is on the line, a half is
 exactly between two, and writing laid out with no relation to the rules lands uniformly and
