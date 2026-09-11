@@ -27,6 +27,7 @@ import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/sync.dart';
 import 'package:desk/transport/transport.dart';
 import 'package:desk/voice/strings.dart';
+import 'package:desk/regions/chat/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -141,6 +142,19 @@ void main() {
         ),
       );
     }
+  });
+
+  // Two of the ten stills are these, and neither is a region: a width change reaches them through
+  // a route rather than through the screens map above.
+  _phones.forEach((where, size) {
+    testWidgets('search, with what it found, $where', (tester) async {
+      for (final t in ['the bus is late', 'raining here too', 'tape the gap in the back door']) {
+        await scope.spine.append('message', {'text': t}, at: DateTime.utc(2026, 3, 4));
+      }
+      await _draw(tester, scope, SearchPage(initialQuery: 'the', onDone: (_) {}), size: size);
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(tester.takeException(), isNull);
+    });
   });
 
   testWidgets('the feeling corner, open', (tester) async {
