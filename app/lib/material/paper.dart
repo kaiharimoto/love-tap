@@ -1147,7 +1147,11 @@ class _StockLayerState extends State<_StockLayer> {
   void didUpdateWidget(_StockLayer old) {
     super.didUpdateWidget(old);
     if (old.stock != widget.stock) {
-      _image = StockCache.peek(paperAsset(widget.stock));
+      // The one already in hand stays until the new one arrives. `Image.asset` had
+      // `gaplessPlayback: true` for the same reason: a stock changing — the light going to dusk —
+      // must not put a frame of the flat fallback colour on the glass between the two.
+      final have = StockCache.peek(paperAsset(widget.stock));
+      if (have != null) _image = have;
       _resolve();
     }
   }
