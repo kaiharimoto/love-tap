@@ -3,6 +3,37 @@
 The state handed to the next session. `docs/BRIEF.md` is the mission and wins over this file.
 Branch: `claude/new-session-f95s8n`.
 
+## Release readiness, which is now part of the goal
+
+The goal was extended mid-session: past the brief's 95 with every floor met, to *ready to release
+and test on real devices*. What that turned up, and what is left.
+
+**Three things the Android project still carried from Flutter's template**, all fixed and all
+covered by `app/test/nothing_leaves_the_phone_test.dart`:
+
+- The release build was signed with the **debug key**, with the template's TODO above it. It reads
+  `android/key.properties` now — gitignored with every `.jks` and `.keystore`, no defaults — and a
+  build without that file signs with debug and *says so at build time*. A debug-signed APK installs
+  and is not a release: a real key cannot replace it without uninstalling, which takes the log.
+- The log was being **backed up to the owner's Google account**, which is Android's default. Off in
+  all three places (`allowBackup`, `@xml/nothing_leaves`, `fullBackupContent`), and the extraction
+  rules exclude the phone-to-phone transfer as well as the cloud — a transfer would put a working
+  copy of the log and the pairing key on a handset nobody paired.
+- **Cleartext was allowed**, on an app that serves over TLS to a tailnet address and nowhere else.
+
+**`docs/PHONES.md` gained the half that was missing**: making the signing key, building the APK,
+getting it onto the handset, how the iPhone adds the web app from the Android phone's own address,
+what Safari's certificate warning is and why accepting it once is right, and what the in-app
+checklist is for.
+
+**What is verified and what is not.** The PWA's install path is complete and recorded in
+`evidence/logs/pwa.json` — manifest with `display: standalone`, four icons, apple-touch-icon,
+service worker registered, and the three Apple meta tags in the shell. The setup checklist observes
+facts off the object graph and stores nothing, so a tick cannot survive the thing it watched going
+away. **The release APK has not been built in this container** and that is the next thing to do:
+`toolchain/android-sdk` is 488 MB with platforms and build-tools, no NDK is fetched unless
+something needs one, and 13 GB is free.
+
 ## 0. Where it stands
 
 **Cycle 9 scored 82**, from 83 and 85 before it. Three floors of five are met (emotional 17/17,
