@@ -69,8 +69,13 @@ class MaterialLibrary {
   final List<String> sounds;
 
   /// How much wider than the piece the baked contact shadow was framed, straight from
-  /// blender/paper/tear_relief.py. The visible part of a contact shadow is the part outside the
-  /// paper, so the shadow render reaches past the piece and the app has to inflate it to match.
+  /// blender/paper/tear_relief.py.
+  ///
+  /// Read, kept, and no longer what places the shadow. Inflating by this alone put the render's
+  /// own paper edge at 0.986 of a piece box whose paper — nine-sliced to fill it — ends at 1.0, so
+  /// the whole penumbra was drawn under opaque paper. `PaperPiece._bakedShadow` maps the render by
+  /// the rect its paper occupies instead, which is what makes the part outside the paper land
+  /// outside the paper.
   final double shadowFrame;
 
   static MaterialLibrary? _instance;

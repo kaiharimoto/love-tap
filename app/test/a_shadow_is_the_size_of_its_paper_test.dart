@@ -8,6 +8,9 @@
 //
 // The thread never showed it because a list gives its rows loose constraints. So the case to hold
 // is the tight one.
+import 'dart:io';
+import 'dart:ui' as ui;
+
 import 'package:desk/material/library.dart';
 import 'package:desk/material/paper.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +18,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   _unconstrainedIsTheSizeOfItsWriting();
+  _theInsetIsWhatTheAssetsSay();
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     await MaterialLibrary.load();
@@ -110,5 +114,82 @@ void _unconstrainedIsTheSizeOfItsWriting() {
         reason: 'a four-letter chip came out ${narrow.width} points wide');
     expect(wide.width, greaterThan(narrow.width),
         reason: 'both labels came out the same width, so the width is not the writing');
+  });
+}
+
+/// The rect the paper occupies inside a shadow render, recomputed from the packed assets.
+///
+/// `PaperPiece._bakedShadow` places the render by this rect rather than by the frame it was baked
+/// at, because the piece's own mask is nine-sliced to fill the piece box: mapped by the frame, the
+/// render's paper edge lands at 0.986 of a box whose paper ends at 1.0, and the whole penumbra —
+/// the only part of a contact shadow anybody can see — is drawn under opaque paper. The eleventh
+/// capture measured what that costs: the desk four to fourteen pixels under a sheet is 3.6 grey
+/// levels darker than forty-five to sixty-five below it in the chat hero, 0.05 in search, −0.17 in
+/// the pulse and −1.64 in Moments, against a floor of 6 that holes.py takes from a capture where it
+/// worked. The one still that passes is Settings, whose cards are cut rather than torn and get the
+/// painted shadow instead.
+///
+/// The constant is a measurement, so this is the measurement. A re-render that moves the paper
+/// inside the frame fails here rather than quietly flattening every shadow in the app again.
+void _theInsetIsWhatTheAssetsSay() {
+  testWidgets('the shadow inset is the rect the paper actually occupies in the renders',
+      (tester) async {
+    const frame = 1.25; // relief.shadow_frame in app/assets/INDEX.json
+    final masks = Directory('assets/tears')
+        .listSync()
+        .whereType<File>()
+        .map((f) => f.path)
+        .where((p) => !p.contains('_shadow') && !p.contains('_dusk') && p.endsWith('.webp'))
+        .where((p) => File(p.replaceAll('.webp', '_shadow.webp')).existsSync())
+        .toList()
+      ..sort();
+    expect(masks.length, greaterThan(20), reason: 'no packed tears to measure');
+    // every fifth one: decoding all fifty-six is a minute of test time for the same answer
+    final sample = [for (var i = 0; i < masks.length; i += 5) masks[i]];
+
+    final got = <String, List<double>>{'l': [], 't': [], 'r': [], 'b': []};
+    await tester.runAsync(() async {
+      for (final path in sample) {
+        final codec = await ui.instantiateImageCodec(File(path).readAsBytesSync());
+        final image = (await codec.getNextFrame()).image;
+        final data = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
+        final w = image.width, h = image.height;
+        final px = data!.buffer.asUint8List();
+        var l = w, t = h, r = -1, b = -1;
+        for (var y = 0; y < h; y += 2) {
+          for (var x = 0; x < w; x += 2) {
+            if (px[(y * w + x) * 4 + 3] < 12) continue;
+            if (x < l) l = x;
+            if (x > r) r = x;
+            if (y < t) t = y;
+            if (y > b) b = y;
+          }
+        }
+        image.dispose();
+        expect(r, greaterThan(0), reason: '$path has no alpha in it');
+        // where the mask's paper sits once the frame is [frame] times the piece, centred
+        got['l']!.add((l / w + (frame - 1) / 2) / frame);
+        got['t']!.add((t / h + (frame - 1) / 2) / frame);
+        got['r']!.add((r / w + (frame - 1) / 2) / frame);
+        got['b']!.add((b / h + (frame - 1) / 2) / frame);
+      }
+    });
+
+    double median(List<double> v) {
+      final s = [...v]..sort();
+      return s[s.length ~/ 2];
+    }
+
+    const used = Rect.fromLTRB(0.113, 0.122, 0.887, 0.875);
+    for (final (name, m, want) in [
+      ('left', median(got['l']!), used.left),
+      ('top', median(got['t']!), used.top),
+      ('right', median(got['r']!), used.right),
+      ('bottom', median(got['b']!), used.bottom),
+    ]) {
+      expect((m - want).abs(), lessThan(0.02),
+          reason: 'the $name of the paper inside a shadow render is $m now, '
+              'and PaperPiece._bakedShadow places them by $want');
+    }
   });
 }

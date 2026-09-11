@@ -294,12 +294,33 @@ class PaperPiece extends StatelessWidget {
 
 
   Widget _bakedShadow(BuildContext context, String suffix) {
-    final frame = MaterialLibrary.loaded ? MaterialLibrary.instance.shadowFrame : 1.0;
-    // Scaling about the centre is what puts it back: the render was framed [frame] times the
-    // piece in both directions, and the piece's height is not known until its writing is laid out.
+    // Where the paper sits inside the shadow render's own frame — and therefore how to place that
+    // render so its penumbra falls where the paper's edge actually is.
+    //
+    // The piece's mask is nine-sliced to *fill* the piece box, so the paper's edge is at 1.0 of
+    // it. The shadow was a straight 1.25 scale about the centre, which puts the render's own paper
+    // edge at 0.986 — so the entire soft tail, the only part of a contact shadow anybody can see,
+    // was compressed into the last one and a half per cent of the box and drawn underneath opaque
+    // paper. Measured on the eleventh capture: the desk four to fourteen pixels under a sheet
+    // reads 3.6 grey levels darker than forty-five to sixty-five below it in the chat hero, 0.05
+    // in search, −0.17 in the pulse and −1.64 in Moments. The one still that passes, Settings at
+    // 8.4, is the one whose cards are cut rather than torn and get the *painted* shadow.
+    //
+    // So the render is mapped by its paper rather than by its frame: the sub-rect the paper
+    // occupies inside it is laid onto the piece box and everything outside that falls outside the
+    // paper, which is where a shadow goes. The numbers are measured over all 56 packed tears and
+    // barely vary — left 0.106 to 0.128, top 0.106 to 0.147, right 0.866 to 0.899, bottom 0.843 to
+    // 0.892 — and a_shadow_is_the_size_of_its_paper_test recomputes them from the assets, so a
+    // re-render that moves them fails rather than quietly going flat again.
+    const inset = Rect.fromLTRB(0.113, 0.122, 0.887, 0.875);
+    final kx = 1.0 / (inset.right - inset.left);
+    final ky = 1.0 / (inset.bottom - inset.top);
     return Positioned.fill(
-      child: Transform.scale(
-        scale: frame,
+      child: Transform(
+        transform: Matrix4.identity()
+          ..translateByDouble(-inset.left * kx, -inset.top * ky, 0.0, 1.0)
+          ..scaleByDouble(kx, ky, 1.0, 1.0),
+        transformHitTests: false,
         // Nine-sliced, like the mask it belongs to, and warm rather than black.
         //
         // A coherence critic found 758 pixels under luma 30 beside one chip in 12_search, minimum

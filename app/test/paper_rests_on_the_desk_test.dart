@@ -48,7 +48,10 @@ void main() {
       final src = File(f).readAsStringSync();
       final at = src.indexOf(anchor);
       expect(at, greaterThan(0), reason: '$f no longer draws a baked shadow where this looks');
-      final block = src.substring(at, (at + 2600).clamp(0, src.length));
+      // Wide enough for the whole function, which is mostly the account of how it went wrong
+      // twice. At 2600 the window stopped short of the draw itself once the shadow's placement
+      // was written down, and this read as the colour having been taken out.
+      final block = src.substring(at, (at + 4600).clamp(0, src.length));
       expect(block, contains('ColorFilter.mode(Shadow.warm, BlendMode.srcIn)'),
           reason: '$f draws its baked shadow in the colour it was rendered in, which is black');
     });
