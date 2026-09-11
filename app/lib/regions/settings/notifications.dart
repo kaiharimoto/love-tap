@@ -102,41 +102,56 @@ class NotificationSettings extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(children: [
-            Stamped('quiet from', size: 9, colour: Pen.margin),
-            const SizedBox(width: 8),
-            _Hour(value: prefs.quietFrom, onPick: (h) => onChanged(prefs.copyWith(quietFrom: h))),
-            const SizedBox(width: 10),
-            Stamped('until', size: 9, colour: Pen.margin),
-            const SizedBox(width: 8),
-            _Hour(value: prefs.quietTo, onPick: (h) => onChanged(prefs.copyWith(quietTo: h))),
-          ]),
+          // A Wrap, because this is four fixed-width pieces in a row and the row is as wide as the
+          // phone. At 360 points — which is the width of both phones and of every clip, and was
+          // never the width anything was drawn at in a test — it overflowed by 78 points.
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 6,
+            children: [
+              Stamped('quiet from', size: 9, colour: Pen.margin),
+              _Hour(value: prefs.quietFrom, onPick: (h) => onChanged(prefs.copyWith(quietFrom: h))),
+              Stamped('until', size: 9, colour: Pen.margin),
+              _Hour(value: prefs.quietTo, onPick: (h) => onChanged(prefs.copyWith(quietTo: h))),
+            ],
+          ),
           const SizedBox(height: 10),
           for (final t in kEventTypes)
             if (t.notify != Notify.none)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Row(
+                // What it is, then how it is announced under it. These were one row — the name in
+                // an Expanded and the three answers beside it — and the three answers alone are
+                // wider than a 360 point phone: 84 points over, on the width both phones have.
+                // The words are the voice and are not being shortened to fit a row that does not
+                // fit; the row is.
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(child: Text(_said(t.id), style: Hands.margin(size: 14))),
-                    for (final a in Announce.values)
-                      GestureDetector(
-                        onTap: () => onChanged(prefs.copyWith(byType: {...prefs.byType, t.id: a})),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12),
-                          child: Text(
-                            switch (a) {
-                              Announce.interrupt => 'wake me',
-                              Announce.quiet => 'quietly',
-                              Announce.off => 'not at all',
-                            },
-                            style: Hands.margin(size: 13).copyWith(
-                              color: (prefs.byType[t.id] ?? Announce.quiet) == a ? Pen.stamp : Pen.margin.withValues(alpha: 0.5),
-                              decoration: (prefs.byType[t.id] ?? Announce.quiet) == a ? TextDecoration.underline : null,
+                    Text(_said(t.id), style: Hands.margin(size: 14)),
+                    Wrap(
+                      alignment: WrapAlignment.end,
+                      spacing: 12,
+                      runSpacing: 2,
+                      children: [
+                        for (final a in Announce.values)
+                          GestureDetector(
+                            onTap: () => onChanged(prefs.copyWith(byType: {...prefs.byType, t.id: a})),
+                            child: Text(
+                              switch (a) {
+                                Announce.interrupt => 'wake me',
+                                Announce.quiet => 'quietly',
+                                Announce.off => 'not at all',
+                              },
+                              style: Hands.margin(size: 13).copyWith(
+                                color: (prefs.byType[t.id] ?? Announce.quiet) == a ? Pen.stamp : Pen.margin.withValues(alpha: 0.5),
+                                decoration: (prefs.byType[t.id] ?? Announce.quiet) == a ? TextDecoration.underline : null,
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                      ],
+                    ),
                   ],
                 ),
               ),

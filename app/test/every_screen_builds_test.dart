@@ -44,9 +44,25 @@ Future<AppScope> _aScope() async {
   );
 }
 
+/// The two surfaces this app actually runs on, in device pixels at three times scale.
+///
+/// Everything here was drawn at 1440 by 3120, which is 480 by 1040 of CSS — wider in logical
+/// pixels than any phone either of them owns, and wider than the clips, which are shot at 360 by
+/// 780. A coherence critic found the difference on the glass: two Us rows that read fully in the
+/// still truncate to 'the second one · the…' and 'tape the gap in the bac…' at the clip's width,
+/// and the calendar glance wraps to a line the card cuts. A screen that builds at a width nobody
+/// has is not evidence that it builds.
+const _phones = <String, Size>{
+  // the iPhone the web app is installed on
+  'at 390 by 844': Size(1170, 2532),
+  // the narrow Android the host runs on, and the width every clip is shot at
+  'at 360 by 780': Size(1080, 2340),
+};
+
 /// One screen, on a phone-shaped surface, with the app's scope over it.
-Future<void> _draw(WidgetTester tester, AppScope scope, Widget screen) async {
-  tester.view.physicalSize = const Size(1440, 3120);
+Future<void> _draw(WidgetTester tester, AppScope scope, Widget screen,
+    {Size size = const Size(1080, 2340)}) async {
+  tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 3.0;
   addTearDown(tester.view.reset);
   await tester.pumpWidget(AppScope.provide(
@@ -77,7 +93,10 @@ void main() {
   };
 
   screens.forEach((name, build) {
-    testWidgets(name, (tester) async => _draw(tester, scope, build()));
+    _phones.forEach((where, size) {
+      testWidgets('$name $where',
+          (tester) async => _draw(tester, scope, build(), size: size));
+    });
   });
 
   testWidgets('moments builds the prints the viewport reaches, not the year', (tester) async {
