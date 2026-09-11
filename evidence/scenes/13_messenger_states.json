@@ -95,6 +95,11 @@
    "ms": 20000
   },
   {
+   "do": "scrollTo",
+   "arg": "types:edited,taken_back,queued",
+   "why": "Framed on the three marks rather than pinned to the end. A messenger critic measured two of the eleven capabilities this artifact is supposed to enumerate \u2014 editing and taking a message back \u2014 visible in no artifact at all: the report named an edited row and the still's first drawn sheet began 84 px below where that row ended, so it was just off the top. `end` frames the newest note and the staging writes four more rows after the edit. This asks for the tightest stretch that holds an edited row, a row taken back and one still in the outbox, and the framing machinery measures what actually lands on the glass and keeps the best it finds."
+  },
+  {
    "do": "shot",
    "out": "evidence/13_messenger_states.png",
    "settle": 200

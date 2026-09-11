@@ -676,6 +676,24 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   ///     the evidence while four hundred and thirty sit in the seeded year.
   ///   - `reply` — a row written in answer to another, which carries the strip of the one it
   ///     answers pinned above it.
+  /// What a row is, for the purpose of framing a picture of it.
+  ///
+  /// Its type, and then everything that is true of it that is not a type: something stuck to it,
+  /// something it answers, that it was edited, that it was taken back, that the other phone would
+  /// not have it, and where it has got to. A messenger critic found two of the eleven capabilities
+  /// the rubric enumerates — editing and taking a message back — visible in no artifact at all,
+  /// and the reason is that neither is a row: both are marks on a row that was already there, so
+  /// nothing could ask to be framed around one.
+  static Set<String> _kindsOf(ThreadItem it) => <String>{
+        it.type,
+        if (it.reactions.isNotEmpty) 'reacted',
+        if (it.replyTo != null) 'reply',
+        if (it.edited) 'edited',
+        if (it.deleted) 'taken_back',
+        if (it.refusedBecause != null) 'refused',
+        it.delivery.name,
+      };
+
   List<(int, int)> _tightestWindows(List<ThreadItem> items, List<String> wanted) {
     if (wanted.isEmpty) return const [];
     final seen = <String, int>{};
@@ -683,11 +701,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     var shortest = 1 << 30;
     for (var i = 0; i < items.length; i++) {
       final it = items[i];
-      final kinds = <String>{
-        it.type,
-        if (it.reactions.isNotEmpty) 'reacted',
-        if (it.replyTo != null) 'reply',
-      };
+      final kinds = _kindsOf(it);
       final here = kinds.where(wanted.contains);
       if (here.isEmpty) continue;
       for (final k in here) {
