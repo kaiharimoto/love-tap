@@ -1,8 +1,22 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
+
+// The key that signs a release, read from a file that is not in this repository and never will be.
+//
+// `android/key.properties` holds four lines — storeFile, storePassword, keyAlias, keyPassword —
+// and is gitignored along with every keystore extension. Nothing here has a default: a release
+// built without that file is signed with the debug key, which Android will install and which is
+// not a release, so the build says so loudly rather than producing something that looks shippable
+// and is not. docs/PHONES.md says how to make the key.
+val keyFile = rootProject.file("key.properties")
+val key = Properties().apply { if (keyFile.exists()) keyFile.inputStream().use { load(it) } }
+val signedForReal = keyFile.exists() &&
+    listOf("storeFile", "storePassword", "keyAlias", "keyPassword").all { key.getProperty(it) != null }
 
 android {
     namespace = "io.lovetap.desk"
@@ -15,7 +29,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "io.lovetap.desk"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
@@ -29,11 +42,37 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (signedForReal) {
+            create("release") {
+                storeFile = rootProject.file(key.getProperty("storeFile"))
+                storePassword = key.getProperty("storePassword")
+                keyAlias = key.getProperty("keyAlias")
+                keyPassword = key.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            if (signedForReal) {
+                signingConfig = signingConfigs.getByName("release")
+            } else {
+                // Installable, and not a release. Said out loud at build time rather than left to
+                // be discovered on a phone: an APK signed with the debug key cannot be updated by
+                // one signed with a real key without uninstalling first, which takes the log with
+                // it, and that is a thing to find out before two people have a year in it.
+                signingConfig = signingConfigs.getByName("debug")
+                logger.lifecycle(
+                    "\n  This release APK is signed with the DEBUG key, because android/key.properties" +
+                    "\n  is absent. It will install on a phone and it is not a release: a build signed" +
+                    "\n  with a real key cannot replace it without uninstalling, which takes the log" +
+                    "\n  with it. docs/PHONES.md says how to make the key.\n")
+            }
+            // The log lives in the app's own storage and is the only copy on this phone. Nothing
+            // here backs it up anywhere, so nothing here may hand it to Google's backup service.
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }

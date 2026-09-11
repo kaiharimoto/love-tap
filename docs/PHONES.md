@@ -52,6 +52,73 @@ everything, writes into it while offline, and pushes what it wrote when the host
    arrives carrying only what kind of thing it is and who sent it. Never the content: the content
    only ever travels over the tailnet.
 
+## Putting it on the two phones
+
+Neither store is involved. The Android phone gets an APK you built; the iPhone adds the web app
+the Android phone is already serving. Nothing has to be published anywhere for either of them.
+
+### The key that signs the Android build
+
+Make it once and keep it. A release signed with a different key later cannot replace this one
+without uninstalling first, and uninstalling takes the log with it.
+
+    keytool -genkey -v -keystore ~/the-other-phone.jks -storetype JKS \
+      -keyalg RSA -keysize 2048 -validity 10000 -alias theotherphone
+
+Then `app/android/key.properties`, which is gitignored along with every `.jks` and `.keystore`:
+
+    storeFile=/absolute/path/to/the-other-phone.jks
+    storePassword=…
+    keyAlias=theotherphone
+    keyPassword=…
+
+Without that file the release build still works and signs with the debug key, and it says so in
+the build output rather than handing you something that looks shippable. That build is fine for
+trying the app out and is not fine for the phone you intend to keep the year on.
+
+### The APK
+
+    ./bootstrap.sh                     # once; installs the SDK into ./toolchain
+    cd app && flutter build apk --release \
+      --dart-define=TRANSPORT=tailscale --dart-define=ROLE=host --dart-define=PERSON=noor
+
+`--dart-define=SEED=year` is how the seeded history gets compiled in, and you do not want it: it
+is for the evidence captures. A build without it starts empty, which is what a real phone wants.
+
+The APK lands in `app/build/app/outputs/flutter-apk/app-release.apk`. Get it onto the phone by
+cable (`adb install -r …`) or by any means that ends with the file on the handset; Android will
+ask once whether you trust the source.
+
+`versionCode` comes from `version:` in `app/pubspec.yaml` — the number after the `+`. Raise it
+before every build you install over the last one, or Android refuses the update.
+
+### The iPhone
+
+There is nothing to install and nothing to sideload. With both phones on the tailnet and the
+Android app running, open the address it shows in Safari — `https://100.x.y.z:8443` — and use
+**Share → Add to Home Screen**. What that adds is the app: it runs full screen with no browser
+chrome, keeps its own copy of the log in the browser's storage, and works with the other phone
+switched off.
+
+Safari will warn about the certificate the first time, because the Android phone signs its own —
+there is no certificate authority that has heard of your phones, and there is nothing for one to
+verify that the six words do not verify better. Accept it once.
+
+Two things the iPhone cannot do, and what it does instead:
+
+- **Vibrate.** Safari has no vibration API. The same pattern that would drive the motor moves the
+  paper under your thumb instead — a push and a turn, in a direction that belongs to that feeling,
+  so the patterns stay tellable apart with the screen where you cannot read it.
+- **Receive anything while the tailnet is down.** A web push arrives carrying only what kind of
+  thing it is and who sent it; the thing itself only ever travels over the tailnet.
+
+### What to check first, on the real phones
+
+The in-app checklist ticks only on events it has actually observed, so it is the check. In order:
+the tailnet address detected, the host listening, the other phone's first fetch, the first TLS
+handshake, the six words accepted, and a push subscription if you asked for one. A tick that is
+not lit is a step that has not happened, whatever the screen behind it looks like.
+
 ## What is deliberately not here
 
 - No account, no server, no directory, nothing to sign up for. The only thing either phone talks

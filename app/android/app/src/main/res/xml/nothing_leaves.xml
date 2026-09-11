@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Nothing leaves this phone, to a cloud backup or to another device.
+
+  Android 12 and later read this instead of android:allowBackup. Both blocks exclude everything:
+  `cloud-backup` is the owner's Google account, `device-transfer` is the phone-to-phone copy a
+  person does when they get a new handset. The second is the harder call and it is deliberate —
+  the log is the couple's conversation and the pairing key is what reaches the other phone, and a
+  transfer that carried them would put a working copy of both on a handset that has not been
+  paired. Setting a new phone up means pairing it, which is six spoken words and takes a minute.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root" />
+        <exclude domain="file" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="root" />
+        <exclude domain="file" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+    </device-transfer>
+</data-extraction-rules>

@@ -8,7 +8,19 @@
     <application
         android:label="the other phone"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="false"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/nothing_leaves"
+        android:fullBackupContent="false">
+        <!-- The log on this phone is one of the two copies of a conversation between two people,
+             and it is the only one here. Android backs an app's files up to the owner's Google
+             account by default, which would put it on a third machine neither of them chose. Off,
+             in the three places it has to be off: allowBackup for the old service, the extraction
+             rules for Android 12 and later, and fullBackupContent for the auto-backup in between.
+             app/test/nothing_leaves_the_phone_test.dart keeps it that way.
+             Cleartext is off with it: the conversation is only ever served over TLS to a tailnet
+             address, so nothing in this app has any business speaking http to anything. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
