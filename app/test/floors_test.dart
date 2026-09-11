@@ -116,22 +116,28 @@ void main() {
           reason: '${spec.id} can neither be searched nor filtered nor is it excluded, so it '
               'would be invisible in Moments and in search both');
     }
-    // and every type the registry holds is one this list names. A code critic found the comment
-    // saying eighteen over a hand-written list of seventeen, with `passed_on` missing — which is
-    // the failure a hand-written list always has: it agrees with the code on the day it is written
-    // and never again. The list is still written out, because naming them is the point of the
-    // test, but it is now checked both ways against the registry.
-    const named = ['message', 'photo', 'video', 'voice_note', 'reaction', 'message_edit',
-                   'message_delete', 'read_marker', 'feeling', 'state_declared',
-                   'state_passive', 'passed_on', 'date_event', 'todo_event', 'milestone',
-                   'ritual_kept', 'ping', 'feeling_authored'];
-    for (final id in named) {
-      expect(kEventTypeById[id], isNotNull, reason: '$id is not in the registry');
-    }
-    final unnamed = kEventTypeById.keys.where((k) => !named.contains(k)).toList();
-    expect(unnamed, isEmpty,
-        reason: 'the registry holds ${kEventTypeById.length} types and this list names '
-            '${named.length}; these are not named: $unnamed');
+    // Every type the registry holds is written down where a reader would look for it.
+    //
+    // This was a hand-written list of the ids, checked both ways. A code critic built a sixth
+    // shared-life module to see what it costs and found this: nothing under the five existing
+    // modules changed and three other tests stayed green, but a new event type failed *here*,
+    // against a literal in a test about floors — which is not what a test about floors is for,
+    // and is a second place to edit that the brief's "without rework" does not allow for.
+    //
+    // The acknowledgement is still required; it has moved to the one place it belongs. Every type
+    // has to be in docs/EVENT_TYPES.md, and spine_schema_test holds the registry and that document
+    // to each other in both directions. So a new module adds its type to the registry and to the
+    // document, which is the documentation it would need anyway, and nothing else.
+    final documented = File('../docs/EVENT_TYPES.md').existsSync()
+        ? File('../docs/EVENT_TYPES.md').readAsStringSync()
+        : File('docs/EVENT_TYPES.md').readAsStringSync();
+    final undocumented =
+        kEventTypeById.keys.where((k) => !RegExp('\\b$k\\b').hasMatch(documented)).toList();
+    expect(undocumented, isEmpty,
+        reason: 'the registry holds ${kEventTypeById.length} types and these are in no '
+            'documentation: $undocumented');
+    expect(kEventTypeById.length, greaterThanOrEqualTo(18),
+        reason: 'the registry has shrunk: ${kEventTypeById.length} types');
   });
 
   test('at least four shared-life modules, each writing into the one log', () {

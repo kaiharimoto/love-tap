@@ -63,6 +63,54 @@ void main() {
             '$offenders');
   });
 
+  test('and a second log written with dart:io is still a second log', () {
+    // The rule was an enumeration of thirteen pub packages and four browser storage entry points,
+    // and it knew nothing about the standard library. A code critic put a whole second event log
+    // in lib/ — File('/tmp/second_spine.jsonl'), writeAsString of jsonEncoded events, a reader
+    // that parses them back — with no package anywhere near it, and the rule that is supposed to
+    // fail the build for a second store had nothing to say.
+    //
+    // Writing a file is not the offence; there are three good reasons to and they are named here,
+    // each with why. Writing *the log* anywhere but the spine is.
+    const mayWriteToDisk = {
+      // The host's key and certificate. They are made on the phone, kept in the app's own storage
+      // which the manifest excludes from every backup, and they are not events.
+      'lib/transport/tailscale/certificate.dart':
+          'the key and certificate the host serves on, made on the phone',
+      // The capture harness writes its own records out, and only in capture builds.
+      'lib/capture/hooks.dart': 'the capture writes its records where the harness reads them',
+      'lib/capture/hooks_io.dart': 'the same, on the platform that has a filesystem',
+      // Where the certificate lives is named here and made in certificate.dart.
+      'lib/main.dart': 'names the directory the key and certificate live in',
+      // A platform player opens a file, not a byte array: a blob already in the log is written to
+      // a temp file so the phone's own video and audio players can be handed a URL for it. It is
+      // a copy of one blob, it is derived from the log, and nothing ever reads it back as state.
+      'lib/media/local_uri_io.dart': 'hands one blob to the platform player as a temp file',
+      'lib/media/read_bytes_io.dart': 'reads a file the person picked, on the way into the log',
+      // The host serves the built PWA off disk. It reads; it writes nothing.
+      'lib/transport/protocol/server_io.dart': 'reads the built web bundle to serve it',
+    };
+    final writes = RegExp(r"\b(File|Directory|RandomAccessFile)\s*\(|"
+        r"\.(writeAsString|writeAsBytes|writeAsStringSync|writeAsBytesSync|openWrite|openSync)\b");
+    final offenders = <String>[];
+    for (final f in Directory('lib').listSync(recursive: true).whereType<File>()) {
+      if (!f.path.endsWith('.dart')) continue;
+      final normalized = f.path.replaceAll('\\', '/');
+      if (normalized.startsWith('lib/spine/store/')) continue;
+      if (mayWriteToDisk.containsKey(normalized)) continue;
+      if (writes.hasMatch(f.readAsStringSync())) offenders.add(normalized);
+    }
+    expect(offenders, isEmpty,
+        reason: 'a file outside lib/spine/store/ writes to the disk, and is not one of the three '
+            'that may: $offenders. If it has a reason, name it in mayWriteToDisk with the reason; '
+            'if it is keeping events, it is a second log and the brief forbids it.');
+
+    // and the rule can see the shape the critic used
+    expect(writes.hasMatch("final f = File('/tmp/second_spine.jsonl');"), isTrue);
+    expect(writes.hasMatch('await f.writeAsString(jsonEncode(events));'), isTrue);
+    expect(writes.hasMatch("final out = File(p).openWrite();"), isTrue);
+  });
+
   test('inside lib/spine/, drivers live under store/ only', () {
     final drivers = _drivers('sqlite3|sqlite3_flutter_libs|idb_shim');
     final offenders = <String>[];
