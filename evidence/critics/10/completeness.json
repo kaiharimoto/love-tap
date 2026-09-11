@@ -1,0 +1,261 @@
+{
+ "critic": "completeness",
+ "cycle": 10,
+ "how_i_worked": {
+  "decode": "every clip decoded with toolchain/ffmpeg -fps_mode passthrough, piped as rawvideo to numpy rather than written to disk (the container had 1.9 GB free). Frame counts came back 286 / 421 / 639 / 300 / 420, matching evidence/frames.json exactly, so no frame was duplicated or dropped.",
+  "luma": "Rec.601 from RGB, the unit frames.json states.",
+  "disclosure": "To check the code critic's rule 9 I ran `flutter test` once from app/. That run rewrote evidence/reliability.json and evidence/coldstart.json in place (reliability_test.dart and coldstart_test.dart write them). I restored both with `git checkout` and verified the working tree is clean for those two paths. The mutation is itself a finding and is recorded under corrections and gaps. I opened no file the brief puts out of bounds: not evidence/SCORE.json, not .critics-hold/, not evidence/critics/<n<10>/, not the git log, TASK_STATE.md, PLAN.md or DIRECTION.md."
+ },
+ "checked": {
+  "reports_read_in_full": [
+   "evidence/critics/10/messenger_reliability.json",
+   "evidence/critics/10/material_truth.json",
+   "evidence/critics/10/emotional_transmission.json",
+   "evidence/critics/10/coherence.json",
+   "evidence/critics/10/anti_goal.json",
+   "evidence/critics/10/code.json",
+   "evidence/critics/BRIEFING.md",
+   "evidence/critics/prompts/*.md (all six)"
+  ],
+  "evidence_opened": [
+   "evidence/04_moments.png",
+   "evidence/02_chat.png",
+   "evidence/01_pulse.png",
+   "evidence/03_us.png",
+   "evidence/05_settings.png",
+   "evidence/10_first_run.png",
+   "evidence/12_search.png",
+   "evidence/13_messenger_states.png",
+   "evidence/14_media_viewer.png",
+   "evidence/17_setup_pwa.png",
+   "evidence/06_unfolding.mp4",
+   "evidence/07_feeling_landing.mp4",
+   "evidence/08_state_propagating.mp4",
+   "evidence/11_chat_scroll.mp4",
+   "evidence/15_authored_feeling.mp4",
+   "evidence/crops/02_chat_300_shadow.png",
+   "evidence/crops/04_moments_what_we_felt.png",
+   "evidence/frames.json",
+   "evidence/MANIFEST.json",
+   "evidence/WHY_MISSING.json",
+   "evidence/DIFF.json",
+   "evidence/reliability.json",
+   "evidence/coldstart.json",
+   "evidence/.previous/ (all 16 files, by sha256)",
+   "evidence/logs/scroll_webkit.json",
+   "evidence/logs/scroll_webkit_plain.json",
+   "evidence/logs/scroll_webkit_alternates.json",
+   "evidence/logs/what_the_alternates_cost.json",
+   "evidence/logs/11_chat_scroll.fling.json",
+   "evidence/logs/11_plain.fling.json",
+   "evidence/logs/11_alternates.fling.json",
+   "evidence/logs/flat.json",
+   "evidence/logs/torn.json",
+   "evidence/logs/lines.json",
+   "evidence/logs/haptics.check.json",
+   "evidence/logs/pwa.json",
+   "evidence/logs/reception.json",
+   "evidence/logs/07_feeling_landing.sound.json",
+   "evidence/logs/15_authored_feeling.sound.json",
+   "evidence/logs/*.report.json (all 19)",
+   "evidence/logs/02_chat.json",
+   "evidence/logs/13_messenger_states.json",
+   "evidence/scenes/13_messenger_states.json",
+   "app/lib/setup/checklist.dart",
+   "app/lib/setup/bootstrap_page.dart",
+   "app/lib/transport/tailscale/tailscale_transport.dart",
+   "app/lib/transport/protocol/server_io.dart",
+   "app/lib/transport/protocol/http_transport.dart",
+   "app/lib/transport/local/local_transport.dart",
+   "app/lib/ambient/ambient_web.dart",
+   "app/lib/media/local_uri_io.dart",
+   "app/lib/spine/types.dart",
+   "app/test/floors_test.dart",
+   "app/test/persistence_boundary_test.dart",
+   "docs/EVENT_TYPES.md"
+  ],
+  "re_measured_and_reproduced_exactly": [
+   "scroll_webkit.json whole record: 802 frames, 182 over 400 ms, gaps 3-7 with median 5, 131.6 s of 136.9 s of build time inside the heavy frames (96.1%), raster p50 118 / max 191. The clip's own 300-frame window: 49.5 s, 67 heavy, median heavy 662 ms, worst 1977 ms. (First-300 and mid-300 windows give 51.0 s / 68 heavy, so the number is not window-sensitive.)",
+   "11_chat_scroll.fling.json: max |asked - moved| = 0.0000 over all 300 ticks; 0 frames under a device pixel.",
+   "13_messenger_states.png: header paper ends y=202, first torn fringe begins y=285, and every scanline y=205..284 has zero pixels above luma 170 (max 117 excluding the fringe row). The five whole paper bands sit at 301-817, 872-1080, 1123-1430, 1491-1884, 1942-2214.",
+   "taken_back is [] in all seven reports that carry it; folded_in.message_delete 0.",
+   "04_moments.png blank tiles: at (494,2144,452x594), (965,2162,452x337) and (24,2615,451x328) not one pixel inside a 12 px inset is below luma 170 at all - no picture, no caption, no ink. The fourth, (24,2320,450x273), carries 1231 dark pixels (the play mark and 0:03). 04_moments.report.json: tiles_built 52, tiles_without_a_picture 8, blobs {asked 18, arrived 18, reading 0, waiting 0}.",
+   "14_media_viewer.report.json video position_ms 625 of duration_ms 2500.",
+   "scenes/13_messenger_states.json drives awaitView partner_typing true before slowSend; 13_messenger_states.report.json .view.partner_typing reads false.",
+   "MANIFEST.json written 2026-09-10T19:16Z with 62 checks entries; scroll_webkit_plain.json, scroll_webkit_alternates.json, what_the_alternates_cost.json, 11_plain.*, 11_alternates.* and apk.json are in none of them, and their mtimes are 2026-09-11 16:59-17:37.",
+   "MANIFEST.json lists 15_authored_feeling.mp4 under `missing` ('not this session's and is not counted') with no artifacts entry, while frames.json records the same file at the same timestamp with from_this_run true.",
+   "asked_a_motor_for appears in 0 of the 19 region reports; held_by_the_phone is [] in all 19.",
+   "haptics.check.json felt_distance floor 18.0 / median 58.94 / smallest 26.49, with no 'control', 'derivation' or 'derived' anywhere in either haptics file; both .sound.json carry source 'assets/sound/<id>.ogg ... mixed over silence' and not 'a recording of the running app's audio output'.",
+   "families Warmth 6 / Ache 5 / Shelter 7 / Mischief 7 / Static 6 / Sparkle 5, built_in 34, authored 2 - so Ache 5 + Static 6 = 11 of 34 built-ins in the two families never opened in the picker.",
+   "07_feeling_landing board tracking by SAD over y1900-2200, x80-1000: hold dy -12 dx -4 at frame 118 then 0,0 at 119; squeeze dy -17 dx +5 at 189 then 0,0 at 190; soup dy -13 dx +3 at 388 then 0,0 at 389.",
+   "15_authored_feeling frames 76-117: mean abs change 0.0062-0.0533, share above two grey levels 0.000775-0.002687, busiest 32 px tile 2.224-3.019. Exactly one frame in the whole clip (75) passes all three held-frame terms, consistent with frames.json repeated_at [74].",
+   "All fifteen files in evidence/.previous/ are byte-identical by sha256 to their current counterparts; .previous/CAPTURED_AT reads 2026-09-10T19:16:44Z against DIFF.json's baseline block of 2026-09-10T05:04:10Z; previous_sha 2068bd6958da1fd7 for 02_chat.png is nowhere on disk.",
+   "08_state_propagating: at frames 535 and 540 the standing strip reads OUT RESTLESS NEED |||. ENERGY |### with its trend arrow; at frame 638, the last frame, it reads OUT HEADS DOWN RESTLESS NEED |||. E, with ENERGY cut to one letter and its meter and arrow off the right edge, and it never comes back.",
+   "rituals glance: '3 kept . 53 times . the last 7 days ago' in 03_us.report.json and '... 8 days ago' in both 07 and 08, with identical now 2026-09-03T19:40:00.000Z, identical seed 20260903 and identical ritual_kept 53.",
+   "contrast: the critic's figures are arithmetically right against a desk of relative luminance 0.106, which is what the desk measures (luma ~90). Pulse ink (191,178,160) gives 3.23:1, Moments name ink (31,42,68) gives 2.08:1 and the date ink (106,105,107) gives 1.24:1. I confirmed the two inks visually: Pulse writes 'ugh / confetti / hold / nyeh / goodnight' in pale warm grey on the wood; the Moments what_we_felt lens writes 'steady' in dark navy on the same wood with its date line all but invisible, and the 'steady' object beside it is a featureless dark-brown lump where the picker shows a lit highlighted ball.",
+   "coherence's arriving-feeling card, verified visually at 15 frame 230 and 07 frame 340: a straight-edged, drop-shadowed, unlabelled card lying over the Pulse partner-state card and over the Us calendar card ('ER / 59' and '9 Nov' showing round it), in the same frame where the same feeling is written 'tuesday soup / 20:35 . noor' in the shelf below. It is present for 91-99 frames of each run (1.46-1.58 s of app time).",
+   "emotional serious[4] verified visually at 15 frame 26: the six Shelter built-ins are lit modelled objects with cast shadows and names in ink on the ruled sheet; the seventh, tuesday soup, is a mark on a tinted torn card cut off by the tab strip with its name drawn behind PULSE/CHAT/US.",
+   "reception.json browser 'chromium', app_open false, the closing note verbatim; pwa.json display_mode_standalone false, url http://127.0.0.1:8798/.",
+   "reliability.json: 177 events both sides, 0 duplicates, same_order_both_sides true, ordering monotonic, faults_injected five, offline_queue '26 events queued offline, all delivered on reconnect', reconnect_ordering 'client holds seq 1..175 gapless and monotonic after the gap'.",
+   "flatness windows: 04_moments 40x40 at (1280,2640) one unique colour and luma std 0.0000; 80x80 at the same point four colours, std 0.0253, 99.8% one triple, mean luma 236.0; 60x60 at (1294,2634) std 0.0000; the control at (260,1190) 190 colours std 16.91; 02_chat (240,1000) 753 colours std 5.35 and (1070,1050) std 1.295; 14_media_viewer probes (400,720) 0.552, (300,700) 0.234, (60,670) 0.366, (100,680) 0.467, and (160,280) a 100% single triple #E3E4E9 at std 0.0000.",
+   "code rule 9: `flutter test --reporter json` gives 75 suites loaded, 353 testDone, 0 non-success, 1 skipped - the code critic's figures to the unit.",
+   "code source claims: HostBind is constructed at tailscale_transport.dart:78 and local_transport.dart:27 and neither passes a securityContext, so server_io.dart:87 always takes HttpServer.bind and _url builds 'http://'; checklist.dart:1-6 carries the 'a checklist that can be lied to is worse than none' paragraph verbatim; certificateVerified ticks on `link.state == LinkState.connected || link.state == LinkState.listening`; mobileConfig and bootstrapPage have zero callers in lib/, test/ or web/ and nothing serves /setup/profile.mobileconfig; ambient_web.dart:82-83 returns on a null container and :93-96 swallows a failed register; floors_test.dart:125-133 holds a closed 18-id list under expect(unnamed, isEmpty); `final Notify notify` is non-nullable so floors_test.dart:113 cannot fail; EVENT_TYPES.md:46 says milestone is 'on the day, interruptive' against types.dart:288 Notify.quiet; persistence_boundary_test.dart enumerates thirteen packages and four browser entry points and knows nothing of dart:io, and five files outside lib/spine import it, local_uri_io.dart:20-29 writing bytes to disk through the gap."
+  ]
+ },
+ "corrections": [
+  {
+   "report": "material_truth",
+   "severity_in_report": "blocking",
+   "claim": "04_moments.png: the six voice-note card interiors are a single literal RGB value #F1ECDF covering '179,258 px in all, 3.99 per cent of the frame, the six regions 24,921 / 27,454 / 27,962 / 30,228 / 31,820 / 36,873 px'.",
+   "what_i_measured": "Exact #F1ECDF pixels in 04_moments.png: 265,995 = 5.920% of the 1440x3120 frame. The six connected components over 5,000 px are 38,243 / 41,061 / 42,079 / 43,954 / 45,472 / 50,098 px, totalling 260,907 = 5.81%, at bounding boxes x520-921 y540-705, x990-1385 y906-1071, x59-434 y1185-1357, x1001-1371 y1190-1352, x76-444 y2088-2263 and x994-1390 y2554-2734, filling 59.4% to 75.7% of their own boxes. The anti_goal critic's independent figures - 260,907 px, 5.81%, six slabs at 59 to 76 per cent - reproduce to the pixel.",
+   "verdict": "anti_goal is right and material_truth is wrong: every one of its six region areas and its total are about 31 per cent low, and 3.99% should be 5.81%. The blocking finding itself is correct and stands on either number; two critics filing the same blocking fault with figures that differ by 46 per cent is the problem, and the builder should work from anti_goal's."
+  },
+  {
+   "report": "anti_goal",
+   "severity_in_report": "minor",
+   "claim": "'All three keys [replies_on_the_glass, refusals_on_the_glass, clipped_at_an_edge] are present and all three are null in both files' - naming evidence/logs/02_chat.json and evidence/logs/13_messenger_states.json - and 'the record written so a reader could check those words against the glass is empty - I had to read them off 13_messenger_states.png instead'.",
+   "what_i_measured": "The three keys do not appear in either file named; they live at .view.* inside the .report.json files. In 13_messenger_states.report.json all three are populated: refusals_on_the_glass = {\"0001MCJ1M0TM1AH3BRGTH8Q39M\": \"this phone is on an older version and cannot read that\"} - the exact string the critic says the record does not carry - plus a full replies_on_the_glass entry resolving row ...Q39T to seq 14053 ('leaving now. dont cut the end off before i get there') and clipped_at_an_edge 0.217. In 02_chat.report.json two are empty objects and clipped_at_an_edge carries two rows at 0.558 and 0.738.",
+   "verdict": "The finding is wrong and should be withdrawn: the record exists, is populated, and agrees with what the critic read off the glass. Its conclusion - that the refusal strings carry no marketing voice - is unaffected. (The critic's companion observation in the same finding, that asked_a_motor_for appears in no region report, is correct: 0 of 19.)"
+  },
+  {
+   "report": "emotional_transmission",
+   "severity_in_report": "serious",
+   "claim": "The page-motion substitute 'has an arrival and a sustain but no release' - each pattern goes from full deflection to rest in one 16 ms frame 'and the whole-frame mean absolute luma change then reads 0.000 to 0.03 grey levels for the following 30 frames - dead still'.",
+   "what_i_measured": "The deflections reproduce exactly (hold -12/-4 to 0/0 at frames 118/119, squeeze -17/+5 to 0/0 at 189/190, soup -13/+3 to 0/0 at 388/389; the critic's soup dx of +6 measures +3). The stillness does not. Decoding with -fps_mode passthrough, the consecutive-frame whole-frame mean absolute luma change over the 30 frames after each release is 0.135 to 1.942 (hold, median 1.241), 0.032 to 0.981 (squeeze, median 0.637) and 0.051 to 2.082 (soup, median 1.151) - four to sixty times the reported figure, and above the brief's own 0.5 held-frame threshold on most of those frames. Localising it, 94 per cent of the post-release change sits in rows 936-1638, the feeling object in the middle of the frame, not the desk band y1900-2200 the critic tracked.",
+   "verdict": "Half right. The board's translation does snap to rest in a single frame and that is worth saying. But the frame is not 'dead still' after it: the settle the finding says is missing is happening, in the object rather than in the board, at up to two grey levels of whole-frame change a frame for at least half a second. The finding should be a minor, not a serious, and its stated measurement should not be quoted."
+  },
+  {
+   "report": "messenger_reliability",
+   "severity_in_report": "blocking",
+   "claim": "The heavy frames in the scroll 'track the link's polling: this run records 187 sync rounds in 802 frames (one every 4.29) against 182 heavy frames (one every 4.40)'.",
+   "what_i_measured": "Every timing number in the finding reproduces exactly. The causal attribution does not, because it cannot: no log in the set carries a per-frame sync record, only an aggregate `rounds`, so the claim rests entirely on two whole-run rates being similar. I did the alignment that is available - the clip run's per-frame build_ms (the last 300 of scroll_webkit.json) against 11_chat_scroll.fling.json's per-frame rows_built, both 300 frames of the same scene. Pearson r = 0.01. Frames that build no rows have mean build 151.4 ms with 33 of 162 over 400 ms; frames that build one row 194.8 ms with 30 of 112 over; two rows 137.4 ms with 4 of 23; three rows 3.7 ms with none. In the plain run the same join gives 4-10 ms everywhere and no heavy frame at all.",
+   "verdict": "The finding, the numbers and the blocking severity all stand - that is not in question. The cause named inside it is unsupported by anything in the evidence, and so is the cause the evidence offers for itself: what_the_alternates_cost.json says 'a fling frame that builds no rows costs 4 ms and one that builds two and a half costs 688 - about 276 ms a row', and the per-frame data in the same evidence set contradicts it. Whatever is costing 662 ms every fourth frame is neither the rows nor, on any evidence here, the polling."
+  },
+  {
+   "report": "material_truth",
+   "severity_in_report": "minor",
+   "claim": "flat.json reports 14_media_viewer.png flattest 0.554 at (400,720) because 'the 80-pixel stride steps over the flattest part of the area it is reporting on'.",
+   "what_i_measured": "The four probe windows reproduce exactly (0.234, 0.366, 0.467, and 0.552 at the published point). The stride does not: every `where` flat.json publishes is a multiple of 40 and three of them - 760, 680, 1240 - are not multiples of 80, so the grid is 40 px. Rerunning the check at both strides, the 40-grid minimum is 0.000 at (160,280) and the 80-grid minimum is 0.044 at (80,400); neither is 0.554, so no stride explains the published number. The mechanism is the pale-window filter: my unfiltered 80x80 pale scan of that still finds 850 windows against the file's 285, a three-fold gap seen on no other still (elsewhere I am within 5 per cent), and the perfectly flat window at (160,280) is cool - R minus B is -6 - so a warmth test excludes it.",
+   "verdict": "The shared conclusion of material_truth and anti_goal is right and important: flat.json's prose exempts the sky on numbers - 'the sky's flattest window reads 0.619, which is above 0.363' - that appear nowhere in its own data, whose floor is 0.461 and whose row for that file says 0.554. anti_goal's '61 windows under 0.5' reproduces to the window on the 40-grid. material_truth's diagnosis of why is wrong and would send a fix at the wrong thing."
+  },
+  {
+   "report": "anti_goal",
+   "severity_in_report": "serious",
+   "claim": "The deckle on the voice card at x994-1389 y2554-2733 is two tear masks butted along a straight vertical line at mid-width: 'the top edge steps 21 px at x=1190 (2549 to 2570) with no other jump over 8 px anywhere along its 396 columns'.",
+   "what_i_measured": "The join is real and unmistakable: cropping x1090-1300, y2520-2600 at 400 per cent shows a dead-straight vertical cut with a ~21 px step, a shallow fibreless deckle on the left and dense hair strokes on the right; the top edge's largest jump is 21 px at x=1191 and the bottom edge breaks 16 px at the same column, and the left half's top-edge rms is 1.98 px against the right half's 3.84. But 'no other jump over 8 px' is wrong: the top edge has five jumps above 8 px (11 px at x=1304, 10 px at x=1279, x=1313 and x=1237), and the bottom edge has five, including an 18 px jump at x=1141 that is larger than the 16 px break at the claimed join and fifty pixels away from it.",
+   "verdict": "Finding confirmed - it is the clearest single anti-goal breach in the set and the crop settles it. The uniqueness argument inside it is overstated and should be dropped; the fibre-density asymmetry, which does reproduce, is the stronger half of the evidence."
+  },
+  {
+   "report": "emotional_transmission",
+   "severity_in_report": "minor",
+   "claim": "Frames 76-117 'escape the held verdict only because the busiest tile reads 2.2 to 3.0 against a 2.0 floor', their mean and share being 'both far under the 0.5 and 0.0015 thresholds'; the run is '42 frames at step_ms 32 = 1.34 s'.",
+   "what_i_measured": "All three measured ranges reproduce to the digit (mean 0.0062-0.0533, share 0.000775-0.002687, busiest tile 2.224-3.019). But the share term reaches 0.0027, which is above the 0.0015 threshold, and 7 of the 42 frames exceed it - so those frames escape the held verdict on two terms, not one. The run is also frames 73-116, 44 frames at step_ms 32 = 1.41 s, per frames.json's cuts_between_runs [.., 72, 116, ..]; and 15_authored_feeling is the one clip whose playback_over_app_time is 0.905 rather than 1.0.",
+   "verdict": "The reader-level conclusion stands and I agree with it - 1.4 s of the clip's central gesture is a still photograph to an eye. The 'only because' is wrong and the frame range is off by three."
+  },
+  {
+   "report": "code",
+   "severity_in_report": "rule 9 evidence and verdict",
+   "claim": "evidence/coldstart.json carries 'a pending later_check dated 2026-09-11'.",
+   "what_i_measured": "The captured file reads later_check.checked_at = 2026-09-10T17:30:36.137280Z. The 2026-09-11 date is an artefact of the critic's own measurement: app/test/reliability_test.dart and app/test/coldstart_test.dart write evidence/reliability.json and evidence/coldstart.json in place, so `flutter test` rewrites two evidence files. I reproduced it exactly - my single run moved later_check.checked_at to 2026-09-11T18:47:37Z and reliability.json generated_at to 2026-09-11T18:47:43Z - and restored both with git checkout. Only timestamps and an ephemeral port changed; 177/177 events, 0 duplicates, same_order_both_sides, monotonic ordering and the five injected faults were byte-identical across runs.",
+   "verdict": "A small wrong date, but it exposes something the review as a whole should have said: the one critic that runs the suite mutates two evidence files that the messenger and coherence critics both cite, and nothing in the evidence discloses it. The reliability run is at least deterministic in substance, which is worth knowing and which nobody had established."
+  },
+  {
+   "report": "messenger_reliability",
+   "severity_in_report": "minor",
+   "claim": "The alternate runs show 'the same fling costs 2.47 s and 2.38 s of build for the same 4.80 s of app time (0.5x real time), with zero frames over 400 ms and a worst frame of 77 ms and 76 ms'.",
+   "what_i_measured": "True of the fling window and of nothing else. Over the last 300 frames, scroll_webkit_alternates gives 2.47 s / 0 over 400 ms / worst 77 ms and scroll_webkit_plain 2.38 s / 0 / 76 ms - and that window is the file's own ('the_fling_alone: frames 300'), so the comparison with the clip run's last 300 is fair. But the whole records are 627 and 628 frames totalling 11.72 s and 10.87 s, with 5 and 6 frames over 400 ms, and worst single build frames of 2429 ms and 1323 ms. The plain run's worst frame is larger than the clip run's 1977 ms; its heavy frames sit at indices 14-18, 44 and 211, i.e. at launch rather than in the throw.",
+   "verdict": "Not wrong, but silently windowed in the direction that flatters the fix, in a finding whose whole point is that a number belongs to a run. The critic also lists the two values in the reverse order of the two files it names. Both arms of what_the_alternates_cost.json record 0 heavy frames in the fling, which means the alternates flag the file was built to test is not what distinguishes the fast runs from the slow one - another reason the cause is still unidentified."
+  },
+  {
+   "report": "material_truth",
+   "severity_in_report": "serious",
+   "claim": "There is no contact shadow: on the shadow crop the wood reads 105.09 at 4 crop px out and 88.8 at 380, brighter at contact than away; across the ten stills the deepest side runs from 0.0 to 7.0 grey levels below the far desk, with 04_moments and dusk_pulse brighter on every side.",
+   "what_i_measured": "Confirmed, and understated. Tracing the paper boundary per column on crops/02_chat_300_shadow.png I get 111.9 at 4 crop px, 97.1 at 8, 93.3 at 12, then 91.1 / 89.7 / 89.8 / 89.0 / 89.3 / 89.4 / 90.1 / 88.9 out to 380 - the same shape, the same far value, near values 2-7 levels apart by boundary-tracing method. Binning desk pixels 4-16 px out from a sheet by direction against a far-desk mean over all ten stills, every direction on every still is brighter than the far desk, by 1.8 to 16.2 grey levels; not one side anywhere is darker. The clip counter-example holds: in 06_unfolding frame 285 the sheet at y1116-1521 reads 76.2 below against 101.1 above and a far desk of 86.9, a 24.9-level directional asymmetry against the critic's 22.0.",
+   "verdict": "Confirmed and stronger than filed. The three stills the critic credits with a real 5.7-7.0 level shadow (01_pulse, 03_us, 12_search) have none on my measurement either. The error is in the build's favour, so the finding if anything understates its case."
+  },
+  {
+   "report": "material_truth",
+   "severity_in_report": "serious",
+   "claim": "The torn edges are very nearly straight; per-still medians run 05_settings 0.38 to 17_setup_pwa 1.30, nine of ten under 1.30 and five inside the 0.36-0.59 band torn.json records as rejected; torn.json's headline pass is measured on the rig's profile generator rather than on the 56 masks the app draws.",
+   "what_i_measured": "Confirmed. Applying torn.json's own stated method - first opaque pixel down each column of the middle sixty per cent, high-passed over 31 columns, whichever of the top and bottom edges wanders less - my per-still medians are 05_settings 0.31, 03_us 0.41, 12_search 0.44, 04_moments 0.51, 14_media_viewer 0.57, 02_chat 0.61, 01_pulse 0.92, 10_first_run 0.92, 17_setup_pwa 0.92, 13_messenger_states 0.93: all ten under 1.0, pooled median 0.49 over 79 edges, 23 of them inside the rejected band. torn.json's max_corr 0.45 / worst_self_correlation 0.339 / ok:true are indeed measured on blender/rig/common.torn_edge, and the same file gives the library's own rms as min 1.15, median 2.0, 28 of 56 under 2, with the Hurst-1.15 cause and 'Not re-rendered this cycle' verbatim.",
+   "verdict": "Confirmed and, again, slightly understated: all ten stills are under 1.0 on my measurement, not nine of ten under 1.30."
+  }
+ ],
+ "not_looked_at": {
+  "opened_by_nobody": [
+   "evidence/logs/07_feeling_landing.frames.json",
+   "evidence/logs/08_state_propagating.frames.json",
+   "evidence/logs/11_chat_scroll.frames.json",
+   "evidence/crops/reception_allowed.png"
+  ],
+  "note_on_that_list": "The three per-clip .frames.json records belong to the exact clips that carry the messenger blocking finding, the coherence blocking finding and two of the emotional serious findings. The remaining three of that family were opened once each: 06_unfolding.frames.json (messenger only), 14_media_viewer.frames.json (messenger only), 15_authored_feeling.frames.json (code only). reception_allowed.png is the permission-granted state of the reception scene, the fifth of its five crops, and no report opened it; three reports explicitly set it aside, which is a judgement, and three passed it by in silence.",
+  "read_by_fewer_than_three": {
+   "one_reader_only": [
+    "evidence/logs/scroll_webkit.json (messenger_reliability) - the whole evidential basis of the blocking finding on the 30-point row, read by one person",
+    "evidence/logs/scroll_webkit_plain.json (messenger_reliability)",
+    "evidence/logs/scroll_webkit_alternates.json (messenger_reliability)",
+    "evidence/logs/11_chat_scroll.fling.json (messenger_reliability)",
+    "evidence/logs/11_plain.fling.json (messenger_reliability)",
+    "evidence/logs/11_alternates.fling.json (messenger_reliability)",
+    "evidence/logs/surfaces.json (material_truth) - 68 KB per-surface material inventory, set aside by four with reasons",
+    "evidence/logs/06_unfolding.frames.json (messenger_reliability)",
+    "evidence/logs/14_media_viewer.frames.json (messenger_reliability)",
+    "evidence/logs/15_authored_feeling.frames.json (code)",
+    "evidence/crops/07_feeling_landing_strip.png (material_truth) - the strip for the landing clip, skipped by the emotional critic in favour of decoding the clip",
+    "evidence/crops/reception_open.png (emotional_transmission)",
+    "all sixteen files under evidence/.previous/ (coherence) - which is by design, since only coherence's row requires the comparison",
+    "evidence/scenes/01_pulse.json, 03_us.json, 05_settings.json, 10_first_run.json, 17_setup_pwa.json, dusk_pulse.json, reception.json (coherence)"
+   ],
+   "two_readers_only": [
+    "evidence/logs/07_feeling_landing.sound.json and 15_authored_feeling.sound.json (coherence, emotional_transmission)",
+    "evidence/logs/haptics.json (anti_goal, emotional_transmission)",
+    "evidence/logs/apk.json (anti_goal, coherence) - the only record of an Android build in the set",
+    "evidence/logs/what_the_alternates_cost.json (coherence, messenger_reliability)",
+    "evidence/reliability.json (coherence, messenger_reliability)",
+    "evidence/logs/manifest.json, recipes.json, reception_scene.json",
+    "the per-scene capture logs evidence/logs/01_pulse.json, 03_us.json, 04_moments.json, 05_settings.json, 06_unfolding.json, 07_feeling_landing.json, 08_state_propagating.json, 10_first_run.json, 11_*.json, 12_search.json, 14_media_viewer.json, 15_authored_feeling.json, 17_setup_pwa.json, dusk_pulse.json (coherence and messenger_reliability between them)",
+    "most of evidence/scenes/*.json"
+   ]
+  },
+  "what_was_covered_well": "Every one of the fifteen present artifacts was opened by four or five of the six, and MANIFEST.json, WHY_MISSING.json and frames.json by all six. The specific files the last completeness pass named as unopened - 17_setup_pwa.png, crops/dusk_pulse.png, logs/hand.json, webpush.txt, strings.json, the shadow crop and the haptics strip - were all opened by three to five readers this time, and every report carries a reasoned not_worth_opening list rather than silence."
+ },
+ "gaps": [
+  {
+   "gap": "load.made_of - a record BRIEFING.md names as one of five written new this cycle - is cited by no report and appears in none of the six opened lists.",
+   "why_it_matters": "The briefing says it 'breaks the first launch into the framework, the library index, the ink plates, the desk, the log and the first frame', and the scroll finding is about what the app costs. In evidence/logs/02_chat.json the breakdown is the framework 7, the library index 13, the ink plates 37, the desk 139, the log 696, the first frame 418, everything 1310 - while the same load block reports ms 2500, so 1190 ms of the launch is in no named part; and that scene's store is 'kept', not fresh. A record written this cycle to answer the question 'what does the launch cost and where does it go' was read by nobody and judged by nobody."
+  },
+  {
+   "gap": "evidence/logs/lines.json - the one measurement the build makes of itself and openly fails - produced no finding from any critic.",
+   "why_it_matters": "The file reports median_across_the_set 0.341 for how far the writing sits from the ruled line nearest it, against 0.25 for writing laid out with no relation to the rules at all, and says so in its own words: 'the writing is not on the rules and is not even accidentally near them'. Five reports list the file and the only '0.33' anywhere in the six is a coincidental 0.339 inside a quotation from torn.json. The material-truth row is decided partly on handwriting, and a published, self-declared, ungated failure of the handwriting's relation to its paper went unscored. Nobody checked the briefing against the file either: BRIEFING.md tells every critic the stock 'appears at pitches from 61 to 178 pixels across the ten stills, a ratio of 2.9', while the current lines.json says smallest 71.0, largest 132.0, ratio 1.86 against a library-implied 1.74. The briefing is carrying a stale number into six fresh contexts."
+  },
+  {
+   "gap": "Nobody tested the causal account the evidence gives of its own worst number.",
+   "why_it_matters": "what_the_alternates_cost.json explains the scroll cost as row-building at 'about 276 ms a row'. Joining the clip run's per-frame build_ms to the fling log's per-frame rows_built - both 300 frames, both in the set - gives r = 0.01, with 33 of the 162 zero-row frames over 400 ms. Both arms of that same file record 0 heavy frames in the fling, so the flag it was built to test is not the difference either. The single number holding the 30-point row at its floor was read by one critic, its stated cause by none, and the evidence's own stated cause is falsifiable from the evidence in about ten lines of arithmetic."
+  },
+  {
+   "gap": "No report says that running the test suite rewrites the evidence.",
+   "why_it_matters": "app/test/reliability_test.dart and app/test/coldstart_test.dart write evidence/reliability.json and evidence/coldstart.json in place. The code critic ran `flutter test` three times and consequently reported a coldstart later_check date that the capture did not write, while the messenger and coherence critics were scoring off the same two files. Nothing in MANIFEST.json, WHY_MISSING.json or any log discloses that those two artifacts are outputs of the suite as well as of the capture."
+  },
+  {
+   "gap": "held_frame_test, the briefing's own instrument, is named by no report.",
+   "why_it_matters": "Each clip's entry carries the three thresholds and a worst_moving_frame said to be 'the frame nearest the held-frame test that still counts as motion'. The briefing explicitly invites a critic to disagree with the number and say where; one did, on 15_authored_feeling, without reading the field. Nobody checked whether the frame each clip declares as its nearest miss is in fact its quietest. On 15_authored_feeling I found exactly one frame (75) passing all three terms, consistent with repeated_at [74], so the record holds there - but it holds unchecked for the other four clips."
+  },
+  {
+   "gap": "reliability.json's draft_survival - 'draft and pairing intact after the client process was closed and reopened' - is cited by nobody.",
+   "why_it_matters": "'No lost drafts' is one of the clauses the messenger row names, and it is the review's one omission in the build's favour: the only evidence answering that clause went unread while the critic filed the ordering clause from the same file."
+  },
+  {
+   "gap": "coldstart.json's host_listener was never cross-read against the code critic's rule 7.",
+   "why_it_matters": "Rule 7 is 'the host binds only its tailnet address', scored PARTIAL from the code. coldstart.json - the only recorded run over the real transport - records host_listener '127.0.0.1:8443' with host_reachable_at '100.68.254.25', which is the userspace branch at tailscale_transport.dart:76 (boundTo = isUserspace ? '127.0.0.1' : address). So the clause the code critic could only check statically was not exercised in the one run that could have exercised it; and the port it chose, 8443, is a third voice in the same certificate story the code critic's blocking finding is about."
+  },
+  {
+   "gap": "No capability check on the second lighting condition beyond the paper.",
+   "why_it_matters": "crops/dusk_pulse.png and logs/dusk_pulse.report.json were opened by four readers, but every use of them is a material or anti-goal reading. Nobody asked the messenger or coherence question of the dusk frame - whether a delivery mark, a read mark or the standing line stays legible at the second light - and dusk_pulse.report.json's standing line is one of the seventeen reading '7 hours ago'."
+  },
+  {
+   "gap": "A looseness in the coherence judgements rule that nobody could have caught but is worth recording.",
+   "why_it_matters": "The briefing forbids calling an artifact 'improved' when SSIM says nothing moved. coherence complies, but calls 07_feeling_landing.mp4 'regressed' at SSIM 0.9953 while writing 'almost nothing changed' - the mirror image of the forbidden move, and permitted only because the rule names one direction. All seventeen artifacts are judged and the five 'unchanged' labels are judged 'unchanged', so the report is compliant; the rule is the thing with the hole in it."
+  }
+ ],
+ "verdict": "This is a sound review and a markedly more honest one than its own evidence suggests the last was: all six reports carry a real opened list and a reasoned not_worth_opening list, all six fail their floors and all six name exactly one blocking finding, so the arithmetic and the vocabulary agree. Every artifact was opened by four or five readers and every file the last completeness pass named as unread was read this time. I re-measured all six blocking findings and all eighteen serious ones, plus nine minors, and every blocking finding survives: the flat #F1ECDF slabs in 04_moments, the absent haptic evidence, the unlabelled straight-edged arrival card, the beige-with-a-paper-hole voice cards, the certificate story the transport does not implement, and the 49.5 seconds of build time behind 4.80 seconds of scroll. Eleven claims needed correcting. Three matter. The largest is that the two critics who filed the same blocking fault on 04_moments.png disagree by 46 per cent on its size - material_truth's 179,258 px and 3.99 per cent of the frame do not reproduce at all, anti_goal's 260,907 px and 5.81 per cent reproduce to the pixel, and my own count of exact #F1ECDF is 265,995. The second is that emotional_transmission's serious finding that the substitute motion 'stops dead' is wrong: the board does snap in one frame, but the following thirty frames carry 0.13 to 2.08 grey levels of whole-frame change, up to sixty times what the report states and above the brief's own held-frame threshold, and ninety-four per cent of it is the feeling object - the settle the finding says is missing is there, in a different place. The third is that anti_goal's minor on the three 'on the glass' record keys should be withdrawn outright: they are not in the two files it names, they live in the report files, and in 13_messenger_states.report.json all three are populated with exactly the refusal string the critic says the record fails to carry. Two further corrections run the other way and strengthen the build's critics rather than weakening them - no still in the set casts a contact shadow on any side by my measurement, where material_truth credited three of them with one, and all ten stills have a median free edge under 1.0 px rms, not nine under 1.30. What the review as a whole did not do is look past the numbers to the causes: the single figure holding the heaviest row at its floor was read by one critic, the cause named inside that finding is unmeasurable from anything in the set, and the cause the evidence offers for itself - 276 ms a row - is falsified by a two-column join of two files already in the set. Alongside that sit three records this cycle was told to write and nobody opened: load.made_of, the three per-clip .frames.json files for the very clips the blocking findings turn on, and lines.json's self-declared failure at 0.341, which is the one published fault in the whole capture that no report scored."
+}
