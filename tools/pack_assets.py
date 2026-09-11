@@ -155,6 +155,48 @@ def safe_inset(mask_path, box):
     ]
 
 
+def tear_depth(mask_path, box):
+    """How far in the tear actually eats on each side, as fractions — left, top, right, bottom.
+
+    Not the same question as `safe_inset`. That one asks where writing can go and answers with the
+    largest rectangle entirely inside the paper; this one asks where the *fibres* are, which is the
+    band a nine-patch must keep at its rendered size.
+
+    They were the same number — a flat four tenths, for every mask — and a material critic measured
+    what that costs: on a piece four times the width of the band left over in the middle, the
+    fibres in that band are stretched to a quarter of their frequency, and a high-pass over 31
+    columns stops seeing them. Traced across the tenth capture's 02_chat, the four widest pieces in
+    the frame measured 0.78 to 1.01 px rms against the material's own 2.417.
+
+    Measured over the middle eight tenths of each side, because the outer tenth belongs to the
+    corner cells, which are never stretched.
+    """
+    from PIL import Image
+    import numpy as np
+    a = np.asarray(Image.open(mask_path).convert("L"), dtype=np.float32) / 255.0
+    a = a[box[1]:box[3], box[0]:box[2]]
+    solid = a > 0.85
+    h, w = solid.shape
+    if h < 8 or w < 8:
+        return [0.2, 0.2, 0.2, 0.2]
+
+    def deepest(lines, span):
+        out = 0
+        for i in range(int(span * 0.1), int(span * 0.9)):
+            col = np.flatnonzero(lines[i])
+            if len(col):
+                out = max(out, col[0])
+        return out
+
+    top = deepest([solid[:, x] for x in range(w)], w) / h
+    bottom = deepest([solid[::-1, x] for x in range(w)], w) / h
+    left = deepest([solid[y, :] for y in range(h)], h) / w
+    right = deepest([solid[y, ::-1] for y in range(h)], h) / w
+    # never more than four tenths — beyond that there is no middle left to stretch — and never
+    # less than a twentieth, or the band is thinner than the sampler's own footprint
+    return [round(min(0.4, max(0.05, v)), 4) for v in (left, top, right, bottom)]
+
+
 # How much wider than the piece the packed contact shadow is. The renderer frames the shadow wider
 # than the sheet because the visible part of one is the part outside the paper; packing keeps that
 # margin relative to the piece's own box, so the app can put every shadow back with one number
@@ -284,6 +326,7 @@ def pack_family(name, index, verbose=True):
     out = []
     boxes = {}
     safes = {}
+    depths = {}
     frame = render_frame() if name == "tears" else 1.0
     shadow_boxes, shadow_spread = {}, {}
     if name == "objects":
@@ -296,6 +339,7 @@ def pack_family(name, index, verbose=True):
                 if box:
                     boxes[stem] = box
                     safes[stem] = safe_inset(os.path.join(src_dir, fn), box)
+                    depths[stem] = tear_depth(os.path.join(src_dir, fn), box)
     for fn in sorted(os.listdir(src_dir)):
         if not fn.lower().endswith((".png", ".webp", ".jpg")):
             continue
@@ -321,6 +365,10 @@ def pack_family(name, index, verbose=True):
             row["safe"] = safes[stem]
             sf = safes[stem]
             row["usable"] = round((1 - sf[0] - sf[2]) * (1 - sf[1] - sf[3]), 4)
+        if stem in depths:
+            # the band of the render that is fibre rather than paper, per side, which is what a
+            # nine-patch must keep at its rendered size instead of stretching
+            row["tear"] = depths[stem]
         out.append(row)
     index[name] = out
     if shadow_spread:

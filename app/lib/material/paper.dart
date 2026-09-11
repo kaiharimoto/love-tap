@@ -731,6 +731,7 @@ class _MaskedLayerState extends State<MaskedLayer> {
     return _MaskedBox(
       mask: mask,
       dpr: dpr,
+      band: SlicedMasks.bandOf(widget.maskAsset),
       shaderFor: (Rect rect) {
         final sliced = SlicedMasks.at(widget.maskAsset, mask, rect.size, dpr);
         final m = Matrix4.identity()
@@ -774,8 +775,12 @@ class _MaskedBox extends SingleChildRenderObjectWidget {
     required this.mask,
     required this.dpr,
     required this.shaderFor,
+    required this.band,
     required Widget super.child,
   });
+
+  /// How far in the tear eats on each side of this particular render — see SlicedMasks.bandOf.
+  final List<double> band;
 
   /// The tear itself, as it was rendered. Drawn straight into the piece as a nine-patch when the
   /// piece paints into the canvas it was given, which is nearly always.
@@ -801,14 +806,16 @@ class _MaskedBox extends SingleChildRenderObjectWidget {
   static const double air = 0.5;
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderMaskedBox(mask, dpr, shaderFor);
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderMaskedBox(mask, dpr, shaderFor, band);
 
   @override
   void updateRenderObject(BuildContext context, _RenderMaskedBox renderObject) {
     renderObject
       ..mask = mask
       ..dpr = dpr
-      ..shaderFor = shaderFor;
+      ..shaderFor = shaderFor
+      ..band = band;
   }
 }
 
@@ -837,7 +844,7 @@ class _MaskedBox extends SingleChildRenderObjectWidget {
 /// two device pixels the blend lands at partial coverage and a third of a pixel of sheet survives
 /// where the tear had erased it. Out on the desk there is nothing to erase.
 class _RenderMaskedBox extends RenderProxyBox {
-  _RenderMaskedBox(this._mask, this._dpr, this._shaderFor);
+  _RenderMaskedBox(this._mask, this._dpr, this._shaderFor, this._band);
 
   ui.Image _mask;
   set mask(ui.Image value) {
@@ -857,6 +864,16 @@ class _RenderMaskedBox extends RenderProxyBox {
   set shaderFor(_ShaderFor value) {
     if (value == _shaderFor) return;
     _shaderFor = value;
+    markNeedsPaint();
+  }
+
+  List<double> _band;
+  set band(List<double> value) {
+    if (value.length == _band.length &&
+        List.generate(value.length, (i) => value[i] == _band[i]).every((x) => x)) {
+      return;
+    }
+    _band = value;
     markNeedsPaint();
   }
 
@@ -904,6 +921,7 @@ class _RenderMaskedBox extends RenderProxyBox {
       Paint()
         ..blendMode = BlendMode.dstIn
         ..filterQuality = FilterQuality.medium,
+      _band,
     );
     canvas.restore();
     canvas.restore();
@@ -931,6 +949,20 @@ class SlicedMasks {
   /// is always solid, so four tenths is comfortably outside them.
   static const double edge = 0.4;
 
+  /// The band of a render that is fibre rather than paper, per side — left, top, right, bottom.
+  ///
+  /// Measured at pack time (tools/pack_assets.py, `tear_depth`) as how far in the alpha boundary
+  /// actually eats over the middle eight tenths of each side, and carried in the index. It used to
+  /// be a flat four tenths for every mask and every side, which is two separate wrongnesses: on a
+  /// mask whose edge barely wanders it puts most of the paper in the corners, and on one that eats
+  /// deep it leaves fibre in the middle band, where the nine-patch stretches it.
+  static List<double> bandOf(String asset) {
+    final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
+    final b = lib?.tearBandOf(asset);
+    if (b == null || b.length != 4) return const [edge, edge, edge, edge];
+    return b;
+  }
+
   /// How much to shrink a tear render by so its torn borders fit the piece it is drawn into.
   ///
   /// `drawImageNine` draws the four corners at their *source* pixel size. Ask for a border wider
@@ -940,43 +972,118 @@ class SlicedMasks {
   /// mid-width, with a step in it. A material critic measured one: a 21-pixel step at x=1190, the
   /// exact middle of a 04_moments tile.
   ///
-  /// Every mask is 1024 pixels on its long side. A Moments tile is 450 device pixels wide and a
-  /// chat note is 360 tall, so four tenths of the render is 410 pixels *per corner* on a card one
-  /// corner wide, and 231 per corner on a note one and a half corners tall. Neither fits, and the
-  /// short axis of an ordinary note has not fitted since the piece started drawing its tear
-  /// straight in.
-  ///
-  /// Narrowing the band instead is worse: the band has to contain the whole wander of the torn
-  /// edge, which is about a fifth of the render, and a band narrower than that puts wandering
-  /// fibre in the middle slice, where the nine-patch stretches it across the piece.
-  ///
   /// So the render is shrunk, whole, until its borders fit with a fifth of the piece left in the
   /// middle to stretch. A sheet the render's own size or larger is untouched and keeps its fibres
   /// at the size they were rendered; a small card gets a smaller tear, which is what a small card
   /// has.
-  static double fitFor(ui.Image image, Size dst) {
-    final bw = image.width * 2 * edge, bh = image.height * 2 * edge;
+  static double fitFor(ui.Image image, Size dst, [List<double>? band]) {
+    final b = band ?? const [edge, edge, edge, edge];
+    final bw = image.width * (b[0] + b[2]);
+    final bh = image.height * (b[1] + b[3]);
     if (bw <= 0 || bh <= 0 || dst.width <= 0 || dst.height <= 0) return 1.0;
     const room = 0.8;      // the borders may take four fifths of the piece; the rest stretches
     return math.min(1.0, math.min(dst.width * room / bw, dst.height * room / bh));
   }
 
-  /// One tear, drawn as a nine-patch into [dst], shrunk by [fitFor] when it has to be.
+  /// One tear, drawn into [dst] as nine cells: four corners at their rendered size, four edge
+  /// bands **repeated** rather than stretched, and a solid middle that may stretch freely.
   ///
-  /// [dst] and the canvas are in device pixels: a nine-patch keeps its corners at their source
-  /// size *in whatever unit the canvas is in*, so drawing this in logical points on a phone at
-  /// three device pixels to the point makes every fibre three times too coarse.
-  static void paintNine(Canvas canvas, ui.Image image, Rect dst, Paint paint) {
+  /// Repeated, because stretching is what made the edges straight. A material critic traced every
+  /// paper/wood boundary in the stills and found rms 0.20 to 2.71 px over a 31-column high-pass,
+  /// median 0.71, against the masks' own 2.417 measured the same way. The four smoothest edges in
+  /// 02_chat were its four widest pieces — 1351, 1351, 1060 and 1063 columns — because the top
+  /// band of a nine-patch is pulled across the whole width of the piece, and fibres stretched
+  /// four times are fibres at a quarter of their frequency, which is below what a high-pass over
+  /// 31 columns can see. Every other copy is mirrored, so the repeats meet themselves and there is
+  /// no period to find.
+  ///
+  /// [dst] and the canvas are in device pixels: a nine-patch keeps its cells at their source size
+  /// *in whatever unit the canvas is in*, so drawing this in logical points on a phone at three
+  /// device pixels to the point makes every fibre three times too coarse.
+  static void paintNine(Canvas canvas, ui.Image image, Rect dst, Paint paint,
+      [List<double>? band]) {
     final w = image.width.toDouble(), h = image.height.toDouble();
-    final k = fitFor(image, dst.size);
+    final b = band ?? const [edge, edge, edge, edge];
+    final k = fitFor(image, dst.size, b);
+    final sx = <double>[0, b[0] * w, w - b[2] * w, w];
+    final sy = <double>[0, b[1] * h, h - b[3] * h, h];
+    // Destination boundaries on whole device pixels. Two cells meeting between two pixels are two
+    // antialiased edges, and this paint is dstIn: partial coverage twice over erases a one-pixel
+    // line out of the sheet, which is the hairline class of fault this material has already been
+    // through once.
+    final dxs = <double>[
+      dst.left,
+      (dst.left + b[0] * w * k).roundToDouble(),
+      (dst.right - b[2] * w * k).roundToDouble(),
+      dst.right,
+    ];
+    final dys = <double>[
+      dst.top,
+      (dst.top + b[1] * h * k).roundToDouble(),
+      (dst.bottom - b[3] * h * k).roundToDouble(),
+      dst.bottom,
+    ];
+    final flat = Paint()
+      ..blendMode = paint.blendMode
+      ..filterQuality = paint.filterQuality
+      ..color = paint.color
+      ..isAntiAlias = false;
+    for (var r = 0; r < 3; r++) {
+      for (var c = 0; c < 3; c++) {
+        final src = Rect.fromLTRB(sx[c], sy[r], sx[c + 1], sy[r + 1]);
+        final out = Rect.fromLTRB(dxs[c], dys[r], dxs[c + 1], dys[r + 1]);
+        if (src.width <= 0 || src.height <= 0 || out.width <= 0 || out.height <= 0) continue;
+        if (r != 1 && c == 1) {
+          _repeat(canvas, image, src, out, flat, along: Axis.horizontal, cell: src.width * k);
+        } else if (c != 1 && r == 1) {
+          _repeat(canvas, image, src, out, flat, along: Axis.vertical, cell: src.height * k);
+        } else {
+          canvas.drawImageRect(image, src, out, flat);
+        }
+      }
+    }
+  }
+
+  static void _repeat(Canvas canvas, ui.Image image, Rect src, Rect dst, Paint paint,
+      {required Axis along, required double cell}) {
+    final horizontal = along == Axis.horizontal;
+    final span = horizontal ? dst.width : dst.height;
+    // A band only a little wider than its own source is not worth repeating: the stretch is under
+    // a quarter and the seam would cost more than it saves.
+    if (cell <= 1 || span <= cell * 1.25) {
+      canvas.drawImageRect(image, src, dst, paint);
+      return;
+    }
     canvas.save();
-    canvas.scale(k);
-    canvas.drawImageNine(
-      image,
-      Rect.fromLTRB(w * edge, h * edge, w * (1 - edge), h * (1 - edge)),
-      Rect.fromLTRB(dst.left / k, dst.top / k, dst.right / k, dst.bottom / k),
-      paint,
-    );
+    canvas.clipRect(dst);
+    var at = horizontal ? dst.left : dst.top;
+    final end = horizontal ? dst.right : dst.bottom;
+    var mirrored = false;
+    var guard = 0;
+    while (at < end && guard++ < 512) {
+      final out = horizontal
+          ? Rect.fromLTRB(at, dst.top, at + cell, dst.bottom)
+          : Rect.fromLTRB(dst.left, at, dst.right, at + cell);
+      if (mirrored) {
+        canvas.save();
+        if (horizontal) {
+          canvas.translate(out.right, 0);
+          canvas.scale(-1, 1);
+          canvas.drawImageRect(
+              image, src, Rect.fromLTWH(0, out.top, out.width, out.height), paint);
+        } else {
+          canvas.translate(0, out.bottom);
+          canvas.scale(1, -1);
+          canvas.drawImageRect(
+              image, src, Rect.fromLTWH(out.left, 0, out.width, out.height), paint);
+        }
+        canvas.restore();
+      } else {
+        canvas.drawImageRect(image, src, out, paint);
+      }
+      at += cell;
+      mirrored = !mirrored;
+    }
     canvas.restore();
   }
 
@@ -1020,6 +1127,7 @@ class SlicedMasks {
       Rect.fromLTWH(1, 1, (w - 2).toDouble().clamp(1, w.toDouble()),
           (h - 2).toDouble().clamp(1, h.toDouble())),
       Paint()..filterQuality = FilterQuality.medium,
+      bandOf(asset),
     );
     final image = recorder.endRecording().toImageSync(w, h);
     composed += 1;
@@ -1096,12 +1204,13 @@ class _NineSlicedState extends State<NineSliced> {
     if (image == null) return const SizedBox.shrink();
     return CustomPaint(
         painter: _NinePainter(image, widget.edge, widget.opacity, widget.filterQuality,
-            MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0));
+            MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0,
+            SlicedMasks.bandOf(widget.asset)));
   }
 }
 
 class _NinePainter extends CustomPainter {
-  _NinePainter(this.image, this.edge, this.opacity, this.filterQuality, this.dpr);
+  _NinePainter(this.image, this.edge, this.opacity, this.filterQuality, this.dpr, this.band);
   final ui.Image image;
   final double edge;
   final double opacity;
@@ -1109,6 +1218,9 @@ class _NinePainter extends CustomPainter {
 
   /// Device pixels per logical point. The draw happens in device pixels — see below.
   final double dpr;
+
+  /// How far in the tear eats on each side of this render.
+  final List<double> band;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -1135,6 +1247,7 @@ class _NinePainter extends CustomPainter {
       Paint()
         ..filterQuality = filterQuality
         ..color = Color.fromRGBO(0, 0, 0, opacity),
+      band,
     );
     canvas.restore();
   }

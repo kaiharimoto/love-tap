@@ -6,7 +6,7 @@ import 'package:flutter/painting.dart' show Rect, Size;
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
 class LibraryEntry {
-  const LibraryEntry(this.id, this.w, this.h, [this.safe, this.usable = 1.0]);
+  const LibraryEntry(this.id, this.w, this.h, [this.safe, this.usable = 1.0, this.tear]);
   final String id;
   final int w;
   final int h;
@@ -17,6 +17,17 @@ class LibraryEntry {
 
   /// How much of the piece is inside that rectangle: a long strip has little, a half sheet a lot.
   final double usable;
+
+  /// For a tear mask: how far in the tear actually eats on each side (left, top, right, bottom, as
+  /// fractions) — the band a nine-patch must keep at its rendered size instead of stretching.
+  ///
+  /// Not the same question as [safe], which asks where writing can go and answers with the largest
+  /// rectangle entirely inside the paper. This asks where the fibres are. They were the same
+  /// number — a flat four tenths for every mask and every side — and a material critic measured
+  /// what that costs: the four widest pieces in 02_chat had edges at 0.78 to 1.01 px rms against
+  /// the masks' own 2.417, because the top band of a nine-patch is pulled across the whole width
+  /// of the piece and fibres stretched four times are below what a high-pass can see.
+  final List<double>? tear;
 
   double get aspect => h == 0 ? 1 : w / h;
 }
@@ -86,6 +97,7 @@ class MaterialLibrary {
               (e['h'] as num).toInt(),
               (e['safe'] as List?)?.map((x) => (x as num).toDouble()).toList(),
               (e['usable'] as num?)?.toDouble() ?? 1.0,
+              (e['tear'] as List?)?.map((x) => (x as num).toDouble()).toList(),
             ))
         .toList();
     final folds = <String, int>{};
@@ -224,6 +236,19 @@ class MaterialLibrary {
       if (e.id == tearId) return e.safe ?? const [0.06, 0.07, 0.06, 0.07];
     }
     return const [0.06, 0.07, 0.06, 0.07];
+  }
+
+  /// The band of a tear render that is fibre rather than paper, per side, or null for a library
+  /// packed before it was measured. Takes an id or an asset path.
+  List<double>? tearBandOf(String assetOrId) {
+    final id = assetOrId.split('/').last.replaceAll('.webp', '');
+    for (final e in tears) {
+      if (e.id == id) {
+        final t = e.tear;
+        return (t != null && t.length == 4) ? t : null;
+      }
+    }
+    return null;
   }
 
   List<String> get objectIds =>

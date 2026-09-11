@@ -13,6 +13,7 @@
 @TestOn('vm')
 library;
 
+import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:desk/feelings/builtins.dart';
@@ -145,6 +146,73 @@ void main() {
       if (a != null && b != null) middle = middle > (b - a).abs() ? middle : (b - a).abs();
     }
     expect(middle, lessThan(12), reason: 'a $middle-pixel step at the exact mid-width is a seam');
+  });
+
+  testWidgets('a wide sheet keeps its fibres instead of having them stretched out', (tester) async {
+    // A nine-patch pulls its top band across the whole width of the piece, so on a sheet four
+    // times the width of that band the fibres come out at a quarter of their frequency and a
+    // high-pass over 31 columns stops seeing them. A material critic traced every paper/wood
+    // boundary in the stills: median rms 0.71 px, thirteen of twenty-two under one pixel, against
+    // the masks' own 2.417 measured the same way. The four smoothest edges in 02_chat were its
+    // four widest pieces.
+    final (img, bytes) = await render(
+      tester,
+      470,
+      200,
+      const ColoredBox(
+        color: Color(0xFF4C3E32),
+        child: Center(
+          child: Slip(
+            id: 'probe.wide',
+            row: 2,
+            stock: 'lined',
+            width: 452,
+            child: SizedBox(height: 120, width: 420),
+          ),
+        ),
+      ),
+    );
+    // On luma against the desk, not on alpha: the baked contact shadow is nearly opaque where it
+    // meets the paper, so the first row with alpha above the threshold is the shadow's boundary
+    // and not the sheet's. This is the measurement tools/check/deckle.py makes on the stills.
+    final ys = <double>[];
+    for (var x = 0; x < img.width; x++) {
+      for (var y = 0; y < img.height; y++) {
+        final i = (y * img.width + x) * 4;
+        final lum = 0.2126 * bytes[i] + 0.7152 * bytes[i + 1] + 0.0722 * bytes[i + 2];
+        if (lum > 150) {
+          ys.add(y.toDouble());
+          break;
+        }
+      }
+    }
+    expect(ys.length, greaterThan(600), reason: 'the sheet did not draw');
+
+    // the same high-pass the check uses: the edge with everything slower than 31 columns removed
+    const window = 31;
+    var sum = 0.0;
+    var n = 0;
+    for (var i = window ~/ 2; i < ys.length - window ~/ 2; i++) {
+      var mean = 0.0;
+      for (var k = -window ~/ 2; k <= window ~/ 2; k++) {
+        mean += ys[i + k];
+      }
+      mean /= window;
+      final d = ys[i] - mean;
+      sum += d * d;
+      n += 1;
+    }
+    final rms = n == 0 ? 0.0 : math.sqrt(sum / n);
+    // One, because that is what this fix is actually worth on this piece and nothing more.
+    // Measured on this exact sheet: 0.61 px rms with the old flat four-tenths band and a stretched
+    // centre slice, 1.16 with the band measured per mask and the edge bands repeated. The bottom
+    // edge of the same sheet goes 4.50 to 4.82 and its middle third against its outer thirds goes
+    // from eight times smoother to three and a half. tools/check/deckle.py measures all of that on
+    // the stills, and derives its own floor from the masks; this holds the one number a widget
+    // test can hold without a capture.
+    expect(rms, greaterThan(1.0),
+        reason: 'the top edge of a full-width sheet measures $rms px rms: it is a straight line '
+            'with a blur on it, not a tear');
   });
 
   test('a piece smaller than the render shrinks the tear rather than butting it', () async {
