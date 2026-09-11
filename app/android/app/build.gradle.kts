@@ -18,6 +18,21 @@ val key = Properties().apply { if (keyFile.exists()) keyFile.inputStream().use {
 val signedForReal = keyFile.exists() &&
     listOf("storeFile", "storePassword", "keyAlias", "keyPassword").all { key.getProperty(it) != null }
 
+// Said at configuration time, from the top level, where it reaches the terminal. Inside the
+// buildTypes block `logger.lifecycle` was swallowed — the APK came out signed `CN=Android Debug`
+// and nothing anywhere said so, which is exactly the failure this line exists to prevent.
+if (!signedForReal) {
+    println("")
+    println("  -- This release will be signed with the DEBUG key -------------------------")
+    println("  android/key.properties is absent, so `flutter build apk --release` produces")
+    println("  an APK signed `CN=Android Debug`. It installs on a phone and it is not a")
+    println("  release: a build signed with a real key cannot replace it without")
+    println("  uninstalling, which takes the log with it. docs/PHONES.md says how to make")
+    println("  the key. tools/check/apk.py reads the signature off whatever was built.")
+    println("  ---------------------------------------------------------------------------")
+    println("")
+}
+
 android {
     namespace = "io.lovetap.desk"
     compileSdk = flutter.compileSdkVersion
@@ -63,11 +78,6 @@ android {
                 // one signed with a real key without uninstalling first, which takes the log with
                 // it, and that is a thing to find out before two people have a year in it.
                 signingConfig = signingConfigs.getByName("debug")
-                logger.lifecycle(
-                    "\n  This release APK is signed with the DEBUG key, because android/key.properties" +
-                    "\n  is absent. It will install on a phone and it is not a release: a build signed" +
-                    "\n  with a real key cannot replace it without uninstalling, which takes the log" +
-                    "\n  with it. docs/PHONES.md says how to make the key.\n")
             }
             // The log lives in the app's own storage and is the only copy on this phone. Nothing
             // here backs it up anywhere, so nothing here may hand it to Google's backup service.

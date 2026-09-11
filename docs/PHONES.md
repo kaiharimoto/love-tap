@@ -79,8 +79,24 @@ trying the app out and is not fine for the phone you intend to keep the year on.
 ### The APK
 
     ./bootstrap.sh                     # once; installs the SDK into ./toolchain
-    cd app && flutter build apk --release \
+    cd app && flutter build apk --release --split-per-abi --target-platform android-arm64 \
       --dart-define=TRANSPORT=tailscale --dart-define=ROLE=host --dart-define=PERSON=noor
+
+`--split-per-abi --target-platform android-arm64` is not optional advice. Without it the APK
+carries three architectures and measures 145 MB, of which 38.6 MB is engines and app images for
+phones you do not have; the arm64 one is 106 MB, and every Android phone made this decade is
+arm64. The 84 MB that remains is the material library — the paper, the tears, the objects and the
+folds — which is the app rather than overhead.
+
+Both numbers were measured on builds made here, and `tools/check/apk.py` reads them, and the
+certificate, out of whatever APK is on disk:
+
+    python3 tools/check/apk.py --out evidence/logs/apk.json
+
+It says who signed it. A build with no `key.properties` comes back `CN=Android Debug`; the one
+made with a key comes back with your own name on it. `evidence/logs/apk.json` records both, from
+this machine — the signed one used a throwaway key generated into /tmp and destroyed straight
+after, which is why the distinguished name in it says so.
 
 `--dart-define=SEED=year` is how the seeded history gets compiled in, and you do not want it: it
 is for the evidence captures. A build without it starts empty, which is what a real phone wants.

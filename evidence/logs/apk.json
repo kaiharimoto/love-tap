@@ -1,0 +1,48 @@
+{
+ "what": "the Android release path, exercised rather than described",
+ "when": "2026-09-11T17:37:09.238385Z",
+ "the_apk": {
+  "name": "app-arm64-v8a-release.apk",
+  "mb": 106.4,
+  "abis": [
+   "arm64-v8a"
+  ],
+  "built_with": "flutter build apk --release --split-per-abi --target-platform android-arm64 --dart-define=TRANSPORT=tailscale --dart-define=ROLE=host --dart-define=PERSON=noor",
+  "biggest": [
+   {
+    "what": "assets/flutter_assets/assets",
+    "mb": 84.1
+   },
+   {
+    "what": "lib/arm64-v8a",
+    "mb": 19.8
+   },
+   {
+    "what": "classes.dex",
+    "mb": 9.2
+   },
+   {
+    "what": "classes2.dex",
+    "mb": 3.4
+   },
+   {
+    "what": "assets/flutter_assets/packages",
+    "mb": 0.3
+   }
+  ]
+ },
+ "signed_by": "CN=a throwaway key that proves the signing path, O=not for release, C=GB",
+ "is_the_debug_key": false,
+ "the_key_that_signed_it": "a throwaway RSA key generated into /tmp for this one build, with a thirty-day validity and a random password, and deleted immediately afterwards along with the key.properties that pointed at it. It exists in this record only as the distinguished name above, which is how a reader can see that the signing config works and that it was not the shared debug key. No keystore, no password and no key.properties is in this repository or ever was; app/android/.gitignore covers all three.",
+ "and_without_a_key": {
+  "signed_by": "C=US, O=Android, CN=Android Debug",
+  "mb": 145.0,
+  "abis": [
+   "arm64-v8a",
+   "armeabi-v7a",
+   "x86_64"
+  ],
+  "measured": "the first build of this session, before the signing config existed. Flutter's template signs a release with the debug key and says nothing; the build prints a block about it now, and tools/check/apk.py reads the certificate out of the file rather than trusting the log."
+ },
+ "what_a_phone_should_get": "the arm64 build. 145 MB carries three architectures and 38.6 MB of it is engines and app images for phones the owner does not have; every Android phone made this decade is arm64. The 84 MB that is left is the material library \u2014 the paper, the tears, the objects and the folds \u2014 which is the app."
+}
