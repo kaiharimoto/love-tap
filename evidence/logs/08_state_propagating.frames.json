@@ -46,7 +46,7 @@
  ],
  "app_seconds": 10.22,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 2.87753,
+ "mean_change_per_frame": 2.82429,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -56,9 +56,9 @@
   },
   "worst_moving_frame": {
    "frame": 474,
-   "mean": 0.0278,
-   "visible_share": 0.000557,
-   "busiest_tile": 15.8552,
+   "mean": 0.0345,
+   "visible_share": 0.000412,
+   "busiest_tile": 21.2308,
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },

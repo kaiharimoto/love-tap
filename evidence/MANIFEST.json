@@ -1,10 +1,10 @@
 {
- "captured_at": "2026-09-10T17:29:30Z",
+ "captured_at": "2026-09-11T21:04:14Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
-   "bytes": 4550111,
-   "written": "2026-09-10T17:40:36Z",
+   "bytes": 4486327,
+   "written": "2026-09-11T21:16:41Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -17,8 +17,8 @@
    ]
   },
   "02_chat.png": {
-   "bytes": 4736041,
-   "written": "2026-09-10T17:42:47Z",
+   "bytes": 4595339,
+   "written": "2026-09-11T21:19:48Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -31,8 +31,8 @@
    ]
   },
   "03_us.png": {
-   "bytes": 4510796,
-   "written": "2026-09-10T17:43:03Z",
+   "bytes": 4392861,
+   "written": "2026-09-11T21:20:10Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -45,8 +45,8 @@
    ]
   },
   "04_moments.png": {
-   "bytes": 4388165,
-   "written": "2026-09-10T17:43:35Z",
+   "bytes": 4564411,
+   "written": "2026-09-11T21:22:17Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -59,8 +59,8 @@
    ]
   },
   "05_settings.png": {
-   "bytes": 4124881,
-   "written": "2026-09-10T17:43:52Z",
+   "bytes": 4020614,
+   "written": "2026-09-11T21:23:03Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -73,8 +73,8 @@
    ]
   },
   "10_first_run.png": {
-   "bytes": 4315695,
-   "written": "2026-09-10T17:48:04Z",
+   "bytes": 4220941,
+   "written": "2026-09-11T21:30:20Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -87,8 +87,8 @@
    ]
   },
   "12_search.png": {
-   "bytes": 4822005,
-   "written": "2026-09-10T17:44:16Z",
+   "bytes": 4576288,
+   "written": "2026-09-11T21:23:59Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -101,8 +101,8 @@
    ]
   },
   "13_messenger_states.png": {
-   "bytes": 4781556,
-   "written": "2026-09-10T17:45:37Z",
+   "bytes": 4565929,
+   "written": "2026-09-11T21:25:59Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -115,8 +115,8 @@
    ]
   },
   "14_media_viewer.png": {
-   "bytes": 2772890,
-   "written": "2026-09-10T17:46:10Z",
+   "bytes": 2741284,
+   "written": "2026-09-11T21:27:07Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -129,8 +129,8 @@
    ]
   },
   "17_setup_pwa.png": {
-   "bytes": 4576262,
-   "written": "2026-09-10T17:48:14Z",
+   "bytes": 4452707,
+   "written": "2026-09-11T21:30:30Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -143,8 +143,8 @@
    ]
   },
   "06_unfolding.mp4": {
-   "bytes": 3217308,
-   "written": "2026-09-10T18:43:45Z",
+   "bytes": 3131325,
+   "written": "2026-09-11T22:54:52Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -162,8 +162,8 @@
    "long_enough": true
   },
   "07_feeling_landing.mp4": {
-   "bytes": 6994206,
-   "written": "2026-09-10T18:47:52Z",
+   "bytes": 7012497,
+   "written": "2026-09-11T22:59:24Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -181,8 +181,8 @@
    "long_enough": true
   },
   "08_state_propagating.mp4": {
-   "bytes": 9336952,
-   "written": "2026-09-10T19:14:10Z",
+   "bytes": 9022568,
+   "written": "2026-09-11T23:25:32Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -200,8 +200,8 @@
    "long_enough": true
   },
   "11_chat_scroll.mp4": {
-   "bytes": 19510026,
-   "written": "2026-09-10T18:46:03Z",
+   "bytes": 19511261,
+   "written": "2026-09-11T22:57:20Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -222,256 +222,263 @@
  "missing": {
   "09_two_devices.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
   "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "15_authored_feeling.mp4": "the frame check failed; see evidence/logs/15_authored_feeling.frames.json (a copy from an earlier run is still on disk, written 2026-09-10T18:47:52Z; it is not this session's and is not counted)"
+  "15_authored_feeling.mp4": "the frame check failed; see evidence/logs/15_authored_feeling.frames.json (a copy from an earlier run is still on disk, written 2026-09-11T22:59:25Z; it is not this session's and is not counted)"
  },
  "checks": {
   "01_pulse.json": {
-   "written": "2026-09-10T17:40:37Z",
+   "written": "2026-09-11T21:16:42Z",
    "from_this_run": true
   },
   "01_pulse.report.json": {
-   "written": "2026-09-10T17:40:36Z",
+   "written": "2026-09-11T21:16:41Z",
    "from_this_run": true
   },
   "02_chat.json": {
-   "written": "2026-09-10T17:42:48Z",
+   "written": "2026-09-11T21:19:49Z",
    "from_this_run": true
   },
   "02_chat.report.json": {
-   "written": "2026-09-10T17:42:47Z",
+   "written": "2026-09-11T21:19:48Z",
    "from_this_run": true
   },
   "03_us.json": {
-   "written": "2026-09-10T17:43:04Z",
+   "written": "2026-09-11T21:20:11Z",
    "from_this_run": true
   },
   "03_us.report.json": {
-   "written": "2026-09-10T17:43:03Z",
+   "written": "2026-09-11T21:20:10Z",
    "from_this_run": true
   },
   "04_moments.json": {
-   "written": "2026-09-10T17:43:36Z",
+   "written": "2026-09-11T21:22:18Z",
    "from_this_run": true
   },
   "04_moments.report.json": {
-   "written": "2026-09-10T17:43:35Z",
+   "written": "2026-09-11T21:22:17Z",
    "from_this_run": true
   },
   "05_settings.json": {
-   "written": "2026-09-10T17:43:53Z",
+   "written": "2026-09-11T21:23:04Z",
    "from_this_run": true
   },
   "05_settings.report.json": {
-   "written": "2026-09-10T17:43:52Z",
+   "written": "2026-09-11T21:23:03Z",
    "from_this_run": true
   },
   "06_unfolding.frames.json": {
-   "written": "2026-09-10T18:44:17Z",
+   "written": "2026-09-11T22:55:28Z",
    "from_this_run": true
   },
   "06_unfolding.json": {
-   "written": "2026-09-10T17:59:40Z",
+   "written": "2026-09-11T21:46:15Z",
    "from_this_run": true
   },
   "06_unfolding.report.json": {
-   "written": "2026-09-10T17:59:40Z",
+   "written": "2026-09-11T21:46:14Z",
    "from_this_run": true
   },
   "07_feeling_landing.frames.json": {
-   "written": "2026-09-10T18:45:33Z",
+   "written": "2026-09-11T22:56:48Z",
    "from_this_run": true
   },
   "07_feeling_landing.json": {
-   "written": "2026-09-10T18:17:35Z",
+   "written": "2026-09-11T22:07:42Z",
    "from_this_run": true
   },
   "07_feeling_landing.report.json": {
-   "written": "2026-09-10T18:17:35Z",
+   "written": "2026-09-11T22:07:42Z",
    "from_this_run": true
   },
   "07_feeling_landing.sound.json": {
-   "written": "2026-09-10T18:47:52Z",
+   "written": "2026-09-11T22:59:24Z",
    "from_this_run": true
   },
   "08_state_propagating.frames.json": {
-   "written": "2026-09-10T19:15:27Z",
+   "written": "2026-09-11T23:26:53Z",
    "from_this_run": true
   },
   "08_state_propagating.json": {
-   "written": "2026-09-10T19:13:30Z",
+   "written": "2026-09-11T23:24:53Z",
    "from_this_run": true
   },
   "08_state_propagating.report.json": {
-   "written": "2026-09-10T19:13:30Z",
+   "written": "2026-09-11T23:24:53Z",
    "from_this_run": true
   },
   "10_first_run.json": {
-   "written": "2026-09-10T17:48:05Z",
+   "written": "2026-09-11T21:30:21Z",
    "from_this_run": true
   },
   "10_first_run.report.json": {
-   "written": "2026-09-10T17:48:04Z",
+   "written": "2026-09-11T21:30:20Z",
    "from_this_run": true
   },
   "11_chat_scroll.fling.json": {
-   "written": "2026-09-10T18:26:57Z",
+   "written": "2026-09-11T22:18:29Z",
    "from_this_run": true
   },
   "11_chat_scroll.frames.json": {
-   "written": "2026-09-10T18:46:39Z",
+   "written": "2026-09-11T22:57:59Z",
    "from_this_run": true
   },
   "11_chat_scroll.json": {
-   "written": "2026-09-10T18:26:58Z",
+   "written": "2026-09-11T22:18:30Z",
    "from_this_run": true
   },
   "11_chat_scroll.report.json": {
-   "written": "2026-09-10T18:26:58Z",
+   "written": "2026-09-11T22:18:30Z",
    "from_this_run": true
   },
   "12_search.json": {
-   "written": "2026-09-10T17:44:17Z",
+   "written": "2026-09-11T21:24:00Z",
    "from_this_run": true
   },
   "12_search.report.json": {
-   "written": "2026-09-10T17:44:16Z",
+   "written": "2026-09-11T21:23:59Z",
    "from_this_run": true
   },
   "13_messenger_states.json": {
-   "written": "2026-09-10T17:45:38Z",
+   "written": "2026-09-11T21:25:59Z",
    "from_this_run": true
   },
   "13_messenger_states.report.json": {
-   "written": "2026-09-10T17:45:37Z",
+   "written": "2026-09-11T21:25:59Z",
    "from_this_run": true
   },
   "14_media_viewer.frames.json": {
-   "written": "2026-09-10T19:15:39Z",
+   "written": "2026-09-11T23:27:07Z",
    "from_this_run": true
   },
   "14_media_viewer.json": {
-   "written": "2026-09-10T17:47:54Z",
+   "written": "2026-09-11T21:30:09Z",
    "from_this_run": true
   },
   "14_media_viewer.report.json": {
-   "written": "2026-09-10T17:47:53Z",
+   "written": "2026-09-11T21:30:08Z",
    "from_this_run": true
   },
   "15_authored_feeling.frames.json": {
-   "written": "2026-09-10T18:47:52Z",
+   "written": "2026-09-11T22:59:24Z",
    "from_this_run": true
   },
   "15_authored_feeling.json": {
-   "written": "2026-09-10T18:43:30Z",
+   "written": "2026-09-11T22:54:36Z",
    "from_this_run": true
   },
   "15_authored_feeling.report.json": {
-   "written": "2026-09-10T18:43:29Z",
+   "written": "2026-09-11T22:54:36Z",
    "from_this_run": true
   },
   "15_authored_feeling.sound.json": {
-   "written": "2026-09-10T18:47:52Z",
+   "written": "2026-09-11T22:59:25Z",
    "from_this_run": true
   },
   "17_setup_pwa.json": {
-   "written": "2026-09-10T17:48:15Z",
+   "written": "2026-09-11T21:30:30Z",
    "from_this_run": true
   },
   "17_setup_pwa.report.json": {
-   "written": "2026-09-10T17:48:14Z",
+   "written": "2026-09-11T21:30:30Z",
    "from_this_run": true
   },
+  "apk.json": {
+   "written": "2026-09-11T17:37:09Z",
+   "from_this_run": false
+  },
   "crops.json": {
-   "written": "2026-09-10T19:15:40Z",
+   "written": "2026-09-11T23:27:08Z",
    "from_this_run": true
   },
   "dusk_pulse.json": {
-   "written": "2026-09-10T17:49:25Z",
+   "written": "2026-09-11T21:33:04Z",
    "from_this_run": true
   },
   "dusk_pulse.report.json": {
-   "written": "2026-09-10T17:49:25Z",
+   "written": "2026-09-11T21:33:03Z",
    "from_this_run": true
   },
   "flat.json": {
-   "written": "2026-09-10T19:16:28Z",
+   "written": "2026-09-11T23:39:35Z",
    "from_this_run": true
   },
   "fonts.json": {
-   "written": "2026-09-10T17:31:46Z",
+   "written": "2026-09-11T21:06:26Z",
    "from_this_run": true
   },
   "grain.json": {
-   "written": "2026-09-10T19:15:49Z",
+   "written": "2026-09-11T23:27:19Z",
    "from_this_run": true
   },
   "hairline.json": {
-   "written": "2026-09-10T19:16:31Z",
+   "written": "2026-09-11T23:39:39Z",
    "from_this_run": true
   },
   "hand.json": {
-   "written": "2026-09-10T19:15:48Z",
+   "written": "2026-09-11T23:27:18Z",
    "from_this_run": true
   },
   "haptics.check.json": {
-   "written": "2026-09-10T18:47:53Z",
+   "written": "2026-09-11T22:59:26Z",
    "from_this_run": true
   },
   "haptics.json": {
-   "written": "2026-09-10T17:59:52Z",
+   "written": "2026-09-11T21:46:27Z",
    "from_this_run": true
   },
   "holes.json": {
-   "written": "2026-09-10T19:16:22Z",
+   "written": "2026-09-11T23:27:54Z",
    "from_this_run": true
   },
   "lines.json": {
-   "written": "2026-09-10T19:15:55Z",
+   "written": "2026-09-11T23:27:25Z",
    "from_this_run": true
   },
   "manifest.json": {
-   "written": "2026-09-10T17:31:47Z",
+   "written": "2026-09-11T21:06:26Z",
    "from_this_run": true
   },
   "pwa.json": {
-   "written": "2026-09-10T17:48:11Z",
+   "written": "2026-09-11T21:30:26Z",
    "from_this_run": true
   },
   "reception.json": {
-   "written": "2026-09-10T17:49:01Z",
+   "written": "2026-09-11T21:32:13Z",
    "from_this_run": true
   },
   "reception.report.json": {
-   "written": "2026-09-10T17:48:37Z",
+   "written": "2026-09-11T21:31:49Z",
    "from_this_run": true
   },
   "reception_scene.json": {
-   "written": "2026-09-10T17:49:02Z",
+   "written": "2026-09-11T21:32:14Z",
    "from_this_run": true
   },
   "recipes.json": {
-   "written": "2026-09-10T17:31:47Z",
+   "written": "2026-09-11T21:06:26Z",
    "from_this_run": true
   },
   "scroll_webkit.json": {
-   "written": "2026-09-10T18:26:56Z",
+   "written": "2026-09-11T22:18:29Z",
    "from_this_run": true
   },
   "strings.json": {
-   "written": "2026-09-10T17:30:50Z",
+   "written": "2026-09-11T21:05:24Z",
    "from_this_run": true
   },
   "surfaces.json": {
-   "written": "2026-09-10T17:34:21Z",
+   "written": "2026-09-11T21:09:22Z",
    "from_this_run": true
   },
   "tears.json": {
-   "written": "2026-09-10T19:15:48Z",
+   "written": "2026-09-11T23:27:18Z",
    "from_this_run": true
   },
   "torn.json": {
-   "written": "2026-09-10T19:15:51Z",
+   "written": "2026-09-11T23:27:20Z",
    "from_this_run": true
   }
- }
+ },
+ "checks_from_an_earlier_run": [
+  "apk.json"
+ ]
 }

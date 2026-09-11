@@ -14,7 +14,7 @@
   "a_flat_fill_of_0xFFF3EEE3": 0.0,
   "note": "the literal Container colour that used to stand in for a sheet in authoring.dart"
  },
- "the_one_it_used_to_get_wrong": "the sky of the photograph open in 14_media_viewer. It is pale, warm enough to pass the colour test, and it is content rather than a surface this build answers for; an anti-goal critic reproduced the old numbers and disagreed with that verdict, correctly. A filter that excluded it by how busy its surroundings are also excluded every real slab, so it was named here instead. Against the derived floor it no longer trips: the sky's flattest window reads 0.619, which is above 0.363, because a photograph of the sky through a lens still carries sensor grain and a flat fill carries nothing.",
+ "the_one_it_used_to_get_wrong": "the sky of the photograph open in 14_media_viewer. This file used to say the sky no longer tripped the check because its flattest window read 0.619 \u2014 and an anti-goal critic measured the same still over the same windows and found sixty-one under 0.5, one of them a hundred per cent a single RGB triple at standard deviation exactly zero. The claim was wrong and the sampling was the reason: a window grid at step 40 lands where it lands. `flat_areas` finds the flat shapes directly now and 14_media_viewer has eight of them covering thirteen per cent of the frame, which is what a photograph of a sky actually is. What separates that from a fault is not how flat it is but what colour it is: `sheets_with_no_paper_on_them` names only the shapes whose colour is one of the app's own paper fallback fills, and none of the sky's is.",
  "quiet_is_not_flat": "windows_quieter_than_2 is what this check used to gate on, kept because four cycles of reports carry it. It is not a fault: receipt stock's own median window is under it, and the 05_settings windows it names are lined writing paper with its tooth plainly in the crop.",
  "stills": {
   "01_pulse.png": {
@@ -23,51 +23,84 @@
     760,
     560
    ],
-   "pale_windows": 1216,
+   "pale_windows": 1197,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 1,
-   "worst_few": []
+   "worst_few": [],
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
+   "sheets_with_no_paper_on_them": []
   },
   "02_chat.png": {
-   "flattest": 4.668,
+   "flattest": 4.731,
    "where": [
     1040,
     1600
    ],
-   "pale_windows": 989,
+   "pale_windows": 1009,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
-   "worst_few": []
+   "worst_few": [],
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
+   "sheets_with_no_paper_on_them": []
   },
   "03_us.png": {
-   "flattest": 1.366,
+   "flattest": 1.359,
    "where": [
-    880,
-    2000
+    440,
+    1400
    ],
-   "pale_windows": 682,
+   "pale_windows": 705,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 29,
-   "worst_few": []
+   "windows_quieter_than_2": 34,
+   "worst_few": [],
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
+   "sheets_with_no_paper_on_them": []
   },
   "04_moments.png": {
-   "flattest": 0.017,
+   "flattest": 4.912,
    "where": [
     1280,
-    2640
+    80
    ],
-   "pale_windows": 664,
-   "windows_under_the_floor": 1,
-   "windows_quieter_than_2": 74,
-   "worst_few": [
+   "pale_windows": 332,
+   "windows_under_the_floor": 0,
+   "windows_quieter_than_2": 0,
+   "worst_few": [],
+   "flat_areas": [
     {
-     "at": [
-      1280,
-      2640
+     "area_px": 2538,
+     "box": [
+      754,
+      619,
+      875,
+      702
      ],
-     "std": 0.017
+     "luma": 243.7,
+     "rgb": "#F5F4ED",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 2412,
+     "box": [
+      841,
+      545,
+      931,
+      675
+     ],
+     "luma": 243.7,
+     "rgb": "#F5F4ED",
+     "a_sheet_with_no_paper_on_it": null
     }
-   ]
+   ],
+   "flat_px": 4950,
+   "flat_share_of_the_frame": 0.0011,
+   "sheets_with_no_paper_on_them": []
   },
   "05_settings.png": {
    "flattest": 1.279,
@@ -75,67 +108,188 @@
     1200,
     680
    ],
-   "pale_windows": 1823,
+   "pale_windows": 1802,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 45,
-   "worst_few": []
+   "windows_quieter_than_2": 57,
+   "worst_few": [],
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
+   "sheets_with_no_paper_on_them": []
   },
   "10_first_run.png": {
-   "flattest": 1.486,
+   "flattest": 1.205,
    "where": [
-    1080,
-    1440
+    1120,
+    1320
    ],
-   "pale_windows": 466,
+   "pale_windows": 487,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 16,
-   "worst_few": []
+   "windows_quieter_than_2": 20,
+   "worst_few": [],
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
+   "sheets_with_no_paper_on_them": []
   },
   "12_search.png": {
-   "flattest": 5.133,
+   "flattest": 4.912,
    "where": [
-    1240,
+    1280,
     80
+   ],
+   "pale_windows": 1267,
+   "windows_under_the_floor": 0,
+   "windows_quieter_than_2": 0,
+   "worst_few": [],
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
+   "sheets_with_no_paper_on_them": []
+  },
+  "13_messenger_states.png": {
+   "flattest": 1.73,
+   "where": [
+    800,
+    1680
    ],
    "pale_windows": 1185,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 0,
-   "worst_few": []
-  },
-  "13_messenger_states.png": {
-   "flattest": 3.716,
-   "where": [
-    400,
-    2360
-   ],
-   "pale_windows": 1334,
-   "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 0,
-   "worst_few": []
+   "windows_quieter_than_2": 4,
+   "worst_few": [],
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
+   "sheets_with_no_paper_on_them": []
   },
   "14_media_viewer.png": {
-   "flattest": 0.554,
+   "flattest": 0.877,
    "where": [
-    400,
+    80,
     720
    ],
-   "pale_windows": 285,
+   "pale_windows": 282,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 12,
-   "worst_few": []
+   "windows_quieter_than_2": 2,
+   "worst_few": [],
+   "flat_areas": [
+    {
+     "area_px": 257894,
+     "box": [
+      44,
+      492,
+      1205,
+      818
+     ],
+     "luma": 230.2,
+     "rgb": "#E6E6E9",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 120987,
+     "box": [
+      727,
+      363,
+      1385,
+      815
+     ],
+     "luma": 225.9,
+     "rgb": "#DFE2E9",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 65308,
+     "box": [
+      42,
+      266,
+      727,
+      481
+     ],
+     "luma": 226.6,
+     "rgb": "#E2E2EA",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 52305,
+     "box": [
+      915,
+      259,
+      1382,
+      473
+     ],
+     "luma": 219.0,
+     "rgb": "#D8DBE4",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 43973,
+     "box": [
+      43,
+      360,
+      473,
+      543
+     ],
+     "luma": 229.1,
+     "rgb": "#E4E5EA",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 15299,
+     "box": [
+      1043,
+      350,
+      1383,
+      546
+     ],
+     "luma": 222.9,
+     "rgb": "#DCDFE6",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 9122,
+     "box": [
+      1050,
+      414,
+      1283,
+      536
+     ],
+     "luma": 224.9,
+     "rgb": "#DEE1E8",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 4892,
+     "box": [
+      867,
+      263,
+      999,
+      360
+     ],
+     "luma": 222.9,
+     "rgb": "#DCDFE6",
+     "a_sheet_with_no_paper_on_it": null
+    }
+   ],
+   "flat_px": 583016,
+   "flat_share_of_the_frame": 0.1298,
+   "sheets_with_no_paper_on_them": []
   },
   "17_setup_pwa.png": {
-   "flattest": 4.704,
+   "flattest": 5.165,
    "where": [
-    800,
-    1240
+    1200,
+    640
    ],
-   "pale_windows": 1407,
+   "pale_windows": 1628,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
-   "worst_few": []
+   "worst_few": [],
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
+   "sheets_with_no_paper_on_them": []
   }
  },
- "ok": false,
- "files_with_a_flat_fill": 1
+ "ok": true,
+ "files_with_a_flat_fill": 0
 }

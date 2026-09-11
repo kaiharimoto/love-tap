@@ -15,40 +15,65 @@
  "distinct_strings": 36,
  "near_shapes": [],
  "felt_distance": {
-  "how": "forty-millisecond bins of real time, amplitude to the power 0.6, mean absolute difference times a hundred. Two patterns a finger cannot separate score near zero however different their strings are.",
-  "floor": 18.0,
-  "median": 58.94,
-  "smallest": 26.49,
+  "how": "forty-millisecond bins of real time, amplitude to the power 0.6, mean absolute difference times a hundred \u2014 at the best alignment over the tempo changes a finger cannot detect \u2014 plus a term for the difference in overall length, with the same fraction as a deadband. Two patterns a finger cannot separate score near zero however different their strings are.",
+  "floor": 8.7,
+  "floor_is": "derived, below",
+  "derived": {
+   "floor": 8.7,
+   "how": "the geometric midpoint of the two bands below, measured by this code on this build's own patterns",
+   "thresholds_used": {
+    "amplitude_weber_fraction": 0.15,
+    "duration_weber_fraction": 0.15,
+    "two_pulses_fuse_below_ms": 25.0,
+    "source": "the figures vibrotactile psychophysics usually reports \u2014 Craig 1972 and Gescheider 1966 onwards for the two Weber fractions, and the ~25 ms at which successive pulses stop being felt as two events"
+   },
+   "a_pair_a_finger_cannot_separate": {
+    "built_by": "changing every segment by half the Weber fraction in both amplitude and duration, which is inside anybody's threshold",
+    "largest": 6.48,
+    "on": "yes",
+    "median": 2.34
+   },
+   "a_pair_a_finger_can_separate": {
+    "built_by": "changing every segment by twice the Weber fraction in both",
+    "smallest": 11.68,
+    "on": "poke",
+    "median": 26.46
+   },
+   "the_bands_overlap": false,
+   "two_copies_of_one_pattern": 0.0
+  },
+  "median": 51.65,
+  "smallest": 17.74,
   "closest_pairs": [
    {
-    "a": "make_you_tea",
-    "b": "snapped",
-    "felt_distance": 26.49
+    "a": "empty_chair",
+    "b": "come_home",
+    "felt_distance": 17.74
    },
    {
-    "a": "thinking_of_you",
-    "b": "pick_one",
-    "felt_distance": 26.85
+    "a": "overwhelmed",
+    "b": "tangled",
+    "felt_distance": 18.42
    },
    {
-    "a": "long_day",
-    "b": "hold",
-    "felt_distance": 26.94
-   },
-   {
-    "a": "pick_one",
-    "b": "grey",
-    "felt_distance": 27.11
+    "a": "forehead",
+    "b": "overwhelmed",
+    "felt_distance": 18.67
    },
    {
     "a": "miss_you",
     "b": "wish_you_were_here",
-    "felt_distance": 27.87
+    "felt_distance": 19.24
    },
    {
-    "a": "catch",
-    "b": "overwhelmed",
-    "felt_distance": 29.63
+    "a": "snap",
+    "b": "confetti",
+    "felt_distance": 19.29
+   },
+   {
+    "a": "wish_you_were_here",
+    "b": "here",
+    "felt_distance": 20.5
    }
   ],
   "under_the_floor": []

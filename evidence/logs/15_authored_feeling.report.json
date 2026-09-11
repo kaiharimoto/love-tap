@@ -5,7 +5,7 @@
   "paired": true,
   "devices": [
    "android-capture",
-   "pwa-mtvtbzje"
+   "pwa-mtxgh7eg"
   ],
   "link": "connected",
   "authored_feelings": 2
@@ -16,9 +16,9 @@
  "stocks": {},
  "scroll": null,
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 8624,
+ "driven_ms": 9104,
  "seed": 20260903,
- "events": 14094,
+ "events": 14097,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -28,8 +28,26 @@
  "light": "day",
  "has_dusk_paper": true,
  "paper_stocks": 54,
- "paper_at_its_own_size": 22897,
- "paper_stretched_to_fit": 490,
+ "the_smallest_patch_of_a_stock_anything_took": [
+  "index_01 2560x1593",
+  "143x102 of it, at its own size",
+  14669.3229675293
+ ],
+ "paper_at_its_own_size": 49130,
+ "paper_stretched_to_fit": 825,
+ "stocks_the_paper_had_not_arrived_for": [
+  "looseleaf_04"
+ ],
+ "paper_that_arrived_after_the_piece_was_drawn": 13,
+ "masks_held": 48,
+ "masks_dropped_to_stay_inside_the_pool": 72,
+ "image_cache": {
+  "held": 131,
+  "bytes": 397017428,
+  "budget": 402653184,
+  "live": 63,
+  "still_decoding": 0
+ },
  "setup_showing": false,
  "fold": {
   "sequence": null
@@ -38,7 +56,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-10T18:39:39.270Z",
+  "started_at": "2026-09-11T22:49:46.233Z",
   "pattern": [
    {
     "ms": 150,
@@ -62,38 +80,100 @@
    }
   ]
  },
+ "asked_a_motor_for": [
+  {
+   "feeling": "pigeon",
+   "timings": [
+    30,
+    80,
+    30,
+    80,
+    30,
+    300,
+    200
+   ],
+   "amplitudes": [
+    175,
+    0,
+    175,
+    0,
+    175,
+    0,
+    140
+   ],
+   "answered_by": "no motor in a browser: the page rhythm carries it instead"
+  },
+  {
+   "feeling": "soup",
+   "timings": [
+    150,
+    150,
+    150,
+    150,
+    600
+   ],
+   "amplitudes": [
+    98,
+    0,
+    98,
+    0,
+    128
+   ],
+   "answered_by": "no motor in a browser: the page rhythm carries it instead"
+  },
+  {
+   "feeling": "soup",
+   "timings": [
+    150,
+    150,
+    150,
+    150,
+    600
+   ],
+   "amplitudes": [
+    123,
+    0,
+    123,
+    0,
+    161
+   ],
+   "answered_by": "no motor in a browser: the page rhythm carries it instead"
+  }
+ ],
  "the_launch_took": {
-  "the framework": 9,
-  "the library index": 20,
-  "the ink plates": 38,
-  "the desk": 147,
-  "the log": 712,
-  "the first frame": 354,
-  "everything": 1280
+  "the framework": 7,
+  "the library index": 12,
+  "the ink plates": 46,
+  "the desk": 166,
+  "the log": 610,
+  "the first frame": 332,
+  "everything": 1173
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 324,
-  "pushed": 4,
+  "rounds": 721,
+  "pushed": 3,
   "refused": 0,
   "pulled": 2,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14094,
+  "cursor": 14097,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14094,
-   "our_cursor": 14094,
+   "peer_cursor": 14097,
+   "our_cursor": 14097,
    "last_error": null,
-   "since": "2026-09-10T18:27:01.234Z",
-   "last_contact": "2026-09-10T18:43:28.068Z"
+   "since": "2026-09-11T22:18:33.113Z",
+   "last_contact": "2026-09-11T22:54:34.806Z",
+   "certificate": null,
+   "setup_address": null
   }
  },
  "ambient": {

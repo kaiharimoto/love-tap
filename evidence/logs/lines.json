@@ -3,23 +3,23 @@
  "why_it_is_not_gated": "the stock is drawn at whatever scale the piece turns out to be, so its rule pitch on the glass follows the piece's width, while the text's line height follows its point size. Nothing makes them agree. Making them agree means laying the text out against the paper it is drawn on \u2014 the pitch, and the phase of the first rule under the seeded patch offset \u2014 which is a change to every note in the app and wants a cycle of its own.",
  "stills": {
   "01_pulse.png": {
-   "ruled_lines": 14,
+   "ruled_lines": 16,
    "written_lines": 33,
    "rule_pitch_px": 71.0,
-   "lines_measured": 10,
+   "lines_measured": 12,
    "off_the_line": {
-    "median": 0.19,
-    "p90": 0.404
+    "median": 0.229,
+    "p90": 0.401
    }
   },
   "02_chat.png": {
-   "ruled_lines": 14,
-   "written_lines": 44,
+   "ruled_lines": 16,
+   "written_lines": 42,
    "rule_pitch_px": 81.0,
-   "lines_measured": 21,
+   "lines_measured": 22,
    "off_the_line": {
-    "median": 0.408,
-    "p90": 0.79
+    "median": 0.306,
+    "p90": 0.488
    }
   },
   "03_us.png": {
@@ -29,17 +29,17 @@
    "lines_measured": 43,
    "off_the_line": {
     "median": 0.303,
-    "p90": 0.708
+    "p90": 0.707
    }
   },
   "04_moments.png": {
-   "ruled_lines": 17,
-   "written_lines": 51,
-   "rule_pitch_px": 90.0,
-   "lines_measured": 30,
+   "ruled_lines": 6,
+   "written_lines": 44,
+   "rule_pitch_px": 599.0,
+   "lines_measured": 44,
    "off_the_line": {
-    "median": 0.294,
-    "p90": 0.736
+    "median": 0.304,
+    "p90": 0.613
    }
   },
   "05_settings.png": {
@@ -53,57 +53,57 @@
    }
   },
   "10_first_run.png": {
-   "ruled_lines": 6,
-   "written_lines": 18,
-   "rule_pitch_px": 114.0,
-   "lines_measured": 15,
+   "ruled_lines": 7,
+   "written_lines": 16,
+   "rule_pitch_px": 114.5,
+   "lines_measured": 14,
    "off_the_line": {
-    "median": 0.365,
-    "p90": 0.69
+    "median": 0.332,
+    "p90": 0.725
    }
   },
   "12_search.png": {
-   "ruled_lines": 15,
+   "ruled_lines": 16,
    "written_lines": 51,
-   "rule_pitch_px": 81.2,
-   "lines_measured": 29,
+   "rule_pitch_px": 81.5,
+   "lines_measured": 30,
    "off_the_line": {
-    "median": 0.431,
-    "p90": 0.824
+    "median": 0.396,
+    "p90": 0.878
    }
   },
   "13_messenger_states.png": {
-   "ruled_lines": 12,
-   "written_lines": 36,
-   "rule_pitch_px": 80.0,
+   "ruled_lines": 11,
+   "written_lines": 41,
+   "rule_pitch_px": 71.0,
    "lines_measured": 17,
    "off_the_line": {
-    "median": 0.35,
-    "p90": 0.804
+    "median": 0.451,
+    "p90": 0.839
    }
   },
   "14_media_viewer.png": {
-   "ruled_lines": 10,
+   "ruled_lines": 11,
    "written_lines": 11,
-   "rule_pitch_px": 97.0,
+   "rule_pitch_px": 82.5,
    "lines_measured": 9,
    "off_the_line": {
-    "median": 0.237,
-    "p90": 0.537
+    "median": 0.339,
+    "p90": 0.533
    }
   },
   "17_setup_pwa.png": {
-   "ruled_lines": 19,
-   "written_lines": 35,
-   "rule_pitch_px": 71.2,
-   "lines_measured": 23,
+   "ruled_lines": 27,
+   "written_lines": 36,
+   "rule_pitch_px": 70.5,
+   "lines_measured": 27,
    "off_the_line": {
-    "median": 0.389,
-    "p90": 0.825
+    "median": 0.319,
+    "p90": 0.718
    }
   }
  },
- "median_across_the_set": 0.341,
+ "median_across_the_set": 0.325,
  "what_that_number_means": "writing laid out with no relation to the rules under it lands uniformly between them, which averages 0.25. On the line is 0. The set reads 0.33, so the writing is not on the rules and is not even accidentally near them: the beat between the text's line height and the paper's pitch pushes it past random.",
  "stills_measured": 10,
  "the_same_paper_is_not_the_same_size": {
@@ -111,17 +111,17 @@
    "01_pulse.png": 71.0,
    "02_chat.png": 81.0,
    "03_us.png": 132.0,
-   "04_moments.png": 90.0,
+   "04_moments.png": 599.0,
    "05_settings.png": 89.0,
-   "10_first_run.png": 114.0,
-   "12_search.png": 81.2,
-   "13_messenger_states.png": 80.0,
-   "14_media_viewer.png": 97.0,
-   "17_setup_pwa.png": 71.2
+   "10_first_run.png": 114.5,
+   "12_search.png": 81.5,
+   "13_messenger_states.png": 71.0,
+   "14_media_viewer.png": 82.5,
+   "17_setup_pwa.png": 70.5
   },
-  "smallest": 71.0,
-  "largest": 132.0,
-  "ratio": 1.86,
+  "smallest": 70.5,
+  "largest": 599.0,
+  "ratio": 8.5,
   "the_library_does_not_rule_them_all_alike": {
    "mm_per_rule": {
     "lined": 8.0,

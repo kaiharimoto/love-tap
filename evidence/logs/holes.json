@@ -3,14 +3,22 @@
  "why": "the baked contact shadows are black at alpha 255 over a third of their area, because that third is under the paper. Anywhere the shadow does not line up with the piece it belongs to, that black is on the desk.",
  "dark": 30.0,
  "allow": 200,
+ "shadow_floor": 6.0,
+ "a_sheet_has_to_cast_one": "measured on the hero of the cycle before this check existed, where the shadow worked: 14.42 grey levels darker four to fourteen pixels under a sheet than forty-five to sixty-five under it, over 1,132 edges. Measured after the shadow was nine-sliced: -0.44, which is half a level the wrong way.",
  "what_it_still_counts_that_is_not_a_hole": "ink at the very edge of a sheet. 05_settings reads 130 pixels at luma 0, and they are the rule under the emphasised word `quietly` \u2014 an 84-pixel horizontal stroke on the last line of a sheet, at (953-1037, 2941). A closing fills a letter-shaped hole inside a sheet, which is why 01_pulse's candle went from 5 to 0, but it cannot fill a notch that is open to the outside, and a dark stroke at a sheet's boundary has the same neighbourhood as a shadow just past it. This is what the allowance is for, and the densest-writing control measures 51 by the same code.",
  "controls": {
   "the_densest_handwriting_in_the_set": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
-   "darkest": 55.0,
-   "darkest_beside_a_sheet": 61.33,
-   "ring_pixels": 3591,
+   "darkest": 54.33,
+   "darkest_beside_a_sheet": 58.67,
+   "ring_pixels": 4044,
+   "contact_shadow": {
+    "edges": 63,
+    "just_under_a_sheet": 86.7,
+    "further_down_the_desk": 85.45,
+    "darker_by": -1.24
+   },
    "measured_at": "three times the radius, because the crop is at three times the scale"
   },
   "a_shadow_out_from_under_its_sheet": {
@@ -24,36 +32,70 @@
    "pixels_darker_than_ink": 701,
    "beside_the_paper": 0,
    "darkest": 0.0,
-   "darkest_beside_a_sheet": 48.0,
-   "ring_pixels": 185778
+   "darkest_beside_a_sheet": 48.67,
+   "ring_pixels": 186156,
+   "contact_shadow": {
+    "edges": 898,
+    "just_under_a_sheet": 87.96,
+    "further_down_the_desk": 87.79,
+    "darker_by": -0.17
+   },
+   "no_shadow_under_the_paper": true
   },
   "02_chat.png": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
    "darkest": 34.0,
    "darkest_beside_a_sheet": 34.0,
-   "ring_pixels": 243954
+   "ring_pixels": 242622,
+   "contact_shadow": {
+    "edges": 892,
+    "just_under_a_sheet": 85.4,
+    "further_down_the_desk": 88.04,
+    "darker_by": 2.64
+   },
+   "no_shadow_under_the_paper": true
   },
   "03_us.png": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
    "darkest": 46.0,
    "darkest_beside_a_sheet": 47.0,
-   "ring_pixels": 256909
+   "ring_pixels": 258138,
+   "contact_shadow": {
+    "edges": 1186,
+    "just_under_a_sheet": 84.72,
+    "further_down_the_desk": 88.03,
+    "darker_by": 3.32
+   },
+   "no_shadow_under_the_paper": true
   },
   "04_moments.png": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
    "darkest": 30.33,
    "darkest_beside_a_sheet": 34.67,
-   "ring_pixels": 319113
+   "ring_pixels": 331891,
+   "contact_shadow": {
+    "edges": 632,
+    "just_under_a_sheet": 89.25,
+    "further_down_the_desk": 87.62,
+    "darker_by": -1.64
+   },
+   "no_shadow_under_the_paper": true
   },
   "05_settings.png": {
    "pixels_darker_than_ink": 2124,
    "beside_the_paper": 130,
    "darkest": 0.0,
    "darkest_beside_a_sheet": 0.0,
-   "ring_pixels": 176256,
+   "ring_pixels": 176472,
+   "contact_shadow": {
+    "edges": 1040,
+    "just_under_a_sheet": 79.39,
+    "further_down_the_desk": 87.76,
+    "darker_by": 8.38
+   },
    "worst_at": [
     986,
     2941
@@ -69,38 +111,72 @@
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
    "darkest": 46.0,
-   "darkest_beside_a_sheet": 47.33,
-   "ring_pixels": 122094
+   "darkest_beside_a_sheet": 48.0,
+   "ring_pixels": 120870,
+   "contact_shadow": {
+    "edges": 826,
+    "just_under_a_sheet": 80.5,
+    "further_down_the_desk": 87.35,
+    "darker_by": 6.85
+   }
   },
   "12_search.png": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
    "darkest": 36.67,
    "darkest_beside_a_sheet": 39.0,
-   "ring_pixels": 384272
+   "ring_pixels": 394650,
+   "contact_shadow": {
+    "edges": 800,
+    "just_under_a_sheet": 87.5,
+    "further_down_the_desk": 87.55,
+    "darker_by": 0.05
+   },
+   "no_shadow_under_the_paper": true
   },
   "13_messenger_states.png": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
    "darkest": 46.0,
-   "darkest_beside_a_sheet": 46.0,
-   "ring_pixels": 244278
+   "darkest_beside_a_sheet": 48.0,
+   "ring_pixels": 243648,
+   "contact_shadow": {
+    "edges": 1266,
+    "just_under_a_sheet": 85.96,
+    "further_down_the_desk": 86.75,
+    "darker_by": 0.79
+   },
+   "no_shadow_under_the_paper": true
   },
   "14_media_viewer.png": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
-   "darkest": 44.33,
-   "darkest_beside_a_sheet": 46.67,
-   "ring_pixels": 123111
+   "darkest": 41.33,
+   "darkest_beside_a_sheet": 48.67,
+   "ring_pixels": 122697,
+   "contact_shadow": {
+    "edges": 754,
+    "just_under_a_sheet": 103.08,
+    "further_down_the_desk": 106.9,
+    "darker_by": 3.82
+   },
+   "no_shadow_under_the_paper": true
   },
   "17_setup_pwa.png": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
-   "darkest": 48.67,
-   "darkest_beside_a_sheet": 48.67,
-   "ring_pixels": 214038
+   "darkest": 47.67,
+   "darkest_beside_a_sheet": 48.33,
+   "ring_pixels": 242855,
+   "contact_shadow": {
+    "edges": 2200,
+    "just_under_a_sheet": 84.82,
+    "further_down_the_desk": 87.43,
+    "darker_by": 2.61
+   },
+   "no_shadow_under_the_paper": true
   }
  },
- "ok": true,
- "stills_with_a_hole_in_them": 0
+ "ok": false,
+ "stills_with_a_hole_in_them": 8
 }
