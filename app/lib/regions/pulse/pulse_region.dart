@@ -310,7 +310,7 @@ class _Traffic extends StatelessWidget {
             // little above as it goes, so there is one object, not two. The wait is the same
             // arithmetic the stage uses, so the two agree on the driven clock as on the wall.
             final intensity = (e.payload['intensity'] as num).toDouble();
-            final wait = Fall.restSeconds(f, intensity) + Fall.putAwaySeconds * 0.7;
+            final wait = Fall.dwellSeconds(f, intensity) + Fall.putAwaySeconds * 0.7;
             final total = wait + Motion.land.inMilliseconds / 1000.0;
             object = Settling(
               key: ValueKey('land.${e.id}'),

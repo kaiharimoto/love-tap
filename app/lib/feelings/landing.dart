@@ -23,6 +23,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../app.dart' show kTabStrip;
 import '../capture/hooks.dart';
 import '../flags.dart';
 import '../material/hands.dart';
@@ -116,6 +117,17 @@ class Fall {
 
   /// How long it takes to be put away into the recent row once it has rested.
   static const putAwaySeconds = 0.5;
+
+  /// How long it lies where it landed before it is put away.
+  ///
+  /// This was the whole length of the pattern — up to 1.7 seconds of an object sitting on the
+  /// glass — on the reasoning that the thing lying there *is* the feeling being felt. It is not:
+  /// the feeling being felt is the pattern, which plays whether the object is on the desk or on
+  /// the shelf, and the page carries it either way (`pageLiftAt`). What lying there longer buys is
+  /// occlusion. So it lies there long enough to have landed — the last bounce, or a third of a
+  /// second, whichever is later — and the rest of the pattern plays with it filed.
+  static double dwellSeconds(Feeling feeling, double intensity) =>
+      math.min(restSeconds(feeling, intensity), math.max(contacts(intensity).last, 0.34));
 
   /// How much the thing is compressed at [t]: one over the first few hundredths of a second
   /// after each contact, biggest at the first.
@@ -278,7 +290,7 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
   void _stopIfDone() {
     final a = _arrival;
     if (a == null) return;
-    final over = Fall.restSeconds(a.feeling, a.intensity) + Fall.putAwaySeconds + 0.05;
+    final over = Fall.dwellSeconds(a.feeling, a.intensity) + Fall.putAwaySeconds + 0.05;
     if (_t >= over) {
       _ticker?.stop();
       setState(() => _arrival = null);
@@ -351,16 +363,28 @@ class _Landing extends StatelessWidget {
     final spin = Fall.spinAt(t, arrival.intensity, seed);
     final shadow = Fall.shadowAt(t, arrival.intensity);
 
-    // where on the desk it lands: never dead centre, and never the same place twice
+    // Where on the desk it lands: never dead centre, never the same place twice, and low.
+    //
+    // It used to land at 0.52 of the height, which is the middle of whatever the region has put on
+    // the glass, and it lay there for the whole length of the pattern: a coherence critic measured
+    // it covering Pulse's partner-state card for 106 frames, Settings' 'the two phones' card for
+    // 77 and Us's 'DATES THAT MATTER' row for 92. A thing landing on your desk lands on the desk,
+    // not on the middle of the letter you are reading — and every region leaves a band of bare
+    // wood above the tab strip, which is the piece of desk there is room to land on.
     final x0 = size.width * (arrival.mine ? 0.66 : 0.34) + (seed - 0.5) * size.width * 0.14;
-    final y0 = size.height * 0.52 + (seed - 0.5) * size.height * 0.10;
+    // Half the room the thing actually covers: a square turned by `spin` reaches
+    // (w/2)(cos|a| + sin|a|) from its middle, and the tilt is what put wish_you_were_here 1.1
+    // points into the strip when this was half of `s`.
+    final reach = s * 0.5 * (math.cos(spin.abs()) + math.sin(spin.abs()));
+    final low = size.height - kTabStrip - reach - 6.0;
+    final y0 = math.min(size.height * 0.78 + (seed - 0.5) * size.height * 0.04, low);
 
     // It lies where it landed while the pattern plays — that is the feeling being felt, the
     // paper under it lifting to the rhythm — and then it is put away: it goes up the desk to
     // where the recent row keeps it, getting smaller as it goes, and the row's copy lands at the
     // moment this one is gone. It used to sit at full size for the whole pattern and then fade
     // where it lay, which read as the thing vanishing.
-    final over = Fall.restSeconds(arrival.feeling, arrival.intensity);
+    final over = Fall.dwellSeconds(arrival.feeling, arrival.intensity);
     final put = ((t - over) / Fall.putAwaySeconds).clamp(0.0, 1.0);
     final ease = Curves.easeInOut.transform(put);
     final x = x0 + (size.width * 0.5 - x0) * ease * 0.6;
@@ -380,6 +404,8 @@ class _Landing extends StatelessWidget {
     final mm = when.minute.toString().padLeft(2, '0');
     final written = (h <= 0.001 ? 1.0 : 0.0) * fade;
     final box = s * scale;
+    // two lines of margin hand plus the slip's own padding — enough to know whether it fits below
+    final labelHeight = 10 * scale.clamp(0.6, 1.4) + 8.5 * scale.clamp(0.6, 1.4) + 14.0;
 
     return Stack(
       children: [
@@ -397,7 +423,16 @@ class _Landing extends StatelessWidget {
                 transform: Matrix4.diagonal3Values(1.0 + squash * 0.6, 1.0 - squash, 1.0),
                 child: FeelingObject(
                   feeling: arrival.feeling,
-                  size: box,
+                  // The room the landing takes is `box`, so what is asked for is the size at
+                  // which the drawing *fills* that room, not the size of the thing inside it.
+                  //
+                  // `size` is the object and the box it needs is `size * ink`, and ink runs to
+                  // 3.4 for something that sits small in its own render — so at full throw this
+                  // was asking for a 190 point thing and drawing 646 points of it, on a phone 360
+                  // points wide, out through a Positioned that was 190. That is the unlabelled
+                  // slab a coherence critic measured covering Pulse's partner-state card for 106
+                  // frames: not a card, an object drawn at three times the size it was placed at.
+                  size: FeelingObject.sizeToFit(arrival.feeling, box),
                   intensity: arrival.intensity,
                   shadowScale: shadow,
                   lift: h,
@@ -408,8 +443,13 @@ class _Landing extends StatelessWidget {
         ),
         if (written > 0)
           Positioned(
-            left: x - box * 0.6,
-            top: y + box / 2 - 4,
+            left: (x - box * 0.6).clamp(6.0, size.width - box * 1.2 - 6.0),
+            // Under it, unless under it is off the bottom of the desk: the object lands low now,
+            // and a slip drawn under a low landing came out behind the tab strip, which is where
+            // the seventh feeling in a family used to be too.
+            top: y + box / 2 + labelHeight + 4 > size.height - kTabStrip
+                ? y - box / 2 - labelHeight - 4
+                : y + box / 2 - 4,
             width: box * 1.2,
             child: Opacity(
               opacity: written,
