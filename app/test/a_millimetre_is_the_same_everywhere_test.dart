@@ -22,6 +22,12 @@ Future<void> _draw(WidgetTester tester, Widget child, {double dpr = 3.0}) async 
   addTearDown(tester.view.reset);
   await tester.pumpWidget(MaterialApp(home: Scaffold(body: child)));
   await tester.pump();
+  // The stock is a decoded image out of StockCache now, not an `Image.asset` inside a
+  // LayoutBuilder, so it arrives on a real future and the counters move when it is painted rather
+  // than when it is asked for. A piece with no paper yet has drawn none, which is the honest
+  // reading and the one the capture's own `stocks_the_paper_had_not_arrived_for` depends on.
+  await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 500)));
+  await tester.pump(const Duration(milliseconds: 300));
   await tester.pump(const Duration(milliseconds: 300));
 }
 

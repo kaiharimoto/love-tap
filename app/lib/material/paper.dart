@@ -95,6 +95,74 @@ class MaskCache {
   }
 }
 
+/// Decoded paper stocks, held here rather than in Flutter's image cache.
+///
+/// A stock used to be an `Image.asset` inside the `LayoutBuilder` that decides how to draw it, and
+/// the eleventh capture measured what that costs. Over a 844-frame fling the build time is
+/// perfectly bimodal: 645 frames build 0 to 2 paper pieces in about 2 ms, and 199 frames build
+/// exactly 60 or 61 in 571 to 1150 ms — 96 per cent of all build time, in frames that built no
+/// rows at all. Sixty is the whole window of the list, and the gap between those frames is two to
+/// six, median four. The positioned list re-anchors as the thread passes a row, which re-lays-out
+/// its window; a `LayoutBuilder`'s callback runs on every *layout*, not on every rebuild, so a
+/// cached row widget does not save its stock from being built again — sixty widgets reconstructed
+/// and sixty image providers re-resolved, against an image cache pinned at 398 MB of its 402 MB
+/// ceiling with 170 masks dropped in the same run.
+///
+/// So the stock is not a widget. It is a decoded image in a pool this file owns, painted straight
+/// into the canvas by a painter that makes its decision from the size it is given — which is what
+/// a layout already knows.
+class StockCache {
+  static final Map<String, ui.Image> _images = {};
+  static final Map<String, Future<ui.Image>> _loading = {};
+
+  /// How many stocks to hold. They are large — an A5 sheet decodes to 13.9 MB and the receipt to
+  /// 21.9 — so this is a small number deliberately: ten is more distinct paper than any one
+  /// screen has ever shown, and it is 140 MB that is bounded and predictable instead of a share
+  /// of a cache that everything else is also competing for.
+  static const int keep = 10;
+
+  static int get held => _images.length;
+  static int dropped = 0;
+
+  /// The bytes these hold, for the record.
+  static int get bytes =>
+      _images.values.fold<int>(0, (n, i) => n + i.width * i.height * 4);
+
+  static ui.Image? peek(String asset) {
+    final have = _images[asset];
+    if (have == null) return null;
+    _images.remove(asset);
+    _images[asset] = have;          // least recently used is the front of the map
+    return have;
+  }
+
+  static Future<ui.Image> load(String asset) {
+    final have = peek(asset);
+    if (have != null) return Future.value(have);
+    return _loading.putIfAbsent(asset, () async {
+      final data = await rootBundle.load(asset);
+      final codec = await ui.instantiateImageCodec(
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
+      final frame = await codec.getNextFrame();
+      _images[asset] = frame.image;
+      _loading.remove(asset);
+      _trim();
+      return frame.image;
+    });
+  }
+
+  static void _trim() {
+    while (_images.length > keep) {
+      final oldest = _images.keys.first;
+      _images.remove(oldest);
+      dropped += 1;
+    }
+  }
+
+  /// How many stocks are being decoded right now. The harness waits on it.
+  static int get decoding => _loading.length;
+}
+
 /// One sheet: stock × tear mask, lit edge, baked shadow, and its content.
 class PaperPiece extends StatelessWidget {
   const PaperPiece({
@@ -320,104 +388,12 @@ class PaperPiece extends StatelessWidget {
         // image is missing from the bundle, is still a sheet.
         Positioned.fill(child: ColoredBox(color: Paper.forStock(stock))),
         Positioned.fill(
-          child: LayoutBuilder(builder: (context, box) {
-            final dpr = MediaQuery.devicePixelRatioOf(context);
-            // ONE IMAGE PIXEL PER DEVICE PIXEL, wherever there is enough paper for it.
-            //
-            // The app did not know how big a millimetre was. Every stock is printed at 8.57 pixels
-            // to the millimetre, and every piece drew its stock at whatever scale that piece
-            // happened to be — so the same ruled paper appeared at rule pitches from 61.5 to 178.5
-            // device pixels across ten stills, a ratio of 2.9 (logs/lines.json), and the tooth on
-            // a wide sheet was averaged away by the sampler that magnified it (2.52 grey levels
-            // native, 1.26 on the large Settings sheet).
-            //
-            // A sheet of paper is a sheet of paper wherever you meet it. So a piece now takes a
-            // *window* of its stock at the stock's own density, positioned by the seeded patch
-            // offset so no two pieces show the same patch — which is what `windowed` has always
-            // meant, and it was only ever used by the tab strip. At three device pixels to the
-            // point that puts an A5 sheet at 423 logical points across, which is about the width
-            // of a phone, which is the size a note is.
-            //
-            // A piece with more glass than there is paper falls back to covering, because a sheet
-            // with a hole in it is worse than a sheet at the wrong size. `native` says which
-            // happened; the capture counts them.
-            final px = MaterialLibrary.loaded
-                ? MaterialLibrary.instance.stockSize(stock)
-                : null;
-            final native = !windowed &&
-                px != null &&
-                box.maxWidth.isFinite &&
-                box.maxHeight.isFinite &&
-                box.maxWidth * dpr <= px.width &&
-                box.maxHeight * dpr <= px.height;
-            // Counted off the decision that is actually drawn with, not off the one that feeds
-            // it: the first version read `native` while the draw read `atOwnSize`, so breaking the
-            // draw left the counter — and the test that watches it — perfectly happy.
-            final atOwnSize = windowed || native;
-            if (atOwnSize) {
-              PaperPiece.drawnNative += 1;
-            } else {
-              PaperPiece.drawnStretched += 1;
-            }
-            if (px != null && box.maxWidth.isFinite && box.maxHeight.isFinite) {
-              final w = box.maxWidth * dpr, h = box.maxHeight * dpr;
-              final took = atOwnSize ? w * h : px.width * px.height;
-              final had = PaperPiece.smallestWindow;
-              if (had == null || took < (had[2] as double)) {
-                PaperPiece.smallestWindow = <Object>[
-                  '$stock ${px.width.round()}x${px.height.round()}',
-                  '${w.round()}x${h.round()} of it, ${atOwnSize ? 'at its own size' : 'stretched'}',
-                  took,
-                ];
-              }
-            }
-            // A packed stock carries the surface it was photographed against in a border about
-            // forty pixels wide — lined_01's first twenty rows sit at 145 against an interior of
-            // 233. Covering scaled that out of the frame; a window at the stock's own density will
-            // show it if the patch offset is anywhere near the edge, and the offsets run to the
-            // edge because nothing needed them not to. So the alignment is pulled in far enough
-            // that the window always lands on paper, in the units alignment is measured in: the
-            // fraction of the slack between the image and the box.
-            var align = stockAlignment;
-            if (atOwnSize && px != null) {
-              const margin = 44.0;                       // the border, and a little
-              final slackX = px.width - box.maxWidth * dpr;
-              final slackY = px.height - box.maxHeight * dpr;
-              // and no further than four fifths of the way out in any case. A stock is ruled
-              // over its middle and blank at its head and foot — lined_01 rules rows 220 to 1673
-              // of 1800 — so a window free to sit anywhere would sometimes land on lined paper
-              // with no lines on it, which is a worse picture than a slightly less varied one.
-              const reach = 0.8;
-              final limX = (slackX > 2 * margin ? 1.0 - 2 * margin / slackX : 0.0).clamp(0.0, reach);
-              final limY = (slackY > 2 * margin ? 1.0 - 2 * margin / slackY : 0.0).clamp(0.0, reach);
-              align = Alignment(stockAlignment.x.clamp(-limX, limX),
-                  stockAlignment.y.clamp(-limY, limY));
-            }
-            return Transform.scale(
-              scale: atOwnSize ? 1.0 : stockScale,
-              alignment: align,
-              child: Image.asset(
-                paperAsset(stock),
-                scale: atOwnSize ? dpr : 1.0,
-                fit: atOwnSize ? BoxFit.none : BoxFit.cover,
-                alignment: align,
-                gaplessPlayback: true,
-                filterQuality: atOwnSize
-                    ? FilterQuality.none
-                    : PaperPiece.stockFilter(stock, box.biggest, dpr, stockScale),
-                // Whether the paper is actually there, as against whether it was asked for.
-                frameBuilder: (context, child, frame, wasSynchronous) {
-                  if (frame == null) {
-                    PaperPiece.waitingForPaper.add(stock);
-                  } else if (PaperPiece.waitingForPaper.remove(stock) && !wasSynchronous) {
-                    PaperPiece.paperArrivedLate += 1;
-                  }
-                  return child;
-                },
-                errorBuilder: PaperPiece.none,
-              ),
-            );
-          }),
+          child: _StockLayer(
+            stock: stock,
+            stockAlignment: stockAlignment,
+            stockScale: stockScale,
+            windowed: windowed,
+          ),
         ),
         if (tearId != null)
           // Sliced the same way the mask is, so the lit fibres on the torn edge keep the length
@@ -1134,6 +1110,192 @@ class SlicedMasks {
     _images[key] = image;
     return image;
   }
+}
+
+/// The stock of one piece, drawn straight into the canvas.
+///
+/// Not an `Image.asset` inside a `LayoutBuilder`. See StockCache for what that cost: sixty widgets
+/// rebuilt and sixty providers re-resolved every time the list re-anchored, which is every second
+/// to sixth frame of a fling, at 571 to 1150 ms a time.
+class _StockLayer extends StatefulWidget {
+  const _StockLayer({
+    required this.stock,
+    required this.stockAlignment,
+    required this.stockScale,
+    required this.windowed,
+  });
+
+  final String stock;
+  final Alignment stockAlignment;
+  final double stockScale;
+  final bool windowed;
+
+  @override
+  State<_StockLayer> createState() => _StockLayerState();
+}
+
+class _StockLayerState extends State<_StockLayer> {
+  ui.Image? _image;
+
+  @override
+  void initState() {
+    super.initState();
+    _resolve();
+  }
+
+  @override
+  void didUpdateWidget(_StockLayer old) {
+    super.didUpdateWidget(old);
+    if (old.stock != widget.stock) {
+      _image = StockCache.peek(paperAsset(widget.stock));
+      _resolve();
+    }
+  }
+
+  void _resolve() {
+    final have = StockCache.peek(paperAsset(widget.stock));
+    if (have != null) {
+      _image = have;
+      PaperPiece.waitingForPaper.remove(widget.stock);
+      return;
+    }
+    // Whether the paper is actually there, as against whether it was asked for. A stock that has
+    // not arrived paints as the flat colour underneath it, and in a still that is indistinguishable
+    // from paper with no tooth: six cream rectangles in 04_moments with their torn fringe drawn
+    // perfectly around every one.
+    PaperPiece.waitingForPaper.add(widget.stock);
+    unawaited(StockCache.load(paperAsset(widget.stock)).then((img) {
+      if (!mounted) return;
+      setState(() => _image = img);
+      if (PaperPiece.waitingForPaper.remove(widget.stock)) {
+        PaperPiece.paperArrivedLate += 1;
+      }
+    }, onError: (Object _) {
+      // a stock missing from the bundle: the colour underneath is the sheet, and it says so
+    }));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final image = _image;
+    if (image == null) return const SizedBox.expand();
+    return CustomPaint(
+      painter: _StockPainter(
+        image: image,
+        stock: widget.stock,
+        alignment: widget.stockAlignment,
+        stockScale: widget.stockScale,
+        windowed: widget.windowed,
+        dpr: MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0,
+      ),
+      size: Size.infinite,
+    );
+  }
+}
+
+class _StockPainter extends CustomPainter {
+  _StockPainter({
+    required this.image,
+    required this.stock,
+    required this.alignment,
+    required this.stockScale,
+    required this.windowed,
+    required this.dpr,
+  });
+
+  final ui.Image image;
+  final String stock;
+  final Alignment alignment;
+  final double stockScale;
+  final bool windowed;
+  final double dpr;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (size.isEmpty) return;
+    final w = image.width.toDouble(), h = image.height.toDouble();
+    final dw = size.width * dpr, dh = size.height * dpr;
+
+    // ONE IMAGE PIXEL PER DEVICE PIXEL, wherever there is enough paper for it.
+    //
+    // The app did not know how big a millimetre was. Every stock is printed at 8.57 pixels to the
+    // millimetre, and every piece drew its stock at whatever scale that piece happened to be — so
+    // the same ruled paper appeared at rule pitches from 61.5 to 178.5 device pixels across ten
+    // stills, a ratio of 2.9 (logs/lines.json), and the tooth on a wide sheet was averaged away by
+    // the sampler that magnified it (2.52 grey levels native, 1.26 on the large Settings sheet).
+    //
+    // A sheet of paper is a sheet of paper wherever you meet it. So a piece takes a *window* of
+    // its stock at the stock's own density, positioned by the seeded patch offset so no two pieces
+    // show the same patch. A piece with more glass than there is paper falls back to covering,
+    // because a sheet with a hole in it is worse than a sheet at the wrong size.
+    final native = !windowed && dw <= w && dh <= h;
+    final atOwnSize = windowed || native;
+    if (atOwnSize) {
+      PaperPiece.drawnNative += 1;
+    } else {
+      PaperPiece.drawnStretched += 1;
+    }
+    final took = atOwnSize ? dw * dh : w * h;
+    final had = PaperPiece.smallestWindow;
+    if (had == null || took < (had[2] as double)) {
+      PaperPiece.smallestWindow = <Object>[
+        '$stock ${w.round()}x${h.round()}',
+        '${dw.round()}x${dh.round()} of it, ${atOwnSize ? 'at its own size' : 'stretched'}',
+        took,
+      ];
+    }
+
+    // A packed stock carries the surface it was photographed against in a border about forty
+    // pixels wide — lined_01's first twenty rows sit at 145 against an interior of 233. Covering
+    // scaled that out of the frame; a window at the stock's own density will show it if the patch
+    // offset is anywhere near the edge, and the offsets run to the edge because nothing needed
+    // them not to. So the alignment is pulled in far enough that the window always lands on paper,
+    // in the units alignment is measured in: the fraction of the slack between image and box.
+    var align = alignment;
+    if (atOwnSize) {
+      const margin = 44.0;
+      final slackX = w - dw, slackY = h - dh;
+      // and no further than four fifths of the way out in any case. A stock is ruled over its
+      // middle and blank at its head and foot — lined_01 rules rows 220 to 1673 of 1800 — so a
+      // window free to sit anywhere would sometimes land on lined paper with no lines on it.
+      const reach = 0.8;
+      final limX = (slackX > 2 * margin ? 1.0 - 2 * margin / slackX : 0.0).clamp(0.0, reach);
+      final limY = (slackY > 2 * margin ? 1.0 - 2 * margin / slackY : 0.0).clamp(0.0, reach);
+      align = Alignment(alignment.x.clamp(-limX, limX), alignment.y.clamp(-limY, limY));
+    }
+    final ax = (align.x + 1) / 2, ay = (align.y + 1) / 2;
+
+    final paint = Paint()
+      ..filterQuality = atOwnSize
+          ? FilterQuality.none
+          : PaperPiece.stockFilter(stock, size, dpr, stockScale);
+    canvas.save();
+    canvas.scale(1 / dpr);
+    if (atOwnSize) {
+      // one image pixel per device pixel, through a window the seed positions
+      final srcW = math.min(dw, w), srcH = math.min(dh, h);
+      final sx = (w - srcW) * ax, sy = (h - srcH) * ay;
+      canvas.drawImageRect(image, Rect.fromLTWH(sx, sy, srcW, srcH),
+          Rect.fromLTWH(0, 0, dw, dh), paint);
+    } else {
+      // cover, then the piece's own scale about the same alignment
+      final cover = math.max(dw / w, dh / h) * stockScale;
+      final srcW = math.min(w, dw / cover), srcH = math.min(h, dh / cover);
+      final sx = (w - srcW) * ax, sy = (h - srcH) * ay;
+      canvas.drawImageRect(image, Rect.fromLTWH(sx, sy, srcW, srcH),
+          Rect.fromLTWH(0, 0, dw, dh), paint);
+    }
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_StockPainter old) =>
+      !identical(old.image, image) ||
+      old.stock != stock ||
+      old.alignment != alignment ||
+      old.stockScale != stockScale ||
+      old.windowed != windowed ||
+      old.dpr != dpr;
 }
 
 /// An image drawn as a nine-slice: the four corners and the four edges at the scale they were

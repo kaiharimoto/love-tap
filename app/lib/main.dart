@@ -45,7 +45,15 @@ Future<void> main() async {
   }
 
   WidgetsFlutterBinding.ensureInitialized();
-  // The paper has to stay in memory, because a stock that has been evicted paints as a flat fill.
+  // The stocks are not in here any more — see StockCache in material/paper.dart. They were, and
+  // the eleventh capture measured what that cost: over an 844-frame fling, 199 frames built
+  // exactly sixty paper pieces in 571 to 1150 ms each and 645 frames built none in about two,
+  // with this cache pinned at 398 MB of its 402 MB ceiling. What is left in here is the baked
+  // shadows, the objects, the fold frames and the photographs, and this number is due to come down
+  // once a capture has said what that actually needs. It is kept where it was for now so that one
+  // change is measured at a time.
+  //
+  // The paper had to stay in memory, because a stock that has been evicted paints as a flat fill.
   //
   // Flutter's image cache holds 100 MB by default. The packed stocks decode to **763 MB** across
   // 54 files — an A5 sheet at 1574x2200 is 13.8 MB and the receipt at 1601x3420 is 21.9 — because

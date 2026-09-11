@@ -438,7 +438,7 @@ class CaptureHooks {
     // Measured on the twelfth capture: one 80-pixel window of 04_moments at standard deviation
     // 0.017 grey levels, inside a voice-note tile whose fringe is plainly drawn. It is not a fill
     // standing in for paper; it is paper that had not arrived when the shutter opened.
-    final stock = PaintingBinding.instance.imageCache.pendingImageCount;
+    final stock = PaintingBinding.instance.imageCache.pendingImageCount + StockCache.decoding;
     // And the outcome as well as the queue: `pendingImageCount` counts what is being decoded, and
     // a piece can be on the glass waiting for a stock whose load has not been started yet.
     final without = PaperPiece.waitingForPaper;
@@ -618,6 +618,11 @@ class CaptureHooks {
       'paper_that_arrived_after_the_piece_was_drawn': PaperPiece.paperArrivedLate,
       'masks_held': MaskCache.held,
       'masks_dropped_to_stay_inside_the_pool': MaskCache.dropped,
+      // The stocks are held here rather than in Flutter's image cache now — see StockCache for
+      // what the cache cost when they were in it.
+      'stocks_held': StockCache.held,
+      'stocks_held_bytes': StockCache.bytes,
+      'stocks_dropped_to_stay_inside_the_pool': StockCache.dropped,
       'image_cache': {
         'held': PaintingBinding.instance.imageCache.currentSize,
         'bytes': PaintingBinding.instance.imageCache.currentSizeBytes,
