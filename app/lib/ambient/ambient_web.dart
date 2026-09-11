@@ -83,7 +83,15 @@ class _WebAmbient implements Ambient {
       _allowed = false;
     }
     final container = _serviceWorker;
-    if (container == null) return;
+    if (container == null) {
+      // Not silence. A code critic found this returning with nothing said and the failed register
+      // below swallowed into `_registration = null`, so every notification path after it was a
+      // no-op nothing could account for. A browser that offers no `navigator.serviceWorker` at all
+      // is telling you something exact — the origin is not secure — and it is written down.
+      _whyNoWorker = 'this browser offers no navigator.serviceWorker, which is what a page on an '
+          'origin the phone does not trust gets';
+      return;
+    }
     try {
       // registered under /push/ so it sits beside the worker Flutter installs to cache the app
       // rather than fighting it for the root scope, and carrying the profile so the worker can
@@ -94,10 +102,15 @@ class _WebAmbient implements Ambient {
       _registration = await container
           .register('push/sw.js?profile=${Flags.profile}'.toJS, _opts({'scope': 'push/'}))
           .toDart;
-    } catch (_) {
+      _whyNoWorker = null;
+    } catch (e) {
       _registration = null;
+      _whyNoWorker = 'the browser refused to register the worker: $e';
     }
   }
+
+  /// Why there is no worker, when there is none. Null when there is one.
+  String? _whyNoWorker;
 
   @override
   Future<bool> ask() async {
@@ -203,6 +216,7 @@ class _WebAmbient implements Ambient {
       'a_secure_origin': secure,
       'service_worker_offered_by_the_browser': _serviceWorker != null,
       'a_worker_is_registered': _registration != null,
+      if (_whyNoWorker != null) 'why_there_is_no_worker': _whyNoWorker,
       'the_person_has_allowed_it': permission,
       'a_push_manager': _registration?.pushManager != null,
     };
