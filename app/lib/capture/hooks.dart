@@ -186,13 +186,32 @@ class CaptureHooks {
   void _watchTimings() {
     if (_watching) return;
     _watching = true;
+    var rowsBefore = ThreadRowStats.built;
+    var piecesBefore = PaperPiece.drawnNative + PaperPiece.drawnStretched;
+    var masksBefore = SlicedMasks.composed;
     SchedulerBinding.instance.addTimingsCallback((frames) {
       for (final f in frames) {
+        // What the frame did, beside what it cost.
+        //
+        // Three cycles of argument about the scroll rested on a number with nothing beside it: 182
+        // frames over 400 ms, recurring every three to seven frames, and no way to tell from the
+        // record whether a heavy frame built a row, composed a mask, or was the browser collecting
+        // half a gigabyte of held images. These are counters the app already keeps; the difference
+        // across a frame is what that frame did.
+        final rows = ThreadRowStats.built;
+        final pieces = PaperPiece.drawnNative + PaperPiece.drawnStretched;
+        final masks = SlicedMasks.composed;
         _timings.add({
           'build_ms': f.buildDuration.inMicroseconds / 1000,
           'raster_ms': f.rasterDuration.inMicroseconds / 1000,
           'total_ms': f.totalSpan.inMicroseconds / 1000,
+          'rows_built': rows - rowsBefore,
+          'pieces_drawn': pieces - piecesBefore,
+          'masks_composed': masks - masksBefore,
         });
+        rowsBefore = rows;
+        piecesBefore = pieces;
+        masksBefore = masks;
       }
     });
   }
@@ -225,6 +244,31 @@ class CaptureHooks {
       'build_ms': {'p50': pct('build_ms', 0.5), 'p95': pct('build_ms', 0.95), 'max': pct('build_ms', 1.0)},
       'raster_ms': {'p50': pct('raster_ms', 0.5), 'p95': pct('raster_ms', 0.95), 'max': pct('raster_ms', 1.0)},
       'over_16ms': t.where((m) => m['total_ms']! > 16).length,
+      // What the expensive frames were doing, summed — so the next argument about the scroll starts
+      // from what happened rather than from what is plausible.
+      'the_heavy_frames': () {
+        final heavy = t.where((m) => m['build_ms']! > 400).toList();
+        num sum(String k, Iterable<Map<String, num>> rows) =>
+            rows.fold<num>(0, (n, m) => n + (m[k] ?? 0));
+        return {
+          'over_400ms': heavy.length,
+          'their_build_ms': sum('build_ms', heavy).round(),
+          'all_build_ms': sum('build_ms', t).round(),
+          'rows_they_built': sum('rows_built', heavy),
+          'pieces_they_drew': sum('pieces_drawn', heavy),
+          'masks_they_composed': sum('masks_composed', heavy),
+          'rows_built_in_all': sum('rows_built', t),
+          'pieces_drawn_in_all': sum('pieces_drawn', t),
+        };
+      }(),
+      'masks_held_at_the_end': MaskCache.held,
+      'masks_dropped': MaskCache.dropped,
+      'image_cache_at_the_end': {
+        'held': PaintingBinding.instance.imageCache.currentSize,
+        'bytes': PaintingBinding.instance.imageCache.currentSizeBytes,
+        'budget': PaintingBinding.instance.imageCache.maximumSizeBytes,
+        'live': PaintingBinding.instance.imageCache.liveImageCount,
+      },
       'per_frame': t,
     };
   }
