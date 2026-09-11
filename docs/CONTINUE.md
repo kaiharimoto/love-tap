@@ -30,9 +30,37 @@ checklist is for.
 `evidence/logs/pwa.json` — manifest with `display: standalone`, four icons, apple-touch-icon,
 service worker registered, and the three Apple meta tags in the shell. The setup checklist observes
 facts off the object graph and stores nothing, so a tick cannot survive the thing it watched going
-away. **The release APK has not been built in this container** and that is the next thing to do:
-`toolchain/android-sdk` is 488 MB with platforms and build-tools, no NDK is fetched unless
-something needs one, and 13 GB is free.
+away.
+
+**The release path has now been exercised rather than described.** A throwaway RSA key was
+generated into /tmp, used to sign an arm64 APK, and the key, the keystore and `key.properties` were
+destroyed straight after; `tools/check/apk.py` reads the signer, the ABIs and the asset weight out
+of whatever APK is on disk and fails on `CN=Android Debug`. Default build: 145 MB across three
+ABIs. `--split-per-abi --target-platform android-arm64`: 106 MB, of which 84 is the material
+library. Both numbers are in `evidence/logs/apk.json` with the distinguished name that says the key
+was a throwaway.
+
+**And the host actually serves over TLS**, which it did not before and which the checklist claimed
+it did. `HostBind` had carried a `securityContext` since the protocol was written and nothing ever
+passed one; the setup step called "trust the certificate the other phone holds" ticked on
+`state == connected`, which a connection with no certificate in it satisfies perfectly. The phone
+makes a 2048-bit key at first start, signs itself a certificate for the tailnet address it is
+actually serving on, and keeps both in the app's own storage — which the manifest already excludes
+from the cloud backup and the phone-to-phone transfer. The client pins the certificate it saw on
+the wire during pairing, because two people in one room saying six words out loud is the one moment
+trust-on-first-use is honest. One small listener stays in the clear on the port above, serving the
+setup page and the configuration profile and 404ing everything else: behind the certificate, the
+page that exists to get the certificate trusted would itself be untrusted, and teaching somebody to
+click through that warning on their own phone is worse than serving a public key in the open.
+
+Two things turned on that and neither was cosmetic. A page served over http at a 100.64/10 address
+is not a secure context, so Safari gives the iPhone no `navigator.serviceWorker` at all and the push
+ambient surface cannot exist; and a checklist that can tick for a thing that did not happen is worse
+than one step short.
+
+**What is still not verified, and cannot be here:** no artifact shows an Android or an iOS device.
+09 and 16 need a handset, `docs/PHONES.md` measures the three routes tried, and the reception scene
+is a Chromium banner on a Linux virtual display, which its own log says.
 
 ## 0. Where it stands
 
