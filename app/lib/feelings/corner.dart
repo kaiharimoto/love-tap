@@ -9,6 +9,7 @@ import 'dart:math' as math;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart' show Ticker;
 
 import '../capture/bus.dart';
 import '../capture/hooks.dart';
@@ -39,12 +40,26 @@ class FeelingCorner extends StatefulWidget {
 /// Which corner's handles are on the bus. See the note in initState.
 _FeelingCornerState? _owner;
 
-class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProviderStateMixin {
+class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateMixin {
   late final AnimationController _curl = AnimationController(
     vsync: this,
     duration: Motion.turn,
     reverseDuration: Motion.settle,
   );
+
+  /// A frame for every frame the hold lasts.
+  ///
+  /// A finger resting on a tile changes nothing the framework watches: `_curl` has finished by
+  /// then and an `AnimatedBuilder` on a finished controller never rebuilds, so on a phone the
+  /// object you were charging sat perfectly still for the whole 1.8 seconds of the charge. The
+  /// capture found it first — forty byte-identical frames of 15_authored_feeling, exactly the run
+  /// where the scene holds `pigeon` — and the fix that went in then only asked the *driven* clock
+  /// for a rebuild, which is the clock nobody's phone runs on. A hold is the one gesture in the
+  /// app that takes time, so it gets a ticker, and the ticker covers both clocks: `_held` reads
+  /// whichever one is running.
+  late final Ticker _charging = createTicker((_) {
+    if (_heldSince != null && mounted) setState(() {});
+  });
   bool _open = false;
   /// When the hold began, on the driven clock (capture) — see [_held].
   Duration? _heldSince;
@@ -79,6 +94,7 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
       _heldSince = DrivenClock.now;
       _wallFrom = DateTime.now();
     });
+    if (!_charging.isActive) _charging.start();
     if (DrivenClock.enabled) {
       _curlFrom = DrivenClock.now;
       _curl.value = 0.0;
@@ -108,6 +124,7 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
 
   void _close({Feeling? send}) {
     final intensity = _intensity;
+    if (_charging.isActive) _charging.stop();
     setState(() {
       _open = false;
       _under = null;
@@ -159,6 +176,7 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
           _heldSince = DrivenClock.now;
           _wallFrom = DateTime.now();
         });
+        if (!_charging.isActive) _charging.start();
         return true;
       };
       // and lift it: whatever is under the finger goes, at whatever the hold has grown to
@@ -177,14 +195,8 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
   }
 
   void _onDriven(Duration now) {
-    // A finger on a tile is a thing that is happening, so the frame has to change while it is.
-    //
-    // The hold grows the intensity from 0.3 to 1.0 over 1.8 seconds and nothing asked for a
-    // repaint while it did, so under the driven clock the ring simply sat there: 42 consecutive
-    // frames of 15_authored_feeling, byte-identical, exactly the run where the scene puts a finger
-    // on `pigeon` and holds it. An emotional critic asked to see a gesture produce a feeling and
-    // what the clip showed was a still picture of a finger.
-    if (_heldSince != null && mounted) setState(() {});
+    // A finger on a tile is a thing that is happening, so the frame has to change while it is —
+    // see `_charging`, which is where that now lives, for both clocks rather than this one.
     final from = _curlFrom;
     if (from == null) return;
     final span = _open ? Motion.turn : Motion.settle;
@@ -203,6 +215,7 @@ class _FeelingCornerState extends State<FeelingCorner> with SingleTickerProvider
       CaptureBus.letGo = null;
     }
     _driven?.cancel();
+    _charging.dispose();
     _curl.dispose();
     super.dispose();
   }
@@ -406,6 +419,10 @@ class _Fan extends StatelessWidget {
   final Feeling? under;
   final double intensity;
 
+  /// How far through its charge a hold is, 0 to 1, from the intensity it has grown to. The hold
+  /// runs 0.3 to 1.0 over 1.8 seconds (docs/FEELINGS.md); below 0.3 there is no finger down.
+  static double _charge(double intensity) => ((intensity - 0.3) / 0.7).clamp(0.0, 1.0);
+
   /// How far out the sheet is, 0 to 1. The scrim comes up with it; the sheet itself does not
   /// fade, it moves.
   final double scrim;
@@ -536,6 +553,22 @@ class _Fan extends StatelessWidget {
                                       size: (under?.id == members[i].id ? 92 : 76) -
                                           (members.length > 6 ? 10 : 0),
                                       intensity: under?.id == members[i].id ? intensity : 0.6,
+                                      // A hold is a thing being picked up, so it comes off the
+                                      // sheet while you hold it and its shadow spreads and pales
+                                      // underneath — the landing's own vocabulary, run backwards.
+                                      //
+                                      // The hold already grew the object: 0.3 to 1.0 of intensity
+                                      // over 1.8 s is a scale of 0.952 to 1.12, which on a 92
+                                      // point tile is fifteen points spread over 112 frames. That
+                                      // is 0.05 of a device pixel a frame, so consecutive frames
+                                      // came out byte-identical: the frame check counted forty of
+                                      // them in a row in 15_authored_feeling, exactly the run
+                                      // where the scene puts a finger on `pigeon` and holds it.
+                                      // The gesture was happening and the picture was not moving.
+                                      lift: under?.id == members[i].id ? _charge(intensity) * 0.5 : 0.0,
+                                      shadowScale: under?.id == members[i].id
+                                          ? 1.0 - 0.42 * _charge(intensity)
+                                          : 1.0,
                                       tilt: math.sin(i * 1.7) * 0.09,
                                     ),
                                     SizedBox(

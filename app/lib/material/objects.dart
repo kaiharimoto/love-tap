@@ -77,11 +77,18 @@ class FeelingObject extends StatelessWidget {
         ),
       );
       if (!onPaper) {
-        // the same rule as the rendered objects below: the box is what the drawing needs
+        // the same rule as the rendered objects below: the box is what the drawing needs, and a
+        // mark held off the desk moves the same way an object does
         return SizedBox(
           width: box,
           height: box,
-          child: Transform.rotate(angle: tilt, child: mark),
+          child: Transform.rotate(
+            angle: tilt,
+            child: Transform.translate(
+              offset: Offset(lift * size * 0.16, -lift * size * 0.62),
+              child: mark,
+            ),
+          ),
         );
       }
       // a scrap, torn off something, with the mark on it — and the scrap's own contact shadow out
@@ -95,7 +102,12 @@ class FeelingObject extends StatelessWidget {
         child: PaperPiece(
           stockId: lib == null ? 'plain_01' : _scrapStock(lib, feeling.id),
           tearId: tear,
-          liftMm: 0.5,
+          // A mark is on a scrap, so picking the feeling up picks the scrap up: the piece leaves
+          // the sheet and the shadow underneath it spreads and pales, which is what `liftMm` is
+          // measured in. The rendered objects get the same from `lift` a few lines down; without
+          // this, the half of the vocabulary that is drawn rather than rendered stayed flat on the
+          // desk while the other half rose, which is two physics in one picker.
+          liftMm: 0.5 + lift * 5.5,
           tilt: tilt,
           width: size,
           padding: EdgeInsets.zero,
