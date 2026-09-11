@@ -201,18 +201,40 @@ class PaperPiece extends StatelessWidget {
         // on a wooden desk is the desk with the light taken out of it, which is warm and dark; it
         // is never neutral and it is never a hole. Tinted to Shadow.warm through the alpha, the
         // densest possible contact now reads 49 against the desk's 84 to 103.
-        child: ColorFiltered(
+        child: Opacity(
+          // One lift was modelled, and the render is as dark as this shadow gets: a note that
+          // lies flatter than the model cannot press harder than the render already did, so the
+          // reference is the flattest lift and every other note lifts away from it, lighter.
+          opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(0.0)).clamp(0.6, 1.0),
+          child: ColorFiltered(
           colorFilter: const ColorFilter.mode(Shadow.warm, BlendMode.srcIn),
-          child: NineSliced(
-            asset: tearAsset('${tearId!}_shadow$suffix'),
-            // Bilinear, never mipmapped: see NineSliced.filterQuality. This is the one asset in
-            // the app where a sampler's overshoot is visible, because it is dark inside a
-            // transparent border and it is drawn straight onto the wood.
+          child: Image.asset(
+            tearAsset('${tearId!}_shadow$suffix'),
+            // Stretched to the piece, which is what this render is for, and **not** nine-sliced.
+            //
+            // Nine-slicing it was the wrong half of the hole fix and it cost the contact shadow
+            // altogether. drawImageNine draws the four corners at their *source* pixel size: the
+            // outer four tenths of a 451 by 799 render is 180 by 320 pixels, dropped into a piece
+            // that is often 420 by 160, so the corners overlap, overflow and are squeezed, and
+            // what is left outside the paper is nothing. Measured on the chat hero over 954
+            // columns: the desk four to fourteen pixels below a sheet read 88.32 against 87.88
+            // forty-five to sixty-five below it — half a grey level the *wrong* way. A material
+            // critic found it and they were right.
+            //
+            // The hole was never the geometry. It was the colour: these renders are black at
+            // alpha 255 over a third of their area because that third is under the paper, so
+            // wherever the render reached past the sheet it put black on the wood. The colour
+            // filter above is the whole fix, and this goes back to the framing that cast a real
+            // shadow for nine cycles.
+            fit: BoxFit.fill,
+            // Bilinear rather than the default. A shadow render is a dark shape inside a
+            // transparent border and a cubic or mipmapped sampler rings at a boundary like that,
+            // landing a *bright* row just outside the dark one — which is the pale straight rule
+            // that lay on the wood under every sheet for five cycles.
             filterQuality: FilterQuality.low,
-            // One lift was modelled, and the render is as dark as this shadow gets: a note that
-            // lies flatter than the model cannot press harder than the render already did, so the
-            // reference is the flattest lift and every other note lifts away from it, lighter.
-            opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(0.0)).clamp(0.6, 1.0),
+            gaplessPlayback: true,
+            errorBuilder: none,
+          ),
           ),
         ),
       ),

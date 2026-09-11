@@ -110,12 +110,59 @@ def _holes(rgb, dark, grow, reach=12):
     return (lum < dark) & ring, lum
 
 
+def contact_shadow(rgb, grow=3, near=(4, 14), far=(45, 65)):
+    """How much darker the desk is just under a sheet than it is a little further away.
+
+    Negative is a shadow. This exists because holes.py passed for the wrong reason: the check that
+    said no black lies beside the paper went to zero on a capture where the contact shadow had
+    vanished altogether, and a material critic found it by walking outward from an edge. No black
+    beside a sheet and no shadow under one are the same picture to a check that only looks for
+    black, and they are opposite faults.
+
+    Measured down every third column: find where a run of paper ends, skip the three pixels of its
+    own soft edge, and compare a band just below it with a band further down, keeping only the
+    pairs where both bands are on the wood.
+    """
+    import numpy as np
+    lum = rgb.mean(axis=2)
+    warm = rgb[..., 0] - rgb[..., 2]
+    paper = (lum > 150.0) & (warm < 60.0)
+    h, w = lum.shape
+    near_v, far_v = [], []
+    for col in range(60, w - 60, 3):
+        inp = False
+        start = 0
+        for y in range(h - 1):
+            p = paper[y, col]
+            if p and not inp:
+                inp, start = True, y
+            elif not p and inp:
+                inp = False
+                if y - start > 80 and y + far[1] < h:
+                    a = lum[y + near[0]:y + near[1], col]
+                    b = lum[y + far[0]:y + far[1], col]
+                    if a.max() < 150 and b.max() < 150:
+                        near_v.append(float(a.mean()))
+                        far_v.append(float(b.mean()))
+    if not near_v:
+        return {"edges": 0}
+    n = float(np.mean(near_v))
+    f = float(np.mean(far_v))
+    return {
+        "edges": len(near_v),
+        "just_under_a_sheet": round(n, 2),
+        "further_down_the_desk": round(f, 2),
+        "darker_by": round(f - n, 2),
+    }
+
+
 def measure(path, dark, grow):
     import numpy as np
     from PIL import Image
     with Image.open(path) as im:
         rgb = np.asarray(im.convert("RGB"), dtype=np.float32)
     holes, lum = _holes(rgb, dark, grow)
+    shade = contact_shadow(rgb, grow)
     n = int(holes.sum())
     import numpy as np
     ring, _ = _holes(rgb, 1e9, grow)      # the whole ring, dark or not
@@ -125,6 +172,7 @@ def measure(path, dark, grow):
         "darkest": round(float(lum.min()), 2),
         "darkest_beside_a_sheet": round(float(lum[ring].min()), 2) if ring.any() else None,
         "ring_pixels": int(ring.sum()),
+        "contact_shadow": shade,
     }
     if n:
         ys, xs = np.nonzero(holes)
@@ -174,6 +222,12 @@ def main():
                     help="how many such pixels a still may have. Not zero: an object as dark as a "
                          "wick or a stone can stand within a dozen pixels of a sheet, and the "
                          "densest-writing control measures 72 by the same code.")
+    ap.add_argument("--shadow-floor", type=float, default=6.0,
+                    help="how many grey levels darker the desk must be just under a sheet than "
+                         "further down it. Measured on the cycle-9 hero, where the shadow worked: "
+                         "14.42. Measured on the cycle-10 hero, after the shadow was nine-sliced "
+                         "out of existence: -0.44. The floor sits between them, nearer the fault, "
+                         "so a shadow that is merely weakened still fails.")
     ap.add_argument("--out", default="")
     a = ap.parse_args()
     files = a.files or sorted(glob.glob(os.path.join(EVIDENCE, "*.png")))
@@ -186,6 +240,11 @@ def main():
                "the piece it belongs to, that black is on the desk.",
         "dark": a.dark,
         "allow": a.allow,
+        "shadow_floor": a.shadow_floor,
+        "a_sheet_has_to_cast_one": "measured on the hero of the cycle before this check existed, "
+                "where the shadow worked: 14.42 grey levels darker four to fourteen pixels under a "
+                "sheet than forty-five to sixty-five under it, over 1,132 edges. Measured after "
+                "the shadow was nine-sliced: -0.44, which is half a level the wrong way.",
         "what_it_still_counts_that_is_not_a_hole": "ink at the very edge of a sheet. 05_settings "
                 "reads 130 pixels at luma 0, and they are the rule under the emphasised word "
                 "`quietly` — an 84-pixel horizontal stroke on the last line of a sheet, at "
@@ -205,6 +264,13 @@ def main():
         report["stills"][os.path.basename(f)] = got
         if got["beside_the_paper"] > a.allow:
             bad += 1
+        # And a sheet has to cast one. No black beside the paper and no shadow under it look the
+        # same to a check that only looks for black, and they are opposite faults: this check
+        # passed with flying colours on a capture where every contact shadow had vanished.
+        cs = got.get("contact_shadow") or {}
+        if cs.get("edges", 0) >= 100 and cs.get("darker_by", 0.0) < a.shadow_floor:
+            bad += 1
+            got["no_shadow_under_the_paper"] = True
     report["ok"] = bad == 0
     report["stills_with_a_hole_in_them"] = bad
     text = json.dumps(report, indent=1) + "\n"

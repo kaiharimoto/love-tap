@@ -54,6 +54,30 @@ void main() {
     });
   });
 
+  test('a sheet casts a shadow at all, and it is not nine-sliced', () {
+    // The other half, and the more expensive lesson. Nine-slicing the shadow was half of a fix for
+    // black leaking past the paper, and it cost the contact shadow altogether: drawImageNine draws
+    // the four corners at their *source* pixel size, and the outer four tenths of a 451 by 799
+    // render is 180 by 320 pixels dropped into a piece often 420 by 160, so they overlap, overflow
+    // and are squeezed, and what is left outside the paper is nothing. Measured on the hero: the
+    // desk 4 to 14 pixels under a sheet read 88.32 against 87.88 further down, half a level the
+    // wrong way, against 14.42 the right way on the capture before it. A material critic found it
+    // by walking outward from an edge, and holes.py gates on it now.
+    //
+    // The leak was never the geometry. It was the colour: those renders are black at alpha 255
+    // over a third of their area, because that third is under the paper.
+    final src = File('lib/material/paper.dart').readAsStringSync();
+    final at = src.indexOf("tearAsset('\${tearId!}_shadow");
+    // Wide enough to hold the comment that explains it: this block earns its length.
+    final block = src.substring((at - 1400).clamp(0, src.length), (at + 2400).clamp(0, src.length));
+    expect(block, contains('BoxFit.fill'),
+        reason: 'the shadow is framed some other way than the one that casts one');
+    expect(block, isNot(contains('NineSliced')),
+        reason: 'a nine-sliced shadow has no penumbra outside the paper');
+    expect(block, contains('ColorFilter.mode(Shadow.warm'),
+        reason: 'an untinted shadow render is black, and black on the wood is a hole');
+  });
+
   test('the baked shadow is sampled with a filter that cannot overshoot', () {
     // A shadow render is a dark shape inside a transparent border. A mipmapped or cubic sampler
     // rings at a boundary like that and lands a *bright* row just outside the dark one — which is
@@ -65,7 +89,9 @@ void main() {
     final src = File('lib/material/paper.dart').readAsStringSync();
     final at = src.indexOf("tearAsset('\${tearId!}_shadow");
     expect(at, greaterThan(0), reason: 'the baked shadow is not drawn where this test looks');
-    final block = src.substring(at, (at + 900).clamp(0, src.length));
+    // Backwards as well as forwards: the asset name is the argument, and the Paint that samples
+    // it is set up around the call rather than only after it.
+    final block = src.substring((at - 900).clamp(0, src.length), (at + 2400).clamp(0, src.length));
     expect(block, contains('FilterQuality.low'),
         reason: 'the shadow is sampled with a filter that can ring, and a ring outside a dark '
             'edge is a bright line on the desk');
