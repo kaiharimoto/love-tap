@@ -276,6 +276,15 @@ class PaperPiece extends StatelessWidget {
   /// How many times a stock has arrived after the piece asking for it was already on the glass.
   static int paperArrivedLate = 0;
 
+  /// Pieces on the glass whose tear mask has not arrived, and what each of them settled for:
+  /// `waiting` while it may still come, `cut` once the piece gave up and drew itself as a cut
+  /// sheet, `never came` for a mask that is not in the bundle at all.
+  ///
+  /// A capture reads it. The fault this exists to make visible cannot be seen in a frame: a piece
+  /// that is waiting is bare desk, and a piece that settled for a cut sheet is a piece of paper.
+  static Map<String, String> get tearsThatHaveNotArrived =>
+      Map.unmodifiable(_WhenThePaperArrivesState.stillWaiting);
+
   /// Which sampler to draw a stock with, from how big it is being drawn.
   ///
   /// Paper being *shrunk* wants a smoothing filter: the ruled lines are a pixel wide at their own
@@ -381,7 +390,33 @@ class PaperPiece extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => _WhenThePaperArrives(
+        asset: tearId == null ? null : tearAsset(tearId!),
+        draw: _draw,
+      );
+
+  /// The piece, drawn as the shape its tear is ready for.
+  ///
+  /// A piece used to be torn or nothing: it kept its room and painted nothing until its mask was
+  /// out of the cache, on the reasoning that the frame after this one would have it. A messenger
+  /// critic measured what happens when the frame after this one does not. The one message the far
+  /// phone wrote while the link was down arrived on reconnect, took its 72 logical pixels of the
+  /// thread, and painted bare desk for the last 46 frames of 08_state_propagating: a
+  /// message-shaped hole in a conversation, in the only artifact in the set about a message
+  /// crossing a cut link.
+  ///
+  /// So there are three shapes, not two. Torn, when the tear is here. Nothing, for the moment it
+  /// takes a mask to come out of the cache - because a sheet that appears as a square-cornered
+  /// slab and *then* tears is the light jump 07 failed on twice. And cut, once that moment has
+  /// gone by: a guillotined sheet, edge wandering, corners nicked, which is what this file already
+  /// draws for every card that was never torn at all. Paper that is cut is still paper. A hole in
+  /// the thread is not.
+  ///
+  /// The layout does not move between the three: the safe area, the padding and the width are the
+  /// tear's whichever shape is drawn, so a sheet that comes up cut and tears a moment later tears
+  /// in place.
+  Widget _draw(BuildContext context, _Shape shape) {
+    final torn = tearId != null && shape != _Shape.cut;
     final dusk = Light.of(context) == LightCondition.dusk;
     final suffix = dusk ? '_dusk' : '';
     final stock = (!dusk || stockId.endsWith('_dusk')) ? stockId : '${stockId}_dusk';
@@ -399,7 +434,7 @@ class PaperPiece extends StatelessWidget {
             windowed: windowed,
           ),
         ),
-        if (tearId != null)
+        if (torn)
           // Sliced the same way the mask is, so the lit fibres on the torn edge keep the length
           // they were rendered at however tall the sheet turns out to be.
           Positioned.fill(child: NineSliced(asset: tearAsset('${tearId!}_edge')))
@@ -422,13 +457,11 @@ class PaperPiece extends StatelessWidget {
     // corner radius zero — which is the shape the anti-goal forbids, reached by clipping. The
     // wander is deterministic in the piece's own stock id, so a card is the same card every time
     // it is drawn and on both phones.
-    final clipped = tearId == null
+    final clipped = !torn
         ? ClipPath(clipper: _CutShape(hashOf(stockId)), child: content)
         : ClipRect(child: content);
-    final piece = tearId == null ? clipped : MaskedLayer(maskAsset: tearAsset(tearId!), child: clipped);
-    return _WhenThePaperArrives(
-      asset: tearId == null ? null : tearAsset(tearId!),
-      child: Transform.rotate(
+    final piece = !torn ? clipped : MaskedLayer(maskAsset: tearAsset(tearId!), child: clipped);
+    return Transform.rotate(
       angle: tilt,
       // Filtered, because a rotation without a filter is nearest-neighbour and every hard edge
       // inside the piece comes out as a staircase. That is the pale one-pixel rule a material
@@ -466,37 +499,74 @@ class PaperPiece extends StatelessWidget {
               // render as the piece, already in the right place, already the right shape. All the
               // app does is put it back at the size it was framed at — wider than the piece, because
               // the part of a contact shadow anyone sees is the part the paper is not covering.
-              if (tearId != null) _tornShadow(context, suffix) else _cutShadow(dusk),
+              if (torn) _tornShadow(context, suffix) else _cutShadow(dusk),
               piece,
               ...stuckOn,
             ],
           ),
         ),
       ),
-    ),
     );
   }
 }
 
+/// Which of the three shapes a piece can be drawn as.
+enum _Shape {
+  /// The mask is out of the cache: the piece is torn along it.
+  torn,
+
+  /// The mask was asked for in the frame just gone. Nothing of the piece is drawn — not its
+  /// sheet and not the shadow it casts — because a sheet that appears as a square-cornered slab
+  /// and tears a frame later is a light jump, and 07's clip failed the frame check on one.
+  waiting,
+
+  /// The mask did not come. The piece is drawn as a sheet that was cut rather than torn, which is
+  /// what this file draws for every card that never had a tear.
+  cut,
+}
+
+/// How long a piece may keep its room and paint nothing while its mask comes out of the cache.
+///
+/// Five frames at sixty a second. Short enough that nobody reads it as a response — a change under
+/// a tenth of a second is the same moment as the thing that caused it — and long enough that the
+/// ordinary case, a decode that lands on the very next frame, is never pre-empted by a cut sheet
+/// that tears a moment later.
+const Duration _patience = Duration(milliseconds: 80);
+
 /// Nothing of a piece is drawn — not its sheet, and not the shadow it casts — until the mask that
-/// gives it its shape is out of the cache.
+/// gives it its shape is out of the cache, and not for longer than [_patience] after that.
 ///
 /// Gating the sheet alone left the shadow: a torn dark shape lying on the desk with no paper on
-/// it, which is a worse frame than the one it fixed. A piece keeps its room in the row and paints
-/// nothing; a mask that never arrives (missing from the bundle) draws the piece the old way rather
-/// than leaving a hole in the thread.
+/// it, which is a worse frame than the one it fixed. So the gate is here, around the whole piece.
+///
+/// Gating it *without a deadline* was worse again, and a messenger critic measured it: the one
+/// message the far phone wrote while the link was down arrived on reconnect, took its room in the
+/// thread, and painted bare desk for the rest of the clip. A piece keeps its room and paints
+/// nothing for a moment; after that it is a cut sheet, and it tears in place when its mask lands.
+/// A mask that never arrives at all — one missing from the bundle — is the same case, reached
+/// sooner.
 class _WhenThePaperArrives extends StatefulWidget {
-  const _WhenThePaperArrives({required this.asset, required this.child});
+  const _WhenThePaperArrives({required this.asset, required this.draw});
+
+  /// The mask this piece is torn along, or null for a piece that was never torn.
   final String? asset;
-  final Widget child;
+
+  final Widget Function(BuildContext context, _Shape shape) draw;
 
   @override
   State<_WhenThePaperArrives> createState() => _WhenThePaperArrivesState();
 }
 
 class _WhenThePaperArrivesState extends State<_WhenThePaperArrives> {
-  bool _here = false;
-  bool _lost = false;
+  _Shape _shape = _Shape.waiting;
+  Timer? _deadline;
+
+  /// Pieces on the glass right now whose mask has not arrived, and what they settled for.
+  ///
+  /// The capture reads it. A hole in a thread and a sheet that came up cut are two different
+  /// faults with two different fixes, and neither of them says anything about itself in a frame:
+  /// the first is bare desk and the second is a piece of paper. This is what says which happened.
+  static final Map<String, String> stillWaiting = <String, String>{};
 
   @override
   void initState() {
@@ -508,28 +578,49 @@ class _WhenThePaperArrivesState extends State<_WhenThePaperArrives> {
   void didUpdateWidget(_WhenThePaperArrives old) {
     super.didUpdateWidget(old);
     if (old.asset != widget.asset) {
-      _here = false;
-      _lost = false;
+      _deadline?.cancel();
+      _shape = _Shape.waiting;
       _look();
     }
+  }
+
+  @override
+  void dispose() {
+    _deadline?.cancel();
+    if (widget.asset != null) stillWaiting.remove(widget.asset);
+    super.dispose();
   }
 
   void _look() {
     final asset = widget.asset;
     if (asset == null || MaskCache.peek(asset) != null) {
-      _here = true;
+      _shape = _Shape.torn;
       return;
     }
+    stillWaiting[asset] = 'waiting';
+    // The deadline is real time, not frames: a screen that is not moving produces no frames, and
+    // a piece waiting for its mask on a still screen would have waited for ever.
+    _deadline = Timer(_patience, () {
+      if (!mounted || _shape == _Shape.torn) return;
+      stillWaiting[asset] = 'cut';
+      setState(() => _shape = _Shape.cut);
+    });
     unawaited(MaskCache.load(asset).then((_) {
-      if (mounted) setState(() => _here = true);
+      stillWaiting.remove(asset);
+      _deadline?.cancel();
+      if (mounted) setState(() => _shape = _Shape.torn);
     }, onError: (Object _) {
-      if (mounted) setState(() => _lost = true);
+      stillWaiting[asset] = 'never came';
+      _deadline?.cancel();
+      if (mounted) setState(() => _shape = _Shape.cut);
     }));
   }
 
   @override
-  Widget build(BuildContext context) =>
-      _here || _lost ? widget.child : Opacity(opacity: 0, child: widget.child);
+  Widget build(BuildContext context) {
+    final drawn = widget.draw(context, _shape);
+    return _shape == _Shape.waiting ? Opacity(opacity: 0, child: drawn) : drawn;
+  }
 }
 
 /// Lays the writing inside the part of the piece the tear cannot reach.
@@ -658,6 +749,13 @@ class _MaskedLayerState extends State<MaskedLayer> {
   /// mask does not exist are two different things, and they used to be the same thing here.
   bool _lost = false;
 
+  /// Whether it has been long enough that a mask still on its way is treated as one that is not
+  /// coming. The piece around this one settles for a cut sheet after [_patience]; without the same
+  /// deadline here, a mask evicted between that decision and this build would leave the hole this
+  /// exists to close.
+  bool _late = false;
+  Timer? _deadline;
+
   @override
   void initState() {
     super.initState();
@@ -674,19 +772,32 @@ class _MaskedLayerState extends State<MaskedLayer> {
   }
 
   void _resolve() {
+    _deadline?.cancel();
     final cached = MaskCache.peek(widget.maskAsset);
     if (cached != null) {
       _mask = cached;
       return;
     }
+    _late = false;
+    _deadline = Timer(_patience, () {
+      if (mounted && _mask == null) setState(() => _late = true);
+    });
     // a mask that is not baked yet leaves the sheet whole rather than blank
     unawaited(
       MaskCache.load(widget.maskAsset).then((img) {
+        _deadline?.cancel();
         if (mounted) setState(() => _mask = img);
       }, onError: (Object _) {
+        _deadline?.cancel();
         if (mounted) setState(() => _lost = true);
       }),
     );
+  }
+
+  @override
+  void dispose() {
+    _deadline?.cancel();
+    super.dispose();
   }
 
   @override
@@ -701,7 +812,7 @@ class _MaskedLayerState extends State<MaskedLayer> {
     // its paper is there, which is the next frame. If the mask never arrives — a build with a mask
     // missing from the bundle — the old behaviour is what is wanted, and _lost says so.
     if (mask == null) {
-      return _lost ? widget.child : Opacity(opacity: 0, child: widget.child);
+      return _lost || _late ? widget.child : Opacity(opacity: 0, child: widget.child);
     }
     // Composed at device pixels, not logical ones. A note is about 340 points wide and the screen
     // it is on is three times that, so a mask composed at 340 would be upsampled threefold before

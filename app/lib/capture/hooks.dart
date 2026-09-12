@@ -634,6 +634,11 @@ class CaptureHooks {
       // here recorded a decision rather than its outcome.
       'stocks_the_paper_had_not_arrived_for': PaperPiece.waitingForPaper.toList()..sort(),
       'paper_that_arrived_after_the_piece_was_drawn': PaperPiece.paperArrivedLate,
+      // A piece whose tear has not come out of the cache keeps its room and paints nothing, and
+      // after eighty milliseconds it settles for a cut sheet rather than staying a hole. Neither
+      // state says anything about itself in a frame; this is what says which happened, and to
+      // which piece.
+      'tears_that_had_not_arrived': PaperPiece.tearsThatHaveNotArrived,
       'masks_held': MaskCache.held,
       'masks_dropped_to_stay_inside_the_pool': MaskCache.dropped,
       // The stocks are held here rather than in Flutter's image cache now — see StockCache for
