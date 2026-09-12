@@ -1,6 +1,6 @@
 {
- "strings_read": 548,
- "literals_in_lib": 3976,
+ "strings_read": 557,
+ "literals_in_lib": 4037,
  "share_of_literals_read": 0.138,
  "in_a_display_position": 114,
  "the_rest_are_judged": "every other literal in a line of code that has a space in it or a mark a wire key would never carry. It used to read only a fixed list of call sites \u2014 Text(, Written(, hintText:, and six more \u2014 which is why a code critic counted 116 strings against 3,672 in lib. Reading them all costs some false positives (an asset query string, a fragment of an interpolation) and those are cheap: a string that is not shown to anybody still must not contain an exclamation mark.",
@@ -43,43 +43,68 @@
  "findings": [],
  "read": [
   {
-   "where": "app/lib/ambient/ambient.dart:78",
+   "where": "app/lib/ambient/ambient.dart:87",
    "text": "there now",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/ambient/ambient.dart:80",
+   "where": "app/lib/ambient/ambient.dart:89",
    "text": "$minutes minutes ago",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/ambient/ambient.dart:82",
+   "where": "app/lib/ambient/ambient.dart:91",
    "text": "${minutes ~/ 60} hours ago",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/ambient/ambient.dart:86",
+   "where": "app/lib/ambient/ambient.dart:95",
    "text": "nearly out of battery",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/ambient/ambient.dart:87",
+   "where": "app/lib/ambient/ambient.dart:96",
    "text": "nothing from them since you last looked",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/ambient/ambient.dart:88",
+   "where": "app/lib/ambient/ambient.dart:97",
    "text": " \u00b7 ",
    "in_a_display_position": false
   },
   {
+   "where": "app/lib/ambient/ambient_stub.dart:87",
+   "text": "not granted",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/ambient/ambient_web.dart:91",
+   "text": "this browser offers no navigator.serviceWorker, which is what a page on an ",
+   "in_a_display_position": false
+  },
+  {
    "where": "app/lib/ambient/ambient_web.dart:92",
+   "text": "origin the phone does not trust gets",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/ambient/ambient_web.dart:103",
    "text": "push/sw.js?profile=${Flags.profile}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/ambient/ambient_web.dart:137",
+   "where": "app/lib/ambient/ambient_web.dart:108",
+   "text": "the browser refused to register the worker: $e",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/ambient/ambient_web.dart:153",
    "text": "held out to you",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/ambient/ambient_web.dart:212",
+   "text": "a browser",
    "in_a_display_position": false
   },
   {
@@ -338,17 +363,22 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:434",
+   "where": "app/lib/feelings/corner.dart:488",
    "text": "family_${f.name}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:458",
+   "where": "app/lib/feelings/corner.dart:512",
    "text": "fan.${family.name}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/landing.dart:414",
+   "where": "app/lib/feelings/landing.dart:466",
+   "text": "landing.${arrival.feeling.id}",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/landing.dart:479",
    "text": " : ",
    "in_a_display_position": false
   },
@@ -378,42 +408,42 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/main.dart:65",
+   "where": "app/lib/main.dart:73",
    "text": "the framework",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/main.dart:67",
+   "where": "app/lib/main.dart:75",
    "text": "the library index",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/main.dart:69",
+   "where": "app/lib/main.dart:77",
    "text": "the ink plates",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/main.dart:71",
+   "where": "app/lib/main.dart:79",
    "text": "the desk",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/main.dart:73",
+   "where": "app/lib/main.dart:81",
    "text": "the log",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/main.dart:92",
+   "where": "app/lib/main.dart:100",
    "text": "the first frame",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/main.dart:141",
+   "where": "app/lib/main.dart:149",
    "text": "${(await getApplicationSupportDirectory()).path}/tls",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/main.dart:144",
+   "where": "app/lib/main.dart:152",
    "text": "transport ${Flags.transport} is not built yet",
    "in_a_display_position": false
   },
@@ -443,38 +473,53 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/library.dart:68",
+   "where": "app/lib/material/library.dart:84",
    "text": "MaterialLibrary.load() has not run",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/objects.dart:153",
+   "where": "app/lib/material/library.dart:249",
+   "text": ").last.replaceAll(",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/objects.dart:165",
    "text": "${id}_dusk",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:263",
+   "where": "app/lib/material/paper.dart:317",
    "text": "${tearId!}_shadow$suffix",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:315",
+   "where": "app/lib/material/paper.dart:362",
    "text": "${stockId}_dusk",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:368",
-   "text": "$stock ${px.width.round()}x${px.height.round()}",
-   "in_a_display_position": false
-  },
-  {
-   "where": "app/lib/material/paper.dart:425",
+   "where": "app/lib/material/paper.dart:380",
    "text": "${tearId!}_edge",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:998",
+   "where": "app/lib/material/paper.dart:920",
+   "text": ").replaceAll(",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/paper.dart:920",
+   "text": ").replaceAll(",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/paper.dart:1065",
    "text": "$asset@${w}x$h",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/paper.dart:1230",
+   "text": "$stock ${w.round()}x${h.round()}",
    "in_a_display_position": false
   },
   {
@@ -673,22 +718,22 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:59",
+   "where": "app/lib/modules/rituals/rituals_module.dart:57",
    "text": "$days days ago",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:60",
+   "where": "app/lib/modules/rituals/rituals_module.dart:58",
    "text": "${recent.length} kept \u00b7 $marks times \u00b7 the last $lately",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:103",
+   "where": "app/lib/modules/rituals/rituals_module.dart:101",
    "text": "nothing kept yet.",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:116",
+   "where": "app/lib/modules/rituals/rituals_module.dart:114",
    "text": "${r.marks.length} times",
    "in_a_display_position": false
   },
@@ -918,62 +963,62 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1070",
+   "where": "app/lib/regions/chat/chat_region.dart:1084",
    "text": "${scope.partner.name} ${S.typing}",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1082",
+   "where": "app/lib/regions/chat/chat_region.dart:1096",
    "text": "${S.replyingTo} ${_replyTo!.text ?? summaryOf(_replyTo!.event, me: scope.me)}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1232",
+   "where": "app/lib/regions/chat/chat_region.dart:1246",
    "text": "${(d.inDays / 30).round()} ${S.monthsUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1233",
+   "where": "app/lib/regions/chat/chat_region.dart:1247",
    "text": "${(d.inDays / 7).round()} ${S.weeksUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1234",
+   "where": "app/lib/regions/chat/chat_region.dart:1248",
    "text": "${d.inDays} ${S.daysUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1235",
+   "where": "app/lib/regions/chat/chat_region.dart:1249",
    "text": "$rows ${S.rowsUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1249",
+   "where": "app/lib/regions/chat/chat_region.dart:1263",
    "text": "${d.day} $month",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1249",
+   "where": "app/lib/regions/chat/chat_region.dart:1263",
    "text": "${d.day} $month ${d.year}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1496",
+   "where": "app/lib/regions/chat/chat_region.dart:1510",
    "text": "a photo",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1497",
+   "where": "app/lib/regions/chat/chat_region.dart:1511",
    "text": "take one",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1498",
+   "where": "app/lib/regions/chat/chat_region.dart:1512",
    "text": "a video",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1499",
+   "where": "app/lib/regions/chat/chat_region.dart:1513",
    "text": "film something",
    "in_a_display_position": false
   },
@@ -1023,22 +1068,22 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:223",
+   "where": "app/lib/regions/chat/viewer_page.dart:232",
    "text": "viewer_${widget.item.id}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:239",
+   "where": "app/lib/regions/chat/viewer_page.dart:248",
    "text": "put it back",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:322",
+   "where": "app/lib/regions/chat/viewer_page.dart:331",
    "text": "${_clock(at)} / ${_clock(total, total: true)}",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/chat/viewer_page.dart:360",
+   "where": "app/lib/regions/chat/viewer_page.dart:369",
    "text": "replaced per platform",
    "in_a_display_position": false
   },
@@ -1083,22 +1128,22 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/moments/moments_region.dart:596",
-   "text": " \u00b7 ",
-   "in_a_display_position": false
-  },
-  {
-   "where": "app/lib/regions/moments/moments_region.dart:713",
+   "where": "app/lib/regions/moments/moments_region.dart:605",
    "text": " \u00b7 ",
    "in_a_display_position": false
   },
   {
    "where": "app/lib/regions/moments/moments_region.dart:722",
+   "text": " \u00b7 ",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/regions/moments/moments_region.dart:731",
    "text": "$words \u00b7 ${S.notDeveloped}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/moments/moments_region.dart:834",
+   "where": "app/lib/regions/moments/moments_region.dart:843",
    "text": "EEE d MMM \u00b7 HH:mm",
    "in_a_display_position": false
   },
@@ -1263,17 +1308,17 @@
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/settings/notifications.dart:106",
+   "where": "app/lib/regions/settings/notifications.dart:113",
    "text": "quiet from",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/settings/notifications.dart:129",
+   "where": "app/lib/regions/settings/notifications.dart:143",
    "text": "wake me",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/settings/notifications.dart:131",
+   "where": "app/lib/regions/settings/notifications.dart:145",
    "text": "not at all",
    "in_a_display_position": false
   },
@@ -1423,17 +1468,17 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/scope.dart:42",
+   "where": "app/lib/scope.dart:43",
    "text": "sync: $line",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/scope.dart:196",
+   "where": "app/lib/scope.dart:222",
    "text": "AppScope missing",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/scope.dart:217",
+   "where": "app/lib/scope.dart:243",
    "text": "AppScope missing",
    "in_a_display_position": false
   },
@@ -2123,7 +2168,7 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/thread/note_body.dart:87",
+   "where": "app/lib/thread/note_body.dart:82",
    "text": " : DateFormat(",
    "in_a_display_position": false
   },
