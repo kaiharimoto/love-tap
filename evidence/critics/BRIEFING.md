@@ -110,6 +110,36 @@ noise was enough to pass, so half a second of a frozen sheet counted as motion. 
 in each entry carries the thresholds and the frame that came closest to failing. If your own eye
 disagrees with that number on a clip, say so and say where — the check is a floor, not a verdict.
 
+## Six things this cycle changed about the set itself
+
+**The stills are shot at a phone's width.** They were 480 by 1040 of CSS at three times scale —
+the 1440 by 3120 the brief asks for, laid out at a logical width no phone has and 120 points wider
+than every clip. They are 360 by 780 at four times scale now: the same pixels, the same minimum,
+and the width both phones and all five clips have. A row that reads differently here from how it
+reads in a clip is no longer the framing.
+
+**A reconnect is on the glass.** 08_state_propagating cuts the link to the far phone, lets it write
+two things while it is down, and puts it back. What the set had before was a headless harness's log
+saying twenty-six events queued and delivered gapless.
+
+**A note is taken back.** The far phone withdraws its last message in 13_messenger_states, so the
+still can frame a row that was really taken away rather than one marked withdrawn by hand.
+
+**The pocket is read back.** `crops/reception_picked_up.png` and
+`logs/reception_picked_up.report.json` are the phone being picked up after the pushes: what it is
+still holding, read from the platform through the app, which is the only place that can be read
+from. `held_by_the_phone` was empty in every report in the set because after the app was closed
+there was no app to ask.
+
+**`logs/holes.json` measures the desk, not the paper.** Its contact-shadow term walks off the tear's
+fringe before it starts — a torn edge in this build is about a centimetre of loose strands at phone
+scale, so a column stops reading as paper at the first gap between two fibres and the fixed band
+four to fourteen pixels later was among the strands rather than on the wood. The file carries the
+walk and what it changed on the capture before this one. A shadow that is there and a shadow that
+is hidden under fibres are different findings and it could not tell them apart.
+
+**`logs/apk.json` is a build made after the phone learned to serve over TLS**, not before it.
+
 ## The mission goal, as given to every critic
 
 An Android app and an Apple-compatible installable PWA that let exactly two people communicate

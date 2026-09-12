@@ -1590,59 +1590,6 @@ class _CutEdge extends CustomPainter {
   bool shouldRepaint(_CutEdge old) => old.seed != seed;
 }
 
-/// A torn sheet's shadow: the tear's own alpha, displaced, blurred and warm.
-class _TornShadow extends CustomPainter {
-  const _TornShadow({required this.asset, required this.lift, required this.alpha});
-  final String asset;
-  final double lift;
-  final double alpha;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final mask = MaskCache.peek(asset);
-    if (mask == null) return;
-    // Stretched rather than nine-sliced. A shadow this soft has no fibres left to keep at their
-    // rendered size, and nine-slicing it would put eight blurred seams across the one thing in the
-    // picture that has to have no edges of its own.
-    // Blurred through a layer, not through the paint. `Paint.maskFilter` is geometry-only: Skia
-    // drops an image draw that carries one, and this painted a perfectly invisible shadow for as
-    // long as it took to measure the wood under a sheet row by row and find a smooth ramp from the
-    // paper's own fade straight to the desk with no dip anywhere in it.
-    //
-    // Two passes, which is what a contact shadow is: the tight dark line where the sheet is down
-    // on the desk, and the wider softer one the lift throws past it. The same two `_CutShadow`
-    // draws for a straight edge, in the same numbers — but cut from the tear, so they follow every
-    // fibre instead of stopping at a rectangle the torn edge does not have.
-    final src = Rect.fromLTWH(0, 0, mask.width.toDouble(), mask.height.toDouble());
-    final dx = 0.6 + lift * 1.1, dy = 1.2 + lift * 2.2;
-    final blur = 1.4 + lift * 2.4;
-    void pass(double ox, double oy, double sigma, double a) {
-      final dst = Rect.fromLTWH(ox, oy, size.width, size.height);
-      canvas.saveLayer(
-        dst.inflate(sigma * 3 + 2),
-        Paint()..imageFilter = ui.ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
-      );
-      canvas.drawImageRect(
-        mask,
-        src,
-        dst,
-        Paint()
-          ..colorFilter = const ColorFilter.mode(Shadow.warm, BlendMode.srcIn)
-          ..color = Color.fromRGBO(0, 0, 0, a.clamp(0.0, 1.0))
-          ..filterQuality = FilterQuality.low,
-      );
-      canvas.restore();
-    }
-
-    pass(dx, dy, blur, alpha);
-    pass(dx * 0.45, dy * 0.45, blur * 0.35, alpha * 1.25);
-  }
-
-  @override
-  bool shouldRepaint(_TornShadow old) =>
-      old.asset != asset || old.lift != lift || old.alpha != alpha;
-}
-
 class _CutShadow extends CustomPainter {
   const _CutShadow({required this.lift, required this.alpha, this.seed = 0});
   final double lift;
