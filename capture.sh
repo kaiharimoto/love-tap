@@ -6,6 +6,8 @@
 #   ./capture.sh --no-build      # against the builds already on disk
 #   ./capture.sh --only=08_state_propagating --no-build --stamp=2026-09-12T00:07:53Z
 #                                # finish a run the machine did not survive, as part of that run
+#   ./capture.sh --only=06_unfolding --no-build --scenes-only --stamp=...
+#                                # one pass of a run split up; the derived checks wait for the last
 #
 # Nothing here composes, retouches, or upscales. Every still is a screenshot of the app running in
 # Playwright WebKit (the engine on the iPhone) or of the app running on the emulator, taken through
@@ -18,6 +20,7 @@ cd "$(dirname "$0")"
 
 BROWSER="webkit"
 BUILD="yes"
+DERIVED="yes"
 ONLY=""
 FRESH_PORT=8798
 DUSK_PORT=8797
@@ -41,6 +44,7 @@ for a in "$@"; do
     --browser=*) BROWSER="${a#*=}" ;;
     --no-build) BUILD="no" ;;
     --stamp=*) STAMP="${a#*=}" ;;
+    --scenes-only) DERIVED="no" ;;
     --frozen-now=*) FROZEN_NOW="${a#*=}" ;;
     -h|--help) sed -n '2,13p' "$0"; exit 0 ;;
     *) echo "capture.sh: don't know $a" >&2; exit 2 ;;
@@ -470,6 +474,16 @@ if [ -d evidence/frames/14_media_viewer ] && \
 fi
 
 # ---- derived: crops, strips, diffs, the capture log ------------------------------------------------
+#
+# Skippable, because a capture is two and a half hours and the machine it runs on is not. A run
+# split into passes — the stills, then a clip, then another — wants these once, on the pass that
+# finishes the set, not five times. `--scenes-only` stops here; the frames each pass shot are kept
+# for the pass that folds them in.
+if [ "$DERIVED" = "no" ]; then
+  echo "· stopping before the derived checks (--scenes-only)"
+  exit 0
+fi
+
 if [ -f evidence/02_chat.png ]; then
   python3 tools/check/crops.py evidence/02_chat.png --out-dir evidence/crops --scale 3 >"$LOG/crops.json"
   # and the letters on the hand crop laid over each other, the way the critic did it
