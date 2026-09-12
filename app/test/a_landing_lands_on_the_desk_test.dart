@@ -27,16 +27,19 @@ void main() {
     await MaterialLibrary.load();
   });
 
-  test('it is put away as soon as it has landed, not when the pattern ends', () {
+  test('it lies where it landed for the whole pattern, and never less than the bouncing', () {
+    // Cutting the dwell to the last bounce was tried and measured. The reasoning was that the
+    // feeling being felt is the pattern, which plays whether the object is on the desk or on the
+    // shelf, so lying there longer only buys occlusion. What it actually buys is the clip: the
+    // object on the desk under a page moving to its rhythm is the only thing happening in
+    // 07_feeling_landing, and with the dwell cut the stage emptied at frame 66 of a 150-frame run
+    // — 154 held frames where the capture before had none. Where it lands is what answers the
+    // occlusion, and that is the case below.
     for (final f in kBuiltInFeelings) {
       for (final i in const [0.3, 0.55, 1.0]) {
         final dwell = Fall.dwellSeconds(f, i);
-        final rest = Fall.restSeconds(f, i);
-        expect(dwell, lessThanOrEqualTo(rest + 1e-9),
-            reason: '${f.id} is put away after the pattern it is meant to be played under');
-        expect(dwell, lessThanOrEqualTo(0.62),
-            reason: '${f.id} at $i lies on the glass for ${dwell}s');
-        // and it is still there long enough to have actually landed
+        expect(dwell, closeTo(Fall.restSeconds(f, i), 1e-9),
+            reason: '${f.id} at $i is put away before the pattern it is played under has finished');
         expect(dwell, greaterThanOrEqualTo(Fall.contacts(i).last - 1e-9),
             reason: '${f.id} at $i is put away before it has stopped bouncing');
       }

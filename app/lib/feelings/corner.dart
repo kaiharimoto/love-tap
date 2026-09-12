@@ -195,8 +195,11 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
   }
 
   void _onDriven(Duration now) {
-    // A finger on a tile is a thing that is happening, so the frame has to change while it is —
-    // see `_charging`, which is where that now lives, for both clocks rather than this one.
+    // A finger on a tile is a thing that is happening, so the frame has to change while it is.
+    // `_charging` is the mechanism that works on a phone; this is the one that is known to run
+    // under the harness, and the twelfth capture is why both are here — the hold's forty held
+    // frames did not move when the ticker was the only thing asking.
+    if (_heldSince != null && mounted) setState(() {});
     final from = _curlFrom;
     if (from == null) return;
     final span = _open ? Motion.turn : Motion.settle;

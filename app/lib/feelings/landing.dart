@@ -118,16 +118,19 @@ class Fall {
   /// How long it takes to be put away into the recent row once it has rested.
   static const putAwaySeconds = 0.5;
 
-  /// How long it lies where it landed before it is put away.
+  /// How long it lies where it landed before it is put away: the whole length of the pattern.
   ///
-  /// This was the whole length of the pattern — up to 1.7 seconds of an object sitting on the
-  /// glass — on the reasoning that the thing lying there *is* the feeling being felt. It is not:
+  /// Cutting it to the last bounce was tried and measured, and it is worse. The reasoning was that
   /// the feeling being felt is the pattern, which plays whether the object is on the desk or on
-  /// the shelf, and the page carries it either way (`pageLiftAt`). What lying there longer buys is
-  /// occlusion. So it lies there long enough to have landed — the last bounce, or a third of a
-  /// second, whichever is later — and the rest of the pattern plays with it filed.
+  /// the shelf, so lying there longer only buys occlusion. What it actually buys is the clip: the
+  /// object on the desk under a page moving to its rhythm is the only thing happening in
+  /// 07_feeling_landing, and with the dwell cut the stage emptied at frame 66 of a 150-frame run.
+  /// The frame check counted 154 held frames where the capture before had none.
+  ///
+  /// The occlusion is answered by *where* it lands — the band of bare desk above the tab strip,
+  /// rather than the middle of whatever the region has on the glass — not by how long it stays.
   static double dwellSeconds(Feeling feeling, double intensity) =>
-      math.min(restSeconds(feeling, intensity), math.max(contacts(intensity).last, 0.34));
+      restSeconds(feeling, intensity);
 
   /// How much the thing is compressed at [t]: one over the first few hundredths of a second
   /// after each contact, biggest at the first.
