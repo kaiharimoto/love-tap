@@ -11,6 +11,8 @@
 //
 // So the hold lifts the thing off the sheet, the way the landing puts it down, and the ticker that
 // drives it is the one both clocks turn. Both halves are read here from the widgets themselves.
+import 'dart:async';
+
 import 'package:desk/capture/bus.dart';
 import 'package:desk/capture/hooks.dart';
 import 'package:desk/feelings/builtins.dart';
@@ -202,10 +204,15 @@ void main() {
     // and in a test no frame happens until the test asks for one, so awaiting it first is a
     // two-second deadlock forty times over.
     for (var i = 0; i < 40; i++) {
-      final stepping = DrivenClock.step(32);
+      // Not awaited. `step` advances the clock synchronously and then waits on two post-frame
+      // callbacks with a two-second real-time timeout — and a widget test's clock is fake, so that
+      // timeout never fires and the wait is only as bounded as the pumps that feed it. Awaiting it
+      // hung this test for ten minutes inside the capture's own pre-shoot suite and stopped a
+      // capture dead, while passing in two seconds when the file was run alone. The pumps below
+      // are what produce the frames; nothing here needs to wait for them.
+      unawaited(DrivenClock.step(32));
       await tester.pump();
       await tester.pump();
-      await stepping;
     }
     final later = liftNow();
     expect(later, greaterThan(atFirst + 0.1),
