@@ -495,7 +495,16 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     } else if (anchor.startsWith('types:')) {
       final wanted = anchor.substring(6).split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
       final windows = _tightestWindows(items, wanted);
-      if (windows.isEmpty) return;
+      if (windows.isEmpty) {
+        // Say so. A framing instruction that cannot be satisfied used to leave the view wherever
+        // it was and write `anchor: null` into the record, which reads as *no anchor was asked
+        // for*: 13_messenger_states was framed on the end of the thread for two captures while its
+        // scene asked for a stretch holding an edited row, a withdrawn one and one still queued,
+        // and nothing anywhere said that no such stretch exists.
+        _lastAnchor = 'types:${wanted.join(',')}: no stretch of ${items.length} rows holds all of '
+            'them, so the thread was not moved';
+        return;
+      }
       // Every equally tight stretch, tried and *measured*, latest first, until one of them holds
       // the hero's own standard.
       //

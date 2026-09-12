@@ -3,73 +3,99 @@
  "view": {
   "region": "chat",
   "visible": [
-   "0001MCJ1M0S7HRNF0F22N9472G",
-   "0001MCJ1M0S7HRNF0F22N9472K",
-   "0001MCJ1M0S7HRNF0F22N94728"
+   "0001MCJ1M0Y4GX3FAR7200SH27",
+   "0001MCJ1M0Y4GX3FAR7200SH28",
+   "0001MCJ1M0Y4GX3FAR7200SH29",
+   "0001MCJ1M0Y4GX3FAR7200SH2B",
+   "0001MCJ1M0Y4GX3FAR7200SH21"
   ],
   "whole_on_the_glass": [
-   "0001MCJ1M0S7HRNF0F22N9472K",
-   "0001MCJ1M0S7HRNF0F22N94728"
+   "0001MCJ1M0Y4GX3FAR7200SH28",
+   "0001MCJ1M0Y4GX3FAR7200SH29",
+   "0001MCJ1M0Y4GX3FAR7200SH2B",
+   "0001MCJ1M0Y4GX3FAR7200SH21"
   ],
   "clipped_at_an_edge": {
-   "0001MCJ1M0S7HRNF0F22N9472G": 0.779
+   "0001MCJ1M0Y4GX3FAR7200SH27": 0.803
   },
   "delivery": {
-   "0001MCJ1M0S7HRNF0F22N9472G": {
+   "0001MCJ1M0Y4GX3FAR7200SH27": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0S7HRNF0F22N9472K": {
+   "0001MCJ1M0Y4GX3FAR7200SH28": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0S7HRNF0F22N94728": {
+   "0001MCJ1M0Y4GX3FAR7200SH29": {
+    "state": "sent",
+    "says": "sent"
+   },
+   "0001MCJ1M0Y4GX3FAR7200SH2B": {
+    "state": "sent",
+    "says": "sent"
+   },
+   "0001MCJ1M0Y4GX3FAR7200SH21": {
     "state": "refused",
     "says": "it would not go"
    }
   },
   "refusals_on_the_glass": {
-   "0001MCJ1M0S7HRNF0F22N94728": "this phone is on an older version and cannot read that"
+   "0001MCJ1M0Y4GX3FAR7200SH21": "this phone is on an older version and cannot read that"
   },
   "states_on_the_glass": {
-   "sent": 1,
+   "sent": 3,
    "it would not go": 1
   },
   "reactions": {},
   "edited": [],
   "taken_back": [],
   "scroll": {
-   "first": 8073,
-   "last": 8076,
-   "of": 8076
+   "first": 8072,
+   "last": 8077,
+   "of": 8077
   },
   "paper": [
-   "0001MCJ1M0S7HRNF0F22N9472G",
-   "0001MCJ1M0S7HRNF0F22N9472K",
-   "0001MCJ1M0S7HRNF0F22N94728"
+   "0001MCJ1M0Y4GX3FAR7200SH27",
+   "0001MCJ1M0Y4GX3FAR7200SH28",
+   "0001MCJ1M0Y4GX3FAR7200SH29",
+   "0001MCJ1M0Y4GX3FAR7200SH2B",
+   "0001MCJ1M0Y4GX3FAR7200SH21"
   ],
-  "paper_whole_on_the_glass": 3,
+  "paper_whole_on_the_glass": 5,
   "rows_cost": [
+   {
+    "row": 8072,
+    "type": "message",
+    "tall": 188,
+    "top": -37
+   },
    {
     "row": 8073,
     "type": "message",
-    "tall": 131,
-    "top": -29
+    "tall": 94,
+    "top": 151
    },
    {
     "row": 8074,
     "type": "message",
-    "tall": 92,
-    "top": 102
+    "tall": 129,
+    "top": 245
    },
    {
     "row": 8075,
     "type": "message",
-    "tall": 172,
-    "top": 194
+    "tall": 92,
+    "top": 374
+   },
+   {
+    "row": 8076,
+    "type": "message",
+    "tall": 188,
+    "top": 466
    }
   ],
-  "viewport_tall": 371.9,
+  "viewport_tall": 663.5,
   "composer": "the second one, then",
   "attaching": true,
   "replying_to": "0001M2ZNX8AF4811Y2F7FNAGMG",
@@ -77,7 +103,7 @@
   "editing": null,
   "anchor": null,
   "kinds": {
-   "message": 3
+   "message": 5
   },
   "folded_in": {
    "reaction": 0,
@@ -88,34 +114,42 @@
   "partner_typing": true
  },
  "visible": [
-  "0001MCJ1M0S7HRNF0F22N9472G",
-  "0001MCJ1M0S7HRNF0F22N9472K",
-  "0001MCJ1M0S7HRNF0F22N94728"
+  "0001MCJ1M0Y4GX3FAR7200SH27",
+  "0001MCJ1M0Y4GX3FAR7200SH28",
+  "0001MCJ1M0Y4GX3FAR7200SH29",
+  "0001MCJ1M0Y4GX3FAR7200SH2B",
+  "0001MCJ1M0Y4GX3FAR7200SH21"
  ],
  "paper": [
-  "0001MCJ1M0S7HRNF0F22N9472G",
-  "0001MCJ1M0S7HRNF0F22N9472K",
-  "0001MCJ1M0S7HRNF0F22N94728"
+  "0001MCJ1M0Y4GX3FAR7200SH27",
+  "0001MCJ1M0Y4GX3FAR7200SH28",
+  "0001MCJ1M0Y4GX3FAR7200SH29",
+  "0001MCJ1M0Y4GX3FAR7200SH2B",
+  "0001MCJ1M0Y4GX3FAR7200SH21"
  ],
  "tears": {
-  "0001MCJ1M0S7HRNF0F22N9472G": "tear_013",
-  "0001MCJ1M0S7HRNF0F22N9472K": "tear_018",
-  "0001MCJ1M0S7HRNF0F22N94728": "tear_055"
+  "0001MCJ1M0Y4GX3FAR7200SH27": "tear_051",
+  "0001MCJ1M0Y4GX3FAR7200SH28": "tear_013",
+  "0001MCJ1M0Y4GX3FAR7200SH29": "tear_035",
+  "0001MCJ1M0Y4GX3FAR7200SH2B": "tear_018",
+  "0001MCJ1M0Y4GX3FAR7200SH21": "tear_004"
  },
  "stocks": {
-  "0001MCJ1M0S7HRNF0F22N9472G": "legal_01",
-  "0001MCJ1M0S7HRNF0F22N9472K": "looseleaf_03",
-  "0001MCJ1M0S7HRNF0F22N94728": "looseleaf_01"
+  "0001MCJ1M0Y4GX3FAR7200SH27": "looseleaf_02",
+  "0001MCJ1M0Y4GX3FAR7200SH28": "legal_02",
+  "0001MCJ1M0Y4GX3FAR7200SH29": "looseleaf_03",
+  "0001MCJ1M0Y4GX3FAR7200SH2B": "looseleaf_02",
+  "0001MCJ1M0Y4GX3FAR7200SH21": "lined_04"
  },
  "scroll": {
-  "first": 8073,
-  "last": 8076,
-  "of": 8076
+  "first": 8072,
+  "last": 8077,
+  "of": 8077
  },
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 416,
  "seed": 20260903,
- "events": 14079,
+ "events": 14078,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -127,53 +161,59 @@
  "paper_stocks": 54,
  "the_smallest_patch_of_a_stock_anything_took": [
   "index_02 2560x1593",
-  "259x168 of it, at its own size",
-  43592.72727272728
+  "266x126 of it, at its own size",
+  33602.72727272727
  ],
- "paper_at_its_own_size": 138,
+ "paper_at_its_own_size": 197,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [
   "sticky_blue_02"
  ],
- "paper_that_arrived_after_the_piece_was_drawn": 17,
+ "paper_that_arrived_after_the_piece_was_drawn": 20,
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 66,
+ "masks_dropped_to_stay_inside_the_pool": 81,
  "stocks_held": 10,
  "stocks_held_bytes": 144780080,
- "stocks_dropped_to_stay_inside_the_pool": 8,
+ "stocks_dropped_to_stay_inside_the_pool": 11,
  "image_cache": {
-  "held": 28,
-  "bytes": 33699536,
+  "held": 31,
+  "bytes": 36406928,
   "budget": 402653184,
-  "live": 26,
+  "live": 29,
   "still_decoding": 0
  },
  "setup_showing": false,
  "fold": {
-  "sequence": null
+  "sequence": "unfold_thirds",
+  "length": 142,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
  },
  "sensation": null,
  "asked_a_motor_for": [],
  "the_launch_took": {
   "the framework": 7,
-  "the library index": 20,
-  "the ink plates": 45,
-  "the desk": 162,
-  "the log": 612,
-  "the first frame": 337,
-  "everything": 1184
+  "the library index": 16,
+  "the ink plates": 46,
+  "the desk": 172,
+  "the log": 654,
+  "the first frame": 368,
+  "everything": 1263
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 9,
-  "pushed": 11,
+  "rounds": 10,
+  "pushed": 10,
   "refused": 1,
-  "pulled": 11,
+  "pulled": 12,
   "blobs_fetched": 0,
   "faults": 7,
   "last_fault": "dropped (POST /events)",
-  "pending": 3,
+  "pending": 2,
   "refused_in_the_outbox": 1,
   "cursor": 14076,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
@@ -185,8 +225,8 @@
    "peer_cursor": 14075,
    "our_cursor": 14075,
    "last_error": null,
-   "since": "2026-09-12T00:28:33.993Z",
-   "last_contact": "2026-09-12T00:30:24.338Z",
+   "since": "2026-09-12T16:18:22.750Z",
+   "last_contact": "2026-09-12T16:20:05.159Z",
    "certificate": null,
    "setup_address": null
   }
