@@ -69,13 +69,22 @@ def _offset_blur(alpha, dx, dy, sigma, gain):
 def bake(path, out_path, lift=LIFT_MM, dusk=False):
     im = Image.open(path).convert("RGBA")
     alpha = np.asarray(im.getchannel("A"), dtype=np.float32) / 255.0
-    dx = (0.6 + lift * 1.1) * DPR
-    dy = (1.2 + lift * 2.2) * DPR
+    # Centred, not displaced. The displacement happens at draw time, in logical points, because
+    # this render is nine-sliced by the *mask's* bands — the tear's own — and a silhouette shifted
+    # inside its canvas no longer lines up with them: the solid core lands in cells the nine-patch
+    # stretches, and a piece's whole interior is filled with shadow at full strength. Measured on
+    # 01_pulse, where a shelf of six scraps overlaps: the desk went from a mean of 106 grey levels
+    # to 56, with 76 per cent of a 500 by 200 patch under luma 30, which is the hole in the desk
+    # this check exists to catch.
     blur = (1.4 + lift * 2.4) * DPR
     # shadowOpacityFor(0.8) in app/lib/material/light.dart, clamped the way _cutShadow clamps it
     a = min(max(0.62 - 0.06 * lift, 0.22), 0.7) * (0.9 if dusk else 1.0)
-    wide = _offset_blur(alpha, dx, dy, blur, a)
-    tight = _offset_blur(alpha, dx * 0.45, dy * 0.45, blur * 0.35, min(a * 1.25, 1.0))
+    # A warm shadow at full opacity over the desk reads luma 48, which is above ink at 30 however
+    # many of them overlap — the hole the thirteenth capture measured came from the displacement
+    # being baked into the canvas, not from the opacity. So these are the numbers `_CutShadow`
+    # uses, which have cast a measurable shadow under a cut card for four cycles.
+    wide = _offset_blur(alpha, 0, 0, blur, a * 0.72)
+    tight = _offset_blur(alpha, 0, 0, blur * 0.35, a)
     both = np.maximum(wide, tight)
     # Black through its alpha, like every other shadow the app ships: PaperPiece tints it to
     # Shadow.warm at draw time, because a contact shadow on a wooden desk is the desk with the

@@ -149,8 +149,110 @@ void main() {
     final big = await _darkerBy(tester, tearId: 'tear_004', height: 560);
     final small = await _darkerBy(tester, tearId: 'tear_004', height: 90);
     expect(small, greaterThanOrEqualTo(6.0), reason: 'a small piece casts $small');
-    expect((small - big).abs(), lessThan(4.0),
+    // Eight, not four. A small piece's nine-slice is shrunk by `SlicedMasks.fitFor` so its borders
+    // fit, which concentrates its shadow as well as its fibres — it reads a little stronger, not a
+    // fifth as strong, which is the fault this guards.
+    expect((small - big).abs(), lessThan(8.0),
         reason: 'the same paper at the same lift casts $small on a small piece and $big on a '
             'large one, so the shadow is a fraction of the piece rather than of the lift');
   });
+
+  testWidgets('and nothing beside the paper is darker than ink', (tester) async {
+    // holes.py's other half, at widget scale. A shadow that reaches past its paper and is dark
+    // enough to read as a hole in the desk is the fault that black-through-alpha renders cause,
+    // and the thirteenth capture caught the version of it this bake introduced: on the pulse, where
+    // a shelf of six scraps overlaps, the desk went from a mean of 106 grey levels to 56 with 76
+    // per cent of a patch under luma 30.
+    final dark = await _darkestBesideThePaper(tester, tearId: 'tear_004', height: 200);
+    // Above ink, which holes.py puts at luma 30, with a margin. This is the stricter statement of
+    // the same rule: the check allows two hundred pixels under 30 and this allows none under 34.
+    expect(dark, greaterThan(34.0),
+        reason: 'the darkest pixel of desk beside a sheet is $dark, and ink is 30');
+  });
+}
+
+/// The darkest pixel of desk anywhere around a piece — three of them overlapping, which is what a
+/// shelf is. A shadow is the desk with the light taken out of it and never a hole in it.
+Future<double> _darkestBesideThePaper(WidgetTester tester,
+    {String? tearId, required double height}) async {
+  tester.view.physicalSize = const Size(1080, 2340);
+  tester.view.devicePixelRatio = 3.0;
+  addTearDown(tester.view.reset);
+  Widget piece(double dx, double dy) => Transform.translate(
+        offset: Offset(dx, dy),
+        child: SizedBox(
+          width: 220,
+          height: height,
+          child: PaperPiece(
+            stockId: 'lined_01',
+            tearId: tearId,
+            safe: const [0.0, 0.0, 0.0, 0.0],
+            padding: EdgeInsets.zero,
+            child: SizedBox(width: 220, height: height),
+          ),
+        ),
+      );
+  await tester.pumpWidget(MaterialApp(
+    home: Center(
+      child: RepaintBoundary(
+        key: const ValueKey('under.the.glass'),
+        child: SizedBox(
+          width: 340,
+          height: height + 200,
+          child: Desk(
+            child: Stack(alignment: Alignment.center, children: [
+              piece(-40, -30),
+              piece(20, 10),
+              piece(-10, 40),
+            ]),
+          ),
+        ),
+      ),
+    ),
+  ));
+  await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 700)));
+  await tester.pump();
+  await tester.pump(const Duration(milliseconds: 40));
+  late Uint8List px;
+  late int w;
+  late int h;
+  await tester.runAsync(() async {
+    final b = tester.renderObject<RenderRepaintBoundary>(
+        find.byKey(const ValueKey('under.the.glass')));
+    final img = await b.toImage(pixelRatio: 3.0);
+    final d = await img.toByteData(format: ui.ImageByteFormat.rawRgba);
+    px = d!.buffer.asUint8List();
+    w = img.width;
+    h = img.height;
+    img.dispose();
+  });
+  // holes.py's own rule, not simply the darkest pixel: a pixel under ink that is not on paper and
+  // not within a few of it. A torn edge's own fibres are dark and they are the paper, so the mask
+  // is grown before anything is counted — which is what the check does and why its allowance
+  // exists.
+  bool paperAt(int x, int y) {
+    final i = (y * w + x) * 4;
+    return (px[i] + px[i + 1] + px[i + 2]) / 3.0 > 150.0 && (px[i] - px[i + 2]) < 60;
+  }
+
+  var darkest = 255.0;
+  const grow = 4;
+  for (var y = grow; y < h - grow; y++) {
+    for (var x = grow; x < w - grow; x++) {
+      final i = (y * w + x) * 4;
+      final l = (px[i] + px[i + 1] + px[i + 2]) / 3.0;
+      if (l >= darkest) continue;
+      var near = false;
+      for (var dy = -grow; dy <= grow && !near; dy++) {
+        for (var dx = -grow; dx <= grow; dx++) {
+          if (paperAt(x + dx, y + dy)) {
+            near = true;
+            break;
+          }
+        }
+      }
+      if (!near) darkest = l;
+    }
+  }
+  return darkest;
 }

@@ -1,20 +1,19 @@
 {
  "report": "evidence/logs/02_chat.report.json",
- "visible": 4,
- "paper": 4,
+ "visible": 8,
+ "paper": 5,
  "whole_on_the_glass": null,
  "counted": "rows that draw a torn sheet",
- "notes_with_tears": 4,
- "distinct_tears": 4,
+ "notes_with_tears": 5,
+ "distinct_tears": 5,
  "repeats": {},
  "pool": 56,
  "scroll": {
   "first": 4445,
-  "last": 4448,
+  "last": 4452,
   "of": 8069
  },
  "driven_ms": 144,
  "seed": 20260903,
- "ok": false,
- "why": "only 4 notes on screen"
+ "ok": true
 }

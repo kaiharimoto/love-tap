@@ -323,7 +323,20 @@ class PaperPiece extends StatelessWidget {
   /// scroll's window is a hundred and twenty blurred layers a frame, and the scroll is the
   /// messenger row's own named failure. A blur of a fixed image is a constant.
   Widget _tornShadow(BuildContext context, String suffix) => Positioned.fill(
-        child: IgnorePointer(
+        // Displaced here, in logical points off the lift, rather than inside the render.
+        //
+        // The render is nine-sliced by the tear's own bands, and a silhouette shifted inside its
+        // own canvas no longer lines up with them — the solid core lands in cells the nine-patch
+        // stretches, and a piece's whole interior fills with shadow at full strength. On a shelf
+        // where six scraps overlap that took the desk from a mean of 106 grey levels to 56.
+        child: Transform.translate(
+          // `_CutShadow`'s own displacement, not `shadowOffsetFor`'s. The two disagree — 1.0 by 1.3
+          // logical points against 1.5 by 3.0 — and the larger is the one that has cast a
+          // measurable shadow under a cut card for four cycles: at the smaller, with the render
+          // centred and blurred over ten device pixels, the penumbra is back underneath the paper
+          // and a sheet reads 1.1 grey levels against a floor of 6.
+          offset: Offset(0.6 + liftMm * 1.1, 1.2 + liftMm * 2.2),
+          child: IgnorePointer(
           child: NineSliced(
             asset: tearAsset('${tearId!}_shadow$suffix'),
             tint: Shadow.warm,
@@ -332,6 +345,7 @@ class PaperPiece extends StatelessWidget {
             // under every sheet for five cycles.
             filterQuality: FilterQuality.low,
           ),
+        ),
         ),
       );
 

@@ -3,119 +3,125 @@
  "why_it_is_not_gated": "the stock is drawn at whatever scale the piece turns out to be, so its rule pitch on the glass follows the piece's width, while the text's line height follows its point size. Nothing makes them agree. Making them agree means laying the text out against the paper it is drawn on \u2014 the pitch, and the phase of the first rule under the seeded patch offset \u2014 which is a change to every note in the app and wants a cycle of its own.",
  "stills": {
   "01_pulse.png": {
-   "ruled_lines": 6,
-   "written_lines": 39,
-   "rule_pitch_px": 70.5,
-   "lines_measured": 9,
+   "ruled_lines": 16,
+   "written_lines": 31,
+   "rule_pitch_px": 71.0,
+   "lines_measured": 12,
    "off_the_line": {
-    "median": 0.305,
-    "p90": 0.472
+    "median": 0.229,
+    "p90": 0.401
    }
   },
   "02_chat.png": {
-   "ruled_lines": 17,
-   "written_lines": 36,
-   "rule_pitch_px": 80.5,
-   "lines_measured": 20,
+   "ruled_lines": 14,
+   "written_lines": 43,
+   "rule_pitch_px": 81.0,
+   "lines_measured": 24,
    "off_the_line": {
-    "median": 0.304,
-    "p90": 0.62
+    "median": 0.333,
+    "p90": 0.592
    }
   },
   "03_us.png": {
-   "ruled_lines": 16,
-   "written_lines": 54,
-   "rule_pitch_px": 113.5,
-   "lines_measured": 42,
+   "ruled_lines": 13,
+   "written_lines": 48,
+   "rule_pitch_px": 179.5,
+   "lines_measured": 45,
    "off_the_line": {
-    "median": 0.368,
-    "p90": 0.871
+    "median": 0.248,
+    "p90": 0.62
    }
   },
   "04_moments.png": {
-   "ruled_lines": 2,
-   "written_lines": 49,
-   "why": "not enough ruled paper or not enough writing on this still to measure"
+   "ruled_lines": 6,
+   "written_lines": 41,
+   "rule_pitch_px": 599.0,
+   "lines_measured": 41,
+   "off_the_line": {
+    "median": 0.286,
+    "p90": 0.587
+   }
   },
   "05_settings.png": {
-   "ruled_lines": 11,
-   "written_lines": 33,
-   "rule_pitch_px": 114.2,
-   "lines_measured": 16,
+   "ruled_lines": 17,
+   "written_lines": 35,
+   "rule_pitch_px": 113.8,
+   "lines_measured": 24,
    "off_the_line": {
-    "median": 0.241,
-    "p90": 0.781
+    "median": 0.264,
+    "p90": 0.466
    }
   },
   "10_first_run.png": {
-   "ruled_lines": 12,
-   "written_lines": 20,
-   "rule_pitch_px": 81.0,
-   "lines_measured": 16,
+   "ruled_lines": 6,
+   "written_lines": 17,
+   "rule_pitch_px": 114.0,
+   "lines_measured": 15,
    "off_the_line": {
-    "median": 0.463,
-    "p90": 0.647
+    "median": 0.423,
+    "p90": 0.744
    }
   },
   "12_search.png": {
-   "ruled_lines": 9,
-   "written_lines": 43,
-   "rule_pitch_px": 147.2,
-   "lines_measured": 23,
+   "ruled_lines": 15,
+   "written_lines": 49,
+   "rule_pitch_px": 81.5,
+   "lines_measured": 29,
    "off_the_line": {
-    "median": 0.356,
-    "p90": 0.772
+    "median": 0.387,
+    "p90": 0.72
    }
   },
   "13_messenger_states.png": {
-   "ruled_lines": 11,
-   "written_lines": 29,
-   "rule_pitch_px": 70.2,
-   "lines_measured": 9,
+   "ruled_lines": 15,
+   "written_lines": 38,
+   "rule_pitch_px": 71.2,
+   "lines_measured": 19,
    "off_the_line": {
-    "median": 0.313,
-    "p90": 0.865
+    "median": 0.421,
+    "p90": 0.792
    }
   },
   "14_media_viewer.png": {
-   "ruled_lines": 13,
-   "written_lines": 21,
-   "rule_pitch_px": 71.0,
-   "lines_measured": 13,
+   "ruled_lines": 10,
+   "written_lines": 16,
+   "rule_pitch_px": 98.0,
+   "lines_measured": 11,
    "off_the_line": {
-    "median": 0.458,
-    "p90": 0.727
+    "median": 0.128,
+    "p90": 0.398
    }
   },
   "17_setup_pwa.png": {
    "ruled_lines": 17,
-   "written_lines": 29,
+   "written_lines": 31,
    "rule_pitch_px": 71.0,
-   "lines_measured": 18,
+   "lines_measured": 20,
    "off_the_line": {
-    "median": 0.447,
-    "p90": 0.896
+    "median": 0.342,
+    "p90": 0.773
    }
   }
  },
- "median_across_the_set": 0.356,
+ "median_across_the_set": 0.309,
  "what_that_number_means": "writing laid out with no relation to the rules under it lands uniformly between them, which averages 0.25. On the line is 0. The set reads 0.33, so the writing is not on the rules and is not even accidentally near them: the beat between the text's line height and the paper's pitch pushes it past random.",
- "stills_measured": 9,
+ "stills_measured": 10,
  "the_same_paper_is_not_the_same_size": {
   "rule_pitch_px": {
-   "01_pulse.png": 70.5,
-   "02_chat.png": 80.5,
-   "03_us.png": 113.5,
-   "05_settings.png": 114.2,
-   "10_first_run.png": 81.0,
-   "12_search.png": 147.2,
-   "13_messenger_states.png": 70.2,
-   "14_media_viewer.png": 71.0,
+   "01_pulse.png": 71.0,
+   "02_chat.png": 81.0,
+   "03_us.png": 179.5,
+   "04_moments.png": 599.0,
+   "05_settings.png": 113.8,
+   "10_first_run.png": 114.0,
+   "12_search.png": 81.5,
+   "13_messenger_states.png": 71.2,
+   "14_media_viewer.png": 98.0,
    "17_setup_pwa.png": 71.0
   },
-  "smallest": 70.2,
-  "largest": 147.2,
-  "ratio": 2.1,
+  "smallest": 71.0,
+  "largest": 599.0,
+  "ratio": 8.44,
   "the_library_does_not_rule_them_all_alike": {
    "mm_per_rule": {
     "lined": 8.0,

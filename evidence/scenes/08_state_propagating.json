@@ -204,13 +204,19 @@
   },
   {
    "do": "wait",
-   "ms": 1800
+   "ms": 900
   },
   {
    "do": "slowSend",
-   "text": "on my way, i think",
-   "ms": 9000,
-   "why": "Written into a link that is cut, so the row sits in the outbox saying so."
+   "text": "on my way \u2014 leaving in ten",
+   "ms": 9000
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/08_state_propagating",
+   "count": 40,
+   "ms": 16,
+   "why": "Filmed while the note is going nowhere, not after it has stopped. The thirteenth capture put 48 frames after the link was already cut and the row had already settled: 47 of the 48 were identical to the one before. A note failing to go is an event and takes about half a second; a note that has failed is a still picture."
   },
   {
    "do": "far",
@@ -222,27 +228,7 @@
   },
   {
    "do": "wait",
-   "ms": 1400
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 48,
-   "ms": 16,
-   "drive": {
-    "kind": "fling",
-    "velocity": -3600,
-    "at": [
-     0,
-     18,
-     36
-    ]
-   },
-   "why": "The near phone does what a person does when the other one has gone quiet: reads back through what they said. Every frame of a thread moving differs from the one before it, and the two things the far phone is writing meanwhile are not on this glass."
-  },
-  {
-   "do": "scrollTo",
-   "arg": "end"
+   "ms": 1200
   },
   {
    "do": "cut",
@@ -252,19 +238,15 @@
    "do": "sync"
   },
   {
-   "do": "awaitArrival"
-  },
-  {
    "do": "frames",
    "dir": "evidence/frames/08_state_propagating",
-   "count": 48,
+   "count": 56,
    "ms": 16,
-   "why": "Both of the far phone's notes land in the order they were written, and the one that would not go goes."
+   "why": "No awaitArrival before this. Waiting for the arrival and then filming is filming the aftermath \u2014 45 of 48 frames identical last capture. The link comes back and the two notes the far phone wrote while it was down land inside these frames, in the order they were written."
   },
   {
    "do": "report",
-   "out": "evidence/logs/08_state_propagating.report.json",
-   "at": "08_state_propagating"
+   "out": "evidence/logs/08_state_propagating.report.json"
   }
  ]
 }
