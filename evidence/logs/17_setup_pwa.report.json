@@ -9,7 +9,7 @@
  "tears": {},
  "stocks": {},
  "scroll": null,
- "now": "2026-09-11T21:30:28.300Z",
+ "now": "2026-09-12T00:35:10.145Z",
  "driven_ms": 0,
  "seed": 20260903,
  "events": 0,
@@ -24,20 +24,23 @@
  "paper_stocks": 54,
  "the_smallest_patch_of_a_stock_anything_took": [
   "index_02 2560x1593",
-  "266x126 of it, at its own size",
-  33602.72727272727
+  "259x168 of it, at its own size",
+  43592.72727272728
  ],
- "paper_at_its_own_size": 34,
+ "paper_at_its_own_size": 10,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [],
- "paper_that_arrived_after_the_piece_was_drawn": 2,
- "masks_held": 14,
+ "paper_that_arrived_after_the_piece_was_drawn": 4,
+ "masks_held": 12,
  "masks_dropped_to_stay_inside_the_pool": 0,
+ "stocks_held": 4,
+ "stocks_held_bytes": 60327040,
+ "stocks_dropped_to_stay_inside_the_pool": 0,
  "image_cache": {
-  "held": 12,
-  "bytes": 85776040,
+  "held": 1,
+  "bytes": 17175200,
   "budget": 402653184,
-  "live": 12,
+  "live": 1,
   "still_decoding": 0
  },
  "setup_showing": true,
@@ -47,13 +50,13 @@
  "sensation": null,
  "asked_a_motor_for": [],
  "the_launch_took": {
-  "the framework": 9,
-  "the library index": 16,
-  "the ink plates": 42,
-  "the desk": 168,
-  "the log": 40,
-  "the first frame": 410,
-  "everything": 685
+  "the framework": 7,
+  "the library index": 22,
+  "the ink plates": 36,
+  "the desk": 149,
+  "the log": 47,
+  "the first frame": 342,
+  "everything": 603
  },
  "sync": {
   "transport": "local",
@@ -76,7 +79,7 @@
    "peer_cursor": null,
    "our_cursor": 0,
    "last_error": null,
-   "since": "2026-09-11T21:30:22.800Z",
+   "since": "2026-09-12T00:35:04.706Z",
    "last_contact": null,
    "certificate": null,
    "setup_address": null
@@ -92,7 +95,15 @@
    "pocket": "the feeling's own name and its sound, because the app is running and has it",
    "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
   },
-  "held_by_the_phone": []
+  "held_by_the_phone": [],
+  "what_the_phone_can_hold": {
+   "platform": "a browser",
+   "a_secure_origin": true,
+   "service_worker_offered_by_the_browser": true,
+   "a_worker_is_registered": true,
+   "the_person_has_allowed_it": "unknown",
+   "a_push_manager": false
+  }
  },
  "at": "17_setup_pwa.png",
  "read_at": "the shutter"
