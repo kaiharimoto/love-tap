@@ -42,9 +42,13 @@ void main() {
         sync: SyncEngine(spine: spine, transport: transport),
         clock: Clock(frozenAt: DateTime.utc(2026, 9, 3, 19, 40)));
     addTearDown(scope.dispose);
-    tester.view.physicalSize = const Size(1440, 3120);
+    // A phone's width, which is 360 logical points — not the 480 the stills used to be shot at.
+    // A module's row costs what it costs where somebody actually reads it, and at 360 a line that
+    // fitted at 480 wraps.
+    tester.view.physicalSize = const Size(1080, 2340);
     tester.view.devicePixelRatio = 3.0;
     addTearDown(tester.view.reset);
+    final wrong = <String>[];
     for (final m in kModules) {
       final ctx = ModuleContext(events: spine.all, me: scope.me, partner: scope.partner,
           now: scope.clock.now().toLocal(), emit: scope.emit, limit: 6, room: 100000);
@@ -66,12 +70,18 @@ void main() {
       // The declared height is what a row of this module costs at its tallest — the first row is
       // the fullest one — so it may not be under what one actually measures, and it may not be so
       // far over that the module takes room it does not use.
-      expect(m.rowHeight, greaterThanOrEqualTo(tallest - 2),
-          reason: '${m.id} says a row costs ${m.rowHeight} and its tallest measures $tallest, so '
-              'it takes less of the desk than it needs and its last row falls off the bottom');
-      expect(m.rowHeight, lessThanOrEqualTo(tallest * 1.35 + 4),
-          reason: '${m.id} says a row costs ${m.rowHeight} against a tallest of $tallest, so it '
-              'takes room from every other module on the desk');
+      //
+      // Every module is measured before anything is asserted. Failing on the first one told you
+      // one number and hid the other four, which meant four more runs to learn what the change
+      // that broke it had actually done.
+      if (m.rowHeight < tallest - 2) {
+        wrong.add('${m.id} says a row costs ${m.rowHeight} and its tallest measures $tallest, so '
+            'it takes less of the desk than it needs and its last row falls off the bottom');
+      } else if (m.rowHeight > tallest * 1.35 + 4) {
+        wrong.add('${m.id} says a row costs ${m.rowHeight} against a tallest of $tallest, so it '
+            'takes room from every other module on the desk');
+      }
     }
+    expect(wrong, isEmpty, reason: wrong.join('\n'));
   });
 }

@@ -26,7 +26,14 @@ class CalendarModule extends Module {
 
   /// On the desk, a line and the day it falls on — measured at the width the shell leaves, not guessed.
   @override
-  double get rowHeight => 66.0;
+  /// Measured at 360 points, which is the width both phones have.
+  ///
+  /// Every one of these was measured at 480 — the width the stills used to be shot at and no phone
+  /// is — where a module's line fits on one row. At 360 it wraps, and a row of this module really
+  /// costs 104 points rather than 66. Us shares the desk by subtracting one row of every
+  /// module from what it has, so five numbers that were each about two thirds of the truth added
+  /// up to a budget that did not exist.
+  double get rowHeight => 104.0;
 
   @override
   Map<String, ThreadBody> get bodies => const {'stamped_card': stampedCard};

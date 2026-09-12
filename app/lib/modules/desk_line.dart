@@ -64,7 +64,14 @@ class DeskLine extends StatelessWidget {
               Expanded(
                 child: Text(
                   text,
-                  maxLines: 1,
+                  // Two, because a line written on a slip of paper wraps and a phone is 360 points
+                  // wide. At that width — which is what both phones have and what every clip is
+                  // shot at, and which the stills were not shot at until this cycle — `the second
+                  // one · the shelf in the hall` came out as `the second one · the…` and `tape the
+                  // gap in the back door` as `tape the gap in the bac…`. A coherence critic found
+                  // both by reading the clips against the stills and said the stills were
+                  // understating how the modules read on a phone. They were.
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Hands.margin(size: 16).copyWith(
                     color: struck ? Pen.margin : Pen.graphite,

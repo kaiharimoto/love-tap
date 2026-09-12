@@ -2,29 +2,30 @@
  "scene": "12_search",
  "browser": "webkit",
  "viewport": {
-  "width": 480,
-  "height": 1040,
-  "dpr": 3
+  "width": 360,
+  "height": 780,
+  "dpr": 4,
+  "why": "360 by 780 of CSS at four times scale: a 1440 by 3120 Android, which is a phone somebody owns. The stills were shot at 480 by 1040 at three times scale — the same 1440 by 3120 the brief asks for, but laid out at a logical width no phone has and 120 points wider than every clip in the set. A coherence critic found what that hid: two Us rows that read fully at 480 truncate to 'the second one · the…' and 'tape the gap in the bac…' at the clip's width, and the calendar glance wraps into a line the card cuts. Same pixels, same minimum, same layout width as the clips and as the phone."
  },
  "url": "http://127.0.0.1:8480/",
  "steps": [
   {
    "do": "pair",
-   "ms": 3622,
+   "ms": 4086,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3411
+   "ms": 4183
   },
   {
    "do": "wait",
-   "ms": 1702
+   "ms": 1749
   },
   {
    "do": "search",
-   "ms": 4134
+   "ms": 6644
   },
   {
    "do": "wait",
@@ -32,19 +33,19 @@
   },
   {
    "do": "searchFacet",
-   "ms": 1416
+   "ms": 1213
   },
   {
    "do": "wait",
-   "ms": 1603
+   "ms": 1665
   },
   {
    "do": "shot",
-   "ms": 33651
+   "ms": 33342
   },
   {
    "do": "report",
-   "ms": 704
+   "ms": 703
   }
  ],
  "shots": [
@@ -77,35 +78,28 @@
     }
    },
    "visible": [
-    "0001M3AY8G83A3FBSRB1Y7W78Q",
-    "0001M3F41R2APQC59QKBMZK4XF",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF",
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "paper": [
-    "0001M3F41R2APQC59QKBMZK4XF",
     "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_043",
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_026",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_048",
     "0001M4GW48FEW3M67XKAZT5051": "tear_010",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_052"
    },
    "stocks": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
-    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
    },
    "scroll": {
-    "first": 8063,
+    "first": 8065,
     "last": 8069,
     "of": 8069
    },
@@ -124,23 +118,25 @@
    "paper_stocks": 54,
    "the_smallest_patch_of_a_stock_anything_took": [
     "index_02 2560x1593",
-    "153x95 of it, at its own size",
-    14572.842461325701
+    "205x127 of it, at its own size",
+    25907.275486801245
    ],
-   "paper_at_its_own_size": 324,
-   "paper_stretched_to_fit": 3,
+   "paper_at_its_own_size": 132,
+   "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
-    "graph_03",
-    "sticky_blue_02"
+    "graph_03"
    ],
-   "paper_that_arrived_after_the_piece_was_drawn": 11,
+   "paper_that_arrived_after_the_piece_was_drawn": 18,
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 38,
+   "masks_dropped_to_stay_inside_the_pool": 78,
+   "stocks_held": 10,
+   "stocks_held_bytes": 142543040,
+   "stocks_dropped_to_stay_inside_the_pool": 9,
    "image_cache": {
-    "held": 95,
-    "bytes": 377515676,
+    "held": 30,
+    "bytes": 32665472,
     "budget": 402653184,
-    "live": 82,
+    "live": 28,
     "still_decoding": 0
    },
    "setup_showing": false,
@@ -150,13 +146,13 @@
    "sensation": null,
    "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 18,
-    "the ink plates": 40,
-    "the desk": 152,
-    "the log": 638,
-    "the first frame": 373,
-    "everything": 1228
+    "the framework": 16,
+    "the library index": 65,
+    "the ink plates": 67,
+    "the desk": 209,
+    "the log": 1099,
+    "the first frame": 429,
+    "everything": 1885
    },
    "sync": {
     "transport": "local",
@@ -179,8 +175,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-11T21:23:06.824Z",
-     "last_contact": "2026-09-11T21:23:48.213Z",
+     "since": "2026-09-12T00:27:34.641Z",
+     "last_contact": "2026-09-12T00:28:16.451Z",
      "certificate": null,
      "setup_address": null
     }
@@ -195,25 +191,33 @@
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
-    "held_by_the_phone": []
+    "held_by_the_phone": [],
+    "what_the_phone_can_hold": {
+     "platform": "a browser",
+     "a_secure_origin": true,
+     "service_worker_offered_by_the_browser": true,
+     "a_worker_is_registered": true,
+     "the_person_has_allowed_it": "unknown",
+     "a_push_manager": false
+    }
    },
    "at": "12_search.png",
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2694,
+ "cold_ms": 3537,
  "load": {
-  "ms": 2694,
+  "ms": 3537,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
-   "the library index": 18,
-   "the ink plates": 40,
-   "the desk": 152,
-   "the log": 638,
-   "the first frame": 373,
-   "everything": 1228
+   "the framework": 16,
+   "the library index": 65,
+   "the ink plates": 67,
+   "the desk": 209,
+   "the log": 1099,
+   "the first frame": 429,
+   "everything": 1885
   }
  },
  "problems": [],
