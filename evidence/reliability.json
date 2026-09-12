@@ -1,16 +1,16 @@
 {
  "transport": "local",
- "generated_at": "2026-09-12T16:45:15.166989Z",
+ "generated_at": "2026-09-12T17:08:31.055851Z",
  "host": {
   "transport": "local",
   "role": "host",
   "state": "connected",
-  "address": "127.0.0.1:38833",
+  "address": "127.0.0.1:42529",
   "peer_cursor": 177,
   "our_cursor": 177,
   "last_error": null,
-  "since": "2026-09-12T16:45:15.154354Z",
-  "last_contact": "2026-09-12T16:45:15.164498Z",
+  "since": "2026-09-12T17:08:31.043439Z",
+  "last_contact": "2026-09-12T17:08:31.053584Z",
   "certificate": null,
   "setup_address": null,
   "device_id": "android-rel",
@@ -19,7 +19,7 @@
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-12T16:45:15.128580Z"
+   "paired_at": "2026-09-12T17:08:31.016508Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -32,12 +32,12 @@
   "transport": "local",
   "role": "client",
   "state": "connected",
-  "address": "http://127.0.0.1:38833",
+  "address": "http://127.0.0.1:42529",
   "peer_cursor": 177,
   "our_cursor": 177,
   "last_error": null,
-  "since": "2026-09-12T16:45:14.856492Z",
-  "last_contact": "2026-09-12T16:45:15.165805Z",
+  "since": "2026-09-12T17:08:30.740114Z",
+  "last_contact": "2026-09-12T17:08:31.054785Z",
   "certificate": null,
   "setup_address": null,
   "device_id": "pwa-rel",
@@ -46,7 +46,7 @@
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-12T16:45:15.131389Z"
+   "paired_at": "2026-09-12T17:08:31.019211Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -116,7 +116,7 @@
   },
   "search": {
    "ok": true,
-   "detail": "nine queries, each answered by an event of the type it was asked about: {\"message\":{\"query\":\"floor\",\"hits\":1,\"types\":[\"message\"],\"first_of_the_wanted_type\":\"01M2B84GW28V1B9K8H0EZSKZRA\"},\"photo\":{\"query\":\"lift buttons\",\"hits\":1,\"types\":[\"photo\"],\"first_of_the_wanted_type\":\"01M2B84H5KGV2BFF0VXAAD0G9Q\"},\"todo_event\":{\"query\":\"bread\",\"hits\":1,\"types\":[\"todo_event\"],\"first_of_the_wanted_type\":\"01M2B84H6D78488EWNZAEMGN22\"},\"date_event\":{\"query\":\"ferry\",\"hits\":1,\"types\":[\"date_event\"],\"first_of_the_wanted_type\":\"01M2B84H6EXT2MP7NPWJA811NT\"},\"feeling\":{\"query\":\"squeeze\",\"hits\":2,\"types\":[\"feeling\"],\"first_of_the_wanted_type\":\"01M2B84H6F0EZC0DC7HT6SX2K4\"},\"state_declared\":{\"query\":\"heads down\",\"hits\":1,\"types\":[\"state_declared\"],\"first_of_the_wanted_type\":\"01M2B84H6GV2XARNSF5KP7CHMJ\"},\"milestone\":{\"query\":\"together\",\"hits\":1,\"types\":[\"milestone\"],\"first_of_the_wanted_type\":\"01M2B84H6HC74K5H0ZHFFXH99A\"},\"video\":{\"query\":\"video\",\"hits\":1,\"types\":[\"video\"],\"first_of_the_wanted_type\":\"01M2B84H4V1EYPPKAAY0W3HF1N\"},\"voice_note\":{\"query\":\"voice\",\"hits\":1,\"types\":[\"voice_note\"],\"first_of_the_wanted_type\":\"01M2B84H3NQV1R4DKZ9N967QRW\"}}"
+   "detail": "nine queries, each answered by an event of the type it was asked about: {\"message\":{\"query\":\"floor\",\"hits\":1,\"types\":[\"message\"],\"first_of_the_wanted_type\":\"01M2B9F41WFJRS5GTCZ69CZKF2\"},\"photo\":{\"query\":\"lift buttons\",\"hits\":1,\"types\":[\"photo\"],\"first_of_the_wanted_type\":\"01M2B9F4B1M99EABFRNYNAFT20\"},\"todo_event\":{\"query\":\"bread\",\"hits\":1,\"types\":[\"todo_event\"],\"first_of_the_wanted_type\":\"01M2B9F4BTKQTPTCVM7MSE3SPM\"},\"date_event\":{\"query\":\"ferry\",\"hits\":1,\"types\":[\"date_event\"],\"first_of_the_wanted_type\":\"01M2B9F4BV4JCNV7ND1RTY58C6\"},\"feeling\":{\"query\":\"squeeze\",\"hits\":2,\"types\":[\"feeling\"],\"first_of_the_wanted_type\":\"01M2B9F4BWDVT5ZWX30SPB3ZR2\"},\"state_declared\":{\"query\":\"heads down\",\"hits\":1,\"types\":[\"state_declared\"],\"first_of_the_wanted_type\":\"01M2B9F4BXNXDYJ7QX5ZAC1A0W\"},\"milestone\":{\"query\":\"together\",\"hits\":1,\"types\":[\"milestone\"],\"first_of_the_wanted_type\":\"01M2B9F4BYMYCV4A62BBYWHFYW\"},\"video\":{\"query\":\"video\",\"hits\":1,\"types\":[\"video\"],\"first_of_the_wanted_type\":\"01M2B9F4ACZ33T3FBRNS8K3YZC\"},\"voice_note\":{\"query\":\"voice\",\"hits\":1,\"types\":[\"voice_note\"],\"first_of_the_wanted_type\":\"01M2B9F497JFKGQJ1WQJJQBWZG\"}}"
   },
   "draft_survival": {
    "ok": true,
@@ -185,7 +185,7 @@
   "later_check": {
    "status": "pending",
    "why": "the nodes were not answering when this was re-run; the run above stands",
-   "checked_at": "2026-09-12T16:45:15.202228Z"
+   "checked_at": "2026-09-12T17:08:31.089113Z"
   }
  }
 }
