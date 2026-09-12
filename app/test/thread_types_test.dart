@@ -7,6 +7,8 @@
 // rendered correctly in the thread and as a bare registry id in search, and nothing failed.
 //
 // These are the cheapest guards against that coming back.
+import 'dart:io';
+
 import 'package:desk/thread/renderers.dart';
 import 'package:desk/spine/event.dart';
 import 'package:desk/spine/types.dart';
@@ -85,6 +87,33 @@ void main() {
           reason: '${spec.id} shows a machine timestamp: "$line"');
       expect(line, isNot(contains('_')), reason: '${spec.id} shows a key: "$line"');
     }
+  });
+
+  test('no region hands a reader a registry id when it runs out of cases', () {
+    // A per-type switch in a region file with a fall-through that prints the raw id. Long-press a
+    // date, a thing off a list, a day that matters, a ritual kept or a thing passed on, reply to
+    // it, and the strip quoting what you are answering read `date_event`. Six types the modules
+    // own and more coming, against five cases written out by hand in the chat region.
+    //
+    // The sentence is summaryOf's, everywhere outside the thread's own renderers — which is what
+    // the two tests above hold to account. This one holds the other half: a region that writes its
+    // own switch and ends it with the id is the shape of the fault, and it is cheap to look for.
+    final offenders = <String>[];
+    final fallThrough = RegExp(r'_\s*=>\s*[A-Za-z_][A-Za-z0-9_.]*\.type\b');
+    for (final dir in ['lib/regions', 'lib/modules', 'lib/feelings', 'lib/ambient']) {
+      final d = Directory(dir);
+      if (!d.existsSync()) continue;
+      for (final f in d.listSync(recursive: true).whereType<File>()) {
+        if (!f.path.endsWith('.dart')) continue;
+        final lines = f.readAsLinesSync();
+        for (var i = 0; i < lines.length; i++) {
+          if (fallThrough.hasMatch(lines[i])) offenders.add('${f.path}:${i + 1}  ${lines[i].trim()}');
+        }
+      }
+    }
+    expect(offenders, isEmpty,
+        reason: 'a switch over event types falls through to showing the type itself:\n'
+            '${offenders.join('\n')}\nask summaryOf instead — the registry already knows');
   });
 
   test('marginality is asked of the registry, not of a second list', () {

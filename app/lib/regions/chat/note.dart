@@ -108,7 +108,7 @@ class Note extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (item.replyTo != null) _ReplyStrip(target: item.replyTo!, registry: registry),
+        if (item.replyTo != null) _ReplyStrip(target: item.replyTo!, me: me),
         _body(context, me),
         const SizedBox(height: 3),
         // A note that was taken back does not report how far it got. It said `read ✓✓` under the
@@ -226,21 +226,21 @@ class Note extends StatelessWidget {
   }
 }
 
+/// What a note is answering, quoted over it.
+///
+/// The sentence is [summaryOf] and nothing else, for the same reason _MarginLine's is. This used
+/// to be a switch over five types with a fall-through that handed the reader the raw registry id:
+/// long-press a date, a thing off a list, a day that matters, a ritual kept or a thing passed on,
+/// reply to it, and the strip over the answer read `date_event`. Six types the modules own, and
+/// there are only ever going to be more of them; the registry already knows what each one says.
 class _ReplyStrip extends StatelessWidget {
-  const _ReplyStrip({required this.target, required this.registry});
+  const _ReplyStrip({required this.target, required this.me});
   final Event target;
-  final FeelingRegistry registry;
+  final Person me;
 
   @override
   Widget build(BuildContext context) {
-    final text = switch (target.type) {
-      'message' => target.payload['text'] as String? ?? '',
-      'photo' => S.photo,
-      'video' => S.video,
-      'voice_note' => S.voiceNote,
-      'feeling' => registry.byId(target.payload['feeling_id'] as String)?.name ?? '',
-      _ => target.type,
-    };
+    final text = summaryOf(target, me: me);
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.only(left: 8, bottom: 4),
