@@ -178,7 +178,9 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
 
-    final first = scope.feelings.family(Family.warmth).first;
+    // A feeling from a family the sheet is *not* showing, which is what the scene does: it opens
+    // Static and holds `pigeon`, which is Mischief. The handle has to turn the sheet to it.
+    final first = scope.feelings.family(Family.mischief).last;
     expect(CaptureBus.holdOver, isNotNull);
     expect(CaptureBus.holdOver!(first.id), isTrue, reason: 'nothing was under the finger');
     await tester.pump();
@@ -188,12 +190,22 @@ void main() {
         .where((t) => t.feeling.id == first.id)
         .first
         .lift;
+    expect(find.text(first.name), findsOneWidget,
+        reason: 'the handle held ${first.name}, which is ${first.family.label}, while the sheet '
+            'was showing something else — so no tile on the glass is the held one and nothing in '
+            'the picture can change');
     final atFirst = liftNow();
 
-    // forty frames of the clip's own step, which is what the scene grabs over a hold
+    // Forty frames of the clip's own step, which is what the scene grabs over a hold.
+    //
+    // The step is started and *then* pumped, not awaited first: it waits on a post-frame callback,
+    // and in a test no frame happens until the test asks for one, so awaiting it first is a
+    // two-second deadlock forty times over.
     for (var i = 0; i < 40; i++) {
-      await DrivenClock.step(32);
+      final stepping = DrivenClock.step(32);
       await tester.pump();
+      await tester.pump();
+      await stepping;
     }
     final later = liftNow();
     expect(later, greaterThan(atFirst + 0.1),

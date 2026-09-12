@@ -178,6 +178,16 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
         if (f == null) return false;
         setState(() {
           _open = true;
+          // The sheet turns to the feeling's own family first.
+          //
+          // It did not, and a finger was put on a tile that was not on the glass: the scene showed
+          // Static and held `pigeon`, which is Mischief, so `_under` was set to a feeling no tile
+          // was drawing and nothing in the picture changed. Three captures counted forty
+          // byte-identical frames in exactly that run and two fixes went in against that number —
+          // a ticker for the phone, the driven clock's own tick for the harness — both of which
+          // were rebuilding a sheet that had nothing to rebuild. A handle that can be asked to
+          // hold something invisible is a handle that will be.
+          _family = f.family;
           _under = f;
           _heldSince = DrivenClock.now;
           _wallFrom = DateTime.now();
