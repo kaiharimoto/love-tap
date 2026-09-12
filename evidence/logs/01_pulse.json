@@ -2,21 +2,22 @@
  "scene": "01_pulse",
  "browser": "webkit",
  "viewport": {
-  "width": 480,
-  "height": 1040,
-  "dpr": 3
+  "width": 360,
+  "height": 780,
+  "dpr": 4,
+  "why": "360 by 780 of CSS at four times scale: a 1440 by 3120 Android, which is a phone somebody owns. The stills were shot at 480 by 1040 at three times scale — the same 1440 by 3120 the brief asks for, but laid out at a logical width no phone has and 120 points wider than every clip in the set. A coherence critic found what that hid: two Us rows that read fully at 480 truncate to 'the second one · the…' and 'tape the gap in the bac…' at the clip's width, and the calendar glance wraps into a line the card cuts. Same pixels, same minimum, same layout width as the clips and as the phone."
  },
  "url": "http://127.0.0.1:8480/",
  "steps": [
   {
    "do": "pair",
-   "ms": 3202,
+   "ms": 2679,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3496
+   "ms": 5355
   },
   {
    "do": "wait",
@@ -24,7 +25,7 @@
   },
   {
    "do": "shot",
-   "ms": 32871
+   "ms": 32766
   },
   {
    "do": "report",
@@ -139,23 +140,26 @@
    "has_dusk_paper": true,
    "paper_stocks": 54,
    "the_smallest_patch_of_a_stock_anything_took": [
-    "index_01 2560x1593",
-    "143x102 of it, at its own size",
-    14669.3229675293
+    "index_02 2560x1593",
+    "259x168 of it, at its own size",
+    43592.72727272728
    ],
-   "paper_at_its_own_size": 421,
-   "paper_stretched_to_fit": 6,
+   "paper_at_its_own_size": 42,
+   "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "sticky_blue_02"
    ],
-   "paper_that_arrived_after_the_piece_was_drawn": 10,
+   "paper_that_arrived_after_the_piece_was_drawn": 13,
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 14,
+   "masks_dropped_to_stay_inside_the_pool": 36,
+   "stocks_held": 10,
+   "stocks_held_bytes": 149702320,
+   "stocks_dropped_to_stay_inside_the_pool": 4,
    "image_cache": {
-    "held": 77,
-    "bytes": 322786832,
+    "held": 26,
+    "bytes": 32288336,
     "budget": 402653184,
-    "live": 71,
+    "live": 24,
     "still_decoding": 0
    },
    "setup_showing": false,
@@ -172,12 +176,12 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 13,
-    "the ink plates": 60,
-    "the desk": 180,
-    "the log": 7190,
-    "the first frame": 463,
-    "everything": 7913
+    "the library index": 17,
+    "the ink plates": 43,
+    "the desk": 169,
+    "the log": 6598,
+    "the first frame": 373,
+    "everything": 7207
    },
    "sync": {
     "transport": "local",
@@ -200,8 +204,8 @@
      "peer_cursor": 14061,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-11T21:15:58.273Z",
-     "last_contact": "2026-09-11T21:16:25.750Z",
+     "since": "2026-09-12T00:20:34.661Z",
+     "last_contact": "2026-09-12T00:21:01.271Z",
      "certificate": null,
      "setup_address": null
     }
@@ -216,25 +220,33 @@
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
-    "held_by_the_phone": []
+    "held_by_the_phone": [],
+    "what_the_phone_can_hold": {
+     "platform": "a browser",
+     "a_secure_origin": true,
+     "service_worker_offered_by_the_browser": true,
+     "a_worker_is_registered": true,
+     "the_person_has_allowed_it": "unknown",
+     "a_push_manager": false
+    }
    },
    "at": "01_pulse.png",
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 9375,
+ "cold_ms": 8541,
  "load": {
-  "ms": 9375,
+  "ms": 8541,
   "store": "fresh",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
-   "the library index": 13,
-   "the ink plates": 60,
-   "the desk": 180,
-   "the log": 7190,
-   "the first frame": 463,
-   "everything": 7913
+   "the library index": 17,
+   "the ink plates": 43,
+   "the desk": 169,
+   "the log": 6598,
+   "the first frame": 373,
+   "everything": 7207
   }
  },
  "problems": [],
