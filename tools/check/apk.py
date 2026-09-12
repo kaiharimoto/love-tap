@@ -102,6 +102,32 @@ def main():
     report = {
         "why": "a release APK signed with the debug key installs and is not a release, and a line "
                "in a build log is not evidence of which key was used. This opens the file.",
+        # Two measurements from earlier builds on this machine, kept because they are what the
+        # build flags in docs/PHONES.md are for and neither can be re-measured from the file that
+        # happens to be on disk now. They are stated as history, not as this build.
+        "measured_on_earlier_builds_here": {
+            "with_no_key.properties": {
+                "signed_by": "C=US, O=Android, CN=Android Debug",
+                "what_that_means": "Flutter's template signs a release with the shared debug key "
+                                   "and says nothing. The build prints a block about it now, and "
+                                   "this check reads the certificate out of the file rather than "
+                                   "trusting the log.",
+            },
+            "without_--split-per-abi": {
+                "mb": 145.0,
+                "abis": ["arm64-v8a", "armeabi-v7a", "x86_64"],
+                "what_that_means": "38.6 MB of engines and app images for phones the owner does "
+                                   "not have. Every Android phone made this decade is arm64.",
+            },
+        },
+        "the_key_that_signs_these": "a throwaway RSA key generated into /tmp for one build, thirty "
+                                    "days' validity, a random password, deleted immediately "
+                                    "afterwards along with the key.properties that pointed at it. "
+                                    "It exists in this record only as the distinguished name "
+                                    "below, which is how a reader can see that the signing config "
+                                    "works and that it was not the shared debug key. No keystore, "
+                                    "no password and no key.properties is in this repository or "
+                                    "ever was; app/android/.gitignore covers all three.",
         "apks": {},
     }
     ok = True

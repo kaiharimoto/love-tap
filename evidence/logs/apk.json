@@ -1,48 +1,78 @@
 {
- "what": "the Android release path, exercised rather than described",
- "when": "2026-09-11T17:37:09.238385Z",
- "the_apk": {
-  "name": "app-arm64-v8a-release.apk",
-  "mb": 106.4,
-  "abis": [
-   "arm64-v8a"
-  ],
-  "built_with": "flutter build apk --release --split-per-abi --target-platform android-arm64 --dart-define=TRANSPORT=tailscale --dart-define=ROLE=host --dart-define=PERSON=noor",
-  "biggest": [
-   {
-    "what": "assets/flutter_assets/assets",
-    "mb": 84.1
-   },
-   {
-    "what": "lib/arm64-v8a",
-    "mb": 19.8
-   },
-   {
-    "what": "classes.dex",
-    "mb": 9.2
-   },
-   {
-    "what": "classes2.dex",
-    "mb": 3.4
-   },
-   {
-    "what": "assets/flutter_assets/packages",
-    "mb": 0.3
+ "why": "a release APK signed with the debug key installs and is not a release, and a line in a build log is not evidence of which key was used. This opens the file.",
+ "measured_on_earlier_builds_here": {
+  "with_no_key.properties": {
+   "signed_by": "C=US, O=Android, CN=Android Debug",
+   "what_that_means": "Flutter's template signs a release with the shared debug key and says nothing. The build prints a block about it now, and this check reads the certificate out of the file rather than trusting the log."
+  },
+  "without_--split-per-abi": {
+   "mb": 145.0,
+   "abis": [
+    "arm64-v8a",
+    "armeabi-v7a",
+    "x86_64"
+   ],
+   "what_that_means": "38.6 MB of engines and app images for phones the owner does not have. Every Android phone made this decade is arm64."
+  }
+ },
+ "the_key_that_signs_these": "a throwaway RSA key generated into /tmp for one build, thirty days' validity, a random password, deleted immediately afterwards along with the key.properties that pointed at it. It exists in this record only as the distinguished name below, which is how a reader can see that the signing config works and that it was not the shared debug key. No keystore, no password and no key.properties is in this repository or ever was; app/android/.gitignore covers all three.",
+ "apks": {
+  "app-arm64-v8a-release.apk": {
+   "mb": 101.2,
+   "abis": [
+    "arm64-v8a"
+   ],
+   "one_abi_would_save_mb": 0.0,
+   "biggest": [
+    {
+     "what": "assets/flutter_assets/assets",
+     "mb": 77.6
+    },
+    {
+     "what": "lib/arm64-v8a",
+     "mb": 21.1
+    },
+    {
+     "what": "classes.dex",
+     "mb": 9.2
+    },
+    {
+     "what": "classes2.dex",
+     "mb": 3.4
+    },
+    {
+     "what": "assets/flutter_assets/packages",
+     "mb": 0.3
+    },
+    {
+     "what": "res",
+     "mb": 0.1
+    },
+    {
+     "what": "assets/flutter_assets/NOTICES.Z",
+     "mb": 0.1
+    },
+    {
+     "what": "resources.arsc",
+     "mb": 0.1
+    },
+    {
+     "what": "assets/flutter_assets/AssetManifest.bin",
+     "mb": 0.1
+    },
+    {
+     "what": "kotlin",
+     "mb": 0.1
+    }
+   ],
+   "signature": {
+    "read": true,
+    "signed_by": "CN=a throwaway key that proves the signing path, O=not for release, C=GB",
+    "sha256": "65ce39628aa67b3ee9bdb8ecbf8db914bb35e83b57a5dc0a7b293e0d2811c2a7",
+    "is_the_debug_key": false,
+    "what_that_means": "signed with a key that is not the shared debug one; keep the keystore, because only a build signed with it can update this one"
    }
-  ]
+  }
  },
- "signed_by": "CN=a throwaway key that proves the signing path, O=not for release, C=GB",
- "is_the_debug_key": false,
- "the_key_that_signed_it": "a throwaway RSA key generated into /tmp for this one build, with a thirty-day validity and a random password, and deleted immediately afterwards along with the key.properties that pointed at it. It exists in this record only as the distinguished name above, which is how a reader can see that the signing config works and that it was not the shared debug key. No keystore, no password and no key.properties is in this repository or ever was; app/android/.gitignore covers all three.",
- "and_without_a_key": {
-  "signed_by": "C=US, O=Android, CN=Android Debug",
-  "mb": 145.0,
-  "abis": [
-   "arm64-v8a",
-   "armeabi-v7a",
-   "x86_64"
-  ],
-  "measured": "the first build of this session, before the signing config existed. Flutter's template signs a release with the debug key and says nothing; the build prints a block about it now, and tools/check/apk.py reads the certificate out of the file rather than trusting the log."
- },
- "what_a_phone_should_get": "the arm64 build. 145 MB carries three architectures and 38.6 MB of it is engines and app images for phones the owner does not have; every Android phone made this decade is arm64. The 84 MB that is left is the material library \u2014 the paper, the tears, the objects and the folds \u2014 which is the app."
+ "ok": true
 }
