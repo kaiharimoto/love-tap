@@ -3,186 +3,119 @@
  "view": {
   "region": "chat",
   "visible": [
-   "0001MCJ1M0RH0PC6JX2E0R8TN9",
-   "0001MCJ1M0RH0PC6JX2E0R8TND",
-   "0001MCJ1M0RH0PC6JX2E0R8TNE",
-   "0001MCJ1M0RH0PC6JX2E0R8TNF",
-   "0001MCJ1M0RH0PC6JX2E0R8TNK",
-   "0001MCJ1M0RH0PC6JX2E0R8TN7"
+   "0001MCJ1M0S7HRNF0F22N9472G",
+   "0001MCJ1M0S7HRNF0F22N9472K",
+   "0001MCJ1M0S7HRNF0F22N94728"
   ],
   "whole_on_the_glass": [
-   "0001MCJ1M0RH0PC6JX2E0R8TND",
-   "0001MCJ1M0RH0PC6JX2E0R8TNE",
-   "0001MCJ1M0RH0PC6JX2E0R8TNF",
-   "0001MCJ1M0RH0PC6JX2E0R8TNK",
-   "0001MCJ1M0RH0PC6JX2E0R8TN7"
+   "0001MCJ1M0S7HRNF0F22N9472K",
+   "0001MCJ1M0S7HRNF0F22N94728"
   ],
   "clipped_at_an_edge": {
-   "0001MCJ1M0RH0PC6JX2E0R8TN9": 0.124
+   "0001MCJ1M0S7HRNF0F22N9472G": 0.779
   },
   "delivery": {
-   "0001MCJ1M0RH0PC6JX2E0R8TN9": {
+   "0001MCJ1M0S7HRNF0F22N9472G": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0RH0PC6JX2E0R8TND": {
+   "0001MCJ1M0S7HRNF0F22N9472K": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0RH0PC6JX2E0R8TNE": {
-    "state": "sent",
-    "says": "sent"
-   },
-   "0001MCJ1M0RH0PC6JX2E0R8TNF": {
-    "state": "sent",
-    "says": "sent"
-   },
-   "0001MCJ1M0RH0PC6JX2E0R8TNK": {
-    "state": "sent",
-    "says": "sent"
-   },
-   "0001MCJ1M0RH0PC6JX2E0R8TN7": {
+   "0001MCJ1M0S7HRNF0F22N94728": {
     "state": "refused",
     "says": "it would not go"
    }
   },
   "refusals_on_the_glass": {
-   "0001MCJ1M0RH0PC6JX2E0R8TN7": "this phone is on an older version and cannot read that"
+   "0001MCJ1M0S7HRNF0F22N94728": "this phone is on an older version and cannot read that"
   },
   "states_on_the_glass": {
-   "sent": 4,
+   "sent": 1,
    "it would not go": 1
   },
   "reactions": {},
-  "edited": [
-   "0001MCJ1M0RH0PC6JX2E0R8TN9"
-  ],
+  "edited": [],
   "taken_back": [],
   "scroll": {
-   "first": 8070,
+   "first": 8073,
    "last": 8076,
    "of": 8076
   },
   "paper": [
-   "0001MCJ1M0RH0PC6JX2E0R8TN9",
-   "0001MCJ1M0RH0PC6JX2E0R8TND",
-   "0001MCJ1M0RH0PC6JX2E0R8TNE",
-   "0001MCJ1M0RH0PC6JX2E0R8TNF",
-   "0001MCJ1M0RH0PC6JX2E0R8TNK",
-   "0001MCJ1M0RH0PC6JX2E0R8TN7"
+   "0001MCJ1M0S7HRNF0F22N9472G",
+   "0001MCJ1M0S7HRNF0F22N9472K",
+   "0001MCJ1M0S7HRNF0F22N94728"
   ],
-  "paper_whole_on_the_glass": 5,
+  "paper_whole_on_the_glass": 3,
   "rows_cost": [
-   {
-    "row": 8070,
-    "type": "message",
-    "tall": 129,
-    "top": -113
-   },
-   {
-    "row": 8071,
-    "type": "message",
-    "tall": 198,
-    "top": 16
-   },
-   {
-    "row": 8072,
-    "type": "message",
-    "tall": 80,
-    "top": 214
-   },
    {
     "row": 8073,
     "type": "message",
-    "tall": 122,
-    "top": 294
+    "tall": 131,
+    "top": -29
    },
    {
     "row": 8074,
     "type": "message",
     "tall": 92,
-    "top": 416
+    "top": 102
    },
    {
     "row": 8075,
     "type": "message",
-    "tall": 180,
-    "top": 508
+    "tall": 172,
+    "top": 194
    }
   ],
-  "viewport_tall": 698.1,
+  "viewport_tall": 371.9,
   "composer": "the second one, then",
   "attaching": true,
   "replying_to": "0001M2ZNX8AF4811Y2F7FNAGMG",
-  "replies_on_the_glass": {
-   "0001MCJ1M0RH0PC6JX2E0R8TND": {
-    "id": "0001M2ZNX8AF4811Y2F7FNAGMG",
-    "seq": 14053,
-    "author": "noor",
-    "device": "android",
-    "ts": 1788454361000,
-    "type": "message",
-    "refs": [],
-    "blobs": [],
-    "payload": {
-     "text": "leaving now. dont cut the end off before i get there"
-    }
-   }
-  },
+  "replies_on_the_glass": {},
   "editing": null,
   "anchor": null,
   "kinds": {
-   "message": 6
+   "message": 3
   },
   "folded_in": {
    "reaction": 0,
-   "message_edit": 1,
+   "message_edit": 0,
    "message_delete": 0,
    "read_marker": 0
   },
-  "partner_typing": false
+  "partner_typing": true
  },
  "visible": [
-  "0001MCJ1M0RH0PC6JX2E0R8TN9",
-  "0001MCJ1M0RH0PC6JX2E0R8TND",
-  "0001MCJ1M0RH0PC6JX2E0R8TNE",
-  "0001MCJ1M0RH0PC6JX2E0R8TNF",
-  "0001MCJ1M0RH0PC6JX2E0R8TNK",
-  "0001MCJ1M0RH0PC6JX2E0R8TN7"
+  "0001MCJ1M0S7HRNF0F22N9472G",
+  "0001MCJ1M0S7HRNF0F22N9472K",
+  "0001MCJ1M0S7HRNF0F22N94728"
  ],
  "paper": [
-  "0001MCJ1M0RH0PC6JX2E0R8TN9",
-  "0001MCJ1M0RH0PC6JX2E0R8TND",
-  "0001MCJ1M0RH0PC6JX2E0R8TNE",
-  "0001MCJ1M0RH0PC6JX2E0R8TNF",
-  "0001MCJ1M0RH0PC6JX2E0R8TNK",
-  "0001MCJ1M0RH0PC6JX2E0R8TN7"
+  "0001MCJ1M0S7HRNF0F22N9472G",
+  "0001MCJ1M0S7HRNF0F22N9472K",
+  "0001MCJ1M0S7HRNF0F22N94728"
  ],
  "tears": {
-  "0001MCJ1M0RH0PC6JX2E0R8TN9": "tear_042",
-  "0001MCJ1M0RH0PC6JX2E0R8TND": "tear_009",
-  "0001MCJ1M0RH0PC6JX2E0R8TNE": "tear_031",
-  "0001MCJ1M0RH0PC6JX2E0R8TNF": "tear_051",
-  "0001MCJ1M0RH0PC6JX2E0R8TNK": "tear_018",
-  "0001MCJ1M0RH0PC6JX2E0R8TN7": "tear_029"
+  "0001MCJ1M0S7HRNF0F22N9472G": "tear_013",
+  "0001MCJ1M0S7HRNF0F22N9472K": "tear_018",
+  "0001MCJ1M0S7HRNF0F22N94728": "tear_055"
  },
  "stocks": {
-  "0001MCJ1M0RH0PC6JX2E0R8TN9": "legal_02",
-  "0001MCJ1M0RH0PC6JX2E0R8TND": "legal_01",
-  "0001MCJ1M0RH0PC6JX2E0R8TNE": "looseleaf_01",
-  "0001MCJ1M0RH0PC6JX2E0R8TNF": "legal_02",
-  "0001MCJ1M0RH0PC6JX2E0R8TNK": "legal_01",
-  "0001MCJ1M0RH0PC6JX2E0R8TN7": "looseleaf_04"
+  "0001MCJ1M0S7HRNF0F22N9472G": "legal_01",
+  "0001MCJ1M0S7HRNF0F22N9472K": "looseleaf_03",
+  "0001MCJ1M0S7HRNF0F22N94728": "looseleaf_01"
  },
  "scroll": {
-  "first": 8070,
+  "first": 8073,
   "last": 8076,
   "of": 8076
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 368,
+ "driven_ms": 416,
  "seed": 20260903,
- "events": 14078,
+ "events": 14079,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -193,23 +126,26 @@
  "has_dusk_paper": true,
  "paper_stocks": 54,
  "the_smallest_patch_of_a_stock_anything_took": [
-  "index_01 2560x1593",
-  "143x102 of it, at its own size",
-  14669.3229675293
+  "index_02 2560x1593",
+  "259x168 of it, at its own size",
+  43592.72727272728
  ],
- "paper_at_its_own_size": 2485,
- "paper_stretched_to_fit": 36,
+ "paper_at_its_own_size": 138,
+ "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [
   "sticky_blue_02"
  ],
- "paper_that_arrived_after_the_piece_was_drawn": 12,
+ "paper_that_arrived_after_the_piece_was_drawn": 17,
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 29,
+ "masks_dropped_to_stay_inside_the_pool": 66,
+ "stocks_held": 10,
+ "stocks_held_bytes": 144780080,
+ "stocks_dropped_to_stay_inside_the_pool": 8,
  "image_cache": {
-  "held": 83,
-  "bytes": 342054332,
+  "held": 28,
+  "bytes": 33699536,
   "budget": 402653184,
-  "live": 74,
+  "live": 26,
   "still_decoding": 0
  },
  "setup_showing": false,
@@ -219,25 +155,25 @@
  "sensation": null,
  "asked_a_motor_for": [],
  "the_launch_took": {
-  "the framework": 8,
-  "the library index": 21,
-  "the ink plates": 47,
-  "the desk": 161,
-  "the log": 835,
-  "the first frame": 423,
-  "everything": 1495
+  "the framework": 7,
+  "the library index": 20,
+  "the ink plates": 45,
+  "the desk": 162,
+  "the log": 612,
+  "the first frame": 337,
+  "everything": 1184
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 7,
-  "pushed": 12,
+  "rounds": 9,
+  "pushed": 11,
   "refused": 1,
-  "pulled": 10,
+  "pulled": 11,
   "blobs_fetched": 0,
   "faults": 7,
   "last_fault": "dropped (POST /events)",
-  "pending": 2,
+  "pending": 3,
   "refused_in_the_outbox": 1,
   "cursor": 14076,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
@@ -249,8 +185,8 @@
    "peer_cursor": 14075,
    "our_cursor": 14075,
    "last_error": null,
-   "since": "2026-09-11T21:24:03.705Z",
-   "last_contact": "2026-09-11T21:25:44.115Z",
+   "since": "2026-09-12T00:28:33.993Z",
+   "last_contact": "2026-09-12T00:30:24.338Z",
    "certificate": null,
    "setup_address": null
   }
@@ -265,7 +201,15 @@
    "pocket": "the feeling's own name and its sound, because the app is running and has it",
    "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
   },
-  "held_by_the_phone": []
+  "held_by_the_phone": [],
+  "what_the_phone_can_hold": {
+   "platform": "a browser",
+   "a_secure_origin": true,
+   "service_worker_offered_by_the_browser": true,
+   "a_worker_is_registered": true,
+   "the_person_has_allowed_it": "unknown",
+   "a_push_manager": false
+  }
  },
  "at": "13_messenger_states.png",
  "read_at": "the shutter"

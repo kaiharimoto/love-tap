@@ -50,6 +50,18 @@
   },
   {
    "do": "far",
+   "arg": "message actually ignore that, wrong thread",
+   "why": "So the row that is taken back is the newest one rather than the last thing noor said in the seeded year. The twelfth capture proved the difference: the daemon really withdrew a message \u2014 its log says `took back 01M1M59VY0YA13H9M86HTA6XNP` \u2014 and the still framed the end of the thread, where the three rows that fit are the staged states, with the withdrawal months above them. A chat at 360 by 780 has a 372 point viewport and holds three rows; a mark that is not next to the others cannot be in the same picture as them."
+  },
+  {
+   "do": "sync"
+  },
+  {
+   "do": "wait",
+   "ms": 700
+  },
+  {
+   "do": "far",
    "arg": "unsend",
    "why": "Noor takes back the last thing she sent. `taken_back` was empty and `message_delete` zero in every region report in the set, so the scrollTo below was asking to frame a mark that was nowhere in the data \u2014 a messenger critic counted taking a note back as one of two capabilities this artifact enumerates and no artifact shows. The withdrawal happens on the far phone, so what the near phone draws is a note that was really taken away from it."
   },
