@@ -447,6 +447,11 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         ],
         'viewport_tall': double.parse(_viewportTall.toStringAsFixed(1)),
         'composer': _text.text,
+        // Whether the thread says, where the person is writing, that the other phone cannot be
+        // reached. A messenger critic read the only reconnect artifact in the set and found a note
+        // sitting at `going` with nothing anywhere saying why.
+        'says_the_link_is_down': AppScope.of(context).link.state == LinkState.offline ||
+            AppScope.of(context).link.state == LinkState.error,
         'attaching': _attaching,
         'replying_to': _replyTo?.id,
         // and the replies that have actually landed and are on the glass, each with the row it
@@ -1103,6 +1108,23 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         // against a placeholder at 4.44:1 — the text you type was half as legible as the prompt
         // telling you to type it. You write on paper. Everything under here is on paper.
         _WritingPad(children: [
+        // The link being down, said where the person is writing.
+        //
+        // A messenger critic read the only reconnect artifact in the set and found nothing in the
+        // thread that says the other phone cannot be reached: a note sat at `going` for 47 frames
+        // and the app never said why. The sentence has been in the voice file since the link was
+        // written and was used nowhere — `can't reach the other phone. it'll go when it can.` —
+        // which is the whole fact and the reassurance in one line, and it is the app's, not the
+        // transport's: it says what happens to what you wrote, not what state a socket is in.
+        if (scope.link.state == LinkState.offline || scope.link.state == LinkState.error)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(S.offlineQueued,
+                  style: Hands.margin(size: 13).copyWith(color: Pen.margin)),
+            ),
+          ),
         if (scope.partnerTyping)
           Padding(
             padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),

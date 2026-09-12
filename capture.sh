@@ -63,9 +63,20 @@ MISSING="$SCRATCH/missing.txt"
 # is also what says not to throw away what the earlier passes found.
 [ "$RESUMING" = "yes" ] || : > "$MISSING"
 note_missing() {
-  # once per artifact, however many passes have run
-  grep -q "^$1|" "$MISSING" 2>/dev/null || echo "$1|$2" >> "$MISSING"
+  # one line per artifact, however many passes have run — the last pass to say anything is the
+  # one that is right. Refusing to overwrite is what left two clips struck for frame counts from
+  # a pass that had been re-shot and thrown away: the manifest said 07_feeling_landing held 154
+  # frames when the file on disk and its own frames.json both say none.
+  unnote_missing "$1"
+  echo "$1|$2" >> "$MISSING"
   echo "  ✗ $1 — $2"
+}
+
+# An artifact that has since been taken again, and passed, is not missing.
+unnote_missing() {
+  [ -s "$MISSING" ] || return 0
+  grep -v "^$1|" "$MISSING" > "$MISSING.keep" 2>/dev/null || : > "$MISSING.keep"
+  mv "$MISSING.keep" "$MISSING"
 }
 
 # --only takes one scene or a comma-separated list of them
@@ -302,6 +313,7 @@ run_scene() { # name url [extra scene.js args...]
   echo "· $name"
   if node tools/capture/scene.js "evidence/scenes/$name.json" --url "$url" --browser "$BROWSER" "$@" \
         >"$SCRATCH/$name.out" 2>"$SCRATCH/$name.err"; then
+    unnote_missing "$name"
     echo "  ✓ $name — $(( $(date +%s) - at ))s, $(since) into the run"
   else
     # the first line of the error is the sentence; the rest is a stack trace nobody reads
@@ -412,9 +424,13 @@ make_clip() { # name fps min_seconds
     "evidence/$name.mp4" </dev/null || { note_missing "$name.mp4" "ffmpeg refused the frames"; return 1; }
   # the check reads the frames the clip was actually assembled from, not just its first run:
   # judging 06 on its opening still is how four static clips came back marked as passing
-  python3 tools/check/frames.py "$staged" --fps "$fps" --min-seconds "$min" --log "$LOG/$name.json" \
-    --strip "evidence/crops/${name}_strip.png" --out "$LOG/${name}.frames.json" >/dev/null \
-    || note_missing "$name.mp4" "the frame check failed; see $LOG/${name}.frames.json"
+  if python3 tools/check/frames.py "$staged" --fps "$fps" --min-seconds "$min" --log "$LOG/$name.json" \
+    --strip "evidence/crops/${name}_strip.png" --out "$LOG/${name}.frames.json" >/dev/null; then
+    # a clip that passes this time is not the clip that failed last time
+    unnote_missing "$name.mp4"
+  else
+    note_missing "$name.mp4" "the frame check failed; see $LOG/${name}.frames.json"
+  fi
   echo "  ✓ $name.mp4 ($i frames at ${fps}fps, $(since) into the run)"
 }
 

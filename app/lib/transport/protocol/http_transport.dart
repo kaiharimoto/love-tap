@@ -223,6 +223,13 @@ class HttpTransport implements Transport {
     try {
       await faults.beforeRequest('$method $path');
     } on InjectedFault catch (f) {
+      // The same set the response side does. A cut made here threw `offline: true` and left the
+      // status wherever it was, so the app went on believing it was connected while every request
+      // failed: 08_state_propagating filmed a note sitting at `going` for 47 frames with the link
+      // reading `connected` in its own report and nothing on the glass saying otherwise. An
+      // injected outage has to look to the app exactly like a real one, or the clip is of
+      // something the app cannot actually do.
+      _set(_status.copyWith(state: LinkState.offline, lastError: f.what));
       throw TransportException(f.what, offline: true);
     }
     final headers = <String, String>{

@@ -261,6 +261,30 @@ def object_coverage(surfaces):
             named = set(re.findall(r"object:\s*'([a-z0-9_]+)'", f.read()))
     except OSError:
         return {"why": "app/lib/feelings/builtins.dart is not readable from here"}
+    # And the ones the couple made themselves. This read only the built-ins, so it said `named: 34`
+    # and `named_but_neither: 0` while two objects in the vocabulary had never been looked at — the
+    # field whose whole job is to find holes was not being shown the part of the vocabulary most
+    # likely to have one, because an authored object is the only kind nobody wrote into this repo.
+    authored = set()
+    seed = os.path.join(ROOT, "app", "assets", "seed", "year")
+    try:
+        for name in sorted(os.listdir(seed)):
+            if not name.endswith(".jsonl"):
+                continue
+            with open(os.path.join(seed, name), encoding="utf-8") as f:
+                for line in f:
+                    if '"feeling_authored"' not in line:
+                        continue
+                    try:
+                        e = json.loads(line)
+                    except ValueError:
+                        continue
+                    asset = (e.get("payload") or {}).get("object_asset")
+                    if asset:
+                        authored.add(asset)
+    except OSError:
+        pass
+    named |= authored
     drawn = set()
     try:
         with open(os.path.join(lib, "drawn.dart"), encoding="utf-8") as f:
@@ -277,6 +301,7 @@ def object_coverage(surfaces):
         (unmeasured if "unmeasurable" in v else measured).add(k.split("/", 1)[1].rsplit(".", 1)[0])
     return {
         "named": len(named),
+        "authored_by_the_couple": sorted(authored),
         "measured": sorted(named & measured),
         "read_but_not_measurable": sorted(named & unmeasured),
         "drawn_in_the_app": sorted(named & drawn),

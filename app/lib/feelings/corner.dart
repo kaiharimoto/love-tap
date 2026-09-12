@@ -5,6 +5,7 @@
 // toward the other phone. How long you held it is how hard it arrives.
 import 'dart:async';
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,9 @@ import '../capture/bus.dart';
 import '../capture/hooks.dart';
 import '../flags.dart';
 import '../material/hands.dart';
+import '../material/library.dart';
+import '../material/light.dart';
+import '../material/paper.dart';
 import '../material/motion.dart';
 import '../material/objects.dart';
 import '../material/palette.dart';
@@ -41,6 +45,7 @@ class FeelingCorner extends StatefulWidget {
 _FeelingCornerState? _owner;
 
 class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateMixin {
+
   late final AnimationController _curl = AnimationController(
     vsync: this,
     duration: Motion.turn,
@@ -313,8 +318,7 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
             },
             child: AnimatedBuilder(
               animation: _curl,
-              builder: (context, _) =>
-                  CustomPaint(size: const Size(74, 74), painter: _CornerPainter(_curl.value)),
+              builder: (context, _) => TurnedCorner(curl: _curl.value),
             ),
           ),
         ),
@@ -323,11 +327,100 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
   }
 }
 
+/// The corner of the desk's top sheet, turned up: a window onto a real sheet, at the sheet's own
+/// density, in whichever light the desk is in.
+///
+/// It used to be a flat triangle of [Paper.underside] with a gradient over it, and an anti-goal
+/// critic measured what that is: 0.26 grey levels of texture across its interior against 1.162 for
+/// the paper tab a hundred pixels away, no contact shadow, and — the measurement that settles it —
+/// byte-identical between the day still and the dusk one over 4,316 pixels, while the desk beside
+/// it moved by 25.7 grey levels. A surface that does not answer the light in the room is not a
+/// surface in the room; it is a shape drawn over one, which is the app's own first example of what
+/// it exists not to be.
+///
+/// The gradient stays as what it always was: the shading on paper, rather than instead of it.
+class TurnedCorner extends StatefulWidget {
+  const TurnedCorner({super.key, required this.curl, this.size = 74, this.stock = 'looseleaf_01'});
+
+  /// 0 at rest, 1 fully turned back.
+  final double curl;
+  final double size;
+
+  /// Which sheet the desk's top one is. Named rather than fixed so a test can ask for one that is
+  /// not in the bundle and get back exactly what this drew before there was a sheet in it: the
+  /// flat colour and the gradient, which is the control the measurement below is against.
+  final String stock;
+
+  @override
+  State<TurnedCorner> createState() => _TurnedCornerState();
+}
+
+class _TurnedCornerState extends State<TurnedCorner> {
+  ui.Image? _paper;
+  String? _paperIs;
+
+  ui.Image? _sheet(BuildContext context) {
+    final want = paperAsset(
+        Light.of(context) == LightCondition.dusk ? '${widget.stock}_dusk' : widget.stock);
+    if (_paperIs != want) {
+      _paperIs = want;
+      final have = StockCache.peek(want);
+      if (have != null) {
+        _paper = have;
+      } else {
+        _paper = null;
+        unawaited(StockCache.load(want).then((img) {
+          if (mounted && _paperIs == want) setState(() => _paper = img);
+        }, onError: (Object _) {}));
+      }
+    }
+    return _paper;
+  }
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+        size: Size(widget.size, widget.size),
+        painter: _CornerPainter(
+          widget.curl,
+          _sheet(context),
+          MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0,
+        ),
+      );
+}
+
 /// The corner of the desk's top sheet, turned up. Drawn rather than rendered because it follows
 /// the finger; the fold sequence in assets/folds/corner_curl is used for the resting state.
 class _CornerPainter extends CustomPainter {
-  _CornerPainter(this.t);
+  _CornerPainter(this.t, this.paper, this.dpr);
   final double t;
+
+  /// The sheet this is the corner of, or null while it decodes. Null draws what this drew for
+  /// eleven cycles — the flat colour — which is honest about a render that has not arrived and is
+  /// not what anybody should be looking at.
+  final ui.Image? paper;
+  final double dpr;
+
+  /// A window onto the sheet, at the sheet's own density, near the top of it where a ruled page
+  /// is still plain. A corner is about a hundred device pixels across and the stock is over a
+  /// thousand: scaled to cover, its tooth would be averaged away, which is the fault this is
+  /// fixing, not a second copy of it.
+  void _window(Canvas canvas, ui.Image image, Rect dst, {double from = 0.03}) {
+    // How many of the canvas's own pixels one logical point is worth, asked of the canvas rather
+    // than of the MediaQuery. They are not always the same number: a clipped subtree is composited
+    // through a layer of its own, and measured at widget scale a window taken at the MediaQuery's
+    // three device pixels to the point came back with a fifth of the sheet's tooth — 0.49 grey
+    // levels against 2.69 — because it was being minified into that layer and then scaled up
+    // again. Taken at the canvas's own scale it measures 2.44. The canvas knows; ask it.
+    final m = canvas.getTransform();
+    final scale = m[0].abs() > 0.001 ? m[0].abs() : dpr;
+    final w = math.min(image.width.toDouble(), dst.width * scale);
+    final h = math.min(image.height.toDouble(), dst.height * scale);
+    final src = Rect.fromLTWH(image.width * from, image.height * 0.012, w, h);
+    canvas.drawImageRect(image, src, dst,
+        Paint()
+          ..filterQuality = FilterQuality.none
+          ..isAntiAlias = false);
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -355,6 +448,14 @@ class _CornerPainter extends CustomPainter {
       ..lineTo(size.width, size.height - h)
       ..close();
     canvas.drawPath(path, under);
+    // and the paper itself over the colour, inside the fold: the same sheet, seen from behind.
+    final sheet = paper;
+    if (sheet != null) {
+      canvas.save();
+      canvas.clipPath(path);
+      _window(canvas, sheet, Rect.fromLTWH(size.width - w, size.height - h, w, h));
+      canvas.restore();
+    }
     canvas.drawPath(path, shade);
     // The crease, and a lit edge just inside it. The dark line alone disappears against anything
     // dark — a photograph open in the viewer, the desk at dusk — and the pale one alone disappears
@@ -381,11 +482,18 @@ class _CornerPainter extends CustomPainter {
         ..lineTo(size.width, size.height)
         ..close();
       canvas.drawPath(lift, face);
+      if (sheet != null) {
+        canvas.save();
+        canvas.clipPath(lift);
+        // a different patch of the same sheet: the front of it, which is not the back
+        _window(canvas, sheet, Rect.fromLTWH(size.width - w, size.height - h, w, h), from: 0.41);
+        canvas.restore();
+      }
     }
   }
 
   @override
-  bool shouldRepaint(_CornerPainter old) => old.t != t;
+  bool shouldRepaint(_CornerPainter old) => old.t != t || !identical(old.paper, paper) || old.dpr != dpr;
 }
 
 /// The vocabulary fanned across the desk, by family. Objects, never a grid of icons.

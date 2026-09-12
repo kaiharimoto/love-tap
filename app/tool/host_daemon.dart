@@ -207,6 +207,45 @@ Future<void> main(List<String> argv) async {
           final e = await spine.append('message_delete', {'target': mine.id},
               at: now(), hostAssign: true);
           stdout.writeln('host-daemon: took back ${mine.id} as ${e.id}');
+        } else if (parts.first == 'edit') {
+          // Noor fixes what she wrote. Changing a message after it has gone is one of the eleven
+          // capabilities 13_messenger_states enumerates, and a messenger critic found it in no
+          // artifact in the set: `edited` was empty in every region report. Edited *here*, on the
+          // phone that wrote it, rather than marked edited on the phone that is reading it.
+          final gone = <String>{
+            for (final e in spine.ordered)
+              if (e.type == 'message_delete') e.payload['target'] as String,
+          };
+          Event? mine;
+          for (final e in spine.ordered) {
+            if (e.type != 'message' || e.author != Person.noor || gone.contains(e.id)) continue;
+            mine = e;
+          }
+          if (mine == null) {
+            stdout.writeln('host-daemon: nothing of noor\'s left to change');
+            continue;
+          }
+          final e = await spine.append('message_edit',
+              {'target': mine.id, 'text': parts.skip(1).join(' ')}, at: now(), hostAssign: true);
+          stdout.writeln('host-daemon: changed ${mine.id} as ${e.id}');
+        } else if (parts.first == 'reply') {
+          // An answer to the last thing the near phone said, carrying what it answers. The set had
+          // the composer holding a reply six times and a delivered one nowhere, so the strip that
+          // quotes the row being answered was never in a frame.
+          Event? theirs;
+          for (final e in spine.ordered) {
+            if (e.author == Person.noor) continue;
+            if (e.type != 'message' && e.type != 'photo' && e.type != 'voice_note') continue;
+            theirs = e;
+          }
+          if (theirs == null) {
+            stdout.writeln('host-daemon: nothing of theirs to answer');
+            continue;
+          }
+          final e = await spine.append(
+              'message', {'text': parts.skip(1).join(' '), 'reply_to': theirs.id},
+              at: now(), hostAssign: true);
+          stdout.writeln('host-daemon: answered ${theirs.id} as ${e.id}');
         } else if (parts.first == 'read') {
           // The far person opens the thread: a read marker over everything they have, which is
           // what turns `sent` into `read` on the near phone — because they read it, not because

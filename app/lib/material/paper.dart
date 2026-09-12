@@ -65,13 +65,19 @@ class MaskCache {
     final have = peek(asset);
     if (have != null) return Future.value(have);
     return _loading.putIfAbsent(asset, () async {
-      final data = await rootBundle.load(asset);
-      final codec = await ui.instantiateImageCodec(data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
-      final frame = await codec.getNextFrame();
-      _images[asset] = frame.image;
-      _loading.remove(asset);
-      _trim();
-      return frame.image;
+      try {
+        final data = await rootBundle.load(asset);
+        final codec = await ui.instantiateImageCodec(
+            data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
+        final frame = await codec.getNextFrame();
+        _images[asset] = frame.image;
+        _trim();
+        return frame.image;
+      } finally {
+        // the same reason as StockCache's: a mask that failed to read once must not be cached as
+        // a failure for ever
+        _loading.remove(asset);
+      }
     });
   }
 
@@ -151,14 +157,20 @@ class StockCache {
     final have = peek(asset);
     if (have != null) return Future.value(have);
     return _loading.putIfAbsent(asset, () async {
-      final data = await rootBundle.load(asset);
-      final codec = await ui.instantiateImageCodec(
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
-      final frame = await codec.getNextFrame();
-      _images[asset] = frame.image;
-      _loading.remove(asset);
-      _trim();
-      return frame.image;
+      try {
+        final data = await rootBundle.load(asset);
+        final codec = await ui.instantiateImageCodec(
+            data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
+        final frame = await codec.getNextFrame();
+        _images[asset] = frame.image;
+        _trim();
+        return frame.image;
+      } finally {
+        // In a finally, or a read that fails once is cached as a failure for the life of the app:
+        // putIfAbsent hands every later caller the same rejected future and the stock never gets a
+        // second chance, however long it is on the glass.
+        _loading.remove(asset);
+      }
     });
   }
 

@@ -1,142 +1,159 @@
 {
- "name": "13_messenger_states",
- "viewport": {
-  "width": 480,
-  "height": 1040,
-  "dpr": 3,
-  "why": "480 by 1040 of CSS at three times scale. Shooting these at 360 by 780 at four times scale was tried for one capture \u2014 same 1440 by 3120, and a width both phones actually have \u2014 and it broke the hero: the brief asks for at least eight notes visible in 02_chat.png with no tear id repeated, and a 360 point thread has a 501 point viewport that holds four. At 480 it holds eight, five of them on torn sheets, five distinct. The phone's width is where the five clips are shot and is what found the truncations and the wrong module row costs this cycle \u2014 those fixes all stay \u2014 but the still that the material row is judged on at three hundred per cent has to hold what the brief asks it to hold."
- },
- "settle": 700,
- "log": "evidence/logs/13_messenger_states.json",
- "steps": [
-  {
-   "do": "goTo",
-   "arg": 1
+  "name": "13_messenger_states",
+  "viewport": {
+    "width": 480,
+    "height": 1040,
+    "dpr": 3,
+    "why": "480 by 1040 of CSS at three times scale. Shooting these at 360 by 780 at four times scale was tried for one capture \u2014 same 1440 by 3120, and a width both phones actually have \u2014 and it broke the hero: the brief asks for at least eight notes visible in 02_chat.png with no tear id repeated, and a 360 point thread has a 501 point viewport that holds four. At 480 it holds eight, five of them on torn sheets, five distinct. The phone's width is where the five clips are shot and is what found the truncations and the wrong module row costs this cycle \u2014 those fixes all stay \u2014 but the still that the material row is judged on at three hundred per cent has to hold what the brief asks it to hold."
   },
-  {
-   "do": "wait",
-   "ms": 1000
-  },
-  {
-   "do": "scrollTo",
-   "arg": "end"
-  },
-  {
-   "do": "wait",
-   "ms": 600
-  },
-  {
-   "do": "far",
-   "arg": "read"
-  },
-  {
-   "do": "wait",
-   "ms": 1400
-  },
-  {
-   "do": "far",
-   "arg": "refuse 1 this phone is on an older version and cannot read that"
-  },
-  {
-   "do": "wait",
-   "ms": 400
-  },
-  {
-   "do": "stage"
-  },
-  {
-   "do": "wait",
-   "ms": 600
-  },
-  {
-   "do": "far",
-   "arg": "message actually ignore that, wrong thread",
-   "why": "So the row that is taken back is the newest one rather than the last thing noor said in the seeded year. The twelfth capture proved the difference: the daemon really withdrew a message \u2014 its log says `took back 01M1M59VY0YA13H9M86HTA6XNP` \u2014 and the still framed the end of the thread, where the three rows that fit are the staged states, with the withdrawal months above them. A chat at 360 by 780 has a 372 point viewport and holds three rows; a mark that is not next to the others cannot be in the same picture as them."
-  },
-  {
-   "do": "sync"
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "far",
-   "arg": "unsend",
-   "why": "Noor takes back the last thing she sent. `taken_back` was empty and `message_delete` zero in every region report in the set, so the scrollTo below was asking to frame a mark that was nowhere in the data \u2014 a messenger critic counted taking a note back as one of two capabilities this artifact enumerates and no artifact shows. The withdrawal happens on the far phone, so what the near phone draws is a note that was really taken away from it."
-  },
-  {
-   "do": "sync"
-  },
-  {
-   "do": "wait",
-   "ms": 900
-  },
-  {
-   "do": "wait",
-   "ms": 1200
-  },
-  {
-   "do": "far",
-   "arg": "read"
-  },
-  {
-   "do": "wait",
-   "ms": 1200
-  },
-  {
-   "do": "far",
-   "arg": "typing on"
-  },
-  {
-   "do": "sync"
-  },
-  {
-   "do": "wait",
-   "ms": 1200
-  },
-  {
-   "do": "openSender",
-   "arg": true
-  },
-  {
-   "do": "wait",
-   "ms": 500
-  },
-  {
-   "do": "scrollTo",
-   "arg": "end"
-  },
-  {
-   "do": "far",
-   "arg": "typing on"
-  },
-  {
-   "do": "awaitView",
-   "key": "partner_typing",
-   "value": true,
-   "timeout": 20000,
-   "settle": 150
-  },
-  {
-   "do": "slowSend",
-   "text": "ok \u2014 leaving now",
-   "ms": 20000
-  },
-  {
-   "do": "scrollTo",
-   "arg": "types:taken_back",
-   "why": "One kind, because three was a stretch that does not exist. The scene asked for an edited row, a withdrawn one and one still queued in one stretch of eight thousand; no such stretch is in the year, so the anchor found nothing, returned without moving, and wrote `anchor: null` \u2014 which reads as no anchor having been asked for. Two captures were framed on the end of the thread that way. The withdrawal is the mark no artifact in the set has ever shown, so it is the one to frame on; the search still maximises the paper around it."
-  },
-  {
-   "do": "shot",
-   "out": "evidence/13_messenger_states.png",
-   "settle": 200
-  },
-  {
-   "do": "report",
-   "out": "evidence/logs/13_messenger_states.report.json",
-   "at": "13_messenger_states.png"
-  }
- ]
+  "settle": 700,
+  "log": "evidence/logs/13_messenger_states.json",
+  "steps": [
+    {
+      "do": "goTo",
+      "arg": 1
+    },
+    {
+      "do": "wait",
+      "ms": 1000
+    },
+    {
+      "do": "scrollTo",
+      "arg": "end"
+    },
+    {
+      "do": "wait",
+      "ms": 600
+    },
+    {
+      "do": "far",
+      "arg": "read"
+    },
+    {
+      "do": "wait",
+      "ms": 1400
+    },
+    {
+      "do": "far",
+      "arg": "message actually ignore that, wrong thread"
+    },
+    {
+      "do": "sync"
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "far",
+      "arg": "unsend"
+    },
+    {
+      "do": "sync"
+    },
+    {
+      "do": "wait",
+      "ms": 900
+    },
+    {
+      "do": "far",
+      "arg": "message i will be on the 6:40, not the 7:10"
+    },
+    {
+      "do": "sync"
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "far",
+      "arg": "edit make that the 7:10 \u2014 they moved it",
+      "why": "Changing a message after it has gone is one of the eleven capabilities this artifact enumerates and a messenger critic found it in no artifact in the set: `edited` was empty in every region report. Changed on the phone that wrote it."
+    },
+    {
+      "do": "sync"
+    },
+    {
+      "do": "wait",
+      "ms": 900
+    },
+    {
+      "do": "far",
+      "arg": "reply yes \u2014 the tin one, by the door",
+      "why": "A delivered reply. The set held the composer carrying one six times and a landed one nowhere, so the strip that quotes the row being answered was never in a frame."
+    },
+    {
+      "do": "sync"
+    },
+    {
+      "do": "wait",
+      "ms": 900
+    },
+    {
+      "do": "far",
+      "arg": "read"
+    },
+    {
+      "do": "wait",
+      "ms": 1200
+    },
+    {
+      "do": "far",
+      "arg": "refuse 1 this phone is on an older version and cannot read that"
+    },
+    {
+      "do": "wait",
+      "ms": 400
+    },
+    {
+      "do": "stage"
+    },
+    {
+      "do": "wait",
+      "ms": 900
+    },
+    {
+      "do": "far",
+      "arg": "typing on"
+    },
+    {
+      "do": "sync"
+    },
+    {
+      "do": "awaitView",
+      "key": "partner_typing",
+      "value": true,
+      "timeout": 20000,
+      "settle": 150
+    },
+    {
+      "do": "scrollTo",
+      "arg": "end"
+    },
+    {
+      "do": "slowSend",
+      "text": "ok \u2014 leaving now",
+      "ms": 20000
+    },
+    {
+      "do": "wait",
+      "ms": 400
+    },
+    {
+      "do": "scrollTo",
+      "arg": "end",
+      "why": "The end, not `types:taken_back`. The thirteenth capture asked for a window holding one named type and the thread's own record said what happened: no stretch of rows held it, so the thread was never moved and the shot was of wherever it had been left. Everything this artifact is about now happens in the last rows of the thread, so the end is where it is."
+    },
+    {
+      "do": "shot",
+      "out": "evidence/13_messenger_states.png",
+      "settle": 200
+    },
+    {
+      "do": "report",
+      "out": "evidence/logs/13_messenger_states.report.json",
+      "at": "13_messenger_states.png"
+    }
+  ]
 }
