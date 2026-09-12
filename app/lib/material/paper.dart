@@ -115,11 +115,22 @@ class StockCache {
   static final Map<String, ui.Image> _images = {};
   static final Map<String, Future<ui.Image>> _loading = {};
 
-  /// How many stocks to hold. They are large — an A5 sheet decodes to 13.9 MB and the receipt to
-  /// 21.9 — so this is a small number deliberately: ten is more distinct paper than any one
-  /// screen has ever shown, and it is 140 MB that is bounded and predictable instead of a share
-  /// of a cache that everything else is also competing for.
-  static const int keep = 10;
+  /// How much decoded paper to hold, in bytes.
+  ///
+  /// It was a count of ten, on the reasoning that ten is more distinct paper than any one screen
+  /// has ever shown. Moments shows nineteen: twenty tiles, each on a variant of its own family,
+  /// which is what stops a wall of pictures reading as one sheet repeated. The twelfth capture
+  /// measured what that cost — `stocks_dropped_to_stay_inside_the_pool: 9`, and a piece drawing the
+  /// flat colour underneath it because the paper it asked for had been evicted and was decoding
+  /// again. A sheet with no paper on it is the anti-goal, and a pool that thrashes is where they
+  /// come from.
+  ///
+  /// A budget rather than a count, because the sheets are not the same size: a full A5 decodes to
+  /// 13.9 MB and a receipt to 21.9. 320 MB holds about twenty-one full sheets and many more small
+  /// ones, which is past what any screen in the app asks for. It sits alongside the framework's own
+  /// image cache, which this capture measured at 43 MB of its 384 MB ceiling — the paper is the
+  /// thing that is large, and it is the thing being budgeted here.
+  static const int budget = 320 << 20;
 
   static int get held => _images.length;
   static int dropped = 0;
@@ -152,7 +163,7 @@ class StockCache {
   }
 
   static void _trim() {
-    while (_images.length > keep) {
+    while (_images.length > 1 && bytes > budget) {
       final oldest = _images.keys.first;
       _images.remove(oldest);
       dropped += 1;

@@ -21,28 +21,35 @@
   }
  },
  "visible": [
+  "0001M3AY8G83A3FBSRB1Y7W78Q",
+  "0001M3F41R2APQC59QKBMZK4XF",
   "0001M3Y4GR5ZE8WDQ00S3NX0KF",
   "0001M4GW48FEW3M67XKAZT5051",
   "0001M4ZQQ0H0PPVTKMMQEE268D",
   "0001M59VY0YA13H9M86HTA6XNP"
  ],
  "paper": [
+  "0001M3F41R2APQC59QKBMZK4XF",
   "0001M59VY0YA13H9M86HTA6XNP"
  ],
  "tears": {
+  "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_043",
+  "0001M3F41R2APQC59QKBMZK4XF": "tear_026",
   "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_048",
   "0001M4GW48FEW3M67XKAZT5051": "tear_010",
   "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
   "0001M59VY0YA13H9M86HTA6XNP": "tear_052"
  },
  "stocks": {
+  "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
+  "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
   "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
   "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
   "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
   "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
  },
  "scroll": {
-  "first": 8065,
+  "first": 8063,
   "last": 8069,
   "of": 8069
  },
@@ -61,25 +68,26 @@
  "paper_stocks": 54,
  "the_smallest_patch_of_a_stock_anything_took": [
   "index_02 2560x1593",
-  "205x127 of it, at its own size",
-  25907.275486801245
+  "153x95 of it, at its own size",
+  14572.842461325701
  ],
- "paper_at_its_own_size": 132,
+ "paper_at_its_own_size": 153,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [
-  "graph_03"
+  "graph_03",
+  "sticky_blue_02"
  ],
- "paper_that_arrived_after_the_piece_was_drawn": 18,
+ "paper_that_arrived_after_the_piece_was_drawn": 22,
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 78,
+ "masks_dropped_to_stay_inside_the_pool": 93,
  "stocks_held": 10,
- "stocks_held_bytes": 142543040,
- "stocks_dropped_to_stay_inside_the_pool": 9,
+ "stocks_held_bytes": 143434240,
+ "stocks_dropped_to_stay_inside_the_pool": 14,
  "image_cache": {
-  "held": 30,
-  "bytes": 32665472,
+  "held": 35,
+  "bytes": 35652800,
   "budget": 402653184,
-  "live": 28,
+  "live": 33,
   "still_decoding": 0
  },
  "setup_showing": false,
@@ -89,13 +97,13 @@
  "sensation": null,
  "asked_a_motor_for": [],
  "the_launch_took": {
-  "the framework": 16,
-  "the library index": 65,
-  "the ink plates": 67,
-  "the desk": 209,
-  "the log": 1099,
-  "the first frame": 429,
-  "everything": 1885
+  "the framework": 8,
+  "the library index": 24,
+  "the ink plates": 38,
+  "the desk": 168,
+  "the log": 605,
+  "the first frame": 341,
+  "everything": 1184
  },
  "sync": {
   "transport": "local",
@@ -118,8 +126,8 @@
    "peer_cursor": 14062,
    "our_cursor": 14062,
    "last_error": null,
-   "since": "2026-09-12T00:27:34.641Z",
-   "last_contact": "2026-09-12T00:28:16.451Z",
+   "since": "2026-09-12T16:17:28.700Z",
+   "last_contact": "2026-09-12T16:18:08.857Z",
    "certificate": null,
    "setup_address": null
   }
