@@ -1,0 +1,200 @@
+{
+  "critic": "code",
+  "cycle": 11,
+  "score": 13,
+  "floor": 13,
+  "meets_floor": true,
+  "findings": [
+    {
+      "severity": "serious",
+      "artifact": "app/lib/spine/types.dart",
+      "where": "types.dart:266, :278, :289, :301, :312 (the facet `'us'`), read together with app/lib/spine/search.dart:87-89",
+      "what": "Five of the six shared-life types declare the search facet `'us'`, and `_index` adds every facet name to the inverted index as a plain keyword (`for (final f in spec.search.facets) addText(f);`), so the word `us` matches every date, to-do, milestone, ritual and shelf card in the log. Counted against the seeded year (seed/year/*.jsonl, 14,061 events) a search for `us` returns 405 rows, of which 351 match only on the facet name and 54 actually contain the word.",
+      "why": "This is byte for byte the failure the registry says it fixed: types.dart:93-101 and docs/EVENT_TYPES.md record that naming the Moments lens in `facets` made `happened` a keyword that 'returned every date, ritual, milestone and shelf card in the year', and the fix was to give the lens its own field. `us` is a commoner word between two people than `happened`, it is still a facet on the same five types, and the search behaviour the rubric asks each type to have is therefore wrong for five of eighteen. The same field's doc comment (types.dart:30) still says facets are 'Facet names this type belongs to in Moments filters', which Moments has not read since it moved to `lens` (moments_region.dart:177)."
+    },
+    {
+      "severity": "serious",
+      "artifact": "app/lib/regions/chat/note.dart",
+      "where": "note.dart:236-243, the `switch (target.type)` in `_ReplyStrip`, whose default arm is `_ => target.type` at :242; reachable from chat_region.dart:887 (`S.reply` is offered on every row) and chat_region.dart:826 (`reply_to` is written with the target's id)",
+      "what": "A per-type switch in a shared region file with a fall-through that prints the raw registry id. Long-press any non-marginal module row — date_event, todo_event, milestone, ritual_kept, passed_on, ping, feeling_authored — pick `reply`, and the landed reply draws a strip reading `date_event` / `todo_event` / `ritual_kept` / `passed_on` / `feeling_authored`. Those rows are explicitly not margin sentences (thread_types_test.dart:103-105 asserts it), so they take the full note path at note.dart:111 and get the long-press at note.dart:170. Nothing in app/test names `_ReplyStrip`.",
+      "why": "The build's stated architecture is that a type reads as one sentence everywhere away from the thread (`summaryOf`), and thread_types_test.dart:70-88 exists because 'there were two sentences for one event and they had drifted'. There are still two here and they still disagree: the composer banner at chat_region.dart:1105 falls back to `summaryOf` and shows words, while the row that lands shows the stored id. Seven of eighteen types are affected and five of them show an underscore to a person, which is the exact condition thread_types_test asserts against in the one place it can see."
+    },
+    {
+      "severity": "serious",
+      "artifact": "app/test/persistence_boundary_test.dart",
+      "where": "persistence_boundary_test.dart:30, :54, :96 (all three walks are `Directory('lib')`), and the token list at :57-58; against app/web/push/sw.js:31, :65, :94",
+      "what": "Two holes in the one rule the brief says must fail the build. (a) The browser-storage rule needs both a web import and one of seven literal tokens (`indexedDB|IDBFactory|IDBDatabase|localStorage|sessionStorage|openDatabase|caches`). A complete second event log written to the Origin Private File System — `import 'package:web/web.dart'`, `navigator.storage.getDirectory()`, `getFileHandle('second_spine.jsonl', create: true)`, `createWritable().write(...)` — contains none of them, imports no listed package and calls no `dart:io` write, so it passes all three tests. I ran the three regexes verbatim against exactly that source: driver rule false, browser-storage rule false (web import seen, storage token not), dart:io rule false. (b) All three walks are `Directory('lib')` only, so app/web/push/sw.js — a file the app ships and runs — opens the spine's IndexedDB database at :31 and :65 and writes `push.shown` into its meta store at :94, from outside the boundary, with no rule able to see it.",
+      "why": "Rule 1 is 'any file outside app/lib/spine/ that imports a storage driver fails the build'. The rule is an enumeration of package names and API spellings, and an enumeration is walkable by definition: `sembast_web`, `hive_ce`, `drift_flutter`, `flutter_secure_storage`, `localstorage` and `get_storage` all slip past the driver list for the same reason. module_costs_test.dart:23-33 learned the `web/` half of this lesson ('a file the app ships and runs is a file this counts, whatever language it is in'); persistence_boundary_test did not."
+    },
+    {
+      "severity": "serious",
+      "artifact": "docs/EVENT_TYPES.md",
+      "where": "EVENT_TYPES.md:43 (row 11, search column 'by signal') against app/lib/spine/search.dart:115, and app/test/the_table_says_what_the_code_does_test.dart:84",
+      "what": "The table promises `state_passive` is searchable 'by signal'. `search.dart:115` reads `if (e.type == 'state_declared') addText(e.payload['signal']);` — the signal is indexed for state_declared and for nothing else, and `state_passive`'s SearchSpec (types.dart:251) has no textFields at all. 4,120 of the seeded year's 14,061 events are state_passive and not one of them can be found by its signal. The test that is named for this check skips it: line 84 reads `if (key == 'feeling_id' || key == 'signal') continue; // handled by name, below`, and no test below handles `signal` — the only later test checks the word 'media facet'. Search's facet tab compounds it: search_page.dart:61 maps the `state` tab to `['state_declared']` only, so the tab excludes half the types the registry gives the `state` facet to.",
+      "why": "Rule 2 asks that the eighteen types and the document agree on each type's search behaviour and that a test assert it. The document, the registry and the index disagree for this row, and the test written to catch exactly this class of drift carries a comment claiming a check that does not exist — which is a test asserting less than its name."
+    },
+    {
+      "severity": "minor",
+      "artifact": "app/test/the_host_serves_over_tls_test.dart",
+      "where": "the_host_serves_over_tls_test.dart:82-95, the test named 'no key material is in the repository'",
+      "what": "The test walks `Directory('lib')`, `Directory('assets')` and `Directory('web')` — all relative to app/ — and only files ending `.dart`, `.json` or `.html`, looking for three literal PEM headers. It never looks at the repository root, tools/, docs/, seed/, blender/, capture.sh, run.sh, bootstrap.sh or android/, and it cannot see a `.pem`, `.key`, `.crt` or `.env` file at all. It also does not look for `tskey-` or for a pairing secret, which are two of the three things the brief names.",
+      "why": "Rule 6 is 'no secret in any committed file'. A test whose name claims the repository and whose body covers three directories under app/ and three extensions would pass with a `TS_AUTHKEY=tskey-auth-…` line committed in run.sh. I checked the working tree by hand instead — no `tskey-`, no PEM private key, no base64 key blob, and no `.pem/.key/.crt/.p12/.jks/.keystore/.env/.authkey` file anywhere outside .git, toolchain/ and app/build/ — so the tree is clean today; it is the guard that is narrower than its name. Git history was out of scope for me by instruction, so the history half of rule 6 is unchecked."
+    },
+    {
+      "severity": "minor",
+      "artifact": "app/lib/flags.dart",
+      "where": "flags.dart:8 (`TRANSPORT` defaults to `'local'`), main.dart:134-136, local_transport.dart:14 and :27",
+      "what": "A build made without `--dart-define=TRANSPORT=tailscale` selects `LocalTransport` with `LocalBinding(host: '127.0.0.1')`, which is what `flutter build apk --release` on its own produces; run.sh:15 also defaults `TRANSPORT=\"local\"`. Nothing in the build or the test suite asserts that a shipped build binds the tailnet.",
+      "why": "Rule 7 says the host binds only its tailnet address. Loopback is narrower than the tailnet rather than wider, so this is not a leak and I have not scored it as one — but the tailnet binding is a flag rather than the default, and the only tests of it (tailnet_test.dart) exercise `TailscaleBinding` directly, which the default build never constructs."
+    },
+    {
+      "severity": "minor",
+      "artifact": "app/lib/spine/projections/thread.dart",
+      "where": "thread.dart:201 names `thread_incremental_test`; app/test/scroll_cost_test.dart:198-210",
+      "what": "The comment says 'thread_incremental_test holds it to exactly that' and there is no such file in app/test — the equivalent assertions live in scroll_cost_test.dart:153-209. And one of those, 'a log that is not an append is rebuilt rather than trusted' (:198), cannot exercise the rebuild in its first half: `update()` calls `inLogOrder(log)` first, so the shuffled list sorts back to the same order, `fold`'s `ordered[_seen-1].id != _lastId` check at :244 never fires, and the incremental path returns the same answer trivially. Only the shorter-log half at :208 forces `_reset()`.",
+      "why": "Rule 9: a claim in the source that points at a test which does not exist, and a test whose first assertion is weaker than its name."
+    },
+    {
+      "severity": "minor",
+      "artifact": "app/test/every_screen_builds_test.dart",
+      "where": "every_screen_builds_test.dart:168-180, 'a sheet that comes up over a note'",
+      "what": "The test builds a `DeskSheet` around a hand-written `Column` of four literal strings ('reply', 'react', 'change it', 'take it back') and asserts `find.text('take it back')`. It never constructs the app's own sheet — `_actions` at chat_region.dart:881 — and the four words are literals rather than `S.reply`/`S.react`/`S.edit`/`S.delete`, so a change to the real sheet's contents or wording cannot fail it.",
+      "why": "Rule 9: the name says the sheet that comes up over a note; the body tests a stand-in that the app never shows. It is also why the reply path in finding 2 is untested."
+    },
+    {
+      "severity": "minor",
+      "artifact": "app/lib/transport/protocol/server_io.dart",
+      "where": "server_io.dart:181-183 and `_readBody` at :255-261",
+      "what": "Every `/v1` request has its whole body accumulated into a `List<int>` with no size cap before `_refuseReason` is consulted at :183; `kMaxPushBatch` is only checked at :396, after the body has been read and decoded. An unauthenticated caller that can reach the address can make the host buffer an arbitrary amount before being refused.",
+      "why": "Rule 7's second half is that the host refuses any request not authenticated with the pairing key. It does refuse — but it does the unbounded work first, so 'refuses' is true of the response and not of the cost."
+    }
+  ],
+  "rules": [
+    {
+      "rule": "1. One event log and no second store; any file outside app/lib/spine/ that imports a storage driver fails the build",
+      "verdict": "PARTIAL",
+      "evidence": "The rule exists and is four tests deep (persistence_boundary_test.dart:27-125): a package list that now matches conditional, deferred and multi-line directives; a browser-storage rule; a dart:io-writes rule with a named allowlist; and a drivers-under-store/ rule. All four pass, and the app genuinely has one store (store.dart:16 `SpineStore`, reached only through open_store.dart:8-12; the only driver imports are store_web.dart:4 and store_native/store_sqlite). But the rule is an enumeration and it is walkable: I ran its three regexes verbatim against a complete second event log written through OPFS (`package:web` + `navigator.storage.getDirectory()` + `createWritable()`) and all three said clean — no listed package, none of the seven storage tokens, no dart:io write. And all three walks are `Directory('lib')` (:30, :54, :96), so app/web/push/sw.js opens the spine database at :31/:65 and writes `push.shown` at :94 from outside the boundary, invisibly to the rule. The allowlist at :83-99 also still names `lib/capture/hooks_io.dart`, a file that does not exist."
+    },
+    {
+      "rule": "2. At least fourteen event types, docs and code agreeing, each with a thread rendering, a notification treatment and a search behaviour, and a test asserting the same list",
+      "verdict": "PARTIAL",
+      "evidence": "Eighteen types (types.dart:120-336), and spine_schema_test.dart:8-18 holds the ordered id list in docs/EVENT_TYPES.md against `kEventTypes` in both directions. Rendering: thread_types_test.dart:16-30 holds every `renderer` id to `kThreadRenderers` both ways, and marginality is asked of the registry (note.dart:196-198) rather than of a second list. Notification: NotificationPrefs.defaults (notifications.dart:41-52) is built from `kEventTypes`, the Settings row reads `spec.announced` (notifications.dart:88), and the_push_says_one_thing_test.dart:38-48 ties `pushed` to `notify` in both directions with the service worker holding no table of its own. Search is where it breaks: `state_passive` is promised 'by signal' at EVENT_TYPES.md:43 and the signal is indexed only for `state_declared` (search.dart:115), and the test that reads the search column skips the key with a comment pointing at a check that does not exist (the_table_says_what_the_code_does_test.dart:84). The facet column is worse than unasserted — facet names are indexed as keywords (search.dart:87-89), so `us` returns 351 shared-life rows out of 405 hits in the seeded year."
+    },
+    {
+      "rule": "3. A fifth shared-life module is a directory plus one line; the commit that added the fourth touched nothing under the first three",
+      "verdict": "PARTIAL",
+      "evidence": "The registry half holds and holds well. registry.dart is six imports and a five-element `const List<Module>`; every consumer is generic over it — renderers.dart:180 and :224, assignment.dart:35, us_region.dart:42-93, search_page.dart:62, hooks.dart:761 — with no per-module branch anywhere. module_costs_test.dart:35-75 counts the cost by reading the source across lib/**.dart and web/**.{js,json,html}, forbidding a module's event type, its renderer id and its own id in any file outside its directory except lib/spine/types.dart, and it passes. What a module still costs is its directory, one line in registry.dart, an entry in spine/types.dart and a row in docs/EVENT_TYPES.md — four edits, two of them shared files — and module.dart:6-26 says so plainly rather than claiming otherwise. The commit half I could not check: reading the git log was outside the instructions I was given, so I verified the structure and not the diff. floors_test.dart:119-130 records that a previous reader built a sixth module and found nothing under the five existing ones changed; that is their evidence, not mine."
+    },
+    {
+      "rule": "4. Typing and presence ticks are never events and never reach the log",
+      "verdict": "PASS",
+      "evidence": "`Ephemeral` is a separate wire type (transport.dart:152-165) with its own route (`POST /v1/ephemeral`, server_io.dart:199, :437-442) and its own queue (`_forClient`, :89), and nothing on that path touches the spine. `Spine.append` validates the type against the registry (spine.dart:219-221) and there is no `typing` or `presence` entry, so one cannot be written even by mistake. transport_local_test.dart:287-302 sends a typing frame client-to-host and a presence frame host-to-client and asserts `r.host.length == 0` and `r.client.length == 0`; reliability_test.dart:119-132 repeats it as a certified capability, comparing `host.length + client.length` before and after. The app's own typing path (scope.dart:208) calls `sendEphemeral` and nothing else."
+    },
+    {
+      "rule": "5. Read markers are never rendered as rows in the thread",
+      "verdict": "PASS",
+      "evidence": "Three independent guards. The registry says `rowInThread: false` (types.dart:216-225) and spine_schema_test.dart:31-34 asserts it for read_marker and reaction. The projector returns before `_add` for read_marker (thread.dart:320-326) and for anything with `rowInThread == false` (thread.dart:328), so no ThreadItem is ever made for one. And the renderer it names, `ink_dries`, is `_neverARow` (renderers.dart:140, :175), so even a row that reached the thread would draw nothing. What a read marker actually moves is the `_DeliveryMark` in the margin of the sender's own rows (note.dart:298, thread.dart:400-406)."
+    },
+    {
+      "rule": "6. No secret in any committed file",
+      "verdict": "PARTIAL",
+      "evidence": "The working tree is clean: no `tskey-auth-…`, no `BEGIN … PRIVATE KEY`, no long base64 key blob, and no `.pem`, `.key`, `.crt`, `.p12`, `.jks`, `.keystore`, `.env` or `.authkey` file outside .git/, toolchain/ and app/build/. Every appearance of `TS_AUTHKEY` is a variable name in bootstrap.sh:217-221, tools/tailscale/up.sh:48-109, docs and README; bootstrap.sh writes only the word 'present' or 'pending' to the gitignored toolchain, and the node state directories are ignored (app/.gitignore, root .gitignore). The guard is the part that is partial: the_host_serves_over_tls_test.dart:82-95 is named 'no key material is in the repository' and covers three directories under app/ and three extensions, so it would not see a key in run.sh, tools/, docs/, android/ or a .pem file. History I did not check: reading the git log was outside my instructions, so the history half of this rule is unverified by me."
+    },
+    {
+      "rule": "7. The host binds only its tailnet address and refuses any request not authenticated with the pairing key",
+      "verdict": "PARTIAL",
+      "evidence": "Binding: `addressToServeOn` (tailnet.dart:56-72) checks a declared address against 100.64.0.0/10 and fd7a:115c:a1e0::/48 rather than trusting it, throws `NotOnTheTailnet` when there is none, and has no fallback; tailnet_test.dart:32-43 asserts that declaring 0.0.0.0, 127.0.0.1, 192.168.0.10 or :: throws. The userspace path binds 127.0.0.1 (tailscale_transport.dart:90), which is narrower, and says why at :49-58. Authentication: every `/v1` route except the two pairing calls goes through `_refuseReason` (server_io.dart:183, :275-311), which checks header, pairing, device id, skew, HMAC with `constantTimeEquals`, and a nonce on non-GET, and answers 401 with the reason. Three deductions. The PWA bundle is served unauthenticated to anything that can reach the address (`_serveStatic`, :477-501) — reasoned at :20-26 and fenced by `insideTheBundle` — as are /setup and the .mobileconfig. The whole body is read before authentication with no cap (:181, :255-261). And the default build does not use this transport at all (flags.dart:8). The real-tailnet half is honestly recorded as pending rather than passed: coldstart_test.dart:85-115 calls `markTestSkipped` when the nodes are not answering, with a comment saying a previous reader found it reporting as a pass."
+    },
+    {
+      "rule": "8. Every file in assets/ has an entry in assets/MANIFEST.json naming its generator, and nothing was downloaded",
+      "verdict": "PASS",
+      "evidence": "I compared the tree against the manifest myself: 744 files under assets/, 742 entries, every entry carrying a non-empty `generator`, and the two files with no entry — assets/sound/MANIFEST.sound.json and assets/tears/relief.json — are index files the generators write beside their output and are named in the checker's EXEMPT set (tools/check/manifest.py:22-23). `python3 tools/check/manifest.py` prints '740 files in assets/, 0 without an entry naming their generator' and exits 0, matching evidence/logs/manifest.json. All ten distinct generators exist on disk (six blender/*.py, four tools/*.py). The three fonts are built rather than fetched — tools/handwriting/build.py:13 'Nothing is downloaded; the RNG is seeded per (face, glyph, variant, attempt)' — and there is no http(s) fetch anywhere in tools/handwriting, tools/tears, tools/sound, tools/ink_plate.py or blender/."
+    },
+    {
+      "rule": "9. The tests pass, and they test what they claim to",
+      "verdict": "PARTIAL",
+      "evidence": "They pass: I ran `cd app && ../toolchain/flutter/bin/flutter test` — 269 passed, 1 skipped (the tailnet cold start, honestly skipped rather than counted green), exit 0. No test in the suite is assertion-free. The best of them read the source rather than the behaviour and carry the bug they were written against: module_costs_test, the_push_says_one_thing_test, persistence_boundary_test, capture_hooks_return_test. Four are weaker than their names. the_table_says_what_the_code_does_test.dart:84 excludes `signal` and `feeling_id` from the one check it makes of the search column, pointing at a later check that does not exist. scroll_cost_test.dart:198-210 claims to test a log that is not an append and its first half is an append. every_screen_builds_test.dart:168-180 tests a hand-built stand-in for the action sheet rather than the sheet. the_host_serves_over_tls_test.dart:82 claims the repository and covers three directories under app/. And nothing anywhere exercises `_ReplyStrip`, which is where finding 2 lives."
+    }
+  ],
+  "what_is_working": [
+    "One spine and one store, genuinely: SpineStore is the only persistence interface, open_store.dart is the only file that names a platform, and the two drivers are the two files under spine/store/ that say so in their first line.",
+    "The registry actually drives the app rather than describing it. kThreadRenderers is assembled from the messenger's bodies, the feelings' and every Module.bodies (renderers.dart:166-181); the paper each type is written on comes from Module.stocks (assignment.dart:35); marginality is asked of the registry (note.dart:196); Moments filters on the type's own `lens` (moments_region.dart:177); the notification defaults and the Settings wording come from the type (notifications.dart:41-52, :88); and the service worker holds no per-type table at all, reading the registry's words out of the app's meta store.",
+    "The module registry is as generic as it claims. Every one of the fourteen references to kModules outside registry.dart is a comprehension over it, with no per-module branch, and module_costs_test counts the remaining cost by reading lib/ and web/ rather than by asserting a number.",
+    "Tests written against specific past failures, with the failure recorded in the test: the storage-driver regex that a conditional import walked past, the per-type table in sw.js that had already drifted, the capture handle that awaited a route, the projector reset that swallowed the first mark of the year. These are the tests that make the suite worth running.",
+    "The honest 'pending': the tailnet cold start marks itself skipped rather than passing, and refuses to overwrite a dated run that actually happened (coldstart_test.dart:74-115).",
+    "The assets library: 740 files, every one naming the script that made it and the settings it was made with, ten generators all present, nothing fetched."
+  ],
+  "verdict": "The architecture is sound where the brief makes it structural, and the source shows it rather than asserting it: one spine, one store behind one interface, and a registry that is read by the thread, the search index, Moments, the Settings rows, the push words and every module's paper, with tests that read the source and carry the bug they were written against. A sixth module really is a directory, a line in registry.dart, a registry entry and a table row, and nothing under the first five would move. What keeps this at the floor rather than above it is that three of the coherence claims are not true of the code as it stands. The facet `us` is still indexed as a keyword on five types, which reproduces — with a commoner word — the exact bug types.dart:93-101 records as fixed: 405 hits in the seeded year, 351 of them matching nothing a person wrote. `_ReplyStrip` at note.dart:236-243 is the last per-type switch in a shared region file, its default arm prints the stored id, and it is reachable by long-pressing any module row and choosing reply, so the composer shows words and the row that lands shows `date_event` — two sentences for one event, drifted, in the one place the test written against that cannot see. And the persistence rule the brief says must fail the build is an enumeration: a whole second event log written through the Origin Private File System passes all three of its checks, and the one file that already reaches storage from outside the boundary, app/web/push/sw.js, is outside every walk because all three are `Directory('lib')`. None of these is blocking — the log is single, the modules extend cleanly, the tests pass and are mostly honest about what they check — so the row meets its floor at 13 and does not clear it.",
+  "opened": [
+    "app/lib/spine/types.dart",
+    "app/lib/spine/search.dart",
+    "app/lib/spine/projections/thread.dart",
+    "app/lib/spine/store/open_store.dart",
+    "app/lib/spine/store/store.dart",
+    "app/lib/spine/store/store_web.dart",
+    "app/lib/thread/renderers.dart",
+    "app/lib/modules/registry.dart",
+    "app/lib/modules/module.dart",
+    "app/lib/regions/chat/note.dart",
+    "app/lib/regions/chat/chat_region.dart",
+    "app/lib/regions/chat/search_page.dart",
+    "app/lib/regions/settings/notifications.dart",
+    "app/lib/regions/us/us_region.dart",
+    "app/lib/regions/moments/moments_region.dart",
+    "app/lib/transport/transport.dart",
+    "app/lib/transport/protocol/server_io.dart",
+    "app/lib/transport/tailscale/tailnet.dart",
+    "app/lib/transport/tailscale/tailscale_transport.dart",
+    "app/lib/transport/local/local_transport.dart",
+    "app/lib/capture/hooks.dart",
+    "app/lib/flags.dart",
+    "app/lib/main.dart",
+    "app/web/push/sw.js",
+    "app/pubspec.yaml",
+    "app/test/spine_schema_test.dart",
+    "app/test/persistence_boundary_test.dart",
+    "app/test/the_table_says_what_the_code_does_test.dart",
+    "app/test/thread_types_test.dart",
+    "app/test/module_costs_test.dart",
+    "app/test/the_push_says_one_thing_test.dart",
+    "app/test/tailnet_test.dart",
+    "app/test/the_host_serves_over_tls_test.dart",
+    "app/test/nothing_leaves_the_phone_test.dart",
+    "app/test/transport_local_test.dart",
+    "app/test/reliability_test.dart",
+    "app/test/scroll_cost_test.dart",
+    "app/test/coldstart_test.dart",
+    "app/test/capture_hooks_return_test.dart",
+    "app/test/every_screen_builds_test.dart",
+    "app/test/floors_test.dart",
+    "app/test/where_the_evidence_goes.dart",
+    "docs/EVENT_TYPES.md",
+    "assets/MANIFEST.json",
+    "assets/tears/relief.json",
+    "tools/check/manifest.py",
+    "tools/check/recipes.py",
+    "tools/handwriting/build.py",
+    "tools/tailscale/up.sh",
+    "bootstrap.sh",
+    "run.sh",
+    ".gitignore",
+    "app/.gitignore",
+    "seed/year/*.jsonl (all twelve, counted rather than read)",
+    "evidence/logs/12_search.report.json",
+    "evidence/logs/manifest.json",
+    "evidence/logs/tests.log",
+    "evidence/logs/webpush.txt",
+    "evidence/logs/apk.json",
+    "ran: cd app && ../toolchain/flutter/bin/flutter test (269 passed, 1 skipped, exit 0)",
+    "ran: python3 tools/check/manifest.py (740 files, 0 without an entry, exit 0)"
+  ],
+  "not_worth_opening": [
+    "The fifteen stills and clips (01_pulse.png … 17_setup_pwa.png, 06/07/08/11/15 .mp4) — my row is the half of coherence that cannot be photographed. A still cannot show whether a lint would fail the build, whether a switch has a default arm, or whether a test asserts what its name says; four other critics read the pictures and this report would add nothing to theirs by looking at them again.",
+    "evidence/crops/ in full, including dusk_pulse.png, haptics_strip.png, 02_chat_300_shadow.png and the six reception crops — derived measurements of surfaces, light and haptics. None of them can confirm or refute a claim about the source, which is what every finding here is.",
+    "evidence/logs/hand.json, torn.json, flat.json, lines.json, holes.json, grain.json, surfaces.json, tears.json, hairline.json, fonts.json, crops.json, haptics.json, haptics.check.json, scroll_webkit.json, pwa.json, reception*.json — measurements of the material and of frame cost. The one I would have used, scroll_webkit.json, is about build and raster cost, and the projector's cost I read directly off scroll_cost_test's own printed numbers instead.",
+    "evidence/frames.json, DIFF.json, MANIFEST.json, WHY_MISSING.json, reliability.json, coldstart.json — the capture's records of itself. Whether a still predates the run is a real finding but it is not a finding about the source, and reliability.json and coldstart.json I deliberately left alone because the suite can rewrite them.",
+    "evidence/scenes/*.json — the framing. I opened none of them because no finding here turns on how a picture was taken; the one scene record I did read (12_search.report.json) I read as the app's own account of what search returned, to see whether the facet problem shows up in the evidence. It does not: the artifact was shot with the query 'morning' and the 'photographs' tab lit, which is the path that works.",
+    "evidence/experiments/ — a side investigation, not one of the artifacts.",
+    "evidence/SCORE.json, evidence/critics/11/*, evidence/critics/<n>/*, .critics-hold/, docs/CONTINUE.md, TASK_STATE.md, PLAN.md, INVENTORY.md and the git log — out of bounds by instruction, and left closed. Two of my verdicts are narrower because of it: rule 3's commit half and rule 6's history half are structural readings only."
+  ]
+}
