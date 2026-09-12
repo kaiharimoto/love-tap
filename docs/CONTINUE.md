@@ -228,6 +228,80 @@ Both are in the evidence so the next cycle starts from a number rather than an i
    laying text out against the paper it is drawn on — the pitch, and the phase of the first rule
    under the seeded patch offset — which is a change to every note in the app.
 
+## 3. Cycle 11, which is what the twelfth capture is of
+
+Eleven changes, and the two largest are corrections to things an earlier cycle had already called
+fixed.
+
+**The contact shadow, twice.** The eleventh capture is the first to run holes.py's contact-shadow
+term, and eight of the ten stills failed it. Two separate faults, and the first is the instrument's.
+
+*The check was measuring the paper.* It walks down each column, finds where a run of paper ends,
+and compares the desk four to fourteen pixels below it with forty-five to sixty-five. A torn edge
+in this build is about a centimetre of loose strands at phone scale, so a column stops reading as
+paper at the first gap between two fibres and stays in the fringe for a long way after that — and
+on any sheet the first few pixels past that point are still the antialiased edge, which is brighter
+than the desk and cancels whatever is under it. The near band starts where the fringe ends now:
+walk down until the column comes within six levels of what the desk reads far below. On the
+eleventh capture's own stills that takes eight failures to one — 01_pulse −0.17 → 7.25, 02_chat
+2.64 → 6.14, 12_search 0.05 → 7.63, 04_moments −1.64 → 4.68, which is the one still short. The
+correction is conservative by construction: the band it moves to is further from the paper, so it
+can only lose shadow.
+
+*And the shadow was the wrong render.* `<tear>_shadow` came out of Blender beside the mask, and
+measured over all 56 packed tears its alpha is 0.095 at the paper's own edge and gone within two
+per cent of the piece: in the render the sheet lies nearly flat and its shadow is genuinely
+underneath it, where opaque paper covers it. Framing it by its frame showed nothing; mapping it by
+its paper so the tail fell outside the sheet showed a wide faint wash — the desk forty-five to
+sixty-five pixels below a sheet went from 88.5 to 78, the reference band itself going into shadow.
+`tools/bake_tear_shadows.py` makes it from the mask instead — the silhouette that actually casts
+it — with `_CutShadow`'s two passes and its own numbers, nine-sliced by the tear's own bands so the
+offset and the blur keep the size they were baked at however tall the sheet turns out to be. Baked
+rather than painted because two blurred layers per piece and sixty pieces in a scroll's window is a
+hundred and twenty blurred layers a frame. `pack_assets.py` runs it, so the app's assets carry it.
+`a_sheet_darkens_the_desk_under_it_test` measures a piece drawn over the real wood and needs no
+capture to answer.
+
+**A hold was a gesture nothing could see happening.** Forty byte-identical frames in a row in
+15_authored_feeling, the whole of the run where the scene holds `pigeon`. The charge does grow the
+object — 0.952 to 1.12 of scale over 1.8 seconds — which on a 92 point tile is 0.05 of a device
+pixel a frame: real and invisible. And nothing asked for a frame at all on a phone, because `_curl`
+has finished by the time a finger is resting and an AnimatedBuilder on a finished controller never
+rebuilds; the earlier fix asked the *driven* clock for a repaint, which is the clock nobody's phone
+runs on. A held tile comes off the sheet now, with its shadow spreading underneath — the landing's
+vocabulary run backwards, 1.2 device pixels a frame — and a ticker drives it on both clocks.
+
+**The arriving feeling was drawn three times the size it was placed at.** `FeelingObject` takes the
+size of the *thing* and needs a box of `size * ink`, and ink runs to 3.4 for something that sits
+small in its own render — so at full throw the landing asked for a 190 point object and drew 646
+points of it, on a phone 360 points wide, out through a Positioned that was 190. That is the
+unlabelled slab a coherence critic measured covering Pulse's partner-state card for 106 frames. It
+also landed at 0.52 of the height, which is the middle of whatever the region has on the glass, and
+lay there for the whole length of the pattern. It lands low on the band of desk every region leaves
+above the tab strip now, and is put away as soon as it has stopped bouncing; the pattern plays on
+with it filed.
+
+**Every still was shot at a width no phone has.** 480 by 1040 of CSS at three times scale — the
+1440 by 3120 the brief asks for, laid out 120 points wider than every clip and wider than either
+phone. 360 by 780 at four times scale now: same pixels, same minimum, a real phone. Every region is
+drawn at 360 and at 390 in `every_screen_builds_test`, which found the first thing immediately —
+the notification preferences overflow a 360 point phone by 78 and 84 points.
+
+**Four claims the set made in a log and showed nowhere.** A reconnect (08 cuts the link, the far
+phone writes two things, the link comes back, and both arrive in order); a note taken back (the far
+phone withdraws its last message, so 13 can frame a row really taken away rather than one marked
+withdrawn by hand); the pocket (the phone is picked up at the end of the reception scene, which is
+the only way `received()` can be read at all); and partner state on the viewer, which was the one
+screen in the set with no strip of any kind.
+
+**And the typing frame expired on a `Timer`** while the app ran on a driven clock, so 13 showed
+`noor writing…` on the glass over a record, claiming to be read at the shutter, that said she was
+not. Both were true, four wall-clock seconds apart.
+
+**The release path was exercised again**, on the build that serves over TLS rather than the one
+from before it: 101.2 MB for arm64, signed with a throwaway key generated into /tmp and destroyed
+with the key.properties that pointed at it.
+
 ## 4. What is left, in order of what it costs to close
 
 Every number here is a critic's, from `evidence/critics/5/`. Check them before acting on them; two
@@ -257,6 +331,12 @@ A note's interior swings 9 to 13 grey levels on 230 across its full width. The '
 01_pulse reads 148 on one side of its curve and 153 on the other while throwing a hard directional
 shadow. The fold's flap darkens 17 per cent while foreshortening 90. The shadows are baked from
 renders and the surfaces they fall on are not, so they read as attached to flat art.
+
+Half of this is now measured rather than asserted, and it is the shadow's half: a torn sheet's
+contact shadow is cut from its own tear and displaced by `shadowOffsetFor`, which is the one rig's
+direction, so paper and its shadow agree about where the light is. What still does not agree is the
+*surface* — the stock renders carry tooth and fibre but no shading field, so a sheet is evenly lit
+wherever it is put and only its edge knows which way the window is.
 
 ### 3. Nothing pictures a state change reaching somebody who has not opened the app (emotional)
 No notification, no lock screen, no home-screen widget, in any of the fifteen artifacts. The ambient

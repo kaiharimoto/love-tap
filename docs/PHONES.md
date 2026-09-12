@@ -101,8 +101,8 @@ trying the app out and is not fine for the phone you intend to keep the year on.
 
 `--split-per-abi --target-platform android-arm64` is not optional advice. Without it the APK
 carries three architectures and measures 145 MB, of which 38.6 MB is engines and app images for
-phones you do not have; the arm64 one is 106 MB, and every Android phone made this decade is
-arm64. The 84 MB that remains is the material library — the paper, the tears, the objects and the
+phones you do not have; the arm64 one is 101 MB, and every Android phone made this decade is
+arm64. The 78 MB that remains is the material library — the paper, the tears, the objects and the
 folds — which is the app rather than overhead.
 
 Both numbers were measured on builds made here, and `tools/check/apk.py` reads them, and the
