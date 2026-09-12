@@ -1,0 +1,191 @@
+{
+  "critic": "messenger-reliability",
+  "cycle": 11,
+  "score": 22,
+  "floor": 26,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "08_state_propagating.mp4",
+      "where": "frames 688-734 (the last of the eight runs), the band x 40-1040, y 1250-1520 of the 1080x2340 frame - between the line '- noor is quiet . Thu 3 Sep . 19:59' and the yellow legal-pad note 'on my way, i think'",
+      "what": "The message the far phone wrote while the link was down - 'the bus is late, dont wait up', id 01M1MDNB1VM79DD8H8CDGD76PW - is delivered on reconnect, takes its full height of layout, and paints nothing. Measuring the distance from the 'noor is quiet' line (found by template-match, correlation 1.00 against its own band in frame 686) to the bright top edge of the legal pad: 99 device px at frames 684, 685, 686 and 687, then 277 device px at frame 688 and unchanged through frame 734 - the row opens 178 device px (59.3 CSS px, against the 72 CSS px the report gives it) and stays empty. The band is bare desk: over x 40-1040, y 1250-1520 of frame 734 the maximum luma is 184, the 99th percentile 111, and the share of pixels above 190 is 0.00000, while the '- noor is quiet' text line 50 px above in the same frame has 4.69 per cent of its pixels above 150. evidence/logs/08_state_propagating.report.json puts that row at rows_cost row 8078, type 'message', tall 72, top 337 of a viewport 501.4 tall, lists it in both 'visible' and 'whole_on_the_glass', counts it in 'paper' with paper_whole_on_the_glass 2 when only one paper note is drawn, and records fold {sequence unfold_thirds, length 142, decoded 38, playhead 0} - the unfold parked on its first frame. evidence/logs/08_state_propagating.json arrivals confirms the delivery: {line 'message the bus is late, dont wait up', before 8078, after 8079, at_frame 687, waited_ms 623}. Frames 690-734 are held by the capture's own three-term test in my decode (mean |dluma| under 0.015, share changing by more than two under 0.0015, busiest 32-px tile under 2.0), so 45 frames - 720 ms of app time at 16 ms a step - go by with the row on screen and blank. The same empty band is in the builder's own strip, evidence/crops/08_state_propagating_strip.png, final panel. The driven clock is not the excuse: the far phone's earlier message 'it is raining here too' unfolds normally across frames 165-304 of this same clip under the same clock.",
+      "why": "The row states that there must be no dropped messages and that ordering after going offline and reconnecting must be correct; the one artifact in the set that films a reconnect ends with the reconnected message as a message-shaped hole in the thread, which is a dropped message to the only reader who matters."
+    },
+    {
+      "severity": "serious",
+      "artifact": "08_state_propagating.mp4",
+      "where": "the clip as a whole, against evidence/MANIFEST.json, evidence/frames.json, evidence/DIFF.json and evidence/scenes/08_state_propagating.json",
+      "what": "The capture cannot agree that its only reconnect artifact exists, and the copy on disk was not shot to the recipe that is in the set. MANIFEST.json lists 08_state_propagating.mp4 under 'missing' ('the frame check failed ... a copy from an earlier run is still on disk, written 2026-09-12T19:03:59Z; it is not this session's and is not counted'); frames.json carries it with from_this_run true and checked_at 2026-09-12T19:05:33Z; DIFF.json labels it 'changed' with ssim 0.7995. Decoding the file myself: 735 frames, 92 held by the three-term test in two runs, 641-687 (47) and 690-734 (45), 12.5 per cent of the clip and 1.47 s of its 11.76 app-seconds. The recipe asks for final runs of 40 and 56 frames and a slowSend of 'on my way - leaving in ten'; the clip's own log records runs of 48 and 48 and the note on the glass reads 'on my way, i think'. The recipe's own notes describe the 48/47 pattern as the thirteenth capture's mistake, so the recipe was amended after this file was shot and the file was never re-shot.",
+      "why": "Correct ordering after a reconnect is one of the named requirements, and there is no artifact in the set that the set itself counts as showing it."
+    },
+    {
+      "severity": "serious",
+      "artifact": "13_messenger_states.png",
+      "where": "the whole still, and the 'edited' / 'taken_back' / 'folded_in' / 'replies_on_the_glass' fields of every chat report in evidence/logs/",
+      "what": "Editing a message and taking one back appear nowhere in the set, and neither does a delivered reply. Every region report whose view.region is 'chat' - 02_chat, 06_unfolding, 08_state_propagating, 10_first_run, 11_chat_scroll, 13_messenger_states - reads edited: [], taken_back: [], replies_on_the_glass: {}, folded_in.message_edit: 0, folded_in.message_delete: 0. 13_messenger_states is the scene written to fix exactly this: evidence/scenes/13_messenger_states.json issues 'far unsend' with the note 'Noor takes back the last thing she sent ... taken_back was empty and message_delete zero in every region report in the set', then 'scrollTo types:taken_back' to frame it. The step log records the unsend as issued and landed (far list entry 'unsend', problems: [], steps_landed: true, ok: true) and the report still reads taken_back: [], folded_in.message_delete: 0 and anchor: null - the anchor found no withdrawn row to frame and returned without moving, the same failure the recipe's own note describes from the previous capture. The still shows four 'sent' marks, one refusal, a typing line and a reply-mode composer, and no withdrawn, edited or reacted row. reliability.json asserts edit, delete and reply all pass, but that is the spine answering about itself, not a phone drawing it.",
+      "why": "The row enumerates reactions, replies, editing and deleting as capabilities that must be present and dependable; three of the four are shown by no picture in the set, and the one scene written to show a withdrawal produced a report saying there was nothing to show."
+    },
+    {
+      "severity": "serious",
+      "artifact": "crops/reception_picked_up.png",
+      "where": "the whole crop, with evidence/logs/reception_picked_up.report.json and evidence/logs/reception.report.json",
+      "what": "A paired phone that already holds the year is put back onto the pairing checklist when it is picked up after a push. The scene closes the app, pushes four notices (logs/reception.json: 'noor / wrote something', 'noor / is holding something out', 'noor / said how they are'), then reopens on the same kept store (reception_scene.json load: {store 'kept', profile 'profile_reception'}). The report taken at that shot reads setup_showing: true, visible: [], link: 'connecting', events 14062 against cursor 14061, pending 1, and the picture is the four-step setup checklist - 'this one, the iphone', 'put this phone on the tailnet', 'install the profile the other phone is serving', 'add it to the home screen' - filling the screen with the CHAT tab selected and no rows behind it. 'connecting' does not explain it: logs/reception.report.json, the same profile earlier in the same scene, is also link 'connecting' with cursor 14061 against events 14062 and reads setup_showing: false, and dusk_pulse.report.json is the same again. Across all eighteen reports setup_showing is true in exactly two places: 17_setup_pwa (events 0, correct) and this one (events 14062). The scene is chromium, headed, origin :8796, and is not one of the seventeen artifacts, and nothing in the record rules out a settle-time race on reopen.",
+      "why": "Being told 'noor wrote something' and then finding a pairing checklist instead of the message is precisely a reason to open Instagram instead, and the one record in the set of the app being picked up after a push is that."
+    },
+    {
+      "severity": "serious",
+      "artifact": "08_state_propagating.mp4",
+      "where": "frame 639 (first frame of run 7, taken while the link is cut) against frame 531 (last chat frame before it), and the arrivals list in evidence/logs/08_state_propagating.json",
+      "what": "A state written on the far phone crosses a cut link while a message written at the same moment does not, and nothing in the thread says the link is down. The step log's order is: '__deskCut(true) ok, the link is cut' at 1143729, wait 2303, slowSend 2777, far 'state mood quiet', far 'message the bus is late, dont wait up', wait 1902, then run 7. At frame 531 - the last chat frame before the cut - the thread ends at 'here . Thu 3 Sep . 19:51'. At frame 639, with the link still cut, the thread already carries '- noor is quiet . Thu 3 Sep . 19:59'; the message written immediately after it is not there and its arrival is only recorded at frame 687, after '__deskCut(false)', with before: 8078 - so row 8077 ('quiet') was already in the log while the link was down. sync.last_fault reads 'offline (POST /events)'. The only thing on the glass saying anything is wrong is the near phone's own note reading 'going' instead of 'sent'.",
+      "why": "During the outage the reader is shown the other person's state fresher than their words, with no mark that the thread is partial - a delivery picture that cannot be trusted, which the row calls out by name."
+    },
+    {
+      "severity": "minor",
+      "artifact": "12_search.png",
+      "where": "the filter chips, x 40-1400, y 530-1100; the PHOTOGRAPHS chip at x 760-1120, y 530-620",
+      "what": "Which filter is on is not legible. logs/12_search.report.json says type_filter: 'photographs', hits 6, kinds {photo: 6}, and all six results on the glass are photographs. The only thing separating PHOTOGRAPHS from the other fourteen chips is a dark rule about 44 px long at roughly x 1045-1089, y 596-599, which begins below the scrap's torn bottom edge - on the desk wood and the fibre fringe, not on the paper - and sits under the last two of the word's eleven letters (the word spans x 795-1080, y 559-581). TALKING, STATE, DATES THAT MATTER, TEO and THIS YEAR all carry rules of the same weight and darker contrast, from the lined stock their scraps are cut from.",
+      "why": "Media search is one of the named capabilities; a search that cannot say what it is filtering by is a search whose results cannot be trusted."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.png",
+      "where": "the voice-note row's meta line, x 295-830, y 1105-1150; and 13_messenger_states.png row 8074's meta line, about x 370-820, y 1255-1305",
+      "what": "Delivery marks are laid across the torn bottom edge of their own sheet. In 02_chat.png the voice note's 'Thu 26 Mar . 08:23 read (check)(check)' has loose paper fibres running through the date glyphs - the '26' in particular - while the 'read' and its two checks at x 660-830 stay clear. In 13_messenger_states.png the row 'and the thing for the door' has its 'Thu 3 Sep . 19:40 sent (check)' sitting on the tear with fibres crossing the letters. Both remain readable, but the mark that says whether a message arrived is the one piece of ink placed where the sheet is falling apart.",
+      "why": "A delivery and read marker has to be readable at a glance; putting it on the fringe is the one place in the layout where it is least so."
+    },
+    {
+      "severity": "minor",
+      "artifact": "10_first_run.png",
+      "where": "the load blocks of every scene log in evidence/logs/",
+      "what": "Nothing in the set shows what a phone looks like during a first launch that imports the year. Every seeded scene whose load.store is 'fresh' takes 8.3-9.7 s - 01_pulse 9109 ms, 06_unfolding 8771, 07_feeling_landing 8296, 08_state_propagating 8887, 15_authored_feeling 9722, dusk_pulse 8424 - of which 'the log' alone is 6387-7849 ms; a phone that already has it is 2289-2662 ms. 10_first_run.png is an empty store (log 34 ms, events 0) and every other still is store 'kept', so the seven seconds that would carry a spinner are in no picture. The breakdown also does not close: in 08 the load is 8887 ms and made_of.everything is 7242, leaving 1.6 s unaccounted for.",
+      "why": "The row asks that no spinner outstay its welcome, and the one launch in this build long enough to need one is the one launch no artifact shows."
+    },
+    {
+      "severity": "minor",
+      "artifact": "11_chat_scroll.mp4",
+      "where": "evidence/logs/scroll_webkit.json, per_frame, 724 entries",
+      "what": "The app's own share of the fling frame is over budget about one frame in nine. build_ms - which that file defines as 'the framework laying out and painting: the app's own work' - reads p50 5, p90 17, p95 28, p99 56, max 82; 82 of 724 frames (11.3 per cent) exceed 16 ms and 26 (3.6 per cent) exceed 33 ms. A frame that builds a row costs 11 ms median against 3 ms for one that does not. I am not counting raster_ms, which the file correctly says is this machine's software rasteriser. This is a small finding and I want to be clear about the other half of it: the clip itself is clean. Decoding all 300 frames, no frame is held or repeated and the smallest per-frame mean |dluma| in the whole clip is 20.96 grey levels; 11_chat_scroll.fling.json has asked equal to moved on all 300 ticks to within 1e-6, frames_under_a_device_pixel: 0, rows_built_worst_tick 4; and the periodic cost named in evidence/experiments/what_the_alternates_cost/README.md ('sixty paper pieces rebuilt on every fourth frame') is gone - max pieces_drawn per frame is now 2, 254 across 724 frames.",
+      "why": "The row asks for no scroll jank against the year-deep history; on a 60 Hz phone a build over 16 ms is a frame the compositor does not get, and it happens on a ninth of the fling."
+    }
+  ],
+  "what_is_working": [
+    "The thread carries the whole vocabulary of kinds on real paper: 02_chat.png has a photo note, a voice note with waveform and 0:51 duration, a kept ritual, messages and state lines together, with four rows carrying read marks and one carrying a reaction that is a coffee-cup ring on a scrap rather than an emoji.",
+    "Delivery states are plain and honest where they appear: 'sent' with a single check, 'read' with two, and in 13_messenger_states.png a refusal that says 'it would not go', offers 'send it again', and gives the reason in the couple's own register - 'this phone is on an older version and cannot read that'.",
+    "Typing indication is on the glass ('noor writing...' in 13_messenger_states.png, partner_typing true in its report), as is reply-compose (a quoted line with a dismiss) and attach (a photo / take one / a video / film something).",
+    "The fling against the year is genuinely smooth: 11_chat_scroll.mp4 has no held or repeated frame in 300, the smallest inter-frame change is 20.96 grey levels, and the thread's own fling log records asked equal to moved on every one of 300 ticks with nothing moving under a device pixel.",
+    "Media is complete and nothing is missing behind it: 04_moments.png shows 183 media items (115 photos, 54 voice notes, 14 videos) with tiles_without_a_picture 0 and all 18 blobs asked for arriving; 14_media_viewer.png opens a video full-bleed with a transport, a scrubber, 0:00 / 0:03 and its caption, and the 48-frame strip shows the video actually playing.",
+    "Search works and is faceted: 12_search.png answers 'morning' with highlighted hits and thumbnails across fifteen filter chips, and reliability.json records nine queries each answered by an event of the type asked for, including photo, video, voice_note, todo_event, date_event, feeling, state_declared and milestone.",
+    "The headless spine is clean and thorough: reliability.json reports 177 events on both sides, duplicates 0, same order both sides, monotonic ordering, 26 events queued offline and all delivered on reconnect, seq 1..175 gapless after the gap, a kill mid-send that did not duplicate, a draft surviving a close and reopen, and a refusal that was kept out of the wire for a round and then delivered as seq 176; coldstart.json shows four events crossing two distinct tailnet nodes in the same order on both sides.",
+    "The push rule is right: logs/reception.json shows the phone was told only 'noor / wrote something', 'noor / is holding something out', 'noor / said how they are' - the kind and the sender and nothing else.",
+    "tests.log ends 'All tests passed!' at 268 passed, 1 skipped, including 'read markers and reactions are never rows in the thread' and 'every required type from the brief is present'."
+  ],
+  "verdict": "The messenger underneath this is real and mostly excellent - every kind of content is on paper, the fling across eight thousand rows does not drop a single frame, the refusal row is the best-written failure state I have seen in a messenger, and the spine's own record of 177 events with no duplicates, gapless sequence across an outage and a kill mid-send that did not double-send is thorough and clean. But the row is scored on what a phone draws, and the one artifact that films a reconnect ends with the reconnected message drawn as nothing: at frame 688 of 08_state_propagating.mp4 the thread opens 178 device pixels of space for 'the bus is late, dont wait up', the app's own report calls that row whole on the glass, and for the remaining 46 frames - 736 ms of app time, the last of them bit-frozen - the reader looks at bare desk between 'noor is quiet' and their own note. That is the blocking finding and it holds the row at or below its floor on its own. It does not stand alone: a state from the far phone crossed the cut link while the message written beside it did not, so during the outage the thread was silently partial; picking the phone up after a push that said 'noor wrote something' put it back on the pairing checklist with an empty thread; and taking a note back and editing one, both named in the row, are in no picture in the set even though 13_messenger_states was written this cycle specifically to frame a withdrawal and its own report came back saying there was none to frame. The capture cannot even agree the reconnect clip exists - MANIFEST.json lists it as missing, frames.json as this run's, DIFF.json as changed - and the file on disk was shot to a recipe that has since been rewritten. Fix the row that paints nothing and get a withdrawal and an edit onto the glass, and this is a strong category; as the evidence stands, a reader watching their partner's note fail to appear has a reason to open Instagram.",
+  "opened": [
+    "evidence/02_chat.png",
+    "evidence/04_moments.png",
+    "evidence/08_state_propagating.mp4",
+    "evidence/10_first_run.png",
+    "evidence/11_chat_scroll.mp4",
+    "evidence/12_search.png",
+    "evidence/13_messenger_states.png",
+    "evidence/14_media_viewer.png",
+    "evidence/crops/06_unfolding_strip.png",
+    "evidence/crops/08_state_propagating_strip.png",
+    "evidence/crops/11_chat_scroll_strip.png",
+    "evidence/crops/14_media_viewer_strip.png",
+    "evidence/crops/reception.png",
+    "evidence/crops/reception_picked_up.png",
+    "evidence/crops/reception_replaced.png",
+    "evidence/crops/reception_state.png",
+    "evidence/frames.json",
+    "evidence/MANIFEST.json",
+    "evidence/DIFF.json",
+    "evidence/reliability.json",
+    "evidence/coldstart.json",
+    "evidence/WHY_MISSING.json",
+    "evidence/logs/01_pulse.report.json",
+    "evidence/logs/02_chat.report.json",
+    "evidence/logs/03_us.report.json",
+    "evidence/logs/04_moments.report.json",
+    "evidence/logs/05_settings.report.json",
+    "evidence/logs/06_unfolding.report.json",
+    "evidence/logs/07_feeling_landing.report.json",
+    "evidence/logs/08_state_propagating.json",
+    "evidence/logs/08_state_propagating.report.json",
+    "evidence/logs/08_state_propagating.frames.json",
+    "evidence/logs/10_first_run.report.json",
+    "evidence/logs/11_chat_scroll.fling.json",
+    "evidence/logs/11_chat_scroll.report.json",
+    "evidence/logs/12_search.report.json",
+    "evidence/logs/13_messenger_states.json",
+    "evidence/logs/13_messenger_states.report.json",
+    "evidence/logs/14_media_viewer.report.json",
+    "evidence/logs/14_media_viewer.frames.json",
+    "evidence/logs/15_authored_feeling.report.json",
+    "evidence/logs/17_setup_pwa.report.json",
+    "evidence/logs/dusk_pulse.report.json",
+    "evidence/logs/reception.json",
+    "evidence/logs/reception.report.json",
+    "evidence/logs/reception_picked_up.report.json",
+    "evidence/logs/reception_scene.json",
+    "evidence/logs/scroll_webkit.json",
+    "evidence/logs/crops.json",
+    "evidence/logs/strings.json",
+    "evidence/logs/webpush.txt",
+    "evidence/logs/tests.log",
+    "evidence/logs/01_pulse.json",
+    "evidence/logs/02_chat.json",
+    "evidence/logs/03_us.json",
+    "evidence/logs/04_moments.json",
+    "evidence/logs/05_settings.json",
+    "evidence/logs/06_unfolding.json",
+    "evidence/logs/07_feeling_landing.json",
+    "evidence/logs/10_first_run.json",
+    "evidence/logs/11_chat_scroll.json",
+    "evidence/logs/12_search.json",
+    "evidence/logs/14_media_viewer.json",
+    "evidence/logs/15_authored_feeling.json",
+    "evidence/logs/17_setup_pwa.json",
+    "evidence/logs/dusk_pulse.json",
+    "evidence/scenes/08_state_propagating.json",
+    "evidence/scenes/13_messenger_states.json",
+    "evidence/scenes/reception.json",
+    "evidence/experiments/what_the_alternates_cost/README.md",
+    "evidence/experiments/what_the_alternates_cost/what_the_alternates_cost.json"
+  ],
+  "not_worth_opening": [
+    {
+      "path": "evidence/01_pulse.png, evidence/03_us.png, evidence/05_settings.png, evidence/17_setup_pwa.png, evidence/crops/dusk_pulse.png",
+      "why": "Not the messenger. I read their reports for link state, cold-start times and setup_showing, which is the only thing in them my row turns on - 17_setup_pwa is the one place setup_showing: true is correct (events 0), and that is what let me say the reception pick-up is not."
+    },
+    {
+      "path": "evidence/07_feeling_landing.mp4, evidence/15_authored_feeling.mp4, evidence/crops/07_feeling_landing_strip.png, evidence/crops/15_authored_feeling_strip.png, evidence/crops/haptics_strip.png, evidence/logs/haptics.json, evidence/logs/haptics.check.json, evidence/logs/07_feeling_landing.sound.json, evidence/logs/15_authored_feeling.sound.json, evidence/logs/07_feeling_landing.frames.json, evidence/logs/15_authored_feeling.frames.json",
+      "why": "The feeling channel, not the messenger. I did read their entries in frames.json, and note in passing that MANIFEST.json's reasons for 07 (154 held frames, first at 66) and 15 (129 held, longest run 42) match neither file's own frames log (07: 0 held, ok true; 15: 40 held, longest 40, first at 104) - the same disagreement I report for 08, where the numbers do match and I checked the file myself."
+    },
+    {
+      "path": "evidence/logs/torn.json, evidence/logs/holes.json, evidence/logs/lines.json, evidence/logs/flat.json, evidence/logs/grain.json, evidence/logs/hairline.json, evidence/logs/hand.json, evidence/logs/tears.json, evidence/logs/surfaces.json, evidence/logs/fonts.json, evidence/crops/02_chat_300_hand.png, evidence/crops/02_chat_300_edge.png, evidence/crops/02_chat_300_shadow.png",
+      "why": "These measure whether the paper is real paper, which is the material row's question, not whether a message arrives. The one place the material touches my row - ink laid across a torn edge where a delivery mark has to be read - I measured myself on the artifacts rather than through these."
+    },
+    {
+      "path": "evidence/logs/apk.json, evidence/logs/pwa.json, evidence/logs/manifest.json, evidence/logs/recipes.json",
+      "why": "Packaging and install. Nothing in them bears on whether a message is dropped, duplicated, ordered or drawn. I did open webpush.txt, because what a push is allowed to carry is part of a message reaching the other person."
+    },
+    {
+      "path": "evidence/crops/04_moments_what_happened.png, evidence/crops/04_moments_what_we_felt.png",
+      "why": "The other two Moments lenses. The media lens is the one my row needs and I opened 04_moments.png and its report, which reports every tile's picture present (tiles_without_a_picture 0, 18 blobs asked and 18 arrived)."
+    },
+    {
+      "path": "evidence/crops/reception_allowed.png, evidence/crops/reception_open.png",
+      "why": "The permission prompt and the app with the notice landing while it is open. I opened the three shade shots and the pick-up, which are the ones that say what the phone held and what it showed when it was picked up."
+    },
+    {
+      "path": "evidence/.previous/",
+      "why": "The capture before this one. A finding about this build has to be measurable in this build's files, and I did not want a comparison standing in for a measurement."
+    },
+    {
+      "path": "evidence/SCORE.json, evidence/critics/11/builder.json, evidence/critics/11/code.json, evidence/critics/11/material_truth.json",
+      "why": "Another reader's conclusions, not evidence. I saw the filenames in the directory listing and left them closed."
+    }
+  ]
+}
