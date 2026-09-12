@@ -1,0 +1,154 @@
+{
+  "critic": "anti-goal",
+  "cycle": 11,
+  "score": 9,
+  "floor": 9,
+  "meets_floor": true,
+  "findings": [
+    {
+      "severity": "serious",
+      "artifact": "every still and every clip; measured in 02_chat.png, 01_pulse.png, 10_first_run.png, crops/dusk_pulse.png, 11_chat_scroll.mp4",
+      "where": "the page-corner triangle at the bottom right. In the ten 1440x3120 stills its bounding box is (1333,2836)-(1439,2942); in 14_media_viewer.png, which has no tab strip under it, (1333,3013)-(1439,3119); in the 1080x2340 clips (1000,2080)-(1079,2162). Area 5,945-5,989 px in the stills, 5,177 px in the clips.",
+      "what": "It is a flat beige shape, not paper. Median colour #CFC8B8 (RGB 207,200,184). Sampling only its interior, eroded 8 px in from every boundary (n=4,316 px in 01_pulse.png), its high-frequency texture (luma minus a sigma=2 Gaussian) has a standard deviation of 0.26 grey levels; the paper tab 100 px away in the same frame, measured by identical code and erosion, reads 1.162 and the desk reads 4.099. Its hypotenuse is a straight, un-torn, un-fibred line and it casts no contact shadow. Decisively, it does not respond to the app's second light: over those same 4,316 interior pixels, 01_pulse.png and crops/dusk_pulse.png are byte-identical (mean absolute difference 0.0, median RGB 207,200,184 in both), while the desk at y2860-2920, x1150-1250 in the same two files moves from (107,90,75) to (89,63,41), mean absolute difference 25.7. It is equally inert in motion: in 11_chat_scroll.mp4 it sits unmoved at the same box with the same colour (#CDC6B6) and the same hf std (0.388, 0.378, 0.389) at frames 0, 150 and 299 of a 4.8-second (app time) scroll. logs/surfaces.json shows the build already owns the real thing it is standing in for: objects/obj_dog_ear.webp at tooth 1.943 with a separate dusk render obj_dog_ear_dusk.webp at tooth 2.277.",
+      "why": "'A beige rounded rectangle with a drop shadow' is the fourth anti-goal's own first example of simulated paper, and this is a beige shape substituted for a folded paper corner on every screen of the app; a surface that carries no tooth and is unchanged between the app's two lighting conditions is not a surface in the scene at all, it is a shape drawn over it."
+    },
+    {
+      "severity": "serious",
+      "artifact": "01_pulse.png, crops/dusk_pulse.png, 08_state_propagating.mp4",
+      "where": "the wedge between the right torn edge of the 'YOURS' sheet and the desk: bounding box x 899-1368, y 1593-2611 of 01_pulse.png; visible again in crops/reception_open.png and at frame 0 of 08_state_propagating.mp4",
+      "what": "The shadow is opaque, not cast. 145,423 px of 01_pulse.png (3.24% of the 1440x3120 frame) sit under luma 30. A clean sample of the wedge (y1680-1780, x1060-1140) has a median luma of 27.6 against 95.7 for the desk in the same rows at x1300-1380: 68.2 grey levels. The build's own contact-shadow control in logs/holes.json reads 11.67 to 18.34 levels across the same ten stills, and 12.99 on its densest-handwriting control, so this is four to six times deeper than any contact shadow the build itself measures. crops/dusk_pulse.png is worse: 196,220 px (4.37%), wedge median 35.8 against a desk of 119.0, 83.1 levels. logs/holes.json already fails on it: ok:false, stills_with_a_hole_in_them:5, 14,190 px of this shadow lying on the desk beside the piece it belongs to in 01_pulse (worst_at [959,1747], spread [73,1595,1357,2611]). 08_state_propagating.mp4 frame 0 carries 12,952 px under luma 30, 0.51% of that frame.",
+      "why": "A drop shadow painted as an opaque black shape, several times darker than the light in the same scene can account for, is the 'with a drop shadow' half of the fourth anti-goal's first example; it reads as a hole cut in the desk rather than as light the sheet occludes."
+    },
+    {
+      "severity": "serious",
+      "artifact": "crops/02_chat_300_shadow.png, verified in 02_chat.png",
+      "where": "source row 2030 of 02_chat.png (row 456 of the 300% crop, whose box is [582,1878,1002,2138] per logs/crops.json)",
+      "what": "The contact shadow under the torn edge is cut off on a dead-straight horizontal line. Row-mean luma on the desk under the tear ramps smoothly from 66.30 at row 2014 to 80.07 at row 2028, then steps from 81.97 to 88.91 between rows 2029 and 2030 (6.94 levels in a single pixel row) and holds flat between 88.80 and 89.20 for the next twenty rows. 764 of the frame's 1,440 columns (53.1%) place their largest vertical luminance jump in rows 2021-2039 on that exact row, mean step 6.19 levels; in the 300% crop it is 1,212 of 1,260 columns (96.2%). Control: the same measurement on three other desk bands of the same still (y 1130, 1480 and 2690, x 200-1250) puts only 6.8%, 10.2% and 9.0% of columns on any single row.",
+      "why": "The penumbra of a shadow cast by a ragged torn edge cannot terminate on a straight line across half the frame; that line is the bottom of the box the shadow was painted into, which makes the shadow a drawn rectangle rather than light, and this is the crop the build selected to exhibit its shadow at 300%."
+    },
+    {
+      "severity": "minor",
+      "artifact": "logs/lines.json, reproduced on crops/02_chat_300_hand.png",
+      "where": "the ruled stock across all ten stills",
+      "what": "The writing has no relation to the rules printed under it. logs/lines.json reports a set median of 0.309 of the rule pitch between a written line and the nearest rule, where 0 is on the line and 0.25 is what writing laid out with no relation at all averages; the worst stills are 10_first_run.png at 0.423, 13_messenger_states.png at 0.421 and 12_search.png at 0.387. I reproduced the pitch independently on crops/02_chat_300_hand.png: rule rows at 74, 317 and 560 of the 780-px crop (pitch 243 at 3x = 81 source px, matching the file's 81.0), with the three written baselines at 269, 545 and 752, i.e. 0.198, 0.062 and 0.210 of pitch from the nearest rule. The same file also reports the same ruled stock drawn at pitches from 71.0 px (01_pulse) to 599.0 px (04_moments), a ratio of 8.44, against the 1.74 the library's own rulings imply. Neither number is gated.",
+      "why": "Ruling that the writing ignores, at a pitch that changes eightfold from screen to screen, makes the ruled sheet read as a printed backdrop with text composited over it rather than as a page somebody wrote on, which is the 'approximation of paper' clause of the fourth anti-goal, though the stock itself is photographic."
+    }
+  ],
+  "what_is_working": [
+    "No engagement machinery anywhere I could find. My own regex over all 563 literals in logs/strings.json for badge|streak|points|reward|achievement|unlock|level up|leaderboard|keep it up|days in a row|broken returns zero hits, and the tab strip of 02_chat.png (crop 0,2940-1440,3120) carries five torn paper tabs with no dot, no unread count and no badge. Every counter on the glass is a ledger and not a target: 03_us.png reads 'RITUALS / 3 kept - 53 times - the last yesterday' (crop 380,1620-1120,2000), 'TO DO / 10 open - 16 done', 'THE SHELF / 2 waiting on you - 6 between you', 'sunday 9 call - 20 times', with no goal, no warning and no guilt. crops/04_moments_what_happened.png marks kept rituals 'KEPT' and passed items 'PASSED ON' and stops there. logs/reception.json's default notification preferences set ritual_kept to 'off' outright.",
+    "No emoji and nothing resembling stock illustration. A saturation scan (S>0.55 and max channel >110) over all ten stills plus crops/dusk_pulse.png and crops/04_moments_what_we_felt.png returns 0 saturated pixels in nine stills; the only coloured ink in the whole set is 2,746 px at median RGB (173,66,59) in 13_messenger_states.png, bounding box y1907-2001 x448-1114, which is the red 'it would not go / send it again' error line. The emotional layer is carried by photographed and rendered physical objects instead: logs/surfaces.json's objects_named_by_feelings shows 34 named feelings backed by 30 rendered objects (blanket_fold, coffee_ring, crumple_ball, party_hat, spitball, stone, wrapper and the rest) and 4 drawn in the app with a pen, with named_but_neither empty. At full resolution these are a wrapped candy, a grey stone, a mug ring, a spiral drawn on a torn scrap, scattered paper leaves (01_pulse.png crop 760,1190-1210,1400; crops/04_moments_what_we_felt.png crop 1180,2200-1440,3000; 07_feeling_landing.mp4 frame 240) - idiosyncratic objects, not a glyph set.",
+    "No product-marketing voice in anything the app displays. My own regex over all 563 literals in logs/strings.json finds six exclamation marks and every one is a Dart null-assertion inside an interpolation (paper.dart:328 '${tearId!}_shadow$suffix', calendar_module.dart:191 '${m.yearsAt(next!)} years' and four more), zero emoji glyphs, zero occurrences of 'user' as a word, and zero of the app's name. The app never names itself: logs/pwa.json shows the served manifest's name is 'the other phone', and logs/reception.json's twelve push records carry the partner's name as the title and 'wrote something' / 'is holding something out' / 'said how they are' as the body, confirmed on the glass in crops/reception.png, crops/reception_state.png and crops/reception_replaced.png. Failure copy is '13_messenger_states.png: it would not go / send it again / this phone is on an older version and cannot read that'; the media viewer's dismiss control says 'PUT IT BACK'; the empty thread says 'first one's yours. / whatever it is. it only goes to one person.'; the notification screen offers 'wake me / quietly / not at all'. The iPhone setup checklist in 17_setup_pwa.png, the likeliest place for onboarding voice, reads 'put this phone on the tailnet' and 'add it to the home screen / share, then add to home screen. it will not hold on to anything until you do.'",
+    "The paper stock itself is photographic by every test I could run. Decoding 11_chat_scroll.mp4 frames 100 and 101 (the thread moves 256 px between them) and correlating the high-frequency residual: the grain travels with the paper at r=0.802 and is uncorrelated with the screen at r=0.061, so it is in the sheet and not a screen-locked noise overlay. Two-dimensional autocorrelation of the largest clean desk blocks (03_us.png y2400-2800 and 10_first_run.png y700-1150, full width) peaks at only 0.150 and 0.141 beyond lag 40-60, so the desk is not a tiled texture; grain patches cross-correlate at most 0.238 between different sheets of 02_chat.png. My own connected-component scan for flat fill (9x9 local sd below 0.45, the floor logs/flat.json derives from real receipt stock) finds no region of 300 px or more in 01_pulse, 02_chat, 03_us, 05_settings, 10_first_run, 12_search, 13_messenger_states, 17_setup_pwa or crops/dusk_pulse.png; the only large flat areas in the set are the sky and water of the real photograph in 14_media_viewer.png. crops/02_chat_300_edge.png and crops/02_chat_300_hand.png show tooth, loose fibres on the tear and ink of varying density at 300%.",
+    "The feeling vocabulary in crops/haptics_strip.png is 36 feelings across six registers written as human phrases - 'a squeeze', 'warm palm', 'i'll make you tea', 'miss you', 'empty chair', 'long day', 'overwhelmed', 'grey', 'not okay', 'stuck with me' - including the difficult ones, with no cheerfulness and no exclamation mark anywhere in the set."
+  ],
+  "opened": [
+    "evidence/01_pulse.png",
+    "evidence/02_chat.png",
+    "evidence/03_us.png",
+    "evidence/04_moments.png",
+    "evidence/05_settings.png",
+    "evidence/06_unfolding.mp4",
+    "evidence/07_feeling_landing.mp4",
+    "evidence/08_state_propagating.mp4",
+    "evidence/10_first_run.png",
+    "evidence/11_chat_scroll.mp4",
+    "evidence/12_search.png",
+    "evidence/13_messenger_states.png",
+    "evidence/14_media_viewer.png",
+    "evidence/15_authored_feeling.mp4",
+    "evidence/17_setup_pwa.png",
+    "evidence/crops/02_chat_300_edge.png",
+    "evidence/crops/02_chat_300_hand.png",
+    "evidence/crops/02_chat_300_shadow.png",
+    "evidence/crops/04_moments_what_happened.png",
+    "evidence/crops/04_moments_what_we_felt.png",
+    "evidence/crops/06_unfolding_strip.png",
+    "evidence/crops/07_feeling_landing_strip.png",
+    "evidence/crops/08_state_propagating_strip.png",
+    "evidence/crops/11_chat_scroll_strip.png",
+    "evidence/crops/14_media_viewer_strip.png",
+    "evidence/crops/15_authored_feeling_strip.png",
+    "evidence/crops/dusk_pulse.png",
+    "evidence/crops/haptics_strip.png",
+    "evidence/crops/reception.png",
+    "evidence/crops/reception_allowed.png",
+    "evidence/crops/reception_open.png",
+    "evidence/crops/reception_picked_up.png",
+    "evidence/crops/reception_replaced.png",
+    "evidence/crops/reception_state.png",
+    "evidence/logs/strings.json",
+    "evidence/logs/flat.json",
+    "evidence/logs/holes.json",
+    "evidence/logs/lines.json",
+    "evidence/logs/grain.json",
+    "evidence/logs/hairline.json",
+    "evidence/logs/hand.json",
+    "evidence/logs/tears.json",
+    "evidence/logs/torn.json",
+    "evidence/logs/surfaces.json",
+    "evidence/logs/fonts.json",
+    "evidence/logs/crops.json",
+    "evidence/logs/pwa.json",
+    "evidence/logs/webpush.txt",
+    "evidence/logs/reception.json",
+    "evidence/logs/manifest.json",
+    "evidence/logs/recipes.json",
+    "evidence/logs/01_pulse.report.json",
+    "evidence/logs/02_chat.report.json",
+    "evidence/logs/03_us.report.json",
+    "evidence/logs/04_moments.report.json",
+    "evidence/logs/05_settings.report.json",
+    "evidence/logs/06_unfolding.report.json",
+    "evidence/logs/07_feeling_landing.report.json",
+    "evidence/logs/08_state_propagating.report.json",
+    "evidence/logs/10_first_run.report.json",
+    "evidence/logs/11_chat_scroll.report.json",
+    "evidence/logs/12_search.report.json",
+    "evidence/logs/13_messenger_states.report.json",
+    "evidence/logs/14_media_viewer.report.json",
+    "evidence/logs/15_authored_feeling.report.json",
+    "evidence/logs/17_setup_pwa.report.json",
+    "evidence/logs/dusk_pulse.report.json",
+    "evidence/logs/reception.report.json",
+    "evidence/logs/reception_picked_up.report.json",
+    "evidence/logs/07_feeling_landing.sound.json",
+    "evidence/logs/15_authored_feeling.sound.json",
+    "evidence/frames.json",
+    "evidence/MANIFEST.json",
+    "evidence/DIFF.json",
+    "evidence/WHY_MISSING.json",
+    "evidence/scenes/01_pulse.json",
+    "evidence/scenes/dusk_pulse.json"
+  ],
+  "not_worth_opening": [
+    {
+      "path": "evidence/logs/haptics.json and evidence/logs/haptics.check.json",
+      "why": "A vibration pattern cannot carry an emoji, a marketing sentence, a badge or a sheet of paper. I read the vocabulary they describe through crops/haptics_strip.png instead, which is where the words a person would see are, and the strip is what my emoji and voice findings rest on."
+    },
+    {
+      "path": "evidence/logs/scroll_webkit.json and evidence/logs/11_chat_scroll.fling.json",
+      "why": "Per-frame build and raster cost and the thread's own scroll simulation. Frame cost and fling physics belong to the responsiveness row; nothing in them can show one of the four forbidden interpretations. I judged the scroll clip from its frames instead, decoded at 100/101/150/299, and used those frames for the grain-follows-the-paper measurement."
+    },
+    {
+      "path": "evidence/logs/apk.json, evidence/reliability.json, evidence/coldstart.json, evidence/logs/tests.log",
+      "why": "Build, reliability, load timing and the test run. None of these is a surface, a string the app displays, or an emotional token; they can only bear on the reliability and completeness rows."
+    },
+    {
+      "path": "evidence/logs/<scene>.json (the fifteen per-step wall-clock capture logs)",
+      "why": "These record the harness's cost of taking each frame, not the app's behaviour, and BRIEFING.md says so explicitly. I read the paired .report.json for every scene instead, which is where the paper-arrival, mask, image-cache and motor fields live."
+    },
+    {
+      "path": "evidence/scenes/*.json other than 01_pulse.json and dusk_pulse.json",
+      "why": "Framing scripts. I read the two that matter to my findings, to check that the black wedge and the corner triangle in 01_pulse.png and crops/dusk_pulse.png are what the app drew and not something the harness did (both scenes are a goTo, a wait and a shot, with no compositing of the harness's own). The other thirteen frame scenes in which my findings reproduce identically, so reading them would not change a number."
+    },
+    {
+      "path": "evidence/.previous/ and evidence/experiments/",
+      "why": "The previous capture is an older build, and the experiments directory is a side comparison. My row asks what is in this build; an older render of the same screen cannot add or remove a forbidden interpretation from it. I did use DIFF.json to confirm all fifteen present artifacts changed since that baseline."
+    },
+    {
+      "path": "evidence/SCORE.json, evidence/critics/11/builder.json, evidence/critics/11/code.json",
+      "why": "Another reader's conclusions, not evidence. Found and left closed, per BRIEFING.md."
+    }
+  ],
+  "verdict": "Three of the four anti-goals are absent to a degree I could not fault with any measurement I could think of. There is no engagement machinery: zero hits for badge, streak, points, reward, achievement, unlock, leaderboard or days-in-a-row across all 563 literals in logs/strings.json, no badge or dot on the five paper tabs, and every counter on the US screen is a ledger of what happened rather than a target ('3 kept - 53 times - the last yesterday'), with ritual_kept notifications off by default. There is no emoji soup and no stock illustration: nine of the ten stills contain literally zero pixels above 0.55 saturation, the only coloured ink in the set is the red error line in 13_messenger_states.png, and all 34 named feelings are carried by rendered physical objects or marks drawn with a pen, per logs/surfaces.json's objects_named_by_feelings with named_but_neither empty. There is no product-marketing voice: every exclamation mark in the codebase's readable literals is a Dart null-assertion, the reader is never called a user, and the app never names itself even in its own served manifest, which is titled 'the other phone'; the failure copy reads 'it would not go / send it again' and the dismiss control reads 'put it back'. The fourth anti-goal is where this row loses its point. The stock itself is photographic on every test - the grain travels with the sheet at r=0.802 and with the screen at r=0.061, the desk shows no tiling peak above 0.15, and there is no flat fill of 300 px or more anywhere paper is drawn - but three things composited on top of it are not. A flat beige triangle of 5,967 px stands in for a folded page corner on every screen and in every clip: 0.26 grey levels of texture against 1.162 for the paper tab beside it, and byte-identical between 01_pulse.png and crops/dusk_pulse.png over 4,316 interior pixels while the desk 90 px away shifts by 25.7, which means it is not lit by the scene at all - and logs/surfaces.json shows the build already renders a real dog-eared corner, with its own dusk variant, that it did not use here. Beside it, the shadows are drawn as shapes rather than cast: 145,423 px of 01_pulse.png (3.24% of the frame) sit under luma 30 in a wedge 68.2 levels below the desk when the build's own contact-shadow control across the same ten stills reads 11.67 to 18.34, and logs/holes.json already fails on this with ok:false; and in the very crop chosen to exhibit the contact shadow, crops/02_chat_300_shadow.png, the penumbra terminates on a single straight row, source row 2030 of 02_chat.png, with 53.1% of the frame's 1,440 columns stepping 6.19 levels there. I score this 9 rather than 10 and mark nothing blocking: the row meets its floor because no forbidden interpretation has been adopted as the concept - the material system is photographic and the voice is exact - and what I found is roughly 3.4% of the pixels, localised in one piece of chrome and in the lighting composite. The corner triangle is the finding that keeps this off 10, and it is the one that would become blocking if it grew or if the sheets themselves came to share its character; it is also the cheapest to fix, since the object it should be is already in the packed library at tooth 1.943."
+}

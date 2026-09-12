@@ -1,0 +1,146 @@
+{
+  "critic": "emotional-transmission",
+  "cycle": 11,
+  "score": 16,
+  "floor": 17,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "08_state_propagating.mp4",
+      "where": "frames 641-687 and 690-734 of 735 (the last 1.50 s of app time; the two runs after `cut on` and after `cut off`+`sync` in evidence/scenes/08_state_propagating.json steps 46 and 52)",
+      "what": "92 of 735 frames (12.5%) are held; I re-ran the brief's own three-term test at full resolution (1080x2340 Rec.601 luma: mean abs change < 0.5, share of pixels changing by more than two < 0.0015, busiest 32-px tile mean < 2.0) and got exactly the two runs evidence/logs/08_state_propagating.frames.json reports - 641-687 (47 frames = 752 ms) and 690-734 (45 frames = 720 ms) - and the frozen content is the reconnect itself: f639-687 is the note stuck at 'on my way, i think - Thu 3 Sep 19:40 going (crossed circle)' and f689-734 is the same row reading 'sent (tick)'. The second thing the far phone wrote while the link was down ('the bus is late, dont wait up', scene step 48) is on no frame of the clip.",
+      "why": "The row is judged from the propagation clip, and the propagation half of it - a state change reaching the other phone - is delivered as two still pictures with a cut between them, so nothing is ever seen arriving; the clip's own record marks it ok:false for this reason."
+    },
+    {
+      "severity": "serious",
+      "artifact": "15_authored_feeling.mp4",
+      "where": "frames 105-144 (640 ms of app time), against evidence/scenes/15_authored_feeling.json steps 17-21",
+      "what": "The only press-and-hold gesture in the whole set produces no visible response at all. Step 17 leaves the picker on STATIC; step 20 does `holdOver pigeon`, and pigeon is Mischief, so the hold lands on a tile that is not on the sheet. My three-term test at full resolution finds 40 consecutive held frames (105-144), and frames 100, 104, 120 and 144 are pixel-for-pixel the same six STATIC tiles. Across all 17 scripts in evidence/scenes/, `holdOver`/`letGo` here is the only place a feeling is chosen and sent by a gesture on the filmed phone; every other arrival is driven by `far`.",
+      "why": "'A gesture on one device arrives on the other as a sensation' needs the gesture to be legible as a gesture; the set has exactly one, and for 640 ms of it the app shows nothing happening. (The release at f145 is correct - see what_is_working - so what is missing is the press, not the send.)"
+    },
+    {
+      "severity": "serious",
+      "artifact": "15_authored_feeling.mp4",
+      "where": "frame 32 (SHELTER tab) and frame 70 (MISCHIEF tab), lower edge of the picker sheet",
+      "what": "Both user-authored feelings are cut off by the picker and neither is named on screen. The picker's label rows sit at y = 1178, 1452 and 1728 of 2340 (pitch 275 px, measured from ink-density rows inside x 150-950), and the sheet's bottom edge - the first row that is more than 60% desk wood across x 200-900 - is at y = 1950 in both frames, so a fourth label row at y ~ 2003 is off the sheet. Shelter's seventh tile is `soup` and Mischief's seventh is `pigeon` (evidence/logs/haptics.json: Shelter 7, Mischief 7, the two authored feelings sorted last); in both frames only the top ~100 px of the object clears the edge and the name is absent, while all six built-ins above carry theirs. Nothing scrolls the sheet anywhere in the clip.",
+      "why": "The row requires user-authored feelings to behave identically to built-ins in every path; in the picker path they are the only two feelings in the app with no readable name."
+    },
+    {
+      "severity": "serious",
+      "artifact": "logs/surfaces.json",
+      "where": "the `objects_named_by_feelings` block",
+      "what": "The check that certifies every feeling object has a real surface skips both authored objects and then reports no holes. It says `named: 34` and `named_but_neither: 0` ('anything under named_but_neither is a hole'), with lists measured 20 + read_but_not_measurable 10 + drawn_in_the_app 4 = 34. logs/haptics.json names 36 objects, one per feeling. The set difference is exactly {obj_user_pigeon, obj_user_soup} - the two authored ones - present in none of the four lists.",
+      "why": "Same clause as above from the other side: the authored feelings are outside a path the built-ins all go through, and the record says zero holes while two objects are unaccounted for."
+    },
+    {
+      "severity": "serious",
+      "artifact": "MANIFEST.json (with frames.json and DIFF.json)",
+      "where": "MANIFEST.json `missing` vs frames.json `clips` vs DIFF.json `artifacts`",
+      "what": "The three clips this row is judged from are recorded three different ways in the same capture. MANIFEST.json lists 07_feeling_landing.mp4, 08_state_propagating.mp4 and 15_authored_feeling.mp4 under `missing` ('a copy from an earlier run is still on disk ... it is not this session's and is not counted'); DIFF.json labels all three `changed` with an ssim against the previous capture (0.8266, 0.7995, 0.6604); frames.json marks each `from_this_run: true`. MANIFEST's reasons also contradict the logs it points at: it says 07 has '154 frames identical ... first at 66' and 15 has '129 ... longest run 42', while 07_feeling_landing.frames.json says 0 and 15_authored_feeling.frames.json says 40 first at 104 - and my own full-resolution three-term measurement of the files on disk gives 0 and 40. Separately, 07_feeling_landing.mp4 does not match its own script: scenes/07 asks for six 64-frame runs (hold, squeeze, nuzzle, confetti, miss_you, here) and the file has four runs of 150/71/93/107, with logs/07_feeling_landing.sound.json and the report's `asked_a_motor_for` both naming the arrivals as hold, squeeze, nuzzle, soup.",
+      "why": "A reader cannot tell which build the landing clip is of or whether the three clips count as this cycle's evidence at all, and two of the three are the artifacts the row is explicitly named against."
+    },
+    {
+      "severity": "serious",
+      "artifact": "crops/reception_picked_up.png and logs/reception_picked_up.report.json",
+      "where": "the whole crop; `ambient.held_by_the_phone`, `setup_showing`, `sync` in the report",
+      "what": "The capture added to read the pocket back came back empty. `held_by_the_phone` is still `[]`; the report reads `setup_showing: true`, `link: \"connecting\"`, `sync.rounds: 0`; and the picture is the iPhone setup checklist ('put this phone on the tailnet', 'add it to the home screen'), i.e. a fresh profile that has never paired, so it could not be holding anything pushed to the other one. Of the three surfaces the reports name in `what_each_surface_may_say` - standing_line, pocket, push - the standing line is on every still and the push is in crops/reception*.png, but the pocket has no picture anywhere in the set and no read-back.",
+      "why": "The row asks for three ambient presence surfaces; two can be seen and the third exists only as a field name (`pocket_feeling`) in the reports."
+    },
+    {
+      "severity": "minor",
+      "artifact": "crops/reception.png, reception_open.png, reception_state.png, reception_replaced.png (with logs/reception.json)",
+      "where": "the toast at the bottom right of each crop; the `note` at the end of reception.json",
+      "what": "The only surface shown outside the app is a default Chromium desktop toast on a Linux virtual display, beside an `about:blank` window, with an unstyled brown square for an icon. The log says so itself: 'this is not an iPhone banner, there is no lock screen in evidence, and what an installed iOS web app does with the same call is not shown anywhere in this build.' The rule behind it is verified (logs/webpush.txt: RFC 8291 record matches, plaintext recovered, payload {\"kind\",\"from\"} at 32 bytes, VAPID ES256 JWT in three parts) and the wording is in the app's voice ('noor / is holding something out').",
+      "why": "'State changes perceptible without opening the app' is demonstrated on neither target platform, and on the one surface a person sees without opening the app the feeling has no form - only a name and one of three phrases."
+    },
+    {
+      "severity": "minor",
+      "artifact": "17_setup_pwa.png (with logs/pwa.json)",
+      "where": "the four checklist cards; pwa.json in full (356 bytes)",
+      "what": "The iPhone-facing artifact says nothing about the substitute. The four cards are network and install only ('this one, the iphone' / 'put this phone on the tailnet' / 'install the profile the other phone is serving' / 'add it to the home screen'), and pwa.json records manifest name, display, start_url, 4 icons, apple_touch_icon and one service worker - nothing about what replaces the motor. Every `asked_a_motor_for` entry in every report answers 'no motor in a browser', which is the browser case in general, not an iOS decision.",
+      "why": "The row asks for a substitute that reads as deliberate rather than as an absence; the substitute is real and measurable in the clips, but nothing in the evidence shows the app choosing it because the platform is iOS, or telling the person on iOS that it exists."
+    },
+    {
+      "severity": "minor",
+      "artifact": "all region reports (logs/*.report.json) with WHY_MISSING.json",
+      "where": "`asked_a_motor_for` in every report; the 09_two_devices.png and 16_setup_android.png entries in WHY_MISSING.json",
+      "what": "No artifact in the set contains a vibration. Every motor ask is answered 'no motor in a browser: the page rhythm carries it instead', and 09_two_devices.png / 16_setup_android.png are absent because /dev/kvm is missing (adbd answered after 113 minutes with no framework behind it). The row's central test - identifiable by haptic pattern alone with the screen face down - is therefore argued from a derived measure in logs/haptics.check.json rather than shown on a device.",
+      "why": "The reason is a reason and not an excuse, and the derived measure is sound (I reproduced it), but it is still the largest thing about this row that the set cannot show, and it is why the two-device frame the row is named against does not exist."
+    }
+  ],
+  "what_is_working": [
+    "The substitute channel is a faithful, frame-accurate rendering of each pattern's envelope, not a decoration. Measuring page translation by FFT phase correlation of the page furniture (window y 200-776, x 80-976, full resolution) against the first frame of each run of 07_feeling_landing.mp4: `hold` (900@142 off100 900@142) steps to -12 px for frames 1-56 (896 ms), returns to -1..-2 for frames 57-62 (~96 ms), steps back to -12 for frames 63-118 (896 ms) and releases by f135; `squeeze` (80@78 / 160@138 / 320@198) gives three plateaus of -5, -11 and -17 px rising with amplitude; `nuzzle` (90@134 x3 then 400@98) gives three short -8/-9 dips then a longer shallower -6/-7 press of ~25 frames (400 ms); `soup` (150@119, 150@119, 600@156) gives two short dips then a 37-frame (592 ms) deeper plateau. The same `hold` signature recurs in 08_state_propagating.mp4 frames 16-164 (two 56-frame plateaus, a 6-frame return between, total excursion 13 px).",
+    "The user-authored feeling drives that channel identically to a built-in, sent by a local gesture. In 15_authored_feeling.mp4, `letGo` at f145 fires `pigeon` (30@175 off80 x3, off300, 200@140; logs/15_authored_feeling.report.json records the motor ask at amp 175). Measured against the settled page at f219: three sharp -17/-16/-15 px spikes at frames 146-148, 153-155 and 160-162, spaced 7 frames (112 ms) apart, a gap over frames 169-179, then a sustained -11..-15 px from f180 to f193 (224 ms) settling to 0 by f202 - three taps and a longer press, exactly the published string.",
+    "Identifiability survives an independent reimplementation. I rebuilt the felt-distance measure from the `segments` in logs/haptics.json (40 ms bins, amplitude^0.6, mean absolute difference x100, best alignment over a +/-15% tempo search, plus a length term with a 15% deadband) over all 630 pairs: smallest 17.78 on empty_chair/come_home - the same closest pair, and within 0.04 of the 17.74 the file reports. Deriving the floor the same way (half-Weber twins max 3.21, double-Weber twins min 13.36, geometric midpoint 6.55) puts the closest real pair 2.7x above it; against the file's own 8.7 it is 2.0x above. The bands do not overlap and no pair is under either floor.",
+    "The vocabulary is there and it is in the pictures: 34 built-in feelings in 6 named families (Warmth 6, Ache 5, Shelter 7, Mischief 7, Static 6, Sparkle 5), all 36 laid on one 2700 ms scale in crops/haptics_strip.png, 36 distinct haptic strings, and a distinct object id and sound id for every one. All six family tabs are shown open in 15_authored_feeling.mp4 - WARMTH f14, SHELTER f32, SPARKLE f51, MISCHIEF f70, ACHE f84, STATIC f98.",
+    "A feeling arrives as a thing, and a state does not. 01_pulse.png y 1150-1560 is a shelf of six different objects - a chair drawn in ink on torn paper, a scrawl, scattered confetti, a pale rounded form, a pink wrapped sweet, a folded card - each with its name and time; crops/04_moments_what_we_felt.png is a whole 'what we felt' timeline of the same objects sorted by who sent them. In 08_state_propagating.mp4 the partner's states arrive as thin grey annotation rows ('noor - out', 'noor is heads down', 'noor is quiet') while the feeling arrives as the soup object, so the two kinds are visibly different kinds.",
+    "Twelve partner-state signals are on the glass in 01_pulse.png - MOOD, HERE, WHERE, NEED, ENERGY, BATTERY, LAST UP, THEIR CLOCK, RINGER, MOVING, SIGNAL, AT HOME - plus the standing line above them; logs/01_pulse.report.json `partner_signals` carries 14 keys.",
+    "One-gesture reach is present in every region. In a 120x120 box at x 1320-1440, y 2830-2950 of each 1440x3120 still, the bottom 20 rows are 0.52-0.61 pale in all five region stills (01_pulse, 02_chat, 03_us, 04_moments, 05_settings) - the same corner fold - and 15_authored_feeling.mp4 shows it opening the picker in two of them (US f0-100, Pulse f220-235).",
+    "Sideways never goes further than up, and the board really turns. |dx| < |dy| in all four runs of 07 (8.3 vs 13.9, 9.0 vs 17.1, 2.1 vs 10.0, 6.6 vs 13.2). Phase-correlating a left band and a right band of the card separately over the `hold` run, dy(right) - dy(left) across 560 px runs -0.6 to -1.0 px through each plateau and returns to ~0 in the 100 ms gap: 0.0011-0.0018 rad, consistent with haptics.json's -0.00375 rad at full amplitude scaled by 142/255.",
+    "The voice holds. logs/strings.json reads 563 strings and finds nothing; re-checking all 1,145 strings in the file myself, the only '!' hits are Dart null-assertion operators (`${tearId!}_edge`), the single 'user' is inside the checker's own rule text, and no marketing phrase or app name appears outside the rule patterns.",
+    "Audio is real and per-feeling: 07_feeling_landing.mp4 carries a mono AAC track whose RMS in 40 ms windows rises from silence at exactly frames 0, 150, 221 and 314 - the four arrival frames logs/07_feeling_landing.sound.json names - with four different peak levels. The log says plainly that the file is the feeling's own ogg mixed in rather than a recording of the app.",
+    "The second lighting condition holds up: crops/dusk_pulse.png shows the same shelf of feelings under a warm low key with long cast shadows, and logs/dusk_pulse.report.json confirms `light: \"dusk\"`."
+  ],
+  "verdict": "Judged on what the pictures actually do, the transmission is real and I could measure it: in 07_feeling_landing.mp4 and 08_state_propagating.mp4 the page moves to each feeling's published envelope to within a frame - hold's two 896 ms plateaus with a 96 ms release between them, squeeze's three plateaus of -5, -11 and -17 px rising with amplitude, nuzzle's three taps and a longer press - and in 15_authored_feeling.mp4 a user-authored feeling sent by a local gesture drives that same channel to its own string. Rebuilding the separability measure from scratch reproduces the file's closest pair to within 0.04 and puts it 2.7x above a floor I derived myself, 34 built-ins sit in six named families all shown open, twelve partner signals are on the glass, the corner is in all five regions, and a feeling arrives as an object with a shadow and its own sound while a state arrives as a grey annotation - which is exactly the distinction the row is asking for. What holds it below the floor is that the evidence for the half of the row about state propagating does not stand up: 08_state_propagating.mp4 fails the brief's own held-frame test on 92 of 735 frames, and the freeze is precisely the reconnect this cycle added - 47 frames of the note stuck at 'going', a cut, then 45 frames of it reading 'sent', with the far phone's second note never appearing at all - so the one thing the clip was reshot to show is delivered as two stills. Around that sit four more real defects: the one press-and-hold in the whole set shows nothing for 640 ms because the script holds over a tile that is not on the sheet; both authored feelings are the seventh tile of their family and are cut off unnamed by the picker's bottom edge at y=1950; logs/surfaces.json skips both authored objects and then reports zero holes; and the pocket read-back added this cycle came back with held_by_the_phone still empty, on a phone that was still on its setup checklist. None of these is the concept failing - the concept is working, and better than its own record admits - but two of the three artifacts this row is named against cannot carry it, and the third does not exist.",
+  "opened": [
+    "evidence/01_pulse.png",
+    "evidence/02_chat.png (bottom-right corner region only, for the one-gesture measurement)",
+    "evidence/03_us.png (bottom-right corner region only)",
+    "evidence/04_moments.png (bottom-right corner region only)",
+    "evidence/05_settings.png (bottom-right corner region only)",
+    "evidence/07_feeling_landing.mp4 (all 421 frames decoded; frames 0-149 and the run boundaries stepped through)",
+    "evidence/08_state_propagating.mp4 (all 735 frames decoded; frames 600-734 stepped through)",
+    "evidence/15_authored_feeling.mp4 (all 448 frames decoded; frames 14, 32, 51, 70, 84, 98, 100-220 stepped through)",
+    "evidence/17_setup_pwa.png",
+    "evidence/crops/07_feeling_landing_strip.png",
+    "evidence/crops/15_authored_feeling_strip.png",
+    "evidence/crops/haptics_strip.png",
+    "evidence/crops/dusk_pulse.png",
+    "evidence/crops/04_moments_what_we_felt.png",
+    "evidence/crops/reception.png",
+    "evidence/crops/reception_open.png",
+    "evidence/crops/reception_state.png",
+    "evidence/crops/reception_replaced.png",
+    "evidence/crops/reception_picked_up.png",
+    "evidence/frames.json",
+    "evidence/MANIFEST.json",
+    "evidence/DIFF.json",
+    "evidence/WHY_MISSING.json",
+    "evidence/logs/haptics.json",
+    "evidence/logs/haptics.check.json",
+    "evidence/logs/pwa.json",
+    "evidence/logs/webpush.txt",
+    "evidence/logs/strings.json",
+    "evidence/logs/surfaces.json",
+    "evidence/logs/reception.json",
+    "evidence/logs/reception_picked_up.report.json",
+    "evidence/logs/01_pulse.report.json",
+    "evidence/logs/dusk_pulse.report.json",
+    "evidence/logs/07_feeling_landing.report.json",
+    "evidence/logs/07_feeling_landing.frames.json",
+    "evidence/logs/07_feeling_landing.sound.json",
+    "evidence/logs/08_state_propagating.report.json",
+    "evidence/logs/08_state_propagating.frames.json",
+    "evidence/logs/15_authored_feeling.report.json",
+    "evidence/logs/15_authored_feeling.frames.json",
+    "evidence/logs/15_authored_feeling.sound.json",
+    "evidence/logs/apk.json",
+    "evidence/scenes/07_feeling_landing.json",
+    "evidence/scenes/08_state_propagating.json",
+    "evidence/scenes/15_authored_feeling.json",
+    "evidence/scenes/ (the step lists of all 17 scripts, to check where a gesture is made locally rather than driven by `far`)"
+  ],
+  "not_worth_opening": [
+    {"path": "evidence/06_unfolding.mp4 and crops/06_unfolding_strip.png", "why": "A message unfolding. Its scene has two `far message` steps and no feeling and no state, so it carries nothing this row is measured on; the strip alone would not change a judgement about sensation."},
+    {"path": "evidence/11_chat_scroll.mp4, crops/11_chat_scroll_strip.png, logs/11_chat_scroll.fling.json, logs/scroll_webkit.json", "why": "Throw physics and per-frame raster cost in the thread. Relevant to whether the messenger feels good under the hand, not to whether a feeling arrives as a sensation."},
+    {"path": "evidence/14_media_viewer.png, 14_media_viewer.mp4 strip, 12_search.png, 13_messenger_states.png, 10_first_run.png", "why": "Messenger surfaces - media, search, delivery and read state, first run. No feeling, no partner-state signal and no ambient surface appears in any of them."},
+    {"path": "evidence/logs/hand.json", "why": "Named in my brief as a file nobody opened, but it measures how often a mark of ink on the thread still has a near-twin - a hand-vs-font question about the writing, which belongs to material truth and hand-made-ness, not to whether a gesture arrives as a sensation. I opened logs/strings.json instead, which is the voice check my row's anti-goals turn on."},
+    {"path": "evidence/logs/torn.json, flat.json, holes.json, grain.json, hairline.json, tears.json, fonts.json, lines.json", "why": "Paper, tear-edge, shadow, grain and rule-pitch measurements. They decide whether a surface reads as real paper, which is another row; none of them says anything about the feeling vocabulary, the substitute channel or the partner signals."},
+    {"path": "evidence/reliability.json, coldstart.json, logs/tests.log, logs/crops.json, logs/recipes.json, logs/manifest.json", "why": "Run reliability, launch timings, the test run and the derivation records for the crops. I checked launch cost indirectly through `the_launch_took` in the reports I did open; none of these carries a measurement of transmission."},
+    {"path": "evidence/02_chat_300_edge.png, 02_chat_300_hand.png, 02_chat_300_shadow.png", "why": "Three-hundred per cent crops of a torn edge, of ink and of a contact shadow on the thread still. All three are material-truth evidence about the chat surface; no feeling object or state field is inside any of the three crops."},
+    {"path": "evidence/crops/04_moments_what_happened.png", "why": "The 'what happened' tab of Moments - dates, to-dos and milestones. I opened its sibling crops/04_moments_what_we_felt.png, which is the feeling timeline and the part of that screen this row is about."},
+    {"path": "evidence/experiments/what_the_alternates_cost", "why": "Not one of the artifacts and not named in the briefing as evidence; it reads as a working note about alternatives rather than a picture or a measurement of the build that shipped."},
+    {"path": "evidence/SCORE.json and evidence/critics/11/*", "why": "Ruled out by the briefing - the builder's own scoring and other readers' reports. Left closed."}
+  ]
+}
