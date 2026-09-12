@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2905
+   "ms": 2903
   },
   {
    "do": "goTo",
-   "ms": 3822
+   "ms": 3208
   },
   {
    "do": "step",
-   "ms": 1597
+   "ms": 1428
   },
   {
    "do": "step",
-   "ms": 1292
+   "ms": 1277
   },
   {
    "do": "wait",
@@ -30,27 +30,27 @@
   },
   {
    "do": "shot",
-   "ms": 31586
+   "ms": 31603
   },
   {
    "do": "goTo",
-   "ms": 4176
+   "ms": 4253
   },
   {
    "do": "step",
-   "ms": 1728
+   "ms": 1546
   },
   {
    "do": "step",
-   "ms": 1794
+   "ms": 1559
   },
   {
    "do": "wait",
-   "ms": 1001
+   "ms": 1002
   },
   {
    "do": "report",
-   "ms": 713
+   "ms": 711
   },
   {
    "push": {
@@ -61,19 +61,19 @@
   },
   {
    "do": "push",
-   "ms": 2210
+   "ms": 2209
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 899
+   "ms": 827
   },
   {
    "do": "closeApp",
-   "ms": 726
+   "ms": 727
   },
   {
    "do": "wait",
@@ -92,11 +92,11 @@
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 778
+   "ms": 777
   },
   {
    "push": {
@@ -107,11 +107,11 @@
   },
   {
    "do": "push",
-   "ms": 2211
+   "ms": 2210
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2102
   },
   {
    "do": "screen",
@@ -126,7 +126,7 @@
   },
   {
    "do": "push",
-   "ms": 2208
+   "ms": 2206
   },
   {
    "do": "wait",
@@ -138,7 +138,23 @@
   },
   {
    "do": "notifications",
-   "ms": 1168
+   "ms": 1145
+  },
+  {
+   "do": "reopenApp",
+   "ms": 3710
+  },
+  {
+   "do": "wait",
+   "ms": 1601
+  },
+  {
+   "do": "shot",
+   "ms": 1581
+  },
+  {
+   "do": "report",
+   "ms": 708
   }
  ],
  "shots": [
@@ -161,6 +177,10 @@
   {
    "out": "evidence/crops/reception_state.png",
    "of": "the display, not the page"
+  },
+  {
+   "out": "evidence/crops/reception_picked_up.png",
+   "clip": null
   }
  ],
  "reports": [
@@ -265,43 +285,40 @@
    "has_dusk_paper": true,
    "paper_stocks": 54,
    "the_smallest_patch_of_a_stock_anything_took": [
-    "index_01 2560x1593",
-    "143x102 of it, at its own size",
-    14669.3229675293
+    "index_02 2560x1593",
+    "218x126 of it, at its own size",
+    27548.18181818182
    ],
-   "paper_at_its_own_size": 418,
-   "paper_stretched_to_fit": 7,
+   "paper_at_its_own_size": 29,
+   "paper_stretched_to_fit": 2,
    "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 4,
+   "paper_that_arrived_after_the_piece_was_drawn": 29,
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 31,
+   "masks_dropped_to_stay_inside_the_pool": 138,
+   "stocks_held": 10,
+   "stocks_held_bytes": 142543040,
+   "stocks_dropped_to_stay_inside_the_pool": 21,
    "image_cache": {
-    "held": 74,
-    "bytes": 291781648,
+    "held": 28,
+    "bytes": 30801744,
     "budget": 402653184,
-    "live": 68,
+    "live": 26,
     "still_decoding": 0
    },
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 142,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "sensation": null,
    "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 6,
-    "the library index": 13,
-    "the ink plates": 29,
-    "the desk": 99,
-    "the log": 4679,
-    "the first frame": 307,
-    "everything": 5133
+    "the framework": 5,
+    "the library index": 14,
+    "the ink plates": 30,
+    "the desk": 109,
+    "the log": 490,
+    "the first frame": 250,
+    "everything": 898
    },
    "sync": {
     "transport": "local",
@@ -324,7 +341,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-11T21:30:57.695Z",
+     "since": "2026-09-12T00:35:15.009Z",
      "last_contact": null,
      "certificate": null,
      "setup_address": null
@@ -340,28 +357,146 @@
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
-    "held_by_the_phone": []
+    "held_by_the_phone": [],
+    "what_the_phone_can_hold": {
+     "platform": "a browser",
+     "a_secure_origin": true,
+     "service_worker_offered_by_the_browser": true,
+     "a_worker_is_registered": true,
+     "the_person_has_allowed_it": "granted",
+     "a_push_manager": true
+    }
    },
    "at": "crops/reception_open.png",
    "read_at": "the end of the scene"
+  },
+  {
+   "region": 1,
+   "view": {
+    "region": "chat",
+    "partner_typing": false
+   },
+   "visible": [],
+   "paper": [],
+   "tears": {},
+   "stocks": {},
+   "scroll": null,
+   "now": "2026-09-03T19:40:00.000Z",
+   "driven_ms": 0,
+   "seed": 20260903,
+   "events": 14062,
+   "transport": "local",
+   "link": "connecting",
+   "me": "teo",
+   "masks_in_pool": 56,
+   "masks_composed": 0,
+   "writable_masks": 47,
+   "light": "day",
+   "has_dusk_paper": true,
+   "paper_stocks": 54,
+   "the_smallest_patch_of_a_stock_anything_took": [
+    "index_02 2560x1593",
+    "218x126 of it, at its own size",
+    27548.18181818182
+   ],
+   "paper_at_its_own_size": 10,
+   "paper_stretched_to_fit": 0,
+   "stocks_the_paper_had_not_arrived_for": [],
+   "paper_that_arrived_after_the_piece_was_drawn": 4,
+   "masks_held": 18,
+   "masks_dropped_to_stay_inside_the_pool": 0,
+   "stocks_held": 4,
+   "stocks_held_bytes": 60327040,
+   "stocks_dropped_to_stay_inside_the_pool": 0,
+   "image_cache": {
+    "held": 1,
+    "bytes": 17175200,
+    "budget": 402653184,
+    "live": 1,
+    "still_decoding": 0
+   },
+   "setup_showing": true,
+   "fold": {
+    "sequence": null
+   },
+   "sensation": null,
+   "asked_a_motor_for": [],
+   "the_launch_took": {
+    "the framework": 2,
+    "the library index": 9,
+    "the ink plates": 27,
+    "the desk": 97,
+    "the log": 447,
+    "the first frame": 151,
+    "everything": 733
+   },
+   "sync": {
+    "transport": "local",
+    "role": "client",
+    "rounds": 0,
+    "pushed": 0,
+    "refused": 0,
+    "pulled": 0,
+    "blobs_fetched": 0,
+    "faults": 0,
+    "pending": 1,
+    "refused_in_the_outbox": 0,
+    "cursor": 14061,
+    "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
+    "link": {
+     "transport": "local",
+     "role": "client",
+     "state": "connecting",
+     "address": "http://127.0.0.1:8480",
+     "peer_cursor": null,
+     "our_cursor": 14061,
+     "last_error": null,
+     "since": "2026-09-12T00:36:31.459Z",
+     "last_contact": null,
+     "certificate": null,
+     "setup_address": null
+    }
+   },
+   "ambient": {
+    "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
+    "pocket_feeling": "ugh",
+    "pocket_at": 1788464400000,
+    "allowed_to_interrupt": true,
+    "what_each_surface_may_say": {
+     "standing_line": "their state, in the couple's own words, assembled here from the log",
+     "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
+    },
+    "held_by_the_phone": [],
+    "what_the_phone_can_hold": {
+     "platform": "a browser",
+     "a_secure_origin": true,
+     "service_worker_offered_by_the_browser": true,
+     "a_worker_is_registered": true,
+     "the_person_has_allowed_it": "granted",
+     "a_push_manager": true
+    }
+   },
+   "at": "crops/reception_picked_up.png",
+   "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 6700,
+ "cold_ms": 2296,
  "load": {
-  "ms": 6700,
-  "store": "fresh",
+  "ms": 2296,
+  "store": "kept",
   "profile": "profile_reception",
   "made_of": {
-   "the framework": 6,
-   "the library index": 13,
-   "the ink plates": 29,
-   "the desk": 99,
-   "the log": 4679,
-   "the first frame": 307,
-   "everything": 5133
+   "the framework": 5,
+   "the library index": 14,
+   "the ink plates": 30,
+   "the desk": 109,
+   "the log": 490,
+   "the first frame": 250,
+   "everything": 898
   }
  },
- "app_open": false,
+ "app_open": "http://127.0.0.1:8796/",
  "reception": {
   "permission": "granted",
   "records": [
@@ -411,6 +546,46 @@
    },
    {
     "at": 1789162329843,
+    "kind": "state_declared",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "said how they are",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789173368079,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789173375547,
+    "kind": "message",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "wrote something",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789173380637,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789173385723,
     "kind": "state_declared",
     "from": "noor",
     "how": "quiet",

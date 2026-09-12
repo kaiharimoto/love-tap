@@ -99,43 +99,40 @@
  "has_dusk_paper": true,
  "paper_stocks": 54,
  "the_smallest_patch_of_a_stock_anything_took": [
-  "index_01 2560x1593",
-  "143x102 of it, at its own size",
-  14669.3229675293
+  "index_02 2560x1593",
+  "218x126 of it, at its own size",
+  27548.18181818182
  ],
- "paper_at_its_own_size": 418,
- "paper_stretched_to_fit": 7,
+ "paper_at_its_own_size": 29,
+ "paper_stretched_to_fit": 2,
  "stocks_the_paper_had_not_arrived_for": [],
- "paper_that_arrived_after_the_piece_was_drawn": 4,
+ "paper_that_arrived_after_the_piece_was_drawn": 29,
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 31,
+ "masks_dropped_to_stay_inside_the_pool": 138,
+ "stocks_held": 10,
+ "stocks_held_bytes": 142543040,
+ "stocks_dropped_to_stay_inside_the_pool": 21,
  "image_cache": {
-  "held": 74,
-  "bytes": 291781648,
+  "held": 28,
+  "bytes": 30801744,
   "budget": 402653184,
-  "live": 68,
+  "live": 26,
   "still_decoding": 0
  },
  "setup_showing": false,
  "fold": {
-  "sequence": "unfold_thirds",
-  "length": 142,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  },
  "sensation": null,
  "asked_a_motor_for": [],
  "the_launch_took": {
-  "the framework": 6,
-  "the library index": 13,
-  "the ink plates": 29,
-  "the desk": 99,
-  "the log": 4679,
-  "the first frame": 307,
-  "everything": 5133
+  "the framework": 5,
+  "the library index": 14,
+  "the ink plates": 30,
+  "the desk": 109,
+  "the log": 490,
+  "the first frame": 250,
+  "everything": 898
  },
  "sync": {
   "transport": "local",
@@ -158,7 +155,7 @@
    "peer_cursor": null,
    "our_cursor": 14061,
    "last_error": null,
-   "since": "2026-09-11T21:30:57.695Z",
+   "since": "2026-09-12T00:35:15.009Z",
    "last_contact": null,
    "certificate": null,
    "setup_address": null
@@ -174,7 +171,15 @@
    "pocket": "the feeling's own name and its sound, because the app is running and has it",
    "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
   },
-  "held_by_the_phone": []
+  "held_by_the_phone": [],
+  "what_the_phone_can_hold": {
+   "platform": "a browser",
+   "a_secure_origin": true,
+   "service_worker_offered_by_the_browser": true,
+   "a_worker_is_registered": true,
+   "the_person_has_allowed_it": "granted",
+   "a_push_manager": true
+  }
  },
  "at": "crops/reception_open.png",
  "read_at": "the end of the scene"

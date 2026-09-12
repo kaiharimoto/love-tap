@@ -10,193 +10,193 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1822,
+   "ms": 1804,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3735
+   "ms": 3089
   },
   {
    "do": "wait",
-   "ms": 1801
+   "ms": 1802
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1102
   },
   {
    "do": "openCorner",
-   "ms": 2435
+   "ms": 4141
   },
   {
    "do": "frames",
-   "ms": 66017
+   "ms": 70145
   },
   {
-   "at": 79303,
+   "at": 84582,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 13
+   "ms": 185
   },
   {
    "do": "step",
-   "ms": 1013
+   "ms": 838
   },
   {
    "do": "frames",
-   "ms": 70817
+   "ms": 79314
   },
   {
-   "at": 151140,
+   "at": 164924,
    "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 7
+   "ms": 190
   },
   {
    "do": "step",
-   "ms": 1300
+   "ms": 835
   },
   {
    "do": "frames",
-   "ms": 72111
+   "ms": 79473
   },
   {
-   "at": 225890,
+   "at": 245395,
    "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 1340
+   "ms": 162
   },
   {
    "do": "step",
-   "ms": 1053
+   "ms": 953
   },
   {
    "do": "frames",
-   "ms": 74801
+   "ms": 49552
   },
   {
-   "at": 301759,
+   "at": 296082,
    "said": "__deskShowFamily(ache) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 15
+   "ms": 183
   },
   {
    "do": "step",
-   "ms": 1189
+   "ms": 812
   },
   {
    "do": "frames",
-   "ms": 66841
+   "ms": 35720
   },
   {
-   "at": 369805,
+   "at": 332829,
    "said": "__deskShowFamily(static) ok, 6 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 16
+   "ms": 215
   },
   {
    "do": "step",
-   "ms": 1478
+   "ms": 835
   },
   {
    "do": "frames",
-   "ms": 68496
+   "ms": 37805
   },
   {
-   "at": 439785,
+   "at": 371640,
    "said": "__deskHoldOver(pigeon) ok, holding pigeon"
   },
   {
    "do": "holdOver",
-   "ms": 6
+   "ms": 171
   },
   {
    "do": "frames",
-   "ms": 833544
+   "ms": 879216
   },
   {
-   "at": 1273340,
+   "at": 1251043,
    "said": "__deskLetGo() ok, sent at 0.77"
   },
   {
    "do": "letGo",
-   "ms": 10
+   "ms": 186
   },
   {
    "do": "frames",
-   "ms": 212674
+   "ms": 403544
   },
   {
    "do": "goTo",
-   "ms": 6697
+   "ms": 6180
   },
   {
    "do": "step",
-   "ms": 2093
+   "ms": 1448
   },
   {
    "do": "openCorner",
-   "ms": 1244
+   "ms": 3604
   },
   {
    "do": "frames",
-   "ms": 73774
+   "ms": 38864
   },
   {
    "do": "openCorner",
-   "ms": 2373
+   "ms": 2393
   },
   {
    "do": "step",
-   "ms": 888
+   "ms": 809
   },
   {
    "do": "far",
-   "ms": 453
+   "ms": 1063
   },
   {
    "do": "awaitArrival",
-   "ms": 2327
+   "ms": 2149
   },
   {
    "do": "frames",
-   "ms": 290387
+   "ms": 1216753
   },
   {
    "do": "goTo",
-   "ms": 5095
+   "ms": 9444
   },
   {
    "do": "step",
-   "ms": 1836
+   "ms": 6132
   },
   {
    "do": "far",
-   "ms": 476
+   "ms": 426
   },
   {
    "do": "awaitArrival",
-   "ms": 2526
+   "ms": 5865
   },
   {
    "do": "frames",
-   "ms": 288238
+   "ms": 1234840
   },
   {
    "do": "report",
-   "ms": 544
+   "ms": 508
   }
  ],
  "shots": [
@@ -275,7 +275,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtxgh7eg"
+     "pwa-mtxn2m03"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -288,34 +288,35 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 9104,
    "seed": 20260903,
-   "events": 14097,
+   "events": 14102,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 5,
+   "masks_composed": 2,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
    "the_smallest_patch_of_a_stock_anything_took": [
-    "index_01 2560x1593",
-    "143x102 of it, at its own size",
-    14669.3229675293
+    "index_02 2560x1593",
+    "225x78 of it, at its own size",
+    17618.35419047963
    ],
-   "paper_at_its_own_size": 49130,
-   "paper_stretched_to_fit": 825,
-   "stocks_the_paper_had_not_arrived_for": [
-    "looseleaf_04"
-   ],
-   "paper_that_arrived_after_the_piece_was_drawn": 13,
+   "paper_at_its_own_size": 25197,
+   "paper_stretched_to_fit": 419,
+   "stocks_the_paper_had_not_arrived_for": [],
+   "paper_that_arrived_after_the_piece_was_drawn": 80,
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 72,
+   "masks_dropped_to_stay_inside_the_pool": 381,
+   "stocks_held": 10,
+   "stocks_held_bytes": 148811120,
+   "stocks_dropped_to_stay_inside_the_pool": 71,
    "image_cache": {
-    "held": 131,
-    "bytes": 397017428,
+    "held": 78,
+    "bytes": 64085944,
     "budget": 402653184,
-    "live": 63,
+    "live": 24,
     "still_decoding": 0
    },
    "setup_showing": false,
@@ -326,7 +327,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-11T22:49:46.233Z",
+    "started_at": "2026-09-12T02:49:16.724Z",
     "pattern": [
      {
       "ms": 150,
@@ -412,36 +413,36 @@
    ],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 12,
-    "the ink plates": 46,
-    "the desk": 166,
-    "the log": 610,
-    "the first frame": 332,
-    "everything": 1173
+    "the library index": 18,
+    "the ink plates": 43,
+    "the desk": 196,
+    "the log": 596,
+    "the first frame": 317,
+    "everything": 1177
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 721,
-    "pushed": 3,
+    "rounds": 1380,
+    "pushed": 4,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14097,
+    "cursor": 14102,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14097,
-     "our_cursor": 14097,
+     "peer_cursor": 14102,
+     "our_cursor": 14102,
      "last_error": null,
-     "since": "2026-09-11T22:18:33.113Z",
-     "last_contact": "2026-09-11T22:54:34.806Z",
+     "since": "2026-09-12T02:00:10.631Z",
+     "last_contact": "2026-09-12T03:09:51.915Z",
      "certificate": null,
      "setup_address": null
     }
@@ -456,25 +457,33 @@
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
-    "held_by_the_phone": []
+    "held_by_the_phone": [],
+    "what_the_phone_can_hold": {
+     "platform": "a browser",
+     "a_secure_origin": true,
+     "service_worker_offered_by_the_browser": true,
+     "a_worker_is_registered": true,
+     "the_person_has_allowed_it": "unknown",
+     "a_push_manager": false
+    }
    },
    "at": "15_authored_feeling",
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2361,
+ "cold_ms": 2294,
  "load": {
-  "ms": 2361,
+  "ms": 2294,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
-   "the library index": 12,
-   "the ink plates": 46,
-   "the desk": 166,
-   "the log": 610,
-   "the first frame": 332,
-   "everything": 1173
+   "the library index": 18,
+   "the ink plates": 43,
+   "the desk": 196,
+   "the log": 596,
+   "the first frame": 317,
+   "everything": 1177
   }
  },
  "far": [
@@ -493,14 +502,14 @@
    "before": 8083,
    "after": 8084,
    "at_frame": 236,
-   "waited_ms": 1926
+   "waited_ms": 1748
   },
   {
    "line": "feeling soup 0.9",
    "before": 8084,
    "after": 8085,
    "at_frame": 342,
-   "waited_ms": 2123
+   "waited_ms": 5464
   }
  ],
  "problems": [],

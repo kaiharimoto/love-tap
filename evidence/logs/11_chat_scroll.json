@@ -10,21 +10,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2119,
+   "ms": 1577,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 2715
+   "ms": 3052
   },
   {
    "do": "wait",
-   "ms": 2002
+   "ms": 2001
   },
   {
    "do": "scrollTo",
-   "ms": 5411
+   "ms": 3975
   },
   {
    "do": "wait",
@@ -32,11 +32,11 @@
   },
   {
    "do": "frames",
-   "ms": 627961
+   "ms": 604149
   },
   {
    "do": "timings",
-   "ms": 423
+   "ms": 433
   },
   {
    "do": "flingLog",
@@ -44,7 +44,7 @@
   },
   {
    "do": "report",
-   "ms": 416
+   "ms": 857
   }
  ],
  "shots": [
@@ -192,7 +192,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 4944,
    "seed": 20260903,
-   "events": 14092,
+   "events": 14096,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -203,23 +203,26 @@
    "has_dusk_paper": true,
    "paper_stocks": 54,
    "the_smallest_patch_of_a_stock_anything_took": [
-    "index_01 2560x1593",
-    "143x102 of it, at its own size",
-    14669.3229675293
+    "index_02 2560x1593",
+    "194x126 of it, at its own size",
+    24520.909090909092
    ],
-   "paper_at_its_own_size": 12918,
-   "paper_stretched_to_fit": 215,
+   "paper_at_its_own_size": 701,
+   "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "sticky_blue_02"
    ],
-   "paper_that_arrived_after_the_piece_was_drawn": 12,
+   "paper_that_arrived_after_the_piece_was_drawn": 52,
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 170,
+   "masks_dropped_to_stay_inside_the_pool": 408,
+   "stocks_held": 10,
+   "stocks_held_bytes": 149023600,
+   "stocks_dropped_to_stay_inside_the_pool": 43,
    "image_cache": {
-    "held": 113,
-    "bytes": 397992540,
+    "held": 53,
+    "bytes": 55310064,
     "budget": 402653184,
-    "live": 74,
+    "live": 30,
     "still_decoding": 0
    },
    "setup_showing": false,
@@ -229,18 +232,18 @@
    "sensation": null,
    "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 7,
+    "the framework": 8,
     "the library index": 17,
-    "the ink plates": 37,
-    "the desk": 148,
-    "the log": 632,
-    "the first frame": 332,
-    "everything": 1173
+    "the ink plates": 36,
+    "the desk": 143,
+    "the log": 610,
+    "the first frame": 311,
+    "everything": 1125
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 214,
+    "rounds": 206,
     "pushed": 0,
     "refused": 0,
     "pulled": 0,
@@ -248,18 +251,18 @@
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14092,
+    "cursor": 14096,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14092,
-     "our_cursor": 14092,
+     "peer_cursor": 14096,
+     "our_cursor": 14096,
      "last_error": null,
-     "since": "2026-09-11T22:07:46.988Z",
-     "last_contact": "2026-09-11T22:18:27.967Z",
+     "since": "2026-09-12T01:49:49.357Z",
+     "last_contact": "2026-09-12T02:00:06.829Z",
      "certificate": null,
      "setup_address": null
     }
@@ -274,25 +277,33 @@
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
-    "held_by_the_phone": []
+    "held_by_the_phone": [],
+    "what_the_phone_can_hold": {
+     "platform": "a browser",
+     "a_secure_origin": true,
+     "service_worker_offered_by_the_browser": true,
+     "a_worker_is_registered": true,
+     "the_person_has_allowed_it": "unknown",
+     "a_push_manager": false
+    }
    },
    "at": "11_chat_scroll",
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2312,
+ "cold_ms": 2449,
  "load": {
-  "ms": 2312,
+  "ms": 2449,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
+   "the framework": 8,
    "the library index": 17,
-   "the ink plates": 37,
-   "the desk": 148,
-   "the log": 632,
-   "the first frame": 332,
-   "everything": 1173
+   "the ink plates": 36,
+   "the desk": 143,
+   "the log": 610,
+   "the first frame": 311,
+   "everything": 1125
   }
  },
  "problems": [],
