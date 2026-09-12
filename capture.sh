@@ -4,6 +4,8 @@
 #   ./capture.sh                 # everything this session can reach
 #   ./capture.sh --only=02_chat  # one scene
 #   ./capture.sh --no-build      # against the builds already on disk
+#   ./capture.sh --only=08_state_propagating --no-build --stamp=2026-09-12T00:07:53Z
+#                                # finish a run the machine did not survive, as part of that run
 #
 # Nothing here composes, retouches, or upscales. Every still is a screenshot of the app running in
 # Playwright WebKit (the engine on the iPhone) or of the app running on the emulator, taken through
@@ -25,6 +27,12 @@ SEEDED_PORT=8796
 FROZEN_NOW="2026-09-03T19:40:00Z"
 SCRATCH="${TMPDIR:-/tmp}/lovetap-capture"
 LOG="evidence/logs"
+# When this run began, which is what collect.py uses to decide whether an artifact is from it.
+#
+# Settable, because a capture takes two and a half hours and the machine it runs on does not always
+# last that long. A run that is finished in a second pass — `--only=08_state_propagating --no-build`
+# against the builds already on disk — belongs to the run that shot the other sixteen, and saying so
+# is the difference between a complete set and sixteen artifacts the manifest calls stale.
 STAMP="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 for a in "$@"; do
@@ -32,6 +40,7 @@ for a in "$@"; do
     --only=*) ONLY="${a#*=}" ;;
     --browser=*) BROWSER="${a#*=}" ;;
     --no-build) BUILD="no" ;;
+    --stamp=*) STAMP="${a#*=}" ;;
     --frozen-now=*) FROZEN_NOW="${a#*=}" ;;
     -h|--help) sed -n '2,13p' "$0"; exit 0 ;;
     *) echo "capture.sh: don't know $a" >&2; exit 2 ;;
