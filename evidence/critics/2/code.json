@@ -1,0 +1,129 @@
+{
+ "critic": "code",
+ "cycle": 2,
+ "score": 12.5,
+ "floor": 13,
+ "meets_floor": false,
+ "rules": [
+  {
+   "rule": "1. One event log and no second store; a storage driver imported outside app/lib/spine/ fails the build",
+   "verdict": "PASS",
+   "evidence": "app/test/persistence_boundary_test.dart:7-19 walks every .dart under lib/, skips lib/spine/, and fails on any import of sqflite|drift|hive|shared_preferences|sqlite3|idb_shim|sembast|isar|objectbox|realm or dart:indexed_db; :22-32 further confines drivers to lib/spine/store/. I ran the suite twice (flutter test, exit 0, 92/92) and the file is one of the 23 that execute, so the build would indeed fail. Grepping lib/ for localStorage|indexedDB|writeAsBytes|path_provider|SharedPreferences outside spine/ returns only app/lib/media/local_uri_io.dart:20-30 and app/lib/media/read_bytes_io.dart:5-21, which write content-addressed media into getTemporaryDirectory() for the platform player to open - a cache derived from the log, not a store of truth. Caveat: app/lib/spine/store/store_sqlite.dart:32 creates a second table, `meta (key TEXT PRIMARY KEY, value TEXT)`, and spine.setMeta is called from six files outside lib/spine/ (regions/chat/chat_region.dart:217,249; regions/settings/settings_region.dart:213; regions/settings/notifications.dart:54; transport/protocol/http_transport.dart:141-142,280,327-328; transport/local/local_transport.dart:54). docs/EVENT_TYPES.md:5-6 says 'The single spine holds exactly one kind of row: an event... There is no other store.' The boundary test's regex cannot see this route."
+  },
+  {
+   "rule": "2. At least fourteen event types, docs/EVENT_TYPES.md and the code agreeing, each with a thread rendering, a notification treatment and a search behaviour, and a test asserting the same list",
+   "verdict": "PARTIAL",
+   "evidence": "Eighteen types: app/lib/spine/types.dart:87-241 (ids at :87,96,106,115,124,134,144,154,163,171,179,187,195,203,211,219,227,235). app/test/spine_schema_test.dart:8-18 parses the doc table and asserts documented == registered in order, >= 14, and uniqueness; it passes. Every spec carries renderer, notify and search fields, and app/test/thread_types_test.dart:16-100 holds renderer<->registry both ways and forces every type through summaryOf. But: (a) nine of the eighteen renderer ids - margin_note, margin_mark, ticket_stub, list_line, stamped_card, tally_mark, shelf_card, folded_clock, new_feeling_card - all map to the same function, marginSentence (renderers.dart:113-121, defined :95-96), while docs/EVENT_TYPES.md rows 12-18 promise distinct paper objects ('a ticket-stub note', 'a stamped card', 'an index card in the hand of whoever passed it on, with what the other one wrote underneath', 'a checklist line torn from a list, ticked in the author's ink when done', 'a folded note with a clock scribble, unfolding when it fires'); (b) the doc's conditional notification treatments are not implemented - row 12 'quiet for planned, interruptive for scheduled' vs types.dart:190 flat Notify.quiet, row 13 'interruptive when assigned to you' vs types.dart:198, row 14 'on the day, interruptive' vs types.dart:206; (c) no test binds the doc's notification or search columns to the code, and the one test that names notifications, app/test/floors_test.dart:78, asserts Notify.values.contains(spec.notify), which is true of every enum value; (d) three registered types - milestone, ping, state_passive - are written by nothing in lib/: grepping every emit( call site in lib/ outside capture/ yields todo_event, passed_on, ritual_kept, date_event, feeling, message, message_edit, photo, video, voice_note, reaction, message_delete, feeling_authored, state_declared, read_marker and no others."
+  },
+  {
+   "rule": "3. A fifth shared-life module is a directory plus one line; the commit adding the fourth touched nothing under the first three",
+   "verdict": "PASS",
+   "evidence": "app/lib/modules/registry.dart:10-16 is a flat const list; app/lib/modules/module.dart:12-28 is the whole contract; app/lib/regions/us/us_region.dart:40-52 iterates kModules generically and the only per-id branch, _rowsFor at :63-68, ends in `_ => 2`, so a new module needs no edit there. The first four modules all arrive in commit 7dfeca2, so there is no separable 'fourth-module commit'; the fifth, shelf, is commit ffc5821, whose file list is registry.dart (+2), modules/shelf/shelf_module.dart (new, 180 lines), renderers.dart (+7), spine/types.dart (+8), docs/EVENT_TYPES.md, seed/tools/validate.py and eleven seed month files - nothing under modules/dates, modules/todos, modules/calendar or modules/rituals. So the claim holds, with the honest qualifier that docs/EVENT_TYPES.md's own 'Adding a nineteenth' section already states: a module that brings a new event type costs four files, not one."
+  },
+  {
+   "rule": "4. Typing and presence ticks are never events",
+   "verdict": "PASS",
+   "evidence": "Ephemeral is a separate wire type with no id in kEventTypes (app/lib/transport/transport.dart:131-147); typing leaves through scope.sendTyping -> transport.sendEphemeral (app/lib/scope.dart:156) and app/lib/regions/chat/chat_region.dart:214-227, never through spine.append. Spine.append calls specOf(type) (app/lib/spine/spine.dart:181-183), which throws ArgumentError for an unregistered id, so 'typing' could not reach the log even by accident. app/test/transport_local_test.dart:207-222 sends a typing frame and a presence frame across a paired pair and then asserts r.host.length == 0 and r.client.length == 0."
+  },
+  {
+   "rule": "5. Read markers are never rendered as rows in the thread",
+   "verdict": "PASS",
+   "evidence": "app/lib/spine/types.dart:154-161 sets rowInThread: false and renderer 'ink_dries'; renderers.dart:112 maps ink_dries to _neverARow (:101, SizedBox.shrink); app/lib/spine/projections/thread.dart:264-270 handles read_marker by moving _readUpto and returning before _add, and :272 returns for any other !rowInThread type. app/test/spine_replay_golden_test.dart 'a read marker moves a mark and is never a row' and app/test/spine_schema_test.dart:31-34 both assert it."
+  },
+  {
+   "rule": "6. No secret in any committed file, history included",
+   "verdict": "PASS",
+   "evidence": "git grep -IE 'tskey-auth-[A-Za-z0-9]|BEGIN [A-Z ]*PRIVATE KEY' across all 119 revisions returns nothing. In the working tree TS_AUTHKEY appears only as an environment-variable name (bootstrap.sh:203-207, tools/tailscale/up.sh:48-109 passing --authkey from the process environment, README.md:23). git ls-files (1367 files) contains no .env, no key material and nothing under toolchain/. tools/push/webpush.py:115 generates the VAPID pair at run time and evidence/logs/webpush.txt records only that a header had three parts. evidence/coldstart.json carries the two tailscaled *public* node keys, which is what the proof requires."
+  },
+  {
+   "rule": "7. The host binds only its tailnet address and refuses any request not authenticated with the pairing key",
+   "verdict": "PASS",
+   "evidence": "app/lib/transport/tailscale/tailnet.dart:22-32 admits only 100.64.0.0/10 and fd7a:115c:a1e0::/48; :55-71 refuses a declared address that is not one and refuses outright when no tailnet address exists - no fallback branch anywhere in the file. app/test/tailnet_test.dart:12-72 pins the boundaries (100.63.255.255 and 100.128.0.0 both false) and asserts 0.0.0.0, 127.0.0.1, 192.168.0.10 and :: all throw when declared. app/lib/transport/protocol/server_io.dart:87-93 401s every /api request whose Authorization header fails _authenticated (:119-130: device id match, kAuthSkew clock window, HMAC over method+path+ts+nonce+body, constant-time compare, nonce replay cache). I ran the tailscale reliability and coldstart tests live against the two userspace nodes in this session: evidence/reliability.json tailscale.status = 'ran' and evidence/coldstart.json status = 'ran', host_listener 127.0.0.1:8443 with host_reachable_at 100.68.254.25, which matches tailscale_transport.dart:77 (userspace mode binds loopback behind tailscaled - narrower than the tailnet address, not wider). One hole: server_io.dart:79-83 routes any path outside kApiPrefix to _serveStatic *before* the auth check, so the whole PWA bundle is readable by anything that can open the listener."
+  },
+  {
+   "rule": "8. Every file in assets/ has an entry in assets/MANIFEST.json naming its generator, and nothing was downloaded",
+   "verdict": "PASS",
+   "evidence": "evidence/logs/manifest.json: 634 files, 766 entries, without_an_entry = []. I re-derived it: every one of the 638 files under assets/ except the two sidecar indexes assets/sound/MANIFEST.sound.json and assets/tears/relief.json (both in the EXEMPT set at tools/check/manifest.py:23-25) has an entry, and all 766 entries carry a non-empty generator - ten distinct local scripts (blender/folds/fold.py 241, blender/photos/still.py+develop.py 128, blender/paper/tear_relief.py 113, blender/objects/objects.py 77, tools/tears/tear.py 57, blender/paper/stocks.py 55, blender/bits/bits.py 44, tools/sound/synth.py 44, tools/handwriting/build.py 5, blender/shell/desk.py 2). Both fonts are built from authored stroke skeletons (tools/handwriting/author.py, build.py) and nothing in tools/ or blender/ fetches a URL. Gap: 40 files under seed/videos (14 .mp4, 14 .poster.jpg, 12 index json), which ship inside the app bundle at app/assets/seed/videos/, appear in neither assets/MANIFEST.json nor seed/MANIFEST.json, and tools/check/manifest.py:18 only ever walks assets/."
+  },
+  {
+   "rule": "9. The tests pass, and they test what they claim to",
+   "verdict": "PARTIAL",
+   "evidence": "flutter test: exit 0, 92 tests, 0 failures, 0 skipped, across all 23 files in app/test/ (verified from the machine-readable --reporter json run: every testDone has result 'success' and none has skipped: true). No test body is empty - the six tests with no inline expect() delegate to helpers that assert (every_screen_builds_test.dart:50-60 expect(tester.takeException(), isNull); nothing_is_drawn_by_the_diagnostic_test.dart pushAndRead ends in expect(_underlinedInYellow(tester), isEmpty)). Two problems. app/test/floors_test.dart:78, inside a test named 'at least fourteen event types, each with a renderer and a notification treatment', asserts Notify.values.contains(spec.notify) - true for every possible value of a non-nullable enum field, so the notification half of the name is unasserted; the comment at :70-72 says this test was already caught doing exactly this once. And app/test/coldstart_test.dart:53-60 and app/test/reliability_test.dart:272-285 write evidence/coldstart.json and evidence/reliability.json from inside the suite, overwriting them with status 'pending' when ../toolchain/ts/a/address is absent, and passing: on any machine without the two nodes up, a plain `flutter test` destroys the two strongest pieces of evidence in the repository and still exits 0."
+  }
+ ],
+ "findings": [
+  {
+   "severity": "serious",
+   "artifact": "app/lib/regions/chat/renderers.dart",
+   "where": "the kThreadRenderers map, lines 113-121, against docs/EVENT_TYPES.md rows 10-18",
+   "what": "Nine of the eighteen types name nine different renderer ids that all resolve to one function, marginSentence (renderers.dart:95-96), so the ticket stub, the stamped card, the index card 'in the hand of whoever passed it on', the torn checklist line and the folded note that 'unfolds when it fires' that docs/EVENT_TYPES.md promises are all one line of pencil text; only the sentence differs (summaryOf, :156-175).",
+   "why": "Rule 2 requires the doc and the code to agree on each type's thread rendering, and here the doc describes five pieces of paper the code never draws."
+  },
+  {
+   "severity": "serious",
+   "artifact": "app/lib/scope.dart",
+   "where": "_tellThePocket, lines 112-131, against app/lib/spine/types.dart and app/lib/regions/settings/notifications.dart:76-80",
+   "what": "The runtime announces exactly two things - the standing line, and an arriving event of type 'feeling'. Nothing ever calls NotificationPrefs.forType (its only definition is notifications.dart:76 and grep finds no caller), and spec.notify is read only to seed the settings defaults (notifications.dart:44) and to decide which rows the settings screen lists (:132), so sixteen of the eighteen declared notification treatments are dead and the per-type 'wake me / quietly / not at all' control a person sets changes nothing.",
+   "why": "Rule 2 requires each type to have a notification treatment; the registry declares eighteen and the delivery path honours two."
+  },
+  {
+   "severity": "serious",
+   "artifact": "app/lib/spine/types.dart",
+   "where": "the milestone (:203), ping (:227) and state_passive (:179) entries",
+   "what": "Three registered types have no author anywhere in the app: every emit( call site in lib/ outside lib/capture/ writes one of the other fifteen, app/lib/modules/calendar/calendar_module.dart contains no emit at all (it only reads milestones the seed wrote), and state_passive is emitted solely by the capture hook at lib/capture/hooks.dart:69. There is no surface that schedules a ping, despite notifications.dart:2-3 asserting 'a ping exists only because one of the two people wrote it'.",
+   "why": "Rule 2's list is meant to describe a working log; a type nothing can write is a registry entry, not an event type, and the mission's anniversaries and scheduled pings ride on these two."
+  },
+  {
+   "severity": "minor",
+   "artifact": "app/test/floors_test.dart",
+   "where": "line 78, inside the test named 'at least fourteen event types, each with a renderer and a notification treatment'",
+   "what": "expect(Notify.values.contains(spec.notify), isTrue) is a tautology for a non-nullable enum field, so the notification half of the test's name is unasserted - the same defect the comment at :70-72 records this test having had before.",
+   "why": "Rule 9: a test that asserts something weaker than its name is a finding, and this is the only test that names notifications at all."
+  },
+  {
+   "severity": "minor",
+   "artifact": "app/test/coldstart_test.dart and app/test/reliability_test.dart",
+   "where": "coldstart_test.dart:53-60 and reliability_test.dart:272-285",
+   "what": "Both tests write into evidence/ from inside the suite and, when ../toolchain/ts/a/address is missing, replace evidence/coldstart.json and evidence/reliability.json with a 'pending' stub and pass. Running the test suite on a machine where the two tailnet nodes are down silently deletes the cold-start proof, and the run still exits 0.",
+   "why": "Rule 9: the evidence a rule is judged on should not be destructible by the command that checks the rule."
+  },
+  {
+   "severity": "minor",
+   "artifact": "app/pubspec.yaml",
+   "where": "lines 96-98, the DeskStamp font family, against tools/handwriting/build.py:40",
+   "what": "build.py declares three faces (FACES = ['NoorHand', 'TeoHand', 'DeskStamp']) with a separate 'stamp' pen model (:399, :760) and a caps-mapped glyph set (:880), but DeskStamp.ttf exists nowhere in the tree and pubspec.yaml points the DeskStamp family at TeoHand.ttf. Everything Hands.stamp draws - the six-word pairing code (regions/settings/settings_region.dart:304), the host's tailnet address (setup/setup_region.dart:71), the module tabs, the calendar day count (modules/calendar/calendar_module.dart:153) - is rendered in one partner's handwriting rather than in the stamp face the pipeline was built to produce.",
+   "why": "Rule 8's intent is that every face in the app traces to a generator that made it; this one names a generator whose output was never produced, and the substitution is silent."
+  },
+  {
+   "severity": "minor",
+   "artifact": "assets/MANIFEST.json and tools/check/manifest.py",
+   "where": "tools/check/manifest.py:18 (ASSETS = ROOT/'assets') and the 40 files under seed/videos/",
+   "what": "The fourteen seed videos, their fourteen posters and twelve month indexes ship inside the app bundle at app/assets/seed/videos/ but have no entry in assets/MANIFEST.json or seed/MANIFEST.json, and the checker never walks outside assets/, so it reports without_an_entry = [] while the app's entire video content is unaccounted for. seed/MANIFEST.json covers only the 54 voice files; seed photos are covered by assets/MANIFEST.json.",
+   "why": "Rule 8 exists so nothing arrives in the library from somewhere unaccounted for, and the largest media class in the shipped bundle escapes both manifests and the check."
+  },
+  {
+   "severity": "minor",
+   "artifact": "app/lib/spine/store/store_sqlite.dart",
+   "where": "line 32, the meta table, reachable from six files outside lib/spine/",
+   "what": "A key-value table alongside events holds the chat draft, notification preferences, the pairing record and the derived pairing key (chat_region.dart:217,249; notifications.dart:54; http_transport.dart:141-142,280; local_transport.dart:54), which docs/EVENT_TYPES.md:5-6 flatly denies ('exactly one kind of row... There is no other store'). persistence_boundary_test.dart matches import statements only, so a future module could persist arbitrary state through spine.setMeta with no test objecting.",
+   "why": "Rule 1's guard is an import regex, and this is the one route around it that the doc's own absolute claim does not survive."
+  },
+  {
+   "severity": "minor",
+   "artifact": "app/lib/transport/protocol/server_io.dart",
+   "where": "lines 79-83, the _serveStatic branch before the auth check",
+   "what": "Any request whose path does not start with kApiPrefix is served from pwaRoot without authentication; only /api paths reach _authenticated at :89. Path traversal is guarded (:274-279) but the whole PWA bundle is readable by anything that can open the listener.",
+   "why": "Rule 7 says the host refuses any request not authenticated with the pairing key, and static GETs are not refused."
+  }
+ ],
+ "what_is_working": [
+  "The persistence boundary is a real, executing guard, not a comment: app/test/persistence_boundary_test.dart enumerates twelve driver packages plus dart:indexed_db, walks all of lib/, and a second test confines drivers to lib/spine/store/ - and grepping for localStorage, indexedDB, writeAsBytes and path_provider outside spine/ finds only a content-addressed temp cache for the media player.",
+  "The module registry earns its claim and the git record proves it: app/lib/modules/registry.dart is a flat list, us_region.dart:40-68 iterates it with a `_ => 2` default for the only per-id branch, and the commit that added the fifth module (ffc5821, shelf) touched its own directory plus two lines of registry.dart and nothing under dates, todos, calendar or rituals.",
+  "Typing and presence cannot reach the log even by mistake: Ephemeral has no registry id, Spine.append throws through specOf for an unregistered type, and transport_local_test.dart:207-222 sends both frame kinds across a paired pair and asserts both spines are still length 0.",
+  "The tailnet bind refuses rather than falls back. tailnet.dart has no branch that returns a non-tailnet address, and tailnet_test.dart:22-30 pins both edges of 100.64.0.0/10 and asserts that declaring 0.0.0.0 or 127.0.0.1 throws. The HMAC auth at server_io.dart:119-130 has a clock window, a constant-time compare and a nonce replay cache.",
+  "The tests genuinely pass and the tailscale path is genuinely exercised: 92/92 across all 23 files, exit 0, twice; the cold-start and reliability suites ran live against the two userspace nodes in this session and wrote evidence/coldstart.json status 'ran' with distinct node keys, 100.68.254.25 and 100.72.198.108, and identical event order on both spines.",
+  "The material pipeline is fully accounted for inside assets/: 634 files, zero without an entry, ten local generator scripts and no network fetch anywhere in tools/ or blender/; both handwriting faces are built from authored stroke skeletons rather than downloaded.",
+  "thread_types_test.dart is a good test - it forces every registered type through summaryOf with a plausible payload and fails if the sentence is empty, equals the registry id, contains an underscore or shows an ISO timestamp, which is the specific drift its header describes."
+ ],
+ "verdict": "The structural spine of this build is real and it is demonstrated rather than asserted: one event log with an executing import-boundary test, eighteen types that the doc and the registry are held to agreeing on, a module registry whose 'a directory plus one line' claim the fifth module's own commit diff confirms, typing and presence that cannot reach the log even by accident, a host bind that refuses anything outside 100.64.0.0/10 with no fallback branch, HMAC request auth with replay protection, an asset manifest with no unaccounted file inside assets/, and 92 tests that pass on a clean run including a live cold start over two real tailscaled nodes. What keeps it under the floor is that the registry promises more than the app delivers, and no test catches the gap. Nine of the eighteen types name nine renderers that are one function, so the ticket stub, the stamped card, the index card and the folded note in docs/EVENT_TYPES.md are all a line of pencil. Sixteen of the eighteen notification treatments are never read at delivery time - the runtime announces the standing line and an arriving feeling and nothing else - so the settings screen's per-type control is inert. Three types, milestone, ping and state_passive, have no writer anywhere in lib/, which means the calendar module can only read what the seed wrote and no one can schedule a ping. The doc's conditional notification columns ('interruptive when assigned to you', 'quiet for planned, interruptive for scheduled') are not implemented, and the only test that names notifications asserts that an enum field holds an enum value. Add a phantom DeskStamp face silently aliased to Teo's handwriting, fourteen bundled videos in no manifest, and a test suite that overwrites the cold-start evidence when the tailnet is down, and the picture is an architecture that would take a nineteenth type and a sixth module cleanly, describing a thread and a notification system it has not finished building."
+}

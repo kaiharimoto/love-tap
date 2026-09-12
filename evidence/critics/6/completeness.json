@@ -1,0 +1,190 @@
+{
+  "critic": "completeness",
+  "cycle": 6,
+  "checked": [
+    "Coverage tally across the six reports, per artifact and per evidence file: which of the seventeen each report names in a finding, in what_is_working, or only in a DIFF judgement.",
+    "evidence/logs/scroll_webkit.json in full: 642 per_frame entries, build/raster/total, spike indices, gaps, share of total build, bimodality, cumulative-time spacing; against evidence/logs/11_chat_scroll.json step wall clock and frames.json app time.",
+    "app/lib/capture/hooks.dart _watchTimings/timings and tools/capture/scene.js 'frames' step, to establish what one per_frame entry is.",
+    "app/lib/transport/sync.dart:140 long-poll period against the measured spike spacing.",
+    "12_search.png: paper-band row profile (query sheet, fifteen filter strips, results, tab bar), chrome share, first-result row; against logs/12_search.report.json (10 hits, type_filter null).",
+    "app/lib/regions/chat/search_page.dart _Tab (lit state, IntrinsicWidth) and its mtime.",
+    "14_media_viewer.png read visually; logs/14_media_viewer.report.json video block; app/lib/regions/chat/viewer_page.dart mtime and transport-strip code.",
+    "06_unfolding.mp4 frames 46, 162 and 325 extracted with ffmpeg: sheet left/right/top/bottom edge straightness over 90-701 samples, neighbouring sheets' edge wander, per-row standard deviation across the fold face, five vertical profiles through the fold, the crease ramp at x=400, the cast-shadow ramp at x=400 and y=1560.",
+    "High-pass (sigma 3) micro-texture on the fold sheet and on every settled note in frames 46, 162 and 325, ink-and-edge masked.",
+    "assets/folds/unfold_thirds/0046.png and app/assets/folds/unfold_thirds/0046.webp and the last packed frame: opaque-edge straightness, alpha shadow ramp, own high-pass texture, texture after upscaling to the on-screen width; blender/folds/fold.py header; tools/pack_assets.py lossless-alpha path; capture.sh clip encode (libx264 -crf 16 -pix_fmt yuv420p).",
+    "08_state_propagating.mp4 frames 0, 148, 149, 167, 392-397 and 501: header-band and whole-frame differences across the 394/395 cut; evidence/scenes/08_state_propagating.json step order.",
+    "Whole-page vertical displacement, sub-pixel, across 07_feeling_landing run 1 ('hold', 150 frames) and 08 run 4 ('here', 156 frames) and 08 run 2 (a plain message, 19 frames).",
+    "evidence/logs/haptics.json: total declared on-time, on-time landing in gaps under the no-amplitude fallback, single-segment feelings, first-segment polarity; app/android/.../Haptics.kt play().",
+    "app/web/push/sw.js WORDS table, silent, icon, badge, standing branch; md5 of app/web/icons/Icon-192.png and the five mipmap launchers; the icon read visually.",
+    "02_chat.png: the y=2627/2628 cut (step size, column agreement, desk luma under it vs 12 px away), one-pixel bright rules at the two coordinates cited and counted across all ten stills at two thresholds, desk vs paper gradient anisotropy.",
+    "evidence/crops/02_chat_300_hand.png and 02_chat_300_edge.png read visually against logs/crops.json boxes.",
+    "Event counts and seeds in all sixteen *.report.json; header band (rows 0-229) across the seven paired screens and the two empty-state screens; DIFF.json ssim 0.648 recomputed with an independent 8x8 block SSIM against evidence/.previous.",
+    "04_moments.png lens-label ink luma and glyph height, chip RGB selected vs unselected; logs/04_moments.report.json lenses and blob counts.",
+    "13_messenger_states.png read visually against its report's delivery map and states_on_the_glass.",
+    "11_chat_scroll.mp4 frames 40-79: sub-pixel shift per transition cross-correlated against logs/11_chat_scroll.fling.json; the fling log's end-estimate swing and revision count.",
+    "Emoji-range scan (Dingbats, Misc Symbols, Arrows, Emoticons, Supplemental, flags, VS16) over 121 app/lib, app/web and app/android source files and over 14,061 seeded events; exclamation marks in Dart literals.",
+    "code report's rule checks: grep for forType|isQuietAt|Announce. outside notifications.dart, scope.dart's arrival loop, 'flutter test' across every .sh/.py/.yaml, .git/hooks, .github, zz_probe_rows_test expect count, floors_test:77-95, types.dart:1.",
+    "Ran the suite: toolchain/flutter/bin/flutter test.",
+    "17_setup_pwa.png and evidence/crops/dusk_pulse.png read (nobody else did); logs/hand.json, logs/pwa.json, logs/webpush.txt, logs/manifest.json, logs/recipes.json, logs/tears.json, logs/reception.json read.",
+    "git status and HEAD against DIFF.json's commit; mtimes of app/lib files against the times the six reports were written."
+  ],
+  "corrections": [
+    {
+      "report": "messenger_reliability.json",
+      "claim": "BLOCKING, 11_chat_scroll.mp4: the framework's build spikes to 916-1462 ms on 26 of 642 frames at a period of exactly 25 frames, so 'the year-deep thread stops for over a second to rebuild roughly every 0.4 s of scrolling'.",
+      "what_i_measured": "The numbers reproduce exactly: 26 entries over 500 ms, gaps 23-27, 916-1462 ms, median 1197, 31,674 of 36,583 ms = 86.6 per cent of all build time, and the distribution is bimodal with nothing at all between 90 ms and 916 ms. The frequency and the cause do not. per_frame is framework frames, not driven steps: 642 frames over 300 grabs, 2.14 per step, so 25 entries is 11.7 steps = 187 ms of app time, not 400. And the spacing is constant in time, not in scrolling: 5.1-6.4 s of framework-accounted time between spikes (mean 5.9) and 531,790/26 = 20,453 ms of wall clock, while the thread's travel per frame falls from 143 to 31 device px across the same clip without the spacing changing. 20.4 s is app/lib/transport/sync.dart:140, `once(wait: const Duration(seconds: 20))`. The frames step took 531.8 s of wall clock to drive 4.8 s of app time, a ratio of 111:1, so anything periodic on the wall clock is oversampled about a hundredfold against app time. A 1.2 s build is still a 1.2 s build and worth a finding; it is a sync round costing it, once every twenty seconds of real time, not the thread rebuilding every 0.4 s of a scroll.",
+      "verdict": "overstated"
+    },
+    {
+      "report": "messenger_reliability.json",
+      "claim": "BLOCKING, 12_search.png: search chrome fills 67.1 per cent of the screen (2095 of 3120 px), the first result starts at y=2518 (80.7 per cent down), no chip carries a selected state.",
+      "what_i_measured": "Reproduces. The query sheet runs 326-500 and the fifteen filter strips 558-2423, so chrome is 2098 px = 67.2 per cent; the first result sheet's paper starts at y=2510 (80.4 per cent) and runs to 2814, the second is 2876-2942 and is cut by the tab bar at 2961; the report says ten hits and type_filter null. One thing the finding could not know: app/lib/regions/chat/search_page.dart was modified at 08:18 today, after the last of the six reports was filed at 07:51, and now builds each tab with IntrinsicWidth ('as wide as its own word'), a proud lift, stamp ink and an underline for the chosen one — with a comment narrating the full-width-strip layout this still shows. The finding stands against the evidence and no longer against the tree.",
+      "verdict": "stands"
+    },
+    {
+      "report": "messenger_reliability.json",
+      "claim": "BLOCKING, 14_media_viewer.png: the frame is a print, a caption slip and 'put it back'; the report says kind video, playing, 1530 ms of 2500, and nothing on the glass says it is a video or lets it be paused, scrubbed or stepped past.",
+      "what_i_measured": "Reproduces exactly on both halves. Same note as above: app/lib/regions/chat/viewer_page.dart (mtime 08:14, after the last report) now carries a transport strip with a play/pause mark and a playhead, and a comment at :181-183 that quotes this finding back verbatim. Accurate when filed; already answered in code no report read.",
+      "verdict": "stands"
+    },
+    {
+      "report": "material_truth.json",
+      "claim": "BLOCKING, 06_unfolding.mp4: the unfolding sheet is a machine-cut rectangle — left edge a single column over 90 rows (std 0.00 px), top exactly 1074 and bottom exactly 1503 at frame 325 — while neighbours wander 22-35 px; and the fold is 'a flat image being transformed'.",
+      "what_i_measured": "The shape claim stands and is if anything understated: at frame 325 the top edge holds std 0.43 px and the bottom std 0.00 px over 701 columns, while the sheet directly below it has a top edge of std 15.9 px and 107 px peak-to-peak. At frame 46 the left edge is std 0.53 over 90 rows (not 0.00) and 0.09 over the 110 rows below the crease. The mechanism is wrong. This is not a flat image being transformed: assets/folds/unfold_thirds/0046.png is a Cycles render whose opaque left edge sits in column 61 for all 209 rows (std 0.00) and right edge in column 538 (std 0.00), and blender/folds/fold.py models a sheet at real size with bevelled crease geometry and a shadow catcher in the same frame. The sheet is straight because the model is a machine-cut rectangle, which is a worse fault to name and a different one to fix.",
+      "verdict": "stands"
+    },
+    {
+      "report": "material_truth.json",
+      "claim": "BLOCKING, 06_unfolding.mp4 frame 46: the fold is a one-dimensional gradient — median per-row standard deviation across the 580-px width 1.50 grey, the vertical profile the same to within 2 grey at five x positions, and the crease a 20.5-grey step in one pixel row at y=1429.",
+      "what_i_measured": "Median per-row standard deviation across x 120-700, y 1350-1560: 1.48. The five profiles do run together — plateau ~180, trough ~111-117, second plateau ~158-166, step to ~236 — but the median spread across x=100/200/400/600/700 at a given row is 5.0 grey, not 2. The crease is not a one-pixel step: at x=400 it falls 163 to 111 over six rows (y 1424-1430); the steepest single row is 19 grey. The load-bearing number reproduces; the crease sentence is the steepest row of a six-row ramp described as the whole thing.",
+      "verdict": "overstated"
+    },
+    {
+      "report": "material_truth.json",
+      "claim": "BLOCKING, 06_unfolding.mp4: the cast shadow is a hard slab — 247.8 to 108.0 to 30.0 across four rows then flat at 30-37 for 60 px.",
+      "what_i_measured": "Reproduces. At frame 325, x=400 the luma runs 248, 224, 186, 108, 46, 30 over five rows and then holds between 30 and 40 for about 70 px before rising. And the slab is in the asset, not applied afterwards: the packed fold frame's own alpha steps 255 to 182 in two rows and holds 158-182 for 46 rows before falling off over eight. It is a shadow-catcher bake that came out flat.",
+      "verdict": "stands"
+    },
+    {
+      "report": "material_truth.json",
+      "claim": "BLOCKING, 06_unfolding.mp4: the unfolding sheet carries 0.90 grey levels of micro-texture against 4.56 on the settled note beside it, a 5.1x deficit — 'the paper only acquires tooth after it lands'.",
+      "what_i_measured": "The ratio reproduces at frame 46: 4.49 on the roster note against 0.77 on the fold sheet's upper face and 1.11 on its front panel, 4.0 to 5.8x. The explanation is wrong twice over. It does not acquire tooth after it lands: the same sheet at rest measures 1.88 at frame 162 and 1.47 at frame 325, against 4.20-4.36 for the notes around it in those same frames. And the tooth is not missing from the source — assets/folds/unfold_thirds/0046.png carries 9.28 grey levels of it, the packed WebP is lossless and carries the identical 9.28, and 6.11 survives upscaling to the on-screen 712 px. So the loss is between the asset and the glass. The gap between 0.77 while moving and 1.88 at rest is the clip's own libx264 -crf 16 encode smoothing a moving region, which is an artifact of how the evidence was made; the residual 2.4x deficit at rest is the build's and is the finding worth keeping.",
+      "verdict": "overstated"
+    },
+    {
+      "report": "material_truth.json",
+      "claim": "SERIOUS, 02_chat.png: the bottom sheet is sliced by a straight cut with no shadow — a 138.4-grey step in one un-antialiased row, the desk 2-5 px beneath reading 94.64 against 94.61 twelve pixels away.",
+      "what_i_measured": "Reproduces. Row 2627 means 230.71 over x 157-1202 and row 2628 means 94.58; the step is 136.1 grey in a single row. The desk immediately under the cut reads 94.58-94.60 and 94.78 twelve rows down — no contact shadow at all, where every other sheet on the screen carries one.",
+      "verdict": "stands"
+    },
+    {
+      "report": "material_truth.json",
+      "claim": "SERIOUS: one-pixel bright rules are drawn across the desk on nine of the ten stills — 12_search 33 rows, longest 440 px, 03_us 21, 04_moments 17, 13_messenger_states 12.",
+      "what_i_measured": "The rules are real and the two coordinates given are exact: 02_chat y=650 x=1100 reads 78 / 127 / 80 across three rows (they said 78.9 / 127.3 / 80.2) and y=316 x=680 reads 106 / 141 / 105 (they said 105.9 / 141.1 / 105.2). They are visible in both 300 per cent crops too. The counts are not reproducible as stated: requiring both neighbours to be wood and a run of at least 150 px I find them on seven of ten (05_settings, 10_first_run and 17_setup_pwa clean at that length, 12_search 16 rows longest 354); dropping the wood constraint I find them on all ten. Right finding, per-file counts are an artefact of an unstated threshold.",
+      "verdict": "stands"
+    },
+    {
+      "report": "material_truth.json",
+      "claim": "SERIOUS: the desk's mean absolute horizontal gradient is 5.58x its vertical one (2.562 vs 0.459) while the paper measures 0.52 (0.841 vs 1.607).",
+      "what_i_measured": "Same conclusion, different magnitude. Over the whole desk eroded 12 px clear of any sheet I get 2.976 / 0.676 = 4.40; over paper 3.701 / 3.780 = 0.98. The desk is strongly one-directional and the paper is not, which is the point; the 5.58 is a figure from eighty hand-chosen windows and does not survive a different window choice.",
+      "verdict": "stands"
+    },
+    {
+      "report": "emotional_transmission.json",
+      "claim": "BLOCKING, 08_state_propagating.mp4: no partner-state change is ever visible happening — the clip reads TRAVELLING at frame 394 and OUT at frame 395 across a splice.",
+      "what_i_measured": "Stands, and the scene script settles it beyond the pixels. evidence/scenes/08_state_propagating.json pushes 'state mood restless' before the first frames run, and 'state availability heads_down' and 'state place out' between the run ending at 394 and the run starting at 395, with a goTo(2) in between. Frame 394 is Chat with TRAVELLING; frame 395 is Us with OUT. Whole-frame mean absolute difference across that pair is 45.7 grey with 49.9 per cent of pixels moving more than 8 — it is not a transition, it is a cut between two regions.",
+      "verdict": "stands"
+    },
+    {
+      "report": "coherence.json",
+      "claim": "WHAT IS WORKING: 'State reaches a region that is not Pulse, in motion. Across 08_state_propagating the header's place word changes from TRAVELLING on frame 0 to OUT on frame 501: the band differs by 9.4 grey levels mean and the change is confined to that word.'",
+      "what_i_measured": "Wrong on both halves, and it is the same artifact the emotional critic reads the opposite way — neither could see the other. Not in motion: both state pushes land between capture runs (scene script above), so nothing changes on camera. Not confined to that word: the header band mean absolute difference between frames 0 and 501 is 8.96 (their 9.4 reproduces), but it is spread over columns 22 to 1054 of 1080 and rows 47 to 171 — the standing line and the energy dial moved too, which is what the emotional critic independently saw ('the energy dial one bar lower'). Frame 0 is Pulse and frame 501 is Us, so the whole frame differs by 52.9 grey; nothing about this pair shows a state change arriving.",
+      "verdict": "wrong"
+    },
+    {
+      "report": "coherence.json",
+      "claim": "WHAT IS WORKING: 'Every per-region report — pulse, chat, us, moments, settings, search, viewer — carries the same events count (14,062) at the same seed.'",
+      "what_i_measured": "Six of the seven do. 14_media_viewer.report.json reads 14,073, the same as 13_messenger_states, which the same paragraph elsewhere accounts for as a scene that wrote. The seed is 20260903 in all sixteen reports. Small, but it is the sentence the one-log claim is hung on and it names the viewer.",
+      "verdict": "overstated"
+    },
+    {
+      "report": "emotional_transmission.json",
+      "claim": "WHAT IS WORKING: the receiving page's displacement reproduces the feeling's waveform — 'hold' holds 56 frames, dips six at 912-992 ms, holds again and stops at 1888 ms against 1900; 'here' gives three 25-frame lifts and two settles ending at index 124 = 1984 ms against 2000; a plain message moves the page zero pixels across all nineteen frames of its run; peak displacement about 0.12 device px per amplitude unit.",
+      "what_i_measured": "Every one of these reproduces. In 07 run 1 the page holds 15-17 device px from frame 1 to 57, dips at frames 58-63 (928-1008 ms), holds again and goes to zero after frame 118 = 1888 ms. In 08 run 4 there are three lifts (frames 240-267, 293-318, 343-363) with two settles between them and the last non-zero frame at relative index 124 = 1984 ms. In 08 run 2, all nineteen frames of the message measure exactly zero. Peak 17 px against hold's played amplitude of 141.75 is 0.120 px per unit. This is the best-evidenced claim in the whole cycle and it holds.",
+      "verdict": "stands"
+    },
+    {
+      "report": "emotional_transmission.json",
+      "claim": "SERIOUS: on a phone without amplitude control the whole vocabulary plays inverted — 23,275 ms of on-time becomes 16,860 ms of buzz falling in the gaps, and warm_palm and poke do not fire at all.",
+      "what_i_measured": "Exact to the millisecond. Haptics.kt hands the timings array to createWaveform(long[], int), whose first element is a wait, and the amplitude-mismatch branch assumes even index = 0; no pattern in haptics.json starts with an off segment; the declared on-time sums to 23,275 ms and the odd-index segments sum to 16,860 ms; warm_palm (600@140) and poke (30@255) are the only single-segment patterns and become a wait with nothing after it.",
+      "verdict": "stands"
+    },
+    {
+      "report": "emotional_transmission.json",
+      "claim": "BLOCKING: with the app closed a feeling arrives as one of twelve fixed sentences under the unaltered Flutter logo, with the system's own sound, and the service worker has no word for any state signal.",
+      "what_i_measured": "All of it. app/web/icons/Icon-192.png is md5 ac9a721a12bbc803b44f645561ecb1e1 and is the Flutter mark (I looked at it). sw.js carries a WORDS table of twelve event kinds with 'is holding something out' for feeling and nothing distinguishing the thirty-six; it sets silent: false, icon '../icons/Icon-192.png', badge Icon-maskable-192.png; there is no entry for any state signal and the standing branch only answers a postMessage from a running page. The same finding is the anti-goal critic's serious one, reached independently.",
+      "verdict": "stands"
+    },
+    {
+      "report": "messenger_reliability.json",
+      "claim": "SERIOUS, 13_messenger_states.png: the glass draws read twice, refused once and 'going', while the report records {read: 3, sent: 1, refused: 1} — a row recorded as 'sent' with no 'sent' mark anywhere in the frame, and 'sending' never recorded.",
+      "what_i_measured": "Reproduces exactly. The frame draws 'read tick-tick' on 'empty chair' 17:19 and on 'and the bread' 19:40, 'it would not go' with a red cross on 'sending you the roster', and 'going' on 'ok — leaving now'. No 'sent' mark appears. The report's states_on_the_glass is {read: 3, sent: 1, refused: 1}.",
+      "verdict": "stands"
+    },
+    {
+      "report": "messenger_reliability.json",
+      "claim": "WHAT IS WORKING / MINOR: the painted content moved by exactly what the fling log claims on all 299 transitions (mean error -0.004 device px, p95 0.18, worst 0.33); and the thread's own end estimate swings 303,766 to 631,730 logical px, revised on 94 of 299 transitions, while the thread travelled 8,439 px.",
+      "what_i_measured": "Both reproduce. On 39 transitions (clip frames 40-79) measured by sub-pixel SAD against the log, mean error -0.013 device px, p95 0.17, worst 0.19, over shifts of 31 to 143 device px. The fling log's end field runs 303,767 to 631,730 (ratio 2.08), changes on 94 of 299 transitions, and the thread travelled 8,439 logical px.",
+      "verdict": "stands"
+    },
+    {
+      "report": "coherence.json",
+      "claim": "SERIOUS, 04_moments.png: the active lens is marked by glyph size alone (31.1 px per character against 26.3, ink luma 177.4/177.7/176.5, a spread of 1.2 grey) beside chips that mark the same choice with a 44-level change in the blue channel.",
+      "what_i_measured": "Reproduces. Ink luma 175.4 / 175.9 / 173.8 (spread 2.1), glyph height 30 px for the active WHAT WE SENT against 26 and 25 for the two inactive; the selected 'both' chip reads RGB (226.0, 217.5, 174.2) against three unselected at blue 218.7-225.8, a 45-51 level difference. Two idioms for the same choice, ninety pixels apart.",
+      "verdict": "stands"
+    },
+    {
+      "report": "coherence.json",
+      "claim": "WHAT IS WORKING: the partner-state header band is identical to within 0.001 grey levels across all seven paired screens, and byte-identical between 10_first_run and 17_setup_pwa; DIFF.json's ssim for 02_chat is 0.648.",
+      "what_i_measured": "All three reproduce: mean absolute difference of 0.0008 over rows 0-229 for every paired screen against 01_pulse, exactly 0.0000 between the two empty-state screens, and an independent 8x8 block SSIM against evidence/.previous/02_chat.png gives 0.6480.",
+      "verdict": "stands"
+    },
+    {
+      "report": "anti_goal.json",
+      "claim": "WHAT IS WORKING: zero emoji across 3,529 string literals and 19,165 seeded string fields, scanning Misc Symbols, Dingbats, Arrows, Emoticons, Supplemental Symbols and flags.",
+      "what_i_measured": "Stands as stated. Scanning whole file contents (121 files under app/lib, app/web and app/android/app/src/main) I find four characters in the blocks named — a tick at note.dart:109 and three arrows in shelf_module.dart, media/capture.dart and transport.dart — and every one is inside a comment, not a literal. 14,061 seeded events across the year files: zero hits. Zero exclamation marks in prose: the eleven Dart literals containing '!' are all null-assertions inside interpolations.",
+      "verdict": "stands"
+    },
+    {
+      "report": "code.json",
+      "claim": "The suite passes (131 tests, no skips); forType/isQuietAt/Announce. are read nowhere outside notifications.dart; only feelings announce; no script runs the tests; zz_probe_rows_test has no expect; floors_test:93 is a tautology and :77-82 asserts nothing about projection; types.dart:1 still says seventeen; sw.js is a second per-type table missing passed_on and carrying ritual_kept.",
+      "what_i_measured": "Every one reproduces. I ran toolchain/flutter/bin/flutter test: 'All tests passed!', and the hit-test warning under the_vocabulary_is_out_test.dart appears in the run exactly as described. The greps come back empty as claimed; scope.dart:137 is `if (e.type != 'feeling' || e.author == me) continue;`; there is no 'flutter test' in any .sh/.py/.yaml, no live git hook and no .github; zz_probe_rows_test.dart contains zero expect( calls; floors_test carries expect(Notify.values.contains(spec.notify), isTrue) and a twelve-signal test that asserts only length and disjointness; types.dart:1 says seventeen over eighteen entries; sw.js's WORDS has date_event, todo_event, milestone and ritual_kept and no passed_on. One drift: the runner now reports 135, not 131, because a scroll_cost_test.dart exists that the report does not mention — the tree moved after the report was written.",
+      "verdict": "stands"
+    }
+  ],
+  "not_looked_at": [
+    "17_setup_pwa.png — the only one of the fifteen present artifacts nobody read. It appears three times in six reports and every one is about its file identity (anti-goal: 'shot on the same headless WebKit'; coherence: byte-identical header band, and a DIFF judgement). Nobody read what is on it. What is on it: 'this one, the iphone', 'add it to the home screen — share, then add to home screen. it will not hold on to anything until you do', 'put this phone on the tailnet', 'install the profile the other phone is serving — open its address in Safari, take the profile, then trust it in settings under about, certificate trust settings', 'read the six words off the other phone'.",
+    "evidence/crops/dusk_pulse.png with logs/dusk_pulse.json and .report.json — a full 1440x3120 capture of Pulse at light: dusk, its own scene file, its own report (14,062 events, six feeling receipts, twelve partner-state facts). Not one of the seventeen, not a derived measurement, and opened by nobody. It is the only evidence in the set for the second lighting state the build ships, and it bears directly on the material row's 'one consistent light direction' and the coherence row's 'one visual language'.",
+    "evidence/crops/02_chat_300_shadow.png — the third of the three 300 per cent crops logs/crops.json names. The material critic judged the hand crop and the edge crop and said both land in the wrong place; the shadow crop, which is the one that would have tested its own contact-shadow findings at 300 per cent, went unopened.",
+    "evidence/crops/haptics_strip.png — the picture of the haptic vocabulary. The emotional critic judged all thirty-six patterns from the millisecond table in haptics.json and wrote 'a table of milliseconds is not a demonstration' without opening the strip that logs/haptics.check.json points at.",
+    "evidence/crops/reception_open.png and reception_allowed.png — two of the four reception crops. Only reception.png (anti-goal) and reception_replaced.png (emotional) were used.",
+    "evidence/logs/hand.json — named in the briefing as one of the four logs a critic can check against the pictures, and cited by nobody. It reports 516 ink marks on 02_chat with 86 near-twins, a 16.7 per cent twin share at IoU 0.85. The material critic did its own version of this measurement (158 marks, 8.9 per cent at correlation 0.99) and never set it against the log; the two disagree by 3.3x on the mark count and by nearly 2x on the twin share, and nothing in the cycle reconciles them.",
+    "evidence/logs/webpush.txt — nobody read it. It is the only evidence that the push path is real crypto (RFC 8291 record matches, round trip recovers the plaintext, the payload carries only kind and from, VAPID ES256 JWT in three parts). It bears on both the emotional row's closed-app clause and the code row's rules 6 and 7.",
+    "evidence/logs/strings.json (13 KB), logs/recipes.json (129 recipes, 501 objects), logs/manifest.json — uncited. manifest.json records two manifest entries with no file (fonts/MANIFEST.fonts.json, tears/tears.json); the code critic checked only the other direction, files without an entry, and found none.",
+    "evidence/logs/pwa.json's display_mode_standalone: false — the anti-goal critic used this file for its icon list and nobody read the line that says the served page was not running as an installed app.",
+    "The four missing-platform gaps were taken and taken well: 09_two_devices.png and 16_setup_android.png are named as absent by five of the six reports, and the webkit-only capture by four."
+  ],
+  "gaps": [
+    "Two reports read 08_state_propagating in opposite directions and neither could see the other: coherence lists 'state reaches a region that is not Pulse, in motion' among the things working, while emotional makes the same clip's state changes its first blocking finding. The scene script settles it against coherence. Nothing in a six-critic fan-out reconciles two readings of one artifact, and this cycle has no mechanism that would have caught it.",
+    "The iOS install flow is pictured and unexamined. 17_setup_pwa.png tells the reader to install and trust a certificate profile in iOS Settings under About, Certificate Trust Settings, and that the app 'will not hold on to anything until you do' add it to the home screen. A CA-trust step and a lose-your-data-until-installed step in the onboarding of half the mission, on the glass, judged by nobody. The anti-goal critic explicitly declined to certify onboarding voice because 16_setup_android is missing, while the PWA half of the onboarding was sitting in the evidence directory.",
+    "Nothing in the evidence shows the app running as an installed home-screen web app, and logs/pwa.json's own display_mode_standalone: false says the one PWA measurement was taken in a tab. logs/reception.json says iOS gives the push API only to a home-screen web app. So the installable-PWA half of the mission has no artifact behind it in the state that matters, and no report says so in those words.",
+    "The dusk lighting state was judged by nobody, so 'one consistent light direction' and 'one visual language across all five regions' were both decided on one of the two lighting states the build ships.",
+    "The sound in the clips is not the app's output — logs/07_feeling_landing.sound.json and 15_authored_feeling.sound.json both say the feeling's ogg was mixed over silence at the arrival frame. The emotional critic noted the file lengths; no rubric row asks whether the app's own audio output works, and no evidence shows it.",
+    "What the evidence does not show at all, beyond the two absent stills: any Android pixel; the vibrator firing; two devices in one frame; the first launch (13.2-13.7 s cold against 2.75-3.36 s warm, on the glass nowhere); the queued 'waiting to send' state; the feeling-authoring drawer, where the anti-goal critic found a gold star and a crown still reachable; a media search returning media; and Moments in two of its three lenses (183 of 1,677 events).",
+    "No rubric row visibly covers onboarding as a capability, accessibility or text scaling, or what the glass shows while the tailnet is down — the last of which is the state the whole transport argument is about.",
+    "The tree moved under the review. DIFF.json names commit 4dd3537; HEAD is 4eeea98; app/lib/regions/chat/search_page.dart, viewer_page.dart and app/lib/material/slip.dart all carry mtimes after 07:51, when the last of the six reports was written, and the search and viewer files now contain fixes for exactly the two blocking findings against them, one of them quoting the finding in a comment. A cycle that judges an evidence set thirteen-fifteenths of which predates its own capture has the same problem one level up: two of the cycle's seven blocking findings are already answered in code no report read.",
+    "evidence/reliability.json and evidence/coldstart.json regenerated while this pass was running (08:05 to 08:20). The capability matrix came back identical — 174 events both sides, no duplicates, seq 1..173 gapless, 26 queued offline — so the messenger critic's reading of it is reproducible on demand. The tailnet later_check is still 'pending ... the nodes were not answering', so the reservations both messenger and coherence put on the three-day-old tailnet run are current rather than stale.",
+    "Nobody counted the reports. 14_media_viewer.report.json reads 14,073 events where coherence's one-log claim says every per-region report reads 14,062, and 10_first_run and 17_setup_pwa read 0. The counts are the cheapest cross-check in the evidence and only one report used them, without checking them."
+  ],
+  "verdict": "The review is in better shape than the build it reviewed. I reproduced every blocking finding in the six reports and all but one of the headline numbers, and most came out within a per cent or two of what was claimed: the search screen's 67 per cent chrome, the media viewer's three elements, the fold sheet's 0.00-px edges against a neighbour's 107 px of wander, its shadow slab holding flat for seventy pixels, its 4.5-against-1 texture deficit, the state change landing across a splice, the haptic waveform inverted to the millisecond (23,275 ms of buzz becoming 16,860 ms of silence), the Flutter logo's md5, the scroll tracking its own fling log to two tenths of a device pixel, and the whole of the emotional row's central measurement — three lifts and two settles for 'here' ending at 1984 ms against a declared 2000, and nineteen frames of exactly zero for a plain message. That last is the strongest thing in the cycle and it survived every way I tried to break it. Four claims did not survive. The scroll's build spikes are real but they are not a scrolling cost: per_frame counts framework frames, not driven steps, and the spikes are spaced 20.4 seconds apart on the wall clock, which is app/lib/transport/sync.dart's twenty-second long poll, oversampled a hundredfold because the harness spent 531 seconds of wall clock driving 4.8 seconds of app time — that is a finding about how the evidence was made wearing the clothes of a finding about the thread. The fold sheet's missing tooth is real at rest (1.5-1.9 against 4.2-4.4) but the 5.1x figure is measured at the worst frame of a moving region under libx264, and 'the paper only acquires tooth after it lands' is the opposite of what happens; the straight edges and the flat shadow are in the Blender asset itself, so the material critic's 'a flat image being transformed' names the wrong mechanism for a fault that is worse than the one it names. And coherence's 'state reaches a region that is not Pulse, in motion' is simply wrong — the scene script pushes both state lines between capture runs — which means two of the six reports read the same clip in opposite directions and the cycle had no way to notice. What the review did not do is look. Fifteen artifacts were present and fourteen were read; 17_setup_pwa.png was not, and it is the screen that tells a reader to install and trust a certificate profile on their iPhone and warns that the app keeps nothing until it is on the home screen — the largest unexamined fact about half the mission. crops/dusk_pulse.png, a full-resolution capture of the whole material system under its second light, was opened by nobody. logs/hand.json, which the briefing names as one of four checkable logs, was cited by nobody and reports a 16.7 per cent twin share where the one critic who measured the hand reported 8.9. And the cycle's own conclusions have already gone stale: two of its blocking findings are answered in files modified after the last report was filed."
+}

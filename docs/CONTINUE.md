@@ -64,10 +64,45 @@ is a Chromium banner on a Linux virtual display, which its own log says.
 
 ## 0. Where it stands
 
-**Cycle 9 scored 82**, from 83 and 85 before it. Three floors of five are met (emotional 17/17,
-coherence 13/13, anti-goal 9/9). Messenger is 24 against a floor of 26; material 19 against 22.
-Both drops across the last two cycles came from the review sharpening, not the build regressing —
-in cycle 9 the completeness pass found *both* blocking findings overstated.
+**Cycle 11 scored 80, with no floor met**: messenger 22/30 (floor 26), material 21/25 (22),
+emotional 16/20 (17), coherence 13/15 (13, met), anti-goal 9/10 (9, met), code 13/15 (13, met).
+Seven reports, in `evidence/critics/11/`. Three of the five rows that carry the score are short,
+and two of them by one point.
+
+**Every blocking finding is fixed in the tree and none of them is in an artifact yet.** The
+thirteenth capture is what the reports are of and the fixes landed after it:
+
+- *A message-shaped hole in the thread.* The one note the far phone wrote while the link was down
+  arrives on reconnect, takes its 72 logical pixels, and paints bare desk for the last 46 frames of
+  `08_state_propagating` — max luma 184 over the whole band against 4.7 per cent above 150 on the
+  text line 50 px above. A piece kept its room and painted nothing until its tear was out of the
+  cache, on the reasoning that the next frame would have it. It has three shapes now: torn,
+  nothing for eighty milliseconds, then **cut** — a guillotined sheet, which is what the app draws
+  for every card that never had a tear. Paper that is cut is still paper.
+- *A hole in the desk.* 113,175 connected pixels under luma 30 beside one sheet in `01_pulse`: the
+  contact shadow's displacement was baked into its canvas, so the nine-patch stretched its solid
+  core across a piece's interior. The bake is centred and the lift displaces it at draw time.
+- *Ninety-two held frames in the reconnect clip.* Both halves were driven between takes, so what
+  was filmed was the aftermath twice over. A scene can drive a handle at a named frame now, and
+  write into the composer a character at a time: the take is somebody writing into a dead link,
+  then the send, then the pull, with both of the far phone's notes landing inside the shot.
+- *A flat beige triangle where the folded corner is.* 0.26 grey levels of texture against 1.162 for
+  the paper tab beside it, and byte-identical between the day still and the dusk one over 4,316
+  pixels while the desk moved by 25.7. It is a window onto a real sheet at the sheet's own density
+  now, in whichever light the desk is in: measured at widget scale, 2.44 against a flat one's 0.25,
+  and 70 grey levels between day and dusk.
+
+### A review has to be of something that is not moving
+
+The completeness pass caught this session doing what it should not: **twelve paths were rewritten
+between 19:58 and 20:07 while the review still stood**, the earliest of them nine minutes after the
+last critic filed. One of the code row's three findings — `_ReplyStrip` handing a reader a raw
+registry id — can no longer be checked against the tree it was written about; it was repaired, not
+refuted, and a reader cannot tell those apart from the repository alone.
+
+The reports for cycle 11 are therefore the record, and this file says what changed after them. For
+cycle 12: **write the builder sheet, run the capture, and do not touch the tree again until the
+seventh report is in.**
 
 **Cycle 10's fixes are in and its capture has not run.** What follows is what changed and, more
 importantly, how it was found, because two of the three biggest fixes this cycle corrected a

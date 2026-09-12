@@ -1,0 +1,50 @@
+{
+ "critic": "builder",
+ "cycle": 3,
+ "note": "Written from my own measurements of the artifacts as captured this session, before reading any critic report. The lower of critic and builder stands by the rule. Where I could not measure a thing, I say so and score as though the critic will find it.",
+ "what_i_will_not_argue_with": [
+  "09_two_devices.png and 16_setup_android.png are missing. They need an Android device and this container has no /dev/kvm; the three routes tried are measured in docs/PHONES.md. Nothing stands in for them.",
+  "Every reliability report says transport local. The tailnet transport exists and its run is recorded pending for want of TS_AUTHKEY, which the brief says may not be asked for again from this session.",
+  "The DeskStamp face did not finish building in this session, so the stamped furniture is set in TeoHand.",
+  "08_state_propagating is intermittent. Four arrivals crossed in under three seconds on one run and the first arrival never crossed in ninety seconds on the next, with the phone reporting link connected throughout. That is a delivery stall on the local transport and it is this build's fault, not the harness's.",
+  "The hero's repeated letters still share 30 per cent of their ink by tools/check/hand.py, against 39 per cent last cycle. Two hands were rebuilt with the jitter raised; a third of the repeats are still twins."
+ ],
+ "scores": {
+  "messenger_reliability": {
+   "score": 22,
+   "why": "Every seeded still is paired with the far phone and connected on the whole year: link connected and 14,062 events in each of the eight reports, against 'connecting' on a seeded fixture last cycle. 13_messenger_states shows read, going and refused produced by the real outbox and a real read marker from the far phone, with the far phone typing. Typing is a capability in reliability.json. Moments shows the photographs as prints with the store quiet before the shot, and the viewer holds one over the desk with its caption once. Search is newest first with a reason on every hit and the shell around it. Against that: 09 is missing, every transport line says local, the first launch still costs 11-12 s (later launches 2.7-3.4 s on the kept store), and the delivery stall above is real and unfixed — I found and fixed two of its causes (a sync loop that ended for good on any unexpected error, and a backoff that doubled to thirty seconds) and it still happens."
+  },
+  "material_truth": {
+   "score": 20,
+   "why": "Every one of the 240 fold frames is above the paper floor — worst 2.125, median 3.003 against 1.2 — where 94 were under it last cycle, and the unfolding clip plays one rendered frame per step with the ink coming up on the sheet as it settles. The tabs and every cut card carry a cut edge and a contact shadow and show their stock at the stock's own density. Both hands were rebuilt: no variant is hollow and no two variants of a letter or digit are closer than the face's floor. 327 surfaces read, none flat. Held back by the twin share of 0.30 on the hero, by DeskStamp not being built, by the ink-density plate not being made, and because the folded resting face still reads as a plain rectangle at a glance."
+  },
+  "emotional_transmission": {
+   "score": 15,
+   "why": "07 is shot on the phone the feeling reaches: the far phone sends at a known frame, the page lifts to the pattern with the lane drawn from the same segments, the object lands on the desk, rests exactly as long as the feeling lasts and is put away into the recent row, which lands newest first. The clip carries the feeling's own sound. haptics_strip.png draws all 36 patterns to scale across six families and no two share a shape in time — breathe was two equal presses at forehead's speed and is now an in-breath, a pause and a long out-breath. The vocabulary sheet shows all six families and every tile on opaque paper, and a widget test opens the corner and reads that off the tree. The emoji-shaped and prize objects are gone. Held back because there is still no vibrator anywhere in the evidence — the PWA path is the whole set — and because a feeling arriving is shown three times but felt only through the page."
+  },
+  "coherence": {
+   "score": 12,
+   "why": "The module events are their own kinds of paper in the thread — a ticket stub, a line with its pencil box, a stamped card, a tally, a shelf card, a folded clock, a card carrying the new object — where all seven were one pencil sentence last cycle, and Moments draws the same event on the same stock with the same body. Every report carries a per-region view and the sync engine's own numbers. Search and the viewer stay inside the shell rather than replacing the app. Held back because Us still draws its rows with its own bodies rather than the shared renderers, and because the fifth-module claim is a directory and a line that was not exercised this session."
+  },
+  "anti_goal": {
+   "score": 8,
+   "why": "No flat fill in a paper colour anywhere outside the paper widget — the test reads the whole tree for any light fill now, not the six named stocks. No emoji shapes and no prize tokens among the objects. No counts, no badges, no streak numbers. Every displayed string passes the voice lint. Held back because the folded resting face is still close to a plain rectangle, and because the haptic lane, capture-only though it is, is a stripe of product furniture across two of the clips."
+  }
+ },
+ "declined": [],
+ "measurements": {
+  "fold_frames_paper_floor": {"worst": 2.125, "median": 3.003, "floor": 1.2, "below_floor": 0, "frames": 240},
+  "hand_twin_share_hero": {"cycle_2": 0.388, "cycle_3": 0.30, "tool": "tools/check/hand.py"},
+  "seeded_stills": {"link": "connected in all eight", "events": 14062},
+  "load_ms": {"first_launch": [11374, 12159], "kept_store": [2727, 3184, 3245, 3341, 3436]},
+  "haptics": {"feelings": 36, "families": 6, "shared_shapes_in_time": 0},
+  "surfaces_read": 327,
+  "clips": {
+   "06_unfolding": {"frames": 256, "repeated": 0, "seconds": 4.27, "ok": true},
+   "07_feeling_landing": {"frames": 314, "repeated": 0, "seconds": 5.23, "ok": true},
+   "11_chat_scroll": {"frames": 300, "repeated": 0, "seconds": 5.0, "ok": true},
+   "15_authored_feeling": {"frames": 304, "repeated": 0, "seconds": 5.07, "ok": true},
+   "08_state_propagating": "intermittent; see what_i_will_not_argue_with"
+  }
+ }
+}

@@ -1,0 +1,106 @@
+{
+  "critic": "material_truth",
+  "cycle": 5,
+  "score": 15,
+  "weight": 25,
+  "floor": 22,
+  "meets_floor": false,
+  "judged_at": "300% on evidence/crops/02_chat_300_*.png and on evidence/02_chat.png at native 1440x3120; frame-by-frame on evidence/06_unfolding.mp4 (256 frames, step_ms 16, playback_over_app_time 1.0) and evidence/11_chat_scroll.mp4 (300 frames)",
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "06_unfolding.mp4",
+      "where": "the composer card, frames 110-134, the folded flap band at the card's lower edge (y approx 1730-1890 of 2340)",
+      "what": "The flap reads as a flat-toned band, not as a plane catching light: its interior luminance varies 1.8% (frame 119), 4.3% (113) and 7.4% (125) from end to end vertically and 2.6% horizontally (frame 60), and as the flap foreshortens from 153 px to 16 px between frames 110 and 134 its brightness relative to the lit panel falls only from 0.864 to 0.718 - a Lambertian plane rotating to near edge-on cannot darken by 17% while foreshortening 90%.",
+      "why": "The rubric row asks for Blender-rendered folds and creases under one consistent light direction and my brief asks whether folds read as rendered geometry or as a flat image being transformed; a flap whose shading is essentially independent of its orientation is a flat image being transformed."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "02_chat.png",
+      "where": "the 'Rain. The first in a month...' note, y1750-2020 x300-1230, and the same measure on evidence/crops/02_chat_300_hand.png",
+      "what": "The handwriting has no pressure variance. Stroke width measured at 2555 skeleton points more than 6 px from any junction or terminal has mean 6.08 px, sd 1.13, coefficient of variation 0.186 - lower than the machine-set sans timestamp on the same note ('Tue 4 Aug 07:20', n=278, CV 0.270). The strokes are monoline: constant width, no taper at entries or exits, no pooling at stroke ends, and a single flat ink value carrying a uniform isotropic speckle that does not follow stroke direction or speed.",
+      "why": "The rubric row names 'real pressure variance' as a requirement, and the named judging condition is 300% on the Chat hero, where the monoline is plain."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "02_chat.png, 01_pulse.png, 06_unfolding.mp4",
+      "where": "the interiors of every note and every feeling object, against their own cast shadows",
+      "what": "The cast shadows imply a light from the left, but nothing in the scene is lit by it. Paper luminance measured across a note's clean interior swings only 9-13 grey levels on a mean of 230 (Rain 11, You_only 12, raining 13, told_you 9), i.e. flat fill. The 'hold' cylinder on 01_pulse casts a directional shadow (desk 54-57 to its right and down-right against a desk reference of 99) yet its own side wall reads 148 at the left third and 153 at the right third across its full 160 px curvature - a 3% swing where a cylinder under any directional key would show a terminator. The 06_unfolding flap is flat to 2-7%.",
+      "why": "The rubric row asks for contact shadows baked from the render's own lighting; a shadow whose light leaves no trace on the surface that casts it is a shadow applied to flat art, not one baked from a render."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png",
+      "where": "the clean paper band at y2265-2299, x400-1100, and 71 equivalent ink-free patches on 12_search.png",
+      "what": "At the rubric's 300% zoom the stock has no visible grain. High-passed at sigma 2 the clean paper patch has a standard deviation of 1.19 grey levels on a mean of 231 (0.5% contrast); across 12_search the mean detail sd at sigma 1/2/4 is 0.38/0.67/0.98. Amplified 24x a real irregular mottle does appear, so a scan is underneath, but on screen the surface reads as a flat cream fill. By comparison the desk beside it carries 4.4-5.2 at the same sigma.",
+      "why": "The row's first sentence is that the paper reads as photographed rather than simulated, judged at three hundred percent on the Chat hero; a surface with 0.5% modulation at that magnification is carrying no photographic evidence of itself."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png, 12_search.png, 03_us.png",
+      "where": "on the bare desk just below several notes' torn lower edges - 02_chat rows 556 and 1394-1398; 12_search rows 318, 504, 564, 765, 883, 1023, 1084, 1659, 1782, 1915, 2051, 2365, 2750 (16 rows); 03_us rows 515, 1960, 2529, 2732",
+      "what": "A pale dead-straight hairline lies on the wood beyond the paper, in dashes at a constant y, crossing the grain. At 02_chat y=556, 47% of the 1440 desk pixels on that row sit 4 or more levels above the local vertical mean, at colour (121,104,87) against wood (108,91,75). The rows differ per screenshot and each sits a few pixels below a note's torn edge, so it travels with the note rather than belonging to the desk: it is the note's own bounding box escaping its tear mask.",
+      "why": "A perfectly straight ruled line lying on the desk immediately below a ragged torn edge is the seam of the simulation showing through, which is the opposite of paper reading as photographed."
+    },
+    {
+      "severity": "serious",
+      "artifact": "crops/02_chat_300_hand.png and 02_chat.png",
+      "where": "the 'Rain. The first in a month and I walked the hill in it...' note, y1750-2020",
+      "what": "Repeated letters within one note are the same glyph. Of 67 ink components, 6 pairs of identically sized components exceed mask IoU 0.90: the two 'a's at 0.975 (both 33x38 px, greyscale Pearson 0.971), the two 'i's at 0.968 (both 31x13), the two 'h's at 0.935 (both 51x33). evidence/logs/hand.json's own figure - 50 of 490 marks with a twin at IoU 0.85, a 10.2% twin share - is consistent with what I measured, so the log is honest about it.",
+      "why": "The row requires multiple variants per glyph; variants exist but they repeat visibly at the 300% zoom the row names as the judging condition."
+    },
+    {
+      "severity": "serious",
+      "artifact": "crops/dusk_pulse.png",
+      "where": "the desk around every note, measured against a direction-matched far reference",
+      "what": "At dusk the notes stop casting shadows. With near (8-20 px) compared to far (70-110 px) samples in the same direction, the largest darkening in any of the eight directions is -6 (up-right); left is +12 and down-left +14. The same measurement on 01_pulse.png gives -32 up-right and -29 right. The dusk desk also carries a strong left-to-right illumination gradient (39-41 on the left of the large note, 88-98 on the right) which no shadow answers.",
+      "why": "The row asks for one consistent light direction; a lighting state in which the same paper on the same desk casts no shadow at all is not the same light, it is no light."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png, 12_search.png",
+      "where": "the desk behind everything, e.g. y2160-2210 full width, and crops/02_chat_300_edge.png",
+      "what": "The desk is drawn, not photographed. Its radial power spectrum falls off with a log-log slope of -3.88 against the paper's -2.53, and at 300% it resolves into hard-edged parallel vertical bars of flat brown with a couple of soft swirls - one hue, no pores, no chatoyance, no micro-structure at any scale. Its detail sd at sigma 2 is 4.4-5.2 on a mean of 95, all of it in those bars.",
+      "why": "The row judges whether the material reads as photographed; the surface that everything else sits on is the largest area on every screen and it reads as vector art."
+    },
+    {
+      "severity": "minor",
+      "artifact": "01_pulse.png, 15_authored_feeling.mp4, 07_feeling_landing.mp4",
+      "where": "the feeling row on 01_pulse at y1150-1420, and the picker and delivered feelings in the clips",
+      "what": "Several feelings are flat drawn marks rather than objects. 'empty chair' and 'ugh' on 01_pulse are black line drawings on a note; the 'pigeon' in 15_authored_feeling (frame 80) is a set of uniform round-capped dark strokes with no shading and no contact shadow on the paper it lies on; the amber arc is a two-tone vector shape with a hard inner lip and no cast shadow. 'confetti', 'hold', 'nyeh' and the 'squeeze' in 08_state_propagating are genuinely dimensional and do cast shadows.",
+      "why": "The row requires feelings as physical objects rather than icons, and a flat outline lying on paper without a shadow is an icon."
+    },
+    {
+      "severity": "minor",
+      "artifact": "14_media_viewer.png, 04_moments.png",
+      "where": "the opened photograph on 14_media_viewer (x300-900, y900-1300) and the grid tiles on 04_moments",
+      "what": "The media the couple has supposedly exchanged is synthetic. The 14_media_viewer photograph is a grey sea with several hundred repeats of the same handful of small blue-violet triangular sprites stamped across it; the 04_moments tiles are untextured 3D test renders - a grey sphere on a plane, a visible area light, a bare table.",
+      "why": "The row is about whether what is on screen is the real thing rather than an approximation of it, and a stamped sprite field standing in for a photograph is the same failure in a different material."
+    },
+    {
+      "severity": "minor",
+      "artifact": "03_us.png, 06_unfolding.mp4",
+      "where": "the DATES card at y292-508 x400-1074 on 03_us, the TO DO card at y2021-2181, and the composer card throughout 06_unfolding",
+      "what": "Some surfaces are exact rectangles rather than paper. The DATES card's right edge sits at x=1072 for each of its first 16 rows and x=1074 for its last 14, its top edge at y=292 for every column, corner radius 0, mask fill 0.991 - four straight edges, no tear anywhere. The composer card in 06_unfolding is the same, and carries no writing through the whole fold.",
+      "why": "These are not the anti-goal's beige rounded rectangle - they are square-cornered, ruled and toned - but a flat rectangle with a drop shadow is still a rectangle standing in for a sheet of paper on a screen where every other sheet is torn."
+    },
+    {
+      "severity": "minor",
+      "artifact": "06_unfolding.mp4",
+      "where": "evidence/MANIFEST.json, 'stale'",
+      "what": "The one clip the rubric row names for judging - the unfolding clip - was not captured in this session. MANIFEST.json records it on disk from 2026-09-06T22:29:24Z against a capture that began at 2026-09-07T00:26:31Z, and DIFF.json labels it 'unchanged, byte for byte the same file'. 02_chat.png is the only material-truth artifact that is from this run (ssim 0.6364 against the baseline).",
+      "why": "The fold evidence is a record of an older build than the hero it is judged beside, so the two halves of this row are not measurements of the same thing."
+    }
+  ],
+  "what_is_working": [
+    "Tear masks genuinely do not repeat on a single screen. I extracted all 10 torn silhouettes from 02_chat.png, detrended and high-passed them at 41 px, clipped isolated spikes at 2.5 sigma and restricted each to its ragged core, then took the maximum Pearson correlation over all lags with at least 500 samples of overlap, plain and mirrored. The highest pair was 0.371 (voice_top vs composer_top) against a phase-randomised null of the same spectra with p95 0.372 and max 0.424 - no pair rises above chance. evidence/logs/tears.json's claim of 9 distinct tears from a pool of 56 with no repeats is borne out.",
+    "No procedural noise overlay and no screen-locked texture. In 11_chat_scroll.mp4 the notes translate 76 px between frames 100 and 101; ink-free paper windows correlate r = 0.991-0.993 at dy=76 and -0.03 to +0.06 at dy=0, and ink-only pixels give 0.889-0.995 travelling against 0.004-0.020 screen-fixed. The desk correctly stays put (r = 1.000 at dy=0). Nothing swims.",
+    "No tiled repeat. The desk's horizontal autocorrelation has no peak above 0.3 at any lag from 20 to 700 px, and two different notes' interiors cross-correlate at only 0.12 against 0.027 for matched synthetic noise - each note carries its own instance of the stock rather than a shared tile.",
+    "The shadow direction is consistent across the still artifacts: measured as the median darkening 8-20 px from the paper against a direction-matched far reference, 02_chat -45, 03_us -47, 13_messenger_states -48, 12_search -37, 01_pulse -33, 05_settings -30 and 06_unfolding -45, all on the right or up-right, all against desks reading 90-103. Light from the left, everywhere.",
+    "The shadows are not one uniform blur. Depth, offset and softness vary note to note on 02_chat: right-edge depth from -23 ('it's raining') to -62 ('voice'), distance of the darkest point from the edge from 5 to 16 px, and 10-90% penumbra from 3 to 11 px. The 06_unfolding cast shadow also takes a stepped notch that follows the fold's silhouette (frame 60).",
+    "Torn silhouettes dominate. Of 74 large paper surfaces across the nine stills, only 4 have both horizontal edges straight to under 1.5 px rms with fill above 0.985; every message note has at least one genuinely torn edge, with fibre spikes and a white deckle visible at 300% in crops/02_chat_300_edge.png.",
+    "The two-panel fold does carry the same stock: the flap's RGB (200.7, 197.6, 190.0) is the lit panel's (242.3, 237.2, 225.4) multiplied by 0.829/0.833/0.844 - a clean neutral darkening, not a grey wash of a different material.",
+    "Several feelings are real objects with dimension and their own cast shadows - the confetti ellipsoids, the 'hold' candle, the 'nyeh' form and the pinched paper 'squeeze' in 08_state_propagating - and none of them is an emoji."
+  ],
+  "verdict": "The tear work is the real achievement here and it survives being measured: ten torn edges on one screen and not one pair of them correlates above a phase-randomised null, the stock is a different instance on every note, nothing is tiled, and nothing swims when the list scrolls. The shadows all agree about where the light is. But the row asks for two things at two named magnifications and the build fails both of them. At 300% on the Chat hero the paper is a flat cream fill - 0.5% modulation, a scan present in the file but invisible on screen - carrying monoline ink whose stroke width varies less (CV 0.186) than the machine sans set beside it (0.270), with the same 'a' twice at IoU 0.975 in one note. In slow motion on the unfolding clip the flap darkens by 17% while foreshortening by 90% and stays flat to 2-7% across its whole width, which is a flat image being transformed and not geometry catching light. Underneath both is one failure that explains them: the light that the shadows describe touches nothing. A note's interior swings 9-13 levels on 230 from edge to edge; the 'hold' cylinder reads 148 on one side of its curve and 153 on the other while throwing a hard directional shadow onto the desk; at dusk the shadows disappear altogether while a strong left-to-right gradient crosses the desk unanswered. Shadows have been attached to flat art rather than baked from a render, and the desk they fall on is drawn - one hue, hard parallel bars, a spectral slope of -3.88 against the paper's -2.53. The finishing is not clean either: a straight pale hairline lies on the bare wood below the torn edge in four of the nine stills, sixteen times on 12_search alone, which is the note's bounding box escaping its own mask. None of the three automatic disqualifiers fires - I looked for a screen-locked noise overlay, a tiled texture and a beige rounded rectangle and found none - so this is not below floor by rule; it is below floor by measurement, on the fold clause, the pressure clause and the baked-lighting clause, which is three of the row's seven. 15 of 25."
+}

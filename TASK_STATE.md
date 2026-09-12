@@ -19,13 +19,21 @@ and continue from **Next action**.
 | 10 | 2026-09-09 | fifteen fixes on the cycle-7 reports; the tenth capture, the first with all five clips passing their own check; a check that says which run wrote it; a scroll claim withdrawn by the capture that measured it; the paper-shaped objects found to have no tooth at all | **cycle 8: 83**, two floors met |
 | 11 | 2026-09-09 | the objects given a surface at the source (no UV map, no paper), the ink made paint, the desk given pores; the ninth review | **cycle 9: 82**, three floors met |
 | 12 | 2026-09-09/10 | the scroll's real cause found by shooting one scene twice (every note was a listener of every sync round: 595 row builds over twenty frames became 16); the fold made to bend rather than hinge; four two-sine "torn" edges replaced; the sawtooth hash under every cut card; DeskStamp's counters, absent for eight cycles; the app taught how big a millimetre is; nine records that did not exist | cycle 10: not yet reviewed |
+| 13 | 2026-09-11/12 | the scroll's named failure closed and measured (147,237 ms of build over a fling became 6,112, 199 frames over 400 ms became 0); the contact shadow cut from the tear that casts it, and the hole in the desk it brought with it; the release path exercised end to end; the thirteenth capture in five passes across two container restarts; the eleventh review, seven reports | **cycle 11: 80**, no floor met |
+| 14 | 2026-09-12 | the message-shaped hole in the thread (a piece whose tear has not arrived becomes a cut sheet, not nothing); the reconnect filmed while it happens rather than twice afterwards; the thread made to say when it cannot reach the other phone; the far phone taught to change its mind and to answer; the folded corner made a window onto a real sheet; a capture pass made able to correct an earlier one | cycle 12: capture running |
 
 ## Current position
 
-- phase: build (cycle 9 scored at **82/100**, from 83, 85, 73, 69, 68, 64, 55.5, 40; the brief asks
-  95 with every floor met). Cycle 10's fixes are in and its capture has not run.
-- rubric at cycle 9: messenger 24/30 (floor 26, short 2) · material 19/25 (22, short 3) ·
-  emotional **17/20 (17, met)** · coherence **13/15 (13, met)** · anti-goal **9/10 (9, met)**.
+- phase: build (cycle 11 scored at **80/100**, from 82, 83, 85, 73, 69, 68, 64, 55.5, 40; the brief
+  asks 95 with every floor met). Cycle 11's fixes are in and its capture has not finished.
+- rubric at cycle 11: messenger 22/30 (floor 26, short 4) · material 21/25 (22, short 1) ·
+  emotional 16/20 (17, short 1) · coherence **13/15 (13, met)** · anti-goal **9/10 (9, met)** ·
+  code **13/15 (13, met)**.
+- **A review has to be of a tree that is not moving.** The completeness pass measured twelve paths
+  rewritten between 19:58 and 20:07 UTC while cycle 11's review still stood, the earliest nine
+  minutes after the last critic filed — so one of the code row's findings can no longer be checked
+  against the tree it was written about. For cycle 12: builder sheet, capture, then nothing touches
+  the tree until the seventh report is in.
 - **Three diagnoses of the scroll have now been made and two disproved by instruments built to
   test them.** The tear mask baked per note: disproved by a counter that read twelve masks across
   a fling through 8,075 rows. The hand fonts' contextual alternates: disproved by a test that

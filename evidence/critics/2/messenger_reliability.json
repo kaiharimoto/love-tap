@@ -1,0 +1,109 @@
+{
+  "critic": "messenger-reliability",
+  "cycle": 2,
+  "score": 20,
+  "floor": 26,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "04_moments.png",
+      "where": "the right column, y=637-677/693-727, 1280-1370, 1770-1860, 2128-2218, 2769-2859 (measured by counting dark-ink row bands in x=960..1250)",
+      "what": "The media library shows five simultaneous 'still fetching the picture.' rows and not one thumbnail; every media tile is a blank paper chip carrying only a duration ('41s' at x=450..1000/y=520..660, then '21s', '38s', '63s', '41s', '47s').",
+      "why": "This is the rubric's 'spinner that outstays its welcome', in the one surface where photos and video live - the shot was taken after a 15,534 ms cold start plus a 1,600 ms wait plus a 900 ms settle (scenes/04_moments.json, logs/04_moments.json) and the pictures still had not arrived, with no error and no retry."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "evidence/ as a whole - reliability.json, 05_settings.png, all seven *.report.json",
+      "where": "05_settings.png y=430-620 reads 'not paired yet.' and 'LINK  connecting - http://127.0.0.1:8480'; every capture report (logs/01_pulse.report.json, 02_chat, 03_us, 04_moments, 12_search, 13_messenger_states, dusk_pulse) carries \"link\": \"connecting\"",
+      "what": "Every messenger screenshot in the evidence was taken on a device that is unpaired and stuck in 'connecting', so the 'sent .', 'read ..' markers shown in 02_chat.png and 11_chat_scroll.mp4 are seeded values, not the result of any observed round trip; and the one artifact that was to show a message crossing between devices, 08_state_propagating.mp4, is absent.",
+      "why": "The rubric asks for delivery and read state that can be trusted; nothing in the evidence shows a marker changing because a peer actually received or opened something, which is precisely the state a couple checks before deciding the app is real."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "reliability.json + all fourteen visual artifacts",
+      "where": "reliability.json 'capabilities' lists send, ack, read, reply, react, edit, delete, voice_note, video, viewer, search, draft_survival, kill_mid_send, offline_queue, reconnect_ordering, host_offline_outbox - sixteen entries, none of them typing",
+      "what": "Typing indication, named explicitly in the rubric row, has no evidence of any kind: it is absent from the programmatic capability sweep and appears in none of the fourteen stills or clips I stepped through.",
+      "why": "A named capability with neither a screenshot nor a harness assertion does not exist as far as the evidence is concerned, and its absence is one of the first things noticed when moving off Instagram DMs."
+    },
+    {
+      "severity": "serious",
+      "artifact": "06_unfolding.mp4",
+      "where": "frames 209-281 inclusive (t = 3.47 s to 4.68 s of 5.33 s); measured as exactly zero pixels below L=110 in the band y=1560..1900, x=220..600 across those 73 frames",
+      "what": "The arriving message renders as a perfectly flat featureless cream rectangle - hard straight edges, no tear, no fold crease, no shadow, no text, no timestamp, no sender - for 1.22 s; ink first appears at frame 282 and the finished note is legible for only the final 0.63 s of the clip.",
+      "why": "The clip whose whole subject is a message arriving shows a message whose content is missing for most of its life on screen, and frames.json marks this same clip \"ok\": false, \"why\": \"the light jumps 1 times\" - it was shipped anyway."
+    },
+    {
+      "severity": "serious",
+      "artifact": "13_messenger_states.png",
+      "where": "the file is dated 17:30 while every other still is 20:22-20:26; /tmp/lovetap-capture/13_messenger_states.err records 'Error: __deskStage() -> threw: Error: Dart exception thrown from converted Future'; the shipped image has bare desk at y=680-1080, y=1310-1770, an unlabelled grey slab at x=145..1035/y=1085..1305, and a state row at y=630-680 ('- noor needs a lot ... Thu 3 Sep - 17:27') drawn on the desk with no surface at all",
+      "what": "The one artifact whose job is to show every messenger state is stale - this cycle's attempt to regenerate it crashed in its staging hook - and the image that stands in its place has three rows with no surface, roughly 950 px of empty desk, and an object that carries no duration, no play control, no timestamp and no delivery state.",
+      "why": "logs/13_messenger_states.json still reports \"problems\": [], \"ok\": true for that run, so the evidence asserts a clean capture over a crash, and no artifact then shows an edited message, a deleted stub, a reply, a video row or a legible voice-note row."
+    },
+    {
+      "severity": "serious",
+      "artifact": "11_chat_scroll.mp4 + logs/11_chat_scroll.json + frames.json",
+      "where": "logs/11_chat_scroll.json records the 'frames' step as ms=366551 for 330 frames (1.11 s per frame); the clip replays them at 60 fps. Per-frame vertical displacement measured by profile matching over all 329 transitions: median -24 px, sigma 0.19 px, zero outliers",
+      "what": "The dense-scroll clip is stop-motion - 330 separate screenshots taken 1.11 s apart and stitched at 60 fps - so it is physically incapable of showing jank; and it traverses only 329 x 24 = 7,896 device px (about 20 rows) of an 8,387-row history.",
+      "why": "The rubric asks for no scroll jank against the year-deep seeded history and frames.json's scroll_emulator entry says only {\"missing\": \"no Android device was up in this session\"} - so no frame-timing measurement of any kind exists anywhere in the evidence, and the clip that appears to answer the question does not."
+    },
+    {
+      "severity": "serious",
+      "artifact": "12_search.png",
+      "where": "result timestamps at y=690 ('Tue 4 Aug - 07:20'), y=1155 ('Tue 4 Aug - 07:24') and y=1650 ('Tue 4 Aug - 07:14'); the 'TALKING' chip begins at x=1290 and is cut by the frame edge at x=1440",
+      "what": "The result order is neither ascending nor descending (07:20, 07:24, 07:14 before the list falls back to descending days: 10 Jun, 1 Apr, 2 Mar), the third result 'text when home - kept' carries no highlighted 'rain' anywhere in it while every other result does, and the media filter for voice notes is clipped mid-word by the right screen edge with no affordance showing the row scrolls.",
+      "why": "Search that returns a hit with no visible reason, in an order the reader cannot explain, is search you stop trusting; and the clipped chip means media search by voice note cannot be reached in the state captured."
+    },
+    {
+      "severity": "serious",
+      "artifact": "14_media_viewer.png",
+      "where": "'PUT IT BACK' at y=2830-2875 sits alongside the still-visible composer placeholder 'write something' which ends at x=556; the caption note occupies y=2540-2680 and a scrimmed duplicate of the same sentence ('three layers. it leans. i am not saying that as a...') is rendered again at y=2620-2790",
+      "what": "The open media viewer does not cover its own chrome - the composer and the tab bar remain visible and the dismiss control abuts the placeholder text - and the caption appears twice on screen, once sharp and once dimmed, roughly 120 px apart.",
+      "why": "A caption shown twice reads as a duplicated message, and the viewer offers no next/previous, no counter, no date and no sender, so it browses exactly one photo."
+    },
+    {
+      "severity": "serious",
+      "artifact": "reliability.json",
+      "where": "top of file: \"transport\": \"local\", host \"address\": \"127.0.0.1:37115\"; the faults_injected list ('lose-response 1', 'offline', 'online', 'offline', 'online') belongs to that run. coldstart.json, the only Tailscale run, carries four events and no faults",
+      "what": "Every dropped-message, duplicate, offline-queue (26 events) and reconnect-ordering (seq 1..173 gapless) result was produced on the in-process loopback transport; over the transport that actually ships, the evidence covers four events and injects nothing.",
+      "why": "'Correct ordering after going offline and reconnecting' is proven on a transport that cannot lose a packet, and the tailnet path - the one between the two phones - is exercised only by a four-event happy path."
+    },
+    {
+      "severity": "minor",
+      "artifact": "11_chat_scroll.mp4",
+      "where": "frame 330, y=1330-1520: the quiet row's label wraps to 'went to the late showing / at the small cinema - Tue / 21 Apr' and its second line ends at x=686 while the right-aligned timestamp begins at x=690",
+      "what": "The row label runs straight into its own timestamp with zero gutter, rendering the unreadable string 'at the small cinema - TueTue 21 Apr - 19:40', with '21 Apr' orphaned on a third line.",
+      "why": "A row in the main chat list whose text collides with its own timestamp is a layout failure the couple sees every time a long label appears."
+    },
+    {
+      "severity": "minor",
+      "artifact": "13_messenger_states.png and 11_chat_scroll.mp4",
+      "where": "13_messenger_states.png: the word 'search' spans x=1245..1400 at y=300-345, crossing a note's torn right edge at x=1283; the 'arch' half measured 1.51:1 against the desk (glyph 108,107,110 vs wood 90,78,70). 11_chat_scroll.mp4 frame 67: the same control is drawn on top of the yellow reaction sticker at x=810..950, y=290..400",
+      "what": "The persistent search affordance is drawn over message content and over a reaction, and half of it sits at 1.51:1 contrast.",
+      "why": "The entry point to history is both unreadable and colliding with the messages it is meant to search."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.png",
+      "where": "composer band y=2830-2885: 'write something' (x=140..560) measures 3.33:1 and 'send' (x=1270..1420) measures 3.38:1 against the desk; glyph height is about 40 device px = 13 CSS px at dpr 3",
+      "what": "The message input placeholder and the send control fall below 4.5:1 for text at that size.",
+      "why": "The two controls a messenger is used through are the two hardest things on the screen to see."
+    },
+    {
+      "severity": "minor",
+      "artifact": "MANIFEST.json / DIFF.json / frames.json",
+      "where": "MANIFEST.json 'missing' now reads '09_two_devices.png: not captured this session' and '16_setup_android.png: not captured this session'; DIFF.json reports ssim 1.0 'unchanged' for all ten stills; frames.json marks 06_unfolding \"ok\": false with no corresponding note in MANIFEST",
+      "what": "Two of seventeen artifacts are absent with a statement rather than a reason, DIFF.json carries no signal this cycle, and a clip the project's own frame checker failed is shipped unflagged. (Read at 22:52 the same MANIFEST carried a measured explanation for the two Android artifacts and a different, contradicted reason for 08; it was rewritten at 22:51-22:56 while this review was in progress.)",
+      "why": "The mission names an Android app and the evidence contains no Android pixel, with nothing on record about why; and self-reported checks that fail without being surfaced are not checks."
+    }
+  ],
+  "what_is_working": [
+    "reliability.json is the strongest thing in the set: 174 events on each side, duplicates 0, same_order_both_sides true, client holding seq 1..173 gapless and monotonic after a forced gap, 26 events queued offline and all delivered on reconnect, and a kill mid-send that the host received exactly once with no duplicate on retry.",
+    "Draft survival is asserted concretely - 'draft and pairing intact after the client process was closed and reopened' - which is the failure mode that most often sends people back to another app.",
+    "Delivery state has a real vocabulary and it is legible: 'sent .' (13_messenger_states.png y=430), 'going', 'waiting to send', 'it would not go X' in red (y=2660), and 'read ..' on outgoing notes in 02_chat.png at y=1085 and y=1930.",
+    "Ordering in 11_chat_scroll.mp4 is monotonic across all 330 frames - 11:46, 11:58, 14:40, 15:40, 15:50, 16:30 reading down frame 67, and the whole traverse walks cleanly backwards from Wed 22 Apr to Tue 21 Apr with no row repeated or skipped.",
+    "Full-text search in 12_search.png highlights every occurrence of the term inside the note ('Rain', 'rain', 'raining') rather than just the row, and offers type filters for written, photographs, video and talking.",
+    "coldstart.json shows four events crossing two distinct tailnet nodes (100.68.254.25 / 100.72.198.108, distinct node keys) landing in identical order on both sides."
+  ],
+  "verdict": "The spine underneath this messenger is demonstrably sound - reliability.json's 174 events with zero duplicates, gapless ordering after an induced gap, a 26-event offline queue delivered on reconnect and a kill mid-send that did not double-post is better evidence than most projects produce. What is missing is any proof that the messenger a person touches is equally sound. Every seeded screenshot was captured on a device that 05_settings.png shows as 'not paired yet.' with the link stuck at 'connecting', so the delivery and read markers on screen are seeded decoration and no artifact anywhere shows one changing because a peer acted; the clip that was to show exactly that is absent. The media library, 04_moments.png, is five 'still fetching the picture.' rows and six blank chips with durations on them - not one picture, after a 15.5 s cold start and 2.5 s of settle - which is the rubric's spinner outstaying its welcome in the surface where photos and video live. Typing indication has neither a screenshot nor a line in the sixteen-capability sweep. The dense-scroll clip cannot answer the jank question because it is 330 screenshots taken 1.11 s apart replayed at 60 fps, and it covers about 20 rows of 8,387. 13_messenger_states.png, the artifact meant to carry the whole state vocabulary, is stale from an earlier build, its re-capture crashed in __deskStage() while its log still reports ok: true, and the image that stands in its place has three rows with no surface and an unidentifiable grey slab. Search returns a hit with no visible match in an order the reader cannot explain. Any one of the media library, the missing typing indicator, or the unverifiable read receipts is on its own a reason to open Instagram instead; there are three of them, so the category sits below its floor."
+}

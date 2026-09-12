@@ -1,0 +1,124 @@
+{
+  "critic": "material-truth",
+  "cycle": 9,
+  "score": 19,
+  "floor": 22,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "06_unfolding.mp4",
+      "where": "the unfolding sheet, frames 16-154 and again 171-309 (app time 0.26-2.46 s and 2.74-4.94 s at 16 ms a frame, frames.json runs[].step_ms=16, playback_over_app_time 1.0); crop the region x 100-950, y 1150-1780",
+      "what": "Each folded panel is filled with one flat tone and the panels meet at a hard seam: over 25 sampled fold frames the end-to-end luminance ramp inside a panel is a median of 2.1 grey levels (max 11) while the step at the crease is a median of 13 and up to 51 grey levels across 2-6 px; at frame 56 the upper panel reads 180-188 over its whole 130 px height and then jumps 177 -> 236, with no crease highlight and no occlusion valley (measured column profile at x 250-800: 186 185 185 184 183 183 183 182 182 182 181 180 179 178 177 | 179 184 189 200 224 234 236 236).",
+      "why": "The row is judged in slow motion on the unfolding clip and asks for Blender-rendered folds and creases catching one light; a panel that is one uniform tone whose value changes with the fold angle is a flat image being transformed, which is the failure mode the row names, and the crease is a masked boundary rather than rendered geometry."
+    },
+    {
+      "severity": "serious",
+      "artifact": "01_pulse.png",
+      "where": "the 'goodnight' feeling object in the object row, x 1215-1430, y 1200-1400; its left edge",
+      "what": "The torn edge is a periodic sawtooth: four V-notches with spacings of 31, 29 and 33 px over a 125 px edge (self-correlation 0.50 at lag 31 px and 0.49 at lag 60 px, i.e. one and two periods), with straight notch sides and no fibre anywhere on the contour; the sheet's surface tooth is 0.045 relative against 0.082-0.087 on the Chat notes, and its cast shadow completes 50% of its transition in 3 px.",
+      "why": "The row requires tear masks with no visible repeat on a single screen; this one repeats the same notch four times within one object, and the surface carries half the material of the paper it sits beside."
+    },
+    {
+      "severity": "serious",
+      "artifact": "05_settings.png",
+      "where": "the large lower sheet, x 120-1330, y 1650-2050 (and the same fault at (600,2560) and (1240,1640), the windows evidence/logs/flat.json flags)",
+      "what": "47% of the 40 px tiles in that region have a high-pass tooth under 1.0 grey level; the flattest 80 px window reads 0.61 grey levels of tooth (relative 0.0026) against 6.9-19 on well-lit paper elsewhere. Same measurement: 17_setup_pwa.png x 300-1330 y 340-560 is 34% texture-free (flattest window 0.54), 03_us.png x 400-1080 y 300-470 is 16% (flattest 0.95), while 02_chat.png is 8% and 13_messenger_states.png 1%.",
+      "why": "The row asks that paper read as photographed; over most of this sheet there is no measurable stock at all, so the surface reads as a pale fill wearing printed rules rather than as a scan of real paper. evidence/logs/flat.json reaches the same conclusion by its own floor of 2.0 and records ok:false with 32, 20 and 20 failing windows in these three files."
+    },
+    {
+      "severity": "serious",
+      "artifact": "01_pulse.png",
+      "where": "the 'hold' object in the object row, x 750-945, y 1160-1420 (also visible in 08_state_propagating.mp4 around frame 300)",
+      "what": "The object is un-smoothed low-poly: the luminance gradient inside its own surface reaches p99 = 28.6 and max 62.5 grey levels per pixel, i.e. hard facet seams across a body that should be continuous. The 'nyeh' candy beside it measures p99 = 7.4 on the same test. The rim is a visible 12-sided polygon.",
+      "why": "The row wants feelings as physical objects; a body whose shading breaks into flat facets reads as untouched CG geometry rather than as an object photographed under a light, and it sits in the same row as objects that pass."
+    },
+    {
+      "severity": "minor",
+      "artifact": "10_first_run.png",
+      "where": "the exposed desk, x 200-1250, y 300-1100 and y 1700-2500",
+      "what": "The desk's grain is stripes with nothing between them: the across-grain mean first difference is 3.85 grey levels against 0.68 along the grain, a ratio of 5.66 (4.83 in the lower half), with no pores, no rays and uniform stripe width. evidence/logs/grain.json states its own ceiling as max_ratio 3.6 and records worst_ratio 5.49 - over that ceiling - yet reports ok:true.",
+      "why": "The ground the paper sits on reads as a drawn wood pattern rather than as a photograph or render of a board, which undercuts the photographed reading of everything placed on it; it is minor because the desk is not the paper the row's floor clause is about, and because the surface is not tiled (2D autocorrelation over 620x1250 px of bare desk in 03_us shows no peak above 0.40 at any lag past the grain's own 12-16 px decay)."
+    },
+    {
+      "severity": "minor",
+      "artifact": "05_settings.png",
+      "where": "the 'let it interrupt you' bar, x 48-1391, y 1375-1514; same shape in 15_authored_feeling.mp4 around frame 300 (the white card behind the brown ring)",
+      "what": "The bar's top edge has an rms deviation of 0.34 px and a peak-to-peak of 2.7 px over 1300 px, its bottom edge 0.19 px and 1.4 px - dead straight on both - with slightly rounded left corners and a soft uniform drop shadow.",
+      "why": "It reads as a rounded rectangle with a drop shadow rather than as a piece of paper put down; it is minor rather than the row's automatic failure because its surface does carry the real stock's tooth (1.556 grey levels rms, statistically the same as the 02_chat yellow voice note at 1.565), so it is cut paper, not a beige fill standing in for paper."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.png",
+      "where": "the solid paper boundary of notes at y 350-640 (top), 675-898 (top and bottom), 923-1233 (top), 2128-2356 (top and bottom) and 2405-2633 (bottom)",
+      "what": "With the 60 outermost columns trimmed and the profile high-passed, those edges deviate by rms 0.36-0.59 px and peak-to-peak 2.9-3.6 px over ~920 px; note 15's bottom is 0.00 px over 937 px. Only three of fourteen edges on this screen (10-top rms 5.14, 12-top 2.88, 15-top 3.14) have contour excursions worth the name.",
+      "why": "On most of the thread the tear is carried by a sprinkle of fibre hairs a few pixels deep sitting on a ruler-straight cut, so a sheet reads as trimmed-and-fluffed rather than torn; the tear masks themselves do not repeat, which is why this is minor and not the row's repeat clause."
+    }
+  ],
+  "what_is_working": [
+    "The stock is a real scan. On the 300% crops (crops/02_chat_300_hand.png, _edge.png) the blue rules sit at slightly different angles on different sheets, carry a red margin rule, and wander in weight; the fibre tooth measures 0.032-0.089 relative on lit paper. Nothing I measured looks like procedural noise: there is no flat high-frequency floor and no directionless 1/f field standing in for fibre.",
+    "No paper crop is reused. Across 21 pairs of note interiors on 02_chat.png the high-passed texture correlates at a maximum of 0.049 (median -0.001), and a sliding search for note 12's patch anywhere inside note 9's sheet peaks at 0.170. The desk is not tiled either: a 2700 px vertical autocorrelation of the bare desk strip decays monotonically with median 0.039 and no peak out to 1200 px.",
+    "Tear masks do not repeat on a single screen. Trimming the profile ends and high-passing, the best sliding cross-correlation between any two edges is 0.742 (median 0.284) over 21 pairs on 02_chat.png, 0.370 (median 0.247) over 36 pairs on 13_messenger_states.png, and 0.884 with nothing above 0.9 over 66 pairs of the 14 filter chips on 12_search.png. No edge shows a tile peak against itself.",
+    "The handwriting has real variants and real modulation. Over 172 ink components on 02_chat.png the best-fit IoU after normalising each mark to 32x32 has a median of 0.797, a p90 of 0.910 and a maximum of 0.969, with nothing at or above 0.99 - repeated letters are similar, never identical, and the two hands stay distinct. Sub-pixel stroke width runs p5 1.8 px to p95 7.7 px (CV 0.44-0.47 per note) and the ink's core luminance has a CV of 0.214 with a 52 grey-level spread between p5 and p95. Cropping 'the whole structure' against 'the dog' at 3x, the two h's, the two e's and the two o's are visibly different letters.",
+    "The contact shadows are directional, consistent and not a uniform blur. Sampling per column so the vertical grain is controlled, the desk 2-20 px below a note on 02_chat.png is 20-44 grey levels darker than the desk 70-110 px below in the same column, while above and to the left it is 0-27 levels brighter - one light from the upper left across all seven notes. The penumbra varies with the sheet rather than being stamped: the darkening peaks 3, 5, 5 and 10 px out on notes 12, 9, 14 and 10, with 50% fall-off in 2, 2, 6 and 6 px and a per-column standard deviation of 4.2-7.9 px.",
+    "The shadows are light, not paint. Inside the 'goodnight' object's dark shapes the wood grain survives at 0.042-0.051 relative contrast against 0.061 on lit wood and 0.051 under the big top note, so they are multiplicative shadows over the desk rather than composited black shapes.",
+    "17_setup_pwa.png is the best paper in the set - deep fibrous tears on all four sides of several sheets, punched holes with their own shadows, and no two tear contours alike - and the crumpled paper objects ('a squeeze' in 08_state_propagating.mp4, the ribbon in 07_feeling_landing.mp4) carry continuous smooth shading across their curls, which is what the fold panels do not.",
+    "The set is intact and current: MANIFEST.json shows all fifteen present artifacts written by this run at full 1440x3120 / 1080x2340, none predating it."
+  ],
+  "verdict": "The paper itself is real and the work of the last cycles shows: the stock scans as stock, the tears on the thread genuinely do not repeat (max sliding correlation 0.742 over 21 pairs on the Chat hero, 0.370 over 36 on the states screen), the two hands have real per-glyph variants with no twin above IoU 0.969, and the contact shadows agree on one light from the upper left with a penumbra that changes note to note rather than being stamped on. None of the three automatic failures is present - I found no procedural noise overlay, no tiled texture on desk or paper, and the straight-cut bars carry the same tooth as the torn sheets, so they are cut paper rather than a beige fill standing in for it. What fails is the half of the row that is judged in motion. Stepped frame by frame, the unfolding clip shades each panel with a single flat tone - a median end-to-end ramp of 2.1 grey levels inside a panel against a 13-to-51 level step at the crease, with no crease highlight and no occlusion valley - so the fold reads as a flat image being transformed, exactly the failure the row names, and that finding is the one holding this row at its floor. Around it sit three more measured misses: the 'goodnight' object's edge is a 31 px sawtooth repeated four times on one screen, the 'hold' object breaks into un-smoothed facets at 28.6 grey levels per pixel of internal gradient, and nearly half of the Settings sheet has less than one grey level of tooth. Four of the row's six named requirements pass on measurement, one is mixed and one fails outright: 19 of 25.",
+  "opened": [
+    "evidence/critics/BRIEFING.md",
+    "evidence/critics/prompts/material_truth.md",
+    "evidence/MANIFEST.json",
+    "evidence/frames.json",
+    "evidence/01_pulse.png",
+    "evidence/02_chat.png",
+    "evidence/03_us.png",
+    "evidence/04_moments.png",
+    "evidence/05_settings.png",
+    "evidence/06_unfolding.mp4",
+    "evidence/07_feeling_landing.mp4",
+    "evidence/08_state_propagating.mp4",
+    "evidence/10_first_run.png",
+    "evidence/12_search.png",
+    "evidence/13_messenger_states.png",
+    "evidence/14_media_viewer.png",
+    "evidence/15_authored_feeling.mp4",
+    "evidence/17_setup_pwa.png",
+    "evidence/crops/02_chat_300_hand.png",
+    "evidence/crops/02_chat_300_edge.png",
+    "evidence/crops/02_chat_300_shadow.png",
+    "evidence/crops/06_unfolding_strip.png",
+    "evidence/crops/07_feeling_landing_strip.png",
+    "evidence/crops/08_state_propagating_strip.png",
+    "evidence/crops/11_chat_scroll_strip.png",
+    "evidence/crops/15_authored_feeling_strip.png",
+    "evidence/crops/dusk_pulse.png",
+    "evidence/crops/haptics_strip.png",
+    "evidence/logs/tears.json",
+    "evidence/logs/grain.json",
+    "evidence/logs/surfaces.json",
+    "evidence/logs/flat.json",
+    "evidence/logs/hairline.json",
+    "evidence/logs/recipes.json",
+    "evidence/logs/hand.json",
+    "evidence/logs/crops.json",
+    "evidence/logs/fonts.json",
+    "evidence/logs/dusk_pulse.json",
+    "evidence/logs/reception.json",
+    "evidence/scenes/06_unfolding.json",
+    "evidence/scenes/dusk_pulse.json"
+  ],
+  "not_worth_opening": [
+    {"path": "evidence/11_chat_scroll.mp4", "reason": "Opened its frame strip (crops/11_chat_scroll_strip.png) instead, which shows six spread frames across seven stocks. The clip is a scroll: the sheets translate without deforming, so stepping it frame by frame adds nothing about material that the strip and the stills at 300% do not already give. Its fling and per-frame raster logs are about motion, not material."},
+    {"path": "evidence/logs/11_chat_scroll.fling.json", "reason": "Per-frame scroll displacement - a motion record, no bearing on whether a surface reads as photographed."},
+    {"path": "evidence/logs/scroll_webkit.json", "reason": "Framework build and raster cost per frame; a performance record, not a material one."},
+    {"path": "evidence/logs/pwa.json, evidence/logs/webpush.txt, evidence/logs/manifest.json", "reason": "What the served page offers an iPhone and what the push worker did. Nothing in them can be checked against a picture of paper."},
+    {"path": "evidence/logs/strings.json", "reason": "Copy and voice, which belongs to the anti-goal about product-marketing voice, not to this row. I read no strings claim into my score."},
+    {"path": "evidence/logs/haptics.json, evidence/logs/haptics.check.json", "reason": "Vibration envelopes. I did open crops/haptics_strip.png as the prompt asked; it is a plain measurement chart of 36 patterns on a flat ground, not an app surface, so it carries no material evidence either way."},
+    {"path": "evidence/crops/reception*.png and evidence/logs/reception*.json", "reason": "I read logs/reception.json, which says in the record that these are notification-delivery scenes on a second browser and not one of the artifacts. The crops are OS notification chrome, not app material, so I did not open them and did not score on them."},
+    {"path": "evidence/reliability.json, evidence/coldstart.json, evidence/DIFF.json, evidence/WHY_MISSING.json", "reason": "Reliability, launch timing and inter-cycle diffs. The two missing artifacts (09_two_devices.png, 16_setup_android.png) are named in MANIFEST.json with a measured reason - no /dev/kvm, so no Android device - and both are Android screens; neither would have carried paper this row has not already been shown ten times over, so their absence does not change the score."},
+    {"path": "evidence/logs/*.report.json (per-scene)", "reason": "Per-region view state - what the app believed it was showing. I took the material measurements off the pixels instead, and used logs/crops.json only for the crop boxes."},
+    {"path": "evidence/SCORE.json, evidence/critics/1..8/, TASK_STATE.md, PLAN.md, docs/, the commit log", "reason": "Another reader's conclusions and the build's own account of itself. Found and left closed."}
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "critic": "coherence",
+  "cycle": 6,
+  "score": 13,
+  "floor": 13,
+  "meets_floor": true,
+  "findings": [
+    {
+      "severity": "serious",
+      "artifact": "MANIFEST.json / frames.json / coldstart.json",
+      "where": "MANIFEST.browser, MANIFEST.missing, frames.json.scroll_emulator, coldstart.json.nodes",
+      "what": "There is not one Android pixel in this capture: MANIFEST.browser is 'webkit' for all fifteen artifacts, 09_two_devices.png and 16_setup_android.png are both listed missing as 'not captured this session', frames.json.scroll_emulator says 'no Android device was up in this session', and the two Tailscale nodes in coldstart.json are both os 'linux' with the later re-check 'pending' because 'the nodes were not answering'.",
+      "why": "The row's last clause is that both platforms serve the same regions, the same feelings and the same event types; on the artifact side that clause is not tested at all, so the only support it has is the code half."
+    },
+    {
+      "severity": "serious",
+      "artifact": "04_moments.png vs 02_chat.png",
+      "where": "the three duration cards at 41s / 21s / 38s in the Moments masonry, against the voice note at Tue 23 Dec 16:40 in Chat",
+      "what": "The same event kind is drawn two incompatible ways: in Chat a voice_note is a play triangle, a full waveform, '0:26', the timestamp and 'read tick-tick'; in Moments it is a bare torn strip carrying '41s' and nothing else, with no author, no date, no waveform and no play — and even the duration format differs, m:ss in the chat player against whole seconds in Moments (app/lib/regions/chat/blob_widgets.dart:252 formats secs~/60 and padLeft, app/lib/regions/moments/moments_region.dart:508, 540, 588 format (duration_ms/1000).round() plus 's').",
+      "why": "'The same event appearing consistently wherever it should across Chat, Moments and Us' is the artifact half of this row, and a reader cannot tell these two cards belong to one event type."
+    },
+    {
+      "severity": "serious",
+      "artifact": "04_moments.png",
+      "where": "the three lens labels WHAT WE SENT / WHAT HAPPENED / WHAT WE FELT at y 306-342, against the both / noor / teo / all year chips 50 px below",
+      "what": "Two selection idioms sit ninety pixels apart and one of them does not render: the active lens (media, per 04_moments.report.json) is marked by glyph size alone — 31.1 px per character against 26.3 for the two inactive labels, 12 pt against 10 pt in app/lib/regions/moments/moments_region.dart:203 — with mean ink luma 177.4 / 177.7 / 176.5, a spread of 1.2 grey levels, on wood at 3.7:1; the chips underneath mark the same kind of choice with a 44-level change in the blue channel (selected 210,202,162 against unselected 214,212,206).",
+      "why": "One visual language holding across all five regions is part of this row, and here two idioms for 'which one is chosen' collide inside a single 90-pixel strip."
+    },
+    {
+      "severity": "serious",
+      "artifact": "04_moments.png",
+      "where": "the whole region, and its absence from every clip",
+      "what": "Moments is shown in one of its three lenses: 04_moments.report.json counts media 183, milestones 154, feelings 1340 and reports lens 'media', showing 183 — 10.9 per cent of the 1,677 events the region can lens — and no clip ever enters it (06 and 11 stay in Chat, 07 and 08 run Pulse to Chat to Us, 15 runs Us to Pulse to Settings, read off the lit tab in every tenth frame).",
+      "why": "A feeling is therefore never once seen in Moments, so a third of 'the same event appearing consistently across Chat, Moments and Us' has no evidence behind it."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the two cards on the bottom row, at x 60-450 y 2740-2930 and x 1000-1360 y 2700-2930",
+      "what": "Two tiles carry no ink at all — their darkest pixel is 182 and 184 of 255 across 390x190 and 360x230 px of visible card — while a real voice-note card in the same masonry carries 3.1 per cent ink; the region's own report says 26 tiles were built but only 18 blobs were asked for and arrived.",
+      "why": "An unfilled placeholder and a real event are the same torn-paper object to a reader, which is the one visual language failing to distinguish a view onto the log from a gap in it."
+    },
+    {
+      "severity": "minor",
+      "artifact": "01_pulse.png",
+      "where": "the header strip at y 120-200, the partner card at y 660-1030, and the YOURS picker at y 1600-2600",
+      "what": "One pair of fields carries three names on one screen: the header strip labels the partner's two scalars NEED and ENERGY, the partner card 460 px below labels the same two NEEDS and HAS LEFT, and the YOURS picker 1,000 px below that goes back to NEED and ENERGY — in code one pair, state.need and state.energy, read at app/lib/material/desk.dart:115,117, app/lib/regions/pulse/pulse_region.dart:104,105 and app/lib/regions/pulse/pulse_region.dart:301,302.",
+      "why": "The same value read in three places on one screen under three names is the vocabulary of the one system splitting."
+    },
+    {
+      "severity": "minor",
+      "artifact": "03_us.png",
+      "where": "below the THE SHELF row, y 2277 to the tab bar at 2960",
+      "what": "619 px of bare desk — 19.8 per cent of the 3120-px frame — sits under five module headings that each show exactly one row, while the region's own report counts 199 to-do events, 81 date events and 53 ritual events; the shortest item row measured is 118 px, so five more would have fitted.",
+      "why": "The five modules are visibly one repeated component, but a fifth of the desk left bare undercuts the claim that Us is a working view onto a year-deep log."
+    },
+    {
+      "severity": "minor",
+      "artifact": "12_search.png",
+      "where": "the fifteen filter strips, y 555 to 2426",
+      "what": "The taxonomy takes 1,871 px, 60.0 per cent of the frame, above one whole result (y 2504-2818, 314 px) and one clipped by the tab bar, for a query the report says has 10 hits.",
+      "why": "The facet list is the best proof in the set that one index spans every region, and the screen gives it six times the room it gives the answers it is meant to find."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.png",
+      "where": "the whole thread, against evidence/.previous/02_chat.png",
+      "what": "The flagship chat still now shows three event kinds (message x7, voice_note x1, one reaction, per 02_chat.report.json) where the previous capture's frame showed five — a feeling ('warm palm'), a passive state line ('noor's phone is on normal'), a declared state line ('you are open'), a voice note and a photo with caption — so the three kinds that demonstrate the one-log claim in Chat are the three that went.",
+      "why": "13_messenger_states still carries one state line and 11_chat_scroll still carries feelings and state lines inline, so the claim survives in the set, but the artifact a reader opens first no longer makes it."
+    },
+    {
+      "severity": "minor",
+      "artifact": "05_settings.png / 04_moments.png against 03_us.png / 12_search.png",
+      "where": "THE TWO PHONES and WHAT MAY INTERRUPT on wood, against DATES and TO DO on paper",
+      "what": "The one stamped section-label idiom renders at 3.7:1 to 4.4:1 when it lands on the desk (Moments lenses, both Settings headings) and at 6.8:1 to 9.8:1 when it lands on paper (Us module headings, search facets) — the same role at roughly half the contrast depending on which region put it down; and the interrupt sheet opens with 375 px of empty ruled paper, four ruled lines with not one dark pixel, before its first word, where the same card idiom elsewhere starts about 38 px in.",
+      "why": "One visual language across all five regions means the same role reads the same way in each of them."
+    }
+  ],
+  "what_is_working": [
+    "One log, one cursor, seven views. Every per-region report — pulse, chat, us, moments, settings, search, viewer — carries the same events count (14,062) at the same seed (20260903) with a monotone cursor over it, and the scenes that write add to that same number rather than starting their own (13 to 14,073, 15 to 14,067, 06 to 14,079, 08 to 14,087, 07 to 14,089).",
+    "No second store, checked rather than taken on trust. Outside app/lib/spine/store/, the whole of lib/ contains no SharedPreferences, Hive, localStorage, sessionStorage, IndexedDB or database call; the only file writes are a temp-directory cache of blobs the spine already holds (media/local_uri_io.dart) and the dev server's static handler. The single key-value side table is reached only through Spine.meta and holds eight device-local, non-replicated keys — the pairing secret, the chat draft, the notification prefs, the device id and the seed marker — none of which is history.",
+    "The same event keeps its identity across regions, down to its paper. Event 0001M4GW48FEW3M67XKAZT5051 is the feeling empty_chair in Pulse's receipt row ('empty chair 17:19'), an outgoing note in 13_messenger_states ('Thu 3 Sep · 17:19 read tick-tick'), and one of search's visible thread rows — and it carries the same torn mask tear_010 in both reports that name it, as do 0001M4ZQQ0H0PPVTKMMQEE268D (tear_032) and 0001M59VY0YA13H9M86HTA6XNP (tear_052).",
+    "Partner state is one component, not five copies of one. The header band (top 230 px of 3120) is identical to within 0.001 grey levels across all seven paired screens — 01_pulse, 02_chat, 03_us, 04_moments, 05_settings, 12_search, 13_messenger_states — and its empty-state variant is byte-identical between 10_first_run and 17_setup_pwa. The tab bar band differs between regions only by which tab is lit (12.6 to 13.3 grey levels mean).",
+    "State reaches a region that is not Pulse, in motion. Across 08_state_propagating the header's place word changes from TRAVELLING on frame 0 (Pulse) to OUT on frame 501 (Us): the band differs by 9.4 grey levels mean and the change is confined to that word. In the same clip a feeling posted at 20:07 appears as a Pulse receipt ('hold 20:07 noor') and then as a Chat row at the same minute, and a further object lands on the Us desk over the module rows.",
+    "The taxonomy is generated from the registries, and the artifacts prove it. The fifteen filter strips in 12_search end with DATES / TO DO / DATES THAT MATTER / RITUALS / THE SHELF in exactly the order of the five module headings in 03_us and of kModules in app/lib/modules/registry.dart, because search builds them with 'for (final m in kModules) m.label: m.eventTypes'; the WHAT MAY INTERRUPT matrix in 05_settings is built with 'for (final t in kEventTypes) if (t.notify != Notify.none)', so its rows are the announced phrases of the one 18-type registry in registry order.",
+    "The fifth-module cost is countable, and I counted it. The five Us module blocks share a header-card width of 706 to 708 px at a left edge of 365 to 367 px — a 2 px spread across five — and UsRegion iterates kModules rather than naming any module. Outside its own directory, each module's event type (date_event, todo_event, milestone, ritual_kept, passed_on) appears in exactly one lib/ file, app/lib/spine/types.dart, and each module's id appears only inside that same type's own search facets. A sixth module is one directory, one line in registry.dart and one type block in types.dart, and touches none of the existing five.",
+    "One codebase behind both platforms: 18,009 lines of Dart under app/lib against 260 lines of hand-written Kotlin (a widget, haptics and ambient), with ten conditional-import seams and none of them under lib/regions or lib/modules.",
+    "One material system serving every region: logs/surfaces.json measures 54 paper stocks, 67 objects, 147 fold frames and 2 shell surfaces in one library, none flat and none unlit, and the same wrapped-sweet object renders as a Pulse feeling receipt and as a Chat reaction with mean pink within 6 grey levels (213.8,171.6,176.7 against 217.9,177.4,181.6) at the same 29 per cent fill of its crop.",
+    "The staleness of the set does not turn out to hide drift. Thirteen of fifteen artifacts predate the capture by up to eight hours, but the header band on the 06:18 chat matches the 22:20 pulse to 0.001 grey levels and the desk median is (114,96,78) plus or minus 2 in every paper-bearing region, so the shell did not move between them.",
+    "reliability.json records 174 events with the same order on both sides, no duplicates, monotone ordering through five injected faults, and nine search queries each answered by an event of the type asked about — including todo_event, date_event, milestone, feeling and state_declared, which is the one index reaching module events."
+  ],
+  "judgements": {
+    "01_pulse.png": "unchanged — byte for byte the same file, ssim 1.0.",
+    "02_chat.png": "regressed — for this row: at ssim 0.648 the frame that used to carry five event kinds from the one log (a feeling, a passive state line, a declared state line, a voice note and a captioned photo) now carries three (seven messages, one voice note, one reaction), so the flagship chat still no longer shows Pulse's events living in the thread, even though its note craft, paper variety and delivery states improved.",
+    "03_us.png": "unchanged — byte for byte the same file, ssim 1.0.",
+    "04_moments.png": "unchanged — byte for byte the same file, ssim 1.0.",
+    "05_settings.png": "unchanged — byte for byte the same file, ssim 1.0.",
+    "06_unfolding.mp4": "unchanged — byte for byte the same file, ssim 1.0.",
+    "07_feeling_landing.mp4": "unchanged — byte for byte the same file, ssim 1.0.",
+    "08_state_propagating.mp4": "improved — at ssim 0.8278 the clip now ends on the five-module Us overview with the header's place word changed from TRAVELLING to OUT (header band 9.4 grey levels apart between frame 0 and frame 501, the change confined to that word), where the previous version ended inside one module's own detail card and never showed the propagated state on a second region.",
+    "09_two_devices.png": "unchanged — absent from this capture and the last, so nothing moved; that it is still absent is the standing gap named in the first finding, not a change.",
+    "10_first_run.png": "unchanged — byte for byte the same file, ssim 1.0.",
+    "11_chat_scroll.mp4": "improved — at ssim 0.5926 the new clip is 300 frames in which the thread moved exactly what the simulation asked on every one (max |asked − moved| 0.0000 logical px over seven throws, smallest step 10.4 px, no frame under a device pixel), and feelings and state lines are visible inline in the thread in five of the six strip frames, where the previous clip held the same typing indicator and the same unsent draft in every sampled frame.",
+    "12_search.png": "unchanged — byte for byte the same file, ssim 1.0.",
+    "13_messenger_states.png": "unchanged — byte for byte the same file, ssim 1.0.",
+    "14_media_viewer.png": "unchanged — byte for byte the same file, ssim 1.0.",
+    "15_authored_feeling.mp4": "unchanged — at ssim 0.9389 what moved is the seeded clock (the anniversary glance reads 61 days rather than 62) and the picker's position in its opening animation; the regions visited, the family grid and the sensation record (soup, page, 1200 ms, same five-step pattern) are the same, so nothing about it is better or worse.",
+    "16_setup_android.png": "unchanged — absent from this capture and the last, so nothing moved; its absence is part of the missing-platform finding.",
+    "17_setup_pwa.png": "unchanged — byte for byte the same file, ssim 1.0."
+  },
+  "verdict": "This is one system rather than an assembly, and unusually, it can be proved rather than asserted: every region report — pulse, chat, us, moments, settings, search, viewer — counts the same 14,062 events over one monotone cursor at one seed; the same event id turns up as a Pulse receipt, a Chat note with a read mark and a search row while keeping the same torn paper mask (tear_010); the partner-state header is pixel-identical to 0.001 grey levels across all seven paired screens and changes its place word from TRAVELLING to OUT while the reader is standing in Us; and the search facets, the Us headings and the interrupt matrix are all generated from the two registries, which I confirmed by finding that each module's event type and id occur in exactly one file outside their own directory (spine/types.dart), so a sixth module costs one directory and two shared lines and touches none of the existing five. Against that, the system is unevenly shown. The clause about both platforms has no artifact behind it at all — the capture is webkit throughout, 09_two_devices and 16_setup_android are missing, no emulator was up, and the two Tailscale nodes are both Linux with the re-check pending. Moments appears in one of three lenses (183 of 1,677 events, 10.9 per cent) and in no clip, so a feeling is never once seen there; a voice note in Moments shares nothing with the same event in Chat, not even its duration format; and the one visual language has four measured dialects — a lens marked by a 2-point size difference beside chips marked by 44 levels of blue, one field pair under three names on one Pulse screen, section stamps at 3.7:1 on wood against 9.8:1 on paper, and two ink-free tiles wearing the same paper as a real event. None of that says the architecture is incoherent; it says the evidence for it stops one region and one platform short. Thirteen of fifteen artifacts predate the run, which I checked for drift and found none. Above the floor, held at it."
+}

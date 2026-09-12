@@ -1,0 +1,95 @@
+{
+ "cycle": 11,
+ "categories": {
+  "messenger_reliability": {
+   "weight": 30,
+   "floor": 26,
+   "critic": 22,
+   "critics": {
+    "messenger_reliability": 22
+   },
+   "builder": 26,
+   "builder_why": "The row's own named failure is fixed and the number is not close. Over the same fling, against the same 14,061-event year, with the far phone up and syncing: frames costing over 400 ms went from 199 to 0, the build time in those frames from 141,392 ms to 0, the build time in the whole clip from 147,237 ms to 6,112, and the paper pieces drawn from 12,141 to 254 \u2014 while the rows built stayed at ~170, so nothing was bought by drawing less of the thread. Build p50 5 ms, p95 28, max 82, against a max of 1,977 before. The cause was the positioned list re-anchoring, which re-lays-out its window, and a LayoutBuilder callback running on every layout: sixty Image.asset widgets reconstructed every fourth frame against an image cache pinned at 398 MB of its 402 MB ceiling. The stock layer holds its own decoded paper and there is no LayoutBuilder on the hot path; the cache ends this run at 51 images in 55 MB.\n\nEvery capability in the row is present and answers for itself: reliability.json exercises twenty-one against a real host over the wire and all twenty-one pass, including a kill mid-send that does not duplicate, events queued offline and delivered gapless, a refusal kept off the wire and delivered when asked again, and a second phone pairing making the first say so.\n\n13_messenger_states carries sent, refused in the far phone's own words, read and `noor writing\u2026` \u2014 and `partner_typing: true` in a record written at the shutter, which read false over the same picture last capture because a six-second lapse ran on the wall clock while the app ran on a driven one. What it does not carry is a withdrawn note: the far phone withdrew one and the scene's anchor asked for a stretch that does not exist, so the thread was never moved and the record said `anchor: null`. Fixed; not in this build.",
+   "score": 22,
+   "meets_floor": false
+  },
+  "material_truth": {
+   "weight": 25,
+   "floor": 22,
+   "critic": 21,
+   "critics": {
+    "material_truth": 21
+   },
+   "builder": 22,
+   "builder_why": "The contact shadow, which four cycles have argued about, is measured rather than asserted at both ends now. The Blender render beside each mask was never going to cast one: over all 56 packed tears its alpha is 0.095 at the paper's own edge and gone within two per cent of the piece, because in it the sheet lies nearly flat and its shadow is genuinely underneath it. `tools/bake_tear_shadows.py` makes the shadow from the mask \u2014 the silhouette that actually casts it \u2014 with the cut card's own two passes, nine-sliced by the tear's own bands so the offset and the blur keep the size they were baked at however tall the sheet turns out. A piece drawn over the real wood went from \u221212.6 grey levels to passing a floor of 6, in a test that needs no capture.\n\nAnd holes.py was measuring the paper. Its contact term sampled four to fourteen pixels past the last pixel that reads as paper \u2014 which on a torn edge about a centimetre deep at phone scale is among the fibres, and on any edge is still the antialiased fringe, brighter than the desk. It walks off the fringe first now, and on the capture *before* any of this work that alone took eight failures to one.\n\n02_chat holds eight notes on eight distinct tear ids, none repeated, five of them on torn sheets \u2014 the brief's own line for the hero. 06_unfolding passes the frame check with no repeated frame and no brightness jump. What is still true and not fixed: the fold's sides are cut rather than torn and its crease carries no specular line, both of which need a Blender re-render.",
+   "score": 21,
+   "meets_floor": false
+  },
+  "emotional_transmission": {
+   "weight": 20,
+   "floor": 17,
+   "critic": 16,
+   "critics": {
+    "emotional_transmission": 16
+   },
+   "builder": 15,
+   "builder_why": "Two of the three clips this row is judged from fail the frame-distinctness check, and that is the row's evidence. 07_feeling_landing has 154 held frames and 15_authored_feeling 129.\n\nBoth causes are found, and neither is what the last two cycles guessed. Every run of 07 outlives its own event \u2014 150 frames of a landing that finishes at 66, then 71 of one that finishes at 65 \u2014 and a feeling's pattern has silences in it, so during a silence with the object at rest the picture genuinely does not change. And 15's hold was put on a tile that was not on the glass: the scene shows Static and holds `pigeon`, which is Mischief, so `_under` was set to a feeling no tile was drawing. Three captures counted the same forty byte-identical frames and two fixes went in against that number without ever being run, because the corner offered its capture handles behind the compile-time build flag. It gates on CaptureBus.wanted now and a test drives exactly what the scene drives.\n\nWhat the row does have: the arriving object is drawn at the size it was placed at (it was 3.4 times that), it carries the sender and the time in the same hand the shelf writes them in, and it lands on the band of desk above the tab strip rather than across the middle of the page. Every feeling's own sound is placed at the frame it lands on. Every region report carries `asked_a_motor_for` with the real timings and amplitudes and what answered. The pocket is still shown nowhere; the record now says which empty it is rather than returning the same empty list for three different facts.",
+   "score": 15,
+   "meets_floor": false
+  },
+  "coherence": {
+   "weight": 15,
+   "floor": 13,
+   "critic": 13,
+   "critics": {
+    "code": 13,
+    "coherence": 13
+   },
+   "builder": 13,
+   "builder_why": "The viewer was the one screen in the set with no partner state of any kind \u2014 no standing line, no tab strip \u2014 and it carries the strip now. Moments and Pulse write the same feelings in the same hand, which they did not. The glance reads one clock, so the same data no longer says two things in one capture. A module line wraps rather than being cut off with an ellipsis, and all five modules declare what a row costs at a width a phone has: 96, 94, 104, 88 and 84 against declared 62, 60, 66, 56 and 53 \u2014 five numbers each about two thirds of the truth, which Us was adding up to share out the desk.\n\nAgainst that: two clips fail the frame check, and an artifact that fails its own check is not one system speaking with one voice.",
+   "score": 13,
+   "meets_floor": true
+  },
+  "anti_goal": {
+   "weight": 10,
+   "floor": 9,
+   "critic": 9,
+   "critics": {
+    "anti_goal": 9
+   },
+   "builder": 9,
+   "builder_why": "563 displayed strings read against eight rules, none against the voice. No emoji anywhere in the vocabulary; no engagement machinery; no reward tokens. The flat cream slabs that were the blocking finding two cycles ago are gone.\n\nThe one that remains is the mechanism behind them: a piece whose stock has not arrived paints the flat colour underneath it, and 04_moments recorded one \u2014 `stocks_dropped_to_stay_inside_the_pool: 9`, because twenty tiles each on a variant of its own family is nineteen distinct stocks on one screen and the pool held ten. It is a 320 MB byte budget now rather than a count; that is not in this build.",
+   "score": 9,
+   "meets_floor": true
+  }
+ },
+ "total": 80,
+ "exit_threshold": 95,
+ "every_floor_met": false,
+ "at_exit": false,
+ "critics_run": [
+  "anti_goal",
+  "code",
+  "coherence",
+  "completeness",
+  "emotional_transmission",
+  "material_truth",
+  "messenger_reliability"
+ ],
+ "critic_count": 7,
+ "declined": [
+  {
+   "artifact": "14_media_viewer.png",
+   "finding": "it reads `0:00 / 0:03` while the report records position 517 ms of 2500",
+   "from": "messenger_reliability and coherence, cycle 10, minor",
+   "reason": "Declined, and the reasoning is in the code. A position floors \u2014 you are not three seconds in until you are \u2014 and a duration rounds up, because a two-and-a-half-second clip is not over at 0:02. Every media player answers the two questions that way. Tenths were tried and reverted: one grammar for a length of time, everywhere, is a rule three cycles of reports rest on, and the oddity is confined to clips under three seconds, which in this build only the seeded stubs are."
+  },
+  {
+   "artifact": "crops/reception_replaced.png and logs/reception.json",
+   "finding": "a feeling arriving with the app closed reads as the same line of text for all four arrivals, rather than naming the feeling",
+   "from": "emotional_transmission, cycle 10, minor",
+   "reason": "Declined as a finding about the payload. The push carries the kind and the sender and nothing else \u2014 that is the rule the whole transport is built on and `nothing_leaves_the_phone_test` enforces it \u2014 so the worker cannot know which feeling arrived and must not be told. What the critic read as sameness is the constraint working. The phone learns which feeling it was when it is picked up, which is what the pocket read-back is for."
+  }
+ ],
+ "problems": []
+}

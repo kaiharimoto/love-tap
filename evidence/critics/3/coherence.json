@@ -1,0 +1,91 @@
+{
+ "critic": "coherence",
+ "cycle": 3,
+ "score": 10,
+ "floor": 13,
+ "meets_floor": false,
+ "findings": [
+  {
+   "severity": "blocking",
+   "artifact": "09_two_devices.png, 16_setup_android.png",
+   "where": "absent from evidence/; MANIFEST.json \"missing\" block and frames.json \"scroll_emulator\"",
+   "what": "Nothing in this capture shows the Android side of the product: MANIFEST.json records browser \"webkit\" for all 15 artifacts, frames.json says scroll_emulator {\"missing\": \"no Android device was up in this session\"}, and the only two artifacts that would show two devices together or the Android install path are absent, with the reason given as \"not captured this session\" \u2014 a restatement, not a cause.",
+   "why": "The row requires that \"both platforms serve the same regions, the same feelings, and the same event types from the one codebase\"; with 17_setup_pwa.png the sole platform artifact and no Android frame anywhere, that clause has zero evidence, and a thing that cannot be seen in the evidence does not exist."
+  },
+  {
+   "severity": "serious",
+   "artifact": "06_unfolding.mp4, 04_moments.png",
+   "where": "06 frame 240, the sheet spanning x=50..770, y=1223..1740 below the \"noor needs a lot / Thu 3 Sep \u00b7 17:27\" divider; 04_moments.png, the three tiles in the bottom row, e.g. the one whose left edge sits at x=24, y=2760..2940",
+   "what": "Events are rendered as flat blank rectangles instead of paper: the 06 sheet's left edge is x=50 and its right edge x=770 for all 48 rows I sampled (edge std 0.00 against 4.65 and 19.57 for the torn edges of the \"empty chair\" note in the same frame), it holds 0 pixels darker than 150 across 450x660, has interior std 2.55, and casts no shadow (wood at x38-49 is 94.3, wood at x0-20 is 89.4). All 256 frames of 06 carry at least one such sheet, 246 scanlines of them at the median and 288 at frame 255 (35% of the frame height). The same shape appears in 04_moments.png, where its report says tiles_built 26 against blobs {asked 18, arrived 18, reading 0, waiting 0} \u2014 eight tiles with nothing in flight to fill them.",
+   "why": "Chat and Moments each render the same event type in two visual languages at once \u2014 torn, inked, shadowed paper beside a straight-edged untextured rectangle \u2014 so the regions are not one view onto one log but a rendered layer and a placeholder layer sitting side by side."
+  },
+  {
+   "severity": "serious",
+   "artifact": "08_state_propagating.mp4, 15_authored_feeling.mp4, 07_feeling_landing.mp4",
+   "where": "the band at y=2030..2140 immediately above the tab bar, e.g. 08 frame 300 and 15 frame 285",
+   "what": "A sensation read-out is drawn over the shell chrome for most of three clips \u2014 \"hold \u00b7 1900ms \u00b7 page\", \"a squeeze \u00b7 640ms \u00b7 page\", \"here \u00b7 2000ms \u00b7 pass\" in 08 (present from frame 25 to 394, 370 of 395 frames), \"pigeon \u00b7 750ms \u00b7 page\" and \"tuesday soup \u00b7 1200ms \u00b7 page\" in 15 (frame 25 to 303, 280 of 304), \"nuzzle \u00b7 990ms\" in 07 \u2014 with a row of flat grey segment bars and a red playhead tick. The durations match evidence/crops/haptics_strip.png exactly. It is drawn in the same place as the composer, so \"here \u00b7 2000ms \u00b7 pass\" and \"write something\" overprint each other and neither is legible; in 15 it sits on the Settings sheet. 06_unfolding and 11_chat_scroll never show it, and none of the ten stills do.",
+   "why": "A millisecond-numbered instrument panel is a sixth visual language that belongs to no region and overlaps the chrome of two of them, so the one visual language the row asks for does not hold once a feeling is playing."
+  },
+  {
+   "severity": "serious",
+   "artifact": "11_chat_scroll.mp4",
+   "where": "frame 95, the signal dividers at y\u2248300 and y\u2248390 of the 1080x2340 frame, and again at frames 114, 152 and 171",
+   "what": "The one divider renderer breaks for the local person: \"you is heads down \u00b7 Fri 24 Apr \u00b7 18:25\" and \"you's phone is on normal \u00b7 Sat 25 Apr \u00b7 07:09\" sit 130 px above the correctly formed \"noor's phone is on normal \u00b7 Sat 25 Apr \u00b7 08:24\". The same fault recurs as \"you is asleep\", \"you is open\" and \"you  home\" later in the clip. evidence/logs/strings.json reports strings_read 116, findings [], ok true, so the string check does not see it.",
+   "why": "In a product for exactly two people, the same event type rendered correctly for one of them and ungrammatically for the other is the clearest possible sign that the two are not going through one path."
+  },
+  {
+   "severity": "serious",
+   "artifact": "17_setup_pwa.png",
+   "where": "the entire ground behind the sheet, sampled at x=0..120 y=300..900 and x=1380..1440 y=300..2600",
+   "what": "The setup screen does not sit in the same room as the app. Its ground measures RGB (76.1, 62.1, 50.1) with std 1.8 in both samples \u2014 flat, ungrained, and identical everywhere \u2014 while every region artifact sits on wood at RGB \u2248(109, 92, 77) with std 15\u201320 (01_pulse 109.6/93.0/77.8 std 16.8, 03_us 110.3/93.8/78.6 std 17.2). The tab bar below it still reads CHAT as the selected region.",
+   "why": "A screen that keeps the shell but drops the surface every other region stands on is not a view onto the same world, and it is the only artifact carrying the platform half of this row."
+  },
+  {
+   "severity": "minor",
+   "artifact": "02_chat.png",
+   "where": "the \"one hour, then stop \u00b7 Wed 22 Apr \u00b7 16:50\" note, top right, roughly x=680..1180, y=2540..2610",
+   "what": "The day divider \"LATER / Thu 23 Apr\" is drawn inside the bounds of the preceding note's paper rather than between the two notes, so the note's ruling lines run underneath it; the same overlap is visible in 11_chat_scroll frame 19.",
+   "why": "Two different kinds of thing from the one log are composited into one another, which reads as two renderers writing to the same pixels instead of one timeline laying them out in order."
+  },
+  {
+   "severity": "minor",
+   "artifact": "the capture as a whole",
+   "where": "DIFF.json and MANIFEST.json",
+   "what": "Nothing in this capture moved. Fourteen artifacts are byte-identical to evidence/.previous/, and the single artifact labelled \"changed\" is not: 08_state_propagating.mp4 is 5,380,163 bytes in both directories and every one of its 395 decoded frames has the same framemd5 as its counterpart, which I also confirmed pixel-for-pixel on ten full-resolution frames sampled every 40. MANIFEST.json marks only 08 \"from_this_run\": true and lists the other 14 under \"stale\".",
+   "why": "A cycle whose evidence is unchanged offers no new answer to any part of this row, and the DIFF label \"changed, ssim 0.9931\" overstates a difference that exists only in the container."
+  }
+ ],
+ "what_is_working": [
+  "One log, measured: all five region reports (01_pulse, 02_chat, 03_us, 04_moments, 05_settings) carry the identical \"events\": 14062 and \"seed\": 20260903, and each names its region as a view field rather than as a store of its own.",
+  "Partner state is legible on every region, not only Pulse: the ambient standing-line banner at x=60..1300, y=40..200 is pixel-identical (mean absolute difference 0.000, zero pixels differing by more than 10) across 01_pulse, 02_chat, 03_us, 04_moments, 05_settings, 12_search and 13_messenger_states.",
+  "Every module writes into the chat timeline. 11_chat_scroll carries, in one stream, text notes, a photograph (frame 133), feeling objects (\"goodnight\" crane at frame 76, \"miss you\" at 95, \"long day\" at 114, \"a squeeze\" at 190), Pulse signal dividers (\"noor went out\", \"noor's phone is on silent\", \"you got in\"), and a to-do event from the Us module (\"text when home | KEPT \u00b7 Sun 26 Apr \u00b7 07:20\" at frame 152).",
+  "The same event is the same event in two regions: 01_pulse.report.json lists empty_chair from teo at ts 1788455973000, and 13_messenger_states.png shows that drawing in the chat stream as \"empty chair \u00b7 Thu 3 Sep \u00b7 17:19 read \u2713\u2713\", with the identical timestamp on the Pulse shelf.",
+  "Search is one search over the one log, not per-module search: evidence/logs/reliability.json records hits across nine types \u2014 message, photo, todo_event, date_event, feeling, state_declared, milestone, video, voice_note \u2014 and 12_search.png shows a message, a photograph, a to-do (\"text when home \u00b7 kept ... found in its note: rain the whole way\") and video results interleaved under one query.",
+  "The fifth-module test is already answered on screen. 03_us.report.json lists five modules \u2014 dates (81 events), todos (199), calendar (6), rituals (53), shelf (12) \u2014 each with the same {id, events, glance} shape, and 03_us.png renders DATES and TO DO with the identical header-card-then-section pattern, so \"shelf\" is visibly a module added in the shape of the other four rather than a special case.",
+  "A feeling arrives wherever you are, not only on Pulse: 15_authored_feeling.mp4 frames 209\u2013303 show the authored \"pigeon\" object landing while the Settings region is on screen, and 08_state_propagating.mp4 shows a Pulse state edit (mood \"restless\") reappearing as the \"noor is restless\" divider in Chat at frame 200.",
+  "The visual language survives a change of light: crops/dusk_pulse.png renders the same Pulse layout, the same six feeling objects in the same order and with the same timestamps (empty chair 17:19, ugh 16:58, confetti 16:23, hold 11:54, nyeh 06:42, goodnight 21:58) as 01_pulse.png under a warmer key, with no element swapped for a different idiom.",
+  "The clips are honest about themselves: frames.json reports 0 repeated frames, 0 brightness jumps and playback_over_app_time 1.042 for all five, and I confirmed the frame counts (256, 314, 395, 300, 304) against ffprobe."
+ ],
+ "judgements": {
+  "01_pulse.png": "unchanged \u2014 DIFF gives ssim 1.0 and the same sha, byte for byte the previous file.",
+  "02_chat.png": "unchanged \u2014 ssim 1.0, byte for byte the previous file.",
+  "03_us.png": "unchanged \u2014 ssim 1.0, byte for byte the previous file.",
+  "04_moments.png": "unchanged \u2014 ssim 1.0, byte for byte the previous file, blank bottom-row tiles included.",
+  "05_settings.png": "unchanged \u2014 ssim 1.0, byte for byte the previous file.",
+  "06_unfolding.mp4": "unchanged \u2014 ssim 1.0, byte for byte the previous file, so the blank straight-edged sheets in all 256 frames stand as they did.",
+  "07_feeling_landing.mp4": "unchanged \u2014 ssim 1.0, byte for byte the previous file.",
+  "08_state_propagating.mp4": "unchanged \u2014 labelled changed at ssim 0.9931, but the file is 5,380,163 bytes in both places and all 395 decoded frames share the same framemd5 with the previous capture, so nothing a person could see moved.",
+  "09_two_devices.png": "unchanged \u2014 absent in this capture and the last; nothing moved, and the two-device view remains unevidenced.",
+  "10_first_run.png": "unchanged \u2014 ssim 1.0, byte for byte the previous file.",
+  "11_chat_scroll.mp4": "unchanged \u2014 ssim 1.0, byte for byte the previous file, so \"you is heads down\" at frame 95 stands as it did.",
+  "12_search.png": "unchanged \u2014 ssim 1.0, byte for byte the previous file.",
+  "13_messenger_states.png": "unchanged \u2014 ssim 1.0, byte for byte the previous file.",
+  "14_media_viewer.png": "unchanged \u2014 ssim 1.0, byte for byte the previous file.",
+  "15_authored_feeling.mp4": "unchanged \u2014 ssim 1.0, byte for byte the previous file, so the \"tuesday soup \u00b7 1200ms \u00b7 page\" strip over Settings stands as it did.",
+  "16_setup_android.png": "unchanged \u2014 absent in this capture and the last; nothing moved, and the Android install path remains unevidenced.",
+  "17_setup_pwa.png": "unchanged \u2014 ssim 1.0, byte for byte the previous file, flat ungrained ground included."
+ },
+ "verdict": "On the evidence this really is one system rather than an assembly, and the strongest parts of the case are measurable rather than impressionistic: every region report carries the same 14,062 events and the same seed, the ambient partner-state banner is pixel-identical across all seven region stills, one chat stream carries messages, photographs, feelings, Pulse signals and a Us to-do side by side, one search returns nine event types, and the Us region already runs five modules on one {id, events, glance} shape, so the fifth-module question is answered on screen rather than argued. What holds it back is that the one visual language does not survive contact with the edges of the system. Chat and Moments both render events as flat, untextured, straight-edged rectangles beside torn inked paper (06_unfolding carries them in all 256 frames, 246 scanlines at the median; 04_moments leaves eight tiles with nothing in flight to fill them), a millisecond-numbered sensation instrument overprints the composer for 370 of 395 frames of 08 and 280 of 304 of 15, the one signal-divider renderer produces \"you is heads down\" for the local person and \"noor's phone is on normal\" for the other, and 17_setup_pwa drops the wood the whole app stands on for a flat ground measuring std 1.8. Above all, the clause of this row that names both platforms has nothing behind it: every artifact was captured under webkit, frames.json says no Android device was up, and the two artifacts that exist to show the second phone are absent with a reason that only restates the absence. I have marked that blocking, and I want to be precise about why \u2014 not because a defect was demonstrated, but because half of what this row asks me to check was not put in front of me. Nothing else moved this cycle either: fourteen artifacts are byte-identical to the previous capture and the fifteenth is frame-for-frame identical despite its \"changed\" label, so this report is, by measurement, the same report the last capture would have earned.",
+ "score_before_completeness": 12,
+ "adjusted_by": "the completeness pass re-measured this row and found the score unsupported; the lower number stands, as it does everywhere else in this rubric"
+}

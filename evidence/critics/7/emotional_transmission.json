@@ -1,0 +1,160 @@
+{
+ "critic": "emotional-transmission",
+ "cycle": 7,
+ "score": 18,
+ "floor": 17,
+ "meets_floor": true,
+ "findings": [
+  {
+   "severity": "serious",
+   "artifact": "crops/reception.png",
+   "where": "the whole frame, the shot taken with the app closed after a push was delivered",
+   "what": "The one scene that would show a state change reaching a shut phone shows nothing: the frame is a blank about:blank window on a black desktop (mean RGB 98.6/98.8/99.1, 737 unique colours in 1180x1100), it is byte-identical to crops/reception_replaced.png taken after the third push (both md5 2b33b0bba0c0f7028f7421d7a9b8afc1), and logs/reception.json's own `records` array is empty.",
+   "why": "The row requires state changes to be perceptible without opening the app; the evidence has the transport (logs/webpush.txt: RFC 8291 record matches, plaintext recovered, VAPID ES256 JWT in three parts) and the policy (05_settings.png: 'a feeling / wake me', 'something they say about themselves / quietly', quiet 23:00-07:00) but not one pixel of a state change being perceived while the app is shut."
+  },
+  {
+   "severity": "serious",
+   "artifact": "logs/haptics.json",
+   "where": "the header field `channel_here`, read against the missing 09_two_devices.png and 16_setup_android.png",
+   "what": "No artifact in the set was made by a device that can vibrate: `channel_here` is \"page\" for every capture, and MANIFEST.json's `missing` block says there is and can be no Android device here (no /dev/kvm; adbd answered after 113 minutes with no framework behind it), so the 36 waveforms exist as a table (logs/haptics.json) and a bar chart (crops/haptics_strip.png) and never as a vibration.",
+   "why": "The row's test is that each feeling is identifiable by its haptic pattern alone with the screen face down; face down on the only platform in evidence leaves sound alone, and the clip audio is the app's asset .ogg mixed in by the harness, which logs/07_feeling_landing.sound.json itself flags as \"not: a recording of the running app's audio output\"."
+  },
+  {
+   "severity": "minor",
+   "artifact": "17_setup_pwa.png",
+   "where": "the iPhone checklist, five cards deep",
+   "what": "The single sentence in which the app admits the iPhone cannot buzz exists only in logs/strings.json (app/lib/setup/checklist.dart:140, 'anything. it goes to one person. when a feeling comes back, this phone cannot buzz:' — the log truncates it there) and appears on no captured frame; the still shows the home-screen, tailnet and certificate cards and stops above it.",
+   "why": "The row asks for a substitute that reads as deliberate rather than as a missing feature, and the one place the build says so out loud is never shown."
+  },
+  {
+   "severity": "minor",
+   "artifact": "14_media_viewer.png",
+   "where": "bottom-right above the tab bar, and the top status band",
+   "what": "With a photo open, the corner that reaches a feeling is gone and so is the ambient strip: the corner box (rows 2890-2960, cols 1375-1438) reads mean luma 94.5 against 150.7-163.7 in the other nine stills, and the strip band (rows 60-180) reads 92.1 against 217.0-218.8 in the other nine.",
+   "why": "The row asks for a feeling reachable in one gesture from any region and for ambient presence surfaces; both drop out for the duration of a full-screen viewer."
+  },
+  {
+   "severity": "minor",
+   "artifact": "08_state_propagating.mp4",
+   "where": "the file's own timestamp against the capture's",
+   "what": "The propagation clip and the authored-feeling clip were not made by this capture: MANIFEST.json marks 14 of 15 artifacts `from_this_run: false`, with 08 written 20:09:56 and 15 written 19:49:37 against a capture that began 22:01:33, and DIFF.json shows 07_feeling_landing.mp4 was the one thing rewritten and that it changed (ssim 0.9866) while 08 and 15 are byte-identical to the baseline.",
+   "why": "Two of the three clips this row rests on are pictures of a build older than the one 07 shows, which the reader can only discount because the arrival timing law measured below is identical in the new 07 and the old 08 to within one frame."
+  },
+  {
+   "severity": "minor",
+   "artifact": "09_two_devices.png",
+   "where": "absent from the set",
+   "what": "No frame anywhere shows a gesture on one device and the sensation on the other: the two-device still is absent for a measured reason (no /dev/kvm), and WHY_MISSING.json records that the far phone in 08 is `dart run tool/host_daemon.dart`, a screenless spine, so every arrival in 07/08/15 enters as an injected line (logs/07_feeling_landing.json `far`: 'feeling hold 0.9', 'feeling squeeze 0.75', 'feeling nuzzle 0.8', 'feeling soup 0.85').",
+   "why": "The row's first sentence is about one device's gesture becoming another's sensation; the sending half (15, frames 68-104) and the receiving half (07, 08) are each real and each on their own screen, but the loop is never closed in one picture."
+  }
+ ],
+ "what_is_working": [
+  "The substitute is a real second channel and it is exact. Tracking the bottom tab bar frame by frame in 07_feeling_landing.mp4, the whole page tremors for the length of the arriving feeling's declared waveform and stops within one frame of it: hold, last moving frame 119 = 1904 ms against a declared 1900; squeeze, last moving frame 39 with the page still at frame 40 = 640 ms against 640; nuzzle 976 ms against 990; soup 1184 ms against 1200 (frames.json: 16 ms a frame, playback_over_app_time 1.0).",
+  "The silences in the waveform are in the page too. hold is '900@150 off100 900@150': the tremor drops to 1-3 px at frames 57-62, i.e. 912-992 ms, and resumes. here is '400@140 off400' three times: in 08_state_propagating.mp4 the page moves for offsets 1-26, is still 27-50, moves 51-75, is still 76-96, moves 97-124, ending at 1984 ms against a declared 2000.",
+  "The tremor is scaled, not switched. squeeze ramps 90 -> 160 -> 230 in amplitude across three bursts; the measured whole-page displacement across those bursts is 9, 17 and 24 px at dpr 3 (3, 6 and 8 CSS px), ratios 1.00/1.89/2.67 against the declared 1.00/1.78/2.56, with the two 40 ms gaps showing as single still frames between them.",
+  "The same feeling sent harder arrives harder. In 15_authored_feeling.mp4 'tuesday soup' lands twice, at sender intensity 0.55 and 0.90 (logs/15_authored_feeling.json `far`); both end at offset 74 = 1184 ms, and peak page displacement is 16 px versus 20 px at full resolution.",
+  "34 built-in feelings across six named families (Warmth 6, Ache 5, Shelter 6, Mischief 6, Static 6, Sparkle 5) plus two authored, and the six family names are on the picker's own tabs (15_authored_feeling.mp4 frames 16-72: WARMTH ACHE SHELTER MISCHIEF STATIC SPARKLE).",
+  "The 36 waveforms have no near twins by my own measure, not just by the log's. No two haptic strings are equal; of the 630 pairs only 15 share a pulse count and a total duration within 20 per cent, and each of those differs by at least 11 per cent in pulse length, 29 per cent in amplitude or 20 per cent in gap. The closest pair, long_day (800@100 off300 800@60) and hold (900@150 off100 900@150), both 1900 ms and two pulses, differ 60 per cent in amplitude and three-fold in the gap: one sags, the other does not.",
+  "Identity is not carried by colour. 36 feelings share only 21 colours (five of them '#3a3a3c'), while each has its own object and its own sound file: 36 distinct objects and 36 distinct sounds, none missing.",
+  "A feeling in the thread is an object on paper, not a bubble in another colour: 07_feeling_landing.mp4 frames 221-313 show 'a squeeze' as a pinched sheet and 'nuzzle' as a clover, each on its own torn note with a name and a time, on the same stock as the messages around it, and 13_messenger_states.png carries 'empty chair / Thu 3 Sep 17:19 read done' so a feeling takes delivery state like anything else.",
+  "The arrival has follow-through rather than a freeze. In the 400 ms silence inside 'here' (08, frames 282-305) the mean frame change decays 5.91 -> 8.37 -> 4.28 -> 1.79 -> 0.99 -> 0.57 -> 0.25 grey levels as the boat settles, then the next pulse hits 10.15 at frame 306; nothing is held.",
+  "The authored feeling is not a second-class citizen: 'tuesday soup' (authored_by teo) drives the same timing law to the frame in two separate clips, sits in the Shelter sheet among built-ins, has its own object and its own snd_user_soup.ogg placed at arrival exactly like the built-ins (logs/07_feeling_landing.sound.json), lies in the Pulse shelf history (08, frames 0-164), and occupies the ambient pocket (`ambient.pocket_feeling: \"soup\"` in every scene report).",
+  "Twelve partner-state signals are on the Pulse note as labelled fields — mood, here, where, need, energy, battery, last up, their clock, ringer, moving, signal, at home — against fourteen in the app's own `partner_signals` block, and they are legible at dusk as well as at day (crops/dusk_pulse.png).",
+  "Three ambient surfaces carry presence without being asked for, and they are live: the standing strip is present on 9 of 10 stills (band mean 217.0-218.8) and changes inside a clip, reading TRAVELLING at 08 frame 0 and a dotted OUT from frame 411, the frame the place change lands; the partner note rewrites itself in place (08 frames 0-8, 'bright' cross-fading to 'restless'); and the desk shelf holds the last six feelings as objects with times. A fourth, the quiet state line in the thread ('— noor needs a lot', 13_messenger_states.png), does the same in Chat.",
+  "The corner that reaches a feeling is on 9 of 10 stills (the same box reads 150.7-163.7 in mean luma on all nine, against 94.5 on 14_media_viewer where that box is bare desk), and 15_authored_feeling.mp4 shows it actually opening the feeling sheet over two different regions, US at frames 0-15 and Pulse at 148-163; arrivals themselves are shown landing in four of the five regions — Pulse, Chat, US and Settings.",
+  "Sending is a physical act rather than a submit: in 15 frames 68-104 the chosen object lifts off the picker sheet and the sheet drops away under it, leaving the object travelling across the region behind.",
+  "The four sounds in 07 land at 0.04, 2.40, 3.54 and 5.02 s against arrivals at 0.00, 2.40, 3.54 and 5.02 s, and their envelopes are per-feeling rather than one ping: nuzzle is three 120-140 ms taps then a 600 ms tail, which is its haptic ('90@150' three times, then '400@110') in another medium."
+ ],
+ "opened": [
+  "evidence/MANIFEST.json",
+  "evidence/DIFF.json",
+  "evidence/WHY_MISSING.json",
+  "evidence/frames.json",
+  "evidence/01_pulse.png",
+  "evidence/02_chat.png",
+  "evidence/03_us.png",
+  "evidence/04_moments.png",
+  "evidence/05_settings.png",
+  "evidence/10_first_run.png",
+  "evidence/12_search.png",
+  "evidence/13_messenger_states.png",
+  "evidence/14_media_viewer.png",
+  "evidence/17_setup_pwa.png",
+  "evidence/07_feeling_landing.mp4",
+  "evidence/08_state_propagating.mp4",
+  "evidence/15_authored_feeling.mp4",
+  "evidence/crops/haptics_strip.png",
+  "evidence/crops/dusk_pulse.png",
+  "evidence/crops/reception.png",
+  "evidence/crops/reception_open.png",
+  "evidence/crops/reception_allowed.png",
+  "evidence/crops/reception_replaced.png",
+  "evidence/crops/07_feeling_landing_strip.png",
+  "evidence/crops/08_state_propagating_strip.png",
+  "evidence/crops/15_authored_feeling_strip.png",
+  "evidence/logs/haptics.json",
+  "evidence/logs/haptics.check.json",
+  "evidence/logs/07_feeling_landing.json",
+  "evidence/logs/07_feeling_landing.report.json",
+  "evidence/logs/07_feeling_landing.frames.json",
+  "evidence/logs/07_feeling_landing.sound.json",
+  "evidence/logs/08_state_propagating.json",
+  "evidence/logs/15_authored_feeling.json",
+  "evidence/logs/15_authored_feeling.sound.json",
+  "evidence/logs/01_pulse.report.json",
+  "evidence/logs/reception.json",
+  "evidence/logs/reception_scene.json",
+  "evidence/logs/pwa.json",
+  "evidence/logs/webpush.txt",
+  "evidence/logs/strings.json",
+  "evidence/logs/surfaces.json",
+  "evidence/logs/crops.json",
+  "evidence/logs/hand.json",
+  "evidence/logs/manifest.json",
+  "evidence/logs/recipes.json",
+  "evidence/logs/tears.json"
+ ],
+ "how_measured": [
+  "All 421 frames of 07_feeling_landing.mp4 and all 518 of 08_state_propagating.mp4 were extracted with toolchain/ffmpeg (frames 164-375 and 68-104 of 15_authored_feeling.mp4), and read in app time at 16 ms a frame per evidence/frames.json.",
+  "Page displacement: the 90-row band of the tab bar was cross-correlated against the same band in the clip's resting frame over +/-40 px (full res) or +/-20 px (half res), per frame, giving the dy series quoted above.",
+  "Per-frame change: mean absolute Rec.601 luma difference, share of pixels changing by more than two grey levels, and the busiest 32 px tile, computed frame to frame.",
+  "Waveform distinctness: every feeling's segments rendered to a 5 ms amplitude envelope and compared pairwise (630 pairs), plus a per-pair feature test on pulse count, pulse length, amplitude and gap.",
+  "Audio: the clip's aac track decoded to 8 kHz mono and reduced to a 20 ms envelope to time and shape each sound.",
+  "Corner and strip presence: fixed pixel boxes (rows 2890-2960 x cols 1375-1438, and rows 60-180 x cols 200-1240) measured on all ten stills against a control box on the same rows."
+ ],
+ "not_worth_opening": [
+  {
+   "path": "evidence/06_unfolding.mp4",
+   "why": "the fold and paper-motion clip; nothing in it is a feeling arriving or a state changing, and the fold sequence is a material question, not this row's."
+  },
+  {
+   "path": "evidence/11_chat_scroll.mp4 and evidence/logs/11_chat_scroll.fling.json, evidence/logs/scroll_webkit.json",
+   "why": "scroll physics and per-frame build cost belong to the messenger and performance rows; the fling log says nothing about whether a feeling arrives as a sensation."
+  },
+  {
+   "path": "evidence/crops/02_chat_300_hand.png, 02_chat_300_edge.png, 02_chat_300_shadow.png",
+   "why": "300 per cent crops of ink, torn edge and contact shadow on one thread note: material-truth evidence. I read logs/crops.json and logs/hand.json to know what they contain, and neither the hand's twin share (0.061) nor the shadow bears on transmission."
+  },
+  {
+   "path": "evidence/logs/fonts.json, hairline.json",
+   "why": "type and hairline measurement, a typography and material question."
+  },
+  {
+   "path": "evidence/reliability.json, evidence/coldstart.json",
+   "why": "sync faults and launch time; the per-scene reports already gave me the link state and cold_ms I needed (07 loaded fresh in 25878 ms, 08 and 15 kept at ~2167 ms) and the rest is the reliability row's."
+  },
+  {
+   "path": "evidence/logs/12_search.json, 14_media_viewer.json, 04_moments.json, 06_unfolding.json and their .report.json siblings",
+   "why": "search, media and moments scene records; I opened the artifacts themselves for the corner and strip measurements and did not need their step logs."
+  },
+  {
+   "path": "evidence/scenes/",
+   "why": "the capture's scene scripts rather than its output; the steps are already quoted in each scene log I read."
+  },
+  {
+   "path": "evidence/SCORE.json, evidence/critics/1..6/",
+   "why": "another reader's conclusions; the briefing says to leave them closed and I did. Only critics/7, BRIEFING.md and prompts/ were present in evidence/critics when I looked."
+  }
+ ],
+ "verdict": "A feeling does arrive here as something that happens to the phone rather than as a message in another colour, and it survives being measured. On the only platform in evidence — WebKit, where there is no vibration to be had — the whole page tremors for exactly the length of the arriving feeling's declared waveform and stops within one frame of it (1904 ms against 1900 for hold, 640 against 640 for squeeze, 1184 against 1200 for soup), the waveform's own silences appear as stillness in the right places, the tremor's amplitude tracks the declared amplitude across squeeze's 90/160/230 ramp at 9/17/24 px, and the same feeling sent at 0.55 and at 0.90 arrives 16 px and 20 px hard. That is not an apology for a missing haptic; it is the haptic re-scored for a surface that can only move, and it runs identically for a feeling one of the two people invented. Around it the counts are all met and then some: 34 built-in feelings in six named families with 36 waveforms that have no near twins by my own pairwise test, 36 distinct objects and 36 distinct sounds against only 21 colours, twelve partner signals on the Pulse note, an ambient strip on nine stills of ten that visibly changes the moment a state lands, and a corner on nine stills of ten that opens the feeling sheet. Two things are short. The haptic itself is never executed anywhere in the set — the row's face-down test cannot be run on any artifact, and on the iPhone face-down leaves only a sound the harness mixed in from an asset file rather than recorded from the app. And the one scene that would show a state change reaching a shut phone shows a blank browser window, byte-identical before and after the push, with the app's own record of shown notifications empty: the transport is proved by cryptography and the policy is drawn in Settings, but nobody ever sees a phone notice anything while it is closed. Neither failure contradicts what the clips show, so neither is blocking; together they cost the row two points."
+}

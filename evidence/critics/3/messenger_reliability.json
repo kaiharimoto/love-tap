@@ -1,0 +1,96 @@
+{
+  "critic": "messenger_reliability",
+  "cycle": 3,
+  "score": 19,
+  "floor": 26,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "08_state_propagating.mp4 (also 07_feeling_landing.mp4, 15_authored_feeling.mp4)",
+      "where": "the composer row at the foot of the chat, y 2050-2090 of 2340; frames 239, 260, 300, 340 and the final frame 394",
+      "what": "A diagnostic readout is drawn on top of the composer placeholder and never clears: 'here · 2000ms · page' sits directly over 'write something' so neither string is legible, and it is still there in the last frame of the clip; the same overlay ends 07 ('nuzzle · 990ms · page') and 15 ('tuesday soup · 1200ms · page'), so it is not scene-specific.",
+      "why": "The rubric forbids a state that outstays its welcome, and this one never ends inside the evidence: the single control you send a message with is unreadable for at least 2.48 s of app time (155 frames × 16 ms) after every feeling, longer than the 2000 ms the sensation itself is declared to run in 08_state_propagating.report.json, and it shows internal telemetry rather than anything a person asked for."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "13_messenger_states.png, 02_chat.png, 11_chat_scroll.mp4, and every *.report.json",
+      "where": "the whole set: no frame anywhere shows a reaction on a message, a reply quoting its parent, a message being edited, a deleted stub, a voice note in the thread, or a video playing",
+      "what": "Six of the twelve capabilities the rubric enumerates have no pictorial evidence at all. All ten chat-region reports (02, 06, 07, 08, 10, 12, 13, 14, and 17) carry 'replying_to': null, 'editing': null and 'attaching': false, so across fifteen captures the reply, edit and attach paths were never once put on screen; the scene actually named 13_messenger_states shows only going, read ✓✓ and 'it would not go ×'. The words 'reaction', 'voice' and 'video' appear in no scene log; the only trace of any of them is five one-line booleans in reliability.json and the search chips WRITTEN / PHOTOGRAPHS / VIDEO / TALKING in 12_search.png.",
+      "why": "The row requires that every messenger capability is present and dependable, and a critic can only judge what the evidence shows; a couple leaving Instagram will reach for a reaction and a reply on day one, and nothing here shows either exists as a thing you can see or touch."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/logs/scroll_webkit.json",
+      "where": "per_frame[], the 630 frames of the year-deep scroll",
+      "what": "The widget build cost spikes to 999-1149 ms on 23 of 630 frames, at frame indices 6, 33, 61, 88, 112, 137, 166, 194, 223, 252, 279, 306, 333, 360, 387, 415, 442, 469, 497, 524, 551, 579, 606 — a gap of 27 ± 2 frames every time. Median build is 14 ms, so each spike is about 75× the median; p95 build alone is 91 ms, five times a 60 Hz frame budget, and 236 of 630 frames (37.5 %) build in over 16 ms.",
+      "why": "This is the scroll jank the row names, and the ratio is machine-independent: the no-GPU headless raster figures may be inflated by the harness, but a build that costs 75× the median on a fixed 27-frame cadence is a periodic full rebuild of the list, not a missing GPU. 11_chat_scroll.mp4 cannot contradict it — frames.json says each frame is one step of a driven clock grabbed one at a time, so that clip is smooth by construction and carries no information about stalls."
+    },
+    {
+      "severity": "serious",
+      "artifact": "08_state_propagating.mp4",
+      "where": "the foot of the chat, frames 239-394, final frame at y ≈ 2085",
+      "what": "The newest arrival — the 'here' feeling that arrived as seq 8392 per the arrivals log — is cut off by a hard horizontal edge just above the composer, with its caption and timestamp not visible, and it stays clipped for the whole 156-frame final run (2.5 s of app time) up to and including the last frame. The thread never scrolls to bring the thing that just arrived into view.",
+      "why": "Delivery you cannot read is delivery you cannot trust; the clip whose job is to show state propagating ends with the propagated item half hidden behind the composer."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/logs/08_state_propagating.json (compare evidence/reliability.json)",
+      "where": "reports[0].sync, and the top-level 'problems' and 'ok' fields",
+      "what": "On the real 14,072-event store the sync loop recorded 'faults': 1 with 'last_fault': 'ConstraintError: Index key is not unique', and the capture ended with 'ok': false on an uncaught page error from main.dart.js. The identical page error also ends 07_feeling_landing.json and 15_authored_feeling.json — all three of the paired, two-device captures. reliability.json, which reports duplicates 0 and all_ok true, was taken separately at 07:04 against a 174-event store with scripted faults, not against the year.",
+      "why": "A unique-index violation inside the sync loop is precisely the mechanism that drops or duplicates a message, and the clean bill of health in reliability.json does not cover the store where the fault actually happened; the row's 'no dropped or duplicated messages' is therefore unproven at the size the couple would use."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/logs/ (01_pulse, 06_unfolding, 08_state_propagating, 14_media_viewer, 15_authored_feeling, dusk_pulse)",
+      "where": "the 'load' block of each scene log",
+      "what": "Every capture whose store is 'fresh' with the seeded year takes 10,988-12,019 ms to load (11,024 / 11,374 / 11,597 / 11,612 / 12,019 / 10,988 ms; mean 11.4 s), against 2,773-3,180 ms when the store is 'kept'. No artifact in the evidence shows what is on screen during those eleven seconds.",
+      "why": "An eleven-second first open is the longest wait in the product and the row forbids a spinner that outstays its welcome; because nothing was captured of that screen, a critic cannot tell whether the wait is explained to the person or is a blank desk."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/logs/08_state_propagating.json",
+      "where": "arrivals[].waited_ms",
+      "what": "Four events sent from the far device took 1,928 ms, 5,601 ms, 2,596 ms and 2,007 ms of wall clock to appear on the near device, including 5.6 s for the plain text message 'it is raining here too' — over loopback, with reliability.json recording latency_ms 0 and no injected fault.",
+      "why": "These are the only end-to-end delivery times anywhere in the evidence, and a text message that can take five and a half seconds to land on the same machine is exactly the lag that sends a couple back to a channel that feels instant."
+    },
+    {
+      "severity": "minor",
+      "artifact": "13_messenger_states.png",
+      "where": "the last note, 'sending you the roster', Thu 3 Sep · 19:40",
+      "what": "The failed send reads 'it would not go ×' and nothing else: no retry affordance, no 'try again', no indication that the × is a control rather than a symbol. Three further messages in the same frame are frozen at 'going' with no elapsed time and no way to tell a slow send from a stuck one.",
+      "why": "A message that failed with no visible way to resend it is the single clearest reason to reopen Instagram, and the states scene is the one place the evidence had to answer this."
+    },
+    {
+      "severity": "minor",
+      "artifact": "11_chat_scroll.mp4",
+      "where": "frame 90, the full height of the thread above the 'miss you' note",
+      "what": "Eight consecutive presence lines fill the screen with no message between them — 'noor went out' 06:35, 'noor's phone is on silent' 07:55, 'noor's phone is on normal' 14:40, 'noor went out' 15:50, 'you is heads down' 18:25, \"you's phone is on normal\" Sat 07:09, \"noor's phone is on normal\" Sat 08:24, 'you got in' Sat 08:30 — spanning Fri 24 Apr 06:35 to Sat 25 Apr 08:30, and two of the eight declare the same ringer state with nothing between them changing it back.",
+      "why": "Scrolling back through the year lands on whole screens with no conversation in them; the searchable history the row asks for is partly padded with ambient chatter that a person did not write."
+    },
+    {
+      "severity": "minor",
+      "artifact": "evidence/logs/manifest.json and evidence/MANIFEST.json",
+      "where": "entries_without_a_file (manifest.json); missing / stale (MANIFEST.json)",
+      "what": "The asset manifest lists 20 declared entries with no file behind them — five seeded photographs (seed/photos/2025-09_*.jpg) and fifteen video posters (scratch/posters/2025-09 to 2026-08) — and still reports ok: true. Separately, 09_two_devices.png is absent with 'not captured this session' as the whole reason, 08 runs 6.58 s against its own declared minimum of 8 s and 07 runs 5.23 s against 6 s (long_enough: false for both), and 14 of the 15 artifacts predate this capture.",
+      "why": "Every video message in the seeded year points at a poster frame that is not on disk, and the one artifact that would have shown delivery and read state on two devices at once was not taken and its absence is restated rather than explained."
+    },
+    {
+      "severity": "minor",
+      "artifact": "12_search.png",
+      "where": "the filter row, y 660-820, right edge",
+      "what": "The type filters run off the right edge of the screen: EVERYTHING, WRITTEN, PHOTOGRAPHS, VIDEO are whole and TALKING is cut through its last letter at x = 1440, with no scroll indicator and no way from the frame to tell whether anything follows it. All six visible results are written notes; no photo, video or voice hit is shown.",
+      "why": "Media search is claimed by the chips and by reliability.json but never demonstrated, and the chip that would filter to voice notes is the one the frame amputates."
+    }
+  ],
+  "what_is_working": [
+    "The sync spine is the best-evidenced thing here. evidence/reliability.json injected a lost response and two offline/online cycles and still reports 174 events on both sides, duplicates 0, same_order_both_sides true, seq 1..173 gapless and monotonic after the gap, 26 events queued offline and all delivered on reconnect, a kill mid-send that the host received once with no duplicate on retry, and a draft plus pairing intact after the client process was closed and reopened.",
+    "evidence/coldstart.json shows two distinct tailnet node keys and addresses (100.68.254.25 / 100.72.198.108) with four events landing in identical order on both spines.",
+    "The four send states are all visible in artifacts rather than only asserted: 'going' with a bar glyph and 'it would not go ×' in 13_messenger_states.png, 'sent ✓' in the 06_unfolding strip, 'read ✓✓' in 02_chat.png, 11_chat_scroll.mp4 and 13; typing shows as 'noor writing…' above the composer in 13, matching partner_typing: true in its report.",
+    "Ordering in the dense thread is clean everywhere I checked: 11_chat_scroll.mp4 runs Wed 22 Apr → Thu 23 → Fri 24 → Sat 25 → Sun 26 Apr strictly forward across all 300 frames with no timestamp going backwards.",
+    "I measured the fling myself by aligning consecutive frames of 11_chat_scroll.mp4: seven flings, each decelerating monotonically from 27 px to 6 px per frame at 270 px wide with no zero-shift frame, no reversal and no repeat — and frames.json independently reports repeated_frames 0 and longest_still_run 0 for all five clips.",
+    "Search in 12_search.png does the real work: the query 'rain' is highlighted inside each result, results reach across modules (a to-do, 'text when home · kept', matched on its note text), and the results span Apr to Aug of the seeded year.",
+    "14_media_viewer.png opens a photograph full-bleed at 1440×3120 with its caption below it, and 04_moments.png shows 183 media items with blobs asked 18 / arrived 18 / waiting 0, so photo bytes do resolve; reliability.json's viewer check confirms the full-resolution bytes on the far device hash to the same blob."
+  ],
+  "verdict": "The hard half of a messenger — the event spine — is in better shape than most builds ever get: 174 events survive a lost response and two disconnections with zero duplicates, gapless monotonic sequence, 26 queued events all delivered on reconnect, a kill mid-send that does not duplicate, and a draft that survives the process dying. Ordering in the year-deep thread is strictly forward, the fling I measured frame by frame is perfectly smooth, and all four send states plus typing are visible in real frames rather than merely asserted. But the row asks whether anything here would give either person a reason to open Instagram instead, and three things do. The composer is overprinted with an internal readout ('here · 2000ms · page' on top of 'write something') that is still there in the last frame of three separate clips, so the control you type into is unreadable after every feeling and the evidence never shows it clearing. The dense scroll stalls on a metronome: 23 of 630 frames in scroll_webkit.json build in 999-1149 ms, 75× the 14 ms median, every 27 ± 2 frames — a ratio no missing GPU explains. And six of the twelve capabilities the row enumerates — reactions, replies, editing, deleting, voice notes in the thread, video playback — appear in no frame at all, with replying_to and editing null in all ten chat reports; five booleans in reliability.json are not a messenger you can see. Add the ConstraintError in the sync loop on the real 14,072-event store (the clean reliability run was against 174 events), an eleven-second cold start nobody photographed, a failed send with no retry, and a newest arrival left clipped behind the composer, and the category sits below its floor: the plumbing is trustworthy, the messenger sitting on it is not yet shown to be."
+}
