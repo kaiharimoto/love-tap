@@ -9,6 +9,8 @@
 // So this builds all of them: the five regions, the setup sheet, the search page, the media
 // viewer, and each of the sheets that come up over a note. It is not looking at them — the
 // pictures are what look at them — it is only insisting that they can be drawn.
+import 'dart:io';
+
 import 'package:desk/feelings/corner.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/material/slip.dart';
@@ -29,6 +31,7 @@ import 'package:desk/transport/transport.dart';
 import 'package:desk/voice/strings.dart';
 import 'package:desk/regions/chat/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show FontLoader;
 import 'package:flutter_test/flutter_test.dart';
 
 Future<AppScope> _aScope() async {
@@ -71,7 +74,24 @@ Future<void> _draw(WidgetTester tester, AppScope scope, Widget screen,
     child: MaterialApp(home: Scaffold(body: screen)),
   ));
   await tester.pump();
-  expect(tester.takeException(), isNull);
+  _nothingThrew(tester);
+}
+
+/// The exception the frame threw, with everything it knows about where.
+///
+/// `expect(takeException(), isNull)` reports `A RenderFlex overflowed by 17 pixels on the right`
+/// and not one word about which flex, on which screen, under which widget — and an overflow that
+/// only appears under a loaded machine is then a number with nowhere to go. A FlutterError carries
+/// the offending render object and the widget that created it in its own diagnostics; this prints
+/// them.
+void _nothingThrew(WidgetTester tester) {
+  final thrown = tester.takeException();
+  if (thrown == null) return;
+  if (thrown is FlutterError) {
+    // ignore: avoid_print
+    print('--- the frame threw ---\n${thrown.diagnostics.map((d) => d.toStringDeep()).join('\n')}');
+  }
+  fail('the frame threw: $thrown');
 }
 
 void main() {
@@ -80,6 +100,18 @@ void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     await MaterialLibrary.load();
+    // The real hands, not Ahem. A widget test lays every string out in the test font unless the
+    // face it names has been loaded, and Ahem is a different width — so a screen that overflows on
+    // a phone builds cleanly here, and the same file passed alone and failed in the suite
+    // depending on whether some earlier test had loaded a face into the same engine. The one this
+    // hid: a seventeen-pixel overflow on the right of the search page at 390 by 844, which is the
+    // iPhone the web app is installed on.
+    for (final face in const ['TeoHand', 'NoorHand', 'DeskStamp']) {
+      final loader = FontLoader(face)
+        ..addFont(Future.value(
+            File('assets/fonts/$face.ttf').readAsBytesSync().buffer.asByteData()));
+      await loader.load();
+    }
   });
 
   setUp(() async => scope = await _aScope());
@@ -153,7 +185,7 @@ void main() {
       }
       await _draw(tester, scope, SearchPage(initialQuery: 'the', onDone: (_) {}), size: size);
       await tester.pump(const Duration(milliseconds: 300));
-      expect(tester.takeException(), isNull);
+      _nothingThrew(tester);
     });
   });
 
