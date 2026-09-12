@@ -20,6 +20,7 @@ cd "$(dirname "$0")"
 
 BROWSER="webkit"
 BUILD="yes"
+RESUMING="no"
 DERIVED="yes"
 ONLY=""
 FRESH_PORT=8798
@@ -43,7 +44,7 @@ for a in "$@"; do
     --only=*) ONLY="${a#*=}" ;;
     --browser=*) BROWSER="${a#*=}" ;;
     --no-build) BUILD="no" ;;
-    --stamp=*) STAMP="${a#*=}" ;;
+    --stamp=*) STAMP="${a#*=}"; RESUMING="yes" ;;
     --scenes-only) DERIVED="no" ;;
     --frozen-now=*) FROZEN_NOW="${a#*=}" ;;
     -h|--help) sed -n '2,13p' "$0"; exit 0 ;;
@@ -53,8 +54,19 @@ done
 
 mkdir -p evidence/crops evidence/frames "$LOG" "$SCRATCH"
 MISSING="$SCRATCH/missing.txt"
-: > "$MISSING"
-note_missing() { echo "$1|$2" >> "$MISSING"; echo "  ✗ $1 — $2"; }
+# Emptied at the start of a run, and *kept* across the passes of one.
+#
+# A run split into passes writes this once per pass and collect.py reads only the last one — so the
+# thirteenth capture's manifest counted 07_feeling_landing and 15_authored_feeling as present and
+# meeting their minimum, when both had failed their frame checks two passes earlier and said so in
+# their own records. A `--stamp` is what says *this is a pass of a run that is already going*, so it
+# is also what says not to throw away what the earlier passes found.
+[ "$RESUMING" = "yes" ] || : > "$MISSING"
+note_missing() {
+  # once per artifact, however many passes have run
+  grep -q "^$1|" "$MISSING" 2>/dev/null || echo "$1|$2" >> "$MISSING"
+  echo "  ✗ $1 — $2"
+}
 
 # --only takes one scene or a comma-separated list of them
 wants() { [ -z "$ONLY" ] || [[ ",$ONLY," == *",$1,"* ]]; }

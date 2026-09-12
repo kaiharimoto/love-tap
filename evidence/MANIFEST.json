@@ -161,25 +161,6 @@
    "minimum_seconds": 4,
    "long_enough": true
   },
-  "07_feeling_landing.mp4": {
-   "bytes": 7704266,
-   "written": "2026-09-12T17:26:09Z",
-   "from_this_run": true,
-   "size": [
-    1080,
-    2340
-   ],
-   "frames": 421,
-   "fps": 62.5,
-   "seconds": 6.74,
-   "meets_minimum": true,
-   "minimum": [
-    1080,
-    2340
-   ],
-   "minimum_seconds": 6,
-   "long_enough": true
-  },
   "11_chat_scroll.mp4": {
    "bytes": 22098890,
    "written": "2026-09-12T17:05:50Z",
@@ -198,31 +179,14 @@
    ],
    "minimum_seconds": 4,
    "long_enough": true
-  },
-  "15_authored_feeling.mp4": {
-   "bytes": 8145326,
-   "written": "2026-09-12T17:57:44Z",
-   "from_this_run": true,
-   "size": [
-    1080,
-    2340
-   ],
-   "frames": 448,
-   "fps": 62.5,
-   "seconds": 7.17,
-   "meets_minimum": true,
-   "minimum": [
-    1080,
-    2340
-   ],
-   "minimum_seconds": 4,
-   "long_enough": true
   }
  },
  "missing": {
-  "09_two_devices.png": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried.",
+  "09_two_devices.png": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried.",
   "16_setup_android.png": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got.",
-  "08_state_propagating.mp4": "the frame check failed; see evidence/logs/08_state_propagating.frames.json (a copy from an earlier run is still on disk, written 2026-09-12T19:03:59Z; it is not this session's and is not counted)"
+  "07_feeling_landing.mp4": "the frame check failed; see evidence/logs/07_feeling_landing.frames.json \u2014 154 frames identical to the one before, first at 66. Every run of the scene outlives its own event. (a copy from an earlier run is still on disk, written 2026-09-12T17:26:09Z; it is not this session's and is not counted)",
+  "08_state_propagating.mp4": "the frame check failed; see evidence/logs/08_state_propagating.frames.json \u2014 92 frames identical to the one before, first at 640, in the two runs that film the link being down and the notes arriving after it returns. (a copy from an earlier run is still on disk, written 2026-09-12T19:03:59Z; it is not this session's and is not counted)",
+  "15_authored_feeling.mp4": "the frame check failed; see evidence/logs/15_authored_feeling.frames.json \u2014 129 frames identical to the one before, longest run 42, where the scene holds a feeling whose family is not the one on the sheet. (a copy from an earlier run is still on disk, written 2026-09-12T17:57:44Z; it is not this session's and is not counted)"
  },
  "checks": {
   "01_pulse.json": {
