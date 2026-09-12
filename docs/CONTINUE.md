@@ -228,7 +228,7 @@ Both are in the evidence so the next cycle starts from a number rather than an i
    laying text out against the paper it is drawn on — the pitch, and the phase of the first rule
    under the seeded patch offset — which is a change to every note in the app.
 
-## 3. Cycle 11, which is what the twelfth capture is of
+## 3. Cycle 11, which is what the thirteenth capture is of
 
 Eleven changes, and the two largest are corrections to things an earlier cycle had already called
 fixed.
@@ -301,6 +301,34 @@ not. Both were true, four wall-clock seconds apart.
 **The release path was exercised again**, on the build that serves over TLS rather than the one
 from before it: 101.2 MB for arm64, signed with a throwaway key generated into /tmp and destroyed
 with the key.properties that pointed at it.
+
+### And six more the twelfth capture found by failing
+
+It ran for three hours, the machine did not last that long, and a self-matching `pgrep` in the
+waiting loop meant nobody noticed for nine hours. Both are fixed — `capture.sh` takes `--stamp=` and
+`--scenes-only` so a run splits into passes of half an hour that each survive, and waits key off a
+sentinel the job writes rather than off a process name. What the capture itself said:
+
+- **The stills at a phone's width broke the hero.** The brief asks for at least eight notes visible
+  in 02_chat.png with no tear id repeated; a 360 point thread has a 501 point viewport and holds
+  four. Back at 480 it holds eight, eight distinct tears. The 360 pass is what found the truncating
+  module rows and five row costs measured at a width nobody has, and those fixes stay.
+- **The shorter landing dwell emptied the stage**: 154 held frames in 07, first at frame 66 of a
+  150-frame run. Reverted; where it lands is what answers the occlusion.
+- **The hold's ticker is not what turns under the harness.** 129 held frames in 15, longest run 42,
+  within two frames of the capture before. The driven clock's own tick is back beside the ticker.
+- **The reconnect was shot in Settings**, where the link state is one word changing on a still page:
+  437 held frames in 08. It is in the thread now — a note that will not go, the near phone reading
+  back while it waits, and both of the far phone's notes landing in order when the link returns.
+- **The paper pool was a count of ten and Moments needs nineteen**, so a piece drew the flat colour
+  under it while the stock it asked for decoded again. A 320 MB byte budget now; the framework's own
+  image cache was measured at 43 MB of its 384 MB ceiling, so the paper is the thing worth bounding.
+- **An anchor that cannot be satisfied moved nothing and said nothing.** 13 asked for a stretch
+  holding an edited row, a withdrawn one and one still queued; no such stretch is in the year, so
+  the thread stayed where it was and the record wrote `anchor: null`. It says what it could not
+  satisfy now, and the scene asks for the one mark no artifact has ever shown.
+- **An empty pocket was three facts wearing one face.** `received()` returned `const []` for a
+  missing registration and for any throw. The record says which empty it is now.
 
 ## 4. What is left, in order of what it costs to close
 
