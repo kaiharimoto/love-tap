@@ -15,7 +15,7 @@
  "cuts_between_runs": [],
  "app_seconds": 1.58,
  "playback_over_app_time": 2.525,
- "mean_change_per_frame": 0.63155,
+ "mean_change_per_frame": 1.2023,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -24,10 +24,10 @@
    "busiest_32px_tile_mean_change_below": 2.0
   },
   "worst_moving_frame": {
-   "frame": 21,
-   "mean": 0.0083,
-   "visible_share": 9.7e-05,
-   "busiest_tile": 18.2301,
+   "frame": 28,
+   "mean": 0.7722,
+   "visible_share": 0.122465,
+   "busiest_tile": 54.3081,
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },

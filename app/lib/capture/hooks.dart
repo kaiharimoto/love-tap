@@ -43,6 +43,7 @@ class CaptureHooks {
   /// the arrival being recorded happens while nothing in the app is being stepped.
   static List<Map<String, Object?>> _heldByThePhone = const [];
   static Map<String, Object?> _whatThePhoneCanHold = const {};
+  static String? _whyTheHeldListIsEmpty;
   static Timer? _ambientPoll;
 
   static void install(AppScope scope) {
@@ -53,6 +54,7 @@ class CaptureHooks {
     _ambientPoll?.cancel();
     _ambientPoll = Timer.periodic(const Duration(milliseconds: 400), (_) async {
       _heldByThePhone = await scope.ambient.received();
+      _whyTheHeldListIsEmpty = scope.ambient.whyTheHeldListIsEmpty;
       _whatThePhoneCanHold = await scope.ambient.whatThePhoneCanHold();
     });
   }
@@ -688,6 +690,7 @@ class CaptureHooks {
         // what this app asked for is above; what the phone is holding is below, read back from
         // the platform, so the record is not four statements of intent
         'held_by_the_phone': _heldByThePhone,
+        if (_heldByThePhone.isEmpty) 'and_it_is_empty_because': _whyTheHeldListIsEmpty,
         // and what this platform would let it hold at all, asked of the platform. An empty
         // `held_by_the_phone` is two different facts wearing one face: a phone holding nothing
         // because nothing was sent, and a page that could not register a worker in the first

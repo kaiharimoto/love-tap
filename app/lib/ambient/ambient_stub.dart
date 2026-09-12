@@ -91,6 +91,10 @@ class _AndroidAmbient implements Ambient {
   }
 
   @override
+  @override
+  String? get whyTheHeldListIsEmpty =>
+      'this platform holds a notification in its own shade; the app cannot read it back';
+
   Future<List<Map<String, Object?>>> received() async {
     // Android's own record of what is in the shade, once there is a device to read it off. There
     // is not one here (docs/PHONES.md), so this returns nothing rather than something invented.

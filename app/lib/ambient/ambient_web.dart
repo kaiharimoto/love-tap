@@ -223,22 +223,50 @@ class _WebAmbient implements Ambient {
   }
 
   @override
+  /// Why the last read of what the phone is holding came back empty, when it was not simply empty.
+  ///
+  /// This returned `const []` on any throw and on no registration, so three separate facts — the
+  /// phone is holding nothing, there is no worker to ask, and asking threw — arrived as one empty
+  /// list. An emotional critic read that list in nineteen reports and concluded, reasonably, that
+  /// no artifact anywhere shows the pocket surface. The reception check said in the same run that
+  /// the browser was still holding one.
+  static String? whyEmpty;
+
+  @override
+  String? get whyTheHeldListIsEmpty => whyEmpty;
+
+  @override
   Future<List<Map<String, Object?>>> received() async {
     // What the browser is holding, as opposed to what this class asked it to hold. The capture
     // report used to be able to say only the second, which is a record of an intention.
     final reg = _registration;
-    if (reg == null) return const [];
+    if (reg == null) {
+      whyEmpty = 'no service worker registration to ask';
+      return const [];
+    }
     try {
-      return [
-        for (final n in (await reg.getNotifications().toDart).toDart)
-          {
-            'title': n.title.toDart,
-            'body': n.body.toDart,
-            'tag': n.tag.toDart,
-            'silent': n.silent,
-          },
-      ];
-    } catch (_) {
+      final held = (await reg.getNotifications().toDart).toDart;
+      final out = <Map<String, Object?>>[];
+      for (final n in held) {
+        // Field by field. A notification the worker drew carries whatever the payload gave it, and
+        // one missing field used to take the whole list with it through the catch below.
+        String read(String what, String Function() f) {
+          try {
+            return f();
+          } catch (e) {
+            return 'unreadable ($what): $e';
+          }
+        }
+        out.add({
+          'title': read('title', () => n.title.toDart),
+          'body': read('body', () => n.body.toDart),
+          'tag': read('tag', () => n.tag.toDart),
+        });
+      }
+      whyEmpty = out.isEmpty ? 'the browser is holding nothing' : null;
+      return out;
+    } catch (e) {
+      whyEmpty = 'asking the browser what it holds threw: $e';
       return const [];
     }
   }

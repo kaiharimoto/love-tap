@@ -61,6 +61,14 @@ abstract class Ambient {
   /// app asked for. A record of an intention is not evidence that anything arrived.
   Future<List<Map<String, Object?>>> received();
 
+  /// Why [received] came back empty, when it was not simply empty.
+  ///
+  /// Three facts used to arrive as one empty list: the phone is holding nothing, there is no worker
+  /// to ask, and asking threw. An emotional critic read that list in nineteen reports and concluded
+  /// that no artifact anywhere shows the pocket surface — while the reception check said in the
+  /// same run that the browser was still holding one.
+  String? get whyTheHeldListIsEmpty;
+
   /// What this platform will let the app hold at all, asked of the platform.
   ///
   /// `received()` returning nothing is two different facts wearing one face: a phone that is
