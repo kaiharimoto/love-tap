@@ -102,10 +102,15 @@ void main() {
     expect(atFirst.lift, lessThan(0.05), reason: 'the hold has barely begun');
 
     // The charge is written against the clock the app is running on, which in a test is the wall
-    // clock, so the time has to actually pass. runAsync is the only thing that lets it.
-    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 900)));
-    await tester.pump();
-    await tester.pump();
+    // clock, so the time has to actually pass. runAsync is the only thing that lets it — and it is
+    // *real* time, so a fixed delay is a race with whatever else the machine is doing. Under a
+    // loaded box this test passed alone and failed in the suite. It waits for the thing it is
+    // about instead: the hold having grown.
+    for (var tries = 0; tries < 20 && held().lift <= 0.1; tries++) {
+      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 120)));
+      await tester.pump();
+      await tester.pump();
+    }
 
     final later = held();
     expect(later.lift, greaterThan(0.1),

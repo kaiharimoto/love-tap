@@ -14,15 +14,15 @@
   },
   {
    "do": "goTo",
-   "ms": 3208
+   "ms": 3821
   },
   {
    "do": "step",
-   "ms": 1428
+   "ms": 1641
   },
   {
    "do": "step",
-   "ms": 1277
+   "ms": 1400
   },
   {
    "do": "wait",
@@ -30,23 +30,23 @@
   },
   {
    "do": "shot",
-   "ms": 31603
+   "ms": 31650
   },
   {
    "do": "goTo",
-   "ms": 4253
+   "ms": 6136
   },
   {
    "do": "step",
-   "ms": 1546
+   "ms": 2329
   },
   {
    "do": "step",
-   "ms": 1559
+   "ms": 1948
   },
   {
    "do": "wait",
-   "ms": 1002
+   "ms": 1006
   },
   {
    "do": "report",
@@ -61,23 +61,23 @@
   },
   {
    "do": "push",
-   "ms": 2209
+   "ms": 2210
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2103
   },
   {
    "do": "screen",
-   "ms": 827
+   "ms": 5223
   },
   {
    "do": "closeApp",
-   "ms": 727
+   "ms": 734
   },
   {
    "do": "wait",
-   "ms": 1604
+   "ms": 1602
   },
   {
    "push": {
@@ -88,11 +88,11 @@
   },
   {
    "do": "push",
-   "ms": 2208
+   "ms": 2210
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2103
   },
   {
    "do": "screen",
@@ -107,15 +107,15 @@
   },
   {
    "do": "push",
-   "ms": 2210
+   "ms": 2205
   },
   {
    "do": "wait",
-   "ms": 2102
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 777
+   "ms": 778
   },
   {
    "push": {
@@ -126,7 +126,7 @@
   },
   {
    "do": "push",
-   "ms": 2206
+   "ms": 2207
   },
   {
    "do": "wait",
@@ -134,27 +134,27 @@
   },
   {
    "do": "screen",
-   "ms": 777
+   "ms": 811
   },
   {
    "do": "notifications",
-   "ms": 1145
+   "ms": 1272
   },
   {
    "do": "reopenApp",
-   "ms": 3710
+   "ms": 4128
   },
   {
    "do": "wait",
-   "ms": 1601
+   "ms": 1605
   },
   {
    "do": "shot",
-   "ms": 1581
+   "ms": 1671
   },
   {
    "do": "report",
-   "ms": 708
+   "ms": 707
   }
  ],
  "shots": [
@@ -294,7 +294,7 @@
    "stocks_the_paper_had_not_arrived_for": [],
    "paper_that_arrived_after_the_piece_was_drawn": 29,
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 138,
+   "masks_dropped_to_stay_inside_the_pool": 126,
    "stocks_held": 10,
    "stocks_held_bytes": 142543040,
    "stocks_dropped_to_stay_inside_the_pool": 21,
@@ -312,13 +312,13 @@
    "sensation": null,
    "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 5,
-    "the library index": 14,
-    "the ink plates": 30,
-    "the desk": 109,
-    "the log": 490,
-    "the first frame": 250,
-    "everything": 898
+    "the framework": 6,
+    "the library index": 11,
+    "the ink plates": 29,
+    "the desk": 111,
+    "the log": 463,
+    "the first frame": 287,
+    "everything": 907
    },
    "sync": {
     "transport": "local",
@@ -341,7 +341,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-12T00:35:15.009Z",
+     "since": "2026-09-12T16:25:00.725Z",
      "last_contact": null,
      "certificate": null,
      "setup_address": null
@@ -423,12 +423,12 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 2,
-    "the library index": 9,
-    "the ink plates": 27,
-    "the desk": 97,
-    "the log": 447,
-    "the first frame": 151,
-    "everything": 733
+    "the library index": 12,
+    "the ink plates": 52,
+    "the desk": 111,
+    "the log": 583,
+    "the first frame": 196,
+    "everything": 956
    },
    "sync": {
     "transport": "local",
@@ -451,7 +451,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-12T00:36:31.459Z",
+     "since": "2026-09-12T16:26:26.359Z",
      "last_contact": null,
      "certificate": null,
      "setup_address": null
@@ -481,19 +481,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2296,
+ "cold_ms": 2423,
  "load": {
-  "ms": 2296,
+  "ms": 2423,
   "store": "kept",
   "profile": "profile_reception",
   "made_of": {
-   "the framework": 5,
-   "the library index": 14,
-   "the ink plates": 30,
-   "the desk": 109,
-   "the log": 490,
-   "the first frame": 250,
-   "everything": 898
+   "the framework": 6,
+   "the library index": 11,
+   "the ink plates": 29,
+   "the desk": 111,
+   "the log": 463,
+   "the first frame": 287,
+   "everything": 907
   }
  },
  "app_open": "http://127.0.0.1:8796/",
@@ -586,6 +586,46 @@
    },
    {
     "at": 1789173385723,
+    "kind": "state_declared",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "said how they are",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789230358212,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "interrupt",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789230370096,
+    "kind": "message",
+    "from": "noor",
+    "how": "interrupt",
+    "title": "noor",
+    "body": "wrote something",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789230375209,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "interrupt",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789230380254,
     "kind": "state_declared",
     "from": "noor",
     "how": "quiet",
