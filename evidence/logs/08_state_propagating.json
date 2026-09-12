@@ -14,7 +14,7 @@
   },
   {
    "do": "pair",
-   "ms": 1400
+   "ms": 1290
   },
   {
    "do": "wait",
@@ -22,15 +22,15 @@
   },
   {
    "do": "goTo",
-   "ms": 3024
+   "ms": 2878
   },
   {
    "do": "far",
-   "ms": 760
+   "ms": 716
   },
   {
    "do": "awaitArrival",
-   "ms": 5030
+   "ms": 5820
   },
   {
    "do": "wait",
@@ -38,67 +38,15 @@
   },
   {
    "do": "step",
-   "ms": 907
+   "ms": 6666
   },
   {
    "do": "frames",
-   "ms": 32949
+   "ms": 50513
   },
   {
    "do": "wait",
-   "ms": 3004
-  },
-  {
-   "do": "far",
-   "ms": 511
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1357
-  },
-  {
-   "do": "wait",
-   "ms": 1203
-  },
-  {
-   "do": "step",
-   "ms": 2864
-  },
-  {
-   "do": "frames",
-   "ms": 303357
-  },
-  {
-   "do": "goTo",
-   "ms": 5795
-  },
-  {
-   "do": "step",
-   "ms": 1554
-  },
-  {
-   "do": "far",
-   "ms": 724
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 871
-  },
-  {
-   "do": "wait",
-   "ms": 1203
-  },
-  {
-   "do": "unfold",
-   "ms": 825
-  },
-  {
-   "do": "wait",
-   "ms": 1202
-  },
-  {
-   "do": "frames",
-   "ms": 275364
+   "ms": 3005
   },
   {
    "do": "far",
@@ -106,55 +54,75 @@
   },
   {
    "do": "awaitArrival",
-   "ms": 2428
+   "ms": 1936
   },
   {
    "do": "wait",
-   "ms": 1203
-  },
-  {
-   "do": "frames",
-   "ms": 187597
-  },
-  {
-   "do": "far",
-   "ms": 628
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1969
-  },
-  {
-   "do": "wait",
-   "ms": 1203
-  },
-  {
-   "do": "frames",
-   "ms": 335557
-  },
-  {
-   "do": "goTo",
-   "ms": 6668
+   "ms": 1202
   },
   {
    "do": "step",
-   "ms": 2556
+   "ms": 1826
   },
   {
-   "do": "wait",
-   "ms": 2104
+   "do": "frames",
+   "ms": 2721430
+  },
+  {
+   "do": "goTo",
+   "ms": 8713
+  },
+  {
+   "do": "step",
+   "ms": 2460
   },
   {
    "do": "far",
-   "ms": 505
-  },
-  {
-   "do": "far",
-   "ms": 895
+   "ms": 1405
   },
   {
    "do": "awaitArrival",
-   "ms": 2682
+   "ms": 3340
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "unfold",
+   "ms": 682
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 3169158
+  },
+  {
+   "do": "far",
+   "ms": 591
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1546
+  },
+  {
+   "do": "wait",
+   "ms": 1201
+  },
+  {
+   "do": "frames",
+   "ms": 451302
+  },
+  {
+   "do": "far",
+   "ms": 617
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 4297
   },
   {
    "do": "wait",
@@ -162,11 +130,131 @@
   },
   {
    "do": "frames",
-   "ms": 325042
+   "ms": 2328274
+  },
+  {
+   "do": "goTo",
+   "ms": 10151
+  },
+  {
+   "do": "step",
+   "ms": 2172
+  },
+  {
+   "do": "wait",
+   "ms": 2101
+  },
+  {
+   "do": "far",
+   "ms": 574
+  },
+  {
+   "do": "far",
+   "ms": 1608
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1798
+  },
+  {
+   "do": "wait",
+   "ms": 1202
+  },
+  {
+   "do": "frames",
+   "ms": 1203281
+  },
+  {
+   "do": "goTo",
+   "ms": 13226
+  },
+  {
+   "do": "step",
+   "ms": 4054
+  },
+  {
+   "do": "wait",
+   "ms": 1201
+  },
+  {
+   "do": "frames",
+   "ms": 161710
+  },
+  {
+   "at": 10187764,
+   "said": "__deskCut(true) ok, the link is cut"
+  },
+  {
+   "do": "cut",
+   "ms": 602
+  },
+  {
+   "do": "wait",
+   "ms": 2003
+  },
+  {
+   "do": "frames",
+   "ms": 419952
+  },
+  {
+   "do": "far",
+   "ms": 587
+  },
+  {
+   "do": "far",
+   "ms": 559
+  },
+  {
+   "do": "wait",
+   "ms": 2107
+  },
+  {
+   "do": "frames",
+   "ms": 320021
+  },
+  {
+   "at": 10933581,
+   "said": "__deskCut(false) ok, the link is back"
+  },
+  {
+   "do": "cut",
+   "ms": 584
+  },
+  {
+   "do": "sync",
+   "ms": 570
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 3263
+  },
+  {
+   "do": "wait",
+   "ms": 1402
+  },
+  {
+   "do": "frames",
+   "ms": 350170
+  },
+  {
+   "do": "goTo",
+   "ms": 7893
+  },
+  {
+   "do": "step",
+   "ms": 1946
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 520833
   },
   {
    "do": "report",
-   "ms": 656
+   "ms": 608
   }
  ],
  "shots": [
@@ -209,99 +297,193 @@
     "line": "state availability heads_down",
     "at": 10
    }
+  },
+  {
+   "frames": 20,
+   "dir": "evidence/frames/08_state_propagating",
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 26,
+   "dir": "evidence/frames/08_state_propagating",
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 20,
+   "dir": "evidence/frames/08_state_propagating",
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 16,
+   "dir": "evidence/frames/08_state_propagating",
+   "ms": 16,
+   "drive": null
+  },
+  {
+   "frames": 34,
+   "dir": "evidence/frames/08_state_propagating",
+   "ms": 16,
+   "drive": null
   }
  ],
  "reports": [
   {
-   "region": 2,
+   "region": 1,
    "view": {
-    "region": "us",
-    "kinds": {
-     "todo_event": 199,
-     "date_event": 81,
-     "milestone": 6,
-     "passed_on": 12,
-     "ritual_kept": 53
+    "region": "chat",
+    "visible": [
+     "01M1MYXTD9PFF8FJYW9N70PZPS",
+     "01M1MYZ4JEXA8FB14Z6TQ1A2NF",
+     "01M1N0N1N5N96BSB49J9CTWR6C",
+     "01M1N0N24P2A418BT11HQG689Z"
+    ],
+    "whole_on_the_glass": [
+     "01M1MYZ4JEXA8FB14Z6TQ1A2NF",
+     "01M1N0N1N5N96BSB49J9CTWR6C",
+     "01M1N0N24P2A418BT11HQG689Z"
+    ],
+    "clipped_at_an_edge": {
+     "01M1MYXTD9PFF8FJYW9N70PZPS": 0.984
     },
-    "modules": [
+    "delivery": {},
+    "refusals_on_the_glass": {},
+    "states_on_the_glass": {},
+    "reactions": {},
+    "edited": [],
+    "taken_back": [],
+    "scroll": {
+     "first": 8091,
+     "last": 8095,
+     "of": 8095
+    },
+    "paper": [
+     "01M1N0N24P2A418BT11HQG689Z"
+    ],
+    "paper_whole_on_the_glass": 1,
+    "rows_cost": [
      {
-      "id": "dates",
-      "events": 81,
-      "glance": "3 ahead"
+      "row": 8091,
+      "type": "feeling",
+      "tall": 245,
+      "top": -4
      },
      {
-      "id": "todos",
-      "events": 199,
-      "glance": "10 open · 16 done"
+      "row": 8092,
+      "type": "state_declared",
+      "tall": 31,
+      "top": 241
      },
      {
-      "id": "calendar",
-      "events": 6,
-      "glance": "3 marked · the next in 58 days"
+      "row": 8093,
+      "type": "state_declared",
+      "tall": 31,
+      "top": 272
      },
      {
-      "id": "rituals",
-      "events": 53,
-      "glance": "3 kept · 53 times · the last 9 days ago"
-     },
-     {
-      "id": "shelf",
-      "events": 12,
-      "glance": "2 waiting on you · 6 between you"
+      "row": 8094,
+      "type": "message",
+      "tall": 148,
+      "top": 303
      }
-    ]
+    ],
+    "viewport_tall": 457.7,
+    "composer": "the second one, then",
+    "attaching": false,
+    "replying_to": null,
+    "replies_on_the_glass": {},
+    "editing": null,
+    "anchor": null,
+    "kinds": {
+     "feeling": 1,
+     "state_declared": 2,
+     "message": 1
+    },
+    "folded_in": {
+     "reaction": 0,
+     "message_edit": 0,
+     "message_delete": 0,
+     "read_marker": 0
+    },
+    "partner_typing": true
    },
-   "visible": [],
-   "paper": [],
-   "tears": {},
-   "stocks": {},
-   "scroll": null,
+   "visible": [
+    "01M1MYXTD9PFF8FJYW9N70PZPS",
+    "01M1MYZ4JEXA8FB14Z6TQ1A2NF",
+    "01M1N0N1N5N96BSB49J9CTWR6C",
+    "01M1N0N24P2A418BT11HQG689Z"
+   ],
+   "paper": [
+    "01M1N0N24P2A418BT11HQG689Z"
+   ],
+   "tears": {
+    "01M1MYXTD9PFF8FJYW9N70PZPS": "tear_051",
+    "01M1MYZ4JEXA8FB14Z6TQ1A2NF": "tear_035",
+    "01M1N0N1N5N96BSB49J9CTWR6C": "tear_018",
+    "01M1N0N24P2A418BT11HQG689Z": "tear_040"
+   },
+   "stocks": {
+    "01M1MYXTD9PFF8FJYW9N70PZPS": "lined_03",
+    "01M1MYZ4JEXA8FB14Z6TQ1A2NF": "spiral_04",
+    "01M1N0N1N5N96BSB49J9CTWR6C": "lined_02",
+    "01M1N0N24P2A418BT11HQG689Z": "lined_03"
+   },
+   "scroll": {
+    "first": 8091,
+    "last": 8095,
+    "of": 8095
+   },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 11248,
+   "driven_ms": 13232,
    "seed": 20260903,
-   "events": 14115,
+   "events": 14126,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 7,
+   "masks_composed": 8,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
    "the_smallest_patch_of_a_stock_anything_took": [
-    "index_01 2560x1593",
-    "143x102 of it, at its own size",
-    14669.3229675293
+    "receipt_01 1601x3420",
+    "229x76 of it, at its own size",
+    17295.615137706307
    ],
-   "paper_at_its_own_size": 31923,
-   "paper_stretched_to_fit": 539,
+   "paper_at_its_own_size": 13924,
+   "paper_stretched_to_fit": 232,
    "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 10,
+   "paper_that_arrived_after_the_piece_was_drawn": 87,
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 12,
+   "masks_dropped_to_stay_inside_the_pool": 577,
+   "stocks_held": 10,
+   "stocks_held_bytes": 138299520,
+   "stocks_dropped_to_stay_inside_the_pool": 77,
    "image_cache": {
-    "held": 72,
-    "bytes": 312479072,
+    "held": 26,
+    "bytes": 28625760,
     "budget": 402653184,
-    "live": 62,
+    "live": 24,
     "still_decoding": 0
    },
    "setup_showing": false,
    "fold": {
     "sequence": "unfold_thirds",
     "length": 142,
-    "decoded": 14,
+    "decoded": 24,
     "decoding": 0,
-    "playhead": 140,
-    "held_from": 128,
-    "held_to": 141
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
    },
    "sensation": {
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-11T23:19:24.792Z",
+    "started_at": "2026-09-12T05:41:24.843Z",
     "pattern": [
      {
       "ms": 150,
@@ -396,43 +578,44 @@
     }
    ],
    "the_launch_took": {
-    "the framework": 8,
-    "the library index": 13,
-    "the ink plates": 38,
-    "the desk": 155,
-    "the log": 595,
-    "the first frame": 331,
-    "everything": 1140
+    "the framework": 7,
+    "the library index": 16,
+    "the ink plates": 40,
+    "the desk": 169,
+    "the log": 644,
+    "the first frame": 357,
+    "everything": 1233
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 509,
-    "pushed": 10,
+    "rounds": 3659,
+    "pushed": 14,
     "refused": 0,
-    "pulled": 8,
+    "pulled": 10,
     "blobs_fetched": 0,
-    "faults": 0,
+    "faults": 130,
+    "last_fault": "offline (GET /events)",
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14115,
+    "cursor": 14126,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14115,
-     "our_cursor": 14115,
+     "peer_cursor": 14126,
+     "our_cursor": 14126,
      "last_error": null,
-     "since": "2026-09-11T22:59:28.595Z",
-     "last_contact": "2026-09-11T23:24:52.135Z",
+     "since": "2026-09-12T03:14:43.820Z",
+     "last_contact": "2026-09-12T06:31:42.866Z",
      "certificate": null,
      "setup_address": null
     }
    },
    "ambient": {
-    "standing_line": "restless · week one, and the room smells right again · out · 7 hours ago",
+    "standing_line": "quiet · week one, and the room smells right again · out · 7 hours ago",
     "pocket_feeling": "soup",
     "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
@@ -441,25 +624,33 @@
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
-    "held_by_the_phone": []
+    "held_by_the_phone": [],
+    "what_the_phone_can_hold": {
+     "platform": "a browser",
+     "a_secure_origin": true,
+     "service_worker_offered_by_the_browser": true,
+     "a_worker_is_registered": true,
+     "the_person_has_allowed_it": "unknown",
+     "a_push_manager": false
+    }
    },
    "at": "08_state_propagating",
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2304,
+ "cold_ms": 2378,
  "load": {
-  "ms": 2304,
+  "ms": 2378,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 8,
-   "the library index": 13,
-   "the ink plates": 38,
-   "the desk": 155,
-   "the log": 595,
-   "the first frame": 331,
-   "everything": 1140
+   "the framework": 7,
+   "the library index": 16,
+   "the ink plates": 40,
+   "the desk": 169,
+   "the log": 644,
+   "the first frame": 357,
+   "everything": 1233
   }
  },
  "far": [
@@ -490,6 +681,14 @@
   {
    "line": "feeling soup 0.7",
    "at_frame": 532
+  },
+  {
+   "line": "state mood quiet",
+   "at_frame": 685
+  },
+  {
+   "line": "message the bus is late, dont wait up",
+   "at_frame": 685
   }
  ],
  "arrivals": [
@@ -498,42 +697,49 @@
    "before": 8085,
    "after": 8086,
    "at_frame": 0,
-   "waited_ms": 4528
+   "waited_ms": 5319
   },
   {
    "line": "feeling hold 0.92",
    "before": 8086,
    "after": 8087,
    "at_frame": 16,
-   "waited_ms": 856
+   "waited_ms": 1436
   },
   {
    "line": "message it is raining here too",
    "before": 8087,
    "after": 8088,
    "at_frame": 165,
-   "waited_ms": 369
+   "waited_ms": 2840
   },
   {
    "line": "feeling squeeze 0.6",
    "before": 8088,
    "after": 8089,
    "at_frame": 305,
-   "waited_ms": 1926
+   "waited_ms": 1044
   },
   {
    "line": "feeling here 0.8",
    "before": 8089,
    "after": 8090,
    "at_frame": 376,
-   "waited_ms": 1468
+   "waited_ms": 3795
   },
   {
    "line": "feeling soup 0.7",
-   "before": 8091,
-   "after": 8092,
+   "before": 8090,
+   "after": 8091,
    "at_frame": 532,
-   "waited_ms": 2181
+   "waited_ms": 1298
+  },
+  {
+   "line": "message the bus is late, dont wait up",
+   "before": 8093,
+   "after": 8095,
+   "at_frame": 705,
+   "waited_ms": 2762
   }
  ],
  "problems": [],

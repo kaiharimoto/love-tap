@@ -10,14 +10,15 @@
   "the_densest_handwriting_in_the_set": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
-   "darkest": 54.33,
-   "darkest_beside_a_sheet": 58.67,
-   "ring_pixels": 4044,
+   "darkest": 56.0,
+   "darkest_beside_a_sheet": 57.0,
+   "ring_pixels": 7701,
    "contact_shadow": {
-    "edges": 63,
-    "just_under_a_sheet": 86.7,
-    "further_down_the_desk": 85.45,
-    "darker_by": -1.24
+    "edges": 93,
+    "just_under_a_sheet": 108.69,
+    "further_down_the_desk": 109.09,
+    "darker_by": 0.4,
+    "fibres_walked_off_median_px": 3
    },
    "measured_at": "three times the radius, because the crop is at three times the scale"
   },
@@ -29,154 +30,226 @@
  },
  "stills": {
   "01_pulse.png": {
-   "pixels_darker_than_ink": 701,
-   "beside_the_paper": 0,
+   "pixels_darker_than_ink": 80572,
+   "beside_the_paper": 4720,
    "darkest": 0.0,
-   "darkest_beside_a_sheet": 48.67,
-   "ring_pixels": 186156,
+   "darkest_beside_a_sheet": 15.0,
+   "ring_pixels": 181521,
    "contact_shadow": {
-    "edges": 898,
-    "just_under_a_sheet": 87.96,
-    "further_down_the_desk": 87.79,
-    "darker_by": -0.17
-   },
-   "no_shadow_under_the_paper": true
-  },
-  "02_chat.png": {
-   "pixels_darker_than_ink": 0,
-   "beside_the_paper": 0,
-   "darkest": 34.0,
-   "darkest_beside_a_sheet": 34.0,
-   "ring_pixels": 242622,
-   "contact_shadow": {
-    "edges": 892,
-    "just_under_a_sheet": 85.4,
-    "further_down_the_desk": 88.04,
-    "darker_by": 2.64
-   },
-   "no_shadow_under_the_paper": true
-  },
-  "03_us.png": {
-   "pixels_darker_than_ink": 0,
-   "beside_the_paper": 0,
-   "darkest": 46.0,
-   "darkest_beside_a_sheet": 47.0,
-   "ring_pixels": 258138,
-   "contact_shadow": {
-    "edges": 1186,
-    "just_under_a_sheet": 84.72,
-    "further_down_the_desk": 88.03,
-    "darker_by": 3.32
-   },
-   "no_shadow_under_the_paper": true
-  },
-  "04_moments.png": {
-   "pixels_darker_than_ink": 0,
-   "beside_the_paper": 0,
-   "darkest": 30.33,
-   "darkest_beside_a_sheet": 34.67,
-   "ring_pixels": 331891,
-   "contact_shadow": {
-    "edges": 632,
-    "just_under_a_sheet": 89.25,
-    "further_down_the_desk": 87.62,
-    "darker_by": -1.64
-   },
-   "no_shadow_under_the_paper": true
-  },
-  "05_settings.png": {
-   "pixels_darker_than_ink": 2124,
-   "beside_the_paper": 130,
-   "darkest": 0.0,
-   "darkest_beside_a_sheet": 0.0,
-   "ring_pixels": 176472,
-   "contact_shadow": {
-    "edges": 1040,
-    "just_under_a_sheet": 79.39,
-    "further_down_the_desk": 87.76,
-    "darker_by": 8.38
+    "edges": 781,
+    "just_under_a_sheet": 75.2,
+    "further_down_the_desk": 88.09,
+    "darker_by": 12.88,
+    "fibres_walked_off_median_px": 3
    },
    "worst_at": [
-    986,
-    2941
+    960,
+    2668
    ],
    "spread": [
-    953,
-    2941,
-    1037,
-    2942
+    99,
+    2504,
+    1057,
+    2883
    ]
   },
-  "10_first_run.png": {
-   "pixels_darker_than_ink": 0,
-   "beside_the_paper": 0,
-   "darkest": 46.0,
-   "darkest_beside_a_sheet": 48.0,
-   "ring_pixels": 120870,
+  "02_chat.png": {
+   "pixels_darker_than_ink": 3917,
+   "beside_the_paper": 2743,
+   "darkest": 16.0,
+   "darkest_beside_a_sheet": 16.0,
+   "ring_pixels": 225045,
    "contact_shadow": {
-    "edges": 826,
-    "just_under_a_sheet": 80.5,
-    "further_down_the_desk": 87.35,
-    "darker_by": 6.85
+    "edges": 1362,
+    "just_under_a_sheet": 73.11,
+    "further_down_the_desk": 87.65,
+    "darker_by": 14.54,
+    "fibres_walked_off_median_px": 3
+   },
+   "worst_at": [
+    638,
+    2799
+   ],
+   "spread": [
+    162,
+    2440,
+    1382,
+    2825
+   ]
+  },
+  "03_us.png": {
+   "pixels_darker_than_ink": 81,
+   "beside_the_paper": 1,
+   "darkest": 25.0,
+   "darkest_beside_a_sheet": 29.0,
+   "ring_pixels": 306945,
+   "contact_shadow": {
+    "edges": 1926,
+    "just_under_a_sheet": 72.16,
+    "further_down_the_desk": 86.85,
+    "darker_by": 14.69,
+    "fibres_walked_off_median_px": 1
+   },
+   "worst_at": [
+    1337,
+    2415
+   ],
+   "spread": [
+    1337,
+    2415,
+    1337,
+    2415
+   ]
+  },
+  "04_moments.png": {
+   "pixels_darker_than_ink": 3,
+   "beside_the_paper": 0,
+   "darkest": 29.0,
+   "darkest_beside_a_sheet": 32.0,
+   "ring_pixels": 345539,
+   "contact_shadow": {
+    "edges": 793,
+    "just_under_a_sheet": 72.84,
+    "further_down_the_desk": 85.31,
+    "darker_by": 12.47,
+    "fibres_walked_off_median_px": 3
    }
   },
-  "12_search.png": {
+  "05_settings.png": {
    "pixels_darker_than_ink": 0,
    "beside_the_paper": 0,
-   "darkest": 36.67,
-   "darkest_beside_a_sheet": 39.0,
-   "ring_pixels": 394650,
+   "darkest": 36.33,
+   "darkest_beside_a_sheet": 40.0,
+   "ring_pixels": 181575,
    "contact_shadow": {
-    "edges": 800,
-    "just_under_a_sheet": 87.5,
-    "further_down_the_desk": 87.55,
-    "darker_by": 0.05
+    "edges": 1002,
+    "just_under_a_sheet": 73.01,
+    "further_down_the_desk": 88.29,
+    "darker_by": 15.28,
+    "fibres_walked_off_median_px": 1
+   }
+  },
+  "10_first_run.png": {
+   "pixels_darker_than_ink": 3917,
+   "beside_the_paper": 2743,
+   "darkest": 16.0,
+   "darkest_beside_a_sheet": 16.0,
+   "ring_pixels": 139653,
+   "contact_shadow": {
+    "edges": 808,
+    "just_under_a_sheet": 71.88,
+    "further_down_the_desk": 88.16,
+    "darker_by": 16.28,
+    "fibres_walked_off_median_px": 4
    },
-   "no_shadow_under_the_paper": true
+   "worst_at": [
+    638,
+    2799
+   ],
+   "spread": [
+    162,
+    2440,
+    1382,
+    2825
+   ]
+  },
+  "12_search.png": {
+   "pixels_darker_than_ink": 1383,
+   "beside_the_paper": 1112,
+   "darkest": 17.33,
+   "darkest_beside_a_sheet": 17.33,
+   "ring_pixels": 335691,
+   "contact_shadow": {
+    "edges": 1246,
+    "just_under_a_sheet": 73.3,
+    "further_down_the_desk": 87.42,
+    "darker_by": 14.12,
+    "fibres_walked_off_median_px": 2
+   },
+   "worst_at": [
+    610,
+    650
+   ],
+   "spread": [
+    239,
+    624,
+    1358,
+    658
+   ]
   },
   "13_messenger_states.png": {
-   "pixels_darker_than_ink": 0,
-   "beside_the_paper": 0,
-   "darkest": 46.0,
-   "darkest_beside_a_sheet": 48.0,
-   "ring_pixels": 243648,
+   "pixels_darker_than_ink": 3446,
+   "beside_the_paper": 2466,
+   "darkest": 16.0,
+   "darkest_beside_a_sheet": 16.0,
+   "ring_pixels": 176139,
    "contact_shadow": {
-    "edges": 1266,
-    "just_under_a_sheet": 85.96,
-    "further_down_the_desk": 86.75,
-    "darker_by": 0.79
+    "edges": 1062,
+    "just_under_a_sheet": 66.99,
+    "further_down_the_desk": 86.42,
+    "darker_by": 19.43,
+    "fibres_walked_off_median_px": 3
    },
-   "no_shadow_under_the_paper": true
+   "worst_at": [
+    638,
+    2801
+   ],
+   "spread": [
+    61,
+    1919,
+    1383,
+    2824
+   ]
   },
   "14_media_viewer.png": {
-   "pixels_darker_than_ink": 0,
-   "beside_the_paper": 0,
-   "darkest": 41.33,
-   "darkest_beside_a_sheet": 48.67,
-   "ring_pixels": 122697,
+   "pixels_darker_than_ink": 34,
+   "beside_the_paper": 1,
+   "darkest": 26.0,
+   "darkest_beside_a_sheet": 29.33,
+   "ring_pixels": 150003,
    "contact_shadow": {
-    "edges": 754,
-    "just_under_a_sheet": 103.08,
-    "further_down_the_desk": 106.9,
-    "darker_by": 3.82
+    "edges": 1130,
+    "just_under_a_sheet": 84.29,
+    "further_down_the_desk": 96.94,
+    "darker_by": 12.65,
+    "fibres_walked_off_median_px": 5
    },
-   "no_shadow_under_the_paper": true
+   "worst_at": [
+    959,
+    2073
+   ],
+   "spread": [
+    959,
+    2073,
+    959,
+    2073
+   ]
   },
   "17_setup_pwa.png": {
-   "pixels_darker_than_ink": 0,
-   "beside_the_paper": 0,
-   "darkest": 47.67,
-   "darkest_beside_a_sheet": 48.33,
-   "ring_pixels": 242855,
+   "pixels_darker_than_ink": 7,
+   "beside_the_paper": 5,
+   "darkest": 29.0,
+   "darkest_beside_a_sheet": 29.0,
+   "ring_pixels": 165393,
    "contact_shadow": {
-    "edges": 2200,
-    "just_under_a_sheet": 84.82,
-    "further_down_the_desk": 87.43,
-    "darker_by": 2.61
+    "edges": 1128,
+    "just_under_a_sheet": 78.04,
+    "further_down_the_desk": 88.16,
+    "darker_by": 10.11,
+    "fibres_walked_off_median_px": 5
    },
-   "no_shadow_under_the_paper": true
+   "worst_at": [
+    1319,
+    520
+   ],
+   "spread": [
+    1319,
+    515,
+    1319,
+    521
+   ]
   }
  },
  "ok": false,
- "stills_with_a_hole_in_them": 8
+ "stills_with_a_hole_in_them": 5
 }

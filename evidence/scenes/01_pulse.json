@@ -1,10 +1,10 @@
 {
  "name": "01_pulse",
  "viewport": {
-  "width": 360,
-  "height": 780,
-  "dpr": 4,
-  "why": "360 by 780 of CSS at four times scale: a 1440 by 3120 Android, which is a phone somebody owns. The stills were shot at 480 by 1040 at three times scale \u2014 the same 1440 by 3120 the brief asks for, but laid out at a logical width no phone has and 120 points wider than every clip in the set. A coherence critic found what that hid: two Us rows that read fully at 480 truncate to 'the second one \u00b7 the\u2026' and 'tape the gap in the bac\u2026' at the clip's width, and the calendar glance wraps into a line the card cuts. Same pixels, same minimum, same layout width as the clips and as the phone."
+  "width": 480,
+  "height": 1040,
+  "dpr": 3,
+  "why": "480 by 1040 of CSS at three times scale. Shooting these at 360 by 780 at four times scale was tried for one capture \u2014 same 1440 by 3120, and a width both phones actually have \u2014 and it broke the hero: the brief asks for at least eight notes visible in 02_chat.png with no tear id repeated, and a 360 point thread has a 501 point viewport that holds four. At 480 it holds eight, five of them on torn sheets, five distinct. The phone's width is where the five clips are shot and is what found the truncations and the wrong module row costs this cycle \u2014 those fixes all stay \u2014 but the still that the material row is judged on at three hundred per cent has to hold what the brief asks it to hold."
  },
  "settle": 700,
  "log": "evidence/logs/01_pulse.json",

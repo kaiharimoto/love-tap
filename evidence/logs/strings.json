@@ -363,22 +363,22 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:488",
+   "where": "app/lib/feelings/corner.dart:491",
    "text": "family_${f.name}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:512",
+   "where": "app/lib/feelings/corner.dart:515",
    "text": "fan.${family.name}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/landing.dart:466",
+   "where": "app/lib/feelings/landing.dart:469",
    "text": "landing.${arrival.feeling.id}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/landing.dart:479",
+   "where": "app/lib/feelings/landing.dart:482",
    "text": " : ",
    "in_a_display_position": false
   },
@@ -543,37 +543,37 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:51",
+   "where": "app/lib/modules/calendar/calendar_module.dart:58",
    "text": "nothing marked",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:54",
+   "where": "app/lib/modules/calendar/calendar_module.dart:61",
    "text": "in $days days",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:55",
+   "where": "app/lib/modules/calendar/calendar_module.dart:62",
    "text": "${next.length} marked \u00b7 the next $soon",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:114",
+   "where": "app/lib/modules/calendar/calendar_module.dart:121",
    "text": "no dates that matter yet. add the first.",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:124",
+   "where": "app/lib/modules/calendar/calendar_module.dart:131",
    "text": "d MMM",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:172",
+   "where": "app/lib/modules/calendar/calendar_module.dart:179",
    "text": "d MMM y",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/calendar/calendar_module.dart:184",
+   "where": "app/lib/modules/calendar/calendar_module.dart:191",
    "text": "${m.yearsAt(next!)} years",
    "in_a_display_position": true
   },
@@ -643,27 +643,27 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/dates/dates_module.dart:60",
+   "where": "app/lib/modules/dates/dates_module.dart:67",
    "text": "${upcoming.length} ahead",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/dates/dates_module.dart:61",
+   "where": "app/lib/modules/dates/dates_module.dart:68",
    "text": "${upcoming.length} ahead \u00b7 the next $when",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/dates/dates_module.dart:64",
+   "where": "app/lib/modules/dates/dates_module.dart:71",
    "text": "nothing planned",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/dates/dates_module.dart:64",
+   "where": "app/lib/modules/dates/dates_module.dart:71",
    "text": "nothing ahead \u00b7 $done behind you",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/dates/dates_module.dart:119",
+   "where": "app/lib/modules/dates/dates_module.dart:126",
    "text": " \u00b7 ",
    "in_a_display_position": false
   },
@@ -708,32 +708,32 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:51",
+   "where": "app/lib/modules/rituals/rituals_module.dart:58",
    "text": "nothing kept yet",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:54",
+   "where": "app/lib/modules/rituals/rituals_module.dart:61",
    "text": "nothing kept yet",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:57",
+   "where": "app/lib/modules/rituals/rituals_module.dart:64",
    "text": "$days days ago",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:58",
+   "where": "app/lib/modules/rituals/rituals_module.dart:65",
    "text": "${recent.length} kept \u00b7 $marks times \u00b7 the last $lately",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:101",
+   "where": "app/lib/modules/rituals/rituals_module.dart:108",
    "text": "nothing kept yet.",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:114",
+   "where": "app/lib/modules/rituals/rituals_module.dart:121",
    "text": "${r.marks.length} times",
    "in_a_display_position": false
   },
@@ -743,52 +743,52 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:56",
+   "where": "app/lib/modules/shelf/shelf_module.dart:63",
    "text": "nothing passed on yet",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:58",
+   "where": "app/lib/modules/shelf/shelf_module.dart:65",
    "text": "${things.length} between you",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:59",
+   "where": "app/lib/modules/shelf/shelf_module.dart:66",
    "text": "$waiting waiting on you \u00b7 ${things.length} between you",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:113",
+   "where": "app/lib/modules/shelf/shelf_module.dart:120",
    "text": "nothing passed between you yet.",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:154",
+   "where": "app/lib/modules/shelf/shelf_module.dart:161",
    "text": "not started",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:154",
+   "where": "app/lib/modules/shelf/shelf_module.dart:161",
    "text": "they have not started it",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:155",
+   "where": "app/lib/modules/shelf/shelf_module.dart:162",
    "text": "part way in",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:155",
+   "where": "app/lib/modules/shelf/shelf_module.dart:162",
    "text": "they are part way in",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:156",
+   "where": "app/lib/modules/shelf/shelf_module.dart:163",
    "text": "they finished it",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:191",
+   "where": "app/lib/modules/shelf/shelf_module.dart:198",
    "text": "${thing.from!.name} passed it on \u00b7 $where",
    "in_a_display_position": false
   },
@@ -853,42 +853,42 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:53",
+   "where": "app/lib/modules/todos/todos_module.dart:60",
    "text": "nothing to do",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:54",
+   "where": "app/lib/modules/todos/todos_module.dart:61",
    "text": "all ${all.length} done",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:55",
+   "where": "app/lib/modules/todos/todos_module.dart:62",
    "text": "$open open \u00b7 ${all.length - open} done",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:127",
+   "where": "app/lib/modules/todos/todos_module.dart:134",
    "text": "nothing to do. suspicious.",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:136",
+   "where": "app/lib/modules/todos/todos_module.dart:143",
    "text": "add one",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:140",
+   "where": "app/lib/modules/todos/todos_module.dart:147",
    "text": "nothing to do. suspicious.",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:153",
+   "where": "app/lib/modules/todos/todos_module.dart:160",
    "text": "what needs doing",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/todos/todos_module.dart:158",
+   "where": "app/lib/modules/todos/todos_module.dart:165",
    "text": "todo_${DateTime.now().microsecondsSinceEpoch.toRadixString(36)}",
    "in_a_display_position": false
   },

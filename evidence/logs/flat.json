@@ -18,14 +18,14 @@
  "quiet_is_not_flat": "windows_quieter_than_2 is what this check used to gate on, kept because four cycles of reports carry it. It is not a fault: receipt stock's own median window is under it, and the 05_settings windows it names are lined writing paper with its tooth plainly in the crop.",
  "stills": {
   "01_pulse.png": {
-   "flattest": 1.613,
+   "flattest": 2.407,
    "where": [
-    760,
-    560
+    600,
+    1000
    ],
-   "pale_windows": 1197,
+   "pale_windows": 1246,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 1,
+   "windows_quieter_than_2": 0,
    "worst_few": [],
    "flat_areas": [],
    "flat_px": 0,
@@ -33,29 +33,55 @@
    "sheets_with_no_paper_on_them": []
   },
   "02_chat.png": {
-   "flattest": 4.731,
+   "flattest": 3.661,
+   "where": [
+    720,
+    3000
+   ],
+   "pale_windows": 991,
+   "windows_under_the_floor": 0,
+   "windows_quieter_than_2": 0,
+   "worst_few": [],
+   "flat_areas": [
+    {
+     "area_px": 2016,
+     "box": [
+      376,
+      411,
+      451,
+      463
+     ],
+     "luma": 225.2,
+     "rgb": "#E8E1CF",
+     "a_sheet_with_no_paper_on_it": "Paper.underside"
+    }
+   ],
+   "flat_px": 2016,
+   "flat_share_of_the_frame": 0.0004,
+   "sheets_with_no_paper_on_them": [
+    {
+     "area_px": 2016,
+     "box": [
+      376,
+      411,
+      451,
+      463
+     ],
+     "luma": 225.2,
+     "rgb": "#E8E1CF",
+     "a_sheet_with_no_paper_on_it": "Paper.underside"
+    }
+   ]
+  },
+  "03_us.png": {
+   "flattest": 1.419,
    "where": [
     1040,
     1600
    ],
-   "pale_windows": 1009,
+   "pale_windows": 839,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 0,
-   "worst_few": [],
-   "flat_areas": [],
-   "flat_px": 0,
-   "flat_share_of_the_frame": 0.0,
-   "sheets_with_no_paper_on_them": []
-  },
-  "03_us.png": {
-   "flattest": 1.359,
-   "where": [
-    440,
-    1400
-   ],
-   "pale_windows": 705,
-   "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 34,
+   "windows_quieter_than_2": 56,
    "worst_few": [],
    "flat_areas": [],
    "flat_px": 0,
@@ -63,69 +89,117 @@
    "sheets_with_no_paper_on_them": []
   },
   "04_moments.png": {
-   "flattest": 4.912,
+   "flattest": 3.661,
    "where": [
-    1280,
-    80
+    720,
+    3000
    ],
-   "pale_windows": 332,
+   "pale_windows": 335,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
-   "worst_few": [],
-   "flat_areas": [
-    {
-     "area_px": 2538,
-     "box": [
-      754,
-      619,
-      875,
-      702
-     ],
-     "luma": 243.7,
-     "rgb": "#F5F4ED",
-     "a_sheet_with_no_paper_on_it": null
-    },
-    {
-     "area_px": 2412,
-     "box": [
-      841,
-      545,
-      931,
-      675
-     ],
-     "luma": 243.7,
-     "rgb": "#F5F4ED",
-     "a_sheet_with_no_paper_on_it": null
-    }
-   ],
-   "flat_px": 4950,
-   "flat_share_of_the_frame": 0.0011,
-   "sheets_with_no_paper_on_them": []
-  },
-  "05_settings.png": {
-   "flattest": 1.279,
-   "where": [
-    1200,
-    680
-   ],
-   "pale_windows": 1802,
-   "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 57,
    "worst_few": [],
    "flat_areas": [],
    "flat_px": 0,
    "flat_share_of_the_frame": 0.0,
    "sheets_with_no_paper_on_them": []
   },
-  "10_first_run.png": {
-   "flattest": 1.205,
+  "05_settings.png": {
+   "flattest": 1.067,
    "where": [
-    1120,
-    1320
+    1080,
+    2680
    ],
-   "pale_windows": 487,
+   "pale_windows": 1548,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 20,
+   "windows_quieter_than_2": 345,
+   "worst_few": [],
+   "flat_areas": [
+    {
+     "area_px": 5320,
+     "box": [
+      1106,
+      2648,
+      1271,
+      2762
+     ],
+     "luma": 230.3,
+     "rgb": "#EAE6DE",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 4266,
+     "box": [
+      898,
+      2802,
+      1063,
+      2881
+     ],
+     "luma": 229.3,
+     "rgb": "#E9E5DD",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 2866,
+     "box": [
+      1062,
+      2785,
+      1180,
+      2867
+     ],
+     "luma": 230.3,
+     "rgb": "#EAE6DE",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 2372,
+     "box": [
+      1000,
+      2705,
+      1118,
+      2770
+     ],
+     "luma": 229.3,
+     "rgb": "#E9E5DD",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 2259,
+     "box": [
+      187,
+      2627,
+      280,
+      2698
+     ],
+     "luma": 230.3,
+     "rgb": "#E9E6E1",
+     "a_sheet_with_no_paper_on_it": null
+    },
+    {
+     "area_px": 2149,
+     "box": [
+      521,
+      2703,
+      615,
+      2760
+     ],
+     "luma": 229.6,
+     "rgb": "#E7E6DD",
+     "a_sheet_with_no_paper_on_it": null
+    }
+   ],
+   "flat_px": 19232,
+   "flat_share_of_the_frame": 0.0043,
+   "sheets_with_no_paper_on_them": []
+  },
+  "10_first_run.png": {
+   "flattest": 1.313,
+   "where": [
+    1080,
+    1120
+   ],
+   "pale_windows": 696,
+   "windows_under_the_floor": 0,
+   "windows_quieter_than_2": 3,
    "worst_few": [],
    "flat_areas": [],
    "flat_px": 0,
@@ -133,12 +207,27 @@
    "sheets_with_no_paper_on_them": []
   },
   "12_search.png": {
-   "flattest": 4.912,
+   "flattest": 1.365,
    "where": [
-    1280,
-    80
+    1080,
+    560
    ],
-   "pale_windows": 1267,
+   "pale_windows": 817,
+   "windows_under_the_floor": 0,
+   "windows_quieter_than_2": 2,
+   "worst_few": [],
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
+   "sheets_with_no_paper_on_them": []
+  },
+  "13_messenger_states.png": {
+   "flattest": 3.661,
+   "where": [
+    720,
+    3000
+   ],
+   "pale_windows": 1259,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
    "worst_few": [],
@@ -147,140 +236,125 @@
    "flat_share_of_the_frame": 0.0,
    "sheets_with_no_paper_on_them": []
   },
-  "13_messenger_states.png": {
-   "flattest": 1.73,
-   "where": [
-    800,
-    1680
-   ],
-   "pale_windows": 1185,
-   "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 4,
-   "worst_few": [],
-   "flat_areas": [],
-   "flat_px": 0,
-   "flat_share_of_the_frame": 0.0,
-   "sheets_with_no_paper_on_them": []
-  },
   "14_media_viewer.png": {
-   "flattest": 0.877,
+   "flattest": 4.933,
    "where": [
-    80,
-    720
+    1280,
+    120
    ],
-   "pale_windows": 282,
+   "pale_windows": 431,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 2,
+   "windows_quieter_than_2": 0,
    "worst_few": [],
    "flat_areas": [
     {
-     "area_px": 257894,
+     "area_px": 135872,
      "box": [
-      44,
-      492,
-      1205,
-      818
+      223,
+      655,
+      1049,
+      897
      ],
      "luma": 230.2,
      "rgb": "#E6E6E9",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 120987,
+     "area_px": 57934,
      "box": [
-      727,
-      363,
-      1385,
-      815
+      734,
+      560,
+      1207,
+      851
      ],
      "luma": 225.9,
      "rgb": "#DFE2E9",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 65308,
+     "area_px": 27430,
      "box": [
-      42,
-      266,
-      727,
-      481
+      222,
+      490,
+      658,
+      632
      ],
-     "luma": 226.6,
-     "rgb": "#E2E2EA",
+     "luma": 226.1,
+     "rgb": "#E1E2E7",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 52305,
+     "area_px": 26045,
      "box": [
-      915,
-      259,
-      1382,
-      473
+      954,
+      484,
+      1205,
+      640
      ],
      "luma": 219.0,
      "rgb": "#D8DBE4",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 43973,
+     "area_px": 23416,
      "box": [
-      43,
-      360,
-      473,
-      543
+      222,
+      558,
+      535,
+      671
      ],
      "luma": 229.1,
      "rgb": "#E4E5EA",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 15299,
+     "area_px": 6604,
      "box": [
-      1043,
-      350,
-      1383,
-      546
+      1020,
+      572,
+      1206,
+      692
      ],
      "luma": 222.9,
      "rgb": "#DCDFE6",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 9122,
+     "area_px": 4284,
      "box": [
-      1050,
-      414,
-      1283,
-      536
+      976,
+      600,
+      1132,
+      686
      ],
      "luma": 224.9,
      "rgb": "#DEE1E8",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 4892,
+     "area_px": 2392,
      "box": [
-      867,
-      263,
-      999,
-      360
+      1016,
+      846,
+      1207,
+      873
      ],
-     "luma": 222.9,
-     "rgb": "#DCDFE6",
+     "luma": 227.8,
+     "rgb": "#E4E4E1",
      "a_sheet_with_no_paper_on_it": null
     }
    ],
-   "flat_px": 583016,
-   "flat_share_of_the_frame": 0.1298,
+   "flat_px": 286089,
+   "flat_share_of_the_frame": 0.0637,
    "sheets_with_no_paper_on_them": []
   },
   "17_setup_pwa.png": {
-   "flattest": 5.165,
+   "flattest": 3.661,
    "where": [
-    1200,
-    640
+    720,
+    3000
    ],
-   "pale_windows": 1628,
+   "pale_windows": 1429,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
    "worst_few": [],
@@ -290,6 +364,6 @@
    "sheets_with_no_paper_on_them": []
   }
  },
- "ok": true,
- "files_with_a_flat_fill": 0
+ "ok": false,
+ "files_with_a_flat_fill": 1
 }

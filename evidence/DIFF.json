@@ -1,8 +1,8 @@
 {
- "commit": "92fbec7",
+ "commit": "a3f56f8",
  "baseline": {
   "dir": "evidence/.previous",
-  "captured_at": "2026-09-10T17:29:30Z",
+  "captured_at": "2026-09-11T21:04:14Z",
   "note": "the numbers below were measured against the capture that was in this directory when the run started; if the run rotated, the directory now holds this capture instead. Each row names the hash and the time of the file it was measured against."
  },
  "unchanged_at": 0.999,
@@ -11,82 +11,82 @@
   {
    "artifact": "01_pulse.png",
    "label": "changed",
-   "ssim": 0.9659,
+   "ssim": 0.5094,
    "judgement": null,
-   "sha": "808b56ea3fc0a53b",
-   "previous_sha": "d1074ddaf85d5b1c",
-   "previous_written": "2026-09-10T17:40:36Z",
-   "label_basis": "ssim 0.9659, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "e05c4f9c3f37eaf1",
+   "previous_sha": "808b56ea3fc0a53b",
+   "previous_written": "2026-09-11T21:16:41Z",
+   "label_basis": "ssim 0.5094, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "02_chat.png",
    "label": "changed",
-   "ssim": 0.9324,
+   "ssim": 0.5045,
    "judgement": null,
-   "sha": "ace92ab238f187ab",
-   "previous_sha": "6a371f422e9ce5d2",
-   "previous_written": "2026-09-10T17:42:47Z",
-   "label_basis": "ssim 0.9324, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "28e77201e74c9465",
+   "previous_sha": "ace92ab238f187ab",
+   "previous_written": "2026-09-11T21:19:48Z",
+   "label_basis": "ssim 0.5045, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "03_us.png",
    "label": "changed",
-   "ssim": 0.9539,
+   "ssim": 0.5285,
    "judgement": null,
-   "sha": "7b4ff379bbb37a87",
-   "previous_sha": "37fac064241219a9",
-   "previous_written": "2026-09-10T17:43:03Z",
-   "label_basis": "ssim 0.9539, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "2c5b2862fdbf9a87",
+   "previous_sha": "7b4ff379bbb37a87",
+   "previous_written": "2026-09-11T21:20:10Z",
+   "label_basis": "ssim 0.5285, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "04_moments.png",
    "label": "changed",
-   "ssim": 0.8674,
+   "ssim": 0.4425,
    "judgement": null,
-   "sha": "c49ca72dfe81f375",
-   "previous_sha": "14ada69da204dd6c",
-   "previous_written": "2026-09-10T17:43:35Z",
-   "label_basis": "ssim 0.8674, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "d35991847452219e",
+   "previous_sha": "c49ca72dfe81f375",
+   "previous_written": "2026-09-11T21:22:17Z",
+   "label_basis": "ssim 0.4425, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "05_settings.png",
    "label": "changed",
-   "ssim": 0.9806,
+   "ssim": 0.5508,
    "judgement": null,
-   "sha": "339123cc1d2293e5",
-   "previous_sha": "d996f46a09124aa0",
-   "previous_written": "2026-09-10T17:43:52Z",
-   "label_basis": "ssim 0.9806, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "51605f9b85f30837",
+   "previous_sha": "339123cc1d2293e5",
+   "previous_written": "2026-09-11T21:23:03Z",
+   "label_basis": "ssim 0.5508, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "changed",
-   "ssim": 0.7568,
+   "ssim": 0.8311,
    "judgement": null,
-   "sha": "3a4aa17d4bc1d14c",
-   "previous_sha": "c4c9fb8a24649eaa",
-   "previous_written": "2026-09-10T18:43:45Z",
-   "label_basis": "ssim 0.7568, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "9b74aa4589602bde",
+   "previous_sha": "3a4aa17d4bc1d14c",
+   "previous_written": "2026-09-11T22:54:52Z",
+   "label_basis": "ssim 0.8311, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "changed",
-   "ssim": 0.9356,
+   "ssim": 0.8816,
    "judgement": null,
-   "sha": "548c2e66987b08d3",
-   "previous_sha": "f28974f12f9008a9",
-   "previous_written": "2026-09-10T18:47:52Z",
-   "label_basis": "ssim 0.9356, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "daf06f58551a6ddf",
+   "previous_sha": "548c2e66987b08d3",
+   "previous_written": "2026-09-11T22:59:24Z",
+   "label_basis": "ssim 0.8816, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
-   "ssim": 0.7161,
+   "ssim": 0.8556,
    "judgement": null,
-   "sha": "1ad6edcba37d51ca",
-   "previous_sha": "38959a27828e5a58",
-   "previous_written": "2026-09-10T19:14:10Z",
-   "label_basis": "ssim 0.7161, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "0de2a483cf482bd8",
+   "previous_sha": "1ad6edcba37d51ca",
+   "previous_written": "2026-09-11T23:25:32Z",
+   "label_basis": "ssim 0.8556, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "09_two_devices.png",
@@ -98,62 +98,62 @@
   {
    "artifact": "10_first_run.png",
    "label": "changed",
-   "ssim": 0.9558,
+   "ssim": 0.7536,
    "judgement": null,
-   "sha": "cb99ba3c2db1c563",
-   "previous_sha": "5a2a5d913fc21c2b",
-   "previous_written": "2026-09-10T17:48:04Z",
-   "label_basis": "ssim 0.9558, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "2eef68769e50b16c",
+   "previous_sha": "cb99ba3c2db1c563",
+   "previous_written": "2026-09-11T21:30:20Z",
+   "label_basis": "ssim 0.7536, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "changed",
-   "ssim": 0.9022,
+   "ssim": 0.9014,
    "judgement": null,
-   "sha": "f5a25ba26b84725e",
-   "previous_sha": "06f83ae2411e47e7",
-   "previous_written": "2026-09-10T18:46:03Z",
-   "label_basis": "ssim 0.9022, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "b3569b83997a4a75",
+   "previous_sha": "f5a25ba26b84725e",
+   "previous_written": "2026-09-11T22:57:20Z",
+   "label_basis": "ssim 0.9014, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "12_search.png",
    "label": "changed",
-   "ssim": 0.8936,
+   "ssim": 0.4644,
    "judgement": null,
-   "sha": "b4af07176c298b29",
-   "previous_sha": "7dda2dd6fb238170",
-   "previous_written": "2026-09-10T17:44:16Z",
-   "label_basis": "ssim 0.8936, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "221ddc11e9133b3f",
+   "previous_sha": "b4af07176c298b29",
+   "previous_written": "2026-09-11T21:23:59Z",
+   "label_basis": "ssim 0.4644, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "changed",
-   "ssim": 0.6159,
+   "ssim": 0.5462,
    "judgement": null,
-   "sha": "bf60c944f4530cf9",
-   "previous_sha": "6077843ce191c461",
-   "previous_written": "2026-09-10T17:45:37Z",
-   "label_basis": "ssim 0.6159, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "a7d8e134fa155ccd",
+   "previous_sha": "bf60c944f4530cf9",
+   "previous_written": "2026-09-11T21:25:59Z",
+   "label_basis": "ssim 0.5462, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "changed",
-   "ssim": 0.9437,
+   "ssim": 0.6696,
    "judgement": null,
-   "sha": "df4656d43df02820",
-   "previous_sha": "515a10ab274e21ca",
-   "previous_written": "2026-09-10T17:46:10Z",
-   "label_basis": "ssim 0.9437, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "c891c90f00c60fd2",
+   "previous_sha": "df4656d43df02820",
+   "previous_written": "2026-09-11T21:27:07Z",
+   "label_basis": "ssim 0.6696, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "changed",
-   "ssim": 0.9377,
+   "ssim": 0.67,
    "judgement": null,
-   "sha": "16181526c151eee8",
-   "previous_sha": "b60594799f3f1464",
-   "previous_written": "2026-09-10T18:47:52Z",
-   "label_basis": "ssim 0.9377, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "8475e9b2d01b1026",
+   "previous_sha": "16181526c151eee8",
+   "previous_written": "2026-09-11T22:59:25Z",
+   "label_basis": "ssim 0.67, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "16_setup_android.png",
@@ -165,12 +165,12 @@
   {
    "artifact": "17_setup_pwa.png",
    "label": "changed",
-   "ssim": 0.6289,
+   "ssim": 0.4993,
    "judgement": null,
-   "sha": "4ad52a9fc9be9fa8",
-   "previous_sha": "4d0306f70e36a94a",
-   "previous_written": "2026-09-10T17:48:14Z",
-   "label_basis": "ssim 0.6289, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "3b1c782ff3a2fa06",
+   "previous_sha": "4ad52a9fc9be9fa8",
+   "previous_written": "2026-09-11T21:30:30Z",
+   "label_basis": "ssim 0.4993, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   }
  ],
  "counts": {
