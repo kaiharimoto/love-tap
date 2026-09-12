@@ -3,25 +3,19 @@
  "view": {
   "region": "chat",
   "visible": [
-   "0003Q7ZA889ZSTG6VMHJVJFHT1",
-   "0003QA7RKRXKZXQ520J53ZA6NH",
-   "0003QAG55G2WRH653W9JT6BKCB",
-   "0003QAK0Z0AMFM503Z3PA4E6JE"
+   "0003PJ6N98X1V3JYGZAJF4SKPN",
+   "0003PJ9MZR7CX1G5978YZ64T4S",
+   "0003PT796GP5KB4BYJMKTRJ80Y"
   ],
   "whole_on_the_glass": [
-   "0003QA7RKRXKZXQ520J53ZA6NH",
-   "0003QAG55G2WRH653W9JT6BKCB"
+   "0003PJ9MZR7CX1G5978YZ64T4S"
   ],
   "clipped_at_an_edge": {
-   "0003Q7ZA889ZSTG6VMHJVJFHT1": 0.481,
-   "0003QAK0Z0AMFM503Z3PA4E6JE": 0.185
+   "0003PJ6N98X1V3JYGZAJF4SKPN": 0.241,
+   "0003PT796GP5KB4BYJMKTRJ80Y": 0.888
   },
   "delivery": {
-   "0003Q7ZA889ZSTG6VMHJVJFHT1": {
-    "state": "read",
-    "says": "read"
-   },
-   "0003QAG55G2WRH653W9JT6BKCB": {
+   "0003PJ9MZR7CX1G5978YZ64T4S": {
     "state": "read",
     "says": "read"
    }
@@ -30,98 +24,90 @@
   "states_on_the_glass": {
    "read": 1
   },
-  "reactions": {},
+  "reactions": {
+   "0003PT796GP5KB4BYJMKTRJ80Y": 1
+  },
   "edited": [],
   "taken_back": [],
   "scroll": {
-   "first": 5183,
-   "last": 5186,
-   "of": 8082
+   "first": 5177,
+   "last": 5179,
+   "of": 8071
   },
   "paper": [
-   "0003Q7ZA889ZSTG6VMHJVJFHT1",
-   "0003QA7RKRXKZXQ520J53ZA6NH",
-   "0003QAG55G2WRH653W9JT6BKCB",
-   "0003QAK0Z0AMFM503Z3PA4E6JE"
+   "0003PJ6N98X1V3JYGZAJF4SKPN",
+   "0003PJ9MZR7CX1G5978YZ64T4S",
+   "0003PT796GP5KB4BYJMKTRJ80Y"
   ],
   "paper_whole_on_the_glass": 2,
   "rows_cost": [
    {
-    "row": 5183,
+    "row": 5177,
     "type": "message",
-    "tall": 337,
-    "top": -175
+    "tall": 108,
+    "top": -82
    },
    {
-    "row": 5184,
+    "row": 5178,
     "type": "message",
-    "tall": 111,
-    "top": 162
+    "tall": 91,
+    "top": 26
    },
    {
-    "row": 5185,
-    "type": "message",
-    "tall": 167,
-    "top": 273
-   },
-   {
-    "row": 5186,
-    "type": "message",
-    "tall": 96,
-    "top": 440
+    "row": 5179,
+    "type": "photo",
+    "tall": 433,
+    "top": 117
    }
   ],
-  "viewport_tall": 457.7,
-  "composer": "the second one, then",
+  "viewport_tall": 501.4,
+  "composer": "",
   "attaching": false,
   "replying_to": null,
   "replies_on_the_glass": {},
   "editing": null,
-  "anchor": "row 5010 of 8082",
+  "anchor": "row 5003 of 8071",
   "kinds": {
-   "message": 4
+   "message": 2,
+   "photo": 1
   },
   "folded_in": {
-   "reaction": 0,
+   "reaction": 1,
    "message_edit": 0,
    "message_delete": 0,
-   "read_marker": 4
+   "read_marker": 3
   },
-  "partner_typing": true
+  "partner_typing": false
  },
  "visible": [
-  "0003Q7ZA889ZSTG6VMHJVJFHT1",
-  "0003QA7RKRXKZXQ520J53ZA6NH",
-  "0003QAG55G2WRH653W9JT6BKCB",
-  "0003QAK0Z0AMFM503Z3PA4E6JE"
+  "0003PJ6N98X1V3JYGZAJF4SKPN",
+  "0003PJ9MZR7CX1G5978YZ64T4S",
+  "0003PT796GP5KB4BYJMKTRJ80Y"
  ],
  "paper": [
-  "0003Q7ZA889ZSTG6VMHJVJFHT1",
-  "0003QA7RKRXKZXQ520J53ZA6NH",
-  "0003QAG55G2WRH653W9JT6BKCB",
-  "0003QAK0Z0AMFM503Z3PA4E6JE"
+  "0003PJ6N98X1V3JYGZAJF4SKPN",
+  "0003PJ9MZR7CX1G5978YZ64T4S",
+  "0003PT796GP5KB4BYJMKTRJ80Y"
  ],
  "tears": {
-  "0003Q7ZA889ZSTG6VMHJVJFHT1": "tear_043",
-  "0003QA7RKRXKZXQ520J53ZA6NH": "tear_026",
-  "0003QAG55G2WRH653W9JT6BKCB": "tear_010",
-  "0003QAK0Z0AMFM503Z3PA4E6JE": "tear_032"
+  "0003PJ6N98X1V3JYGZAJF4SKPN": "tear_007",
+  "0003PJ9MZR7CX1G5978YZ64T4S": "tear_027",
+  "0003PT796GP5KB4BYJMKTRJ80Y": "tear_033"
  },
  "stocks": {
-  "0003Q7ZA889ZSTG6VMHJVJFHT1": "legal_02",
-  "0003QA7RKRXKZXQ520J53ZA6NH": "lined_01",
-  "0003QAG55G2WRH653W9JT6BKCB": "lined_01",
-  "0003QAK0Z0AMFM503Z3PA4E6JE": "lined_03"
+  "0003PJ6N98X1V3JYGZAJF4SKPN": "lined_01",
+  "0003PJ9MZR7CX1G5978YZ64T4S": "lined_02",
+  "0003PT796GP5KB4BYJMKTRJ80Y": "lined_04"
  },
  "scroll": {
-  "first": 5183,
-  "last": 5186,
-  "of": 8082
+  "first": 5177,
+  "last": 5179,
+  "of": 8071
  },
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 4944,
  "seed": 20260903,
- "events": 14096,
+ "events": 14066,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -136,20 +122,20 @@
   "194x126 of it, at its own size",
   24520.909090909092
  ],
- "paper_at_its_own_size": 701,
+ "paper_at_its_own_size": 293,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [
   "sticky_blue_02"
  ],
- "paper_that_arrived_after_the_piece_was_drawn": 52,
+ "paper_that_arrived_after_the_piece_was_drawn": 48,
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 408,
+ "masks_dropped_to_stay_inside_the_pool": 417,
  "stocks_held": 10,
- "stocks_held_bytes": 149023600,
- "stocks_dropped_to_stay_inside_the_pool": 43,
+ "stocks_held_bytes": 140973120,
+ "stocks_dropped_to_stay_inside_the_pool": 39,
  "image_cache": {
-  "held": 53,
-  "bytes": 55310064,
+  "held": 51,
+  "bytes": 54871680,
   "budget": 402653184,
   "live": 30,
   "still_decoding": 0
@@ -161,18 +147,18 @@
  "sensation": null,
  "asked_a_motor_for": [],
  "the_launch_took": {
-  "the framework": 8,
-  "the library index": 17,
-  "the ink plates": 36,
-  "the desk": 143,
-  "the log": 610,
-  "the first frame": 311,
-  "everything": 1125
+  "the framework": 7,
+  "the library index": 20,
+  "the ink plates": 35,
+  "the desk": 167,
+  "the log": 616,
+  "the first frame": 316,
+  "everything": 1161
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 206,
+  "rounds": 23,
   "pushed": 0,
   "refused": 0,
   "pulled": 0,
@@ -180,26 +166,26 @@
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14096,
+  "cursor": 14066,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14096,
-   "our_cursor": 14096,
+   "peer_cursor": 14066,
+   "our_cursor": 14066,
    "last_error": null,
-   "since": "2026-09-12T01:49:49.357Z",
-   "last_contact": "2026-09-12T02:00:06.829Z",
+   "since": "2026-09-12T16:56:29.833Z",
+   "last_contact": "2026-09-12T17:04:16.424Z",
    "certificate": null,
    "setup_address": null
   }
  },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-  "pocket_feeling": "soup",
-  "pocket_at": 1788464400000,
+  "pocket_feeling": null,
+  "pocket_at": null,
   "allowed_to_interrupt": false,
   "what_each_surface_may_say": {
    "standing_line": "their state, in the couple's own words, assembled here from the log",
