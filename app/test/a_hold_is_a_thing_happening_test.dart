@@ -11,6 +11,8 @@
 //
 // So the hold lifts the thing off the sheet, the way the landing puts it down, and the ticker that
 // drives it is the one both clocks turn. Both halves are read here from the widgets themselves.
+import 'package:desk/capture/bus.dart';
+import 'package:desk/capture/hooks.dart';
 import 'package:desk/feelings/builtins.dart';
 import 'package:desk/feelings/corner.dart';
 import 'package:desk/feelings/drawn.dart';
@@ -142,5 +144,60 @@ void main() {
     await _one(tester, drawn, 0.5, onPaper: true);
     final lifted = tester.widget<PaperPiece>(find.byType(PaperPiece)).liftMm;
     expect(lifted, greaterThan(resting + 1.0), reason: 'the scrap stays on the desk when held');
+  });
+
+  testWidgets('and the harness sees it move too, on the clock it drives', (tester) async {
+    // The one that matters, and the one nothing could run. The corner's capture handles were
+    // behind the build flag, so whether a hold moves the picture under the driven clock could only
+    // be found out by shooting a thirty-minute clip and counting frames — and three captures
+    // counted forty held frames in the same place while two fixes went in against that number.
+    //
+    // This drives exactly what the scene drives: `holdOver`, then the clock, one step at a time.
+    CaptureBus.wanted = true;
+    addTearDown(() {
+      CaptureBus.wanted = false;
+      CaptureBus.clear();
+    });
+    tester.view.physicalSize = const Size(1080, 2340);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(AppScope.provide(
+      scope: scope,
+      child: MaterialApp(
+        home: Scaffold(
+          body: Stack(children: [
+            FeelingCorner(registry: scope.feelings, onSend: (f, _) {}),
+          ]),
+        ),
+      ),
+    ));
+    await tester.pump();
+
+    expect(CaptureBus.openCorner, isNotNull, reason: 'the corner did not offer its handles');
+    CaptureBus.openCorner!(true);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+
+    final first = scope.feelings.family(Family.warmth).first;
+    expect(CaptureBus.holdOver, isNotNull);
+    expect(CaptureBus.holdOver!(first.id), isTrue, reason: 'nothing was under the finger');
+    await tester.pump();
+
+    double liftNow() => tester
+        .widgetList<FeelingObject>(find.byType(FeelingObject))
+        .where((t) => t.feeling.id == first.id)
+        .first
+        .lift;
+    final atFirst = liftNow();
+
+    // forty frames of the clip's own step, which is what the scene grabs over a hold
+    for (var i = 0; i < 40; i++) {
+      await DrivenClock.step(32);
+      await tester.pump();
+    }
+    final later = liftNow();
+    expect(later, greaterThan(atFirst + 0.1),
+        reason: 'forty steps of the driven clock moved the held tile from $atFirst to $later, '
+            'which is what forty byte-identical frames of 15_authored_feeling look like from here');
   });
 }

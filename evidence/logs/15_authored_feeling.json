@@ -10,193 +10,193 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1804,
+   "ms": 1649,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3089
+   "ms": 2913
   },
   {
    "do": "wait",
-   "ms": 1802
+   "ms": 1805
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1103
   },
   {
    "do": "openCorner",
-   "ms": 4141
+   "ms": 2624
   },
   {
    "do": "frames",
-   "ms": 70145
+   "ms": 62080
   },
   {
-   "at": 84582,
+   "at": 82329,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 185
+   "ms": 186
   },
   {
    "do": "step",
-   "ms": 838
+   "ms": 1040
   },
   {
    "do": "frames",
-   "ms": 79314
+   "ms": 66146
   },
   {
-   "at": 164924,
+   "at": 149685,
    "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 190
+   "ms": 169
   },
   {
    "do": "step",
-   "ms": 835
+   "ms": 801
   },
   {
    "do": "frames",
-   "ms": 79473
+   "ms": 66374
   },
   {
-   "at": 245395,
+   "at": 217034,
    "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 162
+   "ms": 175
   },
   {
    "do": "step",
-   "ms": 953
+   "ms": 890
   },
   {
    "do": "frames",
-   "ms": 49552
+   "ms": 36220
   },
   {
-   "at": 296082,
+   "at": 254317,
    "said": "__deskShowFamily(ache) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 183
+   "ms": 173
   },
   {
    "do": "step",
-   "ms": 812
+   "ms": 791
   },
   {
    "do": "frames",
-   "ms": 35720
+   "ms": 27435
   },
   {
-   "at": 332829,
+   "at": 282710,
    "said": "__deskShowFamily(static) ok, 6 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 215
+   "ms": 167
   },
   {
    "do": "step",
-   "ms": 835
+   "ms": 858
   },
   {
    "do": "frames",
-   "ms": 37805
+   "ms": 27084
   },
   {
-   "at": 371640,
+   "at": 310835,
    "said": "__deskHoldOver(pigeon) ok, holding pigeon"
   },
   {
    "do": "holdOver",
-   "ms": 171
+   "ms": 182
   },
   {
    "do": "frames",
-   "ms": 879216
+   "ms": 669986
   },
   {
-   "at": 1251043,
+   "at": 981004,
    "said": "__deskLetGo() ok, sent at 0.77"
   },
   {
    "do": "letGo",
-   "ms": 186
+   "ms": 184
   },
   {
    "do": "frames",
-   "ms": 403544
+   "ms": 142500
   },
   {
    "do": "goTo",
-   "ms": 6180
+   "ms": 4016
   },
   {
    "do": "step",
-   "ms": 1448
+   "ms": 1795
   },
   {
    "do": "openCorner",
-   "ms": 3604
+   "ms": 2102
   },
   {
    "do": "frames",
-   "ms": 38864
+   "ms": 29372
   },
   {
    "do": "openCorner",
-   "ms": 2393
+   "ms": 1402
   },
   {
    "do": "step",
-   "ms": 809
+   "ms": 776
   },
   {
    "do": "far",
-   "ms": 1063
+   "ms": 585
   },
   {
    "do": "awaitArrival",
-   "ms": 2149
+   "ms": 2777
   },
   {
    "do": "frames",
-   "ms": 1216753
+   "ms": 154123
   },
   {
    "do": "goTo",
-   "ms": 9444
+   "ms": 4009
   },
   {
    "do": "step",
-   "ms": 6132
+   "ms": 1451
   },
   {
    "do": "far",
-   "ms": 426
+   "ms": 605
   },
   {
    "do": "awaitArrival",
-   "ms": 5865
+   "ms": 2352
   },
   {
    "do": "frames",
-   "ms": 1234840
+   "ms": 153254
   },
   {
    "do": "report",
-   "ms": 508
+   "ms": 419
   }
  ],
  "shots": [
@@ -275,7 +275,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtxn2m03"
+     "pwa-mtynwp4j"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -288,7 +288,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 9104,
    "seed": 20260903,
-   "events": 14102,
+   "events": 14067,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -303,15 +303,15 @@
     "225x78 of it, at its own size",
     17618.35419047963
    ],
-   "paper_at_its_own_size": 25197,
-   "paper_stretched_to_fit": 419,
+   "paper_at_its_own_size": 17714,
+   "paper_stretched_to_fit": 8,
    "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 80,
+   "paper_that_arrived_after_the_piece_was_drawn": 59,
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 381,
+   "masks_dropped_to_stay_inside_the_pool": 268,
    "stocks_held": 10,
-   "stocks_held_bytes": 148811120,
-   "stocks_dropped_to_stay_inside_the_pool": 71,
+   "stocks_held_bytes": 148132400,
+   "stocks_dropped_to_stay_inside_the_pool": 50,
    "image_cache": {
     "held": 78,
     "bytes": 64085944,
@@ -321,13 +321,19 @@
    },
    "setup_showing": false,
    "fold": {
-    "sequence": null
+    "sequence": "unfold_thirds",
+    "length": 142,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
    },
    "sensation": {
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-12T02:49:16.724Z",
+    "started_at": "2026-09-12T17:53:43.273Z",
     "pattern": [
      {
       "ms": 150,
@@ -412,18 +418,18 @@
     }
    ],
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 18,
-    "the ink plates": 43,
-    "the desk": 196,
-    "the log": 596,
-    "the first frame": 317,
-    "everything": 1177
+    "the framework": 8,
+    "the library index": 21,
+    "the ink plates": 40,
+    "the desk": 170,
+    "the log": 7849,
+    "the first frame": 354,
+    "everything": 8442
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 1380,
+    "rounds": 70,
     "pushed": 4,
     "refused": 0,
     "pulled": 2,
@@ -431,18 +437,18 @@
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14102,
+    "cursor": 14067,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14102,
-     "our_cursor": 14102,
+     "peer_cursor": 14067,
+     "our_cursor": 14067,
      "last_error": null,
-     "since": "2026-09-12T02:00:10.631Z",
-     "last_contact": "2026-09-12T03:09:51.915Z",
+     "since": "2026-09-12T17:31:44.565Z",
+     "last_contact": "2026-09-12T17:56:07.880Z",
      "certificate": null,
      "setup_address": null
     }
@@ -471,19 +477,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2294,
+ "cold_ms": 9722,
  "load": {
-  "ms": 2294,
-  "store": "kept",
+  "ms": 9722,
+  "store": "fresh",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
-   "the library index": 18,
-   "the ink plates": 43,
-   "the desk": 196,
-   "the log": 596,
-   "the first frame": 317,
-   "everything": 1177
+   "the framework": 8,
+   "the library index": 21,
+   "the ink plates": 40,
+   "the desk": 170,
+   "the log": 7849,
+   "the first frame": 354,
+   "everything": 8442
   }
  },
  "far": [
@@ -499,17 +505,17 @@
  "arrivals": [
   {
    "line": "feeling soup 0.55",
-   "before": 8083,
-   "after": 8084,
+   "before": 8070,
+   "after": 8071,
    "at_frame": 236,
-   "waited_ms": 1748
+   "waited_ms": 2375
   },
   {
    "line": "feeling soup 0.9",
-   "before": 8084,
-   "after": 8085,
+   "before": 8071,
+   "after": 8072,
    "at_frame": 342,
-   "waited_ms": 5464
+   "waited_ms": 1950
   }
  ],
  "problems": [],

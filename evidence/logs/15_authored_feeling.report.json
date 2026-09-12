@@ -5,7 +5,7 @@
   "paired": true,
   "devices": [
    "android-capture",
-   "pwa-mtxn2m03"
+   "pwa-mtynwp4j"
   ],
   "link": "connected",
   "authored_feelings": 2
@@ -18,7 +18,7 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 9104,
  "seed": 20260903,
- "events": 14102,
+ "events": 14067,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -33,15 +33,15 @@
   "225x78 of it, at its own size",
   17618.35419047963
  ],
- "paper_at_its_own_size": 25197,
- "paper_stretched_to_fit": 419,
+ "paper_at_its_own_size": 17714,
+ "paper_stretched_to_fit": 8,
  "stocks_the_paper_had_not_arrived_for": [],
- "paper_that_arrived_after_the_piece_was_drawn": 80,
+ "paper_that_arrived_after_the_piece_was_drawn": 59,
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 381,
+ "masks_dropped_to_stay_inside_the_pool": 268,
  "stocks_held": 10,
- "stocks_held_bytes": 148811120,
- "stocks_dropped_to_stay_inside_the_pool": 71,
+ "stocks_held_bytes": 148132400,
+ "stocks_dropped_to_stay_inside_the_pool": 50,
  "image_cache": {
   "held": 78,
   "bytes": 64085944,
@@ -51,13 +51,19 @@
  },
  "setup_showing": false,
  "fold": {
-  "sequence": null
+  "sequence": "unfold_thirds",
+  "length": 142,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
  },
  "sensation": {
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-12T02:49:16.724Z",
+  "started_at": "2026-09-12T17:53:43.273Z",
   "pattern": [
    {
     "ms": 150,
@@ -142,18 +148,18 @@
   }
  ],
  "the_launch_took": {
-  "the framework": 7,
-  "the library index": 18,
-  "the ink plates": 43,
-  "the desk": 196,
-  "the log": 596,
-  "the first frame": 317,
-  "everything": 1177
+  "the framework": 8,
+  "the library index": 21,
+  "the ink plates": 40,
+  "the desk": 170,
+  "the log": 7849,
+  "the first frame": 354,
+  "everything": 8442
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 1380,
+  "rounds": 70,
   "pushed": 4,
   "refused": 0,
   "pulled": 2,
@@ -161,18 +167,18 @@
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14102,
+  "cursor": 14067,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14102,
-   "our_cursor": 14102,
+   "peer_cursor": 14067,
+   "our_cursor": 14067,
    "last_error": null,
-   "since": "2026-09-12T02:00:10.631Z",
-   "last_contact": "2026-09-12T03:09:51.915Z",
+   "since": "2026-09-12T17:31:44.565Z",
+   "last_contact": "2026-09-12T17:56:07.880Z",
    "certificate": null,
    "setup_address": null
   }

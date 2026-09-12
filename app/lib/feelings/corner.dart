@@ -146,7 +146,13 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
   @override
   void initState() {
     super.initState();
-    if (Flags.capture) {
+    // `CaptureBus.wanted` as well as the build flag, which is what the chat region has always done.
+    //
+    // The corner's capture path was reachable only from a capture build, so the only way to find
+    // out whether a hold moves the picture was to shoot a thirty-minute clip and count the frames.
+    // Three captures counted forty held frames in the same place and two fixes went in against
+    // that number without ever being run. A test can drive this now.
+    if (Flags.capture || CaptureBus.wanted) {
       // Whoever mounted last owns the handles.
       //
       // When the region changes, Flutter builds the new corner before it disposes the old one, and
@@ -210,7 +216,7 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
 
   @override
   void dispose() {
-    if (Flags.capture && identical(_owner, this)) {
+    if ((Flags.capture || CaptureBus.wanted) && identical(_owner, this)) {
       _owner = null;
       CaptureBus.openCorner = null;
       CaptureBus.showFamily = null;
