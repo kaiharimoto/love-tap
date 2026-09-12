@@ -329,11 +329,29 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       final scope = AppScope.of(context);
       final t = scope.transport;
       if (t is LocalTransport) t.scriptedFaults.setLatency(Duration(milliseconds: slowMs));
-      await scope.emit('message', {'text': text});
+      // Through the composer's own send, not straight into the spine. A scene that writes into the
+      // composer a character at a time and then sends by another route leaves the words sitting
+      // under the note they became; going the way a thumb goes empties the composer, forgets the
+      // draft and stops the typing frame the far phone can see, which is what the shot is of.
+      if (_text.text.trim().isEmpty) {
+        _text.value = TextEditingValue(
+          text: text,
+          selection: TextSelection.collapsed(offset: text.length),
+        );
+      }
       // not awaited: the push is the thing being photographed, so the handle returns while it is
       // still going and the harness takes the picture into it
-      scope.sync.kick();
+      unawaited(_send());
       await Future<void>.delayed(const Duration(milliseconds: 120));
+    };
+    CaptureBus.compose = (text) {
+      // Straight onto the controller, which is what a keyboard does: the draft timer, the typing
+      // frame the far phone sees and the send button's own state all hang off its listener, so a
+      // scene writing a character at a time drives exactly what a thumb does.
+      _text.value = TextEditingValue(
+        text: text,
+        selection: TextSelection.collapsed(offset: text.length),
+      );
     };
     CaptureBus.unfoldAll = Folds.openAll;
     CaptureBus.chatReport = () {

@@ -105,6 +105,14 @@ class CaptureBus {
   /// a pending row already reads `sending` while the link is up, and the engine cleared the mark.
   static Future<void> Function(String text, int slowMs)? sendSlowly;
 
+  /// Put words in the composer, as if somebody were writing them.
+  ///
+  /// A message being written is the plainest motion a messenger has, and no artifact in the set
+  /// held it: the clip about a note crossing a cut link filmed the note after it had already
+  /// stopped, and the states artifact showed five finished rows. A scene writes a character at a
+  /// time now, which is a picture that changes for as long as somebody is writing.
+  static void Function(String text)? compose;
+
   /// Search: what the search page is showing while it is the thing on the glass. Registered by
   /// the page itself, because the hooks dispatch on the region index and the search page is drawn
   /// inside Chat's slot — so without this the search artifact's record described the thread
@@ -145,6 +153,7 @@ class CaptureBus {
     search = null;
     chatReport = null;
     sendSlowly = null;
+    compose = null;
     searchReport = null;
     viewerReport = null;
     momentsReport = null;

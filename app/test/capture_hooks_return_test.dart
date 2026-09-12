@@ -111,6 +111,7 @@ void _everyHandleRuns() {
       // a short slow-down here: the scene asks for six seconds, and this only has to prove the
       // handle exists, reaches the transport and comes back
       'sendSlowly': () async => CaptureBus.sendSlowly!('ok — leaving now', 120),
+      'compose': () async => CaptureBus.compose!('on my way - leaving in ten'),
     };
     for (final e in handles.entries) {
       // Started, then pumped, then awaited. Every one of these ends in a delay — the handles wait
@@ -143,10 +144,13 @@ void _everyHandleRuns() {
     // handles went in for this cycle's scenes and nothing but a capture would have found that.
     final driver = File('../tools/capture/scene.js').readAsStringSync();
     final web = File('lib/capture/hooks_web.dart').readAsStringSync();
-    final called = RegExp(r"hook\('(__desk[A-Za-z]+)'")
-        .allMatches(driver)
-        .map((m) => m.group(1)!)
-        .toSet();
+    final called = {
+      ...RegExp(r"hook\('(__desk[A-Za-z]+)'").allMatches(driver).map((m) => m.group(1)!),
+      // and the ones a frame's `drive` reaches straight off the window, which never go through
+      // hook() and so were invisible here: a take that types into the composer, a take that calls
+      // a handle at a named frame.
+      ...RegExp(r'window\.(__desk[A-Za-z]+)\(').allMatches(driver).map((m) => m.group(1)!),
+    };
     final installed = RegExp(r'w\.(__desk[A-Za-z]+)\s*=')
         .allMatches(web)
         .map((m) => m.group(1)!)
@@ -154,6 +158,28 @@ void _everyHandleRuns() {
     final missing = called.difference(installed).toList()..sort();
     expect(missing, isEmpty,
         reason: 'the driver calls $missing, which hooks_web.dart does not install');
+
+    // A scene may name a handle itself — `drive: {kind: hook, name: __deskSync}` — and a typo
+    // there is the same hour-long failure one layer further out, with nothing between the JSON
+    // and the browser to catch it.
+    final named = <String, String>{};
+    for (final f in Directory('../evidence/scenes').listSync().whereType<File>()) {
+      if (!f.path.endsWith('.json')) continue;
+      final scene = jsonDecode(f.readAsStringSync()) as Map<String, dynamic>;
+      for (final step in (scene['steps'] as List).cast<Map<String, dynamic>>()) {
+        final drive = step['drive'];
+        if (drive is Map && drive['name'] is String) {
+          named[drive['name'] as String] = f.uri.pathSegments.last;
+        }
+      }
+    }
+    final unknownNames = {
+      for (final e in named.entries)
+        if (!installed.contains(e.key)) e.key: e.value,
+    };
+    expect(unknownNames, isEmpty,
+        reason: 'a scene drives ${unknownNames.entries.map((e) => '${e.key} (${e.value})').join(', ')}, '
+            'which the web build does not install');
   });
 
   test('every step the scenes ask for is one the driver knows', () {

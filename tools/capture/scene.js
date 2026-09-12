@@ -344,6 +344,9 @@ function ensure(p) {
         await hook('__deskUnfold'); break;
       case 'stage':
         await hook('__deskStage'); break;
+      case 'compose':
+        // Words in the composer without sending them: what a phone looks like mid-sentence.
+        await hook('__deskCompose', step.text || ''); break;
       case 'slowSend':
         // One message written into a link that has been slowed for a few seconds, so the shot
         // catches it while its push is actually in flight. `sending` lasts exactly as long as a
@@ -535,6 +538,29 @@ function ensure(p) {
             // physics, a frame per step, until it stops or the thumb throws again
             const at = drive.at || [0];
             if (at.includes(i)) await hook('__deskFling', drive.velocity || -2600);
+          }
+          const hookAt = drive && drive.kind === 'hook'
+            ? (Array.isArray(drive.at) ? drive.at : [drive.at === undefined ? 0 : drive.at])
+            : null;
+          if (hookAt && hookAt.includes(i)) {
+            // Any capture handle, at the frames the scene names, while the shutter is open.
+            // A note that will not go and then goes is the one thing 08 is about, and both halves
+            // were driven *between* takes: the send, then 40 frames of a row that had already
+            // settled, and the reconnect, then 56 frames of two notes that landed before the first
+            // of them. 47 and 45 identical frames. What a clip of a thing happening needs is the
+            // thing happening inside it.
+            await page.evaluate(
+              ({ name, args }) => window[name].apply(null, args),
+              { name: drive.name, args: drive.args || [] },
+            );
+          }
+          if (drive && drive.kind === 'type') {
+            // Somebody writing. One more character every frame — or `per` of them — so the take is
+            // of writing rather than of a written thing. This is the plainest motion a messenger
+            // has and no artifact in the set held it.
+            const per = drive.per || 1;
+            const n = Math.min(drive.text.length, Math.round((i + 1) * per));
+            await page.evaluate((t) => window.__deskCompose(t), drive.text.slice(0, n));
           }
           if (drive && drive.kind === 'scrollBy') {
             // The thread's own scroller, a step per frame. Dragging a note is a long press as

@@ -413,6 +413,15 @@ class CaptureHooks {
     return 'ok';
   }
 
+  /// Words into the composer, as if somebody were writing them. The scene sends one more
+  /// character each frame, so the shot is of writing rather than of a written thing.
+  String compose(String text) {
+    final f = CaptureBus.compose;
+    if (f == null) return 'chat is not on screen';
+    f(text);
+    return 'ok';
+  }
+
   Future<String> unfoldAll() async {
     final f = CaptureBus.unfoldAll;
     if (f == null) return 'chat is not on screen';

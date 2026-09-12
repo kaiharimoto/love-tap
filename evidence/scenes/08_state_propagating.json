@@ -1,252 +1,274 @@
 {
- "name": "08_state_propagating",
- "viewport": {
-  "width": 360,
-  "height": 780,
-  "dpr": 3
- },
- "settle": 500,
- "log": "evidence/logs/08_state_propagating.json",
- "steps": [
-  {
-   "do": "wait",
-   "ms": 1800
+  "name": "08_state_propagating",
+  "viewport": {
+    "width": 360,
+    "height": 780,
+    "dpr": 3
   },
-  {
-   "do": "pair"
-  },
-  {
-   "do": "wait",
-   "ms": 3200
-  },
-  {
-   "do": "goTo",
-   "arg": 0
-  },
-  {
-   "do": "far",
-   "arg": "state mood restless"
-  },
-  {
-   "do": "awaitArrival",
-   "timeout": 90000
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "step",
-   "ms": 16
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 16,
-   "ms": 16
-  },
-  {
-   "do": "wait",
-   "ms": 2500
-  },
-  {
-   "do": "far",
-   "arg": "feeling hold 0.92"
-  },
-  {
-   "do": "awaitArrival",
-   "timeout": 90000
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "step",
-   "ms": 16
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 149,
-   "ms": 16
-  },
-  {
-   "do": "goTo",
-   "arg": 1,
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 400
-  },
-  {
-   "do": "far",
-   "arg": "message it is raining here too"
-  },
-  {
-   "do": "awaitArrival",
-   "timeout": 90000
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "unfold"
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 140,
-   "ms": 16
-  },
-  {
-   "do": "far",
-   "arg": "feeling squeeze 0.6"
-  },
-  {
-   "do": "awaitArrival",
-   "timeout": 90000
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 71,
-   "ms": 16
-  },
-  {
-   "do": "far",
-   "arg": "feeling here 0.8"
-  },
-  {
-   "do": "awaitArrival",
-   "timeout": 90000
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 156,
-   "ms": 16
-  },
-  {
-   "do": "goTo",
-   "arg": 2,
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 400
-  },
-  {
-   "do": "wait",
-   "ms": 1600
-  },
-  {
-   "do": "far",
-   "arg": "state place out"
-  },
-  {
-   "do": "far",
-   "arg": "feeling soup 0.7"
-  },
-  {
-   "do": "awaitArrival",
-   "timeout": 90000
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 107,
-   "ms": 16,
-   "drive": {
-    "kind": "far",
-    "line": "state availability heads_down",
-    "at": 10
-   }
-  },
-  {
-   "do": "goTo",
-   "arg": 1,
-   "why": "The reconnect is shown in the thread rather than in Settings. Settings is where the app writes what the link is doing, and a word changing on a still page is one frame of change and twenty-five held ones \u2014 the twelfth capture counted 437 held frames in this clip and forty-seven of them were exactly that. What the thread shows is the same fact in a form that moves: a note that will not go, and then goes."
-  },
-  {
-   "do": "step",
-   "ms": 16
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "scrollTo",
-   "arg": "end"
-  },
-  {
-   "do": "cut",
-   "arg": "on"
-  },
-  {
-   "do": "wait",
-   "ms": 900
-  },
-  {
-   "do": "slowSend",
-   "text": "on my way \u2014 leaving in ten",
-   "ms": 9000
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 40,
-   "ms": 16,
-   "why": "Filmed while the note is going nowhere, not after it has stopped. The thirteenth capture put 48 frames after the link was already cut and the row had already settled: 47 of the 48 were identical to the one before. A note failing to go is an event and takes about half a second; a note that has failed is a still picture."
-  },
-  {
-   "do": "far",
-   "arg": "state mood quiet"
-  },
-  {
-   "do": "far",
-   "arg": "message the bus is late, dont wait up"
-  },
-  {
-   "do": "wait",
-   "ms": 1200
-  },
-  {
-   "do": "cut",
-   "arg": "off"
-  },
-  {
-   "do": "sync"
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/08_state_propagating",
-   "count": 56,
-   "ms": 16,
-   "why": "No awaitArrival before this. Waiting for the arrival and then filming is filming the aftermath \u2014 45 of 48 frames identical last capture. The link comes back and the two notes the far phone wrote while it was down land inside these frames, in the order they were written."
-  },
-  {
-   "do": "report",
-   "out": "evidence/logs/08_state_propagating.report.json"
-  }
- ]
+  "settle": 500,
+  "log": "evidence/logs/08_state_propagating.json",
+  "steps": [
+    {
+      "do": "wait",
+      "ms": 1800
+    },
+    {
+      "do": "pair"
+    },
+    {
+      "do": "wait",
+      "ms": 3200
+    },
+    {
+      "do": "goTo",
+      "arg": 0
+    },
+    {
+      "do": "far",
+      "arg": "state mood restless"
+    },
+    {
+      "do": "awaitArrival",
+      "timeout": 90000
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "step",
+      "ms": 16
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/08_state_propagating",
+      "count": 16,
+      "ms": 16
+    },
+    {
+      "do": "wait",
+      "ms": 2500
+    },
+    {
+      "do": "far",
+      "arg": "feeling hold 0.92"
+    },
+    {
+      "do": "awaitArrival",
+      "timeout": 90000
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "step",
+      "ms": 16
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/08_state_propagating",
+      "count": 149,
+      "ms": 16
+    },
+    {
+      "do": "goTo",
+      "arg": 1,
+      "after": 0
+    },
+    {
+      "do": "step",
+      "ms": 400
+    },
+    {
+      "do": "far",
+      "arg": "message it is raining here too"
+    },
+    {
+      "do": "awaitArrival",
+      "timeout": 90000
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "unfold"
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/08_state_propagating",
+      "count": 140,
+      "ms": 16
+    },
+    {
+      "do": "far",
+      "arg": "feeling squeeze 0.6"
+    },
+    {
+      "do": "awaitArrival",
+      "timeout": 90000
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/08_state_propagating",
+      "count": 71,
+      "ms": 16
+    },
+    {
+      "do": "far",
+      "arg": "feeling here 0.8"
+    },
+    {
+      "do": "awaitArrival",
+      "timeout": 90000
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/08_state_propagating",
+      "count": 156,
+      "ms": 16
+    },
+    {
+      "do": "goTo",
+      "arg": 2,
+      "after": 0
+    },
+    {
+      "do": "step",
+      "ms": 400
+    },
+    {
+      "do": "wait",
+      "ms": 1600
+    },
+    {
+      "do": "far",
+      "arg": "state place out"
+    },
+    {
+      "do": "far",
+      "arg": "feeling soup 0.7"
+    },
+    {
+      "do": "awaitArrival",
+      "timeout": 90000
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/08_state_propagating",
+      "count": 107,
+      "ms": 16,
+      "drive": {
+        "kind": "far",
+        "line": "state availability heads_down",
+        "at": 10
+      }
+    },
+    {
+      "do": "goTo",
+      "arg": 1,
+      "why": "The reconnect is shown in the thread rather than in Settings. Settings is where the app writes what the link is doing, and a word changing on a still page is one frame of change and twenty-five held ones \u2014 the twelfth capture counted 437 held frames in this clip and forty-seven of them were exactly that. What the thread shows is the same fact in a form that moves: a note that will not go, and then goes."
+    },
+    {
+      "do": "step",
+      "ms": 16
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "scrollTo",
+      "arg": "end"
+    },
+    {
+      "do": "cut",
+      "arg": "on"
+    },
+    {
+      "do": "wait",
+      "ms": 600
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/08_state_propagating",
+      "count": 64,
+      "ms": 16,
+      "drive": {
+        "kind": "type",
+        "text": "on my way - leaving in ten",
+        "per": 0.42
+      },
+      "why": "Somebody writing into a link that is down. The thirteenth capture filmed the note after it had already stopped - 47 of 48 frames identical to the one before - because the send was driven between takes and a note that has failed is a still picture. A note being written is not: twenty-six characters at five a second is the plainest motion a messenger has, and it is the only artifact in the set that holds it."
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/08_state_propagating",
+      "count": 44,
+      "ms": 16,
+      "drive": {
+        "kind": "hook",
+        "name": "__deskSendSlowly",
+        "args": [
+          "on my way - leaving in ten",
+          9000
+        ],
+        "at": 2
+      },
+      "why": "And sending it, inside the shot: the composer empties, the note lands in the thread, and the mark under it says it is going nowhere. The push is slowed to nine seconds so the row is still going when the take ends."
+    },
+    {
+      "do": "far",
+      "arg": "state mood quiet"
+    },
+    {
+      "do": "far",
+      "arg": "message the bus is late, dont wait up"
+    },
+    {
+      "do": "wait",
+      "ms": 1200
+    },
+    {
+      "do": "cut",
+      "arg": "off"
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/08_state_propagating",
+      "count": 150,
+      "ms": 16,
+      "drive": {
+        "kind": "hook",
+        "name": "__deskSync",
+        "at": [
+          4,
+          40,
+          76
+        ]
+      },
+      "why": "The link comes back inside the shot, not before it. The thirteenth capture asked for the sync between takes and then filmed 56 frames of the aftermath: 45 of them identical, and the second of the two notes the far phone wrote while the link was down appeared on no frame at all. Two and a half seconds and three pulls is long enough for both of them to land here, in the order they were written."
+    },
+    {
+      "do": "report",
+      "out": "evidence/logs/08_state_propagating.report.json"
+    }
+  ]
 }
