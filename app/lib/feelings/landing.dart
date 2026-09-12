@@ -321,19 +321,25 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
       ms = (_t * 1000).round();
       lift = pageLiftAt(a.feeling.segments, ms) * (0.55 + 0.45 * a.intensity);
     }
+    // The page is always under the same transform, even when nothing is arriving.
+    //
+    // It used to switch between `widget.child` bare and the child inside two Transforms, and the
+    // switch itself is a visible change: the frame check counted four light jumps in
+    // 07_feeling_landing, one at the end of each of its four landings, where the lift was already
+    // near zero and what moved was the resampling. An identity transform is not a transform
+    // anybody can see, and it is the same element either way.
     return Stack(
       fit: StackFit.expand,
       children: [
-        if (a == null)
-          widget.child
-        else
-          Transform.rotate(
-            angle: lift * knockTilt(a.feeling.id),
-            child: Transform.translate(
-              offset: knockDirection(a.feeling.id) * (lift * kPageLiftPx),
-              child: widget.child,
-            ),
+        Transform.rotate(
+          angle: a == null ? 0.0 : lift * knockTilt(a.feeling.id),
+          child: Transform.translate(
+            offset: a == null
+                ? Offset.zero
+                : knockDirection(a.feeling.id) * (lift * kPageLiftPx),
+            child: widget.child,
           ),
+        ),
         if (a != null) IgnorePointer(child: _Landing(arrival: a, t: _t, seed: _seed)),
         // The pattern annotated on the timeline, which artifact 07 is required to carry. Capture
         // builds only, along the top edge where the app draws only desk, and gone the moment the

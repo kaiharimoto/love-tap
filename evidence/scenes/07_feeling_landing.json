@@ -17,8 +17,7 @@
    "ms": 1400
   },
   {
-   "do": "haptics",
-   "out": "evidence/logs/haptics.json"
+   "do": "haptics"
   },
   {
    "do": "far",
@@ -34,9 +33,9 @@
   {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing",
-   "count": 150,
+   "count": 64,
    "ms": 16,
-   "from": 0
+   "why": "Sixty-four frames a landing, which is what a landing is. The thirteenth capture measured every run of this clip outliving its own event: 150 frames of a landing that finishes at 66, then 71 of one that finishes at 65, then 93, then 107 \u2014 154 held frames in all, and every one of them after the object had come to rest. A feeling's pattern has silences in it, and during a silence with the object at rest the picture genuinely does not change; that is honest and it is not a clip. Six arrivals of sixty-four frames is 6.1 seconds with something moving in every one of them."
   },
   {
    "do": "far",
@@ -52,14 +51,12 @@
   {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing",
-   "count": 71,
-   "from": 150,
+   "count": 64,
    "ms": 16
   },
   {
    "do": "goTo",
-   "arg": 1,
-   "after": 0
+   "arg": 1
   },
   {
    "do": "step",
@@ -79,22 +76,12 @@
   {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing",
-   "count": 93,
-   "from": 221,
+   "count": 64,
    "ms": 16
   },
   {
-   "do": "goTo",
-   "arg": 2,
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 400
-  },
-  {
    "do": "far",
-   "arg": "feeling soup 0.85"
+   "arg": "feeling confetti 0.7"
   },
   {
    "do": "awaitArrival"
@@ -106,14 +93,62 @@
   {
    "do": "frames",
    "dir": "evidence/frames/07_feeling_landing",
-   "count": 107,
-   "from": 314,
+   "count": 64,
+   "ms": 16
+  },
+  {
+   "do": "goTo",
+   "arg": 2
+  },
+  {
+   "do": "step",
+   "ms": 400
+  },
+  {
+   "do": "far",
+   "arg": "feeling miss_you 0.85"
+  },
+  {
+   "do": "awaitArrival"
+  },
+  {
+   "do": "wait",
+   "ms": 700
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/07_feeling_landing",
+   "count": 64,
+   "ms": 16
+  },
+  {
+   "do": "goTo",
+   "arg": 0
+  },
+  {
+   "do": "step",
+   "ms": 400
+  },
+  {
+   "do": "far",
+   "arg": "feeling here 0.8"
+  },
+  {
+   "do": "awaitArrival"
+  },
+  {
+   "do": "wait",
+   "ms": 700
+  },
+  {
+   "do": "frames",
+   "dir": "evidence/frames/07_feeling_landing",
+   "count": 64,
    "ms": 16
   },
   {
    "do": "report",
-   "out": "evidence/logs/07_feeling_landing.report.json",
-   "at": "07_feeling_landing"
+   "out": "evidence/logs/07_feeling_landing.report.json"
   }
  ]
 }
