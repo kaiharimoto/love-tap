@@ -10,37 +10,37 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1737,
+   "ms": 2723,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3041
+   "ms": 3512
   },
   {
    "do": "wait",
-   "ms": 1602
+   "ms": 1603
   },
   {
    "do": "scrollTo",
-   "ms": 5374
+   "ms": 4071
   },
   {
    "do": "wait",
-   "ms": 1302
+   "ms": 1304
   },
   {
    "do": "far",
-   "ms": 1337
+   "ms": 405
   },
   {
    "do": "awaitArrival",
-   "ms": 1797
+   "ms": 1051
   },
   {
    "do": "frames",
-   "ms": 5814
+   "ms": 31407
   },
   {
    "do": "unfold",
@@ -52,23 +52,23 @@
   },
   {
    "do": "frames",
-   "ms": 258811
+   "ms": 221856
   },
   {
    "do": "far",
-   "ms": 404
+   "ms": 407
   },
   {
    "do": "awaitArrival",
-   "ms": 1890
+   "ms": 774
   },
   {
    "do": "frames",
-   "ms": 2899
+   "ms": 31447
   },
   {
    "do": "unfold",
-   "ms": 168
+   "ms": 7
   },
   {
    "frames_from_the_build": "unfold_thirds",
@@ -76,11 +76,11 @@
   },
   {
    "do": "frames",
-   "ms": 258011
+   "ms": 220605
   },
   {
    "do": "report",
-   "ms": 413
+   "ms": 416
   }
  ],
  "shots": [
@@ -115,19 +115,23 @@
    "view": {
     "region": "chat",
     "visible": [
-     "0001MCJ1M0S7HRNF0F22N94728",
-     "01M1MDHVFFV6JQMS4N67B1MMYF",
-     "01M1MDT02BYCWAXQV16BTB337N"
+     "0001M4GW48FEW3M67XKAZT5051",
+     "0001M4ZQQ0H0PPVTKMMQEE268D",
+     "0001M59VY0YA13H9M86HTA6XNP",
+     "01M1MCJW45V433TFPEKA021928",
+     "01M1MCTMTVA3JQH0E0M2WS8BP2"
     ],
     "whole_on_the_glass": [
-     "01M1MDHVFFV6JQMS4N67B1MMYF",
-     "01M1MDT02BYCWAXQV16BTB337N"
+     "0001M4ZQQ0H0PPVTKMMQEE268D",
+     "0001M59VY0YA13H9M86HTA6XNP",
+     "01M1MCJW45V433TFPEKA021928",
+     "01M1MCTMTVA3JQH0E0M2WS8BP2"
     ],
     "clipped_at_an_edge": {
-     "0001MCJ1M0S7HRNF0F22N94728": 0.612
+     "0001M4GW48FEW3M67XKAZT5051": 0.129
     },
     "delivery": {
-     "0001MCJ1M0S7HRNF0F22N94728": {
+     "0001M4GW48FEW3M67XKAZT5051": {
       "state": "sent",
       "says": "sent"
      }
@@ -138,88 +142,108 @@
     "edited": [],
     "taken_back": [],
     "scroll": {
-     "first": 8075,
-     "last": 8078,
-     "of": 8078
+     "first": 8066,
+     "last": 8071,
+     "of": 8071
     },
     "paper": [
-     "0001MCJ1M0S7HRNF0F22N94728",
-     "01M1MDHVFFV6JQMS4N67B1MMYF",
-     "01M1MDT02BYCWAXQV16BTB337N"
+     "0001M59VY0YA13H9M86HTA6XNP",
+     "01M1MCJW45V433TFPEKA021928",
+     "01M1MCTMTVA3JQH0E0M2WS8BP2"
     ],
     "paper_whole_on_the_glass": 3,
     "rows_cost": [
      {
-      "row": 8075,
-      "type": "message",
-      "tall": 152,
-      "top": -59
+      "row": 8066,
+      "type": "feeling",
+      "tall": 255,
+      "top": -222
      },
      {
-      "row": 8076,
-      "type": "message",
-      "tall": 179,
-      "top": 93
+      "row": 8067,
+      "type": "state_declared",
+      "tall": 31,
+      "top": 33
      },
      {
-      "row": 8077,
+      "row": 8068,
       "type": "message",
       "tall": 179,
-      "top": 272
+      "top": 64
+     },
+     {
+      "row": 8069,
+      "type": "message",
+      "tall": 179,
+      "top": 243
+     },
+     {
+      "row": 8070,
+      "type": "message",
+      "tall": 72,
+      "top": 422
      }
     ],
-    "viewport_tall": 457.7,
-    "composer": "the second one, then",
+    "viewport_tall": 501.4,
+    "composer": "",
     "attaching": false,
     "replying_to": null,
     "replies_on_the_glass": {},
     "editing": null,
     "anchor": null,
     "kinds": {
+     "feeling": 1,
+     "state_declared": 1,
      "message": 3
     },
     "folded_in": {
      "reaction": 0,
      "message_edit": 0,
      "message_delete": 0,
-     "read_marker": 0
+     "read_marker": 2
     },
-    "partner_typing": true
+    "partner_typing": false
    },
    "visible": [
-    "0001MCJ1M0S7HRNF0F22N94728",
-    "01M1MDHVFFV6JQMS4N67B1MMYF",
-    "01M1MDT02BYCWAXQV16BTB337N"
+    "0001M4GW48FEW3M67XKAZT5051",
+    "0001M4ZQQ0H0PPVTKMMQEE268D",
+    "0001M59VY0YA13H9M86HTA6XNP",
+    "01M1MCJW45V433TFPEKA021928",
+    "01M1MCTMTVA3JQH0E0M2WS8BP2"
    ],
    "paper": [
-    "0001MCJ1M0S7HRNF0F22N94728",
-    "01M1MDHVFFV6JQMS4N67B1MMYF",
-    "01M1MDT02BYCWAXQV16BTB337N"
+    "0001M59VY0YA13H9M86HTA6XNP",
+    "01M1MCJW45V433TFPEKA021928",
+    "01M1MCTMTVA3JQH0E0M2WS8BP2"
    ],
    "tears": {
-    "0001MCJ1M0S7HRNF0F22N94728": "tear_040",
-    "01M1MDHVFFV6JQMS4N67B1MMYF": "tear_029",
-    "01M1MDT02BYCWAXQV16BTB337N": "tear_012"
+    "0001M4GW48FEW3M67XKAZT5051": "tear_010",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
+    "01M1MCJW45V433TFPEKA021928": "tear_014",
+    "01M1MCTMTVA3JQH0E0M2WS8BP2": "tear_019"
    },
    "stocks": {
-    "0001MCJ1M0S7HRNF0F22N94728": "looseleaf_01",
-    "01M1MDHVFFV6JQMS4N67B1MMYF": "spiral_03",
-    "01M1MDT02BYCWAXQV16BTB337N": "lined_03"
+    "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
+    "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
+    "01M1MCJW45V433TFPEKA021928": "lined_03",
+    "01M1MCTMTVA3JQH0E0M2WS8BP2": "spiral_04"
    },
    "scroll": {
-    "first": 8075,
-    "last": 8078,
-    "of": 8078
+    "first": 8066,
+    "last": 8071,
+    "of": 8071
    },
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 4720,
    "seed": 20260903,
-   "events": 14086,
+   "events": 14066,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 2,
+   "masks_composed": 1,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
@@ -229,20 +253,22 @@
     "194x126 of it, at its own size",
     24520.909090909092
    ],
-   "paper_at_its_own_size": 706,
+   "paper_at_its_own_size": 360,
    "paper_stretched_to_fit": 0,
-   "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 19,
+   "stocks_the_paper_had_not_arrived_for": [
+    "sticky_blue_02"
+   ],
+   "paper_that_arrived_after_the_piece_was_drawn": 14,
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 42,
+   "masks_dropped_to_stay_inside_the_pool": 45,
    "stocks_held": 10,
-   "stocks_held_bytes": 144780080,
-   "stocks_dropped_to_stay_inside_the_pool": 9,
+   "stocks_held_bytes": 149702320,
+   "stocks_dropped_to_stay_inside_the_pool": 5,
    "image_cache": {
-    "held": 28,
-    "bytes": 30171116,
+    "held": 26,
+    "bytes": 28759916,
     "budget": 402653184,
-    "live": 26,
+    "live": 24,
     "still_decoding": 0
    },
    "setup_showing": false,
@@ -258,45 +284,45 @@
    "sensation": null,
    "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 8,
+    "the framework": 7,
     "the library index": 16,
-    "the ink plates": 40,
-    "the desk": 150,
-    "the log": 640,
-    "the first frame": 336,
-    "everything": 1190
+    "the ink plates": 39,
+    "the desk": 156,
+    "the log": 6719,
+    "the first frame": 343,
+    "everything": 7280
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 182,
-    "pushed": 5,
+    "rounds": 26,
+    "pushed": 3,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14086,
+    "cursor": 14066,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14086,
-     "our_cursor": 14086,
+     "peer_cursor": 14066,
+     "our_cursor": 14066,
      "last_error": null,
-     "since": "2026-09-12T00:37:30.166Z",
-     "last_contact": "2026-09-12T00:46:34.386Z",
+     "since": "2026-09-12T16:47:44.433Z",
+     "last_contact": "2026-09-12T16:56:19.770Z",
      "certificate": null,
      "setup_address": null
     }
    },
    "ambient": {
     "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-    "pocket_feeling": null,
-    "pocket_at": null,
+    "pocket_feeling": "ugh",
+    "pocket_at": 1788464400000,
     "allowed_to_interrupt": false,
     "what_each_surface_may_say": {
      "standing_line": "their state, in the couple's own words, assembled here from the log",
@@ -317,19 +343,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2293,
+ "cold_ms": 8771,
  "load": {
-  "ms": 2293,
-  "store": "kept",
+  "ms": 8771,
+  "store": "fresh",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 8,
+   "the framework": 7,
    "the library index": 16,
-   "the ink plates": 40,
-   "the desk": 150,
-   "the log": 640,
-   "the first frame": 336,
-   "everything": 1190
+   "the ink plates": 39,
+   "the desk": 156,
+   "the log": 6719,
+   "the first frame": 343,
+   "everything": 7280
   }
  },
  "far": [
@@ -345,17 +371,17 @@
  "arrivals": [
   {
    "line": "message back by six. the pigeon is still on the cupboard, year nine have named it.",
-   "before": 8076,
-   "after": 8077,
+   "before": 8069,
+   "after": 8070,
    "at_frame": 0,
-   "waited_ms": 1396
+   "waited_ms": 650
   },
   {
    "line": "message and the bread",
-   "before": 8077,
-   "after": 8078,
+   "before": 8070,
+   "after": 8071,
    "at_frame": 143,
-   "waited_ms": 1488
+   "waited_ms": 373
   }
  ],
  "problems": [],
