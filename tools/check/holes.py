@@ -113,22 +113,38 @@ def _holes(rgb, dark, grow, reach=12):
 def contact_shadow(rgb, grow=3, near=(4, 14), far=(45, 65)):
     """How much darker the desk is just under a sheet than it is a little further away.
 
-    Negative is a shadow. This exists because holes.py passed for the wrong reason: the check that
+    Positive is a shadow. This exists because holes.py passed for the wrong reason: the check that
     said no black lies beside the paper went to zero on a capture where the contact shadow had
     vanished altogether, and a material critic found it by walking outward from an edge. No black
     beside a sheet and no shadow under one are the same picture to a check that only looks for
     black, and they are opposite faults.
 
-    Measured down every third column: find where a run of paper ends, skip the three pixels of its
-    own soft edge, and compare a band just below it with a band further down, keeping only the
-    pairs where both bands are on the wood.
+    Measured down every third column: find where a run of paper ends, walk off the *fibres*, and
+    compare a band just past them with a band further down, keeping only the pairs where both
+    bands are on the wood.
+
+    Walking off the fibres is the part that was wrong, and it was wrong by a lot. A torn edge in
+    this build is about a centimetre of loose strands at phone scale — rendered, packed, and
+    nine-sliced at its own size — so a column stops reading as paper at the first gap between two
+    fibres and stays in the fringe for a hundred device pixels after that. Fixed bands four to
+    fourteen pixels past that point are not on the desk at all; they are among the strands, where
+    the luminance is a mixture of paper and wood and has nothing to do with a shadow. Measured on
+    a piece drawn over the real wood: 111.6 at four pixels past the last paper pixel, 98.2 at
+    fourteen, 97.2 at sixty, against a desk of 87 — the whole window inside the fringe, and the
+    number it produced was the fringe's own gradient with a minus sign on it.
+
+    So the near band starts where the fringe ends: walk down until the column comes within a few
+    levels of what the desk reads far below, and measure from there. On a cut card that is the
+    first pixel, so nothing about the one still that passed changes; on a torn one it is wherever
+    the last strand is, which is where the desk begins and therefore where a shadow on the desk can
+    be seen at all.
     """
     import numpy as np
     lum = rgb.mean(axis=2)
     warm = rgb[..., 0] - rgb[..., 2]
     paper = (lum > 150.0) & (warm < 60.0)
     h, w = lum.shape
-    near_v, far_v = [], []
+    near_v, far_v, skips = [], [], []
     for col in range(60, w - 60, 3):
         inp = False
         start = 0
@@ -138,12 +154,27 @@ def contact_shadow(rgb, grow=3, near=(4, 14), far=(45, 65)):
                 inp, start = True, y
             elif not p and inp:
                 inp = False
-                if y - start > 80 and y + far[1] < h:
-                    a = lum[y + near[0]:y + near[1], col]
-                    b = lum[y + far[0]:y + far[1], col]
-                    if a.max() < 150 and b.max() < 150:
-                        near_v.append(float(a.mean()))
-                        far_v.append(float(b.mean()))
+                if y - start <= 80 or y + far[1] + 120 >= h:
+                    continue
+                b = lum[y + far[0]:y + far[1], col]
+                if b.max() >= 150:
+                    continue
+                desk = float(b.mean())
+                # off the fibres: the first row within six levels of the desk further down
+                off = None
+                for d in range(1, 120):
+                    if lum[y + d, col] <= desk + 6.0:
+                        off = d
+                        break
+                if off is None or y + off + far[1] >= h:
+                    continue
+                a = lum[y + off + near[0] - 1:y + off + near[1] - 1, col]
+                bb = lum[y + off + far[0]:y + off + far[1], col]
+                if a.max() >= 150 or bb.max() >= 150:
+                    continue
+                near_v.append(float(a.mean()))
+                far_v.append(float(bb.mean()))
+                skips.append(off)
     if not near_v:
         return {"edges": 0}
     n = float(np.mean(near_v))
@@ -153,6 +184,7 @@ def contact_shadow(rgb, grow=3, near=(4, 14), far=(45, 65)):
         "just_under_a_sheet": round(n, 2),
         "further_down_the_desk": round(f, 2),
         "darker_by": round(f - n, 2),
+        "fibres_walked_off_median_px": int(np.median(skips)),
     }
 
 

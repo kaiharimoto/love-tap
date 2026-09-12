@@ -698,6 +698,19 @@ def main(argv=None):
     index = {}
     for fam in ("paper", "tears", "objects", "bits", "shell", "ink"):
         pack_family(fam, index)
+    # The tear shadows the renderer made are overwritten by ones made from the masks themselves.
+    #
+    # Not a preference. Measured over all 56 packed tears, the rendered shadow's alpha is 0.095 at
+    # the paper's own edge and gone within two per cent of the piece — in the render the sheet lies
+    # nearly flat and its shadow is genuinely underneath it, where opaque paper covers it. It has
+    # never cast a visible shadow at any framing anybody tried. tools/bake_tear_shadows.py says the
+    # whole of it.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "bake_tear_shadows", os.path.join(ROOT, "tools", "bake_tear_shadows.py"))
+    baker = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(baker)
+    baker.main([])
     # how the three tear layers line up, straight from the renderer that made them
     relief_path = os.path.join(SRC, "tears", "relief.json")
     if os.path.exists(relief_path):

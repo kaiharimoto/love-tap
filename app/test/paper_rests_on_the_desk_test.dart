@@ -14,7 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('the stack a piece is composed in does not clip its shadow', () {
     final src = File('lib/material/paper.dart').readAsStringSync();
-    final at = src.indexOf('_bakedShadow(context, suffix) else _cutShadow(dusk)');
+    final at = src.indexOf('_tornShadow(context, suffix) else _cutShadow(dusk)');
     expect(at, greaterThan(0), reason: 'the shadow is no longer composed where this test looks');
     // the Stack that holds it, reading backwards from the shadow to the widget that contains it
     final before = src.substring(0, at);
@@ -41,7 +41,7 @@ void main() {
     // Anchored on the call that actually draws the render, not on the word: in objects.dart the
     // first `_shadow` is the widget being *asked* for, three hundred lines above the draw.
     final draws = {
-      'lib/material/paper.dart': 'Widget _bakedShadow(',
+      'lib/material/paper.dart': 'Widget _tornShadow(',
       'lib/material/objects.dart': 'class _Shadow extends StatelessWidget',
     };
     draws.forEach((f, anchor) {
@@ -52,33 +52,44 @@ void main() {
       // twice. At 2600 the window stopped short of the draw itself once the shadow's placement
       // was written down, and this read as the colour having been taken out.
       final block = src.substring(at, (at + 4600).clamp(0, src.length));
-      expect(block, contains('ColorFilter.mode(Shadow.warm, BlendMode.srcIn)'),
+      expect(block, anyOf(contains('ColorFilter.mode(Shadow.warm, BlendMode.srcIn)'),
+              contains('tint: Shadow.warm')),
           reason: '$f draws its baked shadow in the colour it was rendered in, which is black');
     });
   });
 
-  test('a sheet casts a shadow at all, and it is not nine-sliced', () {
-    // The other half, and the more expensive lesson. Nine-slicing the shadow was half of a fix for
-    // black leaking past the paper, and it cost the contact shadow altogether: drawImageNine draws
-    // the four corners at their *source* pixel size, and the outer four tenths of a 451 by 799
-    // render is 180 by 320 pixels dropped into a piece often 420 by 160, so they overlap, overflow
-    // and are squeezed, and what is left outside the paper is nothing. Measured on the hero: the
-    // desk 4 to 14 pixels under a sheet read 88.32 against 87.88 further down, half a level the
-    // wrong way, against 14.42 the right way on the capture before it. A material critic found it
-    // by walking outward from an edge, and holes.py gates on it now.
+  test('a torn sheet\'s shadow is cut by its own tear and sliced by its own bands', () {
+    // The lesson this replaces, kept because it cost the most. Nine-slicing the Blender shadow was
+    // half of a fix for black leaking past the paper and it cost the contact shadow altogether:
+    // drawImageNine draws the four corners at their source pixel size, and the outer four tenths
+    // of a 451 by 799 render is 180 by 320 pixels dropped into a piece often 420 by 160, so they
+    // overlap, overflow and squeeze, and what is left outside the paper is nothing.
     //
-    // The leak was never the geometry. It was the colour: those renders are black at alpha 255
-    // over a third of their area, because that third is under the paper.
+    // The render is gone. It was never going to cast a shadow whatever it was framed by: measured
+    // over all 56 packed tears, its alpha is 0.095 at the paper's own edge and gone within two per
+    // cent of the piece, because in it the sheet lies nearly flat and its shadow is genuinely
+    // underneath it. `tools/bake_tear_shadows.py` makes the shadow from the mask instead — the
+    // silhouette that actually casts it — with `_CutShadow`'s two passes and its own numbers. That
+    // *is* nine-sliced, and must be: sliced by the tear's own bands the offset and the blur keep
+    // the size they were baked at however tall the sheet turns out to be, which is the same rule
+    // the fibres follow and the reason a small card's shadow is not a fifth of a note's.
     final src = File('lib/material/paper.dart').readAsStringSync();
     final at = src.indexOf("tearAsset('\${tearId!}_shadow");
-    // Wide enough to hold the comment that explains it: this block earns its length.
-    final block = src.substring((at - 1400).clamp(0, src.length), (at + 2400).clamp(0, src.length));
-    expect(block, contains('BoxFit.fill'),
-        reason: 'the shadow is framed some other way than the one that casts one');
-    expect(block, isNot(contains('NineSliced')),
-        reason: 'a nine-sliced shadow has no penumbra outside the paper');
-    expect(block, contains('ColorFilter.mode(Shadow.warm'),
+    expect(at, greaterThan(0), reason: 'the torn shadow is not drawn where this test looks');
+    final block = src.substring((at - 1400).clamp(0, src.length), (at + 900).clamp(0, src.length));
+    expect(block, contains('NineSliced'),
+        reason: 'a shadow stretched to the piece is a fraction of the piece rather than of the '
+            'lift, and a chip gets a fifth of a note\'s shadow for the same paper on the same desk');
+    expect(block, contains('tint: Shadow.warm'),
         reason: 'an untinted shadow render is black, and black on the wood is a hole');
+
+    // and the bands are the tear's, not the four-tenths default
+    final bandAt = src.indexOf('static List<double> bandOf(');
+    expect(bandAt, greaterThan(0));
+    final bandBlock = src.substring(bandAt, bandAt + 900);
+    expect(bandBlock, contains("_shadow"),
+        reason: 'a shadow carries no band of its own in the index, so bandOf has to look up the '
+            'tear it belongs to or it falls back to four tenths');
   });
 
   test('the baked shadow is sampled with a filter that cannot overshoot', () {

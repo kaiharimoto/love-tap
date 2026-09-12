@@ -293,98 +293,56 @@ class PaperPiece extends StatelessWidget {
 
 
 
-  Widget _bakedShadow(BuildContext context, String suffix) {
-    // Where the paper sits inside the shadow render's own frame — and therefore how to place that
-    // render so its penumbra falls where the paper's edge actually is.
-    //
-    // The piece's mask is nine-sliced to *fill* the piece box, so the paper's edge is at 1.0 of
-    // it. The shadow was a straight 1.25 scale about the centre, which puts the render's own paper
-    // edge at 0.986 — so the entire soft tail, the only part of a contact shadow anybody can see,
-    // was compressed into the last one and a half per cent of the box and drawn underneath opaque
-    // paper. Measured on the eleventh capture: the desk four to fourteen pixels under a sheet
-    // reads 3.6 grey levels darker than forty-five to sixty-five below it in the chat hero, 0.05
-    // in search, −0.17 in the pulse and −1.64 in Moments. The one still that passes, Settings at
-    // 8.4, is the one whose cards are cut rather than torn and get the *painted* shadow.
-    //
-    // So the render is mapped by its paper rather than by its frame: the sub-rect the paper
-    // occupies inside it is laid onto the piece box and everything outside that falls outside the
-    // paper, which is where a shadow goes. The numbers are measured over all 56 packed tears and
-    // barely vary — left 0.106 to 0.128, top 0.106 to 0.147, right 0.866 to 0.899, bottom 0.843 to
-    // 0.892 — and a_shadow_is_the_size_of_its_paper_test recomputes them from the assets, so a
-    // re-render that moves them fails rather than quietly going flat again.
-    const inset = Rect.fromLTRB(0.113, 0.122, 0.887, 0.875);
-    final kx = 1.0 / (inset.right - inset.left);
-    final ky = 1.0 / (inset.bottom - inset.top);
-    return Positioned.fill(
-      child: Transform(
-        transform: Matrix4.identity()
-          ..translateByDouble(-inset.left * kx, -inset.top * ky, 0.0, 1.0)
-          ..scaleByDouble(kx, ky, 1.0, 1.0),
-        transformHitTests: false,
-        // Nine-sliced, like the mask it belongs to, and warm rather than black.
-        //
-        // A coherence critic found 758 pixels under luma 30 beside one chip in 12_search, minimum
-        // 4.3, where the desk immediately beside it reads 84 to 103 — a hole in the desk at the
-        // right-hand edge of a torn sheet. Two faults, and both are here.
-        //
-        // The first is the geometry. The paper's tear is nine-sliced (SlicedMasks), so its fibres
-        // keep the size they were rendered at whatever shape the piece turns out to be. This
-        // shadow was stretched with BoxFit.fill instead, so on a piece far from the render's own
-        // proportions — a search chip 457 points wide and fifty tall, out of a render 451 by 799 —
-        // the shadow's edge no longer lay under the paper's edge. What stuck out was the middle of
-        // the render, which is not a penumbra: 35 to 47 per cent of every one of these assets is
-        // alpha above 240, because the part under the paper is fully occluded and never meant to
-        // be seen.
-        //
-        // The second is the colour. The renders are black at that alpha — measured, RGB 0,0,0 —
-        // so anywhere the paper did not cover them the composite went to black. A contact shadow
-        // on a wooden desk is the desk with the light taken out of it, which is warm and dark; it
-        // is never neutral and it is never a hole. Tinted to Shadow.warm through the alpha, the
-        // densest possible contact now reads 49 against the desk's 84 to 103.
-        child: Opacity(
-          // One lift was modelled, and the render is as dark as this shadow gets: a note that
-          // lies flatter than the model cannot press harder than the render already did, so the
-          // reference is the flattest lift and every other note lifts away from it, lighter.
-          opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(0.0)).clamp(0.6, 1.0),
-          child: ColorFiltered(
-          colorFilter: const ColorFilter.mode(Shadow.warm, BlendMode.srcIn),
-          child: Image.asset(
-            tearAsset('${tearId!}_shadow$suffix'),
-            // Stretched to the piece, which is what this render is for, and **not** nine-sliced.
-            //
-            // Nine-slicing it was the wrong half of the hole fix and it cost the contact shadow
-            // altogether. drawImageNine draws the four corners at their *source* pixel size: the
-            // outer four tenths of a 451 by 799 render is 180 by 320 pixels, dropped into a piece
-            // that is often 420 by 160, so the corners overlap, overflow and are squeezed, and
-            // what is left outside the paper is nothing. Measured on the chat hero over 954
-            // columns: the desk four to fourteen pixels below a sheet read 88.32 against 87.88
-            // forty-five to sixty-five below it — half a grey level the *wrong* way. A material
-            // critic found it and they were right.
-            //
-            // The hole was never the geometry. It was the colour: these renders are black at
-            // alpha 255 over a third of their area because that third is under the paper, so
-            // wherever the render reached past the sheet it put black on the wood. The colour
-            // filter above is the whole fix, and this goes back to the framing that cast a real
-            // shadow for nine cycles.
-            fit: BoxFit.fill,
-            // Bilinear rather than the default. A shadow render is a dark shape inside a
-            // transparent border and a cubic or mipmapped sampler rings at a boundary like that,
-            // landing a *bright* row just outside the dark one — which is the pale straight rule
-            // that lay on the wood under every sheet for five cycles.
+  /// The shadow a torn sheet casts: its own tear, displaced by the lift and softened, baked.
+  ///
+  /// It used to be a render that came out of Blender beside the mask, and it never showed.
+  /// Measured over all 56 packed tears, that render's alpha is 0.095 at the paper's own edge and
+  /// gone within two per cent of the piece — in it the sheet lies nearly flat and its shadow is
+  /// genuinely underneath it, where opaque paper covers it. The eleventh capture is the first to
+  /// measure the result: 3.6 grey levels under the chat hero's sheets, 0.05 in search, −0.17 in
+  /// the pulse and −1.64 in Moments, against a floor of 6. Eight of ten stills failed, and the one
+  /// that passed was Settings, whose cards are cut and get `_cutShadow`.
+  ///
+  /// `tools/bake_tear_shadows.py` makes it from the thing that casts it instead — the mask, which
+  /// is the paper's silhouette fibre for fibre — with `_CutShadow`'s own two passes and its own
+  /// numbers. Nine-sliced with the tear's bands, so the offset and the blur keep the size they
+  /// were baked at however tall the sheet turns out to be, exactly as the fibres do.
+  ///
+  /// Baked rather than painted for one reason: two blurred layers per piece and sixty pieces in a
+  /// scroll's window is a hundred and twenty blurred layers a frame, and the scroll is the
+  /// messenger row's own named failure. A blur of a fixed image is a constant.
+  Widget _tornShadow(BuildContext context, String suffix) => Positioned.fill(
+        child: IgnorePointer(
+          child: NineSliced(
+            asset: tearAsset('${tearId!}_shadow$suffix'),
+            tint: Shadow.warm,
+            // Low, not medium: a mipmapped sampler overshoots at a hard boundary and lands a
+            // bright row just outside a dark one, which is the pale rule that lay on the wood
+            // under every sheet for five cycles.
             filterQuality: FilterQuality.low,
-            gaplessPlayback: true,
-            errorBuilder: none,
-          ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
-  /// The contact shadow of a cut piece. Nothing rendered it — the tear shadows came out of
-  /// Blender with the pieces they belong to, and a straight-cut card has no render of its own —
-  /// so it is the one shadow in the app that is drawn: the same warm colour as the baked ones,
-  /// as soft and as far as the lift says, under a sharp rectangle.
+  /// The line of contact under a piece, drawn rather than rendered.
+  ///
+  /// It was only for cut cards, which have no render of their own. It is under every piece now,
+  /// and the reason is arithmetic. A baked shadow is *stretched to the piece*, and a piece's shape
+  /// is decided when its writing is laid out — so the width of its penumbra, in millimetres, is
+  /// whatever the layout happened to make it. A physical shadow does not work that way: paper a
+  /// millimetre off a desk casts a millimetre of penumbra whether the sheet is a note or a chip.
+  ///
+  /// And the renders have almost none to stretch. Measured over all 56 packed tears, the alpha
+  /// outside the paper falls to 0.095 at the paper's own edge and to nothing within two per cent
+  /// of the piece, because in the render the sheet lies nearly flat and its shadow is genuinely
+  /// underneath it. Placed by the frame it was baked at, the eleventh capture read 3.6 grey levels
+  /// under the chat hero's sheets, 0.05 in search, −0.17 in the pulse and −1.64 in Moments against
+  /// a floor of 6; placed by the paper — which is right and is what `_bakedShadow` does now — the
+  /// arithmetic says at most 2. The one still that passed was Settings, whose cards are cut and
+  /// got this.
+  ///
+  /// So both: this for the contact, in logical pixels, off the lift; the render on top of it for
+  /// the ragged occlusion right at a torn edge, which is the part only a render knows.
   Widget _cutShadow(bool dusk) => Positioned.fill(
         child: IgnorePointer(
           child: CustomPaint(
@@ -483,7 +441,7 @@ class PaperPiece extends StatelessWidget {
               // render as the piece, already in the right place, already the right shape. All the
               // app does is put it back at the size it was framed at — wider than the piece, because
               // the part of a contact shadow anyone sees is the part the paper is not covering.
-              if (tearId != null) _bakedShadow(context, suffix) else _cutShadow(dusk),
+              if (tearId != null) _tornShadow(context, suffix) else _cutShadow(dusk),
               piece,
               ...stuckOn,
             ],
@@ -955,7 +913,12 @@ class SlicedMasks {
   /// deep it leaves fibre in the middle band, where the nine-patch stretches it.
   static List<double> bandOf(String asset) {
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
-    final b = lib?.tearBandOf(asset);
+    // The edge light and the contact shadow are cut by the same tear as the mask and carry no band
+    // of their own in the index — the packer measures the alpha boundary, which only the mask has.
+    // Sliced by the default four tenths instead, a shadow's corners are four tenths of the render
+    // wide and its blur is stretched across the middle, which is what the band exists to stop.
+    final of = asset.replaceAll('_shadow_dusk', '').replaceAll('_shadow', '').replaceAll('_edge', '');
+    final b = lib?.tearBandOf(of);
     if (b == null || b.length != 4) return const [edge, edge, edge, edge];
     return b;
   }
@@ -1331,9 +1294,13 @@ class _StockPainter extends CustomPainter {
 /// the image is decoded through the same cache the masks use and drawn straight.
 class NineSliced extends StatefulWidget {
   const NineSliced({super.key, required this.asset, this.edge = 0.4, this.opacity = 1.0,
-      this.filterQuality = FilterQuality.medium});
+      this.filterQuality = FilterQuality.medium, this.tint});
 
   final String asset;
+
+  /// Keep the render's alpha, take this colour. A contact shadow is baked black through its alpha
+  /// and is never drawn black: on a wooden desk it is the desk with the light taken out of it.
+  final Color? tint;
 
   /// How much of the render, in from each edge, is the torn edge itself rather than the paper
   /// inside it. Measured off the masks: the fibres reach about a fifth of the way in and the
@@ -1390,18 +1357,22 @@ class _NineSlicedState extends State<NineSliced> {
     final image = _image;
     if (image == null) return const SizedBox.shrink();
     return CustomPaint(
-        painter: _NinePainter(image, widget.edge, widget.opacity, widget.filterQuality,
+        painter: _NinePainter(image, widget.edge, widget.opacity, widget.filterQuality, widget.tint,
             MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0,
             SlicedMasks.bandOf(widget.asset)));
   }
 }
 
 class _NinePainter extends CustomPainter {
-  _NinePainter(this.image, this.edge, this.opacity, this.filterQuality, this.dpr, this.band);
+  _NinePainter(this.image, this.edge, this.opacity, this.filterQuality, this.tint, this.dpr,
+      this.band);
   final ui.Image image;
   final double edge;
   final double opacity;
   final FilterQuality filterQuality;
+
+  /// Keep the alpha, take this colour: what makes a shadow baked black read as warm.
+  final Color? tint;
 
   /// Device pixels per logical point. The draw happens in device pixels — see below.
   final double dpr;
@@ -1433,7 +1404,9 @@ class _NinePainter extends CustomPainter {
       Rect.fromLTWH(0, 0, size.width * d, size.height * d),
       Paint()
         ..filterQuality = filterQuality
-        ..color = Color.fromRGBO(0, 0, 0, opacity),
+        ..color = Color.fromRGBO(0, 0, 0, opacity)
+        ..colorFilter =
+            tint == null ? null : ColorFilter.mode(tint!, BlendMode.srcIn),
       band,
     );
     canvas.restore();
@@ -1441,6 +1414,7 @@ class _NinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_NinePainter old) =>
+      old.tint != tint ||
       !identical(old.image, image) ||
       old.edge != edge ||
       old.opacity != opacity ||
@@ -1614,6 +1588,59 @@ class _CutEdge extends CustomPainter {
 
   @override
   bool shouldRepaint(_CutEdge old) => old.seed != seed;
+}
+
+/// A torn sheet's shadow: the tear's own alpha, displaced, blurred and warm.
+class _TornShadow extends CustomPainter {
+  const _TornShadow({required this.asset, required this.lift, required this.alpha});
+  final String asset;
+  final double lift;
+  final double alpha;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final mask = MaskCache.peek(asset);
+    if (mask == null) return;
+    // Stretched rather than nine-sliced. A shadow this soft has no fibres left to keep at their
+    // rendered size, and nine-slicing it would put eight blurred seams across the one thing in the
+    // picture that has to have no edges of its own.
+    // Blurred through a layer, not through the paint. `Paint.maskFilter` is geometry-only: Skia
+    // drops an image draw that carries one, and this painted a perfectly invisible shadow for as
+    // long as it took to measure the wood under a sheet row by row and find a smooth ramp from the
+    // paper's own fade straight to the desk with no dip anywhere in it.
+    //
+    // Two passes, which is what a contact shadow is: the tight dark line where the sheet is down
+    // on the desk, and the wider softer one the lift throws past it. The same two `_CutShadow`
+    // draws for a straight edge, in the same numbers — but cut from the tear, so they follow every
+    // fibre instead of stopping at a rectangle the torn edge does not have.
+    final src = Rect.fromLTWH(0, 0, mask.width.toDouble(), mask.height.toDouble());
+    final dx = 0.6 + lift * 1.1, dy = 1.2 + lift * 2.2;
+    final blur = 1.4 + lift * 2.4;
+    void pass(double ox, double oy, double sigma, double a) {
+      final dst = Rect.fromLTWH(ox, oy, size.width, size.height);
+      canvas.saveLayer(
+        dst.inflate(sigma * 3 + 2),
+        Paint()..imageFilter = ui.ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
+      );
+      canvas.drawImageRect(
+        mask,
+        src,
+        dst,
+        Paint()
+          ..colorFilter = const ColorFilter.mode(Shadow.warm, BlendMode.srcIn)
+          ..color = Color.fromRGBO(0, 0, 0, a.clamp(0.0, 1.0))
+          ..filterQuality = FilterQuality.low,
+      );
+      canvas.restore();
+    }
+
+    pass(dx, dy, blur, alpha);
+    pass(dx * 0.45, dy * 0.45, blur * 0.35, alpha * 1.25);
+  }
+
+  @override
+  bool shouldRepaint(_TornShadow old) =>
+      old.asset != asset || old.lift != lift || old.alpha != alpha;
 }
 
 class _CutShadow extends CustomPainter {
