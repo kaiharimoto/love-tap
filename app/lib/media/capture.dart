@@ -58,7 +58,17 @@ class MediaCapture {
 
 /// A voice note being recorded: amplitude samples become the waveform drawn in the thread.
 class VoiceRecorder {
-  final AudioRecorder _rec = AudioRecorder();
+  /// Made when somebody presses the microphone, not when the thread is drawn.
+  ///
+  /// `AudioRecorder()` opens its platform channel in its constructor, and this was a field on the
+  /// chat region's state — so every build of the thread, on every phone and in every widget test,
+  /// reached for the microphone plugin before anybody had asked for it. In a test there is no
+  /// plugin behind the channel and the throw lands in whichever test happened to be running: the
+  /// capture's own pre-shoot suite went red on it twice, in a test about the link being down, and
+  /// nothing was photographed either time. A recorder that has never recorded should not have
+  /// touched the microphone.
+  AudioRecorder? _made;
+  AudioRecorder get _rec => _made ??= AudioRecorder();
   final List<double> _amps = [];
   Timer? _timer;
   DateTime? _started;
@@ -99,7 +109,9 @@ class VoiceRecorder {
   Future<void> cancel() async {
     _timer?.cancel();
     _started = null;
-    if (await _rec.isRecording()) await _rec.stop();
+    final rec = _made;
+    if (rec == null) return;
+    if (await rec.isRecording()) await rec.stop();
   }
 
   static List<double> resample(List<double> xs, int n) {
@@ -117,6 +129,6 @@ class VoiceRecorder {
 
   void dispose() {
     _timer?.cancel();
-    _rec.dispose();
+    _made?.dispose();
   }
 }
