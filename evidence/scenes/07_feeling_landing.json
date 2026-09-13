@@ -158,6 +158,25 @@
       "why": "As long as the thing it films, and no longer. A landing settles in six to eight hundred milliseconds and these takes ran for 1,024: the fourteenth capture failed the frame check on three frames at 252, which is the tail of a take that had nothing left to show. Fifty-six frames is 896 ms."
     },
     {
+      "do": "far",
+      "arg": "feeling overwhelmed 0.8"
+    },
+    {
+      "do": "awaitArrival"
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/07_feeling_landing",
+      "count": 56,
+      "ms": 16,
+      "from": 336,
+      "why": "As long as the thing it films, and no longer. A landing settles in six to eight hundred milliseconds and these takes ran for 1,024: the fourteenth capture failed the frame check on three frames at 252, which is the tail of a take that had nothing left to show. Fifty-six frames is 896 ms. Six takes is 5.376 s and this clip's minimum is 6, so there is a seventh — and it is Static, which is the one family of the six that six landings never showed: overwhelmed is fourteen pulses in 450 ms against here's three 400 ms lifts, so the seventh take is also the furthest apart two of these can be."
+    },
+    {
       "do": "report",
       "out": "evidence/logs/07_feeling_landing.report.json"
     }

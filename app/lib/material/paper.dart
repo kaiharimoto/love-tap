@@ -202,6 +202,7 @@ class PaperPiece extends StatelessWidget {
     this.stockScale = 1.0,
     this.windowed = false,
     this.overlays = const [],
+    this.fillsItsBox = false,
     this.stuckOn = const [],
     this.seed = 0,
   });
@@ -217,6 +218,16 @@ class PaperPiece extends StatelessWidget {
 
   /// Radians. Paper never lies square to the desk.
   final double tilt;
+
+  /// Whether the sheet is the size of the box it was given rather than the size of its writing.
+  ///
+  /// Off for every note: a short note in a tall cell is a short note, and a sheet grown to its cell
+  /// is a shadow the size of the cell, which a test has held to since the fifth cycle. On for a
+  /// piece whose box *is* the shape of the paper — the partner's strip is 86 points of sheet
+  /// across the top of every region — because only then is there slack between the writing and the
+  /// edges for the tear's own band to be kept clear of, and on that strip an emotional critic
+  /// measured 90.4 per cent of the state row's ink on bare wood.
+  final bool fillsItsBox;
 
   /// Extra room inside the safe area, in logical pixels.
   final EdgeInsets padding;
@@ -427,12 +438,21 @@ class PaperPiece extends StatelessWidget {
   /// The layout does not move between the three: the safe area, the padding and the width are the
   /// tear's whichever shape is drawn, so a sheet that comes up cut and tears a moment later tears
   /// in place.
+  /// How far this piece's tear eats into it, per side, in logical points — or nothing when the
+  /// library has not been baked and there is no band to read.
+  static List<double> _biteOf(BuildContext context, String tearId) {
+    if (!MaterialLibrary.loaded) return const [0.0, 0.0, 0.0, 0.0];
+    final dpr = MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0;
+    return MaterialLibrary.instance.tearBiteOf(tearId, dpr) ?? const [0.0, 0.0, 0.0, 0.0];
+  }
+
   Widget _draw(BuildContext context, _Shape shape) {
     final torn = tearId != null && shape != _Shape.cut;
     final dusk = Light.of(context) == LightCondition.dusk;
     final suffix = dusk ? '_dusk' : '';
     final stock = (!dusk || stockId.endsWith('_dusk')) ? stockId : '${stockId}_dusk';
     final content = Stack(
+      fit: fillsItsBox ? StackFit.expand : StackFit.loose,
       children: [
         // Underneath everything, the colour the stock is. The render is what makes it paper, but
         // this is what stops it ever being nothing: a sheet whose image has not arrived, or whose
@@ -455,7 +475,15 @@ class PaperPiece extends StatelessWidget {
           // top and left the way a torn one does along its fibres. Without it a whole sheet was a
           // rectangle of texture that stopped dead — edge deviation measured at exactly zero.
           Positioned.fill(child: IgnorePointer(child: CustomPaint(painter: _CutEdge(_seed)))),
-        _WithinTear(safe: safe, padding: padding, child: child ?? const SizedBox.shrink()),
+        _WithinTear(
+          safe: safe,
+          padding: padding,
+          // The tear's own band, in the unit this piece is laid out in. Only when the tear is
+          // actually drawn: a cut edge takes a fraction of a millimetre and the fractions
+          // already cover it.
+          bite: torn ? _biteOf(context, tearId!) : const [0.0, 0.0, 0.0, 0.0],
+          child: child ?? const SizedBox.shrink(),
+        ),
         ...overlays,
       ],
     );
@@ -640,28 +668,59 @@ class _WhenThePaperArrivesState extends State<_WhenThePaperArrives> {
 /// The piece's height is not known until the writing has been laid out, and the safe area is a
 /// fraction of that height, so the two are solved together: with content height C and safe
 /// fractions fT and fB, the piece is C / (1 - fT - fB) tall and the writing starts fT down it.
+///
+/// A fraction is only half of it, and the missing half is [bite]. The safe fractions are measured
+/// on the mask at the size it was rendered — 1024 by about 578 — but the mask is drawn as a
+/// nine-patch, and a nine-patch keeps its border cells at their *rendered* size however big the
+/// piece is. So on a piece shorter than the render the tear eats a much larger share of it than
+/// the fraction says. Measured on the partner's strip, which is 86 points tall: a bottom band of
+/// 0.12 of a 578-pixel mask is 23 points of that strip and the fraction called it 10, and the
+/// difference is where the words went. An emotional critic measured the consequence on the one
+/// clip whose subject is a state change reaching the other phone — 90.4 per cent of that row's ink
+/// on bare wood, in 67 of 70 sampled frames, destroying exactly TRAVELLING, HEADS DOWN, RESTLESS
+/// and QUIET.
+///
+/// What this does about it, and what it does not. The piece is still sized by the fractions: a
+/// piece grown to clear its band is a piece five times the size of the word on it, because
+/// [SlicedMasks.fitFor] lets the band take four fifths of a small piece and then the arithmetic
+/// has only a fifth left to put the writing in — measured at 194 points for the word "41s" in a
+/// 240-point cell, against a test that has held that shadow to 180 since the fifth cycle. So the
+/// band is what the *mask* is chosen by, at the one place where a piece is short enough for it to
+/// matter ([MaterialLibrary.tearsThatFit], used by the partner's strip), and [bite] is carried
+/// here so the piece can say what its own tear costs it. Making every piece clear its band is a
+/// change to fitFor and to the depth the generator tears at, and it is judged by a capture.
 class _WithinTear extends SingleChildRenderObjectWidget {
-  const _WithinTear({required this.safe, required this.padding, required Widget child}) : super(child: child);
+  const _WithinTear({
+    required this.safe,
+    required this.padding,
+    required this.bite,
+    required Widget child,
+  }) : super(child: child);
 
   final List<double> safe;
   final EdgeInsets padding;
 
+  /// left, top, right, bottom — the tear's own band in logical points.
+  final List<double> bite;
+
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderWithinTear(safe, padding);
+  RenderObject createRenderObject(BuildContext context) => _RenderWithinTear(safe, padding, bite);
 
   @override
   void updateRenderObject(BuildContext context, _RenderWithinTear renderObject) {
     renderObject
       ..safe = safe
-      ..padding = padding;
+      ..padding = padding
+      ..bite = bite;
   }
 }
 
 class _RenderWithinTear extends RenderShiftedBox {
-  _RenderWithinTear(this._safe, this._padding) : super(null);
+  _RenderWithinTear(this._safe, this._padding, this._bite) : super(null);
 
   List<double> _safe;
   EdgeInsets _padding;
+  List<double> _bite;
 
   set safe(List<double> v) {
     if (_safe == v) return;
@@ -674,6 +733,16 @@ class _RenderWithinTear extends RenderShiftedBox {
     _padding = v;
     markNeedsLayout();
   }
+
+  set bite(List<double> v) {
+    if (_bite == v) return;
+    _bite = v;
+    markNeedsLayout();
+  }
+
+  /// How much of this piece its own tear eats, per side, in logical points — nothing when the
+  /// piece is not torn or the library has not been baked.
+  List<double> get bite => _bite;
 
   /// What this piece would like to be, asked before it is laid out — by an IntrinsicWidth, which
   /// is how a slip becomes as wide as its own word. The default answer is the child's width, and
@@ -721,10 +790,33 @@ class _RenderWithinTear extends RenderShiftedBox {
     final vertical = (1 - fT - fB).clamp(0.35, 1.0);
     final height = content / vertical;
     size = constraints.constrain(Size(width, height));
+    // Where the writing sits, once the piece is the size it is going to be.
+    //
+    // The fractions decide the size, and then whatever slack the piece was *given* beyond that
+    // goes into clearing the tear's own band rather than sitting under the writing. A piece that
+    // is exactly the size its fractions asked for has no slack and does not move — which is every
+    // note in the thread, and is why no piece changes size here. A piece held to a fixed height by
+    // something above it has slack, and the partner's strip is the case that matters: 86 points
+    // held by the shell, 51 of writing, a mask whose top band is 13 where the fraction called it
+    // 11, and the first line of the partner's state sitting 3.7 points inside the tear.
     (child.parentData! as BoxParentData).offset = Offset(
-      width * fL + _padding.left,
-      size.height * fT + _padding.top,
+      _clear(size.width, fL, fR, child.size.width + _padding.horizontal, _side(0), _side(2)) +
+          _padding.left,
+      _clear(size.height, fT, fB, content, _side(1), _side(3)) + _padding.top,
     );
+  }
+
+  double _side(int i) => _bite.length == 4 ? _bite[i] : 0.0;
+
+  /// How far in the writing starts on one axis: the fraction, pushed toward the tear's own band by
+  /// as much of the piece's slack as there is, and never past what would run the writing off the
+  /// far side of the paper.
+  static double _clear(double extent, double near, double far, double content,
+      double biteNear, double biteFar) {
+    final byFraction = extent * near;
+    if (biteNear <= byFraction) return byFraction;
+    final furthest = extent - content - math.max(extent * far, biteFar);
+    return math.min(biteNear, math.max(byFraction, furthest));
   }
 }
 

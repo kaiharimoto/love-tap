@@ -59,8 +59,15 @@ class PartnerStrip extends StatelessWidget {
     final stock = stockForMood(state.mood);
     final variants = lib?.stockVariants(stock) ?? const <String>[];
     final id = variants.isEmpty ? '' : variants[(partner.index + (state.mood?.length ?? 0)) % variants.length];
-    final tears = lib?.writableTears ?? const <String>[];
-    // a strip torn across the page: the strip kinds sit early in the pool
+    // A strip torn across the page — and torn by a mask that leaves room to write on it.
+    //
+    // This took any writable mask, by the hash of their mood. A mask is rendered about 578 pixels
+    // tall and drawn as a nine-patch, so its torn bands keep their rendered size however short the
+    // piece is: on a strip 86 points tall the median mask of the pool eats 60 of them and the
+    // deepest eats 157. An emotional critic measured the result on the one clip whose subject is a
+    // state change reaching the other phone — 90.4 per cent of this row's ink on bare wood, in 67
+    // of 70 sampled frames, destroying exactly TRAVELLING, HEADS DOWN, RESTLESS and QUIET.
+    final tears = lib?.tearsThatFit(86, MediaQuery.devicePixelRatioOf(context)) ?? const <String>[];
     final tear = tears.isEmpty ? null : tears[(state.mood?.hashCode.abs() ?? 3) % tears.length];
     final asleep = state.availability == 'asleep';
     final headsDown = state.availability == 'heads_down';
@@ -81,6 +88,9 @@ class PartnerStrip extends StatelessWidget {
             child: PaperPiece(
               stockId: id,
               tearId: tear,
+              // the box is the shape of the paper here, and the slack between the writing and the
+              // edges is what keeps the state row clear of the tear
+              fillsItsBox: true,
               liftMm: 0.5 + 0.4 * state.need,
               tilt: -0.006,
               padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),

@@ -62,13 +62,29 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
   /// for a rebuild, which is the clock nobody's phone runs on. A hold is the one gesture in the
   /// app that takes time, so it gets a ticker, and the ticker covers both clocks: `_held` reads
   /// whichever one is running.
-  late final Ticker _charging = createTicker((_) {
+  late final Ticker _charging = createTicker((elapsed) {
+    _ticked = elapsed;
     if (_heldSince != null && mounted) setState(() {});
   });
+
+  /// How long [_charging] has been running, from its own callback.
+  ///
+  /// This was `DateTime.now()`, and a wall clock read inside a build is a race with whatever else
+  /// the machine is doing: the charge reaches full at two seconds, so a box busy enough to take
+  /// two seconds between the long press firing and the first read of a tile saw a hold that was
+  /// already over, and the test that says a hold is a thing happening rather than a state went red
+  /// on one suite run in three — and a red suite is a capture that photographs nothing. A ticker's
+  /// elapsed is the frame timestamp, so on a phone it is the same wall clock to the frame, and
+  /// under a test it advances with the frames the test asks for and by exactly as much. The hold
+  /// is measured by the thing that draws it either way.
+  Duration _ticked = Duration.zero;
   bool _open = false;
   /// When the hold began, on the driven clock (capture) — see [_held].
   Duration? _heldSince;
-  DateTime? _wallFrom;
+
+  /// [_ticked] when the hold began, so a hold that starts while the ticker is already running is
+  /// measured from the finger and not from the ticker.
+  Duration? _chargeFrom;
   Feeling? _under;
   Family _family = Family.warmth;
 
@@ -83,7 +99,7 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
   Duration get _held {
     final since = _heldSince;
     if (since == null) return Duration.zero;
-    return DrivenClock.enabled ? DrivenClock.now - since : DateTime.now().difference(_wallFrom!);
+    return DrivenClock.enabled ? DrivenClock.now - since : _ticked - (_chargeFrom ?? _ticked);
   }
 
   double get _intensity {
@@ -97,7 +113,7 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
     setState(() {
       _open = true;
       _heldSince = DrivenClock.now;
-      _wallFrom = DateTime.now();
+      _chargeFrom = _charging.isActive ? _ticked : Duration.zero;
     });
     if (!_charging.isActive) _charging.start();
     if (DrivenClock.enabled) {
@@ -134,7 +150,7 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
       _open = false;
       _under = null;
       _heldSince = null;
-      _wallFrom = null;
+      _chargeFrom = null;
     });
     if (DrivenClock.enabled) {
       _curlFrom = DrivenClock.now;
@@ -195,7 +211,7 @@ class _FeelingCornerState extends State<FeelingCorner> with TickerProviderStateM
           _family = f.family;
           _under = f;
           _heldSince = DrivenClock.now;
-          _wallFrom = DateTime.now();
+          _chargeFrom = _charging.isActive ? _ticked : Duration.zero;
         });
         if (!_charging.isActive) _charging.start();
         return true;

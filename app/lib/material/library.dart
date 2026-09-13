@@ -243,6 +243,60 @@ class MaterialLibrary {
     return const [0.06, 0.07, 0.06, 0.07];
   }
 
+  /// The writable masks a piece [heightPoints] tall can be torn by and still be written on,
+  /// shallowest first.
+  ///
+  /// A mask is rendered at about 578 pixels tall and drawn as a nine-patch, so its torn bands keep
+  /// their rendered size however short the piece is. On the partner's strip, which is 86 points,
+  /// the median mask of the pool eats 60 of them and the deepest eats 157 — there is no writing on
+  /// a strip torn by those, and the strip was picking one by the hash of their mood. Measured on
+  /// the twelfth capture: 90.4 per cent of that row's ink on bare wood.
+  ///
+  /// [leave] is the share of the piece that has to survive both bands. Nothing in the library
+  /// reaching it returns the shallowest masks anyway rather than nothing: a piece with a tear too
+  /// deep for it is a layout to fix, and a piece with no tear at all is a rectangle, which is the
+  /// one thing this material may never be.
+  List<String> tearsThatFit(double heightPoints, double devicePixelRatio, {double leave = 0.55}) {
+    final scored = <(String, double)>[];
+    for (final id in writableTears) {
+      final bite = tearBiteOf(id, devicePixelRatio);
+      if (bite == null) continue;
+      scored.add((id, bite[1] + bite[3]));
+    }
+    if (scored.isEmpty) return writableTears;
+    scored.sort((a, b) => a.$2.compareTo(b.$2));
+    final room = (1 - leave) * heightPoints;
+    final ok = [for (final s in scored) if (s.$2 <= room) s.$1];
+    return ok.isNotEmpty ? ok : [for (final s in scored.take(4)) s.$1];
+  }
+
+  /// How far the tear actually eats into a piece, per side, in logical points.
+  ///
+  /// [tearBandOf] and [safeOf] are both fractions of the mask at the size it was *rendered*, and
+  /// the mask is drawn as a nine-patch, which keeps its border cells at their rendered size
+  /// whatever size the piece turns out to be. So on a piece shorter than the render the tear takes
+  /// a much bigger share of it than either fraction says: the partner's strip is 86 points tall
+  /// and a bottom band of 0.12 of a 578-pixel mask is 23 of them, not 10. This is the band in the
+  /// unit the piece is laid out in, so the writing can be kept clear of it.
+  ///
+  /// Null when nothing is known about the mask, which is what it did before.
+  List<double>? tearBiteOf(String assetOrId, double devicePixelRatio) {
+    final id = assetOrId.split('/').last.replaceAll('.webp', '');
+    final band = tearBandOf(id);
+    if (band == null || devicePixelRatio <= 0) return null;
+    for (final e in tears) {
+      if (e.id != id) continue;
+      if (e.w <= 0 || e.h <= 0) return null;
+      return [
+        band[0] * e.w / devicePixelRatio,
+        band[1] * e.h / devicePixelRatio,
+        band[2] * e.w / devicePixelRatio,
+        band[3] * e.h / devicePixelRatio,
+      ];
+    }
+    return null;
+  }
+
   /// The band of a tear render that is fibre rather than paper, per side, or null for a library
   /// packed before it was measured. Takes an id or an asset path.
   List<double>? tearBandOf(String assetOrId) {

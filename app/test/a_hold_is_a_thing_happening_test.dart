@@ -103,25 +103,24 @@ void main() {
         .map((t) => t.size)
         .reduce((a, b) => a <= b ? a : b);
     expect(atFirst.size, greaterThan(resting), reason: 'the thumb is not on a tile');
-    // Half charged, not barely begun. The charge is written against the wall clock and the first
-    // read of it costs however long the machine takes to walk the widget tree — under the whole
-    // suite on a loaded box that was 62 ms, which is a real hold that had genuinely started, and
-    // the test failed on it. What this has to catch is a tile that is *already* fully lifted on
-    // the frame the finger lands, which is a hold drawn as a state rather than as a thing
-    // happening; the growth below is what says it kept happening.
+    // Not already fully lifted on the frame the finger landed. That is the thing this catches: a
+    // hold drawn as a state is at full lift the instant it starts, and a hold drawn as something
+    // happening is not.
+    //
+    // This used to be a race. The charge reaches full at two seconds and was written against
+    // `DateTime.now()`, so on a box busy enough to take two seconds between the long press and the
+    // first walk of the widget tree the tile really was fully lifted, and the test really did fail
+    // — once in three suite runs, and a red suite is a capture that photographs nothing. The
+    // charge is the charging ticker's own elapsed now (corner.dart `_ticked`), which on a phone is
+    // the same wall clock to the frame and under a test advances by exactly what the test pumps.
     expect(atFirst.lift, lessThan(0.5),
         reason: 'the tile was already lifted on the frame the finger landed: the hold is a state, '
             'not something happening');
 
-    // The charge is written against the clock the app is running on, which in a test is the wall
-    // clock, so the time has to actually pass. runAsync is the only thing that lets it — and it is
-    // *real* time, so a fixed delay is a race with whatever else the machine is doing. Under a
-    // loaded box this test passed alone and failed in the suite. It waits for the thing it is
-    // about instead: the hold having grown.
+    // So the time passes by being pumped, not by being waited for: the ticker's elapsed is the
+    // frame clock, and each pump moves it by the duration given.
     for (var tries = 0; tries < 20 && held().lift <= 0.1; tries++) {
-      await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 120)));
-      await tester.pump();
-      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 120));
     }
 
     final later = held();

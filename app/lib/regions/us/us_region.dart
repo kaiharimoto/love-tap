@@ -1,6 +1,8 @@
 // Us: the couple's shared life, all of it on one desk, all of it writing into the same spine.
 // The sections come from modules/registry.dart, so a fifth module appears here without this file
 // changing.
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../../material/desk.dart';
@@ -81,16 +83,29 @@ const double kUsSectionGap = 10;
 /// [Module.rowHeight] only decides fairness — [FitRows] enforces the budget by laying the rows
 /// out, so a module whose declared row height has drifted takes a wrong share of the desk rather
 /// than falling off the bottom of it.
-List<double> shareOfTheDesk(double slot) {
-  final chrome = kModules.length * (kUsHeading + kUsSectionGap) + 4 + 8;
-  final minima = [for (final m in kModules) m.rowHeight];
-  final room = slot.isFinite ? slot - chrome : double.infinity;
-  if (!room.isFinite) return minima;
-  var extra = room - minima.fold<double>(0, (a, b) => a + b);
-  if (extra <= 0) return minima;
-  final w = [for (final m in kModules) m.share];
+///
+/// What is shared out never exceeds the room. It used to: when the minima came to more than the
+/// desk had left, this returned them anyway, so the answer to "how much of the desk does each
+/// module get" was a number bigger than the desk. Five modules cost 422 pt of chrome and 466 pt of
+/// minimum row out of the roughly 896 pt the shell leaves, which clears by eight points — and
+/// three files say a sixth module is a directory and one line in the registry. A sixth costs 504
+/// and 556, which is 164 pt more desk than there is, and every module would have been handed its
+/// full row as though there were. Now the room is shared in proportion when it will not stretch,
+/// so what runs out is the last rows of the longest lists rather than the arithmetic.
+///
+/// [modules] is a parameter so the sixth module can be tested rather than asserted.
+List<double> shareOfTheDesk(double slot, {List<Module> modules = kModules}) {
+  final minima = [for (final m in modules) m.rowHeight];
+  if (!slot.isFinite) return minima;
+  final chrome = modules.length * (kUsHeading + kUsSectionGap) + 4 + 8;
+  final room = math.max(0.0, slot - chrome);
+  final want = minima.fold<double>(0, (a, b) => a + b);
+  if (want <= 0) return minima;
+  if (room < want) return [for (final m in minima) m * room / want];
+  final w = [for (final m in modules) m.share];
   final total = w.fold<double>(0, (a, b) => a + b);
-  return [for (var i = 0; i < kModules.length; i++) minima[i] + extra * w[i] / total];
+  final extra = room - want;
+  return [for (var i = 0; i < modules.length; i++) minima[i] + extra * w[i] / total];
 }
 
 /// One module on the desk: its name stamped on an index card laid over the top of it, and as much

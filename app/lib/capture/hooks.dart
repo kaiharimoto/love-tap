@@ -817,7 +817,15 @@ class CaptureHooks {
 /// The driven clock: in capture mode animations advance only when the harness says so, so every
 /// frame of a clip is a real frame of the app at a known time.
 class DrivenClock {
-  static bool get enabled => Flags.capture;
+  /// Whether app time is being stepped rather than passing.
+  ///
+  /// This read the build flag alone, and every other handle in the app reads `Flags.capture ||
+  /// CaptureBus.wanted` — the flag is how a shot build knows, the bus is how a harness or a test
+  /// that is driving an ordinary build says so. The mismatch meant a test could take the corner's
+  /// capture handles, call [step] forty times, and be answered by the wall clock: the one test
+  /// named for the clock the harness drives was measuring the other one, and passed only because
+  /// forty pumps take real milliseconds.
+  static bool get enabled => Flags.capture || CaptureBus.wanted;
   static Duration _now = Duration.zero;
 
   /// How many steps have been taken. A clip grabs one frame per step, so this is the frame the
