@@ -147,6 +147,44 @@ void main() {
             'was written for measured twenty-one');
   });
 
+  testWidgets('a chip is mostly paper, not mostly fringe', (tester) async {
+    // A material critic measured the WRITTEN chip in 12_search holding six rows of solid paper
+    // where it had held forty-nine, in a piece of about the same total extent: almost all of it
+    // had become fringe. The cause is `SlicedMasks.fitFor`'s room to stretch in. It was a fifth —
+    // the borders could take four fifths of the piece — which is nothing on a sheet and is the
+    // whole of a chip, and it only began to bite when the band came to be measured per mask
+    // rather than assumed at four tenths, because a smaller band means less shrinking and so
+    // bigger fibres against a small piece.
+    final (img, bytes) = await render(
+      tester,
+      86,
+      34,
+      const Align(
+        alignment: Alignment.topCenter,
+        child: Slip(
+          id: 'c0ffee112233',
+          row: 1,
+          stock: 'index',
+          width: 86,
+          padding: EdgeInsets.fromLTRB(7, 5, 7, 6),
+          child: SizedBox(height: 20, width: 72),
+        ),
+      ),
+    );
+    var solid = 0;
+    for (var y = 0; y < img.height; y++) {
+      var on = 0;
+      for (var x = 0; x < img.width; x++) {
+        if (bytes[(y * img.width + x) * 4 + 3] > 250) on++;
+      }
+      if (on >= img.width * 0.9) solid++;
+    }
+    expect(solid, greaterThanOrEqualTo(img.height ~/ 3),
+        reason: 'only $solid of the chip\'s ${img.height} rows are nine tenths solid paper: the '
+            'rest is the tear, and there is nowhere on it to write. At four fifths of room to '
+            'stretch in, which is what this was, the answer is zero');
+  });
+
   testWidgets('a feeling lands on a torn scrap, not on a card', (tester) async {
     // The landing scrap is about 190 points square, which is 570 device pixels against a
     // 1024-pixel render — one of the smallest pieces in the app, and squarely inside what the
@@ -241,22 +279,28 @@ void main() {
 
   test('a piece smaller than the render shrinks the tear rather than butting it', () async {
     final mask = await MaskCache.load(tearAsset('tear_001'));
+    // The band the app actually slices this mask by, measured at pack time. It used to ask with
+    // no band at all, which falls back to a flat four tenths a side — a number nothing has drawn
+    // since the band came to be measured per mask, and one that makes a full sheet shrink as soon
+    // as the room to stretch in is anything under four sevenths.
+    final band = SlicedMasks.bandOf(tearAsset('tear_001'));
     // A Moments tile: 450 x 258 device pixels against a 1024-wide render.
-    final small = SlicedMasks.fitFor(mask, const Size(450, 258));
+    final small = SlicedMasks.fitFor(mask, const Size(450, 258), band);
     expect(small, lessThan(1.0), reason: 'the borders cannot fit and nothing shrank');
-    // Both borders and a fifth of the piece to stretch, which is what stops the corners butting.
-    expect(2 * SlicedMasks.edge * mask.width * small, lessThanOrEqualTo(450 * 0.81));
-    expect(2 * SlicedMasks.edge * mask.height * small, lessThanOrEqualTo(258 * 0.81));
+    // Both borders, and the middle left over to stretch, which is what stops the corners butting.
+    expect((band[0] + band[2]) * mask.width * small, lessThanOrEqualTo(450 * 0.51));
+    expect((band[1] + band[3]) * mask.height * small, lessThanOrEqualTo(258 * 0.51));
 
     // A full sheet is bigger than the render and keeps its fibres at the size they were rendered.
-    expect(SlicedMasks.fitFor(mask, const Size(1440, 2000)), 1.0);
+    expect(SlicedMasks.fitFor(mask, const Size(1440, 2000), band), 1.0);
   });
 
   test('and an ordinary chat note, which never fitted on its short axis either', () async {
     final mask = await MaskCache.load(tearAsset('tear_001'));
+    final band = SlicedMasks.bandOf(tearAsset('tear_001'));
     // 340 logical points across at three device pixels to the point, about 120 tall.
-    expect(SlicedMasks.fitFor(mask, const Size(1020, 360)), lessThan(1.0));
-    expect(2 * SlicedMasks.edge * mask.height * SlicedMasks.fitFor(mask, const Size(1020, 360)),
-        lessThanOrEqualTo(360 * 0.81));
+    final k = SlicedMasks.fitFor(mask, const Size(1020, 360), band);
+    expect(k, lessThan(1.0));
+    expect((band[1] + band[3]) * mask.height * k, lessThanOrEqualTo(360 * 0.51));
   });
 }

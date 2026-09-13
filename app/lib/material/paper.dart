@@ -1172,16 +1172,24 @@ class SlicedMasks {
   /// mid-width, with a step in it. A material critic measured one: a 21-pixel step at x=1190, the
   /// exact middle of a 04_moments tile.
   ///
-  /// So the render is shrunk, whole, until its borders fit with a fifth of the piece left in the
-  /// middle to stretch. A sheet the render's own size or larger is untouched and keeps its fibres
-  /// at the size they were rendered; a small card gets a smaller tear, which is what a small card
-  /// has.
+  /// So the render is shrunk, whole, until its borders fit with room left in the middle to
+  /// stretch. A sheet the render's own size or larger is untouched and keeps its fibres at the
+  /// size they were rendered; a small card gets a smaller tear, which is what a small card has.
+  ///
+  /// How much room is the whole argument. It was a fifth, and a fifth is harmless on a sheet and
+  /// fatal on a chip: a material critic measured the WRITTEN chip in 12_search holding six rows of
+  /// solid paper where it had held forty-nine, in a piece of about the same extent — almost all of
+  /// it fringe. Half leaves a chip half its own area to be written on, and it is as far as this
+  /// can go: at a third the shrunk render packs the contact shadow into a line beside the paper
+  /// that measures 28.3 grey levels against ink at 30, which is a black outline round every piece
+  /// and a worse fault than the one it fixes. Both numbers are from tests in this repository, not
+  /// from a preference.
   static double fitFor(ui.Image image, Size dst, [List<double>? band]) {
     final b = band ?? const [edge, edge, edge, edge];
     final bw = image.width * (b[0] + b[2]);
     final bh = image.height * (b[1] + b[3]);
     if (bw <= 0 || bh <= 0 || dst.width <= 0 || dst.height <= 0) return 1.0;
-    const room = 0.8;      // the borders may take four fifths of the piece; the rest stretches
+    const room = 0.5;       // the borders may take half the piece; the rest stretches
     return math.min(1.0, math.min(dst.width * room / bw, dst.height * room / bh));
   }
 

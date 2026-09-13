@@ -42,7 +42,12 @@ class ShelfModule extends Module {
   /// costs 84 points rather than 53. Us shares the desk by subtracting one row of every
   /// module from what it has, so five numbers that were each about two thirds of the truth added
   /// up to a budget that did not exist.
-  double get rowHeight => 84.0;
+  // 104, not 84: a thing passed between them may have a two-line title (`maxLines: 2` below), and
+  // with the rougher tear library one of the seeded year's does. Measured, not guessed — the rows
+  // of this module run 73, 76, 77, 78, 81 and 104, and the desk is shared out by the whole row a
+  // module costs rather than by its usual one.
+  @override
+  double get rowHeight => 104.0;
 
   @override
   Map<String, ThreadBody> get bodies => const {'shelf_card': shelfCard};
