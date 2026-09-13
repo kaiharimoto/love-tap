@@ -20,15 +20,22 @@ and continue from **Next action**.
 | 11 | 2026-09-09 | the objects given a surface at the source (no UV map, no paper), the ink made paint, the desk given pores; the ninth review | **cycle 9: 82**, three floors met |
 | 12 | 2026-09-09/10 | the scroll's real cause found by shooting one scene twice (every note was a listener of every sync round: 595 row builds over twenty frames became 16); the fold made to bend rather than hinge; four two-sine "torn" edges replaced; the sawtooth hash under every cut card; DeskStamp's counters, absent for eight cycles; the app taught how big a millimetre is; nine records that did not exist | cycle 10: not yet reviewed |
 | 13 | 2026-09-11/12 | the scroll's named failure closed and measured (147,237 ms of build over a fling became 6,112, 199 frames over 400 ms became 0); the contact shadow cut from the tear that casts it, and the hole in the desk it brought with it; the release path exercised end to end; the thirteenth capture in five passes across two container restarts; the eleventh review, seven reports | **cycle 11: 80**, no floor met |
-| 14 | 2026-09-12 | the message-shaped hole in the thread (a piece whose tear has not arrived becomes a cut sheet, not nothing); the reconnect filmed while it happens rather than twice afterwards; the thread made to say when it cannot reach the other phone; the far phone taught to change its mind and to answer; the folded corner made a window onto a real sheet; a capture pass made able to correct an earlier one | cycle 12: capture running |
+| 14 | 2026-09-12/13 | the message-shaped hole in the thread; the reconnect filmed while it happens rather than twice afterwards; the thread made to say when it cannot reach the other phone; the far phone taught to change its mind and to answer; the folded corner made a window onto a real sheet; the fourteenth capture, fifteen of seventeen and every clip distinct frame by frame; the twelfth review against a frozen tree | **cycle 12: 74**, no floor met |
 
 ## Current position
 
-- phase: build (cycle 11 scored at **80/100**, from 82, 83, 85, 73, 69, 68, 64, 55.5, 40; the brief
-  asks 95 with every floor met). Cycle 11's fixes are in and its capture has not finished.
-- rubric at cycle 11: messenger 22/30 (floor 26, short 4) · material 21/25 (22, short 1) ·
-  emotional 16/20 (17, short 1) · coherence **13/15 (13, met)** · anti-goal **9/10 (9, met)** ·
+- phase: build (cycle 12 scored at **74/100**, from 80, 82, 83, 85, 73, 69, 68, 64, 55.5, 40; the
+  brief asks 95 with every floor met). The capture improved and the score fell, and three of the
+  four causes were introduced by the cycle that improved it.
+- rubric at cycle 12: messenger 19/30 (floor 26, short 7) · material 20/25 (22, short 2) ·
+  emotional 16/20 (17, short 1) · coherence 10/15 (13, short 3) · anti-goal **9/10 (9, met)** ·
   code **13/15 (13, met)**.
+- **Next action**: take the opacity out of both landings (`note.dart` `_Landing` and `fold.dart`'s
+  arriving treatment) — a note that lands must be drawn from the first frame; then
+  `SlicedMasks.fitFor`'s `room` from 0.8 to about a third; then filter `writableTears` to the masks
+  torn.json clears; then the standing line's clearance from its tear; then 07's length back over
+  six seconds; then stop `scene.js` repeating a `far` line that changes state. Re-capture and review
+  as cycle 13.
 - **A review has to be of a tree that is not moving.** The completeness pass measured twelve paths
   rewritten between 19:58 and 20:07 UTC while cycle 11's review still stood, the earliest nine
   minutes after the last critic filed — so one of the code row's findings can no longer be checked
