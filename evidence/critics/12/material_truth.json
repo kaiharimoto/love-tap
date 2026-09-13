@@ -1,0 +1,112 @@
+{
+  "critic": "material-truth",
+  "cycle": 12,
+  "score": 20,
+  "floor": 22,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "02_chat.png",
+      "where": "the bottom edge of the note ending at y=2634, x155-1228 (the 'four left. the last four...' note), and the three 300 per cent crops the capture itself supplies",
+      "what": "Roughly half the torn edges in the set are not torn: I pulled the silhouette of every free-standing sheet edge in the ten stills (first paper pixel per column, only where there is 30 px of clear desk beyond, >=200 samples) and fitted a straight line to each; across 137 edges the residual is median 1.27 px, 57 of 137 (42 per cent) are under 1.00 px, and four are dead straight - 02_chat bottom y2634 x155-1208 at rms 0.00 px over 632 columns (1-99 per cent spread 0.00), 03_us bottom y1013 x366-1074 at 0.00 over 425, 17_setup_pwa bottom y2944 at 0.00 over 576, 05_settings bottom y2944 at 0.01 over 793; at native zoom those are a one-pixel paper-to-wood transition with no fibre, no fringe and no contact shadow, and the three crops in evidence/crops (02_chat_300_edge.png, _shadow.png, _hand.png) sit on edges measuring 0.64, 0.73 and 0.94 px, where the visible 'tear' is a 1-3 px comb of hairs laid along a ruler-straight line (hair depth mean 1.06, 1.73 and 3.11 px on the three edges I sampled).",
+      "why": "The row requires tear masks cut from genuinely ripped paper and judges the Chat hero at 300 per cent; an edge that deviates 0.0 to 0.9 px from a straight line over 400-800 columns reads as a guillotine cut with a fringe pasted on, not as paper that was torn, and the build's own evidence/logs/torn.json sets the band it accepts at rms 2.88-5.14 and the band it rejects at 0.36-0.59 while recording that 28 of its 56 masks are under 2.0 and were 'not re-rendered this cycle'."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png",
+      "where": "the note at y1567-2015, x153-1228, and every ruled sheet in the ten stills",
+      "what": "The handwriting does not sit on the ruled lines it is written over. On that note the printed rules fall at y = 1599, 1680, 1761, 1841, 1922, 2003 - a clean 81 px pitch - and the four ink baselines below them sit at y = 1662, 1743, 1824 and 1906, i.e. 18, 18, 17 and 16 px above the nearest rule, a constant 0.20 to 0.22 of the pitch for four consecutive lines. evidence/logs/lines.json measures the same thing across all ten stills at a median 0.33 of pitch, where 0.25 is what writing laid out with no relation at all to the rules would average and 0.0 is on the line; the file records this and does not gate it.",
+      "why": "The row is judged at 300 per cent on the Chat hero, and crops/02_chat_300_hand.png is exactly this: ink floating a fifth of a line-space clear of the rule, every line, which is the one thing a photograph of a written page can never show and so reads immediately as type set over a picture of paper rather than as writing done on it."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png",
+      "where": "the note at y2349-2634 and the voice note at y970-1195; and in 01_pulse.png the right edge of the sheet at y1579-2610",
+      "what": "Contact shadows are not consistent inside a single frame. Measuring desk luma 1 to 65 px below each sheet's bottom edge over every column with 80 px of clear desk, four of the six sheets in 02_chat darken by +10.1 to +33.6 grey levels while two do not darken at all: the note at y2349-2634 reads -7.4 (208 clear columns) and the voice note at y970-1195 reads -2.1 over 1054 columns, so those two sheets lie on the desk casting nothing. In the same set, the Pulse sheet's torn right edge carries a band of median width 300 px (min 107, max 419) falling to luma 22-28 against a desk base near 90, while every other sheet in the set has a 10-25 px contact shadow 3.7 to 34 levels deep; evidence/logs/holes.json reports ok:false with six stills over its 200-pixel allowance, and I count 6,912 pixels darker than luma 30 lying off the paper in 01_pulse across 253 blobs, the largest 1,000 px at y1601-1721 x951-967.",
+      "why": "The row asks for contact shadows baked from the render's own lighting; one desk under one light cannot give some sheets a 20-level contact shadow, other sheets none at all, and one sheet a 300 px near-black band, and a sheet with no shadow does not read as an object resting on a surface."
+    },
+    {
+      "severity": "minor",
+      "artifact": "09_two_devices.png",
+      "where": "absent from evidence/, with 16_setup_android.png",
+      "what": "The artifact that would show the two platforms rendering the same paper stock, the same handwriting and the same feeling object side by side is not in the set, and evidence/MANIFEST.json records every one of the 15 artifacts that are present as 'browser: webkit'; the stated reason in WHY_MISSING.json is that /dev/kvm is absent so no Android device can exist here, which is a real constraint rather than an excuse.",
+      "why": "It leaves the whole material case single-platform: nothing in the evidence shows how the scans, the tear masks, the baked fold sequence or the rendered feeling objects come out on the Android target, so the row can only be scored on the PWA."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the gallery tiles, and the open photograph in 14_media_viewer.png",
+      "what": "The photographs the paper is holding are grey test renders rather than pictures: the Moments gallery is filled with untextured scenes of a sphere on a table, a bowl and a bare wall, and the open photo in 14_media_viewer has eight flat shapes covering 12.86 per cent of the frame (evidence/logs/flat.json) with its quietest 80 px window at standard deviation 0.781, against 4.73 for the hero's quietest window.",
+      "why": "The material claim is that every surface in the app is photographed or rendered from something real; a paper frame that is convincing at 300 per cent holding a featureless render undercuts the same sentence the paper is trying to make, and the contrast is visible without zooming."
+    }
+  ],
+  "what_is_working": [
+    "The paper stock itself reads as photographed. The quietest 80 px window in the set (05_settings.png at 840,1840) holds 49 distinct grey levels at sd 7.40 with visible fibre clumping and a printed rule that breaks up and fades along its length - print misregistration, not a drawn line. I found no tiling: the strongest secondary autocorrelation peak outside a 20 px central lobe is 0.24 on the hero note's interior, 0.41 on a clean unwritten strip of it and 0.28 on the desk, all at short lags. evidence/logs/flat.json finds zero shapes anywhere in the ten stills whose colour is one of the app's own paper fallback fills.",
+    "The fold in 06_unfolding reads as rendered geometry catching light, not as a transform. evidence/logs/01_pulse.report.json names it a baked 142-frame sequence, 'unfold_thirds'; the clip is 286 frames at 62.5 fps with 0 repeated frames, i.e. 62.5 unique fold frames per second against the 30 floor. At frame 50, column x=400, the crease rises to luma 240 and then falls to a 217 valley over 12 rows before recovering to 236 - a lit ridge with its own occlusion on the far side, which a translated gradient does not produce. The flap's mean luminance climbs 170.2, 188.0, 201.9, 213.2, 222.0 across frames 38 to 62 toward the flat sheet's 237, and it keeps paper tooth the whole way (high-pass sd 0.97 to 2.80 against the flat sheet's 1.18). The two 142-frame takes in the clip are not copies of each other: mean absolute difference between frame i and frame i+143 is 12.4 to 34.0 grey levels, never below 0.5.",
+    "No tear repeats on one screen. The eight tear ids in evidence/logs/02_chat.report.json are all distinct (tear_055, 018, 040, 023, 008, 029, 050, 034) out of a pool of 56, and measuring rather than trusting that: the best-lag normalised cross-correlation between any two of the 14 sheet-edge profiles I extracted from 02_chat.png is 0.586, and between the hair-fringe patterns of three different edges at most 0.185.",
+    "One light direction. Weighting each desk pixel 4-14 px outside a sheet by how much darker it is than the same sheet's 45-65 px ring, the shadow offset points 73.5 degrees +/- 28.5 on 02_chat (6 sheets), 78.0 +/- 7.0 on 01_pulse (3 sheets) and 89.9 +/- 10.8 on 03_us (6 sheets) - all downward, none disagreeing about where the light is.",
+    "The handwriting is not stamped. Of 300 ink marks segmented from the four note regions of 02_chat.png and compared pairwise after normalising to a 32x32 box, 6 pairs reach IoU 0.95 and none reaches 0.99 or 1.00; 84 of 300 have a twin at IoU 0.90. And the ink carries real density variance: over 102 marks on the hero note the per-mark mean ink luma runs 56 to 134, cv 0.270, with the eroded stroke core at mean 82.0 and sd 20.05.",
+    "Dusk is a second render rather than a tint layer. Bucketing 01_pulse.png by daylight luma in steps of 20 and reading crops/dusk_pulse.png at the same pixels, the dusk value inside each bucket spreads at sd 11.0 to 31.4, so no single curve maps one to the other; and the darkest fifth of the 'hold' object's box moves from dx -29 to dx -49, i.e. its shadow is somewhere else.",
+    "Feelings are physical objects. The row of them on 01_pulse at y1160-1500 is a crumpled paper form, a wrapped sweet, two torn doodle cards, scattered confetti and a folded note, each with its own shading and its own contact shadow; 07_feeling_landing and 15_authored_feeling land leaves, a bowl and a bent paper form the same way. Nothing in the emotional layer is an icon or a system glyph.",
+    "The library can produce good tears - it is the hero that drew flat ones. The setup notes in crops/reception_picked_up.png and the notes in 11_chat_scroll.mp4 carry deeply scalloped edges; measuring frame 260 of the scroll clip the same way gives a median edge residual of 8.16 px against the hero still's 1.06, so this is a selection problem in the pool, not an absence of capability."
+  ],
+  "opened": [
+    "evidence/01_pulse.png",
+    "evidence/02_chat.png",
+    "evidence/03_us.png",
+    "evidence/04_moments.png",
+    "evidence/05_settings.png",
+    "evidence/10_first_run.png",
+    "evidence/12_search.png",
+    "evidence/13_messenger_states.png",
+    "evidence/14_media_viewer.png",
+    "evidence/17_setup_pwa.png",
+    "evidence/06_unfolding.mp4 (all 286 frames extracted and stepped through; shading, crease and silhouette measured frame by frame)",
+    "evidence/07_feeling_landing.mp4 (probed, frames 150 and 300 pulled)",
+    "evidence/08_state_propagating.mp4 (probed)",
+    "evidence/11_chat_scroll.mp4 (probed, frames 40, 150 and 260 pulled and their sheet edges measured)",
+    "evidence/15_authored_feeling.mp4 (probed)",
+    "evidence/crops/02_chat_300_edge.png",
+    "evidence/crops/02_chat_300_hand.png",
+    "evidence/crops/02_chat_300_shadow.png",
+    "evidence/crops/dusk_pulse.png",
+    "evidence/crops/06_unfolding_strip.png",
+    "evidence/crops/07_feeling_landing_strip.png",
+    "evidence/crops/08_state_propagating_strip.png",
+    "evidence/crops/15_authored_feeling_strip.png",
+    "evidence/crops/haptics_strip.png",
+    "evidence/crops/reception_picked_up.png",
+    "evidence/frames.json",
+    "evidence/MANIFEST.json",
+    "evidence/WHY_MISSING.json",
+    "evidence/DIFF.json",
+    "evidence/logs/torn.json",
+    "evidence/logs/tears.json",
+    "evidence/logs/flat.json",
+    "evidence/logs/holes.json",
+    "evidence/logs/lines.json",
+    "evidence/logs/hand.json",
+    "evidence/logs/fonts.json",
+    "evidence/logs/grain.json",
+    "evidence/logs/hairline.json",
+    "evidence/logs/crops.json",
+    "evidence/logs/manifest.json",
+    "evidence/logs/recipes.json",
+    "evidence/logs/surfaces.json (floors and the graph_01 entries)",
+    "evidence/logs/02_chat.report.json",
+    "evidence/logs/01_pulse.report.json",
+    "evidence/logs/03_us.report.json",
+    "evidence/logs/06_unfolding.report.json"
+  ],
+  "not_worth_opening": {
+    "evidence/crops/11_chat_scroll_strip.png": "I pulled frames 40, 150 and 260 out of the clip itself at full resolution and measured their sheet edges, which is strictly more than the six-frame strip can show.",
+    "evidence/crops/14_media_viewer_strip.png": "14_media_viewer is a still in this set; I read the still at full resolution and measured its flat areas, and the strip adds no material surface the still does not have.",
+    "evidence/crops/04_moments_what_happened.png and 04_moments_what_we_felt.png": "the two other Moments filter states; the paper stock, tear masks and light in them are the same pieces as in 04_moments.png, which I measured, and my row has no question that a different filter answers.",
+    "evidence/crops/reception.png, reception_open.png, reception_allowed.png, reception_replaced.png, reception_state.png": "the notification pocket, which is the platform's own chrome rather than the app's material; I opened reception_picked_up.png alone to check that the in-app surface behind it uses the same stock, and it does.",
+    "evidence/logs/haptics.json, haptics.check.json, webpush.txt, strings.json, tests.log, apk.json, pwa.json, reliability.json, coldstart.json, scroll_webkit.json, 11_chat_scroll.fling.json": "haptic patterns, push, displayed strings, tests, the build, the transport and scroll cost belong to rows 01, 03, 04 and 05; none of them measures a surface, and nothing in my row turns on them.",
+    "evidence/scenes/*.json": "I read the framing I needed out of the per-scene reports in evidence/logs/ (scroll anchor, driven clock, seed, tear ids, stock ids, fold sequence), and none of my findings is about how a picture was taken.",
+    "evidence/SCORE.json and evidence/critics/12/*": "BRIEFING.md says these are another reader's conclusions rather than evidence, so they stayed closed."
+  },
+  "verdict": "The material system is most of the way there and fails on one ingredient, visible at exactly the zoom the row names. The stock is real: the quietest window anywhere in the ten stills still holds 49 grey levels of fibre at sd 7.40, the printed rules break up along their length the way cheap print does, there is no tile anywhere I could find (strongest secondary autocorrelation 0.41), and no shape in any still is one of the app's own paper fallback fills. The fold survives slow motion - a baked 142-frame sequence at 62.5 unique frames a second, with a crease that rises to luma 240 and falls to a 217 valley before recovering, and a flap whose luminance climbs 170 to 222 toward the flat sheet's 237 while keeping its tooth. The light agrees with itself across every screen (73 to 90 degrees, all downward), the ink carries genuine pressure variance (per-mark luma 56 to 134, cv 0.270), nothing is a stamped glyph (no pair above IoU 0.99 in 300 marks), no two tears on one screen repeat (best cross-correlation 0.586), dusk is a real second render rather than a tint, and the feelings are objects rather than icons. What holds the row below its floor is the blocking finding: the torn edges are not torn. Across 137 free-standing sheet edges in the ten stills the median deviation from a straight line is 1.27 px and 42 per cent are under 1.00 px, four are exactly 0.00, and all three of the 300 per cent crops the capture supplies as its own proof sit on edges of 0.64, 0.73 and 0.94 px - a ruler-straight cut with a 1 to 3 px comb of hairs along it. The build has already found this (logs/torn.json names the cause, puts 28 of 56 masks under rms 2.0 against an accepted band of 2.88 to 5.14, and says it was not re-rendered this cycle), and the same library draws beautiful tears elsewhere - the scroll clip's median edge is 8.16 px - so this is the pool being drawn from rather than a capability that does not exist. Alongside it, the handwriting sits a constant 16 to 18 px, a fifth of the 81 px rule pitch, clear of the rules on the hero, which the set measures for itself at 0.33 of pitch and does not gate, and two of the six sheets in the hero cast no contact shadow at all. Re-render the flat half of the mask pool, tie the text layout to the pitch and phase of the stock under it, and give every sheet the shadow the other four already have, and this row passes comfortably."
+}
