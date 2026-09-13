@@ -196,3 +196,36 @@ class _SettlingState extends State<Settling> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) =>
       widget.builder(context, widget.curve.transform(_t.clamp(0.0, 1.0)), widget.child);
 }
+
+/// A piece of paper arriving on the desk: it comes down from a little above, a little large, and
+/// settles.
+///
+/// One widget, because the same eight lines existed twice — once for a folded letter from the
+/// other phone and once for a note this phone wrote — and the second copy carried the same fault
+/// as the first for a cycle without anybody noticing they were the same thing.
+///
+/// **No opacity in it.** Paper does not fade in, and a sheet drawn at zero opacity on the frame it
+/// arrives on is a sheet nobody sees until something advances the clock. A still is taken with the
+/// app's clock stopped, so `nothing` is how long that is: four of 13_messenger_states' seven rows
+/// took their room in the thread and painted nothing — 1,503 image rows of bare desk, 48.17 per
+/// cent of the frame, the set's only delivered reply and its only refusal among them. Two critics
+/// and a completeness pass measured it separately and agreed to the digit.
+///
+/// What moves is where the sheet is and how big it is, both of which are drawn from the first
+/// frame however stopped the clock is.
+class Landing extends StatelessWidget {
+  const Landing({super.key, required this.child});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => Settling(
+        duration: Motion.land,
+        curve: Motion.drop,
+        builder: (_, t, piece) => Transform.translate(
+          offset: Offset(0, -18 * (1 - t)),
+          child: Transform.scale(
+              scale: 1.06 - 0.06 * t, alignment: Alignment.topCenter, child: piece),
+        ),
+        child: child,
+      );
+}

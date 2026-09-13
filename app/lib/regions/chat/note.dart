@@ -185,7 +185,7 @@ class Note extends StatelessWidget {
                   child: piece,
                 )
               : arrived
-                  ? _Landing(child: piece)
+                  ? Landing(child: piece)
                   : piece,
         ),
       ),
@@ -227,36 +227,6 @@ class Note extends StatelessWidget {
     if (draw == null) return Written(item.text ?? item.type, by: item.author, size: 18);
     return draw(NoteContext(item: item, registry: registry, me: me, context: context));
   }
-}
-
-/// A note that was not in the thread when it was opened, landing on the desk.
-///
-/// A folded letter from the other phone has done this since the fold player was written, and a
-/// note *this* phone wrote did not: it appeared, fully formed, between one frame and the next.
-/// Paper does not do that, and the clip that films it said so — the take of a note being sent into
-/// a cut link was twenty-three frames identical to the one before, because there was nothing
-/// between the composer emptying and the sheet being there.
-///
-/// The same drop the folded one makes: a little above the desk and a little large, settling into
-/// its place on the clock the rest of the app moves on.
-class _Landing extends StatelessWidget {
-  const _Landing({required this.child});
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) => Settling(
-        duration: Motion.land,
-        curve: Motion.drop,
-        builder: (_, t, piece) => Opacity(
-          opacity: (t * 4).clamp(0.0, 1.0).toDouble(),
-          child: Transform.translate(
-            offset: Offset(0, -18 * (1 - t)),
-            child: Transform.scale(
-                scale: 1.06 - 0.06 * t, alignment: Alignment.topCenter, child: piece),
-          ),
-        ),
-        child: child,
-      );
 }
 
 /// What a note is answering, quoted over it.

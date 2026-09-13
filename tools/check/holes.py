@@ -63,7 +63,7 @@ def _grown(mask, r):
     return tot > 0
 
 
-def _holes(rgb, dark, grow, reach=12):
+def _holes(rgb, dark, grow, reach=None):
     """Dark pixels in the ring just outside a piece of paper.
 
     Not simply "dark and not on paper": half the objects in this app are dark on purpose — a
@@ -106,7 +106,20 @@ def _holes(rgb, dark, grow, reach=12):
     # tell those two apart: a letter at the foot of a sheet and a shadow just past its edge have
     # the same neighbourhood.
     paper = ~_grown(~_grown(sheet, 12), 12)
-    ring = _grown(paper, reach) & ~_grown(paper, grow)
+    # Everything past the paper, not a band three to twelve pixels wide.
+    #
+    # `reach` was twelve, so the check only ever looked at a ring a dozen pixels out — and a
+    # completeness pass measured what that hides. Reproducing the old ring on 01_pulse gives 596
+    # pixels against the file's own 571; taking the outer bound off gives **10,311** under the same
+    # luma 30 more than twelve pixels from any paper, and 62,414 under luma 40. The desk beside the
+    # Pulse sheet's torn right edge runs at luma 23 to 46 for about two hundred pixels, against a
+    # desk of 80 to 100 twenty rows higher: the fault this file exists to find, seventeen times
+    # larger than the number it was reporting, sitting just outside where it was looking.
+    #
+    # There is no grain alibi on a day still. The desk render's own minimum is luma 45.3 and it has
+    # zero pixels under 40, so every dark pixel on the desk in one of these ten frames is something
+    # the app drew. `reach` stays as a parameter for the dusk crop, whose render does go to 8.7.
+    ring = (~_grown(paper, grow)) if reach is None else (_grown(paper, reach) & ~_grown(paper, grow))
     return (lum < dark) & ring, lum
 
 

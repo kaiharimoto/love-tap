@@ -495,18 +495,7 @@ class _FoldedNoteState extends State<FoldedNote> {
       // It lands: a little above the desk and a little large, dropping and settling into its place
       // on the clock the rest of the app moves on. Its shadow is in the frame, so what moves is
       // the whole sheet, the way a folded note tossed onto a table does.
-      sheet = Settling(
-        duration: Motion.land,
-        curve: Motion.drop,
-        builder: (_, t, child) => Opacity(
-          opacity: (t * 4).clamp(0.0, 1.0),
-          child: Transform.translate(
-            offset: Offset(0, -18 * (1 - t)),
-            child: Transform.scale(scale: 1.06 - 0.06 * t, alignment: Alignment.topCenter, child: child),
-          ),
-        ),
-        child: sheet,
-      );
+      sheet = Landing(child: sheet);
     }
     return sheet;
   }

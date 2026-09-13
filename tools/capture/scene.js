@@ -383,6 +383,16 @@ function ensure(p) {
         // The far phone is a process watching a file, and a line can go astray between the two
         // of them. Rather than fail a whole capture over one lost instruction, the line is said
         // again — and the log says it was, so nobody reads the clip as one clean exchange.
+        // …but only for an instruction that can be said twice without meaning it twice. `read`,
+        // `typing`, `refuse` and `pair` set a state; `message`, `feeling`, `state`, `edit`, `reply`
+        // and `unsend` each append an event, and saying one of those again writes another one. The
+        // fourteenth capture did exactly that: `said_again` recorded the far phone's message sent a
+        // second time, the thread grew by four rows for the two lines written while the link was
+        // cut against +1 for all sixteen other arrivals in the set, and three folded notes landed on
+        // the reconnect where the scene had asked for one. A clip of a couple talking is not a
+        // place to invent a sentence neither of them said.
+        const repeatable = new Set(['read', 'typing', 'refuse', 'pair']);
+        const mayRepeat = !!lastFarLine && repeatable.has(String(lastFarLine).split(/\s+/)[0]);
         let saidAgain = 0;
         let nextRetry = Date.now() + Math.min(8000, timeout / 3);
         while (now < want) {
@@ -394,9 +404,10 @@ function ensure(p) {
               const r = JSON.parse(rep);
               where = ` — link ${r.link}, events ${r.events}, sync ${JSON.stringify(r.sync)}`;
             } catch (e) {}
-            throw new Error(`awaitArrival: the log stood at ${now} after ${timeout}ms, waiting for ${want} (said again ${saidAgain}x)${where}`);
+            throw new Error(`awaitArrival: the log stood at ${now} after ${timeout}ms, waiting for ${want} `
+              + `(said again ${saidAgain}x; ${mayRepeat ? 'repeatable' : 'not repeatable, so it was said once'})${where}`);
           }
-          if (Date.now() > nextRetry && lastFarLine && saidAgain < 3) {
+          if (Date.now() > nextRetry && mayRepeat && saidAgain < 3) {
             farSay(lastFarLine);
             saidAgain += 1;
             nextRetry = Date.now() + Math.min(8000, timeout / 3);

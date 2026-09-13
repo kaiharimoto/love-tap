@@ -30,12 +30,35 @@ and continue from **Next action**.
 - rubric at cycle 12: messenger 19/30 (floor 26, short 7) · material 20/25 (22, short 2) ·
   emotional 16/20 (17, short 1) · coherence 10/15 (13, short 3) · anti-goal **9/10 (9, met)** ·
   code **13/15 (13, met)**.
-- **Next action**: take the opacity out of both landings (`note.dart` `_Landing` and `fold.dart`'s
-  arriving treatment) — a note that lands must be drawn from the first frame; then
-  `SlicedMasks.fitFor`'s `room` from 0.8 to about a third; then filter `writableTears` to the masks
-  torn.json clears; then the standing line's clearance from its tear; then 07's length back over
-  six seconds; then stop `scene.js` repeating a `far` line that changes state. Re-capture and review
-  as cycle 13.
+- **Done since the review**: the opacity is out of the landing, and there is only one landing now —
+  `material/motion.dart`'s `Landing`, used by the thread and by the fold player, which carried two
+  copies of the same eight lines and so the same fault twice.
+  `a_note_that_lands_is_on_the_glass_test` measures a sheet in mid-landing against the same sheet
+  lying still on a frame with the clock stopped, and reads 0.00 per cent paper against 26.26 when
+  the opacity is put back. `scene.js` will no longer repeat a `far` line that appends an event —
+  `read`, `typing`, `refuse` and `pair` may be said again, and nothing else. `holes.py` looks at the
+  whole desk rather than a ring twelve pixels wide, which takes 01_pulse from 571 pixels beside the
+  paper to **10,891** and puts six of ten stills over the allowance: the desk render's own minimum
+  is luma 45.3 with no pixel under 40, so on a day still every dark pixel on the wood is something
+  the app drew.
+
+- **Next action — one material job, and it needs a capture to judge.** The tear that ate the chip,
+  the shadow's depth and the shadow being darker than ink are one problem and cannot be tuned
+  apart. Measured this session: `SlicedMasks.fitFor`'s `room` at a third fixes the chip and drops
+  the contact under a sheet to 2.98 grey levels against a floor of 6, because the paper then reaches
+  further out than the shadow it casts; slicing the shadow the same way brings it back to 9.75
+  against a ceiling of 8 and leaves the darkest pixel beside a sheet at 23 against a floor of 34;
+  lightening the bake from 0.62 to 0.42 gives 3.71, 8.51 and 31.3 — closer on all three and passing
+  none. The three widget tests bracket it and the capture is what says whether the bracket is in the
+  right place. Everything was reverted to what the fourteenth capture shot, so the suite is green and
+  the tree is honest about it.
+
+- Then: filter `writableTears` to the masks `torn.json` clears (28 of 56 are under rms 2.0); the
+  standing line's clearance from its tear; 07's length back over six seconds;
+  `a_hold_is_a_thing_happening`'s wall-clock assertion, which came back red on one suite run in
+  three and aborts the whole capture when it does; and `shareOfTheDesk`, which charges chrome per
+  module and then returns unclamped minima, so a sixth module cannot be added as the build says it
+  can.
 - **A review has to be of a tree that is not moving.** The completeness pass measured twelve paths
   rewritten between 19:58 and 20:07 UTC while cycle 11's review still stood, the earliest nine
   minutes after the last critic filed — so one of the code row's findings can no longer be checked
