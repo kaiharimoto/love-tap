@@ -11,7 +11,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4291
+   "ms": 6733
   },
   {
    "do": "wait",
@@ -19,11 +19,11 @@
   },
   {
    "do": "shot",
-   "ms": 33189
+   "ms": 33255
   },
   {
    "do": "report",
-   "ms": 714
+   "ms": 716
   }
  ],
  "shots": [
@@ -135,20 +135,23 @@
    "paper_stocks": 54,
    "the_smallest_patch_of_a_stock_anything_took": [
     "index_02_dusk 2560x1593",
-    "266x126 of it, at its own size",
-    33602.72727272727
+    "198x155 of it, at its own size",
+    30718.119490695397
    ],
-   "paper_at_its_own_size": 19,
+   "paper_at_its_own_size": 17,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "sticky_blue_02_dusk"
    ],
-   "paper_that_arrived_after_the_piece_was_drawn": 15,
+   "sheets_on_the_glass_with_no_paper_on_them": {
+    "sticky_blue_02_dusk": 3
+   },
+   "paper_that_arrived_after_the_piece_was_drawn": 16,
    "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 42,
-   "stocks_held": 16,
-   "stocks_held_bytes": 231918320,
+   "masks_dropped_to_stay_inside_the_pool": 39,
+   "stocks_held": 17,
+   "stocks_held_bytes": 245769520,
    "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
     "held": 29,
@@ -170,13 +173,13 @@
    "sensation": null,
    "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 18,
-    "the ink plates": 44,
-    "the desk": 140,
-    "the log": 6048,
-    "the first frame": 419,
-    "everything": 6676
+    "the framework": 8,
+    "the library index": 13,
+    "the ink plates": 50,
+    "the desk": 178,
+    "the log": 4077,
+    "the first frame": 449,
+    "everything": 4775
    },
    "sync": {
     "transport": "local",
@@ -199,7 +202,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-13T03:34:24.508Z",
+     "since": "2026-09-13T10:06:26.904Z",
      "last_contact": null,
      "certificate": null,
      "setup_address": null
@@ -213,6 +216,7 @@
     "what_each_surface_may_say": {
      "standing_line": "their state, in the couple's own words, assembled here from the log",
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "and_the_pocket_here_is": "this is a PWA and iOS will not let one vibrate, so the rhythm is carried by the feeling's own sound and by the page itself moving under it — feelings/sensation.dart, the same segments the motor would have been given. `pocket_feeling` and `pocket_at` above are what it last played and when, and `asked_a_motor_for` is every pattern it asked for. A held list that is empty after the app has been opened is the surface working: the app clears what the phone was holding the moment somebody looks at it.",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
@@ -230,19 +234,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 7878,
+ "cold_ms": 6058,
  "load": {
-  "ms": 7878,
+  "ms": 6058,
   "store": "fresh",
   "profile": null,
   "made_of": {
-   "the framework": 7,
-   "the library index": 18,
-   "the ink plates": 44,
-   "the desk": 140,
-   "the log": 6048,
-   "the first frame": 419,
-   "everything": 6676
+   "the framework": 8,
+   "the library index": 13,
+   "the ink plates": 50,
+   "the desk": 178,
+   "the log": 4077,
+   "the first frame": 449,
+   "everything": 4775
   }
  },
  "problems": [],
