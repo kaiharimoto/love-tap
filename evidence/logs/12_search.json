@@ -11,29 +11,29 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2839,
+   "ms": 3059,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3851
+   "ms": 3782
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1701
   },
   {
    "do": "search",
-   "ms": 4485
+   "ms": 5097
   },
   {
    "do": "wait",
-   "ms": 1902
+   "ms": 1908
   },
   {
    "do": "searchFacet",
-   "ms": 1207
+   "ms": 1356
   },
   {
    "do": "wait",
@@ -41,11 +41,11 @@
   },
   {
    "do": "shot",
-   "ms": 32995
+   "ms": 33035
   },
   {
    "do": "report",
-   "ms": 703
+   "ms": 702
   }
  ],
  "shots": [
@@ -78,7 +78,6 @@
     }
    },
    "visible": [
-    "0001M3AY8G83A3FBSRB1Y7W78Q",
     "0001M3F41R2APQC59QKBMZK4XF",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF",
     "0001M4GW48FEW3M67XKAZT5051",
@@ -90,15 +89,13 @@
     "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_043",
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_026",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_048",
+    "0001M3F41R2APQC59QKBMZK4XF": "tear_025",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_047",
     "0001M4GW48FEW3M67XKAZT5051": "tear_010",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_052"
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_031",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_051"
    },
    "stocks": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
     "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
@@ -106,7 +103,7 @@
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
    },
    "scroll": {
-    "first": 8063,
+    "first": 8064,
     "last": 8069,
     "of": 8069
    },
@@ -125,19 +122,23 @@
    "paper_stocks": 54,
    "the_smallest_patch_of_a_stock_anything_took": [
     "index_02 2560x1593",
-    "153x95 of it, at its own size",
-    14572.842461325701
+    "155x90 of it, at its own size",
+    13967.928669054612
    ],
-   "paper_at_its_own_size": 195,
+   "paper_at_its_own_size": 175,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "graph_03",
     "sticky_blue_02"
    ],
+   "sheets_on_the_glass_with_no_paper_on_them": {
+    "sticky_blue_02": 2,
+    "graph_03": 1
+   },
    "paper_that_arrived_after_the_piece_was_drawn": 17,
    "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 93,
+   "masks_dropped_to_stay_inside_the_pool": 87,
    "stocks_held": 19,
    "stocks_held_bytes": 273471920,
    "stocks_dropped_to_stay_inside_the_pool": 0,
@@ -156,12 +157,12 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 22,
-    "the ink plates": 37,
-    "the desk": 153,
-    "the log": 605,
-    "the first frame": 345,
-    "everything": 1169
+    "the library index": 21,
+    "the ink plates": 40,
+    "the desk": 168,
+    "the log": 601,
+    "the first frame": 357,
+    "everything": 1194
    },
    "sync": {
     "transport": "local",
@@ -184,8 +185,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-13T01:50:51.372Z",
-     "last_contact": "2026-09-13T01:51:31.408Z",
+     "since": "2026-09-13T09:57:15.756Z",
+     "last_contact": "2026-09-13T09:57:57.078Z",
      "certificate": null,
      "setup_address": null
     }
@@ -198,6 +199,7 @@
     "what_each_surface_may_say": {
      "standing_line": "their state, in the couple's own words, assembled here from the log",
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "and_the_pocket_here_is": "this is a PWA and iOS will not let one vibrate, so the rhythm is carried by the feeling's own sound and by the page itself moving under it — feelings/sensation.dart, the same segments the motor would have been given. `pocket_feeling` and `pocket_at` above are what it last played and when, and `asked_a_motor_for` is every pattern it asked for. A held list that is empty after the app has been opened is the surface working: the app clears what the phone was holding the moment somebody looks at it.",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
@@ -215,19 +217,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2379,
+ "cold_ms": 2464,
  "load": {
-  "ms": 2379,
+  "ms": 2464,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
-   "the library index": 22,
-   "the ink plates": 37,
-   "the desk": 153,
-   "the log": 605,
-   "the first frame": 345,
-   "everything": 1169
+   "the library index": 21,
+   "the ink plates": 40,
+   "the desk": 168,
+   "the log": 601,
+   "the first frame": 357,
+   "everything": 1194
   }
  },
  "problems": [],
