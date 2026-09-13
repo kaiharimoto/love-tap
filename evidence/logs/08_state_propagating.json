@@ -10,27 +10,51 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2302
+   "ms": 2304
   },
   {
    "do": "pair",
-   "ms": 1250
+   "ms": 1267
   },
   {
    "do": "wait",
-   "ms": 3703
+   "ms": 3706
   },
   {
    "do": "goTo",
-   "ms": 3778
+   "ms": 4348
   },
   {
    "do": "far",
-   "ms": 735
+   "ms": 542
   },
   {
    "do": "awaitArrival",
-   "ms": 6383
+   "ms": 4004
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "step",
+   "ms": 1522
+  },
+  {
+   "do": "frames",
+   "ms": 63128
+  },
+  {
+   "do": "wait",
+   "ms": 3002
+  },
+  {
+   "do": "far",
+   "ms": 505
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1028
   },
   {
    "do": "wait",
@@ -38,51 +62,27 @@
   },
   {
    "do": "step",
-   "ms": 4806
+   "ms": 1585
   },
   {
    "do": "frames",
-   "ms": 52831
-  },
-  {
-   "do": "wait",
-   "ms": 3003
-  },
-  {
-   "do": "far",
-   "ms": 507
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 875
-  },
-  {
-   "do": "wait",
-   "ms": 1201
-  },
-  {
-   "do": "step",
-   "ms": 2519
-  },
-  {
-   "do": "frames",
-   "ms": 290187
+   "ms": 299962
   },
   {
    "do": "goTo",
-   "ms": 6866
+   "ms": 3634
   },
   {
    "do": "step",
-   "ms": 1386
+   "ms": 1523
   },
   {
    "do": "far",
-   "ms": 720
+   "ms": 710
   },
   {
    "do": "awaitArrival",
-   "ms": 1781
+   "ms": 1900
   },
   {
    "do": "wait",
@@ -90,7 +90,7 @@
   },
   {
    "do": "unfold",
-   "ms": 1864
+   "ms": 547
   },
   {
    "do": "wait",
@@ -98,15 +98,15 @@
   },
   {
    "do": "frames",
-   "ms": 275872
+   "ms": 229353
   },
   {
    "do": "far",
-   "ms": 504
+   "ms": 591
   },
   {
    "do": "awaitArrival",
-   "ms": 2357
+   "ms": 1755
   },
   {
    "do": "wait",
@@ -114,15 +114,15 @@
   },
   {
    "do": "frames",
-   "ms": 179870
+   "ms": 126395
   },
   {
    "do": "far",
-   "ms": 1670
+   "ms": 639
   },
   {
    "do": "awaitArrival",
-   "ms": 1198
+   "ms": 1006
   },
   {
    "do": "wait",
@@ -130,31 +130,31 @@
   },
   {
    "do": "frames",
-   "ms": 335725
+   "ms": 231801
   },
   {
    "do": "goTo",
-   "ms": 5424
+   "ms": 3925
   },
   {
    "do": "step",
-   "ms": 1687
+   "ms": 2321
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2102
   },
   {
    "do": "far",
-   "ms": 596
+   "ms": 506
   },
   {
    "do": "far",
-   "ms": 1108
+   "ms": 1353
   },
   {
    "do": "awaitArrival",
-   "ms": 1437
+   "ms": 2167
   },
   {
    "do": "wait",
@@ -162,26 +162,26 @@
   },
   {
    "do": "frames",
-   "ms": 253826
+   "ms": 174339
   },
   {
    "do": "goTo",
-   "ms": 7218
+   "ms": 4014
   },
   {
    "do": "step",
-   "ms": 3813
+   "ms": 910
   },
   {
    "do": "wait",
-   "ms": 1203
+   "ms": 1202
   },
   {
    "do": "scrollTo",
-   "ms": 3947
+   "ms": 1887
   },
   {
-   "at": 1476104,
+   "at": 1196895,
    "said": "__deskCut(true) ok, the link is cut"
   },
   {
@@ -190,15 +190,15 @@
   },
   {
    "do": "wait",
-   "ms": 1104
+   "ms": 1100
   },
   {
    "do": "frames",
-   "ms": 27452
+   "ms": 20062
   },
   {
    "do": "frames",
-   "ms": 37528
+   "ms": 39011
   },
   {
    "do": "far",
@@ -206,40 +206,40 @@
   },
   {
    "do": "far",
-   "ms": 1410
+   "ms": 503
   },
   {
    "do": "wait",
    "ms": 1704
   },
   {
-   "at": 1546310,
+   "at": 1260285,
    "said": "__deskCut(false) ok, the link is back"
   },
   {
    "do": "cut",
-   "ms": 504
+   "ms": 505
   },
   {
    "do": "sync",
-   "ms": 511
+   "ms": 515
   },
   {
    "do": "awaitArrival",
-   "ms": 19096
+   "ms": 19220
   },
   {
    "do": "frames",
-   "ms": 42406
+   "ms": 39096
   },
   {
    "do": "report",
-   "ms": 544
+   "ms": 522
   }
  ],
  "shots": [
   {
-   "frames": 25,
+   "frames": 21,
    "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
    "drive": null
@@ -315,23 +315,25 @@
    "view": {
     "region": "chat",
     "visible": [
-     "01M1MCJ1M0D46H1D74PPV4NMP5",
-     "01M1MCJ1M0D46H1D74PPV4NMP6",
-     "01M1MCJ1M0D46H1D74PPV4NMP7",
-     "01M1MCJ1M0D46H1D74PPV4NMP8",
-     "0001MCJ1M0TBH9TMCPR8TY7NE4"
+     "01M1MCJ1M079RT7T54CSV5QMJA",
+     "01M1MCJ1M079RT7T54CSV5QMJB",
+     "01M1MCJ1M079RT7T54CSV5QMJC",
+     "01M1MCJ1M079RT7T54CSV5QMJD",
+     "01M1MCJ1M079RT7T54CSV5QMJE",
+     "0001MCJ1M01JBHHKN9XFKXYJNQ"
     ],
     "whole_on_the_glass": [
-     "01M1MCJ1M0D46H1D74PPV4NMP6",
-     "01M1MCJ1M0D46H1D74PPV4NMP7",
-     "01M1MCJ1M0D46H1D74PPV4NMP8",
-     "0001MCJ1M0TBH9TMCPR8TY7NE4"
+     "01M1MCJ1M079RT7T54CSV5QMJB",
+     "01M1MCJ1M079RT7T54CSV5QMJC",
+     "01M1MCJ1M079RT7T54CSV5QMJD",
+     "01M1MCJ1M079RT7T54CSV5QMJE",
+     "0001MCJ1M01JBHHKN9XFKXYJNQ"
     ],
     "clipped_at_an_edge": {
-     "01M1MCJ1M0D46H1D74PPV4NMP5": 0.765
+     "01M1MCJ1M079RT7T54CSV5QMJA": 0.774
     },
     "delivery": {
-     "0001MCJ1M0TBH9TMCPR8TY7NE4": {
+     "0001MCJ1M01JBHHKN9XFKXYJNQ": {
       "state": "sent",
       "says": "sent"
      }
@@ -344,48 +346,54 @@
     "edited": [],
     "taken_back": [],
     "scroll": {
-     "first": 8096,
-     "last": 8101,
-     "of": 8101
+     "first": 8074,
+     "last": 8080,
+     "of": 8080
     },
     "paper": [
-     "01M1MCJ1M0D46H1D74PPV4NMP8",
-     "0001MCJ1M0TBH9TMCPR8TY7NE4"
+     "01M1MCJ1M079RT7T54CSV5QMJE",
+     "0001MCJ1M01JBHHKN9XFKXYJNQ"
     ],
     "paper_whole_on_the_glass": 2,
     "rows_cost": [
      {
-      "row": 8096,
+      "row": 8074,
+      "type": "state_declared",
+      "tall": 31,
+      "top": -7
+     },
+     {
+      "row": 8075,
       "type": "feeling",
-      "tall": 298,
-      "top": -70
+      "tall": 227,
+      "top": 24
      },
      {
-      "row": 8097,
+      "row": 8076,
       "type": "state_declared",
       "tall": 31,
-      "top": 228
+      "top": 251
      },
      {
-      "row": 8098,
+      "row": 8077,
       "type": "state_declared",
       "tall": 31,
-      "top": 259
+      "top": 282
      },
      {
-      "row": 8099,
+      "row": 8078,
       "type": "message",
       "tall": 71,
-      "top": 290
+      "top": 313
      },
      {
-      "row": 8100,
+      "row": 8079,
       "type": "message",
-      "tall": 116,
-      "top": 361
+      "tall": 123,
+      "top": 384
      }
     ],
-    "viewport_tall": 483.9,
+    "viewport_tall": 514.7,
     "composer": "",
     "says_the_link_is_down": false,
     "attaching": false,
@@ -394,57 +402,60 @@
     "editing": null,
     "anchor": null,
     "kinds": {
+     "state_declared": 3,
      "feeling": 1,
-     "state_declared": 2,
      "message": 2
     },
     "folded_in": {
      "reaction": 0,
      "message_edit": 0,
      "message_delete": 0,
-     "read_marker": 2
+     "read_marker": 3
     },
-    "partner_typing": true
+    "partner_typing": false
    },
    "visible": [
-    "01M1MCJ1M0D46H1D74PPV4NMP5",
-    "01M1MCJ1M0D46H1D74PPV4NMP6",
-    "01M1MCJ1M0D46H1D74PPV4NMP7",
-    "01M1MCJ1M0D46H1D74PPV4NMP8",
-    "0001MCJ1M0TBH9TMCPR8TY7NE4"
+    "01M1MCJ1M079RT7T54CSV5QMJA",
+    "01M1MCJ1M079RT7T54CSV5QMJB",
+    "01M1MCJ1M079RT7T54CSV5QMJC",
+    "01M1MCJ1M079RT7T54CSV5QMJD",
+    "01M1MCJ1M079RT7T54CSV5QMJE",
+    "0001MCJ1M01JBHHKN9XFKXYJNQ"
    ],
    "paper": [
-    "01M1MCJ1M0D46H1D74PPV4NMP8",
-    "0001MCJ1M0TBH9TMCPR8TY7NE4"
+    "01M1MCJ1M079RT7T54CSV5QMJE",
+    "0001MCJ1M01JBHHKN9XFKXYJNQ"
    ],
    "tears": {
-    "01M1MCJ1M0D46H1D74PPV4NMP5": "tear_044",
-    "01M1MCJ1M0D46H1D74PPV4NMP6": "tear_012",
-    "01M1MCJ1M0D46H1D74PPV4NMP7": "tear_017",
-    "01M1MCJ1M0D46H1D74PPV4NMP8": "tear_037",
-    "0001MCJ1M0TBH9TMCPR8TY7NE4": "tear_002"
+    "01M1MCJ1M079RT7T54CSV5QMJA": "tear_013",
+    "01M1MCJ1M079RT7T54CSV5QMJB": "tear_034",
+    "01M1MCJ1M079RT7T54CSV5QMJC": "tear_003",
+    "01M1MCJ1M079RT7T54CSV5QMJD": "tear_044",
+    "01M1MCJ1M079RT7T54CSV5QMJE": "tear_008",
+    "0001MCJ1M01JBHHKN9XFKXYJNQ": "tear_027"
    },
    "stocks": {
-    "01M1MCJ1M0D46H1D74PPV4NMP5": "lined_01",
-    "01M1MCJ1M0D46H1D74PPV4NMP6": "spiral_02",
-    "01M1MCJ1M0D46H1D74PPV4NMP7": "lined_04",
-    "01M1MCJ1M0D46H1D74PPV4NMP8": "lined_02",
-    "0001MCJ1M0TBH9TMCPR8TY7NE4": "lined_01"
+    "01M1MCJ1M079RT7T54CSV5QMJA": "lined_02",
+    "01M1MCJ1M079RT7T54CSV5QMJB": "lined_04",
+    "01M1MCJ1M079RT7T54CSV5QMJC": "lined_01",
+    "01M1MCJ1M079RT7T54CSV5QMJD": "lined_03",
+    "01M1MCJ1M079RT7T54CSV5QMJE": "lined_04",
+    "0001MCJ1M01JBHHKN9XFKXYJNQ": "looseleaf_03"
    },
    "scroll": {
-    "first": 8096,
-    "last": 8101,
-    "of": 8101
+    "first": 8074,
+    "last": 8080,
+    "of": 8080
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 13536,
+   "driven_ms": 13472,
    "seed": 20260903,
-   "events": 14137,
+   "events": 14083,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 10,
+   "masks_composed": 8,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
@@ -454,19 +465,19 @@
     "228x75 of it, at its own size",
     17191.28941289239
    ],
-   "paper_at_its_own_size": 3690,
+   "paper_at_its_own_size": 1497,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 16,
+   "paper_that_arrived_after_the_piece_was_drawn": 15,
    "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 246,
+   "masks_dropped_to_stay_inside_the_pool": 272,
    "stocks_held": 16,
    "stocks_held_bytes": 231918320,
    "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
-    "held": 32,
-    "bytes": 32856000,
+    "held": 30,
+    "bytes": 31578956,
     "budget": 402653184,
     "live": 26,
     "still_decoding": 0
@@ -485,7 +496,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-13T11:35:12.259Z",
+    "started_at": "2026-09-13T12:17:09.665Z",
     "pattern": [
      {
       "ms": 150,
@@ -580,38 +591,38 @@
     }
    ],
    "the_launch_took": {
-    "the framework": 9,
-    "the library index": 16,
-    "the ink plates": 39,
-    "the desk": 182,
-    "the log": 729,
-    "the first frame": 337,
-    "everything": 1312
+    "the framework": 8,
+    "the library index": 15,
+    "the ink plates": 60,
+    "the desk": 188,
+    "the log": 4720,
+    "the first frame": 369,
+    "everything": 5360
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 495,
-    "pushed": 14,
+    "rounds": 63,
+    "pushed": 11,
     "refused": 0,
     "pulled": 11,
     "blobs_fetched": 0,
-    "faults": 15,
+    "faults": 12,
     "last_fault": "offline (POST /events)",
-    "pending": 0,
+    "pending": 1,
     "refused_in_the_outbox": 0,
-    "cursor": 14137,
+    "cursor": 14082,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14137,
-     "our_cursor": 14137,
+     "peer_cursor": 14082,
+     "our_cursor": 14082,
      "last_error": null,
-     "since": "2026-09-13T11:15:10.799Z",
-     "last_contact": "2026-09-13T11:41:55.348Z",
+     "since": "2026-09-13T12:00:23.660Z",
+     "last_contact": "2026-09-13T12:22:07.668Z",
      "certificate": null,
      "setup_address": null
     }
@@ -642,19 +653,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2620,
+ "cold_ms": 6675,
  "load": {
-  "ms": 2620,
-  "store": "kept",
+  "ms": 6675,
+  "store": "fresh",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 9,
-   "the library index": 16,
-   "the ink plates": 39,
-   "the desk": 182,
-   "the log": 729,
-   "the first frame": 337,
-   "everything": 1312
+   "the framework": 8,
+   "the library index": 15,
+   "the ink plates": 60,
+   "the desk": 188,
+   "the log": 4720,
+   "the first frame": 369,
+   "everything": 5360
   }
  },
  "far": [
@@ -664,86 +675,86 @@
   },
   {
    "line": "feeling hold 0.92",
-   "at_frame": 25
+   "at_frame": 21
   },
   {
    "line": "message it is raining here too",
-   "at_frame": 174
+   "at_frame": 170
   },
   {
    "line": "feeling squeeze 0.6",
-   "at_frame": 314
+   "at_frame": 310
   },
   {
    "line": "feeling here 0.8",
-   "at_frame": 385
+   "at_frame": 381
   },
   {
    "line": "state place out",
-   "at_frame": 541
+   "at_frame": 537
   },
   {
    "line": "feeling soup 0.7",
-   "at_frame": 541
+   "at_frame": 537
   },
   {
    "line": "state mood quiet",
-   "at_frame": 676
+   "at_frame": 672
   },
   {
    "line": "message the bus is late, dont wait up",
-   "at_frame": 676
+   "at_frame": 672
   }
  ],
  "arrivals": [
   {
    "line": "state mood restless",
-   "before": 8090,
-   "after": 8091,
+   "before": 8069,
+   "after": 8070,
    "at_frame": 0,
-   "waited_ms": 5883
+   "waited_ms": 3503
   },
   {
    "line": "feeling hold 0.92",
-   "before": 8091,
-   "after": 8092,
-   "at_frame": 25,
-   "waited_ms": 373
+   "before": 8070,
+   "after": 8071,
+   "at_frame": 21,
+   "waited_ms": 527
   },
   {
    "line": "message it is raining here too",
-   "before": 8092,
-   "after": 8093,
-   "at_frame": 174,
-   "waited_ms": 1281
+   "before": 8071,
+   "after": 8072,
+   "at_frame": 170,
+   "waited_ms": 1389
   },
   {
    "line": "feeling squeeze 0.6",
-   "before": 8093,
-   "after": 8094,
-   "at_frame": 314,
-   "waited_ms": 1855
+   "before": 8072,
+   "after": 8073,
+   "at_frame": 310,
+   "waited_ms": 1253
   },
   {
    "line": "feeling here 0.8",
-   "before": 8094,
-   "after": 8095,
-   "at_frame": 385,
-   "waited_ms": 697
+   "before": 8073,
+   "after": 8074,
+   "at_frame": 381,
+   "waited_ms": 505
   },
   {
    "line": "feeling soup 0.7",
-   "before": 8096,
-   "after": 8097,
-   "at_frame": 541,
-   "waited_ms": 936
+   "before": 8075,
+   "after": 8076,
+   "at_frame": 537,
+   "waited_ms": 1667
   },
   {
    "line": "message the bus is late, dont wait up",
-   "before": 8099,
-   "after": 8101,
-   "at_frame": 676,
-   "waited_ms": 18595
+   "before": 8078,
+   "after": 8080,
+   "at_frame": 672,
+   "waited_ms": 18719
   }
  ],
  "problems": [],
