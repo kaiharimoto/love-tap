@@ -86,69 +86,126 @@ def measure(fn, seed, span_mm, deep_mm, samples):
 
 
 def library_contours(box=31):
-    """How far the packed tear masks' own contours wander, in pixels of the mask.
+    """How far the packed tear masks' own torn contours wander, in pixels of the mask.
 
     The profile above is what the *rig* draws. This is what the *library* holds, which is a
     different question and one a material critic asked on the glass: "those edges deviate by rms
     0.36-0.59 px ... only three of fourteen edges on this screen have contour excursions worth the
-    name". Measured here at the source: the first opaque pixel down each column of the middle sixty
-    per cent of a mask, high-passed over a 31-column window, on whichever of the top and bottom
-    edges is the quieter.
+    name".
 
-    Reported and not gated, because the fix is fifty-six Blender renders of the relief and the
-    shadow behind them, and a gate nobody can turn green is a gate that gets ignored.
+    Measured at the source: the first opaque pixel along each line of the middle sixty per cent of
+    an edge, high-passed over a 31-sample window, on **the edges the generator says it tore**.
+
+    That last part is the whole of the difference from what this used to report. It measured the
+    quieter of the top and bottom edges of every mask, and most of the piece kinds in
+    tools/tears/tear.py have one of those two guillotined rather than torn — `half` tears only its
+    bottom, `notepad` only its top, `cut` neither — so on every one of them it was reporting the
+    straightness of an edge that is *supposed* to be straight, and calling it the library's
+    roughness. The quietest ten it listed were the kinds with the most cut edges. A cut edge
+    measures about 0.3 and the generator draws it that way on purpose; it is reported below under
+    its own name, where it is a check on the guillotine rather than an accusation about the tear.
     """
     import glob as _glob
     from PIL import Image
-    out = []
+    meta_path = os.path.join(ROOT, "assets", "tears", "tears.json")
+    torn_by_id = {}
+    if os.path.exists(meta_path):
+        with open(meta_path, encoding="utf-8") as f:
+            for m in json.load(f).get("masks", []):
+                edges = set(m.get("torn_edges") or [])
+                # A diagonal tear runs corner to corner, so it crosses all four sides of the box
+                # and there is no guillotined edge left to measure: scanning in from any side
+                # meets the tear. Folded in with the cut edges it read 20.96 rms, which is not a
+                # guillotine and not a fault either — it is the diagonal, measured sideways.
+                if "d" in edges:
+                    edges = {"t", "b", "l", "r"}
+                torn_by_id[m["id"]] = edges
+
+    def _wander(al, side):
+        """rms of the first-opaque contour along one side, high-passed, or None if it is not whole."""
+        h, w = al.shape
+        across = w if side in ("top", "bottom") else h
+        prof = []
+        for i in range(int(across * 0.2), int(across * 0.8)):
+            if side == "top":
+                line = al[:, i]
+            elif side == "bottom":
+                line = al[::-1, i]
+            elif side == "left":
+                line = al[i, :]
+            else:
+                line = al[i, ::-1]
+            if line.max() <= 127:
+                return None
+            prof.append(int(np.argmax(line > 127)))
+        if len(prof) < 50:
+            return None
+        v = np.array(prof, float)
+        pad = np.pad(v, (box // 2, box // 2), mode="edge")
+        smooth = np.convolve(pad, np.ones(box) / box, "valid")[:len(v)]
+        return float((v - smooth).std())
+
+    sides = {"t": "top", "b": "bottom", "l": "left", "r": "right"}
+    torn_rows, cut_rows, unknown = [], [], 0
     for path in sorted(_glob.glob(os.path.join(ROOT, "app", "assets", "tears", "tear_*.webp"))):
         name = os.path.basename(path)
         if "_edge" in name or "_shadow" in name:
             continue
+        stem = name.rsplit(".", 1)[0]
         with Image.open(path) as im:
             al = np.asarray(im.convert("RGBA"))[..., 3].astype(float)
-        h, w = al.shape
-        got = []
-        for side in ("top", "bottom"):
-            prof = []
-            whole = True
-            for x in range(int(w * 0.2), int(w * 0.8)):
-                col = al[:, x] if side == "top" else al[::-1, x]
-                if col.max() <= 127:
-                    whole = False
-                    break
-                prof.append(int(np.argmax(col > 127)))
-            if not whole or len(prof) < 50:
+        torn = torn_by_id.get(stem)
+        if torn is None:
+            unknown += 1
+            torn = set(sides)
+        got_torn, got_cut = [], []
+        for key, side in sides.items():
+            v = _wander(al, side)
+            if v is None:
                 continue
-            v = np.array(prof, float)
-            pad = np.pad(v, (box // 2, box // 2), mode="edge")
-            smooth = np.convolve(pad, np.ones(box) / box, "valid")[:len(v)]
-            got.append(float((v - smooth).std()))
-        if got:
-            out.append((name.rsplit(".", 1)[0], round(min(got), 2)))
-    if not out:
+            (got_torn if key in torn else got_cut).append(v)
+        if got_torn:
+            torn_rows.append((stem, round(min(got_torn), 2)))
+        if got_cut:
+            cut_rows.append((stem, round(max(got_cut), 2)))
+    if not torn_rows:
         return None
-    vals = np.array([v for _, v in out])
-    out.sort(key=lambda r: r[1])
-    return {
-        "masks": len(out),
-        "how": "the first opaque pixel down each column of the middle sixty per cent, high-passed "
-               "over 31 columns, on whichever of the top and bottom edges wanders less",
+    vals = np.array([v for _, v in torn_rows])
+    torn_rows.sort(key=lambda r: r[1])
+    out = {
+        "masks": len(torn_rows),
+        "how": "the first opaque pixel along each line of the middle sixty per cent of every edge "
+               "the generator says it tore, high-passed over 31 samples, on whichever torn edge "
+               "wanders least",
         "rms_px": {"min": round(float(vals.min()), 2),
                    "p25": round(float(np.percentile(vals, 25)), 2),
                    "median": round(float(np.median(vals)), 2),
                    "max": round(float(vals.max()), 2)},
         "under_2px": int((vals < 2.0).sum()),
-        "quietest_ten": out[:10],
+        "in_the_band_a_critic_liked": int(((vals >= 2.88) & (vals <= 5.14)).sum()),
+        "quietest_ten": torn_rows[:10],
         "what_it_means": "a critic measured the note edges they were content with at rms 2.88 to "
-                         "5.14 on the glass and the ones they were not at 0.36 to 0.59. Half this "
-                         "library is under 2. The cause is in tools/tears/tear.py: the fracture's "
-                         "Hurst exponent runs to 1.15, and 1.15 is a clean pull, and a clean pull "
-                         "is too clean. Not re-rendered this cycle — it is fifty-six masks and "
-                         "their relief and their shadows, behind a capture already waiting on "
-                         "thirty-six stock renders — and it is written here so the next cycle "
-                         "starts from a number instead of from an impression.",
+                         "5.14 on the glass and the ones they were not at 0.36 to 0.59.",
     }
+    if unknown:
+        out["masks_with_no_recorded_kind"] = unknown
+    if cut_rows:
+        cuts = np.array([v for _, v in cut_rows])
+        out["cut_edges"] = {
+            "masks": len(cut_rows),
+            "note": "the sheet's own guillotined edges. Reported separately because this check "
+                    "used to fold them in with the torn ones and report the result as the "
+                    "library's roughness. The number is not the blade: tools/tears/tear.py draws "
+                    "a cut edge as 0.35 mm of wander with one or two nicks up to 1.1 mm deep, and "
+                    "a nick eight pixels deep is most of what a 31-sample high-pass sees. Worth "
+                    "reading beside the torn figure above rather than on its own — a library "
+                    "whose cut edges measure as rough as its torn ones has a real problem, and it "
+                    "is not the one this check was written for.",
+            "rms_px": {"min": round(float(cuts.min()), 2),
+                       "median": round(float(np.median(cuts)), 2),
+                       "max": round(float(cuts.max()), 2)},
+        }
+    return out
 
 
 def main():

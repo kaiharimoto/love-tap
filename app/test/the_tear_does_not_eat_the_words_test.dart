@@ -187,4 +187,35 @@ void main() {
     expect(find.byType(PaperPiece), findsOneWidget,
         reason: 'the old sheet is still on the desk after the whole of Motion.land');
   });
+
+  test('the app only writes on an edge that reads as torn', () {
+    // A material critic's blocking finding was that roughly half the torn edges in the set are not
+    // torn — 137 free-standing sheet edges across ten stills, median residual from a straight line
+    // 1.27 px, four of them exactly straight. Two things were wrong and only the second was the
+    // library's fault.
+    //
+    // tools/check/torn.py measured the quieter of each mask's top and bottom edge, and most of the
+    // piece kinds in tools/tears/tear.py guillotine one of those two — `half` tears only its
+    // bottom, `notepad` only its top — so on those it was reporting the straightness of an edge
+    // that is meant to be straight and calling it the library's roughness. It measures the edges
+    // the generator says it tore now, and the library the finding was made on reads 2.81 median by
+    // that measure rather than 2.00.
+    //
+    // And the fracture itself was too clean: the amplitude floor let a sheet be drawn nearly
+    // smooth however it was torn, and the Hurst exponent ran to 1.15, which is a clean pull. With
+    // the floor up and the exponent down the library reads 4.50 median, six of fifty-six under 2,
+    // thirty of them inside the 2.88-5.14 a critic was content with.
+    final lib = MaterialLibrary.instance;
+    final measured = lib.tears.where((e) =>
+        !e.id.contains('_edge') && !e.id.contains('_shadow') && e.rough != null);
+    expect(measured, isNotEmpty,
+        reason: 'the index carries no roughness at all — tools/pack_assets.py did not measure it');
+    final tooSmooth = measured.where((e) => e.rough! < kTornEnough).map((e) => e.id).toList();
+    expect(tooSmooth.any(lib.writableTears.contains), isFalse,
+        reason: 'the app can write on ${tooSmooth.where(lib.writableTears.contains)}, whose torn '
+            'edges wander less than $kTornEnough px');
+    expect(lib.writableTears.length, greaterThanOrEqualTo(8),
+        reason: 'the hero holds eight notes on eight distinct tears, and the pool is down to '
+            '${lib.writableTears.length}');
+  });
 }

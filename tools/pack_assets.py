@@ -155,6 +155,56 @@ def safe_inset(mask_path, box):
     ]
 
 
+def torn_kinds():
+    """Which edges each mask's generator actually tore, by mask id, from assets/tears/tears.json."""
+    path = os.path.join(SRC, "tears", "tears.json")
+    if not os.path.exists(path):
+        return {}
+    out = {}
+    with open(path, encoding="utf-8") as f:
+        for m in json.load(f).get("masks", []):
+            edges = set(m.get("torn_edges") or [])
+            # a diagonal runs corner to corner and crosses all four sides of the box
+            if "d" in edges:
+                edges = {"t", "b", "l", "r"}
+            out[m["id"]] = edges
+    return out
+
+
+def tear_roughness(packed_path, torn_edges, box=31):
+    """How far the torn contour wanders, in pixels of the packed mask — tools/check/torn.py's own
+    measurement, carried in the index so the app can decline to use an edge that is not torn.
+
+    The critic's band: content at 2.88 to 5.14 px on the glass, not content at 0.36 to 0.59. Only
+    the edges the generator says it tore are measured; a guillotined edge is straight on purpose
+    and averaging it in is how this number came to read half what it is.
+    """
+    import numpy as _np
+    from PIL import Image
+
+    with Image.open(packed_path) as im:
+        al = _np.asarray(im.convert("RGBA"))[..., 3].astype(float)
+    got = []
+    for key in sorted(torn_edges or {"t", "b", "l", "r"}):
+        h, w = al.shape
+        across = w if key in ("t", "b") else h
+        prof, whole = [], True
+        for i in range(int(across * 0.2), int(across * 0.8)):
+            line = (al[:, i] if key == "t" else al[::-1, i] if key == "b"
+                    else al[i, :] if key == "l" else al[i, ::-1])
+            if line.max() <= 127:
+                whole = False
+                break
+            prof.append(int(_np.argmax(line > 127)))
+        if not whole or len(prof) < 50:
+            continue
+        v = _np.array(prof, float)
+        pad = _np.pad(v, (box // 2, box // 2), mode="edge")
+        smooth = _np.convolve(pad, _np.ones(box) / box, "valid")[:len(v)]
+        got.append(float((v - smooth).std()))
+    return round(min(got), 2) if got else None
+
+
 def tear_depth(mask_path, box):
     """How far in the tear actually eats on each side, as fractions — left, top, right, bottom.
 
@@ -331,6 +381,7 @@ def pack_family(name, index, verbose=True):
     shadow_boxes, shadow_spread = {}, {}
     if name == "objects":
         boxes, shadow_boxes, shadow_spread = object_boxes(src_dir)
+    torn_edges = torn_kinds() if name == "tears" else {}
     if name == "tears":
         for fn in sorted(os.listdir(src_dir)):
             stem = os.path.splitext(fn)[0]
@@ -365,6 +416,12 @@ def pack_family(name, index, verbose=True):
             row["safe"] = safes[stem]
             sf = safes[stem]
             row["usable"] = round((1 - sf[0] - sf[2]) * (1 - sf[1] - sf[3]), 4)
+        if plain_mask:
+            # how far this mask's torn edges actually wander, measured on the packed file the app
+            # will load — so `writableTears` can decline an edge that does not read as torn
+            rough = tear_roughness(dst, torn_edges.get(stem))
+            if rough is not None:
+                row["rough"] = rough
         if stem in depths:
             # the band of the render that is fibre rather than paper, per side, which is what a
             # nine-patch must keep at its rendered size instead of stretching

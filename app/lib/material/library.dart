@@ -5,8 +5,14 @@ import 'dart:convert';
 import 'package:flutter/painting.dart' show Rect, Size;
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
+/// How far a torn edge has to wander, in pixels of the packed mask, before the app will write on
+/// it. Halfway between the 0.36-0.59 a material critic was not content with on the glass and the
+/// 2.88-5.14 they were.
+const double kTornEnough = 2.0;
+
 class LibraryEntry {
-  const LibraryEntry(this.id, this.w, this.h, [this.safe, this.usable = 1.0, this.tear]);
+  const LibraryEntry(this.id, this.w, this.h,
+      [this.safe, this.usable = 1.0, this.tear, this.rough]);
   final String id;
   final int w;
   final int h;
@@ -17,6 +23,12 @@ class LibraryEntry {
 
   /// How much of the piece is inside that rectangle: a long strip has little, a half sheet a lot.
   final double usable;
+
+  /// For a tear mask: how far its torn edges wander, in pixels of the packed mask — the
+  /// measurement tools/check/torn.py makes, carried here so the app can decline to use an edge
+  /// that does not read as torn. A material critic was content on the glass at 2.88 to 5.14 and
+  /// not content at 0.36 to 0.59.
+  final double? rough;
 
   /// For a tear mask: how far in the tear actually eats on each side (left, top, right, bottom, as
   /// fractions) — the band a nine-patch must keep at its rendered size instead of stretching.
@@ -103,6 +115,7 @@ class MaterialLibrary {
               (e['safe'] as List?)?.map((x) => (x as num).toDouble()).toList(),
               (e['usable'] as num?)?.toDouble() ?? 1.0,
               (e['tear'] as List?)?.map((x) => (x as num).toDouble()).toList(),
+              (e['rough'] as num?)?.toDouble(),
             ))
         .toList();
     final folds = <String, int>{};
@@ -210,7 +223,17 @@ class MaterialLibrary {
   /// Masks with room to write on: a note goes on one of these, a stamp or a strip can use any.
   List<String> get writableTears {
     final ok = tears
-        .where((e) => !e.id.contains('_edge') && !e.id.contains('_shadow') && e.usable >= 0.5)
+        .where((e) =>
+            !e.id.contains('_edge') &&
+            !e.id.contains('_shadow') &&
+            e.usable >= 0.5 &&
+            // and the tear has to read as a tear. A material critic's blocking finding was that
+            // roughly half the torn edges in the set are not torn; the library's own measurement
+            // of the edges the generator says it tore (`rough`, from tools/check/torn.py's method)
+            // is what decides, and 2.0 px is halfway between the 0.36-0.59 they were not content
+            // with and the 2.88-5.14 they were. A library packed before this was measured has no
+            // number and is not filtered, which is what it did before.
+            (e.rough == null || e.rough! >= kTornEnough))
         .map((e) => e.id)
         .toList()
       ..sort();

@@ -86,57 +86,67 @@
  "deterministic": true,
  "the_library_the_app_holds": {
   "masks": 56,
-  "how": "the first opaque pixel down each column of the middle sixty per cent, high-passed over 31 columns, on whichever of the top and bottom edges wanders less",
+  "how": "the first opaque pixel along each line of the middle sixty per cent of every edge the generator says it tore, high-passed over 31 samples, on whichever torn edge wanders least",
   "rms_px": {
-   "min": 1.15,
-   "p25": 1.69,
-   "median": 2.0,
-   "max": 4.69
+   "min": 1.31,
+   "p25": 3.67,
+   "median": 4.5,
+   "max": 7.73
   },
-  "under_2px": 28,
+  "under_2px": 6,
+  "in_the_band_a_critic_liked": 30,
   "quietest_ten": [
    [
-    "tear_007",
-    1.15
+    "tear_054",
+    1.31
    ],
    [
-    "tear_044",
-    1.24
+    "tear_022",
+    1.34
+   ],
+   [
+    "tear_006",
+    1.37
+   ],
+   [
+    "tear_046",
+    1.59
    ],
    [
     "tear_014",
-    1.26
+    1.6
    ],
    [
-    "tear_031",
-    1.4
+    "tear_038",
+    1.68
    ],
    [
-    "tear_018",
-    1.41
+    "tear_044",
+    2.05
+   ],
+   [
+    "tear_030",
+    2.1
    ],
    [
     "tear_048",
-    1.41
-   ],
-   [
-    "tear_047",
-    1.42
-   ],
-   [
-    "tear_054",
-    1.49
-   ],
-   [
-    "tear_040",
-    1.5
+    3.23
    ],
    [
     "tear_027",
-    1.57
+    3.28
    ]
   ],
-  "what_it_means": "a critic measured the note edges they were content with at rms 2.88 to 5.14 on the glass and the ones they were not at 0.36 to 0.59. Half this library is under 2. The cause is in tools/tears/tear.py: the fracture's Hurst exponent runs to 1.15, and 1.15 is a clean pull, and a clean pull is too clean. Not re-rendered this cycle \u2014 it is fifty-six masks and their relief and their shadows, behind a capture already waiting on thirty-six stock renders \u2014 and it is written here so the next cycle starts from a number instead of from an impression."
+  "what_it_means": "a critic measured the note edges they were content with at rms 2.88 to 5.14 on the glass and the ones they were not at 0.36 to 0.59.",
+  "cut_edges": {
+   "masks": 49,
+   "note": "the sheet's own guillotined edges. Reported separately because this check used to fold them in with the torn ones and report the result as the library's roughness. The number is not the blade: tools/tears/tear.py draws a cut edge as 0.35 mm of wander with one or two nicks up to 1.1 mm deep, and a nick eight pixels deep is most of what a 31-sample high-pass sees. Worth reading beside the torn figure above rather than on its own \u2014 a library whose cut edges measure as rough as its torn ones has a real problem, and it is not the one this check was written for.",
+   "rms_px": {
+    "min": 1.27,
+    "median": 2.16,
+    "max": 4.53
+   }
+  }
  },
  "the_control_is_caught": true,
  "ok": true

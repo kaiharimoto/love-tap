@@ -91,10 +91,20 @@ Future<double> _darkerBy(WidgetTester tester, {String? tearId, required double h
     return (px[i] + px[i + 1] + px[i + 2]) / 3.0;
   }
 
-  // holes.py's own walk: down each column, find where a run of paper ends, and compare the band
-  // just below it with a band further down, keeping only the pairs where both are on the wood.
+  // holes.py's own walk, strand for strand — down every third column, find where a run of paper
+  // ends, **walk off the fibres**, then compare a band just under the last strand with one further
+  // down, keeping only the pairs where both are on the wood.
+  //
+  // Walking off the fibres is the part this copy did not have. holes.py grew it after a material
+  // critic found a torn edge whose column reads 148 at four pixels past the last pixel over 150,
+  // 132 at fourteen and 97.2 at sixty against a desk of 87: the whole fixed window sits inside the
+  // paper's own soft boundary, and what it measures is that boundary's gradient with a minus sign
+  // on it. With the rougher tear library that is no longer an edge case — three of the first
+  // twelve masks read the desk under them as *brighter* than the desk further down, by up to 13
+  // grey levels, which is not a shadow failing, it is a fringe being measured.
   final near = <double>[], far = <double>[];
-  for (var x = 30; x < w - 30; x += 3) {
+  final walked = <int>[];
+  for (var x = 60; x < w - 60; x += 3) {
     var inPaper = false;
     var start = 0;
     for (var y = 0; y < h - 1; y++) {
@@ -106,22 +116,41 @@ Future<double> _darkerBy(WidgetTester tester, {String? tearId, required double h
         start = y;
       } else if (!isPaper && inPaper) {
         inPaper = false;
-        if (y - start > 40 && y + _far.$2 < h) {
-          final a = <double>[for (var d = _near.$1; d < _near.$2; d++) lumaAt(x, y + d)];
-          final b = <double>[for (var d = _far.$1; d < _far.$2; d++) lumaAt(x, y + d)];
-          if (a.reduce((p, q) => p > q ? p : q) < 150 &&
-              b.reduce((p, q) => p > q ? p : q) < 150) {
-            near.addAll(a);
-            far.addAll(b);
+        if (y - start <= 80 || y + _far.$2 + 120 >= h) continue;
+        final wood = <double>[for (var d = _far.$1; d < _far.$2; d++) lumaAt(x, y + d)];
+        if (wood.reduce((p, q) => p > q ? p : q) >= 150) continue;
+        final desk = wood.reduce((p, q) => p + q) / wood.length;
+        // off the fibres: the first row within six levels of the desk further down
+        int? off;
+        for (var d = 1; d < 120; d++) {
+          if (lumaAt(x, y + d) <= desk + 6.0) {
+            off = d;
+            break;
           }
         }
+        if (off == null || y + off + _far.$2 >= h) continue;
+        final a = <double>[for (var d = _near.$1 - 1; d < _near.$2 - 1; d++) lumaAt(x, y + off + d)];
+        final b = <double>[for (var d = _far.$1; d < _far.$2; d++) lumaAt(x, y + off + d)];
+        if (a.reduce((p, q) => p > q ? p : q) >= 150) continue;
+        if (b.reduce((p, q) => p > q ? p : q) >= 150) continue;
+        near.addAll(a);
+        far.addAll(b);
+        walked.add(off);
       }
     }
   }
   expect(near, isNotEmpty, reason: 'no paper edge with wood under it was found in the picture');
   double mean(List<double> v) => v.reduce((a, b) => a + b) / v.length;
+  walked.sort();
+  lastWalk = walked[walked.length ~/ 2];
+  lastEdges = walked.length;
   return mean(far) - mean(near);
 }
+
+/// How far the last measurement had to walk off the fibres, and over how many edges — so a failure
+/// says whether it found an edge at all before it says how dark the desk under it was.
+int lastWalk = 0;
+int lastEdges = 0;
 
 void main() {
   setUpAll(() async {
@@ -133,7 +162,8 @@ void main() {
     final got = await _darkerBy(tester, tearId: 'tear_004', height: 420);
     expect(got, greaterThanOrEqualTo(6.0),
         reason: 'the desk four to fourteen pixels under a torn sheet is only '
-            '${got.toStringAsFixed(2)} grey levels darker than forty-five to sixty-five below it');
+            '${got.toStringAsFixed(2)} grey levels darker than forty-five to sixty-five below it, '
+            'over $lastEdges edges, having walked $lastWalk px off the fibres first');
   });
 
   testWidgets('and so does a cut one', (tester) async {

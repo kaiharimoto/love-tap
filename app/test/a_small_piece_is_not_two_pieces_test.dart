@@ -116,11 +116,35 @@ void main() {
       final a = edge[x - 1], b = edge[x];
       if (a != null && b != null) middle = middle > (b - a).abs() ? middle : (b - a).abs();
     }
-    // A torn edge wanders: a step of a few pixels is the tear. A step at the middle that is the
-    // largest on the whole edge, and several times the rest, is two pictures meeting.
-    expect(middle, lessThanOrEqualTo(worst),
-        reason: 'the middle of the piece is its roughest column');
-    expect(middle, lessThan(8), reason: 'a $middle-pixel step at the exact mid-width is a seam');
+    // A torn edge wanders: a step of a few pixels is the tear. What says two pictures have been
+    // butted together is the middle standing out from the rest of the same edge — so it is
+    // compared with the rest of the same edge, measured the same way.
+    //
+    // It used to be an absolute eight pixels, and eight was the old library's roughness rather
+    // than a fact about seams. With the tear generator's amplitude floor raised, this edge reads
+    // p50 2, p90 8, p95 9 and a worst of 19 somewhere that is not the middle: a nine-pixel step
+    // in the middle of it is the tear, and the fault this test exists for was twenty-one pixels
+    // at the exact mid-width of a 04_moments tile against an edge that was nothing like that
+    // rough. Comparing the middle's five-column window with every other five-column window is the
+    // comparison that means what the test says it means.
+    final windows = <int>[];
+    for (var c = 1; c + 4 < edge.length; c++) {
+      var worstHere = 0;
+      for (var x = c; x < c + 5; x++) {
+        final a = edge[x - 1], b = edge[x];
+        if (a != null && b != null) worstHere = math.max(worstHere, (b - a).abs());
+      }
+      windows.add(worstHere);
+    }
+    windows.sort();
+    final ordinary = windows[(windows.length * 49) ~/ 50];
+    expect(middle, lessThanOrEqualTo(math.max(ordinary, 6)),
+        reason: 'a $middle-pixel step at the exact mid-width, against $ordinary for the roughest '
+            'five columns of the other ninety-eight per cent of the same edge, is a seam');
+    // and however rough the tear, a butted pair of corners is a step no tear makes
+    expect(middle, lessThan(16),
+        reason: 'a $middle-pixel step at the exact mid-width is two pictures meeting: the one this '
+            'was written for measured twenty-one');
   });
 
   testWidgets('a feeling lands on a torn scrap, not on a card', (tester) async {
