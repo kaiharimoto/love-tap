@@ -18,6 +18,7 @@ import 'dart:ui' as ui;
 
 import 'package:desk/feelings/builtins.dart';
 import 'package:desk/feelings/drawn.dart';
+import 'package:desk/material/hands.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/material/objects.dart';
 import 'package:desk/material/paper.dart';
@@ -183,6 +184,57 @@ void main() {
         reason: 'only $solid of the chip\'s ${img.height} rows are nine tenths solid paper: the '
             'rest is the tear, and there is nowhere on it to write. At four fifths of room to '
             'stretch in, which is what this was, the answer is zero');
+  });
+
+  testWidgets('a chip\'s tear does not eat its word', (tester) async {
+    // The systemic one. A coherence critic measured the filter chips in 12_search: the paper behind
+    // 'DATES THAT MATTER' fell from 35,753 px to 19,149 against the previous capture, behind
+    // 'PHOTOGRAPHS' from 29,643 to 15,160, while the words did not shrink — and the tops of ten
+    // chips ended up outside their own sheets. The same defect ate the leading 't' of a ritual row
+    // in the hero and cut a voice note's 'Thu 26 Mar 08:23 read' horizontally.
+    //
+    // A letter that misses its paper is not drawn on the desk — the mask erases it — so it cannot
+    // be found by looking for ink outside the sheet. It is found by drawing the same chip twice,
+    // once torn and once cut, and counting how much of the word survives.
+    Future<int> inkOf({required bool torn}) async {
+      final (img, bytes) = await render(
+        tester,
+        150,
+        44,
+        Align(
+          alignment: Alignment.topCenter,
+          child: Slip(
+            id: 'a1b2c3d4e5f6',
+            row: 2,
+            stock: 'index',
+            torn: torn,
+            width: 150,
+            padding: const EdgeInsets.fromLTRB(10, 7, 10, 8),
+            child: const Stamped('photographs', size: 12),
+          ),
+        ),
+      );
+      var ink = 0;
+      for (var y = 0; y < img.height; y++) {
+        for (var x = 0; x < img.width; x++) {
+          final i = (y * img.width + x) * 4;
+          // the letters: dark, and on opaque paper rather than in the shadow beside it
+          if (bytes[i + 3] > 200 && (bytes[i] + bytes[i + 1] + bytes[i + 2]) / 3.0 < 110) ink++;
+        }
+      }
+      return ink;
+    }
+
+    final cut = await inkOf(torn: false);
+    final torn = await inkOf(torn: true);
+    expect(cut, greaterThan(200), reason: 'the chip drew no word at all');
+    // Five per cent, from the bracket: at four fifths of room to stretch in the tear takes 6.5
+    // per cent of this word, at a half it takes 3.4, and at a third it takes under 3 and puts a
+    // line of shadow beside the paper darker than ink. A torn edge is allowed to soften the edge
+    // of a word block; it is not allowed to take a letter.
+    expect(torn / cut, greaterThan(0.95),
+        reason: 'the tear ate ${((1 - torn / cut) * 100).toStringAsFixed(1)} per cent of the '
+            'word — $torn pixels of ink on the torn chip against $cut on the same chip cut');
   });
 
   testWidgets('a feeling lands on a torn scrap, not on a card', (tester) async {
