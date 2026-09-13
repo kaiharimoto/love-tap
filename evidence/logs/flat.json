@@ -18,12 +18,12 @@
  "quiet_is_not_flat": "windows_quieter_than_2 is what this check used to gate on, kept because four cycles of reports carry it. It is not a fault: receipt stock's own median window is under it, and the 05_settings windows it names are lined writing paper with its tooth plainly in the crop.",
  "stills": {
   "01_pulse.png": {
-   "flattest": 1.614,
+   "flattest": 1.874,
    "where": [
-    760,
-    560
+    120,
+    400
    ],
-   "pale_windows": 1112,
+   "pale_windows": 1271,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 1,
    "worst_few": [],
@@ -33,12 +33,12 @@
    "sheets_with_no_paper_on_them": []
   },
   "02_chat.png": {
-   "flattest": 4.731,
+   "flattest": 4.789,
    "where": [
-    1040,
-    1600
+    800,
+    520
    ],
-   "pale_windows": 852,
+   "pale_windows": 918,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
    "worst_few": [],
@@ -48,14 +48,14 @@
    "sheets_with_no_paper_on_them": []
   },
   "03_us.png": {
-   "flattest": 1.227,
+   "flattest": 1.493,
    "where": [
-    960,
-    1320
+    920,
+    1720
    ],
-   "pale_windows": 487,
+   "pale_windows": 738,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 8,
+   "windows_quieter_than_2": 5,
    "worst_few": [],
    "flat_areas": [],
    "flat_px": 0,
@@ -63,94 +63,57 @@
    "sheets_with_no_paper_on_them": []
   },
   "04_moments.png": {
-   "flattest": 6.348,
+   "flattest": 5.011,
    "where": [
-    760,
-    3000
+    1200,
+    40
    ],
-   "pale_windows": 219,
+   "pale_windows": 314,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
    "worst_few": [],
-   "flat_areas": [
-    {
-     "area_px": 2036,
-     "box": [
-      762,
-      619,
-      875,
-      682
-     ],
-     "luma": 243.7,
-     "rgb": "#F5F4ED",
-     "a_sheet_with_no_paper_on_it": null
-    }
-   ],
-   "flat_px": 2036,
-   "flat_share_of_the_frame": 0.0005,
+   "flat_areas": [],
+   "flat_px": 0,
+   "flat_share_of_the_frame": 0.0,
    "sheets_with_no_paper_on_them": []
   },
   "05_settings.png": {
-   "flattest": 1.205,
+   "flattest": 1.279,
    "where": [
-    840,
-    1840
+    1200,
+    680
    ],
-   "pale_windows": 1759,
+   "pale_windows": 1841,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 239,
+   "windows_quieter_than_2": 141,
    "worst_few": [],
    "flat_areas": [
     {
-     "area_px": 3559,
+     "area_px": 2621,
      "box": [
-      320,
-      2622,
-      468,
-      2720
-     ],
-     "luma": 234.1,
-     "rgb": "#EDEAE2",
-     "a_sheet_with_no_paper_on_it": null
-    },
-    {
-     "area_px": 3142,
-     "box": [
-      695,
-      1953,
-      854,
-      2041
-     ],
-     "luma": 229.3,
-     "rgb": "#E9E5DD",
-     "a_sheet_with_no_paper_on_it": null
-    },
-    {
-     "area_px": 2125,
-     "box": [
-      888,
-      1847,
-      1008,
-      1926
+      671,
+      1926,
+      819,
+      2008
      ],
      "luma": 229.3,
      "rgb": "#E9E5DD",
      "a_sheet_with_no_paper_on_it": null
     }
    ],
-   "flat_px": 8826,
-   "flat_share_of_the_frame": 0.002,
+   "flat_px": 2621,
+   "flat_share_of_the_frame": 0.0006,
    "sheets_with_no_paper_on_them": []
   },
   "10_first_run.png": {
-   "flattest": 1.484,
+   "flattest": 4.337,
    "where": [
     1080,
-    1440
+    1360
    ],
-   "pale_windows": 383,
+   "pale_windows": 409,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 4,
+   "windows_quieter_than_2": 0,
    "worst_few": [],
    "flat_areas": [],
    "flat_px": 0,
@@ -158,12 +121,12 @@
    "sheets_with_no_paper_on_them": []
   },
   "12_search.png": {
-   "flattest": 5.496,
+   "flattest": 4.516,
    "where": [
-    1280,
-    1840
+    160,
+    2840
    ],
-   "pale_windows": 955,
+   "pale_windows": 1130,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
    "worst_few": [],
@@ -173,12 +136,12 @@
    "sheets_with_no_paper_on_them": []
   },
   "13_messenger_states.png": {
-   "flattest": 5.303,
+   "flattest": 4.915,
    "where": [
     1040,
-    800
+    840
    ],
-   "pale_windows": 538,
+   "pale_windows": 1040,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
    "worst_few": [],
@@ -188,124 +151,124 @@
    "sheets_with_no_paper_on_them": []
   },
   "14_media_viewer.png": {
-   "flattest": 0.781,
+   "flattest": 0.899,
    "where": [
-    400,
+    80,
     880
    ],
-   "pale_windows": 262,
+   "pale_windows": 355,
    "windows_under_the_floor": 0,
-   "windows_quieter_than_2": 17,
+   "windows_quieter_than_2": 3,
    "worst_few": [],
    "flat_areas": [
     {
-     "area_px": 248207,
+     "area_px": 252140,
      "box": [
-      62,
-      649,
-      1192,
-      972
+      54,
+      654,
+      1197,
+      975
      ],
-     "luma": 230.1,
-     "rgb": "#E5E6EB",
+     "luma": 230.4,
+     "rgb": "#E6E6EB",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 106033,
+     "area_px": 117349,
      "box": [
-      689,
-      512,
-      1366,
-      905
+      730,
+      531,
+      1374,
+      973
      ],
      "luma": 225.9,
      "rgb": "#DFE2E9",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 70438,
+     "area_px": 63969,
      "box": [
-      60,
-      429,
-      779,
-      661
+      52,
+      433,
+      724,
+      642
      ],
-     "luma": 224.9,
-     "rgb": "#DEE1E8",
+     "luma": 226.1,
+     "rgb": "#E1E2E7",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 49177,
+     "area_px": 52061,
      "box": [
-      1028,
-      424,
-      1364,
-      654
+      918,
+      425,
+      1371,
+      636
      ],
      "luma": 219.0,
      "rgb": "#D8DBE4",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 41571,
+     "area_px": 43206,
      "box": [
-      61,
-      521,
+      53,
+      525,
       476,
-      688
+      705
      ],
      "luma": 229.1,
      "rgb": "#E4E5EA",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 12143,
+     "area_px": 14306,
      "box": [
-      1106,
-      551,
-      1364,
-      702
+      1037,
+      502,
+      1372,
+      707
      ],
      "luma": 222.9,
      "rgb": "#DCDFE6",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 11470,
+     "area_px": 8641,
      "box": [
-      745,
-      903,
-      1366,
-      967
+      1043,
+      578,
+      1274,
+      698
      ],
-     "luma": 227.8,
-     "rgb": "#E4E4E1",
+     "luma": 224.9,
+     "rgb": "#DEE1E8",
      "a_sheet_with_no_paper_on_it": null
     },
     {
-     "area_px": 9054,
+     "area_px": 4990,
      "box": [
-      1040,
-      555,
-      1247,
-      693
+      1128,
+      938,
+      1374,
+      971
      ],
-     "luma": 223.9,
-     "rgb": "#DDE0E7",
+     "luma": 222.1,
+     "rgb": "#E0DEDA",
      "a_sheet_with_no_paper_on_it": null
     }
    ],
-   "flat_px": 577876,
-   "flat_share_of_the_frame": 0.1286,
+   "flat_px": 567864,
+   "flat_share_of_the_frame": 0.1264,
    "sheets_with_no_paper_on_them": []
   },
   "17_setup_pwa.png": {
-   "flattest": 5.077,
+   "flattest": 5.166,
    "where": [
-    1120,
-    2640
+    1200,
+    640
    ],
-   "pale_windows": 1575,
+   "pale_windows": 1450,
    "windows_under_the_floor": 0,
    "windows_quieter_than_2": 0,
    "worst_few": [],

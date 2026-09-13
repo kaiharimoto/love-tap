@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-12T20:50:14Z",
+ "captured_at": "2026-09-13T09:37:45Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -38,7 +38,7 @@
    ],
    "app_seconds": 4.58,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 2.84274,
+   "mean_change_per_frame": 2.56179,
    "held_frame_test": {
     "unit": "grey levels of Rec.601 luma at full resolution",
     "all_three_must_hold": {
@@ -47,10 +47,10 @@
      "busiest_32px_tile_mean_change_below": 2.0
     },
     "worst_moving_frame": {
-     "frame": 227,
-     "mean": 0.1052,
-     "visible_share": 0.008431,
-     "busiest_tile": 4.2626,
+     "frame": 84,
+     "mean": 0.1062,
+     "visible_share": 0.008422,
+     "busiest_tile": 2.6315,
      "note": "the frame nearest the held-frame test that still counts as motion"
     }
    },
@@ -60,6 +60,7 @@
    "repeated_at": [],
    "brightness_jumps": 0,
    "brightness_jumps_at": [],
+   "the_mean_moved_at": [],
    "largest_median_shift": 0.0,
    "ok": true,
    "strip": "evidence/crops/06_unfolding_strip.png",
@@ -71,17 +72,22 @@
     "/tmp/lovetap-capture/06_unfolding/000228.png",
     "/tmp/lovetap-capture/06_unfolding/000285.png"
    ],
-   "checked_at": "2026-09-13T02:11:49Z",
+   "checked_at": "2026-09-13T11:10:17Z",
    "from_this_run": true
   },
   "07_feeling_landing.mp4": {
    "dir": "/tmp/lovetap-capture/07_feeling_landing",
-   "frames": 336,
+   "frames": 392,
    "fps": 62.5,
-   "seconds": 5.38,
+   "seconds": 6.27,
    "clock": "driven",
    "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
    "runs": [
+    {
+     "frames": 56,
+     "step_ms": 16,
+     "dir": "evidence/frames/07_feeling_landing"
+    },
     {
      "frames": 56,
      "step_ms": 16,
@@ -118,11 +124,12 @@
     111,
     167,
     223,
-    279
+    279,
+    335
    ],
-   "app_seconds": 5.38,
+   "app_seconds": 6.27,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 4.70232,
+   "mean_change_per_frame": 5.48409,
    "held_frame_test": {
     "unit": "grey levels of Rec.601 luma at full resolution",
     "all_three_must_hold": {
@@ -132,9 +139,9 @@
     },
     "worst_moving_frame": {
      "frame": 269,
-     "mean": 0.0233,
-     "visible_share": 0.000916,
-     "busiest_tile": 23.709,
+     "mean": 0.0331,
+     "visible_share": 0.000792,
+     "busiest_tile": 27.9941,
      "note": "the frame nearest the held-frame test that still counts as motion"
     }
    },
@@ -144,44 +151,31 @@
    "repeated_at": [],
    "brightness_jumps": 0,
    "brightness_jumps_at": [],
-   "the_mean_moved_at": [
-    {
-     "frame": 169,
-     "mean": 0.117,
-     "median_shift": 2.0,
-     "spread": 74.88
-    },
-    {
-     "frame": 170,
-     "mean": 0.075,
-     "median_shift": 0.587,
-     "spread": 49.55
-    }
-   ],
-   "largest_median_shift": 2.0,
+   "the_mean_moved_at": [],
+   "largest_median_shift": 0.0,
    "ok": true,
    "strip": "evidence/crops/07_feeling_landing_strip.png",
    "strip_frames": [
     "/tmp/lovetap-capture/07_feeling_landing/000000.png",
-    "/tmp/lovetap-capture/07_feeling_landing/000067.png",
-    "/tmp/lovetap-capture/07_feeling_landing/000134.png",
-    "/tmp/lovetap-capture/07_feeling_landing/000201.png",
-    "/tmp/lovetap-capture/07_feeling_landing/000268.png",
-    "/tmp/lovetap-capture/07_feeling_landing/000335.png"
+    "/tmp/lovetap-capture/07_feeling_landing/000078.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000156.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000235.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000313.png",
+    "/tmp/lovetap-capture/07_feeling_landing/000391.png"
    ],
-   "checked_at": "2026-09-13T05:08:27Z",
+   "checked_at": "2026-09-13T11:11:56Z",
    "from_this_run": true
   },
   "08_state_propagating.mp4": {
    "dir": "/tmp/lovetap-capture/08_state_propagating",
-   "frames": 691,
+   "frames": 700,
    "fps": 62.5,
-   "seconds": 11.06,
+   "seconds": 11.2,
    "clock": "driven",
    "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
    "runs": [
     {
-     "frames": 16,
+     "frames": 25,
      "step_ms": 16,
      "dir": "evidence/frames/08_state_propagating"
     },
@@ -227,18 +221,18 @@
     }
    ],
    "cuts_between_runs": [
-    15,
-    164,
-    304,
-    375,
-    531,
-    638,
+    24,
+    173,
+    313,
+    384,
+    540,
     647,
-    666
+    656,
+    675
    ],
-   "app_seconds": 12.21,
-   "playback_over_app_time": 0.906,
-   "mean_change_per_frame": 3.53082,
+   "app_seconds": 12.35,
+   "playback_over_app_time": 0.907,
+   "mean_change_per_frame": 3.38605,
    "held_frame_test": {
     "unit": "grey levels of Rec.601 luma at full resolution",
     "all_three_must_hold": {
@@ -247,51 +241,36 @@
      "busiest_32px_tile_mean_change_below": 2.0
     },
     "worst_moving_frame": {
-     "frame": 643,
+     "frame": 652,
      "mean": 0.0051,
      "visible_share": 5.1e-05,
-     "busiest_tile": 12.4744,
+     "busiest_tile": 9.5609,
      "note": "the frame nearest the held-frame test that still counts as motion"
     }
    },
-   "repeated_frames": 0,
-   "repeated_fraction": 0.0,
-   "longest_still_run": 0,
-   "repeated_at": [],
+   "repeated_frames": 2,
+   "repeated_fraction": 0.003,
+   "longest_still_run": 1,
+   "repeated_at": [
+    23,
+    674
+   ],
    "brightness_jumps": 0,
    "brightness_jumps_at": [],
-   "the_mean_moved_at": [
-    {
-     "frame": 306,
-     "mean": 0.075,
-     "median_shift": 0.0,
-     "spread": 39.52
-    },
-    {
-     "frame": 377,
-     "mean": 0.105,
-     "median_shift": 1.0,
-     "spread": 74.1
-    },
-    {
-     "frame": 378,
-     "mean": 0.068,
-     "median_shift": 0.114,
-     "spread": 48.89
-    }
-   ],
-   "largest_median_shift": 3.929,
-   "ok": true,
+   "the_mean_moved_at": [],
+   "largest_median_shift": 5.402,
+   "ok": false,
+   "why": "2 frame(s) identical to the one before (first at 23); the brief allows none",
    "strip": "evidence/crops/08_state_propagating_strip.png",
    "strip_frames": [
     "/tmp/lovetap-capture/08_state_propagating/000000.png",
-    "/tmp/lovetap-capture/08_state_propagating/000138.png",
-    "/tmp/lovetap-capture/08_state_propagating/000276.png",
-    "/tmp/lovetap-capture/08_state_propagating/000414.png",
-    "/tmp/lovetap-capture/08_state_propagating/000552.png",
-    "/tmp/lovetap-capture/08_state_propagating/000690.png"
+    "/tmp/lovetap-capture/08_state_propagating/000140.png",
+    "/tmp/lovetap-capture/08_state_propagating/000280.png",
+    "/tmp/lovetap-capture/08_state_propagating/000419.png",
+    "/tmp/lovetap-capture/08_state_propagating/000559.png",
+    "/tmp/lovetap-capture/08_state_propagating/000699.png"
    ],
-   "checked_at": "2026-09-13T04:30:21Z",
+   "checked_at": "2026-09-13T11:44:45Z",
    "from_this_run": true
   },
   "11_chat_scroll.mp4": {
@@ -311,7 +290,7 @@
    "cuts_between_runs": [],
    "app_seconds": 4.8,
    "playback_over_app_time": 1.0,
-   "mean_change_per_frame": 31.31564,
+   "mean_change_per_frame": 28.77536,
    "held_frame_test": {
     "unit": "grey levels of Rec.601 luma at full resolution",
     "all_three_must_hold": {
@@ -320,10 +299,10 @@
      "busiest_32px_tile_mean_change_below": 2.0
     },
     "worst_moving_frame": {
-     "frame": 216,
-     "mean": 20.2549,
-     "visible_share": 0.339653,
-     "busiest_tile": 154.7392,
+     "frame": 43,
+     "mean": 18.9828,
+     "visible_share": 0.33386,
+     "busiest_tile": 149.3347,
      "note": "the frame nearest the held-frame test that still counts as motion"
     }
    },
@@ -333,6 +312,7 @@
    "repeated_at": [],
    "brightness_jumps": 0,
    "brightness_jumps_at": [],
+   "the_mean_moved_at": [],
    "largest_median_shift": 0.0,
    "ok": true,
    "strip": "evidence/crops/11_chat_scroll_strip.png",
@@ -344,7 +324,7 @@
     "/tmp/lovetap-capture/11_chat_scroll/000239.png",
     "/tmp/lovetap-capture/11_chat_scroll/000299.png"
    ],
-   "checked_at": "2026-09-13T02:40:52Z",
+   "checked_at": "2026-09-13T11:13:22Z",
    "from_this_run": true
   },
   "15_authored_feeling.mp4": {
@@ -425,7 +405,7 @@
    ],
    "app_seconds": 8.38,
    "playback_over_app_time": 0.817,
-   "mean_change_per_frame": 4.41793,
+   "mean_change_per_frame": 4.60816,
    "held_frame_test": {
     "unit": "grey levels of Rec.601 luma at full resolution",
     "all_three_must_hold": {
@@ -434,10 +414,10 @@
      "busiest_32px_tile_mean_change_below": 2.0
     },
     "worst_moving_frame": {
-     "frame": 111,
-     "mean": 0.008,
-     "visible_share": 0.00086,
-     "busiest_tile": 4.2528,
+     "frame": 106,
+     "mean": 0.0249,
+     "visible_share": 0.002903,
+     "busiest_tile": 5.0697,
      "note": "the frame nearest the held-frame test that still counts as motion"
     }
    },
@@ -447,7 +427,8 @@
    "repeated_at": [],
    "brightness_jumps": 0,
    "brightness_jumps_at": [],
-   "largest_median_shift": 0.886,
+   "the_mean_moved_at": [],
+   "largest_median_shift": 0.299,
    "ok": true,
    "strip": "evidence/crops/15_authored_feeling_strip.png",
    "strip_frames": [
@@ -458,7 +439,7 @@
     "/tmp/lovetap-capture/15_authored_feeling/000342.png",
     "/tmp/lovetap-capture/15_authored_feeling/000427.png"
    ],
-   "checked_at": "2026-09-13T03:00:07Z",
+   "checked_at": "2026-09-13T11:15:06Z",
    "from_this_run": true
   }
  },
@@ -469,45 +450,45 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 8551,
+  "cold_ms": 2376,
   "steps": [
    {
     "do": "pair",
-    "ms": 1856,
+    "ms": 2206,
     "auto": true,
     "far": "http://127.0.0.1:8480"
    },
    {
     "do": "goTo",
-    "ms": 4379
+    "ms": 3889
    },
    {
     "do": "wait",
-    "ms": 2001
+    "ms": 2003
    },
    {
     "do": "scrollTo",
-    "ms": 2872
+    "ms": 3819
    },
    {
     "do": "wait",
-    "ms": 1103
+    "ms": 1102
    },
    {
     "do": "frames",
-    "ms": 457687
+    "ms": 620096
    },
    {
     "do": "timings",
-    "ms": 520
+    "ms": 435
    },
    {
     "do": "flingLog",
-    "ms": 408
+    "ms": 1086
    },
    {
     "do": "report",
-    "ms": 420
+    "ms": 416
    }
   ]
  },

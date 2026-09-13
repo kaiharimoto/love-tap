@@ -1,8 +1,8 @@
 {
- "commit": "43d2682",
+ "commit": "785f7b5",
  "baseline": {
   "dir": "evidence/.previous",
-  "captured_at": "2026-09-11T21:04:14Z",
+  "captured_at": "2026-09-12T20:50:14Z",
   "note": "the numbers below were measured against the capture that was in this directory when the run started; if the run rotated, the directory now holds this capture instead. Each row names the hash and the time of the file it was measured against."
  },
  "unchanged_at": 0.999,
@@ -11,192 +11,166 @@
   {
    "artifact": "01_pulse.png",
    "label": "changed",
-   "ssim": 0.9337,
+   "ssim": 0.636,
    "judgement": null,
-   "sha": "2991def6ca94ba9e",
-   "previous_sha": "808b56ea3fc0a53b",
-   "previous_written": "2026-09-11T21:16:41Z",
-   "label_basis": "ssim 0.9337, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "a81fe37ccda95092",
+   "previous_sha": "2991def6ca94ba9e",
+   "previous_written": "2026-09-13T01:40:40Z",
+   "label_basis": "ssim 0.636, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "02_chat.png",
    "label": "changed",
-   "ssim": 0.8836,
-   "judgement": "regressed",
-   "sha": "adbc68be4a17cca0",
-   "previous_sha": "ace92ab238f187ab",
-   "previous_written": "2026-09-11T21:19:48Z",
-   "label_basis": "ssim 0.8836, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "regressed - the sheets shrank relative to their type, so the voice-note row's 'Thu 26 Mar 08:23 read' is now cut by the sheet's bottom torn edge (crop 250,1110-1000,1220) and the ritual row's leading 't' and the T of KEPT are eaten by its top edge; both rows are clean in evidence/.previous/02_chat.png.",
-   "judged_by": "coherence critic"
+   "ssim": 0.5126,
+   "judgement": null,
+   "sha": "d9e41b339455946a",
+   "previous_sha": "adbc68be4a17cca0",
+   "previous_written": "2026-09-13T01:43:27Z",
+   "label_basis": "ssim 0.5126, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "03_us.png",
    "label": "changed",
-   "ssim": 0.6728,
-   "judgement": "improved",
-   "sha": "28a12669746a0ade",
-   "previous_sha": "7b4ff379bbb37a87",
-   "previous_written": "2026-09-11T21:20:10Z",
-   "label_basis": "ssim 0.6728, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "improved - the date row no longer truncates ('the place by th...' becomes 'the place by the bridge') and every module glance reads in full, at the cost of the title sheet now covering the word 'in' of its own 'in 2 months' chip.",
-   "judged_by": "coherence critic"
+   "ssim": 0.689,
+   "judgement": null,
+   "sha": "a62d058faa5c1c90",
+   "previous_sha": "28a12669746a0ade",
+   "previous_written": "2026-09-13T01:44:13Z",
+   "label_basis": "ssim 0.689, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "04_moments.png",
    "label": "changed",
-   "ssim": 0.9132,
-   "judgement": "improved",
-   "sha": "cf7692f3bbd2d225",
-   "previous_sha": "c49ca72dfe81f375",
-   "previous_written": "2026-09-11T21:22:17Z",
-   "label_basis": "ssim 0.9132, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "improved - the same three lenses and filters over the same log, with the per-tile author-and-date strips reading more clearly against the tiles and 0 tiles without a picture in the report; nothing present before is gone.",
-   "judged_by": "coherence critic"
+   "ssim": 0.8771,
+   "judgement": null,
+   "sha": "06055eb003a2f673",
+   "previous_sha": "cf7692f3bbd2d225",
+   "previous_written": "2026-09-13T01:46:16Z",
+   "label_basis": "ssim 0.8771, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "05_settings.png",
    "label": "changed",
-   "ssim": 0.8341,
-   "judgement": "regressed",
-   "sha": "d644975a0b3d39e0",
-   "previous_sha": "339123cc1d2293e5",
-   "previous_written": "2026-09-11T21:23:03Z",
-   "label_basis": "ssim 0.8341, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "regressed - the per-event-type rows grew to two lines each, so the frame shows five complete event types plus one cut off where the previous showed nine, and the feeling-authoring tools are still outside the frame.",
-   "judged_by": "coherence critic"
+   "ssim": 0.8158,
+   "judgement": null,
+   "sha": "0be63da7c7e04d64",
+   "previous_sha": "d644975a0b3d39e0",
+   "previous_written": "2026-09-13T01:50:48Z",
+   "label_basis": "ssim 0.8158, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "changed",
-   "ssim": 0.638,
+   "ssim": 0.605,
    "judgement": null,
-   "sha": "f2839a8156285e7b",
-   "previous_sha": "3a4aa17d4bc1d14c",
-   "previous_written": "2026-09-11T22:54:52Z",
-   "label_basis": "ssim 0.638, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "50ba02085346afd2",
+   "previous_sha": "f2839a8156285e7b",
+   "previous_written": "2026-09-13T02:11:10Z",
+   "label_basis": "ssim 0.605, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "changed",
-   "ssim": 0.6525,
-   "judgement": "regressed",
-   "sha": "a0204c2a830d6e94",
-   "previous_sha": "548c2e66987b08d3",
-   "previous_written": "2026-09-11T22:59:24Z",
-   "label_basis": "ssim 0.6525, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "regressed - the take fell from 421 frames to 336, 6.74 seconds of app time down to 5.38, below the six-second minimum that MANIFEST.json itself records for this artifact with long_enough false.",
-   "judged_by": "coherence critic"
+   "ssim": 0.653,
+   "judgement": null,
+   "sha": "c4fc9e795e38880a",
+   "previous_sha": "a0204c2a830d6e94",
+   "previous_written": "2026-09-13T05:08:27Z",
+   "label_basis": "ssim 0.653, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
-   "ssim": 0.8002,
-   "judgement": "improved",
-   "sha": "24dd4e95eff0ee39",
-   "previous_sha": "1ad6edcba37d51ca",
-   "previous_written": "2026-09-11T23:25:32Z",
-   "label_basis": "ssim 0.8002, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "improved - the take grew from 639 to 691 frames and now carries the link being cut, the far phone writing while it is down and its notes landing on reconnect, plus the standing-line chips visibly changing outside Pulse; the three blank closing message rows are a fault but were present last cycle too.",
-   "judged_by": "coherence critic"
+   "ssim": 0.7112,
+   "judgement": null,
+   "sha": "fff90d55932881b4",
+   "previous_sha": "24dd4e95eff0ee39",
+   "previous_written": "2026-09-13T04:28:23Z",
+   "label_basis": "ssim 0.7112, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "09_two_devices.png",
    "label": "absent",
    "ssim": null,
-   "judgement": "unchanged",
-   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried.",
-   "judged_because": "unchanged - absent in this capture and not present in evidence/.previous either, so nothing moved; the reason recorded is a standing fact about the machine rather than a choice made this cycle.",
-   "judged_by": "coherence critic"
+   "judgement": null,
+   "why": "There is no Android device in this environment and there cannot be one: /dev/kvm is absent, so the x86_64 system image runs under QEMU's own instruction emulation. That was measured rather than assumed \u2014 adbd answered after 113 minutes and the framework never came up behind it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen, and nothing here was faked from the PWA. docs/PHONES.md records all three routes tried."
   },
   {
    "artifact": "10_first_run.png",
    "label": "changed",
-   "ssim": 0.937,
+   "ssim": 0.8824,
    "judgement": null,
-   "sha": "992ec3a451c4e2cf",
-   "previous_sha": "cb99ba3c2db1c563",
-   "previous_written": "2026-09-11T21:30:20Z",
-   "label_basis": "ssim 0.937, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "cdfc2c0a4ee101aa",
+   "previous_sha": "992ec3a451c4e2cf",
+   "previous_written": "2026-09-13T03:32:40Z",
+   "label_basis": "ssim 0.8824, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "11_chat_scroll.mp4",
    "label": "changed",
-   "ssim": 0.5704,
-   "judgement": "regressed",
-   "sha": "31de782392f879be",
-   "previous_sha": "f5a25ba26b84725e",
-   "previous_written": "2026-09-11T22:57:20Z",
-   "label_basis": "ssim 0.5704, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "regressed - 300 frames in both and the same thread, but notes' first lines are now cut by their sheets' top torn edges (for example 'the towpath with a' at frame 240), where the matched previous frames show every line fully on paper including the ritual row 'text when home KEPT'.",
-   "judged_by": "coherence critic"
+   "ssim": 0.5193,
+   "judgement": null,
+   "sha": "6504e044b435a2b6",
+   "previous_sha": "31de782392f879be",
+   "previous_written": "2026-09-13T02:40:10Z",
+   "label_basis": "ssim 0.5193, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "12_search.png",
    "label": "changed",
-   "ssim": 0.8148,
-   "judgement": "regressed",
-   "sha": "37509f105043dcbd",
-   "previous_sha": "b4af07176c298b29",
-   "previous_written": "2026-09-11T21:23:59Z",
-   "label_basis": "ssim 0.8148, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "regressed - the filter chips' sheets lost 31 to 49 percent of their area in a fixed box while the type stayed the same size, so most chip words are now cut by their own torn top edge; the chip set and the four results are otherwise identical.",
-   "judged_by": "coherence critic"
+   "ssim": 0.4695,
+   "judgement": null,
+   "sha": "5effff8de3d7c1a1",
+   "previous_sha": "37509f105043dcbd",
+   "previous_written": "2026-09-13T01:51:43Z",
+   "label_basis": "ssim 0.4695, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "13_messenger_states.png",
    "label": "changed",
-   "ssim": 0.6059,
-   "judgement": "regressed",
-   "sha": "7a559a642984dbcc",
-   "previous_sha": "bf60c944f4530cf9",
-   "previous_written": "2026-09-11T21:25:59Z",
-   "label_basis": "ssim 0.6059, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "regressed - four of the seven message rows the log places in the viewport paint nothing, bare desk went from 34.0 to 59.0 percent of the frame, and the refused row the previous capture rendered in full ('it would not go - this phone is on an older version and cannot read that') is gone from the glass.",
-   "judged_by": "coherence critic"
+   "ssim": 0.5784,
+   "judgement": null,
+   "sha": "540ad4c78926c14a",
+   "previous_sha": "7a559a642984dbcc",
+   "previous_written": "2026-09-13T01:53:41Z",
+   "label_basis": "ssim 0.5784, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "changed",
-   "ssim": 0.7468,
-   "judgement": "improved",
-   "sha": "2e4c11c142102745",
-   "previous_sha": "df4656d43df02820",
-   "previous_written": "2026-09-11T21:27:07Z",
-   "label_basis": "ssim 0.7468, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "improved - the standing-line band carrying partner state is now at the top of the viewer, where the previous capture had none; the viewer, caption and scrubber are otherwise the same at a later playback position.",
-   "judged_by": "coherence critic"
+   "ssim": 0.8009,
+   "judgement": null,
+   "sha": "577d60ae22418c82",
+   "previous_sha": "2e4c11c142102745",
+   "previous_written": "2026-09-13T01:54:44Z",
+   "label_basis": "ssim 0.8009, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "changed",
-   "ssim": 0.6604,
+   "ssim": 0.6852,
    "judgement": null,
-   "sha": "031eb86223bceea5",
-   "previous_sha": "16181526c151eee8",
-   "previous_written": "2026-09-11T22:59:25Z",
-   "label_basis": "ssim 0.6604, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
+   "sha": "89d29fd8f48b390b",
+   "previous_sha": "031eb86223bceea5",
+   "previous_written": "2026-09-13T03:00:07Z",
+   "label_basis": "ssim 0.6852, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   },
   {
    "artifact": "16_setup_android.png",
    "label": "absent",
    "ssim": null,
-   "judgement": "unchanged",
-   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got.",
-   "judged_because": "unchanged - absent in this capture and absent from evidence/.previous as well, for the same standing machine reason as 09.",
-   "judged_by": "coherence critic"
+   "judgement": null,
+   "why": "The same: the Android first-run screens need an Android device, and this machine has no /dev/kvm. docs/PHONES.md records what was tried and how far each attempt got."
   },
   {
    "artifact": "17_setup_pwa.png",
    "label": "changed",
-   "ssim": 0.8468,
-   "judgement": "improved",
-   "sha": "45c1c3b7a3bc9087",
-   "previous_sha": "4ad52a9fc9be9fa8",
-   "previous_written": "2026-09-11T21:30:30Z",
-   "label_basis": "ssim 0.8468, under 0.999: something a person would see has moved, and SSIM does not know whether for the better",
-   "judged_because": "improved - the same six-step checklist in the same order and voice, with the sheets recut so each step's paper sits under its own text; the difference map shows the change is confined to the tear silhouettes and the last step's wrap.",
-   "judged_by": "coherence critic"
+   "ssim": 0.5725,
+   "judgement": null,
+   "sha": "25f788f50caedbb0",
+   "previous_sha": "45c1c3b7a3bc9087",
+   "previous_written": "2026-09-13T03:32:50Z",
+   "label_basis": "ssim 0.5725, under 0.999: something a person would see has moved, and SSIM does not know whether for the better"
   }
  ],
  "counts": {
@@ -205,6 +179,5 @@
   "unchanged": 0,
   "changed": 15,
   "absent": 2
- },
- "judgements_from": "the coherence critic's report for this cycle"
+ }
 }
