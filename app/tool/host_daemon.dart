@@ -72,12 +72,24 @@ Future<void> main(List<String> argv) async {
   final spine = await Spine.open(NativeStore.openAt('${dir.path}/host.sqlite3'),
       const Identity(person: Person.noor, device: DeviceKind.android));
 
-  // The clock the far phone stamps with: the frozen now the year is written against, moving
-  // forward with the wall clock from the moment this started. Without it a message from the far
-  // phone carried today's date into a thread whose "now" is two days earlier.
+  // The clock the far phone stamps with: the frozen now the year is written against, and *only*
+  // that. Without a frozen now at all, a message from the far phone carried today's date into a
+  // thread whose now is two days earlier; with one that moved forward on the wall clock, it
+  // carried the length of the capture instead.
+  //
+  // The near phone's clock is `Clock(frozenAt:)` in scope.dart, which moves only when the harness
+  // steps the driven clock — a few seconds over a whole scene. This one moved with the wall clock,
+  // and 08_state_propagating takes an hour and a quarter to shoot. A messenger critic read the
+  // result: the newest row on the glass, the person's own note, stamped 19:40, under three rows
+  // from the far phone stamped 19:55, 19:55 and 19:58. The two phones were eighteen minutes apart
+  // about what time it was, in a thread whose whole subject is the two of them agreeing.
+  //
+  // Frozen, they agree. Several events written in one minute of app time read as one minute, which
+  // is what they are; the order among them is the order they were appended, which is what the
+  // spine has always sorted by when timestamps tie.
   final frozenAt = nowArg.isEmpty ? null : DateTime.parse(nowArg).toUtc();
   final startedAt = DateTime.now().toUtc();
-  DateTime now() => frozenAt == null ? DateTime.now().toUtc() : frozenAt.add(DateTime.now().toUtc().difference(startedAt));
+  DateTime now() => frozenAt ?? DateTime.now().toUtc();
 
   if (seed == 'year') {
     final t0 = DateTime.now();

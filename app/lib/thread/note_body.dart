@@ -61,6 +61,16 @@ String whenLabel(Object? at) {
 /// rule three cycles of reports rest on, and the readout's oddity is confined to clips under three
 /// seconds, which in this build only the seeded stubs are.
 String clockOf(int ms, {bool total = false}) {
+  // The elapsed counts seconds *completed* and the total rounds up, which is what every player
+  // does and what the three surfaces that show a length here have agreed on since the tenth cycle.
+  //
+  // A messenger critic read '0:00 / 0:03' on a clip 771 ms into its 2,500 with the playhead
+  // standing 31 per cent along, and called the readout wrong. Rounding the elapsed instead makes
+  // '0:03 / 0:03' appear half a second before the end, which is worse; the real answer for a clip
+  // this short is tenths, and tenths mean a second argument saying how long the whole thing is at
+  // every one of the three call sites. Left as it is, and written down here rather than in a
+  // report nobody reads: on a two-and-a-half-second voice note the bar is the precise readout and
+  // the clock is the coarse one.
   final s = ms <= 0 ? 0 : (total ? (ms + 999) ~/ 1000 : ms ~/ 1000);
   return '${s ~/ 60}:${(s % 60).toString().padLeft(2, '0')}';
 }
