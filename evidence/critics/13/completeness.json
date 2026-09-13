@@ -1,0 +1,295 @@
+{
+  "critic": "completeness",
+  "cycle": 13,
+  "how_i_worked": {
+    "clips": "No ffmpeg or ffprobe exists on this machine; I decoded every clip with OpenCV 5.0.0 (cv2.VideoCapture), sequentially from frame 0 rather than by seeking, because a seek on these files lands on the wrong frame. Frame numbering is therefore 0-based and matches frames.json's counts exactly (06: 286, 07: 392, 08: 696, 11: 300, 15: 428, all 1080x2340 at 62.5 fps).",
+    "luma": "Rec.601 through cv2.cvtColor(BGR2GRAY) for clip work and 0.299R+0.587G+0.114B on float arrays for the PNG stills; both agree to under a tenth of a grey level where I cross-checked them. Timings are read in app time off frames.json runs[].step_ms as BRIEFING.md requires, never off the scene logs' wall-clock steps[].ms.",
+    "flat_regions": "A 5x5 box-filter variance of exactly zero (sq_mean - mean_sq < 1e-6), then 8-connected components with cv2.connectedComponentsWithStats, which is the strictest possible reading of 'flat'. For the stills I also ran the looser 9x9 local-standard-deviation < 0.35 test the material critic describes.",
+    "ruled_lines": "On paper-bright pixels only (luma 175-255), a row is on a rule where blue-minus-red exceeds the still's own paper baseline by 5 across more than a set fraction of the columns; rule centres are the intensity-weighted centroid of each run. Written-line positions are contiguous bands of pixels under luma 110 counted across the note's own column range.",
+    "glyph_twins": "Connected components of ink (luma < 140, area >= 40 px, 6-160 px on a side), grouped by exact bounding-box size, normalised cross-correlation at native scale with no rescaling. I ran three variants: the raw rectangular patch (paper included), the component mask alone, and the ink only with the background held at a constant. The variant chosen changes the answer and I report all three.",
+    "haptics": "logs/haptics.json's segments re-binned at 40 ms, amplitude to the power 0.6, mean absolute difference x100 at the best alignment over a +/-15 per cent tempo window, plus a length term with a 15 per cent deadband - my own reading of the file's prose description.",
+    "disclosure": "I wrote nothing into the repository except this file. `git status --porcelain` was empty when I started (HEAD b6499c2) and is empty now. I did NOT run `flutter test` or any part of the suite: cycle 10's pass found that running it rewrites two files under evidence/, and the code critic's serious finding about a flaky scroll_cost_test is the one claim in this review I therefore left un-rerun, and I say so rather than pretending otherwise. All decoded frames, crops, montages and intermediate PNGs were written to the session scratchpad at /tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad, never into evidence/ or assets/. I read four source files (app/test/floors_test.dart, app/test/spine_replay_golden_test.dart, app/lib/spine/types.dart, app/lib/capture/hooks.dart, app/lib/material/paper.dart) and assets/MANIFEST.json to check code findings; I opened no plan, task list, commit log, SCORE.json or .review-held/ directory."
+  },
+  "checked": {
+    "reports_read_in_full": [
+      "evidence/critics/13/messenger_reliability.json",
+      "evidence/critics/13/material_truth.json",
+      "evidence/critics/13/emotional_transmission.json",
+      "evidence/critics/13/coherence.json",
+      "evidence/critics/13/code.json",
+      "evidence/critics/13/anti_goal.json"
+    ],
+    "evidence_opened": [
+      "evidence/critics/BRIEFING.md",
+      "evidence/critics/prompts/completeness.md",
+      "evidence/critics/prompts/messenger_reliability.md",
+      "evidence/critics/prompts/material_truth.md",
+      "evidence/critics/prompts/emotional_transmission.md",
+      "evidence/critics/prompts/coherence.md",
+      "evidence/critics/prompts/code.md",
+      "evidence/critics/prompts/anti_goal.md",
+      "evidence/MANIFEST.json",
+      "evidence/DIFF.json",
+      "evidence/WHY_MISSING.json",
+      "evidence/frames.json",
+      "evidence/reliability.json",
+      "evidence/coldstart.json",
+      "evidence/01_pulse.png",
+      "evidence/02_chat.png",
+      "evidence/03_us.png",
+      "evidence/04_moments.png",
+      "evidence/05_settings.png",
+      "evidence/10_first_run.png",
+      "evidence/12_search.png",
+      "evidence/13_messenger_states.png",
+      "evidence/14_media_viewer.png",
+      "evidence/17_setup_pwa.png",
+      "evidence/06_unfolding.mp4 (all 286 frames)",
+      "evidence/07_feeling_landing.mp4 (all 392 frames, twice)",
+      "evidence/08_state_propagating.mp4 (all 696 frames)",
+      "evidence/11_chat_scroll.mp4 (all 300 frames)",
+      "evidence/15_authored_feeling.mp4 (all 428 frames)",
+      "evidence/crops/02_chat_300_hand.png",
+      "evidence/crops/dusk_pulse.png",
+      "evidence/logs/crops.json",
+      "evidence/logs/scroll_webkit.json",
+      "evidence/logs/11_chat_scroll.fling.json",
+      "evidence/logs/lines.json",
+      "evidence/logs/flat.json",
+      "evidence/logs/holes.json",
+      "evidence/logs/grain.json",
+      "evidence/logs/hairline.json",
+      "evidence/logs/hand.json",
+      "evidence/logs/tears.json",
+      "evidence/logs/fonts.json",
+      "evidence/logs/surfaces.json",
+      "evidence/logs/haptics.json",
+      "evidence/logs/haptics.check.json",
+      "evidence/logs/strings.json",
+      "evidence/logs/pwa.json",
+      "evidence/logs/webpush.txt",
+      "evidence/logs/manifest.json",
+      "evidence/logs/recipes.json",
+      "evidence/logs/apk.json",
+      "evidence/logs/tests.log",
+      "evidence/logs/07_feeling_landing.sound.json",
+      "evidence/logs/15_authored_feeling.sound.json",
+      "evidence/logs/reception.json",
+      "evidence/logs/reception_scene.json",
+      "all 18 evidence/logs/*.report.json",
+      "all 17 evidence/logs/<scene>.json step logs (ok / problems / load only)",
+      "all 17 evidence/scenes/*.json",
+      "evidence/experiments/what_the_alternates_cost/ (all ten files)",
+      "evidence/.previous/ (all 15 artifacts, sha256 verified, plus CAPTURED_AT)",
+      "app/test/floors_test.dart",
+      "app/test/spine_replay_golden_test.dart",
+      "app/lib/spine/types.dart",
+      "app/lib/capture/hooks.dart",
+      "assets/MANIFEST.json"
+    ]
+  },
+  "corrections": [
+    {
+      "report": "messenger_reliability",
+      "severity_in_report": "blocking",
+      "claim": "scroll_webkit.json reports build_ms p50 9, p95 781, max 1087, 196 of 886 frames over 400 ms; every 300-frame window holds 64-69 of them, longest clean run 6 frames; median build 3 ms at zero paper pieces, 9 at one, 654 at two (n=187, max 1087); corr(build,pieces) 0.788, corr(build,rows) -0.122, corr(build,masks) -0.003.",
+      "what_i_measured": "Every figure, recomputed from per_frame with my own percentile code: p50 9.0, p95 781.0, max 1087.0 over 886 frames; 196 frames over 400 ms; 300-frame sliding windows hold 64 to 69; longest run with no heavy frame 6; medians by pieces_drawn 3.0 (n=350), 9.0 (n=340), 654.0 (n=187, max 1087.0), 654.0 (n=9); correlations 0.788, -0.122, -0.003. Raster p50 102, p95 141, max 225 as stated, and corr(build, raster) is -0.006, which independently supports the file's claim that build is the app and raster is the machine. The heavy frames are uniform across the record (66 in the first 300, 65 in the last 300), so no choice of window changes the picture.",
+      "does_it_survive": "yes - exact, every number, including the ones the critic derived rather than quoted",
+      "why_it_matters": "This is the single finding holding the heaviest row (weight 30) under its floor and it is the best-evidenced finding in the review. I also confirmed the second half of its reasoning: on the frames where my SAD search locked, the clip's on-screen displacement equals 11_chat_scroll.fling.json's asked value times the dpr of 3 (339 px against an asked 113.3, 336 against 336.1, 306 against 306.0), so the clip reproduces the driven clock and cannot show build cost. 'frames_under_a_device_pixel 0' is a property of the harness, exactly as the critic says."
+    },
+    {
+      "report": "messenger_reliability",
+      "severity_in_report": "serious",
+      "claim": "The set carries its own control and the capture is 23x worse: the alternates arm reads p50 5, p95 34.3, 6 of 628 over 400 ms at frames 14-18, 45 and 211; the plain arm p95 33.7 and 5 of 627; what_the_alternates_cost.json states the_fling_alone.over_400_ms = 0 for both.",
+      "what_i_measured": "Recomputed from both arms' per_frame: alternates p50 5.0, p95 34.3, max 1323, 6 of 628 over 400 ms at indices 14, 16, 17, 18, 45, 211; plain p50 4.0, p95 33.7, max 2429, 5 of 627 at indices 14, 15, 16, 18, 44. travelled 27645 and rows_built_total 170 in both fling records; the capture's own fling record reads 167. p95 ratio 781/34.3 = 22.8. One thing the critic did not close, because it declined the four files that would have closed it: the fling records in both arms cover ticks 10-309, and within exactly that window the per-frame records hold 5 and 6 heavy frames, not the 0 that what_the_alternates_cost.json's the_fling_alone reports. Both arms' scene logs (11_plain.json, 11_alternates.json) read ok: true with empty problems, which nobody checked.",
+      "does_it_survive": "yes, and the direction is if anything stronger than stated",
+      "why_it_matters": "The control is the strongest thing in the review after the blocking measurement itself - 5-6 heavy frames in 300, all of them in the first 45 ticks, against 65-66 in any 300 spread evenly throughout. But the summary figure the critic quoted (the_fling_alone.over_400_ms = 0) is not what the per-frame arrays say about the fling window, and the critic quoted the summary and the per-frame list side by side without reconciling them. The comparison should rest on the per-frame arrays, which are on disk."
+    },
+    {
+      "report": "material_truth",
+      "severity_in_report": "blocking",
+      "claim": "In crops/02_chat_300_hand.png the printed rules lie at y=239, 482 and 722 (pitch 242 crop px = 80.7 px of the still) and cross their lines of writing 38%, 38% and 26% down the letters; measured back on the full still the same note has an 81.0 px rule pitch against a ~36 px written-line pitch, 2.25 written lines per printed rule.",
+      "what_i_measured": "The first half replicates. My rule centres in the crop are y = 235.1, 475.4 and 718.3, pitch 240.3 and 242.9 (mean 241.6 crop px = 80.5 still px); the ink bands run 183-314, 420-557 and 705-779, putting each rule 36-40 per cent down its band; on the full still the hero note's rules sit at 2028.0, 2109.3, 2189.0, 2269.8, 2350.8, a pitch of 80.7 px. Visually the rule runs through the x-height of 'stool and le', 'they will bri' and 'no name on'. The second half does not replicate. The hero note's four written lines have baselines at 2053, 2135, 2215 and 2296 - a written-line pitch of 80.3 px, equal to the 80.7 px rule pitch, i.e. 1.00 written lines per printed rule, not 2.25, and nothing anywhere on that note measures 36 px. The crop itself shows it: three rules and three lines of writing, one line to a rule.",
+      "does_it_survive": "the finding survives; the mechanism it names does not",
+      "why_it_matters": "The fault is phase, not frequency. The text is set at the stock's own pitch and sits about a third of a pitch below the rule, so the rule enters the letters near the top of the x-height. A builder told '2.25 written lines per printed rule' would go looking for a line-height bug that is not there; told 'the right pitch, the wrong offset' it is a single constant. The 36 px figure is repeated in the verdict, so it is not a slip in one sentence."
+    },
+    {
+      "report": "material_truth",
+      "severity_in_report": "blocking (supporting citation) and minor (finding 7)",
+      "claim": "logs/lines.json records the same thing for the whole set at a median 0.373 of the pitch off the nearest rule, where laid out with no relation at all reads 0.25. The same report's minor finding says the file's pitches are wrong and gives 81 px for 02_chat against the file's 161.0.",
+      "what_i_measured": "lines.json's rule_pitch_px is wrong on most of the set and worst on the still the row is judged on. Detecting the blue rules directly: 02_chat 80.9 px (file: 161.0, exactly double) across 21 rules with 13 within-note gaps of ~80.4, where the file claims 8 ruled lines; 04_moments ~90.7 (file: 599.0); 03_us ~102.4 (file: 214.5); 12_search ~80.9 (file: 111.2); 05_settings 106.5 and 17_setup_pwa 70.8 match the file. 10_first_run carries three different pitches on three different sheets in the one still - 80.4, 114.5 and 70.3 - so a single per-still pitch is not a well-defined quantity at all. Since off_the_line is defined as a fraction of the pitch, the denominator on the hero still is twice the real one. My own off-the-line for the hero note is 0.316 (25.5 px below the nearest rule over an 80.7 px pitch), not the file's 0.425. I also confirmed the file's median_across_the_set 0.373 is the median of its own ten per-still medians (0.3735), which contradicts both its own prose ('The set reads 0.33') and BRIEFING.md, and that its ratio field of 8.5 (599.0/70.5) contradicts its own prose ('It is 1.86 now') and the briefing's '61 to 178 pixels, a ratio of 2.9'.",
+      "does_it_survive": "the direction survives - the writing is off the rules everywhere - but the quoted figure does not",
+      "why_it_matters": "The material row's blocking finding cites lines.json's 0.373 as the whole-set generalisation of its crop measurement, and the same report's own minor finding 7 shows that file's pitch for that very still is double the truth. A report that disproves its own supporting citation four findings later has not reconciled itself, and a builder reading it cannot tell which of the two numbers to chase. Three values for one quantity now exist in the evidence (8.5, 2.9, 1.86) and two for another (0.373, 0.33); nobody re-derived either."
+    },
+    {
+      "report": "material_truth",
+      "severity_in_report": "serious",
+      "claim": "Repeated letters are pixel-identical: cross-correlating same-size ink components at native scale, 27 of 339 marks (8.0%) have a twin at ncc >= 0.98 and 68 (20.1%) at >= 0.95; inside the hero note 16 of 114 (14.0%) and 45 (39.5%); six pairs over 0.99.",
+      "what_i_measured": "Method-dependent, and the critic's variant is the generous one. Correlating the whole bounding-box patch (paper background included) I get 313 marks, 20 with a twin at >= 0.98 (6.4%), 56 at >= 0.95 (17.9%), 6 pairs >= 0.99, max 0.9985 - close to the report. Correlating the component's ink only, with the background held constant, no pair reaches 0.98 and the maximum is 0.9772; on the mask alone the maximum is 0.9709. Including the background inflates ncc because two same-size patches of the same stock correlate strongly whatever letters are on them. Looking at the top pairs, they are genuinely the same letter twice (e/e at 0.9985 raw, e/e, l/l, o/o, s/s, a/a) and are indistinguishable to my eye at 300 per cent. Also internal: the report's list of 'six pairs over 0.99' contains four values below 0.99 (0.9897, 0.9880, 0.9873).",
+      "does_it_survive": "yes in substance, no at the stated precision",
+      "why_it_matters": "The row names 'handwriting whose repeated letters are identical' verbatim, and they are - fonts.json's own same-variant rate of 0.3006 across five variants makes it arithmetic. But 8.0 per cent at ncc 0.98 is a paper-inclusive figure and the ink-only figure is 0.0 per cent, so the number should not be quoted as a property of the marks. hand.json measures a different thing again (normalised-box IoU, twin_share_at 0.99 = 0.0), and no reader has yet put the three measures on one footing."
+    },
+    {
+      "report": "material_truth / anti_goal / coherence / messenger_reliability",
+      "severity_in_report": "serious (material 6), minor (anti_goal 2), minor (coherence 5)",
+      "claim": "Three reports give three different counts of the same field. Material: 'ten of the seventeen region reports'. Coherence: 'nine reports record {sticky_blue_02: 2} (and sticky_blue_02_dusk in dusk_pulse)'. Anti-goal: 'eight of thirteen scenes', while its own sentence names nine. Messenger elsewhere says 'all nineteen *.report.json'.",
+      "what_i_measured": "There are 18 files matching evidence/logs/*.report.json. Exactly 10 of them carry a non-empty sheets_on_the_glass_with_no_paper_on_them: 01_pulse, 03_us, 05_settings, 06_unfolding, 11_chat_scroll, 13_messenger_states, 14_media_viewer and reception_picked_up at {sticky_blue_02: 2}; 12_search at {sticky_blue_02: 2, graph_03: 1}; dusk_pulse at {sticky_blue_02_dusk: 3}. Coherence's count is right. Material's numerator is right and its denominator wrong. Anti-goal undercounts on both and misses reception_picked_up. Messenger's nineteen does not exist. Separately I confirmed both halves of what they all agree on: no connected region of 1500 px or more with a 9x9 local sd under 0.35 exists in any of the ten stills or crops/dusk_pulse.png except the photograph in 14_media_viewer (27 regions) and one dark video tile in 04_moments, and flat.json reads files_with_a_flat_fill 0.",
+      "does_it_survive": "yes, at 10 of 18",
+      "why_it_matters": "This is the anti-goal verbatim - a sheet painting a flat fill instead of paper - recorded as happening in more than half the set by the app's own instrumentation, with no picture anywhere showing one. Three counts of one field in one review is the reason a reader cannot tell whether it is getting worse or better, and the right count is 10 of 18."
+    },
+    {
+      "report": "material_truth",
+      "severity_in_report": "serious",
+      "claim": "The desk carries almost no fine detail: high-pass standard deviation at sigma=1 is 1.49 grey levels against 12.78 at sigma=16, a ratio of 0.116.",
+      "what_i_measured": "On the same region of 10_first_run.png (120,600)-(1320,1200): sigma=1 gives 1.50, sigma=16 gives 12.88, ratio 0.116. The comparator figures are patch-dependent - a clean paper patch in 02_chat gives me 0.216 and a sky patch in 14_media_viewer 0.200, against the report's 0.299-0.405 and 0.105 - but the desk measurement itself is exact.",
+      "does_it_survive": "yes for the desk; the comparators are patch-sensitive and should be read as such",
+      "why_it_matters": "The desk is the largest surface in every artifact and grain.json passes it on a margin of 14 per cent while conceding in its own note that its anisotropy term 'cannot see the difference between painted stripes and visible oak'. This is the clearest case in the review of a gate that says nothing."
+    },
+    {
+      "report": "emotional_transmission",
+      "severity_in_report": "blocking",
+      "claim": "All 14 motor asks across the three feeling scenes (7 in 07, 4 in 08, 3 in 15) answer 'no motor in a browser: the page rhythm carries it instead', and the feeling's sound is in the clips only because the harness mixed the .ogg over silence, which 07_feeling_landing.sound.json states itself.",
+      "what_i_measured": "Exact. asked_a_motor_for is a list in all 18 region reports and is empty in 15 of them; 07 has 7 entries, 08 has 4, 15 has 3, total 14, and every single one carries answered_by: 'no motor in a browser: the page rhythm carries it instead' with answered null. Both sound logs carry source: 'assets/sound/<id>.ogg, the file the app plays, mixed over silence' and not: 'a recording of the running app's audio output'.",
+      "does_it_survive": "yes, exactly",
+      "why_it_matters": "It is the right blocking finding for the clause it names ('identifiable by its haptic pattern alone with the screen face down'): with the screen face down the page-movement substitute is gone by construction and the sound channel is never recorded coming from the app. Note that the evidence is honest about this rather than hiding it - asked_a_motor_for exists precisely to write the ask and the answer down separately - so the finding is about what cannot be photographed here, not about a concealment."
+    },
+    {
+      "report": "emotional_transmission",
+      "severity_in_report": "minor",
+      "claim": "The haptic separability check is sound and reproduces: an independent re-derivation gives a smallest pair of 17.47 against the file's 17.74.",
+      "what_i_measured": "It reproduces for me too, from an independent implementation of the file's prose. Closest pairs: 16.89 (overwhelmed/tangled), 17.88 (forehead/overwhelmed), 18.12 (empty_chair/come_home), against the file's 17.74 for empty_chair/come_home and 18.42 for overwhelmed/tangled. Half-Weber twins max 4.53 (file: 6.48); twice-Weber twins min 19.51 (file: 11.68); the bands do not overlap on either implementation; my derived geometric midpoint is 9.40 against the file's 8.7, and every real pair clears both by a factor of nearly two. 36 feelings, 36 distinct haptic strings, six families of 5-7, longest 2700 ms, shortest 30 ms - all confirmed.",
+      "does_it_survive": "yes",
+      "why_it_matters": "This is the one derived floor in the set that holds up under an independent rebuild, and it is worth saying so plainly. The one caveat: the file's phrase 'at the best alignment over the tempo changes a finger cannot detect' is not precise enough to reproduce exactly - my first plausible reading of it produced overlapping bands (half max 25.43 against twice min 21.14) before I read it as a tempo-scale search. A derivation whose result depends on how its own sentence is parsed should say what the search is over."
+    },
+    {
+      "report": "emotional_transmission",
+      "severity_in_report": "serious",
+      "claim": "The pocket reads back empty in every single report in the set, 17 of 17, including reception_picked_up.",
+      "what_i_measured": "held_by_the_phone is [] in all 18 report files (18, not 17). But the finding quotes a block that answers it two lines further down: every one of those reports also carries and_it_is_empty_because: 'the browser is holding nothing' and, in what_each_surface_may_say, 'A held list that is empty after the app has been opened is the surface working: the app clears what the phone was holding the moment somebody looks at it.' reception_picked_up is by construction read after the app has been opened - logs/reception.json shows 24 records the worker actually displayed before the pick-up - so an empty list there is the stated behaviour, not the fix failing.",
+      "does_it_survive": "partly",
+      "why_it_matters": "The residual finding is real and should be kept: no artifact anywhere in the set ever shows that list holding anything, so 'the app clears it when you look' is unfalsifiable from the evidence. But 'empty in 17 of 17 including the new scene' reads as the new scene having failed, and the record it cites says the opposite in the same object. The honest version is narrower and still costs the row."
+    },
+    {
+      "report": "emotional_transmission / messenger_reliability",
+      "severity_in_report": "serious (emotional 3, messenger 4)",
+      "claim": "The reconnect happens between two frames: 671 to 672 measures a mean absolute luma change of 41.09 grey levels over 53.5 per cent of pixels, twelve times the clip's mean_change_per_frame of 3.41, and 671 is a run boundary in frames.json; the far phone's returned message is a folded sheet carrying only 'teo' and no words.",
+      "what_i_measured": "The picture replicates completely and the magnitude does not. Decoding all 696 frames: 671->672 is a mean absolute luma change of 31.42 with 42.8 per cent of pixels changing by more than 2 and 56.9 per cent changing at all - 9.2 times the clip's own mean, which I recompute as 3.45 against frames.json's 3.41387, not 12 times. frames.json's cuts_between_runs does list 671, and every one of the six largest single-frame changes in the clip (170, 537, 645, 653, 310, 672) sits on a run boundary. Side by side, frame 671 carries the banner 'can't reach the other phone. it'll go when it can.' over a note reading 'waiting to send'; frame 672 has no banner, 'sent' on that note, a new '- noor is quiet' row, and the far phone's returned row as a blank folded sheet with 'teo' on its cover and no words anywhere.",
+      "does_it_survive": "yes in substance, with the magnitude 30 per cent high",
+      "why_it_matters": "Both critics read this scene the same way and both are right about it: the only artifact in the set that shows ordering after a reconnect never lets the reader see which message came back. The messenger critic correctly attributes it to the scene script rather than the app (no unfold step after the reconnect), which is exactly the distinction BRIEFING.md asks for."
+    },
+    {
+      "report": "coherence",
+      "severity_in_report": "blocking",
+      "claim": "All fifteen artifacts are the same headless WebKit page at dpr 3, ten stills at 480x1040 and five clips at 360x780; logs/apk.json, written 2026-09-12T00:07:18Z against a capture that began 2026-09-13T09:37:45Z, is a 101.2 MB arm64 build and is the only Android record.",
+      "what_i_measured": "Exact. MANIFEST.json: captured_at 2026-09-13T09:37:45Z, browser webkit, 15 artifacts all from_this_run true and all 1440x3120 or 1080x2340; checks_from_an_earlier_run is exactly ['apk.json'] and its entry reads written 2026-09-12T00:07:18Z, from_this_run false. Every scene file and every scene log agrees on the two viewports, and reception alone is 400x880 under chromium. apk.json: 101.2 MB, arm64-v8a only, signed by 'CN=a throwaway key that proves the signing path'. WHY_MISSING.json gives a measured reason for both absent artifacts.",
+      "does_it_survive": "yes, exactly",
+      "why_it_matters": "The clause 'both platforms serve the same regions, the same feelings, and the same event types' genuinely has no artifact behind it, and the critic is right that a measured reason is still not an artifact. Worth adding for the reader: the code critic verified the single-codebase half of that clause from the source, which is the half that can be checked here, so the two halves of row 04 are not saying the same thing."
+    },
+    {
+      "report": "coherence",
+      "severity_in_report": "serious",
+      "claim": "Both 10_first_run and 17_setup_pwa report ambient.standing_line = 'nothing from them since you last looked' while the strip actually drawn - byte-identical between them, mean absolute difference 0.000 over rows 0-250 - reads 'nothing from them yet. the six words are on the other phone.'",
+      "what_i_measured": "Exact on all three counts. Both reports carry that string; rows 0-250 of the two stills differ by a mean of 0.0000 with a maximum of 0.0; and the strip on the glass reads 'nothing from them yet. the six words are on the other phone.' I read it off the pixels.",
+      "does_it_survive": "yes, exactly",
+      "why_it_matters": "It is the cleanest single demonstration in the review that a record and its picture disagree, and it costs row 04 on the clause it is actually about (one surface, one source). It also happens to show the material blocking finding a second time: both rules in that strip cut through the writing."
+    },
+    {
+      "report": "messenger_reliability / coherence",
+      "severity_in_report": "serious in both",
+      "claim": "Reactions are named in the row and no reaction is legible in any artifact; view.reactions is non-empty in exactly one report, on a row that is 0.366 on the glass.",
+      "what_i_measured": "Exactly one of 18 report files has a non-empty view.reactions: 13_messenger_states, {01M1MCJ1M0D46H1D74PPV4NMNH: 1}, and view.clipped_at_an_edge puts that row at 0.366. Looking at the still, the top of the frame is a white sliver with no mark on it, and the same row is also in taken_back. scenes/13_messenger_states.json's far lines are read, message, edit, reply, message, unsend, read, typing on, refuse - no react step.",
+      "does_it_survive": "yes",
+      "why_it_matters": "Two independent readers reached the same measurement on the same field, which is the strongest form of agreement in this review. The scene script is where the fix lives."
+    },
+    {
+      "report": "messenger_reliability",
+      "severity_in_report": "serious / minor",
+      "claim": "Three of fifteen scenes ended ok: false with a 401 on the long poll (11: 1 fault in 212 rounds; 14: 1 in 19; 15: 1 in 453); every ordering claim was taken over loopback with reliability.json reading transport 'local', 127.0.0.1:42935, latency_ms 0, tailscale checked_at 2026-09-05 and later_check pending.",
+      "what_i_measured": "Both exact. 11_chat_scroll, 14_media_viewer and 15_authored_feeling read ok: false with identical 401 problems; their reports read sync.last_fault '401 the signature does not match' at 1/212, 1/19 and 1/453; the other twelve artifact scenes plus dusk_pulse and reception are ok: true with empty problems. reliability.json: transport local, host 127.0.0.1:42935, latency_ms 0, 177 events each side, duplicates 0, same_order_both_sides true, ordering monotonic, offline_queue '26 events queued offline, all delivered on reconnect', reconnect_ordering 'client holds seq 1..175 gapless and monotonic after the gap', tailscale.checked_at 2026-09-05T00:28:43Z with later_check status pending re-checked at 2026-09-13T11:57:53Z; coldstart.json written_at 2026-09-05T00:28:41Z with the same pending later_check.",
+      "does_it_survive": "yes, every quoted value",
+      "why_it_matters": "Twenty per cent of the captured scenes hitting a signature failure on the path that carries every incoming event is the finding in this row I would put second after the scroll, and it is fully supported."
+    },
+    {
+      "report": "anti_goal",
+      "severity_in_report": "blocking",
+      "claim": "obj_crumple_ball is a flat-shaded low-polygon mesh with visible triangle facets: frame 339 of 07_feeling_landing has one connected region of 33,389 px (1.32 per cent of the frame) at 5x5 variance exactly 0.000 and pure #FFFFFF, and 149 of 392 frames (38 per cent, 2.38 s of app time) carry a zero-variance region of 5,000 px or more; surfaces.json gives it a tooth of 0.43 and obj_spitball 0.307 against the 0.45 the same file requires of paper, and shading_floors has entries only for 'paper' and 'folds'.",
+      "what_i_measured": "Exact to the pixel and confirmed by eye. Frame 339: one component of 33,389 px, 412x302 at (42,1300), interior colour (255,255,255), 5x5 variance identically zero, 1.32 per cent of 1080x2340. Scanning all 392 frames, 149 carry such a region (38.0 per cent, 2.38 s at 16 ms a frame). Cropped and viewed, it is unmistakably a flat-shaded low-poly mesh: large pure-white facets with hard triangular boundaries and no tooth at all, occupying a third of the frame height beside a note whose own paper grain is plainly visible. surfaces.json confirms tooth 0.43 for obj_crumple_ball, 0.307 for obj_spitball, shading_floors {paper: {tooth: 0.45, field_swing: 3.0}, folds: {tooth: 0.6}} with no entry for objects. One thing the finding does not say: the 149 frames fall in two runs, 0-96 and 336-387, so the fault is not confined to the 'overwhelmed' landing it names - it is also on the glass for the first 1.55 s of the clip.",
+      "does_it_survive": "yes, and it understates its own extent",
+      "why_it_matters": "It is the correct blocking finding for the fourth anti-goal, it is the emotional layer's own object, and it is the one failure the brief says should cost the build twice. It is also the finding I would most expect a builder to be able to act on, because surfaces.json already holds the gate that would have caught it and does not apply it to objects."
+    },
+    {
+      "report": "anti_goal",
+      "severity_in_report": "serious",
+      "claim": "A flat beige rectangle with hard straight edges lies over the header sheet in three clips: 11,530 px at (546,41) in 08 frame 321, 12,297 px at (545,41) in 07 frame 95, 10,507 px at (546,46) in 15 frame 396, on screen in 208/696, 166/392 and 193/428 frames.",
+      "what_i_measured": "Exact. 08 frame 321: 11,530 px, 456x34 at (546,41), rgb(194,180,162). 07 frame 95: 12,297 px, 454x33 at (545,41), rgb(197,184,163). 15 frame 396: 10,507 px, 452x28 at (546,46). The per-clip shares reproduce to the frame at a 3,000 px threshold: 208/696 (30%), 166/392 (42%), 193/428 (45%); at the 5,000 px threshold the named regions imply, they are 184, 97 and 126. Neither 06_unfolding nor 11_chat_scroll carries one.",
+      "does_it_survive": "yes",
+      "why_it_matters": "This is the one place two reports flatly contradict each other, and the anti-goal critic is right. material_truth's verdict says 'None of the three things that would sink this row outright - procedural noise overlay, tiled texture, beige rectangle - is visible in the pixels', and material_truth's own opened list includes all five clips. Its row says verbatim that a beige rectangle standing in for paper 'scores this category below its floor'. The object is there, it is reproducible to the pixel in three clips, and the row whose floor clause names it never looked for it in the artifacts where it lives. Material truth is already below its floor, so the arithmetic does not move; the review's account of why does."
+    },
+    {
+      "report": "anti_goal",
+      "severity_in_report": "minor",
+      "claim": "strings.json reads 568 of 4,077 literals (13.9 per cent), 114 in a display position; its rule keeps only literals with a space, so every single-word label returns 0 exact matches; its emoji rule covers U+2600-27BF, which is where the tick and cross in 13_messenger_states live.",
+      "what_i_measured": "Exact. strings_read 568, literals_in_lib 4077, share 0.139, in_a_display_position 114; the_rest_are_judged says 'has a space in it'; the emoji pattern includes \\u2600-\\u27bf. Searching the 568 read strings, PULSE, CHAT, US, MOMENTS, SETTINGS, send, ugh, confetti, hold, nyeh and goodnight all return 0 exact matches.",
+      "does_it_survive": "yes",
+      "why_it_matters": "It is a well-aimed observation about a record's reach rather than about the build, and the critic correctly says it read the strings off the artifacts instead and found them clean."
+    },
+    {
+      "report": "code",
+      "severity_in_report": "minor and serious",
+      "claim": "floors_test's Notify assertion is a tautology because notify is a non-nullable Notify at app/lib/spine/types.dart:62; and docs/EVENT_TYPES.md says spine_replay_golden_test.dart 'replays the seeded year and compares every region's view to a golden' when it replays a fifteen-event hand-written log.",
+      "what_i_measured": "Both exact. app/lib/spine/types.dart line 62 is 'final Notify notify;' - non-nullable - so Notify.values.contains(spec.notify) cannot fail for any registered type. docs/EVENT_TYPES.md line 116 carries the quoted sentence; app/test/spine_replay_golden_test.dart's _log() builds exactly 15 events (3 messages plus photo, reaction, message_edit, read_marker, state_declared, state_passive, feeling, date_event, todo_event, milestone, ritual_kept, message_delete), there is no golden file anywhere in the repository, and the test compares snapshots to each other rather than to a stored one.",
+      "does_it_survive": "yes, both",
+      "why_it_matters": "The code row scores exactly at its floor and these are two of the three serious findings carrying it there. I could not re-run the third (the flaky scroll_cost_test) without writing into evidence/, and I say so rather than confirming it silently. evidence/logs/tests.log records a fully green run - 287 passed, 1 skipped, zero failure lines - so the evidence's own record and the code critic's fourth run disagree, and nobody reconciled them."
+    }
+  ],
+  "not_looked_at": {
+    "opened_by_nobody": [
+      "evidence/.previous/CAPTURED_AT",
+      "evidence/experiments/what_the_alternates_cost/11_alternates.json",
+      "evidence/experiments/what_the_alternates_cost/11_plain.json",
+      "evidence/experiments/what_the_alternates_cost/11_plain.report.json",
+      "evidence/experiments/what_the_alternates_cost/11_plain.fling.json",
+      "evidence/logs/reception_scene.json",
+      "evidence/scenes/01_pulse.json",
+      "evidence/scenes/03_us.json",
+      "evidence/scenes/04_moments.json",
+      "evidence/scenes/05_settings.json",
+      "evidence/scenes/10_first_run.json",
+      "evidence/scenes/17_setup_pwa.json",
+      "evidence/scenes/dusk_pulse.json",
+      "evidence/scenes/reception.json"
+    ],
+    "note_on_that_list": "149 files sit under evidence/ outside evidence/critics/. The union of the six opened lists covers 135 of them, and every one of the fourteen left over is named in at least one report's not_worth_opening with a reason, so unlike the last two cycles nothing was silently skipped - this is the first cycle where the declines are complete. Two declines are still load-bearing and I closed them myself. (1) The four experiment files: messenger_reliability's serious finding rests on that experiment and declined exactly the files that hold the plain arm's fling record and both arms' run health. I opened them: both arms read ok: true with empty problems, both flings travelled 27645 over ticks 10-309 with rows_built_total 170, and within that tick window the per-frame records hold 5 (plain) and 6 (alternates) frames over 400 ms - not the 0 that what_the_alternates_cost.json's the_fling_alone claims. The control still holds by a wide margin; the summary field the critic quoted does not. (2) logs/reception_scene.json, declined by three reports as duplicating logs/reception.json: I diffed them and the reception block is identical, so those declines are correct. The eight still-scene scripts are single goTo-and-shoot files and the declines are fair. I also checked two things the briefing asserts that no report cites: DIFF.json's fifteen previous_sha values all match the sha256 of the files now in evidence/.previous/, and .previous/CAPTURED_AT (2026-09-12T20:50:14Z) matches DIFF.json's baseline.captured_at - so the briefing's claim that .previous is now the capture before this one is true and verified."
+  },
+  "gaps": [
+    {
+      "gap": "The reason given for shooting the ten stills at 480 CSS points is contradicted by the capture it justifies. Every still's scenes/*.json and BRIEFING.md carry the same sentence: 'the brief asks for at least eight notes visible in 02_chat.png with no tear id repeated ... At 480 it holds eight, five of them on torn sheets, five distinct.' 02_chat.report.json for this capture records visible = 5 ids, view.kinds {message 3, voice_note 1, photo 1}, paper 5, five distinct tear ids. Five, not eight.",
+      "why_it_matters": "The width decision is the single framing choice that makes the material row and the messenger row read differently from each other, and its stated justification is false of this capture. messenger_reliability noticed the count (its minor finding 10) and coherence noticed it in its 02_chat judgement, but neither connects it to the sentence that repeats it in seventeen scene files and in the briefing. Either the still has to hold eight or the sentence has to stop saying it does."
+    },
+    {
+      "gap": "logs/manifest.json reports entries_without_a_file: ['fonts/MANIFEST.fonts.json', 'tears/tears.json'], and both files exist on disk. assets/MANIFEST.json holds 742 entries including both; the checker walks 740 files and reports the difference as missing.",
+      "why_it_matters": "Rule 8 of the code row is 'every file in assets/ has an entry in assets/MANIFEST.json'. The code critic checked that direction and found it clean; nobody checked the record that claims the reverse direction is broken, and it is wrong. A check that reports two phantom failures every run is a check nobody will read the day it reports a real one."
+    },
+    {
+      "gap": "logs/holes.json ends ok: false with stills_with_a_hole_in_them: 6, and no report in the set mentions either field. material_truth cites the file's contact-shadow numbers and says it could not reproduce them; nobody says the file fails its own gate.",
+      "why_it_matters": "It is the only measurement file in the set whose ok is false, and it is invisible in this review. Separately, material_truth's shadow finding measured with a fixed band 8-20 px out against 30-44 px out, which is exactly the method BRIEFING.md says was replaced this cycle because the fixed band lands among the torn fringe rather than on the wood (holes.json now records fibres_walked_off_median_px of 8 for 01_pulse and 5 for 12_search, the two stills the critic calls shadowless). The disagreement between the critic's -4.06 and the file's 17.83 may be entirely the walk, and neither reader says so."
+    },
+    {
+      "gap": "logs/flat.json reads only the ten stills. Both flat fills in this review - the crumple ball and the beige header rectangle - are in clips, where the check never looks. anti_goal names this (its minor finding 2) and is right; what nobody adds is that the check would catch both instantly: at the same 5x5 zero-variance test the stills top out at 391 px and the clips reach 33,389.",
+      "why_it_matters": "The riskiest clause in the brief is scored twice and the instrument built to find it cannot see where it happens. Extending flat.json to sample clip frames is a smaller change than anything else in this review and would have turned the review's two most serious surface findings into gated measurements."
+    },
+    {
+      "gap": "Nothing in the review measures whether the stills' rule pitch varies within a single still. lines.json publishes one rule_pitch_px per still and three reports argue about which of its values is right; I found three different pitches in 10_first_run alone (80.4, 114.5, 70.3 px on three different sheets) and two in 02_chat's header against its notes (81.1 against 80.7).",
+      "why_it_matters": "'The same ruled stock at pitches 2.9 times apart' is presented in the briefing and in the build's own hooks.dart comment as a per-still property, and it is a per-sheet property. Every number derived from a per-still pitch - the ratio, the off_the_line fractions, the 8.5-versus-1.86-versus-2.9 disagreement - is computed on a quantity that does not exist."
+    },
+    {
+      "gap": "evidence/logs/pwa.json records display_mode_standalone: false, and no report reads that field. Row 03's last clause is about the iOS PWA specifically, and row 04's is about what the served page offers a second platform.",
+      "why_it_matters": "The set's only measurement of what an iPhone would get says the page was not observed running as an installed app. It does not overturn anything, but it is the field that would tell a reader how far the PWA half of the mission has actually been exercised, and it is unread."
+    },
+    {
+      "gap": "The code row's serious finding 2 - a 1-in-4 red run of scroll_cost_test at 27,582 microseconds against a fixed 20,000 ceiling - is the one claim in this review nobody can check without changing the repository, and evidence/logs/tests.log records the opposite (287 passed, 1 skipped, 'All tests passed!', zero failure lines).",
+      "why_it_matters": "A flake reported by one reader and a green transcript in the evidence cannot both be the whole truth, and the only way to settle it writes to evidence/. Until the suite stops rewriting files under evidence/, no completeness pass can adjudicate a test finding, which is a structural hole in this review process rather than in this build."
+    }
+  ],
+  "verdict": "This is a review somebody can act on, and it is the most internally consistent one I have checked: every one of the six rows is arithmetically coherent - the four rows below their floors each name a blocking finding, the code row sits exactly at its floor with three serious findings and nothing blocking, and no row scores above its floor while carrying a blocking finding. The four blocking findings all replicate independently, three of them to the digit: the scroll's 196 heavy frames of 886 with p95 781 ms and a 0.788 correlation with paper pieces rather than rows; the crumple ball's 33,389-pixel zero-variance facet at pure white in 38 per cent of a clip, which I also looked at and which is plainly a flat-shaded low-poly mesh; the fourteen motor asks that every one answer 'no motor in a browser' beside two sound logs that say in their own words they are not recordings of the app; and the fifteen artifacts that are one headless WebKit page with an Android build record but no Android screen. The material row's blocking finding replicates in its principal measurement - the rules do cut the writing at 36 to 40 per cent of letter height, at a pitch of 80.7 px - but not in the mechanism it assigns: the written-line pitch on that note is 80.3 px, one written line per printed rule, so the fault is a phase offset of about a third of a pitch, not a 2.25-to-1 beat, and the 36 px figure the report repeats in its verdict is not measurable anywhere on the sheet. That matters because the same report's supporting citation, lines.json's set-wide 0.373, is computed against a rule pitch its own minor finding shows to be double the truth on the very still the row is judged on - a report that disproves its own evidence four findings later. Three other numbers are softer than stated: the identical-letter percentages hold only when the paper background is included in the correlation and fall to zero when it is not, though the pairs really are the same letter twice; the reconnect cut measures 31.4 grey levels over 42.8 per cent of pixels rather than 41.09 over 53.5; and the empty pocket is empty for the reason printed in the object the finding quotes. The sharpest thing I found is not a number but a contradiction between two readers: the anti-goal critic located a flat beige rectangle with hard straight edges over the header sheet in three clips, reproducible to the pixel and on screen for 30 to 45 per cent of each, and the material-truth verdict - written by a reader who opened all five of those clips - says no beige rectangle is visible in the pixels, on a row whose floor clause names that object by name. Material truth is below its floor either way; the account of why is wrong in one of the two reports, and the anti-goal critic is the one who is right. Beyond the rows, three records in the set carry claims nobody tested: logs/manifest.json reports two assets missing that are on disk, logs/holes.json fails its own gate with ok: false and six stills flagged and no report mentions it, and the sentence justifying the 480-point viewport - repeated in seventeen scene files and in the briefing - asserts that 02_chat holds eight notes when this capture's own report records five. Against the last two cycles the coverage itself is now clean: every one of the fourteen evidence files nobody opened is explicitly declined with a reason, the two declines that were load-bearing I opened and closed myself, and the briefing's claim that .previous now holds the preceding capture checks out against all fifteen sha256 values on disk."
+}
