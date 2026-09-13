@@ -22,6 +22,20 @@ import 'package:desk/voice/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+/// Keep asking the other phone for news until [done], pumping in between.
+Future<void> _until(WidgetTester tester, Future<void> Function() ask, bool Function() done) async {
+  for (var i = 0; i < 80 && !done(); i++) {
+    await tester.runAsync(() async {
+      try {
+        await ask();
+      } catch (_) {
+        // an offline link throws, which is the thing being waited for
+      }
+    });
+    await tester.pump(const Duration(milliseconds: 200));
+  }
+}
+
 void main() {
   testWidgets('a thread whose link is down says so, and stops saying it when it comes back',
       (tester) async {
@@ -93,12 +107,11 @@ void main() {
     expect(find.text(S.offlineQueued), findsNothing,
         reason: 'the thread says the link is down while it is up');
 
-    // The link goes, and the app finds out the way it always does: by trying.
+    // The link goes, and the app finds out the way it always does: by trying. Patiently, because
+    // this is a real request over a real loopback and the suite runs many of these at once: the
+    // twenty tries this had were four seconds on an idle box and not enough on a busy one.
     transport.scriptedFaults.goOffline();
-    for (var i = 0; i < 20 && scope.link.state != LinkState.offline; i++) {
-      await tester.runAsync(() => scope.sync.once().catchError((Object _) => false));
-      await tester.pump(const Duration(milliseconds: 200));
-    }
+    await _until(tester, () => scope.sync.once(), () => scope.link.state == LinkState.offline);
     expect(scope.link.state, LinkState.offline,
         reason: 'the transport never noticed it could not reach the other phone');
     await tester.pump();
@@ -110,10 +123,7 @@ void main() {
 
     // and it goes away again, rather than becoming furniture
     transport.scriptedFaults.goOnline();
-    for (var i = 0; i < 20 && scope.link.state == LinkState.offline; i++) {
-      await tester.runAsync(() => scope.sync.once().catchError((Object _) => false));
-      await tester.pump(const Duration(milliseconds: 200));
-    }
+    await _until(tester, () => scope.sync.once(), () => scope.link.state != LinkState.offline);
     await tester.pump();
     expect(find.text(S.offlineQueued), findsNothing,
         reason: 'the link came back and the thread still says it is down');
