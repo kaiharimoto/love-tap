@@ -11,7 +11,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3309
+   "ms": 3492
   },
   {
    "do": "wait",
@@ -19,7 +19,7 @@
   },
   {
    "do": "shot",
-   "ms": 2935
+   "ms": 2945
   },
   {
    "do": "report",
@@ -72,7 +72,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-13T03:32:38.477Z",
+   "now": "2026-09-13T10:04:05.294Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -95,7 +95,7 @@
    "stocks_the_paper_had_not_arrived_for": [],
    "paper_that_arrived_after_the_piece_was_drawn": 9,
    "tears_that_had_not_arrived": {},
-   "masks_held": 39,
+   "masks_held": 42,
    "masks_dropped_to_stay_inside_the_pool": 0,
    "stocks_held": 9,
    "stocks_held_bytes": 127800640,
@@ -115,12 +115,12 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 23,
-    "the ink plates": 33,
-    "the desk": 148,
-    "the log": 62,
-    "the first frame": 379,
-    "everything": 652
+    "the library index": 17,
+    "the ink plates": 40,
+    "the desk": 161,
+    "the log": 41,
+    "the first frame": 375,
+    "everything": 641
    },
    "sync": {
     "transport": "local",
@@ -143,7 +143,7 @@
      "peer_cursor": null,
      "our_cursor": 0,
      "last_error": null,
-     "since": "2026-09-13T03:32:30.434Z",
+     "since": "2026-09-13T10:03:57.057Z",
      "last_contact": null,
      "certificate": null,
      "setup_address": null
@@ -157,6 +157,7 @@
     "what_each_surface_may_say": {
      "standing_line": "their state, in the couple's own words, assembled here from the log",
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "and_the_pocket_here_is": "this is a PWA and iOS will not let one vibrate, so the rhythm is carried by the feeling's own sound and by the page itself moving under it — feelings/sensation.dart, the same segments the motor would have been given. `pocket_feeling` and `pocket_at` above are what it last played and when, and `asked_a_motor_for` is every pattern it asked for. A held list that is empty after the app has been opened is the surface working: the app clears what the phone was holding the moment somebody looks at it.",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
@@ -174,19 +175,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2181,
+ "cold_ms": 2128,
  "load": {
-  "ms": 2181,
+  "ms": 2128,
   "store": "fresh",
   "profile": null,
   "made_of": {
    "the framework": 7,
-   "the library index": 23,
-   "the ink plates": 33,
-   "the desk": 148,
-   "the log": 62,
-   "the first frame": 379,
-   "everything": 652
+   "the library index": 17,
+   "the ink plates": 40,
+   "the desk": 161,
+   "the log": 41,
+   "the first frame": 375,
+   "everything": 641
   }
  },
  "problems": [],

@@ -11,25 +11,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2789,
+   "ms": 3566,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4171
+   "ms": 5826
+  },
+  {
+   "do": "wait",
+   "ms": 3704
+  },
+  {
+   "do": "openViewer",
+   "ms": 7930
   },
   {
    "do": "wait",
    "ms": 3702
-  },
-  {
-   "do": "openViewer",
-   "ms": 5455
-  },
-  {
-   "do": "wait",
-   "ms": 3710
   },
   {
    "awaited": "video.playing",
@@ -38,31 +38,31 @@
   },
   {
    "do": "awaitView",
-   "ms": 2819
+   "ms": 4659
   },
   {
-   "at": 26141,
-   "said": "__deskSeek(0.42) ok, at 1053ms"
+   "at": 33894,
+   "said": "__deskSeek(0.42) ok, at 27ms"
   },
   {
    "do": "seek",
-   "ms": 1386
+   "ms": 2333
   },
   {
    "do": "wait",
-   "ms": 1403
+   "ms": 1402
   },
   {
    "do": "shot",
-   "ms": 33394
+   "ms": 33751
   },
   {
    "do": "frames",
-   "ms": 143044
+   "ms": 144760
   },
   {
    "do": "report",
-   "ms": 703
+   "ms": 702
   }
  ],
  "shots": [
@@ -90,7 +90,7 @@
     "video": {
      "initialised": true,
      "playing": true,
-     "position_ms": 771,
+     "position_ms": 649,
      "duration_ms": 2500
     }
    },
@@ -108,8 +108,8 @@
    "tears": {
     "00020D7VJGABF9604GW09166QN": "tear_002",
     "00020DC680NM68W87ZT33ZDBXB": "tear_021",
-    "00020K9HT8N4QBZM8W3AF4J2CT": "tear_044",
-    "00020P5YV8GCMVBPX6W1HZ7HNT": "tear_049"
+    "00020K9HT8N4QBZM8W3AF4J2CT": "tear_043",
+    "00020P5YV8GCMVBPX6W1HZ7HNT": "tear_048"
    },
    "stocks": {
     "00020D7VJGABF9604GW09166QN": "legal_02",
@@ -125,7 +125,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 224,
    "seed": 20260903,
-   "events": 14083,
+   "events": 14087,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -140,15 +140,18 @@
     "266x126 of it, at its own size",
     33602.72727272727
    ],
-   "paper_at_its_own_size": 992,
+   "paper_at_its_own_size": 846,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "sticky_blue_02"
    ],
+   "sheets_on_the_glass_with_no_paper_on_them": {
+    "sticky_blue_02": 2
+   },
    "paper_that_arrived_after_the_piece_was_drawn": 17,
    "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 87,
+   "masks_dropped_to_stay_inside_the_pool": 96,
    "stocks_held": 18,
    "stocks_held_bytes": 259620720,
    "stocks_dropped_to_stay_inside_the_pool": 0,
@@ -167,36 +170,37 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 16,
-    "the ink plates": 39,
-    "the desk": 183,
-    "the log": 606,
-    "the first frame": 370,
-    "everything": 1221
+    "the library index": 18,
+    "the ink plates": 41,
+    "the desk": 153,
+    "the log": 656,
+    "the first frame": 382,
+    "everything": 1257
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 20,
-    "pushed": 1,
+    "rounds": 19,
+    "pushed": 3,
     "refused": 0,
     "pulled": 0,
     "blobs_fetched": 0,
-    "faults": 0,
+    "faults": 1,
+    "last_fault": "401 the signature does not match",
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14083,
+    "cursor": 14087,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14083,
-     "our_cursor": 14083,
+     "peer_cursor": 14087,
+     "our_cursor": 14087,
      "last_error": null,
-     "since": "2026-09-13T01:53:44.764Z",
-     "last_contact": "2026-09-13T01:54:42.662Z",
+     "since": "2026-09-13T10:00:21.050Z",
+     "last_contact": "2026-09-13T10:01:24.758Z",
      "certificate": null,
      "setup_address": null
     }
@@ -209,6 +213,7 @@
     "what_each_surface_may_say": {
      "standing_line": "their state, in the couple's own words, assembled here from the log",
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "and_the_pocket_here_is": "this is a PWA and iOS will not let one vibrate, so the rhythm is carried by the feeling's own sound and by the page itself moving under it — feelings/sensation.dart, the same segments the motor would have been given. `pocket_feeling` and `pocket_at` above are what it last played and when, and `asked_a_motor_for` is every pattern it asked for. A held list that is empty after the app has been opened is the surface working: the app clears what the phone was holding the moment somebody looks at it.",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
@@ -226,22 +231,28 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2429,
+ "cold_ms": 2458,
  "load": {
-  "ms": 2429,
+  "ms": 2458,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
-   "the library index": 16,
-   "the ink plates": 39,
-   "the desk": 183,
-   "the log": 606,
-   "the first frame": 370,
-   "everything": 1221
+   "the library index": 18,
+   "the ink plates": 41,
+   "the desk": 153,
+   "the log": 656,
+   "the first frame": 382,
+   "everything": 1257
   }
  },
- "problems": [],
- "ok": true,
+ "problems": [
+  "http: 401 GET http://127.0.0.1:8480/v1/events?after=14085&wait=20",
+  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+ ],
+ "refused_requests": [
+  "401 GET http://127.0.0.1:8480/v1/events?after=14085&wait=20"
+ ],
+ "ok": false,
  "steps_landed": true
 }
