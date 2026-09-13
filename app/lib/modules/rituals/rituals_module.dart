@@ -52,17 +52,22 @@ class RitualsModule extends Module {
   Widget build(BuildContext context, ModuleContext ctx) => RitualList(ctx: ctx);
 
   @override
-  /// How many and how lately, not which one: the rows underneath are the which.
+  /// What is being kept and how lately, not how much of it.
+  ///
+  /// This read '3 kept · 53 times · the last yesterday'. The middle number was every keeping of
+  /// every ritual added together, and an anti-goal critic read it exactly as what it is — a
+  /// running total attached to a recurring act of affection, which is a score. A tally beside one
+  /// ritual is the marks a person makes in a margin; a sum of all of them on a card is a
+  /// scoreboard, and the difference is whether there is a number that only ever goes up.
   String glance(List<Event> events, DateTime now) {
     final r = projectRituals(events);
     if (r.isEmpty) return 'nothing kept yet';
     final recent = r.where((x) => x.marks.isNotEmpty).toList()
       ..sort((a, b) => b.marks.last.compareTo(a.marks.last));
     if (recent.isEmpty) return 'nothing kept yet';
-    final marks = r.fold<int>(0, (a, x) => a + x.marks.length);
     final days = now.difference(recent.first.marks.last).inDays;
     final lately = days <= 0 ? 'today' : (days == 1 ? 'yesterday' : '$days days ago');
-    return '${recent.length} kept · $marks times · the last $lately';
+    return '${recent.first.title} · the last $lately';
   }
 }
 
