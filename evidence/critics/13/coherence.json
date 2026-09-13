@@ -1,0 +1,266 @@
+{
+  "critic": "coherence",
+  "cycle": 13,
+  "score": 12,
+  "floor": 13,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "the set as a whole (MANIFEST.json, DIFF.json, logs/apk.json)",
+      "where": "MANIFEST.json `browser: \"webkit\"`; DIFF.json labels 09_two_devices.png and 16_setup_android.png `absent`; logs/apk.json is the only Android record and MANIFEST.json marks it `from_this_run: false`",
+      "what": "Every one of the fifteen artifacts is the same headless WebKit page at dpr 3 (viewport 480x1040 in the ten stills, 360x780 in the five clips per evidence/scenes/*.json), so no artifact shows the second platform's regions, feelings or event types; logs/apk.json, written 2026-09-12T00:07:18Z against a capture that began 2026-09-13T09:37:45Z, records a 101.2 MB arm64 file and its signing certificate, which is a build, not a screen.",
+      "why": "The row requires that 'both platforms serve the same regions, the same feelings, and the same event types from the one codebase', and that clause has no artifact behind it at all; WHY_MISSING.json gives a measured reason (no /dev/kvm, adbd answering at 113 minutes with no framework behind it), which is a reason and not an excuse, but a row read from artifacts cannot score a clause with no artifact."
+    },
+    {
+      "severity": "serious",
+      "artifact": "10_first_run.png and 17_setup_pwa.png (with logs/10_first_run.report.json, logs/17_setup_pwa.report.json, logs/strings.json)",
+      "where": "the standing-line strip, rows 0-250 of both stills, against `ambient.standing_line` in both reports",
+      "what": "The same surface says two different things about the same event. Both reports record `ambient.standing_line = \"nothing from them since you last looked\"`, while the strip actually drawn at the top of both stills (byte-identical between them, mean absolute difference 0.000 over rows 0-250) reads 'nothing from them yet. the six words are on the other phone.'; logs/strings.json places the first at app/lib/ambient/ambient.dart:104 and the second at app/lib/voice/strings.dart:89, with a third variant at app/lib/voice/strings.dart:69 ('nothing from them yet. it will show here.').",
+      "why": "The report's own `what_each_surface_may_say.standing_line` names these as one surface assembled from the log, so one event (no partner state yet) has three texts in three places, which is the definition of a second store of the same thing."
+    },
+    {
+      "severity": "serious",
+      "artifact": "all ten stills (logs/lines.json, crops/02_chat_300_edge.png, crops/02_chat_300_shadow.png)",
+      "where": "`off_the_line.median` per still in logs/lines.json; verified by eye at 300 per cent in the edge and shadow crops of 02_chat and at full resolution in 17_setup_pwa.png rows 380-720 and 02_chat.png rows 1900-2350",
+      "what": "The writing has no relation to the rules it sits on, and by a different amount in every region: `off_the_line.median` runs 0.251 (03_us) to 0.479 (17_setup_pwa), median 0.373 across the set, where 0.25 is what writing laid out with no relation to the rules averages and 0.5 is exactly between two rules. Measuring the rules myself (blue rules, B-R > 3, luma 140-230) gives a same-sheet pitch of 71 px in 17_setup_pwa, 80 px in 02_chat, 106 px in 05_settings and 114 px in 10_first_run; at 300 per cent a rule cuts 'this one, the iphone' at mid x-height and runs straight through 'has taken the' in crops/02_chat_300_edge.png.",
+      "why": "One visual language across five regions means one relationship between a hand and the paper it is written on; here the relationship is absent and its absence varies by region, so the same ruled stock reads as a different material in Us (0.251) than in the setup checklist (0.479)."
+    },
+    {
+      "severity": "serious",
+      "artifact": "13_messenger_states.png (and logs/02_chat, 06_unfolding, 08_state_propagating, 10_first_run, 11_chat_scroll .report.json)",
+      "where": "the clipped row at the top of 13_messenger_states.png, device rows 282-329, against `view.reactions` in all six chat-surface reports",
+      "what": "A reaction is legible in no artifact in the set. `view.reactions` is `{}` in five of the six chat-surface reports; the one reaction that exists anywhere sits on row 01M1MCJ1M0D46H1D74PPV4NMNH, which `view.clipped_at_an_edge` puts at 0.366 and which on the glass is a white sliver 48 device pixels (16 CSS px) tall and 942 device pixels wide carrying one grey rule and no text, no author and no mark. Moments shows no reaction either: crops/04_moments_what_we_felt.png holds only standalone feelings.",
+      "why": "The row asks whether the same event appears consistently wherever it should; a reaction is an event type the mission names, reliability.json proves it works ('reaction folded onto the target on the host, not a row'), and the artifacts never once show how it reads in Chat, so the Chat-versus-Moments comparison the row turns on cannot be made."
+    },
+    {
+      "severity": "minor",
+      "artifact": "10_first_run.png",
+      "where": "the headline 'first one's yours.' on the centre note, device rows 1265-1360",
+      "what": "The one sentence the app addresses to the reader on a fresh phone is set in the partner's ink. Its darkest percentile measures RGB (35.5, 46.2, 71.5), blue-minus-red 36.0 — the same ink as the partner's line in 01_pulse.png (31, 42, 68, B-R 37.0), noor's note in 02_chat.png (B-R 32.8) and the one noor hit in 12_search.png (31, 42, 68) — while every app-voice headline elsewhere is graphite RGB (58, 58, 60), B-R 2.0: all six setup headlines in 17_setup_pwa.png and 'two phones, linked just now' in 05_settings.png. The phone's own report says `events: 0` and its standing line says nothing has come from them yet.",
+      "why": "The set otherwise keeps a two-hand rule exactly (fonts.json carries NoorHand.ttf at 3.87 px mean stroke and TeoHand.ttf at 6.84 px at 54 px/em, and 12_search.png's four hits obey it pixel for pixel), so this is the single place the rule breaks; it may be intended as a placeholder for their first note, but nothing in the still or its record says which, and the same ink means 'them' in four other artifacts."
+    },
+    {
+      "severity": "minor",
+      "artifact": "logs/flat.json against nine region reports",
+      "where": "`sheets_with_no_paper_on_them` in logs/flat.json versus `sheets_on_the_glass_with_no_paper_on_them` in the reports for 01_pulse, 03_us, 05_settings, 06_unfolding, 11_chat_scroll, 13_messenger_states, 14_media_viewer, dusk_pulse and reception_picked_up",
+      "what": "Two of this capture's own records disagree about the same pixels. Nine reports record `{\"sticky_blue_02\": 2}` (and `sticky_blue_02_dusk` in dusk_pulse) — two sheets on the glass painted with a paper fallback fill because the stock had not arrived — while logs/flat.json, which says it 'names only the shapes whose colour is one of the app's own paper fallback fills', returns `sheets_with_no_paper_on_them: []` for all ten stills and `flat_px: 0` for 01_pulse and 03_us.",
+      "why": "The row is read partly by checking the capture's records against the pictures; when two records of the same still contradict each other about whether a sheet has paper on it, neither can be used to settle whether the material is one material across regions."
+    },
+    {
+      "severity": "minor",
+      "artifact": "logs/lines.json",
+      "where": "`the_same_paper_is_not_the_same_size` — its `ratio` field, its `what_it_means` prose, and `median_across_the_set` against `what_that_number_means`",
+      "what": "The file that measures whether the paper is one paper disagrees with itself three ways. `rule_pitch_px` runs 70.5 (01_pulse) to 599.0 (04_moments) and `ratio` reads 8.5; the `what_it_means` sentence in the same object says 'It is 1.86 now'; BRIEFING.md describes the same file as '61 to 178 pixels ... a ratio of 2.9'; and `what_that_number_means` says 'The set reads 0.33' beside `median_across_the_set: 0.373`. Measuring adjacent rules on single sheets myself gives 71, 80, 106 and 114 px — a spread of 1.61 on the lined stock — so the 599.0 is the detector measuring across two sheets in 04_moments, a screen of photographs with six rules on it.",
+      "why": "The one number in evidence that says whether the same stock is drawn at the same size across regions is not a number a reader can use, so the visual-language claim has to be re-measured from the pixels rather than read off the record."
+    },
+    {
+      "severity": "minor",
+      "artifact": "logs/04_moments.report.json against logs/01_pulse.report.json, 02_chat.report.json, 03_us.report.json and 12_search.report.json",
+      "where": "`view.lenses` in the Moments report and `view.kinds` in all five",
+      "what": "`view.kinds` carries three different scopes under one key: a whole-log census in 01_pulse (6567 events) and 03_us (351), the lens total in 04_moments (183, equal to its own `showing`), and only what is on the glass in 02_chat (5), 12_search (6) and 13_messenger_states (7). And the Moments feelings lens reads 1340 while the log it shares (`events: 14062` in both reports) holds 910 `feeling` plus 2 `feeling_authored` — a gap of 428, unexplained anywhere, where the milestones lens reconciles exactly (53 ritual_kept + 81 date_event + 6 milestone + 12 passed_on + 2 feeling_authored = 154) and the media lens reconciles exactly (115 + 54 + 14 = 183).",
+      "why": "The row's first clause is 'exactly one event log and no second store anywhere'; two regions counting the same kind of event in the same log and differing by 47 per cent is the one place in the set where that cannot be checked."
+    },
+    {
+      "severity": "minor",
+      "artifact": "05_settings.png with logs/reception.json",
+      "where": "the 'what may interrupt' sheet, rows 1950-2960, and `shown_by_the_worker` in logs/reception.json",
+      "what": "The list of what may interrupt runs off the bottom of the still: six rows are readable (something written, a picture, something to watch, their voice, an answer to something of yours, a feeling) and a seventh row's top edge appears at row ~2890 before the tab strip covers it. Meanwhile logs/reception.json shows the push surface sending three kinds — `feeling`, `message` and `state_declared` ('noor / said how they are') — and no readable row on the sheet governs `state_declared`.",
+      "why": "Settings is the one region where the app declares a rule that every other region's events must obey; the set cannot show that the rule covers the kinds the push surface actually sends."
+    }
+  ],
+  "what_is_working": [
+    "The five-region chrome is identical to the pixel across nine stills: the tab labels occupy the same column ranges in 01_pulse, 02_chat, 03_us, 04_moments, 05_settings, 12_search, 13_messenger_states, 10_first_run and 17_setup_pwa (30-293, 308-572, 587-850, 865-1130, 1143-1409, every one within 1 px of every other), and the raised tab is the region the report names in all nine — including 12_search.png, where CHAT is raised because `logs/12_search.report.json` says the search is `over: chat`.",
+    "Partner state is legible on every screen, not only on Pulse: the standing-line strip is byte-identical (mean absolute difference 0.000 over rows 0-250) across 01_pulse, 02_chat, 03_us, 04_moments, 05_settings, 12_search, 13_messenger_states and 14_media_viewer, and identically replaced on the two first-run surfaces. 14_media_viewer drops the tab bar as a modal but keeps the strip.",
+    "One log, one counter: every seeded report says `events: 14062`, the count rises monotonically through the clips (14083, 14085, 14087, 14092, 14108, 14113) and reads 0 on the fresh phone in 10_first_run and 17_setup_pwa. The seven landings in 07_feeling_landing take `feeling` from 910 to 917 in the same field the Pulse report reads.",
+    "Chat is a view onto the whole log, not a messages table: `view.rows_cost` in logs/08_state_propagating.report.json has state_declared x3, feeling x1 and message x2 in one viewport, and 11_chat_scroll's frames show the same state rows and feeling objects interleaved through five months of history.",
+    "The same event carries the same words in two regions: 'the second one / the place by the bridge' is a DATES row in 03_us.png and a PLANNING row in crops/04_moments_what_happened.png; 'sunday 9 call' is a RITUALS row in Us and a KEPT row in Moments; 'the one you said you stopped   teo' is a THE SHELF row in Us and a PASSED ON row in Moments. Every module glance on the glass matches `view.modules[].glance` in logs/03_us.report.json character for character.",
+    "The same six feelings appear with the same objects and the same clock times in the Pulse shelf of 01_pulse.png (empty chair 17:19, ugh 16:58, confetti 16:23, hold 11:54, nyeh 06:42, goodnight 21:58) and in crops/04_moments_what_we_felt.png, and the '· noor' suffix appears on exactly the four the report's `recent_feelings` says are from noor and on neither of the two from teo.",
+    "Two hands, one rule, measured: the partner's ink reads blue-minus-red +31 to +37 (01_pulse 37.0, 02_chat 32.8, 12_search hit 1 37.0, 14_media_viewer caption 27.7) and mine and the app's read +0 to +2 (02_chat my note -3.0, 01_pulse my status 2.0, all six 17_setup_pwa headlines 2.0, 05_settings 2.0). The four search hits in 12_search.png obey it exactly. logs/fonts.json backs it with two 775-glyph hands of different stroke weight, 3.873 px and 6.838 px at 54 px per em, and neither font has a finding.",
+    "One search index over the whole log: reliability.json answers nine queries with nine different kinds, including todo_event, date_event, milestone and state_declared, and 12_search.png's chip row offers exactly those by the same names the Us modules use (DATES, TO DO, DATES THAT MATTER, RITUALS, THE SHELF, STATE, FEELINGS).",
+    "Extensibility is measurable rather than asserted: logs/haptics.json holds 36 feelings, 34 built-in and 2 authored, and every one carries the identical field set (object, sound, colour, haptic, segments, total_ms, on_ms, pulses, knocks_the_desk) with `authored_by` the only field that ever differs. logs/surfaces.json's `objects_named_by_feelings` reports 36 named, `named_but_neither: []`, and both authored objects (obj_user_pigeon, obj_user_soup) in the same library as the built-ins. crops/haptics_strip.png draws all 36 on one 2700 ms axis with the two authored ones in existing families. Us already runs five modules through one card shape with one glance line each.",
+    "One event is drawn once and scaled per region: the `tuesday soup` object in 08_state_propagating.mp4 is the same silhouette in the Us region at frame 600 (348x288 device px) and in the Chat thread at frame 695 (266x224 device px), intersection-over-union 0.908 after scaling to a common box.",
+    "08_state_propagating.mp4 is the row's thesis on the glass: one far phone's events reach Pulse, Chat and Us in one take each, the standing line follows them across regions (TRAVELLING BRIGHT to TRAVELLING RESTLESS to OUT HEADS DOWN RESTLESS to OUT HEADS DOWN QUIET), and the outage is on the glass as a composer sheet reading 'can't reach the other phone. it'll go when it can.' with a row marked 'waiting to send' at frame 660 that reads 'sent ✓' by frame 695.",
+    "One behaviour for the same event in two clips: an arriving message lands folded with the recipient's name on its cover and unfolds into its text — 06_unfolding.mp4 frames 1 to 141 and 143 to 285, and the far phone's message landing at frame 672 of 08_state_propagating.mp4. logs/surfaces.json's `fold_sequences.unfold_thirds` is 142 frames, the same 142 the Pulse report's `fold.length` names, so the shelf and the thread share one fold.",
+    "My own held-frame measurement agrees with frames.json: on the tail of 08_state_propagating (frames 686-695, the frames most likely to be static) the share of pixels changing by more than two grey levels is 3.1 to 8.4 per cent and the busiest 32 px tile moves 4.7 to 14.7 levels, far above the thresholds, so nothing is held."
+  ],
+  "verdict": "Read from the artifacts alone, this is one system and not an assembly, and most of the row is met with measurements rather than impressions: the five-region tab bar is identical to within a pixel across nine stills, the partner's standing line is byte-identical across eight surfaces so partner state is legible everywhere and not only on Pulse, every region report counts the same log (14062 events, rising through the clips and zero on a fresh phone), the same module events carry the same words in Us and in Moments, the same six feelings carry the same objects and times in Pulse and in Moments, and the ink rule that says who wrote a thing holds pixel for pixel across five different surfaces. Extensibility is shown the same way: 34 built-in feelings and 2 authored ones with an identical field set, both authored objects in the same library as the built-ins with no holes, and five shared-life modules already running through one card shape and one glance line, which is as far as artifacts can carry that clause. What holds the row under its floor is the blocking finding: every artifact in the set is the same headless WebKit page, so the clause 'both platforms serve the same regions, the same feelings, and the same event types' rests on nothing a reader can see — logs/apk.json is a 101.2 MB file and a signing certificate from an earlier run, not a screen, and WHY_MISSING.json's reason for that is measured and honest but is still a gap. What would lift it is one artifact, not a rewrite: a single screenshot of any one region on the Android build would settle it, and this machine cannot produce one, which is why the code critic's reading of the same row is where the one-codebase claim has to be settled. Beneath that, three serious faults are the app's own: the first-run standing line says one thing in the record and another on the glass out of two different source files, the writing sits off the rules of the paper it is written on by a region-dependent amount (0.251 in Us to 0.479 in the setup checklist, against 0.25 for writing with no relation to the rules at all), and a reaction — an event type the mission names and reliability.json proves works — is legible in no artifact, so the one Chat-versus-Moments comparison the row most wants cannot be made.",
+  "judgements": {
+    "01_pulse.png": {
+      "judgement": "improved",
+      "why": "SSIM 0.636: the previous capture's YOURS card carried a hard-edged black rectangular slab across its right half and a straight diagonal cut edge, and the header strip cut through both its lines; the current sheet is torn on all four sides with an even shadow and the strip contains 'week one, and the room smells right again' in full."
+    },
+    "02_chat.png": {
+      "judgement": "regressed",
+      "why": "SSIM 0.5126: the thread frame went from eight rows across five event kinds (message, photo, voice_note, a KEPT ritual row and three state rows, with 'read ✓✓' legible on three) to five rows across three kinds — `view.kinds` reads {message 3, voice_note 1, photo 1} — with two of the five clipped at an edge (0.111 and 0.742) and the only delivery mark cut by the composer, so the still is a narrower view onto the one log than it was and holds five notes where BRIEFING.md says the brief asks for eight."
+    },
+    "03_us.png": {
+      "judgement": "improved",
+      "why": "SSIM 0.689: a sixth module row ('the kitchen programme   noor') now makes the shelf glance's '6 between you' legible, the dates row's 'in 2 months' no longer overruns its sheet, and the rituals glance changed from a tally ('3 kept · 53 times · the last yesterday') to the ritual's own name ('tuesday soup · the last yesterday'), matching how every other module glance names a thing rather than counting one."
+    },
+    "04_moments.png": {
+      "judgement": "improved",
+      "why": "SSIM 0.8771: the band-by-band difference is 49.5 in the top 312 rows and 0.0 to 12.2 everywhere else, so the change is the standing-line strip now containing both its lines while the tile grid and the three lens tabs are otherwise as they were."
+    },
+    "05_settings.png": {
+      "judgement": "improved",
+      "why": "SSIM 0.8158: the interrupt list now starts higher on its sheet so all six rows and their three choices are readable, where previously 'a feeling' was cut in half by the tab strip and the sheet's whole upper half was blank."
+    },
+    "06_unfolding.mp4": {
+      "judgement": "improved",
+      "why": "SSIM 0.605: the same 286 frames and the same two 142-frame unfolds, but the header strip no longer truncates the status line with an ellipsis, and the thread behind the fold now shows delivered rows with 'sent ✓' where the previous capture showed two blank folded covers and nothing else."
+    },
+    "07_feeling_landing.mp4": {
+      "judgement": "improved",
+      "why": "SSIM 0.653: 336 frames grew to 392 and the audio from 5.376 s to 6.272 s, which per evidence/scenes/07_feeling_landing.json is a seventh take that puts the Static family (overwhelmed, fourteen pulses in 450 ms) in the evidence for the first time; the clip still drives one event type into Pulse, Chat and Us in one run."
+    },
+    "08_state_propagating.mp4": {
+      "judgement": "improved",
+      "why": "SSIM 0.7262: 691 frames grew to 696, the black rectangular shadow slab under the Pulse shelf is gone, the `hold` feeling now draws its object on the thread patch where the previous capture showed a blank sheet with a shadow, the row timestamps are the driven clock's 19:40 throughout instead of drifting 19:55/19:56/19:58, and the reconnect take ends with one folded cover instead of three."
+    },
+    "09_two_devices.png": {
+      "judgement": "unchanged",
+      "why": "DIFF.json labels it `absent`, not `gone`: it was not in the previous capture either and the standing reason in WHY_MISSING.json (no /dev/kvm, adbd answering at 113 minutes with no framework behind it) is the same one, so nothing about it moved in either direction."
+    },
+    "10_first_run.png": {
+      "judgement": "improved",
+      "why": "SSIM 0.8824: the header strip now contains both its lines and the centre note's bottom edge is torn rather than straight-cut; the navy 'first one's yours.' headline measures the same partner ink in both captures, so that fault is carried over unchanged."
+    },
+    "11_chat_scroll.mp4": {
+      "judgement": "improved",
+      "why": "SSIM 0.5193: the standing line at the top of the clip read 'week one, and the room smells ri…' truncated in the previous capture and reads in full now, and logs/11_chat_scroll.fling.json records 8 throws over 300 frames with `frames_under_a_device_pixel: 0` and a worst tick building 3 rows."
+    },
+    "12_search.png": {
+      "judgement": "improved",
+      "why": "SSIM 0.4695: the chip row no longer overlaps itself — 'DATES THAT MATTER' ran under 'TO DO' and chips ran off the left edge in the previous capture — and all fifteen filters now sit in clean rows, including the five that name the Us modules."
+    },
+    "13_messenger_states.png": {
+      "judgement": "improved",
+      "why": "SSIM 0.5784: the thread went from two rows over a bare desk to seven, and now carries a reply quote, four 'sent ✓', an 'edited ✓', a taken-back row and a refusal in red with its reason ('this phone is on an older version and cannot read that'), which is what the still exists to show."
+    },
+    "14_media_viewer.png": {
+      "judgement": "improved",
+      "why": "SSIM 0.8009: the header strip now contains both its lines and the caption note's bottom edge is torn rather than cut; the photograph and the '0:00 / 0:03' readout are as they were."
+    },
+    "15_authored_feeling.mp4": {
+      "judgement": "improved",
+      "why": "SSIM 0.6852: the same 428 frames and the same six family tabs, but the 'in 2 months' label no longer overruns its sheet, the rituals glance changed from a tally to the ritual's name, and the black rectangular shadow slab that cut across the Pulse shelf in the previous capture's closing frames is gone."
+    },
+    "16_setup_android.png": {
+      "judgement": "unchanged",
+      "why": "DIFF.json labels it `absent`, not `gone`: it was absent from the previous capture for the same standing reason in WHY_MISSING.json, so there is no movement to judge."
+    },
+    "17_setup_pwa.png": {
+      "judgement": "improved",
+      "why": "SSIM 0.5725: a sixth step ('let it interrupt you') is now on the sheet, the cards are fitted to the width instead of leaving a ragged right edge, and the header strip contains both its lines."
+    }
+  },
+  "opened": [
+    "evidence/01_pulse.png",
+    "evidence/02_chat.png",
+    "evidence/03_us.png",
+    "evidence/04_moments.png",
+    "evidence/05_settings.png",
+    "evidence/06_unfolding.mp4",
+    "evidence/07_feeling_landing.mp4",
+    "evidence/08_state_propagating.mp4",
+    "evidence/10_first_run.png",
+    "evidence/11_chat_scroll.mp4",
+    "evidence/12_search.png",
+    "evidence/13_messenger_states.png",
+    "evidence/14_media_viewer.png",
+    "evidence/15_authored_feeling.mp4",
+    "evidence/17_setup_pwa.png",
+    "evidence/crops/02_chat_300_hand.png",
+    "evidence/crops/02_chat_300_edge.png",
+    "evidence/crops/02_chat_300_shadow.png",
+    "evidence/crops/04_moments_what_happened.png",
+    "evidence/crops/04_moments_what_we_felt.png",
+    "evidence/crops/06_unfolding_strip.png",
+    "evidence/crops/07_feeling_landing_strip.png",
+    "evidence/crops/08_state_propagating_strip.png",
+    "evidence/crops/11_chat_scroll_strip.png",
+    "evidence/crops/14_media_viewer_strip.png",
+    "evidence/crops/15_authored_feeling_strip.png",
+    "evidence/crops/dusk_pulse.png",
+    "evidence/crops/haptics_strip.png",
+    "evidence/crops/reception.png",
+    "evidence/crops/reception_state.png",
+    "evidence/crops/reception_picked_up.png",
+    "evidence/MANIFEST.json",
+    "evidence/DIFF.json",
+    "evidence/WHY_MISSING.json",
+    "evidence/frames.json",
+    "evidence/reliability.json",
+    "evidence/coldstart.json",
+    "evidence/scenes/06_unfolding.json",
+    "evidence/scenes/07_feeling_landing.json",
+    "evidence/scenes/08_state_propagating.json",
+    "evidence/scenes/15_authored_feeling.json",
+    "evidence/logs/01_pulse.report.json",
+    "evidence/logs/02_chat.report.json",
+    "evidence/logs/03_us.report.json",
+    "evidence/logs/04_moments.report.json",
+    "evidence/logs/05_settings.report.json",
+    "evidence/logs/06_unfolding.report.json",
+    "evidence/logs/07_feeling_landing.report.json",
+    "evidence/logs/08_state_propagating.report.json",
+    "evidence/logs/10_first_run.report.json",
+    "evidence/logs/11_chat_scroll.report.json",
+    "evidence/logs/12_search.report.json",
+    "evidence/logs/13_messenger_states.report.json",
+    "evidence/logs/14_media_viewer.report.json",
+    "evidence/logs/15_authored_feeling.report.json",
+    "evidence/logs/17_setup_pwa.report.json",
+    "evidence/logs/dusk_pulse.report.json",
+    "evidence/logs/reception.report.json",
+    "evidence/logs/reception_picked_up.report.json",
+    "evidence/logs/reception.json",
+    "evidence/logs/11_chat_scroll.fling.json",
+    "evidence/logs/14_media_viewer.frames.json",
+    "evidence/logs/scroll_webkit.json",
+    "evidence/logs/haptics.json",
+    "evidence/logs/fonts.json",
+    "evidence/logs/hand.json",
+    "evidence/logs/hairline.json",
+    "evidence/logs/grain.json",
+    "evidence/logs/tears.json",
+    "evidence/logs/lines.json",
+    "evidence/logs/flat.json",
+    "evidence/logs/surfaces.json",
+    "evidence/logs/strings.json",
+    "evidence/logs/manifest.json",
+    "evidence/logs/recipes.json",
+    "evidence/logs/pwa.json",
+    "evidence/logs/apk.json",
+    "evidence/logs/webpush.txt",
+    "evidence/logs/crops.json",
+    "evidence/.previous/01_pulse.png",
+    "evidence/.previous/02_chat.png",
+    "evidence/.previous/03_us.png",
+    "evidence/.previous/04_moments.png",
+    "evidence/.previous/05_settings.png",
+    "evidence/.previous/06_unfolding.mp4",
+    "evidence/.previous/07_feeling_landing.mp4",
+    "evidence/.previous/08_state_propagating.mp4",
+    "evidence/.previous/10_first_run.png",
+    "evidence/.previous/11_chat_scroll.mp4",
+    "evidence/.previous/12_search.png",
+    "evidence/.previous/13_messenger_states.png",
+    "evidence/.previous/14_media_viewer.png",
+    "evidence/.previous/15_authored_feeling.mp4",
+    "evidence/.previous/17_setup_pwa.png"
+  ],
+  "not_worth_opening": {
+    "evidence/logs/01_pulse.json and the other fourteen per-scene step logs": "these are the harness's wall-clock cost of taking each frame, which BRIEFING.md says is not a statement about the app; every claim I make about timing comes from frames.json's app time and the driven step instead.",
+    "evidence/logs/06_unfolding.frames.json, 07_feeling_landing.frames.json, 08_state_propagating.frames.json, 11_chat_scroll.frames.json, 15_authored_feeling.frames.json": "evidence/frames.json carries the same per-clip entries verbatim — runs, step_ms, cuts, held_frame_test — and I read them there and re-measured the held-frame test on 08 myself.",
+    "evidence/logs/holes.json, torn.json, haptics.check.json": "these measure the desk's contact shadow, the torn-edge autocorrelation profile and the felt-distance floor between haptic patterns — all questions about whether one artifact is materially true or one pattern is distinguishable from another, none of them about whether two regions agree with each other, which is my row.",
+    "evidence/logs/07_feeling_landing.sound.json and 15_authored_feeling.sound.json": "the clips' audio tracks; I confirmed their durations with ffprobe for the judgements (5.376 s to 6.272 s on 07) but sound is not a surface two regions can disagree on in a still.",
+    "evidence/logs/reception_scene.json": "the scene script for the reception crops, which are declared not to be artifacts; logs/reception.json already carries what the worker showed, which is the part that bears on one event reading the same on the push surface as on the glass.",
+    "evidence/logs/tests.log": "a record of the source's own test run, and my half of this row is read from artifacts; the code critic reads that side.",
+    "evidence/scenes/01_pulse.json and the other ten scene scripts I did not open": "I opened the four scene scripts for the clips whose cross-region behaviour I was judging (06, 07, 08, 15); the still scenes are single goTo-and-shoot scripts whose framing is already visible in the still and its report.",
+    "evidence/crops/reception_allowed.png, reception_open.png, reception_replaced.png": "three more frames of the same Chromium notification scene; reception.png and reception_state.png show both body texts the surface uses and logs/reception.json lists all twenty it sent, which is what I needed to compare the push surface's vocabulary against the glass.",
+    "evidence/experiments/": "not named in BRIEFING.md as part of the evidence set and not one of the seventeen artifacts.",
+    "evidence/SCORE.json and evidence/critics/13/": "another reader's conclusions; BRIEFING.md says to leave them closed and I did."
+  }
+}
