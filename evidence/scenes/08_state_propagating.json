@@ -42,8 +42,9 @@
     {
       "do": "frames",
       "dir": "evidence/frames/08_state_propagating",
-      "count": 16,
-      "ms": 16
+      "count": 25,
+      "ms": 16,
+      "why": "The take this clip is named for. It was sixteen frames and an emotional critic measured the change inside it lasting two: the cross-dissolve read 11.14 per cent mid-tone pixels at frame 1 and was back to its 2.94 per cent baseline by frame 2, the note settled 176 ms in, and over the remaining fourteen frames the board did not move at all. The strip lays the new sheet over the old one now, over Motion.land — 420 ms — and twenty-five frames at 16 ms is 400 of them, so every frame of the take is the change still happening rather than the change already over."
     },
     {
       "do": "wait",
@@ -184,7 +185,7 @@
     {
       "do": "goTo",
       "arg": 1,
-      "why": "The reconnect is shown in the thread rather than in Settings. Settings is where the app writes what the link is doing, and a word changing on a still page is one frame of change and twenty-five held ones \u2014 the twelfth capture counted 437 held frames in this clip and forty-seven of them were exactly that. What the thread shows is the same fact in a form that moves: a note that will not go, and then goes."
+      "why": "The reconnect is shown in the thread rather than in Settings. Settings is where the app writes what the link is doing, and a word changing on a still page is one frame of change and twenty-five held ones — the twelfth capture counted 437 held frames in this clip and forty-seven of them were exactly that. What the thread shows is the same fact in a form that moves: a note that will not go, and then goes."
     },
     {
       "do": "step",
@@ -216,7 +217,7 @@
         "text": "on my way - leaving in ten",
         "per": 3
       },
-      "why": "Three characters a frame. Two left one frame of the fourteenth capture identical to the one before \u2014 the headless compositor hands back the previous picture when it has not finished the new one, and the smaller the change the more often the retry accepts it. Nine frames at 144 ms is the same 1.3 seconds of somebody writing, with half again as much ink between each pair."
+      "why": "Three characters a frame. Two left one frame of the fourteenth capture identical to the one before — the headless compositor hands back the previous picture when it has not finished the new one, and the smaller the change the more often the retry accepts it. Nine frames at 144 ms is the same 1.3 seconds of somebody writing, with half again as much ink between each pair."
     },
     {
       "do": "frames",
@@ -232,7 +233,7 @@
         ],
         "at": 0
       },
-      "why": "Nineteen frames, not twenty-four. The sheet takes 420 ms to settle and the take ran for 384, which should have been inside it \u2014 but the drop begins a frame or two after the send, so the last five frames of the fourteenth capture's take were of a note that had already landed. A take is as long as the thing it films."
+      "why": "Nineteen frames, not twenty-four. The sheet takes 420 ms to settle and the take ran for 384, which should have been inside it — but the drop begins a frame or two after the send, so the last five frames of the fourteenth capture's take were of a note that had already landed. A take is as long as the thing it films."
     },
     {
       "do": "far",

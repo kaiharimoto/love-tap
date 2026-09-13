@@ -16,6 +16,10 @@
 // Two things are asserted here, on the widgets rather than on a photograph: the library reports
 // the tear's bite in the unit the piece is laid out in, and every word of the partner's strip is
 // inside it.
+import 'dart:async';
+
+import 'package:desk/capture/bus.dart';
+import 'package:desk/capture/hooks.dart';
 import 'package:desk/material/desk.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/material/paper.dart';
@@ -36,6 +40,20 @@ PersonState _theirs() {
     'need': v('need', 3),
     'energy': v('energy', 1),
     'status_line': v('status_line', 'on the last train'),
+  });
+}
+
+PersonState _andThen() {
+  const at = 1756999500000;
+  SignalValue v(String s, Object value) =>
+      SignalValue(signal: s, value: value, at: at, declared: true);
+  return PersonState(Person.noor, {
+    'mood': v('mood', 'quiet'),
+    'availability': v('availability', 'open'),
+    'place': v('place', 'out'),
+    'need': v('need', 1),
+    'energy': v('energy', 3),
+    'status_line': v('status_line', 'off the train'),
   });
 }
 
@@ -115,5 +133,58 @@ void main() {
             'eats ${bite[1].toStringAsFixed(1)} pt off the top and ${bite[3].toStringAsFixed(1)} '
             'off the bottom, leaving paper at $paper — and ${offenders.length} of the words are '
             'not on it:\n  ${offenders.join('\n  ')}');
+  });
+
+  testWidgets('a state change is a sheet being laid over the one that was there', (tester) async {
+    // The one thing this surface exists for used to happen between two frames. An emotional critic
+    // measured it on the clip whose whole subject is a state change reaching the other phone: the
+    // cross-dissolve lasted two frames of a sixteen-frame take — 11.14 per cent mid-tone pixels at
+    // frame 1, back to the 2.94 per cent baseline by frame 2 — and over the remaining fourteen the
+    // board did not move at all. Nothing was animating it.
+    CaptureBus.wanted = true;
+    addTearDown(() {
+      CaptureBus.wanted = false;
+      CaptureBus.clear();
+    });
+    tester.view.physicalSize = const Size(1080, 2340);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+
+    Future<void> show(PersonState state) => tester.pumpWidget(MaterialApp(
+          home: Scaffold(
+            body: Align(
+              alignment: Alignment.topCenter,
+              child: SizedBox(
+                width: 360,
+                child: PartnerStrip(partner: Person.noor, state: state, nowMs: 1757000000000),
+              ),
+            ),
+          ),
+        ));
+
+    await show(_theirs());
+    await tester.pump();
+    expect(find.byType(PaperPiece), findsOneWidget);
+
+    await show(_andThen());
+    await tester.pump();
+    // both sheets on the desk: the one that was there, and the one being laid over it
+    expect(find.byType(PaperPiece), findsNWidgets(2),
+        reason: 'the new sheet replaced the old one between two frames, which is the fault');
+
+    // and it is still happening a quarter of a second later, on the clock the harness drives
+    for (var i = 0; i < 15; i++) {
+      unawaited(DrivenClock.step(16));
+      await tester.pump();
+    }
+    expect(find.byType(PaperPiece), findsNWidgets(2),
+        reason: 'the change was over inside 240 ms — Motion.land is 420');
+
+    for (var i = 0; i < 20; i++) {
+      unawaited(DrivenClock.step(16));
+      await tester.pump();
+    }
+    expect(find.byType(PaperPiece), findsOneWidget,
+        reason: 'the old sheet is still on the desk after the whole of Motion.land');
   });
 }

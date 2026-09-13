@@ -12,6 +12,7 @@ import 'assignment.dart';
 import 'hands.dart';
 import 'library.dart';
 import 'light.dart';
+import 'motion.dart';
 import 'palette.dart';
 import '../voice/strings.dart';
 import 'paper.dart';
@@ -76,6 +77,10 @@ class PartnerStrip extends StatelessWidget {
     final energy = state.energy;
     final weight = 0.55 + 0.15 * energy;
 
+    // What the strip is saying, as one string: when this changes, a different sheet is on the desk.
+    final saying = '$id/$tear/${state.statusLine}/${state.mood}/${state.availability}/'
+        '${state.place}/${state.need}/${state.energy}/$asleep';
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -83,7 +88,22 @@ class PartnerStrip extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(10, 6, 10, 2),
         child: SizedBox(
           height: 86,
-          child: Opacity(
+          // A state change is the one thing this surface exists for, and it used to happen between
+          // two frames. An emotional critic measured it on 08_state_propagating, the clip whose
+          // whole subject is a state change reaching the other phone: the cross-dissolve between
+          // the old sheet and the new one lasted two frames — 11.14 per cent mid-tone pixels at
+          // frame 1 and back to the 2.94 per cent baseline by frame 2 — and the note finished
+          // settling 176 ms in, after which the board did not move at all for the take's remaining
+          // fourteen frames. Nothing was animating it: the strip rebuilt and the paint changed.
+          //
+          // So the new sheet is laid over the old one, over the time a sheet takes to come down,
+          // on whichever clock is running. Same widget the shell already uses to change region,
+          // for the same reason.
+          child: Turning(
+            duration: Motion.land,
+            child: KeyedSubtree(
+              key: ValueKey(saying),
+              child: Opacity(
             opacity: asleep ? 0.55 : 1.0,
             child: PaperPiece(
               stockId: id,
@@ -156,6 +176,8 @@ class PartnerStrip extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ),
             ),
           ),
         ),

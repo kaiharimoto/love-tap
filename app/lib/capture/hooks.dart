@@ -698,6 +698,13 @@ class CaptureHooks {
         'what_each_surface_may_say': {
           'standing_line': 'their state, in the couple\'s own words, assembled here from the log',
           'pocket': 'the feeling\'s own name and its sound, because the app is running and has it',
+          'and_the_pocket_here_is': 'this is a PWA and iOS will not let one vibrate, so the '
+              'rhythm is carried by the feeling\'s own sound and by the page itself moving under '
+              'it — feelings/sensation.dart, the same segments the motor would have been given. '
+              '`pocket_feeling` and `pocket_at` above are what it last played and when, and '
+              '`asked_a_motor_for` is every pattern it asked for. A held list that is empty after '
+              'the app has been opened is the surface working: the app clears what the phone was '
+              'holding the moment somebody looks at it.',
           'push': 'the kind and the sender, and nothing else, by the rule in tools/push/webpush.py '
               '— a lock screen is not a place to put what two people said to each other',
         },
