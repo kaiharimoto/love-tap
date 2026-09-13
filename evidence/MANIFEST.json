@@ -180,6 +180,25 @@
    "minimum_seconds": 6,
    "long_enough": true
   },
+  "08_state_propagating.mp4": {
+   "bytes": 11692710,
+   "written": "2026-09-13T12:23:02Z",
+   "from_this_run": true,
+   "size": [
+    1080,
+    2340
+   ],
+   "frames": 696,
+   "fps": 62.5,
+   "seconds": 11.14,
+   "meets_minimum": true,
+   "minimum": [
+    1080,
+    2340
+   ],
+   "minimum_seconds": 8,
+   "long_enough": true
+  },
   "11_chat_scroll.mp4": {
    "bytes": 21970976,
    "written": "2026-09-13T11:12:31Z",
@@ -221,8 +240,7 @@
  },
  "missing": {
   "09_two_devices.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "08_state_propagating.mp4": "the frame check failed; see evidence/logs/08_state_propagating.frames.json (a copy from an earlier run is still on disk, written 2026-09-13T11:42:42Z; it is not this session's and is not counted)"
+  "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA"
  },
  "checks": {
   "01_pulse.json": {
@@ -294,15 +312,15 @@
    "from_this_run": true
   },
   "08_state_propagating.frames.json": {
-   "written": "2026-09-13T11:44:45Z",
+   "written": "2026-09-13T12:25:05Z",
    "from_this_run": true
   },
   "08_state_propagating.json": {
-   "written": "2026-09-13T11:41:58Z",
+   "written": "2026-09-13T12:22:18Z",
    "from_this_run": true
   },
   "08_state_propagating.report.json": {
-   "written": "2026-09-13T11:41:57Z",
+   "written": "2026-09-13T12:22:17Z",
    "from_this_run": true
   },
   "10_first_run.json": {
@@ -386,7 +404,7 @@
    "from_this_run": false
   },
   "crops.json": {
-   "written": "2026-09-13T11:45:01Z",
+   "written": "2026-09-13T12:25:06Z",
    "from_this_run": true
   },
   "dusk_pulse.json": {
@@ -398,27 +416,27 @@
    "from_this_run": true
   },
   "flat.json": {
-   "written": "2026-09-13T11:55:23Z",
+   "written": "2026-09-13T12:35:32Z",
    "from_this_run": true
   },
   "fonts.json": {
-   "written": "2026-09-13T09:40:12Z",
+   "written": "2026-09-13T11:59:04Z",
    "from_this_run": true
   },
   "grain.json": {
-   "written": "2026-09-13T11:45:11Z",
+   "written": "2026-09-13T12:25:16Z",
    "from_this_run": true
   },
   "hairline.json": {
-   "written": "2026-09-13T11:55:27Z",
+   "written": "2026-09-13T12:35:35Z",
    "from_this_run": true
   },
   "hand.json": {
-   "written": "2026-09-13T11:45:10Z",
+   "written": "2026-09-13T12:25:15Z",
    "from_this_run": true
   },
   "haptics.check.json": {
-   "written": "2026-09-13T11:15:08Z",
+   "written": "2026-09-13T12:00:16Z",
    "from_this_run": true
   },
   "haptics.json": {
@@ -426,15 +444,15 @@
    "from_this_run": true
   },
   "holes.json": {
-   "written": "2026-09-13T11:45:42Z",
+   "written": "2026-09-13T12:25:50Z",
    "from_this_run": true
   },
   "lines.json": {
-   "written": "2026-09-13T11:45:17Z",
+   "written": "2026-09-13T12:25:23Z",
    "from_this_run": true
   },
   "manifest.json": {
-   "written": "2026-09-13T09:40:12Z",
+   "written": "2026-09-13T11:59:04Z",
    "from_this_run": true
   },
   "pwa.json": {
@@ -458,7 +476,7 @@
    "from_this_run": true
   },
   "recipes.json": {
-   "written": "2026-09-13T09:40:12Z",
+   "written": "2026-09-13T11:59:04Z",
    "from_this_run": true
   },
   "scroll_webkit.json": {
@@ -466,19 +484,19 @@
    "from_this_run": true
   },
   "strings.json": {
-   "written": "2026-09-13T09:39:13Z",
+   "written": "2026-09-13T11:58:06Z",
    "from_this_run": true
   },
   "surfaces.json": {
-   "written": "2026-09-13T09:43:41Z",
+   "written": "2026-09-13T12:00:08Z",
    "from_this_run": true
   },
   "tears.json": {
-   "written": "2026-09-13T11:45:10Z",
+   "written": "2026-09-13T12:25:16Z",
    "from_this_run": true
   },
   "torn.json": {
-   "written": "2026-09-13T11:45:13Z",
+   "written": "2026-09-13T12:25:18Z",
    "from_this_run": true
   }
  },
