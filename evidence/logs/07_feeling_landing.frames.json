@@ -1,11 +1,16 @@
 {
  "dir": "/tmp/lovetap-capture/07_feeling_landing",
- "frames": 336,
+ "frames": 392,
  "fps": 62.5,
- "seconds": 5.38,
+ "seconds": 6.27,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
+  {
+   "frames": 56,
+   "step_ms": 16,
+   "dir": "evidence/frames/07_feeling_landing"
+  },
   {
    "frames": 56,
    "step_ms": 16,
@@ -42,11 +47,12 @@
   111,
   167,
   223,
-  279
+  279,
+  335
  ],
- "app_seconds": 5.38,
+ "app_seconds": 6.27,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 4.70232,
+ "mean_change_per_frame": 5.48409,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -56,9 +62,9 @@
   },
   "worst_moving_frame": {
    "frame": 269,
-   "mean": 0.0233,
-   "visible_share": 0.000916,
-   "busiest_tile": 23.709,
+   "mean": 0.0331,
+   "visible_share": 0.000792,
+   "busiest_tile": 27.9941,
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },
@@ -68,29 +74,16 @@
  "repeated_at": [],
  "brightness_jumps": 0,
  "brightness_jumps_at": [],
- "the_mean_moved_at": [
-  {
-   "frame": 169,
-   "mean": 0.117,
-   "median_shift": 2.0,
-   "spread": 74.88
-  },
-  {
-   "frame": 170,
-   "mean": 0.075,
-   "median_shift": 0.587,
-   "spread": 49.55
-  }
- ],
- "largest_median_shift": 2.0,
+ "the_mean_moved_at": [],
+ "largest_median_shift": 0.0,
  "ok": true,
  "strip": "evidence/crops/07_feeling_landing_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/07_feeling_landing/000000.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000067.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000134.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000201.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000268.png",
-  "/tmp/lovetap-capture/07_feeling_landing/000335.png"
+  "/tmp/lovetap-capture/07_feeling_landing/000078.png",
+  "/tmp/lovetap-capture/07_feeling_landing/000156.png",
+  "/tmp/lovetap-capture/07_feeling_landing/000235.png",
+  "/tmp/lovetap-capture/07_feeling_landing/000313.png",
+  "/tmp/lovetap-capture/07_feeling_landing/000391.png"
  ]
 }
