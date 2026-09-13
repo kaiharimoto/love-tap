@@ -77,11 +77,23 @@ class WebStore implements SpineStore {
     // Into an empty store nothing can already exist, so nothing is looked up first: the year's
     // import was one get and one put per event, and the get was half the cold start.
     final empty = order == 1;
+    // The puts are issued, not awaited one at a time.
+    //
+    // IndexedDB queues every request in a transaction and runs them itself; awaiting each one
+    // hands control back to the event loop between them, so fourteen thousand events became
+    // fourteen thousand round trips through the microtask queue. Measured on the year-deep import
+    // the capture starts from: 8,551 ms to the first frame, of which the log was 6,726. Issuing
+    // them and waiting once at the end lets the database do the batching it was written to do —
+    // and the futures are collected rather than dropped, because a put that fails and is not
+    // awaited is an error nobody ever sees.
+    final pending = <Future<Object?>>[];
     for (final e in events) {
       final existing = empty ? null : await store.getObject(e.id);
       final storedOrder = existing == null ? order++ : (existing as Map)['stored_order'] as int;
-      await store.put({'id': e.id, 'seq': e.seq, 'stored_order': storedOrder, 'json': e.encode()});
+      pending.add(
+          store.put({'id': e.id, 'seq': e.seq, 'stored_order': storedOrder, 'json': e.encode()}));
     }
+    await Future.wait(pending);
     _nextOrder = order;
     try {
       await txn.completed;
