@@ -13,6 +13,8 @@
 @TestOn('vm')
 library;
 
+import 'dart:convert';
+import 'dart:io';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
@@ -269,29 +271,51 @@ void main() {
     // boundary in the stills: median rms 0.71 px, thirteen of twenty-two under one pixel, against
     // the masks' own 2.417 measured the same way. The four smoothest edges in 02_chat were its
     // four widest pieces.
+    // A mask that actually tears its top edge, named rather than drawn from the pool.
+    //
+    // This rendered a Slip and let the assignment choose, and the assignment handed it tear_023,
+    // whose kind is `cut`: it tears its right edge and guillotines the other three. The test then
+    // measured a guillotined top edge and called it a straight tear — the same mistake
+    // tools/check/torn.py made for four cycles. What this test is about is a *wide torn* edge
+    // being pulled across a piece four times the width of its band, so it names a mask that has
+    // one.
+    final meta = jsonDecode(
+            File('${Directory.current.parent.path}/assets/tears/tears.json').readAsStringSync())
+        as Map<String, dynamic>;
+    final masks = (meta['masks'] as List).cast<Map<String, dynamic>>();
+    final writable = MaterialLibrary.instance.writableTears.toSet();
+    final tornTop = masks.firstWhere((m) {
+      final e = {...(m['torn_edges'] as List).cast<String>()};
+      if (e.contains('d')) e.addAll(['t', 'b']);
+      return e.contains('t') && writable.contains(m['id']);
+    });
+    final tearId = tornTop['id'] as String;
     final (img, bytes) = await render(
       tester,
       470,
       200,
-      const ColoredBox(
-        color: Color(0xFF4C3E32),
+      ColoredBox(
+        color: const Color(0xFF4C3E32),
         child: Center(
-          child: Slip(
-            id: 'probe.wide',
-            row: 2,
-            stock: 'lined',
+          child: SizedBox(
             width: 452,
-            child: SizedBox(height: 120, width: 420),
+            child: PaperPiece(
+              stockId: MaterialLibrary.instance.stockVariants('lined').first,
+              tearId: tearId,
+              child: const SizedBox(height: 120, width: 420),
+            ),
           ),
         ),
       ),
     );
+    const fromTop = true;
     // On luma against the desk, not on alpha: the baked contact shadow is nearly opaque where it
     // meets the paper, so the first row with alpha above the threshold is the shadow's boundary
     // and not the sheet's. This is the measurement tools/check/deckle.py makes on the stills.
     final ys = <double>[];
     for (var x = 0; x < img.width; x++) {
-      for (var y = 0; y < img.height; y++) {
+      for (var k = 0; k < img.height; k++) {
+        final y = fromTop ? k : img.height - 1 - k;
         final i = (y * img.width + x) * 4;
         final lum = 0.2126 * bytes[i] + 0.7152 * bytes[i + 1] + 0.0722 * bytes[i + 2];
         if (lum > 150) {
@@ -325,8 +349,8 @@ void main() {
     // the stills, and derives its own floor from the masks; this holds the one number a widget
     // test can hold without a capture.
     expect(rms, greaterThan(1.0),
-        reason: 'the top edge of a full-width sheet measures $rms px rms: it is a straight line '
-            'with a blur on it, not a tear');
+        reason: 'the ${fromTop ? 'top' : 'bottom'} edge of a full-width sheet, torn by $tearId, '
+            'measures $rms px rms: it is a straight line with a blur on it, not a tear');
   });
 
   test('a piece smaller than the render shrinks the tear rather than butting it', () async {

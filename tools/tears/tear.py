@@ -192,14 +192,32 @@ def draw_mask(kind, seed, size=SIZE):
     ys, xs = np.mgrid[0:size, 0:size].astype(np.float32)
     inside = np.ones((size, size), np.float32)
 
-    amp = rng.uniform(0.5, 3.0)          # mm of fine roughness
-    wander = rng.uniform(1.2, 7.0)       # mm of slow drift
-    hurst = rng.uniform(0.55, 1.15)      # the character of this sheet's break
+    # How rough a torn edge is, measured the way a material critic measured it on the glass: the
+    # first opaque pixel down each column of the middle sixty per cent of the packed mask, high-
+    # passed over thirty-one columns, rms. They were content at 2.88 to 5.14 px and not content at
+    # 0.36 to 0.59, and the twelfth capture's blocking material finding was that these edges are
+    # not torn — 137 free-standing sheet edges across ten stills, median residual from a straight
+    # line 1.27 px, four of them exactly straight.
+    #
+    # The library that finding was made on ran amp 0.5-3.0 and hurst 0.55-1.15 and measured rms
+    # 1.15 to 4.69, median 2.00, twenty-eight of fifty-six under 2. Two things were wrong with it.
+    # The exponent ran to 1.15, and 1.15 is a clean pull, and a clean pull is too clean: nearly all
+    # the energy sits below the thirty-one-column window the measurement high-passes away. And the
+    # amplitude floor was 0.5 mm, so a sheet could be drawn nearly smooth however it was torn —
+    # which is why the *floor* of that library was 1.15 and not its median.
+    #
+    # So the exponent comes down and the floor comes up. The slow drift pays for it: it is 1/f
+    # wander over centimetres, it contributes nothing the high-pass keeps, and taking it from 7 mm
+    # to 5 gives the deeper roughness room without eating further into the piece — a mask that is
+    # mostly bite is a mask a line of writing falls off.
+    amp = rng.uniform(1.8, 3.4)          # mm of fine roughness
+    wander = rng.uniform(1.0, 5.0)       # mm of slow drift
+    hurst = rng.uniform(0.48, 0.78)      # the character of this sheet's break
 
     def edge_profile(n, is_torn):
         # each torn edge of a piece breaks a little differently, around this sheet's character
         return (fracture(n, rng, amp * rng.uniform(0.7, 1.4), wander * rng.uniform(0.6, 1.5),
-                         hurst=float(np.clip(hurst + rng.normal(0, 0.07), 0.5, 1.3)))
+                         hurst=float(np.clip(hurst + rng.normal(0, 0.07), 0.42, 0.86)))
                 if is_torn else cut_edge(n, rng))
 
     # horizontal edges (top, bottom): profile indexed by x

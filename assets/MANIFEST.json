@@ -22060,32 +22060,33 @@
    }
   },
   "assets/tears/tear_001.png": {
-   "bytes": 154189,
+   "bytes": 193095,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 51.39,
-    "hurst": 0.958,
+    "hurst": 0.684,
     "kind": "strip",
     "max_correlation": -1.0,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.04,
+    "roughness_mm": 2.15,
     "seed": 20260904,
     "torn_edges": [
      "t",
      "b"
     ],
     "w_mm": 114.69,
-    "wander_mm": 6.38
+    "wander_mm": 4.57
    }
   },
   "assets/tears/tear_001_edge.png": {
-   "bytes": 279474,
+   "bytes": 1475676,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22095,16 +22096,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_001_shadow.png": {
-   "bytes": 286574,
+   "bytes": 1325095,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -22120,11 +22121,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 96,
+    "samples": 192,
     "thickness_m": 0.00011
    }
   },
@@ -22154,31 +22155,32 @@
    }
   },
   "assets/tears/tear_002.png": {
-   "bytes": 210840,
+   "bytes": 172854,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 97.6,
-    "hurst": 0.73,
+    "hurst": 0.57,
     "kind": "half",
-    "max_correlation": 0.3149,
+    "max_correlation": 0.3291,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.72,
+    "roughness_mm": 3.22,
     "seed": 20260905,
     "torn_edges": [
      "b"
     ],
     "w_mm": 105.23,
-    "wander_mm": 3.22
+    "wander_mm": 2.4
    }
   },
   "assets/tears/tear_002_edge.png": {
-   "bytes": 401239,
+   "bytes": 2204243,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22188,11 +22190,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -22247,32 +22249,33 @@
    }
   },
   "assets/tears/tear_003.png": {
-   "bytes": 185221,
+   "bytes": 166647,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 62.97,
-    "hurst": 0.705,
+    "hurst": 0.557,
     "kind": "corner",
-    "max_correlation": 0.3447,
+    "max_correlation": 0.3858,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.31,
+    "roughness_mm": 2.96,
     "seed": 20260906,
     "torn_edges": [
      "b",
      "l"
     ],
     "w_mm": 87.5,
-    "wander_mm": 5.8
+    "wander_mm": 4.17
    }
   },
   "assets/tears/tear_003_edge.png": {
-   "bytes": 283853,
+   "bytes": 1472200,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22282,11 +22285,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -22341,16 +22344,16 @@
    }
   },
   "assets/tears/tear_004.png": {
-   "bytes": 158014,
+   "bytes": 175318,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 59.75,
-    "hurst": 0.782,
+    "hurst": 0.596,
     "kind": "rect",
-    "max_correlation": 0.3736,
+    "max_correlation": 0.3837,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.99,
+    "roughness_mm": 2.75,
     "seed": 20260907,
     "torn_edges": [
      "t",
@@ -22358,16 +22361,17 @@
      "l"
     ],
     "w_mm": 78.15,
-    "wander_mm": 3.94
+    "wander_mm": 2.89
    }
   },
   "assets/tears/tear_004_edge.png": {
-   "bytes": 262161,
+   "bytes": 1338756,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22377,11 +22381,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -22436,16 +22440,16 @@
    }
   },
   "assets/tears/tear_005.png": {
-   "bytes": 175281,
+   "bytes": 238461,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 65.94,
-    "hurst": 0.796,
+    "hurst": 0.603,
     "kind": "three",
-    "max_correlation": 0.424,
+    "max_correlation": 0.5351,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.4,
+    "roughness_mm": 3.02,
     "seed": 20260908,
     "torn_edges": [
      "t",
@@ -22453,16 +22457,17 @@
      "r"
     ],
     "w_mm": 104.99,
-    "wander_mm": 3.52
+    "wander_mm": 2.6
    }
   },
   "assets/tears/tear_005_edge.png": {
-   "bytes": 322754,
+   "bytes": 1682790,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22472,11 +22477,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -22531,31 +22536,32 @@
    }
   },
   "assets/tears/tear_006.png": {
-   "bytes": 105342,
+   "bytes": 112151,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 75.92,
-    "hurst": 1.007,
+    "hurst": 0.708,
     "kind": "diagonal",
-    "max_correlation": 0.3433,
+    "max_correlation": 0.3758,
     "px_per_mm": 17.067,
-    "roughness_mm": 0.76,
+    "roughness_mm": 1.97,
     "seed": 20260909,
     "torn_edges": [
      "d"
     ],
     "w_mm": 114.97,
-    "wander_mm": 2.74
+    "wander_mm": 2.07
    }
   },
   "assets/tears/tear_006_edge.png": {
-   "bytes": 247966,
+   "bytes": 1267278,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22565,11 +22571,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -22624,31 +22630,32 @@
    }
   },
   "assets/tears/tear_007.png": {
-   "bytes": 223737,
+   "bytes": 195105,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 100.75,
-    "hurst": 0.556,
+    "hurst": 0.483,
     "kind": "cut",
-    "max_correlation": 0.3791,
+    "max_correlation": 0.4742,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.95,
+    "roughness_mm": 3.37,
     "seed": 20260910,
     "torn_edges": [
      "r"
     ],
     "w_mm": 85.2,
-    "wander_mm": 5.72
+    "wander_mm": 4.11
    }
   },
   "assets/tears/tear_007_edge.png": {
-   "bytes": 378699,
+   "bytes": 2017124,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22658,11 +22665,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -22717,31 +22724,32 @@
    }
   },
   "assets/tears/tear_008.png": {
-   "bytes": 155011,
+   "bytes": 137834,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 69.14,
-    "hurst": 0.987,
+    "hurst": 0.698,
     "kind": "notepad",
-    "max_correlation": 0.4155,
+    "max_correlation": 0.5166,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.91,
+    "roughness_mm": 2.7,
     "seed": 20260911,
     "torn_edges": [
      "t"
     ],
     "w_mm": 108.57,
-    "wander_mm": 5.89
+    "wander_mm": 4.23
    }
   },
   "assets/tears/tear_008_edge.png": {
-   "bytes": 322119,
+   "bytes": 1742827,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22751,11 +22759,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -22810,32 +22818,33 @@
    }
   },
   "assets/tears/tear_009.png": {
-   "bytes": 167516,
+   "bytes": 187047,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 52.93,
-    "hurst": 0.575,
+    "hurst": 0.493,
     "kind": "strip",
-    "max_correlation": 0.3931,
+    "max_correlation": 0.4407,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.01,
+    "roughness_mm": 2.76,
     "seed": 20260912,
     "torn_edges": [
      "t",
      "b"
     ],
     "w_mm": 100.08,
-    "wander_mm": 6.9
+    "wander_mm": 4.93
    }
   },
   "assets/tears/tear_009_edge.png": {
-   "bytes": 272419,
+   "bytes": 1400072,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22845,11 +22854,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -22904,31 +22913,32 @@
    }
   },
   "assets/tears/tear_010.png": {
-   "bytes": 175097,
+   "bytes": 205393,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 74.13,
-    "hurst": 0.67,
+    "hurst": 0.54,
     "kind": "half",
-    "max_correlation": 0.4125,
+    "max_correlation": 0.4665,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.24,
+    "roughness_mm": 2.28,
     "seed": 20260913,
     "torn_edges": [
      "b"
     ],
     "w_mm": 99.93,
-    "wander_mm": 4.37
+    "wander_mm": 3.18
    }
   },
   "assets/tears/tear_010_edge.png": {
-   "bytes": 324009,
+   "bytes": 1744479,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -22938,11 +22948,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -22997,32 +23007,33 @@
    }
   },
   "assets/tears/tear_011.png": {
-   "bytes": 127527,
+   "bytes": 171137,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 63.37,
-    "hurst": 0.931,
+    "hurst": 0.67,
     "kind": "corner",
-    "max_correlation": 0.4293,
+    "max_correlation": 0.4792,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.41,
+    "roughness_mm": 3.02,
     "seed": 20260914,
     "torn_edges": [
      "b",
      "l"
     ],
     "w_mm": 63.31,
-    "wander_mm": 6.54
+    "wander_mm": 4.68
    }
   },
   "assets/tears/tear_011_edge.png": {
-   "bytes": 242726,
+   "bytes": 1237686,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23032,11 +23043,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23091,16 +23102,16 @@
    }
   },
   "assets/tears/tear_012.png": {
-   "bytes": 172213,
+   "bytes": 189588,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 63.6,
-    "hurst": 0.698,
+    "hurst": 0.554,
     "kind": "rect",
-    "max_correlation": 0.4471,
+    "max_correlation": 0.5132,
     "px_per_mm": 17.067,
-    "roughness_mm": 0.98,
+    "roughness_mm": 2.11,
     "seed": 20260915,
     "torn_edges": [
      "t",
@@ -23108,16 +23119,17 @@
      "l"
     ],
     "w_mm": 99.74,
-    "wander_mm": 4.95
+    "wander_mm": 3.59
    }
   },
   "assets/tears/tear_012_edge.png": {
-   "bytes": 300128,
+   "bytes": 1600412,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23127,11 +23139,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23186,16 +23198,16 @@
    }
   },
   "assets/tears/tear_013.png": {
-   "bytes": 124051,
+   "bytes": 160360,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 53.28,
-    "hurst": 0.651,
+    "hurst": 0.531,
     "kind": "three",
-    "max_correlation": 0.4798,
+    "max_correlation": 0.6019,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.76,
+    "roughness_mm": 2.6,
     "seed": 20260916,
     "torn_edges": [
      "t",
@@ -23203,16 +23215,17 @@
      "r"
     ],
     "w_mm": 75.93,
-    "wander_mm": 3.1
+    "wander_mm": 2.31
    }
   },
   "assets/tears/tear_013_edge.png": {
-   "bytes": 243174,
+   "bytes": 1242418,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23222,11 +23235,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23281,31 +23294,32 @@
    }
   },
   "assets/tears/tear_014.png": {
-   "bytes": 92346,
+   "bytes": 145883,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 62.35,
-    "hurst": 0.589,
+    "hurst": 0.499,
     "kind": "diagonal",
-    "max_correlation": 0.4615,
+    "max_correlation": 0.4476,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.5,
+    "roughness_mm": 2.44,
     "seed": 20260917,
     "torn_edges": [
      "d"
     ],
     "w_mm": 102.86,
-    "wander_mm": 4.8
+    "wander_mm": 3.48
    }
   },
   "assets/tears/tear_014_edge.png": {
-   "bytes": 204452,
+   "bytes": 1043096,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23315,11 +23329,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23374,31 +23388,32 @@
    }
   },
   "assets/tears/tear_015.png": {
-   "bytes": 131508,
+   "bytes": 137108,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 63.89,
-    "hurst": 1.134,
+    "hurst": 0.772,
     "kind": "cut",
-    "max_correlation": 0.4741,
+    "max_correlation": 0.5332,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.74,
+    "roughness_mm": 3.23,
     "seed": 20260918,
     "torn_edges": [
      "r"
     ],
     "w_mm": 113.82,
-    "wander_mm": 6.6
+    "wander_mm": 4.72
    }
   },
   "assets/tears/tear_015_edge.png": {
-   "bytes": 310732,
+   "bytes": 1675193,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23408,11 +23423,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23467,31 +23482,32 @@
    }
   },
   "assets/tears/tear_016.png": {
-   "bytes": 189430,
+   "bytes": 189434,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 88.93,
-    "hurst": 1.142,
+    "hurst": 0.776,
     "kind": "notepad",
-    "max_correlation": 0.4136,
+    "max_correlation": 0.4979,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.39,
+    "roughness_mm": 3.01,
     "seed": 20260919,
     "torn_edges": [
      "t"
     ],
     "w_mm": 95.8,
-    "wander_mm": 5.74
+    "wander_mm": 4.13
    }
   },
   "assets/tears/tear_016_edge.png": {
-   "bytes": 360018,
+   "bytes": 1954556,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23501,11 +23517,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23560,32 +23576,33 @@
    }
   },
   "assets/tears/tear_017.png": {
-   "bytes": 84470,
+   "bytes": 138391,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 30.51,
-    "hurst": 1.101,
+    "hurst": 0.756,
     "kind": "strip",
-    "max_correlation": 0.4691,
+    "max_correlation": 0.5729,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.68,
+    "roughness_mm": 2.55,
     "seed": 20260920,
     "torn_edges": [
      "t",
      "b"
     ],
     "w_mm": 96.01,
-    "wander_mm": 3.36
+    "wander_mm": 2.49
    }
   },
   "assets/tears/tear_017_edge.png": {
-   "bytes": 194837,
+   "bytes": 990444,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23595,11 +23612,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23654,31 +23671,32 @@
    }
   },
   "assets/tears/tear_018.png": {
-   "bytes": 184210,
+   "bytes": 170070,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 70.16,
-    "hurst": 0.893,
+    "hurst": 0.651,
     "kind": "half",
-    "max_correlation": 0.485,
+    "max_correlation": 0.5199,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.71,
+    "roughness_mm": 2.57,
     "seed": 20260921,
     "torn_edges": [
      "b"
     ],
     "w_mm": 112.92,
-    "wander_mm": 3.02
+    "wander_mm": 2.25
    }
   },
   "assets/tears/tear_018_edge.png": {
-   "bytes": 329944,
+   "bytes": 1795815,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23688,11 +23706,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23747,32 +23765,33 @@
    }
   },
   "assets/tears/tear_019.png": {
-   "bytes": 165666,
+   "bytes": 167368,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 79.77,
-    "hurst": 0.925,
+    "hurst": 0.668,
     "kind": "corner",
-    "max_correlation": 0.4659,
+    "max_correlation": 0.4527,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.36,
+    "roughness_mm": 2.35,
     "seed": 20260922,
     "torn_edges": [
      "b",
      "l"
     ],
     "w_mm": 94.67,
-    "wander_mm": 5.0
+    "wander_mm": 3.62
    }
   },
   "assets/tears/tear_019_edge.png": {
-   "bytes": 336268,
+   "bytes": 1799291,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23782,11 +23801,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23841,16 +23860,16 @@
    }
   },
   "assets/tears/tear_020.png": {
-   "bytes": 238094,
+   "bytes": 229926,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 60.77,
-    "hurst": 0.73,
+    "hurst": 0.57,
     "kind": "rect",
-    "max_correlation": 0.464,
+    "max_correlation": 0.5233,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.63,
+    "roughness_mm": 3.16,
     "seed": 20260923,
     "torn_edges": [
      "t",
@@ -23858,16 +23877,17 @@
      "l"
     ],
     "w_mm": 109.59,
-    "wander_mm": 2.45
+    "wander_mm": 1.86
    }
   },
   "assets/tears/tear_020_edge.png": {
-   "bytes": 315828,
+   "bytes": 1622990,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23877,11 +23897,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -23936,16 +23956,16 @@
    }
   },
   "assets/tears/tear_021.png": {
-   "bytes": 165962,
+   "bytes": 155857,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 46.25,
-    "hurst": 0.575,
+    "hurst": 0.493,
     "kind": "three",
-    "max_correlation": 0.5496,
+    "max_correlation": 0.6153,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.12,
+    "roughness_mm": 2.84,
     "seed": 20260924,
     "torn_edges": [
      "t",
@@ -23953,16 +23973,17 @@
      "r"
     ],
     "w_mm": 72.64,
-    "wander_mm": 4.22
+    "wander_mm": 3.08
    }
   },
   "assets/tears/tear_021_edge.png": {
-   "bytes": 222120,
+   "bytes": 1112453,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -23972,11 +23993,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24031,31 +24052,32 @@
    }
   },
   "assets/tears/tear_022.png": {
-   "bytes": 110328,
+   "bytes": 79827,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 63.79,
-    "hurst": 0.856,
+    "hurst": 0.633,
     "kind": "diagonal",
-    "max_correlation": 0.4974,
+    "max_correlation": 0.4167,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.68,
+    "roughness_mm": 2.56,
     "seed": 20260925,
     "torn_edges": [
      "d"
     ],
     "w_mm": 85.57,
-    "wander_mm": 3.66
+    "wander_mm": 2.69
    }
   },
   "assets/tears/tear_022_edge.png": {
-   "bytes": 209803,
+   "bytes": 1043085,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24065,11 +24087,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24124,31 +24146,32 @@
    }
   },
   "assets/tears/tear_023.png": {
-   "bytes": 144916,
+   "bytes": 165913,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 97.16,
-    "hurst": 1.133,
+    "hurst": 0.771,
     "kind": "cut",
-    "max_correlation": 0.5603,
+    "max_correlation": 0.4626,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.02,
+    "roughness_mm": 2.78,
     "seed": 20260926,
     "torn_edges": [
      "r"
     ],
     "w_mm": 110.13,
-    "wander_mm": 5.8
+    "wander_mm": 4.17
    }
   },
   "assets/tears/tear_023_edge.png": {
-   "bytes": 410286,
+   "bytes": 2260535,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24158,11 +24181,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24217,31 +24240,32 @@
    }
   },
   "assets/tears/tear_024.png": {
-   "bytes": 179228,
+   "bytes": 173384,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 68.03,
-    "hurst": 0.565,
+    "hurst": 0.487,
     "kind": "notepad",
-    "max_correlation": 0.4955,
+    "max_correlation": 0.5479,
     "px_per_mm": 17.067,
-    "roughness_mm": 0.62,
+    "roughness_mm": 1.87,
     "seed": 20260927,
     "torn_edges": [
      "t"
     ],
     "w_mm": 92.73,
-    "wander_mm": 6.41
+    "wander_mm": 4.59
    }
   },
   "assets/tears/tear_024_edge.png": {
-   "bytes": 297109,
+   "bytes": 1571627,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24251,11 +24275,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24310,32 +24334,33 @@
    }
   },
   "assets/tears/tear_025.png": {
-   "bytes": 110526,
+   "bytes": 167841,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 29.47,
-    "hurst": 1.016,
+    "hurst": 0.713,
     "kind": "strip",
-    "max_correlation": 0.4859,
+    "max_correlation": 0.5506,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.3,
+    "roughness_mm": 2.31,
     "seed": 20260928,
     "torn_edges": [
      "t",
      "b"
     ],
     "w_mm": 107.2,
-    "wander_mm": 3.66
+    "wander_mm": 2.7
    }
   },
   "assets/tears/tear_025_edge.png": {
-   "bytes": 201526,
+   "bytes": 1027026,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24345,11 +24370,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24404,31 +24429,32 @@
    }
   },
   "assets/tears/tear_026.png": {
-   "bytes": 190342,
+   "bytes": 222273,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 91.39,
-    "hurst": 0.551,
+    "hurst": 0.48,
     "kind": "half",
-    "max_correlation": 0.4995,
+    "max_correlation": 0.5379,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.79,
+    "roughness_mm": 2.62,
     "seed": 20260929,
     "torn_edges": [
      "b"
     ],
     "w_mm": 103.06,
-    "wander_mm": 1.72
+    "wander_mm": 1.36
    }
   },
   "assets/tears/tear_026_edge.png": {
-   "bytes": 379809,
+   "bytes": 2075227,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24438,11 +24464,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24497,32 +24523,33 @@
    }
   },
   "assets/tears/tear_027.png": {
-   "bytes": 142397,
+   "bytes": 148944,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 59.66,
-    "hurst": 0.644,
+    "hurst": 0.527,
     "kind": "corner",
-    "max_correlation": 0.5364,
+    "max_correlation": 0.5406,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.26,
+    "roughness_mm": 2.28,
     "seed": 20260930,
     "torn_edges": [
      "b",
      "l"
     ],
     "w_mm": 71.69,
-    "wander_mm": 3.11
+    "wander_mm": 2.32
    }
   },
   "assets/tears/tear_027_edge.png": {
-   "bytes": 244466,
+   "bytes": 1260862,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24532,11 +24559,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24591,16 +24618,16 @@
    }
   },
   "assets/tears/tear_028.png": {
-   "bytes": 183790,
+   "bytes": 199791,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 54.72,
-    "hurst": 0.618,
+    "hurst": 0.514,
     "kind": "rect",
-    "max_correlation": 0.3844,
+    "max_correlation": 0.5083,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.41,
+    "roughness_mm": 3.02,
     "seed": 20260931,
     "torn_edges": [
      "t",
@@ -24608,16 +24635,17 @@
      "l"
     ],
     "w_mm": 86.97,
-    "wander_mm": 5.72
+    "wander_mm": 4.11
    }
   },
   "assets/tears/tear_028_edge.png": {
-   "bytes": 272726,
+   "bytes": 1378240,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24627,11 +24655,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24686,16 +24714,16 @@
    }
   },
   "assets/tears/tear_029.png": {
-   "bytes": 149983,
+   "bytes": 206403,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 48.73,
-    "hurst": 0.986,
+    "hurst": 0.698,
     "kind": "three",
-    "max_correlation": 0.4815,
+    "max_correlation": 0.5642,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.62,
+    "roughness_mm": 2.52,
     "seed": 20260932,
     "torn_edges": [
      "t",
@@ -24703,16 +24731,17 @@
      "r"
     ],
     "w_mm": 108.54,
-    "wander_mm": 2.75
+    "wander_mm": 2.07
    }
   },
   "assets/tears/tear_029_edge.png": {
-   "bytes": 264962,
+   "bytes": 1393361,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24722,11 +24751,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24781,31 +24810,32 @@
    }
   },
   "assets/tears/tear_030.png": {
-   "bytes": 105538,
+   "bytes": 129149,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 70.79,
-    "hurst": 1.062,
+    "hurst": 0.736,
     "kind": "diagonal",
-    "max_correlation": 0.5184,
+    "max_correlation": 0.4787,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.35,
+    "roughness_mm": 2.98,
     "seed": 20260933,
     "torn_edges": [
      "d"
     ],
     "w_mm": 91.62,
-    "wander_mm": 4.93
+    "wander_mm": 3.58
    }
   },
   "assets/tears/tear_030_edge.png": {
-   "bytes": 215827,
+   "bytes": 1081059,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24815,11 +24845,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24874,31 +24904,32 @@
    }
   },
   "assets/tears/tear_031.png": {
-   "bytes": 176579,
+   "bytes": 163340,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 93.76,
-    "hurst": 0.69,
+    "hurst": 0.55,
     "kind": "cut",
-    "max_correlation": 0.456,
+    "max_correlation": 0.4671,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.16,
+    "roughness_mm": 2.86,
     "seed": 20260934,
     "torn_edges": [
      "r"
     ],
     "w_mm": 100.47,
-    "wander_mm": 4.13
+    "wander_mm": 3.02
    }
   },
   "assets/tears/tear_031_edge.png": {
-   "bytes": 381679,
+   "bytes": 2087116,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -24908,11 +24939,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -24967,31 +24998,32 @@
    }
   },
   "assets/tears/tear_032.png": {
-   "bytes": 116731,
+   "bytes": 125277,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 53.5,
-    "hurst": 0.974,
+    "hurst": 0.692,
     "kind": "notepad",
-    "max_correlation": 0.5101,
+    "max_correlation": 0.543,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.65,
+    "roughness_mm": 3.18,
     "seed": 20260935,
     "torn_edges": [
      "t"
     ],
     "w_mm": 101.78,
-    "wander_mm": 4.25
+    "wander_mm": 3.11
    }
   },
   "assets/tears/tear_032_edge.png": {
-   "bytes": 263935,
+   "bytes": 1399480,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25001,11 +25033,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25060,32 +25092,33 @@
    }
   },
   "assets/tears/tear_033.png": {
-   "bytes": 153611,
+   "bytes": 168075,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 43.75,
-    "hurst": 1.044,
+    "hurst": 0.727,
     "kind": "strip",
-    "max_correlation": 0.5013,
+    "max_correlation": 0.5112,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.66,
+    "roughness_mm": 3.18,
     "seed": 20260936,
     "torn_edges": [
      "t",
      "b"
     ],
     "w_mm": 99.94,
-    "wander_mm": 1.56
+    "wander_mm": 1.25
    }
   },
   "assets/tears/tear_033_edge.png": {
-   "bytes": 242273,
+   "bytes": 1241208,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25095,11 +25128,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25154,31 +25187,32 @@
    }
   },
   "assets/tears/tear_034.png": {
-   "bytes": 154950,
+   "bytes": 147399,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 95.82,
-    "hurst": 0.644,
+    "hurst": 0.527,
     "kind": "half",
-    "max_correlation": 0.5206,
+    "max_correlation": 0.5947,
     "px_per_mm": 17.067,
-    "roughness_mm": 0.56,
+    "roughness_mm": 1.84,
     "seed": 20260937,
     "torn_edges": [
      "b"
     ],
     "w_mm": 102.1,
-    "wander_mm": 4.29
+    "wander_mm": 3.13
    }
   },
   "assets/tears/tear_034_edge.png": {
-   "bytes": 386965,
+   "bytes": 2146576,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25188,11 +25222,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25247,32 +25281,33 @@
    }
   },
   "assets/tears/tear_035.png": {
-   "bytes": 132312,
+   "bytes": 148282,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 46.25,
-    "hurst": 0.694,
+    "hurst": 0.552,
     "kind": "corner",
-    "max_correlation": 0.5365,
+    "max_correlation": 0.6349,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.06,
+    "roughness_mm": 2.8,
     "seed": 20260938,
     "torn_edges": [
      "b",
      "l"
     ],
     "w_mm": 57.35,
-    "wander_mm": 4.04
+    "wander_mm": 2.96
    }
   },
   "assets/tears/tear_035_edge.png": {
-   "bytes": 192984,
+   "bytes": 969759,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25282,11 +25317,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25341,16 +25376,16 @@
    }
   },
   "assets/tears/tear_036.png": {
-   "bytes": 174526,
+   "bytes": 193027,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 40.45,
-    "hurst": 0.864,
+    "hurst": 0.637,
     "kind": "rect",
-    "max_correlation": 0.5012,
+    "max_correlation": 0.604,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.95,
+    "roughness_mm": 3.37,
     "seed": 20260939,
     "torn_edges": [
      "t",
@@ -25358,16 +25393,17 @@
      "l"
     ],
     "w_mm": 84.48,
-    "wander_mm": 2.38
+    "wander_mm": 1.82
    }
   },
   "assets/tears/tear_036_edge.png": {
-   "bytes": 225808,
+   "bytes": 1114977,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25377,11 +25413,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25436,16 +25472,16 @@
    }
   },
   "assets/tears/tear_037.png": {
-   "bytes": 155936,
+   "bytes": 160051,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 55.82,
-    "hurst": 0.907,
+    "hurst": 0.658,
     "kind": "three",
-    "max_correlation": 0.4411,
+    "max_correlation": 0.5146,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.41,
+    "roughness_mm": 2.38,
     "seed": 20260940,
     "torn_edges": [
      "t",
@@ -25453,16 +25489,17 @@
      "r"
     ],
     "w_mm": 88.13,
-    "wander_mm": 4.22
+    "wander_mm": 3.08
    }
   },
   "assets/tears/tear_037_edge.png": {
-   "bytes": 267116,
+   "bytes": 1388065,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25472,11 +25509,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25531,31 +25568,32 @@
    }
   },
   "assets/tears/tear_038.png": {
-   "bytes": 122413,
+   "bytes": 128422,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 55.33,
-    "hurst": 0.718,
+    "hurst": 0.564,
     "kind": "diagonal",
-    "max_correlation": 0.5424,
+    "max_correlation": 0.5432,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.19,
+    "roughness_mm": 2.24,
     "seed": 20260941,
     "torn_edges": [
      "d"
     ],
     "w_mm": 102.1,
-    "wander_mm": 2.03
+    "wander_mm": 1.57
    }
   },
   "assets/tears/tear_038_edge.png": {
-   "bytes": 206065,
+   "bytes": 1021117,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25565,11 +25603,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25624,31 +25662,32 @@
    }
   },
   "assets/tears/tear_039.png": {
-   "bytes": 155047,
+   "bytes": 142224,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 99.89,
-    "hurst": 0.886,
+    "hurst": 0.648,
     "kind": "cut",
-    "max_correlation": 0.4708,
+    "max_correlation": 0.4807,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.21,
+    "roughness_mm": 2.89,
     "seed": 20260942,
     "torn_edges": [
      "r"
     ],
     "w_mm": 98.54,
-    "wander_mm": 6.67
+    "wander_mm": 4.77
    }
   },
   "assets/tears/tear_039_edge.png": {
-   "bytes": 390074,
+   "bytes": 2143817,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25658,11 +25697,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25717,31 +25756,32 @@
    }
   },
   "assets/tears/tear_040.png": {
-   "bytes": 122316,
+   "bytes": 170807,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 51.62,
-    "hurst": 0.921,
+    "hurst": 0.666,
     "kind": "notepad",
-    "max_correlation": 0.4556,
+    "max_correlation": 0.5252,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.52,
+    "roughness_mm": 3.09,
     "seed": 20260943,
     "torn_edges": [
      "t"
     ],
     "w_mm": 108.75,
-    "wander_mm": 6.51
+    "wander_mm": 4.66
    }
   },
   "assets/tears/tear_040_edge.png": {
-   "bytes": 275537,
+   "bytes": 1437141,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25751,11 +25791,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25810,32 +25850,33 @@
    }
   },
   "assets/tears/tear_041.png": {
-   "bytes": 167112,
+   "bytes": 167495,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 39.34,
-    "hurst": 0.841,
+    "hurst": 0.626,
     "kind": "strip",
-    "max_correlation": 0.4057,
+    "max_correlation": 0.5145,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.3,
+    "roughness_mm": 2.31,
     "seed": 20260944,
     "torn_edges": [
      "t",
      "b"
     ],
     "w_mm": 100.37,
-    "wander_mm": 5.39
+    "wander_mm": 3.89
    }
   },
   "assets/tears/tear_041_edge.png": {
-   "bytes": 235677,
+   "bytes": 1181742,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25845,11 +25886,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25904,31 +25945,32 @@
    }
   },
   "assets/tears/tear_042.png": {
-   "bytes": 177772,
+   "bytes": 165605,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 65.77,
-    "hurst": 0.911,
+    "hurst": 0.66,
     "kind": "half",
-    "max_correlation": 0.5175,
+    "max_correlation": 0.5892,
     "px_per_mm": 17.067,
-    "roughness_mm": 0.9,
+    "roughness_mm": 2.06,
     "seed": 20260945,
     "torn_edges": [
      "b"
     ],
     "w_mm": 107.65,
-    "wander_mm": 4.11
+    "wander_mm": 3.0
    }
   },
   "assets/tears/tear_042_edge.png": {
-   "bytes": 312315,
+   "bytes": 1669919,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -25938,11 +25980,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -25997,32 +26039,33 @@
    }
   },
   "assets/tears/tear_043.png": {
-   "bytes": 139898,
+   "bytes": 164158,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 60.82,
-    "hurst": 0.634,
+    "hurst": 0.522,
     "kind": "corner",
-    "max_correlation": 0.4486,
+    "max_correlation": 0.4332,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.13,
+    "roughness_mm": 2.2,
     "seed": 20260946,
     "torn_edges": [
      "b",
      "l"
     ],
     "w_mm": 81.96,
-    "wander_mm": 5.83
+    "wander_mm": 4.19
    }
   },
   "assets/tears/tear_043_edge.png": {
-   "bytes": 268584,
+   "bytes": 1388487,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26032,11 +26075,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26091,16 +26134,16 @@
    }
   },
   "assets/tears/tear_044.png": {
-   "bytes": 165759,
+   "bytes": 210223,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 61.98,
-    "hurst": 1.092,
+    "hurst": 0.751,
     "kind": "rect",
-    "max_correlation": 0.426,
+    "max_correlation": 0.4916,
     "px_per_mm": 17.067,
-    "roughness_mm": 0.51,
+    "roughness_mm": 1.81,
     "seed": 20260947,
     "torn_edges": [
      "t",
@@ -26108,16 +26151,17 @@
      "l"
     ],
     "w_mm": 108.11,
-    "wander_mm": 6.99
+    "wander_mm": 5.0
    }
   },
   "assets/tears/tear_044_edge.png": {
-   "bytes": 309795,
+   "bytes": 1643583,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26127,11 +26171,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26186,16 +26230,16 @@
    }
   },
   "assets/tears/tear_045.png": {
-   "bytes": 172650,
+   "bytes": 248293,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 70.42,
-    "hurst": 0.72,
+    "hurst": 0.565,
     "kind": "three",
-    "max_correlation": 0.4853,
+    "max_correlation": 0.6154,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.79,
+    "roughness_mm": 2.63,
     "seed": 20260948,
     "torn_edges": [
      "t",
@@ -26203,16 +26247,17 @@
      "r"
     ],
     "w_mm": 87.35,
-    "wander_mm": 4.17
+    "wander_mm": 3.05
    }
   },
   "assets/tears/tear_045_edge.png": {
-   "bytes": 306609,
+   "bytes": 1599760,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26222,11 +26267,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26281,31 +26326,32 @@
    }
   },
   "assets/tears/tear_046.png": {
-   "bytes": 128459,
+   "bytes": 116793,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 70.82,
-    "hurst": 1.138,
+    "hurst": 0.774,
     "kind": "diagonal",
-    "max_correlation": 0.4842,
+    "max_correlation": 0.3943,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.1,
+    "roughness_mm": 2.83,
     "seed": 20260949,
     "torn_edges": [
      "d"
     ],
     "w_mm": 95.46,
-    "wander_mm": 5.34
+    "wander_mm": 3.85
    }
   },
   "assets/tears/tear_046_edge.png": {
-   "bytes": 232505,
+   "bytes": 1133971,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26315,11 +26361,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26374,31 +26420,32 @@
    }
   },
   "assets/tears/tear_047.png": {
-   "bytes": 189286,
+   "bytes": 164466,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 83.11,
-    "hurst": 0.772,
+    "hurst": 0.591,
     "kind": "cut",
-    "max_correlation": 0.4711,
+    "max_correlation": 0.5171,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.57,
+    "roughness_mm": 2.49,
     "seed": 20260950,
     "torn_edges": [
      "r"
     ],
     "w_mm": 99.52,
-    "wander_mm": 5.62
+    "wander_mm": 4.05
    }
   },
   "assets/tears/tear_047_edge.png": {
-   "bytes": 348361,
+   "bytes": 1893180,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26408,11 +26455,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26467,31 +26514,32 @@
    }
   },
   "assets/tears/tear_048.png": {
-   "bytes": 177494,
+   "bytes": 193515,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 75.68,
-    "hurst": 0.822,
+    "hurst": 0.616,
     "kind": "notepad",
-    "max_correlation": 0.5196,
+    "max_correlation": 0.5723,
     "px_per_mm": 17.067,
-    "roughness_mm": 0.78,
+    "roughness_mm": 1.98,
     "seed": 20260951,
     "torn_edges": [
      "t"
     ],
     "w_mm": 108.95,
-    "wander_mm": 3.88
+    "wander_mm": 2.85
    }
   },
   "assets/tears/tear_048_edge.png": {
-   "bytes": 340702,
+   "bytes": 1850090,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26501,11 +26549,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26560,32 +26608,33 @@
    }
   },
   "assets/tears/tear_049.png": {
-   "bytes": 169635,
+   "bytes": 203842,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 41.66,
-    "hurst": 0.639,
+    "hurst": 0.524,
     "kind": "strip",
-    "max_correlation": 0.433,
+    "max_correlation": 0.5057,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.52,
+    "roughness_mm": 2.45,
     "seed": 20260952,
     "torn_edges": [
      "t",
      "b"
     ],
     "w_mm": 107.42,
-    "wander_mm": 2.85
+    "wander_mm": 2.14
    }
   },
   "assets/tears/tear_049_edge.png": {
-   "bytes": 244271,
+   "bytes": 1255913,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26595,11 +26644,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26654,31 +26703,32 @@
    }
   },
   "assets/tears/tear_050.png": {
-   "bytes": 132260,
+   "bytes": 174323,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 79.94,
-    "hurst": 1.052,
+    "hurst": 0.731,
     "kind": "half",
-    "max_correlation": 0.5208,
+    "max_correlation": 0.5417,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.03,
+    "roughness_mm": 2.14,
     "seed": 20260953,
     "torn_edges": [
      "b"
     ],
     "w_mm": 112.83,
-    "wander_mm": 2.05
+    "wander_mm": 1.58
    }
   },
   "assets/tears/tear_050_edge.png": {
-   "bytes": 354249,
+   "bytes": 1961425,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26688,11 +26738,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26747,32 +26797,33 @@
    }
   },
   "assets/tears/tear_051.png": {
-   "bytes": 102875,
+   "bytes": 131475,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 50.27,
-    "hurst": 1.042,
+    "hurst": 0.726,
     "kind": "corner",
-    "max_correlation": 0.5206,
+    "max_correlation": 0.6293,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.78,
+    "roughness_mm": 3.26,
     "seed": 20260954,
     "torn_edges": [
      "b",
      "l"
     ],
     "w_mm": 55.01,
-    "wander_mm": 4.8
+    "wander_mm": 3.48
    }
   },
   "assets/tears/tear_051_edge.png": {
-   "bytes": 198856,
+   "bytes": 1000871,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26782,11 +26833,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26841,16 +26892,16 @@
    }
   },
   "assets/tears/tear_052.png": {
-   "bytes": 145112,
+   "bytes": 194374,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 48.4,
-    "hurst": 0.641,
+    "hurst": 0.526,
     "kind": "rect",
-    "max_correlation": 0.5107,
+    "max_correlation": 0.5642,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.56,
+    "roughness_mm": 2.48,
     "seed": 20260955,
     "torn_edges": [
      "t",
@@ -26858,16 +26909,17 @@
      "l"
     ],
     "w_mm": 87.65,
-    "wander_mm": 3.34
+    "wander_mm": 2.48
    }
   },
   "assets/tears/tear_052_edge.png": {
-   "bytes": 237418,
+   "bytes": 1230450,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26877,11 +26929,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -26936,16 +26988,16 @@
    }
   },
   "assets/tears/tear_053.png": {
-   "bytes": 169228,
+   "bytes": 264992,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 67.44,
-    "hurst": 0.963,
+    "hurst": 0.687,
     "kind": "three",
-    "max_correlation": 0.4216,
+    "max_correlation": 0.5077,
     "px_per_mm": 17.067,
-    "roughness_mm": 2.33,
+    "roughness_mm": 2.97,
     "seed": 20260956,
     "torn_edges": [
      "t",
@@ -26953,16 +27005,17 @@
      "r"
     ],
     "w_mm": 103.93,
-    "wander_mm": 1.88
+    "wander_mm": 1.47
    }
   },
   "assets/tears/tear_053_edge.png": {
-   "bytes": 325590,
+   "bytes": 1707790,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -26972,11 +27025,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -27031,31 +27084,32 @@
    }
   },
   "assets/tears/tear_054.png": {
-   "bytes": 94251,
+   "bytes": 95372,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 87.99,
-    "hurst": 0.647,
+    "hurst": 0.529,
     "kind": "diagonal",
-    "max_correlation": 0.5035,
+    "max_correlation": 0.4575,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.55,
+    "roughness_mm": 2.47,
     "seed": 20260957,
     "torn_edges": [
      "d"
     ],
     "w_mm": 90.22,
-    "wander_mm": 1.38
+    "wander_mm": 1.12
    }
   },
   "assets/tears/tear_054_edge.png": {
-   "bytes": 255021,
+   "bytes": 1294492,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -27065,11 +27119,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -27124,31 +27178,32 @@
    }
   },
   "assets/tears/tear_055.png": {
-   "bytes": 160470,
+   "bytes": 202146,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 76.76,
-    "hurst": 0.574,
+    "hurst": 0.492,
     "kind": "cut",
-    "max_correlation": 0.5789,
+    "max_correlation": 0.5862,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.01,
+    "roughness_mm": 2.12,
     "seed": 20260958,
     "torn_edges": [
      "r"
     ],
     "w_mm": 103.2,
-    "wander_mm": 2.38
+    "wander_mm": 1.81
    }
   },
   "assets/tears/tear_055_edge.png": {
-   "bytes": 332702,
+   "bytes": 1804395,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -27158,11 +27213,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -27217,31 +27272,32 @@
    }
   },
   "assets/tears/tear_056.png": {
-   "bytes": 179127,
+   "bytes": 221739,
    "generator": "tools/tears/tear.py",
    "kind": "tear_mask",
    "settings": {
     "h_mm": 76.18,
-    "hurst": 0.807,
+    "hurst": 0.609,
     "kind": "notepad",
-    "max_correlation": 0.5081,
+    "max_correlation": 0.4632,
     "px_per_mm": 17.067,
-    "roughness_mm": 1.72,
+    "roughness_mm": 2.58,
     "seed": 20260959,
     "torn_edges": [
      "t"
     ],
     "w_mm": 98.64,
-    "wander_mm": 5.82
+    "wander_mm": 4.18
    }
   },
   "assets/tears/tear_056_edge.png": {
-   "bytes": 335488,
+   "bytes": 1784978,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
     "cockle_mm": 0.4,
     "curl_mm": 1.15,
+    "denoised": true,
     "edge_band_mm": 2.6,
     "fibre_band_mm": 1.4,
     "frame": 1.0,
@@ -27251,11 +27307,11 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -27310,7 +27366,7 @@
    }
   },
   "assets/tears/tears.json": {
-   "bytes": 15031,
+   "bytes": 15038,
    "generator": "tools/tears/tear.py",
    "kind": "index",
    "settings": {

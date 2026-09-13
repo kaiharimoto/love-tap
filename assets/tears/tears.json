@@ -15,9 +15,9 @@
     "t",
     "b"
    ],
-   "roughness_mm": 1.04,
-   "wander_mm": 6.38,
-   "hurst": 0.958,
+   "roughness_mm": 2.15,
+   "wander_mm": 4.57,
+   "hurst": 0.684,
    "px_per_mm": 17.067,
    "id": "tear_001",
    "max_correlation": -1.0
@@ -30,12 +30,12 @@
    "torn_edges": [
     "b"
    ],
-   "roughness_mm": 2.72,
-   "wander_mm": 3.22,
-   "hurst": 0.73,
+   "roughness_mm": 3.22,
+   "wander_mm": 2.4,
+   "hurst": 0.57,
    "px_per_mm": 17.067,
    "id": "tear_002",
-   "max_correlation": 0.3149
+   "max_correlation": 0.3291
   },
   {
    "kind": "corner",
@@ -46,12 +46,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 2.31,
-   "wander_mm": 5.8,
-   "hurst": 0.705,
+   "roughness_mm": 2.96,
+   "wander_mm": 4.17,
+   "hurst": 0.557,
    "px_per_mm": 17.067,
    "id": "tear_003",
-   "max_correlation": 0.3447
+   "max_correlation": 0.3858
   },
   {
    "kind": "rect",
@@ -63,12 +63,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 1.99,
-   "wander_mm": 3.94,
-   "hurst": 0.782,
+   "roughness_mm": 2.75,
+   "wander_mm": 2.89,
+   "hurst": 0.596,
    "px_per_mm": 17.067,
    "id": "tear_004",
-   "max_correlation": 0.3736
+   "max_correlation": 0.3837
   },
   {
    "kind": "three",
@@ -80,12 +80,12 @@
     "b",
     "r"
    ],
-   "roughness_mm": 2.4,
-   "wander_mm": 3.52,
-   "hurst": 0.796,
+   "roughness_mm": 3.02,
+   "wander_mm": 2.6,
+   "hurst": 0.603,
    "px_per_mm": 17.067,
    "id": "tear_005",
-   "max_correlation": 0.424
+   "max_correlation": 0.5351
   },
   {
    "kind": "diagonal",
@@ -95,12 +95,12 @@
    "torn_edges": [
     "d"
    ],
-   "roughness_mm": 0.76,
-   "wander_mm": 2.74,
-   "hurst": 1.007,
+   "roughness_mm": 1.97,
+   "wander_mm": 2.07,
+   "hurst": 0.708,
    "px_per_mm": 17.067,
    "id": "tear_006",
-   "max_correlation": 0.3433
+   "max_correlation": 0.3758
   },
   {
    "kind": "cut",
@@ -110,12 +110,12 @@
    "torn_edges": [
     "r"
    ],
-   "roughness_mm": 2.95,
-   "wander_mm": 5.72,
-   "hurst": 0.556,
+   "roughness_mm": 3.37,
+   "wander_mm": 4.11,
+   "hurst": 0.483,
    "px_per_mm": 17.067,
    "id": "tear_007",
-   "max_correlation": 0.3791
+   "max_correlation": 0.4742
   },
   {
    "kind": "notepad",
@@ -125,12 +125,12 @@
    "torn_edges": [
     "t"
    ],
-   "roughness_mm": 1.91,
-   "wander_mm": 5.89,
-   "hurst": 0.987,
+   "roughness_mm": 2.7,
+   "wander_mm": 4.23,
+   "hurst": 0.698,
    "px_per_mm": 17.067,
    "id": "tear_008",
-   "max_correlation": 0.4155
+   "max_correlation": 0.5166
   },
   {
    "kind": "strip",
@@ -141,12 +141,12 @@
     "t",
     "b"
    ],
-   "roughness_mm": 2.01,
-   "wander_mm": 6.9,
-   "hurst": 0.575,
+   "roughness_mm": 2.76,
+   "wander_mm": 4.93,
+   "hurst": 0.493,
    "px_per_mm": 17.067,
    "id": "tear_009",
-   "max_correlation": 0.3931
+   "max_correlation": 0.4407
   },
   {
    "kind": "half",
@@ -156,12 +156,12 @@
    "torn_edges": [
     "b"
    ],
-   "roughness_mm": 1.24,
-   "wander_mm": 4.37,
-   "hurst": 0.67,
+   "roughness_mm": 2.28,
+   "wander_mm": 3.18,
+   "hurst": 0.54,
    "px_per_mm": 17.067,
    "id": "tear_010",
-   "max_correlation": 0.4125
+   "max_correlation": 0.4665
   },
   {
    "kind": "corner",
@@ -172,12 +172,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 2.41,
-   "wander_mm": 6.54,
-   "hurst": 0.931,
+   "roughness_mm": 3.02,
+   "wander_mm": 4.68,
+   "hurst": 0.67,
    "px_per_mm": 17.067,
    "id": "tear_011",
-   "max_correlation": 0.4293
+   "max_correlation": 0.4792
   },
   {
    "kind": "rect",
@@ -189,12 +189,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 0.98,
-   "wander_mm": 4.95,
-   "hurst": 0.698,
+   "roughness_mm": 2.11,
+   "wander_mm": 3.59,
+   "hurst": 0.554,
    "px_per_mm": 17.067,
    "id": "tear_012",
-   "max_correlation": 0.4471
+   "max_correlation": 0.5132
   },
   {
    "kind": "three",
@@ -206,12 +206,12 @@
     "b",
     "r"
    ],
-   "roughness_mm": 1.76,
-   "wander_mm": 3.1,
-   "hurst": 0.651,
+   "roughness_mm": 2.6,
+   "wander_mm": 2.31,
+   "hurst": 0.531,
    "px_per_mm": 17.067,
    "id": "tear_013",
-   "max_correlation": 0.4798
+   "max_correlation": 0.6019
   },
   {
    "kind": "diagonal",
@@ -221,12 +221,12 @@
    "torn_edges": [
     "d"
    ],
-   "roughness_mm": 1.5,
-   "wander_mm": 4.8,
-   "hurst": 0.589,
+   "roughness_mm": 2.44,
+   "wander_mm": 3.48,
+   "hurst": 0.499,
    "px_per_mm": 17.067,
    "id": "tear_014",
-   "max_correlation": 0.4615
+   "max_correlation": 0.4476
   },
   {
    "kind": "cut",
@@ -236,12 +236,12 @@
    "torn_edges": [
     "r"
    ],
-   "roughness_mm": 2.74,
-   "wander_mm": 6.6,
-   "hurst": 1.134,
+   "roughness_mm": 3.23,
+   "wander_mm": 4.72,
+   "hurst": 0.772,
    "px_per_mm": 17.067,
    "id": "tear_015",
-   "max_correlation": 0.4741
+   "max_correlation": 0.5332
   },
   {
    "kind": "notepad",
@@ -251,12 +251,12 @@
    "torn_edges": [
     "t"
    ],
-   "roughness_mm": 2.39,
-   "wander_mm": 5.74,
-   "hurst": 1.142,
+   "roughness_mm": 3.01,
+   "wander_mm": 4.13,
+   "hurst": 0.776,
    "px_per_mm": 17.067,
    "id": "tear_016",
-   "max_correlation": 0.4136
+   "max_correlation": 0.4979
   },
   {
    "kind": "strip",
@@ -267,12 +267,12 @@
     "t",
     "b"
    ],
-   "roughness_mm": 1.68,
-   "wander_mm": 3.36,
-   "hurst": 1.101,
+   "roughness_mm": 2.55,
+   "wander_mm": 2.49,
+   "hurst": 0.756,
    "px_per_mm": 17.067,
    "id": "tear_017",
-   "max_correlation": 0.4691
+   "max_correlation": 0.5729
   },
   {
    "kind": "half",
@@ -282,12 +282,12 @@
    "torn_edges": [
     "b"
    ],
-   "roughness_mm": 1.71,
-   "wander_mm": 3.02,
-   "hurst": 0.893,
+   "roughness_mm": 2.57,
+   "wander_mm": 2.25,
+   "hurst": 0.651,
    "px_per_mm": 17.067,
    "id": "tear_018",
-   "max_correlation": 0.485
+   "max_correlation": 0.5199
   },
   {
    "kind": "corner",
@@ -298,12 +298,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 1.36,
-   "wander_mm": 5.0,
-   "hurst": 0.925,
+   "roughness_mm": 2.35,
+   "wander_mm": 3.62,
+   "hurst": 0.668,
    "px_per_mm": 17.067,
    "id": "tear_019",
-   "max_correlation": 0.4659
+   "max_correlation": 0.4527
   },
   {
    "kind": "rect",
@@ -315,12 +315,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 2.63,
-   "wander_mm": 2.45,
-   "hurst": 0.73,
+   "roughness_mm": 3.16,
+   "wander_mm": 1.86,
+   "hurst": 0.57,
    "px_per_mm": 17.067,
    "id": "tear_020",
-   "max_correlation": 0.464
+   "max_correlation": 0.5233
   },
   {
    "kind": "three",
@@ -332,12 +332,12 @@
     "b",
     "r"
    ],
-   "roughness_mm": 2.12,
-   "wander_mm": 4.22,
-   "hurst": 0.575,
+   "roughness_mm": 2.84,
+   "wander_mm": 3.08,
+   "hurst": 0.493,
    "px_per_mm": 17.067,
    "id": "tear_021",
-   "max_correlation": 0.5496
+   "max_correlation": 0.6153
   },
   {
    "kind": "diagonal",
@@ -347,12 +347,12 @@
    "torn_edges": [
     "d"
    ],
-   "roughness_mm": 1.68,
-   "wander_mm": 3.66,
-   "hurst": 0.856,
+   "roughness_mm": 2.56,
+   "wander_mm": 2.69,
+   "hurst": 0.633,
    "px_per_mm": 17.067,
    "id": "tear_022",
-   "max_correlation": 0.4974
+   "max_correlation": 0.4167
   },
   {
    "kind": "cut",
@@ -362,12 +362,12 @@
    "torn_edges": [
     "r"
    ],
-   "roughness_mm": 2.02,
-   "wander_mm": 5.8,
-   "hurst": 1.133,
+   "roughness_mm": 2.78,
+   "wander_mm": 4.17,
+   "hurst": 0.771,
    "px_per_mm": 17.067,
    "id": "tear_023",
-   "max_correlation": 0.5603
+   "max_correlation": 0.4626
   },
   {
    "kind": "notepad",
@@ -377,12 +377,12 @@
    "torn_edges": [
     "t"
    ],
-   "roughness_mm": 0.62,
-   "wander_mm": 6.41,
-   "hurst": 0.565,
+   "roughness_mm": 1.87,
+   "wander_mm": 4.59,
+   "hurst": 0.487,
    "px_per_mm": 17.067,
    "id": "tear_024",
-   "max_correlation": 0.4955
+   "max_correlation": 0.5479
   },
   {
    "kind": "strip",
@@ -393,12 +393,12 @@
     "t",
     "b"
    ],
-   "roughness_mm": 1.3,
-   "wander_mm": 3.66,
-   "hurst": 1.016,
+   "roughness_mm": 2.31,
+   "wander_mm": 2.7,
+   "hurst": 0.713,
    "px_per_mm": 17.067,
    "id": "tear_025",
-   "max_correlation": 0.4859
+   "max_correlation": 0.5506
   },
   {
    "kind": "half",
@@ -408,12 +408,12 @@
    "torn_edges": [
     "b"
    ],
-   "roughness_mm": 1.79,
-   "wander_mm": 1.72,
-   "hurst": 0.551,
+   "roughness_mm": 2.62,
+   "wander_mm": 1.36,
+   "hurst": 0.48,
    "px_per_mm": 17.067,
    "id": "tear_026",
-   "max_correlation": 0.4995
+   "max_correlation": 0.5379
   },
   {
    "kind": "corner",
@@ -424,12 +424,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 1.26,
-   "wander_mm": 3.11,
-   "hurst": 0.644,
+   "roughness_mm": 2.28,
+   "wander_mm": 2.32,
+   "hurst": 0.527,
    "px_per_mm": 17.067,
    "id": "tear_027",
-   "max_correlation": 0.5364
+   "max_correlation": 0.5406
   },
   {
    "kind": "rect",
@@ -441,12 +441,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 2.41,
-   "wander_mm": 5.72,
-   "hurst": 0.618,
+   "roughness_mm": 3.02,
+   "wander_mm": 4.11,
+   "hurst": 0.514,
    "px_per_mm": 17.067,
    "id": "tear_028",
-   "max_correlation": 0.3844
+   "max_correlation": 0.5083
   },
   {
    "kind": "three",
@@ -458,12 +458,12 @@
     "b",
     "r"
    ],
-   "roughness_mm": 1.62,
-   "wander_mm": 2.75,
-   "hurst": 0.986,
+   "roughness_mm": 2.52,
+   "wander_mm": 2.07,
+   "hurst": 0.698,
    "px_per_mm": 17.067,
    "id": "tear_029",
-   "max_correlation": 0.4815
+   "max_correlation": 0.5642
   },
   {
    "kind": "diagonal",
@@ -473,12 +473,12 @@
    "torn_edges": [
     "d"
    ],
-   "roughness_mm": 2.35,
-   "wander_mm": 4.93,
-   "hurst": 1.062,
+   "roughness_mm": 2.98,
+   "wander_mm": 3.58,
+   "hurst": 0.736,
    "px_per_mm": 17.067,
    "id": "tear_030",
-   "max_correlation": 0.5184
+   "max_correlation": 0.4787
   },
   {
    "kind": "cut",
@@ -488,12 +488,12 @@
    "torn_edges": [
     "r"
    ],
-   "roughness_mm": 2.16,
-   "wander_mm": 4.13,
-   "hurst": 0.69,
+   "roughness_mm": 2.86,
+   "wander_mm": 3.02,
+   "hurst": 0.55,
    "px_per_mm": 17.067,
    "id": "tear_031",
-   "max_correlation": 0.456
+   "max_correlation": 0.4671
   },
   {
    "kind": "notepad",
@@ -503,12 +503,12 @@
    "torn_edges": [
     "t"
    ],
-   "roughness_mm": 2.65,
-   "wander_mm": 4.25,
-   "hurst": 0.974,
+   "roughness_mm": 3.18,
+   "wander_mm": 3.11,
+   "hurst": 0.692,
    "px_per_mm": 17.067,
    "id": "tear_032",
-   "max_correlation": 0.5101
+   "max_correlation": 0.543
   },
   {
    "kind": "strip",
@@ -519,12 +519,12 @@
     "t",
     "b"
    ],
-   "roughness_mm": 2.66,
-   "wander_mm": 1.56,
-   "hurst": 1.044,
+   "roughness_mm": 3.18,
+   "wander_mm": 1.25,
+   "hurst": 0.727,
    "px_per_mm": 17.067,
    "id": "tear_033",
-   "max_correlation": 0.5013
+   "max_correlation": 0.5112
   },
   {
    "kind": "half",
@@ -534,12 +534,12 @@
    "torn_edges": [
     "b"
    ],
-   "roughness_mm": 0.56,
-   "wander_mm": 4.29,
-   "hurst": 0.644,
+   "roughness_mm": 1.84,
+   "wander_mm": 3.13,
+   "hurst": 0.527,
    "px_per_mm": 17.067,
    "id": "tear_034",
-   "max_correlation": 0.5206
+   "max_correlation": 0.5947
   },
   {
    "kind": "corner",
@@ -550,12 +550,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 2.06,
-   "wander_mm": 4.04,
-   "hurst": 0.694,
+   "roughness_mm": 2.8,
+   "wander_mm": 2.96,
+   "hurst": 0.552,
    "px_per_mm": 17.067,
    "id": "tear_035",
-   "max_correlation": 0.5365
+   "max_correlation": 0.6349
   },
   {
    "kind": "rect",
@@ -567,12 +567,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 2.95,
-   "wander_mm": 2.38,
-   "hurst": 0.864,
+   "roughness_mm": 3.37,
+   "wander_mm": 1.82,
+   "hurst": 0.637,
    "px_per_mm": 17.067,
    "id": "tear_036",
-   "max_correlation": 0.5012
+   "max_correlation": 0.604
   },
   {
    "kind": "three",
@@ -584,12 +584,12 @@
     "b",
     "r"
    ],
-   "roughness_mm": 1.41,
-   "wander_mm": 4.22,
-   "hurst": 0.907,
+   "roughness_mm": 2.38,
+   "wander_mm": 3.08,
+   "hurst": 0.658,
    "px_per_mm": 17.067,
    "id": "tear_037",
-   "max_correlation": 0.4411
+   "max_correlation": 0.5146
   },
   {
    "kind": "diagonal",
@@ -599,12 +599,12 @@
    "torn_edges": [
     "d"
    ],
-   "roughness_mm": 1.19,
-   "wander_mm": 2.03,
-   "hurst": 0.718,
+   "roughness_mm": 2.24,
+   "wander_mm": 1.57,
+   "hurst": 0.564,
    "px_per_mm": 17.067,
    "id": "tear_038",
-   "max_correlation": 0.5424
+   "max_correlation": 0.5432
   },
   {
    "kind": "cut",
@@ -614,12 +614,12 @@
    "torn_edges": [
     "r"
    ],
-   "roughness_mm": 2.21,
-   "wander_mm": 6.67,
-   "hurst": 0.886,
+   "roughness_mm": 2.89,
+   "wander_mm": 4.77,
+   "hurst": 0.648,
    "px_per_mm": 17.067,
    "id": "tear_039",
-   "max_correlation": 0.4708
+   "max_correlation": 0.4807
   },
   {
    "kind": "notepad",
@@ -629,12 +629,12 @@
    "torn_edges": [
     "t"
    ],
-   "roughness_mm": 2.52,
-   "wander_mm": 6.51,
-   "hurst": 0.921,
+   "roughness_mm": 3.09,
+   "wander_mm": 4.66,
+   "hurst": 0.666,
    "px_per_mm": 17.067,
    "id": "tear_040",
-   "max_correlation": 0.4556
+   "max_correlation": 0.5252
   },
   {
    "kind": "strip",
@@ -645,12 +645,12 @@
     "t",
     "b"
    ],
-   "roughness_mm": 1.3,
-   "wander_mm": 5.39,
-   "hurst": 0.841,
+   "roughness_mm": 2.31,
+   "wander_mm": 3.89,
+   "hurst": 0.626,
    "px_per_mm": 17.067,
    "id": "tear_041",
-   "max_correlation": 0.4057
+   "max_correlation": 0.5145
   },
   {
    "kind": "half",
@@ -660,12 +660,12 @@
    "torn_edges": [
     "b"
    ],
-   "roughness_mm": 0.9,
-   "wander_mm": 4.11,
-   "hurst": 0.911,
+   "roughness_mm": 2.06,
+   "wander_mm": 3.0,
+   "hurst": 0.66,
    "px_per_mm": 17.067,
    "id": "tear_042",
-   "max_correlation": 0.5175
+   "max_correlation": 0.5892
   },
   {
    "kind": "corner",
@@ -676,12 +676,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 1.13,
-   "wander_mm": 5.83,
-   "hurst": 0.634,
+   "roughness_mm": 2.2,
+   "wander_mm": 4.19,
+   "hurst": 0.522,
    "px_per_mm": 17.067,
    "id": "tear_043",
-   "max_correlation": 0.4486
+   "max_correlation": 0.4332
   },
   {
    "kind": "rect",
@@ -693,12 +693,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 0.51,
-   "wander_mm": 6.99,
-   "hurst": 1.092,
+   "roughness_mm": 1.81,
+   "wander_mm": 5.0,
+   "hurst": 0.751,
    "px_per_mm": 17.067,
    "id": "tear_044",
-   "max_correlation": 0.426
+   "max_correlation": 0.4916
   },
   {
    "kind": "three",
@@ -710,12 +710,12 @@
     "b",
     "r"
    ],
-   "roughness_mm": 1.79,
-   "wander_mm": 4.17,
-   "hurst": 0.72,
+   "roughness_mm": 2.63,
+   "wander_mm": 3.05,
+   "hurst": 0.565,
    "px_per_mm": 17.067,
    "id": "tear_045",
-   "max_correlation": 0.4853
+   "max_correlation": 0.6154
   },
   {
    "kind": "diagonal",
@@ -725,12 +725,12 @@
    "torn_edges": [
     "d"
    ],
-   "roughness_mm": 2.1,
-   "wander_mm": 5.34,
-   "hurst": 1.138,
+   "roughness_mm": 2.83,
+   "wander_mm": 3.85,
+   "hurst": 0.774,
    "px_per_mm": 17.067,
    "id": "tear_046",
-   "max_correlation": 0.4842
+   "max_correlation": 0.3943
   },
   {
    "kind": "cut",
@@ -740,12 +740,12 @@
    "torn_edges": [
     "r"
    ],
-   "roughness_mm": 1.57,
-   "wander_mm": 5.62,
-   "hurst": 0.772,
+   "roughness_mm": 2.49,
+   "wander_mm": 4.05,
+   "hurst": 0.591,
    "px_per_mm": 17.067,
    "id": "tear_047",
-   "max_correlation": 0.4711
+   "max_correlation": 0.5171
   },
   {
    "kind": "notepad",
@@ -755,12 +755,12 @@
    "torn_edges": [
     "t"
    ],
-   "roughness_mm": 0.78,
-   "wander_mm": 3.88,
-   "hurst": 0.822,
+   "roughness_mm": 1.98,
+   "wander_mm": 2.85,
+   "hurst": 0.616,
    "px_per_mm": 17.067,
    "id": "tear_048",
-   "max_correlation": 0.5196
+   "max_correlation": 0.5723
   },
   {
    "kind": "strip",
@@ -771,12 +771,12 @@
     "t",
     "b"
    ],
-   "roughness_mm": 1.52,
-   "wander_mm": 2.85,
-   "hurst": 0.639,
+   "roughness_mm": 2.45,
+   "wander_mm": 2.14,
+   "hurst": 0.524,
    "px_per_mm": 17.067,
    "id": "tear_049",
-   "max_correlation": 0.433
+   "max_correlation": 0.5057
   },
   {
    "kind": "half",
@@ -786,12 +786,12 @@
    "torn_edges": [
     "b"
    ],
-   "roughness_mm": 1.03,
-   "wander_mm": 2.05,
-   "hurst": 1.052,
+   "roughness_mm": 2.14,
+   "wander_mm": 1.58,
+   "hurst": 0.731,
    "px_per_mm": 17.067,
    "id": "tear_050",
-   "max_correlation": 0.5208
+   "max_correlation": 0.5417
   },
   {
    "kind": "corner",
@@ -802,12 +802,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 2.78,
-   "wander_mm": 4.8,
-   "hurst": 1.042,
+   "roughness_mm": 3.26,
+   "wander_mm": 3.48,
+   "hurst": 0.726,
    "px_per_mm": 17.067,
    "id": "tear_051",
-   "max_correlation": 0.5206
+   "max_correlation": 0.6293
   },
   {
    "kind": "rect",
@@ -819,12 +819,12 @@
     "b",
     "l"
    ],
-   "roughness_mm": 1.56,
-   "wander_mm": 3.34,
-   "hurst": 0.641,
+   "roughness_mm": 2.48,
+   "wander_mm": 2.48,
+   "hurst": 0.526,
    "px_per_mm": 17.067,
    "id": "tear_052",
-   "max_correlation": 0.5107
+   "max_correlation": 0.5642
   },
   {
    "kind": "three",
@@ -836,12 +836,12 @@
     "b",
     "r"
    ],
-   "roughness_mm": 2.33,
-   "wander_mm": 1.88,
-   "hurst": 0.963,
+   "roughness_mm": 2.97,
+   "wander_mm": 1.47,
+   "hurst": 0.687,
    "px_per_mm": 17.067,
    "id": "tear_053",
-   "max_correlation": 0.4216
+   "max_correlation": 0.5077
   },
   {
    "kind": "diagonal",
@@ -851,12 +851,12 @@
    "torn_edges": [
     "d"
    ],
-   "roughness_mm": 1.55,
-   "wander_mm": 1.38,
-   "hurst": 0.647,
+   "roughness_mm": 2.47,
+   "wander_mm": 1.12,
+   "hurst": 0.529,
    "px_per_mm": 17.067,
    "id": "tear_054",
-   "max_correlation": 0.5035
+   "max_correlation": 0.4575
   },
   {
    "kind": "cut",
@@ -866,12 +866,12 @@
    "torn_edges": [
     "r"
    ],
-   "roughness_mm": 1.01,
-   "wander_mm": 2.38,
-   "hurst": 0.574,
+   "roughness_mm": 2.12,
+   "wander_mm": 1.81,
+   "hurst": 0.492,
    "px_per_mm": 17.067,
    "id": "tear_055",
-   "max_correlation": 0.5789
+   "max_correlation": 0.5862
   },
   {
    "kind": "notepad",
@@ -881,12 +881,12 @@
    "torn_edges": [
     "t"
    ],
-   "roughness_mm": 1.72,
-   "wander_mm": 5.82,
-   "hurst": 0.807,
+   "roughness_mm": 2.58,
+   "wander_mm": 4.18,
+   "hurst": 0.609,
    "px_per_mm": 17.067,
    "id": "tear_056",
-   "max_correlation": 0.5081
+   "max_correlation": 0.4632
   }
  ]
 }
