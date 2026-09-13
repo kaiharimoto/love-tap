@@ -4,7 +4,7 @@
     "width": 480,
     "height": 1040,
     "dpr": 3,
-    "why": "480 by 1040 of CSS at three times scale. Shooting these at 360 by 780 at four times scale was tried for one capture \u2014 same 1440 by 3120, and a width both phones actually have \u2014 and it broke the hero: the brief asks for at least eight notes visible in 02_chat.png with no tear id repeated, and a 360 point thread has a 501 point viewport that holds four. At 480 it holds eight, five of them on torn sheets, five distinct. The phone's width is where the five clips are shot and is what found the truncations and the wrong module row costs this cycle \u2014 those fixes all stay \u2014 but the still that the material row is judged on at three hundred per cent has to hold what the brief asks it to hold."
+    "why": "480 by 1040 of CSS at three times scale. Shooting these at 360 by 780 at four times scale was tried for one capture — same 1440 by 3120, and a width both phones actually have — and it broke the hero: a 360 point thread has a 501 point viewport that holds four rows. At 480 it holds more, and how many more depends on what is in them.\n\nThis sentence used to end 'At 480 it holds eight, five of them on torn sheets, five distinct', and the thirteenth cycle's completeness pass caught it: this capture's hero holds five rows, three of them whole on the glass, on five distinct tears. Eight was true of a framing with no photograph in it. A photograph is 393 logical points tall against a 784 point viewport, so one of them costs three short sheets — tools/check/tears.py has carried that arithmetic and its own count of five since the thirteenth capture, and the number in this file was simply older. The brief asks for at least eight notes with no tear id repeated; what the set delivers is five, none repeated, with a photograph and a voice note among them, and the gap is written down rather than framed away.\n\nThe phone's width is where the five clips are shot, and it is what found the truncated standing line and the wrong module row costs; those fixes stay."
   },
   "settle": 700,
   "log": "evidence/logs/13_messenger_states.json",
@@ -46,7 +46,7 @@
     },
     {
       "do": "far",
-      "arg": "edit make that the 7:10 \u2014 they moved it",
+      "arg": "edit make that the 7:10 — they moved it",
       "why": "Changing a message after it has gone is one of the eleven capabilities this artifact enumerates and a messenger critic found it in no artifact in the set. Changed on the phone that wrote it, so the near phone is showing an edit rather than making one."
     },
     {
@@ -58,7 +58,7 @@
     },
     {
       "do": "far",
-      "arg": "reply yes \u2014 the tin one, by the door",
+      "arg": "reply yes — the tin one, by the door",
       "why": "A reply that crossed the wire, so the strip quoting the row it answers is a delivered reply rather than the composer holding one."
     },
     {
@@ -122,7 +122,7 @@
     },
     {
       "do": "stage",
-      "why": "Last, and nothing slow after it. Two of the states it stages are transient by definition \u2014 one push genuinely in flight, one row genuinely sitting in the outbox \u2014 and the fourteenth capture put thirty-five seconds of typing frames and a slow send between the staging and the shutter: both had resolved to `sent` by the time the picture was taken, and the artifact named for the five states carried two of them."
+      "why": "Last, and nothing slow after it. Two of the states it stages are transient by definition — one push genuinely in flight, one row genuinely sitting in the outbox — and the fourteenth capture put thirty-five seconds of typing frames and a slow send between the staging and the shutter: both had resolved to `sent` by the time the picture was taken, and the artifact named for the five states carried two of them."
     },
     {
       "do": "scrollTo",

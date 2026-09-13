@@ -1,31 +1,31 @@
 {
- "name": "dusk_pulse",
- "viewport": {
-  "width": 480,
-  "height": 1040,
-  "dpr": 3,
-  "why": "480 by 1040 of CSS at three times scale. Shooting these at 360 by 780 at four times scale was tried for one capture \u2014 same 1440 by 3120, and a width both phones actually have \u2014 and it broke the hero: the brief asks for at least eight notes visible in 02_chat.png with no tear id repeated, and a 360 point thread has a 501 point viewport that holds four. At 480 it holds eight, five of them on torn sheets, five distinct. The phone's width is where the five clips are shot and is what found the truncations and the wrong module row costs this cycle \u2014 those fixes all stay \u2014 but the still that the material row is judged on at three hundred per cent has to hold what the brief asks it to hold."
- },
- "settle": 700,
- "log": "evidence/logs/dusk_pulse.json",
- "steps": [
-  {
-   "do": "goTo",
-   "arg": 0
+  "name": "dusk_pulse",
+  "viewport": {
+    "width": 480,
+    "height": 1040,
+    "dpr": 3,
+    "why": "480 by 1040 of CSS at three times scale. Shooting these at 360 by 780 at four times scale was tried for one capture — same 1440 by 3120, and a width both phones actually have — and it broke the hero: a 360 point thread has a 501 point viewport that holds four rows. At 480 it holds more, and how many more depends on what is in them.\n\nThis sentence used to end 'At 480 it holds eight, five of them on torn sheets, five distinct', and the thirteenth cycle's completeness pass caught it: this capture's hero holds five rows, three of them whole on the glass, on five distinct tears. Eight was true of a framing with no photograph in it. A photograph is 393 logical points tall against a 784 point viewport, so one of them costs three short sheets — tools/check/tears.py has carried that arithmetic and its own count of five since the thirteenth capture, and the number in this file was simply older. The brief asks for at least eight notes with no tear id repeated; what the set delivers is five, none repeated, with a photograph and a voice note among them, and the gap is written down rather than framed away.\n\nThe phone's width is where the five clips are shot, and it is what found the truncated standing line and the wrong module row costs; those fixes stay."
   },
-  {
-   "do": "wait",
-   "ms": 1600
-  },
-  {
-   "do": "shot",
-   "out": "evidence/crops/dusk_pulse.png",
-   "settle": 900
-  },
-  {
-   "do": "report",
-   "out": "evidence/logs/dusk_pulse.report.json",
-   "at": "crops/dusk_pulse.png"
-  }
- ]
+  "settle": 700,
+  "log": "evidence/logs/dusk_pulse.json",
+  "steps": [
+    {
+      "do": "goTo",
+      "arg": 0
+    },
+    {
+      "do": "wait",
+      "ms": 1600
+    },
+    {
+      "do": "shot",
+      "out": "evidence/crops/dusk_pulse.png",
+      "settle": 900
+    },
+    {
+      "do": "report",
+      "out": "evidence/logs/dusk_pulse.report.json",
+      "at": "crops/dusk_pulse.png"
+    }
+  ]
 }

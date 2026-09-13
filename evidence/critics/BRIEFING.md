@@ -116,11 +116,17 @@ disagrees with that number on a clip, say so and say where — the check is a fl
 1040 of CSS at three times scale; the five clips and the reception scene are 360 by 780 and 400 by
 880 at the same three times. Every one of them is the 1440 by 3120 the brief asks for.
 
-Shooting the stills at 360 as well was tried for one capture and reverted: the brief asks for at
-least eight notes visible in 02_chat.png with no tear id repeated, and a 360 point thread has a 501
-point viewport that holds four. The still the material row is judged on at three hundred per cent
-has to hold what the brief asks it to hold, so it is shot where it does. The clips stay at the
-phone's own width, which is where the truncations and the wrong module row costs were found.
+Shooting the stills at 360 as well was tried for one capture and reverted: a 360 point thread has a
+501 point viewport that holds four rows, and the still the material row is judged on at three
+hundred per cent has to hold more than that. The clips stay at the phone's own width, which is where
+the truncated standing line and the wrong module row costs were found.
+
+**What 480 actually holds, since this paragraph used to overstate it.** The brief asks for at least
+eight notes in 02_chat.png with no tear id repeated. This capture's hero holds five rows, three of
+them whole on the glass, on five distinct tears. Eight was true of a framing with no photograph in
+it; a photograph is 393 logical points tall against a 784 point viewport, so one costs three short
+sheets. The shortfall is real and is said here rather than framed away — `logs/02_chat.report.json`
+is the record.
 
 This paragraph said the opposite for one cycle — that the stills were 360 at four times scale — and
 no scene file agreed with it. A coherence critic caught it. **Where a row reads differently in a
