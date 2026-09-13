@@ -103,13 +103,13 @@
   "218x126 of it, at its own size",
   27548.18181818182
  ],
- "paper_at_its_own_size": 32,
+ "paper_at_its_own_size": 31,
  "paper_stretched_to_fit": 3,
  "stocks_the_paper_had_not_arrived_for": [],
  "paper_that_arrived_after_the_piece_was_drawn": 13,
  "tears_that_had_not_arrived": {},
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 130,
+ "masks_dropped_to_stay_inside_the_pool": 108,
  "stocks_held": 14,
  "stocks_held_bytes": 205107120,
  "stocks_dropped_to_stay_inside_the_pool": 0,
@@ -128,12 +128,12 @@
  "asked_a_motor_for": [],
  "the_launch_took": {
   "the framework": 6,
-  "the library index": 13,
-  "the ink plates": 26,
-  "the desk": 97,
-  "the log": 437,
-  "the first frame": 219,
-  "everything": 798
+  "the library index": 18,
+  "the ink plates": 25,
+  "the desk": 118,
+  "the log": 481,
+  "the first frame": 280,
+  "everything": 928
  },
  "sync": {
   "transport": "local",
@@ -156,7 +156,7 @@
    "peer_cursor": null,
    "our_cursor": 14061,
    "last_error": null,
-   "since": "2026-09-13T03:32:53.512Z",
+   "since": "2026-09-13T10:04:20.212Z",
    "last_contact": null,
    "certificate": null,
    "setup_address": null
@@ -170,6 +170,7 @@
   "what_each_surface_may_say": {
    "standing_line": "their state, in the couple's own words, assembled here from the log",
    "pocket": "the feeling's own name and its sound, because the app is running and has it",
+   "and_the_pocket_here_is": "this is a PWA and iOS will not let one vibrate, so the rhythm is carried by the feeling's own sound and by the page itself moving under it — feelings/sensation.dart, the same segments the motor would have been given. `pocket_feeling` and `pocket_at` above are what it last played and when, and `asked_a_motor_for` is every pattern it asked for. A held list that is empty after the app has been opened is the surface working: the app clears what the phone was holding the moment somebody looks at it.",
    "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
   },
   "held_by_the_phone": [],
