@@ -11,21 +11,21 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2567,
+   "ms": 2517,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3654
+   "ms": 3700
   },
   {
    "do": "wait",
-   "ms": 2119
+   "ms": 2103
   },
   {
    "do": "shot",
-   "ms": 32978
+   "ms": 32961
   },
   {
    "do": "report",
@@ -101,7 +101,7 @@
     "266x126 of it, at its own size",
     33602.72727272727
    ],
-   "paper_at_its_own_size": 75,
+   "paper_at_its_own_size": 78,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "sticky_blue_02"
@@ -127,18 +127,18 @@
    "sensation": null,
    "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 8,
-    "the library index": 18,
-    "the ink plates": 40,
-    "the desk": 152,
-    "the log": 597,
-    "the first frame": 361,
-    "everything": 1176
+    "the framework": 7,
+    "the library index": 21,
+    "the ink plates": 34,
+    "the desk": 143,
+    "the log": 603,
+    "the first frame": 350,
+    "everything": 1158
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 2,
+    "rounds": 1,
     "pushed": 0,
     "refused": 0,
     "pulled": 0,
@@ -156,8 +156,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-12T21:15:51.470Z",
-     "last_contact": "2026-09-12T21:16:31.500Z",
+     "since": "2026-09-13T01:43:30.843Z",
+     "last_contact": "2026-09-13T01:43:50.862Z",
      "certificate": null,
      "setup_address": null
     }
@@ -187,19 +187,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2356,
+ "cold_ms": 2341,
  "load": {
-  "ms": 2356,
+  "ms": 2341,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 8,
-   "the library index": 18,
-   "the ink plates": 40,
-   "the desk": 152,
-   "the log": 597,
-   "the first frame": 361,
-   "everything": 1176
+   "the framework": 7,
+   "the library index": 21,
+   "the ink plates": 34,
+   "the desk": 143,
+   "the log": 603,
+   "the first frame": 350,
+   "everything": 1158
   }
  },
  "problems": [],

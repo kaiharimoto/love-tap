@@ -1,8 +1,8 @@
 {
  "dir": "/tmp/lovetap-capture/08_state_propagating",
- "frames": 713,
+ "frames": 691,
  "fps": 62.5,
- "seconds": 11.41,
+ "seconds": 11.06,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
@@ -37,12 +37,12 @@
    "dir": "evidence/frames/08_state_propagating"
   },
   {
-   "frames": 26,
-   "step_ms": 48,
+   "frames": 9,
+   "step_ms": 144,
    "dir": "evidence/frames/08_state_propagating"
   },
   {
-   "frames": 24,
+   "frames": 19,
    "step_ms": 16,
    "dir": "evidence/frames/08_state_propagating"
   },
@@ -59,12 +59,12 @@
   375,
   531,
   638,
-  664,
-  688
+  647,
+  666
  ],
- "app_seconds": 12.24,
- "playback_over_app_time": 0.932,
- "mean_change_per_frame": 3.36673,
+ "app_seconds": 12.21,
+ "playback_over_app_time": 0.906,
+ "mean_change_per_frame": 3.53082,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -73,54 +73,48 @@
    "busiest_32px_tile_mean_change_below": 2.0
   },
   "worst_moving_frame": {
-   "frame": 649,
+   "frame": 643,
    "mean": 0.0051,
    "visible_share": 5.1e-05,
    "busiest_tile": 12.4744,
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },
- "repeated_frames": 26,
- "repeated_fraction": 0.037,
- "longest_still_run": 23,
- "repeated_at": [
-  649,
-  657,
-  660,
-  665,
-  666,
-  667,
-  668,
-  669,
-  670,
-  671,
-  672,
-  673,
-  674,
-  675,
-  676,
-  677,
-  678,
-  679,
-  680,
-  681,
-  682,
-  683,
-  684,
-  685,
-  686,
-  687
+ "repeated_frames": 0,
+ "repeated_fraction": 0.0,
+ "longest_still_run": 0,
+ "repeated_at": [],
+ "brightness_jumps": 0,
+ "brightness_jumps_at": [],
+ "the_mean_moved_at": [
+  {
+   "frame": 306,
+   "mean": 0.075,
+   "median_shift": 0.0,
+   "spread": 39.52
+  },
+  {
+   "frame": 377,
+   "mean": 0.105,
+   "median_shift": 1.0,
+   "spread": 74.1
+  },
+  {
+   "frame": 378,
+   "mean": 0.068,
+   "median_shift": 0.114,
+   "spread": 48.89
+  }
  ],
- "brightness_jumps": 2,
- "ok": false,
- "why": "the light jumps 2 times; 26 frame(s) identical to the one before (first at 649); the brief allows none",
+ "largest_median_shift": 3.929,
+ "ok": true,
  "strip": "evidence/crops/08_state_propagating_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/08_state_propagating/000000.png",
-  "/tmp/lovetap-capture/08_state_propagating/000142.png",
-  "/tmp/lovetap-capture/08_state_propagating/000285.png",
-  "/tmp/lovetap-capture/08_state_propagating/000427.png",
-  "/tmp/lovetap-capture/08_state_propagating/000570.png",
-  "/tmp/lovetap-capture/08_state_propagating/000712.png"
+  "/tmp/lovetap-capture/08_state_propagating/000138.png",
+  "/tmp/lovetap-capture/08_state_propagating/000276.png",
+  "/tmp/lovetap-capture/08_state_propagating/000414.png",
+  "/tmp/lovetap-capture/08_state_propagating/000552.png",
+  "/tmp/lovetap-capture/08_state_propagating/000690.png"
  ]
 }

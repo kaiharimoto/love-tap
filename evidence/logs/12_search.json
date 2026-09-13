@@ -11,37 +11,37 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2615,
+   "ms": 2839,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4026
+   "ms": 3851
   },
   {
    "do": "wait",
-   "ms": 1702
+   "ms": 1703
   },
   {
    "do": "search",
-   "ms": 4471
+   "ms": 4485
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 1902
   },
   {
    "do": "searchFacet",
-   "ms": 1215
+   "ms": 1207
   },
   {
    "do": "wait",
-   "ms": 1602
+   "ms": 1604
   },
   {
    "do": "shot",
-   "ms": 33061
+   "ms": 32995
   },
   {
    "do": "report",
@@ -128,7 +128,7 @@
     "153x95 of it, at its own size",
     14572.842461325701
    ],
-   "paper_at_its_own_size": 188,
+   "paper_at_its_own_size": 195,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "graph_03",
@@ -156,12 +156,12 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 21,
-    "the ink plates": 40,
-    "the desk": 147,
-    "the log": 611,
-    "the first frame": 352,
-    "everything": 1178
+    "the library index": 22,
+    "the ink plates": 37,
+    "the desk": 153,
+    "the log": 605,
+    "the first frame": 345,
+    "everything": 1169
    },
    "sync": {
     "transport": "local",
@@ -184,8 +184,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-12T21:23:10.483Z",
-     "last_contact": "2026-09-12T21:23:50.700Z",
+     "since": "2026-09-13T01:50:51.372Z",
+     "last_contact": "2026-09-13T01:51:31.408Z",
      "certificate": null,
      "setup_address": null
     }
@@ -215,19 +215,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2348,
+ "cold_ms": 2379,
  "load": {
-  "ms": 2348,
+  "ms": 2379,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
-   "the library index": 21,
-   "the ink plates": 40,
-   "the desk": 147,
-   "the log": 611,
-   "the first frame": 352,
-   "everything": 1178
+   "the library index": 22,
+   "the ink plates": 37,
+   "the desk": 153,
+   "the log": 605,
+   "the first frame": 345,
+   "everything": 1169
   }
  },
  "problems": [],

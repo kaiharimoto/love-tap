@@ -6,14 +6,14 @@
    "0001M4GW48FEW3M67XKAZT5051",
    "0001M4ZQQ0H0PPVTKMMQEE268D",
    "0001M59VY0YA13H9M86HTA6XNP",
-   "01M1MCJRM59H0HCN9T03J7VQ70",
-   "01M1MCTGJ7282T1RJY807TSBM5"
+   "01M1MCJRTB384R0V3YNQ2ERGKB",
+   "01M1MCTH3V0ARDSE7SASGZ1GKT"
   ],
   "whole_on_the_glass": [
    "0001M4ZQQ0H0PPVTKMMQEE268D",
    "0001M59VY0YA13H9M86HTA6XNP",
-   "01M1MCJRM59H0HCN9T03J7VQ70",
-   "01M1MCTGJ7282T1RJY807TSBM5"
+   "01M1MCJRTB384R0V3YNQ2ERGKB",
+   "01M1MCTH3V0ARDSE7SASGZ1GKT"
   ],
   "clipped_at_an_edge": {
    "0001M4GW48FEW3M67XKAZT5051": 0.129
@@ -36,8 +36,8 @@
   },
   "paper": [
    "0001M59VY0YA13H9M86HTA6XNP",
-   "01M1MCJRM59H0HCN9T03J7VQ70",
-   "01M1MCTGJ7282T1RJY807TSBM5"
+   "01M1MCJRTB384R0V3YNQ2ERGKB",
+   "01M1MCTH3V0ARDSE7SASGZ1GKT"
   ],
   "paper_whole_on_the_glass": 3,
   "rows_cost": [
@@ -97,27 +97,27 @@
   "0001M4GW48FEW3M67XKAZT5051",
   "0001M4ZQQ0H0PPVTKMMQEE268D",
   "0001M59VY0YA13H9M86HTA6XNP",
-  "01M1MCJRM59H0HCN9T03J7VQ70",
-  "01M1MCTGJ7282T1RJY807TSBM5"
+  "01M1MCJRTB384R0V3YNQ2ERGKB",
+  "01M1MCTH3V0ARDSE7SASGZ1GKT"
  ],
  "paper": [
   "0001M59VY0YA13H9M86HTA6XNP",
-  "01M1MCJRM59H0HCN9T03J7VQ70",
-  "01M1MCTGJ7282T1RJY807TSBM5"
+  "01M1MCJRTB384R0V3YNQ2ERGKB",
+  "01M1MCTH3V0ARDSE7SASGZ1GKT"
  ],
  "tears": {
   "0001M4GW48FEW3M67XKAZT5051": "tear_010",
   "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
   "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-  "01M1MCJRM59H0HCN9T03J7VQ70": "tear_014",
-  "01M1MCTGJ7282T1RJY807TSBM5": "tear_019"
+  "01M1MCJRTB384R0V3YNQ2ERGKB": "tear_014",
+  "01M1MCTH3V0ARDSE7SASGZ1GKT": "tear_042"
  },
  "stocks": {
   "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
   "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
   "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-  "01M1MCJRM59H0HCN9T03J7VQ70": "lined_02",
-  "01M1MCTGJ7282T1RJY807TSBM5": "receipt_01"
+  "01M1MCJRTB384R0V3YNQ2ERGKB": "lined_03",
+  "01M1MCTH3V0ARDSE7SASGZ1GKT": "lined_01"
  },
  "scroll": {
   "first": 8066,
@@ -127,7 +127,7 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 4720,
  "seed": 20260903,
- "events": 14066,
+ "events": 14067,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -142,7 +142,7 @@
   "194x126 of it, at its own size",
   24520.909090909092
  ],
- "paper_at_its_own_size": 365,
+ "paper_at_its_own_size": 367,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [
   "sticky_blue_02"
@@ -174,37 +174,37 @@
  "sensation": null,
  "asked_a_motor_for": [],
  "the_launch_took": {
-  "the framework": 10,
-  "the library index": 19,
-  "the ink plates": 42,
-  "the desk": 166,
-  "the log": 6606,
-  "the first frame": 346,
-  "everything": 7189
+  "the framework": 7,
+  "the library index": 16,
+  "the ink plates": 39,
+  "the desk": 150,
+  "the log": 6538,
+  "the first frame": 348,
+  "everything": 7098
  },
  "sync": {
   "transport": "local",
   "role": "client",
   "rounds": 26,
-  "pushed": 3,
+  "pushed": 4,
   "refused": 0,
   "pulled": 2,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14066,
+  "cursor": 14067,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14066,
-   "our_cursor": 14066,
+   "peer_cursor": 14067,
+   "our_cursor": 14067,
    "last_error": null,
-   "since": "2026-09-12T21:53:08.806Z",
-   "last_contact": "2026-09-12T22:01:40.171Z",
+   "since": "2026-09-13T02:02:15.535Z",
+   "last_contact": "2026-09-13T02:10:46.123Z",
    "certificate": null,
    "setup_address": null
   }

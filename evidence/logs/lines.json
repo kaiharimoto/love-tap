@@ -8,18 +8,18 @@
    "rule_pitch_px": 71.0,
    "lines_measured": 12,
    "off_the_line": {
-    "median": 0.229,
+    "median": 0.232,
     "p90": 0.401
    }
   },
   "02_chat.png": {
    "ruled_lines": 14,
-   "written_lines": 43,
+   "written_lines": 45,
    "rule_pitch_px": 81.0,
-   "lines_measured": 24,
+   "lines_measured": 25,
    "off_the_line": {
-    "median": 0.333,
-    "p90": 0.592
+    "median": 0.358,
+    "p90": 0.63
    }
   },
   "03_us.png": {
@@ -29,22 +29,22 @@
    "lines_measured": 45,
    "off_the_line": {
     "median": 0.248,
-    "p90": 0.62
+    "p90": 0.563
    }
   },
   "04_moments.png": {
    "ruled_lines": 6,
-   "written_lines": 41,
+   "written_lines": 43,
    "rule_pitch_px": 599.0,
-   "lines_measured": 41,
+   "lines_measured": 43,
    "off_the_line": {
-    "median": 0.286,
-    "p90": 0.587
+    "median": 0.272,
+    "p90": 0.585
    }
   },
   "05_settings.png": {
    "ruled_lines": 17,
-   "written_lines": 35,
+   "written_lines": 36,
    "rule_pitch_px": 113.8,
    "lines_measured": 24,
    "off_the_line": {
@@ -54,12 +54,12 @@
   },
   "10_first_run.png": {
    "ruled_lines": 6,
-   "written_lines": 17,
+   "written_lines": 18,
    "rule_pitch_px": 114.0,
-   "lines_measured": 15,
+   "lines_measured": 16,
    "off_the_line": {
-    "median": 0.423,
-    "p90": 0.744
+    "median": 0.424,
+    "p90": 0.739
    }
   },
   "12_search.png": {
@@ -73,37 +73,37 @@
    }
   },
   "13_messenger_states.png": {
-   "ruled_lines": 15,
-   "written_lines": 38,
-   "rule_pitch_px": 71.2,
-   "lines_measured": 19,
+   "ruled_lines": 6,
+   "written_lines": 20,
+   "rule_pitch_px": 70.5,
+   "lines_measured": 7,
    "off_the_line": {
-    "median": 0.421,
-    "p90": 0.792
+    "median": 0.418,
+    "p90": 0.644
    }
   },
   "14_media_viewer.png": {
-   "ruled_lines": 10,
-   "written_lines": 16,
-   "rule_pitch_px": 98.0,
-   "lines_measured": 11,
+   "ruled_lines": 11,
+   "written_lines": 15,
+   "rule_pitch_px": 81.2,
+   "lines_measured": 10,
    "off_the_line": {
-    "median": 0.128,
-    "p90": 0.398
+    "median": 0.222,
+    "p90": 0.519
    }
   },
   "17_setup_pwa.png": {
-   "ruled_lines": 17,
-   "written_lines": 31,
+   "ruled_lines": 25,
+   "written_lines": 40,
    "rule_pitch_px": 71.0,
-   "lines_measured": 20,
+   "lines_measured": 27,
    "off_the_line": {
-    "median": 0.342,
-    "p90": 0.773
+    "median": 0.345,
+    "p90": 0.793
    }
   }
  },
- "median_across_the_set": 0.309,
+ "median_across_the_set": 0.308,
  "what_that_number_means": "writing laid out with no relation to the rules under it lands uniformly between them, which averages 0.25. On the line is 0. The set reads 0.33, so the writing is not on the rules and is not even accidentally near them: the beat between the text's line height and the paper's pitch pushes it past random.",
  "stills_measured": 10,
  "the_same_paper_is_not_the_same_size": {
@@ -115,13 +115,13 @@
    "05_settings.png": 113.8,
    "10_first_run.png": 114.0,
    "12_search.png": 81.5,
-   "13_messenger_states.png": 71.2,
-   "14_media_viewer.png": 98.0,
+   "13_messenger_states.png": 70.5,
+   "14_media_viewer.png": 81.2,
    "17_setup_pwa.png": 71.0
   },
-  "smallest": 71.0,
+  "smallest": 70.5,
   "largest": 599.0,
-  "ratio": 8.44,
+  "ratio": 8.5,
   "the_library_does_not_rule_them_all_alike": {
    "mm_per_rule": {
     "lined": 8.0,

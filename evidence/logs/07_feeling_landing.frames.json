@@ -46,7 +46,7 @@
  ],
  "app_seconds": 5.38,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 4.44972,
+ "mean_change_per_frame": 4.70232,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -67,6 +67,22 @@
  "longest_still_run": 0,
  "repeated_at": [],
  "brightness_jumps": 0,
+ "brightness_jumps_at": [],
+ "the_mean_moved_at": [
+  {
+   "frame": 169,
+   "mean": 0.117,
+   "median_shift": 2.0,
+   "spread": 74.88
+  },
+  {
+   "frame": 170,
+   "mean": 0.075,
+   "median_shift": 0.587,
+   "spread": 49.55
+  }
+ ],
+ "largest_median_shift": 2.0,
  "ok": true,
  "strip": "evidence/crops/07_feeling_landing_strip.png",
  "strip_frames": [

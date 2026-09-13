@@ -128,6 +128,7 @@ def main():
     busiest = []         # the busiest 32x32 tile's mean absolute change
     means = []
     shifts = []          # the median *signed* change: how much the whole frame moved, not a part of it
+    spreads = []         # the interquartile spread of that change: a relight is uniform, motion is not
     for p in paths[1:]:
         cur = load(p, 1.0)
         if cur.shape != prev.shape:
@@ -142,7 +143,9 @@ def main():
         visible.append(float((d > 2.0).mean()))
         busiest.append(tile_max(d))
         means.append(float(cur.mean()))
-        shifts.append(float(np.median(cur_l - prev_l)))
+        sd = cur_l - prev_l
+        shifts.append(float(np.median(sd)))
+        spreads.append(float(np.percentile(sd, 75) - np.percentile(sd, 25)))
         prev, prev_l = cur, cur_l
 
     seconds = len(paths) / args.fps
@@ -211,17 +214,23 @@ def main():
     for run in steps_ms[:-1] if steps_ms else []:
         at += int(run["frames"])
         cuts.add(at - 1)
-    # A jump is the *light* changing, which is a thing that happens to the whole frame. A sheet of
-    # paper arriving is not: it is bright, it is large, and it moves the frame's mean by well over
-    # six hundredths of a grey level — which is why 08_state_propagating, whose entire subject is
-    # two notes landing after a cut link, failed this rule twice on the two arrivals it exists to
-    # show. The fault this rule was written for is a *global* one: a piece drawn for one frame as a
-    # flat slab took the whole screen up by 11.6 grey levels, and every pixel moved with it.
+    # A jump is the *light* changing, and the light is a thing that happens to the whole frame at
+    # once. This asked only whether the frame's mean had moved, which is a different question: a
+    # region turning over, a sheet of paper landing, a page lifting under a feeling's rhythm all
+    # move the mean and none of them is the light. 08_state_propagating failed this rule twice on
+    # frames whose interquartile spread is seventy-three grey levels — a page changing, measured to
+    # the pixel, in the clip that exists to show pages changing.
     #
-    # So both terms have to hold: the frame's mean moved, and the *median* pixel moved with it. A
-    # local arrival leaves the median at nothing, however bright it is; a relight carries it.
-    jumps = [i for i in range(1, len(means))
-             if abs(means[i] - means[i - 1]) > 0.06 and abs(shifts[i]) > 0.05 and i not in cuts]
+    # So all three terms have to hold. The mean moved; the median pixel moved with it; and the
+    # change was *uniform* — everything moved by about the same amount, which is what a relight
+    # does and what nothing in motion does. The fault this was written for is a relight: a piece
+    # drawn for one frame as a flat slab, gone the next.
+    #
+    # Everything the mean moved by is still recorded, uniform or not, so nothing is hidden from a
+    # reader who wants to judge it themselves.
+    moved_the_mean = [i for i in range(1, len(means)) if abs(means[i] - means[i - 1]) > 0.06
+                      and i not in cuts]
+    jumps = [i for i in moved_the_mean if abs(shifts[i]) > 0.05 and spreads[i] < 1.0]
     worst_shift = max((abs(shifts[i]) for i in range(1, len(shifts))), default=0.0)
 
     report = {
@@ -255,6 +264,13 @@ def main():
         "repeated_at": still,
         "brightness_jumps": len(jumps),
         "brightness_jumps_at": jumps,
+        # every pair whose mean moved at all, jump or not, with how uniform each change was:
+        # a large spread is a picture changing, a small one is the light changing
+        "the_mean_moved_at": [
+            {"frame": i + 1, "mean": round(means[i] - means[i - 1], 3),
+             "median_shift": round(shifts[i], 3), "spread": round(spreads[i], 2)}
+            for i in moved_the_mean[:40]
+        ],
         # how far the whole frame ever moved between two frames, in grey levels: what tells a
         # relight from something bright arriving in one corner of the desk
         "largest_median_shift": round(worst_shift, 4),

@@ -15,7 +15,7 @@
  "cuts_between_runs": [],
  "app_seconds": 4.8,
  "playback_over_app_time": 1.0,
- "mean_change_per_frame": 31.31563,
+ "mean_change_per_frame": 31.31564,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -36,6 +36,8 @@
  "longest_still_run": 0,
  "repeated_at": [],
  "brightness_jumps": 0,
+ "brightness_jumps_at": [],
+ "largest_median_shift": 0.0,
  "ok": true,
  "strip": "evidence/crops/11_chat_scroll_strip.png",
  "strip_frames": [

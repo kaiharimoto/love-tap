@@ -40,40 +40,40 @@
     "ts": 1788455973000
    },
    {
-    "id": "01M1MCJNF14C675NGV476210VX",
+    "id": "01M1MCJQ746BVVPKTR3KN9EY8F",
     "feeling": "hold",
     "from": "noor",
-    "ts": 1788464420321
+    "ts": 1788464422116
    },
    {
-    "id": "01M1MCP2Y46ZTN570JRBVAD2W8",
+    "id": "01M1MCPMMNB3ZG52P4FQS7CHNW",
     "feeling": "squeeze",
     "from": "noor",
-    "ts": 1788464532420
+    "ts": 1788464550549
    },
    {
-    "id": "01M1MCTB1CTFN4XVA0B5GQ7WYS",
+    "id": "01M1MCTWA4ZD22MX42XWZ3ZXNC",
     "feeling": "nuzzle",
     "from": "noor",
-    "ts": 1788464671788
+    "ts": 1788464689476
    },
    {
-    "id": "01M1MCXEWMZ98F2A8A8QWWT63Z",
+    "id": "01M1MCY4H3H02KSD1VJK4T03B6",
     "feeling": "confetti",
     "from": "noor",
-    "ts": 1788464774036
+    "ts": 1788464796195
    },
    {
-    "id": "01M1MD0QGN0SPCSGZG3G6N1F40",
+    "id": "01M1MD1M46VHVXPG6BNDPJ2NMB",
     "feeling": "miss_you",
     "from": "noor",
-    "ts": 1788464881173
+    "ts": 1788464910470
    },
    {
-    "id": "01M1MD3PXETSTKJB1B4ND5DETQ",
+    "id": "01M1MD4MR71FPNRSB1NZS9XCMS",
     "feeling": "here",
     "from": "noor",
-    "ts": 1788464978862
+    "ts": 1788465009415
    }
   ],
   "kinds": {
@@ -124,7 +124,7 @@
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 6816,
  "seed": 20260903,
- "events": 14074,
+ "events": 14075,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -139,15 +139,15 @@
   "237x78 of it, at its own size",
   18372.448823232146
  ],
- "paper_at_its_own_size": 668,
+ "paper_at_its_own_size": 763,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [],
- "paper_that_arrived_after_the_piece_was_drawn": 16,
+ "paper_that_arrived_after_the_piece_was_drawn": 15,
  "tears_that_had_not_arrived": {},
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 288,
- "stocks_held": 17,
- "stocks_held_bytes": 245769520,
+ "masks_dropped_to_stay_inside_the_pool": 245,
+ "stocks_held": 16,
+ "stocks_held_bytes": 231918320,
  "stocks_dropped_to_stay_inside_the_pool": 0,
  "image_cache": {
   "held": 34,
@@ -170,7 +170,7 @@
   "feeling": "here",
   "channel": "page",
   "total_ms": 2000,
-  "started_at": "2026-09-12T22:59:30.167Z",
+  "started_at": "2026-09-13T05:05:35.923Z",
   "pattern": [
    {
     "ms": 400,
@@ -315,35 +315,35 @@
  "the_launch_took": {
   "the framework": 7,
   "the library index": 20,
-  "the ink plates": 35,
-  "the desk": 146,
-  "the log": 6452,
-  "the first frame": 355,
-  "everything": 7015
+  "the ink plates": 36,
+  "the desk": 152,
+  "the log": 6441,
+  "the first frame": 373,
+  "everything": 7029
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 32,
-  "pushed": 7,
+  "rounds": 34,
+  "pushed": 8,
   "refused": 0,
   "pulled": 6,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14074,
+  "cursor": 14075,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14074,
-   "our_cursor": 14074,
+   "peer_cursor": 14075,
+   "our_cursor": 14075,
    "last_error": null,
-   "since": "2026-09-12T22:50:02.236Z",
-   "last_contact": "2026-09-12T23:00:37.164Z",
+   "since": "2026-09-13T04:55:37.094Z",
+   "last_contact": "2026-09-13T05:07:03.006Z",
    "certificate": null,
    "setup_address": null
   }

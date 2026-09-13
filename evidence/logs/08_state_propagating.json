@@ -10,11 +10,11 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2303
+   "ms": 2304
   },
   {
    "do": "pair",
-   "ms": 1286
+   "ms": 1280
   },
   {
    "do": "wait",
@@ -22,15 +22,39 @@
   },
   {
    "do": "goTo",
-   "ms": 3136
+   "ms": 3405
   },
   {
    "do": "far",
-   "ms": 609
+   "ms": 576
   },
   {
    "do": "awaitArrival",
-   "ms": 5180
+   "ms": 6281
+  },
+  {
+   "do": "wait",
+   "ms": 1202
+  },
+  {
+   "do": "step",
+   "ms": 1662
+  },
+  {
+   "do": "frames",
+   "ms": 52842
+  },
+  {
+   "do": "wait",
+   "ms": 3003
+  },
+  {
+   "do": "far",
+   "ms": 508
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 835
   },
   {
    "do": "wait",
@@ -38,59 +62,35 @@
   },
   {
    "do": "step",
-   "ms": 2247
+   "ms": 948
   },
   {
    "do": "frames",
-   "ms": 52736
-  },
-  {
-   "do": "wait",
-   "ms": 3004
-  },
-  {
-   "do": "far",
-   "ms": 505
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 862
-  },
-  {
-   "do": "wait",
-   "ms": 1203
-  },
-  {
-   "do": "step",
-   "ms": 1253
-  },
-  {
-   "do": "frames",
-   "ms": 237577
+   "ms": 237280
   },
   {
    "do": "goTo",
-   "ms": 3474
+   "ms": 3527
   },
   {
    "do": "step",
-   "ms": 1476
+   "ms": 1576
   },
   {
    "do": "far",
-   "ms": 578
+   "ms": 551
   },
   {
    "do": "awaitArrival",
-   "ms": 1047
+   "ms": 851
   },
   {
    "do": "wait",
-   "ms": 1203
+   "ms": 1201
   },
   {
    "do": "unfold",
-   "ms": 505
+   "ms": 508
   },
   {
    "do": "wait",
@@ -98,63 +98,31 @@
   },
   {
    "do": "frames",
-   "ms": 194290
+   "ms": 196363
   },
   {
    "do": "far",
-   "ms": 504
+   "ms": 508
   },
   {
    "do": "awaitArrival",
-   "ms": 945
+   "ms": 881
   },
   {
    "do": "wait",
-   "ms": 1202
+   "ms": 1204
   },
   {
    "do": "frames",
-   "ms": 121517
+   "ms": 122666
   },
   {
    "do": "far",
-   "ms": 599
+   "ms": 620
   },
   {
    "do": "awaitArrival",
-   "ms": 820
-  },
-  {
-   "do": "wait",
-   "ms": 1203
-  },
-  {
-   "do": "frames",
-   "ms": 221777
-  },
-  {
-   "do": "goTo",
-   "ms": 3430
-  },
-  {
-   "do": "step",
-   "ms": 2113
-  },
-  {
-   "do": "wait",
-   "ms": 2104
-  },
-  {
-   "do": "far",
-   "ms": 504
-  },
-  {
-   "do": "far",
-   "ms": 832
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1656
+   "ms": 915
   },
   {
    "do": "wait",
@@ -162,26 +130,58 @@
   },
   {
    "do": "frames",
-   "ms": 168440
+   "ms": 226006
   },
   {
    "do": "goTo",
-   "ms": 3947
+   "ms": 3536
   },
   {
    "do": "step",
-   "ms": 879
+   "ms": 1516
   },
   {
    "do": "wait",
-   "ms": 1202
+   "ms": 2104
+  },
+  {
+   "do": "far",
+   "ms": 503
+  },
+  {
+   "do": "far",
+   "ms": 859
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1453
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 167805
+  },
+  {
+   "do": "goTo",
+   "ms": 3760
+  },
+  {
+   "do": "step",
+   "ms": 863
+  },
+  {
+   "do": "wait",
+   "ms": 1203
   },
   {
    "do": "scrollTo",
-   "ms": 1900
+   "ms": 1793
   },
   {
-   "at": 1065974,
+   "at": 1072651,
    "said": "__deskCut(true) ok, the link is cut"
   },
   {
@@ -190,51 +190,51 @@
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1101
   },
   {
    "do": "frames",
-   "ms": 144253
+   "ms": 17279
   },
   {
    "do": "frames",
-   "ms": 410293
+   "ms": 36896
   },
   {
    "do": "far",
-   "ms": 510
+   "ms": 506
   },
   {
    "do": "far",
-   "ms": 503
+   "ms": 502
   },
   {
    "do": "wait",
    "ms": 1702
   },
   {
-   "at": 1624842,
+   "at": 1131142,
    "said": "__deskCut(false) ok, the link is back"
   },
   {
    "do": "cut",
-   "ms": 504
+   "ms": 505
   },
   {
    "do": "sync",
-   "ms": 515
+   "ms": 514
   },
   {
    "do": "awaitArrival",
-   "ms": 19930
+   "ms": 19673
   },
   {
    "do": "frames",
-   "ms": 35553
+   "ms": 36071
   },
   {
    "do": "report",
-   "ms": 523
+   "ms": 524
   }
  ],
  "shots": [
@@ -279,17 +279,17 @@
    }
   },
   {
-   "frames": 26,
+   "frames": 9,
    "dir": "evidence/frames/08_state_propagating",
-   "ms": 48,
+   "ms": 144,
    "drive": {
     "kind": "type",
     "text": "on my way - leaving in ten",
-    "per": 1
+    "per": 3
    }
   },
   {
-   "frames": 24,
+   "frames": 19,
    "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
    "drive": {
@@ -315,27 +315,27 @@
    "view": {
     "region": "chat",
     "visible": [
-     "01M1MDD8BVQG319BTHXX5M4ZES",
-     "01M1MDDTQ7GNK0R1T4Z9N6BZS7",
-     "01M1ME3PYWDN7CZ76JTXV1VP5X",
-     "01M1ME3QEAASE6JHZQZRDWZT3W",
-     "0001MCJ1M02RZB85RV952VJT6N",
-     "01M1ME43QVW063048W869NJ2TB",
-     "01M1ME4BNBVTNY827B6ENWHGXR"
+     "01M1MDDGPAA7EATCGXE1XSM8DD",
+     "01M1MDE2EJ1X11AM0NV4X15GNQ",
+     "01M1MDMNHCKS6G2CMFVGZX9Z39",
+     "01M1MDMP15YGN3D3NRAKK7GAMB",
+     "0001MCJ1M0XNKJ57493RZ3KRMW",
+     "01M1MDN26WP4J1PCCZW4BJBNAN",
+     "01M1MDNA4GKVX65B19V5ZZXMJA"
     ],
     "whole_on_the_glass": [
-     "01M1MDDTQ7GNK0R1T4Z9N6BZS7",
-     "01M1ME3PYWDN7CZ76JTXV1VP5X",
-     "01M1ME3QEAASE6JHZQZRDWZT3W",
-     "0001MCJ1M02RZB85RV952VJT6N",
-     "01M1ME43QVW063048W869NJ2TB",
-     "01M1ME4BNBVTNY827B6ENWHGXR"
+     "01M1MDE2EJ1X11AM0NV4X15GNQ",
+     "01M1MDMNHCKS6G2CMFVGZX9Z39",
+     "01M1MDMP15YGN3D3NRAKK7GAMB",
+     "0001MCJ1M0XNKJ57493RZ3KRMW",
+     "01M1MDN26WP4J1PCCZW4BJBNAN",
+     "01M1MDNA4GKVX65B19V5ZZXMJA"
     ],
     "clipped_at_an_edge": {
-     "01M1MDD8BVQG319BTHXX5M4ZES": 0.413
+     "01M1MDDGPAA7EATCGXE1XSM8DD": 0.413
     },
     "delivery": {
-     "0001MCJ1M02RZB85RV952VJT6N": {
+     "0001MCJ1M0XNKJ57493RZ3KRMW": {
       "state": "sent",
       "says": "sent"
      }
@@ -353,10 +353,10 @@
      "of": 8082
     },
     "paper": [
-     "01M1ME3QEAASE6JHZQZRDWZT3W",
-     "0001MCJ1M02RZB85RV952VJT6N",
-     "01M1ME43QVW063048W869NJ2TB",
-     "01M1ME4BNBVTNY827B6ENWHGXR"
+     "01M1MDMP15YGN3D3NRAKK7GAMB",
+     "0001MCJ1M0XNKJ57493RZ3KRMW",
+     "01M1MDN26WP4J1PCCZW4BJBNAN",
+     "01M1MDNA4GKVX65B19V5ZZXMJA"
     ],
     "paper_whole_on_the_glass": 4,
     "rows_cost": [
@@ -425,37 +425,37 @@
     "partner_typing": false
    },
    "visible": [
-    "01M1MDD8BVQG319BTHXX5M4ZES",
-    "01M1MDDTQ7GNK0R1T4Z9N6BZS7",
-    "01M1ME3PYWDN7CZ76JTXV1VP5X",
-    "01M1ME3QEAASE6JHZQZRDWZT3W",
-    "0001MCJ1M02RZB85RV952VJT6N",
-    "01M1ME43QVW063048W869NJ2TB",
-    "01M1ME4BNBVTNY827B6ENWHGXR"
+    "01M1MDDGPAA7EATCGXE1XSM8DD",
+    "01M1MDE2EJ1X11AM0NV4X15GNQ",
+    "01M1MDMNHCKS6G2CMFVGZX9Z39",
+    "01M1MDMP15YGN3D3NRAKK7GAMB",
+    "0001MCJ1M0XNKJ57493RZ3KRMW",
+    "01M1MDN26WP4J1PCCZW4BJBNAN",
+    "01M1MDNA4GKVX65B19V5ZZXMJA"
    ],
    "paper": [
-    "01M1ME3QEAASE6JHZQZRDWZT3W",
-    "0001MCJ1M02RZB85RV952VJT6N",
-    "01M1ME43QVW063048W869NJ2TB",
-    "01M1ME4BNBVTNY827B6ENWHGXR"
+    "01M1MDMP15YGN3D3NRAKK7GAMB",
+    "0001MCJ1M0XNKJ57493RZ3KRMW",
+    "01M1MDN26WP4J1PCCZW4BJBNAN",
+    "01M1MDNA4GKVX65B19V5ZZXMJA"
    ],
    "tears": {
-    "01M1MDD8BVQG319BTHXX5M4ZES": "tear_055",
-    "01M1MDDTQ7GNK0R1T4Z9N6BZS7": "tear_018",
-    "01M1ME3PYWDN7CZ76JTXV1VP5X": "tear_023",
-    "01M1ME3QEAASE6JHZQZRDWZT3W": "tear_045",
-    "0001MCJ1M02RZB85RV952VJT6N": "tear_008",
-    "01M1ME43QVW063048W869NJ2TB": "tear_029",
-    "01M1ME4BNBVTNY827B6ENWHGXR": "tear_050"
+    "01M1MDDGPAA7EATCGXE1XSM8DD": "tear_055",
+    "01M1MDE2EJ1X11AM0NV4X15GNQ": "tear_018",
+    "01M1MDMNHCKS6G2CMFVGZX9Z39": "tear_023",
+    "01M1MDMP15YGN3D3NRAKK7GAMB": "tear_045",
+    "0001MCJ1M0XNKJ57493RZ3KRMW": "tear_008",
+    "01M1MDN26WP4J1PCCZW4BJBNAN": "tear_029",
+    "01M1MDNA4GKVX65B19V5ZZXMJA": "tear_050"
    },
    "stocks": {
-    "01M1MDD8BVQG319BTHXX5M4ZES": "lined_03",
-    "01M1MDDTQ7GNK0R1T4Z9N6BZS7": "graph_04",
-    "01M1ME3PYWDN7CZ76JTXV1VP5X": "lined_03",
-    "01M1ME3QEAASE6JHZQZRDWZT3W": "lined_01",
-    "0001MCJ1M02RZB85RV952VJT6N": "legal_01",
-    "01M1ME43QVW063048W869NJ2TB": "spiral_02",
-    "01M1ME4BNBVTNY827B6ENWHGXR": "spiral_04"
+    "01M1MDDGPAA7EATCGXE1XSM8DD": "lined_01",
+    "01M1MDE2EJ1X11AM0NV4X15GNQ": "lined_04",
+    "01M1MDMNHCKS6G2CMFVGZX9Z39": "receipt_01",
+    "01M1MDMP15YGN3D3NRAKK7GAMB": "lined_02",
+    "0001MCJ1M0XNKJ57493RZ3KRMW": "legal_02",
+    "01M1MDN26WP4J1PCCZW4BJBNAN": "lined_01",
+    "01M1MDNA4GKVX65B19V5ZZXMJA": "lined_03"
    },
    "scroll": {
     "first": 8075,
@@ -463,7 +463,7 @@
     "of": 8082
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 13424,
+   "driven_ms": 13392,
    "seed": 20260903,
    "events": 14084,
    "transport": "local",
@@ -480,15 +480,15 @@
     "228x76 of it, at its own size",
     17266.689805054197
    ],
-   "paper_at_its_own_size": 1573,
+   "paper_at_its_own_size": 1485,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 15,
+   "paper_that_arrived_after_the_piece_was_drawn": 16,
    "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 246,
-   "stocks_held": 16,
-   "stocks_held_bytes": 231918320,
+   "masks_dropped_to_stay_inside_the_pool": 249,
+   "stocks_held": 17,
+   "stocks_held_bytes": 245769520,
    "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
     "held": 30,
@@ -511,7 +511,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-13T01:00:53.400Z",
+    "started_at": "2026-09-13T04:22:47.796Z",
     "pattern": [
      {
       "ms": 150,
@@ -608,21 +608,21 @@
    "the_launch_took": {
     "the framework": 7,
     "the library index": 17,
-    "the ink plates": 36,
-    "the desk": 157,
-    "the log": 6503,
-    "the first frame": 344,
-    "everything": 7064
+    "the ink plates": 39,
+    "the desk": 156,
+    "the log": 6838,
+    "the first frame": 412,
+    "everything": 7469
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 56,
+    "rounds": 57,
     "pushed": 10,
     "refused": 0,
     "pulled": 13,
     "blobs_fetched": 0,
-    "faults": 105,
+    "faults": 12,
     "last_fault": "offline (POST /events)",
     "pending": 1,
     "refused_in_the_outbox": 0,
@@ -636,8 +636,8 @@
      "peer_cursor": 14083,
      "our_cursor": 14083,
      "last_error": null,
-     "since": "2026-09-13T00:46:13.575Z",
-     "last_contact": "2026-09-13T01:14:01.148Z",
+     "since": "2026-09-13T04:08:00.609Z",
+     "last_contact": "2026-09-13T04:27:34.490Z",
      "certificate": null,
      "setup_address": null
     }
@@ -667,19 +667,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 8343,
+ "cold_ms": 8912,
  "load": {
-  "ms": 8343,
+  "ms": 8912,
   "store": "fresh",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
    "the library index": 17,
-   "the ink plates": 36,
-   "the desk": 157,
-   "the log": 6503,
-   "the first frame": 344,
-   "everything": 7064
+   "the ink plates": 39,
+   "the desk": 156,
+   "the log": 6838,
+   "the first frame": 412,
+   "everything": 7469
   }
  },
  "far": [
@@ -713,11 +713,11 @@
   },
   {
    "line": "state mood quiet",
-   "at_frame": 689
+   "at_frame": 667
   },
   {
    "line": "message the bus is late, dont wait up",
-   "at_frame": 689
+   "at_frame": 667
   }
  ],
  "arrivals": [
@@ -726,49 +726,49 @@
    "before": 8069,
    "after": 8070,
    "at_frame": 0,
-   "waited_ms": 4659
+   "waited_ms": 5781
   },
   {
    "line": "feeling hold 0.92",
    "before": 8070,
    "after": 8071,
    "at_frame": 16,
-   "waited_ms": 361
+   "waited_ms": 334
   },
   {
    "line": "message it is raining here too",
    "before": 8071,
    "after": 8072,
    "at_frame": 165,
-   "waited_ms": 546
+   "waited_ms": 350
   },
   {
    "line": "feeling squeeze 0.6",
    "before": 8072,
    "after": 8073,
    "at_frame": 305,
-   "waited_ms": 444
+   "waited_ms": 381
   },
   {
    "line": "feeling here 0.8",
    "before": 8073,
    "after": 8074,
    "at_frame": 376,
-   "waited_ms": 319
+   "waited_ms": 414
   },
   {
    "line": "feeling soup 0.7",
    "before": 8075,
    "after": 8076,
    "at_frame": 532,
-   "waited_ms": 1155
+   "waited_ms": 953
   },
   {
    "line": "message the bus is late, dont wait up",
    "before": 8078,
    "after": 8082,
-   "at_frame": 689,
-   "waited_ms": 19430
+   "at_frame": 667,
+   "waited_ms": 19172
   }
  ],
  "said_again": [

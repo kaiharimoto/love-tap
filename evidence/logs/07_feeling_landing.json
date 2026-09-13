@@ -10,69 +10,45 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1734,
+   "ms": 2337,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3061
+   "ms": 3053
   },
   {
    "do": "wait",
-   "ms": 1801
+   "ms": 1804
   },
   {
    "do": "haptics",
-   "ms": 594
+   "ms": 518
   },
   {
    "do": "far",
-   "ms": 529
+   "ms": 1751
   },
   {
    "do": "awaitArrival",
-   "ms": 3712
+   "ms": 5052
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1104
   },
   {
    "do": "frames",
-   "ms": 106861
+   "ms": 121722
   },
   {
    "do": "far",
-   "ms": 404
+   "ms": 514
   },
   {
    "do": "awaitArrival",
-   "ms": 887
-  },
-  {
-   "do": "wait",
-   "ms": 1103
-  },
-  {
-   "do": "frames",
-   "ms": 130391
-  },
-  {
-   "do": "goTo",
-   "ms": 5089
-  },
-  {
-   "do": "step",
-   "ms": 1353
-  },
-  {
-   "do": "far",
-   "ms": 579
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1378
+   "ms": 1602
   },
   {
    "do": "wait",
@@ -80,15 +56,23 @@
   },
   {
    "do": "frames",
-   "ms": 99278
+   "ms": 128255
+  },
+  {
+   "do": "goTo",
+   "ms": 5447
+  },
+  {
+   "do": "step",
+   "ms": 2025
   },
   {
    "do": "far",
-   "ms": 503
+   "ms": 540
   },
   {
    "do": "awaitArrival",
-   "ms": 1589
+   "ms": 1694
   },
   {
    "do": "wait",
@@ -96,23 +80,15 @@
   },
   {
    "do": "frames",
-   "ms": 98049
-  },
-  {
-   "do": "goTo",
-   "ms": 4044
-  },
-  {
-   "do": "step",
-   "ms": 1713
+   "ms": 103371
   },
   {
    "do": "far",
-   "ms": 559
+   "ms": 511
   },
   {
    "do": "awaitArrival",
-   "ms": 2199
+   "ms": 2234
   },
   {
    "do": "wait",
@@ -120,31 +96,55 @@
   },
   {
    "do": "frames",
-   "ms": 88662
+   "ms": 102746
   },
   {
    "do": "goTo",
-   "ms": 3623
+   "ms": 5656
   },
   {
    "do": "step",
-   "ms": 1655
+   "ms": 2116
   },
   {
    "do": "far",
-   "ms": 451
+   "ms": 437
   },
   {
    "do": "awaitArrival",
-   "ms": 2090
+   "ms": 1844
   },
   {
    "do": "wait",
-   "ms": 1101
+   "ms": 1103
   },
   {
    "do": "frames",
-   "ms": 83375
+   "ms": 90310
+  },
+  {
+   "do": "goTo",
+   "ms": 3662
+  },
+  {
+   "do": "step",
+   "ms": 1573
+  },
+  {
+   "do": "far",
+   "ms": 454
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 2221
+  },
+  {
+   "do": "wait",
+   "ms": 1103
+  },
+  {
+   "do": "frames",
+   "ms": 86400
   },
   {
    "do": "report",
@@ -232,40 +232,40 @@
       "ts": 1788455973000
      },
      {
-      "id": "01M1MCJNF14C675NGV476210VX",
+      "id": "01M1MCJQ746BVVPKTR3KN9EY8F",
       "feeling": "hold",
       "from": "noor",
-      "ts": 1788464420321
+      "ts": 1788464422116
      },
      {
-      "id": "01M1MCP2Y46ZTN570JRBVAD2W8",
+      "id": "01M1MCPMMNB3ZG52P4FQS7CHNW",
       "feeling": "squeeze",
       "from": "noor",
-      "ts": 1788464532420
+      "ts": 1788464550549
      },
      {
-      "id": "01M1MCTB1CTFN4XVA0B5GQ7WYS",
+      "id": "01M1MCTWA4ZD22MX42XWZ3ZXNC",
       "feeling": "nuzzle",
       "from": "noor",
-      "ts": 1788464671788
+      "ts": 1788464689476
      },
      {
-      "id": "01M1MCXEWMZ98F2A8A8QWWT63Z",
+      "id": "01M1MCY4H3H02KSD1VJK4T03B6",
       "feeling": "confetti",
       "from": "noor",
-      "ts": 1788464774036
+      "ts": 1788464796195
      },
      {
-      "id": "01M1MD0QGN0SPCSGZG3G6N1F40",
+      "id": "01M1MD1M46VHVXPG6BNDPJ2NMB",
       "feeling": "miss_you",
       "from": "noor",
-      "ts": 1788464881173
+      "ts": 1788464910470
      },
      {
-      "id": "01M1MD3PXETSTKJB1B4ND5DETQ",
+      "id": "01M1MD4MR71FPNRSB1NZS9XCMS",
       "feeling": "here",
       "from": "noor",
-      "ts": 1788464978862
+      "ts": 1788465009415
      }
     ],
     "kinds": {
@@ -316,7 +316,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 6816,
    "seed": 20260903,
-   "events": 14074,
+   "events": 14075,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -331,15 +331,15 @@
     "237x78 of it, at its own size",
     18372.448823232146
    ],
-   "paper_at_its_own_size": 668,
+   "paper_at_its_own_size": 763,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 16,
+   "paper_that_arrived_after_the_piece_was_drawn": 15,
    "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 288,
-   "stocks_held": 17,
-   "stocks_held_bytes": 245769520,
+   "masks_dropped_to_stay_inside_the_pool": 245,
+   "stocks_held": 16,
+   "stocks_held_bytes": 231918320,
    "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
     "held": 34,
@@ -362,7 +362,7 @@
     "feeling": "here",
     "channel": "page",
     "total_ms": 2000,
-    "started_at": "2026-09-12T22:59:30.167Z",
+    "started_at": "2026-09-13T05:05:35.923Z",
     "pattern": [
      {
       "ms": 400,
@@ -507,35 +507,35 @@
    "the_launch_took": {
     "the framework": 7,
     "the library index": 20,
-    "the ink plates": 35,
-    "the desk": 146,
-    "the log": 6452,
-    "the first frame": 355,
-    "everything": 7015
+    "the ink plates": 36,
+    "the desk": 152,
+    "the log": 6441,
+    "the first frame": 373,
+    "everything": 7029
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 32,
-    "pushed": 7,
+    "rounds": 34,
+    "pushed": 8,
     "refused": 0,
     "pulled": 6,
     "blobs_fetched": 0,
     "faults": 0,
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14074,
+    "cursor": 14075,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14074,
-     "our_cursor": 14074,
+     "peer_cursor": 14075,
+     "our_cursor": 14075,
      "last_error": null,
-     "since": "2026-09-12T22:50:02.236Z",
-     "last_contact": "2026-09-12T23:00:37.164Z",
+     "since": "2026-09-13T04:55:37.094Z",
+     "last_contact": "2026-09-13T05:07:03.006Z",
      "certificate": null,
      "setup_address": null
     }
@@ -565,19 +565,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 8286,
+ "cold_ms": 8506,
  "load": {
-  "ms": 8286,
+  "ms": 8506,
   "store": "fresh",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
    "the library index": 20,
-   "the ink plates": 35,
-   "the desk": 146,
-   "the log": 6452,
-   "the first frame": 355,
-   "everything": 7015
+   "the ink plates": 36,
+   "the desk": 152,
+   "the log": 6441,
+   "the first frame": 373,
+   "everything": 7029
   }
  },
  "far": [
@@ -612,42 +612,42 @@
    "before": 8069,
    "after": 8070,
    "at_frame": 0,
-   "waited_ms": 3312
+   "waited_ms": 4652
   },
   {
    "line": "feeling squeeze 0.75",
    "before": 8070,
    "after": 8071,
    "at_frame": 56,
-   "waited_ms": 484
+   "waited_ms": 1200
   },
   {
    "line": "feeling nuzzle 0.8",
    "before": 8071,
    "after": 8072,
    "at_frame": 112,
-   "waited_ms": 976
+   "waited_ms": 1293
   },
   {
    "line": "feeling confetti 0.7",
    "before": 8072,
    "after": 8073,
    "at_frame": 168,
-   "waited_ms": 1187
+   "waited_ms": 1833
   },
   {
    "line": "feeling miss_you 0.85",
    "before": 8073,
    "after": 8074,
    "at_frame": 224,
-   "waited_ms": 1798
+   "waited_ms": 1443
   },
   {
    "line": "feeling here 0.8",
    "before": 8074,
    "after": 8075,
    "at_frame": 280,
-   "waited_ms": 1688
+   "waited_ms": 1820
   }
  ],
  "problems": [],

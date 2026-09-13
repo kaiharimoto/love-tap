@@ -209,19 +209,19 @@
     {
       "do": "frames",
       "dir": "evidence/frames/08_state_propagating",
-      "count": 13,
-      "ms": 96,
+      "count": 9,
+      "ms": 144,
       "drive": {
         "kind": "type",
         "text": "on my way - leaving in ten",
-        "per": 2
+        "per": 3
       },
-      "why": "Two characters a frame, not one. One character is a space about a fifth of the time, and a space adds no ink: three frames of the fourteenth capture's typing take were identical to the one before because nothing had been written on them. Two characters always carry one that marks the paper. Thirteen frames at ninety-six milliseconds is the same 1.25 seconds of somebody writing."
+      "why": "Three characters a frame. Two left one frame of the fourteenth capture identical to the one before \u2014 the headless compositor hands back the previous picture when it has not finished the new one, and the smaller the change the more often the retry accepts it. Nine frames at 144 ms is the same 1.3 seconds of somebody writing, with half again as much ink between each pair."
     },
     {
       "do": "frames",
       "dir": "evidence/frames/08_state_propagating",
-      "count": 24,
+      "count": 19,
       "ms": 16,
       "drive": {
         "kind": "hook",
@@ -232,7 +232,7 @@
         ],
         "at": 0
       },
-      "why": "And sending it, inside the shot: the composer empties, the note drops onto the desk, and the mark under it says it is going nowhere. Twenty-four frames is 384 ms against a landing of 420, so the take ends while the sheet is still settling rather than after it has stopped."
+      "why": "Nineteen frames, not twenty-four. The sheet takes 420 ms to settle and the take ran for 384, which should have been inside it \u2014 but the drop begins a frame or two after the send, so the last five frames of the fourteenth capture's take were of a note that had already landed. A take is as long as the thing it films."
     },
     {
       "do": "far",

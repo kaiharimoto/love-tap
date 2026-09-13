@@ -11,25 +11,41 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 3152,
+   "ms": 3216,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4697
+   "ms": 4764
   },
   {
    "do": "wait",
    "ms": 3701
   },
   {
-   "at": 13968,
+   "at": 14188,
    "said": "__deskShowLens(milestones) ok, 154 behind milestones"
   },
   {
    "do": "lens",
-   "ms": 723
+   "ms": 763
+  },
+  {
+   "do": "wait",
+   "ms": 1904
+  },
+  {
+   "do": "shot",
+   "ms": 32574
+  },
+  {
+   "at": 49376,
+   "said": "__deskShowLens(feelings) ok, 1340 behind feelings"
+  },
+  {
+   "do": "lens",
+   "ms": 707
   },
   {
    "do": "wait",
@@ -37,39 +53,23 @@
   },
   {
    "do": "shot",
-   "ms": 32570
+   "ms": 32678
   },
   {
-   "at": 49146,
-   "said": "__deskShowLens(feelings) ok, 1340 behind feelings"
-  },
-  {
-   "do": "lens",
-   "ms": 704
-  },
-  {
-   "do": "wait",
-   "ms": 1911
-  },
-  {
-   "do": "shot",
-   "ms": 32718
-  },
-  {
-   "at": 84481,
+   "at": 84664,
    "said": "__deskShowLens(media) ok, 183 behind media"
   },
   {
    "do": "lens",
-   "ms": 706
+   "ms": 707
   },
   {
    "do": "wait",
-   "ms": 3106
+   "ms": 3104
   },
   {
    "do": "shot",
-   "ms": 32903
+   "ms": 32889
   },
   {
    "do": "report",
@@ -146,7 +146,7 @@
     "143x102 of it, at its own size",
     14669.3229675293
    ],
-   "paper_at_its_own_size": 145,
+   "paper_at_its_own_size": 146,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "sticky_blue_02"
@@ -173,12 +173,12 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 21,
-    "the ink plates": 40,
+    "the library index": 18,
+    "the ink plates": 38,
     "the desk": 146,
-    "the log": 611,
-    "the first frame": 344,
-    "everything": 1169
+    "the log": 610,
+    "the first frame": 357,
+    "everything": 1176
    },
    "sync": {
     "transport": "local",
@@ -201,8 +201,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-12T21:16:37.367Z",
-     "last_contact": "2026-09-12T21:18:17.735Z",
+     "since": "2026-09-13T01:44:16.709Z",
+     "last_contact": "2026-09-13T01:45:57.054Z",
      "certificate": null,
      "setup_address": null
     }
@@ -232,19 +232,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2373,
+ "cold_ms": 2432,
  "load": {
-  "ms": 2373,
+  "ms": 2432,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
-   "the library index": 21,
-   "the ink plates": 40,
+   "the library index": 18,
+   "the ink plates": 38,
    "the desk": 146,
-   "the log": 611,
-   "the first frame": 344,
-   "everything": 1169
+   "the log": 610,
+   "the first frame": 357,
+   "everything": 1176
   }
  },
  "problems": [],

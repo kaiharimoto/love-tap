@@ -1,29 +1,29 @@
 {
- "frames": 748,
+ "frames": 730,
  "clock": "driven",
  "note": "one frame per harness step, so these are the cost of drawing a frame, not a measured refresh rate",
  "build_is_the_app": "build_ms is the framework laying out and painting: the app's own work, and comparable between runs",
  "raster_is_the_machine": "raster_ms is CanvasKit turning that into pixels. This capture has no GPU — headless WebKit in a container falls back to a software rasteriser — so raster_ms says what this machine costs, not what a phone would. over_16ms counts build plus raster and is therefore about the machine as much as the app.",
  "build_ms": {
-  "p50": 8,
-  "p95": 27,
-  "max": 538
+  "p50": 7,
+  "p95": 25,
+  "max": 569
  },
  "raster_ms": {
   "p50": 95,
-  "p95": 129,
-  "max": 202
+  "p95": 125,
+  "max": 200
  },
- "over_16ms": 748,
+ "over_16ms": 730,
  "the_heavy_frames": {
   "over_400ms": 1,
-  "their_build_ms": 538,
-  "all_build_ms": 7691,
+  "their_build_ms": 569,
+  "all_build_ms": 6996,
   "rows_they_built": 0,
   "pieces_they_drew": 2,
   "masks_they_composed": 0,
   "rows_built_in_all": 173,
-  "pieces_drawn_in_all": 369
+  "pieces_drawn_in_all": 361
  },
  "masks_held_at_the_end": 48,
  "masks_dropped": 414,
@@ -35,32 +35,488 @@
  },
  "per_frame": [
   {
-   "build_ms": 26,
-   "raster_ms": 103,
-   "total_ms": 132,
+   "build_ms": 19,
+   "raster_ms": 107,
+   "total_ms": 128,
    "rows_built": 2,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 11,
-   "raster_ms": 99,
-   "total_ms": 112,
+   "build_ms": 9,
+   "raster_ms": 100,
+   "total_ms": 110,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 9,
-   "raster_ms": 104,
+   "build_ms": 7,
+   "raster_ms": 141,
+   "total_ms": 149,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 101,
+   "total_ms": 111,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 569,
+   "raster_ms": 89,
+   "total_ms": 660,
+   "rows_built": 0,
+   "pieces_drawn": 2,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 112,
+   "total_ms": 128,
+   "rows_built": 3,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 94,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 98,
    "total_ms": 114,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 5,
+   "build_ms": 8,
+   "raster_ms": 98,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 24,
+   "raster_ms": 157,
+   "total_ms": 182,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 91,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 89,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 100,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 34,
+   "raster_ms": 106,
+   "total_ms": 142,
+   "rows_built": 3,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 105,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 113,
+   "total_ms": 129,
+   "rows_built": 3,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 96,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 102,
+   "total_ms": 111,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 92,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
    "raster_ms": 112,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 103,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 97,
+   "total_ms": 105,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 106,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 120,
+   "total_ms": 135,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 87,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 113,
+   "total_ms": 127,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 101,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 95,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 100,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 100,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 31,
+   "raster_ms": 105,
+   "total_ms": 138,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 106,
+   "total_ms": 118,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 93,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 102,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 98,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 92,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 103,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 108,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 104,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 98,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 31,
+   "raster_ms": 92,
+   "total_ms": 125,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 88,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 89,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 88,
+   "total_ms": 92,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 89,
+   "total_ms": 91,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 94,
+   "total_ms": 107,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 91,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 88,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 88,
+   "total_ms": 105,
+   "rows_built": 2,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 84,
+   "total_ms": 88,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 93,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 94,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 85,
+   "total_ms": 100,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 88,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 96,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 108,
+   "total_ms": 113,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 88,
+   "total_ms": 90,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 96,
+   "total_ms": 112,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 93,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 87,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 110,
    "total_ms": 118,
    "rows_built": 0,
    "pieces_drawn": 1,
@@ -68,74 +524,138 @@
   },
   {
    "build_ms": 3,
-   "raster_ms": 98,
-   "total_ms": 102,
+   "raster_ms": 93,
+   "total_ms": 98,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
-  },
-  {
-   "build_ms": 538,
-   "raster_ms": 82,
-   "total_ms": 622,
-   "rows_built": 0,
-   "pieces_drawn": 2,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 133,
-   "total_ms": 152,
-   "rows_built": 3,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 99,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 94,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 132,
-   "total_ms": 140,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 22,
-   "raster_ms": 173,
-   "total_ms": 196,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 1
   },
   {
    "build_ms": 1,
-   "raster_ms": 85,
-   "total_ms": 87,
+   "raster_ms": 104,
+   "total_ms": 106,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 3,
-   "raster_ms": 84,
+   "raster_ms": 85,
    "total_ms": 89,
    "rows_built": 0,
    "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 103,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 115,
+   "total_ms": 122,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 101,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 155,
+   "total_ms": 167,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 104,
+   "total_ms": 111,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 101,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 105,
+   "total_ms": 112,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 99,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 91,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 99,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 156,
+   "total_ms": 168,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 95,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 102,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 89,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
@@ -147,177 +667,281 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 31,
-   "raster_ms": 103,
-   "total_ms": 136,
-   "rows_built": 3,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 91,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 16,
-   "raster_ms": 106,
-   "total_ms": 124,
-   "rows_built": 3,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 99,
+   "build_ms": 3,
+   "raster_ms": 97,
    "total_ms": 102,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 7,
+   "build_ms": 1,
    "raster_ms": 84,
-   "total_ms": 92,
+   "total_ms": 88,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 101,
+   "total_ms": 111,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 99,
+   "total_ms": 105,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 8,
-   "raster_ms": 109,
-   "total_ms": 118,
+   "raster_ms": 108,
+   "total_ms": 117,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 3,
-   "raster_ms": 91,
-   "total_ms": 95,
+   "raster_ms": 110,
+   "total_ms": 114,
    "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 92,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 100,
-   "total_ms": 107,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 88,
-   "total_ms": 92,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 136,
-   "total_ms": 149,
-   "rows_built": 1,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 92,
-   "total_ms": 95,
+   "build_ms": 1,
+   "raster_ms": 94,
+   "total_ms": 96,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 107,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 31,
+   "raster_ms": 155,
+   "total_ms": 187,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
   },
   {
    "build_ms": 7,
-   "raster_ms": 99,
-   "total_ms": 108,
+   "raster_ms": 78,
+   "total_ms": 86,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 10,
-   "raster_ms": 104,
-   "total_ms": 115,
+   "build_ms": 8,
+   "raster_ms": 100,
+   "total_ms": 109,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 3,
-   "raster_ms": 98,
+   "raster_ms": 97,
    "total_ms": 102,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 86,
-   "total_ms": 89,
+   "build_ms": 1,
+   "raster_ms": 102,
+   "total_ms": 104,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 91,
-   "total_ms": 95,
-   "rows_built": 0,
+   "build_ms": 13,
+   "raster_ms": 108,
+   "total_ms": 123,
+   "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 6,
+   "build_ms": 7,
    "raster_ms": 102,
    "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 32,
-   "raster_ms": 108,
-   "total_ms": 142,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 98,
-   "total_ms": 113,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 88,
-   "total_ms": 96,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 9,
+   "raster_ms": 110,
+   "total_ms": 120,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 123,
+   "total_ms": 127,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 89,
+   "total_ms": 91,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 116,
+   "total_ms": 130,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 95,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 86,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 91,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 92,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 85,
+   "total_ms": 95,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
    "raster_ms": 99,
-   "total_ms": 110,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 81,
+   "total_ms": 91,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 87,
+   "total_ms": 99,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 95,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 96,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 97,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 95,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 108,
+   "total_ms": 119,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 87,
+   "total_ms": 89,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 103,
+   "total_ms": 109,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
@@ -331,216 +955,232 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 4,
-   "raster_ms": 93,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 100,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 90,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 3,
-   "raster_ms": 91,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 103,
+   "raster_ms": 100,
    "total_ms": 105,
    "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 88,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 1,
-   "raster_ms": 98,
-   "total_ms": 100,
+   "raster_ms": 84,
+   "total_ms": 85,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 32,
+   "raster_ms": 104,
+   "total_ms": 149,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 30,
-   "raster_ms": 96,
-   "total_ms": 128,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
+   "build_ms": 11,
+   "raster_ms": 91,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
   },
   {
-   "build_ms": 7,
-   "raster_ms": 81,
-   "total_ms": 88,
+   "build_ms": 50,
+   "raster_ms": 122,
+   "total_ms": 175,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 22,
+   "raster_ms": 94,
+   "total_ms": 118,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 8,
-   "raster_ms": 83,
+   "build_ms": 15,
+   "raster_ms": 135,
+   "total_ms": 151,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 25,
+   "raster_ms": 93,
+   "total_ms": 120,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 105,
+   "total_ms": 124,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 144,
+   "total_ms": 153,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 96,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 102,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 89,
    "total_ms": 92,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 100,
-   "total_ms": 104,
+   "build_ms": 5,
+   "raster_ms": 147,
+   "total_ms": 153,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
-   "raster_ms": 78,
-   "total_ms": 82,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 113,
-   "total_ms": 126,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 93,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 122,
-   "total_ms": 130,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 89,
-   "total_ms": 102,
-   "rows_built": 2,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 91,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 84,
-   "total_ms": 88,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 91,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 88,
-   "total_ms": 101,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
    "raster_ms": 95,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 97,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 106,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 96,
    "total_ms": 98,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 12,
-   "raster_ms": 81,
-   "total_ms": 94,
+   "build_ms": 25,
+   "raster_ms": 143,
+   "total_ms": 172,
    "rows_built": 1,
-   "pieces_drawn": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 7,
-   "raster_ms": 97,
-   "total_ms": 105,
+   "build_ms": 12,
+   "raster_ms": 100,
+   "total_ms": 113,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 8,
-   "raster_ms": 101,
+   "build_ms": 13,
+   "raster_ms": 88,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 103,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 93,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 132,
+   "total_ms": 142,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 99,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 82,
+   "total_ms": 93,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 92,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 100,
+   "total_ms": 107,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 90,
+   "total_ms": 92,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 91,
+   "total_ms": 107,
+   "rows_built": 2,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 103,
+   "total_ms": 115,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 97,
    "total_ms": 110,
    "rows_built": 0,
    "pieces_drawn": 1,
@@ -548,434 +1188,154 @@
   },
   {
    "build_ms": 3,
-   "raster_ms": 98,
-   "total_ms": 103,
+   "raster_ms": 84,
+   "total_ms": 89,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 1,
-   "raster_ms": 105,
-   "total_ms": 107,
+   "build_ms": 2,
+   "raster_ms": 86,
+   "total_ms": 89,
    "rows_built": 0,
    "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 41,
+   "raster_ms": 106,
+   "total_ms": 149,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 93,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 102,
+   "total_ms": 113,
+   "rows_built": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 3,
-   "raster_ms": 90,
-   "total_ms": 95,
+   "raster_ms": 95,
+   "total_ms": 100,
    "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 101,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 108,
-   "total_ms": 114,
-   "rows_built": 2,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
-   "raster_ms": 85,
-   "total_ms": 87,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 72,
-   "raster_ms": 180,
-   "total_ms": 260,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 88,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 26,
-   "raster_ms": 101,
-   "total_ms": 130,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 85,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 120,
-   "total_ms": 140,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 75,
+   "raster_ms": 77,
    "total_ms": 79,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 3,
-   "raster_ms": 84,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 96,
-   "total_ms": 108,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 197,
-   "total_ms": 216,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 103,
+   "build_ms": 5,
+   "raster_ms": 98,
    "total_ms": 106,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 15,
-   "raster_ms": 97,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 90,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 81,
-   "total_ms": 87,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 95,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 96,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 95,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 90,
-   "total_ms": 107,
+   "build_ms": 3,
+   "raster_ms": 87,
+   "total_ms": 91,
    "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 17,
-   "raster_ms": 93,
+   "build_ms": 18,
+   "raster_ms": 96,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 99,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 97,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 128,
+   "total_ms": 142,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 34,
+   "raster_ms": 110,
+   "total_ms": 146,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 100,
    "total_ms": 111,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 11,
-   "raster_ms": 107,
-   "total_ms": 119,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 144,
-   "total_ms": 150,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 87,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 84,
-   "total_ms": 88,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 92,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 42,
-   "raster_ms": 173,
-   "total_ms": 217,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 101,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 96,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 89,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 82,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 22,
-   "raster_ms": 106,
-   "total_ms": 129,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 97,
-   "total_ms": 109,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 132,
-   "total_ms": 144,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 94,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 90,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 115,
-   "total_ms": 133,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 8,
-   "raster_ms": 106,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 94,
+   "raster_ms": 98,
    "total_ms": 107,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 9,
-   "raster_ms": 125,
-   "total_ms": 137,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 91,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 19,
-   "raster_ms": 80,
-   "total_ms": 100,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
+   "build_ms": 2,
    "raster_ms": 86,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 91,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 91,
-   "total_ms": 103,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 96,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 97,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 111,
-   "total_ms": 118,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 95,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 96,
-   "total_ms": 109,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 81,
    "total_ms": 90,
    "rows_built": 0,
-   "pieces_drawn": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 101,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 88,
+   "total_ms": 102,
+   "rows_built": 1,
+   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
@@ -987,448 +1347,32 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 4,
-   "raster_ms": 89,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 98,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 89,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 103,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 60,
-   "raster_ms": 120,
-   "total_ms": 189,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 28,
-   "raster_ms": 90,
-   "total_ms": 121,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 18,
-   "raster_ms": 83,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 25,
-   "raster_ms": 98,
-   "total_ms": 127,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 111,
-   "total_ms": 127,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 97,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 145,
-   "total_ms": 152,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 109,
-   "total_ms": 112,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 98,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 103,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 130,
-   "total_ms": 136,
+   "build_ms": 8,
+   "raster_ms": 106,
+   "total_ms": 115,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 3,
-   "raster_ms": 102,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 19,
-   "raster_ms": 146,
-   "total_ms": 168,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 107,
-   "total_ms": 121,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 90,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 90,
+   "raster_ms": 92,
    "total_ms": 96,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 6,
-   "raster_ms": 81,
-   "total_ms": 88,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 120,
-   "total_ms": 131,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 101,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 87,
-   "total_ms": 97,
-   "rows_built": 2,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 1,
-   "raster_ms": 98,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 106,
-   "total_ms": 118,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 99,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 18,
-   "raster_ms": 96,
-   "total_ms": 115,
-   "rows_built": 2,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 96,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 91,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 88,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 85,
-   "total_ms": 87,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 39,
-   "raster_ms": 100,
-   "total_ms": 140,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 95,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
    "raster_ms": 93,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 96,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 97,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 87,
-   "total_ms": 92,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 99,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 100,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 19,
-   "raster_ms": 92,
-   "total_ms": 113,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 83,
-   "total_ms": 86,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 97,
-   "total_ms": 109,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 100,
-   "total_ms": 109,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 32,
-   "raster_ms": 113,
-   "total_ms": 147,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 106,
-   "total_ms": 109,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 99,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 114,
-   "total_ms": 123,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 97,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 91,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 92,
-   "total_ms": 106,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 101,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 98,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 100,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 100,
-   "total_ms": 102,
+   "total_ms": 95,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 5,
-   "raster_ms": 82,
+   "raster_ms": 83,
    "total_ms": 89,
    "rows_built": 1,
    "pieces_drawn": 0,
@@ -1436,694 +1380,46 @@
   },
   {
    "build_ms": 2,
-   "raster_ms": 94,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 67,
-   "raster_ms": 86,
-   "total_ms": 165,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 28,
-   "raster_ms": 96,
-   "total_ms": 126,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 84,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 100,
-   "total_ms": 113,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 110,
-   "total_ms": 119,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 87,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 89,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 85,
-   "total_ms": 88,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 20,
-   "raster_ms": 98,
-   "total_ms": 120,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 84,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 96,
-   "total_ms": 108,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 132,
-   "total_ms": 141,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 82,
-   "total_ms": 86,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 75,
-   "total_ms": 79,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 70,
-   "total_ms": 77,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 83,
-   "total_ms": 88,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 77,
+   "raster_ms": 81,
    "total_ms": 83,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 14,
-   "raster_ms": 120,
-   "total_ms": 135,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 97,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 87,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 138,
-   "total_ms": 152,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 98,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 93,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 96,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 100,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 31,
-   "raster_ms": 131,
-   "total_ms": 164,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 102,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 12,
-   "raster_ms": 78,
-   "total_ms": 91,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 104,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 100,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 100,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
    "raster_ms": 75,
-   "total_ms": 78,
+   "total_ms": 89,
    "rows_built": 1,
    "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 23,
-   "raster_ms": 101,
-   "total_ms": 127,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 87,
-   "total_ms": 91,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 96,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 94,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 88,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 101,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 82,
-   "total_ms": 95,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 93,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 7,
-   "raster_ms": 93,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 92,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 95,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 88,
-   "total_ms": 103,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 96,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 89,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 89,
+   "raster_ms": 87,
    "total_ms": 95,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 1,
-   "raster_ms": 97,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 22,
-   "raster_ms": 88,
-   "total_ms": 113,
-   "rows_built": 2,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 12,
-   "raster_ms": 91,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 97,
-   "total_ms": 108,
+   "raster_ms": 74,
+   "total_ms": 87,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 4,
-   "raster_ms": 91,
-   "total_ms": 97,
+   "raster_ms": 104,
+   "total_ms": 109,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 1,
-   "raster_ms": 98,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 79,
-   "total_ms": 82,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 95,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 45,
-   "raster_ms": 91,
-   "total_ms": 147,
-   "rows_built": 2,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 79,
-   "total_ms": 91,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 73,
-   "raster_ms": 108,
-   "total_ms": 186,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 21,
-   "raster_ms": 73,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 87,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 87,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 94,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 21,
-   "raster_ms": 136,
-   "total_ms": 159,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 102,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 103,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 93,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 88,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 89,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 19,
-   "raster_ms": 131,
-   "total_ms": 153,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 84,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 114,
-   "total_ms": 130,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 98,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 113,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 102,
-   "total_ms": 117,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 90,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 91,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 129,
-   "total_ms": 141,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 29,
-   "raster_ms": 105,
-   "total_ms": 136,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 98,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 94,
-   "total_ms": 108,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 22,
-   "raster_ms": 91,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 90,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 98,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 103,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 23,
-   "raster_ms": 90,
-   "total_ms": 115,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
    "raster_ms": 90,
    "total_ms": 92,
    "rows_built": 0,
@@ -2131,23 +1427,39 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 12,
-   "raster_ms": 91,
-   "total_ms": 106,
+   "build_ms": 2,
+   "raster_ms": 83,
+   "total_ms": 87,
    "rows_built": 0,
-   "pieces_drawn": 1,
+   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 6,
-   "raster_ms": 92,
-   "total_ms": 99,
+   "build_ms": 1,
+   "raster_ms": 85,
+   "total_ms": 87,
    "rows_built": 0,
-   "pieces_drawn": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 86,
+   "total_ms": 99,
+   "rows_built": 1,
+   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 13,
+   "raster_ms": 91,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
    "raster_ms": 92,
    "total_ms": 107,
    "rows_built": 0,
@@ -2155,17 +1467,17 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 6,
-   "raster_ms": 97,
-   "total_ms": 105,
+   "build_ms": 3,
+   "raster_ms": 119,
+   "total_ms": 124,
    "rows_built": 0,
-   "pieces_drawn": 2,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 96,
-   "total_ms": 99,
+   "build_ms": 1,
+   "raster_ms": 86,
+   "total_ms": 88,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
@@ -2179,17 +1491,601 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 83,
-   "total_ms": 86,
+   "build_ms": 1,
+   "raster_ms": 86,
+   "total_ms": 88,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
-   "raster_ms": 92,
+   "raster_ms": 75,
+   "total_ms": 78,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 89,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 118,
+   "total_ms": 132,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 97,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 88,
    "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 129,
+   "total_ms": 142,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 95,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 82,
+   "total_ms": 90,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 29,
+   "raster_ms": 112,
+   "total_ms": 142,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 95,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 102,
+   "total_ms": 115,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 102,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 103,
+   "total_ms": 111,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 108,
+   "total_ms": 117,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 109,
+   "total_ms": 114,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 104,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 85,
+   "total_ms": 102,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 85,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 128,
+   "total_ms": 140,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 93,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 98,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 97,
+   "total_ms": 109,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 91,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 93,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 93,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 84,
+   "total_ms": 86,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 103,
+   "total_ms": 120,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 93,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 105,
+   "total_ms": 114,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 92,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 84,
+   "total_ms": 86,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 81,
+   "total_ms": 96,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 91,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 84,
+   "total_ms": 92,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 89,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 108,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 83,
+   "total_ms": 87,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 93,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 82,
+   "total_ms": 90,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 85,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 91,
+   "raster_ms": 116,
+   "total_ms": 215,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 25,
+   "raster_ms": 97,
+   "total_ms": 124,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 100,
+   "total_ms": 117,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 95,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 90,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 120,
+   "total_ms": 139,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 96,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 97,
+   "total_ms": 120,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 85,
+   "total_ms": 90,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 95,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 132,
+   "total_ms": 152,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 82,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 89,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 90,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 84,
+   "total_ms": 92,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 90,
+   "total_ms": 103,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 83,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 97,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 29,
+   "raster_ms": 116,
+   "total_ms": 147,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 100,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 96,
+   "total_ms": 112,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 89,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 87,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 98,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 84,
+   "total_ms": 87,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 25,
+   "raster_ms": 89,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 92,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 94,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 97,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 93,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 82,
+   "total_ms": 88,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 79,
+   "total_ms": 83,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 87,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 78,
+   "total_ms": 82,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
@@ -2204,6 +2100,678 @@
   },
   {
    "build_ms": 4,
+   "raster_ms": 100,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 91,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 91,
+   "total_ms": 107,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 90,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 89,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 84,
+   "total_ms": 89,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 93,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 96,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 83,
+   "total_ms": 85,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 114,
+   "total_ms": 119,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 94,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 88,
+   "total_ms": 92,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 97,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 82,
+   "total_ms": 100,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 94,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 68,
+   "raster_ms": 86,
+   "total_ms": 161,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 119,
+   "total_ms": 140,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 84,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 88,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 81,
+   "total_ms": 88,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 30,
+   "raster_ms": 140,
+   "total_ms": 173,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 112,
+   "total_ms": 128,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 104,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 23,
+   "raster_ms": 100,
+   "total_ms": 125,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 106,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 97,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 97,
+   "total_ms": 112,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 95,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 98,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 101,
+   "total_ms": 116,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 84,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 100,
+   "total_ms": 115,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 117,
+   "total_ms": 124,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 106,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 93,
+   "total_ms": 111,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 95,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 99,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 131,
+   "total_ms": 145,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 86,
+   "total_ms": 90,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 118,
+   "total_ms": 134,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 19,
+   "raster_ms": 89,
+   "total_ms": 114,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 97,
+   "total_ms": 113,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 91,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 91,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 123,
+   "total_ms": 129,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 94,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 91,
+   "total_ms": 104,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 100,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 99,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 23,
+   "raster_ms": 100,
+   "total_ms": 124,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 104,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 99,
+   "total_ms": 113,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 97,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 110,
+   "total_ms": 122,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 115,
+   "total_ms": 127,
+   "rows_built": 2,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 107,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 97,
+   "total_ms": 107,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 99,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 110,
+   "total_ms": 115,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 99,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 91,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 31,
+   "raster_ms": 98,
+   "total_ms": 131,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 101,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 92,
+   "total_ms": 109,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 94,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 94,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 98,
+   "total_ms": 111,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 98,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 23,
+   "raster_ms": 108,
+   "total_ms": 133,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 91,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 104,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 19,
+   "raster_ms": 140,
+   "total_ms": 160,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 101,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 96,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 95,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 131,
+   "total_ms": 135,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 91,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 94,
+   "total_ms": 102,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 98,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 87,
+   "total_ms": 99,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 70,
+   "total_ms": 80,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 109,
+   "total_ms": 123,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
    "raster_ms": 87,
    "total_ms": 93,
    "rows_built": 0,
@@ -2211,18 +2779,18 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 82,
-   "total_ms": 84,
+   "build_ms": 1,
+   "raster_ms": 99,
+   "total_ms": 101,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 14,
-   "raster_ms": 80,
-   "total_ms": 97,
-   "rows_built": 2,
+   "build_ms": 10,
+   "raster_ms": 85,
+   "total_ms": 96,
+   "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
@@ -2236,32 +2804,32 @@
   },
   {
    "build_ms": 7,
-   "raster_ms": 89,
+   "raster_ms": 95,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 93,
    "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 87,
-   "total_ms": 92,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 92,
-   "total_ms": 94,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 3,
-   "raster_ms": 87,
-   "total_ms": 92,
+   "build_ms": 2,
+   "raster_ms": 86,
+   "total_ms": 88,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 74,
+   "total_ms": 77,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
@@ -2271,13 +2839,61 @@
    "raster_ms": 80,
    "total_ms": 82,
    "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 98,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 79,
+   "total_ms": 85,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 124,
+   "total_ms": 143,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 95,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 92,
+   "total_ms": 102,
+   "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 4,
-   "raster_ms": 84,
-   "total_ms": 89,
+   "raster_ms": 99,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 100,
+   "total_ms": 102,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
@@ -2285,15 +2901,231 @@
   {
    "build_ms": 2,
    "raster_ms": 96,
-   "total_ms": 98,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 103,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 119,
+   "total_ms": 126,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 97,
+   "total_ms": 110,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 84,
+   "total_ms": 86,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 99,
+   "total_ms": 106,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 100,
+   "total_ms": 102,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 3,
-   "raster_ms": 80,
-   "total_ms": 84,
+   "raster_ms": 106,
+   "total_ms": 111,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 88,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 108,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 87,
+   "total_ms": 100,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 81,
+   "total_ms": 83,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 87,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 103,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 78,
+   "total_ms": 85,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 85,
+   "total_ms": 87,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 93,
+   "raster_ms": 112,
+   "total_ms": 217,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 98,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 95,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 94,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 85,
+   "total_ms": 100,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 144,
+   "total_ms": 151,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 94,
+   "total_ms": 110,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 84,
+   "total_ms": 89,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 103,
+   "total_ms": 120,
+   "rows_built": 2,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 101,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 114,
+   "total_ms": 121,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
@@ -2307,49 +3139,1345 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 21,
-   "raster_ms": 95,
-   "total_ms": 117,
+   "build_ms": 12,
+   "raster_ms": 123,
+   "total_ms": 138,
    "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 99,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 88,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 96,
+   "total_ms": 99,
+   "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 16,
-   "raster_ms": 87,
+   "raster_ms": 92,
    "total_ms": 109,
-   "rows_built": 0,
+   "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 63,
-   "raster_ms": 99,
-   "total_ms": 166,
+   "build_ms": 20,
+   "raster_ms": 84,
+   "total_ms": 105,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 21,
-   "raster_ms": 84,
+   "build_ms": 12,
+   "raster_ms": 94,
    "total_ms": 107,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
+   "build_ms": 15,
+   "raster_ms": 101,
+   "total_ms": 118,
+   "rows_built": 2,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 84,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 125,
+   "total_ms": 139,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 93,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 68,
+   "total_ms": 70,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 91,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 89,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 94,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 89,
+   "total_ms": 108,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 82,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 91,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 97,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 90,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 87,
+   "total_ms": 96,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 81,
+   "total_ms": 83,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 82,
+   "total_ms": 93,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 82,
+   "total_ms": 85,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 80,
+   "total_ms": 84,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 109,
+   "total_ms": 123,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 90,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 98,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 102,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 88,
+   "total_ms": 90,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 87,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 85,
+   "total_ms": 100,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 90,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
    "build_ms": 11,
-   "raster_ms": 140,
-   "total_ms": 159,
+   "raster_ms": 95,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 90,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 99,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 75,
+   "raster_ms": 125,
+   "total_ms": 210,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 39,
+   "raster_ms": 88,
+   "total_ms": 130,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 99,
+   "total_ms": 118,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 21,
+   "raster_ms": 127,
+   "total_ms": 155,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 100,
+   "total_ms": 114,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 101,
+   "total_ms": 114,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 91,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 88,
+   "total_ms": 91,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 97,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 83,
+   "total_ms": 91,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 186,
+   "total_ms": 194,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 88,
+   "total_ms": 91,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 103,
+   "total_ms": 121,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 86,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 100,
+   "total_ms": 115,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 102,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 102,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 37,
+   "raster_ms": 130,
+   "total_ms": 169,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 92,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 93,
+   "total_ms": 114,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 102,
+   "total_ms": 117,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 100,
+   "total_ms": 111,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 91,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 105,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 137,
+   "total_ms": 143,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 93,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 86,
+   "total_ms": 98,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 94,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 99,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 88,
+   "total_ms": 91,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 94,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 96,
+   "total_ms": 113,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 104,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 106,
+   "total_ms": 117,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 110,
+   "total_ms": 123,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 92,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 106,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 93,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 93,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 95,
+   "total_ms": 109,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 95,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 101,
+   "total_ms": 111,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 7,
+   "raster_ms": 99,
+   "total_ms": 107,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 88,
+   "total_ms": 90,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 79,
+   "total_ms": 88,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 71,
+   "total_ms": 73,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 80,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 99,
+   "total_ms": 111,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 91,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 91,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 105,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 100,
+   "total_ms": 114,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 98,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 65,
+   "raster_ms": 97,
+   "total_ms": 170,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 87,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 120,
+   "total_ms": 133,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 104,
+   "total_ms": 113,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 137,
+   "total_ms": 149,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 100,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 29,
+   "raster_ms": 89,
+   "total_ms": 120,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 101,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 87,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 107,
+   "total_ms": 114,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 94,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 114,
+   "total_ms": 119,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 85,
+   "total_ms": 92,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 86,
+   "total_ms": 91,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 96,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 20,
    "raster_ms": 92,
+   "total_ms": 113,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 91,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 89,
    "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 101,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 91,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 77,
+   "total_ms": 90,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 93,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 90,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 81,
+   "total_ms": 87,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 79,
+   "total_ms": 81,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 81,
+   "total_ms": 85,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 79,
+   "total_ms": 81,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 83,
+   "total_ms": 98,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 92,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 83,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 18,
+   "raster_ms": 79,
+   "total_ms": 99,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 95,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 94,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 35,
+   "raster_ms": 76,
+   "total_ms": 114,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 96,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 87,
+   "total_ms": 104,
+   "rows_built": 2,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 86,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 98,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 94,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 84,
+   "total_ms": 87,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 98,
+   "total_ms": 111,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 96,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 97,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 87,
+   "total_ms": 92,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 89,
+   "total_ms": 104,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 97,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 93,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 81,
+   "total_ms": 88,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 91,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 21,
+   "raster_ms": 92,
+   "total_ms": 114,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 96,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 70,
+   "raster_ms": 107,
+   "total_ms": 184,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 98,
+   "total_ms": 114,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 95,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 92,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 92,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 93,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 94,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 17,
+   "raster_ms": 128,
+   "total_ms": 147,
+   "rows_built": 2,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 95,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 25,
+   "raster_ms": 131,
+   "total_ms": 158,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 107,
+   "total_ms": 121,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 90,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 84,
+   "total_ms": 90,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 94,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 119,
+   "total_ms": 126,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 101,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 102,
+   "total_ms": 119,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 96,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 96,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 96,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 125,
+   "total_ms": 141,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 98,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 84,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 91,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 100,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
@@ -2359,237 +4487,69 @@
    "raster_ms": 120,
    "total_ms": 126,
    "rows_built": 0,
-   "pieces_drawn": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 10,
-   "raster_ms": 80,
-   "total_ms": 93,
+   "build_ms": 2,
+   "raster_ms": 77,
+   "total_ms": 80,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 27,
-   "raster_ms": 134,
-   "total_ms": 163,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 103,
-   "total_ms": 120,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
+   "build_ms": 39,
    "raster_ms": 88,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 28,
-   "raster_ms": 93,
-   "total_ms": 123,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 94,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 106,
-   "total_ms": 122,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 105,
-   "total_ms": 112,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 101,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 94,
-   "total_ms": 109,
+   "total_ms": 128,
    "rows_built": 1,
    "pieces_drawn": 1,
-   "masks_composed": 0
+   "masks_composed": 1
   },
   {
-   "build_ms": 9,
-   "raster_ms": 100,
-   "total_ms": 110,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 89,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 116,
-   "total_ms": 123,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 104,
+   "build_ms": 8,
+   "raster_ms": 97,
    "total_ms": 106,
    "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 16,
-   "raster_ms": 103,
-   "total_ms": 121,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 92,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 97,
-   "total_ms": 108,
-   "rows_built": 0,
    "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 129,
-   "total_ms": 140,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 96,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 74,
-   "total_ms": 77,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 95,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 9,
-   "raster_ms": 82,
-   "total_ms": 92,
+   "raster_ms": 93,
+   "total_ms": 103,
    "rows_built": 0,
    "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 82,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 91,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 94,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 4,
-   "raster_ms": 119,
-   "total_ms": 125,
+   "raster_ms": 96,
+   "total_ms": 103,
    "rows_built": 0,
-   "pieces_drawn": 1,
+   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
-   "raster_ms": 91,
+   "raster_ms": 95,
    "total_ms": 98,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 13,
-   "raster_ms": 92,
-   "total_ms": 107,
+   "build_ms": 22,
+   "raster_ms": 94,
+   "total_ms": 118,
    "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 8,
+   "build_ms": 12,
    "raster_ms": 85,
-   "total_ms": 94,
+   "total_ms": 98,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
@@ -2603,271 +4563,87 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 26,
-   "raster_ms": 95,
-   "total_ms": 123,
+   "build_ms": 13,
+   "raster_ms": 100,
+   "total_ms": 115,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 96,
+   "total_ms": 104,
    "rows_built": 0,
    "pieces_drawn": 1,
-   "masks_composed": 1
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 94,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 89,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
   },
   {
    "build_ms": 2,
-   "raster_ms": 102,
-   "total_ms": 105,
+   "raster_ms": 87,
+   "total_ms": 90,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 13,
-   "raster_ms": 99,
-   "total_ms": 114,
+   "raster_ms": 93,
+   "total_ms": 107,
    "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 104,
-   "total_ms": 115,
-   "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 9,
-   "raster_ms": 104,
-   "total_ms": 114,
+   "build_ms": 7,
+   "raster_ms": 82,
+   "total_ms": 90,
    "rows_built": 0,
    "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 107,
-   "total_ms": 116,
-   "rows_built": 2,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 88,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 104,
-   "total_ms": 114,
-   "rows_built": 2,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 98,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 5,
-   "raster_ms": 99,
-   "total_ms": 105,
+   "raster_ms": 91,
+   "total_ms": 97,
    "rows_built": 0,
    "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 100,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 95,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 112,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 24,
-   "raster_ms": 106,
-   "total_ms": 132,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 103,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 76,
-   "raster_ms": 93,
-   "total_ms": 181,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 29,
-   "raster_ms": 103,
-   "total_ms": 135,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 18,
-   "raster_ms": 113,
-   "total_ms": 134,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 16,
-   "raster_ms": 106,
-   "total_ms": 126,
-   "rows_built": 1,
-   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 14,
-   "raster_ms": 99,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 114,
-   "total_ms": 127,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 103,
-   "total_ms": 109,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 95,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 19,
-   "raster_ms": 132,
-   "total_ms": 153,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 100,
-   "total_ms": 110,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 115,
-   "total_ms": 125,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 121,
-   "total_ms": 127,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 91,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 109,
-   "total_ms": 120,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 102,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 27,
-   "raster_ms": 99,
-   "total_ms": 129,
+   "raster_ms": 83,
+   "total_ms": 98,
    "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 9,
-   "raster_ms": 95,
-   "total_ms": 105,
+   "raster_ms": 96,
+   "total_ms": 106,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 10,
-   "raster_ms": 98,
-   "total_ms": 109,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
+   "build_ms": 6,
    "raster_ms": 85,
    "total_ms": 92,
    "rows_built": 0,
@@ -2875,127 +4651,223 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 91,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 81,
-   "total_ms": 96,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 78,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 80,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 73,
-   "total_ms": 78,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 93,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 73,
-   "total_ms": 76,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 88,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 77,
-   "total_ms": 84,
+   "build_ms": 4,
+   "raster_ms": 111,
+   "total_ms": 117,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
-   "raster_ms": 73,
-   "total_ms": 76,
+   "raster_ms": 98,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 102,
+   "total_ms": 114,
    "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 13,
-   "raster_ms": 110,
-   "total_ms": 125,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 75,
-   "total_ms": 80,
+   "raster_ms": 101,
+   "total_ms": 114,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 9,
-   "raster_ms": 89,
-   "total_ms": 99,
+   "build_ms": 12,
+   "raster_ms": 97,
+   "total_ms": 110,
    "rows_built": 0,
-   "pieces_drawn": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 9,
-   "raster_ms": 91,
-   "total_ms": 101,
+   "build_ms": 27,
+   "raster_ms": 200,
+   "total_ms": 240,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 4,
+   "raster_ms": 103,
+   "total_ms": 109,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 45,
+   "raster_ms": 83,
+   "total_ms": 131,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 25,
+   "raster_ms": 98,
+   "total_ms": 125,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 105,
+   "total_ms": 121,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 110,
+   "total_ms": 119,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 85,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 91,
+   "total_ms": 108,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
    "raster_ms": 99,
+   "total_ms": 114,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 95,
+   "total_ms": 112,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 16,
+   "raster_ms": 112,
+   "total_ms": 130,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 94,
    "total_ms": 105,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
+   "build_ms": 13,
+   "raster_ms": 107,
+   "total_ms": 120,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 97,
+   "total_ms": 101,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
    "build_ms": 1,
+   "raster_ms": 103,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 27,
+   "raster_ms": 114,
+   "total_ms": 143,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 83,
+   "total_ms": 86,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 92,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 125,
+   "total_ms": 136,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 90,
+   "total_ms": 97,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 92,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 116,
+   "total_ms": 122,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
    "raster_ms": 89,
    "total_ms": 91,
    "rows_built": 0,
@@ -3004,26 +4876,10 @@
   },
   {
    "build_ms": 3,
-   "raster_ms": 85,
-   "total_ms": 90,
+   "raster_ms": 77,
+   "total_ms": 82,
    "rows_built": 0,
    "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 82,
-   "total_ms": 84,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 109,
-   "total_ms": 117,
-   "rows_built": 1,
-   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
@@ -3035,27 +4891,11 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 15,
-   "raster_ms": 103,
-   "total_ms": 120,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 87,
-   "total_ms": 90,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 97,
-   "total_ms": 105,
+   "build_ms": 4,
+   "raster_ms": 124,
+   "total_ms": 130,
    "rows_built": 0,
-   "pieces_drawn": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
@@ -3067,15 +4907,15 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 4,
-   "raster_ms": 99,
-   "total_ms": 105,
+   "build_ms": 2,
+   "raster_ms": 92,
+   "total_ms": 95,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
+   "build_ms": 1,
    "raster_ms": 102,
    "total_ms": 104,
    "rows_built": 0,
@@ -3083,521 +4923,337 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 4,
-   "raster_ms": 93,
-   "total_ms": 98,
+   "build_ms": 15,
+   "raster_ms": 102,
+   "total_ms": 119,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 89,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 10,
+   "raster_ms": 125,
+   "total_ms": 136,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
+   "raster_ms": 94,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
    "raster_ms": 88,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 85,
    "total_ms": 90,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 6,
-   "raster_ms": 90,
+   "build_ms": 2,
+   "raster_ms": 96,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 124,
+   "total_ms": 138,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 88,
    "total_ms": 97,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 84,
-   "total_ms": 86,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 101,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 82,
-   "total_ms": 87,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 45,
-   "raster_ms": 84,
-   "total_ms": 139,
-   "rows_built": 2,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 90,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 53,
-   "raster_ms": 121,
-   "total_ms": 180,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
   },
   {
    "build_ms": 9,
    "raster_ms": 95,
    "total_ms": 105,
    "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 82,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 92,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 89,
-   "total_ms": 103,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 92,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 16,
-   "raster_ms": 111,
-   "total_ms": 130,
-   "rows_built": 1,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 3,
-   "raster_ms": 104,
+   "raster_ms": 107,
+   "total_ms": 112,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 94,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 101,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 85,
+   "total_ms": 87,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 95,
    "total_ms": 112,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 15,
-   "raster_ms": 105,
-   "total_ms": 122,
-   "rows_built": 2,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 87,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 83,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 97,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 79,
-   "total_ms": 94,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 94,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 87,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 80,
-   "total_ms": 87,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 16,
-   "raster_ms": 98,
-   "total_ms": 115,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 73,
-   "total_ms": 91,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 80,
-   "total_ms": 92,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 111,
-   "total_ms": 126,
-   "rows_built": 2,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 102,
-   "total_ms": 116,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 89,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
+   "build_ms": 8,
    "raster_ms": 95,
-   "total_ms": 101,
+   "total_ms": 103,
    "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 82,
-   "total_ms": 88,
-   "rows_built": 1,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 15,
-   "raster_ms": 90,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
+   "build_ms": 8,
    "raster_ms": 99,
-   "total_ms": 110,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 82,
-   "total_ms": 91,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 18,
-   "raster_ms": 77,
-   "total_ms": 97,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 96,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 78,
-   "total_ms": 92,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 85,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 84,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 85,
-   "total_ms": 93,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 79,
-   "total_ms": 86,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 86,
-   "total_ms": 95,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 80,
-   "total_ms": 82,
+   "total_ms": 108,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 3,
-   "raster_ms": 82,
-   "total_ms": 87,
+   "raster_ms": 96,
+   "total_ms": 100,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 6,
-   "raster_ms": 77,
-   "total_ms": 83,
+   "build_ms": 2,
+   "raster_ms": 90,
+   "total_ms": 93,
    "rows_built": 0,
    "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 77,
-   "total_ms": 91,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 79,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 10,
-   "raster_ms": 91,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 92,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 102,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 82,
-   "total_ms": 89,
+   "raster_ms": 88,
+   "total_ms": 100,
    "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 96,
-   "total_ms": 98,
+   "build_ms": 7,
+   "raster_ms": 100,
+   "total_ms": 108,
    "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 98,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 98,
+   "total_ms": 110,
+   "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 13,
-   "raster_ms": 90,
-   "total_ms": 105,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 99,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 101,
+   "build_ms": 8,
+   "raster_ms": 100,
    "total_ms": 109,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 22,
-   "raster_ms": 89,
-   "total_ms": 121,
+   "build_ms": 59,
+   "raster_ms": 105,
+   "total_ms": 170,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 105,
+   "total_ms": 122,
    "rows_built": 0,
    "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 104,
+   "total_ms": 113,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 5,
+   "raster_ms": 92,
+   "total_ms": 100,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 96,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 105,
+   "total_ms": 114,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 86,
+   "total_ms": 89,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 29,
+   "raster_ms": 115,
+   "total_ms": 146,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 100,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 86,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 104,
+   "total_ms": 110,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 103,
+   "total_ms": 106,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 20,
+   "raster_ms": 111,
+   "total_ms": 133,
+   "rows_built": 2,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 104,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 10,
-   "raster_ms": 82,
-   "total_ms": 93,
+   "raster_ms": 101,
+   "total_ms": 112,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 84,
+   "total_ms": 91,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 58,
-   "raster_ms": 137,
-   "total_ms": 197,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 32,
-   "raster_ms": 96,
-   "total_ms": 131,
+   "build_ms": 6,
+   "raster_ms": 88,
+   "total_ms": 95,
    "rows_built": 0,
-   "pieces_drawn": 1,
+   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 15,
-   "raster_ms": 94,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 25,
-   "raster_ms": 133,
-   "total_ms": 163,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 95,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 101,
-   "total_ms": 117,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 103,
-   "total_ms": 108,
+   "build_ms": 4,
+   "raster_ms": 83,
+   "total_ms": 89,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
@@ -3611,385 +5267,49 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 4,
-   "raster_ms": 101,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 98,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
+   "build_ms": 14,
+   "raster_ms": 124,
+   "total_ms": 139,
+   "rows_built": 1,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 10,
-   "raster_ms": 202,
-   "total_ms": 215,
+   "raster_ms": 93,
+   "total_ms": 104,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 108,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 91,
-   "total_ms": 107,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 102,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 88,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 83,
-   "total_ms": 88,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
+   "build_ms": 10,
    "raster_ms": 92,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 37,
-   "raster_ms": 119,
-   "total_ms": 158,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 88,
-   "total_ms": 91,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 20,
-   "raster_ms": 82,
-   "total_ms": 103,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 83,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 100,
-   "total_ms": 113,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 87,
-   "total_ms": 91,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 88,
-   "total_ms": 91,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 146,
-   "total_ms": 153,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 91,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 81,
-   "total_ms": 98,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 98,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 104,
-   "total_ms": 113,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 99,
    "total_ms": 103,
    "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 103,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 17,
-   "raster_ms": 103,
-   "total_ms": 122,
+   "raster_ms": 131,
+   "total_ms": 149,
    "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 97,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 83,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 94,
-   "total_ms": 107,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 95,
-   "total_ms": 105,
-   "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 8,
-   "raster_ms": 94,
+   "raster_ms": 93,
    "total_ms": 103,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 95,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 95,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 93,
-   "total_ms": 107,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 71,
-   "total_ms": 79,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 128,
-   "total_ms": 142,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 9,
-   "raster_ms": 96,
-   "total_ms": 106,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 99,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 91,
-   "total_ms": 110,
-   "rows_built": 2,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 110,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 103,
-   "total_ms": 121,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 91,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 93,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 102,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 30,
-   "raster_ms": 110,
-   "total_ms": 153,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 91,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 42,
-   "raster_ms": 113,
-   "total_ms": 158,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 95,
+   "raster_ms": 92,
    "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 23,
-   "raster_ms": 100,
-   "total_ms": 124,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 111,
-   "total_ms": 127,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
@@ -4003,63 +5323,7 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 6,
-   "raster_ms": 98,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 128,
-   "total_ms": 137,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 102,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 25,
-   "raster_ms": 95,
-   "total_ms": 123,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 98,
-   "total_ms": 112,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 98,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 95,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
+   "build_ms": 2,
    "raster_ms": 98,
    "total_ms": 100,
    "rows_built": 0,
@@ -4067,88 +5331,144 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 5,
-   "raster_ms": 130,
-   "total_ms": 137,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 99,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 80,
-   "total_ms": 86,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 97,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 20,
-   "raster_ms": 79,
-   "total_ms": 101,
-   "rows_built": 2,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 90,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 91,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 109,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 89,
-   "total_ms": 91,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 81,
-   "total_ms": 94,
+   "build_ms": 15,
+   "raster_ms": 103,
+   "total_ms": 119,
    "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 8,
-   "raster_ms": 88,
+   "raster_ms": 93,
+   "total_ms": 102,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 86,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 18,
+   "raster_ms": 96,
+   "total_ms": 115,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 93,
+   "total_ms": 104,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 95,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 92,
+   "total_ms": 98,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 85,
+   "total_ms": 88,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 98,
+   "total_ms": 103,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 96,
+   "total_ms": 99,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 90,
+   "total_ms": 105,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 95,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 96,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 85,
+   "total_ms": 89,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 92,
+   "total_ms": 94,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 82,
+   "total_ms": 96,
+   "rows_built": 1,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 98,
+   "total_ms": 107,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 9,
+   "raster_ms": 87,
    "total_ms": 97,
    "rows_built": 0,
    "pieces_drawn": 1,
@@ -4156,38 +5476,14 @@
   },
   {
    "build_ms": 8,
-   "raster_ms": 87,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 80,
-   "total_ms": 86,
-   "rows_built": 0,
+   "raster_ms": 92,
+   "total_ms": 101,
+   "rows_built": 2,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
-   "raster_ms": 87,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 77,
-   "total_ms": 81,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
    "raster_ms": 87,
    "total_ms": 89,
    "rows_built": 0,
@@ -4195,35 +5491,203 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 12,
-   "raster_ms": 77,
-   "total_ms": 90,
+   "build_ms": 11,
+   "raster_ms": 102,
+   "total_ms": 115,
    "rows_built": 1,
-   "pieces_drawn": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 9,
-   "raster_ms": 90,
-   "total_ms": 100,
+   "build_ms": 8,
+   "raster_ms": 94,
+   "total_ms": 103,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 13,
-   "raster_ms": 87,
+   "build_ms": 7,
+   "raster_ms": 94,
    "total_ms": 102,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 17,
+   "build_ms": 23,
    "raster_ms": 95,
-   "total_ms": 113,
+   "total_ms": 130,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 12,
+   "raster_ms": 81,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 46,
+   "raster_ms": 127,
+   "total_ms": 176,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 23,
+   "raster_ms": 97,
+   "total_ms": 122,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 101,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 46,
+   "raster_ms": 106,
+   "total_ms": 154,
+   "rows_built": 1,
+   "pieces_drawn": 1,
+   "masks_composed": 1
+  },
+  {
+   "build_ms": 14,
+   "raster_ms": 100,
+   "total_ms": 116,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 11,
+   "raster_ms": 82,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 29,
+   "raster_ms": 89,
+   "total_ms": 120,
    "rows_built": 1,
    "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 13,
+   "raster_ms": 95,
+   "total_ms": 111,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 19,
+   "raster_ms": 100,
+   "total_ms": 122,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 104,
+   "total_ms": 112,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 6,
+   "raster_ms": 137,
+   "total_ms": 144,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 4,
+   "raster_ms": 102,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 102,
+   "total_ms": 105,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 7,
+   "raster_ms": 126,
+   "total_ms": 136,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 8,
+   "raster_ms": 98,
+   "total_ms": 108,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 91,
+   "total_ms": 95,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 88,
+   "total_ms": 90,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 3,
+   "raster_ms": 91,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 2,
+   "raster_ms": 90,
+   "total_ms": 93,
+   "rows_built": 0,
+   "pieces_drawn": 0,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 15,
+   "raster_ms": 151,
+   "total_ms": 171,
+   "rows_built": 1,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
@@ -4235,1395 +5699,147 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 9,
-   "raster_ms": 107,
-   "total_ms": 117,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 34,
-   "raster_ms": 102,
-   "total_ms": 138,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 93,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 91,
-   "total_ms": 106,
-   "rows_built": 2,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 93,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 129,
-   "total_ms": 141,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 96,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 105,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 123,
-   "total_ms": 135,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 98,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 99,
-   "total_ms": 109,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 98,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 96,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 92,
-   "total_ms": 94,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 84,
-   "total_ms": 99,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 93,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 129,
-   "total_ms": 138,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 87,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 16,
-   "raster_ms": 93,
-   "total_ms": 116,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 58,
-   "raster_ms": 125,
-   "total_ms": 188,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 24,
+   "build_ms": 14,
    "raster_ms": 95,
-   "total_ms": 123,
+   "total_ms": 110,
    "rows_built": 0,
    "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 19,
-   "raster_ms": 98,
-   "total_ms": 119,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 86,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 94,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 93,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 80,
-   "total_ms": 83,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 93,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
    "raster_ms": 91,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 131,
-   "total_ms": 145,
-   "rows_built": 2,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 98,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 24,
-   "raster_ms": 129,
-   "total_ms": 156,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 99,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 109,
-   "total_ms": 119,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 94,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 104,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 135,
-   "total_ms": 141,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 92,
    "total_ms": 95,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 15,
-   "raster_ms": 96,
-   "total_ms": 113,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 98,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 85,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 95,
+   "build_ms": 2,
+   "raster_ms": 102,
    "total_ms": 105,
    "rows_built": 0,
-   "pieces_drawn": 1,
+   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 13,
-   "raster_ms": 128,
+   "build_ms": 22,
+   "raster_ms": 118,
    "total_ms": 142,
    "rows_built": 1,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 9,
-   "raster_ms": 93,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 98,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 95,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 103,
-   "total_ms": 110,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 118,
-   "total_ms": 125,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 79,
-   "total_ms": 81,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 36,
-   "raster_ms": 102,
-   "total_ms": 140,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 91,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 101,
-   "total_ms": 113,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 101,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 97,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 97,
-   "total_ms": 112,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 103,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 102,
-   "total_ms": 112,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 86,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 18,
-   "raster_ms": 112,
-   "total_ms": 131,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 91,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 93,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 92,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 96,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 95,
-   "total_ms": 110,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 8,
-   "raster_ms": 102,
-   "total_ms": 110,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 87,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 87,
-   "total_ms": 103,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 98,
-   "total_ms": 112,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 110,
-   "total_ms": 121,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 121,
-   "total_ms": 127,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 87,
-   "total_ms": 89,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 61,
-   "raster_ms": 91,
-   "total_ms": 162,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 30,
-   "raster_ms": 86,
-   "total_ms": 118,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 19,
-   "raster_ms": 95,
-   "total_ms": 116,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 190,
-   "total_ms": 204,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 88,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 85,
-   "total_ms": 101,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 97,
-   "total_ms": 110,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 90,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 110,
-   "total_ms": 118,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 72,
-   "total_ms": 75,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 92,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 95,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 93,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 19,
-   "raster_ms": 135,
-   "total_ms": 157,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 95,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 80,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 84,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 97,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 37,
-   "raster_ms": 114,
-   "total_ms": 154,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 86,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 90,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 94,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 100,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 98,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 97,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 121,
-   "total_ms": 126,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 89,
+   "raster_ms": 82,
    "total_ms": 91,
    "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 96,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 95,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 99,
-   "total_ms": 105,
-   "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 6,
-   "raster_ms": 82,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 80,
-   "total_ms": 84,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 96,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 104,
-   "total_ms": 121,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 97,
+   "build_ms": 14,
+   "raster_ms": 94,
    "total_ms": 109,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 13,
-   "raster_ms": 100,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 97,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 95,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 3,
-   "raster_ms": 95,
-   "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 93,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 97,
-   "total_ms": 113,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 92,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 98,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 85,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 78,
-   "total_ms": 80,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 101,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 99,
-   "total_ms": 101,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 18,
-   "raster_ms": 102,
-   "total_ms": 121,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 74,
-   "total_ms": 83,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 81,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 101,
-   "total_ms": 105,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 86,
+   "raster_ms": 83,
    "total_ms": 88,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 99,
-   "total_ms": 114,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 1,
-   "raster_ms": 91,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 65,
-   "raster_ms": 94,
-   "total_ms": 165,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 44,
-   "raster_ms": 90,
-   "total_ms": 139,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 91,
-   "total_ms": 106,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 97,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
+   "build_ms": 2,
    "raster_ms": 95,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 90,
    "total_ms": 98,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 3,
-   "raster_ms": 110,
-   "total_ms": 116,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 84,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 96,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 99,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 141,
-   "total_ms": 160,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 101,
-   "total_ms": 117,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 100,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 106,
-   "total_ms": 111,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 85,
-   "total_ms": 92,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 21,
-   "raster_ms": 114,
-   "total_ms": 137,
-   "rows_built": 2,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 108,
-   "total_ms": 120,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 18,
-   "raster_ms": 99,
-   "total_ms": 119,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 151,
-   "total_ms": 157,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 116,
-   "total_ms": 120,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 87,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 95,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 130,
-   "total_ms": 145,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 84,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 85,
-   "total_ms": 96,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 93,
-   "total_ms": 106,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 8,
-   "raster_ms": 81,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 91,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 100,
-   "total_ms": 109,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 82,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
    "raster_ms": 92,
-   "total_ms": 104,
+   "total_ms": 102,
    "rows_built": 1,
-   "pieces_drawn": 0,
+   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 8,
-   "raster_ms": 85,
-   "total_ms": 94,
+   "build_ms": 2,
+   "raster_ms": 95,
+   "total_ms": 98,
    "rows_built": 0,
-   "pieces_drawn": 1,
+   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 13,
-   "raster_ms": 98,
-   "total_ms": 112,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 19,
-   "raster_ms": 110,
-   "total_ms": 131,
+   "raster_ms": 86,
+   "total_ms": 101,
    "rows_built": 1,
-   "pieces_drawn": 1,
+   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 11,
-   "raster_ms": 96,
-   "total_ms": 110,
+   "build_ms": 8,
+   "raster_ms": 92,
+   "total_ms": 101,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 9,
-   "raster_ms": 100,
-   "total_ms": 110,
+   "raster_ms": 93,
+   "total_ms": 103,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 93,
+   "build_ms": 3,
+   "raster_ms": 91,
+   "total_ms": 96,
+   "rows_built": 0,
+   "pieces_drawn": 1,
+   "masks_composed": 0
+  },
+  {
+   "build_ms": 1,
+   "raster_ms": 95,
    "total_ms": 97,
    "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
-   "build_ms": 2,
-   "raster_ms": 101,
-   "total_ms": 103,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 94,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 89,
+   "build_ms": 4,
+   "raster_ms": 84,
    "total_ms": 91,
    "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 97,
-   "total_ms": 110,
-   "rows_built": 1,
    "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
-   "raster_ms": 97,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 97,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 82,
+   "raster_ms": 89,
    "total_ms": 92,
    "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 77,
-   "total_ms": 81,
-   "rows_built": 0,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 2,
-   "raster_ms": 95,
-   "total_ms": 97,
+   "raster_ms": 97,
+   "total_ms": 101,
    "rows_built": 0,
    "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 86,
-   "total_ms": 104,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 7,
-   "raster_ms": 94,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 81,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 91,
-   "total_ms": 100,
-   "rows_built": 2,
-   "pieces_drawn": 1,
    "masks_composed": 0
   },
   {
@@ -5635,385 +5851,25 @@
    "masks_composed": 0
   },
   {
-   "build_ms": 67,
-   "raster_ms": 122,
-   "total_ms": 197,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 26,
-   "raster_ms": 97,
-   "total_ms": 126,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 98,
-   "total_ms": 118,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 89,
-   "total_ms": 98,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 100,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 141,
-   "total_ms": 160,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 81,
-   "total_ms": 95,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 14,
-   "raster_ms": 126,
-   "total_ms": 141,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 47,
-   "raster_ms": 107,
-   "total_ms": 156,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 1
-  },
-  {
-   "build_ms": 15,
-   "raster_ms": 103,
-   "total_ms": 120,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 86,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 26,
-   "raster_ms": 100,
-   "total_ms": 129,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 16,
-   "raster_ms": 105,
-   "total_ms": 124,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 105,
-   "total_ms": 115,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
    "build_ms": 11,
    "raster_ms": 88,
    "total_ms": 100,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
-   "raster_ms": 124,
-   "total_ms": 134,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 12,
-   "raster_ms": 98,
-   "total_ms": 112,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 103,
-   "total_ms": 112,
-   "rows_built": 0,
+   "rows_built": 1,
    "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 7,
-   "raster_ms": 122,
-   "total_ms": 131,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 96,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 88,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 96,
-   "total_ms": 99,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 98,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 90,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 17,
-   "raster_ms": 131,
-   "total_ms": 150,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 102,
-   "total_ms": 113,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 94,
-   "total_ms": 107,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 109,
-   "total_ms": 114,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 86,
-   "total_ms": 89,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 13,
-   "raster_ms": 103,
-   "total_ms": 118,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 9,
    "raster_ms": 99,
-   "total_ms": 109,
+   "total_ms": 107,
    "rows_built": 0,
    "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 101,
-   "total_ms": 110,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 4,
-   "raster_ms": 80,
-   "total_ms": 86,
-   "rows_built": 0,
-   "pieces_drawn": 0,
    "masks_composed": 0
   },
   {
    "build_ms": 7,
-   "raster_ms": 94,
-   "total_ms": 104,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 88,
-   "total_ms": 97,
-   "rows_built": 1,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 78,
-   "total_ms": 81,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 11,
-   "raster_ms": 88,
-   "total_ms": 100,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 81,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 8,
-   "raster_ms": 84,
-   "total_ms": 93,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 105,
-   "total_ms": 109,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 1,
-   "raster_ms": 95,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 5,
-   "raster_ms": 85,
-   "total_ms": 92,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 96,
-   "total_ms": 102,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 3,
-   "raster_ms": 93,
-   "total_ms": 97,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 2,
-   "raster_ms": 89,
-   "total_ms": 92,
-   "rows_built": 0,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 83,
-   "total_ms": 95,
-   "rows_built": 1,
-   "pieces_drawn": 0,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 6,
-   "raster_ms": 83,
-   "total_ms": 90,
-   "rows_built": 0,
-   "pieces_drawn": 1,
-   "masks_composed": 0
-  },
-  {
-   "build_ms": 10,
-   "raster_ms": 97,
-   "total_ms": 108,
+   "raster_ms": 98,
+   "total_ms": 106,
    "rows_built": 0,
    "pieces_drawn": 1,
    "masks_composed": 0

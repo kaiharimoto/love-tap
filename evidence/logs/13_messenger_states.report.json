@@ -3,123 +3,135 @@
  "view": {
   "region": "chat",
   "visible": [
-   "0001MCJ1M0SEHZ02005CCAVYW4",
-   "0001MCJ1M0SEHZ02005CCAVYW5",
-   "0001MCJ1M0SEHZ02005CCAVYWC",
-   "0001MCJ1M0SEHZ02005CCAVYWD",
-   "0001MCJ1M0SEHZ02005CCAVYWE",
-   "0001MCJ1M0SEHZ02005CCAVYW3"
+   "01M1MCPB2GZV1EAS1K560WGZSM",
+   "0001MCJ1M05KVSSP7MN1H89FBG",
+   "0001MCJ1M05KVSSP7MN1H89FBH",
+   "0001MCJ1M05KVSSP7MN1H89FBP",
+   "0001MCJ1M05KVSSP7MN1H89FBQ",
+   "0001MCJ1M05KVSSP7MN1H89FBR",
+   "0001MCJ1M05KVSSP7MN1H89FBF"
   ],
   "whole_on_the_glass": [
-   "0001MCJ1M0SEHZ02005CCAVYW5",
-   "0001MCJ1M0SEHZ02005CCAVYWC",
-   "0001MCJ1M0SEHZ02005CCAVYWD",
-   "0001MCJ1M0SEHZ02005CCAVYWE",
-   "0001MCJ1M0SEHZ02005CCAVYW3"
+   "0001MCJ1M05KVSSP7MN1H89FBG",
+   "0001MCJ1M05KVSSP7MN1H89FBH",
+   "0001MCJ1M05KVSSP7MN1H89FBP",
+   "0001MCJ1M05KVSSP7MN1H89FBQ",
+   "0001MCJ1M05KVSSP7MN1H89FBR",
+   "0001MCJ1M05KVSSP7MN1H89FBF"
   ],
   "clipped_at_an_edge": {
-   "0001MCJ1M0SEHZ02005CCAVYW4": 0.418
+   "01M1MCPB2GZV1EAS1K560WGZSM": 0.323
   },
   "delivery": {
-   "0001MCJ1M0SEHZ02005CCAVYW5": {
+   "0001MCJ1M05KVSSP7MN1H89FBH": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0SEHZ02005CCAVYWC": {
+   "0001MCJ1M05KVSSP7MN1H89FBP": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0SEHZ02005CCAVYWD": {
+   "0001MCJ1M05KVSSP7MN1H89FBQ": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0SEHZ02005CCAVYWE": {
+   "0001MCJ1M05KVSSP7MN1H89FBR": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0SEHZ02005CCAVYW3": {
+   "0001MCJ1M05KVSSP7MN1H89FBF": {
     "state": "refused",
     "says": "it would not go"
    }
   },
   "refusals_on_the_glass": {
-   "0001MCJ1M0SEHZ02005CCAVYW3": "this phone is on an older version and cannot read that"
+   "0001MCJ1M05KVSSP7MN1H89FBF": "this phone is on an older version and cannot read that"
   },
   "states_on_the_glass": {
    "sent": 4,
    "it would not go": 1
   },
-  "reactions": {},
+  "reactions": {
+   "01M1MCPB2GZV1EAS1K560WGZSM": 1
+  },
   "edited": [
-   "0001MCJ1M0SEHZ02005CCAVYW5"
+   "0001MCJ1M05KVSSP7MN1H89FBH"
   ],
   "taken_back": [
-   "0001MCJ1M0SEHZ02005CCAVYW4"
+   "01M1MCPB2GZV1EAS1K560WGZSM",
+   "0001MCJ1M05KVSSP7MN1H89FBG"
   ],
   "scroll": {
-   "first": 8072,
+   "first": 8071,
    "last": 8078,
    "of": 8078
   },
   "paper": [
-   "0001MCJ1M0SEHZ02005CCAVYW4",
-   "0001MCJ1M0SEHZ02005CCAVYW5",
-   "0001MCJ1M0SEHZ02005CCAVYWC",
-   "0001MCJ1M0SEHZ02005CCAVYWD",
-   "0001MCJ1M0SEHZ02005CCAVYWE",
-   "0001MCJ1M0SEHZ02005CCAVYW3"
+   "01M1MCPB2GZV1EAS1K560WGZSM",
+   "0001MCJ1M05KVSSP7MN1H89FBG",
+   "0001MCJ1M05KVSSP7MN1H89FBH",
+   "0001MCJ1M05KVSSP7MN1H89FBP",
+   "0001MCJ1M05KVSSP7MN1H89FBQ",
+   "0001MCJ1M05KVSSP7MN1H89FBR",
+   "0001MCJ1M05KVSSP7MN1H89FBF"
   ],
-  "paper_whole_on_the_glass": 5,
+  "paper_whole_on_the_glass": 6,
   "rows_cost": [
+   {
+    "row": 8071,
+    "type": "message",
+    "tall": 93,
+    "top": -63
+   },
    {
     "row": 8072,
     "type": "message",
-    "tall": 91,
-    "top": -53
+    "tall": 90,
+    "top": 30
    },
    {
     "row": 8073,
     "type": "message",
     "tall": 129,
-    "top": 38
+    "top": 120
    },
    {
     "row": 8074,
     "type": "message",
-    "tall": 129,
-    "top": 167
+    "tall": 115,
+    "top": 249
    },
    {
     "row": 8075,
     "type": "message",
-    "tall": 103,
-    "top": 296
+    "tall": 90,
+    "top": 364
    },
    {
     "row": 8076,
     "type": "message",
-    "tall": 83,
-    "top": 399
+    "tall": 89,
+    "top": 454
    },
    {
     "row": 8077,
     "type": "message",
-    "tall": 215,
-    "top": 482
+    "tall": 154,
+    "top": 543
    }
   ],
   "viewport_tall": 707.2,
   "composer": "the second one, then",
   "says_the_link_is_down": false,
   "attaching": false,
-  "replying_to": "01M1MCK836MKRGXE7FSGKME89D",
+  "replying_to": "01M1MCP6XX77PE0VYVNWJ33K7J",
   "replies_on_the_glass": {
-   "0001MCJ1M0SEHZ02005CCAVYWC": {
-    "id": "01M1MCK836MKRGXE7FSGKME89D",
+   "0001MCJ1M05KVSSP7MN1H89FBP": {
+    "id": "01M1MCP6XX77PE0VYVNWJ33K7J",
     "seq": 14067,
     "author": "noor",
     "device": "android",
-    "ts": 1788464439398,
+    "ts": 1788464536509,
     "type": "message",
     "refs": [
      "01M1M3F41R2APQC59QKBMZK4XF"
@@ -134,57 +146,61 @@
   "editing": null,
   "anchor": null,
   "kinds": {
-   "message": 6
+   "message": 7
   },
   "folded_in": {
-   "reaction": 0,
+   "reaction": 1,
    "message_edit": 1,
-   "message_delete": 1,
-   "read_marker": 0
+   "message_delete": 2,
+   "read_marker": 1
   },
   "partner_typing": true
  },
  "visible": [
-  "0001MCJ1M0SEHZ02005CCAVYW4",
-  "0001MCJ1M0SEHZ02005CCAVYW5",
-  "0001MCJ1M0SEHZ02005CCAVYWC",
-  "0001MCJ1M0SEHZ02005CCAVYWD",
-  "0001MCJ1M0SEHZ02005CCAVYWE",
-  "0001MCJ1M0SEHZ02005CCAVYW3"
+  "01M1MCPB2GZV1EAS1K560WGZSM",
+  "0001MCJ1M05KVSSP7MN1H89FBG",
+  "0001MCJ1M05KVSSP7MN1H89FBH",
+  "0001MCJ1M05KVSSP7MN1H89FBP",
+  "0001MCJ1M05KVSSP7MN1H89FBQ",
+  "0001MCJ1M05KVSSP7MN1H89FBR",
+  "0001MCJ1M05KVSSP7MN1H89FBF"
  ],
  "paper": [
-  "0001MCJ1M0SEHZ02005CCAVYW4",
-  "0001MCJ1M0SEHZ02005CCAVYW5",
-  "0001MCJ1M0SEHZ02005CCAVYWC",
-  "0001MCJ1M0SEHZ02005CCAVYWD",
-  "0001MCJ1M0SEHZ02005CCAVYWE",
-  "0001MCJ1M0SEHZ02005CCAVYW3"
+  "01M1MCPB2GZV1EAS1K560WGZSM",
+  "0001MCJ1M05KVSSP7MN1H89FBG",
+  "0001MCJ1M05KVSSP7MN1H89FBH",
+  "0001MCJ1M05KVSSP7MN1H89FBP",
+  "0001MCJ1M05KVSSP7MN1H89FBQ",
+  "0001MCJ1M05KVSSP7MN1H89FBR",
+  "0001MCJ1M05KVSSP7MN1H89FBF"
  ],
  "tears": {
-  "0001MCJ1M0SEHZ02005CCAVYW4": "tear_013",
-  "0001MCJ1M0SEHZ02005CCAVYW5": "tear_035",
-  "0001MCJ1M0SEHZ02005CCAVYWC": "tear_008",
-  "0001MCJ1M0SEHZ02005CCAVYWD": "tear_029",
-  "0001MCJ1M0SEHZ02005CCAVYWE": "tear_050",
-  "0001MCJ1M0SEHZ02005CCAVYW3": "tear_049"
+  "01M1MCPB2GZV1EAS1K560WGZSM": "tear_024",
+  "0001MCJ1M05KVSSP7MN1H89FBG": "tear_013",
+  "0001MCJ1M05KVSSP7MN1H89FBH": "tear_035",
+  "0001MCJ1M05KVSSP7MN1H89FBP": "tear_023",
+  "0001MCJ1M05KVSSP7MN1H89FBQ": "tear_045",
+  "0001MCJ1M05KVSSP7MN1H89FBR": "tear_008",
+  "0001MCJ1M05KVSSP7MN1H89FBF": "tear_008"
  },
  "stocks": {
-  "0001MCJ1M0SEHZ02005CCAVYW4": "legal_01",
-  "0001MCJ1M0SEHZ02005CCAVYW5": "looseleaf_03",
-  "0001MCJ1M0SEHZ02005CCAVYWC": "legal_01",
-  "0001MCJ1M0SEHZ02005CCAVYWD": "legal_01",
-  "0001MCJ1M0SEHZ02005CCAVYWE": "looseleaf_04",
-  "0001MCJ1M0SEHZ02005CCAVYW3": "legal_02"
+  "01M1MCPB2GZV1EAS1K560WGZSM": "lined_04",
+  "0001MCJ1M05KVSSP7MN1H89FBG": "lined_02",
+  "0001MCJ1M05KVSSP7MN1H89FBH": "lined_03",
+  "0001MCJ1M05KVSSP7MN1H89FBP": "legal_02",
+  "0001MCJ1M05KVSSP7MN1H89FBQ": "legal_01",
+  "0001MCJ1M05KVSSP7MN1H89FBR": "legal_01",
+  "0001MCJ1M05KVSSP7MN1H89FBF": "lined_04"
  },
  "scroll": {
-  "first": 8072,
+  "first": 8071,
   "last": 8078,
   "of": 8078
  },
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 272,
  "seed": 20260903,
- "events": 14087,
+ "events": 14083,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -199,7 +215,7 @@
   "266x126 of it, at its own size",
   33602.72727272727
  ],
- "paper_at_its_own_size": 246,
+ "paper_at_its_own_size": 240,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [
   "sticky_blue_02"
@@ -207,7 +223,7 @@
  "paper_that_arrived_after_the_piece_was_drawn": 16,
  "tears_that_had_not_arrived": {},
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 78,
+ "masks_dropped_to_stay_inside_the_pool": 69,
  "stocks_held": 17,
  "stocks_held_bytes": 245769520,
  "stocks_dropped_to_stay_inside_the_pool": 0,
@@ -232,18 +248,18 @@
  "asked_a_motor_for": [],
  "the_launch_took": {
   "the framework": 7,
-  "the library index": 18,
-  "the ink plates": 46,
-  "the desk": 187,
-  "the log": 6546,
-  "the first frame": 411,
-  "everything": 7215
+  "the library index": 19,
+  "the ink plates": 36,
+  "the desk": 155,
+  "the log": 600,
+  "the first frame": 345,
+  "everything": 1162
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 14,
-  "pushed": 18,
+  "rounds": 16,
+  "pushed": 13,
   "refused": 1,
   "pulled": 7,
   "blobs_fetched": 0,
@@ -251,18 +267,18 @@
   "last_fault": "dropped (POST /events)",
   "pending": 1,
   "refused_in_the_outbox": 1,
-  "cursor": 14086,
+  "cursor": 14082,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14086,
-   "our_cursor": 14086,
+   "peer_cursor": 14082,
+   "our_cursor": 14082,
    "last_error": null,
-   "since": "2026-09-12T21:46:56.274Z",
-   "last_contact": "2026-09-12T21:48:52.530Z",
+   "since": "2026-09-13T01:51:46.505Z",
+   "last_contact": "2026-09-13T01:53:36.604Z",
    "certificate": null,
    "setup_address": null
   }

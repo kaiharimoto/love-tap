@@ -10,17 +10,17 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1788,
+   "ms": 1945,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3210
+   "ms": 3318
   },
   {
    "do": "wait",
-   "ms": 1803
+   "ms": 1801
   },
   {
    "do": "wait",
@@ -28,171 +28,171 @@
   },
   {
    "do": "openCorner",
-   "ms": 2531
+   "ms": 2619
   },
   {
    "do": "frames",
-   "ms": 61719
+   "ms": 60329
   },
   {
-   "at": 80919,
+   "at": 79557,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 163
+   "ms": 169
   },
   {
    "do": "step",
-   "ms": 849
+   "ms": 844
   },
   {
    "do": "frames",
-   "ms": 67181
+   "ms": 67603
   },
   {
-   "at": 149130,
+   "at": 148185,
    "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 184
+   "ms": 183
   },
   {
    "do": "step",
-   "ms": 814
+   "ms": 838
   },
   {
    "do": "frames",
-   "ms": 64872
+   "ms": 64710
   },
   {
-   "at": 215000,
+   "at": 213913,
    "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 180
+   "ms": 178
   },
   {
    "do": "step",
-   "ms": 909
+   "ms": 896
   },
   {
    "do": "frames",
-   "ms": 37547
+   "ms": 35895
   },
   {
-   "at": 253649,
+   "at": 250901,
    "said": "__deskShowFamily(ache) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 194
+   "ms": 197
   },
   {
    "do": "step",
-   "ms": 812
+   "ms": 1064
   },
   {
    "do": "frames",
-   "ms": 27073
+   "ms": 26836
   },
   {
-   "at": 281727,
+   "at": 278994,
    "said": "__deskShowFamily(static) ok, 6 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 192
+   "ms": 195
   },
   {
    "do": "step",
-   "ms": 869
+   "ms": 914
   },
   {
    "do": "frames",
-   "ms": 28002
+   "ms": 27806
   },
   {
-   "at": 310817,
+   "at": 307909,
    "said": "__deskHoldOver(pigeon) ok, holding pigeon"
   },
   {
    "do": "holdOver",
-   "ms": 220
+   "ms": 193
   },
   {
    "do": "frames",
-   "ms": 45312
+   "ms": 46327
   },
   {
-   "at": 356314,
+   "at": 354413,
    "said": "__deskLetGo() ok, sent at 0.97"
   },
   {
    "do": "letGo",
-   "ms": 185
+   "ms": 178
   },
   {
    "do": "frames",
-   "ms": 139705
+   "ms": 140582
   },
   {
    "do": "goTo",
-   "ms": 3844
+   "ms": 3791
   },
   {
    "do": "step",
-   "ms": 1590
+   "ms": 1482
   },
   {
    "do": "openCorner",
-   "ms": 1677
+   "ms": 1548
   },
   {
    "do": "frames",
-   "ms": 29019
+   "ms": 29327
   },
   {
    "do": "openCorner",
-   "ms": 1361
+   "ms": 1346
   },
   {
    "do": "step",
-   "ms": 782
+   "ms": 747
   },
   {
    "do": "far",
-   "ms": 404
+   "ms": 406
   },
   {
    "do": "awaitArrival",
-   "ms": 1166
+   "ms": 1124
   },
   {
    "do": "frames",
-   "ms": 153614
+   "ms": 153408
   },
   {
    "do": "goTo",
-   "ms": 3179
+   "ms": 3134
   },
   {
    "do": "step",
-   "ms": 1776
+   "ms": 1619
   },
   {
    "do": "far",
-   "ms": 473
+   "ms": 488
   },
   {
    "do": "awaitArrival",
-   "ms": 2007
+   "ms": 2697
   },
   {
    "do": "frames",
-   "ms": 152199
+   "ms": 153622
   },
   {
    "do": "report",
@@ -275,7 +275,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtz2p5xn"
+     "pwa-mtz7nq5k"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -303,15 +303,15 @@
     "225x78 of it, at its own size",
     17618.35419047963
    ],
-   "paper_at_its_own_size": 9571,
-   "paper_stretched_to_fit": 7,
+   "paper_at_its_own_size": 9576,
+   "paper_stretched_to_fit": 9,
    "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 15,
+   "paper_that_arrived_after_the_piece_was_drawn": 14,
    "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 196,
-   "stocks_held": 16,
-   "stocks_held_bytes": 231918320,
+   "masks_dropped_to_stay_inside_the_pool": 190,
+   "stocks_held": 15,
+   "stocks_held_bytes": 218067120,
    "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
     "held": 78,
@@ -334,7 +334,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-13T00:37:15.504Z",
+    "started_at": "2026-09-13T02:56:05.330Z",
     "pattern": [
      {
       "ms": 150,
@@ -420,12 +420,12 @@
    ],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 17,
-    "the ink plates": 37,
-    "the desk": 164,
-    "the log": 6531,
-    "the first frame": 316,
-    "everything": 7072
+    "the library index": 19,
+    "the ink plates": 43,
+    "the desk": 186,
+    "the log": 6469,
+    "the first frame": 344,
+    "everything": 7068
    },
    "sync": {
     "transport": "local",
@@ -448,8 +448,8 @@
      "peer_cursor": 14067,
      "our_cursor": 14067,
      "last_error": null,
-     "since": "2026-09-13T00:25:47.340Z",
-     "last_contact": "2026-09-13T00:39:44.504Z",
+     "since": "2026-09-13T02:44:38.313Z",
+     "last_contact": "2026-09-13T02:58:34.806Z",
      "certificate": null,
      "setup_address": null
     }
@@ -479,19 +479,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 8364,
+ "cold_ms": 8263,
  "load": {
-  "ms": 8364,
+  "ms": 8263,
   "store": "fresh",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
-   "the library index": 17,
-   "the ink plates": 37,
-   "the desk": 164,
-   "the log": 6531,
-   "the first frame": 316,
-   "everything": 7072
+   "the library index": 19,
+   "the ink plates": 43,
+   "the desk": 186,
+   "the log": 6469,
+   "the first frame": 344,
+   "everything": 7068
   }
  },
  "far": [
@@ -510,14 +510,14 @@
    "before": 8070,
    "after": 8071,
    "at_frame": 216,
-   "waited_ms": 764
+   "waited_ms": 723
   },
   {
    "line": "feeling soup 0.9",
    "before": 8071,
    "after": 8072,
    "at_frame": 322,
-   "waited_ms": 1606
+   "waited_ms": 2296
   }
  ],
  "problems": [],
