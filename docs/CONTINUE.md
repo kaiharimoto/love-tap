@@ -64,58 +64,55 @@ is a Chromium banner on a Linux virtual display, which its own log says.
 
 ## 0. Where it stands
 
-**Cycle 12 scored 74, down from 80, with no floor met**: messenger 19/30 (floor 26), material
-20/25 (22), emotional 16/20 (17), coherence 10/15 (13), anti-goal 9/10 (9, met), code 13/15
-(13, met). Seven reports, in `evidence/critics/12/`.
+**Cycle 13 scored 75, up from 74, with no floor met**: messenger 21/30 (floor 26), material 18/25
+(22), emotional 16/20 (17), coherence 12/15 (13), anti-goal 8/10 (9), code 13/15 (13, met, folded
+into coherence). Eight reports, in `evidence/critics/13/`, including the builder's own sheet, which
+scored three rows lower than the critics did and claimed 84.
 
-**The capture got better and the score got worse, and both are true.** The fourteenth capture is
-fifteen of seventeen artifacts — only the two that need an Android handset are missing — and the
-first in which all five clips pass the frame-distinctness check the brief names: 06 at 286 frames,
-07 at 336, 08 at 691, 11 at 300, 15 at 428, zero repeated frames between them. `08_state_propagating`
-is in the set at all for the first time. Every blocking finding of cycle 11 is answered on the
-artifact: the message-shaped hole is a folded letter with the reader's name on it, the 113,175-pixel
-hole in the desk is 7,614 in the whole frame, the ninety-two held frames are none, and the flat
-beige corner reads 3.91 grey levels of tooth against 0.26 and 53.7 between the two lights against
-0.0.
+**One point, for a cycle that closed both of the last one's blocking messenger findings.** They are
+closed on the artifacts, not argued: the message that crossed the disconnect twice arrives once
+(`said_again` null, 8,078 → 8,080 rows for two lines, against +4 for the same two), and the four
+rows that painted nothing paint (118 image rows under 12 per cent paper against 1,503; all seven
+rows at 44 to 58 per cent of their boxes against 0.000). The whole tear library was regenerated and
+reads 4.50 px rms median on the edges the generator actually tore, six of fifty-six under 2, thirty
+inside the band a critic was content with. The contact shadow went from absent — 3.6, 0.05, −0.17
+and −1.64 grey levels against a floor of 6 — to 15.0 to 24.6 on all ten stills.
 
-**And three of the four things that cost the score are mine, made this cycle.**
+The score barely moved because the critics moved. What they measured this time was the scroll's
+paper cost, the writing against the printed rules at three hundred per cent, and a feeling object I
+put on screen myself — none of which anybody had measured before, and all of which are harder than
+what came off the list.
 
-- *The landing opened a bigger hole than the one it closed.* A note that arrives now drops onto the
-  desk, and it does it by fading up from opacity zero on the driven clock — which a still never
-  steps. Four of seven rows in `13_messenger_states` lay out and paint nothing: 1,503 image rows,
-  48.17 per cent of the frame, at most twelve per cent of their width above luma 150; the thread
-  band went from 53.6 per cent paper to 12.3. Two critics and the completeness pass found it
-  independently. **A landing must not use opacity. Paper does not fade in; it drops.**
-- *Type is laid out without regard to the tear on small pieces.* The "WRITTEN" chip in `12_search`
-  holds six rows of solid paper where it held forty-nine, in a piece of about the same total
-  extent: almost all of it is fringe now. `SlicedMasks.fitFor` lets a tear's borders take four
-  fifths of a piece (`room = 0.8`), which is harmless on a sheet and fatal on a chip, and it only
-  began to bite when the band came to be measured per mask rather than assumed at four tenths — a
-  smaller band means less shrinking, so the fibres stay big against a small piece. **`room` wants
-  to be about a third.**
-- *07_feeling_landing is 5.376 s against its own six-second minimum*, down from 6.736, because I
-  shortened its takes to stop the frame check failing on a static tail.
-- *The far phone's message crosses the reconnect three times.* `said_again` in the scene log records
-  the harness re-sending the line because `awaitArrival` saw no growth while the link was cut; the
-  far phone appended it each time and all of them crossed. Sixteen of seventeen arrivals in the set
-  add one row; this one adds four. **`scene.js` must not repeat an instruction that changes state.**
+**Three of the six blocking findings are this cycle's own doing**, which is the thing to carry
+forward rather than the number:
 
-**The one finding no rubric row could see**, from the completeness pass: `tools/check/holes.py:109`
-builds its ring as the paper grown by twelve pixels minus the paper grown by three, so it only ever
-counts dark pixels three to twelve pixels outside a sheet. Reproducing that ring gives 596 px
-against the file's own 571; removing it gives **10,311 px under luma 30 more than twelve pixels from
-any paper, and 62,414 under luma 40** — a band about two hundred pixels wide at luma 23 to 46 beside
-the Pulse sheet's torn right edge, against a desk of 80 to 100 twenty rows higher. I declined that
-finding in the builder's sheet as "a band a few pixels wide", having looked straight at it in a
-preview and believed the number over the picture.
+- *The scroll costs paper.* 196 of 886 fling frames over 400 ms of the app's **own** build time,
+  p95 781, max 1,087. A frame drawing two paper pieces costs a median 654 ms against 3 ms for one
+  drawing none — correlation 0.788 with `pieces_drawn`, −0.122 with `rows_built`, so it is the paper
+  pipeline and not the container's missing GPU. The set's own control measured the identical fling
+  at p95 34 ms. This cycle took `SlicedMasks.fitFor`'s room to stretch in from four fifths to a
+  half, which makes the shrink factor vary more from piece to piece, and a nine-patch is composed
+  into one image per distinct size. **That is a hypothesis with a number attached, not a diagnosis:
+  measure the composition cache's hit rate before changing anything.**
+- *`overwhelmed` is a flat-shaded low-poly mesh*, 33,389 pure-white pixels at zero local variance in
+  149 of 07's 392 frames. The twelfth cycle had already named three feeling objects as untextured
+  forms; this cycle re-rendered none of them and then filmed one, as the seventh take it added.
+- *The writing does not sit on the ruled lines.* Measured, designed, deferred — and the deferral
+  cost the material row its floor, which is the right outcome.
 
-**The two findings that are not mine both point at one place.** Half the packed tear masks are
-barely torn — `evidence/logs/torn.json` puts its accepted band at rms 2.88 to 5.14, records 28 of 56
-masks under 2.0, names the cause and ends "not re-rendered this cycle". That straightens the edges
-the material critic measured (median residual 1.27 px over 137 edges, four exactly straight) and it
-decides whether the standing line is readable, because that row is laid out with no clearance from
-the tear. Filtering `writableTears` to the masks that clear the band leaves 28 distinct tears against
-the six to eight visible on any screen.
+**Four checks were found measuring the wrong thing this cycle, and the fourth was mine.**
+`torn.py` reported the sheets' own guillotined edges as the library's roughness; the Dart copy of
+`holes.py`'s walk never got its fringe fix; the seam gate was the old library's roughness rather
+than a fact about seams; and `lines.py` found every other printed rule and called the gap a pitch —
+161.0 px where the rules are 80.5 apart, which is the number the material critic's blocking finding
+rested on. All four are fixed. Against the corrected grid the hero reads **0.491 of a pitch off**,
+where 0.5 is exactly between two rules: worse than the file used to claim, not better.
+
+**Two claims of mine the completeness pass overturned.** It reversed a correction I had accepted
+from the material critic — the hero's written-line pitch is 80.3 px against an 80.7 px rule pitch,
+one line per rule, so the fault is a phase offset after all and my first reading was right. And a
+sentence in eleven scene files and in the briefing said the hero holds eight notes where this
+capture's own report says five; all twelve now say five and name the shortfall as a shortfall.
 
 ### A review has to be of something that is not moving
 
@@ -124,7 +121,7 @@ stood. Cycle 12 was taken against a frozen tree: the builder's sheet was written
 critics and the completeness pass ran with nothing else touching the repository, and each report was
 committed as it landed.
 
-## 3. Cycle 11, which is what the thirteenth capture is of
+## 3. Cycle 12, which is what the fifteenth capture answered
 
 Eleven changes, and the two largest are corrections to things an earlier cycle had already called
 fixed.
@@ -228,70 +225,75 @@ sentinel the job writes rather than off a process name. What the capture itself 
 
 ## 4. What is left, in order of what it costs to close
 
-Every number here is a critic's, from `evidence/critics/5/`. Check them before acting on them; two
-of the six did not reproduce this cycle and the completeness pass says which.
+The six blocking findings of the thirteenth review, each with its measurement. `evidence/critics/13/`
+has them in full; `completeness.json` says which replicate and to what figure.
 
-### 1. ~~The paper is flattened between the library and the glass~~ — it is not (closed, cycle 6)
-`surfaces.py`'s `patch_std` is the largest standard deviation among nine 200 px patches of the whole
-file, and on a ruled stock every one of those squares contains three or four printed rules at a
-55 px pitch. The 9.36-10.28 is a measurement of the ruling. The 1.22 is a median over ink-free 32 px
-blocks. Measured the same way at both ends the library reads 1.09-1.49 and the screen 1.24 — they
-agree. `BoxFit.cover` does not downscale either: the ruled pitch is 55 px in the asset and 70 on
-screen, so the stock is magnified 1.27x. Nothing in `PaperPiece` is averaging anything away.
+### 1. The scroll costs paper (messenger, blocking)
+196 of 886 fling frames over 400 ms of app build time. Correlation 0.788 with `pieces_drawn`,
+−0.122 with `rows_built`; control at p95 34 ms in `evidence/experiments/what_the_alternates_cost`.
+**Measure the nine-patch composition cache first** — `SlicedMasks.paintNine` composes the slice into
+one image at the size the piece turns out to be, and `fitFor`'s room went 0.8 → 0.5 this cycle, so
+distinct sizes multiplied. If that is it, key the cache on the quantised size rather than the exact
+one.
 
-What was real underneath it, and is fixed: the packer made a second lossy pass over a render that
-was already lossy WebP. It copies the bytes when nothing needs doing — 13.91 MB and the render's own
-high-pass of 1.194, against 15.44 MB and 1.144 at quality 95.
+### 2. The writing does not sit on the ruled lines (material, blocking)
+0.491 of a pitch off on the hero against the corrected grid. The design is written into
+`evidence/logs/lines.json` and changes no layout: measure rule phase and pitch per stock at pack
+time into INDEX.json, read the piece's first baseline in `_WithinTear` with `getDistanceToBaseline`
+during layout, publish it to `_StockPainter`, and snap the seeded patch offset to the multiple of
+the pitch that puts a printed rule under that baseline. The rule *detection* is also weak — eight of
+seventeen rules found on the hero, six of thirty-eight on the first run — and worth strengthening so
+the phase can be trusted per piece.
 
-What is still open: `blender/paper/stocks.py` renders paper as WebP at Blender's default quality 92,
-so every number downstream is measured against an already-degraded ceiling. Rendering paper once,
-losslessly, and encoding once in the packer would recover more than any quality knob downstream.
+### 3. Three feeling objects are untextured (anti-goal, blocking)
+`obj_crumple_ball` (overwhelmed), and the `hold` and `nyeh` objects. Re-render with the paper
+material the rest of the library uses. Two checks let it through and both need fixing with it:
+`surfaces.json` sets no tooth floor for the `objects` family at all — the one family the emotional
+layer is made of — and `flat.json` reads only the ten stills and never a clip frame.
 
-`surfaces.json` now reports `tooth` and `field_swing` beside `patch_std`, and says in the record
-what `patch_std` is, so this particular confusion cannot be had a second time.
+### 4. Nothing shows a pattern reaching a finger or an ear (emotional, blocking)
+All fourteen motor asks answer "no motor in a browser". The substitute is the page visibly moving,
+which a face-down phone cannot deliver, and the sound is in the clips only because the harness mixed
+it over silence. Needs a device, or a statement in the set that this container cannot show it.
 
-### 2. The light the shadows describe touches nothing else (material)
-A note's interior swings 9 to 13 grey levels on 230 across its full width. The 'hold' cylinder on
-01_pulse reads 148 on one side of its curve and 153 on the other while throwing a hard directional
-shadow. The fold's flap darkens 17 per cent while foreshortening 90. The shadows are baked from
-renders and the surfaces they fall on are not, so they read as attached to flat art.
+### 5. No artifact behind the platform-parity clause (coherence, blocking)
+All fifteen present artifacts are the same headless WebKit page. One screenshot of any region on the
+Android build lifts it; this machine cannot make one.
 
-Half of this is now measured rather than asserted, and it is the shadow's half: a torn sheet's
-contact shadow is cut from its own tear and displaced by `shadowOffsetFor`, which is the one rig's
-direction, so paper and its shadow agree about where the light is. What still does not agree is the
-*surface* — the stock renders carry tooth and fibre but no shading field, so a sheet is evenly lit
-wherever it is put and only its edge knows which way the window is.
+### 6. The persistence guard has three open doors (code, serious)
+Each walked through with all five tests green: `import'package:sqlite3/sqlite3.dart';` with no space
+after the keyword (the regex is anchored on `\s`); a second event log on
+`File.fromUri(...).open(FileMode.append)` and `RandomAccessFile.writeString`, which neither the
+constructor pattern nor the six enumerated write methods see; and any driver import under
+`app/tool/`, which no loop in the file visits — though `host_daemon.dart` already reaches a store
+from outside the spine.
 
-### 3. Nothing pictures a state change reaching somebody who has not opened the app (emotional)
-No notification, no lock screen, no home-screen widget, in any of the fifteen artifacts. The ambient
-surfaces are recorded as sent in `logs/ambient.json` and never as received.
+### Also carried, measured and unfixed
 
-### 4. The rituals module appears in no artifact (anti-goal, coherence)
-It is the one surface the mission itself pairs with the word streaks — the place engagement
-machinery would hide, never photographed. 03_us shows three of the five modules its own report
-lists, so the Us layout needs more than the row counts it got this cycle.
+- **A 401 leaves the link reading `connected`.** In `11_chat_scroll` and `15_authored_feeling` the
+  pull is refused — `401 the signature does not match` — and 11 shows 212 rounds, 0 pulled, with
+  `link: connected` throughout. The browser profile now persists across scenes, which is what made
+  the cold start cheap, and carries a pairing the far phone rejects. The stale pairing is the cause;
+  the link state not moving is the fault, and it is the same shape as the one cycle 12 fixed for an
+  injected cut.
+- **The contact shadow overshot.** 15.0 to 24.6 grey levels under a sheet against a floor of 6, and
+  `holes.py` counts six of ten stills over its 200-pixel allowance of pixels beside the paper darker
+  than ink — 895 in Us, 643 in Pulse, darkest 22 to 28 against ink at 30. The lever is the bake's
+  own opacity in `tools/bake_tear_shadows.py`, tuned when a tear could take four fifths of a piece.
+- **`scroll_cost_test.dart:110` is a wall-clock microbenchmark** with a fixed 20,000 µs ceiling that
+  went red on one full-suite run in four — and a red suite aborts the whole capture. The same class
+  of fault as the hold test fixed this cycle; one was found and the looking stopped.
+- **`sticky_blue_02` arrives late in four of ten stills**, costing two sheets each time. Ten of
+  eighteen reports carry a non-empty `sheets_on_the_glass_with_no_paper_on_them`.
+- **`docs/EVENT_TYPES.md` claims** `spine_replay_golden_test.dart` replays the seeded year against a
+  golden; it replays fifteen hand-written events against none.
+- **Nobody looked at**: `holes.json` ending `ok: false`, `logs/manifest.json` reporting two assets
+  missing that are on disk, `pwa.json` recording `display_mode_standalone: false`.
 
-### 5. 17_setup_pwa.png is 27.3 per cent one exact RGB value (anti-goal)
-1,225,541 pixels at zero variance, while every other still sits on wood measuring about 11.
-
-### 6. The frame check is defeated by a one-level dither (evidence)
-`frames.json` reports `repeated_frames: 0` while 32 per cent of 06's transitions are visually
-identical and the clip is frozen for its last 416 ms. Bit equality is the wrong test; it wants a
-perceptual floor.
-
-### 7. Two records say things that are not so (evidence)
-Both tailnet records give their direct path as **192.0.2.2**, which is RFC 5737 documentation
-space. `reliability.json`'s search capability is an identity map with no hits in it. And
-`logs/12_search.report.json` describes the thread behind the search sheet rather than the search.
-
-### 8. The build's own structural claims (code)
-A fifth module costs five shared files rather than one line: the registry, the type spec, two
-renderer entries and the stock assignment. The passive half of the nervous system has no producer
-outside the capture hook and the seed. A host-rejected event is re-pushed forever unmarked, because
-the refusal path is unreachable over the wire.
-
-### 9. DeskStamp is still not built (material, coherence)
-About five hours on one core here. Start it at the beginning of a session, not the end.
+### Hold the old reports outside the repository next time
+`.review-held/` inside the working tree was reachable by the code critic's history-wide grep, which
+printed lines out of an earlier `code.json` before it scoped the path away. It disclosed this and no
+finding rests on it. Put them somewhere a search cannot reach.
 
 ### Not fixable here
 09 and 16, as above. The tailnet run is recorded **pending**: no `TS_AUTHKEY` was in this
