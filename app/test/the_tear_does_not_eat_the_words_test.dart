@@ -26,6 +26,7 @@ import 'package:desk/material/paper.dart';
 import 'package:desk/spine/projections/state.dart';
 import 'package:desk/spine/spine.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// The state 08_state_propagating drives: the one whose words the tear ate.
@@ -217,5 +218,47 @@ void main() {
     expect(lib.writableTears.length, greaterThanOrEqualTo(8),
         reason: 'the hero holds eight notes on eight distinct tears, and the pool is down to '
             '${lib.writableTears.length}');
+  });
+
+  testWidgets('the standing line is never cut off, at any width either phone has', (tester) async {
+    // A coherence critic read this line at 360 points, the width the five clips are shot at and
+    // one both phones actually have, and found it truncating to 'week one, and the room smells
+    // ri...' — nine of its forty characters gone — where at 480 it reads in full; the reception
+    // crop at 400 loses 'again'. The surface the whole partner-state row is scored on, with the
+    // end taken off it.
+    const line = 'week one, and the room still smells of paint';
+    final state = PersonState(Person.noor, {
+      'status_line': SignalValue(
+          signal: 'status_line', value: line, at: 1756999000000, declared: true),
+      'mood': SignalValue(signal: 'mood', value: 'quiet', at: 1756999000000, declared: true),
+      'place': SignalValue(signal: 'place', value: 'home', at: 1756999000000, declared: true),
+    });
+    for (final width in [360.0, 400.0, 480.0]) {
+      tester.view.physicalSize = Size(width * 3, 2340);
+      tester.view.devicePixelRatio = 3.0;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: Align(
+            alignment: Alignment.topCenter,
+            child: SizedBox(
+              width: width,
+              child: PartnerStrip(partner: Person.noor, state: state, nowMs: 1757000000000),
+            ),
+          ),
+        ),
+      ));
+      await tester.pump();
+      final found = find.text(line);
+      expect(found, findsOneWidget, reason: 'at $width points the line is not on the glass at all');
+      final t = tester.widget<Text>(found);
+      expect(t.overflow, isNot(TextOverflow.ellipsis),
+          reason: 'at $width points the line is allowed to end in an ellipsis');
+      // and what is drawn is the whole sentence, not a clipped part of it
+      final painted = tester.renderObject<RenderParagraph>(found);
+      expect(painted.didExceedMaxLines, isFalse,
+          reason: 'at $width points the line runs past what it was given');
+      expect(painted.size.width, greaterThan(0));
+    }
   });
 }

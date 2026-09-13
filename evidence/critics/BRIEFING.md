@@ -112,11 +112,20 @@ disagrees with that number on a clip, say so and say where — the check is a fl
 
 ## Six things this cycle changed about the set itself
 
-**The stills are shot at a phone's width.** They were 480 by 1040 of CSS at three times scale —
-the 1440 by 3120 the brief asks for, laid out at a logical width no phone has and 120 points wider
-than every clip. They are 360 by 780 at four times scale now: the same pixels, the same minimum,
-and the width both phones and all five clips have. A row that reads differently here from how it
-reads in a clip is no longer the framing.
+**The set is shot at two widths, on purpose, and both are named here.** The ten stills are 480 by
+1040 of CSS at three times scale; the five clips and the reception scene are 360 by 780 and 400 by
+880 at the same three times. Every one of them is the 1440 by 3120 the brief asks for.
+
+Shooting the stills at 360 as well was tried for one capture and reverted: the brief asks for at
+least eight notes visible in 02_chat.png with no tear id repeated, and a 360 point thread has a 501
+point viewport that holds four. The still the material row is judged on at three hundred per cent
+has to hold what the brief asks it to hold, so it is shot where it does. The clips stay at the
+phone's own width, which is where the truncations and the wrong module row costs were found.
+
+This paragraph said the opposite for one cycle — that the stills were 360 at four times scale — and
+no scene file agreed with it. A coherence critic caught it. **Where a row reads differently in a
+still and in a clip, check the width before concluding anything about the build**; the viewport of
+every scene is in `evidence/scenes/*.json` and in each artifact's own log.
 
 **A reconnect is on the glass.** 08_state_propagating cuts the link to the far phone, lets it write
 two things while it is down, and puts it back. What the set had before was a headless harness's log

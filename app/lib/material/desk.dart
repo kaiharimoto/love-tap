@@ -131,11 +131,25 @@ class PartnerStrip extends StatelessWidget {
                         if (state.signals.isEmpty)
                           Text(S.nobodyYet, maxLines: 2, style: Hands.margin(size: 14))
                         else
-                        Text(
-                          state.statusLine ?? _fallbackLine(state, asleep, headsDown),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Hands.of(partner, size: 17, colour: ink.withValues(alpha: weight)),
+                        // Scaled down rather than cut off, the same as the dials below and for
+                        // the same reason. A coherence critic read this line at the width the
+                        // five clips are shot at — 360 points, which is a width both phones
+                        // actually have — and found it truncating to 'week one, and the room
+                        // smells ri...', nine of its forty characters gone, where at 480 it reads
+                        // in full; the reception crop at 400 loses 'again'. A sentence in
+                        // somebody's own hand with the end taken off it is worse than the same
+                        // sentence a little smaller, and this is the surface the whole row is
+                        // scored on.
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            state.statusLine ?? _fallbackLine(state, asleep, headsDown),
+                            maxLines: 1,
+                            softWrap: false,
+                            style:
+                                Hands.of(partner, size: 17, colour: ink.withValues(alpha: weight)),
+                          ),
                         ),
                         const SizedBox(height: 2),
                         if (state.signals.isNotEmpty)
