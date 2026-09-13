@@ -83,7 +83,26 @@ def measure(path):
     if len(rules) < 4 or len(inks) < 2:
         return {"ruled_lines": len(rules), "written_lines": len(inks),
                 "why": "not enough ruled paper or not enough writing on this still to measure"}
-    pitch = float(np.median(np.diff(rules)))
+    # The pitch, from gaps that may each span more than one rule.
+    #
+    # This took the median of consecutive differences, which is the right answer only if every rule
+    # was found. A feint rule reads about seven levels bluer than its paper and the faintest do not
+    # clear the threshold, so on a sheet where every other one is missed the gaps are two pitches
+    # and the median of them is two pitches. Measured on the thirteenth capture's hero: this
+    # reported 161.0 px where the rules are 80.9 apart, and every "how far the writing sits from
+    # the nearest rule" computed against it was a fraction of the wrong grid — including the 0.373
+    # a material critic's blocking finding rested on.
+    #
+    # So each gap is divided by how many pitches it spans. The tenth percentile of the gaps is a
+    # robust estimate of one pitch; every gap is then a near-integer multiple of it, and the median
+    # of gap-over-multiple is the pitch whether or not the grid is complete.
+    gaps = np.diff(rules)
+    gaps = gaps[gaps > 2]
+    if len(gaps) == 0:
+        return {"ruled_lines": len(rules), "why": "the rules run together"}
+    base = float(np.percentile(gaps, 10))
+    spans = np.maximum(1.0, np.round(gaps / max(base, 1e-6)))
+    pitch = float(np.median(gaps / spans))
     if pitch <= 2:
         return {"ruled_lines": len(rules), "why": "the rules run together"}
     off = []
@@ -100,6 +119,10 @@ def measure(path):
         "ruled_lines": len(rules),
         "written_lines": len(inks),
         "rule_pitch_px": round(pitch, 1),
+        # how many rules were actually found against how many that pitch implies between the first
+        # and the last, so a half-detected grid is visible rather than silent
+        "rules_found_of_expected": [len(rules),
+                                    int(round((rules[-1] - rules[0]) / pitch)) + 1],
         "lines_measured": len(off),
         "off_the_line": {"median": round(float(np.median(a)), 3),
                          "p90": round(float(np.percentile(a, 90)), 3)},
