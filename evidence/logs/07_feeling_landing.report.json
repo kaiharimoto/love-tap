@@ -40,46 +40,52 @@
     "ts": 1788455973000
    },
    {
-    "id": "01M1MCJQ746BVVPKTR3KN9EY8F",
+    "id": "01M1MCJ1M0D46H1D74PPV4NMNP",
     "feeling": "hold",
     "from": "noor",
-    "ts": 1788464422116
+    "ts": 1788464400000
    },
    {
-    "id": "01M1MCPMMNB3ZG52P4FQS7CHNW",
+    "id": "01M1MCJ1M0D46H1D74PPV4NMNQ",
     "feeling": "squeeze",
     "from": "noor",
-    "ts": 1788464550549
+    "ts": 1788464400000
    },
    {
-    "id": "01M1MCTWA4ZD22MX42XWZ3ZXNC",
+    "id": "01M1MCJ1M0D46H1D74PPV4NMNR",
     "feeling": "nuzzle",
     "from": "noor",
-    "ts": 1788464689476
+    "ts": 1788464400000
    },
    {
-    "id": "01M1MCY4H3H02KSD1VJK4T03B6",
+    "id": "01M1MCJ1M0D46H1D74PPV4NMNS",
     "feeling": "confetti",
     "from": "noor",
-    "ts": 1788464796195
+    "ts": 1788464400000
    },
    {
-    "id": "01M1MD1M46VHVXPG6BNDPJ2NMB",
+    "id": "01M1MCJ1M0D46H1D74PPV4NMNT",
     "feeling": "miss_you",
     "from": "noor",
-    "ts": 1788464910470
+    "ts": 1788464400000
    },
    {
-    "id": "01M1MD4MR71FPNRSB1NZS9XCMS",
+    "id": "01M1MCJ1M0D46H1D74PPV4NMNV",
     "feeling": "here",
     "from": "noor",
-    "ts": 1788465009415
+    "ts": 1788464400000
+   },
+   {
+    "id": "01M1MCJ1M0D46H1D74PPV4NMNW",
+    "feeling": "overwhelmed",
+    "from": "noor",
+    "ts": 1788464400000
    }
   ],
   "kinds": {
    "state_passive": 4120,
    "state_declared": 1522,
-   "feeling": 916,
+   "feeling": 917,
    "feeling_authored": 2,
    "ping": 13
   },
@@ -122,14 +128,14 @@
  "stocks": {},
  "scroll": null,
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 6816,
+ "driven_ms": 7712,
  "seed": 20260903,
- "events": 14075,
+ "events": 14108,
  "transport": "local",
  "link": "connected",
  "me": "teo",
  "masks_in_pool": 56,
- "masks_composed": 6,
+ "masks_composed": 7,
  "writable_masks": 47,
  "light": "day",
  "has_dusk_paper": true,
@@ -139,58 +145,144 @@
   "237x78 of it, at its own size",
   18372.448823232146
  ],
- "paper_at_its_own_size": 763,
+ "paper_at_its_own_size": 2360,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [],
- "paper_that_arrived_after_the_piece_was_drawn": 15,
+ "paper_that_arrived_after_the_piece_was_drawn": 18,
  "tears_that_had_not_arrived": {},
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 245,
- "stocks_held": 16,
- "stocks_held_bytes": 231918320,
+ "masks_dropped_to_stay_inside_the_pool": 324,
+ "stocks_held": 19,
+ "stocks_held_bytes": 273471920,
  "stocks_dropped_to_stay_inside_the_pool": 0,
  "image_cache": {
-  "held": 34,
-  "bytes": 34268880,
+  "held": 36,
+  "bytes": 35678400,
   "budget": 402653184,
-  "live": 28,
+  "live": 30,
   "still_decoding": 0
  },
  "setup_showing": false,
  "fold": {
-  "sequence": "unfold_thirds",
-  "length": 142,
-  "decoded": 24,
-  "decoding": 0,
-  "playhead": 0,
-  "held_from": 0,
-  "held_to": 23
+  "sequence": null
  },
  "sensation": {
-  "feeling": "here",
+  "feeling": "overwhelmed",
   "channel": "page",
-  "total_ms": 2000,
-  "started_at": "2026-09-13T05:05:35.923Z",
+  "total_ms": 448,
+  "started_at": "2026-09-13T10:33:22.210Z",
   "pattern": [
    {
-    "ms": 400,
-    "amp": 125
+    "ms": 18,
+    "amp": 227
    },
    {
-    "ms": 400,
+    "ms": 14,
     "amp": 0
    },
    {
-    "ms": 400,
-    "amp": 125
+    "ms": 18,
+    "amp": 227
    },
    {
-    "ms": 400,
+    "ms": 14,
     "amp": 0
    },
    {
-    "ms": 400,
-    "amp": 125
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
+   },
+   {
+    "ms": 18,
+    "amp": 227
+   },
+   {
+    "ms": 14,
+    "amp": 0
    }
   ]
  },
@@ -310,52 +402,117 @@
     125
    ],
    "answered_by": "no motor in a browser: the page rhythm carries it instead"
+  },
+  {
+   "feeling": "overwhelmed",
+   "timings": [
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14,
+    18,
+    14
+   ],
+   "amplitudes": [
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0,
+    227,
+    0
+   ],
+   "answered_by": "no motor in a browser: the page rhythm carries it instead"
   }
  ],
  "the_launch_took": {
   "the framework": 7,
-  "the library index": 20,
-  "the ink plates": 36,
+  "the library index": 19,
+  "the ink plates": 37,
   "the desk": 152,
-  "the log": 6441,
-  "the first frame": 373,
-  "everything": 7029
+  "the log": 628,
+  "the first frame": 321,
+  "everything": 1164
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 34,
-  "pushed": 8,
+  "rounds": 342,
+  "pushed": 9,
   "refused": 0,
-  "pulled": 6,
+  "pulled": 7,
   "blobs_fetched": 0,
   "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14075,
+  "cursor": 14108,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14075,
-   "our_cursor": 14075,
+   "peer_cursor": 14108,
+   "our_cursor": 14108,
    "last_error": null,
-   "since": "2026-09-13T04:55:37.094Z",
-   "last_contact": "2026-09-13T05:07:03.006Z",
+   "since": "2026-09-13T10:18:32.974Z",
+   "last_contact": "2026-09-13T10:35:39.939Z",
    "certificate": null,
    "setup_address": null
   }
  },
  "ambient": {
   "standing_line": "bright · week one, and the room smells right again · travelling · 7 hours ago",
-  "pocket_feeling": "here",
+  "pocket_feeling": "overwhelmed",
   "pocket_at": 1788464400000,
   "allowed_to_interrupt": false,
   "what_each_surface_may_say": {
    "standing_line": "their state, in the couple's own words, assembled here from the log",
    "pocket": "the feeling's own name and its sound, because the app is running and has it",
+   "and_the_pocket_here_is": "this is a PWA and iOS will not let one vibrate, so the rhythm is carried by the feeling's own sound and by the page itself moving under it — feelings/sensation.dart, the same segments the motor would have been given. `pocket_feeling` and `pocket_at` above are what it last played and when, and `asked_a_motor_for` is every pattern it asked for. A held list that is empty after the app has been opened is the surface working: the app clears what the phone was holding the moment somebody looks at it.",
    "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
   },
   "held_by_the_phone": [],
