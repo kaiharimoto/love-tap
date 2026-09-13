@@ -1,6 +1,6 @@
 {
- "strings_read": 565,
- "literals_in_lib": 4054,
+ "strings_read": 568,
+ "literals_in_lib": 4077,
  "share_of_literals_read": 0.139,
  "in_a_display_position": 114,
  "the_rest_are_judged": "every other literal in a line of code that has a space in it or a mark a wire key would never carry. It used to read only a fixed list of call sites \u2014 Text(, Written(, hintText:, and six more \u2014 which is why a code critic counted 116 strings against 3,672 in lib. Reading them all costs some false positives (an asset query string, a fragment of an interpolation) and those are cheap: a string that is not shown to anybody still must not contain an exclamation mark.",
@@ -388,17 +388,17 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:364",
+   "where": "app/lib/feelings/corner.dart:380",
    "text": "${widget.stock}_dusk",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:615",
+   "where": "app/lib/feelings/corner.dart:631",
    "text": "family_${f.name}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:639",
+   "where": "app/lib/feelings/corner.dart:655",
    "text": "fan.${family.name}",
    "in_a_display_position": false
   },
@@ -478,22 +478,32 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/desk.dart:162",
+   "where": "app/lib/material/desk.dart:81",
+   "text": "$id/$tear/${state.statusLine}/${state.mood}/${state.availability}/",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/desk.dart:82",
+   "text": "${state.place}/${state.need}/${state.energy}/$asleep",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/desk.dart:208",
    "text": "heads down",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/desk.dart:163",
+   "where": "app/lib/material/desk.dart:209",
    "text": "heads down",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/desk.dart:176",
+   "where": "app/lib/material/desk.dart:222",
    "text": "heads down",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/desk.dart:264",
+   "where": "app/lib/material/desk.dart:310",
    "text": "the desk surface did not load: $e",
    "in_a_display_position": false
   },
@@ -503,12 +513,17 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/library.dart:84",
+   "where": "app/lib/material/library.dart:96",
    "text": "MaterialLibrary.load() has not run",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/library.dart:249",
+   "where": "app/lib/material/library.dart:307",
+   "text": ").last.replaceAll(",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/library.dart:326",
    "text": ").last.replaceAll(",
    "in_a_display_position": false
   },
@@ -518,42 +533,42 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:362",
+   "where": "app/lib/material/paper.dart:382",
    "text": "${tearId!}_shadow$suffix",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:434",
+   "where": "app/lib/material/paper.dart:462",
    "text": "${stockId}_dusk",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:452",
+   "where": "app/lib/material/paper.dart:481",
    "text": "${tearId!}_edge",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:625",
+   "where": "app/lib/material/paper.dart:662",
    "text": "never came",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:1068",
+   "where": "app/lib/material/paper.dart:1169",
    "text": ").replaceAll(",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:1068",
+   "where": "app/lib/material/paper.dart:1169",
    "text": ").replaceAll(",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:1213",
+   "where": "app/lib/material/paper.dart:1322",
    "text": "$asset@${w}x$h",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:1378",
+   "where": "app/lib/material/paper.dart:1490",
    "text": "$stock ${w.round()}x${h.round()}",
    "in_a_display_position": false
   },
@@ -743,32 +758,32 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:58",
-   "text": "nothing kept yet",
-   "in_a_display_position": false
-  },
-  {
-   "where": "app/lib/modules/rituals/rituals_module.dart:61",
-   "text": "nothing kept yet",
-   "in_a_display_position": false
-  },
-  {
    "where": "app/lib/modules/rituals/rituals_module.dart:64",
+   "text": "nothing kept yet",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:67",
+   "text": "nothing kept yet",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/modules/rituals/rituals_module.dart:69",
    "text": "$days days ago",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:65",
-   "text": "${recent.length} kept \u00b7 $marks times \u00b7 the last $lately",
+   "where": "app/lib/modules/rituals/rituals_module.dart:70",
+   "text": "${recent.first.title} \u00b7 the last $lately",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:108",
+   "where": "app/lib/modules/rituals/rituals_module.dart:113",
    "text": "nothing kept yet.",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/modules/rituals/rituals_module.dart:121",
+   "where": "app/lib/modules/rituals/rituals_module.dart:126",
    "text": "${r.marks.length} times",
    "in_a_display_position": false
   },
@@ -778,52 +793,52 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:63",
+   "where": "app/lib/modules/shelf/shelf_module.dart:68",
    "text": "nothing passed on yet",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:65",
+   "where": "app/lib/modules/shelf/shelf_module.dart:70",
    "text": "${things.length} between you",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:66",
+   "where": "app/lib/modules/shelf/shelf_module.dart:71",
    "text": "$waiting waiting on you \u00b7 ${things.length} between you",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:120",
+   "where": "app/lib/modules/shelf/shelf_module.dart:125",
    "text": "nothing passed between you yet.",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:161",
+   "where": "app/lib/modules/shelf/shelf_module.dart:166",
    "text": "not started",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:161",
+   "where": "app/lib/modules/shelf/shelf_module.dart:166",
    "text": "they have not started it",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:162",
+   "where": "app/lib/modules/shelf/shelf_module.dart:167",
    "text": "part way in",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:162",
+   "where": "app/lib/modules/shelf/shelf_module.dart:167",
    "text": "they are part way in",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:163",
+   "where": "app/lib/modules/shelf/shelf_module.dart:168",
    "text": "they finished it",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/modules/shelf/shelf_module.dart:198",
+   "where": "app/lib/modules/shelf/shelf_module.dart:203",
    "text": "${thing.from!.name} passed it on \u00b7 $where",
    "in_a_display_position": false
   },
@@ -1063,7 +1078,7 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/note.dart:325",
+   "where": "app/lib/regions/chat/note.dart:295",
    "text": " \u00b7 ",
    "in_a_display_position": false
   },
@@ -1503,7 +1518,7 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/us/us_region.dart:124",
+   "where": "app/lib/regions/us/us_region.dart:139",
    "text": "us.${module.id}",
    "in_a_display_position": false
   },
@@ -2208,7 +2223,7 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/thread/note_body.dart:82",
+   "where": "app/lib/thread/note_body.dart:92",
    "text": " : DateFormat(",
    "in_a_display_position": false
   },
