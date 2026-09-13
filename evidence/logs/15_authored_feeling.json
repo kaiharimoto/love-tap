@@ -10,157 +10,157 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 1945,
+   "ms": 2159,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3318
+   "ms": 3884
   },
   {
    "do": "wait",
-   "ms": 1801
+   "ms": 1802
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1102
   },
   {
    "do": "openCorner",
-   "ms": 2619
+   "ms": 3135
   },
   {
    "do": "frames",
-   "ms": 60329
+   "ms": 71481
   },
   {
-   "at": 79557,
+   "at": 86067,
    "said": "__deskShowFamily(shelter) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 169
+   "ms": 206
   },
   {
    "do": "step",
-   "ms": 844
+   "ms": 899
   },
   {
    "do": "frames",
-   "ms": 67603
+   "ms": 82971
   },
   {
-   "at": 148185,
+   "at": 170115,
    "said": "__deskShowFamily(sparkle) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 183
+   "ms": 177
   },
   {
    "do": "step",
-   "ms": 838
+   "ms": 846
   },
   {
    "do": "frames",
-   "ms": 64710
+   "ms": 79636
   },
   {
-   "at": 213913,
+   "at": 250789,
    "said": "__deskShowFamily(mischief) ok, 7 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 178
+   "ms": 193
   },
   {
    "do": "step",
-   "ms": 896
+   "ms": 1120
   },
   {
    "do": "frames",
-   "ms": 35895
+   "ms": 54026
   },
   {
-   "at": 250901,
+   "at": 306179,
    "said": "__deskShowFamily(ache) ok, 5 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 197
+   "ms": 244
   },
   {
    "do": "step",
-   "ms": 1064
+   "ms": 1944
   },
   {
    "do": "frames",
-   "ms": 26836
+   "ms": 37206
   },
   {
-   "at": 278994,
+   "at": 345508,
    "said": "__deskShowFamily(static) ok, 6 on the sheet"
   },
   {
    "do": "showFamily",
-   "ms": 195
+   "ms": 179
   },
   {
    "do": "step",
-   "ms": 914
+   "ms": 1742
   },
   {
    "do": "frames",
-   "ms": 27806
+   "ms": 32350
   },
   {
-   "at": 307909,
+   "at": 379610,
    "said": "__deskHoldOver(pigeon) ok, holding pigeon"
   },
   {
    "do": "holdOver",
-   "ms": 193
+   "ms": 9
   },
   {
    "do": "frames",
-   "ms": 46327
+   "ms": 57376
   },
   {
-   "at": 354413,
+   "at": 437028,
    "said": "__deskLetGo() ok, sent at 0.97"
   },
   {
    "do": "letGo",
-   "ms": 178
+   "ms": 43
   },
   {
    "do": "frames",
-   "ms": 140582
+   "ms": 273857
   },
   {
    "do": "goTo",
-   "ms": 3791
+   "ms": 11248
   },
   {
    "do": "step",
-   "ms": 1482
+   "ms": 2485
   },
   {
    "do": "openCorner",
-   "ms": 1548
+   "ms": 4777
   },
   {
    "do": "frames",
-   "ms": 29327
+   "ms": 47281
   },
   {
    "do": "openCorner",
-   "ms": 1346
+   "ms": 2056
   },
   {
    "do": "step",
-   "ms": 747
+   "ms": 793
   },
   {
    "do": "far",
@@ -168,35 +168,35 @@
   },
   {
    "do": "awaitArrival",
-   "ms": 1124
+   "ms": 1310
   },
   {
    "do": "frames",
-   "ms": 153408
+   "ms": 331764
   },
   {
    "do": "goTo",
-   "ms": 3134
+   "ms": 14527
   },
   {
    "do": "step",
-   "ms": 1619
+   "ms": 3912
   },
   {
    "do": "far",
-   "ms": 488
+   "ms": 461
   },
   {
    "do": "awaitArrival",
-   "ms": 2697
+   "ms": 3076
   },
   {
    "do": "frames",
-   "ms": 153622
+   "ms": 237471
   },
   {
    "do": "report",
-   "ms": 419
+   "ms": 431
   }
  ],
  "shots": [
@@ -275,7 +275,7 @@
     "paired": true,
     "devices": [
      "android-capture",
-     "pwa-mtz7nq5k"
+     "pwa-mtzmwaoe"
     ],
     "link": "connected",
     "authored_feelings": 2
@@ -288,7 +288,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 9616,
    "seed": 20260903,
-   "events": 14067,
+   "events": 14113,
    "transport": "local",
    "link": "connected",
    "me": "teo",
@@ -303,38 +303,32 @@
     "225x78 of it, at its own size",
     17618.35419047963
    ],
-   "paper_at_its_own_size": 9576,
-   "paper_stretched_to_fit": 9,
+   "paper_at_its_own_size": 11739,
+   "paper_stretched_to_fit": 88,
    "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 14,
+   "paper_that_arrived_after_the_piece_was_drawn": 17,
    "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 190,
-   "stocks_held": 15,
-   "stocks_held_bytes": 218067120,
+   "masks_dropped_to_stay_inside_the_pool": 171,
+   "stocks_held": 18,
+   "stocks_held_bytes": 259620720,
    "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
     "held": 78,
     "bytes": 64085944,
     "budget": 402653184,
-    "live": 24,
+    "live": 28,
     "still_decoding": 0
    },
    "setup_showing": false,
    "fold": {
-    "sequence": "unfold_thirds",
-    "length": 142,
-    "decoded": 24,
-    "decoding": 0,
-    "playhead": 0,
-    "held_from": 0,
-    "held_to": 23
+    "sequence": null
    },
    "sensation": {
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-13T02:56:05.330Z",
+    "started_at": "2026-09-13T11:05:14.424Z",
     "pattern": [
      {
       "ms": 150,
@@ -419,37 +413,38 @@
     }
    ],
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 19,
-    "the ink plates": 43,
-    "the desk": 186,
-    "the log": 6469,
-    "the first frame": 344,
-    "everything": 7068
+    "the framework": 8,
+    "the library index": 17,
+    "the ink plates": 33,
+    "the desk": 154,
+    "the log": 660,
+    "the first frame": 323,
+    "everything": 1195
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 40,
-    "pushed": 4,
+    "rounds": 453,
+    "pushed": 3,
     "refused": 0,
     "pulled": 2,
     "blobs_fetched": 0,
-    "faults": 0,
+    "faults": 1,
+    "last_fault": "401 the signature does not match",
     "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14067,
+    "cursor": 14113,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14067,
-     "our_cursor": 14067,
+     "peer_cursor": 14113,
+     "our_cursor": 14113,
      "last_error": null,
-     "since": "2026-09-13T02:44:38.313Z",
-     "last_contact": "2026-09-13T02:58:34.806Z",
+     "since": "2026-09-13T10:46:22.830Z",
+     "last_contact": "2026-09-13T11:09:12.692Z",
      "certificate": null,
      "setup_address": null
     }
@@ -462,6 +457,7 @@
     "what_each_surface_may_say": {
      "standing_line": "their state, in the couple's own words, assembled here from the log",
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "and_the_pocket_here_is": "this is a PWA and iOS will not let one vibrate, so the rhythm is carried by the feeling's own sound and by the page itself moving under it — feelings/sensation.dart, the same segments the motor would have been given. `pocket_feeling` and `pocket_at` above are what it last played and when, and `asked_a_motor_for` is every pattern it asked for. A held list that is empty after the app has been opened is the surface working: the app clears what the phone was holding the moment somebody looks at it.",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
@@ -479,19 +475,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 8263,
+ "cold_ms": 2283,
  "load": {
-  "ms": 8263,
-  "store": "fresh",
+  "ms": 2283,
+  "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
-   "the library index": 19,
-   "the ink plates": 43,
-   "the desk": 186,
-   "the log": 6469,
-   "the first frame": 344,
-   "everything": 7068
+   "the framework": 8,
+   "the library index": 17,
+   "the ink plates": 33,
+   "the desk": 154,
+   "the log": 660,
+   "the first frame": 323,
+   "everything": 1195
   }
  },
  "far": [
@@ -507,20 +503,26 @@
  "arrivals": [
   {
    "line": "feeling soup 0.55",
-   "before": 8070,
-   "after": 8071,
+   "before": 8088,
+   "after": 8089,
    "at_frame": 216,
-   "waited_ms": 723
+   "waited_ms": 909
   },
   {
    "line": "feeling soup 0.9",
-   "before": 8071,
-   "after": 8072,
+   "before": 8089,
+   "after": 8090,
    "at_frame": 322,
-   "waited_ms": 2296
+   "waited_ms": 2676
   }
  ],
- "problems": [],
- "ok": true,
+ "problems": [
+  "http: 401 GET http://127.0.0.1:8480/v1/events?after=14108&wait=20",
+  "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+ ],
+ "refused_requests": [
+  "401 GET http://127.0.0.1:8480/v1/events?after=14108&wait=20"
+ ],
+ "ok": false,
  "steps_landed": true
 }
