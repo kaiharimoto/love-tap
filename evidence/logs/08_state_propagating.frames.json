@@ -1,13 +1,13 @@
 {
  "dir": "/tmp/lovetap-capture/08_state_propagating",
- "frames": 700,
+ "frames": 696,
  "fps": 62.5,
- "seconds": 11.2,
+ "seconds": 11.14,
  "clock": "driven",
  "timebase": "app time: each frame is one step of the app's own clock, grabbed one at a time; wall-clock time between grabs is not in the clip",
  "runs": [
   {
-   "frames": 25,
+   "frames": 21,
    "step_ms": 16,
    "dir": "evidence/frames/08_state_propagating"
   },
@@ -53,18 +53,18 @@
   }
  ],
  "cuts_between_runs": [
-  24,
-  173,
-  313,
-  384,
-  540,
-  647,
-  656,
-  675
+  20,
+  169,
+  309,
+  380,
+  536,
+  643,
+  652,
+  671
  ],
- "app_seconds": 12.35,
- "playback_over_app_time": 0.907,
- "mean_change_per_frame": 3.38605,
+ "app_seconds": 12.29,
+ "playback_over_app_time": 0.906,
+ "mean_change_per_frame": 3.41387,
  "held_frame_test": {
   "unit": "grey levels of Rec.601 luma at full resolution",
   "all_three_must_hold": {
@@ -73,33 +73,29 @@
    "busiest_32px_tile_mean_change_below": 2.0
   },
   "worst_moving_frame": {
-   "frame": 652,
+   "frame": 648,
    "mean": 0.0051,
    "visible_share": 5.1e-05,
-   "busiest_tile": 9.5609,
+   "busiest_tile": 9.5216,
    "note": "the frame nearest the held-frame test that still counts as motion"
   }
  },
- "repeated_frames": 2,
- "repeated_fraction": 0.003,
- "longest_still_run": 1,
- "repeated_at": [
-  23,
-  674
- ],
+ "repeated_frames": 0,
+ "repeated_fraction": 0.0,
+ "longest_still_run": 0,
+ "repeated_at": [],
  "brightness_jumps": 0,
  "brightness_jumps_at": [],
  "the_mean_moved_at": [],
- "largest_median_shift": 5.402,
- "ok": false,
- "why": "2 frame(s) identical to the one before (first at 23); the brief allows none",
+ "largest_median_shift": 0.0,
+ "ok": true,
  "strip": "evidence/crops/08_state_propagating_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/08_state_propagating/000000.png",
-  "/tmp/lovetap-capture/08_state_propagating/000140.png",
-  "/tmp/lovetap-capture/08_state_propagating/000280.png",
-  "/tmp/lovetap-capture/08_state_propagating/000419.png",
-  "/tmp/lovetap-capture/08_state_propagating/000559.png",
-  "/tmp/lovetap-capture/08_state_propagating/000699.png"
+  "/tmp/lovetap-capture/08_state_propagating/000139.png",
+  "/tmp/lovetap-capture/08_state_propagating/000278.png",
+  "/tmp/lovetap-capture/08_state_propagating/000417.png",
+  "/tmp/lovetap-capture/08_state_propagating/000556.png",
+  "/tmp/lovetap-capture/08_state_propagating/000695.png"
  ]
 }
