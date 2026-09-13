@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2304
+   "ms": 2302
   },
   {
    "do": "pair",
-   "ms": 1280
+   "ms": 1250
   },
   {
    "do": "wait",
-   "ms": 3705
+   "ms": 3703
   },
   {
    "do": "goTo",
-   "ms": 3405
+   "ms": 3778
   },
   {
    "do": "far",
-   "ms": 576
+   "ms": 735
   },
   {
    "do": "awaitArrival",
-   "ms": 6281
+   "ms": 6383
   },
   {
    "do": "wait",
@@ -38,11 +38,11 @@
   },
   {
    "do": "step",
-   "ms": 1662
+   "ms": 4806
   },
   {
    "do": "frames",
-   "ms": 52842
+   "ms": 52831
   },
   {
    "do": "wait",
@@ -50,47 +50,47 @@
   },
   {
    "do": "far",
-   "ms": 508
+   "ms": 507
   },
   {
    "do": "awaitArrival",
-   "ms": 835
-  },
-  {
-   "do": "wait",
-   "ms": 1203
-  },
-  {
-   "do": "step",
-   "ms": 948
-  },
-  {
-   "do": "frames",
-   "ms": 237280
-  },
-  {
-   "do": "goTo",
-   "ms": 3527
-  },
-  {
-   "do": "step",
-   "ms": 1576
-  },
-  {
-   "do": "far",
-   "ms": 551
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 851
+   "ms": 875
   },
   {
    "do": "wait",
    "ms": 1201
   },
   {
+   "do": "step",
+   "ms": 2519
+  },
+  {
+   "do": "frames",
+   "ms": 290187
+  },
+  {
+   "do": "goTo",
+   "ms": 6866
+  },
+  {
+   "do": "step",
+   "ms": 1386
+  },
+  {
+   "do": "far",
+   "ms": 720
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1781
+  },
+  {
+   "do": "wait",
+   "ms": 1202
+  },
+  {
    "do": "unfold",
-   "ms": 508
+   "ms": 1864
   },
   {
    "do": "wait",
@@ -98,63 +98,15 @@
   },
   {
    "do": "frames",
-   "ms": 196363
+   "ms": 275872
   },
   {
    "do": "far",
-   "ms": 508
+   "ms": 504
   },
   {
    "do": "awaitArrival",
-   "ms": 881
-  },
-  {
-   "do": "wait",
-   "ms": 1204
-  },
-  {
-   "do": "frames",
-   "ms": 122666
-  },
-  {
-   "do": "far",
-   "ms": 620
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 915
-  },
-  {
-   "do": "wait",
-   "ms": 1201
-  },
-  {
-   "do": "frames",
-   "ms": 226006
-  },
-  {
-   "do": "goTo",
-   "ms": 3536
-  },
-  {
-   "do": "step",
-   "ms": 1516
-  },
-  {
-   "do": "wait",
-   "ms": 2104
-  },
-  {
-   "do": "far",
-   "ms": 503
-  },
-  {
-   "do": "far",
-   "ms": 859
-  },
-  {
-   "do": "awaitArrival",
-   "ms": 1453
+   "ms": 2357
   },
   {
    "do": "wait",
@@ -162,15 +114,63 @@
   },
   {
    "do": "frames",
-   "ms": 167805
+   "ms": 179870
+  },
+  {
+   "do": "far",
+   "ms": 1670
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1198
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 335725
   },
   {
    "do": "goTo",
-   "ms": 3760
+   "ms": 5424
   },
   {
    "do": "step",
-   "ms": 863
+   "ms": 1687
+  },
+  {
+   "do": "wait",
+   "ms": 2103
+  },
+  {
+   "do": "far",
+   "ms": 596
+  },
+  {
+   "do": "far",
+   "ms": 1108
+  },
+  {
+   "do": "awaitArrival",
+   "ms": 1437
+  },
+  {
+   "do": "wait",
+   "ms": 1203
+  },
+  {
+   "do": "frames",
+   "ms": 253826
+  },
+  {
+   "do": "goTo",
+   "ms": 7218
+  },
+  {
+   "do": "step",
+   "ms": 3813
   },
   {
    "do": "wait",
@@ -178,10 +178,10 @@
   },
   {
    "do": "scrollTo",
-   "ms": 1793
+   "ms": 3947
   },
   {
-   "at": 1072651,
+   "at": 1476104,
    "said": "__deskCut(true) ok, the link is cut"
   },
   {
@@ -190,56 +190,56 @@
   },
   {
    "do": "wait",
-   "ms": 1101
+   "ms": 1104
   },
   {
    "do": "frames",
-   "ms": 17279
+   "ms": 27452
   },
   {
    "do": "frames",
-   "ms": 36896
+   "ms": 37528
   },
   {
    "do": "far",
-   "ms": 506
+   "ms": 504
   },
   {
    "do": "far",
-   "ms": 502
+   "ms": 1410
   },
   {
    "do": "wait",
-   "ms": 1702
+   "ms": 1704
   },
   {
-   "at": 1131142,
+   "at": 1546310,
    "said": "__deskCut(false) ok, the link is back"
   },
   {
    "do": "cut",
-   "ms": 505
+   "ms": 504
   },
   {
    "do": "sync",
-   "ms": 514
+   "ms": 511
   },
   {
    "do": "awaitArrival",
-   "ms": 19673
+   "ms": 19096
   },
   {
    "do": "frames",
-   "ms": 36071
+   "ms": 42406
   },
   {
    "do": "report",
-   "ms": 524
+   "ms": 544
   }
  ],
  "shots": [
   {
-   "frames": 16,
+   "frames": 25,
    "dir": "evidence/frames/08_state_propagating",
    "ms": 16,
    "drive": null
@@ -315,27 +315,23 @@
    "view": {
     "region": "chat",
     "visible": [
-     "01M1MDDGPAA7EATCGXE1XSM8DD",
-     "01M1MDE2EJ1X11AM0NV4X15GNQ",
-     "01M1MDMNHCKS6G2CMFVGZX9Z39",
-     "01M1MDMP15YGN3D3NRAKK7GAMB",
-     "0001MCJ1M0XNKJ57493RZ3KRMW",
-     "01M1MDN26WP4J1PCCZW4BJBNAN",
-     "01M1MDNA4GKVX65B19V5ZZXMJA"
+     "01M1MCJ1M0D46H1D74PPV4NMP5",
+     "01M1MCJ1M0D46H1D74PPV4NMP6",
+     "01M1MCJ1M0D46H1D74PPV4NMP7",
+     "01M1MCJ1M0D46H1D74PPV4NMP8",
+     "0001MCJ1M0TBH9TMCPR8TY7NE4"
     ],
     "whole_on_the_glass": [
-     "01M1MDE2EJ1X11AM0NV4X15GNQ",
-     "01M1MDMNHCKS6G2CMFVGZX9Z39",
-     "01M1MDMP15YGN3D3NRAKK7GAMB",
-     "0001MCJ1M0XNKJ57493RZ3KRMW",
-     "01M1MDN26WP4J1PCCZW4BJBNAN",
-     "01M1MDNA4GKVX65B19V5ZZXMJA"
+     "01M1MCJ1M0D46H1D74PPV4NMP6",
+     "01M1MCJ1M0D46H1D74PPV4NMP7",
+     "01M1MCJ1M0D46H1D74PPV4NMP8",
+     "0001MCJ1M0TBH9TMCPR8TY7NE4"
     ],
     "clipped_at_an_edge": {
-     "01M1MDDGPAA7EATCGXE1XSM8DD": 0.413
+     "01M1MCJ1M0D46H1D74PPV4NMP5": 0.765
     },
     "delivery": {
-     "0001MCJ1M0XNKJ57493RZ3KRMW": {
+     "0001MCJ1M0TBH9TMCPR8TY7NE4": {
       "state": "sent",
       "says": "sent"
      }
@@ -348,62 +344,48 @@
     "edited": [],
     "taken_back": [],
     "scroll": {
-     "first": 8075,
-     "last": 8082,
-     "of": 8082
+     "first": 8096,
+     "last": 8101,
+     "of": 8101
     },
     "paper": [
-     "01M1MDMP15YGN3D3NRAKK7GAMB",
-     "0001MCJ1M0XNKJ57493RZ3KRMW",
-     "01M1MDN26WP4J1PCCZW4BJBNAN",
-     "01M1MDNA4GKVX65B19V5ZZXMJA"
+     "01M1MCJ1M0D46H1D74PPV4NMP8",
+     "0001MCJ1M0TBH9TMCPR8TY7NE4"
     ],
-    "paper_whole_on_the_glass": 4,
+    "paper_whole_on_the_glass": 2,
     "rows_cost": [
      {
-      "row": 8075,
+      "row": 8096,
       "type": "feeling",
-      "tall": 225,
-      "top": -132
+      "tall": 298,
+      "top": -70
      },
      {
-      "row": 8076,
+      "row": 8097,
       "type": "state_declared",
       "tall": 31,
-      "top": 93
+      "top": 228
      },
      {
-      "row": 8077,
+      "row": 8098,
       "type": "state_declared",
       "tall": 31,
-      "top": 124
+      "top": 259
      },
      {
-      "row": 8078,
+      "row": 8099,
       "type": "message",
-      "tall": 72,
-      "top": 155
+      "tall": 71,
+      "top": 290
      },
      {
-      "row": 8079,
+      "row": 8100,
       "type": "message",
-      "tall": 123,
-      "top": 227
-     },
-     {
-      "row": 8080,
-      "type": "message",
-      "tall": 72,
-      "top": 350
-     },
-     {
-      "row": 8081,
-      "type": "message",
-      "tall": 72,
-      "top": 422
+      "tall": 116,
+      "top": 361
      }
     ],
-    "viewport_tall": 501.4,
+    "viewport_tall": 483.9,
     "composer": "",
     "says_the_link_is_down": false,
     "attaching": false,
@@ -414,7 +396,7 @@
     "kinds": {
      "feeling": 1,
      "state_declared": 2,
-     "message": 4
+     "message": 2
     },
     "folded_in": {
      "reaction": 0,
@@ -422,77 +404,69 @@
      "message_delete": 0,
      "read_marker": 2
     },
-    "partner_typing": false
+    "partner_typing": true
    },
    "visible": [
-    "01M1MDDGPAA7EATCGXE1XSM8DD",
-    "01M1MDE2EJ1X11AM0NV4X15GNQ",
-    "01M1MDMNHCKS6G2CMFVGZX9Z39",
-    "01M1MDMP15YGN3D3NRAKK7GAMB",
-    "0001MCJ1M0XNKJ57493RZ3KRMW",
-    "01M1MDN26WP4J1PCCZW4BJBNAN",
-    "01M1MDNA4GKVX65B19V5ZZXMJA"
+    "01M1MCJ1M0D46H1D74PPV4NMP5",
+    "01M1MCJ1M0D46H1D74PPV4NMP6",
+    "01M1MCJ1M0D46H1D74PPV4NMP7",
+    "01M1MCJ1M0D46H1D74PPV4NMP8",
+    "0001MCJ1M0TBH9TMCPR8TY7NE4"
    ],
    "paper": [
-    "01M1MDMP15YGN3D3NRAKK7GAMB",
-    "0001MCJ1M0XNKJ57493RZ3KRMW",
-    "01M1MDN26WP4J1PCCZW4BJBNAN",
-    "01M1MDNA4GKVX65B19V5ZZXMJA"
+    "01M1MCJ1M0D46H1D74PPV4NMP8",
+    "0001MCJ1M0TBH9TMCPR8TY7NE4"
    ],
    "tears": {
-    "01M1MDDGPAA7EATCGXE1XSM8DD": "tear_055",
-    "01M1MDE2EJ1X11AM0NV4X15GNQ": "tear_018",
-    "01M1MDMNHCKS6G2CMFVGZX9Z39": "tear_023",
-    "01M1MDMP15YGN3D3NRAKK7GAMB": "tear_045",
-    "0001MCJ1M0XNKJ57493RZ3KRMW": "tear_008",
-    "01M1MDN26WP4J1PCCZW4BJBNAN": "tear_029",
-    "01M1MDNA4GKVX65B19V5ZZXMJA": "tear_050"
+    "01M1MCJ1M0D46H1D74PPV4NMP5": "tear_044",
+    "01M1MCJ1M0D46H1D74PPV4NMP6": "tear_012",
+    "01M1MCJ1M0D46H1D74PPV4NMP7": "tear_017",
+    "01M1MCJ1M0D46H1D74PPV4NMP8": "tear_037",
+    "0001MCJ1M0TBH9TMCPR8TY7NE4": "tear_002"
    },
    "stocks": {
-    "01M1MDDGPAA7EATCGXE1XSM8DD": "lined_01",
-    "01M1MDE2EJ1X11AM0NV4X15GNQ": "lined_04",
-    "01M1MDMNHCKS6G2CMFVGZX9Z39": "receipt_01",
-    "01M1MDMP15YGN3D3NRAKK7GAMB": "lined_02",
-    "0001MCJ1M0XNKJ57493RZ3KRMW": "legal_02",
-    "01M1MDN26WP4J1PCCZW4BJBNAN": "lined_01",
-    "01M1MDNA4GKVX65B19V5ZZXMJA": "lined_03"
+    "01M1MCJ1M0D46H1D74PPV4NMP5": "lined_01",
+    "01M1MCJ1M0D46H1D74PPV4NMP6": "spiral_02",
+    "01M1MCJ1M0D46H1D74PPV4NMP7": "lined_04",
+    "01M1MCJ1M0D46H1D74PPV4NMP8": "lined_02",
+    "0001MCJ1M0TBH9TMCPR8TY7NE4": "lined_01"
    },
    "scroll": {
-    "first": 8075,
-    "last": 8082,
-    "of": 8082
+    "first": 8096,
+    "last": 8101,
+    "of": 8101
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 13392,
+   "driven_ms": 13536,
    "seed": 20260903,
-   "events": 14084,
+   "events": 14137,
    "transport": "local",
    "link": "connected",
    "me": "teo",
    "masks_in_pool": 56,
-   "masks_composed": 9,
+   "masks_composed": 10,
    "writable_masks": 47,
    "light": "day",
    "has_dusk_paper": true,
    "paper_stocks": 54,
    "the_smallest_patch_of_a_stock_anything_took": [
     "receipt_01 1601x3420",
-    "228x76 of it, at its own size",
-    17266.689805054197
+    "228x75 of it, at its own size",
+    17191.28941289239
    ],
-   "paper_at_its_own_size": 1485,
+   "paper_at_its_own_size": 3690,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [],
    "paper_that_arrived_after_the_piece_was_drawn": 16,
    "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 249,
-   "stocks_held": 17,
-   "stocks_held_bytes": 245769520,
+   "masks_dropped_to_stay_inside_the_pool": 246,
+   "stocks_held": 16,
+   "stocks_held_bytes": 231918320,
    "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
-    "held": 30,
-    "bytes": 31578956,
+    "held": 32,
+    "bytes": 32856000,
     "budget": 402653184,
     "live": 26,
     "still_decoding": 0
@@ -511,7 +485,7 @@
     "feeling": "soup",
     "channel": "page",
     "total_ms": 1200,
-    "started_at": "2026-09-13T04:22:47.796Z",
+    "started_at": "2026-09-13T11:35:12.259Z",
     "pattern": [
      {
       "ms": 150,
@@ -606,38 +580,38 @@
     }
    ],
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 17,
+    "the framework": 9,
+    "the library index": 16,
     "the ink plates": 39,
-    "the desk": 156,
-    "the log": 6838,
-    "the first frame": 412,
-    "everything": 7469
+    "the desk": 182,
+    "the log": 729,
+    "the first frame": 337,
+    "everything": 1312
    },
    "sync": {
     "transport": "local",
     "role": "client",
-    "rounds": 57,
-    "pushed": 10,
+    "rounds": 495,
+    "pushed": 14,
     "refused": 0,
-    "pulled": 13,
+    "pulled": 11,
     "blobs_fetched": 0,
-    "faults": 12,
+    "faults": 15,
     "last_fault": "offline (POST /events)",
-    "pending": 1,
+    "pending": 0,
     "refused_in_the_outbox": 0,
-    "cursor": 14083,
+    "cursor": 14137,
     "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
     "link": {
      "transport": "local",
      "role": "client",
      "state": "connected",
      "address": "http://127.0.0.1:8480",
-     "peer_cursor": 14083,
-     "our_cursor": 14083,
+     "peer_cursor": 14137,
+     "our_cursor": 14137,
      "last_error": null,
-     "since": "2026-09-13T04:08:00.609Z",
-     "last_contact": "2026-09-13T04:27:34.490Z",
+     "since": "2026-09-13T11:15:10.799Z",
+     "last_contact": "2026-09-13T11:41:55.348Z",
      "certificate": null,
      "setup_address": null
     }
@@ -650,6 +624,7 @@
     "what_each_surface_may_say": {
      "standing_line": "their state, in the couple's own words, assembled here from the log",
      "pocket": "the feeling's own name and its sound, because the app is running and has it",
+     "and_the_pocket_here_is": "this is a PWA and iOS will not let one vibrate, so the rhythm is carried by the feeling's own sound and by the page itself moving under it — feelings/sensation.dart, the same segments the motor would have been given. `pocket_feeling` and `pocket_at` above are what it last played and when, and `asked_a_motor_for` is every pattern it asked for. A held list that is empty after the app has been opened is the surface working: the app clears what the phone was holding the moment somebody looks at it.",
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
@@ -667,19 +642,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 8912,
+ "cold_ms": 2620,
  "load": {
-  "ms": 8912,
-  "store": "fresh",
+  "ms": 2620,
+  "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
-   "the library index": 17,
+   "the framework": 9,
+   "the library index": 16,
    "the ink plates": 39,
-   "the desk": 156,
-   "the log": 6838,
-   "the first frame": 412,
-   "everything": 7469
+   "the desk": 182,
+   "the log": 729,
+   "the first frame": 337,
+   "everything": 1312
   }
  },
  "far": [
@@ -689,92 +664,86 @@
   },
   {
    "line": "feeling hold 0.92",
-   "at_frame": 16
+   "at_frame": 25
   },
   {
    "line": "message it is raining here too",
-   "at_frame": 165
+   "at_frame": 174
   },
   {
    "line": "feeling squeeze 0.6",
-   "at_frame": 305
+   "at_frame": 314
   },
   {
    "line": "feeling here 0.8",
-   "at_frame": 376
+   "at_frame": 385
   },
   {
    "line": "state place out",
-   "at_frame": 532
+   "at_frame": 541
   },
   {
    "line": "feeling soup 0.7",
-   "at_frame": 532
+   "at_frame": 541
   },
   {
    "line": "state mood quiet",
-   "at_frame": 667
+   "at_frame": 676
   },
   {
    "line": "message the bus is late, dont wait up",
-   "at_frame": 667
+   "at_frame": 676
   }
  ],
  "arrivals": [
   {
    "line": "state mood restless",
-   "before": 8069,
-   "after": 8070,
+   "before": 8090,
+   "after": 8091,
    "at_frame": 0,
-   "waited_ms": 5781
+   "waited_ms": 5883
   },
   {
    "line": "feeling hold 0.92",
-   "before": 8070,
-   "after": 8071,
-   "at_frame": 16,
-   "waited_ms": 334
+   "before": 8091,
+   "after": 8092,
+   "at_frame": 25,
+   "waited_ms": 373
   },
   {
    "line": "message it is raining here too",
-   "before": 8071,
-   "after": 8072,
-   "at_frame": 165,
-   "waited_ms": 350
+   "before": 8092,
+   "after": 8093,
+   "at_frame": 174,
+   "waited_ms": 1281
   },
   {
    "line": "feeling squeeze 0.6",
-   "before": 8072,
-   "after": 8073,
-   "at_frame": 305,
-   "waited_ms": 381
+   "before": 8093,
+   "after": 8094,
+   "at_frame": 314,
+   "waited_ms": 1855
   },
   {
    "line": "feeling here 0.8",
-   "before": 8073,
-   "after": 8074,
-   "at_frame": 376,
-   "waited_ms": 414
+   "before": 8094,
+   "after": 8095,
+   "at_frame": 385,
+   "waited_ms": 697
   },
   {
    "line": "feeling soup 0.7",
-   "before": 8075,
-   "after": 8076,
-   "at_frame": 532,
-   "waited_ms": 953
+   "before": 8096,
+   "after": 8097,
+   "at_frame": 541,
+   "waited_ms": 936
   },
   {
    "line": "message the bus is late, dont wait up",
-   "before": 8078,
-   "after": 8082,
-   "at_frame": 667,
-   "waited_ms": 19172
-  }
- ],
- "said_again": [
-  {
-   "line": "message the bus is late, dont wait up",
-   "times": 2
+   "before": 8099,
+   "after": 8101,
+   "at_frame": 676,
+   "waited_ms": 18595
   }
  ],
  "problems": [],
