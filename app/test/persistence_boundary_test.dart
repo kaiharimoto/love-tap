@@ -111,6 +111,60 @@ void main() {
     expect(writes.hasMatch("final out = File(p).openWrite();"), isTrue);
   });
 
+  test('and the JavaScript that ships with it is held to the same rule', () {
+    // Every rule above enumerates Directory('lib'), and the one file in the shipped app that opens
+    // the browser's storage outside the spine's own directory is not Dart: app/web/push/sw.js
+    // opens `spine_<profile>`, takes a readwrite transaction on `meta` and writes a rolling
+    // twenty-entry `push.shown` record into it. A code critic found the omission and was right
+    // that it is inconsistent rather than considered — module_costs_test.dart already walks
+    // web/*.js for exactly this reason.
+    //
+    // What sw.js writes is bounded dedupe state and not history, so nothing has drifted. The point
+    // is that the rule the brief says must fail the build could not see the file, so a second log
+    // could be written there and nothing would say so. It is named here, with what it may write
+    // and how much of it, and anything else that reaches storage from web/ fails.
+    const mayReachStorage = {
+      'web/push/sw.js':
+          'the worker dedupes pushes across wakes: a rolling twenty-entry push.shown list in the '
+          'spine\'s own meta store, which is state about what has been shown and never an event',
+    };
+    final storage = RegExp(r'\b(indexedDB|IDBFactory|IDBDatabase|localStorage|sessionStorage'
+        r'|openDatabase|caches)\b');
+    final offenders = <String>[];
+    final web = Directory('web');
+    if (web.existsSync()) {
+      for (final f in web.listSync(recursive: true).whereType<File>()) {
+        if (!f.path.endsWith('.js')) continue;
+        final normalized = f.path.replaceAll('\\', '/');
+        if (mayReachStorage.containsKey(normalized)) continue;
+        if (storage.hasMatch(f.readAsStringSync())) offenders.add(normalized);
+      }
+    }
+    expect(offenders, isEmpty,
+        reason: 'JavaScript in web/ reaches the browser\'s storage and is not named with a '
+            'reason: $offenders. If it is keeping events, it is a second log and the brief '
+            'forbids it.');
+
+    // and the one that is named is still doing what it was named for
+    final sw = File('web/push/sw.js');
+    expect(sw.existsSync(), isTrue);
+    final src = sw.readAsStringSync();
+    expect(storage.hasMatch(src), isTrue,
+        reason: 'sw.js no longer reaches storage, so it should not be named as one that may');
+    expect(RegExp(r"while \(all\.length > \d+\) all\.shift\(\)").hasMatch(src), isTrue,
+        reason: 'the worker\'s record of what it has shown is no longer bounded, and an unbounded '
+            'record of what happened is a log');
+    // every write it makes is that one key, counted rather than pattern-matched: a put whose
+    // arguments span a nested call is not something a regular expression should be trusted with
+    final puts = RegExp(r'\.put\(').allMatches(src).length;
+    final shown = RegExp(r"'push\.shown'").allMatches(src).length;
+    expect(puts, greaterThan(0), reason: 'the worker no longer writes anything');
+    expect(puts, lessThanOrEqualTo(shown - 1),
+        reason: 'the worker makes $puts writes into the spine\'s meta store and mentions '
+            'push.shown $shown times: something other than the record it is named for is being '
+            'written');
+  });
+
   test('inside lib/spine/, drivers live under store/ only', () {
     final drivers = _drivers('sqlite3|sqlite3_flutter_libs|idb_shim');
     final offenders = <String>[];
