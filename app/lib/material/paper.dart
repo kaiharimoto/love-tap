@@ -296,6 +296,15 @@ class PaperPiece extends StatelessWidget {
   /// they had all *decided* to. This is the decision's outcome rather than the decision.
   static final Set<String> waitingForPaper = <String>{};
 
+  /// How many pieces are on the glass right now waiting for each stock, by stock.
+  ///
+  /// The set above names the stock and an anti-goal critic asked, fairly, which piece and whether
+  /// it was on the glass: `stocks_the_paper_had_not_arrived_for` was non-empty in ten of the
+  /// eighteen scene reports and said nothing about what that cost the picture. A layer waiting is
+  /// a layer mounted — it is drawing the flat colour under it at the size of the piece — so this
+  /// is how many sheets in the frame are that colour rather than paper.
+  static final Map<String, int> piecesWaitingForPaper = <String, int>{};
+
   /// How many times a stock has arrived after the piece asking for it was already on the glass.
   static int paperArrivedLate = 0;
 
@@ -1393,6 +1402,7 @@ class _StockLayerState extends State<_StockLayer> {
     if (have != null) {
       _image = have;
       PaperPiece.waitingForPaper.remove(widget.stock);
+      PaperPiece.piecesWaitingForPaper.remove(widget.stock);
       return;
     }
     // Whether the paper is actually there, as against whether it was asked for. A stock that has
@@ -1400,9 +1410,11 @@ class _StockLayerState extends State<_StockLayer> {
     // from paper with no tooth: six cream rectangles in 04_moments with their torn fringe drawn
     // perfectly around every one.
     PaperPiece.waitingForPaper.add(widget.stock);
+    PaperPiece.piecesWaitingForPaper.update(widget.stock, (n) => n + 1, ifAbsent: () => 1);
     unawaited(StockCache.load(paperAsset(widget.stock)).then((img) {
       if (!mounted) return;
       setState(() => _image = img);
+      PaperPiece.piecesWaitingForPaper.remove(widget.stock);
       if (PaperPiece.waitingForPaper.remove(widget.stock)) {
         PaperPiece.paperArrivedLate += 1;
       }

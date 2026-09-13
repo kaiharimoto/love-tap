@@ -642,6 +642,11 @@ class CaptureHooks {
       // perfectly around every one of them. Nothing in this report said so, because every counter
       // here recorded a decision rather than its outcome.
       'stocks_the_paper_had_not_arrived_for': PaperPiece.waitingForPaper.toList()..sort(),
+      // and how many sheets in this frame are drawing the flat colour under them rather than
+      // paper, by stock. A layer waiting is a layer mounted, so these are on the glass.
+      if (PaperPiece.piecesWaitingForPaper.isNotEmpty)
+        'sheets_on_the_glass_with_no_paper_on_them':
+            Map<String, int>.of(PaperPiece.piecesWaitingForPaper),
       'paper_that_arrived_after_the_piece_was_drawn': PaperPiece.paperArrivedLate,
       // A piece whose tear has not come out of the cache keeps its room and paints nothing, and
       // after eighty milliseconds it settles for a cut sheet rather than staying a hole. Neither
