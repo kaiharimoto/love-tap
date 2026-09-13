@@ -1,0 +1,236 @@
+{
+ "critic": "completeness",
+ "cycle": 12,
+ "how_i_worked": {
+  "images": "Every still read with PIL at full resolution and converted to Rec.709 luma (0.2126R+0.7152G+0.0722B) in float64. 'Paper' means luma > 150 (and, where a warm term was needed to match the build's own instrument, R-B < 60, which is how tools/check/holes.py finds it). 'Ink' means a pixel at least 26 grey levels below its own local background, where the background is a 45-px horizontal median followed by an 11-px vertical median - this separates a stroke from the sheet or the wood under it, which a flat luma threshold cannot do on a surface that is dark to begin with.",
+  "clips": "Decoded with ./toolchain/ffmpeg/ffmpeg into my scratchpad, never into the repository: every 10th frame of 08_state_propagating (70 frames), frames 660-690 of the same clip one at a time, every 40th frame of 07 and 15, and six-frame samples of 06. Frame counts, sizes and durations from ./toolchain/ffmpeg/ffprobe with -count_frames. Row geometry read off evidence/logs/<scene>.report.json rows_cost (logical top and tall) mapped to pixels at the dpr in evidence/scenes/<scene>.json; for 13_messenger_states the origin y=321 px at 3 px per point reproduces the report's own row tops, and the thread's foot lands at 321 + 3*707.2 = 2443, which is exactly where my measured blank run ends.",
+  "edges": "For the torn-edge survey: paper mask closed with a 7x7 element and hole-filled, connected components over 20,000 px, then for each component the first or last paper pixel per column, kept only where 30 px of clear desk lie beyond, minimum 200 columns; least-squares line fit; I report both rms and median absolute residual because the two differ by an order of magnitude on an edge with a few deep notches and the reports do not say which they used.",
+  "code": "Read-only. I grepped and read app/web/push/sw.js, app/test/persistence_boundary_test.dart, app/test/floors_test.dart, app/test/the_host_serves_over_tls_test.dart, app/test/module_costs_test.dart, app/lib/regions/us/us_region.dart, tools/check/holes.py, tools/check/surfaces.py, tools/check/manifest.py and capture.sh. I did not run the test suite - see disclosure.",
+  "disclosure": "I wrote exactly one file in the repository: evidence/critics/12/completeness.json. Everything else I produced - decoded frames, crops, tiles - went to /tmp/claude-0/-home-user-love-tap/a894c492-3797-50ac-9abe-7e77d0dfbea0/scratchpad. I deliberately did NOT run flutter test, capture.sh, or any tool under tools/ that writes into evidence/, because capture.sh:133-139 records that an earlier completeness pass ran the suite and had to restore reliability.json and coldstart.json with git checkout afterwards. That hazard is now fixed and I checked it rather than assuming it: app/test/where_the_evidence_goes.dart:16 gates both writers on DESK_WRITE_EVIDENCE=1, which only capture.sh exports, and no file under evidence/ has an mtime later than 2026-09-13 05:23:31 except the six critic reports themselves (05:25-06:00), so the code critic's three flutter test runs at about 05:49 wrote nothing into the set. Nothing needed putting right."
+ },
+ "checked": {
+  "reports_read_in_full": [
+   "evidence/critics/12/messenger_reliability.json",
+   "evidence/critics/12/material_truth.json",
+   "evidence/critics/12/emotional_transmission.json",
+   "evidence/critics/12/coherence.json",
+   "evidence/critics/12/anti_goal.json",
+   "evidence/critics/12/code.json",
+   "evidence/critics/12/builder.json"
+  ],
+  "evidence_opened": [
+   "evidence/01_pulse.png",
+   "evidence/02_chat.png",
+   "evidence/03_us.png",
+   "evidence/04_moments.png",
+   "evidence/05_settings.png",
+   "evidence/10_first_run.png",
+   "evidence/12_search.png",
+   "evidence/13_messenger_states.png",
+   "evidence/14_media_viewer.png",
+   "evidence/17_setup_pwa.png",
+   "evidence/06_unfolding.mp4 (frames 0,20,40,60,80,120,140,170,200,230,260,285)",
+   "evidence/07_feeling_landing.mp4 (every 40th frame; ffprobe)",
+   "evidence/08_state_propagating.mp4 (every 10th frame, plus 660-690 individually; ffprobe)",
+   "evidence/11_chat_scroll.mp4 (ffprobe)",
+   "evidence/15_authored_feeling.mp4 (every 40th frame; ffprobe)",
+   "evidence/.previous/12_search.png",
+   "evidence/.previous/13_messenger_states.png",
+   "evidence/.previous/07_feeling_landing.mp4 (ffprobe)",
+   "evidence/crops/02_chat_300_edge.png",
+   "evidence/crops/02_chat_300_hand.png",
+   "evidence/crops/02_chat_300_shadow.png",
+   "evidence/MANIFEST.json",
+   "evidence/DIFF.json",
+   "evidence/frames.json",
+   "evidence/reliability.json",
+   "evidence/coldstart.json",
+   "evidence/WHY_MISSING.json",
+   "evidence/logs/01_pulse.report.json",
+   "evidence/logs/02_chat.report.json",
+   "evidence/logs/03_us.report.json",
+   "evidence/logs/04_moments.report.json",
+   "evidence/logs/05_settings.report.json",
+   "evidence/logs/06_unfolding.report.json",
+   "evidence/logs/07_feeling_landing.report.json",
+   "evidence/logs/08_state_propagating.report.json",
+   "evidence/logs/08_state_propagating.json",
+   "evidence/logs/06_unfolding.json",
+   "evidence/logs/07_feeling_landing.json",
+   "evidence/logs/11_chat_scroll.json",
+   "evidence/logs/15_authored_feeling.json",
+   "evidence/logs/10_first_run.report.json",
+   "evidence/logs/11_chat_scroll.report.json",
+   "evidence/logs/12_search.report.json",
+   "evidence/logs/13_messenger_states.report.json",
+   "evidence/logs/14_media_viewer.report.json",
+   "evidence/logs/15_authored_feeling.report.json",
+   "evidence/logs/17_setup_pwa.report.json",
+   "evidence/logs/dusk_pulse.report.json",
+   "evidence/logs/reception.report.json",
+   "evidence/logs/reception_picked_up.report.json",
+   "evidence/logs/torn.json",
+   "evidence/logs/holes.json",
+   "evidence/logs/surfaces.json",
+   "evidence/logs/strings.json",
+   "evidence/logs/haptics.json",
+   "evidence/logs/haptics.check.json",
+   "evidence/scenes/*.json (all 17, for viewport and step list)",
+   "evidence/scenes/08_state_propagating.json (in full)",
+   "evidence/critics/BRIEFING.md",
+   "evidence/critics/prompts/completeness.md"
+  ]
+ },
+ "corrections": [
+  {
+   "report": "messenger_reliability",
+   "severity_in_report": "blocking",
+   "claim": "The one message that crosses a real disconnect arrives twice: said_again reads times 2, and the thread goes from 8078 rows to 8082 (+4) for the two lines the far phone wrote while the link was cut, where all 16 other arrivals in 06/07/08/15 add exactly +1.",
+   "what_i_measured": "It replicates, and on the glass it is worse than the log says. logs/08_state_propagating.json said_again is verbatim [{\"line\": \"message the bus is late, dont wait up\", \"times\": 2}]; the frame-667 arrivals entry is before 8078, after 8082. I counted every arrivals entry in 06/07/08/15 myself: 17 in total, 16 of them exactly +1 and this the only exception (said_again is absent, not null, in the other three clips). Then I decoded the frames either side. At frame 665 the thread's tail is tuesday soup / noor is heads down / teo's own note 'on my way - leaving in ten ... waiting to send'. At frame 668 it is tuesday soup / noor is heads down / noor is quiet / a folded note / 'on my way ... sent' / a folded note / a folded note. Three message rows landed - rows 8078, 8080 and 8081 of the final report, three distinct ids carrying three distinct tear masks (tear_045, tear_029, tear_050) - for one message written while the link was down, and the scene script (evidence/scenes/08_state_propagating.json steps 43-53) shows only one: cut on, type, send slowly, far writes 'state mood quiet' and 'message the bus is late, dont wait up', cut off, sync.",
+   "does_it_survive": "yes - and the count on the glass is three rows, not two",
+   "why_it_matters": "This is the one row-01 disqualifier in the set that is a fault in the app rather than in the capture, and the picture is stronger evidence than the log the report quoted. It also means the capture's own said_again undercounts: it names two, the thread shows three."
+  },
+  {
+   "report": "coherence / messenger_reliability (both blocking, same artifact)",
+   "severity_in_report": "blocking",
+   "claim": "coherence: a continuous 1480 px band, 47.4 per cent of the frame, in which 0.0152 per cent of pixels are brighter than luma 160, holding rows 8074-8077 which paint nothing. messenger_reliability: a continuous 1503-pixel stretch, 48.2 per cent of the frame height, in which no image row has more than 12 per cent of its width above grey level 150.",
+   "what_i_measured": "Both replicate to the digit. The longest run of image rows with 12 per cent or less of their width above luma 150 is exactly 1503 rows, y=941 to y=2443, 48.17 per cent of 3120. Over the band y953-2432 (1480 rows, 47.44 per cent) 0.0150 per cent of pixels are above luma 160. Per row, using the report's own rows_cost and the 321 + 3*logical mapping: row 8071 24.0 per cent of its box above luma 150, 8072 38.3, 8073 40.0, then 8074 0.000, 8075 0.000, 8076 0.000, 8077 0.001. Bright bands in the whole frame: 62-184, 282-317, 410-582, 673-932, 2449-2886, 2972-3101, which is the coherence critic's list within a few pixels. Against evidence/.previous/13_messenger_states.png the paper share of the same thread band falls from 53.593 per cent to 12.286 per cent and the number of sheets in it from five to three, so it is new this cycle.",
+   "does_it_survive": "yes, exactly",
+   "why_it_matters": "Two rows are held at their floor by this and the arithmetic is right. The one figure I could not reproduce is the coherence report's 'bare desk went 34.0 per cent to 59.0 per cent', because it does not say what band of luma it calls desk: at 70<L<130 I get 37.3 to 62.3, at 75<L<125 32.9 to 55.3. Same direction, same size, unstated method."
+  },
+  {
+   "report": "coherence",
+   "severity_in_report": "serious",
+   "claim": "Three of the four message rows in 08_state_propagating end the clip as sheets carrying only the author label 'teo' and no message; same failure as the blocking finding and the same root cause, the thread commits a row's paper before its ink.",
+   "what_i_measured": "The measurement replicates and the diagnosis does not. Inside each row's own silhouette at frame 690, ink (luma<120) is 0.421, 0.420 and 0.427 per cent for rows 8078, 8080 and 8081 against 3.929 per cent for row 8079, and the three sheets are the same 704 x 161 px box at x69-772 (the report said 0.64-0.67 against 7.88-8.04 and 693x145 at x74-767 - a different ink threshold, the same ratio). But those sheets are not paper-without-ink: they are folded notes with the reader's name written on the outside. Frame 0 of 06_unfolding.mp4 is the same object, and the clip then unfolds it and the words appear by frame 140. The builder's own sheet says so in as many words: 'it now arrives as a folded letter with the reader's name on the outside'.",
+   "does_it_survive": "the measurement yes, the root cause no",
+   "why_it_matters": "The repair the finding asks for - commit paper, mask and ink together - would not change these rows, because there is nothing missing from them. The real complaint is that three unopened letters and no way to read them is a poor closing frame for a clip about a message arriving, and that 13_messenger_states' blank rows are a different fault (there, no paper is painted at all: 0.000 per cent above luma 150). Filing them as one fault hides that there are two."
+  },
+  {
+   "report": "material_truth",
+   "severity_in_report": "blocking",
+   "claim": "Roughly half the torn edges in the set are not torn: across 137 free-standing edges the residual is median 1.27 px, 57 of 137 (42 per cent) under 1.00 px, and four are dead straight - 02_chat bottom y2634 at rms 0.00 over 632 columns, 03_us bottom y1013 at 0.00, 17_setup_pwa bottom y2944 at 0.00, 05_settings bottom y2944 at 0.01.",
+   "what_i_measured": "The aggregate survives; three of the four exhibits do not. My own survey of the ten stills found 181 free-standing edges with 200 or more clear columns: median absolute residual 1.72 px and 69 of 181 (38 per cent) under 1.00 px, against the report's 1.27 px and 42 per cent - close enough to call it the same finding. The three 300 per cent crops agree too: the two torn edges inside crops/02_chat_300_edge.png fit a straight line to a median 0.46 and 0.60 native px (rms 1.43 and 1.57), which is the report's 0.64/0.73/0.94, and at that zoom the edge really is a ruler line with a comb of hairs on it. But the four 'dead straight' edges are the scroll container clipping its content, not tear masks. At 05_settings y2944 and 17_setup_pwa y2944 the paper share of the frame goes 91.0 -> 0.0 and 96.3 -> 0.0 in a single row across the whole width, and the 05_settings cut passes horizontally through the middle of the words 'a feeling'. At 02_chat y2634 the share goes 72.2 -> 0.0 in one row and the note reads 'four left. the last four are the four i have been walking around since the sixteenth' with fringed left, right and top edges and a guillotine bottom - and logs/02_chat.report.json records that very row as clipped_at_an_edge 0.738. 12_search has the same cut at y2942 and the report did not name it. Under my own extraction 02_chat's y2634 edge measures rms 3.62 px with a 1-99 residual spread of 2.57, not 0.00.",
+   "does_it_survive": "the row-level claim yes, three of its four exhibits no",
+   "why_it_matters": "The finding's prescription is to re-render the flat half of the mask pool, and three of the four edges it points at would be unchanged by that - they are a layout clip. BRIEFING.md warns about exactly this class of mistake. The claim still stands on the 181-edge survey and on the crops, and logs/torn.json backs it verbatim (under_2px 28 of 56, accepted band 2.88-5.14, rejected 0.36-0.59, 'Not re-rendered this cycle'), so the row stays below its floor - but a builder reading the finding would fix the wrong thing first."
+  },
+  {
+   "report": "emotional_transmission",
+   "severity_in_report": "blocking",
+   "claim": "In 08_state_propagating the standing line's state row is bisected by the torn bottom edge of its note: 2320 ink pixels at frame 0, 88.8 per cent of them on bare wood; median 90.4 per cent across 70 sampled frames; 67 of the 70 above 60 per cent; contrast 75.3 grey levels on paper against 48.1 on wood; 07 and 15 read 21.9 and 22.2 per cent at the same viewport.",
+   "what_i_measured": "The fault is real and I can see it; the number is overstated by about two and a half times. Testing each ink pixel against the background directly behind it (local median background, wood = background below luma 120), frame 0 is 30.7 per cent on wood and the median over the same 70 frames is 34.4 per cent, with 1 frame of 70 above 60 per cent rather than 67. Using the report's own stated paper edge as a fixed line at y=164 instead gives 56.2 per cent at frame 0 and a median of 54.4 per cent, still not 90. Contrast at frame 0 is 66.5 grey levels on paper and 34.9 on wood. The same method on the comparison clips gives 07 at 17.5 per cent and 15 at 13.8 per cent, so 08 is about twice the others, not four times. What the picture shows is not in doubt: at 360 points the second row reads TRAVE_ING PESTLESS NEED ENERGY with most of each glyph on wood. It is also confined to the narrow width - in every 480-point still the same two lines sit wholly on paper and read cleanly ('week one, and the room smells right again' / 'TRAVELLING BRIGHT NEED ||| ENERGY'), and the band y0-150 is bit-identical across all eight seeded stills (mean absolute difference 0.0000, which replicates the coherence critic's claim).",
+   "does_it_survive": "yes as a fault, no as a number",
+   "why_it_matters": "This is the finding that holds row 03 at 16 against a floor of 17, and it is carried by a figure I cannot reproduce under two different explicit methods while the report gives none. It also belongs with the coherence critic's three-widths finding rather than apart from it: the state row only falls off its paper at the 360-point width the clips use, so one fix - clearance between the state row and the tear at narrow widths - closes both."
+  },
+  {
+   "report": "anti_goal",
+   "severity_in_report": "serious",
+   "claim": "logs/surfaces.json records obj_clover's tooth at 1.001, the second lowest of the 62 object surfaces it measures.",
+   "what_i_measured": "The value is exact and the rank is wrong. obj_clover.webp tooth = 1.001. Of the 62 object entries only 39 carry a tooth value at all - the other 23 are marked unmeasurable - and among those 39 the clover is the 11th lowest (8th of the 21 daylight objects). Lower than it: obj_spitball 0.307, obj_spitball_dusk 0.343, obj_crumple_ball_dusk 0.353, obj_crumple_ball 0.430, obj_boat 0.522, obj_candle_dusk 0.763, obj_plaster 0.878, obj_candle 0.882, obj_stone 0.981, obj_wrapper 0.992. Median object tooth is 1.557, max 2.457. And the objects family has no tooth floor at all: tools/check/surfaces.py gates tooth only for paper (0.45) and folds (0.6); the 'floor: 2.0' printed on every object row is a patch_std floor, which nothing in the library fails (flat is empty, ok is true).",
+   "does_it_survive": "the object is genuinely smooth; the ranking that made it sound exceptional does not",
+   "why_it_matters": "The finding is that three of thirty-six feelings are untextured 3-D forms. On the file's own numbers roughly a quarter of the measured objects are smoother than the clover, so either the finding understates its own scope or the tooth number is not the right instrument for it - and nobody can tell which from the report, because it names one rank and one file and no derivation."
+  },
+  {
+   "report": "material_truth / builder (they disagree with each other and with the file)",
+   "severity_in_report": "serious",
+   "claim": "material_truth: 6,912 pixels darker than luma 30 lying off the paper in 01_pulse across 253 blobs, and a band beside the Pulse sheet's torn right edge of median width 300 px falling to luma 22-28 against a desk base near 90. builder: 571 pixels beside the paper against an allowance of 200, caused by a displacement of four by nine device pixels.",
+   "what_i_measured": "All three numbers are of the same fault at three different scales, and the smallest of them is the one the build gates on. I reproduced the file first: counting pixels under luma 30 in the ring three to twelve pixels outside a sheet gives 596, against logs/holes.json's 571. Then I dropped the ring. Pixels under luma 30 more than twelve pixels from any paper: 10,311. Under luma 40: 62,414. The cause is in the instrument - tools/check/holes.py:109 builds its ring as _grown(paper, reach) & ~_grown(paper, grow) with reach = 12, so nothing further than twelve pixels from a sheet is ever counted. Profiling the desk to the right of the Pulse sheet at y=1620, 1700 and 1760, luma runs 23 to 46 from x about 960 out to x about 1160 - a band roughly 200 px wide - against a desk base of 80 to 100 twenty rows higher. The critic's 300 px is the right order of magnitude; the builder's 571 is not.",
+   "does_it_survive": "yes, and it is about seventeen times larger at the file's own threshold than the number it is being declined against",
+   "why_it_matters": "The builder declines this finding as 'a band a few pixels wide at one torn edge' and says the fix is a lighter shadow core. That diagnosis fits a twelve-pixel ring. It does not fit a two-hundred-pixel wash of near-black desk, which is what is actually beside that sheet. Nobody in this cycle noticed that the file's number and the critic's number differ by a factor of twelve because they measure different things."
+  },
+  {
+   "report": "material_truth",
+   "severity_in_report": "serious",
+   "claim": "Four of the six sheets in 02_chat darken by +10.1 to +33.6 grey levels while two do not darken at all: the note at y2349-2634 reads -7.4 over 208 clear columns and the voice note at y970-1195 reads -2.1 over 1054 columns.",
+   "what_i_measured": "Measured on every connected sheet in 02_chat with fifty or more columns of clear desk beneath it, comparing the mean luma 4-14 px below the edge against 45-65 px below it: standing line +35.9 (1341 columns), voice note +5.1 (1064 columns), ritual row +27.3 (62), hero note +25.5 (751), the y2339-2633 note -6.8 (195), composer +20.4 (1226). The -7.4/208 replicates as -6.8/195. The voice note's -2.1 does not: on the same edge and almost the same column count I get +5.1. Either way it is an order below the other four, so the substance holds.",
+   "does_it_survive": "yes, with the voice note's sign corrected",
+   "why_it_matters": "The sheet reading -6.8 is the one whose bottom is the thread's viewport clip, so it has no bottom edge to cast a shadow from - calling it 'a sheet lying on the desk casting nothing' misnames the only sheet in the set with a real excuse. The finding should rest on the voice note alone, where it is a genuine one-of-six."
+  },
+  {
+   "report": "messenger_reliability / coherence / emotional_transmission (all three)",
+   "severity_in_report": "cited as what_is_working",
+   "claim": "coldstart.json proves the wire: transport tailscale, two distinct node keys, two distinct 100.x addresses, the same four event ids in both spine dumps. messenger_reliability calls it 'proven once, properly'.",
+   "what_i_measured": "The file says all of that, and it also says written_at 2026-09-05T00:28:41Z with later_check {status: pending, why: 'the nodes were not answering when this was re-run', checked_at: 2026-09-13T05:11:25Z}. This capture ran on 2026-09-13. So the tailnet proof is eight days old and could not be reproduced on the day the set was shot, and none of the three reports that lean on it says so. MANIFEST.json makes this hard to see: its checks block lists sixty-eight files and does not list coldstart.json or reliability.json at all, so neither carries a from_this_run flag while every other record does. Separately, both coldstart.json and reliability.json record the tailnet path as 'direct to 192.0.2.2:52340'; 192.0.2.0/24 is RFC 5737 TEST-NET-1, a documentation range that cannot carry traffic. Nobody checked it. The builder's own sheet is wrong in the opposite direction - it says 'evidence/coldstart.json is the local-transport run and names itself as such', and the file's first field is transport: tailscale, status: ran.",
+   "does_it_survive": "the file's contents yes; 'proven, properly, this session' no",
+   "why_it_matters": "The brief's exit conditions turn on a cold start from the final session. A record that is eight days old, that the same file says could not be re-run today, that the manifest does not mark as old, and whose peer path is a documentation address, is the single weakest load-bearing artifact in the set - and it is the one artifact every reader treated as settled."
+  },
+  {
+   "report": "coherence",
+   "severity_in_report": "judgements block, and DIFF.json",
+   "claim": "Per-artifact judgements: 01_pulse unchanged, 06_unfolding unchanged, 10_first_run unchanged, 15_authored_feeling unchanged, 09 and 16 unchanged; the rest improved or regressed.",
+   "what_i_measured": "evidence/DIFF.json carries judgement: null for all seventeen rows, so the coherence critic's labels exist only inside its own report and not in the file the brief asks them to be in. Where they can be compared, four disagree with the SSIM measured in that same file: DIFF.json labels every one of the fifteen present artifacts 'changed' against its own unchanged_at threshold of 0.999, and the four called 'unchanged' measure ssim 0.9337 (01_pulse), 0.638 (06_unfolding), 0.937 (10_first_run) and 0.6604 (15_authored_feeling). The 15_authored_feeling row calls itself unchanged in a sentence that also says the frame count went from 448 to 428.",
+   "does_it_survive": "no",
+   "why_it_matters": "The brief requires every DIFF.json label to be assigned by the coherence critic and to agree with its SSIM value. Neither holds. A regression check whose labels are not in the file and contradict the measurement in the file cannot catch a regression carried into the next cycle."
+  },
+  {
+   "report": "builder",
+   "severity_in_report": "self-score 26/30 for messenger reliability",
+   "claim": "'13_messenger_states carries what a messenger critic found in no artifact in the set: edited holds a row, taken_back holds a row, replies_on_the_glass holds one with the event it answers, the refusal is in the far phone's own words with send it again under it.'",
+   "what_i_measured": "Every one of those rows is inside the 1503-pixel blank band. logs/13_messenger_states.report.json puts the reply (0001MCJ1M05KVSSP7MN1H89FBP) at row 8074 and the refusal (0001MCJ1M05KVSSP7MN1H89FBF) at row 8077; measured, those boxes hold 0.000 and 0.001 per cent of pixels above luma 150. The report is right about what the app thinks it drew; the picture holds one 'sent' and no refusal, and I checked that by counting rather than by reading.",
+   "does_it_survive": "no",
+   "why_it_matters": "The builder's row-01 self-score of 26 - exactly the floor, so the arithmetic turns on it - is argued from the view report rather than from the artifact. The critics' score of 19 and the builder's 26 disagree because one of them looked at the frame."
+  },
+  {
+   "report": "code",
+   "severity_in_report": "serious x2, minor x4",
+   "claim": "sw.js opens the spine's IndexedDB outside lib/spine while persistence_boundary_test walks Directory('lib') only; floors_test:113 is a tautology; the TLS test's key-material walk is narrower than its name; two files in assets/ have no manifest entry; a sixth module overflows the Us slot.",
+   "what_i_measured": "Verified statically, without running anything. app/web/push/sw.js:31 and :65 call indexedDB.open('spine_' + PROFILE), :75 takes a readwrite transaction on 'meta', :94 writes 'push.shown'; app/test/persistence_boundary_test.dart enumerates Directory('lib') at :30, :54 and :96 and Directory('lib/spine') at :117, so it cannot see it, while app/test/module_costs_test.dart:31 already walks Directory('web'). floors_test:113 is expect(Notify.values.contains(spec.notify), isTrue) on a non-nullable enum - unfalsifiable. the_host_serves_over_tls_test's 'no key material' test walks lib, assets and web, only .dart/.json/.html, only three PEM headers. assets/: 745 files on disk against 742 manifest entries, the three unlisted being MANIFEST.json itself, sound/MANIFEST.sound.json and tears/relief.json, exempted by basename at tools/check/manifest.py:22-23. us_region.dart:85 does charge chrome as kModules.length * (kUsHeading + kUsSectionGap) + 12 and :89-90 returns unclamped minima when the room runs out, so the overflow it describes follows from the code. I did not reproduce the scratch-module test run; see disclosure.",
+   "does_it_survive": "yes, all of the parts that can be checked without running the suite",
+   "why_it_matters": "It is the one report in the cycle whose numbers I could check line by line and found exact. Worth saying, because this pass exists to report agreement as well as disagreement."
+  },
+  {
+   "report": "coherence / emotional_transmission / messenger_reliability (numbers that replicate exactly)",
+   "severity_in_report": "serious and minor",
+   "claim": "07 is 336 frames / 5.376009 s against a 6 s minimum, down from 421 / 6.736009 s; the set is shot at three logical widths; 12_search chip sheets lost 31-49 per cent of their area; 14_media_viewer reads 0:00 / 0:03 against position_ms 771 of duration_ms 2500; the pocket is empty in 18 of 18 reports; replies_on_the_glass is {} everywhere but 13; a first launch takes 8,551 ms of which 6,726 is the log.",
+   "what_i_measured": "All replicate. ffprobe: 07 is 336 frames, 5.376009 s, 1080x2340 at 125/2 fps; the previous is 421 frames, 6.736009 s; MANIFEST.json records minimum_seconds 6, long_enough false. Viewports from evidence/scenes/: eleven stills at 480x1040 dpr 3, five clips at 360x780 dpr 3, reception at 400x880 dpr 3 - three widths, and BRIEFING.md's claim that the stills are 360x780 at four times scale matches no scene file. Chip paper in fixed boxes against .previous: PHOTOGRAPHS 29,109 -> 15,259 px (-48 per cent), THIS YEAR 21,478 -> 14,906 (-31), DATES THAT MATTER -48, EVERYTHING -42, against the report's -49, -31 and -46. 14_media_viewer's scrub reads 0:00 / 0:03 and the view block gives position_ms 771 of duration_ms 2500. Eighteen region reports carry an ambient block, all eighteen have held_by_the_phone empty, all name standing_line, pocket and push. replies_on_the_glass is {} in 02, 06, 08, 10 and 11 and non-empty only in 13. logs/11_chat_scroll.json load.ms is 8551 with made_of['the log'] 6726.",
+   "does_it_survive": "yes",
+   "why_it_matters": "Two small corrections only: reliability.json has 21 capability rows, not the 22 the messenger report claims; and its 'warm launches 2,181-2,708 ms' band folds in 10_first_run, which is store: fresh with no year, while 'the other three cold launches' is really six others with the year (8,263 to 8,912 ms, log 6,441 to 6,838)."
+  }
+ ],
+ "not_looked_at": {
+  "opened_by_nobody": [
+   "evidence/SCORE.json",
+   "evidence/logs/dusk_pulse.json",
+   "evidence/logs/reception_scene.json",
+   "evidence/.previous/CAPTURED_AT",
+   "evidence/experiments/what_the_alternates_cost/README.md",
+   "evidence/experiments/what_the_alternates_cost/what_the_alternates_cost.json",
+   "evidence/experiments/what_the_alternates_cost/11_alternates.json",
+   "evidence/experiments/what_the_alternates_cost/11_alternates.report.json",
+   "evidence/experiments/what_the_alternates_cost/11_alternates.fling.json",
+   "evidence/experiments/what_the_alternates_cost/11_plain.json",
+   "evidence/experiments/what_the_alternates_cost/11_plain.report.json",
+   "evidence/experiments/what_the_alternates_cost/11_plain.fling.json",
+   "evidence/experiments/what_the_alternates_cost/scroll_webkit_alternates.json",
+   "evidence/experiments/what_the_alternates_cost/scroll_webkit_plain.json"
+  ],
+  "note_on_that_list": "The union of the six opened lists covers 136 of the 150 files under evidence/ excluding critics/, which is the best coverage this pass has had to report. SCORE.json is off-limits by the briefing and every critic said so. The eleven experiment files name themselves as working material and four reports declined them in writing. Two of the remaining three matter. evidence/logs/dusk_pulse.json is the framing record for crops/dusk_pulse.png, and both the material-truth and the coherence reports certify the second lighting condition from that crop - they read dusk_pulse.report.json but not the scene log that says how the picture was taken, which is precisely the distinction BRIEFING.md added this cycle. evidence/logs/reception_scene.json is the same for the six reception crops the emotional-transmission report files two findings against. Neither absence changes a score, but both are a claim resting on a picture whose framing nobody read."
+ },
+ "gaps": [
+  {
+   "gap": "The build's own contact-shadow-leak check cannot see the fault it exists to catch. tools/check/holes.py:109 counts only dark pixels in the ring three to twelve pixels outside a sheet (reach = 12). Reproducing that ring on 01_pulse gives 596 px against the file's 571; removing the ring gives 10,311 px under the same luma 30, and 62,414 under luma 40, in a band about 200 px wide beside the Pulse sheet's torn right edge.",
+   "why_it_matters": "logs/holes.json is the only instrument in the set for 'a shadow lying on the desk beside the paper it belongs to', it reports ok: false with six stills over a 200-pixel allowance, and the builder declines the finding on the strength of that number. The number is seventeen times too small, so the declined finding is being declined against the wrong measurement."
+  },
+  {
+   "gap": "The tear-mask acceptance band in logs/torn.json is an impression written down as a number. The file's own words: 'a critic measured the note edges they were content with at rms 2.88 to 5.14 on the glass and the ones they were not at 0.36 to 0.59.' The material-truth report then quotes that band back as the standard its blocking finding is judged against.",
+   "why_it_matters": "A floor taken from an earlier reader's satisfaction is not a derivation. logs/haptics.check.json shows this build knows how to derive a threshold with two controls; the torn-edge band has neither, and it is now doing the work of a floor for the row with the second-largest weight."
+  },
+  {
+   "gap": "Tear masks are only recorded for six of the nineteen region reports. logs/*.report.json carries a tears map for 02_chat, 06, 08, 11, 12_search, 13 and 14 only; it is empty for 01_pulse, 03_us, 04_moments, 05_settings, 07, 10_first_run, 15, 17_setup_pwa, dusk_pulse and both reception scenes. And where it is recorded, 13_messenger_states assigns tear_008 to two of its seven sheets - the only within-frame repeat anywhere in the set, which I found by checking all nineteen.",
+   "why_it_matters": "The rubric's row-02 test is that no two tears visible at once are identical. The record cannot answer that for ten of the artifacts, and on the one frame where it can answer it the answer is a repeat - kept off the glass only because both of those rows are in the blank band. Three reports assert 'no tear repeats on one screen' from the 02_chat map alone."
+  },
+  {
+   "gap": "The string lint reads 13.9 per cent of the literals. logs/strings.json: strings_read 565, literals_in_lib 4054, share_of_literals_read 0.139, in_a_display_position 114, and the file names what it still cannot see ('a sentence assembled from parts at the point of use, and anything a module composes from the registry').",
+   "why_it_matters": "The anti-goal row passes at its floor partly on 'no product-marketing voice in any of the 565 literals'. 565 is the size of the sample, not the size of the string table, and no report says so."
+  },
+  {
+   "gap": "MANIFEST.json's checks block does not list reliability.json or coldstart.json, the two records with the strongest claims in the set.",
+   "why_it_matters": "BRIEFING.md tells critics that MANIFEST.json 'says which files this capture wrote and which predate it - a still that predates the run is a still of an older build, and saying so is a finding'. The two files a reader most needs that flag for are the two it omits, and coldstart.json's contents are eight days older than the capture."
+  },
+  {
+   "gap": "Both blocking findings about rows that occupy layout and paint nothing, and the duplicate, land on the same clip-and-still pair, and no report checked whether the same thing happens anywhere else in the set with freshly composed rows. The messenger report checked the seeded scroll (0 blank sheets of 166 sampled) but not the composed rows in 06 or 15.",
+   "why_it_matters": "13_messenger_states and 08_state_propagating are the only two artifacts in the set that compose new rows at capture time, and both fail. That pattern - it breaks on rows the seed did not write - is stronger and more actionable than either finding on its own, and nobody stated it."
+  }
+ ],
+ "verdict": "This is a review a builder could act on, which is not what the last few cycles produced, and the arithmetic and the vocabulary agree for the first time in a while: the four rows under their floors each name exactly one blocking finding, the two rows at their floors name none, and no row scores above its floor while carrying a blocking finding. The three findings I was asked about all survive. The four rows that paint nothing in 13_messenger_states.png replicate to the digit - 1503 image rows from y=941 to y=2443, 48.17 per cent of the frame, with rows 8074 to 8077 holding 0.000, 0.000, 0.000 and 0.001 per cent of their boxes above luma 150 against 24.0, 38.3 and 40.0 for the three rows above them, and the same thread band was 53.6 per cent paper in the previous capture against 12.3 now. The message delivered twice replicates and is worse on the glass than in the log: said_again says two, and the frames either side of the reconnect show three folded notes landing where the far phone wrote one message. Four things in this cycle's reports do not survive re-measurement. The emotional-transmission row is held at 16 by a figure of 90.4 per cent of the standing line's ink sitting on wood; under a per-pixel background test I measure 34.4 per cent, and under the report's own stated paper edge 54.4 per cent, with one frame of seventy above 60 per cent rather than sixty-seven - the fault is plainly there and plainly visible, the number that made it blocking is about two and a half times too large. Three of the four 'dead straight' edges in the material-truth blocking finding are the scroll container clipping its last sheet rather than flat tear masks, which the app's own report says for one of them (clipped_at_an_edge 0.738) and which is visible in 05_settings as a cut through the middle of the words 'a feeling'; the row-level claim behind that finding does survive my own independent survey (38 per cent of 181 edges under a pixel, against the report's 42 per cent of 137), so the row stays below its floor, but the prescription points at the wrong edges. The coherence report's three blank sheets at the end of 08 are folded, unopened letters with the reader's name on the outside - frame 0 of 06_unfolding is the same object unfolding into words - so 'the thread commits a row's paper before its ink' is not what is wrong there. And the clover's tooth of 1.001 is the eleventh lowest of the thirty-nine measured object surfaces, not the second lowest of sixty-two, in a family that carries no tooth floor at all. Beyond the reports, the thing I would put in front of the builder first is that the check the build gates its own worst-known material fault on is blind to it: tools/check/holes.py counts dark pixels only in a ring three to twelve pixels outside a sheet, logs/holes.json therefore reports 571 pixels beside the paper in 01_pulse, and the actual band beside that sheet's torn right edge is about two hundred pixels wide - 10,311 pixels under the same threshold once the ring is removed. The builder declines that finding on the small number. Second is coldstart.json: three reports cite it as the wire being proven, and the file says it was written on 2026-09-05, that the re-run on the day of this capture found the nodes not answering, and that the peer path was 192.0.2.2, which is a documentation address. MANIFEST.json does not flag it, because MANIFEST.json does not list it."
+}
