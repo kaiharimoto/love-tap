@@ -10,7 +10,7 @@
   "video": {
    "initialised": true,
    "playing": true,
-   "position_ms": 101,
+   "position_ms": 850,
    "duration_ms": 2500
   }
  },
@@ -40,12 +40,12 @@
  "scroll": {
   "first": 4785,
   "last": 4788,
-  "of": 8077
+  "of": 8079
  },
  "now": "2026-09-03T19:40:00.000Z",
  "driven_ms": 224,
  "seed": 20260903,
- "events": 14078,
+ "events": 14086,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -60,20 +60,21 @@
   "266x126 of it, at its own size",
   33602.72727272727
  ],
- "paper_at_its_own_size": 828,
+ "paper_at_its_own_size": 984,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [
   "sticky_blue_02"
  ],
- "paper_that_arrived_after_the_piece_was_drawn": 21,
+ "paper_that_arrived_after_the_piece_was_drawn": 16,
+ "tears_that_had_not_arrived": {},
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 81,
- "stocks_held": 10,
- "stocks_held_bytes": 149023600,
- "stocks_dropped_to_stay_inside_the_pool": 12,
+ "masks_dropped_to_stay_inside_the_pool": 87,
+ "stocks_held": 17,
+ "stocks_held_bytes": 245769520,
+ "stocks_dropped_to_stay_inside_the_pool": 0,
  "image_cache": {
-  "held": 39,
-  "bytes": 43774448,
+  "held": 40,
+  "bytes": 44480048,
   "budget": 402653184,
   "live": 1,
   "still_decoding": 0
@@ -87,36 +88,35 @@
  "the_launch_took": {
   "the framework": 7,
   "the library index": 18,
-  "the ink plates": 38,
-  "the desk": 156,
-  "the log": 600,
-  "the first frame": 383,
-  "everything": 1202
+  "the ink plates": 41,
+  "the desk": 162,
+  "the log": 586,
+  "the first frame": 361,
+  "everything": 1175
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 20,
-  "pushed": 2,
+  "rounds": 19,
+  "pushed": 3,
   "refused": 0,
   "pulled": 0,
   "blobs_fetched": 0,
-  "faults": 1,
-  "last_fault": "401 the signature does not match",
+  "faults": 0,
   "pending": 0,
   "refused_in_the_outbox": 0,
-  "cursor": 14078,
+  "cursor": 14086,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14078,
-   "our_cursor": 14078,
+   "peer_cursor": 14086,
+   "our_cursor": 14086,
    "last_error": null,
-   "since": "2026-09-12T16:20:25.079Z",
-   "last_contact": "2026-09-12T16:21:22.854Z",
+   "since": "2026-09-12T21:26:50.336Z",
+   "last_contact": "2026-09-12T21:27:46.068Z",
    "certificate": null,
    "setup_address": null
   }
@@ -132,6 +132,7 @@
    "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
   },
   "held_by_the_phone": [],
+  "and_it_is_empty_because": "the browser is holding nothing",
   "what_the_phone_can_hold": {
    "platform": "a browser",
    "a_secure_origin": true,

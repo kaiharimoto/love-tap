@@ -11,41 +11,25 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2531,
+   "ms": 3152,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 4273
+   "ms": 4697
   },
   {
    "do": "wait",
    "ms": 3701
   },
   {
-   "at": 13020,
+   "at": 13968,
    "said": "__deskShowLens(milestones) ok, 154 behind milestones"
   },
   {
    "do": "lens",
-   "ms": 828
-  },
-  {
-   "do": "wait",
-   "ms": 1904
-  },
-  {
-   "do": "shot",
-   "ms": 32537
-  },
-  {
-   "at": 48166,
-   "said": "__deskShowLens(feelings) ok, 1340 behind feelings"
-  },
-  {
-   "do": "lens",
-   "ms": 706
+   "ms": 723
   },
   {
    "do": "wait",
@@ -53,27 +37,43 @@
   },
   {
    "do": "shot",
-   "ms": 32717
+   "ms": 32570
   },
   {
-   "at": 83494,
+   "at": 49146,
+   "said": "__deskShowLens(feelings) ok, 1340 behind feelings"
+  },
+  {
+   "do": "lens",
+   "ms": 704
+  },
+  {
+   "do": "wait",
+   "ms": 1911
+  },
+  {
+   "do": "shot",
+   "ms": 32718
+  },
+  {
+   "at": 84481,
    "said": "__deskShowLens(media) ok, 183 behind media"
   },
   {
    "do": "lens",
-   "ms": 707
+   "ms": 706
   },
   {
    "do": "wait",
-   "ms": 3105
+   "ms": 3106
   },
   {
    "do": "shot",
-   "ms": 32927
+   "ms": 32903
   },
   {
    "do": "report",
-   "ms": 701
+   "ms": 702
   }
  ],
  "shots": [
@@ -146,17 +146,18 @@
     "143x102 of it, at its own size",
     14669.3229675293
    ],
-   "paper_at_its_own_size": 122,
+   "paper_at_its_own_size": 145,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "sticky_blue_02"
    ],
-   "paper_that_arrived_after_the_piece_was_drawn": 18,
+   "paper_that_arrived_after_the_piece_was_drawn": 17,
+   "tears_that_had_not_arrived": {},
    "masks_held": 48,
    "masks_dropped_to_stay_inside_the_pool": 78,
-   "stocks_held": 10,
-   "stocks_held_bytes": 149702320,
-   "stocks_dropped_to_stay_inside_the_pool": 9,
+   "stocks_held": 18,
+   "stocks_held_bytes": 259620720,
+   "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
     "held": 41,
     "bytes": 43441208,
@@ -172,12 +173,12 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 16,
-    "the ink plates": 43,
-    "the desk": 177,
-    "the log": 606,
-    "the first frame": 361,
-    "everything": 1210
+    "the library index": 21,
+    "the ink plates": 40,
+    "the desk": 146,
+    "the log": 611,
+    "the first frame": 344,
+    "everything": 1169
    },
    "sync": {
     "transport": "local",
@@ -200,8 +201,8 @@
      "peer_cursor": 14062,
      "our_cursor": 14062,
      "last_error": null,
-     "since": "2026-09-12T16:14:40.393Z",
-     "last_contact": "2026-09-12T16:16:22.302Z",
+     "since": "2026-09-12T21:16:37.367Z",
+     "last_contact": "2026-09-12T21:18:17.735Z",
      "certificate": null,
      "setup_address": null
     }
@@ -217,6 +218,7 @@
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
+    "and_it_is_empty_because": "the browser is holding nothing",
     "what_the_phone_can_hold": {
      "platform": "a browser",
      "a_secure_origin": true,
@@ -230,19 +232,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 2381,
+ "cold_ms": 2373,
  "load": {
-  "ms": 2381,
+  "ms": 2373,
   "store": "kept",
   "profile": "profile_seeded",
   "made_of": {
    "the framework": 7,
-   "the library index": 16,
-   "the ink plates": 43,
-   "the desk": 177,
-   "the log": 606,
-   "the first frame": 361,
-   "everything": 1210
+   "the library index": 21,
+   "the ink plates": 40,
+   "the desk": 146,
+   "the log": 611,
+   "the first frame": 344,
+   "everything": 1169
   }
  },
  "problems": [],

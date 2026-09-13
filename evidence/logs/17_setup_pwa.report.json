@@ -9,7 +9,7 @@
  "tears": {},
  "stocks": {},
  "scroll": null,
- "now": "2026-09-12T16:24:33.774Z",
+ "now": "2026-09-12T21:37:28.832Z",
  "driven_ms": 0,
  "seed": 20260903,
  "events": 0,
@@ -27,10 +27,11 @@
   "266x126 of it, at its own size",
   33602.72727272727
  ],
- "paper_at_its_own_size": 13,
+ "paper_at_its_own_size": 17,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [],
  "paper_that_arrived_after_the_piece_was_drawn": 4,
+ "tears_that_had_not_arrived": {},
  "masks_held": 21,
  "masks_dropped_to_stay_inside_the_pool": 0,
  "stocks_held": 4,
@@ -51,12 +52,12 @@
  "asked_a_motor_for": [],
  "the_launch_took": {
   "the framework": 7,
-  "the library index": 25,
-  "the ink plates": 70,
-  "the desk": 217,
-  "the log": 56,
-  "the first frame": 483,
-  "everything": 858
+  "the library index": 19,
+  "the ink plates": 41,
+  "the desk": 147,
+  "the log": 31,
+  "the first frame": 384,
+  "everything": 629
  },
  "sync": {
   "transport": "local",
@@ -79,7 +80,7 @@
    "peer_cursor": null,
    "our_cursor": 0,
    "last_error": null,
-   "since": "2026-09-12T16:24:27.695Z",
+   "since": "2026-09-12T21:37:23.363Z",
    "last_contact": null,
    "certificate": null,
    "setup_address": null
@@ -96,6 +97,7 @@
    "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
   },
   "held_by_the_phone": [],
+  "and_it_is_empty_because": "the browser is holding nothing",
   "what_the_phone_can_hold": {
    "platform": "a browser",
    "a_secure_origin": true,

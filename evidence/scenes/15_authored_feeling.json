@@ -1,212 +1,213 @@
 {
- "name": "15_authored_feeling",
- "viewport": {
-  "width": 360,
-  "height": 780,
-  "dpr": 3
- },
- "settle": 400,
- "log": "evidence/logs/15_authored_feeling.json",
- "steps": [
-  {
-   "do": "goTo",
-   "arg": 2
+  "name": "15_authored_feeling",
+  "viewport": {
+    "width": 360,
+    "height": 780,
+    "dpr": 3
   },
-  {
-   "do": "wait",
-   "ms": 1400
-  },
-  {
-   "do": "wait",
-   "ms": 700
-  },
-  {
-   "do": "openCorner",
-   "arg": true,
-   "after": 0
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 16,
-   "ms": 16,
-   "from": 0
-  },
-  {
-   "do": "showFamily",
-   "arg": "shelter",
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 16
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 19,
-   "from": 16,
-   "ms": 16
-  },
-  {
-   "do": "showFamily",
-   "arg": "sparkle",
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 16
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 19,
-   "from": 35,
-   "ms": 16
-  },
-  {
-   "do": "showFamily",
-   "arg": "mischief",
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 16
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 19,
-   "from": 54,
-   "ms": 16
-  },
-  {
-   "do": "showFamily",
-   "arg": "ache",
-   "after": 0,
-   "why": "ACHE and STATIC appear as tabs in every picker frame and the picker is never shown open on either, so the five Ache feelings and the six Static ones are in no artifact at all \u2014 an emotional critic counted them. Opening them is what puts thirty-four feelings in the evidence rather than twenty-three."
-  },
-  {
-   "do": "step",
-   "ms": 16
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 14,
-   "from": 73,
-   "ms": 16
-  },
-  {
-   "do": "showFamily",
-   "arg": "static",
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 16
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 14,
-   "from": 87,
-   "ms": 16
-  },
-  {
-   "do": "holdOver",
-   "arg": "pigeon",
-   "after": 0
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 44,
-   "from": 101,
-   "ms": 32
-  },
-  {
-   "do": "letGo",
-   "after": 0
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 75,
-   "from": 145,
-   "ms": 16
-  },
-  {
-   "do": "goTo",
-   "arg": 0,
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 400
-  },
-  {
-   "do": "openCorner",
-   "arg": true,
-   "after": 0
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 16,
-   "from": 220,
-   "ms": 16
-  },
-  {
-   "do": "openCorner",
-   "arg": false,
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 16
-  },
-  {
-   "do": "far",
-   "arg": "feeling soup 0.55"
-  },
-  {
-   "do": "awaitArrival"
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 106,
-   "from": 236,
-   "ms": 16
-  },
-  {
-   "do": "goTo",
-   "arg": 4,
-   "after": 0
-  },
-  {
-   "do": "step",
-   "ms": 400
-  },
-  {
-   "do": "far",
-   "arg": "feeling soup 0.9"
-  },
-  {
-   "do": "awaitArrival"
-  },
-  {
-   "do": "frames",
-   "dir": "evidence/frames/15_authored_feeling",
-   "count": 106,
-   "from": 342,
-   "ms": 16
-  },
-  {
-   "do": "report",
-   "out": "evidence/logs/15_authored_feeling.report.json",
-   "at": "15_authored_feeling"
-  }
- ]
+  "settle": 400,
+  "log": "evidence/logs/15_authored_feeling.json",
+  "steps": [
+    {
+      "do": "goTo",
+      "arg": 2
+    },
+    {
+      "do": "wait",
+      "ms": 1400
+    },
+    {
+      "do": "wait",
+      "ms": 700
+    },
+    {
+      "do": "openCorner",
+      "arg": true,
+      "after": 0
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 16,
+      "ms": 16,
+      "from": 0
+    },
+    {
+      "do": "showFamily",
+      "arg": "shelter",
+      "after": 0
+    },
+    {
+      "do": "step",
+      "ms": 16
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 19,
+      "from": 16,
+      "ms": 16
+    },
+    {
+      "do": "showFamily",
+      "arg": "sparkle",
+      "after": 0
+    },
+    {
+      "do": "step",
+      "ms": 16
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 19,
+      "from": 35,
+      "ms": 16
+    },
+    {
+      "do": "showFamily",
+      "arg": "mischief",
+      "after": 0
+    },
+    {
+      "do": "step",
+      "ms": 16
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 19,
+      "from": 54,
+      "ms": 16
+    },
+    {
+      "do": "showFamily",
+      "arg": "ache",
+      "after": 0,
+      "why": "ACHE and STATIC appear as tabs in every picker frame and the picker is never shown open on either, so the five Ache feelings and the six Static ones are in no artifact at all \u2014 an emotional critic counted them. Opening them is what puts thirty-four feelings in the evidence rather than twenty-three."
+    },
+    {
+      "do": "step",
+      "ms": 16
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 14,
+      "from": 73,
+      "ms": 16
+    },
+    {
+      "do": "showFamily",
+      "arg": "static",
+      "after": 0
+    },
+    {
+      "do": "step",
+      "ms": 16
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 14,
+      "from": 87,
+      "ms": 16
+    },
+    {
+      "do": "holdOver",
+      "arg": "pigeon",
+      "after": 0
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 24,
+      "from": 101,
+      "ms": 80,
+      "why": "One frame every eighty milliseconds, not every thirty-two. The charge runs 0.3 to 1.0 over 1.8 seconds, which on a 92-point tile is fifteen points of growth and about a third of a device pixel per frame at 32 ms \u2014 under what the frame check can see, so the fourteenth capture read 28 identical frames in this run and the one before it read 40. Twenty-four frames at eighty covers the same 1.9 seconds of holding with two and a half times the change in each one. The picture the hold makes is still too small; the answer to that is in the app, not in the shutter speed."
+    },
+    {
+      "do": "letGo",
+      "after": 0
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 75,
+      "from": 125,
+      "ms": 16
+    },
+    {
+      "do": "goTo",
+      "arg": 0,
+      "after": 0
+    },
+    {
+      "do": "step",
+      "ms": 400
+    },
+    {
+      "do": "openCorner",
+      "arg": true,
+      "after": 0
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 16,
+      "from": 200,
+      "ms": 16
+    },
+    {
+      "do": "openCorner",
+      "arg": false,
+      "after": 0
+    },
+    {
+      "do": "step",
+      "ms": 16
+    },
+    {
+      "do": "far",
+      "arg": "feeling soup 0.55"
+    },
+    {
+      "do": "awaitArrival"
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 106,
+      "from": 216,
+      "ms": 16
+    },
+    {
+      "do": "goTo",
+      "arg": 4,
+      "after": 0
+    },
+    {
+      "do": "step",
+      "ms": 400
+    },
+    {
+      "do": "far",
+      "arg": "feeling soup 0.9"
+    },
+    {
+      "do": "awaitArrival"
+    },
+    {
+      "do": "frames",
+      "dir": "evidence/frames/15_authored_feeling",
+      "count": 106,
+      "from": 322,
+      "ms": 16
+    },
+    {
+      "do": "report",
+      "out": "evidence/logs/15_authored_feeling.report.json",
+      "at": "15_authored_feeling"
+    }
+  ]
 }

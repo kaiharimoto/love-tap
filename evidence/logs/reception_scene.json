@@ -14,43 +14,43 @@
   },
   {
    "do": "goTo",
-   "ms": 3821
+   "ms": 3366
   },
   {
    "do": "step",
-   "ms": 1641
+   "ms": 1463
   },
   {
    "do": "step",
-   "ms": 1400
+   "ms": 1337
+  },
+  {
+   "do": "wait",
+   "ms": 1000
+  },
+  {
+   "do": "shot",
+   "ms": 31633
+  },
+  {
+   "do": "goTo",
+   "ms": 4007
+  },
+  {
+   "do": "step",
+   "ms": 1563
+  },
+  {
+   "do": "step",
+   "ms": 1564
   },
   {
    "do": "wait",
    "ms": 1003
   },
   {
-   "do": "shot",
-   "ms": 31650
-  },
-  {
-   "do": "goTo",
-   "ms": 6136
-  },
-  {
-   "do": "step",
-   "ms": 2329
-  },
-  {
-   "do": "step",
-   "ms": 1948
-  },
-  {
-   "do": "wait",
-   "ms": 1006
-  },
-  {
    "do": "report",
-   "ms": 711
+   "ms": 712
   },
   {
    "push": {
@@ -65,19 +65,19 @@
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2104
   },
   {
    "do": "screen",
-   "ms": 5223
+   "ms": 850
   },
   {
    "do": "closeApp",
-   "ms": 734
+   "ms": 726
   },
   {
    "do": "wait",
-   "ms": 1602
+   "ms": 1604
   },
   {
    "push": {
@@ -88,11 +88,11 @@
   },
   {
    "do": "push",
-   "ms": 2210
+   "ms": 2207
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2104
   },
   {
    "do": "screen",
@@ -107,7 +107,7 @@
   },
   {
    "do": "push",
-   "ms": 2205
+   "ms": 2208
   },
   {
    "do": "wait",
@@ -115,7 +115,7 @@
   },
   {
    "do": "screen",
-   "ms": 778
+   "ms": 776
   },
   {
    "push": {
@@ -126,35 +126,35 @@
   },
   {
    "do": "push",
-   "ms": 2207
+   "ms": 2208
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2102
   },
   {
    "do": "screen",
-   "ms": 811
+   "ms": 777
   },
   {
    "do": "notifications",
-   "ms": 1272
+   "ms": 1146
   },
   {
    "do": "reopenApp",
-   "ms": 4128
+   "ms": 4258
   },
   {
    "do": "wait",
-   "ms": 1605
+   "ms": 1603
   },
   {
    "do": "shot",
-   "ms": 1671
+   "ms": 1580
   },
   {
    "do": "report",
-   "ms": 707
+   "ms": 708
   }
  ],
  "shots": [
@@ -289,15 +289,16 @@
     "218x126 of it, at its own size",
     27548.18181818182
    ],
-   "paper_at_its_own_size": 29,
-   "paper_stretched_to_fit": 2,
+   "paper_at_its_own_size": 35,
+   "paper_stretched_to_fit": 3,
    "stocks_the_paper_had_not_arrived_for": [],
-   "paper_that_arrived_after_the_piece_was_drawn": 29,
+   "paper_that_arrived_after_the_piece_was_drawn": 13,
+   "tears_that_had_not_arrived": {},
    "masks_held": 48,
-   "masks_dropped_to_stay_inside_the_pool": 126,
-   "stocks_held": 10,
-   "stocks_held_bytes": 142543040,
-   "stocks_dropped_to_stay_inside_the_pool": 21,
+   "masks_dropped_to_stay_inside_the_pool": 132,
+   "stocks_held": 14,
+   "stocks_held_bytes": 205107120,
+   "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
     "held": 28,
     "bytes": 30801744,
@@ -312,13 +313,13 @@
    "sensation": null,
    "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 6,
-    "the library index": 11,
-    "the ink plates": 29,
-    "the desk": 111,
-    "the log": 463,
-    "the first frame": 287,
-    "everything": 907
+    "the framework": 5,
+    "the library index": 23,
+    "the ink plates": 23,
+    "the desk": 96,
+    "the log": 446,
+    "the first frame": 224,
+    "everything": 817
    },
    "sync": {
     "transport": "local",
@@ -341,7 +342,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-12T16:25:00.725Z",
+     "since": "2026-09-12T21:37:34.841Z",
      "last_contact": null,
      "certificate": null,
      "setup_address": null
@@ -358,6 +359,7 @@
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
+    "and_it_is_empty_because": "the browser is holding nothing",
     "what_the_phone_can_hold": {
      "platform": "a browser",
      "a_secure_origin": true,
@@ -403,6 +405,7 @@
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [],
    "paper_that_arrived_after_the_piece_was_drawn": 4,
+   "tears_that_had_not_arrived": {},
    "masks_held": 18,
    "masks_dropped_to_stay_inside_the_pool": 0,
    "stocks_held": 4,
@@ -423,12 +426,12 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 2,
-    "the library index": 12,
-    "the ink plates": 52,
-    "the desk": 111,
-    "the log": 583,
-    "the first frame": 196,
-    "everything": 956
+    "the library index": 15,
+    "the ink plates": 33,
+    "the desk": 89,
+    "the log": 403,
+    "the first frame": 179,
+    "everything": 721
    },
    "sync": {
     "transport": "local",
@@ -451,7 +454,7 @@
      "peer_cursor": null,
      "our_cursor": 14061,
      "last_error": null,
-     "since": "2026-09-12T16:26:26.359Z",
+     "since": "2026-09-12T21:38:51.635Z",
      "last_contact": null,
      "certificate": null,
      "setup_address": null
@@ -468,6 +471,7 @@
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
+    "and_it_is_empty_because": "the browser is holding nothing",
     "what_the_phone_can_hold": {
      "platform": "a browser",
      "a_secure_origin": true,
@@ -481,19 +485,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 2423,
+ "cold_ms": 2136,
  "load": {
-  "ms": 2423,
+  "ms": 2136,
   "store": "kept",
   "profile": "profile_reception",
   "made_of": {
-   "the framework": 6,
-   "the library index": 11,
-   "the ink plates": 29,
-   "the desk": 111,
-   "the log": 463,
-   "the first frame": 287,
-   "everything": 907
+   "the framework": 5,
+   "the library index": 23,
+   "the ink plates": 23,
+   "the desk": 96,
+   "the log": 446,
+   "the first frame": 224,
+   "everything": 817
   }
  },
  "app_open": "http://127.0.0.1:8796/",
@@ -626,6 +630,46 @@
    },
    {
     "at": 1789230380254,
+    "kind": "state_declared",
+    "from": "noor",
+    "how": "quiet",
+    "title": "noor",
+    "body": "said how they are",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789249108253,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "interrupt",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789249115806,
+    "kind": "message",
+    "from": "noor",
+    "how": "interrupt",
+    "title": "noor",
+    "body": "wrote something",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789249120836,
+    "kind": "feeling",
+    "from": "noor",
+    "how": "interrupt",
+    "title": "noor",
+    "body": "is holding something out",
+    "shown": true,
+    "why": null
+   },
+   {
+    "at": 1789249125919,
     "kind": "state_declared",
     "from": "noor",
     "how": "quiet",

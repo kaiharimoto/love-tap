@@ -1,6 +1,6 @@
 {
- "strings_read": 563,
- "literals_in_lib": 4048,
+ "strings_read": 565,
+ "literals_in_lib": 4053,
  "share_of_literals_read": 0.139,
  "in_a_display_position": 114,
  "the_rest_are_judged": "every other literal in a line of code that has a space in it or a mark a wire key would never carry. It used to read only a fixed list of call sites \u2014 Text(, Written(, hintText:, and six more \u2014 which is why a code critic counted 116 strings against 3,672 in lib. Reading them all costs some false positives (an asset query string, a fragment of an interpolation) and those are cheap: a string that is not shown to anybody still must not contain an exclamation mark.",
@@ -388,12 +388,17 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:507",
+   "where": "app/lib/feelings/corner.dart:364",
+   "text": "${widget.stock}_dusk",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/feelings/corner.dart:615",
    "text": "family_${f.name}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/feelings/corner.dart:531",
+   "where": "app/lib/feelings/corner.dart:639",
    "text": "fan.${family.name}",
    "in_a_display_position": false
   },
@@ -513,37 +518,42 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:328",
+   "where": "app/lib/material/paper.dart:362",
    "text": "${tearId!}_shadow$suffix",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:373",
+   "where": "app/lib/material/paper.dart:434",
    "text": "${stockId}_dusk",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:391",
+   "where": "app/lib/material/paper.dart:452",
    "text": "${tearId!}_edge",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:931",
+   "where": "app/lib/material/paper.dart:625",
+   "text": "never came",
+   "in_a_display_position": false
+  },
+  {
+   "where": "app/lib/material/paper.dart:1068",
    "text": ").replaceAll(",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:931",
+   "where": "app/lib/material/paper.dart:1068",
    "text": ").replaceAll(",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:1076",
+   "where": "app/lib/material/paper.dart:1213",
    "text": "$asset@${w}x$h",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/material/paper.dart:1241",
+   "where": "app/lib/material/paper.dart:1378",
    "text": "$stock ${w.round()}x${h.round()}",
    "in_a_display_position": false
   },
@@ -968,87 +978,87 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:505",
+   "where": "app/lib/regions/chat/chat_region.dart:528",
    "text": "them, so the thread was not moved",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:571",
+   "where": "app/lib/regions/chat/chat_region.dart:594",
    "text": "${items.length}: no framing held the stretch whole",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:577",
+   "where": "app/lib/regions/chat/chat_region.dart:600",
    "text": "${items.length}, entered at $chosenFrom, $most sheets on the glass and $mostWhole of ",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:578",
+   "where": "app/lib/regions/chat/chat_region.dart:601",
    "text": "them whole, the best of $tried framings of ${windows.length} stretches",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:587",
+   "where": "app/lib/regions/chat/chat_region.dart:610",
    "text": "row $index of ${items.length}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1093",
+   "where": "app/lib/regions/chat/chat_region.dart:1133",
    "text": "${scope.partner.name} ${S.typing}",
    "in_a_display_position": true
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1105",
+   "where": "app/lib/regions/chat/chat_region.dart:1145",
    "text": "${S.replyingTo} ${_replyTo!.text ?? summaryOf(_replyTo!.event, me: scope.me)}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1255",
+   "where": "app/lib/regions/chat/chat_region.dart:1295",
    "text": "${(d.inDays / 30).round()} ${S.monthsUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1256",
+   "where": "app/lib/regions/chat/chat_region.dart:1296",
    "text": "${(d.inDays / 7).round()} ${S.weeksUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1257",
+   "where": "app/lib/regions/chat/chat_region.dart:1297",
    "text": "${d.inDays} ${S.daysUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1258",
+   "where": "app/lib/regions/chat/chat_region.dart:1298",
    "text": "$rows ${S.rowsUp}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1272",
+   "where": "app/lib/regions/chat/chat_region.dart:1312",
    "text": "${d.day} $month",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1272",
+   "where": "app/lib/regions/chat/chat_region.dart:1312",
    "text": "${d.day} $month ${d.year}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1519",
+   "where": "app/lib/regions/chat/chat_region.dart:1559",
    "text": "a photo",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1520",
+   "where": "app/lib/regions/chat/chat_region.dart:1560",
    "text": "take one",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1521",
+   "where": "app/lib/regions/chat/chat_region.dart:1561",
    "text": "a video",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/regions/chat/chat_region.dart:1522",
+   "where": "app/lib/regions/chat/chat_region.dart:1562",
    "text": "film something",
    "in_a_display_position": false
   },
@@ -2408,47 +2418,47 @@
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/transport/protocol/http_transport.dart:245",
+   "where": "app/lib/transport/protocol/http_transport.dart:252",
    "text": "$method $path",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/transport/protocol/http_transport.dart:262",
+   "where": "app/lib/transport/protocol/http_transport.dart:269",
    "text": "the other phone does not know this pairing",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/transport/protocol/http_transport.dart:263",
+   "where": "app/lib/transport/protocol/http_transport.dart:270",
    "text": "HTTP 401",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/transport/protocol/http_transport.dart:266",
+   "where": "app/lib/transport/protocol/http_transport.dart:273",
    "text": "HTTP ${res.statusCode}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/transport/protocol/http_transport.dart:277",
+   "where": "app/lib/transport/protocol/http_transport.dart:284",
    "text": "${wait.inSeconds}",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/transport/protocol/http_transport.dart:351",
+   "where": "app/lib/transport/protocol/http_transport.dart:358",
    "text": "only the host mints a pairing code",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/transport/protocol/http_transport.dart:361",
+   "where": "app/lib/transport/protocol/http_transport.dart:368",
    "text": "only the client completes pairing",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/transport/protocol/http_transport.dart:378",
+   "where": "app/lib/transport/protocol/http_transport.dart:385",
    "text": "no pairing open",
    "in_a_display_position": false
   },
   {
-   "where": "app/lib/transport/protocol/http_transport.dart:393",
+   "where": "app/lib/transport/protocol/http_transport.dart:400",
    "text": "pairing refused",
    "in_a_display_position": false
   },

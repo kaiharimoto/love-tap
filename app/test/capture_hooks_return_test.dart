@@ -110,7 +110,18 @@ void _everyHandleRuns() {
       'unfoldAll': () async => CaptureBus.unfoldAll!(),
       // a short slow-down here: the scene asks for six seconds, and this only has to prove the
       // handle exists, reaches the transport and comes back
-      'sendSlowly': () async => CaptureBus.sendSlowly!('ok — leaving now', 120),
+      // and it has to actually send: the handle goes through the composer's own send now, and a
+      // composer that refuses — a draft in the way, an await that does not come back under a
+      // slowed link — answers `ok` and leaves the thread exactly as it was. 13_messenger_states
+      // came back with five states and no `sending` for one capture on that.
+      'sendSlowly': () async {
+        final before = spine.length;
+        await CaptureBus.sendSlowly!('ok — leaving now', 120);
+        for (var i = 0; i < 40 && spine.length == before; i++) {
+          await Future<void>.delayed(const Duration(milliseconds: 25));
+        }
+        if (spine.length == before) fail('sendSlowly answered ok and wrote nothing');
+      },
       'compose': () async => CaptureBus.compose!('on my way - leaving in ten'),
     };
     for (final e in handles.entries) {

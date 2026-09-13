@@ -10,13 +10,13 @@
  "steps": [
   {
    "do": "pair",
-   "ms": 2723,
+   "ms": 1800,
    "auto": true,
    "far": "http://127.0.0.1:8480"
   },
   {
    "do": "goTo",
-   "ms": 3512
+   "ms": 2951
   },
   {
    "do": "wait",
@@ -24,7 +24,7 @@
   },
   {
    "do": "scrollTo",
-   "ms": 4071
+   "ms": 2823
   },
   {
    "do": "wait",
@@ -36,11 +36,11 @@
   },
   {
    "do": "awaitArrival",
-   "ms": 1051
+   "ms": 1269
   },
   {
    "do": "frames",
-   "ms": 31407
+   "ms": 31390
   },
   {
    "do": "unfold",
@@ -52,23 +52,23 @@
   },
   {
    "do": "frames",
-   "ms": 221856
+   "ms": 220822
   },
   {
    "do": "far",
-   "ms": 407
+   "ms": 406
   },
   {
    "do": "awaitArrival",
-   "ms": 774
+   "ms": 754
   },
   {
    "do": "frames",
-   "ms": 31447
+   "ms": 31379
   },
   {
    "do": "unfold",
-   "ms": 7
+   "ms": 5
   },
   {
    "frames_from_the_build": "unfold_thirds",
@@ -76,11 +76,11 @@
   },
   {
    "do": "frames",
-   "ms": 220605
+   "ms": 220269
   },
   {
    "do": "report",
-   "ms": 416
+   "ms": 433
   }
  ],
  "shots": [
@@ -118,14 +118,14 @@
      "0001M4GW48FEW3M67XKAZT5051",
      "0001M4ZQQ0H0PPVTKMMQEE268D",
      "0001M59VY0YA13H9M86HTA6XNP",
-     "01M1MCJW45V433TFPEKA021928",
-     "01M1MCTMTVA3JQH0E0M2WS8BP2"
+     "01M1MCJRM59H0HCN9T03J7VQ70",
+     "01M1MCTGJ7282T1RJY807TSBM5"
     ],
     "whole_on_the_glass": [
      "0001M4ZQQ0H0PPVTKMMQEE268D",
      "0001M59VY0YA13H9M86HTA6XNP",
-     "01M1MCJW45V433TFPEKA021928",
-     "01M1MCTMTVA3JQH0E0M2WS8BP2"
+     "01M1MCJRM59H0HCN9T03J7VQ70",
+     "01M1MCTGJ7282T1RJY807TSBM5"
     ],
     "clipped_at_an_edge": {
      "0001M4GW48FEW3M67XKAZT5051": 0.129
@@ -148,8 +148,8 @@
     },
     "paper": [
      "0001M59VY0YA13H9M86HTA6XNP",
-     "01M1MCJW45V433TFPEKA021928",
-     "01M1MCTMTVA3JQH0E0M2WS8BP2"
+     "01M1MCJRM59H0HCN9T03J7VQ70",
+     "01M1MCTGJ7282T1RJY807TSBM5"
     ],
     "paper_whole_on_the_glass": 3,
     "rows_cost": [
@@ -186,6 +186,7 @@
     ],
     "viewport_tall": 501.4,
     "composer": "",
+    "says_the_link_is_down": false,
     "attaching": false,
     "replying_to": null,
     "replies_on_the_glass": {},
@@ -208,27 +209,27 @@
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "01M1MCJW45V433TFPEKA021928",
-    "01M1MCTMTVA3JQH0E0M2WS8BP2"
+    "01M1MCJRM59H0HCN9T03J7VQ70",
+    "01M1MCTGJ7282T1RJY807TSBM5"
    ],
    "paper": [
     "0001M59VY0YA13H9M86HTA6XNP",
-    "01M1MCJW45V433TFPEKA021928",
-    "01M1MCTMTVA3JQH0E0M2WS8BP2"
+    "01M1MCJRM59H0HCN9T03J7VQ70",
+    "01M1MCTGJ7282T1RJY807TSBM5"
    ],
    "tears": {
     "0001M4GW48FEW3M67XKAZT5051": "tear_010",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_032",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_052",
-    "01M1MCJW45V433TFPEKA021928": "tear_014",
-    "01M1MCTMTVA3JQH0E0M2WS8BP2": "tear_019"
+    "01M1MCJRM59H0HCN9T03J7VQ70": "tear_014",
+    "01M1MCTGJ7282T1RJY807TSBM5": "tear_019"
    },
    "stocks": {
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "01M1MCJW45V433TFPEKA021928": "lined_03",
-    "01M1MCTMTVA3JQH0E0M2WS8BP2": "spiral_04"
+    "01M1MCJRM59H0HCN9T03J7VQ70": "lined_02",
+    "01M1MCTGJ7282T1RJY807TSBM5": "receipt_01"
    },
    "scroll": {
     "first": 8066,
@@ -253,17 +254,18 @@
     "194x126 of it, at its own size",
     24520.909090909092
    ],
-   "paper_at_its_own_size": 360,
+   "paper_at_its_own_size": 365,
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [
     "sticky_blue_02"
    ],
-   "paper_that_arrived_after_the_piece_was_drawn": 14,
+   "paper_that_arrived_after_the_piece_was_drawn": 13,
+   "tears_that_had_not_arrived": {},
    "masks_held": 48,
    "masks_dropped_to_stay_inside_the_pool": 45,
-   "stocks_held": 10,
-   "stocks_held_bytes": 149702320,
-   "stocks_dropped_to_stay_inside_the_pool": 5,
+   "stocks_held": 14,
+   "stocks_held_bytes": 204215920,
+   "stocks_dropped_to_stay_inside_the_pool": 0,
    "image_cache": {
     "held": 26,
     "bytes": 28759916,
@@ -284,13 +286,13 @@
    "sensation": null,
    "asked_a_motor_for": [],
    "the_launch_took": {
-    "the framework": 7,
-    "the library index": 16,
-    "the ink plates": 39,
-    "the desk": 156,
-    "the log": 6719,
-    "the first frame": 343,
-    "everything": 7280
+    "the framework": 10,
+    "the library index": 19,
+    "the ink plates": 42,
+    "the desk": 166,
+    "the log": 6606,
+    "the first frame": 346,
+    "everything": 7189
    },
    "sync": {
     "transport": "local",
@@ -313,8 +315,8 @@
      "peer_cursor": 14066,
      "our_cursor": 14066,
      "last_error": null,
-     "since": "2026-09-12T16:47:44.433Z",
-     "last_contact": "2026-09-12T16:56:19.770Z",
+     "since": "2026-09-12T21:53:08.806Z",
+     "last_contact": "2026-09-12T22:01:40.171Z",
      "certificate": null,
      "setup_address": null
     }
@@ -330,6 +332,7 @@
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
+    "and_it_is_empty_because": "the browser is holding nothing",
     "what_the_phone_can_hold": {
      "platform": "a browser",
      "a_secure_origin": true,
@@ -343,19 +346,19 @@
    "read_at": "the end of the scene"
   }
  ],
- "cold_ms": 8771,
+ "cold_ms": 8405,
  "load": {
-  "ms": 8771,
+  "ms": 8405,
   "store": "fresh",
   "profile": "profile_seeded",
   "made_of": {
-   "the framework": 7,
-   "the library index": 16,
-   "the ink plates": 39,
-   "the desk": 156,
-   "the log": 6719,
-   "the first frame": 343,
-   "everything": 7280
+   "the framework": 10,
+   "the library index": 19,
+   "the ink plates": 42,
+   "the desk": 166,
+   "the log": 6606,
+   "the first frame": 346,
+   "everything": 7189
   }
  },
  "far": [
@@ -374,14 +377,14 @@
    "before": 8069,
    "after": 8070,
    "at_frame": 0,
-   "waited_ms": 650
+   "waited_ms": 867
   },
   {
    "line": "message and the bread",
    "before": 8070,
    "after": 8071,
    "at_frame": 143,
-   "waited_ms": 373
+   "waited_ms": 353
   }
  ],
  "problems": [],

@@ -127,6 +127,7 @@ def main():
     visible = []         # share of pixels that changed by more than two grey levels
     busiest = []         # the busiest 32x32 tile's mean absolute change
     means = []
+    shifts = []          # the median *signed* change: how much the whole frame moved, not a part of it
     for p in paths[1:]:
         cur = load(p, 1.0)
         if cur.shape != prev.shape:
@@ -141,6 +142,7 @@ def main():
         visible.append(float((d > 2.0).mean()))
         busiest.append(tile_max(d))
         means.append(float(cur.mean()))
+        shifts.append(float(np.median(cur_l - prev_l)))
         prev, prev_l = cur, cur_l
 
     seconds = len(paths) / args.fps
@@ -209,8 +211,18 @@ def main():
     for run in steps_ms[:-1] if steps_ms else []:
         at += int(run["frames"])
         cuts.add(at - 1)
+    # A jump is the *light* changing, which is a thing that happens to the whole frame. A sheet of
+    # paper arriving is not: it is bright, it is large, and it moves the frame's mean by well over
+    # six hundredths of a grey level — which is why 08_state_propagating, whose entire subject is
+    # two notes landing after a cut link, failed this rule twice on the two arrivals it exists to
+    # show. The fault this rule was written for is a *global* one: a piece drawn for one frame as a
+    # flat slab took the whole screen up by 11.6 grey levels, and every pixel moved with it.
+    #
+    # So both terms have to hold: the frame's mean moved, and the *median* pixel moved with it. A
+    # local arrival leaves the median at nothing, however bright it is; a relight carries it.
     jumps = [i for i in range(1, len(means))
-             if abs(means[i] - means[i - 1]) > 0.06 and i not in cuts]
+             if abs(means[i] - means[i - 1]) > 0.06 and abs(shifts[i]) > 0.05 and i not in cuts]
+    worst_shift = max((abs(shifts[i]) for i in range(1, len(shifts))), default=0.0)
 
     report = {
         "dir": args.dir,
@@ -242,6 +254,10 @@ def main():
         "longest_still_run": longest_still,
         "repeated_at": still,
         "brightness_jumps": len(jumps),
+        "brightness_jumps_at": jumps,
+        # how far the whole frame ever moved between two frames, in grey levels: what tells a
+        # relight from something bright arriving in one corner of the desk
+        "largest_median_shift": round(worst_shift, 4),
         "ok": (moved > 1e-4 and not jumps and seconds >= args.min_seconds and not still),
     }
     if not report["ok"]:

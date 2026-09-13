@@ -549,10 +549,11 @@ function ensure(p) {
             // settled, and the reconnect, then 56 frames of two notes that landed before the first
             // of them. 47 and 45 identical frames. What a clip of a thing happening needs is the
             // thing happening inside it.
-            await page.evaluate(
-              ({ name, args }) => window[name].apply(null, args),
+            const answer = await page.evaluate(
+              ({ name, args }) => (window[name] ? window[name].apply(null, args) : 'no such handle'),
               { name: drive.name, args: drive.args || [] },
             );
+            if (answer === 'no such handle') throw new Error(`drive: the build has no ${drive.name}`);
           }
           if (drive && drive.kind === 'type') {
             // Somebody writing. One more character every frame — or `per` of them — so the take is
@@ -560,7 +561,11 @@ function ensure(p) {
             // has and no artifact in the set held it.
             const per = drive.per || 1;
             const n = Math.min(drive.text.length, Math.round((i + 1) * per));
-            await page.evaluate((t) => window.__deskCompose(t), drive.text.slice(0, n));
+            const said = await page.evaluate((t) => window.__deskCompose(t), drive.text.slice(0, n));
+            // The same rule every other handle is held to. A composer that is not on the screen
+            // answers and carries on, and the take would be sixty-four identical frames of a
+            // phone nobody is writing on — which is the fault this drive exists to fix.
+            if (i === 0 && said !== 'ok') throw new Error(`compose: ${said}`);
           }
           if (drive && drive.kind === 'scrollBy') {
             // The thread's own scroller, a step per frame. Dragging a note is a long press as

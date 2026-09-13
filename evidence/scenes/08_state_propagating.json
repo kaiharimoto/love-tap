@@ -209,19 +209,19 @@
     {
       "do": "frames",
       "dir": "evidence/frames/08_state_propagating",
-      "count": 64,
-      "ms": 16,
+      "count": 13,
+      "ms": 96,
       "drive": {
         "kind": "type",
         "text": "on my way - leaving in ten",
-        "per": 0.42
+        "per": 2
       },
-      "why": "Somebody writing into a link that is down. The thirteenth capture filmed the note after it had already stopped - 47 of 48 frames identical to the one before - because the send was driven between takes and a note that has failed is a still picture. A note being written is not: twenty-six characters at five a second is the plainest motion a messenger has, and it is the only artifact in the set that holds it."
+      "why": "Two characters a frame, not one. One character is a space about a fifth of the time, and a space adds no ink: three frames of the fourteenth capture's typing take were identical to the one before because nothing had been written on them. Two characters always carry one that marks the paper. Thirteen frames at ninety-six milliseconds is the same 1.25 seconds of somebody writing."
     },
     {
       "do": "frames",
       "dir": "evidence/frames/08_state_propagating",
-      "count": 44,
+      "count": 24,
       "ms": 16,
       "drive": {
         "kind": "hook",
@@ -230,9 +230,9 @@
           "on my way - leaving in ten",
           9000
         ],
-        "at": 2
+        "at": 0
       },
-      "why": "And sending it, inside the shot: the composer empties, the note lands in the thread, and the mark under it says it is going nowhere. The push is slowed to nine seconds so the row is still going when the take ends."
+      "why": "And sending it, inside the shot: the composer empties, the note drops onto the desk, and the mark under it says it is going nowhere. Twenty-four frames is 384 ms against a landing of 420, so the take ends while the sheet is still settling rather than after it has stopped."
     },
     {
       "do": "far",
@@ -251,20 +251,19 @@
       "arg": "off"
     },
     {
+      "do": "sync"
+    },
+    {
+      "do": "awaitArrival",
+      "timeout": 90000,
+      "why": "The link comes back, the pull goes out, and the shutter opens on the log actually growing rather than a number of milliseconds somebody guessed at. A hundred and fifty frames driven by three pulls left a hundred and twenty-three identical ones: a pull is a round trip and nothing moves while it is in the air."
+    },
+    {
       "do": "frames",
       "dir": "evidence/frames/08_state_propagating",
-      "count": 150,
+      "count": 24,
       "ms": 16,
-      "drive": {
-        "kind": "hook",
-        "name": "__deskSync",
-        "at": [
-          4,
-          40,
-          76
-        ]
-      },
-      "why": "The link comes back inside the shot, not before it. The thirteenth capture asked for the sync between takes and then filmed 56 frames of the aftermath: 45 of them identical, and the second of the two notes the far phone wrote while the link was down appeared on no frame at all. Two and a half seconds and three pulls is long enough for both of them to land here, in the order they were written."
+      "why": "The two notes the far phone wrote while the link was down, landing. One take, because they cross on the same pull and land together."
     },
     {
       "do": "report",

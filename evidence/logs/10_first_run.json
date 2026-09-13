@@ -11,7 +11,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3597
+   "ms": 3372
   },
   {
    "do": "wait",
@@ -19,7 +19,7 @@
   },
   {
    "do": "shot",
-   "ms": 2962
+   "ms": 2905
   },
   {
    "do": "report",
@@ -52,6 +52,7 @@
     "rows_cost": [],
     "viewport_tall": 0,
     "composer": "",
+    "says_the_link_is_down": false,
     "attaching": false,
     "replying_to": null,
     "replies_on_the_glass": {},
@@ -71,7 +72,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-12T16:24:22.950Z",
+   "now": "2026-09-12T21:37:19.026Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -93,6 +94,7 @@
    "paper_stretched_to_fit": 0,
    "stocks_the_paper_had_not_arrived_for": [],
    "paper_that_arrived_after_the_piece_was_drawn": 9,
+   "tears_that_had_not_arrived": {},
    "masks_held": 39,
    "masks_dropped_to_stay_inside_the_pool": 0,
    "stocks_held": 9,
@@ -113,12 +115,12 @@
    "asked_a_motor_for": [],
    "the_launch_took": {
     "the framework": 7,
-    "the library index": 23,
-    "the ink plates": 42,
-    "the desk": 172,
-    "the log": 34,
-    "the first frame": 401,
-    "everything": 679
+    "the library index": 18,
+    "the ink plates": 43,
+    "the desk": 159,
+    "the log": 44,
+    "the first frame": 369,
+    "everything": 640
    },
    "sync": {
     "transport": "local",
@@ -141,7 +143,7 @@
      "peer_cursor": null,
      "our_cursor": 0,
      "last_error": null,
-     "since": "2026-09-12T16:24:15.284Z",
+     "since": "2026-09-12T21:37:11.366Z",
      "last_contact": null,
      "certificate": null,
      "setup_address": null
@@ -158,6 +160,7 @@
      "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
     },
     "held_by_the_phone": [],
+    "and_it_is_empty_because": "the browser is holding nothing",
     "what_the_phone_can_hold": {
      "platform": "a browser",
      "a_secure_origin": true,
@@ -171,19 +174,19 @@
    "read_at": "the shutter"
   }
  ],
- "cold_ms": 1982,
+ "cold_ms": 1776,
  "load": {
-  "ms": 1982,
+  "ms": 1776,
   "store": "fresh",
   "profile": null,
   "made_of": {
    "the framework": 7,
-   "the library index": 23,
-   "the ink plates": 42,
-   "the desk": 172,
-   "the log": 34,
-   "the first frame": 401,
-   "everything": 679
+   "the library index": 18,
+   "the ink plates": 43,
+   "the desk": 159,
+   "the log": 44,
+   "the first frame": 369,
+   "everything": 640
   }
  },
  "problems": [],

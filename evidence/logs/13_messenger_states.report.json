@@ -3,153 +3,188 @@
  "view": {
   "region": "chat",
   "visible": [
-   "0001MCJ1M0Y4GX3FAR7200SH27",
-   "0001MCJ1M0Y4GX3FAR7200SH28",
-   "0001MCJ1M0Y4GX3FAR7200SH29",
-   "0001MCJ1M0Y4GX3FAR7200SH2B",
-   "0001MCJ1M0Y4GX3FAR7200SH21"
+   "0001MCJ1M0SEHZ02005CCAVYW4",
+   "0001MCJ1M0SEHZ02005CCAVYW5",
+   "0001MCJ1M0SEHZ02005CCAVYWC",
+   "0001MCJ1M0SEHZ02005CCAVYWD",
+   "0001MCJ1M0SEHZ02005CCAVYWE",
+   "0001MCJ1M0SEHZ02005CCAVYW3"
   ],
   "whole_on_the_glass": [
-   "0001MCJ1M0Y4GX3FAR7200SH28",
-   "0001MCJ1M0Y4GX3FAR7200SH29",
-   "0001MCJ1M0Y4GX3FAR7200SH2B",
-   "0001MCJ1M0Y4GX3FAR7200SH21"
+   "0001MCJ1M0SEHZ02005CCAVYW5",
+   "0001MCJ1M0SEHZ02005CCAVYWC",
+   "0001MCJ1M0SEHZ02005CCAVYWD",
+   "0001MCJ1M0SEHZ02005CCAVYWE",
+   "0001MCJ1M0SEHZ02005CCAVYW3"
   ],
   "clipped_at_an_edge": {
-   "0001MCJ1M0Y4GX3FAR7200SH27": 0.803
+   "0001MCJ1M0SEHZ02005CCAVYW4": 0.418
   },
   "delivery": {
-   "0001MCJ1M0Y4GX3FAR7200SH27": {
+   "0001MCJ1M0SEHZ02005CCAVYW5": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0Y4GX3FAR7200SH28": {
+   "0001MCJ1M0SEHZ02005CCAVYWC": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0Y4GX3FAR7200SH29": {
+   "0001MCJ1M0SEHZ02005CCAVYWD": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0Y4GX3FAR7200SH2B": {
+   "0001MCJ1M0SEHZ02005CCAVYWE": {
     "state": "sent",
     "says": "sent"
    },
-   "0001MCJ1M0Y4GX3FAR7200SH21": {
+   "0001MCJ1M0SEHZ02005CCAVYW3": {
     "state": "refused",
     "says": "it would not go"
    }
   },
   "refusals_on_the_glass": {
-   "0001MCJ1M0Y4GX3FAR7200SH21": "this phone is on an older version and cannot read that"
+   "0001MCJ1M0SEHZ02005CCAVYW3": "this phone is on an older version and cannot read that"
   },
   "states_on_the_glass": {
-   "sent": 3,
+   "sent": 4,
    "it would not go": 1
   },
   "reactions": {},
-  "edited": [],
-  "taken_back": [],
+  "edited": [
+   "0001MCJ1M0SEHZ02005CCAVYW5"
+  ],
+  "taken_back": [
+   "0001MCJ1M0SEHZ02005CCAVYW4"
+  ],
   "scroll": {
    "first": 8072,
-   "last": 8077,
-   "of": 8077
+   "last": 8078,
+   "of": 8078
   },
   "paper": [
-   "0001MCJ1M0Y4GX3FAR7200SH27",
-   "0001MCJ1M0Y4GX3FAR7200SH28",
-   "0001MCJ1M0Y4GX3FAR7200SH29",
-   "0001MCJ1M0Y4GX3FAR7200SH2B",
-   "0001MCJ1M0Y4GX3FAR7200SH21"
+   "0001MCJ1M0SEHZ02005CCAVYW4",
+   "0001MCJ1M0SEHZ02005CCAVYW5",
+   "0001MCJ1M0SEHZ02005CCAVYWC",
+   "0001MCJ1M0SEHZ02005CCAVYWD",
+   "0001MCJ1M0SEHZ02005CCAVYWE",
+   "0001MCJ1M0SEHZ02005CCAVYW3"
   ],
   "paper_whole_on_the_glass": 5,
   "rows_cost": [
    {
     "row": 8072,
     "type": "message",
-    "tall": 188,
-    "top": -37
+    "tall": 91,
+    "top": -53
    },
    {
     "row": 8073,
     "type": "message",
-    "tall": 94,
-    "top": 151
+    "tall": 129,
+    "top": 38
    },
    {
     "row": 8074,
     "type": "message",
     "tall": 129,
-    "top": 245
+    "top": 167
    },
    {
     "row": 8075,
     "type": "message",
-    "tall": 92,
-    "top": 374
+    "tall": 103,
+    "top": 296
    },
    {
     "row": 8076,
     "type": "message",
-    "tall": 188,
-    "top": 466
+    "tall": 83,
+    "top": 399
+   },
+   {
+    "row": 8077,
+    "type": "message",
+    "tall": 215,
+    "top": 482
    }
   ],
-  "viewport_tall": 663.5,
+  "viewport_tall": 707.2,
   "composer": "the second one, then",
-  "attaching": true,
-  "replying_to": "0001M2ZNX8AF4811Y2F7FNAGMG",
-  "replies_on_the_glass": {},
+  "says_the_link_is_down": false,
+  "attaching": false,
+  "replying_to": "01M1MCK836MKRGXE7FSGKME89D",
+  "replies_on_the_glass": {
+   "0001MCJ1M0SEHZ02005CCAVYWC": {
+    "id": "01M1MCK836MKRGXE7FSGKME89D",
+    "seq": 14067,
+    "author": "noor",
+    "device": "android",
+    "ts": 1788464439398,
+    "type": "message",
+    "refs": [
+     "01M1M3F41R2APQC59QKBMZK4XF"
+    ],
+    "blobs": [],
+    "payload": {
+     "text": "yes — the tin one, by the door",
+     "reply_to": "01M1M3F41R2APQC59QKBMZK4XF"
+    }
+   }
+  },
   "editing": null,
   "anchor": null,
   "kinds": {
-   "message": 5
+   "message": 6
   },
   "folded_in": {
    "reaction": 0,
-   "message_edit": 0,
-   "message_delete": 0,
+   "message_edit": 1,
+   "message_delete": 1,
    "read_marker": 0
   },
   "partner_typing": true
  },
  "visible": [
-  "0001MCJ1M0Y4GX3FAR7200SH27",
-  "0001MCJ1M0Y4GX3FAR7200SH28",
-  "0001MCJ1M0Y4GX3FAR7200SH29",
-  "0001MCJ1M0Y4GX3FAR7200SH2B",
-  "0001MCJ1M0Y4GX3FAR7200SH21"
+  "0001MCJ1M0SEHZ02005CCAVYW4",
+  "0001MCJ1M0SEHZ02005CCAVYW5",
+  "0001MCJ1M0SEHZ02005CCAVYWC",
+  "0001MCJ1M0SEHZ02005CCAVYWD",
+  "0001MCJ1M0SEHZ02005CCAVYWE",
+  "0001MCJ1M0SEHZ02005CCAVYW3"
  ],
  "paper": [
-  "0001MCJ1M0Y4GX3FAR7200SH27",
-  "0001MCJ1M0Y4GX3FAR7200SH28",
-  "0001MCJ1M0Y4GX3FAR7200SH29",
-  "0001MCJ1M0Y4GX3FAR7200SH2B",
-  "0001MCJ1M0Y4GX3FAR7200SH21"
+  "0001MCJ1M0SEHZ02005CCAVYW4",
+  "0001MCJ1M0SEHZ02005CCAVYW5",
+  "0001MCJ1M0SEHZ02005CCAVYWC",
+  "0001MCJ1M0SEHZ02005CCAVYWD",
+  "0001MCJ1M0SEHZ02005CCAVYWE",
+  "0001MCJ1M0SEHZ02005CCAVYW3"
  ],
  "tears": {
-  "0001MCJ1M0Y4GX3FAR7200SH27": "tear_051",
-  "0001MCJ1M0Y4GX3FAR7200SH28": "tear_013",
-  "0001MCJ1M0Y4GX3FAR7200SH29": "tear_035",
-  "0001MCJ1M0Y4GX3FAR7200SH2B": "tear_018",
-  "0001MCJ1M0Y4GX3FAR7200SH21": "tear_004"
+  "0001MCJ1M0SEHZ02005CCAVYW4": "tear_013",
+  "0001MCJ1M0SEHZ02005CCAVYW5": "tear_035",
+  "0001MCJ1M0SEHZ02005CCAVYWC": "tear_008",
+  "0001MCJ1M0SEHZ02005CCAVYWD": "tear_029",
+  "0001MCJ1M0SEHZ02005CCAVYWE": "tear_050",
+  "0001MCJ1M0SEHZ02005CCAVYW3": "tear_049"
  },
  "stocks": {
-  "0001MCJ1M0Y4GX3FAR7200SH27": "looseleaf_02",
-  "0001MCJ1M0Y4GX3FAR7200SH28": "legal_02",
-  "0001MCJ1M0Y4GX3FAR7200SH29": "looseleaf_03",
-  "0001MCJ1M0Y4GX3FAR7200SH2B": "looseleaf_02",
-  "0001MCJ1M0Y4GX3FAR7200SH21": "lined_04"
+  "0001MCJ1M0SEHZ02005CCAVYW4": "legal_01",
+  "0001MCJ1M0SEHZ02005CCAVYW5": "looseleaf_03",
+  "0001MCJ1M0SEHZ02005CCAVYWC": "legal_01",
+  "0001MCJ1M0SEHZ02005CCAVYWD": "legal_01",
+  "0001MCJ1M0SEHZ02005CCAVYWE": "looseleaf_04",
+  "0001MCJ1M0SEHZ02005CCAVYW3": "legal_02"
  },
  "scroll": {
   "first": 8072,
-  "last": 8077,
-  "of": 8077
+  "last": 8078,
+  "of": 8078
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 416,
+ "driven_ms": 272,
  "seed": 20260903,
- "events": 14078,
+ "events": 14087,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -164,22 +199,23 @@
   "266x126 of it, at its own size",
   33602.72727272727
  ],
- "paper_at_its_own_size": 197,
+ "paper_at_its_own_size": 246,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [
   "sticky_blue_02"
  ],
- "paper_that_arrived_after_the_piece_was_drawn": 20,
+ "paper_that_arrived_after_the_piece_was_drawn": 16,
+ "tears_that_had_not_arrived": {},
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 81,
- "stocks_held": 10,
- "stocks_held_bytes": 144780080,
- "stocks_dropped_to_stay_inside_the_pool": 11,
+ "masks_dropped_to_stay_inside_the_pool": 78,
+ "stocks_held": 17,
+ "stocks_held_bytes": 245769520,
+ "stocks_dropped_to_stay_inside_the_pool": 0,
  "image_cache": {
-  "held": 31,
-  "bytes": 36406928,
+  "held": 29,
+  "bytes": 34995728,
   "budget": 402653184,
-  "live": 29,
+  "live": 27,
   "still_decoding": 0
  },
  "setup_showing": false,
@@ -196,37 +232,37 @@
  "asked_a_motor_for": [],
  "the_launch_took": {
   "the framework": 7,
-  "the library index": 16,
+  "the library index": 18,
   "the ink plates": 46,
-  "the desk": 172,
-  "the log": 654,
-  "the first frame": 368,
-  "everything": 1263
+  "the desk": 187,
+  "the log": 6546,
+  "the first frame": 411,
+  "everything": 7215
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 10,
-  "pushed": 10,
+  "rounds": 14,
+  "pushed": 18,
   "refused": 1,
-  "pulled": 12,
+  "pulled": 7,
   "blobs_fetched": 0,
   "faults": 7,
   "last_fault": "dropped (POST /events)",
-  "pending": 2,
+  "pending": 1,
   "refused_in_the_outbox": 1,
-  "cursor": 14076,
+  "cursor": 14086,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14075,
-   "our_cursor": 14075,
+   "peer_cursor": 14086,
+   "our_cursor": 14086,
    "last_error": null,
-   "since": "2026-09-12T16:18:22.750Z",
-   "last_contact": "2026-09-12T16:20:05.159Z",
+   "since": "2026-09-12T21:46:56.274Z",
+   "last_contact": "2026-09-12T21:48:52.530Z",
    "certificate": null,
    "setup_address": null
   }
@@ -242,6 +278,7 @@
    "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
   },
   "held_by_the_phone": [],
+  "and_it_is_empty_because": "the browser is holding nothing",
   "what_the_phone_can_hold": {
    "platform": "a browser",
    "a_secure_origin": true,

@@ -3,25 +3,27 @@
  "view": {
   "region": "chat",
   "visible": [
-   "01M1MDEAZ0A731N9S281W7GYPA",
-   "01M1MDEBSMMHVXMF935PCNMQ0A",
-   "01M1MDFBDTNEF4BCY5CWK8MYQY",
-   "01M1MDN9ZCV581SN21M35APWNV",
-   "01M1MDNB1VM79DD8H8CDGD76PW",
-   "0001MCJ1M0KENZSN0RWG3MVP3Z"
+   "01M1MDD8BVQG319BTHXX5M4ZES",
+   "01M1MDDTQ7GNK0R1T4Z9N6BZS7",
+   "01M1ME3PYWDN7CZ76JTXV1VP5X",
+   "01M1ME3QEAASE6JHZQZRDWZT3W",
+   "0001MCJ1M02RZB85RV952VJT6N",
+   "01M1ME43QVW063048W869NJ2TB",
+   "01M1ME4BNBVTNY827B6ENWHGXR"
   ],
   "whole_on_the_glass": [
-   "01M1MDEBSMMHVXMF935PCNMQ0A",
-   "01M1MDFBDTNEF4BCY5CWK8MYQY",
-   "01M1MDN9ZCV581SN21M35APWNV",
-   "01M1MDNB1VM79DD8H8CDGD76PW",
-   "0001MCJ1M0KENZSN0RWG3MVP3Z"
+   "01M1MDDTQ7GNK0R1T4Z9N6BZS7",
+   "01M1ME3PYWDN7CZ76JTXV1VP5X",
+   "01M1ME3QEAASE6JHZQZRDWZT3W",
+   "0001MCJ1M02RZB85RV952VJT6N",
+   "01M1ME43QVW063048W869NJ2TB",
+   "01M1ME4BNBVTNY827B6ENWHGXR"
   ],
   "clipped_at_an_edge": {
-   "01M1MDEAZ0A731N9S281W7GYPA": 0.516
+   "01M1MDD8BVQG319BTHXX5M4ZES": 0.413
   },
   "delivery": {
-   "0001MCJ1M0KENZSN0RWG3MVP3Z": {
+   "0001MCJ1M02RZB85RV952VJT6N": {
     "state": "sent",
     "says": "sent"
    }
@@ -34,115 +36,129 @@
   "edited": [],
   "taken_back": [],
   "scroll": {
-   "first": 8074,
-   "last": 8080,
-   "of": 8080
+   "first": 8075,
+   "last": 8082,
+   "of": 8082
   },
   "paper": [
-   "01M1MDNB1VM79DD8H8CDGD76PW",
-   "0001MCJ1M0KENZSN0RWG3MVP3Z"
+   "01M1ME3QEAASE6JHZQZRDWZT3W",
+   "0001MCJ1M02RZB85RV952VJT6N",
+   "01M1ME43QVW063048W869NJ2TB",
+   "01M1ME4BNBVTNY827B6ENWHGXR"
   ],
-  "paper_whole_on_the_glass": 2,
+  "paper_whole_on_the_glass": 4,
   "rows_cost": [
-   {
-    "row": 8074,
-    "type": "state_declared",
-    "tall": 31,
-    "top": -15
-   },
    {
     "row": 8075,
     "type": "feeling",
-    "tall": 259,
-    "top": 16
+    "tall": 225,
+    "top": -132
    },
    {
     "row": 8076,
     "type": "state_declared",
     "tall": 31,
-    "top": 275
+    "top": 93
    },
    {
     "row": 8077,
     "type": "state_declared",
     "tall": 31,
-    "top": 306
+    "top": 124
    },
    {
     "row": 8078,
     "type": "message",
     "tall": 72,
-    "top": 337
+    "top": 155
    },
    {
     "row": 8079,
     "type": "message",
-    "tall": 82,
-    "top": 409
+    "tall": 123,
+    "top": 227
+   },
+   {
+    "row": 8080,
+    "type": "message",
+    "tall": 72,
+    "top": 350
+   },
+   {
+    "row": 8081,
+    "type": "message",
+    "tall": 72,
+    "top": 422
    }
   ],
   "viewport_tall": 501.4,
   "composer": "",
+  "says_the_link_is_down": false,
   "attaching": false,
   "replying_to": null,
   "replies_on_the_glass": {},
   "editing": null,
   "anchor": null,
   "kinds": {
-   "state_declared": 3,
    "feeling": 1,
-   "message": 2
+   "state_declared": 2,
+   "message": 4
   },
   "folded_in": {
    "reaction": 0,
    "message_edit": 0,
    "message_delete": 0,
-   "read_marker": 4
+   "read_marker": 2
   },
   "partner_typing": false
  },
  "visible": [
-  "01M1MDEAZ0A731N9S281W7GYPA",
-  "01M1MDEBSMMHVXMF935PCNMQ0A",
-  "01M1MDFBDTNEF4BCY5CWK8MYQY",
-  "01M1MDN9ZCV581SN21M35APWNV",
-  "01M1MDNB1VM79DD8H8CDGD76PW",
-  "0001MCJ1M0KENZSN0RWG3MVP3Z"
+  "01M1MDD8BVQG319BTHXX5M4ZES",
+  "01M1MDDTQ7GNK0R1T4Z9N6BZS7",
+  "01M1ME3PYWDN7CZ76JTXV1VP5X",
+  "01M1ME3QEAASE6JHZQZRDWZT3W",
+  "0001MCJ1M02RZB85RV952VJT6N",
+  "01M1ME43QVW063048W869NJ2TB",
+  "01M1ME4BNBVTNY827B6ENWHGXR"
  ],
  "paper": [
-  "01M1MDNB1VM79DD8H8CDGD76PW",
-  "0001MCJ1M0KENZSN0RWG3MVP3Z"
+  "01M1ME3QEAASE6JHZQZRDWZT3W",
+  "0001MCJ1M02RZB85RV952VJT6N",
+  "01M1ME43QVW063048W869NJ2TB",
+  "01M1ME4BNBVTNY827B6ENWHGXR"
  ],
  "tears": {
-  "01M1MDEAZ0A731N9S281W7GYPA": "tear_013",
-  "01M1MDEBSMMHVXMF935PCNMQ0A": "tear_035",
-  "01M1MDFBDTNEF4BCY5CWK8MYQY": "tear_023",
-  "01M1MDN9ZCV581SN21M35APWNV": "tear_008",
-  "01M1MDNB1VM79DD8H8CDGD76PW": "tear_029",
-  "0001MCJ1M0KENZSN0RWG3MVP3Z": "tear_050"
+  "01M1MDD8BVQG319BTHXX5M4ZES": "tear_055",
+  "01M1MDDTQ7GNK0R1T4Z9N6BZS7": "tear_018",
+  "01M1ME3PYWDN7CZ76JTXV1VP5X": "tear_023",
+  "01M1ME3QEAASE6JHZQZRDWZT3W": "tear_045",
+  "0001MCJ1M02RZB85RV952VJT6N": "tear_008",
+  "01M1ME43QVW063048W869NJ2TB": "tear_029",
+  "01M1ME4BNBVTNY827B6ENWHGXR": "tear_050"
  },
  "stocks": {
-  "01M1MDEAZ0A731N9S281W7GYPA": "receipt_01",
-  "01M1MDEBSMMHVXMF935PCNMQ0A": "lined_01",
-  "01M1MDFBDTNEF4BCY5CWK8MYQY": "lined_03",
-  "01M1MDN9ZCV581SN21M35APWNV": "lined_01",
-  "01M1MDNB1VM79DD8H8CDGD76PW": "lined_02",
-  "0001MCJ1M0KENZSN0RWG3MVP3Z": "legal_02"
+  "01M1MDD8BVQG319BTHXX5M4ZES": "lined_03",
+  "01M1MDDTQ7GNK0R1T4Z9N6BZS7": "graph_04",
+  "01M1ME3PYWDN7CZ76JTXV1VP5X": "lined_03",
+  "01M1ME3QEAASE6JHZQZRDWZT3W": "lined_01",
+  "0001MCJ1M02RZB85RV952VJT6N": "legal_01",
+  "01M1ME43QVW063048W869NJ2TB": "spiral_02",
+  "01M1ME4BNBVTNY827B6ENWHGXR": "spiral_04"
  },
  "scroll": {
-  "first": 8074,
-  "last": 8080,
-  "of": 8080
+  "first": 8075,
+  "last": 8082,
+  "of": 8082
  },
  "now": "2026-09-03T19:40:00.000Z",
- "driven_ms": 12992,
+ "driven_ms": 13424,
  "seed": 20260903,
- "events": 14086,
+ "events": 14084,
  "transport": "local",
  "link": "connected",
  "me": "teo",
  "masks_in_pool": 56,
- "masks_composed": 6,
+ "masks_composed": 9,
  "writable_masks": 47,
  "light": "day",
  "has_dusk_paper": true,
@@ -152,15 +168,16 @@
   "228x76 of it, at its own size",
   17266.689805054197
  ],
- "paper_at_its_own_size": 1689,
+ "paper_at_its_own_size": 1573,
  "paper_stretched_to_fit": 0,
  "stocks_the_paper_had_not_arrived_for": [],
- "paper_that_arrived_after_the_piece_was_drawn": 65,
+ "paper_that_arrived_after_the_piece_was_drawn": 15,
+ "tears_that_had_not_arrived": {},
  "masks_held": 48,
- "masks_dropped_to_stay_inside_the_pool": 390,
- "stocks_held": 10,
- "stocks_held_bytes": 142543040,
- "stocks_dropped_to_stay_inside_the_pool": 58,
+ "masks_dropped_to_stay_inside_the_pool": 246,
+ "stocks_held": 16,
+ "stocks_held_bytes": 231918320,
+ "stocks_dropped_to_stay_inside_the_pool": 0,
  "image_cache": {
   "held": 30,
   "bytes": 31578956,
@@ -182,7 +199,7 @@
   "feeling": "soup",
   "channel": "page",
   "total_ms": 1200,
-  "started_at": "2026-09-12T18:31:53.902Z",
+  "started_at": "2026-09-13T01:00:53.400Z",
   "pattern": [
    {
     "ms": 150,
@@ -277,38 +294,38 @@
   }
  ],
  "the_launch_took": {
-  "the framework": 9,
-  "the library index": 16,
-  "the ink plates": 40,
-  "the desk": 180,
-  "the log": 6648,
-  "the first frame": 349,
-  "everything": 7242
+  "the framework": 7,
+  "the library index": 17,
+  "the ink plates": 36,
+  "the desk": 157,
+  "the log": 6503,
+  "the first frame": 344,
+  "everything": 7064
  },
  "sync": {
   "transport": "local",
   "role": "client",
-  "rounds": 82,
-  "pushed": 15,
+  "rounds": 56,
+  "pushed": 10,
   "refused": 0,
   "pulled": 13,
   "blobs_fetched": 0,
-  "faults": 174,
+  "faults": 105,
   "last_fault": "offline (POST /events)",
-  "pending": 0,
+  "pending": 1,
   "refused_in_the_outbox": 0,
-  "cursor": 14086,
+  "cursor": 14083,
   "cursor_is": "the highest seq with nothing missing under it; events minus cursor is whatever is still in the outbox",
   "link": {
    "transport": "local",
    "role": "client",
    "state": "connected",
    "address": "http://127.0.0.1:8480",
-   "peer_cursor": 14086,
-   "our_cursor": 14086,
+   "peer_cursor": 14083,
+   "our_cursor": 14083,
    "last_error": null,
-   "since": "2026-09-12T18:16:38.669Z",
-   "last_contact": "2026-09-12T19:03:15.762Z",
+   "since": "2026-09-13T00:46:13.575Z",
+   "last_contact": "2026-09-13T01:14:01.148Z",
    "certificate": null,
    "setup_address": null
   }
@@ -324,6 +341,7 @@
    "push": "the kind and the sender, and nothing else, by the rule in tools/push/webpush.py — a lock screen is not a place to put what two people said to each other"
   },
   "held_by_the_phone": [],
+  "and_it_is_empty_because": "the browser is holding nothing",
   "what_the_phone_can_hold": {
    "platform": "a browser",
    "a_secure_origin": true,
@@ -333,6 +351,6 @@
    "a_push_manager": false
   }
  },
- "at": "08_state_propagating",
+ "at": "evidence/logs/08_state_propagating.report.json",
  "read_at": "the end of the scene"
 }
