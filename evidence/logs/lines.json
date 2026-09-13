@@ -1,122 +1,122 @@
 {
  "what": "how far the writing sits from the ruled line nearest it, as a fraction of the pitch: nought is on the line, a half is exactly between two",
- "why_it_is_not_gated": "Not that nobody knows how. Measured this cycle: the lined stocks carry a clean rule grid at 81 px pitch in their own 2200-pixel-tall render, and a note in 02_chat reads its rules at 81 px on the glass and its four ink baselines at 81, 81 and 82 apart — the pitch already agrees, because a piece takes a window of its stock at one image pixel per device pixel. What is wrong is only the phase: the ink sits a constant 16 to 18 px, 0.20 to 0.22 of a pitch, above the nearest rule, for four consecutive lines. The phase is set by the seeded patch offset `sy` in _StockPainter, which is arbitrary — so the fix is to snap `sy` to the nearest multiple of the pitch that puts a printed rule under the first baseline, which moves the patch by less than one pitch and changes no layout at all. It needs two things this build does not have: the rule phase and pitch per stock in INDEX.json (measurable at pack time exactly as `safe`, `tear` and `rough` are), and the piece's first text baseline in device pixels, which _WithinTear can read with getDistanceToBaseline during layout and publish to the painter — _WithinTear is a non-positioned child of the same Stack and is laid out before the Positioned.fill stock. Left for a cycle of its own because it is a change to the widget every note in the app is made of, and this cycle already moved the tear library under it.",
+ "why_it_is_not_gated": "the stock is drawn at whatever scale the piece turns out to be, so its rule pitch on the glass follows the piece's width, while the text's line height follows its point size. Nothing makes them agree. Making them agree means laying the text out against the paper it is drawn on \u2014 the pitch, and the phase of the first rule under the seeded patch offset \u2014 which is a change to every note in the app and wants a cycle of its own.",
  "stills": {
   "01_pulse.png": {
-   "ruled_lines": 16,
-   "written_lines": 31,
-   "rule_pitch_px": 71.0,
-   "lines_measured": 12,
+   "ruled_lines": 12,
+   "written_lines": 34,
+   "rule_pitch_px": 70.5,
+   "lines_measured": 11,
    "off_the_line": {
-    "median": 0.232,
-    "p90": 0.401
+    "median": 0.402,
+    "p90": 0.936
    }
   },
   "02_chat.png": {
-   "ruled_lines": 14,
-   "written_lines": 45,
-   "rule_pitch_px": 81.0,
-   "lines_measured": 25,
+   "ruled_lines": 8,
+   "written_lines": 27,
+   "rule_pitch_px": 161.0,
+   "lines_measured": 15,
    "off_the_line": {
-    "median": 0.358,
-    "p90": 0.63
+    "median": 0.425,
+    "p90": 0.775
    }
   },
   "03_us.png": {
    "ruled_lines": 13,
-   "written_lines": 48,
-   "rule_pitch_px": 179.5,
-   "lines_measured": 45,
+   "written_lines": 56,
+   "rule_pitch_px": 214.5,
+   "lines_measured": 54,
    "off_the_line": {
-    "median": 0.248,
-    "p90": 0.563
+    "median": 0.251,
+    "p90": 0.524
    }
   },
   "04_moments.png": {
    "ruled_lines": 6,
-   "written_lines": 43,
+   "written_lines": 44,
    "rule_pitch_px": 599.0,
-   "lines_measured": 43,
+   "lines_measured": 44,
    "off_the_line": {
-    "median": 0.272,
-    "p90": 0.585
+    "median": 0.293,
+    "p90": 0.591
    }
   },
   "05_settings.png": {
-   "ruled_lines": 17,
-   "written_lines": 36,
-   "rule_pitch_px": 113.8,
-   "lines_measured": 24,
+   "ruled_lines": 18,
+   "written_lines": 38,
+   "rule_pitch_px": 106.5,
+   "lines_measured": 26,
    "off_the_line": {
-    "median": 0.264,
-    "p90": 0.466
+    "median": 0.283,
+    "p90": 0.493
    }
   },
   "10_first_run.png": {
    "ruled_lines": 6,
-   "written_lines": 18,
+   "written_lines": 16,
    "rule_pitch_px": 114.0,
-   "lines_measured": 16,
+   "lines_measured": 14,
    "off_the_line": {
-    "median": 0.424,
-    "p90": 0.739
+    "median": 0.395,
+    "p90": 0.728
    }
   },
   "12_search.png": {
-   "ruled_lines": 15,
-   "written_lines": 49,
-   "rule_pitch_px": 81.5,
-   "lines_measured": 29,
+   "ruled_lines": 13,
+   "written_lines": 40,
+   "rule_pitch_px": 111.2,
+   "lines_measured": 26,
    "off_the_line": {
-    "median": 0.387,
-    "p90": 0.72
+    "median": 0.352,
+    "p90": 0.784
    }
   },
   "13_messenger_states.png": {
-   "ruled_lines": 6,
-   "written_lines": 20,
-   "rule_pitch_px": 70.5,
-   "lines_measured": 7,
+   "ruled_lines": 7,
+   "written_lines": 38,
+   "rule_pitch_px": 71.0,
+   "lines_measured": 8,
    "off_the_line": {
-    "median": 0.418,
-    "p90": 0.644
+    "median": 0.403,
+    "p90": 0.748
    }
   },
   "14_media_viewer.png": {
-   "ruled_lines": 11,
-   "written_lines": 15,
-   "rule_pitch_px": 81.2,
-   "lines_measured": 10,
+   "ruled_lines": 9,
+   "written_lines": 12,
+   "rule_pitch_px": 127.0,
+   "lines_measured": 7,
    "off_the_line": {
-    "median": 0.222,
-    "p90": 0.519
+    "median": 0.252,
+    "p90": 0.681
    }
   },
   "17_setup_pwa.png": {
-   "ruled_lines": 25,
-   "written_lines": 40,
+   "ruled_lines": 18,
+   "written_lines": 35,
    "rule_pitch_px": 71.0,
-   "lines_measured": 27,
+   "lines_measured": 25,
    "off_the_line": {
-    "median": 0.345,
-    "p90": 0.793
+    "median": 0.479,
+    "p90": 0.934
    }
   }
  },
- "median_across_the_set": 0.308,
+ "median_across_the_set": 0.373,
  "what_that_number_means": "writing laid out with no relation to the rules under it lands uniformly between them, which averages 0.25. On the line is 0. The set reads 0.33, so the writing is not on the rules and is not even accidentally near them: the beat between the text's line height and the paper's pitch pushes it past random.",
  "stills_measured": 10,
  "the_same_paper_is_not_the_same_size": {
   "rule_pitch_px": {
-   "01_pulse.png": 71.0,
-   "02_chat.png": 81.0,
-   "03_us.png": 179.5,
+   "01_pulse.png": 70.5,
+   "02_chat.png": 161.0,
+   "03_us.png": 214.5,
    "04_moments.png": 599.0,
-   "05_settings.png": 113.8,
+   "05_settings.png": 106.5,
    "10_first_run.png": 114.0,
-   "12_search.png": 81.5,
-   "13_messenger_states.png": 70.5,
-   "14_media_viewer.png": 81.2,
+   "12_search.png": 111.2,
+   "13_messenger_states.png": 71.0,
+   "14_media_viewer.png": 127.0,
    "17_setup_pwa.png": 71.0
   },
   "smallest": 70.5,
@@ -134,6 +134,6 @@
    "ratio_the_library_itself_implies": 1.74,
    "read_off": "blender/paper/rules.py"
   },
-  "what_it_means": "This measured 2.9 before a piece knew how big a millimetre was, against the 1.74 the library's own rulings imply — graph paper is ruled at five millimetres and looseleaf at 8.7, so some spread is correct and this check used to claim they were all eight. It is 1.86 now. What is left of the gap is the overscan a piece takes over its stock and the fallback for a piece wider than the sheet it is cut from; what closed is the rest. The number to watch is this ratio against 1.74, not against 1."
+  "what_it_means": "This measured 2.9 before a piece knew how big a millimetre was, against the 1.74 the library's own rulings imply \u2014 graph paper is ruled at five millimetres and looseleaf at 8.7, so some spread is correct and this check used to claim they were all eight. It is 1.86 now. What is left of the gap is the overscan a piece takes over its stock and the fallback for a piece wider than the sheet it is cut from; what closed is the rest. The number to watch is this ratio against 1.74, not against 1."
  }
 }
