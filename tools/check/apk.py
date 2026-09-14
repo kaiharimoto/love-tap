@@ -65,6 +65,38 @@ def whose_signature(path):
     }
 
 
+def the_web_app_inside(path):
+    """Whether this APK can hand the iPhone a page, and what it weighs.
+
+    Step 4 of docs/PHONES.md tells a person to open the host's address in Safari. Before
+    tools/pack_pwa.py existed there was nothing there to open: the app never passed a bundle to
+    its own server and every static GET answered 404, silently, with the setup list still ticking
+    the step. So it is read out of the built APK rather than assumed from a build log.
+    """
+    files, total = 0, 0
+    with zipfile.ZipFile(path) as z:
+        for i in z.infolist():
+            if i.filename.startswith("assets/pwa/"):
+                files += 1
+                total += i.file_size
+        names = {i.filename for i in z.infolist()}
+    has_page = "assets/pwa/index.html" in names
+    out = {
+        "files": files,
+        "mb": round(total / 1e6, 1),
+        "index_html": has_page,
+        "engine": any(n.startswith("assets/pwa/canvaskit/") for n in names),
+        "service_worker": "assets/pwa/push/sw.js" in names,
+    }
+    if not has_page:
+        out["why_it_matters"] = (
+            "no assets/pwa/index.html: this phone has no web app to serve, so the iPhone opening "
+            "https://100.x.y.z:8443 gets a 404 and there is nothing to add to a home screen. "
+            "Run flutter build web and then tools/pack_pwa.py before building the APK."
+        )
+    return out
+
+
 def weigh(path):
     by = {}
     with zipfile.ZipFile(path) as z:
@@ -137,15 +169,23 @@ def main():
         got = {"mb": round(os.path.getsize(p) / 1e6, 1)}
         got.update(weigh(p))
         got["signature"] = whose_signature(p)
+        got["the_web_app_it_hands_over"] = the_web_app_inside(p)
         report["apks"][os.path.basename(p)] = got
         if got["signature"].get("is_the_debug_key"):
+            ok = False
+        if not got["the_web_app_it_hands_over"]["index_html"]:
             ok = False
     report["ok"] = ok and bool(report["apks"])
     if not report["apks"]:
         report["ok"] = False
         report["why_not"] = "no APK has been built; run flutter build apk --release"
     elif not ok:
-        report["why_not"] = "an APK here is signed with the shared debug key"
+        bad = [n for n, g in report["apks"].items() if g["signature"].get("is_the_debug_key")]
+        report["why_not"] = (
+            "an APK here is signed with the shared debug key"
+            if bad
+            else "an APK here carries no web app, so the iPhone has nothing to install"
+        )
     text = json.dumps(report, indent=1) + "\n"
     if a.out:
         os.makedirs(os.path.dirname(a.out), exist_ok=True)

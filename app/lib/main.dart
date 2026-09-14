@@ -23,6 +23,7 @@ import 'spine/seed_loader.dart';
 import 'spine/store/open_store.dart';
 import 'spine/spine.dart';
 import 'transport/local/local_transport.dart';
+import 'transport/pwa_assets.dart';
 import 'transport/tailscale/tailscale_transport.dart';
 import 'transport/sync.dart';
 
@@ -142,6 +143,11 @@ Future<AppScope> bootstrap() async {
         port: Flags.port == 8480 ? 8443 : Flags.port,
         declaredAddress: Flags.tailnetAddress,
         peerAddress: Flags.peerAddress,
+        // The other phone installs the client by opening this one's address in Safari, so this one
+        // has to have the page to give it. It is packed into the APK by tools/pack_pwa.py and read
+        // back by pwa_assets.dart — half out of Android's own assets, half out of the material
+        // library this build already carries. On the web there is nothing to serve and no server.
+        pwaFile: kIsWeb ? null : pwaFile,
         // The key and certificate live in the app's own storage, which the Android manifest
         // excludes from the cloud backup and from the phone-to-phone transfer. They are made once,
         // on the phone, for the address it is actually serving on.

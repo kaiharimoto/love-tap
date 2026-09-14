@@ -8,5 +8,6 @@ class MainActivity : FlutterActivity() {
         super.configureFlutterEngine(engine)
         Haptics.attach(this, engine)
         Ambient.attach(this, engine)
+        Pwa.attach(this, engine)
     }
 }

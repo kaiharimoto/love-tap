@@ -105,32 +105,34 @@ void main() {
     }
 
     const rounds = 2000;
-    final lookups = _ms(() {
+    void spin(Feeling? Function(String) answer) {
       for (var i = 0; i < rounds; i++) {
-        registry.byId('hold');
-        registry.byId('made_3');
-        registry.byId('not a feeling');
+        answer('hold');
+        answer('made_3');
+        answer('not a feeling');
       }
-    });
+    }
+
+    // Both paths run once untimed. The first block timed otherwise pays for the compiler and the
+    // second does not, which on a full-suite run made the indexed lookups measure ten times what
+    // they measure alone and nearly lost to the walk.
+    spin(registry.byId);
+    spin(scanFor);
+    final lookups = _ms(() => spin(registry.byId));
     // The same questions, answered the way this used to answer them. Both halves are timed on the
     // same machine within a few milliseconds of each other, so a container under load slows them
     // together and the ratio stands — which a fixed microsecond ceiling did not: 20,000 us for
     // 6,000 lookups went red on one full-suite run in four, and a red suite aborts a capture.
-    final scanned = _ms(() {
-      for (var i = 0; i < rounds; i++) {
-        scanFor('hold');
-        scanFor('made_3');
-        scanFor('not a feeling');
-      }
-    });
+    final scanned = _ms(() => spin(scanFor));
     expect(registry.byId('made_3')?.name, 'the 3 one');
     expect(registry.byId('hold'), isNotNull);
     expect(registry.byId('nope'), isNull);
     expect(scanFor('made_3')?.name, 'the 3 one', reason: 'the control does not answer the question');
     // A hashed lookup over a library this size is not a little faster than the walk, it is a
-    // different shape of work. Ten is far below the ratio a map actually gives (the walk crosses
-    // hundreds of feelings per miss) and far above anything two constant-time paths could show.
-    expect(lookups * 10, lessThan(scanned),
+    // different shape of work. Four sits between the two answers with room on both sides: with the
+    // index it measures about ten times cheaper, and with the index taken out it measures nine
+    // times dearer, so nothing between those has to be guessed at.
+    expect(lookups * 4, lessThan(scanned),
         reason: '${rounds * 3} lookups took ${lookups}us against ${scanned}us of linear scan '
             '— byId is walking the library rather than indexing it');
     expect(build, lessThan(60000), reason: 'building the registry took ${build}us');

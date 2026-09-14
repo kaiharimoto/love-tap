@@ -17,6 +17,7 @@ class HostServer {
     required void Function(Ephemeral) onEphemeral,
     required void Function(int cursor) onPeerContact,
     String? pwaRoot,
+    Future<Uint8List?> Function(String path)? pwaFile,
     String? Function(Event e)? refuses,
     String Function()? certificatePem,
   });

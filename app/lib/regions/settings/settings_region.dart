@@ -31,9 +31,24 @@ class SettingsRegion extends StatefulWidget {
   State<SettingsRegion> createState() => _SettingsRegionState();
 }
 
+/// Where to look for the other phone, before anybody types anything.
+///
+/// The iPhone gets this app *from* the Android phone — it opens the host's address in Safari and
+/// adds the page to its home screen — so the page's own origin already is the answer, and it is
+/// the one thing on this screen nobody should have to read off a Tailscale panel and type into a
+/// phone keyboard. Under the local transport it stays the loopback port run.sh forwards, which is
+/// what two builds on one desk need.
+String theAddressToTryFirst() {
+  if (kIsWeb && Flags.transport == 'tailscale') {
+    final here = Uri.base;
+    if (here.hasAuthority) return '${here.scheme}://${here.authority}';
+  }
+  return 'http://127.0.0.1:${Flags.port}';
+}
+
 class _SettingsRegionState extends State<SettingsRegion> {
   PairingCode? _code;
-  final _address = TextEditingController(text: 'http://127.0.0.1:8480');
+  final _address = TextEditingController(text: theAddressToTryFirst());
   final _words = TextEditingController();
   String? _result;
   NotificationPrefs? _prefs;

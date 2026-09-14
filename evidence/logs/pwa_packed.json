@@ -1,0 +1,48 @@
+{
+ "from": "/home/user/love-tap/app/build/web",
+ "files": 37,
+ "mb": 35.2,
+ "index_sha256_16": "cdef4bafae0887e1",
+ "served_from_the_apps_own_assets": {
+  "files": 644,
+  "mb": 62.4,
+  "why": "the material library is in flutter_assets already; pwa_assets.dart maps assets/assets/<x> onto this build's own assets/<x>"
+ },
+ "left_out": {
+  "symbols": 6
+ },
+ "biggest": [
+  {
+   "what": "canvaskit/canvaskit.wasm",
+   "mb": 7.28
+  },
+  {
+   "what": "canvaskit/chromium/canvaskit.wasm",
+   "mb": 5.43
+  },
+  {
+   "what": "canvaskit/skwasm_heavy.wasm",
+   "mb": 5.22
+  },
+  {
+   "what": "canvaskit/webparagraph/canvaskit.wasm",
+   "mb": 3.73
+  },
+  {
+   "what": "canvaskit/skwasm.wasm",
+   "mb": 3.59
+  },
+  {
+   "what": "canvaskit/wimp.wasm",
+   "mb": 3.58
+  },
+  {
+   "what": "main.dart.js",
+   "mb": 3.57
+  },
+  {
+   "what": "assets/NOTICES",
+   "mb": 1.35
+  }
+ ]
+}

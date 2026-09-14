@@ -57,6 +57,7 @@ class HttpTransport implements Transport {
     required this.binding,
     required this.deviceId,
     this.pwaRoot,
+    this.pwaFile,
     this.refuses,
   }) : _status = TransportStatus(name: binding.name, role: role, state: LinkState.stopped);
 
@@ -69,6 +70,9 @@ class HttpTransport implements Transport {
 
   /// Host: directory of the built PWA to serve at /. Null until the web build is bundled.
   final String? pwaRoot;
+
+  /// The web app out of this build's own assets, for a phone. See `pwa_assets.dart`.
+  final Future<Uint8List?> Function(String path)? pwaFile;
 
   /// Host: a rule of its own about what it will take. See [srv.HostServer.refuses].
   ///
@@ -153,6 +157,7 @@ class HttpTransport implements Transport {
         onPeerContact: (cursor) => _set(_status.copyWith(
             state: LinkState.connected, peerCursor: cursor, ourCursor: spine.cursor, lastContact: DateTime.now().toUtc())),
         pwaRoot: pwaRoot,
+        pwaFile: pwaFile,
         refuses: (e) => refuses?.call(e),
         certificatePem: binding.certificatePem,
       );

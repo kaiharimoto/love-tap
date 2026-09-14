@@ -19,6 +19,7 @@
 import 'package:http/http.dart' as http;
 
 import 'dart:io';
+import 'dart:typed_data';
 
 import '../protocol/http_transport.dart';
 import '../transport.dart';
@@ -158,6 +159,7 @@ Transport tailscaleTransport({
   String peerAddress = '',
   String userspaceProxy = '',
   String? pwaRoot,
+  Future<Uint8List?> Function(String path)? pwaFile,
   String? Function(Event e)? refuses,
   Future<Directory> Function()? certificateDir,
 }) =>
@@ -166,6 +168,7 @@ Transport tailscaleTransport({
       spine: spine,
       deviceId: deviceId,
       pwaRoot: pwaRoot,
+      pwaFile: pwaFile,
       refuses: refuses,
       binding: TailscaleBinding(
         port: port,

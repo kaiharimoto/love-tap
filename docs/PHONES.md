@@ -96,8 +96,16 @@ trying the app out and is not fine for the phone you intend to keep the year on.
 ### The APK
 
     ./bootstrap.sh                     # once; installs the SDK into ./toolchain
+    python3 tools/pack_assets.py       # the material library, and no seeded year
+    cd app && flutter build web --release --no-web-resources-cdn \
+      --dart-define=TRANSPORT=tailscale --dart-define=ROLE=client --dart-define=PERSON=teo
+    cd .. && python3 tools/pack_pwa.py
     cd app && flutter build apk --release --split-per-abi --target-platform android-arm64 \
       --dart-define=TRANSPORT=tailscale --dart-define=ROLE=host --dart-define=PERSON=noor
+
+The web build in the middle is not a separate product. It is the iPhone's half, and the Android
+phone is the only thing that will ever serve it, so it is built first and packed into the APK. See
+**What the iPhone is given** below for what that costs and why it is not another eighty megabytes.
 
 `--split-per-abi --target-platform android-arm64` is not optional advice. Without it the APK
 carries three architectures and measures 145 MB, of which 38.6 MB is engines and app images for
@@ -117,6 +125,29 @@ after, which is why the distinguished name in it says so.
 
 `--dart-define=SEED=year` is how the seeded history gets compiled in, and you do not want it: it
 is for the evidence captures. A build without it starts empty, which is what a real phone wants.
+
+### What the iPhone is given
+
+Step 4 of the list says to open the host's address in Safari. What answers is the web build that
+went into the APK: `tools/pack_pwa.py` puts it into Android's own assets and the app serves it out
+of there, so the iPhone needs nothing from anywhere else and there is nothing to publish.
+
+It is packed in two halves, because the phone already has most of it:
+
+- **The material library** — paper, tears, objects, folds, fonts, eighty-three megabytes — is not
+  copied. It is byte for byte what the Android app draws itself with, so a request for
+  `assets/assets/paper/index_02.webp` is answered out of this build's own `flutter_assets`.
+  `app/lib/transport/pwa_assets.dart` is the join between the two layouts and
+  `app/test/the_phone_hands_over_the_web_app_test.dart` is what keeps it honest.
+- **The page and the engine** — `index.html`, `main.dart.js`, canvaskit, the icons, the service
+  worker, about forty megabytes — go into `app/android/app/src/main/assets/pwa/`. Android's assets
+  rather than Flutter's, because anything under `app/assets/` is bundled into `flutter build web`
+  too: a copy of the web build kept there would be packed inside the next web build, and inside
+  the one after that.
+
+`evidence/logs/pwa_packed.json` records what went in. If that file says the bundle is absent, or
+`tools/check/apk.py` reports no `assets/pwa/` inside the APK, then the Android phone has nothing to
+hand over and step 4 will end at a 404 — which is exactly what it did before this existed.
 
 The APK lands in `app/build/app/outputs/flutter-apk/app-release.apk`. Get it onto the phone by
 cable (`adb install -r …`) or by any means that ends with the file on the handset; Android will

@@ -51,6 +51,7 @@ class HostServer {
     required this.onEphemeral,
     required this.onPeerContact,
     this.pwaRoot,
+    this.pwaFile,
     this.refuses,
     this.certificatePem,
   });
@@ -65,6 +66,15 @@ class HostServer {
   final void Function(Ephemeral) onEphemeral;
   final void Function(int cursor) onPeerContact;
   final String? pwaRoot;
+
+  /// The web app as bytes, for a host that carries it inside itself rather than beside it.
+  ///
+  /// The capture's far phone runs `dart run` with the built bundle in a directory, which is
+  /// what `pwaRoot` is for. A phone has no such directory: it has the page packed into the
+  /// APK, half of it shared with the material library it draws itself with, and
+  /// `app/lib/transport/pwa_assets.dart` is what knows how to find either half. Answering
+  /// null means this build does not carry that file, which is a 404 and not an error.
+  final Future<Uint8List?> Function(String path)? pwaFile;
 
   /// The certificate this host is presenting, as PEM — the public half and nothing else. It is
   /// served, unauthenticated, at /setup, because an iPhone cannot pair before it trusts the
@@ -476,7 +486,37 @@ class HostServer {
 
   Future<void> _serveStatic(HttpRequest req) async {
     final root = pwaRoot;
-    if (root == null || req.method != 'GET') {
+    final fromTheBuild = pwaFile;
+    if (req.method != 'GET' && req.method != 'HEAD') {
+      req.response.statusCode = HttpStatus.notFound;
+      await req.response.close();
+      return;
+    }
+    if (fromTheBuild != null) {
+      final bytes = await fromTheBuild(req.uri.path);
+      if (bytes == null) {
+        req.response.statusCode = HttpStatus.notFound;
+        await req.response.close();
+        return;
+      }
+      req.response.statusCode = HttpStatus.ok;
+      // A request with no file in it — '/', or '/settings' typed into Safari — is answered with
+      // the page, the way any single-page app is served, so it is html and not octet-stream. The
+      // rule is the same one pwa_assets.dart resolves by, and getting it wrong here means Safari
+      // offers to download the app instead of running it.
+      final named = req.uri.path.split('/').last;
+      req.response.headers.contentType =
+          named.contains('.') ? _mimeFor(named) : ContentType.html;
+      req.response.headers.contentLength = bytes.length;
+      // The page and the engine change when the phone is updated and the material never does, but
+      // the two are served through the same door and a stale engine against a new page is a blank
+      // screen on the other phone. Nothing is cached, and the bundle is on the tailnet.
+      req.response.headers.set('cache-control', 'no-store');
+      if (req.method != 'HEAD') req.response.add(bytes);
+      await req.response.close();
+      return;
+    }
+    if (root == null) {
       req.response.statusCode = HttpStatus.notFound;
       await req.response.close();
       return;
@@ -518,6 +558,11 @@ class HostServer {
         return ContentType('application', 'wasm');
       case '.ttf':
         return ContentType('font', 'ttf');
+      case '.otf':
+        return ContentType('font', 'otf');
+      // canvaskit's shaders. Served as text so a browser that sniffs does not refuse them.
+      case '.frag':
+        return ContentType('text', 'plain', charset: 'utf-8');
       case '.ogg':
         return ContentType('audio', 'ogg');
       case '.mp4':
