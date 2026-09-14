@@ -6,6 +6,7 @@
 //
 // The numbers below are budgets, not measurements of a good day: they are set well above what the
 // code does now, so this fails when something gets slower rather than when a machine is busy.
+import 'package:desk/feelings/builtins.dart';
 import 'package:desk/feelings/registry.dart';
 import 'package:desk/spine/event.dart';
 import 'package:desk/spine/projections/state.dart';
@@ -95,23 +96,47 @@ void main() {
     // and then answered byId with a linear scan. That is the whole year, five times, per frame.
     final build = _ms(() => FeelingRegistry(year));
     final registry = FeelingRegistry(year);
+    final feelings = registry.all;
+    Feeling? scanFor(String id) {
+      for (final f in feelings) {
+        if (f.id == id) return f;
+      }
+      return null;
+    }
+
+    const rounds = 2000;
     final lookups = _ms(() {
-      for (var i = 0; i < 2000; i++) {
+      for (var i = 0; i < rounds; i++) {
         registry.byId('hold');
         registry.byId('made_3');
         registry.byId('not a feeling');
       }
     });
+    // The same questions, answered the way this used to answer them. Both halves are timed on the
+    // same machine within a few milliseconds of each other, so a container under load slows them
+    // together and the ratio stands — which a fixed microsecond ceiling did not: 20,000 us for
+    // 6,000 lookups went red on one full-suite run in four, and a red suite aborts a capture.
+    final scanned = _ms(() {
+      for (var i = 0; i < rounds; i++) {
+        scanFor('hold');
+        scanFor('made_3');
+        scanFor('not a feeling');
+      }
+    });
     expect(registry.byId('made_3')?.name, 'the 3 one');
     expect(registry.byId('hold'), isNotNull);
     expect(registry.byId('nope'), isNull);
-    // 6000 lookups is far more than a frame ever does; if this is not effectively free it is a
-    // scan rather than a lookup
-    expect(lookups, lessThan(20000),
-        reason: 'byId took ${lookups}us for 6000 lookups — that is a linear scan');
+    expect(scanFor('made_3')?.name, 'the 3 one', reason: 'the control does not answer the question');
+    // A hashed lookup over a library this size is not a little faster than the walk, it is a
+    // different shape of work. Ten is far below the ratio a map actually gives (the walk crosses
+    // hundreds of feelings per miss) and far above anything two constant-time paths could show.
+    expect(lookups * 10, lessThan(scanned),
+        reason: '${rounds * 3} lookups took ${lookups}us against ${scanned}us of linear scan '
+            '— byId is walking the library rather than indexing it');
     expect(build, lessThan(60000), reason: 'building the registry took ${build}us');
     // ignore: avoid_print
-    print('registry: build ${build}us, 6000 lookups ${lookups}us');
+    print('registry: build ${build}us, ${rounds * 3} lookups ${lookups}us, '
+        'the same by linear scan ${scanned}us');
   });
 
   test('the first projection of a year is slow, and it only happens once', () {
