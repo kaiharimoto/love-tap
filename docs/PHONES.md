@@ -108,23 +108,44 @@ phone is the only thing that will ever serve it, so it is built first and packed
 **What the iPhone is given** below for what that costs and why it is not another eighty megabytes.
 
 `--split-per-abi --target-platform android-arm64` is not optional advice. Without it the APK
-carries three architectures and measures 145 MB, of which 38.6 MB is engines and app images for
-phones you do not have; the arm64 one is 101 MB, and every Android phone made this decade is
-arm64. The 78 MB that remains is the material library — the paper, the tears, the objects and the
-folds — which is the app rather than overhead.
+carries three architectures, of which 38.6 MB is engines and app images for phones you do not
+have, and every Android phone made this decade is arm64.
 
-Both numbers were measured on builds made here, and `tools/check/apk.py` reads them, and the
-certificate, out of whatever APK is on disk:
+The arm64 build measures **101.8 MB**, and almost all of it is the app rather than overhead:
+
+    62.4 MB   the material library — paper, tears, objects, folds, fonts, ink
+    29.3 MB   canvaskit, which is the iPhone's engine and is carried for it
+    21.1 MB   this phone's own engine
+     3.6 MB   the web app's compiled code, also for the iPhone
+    12.6 MB   dex, resources, everything else
+
+Measured on the build made here, and `tools/check/apk.py` reads those numbers, the certificate and
+the web app out of whatever APK is on disk:
 
     python3 tools/check/apk.py --out evidence/logs/apk.json
 
-It says who signed it. A build with no `key.properties` comes back `CN=Android Debug`; the one
-made with a key comes back with your own name on it. `evidence/logs/apk.json` records both, from
-this machine — the signed one used a throwaway key generated into /tmp and destroyed straight
-after, which is why the distinguished name in it says so.
+It says who signed it. A build with no `key.properties` comes back `CN=Android Debug`; the one made
+with a key comes back with your own name on it. It also fails a build carrying no `assets/pwa/`,
+because an APK that cannot answer Safari is one whose step 4 ends at a 404.
 
 `--dart-define=SEED=year` is how the seeded history gets compiled in, and you do not want it: it
 is for the evidence captures. A build without it starts empty, which is what a real phone wants.
+
+### While the app is open, and not after
+
+The host is an Activity. The log, the server and the certificate all live in the Dart isolate that
+Android starts when the app is opened and stops when it is not, so the Android phone answers the
+iPhone *while somebody has it open*, and does not while it is in a pocket with the screen off.
+
+What that means in practice: the iPhone writes into its own copy whenever it likes, and what it
+wrote crosses the next time the Android app is opened. Nothing is lost — both phones keep
+everything either of them wrote, and the sync engine catches up from the cursor — but it is not
+live unless both are awake.
+
+The fix is a foreground service: a notification the owner can see, holding the isolate up so the
+server stays bound. It is not built. It is the largest thing still missing from the two-phone half
+of this, and it should be built before anyone relies on a message arriving while their phone is
+face down on a table.
 
 ### What the iPhone is given
 

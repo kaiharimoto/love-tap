@@ -3,6 +3,57 @@
 The state handed to the next session. `docs/BRIEF.md` is the mission and wins over this file.
 Branch: `claude/new-session-f95s8n`.
 
+## The goal changed: a build in their hands
+
+The owner's instruction, mid-session: *"I'd say paper texture is good enough. Let's focus on
+everything else and finish this so I can test it and give feedback."* So the brief's 95-with-every-
+floor exit condition is not what the work is aimed at any more. What is aimed at is two phones with
+this on them. Dropped on that instruction, and not to be picked back up without being asked:
+ruled-line alignment, the three untextured feeling objects, the contact-shadow overshoot, any
+further tear-library work, and 09/16 as a scoring concern.
+
+What that turned up, in the order it was found:
+
+**The scroll's real cost, fixed and measured.** `tearFor` stepped through all forty-seven writable
+tears; each note decodes three images (silhouette, lit edge, contact shadow) against a forty-eight
+entry `MaskCache`, so a fling walked a hundred and forty-one images through a cache of forty-eight
+and every note that came into view evicted one that was about to arrive.
+
+    pool 47, cache 48   886 frames  p50 9 ms  p95 781 ms  196 over 400 ms  396 masks dropped
+    whole pool cached   630 frames  p50 4 ms  p95  31 ms    1 over 400 ms    0 masks dropped
+
+Holding all of them costs about 334 MB of decoded alpha (1024 x 578 x 4 a mask), which is not a
+trade to make on a phone. `kTearsInPlay = 16` is sixteen tears, forty-eight images, the cache
+exactly; the brief's rule is about tears visible *at once* and the coprime stride puts a repeat
+sixteen notes away, off the bottom of any phone.
+
+**The iPhone had nothing to install.** This is the one that mattered. `docs/PHONES.md` step 4 says
+to open the host's address in Safari and add the page to the home screen; `main.dart` never passed
+a bundle to its own server, so `_serveStatic` answered 404 to every GET and the whole client half
+of the product had no way to exist. Nothing failed anywhere — the setup list went on ticking the
+step. Now `tools/pack_pwa.py` packs the web build (minus the material library, which the phone
+already holds) into Android's own assets, `lovetap/pwa` reads it back off the platform thread,
+`pwa_assets.dart` joins the two asset layouts, and `tools/check/apk.py` fails a build that does not
+carry it. The pairing field defaults to the page's own origin instead of a loopback address that
+could never be right on a phone.
+
+**The 401 was my own misreading**, not a defect — see the strikethrough in section 4.
+
+**The APK that exists.** `evidence/logs/apk.json`: 101.8 MB, arm64 only, `CN=love-tap` rather than
+`CN=Android Debug`, carrying `assets/pwa/index.html`, canvaskit and `push/sw.js`. Built from
+`app/assets` packed **without** the seed. The keystore that signed it was handed to the owner and
+is not in this repository and never was; a later build signed with a different key cannot replace
+it on the phone without uninstalling, which takes the log, so that file is the thing to ask them
+for rather than to make again.
+
+**The largest thing still missing: the host only serves while the app is open.** There is no
+foreground service. The Dart isolate that holds the log, the HTTP server and the certificate is the
+Activity's, so the Android phone answers the iPhone while somebody has it open and not while it is
+in a pocket. Nothing is lost — both phones keep what they wrote and the cursor catches up — but it
+is not live unless both are awake, which is not what "a complete messenger" means. Written down in
+`docs/PHONES.md` under *While the app is open, and not after*. Build it before anyone relies on a
+message arriving while their phone is face down.
+
 ## Release readiness, which is now part of the goal
 
 The goal was extended mid-session: past the brief's 95 with every floor met, to *ready to release

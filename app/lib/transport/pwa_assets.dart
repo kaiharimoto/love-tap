@@ -47,9 +47,10 @@ Future<Uint8List?> pwaFile(String urlPath) async {
 
 /// Whether this build carries a web app to hand over at all.
 ///
-/// The setup list asks before it tells anyone to open an address in Safari: a host with no bundle
-/// in it is a host with nothing on the other end of that instruction, and saying so is better than
-/// letting the iPhone find a 404.
+/// Not wired into the setup list yet — `tools/check/apk.py` fails a build with no `assets/pwa/` in
+/// it, which catches this before a phone ever sees it. This is here for the screen that should
+/// eventually say so out loud, because a host with no bundle is a host with nothing on the other
+/// end of "open this address in Safari", and the iPhone would find only a 404.
 Future<bool> pwaInThisBuild() async {
   if (kIsWeb) return false;
   try {
