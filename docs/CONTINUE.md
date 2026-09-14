@@ -270,12 +270,17 @@ from outside the spine.
 
 ### Also carried, measured and unfixed
 
-- **A 401 leaves the link reading `connected`.** In `11_chat_scroll` and `15_authored_feeling` the
-  pull is refused — `401 the signature does not match` — and 11 shows 212 rounds, 0 pulled, with
-  `link: connected` throughout. The browser profile now persists across scenes, which is what made
-  the cold start cheap, and carries a pairing the far phone rejects. The stale pairing is the cause;
-  the link state not moving is the fault, and it is the same shape as the one cycle 12 fixed for an
-  injected cut.
+- **~~A 401 leaves the link reading `connected`.~~ Wrong — I misread the field.** I recorded this
+  as a blocking-adjacent fault in the cycle-13 builder's sheet and here, from
+  `rounds: 212, pulled: 0, faults: 1` in `11_chat_scroll.report.json`. `_pulled` counts *events
+  pulled down* (`_pulled += res.events.length`), not successful rounds: a client already at the
+  head of the log pulls nothing and that is correct. One request of 212 was refused, which is below
+  the three-in-a-row `http_transport.dart` requires before it says "the other phone does not know
+  this pairing" in words — so the app behaved exactly as designed and recovered. The one 401 is a
+  stale pairing carried by the browser profile that now persists across scenes; it is capture
+  hygiene, not an app fault. The builder's sheet for cycle 13 is left as written, because it is the
+  record of what was claimed before the reports were read; this is the correction.
+
 - **The contact shadow overshot.** 15.0 to 24.6 grey levels under a sheet against a floor of 6, and
   `holes.py` counts six of ten stills over its 200-pixel allowance of pixels beside the paper darker
   than ink — 895 in Us, 643 in Pulse, darkest 22 to 28 against ink at 30. The lever is the bake's
