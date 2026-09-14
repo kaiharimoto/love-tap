@@ -1,6 +1,6 @@
 {
  "from": "/home/user/love-tap/app/build/web",
- "files": 37,
+ "files": 36,
  "mb": 35.2,
  "index_sha256_16": "cdef4bafae0887e1",
  "served_from_the_apps_own_assets": {
@@ -9,7 +9,8 @@
   "why": "the material library is in flutter_assets already; pwa_assets.dart maps assets/assets/<x> onto this build's own assets/<x>"
  },
  "left_out": {
-  "symbols": 6
+  "symbols": 6,
+  "dotfiles": 1
  },
  "biggest": [
   {

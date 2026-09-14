@@ -38,6 +38,11 @@ DEST = REPO / "app/android/app/src/main/assets/pwa"
 SHARED = "assets/assets/"
 # Fetched by nothing. Seven megabytes of canvaskit symbol tables.
 SKIP_SUFFIX = (".symbols",)
+# Android's packager drops every asset whose name begins with a dot, so a dotfile packed here is
+# counted in and then silently absent from the APK. `.last_build_id` is a Flutter build stamp and
+# no browser asks for it; it is left out here so the two counts agree and nobody has to find out
+# why by unzipping an APK.
+SKIP_DOTFILES = True
 
 
 def pack(src: Path, dest: Path) -> dict:
@@ -47,7 +52,7 @@ def pack(src: Path, dest: Path) -> dict:
         shutil.rmtree(dest)
     dest.mkdir(parents=True)
 
-    kept, shared, skipped = [], 0, 0
+    kept, shared, skipped, dotfiles = [], 0, 0, 0
     shared_bytes = 0
     for path in sorted(src.rglob("*")):
         if not path.is_file():
@@ -59,6 +64,9 @@ def pack(src: Path, dest: Path) -> dict:
             continue
         if rel.endswith(SKIP_SUFFIX):
             skipped += 1
+            continue
+        if SKIP_DOTFILES and path.name.startswith("."):
+            dotfiles += 1
             continue
         out = dest / rel
         out.parent.mkdir(parents=True, exist_ok=True)
@@ -80,7 +88,7 @@ def pack(src: Path, dest: Path) -> dict:
             "why": "the material library is in flutter_assets already; pwa_assets.dart maps "
                    "assets/assets/<x> onto this build's own assets/<x>",
         },
-        "left_out": {"symbols": skipped},
+        "left_out": {"symbols": skipped, "dotfiles": dotfiles},
         "biggest": [
             {"what": rel, "mb": round(size / 1e6, 2)}
             for rel, size in sorted(kept, key=lambda k: -k[1])[:8]

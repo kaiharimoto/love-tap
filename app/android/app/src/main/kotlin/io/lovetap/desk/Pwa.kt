@@ -1,9 +1,12 @@
 package io.lovetap.desk
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.io.IOException
+import java.util.concurrent.Executors
 
 /**
  * The web app, as the phone that serves it holds it.
@@ -13,16 +16,24 @@ import java.io.IOException
  * every static GET on a real host answered 404 and step four of docs/PHONES.md — open the host's
  * address in Safari, add to home screen — could not be followed.
  *
- * What is in here is the web build with `assets/assets/**` taken out of it: the page, the engine,
- * the service worker, the icons. The eighty megabytes that were removed are the material library,
- * and the phone already has those in its own `flutter_assets`; the Dart side serves that half out
- * of `rootBundle` and this half out of here, and the browser cannot tell the difference.
+ * What is in here is the web build with everything under `assets/assets` taken out of it: the
+ * page, the engine, the service worker, the icons. The eighty megabytes that were removed are the
+ * material library, and the phone already has those in its own `flutter_assets`; the Dart side
+ * serves that half out of `rootBundle` and this half out of here, and the browser cannot tell the
+ * difference.
  *
  * It lives in Android's own assets rather than Flutter's for one reason: anything under
  * `app/assets/` is bundled into `flutter build web` as well, so a copy of the web build stored
  * there would be packed inside the next web build, and inside the one after that.
  */
 object Pwa {
+    // Off the platform thread. Handing the iPhone the bundle is about forty megabytes in thirty-odd
+    // requests, one of them a seven-megabyte wasm, and every one of those reads would otherwise
+    // happen on the thread that draws — so the person holding the Android phone would watch it
+    // stutter for as long as the other phone is installing.
+    private val reads = Executors.newSingleThreadExecutor()
+    private val main = Handler(Looper.getMainLooper())
+
     fun attach(context: Context, engine: FlutterEngine) {
         MethodChannel(engine.dartExecutor.binaryMessenger, "lovetap/pwa").setMethodCallHandler { call, result ->
             when (call.method) {
@@ -33,12 +44,19 @@ object Pwa {
                     if (path == null || !safe(path)) {
                         result.success(null)
                     } else {
-                        result.success(read(context, "pwa/$path"))
+                        // The reply has to come back on the platform thread; the reading does not.
+                        reads.execute {
+                            val bytes = read(context, "pwa/$path")
+                            main.post { result.success(bytes) }
+                        }
                     }
                 }
                 // Whether there is a web app in here at all, which is what the setup list wants to
                 // know before it tells anyone to open an address in Safari.
-                "present" -> result.success(read(context, "pwa/index.html") != null)
+                "present" -> reads.execute {
+                    val there = read(context, "pwa/index.html") != null
+                    main.post { result.success(there) }
+                }
                 else -> result.notImplemented()
             }
         }
