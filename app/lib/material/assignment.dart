@@ -96,9 +96,32 @@ String stockVariantFor(Event e, MaterialLibrary lib, {bool dusk = false, String?
 /// surfaces were looking at two different pieces of paper. So the row does not come into it at
 /// all: the same note is the same piece of paper wherever you meet it, and two notes that happen
 /// to hash together is what happens when fifty edges are shared among fourteen thousand notes.
+/// How many different torn edges the scrolling surfaces share between them.
+///
+/// Every note needs three decoded images — the silhouette, the lit edge and the contact shadow —
+/// and `MaskCache` holds forty-eight of them. The pool was every writable mask, forty-seven of
+/// them, which is a hundred and forty-one images: a fling walks the whole pool, so every note that
+/// came into view evicted one that was about to.
+///
+/// Measured on the same fling, twice, through the capture's own instrument:
+///
+///     pool 47, cache 48    886 frames   p50 9 ms   p95 781 ms   196 over 400 ms   144.4 s of build
+///     whole pool cached    630 frames   p50 4 ms   p95  31 ms     1 over 400 ms     6.3 s of build
+///
+/// Twenty-three times the work, and 396 masks dropped and decoded again in one throw. Holding all
+/// of them is the other way to fix it and it costs about 266 MB of decoded alpha on a phone, which
+/// is not a trade worth making for edges nobody can tell apart at a glance.
+///
+/// Sixteen is what the rule actually needs. The brief says no two tears visible *at once* may be
+/// the same; a screen holds five to eight notes, and with the coprime stride below a repeat is
+/// sixteen consecutive notes away, which is off the bottom of any phone. Sixteen tears is
+/// forty-eight images, which is the cache exactly.
+const int kTearsInPlay = 16;
+
 String? tearFor(Event e, MaterialLibrary lib, {bool writable = true, int row = 0}) {
-  final masks = writable ? lib.writableTears : lib.tearMasks;
-  if (masks.isEmpty) return null;
+  final all = writable ? lib.writableTears : lib.tearMasks;
+  if (all.isEmpty) return null;
+  final masks = all.length <= kTearsInPlay ? all : all.sublist(0, kTearsInPlay);
   final n = masks.length;
   final stride = _coprimeStride(n);
   // The event's own sequence number, which is the same on both phones and on every surface that
