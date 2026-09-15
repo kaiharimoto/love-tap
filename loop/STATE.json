@@ -150,6 +150,11 @@
    "what": "confirmation that a Routine-fired session can run unattended",
    "why": "create_trigger exposes no permission_mode. If firings stall on a permission prompt the fix is the environment's default mode, which only the owner can set. Firing 1 establishes whether this is a problem at all.",
    "blocks_the_loop": true
+  },
+  {
+   "what": "attach kaiharimoto/love-tap as a source on the Routine, and give it the Routine tools",
+   "why": "create_trigger stores neither. Step 0 of the prompt clones the repo as a fallback, so the loop should run either way; this only removes a clone per firing and lets a firing drop its own cron to weekly when the build is done.",
+   "blocks_the_loop": false
   }
  ],
  "last_score": {
@@ -171,5 +176,16 @@
    "commit": "58cbd69f8330107e50654a43e45ea236a5f55eb6",
    "did": "built the loop: CLAUDE.md, docs/LOOP.md, this file, the visual_design critic and its two measuring tools, the sixth rubric row, and the folds family surfaces.py never read. Measured the committed artifacts for the first time."
   }
- ]
+ ],
+ "routine": {
+  "trigger_id": "trig_019fzuH5wgjru9hF23A918wN",
+  "name": "love-tap improvement loop",
+  "cron": "29 */3 * * *",
+  "environment_id": "env_01AwdDmmUR8beGj9YmeYaPVm",
+  "fresh_session_per_firing": true,
+  "known_limits": [
+   "A fired session has no MCP tools at all -- no GitHub tools, no Routine tools. Everything is plain git over HTTPS. A firing therefore cannot change the Routine's own schedule, so the terminal-state step in docs/LOOP.md that drops the cron to weekly has to be recorded in asks[] instead of done.",
+   "The Routine stores no repository source, so a fired session may start with no checkout. The prompt's step 0 finds or clones it; if that fails the firing reports it rather than improvising, and the fix is for the owner to attach the repo to the Routine."
+  ]
+ }
 }
