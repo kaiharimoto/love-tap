@@ -37,6 +37,12 @@ FLOORS = {
     "paper": 1.2,      # tooth and fibre: quiet, but never nothing
     "shell": 4.0,      # a desk is wood, and wood has figure in it
     "objects": 2.0,    # a rendered thing has form; a flat one has not been lit
+    # The family this file did not read, and the one the material row is judged on. 281 of the
+    # 320 frames of 06_unfolding.mp4 were a flat cream rectangle and nothing here objected,
+    # because fold frames live one directory deeper than every other family -- folds/<name>/NNNN
+    # -- so even naming the family was not enough on its own. Same floor as paper: a fold is
+    # paper, and it has to carry the tooth the stocks carry.
+    "folds": 1.2,
 }
 PATCH = 200
 
@@ -86,8 +92,13 @@ def main():
     for family, floor in FLOORS.items():
         if args.floor:
             floor = args.floor
-        for path in sorted(glob.glob(os.path.join(ASSETS, family, "*.webp"))):
+        found = sorted(glob.glob(os.path.join(ASSETS, family, "*.webp")))
+        found += sorted(glob.glob(os.path.join(ASSETS, family, "*", "*.webp")))
+        for path in found:
             name = os.path.basename(path)
+            # folds/<name>/NNNN.webp sits a directory deeper than the rest
+            rel = os.path.relpath(path, os.path.join(ASSETS, family))
+            name = rel if os.sep in rel else name
             if "_shadow" in name or "_mask" in name:
                 continue      # a shadow is meant to be smooth; that is what a shadow is
             a = read(path)

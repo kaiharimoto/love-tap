@@ -1,0 +1,175 @@
+{
+ "v": 1,
+ "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
+ "cycle": 3,
+ "stage": "DESIGN",
+ "firing": 0,
+ "stage_entered_at_firing": 0,
+ "lease": null,
+ "evidence_fresh_as_of": null,
+ "evidence_note": "The 14 artifacts on disk were captured before the fixes listed in docs/CONTINUE.md section 2, so they are stale for scoring and fine for designing against: they are what the build actually looks like today.",
+ "degradation": 4,
+ "design": {
+  "verdict": "pending",
+  "decided_at_cycle": null,
+  "frozen_until_cycle": 0
+ },
+ "measured_at_firing_0": {
+  "legibility": {
+   "runs": 834,
+   "below_floor": 404,
+   "share_below_floor": 0.484,
+   "the_shape_of_it": "17_setup_pwa.png is the one still with no desk in it and the one still with no failures in it. Every artifact that shows the desk has between a third and three quarters of its marks below floor.",
+   "worst_confirmed": "the composer placeholder in 02_chat.png: Pen.onWood #BFB2A0 written straight onto the waxed oak, measured at 1.56:1 where the pair is 4.94:1 flat-on-flat. The desk has grain and the grain runs through the letters.",
+   "second_confirmed": "14_media_viewer.png dims the whole sheet and takes the ink down with it: body text at 1.43:1."
+  },
+  "palette": {
+   "mean_chroma": 0.025,
+   "grey_fraction": 0.0324,
+   "hue_families": [
+    4,
+    6
+   ],
+   "lightness_drift": 0.6083,
+   "the_shape_of_it": "mean chroma 0.025 in OKLab is close to neutral -- a saturated colour runs 0.1 to 0.3. This is what 'it doesn't evoke cuteness' looks like as a number. The lightness median runs from 0.34 to 0.95 across the set, so the screens do not agree with each other about how dark the app is."
+  }
+ },
+ "queue": [
+  {
+   "id": "design-colour-law",
+   "why": "visual_design, the row the owner asked for; blocks everything else in the look",
+   "measurement": "docs/COLOR.md exists and states the lightness ladder, hue relationships, chroma ceiling per band and contrast floors in numbers tools/check/palette.py can be pointed at",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0
+  },
+  {
+   "id": "desk-verdict",
+   "why": "visual_design + material_truth; the owner named the desk specifically",
+   "measurement": "a dated entry in DIRECTION.md's decisions log naming keep-and-retune or replace, and the measurement that forced it",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0
+  },
+  {
+   "id": "on-desk-text-legibility",
+   "why": "visual_design 0; confirmed at 1.56:1 against a 4.5:1 floor",
+   "measurement": "tools/check/legibility.py reports no body run below 4.5:1 in 02_chat.png",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0
+  },
+  {
+   "id": "media-viewer-scrim",
+   "why": "visual_design + messenger_reliability; body text at 1.43:1",
+   "measurement": "tools/check/legibility.py reports no body run below 4.5:1 in 14_media_viewer.png",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0
+  },
+  {
+   "id": "legible-test-thresholds",
+   "why": "the guard that should have caught both of the above and did not",
+   "measurement": "app/test/legible_on_what_it_is_on_test.dart fails when Pen.margin is put back to a value that only clears 4.5:1 on the palest stock",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "Hands.onDesk defaults to size 13 and Hands.stamp to size 12, and the test asserts the 3:1 large-text floor for both. At 12-13px the floor is 4.5:1. Separately, Pen.margin clears 4.5 only on Paper.lined: it is 4.05 on aged, 4.01 on stickyYellow, 4.22 on legal and 4.47 on graph, and the test checks only lined."
+  },
+  {
+   "id": "moments-lazy-gallery",
+   "why": "messenger_reliability; Moments shows five 'still fetching the picture.' rows and no thumbnail",
+   "measurement": "app/test/scroll_cost_test.dart, with a case that fails against the SingleChildScrollView",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "moments_region.dart:293 has no lazy child model, so all 183 tiles build at once -- 129 concurrent IndexedDB reads. _Gallery already computes each tile's height, so it knows each tile's top. blob_widgets.dart:50 passes no cacheWidth."
+  },
+  {
+   "id": "surfaces-folds-family",
+   "why": "material_truth + anti_goal; 281 of 320 frames of 06_unfolding.mp4 are a flat rectangle",
+   "measurement": "tools/check/surfaces.py reports the folds family and fails on frames below 1.2",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "done at firing 0: the family and the recursive glob are in. The re-render of blender/folds/fold.py with the tooth the stocks carry is what remains."
+  },
+  {
+   "id": "spine-all-in-build",
+   "why": "coherence; 14k events walked per frame in two regions",
+   "measurement": "a case in app/test/scroll_cost_test.dart with a budget, as the existing ones have",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "moments_region.dart:42 and us_region.dart:26 call scope.spine.all inside build(); Spine.countOf is O(n) and runs on every change."
+  },
+  {
+   "id": "feeling-families-visible",
+   "why": "emotional_transmission; four families visible where the floor is five",
+   "measurement": "a widget test that counts the families the corner renders",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "corner.dart:271 iterates Family.values, all six, so this is a layout overflow."
+  },
+  {
+   "id": "haptic-evidence",
+   "why": "emotional_transmission; no haptic pattern is recorded anywhere in evidence/",
+   "measurement": "an evidence file naming every feeling's duration, envelope and strip",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0
+  },
+  {
+   "id": "texture-budget-tool",
+   "why": "coherence; a gate the build believes it has and does not",
+   "measurement": "tools/check/texture_budget.py exists and runs, or the claim is deleted from TASK_STATE.md and docs/CONTINUE.md",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0
+  }
+ ],
+ "blocked": null,
+ "asks": [
+  {
+   "what": "a host with /dev/kvm, or an ARM64 host",
+   "why": "09_two_devices.png and 16_setup_android.png cannot be captured without one, and 09 is a designated hero and a brief exit condition. Three routes were tried and measured; docs/PHONES.md records all three. The loop can meet every floor it is able to meet and still not be able to declare completion.",
+   "blocks_the_loop": false
+  },
+  {
+   "what": "TS_AUTHKEY",
+   "why": "the Tailscale phase. docs/CONTINUE.md section 6 records that this was asked once already and may not be asked again, so it is recorded here and the loop moves on.",
+   "blocks_the_loop": false
+  },
+  {
+   "what": "the four Android signing secrets",
+   "why": "a release build. Not needed for any rubric row.",
+   "blocks_the_loop": false
+  },
+  {
+   "what": "confirmation that a Routine-fired session can run unattended",
+   "why": "create_trigger exposes no permission_mode. If firings stall on a permission prompt the fix is the environment's default mode, which only the owner can set. Firing 1 establishes whether this is a problem at all.",
+   "blocks_the_loop": true
+  }
+ ],
+ "last_score": {
+  "cycle": 2,
+  "total": 55.5,
+  "scale": 120,
+  "by_category": {
+   "messenger_reliability": 19,
+   "material_truth": 15,
+   "emotional_transmission": 6,
+   "coherence": 10.5,
+   "anti_goal": 5
+  }
+ },
+ "history": [
+  {
+   "firing": 0,
+   "stage": "SCAFFOLD",
+   "commit": "58cbd69f8330107e50654a43e45ea236a5f55eb6",
+   "did": "built the loop: CLAUDE.md, docs/LOOP.md, this file, the visual_design critic and its two measuring tools, the sixth rubric row, and the folds family surfaces.py never read. Measured the committed artifacts for the first time."
+  }
+ ]
+}

@@ -7,10 +7,33 @@
 # one AVD ("lovetap", 1440x3120), Blender (pinned, headless CPU), ffmpeg (static),
 # tailscaled + tailscale (pinned, userspace mode, two state directories), Playwright WebKit.
 #
+#   ./bootstrap.sh --profile=web    everything except the Android SDK, the NDK and the AVD
+#
+# The web profile exists because a container with no /dev/kvm cannot run the emulator — the
+# x86_64 image under QEMU instruction emulation reached adbd after 113 minutes and never reached
+# the framework, and docs/PHONES.md records that and two other routes. So on such a host the
+# Android half is 2.1 GB of NDK and several minutes of download that buy nothing, and a capture
+# has already died on ENOSPC once with those packages installed. The flag skips those three
+# stages by name rather than by forging their markers, so a later `./bootstrap.sh` with no flag
+# still installs them and an APK build does not fail for an invisible reason.
+#
 # Every stage is idempotent: a marker under toolchain/.done/ skips it on re-run.
 # Prerequisites that this script cannot install itself are checked first and named.
 # TS_AUTHKEY is never written to disk; its absence is recorded as "pending".
 set -euo pipefail
+
+PROFILE="full"
+for a in "$@"; do
+  case "$a" in
+    --profile=*) PROFILE="${a#*=}" ;;
+    -h|--help) sed -n '2,20p' "$0"; exit 0 ;;
+    *) echo "bootstrap.sh: don't know $a" >&2; exit 2 ;;
+  esac
+done
+case "$PROFILE" in
+  full|web) ;;
+  *) echo "bootstrap.sh: --profile must be full or web, not $PROFILE" >&2; exit 2 ;;
+esac
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TC="$ROOT/toolchain"
@@ -42,6 +65,16 @@ say()  { printf '\n-- %s\n' "$*"; }
 die()  { printf '\nbootstrap stopped: %s\n' "$*" >&2; exit 2; }
 done_() { [ -f "$DONE/$1" ]; }
 mark() { touch "$DONE/$1"; }
+# A stage the chosen profile does not want. Says so once, rather than being silently absent:
+# a toolchain that is missing on purpose and a toolchain that failed look identical afterwards.
+skipped() {
+  case "$PROFILE:$1" in
+    web:cmdline-tools|web:android-sdk|web:avd)
+      done_ "$1" || say "skipping $1 (--profile=web)"
+      return 0 ;;
+  esac
+  return 1
+}
 
 # ---- prerequisites the script cannot install (named, not guessed) --------------------------
 missing=()
@@ -103,7 +136,7 @@ export ANDROID_SDK_ROOT="$ANDROID_HOME"
 export ANDROID_USER_HOME="$TC/android-user"
 export ANDROID_AVD_HOME="$ANDROID_USER_HOME/avd"
 mkdir -p "$ANDROID_HOME" "$ANDROID_AVD_HOME"
-if ! done_ cmdline-tools; then
+if ! skipped cmdline-tools && ! done_ cmdline-tools; then
   say "Android cmdline-tools $CMDLINE_TOOLS_ID"
   fetch "$CMDLINE_TOOLS_URL" "$DL/cmdline-tools-${CMDLINE_TOOLS_ID}.zip"
   rm -rf "$ANDROID_HOME/cmdline-tools"
@@ -114,14 +147,14 @@ if ! done_ cmdline-tools; then
 fi
 export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
 SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
-if ! done_ android-sdk; then
+if ! skipped android-sdk && ! done_ android-sdk; then
   say "Android SDK packages"
   yes | "$SDKMANAGER" --sdk_root="$ANDROID_HOME" --licenses >/dev/null || true
   "$SDKMANAGER" --sdk_root="$ANDROID_HOME" --install \
     "platform-tools" "$ANDROID_PLATFORM" "$ANDROID_BUILD_TOOLS" "emulator" "$ANDROID_SYSIMG"
   mark android-sdk
 fi
-if ! done_ avd; then
+if ! skipped avd && ! done_ avd; then
   say "AVD $AVD_NAME (1440x3120, software GPU)"
   echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force \
     -n "$AVD_NAME" -k "$ANDROID_SYSIMG" -d "pixel_7_pro" >/dev/null

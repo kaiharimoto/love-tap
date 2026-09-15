@@ -24,11 +24,18 @@ CATEGORIES = {
     "emotional_transmission": {"weight": 20, "floor": 17},
     "coherence": {"weight": 15, "floor": 13},
     "anti_goal": {"weight": 10, "floor": 9},
+    # Added 2026-09-15 at the owner's request, who asked for colour-theory guidance and an expert
+    # eye after reporting that text on the desk is hard to read and that the build does not feel
+    # warm. It is *added* rather than folded into the five, and the five keep their weights and
+    # floors exactly as the brief writes them, so cycle 1's 40 and cycle 2's 55.5 still mean what
+    # they meant. The scale becomes 120 and the exit threshold stays 95 percent of it.
+    "visual_design": {"weight": 20, "floor": 17},
 }
 # The code critic reads app/ and scores the half of coherence that cannot be seen in an artifact.
 # Its score is folded into coherence as the lower of the two readings, for the same reason.
 FOLDS_INTO = {"code": "coherence"}
-EXIT = 95
+SCALE = sum(c["weight"] for c in CATEGORIES.values())   # 120
+EXIT = round(0.95 * SCALE)                             # 114
 
 
 def load_reports(cycle):

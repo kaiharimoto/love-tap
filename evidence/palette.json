@@ -1,0 +1,386 @@
+{
+ "space": "OKLab",
+ "sampled_long_edge": 700,
+ "artifacts": {
+  "01_pulse.png": {
+   "lightness": {
+    "p2": 0.4138,
+    "p50": 0.7839,
+    "p98": 0.9522,
+    "span": 0.5385
+   },
+   "value_bands": {
+    "ground": 0.4541,
+    "mid": 0.0424,
+    "figure": 0.5035
+   },
+   "chroma": {
+    "mean": 0.0291,
+    "p99": 0.056,
+    "grey_fraction": 0.0178
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0337,
+     "p99_chroma": 0.0422
+    },
+    "mid": {
+     "mean_chroma": 0.0204,
+     "p99_chroma": 0.0622
+    },
+    "figure": {
+     "mean_chroma": 0.0256,
+     "p99_chroma": 0.0598
+    }
+   },
+   "hue_families": 6,
+   "hue_centres_deg": [
+    55.0,
+    65.0,
+    75.0,
+    85.0,
+    95.0,
+    105.0
+   ],
+   "widest_hue_gap_deg": 310.0
+  },
+  "02_chat.png": {
+   "lightness": {
+    "p2": 0.397,
+    "p50": 0.5749,
+    "p98": 0.9504,
+    "span": 0.5534
+   },
+   "value_bands": {
+    "ground": 0.5016,
+    "mid": 0.0539,
+    "figure": 0.4445
+   },
+   "chroma": {
+    "mean": 0.025,
+    "p99": 0.0464,
+    "grey_fraction": 0.0177
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0334,
+     "p99_chroma": 0.0422
+    },
+    "mid": {
+     "mean_chroma": 0.0184,
+     "p99_chroma": 0.0398
+    },
+    "figure": {
+     "mean_chroma": 0.0162,
+     "p99_chroma": 0.0477
+    }
+   },
+   "hue_families": 6,
+   "hue_centres_deg": [
+    55.0,
+    65.0,
+    75.0,
+    85.0,
+    95.0,
+    105.0
+   ],
+   "widest_hue_gap_deg": 310.0
+  },
+  "03_us.png": {
+   "lightness": {
+    "p2": 0.4065,
+    "p50": 0.7875,
+    "p98": 0.979,
+    "span": 0.5725
+   },
+   "value_bands": {
+    "ground": 0.4465,
+    "mid": 0.0537,
+    "figure": 0.4998
+   },
+   "chroma": {
+    "mean": 0.0226,
+    "p99": 0.0464,
+    "grey_fraction": 0.02
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0334,
+     "p99_chroma": 0.0422
+    },
+    "mid": {
+     "mean_chroma": 0.0155,
+     "p99_chroma": 0.0475
+    },
+    "figure": {
+     "mean_chroma": 0.0137,
+     "p99_chroma": 0.0464
+    }
+   },
+   "hue_families": 6,
+   "hue_centres_deg": [
+    55.0,
+    65.0,
+    75.0,
+    85.0,
+    95.0,
+    105.0
+   ],
+   "widest_hue_gap_deg": 310.0
+  },
+  "04_moments.png": {
+   "lightness": {
+    "p2": 0.4055,
+    "p50": 0.495,
+    "p98": 0.978,
+    "span": 0.5725
+   },
+   "value_bands": {
+    "ground": 0.8187,
+    "mid": 0.0249,
+    "figure": 0.1564
+   },
+   "chroma": {
+    "mean": 0.0316,
+    "p99": 0.0464,
+    "grey_fraction": 0.0029
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0343,
+     "p99_chroma": 0.0422
+    },
+    "mid": {
+     "mean_chroma": 0.0214,
+     "p99_chroma": 0.0533
+    },
+    "figure": {
+     "mean_chroma": 0.0193,
+     "p99_chroma": 0.0597
+    }
+   },
+   "hue_families": 5,
+   "hue_centres_deg": [
+    55.0,
+    65.0,
+    85.0,
+    95.0,
+    105.0
+   ],
+   "widest_hue_gap_deg": 310.0
+  },
+  "05_settings.png": {
+   "lightness": {
+    "p2": 0.4327,
+    "p50": 0.9258,
+    "p98": 0.95,
+    "span": 0.5173
+   },
+   "value_bands": {
+    "ground": 0.2357,
+    "mid": 0.0628,
+    "figure": 0.7015
+   },
+   "chroma": {
+    "mean": 0.0212,
+    "p99": 0.0598,
+    "grey_fraction": 0.0264
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0325,
+     "p99_chroma": 0.0422
+    },
+    "mid": {
+     "mean_chroma": 0.017,
+     "p99_chroma": 0.0526
+    },
+    "figure": {
+     "mean_chroma": 0.0178,
+     "p99_chroma": 0.0598
+    }
+   },
+   "hue_families": 5,
+   "hue_centres_deg": [
+    65.0,
+    75.0,
+    85.0,
+    95.0,
+    105.0
+   ],
+   "widest_hue_gap_deg": 320.0
+  },
+  "10_first_run.png": {
+   "lightness": {
+    "p2": 0.4107,
+    "p50": 0.4948,
+    "p98": 0.9341,
+    "span": 0.5234
+   },
+   "value_bands": {
+    "ground": 0.8352,
+    "mid": 0.0157,
+    "figure": 0.1491
+   },
+   "chroma": {
+    "mean": 0.0308,
+    "p99": 0.0422,
+    "grey_fraction": 0.0066
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0345,
+     "p99_chroma": 0.0422
+    },
+    "mid": {
+     "mean_chroma": 0.0182,
+     "p99_chroma": 0.0532
+    },
+    "figure": {
+     "mean_chroma": 0.0115,
+     "p99_chroma": 0.023
+    }
+   },
+   "hue_families": 4,
+   "hue_centres_deg": [
+    55.0,
+    65.0,
+    85.0,
+    95.0
+   ],
+   "widest_hue_gap_deg": 320.0
+  },
+  "12_search.png": {
+   "lightness": {
+    "p2": 0.3739,
+    "p50": 0.9088,
+    "p98": 0.9524,
+    "span": 0.5785
+   },
+   "value_bands": {
+    "ground": 0.334,
+    "mid": 0.0568,
+    "figure": 0.6092
+   },
+   "chroma": {
+    "mean": 0.0233,
+    "p99": 0.0626,
+    "grey_fraction": 0.0288
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0318,
+     "p99_chroma": 0.042
+    },
+    "mid": {
+     "mean_chroma": 0.0166,
+     "p99_chroma": 0.054
+    },
+    "figure": {
+     "mean_chroma": 0.0192,
+     "p99_chroma": 0.0802
+    }
+   },
+   "hue_families": 6,
+   "hue_centres_deg": [
+    55.0,
+    65.0,
+    75.0,
+    85.0,
+    95.0,
+    105.0
+   ],
+   "widest_hue_gap_deg": 310.0
+  },
+  "14_media_viewer.png": {
+   "lightness": {
+    "p2": 0.2145,
+    "p50": 0.3387,
+    "p98": 0.9311,
+    "span": 0.7166
+   },
+   "value_bands": {
+    "ground": 0.5526,
+    "mid": 0.1664,
+    "figure": 0.281
+   },
+   "chroma": {
+    "mean": 0.0235,
+    "p99": 0.0689,
+    "grey_fraction": 0.1432
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0134,
+     "p99_chroma": 0.0482
+    },
+    "mid": {
+     "mean_chroma": 0.0569,
+     "p99_chroma": 0.0711
+    },
+    "figure": {
+     "mean_chroma": 0.0238,
+     "p99_chroma": 0.0685
+    }
+   },
+   "hue_families": 5,
+   "hue_centres_deg": [
+    55.0,
+    65.0,
+    75.0,
+    85.0,
+    95.0
+   ],
+   "widest_hue_gap_deg": 320.0
+  },
+  "17_setup_pwa.png": {
+   "lightness": {
+    "p2": 0.3751,
+    "p50": 0.947,
+    "p98": 0.959,
+    "span": 0.584
+   },
+   "value_bands": {
+    "ground": 0.2759,
+    "mid": 0.0475,
+    "figure": 0.6766
+   },
+   "chroma": {
+    "mean": 0.0182,
+    "p99": 0.0278,
+    "grey_fraction": 0.0285
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0265,
+     "p99_chroma": 0.0278
+    },
+    "mid": {
+     "mean_chroma": 0.0087,
+     "p99_chroma": 0.0225
+    },
+    "figure": {
+     "mean_chroma": 0.0154,
+     "p99_chroma": 0.0181
+    }
+   },
+   "hue_families": 4,
+   "hue_centres_deg": [
+    65.0,
+    75.0,
+    85.0,
+    95.0
+   ],
+   "widest_hue_gap_deg": 330.0
+  }
+ },
+ "across_the_set": {
+  "mean_chroma": 0.025,
+  "mean_lightness_span": 0.573,
+  "hue_families_min": 4,
+  "hue_families_max": 6,
+  "grey_fraction": 0.0324,
+  "lightness_drift": 0.6083
+ },
+ "read": 9
+}
