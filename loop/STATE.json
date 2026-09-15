@@ -5,7 +5,12 @@
  "stage": "DESIGN",
  "firing": 0,
  "stage_entered_at_firing": 0,
- "lease": null,
+ "lease": {
+  "session_id": "session_01Sv9t8YpsJAZRfxdT3ZFC2m",
+  "started_at": "2026-09-15T21:19:18Z",
+  "expires_at": "2026-09-15T23:19:18Z",
+  "stage": "DESIGN"
+ },
  "evidence_fresh_as_of": null,
  "evidence_note": "The 14 artifacts on disk were captured before the fixes listed in docs/CONTINUE.md section 2, so they are stale for scoring and fine for designing against: they are what the build actually looks like today.",
  "degradation": 4,
