@@ -64,8 +64,12 @@ def whose_signature(path):
     except Exception as e:                                   # noqa: BLE001
         return {"read": False, "why": str(e)}
     out = got.stdout
-    dn = re.search(r"Signer #1 certificate DN: (.+)", out)
-    sha = re.search(r"Signer #1 certificate SHA-256 digest: (\w+)", out)
+    # Two spellings, because the tools changed theirs. build-tools 36 and earlier say
+    # "Signer #1 certificate DN:"; 37 says "V2 Signer: certificate DN:" and nothing else. The
+    # first CI run ran on 37, matched neither, and reported an APK signed `CN=Android Debug` as
+    # not the debug key — which is the whole job of this function.
+    dn = re.search(r"(?:Signer #\d+|V\d+ Signer:) certificate DN: (.+)", out)
+    sha = re.search(r"(?:Signer #\d+|V\d+ Signer:) certificate SHA-256 digest: (\w+)", out)
     name = dn.group(1).strip() if dn else None
     if name is None:
         # This used to fall through with signed_by null and is_the_debug_key false, and say in
@@ -75,7 +79,7 @@ def whose_signature(path):
         # could read is not a signature that passed.
         return {
             "read": False,
-            "why": "apksigner ran and printed no 'Signer #1 certificate DN' line",
+            "why": "apksigner ran and printed no certificate DN line this could read",
             "apksigner": tool,
             "exit_code": got.returncode,
             "it_said": (out.strip() + ("\n" + got.stderr.strip() if got.stderr.strip() else ""))[:1200],
