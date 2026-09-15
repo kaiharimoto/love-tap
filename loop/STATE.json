@@ -2,15 +2,10 @@
  "v": 1,
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
- "stage": "DESIGN",
- "firing": 0,
- "stage_entered_at_firing": 0,
- "lease": {
-  "session_id": "session_01Sv9t8YpsJAZRfxdT3ZFC2m",
-  "started_at": "2026-09-15T21:19:18Z",
-  "expires_at": "2026-09-15T23:19:18Z",
-  "stage": "DESIGN"
- },
+ "stage": "IMPLEMENT",
+ "firing": 1,
+ "stage_entered_at_firing": 1,
+ "lease": null,
  "evidence_fresh_as_of": null,
  "evidence_note": "The 14 artifacts on disk were captured before the fixes listed in docs/CONTINUE.md section 2, so they are stale for scoring and fine for designing against: they are what the build actually looks like today.",
  "degradation": 4,
@@ -295,6 +290,15 @@
    "stage": "SCAFFOLD",
    "commit": "58cbd69f8330107e50654a43e45ea236a5f55eb6",
    "did": "built the loop: CLAUDE.md, docs/LOOP.md, this file, the visual_design critic and its two measuring tools, the sixth rubric row, and the folds family surfaces.py never read. Measured the committed artifacts for the first time."
+  },
+  {
+   "firing": 1,
+   "stage": "DESIGN",
+   "commit": "ebf1867",
+   "did": "ran the design authority as a fresh-context subagent briefed as an art director and colour specialist, given the stills, the two measurement files and the owner's words but deliberately not DIRECTION.md until it had formed its own judgment. Wrote docs/COLOR.md, 739 lines: a seven-step lightness ladder in OKLab, four hue families with centres and separations in degrees, a chroma ceiling and for the first time a chroma floor per band, contrast floors per light condition, and the rule that no word is set on a rendered ground. Verdict on the desk: keep and retune, dated in DIRECTION.md's decisions log. Three amendments to DIRECTION.md's palette; none to the brief's anti-goals. Eleven queue items, each naming a runnable measurement.",
+   "verdict": "keep and retune",
+   "checked_rather_than_asserted": "every declared constant in COLOR.md was re-derived from source before it was committed: the six ink lightnesses, Pen.red at chroma 0.1553 as the ceiling anchor, Paper.legal at 0.0805, the accent chromas, and the arithmetic that 4.5:1 against the plank's grain at Y 0.1467 requires ink at Y -0.006. The hue families' adjacent gaps sum to 360 and dropping family D leaves 155 degrees against a 150 ceiling, so the fourth family is forced rather than chosen.",
+   "one_thing_guessed": "the dusk contrast floors, 5.0 body and 4.5 large, are set from theory rather than from a measurement, because the set holds one dusk still and it is a crop. COLOR.md section 6 says so in as many words and names the capture that would settle it."
   }
  ],
  "routine": {
