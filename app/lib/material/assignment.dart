@@ -107,10 +107,17 @@ String stockVariantFor(Event e, MaterialLibrary lib, {bool dusk = false, String?
 ///
 ///     pool 47, cache 48    886 frames   p50 9 ms   p95 781 ms   196 over 400 ms   144.4 s of build
 ///     whole pool cached    630 frames   p50 4 ms   p95  31 ms     1 over 400 ms     6.3 s of build
+///     pool 16, cache 48    619 frames   p50 4 ms   p95  26 ms     0 over 400 ms     5.2 s of build
 ///
-/// Twenty-three times the work, and 396 masks dropped and decoded again in one throw. Holding all
-/// of them is the other way to fix it and it costs about 266 MB of decoded alpha on a phone, which
-/// is not a trade worth making for edges nobody can tell apart at a glance.
+/// Twenty-three times the work in the first row, and 396 masks dropped and decoded again in one
+/// throw. Holding all of them is the other way to fix it — the middle row — and it costs about
+/// 334 MB of decoded alpha on a phone (a mask is 1024 x 578 x 4), which is not a trade worth
+/// making for edges nobody can tell apart at a glance.
+///
+/// The third row is this, shot on the same fling: better than holding everything, on 48 images
+/// rather than 141. Seventy-two masks are still dropped, because sixteen tears is the cache
+/// exactly and the chrome's own masks want room too — but they go at warm-up rather than all
+/// through the throw, which is the difference between 396 and 72, and no frame pays for it.
 ///
 /// Sixteen is what the rule actually needs. The brief says no two tears visible *at once* may be
 /// the same; a screen holds five to eight notes, and with the coprime stride below a repeat is
