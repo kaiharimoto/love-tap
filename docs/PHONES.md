@@ -131,6 +131,39 @@ because an APK that cannot answer Safari is one whose step 4 ends at a 404.
 `--dart-define=SEED=year` is how the seeded history gets compiled in, and you do not want it: it
 is for the evidence captures. A build without it starts empty, which is what a real phone wants.
 
+### Getting a build onto the phone from here
+
+The owner downloads it from GitHub rather than being handed a file. **GitHub Releases cannot be
+created from a Claude Code session** — the API answers `403 Creating, editing, or deleting releases
+is not permitted for this session type` — so a build goes on the `builds` branch instead, which
+GitHub serves just as well:
+
+    https://github.com/kaiharimoto/love-tap/raw/builds/love-tap-noor-arm64.apk
+
+`builds` carries artifacts and nothing else: no parent, no code, one APK and a README saying what
+is in it and what is rough about it. Make it with plumbing so the working tree is never touched:
+
+    BLOB=$(git hash-object -w --path love-tap-noor-arm64.apk /path/to/app-arm64-v8a-release.apk)
+    README=$(git hash-object -w --path README.md /path/to/notes.md)
+    TREE=$(printf '100644 blob %s\tREADME.md\n100644 blob %s\tlove-tap-noor-arm64.apk\n' \
+             "$README" "$BLOB" | git mktree)
+    COMMIT=$(printf 'what this build is\n' | git commit-tree "$TREE")
+    git update-ref refs/heads/builds "$COMMIT" && git push -f -u origin builds
+
+**Replace the branch, do not add to it.** Every commit that keeps an old APK reachable keeps a
+hundred megabytes in the repository for ever, and there will be many builds. A fresh parentless
+commit force-pushed over the old one leaves the previous blob unreferenced for GitHub to collect.
+The APK must also stay under GitHub's hard 100 MiB per-file limit; this one is 97.1 MiB, which is
+not much room, and the first build that goes over needs a real release or an Actions job rather
+than a branch.
+
+Always publish the sha256 with it and check the downloaded file against it — a build that arrives
+truncated installs as a parse error and reads like a bug in the app.
+
+**Never put the keystore on the branch.** It is a signing key, the repository is public, and
+possession of that file is the only thing standing between someone else and an update to the
+owner's phone.
+
 ### While the app is open, and not after
 
 The host is an Activity. The log, the server and the certificate all live in the Dart isolate that
