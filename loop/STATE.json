@@ -260,16 +260,6 @@
    "what": "the four Android signing secrets",
    "why": "a release build. Not needed for any rubric row.",
    "blocks_the_loop": false
-  },
-  {
-   "what": "confirmation that a Routine-fired session can run unattended",
-   "why": "create_trigger exposes no permission_mode. If firings stall on a permission prompt the fix is the environment's default mode, which only the owner can set. Firing 1 establishes whether this is a problem at all.",
-   "blocks_the_loop": true
-  },
-  {
-   "what": "attach kaiharimoto/love-tap as a source on the Routine, and give it the Routine tools",
-   "why": "create_trigger stores neither. Step 0 of the prompt clones the repo as a fallback, so the loop should run either way; this only removes a clone per firing and lets a firing drop its own cron to weekly when the build is done.",
-   "blocks_the_loop": false
   }
  ],
  "last_score": {
@@ -299,17 +289,38 @@
    "verdict": "keep and retune",
    "checked_rather_than_asserted": "every declared constant in COLOR.md was re-derived from source before it was committed: the six ink lightnesses, Pen.red at chroma 0.1553 as the ceiling anchor, Paper.legal at 0.0805, the accent chromas, and the arithmetic that 4.5:1 against the plank's grain at Y 0.1467 requires ink at Y -0.006. The hue families' adjacent gaps sum to 360 and dropping family D leaves 155 degrees against a 150 ceiling, so the fourth family is forced rather than chosen.",
    "one_thing_guessed": "the dusk contrast floors, 5.0 body and 4.5 large, are set from theory rather than from a measurement, because the set holds one dusk still and it is a crop. COLOR.md section 6 says so in as many words and names the capture that would settle it."
+  },
+  {
+   "firing": "0b",
+   "stage": "SCAFFOLD",
+   "commit": "47f29b9",
+   "did": "Fixed the delivery. Established that a Routine-minted session cannot push and cannot attach the repository to itself, rebuilt the loop as orchestrator plus fresh worker, wrote loop/WORKER_PROMPT.md, and corrected CLAUDE.md and docs/LOOP.md. The first worker pushed on its first attempt."
   }
  ],
  "routine": {
-  "trigger_id": "trig_019fzuH5wgjru9hF23A918wN",
+  "trigger_id": "trig_01Wu3b9nQVkd9RUa1aEXcrjJ",
   "name": "love-tap improvement loop",
-  "cron": "29 */3 * * *",
+  "cron": "17 */3 * * *",
   "environment_id": "env_01AwdDmmUR8beGj9YmeYaPVm",
-  "fresh_session_per_firing": true,
-  "known_limits": [
-   "A fired session has no MCP tools at all -- no GitHub tools, no Routine tools. Everything is plain git over HTTPS. A firing therefore cannot change the Routine's own schedule, so the terminal-state step in docs/LOOP.md that drops the cron to weekly has to be recorded in asks[] instead of done.",
-   "The Routine stores no repository source, so a fired session may start with no checkout. The prompt's step 0 finds or clones it; if that fails the firing reports it rather than improvising, and the fix is for the owner to attach the repo to the Routine."
+  "delivery": "two hops: the Routine wakes a persistent orchestrator, which spawns a fresh worker per firing with create_session and the repository attached",
+  "orchestrator_session_id": "session_015T1RRVy83zKcg9YVresNeZ",
+  "worker_model": "opus",
+  "worker_prompt": "loop/WORKER_PROMPT.md, referenced by the Routine so it can be corrected here rather than in a Routine nobody can read the history of",
+  "why_two_hops": "A session a Routine mints directly gets sources: [], and the egress proxy injects a push credential only for a session's attached sources, so every git push returns 403. Firing 0 cloned the repo -- readable, the repo is public -- worked seven minutes, committed a76f8e3, could not push it, and lost it when the container was reclaimed. Two probe firings then established that a fired session cannot attach the repository to itself either. create_session can, through source_url and outcome_branch, and a worker created that way pushed on its first attempt.",
+  "traps_paid_for_already": [
+   "list_triggers reports last_run SUCCEEDED for a firing that achieved nothing: it records delivery, not accomplishment. A commit on origin is the only proof a firing did anything.",
+   "update_trigger has no persistent_session_id parameter -- only create_trigger does. Passing it to update_trigger is silently ignored, so a rebinding needs the Routine recreated. Read persist_session back rather than trusting the call.",
+   "create_session cannot make a child more permissive than its parent, so an orchestrator must be created from a session that is not in plan mode, or it inherits plan and stalls for ever."
   ]
- }
+ },
+ "asks_resolved": [
+  {
+   "what": "confirmation that a Routine-fired session can run unattended",
+   "answer": "Resolved 2026-09-15. Firings run in PERMISSION_MODE_AUTO; bash and git need no approval. Permission mode was never the blocker -- the missing repository attachment was."
+  },
+  {
+   "what": "attach kaiharimoto/love-tap as a source on the Routine, and give it the Routine tools",
+   "answer": "Resolved 2026-09-15 by design rather than by the owner. create_trigger cannot attach a repository at all, so the orchestrator attaches it per firing instead. Nothing is needed from the owner here."
+  }
+ ]
 }
