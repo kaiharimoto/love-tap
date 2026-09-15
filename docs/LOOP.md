@@ -7,6 +7,30 @@ successor needs is written down here or in `loop/STATE.json`.
 
 `CLAUDE.md` carries the rules that hold in every stage. This file carries the machine.
 
+## How a firing is actually delivered
+
+A Routine cannot hand a session a repository. One it mints gets `sources: []`, and the egress proxy
+injects a push credential only for a session's attached sources, so `git push` returns a
+deterministic 403. `create_session` *can* attach one, through `source_url` and `outcome_branch`.
+So the loop runs in two hops:
+
+    Routine (cron)  ->  orchestrator session      persistent, no repo, ~2 tool calls per wake
+                            ->  worker session     fresh per firing, repo attached, pushes
+
+The orchestrator exists only because it is an *existing* session rather than one the trigger mints,
+which is what lets it keep the tools needed to spawn the worker. It holds no state — `loop/STATE.json`
+does — so replacing it costs two calls.
+
+Two things follow, and both have already cost this build:
+
+- **A firing proves it can push before it does any work** (`git push --dry-run`), and stops dead if
+  it cannot. The first firing of this loop worked for seven minutes, committed, could not push, and
+  lost everything when its container was reclaimed. Under a full capture that is forty-five minutes.
+- **The Routine's run status is not evidence of progress.** `list_triggers` reported
+  `last_run: SUCCEEDED` for that firing. It records delivery, not accomplishment. The only proof a
+  firing did anything is a commit on `origin`, so every push is confirmed by comparing `HEAD` to
+  `origin/<branch>` after a fetch.
+
 ## The five stages
 
 The owner asked for diagnose, address, design and implement. Stage 0 exists because this repo's

@@ -3,9 +3,9 @@
 Two people, one thread of paper. An Android app and an iOS-installable PWA from one Flutter
 codebase, talking directly to each other over Tailscale. `README.md` is the shape of it.
 
-This repository is built by an autonomous loop. If you are a firing of that loop, `docs/LOOP.md`
-is your protocol and `loop/STATE.json` is where you are. If you are a person, everything below
-applies to you too.
+This repository is built by an autonomous loop. If you are a firing of that loop,
+`loop/WORKER_PROMPT.md` is your running order, `docs/LOOP.md` is the machine behind it, and
+`loop/STATE.json` is where you are. If you are a person, everything below applies to you too.
 
 ## Read in this order
 
@@ -15,8 +15,9 @@ applies to you too.
 2. `DIRECTION.md` — the design law, and its dated decisions log. `docs/COLOR.md` when it exists is
    the colour half of the same law and takes precedence on anything it covers.
 3. `loop/STATE.json` — the cycle, the stage, the queue, what is blocked.
-4. `docs/LOOP.md` — the protocol: the five stages, the degradation ladder, the rules.
-5. `TASK_STATE.md` and `docs/CONTINUE.md` — the prose handoff. `CONTINUE.md` §5 is a list of
+4. `loop/WORKER_PROMPT.md` — what one firing does, in order. Read this first if you are a firing.
+5. `docs/LOOP.md` — the machine: the five stages, the degradation ladder, the state schema.
+6. `TASK_STATE.md` and `docs/CONTINUE.md` — the prose handoff. `CONTINUE.md` §5 is a list of
    things that cost this build hours. Read it before you spend a day rediscovering one of them.
 
 ## The branch
@@ -64,6 +65,12 @@ Everything else worth knowing about running it is in `docs/CONTINUE.md` §4–§
 - **`tools/check/texture_budget.py` does not exist**, although `TASK_STATE.md` and
   `docs/CONTINUE.md` both describe it as enforcing the WebKit texture budget. Either write it or
   delete the claim; a dangling enforcement claim has survived four cycles already.
+- **A Routine cannot deliver a firing directly.** A session a Routine mints gets `sources: []`,
+  and with no attached repository the egress proxy injects no push credential, so every `git push`
+  returns 403. Two firings established this; the first lost seven minutes of work to it. The loop
+  is therefore delivered in two hops — the Routine wakes a persistent orchestrator, which spawns
+  the firing with `create_session` and the repository attached. Do not try to "fix" a firing that
+  cannot push by cloning the repo yourself; a clone is readable and unpushable, which is the trap.
 - **`09_two_devices.png` and `16_setup_android.png` cannot be produced in this container.** No
   `/dev/kvm`; three routes were tried and measured, and `docs/PHONES.md` records all three. That
   is a hardware fact, not a loop defect. 14 of 17 is the ceiling here.
