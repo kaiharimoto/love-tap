@@ -70,6 +70,24 @@ List<Event> _aYear({int count = 14000}) {
   return out;
 }
 
+/// A log of nothing but authored feelings, for measuring what the size of the library costs.
+List<Event> _authored(int n) => [
+      for (var k = 0; k < n; k++)
+        Event(
+          id: 'F$k',
+          seq: k + 1,
+          author: Person.teo,
+          device: DeviceKind.pwa,
+          ts: DateTime.utc(2026, 2, 1).millisecondsSinceEpoch + k * 1000,
+          type: 'feeling_authored',
+          payload: {
+            'feeling_id': 'made_$k', 'name': 'the $k one', 'family': 'warmth',
+            'colour': '#1f2a44', 'object_asset': 'obj_pinch', 'haptic': '80@90',
+            'sound': 'snd_squeeze', 'retired': false,
+          },
+        ),
+    ];
+
 int _ms(void Function() f) {
   final sw = Stopwatch()..start();
   f();
@@ -94,51 +112,54 @@ void main() {
   test('the feeling registry is not rebuilt from the whole log to answer one question', () {
     // It used to be constructed inside build(), in five regions, from every event in the spine,
     // and then answered byId with a linear scan. That is the whole year, five times, per frame.
-    final build = _ms(() => FeelingRegistry(year));
-    final registry = FeelingRegistry(year);
-    final feelings = registry.all;
-    Feeling? scanFor(String id) {
-      for (final f in feelings) {
-        if (f.id == id) return f;
-      }
-      return null;
-    }
+    //
+    // What is asserted is the *shape* of the lookup, and it took three goes to find a way to say
+    // that which holds on someone else's machine. A fixed ceiling — 20,000 us for 6,000 lookups —
+    // went red on one full-suite run in four here. Timing the same questions against a linear walk
+    // instead was better and still wrong: the two are different code and the compiler treats them
+    // differently, so the margin was 22x here, 10x on a loaded run here, and 2.2x on a CI runner,
+    // where it failed. A ratio between two different things is not a measurement of either.
+    //
+    // So: the same code, on the same machine, over two libraries a hundred times apart in size.
+    // A map does not care how many feelings there are and a walk cares linearly, and nothing about
+    // how fast the machine is or how warm the compiler got changes which of those is happening.
+    final small = FeelingRegistry(_authored(50));
+    final big = FeelingRegistry(_authored(5000));
+    expect(big.all.length - small.all.length, 4950,
+        reason: 'the two libraries have to differ by the amount this is measuring');
 
     const rounds = 2000;
-    void spin(Feeling? Function(String) answer) {
+    void spin(FeelingRegistry r) {
       for (var i = 0; i < rounds; i++) {
-        answer('hold');
-        answer('made_3');
-        answer('not a feeling');
+        r.byId('hold');
+        r.byId('made_3');
+        r.byId('not a feeling');
       }
     }
 
-    // Both paths run once untimed. The first block timed otherwise pays for the compiler and the
-    // second does not, which on a full-suite run made the indexed lookups measure ten times what
-    // they measure alone and nearly lost to the walk.
-    spin(registry.byId);
-    spin(scanFor);
-    final lookups = _ms(() => spin(registry.byId));
-    // The same questions, answered the way this used to answer them. Both halves are timed on the
-    // same machine within a few milliseconds of each other, so a container under load slows them
-    // together and the ratio stands — which a fixed microsecond ceiling did not: 20,000 us for
-    // 6,000 lookups went red on one full-suite run in four, and a red suite aborts a capture.
-    final scanned = _ms(() => spin(scanFor));
-    expect(registry.byId('made_3')?.name, 'the 3 one');
-    expect(registry.byId('hold'), isNotNull);
-    expect(registry.byId('nope'), isNull);
-    expect(scanFor('made_3')?.name, 'the 3 one', reason: 'the control does not answer the question');
-    // A hashed lookup over a library this size is not a little faster than the walk, it is a
-    // different shape of work. Four sits between the two answers with room on both sides: with the
-    // index it measures about ten times cheaper, and with the index taken out it measures nine
-    // times dearer, so nothing between those has to be guessed at.
-    expect(lookups * 4, lessThan(scanned),
-        reason: '${rounds * 3} lookups took ${lookups}us against ${scanned}us of linear scan '
-            '— byId is walking the library rather than indexing it');
+    // Both warmed before either is timed, so the first one timed is not paying for the compiler.
+    spin(small);
+    spin(big);
+    final overFifty = _ms(() => spin(small));
+    final overFiveThousand = _ms(() => spin(big));
+
+    expect(small.byId('made_3')?.name, 'the 3 one');
+    expect(big.byId('made_3')?.name, 'the 3 one');
+    expect(big.byId('hold'), isNotNull);
+    expect(big.byId('nope'), isNull);
+
+    // A walk would be about a hundred times dearer over a hundred times the library; a map is
+    // within noise of the same, give or take what a bigger table costs the cache. Eight is well
+    // clear of both, which is the point: nothing in between has to be guessed at.
+    expect(overFiveThousand, lessThan(overFifty * 8),
+        reason: '${rounds * 3} lookups cost ${overFifty}us over 50 feelings and '
+            '${overFiveThousand}us over 5000 — byId grows with the library, so it is walking it');
+
+    final build = _ms(() => FeelingRegistry(year));
     expect(build, lessThan(60000), reason: 'building the registry took ${build}us');
     // ignore: avoid_print
-    print('registry: build ${build}us, ${rounds * 3} lookups ${lookups}us, '
-        'the same by linear scan ${scanned}us');
+    print('registry: build ${build}us, ${rounds * 3} lookups ${overFifty}us over 50 feelings, '
+        '${overFiveThousand}us over 5000');
   });
 
   test('the first projection of a year is slow, and it only happens once', () {

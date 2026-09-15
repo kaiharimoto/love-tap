@@ -58,8 +58,10 @@ def main() -> int:
 
     record = read("evidence/logs/apk.json", {})
     got = (record.get("apks") or {}).get(os.path.basename(apk_path), {})
-    signer = (got.get("signature") or {}).get("signed_by")
-    debug = (got.get("signature") or {}).get("is_the_debug_key")
+    sig = got.get("signature") or {}
+    signer = sig.get("signed_by")
+    debug = sig.get("is_the_debug_key")
+    unread = not sig.get("read", False)
     web = got.get("the_web_app_it_hands_over") or {}
     packed = read("evidence/logs/pwa_packed.json", {})
     mb = round(os.path.getsize(apk_path) / 1e6, 1)
@@ -82,6 +84,17 @@ def main() -> int:
             "not a release: anybody's build of anything with this application id can replace it, "
             "and a build signed with a real key cannot — that needs an uninstall, which takes the "
             "log with it. Do not put this on a phone you intend to keep a conversation on.",
+            "",
+        ]
+    elif unread:
+        # Said, rather than left out. A release whose notes are silent about signing reads as a
+        # release that was signed, and the first CI run proved this file can fail to read one.
+        lines += [
+            "> **Nobody could read the signature on this build.** "
+            f"`{sig.get('why', 'apksigner said nothing this could parse')}` — so it is not known "
+            "whether it carries a real key or the shared Android debug one. Treat it as a test "
+            "build: install it on a phone you are willing to wipe, because if it turns out to be "
+            "debug-signed, a real build cannot replace it without an uninstall that takes the log.",
             "",
         ]
     elif signer:

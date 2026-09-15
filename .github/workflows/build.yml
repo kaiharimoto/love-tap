@@ -16,8 +16,9 @@
 #
 # Without them a release is refused rather than signed with the shared debug key, because a
 # debug-signed build on a real phone cannot be replaced by a real one without uninstalling, and
-# uninstalling takes the log with it. A build with no tag still runs, unsigned, so the toolchain
-# can be exercised; its artifact says so in its own name.
+# uninstalling takes the log with it. `allow_unsigned` is the way past that while the two phones
+# are still being debugged rather than lived on: the APK comes out named `-testkey` and the release
+# says what it is. A build with no tag runs unsigned too, so the toolchain can be exercised.
 
 name: build
 
@@ -30,6 +31,11 @@ on:
         description: 'tag to release as, e.g. v0.1.1 — leave empty to build without releasing'
         required: false
         default: ''
+      allow_unsigned:
+        description: 'release even with no signing key — a test build, not one to keep a log on'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -170,20 +176,28 @@ jobs:
             exit 1
           fi
 
+      # An unsigned build carries it in its name. These two will sit in the same downloads folder
+      # and only one of them can be replaced by the next real build without an uninstall.
       - name: name it and weigh it
         id: file
         run: |
           set -euo pipefail
           src=app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-          cp "$src" love-tap-noor-arm64.apk
-          echo "sha256=$(sha256sum love-tap-noor-arm64.apk | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          if [ "${{ steps.key.outputs.signed }}" = "yes" ]; then
+            name=love-tap-noor-arm64.apk
+          else
+            name=love-tap-noor-arm64-testkey.apk
+          fi
+          cp "$src" "$name"
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "sha256=$(sha256sum "$name" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
 
       - name: what to say about it
-        if: steps.what.outputs.tag != '' && steps.key.outputs.signed == 'yes'
-        run: python3 tools/release_notes.py --tag "${{ steps.what.outputs.tag }}" --apk love-tap-noor-arm64.apk --out notes.md
+        if: steps.what.outputs.tag != '' && (steps.key.outputs.signed == 'yes' || inputs.allow_unsigned)
+        run: python3 tools/release_notes.py --tag "${{ steps.what.outputs.tag }}" --apk "${{ steps.file.outputs.name }}" --out notes.md
 
       - name: release it
-        if: steps.what.outputs.tag != '' && steps.key.outputs.signed == 'yes'
+        if: steps.what.outputs.tag != '' && (steps.key.outputs.signed == 'yes' || inputs.allow_unsigned)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -196,28 +210,28 @@ jobs:
           else
             gh release create "$tag" --title "$tag" --notes-file notes.md --prerelease --target "$GITHUB_SHA"
           fi
-          gh release upload "$tag" love-tap-noor-arm64.apk --clobber
-          echo "### [love-tap-noor-arm64.apk]($(gh release view "$tag" --json url -q .url))" >> "$GITHUB_STEP_SUMMARY"
+          gh release upload "$tag" "${{ steps.file.outputs.name }}" --clobber
+          echo "### [${{ steps.file.outputs.name }}]($(gh release view "$tag" --json url -q .url))" >> "$GITHUB_STEP_SUMMARY"
           echo "sha256 \`${{ steps.file.outputs.sha256 }}\`" >> "$GITHUB_STEP_SUMMARY"
 
       # Anything that is not a signed release: the file is still worth having and reading, and the
       # name says what it is so nobody installs a debug-signed build by mistake.
       - name: keep the file when there is no release to put it in
-        if: steps.what.outputs.tag == '' || steps.key.outputs.signed != 'yes'
+        if: steps.what.outputs.tag == ''
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.key.outputs.signed == 'yes' && 'love-tap-noor-arm64' || 'UNSIGNED-do-not-install' }}
-          path: love-tap-noor-arm64.apk
+          name: ${{ steps.key.outputs.signed == 'yes' && 'love-tap-noor-arm64' || 'UNSIGNED-test-build' }}
+          path: ${{ steps.file.outputs.name }}
           retention-days: 7
 
       - name: a tag with no key is not a release
-        if: steps.what.outputs.tag != '' && steps.key.outputs.signed != 'yes'
+        if: steps.what.outputs.tag != '' && steps.key.outputs.signed != 'yes' && !inputs.allow_unsigned
         run: |
           echo "::error::This run was asked to release ${{ steps.what.outputs.tag }} and there is" \
-               "no signing key, so it did not. The APK it built is attached to this run as" \
-               "UNSIGNED-do-not-install: it is debug-signed, which installs and is not a release," \
-               "because a real build cannot replace a debug-signed one without an uninstall and" \
-               "an uninstall takes the log with it. Add the four secrets and run this again."
+               "no signing key, so it did not. A debug-signed build installs and is not a" \
+               "release: a real build cannot replace it without an uninstall, and an uninstall" \
+               "takes the log with it. Add the four secrets, or run this again with" \
+               "allow_unsigned if it is a test build nobody will keep a log on."
           exit 1
 
       - name: the record, whatever happened

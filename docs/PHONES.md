@@ -152,8 +152,7 @@ workflow, so the tag route needs nothing moved.
 
 Actions cannot sign without the key, and a build signed with the shared Android debug key installs
 and is not a release: a real build cannot replace it without an uninstall, and an uninstall takes
-the log. So a tagged run with no key builds, attaches the APK to the run as
-`UNSIGNED-do-not-install`, and fails rather than publishing it. Set these once, in
+the log. So a tagged run with no key fails rather than publishing. Set these once, in
 Settings → Secrets and variables → Actions:
 
     ANDROID_KEYSTORE_BASE64      base64 -w0 < the-other-phone.jks
@@ -165,6 +164,15 @@ The keystore never goes in the repository — the repository is public, and poss
 is the only thing between someone else and an update to the owner's phone. A secret is the only
 place for it. The job writes it to the runner's temporary directory, and deletes it and the
 `key.properties` that pointed at it in a step that runs whatever happened to the rest.
+
+#### Releasing without a key, while the phones are still being debugged
+
+`allow_unsigned` on a manual run publishes anyway. It is for the stage where the two phones are
+being got working rather than lived on, and it is honest about itself: the APK comes out named
+`love-tap-noor-arm64-testkey.apk`, and the release notes carry the debug-key warning in the first
+paragraph. What it costs is fixed and worth knowing before the log matters — the first build signed
+with a real key cannot replace a test-key one, so that phone has to be wiped once, and everything
+written on it before then goes.
 
 #### The `builds` branch, which is the fallback
 
