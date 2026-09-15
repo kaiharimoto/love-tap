@@ -9,27 +9,45 @@ successor needs is written down here or in `loop/STATE.json`.
 
 ## How a firing is actually delivered
 
-A Routine cannot hand a session a repository. One it mints gets `sources: []`, and the egress proxy
-injects a push credential only for a session's attached sources, so `git push` returns a
-deterministic 403. `create_session` *can* attach one, through `source_url` and `outcome_branch`.
-So the loop runs in two hops:
+This took four wrong designs to get right and every one of them looked plausible, so the dead ends
+are written down here rather than left to be rediscovered.
 
-    Routine (cron)  ->  orchestrator session      persistent, no repo, ~2 tool calls per wake
-                            ->  worker session     fresh per firing, repo attached, pushes
+A Routine can target a session three ways: mint a fresh one, wake a named other one, or wake the
+one that created it. Only the third works for this loop.
 
-The orchestrator exists only because it is an *existing* session rather than one the trigger mints,
-which is what lets it keep the tools needed to spawn the worker. It holds no state — `loop/STATE.json`
-does — so replacing it costs two calls.
+| what was tried | why it failed |
+|---|---|
+| Routine mints a fresh session, which pushes | A minted session gets `sources: []`. The egress proxy injects a push credential only for a session's attached sources, so `git push` returns a deterministic 403. The first firing cloned the repo — public, so readable — worked seven minutes, committed, could not push, and lost it all when the container was reclaimed. |
+| The minted session attaches the repo itself | It has no MCP tools at all. A probe instructed to call `add_repo` and then push landed nothing; a second probe instructed to call `create_session` produced no session and returned in eight seconds. |
+| Routine wakes a named persistent orchestrator | The orchestrator's container had been reclaimed and the wake never re-provisioned it. Fired at 22:20; the session's `updated_at` never moved off its creation turn, and the Routine recorded no `last_run` at all. |
+| **Routine wakes the session that created it** | **Works.** A self-bound wake was delivered on time to a live session. |
 
-Two things follow, and both have already cost this build:
+So the loop is a **dispatcher session plus a fresh worker per firing**:
 
-- **A firing proves it can push before it does any work** (`git push --dry-run`), and stops dead if
-  it cannot. The first firing of this loop worked for seven minutes, committed, could not push, and
-  lost everything when its container was reclaimed. Under a full capture that is forty-five minutes.
-- **The Routine's run status is not evidence of progress.** `list_triggers` reported
-  `last_run: SUCCEEDED` for that firing. It records delivery, not accomplishment. The only proof a
-  firing did anything is a commit on `origin`, so every push is confirmed by comparing `HEAD` to
-  `origin/<branch>` after a fetch.
+    Routine (cron)  ->  dispatcher = the session that created the Routine
+                            ->  worker = create_session with source_url,
+                                source_revision and outcome_branch set
+
+`create_session` *can* attach a repository, which is the asymmetry the whole design rests on. A
+worker made that way has `sources` populated and pushes on its first attempt.
+
+Two consequences, both already paid for:
+
+- **A firing proves it can push before it does any work** (`git push --dry-run`) and stops dead if
+  it cannot. Forty-five minutes of capture that cannot be pushed is forty-five minutes thrown away.
+- **A Routine's run status is not evidence of progress.** `list_triggers` reported
+  `last_run: SUCCEEDED` for the firing that lost everything: it records delivery, not
+  accomplishment. Only a commit on `origin` counts, so every push is confirmed by comparing `HEAD`
+  to `origin/<branch>` after a fetch.
+
+### What will eventually need attention
+
+The dispatcher is a real session with a real context window, and every firing adds a little to it.
+Its prompt is therefore deliberately tiny — spawn one worker, report one line, never read the
+repository. When it does fill, or if it is archived, the loop stops silently: the fix is to create
+a Routine from a new session the same way, which is two calls, and nothing is lost because
+`loop/STATE.json` holds all the state. A dispatcher that has stopped firing shows up as a branch
+with no new commits, which is worth checking for if a day passes quietly.
 
 ## The five stages
 

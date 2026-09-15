@@ -298,20 +298,25 @@
   }
  ],
  "routine": {
-  "trigger_id": "trig_01Wu3b9nQVkd9RUa1aEXcrjJ",
+  "trigger_id": "trig_01U9mayjJPHrEccxPnBuYPdL",
   "name": "love-tap improvement loop",
-  "cron": "17 */3 * * *",
+  "cron": "51 */3 * * *",
   "environment_id": "env_01AwdDmmUR8beGj9YmeYaPVm",
-  "delivery": "two hops: the Routine wakes a persistent orchestrator, which spawns a fresh worker per firing with create_session and the repository attached",
-  "orchestrator_session_id": "session_015T1RRVy83zKcg9YVresNeZ",
+  "delivery": "self-bound: the Routine wakes the session that created it, and that session spawns a fresh repository-attached worker per firing with create_session",
+  "dispatcher_session_id": "session_01S1yovoQv1MVdhvJ1eaL8k2",
   "worker_model": "opus",
-  "worker_prompt": "loop/WORKER_PROMPT.md, referenced by the Routine so it can be corrected here rather than in a Routine nobody can read the history of",
-  "why_two_hops": "A session a Routine mints directly gets sources: [], and the egress proxy injects a push credential only for a session's attached sources, so every git push returns 403. Firing 0 cloned the repo -- readable, the repo is public -- worked seven minutes, committed a76f8e3, could not push it, and lost it when the container was reclaimed. Two probe firings then established that a fired session cannot attach the repository to itself either. create_session can, through source_url and outcome_branch, and a worker created that way pushed on its first attempt.",
+  "worker_prompt": "loop/WORKER_PROMPT.md",
+  "designs_that_do_not_work": [
+   "Routine mints a fresh session which pushes: a minted session gets sources: [] and the proxy injects no push credential, so git push is a deterministic 403.",
+   "The minted session attaches the repository itself: it has no MCP tools. One probe told to call add_repo then push landed nothing; another told to call create_session produced no session and returned in eight seconds.",
+   "Routine wakes a named persistent orchestrator: its container had been reclaimed and the wake never re-provisioned it. Fired 22:20; the session's updated_at never moved and the Routine recorded no last_run at all."
+  ],
   "traps_paid_for_already": [
-   "list_triggers reports last_run SUCCEEDED for a firing that achieved nothing: it records delivery, not accomplishment. A commit on origin is the only proof a firing did anything.",
+   "list_triggers reports last_run SUCCEEDED for a firing that achieved nothing: it records delivery, not accomplishment. A commit on origin is the only proof.",
    "update_trigger has no persistent_session_id parameter -- only create_trigger does. Passing it to update_trigger is silently ignored, so a rebinding needs the Routine recreated. Read persist_session back rather than trusting the call.",
-   "create_session cannot make a child more permissive than its parent, so an orchestrator must be created from a session that is not in plan mode, or it inherits plan and stalls for ever."
-  ]
+   "create_session cannot make a child more permissive than its parent, so a dispatcher must be created from a session that is not in plan mode or it inherits plan and stalls for ever."
+  ],
+  "when_it_stops": "The dispatcher is a real session with a real context window. If it fills or is archived the loop stops silently and the branch simply stops gaining commits. The fix is to create the Routine again from a new session, which is two calls; nothing is lost because loop/STATE.json holds the state."
  },
  "asks_resolved": [
   {
