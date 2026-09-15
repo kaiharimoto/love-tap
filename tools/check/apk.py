@@ -152,14 +152,14 @@ def main():
                                    "not have. Every Android phone made this decade is arm64.",
             },
         },
-        "the_key_that_signs_these": "a throwaway RSA key generated into /tmp for one build, thirty "
-                                    "days' validity, a random password, deleted immediately "
-                                    "afterwards along with the key.properties that pointed at it. "
-                                    "It exists in this record only as the distinguished name "
-                                    "below, which is how a reader can see that the signing config "
-                                    "works and that it was not the shared debug key. No keystore, "
-                                    "no password and no key.properties is in this repository or "
-                                    "ever was; app/android/.gitignore covers all three.",
+        "the_key_that_signs_these": "an RSA key made in this session's scratchpad, outside the repository, and handed to the "
+                                    "owner along with the APK it signed. Keeping it is the point: only a "
+                                    "build signed with the same key can replace this one on the phone, and "
+                                    "uninstalling to get round that takes the log with it. It exists in this "
+                                    "record only as the distinguished name below, which is how a reader can see "
+                                    "that the signing config works and that it was not the shared debug key. No "
+                                    "keystore, no password and no key.properties is in this repository or ever "
+                                    "was; app/android/.gitignore covers all three.",
         "apks": {},
     }
     ok = True
