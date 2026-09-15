@@ -31,12 +31,22 @@ One light rig for everything, forever: **soft daylight from a window up and to t
 
 ## Palette (drawn from stationery, not from a UI palette)
 
+`docs/COLOR.md` is the colour half of this law and takes precedence on any number about
+lightness, hue, chroma, contrast or dimming. The swatches below are its inputs, not its floors.
+
 - Paper: warm cheap-notebook off-white `#f1ecdf`; year-in-a-bag yellow `#ece0c2`; graph paper cool
   blue-grey `#e9ecec` with `#b9cbe0` rules; legal pad `#f3e6a8`; index card `#f6f1e6`.
 - Ink: ballpoint blue-black `#1f2a44`; graphite `#3a3a3c`; hard-pressed biro `#141a2e`; red pen `#a8322b`.
-- Accent: highlighter yellow `#f4ea6a` at 45% and pink `#f2a8c0` at 40% (multiplied, never on top);
-  correction-fluid white `#f7f5ee`; aged tape amber `#d9b46b` at 55%; sticky notes `#f3e08a`,
-  `#f2c1c1`, `#bcd8e8` faded.
+  No word is set directly on a rendered ground — desk, photograph or fold — at any declared contrast
+  ratio, because a flat-on-flat pair is a number about a surface that does not ship. `Pen.onWood` and
+  `Hands.onDesk` are deleted; `Pen.margin` moves from `#6b6b6e` into the ink band at OKLab L ≤ 0.40.
+- Accent: highlighter yellow, highlighter pink, correction-fluid white `#f7f5ee`, aged tape amber,
+  sticky notes `#f3e08a`, `#f2c1c1`, `#bcd8e8` faded. Multiplied, never on top — that is physics and
+  it stays. But an accent's declared colour and alpha are chosen so that its *composite* over every
+  stock it can land on falls inside its hue family band (`docs/COLOR.md` §4) and meets the chroma
+  floors (§5); the composite is what is checked, not the source. Multiply drags an accent toward the
+  ground's own hue, so the accent-area floor is carried by opaque objects — a sticky note, a red pen
+  stroke, the printed margin rule, a foil star — and the highlighter is a supporting voice.
 - Nothing emits light. No glow, no neon, no gradient that is not the shading of a fold or curl.
 - Partner state is carried by paper, ink and object choice, never by a coloured dot.
 
@@ -130,3 +140,32 @@ the feeling's paper sound plays the same rhythm. Same data, different body.
   battery level.
 - 2026-09-04 · The home screen says "the other phone". The app still does not name itself, and on
   an iPhone the thing you tap is the person, not a product.
+- 2026-09-15 · The desk is kept and retuned, not replaced. It was charged with two things and it
+  is guilty of neither as charged. `17_setup_pwa.png` is the one still in the set with no run
+  below the contrast floor — 0 of 89 — and it is usually described as the one still with no desk
+  in it, but a quarter of its frame is desk. What it has is a desk with no words on it and a sheet
+  of stock over the rest. Measuring each still's desk-band area against its below-floor rate gives
+  a Pearson r of 0.87, so the thing that correlates with 404 failures is desk *area*, not desk
+  *presence*: `10_first_run` is 82.1% desk and fails 79% of its text, `04_moments` is 80.0% and
+  fails 76%, `17_setup_pwa` is 2.6% and fails nothing. Three measured causes would follow a
+  replacement surface unchanged, which is why replacing is not the answer. The plate renders at
+  OKLab L p50 0.495 against a declared `DeskColour.day` of L 0.375 — 0.120 lighter than the flat
+  every on-desk ink was tuned against, and the dusk pair drifts 0.110 the same way. The plate's
+  own grain is sd(L) 0.0444 with p95 0.0574, an internal contrast of 1.62:1, and `Pen.onWood`
+  measures 4.94:1 against the declared flat but 2.79:1 against the wood's median and 2.49:1
+  against its highlights, before the app composites a shadow over it; in `02_chat.png` the
+  composer placeholder reads 1.56:1. A ground that wide cannot host body text at any fixed ink
+  colour — 4.5:1 against the grain's light end at Y 0.1467 requires a darker ink at Y −0.006,
+  which is not a hard number to hit, it does not exist — and a linen cloth, a cork board or a
+  painted table would fail the same arithmetic. The desk is also the most chromatic band in the
+  build, ground mean chroma 0.0334–0.0345 against a figure band of 0.0115–0.0256, so the app is
+  grey because the paper is grey and swapping the wood would spend the migration and leave the
+  charm complaint where it found it. The retune is three numbers in `docs/COLOR.md`: the plate
+  re-renders to its declared flat at L 0.40 ± 0.03, `Pen.onWood` and `Hands.onDesk` are deleted
+  because no word is set on a rendered ground at any declared ratio, and `value_bands.ground` is
+  capped at 0.50 with every room screen's `lightness.p50` in [0.78, 0.95]. That cap is not new
+  law. This file already said it — "five regions, one paper desk: each region is a different stack
+  of paper on it" — and the build drifted to a plank with a note in the middle of it because the
+  sentence carried no number. Nothing under `assets/` is deleted; the retune touches
+  `assets/shell/desk.png` and `desk_dusk.png`, 4.2 MB of 103 MB, both regenerated by the committed
+  `blender/shell/desk.py` at a lower exposure within the existing rig.
