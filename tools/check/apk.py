@@ -59,15 +59,31 @@ def whose_signature(path):
     if not tool:
         return {"read": False, "why": "no apksigner in toolchain/android-sdk/build-tools"}
     try:
-        out = subprocess.run([tool, "verify", "--print-certs", path],
-                             capture_output=True, text=True, timeout=180).stdout
+        got = subprocess.run([tool, "verify", "--print-certs", path],
+                             capture_output=True, text=True, timeout=180)
     except Exception as e:                                   # noqa: BLE001
         return {"read": False, "why": str(e)}
+    out = got.stdout
     dn = re.search(r"Signer #1 certificate DN: (.+)", out)
     sha = re.search(r"Signer #1 certificate SHA-256 digest: (\w+)", out)
     name = dn.group(1).strip() if dn else None
+    if name is None:
+        # This used to fall through with signed_by null and is_the_debug_key false, and say in
+        # words that the APK was "signed with a key that is not the shared debug one" — about a
+        # file whose signature it had just failed to read. The first CI run did exactly that to a
+        # debug-signed APK, which is the one thing this check exists to catch. A signature nobody
+        # could read is not a signature that passed.
+        return {
+            "read": False,
+            "why": "apksigner ran and printed no 'Signer #1 certificate DN' line",
+            "apksigner": tool,
+            "exit_code": got.returncode,
+            "it_said": (out.strip() + ("\n" + got.stderr.strip() if got.stderr.strip() else ""))[:1200],
+            "what_that_means": "not knowing who signed an APK is not the same as it being signed "
+                               "properly, and nothing whose signature cannot be read gets released",
+        }
     # The debug key is the same on every machine that has ever run the Android tools.
-    debug = bool(name and "CN=Android Debug" in name)
+    debug = bool("CN=Android Debug" in name)
     return {
         "read": True,
         "signed_by": name,
@@ -189,7 +205,7 @@ def main():
         got["signature"] = whose_signature(p)
         got["the_web_app_it_hands_over"] = the_web_app_inside(p)
         report["apks"][os.path.basename(p)] = got
-        if got["signature"].get("is_the_debug_key"):
+        if got["signature"].get("is_the_debug_key") or not got["signature"].get("read"):
             ok = False
         if not got["the_web_app_it_hands_over"]["index_html"]:
             ok = False
@@ -198,12 +214,15 @@ def main():
         report["ok"] = False
         report["why_not"] = "no APK has been built; run flutter build apk --release"
     elif not ok:
-        bad = [n for n, g in report["apks"].items() if g["signature"].get("is_the_debug_key")]
-        report["why_not"] = (
-            "an APK here is signed with the shared debug key"
-            if bad
-            else "an APK here carries no web app, so the iPhone has nothing to install"
-        )
+        debug = [n for n, g in report["apks"].items() if g["signature"].get("is_the_debug_key")]
+        unread = [n for n, g in report["apks"].items() if not g["signature"].get("read")]
+        if debug:
+            report["why_not"] = "an APK here is signed with the shared debug key"
+        elif unread:
+            report["why_not"] = ("the signature on an APK here could not be read, and an unread "
+                                 "signature is not a passed one; see `it_said` beside it")
+        else:
+            report["why_not"] = "an APK here carries no web app, so the iPhone has nothing to install"
     text = json.dumps(report, indent=1) + "\n"
     if a.out:
         os.makedirs(os.path.dirname(a.out), exist_ok=True)

@@ -114,7 +114,11 @@ jobs:
             # Said here, where it is seen in the first minute, and acted on at the release step
             # rather than here: an unsigned build is still worth having and still worth reading,
             # it is only not worth publishing, so the job runs and the publish is what refuses.
-            echo "::error::No signing key in this repository's secrets, so nothing built here can" \
+            # An error when a release was asked for, a warning when one was not — a run with no tag
+            # is a toolchain run and marking it failed-looking teaches everyone to ignore the mark.
+            how=warning
+            [ -n "${{ steps.what.outputs.tag }}" ] && how=error
+            echo "::$how::No signing key in this repository's secrets, so nothing built here can" \
                  "be released. Set ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD," \
                  "ANDROID_KEY_ALIAS and ANDROID_KEY_PASSWORD; docs/PHONES.md says how to make them."
             echo "signed=no" >> "$GITHUB_OUTPUT"
