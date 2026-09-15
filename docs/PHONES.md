@@ -131,17 +131,52 @@ because an APK that cannot answer Safari is one whose step 4 ends at a 404.
 `--dart-define=SEED=year` is how the seeded history gets compiled in, and you do not want it: it
 is for the evidence captures. A build without it starts empty, which is what a real phone wants.
 
-### Getting a build onto the phone from here
+### Getting a build onto the phone
 
-The owner downloads it from GitHub rather than being handed a file. **GitHub Releases cannot be
-created from a Claude Code session** — the API answers `403 Creating, editing, or deleting releases
-is not permitted for this session type` — so a build goes on the `builds` branch instead, which
-GitHub serves just as well:
+The owner downloads a build from GitHub rather than being handed a file. `.github/workflows/build.yml`
+is what makes one: push a tag beginning with `v` and Actions runs the whole suite, packs the
+library, builds the web app, packs it into the Android build, builds the APK, reads the file back
+with `tools/check/apk.py` and attaches it to a release for that tag.
+
+    git tag v0.1.1 && git push origin v0.1.1
+
+That is the only route that produces a real release. **A Claude Code session cannot make one
+itself** — the API answers `403 Creating, editing, or deleting releases is not permitted for this
+session type` — which is the whole reason the job exists. A session tags; Actions releases.
+
+The manual "Run workflow" button needs this file on the repository's **default branch**; GitHub
+only offers `workflow_dispatch` from there. Tag pushes work from any commit that carries the
+workflow, so the tag route needs nothing moved.
+
+#### The four secrets
+
+Actions cannot sign without the key, and a build signed with the shared Android debug key installs
+and is not a release: a real build cannot replace it without an uninstall, and an uninstall takes
+the log. So a tagged run with no key builds, attaches the APK to the run as
+`UNSIGNED-do-not-install`, and fails rather than publishing it. Set these once, in
+Settings → Secrets and variables → Actions:
+
+    ANDROID_KEYSTORE_BASE64      base64 -w0 < the-other-phone.jks
+    ANDROID_KEYSTORE_PASSWORD
+    ANDROID_KEY_ALIAS
+    ANDROID_KEY_PASSWORD
+
+The keystore never goes in the repository — the repository is public, and possession of that file
+is the only thing between someone else and an update to the owner's phone. A secret is the only
+place for it. The job writes it to the runner's temporary directory, and deletes it and the
+`key.properties` that pointed at it in a step that runs whatever happened to the rest.
+
+#### The `builds` branch, which is the fallback
+
+Before the workflow existed, a build went on a `builds` branch, which GitHub serves directly:
 
     https://github.com/kaiharimoto/love-tap/raw/builds/love-tap-noor-arm64.apk
 
-`builds` carries artifacts and nothing else: no parent, no code, one APK and a README saying what
-is in it and what is rough about it. Make it with plumbing so the working tree is never touched:
+Still useful when Actions is not available, with two rules. **Replace the branch, do not add to
+it**: every commit that keeps an old APK reachable keeps a hundred megabytes in the repository for
+ever. And the file must stay under GitHub's hard 100 MiB per-file limit — this build is 97.1 MiB,
+which is not much room. Release assets have no such limit, which is the other reason to prefer the
+workflow. Make the branch with plumbing, so the working tree is never touched:
 
     BLOB=$(git hash-object -w --path love-tap-noor-arm64.apk /path/to/app-arm64-v8a-release.apk)
     README=$(git hash-object -w --path README.md /path/to/notes.md)
@@ -150,19 +185,8 @@ is in it and what is rough about it. Make it with plumbing so the working tree i
     COMMIT=$(printf 'what this build is\n' | git commit-tree "$TREE")
     git update-ref refs/heads/builds "$COMMIT" && git push -f -u origin builds
 
-**Replace the branch, do not add to it.** Every commit that keeps an old APK reachable keeps a
-hundred megabytes in the repository for ever, and there will be many builds. A fresh parentless
-commit force-pushed over the old one leaves the previous blob unreferenced for GitHub to collect.
-The APK must also stay under GitHub's hard 100 MiB per-file limit; this one is 97.1 MiB, which is
-not much room, and the first build that goes over needs a real release or an Actions job rather
-than a branch.
-
-Always publish the sha256 with it and check the downloaded file against it — a build that arrives
-truncated installs as a parse error and reads like a bug in the app.
-
-**Never put the keystore on the branch.** It is a signing key, the repository is public, and
-possession of that file is the only thing standing between someone else and an update to the
-owner's phone.
+Either way, publish the sha256 with it and check the downloaded file against it. A build that
+arrives truncated installs as a parse error and reads like a bug in the app.
 
 ### While the app is open, and not after
 

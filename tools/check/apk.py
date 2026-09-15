@@ -23,6 +23,7 @@ import glob
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import zipfile
@@ -32,8 +33,25 @@ DEFAULT = os.path.join(ROOT, "app", "build", "app", "outputs", "flutter-apk")
 
 
 def apksigner():
-    got = sorted(glob.glob(os.path.join(ROOT, "toolchain", "android-sdk", "build-tools", "*", "apksigner")))
-    return got[-1] if got else None
+    """Wherever the Android tools happen to be.
+
+    This looked only inside `toolchain/android-sdk`, which is where bootstrap.sh puts them and is
+    nowhere on a CI runner: the check then reported "no apksigner" and said nothing about the
+    signature, which is the one thing it exists to read. Ordered by how specific each answer is.
+    """
+    named = os.environ.get("APKSIGNER", "")
+    if named and os.access(named, os.X_OK):
+        return named
+    roots = [os.path.join(ROOT, "toolchain", "android-sdk")]
+    for var in ("ANDROID_SDK_ROOT", "ANDROID_HOME"):
+        where = os.environ.get(var, "")
+        if where:
+            roots.append(where)
+    for where in roots:
+        got = sorted(glob.glob(os.path.join(where, "build-tools", "*", "apksigner")))
+        if got:
+            return got[-1]
+    return shutil.which("apksigner")
 
 
 def whose_signature(path):

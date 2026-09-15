@@ -1,0 +1,204 @@
+# The build that ends up on a phone.
+#
+# The owner downloads builds from GitHub rather than being handed files, and a Claude Code session
+# cannot create a release — the API answers 403, "not permitted for this session type" — so the
+# release is made here, by Actions, which can.
+#
+#   push a tag v*        build, then attach the APK to a release for that tag
+#   run it by hand       build; give it a tag to release, leave it empty to just get an artifact
+#
+# Signing is the part that cannot be done without the owner. Four secrets, set once:
+#
+#   ANDROID_KEYSTORE_BASE64    base64 -w0 < the-other-phone.jks
+#   ANDROID_KEYSTORE_PASSWORD
+#   ANDROID_KEY_ALIAS
+#   ANDROID_KEY_PASSWORD
+#
+# Without them a release is refused rather than signed with the shared debug key, because a
+# debug-signed build on a real phone cannot be replaced by a real one without uninstalling, and
+# uninstalling takes the log with it. A build with no tag still runs, unsigned, so the toolchain
+# can be exercised; its artifact says so in its own name.
+
+name: build
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'tag to release as, e.g. v0.1.1 — leave empty to build without releasing'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # The gate. Its own job because the tests need the seeded year packed in and the build must not
+  # have it: one checkout cannot be both, and two runners cost wall-clock nothing.
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/toolchain
+
+      - name: the material library, with the seeded year
+        run: python3 tools/pack_assets.py --seed=year
+
+      - name: the whole suite
+        working-directory: app
+        run: flutter test
+
+  apk:
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/toolchain
+
+      - name: which tag, if any
+        id: what
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: the signing key
+        id: key
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -z "$KEYSTORE" ] || [ -z "$STORE_PASSWORD" ] || [ -z "$KEY_ALIAS" ] || [ -z "$KEY_PASSWORD" ]; then
+            # Said here, where it is seen in the first minute, and acted on at the release step
+            # rather than here: an unsigned build is still worth having and still worth reading,
+            # it is only not worth publishing, so the job runs and the publish is what refuses.
+            echo "::error::No signing key in this repository's secrets, so nothing built here can" \
+                 "be released. Set ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD," \
+                 "ANDROID_KEY_ALIAS and ANDROID_KEY_PASSWORD; docs/PHONES.md says how to make them."
+            echo "signed=no" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          printf '%s' "$KEYSTORE" | base64 -d > "$RUNNER_TEMP/release.jks"
+          {
+            echo "storeFile=$RUNNER_TEMP/release.jks"
+            echo "storePassword=$STORE_PASSWORD"
+            echo "keyAlias=$KEY_ALIAS"
+            echo "keyPassword=$KEY_PASSWORD"
+          } > app/android/key.properties
+          echo "signed=yes" >> "$GITHUB_OUTPUT"
+
+      - name: the material library, with no seeded year in it
+        run: python3 tools/pack_assets.py
+
+      # The iPhone's half. Built first because it goes inside the APK: the Android phone is the
+      # only thing that will ever serve it. docs/PHONES.md, "What the iPhone is given".
+      - name: the web app
+        working-directory: app
+        run: |
+          flutter build web --release --no-web-resources-cdn \
+            --dart-define=TRANSPORT=tailscale --dart-define=ROLE=client --dart-define=PERSON=teo
+
+      - name: pack it into the android build
+        run: python3 tools/pack_pwa.py
+
+      # Best effort: the runner image usually has them accepted already, and a build that needs
+      # an NDK the image does not carry will fetch it and be refused without this.
+      - name: the android licences
+        run: |
+          yes | "${ANDROID_SDK_ROOT:-$ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null 2>&1 || true
+
+      - name: the apk
+        working-directory: app
+        run: |
+          flutter build apk --release --split-per-abi --target-platform android-arm64 \
+            --dart-define=TRANSPORT=tailscale --dart-define=ROLE=host --dart-define=PERSON=noor
+
+      # Opens the file rather than trusting the build log: who signed it, what ABIs are in it, and
+      # whether it carries a web app for the iPhone at all.
+      - name: read the apk back
+        run: |
+          set -euo pipefail
+          python3 tools/check/apk.py --out evidence/logs/apk.json || failed=yes
+          if [ "${{ steps.key.outputs.signed }}" = "yes" ] && [ "${failed:-}" = "yes" ]; then
+            echo "::error::tools/check/apk.py refused this APK; see the record above."
+            exit 1
+          fi
+
+      - name: name it and weigh it
+        id: file
+        run: |
+          set -euo pipefail
+          src=app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          cp "$src" love-tap-noor-arm64.apk
+          echo "sha256=$(sha256sum love-tap-noor-arm64.apk | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+
+      - name: what to say about it
+        if: steps.what.outputs.tag != '' && steps.key.outputs.signed == 'yes'
+        run: python3 tools/release_notes.py --tag "${{ steps.what.outputs.tag }}" --apk love-tap-noor-arm64.apk --out notes.md
+
+      - name: release it
+        if: steps.what.outputs.tag != '' && steps.key.outputs.signed == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag='${{ steps.what.outputs.tag }}'
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release edit "$tag" --notes-file notes.md --prerelease
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            gh release create "$tag" --title "$tag" --notes-file notes.md --prerelease
+          else
+            gh release create "$tag" --title "$tag" --notes-file notes.md --prerelease --target "$GITHUB_SHA"
+          fi
+          gh release upload "$tag" love-tap-noor-arm64.apk --clobber
+          echo "### [love-tap-noor-arm64.apk]($(gh release view "$tag" --json url -q .url))" >> "$GITHUB_STEP_SUMMARY"
+          echo "sha256 \`${{ steps.file.outputs.sha256 }}\`" >> "$GITHUB_STEP_SUMMARY"
+
+      # Anything that is not a signed release: the file is still worth having and reading, and the
+      # name says what it is so nobody installs a debug-signed build by mistake.
+      - name: keep the file when there is no release to put it in
+        if: steps.what.outputs.tag == '' || steps.key.outputs.signed != 'yes'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.key.outputs.signed == 'yes' && 'love-tap-noor-arm64' || 'UNSIGNED-do-not-install' }}
+          path: love-tap-noor-arm64.apk
+          retention-days: 7
+
+      - name: a tag with no key is not a release
+        if: steps.what.outputs.tag != '' && steps.key.outputs.signed != 'yes'
+        run: |
+          echo "::error::This run was asked to release ${{ steps.what.outputs.tag }} and there is" \
+               "no signing key, so it did not. The APK it built is attached to this run as" \
+               "UNSIGNED-do-not-install: it is debug-signed, which installs and is not a release," \
+               "because a real build cannot replace a debug-signed one without an uninstall and" \
+               "an uninstall takes the log with it. Add the four secrets and run this again."
+          exit 1
+
+      - name: the record, whatever happened
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: what-was-measured
+          path: |
+            evidence/logs/apk.json
+            evidence/logs/pwa_packed.json
+          if-no-files-found: warn
+
+      # The key does not outlive the job that needed it, whatever happened to that job.
+      - name: put the key away
+        if: always()
+        run: rm -f app/android/key.properties "$RUNNER_TEMP/release.jks"
