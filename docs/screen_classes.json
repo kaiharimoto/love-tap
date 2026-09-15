@@ -1,0 +1,19 @@
+{
+ "_": "Which class each still is scored in, declared by docs/COLOR.md section 3. tools/check/palette.py reads this with --classes. A screen not listed here is a room, because room is the strict class and a screen should have to argue for the exemption rather than inherit it.",
+ "_room": "A room is a place in the app. Its median pixel is paper: lightness.p50 in [0.78, 0.95], value_bands.ground at most 0.50, and it counts toward lightness_drift_room, which is capped at 0.20.",
+ "_viewer": "A viewer is a screen whose entire job is to present a photograph or a video at full size. It has no lightness.p50 floor and is excluded from lightness_drift_room. It is exempt from nothing else: every contrast floor in section 6 applies to every mark on it unchanged, and section 8 says the thing that darkens is the desk behind the photograph, never the sheet, never the chrome and never the ink. At most one artifact in the evidence set may be a viewer.",
+ "classes": {
+  "01_pulse.png": "room",
+  "02_chat.png": "room",
+  "03_us.png": "room",
+  "04_moments.png": "room",
+  "05_settings.png": "room",
+  "09_two_devices.png": "room",
+  "10_first_run.png": "room",
+  "12_search.png": "room",
+  "13_messenger_states.png": "room",
+  "14_media_viewer.png": "viewer",
+  "16_setup_android.png": "room",
+  "17_setup_pwa.png": "room"
+ }
+}

@@ -15,9 +15,14 @@
  "evidence_note": "The 14 artifacts on disk were captured before the fixes listed in docs/CONTINUE.md section 2, so they are stale for scoring and fine for designing against: they are what the build actually looks like today.",
  "degradation": 4,
  "design": {
-  "verdict": "pending",
-  "decided_at_cycle": null,
-  "frozen_until_cycle": 0
+  "verdict": "keep and retune",
+  "decided_at_cycle": 3,
+  "frozen_until_cycle": 6,
+  "recorded_in": [
+   "docs/COLOR.md",
+   "DIRECTION.md decisions log 2026-09-15"
+  ],
+  "freeze_rule": "inside the window the authority may not reverse this without citing a measurement that contradicts it"
  },
  "measured_at_firing_0": {
   "legibility": {
@@ -44,42 +49,112 @@
    "id": "design-colour-law",
    "why": "visual_design, the row the owner asked for; blocks everything else in the look",
    "measurement": "docs/COLOR.md exists and states the lightness ladder, hue relationships, chroma ceiling per band and contrast floors in numbers tools/check/palette.py can be pointed at",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "docs/COLOR.md, 739 lines, 12 sections; ladder, hue families in degrees, per-band chroma ceiling and floor, contrast floors per light condition, all in quantities tools/check/palette.py reports",
    "attempts": 0
   },
   {
    "id": "desk-verdict",
    "why": "visual_design + material_truth; the owner named the desk specifically",
    "measurement": "a dated entry in DIRECTION.md's decisions log naming keep-and-retune or replace, and the measurement that forced it",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "DIRECTION.md decisions log, 2026-09-15: keep and retune, with the r=0.87 desk-area correlation and the negative-required-luminance arithmetic",
    "attempts": 0
   },
   {
    "id": "on-desk-text-legibility",
    "why": "visual_design 0; confirmed at 1.56:1 against a 4.5:1 floor",
    "measurement": "tools/check/legibility.py reports no body run below 4.5:1 in 02_chat.png",
-   "state": "open",
-   "closed_by": null,
+   "state": "superseded",
+   "closed_by": "superseded by words-off-the-desk, which carries the same measurement plus the law behind it",
    "attempts": 0
   },
   {
    "id": "media-viewer-scrim",
    "why": "visual_design + messenger_reliability; body text at 1.43:1",
    "measurement": "tools/check/legibility.py reports no body run below 4.5:1 in 14_media_viewer.png",
-   "state": "open",
-   "closed_by": null,
+   "state": "superseded",
+   "closed_by": "superseded by nothing-with-a-word-on-it-dims, which carries the same measurement plus the law behind it",
    "attempts": 0
   },
   {
    "id": "legible-test-thresholds",
    "why": "the guard that should have caught both of the above and did not",
    "measurement": "app/test/legible_on_what_it_is_on_test.dart fails when Pen.margin is put back to a value that only clears 4.5:1 on the palest stock",
+   "state": "superseded",
+   "closed_by": "superseded by ink-ladder-in-oklab, which carries the same measurement plus the law behind it",
+   "attempts": 0,
+   "note": "Hands.onDesk defaults to size 13 and Hands.stamp to size 12, and the test asserts the 3:1 large-text floor for both. At 12-13px the floor is 4.5:1. Separately, Pen.margin clears 4.5 only on Paper.lined: it is 4.05 on aged, 4.01 on stickyYellow, 4.22 on legal and 4.47 on graph, and the test checks only lined."
+  },
+  {
+   "id": "color-palette-floors",
+   "why": "docs/COLOR.md declares the floors that tools/check/palette.py has been waiting for since it was written \u2014 its closing docstring says it carries no pass/fail floor 'until docs/COLOR.md declares one'. Until the tool can fail, the law is prose.",
+   "measurement": "`python3 tools/check/palette.py --floors --classes docs/screen_classes.json` exits 0. Requires the five additions in docs/COLOR.md \u00a711: a `--classes` room/viewer map adding `across_the_set.lightness_drift_room`; `chroma.accent_fraction` (fraction of pixels at OKLab C >= 0.09); `chroma.accent_fraction_by_family` split by the four \u00a74 hue bands; `across_the_set.hue_families` and `across_the_set.widest_hue_gap_deg` over the unioned family list; and `--floors` itself. Without `--floors` the tool must keep reporting and exiting 0.",
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "Hands.onDesk defaults to size 13 and Hands.stamp to size 12, and the test asserts the 3:1 large-text floor for both. At 12-13px the floor is 4.5:1. Separately, Pen.margin clears 4.5 only on Paper.lined: it is 4.05 on aged, 4.01 on stickyYellow, 4.22 on legal and 4.47 on graph, and the test checks only lined."
+   "note": "Do this one first. Every other item on this list is measured by it or by the next one. It changes no pixels, so it can land while the build is red and will report exactly how red.",
+   "from": "design, cycle 3"
+  },
+  {
+   "id": "legibility-adversarial-ground",
+   "why": "The tool reads every ground at GROUND_PCTL = 90 \u2014 the light end of the ring \u2014 which for dark ink is the flattering end. On a plank whose own internal contrast is 1.62:1 that is the difference between a pass and the truth. The desk failures were found by hand; they should be found by the tool.",
+   "measurement": "`python3 tools/check/legibility.py --out evidence/legibility.json` reports a new per-run `ground_swing` (the contrast ratio between the ring's p05 and p95 luminance within a window the size of the run's own height) and, where `ground_swing >= 1.20`, gates the floor against the ring's p05 for dark ink and p95 for light ink. Assert it on the committed capture: the composer-placeholder run in `02_chat.png` must report `ground_swing >= 1.5` and fail. Add `--dusk` naming the dusk artifacts, raising FLOOR_BODY to 5.0 and FLOOR_LARGE to 4.5; FLOOR_LARGE goes to 4.0 by day.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "Keep reporting the current GROUND_PCTL = 90 number alongside. It was the right fix for a dense paragraph whose ring is mostly its own antialiasing, and removing it would reintroduce the 2.83:1 false reading its comment records.",
+   "from": "design, cycle 3"
+  },
+  {
+   "id": "words-off-the-desk",
+   "why": "The single highest-leverage change in the build. No dark ink of any colour reaches 4.5:1 on the day desk \u2014 the arithmetic returns a negative required luminance \u2014 so this cannot be tuned, only obeyed.",
+   "measurement": "A new Dart test, `app/test/no_word_is_written_on_the_desk_test.dart`: pump each of the five regions and assert no `Text`, `Stamped`, `Written` or `SelectableText` is a descendant of `Desk` without a `PaperPiece` between them. Then `python3 tools/check/legibility.py --only 02_chat.png` shows zero light-on-dark failures, down from the current 56 across the set. Delete `Pen.onWood` and `Hands.onDesk` from `app/lib/material/palette.dart` and `hands.dart`; the composer placeholder, the send and search affordances, the day separators, the three Moments section headers and the blob-pending line each get a stock strip.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "DIRECTION.md's 2026-09-04 decision that there is no icon set anywhere means love-tap's affordances are almost all words, so this is four or five widgets rather than a constant change. Shapes that are not words \u2014 tally strokes, rules, arrows, the pencil-stub battery \u2014 stay on the wood at 3:1 against the adversarial end.",
+   "from": "design, cycle 3"
+  },
+  {
+   "id": "margin-pencil-into-the-ink-band",
+   "why": "Pen.margin at L 0.529 is not an ink that is slightly too pale \u2014 it sits in the `mid` band, which is where shadows live. It is a shadow that has been asked to spell, and it is the sole cause of seven of the eight entries in the current ratchet list.",
+   "measurement": "Move `Pen.margin` to OKLab L <= 0.40, derived from the binding case: aged stock rendered at dusk measures Y p50 0.5528 and the dusk body floor of 5.0:1 requires ink at Y <= 0.0706, i.e. L <= 0.413. Then `_knownBelowFloor` in `app/test/legible_on_what_it_is_on_test.dart` must be emptied \u2014 the test already fails an entry that has been fixed and left in the list, so this is self-checking.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "The constant's own comment says it was tuned 'against the palest stock' and means it. That is the wrong end of the range; ink is tuned against the darkest ground it can land on.",
+   "from": "design, cycle 3"
+  },
+  {
+   "id": "ink-ladder-in-oklab",
+   "why": "The existing guard is six luminance pairs against two declared grounds and it passed while 48.4% of the build's text was below the floor. The ladder in docs/COLOR.md \u00a72 is what it should have been checking.",
+   "measurement": "Extend `app/test/legible_on_what_it_is_on_test.dart` with OKLab assertions: every ink at L <= 0.40; nothing in the `mid` band (0.52\u20130.64) carries a word; every surface at least 0.18 L from the surface it rests on. Keep the existing every-ink-by-every-stock sweep and the `_knownBelowFloor` ratchet. Re-break it to prove it: put `Pen.onWood` back and watch the ladder test fail.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "The ladder is a Dart test because it is about declared constants; the pixels are legibility.py's job. Two mechanisms, two jobs, no overlap.",
+   "from": "design, cycle 3"
+  },
+  {
+   "id": "nothing-with-a-word-on-it-dims",
+   "why": "14_media_viewer dims the whole sheet and takes body text to 1.43:1, and drives the still's grey fraction to 0.1432 against a set mean of 0.0324. DIRECTION.md already forbids this in four words \u2014 'Never a dim overlay' \u2014 and nothing could check it.",
+   "measurement": "`python3 tools/check/legibility.py --only 14_media_viewer.png` reports zero runs below 4.5:1, down from 21 of 40, and `palette.py` reports `14_media_viewer` `grey_fraction` <= 0.08. A widget test asserts no `PaperPiece` with a `Text` descendant receives opacity < 1.0 and no scrim composites over one. The viewer darkens the `Desk` layer from `ground_day` to `ground_dusk` and leaves the sheet, the ink and the chrome alone.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "Same rule retires the blanket `Opacity(0.55)` that PartnerStrip applies when the partner is asleep. Asleep is expressed by the stock and by pen weight, not by fading the sentence you still need to read.",
+   "from": "design, cycle 3"
+  },
+  {
+   "id": "pen-pressure-stays-above-the-floor",
+   "why": "PartnerStrip writes the partner's status line at alpha 0.55 + 0.15 x energy. At energy 0 that composites ballpoint on lined stock to roughly 3.3:1 and graphite lower still. Expressiveness that costs legibility is a bug wearing a feature's clothes.",
+   "measurement": "A Dart test asserting every composited ink that carries a word clears the day and dusk floors at its minimum alpha across every stock in the library. Change the range in `app/lib/material/desk.dart` from `0.55 + 0.15 * energy` to `0.80 + 0.05 * energy`. Verified in pixels by the partner-strip runs in `01_pulse.png` and `crops/dusk_pulse.png` clearing 4.5:1 and 5.0:1 respectively.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "Pen pressure is a good idea and it stays. A hand that presses lightly is still a hand you can read.",
+   "from": "design, cycle 3"
   },
   {
    "id": "moments-lazy-gallery",
@@ -91,15 +166,6 @@
    "note": "moments_region.dart:293 has no lazy child model, so all 183 tiles build at once -- 129 concurrent IndexedDB reads. _Gallery already computes each tile's height, so it knows each tile's top. blob_widgets.dart:50 passes no cacheWidth."
   },
   {
-   "id": "surfaces-folds-family",
-   "why": "material_truth + anti_goal; 281 of 320 frames of 06_unfolding.mp4 are a flat rectangle",
-   "measurement": "tools/check/surfaces.py reports the folds family and fails on frames below 1.2",
-   "state": "open",
-   "closed_by": null,
-   "attempts": 0,
-   "note": "done at firing 0: the family and the recursive glob are in. The re-render of blender/folds/fold.py with the tooth the stocks carry is what remains."
-  },
-  {
    "id": "spine-all-in-build",
    "why": "coherence; 14k events walked per frame in two regions",
    "measurement": "a case in app/test/scroll_cost_test.dart with a budget, as the existing ones have",
@@ -109,6 +175,46 @@
    "note": "moments_region.dart:42 and us_region.dart:26 call scope.spine.all inside build(); Spine.countOf is O(n) and runs on every change."
   },
   {
+   "id": "desk-plate-to-its-declared-flat",
+   "why": "The plate renders 0.120 L lighter than the flat colour declared as its fallback, so a screen that gets the render and a screen that falls back to the constant are two different grounds, and every on-desk constant in the build was specified against the one that almost never ships.",
+   "measurement": "Re-render `blender/shell/desk.py` at a lower exposure within the existing rig \u2014 no second light \u2014 until the plate measures OKLab L p50 0.40 +/- 0.03 against `DeskColour.day` L 0.375, and the dusk plate 0.26 +/- 0.03 against `DeskColour.dusk` L 0.265. Verify with `python3 tools/check/palette.py --dir assets/shell`, and add the general rule to the floors: any rendered ground within 0.05 L of its declared flat fallback. Re-record both files through `blender/rig/manifest.py`.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "Two files, 4.2 MB of the 103 MB library, both already in assets/MANIFEST.json. Keep the grain \u2014 it is what makes it a render rather than a fill, and words-off-the-desk is what makes the grain harmless. Independently confirmed that the plate in the repository is the plate in the captures (L mean 0.4839 vs 0.4846, grain sd 0.0464 vs 0.0444), so this is not chasing a stale render.",
+   "from": "design, cycle 3"
+  },
+  {
+   "id": "paper-is-the-median-pixel",
+   "why": "Three screens have a median pixel that is desk rather than paper, and they are the three worst in the set for legibility. DIRECTION.md says each region is a stack of paper on a desk; 10_first_run is a plank with a note in the middle of it.",
+   "measurement": "`palette.py --floors` shows every room screen with `lightness.p50` in [0.78, 0.95] and `value_bands.ground` <= 0.50. Today 02_chat is 0.575 p50 / 0.5016 ground, 04_moments 0.495 / 0.8187, 10_first_run 0.495 / 0.8352. Also `value_bands.mid` >= 0.04, which 04 (0.0249) and 10 (0.0157) currently fail, and `lightness_drift_room` <= 0.20 against today's 0.452.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "This is a layout change expressed in colour quantities. The empty mid band on 04 and 10 is the tell: a plank and some paper with nothing in between is a two-value image with no depth. Expect the legibility rate on those two screens to fall from 76\u201379% to near zero as a side effect.",
+   "from": "design, cycle 3"
+  },
+  {
+   "id": "one-coloured-thing-per-screen",
+   "why": "Six of the nine stills contain zero pixels at OKLab chroma >= 0.09. Across nine full-resolution screenshots there are about 550 coloured pixels, 0.006% of what was sampled. This is the client's second complaint with a number under it, and it is the cheapest of the charm floors to satisfy.",
+   "measurement": "`palette.py --floors` shows every room still with `accent_fraction` >= 0.010 and `chroma_by_band.figure.p99_chroma` >= 0.10, against today's 0.0000\u20130.0023 and 0.0181\u20130.0802 (all nine fail both). At the 700px sample a 1% patch is about 70x70 \u2014 one sticky note, one highlighter run, one foil star. The ceilings must hold at the same time: figure p99 <= 0.16, mid <= 0.13, ground <= 0.09.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "Spend it on objects that already exist in assets/objects/ \u2014 the foil star, the pressed clover, the torn ticket, the pink sticky \u2014 rather than on new colour. 17_setup_pwa is the place to start: it is the first screen a new user sees and the most colourless in the build at figure p99 0.0181.",
+   "from": "design, cycle 3"
+  },
+  {
+   "id": "families-b-c-and-d-reach-the-glass",
+   "why": "DIRECTION.md's palette already declares the cool family ('graph paper cool blue-grey #e9ecec with #b9cbe0 rules') and the rose family ('red pen #a8322b', the faded pink sticky), and blender/SPEC.md prints both on every sheet of stock. Neither registers as a hue family in any capture. The palette that is written down covers the wheel; the one that ships is a 50\u00b0 wedge.",
+   "measurement": "`palette.py --floors` shows the unioned `widest_hue_gap_deg` <= 150\u00b0 with `hue_families` >= 4, against today's ~310\u00b0. Per still, `hue_families` >= 3 and `widest_hue_gap_deg` <= 200\u00b0. `accent_fraction_by_family` shows non-zero area in bands B (345\u00b0\u201335\u00b0), C (215\u00b0\u2013275\u00b0) and D (120\u00b0\u2013165\u00b0). Raise the printed rules' chroma so they clear the tool's 0.012 area-weighted hue floor; give graph stock the blue-grey cast it is declared to have; introduce family D through objects and stock only.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "150\u00b0 is the widest gap in a split-complementary scheme \u2014 the loosest classical harmony that still reads as deliberately coloured. Three families at 10\u00b0/80\u00b0/235\u00b0 leave 155\u00b0 and fail by five degrees, which is why D is required by arithmetic rather than by taste. Family D does not authorise a green pen: both the brief and DIRECTION.md name the pens as ballpoint, graphite, biro and red, and Teo stays graphite.",
+   "from": "design, cycle 3"
+  },
+  {
    "id": "feeling-families-visible",
    "why": "emotional_transmission; four families visible where the floor is five",
    "measurement": "a widget test that counts the families the corner renders",
@@ -116,6 +222,15 @@
    "closed_by": null,
    "attempts": 0,
    "note": "corner.dart:271 iterates Family.values, all six, so this is a layout overflow."
+  },
+  {
+   "id": "surfaces-folds-family",
+   "why": "material_truth + anti_goal; 281 of 320 frames of 06_unfolding.mp4 are a flat rectangle",
+   "measurement": "tools/check/surfaces.py reports the folds family and fails on frames below 1.2",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "note": "done at firing 0: the family and the recursive glob are in. The re-render of blender/folds/fold.py with the tooth the stocks carry is what remains."
   },
   {
    "id": "haptic-evidence",
