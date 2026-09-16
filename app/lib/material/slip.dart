@@ -168,12 +168,27 @@ class Strip extends StatelessWidget {
   }
 }
 
-/// An empty surface: one sentence, on a piece of paper, on the desk.
+/// An empty surface: one sentence, on the pad of paper that region is.
 ///
 /// The brief allows exactly one empty-state artifact, and it is the one place the couple's own
 /// voice has to carry the whole screen. Floating grey text in the middle of a desk is a product
 /// saying "no items"; a line written on a piece of paper that somebody left there is two people
 /// who have not got round to it yet.
+///
+/// It used to be one small slip centred on bare wood, and that is measurably the wrong picture.
+/// `DIRECTION.md` says the shell is a desk seen from above and *each region is a different stack
+/// of paper on it* — and `10_first_run.png`, which is this widget and almost nothing else, came
+/// back at `lightness.p50` 0.4093 with 79% of its pixels in its own darkest third. The plank was
+/// the subject and the writing was an incident on it. `docs/COLOR.md` section 2 puts the number
+/// on the sentence that was already law: `value_bands.ground` at most 0.50, every room screen's
+/// median pixel in [0.78, 0.95].
+///
+/// So an empty region is the pad, blank: sheets enough to cover the surface, with the desk still
+/// showing at the margin because the paper is *on* something. The sheets under the top one are
+/// not decoration either. Section 2 asks for `value_bands.mid` of at least 0.04 and calls an
+/// empty mid band a two-value image — a plank and some paper with nothing in between. The mid
+/// band is contact shadow and edge light, and on a screen with one sentence on it the only place
+/// either can come from is one sheet lying on another.
 class EmptySurface extends StatelessWidget {
   const EmptySurface({super.key, required this.id, required this.line, this.aside});
 
@@ -183,31 +198,93 @@ class EmptySurface extends StatelessWidget {
   /// A second, quieter line, in the margin hand.
   final String? aside;
 
+  /// The desk left showing around the pad. A stack of paper on a desk has to be *on* the desk, so
+  /// this may not go to zero however much it would help the median: the margin is what makes the
+  /// screen a surface with paper on it rather than a page.
+  static const _margin = 22.0;
+
+  /// How far each sheet under the top one shows past its corner, and how many there are. The
+  /// offset is small because a pad is nearly square at its edge; what is being bought is not the
+  /// sliver of stock but the shadow the top sheet casts onto the one under it.
+  static const _peek = 7.0;
+  static const _under = 2;
+
+  /// What to assume when nothing above has bounded the height. Every call site today is inside an
+  /// `Expanded`, so this is the unreachable branch — but a pad that fills its parent must ask its
+  /// parent how big it is, and `LayoutBuilder` hands back infinity rather than an error.
+  static const _unboundedHeight = 520.0;
+
+  static const _sheetPadding = EdgeInsets.fromLTRB(20, 18, 20, 20);
+
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width * 0.72;
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 40, 24, 80),
-        child: Slip(
-          id: 'empty.$id',
-          row: 3,
-          width: width,
-          padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(line, style: Hands.noor(size: 19)),
-              if (aside != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Text(aside!, style: Hands.margin(size: 14)),
+    return LayoutBuilder(
+      builder: (context, box) {
+        final outerW = box.maxWidth - _margin * 2;
+        final outerH =
+            (box.maxHeight.isFinite ? box.maxHeight : _unboundedHeight) - _margin * 2;
+        // A region too small to lay a pad in gets nothing rather than a negative width.
+        if (outerW <= _peek * _under || outerH <= _peek * _under) return const SizedBox.shrink();
+
+        final sheetW = outerW - _peek * _under;
+        final sheetH = outerH - _peek * _under;
+
+        return Padding(
+          padding: const EdgeInsets.all(_margin),
+          child: SizedBox(
+            width: outerW,
+            height: outerH,
+            // The under-sheets are offset down and right, so the stack still occupies exactly
+            // outerW by outerH and nothing is clipped at the Stack's edge.
+            child: Stack(
+              children: [
+                for (var i = _under; i >= 1; i--)
+                  Positioned(
+                    left: _peek * i,
+                    top: _peek * i,
+                    // A different id is a different stock and a different tear, which is the
+                    // point: three sheets torn along one line is a printed pad, not a stack.
+                    child: Slip(
+                      id: 'empty.$id.under$i',
+                      row: 3 + i,
+                      width: sheetW,
+                      padding: EdgeInsets.zero,
+                      child: SizedBox(width: sheetW, height: sheetH),
+                    ),
+                  ),
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  child: Slip(
+                    id: 'empty.$id',
+                    row: 3,
+                    width: sheetW,
+                    padding: _sheetPadding,
+                    child: SizedBox(
+                      width: sheetW - _sheetPadding.horizontal,
+                      height: sheetH - _sheetPadding.vertical,
+                      // Written at the top of the sheet, where somebody writing on a pad starts,
+                      // rather than centred in it, which is where a dialog box puts things.
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(line, style: Hands.noor(size: 19)),
+                          if (aside != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Text(aside!, style: Hands.margin(size: 14)),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
