@@ -699,3 +699,95 @@ follows a drained backlog is in `tools/relight.py` and in the item's note; the h
 that the ground, mid and figure **mean** floors and every ceiling come good, and that
 `across_the_set.mean_chroma`, `figure.p99_chroma`, `accent_fraction` and the hue families do not,
 because those are albedo and this was a light.
+
+## Cycle 3 · IMPLEMENT · firing 6 — the order, and an asset with no maker
+
+### The question this firing was handed, and what it decided
+
+The firing arrived with a fair challenge: `evidence/palette.json` still reads `mean_chroma` 0.0181
+from the capture taken *before* the lamp changed, so two firings of work on the illuminant are
+currently an assertion, and this repository's first rule is that a measurement beats an assertion.
+A capture is what turns that into a result. Should it have run OBSERVE?
+
+**No, and the reason is that the capture would not have measured what it appears to measure.**
+`loop/STATE.json` named IMPLEMENT and the queue was not drained, which settles the protocol half.
+The substantive half is the one worth writing down. At the moment this firing started, the library
+was in the state its own queue item `the-library-is-lit-by-two-lamps` describes: `assets/shell`,
+`assets/paper`, `assets/objects` and most of `assets/bits` re-rendered under the corrected 5080 K
+day rig, and `assets/tears` (8 of 168 day files), `seed/photos` (0 of 115) and `assets/folds`
+(0 of 240) still under the neutral 6445 K lamp that firing 5 proved was never 5200 K. Every screen
+in the build composites the two together.
+
+A capture of that is a real state and an unrepeatable one. Its `palette.json` would be neither the
+number the lamp work predicts nor the number it replaced; it would be an average over a boundary
+that exists only until the backlog drains, and it would be quoted afterwards as though it measured
+the lamp. 04_moments and 14_media_viewer are the two stills that fail the ground chroma floor
+hardest and they are *made of* photographs — the single family with zero files relit. Measuring
+them before the photographs are relit measures the old lamp and attributes it to the new one.
+
+Firing 5 reached the same conclusion from the other end and wrote it down in plain words at the
+close of its entry: *"The next firing should finish that script before it does anything else, and
+certainly before any capture."* This firing agrees, and adds the argument above so the reasoning
+survives independently of the instruction.
+
+So: the queue first, and the ordering inside the queue is the render backlog, because the backlog
+is the thing standing between this build and a capture that means anything. The warmth thread stays
+an unproven claim for one more firing, and the alternative was to make it a *disproven* one on
+evidence that could not be reproduced.
+
+### An asset whose generator could not make it
+
+`obj_heart_fold.png` and its two shadows named `blender/objects/objects.py` as their generator.
+That file builds twenty-five objects and heart_fold is not among them — and the reason it is not is
+already written, in the docstring of the object that replaced it:
+
+> This replaces an origami heart. A heart is a glyph whatever it is modelled out of — a filled
+> white one on a warm ground is the emoji whether or not it was folded — and the anti-goal is about
+> what a thing reads as, not how it was made.
+
+So the design call was made three cycles ago and only half of it landed. `app/lib/feelings/builtins.dart`
+has shipped `obj_pinch` for `squeeze` ever since; `docs/FEELINGS.md`, `blender/SPEC.md` and three
+files in `assets/` never heard. `loop/STATE.json`'s note on the item reserved the authoring-or-
+retiring question for design — correctly, when it was written — but there was no question left to
+reserve. Retiring the files is executing a decision, not making one.
+
+### The hole in the gate, which is the part that generalises
+
+`tools/check/manifest.py` reported *"634 files in assets/, 0 without an entry naming their
+generator"* while two of those files had no maker. It asked whether an entry **exists**. It never
+asked whether the named generator could **produce** the file, and those are not the same question.
+
+It now reads each generator's catalogue out of the generator itself and fails on an entry whose
+subject is not in it. Statically, with `ast`, because these modules import `bpy` at the top and a
+gate that only runs where Blender is installed is a gate that does not run — this one runs in
+`capture.sh`'s pre-flight.
+
+The coverage is partial, and **the report says so rather than implying otherwise**: 458 entries
+checked against a catalogue, 308 named as having none, broken down by generator. Understating what
+a gate knows is the entire lesson of the bug it was written to catch. The five generators that keep
+a catalogue (`objects.py`, `stocks.py`, `bits.py`, `fold.py`, `synth.py`) are covered; the five that
+are procedural, seeded or single-output (`tear.py`, `tear_relief.py`, `still.py`, `desk.py`,
+`build.py`) are named as unverified, and each is a few lines to add when someone decides what its
+catalogue is.
+
+Re-broken as the item required: dropping `obj_clover` from `OBJECTS` makes the check name
+`obj_clover.png`, its shadow and its dusk shadow alongside heart_fold's three, and exit 1. Putting
+it back returns it to green. Before the retirement the gate found exactly the three heart_fold
+files and exited 1; after it, 634 files, zero unbuildable, exit 0.
+
+`tools/render_queue6.sh` had a comment naming heart_fold as the live example of why
+`restore_missing` exists. That example is no longer true, and a false comment in a script this
+build relies on is the same defect one layer up, so it now records the case in the past tense and
+says what replaced it.
+
+### The test that had never been compiled
+
+`docs/CONTINUE.md` and `loop/WORKER_PROMPT.md` both flag `app/test/legible_on_what_it_is_on_test.dart`
+as rewritten by a firing with no Flutter toolchain, never built, and gating every code commit. This
+is the first firing to bootstrap a toolchain since. **It compiles, and its four tests pass**, inside
+a full suite of 98 passed. The flag can come down.
+
+One setup step is not written down anywhere and cost this firing ten minutes: `flutter test` fails
+at *"unable to find directory entry in pubspec.yaml: app/assets/paper/"* in a fresh container,
+because `app/assets/` is generated and gitignored. `python3 tools/pack_assets.py` writes it, and
+`run.sh` calls that only on a build. Run it once after `bootstrap.sh` and the suite runs.
