@@ -3,10 +3,10 @@
  "frames": 488,
  "fps": 60.0,
  "seconds": 8.13,
- "mean_change_per_frame": 0.01056,
- "repeated_frames": 97,
- "repeated_fraction": 0.199,
- "longest_still_run": 38,
+ "mean_change_per_frame": 0.01292,
+ "repeated_frames": 71,
+ "repeated_fraction": 0.146,
+ "longest_still_run": 23,
  "repeated_at": [
   0,
   1,
@@ -21,8 +21,9 @@
   10,
   11
  ],
- "brightness_jumps": 0,
- "ok": true,
+ "brightness_jumps": 1,
+ "ok": false,
+ "why": "the light jumps 1 times",
  "strip": "evidence/crops/08_state_propagating_strip.png",
  "strip_frames": [
   "/tmp/lovetap-capture/08_state_propagating/000000.png",

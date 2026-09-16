@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4543
+   "ms": 4419
   },
   {
    "do": "wait",
-   "ms": 2303
+   "ms": 2302
   },
   {
    "do": "shot",
-   "ms": 5060
+   "ms": 5347
   },
   {
    "do": "report",
-   "ms": 1642
+   "ms": 1835
   }
  ],
  "shots": [
@@ -35,7 +35,6 @@
   {
    "region": 3,
    "visible": [
-    "0001M34C9R04NVG11H0AJ4SFDZ",
     "0001M3AY8G83A3FBSRB1Y7W78Q",
     "0001M3F41R2APQC59QKBMZK4XF",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF",
@@ -44,7 +43,6 @@
     "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M34C9R04NVG11H0AJ4SFDZ": "tear_004",
     "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
     "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
@@ -53,7 +51,6 @@
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
    },
    "stocks": {
-    "0001M34C9R04NVG11H0AJ4SFDZ": "looseleaf_03",
     "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
     "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
     "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
@@ -62,7 +59,7 @@
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
    },
    "scroll": {
-    "first": 8380,
+    "first": 8381,
     "last": 8387,
     "of": 8387
    },
@@ -91,7 +88,7 @@
    "at": "04_moments.png"
   }
  ],
- "cold_ms": 15534,
+ "cold_ms": 13718,
  "problems": [],
  "ok": true
 }

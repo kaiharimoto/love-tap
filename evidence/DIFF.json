@@ -1,5 +1,56 @@
 {
- "captured_at": "2026-09-16T01:03:42Z",
+ "captured_at": "2026-09-16T01:13:23Z",
  "note": "ssim against the previous session; label assigned by the coherence critic",
- "artifacts": {}
+ "artifacts": {
+  "01_pulse.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  },
+  "02_chat.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  },
+  "03_us.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  },
+  "04_moments.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  },
+  "05_settings.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  },
+  "10_first_run.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  },
+  "12_search.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  },
+  "13_messenger_states.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  },
+  "14_media_viewer.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  },
+  "17_setup_pwa.png": {
+   "ssim": 1.0,
+   "reading": "unchanged",
+   "label": null
+  }
+ }
 }
