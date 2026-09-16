@@ -171,7 +171,10 @@ reports. Cycle 2 cost ~1.2M subagent tokens and 583 tool calls and was worth eve
   state is in `toolchain/ts/{a,b}/state`; restart `tailscaled` with the flags
   `tools/tailscale/up.sh` uses and they return on the same addresses with no new key.
 - **`pkill -f <pattern>` will match your own shell** if the pattern appears anywhere in the same
-  command line. It killed three of mine. Split the literal.
+  command line. It killed three of mine. Split the literal. `pgrep` has the same mouth: a wait loop
+  written `until ! pgrep -f blender/shell/desk.py; do sleep 5; done` never exits, because the loop's
+  own command line contains the pattern and so pgrep always finds itself. Wait on the pid
+  (`while kill -0 "$pid"`) and the question does not arise.
 - **Never edit a running bash script** — bash reads it incrementally and the run corrupts.
 
 ## 6. Secrets, which are failure conditions

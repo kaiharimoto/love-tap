@@ -44,6 +44,7 @@ import argparse
 import glob
 import json
 import os
+import re
 import sys
 
 import numpy as np
@@ -59,6 +60,13 @@ CHROMA_MIN = 0.004    # below this it is grey and its hue is meaningless
 ACCENT_C = 0.09       # docs/COLOR.md section 7: at or above this a pixel is genuinely coloured
 
 CLASSES = os.path.join(ROOT, "docs", "screen_classes.json")
+DESK_DART = os.path.join(ROOT, "app", "lib", "material", "desk.dart")
+
+# docs/COLOR.md section 2: a rendered ground may not sit more than 0.05 L from the flat colour
+# declared as its fallback. Which plate answers to which constant; the constant itself is read out
+# of the Dart rather than copied here, because two copies of a colour is how they drift apart.
+DECLARED_FLATS = {"desk.png": "day", "desk_dusk.png": "dusk"}
+FLAT_TOLERANCE = 0.05
 
 # docs/COLOR.md section 4, the four families and the bands they own. B wraps through zero, which is
 # why these are pairs to be tested rather than a range to be compared.
@@ -263,7 +271,59 @@ def check_floors(report, classes):
         if actual is None or not holds(actual, op, floor):
             breaches.append({"artifact": "<the set>", "class": "-", "quantity": path,
                              "requires": f"{op} {floor}", "actual": actual, "section": section})
+    # Section 2's declared-flat rule is one of the floors, so --floors carries it. It is silent on
+    # a directory of screenshots, because only a rendered ground has a declared flat; --flats runs
+    # it alone, for pointing at assets/shell, where the room floors would be nonsense on a plank.
+    breaches.extend(check_flats(report)[0])
     return breaches
+
+
+def declared_flats(path=DESK_DART):
+    """`DeskColour`'s constants, as OKLab L, straight out of `app/lib/material/desk.dart`."""
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        src = f.read()
+    m = re.search(r"class DeskColour\s*\{(.*?)\n\}", src, re.S)
+    if not m:
+        return {}
+    out = {}
+    for name, hexed in re.findall(r"static const (\w+)\s*=\s*Color\(0x([0-9A-Fa-f]{8})\)",
+                                  m.group(1)):
+        v = int(hexed, 16)
+        rgb = np.array([[[(v >> 16) & 255, (v >> 8) & 255, v & 255]]], dtype=np.uint8)
+        out[name] = round(float(to_oklab(rgb)[..., 0].ravel()[0]), 4)
+    return out
+
+
+def check_flats(report):
+    """Every rendered ground that has drifted from the flat colour declared as its fallback.
+
+    This is the root cause the ladder in section 2 is about, not a cosmetic check: every on-desk
+    constant in this build was tuned against `DeskColour`, and the plate that actually ships was
+    0.120 L lighter than it. A screen that got the render and a screen that fell back to the
+    constant were two different grounds, and only one of them had ever been designed for.
+    """
+    flats = declared_flats()
+    breaches = []
+    for name in sorted(report["artifacts"]):
+        which = DECLARED_FLATS.get(name)
+        if which is None:
+            continue
+        if which not in flats:
+            breaches.append({"artifact": name, "class": "rendered ground",
+                             "quantity": f"DeskColour.{which}", "requires": "to be declared",
+                             "actual": None, "section": "2",
+                             "why": "app/lib/material/desk.dart does not declare it"})
+            continue
+        actual = report["artifacts"][name]["lightness"]["p50"]
+        drift = round(abs(actual - flats[which]), 4)
+        if drift > FLAT_TOLERANCE:
+            breaches.append({"artifact": name, "class": "rendered ground",
+                             "quantity": "lightness.p50 against DeskColour." + which,
+                             "requires": f"within {FLAT_TOLERANCE} L of {flats[which]}",
+                             "actual": actual, "drift": drift, "section": "2"})
+    return breaches, flats
 
 
 def load_classes(path):
@@ -286,6 +346,9 @@ def main():
     ap.add_argument("--classes", default=CLASSES,
                     help="room/viewer map (docs/screen_classes.json); pass '' to score every "
                          "screen as a room")
+    ap.add_argument("--flats", action="store_true",
+                    help="check rendered grounds against the flat colours declared as their "
+                         "fallbacks (docs/COLOR.md section 2); for --dir assets/shell")
     ap.add_argument("--floors", action="store_true",
                     help="enforce the floors in docs/COLOR.md and exit non-zero on a breach")
     args = ap.parse_args()
@@ -334,6 +397,16 @@ def main():
     }
     report["read"] = len(paths)
 
+    if args.flats:
+        flat_breaches, flats = check_flats(report)
+        report["declared_flats"] = {
+            "from": os.path.relpath(DESK_DART, ROOT),
+            "oklab_L": flats,
+            "tolerance_L": FLAT_TOLERANCE,
+            "breaches": len(flat_breaches),
+            "breached": flat_breaches,
+        }
+
     breaches = check_floors(report, classes) if args.floors else None
     if breaches is not None:
         report["floors"] = {
@@ -353,8 +426,25 @@ def main():
         print(f"  mean chroma {s['mean_chroma']}  ·  grey {s['grey_fraction']:.0%}  ·  "
               f"hue families {s['hue_families_min']}-{s['hue_families_max']}  ·  "
               f"lightness drift {s['lightness_drift']}")
-    elif not args.floors:
+    elif not args.floors and not args.flats:
         print(text)
+
+    if args.flats:
+        fb = report["declared_flats"]["breached"]
+        for b in fb:
+            print(f"  §{b['section']:<18} {b['artifact']:<24} {b['quantity']} "
+                  f"= {b['actual']}, requires {b['requires']}", file=sys.stderr)
+        if fb:
+            print(f"palette: {len(fb)} rendered grounds are not their declared flat",
+                  file=sys.stderr)
+            return 1
+        for name, which in sorted(DECLARED_FLATS.items()):
+            if name in report["artifacts"]:
+                got = report["artifacts"][name]["lightness"]["p50"]
+                print(f"  {name:<16} L {got}  ·  DeskColour.{which} "
+                      f"{report['declared_flats']['oklab_L'].get(which)}")
+        print("palette: every rendered ground is within "
+              f"{FLAT_TOLERANCE} L of its declared flat")
 
     if breaches is None:
         return 0

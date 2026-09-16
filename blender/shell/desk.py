@@ -329,7 +329,26 @@ def build_top(seed, w, h, tmp):
     return obj
 
 
-def render(res, condition, out_dir, samples, seed):
+# How far the plate is stopped down from what the rig gives it, in stops, per condition.
+#
+# It is here rather than in the rig because it is a fact about this one surface: the plank was
+# rendering 0.120 L lighter than `DeskColour.day`, the flat colour declared as its own fallback,
+# and 0.098 lighter than `DeskColour.dusk`. Every on-desk constant in the build was specified
+# against the flat, so a screen that got the render and a screen that fell back to the constant
+# were two different grounds and only one of them had ever been designed for. `docs/COLOR.md` §2
+# gives it a number: a rendered ground may not sit more than 0.05 L from its declared fallback.
+#
+# The arithmetic, not a taste: OKLab L is close to the cube root of luminance, and the Standard
+# view transform is a plain multiply in linear light, so the stops are log2((L_target/L_now)^3).
+# Day 0.5002 -> 0.400 is -0.97 and dusk 0.3626 -> 0.260 is -1.44.
+#
+# It is an exposure, not a second light. The rig stays one sun and one lamp, the direction is
+# unchanged, and the grain, the knots and the ring stains are the same fields at the same
+# amplitudes -- what changes is how much of the light the camera keeps.
+STOP_DOWN = {"day": -0.97, "dusk": -1.44}
+
+
+def render(res, condition, out_dir, samples, seed, stop_down=None):
     scene = common.reset_scene()
     ry = int(round(res * HEIGHT_M / WIDTH_M))
     tmp = tempfile.mkdtemp(prefix="desk-")
@@ -344,13 +363,18 @@ def render(res, condition, out_dir, samples, seed):
         # the daylight desk with the paper on it dimmer than both — wood glowing under dim notes,
         # in one picture, which is the first thing anyone looking for faked material checks.
         common.stop_down_for_dusk(scene)
+    stops = STOP_DOWN[condition] if stop_down is None else stop_down
+    scene.view_settings.exposure += stops
     name = "desk" if condition == "day" else "desk_dusk"
     path = os.path.join(out_dir, name + ".png")
     common.render(scene, path)
     manifest.record(path, "blender/shell/desk.py", {
         "width_m": WIDTH_M, "height_m": HEIGHT_M, "planks": PLANKS, "join_mm": JOIN_MM,
         "grain_mm": GRAIN_MM, "mesh": [MESH_X, MESH_Y], "res": [res, ry], "samples": samples,
-        "condition": condition, "seed": seed,
+        "condition": condition, "seed": seed, "stop_down_stops": stops,
+        "stopped_down_because": "docs/COLOR.md section 2: a rendered ground may not sit more than "
+                                "0.05 L from the flat colour declared as its fallback. This plate "
+                                "was 0.120 L light by day and 0.098 by dusk.",
         "grain": "computed at render resolution as albedo, height and gloss maps, not carried "
                  "by the mesh",
         "marks": "three ring stains, nine scratches, up to two knots a board",
@@ -363,16 +387,22 @@ def render(res, condition, out_dir, samples, seed):
 def main():
     argv = common.argv()
     ap = argparse.ArgumentParser()
-    ap.add_argument("--res", type=int, default=1400)
+    # 1100 because that is what the committed plate is, and a committed generator whose defaults
+    # do not reproduce the committed artifact is a trap: running it plainly to change one thing
+    # silently changes the resolution too, and the file grows by a megabyte nobody asked for.
+    ap.add_argument("--res", type=int, default=1100)
     ap.add_argument("--samples", type=int, default=48)
     ap.add_argument("--condition", default="both", choices=["day", "dusk", "both"])
     ap.add_argument("--seed", type=int, default=20260903)
+    ap.add_argument("--stop-down", type=float, default=None,
+                    help="override STOP_DOWN, in stops; for calibrating a new plate")
     ap.add_argument("--out", default=OUT)
     args = ap.parse_args(argv)
     os.makedirs(args.out, exist_ok=True)
     conditions = ["day", "dusk"] if args.condition == "both" else [args.condition]
     for c in conditions:
-        print("desk:", render(args.res, c, args.out, args.samples, args.seed))
+        print("desk:", render(args.res, c, args.out, args.samples, args.seed,
+                              stop_down=args.stop_down))
 
 
 if __name__ == "__main__":

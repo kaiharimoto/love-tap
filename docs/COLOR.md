@@ -690,6 +690,17 @@ here, checks `--floors` exits 0 on it, and then breaks one quantity at a time an
 matching floor comes back. It is a ruler for the ruler; it is not evidence and it is not a picture
 of love-tap.
 
+One more was added while building those five, because §2's declared-flat rule had no mechanism
+either. It is unnumbered deliberately: the numbering above runs on into `legibility.py` below, and
+renumbering a list other documents cite is how a reference goes quietly wrong.
+
+**`--flats`** — checks each rendered ground against the flat colour declared as its fallback,
+reading `DeskColour` straight out of `app/lib/material/desk.dart` rather than carrying a second copy
+of the hex. `--floors` carries the same check, so the rule is one of the floors rather than a
+separate idea; it is silent on a directory of screenshots, because only a rendered ground has a
+declared flat. `--flats` runs it alone, which is what `--dir assets/shell` wants: the room floors in
+§3 are nonsense applied to a plank.
+
 `tools/check/legibility.py` needs two:
 
 6. **`ground_swing` reported per run** — the contrast ratio between the 5th and 95th percentile

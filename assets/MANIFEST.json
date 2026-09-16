@@ -11042,7 +11042,7 @@
    }
   },
   "assets/shell/desk.png": {
-   "bytes": 2202063,
+   "bytes": 2085163,
    "generator": "blender/shell/desk.py",
    "kind": "shell",
    "settings": {
@@ -11064,12 +11064,14 @@
     "rig": "blender/rig/common.py",
     "samples": 48,
     "seed": 20260903,
+    "stop_down_stops": -0.97,
+    "stopped_down_because": "docs/COLOR.md section 2: a rendered ground may not sit more than 0.05 L from the flat colour declared as its fallback. This plate was 0.120 L light by day and 0.098 by dusk.",
     "tiles": "vertically, by construction: every field is whole-numbered sinusoids",
     "width_m": 0.42
    }
   },
   "assets/shell/desk_dusk.png": {
-   "bytes": 2124800,
+   "bytes": 2007133,
    "generator": "blender/shell/desk.py",
    "kind": "shell",
    "settings": {
@@ -11091,6 +11093,8 @@
     "rig": "blender/rig/common.py",
     "samples": 48,
     "seed": 20260903,
+    "stop_down_stops": -1.44,
+    "stopped_down_because": "docs/COLOR.md section 2: a rendered ground may not sit more than 0.05 L from the flat colour declared as its fallback. This plate was 0.120 L light by day and 0.098 by dusk.",
     "tiles": "vertically, by construction: every field is whole-numbered sinusoids",
     "width_m": 0.42
    }
