@@ -26,8 +26,19 @@ credential, that chain has broken; say so and stop, and do not try to route arou
 ### 0. Prove you can push, before you do any work
 
     cd /home/user/love-tap
-    git fetch origin
+    git fetch origin claude/app-improvement-autonomous-workflow-d6fwdu
+    git merge --ff-only origin/claude/app-improvement-autonomous-workflow-d6fwdu
     git push --dry-run origin HEAD:refs/heads/claude/app-improvement-autonomous-workflow-d6fwdu
+
+**Fetch the branch, never the remote.** Bare `git fetch origin` hangs in this container: firing 4
+watched it sit for eight minutes having read 3.6 MB and opened no pack file, while `git ls-remote`
+against the same URL answered in under a second. The repository is 552 MB of git objects and the
+bare form walks every ref, `main` included; the branch refspec does not, and finished in seconds
+every time. Every fetch in this file uses the refspec form for that reason.
+
+The `--ff-only` is the second half of it. A checkout that is behind fails the dry run with
+`non-fast-forward`, which looks alarming and is **not** a credential failure — do not report it as
+one. Fast-forward first, then dry-run again; `Everything up-to-date` is the pass.
 
 If that fails for any reason, **stop immediately** and make your whole final answer a verbatim
 report of the error. Do not do the stage. A firing that discovers it cannot push in the first
@@ -118,7 +129,7 @@ point and a fresh session gets a fresh clone, so the only durable unit of work i
 
 After every push, confirm it landed:
 
-    git fetch origin
+    git fetch origin claude/app-improvement-autonomous-workflow-d6fwdu
     [ "$(git rev-parse HEAD)" = "$(git rev-parse origin/claude/app-improvement-autonomous-workflow-d6fwdu)" ]
 
 A push that did not land is not a completed leg and must not be recorded as one. This is not

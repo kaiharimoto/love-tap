@@ -368,3 +368,196 @@ things. The gallery's load behaviour deserves an item of its own and does not ha
 A last note on process, since it cost twenty minutes. `CLAUDE.md` says never `pkill -f <pattern>`
 where the pattern appears in your own command line. It is the fourth time here. `fuser -k -n tcp
 <port>` does the same job and cannot match itself.
+
+## Firing 4 · cycle 3 · IMPLEMENT · 2026-09-16
+
+Step 0 passed, but not on the first command, and the reason is worth a successor's thirty seconds.
+`git fetch origin` — the bare form, which `loop/WORKER_PROMPT.md` §0 and `CLAUDE.md` both still
+print — **hangs indefinitely in this container**. It sat for eight minutes having read 3.6 MB and
+opened no pack file, while `git ls-remote` against the same URL answered in under a second. A
+targeted `git fetch origin claude/app-improvement-autonomous-workflow-d6fwdu` completed in seconds.
+The repository is 552 MB of git objects and the bare fetch walks every ref including `main`; the
+branch refspec does not. Every fetch in this firing used the refspec form and none of them took
+longer than four seconds. The first `--dry-run` push then failed `non-fast-forward`, which is not a
+credential failure and should not be reported as one: the checkout was three commits behind. After
+a fast-forward the dry run returned `Everything up-to-date`.
+
+The lease was taken, committed and pushed before a single file was read for work, per §2. It was
+the second commit of the firing and the first thing on the branch.
+
+**The stage.** IMPLEMENT, four items open, worked in queue order. One item advanced and did not
+close, two were diagnosed down to a cause neither of them had, and one new item was filed. No item
+closed outright.
+
+### The measurement that reframed the whole colour half
+
+`palette.py --floors` against the committed capture reports 58 breaches, and **roughly fifty of
+them are §5 chroma floors** — ground, mid and figure mean chroma, figure p99, accent fraction,
+spread across every still in the set. That is the owner's "doesn't evoke cuteness", and it dwarfs
+everything else on the board.
+
+Firing 3 established that the objects cannot pay for it: one `obj_*.png` of twenty-six has a pixel
+at the accent threshold. Its conclusion was that the charm floors need the objects re-rendered at
+higher chroma. **That conclusion was right about the numbers and wrong about the cause.**
+
+Every paper stock carries three to five times more chroma in its **dusk** render than in its **day**
+render, off the same albedo, through the same recipe. `lined_01` is Cmean 0.0132 by day and 0.0554
+at dusk. `graph_01` is 0.0074 and 0.0467. `looseleaf_01` is 0.0117 and 0.0540. Every dusk stock in
+the library clears §5's 0.030 ground floor; almost no day stock does.
+
+The obvious explanation is the dusk aperture — `DUSK_STOPS = -3.0`, a darker image, more room for
+colour — and it is the wrong one, which is why it was tested rather than assumed. Darkening the day
+render by those same three stops in linear light measures Cmean **0.0067**: not four times up but
+**half**, because OKLab chroma scales as the cube root of a uniform exposure change. Exposure moves
+chroma the *wrong* way. The illuminant's hue is therefore doing all of the work and then some,
+against the exposure rather than with it.
+
+And the day rig's illuminant is neutral. A near-white sun `(1.0, 0.965, 0.905)` at strength 2.6 plus
+a **cool** sky fill `(0.80, 0.83, 0.87)` at 0.55 nets out to R:G:B = **1.000 : 0.975 : 0.931**. The
+cool fill is actively cancelling what warmth the sun has. Nothing rendered under a neutral lamp can
+be more chromatic than its own albedo, and that is the entire mechanism: **the build is not made of
+grey things, it is lit by a neutral lamp.**
+
+This was proved by render, not by argument. `blender/paper/stocks.py` was run twice at identical
+settings — res 700, samples 10, `--condition day`, `lined` variant 1 — once against the committed
+`blender/rig/common.py` and once against a copy with `DAY_SKY` moved to `(0.92, 0.84, 0.70)`:
+
+| | baseline | warmed | |
+|---|---:|---:|---|
+| `ground.mean_chroma` | 0.0142 | **0.0278** | +96%, from one constant; floor is 0.030 |
+| `ground.p99_chroma` | 0.0273 | 0.0366 | ceiling is 0.09 — not remotely threatened |
+| `lightness.L50` | 0.9675 | 0.9699 | the sheet gets *lighter* |
+| ballpoint contrast | 12.98:1 | 13.06:1 | *improves* |
+| graphite / margin | 10.33 / 8.57 | 10.40 / 8.63 | *improve* |
+
+**Warmth here is free of legibility cost.** That is the opposite of the intuition — that colour is
+bought out of contrast — and it is the single most useful thing this firing learned, because the
+legibility half is the half that has been won and must not be given back. Read the ratios and not
+the absolutes: the probe renders at res 700 / samples 10 / PNG and the shipped asset is res 3000 /
+samples 24 / WebP, so the probe's L50 is 0.9675 where the committed `lined_01.webp` is 0.9306. The
+baseline-versus-warmed comparison is valid; the absolute numbers do not transfer.
+
+`(0.92, 0.84, 0.70)` is a probe and not a proposal. A tint sweep over the committed asset puts the
+net illuminant needed to clear the ground floor at about B = 0.80.
+
+**It was filed, not done**, and that is deliberate. The day illuminant is `DIRECTION.md`'s light
+section rather than an implementation detail, it moves every asset in the build in one stroke, and
+`loop/WORKER_PROMPT.md` §3b is explicit that a worker who finds something worth doing that is not in
+the queue adds it with its measurement and leaves it for ADDRESS to rank. So
+`the-day-rig-is-what-took-the-colour-out` is in the queue with the render numbers above, and both
+charm items now point at it and say not to start placing objects until it has been ranked — because
+a warmed rig raises every object's chroma at once and changes what is left for them to do.
+
+### paper-is-the-median-pixel: the print landed, the shadow did not
+
+The previous firing's named next step was the bordered print, and it is in. `_One` in
+`moments_region.dart` was returning a picture bled to the edge of its tile; the gallery's own
+`_heightOf` has called these things prints since it was written. It is a print now — cut rather than
+torn, on index card, a 5 px paper margin, the date along the bottom in `Pen.margin` — and
+`_heightOf` carries the margin so the column balance stays honest.
+
+The arithmetic was done against the committed still first. `04_moments` is bimodal and its median
+sits on the seam: p50 0.7365, p60 0.9238, 43% of the frame already paper. Converting **2%** of the
+frame from picture to paper reaches 0.8031, and a print margin converts about a quarter of each
+tile, so the change has room rather than being sized to the floor. 106 tests pass, `flutter analyze`
+is clean of errors and warnings, and `scroll_cost` still reports a lazy gallery at 18 of 183 prints
+built for the first screenful. The print is pinned to one stock so a screenful shares a single
+decode — deliberately, because firing 3 recorded a pad starving the gallery's blob reads and
+photographing a screen with no photographs in it.
+
+**The other breach on this item has a root cause now, and it is not a tuning problem.** `RegionPad`
+draws its sheets with `Slip(torn: false)`; `Slip` only assigns a `tearId` when `torn` is true; and
+`app/lib/material/paper.dart:180` draws the baked contact shadow `if (tearId != null)`. **The largest
+piece of paper on every screen casts no contact shadow at all.** On a seeded screen nobody noticed,
+because the notes' own tear shadows supply the mid band — `01_pulse` 0.0514, `13_messenger_states`
+0.0741, both passing. `10_first_run` is a fresh install with nothing on the paper, so the only paper
+is the shadowless pad and `value_bands.mid` collapses to 0.0203 against a floor of 0.04. Its
+histogram is 80.5% of the frame at the top of its own range, 11.8% at the bottom and 2.0% in
+between: the two-value image §2 describes, caused by precisely the thing §2 calls the ladder's
+missing rung.
+
+It was recorded and not fixed. Every shadow in `assets/tears` is keyed to a torn mask — 57 of them,
+all `tear_NNN_shadow*.png` — and there is **no cut-edge shadow in the library**, which is why the
+gate is written the way it is. Closing it needs a new render through `blender/paper/tear_relief.py`
+(which already emits a contact shadow alone, alpha only, framed at `SHADOW_FRAME` 1.20) plus a
+wiring pass through `MANIFEST.json`, `pack_assets.py` and `MaterialLibrary`. That was too much to
+start well with a capture already running. Nothing was bodged in its place, and in particular the
+pad's sheets were **not** made torn to borrow a shadow a cut sheet has no material right to.
+
+### What the capture said
+
+A full `./capture.sh` at degradation rung 0 — `apt-prereqs`, `bootstrap --profile=web`, both builds,
+every scene, every check — 15 of 17, the two Android artifacts the standing hardware ceiling.
+
+| | before | after | |
+|---|---:|---:|---|
+| `04_moments` `lightness.p50` | 0.7365 | **0.7988** | floor 0.78 — **cleared** |
+| `04_moments` `value_bands.ground` | 0.3763 | 0.3368 | in band |
+| `04_moments` `value_bands.mid` | 0.1221 | 0.1339 | in band |
+| `across_the_set.lightness_drift_room` | 0.2105 | **0.1482** | ceiling 0.20 — **cleared** |
+| runs below contrast floor | 26.26% | **25.28%** | not paid out |
+| `10_first_run` `value_bands.mid` | 0.0203 | 0.0203 | floor 0.04 — unmoved |
+| `04_moments` `widest_hue_gap_deg` | 140 | **160** | **regression, mine** |
+
+The prediction was 0.8031 from the committed still and the capture returned 0.7988, which is close
+enough to trust the method next time.
+
+**The regression is mine and it is more interesting than it is expensive.** `04_moments` held hue
+bins at 245°, 255°, 265° and 275°; with a quarter of each tile now paper, only 255° still clears the
+0.012 area floor, so its own gap opened to 160° and the set takes the union. What that exposes is
+worth more than the breach costs: **`04_moments` is the only still in the set that carries family C
+at all, and its blues were photographic content, not stationery.** The declared blue-grey graph
+stock — `#e9ecec` with `#b9cbe0` rules, which `DIRECTION.md` and `blender/SPEC.md` both promise —
+renders at Cmean 0.0074 and is the *least* chromatic thing in the library. The one cool family the
+build has was an accident of the seed photographs. That is the day rig again, and closing that item
+should close this breach on the way past. The wrong response is to trim the margin back: `p50` sits
+0.019 above its floor and the feedback loop is a forty-minute capture.
+
+The date in the print margin was measured rather than assumed: `04_moments` went from 47 text runs
+to 67 and from 29 failures to 30, so nineteen of the twenty new runs clear their floor.
+
+### The capture caught the absent-content trap a second time
+
+`14_media_viewer` came out of the full run as a **bare dark desk with its caption and no photograph**
+— `value_bands.ground` 0.8757, `grey_fraction` 0.0026, `value_bands.mid` 0.0076. Those are pretty
+numbers produced by a missing image, which is exactly what firing 3 was bitten by on `04_moments`.
+
+It was re-captured alone with `--only --no-build` and came back **byte-identical** to the previous
+capture's artifact, so it is a race under full-run load and not a deterministic break. It is also
+**not** caused by the print: `evidence/scenes/14_media_viewer.json` reaches the viewer through chat
+(`goTo 1`, `openViewer photo`) and never touches the gallery. What ties the two instances together
+is that `IndexedStack` builds all five regions, so the Moments gallery is issuing blob reads even on
+a screen showing chat.
+
+Firing 3 wrote that the gallery's load behaviour deserved an item of its own and did not have one.
+It has one now — `the-gallery-loses-its-pictures-under-load` — and its measurement deliberately
+requires three consecutive clean captures, because "capture it again until it looks right" is
+precisely how this build would begin falsifying itself. The committed artifact is the re-capture;
+the empty one is not in the tree and must not be quoted.
+
+### Two things that cost time, written down so they cost nobody else any
+
+**`git fetch origin` hangs in this container.** Eight minutes, 3.6 MB read, no pack file opened,
+while `git ls-remote` against the same URL answered in under a second. The repository is 552 MB of
+git objects and the bare form walks every ref including `main`. `git fetch origin <branch>` finished
+in seconds every time. §0 of `loop/WORKER_PROMPT.md` printed the bare form and has been corrected.
+
+**A blender generator writes `assets/MANIFEST.json` even when `--out` points elsewhere.** The two
+probe renders went to the scratchpad and still added two manifest entries whose paths climbed out of
+the repository with `../../../tmp/...`. Reverted before anything was committed. Anyone rendering a
+throwaway comparison should expect to `git checkout -- assets/MANIFEST.json` afterwards.
+
+### Where this leaves the loop
+
+The stage stays IMPLEMENT with six items open, and the ordering question for ADDRESS is now sharp
+rather than diffuse. Four of the six are downstream of one constant. `one-coloured-thing-per-screen`
+and `families-b-c-and-d-reach-the-glass` are the same job and that job is the day rig;
+`paper-is-the-median-pixel`'s new hue breach is the same job again; and roughly fifty of the
+sixty-three palette breaches are §5 chroma floors that a neutral illuminant cannot satisfy at any
+albedo. **The cheapest real move on the board is no longer a widget. It is a light.**
+
+What a firing taking that item should know before it starts: it is a whole-library re-render, it
+touches `DIRECTION.md`'s light section rather than a constant in a leaf file, and the one thing it
+must not do is buy chroma out of contrast. The probe says it does not have to — warmth came out
+free, and slightly to the good — but that is one stock at one setting, and the measurement clause on
+the item requires `legibility.py` to hold across the whole set before it closes.

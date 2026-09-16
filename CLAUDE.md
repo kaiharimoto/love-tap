@@ -40,6 +40,12 @@ history that has been pushed. Check the branch before every push, not once at th
   file is a stated failure condition for the whole build. The key is read from the environment and
   never written down.
 - **Never skip, disable or delete a test to get green.**
+- **Never `git fetch origin` bare** — it hangs in this container, where the repo is 552 MB of git
+  objects and the bare form walks every ref. `git fetch origin <branch>` answers in seconds. A dry-run
+  push rejected `non-fast-forward` means the checkout is behind, not that the credential is missing.
+- **A blender generator writes `assets/MANIFEST.json` even when `--out` points elsewhere.** A throwaway
+  comparison render leaves entries whose paths climb out of the repo; `git checkout -- assets/MANIFEST.json`
+  after one.
 - **Never edit a running bash script** — bash reads it incrementally and the run corrupts.
 - **Never `pkill -f <pattern>`** where the pattern appears in your own command line. It has killed
   three sessions here. Split the literal.
