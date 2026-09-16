@@ -161,19 +161,19 @@
    "id": "moments-lazy-gallery",
    "why": "messenger_reliability; Moments shows five 'still fetching the picture.' rows and no thumbnail",
    "measurement": "app/test/scroll_cost_test.dart, with a case that fails against the SingleChildScrollView",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "app/test/scroll_cost_test.dart, 'a year of prints does not all get built to show the first screenful': 21 of 183 prints built at 480x1040, down from 183 of 183. The gallery is three SliverLists in a SliverCrossAxisGroup -- three lazy columns sharing one scroll position rather than three scroll views -- so the masonry survives and the laziness is real. No dependency added; SliverCrossAxisGroup has been in the SDK since 3.13 and the app is on 3.47. The column arithmetic is unchanged and the half-gap each side of each column makes the geometry identical to the Row it replaces. blob_widgets.dart:50 now passes cacheWidth, so a third-of-screen print stops decoding a full-size photograph. Re-broken: putting the SingleChildScrollView back reports 183 of 183 and fails the case.",
    "attempts": 0,
-   "note": "moments_region.dart:293 has no lazy child model, so all 183 tiles build at once -- 129 concurrent IndexedDB reads. _Gallery already computes each tile's height, so it knows each tile's top. blob_widgets.dart:50 passes no cacheWidth."
+   "note": "The test counts BlobImage widgets rather than timing anything, because the failure was never a duration -- it was 129 IndexedDB reads issued at once, which do not fail, they queue."
   },
   {
    "id": "spine-all-in-build",
    "why": "coherence; 14k events walked per frame in two regions",
    "measurement": "a case in app/test/scroll_cost_test.dart with a budget, as the existing ones have",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "app/test/scroll_cost_test.dart, 'reading the whole log twice between two changes costs one walk, not two': over 14,006 events, 200 reads of spine.all went 12227us -> 63us and 200 countOf went 17085us -> 54us. Both memoised against a revision counter bumped at each of the six mutation sites. Re-broken by restoring both getters, which fails the case.",
    "attempts": 0,
-   "note": "moments_region.dart:42 and us_region.dart:26 call scope.spine.all inside build(); Spine.countOf is O(n) and runs on every change."
+   "note": "The budget is 2000us. 16000 -- one frame -- was tried first and was not enough: 200 copies of the year came in under it and only the scan tripped, so the looser budget would have let the allocation regress silently. A length-based cache key would also have been wrong: an outbox event coming back from the host with its seq moves between the two lists without changing the total, so there is a second case walking every way an event can arrive and checking the memoised answer against the arithmetic after each."
   },
   {
    "id": "desk-plate-to-its-declared-flat",
@@ -357,6 +357,11 @@
    "artifacts": 10,
    "the_shape_of_it": "Every still fails figure.p99_chroma and figure.mean_chroma. Nine of ten fail the 200 degree per-still hue gap. Eight of nine rooms fail accent_fraction outright at 0.0 to 0.0023 against 0.010. Across the set: mean chroma 0.0236 against 0.045, room drift 0.4363 against 0.20, union gap 310 against 150, named families 1 against 4.",
    "what_passes": "Every chroma ceiling passes with room to spare -- nothing in the build is anywhere near as saturated as a red biro. The whole failure is absence, not excess, which is what the client said."
+  },
+  "tests": {
+   "passing": 103,
+   "was": 100,
+   "toolchain": "bootstrap.sh --profile=web in a fresh container, after tools/apt-prereqs.sh. Flutter 3.47.2. flutter analyze: 0 errors, 19 pre-existing infos in test files."
   }
  }
 }
