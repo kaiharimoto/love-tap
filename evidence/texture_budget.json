@@ -1,0 +1,18 @@
+{
+ "read": "app/assets/folds (what the app ships)",
+ "window_frames": 36,
+ "budget_mb": 32.0,
+ "bytes_per_pixel": 4,
+ "sequences": {
+  "unfold_thirds": {
+   "frames": 240,
+   "widest": 490,
+   "tallest": 315,
+   "distinct_frame_sizes": 88,
+   "held_frames": 36,
+   "whole_sequence_mb": 141.3,
+   "peak_decoded_mb": 21.2
+  }
+ },
+ "problems": []
+}

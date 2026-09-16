@@ -39,11 +39,26 @@ checkpoint under `checkpoints/` and continue from **Next action**.
 - transport in use: local (`app/lib/transport/local/`), named in every report; tailscale not built
 - fourth-module commit hash: 7dfeca2 (`STEP 07-08`); `git show --stat 7dfeca2` touches only
   `app/lib/modules/rituals/`, the registry line, and files outside `modules/`
-- WebKit texture budget: measured rather than guessed. A hundred and fifty fold frames at
-  460x405 RGBA is 112 MB decoded, which is more than WebKit will hold for one animation on a
-  phone, so `FoldFrames` never holds the sequence: a window of 36 frames rides the playhead
-  (27 MB) with 24 decoded ahead of it, and frames well behind are dropped. A frame that has not
-  arrived yet holds the last one drawn rather than blinking out.
+- WebKit texture budget: **32 MB peak decoded per sequence**. `tools/check/texture_budget.py`
+  reads that number from this line, the window size from `app/lib/material/fold.dart`, and the
+  frames from `app/assets/folds`, so `DIRECTION.md`'s claim that the budget is "recorded in
+  `TASK_STATE.md` and enforced by `tools/check/texture_budget.py`" is now true. It was not for
+  four cycles: the tool did not exist.
+  The mechanism it is a budget on: `FoldFrames` never holds the sequence. A window of 36 frames
+  rides the playhead, 24 are decoded ahead of it, and frames well behind are dropped. A frame
+  that has not arrived yet holds the last one drawn rather than blinking out.
+  Measured against what actually ships, which is not what this line used to say: `unfold_thirds`
+  is **240** frames whose largest is **490x315** — 88 distinct sizes, because the sheet opens, so
+  reading the first frame reports the folded 490x124 and flatters the number by a factor of two
+  and a half. Held whole that sequence is **141.3 MB** decoded; on the 36-frame window it is
+  **21.2 MB**. The previous figures here — a hundred and fifty frames at 460x405, 112 MB and
+  27 MB — described a sequence that is not in the repository, and were labelled "measured rather
+  than guessed".
+  The 32 MB ceiling is a **design budget, not a device measurement**: it is the 21.2 MB the window
+  actually costs plus room for the sequence to grow, and no WebKit limit has been measured on a
+  real phone here. It is set where it is to catch the regression that matters — somebody
+  simplifying the window away, which takes the peak to 141.3 MB — rather than to model iOS. When a
+  phone is available, measure it and move this number.
 - TS_AUTHKEY: not needed yet (ask only when the Tailscale phase begins)
 
 ## What exists (verified)

@@ -62,9 +62,13 @@ Everything else worth knowing about running it is in `docs/CONTINUE.md` §4–§
 - **`.github/workflows/build.yml` cannot pass on any branch.** Both jobs open with a guard
   requiring `tools/pack_pwa.py`, `tools/release_notes.py` and `tools/check/apk.py`; none of the
   three has ever been committed. Do not chase a red CI run there unless a queue item says to.
-- **`tools/check/texture_budget.py` does not exist**, although `TASK_STATE.md` and
-  `docs/CONTINUE.md` both describe it as enforcing the WebKit texture budget. Either write it or
-  delete the claim; a dangling enforcement claim has survived four cycles already.
+- **`tools/check/texture_budget.py` exists now**, and `DIRECTION.md`'s claim that it enforces the
+  WebKit texture budget recorded in `TASK_STATE.md` is true as of cycle 3. It reads the budget from
+  `TASK_STATE.md`, the window from `app/lib/material/fold.dart` and the frames from
+  `app/assets/folds`. Two things worth knowing before trusting it: the 32 MB ceiling is a design
+  budget rather than a device measurement, because no phone has been available to measure WebKit
+  on; and the figures that stood in `TASK_STATE.md` for four cycles under the words "measured
+  rather than guessed" described a sequence that is not in the repository.
 - **A Routine cannot deliver a firing directly.** A session a Routine mints gets `sources: []`,
   and with no attached repository the egress proxy injects no push credential, so every `git push`
   returns 403. Two firings established this; the first lost seven minutes of work to it. The loop
