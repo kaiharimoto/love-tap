@@ -3,17 +3,11 @@
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
  "stage": "IMPLEMENT",
- "firing": 2,
+ "firing": 3,
  "stage_entered_at_firing": 1,
- "lease": {
-  "session_id": "session_01QftDc24z6tbRF3ntmu66pZ",
-  "started_at": "2026-09-16T06:56Z",
-  "expires_at": "2026-09-16T10:56Z",
-  "stage": "IMPLEMENT",
-  "ttl_hours": 4
- },
- "evidence_fresh_as_of": "2026-09-16T05:26Z, 14 of 17, captured against d210423 (the retuned desk plate)",
- "evidence_note": "Captured this firing, so for the first time in cycle 3 the artifacts postdate the fixes they are used to judge. 09_two_devices.png and 16_setup_android.png are the hardware ceiling; 06_unfolding.mp4 is recorded missing on its frame check, which is the open surfaces-folds-family item rather than a capture defect.",
+ "lease": null,
+ "evidence_fresh_as_of": "2026-09-16T09:25Z, 15 of 17, captured against 34daee2 (the region pad). One better than the previous capture: 06_unfolding.mp4 recorded 320 frames rather than being recorded missing on its frame check.",
+ "evidence_note": "Captured this firing, twice. The first capture is not in the tree and must not be quoted: the first RegionPad starved the moments gallery's blob reads and 04_moments came back as a sheet of paper with every photograph missing, measuring lightness.p50 0.9432 -- a number produced by absent content. The committed capture is the second, after the pad was made as cheap as the desk. 09_two_devices.png and 16_setup_android.png remain the hardware ceiling.",
  "degradation": 4,
  "design": {
   "verdict": "keep and retune",
@@ -191,8 +185,8 @@
    "measurement": "`palette.py --floors` shows every room screen with `lightness.p50` in [0.78, 0.95] and `value_bands.ground` <= 0.50. Today 02_chat is 0.575 p50 / 0.5016 ground, 04_moments 0.495 / 0.8187, 10_first_run 0.495 / 0.8352. Also `value_bands.mid` >= 0.04, which 04 (0.0249) and 10 (0.0157) currently fail, and `lightness_drift_room` <= 0.20 against today's 0.452.",
    "state": "open",
    "closed_by": null,
-   "attempts": 0,
-   "note": "This is a layout change expressed in colour quantities. The empty mid band on 04 and 10 is the tell: a plank and some paper with nothing in between is a two-value image with no depth. Expect the legibility rate on those two screens to fall from 76–79% to near zero as a side effect. | Re-measured on the 2026-09-16 capture, after the plate retune: 02_chat is now 0.7846 p50 / 0.4318 ground and passes both; 04_moments is 0.4167 / 0.6199 and 10_first_run 0.4093 / 0.7912, both worse than before because the plank they are mostly made of came down to its declared flat. 04_moments' mid band fixed itself on the way (0.0249 -> 0.1707); 10_first_run's is still 0.0177. lightness_drift_room is 0.5377 against 0.20, and this item is the whole of it: 17_setup_pwa at 0.9470 has no desk in it and everything else does.",
+   "attempts": 1,
+   "note": "This is a layout change expressed in colour quantities. The empty mid band on 04 and 10 is the tell: a plank and some paper with nothing in between is a two-value image with no depth. Expect the legibility rate on those two screens to fall from 76–79% to near zero as a side effect. | Re-measured on the 2026-09-16 capture, after the plate retune: 02_chat is now 0.7846 p50 / 0.4318 ground and passes both; 04_moments is 0.4167 / 0.6199 and 10_first_run 0.4093 / 0.7912, both worse than before because the plank they are mostly made of came down to its declared flat. 04_moments' mid band fixed itself on the way (0.0249 -> 0.1707); 10_first_run's is still 0.0177. lightness_drift_room is 0.5377 against 0.20, and this item is the whole of it: 17_setup_pwa at 0.9470 has no desk in it and everything else does. | Worked at firing 3 and NOT closed, but most of the way. app/lib/material/slip.dart gains RegionPad, a sheet drawn behind each region in app.dart, which is DIRECTION.md's 'each region is a different stack of paper on it' implemented rather than asserted. Every value_bands.ground breach in the set is gone (04_moments 0.6199 -> 0.3763, 10_first_run 0.7912 -> 0.1291) and seven room screens' p50 breaches with them; 01_pulse and 13_messenger_states, which were failing at 0.7793 and 0.7687, are 0.9313 and 0.9311. lightness_drift_room went 0.5377 -> 0.2105. Three breaches remain and two of them are one screen: 04_moments at p50 0.7365 is the last room under 0.78 and is also the low end of the drift, so 04_moments >= 0.78 takes the drift to 0.167 and closes both. The third is 10_first_run's value_bands.mid at 0.0203 against 0.04. NEXT: the bordered print. It was considered and rejected this firing on the arithmetic that no border reaches a median-pixel floor from 0.4167 -- but the pad has since done that lifting, and 04_moments needs only 0.044 more. A photographic print with a paper margin and the date in it converts print area to paper on the one screen that still needs it, and is what the gallery's own comment already calls these things.",
    "from": "design, cycle 3"
   },
   {
@@ -231,7 +225,7 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "done at firing 0: the family and the recursive glob are in. The re-render of blender/folds/fold.py with the tooth the stocks carry is what remains."
+   "note": "done at firing 0: the family and the recursive glob are in. The re-render of blender/folds/fold.py with the tooth the stocks carry is what remains. | Firing 3: 06_unfolding.mp4 captured this time, 320 frames at 60fps, so it is no longer recorded missing on its frame check. The underlying item is untouched -- tools/check/surfaces.py still reports 94 flat frames in folds/unfold_thirds, every one of them between 1.04 and 1.18 against a floor of 1.2, and the re-render of blender/folds/fold.py is what remains."
   },
   {
    "id": "haptic-evidence",
@@ -312,6 +306,14 @@
    "checked_rather_than_asserted": "Every closure has a re-break beside it. The three that mattered most: palette.py --floors is proved passable by a synthetic still built to clear every floor, because a gate that is red on everything cannot be told from a broken one; the moments gallery reports 183 of 183 tiles built with the SingleChildScrollView restored and 21 with it gone; the spine memoisation fails its budget at 12227us with the old getters back, and the first budget tried -- one frame, 16000us -- was too loose to catch it.",
    "one_thing_guessed": "The 32 MB texture budget. It is recorded in TASK_STATE.md in as many words as a design ceiling rather than a device measurement, because no phone has been available to measure WebKit on. It is set to catch the window being simplified away, not to model iOS.",
    "what_it_cost_elsewhere": "The desk retune widened lightness_drift_room from 0.4363 to 0.5377 and took 14_media_viewer from 54% to 65% of runs below floor. Both are recorded in measured_at_firing_3 and the first is what paper-is-the-median-pixel exists to close."
+  },
+  {
+   "firing": 3,
+   "stage": "IMPLEMENT",
+   "commit": "pending",
+   "did": "Corrected the record on legibility, then worked paper-is-the-median-pixel, the top open item. Wrote RegionPad and put it behind every region in the shell; captured twice because the first version of it starved the moments gallery. Left the item open with three named breaches and the next move written down. Recorded, without acting on it, that the two charm items cannot be closed the way their notes say.",
+   "measured": "legibility 0.277 -> 0.2626; lightness_drift_room 0.5377 -> 0.2105; every value_bands.ground breach gone",
+   "one_thing_got_worse": "The pad costs the moments gallery load progress inside the capture's settle window. A controlled probe with the pad compiled out returned 8 prints; the committed build returns the same first two columns but the third is short. The prints are not missing from the app -- a twelve second wait brings them all back -- and the third column was already empty in the no-pad probe, so the scene was photographing an incomplete screen before this change existed. That is worth an item."
   }
  ],
  "routine": {
@@ -363,56 +365,79 @@
   "artifacts": "14 of 17, the ceiling for this container"
  },
  "measured_at_firing_3": {
-  "palette_floors": {
-   "breaches": 62,
-   "artifacts": 10,
-   "the_shape_of_it": "Every still fails figure.p99_chroma and figure.mean_chroma. Nine of ten fail the 200 degree per-still hue gap. Eight of nine rooms fail accent_fraction outright at 0.0 to 0.0023 against 0.010. Across the set: mean chroma 0.0236 against 0.045, room drift 0.4363 against 0.20, union gap 310 against 150, named families 1 against 4.",
-   "what_passes": "Every chroma ceiling passes with room to spare -- nothing in the build is anywhere near as saturated as a red biro. The whole failure is absence, not excess, which is what the client said."
-  },
-  "tests": {
-   "passing": 106,
-   "was": 100,
-   "toolchain": "bootstrap.sh --profile=web in a fresh container, after tools/apt-prereqs.sh. Flutter 3.47.2. flutter analyze: 0 errors, 19 pre-existing infos in test files."
-  },
-  "closed_this_firing": [
-   "color-palette-floors",
-   "moments-lazy-gallery",
-   "spine-all-in-build",
-   "desk-plate-to-its-declared-flat",
-   "feeling-families-visible",
-   "texture-budget-tool",
-   "haptic-evidence"
-  ],
-  "still_open": [
-   "paper-is-the-median-pixel",
-   "one-coloured-thing-per-screen",
-   "families-b-c-and-d-reach-the-glass",
-   "surfaces-folds-family"
-  ],
   "legibility": {
-   "runs": 743,
-   "below_floor": 206,
-   "share_below_floor": 0.277,
-   "was": "329 of 848, 0.388, on the capture that opened this firing",
-   "per_artifact": "02_chat 31%->11%, 12_search 20%->9%, 01_pulse 40%->26%, 03_us 32%->30%, 13_messenger_states 24%, 05_settings 43%->44%, 14_media_viewer 54%->65%, 04_moments 51%, 10_first_run 59%, 17_setup_pwa still 0 of 89"
+   "runs": 697,
+   "below_floor": 183,
+   "share_below_floor": 0.2626,
+   "was": "206 of 743, 0.277, on the capture that opened this firing",
+   "the_shape_of_it": "the fourth consecutive capture in which this fell: 0.484 -> 0.388 -> 0.277 -> 0.263. 17_setup_pwa is still the only screen with no failures in it."
   },
-  "palette_after_capture": {
-   "breaches": 68,
-   "was": 62,
-   "not_like_for_like": "the 62 was a different set of stills; the per-screen numbers are the comparison",
-   "mean_chroma": 0.0216,
-   "was_mean_chroma": 0.0236,
-   "lightness_drift_room": 0.5377,
-   "was_drift_room": 0.4363,
-   "widest_hue_gap_deg": 150.0,
-   "was_hue_gap": 310.0,
-   "named_families": 2,
-   "was_named_families": 1,
-   "named_families_present": [
-    "A_paper",
-    "C_cool"
-   ]
+  "paper_is_the_median_pixel": {
+   "p50": {
+    "01_pulse": [
+     0.7793,
+     0.9313
+    ],
+    "02_chat": [
+     0.7846,
+     0.9289
+    ],
+    "03_us": [
+     0.9281,
+     0.9306
+    ],
+    "04_moments": [
+     0.4167,
+     0.7365
+    ],
+    "05_settings": [
+     0.9258,
+     0.9311
+    ],
+    "10_first_run": [
+     0.4093,
+     0.9434
+    ],
+    "12_search": [
+     0.9081,
+     0.9081
+    ],
+    "13_messenger_states": [
+     0.7687,
+     0.9311
+    ],
+    "17_setup_pwa": [
+     0.947,
+     0.947
+    ]
+   },
+   "ground": {
+    "04_moments": [
+     0.6199,
+     0.3763
+    ],
+    "10_first_run": [
+     0.7912,
+     0.1291
+    ],
+    "worst_now": "12_search at 0.3318, unchanged -- search is a pushed page, not one of the five regions"
+   },
+   "lightness_drift_room": [
+    0.5377,
+    0.2105
+   ],
+   "what_is_left": "three breaches, and 04_moments' median drives two of them. At 0.7365 it is the only room screen still under the 0.78 floor, and it is also the low end of the drift: if it reached 0.78 the drift would be 0.947 - 0.78 = 0.167 and inside the 0.20 ceiling. The third is 10_first_run's mid band at 0.0203 against 0.04."
   },
-  "the_cost_of_the_desk_retune": "It met its own measurement and moved two others the wrong way, which is worth stating plainly. 04_moments p50 0.5107 -> 0.4167 and 10_first_run 0.5129 -> 0.4093, while 17_setup_pwa has no desk in it and stayed at 0.9470, so lightness_drift_room went 0.4363 -> 0.5377 against a 0.20 ceiling. Those two screens are mostly desk, which is the entire content of paper-is-the-median-pixel, and that item's note predicted the coupling. 14_media_viewer also went 54% -> 65% of runs below floor; the dusk plate being 1.44 stops darker is the first thing to look at. Two numbers moved the right way for free: 04_moments' mid band 0.0249 -> 0.1707, now clearing its floor, and family C registering for the first time, taking the unioned hue gap 310 -> 150 degrees, exactly the section 4 ceiling. Nothing this cycle added colour, so that is a darker ground letting the printed blue rules carry area they always had."
+  "colour": {
+   "named_families": [
+    1,
+    2
+   ],
+   "widest_hue_gap_deg": [
+    310.0,
+    140.0
+   ],
+   "note": "140 degrees is inside section 4's 150 ceiling for the first time. accent_fraction is unchanged at 0.00026 and is the whole of the charm complaint."
+  }
  }
 }

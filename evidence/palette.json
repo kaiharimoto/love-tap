@@ -5,19 +5,19 @@
   "01_pulse.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9282,
+    "p50": 0.9313,
     "p98": 165.0,
-    "span": 0.6248
+    "span": 0.6035
    },
    "value_bands": {
-    "ground": 0.1839,
-    "mid": 0.062,
-    "figure": 0.7541
+    "ground": 0.1373,
+    "mid": 0.0514,
+    "figure": 0.8113
    },
    "chroma": {
-    "mean": 0.0228,
+    "mean": 0.0229,
     "p99": 0.056,
-    "grey_fraction": 0.0165,
+    "grey_fraction": 0.0158,
     "accent_fraction": 0.00012,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -29,16 +29,16 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0236,
+     "mean_chroma": 0.0249,
      "p99_chroma": 0.0342
     },
     "mid": {
-     "mean_chroma": 0.0162,
-     "p99_chroma": 0.0595
+     "mean_chroma": 0.0167,
+     "p99_chroma": 0.061
     },
     "figure": {
-     "mean_chroma": 0.0231,
-     "p99_chroma": 0.0595
+     "mean_chroma": 0.0229,
+     "p99_chroma": 0.0586
     }
    },
    "hue_families": 6,
@@ -55,19 +55,19 @@
   "02_chat.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.927,
+    "p50": 0.9289,
     "p98": 165.0,
-    "span": 0.6432
+    "span": 0.6303
    },
    "value_bands": {
-    "ground": 0.1915,
-    "mid": 0.0706,
-    "figure": 0.7379
+    "ground": 0.1359,
+    "mid": 0.0831,
+    "figure": 0.781
    },
    "chroma": {
-    "mean": 0.015,
+    "mean": 0.0146,
     "p99": 0.0464,
-    "grey_fraction": 0.0258,
+    "grey_fraction": 0.0248,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -79,15 +79,15 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0235,
-     "p99_chroma": 0.0334
+     "mean_chroma": 0.0236,
+     "p99_chroma": 0.0342
     },
     "mid": {
-     "mean_chroma": 0.0114,
-     "p99_chroma": 0.0325
+     "mean_chroma": 0.0149,
+     "p99_chroma": 0.0332
     },
     "figure": {
-     "mean_chroma": 0.0132,
+     "mean_chroma": 0.013,
      "p99_chroma": 0.0464
     }
    },
@@ -105,19 +105,19 @@
   "03_us.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9298,
+    "p50": 0.9306,
     "p98": 165.0,
-    "span": 0.6447
+    "span": 0.6119
    },
    "value_bands": {
-    "ground": 0.1635,
-    "mid": 0.0466,
-    "figure": 0.7899
+    "ground": 0.1212,
+    "mid": 0.0429,
+    "figure": 0.8359
    },
    "chroma": {
-    "mean": 0.015,
+    "mean": 0.0152,
     "p99": 0.0464,
-    "grey_fraction": 0.0201,
+    "grey_fraction": 0.0199,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -129,15 +129,15 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.024,
-     "p99_chroma": 0.0334
+     "mean_chroma": 0.0241,
+     "p99_chroma": 0.0341
     },
     "mid": {
-     "mean_chroma": 0.0143,
-     "p99_chroma": 0.036
+     "mean_chroma": 0.0138,
+     "p99_chroma": 0.0506
     },
     "figure": {
-     "mean_chroma": 0.0131,
+     "mean_chroma": 0.014,
      "p99_chroma": 0.0464
     }
    },
@@ -155,19 +155,19 @@
   "04_moments.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9432,
+    "p50": 0.7365,
     "p98": 165.0,
-    "span": 0.612
+    "span": 0.6717
    },
    "value_bands": {
-    "ground": 0.1563,
-    "mid": 0.0322,
-    "figure": 0.8116
+    "ground": 0.3763,
+    "mid": 0.1221,
+    "figure": 0.5016
    },
    "chroma": {
-    "mean": 0.0145,
+    "mean": 0.0136,
     "p99": 0.0464,
-    "grey_fraction": 0.0261,
+    "grey_fraction": 0.1735,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -179,45 +179,49 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0247,
-     "p99_chroma": 0.0342
+     "mean_chroma": 0.0135,
+     "p99_chroma": 0.0333
     },
     "mid": {
-     "mean_chroma": 0.0162,
-     "p99_chroma": 0.0351
+     "mean_chroma": 0.0122,
+     "p99_chroma": 0.0391
     },
     "figure": {
-     "mean_chroma": 0.0125,
-     "p99_chroma": 0.0465
+     "mean_chroma": 0.014,
+     "p99_chroma": 0.0483
     }
    },
-   "hue_families": 6,
+   "hue_families": 10,
    "hue_centres_deg": [
     55.0,
     65.0,
     75.0,
     85.0,
     95.0,
-    105.0
+    105.0,
+    245.0,
+    255.0,
+    265.0,
+    275.0
    ],
-   "widest_hue_gap_deg": 310.0
+   "widest_hue_gap_deg": 140.0
   },
   "05_settings.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9268,
+    "p50": 0.9311,
     "p98": 165.0,
-    "span": 0.5971
+    "span": 0.5996
    },
    "value_bands": {
-    "ground": 0.1281,
-    "mid": 0.0512,
-    "figure": 0.8207
+    "ground": 0.1296,
+    "mid": 0.0578,
+    "figure": 0.8125
    },
    "chroma": {
-    "mean": 0.0179,
+    "mean": 0.0181,
     "p99": 0.0598,
-    "grey_fraction": 0.0208,
+    "grey_fraction": 0.023,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -229,15 +233,15 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0239,
+     "mean_chroma": 0.0236,
      "p99_chroma": 0.0342
     },
     "mid": {
-     "mean_chroma": 0.014,
-     "p99_chroma": 0.0407
+     "mean_chroma": 0.0134,
+     "p99_chroma": 0.0411
     },
     "figure": {
-     "mean_chroma": 0.0172,
+     "mean_chroma": 0.0175,
      "p99_chroma": 0.0598
     }
    },
@@ -257,17 +261,17 @@
     "p2": 120.0,
     "p50": 0.9434,
     "p98": 165.0,
-    "span": 0.6248
+    "span": 0.5977
    },
    "value_bands": {
-    "ground": 0.1983,
-    "mid": 0.0299,
-    "figure": 0.7718
+    "ground": 0.1291,
+    "mid": 0.0203,
+    "figure": 0.8505
    },
    "chroma": {
-    "mean": 0.0179,
+    "mean": 0.0176,
     "p99": 0.0323,
-    "grey_fraction": 0.009,
+    "grey_fraction": 0.0085,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -279,16 +283,16 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0247,
-     "p99_chroma": 0.0334
+     "mean_chroma": 0.0253,
+     "p99_chroma": 0.0341
     },
     "mid": {
-     "mean_chroma": 0.0147,
-     "p99_chroma": 0.0278
+     "mean_chroma": 0.0129,
+     "p99_chroma": 0.0281
     },
     "figure": {
-     "mean_chroma": 0.0163,
-     "p99_chroma": 0.0187
+     "mean_chroma": 0.0166,
+     "p99_chroma": 0.0182
     }
    },
    "hue_families": 5,
@@ -354,40 +358,40 @@
   "13_messenger_states.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9263,
+    "p50": 0.9311,
     "p98": 165.0,
-    "span": 0.6461
+    "span": 0.6309
    },
    "value_bands": {
-    "ground": 0.2009,
-    "mid": 0.0632,
-    "figure": 0.7359
+    "ground": 0.1341,
+    "mid": 0.0741,
+    "figure": 0.7918
    },
    "chroma": {
-    "mean": 0.0192,
-    "p99": 0.048,
-    "grey_fraction": 0.0161,
-    "accent_fraction": 0.00023,
+    "mean": 0.0172,
+    "p99": 0.0481,
+    "grey_fraction": 0.0164,
+    "accent_fraction": 0.00013,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
-     "B_rose": 0.00017,
+     "B_rose": 0.00013,
      "C_cool": 0.0,
      "D_green": 0.0,
-     "outside_any_family": 5e-05
+     "outside_any_family": 0.0
     }
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0233,
-     "p99_chroma": 0.0333
+     "mean_chroma": 0.0234,
+     "p99_chroma": 0.0339
     },
     "mid": {
-     "mean_chroma": 0.0157,
-     "p99_chroma": 0.0593
+     "mean_chroma": 0.0178,
+     "p99_chroma": 0.0543
     },
     "figure": {
-     "mean_chroma": 0.0184,
-     "p99_chroma": 0.0481
+     "mean_chroma": 0.0161,
+     "p99_chroma": 0.0486
     }
    },
    "hue_families": 6,
@@ -500,28 +504,33 @@
   }
  },
  "across_the_set": {
-  "mean_chroma": 0.0185,
-  "mean_lightness_span": 0.6317,
+  "mean_chroma": 0.0182,
+  "mean_lightness_span": 0.627,
   "hue_families_min": 4,
-  "hue_families_max": 6,
-  "hue_families": 6,
+  "hue_families_max": 10,
+  "hue_families": 10,
   "hue_centres_deg": [
    55.0,
    65.0,
    75.0,
    85.0,
    95.0,
-   105.0
+   105.0,
+   245.0,
+   255.0,
+   265.0,
+   275.0
   ],
-  "widest_hue_gap_deg": 310.0,
-  "named_families": 1,
+  "widest_hue_gap_deg": 140.0,
+  "named_families": 2,
   "named_families_present": [
-   "A_paper"
+   "A_paper",
+   "C_cool"
   ],
-  "grey_fraction": 0.0329,
-  "accent_fraction": 0.00027,
+  "grey_fraction": 0.0476,
+  "accent_fraction": 0.00026,
   "lightness_drift": 0.5893,
-  "lightness_drift_room": 0.0389,
+  "lightness_drift_room": 0.2105,
   "rooms": 9,
   "viewers": 1
  },

@@ -258,3 +258,113 @@ that reason.
 The evidence is fresh as of this firing, so those three can be worked and measured without a
 capture first. The toolchain is not: a fresh container has none, and `bash tools/apt-prereqs.sh`
 before `./bootstrap.sh --profile=web` is about twenty minutes before anything can be built.
+
+## Cycle 3 · firing 3 · IMPLEMENT · 2026-09-16
+
+The lease was taken and pushed before anything was touched. The container was fresh, so
+`tools/apt-prereqs.sh`, `bootstrap.sh --profile=web` and `pip install numpy pillow` came first, and
+`app/assets/` had to be packed by `tools/pack_assets.py` before a single test could run — the
+repository does not carry it and `flutter test` fails on eleven missing asset directories without it.
+That is worth knowing before you conclude the suite is broken.
+
+**`app/test/legible_on_what_it_is_on_test.dart` compiles.** `WORKER_PROMPT.md` has flagged since it
+was written that this file had never once been through a compiler, and that it gates every code
+commit. It compiles, and its six tests pass. That claim can come out of the prompt.
+
+**The thing this firing was sent to check first: legibility did not regress.** The number is
+`evidence/legibility.json`, its per-artifact shares match the journal entry above pair by pair, and
+the sequence over four captures is 48.4% → 38.8% → 27.7% → **26.3%**. It has fallen every time. The
+phrase that caused the alarm — *the half of the measurement that went the wrong way* — is the
+previous firing's **commit subject**, and sitting next to two percentages it reads as though the
+percentages are what went the wrong way. Its journal entry never said that. What went the wrong way
+was `lightness_drift_room` and `14_media_viewer`, both of which that entry wrote up correctly. The
+correction is now at the head of that entry rather than left for the next firing to re-derive.
+
+**`paper-is-the-median-pixel`, worked and not closed.** `DIRECTION.md` says the shell is a desk seen
+from above and each region is a different stack of paper on it. `app.dart` says the same thing in a
+comment: *the paper underneath does not move; what is on it is exchanged*. There was no paper
+underneath — every region drew onto the wood, and a vertical profile of `10_first_run` reads bare
+plank at L 0.405 from the top of the region to the bottom with one bright band across the middle.
+`RegionPad` is that sentence implemented: a sheet behind the region, taking no child and clipping
+nothing, so every region keeps its own layout, its lazy slivers and its scroll position and goes on
+scrolling over the page exactly as it scrolled over the desk.
+
+What it bought, on a capture taken against it:
+
+| | was | now | floor |
+|---|---|---|---|
+| `01_pulse` p50 | 0.7793 | 0.9313 | ≥ 0.78 |
+| `13_messenger_states` p50 | 0.7687 | 0.9311 | ≥ 0.78 |
+| `10_first_run` p50 | 0.4093 | 0.9434 | ≥ 0.78 |
+| `10_first_run` ground | 0.7912 | 0.1291 | ≤ 0.50 |
+| `04_moments` ground | 0.6199 | 0.3763 | ≤ 0.50 |
+| `lightness_drift_room` | 0.5377 | 0.2105 | ≤ 0.20 |
+
+Every `value_bands.ground` breach in the set is gone and seven room screens' `p50` breaches with
+them. Three breaches remain, and **two of them are one screen**: `04_moments` at 0.7365 is the last
+room under the floor and is also the low end of the drift, so taking it to 0.78 also takes the drift
+to 0.167. The third is `10_first_run`'s mid band at 0.0203 against 0.04.
+
+**The entry to read, because it nearly went into the tree as a success.** The first `RegionPad` was
+three full-region `Slip`s, and a `Slip` at that size is four assets — stock, tear mask, lit edge,
+baked shadow — resampled to a whole screen. That put `04_moments` into the exact failure its own
+gallery comment warns about: the blob reads for the prints do not fail, they queue. The capture came
+back as a sheet of lined paper with every photograph missing, and it measured `lightness.p50`
+**0.9432** — comfortably inside [0.78, 0.95], the best number on the board, and produced by deleting
+the content. Nothing in the gate caught it. `flutter analyze` was clean, 106 tests passed, the scene
+report was byte-identical to the previous one because the widget tree *was* identical, and the
+palette gate cheerfully recorded a pass. It was caught by looking at the picture.
+
+So the pad was measured rather than argued about, four builds against one committed scene:
+
+| build | prints that arrived |
+|---|---|
+| no pad at all (probe, compiled out) | 8 |
+| three torn sheets | 0 |
+| one cut sheet plus one under it | 2 |
+| the same behind a `RepaintBoundary` | 5 |
+
+`torn: false` drops the mask, the edge and the shadow and leaves the stock, and a pad has a cut edge
+rather than a torn one anyway; every sheet takes the same id, so it is one decoded asset painted
+twice, which is what a pad literally is. The `RepaintBoundary` is the other half: without one, a
+sheet that never changes is re-rasterised into the same layer as everything scrolling over it, once
+per frame. The committed capture returns the first two columns and is short on the third.
+
+Two things follow that the next firing should not have to rediscover. The probe is the important
+one: **with the pad compiled out entirely, the third column is already empty at this scene's settle**,
+so `04_moments.png` was photographing an incomplete screen before any of this existed. And the
+prints are not missing from the app — a twelve-second wait brings all of them back. They are missing
+from a two-and-a-half-second screenshot. Neither the scene's wait nor any other capture parameter
+was touched to make a number look better.
+
+**The charm half: both items are the same job, and neither can be done the way its note says.**
+`one-coloured-thing-per-screen` says to spend its accent area on objects that already exist. Every
+`obj_*.png` was converted to OKLab with `palette.py`'s own matrices and asked what fraction of its
+opaque pixels reaches `ACCENT_C = 0.09`. **One object of twenty-six has any: `obj_clover`, at 0.1363%
+of itself.** `gold_star` is p99 0.0791, `snapped_pencil` 0.0728, and neither touches 0.09 anywhere. A
+screen needs 1% of itself at that threshold, which out of a clover that is 0.14% accent by area is
+about seven screens of clover, and §5 shuts the other door: multiply cannot produce chroma the ground
+does not support. The same measurement is the more useful half of `families-b-c-and-d-reach-the-glass`
+— the two families that have never registered are *already in the library at the wrong saturation*,
+`obj_clover` at hue 134.7° being family D and `obj_ribbon` at 353.7° being family B. The hues are
+right and the chroma is not. Both were recorded and neither was worked, because the fix is a re-render
+through the committed blender recipes and that is a larger item than "the cheapest of the charm floors
+to satisfy". Nothing was placed on the strength of the old note.
+
+Free on the side: `06_unfolding.mp4` captured, 320 frames at 60fps, so it is no longer recorded
+missing on its frame check — 15 of 17 rather than 14. `surfaces-folds-family` itself is untouched:
+`surfaces.py` still reports 94 flat frames between 1.04 and 1.18 against a floor of 1.2. And the
+unioned hue gap went 310° → 140°, inside §4's 150° ceiling for the first time, with
+`named_families` at 2.
+
+**What the next firing should expect.** Four items open and the stage stays IMPLEMENT. The cheapest
+real move on the board is the bordered print: `04_moments` needs 0.044 more median, it is the last
+screen under the floor and it is two of the three remaining breaches. That idea was considered and
+rejected *this* firing, on the arithmetic that no border reaches a median-pixel floor starting from
+0.4167 — but the pad has since done that lifting, and from 0.7365 it is a different sum. A print with
+a paper margin and the date written in it is also what `_One`'s own comment already calls these
+things. The gallery's load behaviour deserves an item of its own and does not have one.
+
+A last note on process, since it cost twenty minutes. `CLAUDE.md` says never `pkill -f <pattern>`
+where the pattern appears in your own command line. It is the fourth time here. `fuser -k -n tcp
+<port>` does the same job and cannot match itself.
