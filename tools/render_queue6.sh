@@ -11,7 +11,17 @@
 # setsid, because three earlier attempts at a backlog this size were killed part way through by a
 # stray process-group signal (tools/render_queue.sh records that); and no pgrep or pkill anywhere,
 # because a pattern that matches your own command line has ended three sessions in this container.
-# To stop this run, read the pid out of `ps` and kill it by number.
+#
+# TO STOP THIS RUN, in this order, and the order is the whole of it:
+#
+#   kill -9 <pid of this script>     # FIRST, so it cannot advance to the next family
+#   kill -9 <pid of blender>         # then the render
+#   git checkout -- assets seed/photos
+#
+# Read both pids out of `ps`. Killing blender first lets `run` return normally, the script walks on
+# to the next family, prunes it, and only then takes the signal — firing 5 did exactly that and
+# deleted every tear in the library on its way out. The last line is not optional tidying; it is
+# what puts back anything pruned but not yet rendered.
 #
 # ONLY the day condition is re-rendered. The dusk rig is untouched by this change and its assets
 # already carry three to five times the chroma of their day twins, which was the clue in the first
@@ -87,12 +97,23 @@ python3 tools/check/illuminant.py || { echo "the rig does not pass its own gate;
 # millimetre band along a torn edge, while the photographs ARE the whole of 04_moments and
 # 14_media_viewer — the two stills that fail the ground chroma floor hardest. Photographs first.
 
+# The photographs are TWO phases and the second one is not optional. still.py renders a .exr per
+# shot and develop.py is what turns the negatives into the .jpg the app actually loads. Firing 5
+# left develop.py out, so a run that had rendered fourteen negatives had produced zero usable
+# photographs. Budget for it: about 45 seconds a negative on four cores, so 115 of them is ninety
+# minutes before a single jpg exists, and the .exr files are gitignored and die with the container.
+# This family is therefore all-or-nothing WITHIN a firing. Do not start it with under two hours.
 say "1/3 photographs — 115, and they are the content of the two worst stills in the set"
 prune_stale seed/photos -name '*.jpg'
 run blender/photos/still.py -- --all --res 1100 --samples 36 --skip-existing
+say "developing the negatives"
+python3 blender/photos/develop.py --all 2>&1 | tail -3
 restore_missing
 say "photographs done"
 
+# Measured at firing 5: about four minutes a tear, 57 of them, so the better part of four hours.
+# Resumable at file granularity through prune_stale, so it is the right family to leave running in
+# whatever a firing has left over.
 say "2/3 tears — the lit torn edge of every note, day only. About four minutes apiece."
 prune_stale assets/tears -name 'tear_*_edge.png' -o -name 'tear_*_shadow.png' ! -name '*dusk*'
 run blender/paper/tear_relief.py -- --all --res 1400 --skip-existing
