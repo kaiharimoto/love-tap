@@ -91,10 +91,10 @@
    "id": "color-palette-floors",
    "why": "docs/COLOR.md declares the floors that tools/check/palette.py has been waiting for since it was written — its closing docstring says it carries no pass/fail floor 'until docs/COLOR.md declares one'. Until the tool can fail, the law is prose.",
    "measurement": "`python3 tools/check/palette.py --floors --classes docs/screen_classes.json` exits 0. Requires the five additions in docs/COLOR.md §11: a `--classes` room/viewer map adding `across_the_set.lightness_drift_room`; `chroma.accent_fraction` (fraction of pixels at OKLab C >= 0.09); `chroma.accent_fraction_by_family` split by the four §4 hue bands; `across_the_set.hue_families` and `across_the_set.widest_hue_gap_deg` over the unioned family list; and `--floors` itself. Without `--floors` the tool must keep reporting and exiting 0.",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "tools/check/palette.py carries all five additions from docs/COLOR.md section 11: --classes, chroma.accent_fraction, chroma.accent_fraction_by_family over the four section 4 bands, the union of the family list across the set before the gap is taken, and --floors. Without --floors it reports and exits 0 as before. With it, against the committed set, it exits 1 and names 62 breaches each carrying the section it breaches. It does not exit 0 today and should not: the three colour items below are what make it. Re-broken by tools/check/palette_selftest.py, 8 checks: a synthetic still built to clear every floor exits 0, and breaking lightness.p50, value_bands.ground, value_bands.mid, chroma.accent_fraction, the union hue gap, figure.p99_chroma and grey_fraction each brings back its own floor and no other.",
    "attempts": 0,
-   "note": "still open and it is the one that matters next: palette.py has no --floors and the law has no gate. Measured this cycle: mean chroma 0.0236 against a floor of 0.045, and it moved DOWN from 0.025.",
+   "note": "Implementing it corrected the law. Section 4's 'hue_families >= 4 over the union' counts ten-degree histogram bins, and the union of the committed set is bins 55-105: six bins, all six inside family A, gap 310 degrees. The floor as written read 6 >= 4 and passed on the most monochrome build the document describes. It now binds on across_the_set.named_families, which reads 1 of 4. docs/COLOR.md section 11 carries the amendment with the measurement. Also found: the value_bands floors were already declared in section 2 with a mid ceiling of 0.25, so the table cites section 2 and carries all three rather than restating them in section 3.",
    "from": "design, cycle 3"
   },
   {
@@ -350,5 +350,13 @@
    "the_shape_of_it": "it went down. The colour half of the owner's complaint has not been started."
   },
   "artifacts": "14 of 17, the ceiling for this container"
+ },
+ "measured_at_firing_3": {
+  "palette_floors": {
+   "breaches": 62,
+   "artifacts": 10,
+   "the_shape_of_it": "Every still fails figure.p99_chroma and figure.mean_chroma. Nine of ten fail the 200 degree per-still hue gap. Eight of nine rooms fail accent_fraction outright at 0.0 to 0.0023 against 0.010. Across the set: mean chroma 0.0236 against 0.045, room drift 0.4363 against 0.20, union gap 310 against 150, named families 1 against 4.",
+   "what_passes": "Every chroma ceiling passes with room to spare -- nothing in the build is anywhere near as saturated as a red biro. The whole failure is absence, not excess, which is what the client said."
+  }
  }
 }
