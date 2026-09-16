@@ -1,0 +1,1603 @@
+{
+ "what": "every built-in feeling's haptic, from app/lib/feelings/builtins.dart",
+ "notation": "ms@amp, offN for a gap, (…) ×N to repeat; amp is 0–255",
+ "strip_ms_per_column": 20,
+ "strip_ramp": " .:-=+*#%@",
+ "feelings": 34,
+ "families": [
+  "ache",
+  "mischief",
+  "shelter",
+  "sparkle",
+  "static_",
+  "warmth"
+ ],
+ "duration_ms": {
+  "shortest": 30,
+  "longest": 3200,
+  "mean": 1079.0
+ },
+ "problems": [],
+ "rows": [
+  {
+   "id": "squeeze",
+   "name": "a squeeze",
+   "family": "warmth",
+   "object": "obj_pinch",
+   "haptic": "80@90 off40 160@160 off40 320@230",
+   "sound": "snd_squeeze",
+   "colour": "#1f2a44",
+   "duration_ms": 640,
+   "buzzing_ms": 560,
+   "silent_ms": 80,
+   "pulses": 3,
+   "peak_amp": 230,
+   "mean_amp_over_time": 166.2,
+   "envelope": [
+    {
+     "ms": 80,
+     "amp": 90
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 160,
+     "amp": 160
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 320,
+     "amp": 230
+    }
+   ],
+   "strip": "----  ********  %%%%%%%%%%%%%%%%"
+  },
+  {
+   "id": "forehead",
+   "name": "forehead",
+   "family": "warmth",
+   "object": "obj_thumbprint",
+   "haptic": "200@120 off120 200@120",
+   "sound": "snd_forehead",
+   "colour": "#1f2a44",
+   "duration_ms": 520,
+   "buzzing_ms": 400,
+   "silent_ms": 120,
+   "pulses": 2,
+   "peak_amp": 120,
+   "mean_amp_over_time": 92.3,
+   "envelope": [
+    {
+     "ms": 200,
+     "amp": 120
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 120
+    }
+   ],
+   "strip": "==========      =========="
+  },
+  {
+   "id": "warm_palm",
+   "name": "warm palm",
+   "family": "warmth",
+   "object": "obj_coffee_ring",
+   "haptic": "600@140",
+   "sound": "snd_palm",
+   "colour": "#a67c52",
+   "duration_ms": 600,
+   "buzzing_ms": 600,
+   "silent_ms": 0,
+   "pulses": 1,
+   "peak_amp": 140,
+   "mean_amp_over_time": 140.0,
+   "envelope": [
+    {
+     "ms": 600,
+     "amp": 140
+    }
+   ],
+   "strip": "++++++++++++++++++++++++++++++"
+  },
+  {
+   "id": "nuzzle",
+   "name": "nuzzle",
+   "family": "warmth",
+   "object": "obj_clover",
+   "haptic": "90@150 off60 90@150 off60 90@150 off200 400@110",
+   "sound": "snd_nuzzle",
+   "colour": "#5d7a4a",
+   "duration_ms": 990,
+   "buzzing_ms": 670,
+   "silent_ms": 320,
+   "pulses": 4,
+   "peak_amp": 150,
+   "mean_amp_over_time": 85.4,
+   "envelope": [
+    {
+     "ms": 90,
+     "amp": 150
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 90,
+     "amp": 150
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 90,
+     "amp": 150
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 400,
+     "amp": 110
+    }
+   ],
+   "strip": "++++   ++++   ++++          ===================="
+  },
+  {
+   "id": "thinking_of_you",
+   "name": "thinking of you",
+   "family": "warmth",
+   "object": "obj_margin_sun",
+   "haptic": "40@80 off300 40@80 off300 260@170",
+   "sound": "snd_thinking",
+   "colour": "#1f2a44",
+   "duration_ms": 940,
+   "buzzing_ms": 340,
+   "silent_ms": 600,
+   "pulses": 3,
+   "peak_amp": 170,
+   "mean_amp_over_time": 53.8,
+   "envelope": [
+    {
+     "ms": 40,
+     "amp": 80
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 80
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 260,
+     "amp": 170
+    }
+   ],
+   "strip": "--               --               *************"
+  },
+  {
+   "id": "goodnight",
+   "name": "goodnight",
+   "family": "warmth",
+   "object": "obj_corner_moon",
+   "haptic": "500@120 off200 250@80 off200 120@50",
+   "sound": "snd_goodnight",
+   "colour": "#2c3555",
+   "duration_ms": 1270,
+   "buzzing_ms": 870,
+   "silent_ms": 400,
+   "pulses": 3,
+   "peak_amp": 120,
+   "mean_amp_over_time": 67.7,
+   "envelope": [
+    {
+     "ms": 500,
+     "amp": 120
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 250,
+     "amp": 80
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 120,
+     "amp": 50
+    }
+   ],
+   "strip": "=========================          ------------          ::::::"
+  },
+  {
+   "id": "miss_you",
+   "name": "miss you",
+   "family": "ache",
+   "object": "obj_crane",
+   "haptic": "150@220 off600 150@150 off600 150@90",
+   "sound": "snd_miss",
+   "colour": "#3a3a3c",
+   "duration_ms": 1650,
+   "buzzing_ms": 450,
+   "silent_ms": 1200,
+   "pulses": 3,
+   "peak_amp": 220,
+   "mean_amp_over_time": 41.8,
+   "envelope": [
+    {
+     "ms": 150,
+     "amp": 220
+    },
+    {
+     "ms": 600,
+     "amp": 0
+    },
+    {
+     "ms": 150,
+     "amp": 150
+    },
+    {
+     "ms": 600,
+     "amp": 0
+    },
+    {
+     "ms": 150,
+     "amp": 90
+    }
+   ],
+   "strip": "%%%%%%%%                              ++++++++                              --------"
+  },
+  {
+   "id": "empty_chair",
+   "name": "empty chair",
+   "family": "ache",
+   "object": "obj_chair",
+   "haptic": "300@200 off900 300@100",
+   "sound": "snd_chair",
+   "colour": "#3a3a3c",
+   "duration_ms": 1500,
+   "buzzing_ms": 600,
+   "silent_ms": 900,
+   "pulses": 2,
+   "peak_amp": 200,
+   "mean_amp_over_time": 60.0,
+   "envelope": [
+    {
+     "ms": 300,
+     "amp": 200
+    },
+    {
+     "ms": 900,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 100
+    }
+   ],
+   "strip": "###############                                             ==============="
+  },
+  {
+   "id": "come_home",
+   "name": "come home",
+   "family": "ache",
+   "object": "obj_string_loop",
+   "haptic": "60@255 off200 60@255 off200 60@255 off800 400@120",
+   "sound": "snd_home",
+   "colour": "#6b5a3e",
+   "duration_ms": 1780,
+   "buzzing_ms": 580,
+   "silent_ms": 1200,
+   "pulses": 4,
+   "peak_amp": 255,
+   "mean_amp_over_time": 52.8,
+   "envelope": [
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 800,
+     "amp": 0
+    },
+    {
+     "ms": 400,
+     "amp": 120
+    }
+   ],
+   "strip": "@@@          @@@          @@@                                        ===================="
+  },
+  {
+   "id": "wish_you_were_here",
+   "name": "wish you were here",
+   "family": "ache",
+   "object": "obj_ticket",
+   "haptic": "250@180 off400 250@120 off400 250@70 off400 250@40",
+   "sound": "snd_wish",
+   "colour": "#8a6a4a",
+   "duration_ms": 2200,
+   "buzzing_ms": 1000,
+   "silent_ms": 1200,
+   "pulses": 4,
+   "peak_amp": 180,
+   "mean_amp_over_time": 46.6,
+   "envelope": [
+    {
+     "ms": 250,
+     "amp": 180
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 250,
+     "amp": 120
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 250,
+     "amp": 70
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 250,
+     "amp": 40
+    }
+   ],
+   "strip": "************                    ============                    ::::::::::::                    ............"
+  },
+  {
+   "id": "long_day",
+   "name": "long day",
+   "family": "ache",
+   "object": "obj_window",
+   "haptic": "800@100 off300 800@60",
+   "sound": "snd_longday",
+   "colour": "#3a3a3c",
+   "duration_ms": 1900,
+   "buzzing_ms": 1600,
+   "silent_ms": 300,
+   "pulses": 2,
+   "peak_amp": 100,
+   "mean_amp_over_time": 67.4,
+   "envelope": [
+    {
+     "ms": 800,
+     "amp": 100
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 800,
+     "amp": 60
+    }
+   ],
+   "strip": "========================================               ::::::::::::::::::::::::::::::::::::::::"
+  },
+  {
+   "id": "here",
+   "name": "here",
+   "family": "shelter",
+   "object": "obj_boat",
+   "haptic": "400@140 off400 400@140 off400 400@140",
+   "sound": "snd_here",
+   "colour": "#4a4a4c",
+   "duration_ms": 2000,
+   "buzzing_ms": 1200,
+   "silent_ms": 800,
+   "pulses": 3,
+   "peak_amp": 140,
+   "mean_amp_over_time": 84.0,
+   "envelope": [
+    {
+     "ms": 400,
+     "amp": 140
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 400,
+     "amp": 140
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 400,
+     "amp": 140
+    }
+   ],
+   "strip": "++++++++++++++++++++                    ++++++++++++++++++++                    ++++++++++++++++++++"
+  },
+  {
+   "id": "breathe",
+   "name": "breathe",
+   "family": "shelter",
+   "object": "obj_blanket_fold",
+   "haptic": "1200@110 off800 1200@110",
+   "sound": "snd_breathe",
+   "colour": "#4a4a4c",
+   "duration_ms": 3200,
+   "buzzing_ms": 2400,
+   "silent_ms": 800,
+   "pulses": 2,
+   "peak_amp": 110,
+   "mean_amp_over_time": 82.5,
+   "envelope": [
+    {
+     "ms": 1200,
+     "amp": 110
+    },
+    {
+     "ms": 800,
+     "amp": 0
+    },
+    {
+     "ms": 1200,
+     "amp": 110
+    }
+   ],
+   "strip": "============================================================                                        ============================================================"
+  },
+  {
+   "id": "its_okay",
+   "name": "\"it",
+   "family": "shelter",
+   "object": "obj_plaster",
+   "haptic": "200@160 off200 200@160 off200 200@160 off200 200@160",
+   "sound": "snd_okay",
+   "colour": "#c9a98a",
+   "duration_ms": 1400,
+   "buzzing_ms": 800,
+   "silent_ms": 600,
+   "pulses": 4,
+   "peak_amp": 160,
+   "mean_amp_over_time": 91.4,
+   "envelope": [
+    {
+     "ms": 200,
+     "amp": 160
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 160
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 160
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 160
+    }
+   ],
+   "strip": "**********          **********          **********          **********"
+  },
+  {
+   "id": "steady",
+   "name": "steady",
+   "family": "shelter",
+   "object": "obj_stone",
+   "haptic": "300@180 off300 300@180 off300 300@180 off300 300@180 off300 300@180",
+   "sound": "snd_steady",
+   "colour": "#6d6d70",
+   "duration_ms": 2700,
+   "buzzing_ms": 1500,
+   "silent_ms": 1200,
+   "pulses": 5,
+   "peak_amp": 180,
+   "mean_amp_over_time": 100.0,
+   "envelope": [
+    {
+     "ms": 300,
+     "amp": 180
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 180
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 180
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 180
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 180
+    }
+   ],
+   "strip": "***************               ***************               ***************               ***************               ***************"
+  },
+  {
+   "id": "make_you_tea",
+   "name": "\"i",
+   "family": "shelter",
+   "object": "obj_mug",
+   "haptic": "100@120 off100 100@120 off100 500@150",
+   "sound": "snd_tea",
+   "colour": "#8b6b4a",
+   "duration_ms": 900,
+   "buzzing_ms": 700,
+   "silent_ms": 200,
+   "pulses": 3,
+   "peak_amp": 150,
+   "mean_amp_over_time": 110.0,
+   "envelope": [
+    {
+     "ms": 100,
+     "amp": 120
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 100,
+     "amp": 120
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 500,
+     "amp": 150
+    }
+   ],
+   "strip": "=====     =====     +++++++++++++++++++++++++"
+  },
+  {
+   "id": "hold",
+   "name": "hold",
+   "family": "shelter",
+   "object": "obj_candle",
+   "haptic": "900@150 off100 900@150",
+   "sound": "snd_hold",
+   "colour": "#b89a5a",
+   "duration_ms": 1900,
+   "buzzing_ms": 1800,
+   "silent_ms": 100,
+   "pulses": 2,
+   "peak_amp": 150,
+   "mean_amp_over_time": 142.1,
+   "envelope": [
+    {
+     "ms": 900,
+     "amp": 150
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 900,
+     "amp": 150
+    }
+   ],
+   "strip": "+++++++++++++++++++++++++++++++++++++++++++++     +++++++++++++++++++++++++++++++++++++++++++++"
+  },
+  {
+   "id": "poke",
+   "name": "poke",
+   "family": "mischief",
+   "object": "obj_spitball",
+   "haptic": "30@255",
+   "sound": "snd_poke",
+   "colour": "#a8322b",
+   "duration_ms": 30,
+   "buzzing_ms": 30,
+   "silent_ms": 0,
+   "pulses": 1,
+   "peak_amp": 255,
+   "mean_amp_over_time": 255.0,
+   "envelope": [
+    {
+     "ms": 30,
+     "amp": 255
+    }
+   ],
+   "strip": "@@"
+  },
+  {
+   "id": "nyeh",
+   "name": "nyeh",
+   "family": "mischief",
+   "object": "obj_tongue_face",
+   "haptic": "30@200 off50 30@200 off50 90@255",
+   "sound": "snd_nyeh",
+   "colour": "#a8322b",
+   "duration_ms": 250,
+   "buzzing_ms": 150,
+   "silent_ms": 100,
+   "pulses": 3,
+   "peak_amp": 255,
+   "mean_amp_over_time": 139.8,
+   "envelope": [
+    {
+     "ms": 30,
+     "amp": 200
+    },
+    {
+     "ms": 50,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 200
+    },
+    {
+     "ms": 50,
+     "amp": 0
+    },
+    {
+     "ms": 90,
+     "amp": 255
+    }
+   ],
+   "strip": "##  ##  @@@@"
+  },
+  {
+   "id": "catch",
+   "name": "catch",
+   "family": "mischief",
+   "object": "obj_plane",
+   "haptic": "40@120 off30 40@160 off30 40@200 off30 40@240 off30 120@255",
+   "sound": "snd_catch",
+   "colour": "#a8322b",
+   "duration_ms": 400,
+   "buzzing_ms": 280,
+   "silent_ms": 120,
+   "pulses": 5,
+   "peak_amp": 255,
+   "mean_amp_over_time": 148.5,
+   "envelope": [
+    {
+     "ms": 40,
+     "amp": 120
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 160
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 200
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 240
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 120,
+     "amp": 255
+    }
+   ],
+   "strip": "==  **  ##  %%  @@@@@@"
+  },
+  {
+   "id": "pick_one",
+   "name": "pick one",
+   "family": "mischief",
+   "object": "obj_fortune_teller",
+   "haptic": "50@180 off120 ×6",
+   "sound": "snd_pick",
+   "colour": "#e0a8b8",
+   "duration_ms": 1020,
+   "buzzing_ms": 300,
+   "silent_ms": 720,
+   "pulses": 6,
+   "peak_amp": 180,
+   "mean_amp_over_time": 52.9,
+   "envelope": [
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 180
+    },
+    {
+     "ms": 120,
+     "amp": 0
+    }
+   ],
+   "strip": "**      **      **      **      **      **      "
+  },
+  {
+   "id": "snap",
+   "name": "snap",
+   "family": "mischief",
+   "object": "obj_rubber_band",
+   "haptic": "20@255 off40 60@255 off400 20@180",
+   "sound": "snd_snap",
+   "colour": "#c98a5a",
+   "duration_ms": 540,
+   "buzzing_ms": 100,
+   "silent_ms": 440,
+   "pulses": 3,
+   "peak_amp": 255,
+   "mean_amp_over_time": 44.4,
+   "envelope": [
+    {
+     "ms": 20,
+     "amp": 255
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 400,
+     "amp": 0
+    },
+    {
+     "ms": 20,
+     "amp": 180
+    }
+   ],
+   "strip": "@  @@@                    *"
+  },
+  {
+   "id": "stuck_with_me",
+   "name": "stuck with me",
+   "family": "mischief",
+   "object": "obj_staple_chain",
+   "haptic": "30@220 off30 ×8",
+   "sound": "snd_stuck",
+   "colour": "#7a7a7e",
+   "duration_ms": 480,
+   "buzzing_ms": 240,
+   "silent_ms": 240,
+   "pulses": 8,
+   "peak_amp": 220,
+   "mean_amp_over_time": 110.0,
+   "envelope": [
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 220
+    },
+    {
+     "ms": 30,
+     "amp": 0
+    }
+   ],
+   "strip": "%%  %%  %%  %%  %%  %%  %%  %%  "
+  },
+  {
+   "id": "overwhelmed",
+   "name": "overwhelmed",
+   "family": "static_",
+   "object": "obj_crumple_ball",
+   "haptic": "(25@255 off25 25@200 off25) ×5",
+   "sound": "snd_overwhelmed",
+   "colour": "#141a2e",
+   "duration_ms": 500,
+   "buzzing_ms": 250,
+   "silent_ms": 250,
+   "pulses": 10,
+   "peak_amp": 255,
+   "mean_amp_over_time": 113.8,
+   "envelope": [
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 255
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    },
+    {
+     "ms": 25,
+     "amp": 200
+    },
+    {
+     "ms": 25,
+     "amp": 0
+    }
+   ],
+   "strip": "@ # @ # @ # @ # @ # "
+  },
+  {
+   "id": "ugh",
+   "name": "ugh",
+   "family": "static_",
+   "object": "obj_scribble",
+   "haptic": "180@255 off60 180@255 off60 180@255",
+   "sound": "snd_ugh",
+   "colour": "#141a2e",
+   "duration_ms": 660,
+   "buzzing_ms": 540,
+   "silent_ms": 120,
+   "pulses": 3,
+   "peak_amp": 255,
+   "mean_amp_over_time": 208.6,
+   "envelope": [
+    {
+     "ms": 180,
+     "amp": 255
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 180,
+     "amp": 255
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 180,
+     "amp": 255
+    }
+   ],
+   "strip": "@@@@@@@@@   @@@@@@@@@   @@@@@@@@@"
+  },
+  {
+   "id": "snapped",
+   "name": "snapped",
+   "family": "static_",
+   "object": "obj_snapped_pencil",
+   "haptic": "15@255 off15 15@255 off15 15@255 off300 500@255",
+   "sound": "snd_snapped",
+   "colour": "#3a3a3c",
+   "duration_ms": 875,
+   "buzzing_ms": 545,
+   "silent_ms": 330,
+   "pulses": 4,
+   "peak_amp": 255,
+   "mean_amp_over_time": 158.8,
+   "envelope": [
+    {
+     "ms": 15,
+     "amp": 255
+    },
+    {
+     "ms": 15,
+     "amp": 0
+    },
+    {
+     "ms": 15,
+     "amp": 255
+    },
+    {
+     "ms": 15,
+     "amp": 0
+    },
+    {
+     "ms": 15,
+     "amp": 255
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 500,
+     "amp": 255
+    }
+   ],
+   "strip": "@ @ @               @@@@@@@@@@@@@@@@@@@@@@@@@"
+  },
+  {
+   "id": "tangled",
+   "name": "tangled",
+   "family": "static_",
+   "object": "obj_knot",
+   "haptic": "40@180 off20 80@220 off20 40@180 off20 120@255 off20 40@180 off20 80@220",
+   "sound": "snd_tangled",
+   "colour": "#6b5a3e",
+   "duration_ms": 500,
+   "buzzing_ms": 400,
+   "silent_ms": 100,
+   "pulses": 6,
+   "peak_amp": 255,
+   "mean_amp_over_time": 174.8,
+   "envelope": [
+    {
+     "ms": 40,
+     "amp": 180
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 80,
+     "amp": 220
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 180
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 120,
+     "amp": 255
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 180
+    },
+    {
+     "ms": 20,
+     "amp": 0
+    },
+    {
+     "ms": 80,
+     "amp": 220
+    }
+   ],
+   "strip": "** %%%% ** @@@@@@ ** %%%%"
+  },
+  {
+   "id": "grey",
+   "name": "grey",
+   "family": "static_",
+   "object": "obj_rain",
+   "haptic": "(60@70 off60) ×8",
+   "sound": "snd_grey",
+   "colour": "#8a8a8e",
+   "duration_ms": 960,
+   "buzzing_ms": 480,
+   "silent_ms": 480,
+   "pulses": 8,
+   "peak_amp": 70,
+   "mean_amp_over_time": 35.0,
+   "envelope": [
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 70
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    }
+   ],
+   "strip": ":::   :::   :::   :::   :::   :::   :::   :::   "
+  },
+  {
+   "id": "not_okay",
+   "name": "not okay",
+   "family": "static_",
+   "object": "obj_torn_corner",
+   "haptic": "400@255 off100 40@255 off100 40@255 off100 40@255",
+   "sound": "snd_notokay",
+   "colour": "#141a2e",
+   "duration_ms": 820,
+   "buzzing_ms": 520,
+   "silent_ms": 300,
+   "pulses": 4,
+   "peak_amp": 255,
+   "mean_amp_over_time": 161.7,
+   "envelope": [
+    {
+     "ms": 400,
+     "amp": 255
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 255
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 255
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 255
+    }
+   ],
+   "strip": "@@@@@@@@@@@@@@@@@@@@     @@     @@     @@"
+  },
+  {
+   "id": "did_it",
+   "name": "did it",
+   "family": "sparkle",
+   "object": "obj_gold_star",
+   "haptic": "40@120 off60 40@170 off60 40@220 off60 200@255",
+   "sound": "snd_didit",
+   "colour": "#c9a23a",
+   "duration_ms": 500,
+   "buzzing_ms": 320,
+   "silent_ms": 180,
+   "pulses": 4,
+   "peak_amp": 255,
+   "mean_amp_over_time": 142.8,
+   "envelope": [
+    {
+     "ms": 40,
+     "amp": 120
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 170
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 40,
+     "amp": 220
+    },
+    {
+     "ms": 60,
+     "amp": 0
+    },
+    {
+     "ms": 200,
+     "amp": 255
+    }
+   ],
+   "strip": "==   **   %%   @@@@@@@@@@"
+  },
+  {
+   "id": "confetti",
+   "name": "confetti",
+   "family": "sparkle",
+   "object": "obj_confetti",
+   "haptic": "30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150",
+   "sound": "snd_confetti",
+   "colour": "#f2a8c0",
+   "duration_ms": 450,
+   "buzzing_ms": 210,
+   "silent_ms": 240,
+   "pulses": 7,
+   "peak_amp": 255,
+   "mean_amp_over_time": 93.0,
+   "envelope": [
+    {
+     "ms": 30,
+     "amp": 150
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 190
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 230
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 255
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 230
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 190
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 30,
+     "amp": 150
+    }
+   ],
+   "strip": "++  ##  %%  @@  %%  ##  ++"
+  },
+  {
+   "id": "yes",
+   "name": "yes",
+   "family": "sparkle",
+   "object": "obj_firework",
+   "haptic": "60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255",
+   "sound": "snd_yes",
+   "colour": "#a8322b",
+   "duration_ms": 620,
+   "buzzing_ms": 300,
+   "silent_ms": 320,
+   "pulses": 5,
+   "peak_amp": 255,
+   "mean_amp_over_time": 101.1,
+   "envelope": [
+    {
+     "ms": 60,
+     "amp": 100
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 180
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 200,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    },
+    {
+     "ms": 40,
+     "amp": 0
+    },
+    {
+     "ms": 60,
+     "amp": 255
+    }
+   ],
+   "strip": "===  ***  @@@          @@@  @@@"
+  },
+  {
+   "id": "crown",
+   "name": "crown",
+   "family": "sparkle",
+   "object": "obj_crown",
+   "haptic": "100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255",
+   "sound": "snd_crown",
+   "colour": "#f4ea6a",
+   "duration_ms": 1300,
+   "buzzing_ms": 700,
+   "silent_ms": 600,
+   "pulses": 5,
+   "peak_amp": 255,
+   "mean_amp_over_time": 117.7,
+   "envelope": [
+    {
+     "ms": 100,
+     "amp": 120
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 100,
+     "amp": 170
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 100,
+     "amp": 220
+    },
+    {
+     "ms": 100,
+     "amp": 0
+    },
+    {
+     "ms": 100,
+     "amp": 255
+    },
+    {
+     "ms": 300,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 255
+    }
+   ],
+   "strip": "=====     *****     %%%%%     @@@@@               @@@@@@@@@@@@@@@"
+  },
+  {
+   "id": "treat",
+   "name": "treat",
+   "family": "sparkle",
+   "object": "obj_ribbon",
+   "haptic": "50@200 off80 50@200 off80 300@150 off80 50@255",
+   "sound": "snd_treat",
+   "colour": "#f2a8c0",
+   "duration_ms": 690,
+   "buzzing_ms": 450,
+   "silent_ms": 240,
+   "pulses": 4,
+   "peak_amp": 255,
+   "mean_amp_over_time": 112.7,
+   "envelope": [
+    {
+     "ms": 50,
+     "amp": 200
+    },
+    {
+     "ms": 80,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 200
+    },
+    {
+     "ms": 80,
+     "amp": 0
+    },
+    {
+     "ms": 300,
+     "amp": 150
+    },
+    {
+     "ms": 80,
+     "amp": 0
+    },
+    {
+     "ms": 50,
+     "amp": 255
+    }
+   ],
+   "strip": "##    ##    +++++++++++++++    @@"
+  }
+ ]
+}
