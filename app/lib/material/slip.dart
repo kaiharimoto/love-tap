@@ -168,27 +168,19 @@ class Strip extends StatelessWidget {
   }
 }
 
-/// An empty surface: one sentence, on the pad of paper that region is.
+/// An empty surface: one sentence, on a piece of paper, on the desk.
 ///
 /// The brief allows exactly one empty-state artifact, and it is the one place the couple's own
 /// voice has to carry the whole screen. Floating grey text in the middle of a desk is a product
 /// saying "no items"; a line written on a piece of paper that somebody left there is two people
 /// who have not got round to it yet.
 ///
-/// It used to be one small slip centred on bare wood, and that is measurably the wrong picture.
-/// `DIRECTION.md` says the shell is a desk seen from above and *each region is a different stack
-/// of paper on it* — and `10_first_run.png`, which is this widget and almost nothing else, came
-/// back at `lightness.p50` 0.4093 with 79% of its pixels in its own darkest third. The plank was
-/// the subject and the writing was an incident on it. `docs/COLOR.md` section 2 puts the number
-/// on the sentence that was already law: `value_bands.ground` at most 0.50, every room screen's
-/// median pixel in [0.78, 0.95].
-///
-/// So an empty region is the pad, blank: sheets enough to cover the surface, with the desk still
-/// showing at the margin because the paper is *on* something. The sheets under the top one are
-/// not decoration either. Section 2 asks for `value_bands.mid` of at least 0.04 and calls an
-/// empty mid band a two-value image — a plank and some paper with nothing in between. The mid
-/// band is contact shadow and edge light, and on a screen with one sentence on it the only place
-/// either can come from is one sheet lying on another.
+/// It is a small slip again, and the reason is [RegionPad]. This widget briefly grew into a
+/// full-region pad of its own, because `10_first_run.png` is this widget and almost nothing else
+/// and it measured `lightness.p50` 0.4093 against a floor of 0.78. That fixed one screen. The
+/// sentence in `DIRECTION.md` that the screen was breaking — *each region is a different stack of
+/// paper on it* — is about every region, not about the empty ones, so the paper moved down to the
+/// shell where it is true of all five and this went back to being a note left on the page.
 class EmptySurface extends StatelessWidget {
   const EmptySurface({super.key, required this.id, required this.line, this.aside});
 
@@ -198,93 +190,125 @@ class EmptySurface extends StatelessWidget {
   /// A second, quieter line, in the margin hand.
   final String? aside;
 
-  /// The desk left showing around the pad. A stack of paper on a desk has to be *on* the desk, so
-  /// this may not go to zero however much it would help the median: the margin is what makes the
-  /// screen a surface with paper on it rather than a page.
-  static const _margin = 22.0;
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width * 0.72;
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 40, 24, 80),
+        child: Slip(
+          id: 'empty.$id',
+          row: 3,
+          width: width,
+          padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(line, style: Hands.noor(size: 19)),
+              if (aside != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(aside!, style: Hands.margin(size: 14)),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-  /// How far each sheet under the top one shows past its corner, and how many there are. The
-  /// offset is small because a pad is nearly square at its edge; what is being bought is not the
-  /// sliver of stock but the shadow the top sheet casts onto the one under it.
-  static const _peek = 7.0;
+/// The stack of paper a region *is*, under everything that region draws.
+///
+/// `DIRECTION.md` has said from the beginning that the shell is a desk seen from above and that
+/// each region is a different stack of paper on it, and `app.dart` says the same thing one line
+/// above where this is used: *the paper underneath does not move; what is on it is exchanged*.
+/// There was no paper underneath. Every region drew its contents straight onto the wood, and the
+/// measurement says so plainly — on the 2026-09-16 capture `04_moments` has a median pixel at
+/// L 0.4167 and `10_first_run` 0.4093, against `docs/COLOR.md` section 2 asking every room screen
+/// for [0.78, 0.95] and at most half its pixels in its own darkest third. `04_moments` is at 0.62
+/// of those and `10_first_run` at 0.79. A photograph in the gallery is a dark object and there are
+/// eleven of them; no border drawn around any of them reaches a floor that asks the *median* pixel
+/// to be paper. What reaches it is the page they are laid on.
+///
+/// This is deliberately not a container. It takes no child and clips nothing: it is a sheet drawn
+/// behind the region, and the region goes on scrolling over it exactly as it scrolled over the
+/// desk. That keeps every region's own layout, its lazy slivers and its scroll position untouched
+/// — the gallery's three-column masonry is the shape it is for reasons written down where it
+/// lives, and a page under it is not allowed to change them.
+///
+/// The desk still shows at the margin, and that is not a leftover. A stack of paper on a desk has
+/// to be *on* something or the screen is a page rather than a surface, which is the anti-goal the
+/// whole visual concept is defined against.
+class RegionPad extends StatelessWidget {
+  const RegionPad({super.key, required this.id, this.row = 0});
+
+  /// Which region this is. It picks the stock and the tear, so Moments is the same paper every
+  /// time it is turned to and a different paper from Us — five regions, five stacks, which is
+  /// what the sentence in DIRECTION.md actually says.
+  final String id;
+  final int row;
+
+  /// The desk left showing around the pad.
+  static const _margin = 12.0;
+
+  /// The sheets under the top one, and how far each shows past its corner. Section 2 asks for
+  /// `value_bands.mid` of at least 0.04 and calls a screen without it a two-value image: a plank
+  /// and some paper with nothing in between. Contact shadow and edge light are where a mid tone
+  /// comes from, and one sheet lying on another is the only place either exists.
+  static const _peek = 6.0;
   static const _under = 2;
-
-  /// What to assume when nothing above has bounded the height. Every call site today is inside an
-  /// `Expanded`, so this is the unreachable branch — but a pad that fills its parent must ask its
-  /// parent how big it is, and `LayoutBuilder` hands back infinity rather than an error.
-  static const _unboundedHeight = 520.0;
-
-  static const _sheetPadding = EdgeInsets.fromLTRB(20, 18, 20, 20);
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, box) {
-        final outerW = box.maxWidth - _margin * 2;
-        final outerH =
-            (box.maxHeight.isFinite ? box.maxHeight : _unboundedHeight) - _margin * 2;
-        // A region too small to lay a pad in gets nothing rather than a negative width.
-        if (outerW <= _peek * _under || outerH <= _peek * _under) return const SizedBox.shrink();
-
-        final sheetW = outerW - _peek * _under;
-        final sheetH = outerH - _peek * _under;
-
-        return Padding(
-          padding: const EdgeInsets.all(_margin),
-          child: SizedBox(
-            width: outerW,
-            height: outerH,
-            // The under-sheets are offset down and right, so the stack still occupies exactly
-            // outerW by outerH and nothing is clipped at the Stack's edge.
-            child: Stack(
-              children: [
-                for (var i = _under; i >= 1; i--)
+    return Positioned.fill(
+      child: IgnorePointer(
+        child: LayoutBuilder(
+          builder: (context, box) {
+            final outerW = box.maxWidth - _margin * 2;
+            final outerH = box.maxHeight - _margin * 2;
+            if (!outerW.isFinite || !outerH.isFinite) return const SizedBox.shrink();
+            if (outerW <= _peek * _under || outerH <= _peek * _under) {
+              return const SizedBox.shrink();
+            }
+            final sheetW = outerW - _peek * _under;
+            final sheetH = outerH - _peek * _under;
+            return Padding(
+              padding: const EdgeInsets.all(_margin),
+              // The under-sheets are offset down and right, so the stack occupies exactly
+              // outerW by outerH and no sheet is clipped at the Stack's edge.
+              child: Stack(
+                children: [
+                  for (var i = _under; i >= 1; i--)
+                    Positioned(
+                      left: _peek * i,
+                      top: _peek * i,
+                      child: Slip(
+                        id: 'pad.$id.under$i',
+                        row: row + i,
+                        width: sheetW,
+                        padding: EdgeInsets.zero,
+                        child: SizedBox(width: sheetW, height: sheetH),
+                      ),
+                    ),
                   Positioned(
-                    left: _peek * i,
-                    top: _peek * i,
-                    // A different id is a different stock and a different tear, which is the
-                    // point: three sheets torn along one line is a printed pad, not a stack.
+                    left: 0,
+                    top: 0,
                     child: Slip(
-                      id: 'empty.$id.under$i',
-                      row: 3 + i,
+                      id: 'pad.$id',
+                      row: row,
                       width: sheetW,
                       padding: EdgeInsets.zero,
                       child: SizedBox(width: sheetW, height: sheetH),
                     ),
                   ),
-                Positioned(
-                  left: 0,
-                  top: 0,
-                  child: Slip(
-                    id: 'empty.$id',
-                    row: 3,
-                    width: sheetW,
-                    padding: _sheetPadding,
-                    child: SizedBox(
-                      width: sheetW - _sheetPadding.horizontal,
-                      height: sheetH - _sheetPadding.vertical,
-                      // Written at the top of the sheet, where somebody writing on a pad starts,
-                      // rather than centred in it, which is where a dialog box puts things.
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(line, style: Hands.noor(size: 19)),
-                          if (aside != null)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: Text(aside!, style: Hands.margin(size: 14)),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+                ],
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -14,6 +14,7 @@ import 'material/light.dart';
 import 'material/paper.dart';
 import 'material/motion.dart';
 import 'material/palette.dart';
+import 'material/slip.dart';
 import 'feelings/builtins.dart';
 import 'feelings/corner.dart';
 import 'feelings/landing.dart';
@@ -100,6 +101,11 @@ class _ShellState extends State<Shell> {
   final StreamController<Arrival> _arrivals = StreamController<Arrival>.broadcast();
 
   static const _labels = [S.pulse, S.chat, S.us, S.moments, S.settings];
+
+  /// One per region, in the same order, and never translated: these pick the stock and the tear
+  /// the region's pad is torn from, so a region is the same paper on both phones and in every
+  /// language. Running them through [_labels] would make the paper depend on the words.
+  static const _padIds = ['pulse', 'chat', 'us', 'moments', 'settings'];
 
   StreamSubscription<(String, double)>? _landings;
 
@@ -205,7 +211,14 @@ class _ShellState extends State<Shell> {
                         facts: setup,
                         hostAddress: scope.link.address,
                       )
-                    else
+                    else ...[
+                      // The paper underneath, which the line below has claimed since it was
+                      // written and which until now was not there: the regions drew onto the
+                      // wood. It is outside Turning on purpose — the page does not turn, the
+                      // things on it are exchanged — and it is skipped entirely while the setup
+                      // sheet is up, because that sheet is already paper and already the palest
+                      // screen in the set at p50 0.9470, a hair under section 2's 0.95 ceiling.
+                      RegionPad(id: _padIds[_index], row: _index),
                       // Every region keeps its state and its scroll, so they are all built and
                       // one is shown — but showing one by cutting to it is a hard edit: half the
                       // brightness of the screen changes between two frames, which reads as a
@@ -226,6 +239,7 @@ class _ShellState extends State<Shell> {
                           ),
                         ),
                       ),
+                    ],
                     // one gesture from any region
                     FeelingCorner(
                       registry: scope.feelings,
