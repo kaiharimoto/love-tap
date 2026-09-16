@@ -1,5 +1,53 @@
 {
  "files": {
+  "../../../tmp/claude-0/-home-user-love-tap/96cc1174-83aa-56cd-bacd-32b1e5f3b8eb/scratchpad/tearprobe/tear_005_edge.png": {
+   "bytes": 328175,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_edge",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.0,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "../../../tmp/claude-0/-home-user-love-tap/96cc1174-83aa-56cd-bacd-32b1e5f3b8eb/scratchpad/tearprobe/tear_005.png",
+    "mesh": 340,
+    "pass": "edge",
+    "resolution": [
+     640,
+     640
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 10,
+    "thickness_m": 0.00011
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/96cc1174-83aa-56cd-bacd-32b1e5f3b8eb/scratchpad/tearprobe/tear_005_shadow.png": {
+   "bytes": 186124,
+   "generator": "blender/paper/tear_relief.py",
+   "kind": "tear_shadow",
+   "settings": {
+    "cockle_mm": 0.4,
+    "curl_mm": 1.15,
+    "edge_band_mm": 2.6,
+    "fibre_band_mm": 1.4,
+    "frame": 1.2,
+    "lift_mm": 2.4,
+    "light": "day",
+    "mask": "../../../tmp/claude-0/-home-user-love-tap/96cc1174-83aa-56cd-bacd-32b1e5f3b8eb/scratchpad/tearprobe/tear_005.png",
+    "mesh": 340,
+    "pass": "shadow",
+    "resolution": [
+     768,
+     768
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 10,
+    "thickness_m": 0.00011
+   }
+  },
   "assets/bits/clip_01.png": {
    "bytes": 57426,
    "generator": "blender/bits/bits.py",
@@ -13809,7 +13857,7 @@
    }
   },
   "assets/tears/tear_005_edge.png": {
-   "bytes": 322754,
+   "bytes": 1695186,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -13824,16 +13872,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_005_shadow.png": {
-   "bytes": 181510,
+   "bytes": 670674,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -13848,11 +13896,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -13876,7 +13924,7 @@
    }
   },
   "assets/tears/tear_006_edge.png": {
-   "bytes": 247966,
+   "bytes": 1281717,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -13891,16 +13939,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_006_shadow.png": {
-   "bytes": 143806,
+   "bytes": 598252,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -13915,11 +13963,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -13943,7 +13991,7 @@
    }
   },
   "assets/tears/tear_007_edge.png": {
-   "bytes": 378699,
+   "bytes": 2040838,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -13958,16 +14006,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_007_shadow.png": {
-   "bytes": 188161,
+   "bytes": 726706,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -13982,11 +14030,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14010,7 +14058,7 @@
    }
   },
   "assets/tears/tear_008_edge.png": {
-   "bytes": 322119,
+   "bytes": 1767383,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14025,16 +14073,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_008_shadow.png": {
-   "bytes": 173016,
+   "bytes": 652382,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14049,11 +14097,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14078,7 +14126,7 @@
    }
   },
   "assets/tears/tear_009_edge.png": {
-   "bytes": 272419,
+   "bytes": 1412401,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14093,16 +14141,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_009_shadow.png": {
-   "bytes": 160468,
+   "bytes": 637891,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14117,11 +14165,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14145,7 +14193,7 @@
    }
   },
   "assets/tears/tear_010_edge.png": {
-   "bytes": 324009,
+   "bytes": 1757083,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14160,16 +14208,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_010_shadow.png": {
-   "bytes": 172213,
+   "bytes": 657568,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14184,11 +14232,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14213,7 +14261,7 @@
    }
   },
   "assets/tears/tear_011_edge.png": {
-   "bytes": 242726,
+   "bytes": 1244164,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14228,16 +14276,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_011_shadow.png": {
-   "bytes": 142906,
+   "bytes": 569961,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14252,11 +14300,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14282,7 +14330,7 @@
    }
   },
   "assets/tears/tear_012_edge.png": {
-   "bytes": 300128,
+   "bytes": 1606859,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14297,16 +14345,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_012_shadow.png": {
-   "bytes": 168701,
+   "bytes": 646404,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14321,11 +14369,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14351,7 +14399,7 @@
    }
   },
   "assets/tears/tear_013_edge.png": {
-   "bytes": 243174,
+   "bytes": 1253043,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14366,16 +14414,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_013_shadow.png": {
-   "bytes": 148099,
+   "bytes": 576372,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14390,11 +14438,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14418,7 +14466,7 @@
    }
   },
   "assets/tears/tear_014_edge.png": {
-   "bytes": 204452,
+   "bytes": 1057506,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14433,16 +14481,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_014_shadow.png": {
-   "bytes": 135086,
+   "bytes": 527336,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14457,11 +14505,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14485,7 +14533,7 @@
    }
   },
   "assets/tears/tear_015_edge.png": {
-   "bytes": 310732,
+   "bytes": 1698011,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14500,16 +14548,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_015_shadow.png": {
-   "bytes": 168382,
+   "bytes": 628225,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14524,11 +14572,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14552,7 +14600,7 @@
    }
   },
   "assets/tears/tear_016_edge.png": {
-   "bytes": 360018,
+   "bytes": 1968741,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14567,16 +14615,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_016_shadow.png": {
-   "bytes": 183802,
+   "bytes": 701954,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14591,11 +14639,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14620,7 +14668,7 @@
    }
   },
   "assets/tears/tear_017_edge.png": {
-   "bytes": 194837,
+   "bytes": 991794,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14635,16 +14683,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_017_shadow.png": {
-   "bytes": 127070,
+   "bytes": 496205,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14659,11 +14707,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
@@ -14687,7 +14735,7 @@
    }
   },
   "assets/tears/tear_018_edge.png": {
-   "bytes": 329944,
+   "bytes": 1810388,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_edge",
    "settings": {
@@ -14702,16 +14750,16 @@
     "mesh": 340,
     "pass": "edge",
     "resolution": [
-     640,
-     640
+     1400,
+     1400
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },
   "assets/tears/tear_018_shadow.png": {
-   "bytes": 172171,
+   "bytes": 660044,
    "generator": "blender/paper/tear_relief.py",
    "kind": "tear_shadow",
    "settings": {
@@ -14726,11 +14774,11 @@
     "mesh": 340,
     "pass": "shadow",
     "resolution": [
-     768,
-     768
+     1680,
+     1680
     ],
     "rig": "blender/rig/common.py",
-    "samples": 10,
+    "samples": 48,
     "thickness_m": 0.00011
    }
   },

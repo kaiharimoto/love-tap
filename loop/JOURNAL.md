@@ -791,3 +791,116 @@ One setup step is not written down anywhere and cost this firing ten minutes: `f
 at *"unable to find directory entry in pubspec.yaml: app/assets/paper/"* in a fresh container,
 because `app/assets/` is generated and gitignored. `python3 tools/pack_assets.py` writes it, and
 `run.sh` calls that only on a build. Run it once after `bootstrap.sh` and the suite runs.
+
+### What the backlog actually bought, per family, measured rather than predicted
+
+The photographs went first because they are the whole of 04_moments and 14_media_viewer and were
+the one family with nothing relit. All 115 rendered and developed. Old blob against new file:
+
+| | mean chroma | ratio | ΔL |
+|---|---:|---:|---:|
+| 76 on the day rig | 0.0126 → 0.0159 | ×1.26 | +0.0002 |
+| 39 on their own lamps | 0.0195 → 0.0204 | ×1.05 | +0.0067 |
+
+The overall figure is ×1.17, and quoting it alone would be misleading. A recipe names its own
+light, and only five of the eleven conditions in this family are daylight; `strip`, `kitchen_bulb`,
+`lamp` and `torch` do not move at all, which is correct — a kitchen bulb is not the day rig.
+`window_left`, which is 46 of the 76, moves ×1.45.
+
+**This corrects firing 5's prediction for the two photograph screens, in the unhelpful direction.**
+`tools/relight.py` multiplies a committed still by the illuminant ratio uniformly, so it applied the
+full day-rig ratio to pixels a kitchen bulb lit. Its 04_moments ground chroma of 0.0266 and
+14_media_viewer of 0.0250 are therefore *overstated*, not merely short of the 0.030 floor. A third
+of that family cannot move and the rest moves a quarter. Expect those two stills to miss by more
+than predicted — which is the same conclusion firing 5 reached about presence, arriving a second
+time down a different road: the chroma has to come from albedo and ink, not from the lamp.
+
+The torn edges are the opposite case and the more interesting one. Fourteen done, 005–018, measured
+only where the edge actually paints:
+
+    mean OKLab L   0.9508 → 0.8622   (−0.0886)
+    mean chroma    0.0127 → 0.0436   (×3.44)
+
+**That comparison is not clean, and the commit that carries it, 74eec99, over-attributes it to the
+lamp. The correction is here.** `assets/MANIFEST.json` records tears 005 onward at res 640 and 10
+samples, and tears 001–004 — firing 5's — at 1400 and 48. The manifest was telling the truth: most
+of this library's tears were committed as *draft* renders. So the backlog is a quality upgrade as
+well as a relight, and a before/after across it moves two variables at once.
+
+Isolating them costs one render. `tear_005` was re-rendered at **the old 640/10 settings under the
+new lamp** and compared with the committed old file at the same settings, so that only the
+illuminant differs:
+
+| tear_005_edge, alpha > 0.5 | L | chroma | any channel ≥250 | all three ≥254 |
+|---|---:|---:|---:|---:|
+| old lamp, 640/10 (committed) | 0.9535 | 0.0130 | 43.57% | 1.06% |
+| **new lamp, 640/10 (probe)** | 0.9154 | **0.0447** | 49.82% | **0.00%** |
+| new lamp, 1400/48 (shipped) | 0.8625 | 0.0436 | 5.94% | 0.00% |
+
+Read across those rows:
+
+- **The chroma is the lamp.** 0.0130 → 0.0447 at identical resolution and sample count, ×3.44. The
+  headline number survives intact, and the jump to 1400/48 barely touches it (0.0447 → 0.0436).
+- **Flat-white clipping is the lamp too**, and that part of the original claim holds: 1.06% → 0.00%
+  of painted pixels at 255 on all three channels. A clipped highlight is white by construction —
+  three equal channels, no hue — so removing it is precisely where some of the new chroma comes
+  from.
+- **The collapse in *near*-clipping is not the lamp. It is resolution.** 43.57% → 49.82% under the
+  new lamp at the old settings — it goes slightly *up* — and only falls to 5.94% at 1400/48. A
+  640px render of a two-millimetre lit lip puts that edge in a handful of large bright pixels; at
+  1400px the same edge is resolved into a gradient. The "42.86% → 5.61%" in 74eec99 is almost
+  entirely that, and reading it as an exposure fault the lamp fixed was wrong.
+- **The lightness drop splits.** Of −0.0886 L, the lamp accounts for −0.038 and the resolution and
+  sample count for the remaining −0.053.
+
+So: the tears gained their colour from the corrected illuminant, at ×3.44 — the largest gain of any
+family, and real. They stopped blowing out to flat white because of the illuminant as well. But
+they are also no longer 640-pixel drafts, and that is what most of the lightness change and nearly
+all of the near-clipping change actually measure. Two of the four claims in 74eec99 stand and two
+are corrected here rather than quietly left in the log.
+
+### Two bugs in the backlog script, both found by running it
+
+`blender/paper/tear_relief.py` takes `--conditions` and defaults to `day,dusk`.
+`tools/render_queue6.sh` never passed it, and `--skip-existing` tests only `tear_NNN_edge.png`, so
+pruning a day edge made the generator render that tear's dusk shadow as well — **6.5 minutes a tear
+against the 4.1 measured after the fix**, a third of the largest remaining family spent on the one
+condition this backlog exists to leave alone. It is also where the four stray `*_shadow_dusk.png`
+in `assets/tears` came from: tears 001–004 have one and the other fifty-three do not, and those
+four are exactly what firing 5 rendered before its lease ran out. Nothing reads them. Queued.
+
+The second one cost more. The header's stop procedure ended with
+
+    git checkout -- assets seed/photos
+
+described as putting back anything pruned but not yet rendered. It does that, and it also restores
+every **modified** file in those directories — so it does not recover the pruned, it destroys the
+rendered. This firing ran it as written and lost three finished tears. It now restores the deleted
+paths and nothing else, which is what `restore_missing` in the same file has always done:
+
+    git ls-files -d -- assets seed/photos | xargs -r git checkout --
+
+The 115 photographs were already committed and pushed when that happened and were untouched. That
+is the argument for `WORKER_PROMPT.md`'s "push after every completed item, never once at the end",
+restated as something this firing paid for: a pushed commit is the only thing here that a mistake
+at the stop step cannot reach.
+
+### Where this leaves the backlog
+
+| family | state |
+|---|---|
+| `assets/shell`, `assets/paper`, `assets/objects` | clean |
+| `seed/photos` | **clean — 115 of 115, done this firing** |
+| `assets/tears` | 18 of 56 day edges; **76 files stale**, ~2.6 h at the measured 4.1 min a tear |
+| `assets/bits` | **8 files stale** — the script's step-3 sweep never ran this firing |
+| `assets/folds` | 240 frames, untouched, still not a step in the script |
+
+The next firing re-runs `tools/render_queue6.sh`: photographs are skipped in seconds now, and it
+resumes the tears at file granularity. It is roughly three more hours of rendering to a clean day
+library, not counting folds — and folds still cannot be seen by `palette.py`, which reads stills, so
+the case for spending a firing on them before a capture remains weak.
+
+**The capture is the next firing's after the library is clean, and not before.** `evidence/palette.json`
+will still read 0.0181 until then, and that is the correct state for it to be in: it is the last
+number this build actually measured, and replacing it with one taken over a lamp boundary would
+have been worse than leaving it stale.
