@@ -561,3 +561,141 @@ touches `DIRECTION.md`'s light section rather than a constant in a leaf file, an
 must not do is buy chroma out of contrast. The probe says it does not have to — warmth came out
 free, and slightly to the good — but that is one stock at one setting, and the measurement clause on
 the item requires `legibility.py` to hold across the whole set before it closes.
+
+---
+
+## Cycle 3 · IMPLEMENT · firing 5 — the lamp
+
+Step 0 passed. `git fetch origin <branch>` and `git push --dry-run` both answered; the bare
+`git fetch origin` that §0 warns about was tried first by habit, hung exactly as described, and was
+abandoned for the refspec form, which finished in seconds. The lease was taken and pushed before
+anything was touched.
+
+One item: **`the-day-rig-is-what-took-the-colour-out`**. It does not close. What follows is what it
+cost, what it bought, and the two things it turned up that nobody was looking for.
+
+### The lamp was never 5200 K
+
+`DIRECTION.md` declares one day rig, "warm (5200 K)". `blender/rig/common.py` carried
+`DAY_COLOR = (1.0, 0.965, 0.905)` annotated `# ~5200 K`. Fitting a blackbody to it gives **6125 K**.
+The annotation was nine hundred kelvin out and nothing in the build could tell, because a comment is
+not a measurement.
+
+The larger half was not a wrong number but a wrong model, and firing 4 had already named it without
+having the arithmetic: the world background was open sky at `(0.80, 0.83, 0.87)`. Blender's world is
+a full unoccluded hemisphere, and a sun at 50° contributes `sin(el) × energy` while a world of
+radiance *S* contributes `π × S`, so the sky was **41% of the total irradiance**, not the fifth a
+reading of the constants suggests. Sun and sky together: **R:G:B = 1.000:0.995:0.980**. A neutral
+lamp, and an object under a neutral lamp cannot be more chromatic than its own albedo.
+
+The fix makes the temperature the constant and derives the colour from it by Planck's law, so the
+comment and the value cannot drift apart again; makes the background the key bounced off a
+warm-white room, because that is what a desk beside a window actually sees; and **solves the
+strengths rather than typing them**, holding the luminous irradiance each source lands on a
+horizontal sheet at exactly what the rig has always delivered. Net: **1.000:0.805:0.650, 5080 K,
+exposure unchanged to one part in 10⁹**. Lightness is held by construction and only hue moves.
+
+`tools/check/illuminant.py` is the gate. It fails on the value that shipped, and — the case worth
+having — it also fails on fixing the key alone and leaving the fill as open sky, which is the same
+defect at half strength and which a 700 K tolerance would have waved through at 5825 K. Both were
+put back and watched to fail. It runs in `capture.sh`'s pre-flight, because a gate nobody runs is
+`texture_budget.py` again.
+
+### What it bought, measured on disk and not predicted
+
+| | before | after |
+|---|---:|---:|
+| `assets/shell/desk.png` mean chroma | 0.0276 | **0.0418** |
+| 27 day paper stocks, mean chroma | ~0.018 | **0.0475** |
+| `graph_01` mean chroma | 0.0072 | **0.0350** |
+| 26 objects, mean p99 chroma | 0.0335 | **0.0577** |
+| objects clearing the 0.09 accent threshold | 0 | **3** |
+
+**Legibility was not paid.** That was the one condition on the item and it is the thing this build
+has clawed back from 48.4% to 26.3% of runs below floor. Measured against each sheet's own dark end
+at Y p10 — the adversarial ground, not the flat — the worst of the three declared body inks moved by
+**0.048 contrast ratio points** across all 27 sheets, on values between 3.5:1 and 7.6:1. The largest
+lightness change anywhere in the paper family is 0.0084 of OKLab L, and the desk plate stayed inside
+the 0.40 ± 0.03 its own retune set. That is the exposure invariant doing its job.
+
+### What it does not buy, which is the more useful half
+
+A warm illuminant multiplies up a **warm** albedo and drags a cool or green one toward orange. So it
+raises family A and squeezes B, C and D, and it cannot manufacture presence:
+
+- `figure.p99_chroma` reaches **0.0981** at best against a floor of 0.10. All ten stills still fail.
+- `across_the_set.mean_chroma` goes 0.0181 → about **0.0435** against a floor of 0.045.
+- `widest_hue_gap_deg` gets **worse**, 310° → 330°.
+- `sticky_blue`'s rendered hue went **222.7° → 84.6°**; `obj_staple_chain` 267.3° → 61.9°;
+  `obj_stone` 271.4° → 59.8°. The stock library and the object library now carry **no family C at
+  all**.
+
+`docs/COLOR.md` §7 wrote this down in advance — "a build can meet a mean by warming the whole frame,
+which produces a sepia photograph". So the lamp is corrected to exactly what the law declares and
+**stopped there**, rather than pushed further to chase a number it would reach.
+
+### Family C is not dim. It is out of gamut.
+
+This is the finding worth the firing. Sweeping every in-gamut albedo through the corrected
+illuminant and asking for the most chromatic render inside each family band, per lightness:
+
+| OKLab L | family C, old lamp | **new** | family B, old | **new** | family D, old | **new** |
+|---:|---:|---:|---:|---:|---:|---:|
+| 0.95 | 0.0431 | **0.0000** | 0.0366 | **0.0000** | 0.2233 | **0.0000** |
+| 0.90 | 0.0821 | **0.0000** | 0.0729 | **0.0629** | 0.2668 | **0.1444** |
+| 0.87 | 0.1081 | **0.0070** | 0.0986 | **0.0883** | 0.2943 | **0.2195** |
+| 0.80 | 0.1459 | **0.0583** | 0.1536 | **0.1550** | 0.2766 | **0.2743** |
+| 0.70 | 0.1727 | **0.1271** | 0.2559 | **0.2514** | 0.2416 | **0.2413** |
+
+§3 requires every room's median pixel to be paper at L 0.78–0.95 and the stocks measure 0.87–0.95.
+**At that lightness, under the light this build declares, no albedo renders into family C.** A
+direct search for one that would put `sticky_blue` back in C at its own lightness returns nothing in
+gamut. The declared "graph paper cool blue-grey" cannot exist as a pale sheet under this lamp.
+
+The way out costs no render and was in the palette the whole time: **the app's own flat colours are
+Dart constants composited over the render, so the rig cannot touch them.** `Pen.red #a8322b` is
+chroma **0.1553** at hue 27.7° — family B, and the only declared colour in the build already above
+the accent threshold. `Pen.ballpoint #1f2a44` is 0.0503 at 265.9° and `Pen.biro #141a2e` is 0.0402 at
+270.2°, both family C, both dark enough that the gamut result does not bind them, and both already
+feeding the area-weighted hue histogram, which counts from chroma 0.004 and not from 0.09. **The hue
+families belong to the ink and the objects, not to the paper.**
+
+### Two corrections to notes this firing itself wrote
+
+`tools/relight.py` predicts a capture in seconds instead of forty-five minutes by multiplying the
+committed stills in linear light, and it is committed with its three known errors written down. It
+was 1.1% out on the desk plate. But it **under-called `obj_gold_star` by half** — 0.0881 predicted,
+0.0976 rendered — because a first-order multiply cannot see specular or interreflection and a foil
+star is mostly both. So the earlier note that the lamp moves objects "five to twelve percent" is too
+pessimistic: three objects crossed the accent threshold. Firing 3's conclusion that no object in the
+library can carry an accent patch was true *under the old lamp* and is not true now. That half of
+`one-coloured-thing-per-screen` is a placement job today; the `figure.p99 ≥ 0.10` half is still a
+render job, and the item has come apart into two.
+
+### An asset with no maker
+
+Fifty of the fifty-two object day files came back newer after the re-render. The two that did not
+are `obj_heart_fold.png` and its shadow — because `blender/objects/objects.py` builds twenty-five
+objects and `heart_fold` is not one of them. Their `assets/MANIFEST.json` entries name `objects.py`
+as their generator anyway, and `tools/check/manifest.py` passes, reporting "634 files in assets/, 0
+without an entry naming their generator", because **it checks that an entry exists, not that the
+generator it names can make the file**. Two assets in this library are not reproducible and the gate
+says all of them are. Filed with a measurement and a way to re-break it. Found by rendering, not by
+reading, which is the argument for the mtime comparison in the new coherence item.
+
+### Where this leaves it
+
+`tools/render_queue6.sh` is the backlog — objects, bits, tears, photos — ordered by how much of a
+screen each family covers, idempotent, resumable by re-running it, and with `assets/folds` noted in
+its header as owed and deliberately last because `palette.py` reads stills and no fold frame appears
+in one. Shell, paper, objects and bits are done and pushed. Tears was running when this firing ran
+out of lease and is partially done; photos and folds are untouched.
+
+**The next firing should finish that script before it does anything else, and certainly before any
+capture.** A capture taken now would measure a library lit by two lamps, which is a real state — it
+is queued as `the-library-is-lit-by-two-lamps` so it cannot quietly become a design decision — but
+it is not a state worth spending forty-five minutes measuring. The prediction for the capture that
+follows a drained backlog is in `tools/relight.py` and in the item's note; the honest expectation is
+that the ground, mid and figure **mean** floors and every ceiling come good, and that
+`across_the_set.mean_chroma`, `figure.p99_chroma`, `accent_fraction` and the hue families do not,
+because those are albedo and this was a light.
