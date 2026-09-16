@@ -82,6 +82,26 @@ IMPLEMENT deliberately spans many firings: drain the queue in order, and when yo
 write the queue state back, commit, push, and stop. The next firing continues the same stage. Only
 a drained queue advances it.
 
+### 3b. Stay on the queue, and never end a firing blocked on an ask
+
+Two things went wrong on the firing that first reached IMPLEMENT, and both are cheap to avoid.
+
+**It worked on things that were not in the queue.** It went after an Android release — a signed
+APK, `build.yml`, a PWA stub — none of which is a queue item, and `CLAUDE.md` names `build.yml` as
+a dead end that cannot pass on any branch. If something looks worth doing and is not in the queue,
+**add it to the queue with its measurement and leave it for ADDRESS to rank**. Do not do it. The
+queue is ordered by points on the rubric; work outside it is work that no row is asking for.
+
+**It ended `blocked` on an ask.** Its final state was "set 4 signing secrets; decide on PWA stub",
+which is an `asks[]` entry — and `asks[]` entries *never block the loop*, by construction. Nobody
+is coming to answer. A firing that finds itself waiting on the owner has taken a wrong turn some
+way back: record the ask, drop that item, and spend the rest of the firing on the queue. The only
+legitimate reason to stop early is the push pre-flight failing or another firing holding the lease.
+
+If every open queue item is genuinely blocked — which has not happened yet — say so in
+`loop/JOURNAL.md`, set `blocked` in `loop/STATE.json` with what would unblock it, and stop. That
+is a real outcome. "Waiting for a secret" is not.
+
 ### 4. End the firing
 
 Update `loop/STATE.json` — increment `firing`, record what happened in `history`, set the stage for
