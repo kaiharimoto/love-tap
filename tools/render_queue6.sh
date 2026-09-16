@@ -16,12 +16,19 @@
 #
 #   kill -9 <pid of this script>     # FIRST, so it cannot advance to the next family
 #   kill -9 <pid of blender>         # then the render
-#   git checkout -- assets seed/photos
+#   git ls-files -d -- assets seed/photos | xargs -r git checkout --
 #
 # Read both pids out of `ps`. Killing blender first lets `run` return normally, the script walks on
 # to the next family, prunes it, and only then takes the signal — firing 5 did exactly that and
 # deleted every tear in the library on its way out. The last line is not optional tidying; it is
 # what puts back anything pruned but not yet rendered.
+#
+# That last line used to read `git checkout -- assets seed/photos`, and firing 6 lost three finished
+# tears to it. `git checkout -- <dir>` restores every MODIFIED file in the directory as well as
+# every deleted one, so it does not put back what was pruned — it throws away what was rendered.
+# Restore the deleted paths and nothing else, which is what restore_missing below has always done
+# and what the header should always have said. Commit finished work before stopping a run anyway:
+# a pushed commit is the only thing here that a mistake at this step cannot reach.
 #
 # ONLY the day condition is re-rendered. The dusk rig is untouched by this change and its assets
 # already carry three to five times the chroma of their day twins, which was the clue in the first
@@ -117,9 +124,16 @@ say "photographs done"
 # Measured at firing 5: about four minutes a tear, 57 of them, so the better part of four hours.
 # Resumable at file granularity through prune_stale, so it is the right family to leave running in
 # whatever a firing has left over.
+# --conditions day is load-bearing and was missing until firing 6. tear_relief.py defaults to
+# "day,dusk", and --skip-existing tests only tear_NNN_edge.png, so pruning a day edge made the
+# generator render that tear's dusk shadow too: a third of the wall clock on this family, spent on
+# the condition this backlog exists to leave alone. It also explains a stray in the library —
+# assets/tears holds four *_shadow_dusk.png, for tears 001-004 and no others, which is exactly the
+# four firing 5 rendered before it ran out of lease. Nothing reads them; they are the side effect,
+# not the asset. Measured here: 6.5 minutes a tear with dusk, and the header's four without it.
 say "2/3 tears — the lit torn edge of every note, day only. About four minutes apiece."
 prune_stale assets/tears -name 'tear_*_edge.png' -o -name 'tear_*_shadow.png' ! -name '*dusk*'
-run blender/paper/tear_relief.py -- --all --res 1400 --skip-existing
+run blender/paper/tear_relief.py -- --all --res 1400 --conditions day --skip-existing
 restore_missing
 say "tears done"
 
