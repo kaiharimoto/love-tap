@@ -86,3 +86,69 @@ categories out of 100 while the loop scores six out of 120. And `Desk` paints it
 "standing in for paper" and a desk is not paper, so §9 reads it as out of scope, but it is exactly
 what a fresh-context anti-goal critic will find, and it is better answered than discovered.
 
+## Firing 2 · cycle 3 · IMPLEMENT · 2026-09-16
+
+The owner asked for the work to be implemented and released so they could test it. Six queue items
+closed, all of them the legibility half. The charm half was not started, and the number says so:
+mean chroma across the set is 0.0236 against a floor of 0.045, and it moved *down* from 0.025.
+Anyone reading this and about to report that cycle 3 fixed what the owner complained about should
+read that sentence again. The owner said two things.
+
+Three things cost this firing real time and all three are worth writing down.
+
+**`bootstrap.sh` could not complete in a fresh container.** It checked for a python module named
+`skia_pathops`, which is the distribution name; what pip puts on the path is `pathops`, which is
+what `tools/handwriting/build.py` imports. So bootstrap died on a package that was installed and
+working, and no firing before this one had a toolchain.
+
+**The first capture produced 0 of 17 and took forty minutes doing it.** Every scene reported
+`browserType.launch:` with an empty message after it, which reads like a broken harness. Calling
+`webkit.launch()` by hand printed what the harness had swallowed: `libevent-2.1-7t64` and
+`libwayland-server0`. `CLAUDE.md` has said from the beginning that `tools/apt-prereqs.sh` is the
+difference between a capture and nothing here, and it was right; the list was two packages short.
+What `capture.sh` did under that failure is the reason it is trustworthy: it refused to count the
+stills already on disk, named each with the time it was actually written, and wrote 0 of 17. A
+harness that counted them would have reported 14 of 17 and a clean diff, and this firing would
+have claimed the colour work was verified against artifacts that predate it by a day.
+
+**The widget guard passed while two whole sections were unreadable.** `05_settings.png` came back
+with the four facts about the two phones, the export line and the authored feelings written on the
+wood at about one to one, and `no_word_is_written_on_the_desk_test.dart` was green. The test
+viewport is 480 by 1040 logical pixels and `SettingsRegion` is a lazy `ListView`: everything below
+the fold had never been built. A guard over a scrolling region that does not scroll is a guard over
+its first screenful. It scrolls now, and re-breaking it names exactly the text that is invisible in
+the committed still.
+
+The media viewer is the one to learn from, because the first fix made it worse and the measurement
+is the only reason that was known. Its scrim was 0xCC over near-black, which put the desk at OKLab
+L 0.198 -- below dusk's 0.265 -- and body text at 1.43:1. Lightening it to 0x80 put the desk at
+0.268, which was the stated goal, and the next capture went from 25 of 40 runs below floor to 56 of
+66. The darkness had been hiding that the route is not opaque: behind a translucent barrier is the
+live chat screen, and the still came back with the note's text showing through itself twice and
+`put it back` sitting on top of the composer. A scrim was the wrong instrument in both directions.
+The viewer now brings its own desk at the dusk condition and nothing shows through it.
+`DIRECTION.md` has said "never a dim overlay" in four words since the beginning.
+
+The law was wrong about one thing and implementing it is what found it. Section 2 put every ink at
+OKLab L <= 0.40 and section 10's table then checked five inks and quietly omitted the sixth.
+`Pen.red` is L 0.494, and forcing it down takes its chroma from 0.1553 to 0.1215 -- while section 5
+anchors the entire `figure` chroma ceiling *on red's 0.1553*. The rule as written would have
+destroyed the number the next rule depends on. The ceiling now binds by what the ink is for, and
+section 2 carries the amendment with the measurement that forced it, which is what the freeze rule
+requires of a reversal.
+
+Where it got to: 495 of 834 runs below floor at the start of the cycle, 329 of 848 now, 14 of 17
+artifacts, 100 tests passing against 94. `02_chat` went from 92 of 139 to 33 of 105, which is the
+composer coming off the wood and is the largest single thing in the cycle. `17_setup_pwa` is still
+0 of 89 and its worst run improved from 4.5 to 7.98.
+
+Left for the next firing: `color-palette-floors` first, because `palette.py` still has no
+`--floors` and a law with no gate is prose. Then the two charm items, which are the half of the
+owner's complaint nobody has started. Four clips still fail their frame checks, which is why this
+run was 14 of 17 rather than better, and that was not looked at.
+
+A release the owner can install on an Android phone is still blocked on them: four signing secrets
+only they can set. `tools/pack_pwa.py` is named by the workflow's guard and does not exist, and it
+is not a missing script -- nothing in the app sets `pwaRoot`, so serving the PWA from the phone is
+an unfinished feature. A web build was made and handed over instead.
+

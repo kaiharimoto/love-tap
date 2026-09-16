@@ -88,15 +88,15 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "Do this one first. Every other item on this list is measured by it or by the next one. It changes no pixels, so it can land while the build is red and will report exactly how red.",
+   "note": "still open and it is the one that matters next: palette.py has no --floors and the law has no gate. Measured this cycle: mean chroma 0.0236 against a floor of 0.045, and it moved DOWN from 0.025.",
    "from": "design, cycle 3"
   },
   {
    "id": "legibility-adversarial-ground",
    "why": "The tool reads every ground at GROUND_PCTL = 90 \u2014 the light end of the ring \u2014 which for dark ink is the flattering end. On a plank whose own internal contrast is 1.62:1 that is the difference between a pass and the truth. The desk failures were found by hand; they should be found by the tool.",
    "measurement": "`python3 tools/check/legibility.py --out evidence/legibility.json` reports a new per-run `ground_swing` (the contrast ratio between the ring's p05 and p95 luminance within a window the size of the run's own height) and, where `ground_swing >= 1.20`, gates the floor against the ring's p05 for dark ink and p95 for light ink. Assert it on the committed capture: the composer-placeholder run in `02_chat.png` must report `ground_swing >= 1.5` and fail. Add `--dusk` naming the dusk artifacts, raising FLOOR_BODY to 5.0 and FLOOR_LARGE to 4.5; FLOOR_LARGE goes to 4.0 by day.",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "tools/check/legibility.py reports ground_swing per run and gates on the ring's adversarial end where it is >= 1.20. Re-broken: with the gate out of reach 02_chat reports 78 of 139 below floor at worst 1.42; with it in place, 92 of 139 at worst 1.0.",
    "attempts": 0,
    "note": "Keep reporting the current GROUND_PCTL = 90 number alongside. It was the right fix for a dense paragraph whose ring is mostly its own antialiasing, and removing it would reintroduce the 2.83:1 false reading its comment records.",
    "from": "design, cycle 3"
@@ -105,8 +105,8 @@
    "id": "words-off-the-desk",
    "why": "The single highest-leverage change in the build. No dark ink of any colour reaches 4.5:1 on the day desk \u2014 the arithmetic returns a negative required luminance \u2014 so this cannot be tuned, only obeyed.",
    "measurement": "A new Dart test, `app/test/no_word_is_written_on_the_desk_test.dart`: pump each of the five regions and assert no `Text`, `Stamped`, `Written` or `SelectableText` is a descendant of `Desk` without a `PaperPiece` between them. Then `python3 tools/check/legibility.py --only 02_chat.png` shows zero light-on-dark failures, down from the current 56 across the set. Delete `Pen.onWood` and `Hands.onDesk` from `app/lib/material/palette.dart` and `hands.dart`; the composer placeholder, the send and search affordances, the day separators, the three Moments section headers and the blob-pending line each get a stock strip.",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "app/test/no_word_is_written_on_the_desk_test.dart passes on all five regions, scrolling each to its end. Measured: 02_chat 92 of 139 runs below floor -> 33 of 105; across the set 495 of 834 -> 329 of 848. Pen.onWood, Hands.onDesk and Stamped.onDesk deleted.",
    "attempts": 0,
    "note": "DIRECTION.md's 2026-09-04 decision that there is no icon set anywhere means love-tap's affordances are almost all words, so this is four or five widgets rather than a constant change. Shapes that are not words \u2014 tally strokes, rules, arrows, the pencil-stub battery \u2014 stay on the wood at 3:1 against the adversarial end.",
    "from": "design, cycle 3"
@@ -115,8 +115,8 @@
    "id": "margin-pencil-into-the-ink-band",
    "why": "Pen.margin at L 0.529 is not an ink that is slightly too pale \u2014 it sits in the `mid` band, which is where shadows live. It is a shadow that has been asked to spell, and it is the sole cause of seven of the eight entries in the current ratchet list.",
    "measurement": "Move `Pen.margin` to OKLab L <= 0.40, derived from the binding case: aged stock rendered at dusk measures Y p50 0.5528 and the dusk body floor of 5.0:1 requires ink at Y <= 0.0706, i.e. L <= 0.413. Then `_knownBelowFloor` in `app/test/legible_on_what_it_is_on_test.dart` must be emptied \u2014 the test already fails an entry that has been fixed and left in the list, so this is self-checking.",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "Pen.margin at #464648, OKLab L 0.3949, clears 4.5:1 on all ten stocks, worst 5.91 on stickyPink. _knownBelowFloor shrank from eight entries to one. Re-broken: restoring #6B6B6E fails the ladder test, the mid-band test and names all seven stocks.",
    "attempts": 0,
    "note": "The constant's own comment says it was tuned 'against the palest stock' and means it. That is the wrong end of the range; ink is tuned against the darkest ground it can land on.",
    "from": "design, cycle 3"
@@ -125,8 +125,8 @@
    "id": "ink-ladder-in-oklab",
    "why": "The existing guard is six luminance pairs against two declared grounds and it passed while 48.4% of the build's text was below the floor. The ladder in docs/COLOR.md \u00a72 is what it should have been checking.",
    "measurement": "Extend `app/test/legible_on_what_it_is_on_test.dart` with OKLab assertions: every ink at L <= 0.40; nothing in the `mid` band (0.52\u20130.64) carries a word; every surface at least 0.18 L from the surface it rests on. Keep the existing every-ink-by-every-stock sweep and the `_knownBelowFloor` ratchet. Re-break it to prove it: put `Pen.onWood` back and watch the ladder test fail.",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "app/test/legible_on_what_it_is_on_test.dart asserts the ink ceiling, the mid band and the 0.18 L surface separation in OKLab. It found a contradiction in the law itself and docs/COLOR.md section 2 is amended with the measurement.",
    "attempts": 0,
    "note": "The ladder is a Dart test because it is about declared constants; the pixels are legibility.py's job. Two mechanisms, two jobs, no overlap.",
    "from": "design, cycle 3"
@@ -135,8 +135,8 @@
    "id": "nothing-with-a-word-on-it-dims",
    "why": "14_media_viewer dims the whole sheet and takes body text to 1.43:1, and drives the still's grey fraction to 0.1432 against a set mean of 0.0324. DIRECTION.md already forbids this in four words \u2014 'Never a dim overlay' \u2014 and nothing could check it.",
    "measurement": "`python3 tools/check/legibility.py --only 14_media_viewer.png` reports zero runs below 4.5:1, down from 21 of 40, and `palette.py` reports `14_media_viewer` `grey_fraction` <= 0.08. A widget test asserts no `PaperPiece` with a `Text` descendant receives opacity < 1.0 and no scrim composites over one. The viewer darkens the `Desk` layer from `ground_day` to `ground_dusk` and leaves the sheet, the ink and the chrome alone.",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "14_media_viewer.png 25 of 40 runs below floor -> 13 of 24, with the bleed-through gone. The viewer brings its own desk at the dusk condition rather than tinting the room; PartnerStrip no longer fades its own status line.",
    "attempts": 0,
    "note": "Same rule retires the blanket `Opacity(0.55)` that PartnerStrip applies when the partner is asleep. Asleep is expressed by the stock and by pen weight, not by fading the sentence you still need to read.",
    "from": "design, cycle 3"
@@ -145,8 +145,8 @@
    "id": "pen-pressure-stays-above-the-floor",
    "why": "PartnerStrip writes the partner's status line at alpha 0.55 + 0.15 x energy. At energy 0 that composites ballpoint on lined stock to roughly 3.3:1 and graphite lower still. Expressiveness that costs legibility is a bug wearing a feature's clothes.",
    "measurement": "A Dart test asserting every composited ink that carries a word clears the day and dusk floors at its minimum alpha across every stock in the library. Change the range in `app/lib/material/desk.dart` from `0.55 + 0.15 * energy` to `0.80 + 0.05 * energy`. Verified in pixels by the partner-strip runs in `01_pulse.png` and `crops/dusk_pulse.png` clearing 4.5:1 and 5.0:1 respectively.",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "PartnerStrip writes at 0.80 + 0.05 * energy rather than 0.55 + 0.15 * energy, so the minimum composite alpha for a word is 0.80 as docs/COLOR.md section 6 requires.",
    "attempts": 0,
    "note": "Pen pressure is a good idea and it stays. A hand that presses lightly is still a hand you can read.",
    "from": "design, cycle 3"
@@ -196,7 +196,7 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "Spend it on objects that already exist in assets/objects/ \u2014 the foil star, the pressed clover, the torn ticket, the pink sticky \u2014 rather than on new colour. 17_setup_pwa is the place to start: it is the first screen a new user sees and the most colourless in the build at figure p99 0.0181.",
+   "note": "Spend it on objects that already exist in assets/objects/ \u2014 the foil star, the pressed clover, the torn ticket, the pink sticky \u2014 rather than on new colour. 17_setup_pwa is the place to start: it is the first screen a new user sees and the most colourless in the build at figure p99 0.0181. | Untouched by cycle 3, which was the legibility half only. The charm complaint is exactly where it was found.",
    "from": "design, cycle 3"
   },
   {
@@ -206,7 +206,7 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "150\u00b0 is the widest gap in a split-complementary scheme \u2014 the loosest classical harmony that still reads as deliberately coloured. Three families at 10\u00b0/80\u00b0/235\u00b0 leave 155\u00b0 and fail by five degrees, which is why D is required by arithmetic rather than by taste. Family D does not authorise a green pen: both the brief and DIRECTION.md name the pens as ballpoint, graphite, biro and red, and Teo stays graphite.",
+   "note": "150\u00b0 is the widest gap in a split-complementary scheme \u2014 the loosest classical harmony that still reads as deliberately coloured. Three families at 10\u00b0/80\u00b0/235\u00b0 leave 155\u00b0 and fail by five degrees, which is why D is required by arithmetic rather than by taste. Family D does not authorise a green pen: both the brief and DIRECTION.md name the pens as ballpoint, graphite, biro and red, and Teo stays graphite. | Untouched by cycle 3, which was the legibility half only. The charm complaint is exactly where it was found.",
    "from": "design, cycle 3"
   },
   {
@@ -327,5 +327,22 @@
    "what": "attach kaiharimoto/love-tap as a source on the Routine, and give it the Routine tools",
    "answer": "Resolved 2026-09-15 by design rather than by the owner. create_trigger cannot attach a repository at all, so the orchestrator attaches it per firing instead. Nothing is needed from the owner here."
   }
- ]
+ ],
+ "measured_at_firing_2": {
+  "legibility": {
+   "runs": 848,
+   "below_floor": 329,
+   "share_below_floor": 0.388,
+   "was": "495 of 834 at the start of cycle 3, on the adversarial reading",
+   "per_artifact_wins": "02_chat 66%->31%, 03_us 71%->32%, 12_search 42%->20%, 01_pulse 74%->40%, 05_settings 61%->43%, 14_media_viewer 63%->54%",
+   "17_setup_pwa": "still 0 of 89, and its worst run went 4.5 -> 7.98"
+  },
+  "palette": {
+   "mean_chroma": 0.0236,
+   "floor": 0.045,
+   "was": 0.025,
+   "the_shape_of_it": "it went down. The colour half of the owner's complaint has not been started."
+  },
+  "artifacts": "14 of 17, the ceiling for this container"
+ }
 }
