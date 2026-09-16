@@ -261,12 +261,21 @@ class _Fan extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              // the families, on a torn strip: a stamp belongs on paper, not on the wood
+              // The families, on torn strips: a stamp belongs on paper, not on the wood.
+              //
+              // This was a horizontally scrolling Row, and six index-card tabs reading Warmth,
+              // Ache, Shelter, Mischief, Static and Sparkle do not fit across a phone. Four fitted
+              // and two sat off the right edge, which is why the evidence counted four families
+              // where the floor is five: nothing was clipped or thrown, they were simply past the
+              // end of a strip nobody knew could be dragged. A Wrap puts the overflow on a second
+              // line, where a row of tabs is legible rather than merely present, and it is also
+              // the truer object -- a second row of cards laid on the desk, not a filmstrip.
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
                     children: [
                       for (final f in Family.values)
                         Padding(
