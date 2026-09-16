@@ -57,7 +57,18 @@ EVIDENCE = os.path.join(ROOT, "evidence")
 # pixels. Anything shorter is asked for 4.5.
 LARGE_PX = 72
 FLOOR_BODY = 4.5
-FLOOR_LARGE = 3.0
+# docs/COLOR.md section 6 raises large from WCAG's 3.0 to 4.0. WCAG's large-text exemption exists
+# because a larger glyph has a thicker stroke, which is true of the bold sans the standard was
+# calibrated against and is not true here: large text in this app is handwriting, whose stroke
+# width comes from a pen model and barely moves with the point size, so setting it larger buys
+# height and not weight. The exemption is not one this build ever earned.
+FLOOR_LARGE = 4.0
+# Dusk gets half a point more at both sizes. WCAG's formula carries a constant 0.05 that models
+# roughly 5 percent viewing flare in a lit room; in a dark room the real flare is lower, so the
+# formula overstates the contrast of dark pairs. docs/COLOR.md section 6 records that this pair is
+# a judgment rather than a measurement, and names the capture that would settle it.
+FLOOR_BODY_DUSK = 5.0
+FLOOR_LARGE_DUSK = 4.5
 
 # What counts as a mark shaped like writing. Expressed as a fraction of image height rather than
 # in pixels, because the Android stills are 1440x3120 and the PWA stills are 1080x2340 and a
@@ -77,6 +88,20 @@ INK_DELTA = 0.07
 GROUND_WINDOW = 81      # the box the ink threshold is taken over, odd, in pixels
 RING = 10               # the least distance around a run that the ground is sampled from
 GROUND_PCTL = 90        # the ground under dark ink is the light end of what surrounds it
+# How wide the ground's own variation has to be before the flattering end stops being a fair
+# reading of it. A sheet of stock swings a few percent and reads the same everywhere under a
+# letter; a plank of waxed oak swings 1.62:1 by day and 1.53:1 at dusk, so a pair computed against
+# one point of it is a number about a surface the letters are not sitting on. Below this gate the
+# ring percentile above is kept, because it is the right answer for flat paper and was arrived at
+# the hard way (see the note below). At or above it the floor is required against the adversarial
+# end instead -- the darkest ground under dark ink, the lightest under light ink.
+GROUND_SWING_GATE = 1.20
+# The ground is sampled with every mark, and a couple of pixels of halo around each mark, taken
+# out of it. That exclusion is what makes a low percentile meaningful at all: the ring around a
+# letter is mostly that letter's own antialiasing, so the dark end of "every pixel in the ring"
+# is the halo rather than the paper, and gating on it would report every word in the build at
+# about one to one. GROUND_PCTL dodges that by reading the light end; this reads the real ground.
+GROUND_HALO = 2
 # A pale mark only means writing when the thing under it is dark. On paper, "lighter than the
 # local mean" is a highlight, the lit side of a curl, or correction fluid, and reading those as
 # letters put a line of ordinary body text at 1.66:1 when its pair is 4.55:1. So the pale pass
@@ -115,6 +140,14 @@ def box_mean(a, k):
     h, w = a.shape
     tot = s[k:k + h, k:k + w] - s[0:h, k:k + w] - s[k:k + h, 0:w] + s[0:h, 0:w]
     return tot / float(k * k)
+
+
+def dilate(mask, r):
+    """Grow a boolean mask by r pixels, so a mark's antialiasing comes with it."""
+    if r <= 0:
+        return mask
+    k = 2 * r + 1
+    return box_mean(mask.astype(np.float64), k) > (0.5 / (k * k))
 
 
 def label(ink):
@@ -187,7 +220,7 @@ def marks(gam, ground_gam, polarity):
     return gam > (ground_gam + INK_DELTA)
 
 
-def measure(path):
+def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE):
     with Image.open(path) as im:
         rgb = np.asarray(im.convert("RGB"))
     H, W = rgb.shape[:2]
@@ -198,11 +231,19 @@ def measure(path):
     min_h = max(7, int(GLYPH_MIN_H_FRAC * H))
     max_h = int(GLYPH_MAX_H_FRAC * H)
 
-    out = []
-    seen = 0
-    # Both polarities, because this app writes dark ink on pale paper *and* a pale stamped label
-    # straight onto dark waxed oak. A checker that only looked for dark-on-light would have been
-    # blind to exactly the pair the build already knows is its worst.
+    # Find the writing first, in both polarities, and only then measure it. The two passes exist
+    # so that the ground can have every accepted glyph taken out of it, including the ones in the
+    # other polarity: a pale stamp sitting beside dark ink would otherwise be read as that ink's
+    # paper.
+    #
+    # What is excluded is the accepted glyphs, and NOT everything `marks()` returns. That
+    # distinction is the whole of this: `marks()` is a mark detector and on a plank it fires on
+    # the grain, 41.6% of the frame in `02_chat.png`. Excluding all of that would take the grain
+    # out of the ground, and the grain *is* the ground -- its spread is precisely what
+    # `ground_swing` is asking about. So only the shapes that survived the size and aspect filters
+    # come out, grown by GROUND_HALO to take their antialiasing with them.
+    found = []
+    glyph_px = np.zeros((H, W), dtype=bool)
     for polarity in ("dark", "light"):
         mask = marks(gam, ground_gam, polarity)
         if mask.sum() < 60:
@@ -230,14 +271,23 @@ def measure(path):
             if w > 14 * h or h > 14 * w:      # a printed rule, a tear edge, a stem of nothing
                 continue
             boxes.append((y0, y1, x0, x1))
-        seen += len(boxes)
+            glyph_px[yy, xx] = True
+        found.append((polarity, mask, boxes))
 
+    is_ground = ~dilate(glyph_px, GROUND_HALO)
+
+    out = []
+    seen = 0
+    for polarity, mask, boxes in found:
+        seen += len(boxes)
         for y0, y1, x0, x1, n in runs_of(boxes):
             ring = max(RING, (y1 - y0) // 2)
             ry0, ry1 = max(0, y0 - ring), min(H, y1 + ring)
             rx0, rx1 = max(0, x0 - ring), min(W, x1 + ring)
             pl = lum[ry0:ry1, rx0:rx1]
             pm = mask[ry0:ry1, rx0:rx1]
+            pg = is_ground[ry0:ry1, rx0:rx1]
+            pmg = glyph_px[ry0:ry1, rx0:rx1]
             stroke = pl[pm]
             if stroke.size < 40 or pl.size < 400:
                 continue
@@ -247,6 +297,50 @@ def measure(path):
             else:
                 core = float(np.percentile(stroke, 90))         # the lightest of the stroke
                 g = float(np.percentile(pl, 100 - GROUND_PCTL)) # the darkest of the ring
+
+            # How wide the ground under this run actually is, and therefore whether the reading
+            # above is fair.
+            #
+            # The sample is the band hugging the letters -- everything within half a glyph height
+            # of a stroke, minus the strokes and their antialiasing -- and not the whole ring box.
+            # That distinction is load-bearing: the ring is a rectangle, so for a line of text
+            # near the edge of a sheet it reaches out onto whatever is beside the sheet, and an
+            # adversarial end taken over the whole of it reports a surface the letters are not on.
+            #
+            # It is worth writing down what the readings of about one to one turned out to be,
+            # because they look like a bug and are not one. They are dark marks sitting on the
+            # desk, whose band has a median luminance of 0.12 -- the wood -- and whose dark grain
+            # reaches 0.088, which is as dark as the marks themselves. docs/COLOR.md section 6
+            # predicted exactly this from the other direction: 4.5:1 against the plank requires a
+            # darker ink at Y -0.006, so a dark mark on the wood has essentially no contrast to
+            # measure. The ring reading flattered these at 1.4 to 8.0 by reading the light end of
+            # the grain; one to one is the truthful number.
+            band = max(3, (y1 - y0) // 2)
+            near = dilate(pmg, band) & pg
+            ground = pl[near] if near.sum() >= 200 else pl[pg]
+            swing, g_adv = None, None
+            if ground.size >= 200:
+                g_lo = float(np.percentile(ground, 5))
+                g_hi = float(np.percentile(ground, 95))
+                swing = round(contrast(g_hi, g_lo), 2)
+                g_adv = g_lo if polarity == "dark" else g_hi
+            # On flat paper the ring percentile is kept: it is the right answer there and it was
+            # arrived at the hard way. On a ground that moves, the floor is required against the
+            # end that is worst for this ink -- no fudge factor, just the correct comparison
+            # instead of a flattering one.
+            gated = g
+            if swing is not None and swing >= GROUND_SWING_GATE and g_adv is not None:
+                # A ground has to be on the far side of the ink from the reader, or it is not
+                # this ink's ground. Dark ink is written on something lighter than itself; pale
+                # ink on something darker. Where the adversarial end crosses the stroke -- a line
+                # of dark text with the status bar or a photograph inside its band, a pale label
+                # beside something paler still -- what has been found is a second surface rather
+                # than the one the letters are on, and the ring reading is kept instead. Without
+                # this, fifty runs in `02_chat.png` alone reported one to one, none of which was
+                # a real failure and all of which would have drowned the ones that are.
+                on_the_far_side = (g_adv > core) if polarity == "dark" else (g_adv < core)
+                if on_the_far_side:
+                    gated = g_adv
             # The test is the median of the surface, not its dark end. A paragraph of dark ink on
             # cream has a very dark tenth percentile — it is full of letters — and reading that as
             # "a dark ground" turns ordinary text inside out and reports the paper as failing ink.
@@ -260,16 +354,24 @@ def measure(path):
             # connected word, which is what a cursive hand produces.
             if n < 2 and width < 2 * height:
                 continue
-            floor = FLOOR_LARGE if height >= LARGE_PX else FLOOR_BODY
+            floor = floor_large if height >= LARGE_PX else floor_body
             out.append({
                 "box": [x0, y0, x1 - x0, height],
                 "glyphs": n,
                 "polarity": polarity,
                 "role": "large" if height >= LARGE_PX else "body",
                 "floor": floor,
-                "ink_core": round(contrast(core, g), 2),
-                "ink_median": round(contrast(med, g), 2),
-                "ground_lum": round(g, 4),
+                # What the floors gate on: measured against the adversarial end of the ground
+                # wherever the ground moves enough to have one.
+                "ink_core": round(contrast(core, gated), 2),
+                "ink_median": round(contrast(med, gated), 2),
+                # The ring reading this file has always reported, kept alongside so that the two
+                # can be compared and so that nothing that was true before quietly stops being
+                # reported. On flat paper they are the same number.
+                "ink_core_ring": round(contrast(core, g), 2),
+                "ground_swing": swing,
+                "ground_lum": round(gated, 4),
+                "ground_lum_ring": round(g, 4),
             })
     return {"runs": out, "glyphs": seen, "size": [W, H]}
 
@@ -280,7 +382,11 @@ def main():
     ap.add_argument("--only", default="", help="one artifact filename")
     ap.add_argument("--worst", type=int, default=12, help="how many failures to print")
     ap.add_argument("--dir", default=EVIDENCE)
+    ap.add_argument("--dusk", default="",
+                    help="comma-separated artifacts captured under the dusk rig; they are held to "
+                         "the dusk floors in docs/COLOR.md section 6 rather than the day ones")
     args = ap.parse_args()
+    dusk = {n.strip() for n in args.dusk.split(",") if n.strip()}
 
     paths = sorted(glob.glob(os.path.join(args.dir, "*.png")))
     if args.only:
@@ -291,13 +397,18 @@ def main():
 
     report = {
         "mode": "measured-from-pixels",
-        "floors": {"body": FLOOR_BODY, "large": FLOOR_LARGE, "large_above_px": LARGE_PX},
+        "floors": {"body": FLOOR_BODY, "large": FLOOR_LARGE, "large_above_px": LARGE_PX,
+                   "body_dusk": FLOOR_BODY_DUSK, "large_dusk": FLOOR_LARGE_DUSK,
+                   "ground_swing_gate": GROUND_SWING_GATE},
+        "dusk": sorted(dusk),
         "artifacts": {},
         "failures": [],
     }
     for path in paths:
         name = os.path.basename(path)
-        m = measure(path)
+        m = measure(path,
+                    FLOOR_BODY_DUSK if name in dusk else FLOOR_BODY,
+                    FLOOR_LARGE_DUSK if name in dusk else FLOOR_LARGE)
         runs = m.get("runs", [])
         bad = [r for r in runs if r["ink_core"] < r["floor"]]
         worst = min((r["ink_core"] for r in runs), default=None)
@@ -313,9 +424,17 @@ def main():
             report["failures"].append({
                 "artifact": name, "box": r["box"], "role": r["role"], "polarity": r["polarity"],
                 "ink_core": r["ink_core"], "ink_median": r["ink_median"], "floor": r["floor"],
+                "ink_core_ring": r["ink_core_ring"], "ground_swing": r["ground_swing"],
             })
 
     report["failures"].sort(key=lambda f: f["ink_core"])
+    # How much of the tally is the adversarial reading rather than the ring one. A firing that
+    # wants to compare against an older report needs to know which of the two it is looking at.
+    report["on_moving_ground"] = sum(
+        1 for f in report["failures"]
+        if f["ground_swing"] is not None and f["ground_swing"] >= GROUND_SWING_GATE)
+    report["would_pass_on_ring_reading"] = sum(
+        1 for f in report["failures"] if f["ink_core_ring"] >= f["floor"])
     report["read"] = len(paths)
     report["total_runs"] = sum(a["runs"] for a in report["artifacts"].values())
     report["total_below_floor"] = len(report["failures"])

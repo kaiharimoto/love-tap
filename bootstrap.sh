@@ -92,7 +92,11 @@ python3 -c 'import sys; assert sys.version_info >= (3,10)' 2>/dev/null || die "p
 # guessed at, and a missing one stops here with its own name in the message instead of failing in
 # the middle of a three-hour render.
 py_missing=()
-for mod in numpy PIL fontTools cv2 skia_pathops cffi cryptography; do
+# The importable name, not the distribution name: pip installs `skia-pathops` and what it puts
+# on the path is `pathops`, which is what tools/handwriting/build.py imports. Checking for
+# `skia_pathops` meant bootstrap died on a package that was installed and working, and no
+# fresh container could get past this line.
+for mod in numpy PIL fontTools cv2 pathops cffi cryptography; do
   python3 -c "import $mod" >/dev/null 2>&1 || py_missing+=("$mod")
 done
 if [ ${#py_missing[@]} -gt 0 ]; then
