@@ -89,10 +89,17 @@ def declared_temperature():
         return None, "DIRECTION.md has no Light section"
     end = text.find("\n## ", start + 1)
     section = text[start:end if end > 0 else len(text)]
-    # the dusk condition declares its own temperature in the same section; the key is the first
-    found = re.findall(r"(\d{3,5})\s*K\b", section)
-    if not found:
-        return None, "DIRECTION.md's Light section declares no colour temperature"
+    # The Light section names several temperatures -- the key, the net the rig arrives at, and the
+    # dusk lamp -- so this reads the KEY's line rather than the first number in the section. Taking
+    # the first match worked until the section grew a second sentence, which is the kind of thing
+    # that turns a gate into a coin toss without anyone noticing.
+    key_line = next((ln for ln in section.splitlines() if ln.strip().startswith("- Key:")), None)
+    if key_line is None:
+        return None, "DIRECTION.md's Light section has no '- Key:' line to read a temperature from"
+    found = re.findall(r"(\d{3,5})\s*K\b", key_line)
+    if len(found) != 1:
+        return None, (f"DIRECTION.md's Key line declares {len(found)} colour temperatures and this "
+                      f"gate needs exactly one: {key_line.strip()!r}")
     return float(found[0]), None
 
 
