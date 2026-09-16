@@ -5,7 +5,13 @@
  "stage": "IMPLEMENT",
  "firing": 1,
  "stage_entered_at_firing": 1,
- "lease": null,
+ "lease": {
+  "session_id": "session_01WpPGqFoSC2MSUdRg8GGLn7",
+  "started_at": "2026-09-16T03:56:34Z",
+  "expires_at": "2026-09-16T07:56:34Z",
+  "stage": "IMPLEMENT",
+  "ttl_hours": 4
+ },
  "evidence_fresh_as_of": null,
  "evidence_note": "The 14 artifacts on disk were captured before the fixes listed in docs/CONTINUE.md section 2, so they are stale for scoring and fine for designing against: they are what the build actually looks like today.",
  "degradation": 4,
@@ -83,8 +89,8 @@
   },
   {
    "id": "color-palette-floors",
-   "why": "docs/COLOR.md declares the floors that tools/check/palette.py has been waiting for since it was written \u2014 its closing docstring says it carries no pass/fail floor 'until docs/COLOR.md declares one'. Until the tool can fail, the law is prose.",
-   "measurement": "`python3 tools/check/palette.py --floors --classes docs/screen_classes.json` exits 0. Requires the five additions in docs/COLOR.md \u00a711: a `--classes` room/viewer map adding `across_the_set.lightness_drift_room`; `chroma.accent_fraction` (fraction of pixels at OKLab C >= 0.09); `chroma.accent_fraction_by_family` split by the four \u00a74 hue bands; `across_the_set.hue_families` and `across_the_set.widest_hue_gap_deg` over the unioned family list; and `--floors` itself. Without `--floors` the tool must keep reporting and exiting 0.",
+   "why": "docs/COLOR.md declares the floors that tools/check/palette.py has been waiting for since it was written — its closing docstring says it carries no pass/fail floor 'until docs/COLOR.md declares one'. Until the tool can fail, the law is prose.",
+   "measurement": "`python3 tools/check/palette.py --floors --classes docs/screen_classes.json` exits 0. Requires the five additions in docs/COLOR.md §11: a `--classes` room/viewer map adding `across_the_set.lightness_drift_room`; `chroma.accent_fraction` (fraction of pixels at OKLab C >= 0.09); `chroma.accent_fraction_by_family` split by the four §4 hue bands; `across_the_set.hue_families` and `across_the_set.widest_hue_gap_deg` over the unioned family list; and `--floors` itself. Without `--floors` the tool must keep reporting and exiting 0.",
    "state": "open",
    "closed_by": null,
    "attempts": 0,
@@ -93,7 +99,7 @@
   },
   {
    "id": "legibility-adversarial-ground",
-   "why": "The tool reads every ground at GROUND_PCTL = 90 \u2014 the light end of the ring \u2014 which for dark ink is the flattering end. On a plank whose own internal contrast is 1.62:1 that is the difference between a pass and the truth. The desk failures were found by hand; they should be found by the tool.",
+   "why": "The tool reads every ground at GROUND_PCTL = 90 — the light end of the ring — which for dark ink is the flattering end. On a plank whose own internal contrast is 1.62:1 that is the difference between a pass and the truth. The desk failures were found by hand; they should be found by the tool.",
    "measurement": "`python3 tools/check/legibility.py --out evidence/legibility.json` reports a new per-run `ground_swing` (the contrast ratio between the ring's p05 and p95 luminance within a window the size of the run's own height) and, where `ground_swing >= 1.20`, gates the floor against the ring's p05 for dark ink and p95 for light ink. Assert it on the committed capture: the composer-placeholder run in `02_chat.png` must report `ground_swing >= 1.5` and fail. Add `--dusk` naming the dusk artifacts, raising FLOOR_BODY to 5.0 and FLOOR_LARGE to 4.5; FLOOR_LARGE goes to 4.0 by day.",
    "state": "closed",
    "closed_by": "tools/check/legibility.py reports ground_swing per run and gates on the ring's adversarial end where it is >= 1.20. Re-broken: with the gate out of reach 02_chat reports 78 of 139 below floor at worst 1.42; with it in place, 92 of 139 at worst 1.0.",
@@ -103,18 +109,18 @@
   },
   {
    "id": "words-off-the-desk",
-   "why": "The single highest-leverage change in the build. No dark ink of any colour reaches 4.5:1 on the day desk \u2014 the arithmetic returns a negative required luminance \u2014 so this cannot be tuned, only obeyed.",
+   "why": "The single highest-leverage change in the build. No dark ink of any colour reaches 4.5:1 on the day desk — the arithmetic returns a negative required luminance — so this cannot be tuned, only obeyed.",
    "measurement": "A new Dart test, `app/test/no_word_is_written_on_the_desk_test.dart`: pump each of the five regions and assert no `Text`, `Stamped`, `Written` or `SelectableText` is a descendant of `Desk` without a `PaperPiece` between them. Then `python3 tools/check/legibility.py --only 02_chat.png` shows zero light-on-dark failures, down from the current 56 across the set. Delete `Pen.onWood` and `Hands.onDesk` from `app/lib/material/palette.dart` and `hands.dart`; the composer placeholder, the send and search affordances, the day separators, the three Moments section headers and the blob-pending line each get a stock strip.",
    "state": "closed",
    "closed_by": "app/test/no_word_is_written_on_the_desk_test.dart passes on all five regions, scrolling each to its end. Measured: 02_chat 92 of 139 runs below floor -> 33 of 105; across the set 495 of 834 -> 329 of 848. Pen.onWood, Hands.onDesk and Stamped.onDesk deleted.",
    "attempts": 0,
-   "note": "DIRECTION.md's 2026-09-04 decision that there is no icon set anywhere means love-tap's affordances are almost all words, so this is four or five widgets rather than a constant change. Shapes that are not words \u2014 tally strokes, rules, arrows, the pencil-stub battery \u2014 stay on the wood at 3:1 against the adversarial end.",
+   "note": "DIRECTION.md's 2026-09-04 decision that there is no icon set anywhere means love-tap's affordances are almost all words, so this is four or five widgets rather than a constant change. Shapes that are not words — tally strokes, rules, arrows, the pencil-stub battery — stay on the wood at 3:1 against the adversarial end.",
    "from": "design, cycle 3"
   },
   {
    "id": "margin-pencil-into-the-ink-band",
-   "why": "Pen.margin at L 0.529 is not an ink that is slightly too pale \u2014 it sits in the `mid` band, which is where shadows live. It is a shadow that has been asked to spell, and it is the sole cause of seven of the eight entries in the current ratchet list.",
-   "measurement": "Move `Pen.margin` to OKLab L <= 0.40, derived from the binding case: aged stock rendered at dusk measures Y p50 0.5528 and the dusk body floor of 5.0:1 requires ink at Y <= 0.0706, i.e. L <= 0.413. Then `_knownBelowFloor` in `app/test/legible_on_what_it_is_on_test.dart` must be emptied \u2014 the test already fails an entry that has been fixed and left in the list, so this is self-checking.",
+   "why": "Pen.margin at L 0.529 is not an ink that is slightly too pale — it sits in the `mid` band, which is where shadows live. It is a shadow that has been asked to spell, and it is the sole cause of seven of the eight entries in the current ratchet list.",
+   "measurement": "Move `Pen.margin` to OKLab L <= 0.40, derived from the binding case: aged stock rendered at dusk measures Y p50 0.5528 and the dusk body floor of 5.0:1 requires ink at Y <= 0.0706, i.e. L <= 0.413. Then `_knownBelowFloor` in `app/test/legible_on_what_it_is_on_test.dart` must be emptied — the test already fails an entry that has been fixed and left in the list, so this is self-checking.",
    "state": "closed",
    "closed_by": "Pen.margin at #464648, OKLab L 0.3949, clears 4.5:1 on all ten stocks, worst 5.91 on stickyPink. _knownBelowFloor shrank from eight entries to one. Re-broken: restoring #6B6B6E fails the ladder test, the mid-band test and names all seven stocks.",
    "attempts": 0,
@@ -123,8 +129,8 @@
   },
   {
    "id": "ink-ladder-in-oklab",
-   "why": "The existing guard is six luminance pairs against two declared grounds and it passed while 48.4% of the build's text was below the floor. The ladder in docs/COLOR.md \u00a72 is what it should have been checking.",
-   "measurement": "Extend `app/test/legible_on_what_it_is_on_test.dart` with OKLab assertions: every ink at L <= 0.40; nothing in the `mid` band (0.52\u20130.64) carries a word; every surface at least 0.18 L from the surface it rests on. Keep the existing every-ink-by-every-stock sweep and the `_knownBelowFloor` ratchet. Re-break it to prove it: put `Pen.onWood` back and watch the ladder test fail.",
+   "why": "The existing guard is six luminance pairs against two declared grounds and it passed while 48.4% of the build's text was below the floor. The ladder in docs/COLOR.md §2 is what it should have been checking.",
+   "measurement": "Extend `app/test/legible_on_what_it_is_on_test.dart` with OKLab assertions: every ink at L <= 0.40; nothing in the `mid` band (0.52–0.64) carries a word; every surface at least 0.18 L from the surface it rests on. Keep the existing every-ink-by-every-stock sweep and the `_knownBelowFloor` ratchet. Re-break it to prove it: put `Pen.onWood` back and watch the ladder test fail.",
    "state": "closed",
    "closed_by": "app/test/legible_on_what_it_is_on_test.dart asserts the ink ceiling, the mid band and the 0.18 L surface separation in OKLab. It found a contradiction in the law itself and docs/COLOR.md section 2 is amended with the measurement.",
    "attempts": 0,
@@ -133,7 +139,7 @@
   },
   {
    "id": "nothing-with-a-word-on-it-dims",
-   "why": "14_media_viewer dims the whole sheet and takes body text to 1.43:1, and drives the still's grey fraction to 0.1432 against a set mean of 0.0324. DIRECTION.md already forbids this in four words \u2014 'Never a dim overlay' \u2014 and nothing could check it.",
+   "why": "14_media_viewer dims the whole sheet and takes body text to 1.43:1, and drives the still's grey fraction to 0.1432 against a set mean of 0.0324. DIRECTION.md already forbids this in four words — 'Never a dim overlay' — and nothing could check it.",
    "measurement": "`python3 tools/check/legibility.py --only 14_media_viewer.png` reports zero runs below 4.5:1, down from 21 of 40, and `palette.py` reports `14_media_viewer` `grey_fraction` <= 0.08. A widget test asserts no `PaperPiece` with a `Text` descendant receives opacity < 1.0 and no scrim composites over one. The viewer darkens the `Desk` layer from `ground_day` to `ground_dusk` and leaves the sheet, the ink and the chrome alone.",
    "state": "closed",
    "closed_by": "14_media_viewer.png 25 of 40 runs below floor -> 13 of 24, with the bleed-through gone. The viewer brings its own desk at the dusk condition rather than tinting the room; PartnerStrip no longer fades its own status line.",
@@ -172,11 +178,11 @@
   {
    "id": "desk-plate-to-its-declared-flat",
    "why": "The plate renders 0.120 L lighter than the flat colour declared as its fallback, so a screen that gets the render and a screen that falls back to the constant are two different grounds, and every on-desk constant in the build was specified against the one that almost never ships.",
-   "measurement": "Re-render `blender/shell/desk.py` at a lower exposure within the existing rig \u2014 no second light \u2014 until the plate measures OKLab L p50 0.40 +/- 0.03 against `DeskColour.day` L 0.375, and the dusk plate 0.26 +/- 0.03 against `DeskColour.dusk` L 0.265. Verify with `python3 tools/check/palette.py --dir assets/shell`, and add the general rule to the floors: any rendered ground within 0.05 L of its declared flat fallback. Re-record both files through `blender/rig/manifest.py`.",
+   "measurement": "Re-render `blender/shell/desk.py` at a lower exposure within the existing rig — no second light — until the plate measures OKLab L p50 0.40 +/- 0.03 against `DeskColour.day` L 0.375, and the dusk plate 0.26 +/- 0.03 against `DeskColour.dusk` L 0.265. Verify with `python3 tools/check/palette.py --dir assets/shell`, and add the general rule to the floors: any rendered ground within 0.05 L of its declared flat fallback. Re-record both files through `blender/rig/manifest.py`.",
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "Two files, 4.2 MB of the 103 MB library, both already in assets/MANIFEST.json. Keep the grain \u2014 it is what makes it a render rather than a fill, and words-off-the-desk is what makes the grain harmless. Independently confirmed that the plate in the repository is the plate in the captures (L mean 0.4839 vs 0.4846, grain sd 0.0464 vs 0.0444), so this is not chasing a stale render.",
+   "note": "Two files, 4.2 MB of the 103 MB library, both already in assets/MANIFEST.json. Keep the grain — it is what makes it a render rather than a fill, and words-off-the-desk is what makes the grain harmless. Independently confirmed that the plate in the repository is the plate in the captures (L mean 0.4839 vs 0.4846, grain sd 0.0464 vs 0.0444), so this is not chasing a stale render.",
    "from": "design, cycle 3"
   },
   {
@@ -186,27 +192,27 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "This is a layout change expressed in colour quantities. The empty mid band on 04 and 10 is the tell: a plank and some paper with nothing in between is a two-value image with no depth. Expect the legibility rate on those two screens to fall from 76\u201379% to near zero as a side effect.",
+   "note": "This is a layout change expressed in colour quantities. The empty mid band on 04 and 10 is the tell: a plank and some paper with nothing in between is a two-value image with no depth. Expect the legibility rate on those two screens to fall from 76–79% to near zero as a side effect.",
    "from": "design, cycle 3"
   },
   {
    "id": "one-coloured-thing-per-screen",
    "why": "Six of the nine stills contain zero pixels at OKLab chroma >= 0.09. Across nine full-resolution screenshots there are about 550 coloured pixels, 0.006% of what was sampled. This is the client's second complaint with a number under it, and it is the cheapest of the charm floors to satisfy.",
-   "measurement": "`palette.py --floors` shows every room still with `accent_fraction` >= 0.010 and `chroma_by_band.figure.p99_chroma` >= 0.10, against today's 0.0000\u20130.0023 and 0.0181\u20130.0802 (all nine fail both). At the 700px sample a 1% patch is about 70x70 \u2014 one sticky note, one highlighter run, one foil star. The ceilings must hold at the same time: figure p99 <= 0.16, mid <= 0.13, ground <= 0.09.",
+   "measurement": "`palette.py --floors` shows every room still with `accent_fraction` >= 0.010 and `chroma_by_band.figure.p99_chroma` >= 0.10, against today's 0.0000–0.0023 and 0.0181–0.0802 (all nine fail both). At the 700px sample a 1% patch is about 70x70 — one sticky note, one highlighter run, one foil star. The ceilings must hold at the same time: figure p99 <= 0.16, mid <= 0.13, ground <= 0.09.",
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "Spend it on objects that already exist in assets/objects/ \u2014 the foil star, the pressed clover, the torn ticket, the pink sticky \u2014 rather than on new colour. 17_setup_pwa is the place to start: it is the first screen a new user sees and the most colourless in the build at figure p99 0.0181. | Untouched by cycle 3, which was the legibility half only. The charm complaint is exactly where it was found.",
+   "note": "Spend it on objects that already exist in assets/objects/ — the foil star, the pressed clover, the torn ticket, the pink sticky — rather than on new colour. 17_setup_pwa is the place to start: it is the first screen a new user sees and the most colourless in the build at figure p99 0.0181. | Untouched by cycle 3, which was the legibility half only. The charm complaint is exactly where it was found.",
    "from": "design, cycle 3"
   },
   {
    "id": "families-b-c-and-d-reach-the-glass",
-   "why": "DIRECTION.md's palette already declares the cool family ('graph paper cool blue-grey #e9ecec with #b9cbe0 rules') and the rose family ('red pen #a8322b', the faded pink sticky), and blender/SPEC.md prints both on every sheet of stock. Neither registers as a hue family in any capture. The palette that is written down covers the wheel; the one that ships is a 50\u00b0 wedge.",
-   "measurement": "`palette.py --floors` shows the unioned `widest_hue_gap_deg` <= 150\u00b0 with `hue_families` >= 4, against today's ~310\u00b0. Per still, `hue_families` >= 3 and `widest_hue_gap_deg` <= 200\u00b0. `accent_fraction_by_family` shows non-zero area in bands B (345\u00b0\u201335\u00b0), C (215\u00b0\u2013275\u00b0) and D (120\u00b0\u2013165\u00b0). Raise the printed rules' chroma so they clear the tool's 0.012 area-weighted hue floor; give graph stock the blue-grey cast it is declared to have; introduce family D through objects and stock only.",
+   "why": "DIRECTION.md's palette already declares the cool family ('graph paper cool blue-grey #e9ecec with #b9cbe0 rules') and the rose family ('red pen #a8322b', the faded pink sticky), and blender/SPEC.md prints both on every sheet of stock. Neither registers as a hue family in any capture. The palette that is written down covers the wheel; the one that ships is a 50° wedge.",
+   "measurement": "`palette.py --floors` shows the unioned `widest_hue_gap_deg` <= 150° with `hue_families` >= 4, against today's ~310°. Per still, `hue_families` >= 3 and `widest_hue_gap_deg` <= 200°. `accent_fraction_by_family` shows non-zero area in bands B (345°–35°), C (215°–275°) and D (120°–165°). Raise the printed rules' chroma so they clear the tool's 0.012 area-weighted hue floor; give graph stock the blue-grey cast it is declared to have; introduce family D through objects and stock only.",
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "150\u00b0 is the widest gap in a split-complementary scheme \u2014 the loosest classical harmony that still reads as deliberately coloured. Three families at 10\u00b0/80\u00b0/235\u00b0 leave 155\u00b0 and fail by five degrees, which is why D is required by arithmetic rather than by taste. Family D does not authorise a green pen: both the brief and DIRECTION.md name the pens as ballpoint, graphite, biro and red, and Teo stays graphite. | Untouched by cycle 3, which was the legibility half only. The charm complaint is exactly where it was found.",
+   "note": "150° is the widest gap in a split-complementary scheme — the loosest classical harmony that still reads as deliberately coloured. Three families at 10°/80°/235° leave 155° and fail by five degrees, which is why D is required by arithmetic rather than by taste. Family D does not authorise a green pen: both the brief and DIRECTION.md name the pens as ballpoint, graphite, biro and red, and Teo stays graphite. | Untouched by cycle 3, which was the legibility half only. The charm complaint is exactly where it was found.",
    "from": "design, cycle 3"
   },
   {
