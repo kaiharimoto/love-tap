@@ -5,7 +5,12 @@
  "stage": "IMPLEMENT",
  "firing": 3,
  "stage_entered_at_firing": 1,
- "lease": null,
+ "lease": {
+  "session_id": "session_01VnCrVXbgoJz23pwK25t8iy",
+  "started_at": "2026-09-16T09:57:39Z",
+  "expires_at": "2026-09-16T13:57:39Z",
+  "stage": "IMPLEMENT"
+ },
  "evidence_fresh_as_of": "2026-09-16T09:25Z, 15 of 17, captured against 34daee2 (the region pad). One better than the previous capture: 06_unfolding.mp4 recorded 320 frames rather than being recorded missing on its frame check.",
  "evidence_note": "Captured this firing, twice. The first capture is not in the tree and must not be quoted: the first RegionPad starved the moments gallery's blob reads and 04_moments came back as a sheet of paper with every photograph missing, measuring lightness.p50 0.9432 -- a number produced by absent content. The committed capture is the second, after the pad was made as cheap as the desk. 09_two_devices.png and 16_setup_android.png remain the hardware ceiling.",
  "degradation": 4,
