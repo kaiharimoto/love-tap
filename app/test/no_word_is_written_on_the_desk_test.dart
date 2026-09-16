@@ -17,6 +17,14 @@
 // A mark that is not a word may still sit on the wood — a tally stroke, a rule, an arrow, the
 // pencil-stub battery. A shape is recognised by its silhouette and a word by its counters. So this
 // looks for `Text` and nothing else; `Mark` and `CustomPaint` are allowed on the plank by design.
+//
+// It scrolls, and that is not incidental. The first version of this pumped each region once and
+// passed, and `05_settings.png` came back from the next capture with two whole sections written
+// on the wood at about one to one — the four facts about the two phones, the export line, the
+// authored feelings. The test viewport is 480 by 1040 logical pixels and `SettingsRegion` is a
+// lazy `ListView`, so everything below the fold had never been built, and a guard that only sees
+// the first screenful of a scrolling region is a guard over the first screenful. So each region
+// is dragged to its end and checked the whole way down.
 import 'package:desk/material/desk.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/material/paper.dart';
@@ -106,8 +114,22 @@ void main() {
       await tester.pump();
       expect(tester.takeException(), isNull);
 
-      final stranded = _wordsOnTheWood(tester);
-      expect(stranded, isEmpty,
+      // Down the whole region, a screenful at a time. A lazy list only builds what is near the
+      // viewport, so what is never scrolled to is never checked.
+      final stranded = <String>{...(_wordsOnTheWood(tester))};
+      final scrollable = find.byType(Scrollable);
+      if (scrollable.evaluate().isNotEmpty) {
+        final state = tester.state<ScrollableState>(scrollable.first);
+        for (var step = 0; step < 40; step++) {
+          final before = state.position.pixels;
+          await tester.drag(scrollable.first, const Offset(0, -700));
+          await tester.pump();
+          stranded.addAll(_wordsOnTheWood(tester));
+          // At the bottom the drag stops moving it, and that is the end of the region.
+          if (state.position.pixels <= before + 1) break;
+        }
+      }
+      expect(stranded.toList(), isEmpty,
           reason: 'these words are written straight onto the desk, where no ink reaches 4.5:1 '
               'because the plank would need one at Y -0.006: ${stranded.join(' / ')}. '
               'Put a Strip (material/slip.dart) under them.');

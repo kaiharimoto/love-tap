@@ -17,6 +17,7 @@ import '../../app.dart';
 import '../../scope.dart';
 import '../../spine/projections/thread.dart';
 import 'blob_widgets.dart';
+import '../../material/desk.dart';
 
 class ViewerPage extends StatefulWidget {
   const ViewerPage({super.key, required this.item});
@@ -32,7 +33,14 @@ class ViewerPage extends StatefulWidget {
         // and 14_media_viewer.png measured body text at 1.43:1 underneath it. At 0x80 the desk
         // behind lands at L 0.268 against dusk's 0.265, which is the whole of what was wanted.
         // DIRECTION.md has forbidden this in four words since the beginning: never a dim overlay.
-        barrierColor: const Color(0x800E0A06),
+        // Lightening this to 0x80 put the desk at the right lightness and immediately showed
+        // what the darkness had been hiding: the route is not opaque, so what sits behind a
+        // translucent barrier is the live chat screen. The capture came back with the note's
+        // text showing through itself twice and `put it back` sitting on top of the composer.
+        // So the viewer stops tinting the room and brings its own -- same desk, same rig, at the
+        // dusk condition, which is what DIRECTION.md means by night. The barrier does nothing
+        // now: Desk is opaque and nothing shows through it.
+        barrierColor: const Color(0x00000000),
         transitionDuration: const Duration(milliseconds: 200),
         // Material, because there is no Scaffold on this route and a Text with no Material over
         // it anywhere is drawn by Flutter in red under a double yellow underline — a diagnostic,
@@ -42,7 +50,10 @@ class ViewerPage extends StatefulWidget {
         // Transparency, so the desk is still what is under the page.
         pageBuilder: (_, _, _) => Material(
           type: MaterialType.transparency,
-          child: ViewerPage(item: item),
+          child: Light(
+            condition: LightCondition.dusk,
+            child: Desk(child: ViewerPage(item: item)),
+          ),
         ),
       ));
 

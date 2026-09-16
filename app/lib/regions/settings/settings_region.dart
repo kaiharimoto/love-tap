@@ -160,14 +160,30 @@ class _SettingsRegionState extends State<SettingsRegion> {
               if (made == null) return;
               await scope.emit('feeling_authored', made);
             },
-            child: Text('make one', style: Hands.margin(size: 14)),
+            child: Strip(
+              id: 'make-a-feeling',
+              row: 6,
+              padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
+              child: Text('make one', style: Hands.margin(size: 14)),
+            ),
           ),
         ]),
         const SizedBox(height: 8),
         if (authored.isEmpty)
-          Text(S.emptyFeelings, style: Hands.margin(size: 15))
+          Slip(
+            id: 'settings.feelings.empty',
+            row: 7,
+            stock: 'looseleaf',
+            padding: const EdgeInsets.fromLTRB(12, 9, 12, 10),
+            child: Text(S.emptyFeelings, style: Hands.margin(size: 15)),
+          )
         else
-          Wrap(
+          Slip(
+            id: 'settings.feelings',
+            row: 7,
+            stock: 'looseleaf',
+            padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),
+            child: Wrap(
             spacing: 10,
             runSpacing: 10,
             children: [
@@ -194,23 +210,42 @@ class _SettingsRegionState extends State<SettingsRegion> {
                 ),
             ],
           ),
+          ),
         const SizedBox(height: 22),
         Strip(id: 'heading-the-two-of-you', row: 4,
             padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
             child: const Stamped('the two of you', size: 11)),
         const SizedBox(height: 6),
-        _Fact('this phone', '${scope.me.name} · ${t.role.name} · ${t.name}'),
-        _Fact('their phone', scope.partner.name),
-        _Fact('history', '${scope.spine.length} events, ${scope.spine.pending.length} waiting to send'),
-        _Fact('feelings', '${registry.active.length} to send, ${authored.length} made here'),
-        const SizedBox(height: 14),
-        GestureDetector(
-          onTap: _export,
-          child: Text('write the whole history out', style: Hands.margin(size: 15)),
+        // A page of facts about the two phones, on a page. These were written on the wood and
+        // measured at about one to one in 05_settings.png: the widget test that should have
+        // caught them builds the region against an empty spine, and every one of these rows only
+        // exists once there is a history to count.
+        Slip(
+          id: 'settings.the-two-of-you',
+          row: 8,
+          stock: 'lined',
+          padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _Fact('this phone', '${scope.me.name} · ${t.role.name} · ${t.name}'),
+              _Fact('their phone', scope.partner.name),
+              _Fact('history',
+                  '${scope.spine.length} events, ${scope.spine.pending.length} waiting to send'),
+              _Fact('feelings',
+                  '${registry.active.length} to send, ${authored.length} made here'),
+              const SizedBox(height: 14),
+              GestureDetector(
+                onTap: _export,
+                child: Text('write the whole history out', style: Hands.margin(size: 15)),
+              ),
+              const SizedBox(height: 10),
+              Text('everything either of you wrote is in one log on both phones. this copies it out.',
+                  style: Hands.margin(size: 12)),
+            ],
+          ),
         ),
-        const SizedBox(height: 10),
-        Text('everything either of you wrote is in one log on both phones. this copies it out.',
-            style: Hands.margin(size: 12)),
       ],
     );
   }
