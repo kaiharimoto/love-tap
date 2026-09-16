@@ -19,10 +19,84 @@ import bpy
 DAY_AZIMUTH_DEG = 315.0     # measured clockwise from +Y (top of the image) → light from upper-left
 DAY_ELEVATION_DEG = 50.0
 DAY_ANGLE_DEG = 5.0         # angular diameter → soft edges
-DAY_STRENGTH = 2.6
-DAY_COLOR = (1.0, 0.965, 0.905)     # ~5200 K
-DAY_SKY = (0.80, 0.83, 0.87)        # cool sky fill
-DAY_SKY_STRENGTH = 0.55
+
+# ---- the day illuminant, and why it is written as a temperature -----------------------------
+#
+# DIRECTION.md declares the key as "soft daylight from a window up and to the left ... warm
+# (5200 K)". What used to sit here was DAY_COLOR = (1.0, 0.965, 0.905), annotated "~5200 K". It is
+# a 6125 K sun. The annotation was nine hundred kelvin out, nothing checked it, and every asset in
+# the build was rendered through it. So the temperature is now the constant and the colour is
+# derived from it by Planck's law, and tools/check/illuminant.py fails if the two disagree or if
+# either disagrees with DIRECTION.md.
+#
+# The world background is the larger error and it is not a mistyped number, it is a wrong model.
+# Blender's world is a full unoccluded hemisphere. A sheet of paper on a desk beside a window does
+# not see a full hemisphere of sky: it sees the window, which is a small solid angle, and then a
+# whole room — walls, ceiling, the desk itself — every surface of it returning that same daylight
+# with its own warm albedo on it. Lighting the background as open sky lights this desk as though it
+# were outdoors on a lawn. Measured, sun and sky together came to R:G:B = 1.000:0.995:0.980, which
+# is a neutral lamp, and an object rendered under a neutral lamp cannot be more chromatic than its
+# own albedo. That is the whole of why a build made of warm paper measured at mean chroma 0.0181
+# against a floor of 0.045: the build was not made of grey things, it was lit by a neutral lamp.
+#
+# So the background is the room's own bounce — DAY_COLOR reflected off a warm-white emulsion wall —
+# and the net illuminant comes to R:G:B = 1.000:0.806:0.651, which is daylight in a room rather
+# than daylight on a lawn.
+DAY_TEMPERATURE_K = 5200.0          # DIRECTION.md, "Light"
+ROOM_ALBEDO = (0.78, 0.75, 0.70)    # warm-white emulsion, the ordinary colour of a room
+
+
+def _blackbody_srgb(kelvin, samples=471):
+    """A blackbody at `kelvin` as linear sRGB, normalised so the largest channel is 1.
+
+    Planck's law through the CIE 1931 2° observer (the Wyman/Sloan/Shirley multi-lobe fit, which
+    is within 1% of the tabulated curves) and then the D65 sRGB matrix. Written out here rather
+    than imported because blender's bundled python has no colour library and because a colour
+    temperature that is computed is a colour temperature that cannot drift from its own comment.
+    """
+    w = np.linspace(360.0, 830.0, samples)
+
+    def g(x, m, s1, s2):
+        return np.exp(-0.5 * ((x - m) / np.where(x < m, s1, s2)) ** 2)
+
+    xb = 1.056 * g(w, 599.8, 37.9, 31.0) + 0.362 * g(w, 442.0, 16.0, 26.7) - 0.065 * g(w, 501.1, 20.4, 26.2)
+    yb = 0.821 * g(w, 568.8, 46.9, 40.5) + 0.286 * g(w, 530.9, 16.3, 31.1)
+    zb = 1.217 * g(w, 437.0, 11.8, 36.0) + 0.681 * g(w, 459.0, 26.0, 13.8)
+    lam = w * 1e-9
+    h, c, kB = 6.62607015e-34, 2.99792458e8, 1.380649e-23
+    rad = (2 * h * c ** 2) / lam ** 5 / np.expm1(h * c / (lam * kB * kelvin))
+    # numpy renamed trapz to trapezoid at 2.0; blender 4.5 bundles 1.26 and the container's
+    # python is 2.x, and this module is imported by both.
+    integrate = getattr(np, "trapezoid", None) or np.trapz
+    xyz = np.array([integrate(rad * cmf, w) for cmf in (xb, yb, zb)])
+    m = np.array([[3.2404542, -1.5371385, -0.4985314],
+                  [-0.9692660, 1.8760108, 0.0415560],
+                  [0.0556434, -0.2040259, 1.0572252]])
+    rgb = m @ xyz
+    return tuple(float(v) for v in rgb / rgb.max())
+
+
+def _luma(rgb):
+    return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]
+
+
+DAY_COLOR = _blackbody_srgb(DAY_TEMPERATURE_K)
+DAY_SKY = tuple(float(min(1.0, DAY_COLOR[i] * ROOM_ALBEDO[i] / max(ROOM_ALBEDO))) for i in range(3))
+
+# The exposure is the invariant; only the colour of the light changed.
+#
+# This matters more than it looks. Legibility is the other half of what this build is scored on and
+# it has been clawed back from 48.4% of runs below floor to 26.3%; a warmer lamp that also moved the
+# exposure would put that at risk for no reason, and an exposure change moves chroma the WRONG way
+# in any case, because OKLab chroma goes as the cube root of a uniform scaling. So the luminous
+# irradiance each source lands on a horizontal sheet is held at exactly what the rig has always
+# delivered, and the strengths are solved for rather than typed. A sheet's LIGHTNESS is unchanged by
+# construction; its HUE is what moves.
+DAY_SUN_IRRADIANCE_Y = math.sin(math.radians(DAY_ELEVATION_DEG)) * 2.6 * _luma((1.0, 0.965, 0.905))
+DAY_SKY_IRRADIANCE_Y = math.pi * 0.55 * _luma((0.80, 0.83, 0.87))
+
+DAY_STRENGTH = DAY_SUN_IRRADIANCE_Y / (math.sin(math.radians(DAY_ELEVATION_DEG)) * _luma(DAY_COLOR))
+DAY_SKY_STRENGTH = DAY_SKY_IRRADIANCE_Y / (math.pi * _luma(DAY_SKY))
 
 # Dusk: the sky drops and cools, a desk lamp on the right becomes the key.
 DUSK_SUN_ELEVATION_DEG = 8.0
