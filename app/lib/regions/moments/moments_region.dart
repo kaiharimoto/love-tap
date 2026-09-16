@@ -336,11 +336,21 @@ class _Gallery extends StatelessWidget {
 
   /// Roughly how tall a thing will be, only so the columns end up about level. A print is its
   /// own shape; a slip is the few lines that fit on it.
+  ///
+  /// The print's margin is in here because it is real height: `_One` insets the picture by
+  /// `_printSide` on each edge and hangs the date under it, so a tile is taller than its picture
+  /// by `_printChrome`. Leaving that out would not break the layout — the slivers measure what
+  /// they actually build — but it would tilt the column balance toward whichever column happened
+  /// to collect the tall prints, and the balance is the only thing this function is for.
+  static const _printSide = 5.0;
+  static const _printChrome = 24.0;
+
   static double _heightOf(Event e, double width) {
     if (e.type == 'voice_note') return 74;
     final w = (e.payload['w'] as num?)?.toDouble() ?? 4;
     final h = (e.payload['h'] as num?)?.toDouble() ?? 3;
-    return width * (h / (w == 0 ? 4 : w)).clamp(0.6, 1.6);
+    final picture = width - _printSide * 2;
+    return picture * (h / (w == 0 ? 4 : w)).clamp(0.6, 1.6) + _printChrome;
   }
 }
 
@@ -371,9 +381,46 @@ class _One extends StatelessWidget {
     final hash = (event.payload['poster_blob'] ?? event.payload['blob']) as String;
     final w = (event.payload['w'] as num?)?.toDouble() ?? 4;
     final h = (event.payload['h'] as num?)?.toDouble() ?? 3;
-    return AspectRatio(
-      aspectRatio: (w == 0 ? 4 : w) / (h == 0 ? 3 : h),
-      child: BlobImage(hash: hash, fit: BoxFit.cover),
+    // A photograph in this gallery is a print, not a picture bled to the edge of its tile. The
+    // gallery's own `_heightOf` has called these prints since it was written; this is the widget
+    // catching up with the comment. A print is cut rather than torn, so `torn: false`, and it is
+    // on `index` — the plain white card a photograph is actually printed on.
+    //
+    // It is also how 04_moments stops being the one room whose median pixel is not paper.
+    // docs/COLOR.md §3 wants every room at lightness.p50 >= 0.78 and this screen measured 0.7365,
+    // which is a hair under because the frame is almost exactly half photograph and half paper and
+    // the median falls on the seam: p50 is 0.7365 and p60 is 0.9238. Converting about a quarter of
+    // each tile from picture to paper margin moves far more than the two per cent of the frame
+    // that arithmetic says is needed. The margin is a real print's margin, not a shim sized to a
+    // measurement — it just happens that the honest object and the failing number want the same
+    // thing, which is usually the sign that the number was measuring something real.
+    return Slip(
+      id: event.id,
+      row: row,
+      stock: 'index',
+      width: width,
+      torn: false,
+      padding: const EdgeInsets.fromLTRB(5, 5, 5, 3),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AspectRatio(
+            aspectRatio: (w == 0 ? 4 : w) / (h == 0 ? 3 : h),
+            child: BlobImage(hash: hash, fit: BoxFit.cover),
+          ),
+          // The date goes in the bottom margin, the way it is written on the back of a print or
+          // stamped along the edge by the lab. Pen.margin, which clears 4.5:1 on every stock.
+          Padding(
+            padding: const EdgeInsets.only(top: 4, bottom: 1),
+            child: Text(
+              DateFormat('d MMM yy').format(DateTime.fromMillisecondsSinceEpoch(event.ts)),
+              style: Hands.margin(size: 9),
+              textAlign: TextAlign.right,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
