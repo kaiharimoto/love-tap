@@ -671,6 +671,25 @@ them. The additions, each small:
 5. **`--floors`** — reads the numbers in this file and exits non-zero on a breach. Without it the
    tool keeps reporting and exiting 0, which is the right default for a tool that runs in capture.
 
+**All five are in, and building them corrected one number in this document.** §4 asks for
+`hue_families` ≥ 4 over the union, and a "family" as `palette.py` computes it is a ten-degree
+histogram bin, not one of the four families named in §4's table. Measured on the committed set: the
+union is bins 55°, 65°, 75°, 85°, 95° and 105° — six of them, every one inside family **A**, at a
+widest gap of 310°. The floor as written therefore reads 6 ≥ 4 and passes, on the most monochrome
+build this document was written to describe. So the ≥ 4 floor binds on
+`across_the_set.named_families` — how many of A, B, C and D carry any area at all — which reads
+**1** today. The bin count stays reported beside it as `hue_families`, because it is the right
+number for "how finely is this screen's hue spread" and the wrong one for "how many families are
+there". The per-still and union `widest_hue_gap_deg` floors are unaffected and were always the
+sharper of the two.
+
+`tools/check/palette_selftest.py` is why that was found rather than assumed. The committed set
+breaches 62 floors, so it cannot tell a gate that is correctly red from a gate that is red at
+everything. The self-test builds a synthetic still out of flat OKLab patches that clears every floor
+here, checks `--floors` exits 0 on it, and then breaks one quantity at a time and checks the
+matching floor comes back. It is a ruler for the ruler; it is not evidence and it is not a picture
+of love-tap.
+
 `tools/check/legibility.py` needs two:
 
 6. **`ground_swing` reported per run** — the contrast ratio between the 5th and 95th percentile
