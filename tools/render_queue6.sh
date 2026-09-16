@@ -58,11 +58,14 @@ RIG_COMMIT=a6f46fd
 # The deletion is the part to understand before running this. Between the delete and the render a
 # family's stale files are absent from the working tree. They are all committed and nothing here
 # ever commits, so nothing is ever lost — but a file can be deleted and then NOT come back, and
-# that case is real rather than theoretical. assets/objects/obj_heart_fold.png is in the library
-# and is not in blender/objects/objects.py's list of twenty-five objects, so pruning it and running
-# the generator would remove an asset permanently from the working tree. That is what
-# restore_missing is for: after every generator run, and on the way out of a killed run, anything
-# still deleted was not regenerated and is put straight back. If this script is ever killed between
+# that case was real rather than theoretical: assets/objects/obj_heart_fold.png was in the library
+# and was not in blender/objects/objects.py's list of twenty-five objects, so pruning it and
+# running the generator would have removed an asset permanently from the working tree. Firing 6
+# retired heart_fold — obj_pinch had replaced it in the app and only two documents still named it —
+# and taught tools/check/manifest.py to fail on an entry whose generator cannot build it, so the
+# library no longer holds a file with no maker. restore_missing stays, because the next one of
+# those is found by this script and not by the gate: after every generator run, and on the way out
+# of a killed run, anything still deleted was not regenerated and is put straight back. If this script is ever killed between
 # the two, the recovery is one command:
 #
 #     git checkout -- assets/ seed/photos

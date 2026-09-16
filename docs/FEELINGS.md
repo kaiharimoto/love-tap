@@ -35,7 +35,7 @@ Intensity scales: haptic amplitude (×0.45 → ×1.0), object scale (×0.88 → 
 
 | id | family | shown as (in hand) | object asset | haptic sequence | sound | colour |
 |---|---|---|---|---|---|---|
-| `squeeze` | Warmth | a squeeze | `obj_heart_fold` — an origami heart | 80@90 off40 160@160 off40 320@230 | `snd_squeeze` press | `#1f2a44` |
+| `squeeze` | Warmth | a squeeze | `obj_pinch` — a strip of paper pinched between finger and thumb | 80@90 off40 160@160 off40 320@230 | `snd_squeeze` press | `#1f2a44` |
 | `forehead` | Warmth | forehead | `obj_thumbprint` — a blue-ink thumbprint | 200@120 off120 200@120 | `snd_forehead` two soft presses | `#1f2a44` |
 | `warm_palm` | Warmth | warm palm | `obj_coffee_ring` — a coffee ring with a heart drawn inside | 600@140 | `snd_palm` slow rub | `#a67c52` |
 | `nuzzle` | Warmth | nuzzle | `obj_clover` — a pressed clover | 90@150 off60 90@150 off60 90@150 off200 400@110 | `snd_nuzzle` three small rustles, one long | `#5d7a4a` |
@@ -96,3 +96,16 @@ finger and rendered by the stroke engine, a rhythm tapped on the screen (recorde
 notation), a sound picked from the recipe set. Emitted as `feeling_authored`; from then on it is in
 the sender, the thread, the notifications, Moments, search — nothing checks whether a feeling is built in.
 Retiring hides it from the sender but never from history.
+
+## A note on `squeeze`, which used to be a heart
+
+`squeeze` was `obj_heart_fold`, an origami heart, and is `obj_pinch`, a strip of paper taken
+between finger and thumb and pressed. The reason is the anti-goal and it is written out in
+`blender/objects/objects.py`: *"a heart is a glyph whatever it is modelled out of — a filled white
+one on a warm ground is the emoji whether or not it was folded"*. A squeeze is a gesture, so the
+object is the mark the gesture leaves rather than a symbol standing in for it.
+
+The app has shipped `obj_pinch` since that change. This table and `blender/SPEC.md` went on naming
+the heart, and its three rendered files stayed in `assets/` with manifest entries naming a
+generator that had stopped building it — which is how firing 6 found them, and why
+`tools/check/manifest.py` now fails on an entry whose generator cannot produce it.
