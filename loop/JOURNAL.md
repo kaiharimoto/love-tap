@@ -160,6 +160,21 @@ an unfinished feature. A web build was made and handed over instead.
 Seven items closed, and then the container was bootstrapped and the evidence recaptured, so for
 the first time in this cycle the artifacts postdate the work they are used to judge.
 
+**Correction, firing 3, on the direction of the legibility number.** This entry's commit subject —
+*"the half of the measurement that went the wrong way"* — reads, next to the two percentages below,
+as though legibility regressed. It did not, and a firing that stops at the subject line will get
+this backwards. Legibility improved, and it is the one number in this build that has moved the
+right way at every capture: **48.4% → 38.8% → 27.7%** of text runs below floor (404 of 834, then
+329 of 848, then 206 of 743). 27.7% is the current reading and it is the best this build has ever
+measured. `evidence/legibility.json` holds it: `total_runs` 743, `total_below_floor` 206, and the
+per-artifact shares in it match this entry's pair by pair.
+
+What *did* go the wrong way is two named things, neither of them the overall share, and both of
+them already written up under the desk-retune heading below: `lightness_drift_room` 0.4363 → 0.5377
+against a 0.20 ceiling, and `14_media_viewer` 54% → 65% of runs below floor, with `05_settings` flat
+at 43% → 44%. Those are the cost the retune paid, they are the content of
+`paper-is-the-median-pixel`, and they are what the subject line meant.
+
 The lease was taken and pushed before anything else was touched, which is the thing the previous
 firing did not do and which cost this build a second worker on one branch.
 
