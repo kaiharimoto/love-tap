@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4601
+   "ms": 4571
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2103
   },
   {
    "do": "shot",
-   "ms": 3161
+   "ms": 3143
   },
   {
    "do": "report",
-   "ms": 810
+   "ms": 1093
   }
  ],
  "shots": [
@@ -79,16 +79,16 @@
    "fold": {
     "sequence": "unfold_thirds",
     "length": 240,
-    "decoded": 20,
-    "decoding": 4,
+    "decoded": 0,
+    "decoding": 24,
     "playhead": 0,
-    "held_from": 0,
-    "held_to": 19
+    "held_from": null,
+    "held_to": null
    },
    "at": "03_us.png"
   }
  ],
- "cold_ms": 13814,
+ "cold_ms": 14878,
  "problems": [],
  "ok": true
 }

@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 6301
+   "ms": 5286
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2107
   },
   {
    "do": "shot",
-   "ms": 3126
+   "ms": 2857
   },
   {
    "do": "report",
-   "ms": 1112
+   "ms": 1047
   }
  ],
  "shots": [
@@ -88,7 +88,7 @@
    "at": "01_pulse.png"
   }
  ],
- "cold_ms": 13626,
+ "cold_ms": 14207,
  "problems": [],
  "ok": true
 }

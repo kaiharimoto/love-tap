@@ -10,55 +10,55 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4181
+   "ms": 3257
   },
   {
    "do": "wait",
-   "ms": 1806
+   "ms": 1803
   },
   {
    "do": "goTo",
-   "ms": 10726
+   "ms": 6474
   },
   {
    "do": "wait",
-   "ms": 1303
+   "ms": 1305
   },
   {
    "do": "openCorner",
-   "ms": 2666
+   "ms": 7227
   },
   {
    "do": "frames",
-   "ms": 53203
+   "ms": 55394
   },
   {
    "do": "sendFeeling",
-   "ms": 2944
+   "ms": 2804
   },
   {
    "do": "frames",
-   "ms": 117337
+   "ms": 118675
   },
   {
    "do": "sendFeeling",
-   "ms": 3203
+   "ms": 2910
   },
   {
    "do": "frames",
-   "ms": 191717
+   "ms": 191760
   },
   {
    "do": "openCorner",
-   "ms": 981
+   "ms": 1007
   },
   {
    "do": "frames",
-   "ms": 41714
+   "ms": 41519
   },
   {
    "do": "report",
-   "ms": 457
+   "ms": 437
   }
  ],
  "shots": [
@@ -93,20 +93,20 @@
    "visible": [
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0YHX81V607WCAGZDD",
-    "0001MCJ1M0YHX81V607WCAGZDE"
+    "0001MCJ1M09N4M642C6Y566RYF",
+    "0001MCJ1M09N4M642C6Y566RYG"
    ],
    "tears": {
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M0YHX81V607WCAGZDD": "tear_035",
-    "0001MCJ1M0YHX81V607WCAGZDE": "tear_055"
+    "0001MCJ1M09N4M642C6Y566RYF": "tear_035",
+    "0001MCJ1M09N4M642C6Y566RYG": "tear_055"
    },
    "stocks": {
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M0YHX81V607WCAGZDD": "legal_02",
-    "0001MCJ1M0YHX81V607WCAGZDE": "lined_03"
+    "0001MCJ1M09N4M642C6Y566RYF": "legal_02",
+    "0001MCJ1M09N4M642C6Y566RYG": "looseleaf_04"
    },
    "scroll": {
     "first": 8385,
@@ -138,7 +138,7 @@
    "at": "15_authored_feeling"
   }
  ],
- "cold_ms": 13351,
+ "cold_ms": 13150,
  "problems": [
   "pageerror: "
  ],
