@@ -10,71 +10,71 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2305
+   "ms": 2303
   },
   {
    "do": "pair",
-   "ms": 1114
+   "ms": 969
   },
   {
    "do": "wait",
-   "ms": 3702
+   "ms": 3705
   },
   {
    "do": "goTo",
-   "ms": 1293
+   "ms": 1420
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1708
   },
   {
    "do": "frames",
-   "ms": 23868
+   "ms": 20238
   },
   {
    "do": "far",
-   "ms": 502
+   "ms": 501
   },
   {
    "do": "frames",
-   "ms": 28850
+   "ms": 23946
   },
   {
    "do": "far",
-   "ms": 504
+   "ms": 501
   },
   {
    "do": "frames",
-   "ms": 165557
+   "ms": 137935
   },
   {
    "do": "goTo",
-   "ms": 1721
+   "ms": 1453
   },
   {
    "do": "frames",
-   "ms": 46310
+   "ms": 37697
   },
   {
    "do": "far",
-   "ms": 504
+   "ms": 501
   },
   {
    "do": "frames",
-   "ms": 146643
+   "ms": 121681
   },
   {
    "do": "far",
-   "ms": 502
+   "ms": 501
   },
   {
    "do": "frames",
-   "ms": 133625
+   "ms": 111325
   },
   {
    "do": "report",
-   "ms": 508
+   "ms": 514
   }
  ],
  "shots": [
@@ -122,29 +122,29 @@
   {
    "region": 1,
    "visible": [
-    "01M2M2XAYVRPQKQFJVGX1CTCFX",
-    "01M2M2Y7NQZWRE9FF56PZQTCXF",
-    "01M2M34RSHDVDNFK0EAXRET049",
-    "01M2M398CM7XAMQZ8MA632KNMM"
+    "01M2MARMC69Q29790TR2E1RDPX",
+    "01M2MASC6HBSB282T6EFK3BG1R",
+    "01M2MAYSMGEXBV16QQ93BF2JKY",
+    "01M2MB2H1E2TMH7KJ951VWJ5QX"
    ],
    "tears": {
-    "01M2M2XAYVRPQKQFJVGX1CTCFX": "tear_001",
-    "01M2M2Y7NQZWRE9FF56PZQTCXF": "tear_020",
-    "01M2M34RSHDVDNFK0EAXRET049": "tear_043",
-    "01M2M398CM7XAMQZ8MA632KNMM": "tear_005"
+    "01M2MARMC69Q29790TR2E1RDPX": "tear_001",
+    "01M2MASC6HBSB282T6EFK3BG1R": "tear_020",
+    "01M2MAYSMGEXBV16QQ93BF2JKY": "tear_043",
+    "01M2MB2H1E2TMH7KJ951VWJ5QX": "tear_005"
    },
    "stocks": {
-    "01M2M2XAYVRPQKQFJVGX1CTCFX": "lined_01",
-    "01M2M2Y7NQZWRE9FF56PZQTCXF": "lined_02",
-    "01M2M34RSHDVDNFK0EAXRET049": "receipt_01",
-    "01M2M398CM7XAMQZ8MA632KNMM": "lined_04"
+    "01M2MARMC69Q29790TR2E1RDPX": "lined_03",
+    "01M2MASC6HBSB282T6EFK3BG1R": "lined_01",
+    "01M2MAYSMGEXBV16QQ93BF2JKY": "lined_04",
+    "01M2MB2H1E2TMH7KJ951VWJ5QX": "lined_04"
    },
    "scroll": {
     "first": 0,
     "last": 3,
     "of": 4
    },
-   "now": "2026-09-16T03:15:50.785Z",
+   "now": "2026-09-16T05:31:36.473Z",
    "driven_ms": 5712,
    "seed": 20260903,
    "events": 8,
@@ -169,7 +169,7 @@
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 1398,
+ "cold_ms": 1233,
  "problems": [],
  "ok": true
 }

@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4571
+   "ms": 3377
   },
   {
    "do": "wait",
-   "ms": 2103
+   "ms": 2102
   },
   {
    "do": "shot",
-   "ms": 3143
+   "ms": 2013
   },
   {
    "do": "report",
-   "ms": 1093
+   "ms": 712
   }
  ],
  "shots": [
@@ -66,7 +66,7 @@
    "now": "2026-09-03T19:40:00.000Z",
    "driven_ms": 48,
    "seed": 20260903,
-   "events": 14061,
+   "events": 14062,
    "transport": "local",
    "link": "connecting",
    "me": "teo",
@@ -79,16 +79,16 @@
    "fold": {
     "sequence": "unfold_thirds",
     "length": 240,
-    "decoded": 0,
-    "decoding": 24,
+    "decoded": 24,
+    "decoding": 0,
     "playhead": 0,
-    "held_from": null,
-    "held_to": null
+    "held_from": 0,
+    "held_to": 23
    },
    "at": "03_us.png"
   }
  ],
- "cold_ms": 14878,
+ "cold_ms": 11213,
  "problems": [],
  "ok": true
 }
