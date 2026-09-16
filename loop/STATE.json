@@ -179,10 +179,10 @@
    "id": "desk-plate-to-its-declared-flat",
    "why": "The plate renders 0.120 L lighter than the flat colour declared as its fallback, so a screen that gets the render and a screen that falls back to the constant are two different grounds, and every on-desk constant in the build was specified against the one that almost never ships.",
    "measurement": "Re-render `blender/shell/desk.py` at a lower exposure within the existing rig — no second light — until the plate measures OKLab L p50 0.40 +/- 0.03 against `DeskColour.day` L 0.375, and the dusk plate 0.26 +/- 0.03 against `DeskColour.dusk` L 0.265. Verify with `python3 tools/check/palette.py --dir assets/shell`, and add the general rule to the floors: any rendered ground within 0.05 L of its declared flat fallback. Re-record both files through `blender/rig/manifest.py`.",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "Both plates re-render one exposure lower in the existing rig: day -0.97 stops, dusk -1.44, derived as log2((L_target/L_now)^3) because OKLab L is close to the cube root of luminance and the Standard view transform is a plain multiply in linear light. Measured: day 0.5002 -> 0.4007 against DeskColour.day 0.3751, dusk 0.3626 -> 0.2595 against 0.2653. Both inside 0.40 and 0.26 plus or minus 0.03 and inside 0.05 L of their flat. `python3 tools/check/palette.py --dir assets/shell --flats` exits 0; the same command against the previous plates exits 1 and names both. Both files re-recorded through blender/rig/manifest.py.",
    "attempts": 0,
-   "note": "Two files, 4.2 MB of the 103 MB library, both already in assets/MANIFEST.json. Keep the grain — it is what makes it a render rather than a fill, and words-off-the-desk is what makes the grain harmless. Independently confirmed that the plate in the repository is the plate in the captures (L mean 0.4839 vs 0.4846, grain sd 0.0464 vs 0.0444), so this is not chasing a stale render.",
+   "note": "It is an exposure, not a second light: relative grain went 0.0832 -> 0.0830 by day and 0.2389 -> 0.2393 by dusk, which is what a pure exposure change looks like and what a different material does not. The library went 4.2 MB -> 4.1 MB. Also found: desk.py's --res default was 1400 while the committed plate is 1100, so re-rendering it plainly to change one thing silently changed the resolution and grew each file by a megabyte. The default is 1100 now.",
    "from": "design, cycle 3"
   },
   {
@@ -219,10 +219,10 @@
    "id": "feeling-families-visible",
    "why": "emotional_transmission; four families visible where the floor is five",
    "measurement": "a widget test that counts the families the corner renders",
-   "state": "open",
-   "closed_by": null,
+   "state": "closed",
+   "closed_by": "app/test/every_family_is_on_the_strip_test.dart: 6 of 6 family tabs wholly inside the screen at 480x1040. The strip is a Wrap rather than a horizontally scrolling Row. Re-broken: restoring the Row reports 4 of 6 and names static_ and sparkle, which is the four the capture counted.",
    "attempts": 0,
-   "note": "corner.dart:271 iterates Family.values, all six, so this is a layout overflow."
+   "note": "The test counts geometry, not widgets, and that is the point of it: find.byType would have returned six for the whole life of the bug. Nothing was ever missing or clipped -- two tabs were past the right edge of a strip with no arrow, no fade and no reason to guess it could be dragged."
   },
   {
    "id": "surfaces-folds-family",
@@ -237,17 +237,19 @@
    "id": "haptic-evidence",
    "why": "emotional_transmission; no haptic pattern is recorded anywhere in evidence/",
    "measurement": "an evidence file naming every feeling's duration, envelope and strip",
-   "state": "open",
-   "closed_by": null,
-   "attempts": 0
+   "state": "closed",
+   "closed_by": "evidence/haptics.json names all 34 built-in feelings' duration, envelope segment by segment, and a strip at 20 ms a column. No two share a haptic sequence or an object asset, which is what docs/FEELINGS.md requires and nothing could check. Written by tools/check/haptics.py and held to the app by app/test/the_haptics_are_written_down_test.dart, which checks every segment against parseHaptic. Re-broken: recording overwhelmed as one 500 ms pulse fails naming the 20 segments Dart reads.",
+   "attempts": 0,
+   "note": "The Dart test earned its place twice before it was committed. The first Python parser lost steady and hold to a lazy DOTALL match running past a row; the second lost overwhelmed and grey by cutting each row at its first ')', which is inside '(60@70 off60) x8'. Both wrote a file that looked complete and was short by two."
   },
   {
    "id": "texture-budget-tool",
    "why": "coherence; a gate the build believes it has and does not",
    "measurement": "tools/check/texture_budget.py exists and runs, or the claim is deleted from TASK_STATE.md and docs/CONTINUE.md",
-   "state": "open",
-   "closed_by": null,
-   "attempts": 0
+   "state": "closed",
+   "closed_by": "tools/check/texture_budget.py exists and runs, so DIRECTION.md's claim that the WebKit texture budget is 'recorded in TASK_STATE.md and enforced by tools/check/texture_budget.py' is true. It reads the budget from TASK_STATE.md, the window from app/lib/material/fold.dart and the frames from app/assets/folds. Re-broken twice: deleting FoldFrames.window reports 141.3 MB against 32 and names the missing constant; widening it to 60 reports 35.3 MB against 32.",
+   "attempts": 0,
+   "note": "The recorded figures were wrong and said 'measured rather than guessed'. TASK_STATE.md claimed 150 frames at 460x405, 112 MB whole and 27 MB windowed; what ships is unfold_thirds at 240 frames whose largest is 490x315, 141.3 MB whole and 21.2 MB on the 36-frame window. The largest frame matters: 88 distinct sizes, so reading the first reports the folded 490x124 and flatters the peak by 2.5x -- and INDEX.json records that first size. The 32 MB ceiling is recorded in as many words as a design budget, not a device measurement; no phone has been available."
   }
  ],
  "blocked": null,
@@ -359,9 +361,24 @@
    "what_passes": "Every chroma ceiling passes with room to spare -- nothing in the build is anywhere near as saturated as a red biro. The whole failure is absence, not excess, which is what the client said."
   },
   "tests": {
-   "passing": 103,
+   "passing": 106,
    "was": 100,
    "toolchain": "bootstrap.sh --profile=web in a fresh container, after tools/apt-prereqs.sh. Flutter 3.47.2. flutter analyze: 0 errors, 19 pre-existing infos in test files."
-  }
+  },
+  "closed_this_firing": [
+   "color-palette-floors",
+   "moments-lazy-gallery",
+   "spine-all-in-build",
+   "desk-plate-to-its-declared-flat",
+   "feeling-families-visible",
+   "texture-budget-tool",
+   "haptic-evidence"
+  ],
+  "still_open": [
+   "paper-is-the-median-pixel",
+   "one-coloured-thing-per-screen",
+   "families-b-c-and-d-reach-the-glass",
+   "surfaces-folds-family"
+  ]
  }
 }
