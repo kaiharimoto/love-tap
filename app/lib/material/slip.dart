@@ -96,6 +96,78 @@ class Slip extends StatelessWidget {
   static int _gcd(int a, int b) => b == 0 ? a : _gcd(b, a % b);
 }
 
+/// A torn strip of stock, sized to whatever is written on it.
+///
+/// This is what the furniture of the app is written on now: the composer, the word `search`, a day
+/// separator, a section heading. It exists because of an arithmetic result rather than a taste:
+/// the desk plate's grain reaches Y 0.1467, and 4.5:1 against that requires a darker ink at
+/// Y -0.006, which is not a hard number to hit so much as a number that does not exist. No ink of
+/// any colour is legible on the wood, so `docs/COLOR.md` section 6 forbids the case instead of
+/// tuning the pair: no word is set on a rendered ground, and every word in this app is written on
+/// a piece of paper.
+///
+/// A [Slip] is a piece of paper with something *on* it — a date, a line off a list, an empty
+/// surface. A [Strip] is smaller and dumber: it is the paper that has to be under a label for the
+/// label to be readable at all, and it hugs what it is given rather than taking a width.
+///
+/// A mark that is not a word may still sit on the wood. A tally stroke, a rule, an arrow, the
+/// pencil-stub battery: a shape is recognised by its silhouette and a word by its counters, so the
+/// shapes stay on the desk and the sentences come off it.
+class Strip extends StatelessWidget {
+  const Strip({
+    super.key,
+    required this.id,
+    required this.child,
+    this.row = 0,
+    this.stock,
+    this.padding = const EdgeInsets.fromLTRB(9, 5, 9, 5),
+    this.liftMm = 0.35,
+  });
+
+  final String id;
+  final Widget child;
+  final int row;
+  final String? stock;
+  final EdgeInsets padding;
+
+  /// Lower than a [Slip]'s by default: a strip under a label is lying flat on the desk, not
+  /// dropped onto it, and a tall shadow under a heading reads as a floating card.
+  final double liftMm;
+
+  /// The stocks a strip is torn from. Narrower than [Slip]'s list on purpose: these are the pale
+  /// ones, because a strip is small and a small piece of paper has to carry its ink on less of it.
+  static const _stocks = ['index', 'looseleaf', 'lined'];
+
+  @override
+  Widget build(BuildContext context) {
+    final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
+    final h = hashOf(id);
+    final want = stock ?? _stocks[h % _stocks.length];
+    var variants = lib?.stockVariants(want) ?? const <String>[];
+    if (variants.isEmpty) variants = lib?.stockVariants('lined') ?? const <String>[];
+    final stockId = variants.isEmpty ? '' : variants[(h >> 8) % variants.length];
+
+    String? tear;
+    final masks = lib?.writableTears ?? const <String>[];
+    if (masks.isNotEmpty) {
+      final n = masks.length;
+      tear = masks[((row % n) * Slip._stride(n)) % n];
+    }
+
+    return PaperPiece(
+      stockId: stockId,
+      tearId: tear,
+      liftMm: liftMm,
+      tilt: ((h >> 16) % 100 - 50) / 100.0 * 0.008,
+      stockAlignment: Alignment(((h >> 3) % 100) / 50.0 - 1, ((h >> 11) % 100) / 50.0 - 1),
+      stockScale: 1.2,
+      padding: padding,
+      safe: tear == null || lib == null ? const [0.04, 0.05, 0.04, 0.05] : lib.safeOf(tear),
+      child: child,
+    );
+  }
+}
+
 /// An empty surface: one sentence, on a piece of paper, on the desk.
 ///
 /// The brief allows exactly one empty-state artifact, and it is the one place the couple's own

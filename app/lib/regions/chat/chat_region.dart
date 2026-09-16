@@ -468,10 +468,16 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                   onTap: _search,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 4, 4, 10),
+                    // The loop is a shape and stays on the wood; the word goes on a strip.
                     child: Row(mainAxisSize: MainAxisSize.min, children: [
                       Mark.loop(size: 17, colour: Pen.margin),
                       const SizedBox(width: 5),
-                      Text(S.search, style: Hands.onDesk(size: 13)),
+                      Strip(
+                        id: 'search-affordance',
+                        row: 3,
+                        padding: const EdgeInsets.fromLTRB(8, 3, 8, 3),
+                        child: Text(S.search, style: Hands.margin(size: 13)),
+                      ),
                     ]),
                   ),
                 ),
@@ -484,7 +490,12 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
             padding: const EdgeInsets.fromLTRB(18, 2, 18, 2),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text('${scope.partner.name} ${S.typing}', style: Hands.onDesk(size: 13)),
+              child: Strip(
+                id: 'typing-${scope.partner.name}',
+                row: 5,
+                padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
+                child: Text('${scope.partner.name} ${S.typing}', style: Hands.margin(size: 13)),
+              ),
             ),
           ),
         if (_replyTo != null || _editing != null)
@@ -558,9 +569,20 @@ class _Composer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The composer is a slip of paper you write on, and it is the clearest case of the rule in
+    // docs/COLOR.md section 6: people do not write on their desk. Its placeholder was `Pen.onWood`
+    // straight onto the plank and measured 1.56:1 in `02_chat.png`, which is the worst reading in
+    // the whole evidence set. Putting a stock under the whole row fixes the placeholder, the word
+    // `send`, and the two marks beside them in one move.
     return Padding(
       padding: const EdgeInsets.fromLTRB(14, 2, 14, 10),
-      child: Row(
+      child: Strip(
+        id: 'composer',
+        row: 1,
+        stock: 'lined',
+        liftMm: 0.7,
+        padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
+        child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           GestureDetector(
@@ -587,7 +609,7 @@ class _Composer extends StatelessWidget {
                     isDense: true,
                     contentPadding: const EdgeInsets.fromLTRB(0, 6, 0, 5),
                     hintText: recording ? S.recording : S.composerHint,
-                    hintStyle: Hands.onDesk(size: 16),
+                    hintStyle: Hands.margin(size: 16),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
@@ -615,10 +637,11 @@ class _Composer extends StatelessWidget {
             onTap: onSend,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(2, 6, 2, 8),
-              child: Text(S.send, style: Hands.onDesk(size: 16)),
+              child: Text(S.send, style: Hands.margin(size: 16)),
             ),
           ),
         ],
+        ),
       ),
     );
   }

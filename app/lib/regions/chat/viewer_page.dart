@@ -25,7 +25,14 @@ class ViewerPage extends StatefulWidget {
   static Future<void> open(BuildContext context, ThreadItem item) =>
       Navigator.of(context).push(PageRouteBuilder<void>(
         opaque: false,
-        barrierColor: const Color(0xCC0E0A06),
+        // The room goes quiet so you can look at this; it does not black out. docs/COLOR.md
+        // section 8: what darkens in a viewer is the desk behind the photograph, from
+        // `ground_day` to `ground_dusk` and no further, and never the sheet, the chrome or the
+        // ink. This was 0xCC, which took the desk to OKLab L 0.198 -- well below dusk's 0.265 --
+        // and 14_media_viewer.png measured body text at 1.43:1 underneath it. At 0x80 the desk
+        // behind lands at L 0.268 against dusk's 0.265, which is the whole of what was wanted.
+        // DIRECTION.md has forbidden this in four words since the beginning: never a dim overlay.
+        barrierColor: const Color(0x800E0A06),
         transitionDuration: const Duration(milliseconds: 200),
         // Material, because there is no Scaffold on this route and a Text with no Material over
         // it anywhere is drawn by Flutter in red under a double yellow underline — a diagnostic,
@@ -151,12 +158,25 @@ class _ViewerPageState extends State<ViewerPage> {
               child: Padding(
                 // clear of the tab strip: this sat on top of `chat` and `moments`
                 padding: const EdgeInsets.only(bottom: 18 + kTabStrip),
+                // Section 8: the thing that darkens in a viewer is the desk behind the
+                // photograph. The way out is chrome, so it stays lit, and it is a word, so it is
+                // on stock rather than on whatever the photograph happens to be.
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Mark.turnback(size: 20, colour: Pen.onWood, seed: 7),
-                    const SizedBox(width: 8),
-                    Stamped('put it back', size: 10, colour: Pen.onWood),
+                    Strip(
+                      id: 'put-it-back',
+                      row: 4,
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Mark.turnback(size: 20, colour: Pen.margin, seed: 7),
+                          const SizedBox(width: 8),
+                          const Stamped('put it back', size: 10),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -112,7 +112,7 @@ Seven named steps, in OKLab L. Every surface in the app is one of these or it is
 
 | step | OKLab L | tolerance | what sits here |
 |---|---:|---:|---|
-| `ink` | ≤ 0.40 | — | every pen, pencil and stamp that carries a word |
+| `ink` | ≤ 0.40 | — | every achromatic pen, pencil and stamp that carries a word (a chromatic ink: see below) |
 | `ground_dusk` | 0.26 | ± 0.03 | the desk under lamplight |
 | `ground_day` | 0.40 | ± 0.03 | the desk by the window |
 | `mid` | 0.58 | ± 0.06 | contact shadow, the underside of a turned corner, tape, a photograph's midtones |
@@ -125,6 +125,23 @@ land on is aged stock rendered at dusk, which measures Y p50 0.5528 in `crops/du
 dusk body floor of 5.0:1 (§6) against that ground requires the ink at Y ≤ 0.0706, which is OKLab
 L 0.413. Rounding down to 0.40 gives the hairline strokes of a handwritten face a little room. Every
 ink in `app/lib/material/palette.dart` is tested against that number in §10.
+
+**Amended 2026-09-16, by a measurement taken while implementing it.** As first written this
+section put *every* pen, pencil and stamp that carries a word at L ≤ 0.40, and §10's own table
+then checked five inks and quietly omitted the sixth. The sixth is `Pen.red`, which is L 0.494,
+and the omission was hiding a contradiction rather than an oversight: forcing red to L 0.40 takes
+it to `#7C2520` and its chroma from 0.1553 to 0.1215, a loss of 22%, and §5 anchors the whole
+`figure` chroma ceiling *on red's 0.1553*. The rule as written would have destroyed the number the
+next rule depends on. Measured against the ten stocks it can land on, red at L 0.494 clears 4.5:1
+on nine of them and is 4.17:1 on the pink sticky, which was already a recorded exception.
+
+So the ceiling binds by what the ink is for. An **achromatic** ink — chroma < 0.10, which is every
+ink that carries body text: ballpoint 0.288, biro 0.223, graphite 0.349, stamp 0.395, margin
+0.395 — sits at **L ≤ 0.40**. A **chromatic** ink — chroma ≥ 0.10, which is red and anything that
+joins it — may sit above that but **must stay below the `mid` band at L < 0.52**, and must clear
+every contrast floor in §6 on every stock it can land on. Nothing is exempt from the mid-band rule
+and nothing is exempt from the contrast floors; what is relaxed is a proxy, in the one case where
+the proxy was destroying what it stood for.
 
 Three rules run on the ladder.
 

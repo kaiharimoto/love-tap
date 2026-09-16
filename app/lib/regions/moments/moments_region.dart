@@ -141,16 +141,25 @@ class _Filters extends StatelessWidget {
                 for (final v in MomentsView.values)
                   GestureDetector(
                     onTap: () => onView(v),
+                    // Tabs cut from index card, which is what DIRECTION.md said they were all
+                    // along; they had become three words stamped on the wood.
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 14),
-                      child: Stamped(
-                        switch (v) {
-                          MomentsView.media => 'what we sent',
-                          MomentsView.milestones => 'what happened',
-                          MomentsView.feelings => 'what we felt',
-                        },
-                        size: v == view ? 12 : 10,
-                        colour: v == view ? Pen.stamp : Pen.margin,
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Strip(
+                        id: 'moments-tab-${v.name}',
+                        row: v.index,
+                        stock: 'index',
+                        padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
+                        liftMm: v == view ? 0.7 : 0.25,
+                        child: Stamped(
+                          switch (v) {
+                            MomentsView.media => 'what we sent',
+                            MomentsView.milestones => 'what happened',
+                            MomentsView.feelings => 'what we felt',
+                          },
+                          size: v == view ? 12 : 10,
+                          colour: v == view ? Pen.stamp : Pen.margin,
+                        ),
                       ),
                     ),
                   ),

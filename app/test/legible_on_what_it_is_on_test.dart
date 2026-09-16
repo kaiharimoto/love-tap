@@ -26,10 +26,18 @@
 // guard.
 //
 // What it still cannot see, and what `tools/check/legibility.py` exists for: these are declared
-// colours against declared colours, and every ground in this app is a render. The composer's
-// placeholder is `Pen.onWood` at 4.94:1 against `DeskColour.day` — and 1.56:1 against the actual
-// waxed oak in `02_chat.png`, because the plank has grain in it and the grain runs through the
-// letters. This file is the cheap pass that runs in a second. It is not the measurement.
+// colours against declared colours, and every ground in this app is a render. This file is the
+// cheap pass that runs in a second. It is not the measurement.
+//
+// The third thing that was wrong with it is gone now, and it was the largest. It asked whether
+// the on-desk inks cleared 4.5:1 against `DeskColour.day`, which is a flat colour the app almost
+// never ships: the plate renders 0.120 OKLab L lighter than it. Against the plate itself
+// `Pen.onWood` was 2.49:1, and in `02_chat.png` the composer placeholder measured 1.56:1. No
+// value would have fixed it — the plank's grain reaches Y 0.1467 and 4.5:1 against that needs an
+// ink at Y -0.006, a number that does not exist — so `docs/COLOR.md` section 6 forbids the case
+// rather than tuning the pair, and `Pen.onWood` and `Hands.onDesk` are deleted. The three tests
+// that asserted those pairs are gone with them; what replaces them is the ladder, below, which
+// is the rule they were a special case of.
 import 'dart:math' as math;
 
 import 'package:desk/material/desk.dart';
@@ -49,8 +57,48 @@ double contrast(Color a, Color b) {
   return (math.max(la, lb) + 0.05) / (math.min(la, lb) + 0.05);
 }
 
+/// OKLab lightness, which is the axis `docs/COLOR.md`'s ladder is written on. Luminance is not
+/// interchangeable with it: #F3E08A and #3A3A3C differ by far more perceived lightness than their
+/// luminances suggest, and a ladder judged in luminance drifts dark without anyone noticing.
+double _oklabL(Color c) {
+  double lin(double v) => v <= 0.04045 ? v / 12.92 : math.pow((v + 0.055) / 1.055, 2.4) as double;
+  final r = lin(c.r), g = lin(c.g), b = lin(c.b);
+  final l = math.pow(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b, 1 / 3) as double;
+  final m = math.pow(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b, 1 / 3) as double;
+  final s = math.pow(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b, 1 / 3) as double;
+  return 0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s;
+}
+
+/// OKLab chroma: how colourful, as distinct from how light.
+double _oklabChroma(Color c) {
+  double lin(double v) => v <= 0.04045 ? v / 12.92 : math.pow((v + 0.055) / 1.055, 2.4) as double;
+  final r = lin(c.r), g = lin(c.g), b = lin(c.b);
+  final l = math.pow(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b, 1 / 3) as double;
+  final m = math.pow(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b, 1 / 3) as double;
+  final s = math.pow(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b, 1 / 3) as double;
+  final a = 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s;
+  final bb = 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s;
+  return math.sqrt(a * a + bb * bb);
+}
+
 /// Nothing in this app is set at 24px, so nothing in this app gets the large-text floor.
 const _body = 4.5;
+
+/// The `ink` step of the ladder. Derived rather than chosen: the darkest ground a word can
+/// legitimately land on is aged stock rendered at dusk, Y p50 0.5528, and the dusk body floor of
+/// 5.0:1 against that puts the ink at Y <= 0.0706, which is OKLab L 0.413. Rounded down to give a
+/// handwritten hairline a little room.
+const _inkCeiling = 0.40;
+
+/// The `mid` step: contact shadow, the underside of a turned corner, tape, a photograph's
+/// midtones. Nothing that sits here carries a word.
+const _midLow = 0.52;
+const _midHigh = 0.64;
+
+/// Where an ink stops being a grey and starts being a colour. `Pen.red` is 0.155 and every other
+/// ink in the palette is under 0.051, so nothing sits near this line and it is not load-bearing
+/// to a thousandth.
+const _chromatic = 0.10;
 
 const _desk = DeskColour.day;
 const _paper = Color(0xFFF1ECDF); // the palest stock, the hardest ground for a pale ink
@@ -86,54 +134,83 @@ const _stocks = <String, Color>{
 /// that has been fixed also fails, because the entry is now a lie and the next person to read it
 /// would believe it.
 ///
-/// Every one of these is `Pen.margin` except the last. Pencil is the ink that does not have the
-/// headroom, and every stock that is not the palest is where it runs out.
+/// Seven of the eight entries that used to be here were `Pen.margin`, which was #6B6B6E: OKLab
+/// L 0.529, sitting in the `mid` band, which is where shadows live. It was a shadow that had been
+/// asked to spell. At L 0.3949 it clears every stock in the library, worst 5.91:1 on the pink
+/// sticky, so all seven are gone from this list because they are gone from the build.
+///
+/// What is left is a red pen on a pink sticky note, which is a real pair and a genuinely hard
+/// one: red on pink is two hues at the same lightness, and the fix is a stock or an ink rather
+/// than a nudge.
 const _knownBelowFloor = <String, double>{
-  'margin on stickyPink': 3.33,
-  'margin on stickyYellow': 4.01,
-  'margin on underside': 4.03,
-  'margin on aged': 4.05,
   'red on stickyPink': 4.17,
-  'margin on legal': 4.22,
-  'margin on spiral': 4.42,
-  'margin on graph': 4.47,
 };
 
 void main() {
-  test('nothing written on the desk is written in an ink for paper', () {
-    // Set at 12 and 13, so the floor is the body floor. The earlier version of this asked for
-    // 3:1 here, which is the floor for text at 24px, and there is no text at 24px in this app.
-    final onDesk = <String, Color>{
-      'the hand for the desk': Hands.onDesk().color!,
-      'a stamped label on the desk': Pen.onWood,
-    };
-    for (final e in onDesk.entries) {
-      final r = contrast(e.value, _desk);
-      expect(r, greaterThanOrEqualTo(_body),
-          reason: '${e.key} is ${r.toStringAsFixed(2)}:1 on the desk, and it is set at 13px');
+  test('every ink sits in the ink step of the ladder', () {
+    // docs/COLOR.md section 2, as amended on 2026-09-16 by the measurement this test took.
+    //
+    // The ceiling binds by what the ink is for. An achromatic ink carries body text and sits at
+    // L <= 0.40. A chromatic one may sit above that and below the mid band, because forcing red
+    // to 0.40 takes it to #7C2520 and its chroma from 0.1553 to 0.1215 — and section 5 anchors
+    // the whole figure chroma ceiling on red's 0.1553, so the rule as first written would have
+    // destroyed the number the next rule depends on. What it may not do is skip the contrast
+    // floors, and the every-ink-by-every-stock sweep below is where that is checked.
+    for (final e in _inks.entries) {
+      final l = _oklabL(e.value);
+      final c = _oklabChroma(e.value);
+      if (c >= _chromatic) {
+        expect(l, lessThan(_midLow),
+            reason: '${e.key} is chromatic (chroma ${c.toStringAsFixed(3)}) and at OKLab L '
+                '${l.toStringAsFixed(3)}, which is in or above the mid band. A chromatic ink has '
+                'room above the ink ceiling and none inside the band where shadows live.');
+      } else {
+        expect(l, lessThanOrEqualTo(_inkCeiling),
+            reason: '${e.key} is achromatic (chroma ${c.toStringAsFixed(3)}) and at OKLab L '
+                '${l.toStringAsFixed(3)}, above the ink ceiling of $_inkCeiling. An ink darker '
+                'than every ground it can land on is the only kind that carries body text here.');
+      }
     }
   });
 
-  test('the desk at dusk is still a ground, and the ink on it still has to clear the floor', () {
-    // The whole library is re-rendered at dusk and not one declared constant moves, so this pair
-    // was never checked in either condition until it was checked in both.
-    for (final ground in {'day': DeskColour.day, 'dusk': DeskColour.dusk}.entries) {
-      final r = contrast(Pen.onWood, ground.value);
-      expect(r, greaterThanOrEqualTo(_body),
-          reason: 'the desk hand is ${r.toStringAsFixed(2)}:1 on the desk at ${ground.key}');
+  test('nothing in the mid band carries a word', () {
+    // The mid band is contact shadow, tape and the underside of a turned corner. `Pen.margin`
+    // used to sit in it at L 0.529 and that single fact explains seven of the eight pairs that
+    // used to be in _knownBelowFloor.
+    for (final e in _inks.entries) {
+      final l = _oklabL(e.value);
+      expect(l > _midLow && l < _midHigh, isFalse,
+          reason: '${e.key} is at OKLab L ${l.toStringAsFixed(3)}, inside the mid band '
+              '($_midLow..$_midHigh), which is where shadows live. An ink there is a shadow that '
+              'has been asked to spell.');
     }
   });
 
-  test('the pencil the margin is written in is for paper, and stays off the desk', () {
-    // It is a good ink on paper and a bad one on wood. This holds both halves of that, so the
-    // day nobody remembers why Hands.onDesk exists, the test says.
-    final onPaper = contrast(Pen.margin, _paper);
-    final onWood = contrast(Pen.margin, _desk);
-    expect(onPaper, greaterThanOrEqualTo(_body),
-        reason: 'the margin pencil is ${onPaper.toStringAsFixed(2)}:1 on paper');
-    expect(onWood, lessThan(3.0),
-        reason: 'the margin pencil now reads on wood too, so Hands.onDesk may be unnecessary — '
-            'check the desk has not been lightened into something else');
+  test('a surface clears the surface it rests on', () {
+    // 0.18 L, docs/COLOR.md section 2. Paper on the day desk is 0.44 and passes with room; this
+    // is here so that a desk lightened toward its paper, or a stock darkened toward its desk,
+    // fails in a test rather than in a capture.
+    final deskL = _oklabL(DeskColour.day);
+    for (final e in _stocks.entries) {
+      final gap = _oklabL(e.value) - deskL;
+      expect(gap, greaterThanOrEqualTo(0.18),
+          reason: '${e.key} is only ${gap.toStringAsFixed(3)} L above the day desk, and a sheet '
+              'that does not clear what it lies on has no edge without a shadow to give it one');
+    }
+  });
+
+  test('the desk is within reach of the flat colour that stands in for it', () {
+    // The rule that caught the root cause, docs/COLOR.md section 2: a rendered ground may not sit
+    // more than 0.05 L from the flat colour declared as its fallback. This half of it is the only
+    // half a Dart test can see -- that the two declared desk colours are where the ladder says
+    // the ground steps are. The other half, whether the plate agrees with them, is
+    // tools/check/palette.py's job against assets/shell.
+    expect((_oklabL(DeskColour.day) - 0.40).abs(), lessThanOrEqualTo(0.03),
+        reason: 'the day desk is at OKLab L ${_oklabL(DeskColour.day).toStringAsFixed(3)}, and '
+            'the ground_day step is 0.40 +/- 0.03');
+    expect((_oklabL(DeskColour.dusk) - 0.26).abs(), lessThanOrEqualTo(0.03),
+        reason: 'the dusk desk is at OKLab L ${_oklabL(DeskColour.dusk).toStringAsFixed(3)}, and '
+            'the ground_dusk step is 0.26 +/- 0.03');
   });
 
   test('both hands are legible on the paper they are written on', () {

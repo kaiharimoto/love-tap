@@ -21,6 +21,7 @@ import '../../spine/projections/thread.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
 import 'renderers.dart';
+import '../../material/slip.dart';
 
 /// The width a note takes on the desk, as a fraction of the region's width.
 const double _noteWidthFraction = 0.76;
@@ -309,10 +310,29 @@ class _MarginLine extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(26, 6, 26, 6),
       child: Row(
         children: [
-          Container(width: 14, height: 1, color: Pen.onWood.withValues(alpha: 0.55)),
+          // A rule is a shape, not a word, so it may stay on the wood — at the stamp's own ink
+          // rather than the chalky tone, because there is no chalky tone any more.
+          Container(width: 14, height: 1, color: Pen.margin.withValues(alpha: 0.55)),
           const SizedBox(width: 8),
-          Expanded(child: Text(text, style: Hands.onDesk(size: 13))),
-          Text(timeLabel(item.ts), style: Hands.onDesk(size: 11.5)),
+          // The sentence is a word, so it is on paper.
+          Flexible(
+            child: Strip(
+              id: 'margin-${item.event.id}',
+              row: item.ts.hashCode & 0x7fffffff,
+              padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(text,
+                        style: Hands.margin(size: 13), maxLines: 1, overflow: TextOverflow.ellipsis),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(timeLabel(item.ts), style: Hands.margin(size: 11.5)),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

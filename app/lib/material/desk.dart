@@ -56,9 +56,13 @@ class PartnerStrip extends StatelessWidget {
     final asleep = state.availability == 'asleep';
     final headsDown = state.availability == 'heads_down';
     final ink = partner == Person.noor ? Pen.ballpoint : Pen.graphite;
-    // pen pressure follows their energy: faint pencil at 0, hard biro at 4
+    // Pen pressure follows their energy, and it stays -- a hand that presses lightly is still a
+    // hand you can read. It just varies between 0.80 and 1.00 rather than between 0.55 and 1.00,
+    // because alpha counts as contrast: at energy 0 the old range put ballpoint on lined stock at
+    // about 3.3:1 and graphite lower still, and docs/COLOR.md section 6 requires any ink carrying
+    // a word to composite at alpha >= 0.80.
     final energy = state.energy;
-    final weight = 0.55 + 0.15 * energy;
+    final weight = 0.80 + 0.05 * energy;
 
     return GestureDetector(
       onTap: onTap,
@@ -66,9 +70,11 @@ class PartnerStrip extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(10, 6, 10, 2),
         child: SizedBox(
           height: 86,
-          child: Opacity(
-            opacity: asleep ? 0.55 : 1.0,
-            child: PaperPiece(
+          // Asleep used to fade this whole strip to 0.55, sentence and all. docs/COLOR.md section 8:
+          // nothing that carries a word may be dimmed, and the status line is the part you still
+          // need to read. Asleep is said by the stock `stockForMood` picks and by the pen's own
+          // weight above, which is where it belonged, so there is no Opacity here at all now.
+          child: PaperPiece(
               stockId: id,
               tearId: tear,
               liftMm: 0.5 + 0.4 * state.need,
@@ -109,7 +115,6 @@ class PartnerStrip extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 

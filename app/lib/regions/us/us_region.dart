@@ -127,7 +127,19 @@ class _Section extends StatelessWidget {
               ),
             ),
           ),
-          module.build(context, ctx.only(rows)),
+          // The card above is on an index card and the rows under it were on the wood, which is
+          // half a module on paper. docs/COLOR.md section 6: every word is on a piece of paper, so
+          // the body gets the sheet the card always implied was under it.
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 0, 14, 2),
+            child: Slip(
+              id: 'us.body.${module.id}',
+              row: row + 1,
+              stock: 'looseleaf',
+              padding: const EdgeInsets.fromLTRB(4, 4, 4, 6),
+              child: module.build(context, ctx.only(rows)),
+            ),
+          ),
         ],
       ),
     );

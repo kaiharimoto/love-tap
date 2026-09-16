@@ -82,7 +82,9 @@ class _SettingsRegionState extends State<SettingsRegion> {
     return ListView(
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 96),
       children: [
-        const Stamped.onDesk('the two phones', size: 11),
+        Strip(id: 'heading-the-two-phones', row: 1,
+            padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
+            child: const Stamped('the two phones', size: 11)),
         const SizedBox(height: 6),
         _Pairing(
           transport: t,
@@ -110,7 +112,9 @@ class _SettingsRegionState extends State<SettingsRegion> {
           },
         ),
         const SizedBox(height: 22),
-        const Stamped.onDesk('what may interrupt', size: 11),
+        Strip(id: 'heading-what-may-interrupt', row: 2,
+            padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
+            child: const Stamped('what may interrupt', size: 11)),
         const SizedBox(height: 6),
         if (!scope.ambient.allowed)
           // On a slip, and in the ink that is legible on wood. This was pencil grey written
@@ -146,7 +150,9 @@ class _SettingsRegionState extends State<SettingsRegion> {
           ),
         const SizedBox(height: 22),
         Row(children: [
-          const Stamped.onDesk('feelings you made', size: 11),
+          Strip(id: 'heading-feelings-you-made', row: 3,
+            padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
+            child: const Stamped('feelings you made', size: 11)),
           const Spacer(),
           GestureDetector(
             onTap: () async {
@@ -189,7 +195,9 @@ class _SettingsRegionState extends State<SettingsRegion> {
             ],
           ),
         const SizedBox(height: 22),
-        const Stamped.onDesk('the two of you', size: 11),
+        Strip(id: 'heading-the-two-of-you', row: 4,
+            padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
+            child: const Stamped('the two of you', size: 11)),
         const SizedBox(height: 6),
         _Fact('this phone', '${scope.me.name} · ${t.role.name} · ${t.name}'),
         _Fact('their phone', scope.partner.name),

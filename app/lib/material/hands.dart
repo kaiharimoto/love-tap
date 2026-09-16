@@ -36,21 +36,15 @@ class Hands {
         fontFeatures: _handFeatures,
       );
 
-  /// The same hand, in the ink that is legible on wood.
-  ///
-  /// Pencil grey is #6D6D70 and the desk is a dark waxed oak: one and a half to one, which is not
-  /// a contrast ratio, it is a rumour. It was survivable while the desk was a flat fill and it
-  /// stopped being survivable the moment the desk had grain in it. Anything written straight onto
-  /// the desk — the margin line beside the thread, the composer, the word `search` — uses this.
-  /// Anything written on paper uses [margin], because paper is pale and pencil is not.
-  static TextStyle onDesk({double size = 13, Color? colour}) => TextStyle(
-        fontFamily: 'TeoHand',
-        fontSize: size,
-        color: colour ?? Pen.onWood,
-        fontFeatures: _handFeatures,
-      );
+  // `Hands.onDesk` used to live here, for anything written straight onto the wood: the margin
+  // line beside the thread, the composer, the word `search`. It is gone, and so is the ink it
+  // was written in. The reasoning is in material/palette.dart and in docs/COLOR.md section 6, and
+  // it is arithmetic rather than preference — no ink of any colour clears the body floor on the
+  // plate this app ships. Everything that used it now sits on a `Strip` (material/slip.dart) and
+  // is written in [margin], which is pencil, because a strip of stock is pale and pencil is not.
 
-  /// A margin note in pencil: system facts inside the thread.
+  /// A margin note in pencil: system facts inside the thread, and every label that used to be
+  /// written on the desk.
   static TextStyle margin({double size = 12.5}) => TextStyle(
         fontFamily: 'TeoHand',
         fontSize: size,
@@ -88,21 +82,16 @@ class Written extends StatelessWidget {
 
 /// A stamped label: tabs, dates, the furniture of the desk.
 class Stamped extends StatelessWidget {
-  const Stamped(this.text, {super.key, this.size = 12, this.colour, this.spacing = 1.6})
-      : onDesk = false;
+  const Stamped(this.text, {super.key, this.size = 12, this.colour, this.spacing = 1.6});
 
-  /// A heading stamped straight onto the desk rather than onto a piece of paper. The stamp ink is
-  /// dark because it is meant for paper; on the desk it disappears, so this is the same stamp in
-  /// the chalky tone the desk takes.
-  const Stamped.onDesk(this.text, {super.key, this.size = 12, this.spacing = 1.6})
-      : colour = null,
-        onDesk = true;
+  // `Stamped.onDesk` used to be here, for a heading stamped straight onto the wood in a chalky
+  // tone. A heading is a word, and words do not go on the wood any more; the headings that used
+  // it are wrapped in a `Strip` and stamped in ordinary stamp ink, which is what stamp ink is for.
 
   final String text;
   final double size;
   final Color? colour;
   final double spacing;
-  final bool onDesk;
 
   @override
   Widget build(BuildContext context) => Text(
@@ -116,10 +105,6 @@ class Stamped extends StatelessWidget {
           applyHeightToFirstAscent: false,
           applyHeightToLastDescent: false,
         ),
-        style: Hands.stamp(
-          size: size,
-          colour: colour ?? (onDesk ? Pen.onWood : null),
-          spacing: spacing,
-        ),
+        style: Hands.stamp(size: size, colour: colour, spacing: spacing),
       );
 }
