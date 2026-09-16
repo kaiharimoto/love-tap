@@ -152,3 +152,94 @@ only they can set. `tools/pack_pwa.py` is named by the workflow's guard and does
 is not a missing script -- nothing in the app sets `pwaRoot`, so serving the PWA from the phone is
 an unfinished feature. A web build was made and handed over instead.
 
+
+---
+
+## Cycle 3 · firing 2 · IMPLEMENT · 2026-09-16
+
+Seven items closed, and then the container was bootstrapped and the evidence recaptured, so for
+the first time in this cycle the artifacts postdate the work they are used to judge.
+
+The lease was taken and pushed before anything else was touched, which is the thing the previous
+firing did not do and which cost this build a second worker on one branch.
+
+**What the gate said the first time it was allowed to speak.** `color-palette-floors` was the item
+that mattered, because `docs/COLOR.md` had been law with no mechanism since it was written. It has
+one now, and against the committed set it exits 1 and names 62 breaches, each carrying the section
+it breaches. Not one of them is a ceiling. Every chroma ceiling in §5 passes with room to spare —
+nothing in this build is remotely as saturated as a red biro — and the whole failure is absence.
+Eight of nine rooms are at an accent fraction of zero. That is the client's "it doesn't evoke
+cuteness" with a number under it, and it is a different complaint from the one a ceiling would
+catch.
+
+**Building the gate corrected the law.** §4 asks for four families over the union of the set, and a
+"family" as `palette.py` computes it is a ten-degree histogram bin. The union of the committed set
+is bins 55 through 105 — six of them, every one inside family A, at a gap of 310°. So the floor as
+written read 6 ≥ 4 and passed, on the most monochrome build the document was written to describe.
+It binds on `named_families` now, which read 1. The bin count stays reported beside it, the way
+`legibility.py` keeps `GROUND_PCTL` beside its adversarial reading.
+
+That was found rather than assumed because of `palette_selftest.py`, and the reason that file
+exists is worth keeping: the committed set breaches 62 floors, so it cannot tell a gate that is
+correctly red from a gate that is red at everything. The self-test builds a still out of flat OKLab
+patches that clears every floor, proves `--floors` exits 0 on it, then breaks one quantity at a
+time and proves the matching floor comes back. A gate that can never pass is not a gate.
+
+**Two budgets, and the first one was too loose.** `spine-all-in-build` memoises `Spine.all` and
+`countOf`, and the obvious budget was one frame — 16000 µs. With the old getters put back, 200
+copies of a fourteen-thousand-event year came in *under* it and only the linear scan tripped. A
+budget that admits the regression it was written for is worse than none, so it is 2000 µs, which
+is twenty times what the memoised path costs and six times below what the old one does. The same
+care is why the cache is keyed on a revision counter and not on a length: an outbox event coming
+back from the host with its seq moves between the two lists without changing the total.
+
+**The desk retune met its measurement and cost something elsewhere, which is the entry to read.**
+The plate came down to its declared flat: day 0.5002 → 0.4007 against `DeskColour.day` 0.3751,
+dusk 0.3626 → 0.2595 against 0.2653, both inside 0.05 L, on an exposure change and not a second
+light — relative grain moved by four ten-thousandths. Then the capture said what that cost.
+`04_moments`' median pixel went 0.5107 → 0.4167 and `10_first_run`'s 0.5129 → 0.4093, while
+`17_setup_pwa` has no desk in it and stayed at 0.9470, so `lightness_drift_room` went 0.4363 →
+0.5377 against a ceiling of 0.20. `14_media_viewer` went 54% → 65% of runs below floor, and a dusk
+plate 1.44 stops darker is the first place to look.
+
+None of that is a reason to undo it. Those two screens are mostly desk, which is the entire content
+of `paper-is-the-median-pixel`, and that item's note predicted the coupling before the render
+happened. But a firing that reports the plate landing on its target and not the drift widening has
+reported half a measurement.
+
+Two things moved the right way for free. `04_moments`' mid band went 0.0249 → 0.1707 and now clears
+its floor, and family C registers for the first time, so `named_families` went 1 → 2 and the unioned
+hue gap went 310° → 150°, which is §4's ceiling exactly. Nothing this cycle added any colour, so
+that is a darker ground letting the printed blue rules carry area they always had. It is also a
+warning: half of `families-b-c-and-d-reach-the-glass` arrived as a side effect nobody designed, and
+the other half — B and D — is still at zero area on every still.
+
+**Legibility, overall:** 329 of 848 runs below floor → 206 of 743, 38.8% → 27.7%. `02_chat` 31% →
+11%, `12_search` 20% → 9%, `01_pulse` 40% → 26%. `17_setup_pwa` is still the one screen with no
+desk in it and still the one with no failures in it, which has now been true for three captures and
+is the whole argument of `paper-is-the-median-pixel` in one line.
+
+**Two claims the repository was making that were not true.** `tools/check/texture_budget.py` did not
+exist, though `DIRECTION.md` said it enforced the budget; it exists now, and writing it found that
+the figures `TASK_STATE.md` recorded under the words "measured rather than guessed" described a
+sequence that is not in this repository — 150 frames at 460×405 against an actual 240 at 490×315.
+And `evidence/haptics.json` did not exist at all, so the one channel the brief cares most about had
+no record of any kind. It has one now: 34 feelings, duration, envelope and a strip you can read in
+a diff, held to the app by a Dart test that checks every segment against the parser the app plays.
+
+That test earned its place twice before it was committed. The first Python parser lost `steady` and
+`hold` to a lazy `.*?` under DOTALL running past the end of a row; the second lost `overwhelmed` and
+`grey` by cutting each row at its first `)`, which falls inside `(60@70 off60) ×8`. Both wrote a
+file that looked complete and was short by two, and neither would have been noticed by reading it.
+
+**What the next firing should expect.** Four items open, and the stage stays IMPLEMENT because only
+a drained queue advances it. `paper-is-the-median-pixel` is first and is now the largest single
+number on the board: it owns the whole of the 0.5377 room drift and both of the two worst screens.
+`one-coloured-thing-per-screen` and the B and D half of `families-b-c-and-d` are untouched and are
+the colour half of the owner's complaint. `surfaces-folds-family` wants a re-render of
+`blender/folds/fold.py`, and `06_unfolding.mp4` is recorded missing on its frame check for exactly
+that reason.
+
+The evidence is fresh as of this firing, so those three can be worked and measured without a
+capture first. The toolchain is not: a fresh container has none, and `bash tools/apt-prereqs.sh`
+before `./bootstrap.sh --profile=web` is about twenty minutes before anything can be built.

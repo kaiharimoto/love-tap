@@ -3,17 +3,11 @@
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
  "stage": "IMPLEMENT",
- "firing": 1,
+ "firing": 2,
  "stage_entered_at_firing": 1,
- "lease": {
-  "session_id": "session_01WpPGqFoSC2MSUdRg8GGLn7",
-  "started_at": "2026-09-16T03:56:34Z",
-  "expires_at": "2026-09-16T07:56:34Z",
-  "stage": "IMPLEMENT",
-  "ttl_hours": 4
- },
- "evidence_fresh_as_of": null,
- "evidence_note": "The 14 artifacts on disk were captured before the fixes listed in docs/CONTINUE.md section 2, so they are stale for scoring and fine for designing against: they are what the build actually looks like today.",
+ "lease": null,
+ "evidence_fresh_as_of": "2026-09-16T05:26Z, 14 of 17, captured against d210423 (the retuned desk plate)",
+ "evidence_note": "Captured this firing, so for the first time in cycle 3 the artifacts postdate the fixes they are used to judge. 09_two_devices.png and 16_setup_android.png are the hardware ceiling; 06_unfolding.mp4 is recorded missing on its frame check, which is the open surfaces-folds-family item rather than a capture defect.",
  "degradation": 4,
  "design": {
   "verdict": "keep and retune",
@@ -192,7 +186,7 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "This is a layout change expressed in colour quantities. The empty mid band on 04 and 10 is the tell: a plank and some paper with nothing in between is a two-value image with no depth. Expect the legibility rate on those two screens to fall from 76–79% to near zero as a side effect.",
+   "note": "This is a layout change expressed in colour quantities. The empty mid band on 04 and 10 is the tell: a plank and some paper with nothing in between is a two-value image with no depth. Expect the legibility rate on those two screens to fall from 76–79% to near zero as a side effect. | Re-measured on the 2026-09-16 capture, after the plate retune: 02_chat is now 0.7846 p50 / 0.4318 ground and passes both; 04_moments is 0.4167 / 0.6199 and 10_first_run 0.4093 / 0.7912, both worse than before because the plank they are mostly made of came down to its declared flat. 04_moments' mid band fixed itself on the way (0.0249 -> 0.1707); 10_first_run's is still 0.0177. lightness_drift_room is 0.5377 against 0.20, and this item is the whole of it: 17_setup_pwa at 0.9470 has no desk in it and everything else does.",
    "from": "design, cycle 3"
   },
   {
@@ -202,7 +196,7 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "Spend it on objects that already exist in assets/objects/ — the foil star, the pressed clover, the torn ticket, the pink sticky — rather than on new colour. 17_setup_pwa is the place to start: it is the first screen a new user sees and the most colourless in the build at figure p99 0.0181. | Untouched by cycle 3, which was the legibility half only. The charm complaint is exactly where it was found.",
+   "note": "Spend it on objects that already exist in assets/objects/ — the foil star, the pressed clover, the torn ticket, the pink sticky — rather than on new colour. 17_setup_pwa is the place to start: it is the first screen a new user sees and the most colourless in the build at figure p99 0.0181. | Re-measured 2026-09-16: still eight of nine rooms at accent_fraction 0.0, 12_search the only one above zero at 0.00231 against a 0.010 floor. Untouched by this cycle.",
    "from": "design, cycle 3"
   },
   {
@@ -212,7 +206,7 @@
    "state": "open",
    "closed_by": null,
    "attempts": 0,
-   "note": "150° is the widest gap in a split-complementary scheme — the loosest classical harmony that still reads as deliberately coloured. Three families at 10°/80°/235° leave 155° and fail by five degrees, which is why D is required by arithmetic rather than by taste. Family D does not authorise a green pen: both the brief and DIRECTION.md name the pens as ballpoint, graphite, biro and red, and Teo stays graphite. | Untouched by cycle 3, which was the legibility half only. The charm complaint is exactly where it was found.",
+   "note": "150° is the widest gap in a split-complementary scheme — the loosest classical harmony that still reads as deliberately coloured. Three families at 10°/80°/235° leave 155° and fail by five degrees, which is why D is required by arithmetic rather than by taste. Family D does not authorise a green pen: both the brief and DIRECTION.md name the pens as ballpoint, graphite, biro and red, and Teo stays graphite. | Re-measured 2026-09-16: half of this arrived as a side effect of the desk retune. Family C now registers, so named_families is 2 of 4 and the unioned gap is 150 degrees, which meets the section 4 ceiling exactly. B and D still carry no area, and accent_fraction_by_family is 0.0 for both on every still.",
    "from": "design, cycle 3"
   },
   {
@@ -303,6 +297,15 @@
    "stage": "SCAFFOLD",
    "commit": "47f29b9",
    "did": "Fixed the delivery. Established that a Routine-minted session cannot push and cannot attach the repository to itself, rebuilt the loop as orchestrator plus fresh worker, wrote loop/WORKER_PROMPT.md, and corrected CLAUDE.md and docs/LOOP.md. The first worker pushed on its first attempt."
+  },
+  {
+   "firing": 2,
+   "stage": "IMPLEMENT",
+   "commit": "d5ed923",
+   "did": "Seven queue items closed, each against the measurement it named and each re-broken before it was claimed: color-palette-floors, moments-lazy-gallery, spine-all-in-build, desk-plate-to-its-declared-flat, feeling-families-visible, texture-budget-tool, haptic-evidence. Then bootstrapped the container and captured the evidence set, so cycle 3's work is measured against artifacts that postdate it for the first time.",
+   "checked_rather_than_asserted": "Every closure has a re-break beside it. The three that mattered most: palette.py --floors is proved passable by a synthetic still built to clear every floor, because a gate that is red on everything cannot be told from a broken one; the moments gallery reports 183 of 183 tiles built with the SingleChildScrollView restored and 21 with it gone; the spine memoisation fails its budget at 12227us with the old getters back, and the first budget tried -- one frame, 16000us -- was too loose to catch it.",
+   "one_thing_guessed": "The 32 MB texture budget. It is recorded in TASK_STATE.md in as many words as a design ceiling rather than a device measurement, because no phone has been available to measure WebKit on. It is set to catch the window being simplified away, not to model iOS.",
+   "what_it_cost_elsewhere": "The desk retune widened lightness_drift_room from 0.4363 to 0.5377 and took 14_media_viewer from 54% to 65% of runs below floor. Both are recorded in measured_at_firing_3 and the first is what paper-is-the-median-pixel exists to close."
   }
  ],
  "routine": {
@@ -379,6 +382,31 @@
    "one-coloured-thing-per-screen",
    "families-b-c-and-d-reach-the-glass",
    "surfaces-folds-family"
-  ]
+  ],
+  "legibility": {
+   "runs": 743,
+   "below_floor": 206,
+   "share_below_floor": 0.277,
+   "was": "329 of 848, 0.388, on the capture that opened this firing",
+   "per_artifact": "02_chat 31%->11%, 12_search 20%->9%, 01_pulse 40%->26%, 03_us 32%->30%, 13_messenger_states 24%, 05_settings 43%->44%, 14_media_viewer 54%->65%, 04_moments 51%, 10_first_run 59%, 17_setup_pwa still 0 of 89"
+  },
+  "palette_after_capture": {
+   "breaches": 68,
+   "was": 62,
+   "not_like_for_like": "the 62 was a different set of stills; the per-screen numbers are the comparison",
+   "mean_chroma": 0.0216,
+   "was_mean_chroma": 0.0236,
+   "lightness_drift_room": 0.5377,
+   "was_drift_room": 0.4363,
+   "widest_hue_gap_deg": 150.0,
+   "was_hue_gap": 310.0,
+   "named_families": 2,
+   "was_named_families": 1,
+   "named_families_present": [
+    "A_paper",
+    "C_cool"
+   ]
+  },
+  "the_cost_of_the_desk_retune": "It met its own measurement and moved two others the wrong way, which is worth stating plainly. 04_moments p50 0.5107 -> 0.4167 and 10_first_run 0.5129 -> 0.4093, while 17_setup_pwa has no desk in it and stayed at 0.9470, so lightness_drift_room went 0.4363 -> 0.5377 against a 0.20 ceiling. Those two screens are mostly desk, which is the entire content of paper-is-the-median-pixel, and that item's note predicted the coupling. 14_media_viewer also went 54% -> 65% of runs below floor; the dusk plate being 1.44 stops darker is the first thing to look at. Two numbers moved the right way for free: 04_moments' mid band 0.0249 -> 0.1707, now clearing its floor, and family C registering for the first time, taking the unioned hue gap 310 -> 150 degrees, exactly the section 4 ceiling. Nothing this cycle added colour, so that is a darker ground letting the printed blue rules carry area they always had."
  }
 }
