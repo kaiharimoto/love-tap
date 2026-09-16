@@ -10,27 +10,35 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2303
+   "ms": 2305
   },
   {
    "do": "pair",
-   "ms": 969
+   "ms": 1166
   },
   {
    "do": "wait",
-   "ms": 3705
+   "ms": 3702
   },
   {
    "do": "goTo",
-   "ms": 1420
+   "ms": 2029
   },
   {
    "do": "wait",
-   "ms": 1708
+   "ms": 1703
   },
   {
    "do": "frames",
-   "ms": 20238
+   "ms": 22849
+  },
+  {
+   "do": "far",
+   "ms": 502
+  },
+  {
+   "do": "frames",
+   "ms": 30408
   },
   {
    "do": "far",
@@ -38,43 +46,35 @@
   },
   {
    "do": "frames",
-   "ms": 23946
-  },
-  {
-   "do": "far",
-   "ms": 501
-  },
-  {
-   "do": "frames",
-   "ms": 137935
+   "ms": 183857
   },
   {
    "do": "goTo",
-   "ms": 1453
+   "ms": 2545
   },
   {
    "do": "frames",
-   "ms": 37697
+   "ms": 49250
   },
   {
    "do": "far",
-   "ms": 501
+   "ms": 502
   },
   {
    "do": "frames",
-   "ms": 121681
+   "ms": 173755
   },
   {
    "do": "far",
-   "ms": 501
+   "ms": 503
   },
   {
    "do": "frames",
-   "ms": 111325
+   "ms": 150441
   },
   {
    "do": "report",
-   "ms": 514
+   "ms": 508
   }
  ],
  "shots": [
@@ -122,29 +122,29 @@
   {
    "region": 1,
    "visible": [
-    "01M2MARMC69Q29790TR2E1RDPX",
-    "01M2MASC6HBSB282T6EFK3BG1R",
-    "01M2MAYSMGEXBV16QQ93BF2JKY",
-    "01M2MB2H1E2TMH7KJ951VWJ5QX"
+    "01M2MKVS6168THPPE75G16EK08",
+    "01M2MKWQAJZTMVKGMNER1YQ8F7",
+    "01M2MM3XZQ81NR0ZX6F3FMK8K8",
+    "01M2MM986WNEACYNBA0WRTSAY1"
    ],
    "tears": {
-    "01M2MARMC69Q29790TR2E1RDPX": "tear_001",
-    "01M2MASC6HBSB282T6EFK3BG1R": "tear_020",
-    "01M2MAYSMGEXBV16QQ93BF2JKY": "tear_043",
-    "01M2MB2H1E2TMH7KJ951VWJ5QX": "tear_005"
+    "01M2MKVS6168THPPE75G16EK08": "tear_001",
+    "01M2MKWQAJZTMVKGMNER1YQ8F7": "tear_020",
+    "01M2MM3XZQ81NR0ZX6F3FMK8K8": "tear_043",
+    "01M2MM986WNEACYNBA0WRTSAY1": "tear_005"
    },
    "stocks": {
-    "01M2MARMC69Q29790TR2E1RDPX": "lined_03",
-    "01M2MASC6HBSB282T6EFK3BG1R": "lined_01",
-    "01M2MAYSMGEXBV16QQ93BF2JKY": "lined_04",
-    "01M2MB2H1E2TMH7KJ951VWJ5QX": "lined_04"
+    "01M2MKVS6168THPPE75G16EK08": "lined_04",
+    "01M2MKWQAJZTMVKGMNER1YQ8F7": "lined_04",
+    "01M2MM3XZQ81NR0ZX6F3FMK8K8": "lined_01",
+    "01M2MM986WNEACYNBA0WRTSAY1": "spiral_01"
    },
    "scroll": {
     "first": 0,
     "last": 3,
     "of": 4
    },
-   "now": "2026-09-16T05:31:36.473Z",
+   "now": "2026-09-16T08:13:13.110Z",
    "driven_ms": 5712,
    "seed": 20260903,
    "events": 8,
@@ -169,7 +169,7 @@
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 1233,
+ "cold_ms": 1500,
  "problems": [],
  "ok": true
 }

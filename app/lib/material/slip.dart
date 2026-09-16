@@ -225,12 +225,9 @@ class EmptySurface extends StatelessWidget {
 /// each region is a different stack of paper on it, and `app.dart` says the same thing one line
 /// above where this is used: *the paper underneath does not move; what is on it is exchanged*.
 /// There was no paper underneath. Every region drew its contents straight onto the wood, and the
-/// measurement says so plainly — on the 2026-09-16 capture `04_moments` has a median pixel at
-/// L 0.4167 and `10_first_run` 0.4093, against `docs/COLOR.md` section 2 asking every room screen
-/// for [0.78, 0.95] and at most half its pixels in its own darkest third. `04_moments` is at 0.62
-/// of those and `10_first_run` at 0.79. A photograph in the gallery is a dark object and there are
-/// eleven of them; no border drawn around any of them reaches a floor that asks the *median* pixel
-/// to be paper. What reaches it is the page they are laid on.
+/// measurement said so plainly — on the capture before this one `04_moments` had a median pixel
+/// at L 0.4167 and `10_first_run` 0.4093, against `docs/COLOR.md` section 2 asking every room
+/// screen for [0.78, 0.95] and at most half its pixels in its own darkest third.
 ///
 /// This is deliberately not a container. It takes no child and clips nothing: it is a sheet drawn
 /// behind the region, and the region goes on scrolling over it exactly as it scrolled over the
@@ -238,32 +235,50 @@ class EmptySurface extends StatelessWidget {
 /// — the gallery's three-column masonry is the shape it is for reasons written down where it
 /// lives, and a page under it is not allowed to change them.
 ///
+/// **It has to be as cheap as the desk, and the first version was not.** A [Slip] at full region
+/// size is four assets — the stock, the tear mask, the lit edge and the baked shadow — resampled
+/// to a whole screen, and three of those stacked put `04_moments` back into the failure its own
+/// gallery comment warns about: the blob reads for the prints do not fail, they queue, and the
+/// capture caught a screen of paper with the photographs missing. It measured `lightness.p50`
+/// 0.9432, which is a number you can get by deleting the content. Re-running that scene with a
+/// twelve second wait brought the prints back and proved it timing rather than breakage.
+///
+/// So: `torn: false`, which drops the mask, the edge and the shadow and leaves the stock — and a
+/// pad is a cut edge rather than a torn one anyway. And every sheet takes the *same* id, so it is
+/// the same stock and the same variant and therefore one decoded asset painted twice, which is
+/// also what a pad literally is: many sheets of one paper. The cost is now the desk's.
+///
 /// The desk still shows at the margin, and that is not a leftover. A stack of paper on a desk has
 /// to be *on* something or the screen is a page rather than a surface, which is the anti-goal the
 /// whole visual concept is defined against.
 class RegionPad extends StatelessWidget {
   const RegionPad({super.key, required this.id, this.row = 0});
 
-  /// Which region this is. It picks the stock and the tear, so Moments is the same paper every
-  /// time it is turned to and a different paper from Us — five regions, five stacks, which is
-  /// what the sentence in DIRECTION.md actually says.
+  /// Which region this is. It picks the stock, so Moments is the same paper every time it is
+  /// turned to and a different paper from Us — five regions, five stacks, which is what the
+  /// sentence in DIRECTION.md actually says.
   final String id;
   final int row;
 
   /// The desk left showing around the pad.
   static const _margin = 12.0;
 
-  /// The sheets under the top one, and how far each shows past its corner. Section 2 asks for
-  /// `value_bands.mid` of at least 0.04 and calls a screen without it a two-value image: a plank
-  /// and some paper with nothing in between. Contact shadow and edge light are where a mid tone
-  /// comes from, and one sheet lying on another is the only place either exists.
-  static const _peek = 6.0;
-  static const _under = 2;
+  /// The sheet under the top one, and how far it shows past the corner. One, not two: each extra
+  /// sheet is another full-screen paint for a few millimetres of edge, and what it buys is the
+  /// only mid tone a screen of paper on wood has. `value_bands.mid` has a floor of 0.04 in
+  /// section 2 and this does not reach it on its own — see the journal for firing 3.
+  static const _peek = 7.0;
+  static const _under = 1;
 
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(
-      child: IgnorePointer(
+      // The pad never changes while a region is on screen, but without this it is re-rasterised
+      // into the same layer as everything that scrolls over it, so a full-screen sheet is
+      // repainted on every frame of a scroll. That is what the prints in the gallery were losing
+      // their raster budget to. Behind a boundary it is rasterised once and composited.
+      child: RepaintBoundary(
+        child: IgnorePointer(
         child: LayoutBuilder(
           builder: (context, box) {
             final outerW = box.maxWidth - _margin * 2;
@@ -274,39 +289,29 @@ class RegionPad extends StatelessWidget {
             }
             final sheetW = outerW - _peek * _under;
             final sheetH = outerH - _peek * _under;
+            // One id for every sheet: same stock, same variant, one decode, painted twice.
+            final sheet = Slip(
+              id: 'pad.$id',
+              row: row,
+              width: sheetW,
+              torn: false,
+              padding: EdgeInsets.zero,
+              child: SizedBox(width: sheetW, height: sheetH),
+            );
             return Padding(
               padding: const EdgeInsets.all(_margin),
-              // The under-sheets are offset down and right, so the stack occupies exactly
-              // outerW by outerH and no sheet is clipped at the Stack's edge.
+              // The under-sheet is offset down and right, so the stack occupies exactly outerW by
+              // outerH and no sheet is clipped at the Stack's edge.
               child: Stack(
                 children: [
                   for (var i = _under; i >= 1; i--)
-                    Positioned(
-                      left: _peek * i,
-                      top: _peek * i,
-                      child: Slip(
-                        id: 'pad.$id.under$i',
-                        row: row + i,
-                        width: sheetW,
-                        padding: EdgeInsets.zero,
-                        child: SizedBox(width: sheetW, height: sheetH),
-                      ),
-                    ),
-                  Positioned(
-                    left: 0,
-                    top: 0,
-                    child: Slip(
-                      id: 'pad.$id',
-                      row: row,
-                      width: sheetW,
-                      padding: EdgeInsets.zero,
-                      child: SizedBox(width: sheetW, height: sheetH),
-                    ),
-                  ),
+                    Positioned(left: _peek * i, top: _peek * i, child: sheet),
+                  Positioned(left: 0, top: 0, child: sheet),
                 ],
               ),
             );
           },
+        ),
         ),
       ),
     );

@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2523
+   "ms": 4409
   },
   {
    "do": "wait",
-   "ms": 1905
+   "ms": 1904
   },
   {
    "do": "scrollTo",
-   "ms": 3362
+   "ms": 9149
   },
   {
    "do": "wait",
@@ -26,11 +26,11 @@
   },
   {
    "do": "shot",
-   "ms": 2590
+   "ms": 2759
   },
   {
    "do": "report",
-   "ms": 714
+   "ms": 743
   }
  ],
  "shots": [
@@ -102,7 +102,7 @@
    "at": "02_chat.png"
   }
  ],
- "cold_ms": 10981,
+ "cold_ms": 14029,
  "problems": [],
  "ok": true
 }
