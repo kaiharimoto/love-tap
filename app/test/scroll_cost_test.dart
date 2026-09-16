@@ -7,9 +7,17 @@
 // The numbers below are budgets, not measurements of a good day: they are set well above what the
 // code does now, so this fails when something gets slower rather than when a machine is busy.
 import 'package:desk/feelings/registry.dart';
-import 'package:desk/spine/event.dart';
+import 'package:desk/material/desk.dart';
+import 'package:desk/material/library.dart';
+import 'package:desk/regions/chat/blob_widgets.dart';
+import 'package:desk/regions/moments/moments_region.dart';
+import 'package:desk/scope.dart';
 import 'package:desk/spine/projections/state.dart';
 import 'package:desk/spine/projections/thread.dart';
+import 'package:desk/spine/spine.dart';
+import 'package:desk/transport/local/local_transport.dart';
+import 'package:desk/transport/sync.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 List<Event> _aYear({int count = 14000}) {
@@ -57,6 +65,34 @@ List<Event> _aYear({int count = 14000}) {
     ));
   }
   return out;
+}
+
+List<Event> _aYearOfPrints({int count = 183}) {
+  final out = <Event>[];
+  for (var i = 0; i < count; i++) {
+    out.add(Event(
+      id: 'P${i.toString().padLeft(6, '0')}',
+      seq: i + 1,
+      author: i % 2 == 0 ? Person.noor : Person.teo,
+      device: i % 2 == 0 ? DeviceKind.android : DeviceKind.pwa,
+      ts: DateTime.utc(2025, 9, 1).millisecondsSinceEpoch + i * 1800000,
+      type: 'photo',
+      // The shapes vary because the gallery is masonry: every tile the same height would hide
+      // whether the column arithmetic still works.
+      payload: {'blob': 'hash$i', 'w': 4, 'h': 3 + (i % 3)},
+      blobs: ['hash$i'],
+    ));
+  }
+  return out;
+}
+
+Future<Spine> _spineOf(List<Event> events) async {
+  final spine = await Spine.open(
+    SpineStore.memory(),
+    const Identity(person: Person.teo, device: DeviceKind.pwa),
+  );
+  await spine.importSeed(events);
+  return spine;
 }
 
 int _ms(void Function() f) {
@@ -162,6 +198,143 @@ void main() {
       }
       expect(folded.readUpto, fresh.readUpto);
     }
+  });
+
+  test('reading the whole log twice between two changes costs one walk, not two', () async {
+    // MomentsRegion and UsRegion both open build() with `scope.spine.all`, and that getter was
+    // `[..._ordered, ..._pending]` — a fresh fourteen-thousand-element list allocated per frame,
+    // per region. `countOf` was a linear scan beside it, and the scope asks it on every change,
+    // which a scroll emits constantly because a read marker is an event.
+    final spine = await _spineOf(year);
+
+    // Warm, so this measures the work and not the JIT.
+    for (var i = 0; i < 3; i++) {
+      spine.all;
+      spine.countOf('message');
+    }
+
+    final again = _ms(() {
+      for (var i = 0; i < 200; i++) {
+        spine.all;
+      }
+    });
+    final counts = _ms(() {
+      for (var i = 0; i < 200; i++) {
+        spine.countOf('feeling_authored');
+      }
+    });
+
+    // ignore: avoid_print
+    print('spine.all: 200 reads ${again}us; 200 countOf ${counts}us '
+        'over ${spine.all.length} events');
+
+    expect(spine.all.length, year.length);
+    expect(spine.countOf('feeling_authored'), 6);
+    expect(spine.countOf('message'), year.where((e) => e.type == 'message').length);
+    expect(spine.countOf('not an event type'), 0);
+
+    // 200 frames' worth of asking. Memoised this measures 65us and 88us; with the old getters put
+    // back it is 12602us and 17085us, so 2000 is twenty times the headroom a warm machine needs
+    // and six times below the regression it has to catch. A 16000 budget — one frame — was not
+    // enough: 200 copies of the year came in under it and only the scan tripped.
+    expect(again, lessThan(2000),
+        reason: 'asking for the whole log 200 times cost ${again}us — it is being rebuilt');
+    expect(counts, lessThan(2000),
+        reason: 'counting one type 200 times cost ${counts}us — it is still a scan');
+  });
+
+  test('the memoised log is never stale, whichever way an event arrives', () async {
+    // The cache is invalidated by hand at six mutation sites, and the failure mode of missing one
+    // is silent and terrible: a region drawing a year that no longer exists. So each way in is
+    // walked here and the memoised answer is checked against the arithmetic every time.
+    final spine = await _spineOf(year.sublist(0, 200));
+
+    void agrees(String after) {
+      final all = spine.all;
+      expect(all.length, spine.ordered.length + spine.pending.length, reason: 'length, $after');
+      final tally = <String, int>{};
+      for (final e in all) {
+        tally[e.type] = (tally[e.type] ?? 0) + 1;
+      }
+      for (final type in tally.keys) {
+        expect(spine.countOf(type), tally[type], reason: 'countOf($type), $after');
+      }
+    }
+
+    agrees('a seed import');
+
+    // minted here and accepted immediately: straight into _ordered
+    final was = spine.all.length;
+    await spine.append('message', {'text': 'written on this device'}, hostAssign: true);
+    expect(spine.all.length, was + 1, reason: 'a minted event is missing from the memoised list');
+    expect(spine.all.last.payload['text'], 'written on this device');
+    agrees('an event minted with a seq');
+
+    // minted into the outbox: into _pending, and `all` is ordered-then-pending
+    final pending = await spine.append('message', {'text': 'still in the outbox'});
+    expect(spine.all.length, was + 2);
+    expect(spine.pending.map((e) => e.id), contains(pending.id));
+    agrees('an event minted into the outbox');
+
+    // and the host giving that pending event its seq, which moves it between the two lists
+    // without changing the length — which is exactly what a length-based cache key would miss.
+    await spine.applyFromHost([pending.withSeq(spine.maxSeq + 1)]);
+    expect(spine.pending.map((e) => e.id), isNot(contains(pending.id)),
+        reason: 'the event left the outbox but the memoised list still shows it there');
+    expect(spine.all.length, was + 2);
+    agrees('the outbox event coming back with a seq');
+  });
+
+  testWidgets('a year of prints does not all get built to show the first screenful',
+      (tester) async {
+    // Moments came back from the capture as five rows of "still fetching the picture." and no
+    // thumbnail at all. The gallery was a SingleChildScrollView over a Row of three Columns, which
+    // has no lazy child model: every tile in the year is built on the first frame. A tile is a
+    // BlobImage, so that is one IndexedDB read per print, all issued at once. They do not fail,
+    // they queue, and the queue is longer than the frame that was going to draw them.
+    //
+    // So the number that matters is not a duration, it is how many tiles exist. This is the case
+    // that fails against the SingleChildScrollView: with it, the count below is the whole year.
+    await MaterialLibrary.load();
+    tester.view.physicalSize = const Size(1440, 3120);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+
+    final prints = _aYearOfPrints();
+    final spine = await _spineOf(prints);
+    final transport = LocalTransport(role: TransportRole.client, spine: spine, deviceId: 'test');
+    final scope = AppScope(
+      spine: spine,
+      transport: transport,
+      sync: SyncEngine(spine: spine, transport: transport),
+      clock: Clock(frozenAt: DateTime.utc(2026, 8, 30, 9, 14)),
+    );
+    addTearDown(scope.dispose);
+
+    await tester.pumpWidget(AppScope.provide(
+      scope: scope,
+      child: const MaterialApp(home: Scaffold(body: Desk(child: MomentsRegion()))),
+    ));
+    await tester.pump();
+    expect(tester.takeException(), isNull);
+
+    final built = find.byType(BlobImage).evaluate().length;
+    // ignore: avoid_print
+    print('moments: $built of ${prints.length} prints built for the first screenful');
+
+    // The screen is 480 by 1040 and a tile is about a third of that wide, so a screenful is
+    // roughly a dozen. A sliver builds a cache extent either side of that, so the budget is
+    // generous; what it will not tolerate is the whole year.
+    expect(built, greaterThan(0), reason: 'no print was built at all — the gallery is empty');
+    expect(built, lessThan(60),
+        reason: '$built of ${prints.length} prints were built to fill one screen. That is every '
+            'tile in the year, which is $built concurrent blob reads, which is why the capture '
+            'caught "still fetching the picture." and no thumbnail.');
+
+    // and it is still the whole year underneath: lazy, not truncated
+    await tester.drag(find.byType(Scrollable).last, const Offset(0, -20000));
+    await tester.pump();
+    expect(tester.takeException(), isNull);
   });
 
   test('a log that is not an append is rebuilt rather than trusted', () {

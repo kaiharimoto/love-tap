@@ -59,6 +59,22 @@ class Spine {
   int _maxSeq = 0; // highest seq held
   int _cursor = 0; // highest seq such that every seq up to it is held (never skips a gap)
 
+  /// Bumped by `_touched()` whenever `_ordered` or `_pending` changes in any way. Everything
+  /// derived from the whole log is memoised against it, so a region that asks the same question
+  /// twice between two changes pays for it once.
+  ///
+  /// A length would not do: an event can be replaced in place when the host returns a corrected
+  /// copy, and an insert into the middle keeps the length it would have had anyway.
+  int _rev = 0;
+  List<Event>? _allCache;
+  int _allRev = -1;
+  Map<String, int>? _countCache;
+  int _countRev = -1;
+
+  void _touched() {
+    _rev++;
+  }
+
   /// Opens the spine for a device profile and replays the stored log into memory.
   static Future<Spine> open(SpineStore store, Identity identity, {UlidFactory? ulids}) async {
     final s = Spine._(store, identity, ulids: ulids);
@@ -75,6 +91,7 @@ class Spine {
     _seqs.clear();
     _maxSeq = 0;
     _cursor = 0;
+    _touched();
     for (final e in all) {
       _byId[e.id] = e;
       if (e.seq == null) {
@@ -97,17 +114,27 @@ class Spine {
   /// Every accepted event in host order.
   List<Event> get ordered => List.unmodifiable(_ordered);
 
-  /// How many events of one type there are. Cheap enough to ask on every change, and the way
-  /// the scope knows whether anything that would change the feeling registry has happened.
-  int countOf(String type) {
-    var n = 0;
-    for (final e in _ordered) {
-      if (e.type == type) n++;
+  /// How many events of one type there are. The way the scope knows whether anything that would
+  /// change the feeling registry has happened, which it asks on every change.
+  ///
+  /// It used to walk the whole log per call, so asking "have any feelings been authored?" cost a
+  /// pass over fourteen thousand events every time a read marker moved. The tally is built once
+  /// per change instead and every type is answered from it.
+  int countOf(String type) => _counts[type] ?? 0;
+
+  Map<String, int> get _counts {
+    if (_countCache == null || _countRev != _rev) {
+      final tally = <String, int>{};
+      for (final e in _ordered) {
+        tally[e.type] = (tally[e.type] ?? 0) + 1;
+      }
+      for (final e in _pending) {
+        tally[e.type] = (tally[e.type] ?? 0) + 1;
+      }
+      _countCache = tally;
+      _countRev = _rev;
     }
-    for (final e in _pending) {
-      if (e.type == type) n++;
-    }
-    return n;
+    return _countCache!;
   }
 
   /// Ids the host refused, with the reason. Read by the thread to mark the row.
@@ -135,7 +162,18 @@ class Spine {
   List<Event> get pending => List.unmodifiable(_pending);
 
   /// Accepted events followed by pending ones: what the thread shows.
-  List<Event> get all => [..._ordered, ..._pending];
+  ///
+  /// Read inside `build()` in Moments and in Us, so it is memoised: it used to copy the whole
+  /// year into a fresh list on every frame, twice over, and a list of fourteen thousand events
+  /// allocated per frame is a frame's budget spent before anything is drawn. The view is
+  /// unmodifiable because it is now shared rather than a copy, and no caller ever wrote to it.
+  List<Event> get all {
+    if (_allCache == null || _allRev != _rev) {
+      _allCache = List<Event>.unmodifiable(<Event>[..._ordered, ..._pending]);
+      _allRev = _rev;
+    }
+    return _allCache!;
+  }
 
   int get length => _ordered.length + _pending.length;
 
@@ -212,6 +250,7 @@ class Spine {
     } else {
       _pending.add(e);
     }
+    _touched();
     _search.add(e);
     _changes.add(SpineChange(added: [e], assigned: const []));
     return e;
@@ -232,6 +271,7 @@ class Spine {
       if (problem != null) continue; // the host never stores an invalid event
       final assigned = e.withSeq(_maxSeq + 1);
       _ordered.add(assigned);
+      _touched();
       _noteSeq(assigned.seq!);
       _byId[assigned.id] = assigned;
       _search.add(assigned);
@@ -264,6 +304,7 @@ class Spine {
       if (known != null) {
         if (known.seq == null) {
           _pending.removeWhere((p) => p.id == e.id);
+          _touched();
           _insertOrdered(e);
           _byId[e.id] = e;
           assigned.add(e);
@@ -296,6 +337,7 @@ class Spine {
       }
       _ordered.insert(lo, e);
     }
+    _touched();
     _noteSeq(e.seq!);
   }
 
@@ -307,6 +349,7 @@ class Spine {
     for (final e in events) {
       _byId[e.id] = e;
       _ordered.add(e);
+      _touched();
       _noteSeq(e.seq!);
       _search.add(e);
     }

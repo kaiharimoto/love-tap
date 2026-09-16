@@ -284,32 +284,53 @@ class _Gallery extends StatelessWidget {
     final media = events.reversed.toList();
     final width = (MediaQuery.sizeOf(context).width - 16 - _gap * (_columns - 1)) / _columns;
 
-    final columns = List.generate(_columns, (_) => <Widget>[]);
+    // Which column each print lands in, shortest-first so the three end up about level. This is
+    // one pass over the list and it is cheap; what was expensive was what came after it.
+    final columns = List.generate(_columns, (_) => <Event>[]);
+    final rows = List.generate(_columns, (_) => <int>[]);
     final heights = List.filled(_columns, 0.0);
     for (final (i, e) in media.indexed) {
-      final tall = _heightOf(e, width);
       var shortest = 0;
       for (var c = 1; c < _columns; c++) {
         if (heights[c] < heights[shortest]) shortest = c;
       }
-      heights[shortest] += tall + _gap;
-      columns[shortest].add(Padding(
-        padding: const EdgeInsets.only(bottom: _gap),
-        child: _One(event: e, row: i, width: width),
-      ));
+      heights[shortest] += _heightOf(e, width) + _gap;
+      columns[shortest].add(e);
+      rows[shortest].add(i);
     }
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(8, 4, 8, 90),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (var c = 0; c < _columns; c++) ...[
-            if (c > 0) const SizedBox(width: _gap),
-            Expanded(child: Column(children: columns[c])),
-          ],
-        ],
-      ),
+    // Three lazy columns sharing one scroll. It was a SingleChildScrollView over a Row of Columns,
+    // which has no lazy child model at all: every tile in the year was built on the first frame,
+    // and since a tile is a BlobImage that is a hundred and twenty-nine IndexedDB reads issued at
+    // once. They do not fail, they queue, and the screen the capture caught was five rows of
+    // "still fetching the picture." and no thumbnail. A SliverList builds what is near the
+    // viewport, and SliverCrossAxisGroup is what lets three of them share one scroll position
+    // without becoming three scroll views — so the masonry survives and the laziness is real.
+    //
+    // The half-gap on each side of each column is what keeps the arithmetic identical to the Row
+    // it replaces: every column gets the same slot, the space between two tiles is still _gap, and
+    // the outer margin is still 8.
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(8 - _gap / 2, 4, 8 - _gap / 2, 90),
+          sliver: SliverCrossAxisGroup(
+            slivers: [
+              for (var c = 0; c < _columns; c++)
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: _gap / 2),
+                  sliver: SliverList.builder(
+                    itemCount: columns[c].length,
+                    itemBuilder: (context, i) => Padding(
+                      padding: const EdgeInsets.only(bottom: _gap),
+                      child: _One(event: columns[c][i], row: rows[c][i], width: width),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

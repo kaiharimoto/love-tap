@@ -47,7 +47,20 @@ class BlobImage extends StatelessWidget {
             child: const Center(child: Text(S.fetching, style: TextStyle(fontSize: 12))),
           );
         }
-        return Image.memory(b.bytes, width: width, height: height, fit: fit, gaplessPlayback: true);
+        // A print in the Moments gallery is about a third of the screen wide and the photograph
+        // behind it is a full-size one, so decoding it at its own resolution puts nine times the
+        // pixels it can ever show into the image cache, per tile, across a year of them. cacheWidth
+        // decodes at the size being drawn. It is only passed when a width is actually known: with
+        // no width there is nothing to decode against and a guess would be worse than the original.
+        final dpr = MediaQuery.devicePixelRatioOf(context);
+        return Image.memory(
+          b.bytes,
+          width: width,
+          height: height,
+          fit: fit,
+          gaplessPlayback: true,
+          cacheWidth: width == null ? null : (width! * dpr).round(),
+        );
       },
     );
   }
