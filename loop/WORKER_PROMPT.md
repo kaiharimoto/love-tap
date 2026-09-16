@@ -40,22 +40,43 @@ capture away, because nothing uncommitted survives the container.
 authoritative and is 85 KB: read it whole in a stage that judges or plans (DIAGNOSE, ADDRESS,
 DESIGN) and skip it in a stage executing one named item.
 
-### 2. The lease
+### 2. Take the lease, and do not touch anything until you hold it
 
-If `loop/STATE.json` has a `lease` whose `expires_at` is in the future and whose `session_id` is
-not yours, another firing is still running. Append one line to `loop/JOURNAL.md` saying so, commit,
-push, and stop — do not work.
+**This is a gate, not a formality, and the first firing to reach IMPLEMENT walked straight past
+it.** It ran for hours with `lease: null` in `loop/STATE.json`, which meant the next firing's
+worker saw a free lease, took it, and began the same stage — two workers on one branch, which is
+the one thing the lease exists to prevent. It was caught by hand. Next time nobody will be
+watching.
 
-If the lease has expired, that firing died mid-stage. Return every `in_progress` queue item to
-`open`, increment its `attempts`, record that it was abandoned, and carry on.
+So, before you edit a single file:
 
-Take the lease before you start. TTLs: DESIGN and ADDRESS two hours, OBSERVE and DIAGNOSE three,
-IMPLEMENT four.
+- If `lease` is non-null, `expires_at` is in the future, and `session_id` is not yours: **another
+  firing is running.** Append one line to `loop/JOURNAL.md` saying so, commit, push, and stop. Do
+  not do the stage. This is a complete and successful firing.
+- If `lease` is non-null and `expires_at` has passed: that firing died mid-stage. Return every
+  `in_progress` queue item to `open`, increment its `attempts`, record that it was abandoned.
+- Then write your own lease — `{session_id, started_at, expires_at}` — commit it, and **push it
+  before you do anything else**, so a firing that starts while you work can see it. TTLs: DESIGN
+  and ADDRESS two hours, OBSERVE and DIAGNOSE three, IMPLEMENT four.
+- If you are still working when your lease is close to expiring, extend it and push, rather than
+  letting it lapse under you.
+- Release it at the end of the firing, in the same commit that updates the stage.
+
+A firing that holds no lease is a firing that is invisible to the next one. Holding it is what
+makes the loop safe to run unattended.
 
 ### 3. Do exactly one stage
 
-The one `loop/STATE.json` names. Not two, however much budget is left — write down where you got to
-and stop instead. `docs/LOOP.md` says what each stage does and when it is finished.
+The one `loop/STATE.json` names when you started. Not two, however much budget is left.
+
+The DESIGN firing finished its stage, set the next stage to IMPLEMENT, released its lease — and
+then carried straight on into IMPLEMENT in the same session. The work it did was good, and it
+still should not have done it: the dispatcher spawns one worker per firing on the assumption that
+the last one has stopped, so a worker that keeps going is a worker the loop does not know about.
+When your stage's definition of done is met, write it down, push, and **stop**, even if you have
+hours of budget left. The next firing is three hours away and it will pick the work up.
+
+`docs/LOOP.md` says what each stage does and when it is finished.
 
 IMPLEMENT deliberately spans many firings: drain the queue in order, and when your budget runs low,
 write the queue state back, commit, push, and stop. The next firing continues the same stage. Only

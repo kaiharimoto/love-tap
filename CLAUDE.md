@@ -68,9 +68,12 @@ Everything else worth knowing about running it is in `docs/CONTINUE.md` §4–§
 - **A Routine cannot deliver a firing directly.** A session a Routine mints gets `sources: []`,
   and with no attached repository the egress proxy injects no push credential, so every `git push`
   returns 403. Two firings established this; the first lost seven minutes of work to it. The loop
-  is therefore delivered in two hops — the Routine wakes a persistent orchestrator, which spawns
-  the firing with `create_session` and the repository attached. Do not try to "fix" a firing that
-  cannot push by cloning the repo yourself; a clone is readable and unpushable, which is the trap.
+  is delivered instead by a Routine that wakes **the session that created it**, and that session
+  spawns the firing with `create_session`, which can attach a repository. A Routine bound to some
+  *other* named session does not work either: the one that was tried never woke, because its
+  container had been reclaimed and the wake did not re-provision it. `docs/LOOP.md` has the full
+  table of what was tried. Do not try to "fix" a firing that cannot push by cloning the repo
+  yourself; a clone is readable and unpushable, which is the trap.
 - **`09_two_devices.png` and `16_setup_android.png` cannot be produced in this container.** No
   `/dev/kvm`; three routes were tried and measured, and `docs/PHONES.md` records all three. That
   is a hardware fact, not a loop defect. 14 of 17 is the ceiling here.
