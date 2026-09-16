@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4199
+   "ms": 2891
   },
   {
    "do": "wait",
-   "ms": 2007
+   "ms": 2005
   },
   {
    "do": "scrollTo",
-   "ms": 1322
+   "ms": 1069
   },
   {
    "do": "wait",
@@ -26,19 +26,19 @@
   },
   {
    "do": "frames",
-   "ms": 18535
+   "ms": 15416
   },
   {
    "do": "unfold",
-   "ms": 627
+   "ms": 449
   },
   {
    "do": "frames",
-   "ms": 300897
+   "ms": 248178
   },
   {
    "do": "report",
-   "ms": 436
+   "ms": 426
   }
  ],
  "shots": [
@@ -109,7 +109,7 @@
    "at": "06_unfolding_b"
   }
  ],
- "cold_ms": 14181,
+ "cold_ms": 11188,
  "problems": [],
  "ok": true
 }

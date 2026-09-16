@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4153
+   "ms": 2664
   },
   {
    "do": "wait",
-   "ms": 1710
+   "ms": 1706
   },
   {
    "do": "search",
-   "ms": 3851
+   "ms": 2557
   },
   {
    "do": "wait",
-   "ms": 1907
+   "ms": 1903
   },
   {
    "do": "shot",
-   "ms": 2552
+   "ms": 2271
   },
   {
    "do": "report",
-   "ms": 731
+   "ms": 726
   }
  ],
  "shots": [
@@ -96,7 +96,7 @@
    "at": "12_search.png"
   }
  ],
- "cold_ms": 14453,
+ "cold_ms": 11107,
  "problems": [],
  "ok": true
 }
