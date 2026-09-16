@@ -5,7 +5,13 @@
  "stage": "IMPLEMENT",
  "firing": 2,
  "stage_entered_at_firing": 1,
- "lease": null,
+ "lease": {
+  "session_id": "session_01QftDc24z6tbRF3ntmu66pZ",
+  "started_at": "2026-09-16T06:56Z",
+  "expires_at": "2026-09-16T10:56Z",
+  "stage": "IMPLEMENT",
+  "ttl_hours": 4
+ },
  "evidence_fresh_as_of": "2026-09-16T05:26Z, 14 of 17, captured against d210423 (the retuned desk plate)",
  "evidence_note": "Captured this firing, so for the first time in cycle 3 the artifacts postdate the fixes they are used to judge. 09_two_devices.png and 16_setup_android.png are the hardware ceiling; 06_unfolding.mp4 is recorded missing on its frame check, which is the open surfaces-folds-family item rather than a capture defect.",
  "degradation": 4,
