@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 # System packages bootstrap.sh checks for but cannot install itself (Ubuntu 24.04).
 # Run with privileges: sudo tools/apt-prereqs.sh   (in the build container we are already root)
+#
+# The last two on the list are libevent-2.1-7t64 and libwayland-server0, and they are the whole
+# difference between a capture and no capture. Without them Playwright's WebKit fails to launch
+# and every scene reports `browserType.launch:` with an empty message, which reads like a broken
+# harness rather than two missing packages; a full run cost forty minutes and produced 0 of 17
+# artifacts before `webkit.launch()` was called by hand and printed what it actually wanted.
+# CLAUDE.md has warned since the beginning that this script is the difference between a capture
+# and nothing, and it was right; it was just two packages short.
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
@@ -14,5 +22,6 @@ apt-get install -y -qq --no-install-recommends \
   libwoff1 libharfbuzz-icu0 libgstreamer-plugins-bad1.0-0 libgstreamer-gl1.0-0 libenchant-2-2 \
   libsecret-1-0 libhyphen0 libmanette-0.2-0 libx264-164 libflite1 libgstreamer-plugins-base1.0-0 \
   libgstreamer1.0-0 libevdev2 libgudev-1.0-0 libgtk-4-1 libgraphene-1.0-0 libatomic1 \
-  gstreamer1.0-libav gstreamer1.0-plugins-good gstreamer1.0-plugins-bad libavif16 liblcms2-2
+  gstreamer1.0-libav gstreamer1.0-plugins-good gstreamer1.0-plugins-bad libavif16 liblcms2-2 \
+  libevent-2.1-7t64 libwayland-server0
 pip3 install --quiet --disable-pip-version-check numpy pillow fonttools scipy scikit-image opencv-python-headless
