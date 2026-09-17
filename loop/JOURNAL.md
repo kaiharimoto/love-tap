@@ -1020,3 +1020,22 @@ this order:
    family under the old lamp and the whole of `surfaces-folds-family`.
 
 Neither is blocked. Nothing in `asks[]` moved.
+
+## Firing 8 · cycle 3 · IMPLEMENT · 2026-09-17
+
+Step 0 hit the shallow-clone trap a second time, exactly as firing 7 wrote it down, and the note
+saved the diagnosis rather than the time. The container's checkout was at `3edfbf7`, fifty commits
+behind; `git merge-base` reported **no common ancestor at all** and both `git log A..B` and `B..A`
+printed long disjoint lists, which reads like two unrelated histories rather than one that is
+behind. `.git/shallow` is the whole of it — `git rev-parse --is-shallow-repository` says `true`,
+and the grafted boundary hides the join. Two tells, both cheap: the server's rejection says *"the
+tip of your current branch is behind its remote counterpart"*, an ancestry claim only the server
+can make; and `git ls-remote` puts the branch at `034937c`, which was already in the object store
+because the session was minted at that revision. Fast-forwarded to `034937c`, re-ran the dry run,
+`Everything up-to-date`. Bare `git fetch origin` did NOT hang this time — it took about two
+minutes and completed — but the refspec form is still the right default and the file still says so.
+
+This entry is being written before the stage, alongside the lease, so that a firing arriving on top
+of this one can see what is running. The rest of it is appended at the end of the firing.
+
+**Lease taken: IMPLEMENT, four hours, to 2026-09-17T10:58Z.**
