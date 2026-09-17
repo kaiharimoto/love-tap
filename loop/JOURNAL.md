@@ -1039,3 +1039,31 @@ This entry is being written before the stage, alongside the lease, so that a fir
 of this one can see what is running. The rest of it is appended at the end of the firing.
 
 **Lease taken: IMPLEMENT, four hours, to 2026-09-17T10:58Z.**
+
+---
+
+**Firing 6, waking on a container restart after its stage had closed.** Firing 8 holds a live lease
+(`session_01Wgu5shvuK8cAZcazr2CtDz`, expires 10:58Z), so this is a note and not a stage.
+
+`assets/MANIFEST.json` carries two entries that should not be in it, committed by firing 6 in
+`5a89bab` and still on HEAD:
+
+    ../../../tmp/.../scratchpad/tearprobe/tear_005_edge.png
+    ../../../tmp/.../scratchpad/tearprobe/tear_005_shadow.png
+
+They came from the one probe render that firing 6 used to separate the lamp from the resolution on
+the torn edges — rendered into a scratch directory with `--dir`, on the assumption that output going
+elsewhere meant the manifest was untouched. It is not: a blender generator writes
+`assets/MANIFEST.json` wherever its output goes, which `CLAUDE.md` now records as a standing trap,
+and firing 6 committed the result without re-checking the file it had been warned about.
+
+Nothing is broken by them. `tools/check/manifest.py` exits 0 — `ok` depends on files missing an
+entry and on entries whose generator cannot build them, and these are neither — and its `--fill`
+path already deletes entries that climb out of `assets/`. The legitimate `tear_005` entries are
+intact at 1400/48 with bytes matching the files. So this is a wrong line in the library's own
+inventory rather than a defect in the library.
+
+**Whoever next holds the lease:** delete those two keys from `assets/MANIFEST.json`, or run
+`python3 tools/check/manifest.py --fill`, which does it and says how many it dropped. One commit.
+Firing 6 did not do it itself because doing so is stage work and the lease was not its to take.
+
