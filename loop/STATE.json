@@ -5,7 +5,14 @@
  "stage": "IMPLEMENT",
  "firing": 8,
  "stage_entered_at_firing": 1,
- "lease": null,
+ "lease": {
+  "session_id": "session_01VnB1gEpd4mBgeV9wrhZg1E",
+  "stage": "IMPLEMENT",
+  "firing": 9,
+  "started_at": "2026-09-17T13:01Z",
+  "expires_at": "2026-09-17T17:01Z",
+  "note": "Firing 9. First business is the-relit-tear-edge-is-a-dark-band, per firing 8's handover. Before any fix: establish whether part of 25.28% -> 30.70% is the run count going 708 -> 759 rather than text getting worse."
+ },
  "evidence_fresh_as_of": "2026-09-17T08:00Z, 15 of 17, captured at 097bea5 by firing 8 -- the first capture since the library came under one lamp for everything a still can see. Full ./capture.sh, degradation rung 0. palette.json and legibility.json were run BY HAND afterwards and are part of that commit: capture.sh runs neither, which is why both files still read the pre-relight numbers when the capture finished. 09_two_devices.png and 16_setup_android.png remain the hardware ceiling.",
  "evidence_note": "The capture answered both halves of the owner's second complaint and one of them went the wrong way. Chroma: across_the_set.mean_chroma 0.0181 -> 0.0358 against a 0.045 floor, with the per-band floors going from 0 of 10 stills over ground 0.030 to 7 of 10. Legibility: 25.28% -> 30.70% of runs below floor, entirely on moving ground (43 -> 41 on still ground, 136 -> 192 on moving), caused by the relit torn lip going from a blown-out highlight to a dark band. Filed as the-relit-tear-edge-is-a-dark-band. AND THE GALLERY LOST ITS PICTURES AGAIN, IN THIS CAPTURE, PARTIALLY. 04_moments lightness.p50 is 0.9254 against the <= 0.85 that the-gallery-loses-its-pictures-under-load names as violated precisely when the content is absent, and the still shows it plainly: roughly half the tiles are empty bordered prints carrying only their date. 14_media_viewer is fine this time, value_bands.ground 0.5771 against <= 0.62, so the two halves of that bug did not fire together. WHAT THIS DOES TO THE NUMBERS ABOVE, stated so that nobody has to rediscover it: 04_moments' own figures measure a half-empty gallery, so its ground mean_chroma 0.0219 and its legibility improvement (30 of 67 runs below floor -> 19 of 54) are BOTH artefacts of absent content and must not be read as results. The photographs carry chroma, so the set mean of 0.0358 is if anything understated by this rather than flattered. The other nine stills are unaffected.",
  "degradation": 0,
