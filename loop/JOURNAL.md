@@ -1067,3 +1067,120 @@ inventory rather than a defect in the library.
 `python3 tools/check/manifest.py --fill`, which does it and says how many it dropped. One commit.
 Firing 6 did not do it itself because doing so is stage work and the lease was not its to take.
 
+
+### The capture, and the two things it says
+
+`evidence/palette.json` no longer reads 0.0181. The number is **0.0358**, against a floor of 0.045.
+It nearly doubled and it did not arrive, which is what firing 5 wrote down in advance and is the
+answer as it landed rather than as it was hoped.
+
+The set mean hides where the relight actually paid, so both are recorded. `chroma_by_band.ground.mean_chroma`
+went from **0 of 10** stills over the 0.030 floor to **7 of 10**; `mid` is 8 of 10; `figure` mean is 8
+of 10 over 0.035. `grey_fraction` 0.0454 → 0.0241, `lightness_drift_room` 0.1482 → 0.0534, and every
+section 5 ceiling holds — of 42 breaches, not one is a ceiling. The three stills that did not move
+are the three the lamp does not light: `17_setup_pwa` 0.0256 → 0.0256 and `14_media_viewer` 0.0150 →
+0.0150, unchanged to four decimals, and `04_moments` 0.0162 → 0.0219. Firing 5 predicted that and
+firing 6 explained it. So `the-day-rig-is-what-took-the-colour-out` should close on the per-band
+floors and hand the set mean to the albedo items: the lamp has now given everything it has, and the
+remaining 0.009 is owed by ink and objects.
+
+The wheel narrowed exactly as firing 5 said it would, and it is worse than before: `named_families`
+2 → 1, `widest_hue_gap_deg` 160 → 320. Family C is gone from the set.
+
+### Legibility went the wrong way, and the relight is what did it
+
+**25.28% → 30.70%** of runs below floor, 179 of 708 → 233 of 759. Nothing in `app/lib` changed
+between the baseline capture and this one, so it is the library.
+
+It is not a dimming, and the split is the whole diagnosis: failures on **still** ground went 43 →
+41, and every one of the 54 extra failures is on **moving** ground, 136 → 192. Measured on
+`tear_010`'s lit edge where alpha > 0.5, the torn lip's own luminance is **Y 0.8649** under the old
+lamp and **0.6424** under the new one, against a sheet at 0.8936 — and flat-white pixels went 7.10%
+→ 0.00%.
+
+That is the mechanism, and it is the same measurement firings 6 and 7 both counted as a win. What
+was being clipped away was the lip's entire tonal presence: blown out it sat within 3% of the sheet
+and was not a feature of the image at all. Unclipped, it is a dark band 28% below the paper it is
+part of. Every torn note now carries a dark ring; text near a torn edge has a ground whose dark end
+is genuinely dark; `ground_swing` crosses the 1.20 gate; and `legibility.py` reads the ink against
+that end, correctly. `03_us` carries most of it — 9 failures of 52 runs → 36 of 83, median contrast
+as rendered 5.87 → 2.72, and 35 of the 36 are at boxes that were not failing before.
+
+The crops were looked at rather than argued about, because the alternative reading is that the gate
+is wrong. It is not: at (60,520)–(860,780) the old still has a fine white torn lip and the new one
+has a coarse dark stepped band in the same place. Filed as `the-relit-tear-edge-is-a-dark-band`
+with the route **not** to take written into it — re-clipping the edge would undo the ×3.44 chroma
+gain that the same change bought, and the still-ground failures did not move, so there is nothing
+to be won by trading them.
+
+### Two things about the instruments, both of which cost this firing time
+
+**`capture.sh` runs neither `palette.py` nor `legibility.py`.** A full capture finishes, reports 15
+of 17, and leaves both files reading the numbers from the previous cycle. Both came back
+byte-identical to the stale ones and were very nearly reported as the result; the mtimes are what
+gave it away — the stills were rewritten at 07:15 and the two JSONs still said 06:57. Run them by
+hand after a capture, and match the previous invocation: the baseline ran `legibility.py` with no
+`--dusk`, so this one did too, or the comparison would have measured a changed command.
+
+**The gallery lost its pictures again, in this capture, partially.** `04_moments` is at
+`lightness.p50` 0.9254 against the ≤ 0.85 that `the-gallery-loses-its-pictures-under-load` names as
+violated precisely when the content is absent, and about half the tiles are bordered prints with
+their date and no photograph. `14_media_viewer` is clean this time (0.5771 against ≤ 0.62), so the
+two screens do not fail together. The three-consecutive-captures clause is therefore at **0, not 1**.
+And `04_moments`' own figures in this capture measure a half-empty gallery: its ground chroma of
+0.0219 and its apparent legibility improvement, 30 of 67 → 19 of 54, are both artefacts of absent
+content and are not results. The photographs carry chroma, so the set mean is understated by this
+rather than flattered by it.
+
+### Fifty-six of fifty-six, at dusk
+
+`fifty-two-notes-have-no-shadow-at-dusk` is closed. `tools/check/dusk_shadows.py` exits 0 on all
+four rules against the 53 it named this morning; re-broken by hiding one file, which takes it to
+MISSING 55 of 56, names the file and exits 1. The app half stayed green with it — three tests in
+`a_note_at_dusk_asks_for_its_dusk_shadow_test.dart`, inside 109 passed — which is the clause that
+stops the cheap fix of no longer asking for the asset.
+
+**None of it would have rendered.** `tear_relief.py`'s `--skip-existing` tested only
+`tear_NNN_edge.png`, and the edge is baked once under daylight and is the one file a dusk pass never
+writes, so `--conditions dusk` over the complete day library would have skipped all fifty-six tears
+and printed `skip` fifty-six times. `objects.py` had the same shape, which is how
+`obj_plaster_shadow_dusk` stayed missing while its family reported finished. This is the third copy
+of the hole firing 7 found in `bits.py` — and `bits.py`'s docstring said firing 6 had already closed
+it in `tear_relief.py`. It had not: firing 6 had worked around it from `render_queue6.sh` by passing
+`--conditions day`. Both closed, the false sentence corrected where it was read, and verified
+against the library without spending a render: `tear_001` skips under `--conditions dusk` and
+`tear_005` does not, where the old rule skipped both.
+
+Cost, for whoever estimates the next single-condition family: **3.2 minutes a shadow**, 52 in 2h45m,
+against the 2.4 the queue item derived by subtracting firing 6's day-only figure from its
+day-and-dusk one. That subtraction charges the second condition with none of the scene setup it
+repeats, and under-calls by about a third.
+
+### A second firing arrived while this one held the lease, and the lease worked
+
+`c9bc763` landed on the branch mid-firing. It had read `loop/STATE.json`, found a live lease that
+was not its own, wrote one journal note and took no stage — which is exactly what `WORKER_PROMPT.md`
+§2 asks for, and the first time the gate has been observed doing its job. This firing rebased its
+own unpushed commit onto that one rather than over it. Nothing was lost on either side. The lease
+was later extended to 11:30Z rather than allowed to lapse under a running render, because a lapsed
+lease is precisely what invites a second worker to start the stage.
+
+### What the next firing should expect
+
+The stage is still IMPLEMENT and the queue is not drained. Eight items open. In order of what this
+firing would do next:
+
+1. **`the-relit-tear-edge-is-a-dark-band`** — the regression, with its diagnosis and its forbidden
+   route already written into the item. `legibility.py --only 03_us.png` is the cheap inner loop.
+   Note that `17_setup_pwa`, the one still with no desk and no tears in it, went 0 failures → 3 and
+   its `worst_ink_core` 7.98 → 1.07, so the tears are not the whole of it and that screen is worth
+   its own look.
+2. **`assets/folds`** — 240 frames, the last family under the old lamp, the whole of
+   `surfaces-folds-family`, and the only thing keeping `the-library-is-lit-by-two-lamps` open. CPU
+   and no decision.
+3. **`the-gallery-loses-its-pictures-under-load`** now has a committed partial instance to debug
+   against, which is more useful than either of the all-or-nothing ones.
+
+Nothing is blocked. Nothing in `asks[]` moved.
+
+**Lease released.**

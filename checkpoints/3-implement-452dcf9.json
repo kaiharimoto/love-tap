@@ -1,0 +1,34 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 8,
+ "commit": "452dcf9",
+ "evidence_fresh_as_of": "2026-09-17T08:00Z, 15 of 17, captured at 097bea5 by firing 8 -- the first capture since the library came under one lamp for everything a still can see. Full ./capture.sh, degradation rung 0. palette.json and legibility.json were run BY HAND afterwards and are part of that commit: capture.sh runs neither, which is why both files still read the pre-relight numbers when the capture finished. 09_two_devices.png and 16_setup_android.png remain the hardware ceiling.",
+ "closed_this_firing": [
+  "fifty-two-notes-have-no-shadow-at-dusk"
+ ],
+ "opened_this_firing": [
+  "the-relit-tear-edge-is-a-dark-band"
+ ],
+ "headline": {
+  "across_the_set.mean_chroma": [
+   0.0181,
+   0.0358,
+   "floor 0.045"
+  ],
+  "legibility.share_below_floor": [
+   0.2528,
+   0.307,
+   "regression"
+  ],
+  "ground.mean_chroma stills over 0.030": [
+   0,
+   7,
+   "of 10"
+  ],
+  "dusk_shadows.py": [
+   "53 missing",
+   "exits 0"
+  ]
+ }
+}
