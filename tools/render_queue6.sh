@@ -38,8 +38,27 @@
 # 240 frames, the largest family in the build, and it feeds 06_unfolding.mp4 alone —
 # tools/check/palette.py reads stills, so not one of the chroma floors this change exists to reach
 # can see a single frame of it. It is owed a pass and it is owed it after everything a still can
-# see. Whoever picks this up: add it as a step, or run it on its own.
+# see.
+#
+# DONE AT FIRING 10, on its own rather than as a step here, and the command this note used to
+# suggest was wrong twice over:
+#
 #     bash blender/run.sh blender/folds/fold.py -- --all --res 540 --samples 16 --condition day
+#
+# --all renders four sequences. This library has one. unfold_half, crumple_open and corner_curl are
+# declared in fold.py's SEQUENCES and have never been rendered, are not under assets/folds, and are
+# not in app/pubspec.yaml — so --all would have invented 420 frames of three sequences nothing
+# loads, on top of the 240 that were owed. And --res 540 is the resolution that made this family
+# fail its own floor: 94 of the 240 frames read below the 1.2 paper floor and the whole of that is
+# resolution, which is why fold.py's default is 1440 now and why the flag is gone from the line.
+#
+# What was actually run, in eight chunks of thirty so that the frames could be committed as they
+# landed rather than held for two hours:
+#
+#     bash blender/run.sh blender/folds/fold.py -- --seq unfold_thirds --start N --end N+30
+#
+# 33 seconds a frame on four cores, a little over two hours for the sequence. If the other three
+# sequences are ever wanted they are a separate decision with a separate cost, not a flag.
 set -uo pipefail
 cd "$(dirname "$0")/.."
 STAMP() { date -u +%H:%M:%S; }
