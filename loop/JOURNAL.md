@@ -1502,3 +1502,19 @@ Two things this firing learned about the container, both cheap and both wasted a
 Nothing is blocked. Nothing in `asks[]` moved.
 
 **Lease released.**
+
+## Firing 11 — IMPLEMENT — lease taken
+
+Step 0 passed on the second attempt, in exactly the shape firing 10 wrote up and amended
+`loop/WORKER_PROMPT.md` §0 for: a **shallow clone at depth 50**, grafted at a different point from
+the branch tip, so `git merge-base` came back empty and `git rev-list --count HEAD...origin/<branch>`
+read **50 ahead / 50 behind** — which is the *total* commit count on both sides, the tell §0 names.
+`git rev-list --count origin/<branch>..HEAD` was 50, equal to the total, so it is a graft boundary
+and not work. `git reset --hard origin/<branch>` fixed it; the dry run then returned
+`Everything up-to-date`. The credential was never in question — the first rejection was
+`non-fast-forward`, which is the remote authenticating and then declining the ref update.
+
+Third firing to meet this. The amendment held: reading it cost two minutes rather than the slice it
+cost firing 10.
+
+Lease held to 2026-09-18T02:00Z. The stage is IMPLEMENT and seven items are open.
