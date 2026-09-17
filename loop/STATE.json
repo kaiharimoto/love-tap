@@ -5,7 +5,13 @@
  "stage": "IMPLEMENT",
  "firing": 6,
  "stage_entered_at_firing": 1,
- "lease": null,
+ "lease": {
+  "session_id": "session_01XP35V36WuF5tDzj9VJsRuC",
+  "started_at": "2026-09-17T00:58:21Z",
+  "expires_at": "2026-09-17T04:58:21Z",
+  "firing": 7,
+  "stage": "IMPLEMENT"
+ },
  "evidence_fresh_as_of": "2026-09-16T11:00Z, 15 of 17, captured against the bordered print (e5d6ce8). Full ./capture.sh, degradation rung 0: apt-prereqs, bootstrap --profile=web, both builds, every scene, every check. 09_two_devices.png and 16_setup_android.png remain the hardware ceiling.",
  "evidence_note": "14_media_viewer came out of the full run with NO PHOTOGRAPH IN IT -- a dark desk and its caption, value_bands.ground 0.8757, grey_fraction 0.0026 -- which is the absent-content trap firing 3 recorded, in a second place. It was re-captured alone with --only --no-build and came back byte-identical to the previous capture's artifact, so the committed one is the re-capture and the empty one is not in the tree and must not be quoted. It is a race under full-run load, not an effect of this cycle's change: the scene reaches the viewer through chat and never touches the gallery. It is now a queue item of its own, the-gallery-loses-its-pictures-under-load, with a three-consecutive-captures clause so a lucky capture cannot close it.",
  "degradation": 0,
