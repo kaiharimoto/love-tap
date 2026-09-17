@@ -157,6 +157,29 @@ def keep_edge_band(path, mask, band_mm=EDGE_BAND_MM):
     return path
 
 
+def outputs_of(mid, out_dir, conditions=("day", "dusk")):
+    """Every file render_one will write for these conditions.
+
+    --skip-existing used to ask only whether `{mid}_edge.png` was there. The edge is baked once,
+    under daylight, and is the one file a dusk pass never writes -- so `--conditions dusk` on a
+    library whose day edges are all present skipped all fifty-six tears and rendered nothing, and
+    said `skip` fifty-six times while doing it. bits.py's `outputs_of` carries the same close and
+    its docstring said this one had already been made; it had not. Firing 8 found that out by
+    reading the code the docstring pointed at, which is the cheaper half of the lesson: a claim
+    that a hole is closed is not a closed hole.
+
+    Skip a tear only when every file it would write under the requested conditions is on disk.
+    """
+    paths = []
+    for condition in conditions:
+        for pass_kind in ("edge", "shadow"):
+            if pass_kind == "edge" and condition != "day":
+                continue          # the edge light is baked once, under daylight
+            suffix = {"edge": "_edge", "shadow": "_shadow" if condition == "day" else "_shadow_dusk"}[pass_kind]
+            paths.append(os.path.join(out_dir, mid + suffix + ".png"))
+    return paths
+
+
 def render_one(mask_path, meta, out_dir, res, samples, conditions):
     name = os.path.splitext(os.path.basename(mask_path))[0]
     mask = load_mask(mask_path)
@@ -226,7 +249,8 @@ def main():
         if not os.path.exists(path):
             print(f"missing {path}")
             continue
-        if a.skip_existing and os.path.exists(os.path.join(a.dir, mid + "_edge.png")):
+        wanted = outputs_of(mid, a.dir, conditions)
+        if a.skip_existing and all(os.path.exists(p) for p in wanted):
             print(f"skip {mid}")
             continue
         import time

@@ -233,8 +233,11 @@ def outputs_of(name, out_dir, conditions=("day", "dusk")):
     still on disk, and the script's own restore_missing put the stale files straight back. The run
     reported no error at any point, because nothing had gone wrong as far as either half could see.
 
-    tear_relief.py had the same hole and firing 6 closed it. This is the same close: skip a bit only
-    when every file it would write is already there.
+    tear_relief.py had the same hole. This file used to say firing 6 had closed it there too; firing
+    8 read that code and it had not -- firing 6 had worked around it by passing `--conditions day`
+    from render_queue6.sh, and the skip itself still asked only about `{mid}_edge.png`. It is closed
+    there now, the same way. This is that close: skip a bit only when every file it would write is
+    already there.
     """
     paths = []
     for condition in conditions:

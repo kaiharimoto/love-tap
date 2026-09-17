@@ -526,6 +526,25 @@ OBJECTS = {
 }
 
 
+def outputs_of(name, out_dir, conditions=("day", "dusk")):
+    """Every file render_object will write for these conditions.
+
+    The third copy of the same hole, after bits.py (firing 7) and tear_relief.py (firing 8): the
+    skip asked only whether `{name}.png` was on disk, and the colour pass is the one file a dusk
+    run never writes. So `--conditions dusk` over a complete day library skipped every object and
+    rendered nothing, silently, which is exactly how obj_plaster_shadow_dusk stayed missing while
+    the generator reported the family finished.
+    """
+    paths = []
+    for condition in conditions:
+        for pass_kind in ("object", "shadow"):
+            if pass_kind == "object" and condition != "day":
+                continue
+            suffix = {"object": "", "shadow": "_shadow" if condition == "day" else "_shadow_dusk"}[pass_kind]
+            paths.append(os.path.join(out_dir, name + suffix + ".png"))
+    return paths
+
+
 def render_object(name, res, samples, out_dir, conditions=("day", "dusk")):
     rng = np.random.default_rng(20260903 + abs(hash(name)) % 997)
     written = []
@@ -580,7 +599,7 @@ def main():
     conditions = [c for c in a.conditions.split(",") if c]
     import time
     for n in names:
-        if a.skip_existing and os.path.exists(os.path.join(a.out, n + ".png")):
+        if a.skip_existing and all(os.path.exists(p) for p in outputs_of(n, a.out, conditions)):
             print(f"skip {n}")
             continue
         t0 = time.time()
