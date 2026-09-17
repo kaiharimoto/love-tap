@@ -76,6 +76,9 @@ python3 tools/check/surfaces.py --out "$LOG/surfaces.json" \
 echo "· checking the lamp is the colour DIRECTION.md says it is"
 python3 tools/check/illuminant.py --out "$LOG/illuminant.json" >/dev/null \
   || note_missing "illuminant" "the day rig's net colour temperature is not the one DIRECTION.md declares, so every render in assets/ is lit wrong; see $LOG/illuminant.json"
+echo "· checking the library holds everything the app asks it for at dusk"
+python3 tools/check/dusk_shadows.py --out "$LOG/dusk_shadows.json" >/dev/null \
+  || note_missing "dusk" "the app names an asset under _dusk that the library does not hold, and loads it behind an errorBuilder, so it draws nothing and says nothing; see $LOG/dusk_shadows.json"
 echo "· checking the push payload carries only kind and sender"
 python3 tools/push/webpush.py --self-test > "$LOG/webpush.txt" 2>&1 || note_missing "push" "the web push sender failed its own vectors"
 
