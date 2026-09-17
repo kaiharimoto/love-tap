@@ -6235,6 +6235,23 @@
     "samples": 64
    }
   },
+  "assets/objects/obj_plaster_shadow_dusk.png": {
+   "bytes": 74463,
+   "generator": "blender/objects/objects.py",
+   "kind": "feeling_shadow",
+   "settings": {
+    "frame_mm": 60,
+    "light": "dusk",
+    "object": "obj_plaster",
+    "pass": "shadow",
+    "resolution": [
+     1200,
+     1200
+    ],
+    "rig": "blender/rig/common.py",
+    "samples": 48
+   }
+  },
   "assets/objects/obj_ribbon.png": {
    "bytes": 328086,
    "generator": "blender/objects/objects.py",
