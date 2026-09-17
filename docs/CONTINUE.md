@@ -176,6 +176,28 @@ reports. Cycle 2 cost ~1.2M subagent tokens and 583 tool calls and was worth eve
   own command line contains the pattern and so pgrep always finds itself. Wait on the pid
   (`while kill -0 "$pid"`) and the question does not arise.
 - **Never edit a running bash script** — bash reads it incrementally and the run corrupts.
+- **`flutter test` cannot build its asset bundle in a fresh container, and exits 0 while failing
+  to.** `app/assets` is written by `tools/pack_assets.py` and is gitignored, so it does not exist
+  until you make it. Without it the run prints nine lines of `unable to find directory entry in
+  pubspec.yaml` and then `Failed to build asset bundle`, having run no test at all — and returns
+  zero, so a script that trusts the status records a green suite that never existed. Run
+  `python3 tools/pack_assets.py --seed=year` first, and `pip install opencv-python-headless`
+  before that or it dies on `import cv2` two thirds of the way in, after writing half of
+  `app/assets`.
+- **`flutter test` writes to `evidence/`.** `coldstart.json` and `reliability.json` come back with
+  this container's timestamps and ports in them. That is not your change and it is not a
+  measurement anything took: `git checkout evidence/` before every commit.
+- **`getTransformTo(renderView)` is already in device pixels.** `RenderView` applies the device
+  pixel ratio in its own paint transform, so a rect transformed to it is in the screenshot's
+  coordinates and multiplying by the ratio again is wrong by exactly that factor. It is silent —
+  nothing throws, the JSON looks well-formed — and on a screen of writing it puts every declared
+  line somewhere between the lines. `app/test/the_app_says_where_its_words_are_test.dart` holds it
+  against what the framework says the same paragraph's rect is.
+- **`visitChildren` is not what is on the glass.** `app.dart` keeps all five regions alive in an
+  `IndexedStack`, so a naive walk of the render tree finds five screens of widgets laid out on top
+  of each other. `RenderObject.paintsChild` is the framework's own answer and covers opacity,
+  `Offstage`, `Visibility` and list children scrolled out of a viewport; `RenderIndexedStack` does
+  not implement it and has to be asked for the child at its `index` directly.
 
 ## 6. Secrets, which are failure conditions
 

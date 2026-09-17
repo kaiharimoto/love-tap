@@ -1518,3 +1518,199 @@ Third firing to meet this. The amendment held: reading it cost two minutes rathe
 cost firing 10.
 
 Lease held to 2026-09-18T02:00Z. The stage is IMPLEMENT and seven items are open.
+
+## Firing 11 — IMPLEMENT — the ruler, and why not the capture
+
+### The weighing, because it was asked for and because the answer surprised me
+
+Two things were put to this firing: build the `__deskTextRuns` handle, or take the capture that
+would show what the finished library actually looks like. Both were called defensible and an
+unexamined choice between them was called not.
+
+The argument I expected to make was that a capture measured with a ruler that disagrees with itself
+between runs cannot settle the open question, so the ruler comes first. That argument is sound and
+it is not the one that decides it. The stills are durable and the ruler can be re-applied to them
+afterwards — firing 9 re-measured a whole committed capture from disk and reproduced its baseline
+exactly. On that reading, capture first loses nothing.
+
+Except that it does, and the reason is specific: **the declared text geometry can only be collected
+while the app is running.** It is not recoverable from a PNG afterwards at any price. A capture
+taken before the handle exists produces stills that can never be measured with the fixed ruler —
+only ever with the broken one. So the two are not two orderings of the same pair of tasks. One
+order costs a capture; the other costs nothing.
+
+And then the thing that actually settles it, which neither argument mentioned. `docs/LOOP.md` gives
+capture to **OBSERVE**, stage 0, not to IMPLEMENT. The queue is not drained — eight items are open —
+so the stage does not advance and this firing has no business running `./capture.sh` at all.
+`loop/WORKER_PROMPT.md` §3 is explicit that a worker does one stage however much budget is left,
+and §3b is explicit that work outside the queue is work no row is asking for. The next OBSERVE will
+take the capture, and it will take it with the handle in the build, which is the only version of it
+worth having.
+
+So: the handle, and one still measured into a scratch directory to prove the chain, and nothing
+written under `evidence/`.
+
+### What was wrong with the ruler
+
+`tools/check/legibility.py` finds writing by looking for marks shaped like glyphs. Its own docstring
+says so, and says it is what it can do from a PNG. A surface that acquires texture acquires
+glyph-shaped marks: when the corrected illuminant stopped the torn lips clipping to flat white,
+137 runs arrived that had never existed, 102 of them below floor — 74% against 21% on the 622 runs
+that were really there. Firing 9 established that by pairing two captures run by run and then
+cropping three artifacts at 300% to look at the boxes by eye.
+
+The app knows where its text is. That was written into the item as the direction not yet tried, and
+`app/lib/capture/hooks_web.dart` already exposes a dozen handles of the same shape, so this is one
+more of a pattern that works rather than new machinery.
+
+### What it declares
+
+`CaptureHooks.textRuns` walks the render tree and returns, per painted paragraph: its rect and its
+line rects in the picture's own pixels, its type size in points and in those same pixels, its font
+family, its role, its declared ink, and what it says. `tools/capture/scene.js` calls it after every
+`shot` and writes `<name>.text.json` beside the PNG, shifted into the crop's coordinates where the
+shot is clipped. `legibility.py` grows `--text-runs auto|off|require`.
+
+Nothing about the measurement moved. The contrast is still read off the real pixels with the real
+antialiasing and the real fibre in the ground — that is the whole reason for reading the artifact
+rather than the source. What the declaration changes is where the tool is allowed to look.
+
+Three things came free with it and are worth more than they cost:
+
+- A run is a **declared line**, not a group of shapes that `runs_of` grouped by a 26px gap.
+- The body/large floor comes from the **declared point size**. It came off the bounding box of the
+  found marks, which on a line with no ascender and no descender in it is several points short.
+- A failure carries **what the app says it says**, so a finding reads as a sentence.
+
+### Three proofs, because a filter is the easiest thing in the world to fake
+
+**The unchanged path is unchanged.** With no sidecar — every capture taken before the handle — the
+tool reproduces 759 runs and 233 failures over the committed set with the failures list
+byte-identical to `evidence/legibility.json`. `legibility_delta.py` still pairs across the relight
+and firing 9's work is not invalidated.
+
+**`tools/check/legibility_selftest.py`**, a ruler for the ruler in the shape of
+`palette_selftest.py`. A synthetic still carries a line of writing and a band of torn-lip fibre
+steps of the same size, shape and spacing. With no sidecar both are found and the fibre is counted
+as text below its floor. With the writing declared, the fibre is gone, 12 marks are counted outside
+text, and the writing reads **12.81:1 — the same number it reads on a page with no lip on it at
+all**, which is the half that makes it a filter rather than a fudge. Then the re-break: declare the
+lip as text too and the failures come straight back. Without that last check the second is
+satisfied by a tool that has quietly stopped finding anything, which is the one way this could hide
+true findings instead of false ones. It also checks that a sidecar written for another frame is
+refused rather than used.
+
+**`app/test/the_app_says_where_its_words_are_test.dart`** holds the geometry to what the framework
+says the same paragraph's rect is. The bug it exists to catch is silent, and this code had it:
+`getTransformTo(view)` already lands in device pixels, because `RenderView` applies the ratio in
+its own paint transform, so multiplying by it again puts every line three times too far down the
+page. Nothing throws. The JSON looks fine. Legibility just quietly measures less and less. Putting
+it back fails two of the four tests.
+
+### Declaring what is painted, not what is built
+
+The first version walked every child in the tree, and `app.dart` keeps all five regions alive in an
+`IndexedStack`. On a real `02_chat` that declared **233 lines, 127 of them overlapping another by
+more than half**, with `wake me`, `quietly` and `not at all` appearing fourteen times each — five
+screens of writing stacked on top of one another, every line of it a licence to read pixels where a
+hidden paragraph *would* be. That is exactly the hole this item exists to close, reopened from the
+other side.
+
+`RenderObject.paintsChild` is the framework's own answer and covers opacity, `Offstage`,
+`Visibility` and a list child kept alive but scrolled out of its viewport. `RenderIndexedStack` is
+the one that does not implement it — it paints one child and says so nowhere but in its own
+`paintStack` — so it is asked directly. 233 lines → 67, 127 overlaps → 9.
+
+### What it reads, on a real still
+
+Built the seeded PWA, served it, ran the `02_chat` scene with `--out-dir` pointed at scratch.
+`evidence/` was not written to.
+
+```
+                      found-by-shape   declared
+  runs                      93             45
+  below floor               29             10
+  worst ink_core          1.03           1.02
+  median ink_core         7.77           7.65
+  marks outside text         —            186
+  declared lines             —             67
+```
+
+Audited one by one rather than summarised, because "29 → 10" is exactly the shape of a number that
+is hiding something. **Of the 29: nineteen touch no declared line at all**, and are not writing by
+construction. Ten touch declared text and **nine are still reported**. Exactly one is not: a
+1014×63 band at 238,1882 reading 1.38:1 — eight times the width of a line of writing — which merely
+clipped the corner of a `Wed 22 Apr · 16:40` timestamp, and that timestamp is itself still reported,
+failing at 4.30:1. One finding lost, and it was a sheet edge.
+
+The ten that remain are nameable, which is the whole point:
+
+```
+  1.02:1  'Wed 22 Apr · 16:44'                              body   hand
+  1.14:1  'week one, and the room smells right again'       body   hand
+  1.27:1  'write something'                                 body   hand
+  1.31:1  'when is the exam. which day in may. i want it…'  body   hand
+  1.89 · 2.71 · 3.43 · 4.30 · 4.45 · 4.48   five more timestamps
+```
+
+Six of the ten are message timestamps. That is a finding a firing can act on, and it did not exist
+as a sentence before today — firing 9 had to crop PNGs at 300% to say anything about these boxes at
+all.
+
+### A quantity nobody could see before
+
+**45 runs read against 67 lines declared.** Twenty-two lines the app painted produce no reading at
+all, because no mark in them clears `INK_DELTA` or they are single short words the `n < 2` filter
+drops. Whether that is faint text going unmeasured or the size filters doing their job is **not
+established here**, and it is written into the queue item as a question rather than a finding. It is
+the first time the denominator has been knowable: before the sidecar there was no way to ask how
+much of the writing on a screen the tool never looked at.
+
+### The item's measurement had to be restated, and why that is not moving the goalposts
+
+`writing-is-not-the-same-as-texture` was filed with a `legibility_delta.py` gate: new-run failure
+rate within 1.5× of the matched-run rate. That gate **cannot be run once the fix is in**, because
+the fix is that there are no new runs to rate — a run is a declared line, and fibre does not declare
+one. Chasing the old wording would mean building something that still guesses.
+
+The restated measurement is three parts and all three have to be quoted together: the unchanged
+path still reproduces 759/233 byte-identical; the selftest passes including its re-break; and on a
+real capture taken with the handle, every reported failure carries a `says` that is writing and
+every failure lost against `--text-runs off` is accounted for one by one, the way the one on
+`02_chat` was. The first two are done. **The third needs a capture and is OBSERVE's.**
+
+The item stays **open**, at attempts 2.
+
+### For whoever runs next
+
+The stage is IMPLEMENT and eight items are open. The order firing 9 set still holds for what is
+left, with one change at the top:
+
+1. **The next OBSERVE is now worth a great deal more than it was.** The library is finished and
+   under one lamp, and the ruler no longer disagrees with itself between runs. Every measurement in
+   `evidence/` is stale against both. When the queue drains, that capture answers the owner's two
+   complaints with an instrument that can be trusted — and it closes part 3 of
+   `writing-is-not-the-same-as-texture` on the way past.
+2. **`the-gallery-loses-its-pictures-under-load`** — has the committed partial instance from firing
+   8 to debug against, and now has a Flutter toolchain that is known to work in this container.
+3. **`the-corrected-lamp-pins-the-red-channel`** — still ADDRESS's to rank, not an IMPLEMENT
+   firing's to take on the side. Note that the six failing timestamps above are a *candidate*
+   observation for its legibility hypothesis and nothing more; do not write it down as support.
+
+Three things about the container, all cheap and all learned the hard way here:
+
+- The shallow-clone-that-reads-like-a-fork happened for the **third** time. `WORKER_PROMPT.md` §0's
+  amendment held and cost two minutes instead of a slice of the firing. Leave it exactly as it is.
+- `flutter test` fails to build its asset bundle in a fresh container until
+  `python3 tools/pack_assets.py --seed=year` has run, and it **exits 0 while doing so** — the
+  failure is nine lines of `unable to find directory entry in pubspec.yaml` and then
+  `Failed to build asset bundle`, with no test having run and no non-zero status to notice it by.
+  Pack first. `pip install opencv-python-headless` before that, or `pack_assets.py` dies on
+  `import cv2` two thirds of the way in.
+- `flutter test` rewrites `evidence/coldstart.json` and `evidence/reliability.json` with this
+  container's timestamps and ports. Those are not your change; `git checkout evidence/` before
+  every commit, or a firing records a measurement that no capture took.
+
+Nothing is blocked. Nothing in `asks[]` moved.
+
+**Lease released.**
