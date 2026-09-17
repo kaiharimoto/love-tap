@@ -904,3 +904,119 @@ the case for spending a firing on them before a capture remains weak.
 will still read 0.0181 until then, and that is the correct state for it to be in: it is the last
 number this build actually measured, and replacing it with one taken over a lamp boundary would
 have been worse than leaving it stale.
+
+## Firing 7 · cycle 3 · IMPLEMENT · 2026-09-17
+
+Step 0 failed on the first attempt and was not a credential failure, which is the case
+`WORKER_PROMPT.md` §0 warns about by name and is worth one paragraph because the warning was
+earned again. The container's checkout was a **shallow clone fifty commits behind** `origin`, so
+`git push --dry-run` came back `non-fast-forward` and `git merge-base` reported no common ancestor
+at all — the shared history was simply cut off by `.git/shallow`. It reads exactly like two
+divergent branches. The tell is the server's own words in the rejection: *"the tip of your current
+branch is behind its remote counterpart"*, which is an ancestry claim only the server can make and
+the shallow client cannot. Fast-forwarded to `5a89bab`, re-ran the dry run, `Everything
+up-to-date`. Also worth writing down: **bare `git fetch origin` hung again**, exactly as firing 4
+recorded, and the branch refspec answered in seconds. The file already says this; it is true.
+
+### The library is lit by one lamp, for everything a still can see
+
+The day tear family is finished: 56 lit edges and 56 contact shadows at 1400/48 under the corrected
+5080 K room, against the 18 firing 6 left. Thirty-eight tears in two hours fifty-five minutes, 4.6
+minutes apiece over the whole run and 3.5 once the bootstrap and the test suite stopped sharing the
+four cores — so firing 6's 4.1 and this firing's 4.6 are the same number measured through different
+amounts of contention, and a firing that renders and tests at once should expect to pay about a
+third more per tear in that window.
+
+`assets/objects`, `assets/paper`, `assets/shell` and `seed/photos` were re-measured rather than
+assumed, and were already clean. **What remains is `assets/folds` and nothing else.**
+
+That changes what the next firing may do, and it is the whole point of the last three. `assets/folds`
+is 240 frames and feeds `06_unfolding.mp4` alone; `tools/check/palette.py` reads stills and no fold
+frame appears in one. So the chroma numbers a capture takes now measure a single illuminant. The
+argument firing 6 made for withholding the capture — that a library lit by two lamps averages two
+lighting conditions and produces a number meaning neither — no longer applies to any still in the
+set. `evidence/palette.json` can stop reading 0.0181. `tools/check/surfaces.py` *does* read the fold
+frames, so folds are still owed for `material_truth` and for `surfaces-folds-family`; they are not
+owed for the chroma floors, and the two should not be confused again.
+
+### The bits step had been doing nothing, and said nothing about it
+
+The backlog's last step printed `assets/bits: 14 already relit, 8 to render`, finished in **one
+second**, and then printed `restored 8 file(s) the generator did not rebuild`. No error anywhere.
+
+`bits.py`'s `--skip-existing` asked whether `{name}.png` was on disk. `render_bit` writes four files
+for a bit — the colour pass and the contact shadow, under each of the two lights. `render_queue6.sh`
+had pruned eight `*_shadow.png` whose colour pass was still there, so the generator skipped those
+bits outright and `restore_missing` put the stale shadows back. This is the same hole `tear_relief.py`
+had, which firing 6 found the same way: by running the thing and reading what it said. Closed the
+same way, and `bits.py` gains `--conditions` so the dusk rig this backlog exists to leave alone is
+left alone. Re-broken to check it: before, all eleven bits print "already rendered" and none of the
+eight files come back; after, the three whose four files are complete skip and exactly the eight
+render.
+
+A second, smaller one in the same place: `run()`'s filter matched `bit:` and `bits.py` prints
+`bits:`, so that family's output never reached the log at all. That is why the step looked silent
+rather than skipped, and it is why it took a re-run to see.
+
+### The resume ledger has a blind spot, and it cannot be rendered away
+
+The eight bit shadows come back **bit-for-bit identical** under the corrected lamp — `maxdiff 0.0000`
+on every channel of every one. The contact shadow pass carries no colour from the illuminant. So it
+never changes, so git never records a change, and `prune_stale` — which infers *already relit* from
+*changed in a commit since `a6f46fd`* — will report those eight stale forever, however many times a
+firing renders them.
+
+The ledger is sound for everything the lamp moves and structurally cannot clear an asset the lamp
+does not move. The eight are verified relit by reproduction instead, which is the stronger evidence
+anyway. Whoever runs the backlog again: **eight bit shadows reported stale is the expected reading,
+not work.**
+
+### A queue item was wrong in the direction that costs an asset
+
+`four-tears-have-a-dusk-shadow-and-fifty-three-do-not` said that nothing reads a tear's dusk shadow,
+that the four `*_shadow_dusk.png` were the side effect of a missing flag, and — carefully, and to its
+credit — filed the deletion rather than doing it in passing, because removing a committed asset is
+not a thing to do without looking. Looking is what this firing did, because the item's own
+measurement told it to: *grep the app for a dusk tear path*.
+
+There is one. `PaperPiece.build` reads `Light.of(context)` and `_bakedShadow` puts the suffix
+straight into `tearAsset('${tearId}_shadow$suffix')` at `app/lib/material/paper.dart:112`. At dusk
+the app asks for a dusk contact shadow for **every** torn note in the build. Four of the fifty-six
+exist. The other fifty-two draw nothing, silently, because the load carries `errorBuilder: none` —
+so on one dusk screen some notes sit on the desk and some float, and no check, no test and no
+capture has ever been able to tell. `app/lib/material/objects.dart:118` is the same construction and
+is one file short, `obj_plaster_shadow_dusk`. Deleting the four would have removed the only four
+that work.
+
+`MaterialLibrary` carries a guard for each of these — `hasTearRender`, `hasObjectShadow` — and
+**neither is called from anywhere.** A guard nobody calls and a render nobody made fail together
+and in silence.
+
+So the gate went where the app cannot see: `tools/check/dusk_shadows.py` takes each place the app
+appends `_dusk`, cites the line that does it, and requires the file. It names 53 today; `paper_stock`
+(27 of 27) and `desk_plate` (1 of 1) pass, so this is two families that never had a dusk pass rather
+than a habit of the build. Re-broken by hiding `assets/paper/lined_01_dusk.webp`: `paper_stock` went
+from `ok 27 of 27` to `MISSING 26 of 27` and printed the file. It is wired into `capture.sh` beside
+the illuminant gate.
+
+The app half is a widget test, because the cheap way to make a completeness check pass is to stop
+asking for the asset. Re-broken by dropping `$suffix` from `paper.dart:112`: the dusk case fails and
+names the day asset it got instead. 109 tests pass with it.
+
+The renders are 2.1 hours and no decision, and they are queued rather than done, because the day
+tear backlog held the machine for this firing. Filed as `fifty-two-notes-have-no-shadow-at-dusk`.
+
+### What the next firing should expect
+
+The stage is still IMPLEMENT and the queue is not drained. The two things now worth a firing, in
+this order:
+
+1. **Take the capture.** It is what four firings have been waiting on and the library is finally
+   consistent for it. `evidence/palette.json` and `evidence/legibility.json` are both stale against
+   a lamp that has changed underneath them, and until they are re-taken the owner's second complaint
+   is unanswerable rather than unanswered. Legibility is the one to watch: 25.3% of runs below floor
+   is the number to hold or beat, and the relight must not have bought warmth with it.
+2. **The 53 dusk shadows**, which are CPU and no decision, and `assets/folds`, which is the last
+   family under the old lamp and the whole of `surfaces-folds-family`.
+
+Neither is blocked. Nothing in `asks[]` moved.
