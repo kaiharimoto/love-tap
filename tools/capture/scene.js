@@ -91,6 +91,66 @@ function ensure(p) {
     await page.waitForTimeout(ms === undefined ? (scene.settle || 700) : ms);
   }
 
+  // Beside every still, what the app says it drew. tools/check/legibility.py finds writing by
+  // looking for marks shaped like glyphs — its own docstring says so — and a surface that
+  // acquires texture acquires glyph-shaped marks, which is how 137 runs that were torn fibre
+  // arrived in one capture and outnumbered the change they were being used to judge. The app
+  // knows where its text is; this writes it down at the moment of the shot, when it is true.
+  //
+  // Written as a sidecar rather than folded into the scene log because it is per-artifact and the
+  // tool reads it per-artifact: `02_chat.png` is measured against `02_chat.text.json`.
+  //
+  // A shot with a `clip` is a crop of the viewport, so the declared rects are shifted into the
+  // crop's own coordinates and anything outside it is dropped — otherwise the tool would be
+  // handed permission to look at pixels that are not in the file.
+  async function textSidecar(out, clip) {
+    const raw = await page.evaluate(() => window.__deskTextRuns && window.__deskTextRuns())
+      .catch((e) => 'threw: ' + e);
+    if (!raw || typeof raw !== 'string' || raw.startsWith('threw:')) {
+      // An older build with no handle is not a failed scene; it is a still the tool will measure
+      // the way it always did. Said out loud so it is never mistaken for an empty screen.
+      problems.push('text runs: ' + (raw ? String(raw).slice(0, 200) : 'no __deskTextRuns handle'));
+      return null;
+    }
+    let runs;
+    try {
+      runs = JSON.parse(raw);
+    } catch (e) {
+      problems.push('text runs: unparseable: ' + String(e).slice(0, 200));
+      return null;
+    }
+    const dpr = vp.dpr;
+    const box = clip
+      ? { x: Math.round(clip.x * dpr), y: Math.round(clip.y * dpr),
+          w: Math.round(clip.width * dpr), h: Math.round(clip.height * dpr) }
+      : { x: 0, y: 0, w: Math.round(vp.width * dpr), h: Math.round(vp.height * dpr) };
+    const shift = (r) => {
+      const x0 = Math.max(r[0] - box.x, 0);
+      const y0 = Math.max(r[1] - box.y, 0);
+      const x1 = Math.min(r[0] + r[2] - box.x, box.w);
+      const y1 = Math.min(r[1] + r[3] - box.y, box.h);
+      return (x1 - x0) >= 1 && (y1 - y0) >= 1 ? [x0, y0, x1 - x0, y1 - y0] : null;
+    };
+    const kept = [];
+    for (const run of runs) {
+      const rect = shift(run.rect);
+      if (!rect) continue;
+      const lines = (run.lines || []).map(shift).filter(Boolean);
+      kept.push(Object.assign({}, run, { rect, lines: lines.length ? lines : [rect] }));
+    }
+    const sidecar = out.replace(/\.png$/, '') + '.text.json';
+    ensure(sidecar);
+    fs.writeFileSync(sidecar, JSON.stringify({
+      of: path.basename(out),
+      size: [box.w, box.h],
+      dpr,
+      declared: kept.length,
+      offscreen: runs.length - kept.length,
+      runs: kept,
+    }, null, 1));
+    return kept.length;
+  }
+
   for (const step of scene.steps) {
     const started = Date.now();
     switch (step.do) {
@@ -158,7 +218,8 @@ function ensure(p) {
         ensure(out);
         await settle(step.settle);
         await page.screenshot({ path: out, fullPage: false, clip: step.clip });
-        log.shots.push({ out: path.relative(ROOT, out), clip: step.clip || null });
+        const declared = await textSidecar(out, step.clip);
+        log.shots.push({ out: path.relative(ROOT, out), clip: step.clip || null, text_runs: declared });
         break;
       }
       case 'frames': {

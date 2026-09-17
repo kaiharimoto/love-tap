@@ -24,6 +24,27 @@ What it cannot see is everything that actually happens:
 So this reads the captured artifacts instead of the source, finds the marks that are shaped like
 writing, and measures each one against the pixels immediately around it.
 
+Finding writing by its shape is the part that went wrong, and it went wrong in the way the line
+above admits it could. A surface that acquires texture acquires glyph-shaped marks: when the
+corrected day illuminant stopped the torn paper lips clipping to flat white, their fibre steps
+became marks, and 137 runs arrived in one capture that had never existed, 102 of them below the
+floor — a 74% failure rate against 21% on the 622 runs that were really there. The instrument's
+noise was larger than the change it was being used to judge.
+
+The app knows where its text is. `window.__deskTextRuns` (app/lib/capture/hooks.dart) walks the
+render tree at the moment of the shot and writes every drawn paragraph's line rects, type size in
+device pixels, font and declared ink beside the PNG as `<name>.text.json`. Where that sidecar
+exists, a mark is measured only if it sits inside a line the app says it drew, and a run is a
+declared line rather than a group of shapes that happened to queue up. Nothing about the
+measurement changes: the contrast is still read off the real pixels, with the real antialiasing and
+the real fibre in the ground, because that is the whole reason for reading the artifact. What the
+sidecar changes is only *where this is allowed to look*.
+
+Where the sidecar does not exist — every capture taken before the handle did — this behaves exactly
+as it always has, so an older artifact is still measurable and `legibility_delta.py` still pairs.
+Which of the two happened is reported per artifact as `text_runs`, because a number measured by one
+and compared against the other is not a comparison.
+
 Two numbers are reported per run, because they answer two different questions:
 
   ink_core    the darkest tenth of the stroke against its ground. This is the fair comparison to
@@ -107,6 +128,17 @@ GROUND_HALO = 2
 # letters put a line of ordinary body text at 1.66:1 when its pair is 4.55:1. So the pale pass
 # only reports where the ground is genuinely dark — the desk, a photograph, a dusk render.
 LIGHT_ON_DARK_MAX_GROUND = 0.30
+
+# How far outside a declared line a mark may sit and still be that line's. A line box runs from
+# the ascent to the descent of the type, so an upright glyph is comfortably inside it; what needs
+# the slack is the two hands, which are slanted and pressure-varying and overhang their own metrics
+# at the ends of strokes, and the antialiasing, which is most of a hairline. Expressed as a
+# fraction of the line's own height so it means the same thing on a 12.5pt margin note and a 19pt
+# hand, with a floor in pixels for the short ones. It is deliberately generous: this test exists to
+# throw out fibre in the middle of a torn lip, which is nowhere near a line of writing, not to
+# adjudicate a millimetre at the end of a descender.
+DECLARED_PAD_FRAC = 0.35
+DECLARED_PAD_MIN = 6
 
 # The ground is taken over every pixel in the ring box and not only the ones outside the stroke
 # mask. That is deliberate and it was wrong the first time: in a dense paragraph the pixels around
@@ -194,6 +226,79 @@ def label(ink):
     return ys, xs, roots
 
 
+def declared_lines(sidecar):
+    """Every declared line in one sidecar, as arrays of y0, y1, x0, x1 and the run it belongs to.
+
+    Flattened across paragraphs because the unit being matched is the line: a paragraph of four
+    lines is four separate readings, each against its own ground, which is what a person does and
+    what this file has always reported.
+    """
+    y0, y1, x0, x1, owner = [], [], [], [], []
+    for i, run in enumerate(sidecar.get("runs", [])):
+        for rect in run.get("lines") or [run.get("rect")]:
+            if not rect:
+                continue
+            x, y, w, h = rect
+            if w < 1 or h < 1:
+                continue
+            y0.append(y); y1.append(y + h); x0.append(x); x1.append(x + w); owner.append(i)
+    return (np.array(y0, dtype=np.float64), np.array(y1, dtype=np.float64),
+            np.array(x0, dtype=np.float64), np.array(x1, dtype=np.float64),
+            np.array(owner, dtype=np.int64))
+
+
+def line_of(boxes, lines):
+    """Which declared line each glyph box belongs to, or -1 for none of them.
+
+    A box is placed by its centre inside the padded line, and where two padded lines both take it
+    — set solid, they overlap — the nearer centre wins. Returns one index per box, into the
+    flattened line arrays.
+    """
+    ly0, ly1, lx0, lx1, _ = lines
+    n = len(boxes)
+    if n == 0 or ly0.size == 0:
+        return np.full(n, -1, dtype=np.int64)
+    b = np.asarray(boxes, dtype=np.float64)            # (n, 4) as y0, y1, x0, x1
+    cy = ((b[:, 0] + b[:, 1]) / 2.0)[:, None]
+    cx = ((b[:, 2] + b[:, 3]) / 2.0)[:, None]
+    pad = np.maximum(DECLARED_PAD_MIN, DECLARED_PAD_FRAC * (ly1 - ly0))[None, :]
+    inside = ((cy >= ly0[None, :] - pad) & (cy <= ly1[None, :] + pad) &
+              (cx >= lx0[None, :] - pad) & (cx <= lx1[None, :] + pad))
+    mid = ((ly0 + ly1) / 2.0)[None, :]
+    dist = np.where(inside, np.abs(cy - mid), np.inf)
+    best = np.argmin(dist, axis=1)
+    return np.where(np.isfinite(dist[np.arange(n), best]), best, -1)
+
+
+def group_by_line(boxes, owner, lines, sidecar):
+    """One run per declared line that actually has marks in it, in reading order.
+
+    The run's own box is the union of the marks found in that line, not the declared rect: the
+    ground is sampled around the ink, and a declared line box runs from ascent to descent across
+    the full measure of the text, which on a short last line is mostly paper.
+
+    A declared line with no marks in it produces nothing. That is not a silence to worry about --
+    it is a paragraph behind another sheet, or scrolled under the fold, or inside a zero opacity.
+    The handle declares what was drawn, not what can be seen, and the two are reconciled here by
+    intersection.
+    """
+    runs = sidecar.get("runs", [])
+    _, _, _, _, line_owner = lines
+    by_line = {}
+    for i, b in enumerate(boxes):
+        by_line.setdefault(int(owner[i]), []).append(b)
+    out = []
+    for li in sorted(by_line):
+        bs = by_line[li]
+        y0 = min(b[0] for b in bs)
+        y1 = max(b[1] for b in bs)
+        x0 = min(b[2] for b in bs)
+        x1 = max(b[3] for b in bs)
+        decl = runs[int(line_owner[li])] if line_owner.size else None
+        out.append((y0, y1, x0, x1, len(bs), decl))
+    return out
+
+
 def runs_of(boxes, gap=26):
     """Group glyph boxes that sit on one line into runs, left to right."""
     out = []
@@ -220,7 +325,7 @@ def marks(gam, ground_gam, polarity):
     return gam > (ground_gam + INK_DELTA)
 
 
-def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE):
+def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
     with Image.open(path) as im:
         rgb = np.asarray(im.convert("RGB"))
     H, W = rgb.shape[:2]
@@ -242,7 +347,24 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE):
     # out of the ground, and the grain *is* the ground -- its spread is precisely what
     # `ground_swing` is asking about. So only the shapes that survived the size and aspect filters
     # come out, grown by GROUND_HALO to take their antialiasing with them.
+    if sidecar is not None:
+        # A sidecar written against a different frame is worse than no sidecar at all: it would
+        # hand this permission to look at pixels that are somewhere else in this image. Refuse
+        # rather than measure, because the failure is silent in both directions -- runs that are
+        # not there, and real text that is never looked at.
+        declared_size = list(sidecar.get("size") or [])
+        if declared_size != [W, H]:
+            raise ValueError(
+                f"{os.path.basename(path)}: its text sidecar was written for {declared_size} and "
+                f"the image is {[W, H]}")
+    lines = declared_lines(sidecar) if sidecar else None
+    if lines is not None and lines[0].size == 0:
+        # A sidecar that declares nothing is a screen with no writing on it, which is a fact and
+        # not a missing file. Everything the mark detector finds here is the surface.
+        lines = (np.empty(0), np.empty(0), np.empty(0), np.empty(0), np.empty(0, dtype=np.int64))
+
     found = []
+    outside = 0
     glyph_px = np.zeros((H, W), dtype=bool)
     for polarity in ("dark", "light"):
         mask = marks(gam, ground_gam, polarity)
@@ -256,7 +378,7 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE):
         starts = np.searchsorted(roots, np.unique(roots))
         bounds = list(starts) + [roots.size]
 
-        boxes = []
+        boxes, pixels = [], []
         for i in range(len(bounds) - 1):
             a, b = bounds[i], bounds[i + 1]
             area = b - a
@@ -271,16 +393,41 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE):
             if w > 14 * h or h > 14 * w:      # a printed rule, a tear edge, a stem of nothing
                 continue
             boxes.append((y0, y1, x0, x1))
+            pixels.append((yy, xx))
+
+        # Where the app declared its text, a shape that survived the size and aspect filters is
+        # writing only if it sits in a line the app says it drew. The rest go back into the ground
+        # they came out of -- which is the correct place for them, and the same reasoning as the
+        # note above about the grain: fibre IS the surface, and taking it out of the ground would
+        # be measuring the paper against a version of itself with its texture removed.
+        if lines is not None:
+            owner = line_of(boxes, lines)
+            outside += int((owner < 0).sum())
+            keep = [i for i in range(len(boxes)) if owner[i] >= 0]
+            boxes = [boxes[i] for i in keep]
+            pixels = [pixels[i] for i in keep]
+            owner = owner[[i for i in keep]] if keep else np.empty(0, dtype=np.int64)
+        else:
+            owner = None
+
+        for yy, xx in pixels:
             glyph_px[yy, xx] = True
-        found.append((polarity, mask, boxes))
+        found.append((polarity, mask, boxes, owner))
 
     is_ground = ~dilate(glyph_px, GROUND_HALO)
 
     out = []
     seen = 0
-    for polarity, mask, boxes in found:
+    for polarity, mask, boxes, owner in found:
         seen += len(boxes)
-        for y0, y1, x0, x1, n in runs_of(boxes):
+        # A run is a declared line's worth of marks where there is a sidecar, and a group of
+        # shapes that queued up where there is not. The first is the unit the app authored; the
+        # second is runs_of's guess at it, kept unchanged so an older artifact reads as it did.
+        if owner is not None:
+            grouped = group_by_line(boxes, owner, lines, sidecar)
+        else:
+            grouped = [(r[0], r[1], r[2], r[3], r[4], None) for r in runs_of(boxes)]
+        for y0, y1, x0, x1, n, decl in grouped:
             ring = max(RING, (y1 - y0) // 2)
             ry0, ry1 = max(0, y0 - ring), min(H, y1 + ring)
             rx0, rx1 = max(0, x0 - ring), min(W, x1 + ring)
@@ -354,12 +501,19 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE):
             # connected word, which is what a cursive hand produces.
             if n < 2 and width < 2 * height:
                 continue
-            floor = floor_large if height >= LARGE_PX else floor_body
-            out.append({
+            # Which floor this run is held to. The size of type is a thing the app decided, and
+            # where it has said so that is what is read: `px` is the point size in the
+            # screenshot's own pixels. Measuring it off the bounding box of the found marks -- all
+            # this could do before -- reads a line with no ascender and no descender in it as
+            # several points smaller than it is, and asks a large heading for the body floor.
+            size_px = float(decl["px"]) if decl and decl.get("px") else float(height)
+            large = size_px >= LARGE_PX
+            floor = floor_large if large else floor_body
+            entry = {
                 "box": [x0, y0, x1 - x0, height],
                 "glyphs": n,
                 "polarity": polarity,
-                "role": "large" if height >= LARGE_PX else "body",
+                "role": "large" if large else "body",
                 "floor": floor,
                 # What the floors gate on: measured against the adversarial end of the ground
                 # wherever the ground moves enough to have one.
@@ -372,8 +526,28 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE):
                 "ground_swing": swing,
                 "ground_lum": round(gated, 4),
                 "ground_lum_ring": round(g, 4),
-            })
-    return {"runs": out, "glyphs": seen, "size": [W, H]}
+            }
+            if decl:
+                # So a failure can be read as a sentence rather than cropped out of the PNG at
+                # 300%, which is what firing 9 had to do to establish that the extra runs were
+                # fibre. This is the app's own answer to "what does it say", not an inference.
+                entry["says"] = decl.get("text", "")
+                entry["px"] = decl.get("px")
+                entry["points"] = decl.get("points")
+                entry["family"] = decl.get("family", "")
+                entry["hand"] = decl.get("role", "")
+                entry["ink"] = decl.get("ink", "")
+            out.append(entry)
+    result = {"runs": out, "glyphs": seen, "size": [W, H]}
+    if lines is not None:
+        result["text_runs"] = "declared"
+        result["declared_lines"] = int(lines[0].size)
+        # The size of the problem this sidecar exists to remove: shapes that passed every test for
+        # being a glyph and are not in any line the app drew.
+        result["marks_outside_text"] = outside
+    else:
+        result["text_runs"] = "found-by-shape"
+    return result
 
 
 def main():
@@ -385,6 +559,11 @@ def main():
     ap.add_argument("--dusk", default="",
                     help="comma-separated artifacts captured under the dusk rig; they are held to "
                          "the dusk floors in docs/COLOR.md section 6 rather than the day ones")
+    ap.add_argument("--text-runs", default="auto", choices=("auto", "off", "require"),
+                    help="use the <name>.text.json the capture wrote beside each still, which is "
+                         "what the app says it drew. auto: where there is one. off: never, which "
+                         "is how every capture before the handle existed was measured and the "
+                         "only fair way to compare against one. require: fail if any is missing")
     args = ap.parse_args()
     dusk = {n.strip() for n in args.dusk.split(",") if n.strip()}
 
@@ -404,28 +583,50 @@ def main():
         "artifacts": {},
         "failures": [],
     }
+    missing_sidecars = []
     for path in paths:
         name = os.path.basename(path)
+        sidecar = None
+        if args.text_runs != "off":
+            side = path[:-4] + ".text.json" if path.endswith(".png") else path + ".text.json"
+            if os.path.exists(side):
+                with open(side, encoding="utf-8") as f:
+                    sidecar = json.load(f)
+            else:
+                missing_sidecars.append(name)
         m = measure(path,
                     FLOOR_BODY_DUSK if name in dusk else FLOOR_BODY,
-                    FLOOR_LARGE_DUSK if name in dusk else FLOOR_LARGE)
+                    FLOOR_LARGE_DUSK if name in dusk else FLOOR_LARGE,
+                    sidecar=sidecar)
         runs = m.get("runs", [])
         bad = [r for r in runs if r["ink_core"] < r["floor"]]
         worst = min((r["ink_core"] for r in runs), default=None)
         report["artifacts"][name] = {
             "runs": len(runs),
             "below_floor": len(bad),
+            # Which instrument read this artifact. A number taken one way and compared against a
+            # number taken the other is not a comparison, and the whole of firing 9 was spent
+            # establishing that after the fact.
+            "text_runs": m.get("text_runs"),
+            "declared_lines": m.get("declared_lines"),
+            "marks_outside_text": m.get("marks_outside_text"),
             "worst_ink_core": worst,
             "median_ink_core": round(float(np.median([r["ink_core"] for r in runs])), 2) if runs else None,
             "median_as_rendered": round(float(np.median([r["ink_median"] for r in runs])), 2) if runs else None,
             "detail": sorted(bad, key=lambda r: r["ink_core"])[:60],
         }
         for r in bad:
-            report["failures"].append({
+            f = {
                 "artifact": name, "box": r["box"], "role": r["role"], "polarity": r["polarity"],
                 "ink_core": r["ink_core"], "ink_median": r["ink_median"], "floor": r["floor"],
                 "ink_core_ring": r["ink_core_ring"], "ground_swing": r["ground_swing"],
-            })
+            }
+            if "says" in r:
+                f["says"] = r["says"]
+                f["hand"] = r["hand"]
+                f["ink"] = r["ink"]
+                f["px"] = r["px"]
+            report["failures"].append(f)
 
     report["failures"].sort(key=lambda f: f["ink_core"])
     # How much of the tally is the adversarial reading rather than the ring one. A firing that
@@ -438,7 +639,22 @@ def main():
     report["read"] = len(paths)
     report["total_runs"] = sum(a["runs"] for a in report["artifacts"].values())
     report["total_below_floor"] = len(report["failures"])
+    report["text_runs"] = args.text_runs
+    report["measured_from_declared_text"] = sum(
+        1 for a in report["artifacts"].values() if a.get("text_runs") == "declared")
+    report["without_a_sidecar"] = sorted(missing_sidecars)
+    report["marks_outside_text"] = sum(
+        a["marks_outside_text"] or 0 for a in report["artifacts"].values()
+        if a.get("marks_outside_text") is not None)
     report["ok"] = not report["failures"]
+
+    if args.text_runs == "require" and missing_sidecars:
+        print("legibility: --text-runs require, and these stills have no <name>.text.json beside "
+              "them:\n  " + "\n  ".join(sorted(missing_sidecars)) +
+              "\nThey were captured before window.__deskTextRuns existed, or the scene did not "
+              "write one. Re-capture, or measure with --text-runs off and compare only against "
+              "another run taken the same way.", file=sys.stderr)
+        return 2
 
     text = json.dumps(report, indent=1)
     if args.out:
@@ -454,9 +670,10 @@ def main():
         print(f"\n{len(report['failures'])} text run(s) below their contrast floor:", file=sys.stderr)
         for f in report["failures"][:args.worst]:
             x, y, w, h = f["box"]
+            says = f"  {f['says'][:40]!r}" if f.get("says") else ""
             print(f"  {f['artifact']:<24} {f['ink_core']:>5.2f}:1 (floor {f['floor']}, "
                   f"{f['ink_median']:.2f}:1 as rendered)  {f['role']:<5} {f['polarity']:<5} "
-                  f"{w}x{h} at {x},{y}", file=sys.stderr)
+                  f"{w}x{h} at {x},{y}{says}", file=sys.stderr)
         return 1
     print(f"{report['total_runs']} text runs, every one of them above its floor")
     return 0

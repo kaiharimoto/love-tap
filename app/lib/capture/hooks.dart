@@ -6,7 +6,9 @@
 // CAPTURE=true, so a real build has nothing to reach.
 import 'dart:async';
 
+import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/widgets.dart';
 
 import '../flags.dart';
 import '../material/assignment.dart';
@@ -201,6 +203,145 @@ class CaptureHooks {
       // or a sequence whose frames never decoded, and from the outside they look the same
       'fold': FoldFrames.state,
     };
+  }
+
+  /// Every text run the app has drawn, in the pixel coordinates of the screenshot about to be
+  /// taken of it.
+  ///
+  /// `tools/check/legibility.py` finds writing by looking for marks shaped like glyphs, and says
+  /// so in its own docstring. That was the only thing it could do from a PNG, and it is why the
+  /// capture at `097bea5` grew 137 runs that had never existed: when the corrected illuminant
+  /// stopped the torn paper lips clipping to flat white, their fibre steps stopped being flat and
+  /// became marks. 102 of those 137 were below the floor, a 74% failure rate against 21% on the
+  /// 622 runs that were really there, and the noise was larger than the change it was being used
+  /// to judge.
+  ///
+  /// The app knows where its text is. This says so, so a run is declared rather than guessed at.
+  /// Nothing here measures anything: the contrast arithmetic stays in the tool, against the real
+  /// pixels, because the whole point of reading the artifact is that the antialiasing and the
+  /// fibre and the shadow are in it. All this changes is *where the tool is allowed to look*.
+  ///
+  /// One entry per paragraph, with its line boxes, because a line is the unit a person reads and
+  /// the unit `runs_of` was already grouping toward. Rects are integer device pixels — the PNG's
+  /// own coordinate space, logical pixels times the view's devicePixelRatio — and are clipped to
+  /// the view, so a paragraph scrolled half off the bottom declares only the half that was drawn.
+  ///
+  /// What is deliberately NOT here: any claim that a declared run is visible. A paragraph inside
+  /// a zero opacity, or behind another sheet, is still in the render tree and still declared. That
+  /// is safe in the only direction that matters, because the tool intersects this with the marks
+  /// it finds: a run nobody can see contributes no marks and produces no reading. Declaring is
+  /// permission to measure, not an assertion that there is something to measure.
+  ///
+  /// Static, like `DrivenClock.step`, because it reads the framework rather than the app: it needs
+  /// no spine, no transport and no library, and a test of it should not have to stand one up.
+  static List<Map<String, dynamic>> textRuns() {
+    final out = <Map<String, dynamic>>[];
+    for (final view in RendererBinding.instance.renderViews) {
+      // The frame is the view's PHYSICAL size, and the transform to the view is already in
+      // physical pixels: `RenderView` converts logical to device in its own paint transform, so
+      // `getTransformTo(view)` lands in the picture's coordinates without anything here
+      // multiplying by the ratio. Doing it again is the exact mistake this is written to avoid,
+      // and it is silent -- every rect comes out a factor of the device pixel ratio too far down
+      // and to the right, which on a screen of writing is somewhere between the lines.
+      final size = view.flutterView.physicalSize;
+      _collectRuns(view, view, view.flutterView.devicePixelRatio, Offset.zero & size, out);
+    }
+    return out;
+  }
+
+  static void _collectRuns(
+      RenderObject node, RenderView view, double dpr, Rect bounds, List<Map<String, dynamic>> out) {
+    if (node is RenderParagraph) _paragraph(node, view, dpr, bounds, out);
+    // Visited even for a paragraph: a RenderParagraph can carry inline widget children, and one
+    // of those can be another paragraph.
+    node.visitChildren((child) => _collectRuns(child, view, dpr, bounds, out));
+  }
+
+  static void _paragraph(
+      RenderParagraph p, RenderView view, double dpr, Rect bounds, List<Map<String, dynamic>> out) {
+    if (!p.attached || !p.hasSize || p.size.isEmpty) return;
+    final span = p.text;
+    // Offsets are counted with the placeholders in, because that is the string the paragraph
+    // indexes by; the emptiness test is taken without them, because a row of inline widgets with
+    // no letters in it is not writing.
+    final indexed = span.toPlainText();
+    final visible = span.toPlainText(includePlaceholders: false).trim();
+    if (visible.isEmpty) return;
+
+    final Matrix4 toView = p.getTransformTo(view);
+    Rect? box(Rect local) {
+      final r = MatrixUtils.transformRect(toView, local).intersect(bounds);
+      if (r.isEmpty || r.width < 1 || r.height < 1) return null;
+      return r;
+    }
+
+    final whole = box(Offset.zero & p.size);
+    if (whole == null) return;
+
+    List<Rect> lines = const [];
+    try {
+      lines = p
+          .getBoxesForSelection(TextSelection(baseOffset: 0, extentOffset: indexed.length))
+          .map((b) => b.toRect())
+          .map(box)
+          .whereType<Rect>()
+          .toList();
+    } catch (_) {
+      // A paragraph whose layout the framework will not hand back a selection for is still a
+      // paragraph; its own rect is a coarser but honest declaration.
+      lines = const [];
+    }
+    if (lines.isEmpty) lines = [whole];
+
+    final style = span.style;
+    final points = style?.fontSize ?? 14.0;
+    out.add({
+      'rect': _px(whole),
+      'lines': [for (final l in lines) _px(l)],
+      // The type size as the app asked for it, and again in the screenshot's own pixels. The
+      // second is the one that matters: legibility.py splits body from large at a device-pixel
+      // height, and until now it took that height off the bounding box of the marks it found,
+      // which for a line with no ascenders or descenders in it is most of a point size short.
+      'points': double.parse(points.toStringAsFixed(2)),
+      'px': double.parse((p.textScaler.scale(points) * dpr).toStringAsFixed(2)),
+      'family': style?.fontFamily ?? '',
+      'role': _role(style?.fontFamily),
+      'ink': _hex(style?.color),
+      // Kept so a failing run can be read as a sentence instead of cropped out of a PNG at 300%,
+      // which is what firing 9 had to do to establish that the extra runs were fibre.
+      'text': visible.length > 64 ? '${visible.substring(0, 63)}…' : visible,
+      'chars': visible.length,
+    });
+  }
+
+  /// A rect already in the picture's own pixels, rounded outward so a mark on the edge of a line
+  /// is inside the line rather than a pixel outside it.
+  static List<int> _px(Rect r) => [r.left.floor(), r.top.floor(), r.width.ceil(), r.height.ceil()];
+
+  /// What kind of writing this is, in the app's own vocabulary and not the tool's.
+  ///
+  /// Only what the font actually settles. `Hands.margin` is `TeoHand` and `Pen.margin` is now the
+  /// same value as `Pen.stamp`, so there is no test here that separates a margin pencil from a
+  /// hand, and inventing one would be the same inference this handle exists to remove.
+  static String _role(String? family) {
+    switch (family) {
+      case 'DeskStamp':
+        return 'stamp';
+      case 'NoorHand':
+      case 'TeoHand':
+        return 'hand';
+      default:
+        return 'printed';
+    }
+  }
+
+  static String _hex(Color? c) {
+    if (c == null) return '';
+    int chan(double v) => (v * 255).round().clamp(0, 255);
+    return '${chan(c.a).toRadixString(16).padLeft(2, '0')}'
+        '${chan(c.r).toRadixString(16).padLeft(2, '0')}'
+        '${chan(c.g).toRadixString(16).padLeft(2, '0')}'
+        '${chan(c.b).toRadixString(16).padLeft(2, '0')}';
   }
 
   /// Let the framework finish what the handle started before the harness takes the shot.
