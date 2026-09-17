@@ -1,6 +1,6 @@
 """blender/folds/fold.py — the fold, unfold and crumple sequences, as rendered geometry.
 
-    bash blender/run.sh blender/folds/fold.py -- --seq unfold_thirds --frames 240 --res 540
+    bash blender/run.sh blender/folds/fold.py -- --seq unfold_thirds --frames 240
     bash blender/run.sh blender/folds/fold.py -- --all
 
 A note opening is the clip that exposes a faked material system, so nothing here is a transform of
@@ -240,11 +240,16 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
     # own entry rather than the directory getting one. They share the sequence's settings and add
     # the frame number, which is the only thing that differs between them.
     manifest.record(out_dir, "blender/folds/fold.py", settings, kind="fold_sequence")
-    for frame_file in sorted(os.listdir(out_dir)):
-        if frame_file.endswith((".png", ".webp")):
-            manifest.record(os.path.join(out_dir, frame_file), "blender/folds/fold.py",
-                            dict(settings, frame=int(os.path.splitext(frame_file)[0])),
-                            kind="fold_frame")
+    # Only the frames this call actually rendered. Listing the directory instead records every
+    # frame that happens to be sitting in it under THIS call's settings, so a chunked run --
+    # which is the only way 240 frames get committed as they land rather than in one three-hour
+    # lump -- writes "resolution: 1440" over frames still on disk at 540. The manifest is the
+    # provenance of the library and it has to be true of a half-finished one too.
+    for frame in range(start, end):
+        frame_path = os.path.join(out_dir, f"{frame:04d}.png")
+        if os.path.exists(frame_path):
+            manifest.record(frame_path, "blender/folds/fold.py",
+                            dict(settings, frame=frame), kind="fold_frame")
 
 
 def main():
@@ -253,7 +258,29 @@ def main():
     ap.add_argument("--seq", choices=list(SEQUENCES))
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--frames", type=int)
-    ap.add_argument("--res", type=int, default=540)
+    # Rendered at 1440 and packed down to 540, because 540 is below what the fibre needs.
+    #
+    # 94 of the 240 frames of unfold_thirds read below tools/check/surfaces.py's 1.2 floor for
+    # paper, 0.912 to 1.197, and the whole of that is render resolution. Measured at firing 10 on
+    # frames 0000, 0150, 0235 and 0238, one variable at a time, the worst frame in the set (0235,
+    # 0.912) reading:
+    #
+    #   540, as committed                     0.912
+    #   540, four times the samples           +0.03     sample count is not the lever
+    #   540, fibre coarsened to the stocks'   -0.09     see below; it is worse, not better
+    #   1080                                  1.946 at source, 1.179 packed to 540 — still short
+    #   1440                                  1.946 at source, 1.384 packed to 540
+    #   1440 at four times the samples        2.047 at source, 1.396 packed to 540
+    #
+    # So 1440/16: the last line is what says 16 samples is converged — quadrupling them moves the
+    # packed frame by 0.012, which is not worth three times the render.
+    #
+    # The obvious reading of "carry the tooth the stocks carry" — that the fold's fibre is too fine
+    # because paper_material's noise scales are in UV and the fold's UV spans 148 mm where a stock's
+    # spans 210 — is REFUTED. Matching the stocks in millimetres (fibre_scale 1100 -> 669) made
+    # every frame worse at both resolutions. The fold's fibre was never too fine for the paper; it
+    # was too fine for 540 pixels.
+    ap.add_argument("--res", type=int, default=1440)
     ap.add_argument("--samples", type=int, default=16)
     ap.add_argument("--condition", default="day")
     ap.add_argument("--start", type=int, default=0)
