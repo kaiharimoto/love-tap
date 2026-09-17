@@ -222,6 +222,28 @@ def build_glue(name, width, seed):
 BUILDERS = {"tape": build_tape, "staple": build_staple, "clip": build_clip, "pin": build_pin, "glue": build_glue}
 
 
+def outputs_of(name, out_dir, conditions=("day", "dusk")):
+    """Every file render_bit will write for these conditions.
+
+    --skip-existing used to ask only whether `{name}.png` was there, and a bit is four files: the
+    colour pass and the contact shadow, under each of the two lights. So a run that had been given a
+    library with `clip_01.png` present and `clip_01_shadow.png` pruned skipped the bit outright and
+    rebuilt neither. Firing 7 watched that happen to eight shadows in the relight backlog:
+    render_queue6.sh deleted them, bits.py declined to render them because their colour pass was
+    still on disk, and the script's own restore_missing put the stale files straight back. The run
+    reported no error at any point, because nothing had gone wrong as far as either half could see.
+
+    tear_relief.py had the same hole and firing 6 closed it. This is the same close: skip a bit only
+    when every file it would write is already there.
+    """
+    paths = []
+    for condition in conditions:
+        suffix = "" if condition == "day" else "_dusk"
+        for pass_name in ("", "_shadow"):
+            paths.append(os.path.join(out_dir, f"{name}{suffix}{pass_name}.png"))
+    return paths
+
+
 def render_bit(name, res, samples, out_dir, conditions=("day", "dusk")):
     kind, width, seed = BITS[name]
     made = []
@@ -264,18 +286,27 @@ def main():
     ap.add_argument("--res", type=int, default=700)
     ap.add_argument("--samples", type=int, default=24)
     ap.add_argument("--skip-existing", action="store_true")
+    # The day rig is the one that was corrected; the dusk rig is untouched and re-rendering it only
+    # reseeds its noise. A backlog that wants one light says so, the way tear_relief.py does.
+    ap.add_argument("--conditions", default="day,dusk")
     ap.add_argument("--out", default=OUT)
     args = ap.parse_args(argv)
+
+    conditions = tuple(c.strip() for c in args.conditions.split(",") if c.strip())
+    unknown = [c for c in conditions if c not in ("day", "dusk")]
+    if unknown:
+        raise SystemExit(f"bits.py: --conditions takes day and dusk, not {', '.join(unknown)}")
 
     names = [args.only] if args.only else (list(BITS) if args.all else [])
     if not names:
         raise SystemExit("bits.py: pass --only <name> or --all")
     os.makedirs(args.out, exist_ok=True)
     for name in names:
-        if args.skip_existing and os.path.exists(os.path.join(args.out, f"{name}.png")):
+        wanted = outputs_of(name, args.out, conditions)
+        if args.skip_existing and all(os.path.exists(p) for p in wanted):
             print(f"bits: {name} already rendered")
             continue
-        render_bit(name, args.res, args.samples, args.out)
+        render_bit(name, args.res, args.samples, args.out, conditions=conditions)
         print(f"bits: {name}")
 
 

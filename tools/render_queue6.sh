@@ -44,7 +44,9 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 STAMP() { date -u +%H:%M:%S; }
 say() { echo "[$(STAMP)] $*"; }
-run() { bash blender/run.sh "$@" 2>&1 | grep -E "^(paper|object|bit|still|fold|tear|desk):|Error|Traceback" || true; }
+# bits.py prints "bits:", not "bit:", so this filter swallowed every line that family wrote and
+# firing 7 watched the step pass in one second with nothing in the log at all.
+run() { bash blender/run.sh "$@" 2>&1 | grep -E "^(paper|object|bits?|still|fold|tear|desk):|Error|Traceback" || true; }
 
 # The commit that corrected the day illuminant. A file touched at or after this is already relit.
 RIG_COMMIT=a6f46fd
@@ -141,7 +143,7 @@ say "3/3 a sweep for anything the earlier families missed"
 prune_stale assets/objects -name 'obj_*.png' ! -name '*dusk*'
 run blender/objects/objects.py -- --all --res 1200 --samples 64 --conditions day --skip-existing
 prune_stale assets/bits -name '*.png' ! -name '*dusk*'
-run blender/bits/bits.py -- --all --res 600 --samples 18 --skip-existing
+run blender/bits/bits.py -- --all --res 600 --samples 18 --conditions day --skip-existing
 restore_missing
 say "sweep done"
 
