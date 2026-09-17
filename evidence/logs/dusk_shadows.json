@@ -1,0 +1,308 @@
+{
+ "rules": [
+  {
+   "id": "tear_contact_shadow",
+   "family": "tears",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')",
+   "guarded": false,
+   "day_assets": 56,
+   "dusk_assets": 4,
+   "missing": 52
+  },
+  {
+   "id": "object_contact_shadow",
+   "family": "objects",
+   "asked_by": "app/lib/material/objects.dart:118 \u2014 objectAsset('${id}_shadow${dusk...}')",
+   "guarded": false,
+   "day_assets": 25,
+   "dusk_assets": 24,
+   "missing": 1
+  },
+  {
+   "id": "paper_stock",
+   "family": "paper",
+   "asked_by": "app/lib/material/paper.dart:126 \u2014 paperAsset('${stockId}_dusk')",
+   "guarded": false,
+   "day_assets": 27,
+   "dusk_assets": 27,
+   "missing": 0
+  },
+  {
+   "id": "desk_plate",
+   "family": "shell",
+   "asked_by": "app/lib/material/desk.dart \u2014 the plate under everything",
+   "guarded": false,
+   "day_assets": 1,
+   "dusk_assets": 1,
+   "missing": 0
+  }
+ ],
+ "breaches": [
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_005_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_006_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_007_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_008_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_009_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_010_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_011_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_012_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_013_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_014_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_015_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_016_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_017_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_018_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_019_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_020_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_021_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_022_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_023_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_024_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_025_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_026_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_027_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_028_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_029_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_030_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_031_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_032_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_033_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_034_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_035_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_036_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_037_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_038_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_039_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_040_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_041_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_042_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_043_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_044_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_045_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_046_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_047_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_048_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_049_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_050_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_051_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_052_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_053_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_054_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_055_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "tear_contact_shadow",
+   "asset": "tears/tear_056_shadow_dusk",
+   "asked_by": "app/lib/material/paper.dart:112 \u2014 tearAsset('${tearId}_shadow$suffix')"
+  },
+  {
+   "rule": "object_contact_shadow",
+   "asset": "objects/obj_plaster_shadow_dusk",
+   "asked_by": "app/lib/material/objects.dart:118 \u2014 objectAsset('${id}_shadow${dusk...}')"
+  }
+ ],
+ "ok": false
+}

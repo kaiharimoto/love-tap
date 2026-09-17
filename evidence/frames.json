@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-16T11:00:34Z",
+ "captured_at": "2026-09-17T07:07:27Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -7,9 +7,9 @@
    "frames": 320,
    "fps": 60.0,
    "seconds": 5.33,
-   "mean_change_per_frame": 0.00374,
-   "repeated_frames": 54,
-   "repeated_fraction": 0.169,
+   "mean_change_per_frame": 0.00372,
+   "repeated_frames": 53,
+   "repeated_fraction": 0.166,
    "longest_still_run": 25,
    "repeated_at": [
     6,
@@ -42,9 +42,9 @@
    "frames": 384,
    "fps": 60.0,
    "seconds": 6.4,
-   "mean_change_per_frame": 0.01567,
-   "repeated_frames": 27,
-   "repeated_fraction": 0.07,
+   "mean_change_per_frame": 0.01534,
+   "repeated_frames": 26,
+   "repeated_fraction": 0.068,
    "longest_still_run": 10,
    "repeated_at": [
     140,
@@ -77,9 +77,9 @@
    "frames": 488,
    "fps": 60.0,
    "seconds": 8.13,
-   "mean_change_per_frame": 0.01235,
-   "repeated_frames": 49,
-   "repeated_fraction": 0.101,
+   "mean_change_per_frame": 0.01145,
+   "repeated_frames": 59,
+   "repeated_fraction": 0.121,
    "longest_still_run": 22,
    "repeated_at": [
     1,
@@ -112,7 +112,7 @@
    "frames": 330,
    "fps": 60.0,
    "seconds": 5.5,
-   "mean_change_per_frame": 0.04702,
+   "mean_change_per_frame": 0.04791,
    "repeated_frames": 0,
    "repeated_fraction": 0.0,
    "longest_still_run": 0,
@@ -134,12 +134,11 @@
    "frames": 308,
    "fps": 60.0,
    "seconds": 5.13,
-   "mean_change_per_frame": 0.0137,
-   "repeated_frames": 99,
-   "repeated_fraction": 0.322,
+   "mean_change_per_frame": 0.01336,
+   "repeated_frames": 98,
+   "repeated_fraction": 0.319,
    "longest_still_run": 36,
    "repeated_at": [
-    32,
     33,
     34,
     35,
@@ -150,7 +149,8 @@
     45,
     46,
     47,
-    48
+    48,
+    49
    ],
    "brightness_jumps": 0,
    "ok": true,
@@ -172,11 +172,11 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 11539,
+  "cold_ms": 9269,
   "steps": [
    {
     "do": "goTo",
-    "ms": 2412
+    "ms": 2525
    },
    {
     "do": "wait",
@@ -184,15 +184,15 @@
    },
    {
     "do": "scrollTo",
-    "ms": 1803
+    "ms": 2072
    },
    {
     "do": "wait",
-    "ms": 1103
+    "ms": 1102
    },
    {
     "do": "frames",
-    "ms": 313590
+    "ms": 319009
    }
   ]
  },

@@ -1,6 +1,6 @@
 {
  "files": 634,
- "entries": 767,
+ "entries": 768,
  "without_an_entry": [],
  "entries_without_a_file": [
   "folds/unfold_thirds",
@@ -24,5 +24,14 @@
   "seed/photos/2025-09_classroom_display.jpg",
   "seed/photos/2025-09_marker_drawer.jpg"
  ],
+ "naming_a_generator_that_cannot_build_them": [],
+ "checked_against_a_catalogue": 458,
+ "no_catalogue_to_check_against": {
+  "blender/paper/tear_relief.py": 118,
+  "blender/photos/still.py + blender/photos/develop.py": 128,
+  "blender/shell/desk.py": 2,
+  "tools/handwriting/build.py": 5,
+  "tools/tears/tear.py": 57
+ },
  "ok": true
 }

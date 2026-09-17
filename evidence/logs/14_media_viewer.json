@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2468
+   "ms": 3714
   },
   {
    "do": "wait",
@@ -18,19 +18,19 @@
   },
   {
    "do": "openViewer",
-   "ms": 4818
+   "ms": 4164
   },
   {
    "do": "wait",
-   "ms": 2504
+   "ms": 2505
   },
   {
    "do": "shot",
-   "ms": 1896
+   "ms": 2071
   },
   {
    "do": "report",
-   "ms": 714
+   "ms": 722
   }
  ],
  "shots": [
@@ -90,7 +90,7 @@
    "at": "14_media_viewer.png"
   }
  ],
- "cold_ms": 11394,
+ "cold_ms": 9200,
  "problems": [],
  "ok": true
 }
