@@ -8,7 +8,6 @@ import 'dart:async';
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart';
 
 import '../flags.dart';
 import '../material/assignment.dart';
@@ -226,11 +225,15 @@ class CaptureHooks {
   /// own coordinate space, logical pixels times the view's devicePixelRatio — and are clipped to
   /// the view, so a paragraph scrolled half off the bottom declares only the half that was drawn.
   ///
-  /// What is deliberately NOT here: any claim that a declared run is visible. A paragraph inside
-  /// a zero opacity, or behind another sheet, is still in the render tree and still declared. That
-  /// is safe in the only direction that matters, because the tool intersects this with the marks
-  /// it finds: a run nobody can see contributes no marks and produces no reading. Declaring is
-  /// permission to measure, not an assertion that there is something to measure.
+  /// Only what is painted. A subtree the framework does not put on the glass -- a zero opacity, an
+  /// `Offstage`, the four regions of the `IndexedStack` that are built and not shown -- is not
+  /// declared, because a declaration is permission to measure those pixels, and pixels where a
+  /// hidden paragraph would be are somebody else's. See [_painted].
+  ///
+  /// What is still NOT claimed is that a declared run is legible, or even that there is ink in it.
+  /// A paragraph behind another sheet is painted and declared and contributes nothing, because the
+  /// tool intersects this with the marks it finds. Declaring is permission to measure, not an
+  /// assertion that there is something to measure.
   ///
   /// Static, like `DrivenClock.step`, because it reads the framework rather than the app: it needs
   /// no spine, no transport and no library, and a test of it should not have to stand one up.
@@ -254,7 +257,39 @@ class CaptureHooks {
     if (node is RenderParagraph) _paragraph(node, view, dpr, bounds, out);
     // Visited even for a paragraph: a RenderParagraph can carry inline widget children, and one
     // of those can be another paragraph.
-    node.visitChildren((child) => _collectRuns(child, view, dpr, bounds, out));
+    node.visitChildren((child) {
+      if (_painted(node, child)) _collectRuns(child, view, dpr, bounds, out);
+    });
+  }
+
+  /// Whether [parent] actually puts [child] on the glass, rather than merely having built it.
+  ///
+  /// This is not a nicety. `app.dart` keeps all five regions alive in an `IndexedStack` and shows
+  /// one, so the render tree carries five screens' worth of writing at any moment, laid out at
+  /// plausible positions on top of each other. Measured on `02_chat`, walking every child declared
+  /// 233 lines of which 127 overlapped another by more than half, and `wake me`, `quietly` and
+  /// `not at all` each appeared fourteen times over. Declaring those would hand the tool
+  /// permission to read pixels where a hidden paragraph *would* be, which is the one way this
+  /// could let a piece of surface back in wearing a line of text's rect.
+  ///
+  /// `paintsChild` is the framework's own answer and covers the general cases: a zero opacity, an
+  /// `Offstage`, an invisible `Visibility`, a list child kept alive but scrolled out of the
+  /// viewport. `RenderIndexedStack` is the exception that does not implement it -- it paints one
+  /// child and says so nowhere but in its own `paintStack` -- so it is asked directly.
+  static bool _painted(RenderObject parent, RenderObject child) {
+    if (!parent.paintsChild(child)) return false;
+    if (parent is RenderIndexedStack) return identical(child, _shownChildOf(parent));
+    return true;
+  }
+
+  static RenderBox? _shownChildOf(RenderIndexedStack stack) {
+    final at = stack.index;
+    if (at == null || at < 0) return null;
+    var child = stack.firstChild;
+    for (var i = 0; child != null && i < at; i++) {
+      child = stack.childAfter(child);
+    }
+    return child;
   }
 
   static void _paragraph(
