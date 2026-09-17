@@ -1184,3 +1184,121 @@ firing would do next:
 Nothing is blocked. Nothing in `asks[]` moved.
 
 **Lease released.**
+
+---
+
+## Firing 9 — IMPLEMENT — the regression was mostly the instrument
+
+Firing 8 handed over `the-relit-tear-edge-is-a-dark-band` as first business and it was the right
+item to pick up. Its diagnosis of the pixels is correct and its conclusion about the text is not,
+and the difference is 47 of 54 failures.
+
+### The denominator moved, and it was most of the story
+
+The run count went 708 → 759 between the two captures. `legibility.py` is **byte-identical** at
+`e5d6ce8` and at HEAD — checked, not assumed — so every bit of that is the pixels. A run is not a
+declared thing: it is found by a mark detector, so the denominator of
+`total_below_floor / total_runs` moves whenever the light does, and comparing that ratio across a
+relight is not a comparison of the same thing.
+
+Both captures were re-measured from the committed stills with the current tool (baseline
+reproduced exactly: 708 runs, 179 below) and then paired run by run, by box overlap within each
+artifact:
+
+```
+  the same text, lit twice   124 -> 131 of 622 matched runs     0.1994 -> 0.2106
+  the whole-set ratio        179 -> 233 of 708 -> 759 runs      0.2528 -> 0.3070
+  runs that went                86, 55 of them failing
+  runs that arrived            137, 102 of them failing (74% against 21% on matched runs)
+```
+
+**Of the +54, seven are the same text reading differently and forty-seven are the population
+moving under the detector.** The legibility regression this cycle caused is 0.1994 → 0.2106, not
+0.2528 → 0.3070.
+
+Per-artifact it is starker than the total. `03_us` was named as carrying most of the regression:
+its matched runs went **6 failures → 6**, and the whole of its apparent 9 → 36 is thirty-five new
+boxes. `05_settings` 38 → 38. `04_moments`, `13_messenger_states`, `14_media_viewer` all unchanged
+on matched runs. `17_setup_pwa` went **0 → 0** on matched runs, so the item's note that "that
+screen is worth its own look" can be struck — its three new failures are the same artefact as
+everything else.
+
+### The new boxes are not text, and this was looked at rather than argued
+
+Cropped at 300%, before and after side by side, in `03_us`, `05_settings` and `01_pulse`. Not one
+of the sampled boxes contains writing. They are torn-paper fibre steps, sheet edges against the
+desk, and in one case the blank lined space beside a word — in two of the crops the real text
+("able go", "ne table", "YOURS") is plainly visible *above* the box that was drawn. The population
+reads `ink_core` median **1.18** — stroke and ground at the same luminance, which is what a piece
+of one surface reads as — against **7.77** for the matched runs.
+
+So the relight did not make the writing hard to read. It stopped the torn lips clipping to flat
+white, the real fibre structure underneath became visible, and the mark detector started counting
+it as writing.
+
+### Three routes tried, three refuted, so nobody spends a firing on them again
+
+1. **Shape.** Nothing separates the two populations: glyph count, fill fraction, glyph-height CV,
+   baseline CV, median glyph width all overlap heavily. `glyphs >= 3` removes 83 of the 102 false
+   failures — and 53 of the 131 **true** matched failures with them, plus 132 real runs. That is
+   improving the number by hiding real problems.
+2. **Straddle.** The idea that a torn edge is a boundary between two surfaces while writing sits on
+   one, tested as the contrast between a band above the run and a band below it. Refuted by its own
+   measurement: at every threshold from 1.5 to 4.0 it drops more true matched failures than false
+   new ones — at 1.5, twenty-six against six.
+3. **Quantization.** The staircase look of the relit lip is not posterization and the rig is not
+   mis-exposed. Over the `05_settings` lip the distinct RGB count went **up**, 1899 → 2098, and the
+   mean flat run got **shorter**, 3.59px → 2.91px, with the luminance range widening at the dark
+   end. It is the truthful render of structure that was previously clipped away.
+
+Re-clipping the edge was already forbidden for costing the ×3.44 chroma gain. It is now also
+pointless: the edge was never what moved the number.
+
+### What was built
+
+`tools/check/legibility_delta.py`. It pairs two captures run by run and splits the headline into
+the part that is the same text reading differently and the part that is the population moving.
+Re-broken three ways rather than asserted: against itself the matched rate moves 0.0000 and
+`--gate` exits 0; against a set washed toward its paper with the geometry held fixed — so every run
+still matches its twin — it puts +492 of +545 on the matched runs and exits 1; against the real
+pair it exits 1 at tolerance 0 and passes at 0.02.
+
+This was treated as part of the item rather than as work outside the queue, because the item's own
+`measurement` field named a comparison that does not hold, and supplying the one that does is the
+item's work. The field has been restated in `loop/STATE.json` so the next firing gates on the
+matched-run rate and not on the whole-set ratio.
+
+### What was not done, and why
+
+No fix was pushed, because the three cheap fixes are measured and none is safe, and the honest
+remaining question — what makes a mark writing rather than a piece of the surface it is on — is a
+designed answer and not a threshold. It is filed as `writing-is-not-the-same-as-texture` with its
+measurement and with both halves that have to be quoted together, so that it cannot be closed by
+deleting true findings. Two directions are written into it that were not tried: writing is authored
+and therefore repeats, where fibre does not; and the app knows where its own text is, so a
+render-time text mask would turn this from inference into fact.
+
+`evidence_note` in `loop/STATE.json` has been amended, because as written it sent this firing at the
+wrong thing and would have sent the next one too. The chroma half of it stands untouched. No file
+under `evidence/` was altered.
+
+**Not run:** `flutter analyze` and `flutter test`. There is no Dart toolchain in this container and
+this firing touched no Dart and no `app/` code — one new Python analysis tool, plus JSON and prose.
+Bootstrapping fifteen minutes of Flutter to gate a file it cannot see was not worth the firing.
+
+### What the next firing should expect
+
+The stage is still IMPLEMENT and the queue is not drained. The regression no longer jumps the
+queue: at +7 matched runs it is a small real item, not the emergency it was recorded as. In order:
+
+1. **`assets/folds`** — 240 frames, the last family under the old lamp, the whole of
+   `surfaces-folds-family`, and the only thing keeping `the-library-is-lit-by-two-lamps` open. CPU
+   and no decision, and now the most valuable thing on the board.
+2. **`the-gallery-loses-its-pictures-under-load`** — still has the committed partial instance from
+   firing 8 to debug against, which is more useful than either all-or-nothing one.
+3. **`writing-is-not-the-same-as-texture`** — worth doing, wants DESIGN, do not attempt it with a
+   threshold.
+
+Nothing is blocked. Nothing in `asks[]` moved.
+
+**Lease released.**
