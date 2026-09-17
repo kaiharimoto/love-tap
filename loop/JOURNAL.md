@@ -1302,3 +1302,22 @@ queue: at +7 matched runs it is a small real item, not the emergency it was reco
 Nothing is blocked. Nothing in `asks[]` moved.
 
 **Lease released.**
+
+---
+
+## Firing 10 — IMPLEMENT — lease taken
+
+Step 0 passed on the second attempt, and the first attempt's failure is worth recording because it
+will recur. This container's checkout was a **shallow clone at depth 50, made two days before the
+branch tip it was checked out against**. `git merge-base` between it and `origin/<branch>` is empty
+and `git rev-list --count` reads 50 ahead / 50 behind, so the working tree reads as a fork of
+unrelated history rather than as a checkout that is behind. `git merge --ff-only` cannot fix that;
+`git reset --hard origin/<branch>` can, and did. The dry run then returned `Everything up-to-date`.
+The credential was never in question: the first dry run was rejected by the remote with
+`non-fast-forward`, which is the server having authenticated and then declined the ref update.
+
+`70ade67` already named this shape — "a shallow clone that reads like a fork" — so this is the
+second firing to meet it. `loop/WORKER_PROMPT.md` §0 prescribes `--ff-only`, which is not sufficient
+here; that is amended below.
+
+Picking up firing 9's handoff in the order it wrote: `assets/folds` first.
