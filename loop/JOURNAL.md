@@ -1321,3 +1321,184 @@ second firing to meet it. `loop/WORKER_PROMPT.md` §0 prescribes `--ff-only`, wh
 here; that is amended below.
 
 Picking up firing 9's handoff in the order it wrote: `assets/folds` first.
+
+## Firing 10 — IMPLEMENT — the folds, and a gate that had never opened its eyes
+
+Picked up firing 9's handoff in the order it wrote it: `assets/folds` first, the last family under
+the old lamp and the whole of `surfaces-folds-family`.
+
+### The gate was green because it had read nothing
+
+`tools/check/surfaces.py` reads `app/assets`. `tools/pack_assets.py` writes `app/assets` and
+`.gitignore` excludes it, so in a fresh container there is no such directory. Every glob matched
+nothing and the report came back `"read": 0, "ok": true`, exit 0 — the check that exists to catch a
+flat plate declaring the library sound having opened none of it. That is the file's own docstring
+happening to the file: *nobody notices, because it looks approximately like the thing.*
+
+Reading fewer than `--min-read` surfaces is now its own error, exit 2, tested before the flat list
+because a run that found nothing has an empty flat list as well. Re-broken to prove the guard is
+what does it and not the rewrite around it: `--min-read 0` reproduces the old behaviour exactly,
+0 surfaces read and exit 0. `--root` now picks the library, so the source renders can be checked
+before a pack, and PNG is matched as well as WebP.
+
+Against `--root assets` it reads 321 surfaces, names the folds family, and fails on 94 of the 240
+frames of `unfold_thirds` between 0.912 and 1.197 — which reproduces from the source library the
+number firing 3 recorded from the packed copy.
+
+### The queue note's own hypothesis, measured and refuted
+
+The item has said for three firings that what remains is "the re-render of `blender/folds/fold.py`
+with the tooth the stocks carry". The natural reading is that the fold's fibre is the wrong size:
+`paper_material`'s noise scales are in UV, a stock's UV spans 210 mm and the fold's spans 148, so
+the same number is a 1.64× finer fibre on the fold than on the paper it is supposed to be made of.
+
+That reading is wrong, and it is wrong in the expensive direction. Matching the stocks in
+millimetres — `fibre_scale` 1100 → 669 — made every frame worse at both resolutions tested.
+
+Measured one variable at a time, as `surfaces.py`'s own `patch_std`. "packed" is the frame put
+through `pack_assets.convert` at the size the app ships it, which is what the default gate reads.
+
+```
+                                        frame 0000    frame 0150
+  committed, old lamp, 540/16              1.096         1.354
+  new lamp, 540/16                         0.831          --
+  new lamp, 540/64                         0.864         1.098     samples are not the lever
+  new lamp, 540/16, fibre 1100 -> 669      0.822         1.073     worse, not better
+  new lamp, 540/16, exposure -0.30         1.027         1.296     not taken; see below
+  new lamp, 1080/16      source            1.677         1.944
+                         packed            1.179         1.371     still short
+  new lamp, 1440/16      source            2.047         2.084
+                         packed            1.489         1.607
+
+and on the two worst frames in the set, which are what the floor has to clear:
+
+                                        frame 0235    frame 0238
+  committed, old lamp, 540/16              0.912         0.924
+  new lamp, 1440/16      source            1.946         1.925
+                         packed            1.384         1.399
+  new lamp, 1440/64      source            2.047          --
+                         packed            1.396          --
+```
+
+The fold's fibre was never too fine for the paper. It was too fine for 540 pixels. This is the
+tears' lesson again, which firing 6 wrote down in the same words — *the '42.86% → 5.61%' is
+RESOLUTION, not the lamp* — and which the folds were owed as much as the tears were.
+
+So the default is 1440/16, and the last line is why the samples did not move with the resolution:
+quadrupling them buys 0.012 at the size the frame is actually shown at, for three times the render.
+The packed WebP was measured through `pack_assets.convert` itself rather than through a stand-in
+resize, and the four frames tested land at 1.384, 1.399, 1.489 and 1.607 against the 1.2 floor.
+
+Two checks that the number is texture and not noise, because a patch-variance floor is satisfied by
+render noise as happily as by tooth and firing 9 was right to say so. A 2.67× downsample would cut
+white noise by about the same factor: 2.047 → 0.77. It reads 1.489. And 16 samples against 64
+agree to 0.012, which undenoised noise would not.
+
+### What the relight alone would have done, which is the opposite of what was wanted
+
+Rendering frame 0000 under the corrected lamp with nothing else changed took it from 1.096 to
+**0.831**. Worse. The cause is a finding larger than this item and it is filed as its own queue
+entry rather than absorbed: **the corrected day illuminant pins the red channel.**
+
+The relight holds *luminous* irradiance constant. Luminance is 0.2126R + 0.7152G + 0.0722B, which
+is almost all green, so holding it while moving the spectrum to 1.000:0.805:0.650 raises red by
+construction. `tools/check/illuminant.py` gates the temperature. Nothing gates the headroom.
+
+Measured against the pre-relight blobs in git, so it is this change and not a state that was always
+there — the fraction of opaque pixels at exactly R = 255:
+
+```
+  paper/graph_01        0.0000 -> 0.5123        objects/obj_plaster   0.2272 -> 0.8274
+  paper/looseleaf_01    0.0000 -> 0.5931        objects/obj_crane     0.3450 -> 0.7199
+  paper/receipt_01      0.0025 -> 0.7735        a fresh fold frame            0.9564
+```
+
+25 of 27 day paper files and 13 of 25 day objects are over 1%.
+
+The rig already names this defect for the other condition — *"clipped at 254 with half the tooth"* —
+and answers it with `DUSK_STOPS`, an aperture that lives in `blender/rig/common.py` "because
+everything lit at dusk has to agree about it". There is no day equivalent. A probe at a −0.30 stop
+cleared a fold frame's clipping completely, 0.9564 → 0.0000, and raised its `patch_std`
+0.831 → 1.027, so an aperture is a measured route and not a guess.
+
+**It was filed and not acted on, deliberately.** Whatever fixes it re-renders every day asset in
+`assets/`, which is four firings and the whole library that answered the owner's warmth complaint.
+`loop/WORKER_PROMPT.md` §3b says that is ADDRESS's to rank, not something to do on the side of
+another item. Two things for whoever ranks it: a clipped channel carries no hue and no tooth, which
+is the same argument that made the tears' un-clipping worth ×3.44 their chroma — so this may be
+taking back part of what the relight bought, and `evidence/palette.json` was measured with it. And
+it is a *candidate* mechanism for the legibility half, because ink contrast against a ground whose
+red is pinned loses the red component of that contrast. That last is a hypothesis with a way to
+test it, not a finding, and it is written into the item as one.
+
+Do not fix it by moving `DAY_COLOR` back. The quantity with no gate on it is the exposure.
+
+### The re-render, and what it came to
+
+240 frames at 1440/16, two and a half hours, 33 seconds a frame on four cores, committed in eight
+chunks of thirty as they landed rather than held to the end — which is also why `render_sequence`
+needed fixing first. It recorded the manifest by listing its output directory, so a chunked run
+wrote *this* call's resolution over every frame sitting in the directory, including ones still on
+disk at 540. It records the range it rendered now, and the half-finished library's provenance was
+true at every commit along the way: after chunk one, `0029` read 1440 and `0030` read 540 while
+`0030.png` was already on disk at 1440 and its call had not returned.
+
+```
+  tools/check/surfaces.py --root assets        before   94 of 240 below floor, worst 0.912, median 1.371
+                                               after     0 of 240 below floor, worst 1.840, median 2.057
+
+  tools/check/surfaces.py  (app/assets, packed to 540 WebP, what the app ships)
+                                               after     0 of 240 below floor, worst 1.477, median 1.691
+```
+
+321 and 318 surfaces read respectively, none flat, exit 0 both ways.
+`tools/check/texture_budget.py` still passes: 28.0 MB of 32 on a 36-frame window, because the packed
+size did not change — only the source did.
+
+**Re-broken rather than asserted.** The frames as they were, restored from `25638eb` into a tree of
+their own and run through the same tool, fail with exactly 94 and exit 1.
+
+### The library is under one lamp
+
+`the-library-is-lit-by-two-lamps` closes with it. Checked by the same git test `prune_stale` uses
+rather than assumed: of 508 day-lit files under `assets/`, 64 have no commit touching them since
+`a6f46fd`, and all 64 are accounted for.
+
+56 of them are `tear_NNN.png`, which are the tear **masks** — white-on-black alpha, no illuminant
+falls on them, and the relight renders `tear_NNN_edge.png` and `tear_NNN_shadow.png` instead. They
+were never day-lit; the filter that flags them is too broad. The other 8 are the bit shadows firing
+7 wrote down as a permanent blind spot: bit-identical when re-rendered, verified relit by
+reproduction, and "reported stale is the expected reading, not work."
+
+Zero genuinely stale files. Four firings and a whole library, done.
+
+### For whoever runs next
+
+The stage is still IMPLEMENT and eight items are open. Firing 9's order still holds for what is
+left of it, minus the one that is now done:
+
+1. **`the-gallery-loses-its-pictures-under-load`** — has the committed partial instance from firing
+   8 to debug against. Wants a Flutter toolchain, which this container did not have and this firing
+   did not need; budget fifteen minutes for `./bootstrap.sh --profile=web` before anything else.
+2. **`writing-is-not-the-same-as-texture`** — wants DESIGN. Do not attempt it with a threshold.
+3. **`the-corrected-lamp-pins-the-red-channel`** — new, and it is the one that may reorder the rest,
+   because it touches the same two numbers the owner asked about. It is ADDRESS's to rank and not an
+   IMPLEMENT firing's to take on the side.
+
+Two things this firing learned about the container, both cheap and both wasted a slice of it:
+
+- The checkout arrived as a **shallow clone at depth 50 made two days before the tip**, so
+  `git merge-base` with `origin/<branch>` is empty and it reads 50 ahead / 50 behind — a fork, not a
+  checkout that is behind. `WORKER_PROMPT.md` §0 prescribes `git merge --ff-only`, which cannot fix
+  it. `git reset --hard origin/<branch>` can, and the section has been amended to say so. The
+  credential was never in question: the first dry run came back `non-fast-forward`, which is the
+  remote authenticating and then declining.
+- `bootstrap.sh` is not needed to render. Blender alone is a 360 MB download and one `tar -xJf` into
+  `toolchain/blender`, about ninety seconds, plus `pip install numpy pillow` for the check tools and
+  `opencv-python-headless` for `pack_assets.py` — which is in `bootstrap.sh`'s python list and is
+  worth knowing separately, because `pack_assets.py` dies on `import cv2` two thirds of the way in
+  after it has already written half of `app/assets`.
+
+Nothing is blocked. Nothing in `asks[]` moved.
+
+**Lease released.**

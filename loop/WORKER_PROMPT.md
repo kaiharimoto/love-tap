@@ -40,6 +40,23 @@ The `--ff-only` is the second half of it. A checkout that is behind fails the dr
 `non-fast-forward`, which looks alarming and is **not** a credential failure — do not report it as
 one. Fast-forward first, then dry-run again; `Everything up-to-date` is the pass.
 
+**And `--ff-only` will sometimes fail too, on a checkout that is merely old.** This container hands
+you a **shallow clone at depth 50**, and firing 10's was made two days before the branch tip it was
+checked out against. Two shallow histories of the same branch taken at different times have
+different grafted roots, so they share no commit at all: `git merge-base` came back empty,
+`git rev-list --count` read **50 ahead and 50 behind**, and the working tree read as a fork of
+unrelated history rather than as a checkout that is behind. `70ade67` met the same shape and called
+it "a shallow clone that reads like a fork"; firing 10 is the second.
+
+There is nothing to merge, because the local branch has no commit of its own — it is a clone. So:
+
+    git reset --hard origin/claude/app-improvement-autonomous-workflow-d6fwdu
+
+Check that first, before believing a divergence: `git rev-list --count origin/<branch>..HEAD` on a
+fresh clone should be 0, and if it equals the *total* number of commits you can see then you are
+looking at a graft boundary and not at work. Never force-push to reconcile it — the remote is right
+and the checkout is what is old.
+
 If that fails for any reason, **stop immediately** and make your whole final answer a verbatim
 report of the error. Do not do the stage. A firing that discovers it cannot push in the first
 thirty seconds is useful. One that discovers it after a forty-five minute capture has thrown that

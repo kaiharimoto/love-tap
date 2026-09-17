@@ -1,0 +1,93 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 10,
+ "commit": "3eaefa9",
+ "written_at": "2026-09-17T18:59:48Z",
+ "closed": [
+  "surfaces-folds-family",
+  "the-library-is-lit-by-two-lamps"
+ ],
+ "opened": [
+  "the-corrected-lamp-pins-the-red-channel"
+ ],
+ "measurements": {
+  "folds_source": {
+   "tool": "tools/check/surfaces.py --root assets",
+   "floor": 1.2,
+   "before": {
+    "frames": 240,
+    "below_floor": 94,
+    "worst": 0.912,
+    "median": 1.371
+   },
+   "after": {
+    "frames": 240,
+    "below_floor": 0,
+    "worst": 1.84,
+    "median": 2.057
+   },
+   "surfaces_read": 321,
+   "exit": 0
+  },
+  "folds_packed": {
+   "tool": "tools/check/surfaces.py (app/assets)",
+   "floor": 1.2,
+   "after": {
+    "frames": 240,
+    "below_floor": 0,
+    "worst": 1.477,
+    "median": 1.691
+   },
+   "surfaces_read": 318,
+   "exit": 0
+  },
+  "re_broken": {
+   "how": "the 540 px frames restored from 25638eb into their own tree",
+   "result": "94 below floor, exit 1"
+  },
+  "texture_budget": {
+   "peak_mb": 28.0,
+   "limit_mb": 32,
+   "exit": 0
+  },
+  "render": {
+   "resolution": 1440,
+   "samples": 16,
+   "frames": 240,
+   "seconds_per_frame": 33,
+   "wall_clock": "2h31m",
+   "chunks": 8
+  },
+  "red_clipping_filed_not_fixed": {
+   "day_paper_over_1pct": "25 of 27",
+   "day_objects_over_1pct": "13 of 25",
+   "before_after_examples": {
+    "paper/graph_01": [
+     0.0,
+     0.5123
+    ],
+    "paper/receipt_01": [
+     0.0025,
+     0.7735
+    ],
+    "objects/obj_plaster": [
+     0.2272,
+     0.8274
+    ]
+   }
+  }
+ },
+ "open_after": [
+  "paper-is-the-median-pixel",
+  "the-day-rig-is-what-took-the-colour-out",
+  "one-coloured-thing-per-screen",
+  "families-b-c-and-d-reach-the-glass",
+  "the-gallery-loses-its-pictures-under-load",
+  "the-relit-tear-edge-is-a-dark-band",
+  "writing-is-not-the-same-as-texture",
+  "the-corrected-lamp-pins-the-red-channel"
+ ],
+ "stage_after": "IMPLEMENT",
+ "lease": null
+}
