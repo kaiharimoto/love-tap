@@ -261,25 +261,46 @@ def main():
     # Rendered at 1440 and packed down to 540, because 540 is below what the fibre needs.
     #
     # 94 of the 240 frames of unfold_thirds read below tools/check/surfaces.py's 1.2 floor for
-    # paper, 0.912 to 1.197, and the whole of that is render resolution. Measured at firing 10 on
-    # frames 0000, 0150, 0235 and 0238, one variable at a time, the worst frame in the set (0235,
-    # 0.912) reading:
+    # paper, 0.912 to 1.197, and the whole of that is render resolution. Measured at firing 10, one
+    # variable at a time, as surfaces.py's own patch_std. "packed" is the frame put through
+    # pack_assets.convert at the size the app ships it, which is the number the default gate reads.
     #
-    #   540, as committed                     0.912
-    #   540, four times the samples           +0.03     sample count is not the lever
-    #   540, fibre coarsened to the stocks'   -0.09     see below; it is worse, not better
-    #   1080                                  1.946 at source, 1.179 packed to 540 — still short
-    #   1440                                  1.946 at source, 1.384 packed to 540
-    #   1440 at four times the samples        2.047 at source, 1.396 packed to 540
+    #                                          frame 0000        frame 0150
+    #   committed, old lamp, 540/16                 1.096             1.354
+    #   new lamp, 540/16                            0.831              --
+    #   new lamp, 540/64                            0.864             1.098    samples are not it
+    #   new lamp, 540/16, fibre 1100 -> 669         0.822             1.073    worse, not better
+    #   new lamp, 540/16, exposure -0.30            1.027             1.296    see the note below
+    #   new lamp, 1080/16            source         1.677             1.944
+    #                                packed         1.179             1.371    still short
+    #   new lamp, 1440/16            source         2.047             2.084
+    #                                packed         1.489             1.607
     #
-    # So 1440/16: the last line is what says 16 samples is converged — quadrupling them moves the
-    # packed frame by 0.012, which is not worth three times the render.
+    # And on the two worst frames in the whole set, which is what the floor has to clear:
     #
-    # The obvious reading of "carry the tooth the stocks carry" — that the fold's fibre is too fine
-    # because paper_material's noise scales are in UV and the fold's UV spans 148 mm where a stock's
-    # spans 210 — is REFUTED. Matching the stocks in millimetres (fibre_scale 1100 -> 669) made
-    # every frame worse at both resolutions. The fold's fibre was never too fine for the paper; it
-    # was too fine for 540 pixels.
+    #                                          frame 0235        frame 0238
+    #   committed, old lamp, 540/16                 0.912             0.924
+    #   new lamp, 1440/16            source         1.946             1.925
+    #                                packed         1.384             1.399
+    #   new lamp, 1440/64            source         2.047              --
+    #                                packed         1.396              --
+    #
+    # So 1440/16. The last pair is what says 16 samples is converged: quadrupling them moves the
+    # packed frame by 0.012, which is not worth three times the render. Two checks that this is
+    # texture and not render noise, because a patch-variance floor is met by noise as happily as by
+    # tooth -- a 2.67x downsample cuts white noise by about 2.67, so 2.047 would land at 0.77 and it
+    # lands at 1.489; and 16 samples against 64 agree to 0.012, which undenoised noise would not.
+    #
+    # THE OBVIOUS READING OF "the tooth the stocks carry" IS REFUTED. paper_material's noise scales
+    # are in UV, a stock's UV spans 210 mm and the fold's spans 148, so the same number is a 1.64x
+    # finer fibre on the fold than on the paper it is meant to be made of. Matching the stocks in
+    # millimetres made every frame worse, at both resolutions. The fold's fibre was never too fine
+    # for the paper; it was too fine for 540 pixels.
+    #
+    # The exposure row is NOT taken. It is the day aperture, it is a rig-level quantity, and it is
+    # filed as the-corrected-lamp-pins-the-red-channel for ADDRESS to rank. A fold-only day aperture
+    # is precisely the mistake DUSK_STOPS exists to stop: everything lit by one lamp has to agree
+    # about the aperture.
     ap.add_argument("--res", type=int, default=1440)
     ap.add_argument("--samples", type=int, default=16)
     ap.add_argument("--condition", default="day")
