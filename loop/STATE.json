@@ -364,7 +364,8 @@
    "state": "open",
    "attempts": 0,
    "closed_by": null,
-   "rank": 27
+   "rank": 27,
+   "measured_at_firing_19": "THE SUITE WAS RUN FOR THE FIRST TIME IN THIS BUILD'S HISTORY, AND IT IS GREEN. 123 tests, all passed, exit 0, in 31 seconds once the bundle was built. flutter analyze: 0 errors, 32 warnings and infos, all of them unused imports and one unused private element in the test files. Flutter 3.47.2 out of ./bootstrap.sh --profile=web.\nSO THE STANDING WORRY IN loop/WORKER_PROMPT.md IS CLEARED: app/test/legible_on_what_it_is_on_test.dart -- rewritten by a container with no toolchain and never once compiled, and named there as the file that gates every code commit -- compiles and passes. Its only analyzer complaints are an unused import of material/hands.dart at :55 and an unused _desk declaration at :114.\nONE PREREQUISITE THAT IS NOT WRITTEN DOWN ANYWHERE AND COST A RUN: flutter test FAILS OUTRIGHT on a fresh container with 'unable to find directory entry in pubspec.yaml: app/assets/paper/' and eleven more like it, because app/assets is derived and gitignored. tools/pack_assets.py must run first, and for the seed directories it must run as tools/pack_assets.py --seed=year -- a bare pack prints 'seed absent' and the bundle still will not build. That is what this item should wire, and the order is: pack with the seed, then analyze, then test.\nTHIS ITEM IS STILL OPEN. Nothing has been wired into bootstrap.sh, run.sh or capture.sh; the suite was run by hand once. The measurement it names is unchanged."
   },
   {
    "id": "nine-thread-renderings-are-one-function-aliased-nine-times",
