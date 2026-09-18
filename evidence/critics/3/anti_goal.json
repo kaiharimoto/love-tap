@@ -1,0 +1,76 @@
+{
+  "critic": "anti-goal",
+  "cycle": 3,
+  "score": 6,
+  "floor": 9,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "17_setup_pwa.png",
+      "where": "the sheet filling the frame; sampled at x400-1100, y900-1000, and across the whole image",
+      "what": "A 700x100 px region of the paper contains exactly one RGB value (242,237,226): standard deviation 0.00, high-frequency energy 0.000, 1 distinct colour across 70,000 pixels, and that single value covers 48.0% of the 1440x3120 frame; 10_first_run.png is 59.5% one value (241,236,223) and the base page of 01_pulse.png is 98.2% one value over a 200x200 sample at (1150,2700).",
+      "why": "Anti-goal 4: a photograph of real paper cannot have zero variance over 70,000 pixels, so on these screens the paper is a flat CSS colour fill and reads as an approximation of paper rather than as paper."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "13_messenger_states.png",
+      "where": "x65-1099, y1281-1515, between the 'noor needs a lot' strip and the 'left the key under the pot' note",
+      "what": "A beige rectangle 1035x235 px, fill (253,227,200), corner radius measured at 2-3 px, with a hard dark drop shadow offset down and right; its interior measures std 1.35, 168 distinct colours, hf_mean 0.640 against 35.79 / 2182 / 6.853 for the real note 200 px below it in the same file, and the 06_unfolding strip shows the identical block as the state a note occupies while arriving, so it is a designed reusable surface and not a one-off capture miss.",
+      "why": "Anti-goal 4 names 'a beige rounded rectangle with a drop shadow' as the first example of a failure of the entire visual concept, and this is literally that object, on the primary chat surface."
+    },
+    {
+      "severity": "serious",
+      "artifact": "03_us.png",
+      "where": "the tear across the page at y600-860; same construction on 05_settings.png at y1450-1640 and 17_setup_pwa.png at y420-720",
+      "what": "The tear edge is a run of axis-aligned rectangular crenellations with flat horizontal treads and hard vertical risers under a uniform gaussian shadow of constant softness along its whole length, and the pale ruled lines run continuously and unbroken straight through the stepped region, which means the tear is a translucent overlay painted on top of unbroken paper rather than an actual torn edge.",
+      "why": "Anti-goal 4: paper does not tear in rectangular steps, and a generated silhouette plus a uniform blur is a procedural approximation of a torn edge, which the anti-goal forbids."
+    },
+    {
+      "severity": "serious",
+      "artifact": "01_pulse.png",
+      "where": "the feeling-object strip at y1180-1460: the cylinder at x500-660 and the scatter of beads at x690-860; the same cylinder dominates crops/07_feeling_landing_strip.png and crops/08_state_propagating_strip.png",
+      "what": "The central object of the emotional layer is a smooth untextured 3D cylinder (side interior hf_mean 1.637 against 4.903-9.835 for paper in the same file) beside roughly thirteen smooth gradient spheres (a clean bead interior at x760-800, y1250-1290 measures hf_mean 0.135, hf_max 3), and the cylinder's colour is byte-identical between 01_pulse.png and crops/dusk_pulse.png at [205,180,145] while every paper surface shifts warm (top note R/B 1.416 to 1.578, lower note 1.225 to 1.348), so it is a pre-rendered sprite composited on top rather than an object lit by the scene.",
+      "why": "Anti-goal 2 forbids feelings drawn as 3D gradient blobs, and these are untextured gradient-shaded primitives carrying the emotional layer at full screen size in two of the five clips."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png",
+      "where": "x430-1100, y1520-1590 in the gap between the 'a month. and you have not opened the folder' note and 'The folder is open.'; also 03_us.png at x640-1000 y1470-1580, 13_messenger_states.png below the blank block, and crops/dusk_pulse.png behind the object strip",
+      "what": "A run of hard-edged vertical grey bars of varying width, all beginning and ending at exactly the same y, is laid across the paper and reads on screen as a printed barcode or a venetian blind; it recurs on four separate artifacts including both illuminants of the pulse screen.",
+      "why": "Anti-goal 4: a one-dimensional procedural pattern painted over the paper surface is a procedural texture overlay, and it does not read as any property of real paper."
+    },
+    {
+      "severity": "minor",
+      "artifact": "04_moments.png",
+      "where": "the only loaded image in 'WHAT WE SENT', x60-440 y640-1160; and the full-bleed image on 14_media_viewer.png, y120-1270",
+      "what": "The only two photographs anywhere in the evidence set are synthetic 3D test renders: a raytraced desk with an untextured mug, flat-shaded wood and a large black glossy sphere with a blown specular highlight (sphere interior hf_mean 1.839), and a stack of smooth cream ellipsoid blobs on a plate captioned 'three layers. it leans.'; the remaining sixteen tiles on 04_moments are blank or read 'still fetching the picture.'",
+      "why": "Adjacent to anti-goal 2: gradient-shaded 3D blobs stand in for the couple's own pictures, so the one place the build shows photographic content shows a render instead."
+    },
+    {
+      "severity": "minor",
+      "artifact": "01_pulse.png",
+      "where": "the second card in the feeling strip, x150-290, y1230-1370 (also present in crops/dusk_pulse.png)",
+      "what": "One item in the feeling vocabulary is a smiley face: two red dots and a red curved mouth drawn in ink on a torn card, sitting beside a crescent, a zigzag, a chair and a coffee ring.",
+      "why": "Anti-goal 2: it is hand-drawn rather than a system emoji so it is not emoji soup, but it is the one mark in the set that reaches for the generic smiley rather than for something the couple would actually have drawn."
+    },
+    {
+      "severity": "minor",
+      "artifact": "evidence/logs/surfaces.json",
+      "where": "the 'objects' family, entries obj_gold_star.webp (patch_std 28.549) and obj_crown.webp (patch_std 33.724)",
+      "what": "A gold star and a crown ship in the 22-object vocabulary, and neither appears in any of the fifteen captured artifacts or five frame strips, so how they are used cannot be checked.",
+      "why": "Anti-goal 1: a gold star and a crown are the standard iconography of reward and rank, and nothing in the evidence set shows whether they are used as such or as two more ordinary objects on the desk."
+    }
+  ],
+  "what_is_working": [
+    "The voice is the strongest thing in the build and I could not find a single breach of anti-goal 3 across the 337 extracted strings or anything I read off the screens. Not one exclamation mark. The app never names itself and never speaks in the third person.",
+    "The failure states are where this usually collapses and they are the best evidence in the set: 'it would not go' with a small cross, 'waiting to send', 'going', 'still fetching the picture.', 'not paired yet.'. No 'Oops', no 'Please try again', no apology on the app's behalf.",
+    "First run is two lines on one torn note: 'first one's yours. / whatever it is. it only goes to one person.' There is no welcome screen, no tour and no brand. 17_setup_pwa is the same register throughout: 'two phones, one wire between them, nobody else on it.', 'say them out loud in the same room. they are only good once.'",
+    "05_settings carries 77 strings, the largest surface in the build, and holds the voice completely: 'WHAT MAY INTERRUPT', 'let it interrupt you', and every notification class named as a human event ('their voice', 'an answer to something of yours', 'something they say about themselves', 'a day that matters') with 'wake me / quietly / not at all'. The whole screen is designed to reduce interruption, which is the opposite of engagement machinery.",
+    "Anti-goal 1 is clean. Across every screen I found no badge, no point, no count, no level, no progress bar toward a target, no streak-breakage warning and no nag. 03_us is AHEAD / BEEN / TO DO with plain dates ('PLANNED 9 Nov', 'REMEMBERED 18 Jul'); 04_moments filters on 'both / noor / teo / all year' with no totals. The NEED and ENERGY tick meters are self-reported present state with no target and nothing that can be failed.",
+    "The conceptual core of the emotional layer is right and is the opposite of emoji soup: feelings are named words on paper strips with sliders (WARMTH, ACHE, SHELTER, MISCHIEF, STATIC, SPARKLE) and authored ink marks on torn cards. 'empty chair' sent as a drawn chair, and a crescent sent as 'goodnight', are exactly the specific, authored gesture the mission asks for. There is no system emoji anywhere in the build.",
+    "The build can plainly do real paper when it does it. 12_search.png runs ruled, graph and plain stocks at different warmths with punch holes, red margin rules and fibrous deckle edges; 14_media_viewer.png's caption note has genuine fibre whiskers on a wavy tear; the 300% crop 02_chat_300_hand.png shows real fibre striations at the tear and 02_chat_300_shadow.png shows faint show-through from the sheet beneath. tears.json records 8 distinct tears drawn from a pool of 56 with no repeats, which is why no tear silhouette reads as reused.",
+    "The two missing artifacts are recorded with a reason rather than an excuse. frames.json and MANIFEST.json name the mechanism (no /dev/kvm, x86_64 under QEMU instruction emulation, adbd answering after a measured 113 minutes but the framework never coming up so there was no package service, no GTK for a desktop stand-in) and state explicitly that neither was faked from the PWA. I did not penalise the build for them."
+  ],
+  "verdict": "Two of the four anti-goals are held to a standard I would not have expected. I went looking hard for engagement machinery and found none at all, and the voice is genuinely disciplined in the place it almost always fails, which is the error strings: 'it would not go', 'still fetching the picture.', 'not paired yet.'. The emotional layer is conceptually right too, built from named feelings on paper strips and hand-drawn ink marks rather than emoji. But the anti-goal the brief calls the riskiest, and scores twice on purpose, is the one that breaks, and it breaks in four separate ways I could measure rather than merely assert. A 700x100 patch of the setup screen's paper holds exactly one colour across 70,000 pixels and that colour covers 48% of the frame; the first-run page is 59.5% one colour and the pulse page 98.2%, so on those screens the paper is a flat fill, and a photograph cannot do that. On 13_messenger_states, at x65-1099 y1281-1515, sits a 1035x235 beige rectangle with a 2 px radius and a hard drop shadow whose interior carries a tenth the texture of the real note 200 px below it, and the 06_unfolding strip shows it is the app's own arriving-note state rather than a capture miss, so the literal archetype the brief names as a failure of the entire visual concept is a deliberate, reusable surface. The tears on 03_us, 05_settings and 17_setup_pwa are rectangular crenellations under a constant blur with the ruled lines running unbroken straight through them, which proves they are overlays on whole paper, and a barcode of vertical bars is painted over the paper on four artifacts. Alongside that, the object at the centre of the feeling layer is an untextured 3D cylinder whose colour is byte-identical under the day and dusk illuminants while every paper surface around it shifts warm, flanked by thirteen smooth gradient spheres measuring hf_mean 0.135 — the 3D gradient blobs the second anti-goal names, carrying the feature the whole app exists for. The frustrating part is that 12_search and 14_media_viewer show this build knows exactly what real paper looks like; it has photographed paper for its notes and a procedural approximation for its pages, its edges and its placeholders, and the seam between the two is visible at 100%. Half this rubric row is close to perfect and half of it is breached at the point that costs double, so it lands at 6 and does not meet the floor of 9. I judged the five .mp4 clips from the frame strips in evidence/crops/ and the reports in evidence/logs/ rather than from playback, since they cannot be decoded in this container."
+}
