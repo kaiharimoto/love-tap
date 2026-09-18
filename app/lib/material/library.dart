@@ -60,7 +60,22 @@ class MaterialLibrary {
 
   static bool get loaded => _instance != null;
 
+  /// Decode the baked library, once per process.
+  ///
+  /// The memoisation is not an optimisation, it is the fix for a trap. `rootBundle` is a
+  /// `CachingAssetBundle`: it caches the *Future* of a string, not the string, so a second
+  /// `loadString` for the same asset awaits the Future the first call made. The first call in a
+  /// test file is made inside the first `testWidgets`' fake-async zone, which has stopped by the
+  /// time the second test runs, so the second await never returns and the runner reports
+  /// `TimeoutException after 0:10:00` naming no asset and no library. Every widget test in this
+  /// app needs the library, so that is a trap laid for whoever writes the next one.
+  ///
+  /// So once the library is decoded, later calls return it without going near the bundle at all.
+  /// An explicit `bundle` is a deliberate 'read this one instead' and is still read, because that
+  /// is the only thing the parameter is for.
   static Future<MaterialLibrary> load({AssetBundle? bundle}) async {
+    final cached = _instance;
+    if (cached != null && bundle == null) return cached;
     final b = bundle ?? rootBundle;
     Map<String, dynamic> j;
     try {
