@@ -10,7 +10,9 @@ import 'package:desk/feelings/registry.dart';
 import 'package:desk/material/desk.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/regions/chat/blob_widgets.dart';
+import 'package:desk/regions/chat/viewer_page.dart';
 import 'package:desk/regions/moments/moments_region.dart';
+import 'package:desk/spine/store/store.dart';
 import 'package:desk/scope.dart';
 import 'package:desk/spine/projections/state.dart';
 import 'package:desk/spine/projections/thread.dart';
@@ -19,6 +21,8 @@ import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/sync.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'dart:async';
+import 'dart:typed_data';
 
 List<Event> _aYear({int count = 14000}) {
   final out = <Event>[];
@@ -85,6 +89,78 @@ List<Event> _aYearOfPrints({int count = 183}) {
   }
   return out;
 }
+
+/// The store as the web actually has it: one lane.
+///
+/// `MemoryStore.getBlob` is an `async` getter over a map, so every read it is given completes on
+/// the next microtask and the order they were asked in never matters. IndexedDB is not that. It
+/// serves one read at a time, in the order the reads arrived, and a read issued late waits for
+/// every read issued early — which is the whole of the defect this models. Making the test store
+/// honest about that is what lets a widget test see a bug that only ever showed up in a capture.
+///
+/// It records the order it served, which is the measurement.
+class _OneLaneStore implements SpineStore {
+  final MemoryStore _inner = MemoryStore();
+
+  /// The hashes the store was asked for, in the order it actually served them.
+  final List<String> served = [];
+
+  final List<({String hash, Completer<StoredBlob?> done})> _lane = [];
+
+  /// How many reads are sitting in the store's lane, asked for and not yet answered.
+  int get queued => _lane.length;
+
+  /// Puts a blob in without going through the lane: this is the seeding, not the reading.
+  Future<void> seedBlob(String hash, Uint8List bytes) => _inner.putBlob(hash, 'image/png', bytes);
+
+  /// Answers the oldest outstanding read, and only that one.
+  ///
+  /// Hand-driven rather than timed, because what is being measured is which read is at the front
+  /// of the queue when the next answer comes back, and a store that answers by itself would make
+  /// that depend on how many times the test happened to pump.
+  Future<void> serveOne() async {
+    if (_lane.isEmpty) return;
+    final next = _lane.removeAt(0);
+    served.add(next.hash);
+    next.done.complete(await _inner.getBlob(next.hash));
+  }
+
+  @override
+  Future<StoredBlob?> getBlob(String hash) {
+    final done = Completer<StoredBlob?>();
+    _lane.add((hash: hash, done: done));
+    return done.future;
+  }
+
+  @override
+  Future<List<Event>> loadAll() => _inner.loadAll();
+  @override
+  Future<void> upsertAll(Iterable<Event> events) => _inner.upsertAll(events);
+  @override
+  Future<String?> getMeta(String key) => _inner.getMeta(key);
+  @override
+  Future<void> setMeta(String key, String? value) => _inner.setMeta(key, value);
+  @override
+  Future<void> putBlob(String hash, String mime, Uint8List bytes) => _inner.putBlob(hash, mime, bytes);
+  @override
+  Future<bool> hasBlob(String hash) => _inner.hasBlob(hash);
+  @override
+  Future<List<String>> blobHashes() => _inner.blobHashes();
+  @override
+  Future<void> wipe() => _inner.wipe();
+  @override
+  Future<void> close() => _inner.close();
+}
+
+/// The smallest thing Image.memory will decode: a 1x1 transparent PNG. The test is about which
+/// order the bytes are fetched in, not about what they are a picture of.
+final Uint8List _onePixelPng = Uint8List.fromList(const [
+  0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52,
+  0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x08, 0x06, 0x00, 0x00, 0x00, 0x1F, 0x15, 0xC4,
+  0x89, 0x00, 0x00, 0x00, 0x0A, 0x49, 0x44, 0x41, 0x54, 0x78, 0x9C, 0x63, 0x00, 0x01, 0x00, 0x00,
+  0x05, 0x00, 0x01, 0x0D, 0x0A, 0x2D, 0xB4, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE,
+  0x42, 0x60, 0x82,
+]);
 
 Future<Spine> _spineOf(List<Event> events) async {
   final spine = await Spine.open(
@@ -334,6 +410,199 @@ void main() {
     // and it is still the whole year underneath: lazy, not truncated
     await tester.drag(find.byType(Scrollable).last, const Offset(0, -20000));
     await tester.pump();
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('the photograph somebody opened is not read after the gallery behind it',
+      (tester) async {
+    // app.dart puts all five regions in an IndexedStack, so every region is laid out whatever is
+    // on screen, and the Moments gallery is reading blobs for its tiles while a person is in
+    // chat. Open a photograph and the viewer's read joins the back of a queue the gallery made.
+    // The store is one lane on the web, so joining the back of the queue is the whole cost: two
+    // captures photographed the result, firing 3 as `04_moments` with every print missing and
+    // firing 4 as `14_media_viewer` with a caption and no photograph. Firing 3 established the
+    // prints are not lost -- twelve seconds brings them all back -- so it is a queue, not a
+    // decode failure, and a queue is a thing a test can see.
+    //
+    // What is asserted is position in the store's queue rather than a duration, because a
+    // duration here would be measuring this machine. Position is the defect itself.
+    // Guarded, and it has to be. `load()` reads `assets/INDEX.json` off `rootBundle`, and
+    // rootBundle is a CachingAssetBundle: the SECOND call in a process awaits the Future the
+    // FIRST call cached. That Future was completed inside the first test's fake-async zone, so a
+    // later test awaiting it waits for a clock that has stopped -- ten minutes, then
+    // `TimeoutException`, with no hint that a bundle was involved. `loaded` is a synchronous
+    // getter for exactly this. The first widget test in this file calls load() unguarded and is
+    // fine because it is first; any test added after it is not.
+    if (!MaterialLibrary.loaded) await MaterialLibrary.load();
+    tester.view.physicalSize = const Size(1440, 3120);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+    BlobCache.reset();
+    addTearDown(BlobCache.reset);
+
+    final prints = _aYearOfPrints();
+    // An existing print from well down the year, not a new event bolted on the end. Two earlier
+    // versions of this test invented an extra photograph, and both times the gallery put it in
+    // the first screenful -- it carried the highest seq, and seq is what the gallery orders by,
+    // so dating it oldest changed nothing. It was therefore tile one, the first blob the store
+    // served, and the test passed with the fix taken out. A person scrolls down and taps an old
+    // photograph; this is that, and it cannot drift back into the first screenful.
+    final photo = prints[150];
+    final opened = photo.payload['blob'] as String;
+    // The same gallery across both pumps: a new key would throw its element away and re-issue
+    // every read, which is not what tapping a photograph does.
+    final galleryKey = GlobalKey();
+
+    final store = _OneLaneStore();
+    for (final e in prints) {
+      await store.seedBlob(e.payload['blob'] as String, _onePixelPng);
+    }
+
+    final spine = await Spine.open(
+      store, const Identity(person: Person.teo, device: DeviceKind.pwa));
+    await spine.importSeed(prints);
+    final transport = LocalTransport(role: TransportRole.client, spine: spine, deviceId: 'test');
+    final scope = AppScope(
+      spine: spine,
+      transport: transport,
+      sync: SyncEngine(spine: spine, transport: transport),
+      clock: Clock(frozenAt: DateTime.utc(2026, 8, 30, 9, 14)),
+    );
+    addTearDown(scope.dispose);
+
+    final item = ThreadItem(
+      event: photo, text: null, edited: false, deleted: false,
+      reactions: const [], replyTo: null, delivery: Delivery.read, writtenEarlier: false,
+    );
+
+    // The order this happens in is the whole thing, and the first version of this test got it
+    // wrong. Mounting the gallery and the viewer in the same frame proves nothing: the viewer's
+    // photograph is built during the build phase and the gallery's tiles are built during layout,
+    // so the viewer's read is issued first anyway and the test passes with the fix taken out.
+    //
+    // What actually happens to a person is sequential. They are looking at Moments, its tiles are
+    // already asked for and not yet answered, and then they tap one. So the gallery is pumped
+    // first, and the viewer arrives while the gallery's reads are outstanding.
+    await tester.pumpWidget(AppScope.provide(
+      scope: scope,
+      child: MaterialApp(home: Scaffold(body: Desk(child: MomentsRegion(key: galleryKey)))),
+    ));
+    await tester.pump();
+
+    final tiles = find.byType(BlobImage).evaluate().length;
+    expect(tiles, greaterThan(BlobCache.inFlightLimit + 1),
+        reason: 'only $tiles tiles were laid out, so there is no queue here to get stuck behind '
+            'and this test would prove nothing');
+    expect(store.queued, BlobCache.inFlightLimit,
+        reason: 'the store was handed ${store.queued} reads at once. BlobCache is supposed to let '
+            'only ${BlobCache.inFlightLimit} through, and hold the rest where they can still be '
+            'reordered — a read the store has accepted cannot be overtaken.');
+
+    // Now the photograph is tapped. The viewer goes over the gallery on a route that is not
+    // opaque (ViewerPage.open), so the gallery stays laid out underneath and its remaining tiles
+    // are still queued.
+    await tester.pumpWidget(AppScope.provide(
+      scope: scope,
+      child: MaterialApp(
+        home: Scaffold(
+          body: Desk(
+            child: Stack(children: [MomentsRegion(key: galleryKey), ViewerPage(item: item)]),
+          ),
+        ),
+      ),
+    ));
+    await tester.pump();
+
+    // Drain the store one read at a time, the way one lane drains.
+    for (var i = 0; i < tiles + 8 && !store.served.contains(opened); i++) {
+      await store.serveOne();
+      await tester.pump();
+    }
+
+    final at = store.served.indexOf(opened);
+    expect(at, isNot(-1),
+        reason: 'the opened photograph was never read; the store served ${store.served.length} '
+            'blobs and none of them was it');
+
+    // It cannot be first: the reads already accepted by the store when the viewer asked cannot be
+    // overtaken. That bound is the budget, and it is the reason inFlightLimit is a small number
+    // rather than a comfortable one.
+    expect(at, lessThanOrEqualTo(BlobCache.inFlightLimit),
+        reason: 'the opened photograph was blob number ${at + 1} out of the store, behind $at of '
+            "the gallery's own tiles. That is what a person gets for tapping a photograph: an "
+            'empty frame until every tile ahead of it has been read. The budget is '
+            '${BlobCache.inFlightLimit}, the number of reads already in the store when they '
+            'tapped.');
+
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a region that is not on screen does not read a year of pictures', (tester) async {
+    // This is here because the queue item that produced the test above asserted the opposite, and
+    // the opposite is what everything downstream of it was reasoning from: "IndexedStack builds
+    // all five regions, so the Moments gallery is issuing blob reads even on a screen that is
+    // showing chat". Built, yes. Reading, no -- and the difference is layout.
+    //
+    // IndexedStack keeps its other children in the tree with `maintainState`, which is `Offstage`,
+    // and an offstage subtree is built but never laid out. A lazy sliver decides what to build
+    // during layout, so with no layout it builds almost nothing. Measured here on the same year of
+    // 183 prints: on screen the gallery builds 18 tiles, offstage inside an IndexedStack it builds
+    // none at all, and laid out beside the viewer in a Stack it builds 18.
+    //
+    // So a viewer opened from chat is not waiting behind the gallery. It is the viewer opened from
+    // Moments that has a queue in front of it, which is the arrangement the test above uses.
+    // Guarded, and it has to be. `load()` reads `assets/INDEX.json` off `rootBundle`, and
+    // rootBundle is a CachingAssetBundle: the SECOND call in a process awaits the Future the
+    // FIRST call cached. That Future was completed inside the first test's fake-async zone, so a
+    // later test awaiting it waits for a clock that has stopped -- ten minutes, then
+    // `TimeoutException`, with no hint that a bundle was involved. `loaded` is a synchronous
+    // getter for exactly this. The first widget test in this file calls load() unguarded and is
+    // fine because it is first; any test added after it is not.
+    if (!MaterialLibrary.loaded) await MaterialLibrary.load();
+    tester.view.physicalSize = const Size(1440, 3120);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+    BlobCache.reset();
+    addTearDown(BlobCache.reset);
+
+    final prints = _aYearOfPrints();
+    final store = _OneLaneStore();
+    for (final e in prints) {
+      await store.seedBlob(e.payload['blob'] as String, _onePixelPng);
+    }
+    final spine = await Spine.open(
+      store, const Identity(person: Person.teo, device: DeviceKind.pwa));
+    await spine.importSeed(prints);
+    final transport = LocalTransport(role: TransportRole.client, spine: spine, deviceId: 'test');
+    final scope = AppScope(
+      spine: spine,
+      transport: transport,
+      sync: SyncEngine(spine: spine, transport: transport),
+      clock: Clock(frozenAt: DateTime.utc(2026, 8, 30, 9, 14)),
+    );
+    addTearDown(scope.dispose);
+
+    await tester.pumpWidget(AppScope.provide(
+      scope: scope,
+      child: const MaterialApp(
+        home: Scaffold(
+          body: Desk(
+            child: IndexedStack(
+              index: 1,
+              children: [MomentsRegion(), SizedBox.expand()],
+            ),
+          ),
+        ),
+      ),
+    ));
+    await tester.pump();
+
+    final built = find.byType(BlobImage).evaluate().length;
+    // ignore: avoid_print
+    print('moments offstage: $built of ${prints.length} prints built');
+    expect(built, lessThan(4),
+        reason: '$built tiles were built by a gallery nobody is looking at. An offstage region '
+            'reading the store is a region competing with the one on screen.');
     expect(tester.takeException(), isNull);
   });
 

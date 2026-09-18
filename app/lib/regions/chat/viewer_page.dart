@@ -74,7 +74,10 @@ class _ViewerPageState extends State<ViewerPage> {
   Future<void> _loadVideo() async {
     try {
       final spine = AppScope.of(context).spine;
-      final b = await BlobCache.get(spine, widget.item.event.payload['blob'] as String);
+      // urgent: this is the thing on the screen. The five regions live in an IndexedStack, so
+      // the Moments gallery is laid out and reading its own tiles while this page opens, and
+      // without a lane of its own this read waits behind all of them. See BlobCache.
+      final b = await BlobCache.get(spine, widget.item.event.payload['blob'] as String, urgent: true);
       if (b == null) return;
       final uri = await localUriFor(b.hash, b.bytes, b.mime);
       final c = isWebPlatform ? VideoPlayerController.networkUrl(uri) : VideoPlayerController.file(_fileOf(uri));
@@ -103,12 +106,15 @@ class _ViewerPageState extends State<ViewerPage> {
     if (widget.item.type == 'photo') {
       body = InteractiveViewer(
         maxScale: 6,
-        child: Center(child: BlobImage(hash: p['blob'] as String, fit: BoxFit.contain)),
+        child: Center(child: BlobImage(hash: p['blob'] as String, fit: BoxFit.contain, urgent: true)),
       );
     } else if (widget.item.type == 'video') {
       final v = _video;
       body = v == null
-          ? Center(child: _error == null ? BlobImage(hash: p['poster_blob'] as String, fit: BoxFit.contain) : Text(_error!))
+          ? Center(
+              child: _error == null
+                  ? BlobImage(hash: p['poster_blob'] as String, fit: BoxFit.contain, urgent: true)
+                  : Text(_error!))
           : Center(child: AspectRatio(aspectRatio: v.value.aspectRatio, child: VideoPlayer(v)));
     } else {
       body = const SizedBox.shrink();

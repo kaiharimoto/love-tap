@@ -1,4 +1,5 @@
 // Media from the blob store: images, voice notes, video posters.
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -17,27 +18,132 @@ import '../../material/hands.dart';
 import '../../material/assignment.dart';
 import '../../material/marks.dart';
 
-/// Process-wide cache of decoded blob bytes so scrolling never re-reads the store.
+/// Process-wide cache of decoded blob bytes so scrolling never re-reads the store, and the only
+/// place that decides how many of those reads the store is asked for at once.
+///
+/// It used to be the map alone, and `get` was a `putIfAbsent` that called `spine.blob` the instant
+/// a widget asked. Every caller therefore issued its read immediately and the store served them in
+/// the order they arrived. On the web the store is IndexedDB, which is one lane: a read is not
+/// slow, it is queued, and it is queued behind every read issued before it.
+///
+/// That is survivable until two regions want blobs at the same moment, and `app.dart` guarantees
+/// they will — the five regions live in an `IndexedStack`, so the Moments gallery is laid out and
+/// is issuing reads for its tiles while the screen is showing chat. Open a photograph from the
+/// thread and the viewer's own read goes to the back of a queue it did not make. Two captures have
+/// photographed the result: firing 3 caught `04_moments` as a sheet of paper with every print
+/// missing, firing 4 caught `14_media_viewer` as a bare desk with a caption and no photograph.
+/// Firing 3 established that the prints are not lost — a twelve-second wait brings them all back —
+/// which is what makes this a queue rather than a decode failure. A person on a phone sees an
+/// empty frame for several seconds after tapping a photograph.
+///
+/// So the reads are held here instead, at most [inFlightLimit] of them in the store at once, and
+/// the rest wait in a list this class can reorder. A read marked [urgent] — the thing a person is
+/// actually looking at — is served before the background tiles that have not started yet. It
+/// still waits for whatever is already in the store's lane, which is why the limit is small: the
+/// limit is the worst case an urgent read can be made to wait.
+///
+/// The limit does not make the gallery slower in any way a person can see. The tiles were never
+/// going to be decoded in one frame; they were going to be decoded in the order they were asked
+/// for, and this changes only which order that is.
 class BlobCache {
-  static final Map<String, Future<StoredBlob?>> _futures = {};
+  /// How many reads the store is asked for at once.
+  ///
+  /// Small on purpose. An urgent read cannot overtake a read the store has already accepted, so
+  /// this number is the length of the queue an urgent read can be stuck behind in the worst case.
+  /// Above one, so a single slow blob cannot stall the gallery entirely.
+  static const inFlightLimit = 4;
 
-  static Future<StoredBlob?> get(Spine spine, String hash) => _futures.putIfAbsent(hash, () => spine.blob(hash));
+  static final Map<String, Future<StoredBlob?>> _futures = {};
+  static final List<_Read> _waiting = [];
+  static int _inFlight = 0;
+
+  static Future<StoredBlob?> get(Spine spine, String hash, {bool urgent = false}) {
+    final known = _futures[hash];
+    if (known != null) {
+      // The same blob can be asked for twice: a gallery tile and then the viewer opened on it.
+      // The second ask cannot start a second read, but it can promote the first if it has not
+      // left the queue yet, which is the case that matters — it is exactly the photograph the
+      // person just tapped.
+      if (urgent) {
+        for (final r in _waiting) {
+          if (r.hash == hash) r.urgent = true;
+        }
+        _start();
+      }
+      return known;
+    }
+    final read = _Read(spine, hash, urgent);
+    _waiting.add(read);
+    _futures[hash] = read.done.future;
+    _start();
+    return read.done.future;
+  }
+
+  static void _start() {
+    while (_inFlight < inFlightLimit && _waiting.isNotEmpty) {
+      var pick = _waiting.indexWhere((r) => r.urgent);
+      if (pick < 0) pick = 0;
+      final read = _waiting.removeAt(pick);
+      _inFlight++;
+      unawaited(_serve(read));
+    }
+  }
+
+  static Future<void> _serve(_Read read) async {
+    try {
+      read.done.complete(await read.spine.blob(read.hash));
+    } catch (e, st) {
+      read.done.completeError(e, st);
+    } finally {
+      _inFlight--;
+      _start();
+    }
+  }
 
   static void forget(String hash) => _futures.remove(hash);
+
+  /// Empties the cache and the queue. For tests, which share one process: a cached future from an
+  /// earlier test is an answer to a question this one did not ask.
+  @visibleForTesting
+  static void reset() {
+    _futures.clear();
+    _waiting.clear();
+    _inFlight = 0;
+  }
+}
+
+class _Read {
+  _Read(this.spine, this.hash, this.urgent);
+  final Spine spine;
+  final String hash;
+  bool urgent;
+  final Completer<StoredBlob?> done = Completer<StoredBlob?>();
 }
 
 class BlobImage extends StatelessWidget {
-  const BlobImage({super.key, required this.hash, this.width, this.height, this.fit = BoxFit.cover});
+  const BlobImage({
+    super.key,
+    required this.hash,
+    this.width,
+    this.height,
+    this.fit = BoxFit.cover,
+    this.urgent = false,
+  });
   final String hash;
   final double? width;
   final double? height;
   final BoxFit fit;
 
+  /// Whether this is the picture somebody is looking at, rather than one of the many a region has
+  /// laid out in the background. Set on the viewer and nowhere else: if every caller is urgent,
+  /// none is.
+  final bool urgent;
+
   @override
   Widget build(BuildContext context) {
     final spine = AppScope.of(context).spine;
     return FutureBuilder<StoredBlob?>(
-      future: BlobCache.get(spine, hash),
+      future: BlobCache.get(spine, hash, urgent: urgent),
       builder: (context, snap) {
         final b = snap.data;
         if (b == null) {
