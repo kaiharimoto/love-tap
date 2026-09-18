@@ -2862,3 +2862,164 @@ capture, the script instead of the scroll, the font's own alpha instead of the s
 a single habit, and it has cost this build more than any single bug in the app.
 
 **Lease released.**
+
+## Firing 18 — ADDRESS, cycle 3 — thirty-nine items, ordered by what is capped
+
+No code. `loop/STATE.json` carries the queue and a `queue_note` that states the ordering rule and
+the per-row headroom. Lease taken at `8f4306c` before anything was read, queue pushed at `ea50462`.
+
+### Why the return was thin
+
+**+3.5 is a net, and the gross was +6.**
+
+| row | cycle 2 | cycle 3 | |
+|---|---:|---:|---|
+| emotional_transmission | 6 | 10 | **+4** |
+| messenger_reliability | 19 | 20 | **+1** |
+| anti_goal | 5 | 6 | **+1** |
+| material_truth | 15 | 13 | **−2** |
+| coherence | 10.5 | 10 | **−0.5** |
+| | 55.5 | 59.0 | +3.5 |
+
+The cycle's single largest work item — relighting the whole asset library and rendering 240 fold
+frames — served `material_truth`, and `material_truth` is the row that fell. Three causes, in order
+of size.
+
+**1. The cycle improved inputs, and the rubric scores outputs.** Two hundred and forty fold frames
+were rendered and the clip that plays them is a flat beige rectangle for about two thirds of its
+length, measured from the pixels by three critics who could not see each other. The entire library
+was relit at dusk; the surfaces four critics called simulated paper — the shell, the tear overlay, the arriving-
+note placeholder, the barcode band — do not draw from the library at all. Every defect that more
+than one critic named independently sits at the *last* step, the composite the capture photographs,
+and none of the cycle's work reached that step. The library got better and the picture of it did
+not change.
+
+**2. The brief's regression rule has never once executed.** §04 requires that after every cycle each
+artifact be compared against its predecessor, labelled improved / unchanged / regressed, and that
+regressions be fixed or rolled back before continuing. `evidence/DIFF.json` compares every still
+with itself — `capture.sh:343` rotates `.previous` to hold *this* capture, then
+`collect.py:175` recomputes SSIM against that rotated baseline and overwrites the correct file — so
+it has printed ten `unchanged` labels every cycle since it was written. A −2.5 regression, in the
+cycle whose main work item could regress every artifact at once, passed through invisibly. Caught
+and rolled back, cycle 3 reads 61.5 and the queue below is a different queue. Firing 17 found this
+and ranked it among six broken instruments; it is worse than the other five, because the other five
+fail to *find* a defect and this one asserts that none exists.
+
+**3. The queue was ordered by what was measurable, not by what was blocking.** Twenty-four items
+closed, and the great majority served the legibility and palette instruments — which is to say the
+cycle spent itself on the rulers and then measured a build the rulers do not point at. Meanwhile
+`docs/BRIEF.md` holds three clauses that stop a row rising no matter what else is repaired, each
+held shut by exactly one defect, and **not one of the three was in the queue**:
+
+- Row 01 plus the failure condition *"a rubric row 01 disqualifier scored at the floor; a
+  disqualifier scores strictly below the floor"* — `04_moments.png`. Thirty points, a quarter of the
+  whole rubric, locked strictly under 26 for three cycles.
+- Row 02, *"…or beige rounded rectangle standing in for paper scores this category below its
+  floor"* — the flat rectangle the unfolding clip shows for at least frames 64 to 255 of 320, and
+  which is frozen into `13_messenger_states.png` as the state a note occupies while arriving.
+- Row 05, simulated paper scored twice on purpose — the same cluster again.
+
+That is the shape of it: **cycle 3 worked on what it could measure rather than on what was
+blocking, and the one instrument whose job was to tell it the difference was reading its own
+output.**
+
+### The three rows the dispatch asked about
+
+**`visual_design`, 8 against a critic's 13.5.** Neither of the two readings offered. I put the
+sheets side by side and they enumerate an *identical* defect list — unselected-as-alpha, forty
+palette breaches with three of four declared hue families absent everywhere, the blank Moments grid,
+the clipped bottom row, the comb shadow, the barcode band. Not one defect appears on one sheet and
+not the other. They differ only in what was being scored: the critic scored the design as designed
+and executed and gave the concept credit ("I would open the chat surface every day"); the builder
+scored compliance with the build's own written law and gave the concept none. So the five and a half
+points are a weighting disagreement, not a disagreement about the build. **The queue is identical
+under either number**, which is the answer to "which of those it is changes what to do next" — it
+changes nothing, and that is the finding. What the gap *does* cost is 5.5 points of score bought
+with zero points of diagnosis. `CLAUDE.md`'s rule that the lower score is taken exists to stop the
+builder inflating, and it has no symmetric guard against deflating; a deflated number is just as
+wrong a measurement as an inflated one, and it is the one this build now has. Rank 39 files the
+remedy for the next DIAGNOSE: anchors written into the row *before* the sheet — what a 17 looks
+like, what a 10 looks like, what a 5 looks like, in the measured terms the floors already use.
+
+**`anti_goal`, 6 against a floor of 9.** Cheap and real, exactly as the dispatch guessed, and the
+cheapest points in the build. Three of the four anti-goals are held better than I expected: the
+critic went looking hard for engagement machinery and found *none*, the voice is disciplined in the
+place it almost always fails — the error strings, "it would not go", "not paired yet." — and the
+emotional layer is named feelings on paper strips rather than emoji, with one exception (a smiley
+face with dot eyes is in the vocabulary). The whole of the shortfall is the fourth, simulated paper,
+which the brief scores twice **on purpose**. It breaks four measurable ways and every one already
+has a root cause: the beige rectangle is the unfolding clip's own arriving-note surface, present for two thirds of
+its frames; the flat fill *is* a shell
+family of two assets drawing a colour instead of stock (10_first_run is 59.5 % one RGB value,
+17_setup_pwa 48 %, 01_pulse's base page 98.2 %); the tears *are* overlays, proved by the ruled lines
+running unbroken straight through them; the barcode *is* a texture composited over paper, 58
+mean-crossings across 47 % of the chat frame. So `anti_goal` is not a work stream of its own — it is
+the same cluster that holds `material_truth` below its floor, and the brief says so in as many
+words. Ranks 1 and 5 to 8 are that cluster, and they are ranked there because fixing it once scores
+twice.
+
+**`messenger_reliability`, 20 against a floor of 26, and nothing went near it.** The reason nothing
+went near it is the reason it should be rank 2: the row is not low, it is **capped**. Its own rubric
+text says any single failure that would give either person a reason to open Instagram "scores this
+category at or below its floor regardless of how well everything else is working", and §09 sharpens
+*at or below* into *strictly below*. `04_moments.png` is that failure, and three critics who could
+not see each other named it blocking independently. Every point of polish spent on this row was
+unscoreable while the gallery was blank. The root cause turns out to be neither subtle nor
+expensive, and not what the item that has been open on it since firing 3 assumed: it is not a load
+or eviction race. `evidence/logs/manifest.json` lists **twenty `entries_without_a_file`, sixteen of
+which are the photographs and video posters this screen renders** — four `seed/photos/*.jpg` and
+thirteen `scratch/posters/*.jpg` — and the gate reports `ok: true` anyway. Four missing seed photos
+maps to the six tiles reading "still fetching the picture."; thirteen missing posters maps to the
+blank cards carrying nothing but a duration stub. The old item is marked `superseded` with that
+written down, and its media-viewer half is carried forward as its own item rather than dropped.
+
+### What I did not do
+
+I wrote no code, which is the stage's rule. I ran no capture and took no new measurement of the
+app; the two checks I did run — `evidence/logs/manifest.json` and
+`evidence/logs/06_unfolding.report.json` — were reads of committed tool output, done to confirm that
+the measurement a queue item names actually exists before the item was filed on it. The first confirmed the
+critics exactly: `entries_without_a_file` holds twenty paths, sixteen of them the photographs
+`04_moments` renders. **The second corrected me, and I have corrected the queue item rather than
+shipping it.** I first read `fold: {length: 240, decoded: 13, decoding: 0, playhead: 239}` as a
+decoder that stopped at thirteen frames of two hundred and forty, and filed rank 1 on that. It is
+not that. `FoldFrames.window` in `app/lib/material/fold.dart:35` is 36, `_held` is a *rolling*
+window, and the report is a snapshot at playhead 239 — the last frame — where `held_from: 227,
+held_to: 239` is thirteen frames and is the window behaving correctly at the end of a sequence. All
+240 PNGs are on disk. So the report does not explain the flat rectangle; the pixels three critics
+measured are the only evidence that does, and they are unaffected. Rank 1 now names the symptom as
+its measurement, lists the two candidate causes to separate first — decode falling behind, so
+`frameAt` serves a stale frame (`fold.dart:72-90`, whose own comment at `:77` records a past bug of
+exactly that shape), or a separate placeholder surface drawn before anything decodes — and carries
+the constraint that would otherwise be breached closing it: the WebKit texture budget in
+`TASK_STATE.md` is 32 MB peak, the 36-frame window peaks at 21.2 MB, and the whole sequence held at
+once is about 141 MB, so the fix is not to decode the sequence. `tools/check/texture_budget.py`
+enforces that and should be run alongside.
+
+I did not re-rank by effort. Several of the top items are large and one of them (rank 2) may be
+mostly a matter of producing sixteen photographs through the existing `blender/photos/` pipeline.
+IMPLEMENT should expect rank 1 and rank 2 to be the whole of a firing each, and should not skip them
+for being large — they are worth 13 of the 56 points on the sheet and they unlock two of the three
+caps. Rank 1 in particular must be diagnosed before it is fixed: one plausible reading of it has
+already been ruled out here, and the item says so.
+
+### One correction to `CLAUDE.md`
+
+`CLAUDE.md` still lists `tools/check/texture_budget.py` under known dead ends as "does not exist".
+It exists — it is committed and executable, closed by the `texture-budget-tool` queue item. The
+other two dead ends in that list still hold. Not edited here, because this stage changes no files
+but `loop/`; filed so a successor does not trust the stale line.
+
+### What the next firing gets
+
+Stage IMPLEMENT, cycle 3, thirty-nine open items in rank order. Design is frozen until cycle 6
+("keep and retune", `docs/COLOR.md` + `DIRECTION.md` 2026-09-15), so DESIGN is skipped. IMPLEMENT
+spans firings: drain in order, one commit per item, push after each, and when budget runs low write
+the queue state back and stop. Only a drained queue advances the cycle.
+
+It will need a toolchain — `bash tools/apt-prereqs.sh`, then `./bootstrap.sh --profile=web`, then
+`python3 -m pip install numpy pillow` — and rank 27 says plainly that nothing in this build runs
+`flutter test` at all, so the first firing to hold a toolchain should run the suite early. Three
+`asks[]` entries stand and none of them blocks the loop.
+
+**Lease released.**

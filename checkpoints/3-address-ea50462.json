@@ -1,0 +1,25 @@
+{
+ "cycle": 3,
+ "stage": "ADDRESS",
+ "firing": 18,
+ "at": "2026-09-18T19:13:02Z",
+ "from_sha": "ea50462",
+ "queue_open": 39,
+ "points_on_the_sheet": 56,
+ "headroom": 53,
+ "score_addressed": {
+  "total": 67,
+  "scale": 120,
+  "by_category": {
+   "messenger_reliability": 20,
+   "material_truth": 13,
+   "emotional_transmission": 10,
+   "coherence": 10,
+   "anti_goal": 6,
+   "visual_design": 8
+  }
+ },
+ "ordering_rule": "by which rubric clause is capped, not by which defect is measurable",
+ "next_stage": "IMPLEMENT",
+ "done_when": "every queue item names the measurement that will close it -- checked, 39 of 39 do"
+}
