@@ -1,0 +1,138 @@
+{
+  "critic": "visual_design",
+  "cycle": 2,
+  "score": 13.5,
+  "floor": 17,
+  "meets_floor": false,
+  "measured": {
+    "artifacts_with_failing_text": 3,
+    "worst_ratio": 2.43,
+    "worst_ratio_where": "05_settings.png — the unselected notification choices ('wake me' / 'quietly' / 'not at all') in the WHAT MAY INTERRUPT matrix, 39px hand, ink 80464648 (50% alpha). legibility.json reports 2.42-2.54 across 26 runs on flat ground (ground_swing 1.02-1.06); I re-measured the run at box [1049,1896,268,36] myself from the PNG at p5-ink vs p90-ground and got 2.43:1 against a 4.5 floor."
+  },
+  "findings": [
+    {
+      "artifact": "05_settings.png",
+      "severity": "blocking",
+      "subsystem": "state styling — the disabled/unselected token",
+      "what": "Every unselected option in the interrupt matrix — 'wake me', 'quietly', 'not at all', thirteen rows of three — is set in 50%-alpha grey and sits at roughly 2.4:1 on cream, so two thirds of the screen's interactive vocabulary is the faintest thing on it.",
+      "measurement": "26 runs in legibility.json at ink_core 2.42-2.54 with ground_swing 1.02-1.06 (flat ground, so the number is trustworthy); my own recomputation of [1049,1896,268,36] gives 2.43:1, floor 4.5",
+      "root_cause": "Unselected state is expressed by dropping the ink's alpha to 0x80 rather than by a second, still-legible ink. Opacity is being used as the only signal for 'not chosen', and it costs contrast linearly.",
+      "correction": "Stop encoding 'unchosen' as alpha. Keep every option at full-alpha ink no lighter than #6a6a6c (about 5.2:1 on this paper) and carry the chosen/unchosen distinction with the underline that is already there, plus a pencil-tick or a box, so the difference is a mark rather than a fade."
+    },
+    {
+      "artifact": "01_pulse.png",
+      "severity": "blocking",
+      "subsystem": "state styling — the mood/here/place picker",
+      "what": "The mood picker on the YOURS card — the emotional core of the app — renders 'tender', 'restless', 'low', 'flat', 'heads down', 'work', 'out', 'travelling' in 60%-alpha grey at about 3.0:1, so the feelings you have not picked are the hardest words on the screen to read.",
+      "measurement": "9 runs in legibility.json at ink_core 2.70-3.51, ink 99464648, ground_swing 1.02-1.12; my own recomputation of 'tender' [666,1630,163,73] gives 3.10:1 and 'heads down' [490,1803,287,43] gives 2.99:1, floor 4.5",
+      "root_cause": "Same alpha-as-state rule as 05_settings, one notch lighter (0x99 instead of 0x80). It is a single shared token failing in two places, not two bugs.",
+      "correction": "Same fix as above, and apply it to the same token so both screens move together. The words a person is choosing between must all be readable before one of them is chosen."
+    },
+    {
+      "artifact": "04_moments.png",
+      "severity": "blocking",
+      "subsystem": "moments grid — media loading and empty state",
+      "what": "The whole Moments region is a three-column grid of blank ruled paper: one image out of roughly twenty tiles actually rendered, six tiles carry the literal failure string 'still fetching the picture.', and five more show only a bare duration stub ('41s', '38s', '63s', '21s', '47s') floating on an otherwise empty card with a date in the corner.",
+      "measurement": "No contrast number establishes this — it is what the artifact shows. Alongside it, the two unselected filter chips measure 3.87:1 ('teo') and 3.90:1 ('all year') against a 4.5 floor, confirmed by my own recomputation of boxes [498,497,61,33] and [703,464,212,102].",
+      "root_cause": "Thumbnail fetch never completes in the capture environment and the fallback is a raw sentence rendered as body copy in the tile, so the failure state is doing the design's job. The empty cards keep their full ruled-paper height, which turns one failure into a page of nothing.",
+      "correction": "Give the unloaded tile a real placeholder — a torn blank slip at a fraction of the height with a pencil frame, not a full-size sheet — and demote 'still fetching the picture.' to a small caption under a visible spinner or a paper-clip mark. Collapse tiles with no content rather than reserving space for them. Then raise the filter chips to full-alpha ink like the two blocking findings above."
+    },
+    {
+      "artifact": "01_pulse.png",
+      "severity": "major",
+      "subsystem": "colour system",
+      "what": "There is no second hue anywhere in the build: every artifact's hue families sit inside a 30-40 degree wedge centred on warm yellow-brown, so the widest hue gap is 320-330 degrees and the accent area is essentially nil; the design is one warm cluster with nothing to be warm against.",
+      "measurement": "palette.json floors: 40 breaches across all 10 artifacts. widest_hue_gap_deg breached on all 10 (330.0 here, requires <= 200.0); chroma_by_band.figure.p99_chroma breached on all 10 (0.0829 here, requires >= 0.1); chroma.accent_fraction breached on 9 (0.00048 here, requires >= 0.01). Across the set: named_families 1 of a required 4, mean_chroma 0.0375 against >= 0.045, widest_hue_gap 320.0 against <= 150.0.",
+      "root_cause": "The paper-and-desk metaphor was taken as licence to make the whole gamut paper. The one place a real accent exists — the yellow highlighter on the search term in 12_search, and the single red 'it would not go' in 13 — proves the system can carry one; it just was never extended.",
+      "correction": "Commit one counter-hue and give it about 1-2% of area on every screen. The highlighter yellow from 12_search and the red of the margin rule and the failed-send mark are already in the build; promote them to system accents — the selected mood word, the active tab, the 'read' ticks, the day dividers — instead of leaving nine screens with no accent at all."
+    },
+    {
+      "artifact": "10_first_run.png",
+      "severity": "major",
+      "subsystem": "empty states",
+      "what": "The first thing a new user sees is a phone-height field of one flat off-white with a single small slip floating in the middle, no mid-tone at all, and a header strip that is blank and shifted right of where it sits on every other screen.",
+      "measurement": "palette.json: value_bands.mid 0.0212 against a >= 0.04 requirement; chroma_by_band.figure.mean_chroma 0.0238 against >= 0.035; chroma_by_band.mid.mean_chroma 0.0287 against >= 0.03. Six breaches, the joint-worst in the set with 17_setup_pwa.",
+      "root_cause": "The empty state is the chat surface with the messages removed. Nothing was designed to occupy the space, so the page has a ground and a figure and no middle.",
+      "correction": "Make the first run a composed page, not a subtraction: put the slip on a visible desk surface with a second element at mid value — a blotter, a pinned corner, a shadow with weight — so the eye has somewhere to go. The line 'first one's yours.' deserves a page built around it."
+    },
+    {
+      "artifact": "17_setup_pwa.png",
+      "severity": "major",
+      "subsystem": "paper and edge rendering",
+      "what": "The torn top edge of the setup sheet is a visibly blocky stair-step of rectangles rather than a tear, and the same low-resolution deckle shows as chunky pixel steps at 300% in the chat crop; separately this screen's paper is markedly greyer than the rest of the build and its ground is flat brown with none of the wood grain that frames every other screen.",
+      "measurement": "palette.json: chroma mean 0.0194 here against 0.0397-0.0448 on the other nine artifacts, and hue_families 3 against 4-5 elsewhere; the stair-stepping is visible in 17_setup_pwa.png at the sheet's top edge and in evidence/crops/02_chat_300_shadow.png where the yellow slip's edge and the deckle are plainly upsampled.",
+      "root_cause": "The tear masks are authored at a low resolution (the pool is described in the scene reports as 56 masks) and stretched to a 1440px-wide sheet, so the alpha edge quantises. The setup screen appears to be drawn before the paper/wood theme is applied.",
+      "correction": "Author the tear masks at least 2x the widest sheet they can be stretched to, or blur-and-threshold the alpha at draw time so the step never lands on a pixel boundary. Bring the setup screen onto the same paper stock and wood ground as the other four regions."
+    },
+    {
+      "artifact": "05_settings.png",
+      "severity": "minor",
+      "subsystem": "layout — bottom edge",
+      "what": "The last row of the interrupt matrix ('a note set to arrive') is sliced through its descenders by the tab bar with a second line fully hidden, and the same clipping cuts 'app is on the home screen.' on 17_setup_pwa.png and pushes the 'TALKING' filter chip off the right edge on 12_search.png.",
+      "measurement": null,
+      "root_cause": "The scroll region's bottom inset does not account for the tab bar's height, and the filter chip row does not wrap or scroll.",
+      "correction": "Add bottom padding equal to the tab bar height plus one line to every scrolling region, and let the filter chips wrap to a second row or scroll horizontally with a visible cut edge."
+    },
+    {
+      "artifact": "03_us.png",
+      "severity": "minor",
+      "subsystem": "shadow and texture rendering",
+      "what": "A spiky comb-or-skyline band of grey rectangles runs across the page below the DATES card, and the identical band appears on 05_settings.png under 'let it interrupt you'; on the same screen a vertical barcode-like stripe texture runs directly under the words 'somebody else', which is the one place in the build where a texture is sitting beneath body copy.",
+      "measurement": null,
+      "root_cause": "A torn-edge shadow is being drawn from the mask's own alpha histogram rather than from a blurred silhouette, so the individual mask columns show as bars; the barcode is a paper-stock texture with no clearance rule against text.",
+      "correction": "Blur the shadow source before drawing it, and give any stock texture a lightened clearance band behind any text run that overlaps it."
+    },
+    {
+      "artifact": "04_moments.png",
+      "severity": "minor",
+      "subsystem": "imagery",
+      "what": "The only photograph that loaded is a synthetic 3D render of a grey desk with a chrome sphere, and the media viewer's image is a similar putty-coloured render — they are the coldest, least handmade objects in a set that is otherwise all paper and ink.",
+      "measurement": "palette.json for 14_media_viewer.png: chroma.grey_fraction 0.1376 against a <= 0.08 requirement, and chroma_by_band.ground.mean_chroma 0.023 against >= 0.03 — the grey render is what is pulling that screen's colour out.",
+      "root_cause": "Placeholder imagery from a render engine rather than photographs of the kind the app is meant to carry.",
+      "correction": "Seed the fixture with warm, grainy photographs — the sort two people actually send each other. The frame around the picture is doing careful work and the picture inside it is undoing it."
+    },
+    {
+      "artifact": "06_unfolding.mp4",
+      "severity": "minor",
+      "subsystem": "the unfold animation",
+      "what": "Judged from evidence/crops/06_unfolding_strip.png rather than playback: five of the six sampled frames show the arriving message as a flat, edgeless tan rectangle with a hard drop shadow and no content, and the text ('two steps. put the kettle on the second one not the first one') only appears in the last frame — the same flat rectangle is frozen into the still 13_messenger_states.png, where it reads as a broken empty box.",
+      "measurement": "frames.json: 06_unfolding repeated_fraction 0.163 with a longest_still_run of 23 frames; 15_authored_feeling repeated_fraction 0.319 with a longest_still_run of 36 frames (0.6s of held frames at 60fps)",
+      "root_cause": "The unfold holds a featureless fill for most of its 240-frame sequence before the sheet's own paper stock and tear are applied, and the capture for 13 caught it mid-sequence.",
+      "correction": "Give the folded state the paper stock, the tear and the rule lines from the first frame so it reads as a folded sheet rather than a blank block, and bring the text in progressively as the thirds open rather than all at the end."
+    },
+    {
+      "artifact": "05_settings.png",
+      "severity": "minor",
+      "subsystem": "copy and chrome on the settings paper",
+      "what": "'connecting · http://127.0.0.1:8480' and a second bare 'http://127.0.0.1:8480' are printed twice in the handwriting font on the THE TWO PHONES card, which is the one moment in the build where a raw debug address is treated as something a person wrote by hand.",
+      "measurement": null,
+      "root_cause": "The pairing address is surfaced verbatim with no presentation layer.",
+      "correction": "Show the six words and a QR or a short human address; keep the loopback URL behind a 'the long way' disclosure. A handwritten port number is the least warm thing in the set."
+    }
+  ],
+  "charming": [
+    "The two hands are genuinely two people: 02_chat.png and the 11_chat_scroll strip set one side in a looping italic script (NoorHand) and the other in an upright marker (TeoHand) on visibly different paper stocks — looseleaf, legal, index, graph — with a red margin rule and torn deckle edges, so you can tell who spoke before you read a word.",
+    "The small hand-drawn objects: the two-stroke chair doodle in 13_messenger_states.png, the crescent moon in the 11_chat_scroll strip, the biro smiley and scribbled waveform on the pulse shelf in 01_pulse.png, and the drawer of tokens (moon, sun, leaf, sticky notes) under WARMTH / ACHE / SHELTER / MISCHIEF / STATIC / SPARKLE in the 07_feeling_landing and 15_authored_feeling strips. Nobody adds a lopsided chair to a settings app.",
+    "The yellow highlighter in 12_search.png, drawn as a slightly-overrunning marker swipe over the matched word rather than a rectangle, and the caption slip in 14_media_viewer.png — torn paper on bare wood with 'i am not saying that as a criticism, i am saying it as a fact about a building' and a PUT IT BACK tab. The copy and the material are the same idea."
+  ],
+  "drab": [
+    "The WHAT MAY INTERRUPT matrix in 05_settings.png: thirty-nine near-identical grey words in a thirteen-row grid at 2.4:1, which is a spreadsheet wearing a handwriting font. It is the largest single surface in the build and the least readable.",
+    "04_moments.png as a whole — a three-column grid of blank ruled sheets, six copies of the sentence 'still fetching the picture.', and orphaned '41s' / '38s' / '63s' stubs. Nothing comes forward because there is nothing there; the only image is a grey chrome ball on a grey desk.",
+    "The colour, measured and seen: 40 palette breaches, one named hue family out of four, accent area 0.0 on six of ten artifacts, every hue inside a 30-40 degree wedge. It is not a warm palette, it is an unpainted one — sepia by omission, and 10_first_run.png is the extreme case, 85% of a phone screen in one flat value."
+  ],
+  "would_open_it_daily": true,
+  "what_is_working": [
+    "The two-hands system and the per-message paper stock and tear — 54 stocks and 56 tear masks by the scene reports, and it shows. This is the thing that makes the chat feel like a thread of paper rather than a theme, and it should not be simplified.",
+    "12_search.png is the best-designed screen in the build and the only one that satisfies both halves at once: real accent (highlighter yellow, 0.78% area, the only artifact with a named family present), real value structure (ground 0.33 / mid 0.06 / figure 0.61 — the only screen with a substantial dark ground), a per-result paper stock that tells you what kind of thing you found, and worst text at 3.56:1 that I re-measured at 9.22:1 on the actual pixels. Use it as the reference for the other four regions.",
+    "The type hierarchy in 17_setup_pwa.png — a marker head, a lighter body, a still-lighter note, three sizes carrying three jobs — and its 7.98:1 worst contrast. Whatever rule governs that page should govern 05_settings.",
+    "14_media_viewer.png's structure: full-bleed image, torn caption slip on bare wood, one small paper tab for the action, no contrast failures at all. It is the only artifact that uses darkness as a deliberate ground.",
+    "The dusk variant in crops/dusk_pulse.png — a warm lamplight wash over the whole page rather than an inverted dark theme. It is the single most convincing answer to 'is anything here warm' in the evidence set, and it is not one of the ten scored artifacts."
+  ],
+  "verdict": "This is a real design with a real idea — two hands on torn paper on a wooden desk, with doodles and a drawer of tokens — and in 02_chat, 11_chat_scroll, 12_search, 14_media_viewer and 17_setup_pwa it is executed with more care than most shipped messengers; I would open the chat surface every day. But one rendering rule, unselected state drawn as 50-60% alpha ink, puts the entire mood picker on 01_pulse and the entire interrupt matrix on 05_settings between 2.4:1 and 3.1:1 against a 4.5 floor — 35 runs that I re-measured from the pixels myself and confirmed — while 04_moments is a grid of blank sheets and six copies of 'still fetching the picture.', and palette.json records 40 breaches across all ten artifacts with one hue family and effectively no accent; the objective half therefore caps this below its floor, and the gap to the floor is the distance between a warm idea and a warm build.",
+  "notes": {
+    "clips": "I could not decode the .mp4 files in this container (no ffmpeg). Every judgement about 06_unfolding, 07_feeling_landing, 08_state_propagating, 11_chat_scroll and 15_authored_feeling is made from the six-frame strips in evidence/crops/*_strip.png and from evidence/frames.json and evidence/logs/*.report.json, not from playback.",
+    "missing_artifacts": "09_two_devices.png and 16_setup_android.png are recorded as missing in MANIFEST.json (no Android device up in this session). I have not scored them, imagined their contents, or penalised the build for their absence beyond noting that the two-device view and the Android setup screen are unreviewed here.",
+    "instrument": "I treated legibility.json as a measurement to be checked, not believed. 29 of its 64 below-floor runs are full-alpha ink with ground_swing between 1.8 and 14.5 — the header strip 'week one, and the room smells right again' on six artifacts, 'write something' on two, the WHAT WE SENT / WHAT HAPPENED / WHAT WE FELT stamps, the EVERYTHING / WRITTEN / PHOTOGRAPHS chips, the timestamps, 'text when home · kept', 'it would not go'. I recomputed each of those from the PNG (p5 ink against p90 ground, WCAG relative luminance) and they land between 5.5:1 and 9.8:1, matching the file's own ink_core_ring column; they are the instrument sampling the dark wood or the torn edge as ground and are not design faults. The 35 runs I did count as failures all sit on flat ground (ground_swing 1.02-1.12) and my independent numbers agree with the file's to within 0.05. Separately: legibility.json's dusk array is empty, so the dusk floors (5.0 body / 4.5 large) were applied to nothing — I measured crops/dusk_pulse.png myself and the same unselected mood words read 2.76-2.85:1 there, worse than in daylight, on a surface no gate currently covers.",
+    "no_trend": "No comparison against any previous cycle's numbers was attempted; these are read as the current measurement of the current build only."
+  }
+}
