@@ -3,8 +3,17 @@
 
   evidence/frames.json   what every clip actually is: frame count, rate, dropped frames, and the
                          scroll timings, with the device they came off
-  evidence/DIFF.json     each still against the same still from the previous session, by SSIM
   evidence/MANIFEST.json every artifact, its size, and — for the ones that are missing — why
+
+evidence/DIFF.json is NOT written here, and neither is evidence/.previous rotated here. Both were,
+and both had to stop. capture.sh runs `tools/check/diff.py --rotate` first — which measures this
+capture against the baseline and only then makes this capture the new baseline — and this file then
+ran second, recomputed SSIM against the baseline that had just been rotated to hold this very
+capture, and overwrote the correct file with a column of 1.0s. Every still in every DIFF.json this
+build ever shipped read `ssim: 1.0, unchanged` because each one was compared with itself, so the
+brief's rule that a regression be caught and rolled back before the next cycle has never once run.
+There is exactly one writer of DIFF.json and one rotator of .previous, and tools/check/diff_selftest.py
+holds that to be true.
 
 Nothing is invented here. An artifact that was not captured is listed as missing with the reason
 capture.sh gave, and the previous session's copy is left where it is rather than being passed off
@@ -13,13 +22,11 @@ as this session's.
 import argparse
 import json
 import pathlib
-import shutil
 import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 EVIDENCE = ROOT / "evidence"
-PREVIOUS = EVIDENCE / ".previous"
 LOGS = EVIDENCE / "logs"
 
 STILLS = [
@@ -81,30 +88,6 @@ def probe(path):
     }
 
 
-def ssim(a, b):
-    out = subprocess.run(
-        [sys.executable, str(ROOT / "tools" / "check" / "ssim.py"), str(a), str(b)],
-        capture_output=True, text=True,
-    )
-    try:
-        return json.loads(out.stdout).get("ssim")
-    except Exception:
-        return None
-
-
-def label_for(value):
-    """The coherence critic assigns the label; this is the reading the label has to agree with."""
-    if value is None:
-        return "new"
-    if value >= 0.995:
-        return "unchanged"
-    if value >= 0.90:
-        return "nudged"
-    if value >= 0.60:
-        return "reworked"
-    return "redrawn"
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stamp", required=True)
@@ -120,7 +103,6 @@ def main():
                 reasons[name.strip()] = why.strip()
 
     manifest = {"captured_at": args.stamp, "browser": args.browser, "artifacts": {}, "missing": {}}
-    diff = {"captured_at": args.stamp, "note": "ssim against the previous session; label assigned by the coherence critic", "artifacts": {}}
 
     stamp_s = None
     try:
@@ -170,11 +152,6 @@ def main():
             entry["long_enough"] = entry.get("seconds", 0) >= MIN_SECONDS[name]
         manifest["artifacts"][name] = entry
 
-        if name.endswith(".png"):
-            prev = PREVIOUS / name
-            value = ssim(path, prev) if prev.exists() else None
-            diff["artifacts"][name] = {"ssim": value, "reading": label_for(value), "label": None}
-
     # frames.json: what every clip is made of, and where the frames came from
     frames = {"captured_at": args.stamp, "source": args.browser, "clips": {}, "scroll": {}}
     for name in CLIPS:
@@ -196,16 +173,17 @@ def main():
     else:
         frames["scroll_emulator"] = {"missing": reasons.get("frames.json") or "no Android device was up in this session"}
 
-    (EVIDENCE / "frames.json").write_text(json.dumps(frames, indent=1) + "\n")
-    (EVIDENCE / "DIFF.json").write_text(json.dumps(diff, indent=1) + "\n")
-    (EVIDENCE / "MANIFEST.json").write_text(json.dumps(manifest, indent=1) + "\n")
+    # Anything capture.sh reported that is not one of the seventeen artifacts -- a derived file, a
+    # gate that failed -- still has to appear. It was being read into `reasons` and then dropped on
+    # the floor, so a note_missing on DIFF.json or a selftest would have printed once to a console
+    # nobody reads and left MANIFEST.json saying everything was fine.
+    said = set(STILLS) | set(CLIPS) | {"__default__"}
+    for name, why in reasons.items():
+        if name not in said and name not in manifest["missing"]:
+            manifest["missing"][name] = why
 
-    # keep this session's stills as the baseline the next session is measured against
-    PREVIOUS.mkdir(parents=True, exist_ok=True)
-    for name in STILLS:
-        p = EVIDENCE / name
-        if p.exists():
-            shutil.copy2(p, PREVIOUS / name)
+    (EVIDENCE / "frames.json").write_text(json.dumps(frames, indent=1) + "\n")
+    (EVIDENCE / "MANIFEST.json").write_text(json.dumps(manifest, indent=1) + "\n")
 
     have = len(manifest["artifacts"])
     print(f"· {have} of {len(STILLS) + len(CLIPS)} artifacts present")

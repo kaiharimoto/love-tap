@@ -339,6 +339,15 @@ fi
 # becomes the baseline for the next one. The rotation has to happen here rather than by hand:
 # nothing rotated it for a long time, so every SSIM in DIFF.json was unreproducible from the
 # baseline that shipped beside it.
+#
+# The ruler is checked before it is read. For three cycles the step below wrote a correct DIFF.json
+# and tools/capture/collect.py then overwrote it with SSIM measured against the baseline this same
+# step had just rotated -- every still compared with itself, every label "unchanged", and a 2.5
+# point regression between cycle 2 and cycle 3 that nothing was in a position to see. The selftest
+# runs two captures against a throwaway tree with one still altered between them and fails if the
+# altered one does not read `changed`, so a second writer cannot come back unnoticed.
+python3 tools/check/diff_selftest.py >"$LOG/diff_selftest.json" 2>&1 \
+  || note_missing "DIFF.json" "tools/check/diff_selftest.py failed: the comparison against the previous capture is not trustworthy; see evidence/logs/diff_selftest.json"
 python3 tools/check/diff.py --rotate || true
 
 # the frames are the negative of a clip and run to hundreds of megabytes a run; the mp4 and the
