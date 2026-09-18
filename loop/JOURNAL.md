@@ -2129,3 +2129,178 @@ which it was not — that is what a shallow refetch of a moved branch looks like
 still the one §0 tells you to use.
 
 Lease: `cse_012SuXDQ8tX3DrZEp6D5EkG5`, four hours, to 2026-09-18T10:58Z.
+
+## Firing 14 — IMPLEMENT, cycle 3
+
+Five items touched. One closed with its measurement taken both ways, two measured to a definite
+answer and moved to the back of the queue at three attempts, one corrected against its own
+evidence, two new ones filed. No capture: this was IMPLEMENT.
+
+### `a-second-widget-test-in-a-file-hangs-for-ten-minutes` — closed
+
+The one open item whose whole measurement could be taken in this container, and it took under an
+hour. `app/test/the_library_loads_more_than_once_test.dart` holds three `testWidgets` in one file,
+each calling `await MaterialLibrary.load()` the obvious way — no `setUpAll`, no `loaded` guard —
+at a thirty-second timeout rather than the runner's ten minutes. **The re-break was run first**:
+against the code as committed, test one passes in under a second and tests two and three both
+report `TimeoutException after 0:00:30`. With the library memoised, all three pass in under a
+second.
+
+`CachingAssetBundle` caches the *Future* of `loadString`, so the second call awaits a Future the
+first made inside a fake-async zone that has stopped. The fix is the first branch the item asked
+for: `load()` returns the decoded instance without touching the bundle. An explicit `bundle:` is
+still read, because that is the only thing the parameter is for.
+
+The item also asked whether anything else through `rootBundle` has the shape, and the answer is
+written down rather than assumed: `asset_bundle.dart:186-187` caches `loadString` and
+`loadStructuredData` and **not** `load`, so the trap needs a `loadString`. `MaskCache` and
+`FoldFrames._decode` both use `load` and both memoise their own `ui.Image`. `SeedLoader` does use
+`loadString`, and is only ever called from `main` and from two tests' `setUpAll` — outside any
+fake-async zone. A widget test that called it twice in one file would hang the same way.
+
+### The sixteen timestamps, re-counted — nine go, not thirteen, and the other seven are not ink
+
+Firing 13 fixed the `Opacity(0.78)` and predicted thirteen of sixteen would clear. The arithmetic
+that was never done needs no capture: every failure in `evidence/legibility.json` carries
+`ground_lum`, the ground the floor was actually taken against, so what a run *becomes* at full ink
+is `contrast(Y(#464648), that ground)`. `Pen.margin` is Y 0.0615 and needs its ground at Y 0.4518;
+**any** dark ink needs Y 0.1750. Nine runs have paper under them and clear, at 4.63 to 7.68:1.
+
+The seven that do not were each cropped and looked at, and not one is the app's ink:
+
+- **Two are already at full strength.** The px-33 pair in `12_search` measure 3.38 and 4.24, which
+  equal their own best case to two decimals. The thinning never touched them.
+- **One is read against its own colon and its own digits.** `02_chat` at 1.02:1 — the `:` is two
+  5×5 components, area 18 and 21, under `GLYPH_MIN_AREA` 24 and `min_h` 18; the `44` merged with
+  the stock's printed rule into one 543×31 component thrown out on aspect. Neither is an accepted
+  glyph, so both stay in the ground, and the ground's dark end is the word itself.
+- **Two are read against the torn edge below them.** `13_messenger_states` at 1.24 and `02_chat` at
+  1.89, ring grounds 0.7946 and 0.8202, crisp dark ink on cream in the crop. Both are the last
+  line on their note, so the relit lip and its contact shadow are inside the half-glyph band.
+- **Two are not writing at all.** `12_search`'s at 1.27 is at y=0 and is bare wood grain;
+  `14_media_viewer`'s at 1.01 is photograph. Both sit inside the padded rect of a declared run the
+  app painted over.
+
+So the item's measurement — *zero failures whose says matches a timestamp* — cannot pass on any
+capture, because it asks the app for seven runs that are not its ink. The next OBSERVE should
+expect nine to go and seven to remain, and should not read that as the fix failing.
+
+### Two items filed, and what they are worth
+
+**`a-run-is-read-against-its-own-lines-ink`.** A run's ground is everything near it that is not an
+*accepted* glyph, and three kinds of the app's own ink are never accepted: punctuation under the
+area floor, strokes merged with a printed rule and thrown out on aspect, and drawn rules. Measured
+with two scratch copies of `legibility.py`, neither committed, each a single substitution:
+
+```
+  committed                                84 of 370 below floor   0.2270
+  A  every mark pixel inside a declared line out of the ground
+                                           67                      0.1811   17 gone, 0 new
+  C  only components small enough to be a stroke, half inside the line
+                                           77                      0.2081    8 gone, 1 new
+```
+
+**A is the wrong rule and the counter-example is the useful part.** `12_search`'s `PHOTOGRAPHS` is
+a torn tab in two halves with the desk showing through the gap between the O and the T, and A
+takes that desk out of the ground because it is mark-like and inside the line box. A ruler that
+cannot see a hole in the paper a word is written across is not the one to have. C keeps it, misses
+the merged digits-plus-rule case, and its one new failure is the `near.sum() >= 200` guard falling
+back to the whole ring box, which reaches off the sheet. Neither is the answer; the item wants a
+designed rule, and the rule is that a run's ground is the surface the letters are on.
+
+**`the-app-declares-writing-it-has-painted-over`.** `14_media_viewer` declares 25 runs and 49
+lines; the screen is a photograph, one torn note and one stamped button, and the other 22 runs are
+the chat behind the viewer. `legibility.py` looks inside those rects, finds photograph and grain,
+and reports it as writing. All four of that screen's failures are this, and two of `12_search`'s
+nine are the same thing at y=0. The sidecar already has an `offscreen` key, so occluded is the
+case that was missed rather than one the format cannot express.
+
+Together: 8 to 17 of the 84 are the ruler and 6 more are the declaration, disjoint. **The
+app-attributable rate on firing 12's capture is between 16.49% and 18.92%, against a declared
+baseline of 22.70%.** That is what every firing reading `legibility.json` has been working
+against, and firing 13 already lost a guess to it.
+
+### `paper-is-the-median-pixel` — the missing asset built, and measured as insufficient
+
+Firing 4 wrote the route out and three firings left it alone: teach `tear_relief.py` to emit a
+straight-edged variant, wire it through, use it from `RegionPad`. `blender/paper/cut_relief.py`
+now renders both passes a torn piece gets — the contact shadow of a cut sheet and the lit band
+along the cut. It is `tear_relief.py` with the torn parts removed and nothing invented: no fibre
+band and no flare, because that file's own comment says a cut edge is flat; no corner lift,
+because a pad that covers a region is not a note lying loose; the curl and the cockle at its
+numbers, because that is what paper on a desk does whatever cut it.
+
+Then the prediction, against the committed `10_first_run.png`, with the render put back around the
+pad the way the app would — nine-sliced, the sheet covering its own footprint, `RegionPad`'s own
+`_margin` 12 and `_peek` 7 at DPR 3, which the still confirms — and read through `palette.py`'s own
+`describe()` and `read()`:
+
+```
+  committed                     value_bands.mid 0.0212      floor 0.04
+  the contact shadow                            0.0218
+  the cut edge light                            0.0236
+  both                                          0.0240
+  shadow at a reach of 3.4 mm                   0.0281
+  a pad of six sheets, each casting             0.0062      (synthetic, starts at 0.0000)
+  a flat rim 10 device px at the midpoint       0.0540
+```
+
+**The route does not close the item, and the reason generalises.** A contact shadow is a thin
+band; `palette.py` samples the long side to 700 px; 21 device px of shadow is 4.7 px there and
+averages back into the paper. The flat-rim row says the floor *is* reachable — by an area at a
+middle lightness, not by an edge — and the real edge render stays paper-bright, Y 0.89 to 0.96
+against a flat centre of 0.933, because a curled edge turns toward the sky rather than away from
+it. What `10_first_run` is short of is a mid-toned **area**, and what that may be is
+`docs/COLOR.md`'s question.
+
+The renders are deliberately **not** committed: `pack_assets.py` packs every png in `assets/paper`
+into the paper family, so an unwired `cut_shadow.png` would enter the packed library and the app's
+`INDEX.json` at the next capture without anyone asking. They take ten seconds to regenerate.
+
+### `the-day-rig-is-what-took-the-colour-out` — measured clause by clause, and not closable
+
+`palette.py --floors --classes docs/screen_classes.json` over the committed evidence: 40 breaches.
+Every §5 chroma ceiling holds — zero p99 breaches on any band on any still, which was the whole
+risk of this item. But `ground.mean_chroma >= 0.030` is 8 of 10 and `mid.mean_chroma` is 8 of 10,
+and `across_the_set.mean_chroma` is 0.0374 against 0.045. So firing 8's proposal — close on the
+per-band floors, carry the set mean to the albedo items — is half right and cannot be executed:
+the per-band floors do not pass either.
+
+The four that fail are `14_media_viewer` (a photograph), `10_first_run` and `17_setup_pwa`, and
+`17_setup_pwa` is the interesting one: it is an all-paper instruction sheet whose ground band is
+the darkest third of *paper*, and the 0.030 ground floor was calibrated on screens whose ground is
+the plank. No lamp change reaches that. It is a question about the law, and DESIGN's to answer.
+
+### Two items at three attempts, moved to the back
+
+`paper-is-the-median-pixel` and `the-day-rig-is-what-took-the-colour-out` both reached three
+attempts here and both carry `what_would_unblock`. The global `blocked` is deliberately left null:
+the loop is not blocked, nine other items are open, and a successor reading `blocked` as "stop"
+would be reading something this firing does not mean.
+
+### The clone, for the seventh firing running, and a third route that worked
+
+50 commits, 50 ahead, 50 behind, empty merge-base, two entries in `.git/shallow`. This container
+refused nothing, and `git checkout -B <branch> origin/<branch>` did it in one command.
+`WORKER_PROMPT.md` §0 now carries all three routes in the order to try them. Also: bare
+`git fetch origin` took 3m40s here and reported the branch as a `(forced update)`, which it was
+not — that is what a shallow refetch of a moved branch looks like.
+
+### For whoever runs next: the stage is OBSERVE, and this is why
+
+**The queue was not drained, and the stage is being handed on anyway.** Every one of the eleven
+open items now needs a capture, a ranking, or a decision about the law, and four of them are
+waiting on the capture specifically:
+
+1. `capture-packs-its-assets-after-the-gate-that-reads-them` closes end to end **only** on a
+   container that captures before it packs. **Do not run `pack_assets.py` before `capture.sh`.**
+   This firing packed, for `flutter test`, and so could not have taken it.
+2. `the-timestamps-are-a-quarter-of-the-failing-writing` — expect nine of sixteen to go and seven
+   to remain, for the reasons above.
+3. `the-gallery-loses-its-pictures-under-load` needs three consecutive clean captures and is at 0.
+4. `the-relit-tear-edge-is-a-dark-band` wants `--text-runs` on a capture with sidecars.
+
+And the two filed here are the highest-value unranked things on the board, because they say the
+baseline every other legibility item is measured against is between 3.8 and 6.2 points too high.
+
+**Lease released.**

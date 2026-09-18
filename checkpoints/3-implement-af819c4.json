@@ -1,0 +1,58 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 14,
+ "at_commit": "af819c4",
+ "completed": "NOT a drained queue. One item closed with its measurement, two measured to a definite answer and moved to the back at three attempts, one corrected against its own evidence, two filed. The stage is handed to OBSERVE because every open item now needs a capture, a ranking, or a decision about the law -- see stage_change_note.",
+ "closed": [
+  "a-second-widget-test-in-a-file-hangs-for-ten-minutes"
+ ],
+ "new_queue_items": [
+  "a-run-is-read-against-its-own-lines-ink",
+  "the-app-declares-writing-it-has-painted-over"
+ ],
+ "legibility": {
+  "declared_baseline": {
+   "runs": 370,
+   "below_floor": 84,
+   "share": 0.227
+  },
+  "the_ruler_reading_a_line_against_its_own_ink": {
+   "conservative": 8,
+   "wide": 17
+  },
+  "texture_inside_a_declaration_the_app_painted_over": 6,
+  "app_attributable_share": [
+   0.1649,
+   0.1892
+  ],
+  "how": "two scratch copies of tools/check/legibility.py, neither committed, each one substitution at the is_ground line; and every failure cropped and looked at"
+ },
+ "timestamps": {
+  "of_sixteen_clear_at_full_ink": 9,
+  "remain": 7,
+  "firing_13_predicted": 13,
+  "why": "the seven are the ruler and the declaration, not the app's ink"
+ },
+ "paper_is_the_median_pixel": {
+  "asset_built": "blender/paper/cut_relief.py, both passes, renders not committed",
+  "value_bands_mid": {
+   "committed": 0.0212,
+   "shadow": 0.0218,
+   "edge": 0.0236,
+   "both": 0.024,
+   "floor": 0.04,
+   "a_flat_rim_10px_at_the_midpoint": 0.054
+  },
+  "reading": "the mid band wants an area at a middle lightness, not an edge treatment"
+ },
+ "day_rig": {
+  "section_5_chroma_ceilings": "all hold, zero p99 breaches",
+  "ground_mean_chroma_over_0.030": "8 of 10",
+  "mid_mean_chroma_over_0.030": "8 of 10",
+  "across_the_set_mean_chroma": 0.0374,
+  "floor": 0.045,
+  "reading": "what is left is a question about the law, not about the rig"
+ },
+ "next_stage": "OBSERVE — capture BEFORE packing, or one item's measurement is lost again"
+}
