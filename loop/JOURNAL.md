@@ -2304,3 +2304,63 @@ And the two filed here are the highest-value unranked things on the board, becau
 baseline every other legibility item is measured against is between 3.8 and 6.2 points too high.
 
 **Lease released.**
+
+## Firing 15 — OBSERVE refused, IMPLEMENT run instead — lease taken
+
+`loop/STATE.json` said OBSERVE. This firing is not capturing, and the reason is the instrument.
+
+**The judgement, and it is a close one.** Firing 14 measured two defects in the declared-runs ruler
+and filed both with numbers: `a-run-is-read-against-its-own-lines-ink` accounts for 8 to 17 of the
+84 runs below floor, and `the-app-declares-writing-it-has-painted-over` for a disjoint 6. So the
+22.70% baseline is between 3.8 and 6.2 points too high, and the app-attributable rate is somewhere
+in 16.49% to 18.92%. That much was already known before this firing started.
+
+The question the stage turns on is not whether the ruler is wrong — it is whether it is wrong by a
+**constant**, because a constant error cancels in a delta and a capture taken with it still means
+something. It does not, and here is the argument against my own first instinct:
+
+- **The occluded-declaration component scales with what the app paints over.** Six runs today, all
+  on `14_media_viewer` and `12_search`, because those are the two screens with an overlay. Any
+  change to an overlay moves that count with no change to any ink.
+- **The ink-as-ground component scales with punctuation and rules near runs.** A colon, a printed
+  rule a digit touches, an underline the widget draws. Change the typography and the count moves.
+- So the error is a function of what the app draws, which is precisely the variable a capture
+  exists to measure. It cannot be subtracted afterwards, and firing 14's hand attribution would
+  have to be redone, by hand, every cycle.
+
+**And the next capture's headline item is the one this breaks worst.**
+`the-timestamps-are-a-quarter-of-the-failing-writing` is queued and its cause is fixed. Firing 14
+did the arithmetic in advance: nine of its sixteen failures clear, and the other **seven survive
+the fix because of these two defects** — two read against their own line's ink, two against a torn
+edge, two are wood grain and photograph inside declarations the app painted over. A capture taken
+now would report a fix that works as 56% effective, and nothing in the number would say which. The
+loop has already paid for this once: firing 13 read `14_media_viewer`'s 1.01:1 timestamp as the
+gallery's fault and lost a guess to a crop that turns out to be photograph.
+
+**The cost of deferring, stated honestly.**
+`capture-packs-its-assets-after-the-gate-that-reads-them` wants a container that captures before it
+packs, and this container is fresh. Spending it on IMPLEMENT — which runs `flutter test`, which
+packs — spends that property. That is one queue item at attempt 1, set against the single number
+every legibility item on the board is measured against. I am taking the trade, and recording it so
+that a successor can disagree with it on the record rather than rediscover it.
+
+**What makes this worth a firing rather than a remark** is that the two items are cheap and
+asymmetric. `a-run-is-read-against-its-own-lines-ink` closes over the **committed** evidence with no
+capture at all — `legibility.py` runs the set in about four minutes, so the before and after are
+both taken here. `the-app-declares-writing-it-has-painted-over` is an app-side change that must
+land *before* a capture to be measurable at all; capturing first guarantees a second capture.
+Capture-then-fix costs two captures and yields one meaningless number. Fix-then-capture costs one.
+
+Stage set back to IMPLEMENT for this firing, and it goes to OBSERVE at the end so the next firing
+captures with a ruler that has been re-measured.
+
+**The clone read as a fork for the seventh time, and the shortest route was allowed again.** Two
+entries in `.git/shallow`, `git rev-list --count` reading 50 and 50 — but `git merge-base` was
+**not** empty here, it returned the local tip, which is the clearest single tell yet that the
+divergence is a graft boundary and not work. `git reset --hard` was allowed at this container, for
+the first time in three firings that tried it; `WORKER_PROMPT.md` §0 says it has been refused twice
+and allowed never, and that is now once. It is still the wrong one to start with. The bare
+`git fetch origin` was the slow kind: it indexed a 9,671-object pack in about three minutes and
+returned.
+
+Lease: `session_01F2z1wtbTSmScfd9anwWMV7`, four hours, to 2026-09-18T14:00Z.
