@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2605
+   "ms": 4018
   },
   {
    "do": "wait",
-   "ms": 2108
+   "ms": 2102
   },
   {
    "do": "shot",
-   "ms": 3251
+   "ms": 3282
   },
   {
    "do": "report",
-   "ms": 978
+   "ms": 990
   }
  ],
  "shots": [
@@ -89,7 +89,7 @@
    "at": "03_us.png"
   }
  ],
- "cold_ms": 11233,
+ "cold_ms": 12548,
  "problems": [],
  "ok": true
 }

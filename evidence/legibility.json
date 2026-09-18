@@ -311,14 +311,14 @@
    ]
   },
   "02_chat.png": {
-   "runs": 45,
-   "below_floor": 9,
+   "runs": 46,
+   "below_floor": 5,
    "text_runs": "declared",
    "declared_lines": 67,
-   "marks_outside_text": 186,
+   "marks_outside_text": 188,
    "worst_ink_core": 1.2,
-   "median_ink_core": 7.74,
-   "median_as_rendered": 6.43,
+   "median_ink_core": 7.85,
+   "median_as_rendered": 7.77,
    "detail": [
     {
      "box": [
@@ -370,166 +370,70 @@
     },
     {
      "box": [
-      156,
-      1399,
-      282,
-      69
+      242,
+      2367,
+      185,
+      34
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.65,
+     "ink_median": 3.65,
+     "ink_core_ring": 7.62,
+     "ground_swing": 2.1,
+     "ground_lum": 0.3574,
+     "ground_lum_ring": 0.7995,
+     "says": "Wed 22 Apr \u00b7 16:44",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      213,
+      1421,
+      225,
+      43
      ],
      "glyphs": 6,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.89,
-     "ink_median": 1.39,
-     "ink_core_ring": 11.82,
-     "ground_swing": 6.78,
-     "ground_lum": 0.0892,
-     "ground_lum_ring": 0.8202,
-     "says": "Wed 22 Apr \u00b7 16:36",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      214,
-      2367,
-      213,
-      34
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.71,
-     "ink_median": 2.67,
-     "ink_core_ring": 4.46,
-     "ground_swing": 1.65,
-     "ground_lum": 0.4667,
-     "ground_lum_ring": 0.7995,
-     "says": "Wed 22 Apr \u00b7 16:44",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      211,
-      740,
-      271,
-      41
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.48,
-     "ink_median": 3.38,
-     "ink_core_ring": 4.59,
-     "ground_swing": 1.32,
-     "ground_lum": 0.6118,
-     "ground_lum_ring": 0.8212,
-     "says": "Wed 22 Apr \u00b7 16:30",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      238,
-      1890,
-      284,
-      55
-     ],
-     "glyphs": 8,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 4.4,
-     "ink_median": 3.59,
-     "ink_core_ring": 5.35,
-     "ground_swing": 1.27,
-     "ground_lum": 0.6865,
-     "ground_lum_ring": 0.8451,
-     "says": "Wed 22 Apr \u00b7 16:40",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      428,
-      2369,
-      94,
-      40
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 4.45,
-     "ink_median": 4.38,
-     "ink_core_ring": 4.45,
-     "ground_swing": 1.02,
-     "ground_lum": 0.7995,
-     "ground_lum_ring": 0.7995,
-     "says": "Wed 22 Apr \u00b7 16:44",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      526,
-      2370,
-      53,
-      32
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 4.46,
-     "ink_median": 4.39,
-     "ink_core_ring": 4.46,
-     "ground_swing": 1.02,
-     "ground_lum": 0.8004,
-     "ground_lum_ring": 0.8004,
-     "says": "Wed 22 Apr \u00b7 16:44",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      419,
-      1425,
-      147,
-      33
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 4.48,
-     "ink_median": 4.42,
-     "ink_core_ring": 4.48,
-     "ground_swing": 1.05,
-     "ground_lum": 0.8058,
+     "ink_core": 3.67,
+     "ink_median": 3.67,
+     "ink_core_ring": 7.68,
+     "ground_swing": 2.1,
+     "ground_lum": 0.3593,
      "ground_lum_ring": 0.8058,
      "says": "Wed 22 Apr \u00b7 16:36",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      212,
+      740,
+      212,
+      41
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.77,
+     "ink_median": 3.77,
+     "ink_core_ring": 7.81,
+     "ground_swing": 2.07,
+     "ground_lum": 0.3701,
+     "ground_lum_ring": 0.8212,
+     "says": "Wed 22 Apr \u00b7 16:30",
      "px": 36,
      "points": 12,
      "family": "TeoHand",
@@ -543,10 +447,10 @@
    "below_floor": 1,
    "text_runs": "declared",
    "declared_lines": 29,
-   "marks_outside_text": 187,
+   "marks_outside_text": 222,
    "worst_ink_core": 1.3,
-   "median_ink_core": 7.83,
-   "median_as_rendered": 7.65,
+   "median_ink_core": 7.73,
+   "median_as_rendered": 7.38,
    "detail": [
     {
      "box": [
@@ -579,10 +483,10 @@
    "below_floor": 8,
    "text_runs": "declared",
    "declared_lines": 33,
-   "marks_outside_text": 85,
+   "marks_outside_text": 249,
    "worst_ink_core": 1.09,
    "median_ink_core": 7.66,
-   "median_as_rendered": 6.79,
+   "median_as_rendered": 6.56,
    "detail": [
     {
      "box": [
@@ -1475,39 +1379,15 @@
    ]
   },
   "12_search.png": {
-   "runs": 41,
-   "below_floor": 8,
+   "runs": 37,
+   "below_floor": 6,
    "text_runs": "declared",
-   "declared_lines": 85,
-   "marks_outside_text": 69,
-   "worst_ink_core": 1.01,
+   "declared_lines": 42,
+   "marks_outside_text": 82,
+   "worst_ink_core": 1.07,
    "median_ink_core": 7.66,
-   "median_as_rendered": 7.45,
+   "median_as_rendered": 7.48,
    "detail": [
-    {
-     "box": [
-      495,
-      1102,
-      403,
-      43
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.01,
-     "ink_median": 1.25,
-     "ink_core_ring": 2.67,
-     "ground_swing": 1.6,
-     "ground_lum": 0.0301,
-     "ground_lum_ring": 0.1606,
-     "says": "It was the good end. I left you the better one, which is a diff\u2026",
-     "px": 57,
-     "points": 19,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff3a3a3c"
-    },
     {
      "box": [
       696,
@@ -1582,54 +1462,6 @@
     },
     {
      "box": [
-      474,
-      37,
-      192,
-      42
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.17,
-     "ink_median": 1.01,
-     "ink_core_ring": 1.78,
-     "ground_swing": 1.55,
-     "ground_lum": 0.0328,
-     "ground_lum_ring": 0.0767,
-     "says": "week one, and the room smells right again",
-     "px": 51,
-     "points": 17,
-     "family": "NoorHand",
-     "hand": "hand",
-     "ink": "d91f2a44"
-    },
-    {
-     "box": [
-      476,
-      0,
-      122,
-      36
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.34,
-     "ink_median": 1.21,
-     "ink_core_ring": 1.85,
-     "ground_swing": 1.39,
-     "ground_lum": 0.0421,
-     "ground_lum_ring": 0.0774,
-     "says": "Thu 3 Sep \u00b7 16:55",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
       245,
       1556,
       423,
@@ -1642,8 +1474,8 @@
      "ink_core": 1.58,
      "ink_median": 1.04,
      "ink_core_ring": 12.96,
-     "ground_swing": 8.26,
-     "ground_lum": 0.0602,
+     "ground_swing": 8.24,
+     "ground_lum": 0.0604,
      "ground_lum_ring": 0.8553,
      "says": "text when home \u00b7 kept",
      "px": 51,
@@ -1651,6 +1483,30 @@
      "family": "TeoHand",
      "hand": "hand",
      "ink": "ff3a3a3c"
+    },
+    {
+     "box": [
+      124,
+      674,
+      1079,
+      148
+     ],
+     "glyphs": 30,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.56,
+     "ink_median": 3.56,
+     "ink_core_ring": 9.22,
+     "ground_swing": 2.59,
+     "ground_lum": 0.2798,
+     "ground_lum_ring": 0.8032,
+     "says": "Rain. The first in a month and I walked the hill in it with the\u2026",
+     "px": 42,
+     "points": 14,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "dd000000"
     },
     {
      "box": [
@@ -1680,38 +1536,14 @@
   },
   "13_messenger_states.png": {
    "runs": 40,
-   "below_floor": 8,
+   "below_floor": 4,
    "text_runs": "declared",
    "declared_lines": 54,
-   "marks_outside_text": 163,
-   "worst_ink_core": 1.24,
-   "median_ink_core": 6.45,
-   "median_as_rendered": 5.55,
+   "marks_outside_text": 174,
+   "worst_ink_core": 1.28,
+   "median_ink_core": 7.75,
+   "median_as_rendered": 7.73,
    "detail": [
-    {
-     "box": [
-      290,
-      2239,
-      220,
-      58
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.24,
-     "ink_median": 1.26,
-     "ink_core_ring": 6.87,
-     "ground_swing": 6.03,
-     "ground_lum": 0.1027,
-     "ground_lum_ring": 0.7946,
-     "says": "Thu 3 Sep \u00b7 19:40",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
     {
      "box": [
       123,
@@ -1762,93 +1594,21 @@
     },
     {
      "box": [
-      601,
-      1727,
-      93,
-      32
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.39,
-     "ink_median": 3.39,
-     "ink_core_ring": 4.55,
-     "ground_swing": 1.34,
-     "ground_lum": 0.6163,
-     "ground_lum_ring": 0.8428,
-     "says": "Thu 3 Sep \u00b7 19:40",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      374,
-      1727,
-      186,
-      40
-     ],
-     "glyphs": 7,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.42,
-     "ink_median": 3.42,
-     "ink_core_ring": 4.53,
-     "ground_swing": 1.33,
-     "ground_lum": 0.6205,
-     "ground_lum_ring": 0.839,
-     "says": "Thu 3 Sep \u00b7 19:40",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      650,
-      2002,
-      102,
-      31
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.64,
-     "ink_median": 3.64,
-     "ink_core_ring": 4.55,
-     "ground_swing": 1.25,
-     "ground_lum": 0.6635,
-     "ground_lum_ring": 0.8428,
-     "says": "going",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      624,
+      646,
       2582,
-      317,
-      39
+      294,
+      41
      ],
      "glyphs": 12,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.79,
-     "ink_median": 3.79,
-     "ink_core_ring": 3.79,
-     "ground_swing": 1.02,
-     "ground_lum": 0.839,
-     "ground_lum_ring": 0.839,
+     "ink_core": 4.24,
+     "ink_median": 4.24,
+     "ink_core_ring": 5.52,
+     "ground_swing": 1.3,
+     "ground_lum": 0.6195,
+     "ground_lum_ring": 0.8212,
      "says": "it would not go",
      "px": 36,
      "points": 12,
@@ -1858,21 +1618,21 @@
     },
     {
      "box": [
-      511,
-      2241,
-      101,
-      33
+      298,
+      1995,
+      194,
+      40
      ],
-     "glyphs": 4,
+     "glyphs": 6,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 4.44,
-     "ink_median": 4.38,
-     "ink_core_ring": 4.44,
-     "ground_swing": 1.02,
-     "ground_lum": 0.7946,
-     "ground_lum_ring": 0.7946,
+     "ink_core": 4.3,
+     "ink_median": 4.3,
+     "ink_core_ring": 7.65,
+     "ground_swing": 1.8,
+     "ground_lum": 0.4291,
+     "ground_lum_ring": 0.8032,
      "says": "Thu 3 Sep \u00b7 19:40",
      "px": 36,
      "points": 12,
@@ -1883,112 +1643,15 @@
    ]
   },
   "14_media_viewer.png": {
-   "runs": 9,
-   "below_floor": 4,
+   "runs": 4,
+   "below_floor": 0,
    "text_runs": "declared",
-   "declared_lines": 49,
-   "marks_outside_text": 51,
-   "worst_ink_core": 1.01,
-   "median_ink_core": 4.86,
-   "median_as_rendered": 2.69,
-   "detail": [
-    {
-     "box": [
-      381,
-      953,
-      122,
-      18
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.01,
-     "ink_median": 1.04,
-     "ink_core_ring": 2.03,
-     "ground_swing": 1.93,
-     "ground_lum": 0.0194,
-     "ground_lum_ring": 0.0888,
-     "says": "Sat 14 Mar \u00b7 12:50",
-     "px": 34.5,
-     "points": 11.5,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      624,
-      1010,
-      329,
-      135
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.02,
-     "ink_median": 1.24,
-     "ink_core_ring": 11.35,
-     "ground_swing": 11.39,
-     "ground_lum": 0.0232,
-     "ground_lum_ring": 0.7688,
-     "says": "went to the fourteenth at his flat. one room, nobody singing \u00b7 \u2026",
-     "px": 39,
-     "points": 13,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
-    },
-    {
-     "box": [
-      461,
-      571,
-      59,
-      19
-     ],
-     "glyphs": 1,
-     "polarity": "light",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.08,
-     "ink_median": 1.02,
-     "ink_core_ring": 2.18,
-     "ground_swing": 1.98,
-     "ground_lum": 0.1328,
-     "ground_lum_ring": 0.0406,
-     "says": "on the bus with a bag containing nothing. i have brought an emp\u2026",
-     "px": 57,
-     "points": 19,
-     "family": "NoorHand",
-     "hand": "hand",
-     "ink": "ff1f2a44"
-    },
-    {
-     "box": [
-      770,
-      731,
-      177,
-      37
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.19,
-     "ink_median": 1.07,
-     "ink_core_ring": 2.47,
-     "ground_swing": 2.2,
-     "ground_lum": 0.2875,
-     "ground_lum_ring": 0.6492,
-     "says": "on the bus with a bag containing nothing. i have brought an emp\u2026",
-     "px": 57,
-     "points": 19,
-     "family": "NoorHand",
-     "hand": "hand",
-     "ink": "ff1f2a44"
-    }
-   ]
+   "declared_lines": 4,
+   "marks_outside_text": 64,
+   "worst_ink_core": 4.87,
+   "median_ink_core": 7.08,
+   "median_as_rendered": 5.15,
+   "detail": []
   },
   "17_setup_pwa.png": {
    "runs": 33,
@@ -2003,66 +1666,6 @@
   }
  },
  "failures": [
-  {
-   "artifact": "12_search.png",
-   "box": [
-    495,
-    1102,
-    403,
-    43
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.01,
-   "ink_median": 1.25,
-   "floor": 4.5,
-   "ink_core_ring": 2.67,
-   "ground_swing": 1.6,
-   "says": "It was the good end. I left you the better one, which is a diff\u2026",
-   "hand": "hand",
-   "ink": "ff3a3a3c",
-   "px": 57
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    381,
-    953,
-    122,
-    18
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.01,
-   "ink_median": 1.04,
-   "floor": 4.5,
-   "ink_core_ring": 2.03,
-   "ground_swing": 1.93,
-   "says": "Sat 14 Mar \u00b7 12:50",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 34.5
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    624,
-    1010,
-    329,
-    135
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.02,
-   "ink_median": 1.24,
-   "floor": 4.5,
-   "ink_core_ring": 11.35,
-   "ground_swing": 11.39,
-   "says": "went to the fourteenth at his flat. one room, nobody singing \u00b7 \u2026",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 39
-  },
   {
    "artifact": "05_settings.png",
    "box": [
@@ -2102,26 +1705,6 @@
    "hand": "stamp",
    "ink": "ff464648",
    "px": 28.5
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    461,
-    571,
-    59,
-    19
-   ],
-   "role": "body",
-   "polarity": "light",
-   "ink_core": 1.08,
-   "ink_median": 1.02,
-   "floor": 4.5,
-   "ink_core_ring": 2.18,
-   "ground_swing": 1.98,
-   "says": "on the bus with a bag containing nothing. i have brought an emp\u2026",
-   "hand": "hand",
-   "ink": "ff1f2a44",
-   "px": 57
   },
   {
    "artifact": "04_moments.png",
@@ -2184,26 +1767,6 @@
    "px": 28.5
   },
   {
-   "artifact": "12_search.png",
-   "box": [
-    474,
-    37,
-    192,
-    42
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.17,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 1.78,
-   "ground_swing": 1.55,
-   "says": "week one, and the room smells right again",
-   "hand": "hand",
-   "ink": "d91f2a44",
-   "px": 51
-  },
-  {
    "artifact": "05_settings.png",
    "box": [
     1007,
@@ -2224,26 +1787,6 @@
    "px": 39
   },
   {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    770,
-    731,
-    177,
-    37
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.19,
-   "ink_median": 1.07,
-   "floor": 4.5,
-   "ink_core_ring": 2.47,
-   "ground_swing": 2.2,
-   "says": "on the bus with a bag containing nothing. i have brought an emp\u2026",
-   "hand": "hand",
-   "ink": "ff1f2a44",
-   "px": 57
-  },
-  {
    "artifact": "02_chat.png",
    "box": [
     249,
@@ -2262,26 +1805,6 @@
    "hand": "hand",
    "ink": "ff464648",
    "px": 48
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    290,
-    2239,
-    220,
-    58
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.24,
-   "ink_median": 1.26,
-   "floor": 4.5,
-   "ink_core_ring": 6.87,
-   "ground_swing": 6.03,
-   "says": "Thu 3 Sep \u00b7 19:40",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
   },
   {
    "artifact": "10_first_run.png",
@@ -2444,26 +1967,6 @@
    "px": 51
   },
   {
-   "artifact": "12_search.png",
-   "box": [
-    476,
-    0,
-    122,
-    36
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.34,
-   "ink_median": 1.21,
-   "floor": 4.5,
-   "ink_core_ring": 1.85,
-   "ground_swing": 1.39,
-   "says": "Thu 3 Sep \u00b7 16:55",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
    "artifact": "04_moments.png",
    "box": [
     517,
@@ -2497,31 +2000,11 @@
    "ink_median": 1.04,
    "floor": 4.5,
    "ink_core_ring": 12.96,
-   "ground_swing": 8.26,
+   "ground_swing": 8.24,
    "says": "text when home \u00b7 kept",
    "hand": "hand",
    "ink": "ff3a3a3c",
    "px": 51
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    156,
-    1399,
-    282,
-    69
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.89,
-   "ink_median": 1.39,
-   "floor": 4.5,
-   "ink_core_ring": 11.82,
-   "ground_swing": 6.78,
-   "says": "Wed 22 Apr \u00b7 16:36",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
   },
   {
    "artifact": "04_moments.png",
@@ -3084,26 +2567,6 @@
    "px": 45
   },
   {
-   "artifact": "02_chat.png",
-   "box": [
-    214,
-    2367,
-    213,
-    34
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.71,
-   "ink_median": 2.67,
-   "floor": 4.5,
-   "ink_core_ring": 4.46,
-   "ground_swing": 1.65,
-   "says": "Wed 22 Apr \u00b7 16:44",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
    "artifact": "01_pulse.png",
    "box": [
     566,
@@ -3244,66 +2707,6 @@
    "px": 45
   },
   {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    601,
-    1727,
-    93,
-    32
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.39,
-   "ink_median": 3.39,
-   "floor": 4.5,
-   "ink_core_ring": 4.55,
-   "ground_swing": 1.34,
-   "says": "Thu 3 Sep \u00b7 19:40",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    374,
-    1727,
-    186,
-    40
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.42,
-   "ink_median": 3.42,
-   "floor": 4.5,
-   "ink_core_ring": 4.53,
-   "ground_swing": 1.33,
-   "says": "Thu 3 Sep \u00b7 19:40",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    211,
-    740,
-    271,
-    41
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.48,
-   "ink_median": 3.38,
-   "floor": 4.5,
-   "ink_core_ring": 4.59,
-   "ground_swing": 1.32,
-   "says": "Wed 22 Apr \u00b7 16:30",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
    "artifact": "01_pulse.png",
    "box": [
     430,
@@ -3344,43 +2747,83 @@
    "px": 27
   },
   {
-   "artifact": "13_messenger_states.png",
+   "artifact": "12_search.png",
    "box": [
-    650,
-    2002,
-    102,
-    31
+    124,
+    674,
+    1079,
+    148
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 3.64,
-   "ink_median": 3.64,
+   "ink_core": 3.56,
+   "ink_median": 3.56,
    "floor": 4.5,
-   "ink_core_ring": 4.55,
-   "ground_swing": 1.25,
-   "says": "going",
+   "ink_core_ring": 9.22,
+   "ground_swing": 2.59,
+   "says": "Rain. The first in a month and I walked the hill in it with the\u2026",
+   "hand": "hand",
+   "ink": "dd000000",
+   "px": 42
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    242,
+    2367,
+    185,
+    34
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.65,
+   "ink_median": 3.65,
+   "floor": 4.5,
+   "ink_core_ring": 7.62,
+   "ground_swing": 2.1,
+   "says": "Wed 22 Apr \u00b7 16:44",
    "hand": "hand",
    "ink": "ff464648",
    "px": 36
   },
   {
-   "artifact": "13_messenger_states.png",
+   "artifact": "02_chat.png",
    "box": [
-    624,
-    2582,
-    317,
-    39
+    213,
+    1421,
+    225,
+    43
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 3.79,
-   "ink_median": 3.79,
+   "ink_core": 3.67,
+   "ink_median": 3.67,
    "floor": 4.5,
-   "ink_core_ring": 3.79,
-   "ground_swing": 1.02,
-   "says": "it would not go",
+   "ink_core_ring": 7.68,
+   "ground_swing": 2.1,
+   "says": "Wed 22 Apr \u00b7 16:36",
    "hand": "hand",
-   "ink": "ffa8322b",
+   "ink": "ff464648",
+   "px": 36
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    212,
+    740,
+    212,
+    41
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.77,
+   "ink_median": 3.77,
+   "floor": 4.5,
+   "ink_core_ring": 7.81,
+   "ground_swing": 2.07,
+   "says": "Wed 22 Apr \u00b7 16:30",
+   "hand": "hand",
+   "ink": "ff464648",
    "px": 36
   },
   {
@@ -3444,6 +2887,26 @@
    "px": 33
   },
   {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    646,
+    2582,
+    294,
+    41
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.24,
+   "ink_median": 4.24,
+   "floor": 4.5,
+   "ink_core_ring": 5.52,
+   "ground_swing": 1.3,
+   "says": "it would not go",
+   "hand": "hand",
+   "ink": "ffa8322b",
+   "px": 36
+  },
+  {
    "artifact": "01_pulse.png",
    "box": [
     338,
@@ -3464,114 +2927,34 @@
    "px": 27
   },
   {
-   "artifact": "02_chat.png",
-   "box": [
-    238,
-    1890,
-    284,
-    55
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 4.4,
-   "ink_median": 3.59,
-   "floor": 4.5,
-   "ink_core_ring": 5.35,
-   "ground_swing": 1.27,
-   "says": "Wed 22 Apr \u00b7 16:40",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
    "artifact": "13_messenger_states.png",
    "box": [
-    511,
-    2241,
-    101,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 4.44,
-   "ink_median": 4.38,
-   "floor": 4.5,
-   "ink_core_ring": 4.44,
-   "ground_swing": 1.02,
-   "says": "Thu 3 Sep \u00b7 19:40",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    428,
-    2369,
-    94,
+    298,
+    1995,
+    194,
     40
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 4.45,
-   "ink_median": 4.38,
+   "ink_core": 4.3,
+   "ink_median": 4.3,
    "floor": 4.5,
-   "ink_core_ring": 4.45,
-   "ground_swing": 1.02,
-   "says": "Wed 22 Apr \u00b7 16:44",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    526,
-    2370,
-    53,
-    32
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 4.46,
-   "ink_median": 4.39,
-   "floor": 4.5,
-   "ink_core_ring": 4.46,
-   "ground_swing": 1.02,
-   "says": "Wed 22 Apr \u00b7 16:44",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    419,
-    1425,
-    147,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 4.48,
-   "ink_median": 4.42,
-   "floor": 4.5,
-   "ink_core_ring": 4.48,
-   "ground_swing": 1.05,
-   "says": "Wed 22 Apr \u00b7 16:36",
+   "ink_core_ring": 7.65,
+   "ground_swing": 1.8,
+   "says": "Thu 3 Sep \u00b7 19:40",
    "hand": "hand",
    "ink": "ff464648",
    "px": 36
   }
  ],
- "on_moving_ground": 39,
- "would_pass_on_ring_reading": 30,
+ "on_moving_ground": 30,
+ "would_pass_on_ring_reading": 28,
  "read": 10,
- "total_runs": 370,
- "total_below_floor": 78,
+ "total_runs": 362,
+ "total_below_floor": 64,
  "text_runs": "require",
  "measured_from_declared_text": 10,
  "without_a_sidecar": [],
- "marks_outside_text": 1201,
+ "marks_outside_text": 1439,
  "ok": false
 }

@@ -14,67 +14,67 @@
   },
   {
    "do": "pair",
-   "ms": 980
+   "ms": 1006
   },
   {
    "do": "wait",
-   "ms": 3705
+   "ms": 3704
   },
   {
    "do": "goTo",
-   "ms": 1481
+   "ms": 1465
   },
   {
    "do": "wait",
-   "ms": 1704
+   "ms": 1703
   },
   {
    "do": "frames",
-   "ms": 14342
+   "ms": 14920
   },
   {
    "do": "far",
-   "ms": 504
+   "ms": 501
   },
   {
    "do": "frames",
-   "ms": 21068
+   "ms": 21789
   },
   {
    "do": "far",
-   "ms": 500
+   "ms": 501
   },
   {
    "do": "frames",
-   "ms": 127902
+   "ms": 131104
   },
   {
    "do": "goTo",
-   "ms": 1661
+   "ms": 1660
   },
   {
    "do": "frames",
-   "ms": 33849
+   "ms": 34623
   },
   {
    "do": "far",
-   "ms": 504
+   "ms": 505
   },
   {
    "do": "frames",
-   "ms": 111008
+   "ms": 116520
   },
   {
    "do": "far",
-   "ms": 504
+   "ms": 501
   },
   {
    "do": "frames",
-   "ms": 102750
+   "ms": 106888
   },
   {
    "do": "report",
-   "ms": 508
+   "ms": 507
   }
  ],
  "shots": [
@@ -122,29 +122,29 @@
   {
    "region": 1,
    "visible": [
-    "01M2S37XVH9RC0D330HXC8GPG0",
-    "01M2S38K0KPBXSQ9FVTXFJYCAN",
-    "01M2S3DK10XKHVR55Q1GVBGFYB",
-    "01M2S3GZXNE2N5XYKW8VYHGV28"
+    "01M2TC9JAYK3K8GKEWXM8KE738",
+    "01M2TCA8218HCR0XMY3RBSFNTB",
+    "01M2TCFC2SRJBW53WRBZCQBR21",
+    "01M2TCJYC6MHRTEVR2XXHN17XW"
    ],
    "tears": {
-    "01M2S37XVH9RC0D330HXC8GPG0": "tear_001",
-    "01M2S38K0KPBXSQ9FVTXFJYCAN": "tear_020",
-    "01M2S3DK10XKHVR55Q1GVBGFYB": "tear_043",
-    "01M2S3GZXNE2N5XYKW8VYHGV28": "tear_005"
+    "01M2TC9JAYK3K8GKEWXM8KE738": "tear_001",
+    "01M2TCA8218HCR0XMY3RBSFNTB": "tear_020",
+    "01M2TCFC2SRJBW53WRBZCQBR21": "tear_043",
+    "01M2TCJYC6MHRTEVR2XXHN17XW": "tear_005"
    },
    "stocks": {
-    "01M2S37XVH9RC0D330HXC8GPG0": "lined_01",
-    "01M2S38K0KPBXSQ9FVTXFJYCAN": "lined_02",
-    "01M2S3DK10XKHVR55Q1GVBGFYB": "spiral_03",
-    "01M2S3GZXNE2N5XYKW8VYHGV28": "lined_04"
+    "01M2TC9JAYK3K8GKEWXM8KE738": "lined_02",
+    "01M2TCA8218HCR0XMY3RBSFNTB": "lined_04",
+    "01M2TCFC2SRJBW53WRBZCQBR21": "lined_03",
+    "01M2TCJYC6MHRTEVR2XXHN17XW": "lined_01"
    },
    "scroll": {
     "first": 0,
     "last": 3,
     "of": 4
    },
-   "now": "2026-09-18T01:55:45.501Z",
+   "now": "2026-09-18T13:53:25.136Z",
    "driven_ms": 5712,
    "seed": 20260903,
    "events": 8,
@@ -169,7 +169,7 @@
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 1179,
+ "cold_ms": 1217,
  "problems": [],
  "ok": true
 }

@@ -10,23 +10,23 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2950
+   "ms": 5436
   },
   {
    "do": "wait",
-   "ms": 1704
+   "ms": 1703
   },
   {
    "do": "scrollTo",
-   "ms": 3197
+   "ms": 2201
   },
   {
    "do": "wait",
-   "ms": 1303
+   "ms": 1302
   },
   {
    "do": "stage",
-   "ms": 3593
+   "ms": 3615
   },
   {
    "do": "wait",
@@ -34,11 +34,11 @@
   },
   {
    "do": "shot",
-   "ms": 2171
+   "ms": 2216
   },
   {
    "do": "report",
-   "ms": 714
+   "ms": 715
   }
  ],
  "shots": [
@@ -57,10 +57,10 @@
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0F5GYDC4DQN7DVGZW",
-    "0001MCJ1M0F5GYDC4DQN7DVGZX",
-    "0001MCJ1M0F5GYDC4DQN7DVGZY",
-    "0001MCJ1M0F5GYDC4DQN7DVGZZ"
+    "0001MCJ1M0D71QR2YCWV81J687",
+    "0001MCJ1M0D71QR2YCWV81J688",
+    "0001MCJ1M0D71QR2YCWV81J689",
+    "0001MCJ1M0D71QR2YCWV81J68A"
    ],
    "tears": {
     "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
@@ -68,10 +68,10 @@
     "0001M4GW48FEW3M67XKAZT5051": "tear_031",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M0F5GYDC4DQN7DVGZW": "tear_035",
-    "0001MCJ1M0F5GYDC4DQN7DVGZX": "tear_055",
-    "0001MCJ1M0F5GYDC4DQN7DVGZY": "tear_018",
-    "0001MCJ1M0F5GYDC4DQN7DVGZZ": "tear_040"
+    "0001MCJ1M0D71QR2YCWV81J687": "tear_035",
+    "0001MCJ1M0D71QR2YCWV81J688": "tear_055",
+    "0001MCJ1M0D71QR2YCWV81J689": "tear_018",
+    "0001MCJ1M0D71QR2YCWV81J68A": "tear_040"
    },
    "stocks": {
     "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
@@ -79,10 +79,10 @@
     "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
     "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M0F5GYDC4DQN7DVGZW": "looseleaf_04",
-    "0001MCJ1M0F5GYDC4DQN7DVGZX": "looseleaf_03",
-    "0001MCJ1M0F5GYDC4DQN7DVGZY": "legal_02",
-    "0001MCJ1M0F5GYDC4DQN7DVGZZ": "looseleaf_04"
+    "0001MCJ1M0D71QR2YCWV81J687": "looseleaf_02",
+    "0001MCJ1M0D71QR2YCWV81J688": "legal_01",
+    "0001MCJ1M0D71QR2YCWV81J689": "looseleaf_03",
+    "0001MCJ1M0D71QR2YCWV81J68A": "lined_03"
    },
    "scroll": {
     "first": 8382,
@@ -114,7 +114,7 @@
    "at": "13_messenger_states.png"
   }
  ],
- "cold_ms": 11891,
+ "cold_ms": 11528,
  "problems": [],
  "ok": true
 }
