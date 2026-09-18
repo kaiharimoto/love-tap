@@ -1,0 +1,113 @@
+{
+  "critic": "coherence",
+  "cycle": 3,
+  "score": 11,
+  "floor": 13,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "04_moments.png",
+      "where": "all three columns, WHAT WE SENT / WHAT HAPPENED / WHAT WE FELT, whole screen",
+      "what": "Of roughly fifteen tiles exactly one carries a photograph; six carry the literal loading string \"still fetching the picture.\" set in the app's own hand (right column at 1 Sep 26, 23 Aug 26, 18 Aug 26, 8 Aug 26; middle column at 4 Aug 26 and again at the foot), and at least three more are bare lined paper with nothing but a date (left column, 20 Aug 26 at approx y1450-1880, 18 Aug 26, 12 Aug 26) - I cropped (40,1400)-(700,1900) and (960,700)-(1440,1000) to confirm both cases.",
+      "why": "The row requires every region to be a view onto the one log; a region in which one photo event renders three different ways inside a single screen - as an image, as a loading sentence frozen as content, and as nothing at all - is not a view onto that log, it is a broken adapter over it."
+    },
+    {
+      "severity": "serious",
+      "artifact": "04_moments.png",
+      "where": "the WHAT WE FELT column, x approx 1026-1440",
+      "what": "The column named for feelings contains two voice durations (21s at y647, 47s at the foot) and four \"still fetching the picture.\" tiles; none of the 34 feelings in haptics.json and none of its six families (ache, mischief, shelter, sparkle, static_, warmth) appear anywhere in Moments, and the column's contents do not match its own heading.",
+      "why": "The same feeling event has a full rendering in Chat (13_messenger_states.png shows \"empty chair\" with its chair drawn on the note) and in the Pulse object row (01_pulse.png), so the same event does not render the same way wherever it appears across Chat, Moments and Us."
+    },
+    {
+      "severity": "serious",
+      "artifact": "13_messenger_states.png",
+      "where": "the chat stream between the \"noor needs a lot\" rail (text run at y1149) and \"left the key under the pot\" (y1620)",
+      "what": "A flat beige rectangle roughly 1050x255 px at (90,1300)-(1100,1510) with square corners and a hard dark drop shadow along its bottom and right: measured mean RGB (252,226,198) with per-channel standard deviation 1.4, against standard deviation 52.4 for a real note body sampled at (300,1560)-(1150,1760) in the same screenshot. No paper fibre, no rule lines, no torn edge, no text run declared in 13_messenger_states.text.json, and it overhangs the left edge of the sheet it sits on.",
+      "why": "An event in the stream rendering with none of the paper language the rest of the stream uses - and rendering as a flat beige rectangle with a drop shadow - puts the anti-goal surface inside the one region that defines the visual law; logs/surfaces.json meanwhile reports \"flat\": [] and ok true over 318 surfaces read, so the check that should have caught it did not."
+    },
+    {
+      "severity": "serious",
+      "artifact": "17_setup_pwa.png",
+      "where": "the desk behind and around the setup sheet",
+      "what": "Sampling an identical 100x2700 px left-margin box (0,200)-(100,2900) in every still: this screen gives mean RGB (76,62,50), standard deviation 2.2, 121 distinct colours, against standard deviation 67-78 and 2,897-9,348 distinct colours in 01_pulse, 02_chat, 10_first_run and 13_messenger_states. palette.json independently gives this artifact 3 hue families where the rest of the set has 4-5.",
+      "why": "The first screen a new person sees is the only one whose ground is a flat fill rather than the photographed desk every other region stands on, so one visual language does not in fact hold across all five regions plus onboarding."
+    },
+    {
+      "severity": "serious",
+      "artifact": "07_feeling_landing.mp4",
+      "where": "frames 0 and 383, read from evidence/crops/07_feeling_landing_strip.png",
+      "what": "The six sampled frames show the feeling picker - the six family strips WARMTH / ACHE / SHELTER / MISCHIEF / STATIC / SPARKLE above an object tray - sliding over Pulse and closing again; I composited frame 0 against frame 383 and they carry the same headline, the same eleven state fields (bright, open, travelling, a lot, a little, 72%, just now, 11:00, normal, still, wifi, yes) and the same object row, so at the end of 6.4 s nothing has arrived.",
+      "why": "The clip named for a feeling landing shows a feeling being chosen and leaves no trace in the region afterwards, so the row's central claim - that one event is visible wherever it should be - is unevidenced for the app's defining event type."
+    },
+    {
+      "severity": "serious",
+      "artifact": "15_authored_feeling.mp4",
+      "where": "final frame, read from evidence/crops/15_authored_feeling_strip.png, last panel",
+      "what": "The authored feeling lands in Chat as a full-width blank legal-pad card carrying only \"pigeon / Thu 3 Sep / waiting to send\", with a second wholly blank card beneath it and no object mark of any kind; a built-in feeling in 13_messenger_states.png renders with its object drawn on the note, and haptics.json gives every one of its 34 feelings an object (obj_pinch, obj_thumbprint, obj_coffee_ring, obj_clover, obj_margin_sun, obj_corner_moon and so on).",
+      "why": "An authored feeling and a built-in feeling are the same event type in the same region and render as two different things, which is an assembly rather than one system, and it is the exact seam a fifth module would have to be added along."
+    },
+    {
+      "severity": "serious",
+      "artifact": "09_two_devices.png and 16_setup_android.png",
+      "where": "MANIFEST.json \"missing\"",
+      "what": "Both are absent. The stated reason is measured rather than asserted - no /dev/kvm, the x86_64 image running under QEMU instruction emulation did start and adbd answered after 113 minutes but the framework never came up so there was no package service to install into, no GTK for a desktop stand-in, and neither was faked from the PWA - and I accept it as a reason, not an excuse. Counted once for both files.",
+      "why": "It nonetheless leaves the second clause of this row - both platforms serving the same regions, the same feelings and the same event types from one codebase - with no artifact behind it anywhere in the set; 17_setup_pwa.png is the only platform-specific screen captured, and it is the iOS one."
+    },
+    {
+      "severity": "minor",
+      "artifact": "12_search.png and 14_media_viewer.png",
+      "where": "top of screen",
+      "what": "Neither carries the partner-state strip that 01_pulse, 02_chat, 03_us, 04_moments, 05_settings and 13_messenger_states all carry at the identical rect [120,55,1059,79] with the identical TRAVELLING / NEED / ENERGY stamps at [121,138], [380,141], [558,139]; 12_search also drops the five-region tab bar.",
+      "why": "The row asks for partner state to be legible on every screen rather than only on Pulse, and two full-screen surfaces a person reaches from inside Chat drop it entirely."
+    },
+    {
+      "severity": "minor",
+      "artifact": "12_search.png",
+      "where": "the filter chip row at y422",
+      "what": "Five chips - EVERYTHING, WRITTEN, PHOTOGRAPHS, VIDEO, TALKING - against the nine event types reliability.json says search actually returns (message, photo, video, voice_note, feeling, state_declared, todo_event, date_event, milestone); the last chip is clipped by the right screen edge, its text run being [1287,422,153,37] whose right edge lands exactly on the 1440 px image width, confirmed by cropping (1150,380)-(1440,500).",
+      "why": "The region's controls are narrower than the log's own vocabulary, so events a fifth shared-life module writes would be findable but not filterable, which is the rework the row exists to prevent."
+    },
+    {
+      "severity": "minor",
+      "artifact": "03_us.png",
+      "where": "foot of the screen, the third section of the Us region",
+      "what": "The \"TO DO\" stamp is declared at [437,3079,131,41] with 03_us.text.json claiming offscreen 0, but that rect sits behind the tab bar - cropping (380,3050)-(660,3120) returns flat tab-card pixels and no ink - so the third module of Us is invisible, and no to-do content appears anywhere in Us.",
+      "why": "A shared-life module that exists in the taxonomy but cannot be seen in its own region weakens the claim that every module both writes into and reads from the one log."
+    },
+    {
+      "severity": "minor",
+      "artifact": "05_settings.png",
+      "where": "THE TWO PHONES card, against the header strip on the same screen and the Pulse card in 01_pulse.png",
+      "what": "Settings reads \"not paired yet.\" and \"connecting - http://127.0.0.1:8480\", and logs/05_settings.report.json records link \"connecting\", while the header on that same screen and the Pulse card report the partner's battery at 72%, their clock at 11:00, ringer normal, at home yes and LAST UP \"just now\".",
+      "why": "Two regions state contradictory system state at the same instant, so the partner-state strip is not legibly a view onto the same link the rest of the app reports."
+    },
+    {
+      "severity": "minor",
+      "artifact": "DIFF.json",
+      "where": "every entry, and the artifacts it omits",
+      "what": "It carries the per-artifact SSIM it is meant to carry, but \"label\" is null in all ten entries, and only the ten PNGs appear - none of the five clips has an entry. Every SSIM is exactly 1.0, \"unchanged\", so the ten stills are pixel-identical to the previous capture. My labels for this cycle: 04_moments unchanged-and-still-broken; 13_messenger_states unchanged-and-still-broken; 17_setup_pwa unchanged-off-language; 01_pulse, 02_chat, 03_us, 05_settings, 10_first_run, 12_search, 14_media_viewer unchanged-and-sound.",
+      "why": "It does half its job as delivered, and the half it does proves that every finding above survived a full cycle without being touched."
+    },
+    {
+      "severity": "minor",
+      "artifact": "logs/01_pulse.report.json, 03_us.report.json, 04_moments.report.json, 05_settings.report.json, 12_search.report.json",
+      "where": "the \"visible\" and \"scroll\" fields",
+      "what": "All five report the identical six event ids (0001M3AY8G83A3FBSRB1Y7W78Q through 0001M59VY0YA13H9M86HTA6XNP), the identical tears and stocks, and the identical scroll window {first: 8381, last: 8387, of: 8387}, although 04_moments plainly shows different events (photos dated 1 Sep 26 and voice notes of 63s and 41s) from 01_pulse.",
+      "why": "The one instrument that would have shown each region resolving the same log independently is reporting the chat cursor for every region, so the strongest available artifact-side evidence for the row's first clause is not actually being taken."
+    }
+  ],
+  "what_is_working": [
+    "One shell holds all five regions: the tab bar sits at the same rects in every in-app still (PULSE [100,3015], CHAT [381,3001], US [693,3015], MOMENTS [908,3015], SETTINGS [1184,3015] in both 13_messenger_states and 17_setup_pwa), with the same stamp face and the same 33/36 px active-inactive size step.",
+    "One palette holds across the whole set: palette.json across_the_set gives mean chroma 0.0375, hue centres 55/65/75/85/95 degrees and a single named family A_paper, and per-artifact hue families sit at 4-5 for nine of the ten stills.",
+    "Two type roles are used identically everywhere: DeskStamp for every label and section head at 27-36 px, NoorHand and TeoHand for every authored word at 36-72 px, with no third face and no drift between regions across all ten text sidecars.",
+    "State declarations render as one thing wherever they appear: a thin rail above the stream, identically treated in 02_chat (\"noor went out\", \"noor's phone is on normal\"), 13_messenger_states (\"noor - travelling\", \"noor needs a lot\"), 08_state_propagating (\"noor is restless\") and 11_chat_scroll.",
+    "Delivery and read state is one small vocabulary with no product voice in it - \"read\", \"going\", \"waiting to send\", \"it would not go\" in 13_messenger_states - no exclamation marks, no \"Oops!\", no self-naming, no badge or streak anywhere in the ten stills.",
+    "The event taxonomy is enumerated in three independent places and they agree: the fourteen-row interrupt matrix in 05_settings (something written, a picture, something to watch, their voice, an answer, a feeling, something they say about themselves, something their phone notices, a date moving, the list moving, a day that matters, passed on, a note set to arrive later, a feeling one of you made), the nine searched types in reliability.json, and the 34 feelings in six families in haptics.json. That matrix is the best extensibility evidence in the set: a fifth module's events already have a row shape to occupy.",
+    "08_state_propagating is the one clip that does the row's job: across its six sampled frames a partner state change appears in the Pulse card, in the header strip and as a rail in Chat, one event surfacing in two regions and the chrome.",
+    "The partner-state strip is genuinely present on all five regions rather than only on Pulse, at a byte-identical rect in 01 through 05 and 13, which is the specific thing the rubric asked to be checked.",
+    "10_first_run shows a real empty state rather than a fixture - 0 events, a single scrap reading \"first one's yours.\" - so the regions do degrade to nothing when the log is empty."
+  ],
+  "verdict": "I judged the five .mp4 clips from their frame strips in evidence/crops/ and from evidence/logs/*.report.json, not from playback, because nothing in this container decodes them; everything I assert about 06, 07, 08, 11 and 15 comes from six sampled frames each and is caveated accordingly. What the ten stills show is one very convincing shell wrapped around regions that are not all wired to the same thing. The shell is excellent and consistent: one tab bar, one palette (hue centres 55-95 degrees across all ten), two type roles used the same way everywhere, one rail treatment for state declarations that holds identically across four artifacts, one delivery-state vocabulary with none of the anti-goal voice in it, and a fourteen-row interrupt matrix in Settings that is the strongest evidence in the set that a fifth module could be added without rework. But Moments, one of the five regions, is not a view onto the log at all in this capture - one photograph in about fifteen tiles, six tiles frozen on the loading sentence \"still fetching the picture.\", at least three tiles that are bare dated paper, and a column headed WHAT WE FELT that contains no feeling from the 34 the app ships. That is the row's first clause failing in the artifact, and it blocks. Under it sit two more seams of the same kind: a flat beige rectangle with a drop shadow and standard deviation 1.4 sitting in the Chat stream where an event should be, and a setup screen whose desk is a flat fill (standard deviation 2.2, 121 colours) where every other screen has photographed grain (standard deviation 67-78, thousands of colours). The feeling, which is the reason the app exists, renders four different ways across the evidence - as its object in Chat, as a bare name in 08, as a blank card labelled \"pigeon\" in 15, and not at all in Moments - and the clip named for a feeling landing ends on a Pulse identical to the one it started on. DIFF.json carries its SSIM half honestly and its label half is empty for me to fill; every SSIM is 1.0, which means none of this moved since the last capture. The two missing Android artifacts are a reason and not an excuse and I have counted them once, but they leave the platform half of this row with no artifact behind it. 11 of 15, below the floor of 13.",
+  "note_on_method": "Read only under evidence/ and evidence/critics/prompts/coherence.md. Clips judged from evidence/crops/*_strip.png and evidence/logs/*.report.json, not from playback - no decoder in this container. All pixel measurements taken with PIL over named boxes in the named artifacts and are reproducible from the files as committed."
+}
