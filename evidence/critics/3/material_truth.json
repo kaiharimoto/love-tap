@@ -1,0 +1,98 @@
+{
+  "critic": "material-truth",
+  "cycle": 3,
+  "score": 13,
+  "floor": 22,
+  "meets_floor": false,
+  "method_note": "The .mp4 clips cannot be decoded in this container (no ffmpeg), so 06_unfolding was judged from evidence/crops/06_unfolding_strip.png (six frames: indices 0, 64, 128, 191, 255, 319, each 151x320 downscaled from 1080x2340) together with evidence/logs/06_unfolding.report.json and evidence/frames.json, not from playback. 07, 08, 11 and 15 were judged from their strips only. All pixel measurements below were taken with PIL on the delivered PNGs at native resolution and are reproducible against the named files and coordinates.",
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "13_messenger_states.png",
+      "where": "the message column, an axis-aligned rectangle spanning x 40-1116, y ~1252-1533 (about 1050 x 240 px), between the 'noor needs a lot' strip and the 'left the key under the pot' note",
+      "what": "A note is rendered as a flat beige rectangle with a drop shadow: a 300x120 sample at (200,1350) measures mean L 230.8, L_std 1.310, high-frequency std 0.446 and only 11 distinct luminance levels, against L_std 43.7 / HF_std 8.65 / 171 levels for real note paper 350 px below it in the same frame; its right edge (x 1106-1114 at y 1400) and bottom edge (y 1517-1533 at x 600) are soft symmetric dark bands returning straight to ground, i.e. an offset drop shadow, and the silhouette is a perfect axis-aligned rectangle at every scanline.",
+      "why": "The rubric row states that a beige rectangle with a drop shadow standing in for paper scores this category below its floor; this is that object, with no stock, no ruling, no tear and no contact shadow, shipped in a delivered hero still."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "06_unfolding.mp4 (judged via crops/06_unfolding_strip.png and logs/06_unfolding.report.json)",
+      "where": "the lower third of the frame in strip frames 2, 3 and 4 (clip frame indices 64, 128, 191 and 255 of 320)",
+      "what": "For at least frames 64 through 255 of 320 at 60 fps - about 3.2 s of the 5.33 s clip - the unfolding note is a flat, untextured, square-cornered beige rectangle with a drop shadow: no paper stock, no ruled lines, no tear edge, no crease, no fold seam and no lighting variation; only the final frame (index 319) shows a rendered note, and logs/06_unfolding.report.json records fold.sequence 'unfold_thirds', fold.length 240, fold.decoded 13, fold.held_from 227, fold.held_to 239, while evidence/frames.json records mean_change_per_frame 0.00421, 52 repeated frames and a longest still run of 23.",
+      "why": "The rubric row names 'Blender-rendered folds and creases under one consistent light direction' and names the unfolding clip as one of its two judging tests; the clip contains no visible fold geometry at all, only the anti-goal's beige rectangle with a drop shadow, for the majority of its runtime."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png and crops/02_chat_300_hand.png",
+      "where": "the outgoing note 'The folder is open. It has been open on the table for nine days.', text line at y 1620-1700; connected components extracted at threshold L<150",
+      "what": "There is one variant per glyph and no pressure variance whatsoever. The five 'e' glyphs in that line have ink areas 457, 448, 459, 450 and 457 px and bounding boxes 26x33, 25x34, 26x33, 25x33 and 26x33; best-aligned mean absolute difference between the 'e' of 'The' and the 'e' of 'open' is 3.07/255 (control, 'e' versus 'o', is 42.41/255). Every ink pixel is one flat colour: across nine sampled glyphs the core ink is min = 5th percentile = median = L 58 exactly, and the second ink family (the italic script note at y 500-760) is min = p5 = p50 = L 42 exactly.",
+      "why": "The rubric row requires 'handwriting with multiple variants per glyph and real pressure variance'; this is a single monoline handwriting typeface filled with one constant colour, which is neither, and it is what the 300% Chat-hero zoom - the row's first named test - actually shows."
+    },
+    {
+      "severity": "serious",
+      "artifact": "02_chat.png, 03_us.png, 04_moments.png, 13_messenger_states.png, crops/dusk_pulse.png, crops/06_unfolding_strip.png",
+      "where": "02_chat.png y 1535-1565 x 430-1100 (below the 'a month. and you have not opened the folder' note); 13_messenger_states.png y 1545-1575 x 420-1120; 03_us.png across the body text of 'the second one'; dusk_pulse.png the object shelf at x 640-850, y 1210-1380",
+      "what": "A band of hard-edged vertical bars is composited over the paper: in 02_chat the 30-row column profile has 58 mean-crossings and a 70.8 L range across 670 px (47% of frame width), with bar interiors perfectly constant (195,195,195,195...) against a 240 ground; in 13_messenger_states, 68 crossings and a 50.8 L range; on the dusk object shelf, 21 crossings and a 62.2 L range. The same bands appear over the 'empty chair' note in strip frame 4 of 06_unfolding and over the '41s' chip in 04_moments.",
+      "why": "This is a repeating vertical stripe pattern laid over surfaces that must read as photographed paper; it appears in six of the eleven stills and in the named clip, so it is systemic rather than isolated, and at 100% it reads as a barcode rather than as any material."
+    },
+    {
+      "severity": "serious",
+      "artifact": "crops/dusk_pulse.png compared against 01_pulse.png",
+      "where": "the feeling-object shelf, the spool at source x 480-660, y 1195-1460",
+      "what": "Two contradictory key directions inside one object in one frame. Day-to-dusk mean absolute RGB difference is 96.8 for the spool's side wall (x480-660, y1330-1420), 139.6 for the ground beside it (x680-760, y1360-1430) and 106.3 for the bead cluster (x700-900, y1240-1400) - all re-rendered - but the spool's top face including the peg and the peg's own cast shadow (x520-610, y1225-1290) has a mean absolute RGB difference of 0.02 with a maximum of 3, i.e. it is the day sprite reused unchanged. At dusk the ground beside the spool measures 138 on the left against 204 on the right and every bead casts to the lower-left, while the unchanged peg shadow still sits at offset dx +4.7, dy +6.3 from the peg, pointing down-right.",
+      "why": "The rubric row requires contact shadows baked from the render's own lighting under one consistent light direction; here an object's self-shadow and its cast shadow disagree by roughly 180 degrees in a single frame."
+    },
+    {
+      "severity": "serious",
+      "artifact": "17_setup_pwa.png",
+      "where": "the top tear of the setup sheet, y 460-800 across x 260-1340",
+      "what": "The tear is an upscaled low-resolution alpha mask, not a torn edge: tracing the contour gives 26 flat treads of 8 px or more and a longest tread of 89 px of perfectly constant edge height, all treads axis-aligned with vertical risers, plus abrupt contour discontinuities of -141 px at x=888, +117/-117/+118 px at x=943-947 and -176 px at x=303 where mask segments butt together. Below the staircase is a uniform brown gaussian smear rather than fibre.",
+      "why": "The rubric row requires tear masks that read as photographed; a rectilinear staircase with butt seams reads as a flat image being transformed, and it is the largest single surface on the screen."
+    },
+    {
+      "severity": "serious",
+      "artifact": "10_first_run.png and 17_setup_pwa.png",
+      "where": "the sheet under everything: 10_first_run x 36-1402, y 318-2896; 17_setup_pwa x 192-1312, y 392-2928",
+      "what": "The backing surface is a single flat colour. In 10_first_run the exact RGB (241,236,223) occupies 59.5% of the whole 1440x3120 frame, and a 400x200 sample at (300,700) measures L_std 0.000, HF_std 0.0000 and exactly 1 distinct luminance level; in 17_setup_pwa the exact RGB (242,237,226) occupies 48.0% of the frame. evidence/logs/surfaces.json reports a 'shell' family of 2 assets with patch_std 11.12 and 12.53, so a textured plate asset exists and is not reaching the screen.",
+      "why": "The rubric row requires real scanned stock; on the two screens a new person sees first, roughly half the delivered pixels are a solid fill with literally one value, which is not a photograph of anything."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.png and 01_pulse.png",
+      "where": "bottom tear of 'The folder is open' at y 1960-1975 versus the spool's ground shadow at 01_pulse x 680-760, y 1400-1430",
+      "what": "Paper notes cast no downward shadow at all. Vertical profiles at x 400, 700 and 1000 below the note's bottom tear drop to L 92-98 inside the dark edge and return to 238-241 within 2-3 px - brighter than the note's own 236 - while the right edge at the same note shows a genuine 8 px penumbra ramp (108 to 142 to 181 to 229). On the same plane in 01_pulse the spool casts a shadow reaching about 200 px down and right (ground below-right 133 against a 235 background).",
+      "why": "The rubric row asks for contact shadows baked from the render's own lighting; a horizontal-only offset with zero vertical component implies a light at near-zero elevation, which cannot coexist with the spool's roughly 45-degree shadow in the neighbouring artifact."
+    },
+    {
+      "severity": "minor",
+      "artifact": "crops/15_authored_feeling_strip.png and 01_pulse.png",
+      "where": "the feeling palette in strip frames 3-5, lower two rows; and the object shelf of 01_pulse at x 240-480, y 1195-1400",
+      "what": "Four of the six palette entries are pictograms drawn on cards rather than objects: a sun with radiating rays labelled 'thinking of y...', a crescent moon labelled 'goodnight', an orange ring and a spiral; in 01_pulse the second shelf card carries a red drawn smiley face (two dots and a curved mouth).",
+      "why": "The rubric row asks for feelings as physical objects rather than icons; a sun glyph, a moon glyph and a smiley are icons, and putting them on torn card does not change what they are. The spool, the beads and the leaf sprig, by contrast, are genuine objects."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.png and 03_us.png",
+      "where": "left edge of 'The twenty first.' at x 243-277, y 900-1120; right edge of 'empty chair' in 13_messenger_states; the large sheet edges in 03_us",
+      "what": "Several note edges are vertical column smears rather than tears: a run of constant-colour vertical striations 30-40 px wide replacing the torn contour, visible directly in crops/02_chat_300_hand.png at the upper left of the frame.",
+      "why": "It is the same stretch artifact as the barcode bands, arriving on the tear itself, so the edge that carries the whole material claim reads as resampling rather than fibre."
+    },
+    {
+      "severity": "minor",
+      "artifact": "09_two_devices.png and 16_setup_android.png (missing)",
+      "where": "evidence/MANIFEST.json, 'missing'",
+      "what": "Both are recorded absent because no Android device came up: the stated reason is that without /dev/kvm the x86_64 image runs under QEMU instruction emulation, adbd answered after 113 minutes but the framework never started so there was no package service to install into, there is no GTK for a desktop stand-in, and neither shot was faked from the PWA.",
+      "why": "Judged as a reason, not an excuse - it is specific, falsifiable, timed, names the three routes tried, and explicitly refuses the substitution that would have been easy. No material-truth penalty is taken for either absence."
+    }
+  ],
+  "what_is_working": [
+    "The paper stock is genuinely photographed, not procedural and not tiled. Real note paper in 02_chat measures L_std 28.7-44.7, HF_std 6.8-12.9 and 170-190 distinct luminance levels per 400x150 patch; contrast-stretched to 196-242 it shows correlated blotchy mottle and ruled lines whose density and wobble vary along their length, which procedural noise does not produce. Autocorrelation of the high-pass residual over 400x300 regions of the backing sheet finds no peak above ncc 0.20 at any shift from 4 to 200 px on either axis, so there is no tile period.",
+    "Tear masks do not repeat within a screen. evidence/logs/02_chat.report.json lists 8 visible notes carrying 8 distinct masks (tear_008, 012, 023, 029, 034, 045, 050, 054) from a pool of 56, across 6 distinct stocks from a pool of 54, and the 06 report lists 5 distinct masks for 5 notes; I confirmed by eye that no two edges in 02_chat.png share a contour.",
+    "Where the tear renders correctly it is convincing. The '63s' chip in 04_moments and the note in 14_media_viewer show white fibre whiskers standing proud of the edge, dark speckle of varying density, and no rectilinear structure at 3x - these read as photographed torn paper.",
+    "The backing sheet carries real show-through: faint brown ghost-writing in horizontal rows, visible in 02_chat between y 860 and 1160, differing cluster to cluster. That is a sophisticated observation about how a real sheet behaves and it is not repeated.",
+    "Day lighting on the objects is coherent and properly rendered. In 01_pulse every bead is lit from the upper-left and casts a short soft penumbra to the lower-right, and the spool agrees (body left 160 against right 148, ground right 142 against left 236). The dusk beads are internally coherent too, simply lit from the other side with longer shadows - a legitimate rig change, not an error.",
+    "Note contact shadows follow the tear contour rather than an offset silhouette. The right edge of 'The folder is open' has a dark core at L 103-110 that tracks every notch of the tear, then a graded 8 px penumbra (108, 142, 181, 229) into the ground, while the lit left edge shows only a shallow 200-207 roll - that is edge behaviour a uniform blur cannot produce.",
+    "evidence/logs/illuminant.json records net 5080 K against a declared 5200 K with fit error 0.0003, zero colour drift and no breaches, and evidence/logs/dusk_shadows.json shows all four shadow families (tears, objects, paper, shell) with matched day and dusk asset counts and zero missing - the rig discipline is real even where the composite loses it.",
+    "The absences are honest. MANIFEST.json records both missing artifacts with a measured reason and an explicit statement that neither was faked from the PWA."
+  ],
+  "verdict": "The materials this build owns are real, and the parts of the pipeline that touch them directly are good: the paper is photographed stock with genuine mottle, ruled lines that wobble, and show-through ghost writing, with no tile period detectable anywhere I looked; the tear masks are photographic, fibrous where they render properly, and provably non-repeating within a screen; the day lighting on the feeling objects is coherent and the note edge shadows follow the tear contour with a real penumbra rather than an offset blur. But the row is judged on two named tests and both fail. At three hundred percent on the Chat hero the ink is a single monoline handwriting typeface with exactly one variant per glyph - five 'e' glyphs differing by as little as 3.07/255 after alignment against a 42.41 control - laid down in one flat colour with literally zero density variance (core ink is L 58 exactly at min, fifth percentile and median across nine glyphs; the second ink family is L 42 exactly), so 'multiple variants per glyph and real pressure variance' is not merely thin, it is absent and measurable. And the unfolding clip contains no fold: for at least 191 of its 320 frames the note is a flat, square-cornered, untextured beige rectangle with a drop shadow, with the app's own report conceding 13 of 240 fold frames decoded - the anti-goal condition occupying the very artifact the rubric nominated to disprove it. The same object recurs in a delivered still, 13_messenger_states, measured at L_std 1.31 and eleven distinct luminance levels beside real paper at 43.7 and 171. Around that sit a systemic vertical-bar composite artifact across six artifacts, a setup sheet whose tear is a rectilinear staircase with 89 px treads and 176 px butt seams, a backing plate delivered as one exact RGB value over 59.5% of the first-run screen while a textured shell asset sits unused in the logs, and a dusk object whose baked self-shadow points down-right while its own re-rendered ground shadow and every bead beside it point left. The honesty of the evidence set is not in question - the two missing artifacts are refused rather than faked, and I took no penalty for them - but the material claim itself is currently carried by the stock and the tear masks alone, with the folds, the handwriting and the composite all failing to hold it up. 13 of 25, well below the floor of 22."
+}
