@@ -10,33 +10,34 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3714
+   "ms": 3057
   },
   {
    "do": "wait",
-   "ms": 1905
+   "ms": 1903
   },
   {
    "do": "openViewer",
-   "ms": 4164
+   "ms": 5646
   },
   {
    "do": "wait",
-   "ms": 2505
+   "ms": 2504
   },
   {
    "do": "shot",
-   "ms": 2071
+   "ms": 2353
   },
   {
    "do": "report",
-   "ms": 722
+   "ms": 712
   }
  ],
  "shots": [
   {
    "out": "evidence/14_media_viewer.png",
-   "clip": null
+   "clip": null,
+   "text_runs": 25
   }
  ],
  "reports": [
@@ -90,7 +91,7 @@
    "at": "14_media_viewer.png"
   }
  ],
- "cold_ms": 9200,
+ "cold_ms": 11868,
  "problems": [],
  "ok": true
 }

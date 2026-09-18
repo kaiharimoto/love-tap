@@ -10,25 +10,26 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3469
+   "ms": 3126
   },
   {
    "do": "wait",
-   "ms": 2306
+   "ms": 2304
   },
   {
    "do": "shot",
-   "ms": 1913
+   "ms": 1830
   },
   {
    "do": "report",
-   "ms": 717
+   "ms": 712
   }
  ],
  "shots": [
   {
    "out": "evidence/05_settings.png",
-   "clip": null
+   "clip": null,
+   "text_runs": 77
   }
  ],
  "reports": [
@@ -88,7 +89,7 @@
    "at": "05_settings.png"
   }
  ],
- "cold_ms": 9357,
+ "cold_ms": 11341,
  "problems": [],
  "ok": true
 }

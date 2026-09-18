@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2525
+   "ms": 2613
   },
   {
    "do": "wait",
@@ -18,15 +18,15 @@
   },
   {
    "do": "scrollTo",
-   "ms": 2072
+   "ms": 2187
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1103
   },
   {
    "do": "frames",
-   "ms": 319009
+   "ms": 311523
   }
  ],
  "shots": [
@@ -41,7 +41,7 @@
   }
  ],
  "reports": [],
- "cold_ms": 9269,
+ "cold_ms": 11355,
  "problems": [],
  "ok": true
 }

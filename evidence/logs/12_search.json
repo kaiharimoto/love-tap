@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2566
+   "ms": 3508
   },
   {
    "do": "wait",
@@ -18,25 +18,26 @@
   },
   {
    "do": "search",
-   "ms": 2959
+   "ms": 2729
   },
   {
    "do": "wait",
-   "ms": 1907
+   "ms": 1904
   },
   {
    "do": "shot",
-   "ms": 2571
+   "ms": 2313
   },
   {
    "do": "report",
-   "ms": 715
+   "ms": 724
   }
  ],
  "shots": [
   {
    "out": "evidence/12_search.png",
-   "clip": null
+   "clip": null,
+   "text_runs": 45
   }
  ],
  "reports": [
@@ -96,7 +97,7 @@
    "at": "12_search.png"
   }
  ],
- "cold_ms": 9664,
+ "cold_ms": 11193,
  "problems": [],
  "ok": true
 }

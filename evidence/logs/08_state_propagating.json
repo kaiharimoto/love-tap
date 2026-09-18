@@ -10,51 +10,27 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2303
+   "ms": 2304
   },
   {
    "do": "pair",
-   "ms": 969
+   "ms": 980
   },
   {
    "do": "wait",
-   "ms": 3706
+   "ms": 3705
   },
   {
    "do": "goTo",
-   "ms": 1129
+   "ms": 1481
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1704
   },
   {
    "do": "frames",
-   "ms": 15325
-  },
-  {
-   "do": "far",
-   "ms": 502
-  },
-  {
-   "do": "frames",
-   "ms": 21956
-  },
-  {
-   "do": "far",
-   "ms": 501
-  },
-  {
-   "do": "frames",
-   "ms": 134174
-  },
-  {
-   "do": "goTo",
-   "ms": 1695
-  },
-  {
-   "do": "frames",
-   "ms": 33599
+   "ms": 14342
   },
   {
    "do": "far",
@@ -62,19 +38,43 @@
   },
   {
    "do": "frames",
-   "ms": 109602
+   "ms": 21068
   },
   {
    "do": "far",
-   "ms": 502
+   "ms": 500
   },
   {
    "do": "frames",
-   "ms": 104069
+   "ms": 127902
+  },
+  {
+   "do": "goTo",
+   "ms": 1661
+  },
+  {
+   "do": "frames",
+   "ms": 33849
+  },
+  {
+   "do": "far",
+   "ms": 504
+  },
+  {
+   "do": "frames",
+   "ms": 111008
+  },
+  {
+   "do": "far",
+   "ms": 504
+  },
+  {
+   "do": "frames",
+   "ms": 102750
   },
   {
    "do": "report",
-   "ms": 512
+   "ms": 508
   }
  ],
  "shots": [
@@ -122,29 +122,29 @@
   {
    "region": 1,
    "visible": [
-    "01M2Q58RT0Y0W4CC1KPVGN5Q3A",
-    "01M2Q59ER6F3X27VZCHJVRWJXQ",
-    "01M2Q5EMRWKTPW41RB3BSS5JNR",
-    "01M2Q5J09QKQ7NES3PFZD4N369"
+    "01M2S37XVH9RC0D330HXC8GPG0",
+    "01M2S38K0KPBXSQ9FVTXFJYCAN",
+    "01M2S3DK10XKHVR55Q1GVBGFYB",
+    "01M2S3GZXNE2N5XYKW8VYHGV28"
    ],
    "tears": {
-    "01M2Q58RT0Y0W4CC1KPVGN5Q3A": "tear_001",
-    "01M2Q59ER6F3X27VZCHJVRWJXQ": "tear_020",
-    "01M2Q5EMRWKTPW41RB3BSS5JNR": "tear_043",
-    "01M2Q5J09QKQ7NES3PFZD4N369": "tear_005"
+    "01M2S37XVH9RC0D330HXC8GPG0": "tear_001",
+    "01M2S38K0KPBXSQ9FVTXFJYCAN": "tear_020",
+    "01M2S3DK10XKHVR55Q1GVBGFYB": "tear_043",
+    "01M2S3GZXNE2N5XYKW8VYHGV28": "tear_005"
    },
    "stocks": {
-    "01M2Q58RT0Y0W4CC1KPVGN5Q3A": "lined_04",
-    "01M2Q59ER6F3X27VZCHJVRWJXQ": "lined_01",
-    "01M2Q5EMRWKTPW41RB3BSS5JNR": "lined_04",
-    "01M2Q5J09QKQ7NES3PFZD4N369": "lined_04"
+    "01M2S37XVH9RC0D330HXC8GPG0": "lined_01",
+    "01M2S38K0KPBXSQ9FVTXFJYCAN": "lined_02",
+    "01M2S3DK10XKHVR55Q1GVBGFYB": "spiral_03",
+    "01M2S3GZXNE2N5XYKW8VYHGV28": "lined_04"
    },
    "scroll": {
     "first": 0,
     "last": 3,
     "of": 4
    },
-   "now": "2026-09-17T07:52:48.223Z",
+   "now": "2026-09-18T01:55:45.501Z",
    "driven_ms": 5712,
    "seed": 20260903,
    "events": 8,
@@ -169,7 +169,7 @@
    "at": "08_state_propagating"
   }
  ],
- "cold_ms": 1146,
+ "cold_ms": 1179,
  "problems": [],
  "ok": true
 }
