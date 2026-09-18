@@ -51,16 +51,25 @@ FIBRE = 0.60               # a step in that edge: about 1.4:1 against the lip, a
 
 WRITING_Y = 620
 FIBRE_Y = 1500
+# Section 6's two lines: one with the app's own rules drawn through its band, one written across a
+# hole in the paper with the desk showing through it.
+RULED_Y = 1900
+HOLED_Y = 2150
+RULE = 0.30                # a drawn rule: far off the paper, and LIGHTER than the ink, which is
+                           # the case that gets past `on_the_far_side` and becomes the ground
+HOLE = 0.30                # the desk, seen through a tear that runs past the line both ways
+RULED_SAYS = "the six words"
+HOLED_SAYS = "written across a tear"
 GLYPH_W, GLYPH_H, GAP, COUNT = 20, 30, 12, 12
 WRITING_SAYS = "in the morning then"
 FIBRE_SAYS = "not writing at all"
 
 
-def blocks(img, y, x0, value):
+def blocks(img, y, x0, value, count=None):
     """A line of glyph-sized marks: 20x30, area 600, which passes every filter in legibility.py."""
     boxes = []
     x = x0
-    for _ in range(COUNT):
+    for _ in range(count if count is not None else COUNT):
         img[y:y + GLYPH_H, x:x + GLYPH_W] = value
         boxes.append((x, y, GLYPH_W, GLYPH_H))
         x += GLYPH_W + GAP
@@ -83,6 +92,56 @@ def still(path, with_lip):
     rgb = np.repeat((a * 255.0).round().astype(np.uint8)[:, :, None], 3, axis=2)
     Image.fromarray(rgb, "RGB").save(path)
     return writing, fibre
+
+
+def still_ruled(path):
+    """One declared line with the app's own rules drawn immediately above and below it.
+
+    900x8, thrown out of the glyph filters on aspect, and LIGHTER than the ink so that they get
+    past `on_the_far_side` and are taken as the ground. That is `05_settings`'s "the six words",
+    which measured 1.14:1 against them on the committed capture while being plainly legible at
+    400%. They are inside the line's band -- the band is GLYPH_H // 2 = 15 -- and inside its
+    padded rect, which is the whole point: they are near the writing, and they are not what it is
+    written on.
+    """
+    rng = np.random.default_rng(29)
+    img = PAPER + rng.normal(0.0, 0.004, size=(H, W))
+    ruled = blocks(img, RULED_Y, 120, INK)
+    img[RULED_Y - 12:RULED_Y - 4, 100:1000] = RULE
+    img[RULED_Y + GLYPH_H + 4:RULED_Y + GLYPH_H + 12, 100:1000] = RULE
+    a = np.clip(img, 0.0, 1.0)
+    Image.fromarray(np.repeat((a * 255.0).round().astype(np.uint8)[:, :, None], 3, axis=2),
+                    "RGB").save(path)
+    return ruled
+
+
+def still_holed(path):
+    """One declared line written across a tear, with the desk showing through the gap in it.
+
+    `12_search`'s `PHOTOGRAPHS` is a torn tab in two halves with the desk visible between the O
+    and the T, so this is the same shape: the word in two groups, and one dark region in the gap
+    that runs well past the line above and below. It is the same luminance as the rules in
+    [still_ruled] and the same distance from the ink. Only its SCALE against the line differs,
+    and that must be enough to keep it as the ground -- a ruler that cannot see a hole in the
+    paper a word is written across is not the one to have.
+    """
+    rng = np.random.default_rng(31)
+    img = PAPER + rng.normal(0.0, 0.004, size=(H, W))
+    # Two halves of one word. The left ends at x=268 and the right starts at x=300, and the desk
+    # fills the 30px between them with a pixel of paper either side of it, so it is its own
+    # connected component and never merges with a letter. The gap is narrow on purpose: the
+    # band this is measured against reaches GLYPH_H // 2 = 15 either side of a stroke, so a tear
+    # much further from the writing than this is not the writing's ground at all and a test
+    # built on one would prove nothing. At 30px it is about a quarter of the band, which is what
+    # puts it under the fifth percentile the adversarial end is read from.
+    left = blocks(img, HOLED_Y, 120, INK, count=5)
+    right = blocks(img, HOLED_Y, 300, INK, count=5)
+    img[HOLED_Y - 60:HOLED_Y + GLYPH_H + 60, 270:298] = HOLE + rng.normal(
+        0.0, 0.004, size=(GLYPH_H + 120, 28))
+    a = np.clip(img, 0.0, 1.0)
+    Image.fromarray(np.repeat((a * 255.0).round().astype(np.uint8)[:, :, None], 3, axis=2),
+                    "RGB").save(path)
+    return left + right
 
 
 def sidecar(path, name, groups):
@@ -199,6 +258,39 @@ def main():
                             "--text-runs", "require"], capture_output=True, text=True)
         check(p.returncode == 2 and name in p.stderr,
               "require names the stills that have no declaration beside them")
+
+        # ---- 6. the app's own ink is not the surface, and a hole in the paper still is --------
+        # Two pages, each with one declared line and one dark thing in its band. The two dark
+        # things are the same luminance and the same distance from the ink; they differ only in
+        # scale against the line, and that alone decides which is the ground.
+        with tempfile.TemporaryDirectory() as rd:
+            rname = "ruled.png"
+            sidecar(os.path.join(rd, "ruled.text.json"), rname,
+                    [(still_ruled(os.path.join(rd, rname)), RULED_SAYS)])
+            p6, ruled = measure(rd)
+            rart = ruled["artifacts"][rname]
+            check(rart["runs"] == 1, f"the ruled line reads as one run ({rart['runs']})")
+            check(p6.returncode == 0 and ruled["total_below_floor"] == 0,
+                  "a rule the app drew through a line's band is not that line's ground")
+            # The half that keeps this from being met by a tool that stopped looking: the line has
+            # to read what the same writing reads on clean paper, not merely stop failing.
+            check(rart["worst_ink_core"] is not None
+                  and abs(rart["worst_ink_core"] - alone_core) <= 0.25,
+                  f"and it reads what that writing reads on a clean page "
+                  f"({alone_core} -> {rart['worst_ink_core']})")
+
+        with tempfile.TemporaryDirectory() as hd:
+            hname = "holed.png"
+            sidecar(os.path.join(hd, "holed.text.json"), hname,
+                    [(still_holed(os.path.join(hd, hname)), HOLED_SAYS)])
+            p6, holed = measure(hd)
+            hart = holed["artifacts"][hname]
+            check(hart["runs"] == 1, f"the torn line reads as one run ({hart['runs']})")
+            check(p6.returncode == 1 and holed["total_below_floor"] >= 1,
+                  f"and the desk seen through a tear it is written across still is its ground "
+                  f"({hart['worst_ink_core']}:1)")
+            check(any(f.get("says") == HOLED_SAYS for f in holed["failures"]),
+                  "so the rule is a rule about scale, not a licence to empty the ground")
 
     if failures:
         print(f"\n{len(failures)} check(s) failed", file=sys.stderr)

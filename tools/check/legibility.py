@@ -147,6 +147,40 @@ DECLARED_PAD_MIN = 6
 # on lined stock at 2.83:1 when the pair is 4.55:1. A high percentile over the whole ring finds
 # the paper whether or not the halo is in the sample.
 
+# A RUN'S GROUND IS THE SURFACE THE LETTERS ARE ON, AND THE APP'S OWN INK IS NOT THAT SURFACE.
+#
+# The glyph filters above are deliberately strict, because their job is to decide what gets
+# *measured*. Using the same filters to decide what gets *excluded from the ground* is a different
+# question with a different answer, and conflating the two is what made this file fail writing
+# against its own ink. Three kinds of the app's own mark miss those filters and so stayed in the
+# ground as the adversarial dark end the floor was taken against:
+#
+#   - the two dots of a `:`, 5x5 and area 18, under both GLYPH_MIN_AREA and min_h;
+#   - digits that touch a printed rule of the stock and merge into one 543x31 component, thrown
+#     out on the 14:1 aspect filter;
+#   - a drawn rule or an underline, thrown out on aspect on its own.
+#
+# So "Wed 22 Apr 16:44" was failed at 1.02:1 against the ink of its own colon and its own 44, and
+# "the six words" -- black ink on cream, legible at 400% -- at 1.14:1 against the two heavy rules
+# the widget draws above and below it. This is the mirror image of the fibre problem the sidecar
+# was built for: that was the detector reading a surface as writing, this is it reading writing as
+# a surface.
+#
+# The rule that separates them is SCALE, measured against the line the mark sits in, and it is the
+# app that supplies the scale. A mark drawn on a surface is no taller than the writing it sits
+# among; a surface is taller than the writing on it. Both halves matter, and the second is the one
+# that kept this honest -- 12_search's `PHOTOGRAPHS` is a torn tab in two halves with the desk
+# showing through the gap between the O and the T, and that desk is one 1408x685 component against
+# a 37px line. A ruler that cannot see a hole in the paper a word is written across is not the one
+# to have, and a height test sees it: 685 is not 37. Every giant surface component on the set is
+# five to twenty times its line's height, and every piece of the app's own ink is under it.
+#
+# What this does NOT do is anchor the ground band anywhere new: the band is still grown from the
+# accepted glyphs alone (`glyph_px`), so it still hugs real letters. The extra ink is only denied
+# the right to *be* the ground. And it applies only where the app declared its text, so a capture
+# taken before the sidecar existed reads exactly as it did.
+FIGURE_MAX_H_OVER_LINE = 1.0
+
 
 def srgb_to_linear(a):
     return np.where(a <= 0.03928, a / 12.92, ((a + 0.055) / 1.055) ** 2.4)
@@ -270,6 +304,46 @@ def line_of(boxes, lines):
     return np.where(np.isfinite(dist[np.arange(n), best]), best, -1)
 
 
+def figure_of(rejected, ys, xs, lines, shape, polarity, surround):
+    """The app's own marks among the components the glyph filters threw out.
+
+    A rejected component is the app's ink -- figure -- when it overlaps the padded rect of a
+    declared line *and* is no taller than that line. Anything taller is the surface the line is
+    written on: a sheet, a shadow field, a photograph, or the desk showing through a hole torn in
+    the paper. Returns their pixels as a mask, for removal from the ground.
+
+    The overlap is the component's box against the line's box, not its centre against it, because
+    the case this exists for is a rule that runs the width of the sheet through a line of digits:
+    its centre is off in the rule and a containment test never sees it.
+
+    A PALE MARK IS ONLY THE APP'S INK WHERE WHAT IT SITS ON IS DARK, which is the same asymmetry
+    the measuring loop already applies through LIGHT_ON_DARK_MAX_GROUND and for the same reason:
+    on paper, lighter-than-local is a highlight, the lit side of a curl, or the tooth of the
+    stock, and all three are the surface. Taken symmetrically this rule removed the bright half
+    of `02_chat`'s paper from the ground under "Wed 22 Apr · 16:34", which left the sample's dark
+    tail exposed, lifted its swing from 1.07 through the 1.20 gate to 1.29 and turned a 4.70 into
+    a 3.65 failure. [surround] is the local paper level -- the same box mean the ink threshold is
+    taken against -- read in luminance so it can be compared to that constant.
+    """
+    ly0, ly1, lx0, lx1, _ = lines
+    out = np.zeros(shape, dtype=bool)
+    if ly0.size == 0 or not rejected:
+        return out
+    r = np.asarray([t[:4] for t in rejected], dtype=np.float64)   # (n, 4) y0, y1, x0, x1
+    pad = np.maximum(DECLARED_PAD_MIN, DECLARED_PAD_FRAC * (ly1 - ly0))[None, :]
+    lh = (ly1 - ly0)[None, :]
+    hit = ((r[:, 1:2] > ly0[None, :] - pad) & (r[:, 0:1] < ly1[None, :] + pad) &
+           (r[:, 3:4] > lx0[None, :] - pad) & (r[:, 2:3] < lx1[None, :] + pad) &
+           ((r[:, 1:2] - r[:, 0:1]) <= FIGURE_MAX_H_OVER_LINE * lh))
+    for i in np.nonzero(hit.any(axis=1))[0]:
+        a, b = rejected[i][4], rejected[i][5]
+        yy, xx = ys[a:b], xs[a:b]
+        if polarity == "light" and float(np.median(surround[yy, xx])) > LIGHT_ON_DARK_MAX_GROUND:
+            continue
+        out[yy, xx] = True
+    return out
+
+
 def group_by_line(boxes, owner, lines, sidecar):
     """One run per declared line that actually has marks in it, in reading order.
 
@@ -332,6 +406,9 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
     lum = luminance(rgb)                                  # for the arithmetic WCAG specifies
     gam = rgb.astype(np.float64).mean(axis=2) / 255.0     # for deciding what is a mark
     ground_gam = box_mean(gam, GROUND_WINDOW)
+    # The same local paper level again in luminance, so `figure_of` can ask whether what a pale
+    # mark sits on is dark against LIGHT_ON_DARK_MAX_GROUND, which is a luminance constant.
+    lum_bg = box_mean(lum, GROUND_WINDOW)
 
     min_h = max(7, int(GLYPH_MIN_H_FRAC * H))
     max_h = int(GLYPH_MAX_H_FRAC * H)
@@ -366,6 +443,7 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
     found = []
     outside = 0
     glyph_px = np.zeros((H, W), dtype=bool)
+    figure_px = np.zeros((H, W), dtype=bool)
     for polarity in ("dark", "light"):
         mask = marks(gam, ground_gam, polarity)
         if mask.sum() < 60:
@@ -379,21 +457,21 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
         bounds = list(starts) + [roots.size]
 
         boxes, pixels = [], []
+        rejected = []                          # (y0, y1, x0, x1, a, b) for the figure test below
         for i in range(len(bounds) - 1):
             a, b = bounds[i], bounds[i + 1]
             area = b - a
-            if not (GLYPH_MIN_AREA <= area <= GLYPH_MAX_AREA):
-                continue
             yy, xx = ys[a:b], xs[a:b]
             y0, y1 = int(yy.min()), int(yy.max()) + 1
             x0, x1 = int(xx.min()), int(xx.max()) + 1
             h, w = y1 - y0, x1 - x0
-            if not (min_h <= h <= max_h):
-                continue
-            if w > 14 * h or h > 14 * w:      # a printed rule, a tear edge, a stem of nothing
-                continue
-            boxes.append((y0, y1, x0, x1))
-            pixels.append((yy, xx))
+            if (GLYPH_MIN_AREA <= area <= GLYPH_MAX_AREA and min_h <= h <= max_h
+                    # a printed rule, a tear edge, a stem of nothing
+                    and not (w > 14 * h or h > 14 * w)):
+                boxes.append((y0, y1, x0, x1))
+                pixels.append((yy, xx))
+            else:
+                rejected.append((y0, y1, x0, x1, a, b))
 
         # Where the app declared its text, a shape that survived the size and aspect filters is
         # writing only if it sits in a line the app says it drew. The rest go back into the ground
@@ -412,9 +490,15 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
 
         for yy, xx in pixels:
             glyph_px[yy, xx] = True
+        # The app's own ink that the glyph filters threw out: shorter than the line it overlaps,
+        # so a mark on that surface rather than the surface itself. Out of the ground, and not
+        # into `glyph_px`, because it is not measured and must not anchor the band either.
+        if lines is not None and rejected:
+            figure_px |= figure_of(rejected, ys, xs, lines, (H, W), polarity, lum_bg)
         found.append((polarity, mask, boxes, owner))
 
-    is_ground = ~dilate(glyph_px, GROUND_HALO)
+    figure_px |= glyph_px
+    is_ground = ~dilate(figure_px, GROUND_HALO)
 
     out = []
     seen = 0
@@ -462,9 +546,26 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
             # darker ink at Y -0.006, so a dark mark on the wood has essentially no contrast to
             # measure. The ring reading flattered these at 1.4 to 8.0 by reading the light end of
             # the grain; one to one is the truthful number.
+            # The band is never abandoned for the whole ring box. Falling back to the ring is what
+            # the paragraph above says is wrong -- the ring is a rectangle, and for a line near
+            # the edge of a sheet it reaches out onto whatever is beside the sheet -- and this
+            # file did it anyway, `ground = pl[near] if near.sum() >= 200 else pl[pg]`, whenever
+            # the band came up short. Taking the app's own ink out of the ground makes a short
+            # band commoner, so the fallback had to go before the rule above could land: firing
+            # 14 measured `03_us`'s "18 Jul" arriving as a new failure through exactly it.
+            #
+            # What replaces it is nothing: where the band cannot find 200 pixels of surface, no
+            # adversarial end is claimed and the ring percentile stands, which is the flat-paper
+            # answer and the conservative one. GROWING the band instead was tried and is worse --
+            # at two to four times it stops hugging the letters, which is the band's whole
+            # meaning, and it reached a neighbouring surface and turned `02_chat`'s
+            # "Wed 22 Apr · 16:34" from 4.70 into a 3.65 failure against a ground 20 points
+            # darker than its paper. The short-band case is a small run enclosed by its own ink,
+            # which is flat paper by construction; a run on the desk has thousands of pixels of
+            # grain in its band and never reaches this.
             band = max(3, (y1 - y0) // 2)
             near = dilate(pmg, band) & pg
-            ground = pl[near] if near.sum() >= 200 else pl[pg]
+            ground = pl[near]
             swing, g_adv = None, None
             if ground.size >= 200:
                 g_lo = float(np.percentile(ground, 5))
