@@ -70,9 +70,6 @@ python3 tools/check/manifest.py --out "$LOG/manifest.json" >/dev/null \
 echo "· checking every recipe can actually be built"
 python3 tools/check/recipes.py --out "$LOG/recipes.json" >/dev/null \
   || note_missing "recipes" "a recipe names something the kit cannot build, or tells it something it cannot be told"
-echo "· checking no surface in the library is a flat fill"
-python3 tools/check/surfaces.py --out "$LOG/surfaces.json" \
-  || note_missing "surfaces" "a rendered surface in the library has nothing in it; see $LOG/surfaces.json"
 echo "· checking the lamp is the colour DIRECTION.md says it is"
 python3 tools/check/illuminant.py --out "$LOG/illuminant.json" >/dev/null \
   || note_missing "illuminant" "the day rig's net colour temperature is not the one DIRECTION.md declares, so every render in assets/ is lit wrong; see $LOG/illuminant.json"
@@ -128,6 +125,22 @@ if [ "$BUILD" = "yes" ]; then
     exit 4
   fi
 fi
+
+# The surfaces gate reads `app/assets`, which is derived and gitignored, so it has to be asked
+# after something has packed it. It used to sit sixteen lines above the first `pack_assets.py`,
+# with the other library checks, and in a fresh container it therefore globbed an empty directory,
+# read zero surfaces and exited 2 — correctly, because firing 10 made reading nothing an error on
+# purpose (cc078d7) so that a gate could not pass by looking at nothing. What reached
+# evidence/frames.json was `surfaces — a rendered surface in the library has nothing in it`, which
+# is a false statement about the library and had been made on every fresh-container capture.
+# Re-run after the packing, the same gate reads 318 surfaces and none of them is flat.
+#
+# It stays on the packed library rather than moving to `--root assets`: app/assets is what the app
+# ships and what the rest of this capture measures, and a gate that reads a different library from
+# the one under the camera is a gate that can be green about the wrong thing.
+echo "· checking no surface in the library is a flat fill"
+python3 tools/check/surfaces.py --out "$LOG/surfaces.json" \
+  || note_missing "surfaces" "a rendered surface in the library has nothing in it; see $LOG/surfaces.json"
 
 # Sets SERVED to the server's pid. It does not echo it: a background job started inside $(...)
 # keeps the substitution's pipe open for as long as it runs, so reading the pid that way blocks
