@@ -1,0 +1,117 @@
+{
+  "critic": "messenger-reliability",
+  "cycle": 3,
+  "score": 21,
+  "floor": 26,
+  "meets_floor": false,
+  "findings": [
+    {
+      "severity": "blocking",
+      "artifact": "04_moments.png",
+      "where": "the media board under WHAT WE SENT / WHAT HAPPENED / WHAT WE FELT; the string 'still fetching the picture.' appears six times, at approximately y=750, y=1460, y=2010, y=2325, y=2435 and y=2835 of 3120, alongside roughly a dozen further tiles that carry only a date (20 Aug 26, 18 Aug 26, 21 Aug 26, 4 Aug 26, 8 Aug 26, 12 Aug 26) and no content at all",
+      "what": "Exactly one photo tile in the whole media board has loaded; the rest are either frozen on a 'still fetching the picture.' placeholder or are blank paper with a date, and evidence/logs/04_moments.json shows the capture gave it 2305 ms of wait plus a 2828 ms shot settle plus the scene's own 700 ms settle before the shutter.",
+      "why": "The rubric row forbids 'a spinner that outstays its welcome' and demands that photos and video be dependable; a gallery where most of the couple's media never arrives after five seconds of settling is the single clearest reason in this evidence set to open Instagram instead."
+    },
+    {
+      "severity": "blocking",
+      "artifact": "13_messenger_states.png",
+      "where": "the full screen, which is the one artifact in the set whose stated job is the messenger's states; also checked against the capabilities map in reliability.json",
+      "what": "Typing indication appears nowhere in the evidence: 13_messenger_states.png shows only 'read ✓✓', 'going', 'waiting to send' and 'it would not go ✕', and reliability.json's capabilities object has sixteen keys (send, ack, read, reply, react, edit, delete, voice_note, video, viewer, search, draft_survival, kill_mid_send, offline_queue, reconnect_ordering, host_offline_outbox) with no typing key among them.",
+      "why": "Typing indication is named explicitly in the rubric row as a capability that must be present and dependable, and it has neither a picture nor a measurement anywhere in the evidence, so on this evidence it does not exist."
+    },
+    {
+      "severity": "serious",
+      "artifact": "13_messenger_states.png",
+      "where": "the row reading 'sending you the roster / Thu 3 Sep · 19:40 it would not go ✕' at y≈2483–2620 (crop verified at full resolution)",
+      "what": "A permanently failed outbound message is shown with a clear failure marker but with no retry, resend or 'try again' affordance anywhere on or beside the row.",
+      "why": "A message the app admits it could not send and offers no way to send again is a dropped message from the couple's point of view, which the rubric row treats as disqualifying."
+    },
+    {
+      "severity": "serious",
+      "artifact": "12_search.png",
+      "where": "the first three results for the query 'rain': 'Rain. The first in a month…' Tue 4 Aug · 07:20 (y=920), 'its raining here too…' Tue 4 Aug · 07:24 (y=1372), 'text when home · kept' Tue 4 Aug · 07:14 (y=1629), then Wed 10 Jun · 11:52, Wed 1 Apr · 06:38, Mon 2 Mar · 07:40",
+      "what": "Results run strictly newest-first across days but are non-monotonic inside 4 Aug — 07:20, then 07:24, then 07:14 — and the third result, 'text when home · kept', carries no highlighted match and contains no occurrence of the search term in anything shown.",
+      "why": "The rubric row requires full-text and media search to be dependable; an ordering that is neither ascending nor descending inside a day, plus a hit the reader cannot see the reason for, makes the search result list untrustworthy."
+    },
+    {
+      "severity": "serious",
+      "artifact": "14_media_viewer.png",
+      "where": "the full-screen photo occupying roughly x=66–1400, y=190–1990",
+      "what": "The opened photo carries essentially no high-frequency detail: measured over x=100–1400, y=700–1900 the mean absolute horizontal neighbour difference is 0.66/255 and only 0.5% of adjacent pixel pairs differ by more than 12 levels, against 4.59 for the caption paper 300 px below it in the same file and 1.00 for the flat wood background — the photo is the softest region in its own screenshot, and horizontal scanline banding is visible at 200%.",
+      "why": "The media viewer is a named rubric item; opening a photo full screen and getting something blurrier than the desk behind it defeats the purpose of having a viewer at all, whatever reliability.json's viewer check says about the bytes hashing equal."
+    },
+    {
+      "severity": "serious",
+      "artifact": "frames.json",
+      "where": "clips.11_chat_scroll and the scroll object; cross-checked against evidence/logs/11_chat_scroll.json and evidence/scenes/11_chat_scroll.json",
+      "what": "The dense-scroll clip is not a recording of scrolling: the scene drives it with {\"kind\":\"scrollBy\",\"per\":-11.0} one step per captured still, 330 stills assembled at a nominal 60 fps, and the capture took 317390 ms of wall clock to produce 5.5 s of video (962 ms per frame).",
+      "why": "'repeated_frames: 0' and 'mean_change_per_frame: 0.04874' are guaranteed by the driver rather than measured from the app, so the evidence set contains no frame-timing number at all for the rubric's 'no scroll jank against the year-deep seeded history'."
+    },
+    {
+      "severity": "serious",
+      "artifact": "evidence/logs/*.json (cold_ms across all sixteen scene logs)",
+      "what": "Every scene that loads the 14,062-event seeded year reports cold_ms between 11528 and 12548 (01_pulse 12496, 02_chat 12303, 03_us 12548, 04_moments 11961, 05_settings 11771, 06_unfolding 11779, 07_feeling_landing 11625, 11_chat_scroll 11757, 12_search 11771, 13_messenger_states 11528, 14_media_viewer 11677, 15_authored_feeling 12004, dusk_pulse 11531), while the three scenes without that history report 1217, 1245 and 1295.",
+      "where": "the cold_ms field of each scene log",
+      "why": "A tenfold start-up penalty that tracks exactly with the year-deep history is the shape of a spinner that outstays its welcome, and nothing in the evidence set separates app start-up from harness seeding, so there is no trustworthy time-to-first-screen figure for the state the couple would actually open the app in."
+    },
+    {
+      "severity": "serious",
+      "artifact": "reliability.json",
+      "where": "the top-level \"transport\": \"local\" field, and tailscale.later_check",
+      "what": "The whole capability and fault matrix — kill_mid_send, offline_queue with 26 events, reconnect_ordering gapless seq 1..173, host_offline_outbox — was run over loopback, and the only Tailscale crossing in the file is dated 2026-09-05 with later_check.status 'pending' and the note 'the nodes were not answering when this was re-run'; coldstart.json carries the same stale date and the same pending re-check.",
+      "why": "The rubric row's ordering-after-reconnect guarantee is the one that decides whether the couple loses messages, and on the day of capture it could not be reproduced on the transport the product actually uses."
+    },
+    {
+      "severity": "minor",
+      "artifact": "13_messenger_states.png",
+      "where": "x=60–1120, y=1275–1520, between 'noor needs a lot · Thu 3 Sep · 17:27' and 'left the key under the pot · Thu 3 Sep · 19:40'",
+      "what": "A full message slot renders as a flat empty slab with no text, no author, no timestamp and no delivery or read marker; 06_unfolding_strip.png shows the same slab in frames 0 through 4 and reveals in frame 5 that it is a folded note that opens into 'Two steps. put the kettle on the second one not the first one · Thu 3 Sep · 17:33'.",
+      "why": "Even granting that it is a deliberate folded note, a row in the thread that shows neither who sent it, nor when, nor whether it was delivered breaks the rubric's requirement that delivery and read state be legible on every message."
+    },
+    {
+      "severity": "minor",
+      "artifact": "evidence/crops/11_chat_scroll_strip.png",
+      "where": "panel 5 of 6 (frame 263), top right — also visible in 06_unfolding_strip.png panel 1",
+      "what": "The floating search chip and its magnifier glyph are drawn over the message body: in the scroll strip the word 'saw' in 'I saw the boat. I saw the boat and then I saw the credits.' sits underneath the magnifier and the chip's paper covers the end of the line.",
+      "why": "Message text being occluded by a persistent control during ordinary scrolling is exactly the kind of small unreliability that accumulates into not trusting the thread."
+    },
+    {
+      "severity": "minor",
+      "artifact": "02_chat.text.json",
+      "where": "the last run, rect [251, 3118, 262, 2]",
+      "what": "A message run 'went to wednesday bin, the lid, and the box that is still stand…' is laid out 2 px tall at y=3118 in a 3120 px frame, underneath the tab bar, while the same file declares \"offscreen\": 0.",
+      "why": "A message row collapsed to two pixels is a layout failure that the text sidecar reports as fine, so the evidence set's own check for clipped content does not catch it."
+    },
+    {
+      "severity": "minor",
+      "artifact": "12_search.png",
+      "where": "the filter row at y=422; the TALKING chip's text run is [1287, 422, 153, 42], right edge exactly 1440 = the frame edge",
+      "what": "The last of the five type filters (EVERYTHING / WRITTEN / PHOTOGRAPHS / VIDEO / TALKING) is cut off by the right edge of the screen with no visible affordance saying the row scrolls.",
+      "why": "The media filters are how media search is reached, and one of them reads as broken rather than as scrollable."
+    },
+    {
+      "severity": "minor",
+      "artifact": "evidence/logs/manifest.json and evidence/logs/strings.json",
+      "where": "manifest.json entries_without_a_file (20 entries, including seed/photos/2025-09_bread_loaf.jpg, 2025-09_canal_grey.jpg, 2025-09_classroom_display.jpg, 2025-09_marker_drawer.jpg and twelve scratch/posters/*.jpg), with \"ok\": true; strings.json \"findings\": [], \"ok\": true",
+      "what": "The asset manifest check lists twenty catalogued entries with no file behind them, four of them seed photos, and still reports ok; the strings audit reports no findings while 'still fetching the picture.' is on screen six times in 04_moments.png and does not appear in 04_moments.text.json's 33 extracted runs at all.",
+      "why": "Two of the build's own self-checks pass over the exact conditions that produce the stalled media board, so the evidence set cannot be relied on to catch a recurrence."
+    },
+    {
+      "severity": "minor",
+      "artifact": "MANIFEST.json",
+      "where": "the missing object: 09_two_devices.png and 16_setup_android.png",
+      "what": "Both are recorded missing with a measured reason — no /dev/kvm, the x86_64 image booting under QEMU instruction emulation, adbd answering after 113 minutes but the framework never coming up, no GTK for a desktop stand-in, and an explicit statement that neither was faked from the PWA.",
+      "why": "That is a reason rather than an excuse and I penalise it once, not twice, but it does mean no artifact in the set shows a delivery or read marker produced by a real exchange between two devices — every still was captured with link 'connecting' and 05_settings.png reading 'not paired yet.'"
+    }
+  ],
+  "what_is_working": [
+    "Delivery and read are genuinely distinct and legible: 06_unfolding_strip.png shows 'sent ✓' on two messages and 13_messenger_states.png and 02_chat.png show 'read ✓✓', with 'going', 'waiting to send' and a red 'it would not go ✕' covering the in-flight and failed cases.",
+    "reliability.json is a real fault-injection harness rather than a claim: 174 events on both sides, duplicates 0, same_order_both_sides true, ordering monotonic, kill_mid_send confirming the host received the message once and the retry did not duplicate it, 26 events queued offline and all delivered on reconnect, seq 1..173 gapless and monotonic after the gap, and a draft surviving the client process being closed and reopened. That is precisely the set of guarantees the rubric row asks for.",
+    "Ordering in the dense history reads correctly everywhere I could check it: 11_chat_scroll_strip.png panel 5 runs 21:56, 21:58, 22:00 top to bottom, panel 2 runs 11:46, 11:58, 14:40, 15:40, 15:50, and panel 1 runs 16:30, 16:34, 16:36, 16:40 — ascending downward, descending as the scroll moves back through 22 Apr into 21 Apr.",
+    "Search is substantive: 12_search.png shows a live query, five type filters, the term highlighted in place inside each hit, and results reaching back across the year to 2 Mar; reliability.json's search check reports hits across nine event types including photo, video, voice_note and todo_event.",
+    "Reactions are folded onto the message rather than taking a row of their own — visible as the small drawn sticky on 'There was a boat.' in 11_chat_scroll_strip.png panel 5, which matches reliability.json's react detail.",
+    "The failure and empty states are written like a person: 'it would not go', 'waiting to send', and in 08_state_propagating_strip.png frame 0, 'nothing from them yet. it will show here. their phone tells this one where they are, once it can reach them.' No exclamation marks, no 'Oops!', nobody addressed as a user.",
+    "05_settings.png surfaces the link honestly — 'not paired yet.' and 'connecting · http://127.0.0.1:8480' — rather than pretending to be connected, and 08_state_propagating.report.json shows link 'connected' with an event actually crossing between two paired surfaces."
+  ],
+  "verdict": "The spine of this messenger is better than its surface: reliability.json is an honest fault-injection harness and it answers the hardest parts of this rubric row — no duplicates across 174 events, identical order on both sides, a kill mid-send that does not double-post, 26 events queued offline and all delivered, gapless monotonic sequence after the gap, and a draft that survives the process dying — while the stills show sent and read as genuinely distinct markers, a failure state that says 'it would not go', reactions folded onto their target, and a year-deep search with the term highlighted in place. What sinks it is what the couple would actually see. 04_moments.png, the board where their photos and videos live, has one tile loaded and six frozen on 'still fetching the picture.' with a dozen more blank but for a date, after five seconds of settling before the shutter; that is a stalled state in a delivered artifact and on its own it is a reason to open Instagram. Typing indication, named in the rubric, exists in no artifact and in no key of the capability matrix. The failed message offers no way to retry, the full-screen photo in 14_media_viewer.png is measurably the softest thing in its own frame, search results are non-monotonic inside 4 Aug and return a hit whose match cannot be seen, and the one clip that was meant to answer scroll jank is a scripted eleven-pixel-per-frame slideshow that can only ever report zero repeated frames. I judged all five clips from the frame strips in evidence/crops/ and the per-clip records in evidence/logs/ and frames.json, not from playback, since there is no decoder in this container — and I should say that those strips are 151 px wide per frame from a 1080 px source, which is too small to check a delivery marker without upscaling. The missing 09_two_devices.png and 16_setup_android.png come with a measured hardware reason that I accept and count once. Twenty-one out of thirty, five below the floor."
+}
