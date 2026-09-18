@@ -1,5 +1,67 @@
 {
  "files": {
+  "../../../tmp/claude-0/-home-user-love-tap/cf119e03-1236-54ba-99f4-ac6fc3c1772a/scratchpad/foldprobe/unfold_thirds": {
+   "bytes": 4096,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_sequence",
+   "settings": {
+    "crease_mm": 1.4,
+    "frames": 240,
+    "light": "day",
+    "resolution": 1440,
+    "rig": "blender/rig/common.py",
+    "rules_stock": "lined",
+    "rules_variant": 1,
+    "samples": 16,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cf119e03-1236-54ba-99f4-ac6fc3c1772a/scratchpad/foldprobe/unfold_thirds/0000.png": {
+   "bytes": 801982,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "frame": 0,
+    "frames": 240,
+    "light": "day",
+    "resolution": 1440,
+    "rig": "blender/rig/common.py",
+    "rules_stock": "lined",
+    "rules_variant": 1,
+    "samples": 16,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
+  "../../../tmp/claude-0/-home-user-love-tap/cf119e03-1236-54ba-99f4-ac6fc3c1772a/scratchpad/foldprobe/unfold_thirds/0001.png": {
+   "bytes": 804515,
+   "generator": "blender/folds/fold.py",
+   "kind": "fold_frame",
+   "settings": {
+    "crease_mm": 1.4,
+    "frame": 1,
+    "frames": 240,
+    "light": "day",
+    "resolution": 1440,
+    "rig": "blender/rig/common.py",
+    "rules_stock": "lined",
+    "rules_variant": 1,
+    "samples": 16,
+    "sequence": "unfold_thirds",
+    "sheet_mm": [
+     148.0,
+     105.0
+    ]
+   }
+  },
   "assets/bits/clip_01.png": {
    "bytes": 57426,
    "generator": "blender/bits/bits.py",

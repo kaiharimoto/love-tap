@@ -35,6 +35,19 @@ from rig import common, manifest  # noqa: E402
 
 OUT = os.path.join(common.repo_root(), "assets", "folds")
 SHEET_MM = (148.0, 105.0)          # A6, the size of a note in the thread
+
+# The stock a note in the thread is torn from, and which variant of it.
+#
+# Every other piece of paper in this build is a render of a printed stock: blender/paper/stocks.py
+# passes `rules_image` to `common.paper_material` for all fifty-four of them. The fold did not, so
+# for four cycles the one sheet the material row is judged on was the only blank sheet in the
+# library -- a flat cream rectangle with a procedural tooth, square-cut, which is the archetype
+# docs/BRIEF.md names as a failure of the whole visual concept. Firing 19 measured it: a 300x120
+# interior patch of frame 0 reads L_std 1.795 over 16 luminance levels against 9.783 over 95 for
+# the stock it is meant to be made of, and the artifact it freezes into reads 1.317 against 36.896
+# for the ruled note 200 px below it in the same frame.
+RULES_STOCK = "lined"
+RULES_VARIANT = 1
 THICKNESS_M = 0.00011
 CREASE_MM = 1.4                     # width of the bevelled crease band
 SEQUENCES = {
@@ -175,6 +188,35 @@ def crumple_field(verts_co, rng, w, h):
     return field
 
 
+def rules_for_a_note():
+    """The printed rules of the stock this note is torn from, and where on the stock it is torn.
+
+    Two things have to be right or the rules are worse than none. The image comes from
+    blender/paper/rules.py under the SYSTEM python, because Blender's bundled python has numpy and
+    no Pillow -- the same dance blender/paper/stocks.py:203 does and for the same reason. And the
+    pitch has to survive the change of sheet: rules.py prints a `lined` sheet at 148 x 210 mm with
+    8 mm feint rules and a red margin 32 mm in, while this sheet is A6 at 148 x 105 mm, and the
+    rules image is sampled by raw UV. Stretched, 8 mm rules would print at 4 mm and the note would
+    be ruled like nothing that exists. So the sheet samples the fraction of the image it actually
+    covers -- 105/210 in v, 148/148 in u -- and takes it from the middle of the stock rather than
+    the top, because the top of a lined sheet is its header margin and a note torn out of the
+    middle of a pad is what the thread is made of.
+    """
+    import shutil
+    import subprocess
+    sys.path.insert(0, os.path.join(os.path.dirname(HERE), "paper"))
+    import rules as rules_mod  # noqa: E402
+    path = rules_mod.output_path(RULES_STOCK, RULES_VARIANT)
+    if not os.path.exists(path):
+        py = shutil.which("python3") or "python3"
+        subprocess.run([py, os.path.join(os.path.dirname(HERE), "paper", "rules.py"),
+                        "--stock", RULES_STOCK, "--variant", str(RULES_VARIANT)], check=True)
+    stock_w_mm, stock_h_mm = rules_mod.SHEETS_MM[RULES_STOCK]
+    scale = (SHEET_MM[0] / stock_w_mm, SHEET_MM[1] / stock_h_mm)
+    offset = ((1.0 - scale[0]) / 2.0, (1.0 - scale[1]) / 2.0)
+    return path, scale, offset
+
+
 def render_sequence(name, frames, res, samples, out_dir, condition="day", start=0, end=None):
     cfg = SEQUENCES[name]
     kind = cfg["kind"]
@@ -185,6 +227,8 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
     end = frames if end is None else end
     base_co = None
     field = None
+    # The path once; the datablock per frame, because reset_scene empties bpy.data.
+    rules_png, rules_scale, rules_offset = rules_for_a_note()
     for frame in range(start, end):
         t = frame / max(1, frames - 1)
         scene = common.reset_scene()
@@ -214,8 +258,12 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
         solid = obj.modifiers.new("thickness", "SOLIDIFY")
         solid.thickness = THICKNESS_M
         solid.offset = -1.0
+        rules_img = common.load_image(rules_png)
+        rules_img.colorspace_settings.name = "sRGB"
         mat = common.paper_material(f"{name}_paper", (0.94, 0.91, 0.85), tooth=1.05, yellowing=0.25,
-                                    sheen=0.24, fibre_scale=1100.0)
+                                    sheen=0.24, fibre_scale=1100.0,
+                                    rules_image=rules_img, rules_uv_scale=rules_scale,
+                                    rules_uv_offset=rules_offset)
         obj.data.materials.append(mat)
         common.add_shadow_catcher(scene, size_m=0.4)
         common.add_top_camera(scene, w * 1.25, h * 1.55, ortho=True, distance=0.5)
@@ -234,6 +282,7 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
     settings = {
         "sequence": name, "frames": frames, "resolution": res, "samples": samples,
         "sheet_mm": list(SHEET_MM), "crease_mm": CREASE_MM, "light": condition,
+        "rules_stock": RULES_STOCK, "rules_variant": RULES_VARIANT,
         "rig": "blender/rig/common.py",
     }
     # The brief's rule is that every file in assets/ names its generator, so each frame gets its

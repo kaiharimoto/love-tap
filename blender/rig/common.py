@@ -309,10 +309,20 @@ def add_shadow_catcher(scene, size_m=2.0):
 
 
 def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_image=None,
-                   fibre_scale=900.0, roughness=0.78, subsurface=0.012):
+                   fibre_scale=900.0, roughness=0.78, subsurface=0.012,
+                   rules_uv_scale=(1.0, 1.0), rules_uv_offset=(0.0, 0.0)):
     """The base paper material. Fibre relief is a bump from layered noise; the printed rules
     (an image texture generated in Python) are multiplied over the base colour; yellowing warms
-    the base toward the edges. tooth scales the relief. Returns the material."""
+    the base toward the edges. tooth scales the relief. Returns the material.
+
+    `rules_uv_scale` and `rules_uv_offset` exist because the rules image is sampled by raw UV and
+    every sheet's UV is 0..1 over its own size, so a rules image drawn for one sheet lands at the
+    wrong pitch on a sheet of a different size. blender/paper/rules.py prints in millimetres -- 8 mm
+    feint rules, a red margin at 32 mm -- and stretching that over a sheet half as tall halves the
+    pitch and prints a lie. A caller whose sheet is a different size from the image's says so here:
+    scale is the fraction of the image the sheet covers, offset is which part of it. The default is
+    the identity, so every existing caller is unchanged.
+    """
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
     nt = mat.node_tree
@@ -433,7 +443,15 @@ def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_i
         img = nodes.new("ShaderNodeTexImage")
         img.image = rules_image
         img.interpolation = "Cubic"
-        links.new(texco.outputs["UV"], img.inputs["Vector"])
+        if tuple(rules_uv_scale) != (1.0, 1.0) or tuple(rules_uv_offset) != (0.0, 0.0):
+            place = nodes.new("ShaderNodeMapping")
+            place.vector_type = "POINT"
+            place.inputs["Scale"].default_value = (rules_uv_scale[0], rules_uv_scale[1], 1.0)
+            place.inputs["Location"].default_value = (rules_uv_offset[0], rules_uv_offset[1], 0.0)
+            links.new(texco.outputs["UV"], place.inputs["Vector"])
+            links.new(place.outputs["Vector"], img.inputs["Vector"])
+        else:
+            links.new(texco.outputs["UV"], img.inputs["Vector"])
         ruled = nodes.new("ShaderNodeMix")
         ruled.data_type = "RGBA"
         ruled.blend_type = "MULTIPLY"
