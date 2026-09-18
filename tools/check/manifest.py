@@ -22,6 +22,20 @@ The coverage is deliberately partial and is reported rather than assumed. A gene
 in CATALOGUES is counted as unverifiable and named in the report, so that the gate understates what
 it knows instead of overstating it. That is the whole lesson of the bug it exists to catch.
 
+Firing 19 found the same shape a third time, in the inverse rule. An entry naming a file that is not
+there was measured and then not gated on: `ok` was `not missing and not unbuildable`, so the gate
+reported ok true beside twenty entries with no file, for three cycles, and the sixteen missing
+photographs that capped the heaviest row on the rubric went unnoticed because of it. The list was
+also cut at twenty with no count beside it, so the twenty on show were the visible end of a hundred
+and thirty-four. And a hundred and fifteen of those hundred and thirty-four were not missing at all:
+this gate resolved every entry under `assets/`, while the manifest records some keys relative to the
+repository root -- `seed/photos/*.jpg` are all on disk and were all being reported absent. A gate
+that says a present file is missing is as broken as one that says a missing file is present, and it
+sent a triage to the wrong root cause for thirty points of rubric. So: entries are resolved against
+`assets/` and then against the repository root; the counts are never truncated; entries pointing
+into gitignored build scratch are separated from entries that are simply gone, because those are
+different faults with different owners; and `ok` is false for any of them.
+
     python3 tools/check/manifest.py
     python3 tools/check/manifest.py --json --out evidence/logs/manifest.json
 """
@@ -167,6 +181,41 @@ def unbuildable(entries):
     return failures, checked, unverifiable
 
 
+def where(relpath):
+    """Where an entry's file actually is, or None. `assets/` first, then the repository root.
+
+    The manifest records some keys relative to `assets/` and some relative to the repository root
+    -- `seed/photos/*.jpg` is the big one, a hundred and fifteen files -- and reading only the
+    first is what made the gate report a hundred and fifteen present photographs as absent.
+    """
+    for base in (ASSETS, ROOT):
+        p = base / relpath
+        if p.exists():
+            return p
+    return None
+
+
+def why_no_file(relpath):
+    """For an entry with no file under assets/: what kind of nothing it is, or None if it is fine.
+
+    Three of these are not faults and were being counted as one. A directory entry is how a
+    sequence records itself and its frames are entried beside it; an EXEMPT file is on disk and is
+    only left out of the on-disk listing; and a file at the repository root is simply somewhere
+    else. The two that are faults are kept apart because they have different remedies: a file under
+    a gitignored scratch directory is a build product the library is claiming as its own, and
+    anything else is an entry for a file that has gone.
+    """
+    if (ASSETS / relpath).is_dir():
+        return None
+    if (ASSETS / relpath).exists():
+        return None
+    if (ROOT / relpath).exists():
+        return None
+    if relpath.startswith("scratch/") or "/scratchpad/" in relpath or relpath.startswith("tmp/"):
+        return "outside"
+    return "gone"
+
+
 def covered(entries):
     """The manifest keys, reduced to paths relative to assets/ however they were recorded."""
     out = set()
@@ -204,9 +253,16 @@ def main():
 
     if args.fill:
         # Entries pointing outside assets/ are records of smoke tests that were written to a
-        # scratch directory. They are not part of the library and never were.
+        # scratch directory. They are not part of the library and never were. A probe run from a
+        # session scratchpad records an absolute path rather than a `../` one and is the same
+        # thing: two tear_005 files from a container that no longer exists sat in the library's
+        # provenance for four cycles. A file under `scratch/` is NOT dropped here -- that is a
+        # build product the library is claiming, and deleting the entry would hide it.
         raw = json.loads(MANIFEST.read_text())
-        outside = [k for k in raw["files"] if k.replace(os.sep, "/").startswith("../")]
+        outside = [k for k in raw["files"]
+                   if k.replace(os.sep, "/").startswith("../")
+                   or "/scratchpad/" in k.replace(os.sep, "/")
+                   or k.replace(os.sep, "/").lstrip("./").startswith("tmp/")]
         for k in outside:
             del raw["files"][k]
         if outside:
@@ -245,15 +301,31 @@ def main():
 
     unbuildable_entries, checked, unverifiable = unbuildable(entries)
 
+    # Of the entries with nothing under assets/, which are actually a fault and which are not.
+    gone = sorted(h for h in stale if why_no_file(h) == "gone")
+    outside = sorted(h for h in stale if why_no_file(h) == "outside")
+    elsewhere = sorted(h for h in stale if why_no_file(h) is None)
+
     report = {
         "files": len(on_disk),
         "entries": len(entries),
         "without_an_entry": missing,
-        "entries_without_a_file": stale[:20],
+        "without_an_entry_count": len(missing),
+        # Never truncated, and never conflated. The old field cut this list at twenty with no count
+        # beside it and mixed present files in with absent ones; both are recorded in the docstring.
+        "entries_without_a_file": gone,
+        "entries_without_a_file_count": len(gone),
+        "entries_for_files_outside_the_library": outside,
+        "entries_for_files_outside_the_library_count": len(outside),
+        "entries_whose_file_is_not_under_assets": {
+            "count": len(elsewhere),
+            "note": "resolved at the repository root, or a directory entry, or an exempt index "
+                    "file: on disk, and not a fault",
+        },
         "naming_a_generator_that_cannot_build_them": unbuildable_entries,
         "checked_against_a_catalogue": checked,
         "no_catalogue_to_check_against": dict(sorted(unverifiable.items())),
-        "ok": not missing and not unbuildable_entries,
+        "ok": not missing and not unbuildable_entries and not gone and not outside,
     }
     if args.out:
         pathlib.Path(args.out).parent.mkdir(parents=True, exist_ok=True)
@@ -277,6 +349,13 @@ def main():
             print(f"   ... and {len(unbuildable_entries) - 12} more")
         for generator, n in sorted(unverifiable.items()):
             print(f"   not verifiable: {n:4d} from {generator}")
+        print(f"{len(gone)} entries naming a file that is not there, "
+              f"{len(outside)} naming a file outside the library "
+              f"({len(elsewhere)} more resolve at the repository root and are fine)")
+        for f in (gone + outside)[:12]:
+            print(f"   {f}")
+        if len(gone) + len(outside) > 12:
+            print(f"   ... and {len(gone) + len(outside) - 12} more")
     return 0 if report["ok"] else 1
 
 

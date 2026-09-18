@@ -1,53 +1,5 @@
 {
  "files": {
-  "../../../tmp/claude-0/-home-user-love-tap/96cc1174-83aa-56cd-bacd-32b1e5f3b8eb/scratchpad/tearprobe/tear_005_edge.png": {
-   "bytes": 328175,
-   "generator": "blender/paper/tear_relief.py",
-   "kind": "tear_edge",
-   "settings": {
-    "cockle_mm": 0.4,
-    "curl_mm": 1.15,
-    "edge_band_mm": 2.6,
-    "fibre_band_mm": 1.4,
-    "frame": 1.0,
-    "lift_mm": 2.4,
-    "light": "day",
-    "mask": "../../../tmp/claude-0/-home-user-love-tap/96cc1174-83aa-56cd-bacd-32b1e5f3b8eb/scratchpad/tearprobe/tear_005.png",
-    "mesh": 340,
-    "pass": "edge",
-    "resolution": [
-     640,
-     640
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 10,
-    "thickness_m": 0.00011
-   }
-  },
-  "../../../tmp/claude-0/-home-user-love-tap/96cc1174-83aa-56cd-bacd-32b1e5f3b8eb/scratchpad/tearprobe/tear_005_shadow.png": {
-   "bytes": 186124,
-   "generator": "blender/paper/tear_relief.py",
-   "kind": "tear_shadow",
-   "settings": {
-    "cockle_mm": 0.4,
-    "curl_mm": 1.15,
-    "edge_band_mm": 2.6,
-    "fibre_band_mm": 1.4,
-    "frame": 1.2,
-    "lift_mm": 2.4,
-    "light": "day",
-    "mask": "../../../tmp/claude-0/-home-user-love-tap/96cc1174-83aa-56cd-bacd-32b1e5f3b8eb/scratchpad/tearprobe/tear_005.png",
-    "mesh": 340,
-    "pass": "shadow",
-    "resolution": [
-     768,
-     768
-    ],
-    "rig": "blender/rig/common.py",
-    "samples": 10,
-    "thickness_m": 0.00011
-   }
-  },
   "assets/bits/clip_01.png": {
    "bytes": 57426,
    "generator": "blender/bits/bits.py",

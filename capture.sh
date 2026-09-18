@@ -64,9 +64,16 @@ echo "· reading every displayed string against docs/VOICE.md"
 python3 tools/lint/strings.py --out "$LOG/strings.json" || note_missing "voice" "a displayed string is against docs/VOICE.md"
 echo "· checking both hands still have all their ink"
 python3 tools/handwriting/check.py --out "$LOG/fonts.json" || note_missing "handwriting" "a glyph variant has lost a stroke"
-echo "· checking every file in assets/ names what made it"
+echo "· checking every file in assets/ names what made it, and every entry has a file"
+# The ruler before the reading, for the same reason as diff.py: this gate reported ok true beside
+# twenty entries with no file for three cycles, because `ok` was computed from two of the four
+# things it measures, and a hundred and fifteen of the entries it called missing were present files
+# it had looked for in the wrong directory. The selftest breaks the library one fault at a time and
+# fails if any of them leaves the gate green.
+python3 tools/check/manifest_selftest.py >"$LOG/manifest_selftest.json" 2>&1 \
+  || note_missing "assets" "tools/check/manifest_selftest.py failed: the manifest gate cannot be trusted to go red; see evidence/logs/manifest_selftest.json"
 python3 tools/check/manifest.py --out "$LOG/manifest.json" >/dev/null \
-  || note_missing "assets" "a file in assets/ has no manifest entry naming its generator"
+  || note_missing "assets" "assets/MANIFEST.json does not match what is on disk: see entries_without_a_file and entries_for_files_outside_the_library in evidence/logs/manifest.json"
 echo "· checking every recipe can actually be built"
 python3 tools/check/recipes.py --out "$LOG/recipes.json" >/dev/null \
   || note_missing "recipes" "a recipe names something the kit cannot build, or tells it something it cannot be told"
