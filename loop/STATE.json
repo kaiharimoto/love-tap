@@ -2,19 +2,13 @@
  "v": 1,
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
- "stage": "IMPLEMENT",
- "firing": 14,
- "stage_entered_at_firing": 15,
- "lease": {
-  "session_id": "session_01F2z1wtbTSmScfd9anwWMV7",
-  "started_at": "2026-09-18T10:00Z",
-  "expires_at": "2026-09-18T14:00Z",
-  "firing": 15,
-  "taken_for": "IMPLEMENT, not the OBSERVE this file named. The four-hour TTL is IMPLEMENT's. The reasoning is the next commit and loop/JOURNAL.md; in one line, the ruler is known to be wrong by 3.8 to 6.2 points in an app-dependent direction and a capture taken with it cannot be compared to the 22.70% baseline or to itself."
- },
- "evidence_fresh_as_of": "2026-09-18T01:57Z, 15 of 17, captured at e7a3a5a by firing 12. Full ./capture.sh, degradation rung 0, fifty minutes. THE FIRST CAPTURE TAKEN WITH THE FINISHED FOLD LIBRARY AND WITH THE DECLARED-TEXT RULER: every still carries a <name>.text.json beside it (eleven files, ten stills and the dusk crop), so legibility is measured against runs the app declares rather than marks a detector found. legibility.py and palette.py were again run BY HAND afterwards -- capture.sh runs neither -- and are part of commit 9dec301. 09_two_devices.png and 16_setup_android.png remain the hardware ceiling. A THIRD artifact, 'surfaces', is named missing in frames.json and MUST NOT be believed: it is the capture.sh ordering defect filed as capture-packs-its-assets-after-the-gate-that-reads-them, and surfaces.py re-run correctly reads 318 surfaces, none of them flat.",
- "evidence_note": "FIRING 12. Both of the owner's questions now have an answer taken with one instrument and one lamp, and the honest headline is that one of the two numbers is the ruler rather than the app.\n\nLEGIBILITY. 84 of 370 declared runs below floor = 22.70%. This is NOT 30.70% improving, and it must not be drawn as a fourth point on the 48.4 -> 25.3 -> 30.7 line. The proof is a controlled pair taken on the SAME stills: measured with the old found-by-shape instrument this capture reads 233 of 756 = 30.82%, against 233 of 759 = 30.70% on firing 8's stills. Hold the instrument still and the ninth fold family, the 240 fold frames and the one lamp moved legibility by +0.12 percentage points -- that is, not at all. The entire 30.7 -> 22.7 drop is the change of ruler, which is what firing 9 predicted when it measured seven-were-text and forty-seven-were-the-ruler. Both readings are committed: evidence/legibility.json is the declared one and evidence/legibility_found_by_shape.json is the old instrument on the same pixels, so no successor has to re-derive this pair.\n\nWHAT IS REAL IN THE NEW READING. The 84 failures are nameable, which they have never been. All 84 carry the text they are made of; none is empty. 19 of the 84 -- nearly a quarter -- are message timestamps, which is a finding no previous capture could state and is filed as its own queue item. 76 are the hand and 8 are the stamp. 17_setup_pwa is now genuinely 0 of 33, where the old ruler called it 3 of 93.\n\nWARMTH. across_the_set.mean_chroma 0.0374, from 0.0358 at firing 8, against a 0.045 floor. The finished library bought 0.0016 and this is the first honest reading of it rather than of a half-relit one. grey_fraction improved 0.0241 -> 0.0183 and 8 of 10 stills now meet the ground chroma floor, up from 7. But the things that would actually move this are untouched and the numbers say so precisely: accent_fraction is 0.00087 against a required 0.010, unchanged to five decimal places; named_families is 1 (A_paper) against a required 4; widest_hue_gap_deg is 320 against a required 150. one-coloured-thing-per-screen and families-b-c-and-d-reach-the-glass are open and have never been started, and until they are this number will not reach its floor. 40 section-breaches across the set.\n\nTHE INSTRUMENT AUDITED ITSELF. tools/check/legibility_selftest.py passes every check including the re-break (declare the torn lip as text and the failures come straight back), so the filter is not a tool that has quietly stopped looking.",
- "degradation": 0,
+ "stage": "OBSERVE",
+ "firing": 15,
+ "stage_entered_at_firing": 16,
+ "lease": null,
+ "evidence_fresh_as_of": "STALE FOR SCORING AS OF FIRING 15, AND STALE IN A NEW WAY. The fifteen artifacts still on disk were captured at e7a3a5a by firing 12 and are unchanged. What changed underneath them is BOTH halves of the instrument: app/lib/capture/hooks.dart and app/lib/material/desk.dart now refuse to declare a paragraph the app painted over, and tools/check/legibility.py no longer takes the app's own ink as a run's ground. docs/LOOP.md refuses to score when app/ has changed, and app/ has. evidence/legibility.json HAS been regenerated against the new ruler over the old stills and reads 78 of 370, 21.08%; the sidecars beside those stills are the OLD ones and still declare the runs the app painted over, so the declaration half of the fix is NOT in that number and cannot be until a capture is taken.",
+ "evidence_note": "FIRING 15, AND THE HEADLINE IS THAT THE BASELINE MOVED WITHOUT THE APP MOVING. The standing legibility figure was 84 of 370 declared runs, 22.70%, taken by firing 12 at e7a3a5a. Over the SAME ten stills, the SAME sidecars and an app that had not been rebuilt, the corrected ruler reads 78 of 370, 21.08%. EVERY POINT OF THAT 1.62-POINT FALL IS THE RULER. Nothing was captured, no pixel changed, and the run count is unchanged at 370: six failures were removed and none were created. They are named one by one in checkpoints/3-implement-bf4aef8.json and in the queue item, and the fix was re-broken and re-run -- with the bug restored the totals return to exactly 84 of 370 with identical failure sets. SO 22.70% IS SUPERSEDED AS A BASELINE, and 21.08% is what a future capture must be compared against. Comparing a new capture to 22.70% would credit the app with 1.62 points it did not earn, which is the same mistake firing 12 caught when the ruler changed under it and the drop from 30.7% to 22.7% turned out to be entirely the instrument. AND 21.08% IS ITSELF NOT THE NUMBER THE NEXT CAPTURE WILL PRODUCE, for a reason that is a fix rather than a fault: the second half of this firing stops the app declaring writing it has painted over, and that half CANNOT show up until a capture writes new sidecars. Expect 14_media_viewer to declare about 3 runs rather than 25 and to lose all four of its failures, and 12_search to lose its two runs at y=0. The declared-run COUNT falls with them, so the next rate is not a like-for-like against 370 and has to be reported as both numbers. PALETTE IS UNTOUCHED BY ANY OF THIS and its standing figures stand: mean chroma 0.0374 against a floor of 0.045, grey fraction 0.0183 against 0.0454.",
+ "degradation": 4,
  "design": {
   "verdict": "keep and retune",
   "decided_at_cycle": 3,
@@ -559,6 +553,16 @@
     0.1892
    ],
    "mean_chroma": 0.0374
+  },
+  {
+   "firing": 15,
+   "cycle": 3,
+   "stage": "IMPLEMENT",
+   "stage_named_by_state": "OBSERVE",
+   "what": "REFUSED THE CAPTURE AND FIXED THE RULER INSTEAD, on the argument that the ruler's error is a function of what the app draws and so does not cancel in a delta. Two items, both of them the instrument rather than the app. a-run-is-read-against-its-own-lines-ink CLOSED against a restated measurement -- the wording it was filed with cannot be met and meeting it would delete the item's own counter-example, 12_search's torn tab with the desk in the gap. The designed rule is scale against the declared line: a mark drawn on a surface is no taller than the writing it sits among, a surface is taller than the writing on it, and a pale mark is only ink where what it sits on is dark. 84 of 370 -> 78, six failures named and removed, none created, re-broken and returned to exactly 84. the-app-declares-writing-it-has-painted-over FIXED AT THE CAUSE and left open for the capture its measurement names: the cause was not what the item guessed, it is that the Navigator's overlay does not override paintsChild, and SearchPage being opaque:true while still declaring the chat behind it is the proof no route flag fixes it. Desk now declares itself an OpaqueSurface and the walker drops what it covers.",
+   "gates": "flutter analyze clean, 123 tests pass, legibility_selftest.py every check passed, three fixes re-broken and each watched to fail",
+   "cost_paid": "a fresh container spent on IMPLEMENT rather than on capture-packs-its-assets-after-the-gate-that-reads-them, which wants a container that captures before it packs",
+   "stage_handed_on": "OBSERVE"
   }
  ],
  "routine": {

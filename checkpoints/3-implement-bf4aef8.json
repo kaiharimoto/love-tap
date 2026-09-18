@@ -1,0 +1,34 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 15,
+ "at_commit": "bf4aef8",
+ "stage_was_planned_as": "OBSERVE",
+ "stage_substituted_because": "the ruler is wrong by 3.8 to 6.2 points of a 22.70% baseline and the error is not a constant -- its occluded-declaration half scales with what the app paints over and its ink-as-ground half with punctuation and rules near runs, so it does not cancel in a delta. loop/JOURNAL.md firing 15 carries the argument in full.",
+ "completed": "both ruler items. One closed against a restated measurement, one fixed at the cause and left open for the capture its measurement names.",
+ "legibility_declared": {
+  "runs": 370,
+  "below_floor": 78,
+  "share": 0.2108,
+  "was": {"runs": 370, "below_floor": 84, "share": 0.227},
+  "the_change_is_the_ruler_not_the_app": "the same ten stills, the same sidecars, the same commit of the app. Nothing was captured and nothing in app/ affected these pixels. Six failures removed, none new, the run count unchanged.",
+  "re_break": "with is_ground restored the totals return to exactly 84 of 370 and the failure sets are identical to the committed report"
+ },
+ "failures_removed_named": [
+  "02_chat 'when is the exam. which day in m' 1.31",
+  "05_settings 'the six words' 1.14 -> 7.81, ground 0.0772 -> 0.8212",
+  "05_settings 'wake me' 1.85",
+  "12_search 'Wed 1 Apr · 06:38' 3.38",
+  "13_messenger_states 'write something' 2.86",
+  "13_messenger_states 'Thu 3 Sep · 19:40' 3.77"
+ ],
+ "clearest_single_reading": "02_chat 'Wed 22 Apr · 16:44' 1.02 -> 4.46, its ground 0.1438 -> 0.8004 and its swing 4.39 -> 1.02. It was being read against its own colon and its own 44. It is still 0.04 under the floor, which is an honest near miss rather than a ghost.",
+ "not_measured_here": "the-app-declares-writing-it-has-painted-over is fixed at the cause and its effect is NOT in the 78. Its measurement names a capture with sidecars and this firing took none.",
+ "expected_at_the_next_capture": {
+  "14_media_viewer": "about 3 declared runs rather than 25, and zero failures whose box lies inside the photograph, against four today",
+  "12_search": "loses its two runs at y=0",
+  "warning": "the declared-run COUNT falls as well as the failures, so the next rate is not a like-for-like against 370 and must be reported as both numbers"
+ },
+ "gates": "flutter analyze clean, 123 tests pass, legibility_selftest.py every check passed, and every one of the three fixes re-broken and watched to fail",
+ "no_capture": "deliberate. This firing spent a fresh container on IMPLEMENT, which packs, so capture-packs-its-assets-after-the-gate-that-reads-them did not get the container it wants. That cost is recorded in the journal rather than hidden."
+}

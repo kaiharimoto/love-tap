@@ -2364,3 +2364,151 @@ and allowed never, and that is now once. It is still the wrong one to start with
 returned.
 
 Lease: `session_01F2z1wtbTSmScfd9anwWMV7`, four hours, to 2026-09-18T14:00Z.
+
+## Firing 15 — IMPLEMENT, cycle 3 — the ruler, both halves of it
+
+Two items, both of them the instrument rather than the app. One closed against a measurement it
+had to be given, one fixed at the cause and left open for the capture its own measurement names.
+No capture, by the argument in the entry above.
+
+### `a-run-is-read-against-its-own-lines-ink` — closed, and the count is smaller than the estimate
+
+The glyph filters decide what gets *measured*. This file was using the same filters to decide what
+gets *excluded from the ground*, and that is a different question with a different answer. Three
+kinds of the app's own mark miss them — a colon's dots at 5×5, digits merged with a printed rule
+and thrown out on aspect, a rule the widget draws — and each stayed in the ground as the
+adversarial dark end the floor was taken against.
+
+**The rule is scale, and the app supplies the scale.** A mark drawn on a surface is no taller than
+the writing it sits among; a surface is taller than the writing on it. Both halves earn their
+keep, and the second is the one that kept this honest. Firing 14 named the counter-example and it
+held up under measurement: `12_search`'s `PHOTOGRAPHS` is a torn tab with the desk showing through
+the gap, and that desk is **one 1408×685 component against a 37px line**. Pulling the components
+apart confirmed the separation is clean rather than lucky — every giant surface component on the
+set runs five to twenty times its line's height, and every piece of the app's own ink is under it.
+
+Over the committed evidence, ten stills, 370 declared runs:
+
+```
+  committed                                84 of 370   0.2270
+  the designed rule                         78 of 370   0.2108     6 gone, 0 new, runs unchanged
+  re-broken                                 84 of 370   0.2270     identical failure sets
+```
+
+The six, named, as the measurement requires: `02_chat` 'when is the exam…' 1.31; `05_settings`
+'the six words' 1.14 → **7.81** with its ground 0.0772 → 0.8212, which is the item's own second
+named case; `05_settings` 'wake me' 1.85; `12_search` 'Wed 1 Apr · 06:38' 3.38;
+`13_messenger_states` 'write something' 2.86 and 'Thu 3 Sep · 19:40' 3.77.
+
+**The clearest single reading is not in that list**, because it does not cross the floor:
+`02_chat`'s 'Wed 22 Apr · 16:44' goes 1.02 → **4.46**, its ground 0.1438 → 0.8004 and its swing
+4.39 → 1.02. That is the item's first named case — the run failed against the ink of its own colon
+and its own `44` — and it now reads against paper and sits 0.04 under the floor. An honest near
+miss instead of a ghost.
+
+**Six is below the eight-to-seventeen this was filed with, and the gap is worth writing down.**
+Removing pale marks symmetrically fixes three more — `12_search` 4.24, `13_messenger_states` 3.39
+and 3.64 — and *manufactures* one: `02_chat`'s 'Wed 22 Apr · 16:34' goes 4.70 → 3.65, because
+taking the bright half of the paper out of the ground leaves the dark tail exposed and lifts the
+swing from 1.07 through the 1.20 gate to 1.29. A pale mark is only the app's ink where what it
+sits on is dark, which is the asymmetry `LIGHT_ON_DARK_MAX_GROUND` already applies two hundred
+lines further down. The three it declines to fix are marginal, their grounds move by under 0.003,
+and firing 14 judged two of them genuine on its own evidence. **The principled rule with no false
+failures was taken over the looser one with three more fixes and one invention.**
+
+**The measurement had to be restated, and that is the part a successor should check hardest.** As
+filed it asked for *zero runs whose gated ground is darker than the run's own ink where the ring
+ground is paper*. That cannot be met: nine runs satisfy it on the committed capture and **three of
+them are `PHOTOGRAPHS`, `EVERYTHING` and `WRITTEN`** — the torn tab, ring 0.817 against a gated
+0.0099–0.0114. The wording used "darker than the run's own ink" as a proxy for "the tool is
+reading ink as ground", and the proxy also catches "the tool is reading a genuinely dark surface as
+ground", which is the behaviour the item's own note insists on. What replaced it is narrower, not
+looser: the controlled before/after naming every failure that moves, the re-break, **and** a new
+`legibility_selftest.py` section 6 that builds two declared lines with one dark thing each at the
+same luminance and the same distance from the ink, differing only in scale — and requires the
+drawn rule to be excluded *and* the tear to be kept. Re-broken, section 6 fails at 12.81 → 1.76,
+which is the 'the six words' pathology exactly.
+
+One thing fixed on the way, because the rule could not land until it was: `ground = pl[near] if
+near.sum() >= 200 else pl[pg]`. The fallback to the whole ring box is what the comment eight lines
+above it says is wrong — the ring is a rectangle and reaches off the sheet — and the file did it
+anyway. Growing the band instead was tried first and is worse: at two to four times it stops
+hugging the letters, which is the band's whole meaning. Now nothing is claimed where the band
+comes up short, and the ring reading stands.
+
+**Eight runs still read against a ground darker than their own ink where the ring sees paper, and
+they are not this item.** Firing 14 asked whoever took this to decide where the torn-edge
+sub-class belongs *before* starting. Decided: it belongs to `the-relit-tear-edge-is-a-dark-band`,
+which now carries all eight with their numbers. They are real pairs — the ruler is right about
+them — so they are the app's to answer.
+
+### `the-app-declares-writing-it-has-painted-over` — fixed at the cause, open for the capture
+
+**The cause is not the one the item guessed, and the wrong guess would have cost a firing.** Its
+note said to read how `offscreen` is computed and follow it. `offscreen` is computed in
+`tools/capture/scene.js`, from the crop, and has nothing to do with this.
+
+What is actually missing is that `_painted` asks the framework, and the framework does not answer
+for a route stacked over another route. The `Navigator`'s overlay lays its offstage entries out
+and declines to paint them **without overriding `paintsChild` to say so** — the same shape as the
+`RenderIndexedStack` exception `_painted` already carries, one level further out. Checked in the
+pinned Flutter rather than assumed: `_RenderTheatre` is not among the five overrides of
+`paintsChild` in the framework.
+
+**And the proof that no route flag closes this from the outside**: `SearchPage` has been pushed
+`opaque: true` since it was written, and `12_search` declared the chat behind it anyway. So
+`ViewerPage`'s `opaque: false` was deliberately left alone — changing it would have looked like a
+fix and measured as nothing.
+
+`Desk` now says what it is. Its first child is a `StackFit.expand` `ColoredBox` at full alpha in
+both light conditions, so there is no state — not even an unbaked library — in which something
+behind shows through, and it wraps its own stack in an `OpaqueSurface`. The walker visits in paint
+order and, on reaching one, drops every run already collected that it completely covers. Desk is
+what the viewer, the search sheet, the Us region and the app shell are all built on, so one change
+reaches all of them.
+
+A run only *half* covered is still declared, deliberately. That errs toward declaring, which costs
+at worst a false failure; guessing at a partial cover would let the tool stop looking at writing
+that is really there — the one way this change could hide true findings instead of false ones.
+
+Four cases in `the_app_says_where_its_words_are_test.dart`, which is where the item said the test
+belonged. Re-broken: two of them fail with the real symptom — 'behind the desk' declared when none
+of it is on the glass — and the half-covered case still passes.
+
+### The number, plainly: 22.70% is superseded, and the change is the ruler
+
+The same ten stills, the same sidecars, an app that was never rebuilt between the two readings:
+**84 of 370 → 78 of 370, 22.70% → 21.08%. Every point of that is the instrument.** Six failures
+removed, none created, the run count unchanged. A future capture compared against 22.70% would
+credit the app with 1.62 points it did not earn — which is the mistake firing 12 caught when the
+30.7 → 22.7 drop turned out to be entirely the change of ruler.
+
+**And 21.08% is not the number the next capture will produce either**, for a reason that is a fix
+rather than a fault. The occlusion half cannot appear until a capture writes new sidecars: the
+ones on disk are the old ones and still declare the runs the app painted over. Expect
+`14_media_viewer` to declare about 3 runs rather than 25 and lose all four of its failures, and
+`12_search` to lose its two at y=0. **The declared-run count falls with them**, so the next rate is
+not a like-for-like against 370 and has to be reported as both numbers or it will read as an
+improvement that is really a smaller denominator.
+
+Palette is untouched by any of this and its figures stand: mean chroma 0.0374 against 0.045, grey
+fraction 0.0183 against 0.0454.
+
+### For whoever runs next: OBSERVE, and now it is worth taking
+
+The stage is handed back to OBSERVE, which is where firing 14 put it and where this firing
+declined to leave it for one cycle. The instrument is now worth pointing at the app: both halves
+of the ruler fault firing 14 found are fixed, one measured here and one waiting on the capture to
+be measurable at all.
+
+Three things to carry in:
+
+1. **`capture-packs-its-assets-after-the-gate-that-reads-them` still wants a container that
+   captures before it packs, and this firing spent one.** `flutter test` needs packed assets, so
+   `pack_assets.py` has run here. That is the price of this firing and it is recorded rather than
+   hidden. The next container is fresh — **do not run `pack_assets.py` before `capture.sh`.**
+2. **Report both numbers.** Runs and failures, not the rate alone. The denominator moves this time.
+3. **`21.08%`, not `22.70%`,** is what the capture is compared against for the ruler half — and
+   neither is a fair comparison for the declaration half, which has no prior reading at all.
+
+Ten items open, none blocked. **Lease released.**
