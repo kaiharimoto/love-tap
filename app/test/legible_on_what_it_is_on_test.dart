@@ -29,6 +29,17 @@
 // colours against declared colours, and every ground in this app is a render. This file is the
 // cheap pass that runs in a second. It is not the measurement.
 //
+// There was a fourth thing wrong with it, found on 2026-09-18 and the reason the last test in
+// this file exists. It read every ink as it is DECLARED, and a widget is free to paint a
+// declared ink at less than full strength: `_Margin` in regions/chat/note.dart wrapped the
+// thread's timestamps in `Opacity(0.78)`, and that number was known to one call site and to
+// nothing else. So this file swept `Pen.margin` against ten stocks, found 5.91:1 at worst, and
+// passed, while `tools/check/legibility.py` read the pixels the widget actually produced and
+// failed nineteen timestamp runs -- one of them at 1.02:1 against a floor of 4.5. Declared
+// colour against declared colour is a real check and it is not the same check as painted
+// against painted. Every thinning factor now has a name in material/palette.dart, and the sweep
+// below reads them.
+//
 // The third thing that was wrong with it is gone now, and it was the largest. It asked whether
 // the on-desk inks cleared 4.5:1 against `DeskColour.day`, which is a flat colour the app almost
 // never ships: the plate renders 0.120 OKLab L lighter than it. Against the plate itself
@@ -124,6 +135,25 @@ const _stocks = <String, Color>{
   'stickyPink': Paper.stickyPink,
   'underside': Paper.underside,
 };
+
+/// Every factor by which this app paints a declared ink at less than full strength.
+///
+/// One entry today, and it is a 1.0, which is the point: a thinning that lives in a widget is
+/// invisible to this file, and a thinning that lives here is not. An `Opacity` of 1.0 costs
+/// nothing at paint time -- RenderOpacity paints its child directly rather than building a layer
+/// -- so a widget keeping the wrapper and taking its factor from here is not carrying a cost for
+/// the sake of the test.
+///
+/// Add the name here first and read it from the widget; do not write a factor into a widget.
+const _thinnings = <String, double>{
+  'margin': Pen.marginThinning,
+};
+
+/// What `Opacity` does to a colour: the ink mixed toward what is behind it, in sRGB component
+/// space, which is where Flutter composites -- the same mix `Color.lerp` does, so the widget and
+/// the test cannot disagree about it. A linear-light mix is a different and more generous number
+/// and is not what the screen shows.
+Color _thinned(Color ink, double alpha, Color ground) => Color.lerp(ground, ink, alpha)!;
 
 /// The pairs that are below the floor today, with what they measure.
 ///
@@ -244,5 +274,35 @@ void main() {
           reason: '${e.key} was ${e.value}:1 and is now ${now!.toStringAsFixed(2)}:1, '
               'which is the wrong direction');
     }
+  });
+
+  test('an ink thinned by a widget still clears the floor on the stock it is thinned against', () {
+    // The guard the nineteen failing timestamps did not have. Put `Pen.marginThinning` back to
+    // 0.78 and this fails on six of the ten stocks -- pink sticky 3.74:1, stickyYellow 4.22,
+    // underside 4.23, aged 4.24, legal 4.36, spiral 4.49 -- while all six tests above stay
+    // green, because the ink they read is still #464648 at full strength and the thinning never
+    // reached it. That is the whole of the blind spot, demonstrated rather than argued.
+    //
+    // The pair is checked against the stock rather than against the desk on purpose: `Opacity`
+    // composites against whatever is behind the text, and what is behind a margin note is the
+    // note's own paper. A word thinned against the desk is a different and worse case, and
+    // docs/COLOR.md section 6 forbids it outright rather than tuning it.
+    final below = <String, double>{};
+    for (final t in _thinnings.entries) {
+      final ink = _inks[t.key];
+      expect(ink, isNotNull,
+          reason: '_thinnings names "${t.key}", which is not an ink in _inks. A thinning factor '
+              'with no ink to apply it to is a factor nothing is checking.');
+      expect(t.value, inInclusiveRange(0.0, 1.0));
+      for (final stock in _stocks.entries) {
+        final r = contrast(_thinned(ink!, t.value, stock.value), stock.value);
+        if (r < _body) below['${t.key} at ${t.value} on ${stock.key}'] = r;
+      }
+    }
+
+    expect(below, isEmpty,
+        reason: 'these inks are below $_body:1 once the widget has thinned them, however well '
+            'they read at full strength: '
+            '${below.entries.map((e) => '${e.key} at ${e.value.toStringAsFixed(2)}:1').join(', ')}');
   });
 }

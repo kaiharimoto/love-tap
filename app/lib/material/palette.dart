@@ -41,6 +41,33 @@ class Pen {
   /// darkest ground it can land on. At L 0.3949 it now clears every stock, worst 5.91:1 on the
   /// pink sticky, which also clears the dusk floor of 5.0.
   static const margin = Color(0xFF464648);
+
+  /// How far a margin note is thinned toward the paper behind it.
+  ///
+  /// It is a named constant rather than a number inside a widget because thinning an ink changes
+  /// which pair the legibility test is checking, and for four cycles nothing connected the two.
+  /// `_Margin` in `regions/chat/note.dart` wrapped the thread's timestamps in `Opacity(0.78)`.
+  /// `legible_on_what_it_is_on_test.dart` read [margin] at full strength, found 5.91:1 on the
+  /// darkest stock, and passed. `tools/check/legibility.py` read the pixels and failed nineteen
+  /// timestamps, six of them among the worst twelve runs in the capture -- `Wed 22 Apr / 16:44`
+  /// at 1.02:1, and a row of them at 4.44, 4.45 and 4.48 against a floor of 4.5, which is the
+  /// shape of an ink that is fractionally too pale rather than one on the wrong ground.
+  ///
+  /// The arithmetic, composited the way `Opacity` composites, over the ten stocks in the library:
+  /// at full strength [margin] runs 5.91:1 (pink sticky) to 8.36:1 (index) and clears the 4.5
+  /// body floor everywhere. At 0.78 it runs 3.74:1 to 4.68:1 and six of the ten are below floor
+  /// -- pink sticky 3.74, stickyYellow 4.22, underside 4.23, aged 4.24, legal 4.36, spiral 4.49.
+  /// [margin] was derived to sit exactly at the ink ceiling of the ladder and therefore has no
+  /// headroom at all to spend on being faint: the whole of its margin over the floor is the thing
+  /// being thinned away.
+  ///
+  /// A smaller thinning was considered and is not what is written here, because the flat stocks
+  /// are a stand-in and the real grounds are renders. The four stocks that survive 0.78 survive
+  /// it by 0.02 to 0.18, and the runs the capture measured at 4.44, 4.45 and 4.48 are ones this
+  /// same arithmetic calls 4.54 on lined. Whatever a render takes off comes out of a gap that is
+  /// not there. Anything that thins an ink takes its factor from here, so the sweep in
+  /// `legible_on_what_it_is_on_test.dart` can see it.
+  static const marginThinning = 1.0;
 }
 
 class Accent {
