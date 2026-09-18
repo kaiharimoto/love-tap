@@ -2512,3 +2512,18 @@ Three things to carry in:
    neither is a fair comparison for the declaration half, which has no prior reading at all.
 
 Ten items open, none blocked. **Lease released.**
+
+## Firing 16 — OBSERVE — lease taken
+
+`loop/STATE.json` said OBSERVE, firing 15 handed it back deliberately, and this firing takes it.
+
+**The clone read as a fork for the eighth time, and a fourth route worked — the cheapest one yet.**
+Two shallow histories again: `git merge-base` empty, `git rev-list --count` reading 50 and 50, the
+dry-run push rejected `non-fast-forward`. But none of `WORKER_PROMPT.md` §0's three reset routes
+was needed, because the divergence was never real. `git fetch --unshallow origin <branch>` filled in
+the graft boundary, after which `git merge-base` returned the local tip exactly and the counts read
+**0 ahead, 136 behind** — an ordinary fast-forward, which `git merge --ff-only` then took. Nothing
+was reset, nothing was force-moved, and no old tip was dropped anywhere. §0 is amended to try this
+first: it is the only route that *proves* the divergence is a graft rather than assuming it.
+
+Lease: `session_011AXftP5tRLu3XnMYbXALzr`, three hours, to 2026-09-18T15:58Z.

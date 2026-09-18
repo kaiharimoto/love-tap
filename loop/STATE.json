@@ -5,7 +5,13 @@
  "stage": "OBSERVE",
  "firing": 15,
  "stage_entered_at_firing": 16,
- "lease": null,
+ "lease": {
+  "session_id": "session_011AXftP5tRLu3XnMYbXALzr",
+  "started_at": "2026-09-18T12:58:00Z",
+  "expires_at": "2026-09-18T15:58:00Z",
+  "firing": 16,
+  "stage": "OBSERVE"
+ },
  "evidence_fresh_as_of": "STALE FOR SCORING AS OF FIRING 15, AND STALE IN A NEW WAY. The fifteen artifacts still on disk were captured at e7a3a5a by firing 12 and are unchanged. What changed underneath them is BOTH halves of the instrument: app/lib/capture/hooks.dart and app/lib/material/desk.dart now refuse to declare a paragraph the app painted over, and tools/check/legibility.py no longer takes the app's own ink as a run's ground. docs/LOOP.md refuses to score when app/ has changed, and app/ has. evidence/legibility.json HAS been regenerated against the new ruler over the old stills and reads 78 of 370, 21.08%; the sidecars beside those stills are the OLD ones and still declare the runs the app painted over, so the declaration half of the fix is NOT in that number and cannot be until a capture is taken.",
  "evidence_note": "FIRING 15, AND THE HEADLINE IS THAT THE BASELINE MOVED WITHOUT THE APP MOVING. The standing legibility figure was 84 of 370 declared runs, 22.70%, taken by firing 12 at e7a3a5a. Over the SAME ten stills, the SAME sidecars and an app that had not been rebuilt, the corrected ruler reads 78 of 370, 21.08%. EVERY POINT OF THAT 1.62-POINT FALL IS THE RULER. Nothing was captured, no pixel changed, and the run count is unchanged at 370: six failures were removed and none were created. They are named one by one in checkpoints/3-implement-bf4aef8.json and in the queue item, and the fix was re-broken and re-run -- with the bug restored the totals return to exactly 84 of 370 with identical failure sets. SO 22.70% IS SUPERSEDED AS A BASELINE, and 21.08% is what a future capture must be compared against. Comparing a new capture to 22.70% would credit the app with 1.62 points it did not earn, which is the same mistake firing 12 caught when the ruler changed under it and the drop from 30.7% to 22.7% turned out to be entirely the instrument. AND 21.08% IS ITSELF NOT THE NUMBER THE NEXT CAPTURE WILL PRODUCE, for a reason that is a fix rather than a fault: the second half of this firing stops the app declaring writing it has painted over, and that half CANNOT show up until a capture writes new sidecars. Expect 14_media_viewer to declare about 3 runs rather than 25 and to lose all four of its failures, and 12_search to lose its two runs at y=0. The declared-run COUNT falls with them, so the next rate is not a like-for-like against 370 and has to be reported as both numbers. PALETTE IS UNTOUCHED BY ANY OF THIS and its standing figures stand: mean chroma 0.0374 against a floor of 0.045, grey fraction 0.0183 against 0.0454.",
  "degradation": 4,
