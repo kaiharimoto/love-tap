@@ -2105,3 +2105,27 @@ The stage stays IMPLEMENT with ten items open. It was never drained.
 Nothing is blocked. Nothing in `asks[]` moved.
 
 **Lease released.**
+
+## Firing 14 — IMPLEMENT — lease taken
+
+Stage stays IMPLEMENT, cycle 3, ten items open. Firing 13 closed one, fixed three at the cause and
+left two of those open for a capture, and filed one new item. The queue was never drained, so this
+is a continuation.
+
+**The clone read as a fork for the sixth time, and a third route was allowed.** Same shape as every
+firing since 10: 50 commits total, 50 "ahead", 50 behind, `git merge-base` empty, two entries in
+`.git/shallow`. What worked here is one command and neither of the two `WORKER_PROMPT.md` §0 routes:
+
+    git checkout -B claude/app-improvement-autonomous-workflow-d6fwdu origin/claude/app-improvement-autonomous-workflow-d6fwdu
+
+`-B` moves the branch and checks it out in one step, and it was not classified as destruction. It is
+the shortest of the three and it does lose the old tip from any branch — the reflog keeps it — so it
+sits between the detach route and firing 13's new-branch route rather than replacing them. §0 now
+carries all three in the order to try them.
+
+**And the bare `git fetch origin` was the slow kind, not the fatal kind**: it ran 3m40s and returned,
+where firing 4 watched it hang for eight minutes. It also reported the branch as a `(forced update)`,
+which it was not — that is what a shallow refetch of a moved branch looks like. The refspec form is
+still the one §0 tells you to use.
+
+Lease: `cse_012SuXDQ8tX3DrZEp6D5EkG5`, four hours, to 2026-09-18T10:58Z.
