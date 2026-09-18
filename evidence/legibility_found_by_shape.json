@@ -1,0 +1,8068 @@
+{
+ "mode": "measured-from-pixels",
+ "floors": {
+  "body": 4.5,
+  "large": 4.0,
+  "large_above_px": 72,
+  "body_dusk": 5.0,
+  "large_dusk": 4.5,
+  "ground_swing_gate": 1.2
+ },
+ "dusk": [],
+ "artifacts": {
+  "01_pulse.png": {
+   "runs": 96,
+   "below_floor": 31,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.03,
+   "median_ink_core": 7.26,
+   "median_as_rendered": 5.45,
+   "detail": [
+    {
+     "box": [
+      21,
+      23,
+      44,
+      70
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.03,
+     "ink_median": 1.37,
+     "ink_core_ring": 8.14,
+     "ground_swing": 8.79,
+     "ground_lum": 0.0378,
+     "ground_lum_ring": 0.6455
+    },
+    {
+     "box": [
+      652,
+      239,
+      28,
+      30
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.06,
+     "ink_median": 1.03,
+     "ink_core_ring": 1.57,
+     "ground_swing": 1.49,
+     "ground_lum": 0.0361,
+     "ground_lum_ring": 0.078
+    },
+    {
+     "box": [
+      123,
+      73,
+      230,
+      101
+     ],
+     "glyphs": 16,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.07,
+     "ink_median": 1.27,
+     "ink_core_ring": 10.09,
+     "ground_swing": 9.51,
+     "ground_lum": 0.0403,
+     "ground_lum_ring": 0.8032
+    },
+    {
+     "box": [
+      123,
+      1545,
+      133,
+      28
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.14,
+     "ink_median": 1.06,
+     "ink_core_ring": 1.48,
+     "ground_swing": 1.32,
+     "ground_lum": 0.6293,
+     "ground_lum_ring": 0.838
+    },
+    {
+     "box": [
+      320,
+      359,
+      126,
+      172
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.37,
+     "ink_median": 1.08,
+     "ink_core_ring": 11.62,
+     "ground_swing": 8.59,
+     "ground_lum": 0.0508,
+     "ground_lum_ring": 0.8059
+    },
+    {
+     "box": [
+      46,
+      1236,
+      185,
+      155
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.43,
+     "ink_median": 1.0,
+     "ink_core_ring": 10.49,
+     "ground_swing": 7.31,
+     "ground_lum": 0.0718,
+     "ground_lum_ring": 0.8402
+    },
+    {
+     "box": [
+      457,
+      2170,
+      651,
+      60
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.61,
+     "ink_median": 1.39,
+     "ink_core_ring": 1.61,
+     "ground_swing": 1.1,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      490,
+      1803,
+      287,
+      43
+     ],
+     "glyphs": 9,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.25,
+     "ink_median": 2.25,
+     "ink_core_ring": 3.01,
+     "ground_swing": 1.34,
+     "ground_lum": 0.6199,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1254,
+      415,
+      67,
+      19
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.3,
+     "ink_median": 1.17,
+     "ink_core_ring": 3.31,
+     "ground_swing": 1.45,
+     "ground_lum": 0.5386,
+     "ground_lum_ring": 0.7954
+    },
+    {
+     "box": [
+      221,
+      1101,
+      108,
+      29
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.57,
+     "ink_median": 1.31,
+     "ink_core_ring": 3.57,
+     "ground_swing": 1.39,
+     "ground_lum": 0.5649,
+     "ground_lum_ring": 0.8024
+    },
+    {
+     "box": [
+      566,
+      1723,
+      75,
+      42
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.99,
+     "ink_median": 2.99,
+     "ink_core_ring": 2.99,
+     "ground_swing": 1.03,
+     "ground_lum": 0.839,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      349,
+      1816,
+      107,
+      37
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.01,
+     "ink_median": 3.01,
+     "ink_core_ring": 3.01,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8442,
+     "ground_lum_ring": 0.8442
+    },
+    {
+     "box": [
+      356,
+      72,
+      822,
+      52
+     ],
+     "glyphs": 26,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.03,
+     "ink_median": 1.83,
+     "ink_core_ring": 7.75,
+     "ground_swing": 2.59,
+     "ground_lum": 0.2868,
+     "ground_lum_ring": 0.8111
+    },
+    {
+     "box": [
+      676,
+      1724,
+      86,
+      42
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.05,
+     "ink_median": 2.99,
+     "ink_core_ring": 3.05,
+     "ground_swing": 1.09,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      423,
+      1722,
+      109,
+      42
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.06,
+     "ink_median": 3.01,
+     "ink_core_ring": 3.06,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      267,
+      1734,
+      154,
+      28
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.06,
+     "ink_median": 2.98,
+     "ink_core_ring": 3.06,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      97,
+      1093,
+      90,
+      34
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.1,
+     "ink_median": 1.6,
+     "ink_core_ring": 4.14,
+     "ground_swing": 1.35,
+     "ground_lum": 0.5987,
+     "ground_lum_ring": 0.8162
+    },
+    {
+     "box": [
+      666,
+      1663,
+      79,
+      38
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.12,
+     "ink_median": 3.01,
+     "ink_core_ring": 3.12,
+     "ground_swing": 1.11,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      482,
+      2010,
+      105,
+      52
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.13,
+     "ink_median": 3.01,
+     "ink_core_ring": 3.13,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8437,
+     "ground_lum_ring": 0.8437
+    },
+    {
+     "box": [
+      503,
+      1948,
+      374,
+      42
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.15,
+     "ink_median": 2.98,
+     "ink_core_ring": 3.15,
+     "ground_swing": 1.11,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1033,
+      1068,
+      79,
+      26
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.28,
+     "ink_median": 1.92,
+     "ink_core_ring": 3.28,
+     "ground_swing": 1.05,
+     "ground_lum": 0.8032,
+     "ground_lum_ring": 0.8032
+    },
+    {
+     "box": [
+      776,
+      1371,
+      111,
+      56
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.37,
+     "ink_median": 2.0,
+     "ink_core_ring": 3.37,
+     "ground_swing": 1.19,
+     "ground_lum": 0.8402,
+     "ground_lum_ring": 0.8402
+    },
+    {
+     "box": [
+      707,
+      1283,
+      112,
+      44
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.52,
+     "ink_median": 1.96,
+     "ink_core_ring": 3.52,
+     "ground_swing": 1.14,
+     "ground_lum": 0.8402,
+     "ground_lum_ring": 0.8402
+    },
+    {
+     "box": [
+      333,
+      1092,
+      185,
+      43
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.58,
+     "ink_median": 1.84,
+     "ink_core_ring": 4.36,
+     "ground_swing": 1.22,
+     "ground_lum": 0.6543,
+     "ground_lum_ring": 0.8083
+    },
+    {
+     "box": [
+      381,
+      846,
+      183,
+      36
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.66,
+     "ink_median": 3.66,
+     "ink_core_ring": 7.69,
+     "ground_swing": 2.11,
+     "ground_lum": 0.3579,
+     "ground_lum_ring": 0.808
+    },
+    {
+     "box": [
+      518,
+      1079,
+      228,
+      50
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.69,
+     "ink_median": 1.97,
+     "ink_core_ring": 4.49,
+     "ground_swing": 1.23,
+     "ground_lum": 0.6564,
+     "ground_lum_ring": 0.8083
+    },
+    {
+     "box": [
+      338,
+      923,
+      28,
+      24
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.79,
+     "ink_median": 1.2,
+     "ink_core_ring": 7.67,
+     "ground_swing": 2.04,
+     "ground_lum": 0.3727,
+     "ground_lum_ring": 0.8055
+    },
+    {
+     "box": [
+      1285,
+      441,
+      64,
+      95
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 3.8,
+     "ink_median": 1.87,
+     "ink_core_ring": 4.81,
+     "ground_swing": 1.27,
+     "ground_lum": 0.6341,
+     "ground_lum_ring": 0.8162
+    },
+    {
+     "box": [
+      885,
+      1896,
+      185,
+      50
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.85,
+     "ink_median": 1.55,
+     "ink_core_ring": 3.85,
+     "ground_swing": 1.13,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1337,
+      866,
+      44,
+      21
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 4.3,
+     "ink_median": 2.46,
+     "ink_core_ring": 4.3,
+     "ground_swing": 1.17,
+     "ground_lum": 0.801,
+     "ground_lum_ring": 0.801
+    },
+    {
+     "box": [
+      772,
+      1075,
+      67,
+      39
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 4.49,
+     "ink_median": 2.61,
+     "ink_core_ring": 4.49,
+     "ground_swing": 1.11,
+     "ground_lum": 0.8083,
+     "ground_lum_ring": 0.8083
+    }
+   ]
+  },
+  "02_chat.png": {
+   "runs": 93,
+   "below_floor": 29,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.03,
+   "median_ink_core": 7.77,
+   "median_as_rendered": 6.08,
+   "detail": [
+    {
+     "box": [
+      21,
+      23,
+      44,
+      70
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.03,
+     "ink_median": 1.37,
+     "ink_core_ring": 8.14,
+     "ground_swing": 8.79,
+     "ground_lum": 0.0378,
+     "ground_lum_ring": 0.6455
+    },
+    {
+     "box": [
+      438,
+      1543,
+      185,
+      51
+     ],
+     "glyphs": 10,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.03,
+     "ink_median": 1.01,
+     "ink_core_ring": 1.62,
+     "ground_swing": 1.57,
+     "ground_lum": 0.5383,
+     "ground_lum_ring": 0.8728
+    },
+    {
+     "box": [
+      517,
+      869,
+      84,
+      25
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.04,
+     "ink_median": 1.0,
+     "ink_core_ring": 1.51,
+     "ground_swing": 1.46,
+     "ground_lum": 0.5985,
+     "ground_lum_ring": 0.8894
+    },
+    {
+     "box": [
+      581,
+      1553,
+      27,
+      45
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.04,
+     "ink_median": 1.01,
+     "ink_core_ring": 1.61,
+     "ground_swing": 1.52,
+     "ground_lum": 0.5412,
+     "ground_lum_ring": 0.8615
+    },
+    {
+     "box": [
+      646,
+      1550,
+      21,
+      40
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.05,
+     "ink_median": 1.0,
+     "ink_core_ring": 1.59,
+     "ground_swing": 1.51,
+     "ground_lum": 0.5634,
+     "ground_lum_ring": 0.8809
+    },
+    {
+     "box": [
+      701,
+      1556,
+      148,
+      40
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.05,
+     "ink_median": 1.01,
+     "ink_core_ring": 1.52,
+     "ground_swing": 1.44,
+     "ground_lum": 0.5916,
+     "ground_lum_ring": 0.8787
+    },
+    {
+     "box": [
+      1270,
+      819,
+      43,
+      25
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.06,
+     "ink_median": 1.02,
+     "ink_core_ring": 1.53,
+     "ground_swing": 1.46,
+     "ground_lum": 0.6072,
+     "ground_lum_ring": 0.9018
+    },
+    {
+     "box": [
+      123,
+      73,
+      230,
+      101
+     ],
+     "glyphs": 16,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.07,
+     "ink_median": 1.27,
+     "ink_core_ring": 10.09,
+     "ground_swing": 9.51,
+     "ground_lum": 0.0403,
+     "ground_lum_ring": 0.8032
+    },
+    {
+     "box": [
+      1231,
+      1307,
+      98,
+      40
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.09,
+     "ink_median": 1.03,
+     "ink_core_ring": 1.52,
+     "ground_swing": 1.41,
+     "ground_lum": 0.6322,
+     "ground_lum_ring": 0.9018
+    },
+    {
+     "box": [
+      441,
+      1172,
+      128,
+      25
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.1,
+     "ink_median": 1.04,
+     "ink_core_ring": 1.41,
+     "ground_swing": 1.27,
+     "ground_lum": 0.629,
+     "ground_lum_ring": 0.815
+    },
+    {
+     "box": [
+      201,
+      2735,
+      149,
+      141
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.15,
+     "ink_median": 1.21,
+     "ink_core_ring": 10.78,
+     "ground_swing": 9.44,
+     "ground_lum": 0.0508,
+     "ground_lum_ring": 0.8953
+    },
+    {
+     "box": [
+      401,
+      741,
+      122,
+      40
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.25,
+     "ink_median": 1.19,
+     "ink_core_ring": 4.65,
+     "ground_swing": 3.73,
+     "ground_lum": 0.1838,
+     "ground_lum_ring": 0.8212
+    },
+    {
+     "box": [
+      238,
+      1882,
+      1014,
+      63
+     ],
+     "glyphs": 16,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.38,
+     "ink_median": 1.03,
+     "ink_core_ring": 5.78,
+     "ground_swing": 4.23,
+     "ground_lum": 0.1636,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1348,
+      2781,
+      41,
+      20
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.5,
+     "ink_median": 1.09,
+     "ink_core_ring": 5.18,
+     "ground_swing": 3.62,
+     "ground_lum": 0.1909,
+     "ground_lum_ring": 0.7816
+    },
+    {
+     "box": [
+      666,
+      1175,
+      37,
+      18
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.67,
+     "ink_median": 1.14,
+     "ink_core_ring": 2.04,
+     "ground_swing": 1.22,
+     "ground_lum": 0.6455,
+     "ground_lum_ring": 0.8013
+    },
+    {
+     "box": [
+      156,
+      1399,
+      198,
+      69
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.71,
+     "ink_median": 1.46,
+     "ink_core_ring": 11.73,
+     "ground_swing": 7.16,
+     "ground_lum": 0.0828,
+     "ground_lum_ring": 0.8628
+    },
+    {
+     "box": [
+      556,
+      2797,
+      132,
+      55
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.88,
+     "ink_median": 1.88,
+     "ink_core_ring": 7.81,
+     "ground_swing": 4.16,
+     "ground_lum": 0.1597,
+     "ground_lum_ring": 0.8212
+    },
+    {
+     "box": [
+      476,
+      2039,
+      694,
+      50
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.92,
+     "ink_median": 1.15,
+     "ink_core_ring": 2.53,
+     "ground_swing": 1.3,
+     "ground_lum": 0.6548,
+     "ground_lum_ring": 0.8787
+    },
+    {
+     "box": [
+      321,
+      1184,
+      50,
+      20
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.21,
+     "ink_median": 1.1,
+     "ink_core_ring": 2.87,
+     "ground_swing": 1.33,
+     "ground_lum": 0.5947,
+     "ground_lum_ring": 0.7868
+    },
+    {
+     "box": [
+      214,
+      2367,
+      85,
+      32
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.25,
+     "ink_median": 2.02,
+     "ink_core_ring": 4.45,
+     "ground_swing": 1.99,
+     "ground_lum": 0.3792,
+     "ground_lum_ring": 0.7967
+    },
+    {
+     "box": [
+      853,
+      1184,
+      49,
+      22
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.3,
+     "ink_median": 1.37,
+     "ink_core_ring": 2.81,
+     "ground_swing": 1.22,
+     "ground_lum": 0.6688,
+     "ground_lum_ring": 0.8262
+    },
+    {
+     "box": [
+      502,
+      874,
+      439,
+      47
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.41,
+     "ink_median": 1.09,
+     "ink_core_ring": 3.22,
+     "ground_swing": 1.34,
+     "ground_lum": 0.6517,
+     "ground_lum_ring": 0.887
+    },
+    {
+     "box": [
+      356,
+      72,
+      822,
+      52
+     ],
+     "glyphs": 26,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.03,
+     "ink_median": 1.83,
+     "ink_core_ring": 7.75,
+     "ground_swing": 2.59,
+     "ground_lum": 0.2868,
+     "ground_lum_ring": 0.8111
+    },
+    {
+     "box": [
+      954,
+      2738,
+      136,
+      18
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.12,
+     "ink_median": 1.28,
+     "ink_core_ring": 3.98,
+     "ground_swing": 1.28,
+     "ground_lum": 0.6703,
+     "ground_lum_ring": 0.8691
+    },
+    {
+     "box": [
+      399,
+      1425,
+      167,
+      39
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.24,
+     "ink_median": 3.19,
+     "ink_core_ring": 4.47,
+     "ground_swing": 1.39,
+     "ground_lum": 0.5694,
+     "ground_lum_ring": 0.8045
+    },
+    {
+     "box": [
+      1062,
+      1207,
+      106,
+      40
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.62,
+     "ink_median": 1.56,
+     "ink_core_ring": 5.15,
+     "ground_swing": 1.41,
+     "ground_lum": 0.5959,
+     "ground_lum_ring": 0.8691
+    },
+    {
+     "box": [
+      173,
+      760,
+      1030,
+      90
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 3.76,
+     "ink_median": 2.22,
+     "ink_core_ring": 5.02,
+     "ground_swing": 1.35,
+     "ground_lum": 0.6519,
+     "ground_lum_ring": 0.886
+    },
+    {
+     "box": [
+      908,
+      1199,
+      81,
+      24
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 4.33,
+     "ink_median": 1.56,
+     "ink_core_ring": 5.54,
+     "ground_swing": 1.27,
+     "ground_lum": 0.6362,
+     "ground_lum_ring": 0.8273
+    },
+    {
+     "box": [
+      344,
+      2368,
+      235,
+      41
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 4.46,
+     "ink_median": 4.38,
+     "ink_core_ring": 4.46,
+     "ground_swing": 1.04,
+     "ground_lum": 0.7995,
+     "ground_lum_ring": 0.7995
+    }
+   ]
+  },
+  "03_us.png": {
+   "runs": 77,
+   "below_floor": 32,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.03,
+   "median_ink_core": 5.74,
+   "median_as_rendered": 3.89,
+   "detail": [
+    {
+     "box": [
+      21,
+      23,
+      44,
+      70
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.03,
+     "ink_median": 1.37,
+     "ink_core_ring": 8.14,
+     "ground_swing": 8.79,
+     "ground_lum": 0.0378,
+     "ground_lum_ring": 0.6455
+    },
+    {
+     "box": [
+      123,
+      73,
+      230,
+      101
+     ],
+     "glyphs": 16,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.07,
+     "ink_median": 1.27,
+     "ink_core_ring": 10.09,
+     "ground_swing": 9.51,
+     "ground_lum": 0.0403,
+     "ground_lum_ring": 0.8032
+    },
+    {
+     "box": [
+      872,
+      1094,
+      64,
+      24
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.08,
+     "ink_median": 1.04,
+     "ink_core_ring": 1.37,
+     "ground_swing": 1.27,
+     "ground_lum": 0.6365,
+     "ground_lum_ring": 0.8235
+    },
+    {
+     "box": [
+      857,
+      708,
+      51,
+      67
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.09,
+     "ink_median": 1.04,
+     "ink_core_ring": 1.47,
+     "ground_swing": 1.36,
+     "ground_lum": 0.6013,
+     "ground_lum_ring": 0.8314
+    },
+    {
+     "box": [
+      1066,
+      1090,
+      70,
+      22
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.09,
+     "ink_median": 1.03,
+     "ink_core_ring": 1.39,
+     "ground_swing": 1.28,
+     "ground_lum": 0.6479,
+     "ground_lum_ring": 0.8402
+    },
+    {
+     "box": [
+      101,
+      604,
+      665,
+      118
+     ],
+     "glyphs": 12,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.12,
+     "ink_median": 1.07,
+     "ink_core_ring": 1.47,
+     "ground_swing": 1.32,
+     "ground_lum": 0.6257,
+     "ground_lum_ring": 0.838
+    },
+    {
+     "box": [
+      121,
+      2601,
+      160,
+      33
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.13,
+     "ink_median": 1.07,
+     "ink_core_ring": 1.47,
+     "ground_swing": 1.31,
+     "ground_lum": 0.6205,
+     "ground_lum_ring": 0.822
+    },
+    {
+     "box": [
+      469,
+      1217,
+      140,
+      41
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.15,
+     "ink_median": 1.08,
+     "ink_core_ring": 1.41,
+     "ground_swing": 1.23,
+     "ground_lum": 0.6739,
+     "ground_lum_ring": 0.8402
+    },
+    {
+     "box": [
+      126,
+      1788,
+      86,
+      41
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.15,
+     "ink_median": 1.08,
+     "ink_core_ring": 1.46,
+     "ground_swing": 1.27,
+     "ground_lum": 0.6516,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      1018,
+      710,
+      43,
+      36
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.16,
+     "ink_median": 1.08,
+     "ink_core_ring": 1.54,
+     "ground_swing": 1.32,
+     "ground_lum": 0.6214,
+     "ground_lum_ring": 0.838
+    },
+    {
+     "box": [
+      77,
+      801,
+      84,
+      31
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.16,
+     "ink_median": 1.1,
+     "ink_core_ring": 1.45,
+     "ground_swing": 1.26,
+     "ground_lum": 0.6581,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      1193,
+      675,
+      29,
+      44
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.18,
+     "ink_median": 1.07,
+     "ink_core_ring": 1.55,
+     "ground_swing": 1.32,
+     "ground_lum": 0.6222,
+     "ground_lum_ring": 0.831
+    },
+    {
+     "box": [
+      906,
+      2858,
+      286,
+      43
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.18,
+     "ink_median": 1.07,
+     "ink_core_ring": 1.53,
+     "ground_swing": 1.3,
+     "ground_lum": 0.6284,
+     "ground_lum_ring": 0.83
+    },
+    {
+     "box": [
+      122,
+      2401,
+      133,
+      56
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.21,
+     "ink_median": 1.13,
+     "ink_core_ring": 1.48,
+     "ground_swing": 1.22,
+     "ground_lum": 0.6713,
+     "ground_lum_ring": 0.8295
+    },
+    {
+     "box": [
+      1273,
+      2866,
+      76,
+      26
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.23,
+     "ink_median": 1.11,
+     "ink_core_ring": 1.56,
+     "ground_swing": 1.27,
+     "ground_lum": 0.6422,
+     "ground_lum_ring": 0.83
+    },
+    {
+     "box": [
+      186,
+      2866,
+      88,
+      31
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.25,
+     "ink_median": 1.13,
+     "ink_core_ring": 1.53,
+     "ground_swing": 1.23,
+     "ground_lum": 0.669,
+     "ground_lum_ring": 0.8291
+    },
+    {
+     "box": [
+      927,
+      698,
+      28,
+      23
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.28,
+     "ink_median": 1.04,
+     "ink_core_ring": 1.76,
+     "ground_swing": 1.39,
+     "ground_lum": 0.5898,
+     "ground_lum_ring": 0.831
+    },
+    {
+     "box": [
+      270,
+      1995,
+      64,
+      28
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.31,
+     "ink_median": 1.07,
+     "ink_core_ring": 1.72,
+     "ground_swing": 1.33,
+     "ground_lum": 0.5935,
+     "ground_lum_ring": 0.7962
+    },
+    {
+     "box": [
+      869,
+      1541,
+      105,
+      37
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.44,
+     "ink_median": 1.32,
+     "ink_core_ring": 1.44,
+     "ground_swing": 1.1,
+     "ground_lum": 0.8402,
+     "ground_lum_ring": 0.8402
+    },
+    {
+     "box": [
+      736,
+      1587,
+      92,
+      22
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.45,
+     "ink_median": 1.33,
+     "ink_core_ring": 1.45,
+     "ground_swing": 1.08,
+     "ground_lum": 0.8402,
+     "ground_lum_ring": 0.8402
+    },
+    {
+     "box": [
+      118,
+      2519,
+      143,
+      35
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.46,
+     "ink_median": 1.08,
+     "ink_core_ring": 1.88,
+     "ground_swing": 1.29,
+     "ground_lum": 0.6321,
+     "ground_lum_ring": 0.8263
+    },
+    {
+     "box": [
+      340,
+      1974,
+      566,
+      59
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.53,
+     "ink_median": 1.13,
+     "ink_core_ring": 1.96,
+     "ground_swing": 1.29,
+     "ground_lum": 0.6122,
+     "ground_lum_ring": 0.8009
+    },
+    {
+     "box": [
+      80,
+      1526,
+      48,
+      79
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.55,
+     "ink_median": 1.1,
+     "ink_core_ring": 2.0,
+     "ground_swing": 1.3,
+     "ground_lum": 0.6273,
+     "ground_lum_ring": 0.8249
+    },
+    {
+     "box": [
+      986,
+      2634,
+      50,
+      24
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.63,
+     "ink_median": 1.11,
+     "ink_core_ring": 2.42,
+     "ground_swing": 1.49,
+     "ground_lum": 0.5298,
+     "ground_lum_ring": 0.8133
+    },
+    {
+     "box": [
+      981,
+      1982,
+      80,
+      29
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.65,
+     "ink_median": 1.24,
+     "ink_core_ring": 2.15,
+     "ground_swing": 1.3,
+     "ground_lum": 0.6011,
+     "ground_lum_ring": 0.7976
+    },
+    {
+     "box": [
+      97,
+      1708,
+      21,
+      54
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.8,
+     "ink_median": 1.18,
+     "ink_core_ring": 2.26,
+     "ground_swing": 1.3,
+     "ground_lum": 0.6147,
+     "ground_lum_ring": 0.7853
+    },
+    {
+     "box": [
+      75,
+      907,
+      165,
+      68
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.35,
+     "ink_median": 1.08,
+     "ink_core_ring": 3.06,
+     "ground_swing": 1.31,
+     "ground_lum": 0.6337,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      243,
+      2650,
+      66,
+      29
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.52,
+     "ink_median": 1.29,
+     "ink_core_ring": 3.38,
+     "ground_swing": 1.34,
+     "ground_lum": 0.5948,
+     "ground_lum_ring": 0.8133
+    },
+    {
+     "box": [
+      284,
+      1650,
+      69,
+      23
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.57,
+     "ink_median": 1.33,
+     "ink_core_ring": 3.83,
+     "ground_swing": 1.5,
+     "ground_lum": 0.5426,
+     "ground_lum_ring": 0.8322
+    },
+    {
+     "box": [
+      356,
+      72,
+      822,
+      52
+     ],
+     "glyphs": 26,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.03,
+     "ink_median": 1.83,
+     "ink_core_ring": 7.75,
+     "ground_swing": 2.59,
+     "ground_lum": 0.2868,
+     "ground_lum_ring": 0.8111
+    },
+    {
+     "box": [
+      353,
+      2652,
+      77,
+      38
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.22,
+     "ink_median": 1.37,
+     "ink_core_ring": 4.23,
+     "ground_swing": 1.32,
+     "ground_lum": 0.6083,
+     "ground_lum_ring": 0.8133
+    },
+    {
+     "box": [
+      573,
+      1668,
+      130,
+      27
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.88,
+     "ink_median": 1.89,
+     "ink_core_ring": 5.02,
+     "ground_swing": 1.29,
+     "ground_lum": 0.6376,
+     "ground_lum_ring": 0.8402
+    }
+   ]
+  },
+  "04_moments.png": {
+   "runs": 49,
+   "below_floor": 18,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.02,
+   "median_ink_core": 5.69,
+   "median_as_rendered": 4.84,
+   "detail": [
+    {
+     "box": [
+      95,
+      720,
+      314,
+      57
+     ],
+     "glyphs": 1,
+     "polarity": "light",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.02,
+     "ink_median": 1.01,
+     "ink_core_ring": 3.22,
+     "ground_swing": 3.42,
+     "ground_lum": 0.2758,
+     "ground_lum_ring": 0.0533
+    },
+    {
+     "box": [
+      21,
+      23,
+      44,
+      70
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.03,
+     "ink_median": 1.37,
+     "ink_core_ring": 8.14,
+     "ground_swing": 8.79,
+     "ground_lum": 0.0378,
+     "ground_lum_ring": 0.6455
+    },
+    {
+     "box": [
+      167,
+      833,
+      44,
+      19
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.03,
+     "ink_median": 1.02,
+     "ink_core_ring": 3.15,
+     "ground_swing": 2.9,
+     "ground_lum": 0.06,
+     "ground_lum_ring": 0.2862
+    },
+    {
+     "box": [
+      788,
+      2159,
+      30,
+      30
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.05,
+     "ink_median": 1.01,
+     "ink_core_ring": 1.44,
+     "ground_swing": 1.38,
+     "ground_lum": 0.6474,
+     "ground_lum_ring": 0.9102
+    },
+    {
+     "box": [
+      652,
+      239,
+      28,
+      30
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.06,
+     "ink_median": 1.03,
+     "ink_core_ring": 1.57,
+     "ground_swing": 1.49,
+     "ground_lum": 0.0364,
+     "ground_lum_ring": 0.078
+    },
+    {
+     "box": [
+      76,
+      319,
+      404,
+      114
+     ],
+     "glyphs": 11,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.06,
+     "ink_median": 1.29,
+     "ink_core_ring": 10.42,
+     "ground_swing": 9.94,
+     "ground_lum": 0.0394,
+     "ground_lum_ring": 0.831
+    },
+    {
+     "box": [
+      123,
+      73,
+      230,
+      101
+     ],
+     "glyphs": 16,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.07,
+     "ink_median": 1.27,
+     "ink_core_ring": 10.09,
+     "ground_swing": 9.51,
+     "ground_lum": 0.0403,
+     "ground_lum_ring": 0.8032
+    },
+    {
+     "box": [
+      736,
+      2159,
+      16,
+      30
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.09,
+     "ink_median": 1.07,
+     "ink_core_ring": 1.41,
+     "ground_swing": 1.29,
+     "ground_lum": 0.6922,
+     "ground_lum_ring": 0.9102
+    },
+    {
+     "box": [
+      39,
+      1288,
+      441,
+      145
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.1,
+     "ink_median": 2.69,
+     "ink_core_ring": 8.61,
+     "ground_swing": 7.8,
+     "ground_lum": 0.0732,
+     "ground_lum_ring": 0.9102
+    },
+    {
+     "box": [
+      612,
+      2159,
+      97,
+      29
+     ],
+     "glyphs": 11,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.22,
+     "ink_median": 1.17,
+     "ink_core_ring": 1.53,
+     "ground_swing": 1.26,
+     "ground_lum": 0.7105,
+     "ground_lum_ring": 0.9037
+    },
+    {
+     "box": [
+      1154,
+      332,
+      195,
+      74
+     ],
+     "glyphs": 7,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.26,
+     "ink_median": 1.07,
+     "ink_core_ring": 9.77,
+     "ground_swing": 7.74,
+     "ground_lum": 0.0657,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      517,
+      336,
+      409,
+      75
+     ],
+     "glyphs": 11,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.44,
+     "ink_median": 1.02,
+     "ink_core_ring": 10.14,
+     "ground_swing": 7.08,
+     "ground_lum": 0.0766,
+     "ground_lum_ring": 0.838
+    },
+    {
+     "box": [
+      495,
+      1115,
+      306,
+      23
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.82,
+     "ink_median": 1.34,
+     "ink_core_ring": 1.82,
+     "ground_swing": 1.04,
+     "ground_lum": 0.8063,
+     "ground_lum_ring": 0.8063
+    },
+    {
+     "box": [
+      491,
+      1212,
+      453,
+      139
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 2.12,
+     "ink_median": 1.02,
+     "ink_core_ring": 5.93,
+     "ground_swing": 2.79,
+     "ground_lum": 0.2942,
+     "ground_lum_ring": 0.9102
+    },
+    {
+     "box": [
+      356,
+      72,
+      822,
+      52
+     ],
+     "glyphs": 26,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.03,
+     "ink_median": 1.83,
+     "ink_core_ring": 7.75,
+     "ground_swing": 2.59,
+     "ground_lum": 0.2868,
+     "ground_lum_ring": 0.8111
+    },
+    {
+     "box": [
+      806,
+      1030,
+      563,
+      115
+     ],
+     "glyphs": 7,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 3.21,
+     "ink_median": 1.02,
+     "ink_core_ring": 9.78,
+     "ground_swing": 3.07,
+     "ground_lum": 0.2626,
+     "ground_lum_ring": 0.9037
+    },
+    {
+     "box": [
+      498,
+      497,
+      61,
+      33
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.88,
+     "ink_median": 3.88,
+     "ink_core_ring": 3.88,
+     "ground_swing": 1.1,
+     "ground_lum": 0.8207,
+     "ground_lum_ring": 0.8207
+    },
+    {
+     "box": [
+      703,
+      495,
+      51,
+      36
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.91,
+     "ink_median": 3.87,
+     "ink_core_ring": 3.91,
+     "ground_swing": 1.13,
+     "ground_lum": 0.8198,
+     "ground_lum_ring": 0.8198
+    }
+   ]
+  },
+  "05_settings.png": {
+   "runs": 115,
+   "below_floor": 54,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.0,
+   "median_ink_core": 6.08,
+   "median_as_rendered": 5.09,
+   "detail": [
+    {
+     "box": [
+      1211,
+      2900,
+      59,
+      33
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.0,
+     "ink_median": 1.35,
+     "ink_core_ring": 9.77,
+     "ground_swing": 9.74,
+     "ground_lum": 0.042,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1412,
+      2339,
+      26,
+      100
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.02,
+     "ink_median": 1.54,
+     "ink_core_ring": 5.12,
+     "ground_swing": 7.2,
+     "ground_lum": 0.0321,
+     "ground_lum_ring": 0.3607
+    },
+    {
+     "box": [
+      21,
+      23,
+      44,
+      70
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.03,
+     "ink_median": 1.37,
+     "ink_core_ring": 8.14,
+     "ground_swing": 8.79,
+     "ground_lum": 0.0378,
+     "ground_lum_ring": 0.6455
+    },
+    {
+     "box": [
+      1150,
+      2900,
+      55,
+      33
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.05,
+     "ink_median": 1.29,
+     "ink_core_ring": 9.92,
+     "ground_swing": 9.48,
+     "ground_lum": 0.0445,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      652,
+      239,
+      28,
+      30
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.06,
+     "ink_median": 1.03,
+     "ink_core_ring": 1.57,
+     "ground_swing": 1.49,
+     "ground_lum": 0.0364,
+     "ground_lum_ring": 0.078
+    },
+    {
+     "box": [
+      123,
+      73,
+      230,
+      101
+     ],
+     "glyphs": 16,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.07,
+     "ink_median": 1.27,
+     "ink_core_ring": 10.09,
+     "ground_swing": 9.51,
+     "ground_lum": 0.0403,
+     "ground_lum_ring": 0.8032
+    },
+    {
+     "box": [
+      437,
+      786,
+      54,
+      41
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.1,
+     "ink_median": 1.1,
+     "ink_core_ring": 7.77,
+     "ground_swing": 7.06,
+     "ground_lum": 0.0728,
+     "ground_lum_ring": 0.8166
+    },
+    {
+     "box": [
+      415,
+      1501,
+      213,
+      60
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.1,
+     "ink_median": 1.05,
+     "ink_core_ring": 1.47,
+     "ground_swing": 1.34,
+     "ground_lum": 0.6142,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      73,
+      1596,
+      118,
+      35
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.12,
+     "ink_median": 1.07,
+     "ink_core_ring": 1.43,
+     "ground_swing": 1.28,
+     "ground_lum": 0.6475,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      809,
+      1512,
+      125,
+      34
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.13,
+     "ink_median": 1.08,
+     "ink_core_ring": 1.48,
+     "ground_swing": 1.31,
+     "ground_lum": 0.6362,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      304,
+      1513,
+      66,
+      51
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.14,
+     "ink_median": 1.07,
+     "ink_core_ring": 1.51,
+     "ground_swing": 1.33,
+     "ground_lum": 0.6205,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      157,
+      785,
+      274,
+      42
+     ],
+     "glyphs": 9,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.15,
+     "ink_median": 1.15,
+     "ink_core_ring": 7.81,
+     "ground_swing": 6.77,
+     "ground_lum": 0.0786,
+     "ground_lum_ring": 0.8212
+    },
+    {
+     "box": [
+      247,
+      1531,
+      26,
+      22
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.15,
+     "ink_median": 1.05,
+     "ink_core_ring": 1.56,
+     "ground_swing": 1.36,
+     "ground_lum": 0.6021,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      767,
+      1485,
+      32,
+      36
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.16,
+     "ink_median": 1.06,
+     "ink_core_ring": 1.52,
+     "ground_swing": 1.32,
+     "ground_lum": 0.6273,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      1045,
+      1524,
+      118,
+      35
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.16,
+     "ink_median": 1.06,
+     "ink_core_ring": 1.52,
+     "ground_swing": 1.31,
+     "ground_lum": 0.6345,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      937,
+      1524,
+      99,
+      51
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.17,
+     "ink_median": 1.05,
+     "ink_core_ring": 1.58,
+     "ground_swing": 1.36,
+     "ground_lum": 0.6076,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      1007,
+      2897,
+      28,
+      23
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.17,
+     "ink_median": 1.01,
+     "ink_core_ring": 2.85,
+     "ground_swing": 2.43,
+     "ground_lum": 0.319,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      73,
+      1085,
+      63,
+      19
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.18,
+     "ink_median": 1.08,
+     "ink_core_ring": 1.43,
+     "ground_swing": 1.22,
+     "ground_lum": 0.683,
+     "ground_lum_ring": 0.8385
+    },
+    {
+     "box": [
+      1201,
+      1524,
+      53,
+      44
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.18,
+     "ink_median": 1.09,
+     "ink_core_ring": 1.52,
+     "ground_swing": 1.3,
+     "ground_lum": 0.6403,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      756,
+      352,
+      632,
+      71
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.4,
+     "ink_median": 1.1,
+     "ink_core_ring": 9.85,
+     "ground_swing": 7.07,
+     "ground_lum": 0.0762,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      93,
+      1855,
+      20,
+      46
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.54,
+     "ink_median": 1.19,
+     "ink_core_ring": 2.0,
+     "ground_swing": 1.31,
+     "ground_lum": 0.6104,
+     "ground_lum_ring": 0.804
+    },
+    {
+     "box": [
+      157,
+      680,
+      508,
+      55
+     ],
+     "glyphs": 16,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.77,
+     "ink_median": 1.77,
+     "ink_core_ring": 9.42,
+     "ground_swing": 5.34,
+     "ground_lum": 0.1136,
+     "ground_lum_ring": 0.8212
+    },
+    {
+     "box": [
+      739,
+      2038,
+      69,
+      35
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.85,
+     "ink_median": 1.0,
+     "ink_core_ring": 14.88,
+     "ground_swing": 8.04,
+     "ground_lum": 0.0615,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      708,
+      2578,
+      169,
+      36
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.85,
+     "ink_median": 1.85,
+     "ink_core_ring": 2.42,
+     "ground_swing": 1.32,
+     "ground_lum": 0.629,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      1151,
+      2582,
+      120,
+      33
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.87,
+     "ink_median": 1.85,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.31,
+     "ground_lum": 0.6354,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      707,
+      2650,
+      170,
+      36
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.89,
+     "ink_median": 1.89,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.29,
+     "ground_lum": 0.6421,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      1151,
+      2654,
+      120,
+      33
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.93,
+     "ink_median": 1.92,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.26,
+     "ground_lum": 0.6595,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      707,
+      2722,
+      170,
+      36
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.94,
+     "ink_median": 1.93,
+     "ink_core_ring": 2.43,
+     "ground_swing": 1.26,
+     "ground_lum": 0.6596,
+     "ground_lum_ring": 0.8395
+    },
+    {
+     "box": [
+      1275,
+      2724,
+      23,
+      36
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.94,
+     "ink_median": 1.93,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.26,
+     "ground_lum": 0.6626,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      707,
+      2794,
+      170,
+      36
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.94,
+     "ink_median": 1.94,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.26,
+     "ground_lum": 0.6601,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      1275,
+      2580,
+      24,
+      36
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.95,
+     "ink_median": 1.93,
+     "ink_core_ring": 2.43,
+     "ground_swing": 1.25,
+     "ground_lum": 0.6638,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      1275,
+      2652,
+      23,
+      36
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.99,
+     "ink_median": 1.99,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.23,
+     "ground_lum": 0.6814,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1274,
+      2796,
+      24,
+      36
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.0,
+     "ink_median": 1.98,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.22,
+     "ground_lum": 0.6834,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      1276,
+      2346,
+      23,
+      36
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.05,
+     "ink_median": 2.03,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.2,
+     "ground_lum": 0.7003,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      948,
+      1823,
+      115,
+      44
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.44,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.03,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      948,
+      1895,
+      369,
+      44
+     ],
+     "glyphs": 12,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.44,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.06,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      962,
+      1967,
+      369,
+      44
+     ],
+     "glyphs": 9,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.44,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.05,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      738,
+      2344,
+      140,
+      36
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.44,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.16,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1100,
+      2591,
+      46,
+      24
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.44,
+     "ink_median": 2.44,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.08,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1100,
+      2663,
+      46,
+      24
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.44,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.44,
+     "ground_swing": 1.03,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1103,
+      1824,
+      214,
+      36
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.05,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      987,
+      2039,
+      342,
+      44
+     ],
+     "glyphs": 7,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.43,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.06,
+     "ground_lum": 0.848,
+     "ground_lum_ring": 0.848
+    },
+    {
+     "box": [
+      709,
+      2140,
+      170,
+      36
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.03,
+     "ground_lum": 0.8471,
+     "ground_lum_ring": 0.8471
+    },
+    {
+     "box": [
+      1101,
+      2142,
+      199,
+      36
+     ],
+     "glyphs": 8,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.43,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.09,
+     "ground_lum": 0.848,
+     "ground_lum_ring": 0.848
+    },
+    {
+     "box": [
+      1128,
+      2348,
+      80,
+      33
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.43,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.14,
+     "ground_lum": 0.848,
+     "ground_lum_ring": 0.848
+    },
+    {
+     "box": [
+      1213,
+      2348,
+      59,
+      33
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.19,
+     "ground_lum": 0.8471,
+     "ground_lum_ring": 0.8471
+    },
+    {
+     "box": [
+      708,
+      2476,
+      170,
+      36
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.43,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1100,
+      2478,
+      214,
+      36
+     ],
+     "glyphs": 7,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.12,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1099,
+      2735,
+      46,
+      24
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.44,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1150,
+      2726,
+      121,
+      33
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.15,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1099,
+      2807,
+      46,
+      24
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      1150,
+      2798,
+      120,
+      33
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.1,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461
+    },
+    {
+     "box": [
+      913,
+      2243,
+      404,
+      44
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.54,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.54,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8466,
+     "ground_lum_ring": 0.8466
+    },
+    {
+     "box": [
+      356,
+      72,
+      822,
+      52
+     ],
+     "glyphs": 26,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.03,
+     "ink_median": 1.83,
+     "ink_core_ring": 7.75,
+     "ground_swing": 2.59,
+     "ground_lum": 0.2868,
+     "ground_lum_ring": 0.8111
+    }
+   ]
+  },
+  "10_first_run.png": {
+   "runs": 33,
+   "below_floor": 14,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.04,
+   "median_ink_core": 6.02,
+   "median_as_rendered": 4.83,
+   "detail": [
+    {
+     "box": [
+      235,
+      42,
+      42,
+      18
+     ],
+     "glyphs": 1,
+     "polarity": "light",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.04,
+     "ink_median": 2.48,
+     "ink_core_ring": 8.2,
+     "ground_swing": 9.45,
+     "ground_lum": 0.7956,
+     "ground_lum_ring": 0.0567
+    },
+    {
+     "box": [
+      230,
+      1422,
+      62,
+      20
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.15,
+     "ink_median": 1.08,
+     "ink_core_ring": 1.45,
+     "ground_swing": 1.26,
+     "ground_lum": 0.6416,
+     "ground_lum_ring": 0.8212
+    },
+    {
+     "box": [
+      201,
+      2735,
+      149,
+      141
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.15,
+     "ink_median": 1.2,
+     "ink_core_ring": 10.18,
+     "ground_swing": 8.83,
+     "ground_lum": 0.0508,
+     "ground_lum_ring": 0.8402
+    },
+    {
+     "box": [
+      36,
+      43,
+      237,
+      163
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.25,
+     "ink_median": 1.18,
+     "ink_core_ring": 12.8,
+     "ground_swing": 10.35,
+     "ground_lum": 0.0334,
+     "ground_lum_ring": 0.8073
+    },
+    {
+     "box": [
+      1349,
+      143,
+      51,
+      22
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.3,
+     "ink_median": 1.23,
+     "ink_core_ring": 11.5,
+     "ground_swing": 9.17,
+     "ground_lum": 0.039,
+     "ground_lum_ring": 0.7393
+    },
+    {
+     "box": [
+      1348,
+      2781,
+      41,
+      20
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.5,
+     "ink_median": 1.1,
+     "ink_core_ring": 5.31,
+     "ground_swing": 3.58,
+     "ground_lum": 0.1798,
+     "ground_lum_ring": 0.7619
+    },
+    {
+     "box": [
+      800,
+      1258,
+      61,
+      20
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.7,
+     "ink_median": 1.11,
+     "ink_core_ring": 2.11,
+     "ground_swing": 1.24,
+     "ground_lum": 0.6273,
+     "ground_lum_ring": 0.7932
+    },
+    {
+     "box": [
+      1041,
+      1251,
+      60,
+      19
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.71,
+     "ink_median": 1.32,
+     "ink_core_ring": 1.71,
+     "ground_swing": 1.19,
+     "ground_lum": 0.791,
+     "ground_lum_ring": 0.791
+    },
+    {
+     "box": [
+      358,
+      1259,
+      50,
+      18
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.83,
+     "ink_median": 1.07,
+     "ink_core_ring": 2.38,
+     "ground_swing": 1.3,
+     "ground_lum": 0.5979,
+     "ground_lum_ring": 0.7907
+    },
+    {
+     "box": [
+      556,
+      2797,
+      132,
+      55
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.88,
+     "ink_median": 1.88,
+     "ink_core_ring": 7.81,
+     "ground_swing": 4.16,
+     "ground_lum": 0.1597,
+     "ground_lum_ring": 0.8212
+    },
+    {
+     "box": [
+      1154,
+      1441,
+      54,
+      19
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.72,
+     "ink_median": 1.26,
+     "ink_core_ring": 3.73,
+     "ground_swing": 1.37,
+     "ground_lum": 0.5761,
+     "ground_lum_ring": 0.8083
+    },
+    {
+     "box": [
+      507,
+      1248,
+      83,
+      30
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.97,
+     "ink_median": 1.26,
+     "ink_core_ring": 4.04,
+     "ground_swing": 1.35,
+     "ground_lum": 0.5913,
+     "ground_lum_ring": 0.8242
+    },
+    {
+     "box": [
+      954,
+      2738,
+      135,
+      18
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.34,
+     "ink_median": 1.33,
+     "ink_core_ring": 4.0,
+     "ground_swing": 1.2,
+     "ground_lum": 0.6721,
+     "ground_lum_ring": 0.8162
+    },
+    {
+     "box": [
+      1050,
+      1603,
+      133,
+      42
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.66,
+     "ink_median": 2.96,
+     "ink_core_ring": 5.31,
+     "ground_swing": 1.47,
+     "ground_lum": 0.5521,
+     "ground_lum_ring": 0.8242
+    }
+   ]
+  },
+  "12_search.png": {
+   "runs": 103,
+   "below_floor": 13,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.01,
+   "median_ink_core": 8.5,
+   "median_as_rendered": 7.81,
+   "detail": [
+    {
+     "box": [
+      833,
+      1102,
+      65,
+      41
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.01,
+     "ink_median": 1.16,
+     "ink_core_ring": 1.56,
+     "ground_swing": 1.56,
+     "ground_lum": 0.0321,
+     "ground_lum_ring": 0.0766
+    },
+    {
+     "box": [
+      637,
+      1742,
+      88,
+      35
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.01,
+     "ink_median": 1.16,
+     "ink_core_ring": 1.56,
+     "ground_swing": 1.56,
+     "ground_lum": 0.0323,
+     "ground_lum_ring": 0.0766
+    },
+    {
+     "box": [
+      28,
+      2233,
+      44,
+      141
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.01,
+     "ink_median": 1.35,
+     "ink_core_ring": 9.88,
+     "ground_swing": 9.94,
+     "ground_lum": 0.0355,
+     "ground_lum_ring": 0.7825
+    },
+    {
+     "box": [
+      27,
+      507,
+      365,
+      130
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.02,
+     "ink_median": 1.32,
+     "ink_core_ring": 10.28,
+     "ground_swing": 10.19,
+     "ground_lum": 0.0337,
+     "ground_lum_ring": 0.7946
+    },
+    {
+     "box": [
+      599,
+      538,
+      48,
+      53
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.03,
+     "ink_median": 1.0,
+     "ink_core_ring": 1.57,
+     "ground_swing": 1.54,
+     "ground_lum": 0.0324,
+     "ground_lum_ring": 0.076
+    },
+    {
+     "box": [
+      111,
+      2610,
+      237,
+      18
+     ],
+     "glyphs": 1,
+     "polarity": "light",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.05,
+     "ink_median": 1.49,
+     "ink_core_ring": 9.7,
+     "ground_swing": 10.0,
+     "ground_lum": 0.7955,
+     "ground_lum_ring": 0.0416
+    },
+    {
+     "box": [
+      696,
+      427,
+      264,
+      25
+     ],
+     "glyphs": 11,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.07,
+     "ink_median": 1.82,
+     "ink_core_ring": 15.16,
+     "ground_swing": 14.2,
+     "ground_lum": 0.0114,
+     "ground_lum_ring": 0.817
+    },
+    {
+     "box": [
+      95,
+      427,
+      217,
+      25
+     ],
+     "glyphs": 10,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.09,
+     "ink_median": 1.86,
+     "ink_core_ring": 15.79,
+     "ground_swing": 14.54,
+     "ground_lum": 0.0099,
+     "ground_lum_ring": 0.8147
+    },
+    {
+     "box": [
+      428,
+      427,
+      151,
+      25
+     ],
+     "glyphs": 7,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.1,
+     "ink_median": 1.83,
+     "ink_core_ring": 15.75,
+     "ground_swing": 14.3,
+     "ground_lum": 0.0109,
+     "ground_lum_ring": 0.8184
+    },
+    {
+     "box": [
+      1410,
+      3054,
+      18,
+      66
+     ],
+     "glyphs": 2,
+     "polarity": "light",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.12,
+     "ink_median": 1.01,
+     "ink_core_ring": 2.18,
+     "ground_swing": 2.01,
+     "ground_lum": 0.0719,
+     "ground_lum_ring": 0.0129
+    },
+    {
+     "box": [
+      820,
+      1546,
+      488,
+      132
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.34,
+     "ink_median": 1.34,
+     "ink_core_ring": 14.97,
+     "ground_swing": 11.2,
+     "ground_lum": 0.0313,
+     "ground_lum_ring": 0.8573
+    },
+    {
+     "box": [
+      273,
+      2495,
+      36,
+      28
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.82,
+     "ink_median": 1.77,
+     "ink_core_ring": 7.74,
+     "ground_swing": 4.28,
+     "ground_lum": 0.1534,
+     "ground_lum_ring": 0.8133
+    },
+    {
+     "box": [
+      130,
+      2078,
+      157,
+      30
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 4.42,
+     "ink_median": 4.42,
+     "ink_core_ring": 7.48,
+     "ground_swing": 1.7,
+     "ground_lum": 0.4429,
+     "ground_lum_ring": 0.784
+    }
+   ]
+  },
+  "13_messenger_states.png": {
+   "runs": 71,
+   "below_floor": 23,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.0,
+   "median_ink_core": 6.77,
+   "median_as_rendered": 5.23,
+   "detail": [
+    {
+     "box": [
+      706,
+      1569,
+      39,
+      21
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.0,
+     "ink_median": 1.04,
+     "ink_core_ring": 1.55,
+     "ground_swing": 1.54,
+     "ground_lum": 0.5593,
+     "ground_lum_ring": 0.8905
+    },
+    {
+     "box": [
+      439,
+      1568,
+      102,
+      24
+     ],
+     "glyphs": 6,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.01,
+     "ink_median": 1.02,
+     "ink_core_ring": 1.53,
+     "ground_swing": 1.57,
+     "ground_lum": 0.5419,
+     "ground_lum_ring": 0.8473
+    },
+    {
+     "box": [
+      21,
+      23,
+      44,
+      70
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.03,
+     "ink_median": 1.37,
+     "ink_core_ring": 8.14,
+     "ground_swing": 8.79,
+     "ground_lum": 0.0378,
+     "ground_lum_ring": 0.6455
+    },
+    {
+     "box": [
+      1291,
+      993,
+      34,
+      28
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.05,
+     "ink_median": 1.01,
+     "ink_core_ring": 1.47,
+     "ground_swing": 1.41,
+     "ground_lum": 0.6333,
+     "ground_lum_ring": 0.9059
+    },
+    {
+     "box": [
+      1288,
+      1062,
+      41,
+      28
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.06,
+     "ink_median": 1.02,
+     "ink_core_ring": 1.38,
+     "ground_swing": 1.31,
+     "ground_lum": 0.6889,
+     "ground_lum_ring": 0.9102
+    },
+    {
+     "box": [
+      123,
+      73,
+      230,
+      101
+     ],
+     "glyphs": 16,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.07,
+     "ink_median": 1.27,
+     "ink_core_ring": 10.09,
+     "ground_swing": 9.51,
+     "ground_lum": 0.0403,
+     "ground_lum_ring": 0.8032
+    },
+    {
+     "box": [
+      996,
+      1575,
+      235,
+      28
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.12,
+     "ink_median": 1.01,
+     "ink_core_ring": 1.64,
+     "ground_swing": 1.45,
+     "ground_lum": 0.5935,
+     "ground_lum_ring": 0.8953
+    },
+    {
+     "box": [
+      133,
+      2733,
+      217,
+      143
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.16,
+     "ink_median": 1.19,
+     "ink_core_ring": 10.77,
+     "ground_swing": 9.38,
+     "ground_lum": 0.0523,
+     "ground_lum_ring": 0.9018
+    },
+    {
+     "box": [
+      241,
+      632,
+      143,
+      45
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.25,
+     "ink_median": 1.17,
+     "ink_core_ring": 1.45,
+     "ground_swing": 1.2,
+     "ground_lum": 0.7184,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      1207,
+      1307,
+      122,
+      40
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.26,
+     "ink_median": 1.17,
+     "ink_core_ring": 1.51,
+     "ground_swing": 1.2,
+     "ground_lum": 0.753,
+     "ground_lum_ring": 0.9102
+    },
+    {
+     "box": [
+      1348,
+      2781,
+      41,
+      20
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.5,
+     "ink_median": 1.09,
+     "ink_core_ring": 5.18,
+     "ground_swing": 3.62,
+     "ground_lum": 0.1909,
+     "ground_lum_ring": 0.7816
+    },
+    {
+     "box": [
+      556,
+      2797,
+      132,
+      55
+     ],
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.88,
+     "ink_median": 1.88,
+     "ink_core_ring": 7.81,
+     "ground_swing": 4.16,
+     "ground_lum": 0.1597,
+     "ground_lum_ring": 0.8212
+    },
+    {
+     "box": [
+      358,
+      386,
+      413,
+      44
+     ],
+     "glyphs": 16,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.71,
+     "ink_median": 1.78,
+     "ink_core_ring": 7.67,
+     "ground_swing": 2.85,
+     "ground_lum": 0.2521,
+     "ground_lum_ring": 0.8054
+    },
+    {
+     "box": [
+      356,
+      72,
+      822,
+      52
+     ],
+     "glyphs": 26,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.03,
+     "ink_median": 1.83,
+     "ink_core_ring": 7.75,
+     "ground_swing": 2.59,
+     "ground_lum": 0.2868,
+     "ground_lum_ring": 0.8111
+    },
+    {
+     "box": [
+      917,
+      2736,
+      173,
+      20
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.1,
+     "ink_median": 1.24,
+     "ink_core_ring": 3.94,
+     "ground_swing": 1.27,
+     "ground_lum": 0.6797,
+     "ground_lum_ring": 0.8774
+    },
+    {
+     "box": [
+      239,
+      2235,
+      127,
+      39
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.27,
+     "ink_median": 1.44,
+     "ink_core_ring": 4.4,
+     "ground_swing": 1.47,
+     "ground_lum": 0.5813,
+     "ground_lum_ring": 0.7988
+    },
+    {
+     "box": [
+      601,
+      1727,
+      69,
+      32
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.35,
+     "ink_median": 3.35,
+     "ink_core_ring": 4.55,
+     "ground_swing": 1.36,
+     "ground_lum": 0.608,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      374,
+      1727,
+      186,
+      40
+     ],
+     "glyphs": 7,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.4,
+     "ink_median": 3.4,
+     "ink_core_ring": 4.53,
+     "ground_swing": 1.34,
+     "ground_lum": 0.6177,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      533,
+      1994,
+      262,
+      39
+     ],
+     "glyphs": 10,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.74,
+     "ink_median": 3.74,
+     "ink_core_ring": 4.55,
+     "ground_swing": 1.22,
+     "ground_lum": 0.6834,
+     "ground_lum_ring": 0.8428
+    },
+    {
+     "box": [
+      768,
+      2582,
+      218,
+      39
+     ],
+     "glyphs": 8,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.79,
+     "ink_median": 3.79,
+     "ink_core_ring": 3.79,
+     "ground_swing": 1.1,
+     "ground_lum": 0.839,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      238,
+      503,
+      988,
+      129
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 3.95,
+     "ink_median": 1.05,
+     "ink_core_ring": 5.42,
+     "ground_swing": 1.39,
+     "ground_lum": 0.6273,
+     "ground_lum_ring": 0.8801
+    },
+    {
+     "box": [
+      249,
+      1011,
+      426,
+      58
+     ],
+     "glyphs": 7,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 4.09,
+     "ink_median": 3.31,
+     "ink_core_ring": 4.89,
+     "ground_swing": 1.21,
+     "ground_lum": 0.6926,
+     "ground_lum_ring": 0.839
+    },
+    {
+     "box": [
+      413,
+      2241,
+      739,
+      39
+     ],
+     "glyphs": 17,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 4.45,
+     "ink_median": 4.38,
+     "ink_core_ring": 4.45,
+     "ground_swing": 1.02,
+     "ground_lum": 0.7946,
+     "ground_lum_ring": 0.7946
+    }
+   ]
+  },
+  "14_media_viewer.png": {
+   "runs": 26,
+   "below_floor": 16,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.01,
+   "median_ink_core": 2.46,
+   "median_as_rendered": 2.06,
+   "detail": [
+    {
+     "box": [
+      381,
+      953,
+      122,
+      18
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.01,
+     "ink_median": 1.04,
+     "ink_core_ring": 2.03,
+     "ground_swing": 1.93,
+     "ground_lum": 0.0194,
+     "ground_lum_ring": 0.0888
+    },
+    {
+     "box": [
+      668,
+      1010,
+      285,
+      71
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.01,
+     "ink_median": 1.28,
+     "ink_core_ring": 11.49,
+     "ground_swing": 11.59,
+     "ground_lum": 0.022,
+     "ground_lum_ring": 0.7688
+    },
+    {
+     "box": [
+      1392,
+      1938,
+      41,
+      69
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.01,
+     "ink_median": 1.09,
+     "ink_core_ring": 3.27,
+     "ground_swing": 3.2,
+     "ground_lum": 0.0413,
+     "ground_lum_ring": 0.2464
+    },
+    {
+     "box": [
+      45,
+      865,
+      276,
+      136
+     ],
+     "glyphs": 4,
+     "polarity": "light",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.03,
+     "ink_median": 1.24,
+     "ink_core_ring": 3.33,
+     "ground_swing": 3.61,
+     "ground_lum": 0.163,
+     "ground_lum_ring": 0.0157
+    },
+    {
+     "box": [
+      624,
+      1072,
+      303,
+      73
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "large",
+     "floor": 4.0,
+     "ink_core": 1.04,
+     "ink_median": 1.23,
+     "ink_core_ring": 11.45,
+     "ground_swing": 11.18,
+     "ground_lum": 0.0246,
+     "ground_lum_ring": 0.7688
+    },
+    {
+     "box": [
+      979,
+      967,
+      322,
+      42
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.05,
+     "ink_median": 1.02,
+     "ink_core_ring": 1.75,
+     "ground_swing": 1.69,
+     "ground_lum": 0.4467,
+     "ground_lum_ring": 0.7778
+    },
+    {
+     "box": [
+      461,
+      571,
+      59,
+      19
+     ],
+     "glyphs": 1,
+     "polarity": "light",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.05,
+     "ink_median": 1.06,
+     "ink_core_ring": 2.18,
+     "ground_swing": 2.35,
+     "ground_lum": 0.1383,
+     "ground_lum_ring": 0.0406
+    },
+    {
+     "box": [
+      667,
+      1160,
+      147,
+      37
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.07,
+     "ink_median": 1.01,
+     "ink_core_ring": 3.96,
+     "ground_swing": 6.29,
+     "ground_lum": 0.0333,
+     "ground_lum_ring": 0.2588
+    },
+    {
+     "box": [
+      770,
+      731,
+      177,
+      37
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.19,
+     "ink_median": 1.06,
+     "ink_core_ring": 2.47,
+     "ground_swing": 2.21,
+     "ground_lum": 0.2858,
+     "ground_lum_ring": 0.6492
+    },
+    {
+     "box": [
+      58,
+      1948,
+      410,
+      45
+     ],
+     "glyphs": 1,
+     "polarity": "light",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.2,
+     "ink_median": 1.04,
+     "ink_core_ring": 2.62,
+     "ground_swing": 2.29,
+     "ground_lum": 0.1044,
+     "ground_lum_ring": 0.0206
+    },
+    {
+     "box": [
+      70,
+      980,
+      51,
+      20
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.9,
+     "ink_median": 1.86,
+     "ink_core_ring": 1.9,
+     "ground_swing": 1.83,
+     "ground_lum": 0.0803,
+     "ground_lum_ring": 0.0803
+    },
+    {
+     "box": [
+      666,
+      1284,
+      112,
+      35
+     ],
+     "glyphs": 1,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.23,
+     "ink_median": 1.73,
+     "ink_core_ring": 9.64,
+     "ground_swing": 4.36,
+     "ground_lum": 0.1148,
+     "ground_lum_ring": 0.6613
+    },
+    {
+     "box": [
+      659,
+      1196,
+      93,
+      27
+     ],
+     "glyphs": 1,
+     "polarity": "light",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.33,
+     "ink_median": 2.02,
+     "ink_core_ring": 2.33,
+     "ground_swing": 2.45,
+     "ground_lum": 0.0265,
+     "ground_lum_ring": 0.0265
+    },
+    {
+     "box": [
+      255,
+      1984,
+      500,
+      27
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.6,
+     "ink_median": 2.45,
+     "ink_core_ring": 2.6,
+     "ground_swing": 2.36,
+     "ground_lum": 0.1353,
+     "ground_lum_ring": 0.1353
+    },
+    {
+     "box": [
+      640,
+      1134,
+      129,
+      25
+     ],
+     "glyphs": 1,
+     "polarity": "light",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.66,
+     "ink_median": 2.11,
+     "ink_core_ring": 2.66,
+     "ground_swing": 2.8,
+     "ground_lum": 0.035,
+     "ground_lum_ring": 0.035
+    },
+    {
+     "box": [
+      568,
+      1948,
+      215,
+      38
+     ],
+     "glyphs": 1,
+     "polarity": "light",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.86,
+     "ink_median": 2.68,
+     "ink_core_ring": 2.86,
+     "ground_swing": 3.0,
+     "ground_lum": 0.0254,
+     "ground_lum_ring": 0.0254
+    }
+   ]
+  },
+  "17_setup_pwa.png": {
+   "runs": 93,
+   "below_floor": 3,
+   "text_runs": "found-by-shape",
+   "declared_lines": null,
+   "marks_outside_text": null,
+   "worst_ink_core": 1.07,
+   "median_ink_core": 8.07,
+   "median_as_rendered": 8.07,
+   "detail": [
+    {
+     "box": [
+      1040,
+      529,
+      28,
+      49
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.07,
+     "ink_median": 1.03,
+     "ink_core_ring": 1.46,
+     "ground_swing": 1.36,
+     "ground_lum": 0.6111,
+     "ground_lum_ring": 0.8494
+    },
+    {
+     "box": [
+      347,
+      546,
+      50,
+      30
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.12,
+     "ink_median": 1.08,
+     "ink_core_ring": 1.5,
+     "ground_swing": 1.34,
+     "ground_lum": 0.6222,
+     "ground_lum_ring": 0.8494
+    },
+    {
+     "box": [
+      709,
+      592,
+      61,
+      56
+     ],
+     "glyphs": 2,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.15,
+     "ink_median": 1.09,
+     "ink_core_ring": 1.44,
+     "ground_swing": 1.25,
+     "ground_lum": 0.6696,
+     "ground_lum_ring": 0.8494
+    }
+   ]
+  }
+ },
+ "failures": [
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1211,
+    2900,
+    59,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.0,
+   "ink_median": 1.35,
+   "floor": 4.5,
+   "ink_core_ring": 9.77,
+   "ground_swing": 9.74
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    706,
+    1569,
+    39,
+    21
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.0,
+   "ink_median": 1.04,
+   "floor": 4.5,
+   "ink_core_ring": 1.55,
+   "ground_swing": 1.54
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    833,
+    1102,
+    65,
+    41
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.01,
+   "ink_median": 1.16,
+   "floor": 4.5,
+   "ink_core_ring": 1.56,
+   "ground_swing": 1.56
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    637,
+    1742,
+    88,
+    35
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.01,
+   "ink_median": 1.16,
+   "floor": 4.5,
+   "ink_core_ring": 1.56,
+   "ground_swing": 1.56
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    28,
+    2233,
+    44,
+    141
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.01,
+   "ink_median": 1.35,
+   "floor": 4.0,
+   "ink_core_ring": 9.88,
+   "ground_swing": 9.94
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    439,
+    1568,
+    102,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.01,
+   "ink_median": 1.02,
+   "floor": 4.5,
+   "ink_core_ring": 1.53,
+   "ground_swing": 1.57
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    381,
+    953,
+    122,
+    18
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.01,
+   "ink_median": 1.04,
+   "floor": 4.5,
+   "ink_core_ring": 2.03,
+   "ground_swing": 1.93
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    668,
+    1010,
+    285,
+    71
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.01,
+   "ink_median": 1.28,
+   "floor": 4.5,
+   "ink_core_ring": 11.49,
+   "ground_swing": 11.59
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    1392,
+    1938,
+    41,
+    69
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.01,
+   "ink_median": 1.09,
+   "floor": 4.5,
+   "ink_core_ring": 3.27,
+   "ground_swing": 3.2
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    95,
+    720,
+    314,
+    57
+   ],
+   "role": "body",
+   "polarity": "light",
+   "ink_core": 1.02,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 3.22,
+   "ground_swing": 3.42
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1412,
+    2339,
+    26,
+    100
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.02,
+   "ink_median": 1.54,
+   "floor": 4.0,
+   "ink_core_ring": 5.12,
+   "ground_swing": 7.2
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    27,
+    507,
+    365,
+    130
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.02,
+   "ink_median": 1.32,
+   "floor": 4.0,
+   "ink_core_ring": 10.28,
+   "ground_swing": 10.19
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    21,
+    23,
+    44,
+    70
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.03,
+   "ink_median": 1.37,
+   "floor": 4.5,
+   "ink_core_ring": 8.14,
+   "ground_swing": 8.79
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    21,
+    23,
+    44,
+    70
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.03,
+   "ink_median": 1.37,
+   "floor": 4.5,
+   "ink_core_ring": 8.14,
+   "ground_swing": 8.79
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    438,
+    1543,
+    185,
+    51
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.03,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 1.62,
+   "ground_swing": 1.57
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    21,
+    23,
+    44,
+    70
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.03,
+   "ink_median": 1.37,
+   "floor": 4.5,
+   "ink_core_ring": 8.14,
+   "ground_swing": 8.79
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    21,
+    23,
+    44,
+    70
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.03,
+   "ink_median": 1.37,
+   "floor": 4.5,
+   "ink_core_ring": 8.14,
+   "ground_swing": 8.79
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    167,
+    833,
+    44,
+    19
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.03,
+   "ink_median": 1.02,
+   "floor": 4.5,
+   "ink_core_ring": 3.15,
+   "ground_swing": 2.9
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    21,
+    23,
+    44,
+    70
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.03,
+   "ink_median": 1.37,
+   "floor": 4.5,
+   "ink_core_ring": 8.14,
+   "ground_swing": 8.79
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    599,
+    538,
+    48,
+    53
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.03,
+   "ink_median": 1.0,
+   "floor": 4.5,
+   "ink_core_ring": 1.57,
+   "ground_swing": 1.54
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    21,
+    23,
+    44,
+    70
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.03,
+   "ink_median": 1.37,
+   "floor": 4.5,
+   "ink_core_ring": 8.14,
+   "ground_swing": 8.79
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    45,
+    865,
+    276,
+    136
+   ],
+   "role": "large",
+   "polarity": "light",
+   "ink_core": 1.03,
+   "ink_median": 1.24,
+   "floor": 4.0,
+   "ink_core_ring": 3.33,
+   "ground_swing": 3.61
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    517,
+    869,
+    84,
+    25
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.04,
+   "ink_median": 1.0,
+   "floor": 4.5,
+   "ink_core_ring": 1.51,
+   "ground_swing": 1.46
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    581,
+    1553,
+    27,
+    45
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.04,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 1.61,
+   "ground_swing": 1.52
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    235,
+    42,
+    42,
+    18
+   ],
+   "role": "body",
+   "polarity": "light",
+   "ink_core": 1.04,
+   "ink_median": 2.48,
+   "floor": 4.5,
+   "ink_core_ring": 8.2,
+   "ground_swing": 9.45
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    624,
+    1072,
+    303,
+    73
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.04,
+   "ink_median": 1.23,
+   "floor": 4.0,
+   "ink_core_ring": 11.45,
+   "ground_swing": 11.18
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    646,
+    1550,
+    21,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.05,
+   "ink_median": 1.0,
+   "floor": 4.5,
+   "ink_core_ring": 1.59,
+   "ground_swing": 1.51
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    701,
+    1556,
+    148,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.05,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 1.52,
+   "ground_swing": 1.44
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    788,
+    2159,
+    30,
+    30
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.05,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 1.44,
+   "ground_swing": 1.38
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1150,
+    2900,
+    55,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.05,
+   "ink_median": 1.29,
+   "floor": 4.5,
+   "ink_core_ring": 9.92,
+   "ground_swing": 9.48
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    111,
+    2610,
+    237,
+    18
+   ],
+   "role": "body",
+   "polarity": "light",
+   "ink_core": 1.05,
+   "ink_median": 1.49,
+   "floor": 4.5,
+   "ink_core_ring": 9.7,
+   "ground_swing": 10.0
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    1291,
+    993,
+    34,
+    28
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.05,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 1.47,
+   "ground_swing": 1.41
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    979,
+    967,
+    322,
+    42
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.05,
+   "ink_median": 1.02,
+   "floor": 4.5,
+   "ink_core_ring": 1.75,
+   "ground_swing": 1.69
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    461,
+    571,
+    59,
+    19
+   ],
+   "role": "body",
+   "polarity": "light",
+   "ink_core": 1.05,
+   "ink_median": 1.06,
+   "floor": 4.5,
+   "ink_core_ring": 2.18,
+   "ground_swing": 2.35
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    652,
+    239,
+    28,
+    30
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.06,
+   "ink_median": 1.03,
+   "floor": 4.5,
+   "ink_core_ring": 1.57,
+   "ground_swing": 1.49
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    1270,
+    819,
+    43,
+    25
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.06,
+   "ink_median": 1.02,
+   "floor": 4.5,
+   "ink_core_ring": 1.53,
+   "ground_swing": 1.46
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    652,
+    239,
+    28,
+    30
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.06,
+   "ink_median": 1.03,
+   "floor": 4.5,
+   "ink_core_ring": 1.57,
+   "ground_swing": 1.49
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    76,
+    319,
+    404,
+    114
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.06,
+   "ink_median": 1.29,
+   "floor": 4.0,
+   "ink_core_ring": 10.42,
+   "ground_swing": 9.94
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    652,
+    239,
+    28,
+    30
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.06,
+   "ink_median": 1.03,
+   "floor": 4.5,
+   "ink_core_ring": 1.57,
+   "ground_swing": 1.49
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    1288,
+    1062,
+    41,
+    28
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.06,
+   "ink_median": 1.02,
+   "floor": 4.5,
+   "ink_core_ring": 1.38,
+   "ground_swing": 1.31
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    123,
+    73,
+    230,
+    101
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.07,
+   "ink_median": 1.27,
+   "floor": 4.0,
+   "ink_core_ring": 10.09,
+   "ground_swing": 9.51
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    123,
+    73,
+    230,
+    101
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.07,
+   "ink_median": 1.27,
+   "floor": 4.0,
+   "ink_core_ring": 10.09,
+   "ground_swing": 9.51
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    123,
+    73,
+    230,
+    101
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.07,
+   "ink_median": 1.27,
+   "floor": 4.0,
+   "ink_core_ring": 10.09,
+   "ground_swing": 9.51
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    123,
+    73,
+    230,
+    101
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.07,
+   "ink_median": 1.27,
+   "floor": 4.0,
+   "ink_core_ring": 10.09,
+   "ground_swing": 9.51
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    123,
+    73,
+    230,
+    101
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.07,
+   "ink_median": 1.27,
+   "floor": 4.0,
+   "ink_core_ring": 10.09,
+   "ground_swing": 9.51
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    696,
+    427,
+    264,
+    25
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.07,
+   "ink_median": 1.82,
+   "floor": 4.5,
+   "ink_core_ring": 15.16,
+   "ground_swing": 14.2
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    123,
+    73,
+    230,
+    101
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.07,
+   "ink_median": 1.27,
+   "floor": 4.0,
+   "ink_core_ring": 10.09,
+   "ground_swing": 9.51
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    667,
+    1160,
+    147,
+    37
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.07,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 3.96,
+   "ground_swing": 6.29
+  },
+  {
+   "artifact": "17_setup_pwa.png",
+   "box": [
+    1040,
+    529,
+    28,
+    49
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.07,
+   "ink_median": 1.03,
+   "floor": 4.5,
+   "ink_core_ring": 1.46,
+   "ground_swing": 1.36
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    872,
+    1094,
+    64,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.08,
+   "ink_median": 1.04,
+   "floor": 4.5,
+   "ink_core_ring": 1.37,
+   "ground_swing": 1.27
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    1231,
+    1307,
+    98,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.09,
+   "ink_median": 1.03,
+   "floor": 4.5,
+   "ink_core_ring": 1.52,
+   "ground_swing": 1.41
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    857,
+    708,
+    51,
+    67
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.09,
+   "ink_median": 1.04,
+   "floor": 4.5,
+   "ink_core_ring": 1.47,
+   "ground_swing": 1.36
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    1066,
+    1090,
+    70,
+    22
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.09,
+   "ink_median": 1.03,
+   "floor": 4.5,
+   "ink_core_ring": 1.39,
+   "ground_swing": 1.28
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    736,
+    2159,
+    16,
+    30
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.09,
+   "ink_median": 1.07,
+   "floor": 4.5,
+   "ink_core_ring": 1.41,
+   "ground_swing": 1.29
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    95,
+    427,
+    217,
+    25
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.09,
+   "ink_median": 1.86,
+   "floor": 4.5,
+   "ink_core_ring": 15.79,
+   "ground_swing": 14.54
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    441,
+    1172,
+    128,
+    25
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.1,
+   "ink_median": 1.04,
+   "floor": 4.5,
+   "ink_core_ring": 1.41,
+   "ground_swing": 1.27
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    39,
+    1288,
+    441,
+    145
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.1,
+   "ink_median": 2.69,
+   "floor": 4.0,
+   "ink_core_ring": 8.61,
+   "ground_swing": 7.8
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    437,
+    786,
+    54,
+    41
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.1,
+   "ink_median": 1.1,
+   "floor": 4.5,
+   "ink_core_ring": 7.77,
+   "ground_swing": 7.06
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    415,
+    1501,
+    213,
+    60
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.1,
+   "ink_median": 1.05,
+   "floor": 4.5,
+   "ink_core_ring": 1.47,
+   "ground_swing": 1.34
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    428,
+    427,
+    151,
+    25
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.1,
+   "ink_median": 1.83,
+   "floor": 4.5,
+   "ink_core_ring": 15.75,
+   "ground_swing": 14.3
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    101,
+    604,
+    665,
+    118
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.12,
+   "ink_median": 1.07,
+   "floor": 4.0,
+   "ink_core_ring": 1.47,
+   "ground_swing": 1.32
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    73,
+    1596,
+    118,
+    35
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.12,
+   "ink_median": 1.07,
+   "floor": 4.5,
+   "ink_core_ring": 1.43,
+   "ground_swing": 1.28
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    1410,
+    3054,
+    18,
+    66
+   ],
+   "role": "body",
+   "polarity": "light",
+   "ink_core": 1.12,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 2.18,
+   "ground_swing": 2.01
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    996,
+    1575,
+    235,
+    28
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.12,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 1.64,
+   "ground_swing": 1.45
+  },
+  {
+   "artifact": "17_setup_pwa.png",
+   "box": [
+    347,
+    546,
+    50,
+    30
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.12,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 1.5,
+   "ground_swing": 1.34
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    121,
+    2601,
+    160,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.13,
+   "ink_median": 1.07,
+   "floor": 4.5,
+   "ink_core_ring": 1.47,
+   "ground_swing": 1.31
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    809,
+    1512,
+    125,
+    34
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.13,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 1.48,
+   "ground_swing": 1.31
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    123,
+    1545,
+    133,
+    28
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.14,
+   "ink_median": 1.06,
+   "floor": 4.5,
+   "ink_core_ring": 1.48,
+   "ground_swing": 1.32
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    304,
+    1513,
+    66,
+    51
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.14,
+   "ink_median": 1.07,
+   "floor": 4.5,
+   "ink_core_ring": 1.51,
+   "ground_swing": 1.33
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    201,
+    2735,
+    149,
+    141
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.15,
+   "ink_median": 1.21,
+   "floor": 4.0,
+   "ink_core_ring": 10.78,
+   "ground_swing": 9.44
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    469,
+    1217,
+    140,
+    41
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.15,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 1.41,
+   "ground_swing": 1.23
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    126,
+    1788,
+    86,
+    41
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.15,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 1.46,
+   "ground_swing": 1.27
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    157,
+    785,
+    274,
+    42
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.15,
+   "ink_median": 1.15,
+   "floor": 4.5,
+   "ink_core_ring": 7.81,
+   "ground_swing": 6.77
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    247,
+    1531,
+    26,
+    22
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.15,
+   "ink_median": 1.05,
+   "floor": 4.5,
+   "ink_core_ring": 1.56,
+   "ground_swing": 1.36
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    230,
+    1422,
+    62,
+    20
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.15,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 1.45,
+   "ground_swing": 1.26
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    201,
+    2735,
+    149,
+    141
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.15,
+   "ink_median": 1.2,
+   "floor": 4.0,
+   "ink_core_ring": 10.18,
+   "ground_swing": 8.83
+  },
+  {
+   "artifact": "17_setup_pwa.png",
+   "box": [
+    709,
+    592,
+    61,
+    56
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.15,
+   "ink_median": 1.09,
+   "floor": 4.5,
+   "ink_core_ring": 1.44,
+   "ground_swing": 1.25
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    1018,
+    710,
+    43,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.16,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 1.54,
+   "ground_swing": 1.32
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    77,
+    801,
+    84,
+    31
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.16,
+   "ink_median": 1.1,
+   "floor": 4.5,
+   "ink_core_ring": 1.45,
+   "ground_swing": 1.26
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    767,
+    1485,
+    32,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.16,
+   "ink_median": 1.06,
+   "floor": 4.5,
+   "ink_core_ring": 1.52,
+   "ground_swing": 1.32
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1045,
+    1524,
+    118,
+    35
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.16,
+   "ink_median": 1.06,
+   "floor": 4.5,
+   "ink_core_ring": 1.52,
+   "ground_swing": 1.31
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    133,
+    2733,
+    217,
+    143
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.16,
+   "ink_median": 1.19,
+   "floor": 4.0,
+   "ink_core_ring": 10.77,
+   "ground_swing": 9.38
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    937,
+    1524,
+    99,
+    51
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.17,
+   "ink_median": 1.05,
+   "floor": 4.5,
+   "ink_core_ring": 1.58,
+   "ground_swing": 1.36
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1007,
+    2897,
+    28,
+    23
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.17,
+   "ink_median": 1.01,
+   "floor": 4.5,
+   "ink_core_ring": 2.85,
+   "ground_swing": 2.43
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    1193,
+    675,
+    29,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.18,
+   "ink_median": 1.07,
+   "floor": 4.5,
+   "ink_core_ring": 1.55,
+   "ground_swing": 1.32
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    906,
+    2858,
+    286,
+    43
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.18,
+   "ink_median": 1.07,
+   "floor": 4.5,
+   "ink_core_ring": 1.53,
+   "ground_swing": 1.3
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    73,
+    1085,
+    63,
+    19
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.18,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 1.43,
+   "ground_swing": 1.22
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1201,
+    1524,
+    53,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.18,
+   "ink_median": 1.09,
+   "floor": 4.5,
+   "ink_core_ring": 1.52,
+   "ground_swing": 1.3
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    770,
+    731,
+    177,
+    37
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.19,
+   "ink_median": 1.06,
+   "floor": 4.5,
+   "ink_core_ring": 2.47,
+   "ground_swing": 2.21
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    58,
+    1948,
+    410,
+    45
+   ],
+   "role": "body",
+   "polarity": "light",
+   "ink_core": 1.2,
+   "ink_median": 1.04,
+   "floor": 4.5,
+   "ink_core_ring": 2.62,
+   "ground_swing": 2.29
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    122,
+    2401,
+    133,
+    56
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.21,
+   "ink_median": 1.13,
+   "floor": 4.5,
+   "ink_core_ring": 1.48,
+   "ground_swing": 1.22
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    612,
+    2159,
+    97,
+    29
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.22,
+   "ink_median": 1.17,
+   "floor": 4.5,
+   "ink_core_ring": 1.53,
+   "ground_swing": 1.26
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    1273,
+    2866,
+    76,
+    26
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.23,
+   "ink_median": 1.11,
+   "floor": 4.5,
+   "ink_core_ring": 1.56,
+   "ground_swing": 1.27
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    401,
+    741,
+    122,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.25,
+   "ink_median": 1.19,
+   "floor": 4.5,
+   "ink_core_ring": 4.65,
+   "ground_swing": 3.73
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    186,
+    2866,
+    88,
+    31
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.25,
+   "ink_median": 1.13,
+   "floor": 4.5,
+   "ink_core_ring": 1.53,
+   "ground_swing": 1.23
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    36,
+    43,
+    237,
+    163
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.25,
+   "ink_median": 1.18,
+   "floor": 4.0,
+   "ink_core_ring": 12.8,
+   "ground_swing": 10.35
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    241,
+    632,
+    143,
+    45
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.25,
+   "ink_median": 1.17,
+   "floor": 4.5,
+   "ink_core_ring": 1.45,
+   "ground_swing": 1.2
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    1154,
+    332,
+    195,
+    74
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.26,
+   "ink_median": 1.07,
+   "floor": 4.0,
+   "ink_core_ring": 9.77,
+   "ground_swing": 7.74
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    1207,
+    1307,
+    122,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.26,
+   "ink_median": 1.17,
+   "floor": 4.5,
+   "ink_core_ring": 1.51,
+   "ground_swing": 1.2
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    927,
+    698,
+    28,
+    23
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.28,
+   "ink_median": 1.04,
+   "floor": 4.5,
+   "ink_core_ring": 1.76,
+   "ground_swing": 1.39
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    1349,
+    143,
+    51,
+    22
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.3,
+   "ink_median": 1.23,
+   "floor": 4.5,
+   "ink_core_ring": 11.5,
+   "ground_swing": 9.17
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    270,
+    1995,
+    64,
+    28
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.31,
+   "ink_median": 1.07,
+   "floor": 4.5,
+   "ink_core_ring": 1.72,
+   "ground_swing": 1.33
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    820,
+    1546,
+    488,
+    132
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.34,
+   "ink_median": 1.34,
+   "floor": 4.0,
+   "ink_core_ring": 14.97,
+   "ground_swing": 11.2
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    320,
+    359,
+    126,
+    172
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.37,
+   "ink_median": 1.08,
+   "floor": 4.0,
+   "ink_core_ring": 11.62,
+   "ground_swing": 8.59
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    238,
+    1882,
+    1014,
+    63
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.38,
+   "ink_median": 1.03,
+   "floor": 4.5,
+   "ink_core_ring": 5.78,
+   "ground_swing": 4.23
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    756,
+    352,
+    632,
+    71
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.4,
+   "ink_median": 1.1,
+   "floor": 4.5,
+   "ink_core_ring": 9.85,
+   "ground_swing": 7.07
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    46,
+    1236,
+    185,
+    155
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.43,
+   "ink_median": 1.0,
+   "floor": 4.0,
+   "ink_core_ring": 10.49,
+   "ground_swing": 7.31
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    869,
+    1541,
+    105,
+    37
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.44,
+   "ink_median": 1.32,
+   "floor": 4.5,
+   "ink_core_ring": 1.44,
+   "ground_swing": 1.1
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    517,
+    336,
+    409,
+    75
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.44,
+   "ink_median": 1.02,
+   "floor": 4.0,
+   "ink_core_ring": 10.14,
+   "ground_swing": 7.08
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    736,
+    1587,
+    92,
+    22
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.45,
+   "ink_median": 1.33,
+   "floor": 4.5,
+   "ink_core_ring": 1.45,
+   "ground_swing": 1.08
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    118,
+    2519,
+    143,
+    35
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.46,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 1.88,
+   "ground_swing": 1.29
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    1348,
+    2781,
+    41,
+    20
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.5,
+   "ink_median": 1.09,
+   "floor": 4.5,
+   "ink_core_ring": 5.18,
+   "ground_swing": 3.62
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    1348,
+    2781,
+    41,
+    20
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.5,
+   "ink_median": 1.1,
+   "floor": 4.5,
+   "ink_core_ring": 5.31,
+   "ground_swing": 3.58
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    1348,
+    2781,
+    41,
+    20
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.5,
+   "ink_median": 1.09,
+   "floor": 4.5,
+   "ink_core_ring": 5.18,
+   "ground_swing": 3.62
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    340,
+    1974,
+    566,
+    59
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.53,
+   "ink_median": 1.13,
+   "floor": 4.5,
+   "ink_core_ring": 1.96,
+   "ground_swing": 1.29
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    93,
+    1855,
+    20,
+    46
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.54,
+   "ink_median": 1.19,
+   "floor": 4.5,
+   "ink_core_ring": 2.0,
+   "ground_swing": 1.31
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    80,
+    1526,
+    48,
+    79
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 1.55,
+   "ink_median": 1.1,
+   "floor": 4.0,
+   "ink_core_ring": 2.0,
+   "ground_swing": 1.3
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    457,
+    2170,
+    651,
+    60
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.61,
+   "ink_median": 1.39,
+   "floor": 4.5,
+   "ink_core_ring": 1.61,
+   "ground_swing": 1.1
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    986,
+    2634,
+    50,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.63,
+   "ink_median": 1.11,
+   "floor": 4.5,
+   "ink_core_ring": 2.42,
+   "ground_swing": 1.49
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    981,
+    1982,
+    80,
+    29
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.65,
+   "ink_median": 1.24,
+   "floor": 4.5,
+   "ink_core_ring": 2.15,
+   "ground_swing": 1.3
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    666,
+    1175,
+    37,
+    18
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.67,
+   "ink_median": 1.14,
+   "floor": 4.5,
+   "ink_core_ring": 2.04,
+   "ground_swing": 1.22
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    800,
+    1258,
+    61,
+    20
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.7,
+   "ink_median": 1.11,
+   "floor": 4.5,
+   "ink_core_ring": 2.11,
+   "ground_swing": 1.24
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    156,
+    1399,
+    198,
+    69
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.71,
+   "ink_median": 1.46,
+   "floor": 4.5,
+   "ink_core_ring": 11.73,
+   "ground_swing": 7.16
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    1041,
+    1251,
+    60,
+    19
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.71,
+   "ink_median": 1.32,
+   "floor": 4.5,
+   "ink_core_ring": 1.71,
+   "ground_swing": 1.19
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    157,
+    680,
+    508,
+    55
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.77,
+   "ink_median": 1.77,
+   "floor": 4.5,
+   "ink_core_ring": 9.42,
+   "ground_swing": 5.34
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    97,
+    1708,
+    21,
+    54
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.8,
+   "ink_median": 1.18,
+   "floor": 4.5,
+   "ink_core_ring": 2.26,
+   "ground_swing": 1.3
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    495,
+    1115,
+    306,
+    23
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.82,
+   "ink_median": 1.34,
+   "floor": 4.5,
+   "ink_core_ring": 1.82,
+   "ground_swing": 1.04
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    273,
+    2495,
+    36,
+    28
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.82,
+   "ink_median": 1.77,
+   "floor": 4.5,
+   "ink_core_ring": 7.74,
+   "ground_swing": 4.28
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    358,
+    1259,
+    50,
+    18
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.83,
+   "ink_median": 1.07,
+   "floor": 4.5,
+   "ink_core_ring": 2.38,
+   "ground_swing": 1.3
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    739,
+    2038,
+    69,
+    35
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.85,
+   "ink_median": 1.0,
+   "floor": 4.5,
+   "ink_core_ring": 14.88,
+   "ground_swing": 8.04
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    708,
+    2578,
+    169,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.85,
+   "ink_median": 1.85,
+   "floor": 4.5,
+   "ink_core_ring": 2.42,
+   "ground_swing": 1.32
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1151,
+    2582,
+    120,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.87,
+   "ink_median": 1.85,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.31
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    556,
+    2797,
+    132,
+    55
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.88,
+   "ink_median": 1.88,
+   "floor": 4.5,
+   "ink_core_ring": 7.81,
+   "ground_swing": 4.16
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    556,
+    2797,
+    132,
+    55
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.88,
+   "ink_median": 1.88,
+   "floor": 4.5,
+   "ink_core_ring": 7.81,
+   "ground_swing": 4.16
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    556,
+    2797,
+    132,
+    55
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.88,
+   "ink_median": 1.88,
+   "floor": 4.5,
+   "ink_core_ring": 7.81,
+   "ground_swing": 4.16
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    707,
+    2650,
+    170,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.89,
+   "ink_median": 1.89,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.29
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    70,
+    980,
+    51,
+    20
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.9,
+   "ink_median": 1.86,
+   "floor": 4.5,
+   "ink_core_ring": 1.9,
+   "ground_swing": 1.83
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    476,
+    2039,
+    694,
+    50
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.92,
+   "ink_median": 1.15,
+   "floor": 4.5,
+   "ink_core_ring": 2.53,
+   "ground_swing": 1.3
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1151,
+    2654,
+    120,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.93,
+   "ink_median": 1.92,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.26
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    707,
+    2722,
+    170,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.94,
+   "ink_median": 1.93,
+   "floor": 4.5,
+   "ink_core_ring": 2.43,
+   "ground_swing": 1.26
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1275,
+    2724,
+    23,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.94,
+   "ink_median": 1.93,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.26
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    707,
+    2794,
+    170,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.94,
+   "ink_median": 1.94,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.26
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1275,
+    2580,
+    24,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.95,
+   "ink_median": 1.93,
+   "floor": 4.5,
+   "ink_core_ring": 2.43,
+   "ground_swing": 1.25
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1275,
+    2652,
+    23,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.99,
+   "ink_median": 1.99,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.23
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1274,
+    2796,
+    24,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.0,
+   "ink_median": 1.98,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.22
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1276,
+    2346,
+    23,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.05,
+   "ink_median": 2.03,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.2
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    491,
+    1212,
+    453,
+    139
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 2.12,
+   "ink_median": 1.02,
+   "floor": 4.0,
+   "ink_core_ring": 5.93,
+   "ground_swing": 2.79
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    321,
+    1184,
+    50,
+    20
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.21,
+   "ink_median": 1.1,
+   "floor": 4.5,
+   "ink_core_ring": 2.87,
+   "ground_swing": 1.33
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    666,
+    1284,
+    112,
+    35
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.23,
+   "ink_median": 1.73,
+   "floor": 4.5,
+   "ink_core_ring": 9.64,
+   "ground_swing": 4.36
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    490,
+    1803,
+    287,
+    43
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.25,
+   "ink_median": 2.25,
+   "floor": 4.5,
+   "ink_core_ring": 3.01,
+   "ground_swing": 1.34
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    214,
+    2367,
+    85,
+    32
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.25,
+   "ink_median": 2.02,
+   "floor": 4.5,
+   "ink_core_ring": 4.45,
+   "ground_swing": 1.99
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    1254,
+    415,
+    67,
+    19
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.3,
+   "ink_median": 1.17,
+   "floor": 4.5,
+   "ink_core_ring": 3.31,
+   "ground_swing": 1.45
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    853,
+    1184,
+    49,
+    22
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.3,
+   "ink_median": 1.37,
+   "floor": 4.5,
+   "ink_core_ring": 2.81,
+   "ground_swing": 1.22
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    659,
+    1196,
+    93,
+    27
+   ],
+   "role": "body",
+   "polarity": "light",
+   "ink_core": 2.33,
+   "ink_median": 2.02,
+   "floor": 4.5,
+   "ink_core_ring": 2.33,
+   "ground_swing": 2.45
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    75,
+    907,
+    165,
+    68
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.35,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 3.06,
+   "ground_swing": 1.31
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    502,
+    874,
+    439,
+    47
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.41,
+   "ink_median": 1.09,
+   "floor": 4.5,
+   "ink_core_ring": 3.22,
+   "ground_swing": 1.34
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    948,
+    1823,
+    115,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.44,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.03
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    948,
+    1895,
+    369,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.44,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.06
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    962,
+    1967,
+    369,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.44,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.05
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    738,
+    2344,
+    140,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.44,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.16
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1100,
+    2591,
+    46,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.44,
+   "ink_median": 2.44,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.08
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1100,
+    2663,
+    46,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.44,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.03
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1103,
+    1824,
+    214,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.05
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    987,
+    2039,
+    342,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.43,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.06
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    709,
+    2140,
+    170,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.03
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1101,
+    2142,
+    199,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.43,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.09
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1128,
+    2348,
+    80,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.43,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.14
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1213,
+    2348,
+    59,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.19
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    708,
+    2476,
+    170,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.43,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.02
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1100,
+    2478,
+    214,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.12
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1099,
+    2735,
+    46,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.44,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.02
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1150,
+    2726,
+    121,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.15
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1099,
+    2807,
+    46,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.02
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1150,
+    2798,
+    120,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.1
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    243,
+    2650,
+    66,
+    29
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.52,
+   "ink_median": 1.29,
+   "floor": 4.5,
+   "ink_core_ring": 3.38,
+   "ground_swing": 1.34
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    913,
+    2243,
+    404,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.54,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.54,
+   "ground_swing": 1.02
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    221,
+    1101,
+    108,
+    29
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.57,
+   "ink_median": 1.31,
+   "floor": 4.5,
+   "ink_core_ring": 3.57,
+   "ground_swing": 1.39
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    284,
+    1650,
+    69,
+    23
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.57,
+   "ink_median": 1.33,
+   "floor": 4.5,
+   "ink_core_ring": 3.83,
+   "ground_swing": 1.5
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    255,
+    1984,
+    500,
+    27
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.6,
+   "ink_median": 2.45,
+   "floor": 4.5,
+   "ink_core_ring": 2.6,
+   "ground_swing": 2.36
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    640,
+    1134,
+    129,
+    25
+   ],
+   "role": "body",
+   "polarity": "light",
+   "ink_core": 2.66,
+   "ink_median": 2.11,
+   "floor": 4.5,
+   "ink_core_ring": 2.66,
+   "ground_swing": 2.8
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    358,
+    386,
+    413,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.71,
+   "ink_median": 1.78,
+   "floor": 4.5,
+   "ink_core_ring": 7.67,
+   "ground_swing": 2.85
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    1154,
+    1441,
+    54,
+    19
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.72,
+   "ink_median": 1.26,
+   "floor": 4.5,
+   "ink_core_ring": 3.73,
+   "ground_swing": 1.37
+  },
+  {
+   "artifact": "14_media_viewer.png",
+   "box": [
+    568,
+    1948,
+    215,
+    38
+   ],
+   "role": "body",
+   "polarity": "light",
+   "ink_core": 2.86,
+   "ink_median": 2.68,
+   "floor": 4.5,
+   "ink_core_ring": 2.86,
+   "ground_swing": 3.0
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    507,
+    1248,
+    83,
+    30
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.97,
+   "ink_median": 1.26,
+   "floor": 4.5,
+   "ink_core_ring": 4.04,
+   "ground_swing": 1.35
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    566,
+    1723,
+    75,
+    42
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.99,
+   "ink_median": 2.99,
+   "floor": 4.5,
+   "ink_core_ring": 2.99,
+   "ground_swing": 1.03
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    349,
+    1816,
+    107,
+    37
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.01,
+   "ink_median": 3.01,
+   "floor": 4.5,
+   "ink_core_ring": 3.01,
+   "ground_swing": 1.02
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    356,
+    72,
+    822,
+    52
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.03,
+   "ink_median": 1.83,
+   "floor": 4.5,
+   "ink_core_ring": 7.75,
+   "ground_swing": 2.59
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    356,
+    72,
+    822,
+    52
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.03,
+   "ink_median": 1.83,
+   "floor": 4.5,
+   "ink_core_ring": 7.75,
+   "ground_swing": 2.59
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    356,
+    72,
+    822,
+    52
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.03,
+   "ink_median": 1.83,
+   "floor": 4.5,
+   "ink_core_ring": 7.75,
+   "ground_swing": 2.59
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    356,
+    72,
+    822,
+    52
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.03,
+   "ink_median": 1.83,
+   "floor": 4.5,
+   "ink_core_ring": 7.75,
+   "ground_swing": 2.59
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    356,
+    72,
+    822,
+    52
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.03,
+   "ink_median": 1.83,
+   "floor": 4.5,
+   "ink_core_ring": 7.75,
+   "ground_swing": 2.59
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    356,
+    72,
+    822,
+    52
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.03,
+   "ink_median": 1.83,
+   "floor": 4.5,
+   "ink_core_ring": 7.75,
+   "ground_swing": 2.59
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    676,
+    1724,
+    86,
+    42
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.05,
+   "ink_median": 2.99,
+   "floor": 4.5,
+   "ink_core_ring": 3.05,
+   "ground_swing": 1.09
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    423,
+    1722,
+    109,
+    42
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.06,
+   "ink_median": 3.01,
+   "floor": 4.5,
+   "ink_core_ring": 3.06,
+   "ground_swing": 1.02
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    267,
+    1734,
+    154,
+    28
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.06,
+   "ink_median": 2.98,
+   "floor": 4.5,
+   "ink_core_ring": 3.06,
+   "ground_swing": 1.02
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    97,
+    1093,
+    90,
+    34
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.1,
+   "ink_median": 1.6,
+   "floor": 4.5,
+   "ink_core_ring": 4.14,
+   "ground_swing": 1.35
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    917,
+    2736,
+    173,
+    20
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.1,
+   "ink_median": 1.24,
+   "floor": 4.5,
+   "ink_core_ring": 3.94,
+   "ground_swing": 1.27
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    666,
+    1663,
+    79,
+    38
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.12,
+   "ink_median": 3.01,
+   "floor": 4.5,
+   "ink_core_ring": 3.12,
+   "ground_swing": 1.11
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    954,
+    2738,
+    136,
+    18
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.12,
+   "ink_median": 1.28,
+   "floor": 4.5,
+   "ink_core_ring": 3.98,
+   "ground_swing": 1.28
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    482,
+    2010,
+    105,
+    52
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.13,
+   "ink_median": 3.01,
+   "floor": 4.5,
+   "ink_core_ring": 3.13,
+   "ground_swing": 1.02
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    503,
+    1948,
+    374,
+    42
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.15,
+   "ink_median": 2.98,
+   "floor": 4.5,
+   "ink_core_ring": 3.15,
+   "ground_swing": 1.11
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    806,
+    1030,
+    563,
+    115
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 3.21,
+   "ink_median": 1.02,
+   "floor": 4.0,
+   "ink_core_ring": 9.78,
+   "ground_swing": 3.07
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    353,
+    2652,
+    77,
+    38
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.22,
+   "ink_median": 1.37,
+   "floor": 4.5,
+   "ink_core_ring": 4.23,
+   "ground_swing": 1.32
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    399,
+    1425,
+    167,
+    39
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.24,
+   "ink_median": 3.19,
+   "floor": 4.5,
+   "ink_core_ring": 4.47,
+   "ground_swing": 1.39
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    239,
+    2235,
+    127,
+    39
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.27,
+   "ink_median": 1.44,
+   "floor": 4.5,
+   "ink_core_ring": 4.4,
+   "ground_swing": 1.47
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    1033,
+    1068,
+    79,
+    26
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.28,
+   "ink_median": 1.92,
+   "floor": 4.5,
+   "ink_core_ring": 3.28,
+   "ground_swing": 1.05
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    954,
+    2738,
+    135,
+    18
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.34,
+   "ink_median": 1.33,
+   "floor": 4.5,
+   "ink_core_ring": 4.0,
+   "ground_swing": 1.2
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    601,
+    1727,
+    69,
+    32
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.35,
+   "ink_median": 3.35,
+   "floor": 4.5,
+   "ink_core_ring": 4.55,
+   "ground_swing": 1.36
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    776,
+    1371,
+    111,
+    56
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.37,
+   "ink_median": 2.0,
+   "floor": 4.5,
+   "ink_core_ring": 3.37,
+   "ground_swing": 1.19
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    374,
+    1727,
+    186,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.4,
+   "ink_median": 3.4,
+   "floor": 4.5,
+   "ink_core_ring": 4.53,
+   "ground_swing": 1.34
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    707,
+    1283,
+    112,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.52,
+   "ink_median": 1.96,
+   "floor": 4.5,
+   "ink_core_ring": 3.52,
+   "ground_swing": 1.14
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    333,
+    1092,
+    185,
+    43
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.58,
+   "ink_median": 1.84,
+   "floor": 4.5,
+   "ink_core_ring": 4.36,
+   "ground_swing": 1.22
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    1062,
+    1207,
+    106,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.62,
+   "ink_median": 1.56,
+   "floor": 4.5,
+   "ink_core_ring": 5.15,
+   "ground_swing": 1.41
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    381,
+    846,
+    183,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.66,
+   "ink_median": 3.66,
+   "floor": 4.5,
+   "ink_core_ring": 7.69,
+   "ground_swing": 2.11
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    1050,
+    1603,
+    133,
+    42
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.66,
+   "ink_median": 2.96,
+   "floor": 4.5,
+   "ink_core_ring": 5.31,
+   "ground_swing": 1.47
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    518,
+    1079,
+    228,
+    50
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.69,
+   "ink_median": 1.97,
+   "floor": 4.5,
+   "ink_core_ring": 4.49,
+   "ground_swing": 1.23
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    533,
+    1994,
+    262,
+    39
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.74,
+   "ink_median": 3.74,
+   "floor": 4.5,
+   "ink_core_ring": 4.55,
+   "ground_swing": 1.22
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    173,
+    760,
+    1030,
+    90
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 3.76,
+   "ink_median": 2.22,
+   "floor": 4.0,
+   "ink_core_ring": 5.02,
+   "ground_swing": 1.35
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    338,
+    923,
+    28,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.79,
+   "ink_median": 1.2,
+   "floor": 4.5,
+   "ink_core_ring": 7.67,
+   "ground_swing": 2.04
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    768,
+    2582,
+    218,
+    39
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.79,
+   "ink_median": 3.79,
+   "floor": 4.5,
+   "ink_core_ring": 3.79,
+   "ground_swing": 1.1
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    1285,
+    441,
+    64,
+    95
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 3.8,
+   "ink_median": 1.87,
+   "floor": 4.0,
+   "ink_core_ring": 4.81,
+   "ground_swing": 1.27
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    885,
+    1896,
+    185,
+    50
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.85,
+   "ink_median": 1.55,
+   "floor": 4.5,
+   "ink_core_ring": 3.85,
+   "ground_swing": 1.13
+  },
+  {
+   "artifact": "03_us.png",
+   "box": [
+    573,
+    1668,
+    130,
+    27
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.88,
+   "ink_median": 1.89,
+   "floor": 4.5,
+   "ink_core_ring": 5.02,
+   "ground_swing": 1.29
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    498,
+    497,
+    61,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.88,
+   "ink_median": 3.88,
+   "floor": 4.5,
+   "ink_core_ring": 3.88,
+   "ground_swing": 1.1
+  },
+  {
+   "artifact": "04_moments.png",
+   "box": [
+    703,
+    495,
+    51,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.91,
+   "ink_median": 3.87,
+   "floor": 4.5,
+   "ink_core_ring": 3.91,
+   "ground_swing": 1.13
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    238,
+    503,
+    988,
+    129
+   ],
+   "role": "large",
+   "polarity": "dark",
+   "ink_core": 3.95,
+   "ink_median": 1.05,
+   "floor": 4.0,
+   "ink_core_ring": 5.42,
+   "ground_swing": 1.39
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    249,
+    1011,
+    426,
+    58
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.09,
+   "ink_median": 3.31,
+   "floor": 4.5,
+   "ink_core_ring": 4.89,
+   "ground_swing": 1.21
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    1337,
+    866,
+    44,
+    21
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.3,
+   "ink_median": 2.46,
+   "floor": 4.5,
+   "ink_core_ring": 4.3,
+   "ground_swing": 1.17
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    908,
+    1199,
+    81,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.33,
+   "ink_median": 1.56,
+   "floor": 4.5,
+   "ink_core_ring": 5.54,
+   "ground_swing": 1.27
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    130,
+    2078,
+    157,
+    30
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.42,
+   "ink_median": 4.42,
+   "floor": 4.5,
+   "ink_core_ring": 7.48,
+   "ground_swing": 1.7
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    413,
+    2241,
+    739,
+    39
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.45,
+   "ink_median": 4.38,
+   "floor": 4.5,
+   "ink_core_ring": 4.45,
+   "ground_swing": 1.02
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    344,
+    2368,
+    235,
+    41
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.46,
+   "ink_median": 4.38,
+   "floor": 4.5,
+   "ink_core_ring": 4.46,
+   "ground_swing": 1.04
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    772,
+    1075,
+    67,
+    39
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.49,
+   "ink_median": 2.61,
+   "floor": 4.5,
+   "ink_core_ring": 4.49,
+   "ground_swing": 1.11
+  }
+ ],
+ "on_moving_ground": 190,
+ "would_pass_on_ring_reading": 75,
+ "read": 10,
+ "total_runs": 756,
+ "total_below_floor": 233,
+ "text_runs": "off",
+ "measured_from_declared_text": 0,
+ "without_a_sidecar": [],
+ "marks_outside_text": 0,
+ "ok": false
+}

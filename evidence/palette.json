@@ -102,19 +102,19 @@
   "03_us.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9267,
+    "p50": 0.9272,
     "p98": 165.0,
-    "span": 0.615
+    "span": 0.5903
    },
    "value_bands": {
-    "ground": 0.1232,
-    "mid": 0.0455,
-    "figure": 0.8313
+    "ground": 0.1222,
+    "mid": 0.0407,
+    "figure": 0.8371
    },
    "chroma": {
-    "mean": 0.0426,
+    "mean": 0.0406,
     "p99": 0.0718,
-    "grey_fraction": 0.0006,
+    "grey_fraction": 0.002,
     "accent_fraction": 5e-05,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -126,15 +126,15 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0377,
+     "mean_chroma": 0.0378,
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0326,
-     "p99_chroma": 0.0712
+     "mean_chroma": 0.0303,
+     "p99_chroma": 0.0562
     },
     "figure": {
-     "mean_chroma": 0.0439,
+     "mean_chroma": 0.0416,
      "p99_chroma": 0.0722
     }
    },
@@ -150,19 +150,19 @@
   "04_moments.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9254,
+    "p50": 0.9286,
     "p98": 165.0,
-    "span": 0.6797
+    "span": 0.6299
    },
    "value_bands": {
-    "ground": 0.2454,
-    "mid": 0.0921,
-    "figure": 0.6625
+    "ground": 0.1338,
+    "mid": 0.0533,
+    "figure": 0.8129
    },
    "chroma": {
-    "mean": 0.0374,
-    "p99": 0.0726,
-    "grey_fraction": 0.0665,
+    "mean": 0.0422,
+    "p99": 0.0731,
+    "grey_fraction": 0.0093,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -174,15 +174,15 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0219,
-     "p99_chroma": 0.049
+     "mean_chroma": 0.0334,
+     "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0307,
-     "p99_chroma": 0.0539
+     "mean_chroma": 0.0346,
+     "p99_chroma": 0.0564
     },
     "figure": {
-     "mean_chroma": 0.0441,
+     "mean_chroma": 0.0442,
      "p99_chroma": 0.0733
     }
    },
@@ -300,8 +300,8 @@
    },
    "value_bands": {
     "ground": 0.3321,
-    "mid": 0.0561,
-    "figure": 0.6118
+    "mid": 0.056,
+    "figure": 0.6119
    },
    "chroma": {
     "mean": 0.0448,
@@ -343,23 +343,23 @@
   "13_messenger_states.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9332,
+    "p50": 0.929,
     "p98": 165.0,
-    "span": 0.6163
+    "span": 0.6191
    },
    "value_bands": {
-    "ground": 0.1368,
-    "mid": 0.0729,
-    "figure": 0.7903
+    "ground": 0.1401,
+    "mid": 0.0735,
+    "figure": 0.7865
    },
    "chroma": {
-    "mean": 0.0395,
-    "p99": 0.0719,
-    "grey_fraction": 0.003,
-    "accent_fraction": 0.00039,
+    "mean": 0.0423,
+    "p99": 0.0736,
+    "grey_fraction": 0.0029,
+    "accent_fraction": 0.00033,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
-     "B_rose": 0.00039,
+     "B_rose": 0.00033,
      "C_cool": 0.0,
      "D_green": 0.0,
      "outside_any_family": 0.0
@@ -367,16 +367,16 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0364,
+     "mean_chroma": 0.0365,
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0357,
-     "p99_chroma": 0.0774
+     "mean_chroma": 0.037,
+     "p99_chroma": 0.0769
     },
     "figure": {
-     "mean_chroma": 0.0404,
-     "p99_chroma": 0.0722
+     "mean_chroma": 0.0438,
+     "p99_chroma": 0.0736
     }
    },
    "hue_families": 5,
@@ -392,19 +392,19 @@
   "14_media_viewer.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.3573,
+    "p50": 0.3904,
     "p98": 165.0,
-    "span": 0.6937
+    "span": 0.7332
    },
    "value_bands": {
-    "ground": 0.5771,
-    "mid": 0.1453,
-    "figure": 0.2776
+    "ground": 0.5224,
+    "mid": 0.183,
+    "figure": 0.2946
    },
    "chroma": {
-    "mean": 0.024,
+    "mean": 0.0342,
     "p99": 0.0692,
-    "grey_fraction": 0.1404,
+    "grey_fraction": 0.1376,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -416,16 +416,16 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.015,
-     "p99_chroma": 0.0554
+     "mean_chroma": 0.023,
+     "p99_chroma": 0.0459
     },
     "mid": {
-     "mean_chroma": 0.0581,
-     "p99_chroma": 0.0717
+     "mean_chroma": 0.0555,
+     "p99_chroma": 0.0706
     },
     "figure": {
-     "mean_chroma": 0.0249,
-     "p99_chroma": 0.066
+     "mean_chroma": 0.041,
+     "p99_chroma": 0.07
     }
    },
    "hue_families": 5,
@@ -487,8 +487,8 @@
   }
  },
  "across_the_set": {
-  "mean_chroma": 0.0358,
-  "mean_lightness_span": 0.6235,
+  "mean_chroma": 0.0374,
+  "mean_lightness_span": 0.6203,
   "hue_families_min": 3,
   "hue_families_max": 5,
   "hue_families": 5,
@@ -504,9 +504,9 @@
   "named_families_present": [
    "A_paper"
   ],
-  "grey_fraction": 0.0241,
+  "grey_fraction": 0.0183,
   "accent_fraction": 0.00087,
-  "lightness_drift": 0.5861,
+  "lightness_drift": 0.553,
   "lightness_drift_room": 0.0534,
   "rooms": 9,
   "viewers": 1
@@ -515,7 +515,7 @@
  "floors": {
   "law": "docs/COLOR.md",
   "classes_from": "docs/screen_classes.json",
-  "breaches": 42,
+  "breaches": 40,
   "breached": [
    {
     "artifact": "01_pulse.png",
@@ -596,14 +596,6 @@
     "requires": "<= 200.0",
     "actual": 330.0,
     "section": "4"
-   },
-   {
-    "artifact": "04_moments.png",
-    "class": "room",
-    "quantity": "chroma_by_band.ground.mean_chroma",
-    "requires": ">= 0.03",
-    "actual": 0.0219,
-    "section": "5 floor"
    },
    {
     "artifact": "04_moments.png",
@@ -730,7 +722,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0722,
+    "actual": 0.0736,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -738,7 +730,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.00039,
+    "actual": 0.00033,
     "section": "7 item 5"
    },
    {
@@ -754,15 +746,7 @@
     "class": "viewer",
     "quantity": "chroma_by_band.ground.mean_chroma",
     "requires": ">= 0.03",
-    "actual": 0.015,
-    "section": "5 floor"
-   },
-   {
-    "artifact": "14_media_viewer.png",
-    "class": "viewer",
-    "quantity": "chroma_by_band.figure.mean_chroma",
-    "requires": ">= 0.035",
-    "actual": 0.0249,
+    "actual": 0.023,
     "section": "5 floor"
    },
    {
@@ -770,7 +754,7 @@
     "class": "viewer",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.066,
+    "actual": 0.07,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -778,7 +762,7 @@
     "class": "viewer",
     "quantity": "chroma.grey_fraction",
     "requires": "<= 0.08",
-    "actual": 0.1404,
+    "actual": 0.1376,
     "section": "5 floor"
    },
    {
@@ -834,7 +818,7 @@
     "class": "-",
     "quantity": "across_the_set.mean_chroma",
     "requires": ">= 0.045",
-    "actual": 0.0358,
+    "actual": 0.0374,
     "section": "5 floor / 7 item 1"
    },
    {

@@ -11,137 +11,38 @@
  "dusk": [],
  "artifacts": {
   "01_pulse.png": {
-   "runs": 96,
-   "below_floor": 31,
-   "worst_ink_core": 1.03,
-   "median_ink_core": 7.26,
-   "median_as_rendered": 5.45,
+   "runs": 52,
+   "below_floor": 12,
+   "text_runs": "declared",
+   "declared_lines": 54,
+   "marks_outside_text": 222,
+   "worst_ink_core": 1.15,
+   "median_ink_core": 7.65,
+   "median_as_rendered": 7.65,
    "detail": [
     {
      "box": [
-      21,
-      23,
-      44,
-      70
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.37,
-     "ink_core_ring": 8.14,
-     "ground_swing": 8.79,
-     "ground_lum": 0.0378,
-     "ground_lum_ring": 0.6455
-    },
-    {
-     "box": [
-      652,
-      239,
-      28,
-      30
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.06,
-     "ink_median": 1.03,
-     "ink_core_ring": 1.57,
-     "ground_swing": 1.49,
-     "ground_lum": 0.0361,
-     "ground_lum_ring": 0.078
-    },
-    {
-     "box": [
       123,
-      73,
-      230,
-      101
+      72,
+      1055,
+      102
      ],
-     "glyphs": 16,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.07,
-     "ink_median": 1.27,
-     "ink_core_ring": 10.09,
-     "ground_swing": 9.51,
-     "ground_lum": 0.0403,
-     "ground_lum_ring": 0.8032
-    },
-    {
-     "box": [
-      123,
-      1545,
-      133,
-      28
-     ],
-     "glyphs": 1,
+     "glyphs": 33,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.14,
-     "ink_median": 1.06,
-     "ink_core_ring": 1.48,
-     "ground_swing": 1.32,
-     "ground_lum": 0.6293,
-     "ground_lum_ring": 0.838
-    },
-    {
-     "box": [
-      320,
-      359,
-      126,
-      172
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.37,
-     "ink_median": 1.08,
-     "ink_core_ring": 11.62,
-     "ground_swing": 8.59,
-     "ground_lum": 0.0508,
-     "ground_lum_ring": 0.8059
-    },
-    {
-     "box": [
-      46,
-      1236,
-      185,
-      155
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.43,
-     "ink_median": 1.0,
-     "ink_core_ring": 10.49,
-     "ground_swing": 7.31,
-     "ground_lum": 0.0718,
-     "ground_lum_ring": 0.8402
-    },
-    {
-     "box": [
-      457,
-      2170,
-      651,
-      60
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.61,
-     "ink_median": 1.39,
-     "ink_core_ring": 1.61,
-     "ground_swing": 1.1,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ink_core": 1.15,
+     "ink_median": 1.19,
+     "ink_core_ring": 10.13,
+     "ground_swing": 8.9,
+     "ground_lum": 0.0471,
+     "ground_lum_ring": 0.8032,
+     "says": "week one, and the room smells right again",
+     "px": 51,
+     "points": 17,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "d91f2a44"
     },
     {
      "box": [
@@ -159,43 +60,61 @@
      "ink_core_ring": 3.01,
      "ground_swing": 1.34,
      "ground_lum": 0.6199,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "heads down",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "99464648"
     },
     {
      "box": [
-      1254,
-      415,
-      67,
-      19
+      666,
+      1630,
+      163,
+      73
      ],
-     "glyphs": 1,
+     "glyphs": 7,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 2.3,
-     "ink_median": 1.17,
-     "ink_core_ring": 3.31,
-     "ground_swing": 1.45,
-     "ground_lum": 0.5386,
-     "ground_lum_ring": 0.7954
+     "ink_core": 2.59,
+     "ink_median": 2.37,
+     "ink_core_ring": 3.25,
+     "ground_swing": 1.26,
+     "ground_lum": 0.6626,
+     "ground_lum_ring": 0.8461,
+     "says": "tender",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "99464648"
     },
     {
      "box": [
-      221,
-      1101,
-      108,
-      29
+      402,
+      1659,
+      103,
+      51
      ],
      "glyphs": 2,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 2.57,
-     "ink_median": 1.31,
-     "ink_core_ring": 3.57,
-     "ground_swing": 1.39,
-     "ground_lum": 0.5649,
-     "ground_lum_ring": 0.8024
+     "ink_core": 2.61,
+     "ink_median": 2.5,
+     "ink_core_ring": 3.13,
+     "ground_swing": 1.21,
+     "ground_lum": 0.6932,
+     "ground_lum_ring": 0.8399,
+     "says": "bright",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "99464648"
     },
     {
      "box": [
@@ -213,7 +132,13 @@
      "ink_core_ring": 2.99,
      "ground_swing": 1.03,
      "ground_lum": 0.839,
-     "ground_lum_ring": 0.839
+     "ground_lum_ring": 0.839,
+     "says": "low",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "99464648"
     },
     {
      "box": [
@@ -229,27 +154,15 @@
      "ink_core": 3.01,
      "ink_median": 3.01,
      "ink_core_ring": 3.01,
-     "ground_swing": 1.02,
+     "ground_swing": 1.03,
      "ground_lum": 0.8442,
-     "ground_lum_ring": 0.8442
-    },
-    {
-     "box": [
-      356,
-      72,
-      822,
-      52
-     ],
-     "glyphs": 26,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.03,
-     "ink_median": 1.83,
-     "ink_core_ring": 7.75,
-     "ground_swing": 2.59,
-     "ground_lum": 0.2868,
-     "ground_lum_ring": 0.8111
+     "ground_lum_ring": 0.8442,
+     "says": "open",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "99464648"
     },
     {
      "box": [
@@ -267,1619 +180,434 @@
      "ink_core_ring": 3.05,
      "ground_swing": 1.09,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      423,
-      1722,
-      109,
-      42
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.06,
-     "ink_median": 3.01,
-     "ink_core_ring": 3.06,
-     "ground_swing": 1.02,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      267,
-      1734,
-      154,
-      28
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.06,
-     "ink_median": 2.98,
-     "ink_core_ring": 3.06,
-     "ground_swing": 1.02,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      97,
-      1093,
-      90,
-      34
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.1,
-     "ink_median": 1.6,
-     "ink_core_ring": 4.14,
-     "ground_swing": 1.35,
-     "ground_lum": 0.5987,
-     "ground_lum_ring": 0.8162
-    },
-    {
-     "box": [
-      666,
-      1663,
-      79,
-      38
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.12,
-     "ink_median": 3.01,
-     "ink_core_ring": 3.12,
-     "ground_swing": 1.11,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      482,
-      2010,
-      105,
-      52
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.13,
-     "ink_median": 3.01,
-     "ink_core_ring": 3.13,
-     "ground_swing": 1.02,
-     "ground_lum": 0.8437,
-     "ground_lum_ring": 0.8437
+     "ground_lum_ring": 0.8461,
+     "says": "flat",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "99464648"
     },
     {
      "box": [
       503,
       1948,
-      374,
-      42
+      168,
+      41
      ],
-     "glyphs": 3,
+     "glyphs": 2,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.15,
-     "ink_median": 2.98,
-     "ink_core_ring": 3.15,
-     "ground_swing": 1.11,
+     "ink_core": 3.24,
+     "ink_median": 3.01,
+     "ink_core_ring": 3.24,
+     "ground_swing": 1.02,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "work",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "99464648"
     },
     {
      "box": [
-      1033,
-      1068,
-      79,
-      26
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.28,
-     "ink_median": 1.92,
-     "ink_core_ring": 3.28,
-     "ground_swing": 1.05,
-     "ground_lum": 0.8032,
-     "ground_lum_ring": 0.8032
-    },
-    {
-     "box": [
-      776,
-      1371,
-      111,
-      56
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.37,
-     "ink_median": 2.0,
-     "ink_core_ring": 3.37,
-     "ground_swing": 1.19,
-     "ground_lum": 0.8402,
-     "ground_lum_ring": 0.8402
-    },
-    {
-     "box": [
-      707,
-      1283,
-      112,
-      44
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.52,
-     "ink_median": 1.96,
-     "ink_core_ring": 3.52,
-     "ground_swing": 1.14,
-     "ground_lum": 0.8402,
-     "ground_lum_ring": 0.8402
-    },
-    {
-     "box": [
-      333,
-      1092,
-      185,
-      43
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.58,
-     "ink_median": 1.84,
-     "ink_core_ring": 4.36,
-     "ground_swing": 1.22,
-     "ground_lum": 0.6543,
-     "ground_lum_ring": 0.8083
-    },
-    {
-     "box": [
-      381,
-      846,
-      183,
-      36
+      267,
+      1722,
+      265,
+      42
      ],
      "glyphs": 6,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.66,
-     "ink_median": 3.66,
-     "ink_core_ring": 7.69,
-     "ground_swing": 2.11,
-     "ground_lum": 0.3579,
-     "ground_lum_ring": 0.808
-    },
-    {
-     "box": [
-      518,
-      1079,
-      228,
-      50
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.69,
-     "ink_median": 1.97,
-     "ink_core_ring": 4.49,
-     "ground_swing": 1.23,
-     "ground_lum": 0.6564,
-     "ground_lum_ring": 0.8083
-    },
-    {
-     "box": [
-      338,
-      923,
-      28,
-      24
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.79,
-     "ink_median": 1.2,
-     "ink_core_ring": 7.67,
-     "ground_swing": 2.04,
-     "ground_lum": 0.3727,
-     "ground_lum_ring": 0.8055
-    },
-    {
-     "box": [
-      1285,
-      441,
-      64,
-      95
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 3.8,
-     "ink_median": 1.87,
-     "ink_core_ring": 4.81,
-     "ground_swing": 1.27,
-     "ground_lum": 0.6341,
-     "ground_lum_ring": 0.8162
-    },
-    {
-     "box": [
-      885,
-      1896,
-      185,
-      50
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.85,
-     "ink_median": 1.55,
-     "ink_core_ring": 3.85,
-     "ground_swing": 1.13,
+     "ink_core": 3.28,
+     "ink_median": 3.01,
+     "ink_core_ring": 3.28,
+     "ground_swing": 1.02,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "restless",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "99464648"
     },
     {
      "box": [
-      1337,
-      866,
-      44,
-      21
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 4.3,
-     "ink_median": 2.46,
-     "ink_core_ring": 4.3,
-     "ground_swing": 1.17,
-     "ground_lum": 0.801,
-     "ground_lum_ring": 0.801
-    },
-    {
-     "box": [
-      772,
-      1075,
-      67,
-      39
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 4.49,
-     "ink_median": 2.61,
-     "ink_core_ring": 4.49,
-     "ground_swing": 1.11,
-     "ground_lum": 0.8083,
-     "ground_lum_ring": 0.8083
-    }
-   ]
-  },
-  "02_chat.png": {
-   "runs": 93,
-   "below_floor": 29,
-   "worst_ink_core": 1.03,
-   "median_ink_core": 7.77,
-   "median_as_rendered": 6.08,
-   "detail": [
-    {
-     "box": [
-      21,
-      23,
-      44,
-      70
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.37,
-     "ink_core_ring": 8.14,
-     "ground_swing": 8.79,
-     "ground_lum": 0.0378,
-     "ground_lum_ring": 0.6455
-    },
-    {
-     "box": [
-      438,
-      1543,
-      185,
-      51
-     ],
-     "glyphs": 10,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.01,
-     "ink_core_ring": 1.62,
-     "ground_swing": 1.57,
-     "ground_lum": 0.5383,
-     "ground_lum_ring": 0.8728
-    },
-    {
-     "box": [
-      517,
-      869,
-      84,
-      25
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.04,
-     "ink_median": 1.0,
-     "ink_core_ring": 1.51,
-     "ground_swing": 1.46,
-     "ground_lum": 0.5985,
-     "ground_lum_ring": 0.8894
-    },
-    {
-     "box": [
-      581,
-      1553,
-      27,
-      45
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.04,
-     "ink_median": 1.01,
-     "ink_core_ring": 1.61,
-     "ground_swing": 1.52,
-     "ground_lum": 0.5412,
-     "ground_lum_ring": 0.8615
-    },
-    {
-     "box": [
-      646,
-      1550,
-      21,
-      40
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.05,
-     "ink_median": 1.0,
-     "ink_core_ring": 1.59,
-     "ground_swing": 1.51,
-     "ground_lum": 0.5634,
-     "ground_lum_ring": 0.8809
-    },
-    {
-     "box": [
-      701,
-      1556,
-      148,
-      40
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.05,
-     "ink_median": 1.01,
-     "ink_core_ring": 1.52,
-     "ground_swing": 1.44,
-     "ground_lum": 0.5916,
-     "ground_lum_ring": 0.8787
-    },
-    {
-     "box": [
-      1270,
-      819,
-      43,
-      25
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.06,
-     "ink_median": 1.02,
-     "ink_core_ring": 1.53,
-     "ground_swing": 1.46,
-     "ground_lum": 0.6072,
-     "ground_lum_ring": 0.9018
-    },
-    {
-     "box": [
-      123,
-      73,
-      230,
-      101
-     ],
-     "glyphs": 16,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.07,
-     "ink_median": 1.27,
-     "ink_core_ring": 10.09,
-     "ground_swing": 9.51,
-     "ground_lum": 0.0403,
-     "ground_lum_ring": 0.8032
-    },
-    {
-     "box": [
-      1231,
-      1307,
-      98,
-      40
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.09,
-     "ink_median": 1.03,
-     "ink_core_ring": 1.52,
-     "ground_swing": 1.41,
-     "ground_lum": 0.6322,
-     "ground_lum_ring": 0.9018
-    },
-    {
-     "box": [
-      441,
-      1172,
-      128,
-      25
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.1,
-     "ink_median": 1.04,
-     "ink_core_ring": 1.41,
-     "ground_swing": 1.27,
-     "ground_lum": 0.629,
-     "ground_lum_ring": 0.815
-    },
-    {
-     "box": [
-      201,
-      2735,
-      149,
-      141
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.15,
-     "ink_median": 1.21,
-     "ink_core_ring": 10.78,
-     "ground_swing": 9.44,
-     "ground_lum": 0.0508,
-     "ground_lum_ring": 0.8953
-    },
-    {
-     "box": [
-      401,
-      741,
-      122,
-      40
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.25,
-     "ink_median": 1.19,
-     "ink_core_ring": 4.65,
-     "ground_swing": 3.73,
-     "ground_lum": 0.1838,
-     "ground_lum_ring": 0.8212
-    },
-    {
-     "box": [
-      238,
-      1882,
-      1014,
-      63
-     ],
-     "glyphs": 16,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.38,
-     "ink_median": 1.03,
-     "ink_core_ring": 5.78,
-     "ground_swing": 4.23,
-     "ground_lum": 0.1636,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      1348,
-      2781,
-      41,
-      20
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.5,
-     "ink_median": 1.09,
-     "ink_core_ring": 5.18,
-     "ground_swing": 3.62,
-     "ground_lum": 0.1909,
-     "ground_lum_ring": 0.7816
-    },
-    {
-     "box": [
-      666,
-      1175,
-      37,
-      18
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.67,
-     "ink_median": 1.14,
-     "ink_core_ring": 2.04,
-     "ground_swing": 1.22,
-     "ground_lum": 0.6455,
-     "ground_lum_ring": 0.8013
-    },
-    {
-     "box": [
-      156,
-      1399,
-      198,
-      69
+      430,
+      2010,
+      157,
+      52
      ],
      "glyphs": 4,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.71,
-     "ink_median": 1.46,
-     "ink_core_ring": 11.73,
-     "ground_swing": 7.16,
-     "ground_lum": 0.0828,
-     "ground_lum_ring": 0.8628
+     "ink_core": 3.51,
+     "ink_median": 3.0,
+     "ink_core_ring": 3.51,
+     "ground_swing": 1.08,
+     "ground_lum": 0.8432,
+     "ground_lum_ring": 0.8432,
+     "says": "travelling",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "99464648"
     },
     {
      "box": [
-      556,
-      2797,
-      132,
-      55
+      932,
+      798,
+      79,
+      24
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.53,
+     "ink_median": 3.53,
+     "ink_core_ring": 7.65,
+     "ground_swing": 2.17,
+     "ground_lum": 0.3435,
+     "ground_lum_ring": 0.8032,
+     "says": "RINGER",
+     "px": 27,
+     "points": 9,
+     "family": "DeskStamp",
+     "hand": "stamp",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      338,
+      922,
+      124,
+      25
      ],
      "glyphs": 5,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.88,
-     "ink_median": 1.88,
-     "ink_core_ring": 7.81,
-     "ground_swing": 4.16,
-     "ground_lum": 0.1597,
-     "ground_lum_ring": 0.8212
-    },
+     "ink_core": 4.28,
+     "ink_median": 3.4,
+     "ink_core_ring": 7.66,
+     "ground_swing": 1.8,
+     "ground_lum": 0.4272,
+     "ground_lum_ring": 0.8036,
+     "says": "SIGNAL",
+     "px": 27,
+     "points": 9,
+     "family": "DeskStamp",
+     "hand": "stamp",
+     "ink": "ff464648"
+    }
+   ]
+  },
+  "02_chat.png": {
+   "runs": 45,
+   "below_floor": 10,
+   "text_runs": "declared",
+   "declared_lines": 67,
+   "marks_outside_text": 186,
+   "worst_ink_core": 1.02,
+   "median_ink_core": 7.65,
+   "median_as_rendered": 6.41,
+   "detail": [
     {
      "box": [
-      476,
-      2039,
-      694,
-      50
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.92,
-     "ink_median": 1.15,
-     "ink_core_ring": 2.53,
-     "ground_swing": 1.3,
-     "ground_lum": 0.6548,
-     "ground_lum_ring": 0.8787
-    },
-    {
-     "box": [
-      321,
-      1184,
-      50,
-      20
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.21,
-     "ink_median": 1.1,
-     "ink_core_ring": 2.87,
-     "ground_swing": 1.33,
-     "ground_lum": 0.5947,
-     "ground_lum_ring": 0.7868
-    },
-    {
-     "box": [
-      214,
-      2367,
-      85,
+      526,
+      2370,
+      53,
       32
      ],
      "glyphs": 2,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 2.25,
-     "ink_median": 2.02,
-     "ink_core_ring": 4.45,
-     "ground_swing": 1.99,
-     "ground_lum": 0.3792,
-     "ground_lum_ring": 0.7967
+     "ink_core": 1.02,
+     "ink_median": 1.0,
+     "ink_core_ring": 4.46,
+     "ground_swing": 4.39,
+     "ground_lum": 0.1438,
+     "ground_lum_ring": 0.8004,
+     "says": "Wed 22 Apr \u00b7 16:44",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      853,
-      1184,
-      49,
-      22
+      123,
+      72,
+      1055,
+      102
      ],
-     "glyphs": 1,
+     "glyphs": 33,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 2.3,
-     "ink_median": 1.37,
-     "ink_core_ring": 2.81,
-     "ground_swing": 1.22,
-     "ground_lum": 0.6688,
-     "ground_lum_ring": 0.8262
+     "ink_core": 1.14,
+     "ink_median": 1.2,
+     "ink_core_ring": 10.13,
+     "ground_swing": 8.98,
+     "ground_lum": 0.0463,
+     "ground_lum_ring": 0.8032,
+     "says": "week one, and the room smells right again",
+     "px": 51,
+     "points": 17,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "d91f2a44"
     },
     {
      "box": [
-      502,
-      874,
+      249,
+      2735,
       439,
-      47
+      141
+     ],
+     "glyphs": 15,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.27,
+     "ink_median": 1.09,
+     "ink_core_ring": 10.67,
+     "ground_swing": 8.48,
+     "ground_lum": 0.0614,
+     "ground_lum_ring": 0.8851,
+     "says": "write something",
+     "px": 48,
+     "points": 16,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      207,
+      658,
+      217,
+      57
      ],
      "glyphs": 3,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 2.41,
-     "ink_median": 1.09,
-     "ink_core_ring": 3.22,
-     "ground_swing": 1.34,
-     "ground_lum": 0.6517,
-     "ground_lum_ring": 0.887
+     "ink_core": 1.31,
+     "ink_median": 1.82,
+     "ink_core_ring": 11.8,
+     "ground_swing": 9.03,
+     "ground_lum": 0.0465,
+     "ground_lum_ring": 0.8193,
+     "says": "when is the exam. which day in may. i want it in my head proper\u2026",
+     "px": 57,
+     "points": 19,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "ff1f2a44"
     },
     {
      "box": [
-      356,
-      72,
-      822,
-      52
+      156,
+      1399,
+      282,
+      69
      ],
-     "glyphs": 26,
+     "glyphs": 6,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.03,
-     "ink_median": 1.83,
-     "ink_core_ring": 7.75,
-     "ground_swing": 2.59,
-     "ground_lum": 0.2868,
-     "ground_lum_ring": 0.8111
+     "ink_core": 1.89,
+     "ink_median": 1.39,
+     "ink_core_ring": 11.82,
+     "ground_swing": 6.78,
+     "ground_lum": 0.0892,
+     "ground_lum_ring": 0.8202,
+     "says": "Wed 22 Apr \u00b7 16:36",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      954,
-      2738,
-      136,
-      18
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.12,
-     "ink_median": 1.28,
-     "ink_core_ring": 3.98,
-     "ground_swing": 1.28,
-     "ground_lum": 0.6703,
-     "ground_lum_ring": 0.8691
-    },
-    {
-     "box": [
-      399,
-      1425,
-      167,
-      39
+      214,
+      2367,
+      213,
+      34
      ],
      "glyphs": 4,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.24,
-     "ink_median": 3.19,
-     "ink_core_ring": 4.47,
-     "ground_swing": 1.39,
-     "ground_lum": 0.5694,
-     "ground_lum_ring": 0.8045
+     "ink_core": 2.71,
+     "ink_median": 2.67,
+     "ink_core_ring": 4.46,
+     "ground_swing": 1.65,
+     "ground_lum": 0.4667,
+     "ground_lum_ring": 0.7995,
+     "says": "Wed 22 Apr \u00b7 16:44",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      1062,
-      1207,
-      106,
+      211,
+      740,
+      271,
+      41
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.43,
+     "ink_median": 3.33,
+     "ink_core_ring": 4.59,
+     "ground_swing": 1.34,
+     "ground_lum": 0.6014,
+     "ground_lum_ring": 0.8212,
+     "says": "Wed 22 Apr \u00b7 16:30",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      238,
+      1890,
+      284,
+      55
+     ],
+     "glyphs": 8,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 4.3,
+     "ink_median": 3.51,
+     "ink_core_ring": 5.35,
+     "ground_swing": 1.3,
+     "ground_lum": 0.6693,
+     "ground_lum_ring": 0.8451,
+     "says": "Wed 22 Apr \u00b7 16:40",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      428,
+      2369,
+      94,
       40
      ],
      "glyphs": 1,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.62,
-     "ink_median": 1.56,
-     "ink_core_ring": 5.15,
-     "ground_swing": 1.41,
-     "ground_lum": 0.5959,
-     "ground_lum_ring": 0.8691
+     "ink_core": 4.45,
+     "ink_median": 4.38,
+     "ink_core_ring": 4.45,
+     "ground_swing": 1.02,
+     "ground_lum": 0.7995,
+     "ground_lum_ring": 0.7995,
+     "says": "Wed 22 Apr \u00b7 16:44",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      173,
-      760,
-      1030,
-      90
+      419,
+      1425,
+      147,
+      33
      ],
      "glyphs": 2,
      "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 3.76,
-     "ink_median": 2.22,
-     "ink_core_ring": 5.02,
-     "ground_swing": 1.35,
-     "ground_lum": 0.6519,
-     "ground_lum_ring": 0.886
-    },
-    {
-     "box": [
-      908,
-      1199,
-      81,
-      24
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 4.33,
-     "ink_median": 1.56,
-     "ink_core_ring": 5.54,
-     "ground_swing": 1.27,
-     "ground_lum": 0.6362,
-     "ground_lum_ring": 0.8273
-    },
-    {
-     "box": [
-      344,
-      2368,
-      235,
-      41
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 4.46,
-     "ink_median": 4.38,
-     "ink_core_ring": 4.46,
-     "ground_swing": 1.04,
-     "ground_lum": 0.7995,
-     "ground_lum_ring": 0.7995
+     "ink_core": 4.48,
+     "ink_median": 4.42,
+     "ink_core_ring": 4.48,
+     "ground_swing": 1.06,
+     "ground_lum": 0.8058,
+     "ground_lum_ring": 0.8058,
+     "says": "Wed 22 Apr \u00b7 16:36",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     }
    ]
   },
   "03_us.png": {
-   "runs": 83,
-   "below_floor": 36,
-   "worst_ink_core": 1.03,
-   "median_ink_core": 5.61,
-   "median_as_rendered": 2.72,
+   "runs": 28,
+   "below_floor": 1,
+   "text_runs": "declared",
+   "declared_lines": 29,
+   "marks_outside_text": 187,
+   "worst_ink_core": 1.15,
+   "median_ink_core": 7.68,
+   "median_as_rendered": 6.05,
    "detail": [
     {
      "box": [
-      21,
-      23,
-      44,
-      70
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.37,
-     "ink_core_ring": 8.14,
-     "ground_swing": 8.79,
-     "ground_lum": 0.0378,
-     "ground_lum_ring": 0.6455
-    },
-    {
-     "box": [
-      936,
-      1491,
-      11,
-      25
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.0,
-     "ink_core_ring": 1.43,
-     "ground_swing": 1.39,
-     "ground_lum": 0.6389,
-     "ground_lum_ring": 0.9102
-    },
-    {
-     "box": [
-      845,
-      1496,
-      27,
-      58
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.06,
-     "ink_median": 1.01,
-     "ink_core_ring": 1.47,
-     "ground_swing": 1.39,
-     "ground_lum": 0.6413,
-     "ground_lum_ring": 0.9083
-    },
-    {
-     "box": [
       123,
-      73,
-      230,
-      101
-     ],
-     "glyphs": 16,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.07,
-     "ink_median": 1.27,
-     "ink_core_ring": 10.09,
-     "ground_swing": 9.51,
-     "ground_lum": 0.0403,
-     "ground_lum_ring": 0.8032
-    },
-    {
-     "box": [
-      872,
-      1094,
-      64,
-      24
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.07,
-     "ink_median": 1.03,
-     "ink_core_ring": 1.41,
-     "ground_swing": 1.29,
-     "ground_lum": 0.6406,
-     "ground_lum_ring": 0.8592
-    },
-    {
-     "box": [
-      857,
-      708,
-      51,
-      67
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.09,
-     "ink_median": 1.04,
-     "ink_core_ring": 1.47,
-     "ground_swing": 1.36,
-     "ground_lum": 0.6013,
-     "ground_lum_ring": 0.8314
-    },
-    {
-     "box": [
-      1065,
-      1090,
-      66,
-      24
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.1,
-     "ink_median": 1.02,
-     "ink_core_ring": 1.51,
-     "ground_swing": 1.37,
-     "ground_lum": 0.6498,
-     "ground_lum_ring": 0.9102
-    },
-    {
-     "box": [
-      101,
-      604,
-      665,
-      118
-     ],
-     "glyphs": 12,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.12,
-     "ink_median": 1.07,
-     "ink_core_ring": 1.47,
-     "ground_swing": 1.32,
-     "ground_lum": 0.6257,
-     "ground_lum_ring": 0.838
-    },
-    {
-     "box": [
-      121,
-      2601,
-      160,
-      33
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.13,
-     "ink_median": 1.07,
-     "ink_core_ring": 1.47,
-     "ground_swing": 1.31,
-     "ground_lum": 0.6205,
-     "ground_lum_ring": 0.822
-    },
-    {
-     "box": [
-      545,
-      1231,
-      249,
-      31
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.14,
-     "ink_median": 1.06,
-     "ink_core_ring": 1.54,
-     "ground_swing": 1.35,
-     "ground_lum": 0.6588,
-     "ground_lum_ring": 0.9102
-    },
-    {
-     "box": [
-      1136,
-      1381,
-      84,
-      31
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.15,
-     "ink_median": 1.06,
-     "ink_core_ring": 1.51,
-     "ground_swing": 1.31,
-     "ground_lum": 0.6822,
-     "ground_lum_ring": 0.9102
-    },
-    {
-     "box": [
-      126,
-      1788,
-      86,
-      41
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.15,
-     "ink_median": 1.08,
-     "ink_core_ring": 1.46,
-     "ground_swing": 1.27,
-     "ground_lum": 0.6516,
-     "ground_lum_ring": 0.839
-    },
-    {
-     "box": [
-      1018,
-      710,
-      43,
-      36
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.16,
-     "ink_median": 1.08,
-     "ink_core_ring": 1.54,
-     "ground_swing": 1.32,
-     "ground_lum": 0.6214,
-     "ground_lum_ring": 0.838
-    },
-    {
-     "box": [
-      77,
-      801,
-      84,
-      31
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.16,
-     "ink_median": 1.1,
-     "ink_core_ring": 1.45,
-     "ground_swing": 1.26,
-     "ground_lum": 0.6581,
-     "ground_lum_ring": 0.839
-    },
-    {
-     "box": [
-      1193,
-      675,
-      29,
-      44
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.18,
-     "ink_median": 1.07,
-     "ink_core_ring": 1.55,
-     "ground_swing": 1.32,
-     "ground_lum": 0.6222,
-     "ground_lum_ring": 0.831
-    },
-    {
-     "box": [
-      543,
-      1190,
-      36,
-      23
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.18,
-     "ink_median": 1.14,
-     "ink_core_ring": 1.48,
-     "ground_swing": 1.26,
-     "ground_lum": 0.714,
-     "ground_lum_ring": 0.9037
-    },
-    {
-     "box": [
-      906,
-      2858,
-      286,
-      43
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.18,
-     "ink_median": 1.07,
-     "ink_core_ring": 1.53,
-     "ground_swing": 1.3,
-     "ground_lum": 0.6284,
-     "ground_lum_ring": 0.83
-    },
-    {
-     "box": [
-      122,
-      2401,
-      133,
-      56
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.21,
-     "ink_median": 1.13,
-     "ink_core_ring": 1.48,
-     "ground_swing": 1.22,
-     "ground_lum": 0.6713,
-     "ground_lum_ring": 0.8295
-    },
-    {
-     "box": [
-      1273,
-      2866,
-      76,
-      26
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.23,
-     "ink_median": 1.11,
-     "ink_core_ring": 1.56,
-     "ground_swing": 1.27,
-     "ground_lum": 0.6422,
-     "ground_lum_ring": 0.83
-    },
-    {
-     "box": [
-      186,
-      2866,
-      88,
-      31
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.25,
-     "ink_median": 1.13,
-     "ink_core_ring": 1.53,
-     "ground_swing": 1.23,
-     "ground_lum": 0.669,
-     "ground_lum_ring": 0.8291
-    },
-    {
-     "box": [
-      736,
-      1590,
-      84,
-      34
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.26,
-     "ink_median": 1.09,
-     "ink_core_ring": 1.66,
-     "ground_swing": 1.32,
-     "ground_lum": 0.6792,
-     "ground_lum_ring": 0.9102
-    },
-    {
-     "box": [
-      927,
-      698,
-      28,
-      23
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.28,
-     "ink_median": 1.04,
-     "ink_core_ring": 1.76,
-     "ground_swing": 1.39,
-     "ground_lum": 0.5898,
-     "ground_lum_ring": 0.831
-    },
-    {
-     "box": [
-      270,
-      1995,
-      64,
-      28
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.31,
-     "ink_median": 1.07,
-     "ink_core_ring": 1.72,
-     "ground_swing": 1.33,
-     "ground_lum": 0.5935,
-     "ground_lum_ring": 0.7962
-    },
-    {
-     "box": [
-      118,
-      2519,
-      143,
-      35
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.46,
-     "ink_median": 1.08,
-     "ink_core_ring": 1.88,
-     "ground_swing": 1.29,
-     "ground_lum": 0.6321,
-     "ground_lum_ring": 0.8263
-    },
-    {
-     "box": [
-      340,
-      1974,
-      566,
-      59
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.53,
-     "ink_median": 1.13,
-     "ink_core_ring": 1.96,
-     "ground_swing": 1.29,
-     "ground_lum": 0.6122,
-     "ground_lum_ring": 0.8009
-    },
-    {
-     "box": [
-      80,
-      1526,
-      48,
-      79
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.55,
-     "ink_median": 1.1,
-     "ink_core_ring": 2.0,
-     "ground_swing": 1.3,
-     "ground_lum": 0.6273,
-     "ground_lum_ring": 0.8249
-    },
-    {
-     "box": [
-      862,
-      1541,
-      111,
-      57
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.57,
-     "ink_median": 1.0,
-     "ink_core_ring": 2.31,
-     "ground_swing": 1.48,
-     "ground_lum": 0.5982,
-     "ground_lum_ring": 0.9042
-    },
-    {
-     "box": [
-      986,
-      2634,
-      50,
-      24
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.63,
-     "ink_median": 1.11,
-     "ink_core_ring": 2.42,
-     "ground_swing": 1.49,
-     "ground_lum": 0.5298,
-     "ground_lum_ring": 0.8133
-    },
-    {
-     "box": [
-      981,
-      1982,
-      80,
-      29
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.65,
-     "ink_median": 1.24,
-     "ink_core_ring": 2.15,
-     "ground_swing": 1.3,
-     "ground_lum": 0.6011,
-     "ground_lum_ring": 0.7976
-    },
-    {
-     "box": [
-      97,
-      1708,
-      21,
-      54
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.8,
-     "ink_median": 1.18,
-     "ink_core_ring": 2.26,
-     "ground_swing": 1.3,
-     "ground_lum": 0.6147,
-     "ground_lum_ring": 0.7853
-    },
-    {
-     "box": [
-      75,
-      907,
-      165,
-      68
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.35,
-     "ink_median": 1.08,
-     "ink_core_ring": 3.06,
-     "ground_swing": 1.31,
-     "ground_lum": 0.6337,
-     "ground_lum_ring": 0.839
-    },
-    {
-     "box": [
-      243,
-      2650,
-      66,
-      29
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.52,
-     "ink_median": 1.29,
-     "ink_core_ring": 3.38,
-     "ground_swing": 1.34,
-     "ground_lum": 0.5948,
-     "ground_lum_ring": 0.8133
-    },
-    {
-     "box": [
-      284,
-      1650,
-      69,
-      23
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.66,
-     "ink_median": 1.33,
-     "ink_core_ring": 4.06,
-     "ground_swing": 1.54,
-     "ground_lum": 0.5691,
-     "ground_lum_ring": 0.8953
-    },
-    {
-     "box": [
-      573,
-      1631,
-      292,
-      64
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.82,
-     "ink_median": 1.07,
-     "ink_core_ring": 4.11,
-     "ground_swing": 1.46,
-     "ground_lum": 0.6038,
-     "ground_lum_ring": 0.9027
-    },
-    {
-     "box": [
-      356,
       72,
-      822,
-      52
+      1055,
+      102
      ],
-     "glyphs": 26,
+     "glyphs": 33,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.03,
-     "ink_median": 1.83,
-     "ink_core_ring": 7.75,
-     "ground_swing": 2.59,
-     "ground_lum": 0.2868,
-     "ground_lum_ring": 0.8111
-    },
-    {
-     "box": [
-      353,
-      2652,
-      77,
-      38
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.22,
-     "ink_median": 1.37,
-     "ink_core_ring": 4.23,
-     "ground_swing": 1.32,
-     "ground_lum": 0.6083,
-     "ground_lum_ring": 0.8133
+     "ink_core": 1.15,
+     "ink_median": 1.19,
+     "ink_core_ring": 10.13,
+     "ground_swing": 8.9,
+     "ground_lum": 0.0471,
+     "ground_lum_ring": 0.8032,
+     "says": "week one, and the room smells right again",
+     "px": 51,
+     "points": 17,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "d91f2a44"
     }
    ]
   },
   "04_moments.png": {
-   "runs": 54,
-   "below_floor": 19,
-   "worst_ink_core": 1.02,
-   "median_ink_core": 5.76,
-   "median_as_rendered": 4.96,
+   "runs": 32,
+   "below_floor": 8,
+   "text_runs": "declared",
+   "declared_lines": 33,
+   "marks_outside_text": 85,
+   "worst_ink_core": 1.08,
+   "median_ink_core": 6.26,
+   "median_as_rendered": 5.58,
    "detail": [
-    {
-     "box": [
-      96,
-      720,
-      313,
-      57
-     ],
-     "glyphs": 1,
-     "polarity": "light",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.02,
-     "ink_median": 1.01,
-     "ink_core_ring": 3.24,
-     "ground_swing": 3.44,
-     "ground_lum": 0.2758,
-     "ground_lum_ring": 0.0526
-    },
-    {
-     "box": [
-      559,
-      1509,
-      325,
-      33
-     ],
-     "glyphs": 1,
-     "polarity": "light",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.02,
-     "ink_median": 1.01,
-     "ink_core_ring": 4.35,
-     "ground_swing": 4.46,
-     "ground_lum": 0.2782,
-     "ground_lum_ring": 0.0268
-    },
-    {
-     "box": [
-      21,
-      23,
-      44,
-      70
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.37,
-     "ink_core_ring": 8.14,
-     "ground_swing": 8.79,
-     "ground_lum": 0.0378,
-     "ground_lum_ring": 0.6455
-    },
-    {
-     "box": [
-      167,
-      833,
-      44,
-      19
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.03,
-     "ink_core_ring": 3.21,
-     "ground_swing": 2.95,
-     "ground_lum": 0.0587,
-     "ground_lum_ring": 0.2878
-    },
-    {
-     "box": [
-      143,
-      2025,
-      91,
-      33
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.04,
-     "ink_median": 1.14,
-     "ink_core_ring": 5.32,
-     "ground_swing": 1.78,
-     "ground_lum": 0.0262,
-     "ground_lum_ring": 0.3386
-    },
-    {
-     "box": [
-      652,
-      239,
-      28,
-      30
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.06,
-     "ink_median": 1.03,
-     "ink_core_ring": 1.57,
-     "ground_swing": 1.49,
-     "ground_lum": 0.0364,
-     "ground_lum_ring": 0.078
-    },
     {
      "box": [
       76,
@@ -1889,104 +617,68 @@
      ],
      "glyphs": 11,
      "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.06,
-     "ink_median": 1.29,
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.08,
+     "ink_median": 1.26,
      "ink_core_ring": 10.42,
-     "ground_swing": 9.94,
-     "ground_lum": 0.0394,
-     "ground_lum_ring": 0.831
+     "ground_swing": 9.71,
+     "ground_lum": 0.0415,
+     "ground_lum_ring": 0.831,
+     "says": "WHAT WE SENT",
+     "px": 36,
+     "points": 12,
+     "family": "DeskStamp",
+     "hand": "stamp",
+     "ink": "ff464648"
     },
     {
      "box": [
       123,
-      73,
-      230,
-      101
+      72,
+      1055,
+      102
      ],
-     "glyphs": 16,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.07,
-     "ink_median": 1.27,
-     "ink_core_ring": 10.09,
-     "ground_swing": 9.51,
-     "ground_lum": 0.0403,
-     "ground_lum_ring": 0.8032
-    },
-    {
-     "box": [
-      39,
-      1288,
-      441,
-      145
-     ],
-     "glyphs": 6,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.1,
-     "ink_median": 2.58,
-     "ink_core_ring": 8.61,
-     "ground_swing": 7.8,
-     "ground_lum": 0.0732,
-     "ground_lum_ring": 0.9102
-    },
-    {
-     "box": [
-      945,
-      1030,
-      424,
-      127
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.23,
-     "ink_median": 1.16,
-     "ink_core_ring": 10.72,
-     "ground_swing": 8.71,
-     "ground_lum": 0.0602,
-     "ground_lum_ring": 0.9092
-    },
-    {
-     "box": [
-      1154,
-      332,
-      195,
-      74
-     ],
-     "glyphs": 7,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.26,
-     "ink_median": 1.07,
-     "ink_core_ring": 9.77,
-     "ground_swing": 7.74,
-     "ground_lum": 0.0657,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      610,
-      1021,
-      101,
-      38
-     ],
-     "glyphs": 1,
+     "glyphs": 33,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.35,
-     "ink_median": 1.27,
-     "ink_core_ring": 2.21,
-     "ground_swing": 1.65,
-     "ground_lum": 0.044,
-     "ground_lum_ring": 0.1045
+     "ink_core": 1.15,
+     "ink_median": 1.19,
+     "ink_core_ring": 10.13,
+     "ground_swing": 8.9,
+     "ground_lum": 0.0471,
+     "ground_lum_ring": 0.8032,
+     "says": "week one, and the room smells right again",
+     "px": 51,
+     "points": 17,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "d91f2a44"
+    },
+    {
+     "box": [
+      1030,
+      332,
+      319,
+      74
+     ],
+     "glyphs": 11,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.28,
+     "ink_median": 1.06,
+     "ink_core_ring": 9.83,
+     "ground_swing": 7.7,
+     "ground_lum": 0.0663,
+     "ground_lum_ring": 0.8418,
+     "says": "WHAT WE FELT",
+     "px": 30,
+     "points": 10,
+     "family": "DeskStamp",
+     "hand": "stamp",
+     "ink": "ff464648"
     },
     {
      "box": [
@@ -1995,16 +687,22 @@
       409,
       75
      ],
-     "glyphs": 11,
+     "glyphs": 10,
      "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
+     "role": "body",
+     "floor": 4.5,
      "ink_core": 1.44,
      "ink_median": 1.02,
      "ink_core_ring": 10.14,
-     "ground_swing": 7.08,
-     "ground_lum": 0.0766,
-     "ground_lum_ring": 0.838
+     "ground_swing": 7.11,
+     "ground_lum": 0.0761,
+     "ground_lum_ring": 0.838,
+     "says": "WHAT HAPPENED",
+     "px": 30,
+     "points": 10,
+     "family": "DeskStamp",
+     "hand": "stamp",
+     "ink": "ff464648"
     },
     {
      "box": [
@@ -2015,68 +713,44 @@
      ],
      "glyphs": 4,
      "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
+     "role": "body",
+     "floor": 4.5,
      "ink_core": 2.12,
      "ink_median": 1.02,
      "ink_core_ring": 5.93,
      "ground_swing": 2.79,
      "ground_lum": 0.2942,
-     "ground_lum_ring": 0.9102
+     "ground_lum_ring": 0.9102,
+     "says": "38s",
+     "px": 42,
+     "points": 14,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      117,
-      2047,
-      119,
-      85
+      39,
+      1290,
+      441,
+      143
      ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 2.23,
-     "ink_median": 2.04,
-     "ink_core_ring": 2.23,
-     "ground_swing": 1.35,
-     "ground_lum": 0.1088,
-     "ground_lum_ring": 0.1088
-    },
-    {
-     "box": [
-      475,
-      601,
-      488,
-      153
-     ],
-     "glyphs": 8,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 2.76,
-     "ink_median": 1.01,
-     "ink_core_ring": 8.61,
-     "ground_swing": 3.12,
-     "ground_lum": 0.2576,
-     "ground_lum_ring": 0.9102
-    },
-    {
-     "box": [
-      356,
-      72,
-      822,
-      52
-     ],
-     "glyphs": 26,
+     "glyphs": 4,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.03,
-     "ink_median": 1.83,
-     "ink_core_ring": 7.75,
-     "ground_swing": 2.59,
-     "ground_lum": 0.2868,
-     "ground_lum_ring": 0.8111
+     "ink_core": 2.42,
+     "ink_median": 1.23,
+     "ink_core_ring": 8.61,
+     "ground_swing": 3.56,
+     "ground_lum": 0.2194,
+     "ground_lum_ring": 0.9102,
+     "says": "63s",
+     "px": 42,
+     "points": 14,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
@@ -2094,322 +768,121 @@
      "ink_core_ring": 3.88,
      "ground_swing": 1.1,
      "ground_lum": 0.8207,
-     "ground_lum_ring": 0.8207
+     "ground_lum_ring": 0.8207,
+     "says": "teo",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
       703,
-      495,
-      51,
-      36
+      464,
+      212,
+      102
      ],
-     "glyphs": 3,
+     "glyphs": 8,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.91,
-     "ink_median": 3.87,
-     "ink_core_ring": 3.91,
-     "ground_swing": 1.13,
-     "ground_lum": 0.8198,
-     "ground_lum_ring": 0.8198
+     "ink_core": 4.0,
+     "ink_median": 2.43,
+     "ink_core_ring": 4.0,
+     "ground_swing": 1.08,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461,
+     "says": "all year",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     }
    ]
   },
   "05_settings.png": {
-   "runs": 115,
-   "below_floor": 54,
-   "worst_ink_core": 1.0,
-   "median_ink_core": 6.08,
-   "median_as_rendered": 5.09,
+   "runs": 77,
+   "below_floor": 29,
+   "text_runs": "declared",
+   "declared_lines": 84,
+   "marks_outside_text": 139,
+   "worst_ink_core": 1.04,
+   "median_ink_core": 6.31,
+   "median_as_rendered": 6.13,
    "detail": [
     {
      "box": [
-      1211,
-      2900,
-      59,
-      33
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.0,
-     "ink_median": 1.35,
-     "ink_core_ring": 9.77,
-     "ground_swing": 9.74,
-     "ground_lum": 0.042,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      1412,
-      2339,
-      26,
-      100
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.02,
-     "ink_median": 1.54,
-     "ink_core_ring": 5.12,
-     "ground_swing": 7.2,
-     "ground_lum": 0.0321,
-     "ground_lum_ring": 0.3607
-    },
-    {
-     "box": [
-      21,
-      23,
-      44,
-      70
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.37,
-     "ink_core_ring": 8.14,
-     "ground_swing": 8.79,
-     "ground_lum": 0.0378,
-     "ground_lum_ring": 0.6455
-    },
-    {
-     "box": [
       1150,
-      2900,
-      55,
-      33
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.05,
-     "ink_median": 1.29,
-     "ink_core_ring": 9.92,
-     "ground_swing": 9.48,
-     "ground_lum": 0.0445,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      652,
-      239,
-      28,
-      30
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.06,
-     "ink_median": 1.03,
-     "ink_core_ring": 1.57,
-     "ground_swing": 1.49,
-     "ground_lum": 0.0364,
-     "ground_lum_ring": 0.078
-    },
-    {
-     "box": [
-      123,
-      73,
-      230,
-      101
-     ],
-     "glyphs": 16,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.07,
-     "ink_median": 1.27,
-     "ink_core_ring": 10.09,
-     "ground_swing": 9.51,
-     "ground_lum": 0.0403,
-     "ground_lum_ring": 0.8032
-    },
-    {
-     "box": [
-      437,
-      786,
-      54,
-      41
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.1,
-     "ink_median": 1.1,
-     "ink_core_ring": 7.77,
-     "ground_swing": 7.06,
-     "ground_lum": 0.0728,
-     "ground_lum_ring": 0.8166
-    },
-    {
-     "box": [
-      415,
-      1501,
-      213,
-      60
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.1,
-     "ink_median": 1.05,
-     "ink_core_ring": 1.47,
-     "ground_swing": 1.34,
-     "ground_lum": 0.6142,
-     "ground_lum_ring": 0.839
-    },
-    {
-     "box": [
-      73,
-      1596,
-      118,
+      2898,
+      132,
       35
      ],
-     "glyphs": 1,
+     "glyphs": 5,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.12,
-     "ink_median": 1.07,
-     "ink_core_ring": 1.43,
-     "ground_swing": 1.28,
-     "ground_lum": 0.6475,
-     "ground_lum_ring": 0.839
-    },
-    {
-     "box": [
-      809,
-      1512,
-      125,
-      34
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.13,
-     "ink_median": 1.08,
-     "ink_core_ring": 1.48,
-     "ground_swing": 1.31,
-     "ground_lum": 0.6362,
-     "ground_lum_ring": 0.8428
-    },
-    {
-     "box": [
-      304,
-      1513,
-      66,
-      51
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.14,
-     "ink_median": 1.07,
-     "ink_core_ring": 1.51,
-     "ground_swing": 1.33,
-     "ground_lum": 0.6205,
-     "ground_lum_ring": 0.839
+     "ink_core": 1.04,
+     "ink_median": 1.3,
+     "ink_core_ring": 9.77,
+     "ground_swing": 9.43,
+     "ground_lum": 0.045,
+     "ground_lum_ring": 0.8461,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
       157,
       785,
-      274,
+      334,
       42
      ],
-     "glyphs": 9,
+     "glyphs": 11,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.15,
-     "ink_median": 1.15,
+     "ink_core": 1.14,
+     "ink_median": 1.14,
      "ink_core_ring": 7.81,
-     "ground_swing": 6.77,
-     "ground_lum": 0.0786,
-     "ground_lum_ring": 0.8212
+     "ground_swing": 6.85,
+     "ground_lum": 0.0772,
+     "ground_lum_ring": 0.8212,
+     "says": "the six words",
+     "px": 45,
+     "points": 15,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      247,
-      1531,
-      26,
-      22
+      123,
+      72,
+      1055,
+      102
      ],
-     "glyphs": 2,
+     "glyphs": 33,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 1.15,
-     "ink_median": 1.05,
-     "ink_core_ring": 1.56,
-     "ground_swing": 1.36,
-     "ground_lum": 0.6021,
-     "ground_lum_ring": 0.839
-    },
-    {
-     "box": [
-      767,
-      1485,
-      32,
-      36
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.16,
-     "ink_median": 1.06,
-     "ink_core_ring": 1.52,
-     "ground_swing": 1.32,
-     "ground_lum": 0.6273,
-     "ground_lum_ring": 0.839
-    },
-    {
-     "box": [
-      1045,
-      1524,
-      118,
-      35
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.16,
-     "ink_median": 1.06,
-     "ink_core_ring": 1.52,
-     "ground_swing": 1.31,
-     "ground_lum": 0.6345,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      937,
-      1524,
-      99,
-      51
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.17,
-     "ink_median": 1.05,
-     "ink_core_ring": 1.58,
-     "ground_swing": 1.36,
-     "ground_lum": 0.6076,
-     "ground_lum_ring": 0.8428
+     "ink_median": 1.19,
+     "ink_core_ring": 10.13,
+     "ground_swing": 8.9,
+     "ground_lum": 0.0471,
+     "ground_lum_ring": 0.8032,
+     "says": "week one, and the room smells right again",
+     "px": 51,
+     "points": 17,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "d91f2a44"
     },
     {
      "box": [
@@ -2427,97 +900,13 @@
      "ink_core_ring": 2.85,
      "ground_swing": 2.43,
      "ground_lum": 0.319,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      73,
-      1085,
-      63,
-      19
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.18,
-     "ink_median": 1.08,
-     "ink_core_ring": 1.43,
-     "ground_swing": 1.22,
-     "ground_lum": 0.683,
-     "ground_lum_ring": 0.8385
-    },
-    {
-     "box": [
-      1201,
-      1524,
-      53,
-      44
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.18,
-     "ink_median": 1.09,
-     "ink_core_ring": 1.52,
-     "ground_swing": 1.3,
-     "ground_lum": 0.6403,
-     "ground_lum_ring": 0.8428
-    },
-    {
-     "box": [
-      756,
-      352,
-      632,
-      71
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.4,
-     "ink_median": 1.1,
-     "ink_core_ring": 9.85,
-     "ground_swing": 7.07,
-     "ground_lum": 0.0762,
-     "ground_lum_ring": 0.839
-    },
-    {
-     "box": [
-      93,
-      1855,
-      20,
-      46
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.54,
-     "ink_median": 1.19,
-     "ink_core_ring": 2.0,
-     "ground_swing": 1.31,
-     "ground_lum": 0.6104,
-     "ground_lum_ring": 0.804
-    },
-    {
-     "box": [
-      157,
-      680,
-      508,
-      55
-     ],
-     "glyphs": 16,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.77,
-     "ink_median": 1.77,
-     "ink_core_ring": 9.42,
-     "ground_swing": 5.34,
-     "ground_lum": 0.1136,
-     "ground_lum_ring": 0.8212
+     "ground_lum_ring": 0.8461,
+     "says": "quietly",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
@@ -2535,7 +924,13 @@
      "ink_core_ring": 14.88,
      "ground_swing": 8.04,
      "ground_lum": 0.0615,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "wake me",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
@@ -2553,25 +948,37 @@
      "ink_core_ring": 2.42,
      "ground_swing": 1.32,
      "ground_lum": 0.629,
-     "ground_lum_ring": 0.839
+     "ground_lum_ring": 0.839,
+     "says": "wake me",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      1151,
-      2582,
-      120,
-      33
+      1100,
+      2580,
+      199,
+      36
      ],
-     "glyphs": 4,
+     "glyphs": 8,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.87,
-     "ink_median": 1.85,
+     "ink_core": 1.89,
+     "ink_median": 1.87,
      "ink_core_ring": 2.44,
-     "ground_swing": 1.31,
-     "ground_lum": 0.6354,
-     "ground_lum_ring": 0.8461
+     "ground_swing": 1.29,
+     "ground_lum": 0.6426,
+     "ground_lum_ring": 0.8461,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
@@ -2589,25 +996,13 @@
      "ink_core_ring": 2.44,
      "ground_swing": 1.29,
      "ground_lum": 0.6421,
-     "ground_lum_ring": 0.8428
-    },
-    {
-     "box": [
-      1151,
-      2654,
-      120,
-      33
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.93,
-     "ink_median": 1.92,
-     "ink_core_ring": 2.44,
-     "ground_swing": 1.26,
-     "ground_lum": 0.6595,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8428,
+     "says": "wake me",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
@@ -2625,25 +1020,37 @@
      "ink_core_ring": 2.43,
      "ground_swing": 1.26,
      "ground_lum": 0.6596,
-     "ground_lum_ring": 0.8395
+     "ground_lum_ring": 0.8395,
+     "says": "wake me",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      1275,
+      1099,
       2724,
-      23,
+      199,
       36
      ],
-     "glyphs": 2,
+     "glyphs": 8,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 1.94,
      "ink_median": 1.93,
-     "ink_core_ring": 2.44,
+     "ink_core_ring": 2.45,
      "ground_swing": 1.26,
      "ground_lum": 0.6626,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
@@ -2661,124 +1068,142 @@
      "ink_core_ring": 2.44,
      "ground_swing": 1.26,
      "ground_lum": 0.6601,
-     "ground_lum_ring": 0.8428
+     "ground_lum_ring": 0.8428,
+     "says": "wake me",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      1275,
-      2580,
-      24,
+      1100,
+      2652,
+      198,
       36
      ],
-     "glyphs": 2,
+     "glyphs": 8,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 1.95,
-     "ink_median": 1.93,
-     "ink_core_ring": 2.43,
+     "ink_median": 1.94,
+     "ink_core_ring": 2.44,
      "ground_swing": 1.25,
-     "ground_lum": 0.6638,
-     "ground_lum_ring": 0.8428
+     "ground_lum": 0.6664,
+     "ground_lum_ring": 0.8461,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      1275,
-      2652,
-      23,
-      36
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.99,
-     "ink_median": 1.99,
-     "ink_core_ring": 2.44,
-     "ground_swing": 1.23,
-     "ground_lum": 0.6814,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      1274,
+      1099,
       2796,
-      24,
+      199,
       36
      ],
-     "glyphs": 2,
+     "glyphs": 8,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 2.0,
-     "ink_median": 1.98,
-     "ink_core_ring": 2.44,
-     "ground_swing": 1.22,
-     "ground_lum": 0.6834,
-     "ground_lum_ring": 0.8428
+     "ink_core": 1.95,
+     "ink_median": 1.94,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.25,
+     "ground_lum": 0.6659,
+     "ground_lum_ring": 0.8461,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      1276,
+      1101,
       2346,
-      23,
+      198,
       36
      ],
-     "glyphs": 2,
+     "glyphs": 8,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 2.05,
      "ink_median": 2.03,
-     "ink_core_ring": 2.44,
+     "ink_core_ring": 2.45,
      "ground_swing": 1.2,
-     "ground_lum": 0.7003,
-     "ground_lum_ring": 0.8461
+     "ground_lum": 0.7023,
+     "ground_lum_ring": 0.8471,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      948,
+      921,
       1823,
-      115,
+      142,
       44
      ],
-     "glyphs": 5,
+     "glyphs": 6,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 2.44,
      "ink_median": 2.42,
      "ink_core_ring": 2.44,
-     "ground_swing": 1.03,
+     "ground_swing": 1.04,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "quietly",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      948,
+      921,
       1895,
-      369,
+      142,
       44
      ],
-     "glyphs": 12,
+     "glyphs": 6,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 2.44,
      "ink_median": 2.42,
      "ink_core_ring": 2.44,
-     "ground_swing": 1.06,
+     "ground_swing": 1.02,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "quietly",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      962,
-      1967,
-      369,
-      44
+      1049,
+      1896,
+      268,
+      36
      ],
-     "glyphs": 9,
+     "glyphs": 7,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
@@ -2787,61 +1212,61 @@
      "ink_core_ring": 2.44,
      "ground_swing": 1.05,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      738,
-      2344,
-      140,
+      1094,
+      1968,
+      237,
       36
      ],
-     "glyphs": 5,
+     "glyphs": 7,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 2.44,
      "ink_median": 2.42,
      "ink_core_ring": 2.44,
-     "ground_swing": 1.16,
+     "ground_swing": 1.07,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      1100,
-      2591,
-      46,
-      24
+      709,
+      2344,
+      169,
+      36
      ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.44,
-     "ink_median": 2.44,
-     "ink_core_ring": 2.44,
-     "ground_swing": 1.08,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      1100,
-      2663,
-      46,
-      24
-     ],
-     "glyphs": 2,
+     "glyphs": 6,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 2.44,
      "ink_median": 2.42,
      "ink_core_ring": 2.44,
-     "ground_swing": 1.03,
+     "ground_swing": 1.12,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "wake me",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
@@ -2859,25 +1284,85 @@
      "ink_core_ring": 2.45,
      "ground_swing": 1.05,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
-      987,
-      2039,
-      342,
+      893,
+      1967,
+      199,
       44
      ],
-     "glyphs": 7,
+     "glyphs": 5,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461,
+     "says": "quietly",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
+    },
+    {
+     "box": [
+      975,
+      2039,
+      95,
+      44
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.45,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.45,
+     "ground_swing": 1.03,
+     "ground_lum": 0.8471,
+     "ground_lum_ring": 0.8471,
+     "says": "quietly",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
+    },
+    {
+     "box": [
+      1074,
+      2040,
+      255,
+      36
+     ],
+     "glyphs": 4,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 2.45,
      "ink_median": 2.43,
      "ink_core_ring": 2.45,
-     "ground_swing": 1.06,
+     "ground_swing": 1.05,
      "ground_lum": 0.848,
-     "ground_lum_ring": 0.848
+     "ground_lum_ring": 0.848,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
@@ -2893,9 +1378,15 @@
      "ink_core": 2.45,
      "ink_median": 2.42,
      "ink_core_ring": 2.45,
-     "ground_swing": 1.03,
+     "ground_swing": 1.09,
      "ground_lum": 0.8471,
-     "ground_lum_ring": 0.8471
+     "ground_lum_ring": 0.8471,
+     "says": "wake me",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
@@ -2913,43 +1404,13 @@
      "ink_core_ring": 2.45,
      "ground_swing": 1.09,
      "ground_lum": 0.848,
-     "ground_lum_ring": 0.848
-    },
-    {
-     "box": [
-      1128,
-      2348,
-      80,
-      33
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.45,
-     "ink_median": 2.43,
-     "ink_core_ring": 2.45,
-     "ground_swing": 1.14,
-     "ground_lum": 0.848,
-     "ground_lum_ring": 0.848
-    },
-    {
-     "box": [
-      1213,
-      2348,
-      59,
-      33
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.45,
-     "ink_median": 2.42,
-     "ink_core_ring": 2.45,
-     "ground_swing": 1.19,
-     "ground_lum": 0.8471,
-     "ground_lum_ring": 0.8471
+     "ground_lum_ring": 0.848,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
@@ -2967,7 +1428,13 @@
      "ink_core_ring": 2.45,
      "ground_swing": 1.02,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "wake me",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
@@ -2985,493 +1452,133 @@
      "ink_core_ring": 2.45,
      "ground_swing": 1.12,
      "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      1099,
-      2735,
-      46,
-      24
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.45,
-     "ink_median": 2.44,
-     "ink_core_ring": 2.45,
-     "ground_swing": 1.02,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      1150,
-      2726,
-      121,
-      33
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.45,
-     "ink_median": 2.42,
-     "ink_core_ring": 2.45,
-     "ground_swing": 1.15,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      1099,
-      2807,
-      46,
-      24
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.45,
-     "ink_median": 2.42,
-     "ink_core_ring": 2.45,
-     "ground_swing": 1.02,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      1150,
-      2798,
-      120,
-      33
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.45,
-     "ink_median": 2.42,
-     "ink_core_ring": 2.45,
-     "ground_swing": 1.1,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
+     "ground_lum_ring": 0.8461,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     },
     {
      "box": [
       913,
       2243,
-      404,
+      152,
       44
      ],
-     "glyphs": 5,
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.51,
+     "ink_median": 2.42,
+     "ink_core_ring": 2.51,
+     "ground_swing": 1.02,
+     "ground_lum": 0.8461,
+     "ground_lum_ring": 0.8461,
+     "says": "quietly",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
+    },
+    {
+     "box": [
+      1068,
+      2244,
+      249,
+      36
+     ],
+     "glyphs": 2,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 2.54,
-     "ink_median": 2.42,
+     "ink_median": 2.43,
      "ink_core_ring": 2.54,
-     "ground_swing": 1.02,
-     "ground_lum": 0.8466,
-     "ground_lum_ring": 0.8466
-    },
-    {
-     "box": [
-      356,
-      72,
-      822,
-      52
-     ],
-     "glyphs": 26,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.03,
-     "ink_median": 1.83,
-     "ink_core_ring": 7.75,
-     "ground_swing": 2.59,
-     "ground_lum": 0.2868,
-     "ground_lum_ring": 0.8111
+     "ground_swing": 1.03,
+     "ground_lum": 0.848,
+     "ground_lum_ring": 0.848,
+     "says": "not at all",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "80464648"
     }
    ]
   },
   "10_first_run.png": {
-   "runs": 33,
-   "below_floor": 14,
-   "worst_ink_core": 1.04,
-   "median_ink_core": 6.02,
-   "median_as_rendered": 4.83,
+   "runs": 13,
+   "below_floor": 1,
+   "text_runs": "declared",
+   "declared_lines": 13,
+   "marks_outside_text": 54,
+   "worst_ink_core": 1.28,
+   "median_ink_core": 7.77,
+   "median_as_rendered": 7.74,
    "detail": [
     {
      "box": [
-      235,
-      42,
-      42,
-      18
-     ],
-     "glyphs": 1,
-     "polarity": "light",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.04,
-     "ink_median": 2.48,
-     "ink_core_ring": 8.2,
-     "ground_swing": 9.45,
-     "ground_lum": 0.7956,
-     "ground_lum_ring": 0.0567
-    },
-    {
-     "box": [
-      230,
-      1422,
-      62,
-      20
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.15,
-     "ink_median": 1.08,
-     "ink_core_ring": 1.45,
-     "ground_swing": 1.26,
-     "ground_lum": 0.6416,
-     "ground_lum_ring": 0.8212
-    },
-    {
-     "box": [
-      201,
+      249,
       2735,
-      149,
+      439,
       141
      ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.15,
-     "ink_median": 1.2,
-     "ink_core_ring": 10.18,
-     "ground_swing": 8.83,
-     "ground_lum": 0.0508,
-     "ground_lum_ring": 0.8402
-    },
-    {
-     "box": [
-      36,
-      43,
-      237,
-      163
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.25,
-     "ink_median": 1.18,
-     "ink_core_ring": 12.8,
-     "ground_swing": 10.35,
-     "ground_lum": 0.0334,
-     "ground_lum_ring": 0.8073
-    },
-    {
-     "box": [
-      1349,
-      143,
-      51,
-      22
-     ],
-     "glyphs": 1,
+     "glyphs": 15,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.3,
-     "ink_median": 1.23,
-     "ink_core_ring": 11.5,
-     "ground_swing": 9.17,
-     "ground_lum": 0.039,
-     "ground_lum_ring": 0.7393
-    },
-    {
-     "box": [
-      1348,
-      2781,
-      41,
-      20
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.5,
-     "ink_median": 1.1,
-     "ink_core_ring": 5.31,
-     "ground_swing": 3.58,
-     "ground_lum": 0.1798,
-     "ground_lum_ring": 0.7619
-    },
-    {
-     "box": [
-      800,
-      1258,
-      61,
-      20
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.7,
-     "ink_median": 1.11,
-     "ink_core_ring": 2.11,
-     "ground_swing": 1.24,
-     "ground_lum": 0.6273,
-     "ground_lum_ring": 0.7932
-    },
-    {
-     "box": [
-      1041,
-      1251,
-      60,
-      19
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.71,
-     "ink_median": 1.32,
-     "ink_core_ring": 1.71,
-     "ground_swing": 1.19,
-     "ground_lum": 0.791,
-     "ground_lum_ring": 0.791
-    },
-    {
-     "box": [
-      358,
-      1259,
-      50,
-      18
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.83,
-     "ink_median": 1.07,
-     "ink_core_ring": 2.38,
-     "ground_swing": 1.3,
-     "ground_lum": 0.5979,
-     "ground_lum_ring": 0.7907
-    },
-    {
-     "box": [
-      556,
-      2797,
-      132,
-      55
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.88,
-     "ink_median": 1.88,
-     "ink_core_ring": 7.81,
-     "ground_swing": 4.16,
-     "ground_lum": 0.1597,
-     "ground_lum_ring": 0.8212
-    },
-    {
-     "box": [
-      1154,
-      1441,
-      54,
-      19
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.72,
-     "ink_median": 1.26,
-     "ink_core_ring": 3.73,
-     "ground_swing": 1.37,
-     "ground_lum": 0.5761,
-     "ground_lum_ring": 0.8083
-    },
-    {
-     "box": [
-      507,
-      1248,
-      83,
-      30
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.97,
-     "ink_median": 1.26,
-     "ink_core_ring": 4.04,
-     "ground_swing": 1.35,
-     "ground_lum": 0.5913,
-     "ground_lum_ring": 0.8242
-    },
-    {
-     "box": [
-      954,
-      2738,
-      135,
-      18
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.34,
-     "ink_median": 1.33,
-     "ink_core_ring": 4.0,
-     "ground_swing": 1.2,
-     "ground_lum": 0.6721,
-     "ground_lum_ring": 0.8162
-    },
-    {
-     "box": [
-      1050,
-      1603,
-      133,
-      42
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.66,
-     "ink_median": 2.96,
-     "ink_core_ring": 5.31,
-     "ground_swing": 1.47,
-     "ground_lum": 0.5521,
-     "ground_lum_ring": 0.8242
+     "ink_core": 1.28,
+     "ink_median": 1.08,
+     "ink_core_ring": 10.2,
+     "ground_swing": 7.99,
+     "ground_lum": 0.0614,
+     "ground_lum_ring": 0.8402,
+     "says": "write something",
+     "px": 48,
+     "points": 16,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     }
    ]
   },
   "12_search.png": {
-   "runs": 103,
-   "below_floor": 13,
+   "runs": 41,
+   "below_floor": 9,
+   "text_runs": "declared",
+   "declared_lines": 85,
+   "marks_outside_text": 69,
    "worst_ink_core": 1.01,
-   "median_ink_core": 8.5,
-   "median_as_rendered": 7.81,
+   "median_ink_core": 7.65,
+   "median_as_rendered": 6.61,
    "detail": [
     {
      "box": [
-      833,
+      495,
       1102,
-      65,
-      41
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.01,
-     "ink_median": 1.16,
-     "ink_core_ring": 1.56,
-     "ground_swing": 1.56,
-     "ground_lum": 0.0321,
-     "ground_lum_ring": 0.0766
-    },
-    {
-     "box": [
-      637,
-      1742,
-      88,
-      35
+      403,
+      43
      ],
      "glyphs": 5,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
      "ink_core": 1.01,
-     "ink_median": 1.16,
-     "ink_core_ring": 1.56,
-     "ground_swing": 1.56,
-     "ground_lum": 0.0323,
-     "ground_lum_ring": 0.0766
-    },
-    {
-     "box": [
-      28,
-      2233,
-      44,
-      141
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.01,
-     "ink_median": 1.35,
-     "ink_core_ring": 9.88,
-     "ground_swing": 9.94,
-     "ground_lum": 0.0355,
-     "ground_lum_ring": 0.7825
-    },
-    {
-     "box": [
-      27,
-      507,
-      365,
-      130
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.02,
-     "ink_median": 1.32,
-     "ink_core_ring": 10.28,
-     "ground_swing": 10.19,
-     "ground_lum": 0.0337,
-     "ground_lum_ring": 0.7946
-    },
-    {
-     "box": [
-      599,
-      538,
-      48,
-      53
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.0,
-     "ink_core_ring": 1.57,
-     "ground_swing": 1.54,
-     "ground_lum": 0.0324,
-     "ground_lum_ring": 0.076
-    },
-    {
-     "box": [
-      111,
-      2610,
-      237,
-      18
-     ],
-     "glyphs": 1,
-     "polarity": "light",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.05,
-     "ink_median": 1.49,
-     "ink_core_ring": 9.7,
-     "ground_swing": 10.0,
-     "ground_lum": 0.7955,
-     "ground_lum_ring": 0.0416
+     "ink_median": 1.25,
+     "ink_core_ring": 2.67,
+     "ground_swing": 1.91,
+     "ground_lum": 0.0301,
+     "ground_lum_ring": 0.1606,
+     "says": "It was the good end. I left you the better one, which is a diff\u2026",
+     "px": 57,
+     "points": 19,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff3a3a3c"
     },
     {
      "box": [
@@ -3489,7 +1596,13 @@
      "ink_core_ring": 15.16,
      "ground_swing": 14.2,
      "ground_lum": 0.0114,
-     "ground_lum_ring": 0.817
+     "ground_lum_ring": 0.817,
+     "says": "PHOTOGRAPHS",
+     "px": 28.5,
+     "points": 9.5,
+     "family": "DeskStamp",
+     "hand": "stamp",
+     "ink": "ff464648"
     },
     {
      "box": [
@@ -3507,7 +1620,13 @@
      "ink_core_ring": 15.79,
      "ground_swing": 14.54,
      "ground_lum": 0.0099,
-     "ground_lum_ring": 0.8147
+     "ground_lum_ring": 0.8147,
+     "says": "EVERYTHING",
+     "px": 28.5,
+     "points": 9.5,
+     "family": "DeskStamp",
+     "hand": "stamp",
+     "ink": "ff464648"
     },
     {
      "box": [
@@ -3525,440 +1644,422 @@
      "ink_core_ring": 15.75,
      "ground_swing": 14.3,
      "ground_lum": 0.0109,
-     "ground_lum_ring": 0.8184
+     "ground_lum_ring": 0.8184,
+     "says": "WRITTEN",
+     "px": 28.5,
+     "points": 9.5,
+     "family": "DeskStamp",
+     "hand": "stamp",
+     "ink": "ff464648"
     },
     {
      "box": [
-      1410,
-      3054,
-      18,
-      66
+      474,
+      37,
+      192,
+      42
      ],
-     "glyphs": 2,
-     "polarity": "light",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.12,
-     "ink_median": 1.01,
-     "ink_core_ring": 2.18,
-     "ground_swing": 2.01,
-     "ground_lum": 0.0719,
-     "ground_lum_ring": 0.0129
-    },
-    {
-     "box": [
-      820,
-      1546,
-      488,
-      132
-     ],
-     "glyphs": 4,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.34,
-     "ink_median": 1.34,
-     "ink_core_ring": 14.97,
-     "ground_swing": 11.2,
-     "ground_lum": 0.0313,
-     "ground_lum_ring": 0.8573
-    },
-    {
-     "box": [
-      273,
-      2495,
-      36,
-      28
-     ],
-     "glyphs": 2,
+     "glyphs": 3,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.82,
-     "ink_median": 1.77,
-     "ink_core_ring": 7.74,
-     "ground_swing": 4.28,
-     "ground_lum": 0.1534,
-     "ground_lum_ring": 0.8133
+     "ink_core": 1.16,
+     "ink_median": 1.0,
+     "ink_core_ring": 1.78,
+     "ground_swing": 1.56,
+     "ground_lum": 0.0322,
+     "ground_lum_ring": 0.0767,
+     "says": "week one, and the room smells right again",
+     "px": 51,
+     "points": 17,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "d91f2a44"
     },
     {
      "box": [
-      130,
-      2078,
-      157,
-      30
+      476,
+      0,
+      122,
+      36
+     ],
+     "glyphs": 3,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.27,
+     "ink_median": 1.14,
+     "ink_core_ring": 1.85,
+     "ground_swing": 1.47,
+     "ground_lum": 0.0374,
+     "ground_lum_ring": 0.0774,
+     "says": "Thu 3 Sep \u00b7 16:55",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      245,
+      1556,
+      423,
+      103
+     ],
+     "glyphs": 13,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.59,
+     "ink_median": 1.05,
+     "ink_core_ring": 12.96,
+     "ground_swing": 8.2,
+     "ground_lum": 0.0609,
+     "ground_lum_ring": 0.8553,
+     "says": "text when home \u00b7 kept",
+     "px": 51,
+     "points": 17,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff3a3a3c"
+    },
+    {
+     "box": [
+      138,
+      2487,
+      171,
+      36
      ],
      "glyphs": 6,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 4.42,
-     "ink_median": 4.42,
+     "ink_core": 3.38,
+     "ink_median": 3.28,
+     "ink_core_ring": 7.74,
+     "ground_swing": 2.31,
+     "ground_lum": 0.3269,
+     "ground_lum_ring": 0.8133,
+     "says": "Wed 1 Apr \u00b7 06:38",
+     "px": 33,
+     "points": 11,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      130,
+      2078,
+      202,
+      30
+     ],
+     "glyphs": 7,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 4.24,
+     "ink_median": 4.24,
      "ink_core_ring": 7.48,
-     "ground_swing": 1.7,
-     "ground_lum": 0.4429,
-     "ground_lum_ring": 0.784
+     "ground_swing": 1.77,
+     "ground_lum": 0.4227,
+     "ground_lum_ring": 0.784,
+     "says": "Wed 10 Jun \u00b7 11:52",
+     "px": 33,
+     "points": 11,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     }
    ]
   },
   "13_messenger_states.png": {
-   "runs": 63,
-   "below_floor": 19,
-   "worst_ink_core": 1.01,
-   "median_ink_core": 6.77,
-   "median_as_rendered": 4.53,
+   "runs": 40,
+   "below_floor": 10,
+   "text_runs": "declared",
+   "declared_lines": 54,
+   "marks_outside_text": 163,
+   "worst_ink_core": 1.14,
+   "median_ink_core": 5.95,
+   "median_as_rendered": 4.99,
    "detail": [
     {
      "box": [
-      582,
-      1567,
-      41,
-      27
+      123,
+      72,
+      1055,
+      102
      ],
-     "glyphs": 2,
+     "glyphs": 33,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.01,
-     "ink_median": 1.01,
-     "ink_core_ring": 1.52,
-     "ground_swing": 1.42,
-     "ground_lum": 0.5496,
-     "ground_lum_ring": 0.8507
+     "ink_core": 1.14,
+     "ink_median": 1.2,
+     "ink_core_ring": 10.13,
+     "ground_swing": 8.98,
+     "ground_lum": 0.0463,
+     "ground_lum_ring": 0.8032,
+     "says": "week one, and the room smells right again",
+     "px": 51,
+     "points": 17,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "d91f2a44"
     },
     {
      "box": [
-      707,
-      1564,
-      38,
-      24
+      290,
+      2239,
+      220,
+      58
      ],
-     "glyphs": 3,
+     "glyphs": 5,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.01,
-     "ink_median": 1.03,
-     "ink_core_ring": 1.52,
-     "ground_swing": 1.5,
-     "ground_lum": 0.5782,
-     "ground_lum_ring": 0.8958
+     "ink_core": 1.24,
+     "ink_median": 1.26,
+     "ink_core_ring": 6.87,
+     "ground_swing": 6.03,
+     "ground_lum": 0.1027,
+     "ground_lum_ring": 0.7946,
+     "says": "Thu 3 Sep \u00b7 19:40",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      500,
-      1566,
-      50,
-      21
+      358,
+      386,
+      206,
+      44
+     ],
+     "glyphs": 10,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.98,
+     "ink_median": 1.44,
+     "ink_core_ring": 7.68,
+     "ground_swing": 3.92,
+     "ground_lum": 0.1706,
+     "ground_lum_ring": 0.8059,
+     "says": "noor \u00b7 travelling",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      273,
+      2797,
+      415,
+      55
+     ],
+     "glyphs": 14,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 2.86,
+     "ink_median": 2.81,
+     "ink_core_ring": 7.81,
+     "ground_swing": 2.73,
+     "ground_lum": 0.2688,
+     "ground_lum_ring": 0.8212,
+     "says": "write something",
+     "px": 48,
+     "points": 16,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
+    {
+     "box": [
+      601,
+      1727,
+      93,
+      32
      ],
      "glyphs": 4,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.02,
-     "ink_median": 1.0,
-     "ink_core_ring": 1.59,
-     "ground_swing": 1.44,
-     "ground_lum": 0.5445,
-     "ground_lum_ring": 0.8737
+     "ink_core": 3.39,
+     "ink_median": 3.39,
+     "ink_core_ring": 4.55,
+     "ground_swing": 1.35,
+     "ground_lum": 0.6154,
+     "ground_lum_ring": 0.8428,
+     "says": "Thu 3 Sep \u00b7 19:40",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      21,
-      23,
-      44,
-      70
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.03,
-     "ink_median": 1.37,
-     "ink_core_ring": 8.14,
-     "ground_swing": 8.79,
-     "ground_lum": 0.0378,
-     "ground_lum_ring": 0.6455
-    },
-    {
-     "box": [
-      1291,
-      993,
-      34,
-      28
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.05,
-     "ink_median": 1.01,
-     "ink_core_ring": 1.47,
-     "ground_swing": 1.41,
-     "ground_lum": 0.6333,
-     "ground_lum_ring": 0.9059
-    },
-    {
-     "box": [
-      1288,
-      1062,
-      41,
-      28
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.06,
-     "ink_median": 1.02,
-     "ink_core_ring": 1.38,
-     "ground_swing": 1.31,
-     "ground_lum": 0.6855,
-     "ground_lum_ring": 0.9102
-    },
-    {
-     "box": [
-      123,
-      73,
-      230,
-      101
-     ],
-     "glyphs": 16,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.07,
-     "ink_median": 1.27,
-     "ink_core_ring": 10.09,
-     "ground_swing": 9.51,
-     "ground_lum": 0.0403,
-     "ground_lum_ring": 0.8032
-    },
-    {
-     "box": [
-      133,
-      2733,
-      217,
-      143
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.17,
-     "ink_median": 1.19,
-     "ink_core_ring": 10.84,
-     "ground_swing": 9.38,
-     "ground_lum": 0.0523,
-     "ground_lum_ring": 0.9018
-    },
-    {
-     "box": [
-      1207,
-      1307,
-      122,
+      374,
+      1727,
+      186,
       40
      ],
-     "glyphs": 2,
+     "glyphs": 7,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.26,
-     "ink_median": 1.17,
-     "ink_core_ring": 1.51,
-     "ground_swing": 1.2,
-     "ground_lum": 0.753,
-     "ground_lum_ring": 0.9102
+     "ink_core": 3.4,
+     "ink_median": 3.4,
+     "ink_core_ring": 4.53,
+     "ground_swing": 1.34,
+     "ground_lum": 0.6177,
+     "ground_lum_ring": 0.839,
+     "says": "Thu 3 Sep \u00b7 19:40",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      1348,
-      2781,
-      41,
-      20
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.5,
-     "ink_median": 1.09,
-     "ink_core_ring": 5.18,
-     "ground_swing": 3.62,
-     "ground_lum": 0.1909,
-     "ground_lum_ring": 0.7816
-    },
-    {
-     "box": [
-      556,
-      2797,
-      132,
-      55
+      650,
+      2002,
+      102,
+      31
      ],
      "glyphs": 5,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 1.88,
-     "ink_median": 1.88,
-     "ink_core_ring": 7.81,
-     "ground_swing": 4.16,
-     "ground_lum": 0.1597,
-     "ground_lum_ring": 0.8212
-    },
-    {
-     "box": [
-      235,
-      2225,
-      544,
-      53
-     ],
-     "glyphs": 9,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.98,
-     "ink_median": 2.71,
-     "ink_core_ring": 4.79,
-     "ground_swing": 1.71,
-     "ground_lum": 0.4913,
-     "ground_lum_ring": 0.8212
-    },
-    {
-     "box": [
-      356,
-      72,
-      822,
-      52
-     ],
-     "glyphs": 26,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.03,
-     "ink_median": 1.83,
-     "ink_core_ring": 7.75,
-     "ground_swing": 2.59,
-     "ground_lum": 0.2868,
-     "ground_lum_ring": 0.8111
-    },
-    {
-     "box": [
-      917,
-      2736,
-      173,
-      20
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.1,
-     "ink_median": 1.24,
-     "ink_core_ring": 3.94,
-     "ground_swing": 1.27,
-     "ground_lum": 0.6797,
-     "ground_lum_ring": 0.8774
+     "ink_core": 3.64,
+     "ink_median": 3.64,
+     "ink_core_ring": 4.55,
+     "ground_swing": 1.25,
+     "ground_lum": 0.6635,
+     "ground_lum_ring": 0.8428,
+     "says": "going",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
       533,
-      1993,
-      261,
-      38
-     ],
-     "glyphs": 11,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.45,
-     "ink_median": 3.45,
-     "ink_core_ring": 4.53,
-     "ground_swing": 1.32,
-     "ground_lum": 0.6278,
-     "ground_lum_ring": 0.839
-    },
-    {
-     "box": [
-      356,
-      1719,
-      86,
-      36
+      1997,
+      93,
+      32
      ],
      "glyphs": 4,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.51,
-     "ink_median": 3.42,
-     "ink_core_ring": 4.52,
-     "ground_swing": 1.29,
-     "ground_lum": 0.6207,
-     "ground_lum_ring": 0.8133
+     "ink_core": 3.77,
+     "ink_median": 3.77,
+     "ink_core_ring": 4.55,
+     "ground_swing": 1.21,
+     "ground_lum": 0.69,
+     "ground_lum_ring": 0.8428,
+     "says": "Thu 3 Sep \u00b7 19:40",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
-      767,
-      2580,
-      218,
-      41
-     ],
-     "glyphs": 8,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.82,
-     "ink_median": 3.82,
-     "ink_core_ring": 3.82,
-     "ground_swing": 1.19,
-     "ground_lum": 0.8461,
-     "ground_lum_ring": 0.8461
-    },
-    {
-     "box": [
-      649,
-      2387,
-      484,
-      61
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 4.18,
-     "ink_median": 1.15,
-     "ink_core_ring": 5.53,
-     "ground_swing": 1.33,
-     "ground_lum": 0.6618,
-     "ground_lum_ring": 0.8934
-    },
-    {
-     "box": [
-      447,
-      1724,
-      113,
+      624,
+      2582,
+      317,
       39
      ],
+     "glyphs": 12,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 3.79,
+     "ink_median": 3.79,
+     "ink_core_ring": 3.79,
+     "ground_swing": 1.07,
+     "ground_lum": 0.839,
+     "ground_lum_ring": 0.839,
+     "says": "it would not go",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ffa8322b"
+    },
+    {
+     "box": [
+      511,
+      2241,
+      101,
+      33
+     ],
      "glyphs": 4,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 4.47,
-     "ink_median": 4.45,
-     "ink_core_ring": 4.47,
-     "ground_swing": 1.05,
-     "ground_lum": 0.8133,
-     "ground_lum_ring": 0.8133
+     "ink_core": 4.44,
+     "ink_median": 4.38,
+     "ink_core_ring": 4.44,
+     "ground_swing": 1.02,
+     "ground_lum": 0.7946,
+     "ground_lum_ring": 0.7946,
+     "says": "Thu 3 Sep \u00b7 19:40",
+     "px": 36,
+     "points": 12,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     }
    ]
   },
   "14_media_viewer.png": {
-   "runs": 26,
-   "below_floor": 15,
+   "runs": 9,
+   "below_floor": 4,
+   "text_runs": "declared",
+   "declared_lines": 49,
+   "marks_outside_text": 51,
    "worst_ink_core": 1.01,
-   "median_ink_core": 2.5,
-   "median_as_rendered": 2.06,
+   "median_ink_core": 4.86,
+   "median_as_rendered": 2.69,
    "detail": [
+    {
+     "box": [
+      624,
+      1010,
+      329,
+      135
+     ],
+     "glyphs": 4,
+     "polarity": "dark",
+     "role": "body",
+     "floor": 4.5,
+     "ink_core": 1.01,
+     "ink_median": 1.25,
+     "ink_core_ring": 11.35,
+     "ground_swing": 11.47,
+     "ground_lum": 0.0227,
+     "ground_lum_ring": 0.7688,
+     "says": "went to the fourteenth at his flat. one room, nobody singing \u00b7 \u2026",
+     "px": 39,
+     "points": 13,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
+    },
     {
      "box": [
       381,
@@ -3975,97 +2076,13 @@
      "ink_core_ring": 2.03,
      "ground_swing": 1.93,
      "ground_lum": 0.0194,
-     "ground_lum_ring": 0.0888
-    },
-    {
-     "box": [
-      65,
-      980,
-      56,
-      20
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.01,
-     "ink_median": 1.02,
-     "ink_core_ring": 1.93,
-     "ground_swing": 1.82,
-     "ground_lum": 0.019,
-     "ground_lum_ring": 0.0823
-    },
-    {
-     "box": [
-      668,
-      1010,
-      285,
-      71
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.01,
-     "ink_median": 1.28,
-     "ink_core_ring": 11.49,
-     "ground_swing": 11.59,
-     "ground_lum": 0.022,
-     "ground_lum_ring": 0.7688
-    },
-    {
-     "box": [
-      64,
-      863,
-      239,
-      116
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.02,
-     "ink_median": 1.0,
-     "ink_core_ring": 2.79,
-     "ground_swing": 2.97,
-     "ground_lum": 0.02,
-     "ground_lum_ring": 0.1411
-    },
-    {
-     "box": [
-      624,
-      1072,
-      303,
-      73
-     ],
-     "glyphs": 3,
-     "polarity": "dark",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.04,
-     "ink_median": 1.23,
-     "ink_core_ring": 11.45,
-     "ground_swing": 11.18,
-     "ground_lum": 0.0246,
-     "ground_lum_ring": 0.7688
-    },
-    {
-     "box": [
-      979,
-      967,
-      322,
-      42
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.05,
-     "ink_median": 1.02,
-     "ink_core_ring": 1.75,
-     "ground_swing": 1.69,
-     "ground_lum": 0.4467,
-     "ground_lum_ring": 0.7778
+     "ground_lum_ring": 0.0888,
+     "says": "Sat 14 Mar \u00b7 12:50",
+     "px": 34.5,
+     "points": 11.5,
+     "family": "TeoHand",
+     "hand": "hand",
+     "ink": "ff464648"
     },
     {
      "box": [
@@ -4083,43 +2100,13 @@
      "ink_core_ring": 2.18,
      "ground_swing": 2.35,
      "ground_lum": 0.1383,
-     "ground_lum_ring": 0.0406
-    },
-    {
-     "box": [
-      46,
-      874,
-      275,
-      127
-     ],
-     "glyphs": 5,
-     "polarity": "light",
-     "role": "large",
-     "floor": 4.0,
-     "ink_core": 1.05,
-     "ink_median": 1.2,
-     "ink_core_ring": 3.19,
-     "ground_swing": 3.03,
-     "ground_lum": 0.1611,
-     "ground_lum_ring": 0.0196
-    },
-    {
-     "box": [
-      667,
-      1160,
-      147,
-      37
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.07,
-     "ink_median": 1.01,
-     "ink_core_ring": 3.96,
-     "ground_swing": 6.29,
-     "ground_lum": 0.0333,
-     "ground_lum_ring": 0.2588
+     "ground_lum_ring": 0.0406,
+     "says": "on the bus with a bag containing nothing. i have brought an emp\u2026",
+     "px": 57,
+     "points": 19,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "ff1f2a44"
     },
     {
      "box": [
@@ -4137,260 +2124,68 @@
      "ink_core_ring": 2.47,
      "ground_swing": 2.21,
      "ground_lum": 0.2858,
-     "ground_lum_ring": 0.6492
-    },
-    {
-     "box": [
-      878,
-      2495,
-      107,
-      21
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.51,
-     "ink_median": 1.39,
-     "ink_core_ring": 1.51,
-     "ground_swing": 1.14,
-     "ground_lum": 0.8822,
-     "ground_lum_ring": 0.8822
-    },
-    {
-     "box": [
-      666,
-      1284,
-      112,
-      35
-     ],
-     "glyphs": 1,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.23,
-     "ink_median": 1.73,
-     "ink_core_ring": 9.64,
-     "ground_swing": 4.36,
-     "ground_lum": 0.1148,
-     "ground_lum_ring": 0.6613
-    },
-    {
-     "box": [
-      659,
-      1196,
-      93,
-      27
-     ],
-     "glyphs": 1,
-     "polarity": "light",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.33,
-     "ink_median": 2.02,
-     "ink_core_ring": 2.33,
-     "ground_swing": 2.45,
-     "ground_lum": 0.0265,
-     "ground_lum_ring": 0.0265
-    },
-    {
-     "box": [
-      640,
-      1134,
-      129,
-      25
-     ],
-     "glyphs": 1,
-     "polarity": "light",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.66,
-     "ink_median": 2.11,
-     "ink_core_ring": 2.66,
-     "ground_swing": 2.8,
-     "ground_lum": 0.035,
-     "ground_lum_ring": 0.035
-    },
-    {
-     "box": [
-      557,
-      1948,
-      226,
-      38
-     ],
-     "glyphs": 1,
-     "polarity": "light",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 2.82,
-     "ink_median": 2.63,
-     "ink_core_ring": 2.82,
-     "ground_swing": 2.85,
-     "ground_lum": 0.0266,
-     "ground_lum_ring": 0.0266
+     "ground_lum_ring": 0.6492,
+     "says": "on the bus with a bag containing nothing. i have brought an emp\u2026",
+     "px": 57,
+     "points": 19,
+     "family": "NoorHand",
+     "hand": "hand",
+     "ink": "ff1f2a44"
     }
    ]
   },
   "17_setup_pwa.png": {
-   "runs": 93,
-   "below_floor": 3,
-   "worst_ink_core": 1.07,
+   "runs": 33,
+   "below_floor": 0,
+   "text_runs": "declared",
+   "declared_lines": 34,
+   "marks_outside_text": 45,
+   "worst_ink_core": 7.98,
    "median_ink_core": 8.07,
    "median_as_rendered": 8.07,
-   "detail": [
-    {
-     "box": [
-      1040,
-      529,
-      28,
-      49
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.07,
-     "ink_median": 1.03,
-     "ink_core_ring": 1.46,
-     "ground_swing": 1.36,
-     "ground_lum": 0.6111,
-     "ground_lum_ring": 0.8494
-    },
-    {
-     "box": [
-      347,
-      546,
-      50,
-      30
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.12,
-     "ink_median": 1.08,
-     "ink_core_ring": 1.5,
-     "ground_swing": 1.34,
-     "ground_lum": 0.6222,
-     "ground_lum_ring": 0.8494
-    },
-    {
-     "box": [
-      709,
-      592,
-      61,
-      56
-     ],
-     "glyphs": 2,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 1.15,
-     "ink_median": 1.09,
-     "ink_core_ring": 1.44,
-     "ground_swing": 1.25,
-     "ground_lum": 0.6696,
-     "ground_lum_ring": 0.8494
-    }
-   ]
+   "detail": []
   }
  },
  "failures": [
   {
-   "artifact": "05_settings.png",
-   "box": [
-    1211,
-    2900,
-    59,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.0,
-   "ink_median": 1.35,
-   "floor": 4.5,
-   "ink_core_ring": 9.77,
-   "ground_swing": 9.74
-  },
-  {
    "artifact": "12_search.png",
    "box": [
-    833,
+    495,
     1102,
-    65,
-    41
+    403,
+    43
    ],
    "role": "body",
    "polarity": "dark",
    "ink_core": 1.01,
-   "ink_median": 1.16,
+   "ink_median": 1.25,
    "floor": 4.5,
-   "ink_core_ring": 1.56,
-   "ground_swing": 1.56
+   "ink_core_ring": 2.67,
+   "ground_swing": 1.91,
+   "says": "It was the good end. I left you the better one, which is a diff\u2026",
+   "hand": "hand",
+   "ink": "ff3a3a3c",
+   "px": 57
   },
   {
-   "artifact": "12_search.png",
+   "artifact": "14_media_viewer.png",
    "box": [
-    637,
-    1742,
-    88,
-    35
+    624,
+    1010,
+    329,
+    135
    ],
    "role": "body",
    "polarity": "dark",
    "ink_core": 1.01,
-   "ink_median": 1.16,
+   "ink_median": 1.25,
    "floor": 4.5,
-   "ink_core_ring": 1.56,
-   "ground_swing": 1.56
-  },
-  {
-   "artifact": "12_search.png",
-   "box": [
-    28,
-    2233,
-    44,
-    141
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.01,
-   "ink_median": 1.35,
-   "floor": 4.0,
-   "ink_core_ring": 9.88,
-   "ground_swing": 9.94
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    582,
-    1567,
-    41,
-    27
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.01,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 1.52,
-   "ground_swing": 1.42
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    707,
-    1564,
-    38,
-    24
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.01,
-   "ink_median": 1.03,
-   "floor": 4.5,
-   "ink_core_ring": 1.52,
-   "ground_swing": 1.5
+   "ink_core_ring": 11.35,
+   "ground_swing": 11.47,
+   "says": "went to the fourteenth at his flat. one room, nobody singing \u00b7 \u2026",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 39
   },
   {
    "artifact": "14_media_viewer.png",
@@ -4406,471 +2201,51 @@
    "ink_median": 1.04,
    "floor": 4.5,
    "ink_core_ring": 2.03,
-   "ground_swing": 1.93
+   "ground_swing": 1.93,
+   "says": "Sat 14 Mar \u00b7 12:50",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 34.5
   },
   {
-   "artifact": "14_media_viewer.png",
+   "artifact": "02_chat.png",
    "box": [
-    65,
-    980,
-    56,
-    20
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.01,
-   "ink_median": 1.02,
-   "floor": 4.5,
-   "ink_core_ring": 1.93,
-   "ground_swing": 1.82
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    668,
-    1010,
-    285,
-    71
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.01,
-   "ink_median": 1.28,
-   "floor": 4.5,
-   "ink_core_ring": 11.49,
-   "ground_swing": 11.59
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    96,
-    720,
-    313,
-    57
-   ],
-   "role": "body",
-   "polarity": "light",
-   "ink_core": 1.02,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 3.24,
-   "ground_swing": 3.44
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    559,
-    1509,
-    325,
-    33
-   ],
-   "role": "body",
-   "polarity": "light",
-   "ink_core": 1.02,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 4.35,
-   "ground_swing": 4.46
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1412,
-    2339,
-    26,
-    100
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.02,
-   "ink_median": 1.54,
-   "floor": 4.0,
-   "ink_core_ring": 5.12,
-   "ground_swing": 7.2
-  },
-  {
-   "artifact": "12_search.png",
-   "box": [
-    27,
-    507,
-    365,
-    130
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.02,
-   "ink_median": 1.32,
-   "floor": 4.0,
-   "ink_core_ring": 10.28,
-   "ground_swing": 10.19
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    500,
-    1566,
-    50,
-    21
+    526,
+    2370,
+    53,
+    32
    ],
    "role": "body",
    "polarity": "dark",
    "ink_core": 1.02,
    "ink_median": 1.0,
    "floor": 4.5,
-   "ink_core_ring": 1.59,
-   "ground_swing": 1.44
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    64,
-    863,
-    239,
-    116
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.02,
-   "ink_median": 1.0,
-   "floor": 4.0,
-   "ink_core_ring": 2.79,
-   "ground_swing": 2.97
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    21,
-    23,
-    44,
-    70
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.37,
-   "floor": 4.5,
-   "ink_core_ring": 8.14,
-   "ground_swing": 8.79
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    21,
-    23,
-    44,
-    70
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.37,
-   "floor": 4.5,
-   "ink_core_ring": 8.14,
-   "ground_swing": 8.79
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    438,
-    1543,
-    185,
-    51
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 1.62,
-   "ground_swing": 1.57
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    21,
-    23,
-    44,
-    70
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.37,
-   "floor": 4.5,
-   "ink_core_ring": 8.14,
-   "ground_swing": 8.79
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    936,
-    1491,
-    11,
-    25
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.0,
-   "floor": 4.5,
-   "ink_core_ring": 1.43,
-   "ground_swing": 1.39
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    21,
-    23,
-    44,
-    70
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.37,
-   "floor": 4.5,
-   "ink_core_ring": 8.14,
-   "ground_swing": 8.79
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    167,
-    833,
-    44,
-    19
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.03,
-   "floor": 4.5,
-   "ink_core_ring": 3.21,
-   "ground_swing": 2.95
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    21,
-    23,
-    44,
-    70
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.37,
-   "floor": 4.5,
-   "ink_core_ring": 8.14,
-   "ground_swing": 8.79
-  },
-  {
-   "artifact": "12_search.png",
-   "box": [
-    599,
-    538,
-    48,
-    53
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.0,
-   "floor": 4.5,
-   "ink_core_ring": 1.57,
-   "ground_swing": 1.54
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    21,
-    23,
-    44,
-    70
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.03,
-   "ink_median": 1.37,
-   "floor": 4.5,
-   "ink_core_ring": 8.14,
-   "ground_swing": 8.79
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    517,
-    869,
-    84,
-    25
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.04,
-   "ink_median": 1.0,
-   "floor": 4.5,
-   "ink_core_ring": 1.51,
-   "ground_swing": 1.46
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    581,
-    1553,
-    27,
-    45
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.04,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 1.61,
-   "ground_swing": 1.52
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    143,
-    2025,
-    91,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.04,
-   "ink_median": 1.14,
-   "floor": 4.5,
-   "ink_core_ring": 5.32,
-   "ground_swing": 1.78
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    235,
-    42,
-    42,
-    18
-   ],
-   "role": "body",
-   "polarity": "light",
-   "ink_core": 1.04,
-   "ink_median": 2.48,
-   "floor": 4.5,
-   "ink_core_ring": 8.2,
-   "ground_swing": 9.45
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    624,
-    1072,
-    303,
-    73
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.04,
-   "ink_median": 1.23,
-   "floor": 4.0,
-   "ink_core_ring": 11.45,
-   "ground_swing": 11.18
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    646,
-    1550,
-    21,
-    40
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.05,
-   "ink_median": 1.0,
-   "floor": 4.5,
-   "ink_core_ring": 1.59,
-   "ground_swing": 1.51
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    701,
-    1556,
-    148,
-    40
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.05,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 1.52,
-   "ground_swing": 1.44
+   "ink_core_ring": 4.46,
+   "ground_swing": 4.39,
+   "says": "Wed 22 Apr \u00b7 16:44",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
   },
   {
    "artifact": "05_settings.png",
    "box": [
     1150,
-    2900,
-    55,
-    33
+    2898,
+    132,
+    35
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.05,
-   "ink_median": 1.29,
+   "ink_core": 1.04,
+   "ink_median": 1.3,
    "floor": 4.5,
-   "ink_core_ring": 9.92,
-   "ground_swing": 9.48
-  },
-  {
-   "artifact": "12_search.png",
-   "box": [
-    111,
-    2610,
-    237,
-    18
-   ],
-   "role": "body",
-   "polarity": "light",
-   "ink_core": 1.05,
-   "ink_median": 1.49,
-   "floor": 4.5,
-   "ink_core_ring": 9.7,
-   "ground_swing": 10.0
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    1291,
-    993,
-    34,
-    28
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.05,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 1.47,
-   "ground_swing": 1.41
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    979,
-    967,
-    322,
-    42
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.05,
-   "ink_median": 1.02,
-   "floor": 4.5,
-   "ink_core_ring": 1.75,
-   "ground_swing": 1.69
+   "ink_core_ring": 9.77,
+   "ground_swing": 9.43,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "14_media_viewer.png",
@@ -4886,231 +2261,11 @@
    "ink_median": 1.06,
    "floor": 4.5,
    "ink_core_ring": 2.18,
-   "ground_swing": 2.35
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    46,
-    874,
-    275,
-    127
-   ],
-   "role": "large",
-   "polarity": "light",
-   "ink_core": 1.05,
-   "ink_median": 1.2,
-   "floor": 4.0,
-   "ink_core_ring": 3.19,
-   "ground_swing": 3.03
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    652,
-    239,
-    28,
-    30
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.06,
-   "ink_median": 1.03,
-   "floor": 4.5,
-   "ink_core_ring": 1.57,
-   "ground_swing": 1.49
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    1270,
-    819,
-    43,
-    25
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.06,
-   "ink_median": 1.02,
-   "floor": 4.5,
-   "ink_core_ring": 1.53,
-   "ground_swing": 1.46
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    845,
-    1496,
-    27,
-    58
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.06,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 1.47,
-   "ground_swing": 1.39
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    652,
-    239,
-    28,
-    30
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.06,
-   "ink_median": 1.03,
-   "floor": 4.5,
-   "ink_core_ring": 1.57,
-   "ground_swing": 1.49
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    76,
-    319,
-    404,
-    114
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.06,
-   "ink_median": 1.29,
-   "floor": 4.0,
-   "ink_core_ring": 10.42,
-   "ground_swing": 9.94
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    652,
-    239,
-    28,
-    30
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.06,
-   "ink_median": 1.03,
-   "floor": 4.5,
-   "ink_core_ring": 1.57,
-   "ground_swing": 1.49
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    1288,
-    1062,
-    41,
-    28
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.06,
-   "ink_median": 1.02,
-   "floor": 4.5,
-   "ink_core_ring": 1.38,
-   "ground_swing": 1.31
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    123,
-    73,
-    230,
-    101
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.07,
-   "ink_median": 1.27,
-   "floor": 4.0,
-   "ink_core_ring": 10.09,
-   "ground_swing": 9.51
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    123,
-    73,
-    230,
-    101
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.07,
-   "ink_median": 1.27,
-   "floor": 4.0,
-   "ink_core_ring": 10.09,
-   "ground_swing": 9.51
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    123,
-    73,
-    230,
-    101
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.07,
-   "ink_median": 1.27,
-   "floor": 4.0,
-   "ink_core_ring": 10.09,
-   "ground_swing": 9.51
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    872,
-    1094,
-    64,
-    24
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.07,
-   "ink_median": 1.03,
-   "floor": 4.5,
-   "ink_core_ring": 1.41,
-   "ground_swing": 1.29
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    123,
-    73,
-    230,
-    101
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.07,
-   "ink_median": 1.27,
-   "floor": 4.0,
-   "ink_core_ring": 10.09,
-   "ground_swing": 9.51
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    123,
-    73,
-    230,
-    101
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.07,
-   "ink_median": 1.27,
-   "floor": 4.0,
-   "ink_core_ring": 10.09,
-   "ground_swing": 9.51
+   "ground_swing": 2.35,
+   "says": "on the bus with a bag containing nothing. i have brought an emp\u2026",
+   "hand": "hand",
+   "ink": "ff1f2a44",
+   "px": 57
   },
   {
    "artifact": "12_search.png",
@@ -5126,87 +2281,31 @@
    "ink_median": 1.82,
    "floor": 4.5,
    "ink_core_ring": 15.16,
-   "ground_swing": 14.2
+   "ground_swing": 14.2,
+   "says": "PHOTOGRAPHS",
+   "hand": "stamp",
+   "ink": "ff464648",
+   "px": 28.5
   },
   {
-   "artifact": "13_messenger_states.png",
+   "artifact": "04_moments.png",
    "box": [
-    123,
-    73,
-    230,
-    101
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.07,
-   "ink_median": 1.27,
-   "floor": 4.0,
-   "ink_core_ring": 10.09,
-   "ground_swing": 9.51
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    667,
-    1160,
-    147,
-    37
+    76,
+    319,
+    404,
+    114
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.07,
-   "ink_median": 1.01,
+   "ink_core": 1.08,
+   "ink_median": 1.26,
    "floor": 4.5,
-   "ink_core_ring": 3.96,
-   "ground_swing": 6.29
-  },
-  {
-   "artifact": "17_setup_pwa.png",
-   "box": [
-    1040,
-    529,
-    28,
-    49
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.07,
-   "ink_median": 1.03,
-   "floor": 4.5,
-   "ink_core_ring": 1.46,
-   "ground_swing": 1.36
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    1231,
-    1307,
-    98,
-    40
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.09,
-   "ink_median": 1.03,
-   "floor": 4.5,
-   "ink_core_ring": 1.52,
-   "ground_swing": 1.41
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    857,
-    708,
-    51,
-    67
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.09,
-   "ink_median": 1.04,
-   "floor": 4.5,
-   "ink_core_ring": 1.47,
-   "ground_swing": 1.36
+   "ink_core_ring": 10.42,
+   "ground_swing": 9.71,
+   "says": "WHAT WE SENT",
+   "hand": "stamp",
+   "ink": "ff464648",
+   "px": 36
   },
   {
    "artifact": "12_search.png",
@@ -5222,87 +2321,11 @@
    "ink_median": 1.86,
    "floor": 4.5,
    "ink_core_ring": 15.79,
-   "ground_swing": 14.54
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    441,
-    1172,
-    128,
-    25
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.1,
-   "ink_median": 1.04,
-   "floor": 4.5,
-   "ink_core_ring": 1.41,
-   "ground_swing": 1.27
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    1065,
-    1090,
-    66,
-    24
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.1,
-   "ink_median": 1.02,
-   "floor": 4.5,
-   "ink_core_ring": 1.51,
-   "ground_swing": 1.37
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    39,
-    1288,
-    441,
-    145
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.1,
-   "ink_median": 2.58,
-   "floor": 4.0,
-   "ink_core_ring": 8.61,
-   "ground_swing": 7.8
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    437,
-    786,
-    54,
-    41
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.1,
-   "ink_median": 1.1,
-   "floor": 4.5,
-   "ink_core_ring": 7.77,
-   "ground_swing": 7.06
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    415,
-    1501,
-    213,
-    60
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.1,
-   "ink_median": 1.05,
-   "floor": 4.5,
-   "ink_core_ring": 1.47,
-   "ground_swing": 1.34
+   "ground_swing": 14.54,
+   "says": "EVERYTHING",
+   "hand": "stamp",
+   "ink": "ff464648",
+   "px": 28.5
   },
   {
    "artifact": "12_search.png",
@@ -5318,359 +2341,171 @@
    "ink_median": 1.83,
    "floor": 4.5,
    "ink_core_ring": 15.75,
-   "ground_swing": 14.3
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    101,
-    604,
-    665,
-    118
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.12,
-   "ink_median": 1.07,
-   "floor": 4.0,
-   "ink_core_ring": 1.47,
-   "ground_swing": 1.32
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    73,
-    1596,
-    118,
-    35
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.12,
-   "ink_median": 1.07,
-   "floor": 4.5,
-   "ink_core_ring": 1.43,
-   "ground_swing": 1.28
-  },
-  {
-   "artifact": "12_search.png",
-   "box": [
-    1410,
-    3054,
-    18,
-    66
-   ],
-   "role": "body",
-   "polarity": "light",
-   "ink_core": 1.12,
-   "ink_median": 1.01,
-   "floor": 4.5,
-   "ink_core_ring": 2.18,
-   "ground_swing": 2.01
-  },
-  {
-   "artifact": "17_setup_pwa.png",
-   "box": [
-    347,
-    546,
-    50,
-    30
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.12,
-   "ink_median": 1.08,
-   "floor": 4.5,
-   "ink_core_ring": 1.5,
-   "ground_swing": 1.34
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    121,
-    2601,
-    160,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.13,
-   "ink_median": 1.07,
-   "floor": 4.5,
-   "ink_core_ring": 1.47,
-   "ground_swing": 1.31
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    809,
-    1512,
-    125,
-    34
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.13,
-   "ink_median": 1.08,
-   "floor": 4.5,
-   "ink_core_ring": 1.48,
-   "ground_swing": 1.31
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    123,
-    1545,
-    133,
-    28
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.14,
-   "ink_median": 1.06,
-   "floor": 4.5,
-   "ink_core_ring": 1.48,
-   "ground_swing": 1.32
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    545,
-    1231,
-    249,
-    31
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.14,
-   "ink_median": 1.06,
-   "floor": 4.5,
-   "ink_core_ring": 1.54,
-   "ground_swing": 1.35
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    304,
-    1513,
-    66,
-    51
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.14,
-   "ink_median": 1.07,
-   "floor": 4.5,
-   "ink_core_ring": 1.51,
-   "ground_swing": 1.33
+   "ground_swing": 14.3,
+   "says": "WRITTEN",
+   "hand": "stamp",
+   "ink": "ff464648",
+   "px": 28.5
   },
   {
    "artifact": "02_chat.png",
    "box": [
-    201,
-    2735,
-    149,
-    141
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.15,
-   "ink_median": 1.21,
-   "floor": 4.0,
-   "ink_core_ring": 10.78,
-   "ground_swing": 9.44
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    1136,
-    1381,
-    84,
-    31
+    123,
+    72,
+    1055,
+    102
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.15,
-   "ink_median": 1.06,
+   "ink_core": 1.14,
+   "ink_median": 1.2,
    "floor": 4.5,
-   "ink_core_ring": 1.51,
-   "ground_swing": 1.31
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    126,
-    1788,
-    86,
-    41
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.15,
-   "ink_median": 1.08,
-   "floor": 4.5,
-   "ink_core_ring": 1.46,
-   "ground_swing": 1.27
+   "ink_core_ring": 10.13,
+   "ground_swing": 8.98,
+   "says": "week one, and the room smells right again",
+   "hand": "hand",
+   "ink": "d91f2a44",
+   "px": 51
   },
   {
    "artifact": "05_settings.png",
    "box": [
     157,
     785,
-    274,
+    334,
     42
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.15,
-   "ink_median": 1.15,
+   "ink_core": 1.14,
+   "ink_median": 1.14,
    "floor": 4.5,
    "ink_core_ring": 7.81,
-   "ground_swing": 6.77
+   "ground_swing": 6.85,
+   "says": "the six words",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 45
   },
   {
-   "artifact": "05_settings.png",
+   "artifact": "13_messenger_states.png",
    "box": [
-    247,
-    1531,
-    26,
-    22
+    123,
+    72,
+    1055,
+    102
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.15,
-   "ink_median": 1.05,
-   "floor": 4.5,
-   "ink_core_ring": 1.56,
-   "ground_swing": 1.36
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    230,
-    1422,
-    62,
-    20
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.15,
-   "ink_median": 1.08,
-   "floor": 4.5,
-   "ink_core_ring": 1.45,
-   "ground_swing": 1.26
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    201,
-    2735,
-    149,
-    141
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.15,
+   "ink_core": 1.14,
    "ink_median": 1.2,
-   "floor": 4.0,
-   "ink_core_ring": 10.18,
-   "ground_swing": 8.83
+   "floor": 4.5,
+   "ink_core_ring": 10.13,
+   "ground_swing": 8.98,
+   "says": "week one, and the room smells right again",
+   "hand": "hand",
+   "ink": "d91f2a44",
+   "px": 51
   },
   {
-   "artifact": "17_setup_pwa.png",
+   "artifact": "01_pulse.png",
    "box": [
-    709,
-    592,
-    61,
-    56
+    123,
+    72,
+    1055,
+    102
    ],
    "role": "body",
    "polarity": "dark",
    "ink_core": 1.15,
-   "ink_median": 1.09,
+   "ink_median": 1.19,
    "floor": 4.5,
-   "ink_core_ring": 1.44,
-   "ground_swing": 1.25
+   "ink_core_ring": 10.13,
+   "ground_swing": 8.9,
+   "says": "week one, and the room smells right again",
+   "hand": "hand",
+   "ink": "d91f2a44",
+   "px": 51
   },
   {
    "artifact": "03_us.png",
    "box": [
-    1018,
-    710,
-    43,
-    36
+    123,
+    72,
+    1055,
+    102
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.16,
-   "ink_median": 1.08,
+   "ink_core": 1.15,
+   "ink_median": 1.19,
    "floor": 4.5,
-   "ink_core_ring": 1.54,
-   "ground_swing": 1.32
+   "ink_core_ring": 10.13,
+   "ground_swing": 8.9,
+   "says": "week one, and the room smells right again",
+   "hand": "hand",
+   "ink": "d91f2a44",
+   "px": 51
   },
   {
-   "artifact": "03_us.png",
+   "artifact": "04_moments.png",
    "box": [
-    77,
-    801,
-    84,
-    31
+    123,
+    72,
+    1055,
+    102
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.16,
-   "ink_median": 1.1,
+   "ink_core": 1.15,
+   "ink_median": 1.19,
    "floor": 4.5,
-   "ink_core_ring": 1.45,
-   "ground_swing": 1.26
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    767,
-    1485,
-    32,
-    36
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.16,
-   "ink_median": 1.06,
-   "floor": 4.5,
-   "ink_core_ring": 1.52,
-   "ground_swing": 1.32
+   "ink_core_ring": 10.13,
+   "ground_swing": 8.9,
+   "says": "week one, and the room smells right again",
+   "hand": "hand",
+   "ink": "d91f2a44",
+   "px": 51
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    1045,
-    1524,
-    118,
-    35
+    123,
+    72,
+    1055,
+    102
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.15,
+   "ink_median": 1.19,
+   "floor": 4.5,
+   "ink_core_ring": 10.13,
+   "ground_swing": 8.9,
+   "says": "week one, and the room smells right again",
+   "hand": "hand",
+   "ink": "d91f2a44",
+   "px": 51
+  },
+  {
+   "artifact": "12_search.png",
+   "box": [
+    474,
+    37,
+    192,
+    42
    ],
    "role": "body",
    "polarity": "dark",
    "ink_core": 1.16,
-   "ink_median": 1.06,
+   "ink_median": 1.0,
    "floor": 4.5,
-   "ink_core_ring": 1.52,
-   "ground_swing": 1.31
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    937,
-    1524,
-    99,
-    51
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.17,
-   "ink_median": 1.05,
-   "floor": 4.5,
-   "ink_core_ring": 1.58,
-   "ground_swing": 1.36
+   "ink_core_ring": 1.78,
+   "ground_swing": 1.56,
+   "says": "week one, and the room smells right again",
+   "hand": "hand",
+   "ink": "d91f2a44",
+   "px": 51
   },
   {
    "artifact": "05_settings.png",
@@ -5686,103 +2521,11 @@
    "ink_median": 1.01,
    "floor": 4.5,
    "ink_core_ring": 2.85,
-   "ground_swing": 2.43
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    133,
-    2733,
-    217,
-    143
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.17,
-   "ink_median": 1.19,
-   "floor": 4.0,
-   "ink_core_ring": 10.84,
-   "ground_swing": 9.38
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    1193,
-    675,
-    29,
-    44
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.18,
-   "ink_median": 1.07,
-   "floor": 4.5,
-   "ink_core_ring": 1.55,
-   "ground_swing": 1.32
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    543,
-    1190,
-    36,
-    23
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.18,
-   "ink_median": 1.14,
-   "floor": 4.5,
-   "ink_core_ring": 1.48,
-   "ground_swing": 1.26
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    906,
-    2858,
-    286,
-    43
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.18,
-   "ink_median": 1.07,
-   "floor": 4.5,
-   "ink_core_ring": 1.53,
-   "ground_swing": 1.3
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    73,
-    1085,
-    63,
-    19
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.18,
-   "ink_median": 1.08,
-   "floor": 4.5,
-   "ink_core_ring": 1.43,
-   "ground_swing": 1.22
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1201,
-    1524,
-    53,
-    44
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.18,
-   "ink_median": 1.09,
-   "floor": 4.5,
-   "ink_core_ring": 1.52,
-   "ground_swing": 1.3
+   "ground_swing": 2.43,
+   "says": "quietly",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "14_media_viewer.png",
@@ -5798,295 +2541,131 @@
    "ink_median": 1.06,
    "floor": 4.5,
    "ink_core_ring": 2.47,
-   "ground_swing": 2.21
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    122,
-    2401,
-    133,
-    56
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.21,
-   "ink_median": 1.13,
-   "floor": 4.5,
-   "ink_core_ring": 1.48,
-   "ground_swing": 1.22
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    1273,
-    2866,
-    76,
-    26
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.23,
-   "ink_median": 1.11,
-   "floor": 4.5,
-   "ink_core_ring": 1.56,
-   "ground_swing": 1.27
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    945,
-    1030,
-    424,
-    127
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.23,
-   "ink_median": 1.16,
-   "floor": 4.0,
-   "ink_core_ring": 10.72,
-   "ground_swing": 8.71
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    401,
-    741,
-    122,
-    40
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.25,
-   "ink_median": 1.19,
-   "floor": 4.5,
-   "ink_core_ring": 4.65,
-   "ground_swing": 3.73
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    186,
-    2866,
-    88,
-    31
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.25,
-   "ink_median": 1.13,
-   "floor": 4.5,
-   "ink_core_ring": 1.53,
-   "ground_swing": 1.23
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    36,
-    43,
-    237,
-    163
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.25,
-   "ink_median": 1.18,
-   "floor": 4.0,
-   "ink_core_ring": 12.8,
-   "ground_swing": 10.35
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    736,
-    1590,
-    84,
-    34
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.26,
-   "ink_median": 1.09,
-   "floor": 4.5,
-   "ink_core_ring": 1.66,
-   "ground_swing": 1.32
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    1154,
-    332,
-    195,
-    74
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.26,
-   "ink_median": 1.07,
-   "floor": 4.0,
-   "ink_core_ring": 9.77,
-   "ground_swing": 7.74
+   "ground_swing": 2.21,
+   "says": "on the bus with a bag containing nothing. i have brought an emp\u2026",
+   "hand": "hand",
+   "ink": "ff1f2a44",
+   "px": 57
   },
   {
    "artifact": "13_messenger_states.png",
    "box": [
-    1207,
-    1307,
-    122,
-    40
+    290,
+    2239,
+    220,
+    58
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.26,
-   "ink_median": 1.17,
+   "ink_core": 1.24,
+   "ink_median": 1.26,
    "floor": 4.5,
-   "ink_core_ring": 1.51,
-   "ground_swing": 1.2
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    927,
-    698,
-    28,
-    23
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.28,
-   "ink_median": 1.04,
-   "floor": 4.5,
-   "ink_core_ring": 1.76,
-   "ground_swing": 1.39
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    1349,
-    143,
-    51,
-    22
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.3,
-   "ink_median": 1.23,
-   "floor": 4.5,
-   "ink_core_ring": 11.5,
-   "ground_swing": 9.17
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    270,
-    1995,
-    64,
-    28
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.31,
-   "ink_median": 1.07,
-   "floor": 4.5,
-   "ink_core_ring": 1.72,
-   "ground_swing": 1.33
-  },
-  {
-   "artifact": "12_search.png",
-   "box": [
-    820,
-    1546,
-    488,
-    132
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.34,
-   "ink_median": 1.34,
-   "floor": 4.0,
-   "ink_core_ring": 14.97,
-   "ground_swing": 11.2
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    610,
-    1021,
-    101,
-    38
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.35,
-   "ink_median": 1.27,
-   "floor": 4.5,
-   "ink_core_ring": 2.21,
-   "ground_swing": 1.65
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    320,
-    359,
-    126,
-    172
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.37,
-   "ink_median": 1.08,
-   "floor": 4.0,
-   "ink_core_ring": 11.62,
-   "ground_swing": 8.59
+   "ink_core_ring": 6.87,
+   "ground_swing": 6.03,
+   "says": "Thu 3 Sep \u00b7 19:40",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
   },
   {
    "artifact": "02_chat.png",
    "box": [
-    238,
-    1882,
-    1014,
-    63
+    249,
+    2735,
+    439,
+    141
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.38,
-   "ink_median": 1.03,
+   "ink_core": 1.27,
+   "ink_median": 1.09,
    "floor": 4.5,
-   "ink_core_ring": 5.78,
-   "ground_swing": 4.23
+   "ink_core_ring": 10.67,
+   "ground_swing": 8.48,
+   "says": "write something",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 48
   },
   {
-   "artifact": "05_settings.png",
+   "artifact": "12_search.png",
    "box": [
-    756,
-    352,
-    632,
-    71
+    476,
+    0,
+    122,
+    36
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.4,
-   "ink_median": 1.1,
+   "ink_core": 1.27,
+   "ink_median": 1.14,
    "floor": 4.5,
-   "ink_core_ring": 9.85,
-   "ground_swing": 7.07
+   "ink_core_ring": 1.85,
+   "ground_swing": 1.47,
+   "says": "Thu 3 Sep \u00b7 16:55",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
   },
   {
-   "artifact": "01_pulse.png",
+   "artifact": "04_moments.png",
    "box": [
-    46,
-    1236,
-    185,
-    155
+    1030,
+    332,
+    319,
+    74
    ],
-   "role": "large",
+   "role": "body",
    "polarity": "dark",
-   "ink_core": 1.43,
-   "ink_median": 1.0,
-   "floor": 4.0,
-   "ink_core_ring": 10.49,
-   "ground_swing": 7.31
+   "ink_core": 1.28,
+   "ink_median": 1.06,
+   "floor": 4.5,
+   "ink_core_ring": 9.83,
+   "ground_swing": 7.7,
+   "says": "WHAT WE FELT",
+   "hand": "stamp",
+   "ink": "ff464648",
+   "px": 30
+  },
+  {
+   "artifact": "10_first_run.png",
+   "box": [
+    249,
+    2735,
+    439,
+    141
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.28,
+   "ink_median": 1.08,
+   "floor": 4.5,
+   "ink_core_ring": 10.2,
+   "ground_swing": 7.99,
+   "says": "write something",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 48
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    207,
+    658,
+    217,
+    57
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.31,
+   "ink_median": 1.82,
+   "floor": 4.5,
+   "ink_core_ring": 11.8,
+   "ground_swing": 9.03,
+   "says": "when is the exam. which day in may. i want it in my head proper\u2026",
+   "hand": "hand",
+   "ink": "ff1f2a44",
+   "px": 57
   },
   {
    "artifact": "04_moments.png",
@@ -6096,333 +2675,37 @@
     409,
     75
    ],
-   "role": "large",
+   "role": "body",
    "polarity": "dark",
    "ink_core": 1.44,
    "ink_median": 1.02,
-   "floor": 4.0,
+   "floor": 4.5,
    "ink_core_ring": 10.14,
-   "ground_swing": 7.08
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    118,
-    2519,
-    143,
-    35
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.46,
-   "ink_median": 1.08,
-   "floor": 4.5,
-   "ink_core_ring": 1.88,
-   "ground_swing": 1.29
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    1348,
-    2781,
-    41,
-    20
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.5,
-   "ink_median": 1.09,
-   "floor": 4.5,
-   "ink_core_ring": 5.18,
-   "ground_swing": 3.62
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    1348,
-    2781,
-    41,
-    20
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.5,
-   "ink_median": 1.1,
-   "floor": 4.5,
-   "ink_core_ring": 5.31,
-   "ground_swing": 3.58
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    1348,
-    2781,
-    41,
-    20
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.5,
-   "ink_median": 1.09,
-   "floor": 4.5,
-   "ink_core_ring": 5.18,
-   "ground_swing": 3.62
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    878,
-    2495,
-    107,
-    21
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.51,
-   "ink_median": 1.39,
-   "floor": 4.5,
-   "ink_core_ring": 1.51,
-   "ground_swing": 1.14
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    340,
-    1974,
-    566,
-    59
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.53,
-   "ink_median": 1.13,
-   "floor": 4.5,
-   "ink_core_ring": 1.96,
-   "ground_swing": 1.29
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    93,
-    1855,
-    20,
-    46
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.54,
-   "ink_median": 1.19,
-   "floor": 4.5,
-   "ink_core_ring": 2.0,
-   "ground_swing": 1.31
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    80,
-    1526,
-    48,
-    79
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 1.55,
-   "ink_median": 1.1,
-   "floor": 4.0,
-   "ink_core_ring": 2.0,
-   "ground_swing": 1.3
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    862,
-    1541,
-    111,
-    57
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.57,
-   "ink_median": 1.0,
-   "floor": 4.5,
-   "ink_core_ring": 2.31,
-   "ground_swing": 1.48
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    457,
-    2170,
-    651,
-    60
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.61,
-   "ink_median": 1.39,
-   "floor": 4.5,
-   "ink_core_ring": 1.61,
-   "ground_swing": 1.1
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    986,
-    2634,
-    50,
-    24
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.63,
-   "ink_median": 1.11,
-   "floor": 4.5,
-   "ink_core_ring": 2.42,
-   "ground_swing": 1.49
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    981,
-    1982,
-    80,
-    29
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.65,
-   "ink_median": 1.24,
-   "floor": 4.5,
-   "ink_core_ring": 2.15,
-   "ground_swing": 1.3
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    666,
-    1175,
-    37,
-    18
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.67,
-   "ink_median": 1.14,
-   "floor": 4.5,
-   "ink_core_ring": 2.04,
-   "ground_swing": 1.22
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    800,
-    1258,
-    61,
-    20
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.7,
-   "ink_median": 1.11,
-   "floor": 4.5,
-   "ink_core_ring": 2.11,
-   "ground_swing": 1.24
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    156,
-    1399,
-    198,
-    69
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.71,
-   "ink_median": 1.46,
-   "floor": 4.5,
-   "ink_core_ring": 11.73,
-   "ground_swing": 7.16
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    1041,
-    1251,
-    60,
-    19
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.71,
-   "ink_median": 1.32,
-   "floor": 4.5,
-   "ink_core_ring": 1.71,
-   "ground_swing": 1.19
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    157,
-    680,
-    508,
-    55
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.77,
-   "ink_median": 1.77,
-   "floor": 4.5,
-   "ink_core_ring": 9.42,
-   "ground_swing": 5.34
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    97,
-    1708,
-    21,
-    54
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.8,
-   "ink_median": 1.18,
-   "floor": 4.5,
-   "ink_core_ring": 2.26,
-   "ground_swing": 1.3
+   "ground_swing": 7.11,
+   "says": "WHAT HAPPENED",
+   "hand": "stamp",
+   "ink": "ff464648",
+   "px": 30
   },
   {
    "artifact": "12_search.png",
    "box": [
-    273,
-    2495,
-    36,
-    28
+    245,
+    1556,
+    423,
+    103
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.82,
-   "ink_median": 1.77,
+   "ink_core": 1.59,
+   "ink_median": 1.05,
    "floor": 4.5,
-   "ink_core_ring": 7.74,
-   "ground_swing": 4.28
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    358,
-    1259,
-    50,
-    18
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.83,
-   "ink_median": 1.07,
-   "floor": 4.5,
-   "ink_core_ring": 2.38,
-   "ground_swing": 1.3
+   "ink_core_ring": 12.96,
+   "ground_swing": 8.2,
+   "says": "text when home \u00b7 kept",
+   "hand": "hand",
+   "ink": "ff3a3a3c",
+   "px": 51
   },
   {
    "artifact": "05_settings.png",
@@ -6438,7 +2721,11 @@
    "ink_median": 1.0,
    "floor": 4.5,
    "ink_core_ring": 14.88,
-   "ground_swing": 8.04
+   "ground_swing": 8.04,
+   "says": "wake me",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
@@ -6454,71 +2741,51 @@
    "ink_median": 1.85,
    "floor": 4.5,
    "ink_core_ring": 2.42,
-   "ground_swing": 1.32
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1151,
-    2582,
-    120,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.87,
-   "ink_median": 1.85,
-   "floor": 4.5,
-   "ink_core_ring": 2.44,
-   "ground_swing": 1.31
+   "ground_swing": 1.32,
+   "says": "wake me",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "02_chat.png",
    "box": [
-    556,
-    2797,
-    132,
-    55
+    156,
+    1399,
+    282,
+    69
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.88,
-   "ink_median": 1.88,
+   "ink_core": 1.89,
+   "ink_median": 1.39,
    "floor": 4.5,
-   "ink_core_ring": 7.81,
-   "ground_swing": 4.16
+   "ink_core_ring": 11.82,
+   "ground_swing": 6.78,
+   "says": "Wed 22 Apr \u00b7 16:36",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
   },
   {
-   "artifact": "10_first_run.png",
+   "artifact": "05_settings.png",
    "box": [
-    556,
-    2797,
-    132,
-    55
+    1100,
+    2580,
+    199,
+    36
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 1.88,
-   "ink_median": 1.88,
+   "ink_core": 1.89,
+   "ink_median": 1.87,
    "floor": 4.5,
-   "ink_core_ring": 7.81,
-   "ground_swing": 4.16
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    556,
-    2797,
-    132,
-    55
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.88,
-   "ink_median": 1.88,
-   "floor": 4.5,
-   "ink_core_ring": 7.81,
-   "ground_swing": 4.16
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.29,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
@@ -6534,39 +2801,11 @@
    "ink_median": 1.89,
    "floor": 4.5,
    "ink_core_ring": 2.44,
-   "ground_swing": 1.29
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    476,
-    2039,
-    694,
-    50
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.92,
-   "ink_median": 1.15,
-   "floor": 4.5,
-   "ink_core_ring": 2.53,
-   "ground_swing": 1.3
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1151,
-    2654,
-    120,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.93,
-   "ink_median": 1.92,
-   "floor": 4.5,
-   "ink_core_ring": 2.44,
-   "ground_swing": 1.26
+   "ground_swing": 1.29,
+   "says": "wake me",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
@@ -6582,14 +2821,18 @@
    "ink_median": 1.93,
    "floor": 4.5,
    "ink_core_ring": 2.43,
-   "ground_swing": 1.26
+   "ground_swing": 1.26,
+   "says": "wake me",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    1275,
+    1099,
     2724,
-    23,
+    199,
     36
    ],
    "role": "body",
@@ -6597,8 +2840,12 @@
    "ink_core": 1.94,
    "ink_median": 1.93,
    "floor": 4.5,
-   "ink_core_ring": 2.44,
-   "ground_swing": 1.26
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.26,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
@@ -6614,62 +2861,78 @@
    "ink_median": 1.94,
    "floor": 4.5,
    "ink_core_ring": 2.44,
-   "ground_swing": 1.26
+   "ground_swing": 1.26,
+   "says": "wake me",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    1275,
-    2580,
-    24,
+    1100,
+    2652,
+    198,
     36
    ],
    "role": "body",
    "polarity": "dark",
    "ink_core": 1.95,
-   "ink_median": 1.93,
-   "floor": 4.5,
-   "ink_core_ring": 2.43,
-   "ground_swing": 1.25
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1275,
-    2652,
-    23,
-    36
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 1.99,
-   "ink_median": 1.99,
+   "ink_median": 1.94,
    "floor": 4.5,
    "ink_core_ring": 2.44,
-   "ground_swing": 1.23
+   "ground_swing": 1.25,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    1274,
+    1099,
     2796,
-    24,
+    199,
     36
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 2.0,
-   "ink_median": 1.98,
+   "ink_core": 1.95,
+   "ink_median": 1.94,
    "floor": 4.5,
-   "ink_core_ring": 2.44,
-   "ground_swing": 1.22
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.25,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    358,
+    386,
+    206,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 1.98,
+   "ink_median": 1.44,
+   "floor": 4.5,
+   "ink_core_ring": 7.68,
+   "ground_swing": 3.92,
+   "says": "noor \u00b7 travelling",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    1276,
+    1101,
     2346,
-    23,
+    198,
     36
    ],
    "role": "body",
@@ -6677,8 +2940,12 @@
    "ink_core": 2.05,
    "ink_median": 2.03,
    "floor": 4.5,
-   "ink_core_ring": 2.44,
-   "ground_swing": 1.2
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.2,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "04_moments.png",
@@ -6688,61 +2955,17 @@
     453,
     139
    ],
-   "role": "large",
+   "role": "body",
    "polarity": "dark",
    "ink_core": 2.12,
    "ink_median": 1.02,
-   "floor": 4.0,
+   "floor": 4.5,
    "ink_core_ring": 5.93,
-   "ground_swing": 2.79
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    321,
-    1184,
-    50,
-    20
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.21,
-   "ink_median": 1.1,
-   "floor": 4.5,
-   "ink_core_ring": 2.87,
-   "ground_swing": 1.33
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    117,
-    2047,
-    119,
-    85
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 2.23,
-   "ink_median": 2.04,
-   "floor": 4.0,
-   "ink_core_ring": 2.23,
-   "ground_swing": 1.35
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    666,
-    1284,
-    112,
-    35
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.23,
-   "ink_median": 1.73,
-   "floor": 4.5,
-   "ink_core_ring": 9.64,
-   "ground_swing": 4.36
+   "ground_swing": 2.79,
+   "says": "38s",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 42
   },
   {
    "artifact": "01_pulse.png",
@@ -6758,110 +2981,38 @@
    "ink_median": 2.25,
    "floor": 4.5,
    "ink_core_ring": 3.01,
-   "ground_swing": 1.34
+   "ground_swing": 1.34,
+   "says": "heads down",
+   "hand": "hand",
+   "ink": "99464648",
+   "px": 45
   },
   {
-   "artifact": "02_chat.png",
+   "artifact": "04_moments.png",
    "box": [
-    214,
-    2367,
-    85,
-    32
+    39,
+    1290,
+    441,
+    143
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 2.25,
-   "ink_median": 2.02,
+   "ink_core": 2.42,
+   "ink_median": 1.23,
    "floor": 4.5,
-   "ink_core_ring": 4.45,
-   "ground_swing": 1.99
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    1254,
-    415,
-    67,
-    19
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.3,
-   "ink_median": 1.17,
-   "floor": 4.5,
-   "ink_core_ring": 3.31,
-   "ground_swing": 1.45
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    853,
-    1184,
-    49,
-    22
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.3,
-   "ink_median": 1.37,
-   "floor": 4.5,
-   "ink_core_ring": 2.81,
-   "ground_swing": 1.22
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    659,
-    1196,
-    93,
-    27
-   ],
-   "role": "body",
-   "polarity": "light",
-   "ink_core": 2.33,
-   "ink_median": 2.02,
-   "floor": 4.5,
-   "ink_core_ring": 2.33,
-   "ground_swing": 2.45
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    75,
-    907,
-    165,
-    68
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.35,
-   "ink_median": 1.08,
-   "floor": 4.5,
-   "ink_core_ring": 3.06,
-   "ground_swing": 1.31
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    502,
-    874,
-    439,
-    47
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.41,
-   "ink_median": 1.09,
-   "floor": 4.5,
-   "ink_core_ring": 3.22,
-   "ground_swing": 1.34
+   "ink_core_ring": 8.61,
+   "ground_swing": 3.56,
+   "says": "63s",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 42
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    948,
+    921,
     1823,
-    115,
+    142,
     44
    ],
    "role": "body",
@@ -6870,14 +3021,18 @@
    "ink_median": 2.42,
    "floor": 4.5,
    "ink_core_ring": 2.44,
-   "ground_swing": 1.03
+   "ground_swing": 1.04,
+   "says": "quietly",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    948,
+    921,
     1895,
-    369,
+    142,
     44
    ],
    "role": "body",
@@ -6886,30 +3041,18 @@
    "ink_median": 2.42,
    "floor": 4.5,
    "ink_core_ring": 2.44,
-   "ground_swing": 1.06
+   "ground_swing": 1.02,
+   "says": "quietly",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    962,
-    1967,
-    369,
-    44
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.44,
-   "ink_median": 2.42,
-   "floor": 4.5,
-   "ink_core_ring": 2.44,
-   "ground_swing": 1.05
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    738,
-    2344,
-    140,
+    1049,
+    1896,
+    268,
     36
    ],
    "role": "body",
@@ -6918,31 +3061,19 @@
    "ink_median": 2.42,
    "floor": 4.5,
    "ink_core_ring": 2.44,
-   "ground_swing": 1.16
+   "ground_swing": 1.05,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    1100,
-    2591,
-    46,
-    24
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.44,
-   "ink_median": 2.44,
-   "floor": 4.5,
-   "ink_core_ring": 2.44,
-   "ground_swing": 1.08
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1100,
-    2663,
-    46,
-    24
+    1094,
+    1968,
+    237,
+    36
    ],
    "role": "body",
    "polarity": "dark",
@@ -6950,7 +3081,31 @@
    "ink_median": 2.42,
    "floor": 4.5,
    "ink_core_ring": 2.44,
-   "ground_swing": 1.03
+   "ground_swing": 1.07,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    709,
+    2344,
+    169,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.44,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.44,
+   "ground_swing": 1.12,
+   "says": "wake me",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
@@ -6966,15 +3121,59 @@
    "ink_median": 2.42,
    "floor": 4.5,
    "ink_core_ring": 2.45,
-   "ground_swing": 1.05
+   "ground_swing": 1.05,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
    "box": [
-    987,
-    2039,
-    342,
+    893,
+    1967,
+    199,
     44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.02,
+   "says": "quietly",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    975,
+    2039,
+    95,
+    44
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.45,
+   "ink_median": 2.42,
+   "floor": 4.5,
+   "ink_core_ring": 2.45,
+   "ground_swing": 1.03,
+   "says": "quietly",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1074,
+    2040,
+    255,
+    36
    ],
    "role": "body",
    "polarity": "dark",
@@ -6982,7 +3181,11 @@
    "ink_median": 2.43,
    "floor": 4.5,
    "ink_core_ring": 2.45,
-   "ground_swing": 1.06
+   "ground_swing": 1.05,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
@@ -6998,7 +3201,11 @@
    "ink_median": 2.42,
    "floor": 4.5,
    "ink_core_ring": 2.45,
-   "ground_swing": 1.03
+   "ground_swing": 1.09,
+   "says": "wake me",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
@@ -7014,39 +3221,11 @@
    "ink_median": 2.43,
    "floor": 4.5,
    "ink_core_ring": 2.45,
-   "ground_swing": 1.09
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1128,
-    2348,
-    80,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.45,
-   "ink_median": 2.43,
-   "floor": 4.5,
-   "ink_core_ring": 2.45,
-   "ground_swing": 1.14
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1213,
-    2348,
-    59,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.45,
-   "ink_median": 2.42,
-   "floor": 4.5,
-   "ink_core_ring": 2.45,
-   "ground_swing": 1.19
+   "ground_swing": 1.09,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
@@ -7062,7 +3241,11 @@
    "ink_median": 2.43,
    "floor": 4.5,
    "ink_core_ring": 2.45,
-   "ground_swing": 1.02
+   "ground_swing": 1.02,
+   "says": "wake me",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
@@ -7078,247 +3261,131 @@
    "ink_median": 2.42,
    "floor": 4.5,
    "ink_core_ring": 2.45,
-   "ground_swing": 1.12
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1099,
-    2735,
-    46,
-    24
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.45,
-   "ink_median": 2.44,
-   "floor": 4.5,
-   "ink_core_ring": 2.45,
-   "ground_swing": 1.02
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1150,
-    2726,
-    121,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.45,
-   "ink_median": 2.42,
-   "floor": 4.5,
-   "ink_core_ring": 2.45,
-   "ground_swing": 1.15
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1099,
-    2807,
-    46,
-    24
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.45,
-   "ink_median": 2.42,
-   "floor": 4.5,
-   "ink_core_ring": 2.45,
-   "ground_swing": 1.02
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    1150,
-    2798,
-    120,
-    33
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.45,
-   "ink_median": 2.42,
-   "floor": 4.5,
-   "ink_core_ring": 2.45,
-   "ground_swing": 1.1
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    243,
-    2650,
-    66,
-    29
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.52,
-   "ink_median": 1.29,
-   "floor": 4.5,
-   "ink_core_ring": 3.38,
-   "ground_swing": 1.34
+   "ground_swing": 1.12,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "05_settings.png",
    "box": [
     913,
     2243,
-    404,
+    152,
     44
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 2.54,
+   "ink_core": 2.51,
    "ink_median": 2.42,
    "floor": 4.5,
+   "ink_core_ring": 2.51,
+   "ground_swing": 1.02,
+   "says": "quietly",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
+  },
+  {
+   "artifact": "05_settings.png",
+   "box": [
+    1068,
+    2244,
+    249,
+    36
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 2.54,
+   "ink_median": 2.43,
+   "floor": 4.5,
    "ink_core_ring": 2.54,
-   "ground_swing": 1.02
+   "ground_swing": 1.03,
+   "says": "not at all",
+   "hand": "hand",
+   "ink": "80464648",
+   "px": 39
   },
   {
    "artifact": "01_pulse.png",
    "box": [
-    221,
-    1101,
-    108,
-    29
+    666,
+    1630,
+    163,
+    73
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 2.57,
-   "ink_median": 1.31,
+   "ink_core": 2.59,
+   "ink_median": 2.37,
    "floor": 4.5,
-   "ink_core_ring": 3.57,
-   "ground_swing": 1.39
+   "ink_core_ring": 3.25,
+   "ground_swing": 1.26,
+   "says": "tender",
+   "hand": "hand",
+   "ink": "99464648",
+   "px": 45
   },
   {
-   "artifact": "03_us.png",
+   "artifact": "01_pulse.png",
    "box": [
-    284,
-    1650,
-    69,
-    23
+    402,
+    1659,
+    103,
+    51
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 2.66,
-   "ink_median": 1.33,
+   "ink_core": 2.61,
+   "ink_median": 2.5,
    "floor": 4.5,
-   "ink_core_ring": 4.06,
-   "ground_swing": 1.54
+   "ink_core_ring": 3.13,
+   "ground_swing": 1.21,
+   "says": "bright",
+   "hand": "hand",
+   "ink": "99464648",
+   "px": 45
   },
   {
-   "artifact": "14_media_viewer.png",
+   "artifact": "02_chat.png",
    "box": [
-    640,
-    1134,
-    129,
-    25
-   ],
-   "role": "body",
-   "polarity": "light",
-   "ink_core": 2.66,
-   "ink_median": 2.11,
-   "floor": 4.5,
-   "ink_core_ring": 2.66,
-   "ground_swing": 2.8
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    1154,
-    1441,
-    54,
-    19
+    214,
+    2367,
+    213,
+    34
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 2.72,
-   "ink_median": 1.26,
+   "ink_core": 2.71,
+   "ink_median": 2.67,
    "floor": 4.5,
-   "ink_core_ring": 3.73,
-   "ground_swing": 1.37
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    475,
-    601,
-    488,
-    153
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 2.76,
-   "ink_median": 1.01,
-   "floor": 4.0,
-   "ink_core_ring": 8.61,
-   "ground_swing": 3.12
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    573,
-    1631,
-    292,
-    64
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.82,
-   "ink_median": 1.07,
-   "floor": 4.5,
-   "ink_core_ring": 4.11,
-   "ground_swing": 1.46
-  },
-  {
-   "artifact": "14_media_viewer.png",
-   "box": [
-    557,
-    1948,
-    226,
-    38
-   ],
-   "role": "body",
-   "polarity": "light",
-   "ink_core": 2.82,
-   "ink_median": 2.63,
-   "floor": 4.5,
-   "ink_core_ring": 2.82,
-   "ground_swing": 2.85
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    507,
-    1248,
-    83,
-    30
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.97,
-   "ink_median": 1.26,
-   "floor": 4.5,
-   "ink_core_ring": 4.04,
-   "ground_swing": 1.35
+   "ink_core_ring": 4.46,
+   "ground_swing": 1.65,
+   "says": "Wed 22 Apr \u00b7 16:44",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
   },
   {
    "artifact": "13_messenger_states.png",
    "box": [
-    235,
-    2225,
-    544,
-    53
+    273,
+    2797,
+    415,
+    55
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 2.98,
-   "ink_median": 2.71,
+   "ink_core": 2.86,
+   "ink_median": 2.81,
    "floor": 4.5,
-   "ink_core_ring": 4.79,
-   "ground_swing": 1.71
+   "ink_core_ring": 7.81,
+   "ground_swing": 2.73,
+   "says": "write something",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 48
   },
   {
    "artifact": "01_pulse.png",
@@ -7334,7 +3401,11 @@
    "ink_median": 2.99,
    "floor": 4.5,
    "ink_core_ring": 2.99,
-   "ground_swing": 1.03
+   "ground_swing": 1.03,
+   "says": "low",
+   "hand": "hand",
+   "ink": "99464648",
+   "px": 45
   },
   {
    "artifact": "01_pulse.png",
@@ -7350,103 +3421,11 @@
    "ink_median": 3.01,
    "floor": 4.5,
    "ink_core_ring": 3.01,
-   "ground_swing": 1.02
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    356,
-    72,
-    822,
-    52
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.03,
-   "ink_median": 1.83,
-   "floor": 4.5,
-   "ink_core_ring": 7.75,
-   "ground_swing": 2.59
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    356,
-    72,
-    822,
-    52
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.03,
-   "ink_median": 1.83,
-   "floor": 4.5,
-   "ink_core_ring": 7.75,
-   "ground_swing": 2.59
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    356,
-    72,
-    822,
-    52
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.03,
-   "ink_median": 1.83,
-   "floor": 4.5,
-   "ink_core_ring": 7.75,
-   "ground_swing": 2.59
-  },
-  {
-   "artifact": "04_moments.png",
-   "box": [
-    356,
-    72,
-    822,
-    52
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.03,
-   "ink_median": 1.83,
-   "floor": 4.5,
-   "ink_core_ring": 7.75,
-   "ground_swing": 2.59
-  },
-  {
-   "artifact": "05_settings.png",
-   "box": [
-    356,
-    72,
-    822,
-    52
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.03,
-   "ink_median": 1.83,
-   "floor": 4.5,
-   "ink_core_ring": 7.75,
-   "ground_swing": 2.59
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    356,
-    72,
-    822,
-    52
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.03,
-   "ink_median": 1.83,
-   "floor": 4.5,
-   "ink_core_ring": 7.75,
-   "ground_swing": 2.59
+   "ground_swing": 1.03,
+   "says": "open",
+   "hand": "hand",
+   "ink": "99464648",
+   "px": 45
   },
   {
    "artifact": "01_pulse.png",
@@ -7462,423 +3441,231 @@
    "ink_median": 2.99,
    "floor": 4.5,
    "ink_core_ring": 3.05,
-   "ground_swing": 1.09
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    423,
-    1722,
-    109,
-    42
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.06,
-   "ink_median": 3.01,
-   "floor": 4.5,
-   "ink_core_ring": 3.06,
-   "ground_swing": 1.02
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    267,
-    1734,
-    154,
-    28
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.06,
-   "ink_median": 2.98,
-   "floor": 4.5,
-   "ink_core_ring": 3.06,
-   "ground_swing": 1.02
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    97,
-    1093,
-    90,
-    34
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.1,
-   "ink_median": 1.6,
-   "floor": 4.5,
-   "ink_core_ring": 4.14,
-   "ground_swing": 1.35
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    917,
-    2736,
-    173,
-    20
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.1,
-   "ink_median": 1.24,
-   "floor": 4.5,
-   "ink_core_ring": 3.94,
-   "ground_swing": 1.27
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    666,
-    1663,
-    79,
-    38
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.12,
-   "ink_median": 3.01,
-   "floor": 4.5,
-   "ink_core_ring": 3.12,
-   "ground_swing": 1.11
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    954,
-    2738,
-    136,
-    18
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.12,
-   "ink_median": 1.28,
-   "floor": 4.5,
-   "ink_core_ring": 3.98,
-   "ground_swing": 1.28
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    482,
-    2010,
-    105,
-    52
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.13,
-   "ink_median": 3.01,
-   "floor": 4.5,
-   "ink_core_ring": 3.13,
-   "ground_swing": 1.02
+   "ground_swing": 1.09,
+   "says": "flat",
+   "hand": "hand",
+   "ink": "99464648",
+   "px": 45
   },
   {
    "artifact": "01_pulse.png",
    "box": [
     503,
     1948,
-    374,
-    42
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.15,
-   "ink_median": 2.98,
-   "floor": 4.5,
-   "ink_core_ring": 3.15,
-   "ground_swing": 1.11
-  },
-  {
-   "artifact": "03_us.png",
-   "box": [
-    353,
-    2652,
-    77,
-    38
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.22,
-   "ink_median": 1.37,
-   "floor": 4.5,
-   "ink_core_ring": 4.23,
-   "ground_swing": 1.32
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    399,
-    1425,
-    167,
-    39
+    168,
+    41
    ],
    "role": "body",
    "polarity": "dark",
    "ink_core": 3.24,
-   "ink_median": 3.19,
+   "ink_median": 3.01,
    "floor": 4.5,
-   "ink_core_ring": 4.47,
-   "ground_swing": 1.39
+   "ink_core_ring": 3.24,
+   "ground_swing": 1.02,
+   "says": "work",
+   "hand": "hand",
+   "ink": "99464648",
+   "px": 45
   },
   {
    "artifact": "01_pulse.png",
    "box": [
-    1033,
-    1068,
-    79,
-    26
+    267,
+    1722,
+    265,
+    42
    ],
    "role": "body",
    "polarity": "dark",
    "ink_core": 3.28,
-   "ink_median": 1.92,
+   "ink_median": 3.01,
    "floor": 4.5,
    "ink_core_ring": 3.28,
-   "ground_swing": 1.05
+   "ground_swing": 1.02,
+   "says": "restless",
+   "hand": "hand",
+   "ink": "99464648",
+   "px": 45
   },
   {
-   "artifact": "10_first_run.png",
+   "artifact": "12_search.png",
    "box": [
-    954,
-    2738,
-    135,
-    18
+    138,
+    2487,
+    171,
+    36
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 3.34,
-   "ink_median": 1.33,
+   "ink_core": 3.38,
+   "ink_median": 3.28,
    "floor": 4.5,
-   "ink_core_ring": 4.0,
-   "ground_swing": 1.2
+   "ink_core_ring": 7.74,
+   "ground_swing": 2.31,
+   "says": "Wed 1 Apr \u00b7 06:38",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 33
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    601,
+    1727,
+    93,
+    32
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.39,
+   "ink_median": 3.39,
+   "floor": 4.5,
+   "ink_core_ring": 4.55,
+   "ground_swing": 1.35,
+   "says": "Thu 3 Sep \u00b7 19:40",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    374,
+    1727,
+    186,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.4,
+   "ink_median": 3.4,
+   "floor": 4.5,
+   "ink_core_ring": 4.53,
+   "ground_swing": 1.34,
+   "says": "Thu 3 Sep \u00b7 19:40",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    211,
+    740,
+    271,
+    41
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.43,
+   "ink_median": 3.33,
+   "floor": 4.5,
+   "ink_core_ring": 4.59,
+   "ground_swing": 1.34,
+   "says": "Wed 22 Apr \u00b7 16:30",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
   },
   {
    "artifact": "01_pulse.png",
    "box": [
-    776,
-    1371,
-    111,
-    56
+    430,
+    2010,
+    157,
+    52
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 3.37,
-   "ink_median": 2.0,
+   "ink_core": 3.51,
+   "ink_median": 3.0,
    "floor": 4.5,
-   "ink_core_ring": 3.37,
-   "ground_swing": 1.19
+   "ink_core_ring": 3.51,
+   "ground_swing": 1.08,
+   "says": "travelling",
+   "hand": "hand",
+   "ink": "99464648",
+   "px": 45
+  },
+  {
+   "artifact": "01_pulse.png",
+   "box": [
+    932,
+    798,
+    79,
+    24
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.53,
+   "ink_median": 3.53,
+   "floor": 4.5,
+   "ink_core_ring": 7.65,
+   "ground_swing": 2.17,
+   "says": "RINGER",
+   "hand": "stamp",
+   "ink": "ff464648",
+   "px": 27
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    650,
+    2002,
+    102,
+    31
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.64,
+   "ink_median": 3.64,
+   "floor": 4.5,
+   "ink_core_ring": 4.55,
+   "ground_swing": 1.25,
+   "says": "going",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
   },
   {
    "artifact": "13_messenger_states.png",
    "box": [
     533,
-    1993,
-    261,
-    38
+    1997,
+    93,
+    32
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 3.45,
-   "ink_median": 3.45,
+   "ink_core": 3.77,
+   "ink_median": 3.77,
    "floor": 4.5,
-   "ink_core_ring": 4.53,
-   "ground_swing": 1.32
+   "ink_core_ring": 4.55,
+   "ground_swing": 1.21,
+   "says": "Thu 3 Sep \u00b7 19:40",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
   },
   {
    "artifact": "13_messenger_states.png",
    "box": [
-    356,
-    1719,
-    86,
-    36
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.51,
-   "ink_median": 3.42,
-   "floor": 4.5,
-   "ink_core_ring": 4.52,
-   "ground_swing": 1.29
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    707,
-    1283,
-    112,
-    44
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.52,
-   "ink_median": 1.96,
-   "floor": 4.5,
-   "ink_core_ring": 3.52,
-   "ground_swing": 1.14
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    333,
-    1092,
-    185,
-    43
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.58,
-   "ink_median": 1.84,
-   "floor": 4.5,
-   "ink_core_ring": 4.36,
-   "ground_swing": 1.22
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    1062,
-    1207,
-    106,
-    40
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.62,
-   "ink_median": 1.56,
-   "floor": 4.5,
-   "ink_core_ring": 5.15,
-   "ground_swing": 1.41
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    381,
-    846,
-    183,
-    36
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.66,
-   "ink_median": 3.66,
-   "floor": 4.5,
-   "ink_core_ring": 7.69,
-   "ground_swing": 2.11
-  },
-  {
-   "artifact": "10_first_run.png",
-   "box": [
-    1050,
-    1603,
-    133,
-    42
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.66,
-   "ink_median": 2.96,
-   "floor": 4.5,
-   "ink_core_ring": 5.31,
-   "ground_swing": 1.47
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    518,
-    1079,
-    228,
-    50
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.69,
-   "ink_median": 1.97,
-   "floor": 4.5,
-   "ink_core_ring": 4.49,
-   "ground_swing": 1.23
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    173,
-    760,
-    1030,
-    90
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 3.76,
-   "ink_median": 2.22,
-   "floor": 4.0,
-   "ink_core_ring": 5.02,
-   "ground_swing": 1.35
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    338,
-    923,
-    28,
-    24
+    624,
+    2582,
+    317,
+    39
    ],
    "role": "body",
    "polarity": "dark",
    "ink_core": 3.79,
-   "ink_median": 1.2,
+   "ink_median": 3.79,
    "floor": 4.5,
-   "ink_core_ring": 7.67,
-   "ground_swing": 2.04
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    1285,
-    441,
-    64,
-    95
-   ],
-   "role": "large",
-   "polarity": "dark",
-   "ink_core": 3.8,
-   "ink_median": 1.87,
-   "floor": 4.0,
-   "ink_core_ring": 4.81,
-   "ground_swing": 1.27
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    767,
-    2580,
-    218,
-    41
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.82,
-   "ink_median": 3.82,
-   "floor": 4.5,
-   "ink_core_ring": 3.82,
-   "ground_swing": 1.19
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    885,
-    1896,
-    185,
-    50
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.85,
-   "ink_median": 1.55,
-   "floor": 4.5,
-   "ink_core_ring": 3.85,
-   "ground_swing": 1.13
+   "ink_core_ring": 3.79,
+   "ground_swing": 1.07,
+   "says": "it would not go",
+   "hand": "hand",
+   "ink": "ffa8322b",
+   "px": 36
   },
   {
    "artifact": "04_moments.png",
@@ -7894,141 +3681,161 @@
    "ink_median": 3.88,
    "floor": 4.5,
    "ink_core_ring": 3.88,
-   "ground_swing": 1.1
+   "ground_swing": 1.1,
+   "says": "teo",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 39
   },
   {
    "artifact": "04_moments.png",
    "box": [
     703,
-    495,
-    51,
-    36
+    464,
+    212,
+    102
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 3.91,
-   "ink_median": 3.87,
+   "ink_core": 4.0,
+   "ink_median": 2.43,
    "floor": 4.5,
-   "ink_core_ring": 3.91,
-   "ground_swing": 1.13
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    649,
-    2387,
-    484,
-    61
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 4.18,
-   "ink_median": 1.15,
-   "floor": 4.5,
-   "ink_core_ring": 5.53,
-   "ground_swing": 1.33
-  },
-  {
-   "artifact": "01_pulse.png",
-   "box": [
-    1337,
-    866,
-    44,
-    21
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 4.3,
-   "ink_median": 2.46,
-   "floor": 4.5,
-   "ink_core_ring": 4.3,
-   "ground_swing": 1.17
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    908,
-    1199,
-    81,
-    24
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 4.33,
-   "ink_median": 1.56,
-   "floor": 4.5,
-   "ink_core_ring": 5.54,
-   "ground_swing": 1.27
+   "ink_core_ring": 4.0,
+   "ground_swing": 1.08,
+   "says": "all year",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 39
   },
   {
    "artifact": "12_search.png",
    "box": [
     130,
     2078,
-    157,
+    202,
     30
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 4.42,
-   "ink_median": 4.42,
+   "ink_core": 4.24,
+   "ink_median": 4.24,
    "floor": 4.5,
    "ink_core_ring": 7.48,
-   "ground_swing": 1.7
-  },
-  {
-   "artifact": "02_chat.png",
-   "box": [
-    344,
-    2368,
-    235,
-    41
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 4.46,
-   "ink_median": 4.38,
-   "floor": 4.5,
-   "ink_core_ring": 4.46,
-   "ground_swing": 1.04
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    447,
-    1724,
-    113,
-    39
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 4.47,
-   "ink_median": 4.45,
-   "floor": 4.5,
-   "ink_core_ring": 4.47,
-   "ground_swing": 1.05
+   "ground_swing": 1.77,
+   "says": "Wed 10 Jun \u00b7 11:52",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 33
   },
   {
    "artifact": "01_pulse.png",
    "box": [
-    772,
-    1075,
-    67,
-    39
+    338,
+    922,
+    124,
+    25
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 4.49,
-   "ink_median": 2.61,
+   "ink_core": 4.28,
+   "ink_median": 3.4,
    "floor": 4.5,
-   "ink_core_ring": 4.49,
-   "ground_swing": 1.11
+   "ink_core_ring": 7.66,
+   "ground_swing": 1.8,
+   "says": "SIGNAL",
+   "hand": "stamp",
+   "ink": "ff464648",
+   "px": 27
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    238,
+    1890,
+    284,
+    55
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.3,
+   "ink_median": 3.51,
+   "floor": 4.5,
+   "ink_core_ring": 5.35,
+   "ground_swing": 1.3,
+   "says": "Wed 22 Apr \u00b7 16:40",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    511,
+    2241,
+    101,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.44,
+   "ink_median": 4.38,
+   "floor": 4.5,
+   "ink_core_ring": 4.44,
+   "ground_swing": 1.02,
+   "says": "Thu 3 Sep \u00b7 19:40",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    428,
+    2369,
+    94,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.45,
+   "ink_median": 4.38,
+   "floor": 4.5,
+   "ink_core_ring": 4.45,
+   "ground_swing": 1.02,
+   "says": "Wed 22 Apr \u00b7 16:44",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
+  },
+  {
+   "artifact": "02_chat.png",
+   "box": [
+    419,
+    1425,
+    147,
+    33
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 4.48,
+   "ink_median": 4.42,
+   "floor": 4.5,
+   "ink_core_ring": 4.48,
+   "ground_swing": 1.06,
+   "says": "Wed 22 Apr \u00b7 16:36",
+   "hand": "hand",
+   "ink": "ff464648",
+   "px": 36
   }
  ],
- "on_moving_ground": 192,
- "would_pass_on_ring_reading": 74,
+ "on_moving_ground": 57,
+ "would_pass_on_ring_reading": 36,
  "read": 10,
- "total_runs": 759,
- "total_below_floor": 233,
+ "total_runs": 370,
+ "total_below_floor": 84,
+ "text_runs": "require",
+ "measured_from_declared_text": 10,
+ "without_a_sidecar": [],
+ "marks_outside_text": 1201,
  "ok": false
 }

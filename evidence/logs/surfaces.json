@@ -6,9 +6,1600 @@
   "folds": 1.2
  },
  "root": "app/assets",
- "surfaces": {},
+ "surfaces": {
+  "paper/graph_01.webp": {
+   "family": "paper",
+   "patch_std": 9.691,
+   "floor": 1.2
+  },
+  "paper/graph_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.28,
+   "floor": 1.2
+  },
+  "paper/graph_02.webp": {
+   "family": "paper",
+   "patch_std": 9.342,
+   "floor": 1.2
+  },
+  "paper/graph_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.415,
+   "floor": 1.2
+  },
+  "paper/graph_03.webp": {
+   "family": "paper",
+   "patch_std": 9.707,
+   "floor": 1.2
+  },
+  "paper/graph_03_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.636,
+   "floor": 1.2
+  },
+  "paper/graph_04.webp": {
+   "family": "paper",
+   "patch_std": 9.619,
+   "floor": 1.2
+  },
+  "paper/graph_04_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.804,
+   "floor": 1.2
+  },
+  "paper/index_01.webp": {
+   "family": "paper",
+   "patch_std": 11.426,
+   "floor": 1.2
+  },
+  "paper/index_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.676,
+   "floor": 1.2
+  },
+  "paper/index_02.webp": {
+   "family": "paper",
+   "patch_std": 11.275,
+   "floor": 1.2
+  },
+  "paper/index_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.681,
+   "floor": 1.2
+  },
+  "paper/legal_01.webp": {
+   "family": "paper",
+   "patch_std": 11.076,
+   "floor": 1.2
+  },
+  "paper/legal_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.026,
+   "floor": 1.2
+  },
+  "paper/legal_02.webp": {
+   "family": "paper",
+   "patch_std": 10.935,
+   "floor": 1.2
+  },
+  "paper/legal_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.944,
+   "floor": 1.2
+  },
+  "paper/lined_01.webp": {
+   "family": "paper",
+   "patch_std": 10.045,
+   "floor": 1.2
+  },
+  "paper/lined_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 8.992,
+   "floor": 1.2
+  },
+  "paper/lined_02.webp": {
+   "family": "paper",
+   "patch_std": 10.137,
+   "floor": 1.2
+  },
+  "paper/lined_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.383,
+   "floor": 1.2
+  },
+  "paper/lined_03.webp": {
+   "family": "paper",
+   "patch_std": 10.118,
+   "floor": 1.2
+  },
+  "paper/lined_03_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.21,
+   "floor": 1.2
+  },
+  "paper/lined_04.webp": {
+   "family": "paper",
+   "patch_std": 9.974,
+   "floor": 1.2
+  },
+  "paper/lined_04_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.011,
+   "floor": 1.2
+  },
+  "paper/looseleaf_01.webp": {
+   "family": "paper",
+   "patch_std": 7.271,
+   "floor": 1.2
+  },
+  "paper/looseleaf_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 7.896,
+   "floor": 1.2
+  },
+  "paper/looseleaf_02.webp": {
+   "family": "paper",
+   "patch_std": 6.584,
+   "floor": 1.2
+  },
+  "paper/looseleaf_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 7.593,
+   "floor": 1.2
+  },
+  "paper/looseleaf_03.webp": {
+   "family": "paper",
+   "patch_std": 7.484,
+   "floor": 1.2
+  },
+  "paper/looseleaf_03_dusk.webp": {
+   "family": "paper",
+   "patch_std": 8.368,
+   "floor": 1.2
+  },
+  "paper/looseleaf_04.webp": {
+   "family": "paper",
+   "patch_std": 7.11,
+   "floor": 1.2
+  },
+  "paper/looseleaf_04_dusk.webp": {
+   "family": "paper",
+   "patch_std": 7.638,
+   "floor": 1.2
+  },
+  "paper/receipt_01.webp": {
+   "family": "paper",
+   "patch_std": 9.8,
+   "floor": 1.2
+  },
+  "paper/receipt_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 10.244,
+   "floor": 1.2
+  },
+  "paper/spiral_01.webp": {
+   "family": "paper",
+   "patch_std": 9.894,
+   "floor": 1.2
+  },
+  "paper/spiral_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.128,
+   "floor": 1.2
+  },
+  "paper/spiral_02.webp": {
+   "family": "paper",
+   "patch_std": 10.147,
+   "floor": 1.2
+  },
+  "paper/spiral_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.459,
+   "floor": 1.2
+  },
+  "paper/spiral_03.webp": {
+   "family": "paper",
+   "patch_std": 10.267,
+   "floor": 1.2
+  },
+  "paper/spiral_03_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.549,
+   "floor": 1.2
+  },
+  "paper/spiral_04.webp": {
+   "family": "paper",
+   "patch_std": 10.059,
+   "floor": 1.2
+  },
+  "paper/spiral_04_dusk.webp": {
+   "family": "paper",
+   "patch_std": 9.135,
+   "floor": 1.2
+  },
+  "paper/sticky_blue_01.webp": {
+   "family": "paper",
+   "patch_std": 2.8,
+   "floor": 1.2
+  },
+  "paper/sticky_blue_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.976,
+   "floor": 1.2
+  },
+  "paper/sticky_blue_02.webp": {
+   "family": "paper",
+   "patch_std": 2.666,
+   "floor": 1.2
+  },
+  "paper/sticky_blue_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.67,
+   "floor": 1.2
+  },
+  "paper/sticky_pink_01.webp": {
+   "family": "paper",
+   "patch_std": 2.716,
+   "floor": 1.2
+  },
+  "paper/sticky_pink_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.766,
+   "floor": 1.2
+  },
+  "paper/sticky_pink_02.webp": {
+   "family": "paper",
+   "patch_std": 2.672,
+   "floor": 1.2
+  },
+  "paper/sticky_pink_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.998,
+   "floor": 1.2
+  },
+  "paper/sticky_yellow_01.webp": {
+   "family": "paper",
+   "patch_std": 2.874,
+   "floor": 1.2
+  },
+  "paper/sticky_yellow_01_dusk.webp": {
+   "family": "paper",
+   "patch_std": 3.881,
+   "floor": 1.2
+  },
+  "paper/sticky_yellow_02.webp": {
+   "family": "paper",
+   "patch_std": 2.363,
+   "floor": 1.2
+  },
+  "paper/sticky_yellow_02_dusk.webp": {
+   "family": "paper",
+   "patch_std": 4.022,
+   "floor": 1.2
+  },
+  "shell/desk.webp": {
+   "family": "shell",
+   "patch_std": 11.121,
+   "floor": 4.0
+  },
+  "shell/desk_dusk.webp": {
+   "family": "shell",
+   "patch_std": 12.531,
+   "floor": 4.0
+  },
+  "objects/obj_blanket_fold.webp": {
+   "family": "objects",
+   "patch_std": 14.217,
+   "floor": 2.0
+  },
+  "objects/obj_boat.webp": {
+   "family": "objects",
+   "patch_std": 30.33,
+   "floor": 2.0
+  },
+  "objects/obj_candle.webp": {
+   "family": "objects",
+   "patch_std": 31.749,
+   "floor": 2.0
+  },
+  "objects/obj_clover.webp": {
+   "family": "objects",
+   "patch_std": 18.37,
+   "floor": 2.0
+  },
+  "objects/obj_coffee_ring.webp": {
+   "family": "objects",
+   "patch_std": 27.323,
+   "floor": 2.0
+  },
+  "objects/obj_confetti.webp": {
+   "family": "objects",
+   "patch_std": 27.746,
+   "floor": 2.0
+  },
+  "objects/obj_crane.webp": {
+   "family": "objects",
+   "patch_std": 27.507,
+   "floor": 2.0
+  },
+  "objects/obj_crown.webp": {
+   "family": "objects",
+   "patch_std": 33.724,
+   "floor": 2.0
+  },
+  "objects/obj_crumple_ball.webp": {
+   "family": "objects",
+   "patch_std": 32.502,
+   "floor": 2.0
+  },
+  "objects/obj_fortune_teller.webp": {
+   "family": "objects",
+   "patch_std": 28.462,
+   "floor": 2.0
+  },
+  "objects/obj_gold_star.webp": {
+   "family": "objects",
+   "patch_std": 28.549,
+   "floor": 2.0
+  },
+  "objects/obj_knot.webp": {
+   "family": "objects",
+   "patch_std": 26.333,
+   "floor": 2.0
+  },
+  "objects/obj_mug.webp": {
+   "family": "objects",
+   "patch_std": 37.377,
+   "floor": 2.0
+  },
+  "objects/obj_pinch.webp": {
+   "family": "objects",
+   "patch_std": 28.128,
+   "floor": 2.0
+  },
+  "objects/obj_plane.webp": {
+   "family": "objects",
+   "patch_std": 41.931,
+   "floor": 2.0
+  },
+  "objects/obj_plaster.webp": {
+   "family": "objects",
+   "patch_std": 20.953,
+   "floor": 2.0
+  },
+  "objects/obj_ribbon.webp": {
+   "family": "objects",
+   "patch_std": 32.993,
+   "floor": 2.0
+  },
+  "objects/obj_rubber_band.webp": {
+   "family": "objects",
+   "patch_std": 28.322,
+   "floor": 2.0
+  },
+  "objects/obj_snapped_pencil.webp": {
+   "family": "objects",
+   "patch_std": 33.191,
+   "floor": 2.0
+  },
+  "objects/obj_stone.webp": {
+   "family": "objects",
+   "patch_std": 19.378,
+   "floor": 2.0
+  },
+  "objects/obj_ticket.webp": {
+   "family": "objects",
+   "patch_std": 9.686,
+   "floor": 2.0
+  },
+  "objects/obj_torn_corner.webp": {
+   "family": "objects",
+   "patch_std": 3.843,
+   "floor": 2.0
+  },
+  "folds/unfold_thirds/0000.webp": {
+   "family": "folds",
+   "patch_std": 1.592,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0001.webp": {
+   "family": "folds",
+   "patch_std": 1.581,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0002.webp": {
+   "family": "folds",
+   "patch_std": 1.551,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0003.webp": {
+   "family": "folds",
+   "patch_std": 1.586,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0004.webp": {
+   "family": "folds",
+   "patch_std": 1.505,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0005.webp": {
+   "family": "folds",
+   "patch_std": 1.549,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0006.webp": {
+   "family": "folds",
+   "patch_std": 1.564,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0007.webp": {
+   "family": "folds",
+   "patch_std": 1.52,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0008.webp": {
+   "family": "folds",
+   "patch_std": 1.599,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0009.webp": {
+   "family": "folds",
+   "patch_std": 1.536,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0010.webp": {
+   "family": "folds",
+   "patch_std": 1.554,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0011.webp": {
+   "family": "folds",
+   "patch_std": 1.607,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0012.webp": {
+   "family": "folds",
+   "patch_std": 1.613,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0013.webp": {
+   "family": "folds",
+   "patch_std": 1.612,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0014.webp": {
+   "family": "folds",
+   "patch_std": 1.599,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0015.webp": {
+   "family": "folds",
+   "patch_std": 1.539,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0016.webp": {
+   "family": "folds",
+   "patch_std": 1.571,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0017.webp": {
+   "family": "folds",
+   "patch_std": 1.569,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0018.webp": {
+   "family": "folds",
+   "patch_std": 1.563,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0019.webp": {
+   "family": "folds",
+   "patch_std": 1.584,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0020.webp": {
+   "family": "folds",
+   "patch_std": 1.559,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0021.webp": {
+   "family": "folds",
+   "patch_std": 1.568,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0022.webp": {
+   "family": "folds",
+   "patch_std": 1.53,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0023.webp": {
+   "family": "folds",
+   "patch_std": 1.605,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0024.webp": {
+   "family": "folds",
+   "patch_std": 1.576,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0025.webp": {
+   "family": "folds",
+   "patch_std": 1.573,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0026.webp": {
+   "family": "folds",
+   "patch_std": 1.591,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0027.webp": {
+   "family": "folds",
+   "patch_std": 1.576,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0028.webp": {
+   "family": "folds",
+   "patch_std": 1.543,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0029.webp": {
+   "family": "folds",
+   "patch_std": 1.59,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0030.webp": {
+   "family": "folds",
+   "patch_std": 1.537,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0031.webp": {
+   "family": "folds",
+   "patch_std": 1.605,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0032.webp": {
+   "family": "folds",
+   "patch_std": 1.622,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0033.webp": {
+   "family": "folds",
+   "patch_std": 1.501,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0034.webp": {
+   "family": "folds",
+   "patch_std": 1.56,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0035.webp": {
+   "family": "folds",
+   "patch_std": 1.599,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0036.webp": {
+   "family": "folds",
+   "patch_std": 1.53,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0037.webp": {
+   "family": "folds",
+   "patch_std": 1.567,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0038.webp": {
+   "family": "folds",
+   "patch_std": 1.58,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0039.webp": {
+   "family": "folds",
+   "patch_std": 1.58,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0040.webp": {
+   "family": "folds",
+   "patch_std": 1.592,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0041.webp": {
+   "family": "folds",
+   "patch_std": 1.583,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0042.webp": {
+   "family": "folds",
+   "patch_std": 1.521,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0043.webp": {
+   "family": "folds",
+   "patch_std": 1.598,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0044.webp": {
+   "family": "folds",
+   "patch_std": 1.614,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0045.webp": {
+   "family": "folds",
+   "patch_std": 1.608,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0046.webp": {
+   "family": "folds",
+   "patch_std": 1.548,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0047.webp": {
+   "family": "folds",
+   "patch_std": 1.562,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0048.webp": {
+   "family": "folds",
+   "patch_std": 1.582,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0049.webp": {
+   "family": "folds",
+   "patch_std": 1.539,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0050.webp": {
+   "family": "folds",
+   "patch_std": 1.574,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0051.webp": {
+   "family": "folds",
+   "patch_std": 1.534,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0052.webp": {
+   "family": "folds",
+   "patch_std": 1.585,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0053.webp": {
+   "family": "folds",
+   "patch_std": 1.573,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0054.webp": {
+   "family": "folds",
+   "patch_std": 1.57,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0055.webp": {
+   "family": "folds",
+   "patch_std": 1.562,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0056.webp": {
+   "family": "folds",
+   "patch_std": 1.538,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0057.webp": {
+   "family": "folds",
+   "patch_std": 1.56,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0058.webp": {
+   "family": "folds",
+   "patch_std": 1.596,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0059.webp": {
+   "family": "folds",
+   "patch_std": 1.596,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0060.webp": {
+   "family": "folds",
+   "patch_std": 1.665,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0061.webp": {
+   "family": "folds",
+   "patch_std": 1.775,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0062.webp": {
+   "family": "folds",
+   "patch_std": 1.796,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0063.webp": {
+   "family": "folds",
+   "patch_std": 1.799,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0064.webp": {
+   "family": "folds",
+   "patch_std": 1.943,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0065.webp": {
+   "family": "folds",
+   "patch_std": 1.976,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0066.webp": {
+   "family": "folds",
+   "patch_std": 2.07,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0067.webp": {
+   "family": "folds",
+   "patch_std": 2.186,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0068.webp": {
+   "family": "folds",
+   "patch_std": 2.201,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0069.webp": {
+   "family": "folds",
+   "patch_std": 2.211,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0070.webp": {
+   "family": "folds",
+   "patch_std": 2.303,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0071.webp": {
+   "family": "folds",
+   "patch_std": 2.291,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0072.webp": {
+   "family": "folds",
+   "patch_std": 2.341,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0073.webp": {
+   "family": "folds",
+   "patch_std": 2.262,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0074.webp": {
+   "family": "folds",
+   "patch_std": 2.296,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0075.webp": {
+   "family": "folds",
+   "patch_std": 2.322,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0076.webp": {
+   "family": "folds",
+   "patch_std": 2.289,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0077.webp": {
+   "family": "folds",
+   "patch_std": 2.249,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0078.webp": {
+   "family": "folds",
+   "patch_std": 2.238,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0079.webp": {
+   "family": "folds",
+   "patch_std": 2.193,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0080.webp": {
+   "family": "folds",
+   "patch_std": 2.13,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0081.webp": {
+   "family": "folds",
+   "patch_std": 2.13,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0082.webp": {
+   "family": "folds",
+   "patch_std": 2.037,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0083.webp": {
+   "family": "folds",
+   "patch_std": 1.995,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0084.webp": {
+   "family": "folds",
+   "patch_std": 2.024,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0085.webp": {
+   "family": "folds",
+   "patch_std": 1.949,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0086.webp": {
+   "family": "folds",
+   "patch_std": 1.86,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0087.webp": {
+   "family": "folds",
+   "patch_std": 1.866,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0088.webp": {
+   "family": "folds",
+   "patch_std": 1.747,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0089.webp": {
+   "family": "folds",
+   "patch_std": 1.778,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0090.webp": {
+   "family": "folds",
+   "patch_std": 1.761,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0091.webp": {
+   "family": "folds",
+   "patch_std": 1.77,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0092.webp": {
+   "family": "folds",
+   "patch_std": 1.738,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0093.webp": {
+   "family": "folds",
+   "patch_std": 1.73,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0094.webp": {
+   "family": "folds",
+   "patch_std": 1.745,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0095.webp": {
+   "family": "folds",
+   "patch_std": 1.7,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0096.webp": {
+   "family": "folds",
+   "patch_std": 1.705,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0097.webp": {
+   "family": "folds",
+   "patch_std": 1.729,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0098.webp": {
+   "family": "folds",
+   "patch_std": 1.677,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0099.webp": {
+   "family": "folds",
+   "patch_std": 1.712,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0100.webp": {
+   "family": "folds",
+   "patch_std": 1.707,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0101.webp": {
+   "family": "folds",
+   "patch_std": 1.703,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0102.webp": {
+   "family": "folds",
+   "patch_std": 1.683,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0103.webp": {
+   "family": "folds",
+   "patch_std": 1.717,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0104.webp": {
+   "family": "folds",
+   "patch_std": 1.722,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0105.webp": {
+   "family": "folds",
+   "patch_std": 1.716,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0106.webp": {
+   "family": "folds",
+   "patch_std": 1.725,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0107.webp": {
+   "family": "folds",
+   "patch_std": 1.696,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0108.webp": {
+   "family": "folds",
+   "patch_std": 1.74,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0109.webp": {
+   "family": "folds",
+   "patch_std": 1.686,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0110.webp": {
+   "family": "folds",
+   "patch_std": 1.732,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0111.webp": {
+   "family": "folds",
+   "patch_std": 1.689,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0112.webp": {
+   "family": "folds",
+   "patch_std": 1.735,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0113.webp": {
+   "family": "folds",
+   "patch_std": 1.732,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0114.webp": {
+   "family": "folds",
+   "patch_std": 1.704,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0115.webp": {
+   "family": "folds",
+   "patch_std": 1.697,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0116.webp": {
+   "family": "folds",
+   "patch_std": 1.689,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0117.webp": {
+   "family": "folds",
+   "patch_std": 1.707,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0118.webp": {
+   "family": "folds",
+   "patch_std": 1.735,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0119.webp": {
+   "family": "folds",
+   "patch_std": 1.699,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0120.webp": {
+   "family": "folds",
+   "patch_std": 1.704,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0121.webp": {
+   "family": "folds",
+   "patch_std": 1.705,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0122.webp": {
+   "family": "folds",
+   "patch_std": 1.703,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0123.webp": {
+   "family": "folds",
+   "patch_std": 1.747,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0124.webp": {
+   "family": "folds",
+   "patch_std": 1.698,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0125.webp": {
+   "family": "folds",
+   "patch_std": 1.722,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0126.webp": {
+   "family": "folds",
+   "patch_std": 1.691,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0127.webp": {
+   "family": "folds",
+   "patch_std": 1.688,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0128.webp": {
+   "family": "folds",
+   "patch_std": 1.689,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0129.webp": {
+   "family": "folds",
+   "patch_std": 1.718,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0130.webp": {
+   "family": "folds",
+   "patch_std": 1.729,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0131.webp": {
+   "family": "folds",
+   "patch_std": 1.738,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0132.webp": {
+   "family": "folds",
+   "patch_std": 1.696,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0133.webp": {
+   "family": "folds",
+   "patch_std": 1.68,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0134.webp": {
+   "family": "folds",
+   "patch_std": 1.737,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0135.webp": {
+   "family": "folds",
+   "patch_std": 1.71,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0136.webp": {
+   "family": "folds",
+   "patch_std": 1.701,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0137.webp": {
+   "family": "folds",
+   "patch_std": 1.696,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0138.webp": {
+   "family": "folds",
+   "patch_std": 1.7,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0139.webp": {
+   "family": "folds",
+   "patch_std": 1.72,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0140.webp": {
+   "family": "folds",
+   "patch_std": 1.754,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0141.webp": {
+   "family": "folds",
+   "patch_std": 1.72,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0142.webp": {
+   "family": "folds",
+   "patch_std": 1.668,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0143.webp": {
+   "family": "folds",
+   "patch_std": 1.703,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0144.webp": {
+   "family": "folds",
+   "patch_std": 1.701,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0145.webp": {
+   "family": "folds",
+   "patch_std": 1.718,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0146.webp": {
+   "family": "folds",
+   "patch_std": 1.701,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0147.webp": {
+   "family": "folds",
+   "patch_std": 1.714,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0148.webp": {
+   "family": "folds",
+   "patch_std": 1.703,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0149.webp": {
+   "family": "folds",
+   "patch_std": 1.689,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0150.webp": {
+   "family": "folds",
+   "patch_std": 1.7,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0151.webp": {
+   "family": "folds",
+   "patch_std": 1.701,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0152.webp": {
+   "family": "folds",
+   "patch_std": 1.693,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0153.webp": {
+   "family": "folds",
+   "patch_std": 1.688,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0154.webp": {
+   "family": "folds",
+   "patch_std": 1.694,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0155.webp": {
+   "family": "folds",
+   "patch_std": 1.678,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0156.webp": {
+   "family": "folds",
+   "patch_std": 1.678,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0157.webp": {
+   "family": "folds",
+   "patch_std": 1.683,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0158.webp": {
+   "family": "folds",
+   "patch_std": 1.687,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0159.webp": {
+   "family": "folds",
+   "patch_std": 1.646,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0160.webp": {
+   "family": "folds",
+   "patch_std": 1.673,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0161.webp": {
+   "family": "folds",
+   "patch_std": 1.706,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0162.webp": {
+   "family": "folds",
+   "patch_std": 1.67,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0163.webp": {
+   "family": "folds",
+   "patch_std": 1.663,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0164.webp": {
+   "family": "folds",
+   "patch_std": 1.698,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0165.webp": {
+   "family": "folds",
+   "patch_std": 1.663,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0166.webp": {
+   "family": "folds",
+   "patch_std": 1.648,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0167.webp": {
+   "family": "folds",
+   "patch_std": 1.699,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0168.webp": {
+   "family": "folds",
+   "patch_std": 1.782,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0169.webp": {
+   "family": "folds",
+   "patch_std": 1.853,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0170.webp": {
+   "family": "folds",
+   "patch_std": 1.895,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0171.webp": {
+   "family": "folds",
+   "patch_std": 1.954,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0172.webp": {
+   "family": "folds",
+   "patch_std": 1.951,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0173.webp": {
+   "family": "folds",
+   "patch_std": 1.973,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0174.webp": {
+   "family": "folds",
+   "patch_std": 1.977,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0175.webp": {
+   "family": "folds",
+   "patch_std": 2.014,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0176.webp": {
+   "family": "folds",
+   "patch_std": 1.979,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0177.webp": {
+   "family": "folds",
+   "patch_std": 2.009,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0178.webp": {
+   "family": "folds",
+   "patch_std": 2.031,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0179.webp": {
+   "family": "folds",
+   "patch_std": 2.012,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0180.webp": {
+   "family": "folds",
+   "patch_std": 2.017,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0181.webp": {
+   "family": "folds",
+   "patch_std": 2.003,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0182.webp": {
+   "family": "folds",
+   "patch_std": 2.055,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0183.webp": {
+   "family": "folds",
+   "patch_std": 2.059,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0184.webp": {
+   "family": "folds",
+   "patch_std": 2.047,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0185.webp": {
+   "family": "folds",
+   "patch_std": 2.07,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0186.webp": {
+   "family": "folds",
+   "patch_std": 2.01,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0187.webp": {
+   "family": "folds",
+   "patch_std": 2.007,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0188.webp": {
+   "family": "folds",
+   "patch_std": 1.977,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0189.webp": {
+   "family": "folds",
+   "patch_std": 1.977,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0190.webp": {
+   "family": "folds",
+   "patch_std": 1.981,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0191.webp": {
+   "family": "folds",
+   "patch_std": 1.959,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0192.webp": {
+   "family": "folds",
+   "patch_std": 1.937,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0193.webp": {
+   "family": "folds",
+   "patch_std": 1.906,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0194.webp": {
+   "family": "folds",
+   "patch_std": 1.895,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0195.webp": {
+   "family": "folds",
+   "patch_std": 1.839,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0196.webp": {
+   "family": "folds",
+   "patch_std": 1.84,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0197.webp": {
+   "family": "folds",
+   "patch_std": 1.799,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0198.webp": {
+   "family": "folds",
+   "patch_std": 1.782,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0199.webp": {
+   "family": "folds",
+   "patch_std": 1.773,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0200.webp": {
+   "family": "folds",
+   "patch_std": 1.717,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0201.webp": {
+   "family": "folds",
+   "patch_std": 1.729,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0202.webp": {
+   "family": "folds",
+   "patch_std": 1.691,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0203.webp": {
+   "family": "folds",
+   "patch_std": 1.651,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0204.webp": {
+   "family": "folds",
+   "patch_std": 1.623,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0205.webp": {
+   "family": "folds",
+   "patch_std": 1.682,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0206.webp": {
+   "family": "folds",
+   "patch_std": 1.65,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0207.webp": {
+   "family": "folds",
+   "patch_std": 1.616,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0208.webp": {
+   "family": "folds",
+   "patch_std": 1.59,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0209.webp": {
+   "family": "folds",
+   "patch_std": 1.597,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0210.webp": {
+   "family": "folds",
+   "patch_std": 1.555,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0211.webp": {
+   "family": "folds",
+   "patch_std": 1.567,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0212.webp": {
+   "family": "folds",
+   "patch_std": 1.579,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0213.webp": {
+   "family": "folds",
+   "patch_std": 1.538,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0214.webp": {
+   "family": "folds",
+   "patch_std": 1.526,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0215.webp": {
+   "family": "folds",
+   "patch_std": 1.536,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0216.webp": {
+   "family": "folds",
+   "patch_std": 1.527,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0217.webp": {
+   "family": "folds",
+   "patch_std": 1.516,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0218.webp": {
+   "family": "folds",
+   "patch_std": 1.53,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0219.webp": {
+   "family": "folds",
+   "patch_std": 1.488,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0220.webp": {
+   "family": "folds",
+   "patch_std": 1.557,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0221.webp": {
+   "family": "folds",
+   "patch_std": 1.547,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0222.webp": {
+   "family": "folds",
+   "patch_std": 1.504,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0223.webp": {
+   "family": "folds",
+   "patch_std": 1.488,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0224.webp": {
+   "family": "folds",
+   "patch_std": 1.501,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0225.webp": {
+   "family": "folds",
+   "patch_std": 1.477,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0226.webp": {
+   "family": "folds",
+   "patch_std": 1.513,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0227.webp": {
+   "family": "folds",
+   "patch_std": 1.49,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0228.webp": {
+   "family": "folds",
+   "patch_std": 1.501,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0229.webp": {
+   "family": "folds",
+   "patch_std": 1.485,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0230.webp": {
+   "family": "folds",
+   "patch_std": 1.504,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0231.webp": {
+   "family": "folds",
+   "patch_std": 1.493,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0232.webp": {
+   "family": "folds",
+   "patch_std": 1.489,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0233.webp": {
+   "family": "folds",
+   "patch_std": 1.488,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0234.webp": {
+   "family": "folds",
+   "patch_std": 1.488,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0235.webp": {
+   "family": "folds",
+   "patch_std": 1.49,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0236.webp": {
+   "family": "folds",
+   "patch_std": 1.481,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0237.webp": {
+   "family": "folds",
+   "patch_std": 1.481,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0238.webp": {
+   "family": "folds",
+   "patch_std": 1.503,
+   "floor": 1.2
+  },
+  "folds/unfold_thirds/0239.webp": {
+   "family": "folds",
+   "patch_std": 1.479,
+   "floor": 1.2
+  }
+ },
  "flat": [],
- "read": 0,
- "enough_read": false,
- "ok": false
+ "read": 318,
+ "enough_read": true,
+ "ok": true
 }
