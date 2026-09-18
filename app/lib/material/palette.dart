@@ -48,8 +48,11 @@ class Pen {
   /// which pair the legibility test is checking, and for four cycles nothing connected the two.
   /// `_Margin` in `regions/chat/note.dart` wrapped the thread's timestamps in `Opacity(0.78)`.
   /// `legible_on_what_it_is_on_test.dart` read [margin] at full strength, found 5.91:1 on the
-  /// darkest stock, and passed. `tools/check/legibility.py` read the pixels and failed nineteen
-  /// timestamps, six of them among the worst twelve runs in the capture -- `Wed 22 Apr / 16:44`
+  /// darkest stock, and passed. `tools/check/legibility.py` read the pixels and failed sixteen
+  /// timestamps -- the queue item and firing 12's journal both say nineteen; counted from the
+  /// committed evidence/legibility.json with two independent patterns it is sixteen, of which the
+  /// thirteen at px 36 are this widget -- with six of them among the worst twelve runs in the
+  /// capture. `Wed 22 Apr / 16:44`
   /// at 1.02:1, and a row of them at 4.44, 4.45 and 4.48 against a floor of 4.5, which is the
   /// shape of an ink that is fractionally too pale rather than one on the wrong ground.
   ///

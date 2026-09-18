@@ -215,9 +215,9 @@ class _Margin extends StatelessWidget {
     ];
     // The thinning is `Pen.marginThinning` and not a number written here. It was 0.78, applied
     // at this one call site and visible to nothing else, and it took the whole of the margin
-    // ink's headroom over the body floor: nineteen of the eighty-four runs below floor in the
-    // capture at `9dec301` were this Row's timestamps, six of them among the worst twelve in the
-    // set. The ink is derived to sit exactly at the ink ceiling of the ladder, so there is no
+    // ink's headroom over the body floor: thirteen of the eighty-four runs below floor in the
+    // capture at `9dec301` were this Row's timestamps -- sixteen of them are timestamps at all,
+    // and the thirteen at px 36 are the ones drawn here -- six among the worst twelve in the set. The ink is derived to sit exactly at the ink ceiling of the ladder, so there is no
     // gap here to spend on being faint; a margin note is set back by being small, by being
     // pencil and by being at the edge of the note, not by being washed toward the paper.
     return Opacity(

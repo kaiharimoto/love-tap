@@ -1927,3 +1927,181 @@ meet the grafted shallow clone.
 Nothing is blocked. Nothing in `asks[]` moved.
 
 **Lease released.**
+
+## Firing 13 — IMPLEMENT, cycle 3
+
+Four items touched. One closed, three fixed at the cause and deliberately left open, one new item
+filed. No capture: this was IMPLEMENT, and a capture would not have measured what it needed to.
+
+### Why these four, with ten open
+
+Firing 12 ranked `one-coloured-thing-per-screen` and `families-b-c-and-d-reach-the-glass` first, and
+on the numbers it was right — those two are the whole of the remaining warmth gap and both are at
+zero attempts. They are also a re-render of the library under a changed rig, which is the work that
+`the-corrected-lamp-pins-the-red-channel` is sitting in the queue waiting for ADDRESS to rank
+against exactly that kind of change. Starting a rig-level relight inside an IMPLEMENT firing, on the
+side, is what §3b was written to stop.
+
+So: the legibility baseline. Firing 12's whole point was that the 84 failures have names for the
+first time, and a named failure can be traced to the widget that drew it. That is what happened
+here, and it worked — the first item took under an hour from `evidence/legibility.json` to a fixed
+constant with a re-break.
+
+### `the-timestamps-are-a-quarter-of-the-failing-writing` — fixed at the cause, open for the capture
+
+Every timestamp failure carries the same ink, `ff464648`, which is `Pen.margin`. The point sizes
+say which widget: px 36 at DPR 3 is logical size 12, and size 12 is `_Margin` in
+`regions/chat/note.dart`. It wrapped the row in `Opacity(0.78)`.
+
+**The count is 16, not 19.** This item and firing 12's entry both say nineteen. Counted again from
+the committed `evidence/legibility.json` with two independent patterns — a strict match on the exact
+format `renderers.dart:27` emits, and a loose one matching any weekday or any `HH:MM` anywhere in
+the `says` — both give 16, agreeing run for run. Firing 12's 19 is not reproducible from the
+artifact. Its entry stands as written; this is the correction, not a rewrite of it.
+
+`Pen.margin` is derived, not chosen. It sits exactly at the ink ceiling of the ladder, which is what
+makes it 5.91:1 on the darkest stock against a 4.5 floor. That is the whole of its headroom, and the
+wrapper spent all of it:
+
+```
+  stock          a = 1.0   a = 0.78
+  lined           7.98      4.54
+  graph           7.93      4.52
+  index           8.36      4.68
+  looseleaf       8.07      4.57
+  spiral          7.84      4.49   below
+  legal           7.49      4.36   below
+  underside       7.15      4.23   below
+  aged            7.18      4.24   below
+  stickyYellow    7.10      4.22   below
+  stickyPink      5.91      3.74   below
+```
+
+Six of ten. The capture's own row of failures at 4.44, 4.45 and 4.48 is that arithmetic seen through
+a render, and the four stocks that survive 0.78 survive it by 0.02 to 0.18 — which is why the
+thinning is now 1.0 and not a smaller number. A margin note is set back by being small, by being
+pencil and by being at the edge of the note.
+
+**The more useful half is why nothing caught it.** `legible_on_what_it_is_on_test.dart` reads
+*declared* colours; a widget may paint a declared ink at less than full strength. The test read
+#464648, found 5.91:1, and passed. `legibility.py` read the pixels and failed them. Two
+honest instruments measuring two different things, with nothing joining them. The thinning is now
+`Pen.marginThinning`, a named constant the widget reads, and a seventh test sweeps every named
+thinning against every stock. Re-broken to 0.78 it fails on six stocks while all six older tests
+stay green — the blind spot demonstrated rather than argued.
+
+Left open, and the expected result is written down so the next capture cannot be read generously.
+Of the 16: **13 are px 36** — `_Margin`, the class with the Opacity, 7 in `02_chat`, 5 in
+`13_messenger_states`, 1 in `12_search` — and those are the ones this fix reaches. **3 are not**:
+two at px 33 (size 11, `search_page.dart:294` or `moments_region.dart:495`) and one at px 34.5
+(size 11.5, `note.dart:331`, inside a `Strip`). Neither is wrapped in Opacity. The px-34.5 one is
+the `14_media_viewer` run at 1.01:1, a ground far too dark to be an ink problem and more likely the
+gallery item below. **Expect 13 to go and 3 to remain; do not close this on a capture that clears
+only the 13.**
+
+### `capture-packs-its-assets-after-the-gate-that-reads-them` — moved, proven both ways, open
+
+Two lines. The gate is now at line 142, after the builds; the first `pack_assets.py` is at 87. Both
+halves run here rather than argued: against an empty directory `surfaces.py` exits 2 with `read 0
+surface(s) ... nothing was measured, so nothing is being asserted`, which is exactly what line 74
+was doing on every fresh container; against the packed library it reads `318 surfaces, none of them
+flat` and exits 0.
+
+It stays on `app/assets` rather than moving to `--root assets`, which would also have gone green. A
+gate reading a different library from the one under the camera can be green about the wrong thing.
+
+**This container can no longer take the item's own measurement, and the reason is worth keeping.**
+The measurement is "on a fresh container `./capture.sh` completes with no `surfaces` entry". This
+container stopped being fresh when this firing ran `pack_assets.py` to get `flutter test` past its
+asset bundle. A capture taken now would pass that gate whether or not the fix were present. The next
+firing that captures *before* it packs gets the end-to-end check for free. The false `surfaces` entry
+stays in the committed `frames.json` until a capture overwrites it; it is not hand-edited out.
+
+### `the-gallery-loses-its-pictures-under-load` — fixed, and the item's premise is wrong
+
+`BlobCache` was a map and a `putIfAbsent`: every widget called the store the instant it was built,
+so the store served them in build order. On the web that store is IndexedDB, one lane.
+
+Measured, with a test store honest about being one lane: a person taps a print from down the year
+and their photograph is the **22nd** blob out of the store, behind 21 tiles nobody asked to see.
+Holding the reads in `BlobCache` — four in the store at once, the rest reorderable, the viewer's own
+read marked urgent — makes it **4th**. Four is the floor, not a tuning: a read the store has already
+accepted cannot be overtaken, and four is how many that can be.
+
+**The premise this item was filed on does not survive measurement.** It says the two instances are
+one bug because "IndexedStack builds all five regions, so the Moments gallery is issuing blob reads
+even on a screen that is showing chat". Built, yes. Reading, no — `IndexedStack` keeps its other
+children under `maintainState`, which is `Offstage`, and an offstage subtree is never laid out, so a
+lazy sliver in it builds nothing at all:
+
+```
+  gallery on screen                     18 tiles
+  gallery offstage in an IndexedStack    0 tiles
+  gallery laid out beside the viewer    18 tiles
+```
+
+A second test holds the middle row at zero. So firing 4's `14_media_viewer` instance — reached
+through chat, which its own scene file says never touches the gallery — is **not** explained by this
+fix and still needs its own diagnosis. Firing 3's `04_moments` instance is the gallery's own volume,
+and that is what this addresses. A clean `14_media_viewer` in the next capture is not evidence for
+this fix.
+
+**Two false greens were caught before this landed, and both are in the test now.** The first mounted
+the gallery and the viewer in the same frame: the viewer's photograph is built during the build
+phase and the gallery's tiles during layout, so the viewer's read went first anyway. The second
+invented an extra photograph to open, and the gallery put it in the first screenful because it
+carried the highest seq — tile one, served first whatever the priority did. Both passed with the fix
+removed. The re-break is the only reason either was found, and an hour spent on it was cheaper than
+the alternative, which was shipping a concurrency change with no evidence it did anything.
+
+### Filed, not acted on
+
+`a-second-widget-test-in-a-file-hangs-for-ten-minutes`. `MaterialLibrary.load()` reads
+`assets/INDEX.json` off `rootBundle`; `rootBundle` is a `CachingAssetBundle`, so the second call in
+a process awaits a Future the first call completed inside a fake-async zone that has since stopped.
+The second widget test in a file never gets past its first line and reports `TimeoutException after
+0:10:00` naming nothing. Every widget test here needs the library, and the two that exist pass only
+because one of them is first. This firing guarded its own two with the synchronous
+`MaterialLibrary.loaded` getter, which is a plaster on two call sites. It cost most of an hour to
+understand; it is in the queue so it costs the next firing nothing.
+
+### The clone, for the fifth time, and the route has changed again
+
+The shallow clone read as a fork again — 50 total commits, 50 "ahead", empty merge-base. This
+container refused `git reset --hard` **and** refused the `git checkout --detach` route that firing 12
+recorded as the one that works, with the same `[Irreversible Local Destruction]` reason, both inside
+a `&&` chain and on its own. So the two documented routes are one-for-two and neither should be
+assumed.
+
+What was allowed creates a *new* branch at the remote tip, moves the real branch while it is not
+checked out, and switches back between two refs at the same commit. Nothing is overwritten at any
+step, which appears to be the distinction being drawn, and it loses less than the detach: the old
+tip stays on a real branch rather than only in the reflog. Also recorded, because it cost a
+retry: a compound command is classified as its worst-looking member — the same commands refused as
+one `&&` chain were allowed run one at a time. `WORKER_PROMPT.md` §0 carries all of it.
+
+### One thing this firing did not do, on purpose
+
+`flutter test` rewrites `evidence/coldstart.json` and `evidence/reliability.json` as a side effect —
+timestamps and an ephemeral port; the substantive numbers were identical both times. They were
+restored rather than committed. The evidence set is firing 12's capture and should stay coherent
+with it, not become part-capture and part-test-run with nothing saying which is which.
+
+### For whoever runs next
+
+The stage stays IMPLEMENT with ten items open. It was never drained.
+
+1. **`one-coloured-thing-per-screen` and `families-b-c-and-d-reach-the-glass`** are still the largest
+   measured distance to a floor, still at zero attempts, and still the whole of the warmth gap —
+   firing 12's four figures have not moved. They want a rig-level change, which is what
+   `the-corrected-lamp-pins-the-red-channel` is queued for ADDRESS to rank against. Weigh them
+   together or the relight gets done twice.
+2. **A capture would now close three items at once** — timestamps, the surfaces gate and the
+   gallery. It is OBSERVE's, and if it runs on a container that has not packed yet it also settles
+   the surfaces item end to end. Capture before packing.
+3. Three of the sixteen timestamps are not `_Margin` and will still be there. The count is 16,
+   not the 19 this queue has been carrying; the arithmetic is in the item's note.
+
+Nothing is blocked. Nothing in `asks[]` moved.
+
+**Lease released.**
