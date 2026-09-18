@@ -2,16 +2,10 @@
  "v": 1,
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
- "stage": "DIAGNOSE",
- "firing": 16,
- "stage_entered_at_firing": 17,
- "lease": {
-  "session_id": "session_01FhRZNhmxTBcSPdE51LsMmz",
-  "firing": 17,
-  "stage": "DIAGNOSE",
-  "started_at": "2026-09-18T15:58:00Z",
-  "expires_at": "2026-09-18T18:58:00Z"
- },
+ "stage": "ADDRESS",
+ "firing": 17,
+ "stage_entered_at_firing": 18,
+ "lease": null,
  "evidence_fresh_as_of": "FRESH AS OF FIRING 16, captured at 8d0f64d5 on this branch, and DIAGNOSE MAY SCORE ON IT. Fifteen of seventeen artifacts, evidence/MANIFEST.json lists no internal missing and every gate in evidence/logs/*.json reads ok true. 09_two_devices.png and 16_setup_android.png are absent for the hardware reason docs/PHONES.md records; that is the ceiling in this container and it is an asks[] entry, not a queue item. Nothing in app/, assets/ or seed/ has been touched since the capture -- this firing changed no code at all -- so the freshness rule DIAGNOSE enforces is satisfied.",
  "evidence_note": "FIRING 16, AND THE HEADLINE IS THAT THE APP MOVED AND MOST OF THE FALL IS ITS OWN INK. The declared-runs ruler reads 64 of 362 below floor, 17.68%, against firing 15's corrected 78 of 370, 21.08%. Fourteen failures went and the denominator fell by eight, and the two halves separate cleanly because two screens each held one half of themselves still:\n  * 02_chat declared set BYTE-IDENTICAL (36 runs, same text, same rects), PNG changed: 9 -> 5.\n  * 13_messenger_states 34 declared runs before and after, none added or removed, PNG changed: 8 -> 4.\n  * 12_search PNG BYTE-IDENTICAL, sidecar lost 26 of 45 declared runs, all behind the search sheet: 8 -> 6.\n  * 14_media_viewer 25 declared runs -> 2, PNG changed: 4 -> 0.\nSo EIGHT of the fourteen are the app's ink (02_chat and 13_messenger_states, where nothing was un-declared) and SIX are firing 15's occlusion fix (14_media_viewer and 12_search). The five other stills did not move at all and three of them are byte-identical PNGs. Timestamp failures 14 -> 5 and every survivor is 3.65 to 4.30 under a 4.5 floor, against 1.01 to 3.48 before: firing 13's timestamp fix is real and is most of the way there.\nTHE REMAINING RULER ERROR IS MEASURED AND IT IS 12 OF THE 64. See the queue item a-runs-ink-is-the-glyphs-not-every-mark-near-it. With the ink term taken from the accepted glyphs instead of from every mark in the ring, this capture reads 52 of 362 (14.36%) and the committed one read 66 of 370 (17.84%). IT IS THE SAME TWELVE RUNS WITH THE SAME READINGS ON BOTH CAPTURES, so unlike the two faults firing 15 fixed this one SUBTRACTS OUT OF A DELTA: 78->64 and 66->52 are both a fall of fourteen. That is why capturing was right this time.\nPALETTE IS UNMOVED, as it must be with no colour change in the app: across_the_set mean_chroma 0.0375 against 0.0374, grey_fraction 0.0182 against 0.0183, and NO docs/COLOR.md section 5 ceiling is breached -- no figure/mid/ground chroma ceiling appears in the breach list at all. The warmth was not spent to buy legibility, because nothing was spent.",
  "degradation": 0,
@@ -436,16 +430,48 @@
   }
  ],
  "last_score": {
-  "cycle": 2,
-  "total": 55.5,
+  "cycle": 3,
+  "total": 67,
   "scale": 120,
+  "exit": 114,
+  "every_floor_met": false,
   "by_category": {
-   "messenger_reliability": 19,
-   "material_truth": 15,
-   "emotional_transmission": 6,
-   "coherence": 10.5,
-   "anti_goal": 5
-  }
+   "messenger_reliability": 20,
+   "material_truth": 13,
+   "emotional_transmission": 10,
+   "coherence": 10,
+   "anti_goal": 6,
+   "visual_design": 8
+  },
+  "critic_and_builder": {
+   "messenger_reliability": [
+    21,
+    20
+   ],
+   "material_truth": [
+    13,
+    15
+   ],
+   "emotional_transmission": [
+    11,
+    10
+   ],
+   "coherence": [
+    11,
+    10
+   ],
+   "anti_goal": [
+    6,
+    6
+   ],
+   "visual_design": [
+    13.5,
+    8
+   ]
+  },
+  "on_the_five_rows_that_have_a_predecessor": "55.5 -> 59.0, +3.5; the brief's structural-pass rule triggers under +1.0 and is not triggered",
+  "critics_run": 7,
+  "problems": []
  },
  "history": [
   {
@@ -592,6 +618,20 @@
    "legibility": "64 of 362 = 0.1768 committed tool; 52 of 362 = 0.1436 with the filed correction",
    "palette": "mean chroma 0.0375, grey fraction 0.0182",
    "degradation": 0
+  },
+  {
+   "firing": 17,
+   "cycle": 3,
+   "stage": "DIAGNOSE",
+   "stage_named_by_state": "DIAGNOSE",
+   "what": "Wrote evidence/critics/3/builder.json first and pushed it with the folder otherwise empty, ran the seven critics as genuinely fresh contexts, then score.py: 67 of 120, no floor met, problems empty. 20/13/10/10/6 on the five old rows against cycle 2's 19/15/6/10.5/5, and 8 on the new visual_design row. The critics found four instruments reporting green on something that is not -- DIFF.json comparing each still with itself, the scroll clip scripted so it cannot fail, fonts.json reading the file rather than the render, and the empty dusk array -- which with the two already known makes six, and that is the firing's real result. Two of my own numbers and one of my judgements were corrected against me and are written down in the journal. Lease taken, pushed before any work, released here.",
+   "score": {
+    "total": 67,
+    "scale": 120,
+    "every_floor_met": false
+   },
+   "checkpoint": "checkpoints/3-diagnose-*.json",
+   "next": "ADDRESS"
   }
  ],
  "routine": {
@@ -739,7 +779,7 @@
    "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
   }
  },
- "stage_change_note": "FIRING 16 RAN THE OBSERVE THAT loop/STATE.json NAMED, and hands DIAGNOSE a fresh set. The judgement it was asked for is in loop/JOURNAL.md's firing 16 entry: the ruler has NOT converged -- there is a third fault and it is worth 12 of the 64 -- but it is the first of the three whose error is CONSTANT across a pair of captures, so it does not invalidate the 78 -> 64 comparison and it is not a reason to defer a fourth capture. DIAGNOSE SHOULD SCORE LEGIBILITY OFF BOTH NUMBERS: 64 of 362 is what the committed tool reports and 52 of 362 is what it reports with the one-character fix the head queue item names, already measured on this capture and on the previous one. Scoring off 64 alone under-credits the app by twelve runs; scoring off 52 alone claims a fix that is not committed yet. Quote both.",
+ "stage_change_note": "FIRING 17 RAN THE DIAGNOSE THAT loop/STATE.json NAMED. 67 of 120, no floor met, seven critics, score.py returned problems: []. The builder sheet was written and pushed at 832301cd with evidence/critics/3/ holding nothing else. THE HEADLINE IS NOT THE NUMBER: six instruments in this build read green on something that is not green, four of them found this firing by contexts that could not see each other. DIFF.json compares every still with itself because capture.sh:343 rotates the baseline before collect.py:175 measures against it and overwrites diff.py's correct file; 11_chat_scroll is scripted at 11 px a frame so its repeated-frame count can only be zero; logs/fonts.json checks the font file rather than the render, which is why five 'e' glyphs differ by 3.07/255 at 300% while the gate reads no findings; legibility.json's dusk array is empty so the dusk floors gate nothing and the dusk Pulse crop measures 2.76-2.85:1 unwatched; legible_on_what_it_is_on_test.dart reads a _thinnings map whose one entry is 1.0 and is arithmetically the sweep above it; and NOTHING RUNS app/test AT ALL -- no flutter test in bootstrap, run or capture, and the only invocation sits behind the build.yml guard CLAUDE.md already records as never satisfiable, so persistence_boundary_test and every other structural guard is advisory. ADDRESS SHOULD RANK THAT ABOVE ALMOST EVERYTHING ELSE, and should consider whether it is one item or six: my reading is one, because every one of them measures the artifact it can reach instead of the artifact it is named after. The full finding list with its measurements is in loop/JOURNAL.md's firing 17 entry; DIAGNOSE does not write the queue. Two corrections to my own sheet are recorded there too: material truth 15 was wrong and 13 stands, and 'the code half is the strongest thing in this build' was too generous -- moments_region.dart 84-85 and search_page.dart 56-65 keep private hard-coded type lists, which is the same fault as the WHAT WE FELT column holding none of the 34 feelings. The head queue item is better specified than it was: the remaining ink fault is localised to 29 runs, all with ground_swing 1.8-14.5, so closing it moves the reported number from 64 to about 35 rather than to 52.",
  "measured_at_firing_12": {
   "captured_at": "e7a3a5a",
   "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",

@@ -2685,3 +2685,180 @@ Nine items open, none blocked. Stage to DIAGNOSE, which may score: nothing under
 by twelve runs; scoring off 52 alone claims a fix that is not committed yet.
 
 **Lease released.**
+
+---
+
+## Firing 17 — DIAGNOSE, cycle 3 — 67 of 120, no floor met
+
+Seven critics, seven fresh contexts, my own sheet written and pushed at `832301cd` with the
+folder still empty. `python3 tools/score.py --cycle 3` returned with `problems: []`.
+
+| row | weight | floor | critic | builder | taken |
+|---|---:|---:|---:|---:|---:|
+| messenger_reliability | 30 | 26 | 21 | 20 | **20** |
+| material_truth | 25 | 22 | 13 | 15 | **13** |
+| emotional_transmission | 20 | 17 | 11 | 10 | **10** |
+| coherence | 15 | 13 | 11 (code critic 12) | 10 | **10** |
+| anti_goal | 10 | 9 | 6 | 6 | **6** |
+| visual_design | 20 | 17 | 13.5 | 8 | **8** |
+| | **120** | | | | **67** |
+
+On the five rows that have a predecessor: 55.5 → 59.0. The brief triggers a structural pass when
+a cycle gains less than one point; +3.5 does not trigger it. The sixth row enters at 8 of 20.
+
+Two rows moved on their own merits rather than on better measurement. Emotional transmission went
+6 → 10 because the two things cycle 2 said disproved the row are answered: a feeling now lands as
+a folded paper object in `08_state_propagating` rather than as the word "hold" in blue script, and
+`evidence/haptics.json` now records 34 sequences so the face-down claim can be checked by someone
+other than me. Messenger reliability went 19 → 20 because `13_messenger_states` finally exists and
+its states are real. Everything else is flat or was already flat and I could not see it.
+
+### The finding that matters more than the number
+
+**Six instruments in this build read green on something that is not green.** Four of the six were
+found this firing, by contexts that could not see each other and were not looking for the same
+thing.
+
+1. **`evidence/DIFF.json` compares every still with itself.** `capture.sh:343` runs
+   `tools/check/diff.py --rotate`, which measures and then rotates `evidence/.previous` to hold
+   *this* capture; `tools/capture/collect.py:175` then runs, recomputes SSIM against that
+   already-rotated baseline, and overwrites the correct file `diff.py` just wrote. Every still has
+   read `ssim 1.0 / unchanged` every cycle, by construction. The coherence critic — correctly
+   denied the source — read those ten ones as proof that the stills were pixel-identical to the
+   previous capture and that every finding had survived a cycle untouched. That is the file working
+   exactly as badly as it possibly could: not merely useless, but actively supplying a false fact
+   to the one reader it exists for.
+2. **`11_chat_scroll.mp4` is scripted at 11 px per frame**, so its repeated-frame count can only
+   ever be zero. The jank check cannot fail.
+3. **`evidence/logs/fonts.json` checks the font file, not the render.** It reads 775 glyphs and 360
+   checked variants per hand with no findings; at 300 % five `e` glyphs differ by as little as
+   3.07/255 after alignment, against a 42.41/255 control, and nine glyphs hold exactly L 58 for
+   min, p5 and median. The hands carry the variants. Nothing asks for them. Cycle 2's sheet said
+   this in words; the gate that should have caught it is pointed at the wrong end of the pipe.
+4. **`evidence/legibility.json`'s `dusk` array is empty**, so the dusk floors of 5.0 and 4.5 have
+   been gating nothing at all. The visual-design critic measured `crops/dusk_pulse.png` by hand:
+   the same unselected mood words read 2.76–2.85:1 there, *worse* than in daylight, on a surface no
+   check covers. Nothing in the queue names it.
+5. **`app/test/legible_on_what_it_is_on_test.dart`** — the file `loop/WORKER_PROMPT.md` says gates
+   every code commit — reads a `_thinnings` map whose single entry is `1.0`. `Color.lerp(ground,
+   ink, 1.0) == ink`, so the guard is arithmetically identical to the sweep above it. Its own
+   comment concedes as much.
+6. **Nothing runs `app/test/` at all.** No `flutter test` in `bootstrap.sh`, `run.sh` or
+   `capture.sh`; the only invocation is `build.yml:70`, behind the guard at `build.yml:55` that
+   `CLAUDE.md` already records as never satisfiable. Every structural guard in the suite is
+   advisory — including `persistence_boundary_test.dart`, which is the enforcement the brief names
+   as a build-failing condition.
+
+A build cannot climb a rubric it is measuring with six broken rulers, and five cycles of effort
+have gone into the ruler that was *known* to be broken while these sat quietly reading green. That
+is the structural finding of this DIAGNOSE and ADDRESS should rank it above almost everything else
+in the list below.
+
+### Where I was wrong, in writing, so it is on the record
+
+**I scored material truth at 15 and the critic has it at 13.** Thirteen stands and it earned the
+gap. My reason for 15 was that "the library measures real — 775 glyphs and 360 checked variants per
+hand" — which is me citing a green gate at a claim the gate does not cover. Finding 3 above is my
+error as much as the build's.
+
+**I wrote that "the code half is the strongest thing in this build and I will not mark it down."**
+Too generous, and the code critic has the line numbers. `moments_region.dart:84-85` and
+`search_page.dart:56-65` each keep a private hard-coded event-type list that the registry exists to
+abolish; `passed_on`, `ritual_kept`, `milestone`, `ping` and `feeling_authored` are in neither. That
+is the same defect as the artifact I *could* see and could not explain — the column headed WHAT WE
+FELT in `04_moments.png` holds none of the 34 feelings the app ships, because Moments filters
+against a list that does not know they exist. A source fault and a picture, found from opposite
+ends by two contexts that could not see each other, meeting in the middle. That is the whole
+argument for running the critics fresh, demonstrated in one finding.
+
+My coherence number was already below both critics', so the arithmetic does not move. The reasoning
+under it was wrong.
+
+### The findings ADDRESS has to rank, none of them queued here
+
+DIAGNOSE does not write the queue. These are the ones with a measurement already attached:
+
+- The six instruments above, each of which has a named file and line.
+- **The paper is a flat fill on three screens.** A 700×100 patch of `17_setup_pwa.png` holds exactly
+  one RGB value across 70,000 pixels, and that value covers 48.0 % of the frame; `10_first_run.png`
+  is 59.5 % one value; the base page under `01_pulse.png` is 98.2 % one value over a 200×200 sample.
+  A photograph cannot do that.
+- **The beige rectangle is a designed surface, not a capture miss.** `13_messenger_states.png`
+  x65–1099 y1281–1515: 1035×235, 2 px corner radius, hard drop shadow, interior std 1.31–1.35 and
+  11 distinct levels against 35.79–43.7 and 171–2182 for real paper in the same frame. The
+  `06_unfolding` strip shows the same block is the app's own note-arriving state. This is the
+  literal archetype anti-goal 4 names, shipped in the fixed set, and it costs the build twice.
+- **The unfolding clip contains no fold.** `logs/06_unfolding.report.json` concedes 13 of 240 frames
+  decoded; the critic measures the flat rectangle present for at least 191 of 320 frames. 240 fold
+  frames were rendered and 13 reached the screen.
+- **The tear edges on `03_us`, `05_settings` and `17_setup_pwa` are overlays on whole paper** —
+  axis-aligned rectangular crenellations under a constant-softness blur, with the ruled lines
+  running unbroken straight through them. That is the smeared grey comb I could see and could not
+  read.
+- **The feeling objects are not lit by the scene.** The spool is byte-identical at [205,180,145]
+  between `01_pulse.png` and `crops/dusk_pulse.png` while every paper surface around it shifts warm;
+  its top face and peg shadow are reused pixel-identically (mean |RGB| diff 0.02) while its side
+  wall and ground shadow were re-rendered and now point the opposite way.
+- **An authored feeling arrives as a blank sheet** where the built-in it must behave identically to
+  carries its drawing. That is the row's own wording falsified.
+- **Three of six shelter feelings are the same pulse train**, separated only by count and ≤40/255
+  amplitude. `haptics.json` is a catalogue, not a discrimination test: no pairwise distance, no
+  threshold, no stated criterion behind its empty `problems` array.
+- **`05_settings.png` shows "not paired yet."** and no feeling-authoring tools, on the artifact whose
+  deliverable is pairing state and the authoring tools.
+- **`03_us.png` shows one module of five.** The artifact whose stated job is to prove the module
+  floor proves one.
+- **Search results are non-monotonic inside one day** (4 Aug: 07:20 → 07:24 → 07:14) and one hit
+  shows no visible match.
+- **Three of four hue families in the app's own colour law are absent everywhere.** `B_rose`,
+  `C_cool` and `D_green` sit at `accent_fraction 0.0` on every artifact; mean chroma 0.0375 against
+  the law's own ≥0.045; 40 breaches in total.
+- **`05_settings.png` alone holds 27 of the 64 failing runs**, 26 of which survive the ink
+  correction, and its unselected options are ~2.43:1. That is the owner's original complaint, still
+  unanswered, concentrated on one screen.
+- The remaining ruler fault is now **localised**: 29 of the 64 are false, every one where
+  `ground_swing` is 1.8–14.5; the 35 that stand sit on flat ground at swing 1.02–1.12.
+
+### Freshness, and the one leak
+
+No critic was given the git log, `loop/`, `docs/BRIEF.md`, `docs/COLOR.md`, `DIRECTION.md`,
+`TASK_STATE.md` or any previous cycle's report. Each got the mission goal, the four anti-goals, its
+own rubric row in full, and the evidence set. The visual-design critic was told plainly that the
+legibility instrument was rebuilt twice this cycle, that one fault remains, and that no trend
+comparison was available to it.
+
+Two honest caveats. The repository `CLAUDE.md` is placed in a subagent's context automatically and
+cannot be withheld from this seat; every critic was instructed to disregard it and six of the seven
+confirmed unprompted that they had. And the code critic discloses that its first history-wide secret
+grep printed lines out of a prior cycle's critic report under `evidence/`, that it re-ran the search
+with `evidence/`, `loop/` and `.review-held/` excluded, and that no verdict rests on what it saw.
+Recorded rather than smoothed over.
+
+No .mp4 in this container can be decoded — there is no ffmpeg and `bootstrap.sh` was not run, this
+being a stage with no toolchain profile. Every critic judged the five clips from the six-frame
+strips in `evidence/crops/` plus `frames.json` and `logs/*.report.json`, and every one of them said
+so in its report. The emotional-transmission critic adds the right caveat: the strips sample one
+frame per 1.28–1.63 s, so a sub-second arrival animation could exist unsampled, and it named which
+of its findings that would soften.
+
+`09_two_devices.png` and `16_setup_android.png` are absent for the `/dev/kvm` reason `docs/PHONES.md`
+records. All four critics who reached the question judged it a reason and not an excuse, each
+citing the measured 113 minutes to adbd and the refusal to fake the frame from the PWA, and each
+took the penalty once. That is the ceiling in this container and it stays an `asks[]` entry.
+
+### What the next firing gets
+
+Stage ADDRESS, which writes the queue and changes no code. Nine items were open at the end of
+firing 16 and nothing here closes any of them. The head item — the ink-sampling fix — is now
+**better specified than it was**: the visual-design critic localised it to 29 runs and gave the
+discriminator, `ground_swing` above ~1.8. ADDRESS should note that closing it moves the reported
+number from 64 to about 35 rather than to 52, because 12 of the 29 are the ones firing 16 predicted
+and the other 17 are new to this measurement.
+
+And ADDRESS should consider whether the six dead instruments are one item or six. My reading is that
+they are one: every one of them measures the artifact it can reach instead of the artifact it is
+named after — the font file instead of the render, the rotated baseline instead of the previous
+capture, the script instead of the scroll, the font's own alpha instead of the shipped one. That is
+a single habit, and it has cost this build more than any single bug in the app.
+
+**Lease released.**

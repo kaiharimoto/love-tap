@@ -1,80 +1,92 @@
 {
- "cycle": 2,
+ "cycle": 3,
  "categories": {
   "messenger_reliability": {
    "weight": 30,
    "floor": 26,
-   "critic": 20,
+   "critic": 21,
    "critics": {
-    "messenger_reliability": 20
+    "messenger_reliability": 21
    },
-   "builder": 19,
-   "builder_why": "The critic is right and I had credited myself too much. Moments renders five 'still fetching the picture.' rows and not one thumbnail \u2014 that is my masonry rewrite, and the surface where photographs and video live now shows neither. 13_messenger_states is missing for the fourth run running. Typing indication is named in the row and appears in no artifact and in no capability in reliability.json. And the point I had not made against myself: every still was taken on a single seeded device that is unpaired and 'connecting', so the sent and read markers are seeded values rather than an observed round trip. 08 is the only artifact where a message actually crosses, and it crossed today for the first time.",
-   "score": 19,
+   "builder": 20,
+   "builder_why": "The row's own disqualifier is 'any single failure that would give either person a reason to open Instagram instead', and 04_moments.png is that failure, unchanged from the last cycle: six rows reading 'still fetching the picture.' and about ten completely blank cards, with exactly one image rendered in the whole gallery. The archive where a year of photographs and video live shows almost nothing. Two more against me. 02_chat.png is the hero and the deliverable asks it to carry photographs, voice notes, reactions and replies inline; the frame holds five text notes, a state row and a date row, and not one of those four. 13_messenger_states.png -- which is new and is otherwise the best messenger evidence in the set -- has a flat untextured rectangle sitting where an event should have rendered. And 05_settings.png reads 'not paired yet.', so the pairing the whole messenger stands on is not shown working. Against that: 13_messenger_states now exists after four runs missing and its states are real and legible (read, going, waiting to send, 'it would not go'); 12_search.png is genuinely good, with highlighted hits across nine event types; reliability.json exercises all sixteen capabilities with zero duplicates and gapless ordering after four injected faults. That is worth more than cycle 2's 19 and nowhere near the floor of 26.",
+   "score": 20,
    "meets_floor": false
   },
   "material_truth": {
    "weight": 25,
    "floor": 22,
-   "critic": 16,
+   "critic": 13,
    "critics": {
-    "material_truth": 16
+    "material_truth": 13
    },
    "builder": 15,
-   "builder_why": "The unfolding clip is the row's own test and it fails it. 281 of 320 frames are a flat cream rectangle: I cropped the fold frames and re-rendered them for the z-fight, and never measured their paper. My own tools/check/surfaces.py would have caught it \u2014 it reads paper/, shell/ and objects/ and not folds/, so the one sequence the material row is judged on is the one surface the check does not look at. The tab tiles and two settings surfaces are flat fills. And repeated glyphs render pixel-identical at IoU 0.998, so the contextual alternates that the fonts carry are not varying at render time: the hands have the variants, the renderer is not asking for them.",
-   "score": 15,
+   "builder_why": "The row names its own two tests and the evidence fails both. At 300 percent -- evidence/crops/02_chat_300_edge.png and _hand.png -- the paper is a flat peach fill with no fibre, no tooth and no print misregistration, the type has hard uniform edges with no pressure variance, and the tear is a soft grey smear with visible block artifacts from being upsampled. In slow motion the unfolding clip is worse than it looks: evidence/logs/06_unfolding.report.json says the app decoded 13 frames of the 240-frame unfold_thirds sequence and held 227-239, and the frame strip shows the clip is mostly the chat scrolling past a blank flat rectangle standing in for the note. 240 fold frames were rendered and 13 reached the screen. The feeling objects are untextured Blender primitives -- the cream cylinder in 01_pulse and in both clip strips is a smooth solid of revolution, not a doodle, a folded shape, tape or a pressed flower. And the desk, which is a third of the pixels in 12_search, reads as a vertically-tiled procedural wood at full frame. What holds: the library itself measures real -- 8 distinct tears from a pool of 56 with no repeat, 775 glyphs and 360 checked variants per hand, one 5200K illuminant with zero drift, a dusk twin for every shadow family. The pipeline is real; almost none of its quality survives the trip to the screen. Nothing in the material path changed this cycle, so this stays at cycle 2's number rather than moving on evidence that is only better measured.",
+   "score": 13,
    "meets_floor": false
   },
   "emotional_transmission": {
    "weight": 20,
    "floor": 17,
-   "critic": 6,
+   "critic": 11,
    "critics": {
-    "emotional_transmission": 6
+    "emotional_transmission": 11
    },
-   "builder": 7,
-   "builder_why": "A feeling arriving on the far phone renders as the word 'hold' in blue script in the transcript. The row's first sentence is that a gesture on one device becomes a sensation on the other, and what 08 shows is a message in a different colour. That is the central claim of the whole app and the artifact disproves it. Four named families are visible where the floor is five. No haptic pattern is recorded anywhere in evidence/ \u2014 thirty feelings are meant to be identifiable by pattern alone with the screen face down and there is nothing in the set that lets anyone check it. I score this one point above the critic only because the landing itself (07) is real geometry with a shadow that separates and meets; the lower of the two stands.",
-   "score": 6,
+   "builder": 10,
+   "builder_why": "Cycle 2's central charge was that a feeling arriving on the far phone rendered as the word 'hold' in blue script -- the row's first sentence disproved by the artifact. In evidence/crops/08_state_propagating_strip.png the same feeling now lands as a folded paper object with 'hold' beneath it, the shell strip carries the state change, and Chat shows 'noor is restless' inline. That charge is answered. The second was that no haptic pattern was recorded anywhere in evidence/, so the face-down claim could not be checked by anyone; evidence/haptics.json now carries 34 feelings across 6 named families with 34 distinct sequences, envelopes and printed strips. Also answered. And 07's sender shows six named families at once against a floor of five. What is still wrong is most of the row. The objects are untextured primitives, so a feeling arrives as a shape rather than as a thing. 01_pulse reaches 7 of 34 feelings and leaves the bottom quarter of the screen empty where the required live pulse of the day's exchanged feelings should be. No haptic annotation is visible on any clip timeline, though the deliverable asks for it on 07 and 15. Nothing in the set shows a state change reaching the other device without the app open, and nothing shows the PWA's designed non-haptic substitute, which is the part the row singles out. Real movement from 6, still seven under the floor.",
+   "score": 10,
    "meets_floor": false
   },
   "coherence": {
    "weight": 15,
    "floor": 13,
-   "critic": 10.5,
+   "critic": 11,
    "critics": {
-    "code": 12.5,
-    "coherence": 10.5
+    "code": 12,
+    "coherence": 11
    },
-   "builder": 11,
-   "builder_why": "The same class of row draws as torn paper in one region and as a hard-edged rectangle in another, which is the coherence row's exact subject. Moments renders none of its content. Nine of eighteen types name nine renderer ids that all resolve to one function, which makes the registry's table wider than the thing it describes. The extensibility half is genuinely good \u2014 the fifth module went in as one directory and one line, and the commit shows it touched nothing under the other four.",
-   "score": 10.5,
+   "builder": 10,
+   "builder_why": "The code half is the strongest thing in this build and I will not mark it down: one spine, no storage driver imported anywhere outside app/lib/spine/, five modules registered through one list so the fifth cost a directory and a line, and persistence_boundary and spine_replay_golden both present. The artifact half contradicts it three ways. 03_us.png is the artifact whose stated job is to prove the module floor and it shows ONE module -- Dates, ahead and been -- with no to-do list, no calendar countdown and no rituals anywhere in the frame; five modules exist in the code and one is visible. 04_moments.png renders 'still fetching the picture.' inside the column headed WHAT WE FELT, which is a photo renderer running under the feelings heading -- the same event failing to appear consistently wherever it should, which is this row's exact subject. And evidence/DIFF.json, the file the brief asks this row's critic to label, reports ssim 1.0 and 'unchanged' for all ten stills with every label null, because capture.sh rotates the baseline before collect.py measures against it; the file compares each still with itself and has done every cycle. A system that is coherent in its source and incoherent in every third artifact is not at 13.",
+   "score": 10,
    "meets_floor": false
   },
   "anti_goal": {
    "weight": 10,
    "floor": 9,
-   "critic": 5.5,
+   "critic": 6,
    "critics": {
-    "anti_goal": 5.5
+    "anti_goal": 6
    },
-   "builder": 5,
-   "builder_why": "Two blocking failures and I accept both. A five-of-five star rating on a remembered date is the canonical review widget attached to a shared memory \u2014 it quantifies the relationship, which is the thing anti-goal one exists to forbid, and I wrote it. Notes in two clips are flat hard-cornered untextured rectangles, which is anti-goal four in the surface the whole visual concept rests on. The drawn feelings read as the standard emoji set to a fresh eye \u2014 a sun with rays for 'forehead', a crescent for 'warm palm' \u2014 and that they are hand-drawn strokes rather than font glyphs is a distinction the picture does not make.",
-   "score": 5,
+   "builder": 6,
+   "builder_why": "One of cycle 2's two blocking failures is gone: the five-of-five star rating on a remembered date is not in 03_us.png, which now reads 'REMEMBERED 18 Jul' with a sentence under it and no score. Nothing anywhere in the set counts, badges, warns or nags. The voice half is clean and I can show it rather than assert it -- strings.json reads 108 displayed strings with zero findings, and what is on screen is 'put it back', 'first one's yours', 'let it interrupt you', 'it would not go': no exclamation mark, no 'Oops', no self-reference, nobody addressed as a user. The other blocking failure did not go, it moved. Anti-goal four names 'a beige rounded rectangle with a drop shadow' and 13_messenger_states.png has one, hard-edged and untextured, occupying an eighth of the frame where an event should have rendered, and 06_unfolding's strip shows the same rectangle standing in for the folding note through most of the clip. In cycle 2 that shape was in two clips; it is now in a still in the fixed set. And the emoji charge is not answered: the sender row in 01_pulse and 07 carries a smiley face of two dots and a red arc, and a sun with rays, which to a fresh eye are the standard set drawn by hand.",
+   "score": 6,
+   "meets_floor": false
+  },
+  "visual_design": {
+   "weight": 20,
+   "floor": 17,
+   "critic": 13.5,
+   "critics": {
+    "visual_design": 13.5
+   },
+   "builder": 8,
+   "builder_why": "This row was added because the owner said the desk gave him visibility issues with text and did not evoke cuteness, and asked for colour-theory guidance and an expert eye. The guidance now exists and is checkable -- docs/COLOR.md is stated in numbers and tools/check/palette.py enforces it per screen class. The app does not implement it. evidence/palette.json records 40 breaches, at least three on every one of the ten stills, and the set-level three are the damning ones: mean chroma 0.0375 against the law's own >=0.045 floor, widest hue gap 320 degrees against <=150, and named families 1 of a required 4 -- B_rose, C_cool and D_green sit at accent_fraction 0.0 on every artifact, so three of the four hue families the design authority wrote down appear nowhere in the app. The warmth the owner complained about was answered once, from 0.025 to 0.0374, and has not moved since: 0.0375 this capture, grey fraction 0.0182 against 0.0183. It is still under the app's own floor. On his other complaint, 64 of 362 declared runs are below the contrast floor (52 with the uncommitted ink correction), and 05_settings.png holds 27 of the 64 with 26 surviving that correction -- its unselected options, 'quietly' and 'not at all', are light grey on cream and I can barely read them at full size. That is the owner's original complaint, still unanswered, concentrated on one screen. Composition is uneven beyond colour: 01_pulse leaves its bottom quarter blank, 03_us and 05_settings carry a smeared grey comb along their torn edges that reads as a rendering fault rather than as paper, 05_settings clips its last row mid-word, and 12_search's tab strip runs off the right edge with TALKING cut. What is genuinely good is the concept and its consistency -- one stationery language across five regions, highlighter-yellow search hits, paper tabs, and the torn-note rhythm of 02_chat and 12_search, which is a real and distinctive piece of art direction. An app in breach of its own colour law forty times, with three of four declared families absent everywhere and a sixth of its text under its own floor, is not near 17.",
+   "score": 8,
    "meets_floor": false
   }
  },
- "total": 55.5,
- "exit_threshold": 95,
+ "total": 67,
+ "exit_threshold": 114,
  "every_floor_met": false,
  "at_exit": false,
  "critics_run": [
   "anti_goal",
   "code",
   "coherence",
-  "completeness",
   "emotional_transmission",
   "material_truth",
-  "messenger_reliability"
+  "messenger_reliability",
+  "visual_design"
  ],
  "critic_count": 7,
  "declined": [],

@@ -1,0 +1,41 @@
+{
+ "cycle": 3,
+ "stage": "DIAGNOSE",
+ "firing": 17,
+ "at_commit": "fcee088f",
+ "completed": "seven critics run as fresh contexts, builder sheet written first, score.py accepted the arithmetic with no problems",
+ "score": {
+  "total": 67,
+  "scale": 120,
+  "exit": 114,
+  "every_floor_met": false,
+  "by_category": {
+   "messenger_reliability": {"critic": 21, "builder": 20, "taken": 20, "floor": 26},
+   "material_truth": {"critic": 13, "builder": 15, "taken": 13, "floor": 22},
+   "emotional_transmission": {"critic": 11, "builder": 10, "taken": 10, "floor": 17},
+   "coherence": {"critic": 11, "code_critic": 12, "builder": 10, "taken": 10, "floor": 13},
+   "anti_goal": {"critic": 6, "builder": 6, "taken": 6, "floor": 9},
+   "visual_design": {"critic": 13.5, "builder": 8, "taken": 8, "floor": 17}
+  }
+ },
+ "against_cycle_2": {
+  "the_five_old_rows": "55.5 -> 59.0, +3.5",
+  "the_sixth_row": "8 of 20, no predecessor",
+  "total_on_the_new_scale": "67 of 120",
+  "structural_pass_rule": "the brief triggers a structural pass on less than one point across two consecutive cycles; +3.5 on comparable rows does not trigger it"
+ },
+ "the_headline": "six instruments read green on something that is not green, and four of them were found this firing by contexts that could not see each other",
+ "instruments_found_lying": [
+  "evidence/DIFF.json -- capture.sh:343 rotates evidence/.previous to hold THIS capture, then tools/capture/collect.py:175 measures against it and overwrites diff.py's correct file; every still reads ssim 1.0 unchanged, every cycle, by construction. The coherence critic read those ten ones as proof the stills were pixel-identical to the previous capture.",
+  "11_chat_scroll.mp4 -- scripted at 11 px per frame, so its repeated-frame count can only ever be zero",
+  "evidence/logs/fonts.json -- reads 775 glyphs and 360 checked variants per hand with no findings, but it checks the font file, not the render; at 300% five 'e' glyphs differ by as little as 3.07/255 after alignment against a 42.41 control",
+  "evidence/legibility.json -- the dusk array is empty, so the dusk floors of 5.0 and 4.5 gate nothing; the dusk Pulse crop measures 2.76-2.85:1 by hand",
+  "app/test/legible_on_what_it_is_on_test.dart -- its thinning guard reads a _thinnings map whose single entry is 1.0, so Color.lerp(ground, ink, 1.0) == ink and the test is arithmetically the sweep above it",
+  "app/test/ as a whole -- no flutter test in bootstrap.sh, run.sh or capture.sh; the only invocation sits behind the build.yml guard that has never been satisfiable, so every structural guard in the suite is advisory"
+ ],
+ "the_remaining_legibility_fault_localised": "the visual-design critic recomputed all 64 below-floor runs from the PNGs: 29 are false, every one where ground_swing is 1.8-14.5 (the sampler took the desk or a torn edge as ground); the 35 that stand all sit on flat ground at swing 1.02-1.12 and agree with the file to within 0.05",
+ "legibility": {"runs": 362, "below_floor_as_committed": 64, "share": 0.1768, "below_floor_after_the_head_queue_items_fix": 52, "below_floor_the_critic_could_reproduce": 35},
+ "palette": {"mean_chroma": 0.0375, "floor": 0.045, "grey_fraction": 0.0182, "breaches": 40, "named_families_present": 1, "named_families_required": 4},
+ "freshness": "no critic was given the git log, loop/, docs/BRIEF.md, docs/COLOR.md, DIRECTION.md, TASK_STATE.md or any previous cycle's report. Each was given the mission goal, the four anti-goals, its own rubric row and the evidence set. The code critic discloses that one history-wide secret grep printed lines from a prior cycle's report before it re-ran the search scoped; it states no verdict rests on that.",
+ "next_stage": "ADDRESS"
+}
