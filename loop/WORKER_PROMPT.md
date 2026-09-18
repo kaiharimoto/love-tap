@@ -95,8 +95,23 @@ moves the branch and the working tree together:
 
     git checkout -B claude/app-improvement-autonomous-workflow-d6fwdu origin/claude/app-improvement-autonomous-workflow-d6fwdu
 
-So there are three routes, none of them reliably available, and the order to try them in is
-shortest first — **expect any of them to be refused and move down the list rather than arguing**:
+**And firing 16 did not need any of the three, because the divergence was never real.** Two
+shallow histories again, `git merge-base` empty, `git rev-list --count` reading 50 and 50, the
+dry-run push rejected `non-fast-forward`. One command filled the graft boundary in:
+
+    git fetch --unshallow origin claude/app-improvement-autonomous-workflow-d6fwdu
+
+After it, `git merge-base` returned the local tip exactly and the counts read **0 ahead, 136
+behind** — an ordinary checkout that is behind, which `git merge --ff-only` then took. Nothing was
+reset, nothing was force-moved, no tip was dropped. It was given the branch refspec, not the bare
+remote, so it is not the hazard §0 opens with; firing 16 did not time it, but it returned inside a
+single five-minute budget and was not the slow kind.
+
+**Try this first.** It is the only route that *proves* the divergence is a graft rather than
+assuming it, and if the unshallowed history really does diverge you will find out before you have
+overwritten anything. Then dry-run again; `Everything up-to-date` is the pass. If it is refused or
+the histories are genuinely unrelated, the three routes below are the fallbacks, shortest first —
+**expect any of them to be refused and move down the list rather than arguing**:
 
 1. `git checkout -B <branch> origin/<branch>` — one command, allowed at firing 14, untried before
    that. It is also the one that loses most: the old tip is left in the reflog and on no branch.

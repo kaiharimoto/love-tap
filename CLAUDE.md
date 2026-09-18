@@ -86,4 +86,5 @@ Everything else worth knowing about running it is in `docs/CONTINUE.md` §4–§
   yourself; a clone is readable and unpushable, which is the trap.
 - **`09_two_devices.png` and `16_setup_android.png` cannot be produced in this container.** No
   `/dev/kvm`; three routes were tried and measured, and `docs/PHONES.md` records all three. That
-  is a hardware fact, not a loop defect. 14 of 17 is the ceiling here.
+  is a hardware fact, not a loop defect. **15 of 17 is the ceiling here**, and firings 12 and 16
+  have both reached it; the 14 this line used to claim was one out.

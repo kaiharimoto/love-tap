@@ -2527,3 +2527,161 @@ was reset, nothing was force-moved, and no old tip was dropped anywhere. §0 is 
 first: it is the only route that *proves* the divergence is a graft rather than assuming it.
 
 Lease: `session_011AXftP5tRLu3XnMYbXALzr`, three hours, to 2026-09-18T15:58Z.
+
+## Firing 16 — OBSERVE, cycle 3 — the capture, and the ruler judged against it
+
+The stage `loop/STATE.json` named, run as named. No code was touched: `app/`, `assets/` and `seed/`
+are byte-identical to what firing 15 pushed, which is what lets DIAGNOSE score on this set.
+
+### The capture
+
+Fifteen of seventeen. `09_two_devices.png` and `16_setup_android.png` absent for the reason
+`docs/PHONES.md` records, which is hardware and not a loop defect. Every gate in
+`evidence/logs/*.json` that carries an `ok` flag reads true. `CLAUDE.md` says 14 of 17 is the
+ceiling here; it is 15, and has been twice now, so that line is corrected.
+
+### The number, and the part of it the app earned
+
+**64 of 362 declared runs below floor, 17.68%, against firing 15's corrected 78 of 370, 21.08%.**
+
+Fourteen failures gone, and the denominator down by eight. Those two movements have different
+causes and this capture separates them without any hand attribution, because two screens each held
+one half of themselves still:
+
+```
+  02_chat.png            declared set BYTE-IDENTICAL — 36 runs, same text, same rects
+                         pixels changed                        9 failures →  5      the app
+  13_messenger_states    34 declared runs before and after, none added or removed
+                         pixels changed                        8 failures →  4      the app
+  12_search.png          PNG BYTE-IDENTICAL
+                         26 of 45 declared runs gone           8 failures →  6      the declaration
+  14_media_viewer.png    25 declared runs → 2, pixels changed  4 failures →  0      the declaration
+  the other six stills   nothing moved; three are byte-identical PNGs
+```
+
+So **eight of the fourteen are the app's own ink and six are firing 15's occlusion fix.** This is
+the first capture in this cycle where the larger half of a fall belongs to the app.
+
+`12_search` is the cleanest thing in the set. Its pixels are unchanged to the byte and its sidecar
+lost twenty-six declarations, every one of them behind the search sheet — `CHAT`, `ENERGY`,
+`MOMENTS`, `PULSE`, `NEED`, and the chat paragraph `It was the good end…` — and gained none. Same
+photograph, fewer lies about it. Firing 15 predicted `14_media_viewer` would fall to "about 3 runs
+rather than 25"; it is 2, and it loses all four of its failures, which is that item's measurement
+met exactly.
+
+**The timestamps.** 14 failures → 5, and the five are 3.65, 3.67, 3.77, 4.22 and 4.30 against a 4.5
+floor, where before they were 1.01 to 3.48. Firing 13 fixed the cause — the `Opacity(0.78)` wrapper
+— and this is the first capture able to say so. It is about 0.85 of a contrast point short of done,
+on margin ink headroom, and it is no longer a blind spot. The item does not close: it asks for zero.
+
+**Palette did not move, which is what no colour change should look like.** Mean chroma 0.0375
+against 0.0374, grey fraction 0.0182 against 0.0183, and **no `docs/COLOR.md` §5 ceiling appears in
+the breach list at all**. The warmth was not spent to buy legibility, because nothing was spent.
+
+### The judgement: the ruler has not converged, and that no longer blocks the number
+
+I was asked to decide whether the instrument has stopped moving. It has not — there is a third
+fault, it is real, and I measured it before I wrote this. But the answer is different in kind from
+the last two times, and the difference is the whole of what this entry is for.
+
+**The fault.** `legibility.py` reports `contrast(core, gated)`. Firing 15 fixed `gated` so that the
+app's own ink cannot be a run's ground. `core` was left as it was:
+
+    stroke = pl[pm]          # pm is the WHOLE mark mask over the ring box
+    core   = np.percentile(stroke, 10)
+
+`pm` is every pixel the mark detector fired on in that rectangle — the run's letters, the
+components the glyph filters rejected, and the desk. So where a run has something darker than its
+own letters inside its ring, the tenth percentile lands on that thing instead of on the writing.
+
+Pulled apart on `12_search`'s `PHOTOGRAPHS`, which is the case firing 15 chose as its own
+counter-example:
+
+```
+  ink sample                      2833 px, of which 994 (35%) are not glyphs at all
+  those 994 non-glyph pixels      p10 0.0047     — the desk through the gap in the tab
+  the letters themselves          p10 0.0615     — flat; p10 and p50 are the same number
+  gated ground                    0.0114         — the same desk, in the band
+
+  shipped      contrast(0.0072, 0.0114) = 1.07   the desk against the desk
+  glyphs only  contrast(0.0615, 0.0114) = 1.82   and then the ring reading 15.16 stands
+```
+
+The last step is the part worth reading twice. `legibility.py` already has a guard for exactly this
+— `on_the_far_side`, which says a ground darker than the ink is a second surface and not this ink's
+ground. It was being defeated by being handed a wrong ink value: with `core` at 0.0072 the hole
+looks *lighter* than the ink and the guard passes it through. Give the guard the real letters and
+it fires by itself. **The fix does not add a rule; it stops breaking one the file already has.**
+
+**The size, and why it is the interesting part.** Twelve failures on the committed capture
+(78 → 66 of 370) and twelve on this one (64 → 52 of 362) — and *the same twelve runs, with the same
+readings, on two captures taken five firings apart*:
+
+```
+  'week one, and the room smells right again'   ×6 screens   1.28–1.30   ring 10.13
+  'write something'                             ×2 screens   1.20, 1.25  ring 10.67, 10.20
+  'PHOTOGRAPHS' 'EVERYTHING' 'WRITTEN'          12_search    1.07–1.10   ring 15.16–15.79
+  'WHAT WE SENT'                                04_moments   1.09        ring 10.42
+```
+
+Zero new failures either time and the run count does not move. Every one of them has a ring reading
+of 10:1 or better; they are the twelve most legible-looking runs in the failure list and they hold
+**twelve of the worst fifteen places in it**.
+
+**So why capture now when firing 15 was right not to.** Firing 15's argument was that the ruler's
+error was a function of what the app draws and so would not cancel in a delta. That was true of
+both of its faults, and it is *not* true of this one, on the evidence of two captures: the runs it
+bites are fixed furniture — the shell line on six screens, the composer placeholder on two, the
+three torn tabs, one Moments heading — and it removed exactly twelve from each side. 78 → 64 and
+66 → 52 are both a fall of fourteen. The delta cancels. That is a measured claim, not a hope, and
+the next firing can falsify it.
+
+**And it composes with firing 15's rule rather than competing with it.** The probe passes
+`legibility_selftest.py` unchanged, section 6 and its 1.76:1 tear case included. Which also means
+the selftest does **not** cover this fault — the synthetic tear's gap is too small to move a tenth
+percentile — so the queue item asks for a section that fails without the change.
+
+**What I did not do.** I did not land it. Three consecutive instrument-only firings would be the
+failure the brief warns about more surely than a ruler that is 12 runs wrong, and this fault, unlike
+firing 15's, does not corrupt a comparison. It is at the head of the queue with its before and after
+already measured on two captures, so IMPLEMENT can close it in one commit without a capture.
+
+**A prediction, so the next firing can hold this to account.** I think this is the last of the
+family. The three faults are one conflation in the three places it can occur: what counts as a
+declared run (firing 15), what counts as ground (firing 15), and what counts as ink (this one).
+After it lands, every term in `contrast(core, gated)` is sourced from the app's own declaration
+rather than from the mark detector, and there is no fourth term. If a fourth fault is found anyway,
+it will be somewhere other than the three terms, and that should raise the question of whether the
+declared-runs design is the right one — not merely whether it has another bug in it.
+
+**And one correction to a firing 15 judgement.** It assigned eight runs reading against a ground
+darker than their own ink to `the-relit-tear-edge-is-a-dark-band`, saying "the ruler is right about
+them — they are the app's to answer." It is not right about the three torn search tabs, which are
+this fault, measured. That item's eight need re-counting after the fix lands.
+
+### Where the remaining work actually is
+
+`05_settings` holds **27 of the 64**, and twenty-six of those survive the ink correction. Its PNG is
+byte-identical across three captures and nothing in the queue names it. `01_pulse` holds 12, of
+which 11 survive. Between them that is 38 of the 52 real failures, and the worst genuine reading in
+the whole set is `05_settings`' `'not at all'` at 1.03 against a ring of 9.77. That is where the
+next legibility work should go, and ADDRESS should rank it.
+
+### Closed this firing, each against its own named measurement
+
+- **`capture-packs-its-assets-after-the-gate-that-reads-them`** — met on the fresh container that is
+  the only place it can be met. `app/assets` did not exist at the start; the reordered gate read 318
+  surfaces with `flat` empty, and `evidence/frames.json` has no `surfaces` entry. Re-broken by
+  pointing `surfaces.py --root` at an empty directory, which is exactly what a fresh container's
+  `app/assets` is before packing: 0 read, *"nothing was measured, so nothing is being asserted"*,
+  exit 2 — the failure that used to be recorded as a missing artifact.
+- **`the-app-declares-writing-it-has-painted-over`** — `14_media_viewer` 25 declared runs → 2 and
+  four failures → zero, which is the item's own wording. The eight untouched stills' declared sets
+  are unchanged run for run, so the change reached the two screens with an overlay and nothing else.
+
+Nine items open, none blocked. Stage to DIAGNOSE, which may score: nothing under `app/` moved.
+**DIAGNOSE should quote both legibility numbers** — 64 of 362 as the committed tool reports it, and
+52 of 362 with the head queue item's correction applied. Scoring off 64 alone under-credits the app
+by twelve runs; scoring off 52 alone claims a fix that is not committed yet.
+
+**Lease released.**

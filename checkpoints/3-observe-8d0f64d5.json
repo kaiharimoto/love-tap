@@ -1,0 +1,50 @@
+{
+ "cycle": 3,
+ "stage": "OBSERVE",
+ "firing": 16,
+ "at": "8d0f64d5",
+ "completed_at": "2026-09-18T14:20:00Z",
+ "artifacts": {
+  "present": 15,
+  "declared": 17,
+  "missing": [
+   "09_two_devices.png",
+   "16_setup_android.png"
+  ]
+ },
+ "legibility": {
+  "committed_tool": {
+   "below_floor": 64,
+   "runs": 362,
+   "rate": 0.1768
+  },
+  "ink_term_corrected": {
+   "below_floor": 52,
+   "runs": 362,
+   "rate": 0.1436
+  },
+  "previous": {
+   "below_floor": 78,
+   "runs": 370,
+   "rate": 0.2108
+  },
+  "decomposition": {
+   "app_ink": 8,
+   "declaration_fix": 6,
+   "evidence": "02_chat and 13_messenger_states changed pixels with an unchanged declared set; 12_search changed its declared set with a byte-identical PNG"
+  }
+ },
+ "palette": {
+  "mean_chroma": 0.0375,
+  "grey_fraction": 0.0182,
+  "section_5_ceilings_breached": 0
+ },
+ "closed": [
+  "capture-packs-its-assets-after-the-gate-that-reads-them",
+  "the-app-declares-writing-it-has-painted-over"
+ ],
+ "filed": [
+  "a-runs-ink-is-the-glyphs-not-every-mark-near-it"
+ ],
+ "next_stage": "DIAGNOSE"
+}
