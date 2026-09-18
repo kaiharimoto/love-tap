@@ -3023,3 +3023,135 @@ It will need a toolchain — `bash tools/apt-prereqs.sh`, then `./bootstrap.sh -
 `asks[]` entries stand and none of them blocks the loop.
 
 **Lease released.**
+
+---
+
+## Firing 19 — IMPLEMENT, cycle 3
+
+Push pre-flight passed, after the graft hazard §0 warns about. The container's checkout was a
+shallow clone at firing 0's tip — `git merge-base` empty, the dry-run push rejected
+`non-fast-forward` — and `git fetch --unshallow origin <branch>` turned it into an ordinary
+checkout 0 ahead and behind, which `git merge --ff-only` then took. No reset, no force, nothing
+dropped. That is the fourth firing to meet this and the second time the unshallow route was the
+one that worked.
+
+Lease taken and pushed before anything was touched, TTL four hours, extended to 03:00Z when the
+Blender render was started.
+
+### What the triage asked for first, and what the pixels said
+
+The dispatch was explicit: `the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames`
+is the cap on `material_truth`, firing 9 reported 240 of 240 fold frames with paper in them, and
+both can be true if the clip is assembled from something other than those frames — **establish
+which before re-rendering anything**.
+
+It is neither of the item's two candidates and it is not the assembly. **The render is the
+rectangle.** `blender/folds/fold.py:217` built the fold sheet's material with
+`common.paper_material(..., tooth=1.05, yellowing=0.25, sheen=0.24, fibre_scale=1100.0)` and passed
+no `rules_image`, where `blender/paper/stocks.py:225` passes one for every stock in the library. The
+fold was the one piece of paper in this build rendered without the printed rules of the stock it is
+meant to be made of, and modelled square-cut, so no tear edge either. Four measurements agree:
+
+- **Colour.** The flat rect in `13_messenger_states.png` has median RGB (252,226,198) over
+  x70–1095, y1285–1512. The opaque median of every frame in `assets/folds/unfold_thirds/` is
+  (252,226,198) exactly. No `Paper.forStock` constant is near it, which rules out the `ColoredBox`
+  fallback.
+- **Geometry.** The object spans 1055×260 including its shadow. Frame 18's band, cropped as
+  `pack_assets.py` crops it and drawn at 1055 wide, is 270 tall — the nearest frame in the sequence.
+- **Picture.** That frame composited over the pad colour *is* the artifact region: same flat fill,
+  same square corners, same hard drop shadow down and right, the artifact only softer.
+- **Generator.** One argument short of the one every other sheet gets.
+
+So firing 9 was right and `tools/check/surfaces.py` is right that all 240 clear its folds floor at
+patch_std 1.918–2.075. Both are true because **the floor is satisfied by procedural tooth alone and
+cannot see that no rules were printed** — a third gate reading green over a real defect, filed as
+`the-folds-floor-passes-a-blank-sheet` for ADDRESS to rank rather than fixed here.
+
+`SIZES["folds"] = 540` against `SIZES["paper"] = 1500` is real and measured, and it is *not* the
+cause: it makes a flat sheet flatter. Raising it costs `FoldFrames.window` against the 32 MB in
+`TASK_STATE.md` — 36 frames at 1035×604 RGBA is 88 MB — so it is written down and not bought.
+
+### The two broken gates, which the triage put above items worth more points
+
+**`every-still-in-diff-json-is-compared-with-itself` — closed.** `capture.sh` ran `diff.py --rotate`,
+which measures against `evidence/.previous` and only then rotates, and `collect.py` then recomputed
+SSIM against the baseline that had just been rotated to hold this very capture, and overwrote the
+file. `collect.py` no longer measures, writes or rotates anything to do with the previous capture.
+
+The measurement is `tools/check/diff_selftest.py`, and it is end-to-end on purpose: a grep for
+writers would pass on a build whose one writer compares a file with itself, which is the failure
+that actually happened. It stands up a throwaway root holding the real tools and runs capture.sh's
+own two steps twice with one still altered upstream between them. Passing: the altered still reads
+`changed` at ssim 0.9493, the untouched ones `unchanged`. **Re-broken and watched to fail**: with
+collect.py's write put back it fails five checks, the decisive line being the symptom itself —
+`02_chat.png altered upstream reads None at ssim 1.0`.
+
+It is wired into `capture.sh` *above* `diff.py`, so the ruler is checked before it is read. Nothing
+in this build ran a selftest at all. One silent drop found while wiring it: a `note_missing` against
+anything that is not one of the seventeen artifacts was read into `collect.py` and written nowhere.
+
+**`the-manifest-gate-reports-ok-with-twenty-entries-that-have-no-file` — closed, and the gate was
+wronger than the item said, in both directions.** Three faults: `ok` was `not missing and not
+unbuildable`, so `entries_without_a_file` was computed, written and never read; the list was cut at
+`stale[:20]` with no count beside it, so the twenty on show were the visible end of **134**; and
+`covered()` resolved every key under `assets/` while the manifest records some relative to the
+repository root, so **115 photographs that are on disk were reported as having no file**.
+
+The 134, classified: 115 present at the root, 14 under gitignored `/scratch/`, 2 in a dead session's
+scratchpad, 2 exempt index files, 1 directory entry. Only the first sixteen were ever a fault. The
+two scratchpad records are dropped by the same code path and reasoning as the `../` smoke tests
+already were; the fourteen under `/scratch/` are **left to read red**, because deleting their
+entries would hide a real question about whether the video posters belong in the library.
+`tools/check/manifest_selftest.py` breaks a throwaway library one fault at a time and requires each
+to take `ok` false — including the item's own re-break, deleting a seed photo. Seven checks pass;
+with the old `ok` and the assets-only resolution back, four fail.
+
+The item's second clause was already true and is now recorded: `manifest.py` runs at
+`capture.sh:68`, before any still is shot.
+
+### The heaviest row: its diagnosis was wrong and is withdrawn
+
+`the-gallery-has-no-photographs-because-sixteen-of-them-are-not-on-disk` said the files do not
+exist. **They do.** All 128 `seed/photos/*.jpg` are on disk, the four it names among them, and
+`seed/videos` holds 14 mp4s and 14 matching `*.poster.jpg`. They were listed as missing by the
+broken manifest gate above. Nobody should render a photograph that is already there.
+
+What 04_moments actually shows, looked at rather than inferred: **one** photograph tile rendered,
+six reading "still fetching the picture.", five cards with a duration and no poster. A print that
+renders is a blob that was written, found and decoded, so the seed load, the store and the decode
+path all work. `blob_widgets.dart`'s own comment says the rest — IndexedDB is one lane, `BlobCache`
+holds four reads at a time, and firing 3 measured that a twelve-second wait brings every print back.
+`main.dart:25–28` marks `__deskReady` from the second post-frame callback after the first frame, and
+`scene.js:78` waits on that and a fixed settle. `evidence/logs/04_moments.json` times it: 4771 ms to
+ready, then 2305 and 2828. **Two to five seconds to drain a queue that takes twelve.**
+
+Two faults, not to be conflated: the evidence is ambiguous between slow and broken, and three
+critics read it as broken; and the app really is too slow, because twelve seconds of blank grid *is*
+the row's own disqualifier, so making the capture wait longer would photograph a lie.
+
+### And the flat backing surface, located exactly
+
+`the-backing-surface-of-three-screens-is-one-rgb-value`: the dominant RGB of each affected still is
+bit-exact a `Paper` constant, which no render can be — `Paper.lined` at 59.5% of `10_first_run`,
+`Paper.looseleaf` at 48.0% of `17_setup_pwa`. So what is on screen is the `ColoredBox` fallback at
+`paper.dart:132`. The bounds name the widget: the exact-constant region spans **x 36–1403** on both
+stills, which is `RegionPad`'s 12 logical px margin at DPR 3, the same figure another item recorded
+independently, and 75.8% of that box is the constant to the bit.
+
+One frame settles what it is not. On `01_pulse`, a 120×400 patch of the pad reads **L_std 0.000 with
+one luminance level** while a note 400 px away reads **43.303 with 163**, in a capture whose report
+has the library loaded with 54 stocks. Not the bundle, not the library, not the relight, not an
+early shutter. Three candidates are written into the item in rank order, with a widget test that
+separates them without a browser.
+
+### The toolchain, and the suite nobody had ever run
+
+`bash tools/apt-prereqs.sh` then `./bootstrap.sh --profile=web` gave Flutter 3.47.2, Blender 4.5.13
+and ffmpeg in about six minutes. **`flutter analyze`: 0 errors.** **`flutter test`: 123 tests, all
+passed.** So the standing worry in `WORKER_PROMPT.md` is cleared —
+`legible_on_what_it_is_on_test.dart`, never compiled since it was written, compiles and passes.
+
+One prerequisite that was written down nowhere and cost a run: `flutter test` fails outright on a
+fresh container until `tools/pack_assets.py --seed=year` has run, because `app/assets` is derived and
+gitignored and a bare pack leaves the seed directories out.
+
