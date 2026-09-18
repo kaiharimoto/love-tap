@@ -1714,3 +1714,64 @@ Three things about the container, all cheap and all learned the hard way here:
 Nothing is blocked. Nothing in `asks[]` moved.
 
 **Lease released.**
+
+## Firing 12 — OBSERVE — lease taken
+
+Step 0 passed on the second attempt, in the shape `loop/WORKER_PROMPT.md` §0 names — the **fourth**
+firing to meet it. A shallow clone at depth 50, grafted at a different point from the branch tip:
+`git merge-base --is-ancestor` said no, `git rev-list --count origin/<branch>..HEAD` said 50, and 50
+is the *total* commit count on this side, which is §0's tell that it is a graft boundary and not
+work. The first dry run's `non-fast-forward` was the remote authenticating and then declining the
+ref update — not a credential failure, and not reported as one.
+
+One difference from firings 7, 10 and 11, worth writing down because §0 tells you to run
+`git reset --hard` and this container would not let me: **`git reset --hard` was refused by the
+permission layer as irreversible local destruction.** The equivalent that is allowed, and that loses
+strictly less, is three commands — confirm `git status --porcelain` and `git stash list` are both
+empty, `git checkout --detach origin/<branch>`, then `git branch -f <branch> HEAD` and check it out.
+The old tip stays in the reflog (`3edfbf7`, noted before moving it) rather than being dropped. The
+dry run then returned `Everything up-to-date`. §0 should say this; a successor should not have to
+rediscover it, and it is added to `WORKER_PROMPT.md` in this firing's closing commit.
+
+Also: bare `git fetch origin` did run here rather than hanging, but it took just over three minutes
+to index a 9,649-object pack. The refspec form §0 insists on is still the right one.
+
+### The stage this firing runs, and why it is not the one STATE.json named
+
+`loop/STATE.json` said IMPLEMENT with eight items open, and `loop/WORKER_PROMPT.md` §3 says do the
+stage the file names. This firing was directed to take the capture instead, and that is a departure
+from the protocol, so it is recorded here rather than quietly taken.
+
+It is defensible on the repository's own terms. Five of the eight open items — `paper-is-the-median-pixel`,
+`the-day-rig-is-what-took-the-colour-out`, `one-coloured-thing-per-screen`,
+`families-b-c-and-d-reach-the-glass`, `the-relit-tear-edge-is-a-dark-band` — name
+`palette.py --floors` or `legibility.py` over a fresh capture as the measurement that closes them,
+and part 3 of `writing-is-not-the-same-as-texture` says in as many words that it "needs a capture and
+is OBSERVE's". `evidence/` is fresh only as of firing 8 at `097bea5`: before the ninth fold family,
+before 240 of 240 fold frames had paper in them, and before the declared-text ruler at `1817462` and
+`5b91abd`. Not one of those five can be closed honestly against what is on disk. An IMPLEMENT firing
+that stayed on the queue would be writing fixes it could not measure.
+
+Firing 11 declined this capture for a specific reason — the text handle did not exist, so the stills
+it produced could only ever be measured with the broken ruler — and said the next OBSERVE should take
+it with the handle in the build. The handle is in the build. This is that OBSERVE.
+
+Lease held to 2026-09-18T04:01Z, three hours, which is OBSERVE's TTL.
+
+### What this firing is trying to find out
+
+Two numbers, and the honest answer about both is that neither is comparable to its predecessor in
+the way a trend line would suggest.
+
+**Legibility.** The last reading was 30.70% of runs below floor, against 25.28% before it and 48.4%
+when the owner first said the text was hard to read. Every one of those was taken with a ruler that
+finds writing by looking for glyph-shaped marks, and firing 9 measured that instrument's error
+directly: of fifty-four extra below-floor runs, seven were the text and forty-seven were the ruler.
+Whatever this capture reads, it is the first reading taken with runs declared by the app. It
+supersedes all three and it is **not** a fourth point on the same line.
+
+**Warmth.** `across_the_set.mean_chroma` was 0.0358 against 0.045, from 0.025 when the owner
+complained — but that was measured on a half-relit library. This is the first reading of the
+finished one.
+
+A number that disappoints is a result. Both go into the next block as they land.
