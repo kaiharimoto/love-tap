@@ -2,6 +2,7 @@
 // every region. The desk is a render (assets/shell/desk*.webp) when the library has been baked;
 // until then it is the flat colour the render was made against, never a gradient.
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../spine/projections/state.dart';
 import '../spine/spine.dart';
@@ -21,18 +22,55 @@ class Desk extends StatelessWidget {
     final dusk = Light.of(context) == LightCondition.dusk;
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
     final surface = lib?.shell.any((e) => e.id == (dusk ? 'desk_dusk' : 'desk')) ?? false;
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        ColoredBox(color: dusk ? DeskColour.dusk : DeskColour.day),
-        if (surface)
-          Image.asset(shellAsset(dusk ? 'desk_dusk' : 'desk'),
-              fit: BoxFit.cover, repeat: ImageRepeat.repeatY, errorBuilder: PaperPiece.none),
-        child,
-      ],
+    // The desk hides whatever was painted before it, and says so. `ColoredBox` is the first thing
+    // in the stack, it is expanded to the whole of this box, and both desk colours carry a full
+    // alpha, so there is no condition under which something behind shows through -- not even when
+    // the library has not been baked and the render above is absent. See [OpaqueSurface] for what
+    // the declaration does with that.
+    return OpaqueSurface(
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          ColoredBox(color: dusk ? DeskColour.dusk : DeskColour.day),
+          if (surface)
+            Image.asset(shellAsset(dusk ? 'desk_dusk' : 'desk'),
+                fit: BoxFit.cover, repeat: ImageRepeat.repeatY, errorBuilder: PaperPiece.none),
+          child,
+        ],
+      ),
     );
   }
 }
+
+/// A surface that covers whatever was painted before it, stated by the widget that knows.
+///
+/// It draws nothing and costs nothing; it exists so that the capture declaration can tell the
+/// difference between a paragraph that is on the glass and one that is behind a desk.
+///
+/// The declaration needed this because the framework will not answer it. `CaptureHooks.textRuns`
+/// declares only what is painted, and asks `paintsChild` -- the framework's own answer -- which
+/// covers a zero opacity, an `Offstage`, a scrolled-away list child, and, asked directly, a
+/// `RenderIndexedStack`. What it does not cover is a route stacked over another route: the
+/// `Navigator`'s overlay lays its offstage entries out and simply does not paint them, and its
+/// render object does not override `paintsChild` to say so. `SearchPage` has been pushed with
+/// `opaque: true` since it was written and the chat behind it was declared anyway, which is the
+/// proof that this is not something a route flag can fix from the outside.
+///
+/// So `14_media_viewer.png` declared 25 runs where the screen holds three: one torn note, one
+/// stamped button, and 22 lines of the chat underneath a photograph. `legibility.py` looked
+/// inside those rects, found photograph and wood grain, and reported them as writing at 1.01:1 --
+/// six of the 84 runs below floor on firing 12's capture were texture inside a declaration of
+/// something invisible, and firing 13 lost a guess to one of them.
+class OpaqueSurface extends SingleChildRenderObjectWidget {
+  const OpaqueSurface({super.key, required Widget super.child});
+
+  @override
+  RenderOpaqueSurface createRenderObject(BuildContext context) => RenderOpaqueSurface();
+}
+
+/// The render object [OpaqueSurface] exists to put in the tree. It is a plain proxy: it changes
+/// no layout, paints nothing of its own, and is only ever looked for by type.
+class RenderOpaqueSurface extends RenderProxyBox {}
 
 /// The partner's state, on a torn strip of the paper their mood picks, in their hand, at the top
 /// of every region. docs/SIGNALS.md says what each signal does to it.

@@ -19,6 +19,7 @@
 // file, and the only symptom of either is a legibility report that quietly measures less and less.
 // So every assertion here is against what the framework says the same paragraph's rect is.
 import 'package:desk/capture/hooks.dart';
+import 'package:desk/material/desk.dart';
 import 'package:desk/material/hands.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -133,6 +134,74 @@ void main() {
     expect(runs.length, lessThan(_lines.length),
         reason: 'four of the five lines were pushed off the bottom and all five were still '
             'declared, so nothing is being clipped at all');
+  });
+
+  // What the app paints over is not on the glass, and is not declared.
+  //
+  // `14_media_viewer.png` declared 25 runs where three were visible: the other 22 were the chat
+  // behind the photograph. `legibility.py` looked inside those rects, found photograph and wood
+  // grain, and reported it as writing at 1.01:1. All four of that still's failures were this, and
+  // two of `12_search`'s nine were the same thing at y=0. `paintsChild` cannot see it -- the
+  // `Navigator`'s overlay lays its offstage entries out and simply does not paint them, and
+  // `SearchPage` has been pushed `opaque: true` since it was written and the chat behind it was
+  // declared anyway.
+  Future<void> pumpCovered(WidgetTester tester, {required Widget cover}) async {
+    tester.view.physicalSize = _physical;
+    tester.view.devicePixelRatio = _dpr;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: Stack(children: [
+          Positioned(left: 24, top: 80, child: Text('behind the desk', style: Hands.noor())),
+          cover,
+        ]),
+      ),
+    ));
+    await tester.pump();
+  }
+
+  testWidgets('writing behind an opaque surface is not declared', (tester) async {
+    await pumpCovered(tester, cover: const Positioned.fill(
+      child: OpaqueSurface(child: ColoredBox(color: Color(0xFF2A241F))),
+    ));
+    expect(CaptureHooks.textRuns().map((r) => r['text']), isEmpty,
+        reason: 'the line was painted before a surface that covers the whole view');
+  });
+
+  testWidgets('writing on the surface is declared, and writing under it is not', (tester) async {
+    await pumpCovered(tester, cover: Positioned.fill(
+      child: OpaqueSurface(child: Stack(children: [
+        const ColoredBox(color: Color(0xFF2A241F)),
+        Positioned(left: 24, top: 400, child: Text('on the desk', style: Hands.noor())),
+      ])),
+    ));
+    expect(CaptureHooks.textRuns().map((r) => r['text']), ['on the desk'],
+        reason: 'the surface hides what was painted before it and nothing painted after it');
+  });
+
+  testWidgets('a run only half covered is still declared', (tester) async {
+    // The honest direction to err in. A paragraph that is partly on the glass names pixels that
+    // are partly its own, and the tool intersects a declaration with the marks it finds -- so
+    // declaring it costs at worst a false failure, where dropping it would hand the tool
+    // permission to stop looking at writing that is really there.
+    await pumpCovered(tester, cover: Positioned(
+      left: 0, top: 0, right: 0, height: 30,
+      child: const OpaqueSurface(child: ColoredBox(color: Color(0xFF2A241F))),
+    ));
+    expect(CaptureHooks.textRuns().map((r) => r['text']), ['behind the desk']);
+  });
+
+  testWidgets('the desk itself is one of these surfaces', (tester) async {
+    // Without this the wiring could be removed and every test above would still pass.
+    tester.view.physicalSize = _physical;
+    tester.view.devicePixelRatio = _dpr;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(const MaterialApp(
+      home: Desk(child: SizedBox.shrink()),
+    ));
+    await tester.pump();
+    expect(find.descendant(of: find.byType(Desk), matching: find.byType(OpaqueSurface)),
+        findsOneWidget);
   });
 
   testWidgets('a paragraph with no letters in it is not writing', (tester) async {

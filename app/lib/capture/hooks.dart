@@ -11,6 +11,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../flags.dart';
 import '../material/assignment.dart';
+import '../material/desk.dart';
 import '../material/fold.dart';
 import '../material/library.dart';
 import '../scope.dart';
@@ -254,6 +255,11 @@ class CaptureHooks {
 
   static void _collectRuns(
       RenderObject node, RenderView view, double dpr, Rect bounds, List<Map<String, dynamic>> out) {
+    // Paint order first: anything already collected that this surface covers was painted before
+    // it and is not on the glass. [_hideUnder] explains why this is a separate question from
+    // `paintsChild`, and `OpaqueSurface` in material/desk.dart explains why the app has to answer
+    // it rather than the framework.
+    if (node is RenderOpaqueSurface) _hideUnder(node, view, bounds, out);
     if (node is RenderParagraph) _paragraph(node, view, dpr, bounds, out);
     // Visited even for a paragraph: a RenderParagraph can carry inline widget children, and one
     // of those can be another paragraph.
@@ -280,6 +286,40 @@ class CaptureHooks {
     if (!parent.paintsChild(child)) return false;
     if (parent is RenderIndexedStack) return identical(child, _shownChildOf(parent));
     return true;
+  }
+
+  /// Drop every run already collected that [surface] completely covers.
+  ///
+  /// `visitChildren` is paint order -- a `Stack`'s children are visited in the order they are
+  /// painted, and the `Navigator`'s overlay hands its entries over bottom first -- so everything
+  /// in [out] when this runs was painted before this surface and is behind it.
+  ///
+  /// `_painted` cannot reach this case. It asks the framework whether a parent paints a child,
+  /// and the answer is yes for both routes under a stacked one: the overlay lays its offstage
+  /// entries out and declines to paint them without overriding `paintsChild` to say so. This is
+  /// the same shape as the `RenderIndexedStack` exception and one level further out.
+  ///
+  /// Only a run entirely inside the surface is dropped. A paragraph that is half covered is
+  /// still partly on the glass, and the pixels it names are still partly its own; declaring it
+  /// is the honest answer and the tool intersects it with the marks it finds. This errs toward
+  /// declaring, which is the direction that costs a false failure rather than a missed one, and
+  /// is the direction to err in only because the alternative -- guessing at a partial cover --
+  /// would hand the tool permission to stop looking at real text.
+  static void _hideUnder(
+      RenderBox surface, RenderView view, Rect bounds, List<Map<String, dynamic>> out) {
+    if (out.isEmpty || !surface.attached || !surface.hasSize || surface.size.isEmpty) return;
+    final cover = MatrixUtils
+        .transformRect(surface.getTransformTo(view), Offset.zero & surface.size)
+        .intersect(bounds);
+    if (cover.isEmpty) return;
+    // A pixel of slack at the edges, because a declared rect is rounded outward by `_px` and a
+    // sheet that covers the view exactly would otherwise fail to cover a run at its own edge.
+    final c = cover.inflate(1.0);
+    out.removeWhere((run) {
+      final r = (run['rect'] as List).cast<int>();
+      return c.left <= r[0] && c.top <= r[1] &&
+          c.right >= r[0] + r[2] && c.bottom >= r[1] + r[3];
+    });
   }
 
   static RenderBox? _shownChildOf(RenderIndexedStack stack) {
