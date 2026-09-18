@@ -2,18 +2,12 @@
  "v": 1,
  "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
  "cycle": 3,
- "stage": "OBSERVE",
+ "stage": "IMPLEMENT",
  "firing": 12,
- "stage_entered_at_firing": 12,
- "lease": {
-  "session_id": "cse_01LDcSAhAuVa5c1baM6macJR",
-  "firing": 12,
-  "stage": "OBSERVE",
-  "started_at": "2026-09-18T01:01Z",
-  "expires_at": "2026-09-18T04:01Z"
- },
- "evidence_fresh_as_of": "2026-09-17T08:00Z, 15 of 17, captured at 097bea5 by firing 8 -- the first capture since the library came under one lamp for everything a still can see. Full ./capture.sh, degradation rung 0. palette.json and legibility.json were run BY HAND afterwards and are part of that commit: capture.sh runs neither, which is why both files still read the pre-relight numbers when the capture finished. 09_two_devices.png and 16_setup_android.png remain the hardware ceiling.",
- "evidence_note": "AMENDED AT FIRING 9. The capture answered both halves of the owner's second complaint. CHROMA: across_the_set.mean_chroma 0.0181 -> 0.0358 against a 0.045 floor, per-band ground floors 0 of 10 stills -> 7 of 10, grey_fraction 0.0454 -> 0.0241. That stands and is the owner's own complaint answered. LEGIBILITY: the 25.28% -> 30.70% recorded here as a regression IS MOSTLY NOT ONE, and the original wording sent the next firing at the wrong thing. Paired run by run with tools/check/legibility_delta.py, on the 622 runs present in both captures the failures went 124 -> 131, 0.1994 -> 0.2106. Of the +54 in the headline, +7 is the same text reading differently and +47 is the run population moving under a detector that finds runs in pixels: 137 runs arrived that had never existed, 102 of them failing, and they are torn-fibre steps and sheet edges rather than writing -- cropped and confirmed by eye in three artifacts. The moving-ground split quoted here (136 -> 192) is the same artefact seen from another angle and must not be read as text on moving ground getting worse. The instrument half is filed as writing-is-not-the-same-as-texture; the residual +7 stays on the-relit-tear-edge-is-a-dark-band. THE GALLERY LOST ITS PICTURES AGAIN, IN THIS CAPTURE, PARTIALLY, and that part is unchanged: 04_moments lightness.p50 is 0.9254 against the <= 0.85 that the-gallery-loses-its-pictures-under-load names as violated precisely when the content is absent, and roughly half the tiles are empty bordered prints carrying only their date. 14_media_viewer is fine this time (value_bands.ground 0.5771 against <= 0.62), so the two halves did not fire together and the three-consecutive-captures clause is at 0, not 1. 04_moments' own figures measure a half-empty gallery, so its ground mean_chroma 0.0219 and its legibility numbers are BOTH artefacts of absent content. The photographs carry chroma, so the set mean of 0.0358 is understated by this rather than flattered. 09_two_devices.png and 16_setup_android.png remain the hardware ceiling. | FIRING 10: 06_unfolding.mp4 in evidence/ is now stale in a new way -- every one of its 320 frames was captured from the 540 px fold library, and all 240 source frames have been re-rendered at 1440. The clip on disk is not what the app would produce today. The chroma and legibility numbers are unaffected: tools/check/palette.py and legibility.py read stills and no fold frame appears in one.",
+ "stage_entered_at_firing": 13,
+ "lease": null,
+ "evidence_fresh_as_of": "2026-09-18T01:57Z, 15 of 17, captured at e7a3a5a by firing 12. Full ./capture.sh, degradation rung 0, fifty minutes. THE FIRST CAPTURE TAKEN WITH THE FINISHED FOLD LIBRARY AND WITH THE DECLARED-TEXT RULER: every still carries a <name>.text.json beside it (eleven files, ten stills and the dusk crop), so legibility is measured against runs the app declares rather than marks a detector found. legibility.py and palette.py were again run BY HAND afterwards -- capture.sh runs neither -- and are part of commit 9dec301. 09_two_devices.png and 16_setup_android.png remain the hardware ceiling. A THIRD artifact, 'surfaces', is named missing in frames.json and MUST NOT be believed: it is the capture.sh ordering defect filed as capture-packs-its-assets-after-the-gate-that-reads-them, and surfaces.py re-run correctly reads 318 surfaces, none of them flat.",
+ "evidence_note": "FIRING 12. Both of the owner's questions now have an answer taken with one instrument and one lamp, and the honest headline is that one of the two numbers is the ruler rather than the app.\n\nLEGIBILITY. 84 of 370 declared runs below floor = 22.70%. This is NOT 30.70% improving, and it must not be drawn as a fourth point on the 48.4 -> 25.3 -> 30.7 line. The proof is a controlled pair taken on the SAME stills: measured with the old found-by-shape instrument this capture reads 233 of 756 = 30.82%, against 233 of 759 = 30.70% on firing 8's stills. Hold the instrument still and the ninth fold family, the 240 fold frames and the one lamp moved legibility by +0.12 percentage points -- that is, not at all. The entire 30.7 -> 22.7 drop is the change of ruler, which is what firing 9 predicted when it measured seven-were-text and forty-seven-were-the-ruler. Both readings are committed: evidence/legibility.json is the declared one and evidence/legibility_found_by_shape.json is the old instrument on the same pixels, so no successor has to re-derive this pair.\n\nWHAT IS REAL IN THE NEW READING. The 84 failures are nameable, which they have never been. All 84 carry the text they are made of; none is empty. 19 of the 84 -- nearly a quarter -- are message timestamps, which is a finding no previous capture could state and is filed as its own queue item. 76 are the hand and 8 are the stamp. 17_setup_pwa is now genuinely 0 of 33, where the old ruler called it 3 of 93.\n\nWARMTH. across_the_set.mean_chroma 0.0374, from 0.0358 at firing 8, against a 0.045 floor. The finished library bought 0.0016 and this is the first honest reading of it rather than of a half-relit one. grey_fraction improved 0.0241 -> 0.0183 and 8 of 10 stills now meet the ground chroma floor, up from 7. But the things that would actually move this are untouched and the numbers say so precisely: accent_fraction is 0.00087 against a required 0.010, unchanged to five decimal places; named_families is 1 (A_paper) against a required 4; widest_hue_gap_deg is 320 against a required 150. one-coloured-thing-per-screen and families-b-c-and-d-reach-the-glass are open and have never been started, and until they are this number will not reach its floor. 40 section-breaches across the set.\n\nTHE INSTRUMENT AUDITED ITSELF. tools/check/legibility_selftest.py passes every check including the re-break (declare the torn lip as text and the failures come straight back), so the filter is not a tool that has quietly stopped looking.",
  "degradation": 0,
  "design": {
   "verdict": "keep and retune",
@@ -328,7 +322,8 @@
    "closed_by": "",
    "attempts": 1,
    "note": "Firing 9 refuted the three cheap routes and they are written out in full in the-relit-tear-edge-is-a-dark-band's note: shape features (no separation), the above/below straddle test (drops more true failures than false), and quantization (the lip is not posterized -- distinct RGB went up and flat runs got shorter, it is the truthful render). What is left is a designed answer to 'what makes a mark writing rather than a piece of the surface it is on', which is a DESIGN question. One direction not yet tried: writing is authored and therefore repeats -- the same glyph shapes recur across a screen, fibre does not. Another: the app knows where its text is, and a render-time text mask would turn this from inference into fact, at the cost of a capture-side hook. | FIRING 11 BUILT THE INSTRUMENT AND RESTATED THE MEASUREMENT, because the one this item was filed with cannot be run once the fix is in. It gates on legibility_delta.py reporting a new-run failure rate 'within 1.5x of the matched-run rate' -- and the whole point of the fix is that there are no new runs to rate: a run is a declared line, and fibre does not declare one. Chasing the old wording would mean building something that still guesses. What is quotable instead, and what the restated measurement asks for, is below.\nWHAT WAS BUILT. window.__deskTextRuns (app/lib/capture/hooks.dart) walks the render tree at the moment of the shot and returns every PAINTED paragraph's line rects, its type size in the picture's own pixels, its font, its role and its declared ink. tools/capture/scene.js writes it beside every still as <name>.text.json, shifted into the crop's coordinates where a shot is clipped. legibility.py grows --text-runs auto|off|require: with a sidecar it accepts a glyph-shaped mark only inside a declared line, groups runs BY declared line rather than by runs_of's gap heuristic, takes the body/large floor from the declared point size rather than from the bounding box of the marks it found, counts what it rejected as marks_outside_text, and carries what the app says each run says into the failure. Without a sidecar it is unchanged: over the committed set it reproduces 759 runs / 233 failures with the failures list byte-identical, so legibility_delta.py still pairs across the relight.\nMEASURED END TO END, on a real 02_chat taken from a real build into a scratch directory (nothing under evidence/ was written; the capture that uses this belongs to OBSERVE). found-by-shape 93 runs / 29 below floor; declared 45 runs / 10 below floor, 186 marks rejected as outside text, 67 declared lines. Audited one by one: of the 29, NINETEEN touch no declared line at all and are not writing by construction; ten touch declared text and NINE are still reported. Exactly one is not -- a 1014x63 band at 238,1882 reading 1.38:1, which is eight times the width of a line of writing and merely clipped the corner of a 'Wed 22 Apr 16:40' timestamp, and that timestamp is itself still reported failing at 4.30:1. So one finding was lost and it was a sheet edge. Every one of the ten that remain is nameable: six are message timestamps (worst 1.02:1), one is the composer's 'write something' at 1.27, one is the day heading at 1.14, and two are note bodies.\nTHE DECLARATION IS OF WHAT IS PAINTED, NOT WHAT IS BUILT, and that distinction was measured rather than assumed. app.dart keeps all five regions alive in an IndexedStack, so walking every child declared 233 lines of which 127 overlapped another by more than half and 'wake me', 'quietly' and 'not at all' each appeared fourteen times -- five screens of writing laid out on top of each other, every one of them a licence to read pixels where a hidden paragraph WOULD be. RenderObject.paintsChild is the framework's own answer and covers opacity, Offstage, Visibility and a list child scrolled out of its viewport; RenderIndexedStack is the one that does not implement it and is asked directly. 233 lines -> 67, 127 overlaps -> 9.\nA NEW QUANTITY THAT NOBODY COULD SEE BEFORE: 45 runs read against 67 lines declared. Twenty-two lines the app drew produce no reading at all, because no mark in them clears INK_DELTA or they are single short words the n<2 filter drops. Whether those are faint text going unmeasured or filters doing their job is NOT established here and is stated as a question. It is the first time the denominator has been knowable.\nWHAT IS LEFT: one capture taken with the handle in the build, which is OBSERVE's and not this stage's. Until then the numbers above are from one still measured into scratch.",
-   "from": "implement, cycle 3, firing 9"
+   "from": "implement, cycle 3, firing 9",
+   "part_3_measured_at_firing_12": "The capture part 3 was waiting for exists, and the accounting is done. Every one of the 84 declared failures carries a says and none is empty. Of the 233 found-by-shape failures on the same stills, 132 touch no declared line at all and are not writing by construction; 101 touch writing and resolve to 112 distinct declared lines, of which the declared ruler fails 84 and passes 28. The cross-check against firing 11's hand audit of 02_chat agrees to one box, and that box is the boundary case firing 11 itself named. Parts 1 and 2 were already quoted at firing 11. ALL THREE PARTS ARE NOW QUOTABLE TOGETHER. This firing did not close the item, because closing a queue item belongs to the stage that drains the queue and this was an OBSERVE; the next IMPLEMENT can close it in one step against this paragraph. The 28-line residual is recorded as a thing to look at, not asserted to be wholly correct."
   },
   {
    "id": "the-corrected-lamp-pins-the-red-channel",
@@ -338,6 +333,24 @@
    "closed_by": null,
    "attempts": 0,
    "note": "FILED, NOT ACTED ON, and deliberately. Whatever fixes this is a rig-level change and re-renders every day asset in assets/ -- the four firings and the whole library that answered the owner's warmth complaint. That is not an IMPLEMENT firing's call to make on the side of another item, so it is in the queue for ADDRESS to rank, per loop/WORKER_PROMPT.md 3b. TWO THINGS TO WEIGH WHEN IT IS RANKED. First, a clipped channel carries no hue and no tooth, which is the same argument that made the tears' un-clipping worth 3.44x their chroma at firing 6 -- so this may be taking back part of what the relight bought, and the chroma numbers in evidence/palette.json were measured WITH it. Second, it is a candidate mechanism for the legibility half: ink contrast against a ground whose red is pinned loses the red component of that contrast, and legibility went 25.28% -> 30.70% across this same relight. Firing 9 showed 47 of those 54 extra runs were the detector and 7 were real text. Whether those 7 are this is UNTESTED and is stated here as a hypothesis with a way to test it, not as a finding. DO NOT fix this by moving DAY_COLOR back. The colour is the owner's own complaint answered and docs/COLOR.md 5 and 6 were written to be satisfiable together. The quantity with no gate on it is the exposure, not the temperature."
+  },
+  {
+   "id": "capture-packs-its-assets-after-the-gate-that-reads-them",
+   "why": "capture.sh line 74 runs tools/check/surfaces.py against app/assets, and line 90 is the first pack_assets.py call that creates app/assets. app/assets is derived and gitignored, so in any fresh container the gate reads zero surfaces, exits 2 -- correctly, firing 10 made reading nothing an error on purpose -- and capture.sh records a missing artifact called 'surfaces' with the message 'a rendered surface in the library has nothing in it'. That message is false and it lands in evidence/frames.json and the manifest, where a critic or a successor will read it as a finding about the library. Re-run after the packing and the same gate reads 318 surfaces, none flat. surfaces.py's own error names the fix. This is the gate-that-looked-at-nothing shape from the other side: the gate is right and the capture asks it the question too early.",
+   "measurement": "On a fresh container ./capture.sh completes with no 'surfaces' entry in evidence/frames.json, and evidence/logs/surfaces.json reads >= 300 surfaces with flat empty. Re-break by moving the surfaces call back above the first pack_assets.py and watching it read 0 and be recorded missing again.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "found_at_firing": 12
+  },
+  {
+   "id": "the-timestamps-are-a-quarter-of-the-failing-writing",
+   "why": "The declared ruler can name what fails, and the first thing it says is that 19 of the 84 runs below floor on this capture are message timestamps -- 'Wed 22 Apr 16:44', 'Sat 14 Mar 12:50' and their kind -- reading as low as 1.01:1 against a 4.5 floor. Six of the worst twelve are timestamps. No previous capture could state this: firing 9 had to crop PNGs at 300% to say anything about these boxes at all, and firing 11 saw six of them on one screen and correctly filed it as a candidate observation rather than a finding. It is a finding now, on ten screens at once, and it is one class of one widget rather than a diffuse problem with the desk.",
+   "measurement": "python3 tools/check/legibility.py --text-runs require reports zero failures whose says matches a timestamp, on a capture taken after the fix, AND total below_floor does not rise: the timestamps must clear their floor rather than be made to stop declaring themselves. Re-break by restoring the old ink and watching the 19 come back.",
+   "state": "open",
+   "closed_by": null,
+   "attempts": 0,
+   "found_at_firing": 12
   }
  ],
  "blocked": null,
@@ -456,6 +469,15 @@
    "stage": "IMPLEMENT",
    "commit": "5b91abd4",
    "did": "Built the ruler the last two firings kept saying was needed, and did not spend the firing on a capture, which is OBSERVE's and not IMPLEMENT's -- that is the whole of the weighing this firing was asked to do, and the argument is in loop/JOURNAL.md. window.__deskTextRuns walks the render tree at the moment of the shot and returns every PAINTED paragraph's line rects, type size in the picture's own pixels, font, role and declared ink; tools/capture/scene.js writes it beside every still as <name>.text.json; tools/check/legibility.py grows --text-runs auto|off|require and, given one, measures a mark only inside a declared line, groups runs by declared line, takes the body/large floor from the declared point size, counts what it rejected as marks_outside_text, and carries what the app says each run says into the failure. Without a sidecar it is byte-identical: 759 runs / 233 failures over the committed set with the failures list unchanged, so legibility_delta.py still pairs across the relight. Proven three ways rather than asserted. tools/check/legibility_selftest.py builds a still carrying a line of writing and a band of torn-lip fibre of the same size and shape: with no sidecar both are found and the fibre fails; with the writing declared the fibre is gone, 12 marks are counted outside text, and the writing reads 12.81:1, the same number it reads on a page with no lip on it -- and then the re-break, declaring the lip, brings the failures straight back. app/test/the_app_says_where_its_words_are_test.dart holds the geometry to what the framework says the paragraph's rect is; putting back the double device-pixel multiply that this actually had while being written fails two of its four tests. End to end on a real 02_chat into a scratch directory: found-by-shape 93 runs / 29 failures, declared 45 / 10, 186 marks outside text. Audited: 19 of the 29 touch no declared line at all, 9 of the remaining 10 are still reported, and the single one lost is a 1014x63 sheet edge whose overlapping timestamp still fails at 4.30:1. The ten that remain are nameable -- six timestamps worst 1.02:1, the composer's 'write something' at 1.27, the day heading at 1.14. Also measured and fixed: the first version declared all five IndexedStack regions, 233 lines with 127 overlapping and three strings appearing fourteen times each; RenderObject.paintsChild plus a direct question to RenderIndexedStack took it to 67 lines and 9 overlaps. Restated the item's measurement, because the legibility_delta gate it was filed with cannot be run once runs are declared -- there are no new runs to rate. flutter analyze clean of the new files, 113 tests pass, selftest passes. No file under evidence/ was written or altered."
+  },
+  {
+   "firing": 12,
+   "cycle": 3,
+   "stage": "OBSERVE",
+   "what": "Took the capture the last three firings were building toward. 15 of 17, rung 0. Measured legibility with the declared-text ruler AND with the old instrument on the same pixels, which is what makes the result interpretable: the app moved legibility by +0.12pp and the ruler moved it by -8.1pp. Warmth 0.0358 -> 0.0374 against a 0.045 floor. Found and filed a capture.sh ordering defect that has been writing a false 'surfaces' failure into the manifest on every fresh container.",
+   "legibility_declared": 0.227,
+   "legibility_found_by_shape": 0.3082,
+   "mean_chroma": 0.0374
   }
  ],
  "routine": {
@@ -603,5 +625,59 @@
    "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
   }
  },
- "stage_change_note": "Firing 12 entered OBSERVE from IMPLEMENT with 8 items still open, at the explicit direction of the firing's own brief. This is a deliberate departure from 'only a drained queue advances the stage' and is recorded rather than quietly taken. The reason it is defensible: five of the eight open items name palette.py --floors or legibility.py over a fresh capture as the measurement that closes them, and evidence/ is fresh only as of firing 8 (097bea5) -- before the ninth fold family, before 240 of 240 fold frames, and before the declared-text ruler (1817462, 5b91abd). None of those five can be closed honestly against the artifacts on disk. Firing 11 declined the capture because the handle did not exist yet and said 'the next OBSERVE will take it, with the handle in the build'. The handle is in the build. This is that OBSERVE."
+ "stage_change_note": "Firing 12 ran OBSERVE out of band (its own note above says why) and hands the stage back to IMPLEMENT with ten items open. The queue was never drained, so the cycle has NOT advanced and this is not the OBSERVE -> DIAGNOSE transition. evidence/ is now fresh at e7a3a5a, so the five items whose measurement is palette.py --floors or legibility.py can be worked and closed against a capture that actually reflects the code.",
+ "measured_at_firing_12": {
+  "captured_at": "e7a3a5a",
+  "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",
+  "legibility_declared": {
+   "runs": 370,
+   "below_floor": 84,
+   "share_below_floor": 0.227,
+   "all_failures_name_their_text": true,
+   "timestamps_among_failures": 19,
+   "by_hand": 76,
+   "by_stamp": 8,
+   "clean_screens": "17_setup_pwa 0 of 33"
+  },
+  "legibility_found_by_shape_same_stills": {
+   "runs": 756,
+   "below_floor": 233,
+   "share_below_floor": 0.3082,
+   "baseline_firing8": {
+    "runs": 759,
+    "below_floor": 233,
+    "share_below_floor": 0.307
+   },
+   "reading": "the instrument held still, the app moved legibility by +0.12pp, i.e. not at all"
+  },
+  "instrument_accounting": {
+   "found_by_shape_failures": 233,
+   "touch_no_declared_line": 132,
+   "touch_a_declared_line": 101,
+   "distinct_declared_lines_implicated": 112,
+   "declared_failures": 84,
+   "residual": "28 declared lines are implicated by a found-by-shape box but pass when read whole. That is the expected direction -- a box straddling part of a line plus adjacent fibre, and a floor taken from the declared point size rather than from the bounding box of found marks -- but it is recorded as a residual to look at, not asserted to be entirely correct.",
+   "cross_check": "02_chat reads 18 untouched / 11 touching here against firing 11's hand audit of 19 / 10 on the same screen; the one-box difference is the 1014x63 band that clips a timestamp's corner, which firing 11 named as the single boundary case."
+  },
+  "palette": {
+   "mean_chroma": 0.0374,
+   "was_firing8": 0.0358,
+   "floor": 0.045,
+   "grey_fraction": 0.0183,
+   "was": "7 of 10",
+   "accent_fraction": 0.00087,
+   "required": 150.0,
+   "moved": "not at all",
+   "named_families": 1,
+   "required_families": 4,
+   "widest_hue_gap_deg": 320.0,
+   "stills_meeting_ground_chroma_floor": "8 of 10",
+   "breaches": 40
+  },
+  "other_checks": {
+   "surfaces": "318 read from app/assets, none flat, once run after pack_assets",
+   "texture_budget": "unfold_thirds 240 frames, peak 28.0 MB of a 32 MB budget",
+   "legibility_selftest": "every check passed, including the re-break"
+  }
+ }
 }

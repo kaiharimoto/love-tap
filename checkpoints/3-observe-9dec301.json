@@ -1,0 +1,34 @@
+{
+ "cycle": 3,
+ "stage": "OBSERVE",
+ "firing": 12,
+ "at_commit": "9dec301",
+ "completed": "the evidence set is fresh against the code, degradation rung 0, 15 of 17",
+ "legibility_declared": {
+  "runs": 370,
+  "below_floor": 84,
+  "share": 0.227
+ },
+ "legibility_found_by_shape_same_stills": {
+  "runs": 756,
+  "below_floor": 233,
+  "share": 0.3082
+ },
+ "legibility_baseline_firing8": {
+  "runs": 759,
+  "below_floor": 233,
+  "share": 0.307
+ },
+ "reading": "the instrument moved, the app did not: +0.12pp with the ruler held still",
+ "palette": {
+  "mean_chroma": 0.0374,
+  "was": 0.0358,
+  "floor": 0.045,
+  "breaches": 40
+ },
+ "new_queue_items": [
+  "capture-packs-its-assets-after-the-gate-that-reads-them",
+  "the-timestamps-are-a-quarter-of-the-failing-writing"
+ ],
+ "next_stage": "IMPLEMENT, ten items open; the cycle has not advanced"
+}
