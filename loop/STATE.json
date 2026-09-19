@@ -78,11 +78,12 @@
    "points": 1,
    "why": "One fix, five symptoms, all measured. 05_settings.png slices the last row of the interrupt matrix ('a note set to arrive') through its descenders with a second line fully hidden behind the tab bar; the same clipping cuts 'app is on the home screen.' on 17_setup_pwa.png; 12_search.png pushes the last of five type filters (TALKING) off the right edge with no affordance saying the row scrolls; 02_chat.text.json lays a message run 2px tall at y=3118 in a 3120px frame under the tab bar while declaring offscreen: 0; and crops/11_chat_scroll_strip.png draws the floating search chip and its magnifier over the word 'saw' in the message body.",
    "measurement": "Every scrolling region carries bottom padding equal to the tab bar height plus one line, the filter chips wrap or scroll with a visible cut edge, and no .text.json declares offscreen: 0 for a run whose box is clipped by a frame edge or a bar. Re-break by removing the padding and watching the 2px run and the sliced descenders return.",
-   "state": "open",
-   "attempts": 0,
-   "closed_by": null,
+   "state": "closed",
+   "attempts": 1,
+   "closed_by": "397b900",
    "rank": 37,
-   "owner_priority": "using-it"
+   "owner_priority": "using-it",
+   "closed_note": "Three of the five symptoms had one cause and it was the DECLARATION, not the layout. `__deskTextRuns` intersected a paragraph's box with the frame, and a scrollable lays its last child out past the end of its viewport and clips it there rather than moving it; scene.js then clamps a declared rect into the frame. So 02_chat's two-pixel run at y=3118, 05_settings' `a note set to arrive later` across the tab strip and 17_setup_pwa's two were runs in bands where nothing of them is drawn, and every one of those sidecars read offscreen: 0 truthfully, because nothing was ever wholly outside. A paragraph is clipped by every clip between it and the view now, and scene.js counts what it still had to trim as `clipped`. The other two were real and are fixed: 12_search's nine facet tabs were one horizontal list showing five with the fifth cut at the frame edge and four undrawn -- they wrap; and the search affordance was Positioned over the thread with nothing reserved, so it landed on whatever note was scrolled under it (`saw`, in crops/11_chat_scroll_strip.png) -- it is a strip of its own above the thread. MEASURED AND NOT CHANGED: the bottom padding the item's measurement asks for is already there (settings/pulse/us 96, moments 90, against a 62-point strip) and the tab strip is a sibling of the regions in a Column rather than a bar over them, so nothing scrolls under it. app/test/a_screen_does_not_clip_its_own_content_test.dart, four tests, re-broken three ways and watched to fail each time."
   },
   {
    "id": "an-authored-feeling-arrives-as-a-blank-sheet",
