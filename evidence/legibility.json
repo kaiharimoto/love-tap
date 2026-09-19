@@ -309,6 +309,17 @@
     }
    ]
   },
+  "05_settings_interrupt.png": {
+   "runs": 61,
+   "below_floor": 0,
+   "text_runs": "declared",
+   "declared_lines": 64,
+   "marks_outside_text": 97,
+   "worst_ink_core": 5.51,
+   "median_ink_core": 7.9,
+   "median_as_rendered": 7.89,
+   "detail": []
+  },
   "10_first_run.png": {
    "runs": 13,
    "below_floor": 0,
@@ -325,7 +336,7 @@
    "below_floor": 2,
    "text_runs": "declared",
    "declared_lines": 21,
-   "marks_outside_text": 54,
+   "marks_outside_text": 52,
    "worst_ink_core": 3.66,
    "median_ink_core": 7.74,
    "median_as_rendered": 7.7,
@@ -382,13 +393,13 @@
   },
   "13_messenger_states.png": {
    "runs": 32,
-   "below_floor": 4,
+   "below_floor": 3,
    "text_runs": "declared",
    "declared_lines": 40,
-   "marks_outside_text": 131,
-   "worst_ink_core": 2.11,
-   "median_ink_core": 7.67,
-   "median_as_rendered": 7.65,
+   "marks_outside_text": 141,
+   "worst_ink_core": 2.12,
+   "median_ink_core": 7.74,
+   "median_as_rendered": 7.74,
    "detail": [
     {
      "box": [
@@ -401,11 +412,11 @@
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 2.11,
-     "ink_median": 2.11,
+     "ink_core": 2.12,
+     "ink_median": 2.12,
      "ink_core_ring": 7.63,
-     "ground_swing": 3.62,
-     "ground_lum": 0.1849,
+     "ground_swing": 3.6,
+     "ground_lum": 0.1864,
      "ground_lum_ring": 0.8012,
      "says": "noor writing\u2026",
      "px": 39,
@@ -416,21 +427,21 @@
     },
     {
      "box": [
-      374,
-      1498,
-      186,
-      89
+      305,
+      1789,
+      187,
+      77
      ],
      "glyphs": 6,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 2.46,
-     "ink_median": 2.04,
-     "ink_core_ring": 9.22,
-     "ground_swing": 3.75,
-     "ground_lum": 0.1773,
-     "ground_lum_ring": 0.8032,
+     "ink_core": 3.42,
+     "ink_median": 2.84,
+     "ink_core_ring": 9.21,
+     "ground_swing": 2.7,
+     "ground_lum": 0.2662,
+     "ground_lum_ring": 0.8024,
      "says": "Thu 3 Sep \u00b7 19:40",
      "px": 36,
      "points": 12,
@@ -440,51 +451,27 @@
     },
     {
      "box": [
-      340,
-      2560,
-      206,
+      349,
+      2559,
+      190,
       40
      ],
      "glyphs": 8,
      "polarity": "dark",
      "role": "body",
      "floor": 4.5,
-     "ink_core": 3.28,
-     "ink_median": 3.28,
+     "ink_core": 3.58,
+     "ink_median": 3.58,
      "ink_core_ring": 5.66,
-     "ground_swing": 1.74,
-     "ground_lum": 0.467,
-     "ground_lum_ring": 0.8428,
+     "ground_swing": 1.57,
+     "ground_lum": 0.5143,
+     "ground_lum_ring": 0.8424,
      "says": "try again",
      "px": 37.5,
      "points": 12.5,
      "family": "TeoHand",
      "hand": "hand",
      "ink": "ffa8322b"
-    },
-    {
-     "box": [
-      306,
-      1803,
-      201,
-      39
-     ],
-     "glyphs": 5,
-     "polarity": "dark",
-     "role": "body",
-     "floor": 4.5,
-     "ink_core": 3.95,
-     "ink_median": 3.95,
-     "ink_core_ring": 7.62,
-     "ground_swing": 1.94,
-     "ground_lum": 0.3906,
-     "ground_lum_ring": 0.7996,
-     "says": "Thu 3 Sep \u00b7 19:40",
-     "px": 36,
-     "points": 12,
-     "family": "TeoHand",
-     "hand": "hand",
-     "ink": "ff464648"
     }
    ]
   },
@@ -542,11 +529,11 @@
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 2.11,
-   "ink_median": 2.11,
+   "ink_core": 2.12,
+   "ink_median": 2.12,
    "floor": 4.5,
    "ink_core_ring": 7.63,
-   "ground_swing": 3.62,
+   "ground_swing": 3.6,
    "says": "noor writing\u2026",
    "hand": "hand",
    "ink": "ff464648",
@@ -573,26 +560,6 @@
    "px": 42
   },
   {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    374,
-    1498,
-    186,
-    89
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 2.46,
-   "ink_median": 2.04,
-   "floor": 4.5,
-   "ink_core_ring": 9.22,
-   "ground_swing": 3.75,
-   "says": "Thu 3 Sep \u00b7 19:40",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
-  },
-  {
    "artifact": "05_settings.png",
    "box": [
     179,
@@ -615,22 +582,22 @@
   {
    "artifact": "13_messenger_states.png",
    "box": [
-    340,
-    2560,
-    206,
-    40
+    305,
+    1789,
+    187,
+    77
    ],
    "role": "body",
    "polarity": "dark",
-   "ink_core": 3.28,
-   "ink_median": 3.28,
+   "ink_core": 3.42,
+   "ink_median": 2.84,
    "floor": 4.5,
-   "ink_core_ring": 5.66,
-   "ground_swing": 1.74,
-   "says": "try again",
+   "ink_core_ring": 9.21,
+   "ground_swing": 2.7,
+   "says": "Thu 3 Sep \u00b7 19:40",
    "hand": "hand",
-   "ink": "ffa8322b",
-   "px": 37.5
+   "ink": "ff464648",
+   "px": 36
   },
   {
    "artifact": "04_moments.png",
@@ -693,6 +660,26 @@
    "px": 27
   },
   {
+   "artifact": "13_messenger_states.png",
+   "box": [
+    349,
+    2559,
+    190,
+    40
+   ],
+   "role": "body",
+   "polarity": "dark",
+   "ink_core": 3.58,
+   "ink_median": 3.58,
+   "floor": 4.5,
+   "ink_core_ring": 5.66,
+   "ground_swing": 1.57,
+   "says": "try again",
+   "hand": "hand",
+   "ink": "ffa8322b",
+   "px": 37.5
+  },
+  {
    "artifact": "12_search.png",
    "box": [
     339,
@@ -731,26 +718,6 @@
    "hand": "stamp",
    "ink": "ff464648",
    "px": 28.5
-  },
-  {
-   "artifact": "13_messenger_states.png",
-   "box": [
-    306,
-    1803,
-    201,
-    39
-   ],
-   "role": "body",
-   "polarity": "dark",
-   "ink_core": 3.95,
-   "ink_median": 3.95,
-   "floor": 4.5,
-   "ink_core_ring": 7.62,
-   "ground_swing": 1.94,
-   "says": "Thu 3 Sep \u00b7 19:40",
-   "hand": "hand",
-   "ink": "ff464648",
-   "px": 36
   },
   {
    "artifact": "04_moments.png",
@@ -833,14 +800,14 @@
    "px": 27
   }
  ],
- "on_moving_ground": 14,
- "would_pass_on_ring_reading": 14,
- "read": 10,
- "total_runs": 298,
- "total_below_floor": 16,
+ "on_moving_ground": 13,
+ "would_pass_on_ring_reading": 13,
+ "read": 11,
+ "total_runs": 359,
+ "total_below_floor": 15,
  "text_runs": "auto",
- "measured_from_declared_text": 10,
+ "measured_from_declared_text": 11,
  "without_a_sidecar": [],
- "marks_outside_text": 1165,
+ "marks_outside_text": 1270,
  "ok": false
 }
