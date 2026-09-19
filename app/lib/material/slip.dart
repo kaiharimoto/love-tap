@@ -260,6 +260,21 @@ class RegionPad extends StatelessWidget {
   final String id;
   final int row;
 
+  /// The stocks a region pad is torn from.
+  ///
+  /// Its own list, and narrower than [Slip]'s, because a pad is the only sheet in this app that
+  /// is the whole screen and the stocks are not all the same shape. `receipt` is the one that
+  /// mattered: `receipt_01` is a 702x1500 render of a till roll, and the PWA drew it as the
+  /// backing of two regions for the life of the build -- narrow, smooth, no printed rules and
+  /// almost no tooth, stretched 1.94x across the screen, which is a flat cream rectangle and the
+  /// named failure of the whole visual concept. `index` is left out for the same reason and it is
+  /// worse: `index_02` is 1500x933, landscape, and covering a portrait screen with it magnifies
+  /// it 3.27 times.
+  ///
+  /// What is left is the four full-page portrait stocks plus the spiral one, all of them
+  /// 1073x1500, which is one sheet of paper the shape a sheet of paper is.
+  static const stocks = ['lined', 'looseleaf', 'graph', 'legal', 'spiral'];
+
   /// The desk left showing around the pad.
   static const _margin = 12.0;
 
@@ -293,6 +308,7 @@ class RegionPad extends StatelessWidget {
             final sheet = Slip(
               id: 'pad.$id',
               row: row,
+              stock: stocks[hashOf('pad.$id') % stocks.length],
               width: sheetW,
               torn: false,
               padding: EdgeInsets.zero,

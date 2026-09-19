@@ -9,11 +9,40 @@ import 'library.dart';
 
 /// A deterministic 32-bit hash of an event id (FNV-1a): the same note gets the same paper on both
 /// devices and in every capture.
+///
+/// **The multiply is split, and it has to be.** The obvious form is
+/// `h = (h * 0x01000193) & 0xFFFFFFFF`, and that is what this was. On the Android build it is
+/// exact. On the PWA it is not: a web `int` is an IEEE-754 double, and `h * 0x01000193` reaches
+/// 3.6e16 on the very first character of the very first id — four times past 2^53, where a double
+/// stops being able to count. The product is rounded, and the bits that are rounded away are the
+/// low ones, which is the entire hash. One step of `pad.pulse` comes out 4111221743 on the phone
+/// and 4111221744 in the browser.
+///
+/// So every piece of paper in this app was a different piece of paper on the two devices: which
+/// stock a note is torn from, which tear mask, which patch of the sheet, which way it is tilted.
+/// `DIRECTION.md` states the opposite twice -- *the same date is the same piece of paper every
+/// time it is drawn, on both phones*, and *a region is the same paper on both phones and in every
+/// language* -- so this was a law the code had never once kept.
+///
+/// It was visible the whole time and read as something else. `pad.pulse` and `pad.chat` both hash
+/// to `receipt` in the browser, and `receipt_01` is a 702x1500 render of a till roll: narrow,
+/// smooth, no rules and almost no tooth, because that is what thermal paper is. Stretched across
+/// a whole phone screen at 1.94x it is a flat cream rectangle -- the one `10_first_run.png`,
+/// `17_setup_pwa.png` and the bare part of `01_pulse.png` are measured at 59.5%, 48.0% and 10.9%
+/// of their frames, which three cycles of review called a missing asset and then a `ColoredBox`
+/// showing through. It was neither. It was the right widget drawing the wrong paper.
+///
+/// The split keeps every intermediate inside 2^53 and computes the identical 32-bit result, so
+/// the Android build's assignments do not move and the PWA's come to meet them:
+/// `h * M mod 2^32` is `(h_lo * M) + ((h_hi * (M & 0xFFFF)) << 16) mod 2^32`, and the largest
+/// value formed is `0xFFFF * 0x01000193`, about 1.1e12.
 int hashOf(String s) {
   var h = 0x811c9dc5;
   for (final c in s.codeUnits) {
     h ^= c;
-    h = (h * 0x01000193) & 0xFFFFFFFF;
+    final lo = h & 0xFFFF;
+    final hi = (h >> 16) & 0xFFFF;
+    h = ((lo * 0x01000193) + (((hi * 0x0193) & 0xFFFF) << 16)) & 0xFFFFFFFF;
   }
   return h;
 }

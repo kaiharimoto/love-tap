@@ -8,6 +8,7 @@ import 'dart:async';
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/widgets.dart';
 
 import '../flags.dart';
 import '../material/assignment.dart';
@@ -244,6 +245,78 @@ class CaptureHooks {
   ///
   /// Static, like `DrivenClock.step`, because it reads the framework rather than the app: it needs
   /// no spine, no transport and no library, and a test of it should not have to stand one up.
+  /// Every rendered surface the app put on the glass, with the size of the render it came from
+  /// and the size it was drawn at.
+  ///
+  /// This exists because three cycles of review argued about a flat cream rectangle from the
+  /// outside and got it wrong twice. `10_first_run`, `17_setup_pwa` and the bare part of
+  /// `01_pulse` measure as one RGB value over a large fraction of the frame, which is the named
+  /// failure of the whole visual concept, and the two diagnoses made from the pixels alone were
+  /// that a stock render was missing and then that the `ColoredBox` fallback in
+  /// `material/paper.dart` was showing through. Both were wrong. A build with that fallback set
+  /// to magenta put no magenta pixel anywhere in the frame: every sheet, the flat one included,
+  /// has its render over it.
+  ///
+  /// What no screenshot can say is how big that render was and how big it was drawn. A sheet
+  /// magnified past its own resolution has its tooth resampled away, and the result is a flat
+  /// fill that looks exactly like a missing asset. So the app says it, at the moment of the shot,
+  /// the way it already says where its words are.
+  ///
+  /// `scale` is the magnification: the drawn size in device pixels over the render's own pixels,
+  /// on the axis `fit` actually scales by. Above 1.0 the app is showing paper it does not have.
+  ///
+  /// Painted-ness is decided by [_painted], exactly as it is for the text runs, so an offstage
+  /// region's four screens of paper are not declared.
+  static List<Map<String, dynamic>> paperSurfaces() {
+    // The asset name lives on the widget and the size lives on the render object, so the element
+    // tree is walked once to pair them up and the render tree is walked after, where the paint
+    // order and the visibility rules already are.
+    final names = <RenderObject, String>{};
+    void pair(Element el) {
+      final w = el.widget;
+      if (w is Image) {
+        final ro = el.renderObject;
+        final provider = w.image;
+        if (ro != null && provider is AssetImage) names[ro] = provider.assetName;
+      }
+      el.visitChildren(pair);
+    }
+    WidgetsBinding.instance.rootElement?.visitChildren(pair);
+
+    final out = <Map<String, dynamic>>[];
+    for (final view in RendererBinding.instance.renderViews) {
+      _collectSurfaces(view, view, view.flutterView.devicePixelRatio, names, out);
+    }
+    return out;
+  }
+
+  static void _collectSurfaces(RenderObject node, RenderView view, double dpr,
+      Map<RenderObject, String> names, List<Map<String, dynamic>> out) {
+    if (node is RenderImage) {
+      final img = node.image;
+      if (img != null && node.hasSize && node.size.width > 0 && node.size.height > 0) {
+        final box = node.size;
+        final sx = box.width * dpr / img.width;
+        final sy = box.height * dpr / img.height;
+        // cover and fill both stretch to the box; cover takes the larger of the two so the box is
+        // filled, fill takes each axis separately and the larger one is what shows first.
+        final scale = sx > sy ? sx : sy;
+        final rect = MatrixUtils.transformRect(node.getTransformTo(view), Offset.zero & box);
+        out.add({
+          'asset': names[node] ?? '',
+          'src': [img.width, img.height],
+          'drawn': [(box.width * dpr).round(), (box.height * dpr).round()],
+          'scale': double.parse(scale.toStringAsFixed(3)),
+          'fit': node.fit?.name ?? '',
+          'rect': [rect.left.round(), rect.top.round(), rect.width.round(), rect.height.round()],
+        });
+      }
+    }
+    node.visitChildren((child) {
+      if (_painted(node, child)) _collectSurfaces(child, view, dpr, names, out);
+    });
+  }
+
   static List<Map<String, dynamic>> textRuns() {
     final out = <Map<String, dynamic>>[];
     for (final view in RendererBinding.instance.renderViews) {
