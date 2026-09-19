@@ -4,9 +4,22 @@ import 'event.dart';
 import 'types.dart';
 
 class SearchHit {
-  const SearchHit(this.event, this.score);
+  const SearchHit(this.event, this.score, {this.matchedIn = const [], this.matchedKind});
   final Event event;
   final double score;
+
+  /// The strings this event was indexed under that carry one of the query's terms, in the order
+  /// the type declares its text fields. A row draws the summary of the event, and a summary shows
+  /// some of the fields and not others: `ritual_kept` prints `title · kept` and never its note, so
+  /// a search for `rain` returned `text when home · kept` with nothing on it to see. The row shows
+  /// one of these when the summary carries no match, so a hit is never a thing you have to take
+  /// on trust.
+  final List<String> matchedIn;
+
+  /// Set when the only thing that matched was the kind of thing it is -- `photo`, `feelings`,
+  /// `rituals`. Those are searchable on purpose, and a row that matched on one has nothing in its
+  /// words to highlight.
+  final String? matchedKind;
 }
 
 class SearchIndex {
@@ -53,9 +66,38 @@ class SearchIndex {
     _index(e);
   }
 
+  /// The strings an event is indexed under: the words of it, then the words for the kind of thing
+  /// it is. Both halves are asked of the registry rather than listed here, and the query side
+  /// asks the same function, so what a row can say it matched on cannot drift from what was
+  /// actually indexed.
+  ///
+  /// `override` is the current text of an edited message, which replaces the stored text.
+  (List<String>, List<String>) _sourcesOf(Event e, {String? override}) {
+    final spec = kEventTypeById[e.type]!;
+    final words = <String>[];
+    if (override != null) {
+      words.add(override);
+    } else {
+      for (final f in spec.search.textFields) {
+        final v = e.payload[f];
+        if (v is String && v.isNotEmpty) words.add(v);
+      }
+    }
+    if (e.type == 'feeling' || e.type == 'reaction') {
+      final f = e.payload['feeling_id'] as String?;
+      if (f != null) words.add(f);
+    }
+    if (e.type == 'state_declared') {
+      final sig = e.payload['signal'] as String?;
+      if (sig != null) words.add(sig);
+    }
+    // type and facet terms so "photo" or "feeling" finds by kind
+    final kinds = <String>[e.type, ...spec.search.facets];
+    return (words, kinds);
+  }
+
   void _index(Event e, {String? override}) {
     _byId[e.id] = e;
-    final spec = kEventTypeById[e.type]!;
     final counts = <String, int>{};
     void addText(String? s) {
       if (s == null) return;
@@ -63,21 +105,9 @@ class SearchIndex {
         counts[t] = (counts[t] ?? 0) + 1;
       }
     }
-    if (override != null) {
-      addText(override);
-    } else {
-      for (final f in spec.search.textFields) {
-        final v = e.payload[f];
-        if (v is String) addText(v);
-      }
-    }
-    // type and facet terms so "photo" or "feeling" finds by kind
-    addText(e.type);
-    for (final f in spec.search.facets) {
-      addText(f);
-    }
-    if (e.type == 'feeling' || e.type == 'reaction') addText(e.payload['feeling_id'] as String?);
-    if (e.type == 'state_declared') addText(e.payload['signal'] as String?);
+    final (words, kinds) = _sourcesOf(e, override: override);
+    words.forEach(addText);
+    kinds.forEach(addText);
     for (final entry in counts.entries) {
       (_postings[entry.key] ??= {})[e.id] = entry.value;
     }
@@ -129,12 +159,60 @@ class SearchIndex {
       if (author != null && e.author != author) continue;
       if (fromTs != null && e.ts < fromTs) continue;
       if (toTs != null && e.ts > toTs) continue;
-      hits.add(SearchHit(e, s.value));
+      final (words, kinds) = _sourcesOf(e, override: _editedText[e.id]);
+      final carried = [for (final w in words) if (carries(w, terms)) w];
+      hits.add(SearchHit(e, s.value,
+          matchedIn: carried,
+          matchedKind: carried.isNotEmpty ? null : _firstCarrying(kinds, terms)));
     }
+    // Newest first, and nothing else. It sorted by score with the timestamp only as a tiebreak,
+    // which is why one day's hits came out 07:20, 07:24, 07:14: three results a person reads as a
+    // sequence, in an order derived from a number that is nowhere on the screen. A relevance rank
+    // needs a reason to be believed, and a year of one conversation does not give it one -- the
+    // question somebody is asking a search box here is `when did we say that`, and the answer to
+    // that is a date. The score still chooses which hits there are; it no longer chooses what
+    // order they are read in. The id breaks a tie so two events written in the same millisecond
+    // do not swap places between two runs of the same query.
     hits.sort((a, b) {
-      final c = b.score.compareTo(a.score);
-      return c != 0 ? c : b.event.ts.compareTo(a.event.ts);
+      final c = b.event.ts.compareTo(a.event.ts);
+      return c != 0 ? c : b.event.id.compareTo(a.event.id);
     });
     return hits.length > limit ? hits.sublist(0, limit) : hits;
+  }
+
+  static String? _firstCarrying(List<String> texts, List<String> terms) {
+    for (final t in texts) {
+      if (carries(t, terms)) return t;
+    }
+    return null;
+  }
+
+  /// Whether one of [terms] is a word of [text] or the start of one -- the same match the index
+  /// makes, so a highlighted word is a word the index actually matched on.
+  static bool carries(String text, List<String> terms) => spansIn(text, terms).isNotEmpty;
+
+  /// Where in [text] the words of [query] are, as (start, end) ranges over the original string,
+  /// in order and never overlapping. The highlighter draws these.
+  ///
+  /// A whole word at a time, because that is what the index matched: it holds tokens, it matches
+  /// the last term of a query as a prefix while somebody is still typing, and it knows nothing
+  /// about a query as one literal run of characters. The highlighter did know it as one, so a
+  /// two-word query lit nothing unless the two words happened to be adjacent in the line.
+  static List<(int, int)> spansOf(String text, String query) =>
+      spansIn(text, tokenize(query));
+
+  static List<(int, int)> spansIn(String text, List<String> terms) {
+    if (terms.isEmpty) return const [];
+    final out = <(int, int)>[];
+    for (final m in _token.allMatches(text)) {
+      final word = m.group(0)!.toLowerCase();
+      for (final q in terms) {
+        if (word == q || word.startsWith(q)) {
+          out.add((m.start, m.end));
+          break;
+        }
+      }
+    }
+    return out;
   }
 }

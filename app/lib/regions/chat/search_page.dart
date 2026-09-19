@@ -266,9 +266,41 @@ class _Hit extends StatelessWidget {
   final String query;
   final VoidCallback onTap;
 
+  /// The words for a kind of thing, in the same vocabulary the facet tabs down the side use, so
+  /// a hit that matched on its kind says `photographs` and not `photo` or `state_declared`.
+  static const Map<String, String> _kindWords = {
+    'message': 'written',
+    'photo': 'photographs',
+    'video': 'video',
+    'voice_note': 'talking',
+    'feeling': 'feelings',
+    'reaction': 'feelings',
+    'date_event': 'dates',
+    'todo_event': 'the list',
+    'state_declared': 'state',
+    'ritual_kept': 'rituals',
+    'milestone': 'dates',
+  };
+
+  /// The line under the sentence: the field the term is actually in, or the kind of thing this
+  /// is when that is all that matched. Null when the sentence itself carries the match.
+  String? get _aside {
+    final summary = summaryOf(hit.event, me: me);
+    final terms = SearchIndex.tokenize(query);
+    if (terms.isEmpty) return null;
+    if (SearchIndex.carries(summary, terms)) return null;
+    for (final m in hit.matchedIn) {
+      if (m != summary) return m;
+    }
+    final kind = hit.matchedKind;
+    if (kind == null) return null;
+    return _kindWords[hit.event.type] ?? kind.replaceAll('_', ' ');
+  }
+
   @override
   Widget build(BuildContext context) {
     final e = hit.event;
+    final aside = _aside;
     final tear = lib == null ? null : tearFor(e, lib!, row: row);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -290,6 +322,14 @@ class _Hit extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _Marked(text: summaryOf(e, me: me), query: query, by: e.author),
+              // What it matched on, when the sentence above shows none of it. `ritual_kept`
+              // prints `title . kept` and its note is indexed and never drawn, so a search for
+              // `rain` put `text when home . kept` on the desk with nothing on it to see, and a
+              // hit you cannot see the match in is indistinguishable from a wrong answer.
+              if (aside != null) ...[
+                const SizedBox(height: 3),
+                _Marked(text: aside, query: query, by: e.author, size: 14, colour: Pen.margin),
+              ],
               const SizedBox(height: 3),
               Text(timeLabel(e.ts), style: Hands.margin(size: 11)),
             ],
@@ -302,35 +342,39 @@ class _Hit extends StatelessWidget {
 
 /// The line, with the words you were looking for gone over in highlighter.
 class _Marked extends StatelessWidget {
-  const _Marked({required this.text, required this.query, required this.by});
+  const _Marked(
+      {required this.text, required this.query, required this.by, this.size = 17, this.colour});
   final String text;
   final String query;
   final Person by;
+  final double size;
+  final Color? colour;
 
   @override
   Widget build(BuildContext context) {
-    final style = Hands.of(by, size: 17);
-    final q = query.trim().toLowerCase();
-    if (q.isEmpty || !text.toLowerCase().contains(q)) {
+    var style = Hands.of(by, size: size);
+    if (colour != null) style = style.copyWith(color: colour);
+    // Word by word, the way the index matched, rather than the whole query as one literal
+    // substring. Two words that are both in the line but not next to each other in it -- which is
+    // most of what anybody types into a search box -- highlighted nothing at all, and the last
+    // word of a query is a prefix while somebody is still typing, so `ros` matched `roster` in
+    // the index and lit nothing on the paper.
+    final spans = SearchIndex.spansOf(text, query);
+    if (spans.isEmpty) {
       return Text(text, style: style, maxLines: 3, overflow: TextOverflow.ellipsis);
     }
-    final spans = <TextSpan>[];
+    final out = <TextSpan>[];
     var at = 0;
-    final lower = text.toLowerCase();
-    while (true) {
-      final i = lower.indexOf(q, at);
-      if (i < 0) {
-        spans.add(TextSpan(text: text.substring(at)));
-        break;
-      }
-      if (i > at) spans.add(TextSpan(text: text.substring(at, i)));
-      spans.add(TextSpan(
-        text: text.substring(i, i + q.length),
+    for (final (start, end) in spans) {
+      if (start > at) out.add(TextSpan(text: text.substring(at, start)));
+      out.add(TextSpan(
+        text: text.substring(start, end),
         style: const TextStyle(backgroundColor: Accent.highlighterYellow),
       ));
-      at = i + q.length;
+      at = end;
     }
-    return Text.rich(TextSpan(style: style, children: spans),
+    if (at < text.length) out.add(TextSpan(text: text.substring(at)));
+    return Text.rich(TextSpan(style: style, children: out),
         maxLines: 3, overflow: TextOverflow.ellipsis);
   }
 }
