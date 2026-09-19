@@ -58,8 +58,20 @@ HOLED_Y = 2150
 RULE = 0.30                # a drawn rule: far off the paper, and LIGHTER than the ink, which is
                            # the case that gets past `on_the_far_side` and becomes the ground
 HOLE = 0.30                # the desk, seen through a tear that runs past the line both ways
+# Section 7's line: the same writing, with a surface showing through a gap in it AND something
+# darker than the letters sitting in the ring beside them.
+NEAR_Y = 1150
+DESK = 0.10                # the wood seen through a gap in the sheet: DARKER than the ink, and
+                           # taller than the line, so it stays in the ground. Darker than the ink
+                           # is the whole point -- it is what makes `on_the_far_side` the thing
+                           # that decides this run, and the real case is the same way round:
+                           # 12_search's letters read 0.0615 against a gated ground of 0.0114
+DEEP = 0.04                # a mark darker than the writing: the shadow in a tear, a printed bar,
+                           # anything the glyph filters throw out. Shorter than the line, so it
+                           # leaves the ground -- and it was still being taken as the ink
 RULED_SAYS = "the six words"
 HOLED_SAYS = "written across a tear"
+NEAR_SAYS = "darker things beside it"
 GLYPH_W, GLYPH_H, GAP, COUNT = 20, 30, 12, 12
 WRITING_SAYS = "in the morning then"
 FIBRE_SAYS = "not writing at all"
@@ -138,6 +150,56 @@ def still_holed(path):
     right = blocks(img, HOLED_Y, 300, INK, count=5)
     img[HOLED_Y - 60:HOLED_Y + GLYPH_H + 60, 270:298] = HOLE + rng.normal(
         0.0, 0.004, size=(GLYPH_H + 120, 28))
+    a = np.clip(img, 0.0, 1.0)
+    Image.fromarray(np.repeat((a * 255.0).round().astype(np.uint8)[:, :, None], 3, axis=2),
+                    "RGB").save(path)
+    return left + right
+
+
+def still_darker_near(path):
+    """One declared line with a surface darker than its ink above it, and darker marks below it.
+
+    This is `12_search`'s `PHOTOGRAPHS` in miniature, and it is the case the ink sample was
+    getting wrong. Three things are in the ring, and only one of them is the writing:
+
+      the letters   at INK,  which is the writing;
+      a surface     at DESK, DARKER than the letters and taller than the line, so `figure_of`
+                    leaves it in the ground and it becomes the ground band's dark end;
+      dark marks    at DEEP, darker still, shorter than the line so they leave the ground as the
+                    app's own ink, and thrown out of the glyph filters on aspect.
+
+    Both of the last two are dark marks, so both are in the polarity mask the ink used to be read
+    from, and the DEEP marks are the darkest thing in it. Taking the tenth percentile of that puts
+    the ink at DEEP instead of at INK -- and the ink then reads darker than its own ground, so
+    `on_the_far_side` concludes the ground is a second surface behind the writing and gates the
+    run against it. The run comes out at about one to one for text that is plainly legible.
+
+    The guard is right and it is doing its job; it was being handed the wrong ink. Measured on the
+    capture this is drawn from: the letters are a flat 0.0615, the gated ground 0.0114, and the
+    polluted sample 0.0072 -- contrast(0.0072, 0.0114) = 1.07, where the letters alone give
+    contrast(0.0615, 0.0114) = 1.82 and the guard declines to gate at all, leaving the ring
+    reading of 15.16 standing.
+
+    Two pieces of geometry are load-bearing, and the first two attempts at this page got both
+    wrong, so they are written down. The ground band reaches `(y1 - y0) // 2` -- fifteen pixels
+    for this line -- from a GLYPH, so a surface off to one side of the line contributes a sliver
+    far under the fifth percentile the adversarial end is read from, and the band comes back flat
+    paper. It has to run along the line. And the ring is `max(RING, (y1 - y0) // 2)` around the
+    run, so marks placed a comfortable-looking distance from the writing are simply outside it.
+    """
+    rng = np.random.default_rng(37)
+    img = PAPER + rng.normal(0.0, 0.004, size=(H, W))
+    left = blocks(img, NEAR_Y, 120, INK, count=6)
+    right = blocks(img, NEAR_Y, 460, INK, count=6)
+    # the surface, along the line and six pixels off it: forty tall against a thirty-tall line, so
+    # its height over the line clears FIGURE_MAX_H_OVER_LINE and it stays in the ground
+    img[NEAR_Y - 46:NEAR_Y - 6, 110:740] = DESK + rng.normal(0.0, 0.004, size=(40, 630))
+    # and the darker marks, just under the line and inside the ring. 70x12 is 5.8:1, thrown out on
+    # aspect; twelve against thirty is shorter than the line, so they are ink and not a surface
+    for k in range(8):
+        x = 120 + k * 78
+        img[NEAR_Y + GLYPH_H + 2:NEAR_Y + GLYPH_H + 14, x:x + 70] = DEEP + rng.normal(
+            0.0, 0.003, size=(12, 70))
     a = np.clip(img, 0.0, 1.0)
     Image.fromarray(np.repeat((a * 255.0).round().astype(np.uint8)[:, :, None], 3, axis=2),
                     "RGB").save(path)
@@ -291,6 +353,36 @@ def main():
                   f"({hart['worst_ink_core']}:1)")
             check(any(f.get("says") == HOLED_SAYS for f in holed["failures"]),
                   "so the rule is a rule about scale, not a licence to empty the ground")
+
+        # ---- 7. a run's ink is the glyphs, not every mark near them ---------------------------
+        # The page has the writing, a surface showing through a gap in it, and four marks DARKER
+        # than the writing sitting in the band. Only the letters are the writing. Reading the ink
+        # as every mark of that polarity in the ring puts the tenth percentile inside those four,
+        # which makes the ink look darker than its own ground -- so `on_the_far_side` decides the
+        # ground is a second surface, gates the run against it, and reports about one to one for
+        # text that is plainly legible.
+        with tempfile.TemporaryDirectory() as nd:
+            nname = "darker_near.png"
+            sidecar(os.path.join(nd, "darker_near.text.json"), nname,
+                    [(still_darker_near(os.path.join(nd, nname)), NEAR_SAYS)])
+            p7, near_d = measure(nd)
+            nart = near_d["artifacts"][nname]
+            check(nart["runs"] == 1, f"the line reads as one run ({nart['runs']})")
+            check(p7.returncode == 0 and near_d["total_below_floor"] == 0,
+                  f"a mark darker than the writing is not the writing "
+                  f"({nart['worst_ink_core']}:1)")
+            # The half that makes it a measurement rather than a threshold: the letters' own
+            # luminance has to be what came out, so this cannot be met by a tool that widened a
+            # tolerance or stopped reading the run at all.
+            check(nart["worst_ink_core"] is not None
+                  and abs(nart["worst_ink_core"] - alone_core) <= 0.25,
+                  f"and it reads what that writing reads on a clean page "
+                  f"({alone_core} -> {nart['worst_ink_core']})")
+            # `marks_outside_text` is 0 on this page and that is correct: the surface and the
+            # dark marks both lie inside this line's own declared span, so there is nothing
+            # outside it to count. The property that they are seen rather than erased is section
+            # 2's, on a page built for it. What this section proves is the one thing that page
+            # cannot: which of the marks inside a declared run is the run's ink.
 
     if failures:
         print(f"\n{len(failures)} check(s) failed", file=sys.stderr)

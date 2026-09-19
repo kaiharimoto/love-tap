@@ -519,7 +519,24 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
             pm = mask[ry0:ry1, rx0:rx1]
             pg = is_ground[ry0:ry1, rx0:rx1]
             pmg = glyph_px[ry0:ry1, rx0:rx1]
-            stroke = pl[pm]
+            # A run's ink is the glyphs, not every mark near them.
+            #
+            # `pm` is every pixel of this polarity the detector fired on inside the ring box --
+            # the components the glyph filters rejected included, and the desk included. Taking
+            # the tenth percentile of that reports the contrast of whatever is darkest in the
+            # neighbourhood against the ground, and calls it the writing's contrast. Measured on
+            # 12_search's `PHOTOGRAPHS`: the ink sample is 2833 px of which 994, thirty-five
+            # percent, are not glyphs at all; those 994 have p10 0.0047 while the letters
+            # themselves are a flat 0.0615, and the gated ground is 0.0114. So the tool read
+            # contrast(0.0072, 0.0114) = 1.07 for a word that is plainly legible.
+            #
+            # `glyph_px` is what the tool already accepted as letters, and the ground band is
+            # already grown from it alone. Using it here as well is the same rule applied to both
+            # ends of the comparison. It also lets the `on_the_far_side` guard below do its job:
+            # with the letters' own luminance in hand, a ground darker than the ink is recognised
+            # as a second surface behind a hole in the paper rather than as this ink's ground, and
+            # the ring reading stands. That guard was being defeated by being handed a wrong ink.
+            stroke = pl[pm & pmg]
             if stroke.size < 40 or pl.size < 400:
                 continue
             if polarity == "dark":
