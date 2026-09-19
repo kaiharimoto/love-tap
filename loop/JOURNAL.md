@@ -3539,3 +3539,125 @@ this container, for the same `/dev/kvm` reason as 09 and 16; and the 2.0 JND flo
 convention that a forced-choice identification run on real hardware would settle.
 
 Stage unchanged: IMPLEMENT, cycle 3. Queue: 31 open, 35 closed, 5 superseded. Lease released.
+
+## Firing 22 — IMPLEMENT, cycle 3 — three stated remedies that did not survive their own measurement
+
+Lease taken at 09:58Z, four hours, released at the end of this entry. Push proved before any work.
+
+**The checkout read as a fork again, and `--deepen` settled it without overwriting anything.** Same
+shape §0 warns about: `git fetch` reported `+ 3edfbf7...e725f34 (forced update)`, `git merge-base`
+came back empty and the counts read 50 ahead and 50 behind. Firing 21 met this and took route 1.
+This firing took the route §0 says to try first and it worked, at the second attempt: `--deepen=25`
+on the branch refspec added nothing visible, `--deepen=40` took the remote side to 115 commits, and
+`--deepen=160` took it to 275 and back to 2026-09-04 — at which point `git merge-base --is-ancestor`
+returned true and the merge base was exactly the local tip. So it was an ordinary checkout that was
+behind, `git merge --ff-only` took it, and nothing was reset, force-moved or dropped. **The lesson
+for a successor is that one `--deepen` that does not fill the graft is not evidence the histories
+are unrelated; the gap here was four days and 225 commits.** `--unshallow` would also have done it.
+
+**Three of the four commits are a queue item's own remedy failing when it was finally measured.**
+That is the shape of this firing, and it is worth naming because none of the three was discoverable
+by reading the item.
+
+**Rank's parent — `no-surface-in-this-app-is-drawn-at-its-own-resolution` — is refuted.** It says
+the sheets go flat because the packer spends their resolution, and names the fix: raise
+`SIZES['paper']` from 1500 against sources `DIRECTION.md` puts at 2400×3200 minimum. Neither half
+holds. *The sources are not 2400×3200*: all fifty-four files in `assets/paper` are 1800 on the long
+side, so the packer's 1500 is a seventeen per cent trim, and 1800 is the whole range repacking can
+reach. Over the library that range is worth seven samples out of four hundred and thirty-two — 117
+above the floor against 124 — for 5146 kB → 10053 kB of packed paper. And *the ceiling is no better
+than the range*: one sheet re-rendered with the pinned Blender at `--res 3000` and drawn at 0.97×,
+which is exactly the `scale <= 1.05` the item demands, reads mean L_std 6.257 on the same patch the
+committed chain reads 5.889 on, and zero of eight samples pass either way. Eight hours of Blender
+and four times the paper bundle would buy 0.37 against a floor of 8.0.
+
+So the gap is the tooth in the material, not the pixels it is stored at. Filed as
+`the-paper-tooth-is-six-and-the-floor-asks-eight` with the evidence for *both* readings, because it
+is a design decision and not a defect: against the floor, `graph_01` passes 8 of 8 region-matched,
+so the floor is reachable where a stock has a printed grid; for the floor, no plain lined or
+looseleaf sample clears it anywhere in the library at any resolution, and that is a lot of the
+app's surface. `tools/check/surfaces.py` passes these same sheets on its own floor of 1.2, which is
+the shape of `the-folds-floor-passes-a-blank-sheet` all over again.
+
+**And the reading that nearly went in the commit message was wrong, which is the part worth
+keeping.** My first comparison put a 400×200 sample of the source at 1:1 against one of the drawn
+sheet, and read 21/48 against 6/48 — apparently decisive proof that magnification is the mechanism.
+It is not like-for-like. Every chain draws into the same 2908-px-tall box, so a screen window
+always covers 0.137 of the sheet's width whatever the source is; a window taken off an 1800-px
+source at 1:1 covers 0.222 of it, 1.6× more paper, and catches a printed rule far more often, and
+the rules carry nearly all the variance on a lined sheet. The probe is what corrected it. That trap
+is now in `tools/paper_tooth.py`'s docstring, and the tool draws every column into one box so it
+cannot be made again.
+
+**Rank 1's last live question is answered, and the answer is that there is nothing there.** Firing
+19 called decode lag "the only part of candidate (a) left alive". It is not alive. `06_unfolding.mp4`
+was decoded back to its 320 frames with the pinned ffmpeg and put through `tools/check/frames.py`
+unchanged — nothing under `evidence/` was written — and the repeats sit in two runs at the two
+ends: **13..31, nineteen frames of a note lying folded before the scene issues `unfold` at all**,
+and **298..318, twenty-one frames after it has finished opening while the recorder is still
+rolling**. Between them the fold moves for 266 frames and repeats 16 of them, the longest run being
+five. That is about **fifty-six unique frames a second against a failure condition of thirty**, so
+that failure condition is not breached and rank 1 should not be counted among `queue_note`'s four
+on the timing clause. `evidence/scenes/06_unfolding.json` is why: step 5 grabs twenty frames
+*before* step 6 issues `unfold`, and `fold.dart`'s 200 ms `holdFirst` adds twelve more, with a
+comment saying exactly why it is there.
+
+Nothing could print this before. `frames.py` truncated its only positional output to
+`repeated_at: still[:12]`, and for this clip those twelve indices are the opening hold and nothing
+else, so the run carrying most of the repeats was off the end of the list and the clip read as a
+fold that stutters. It now emits `still_runs` — every run with start, end and length. **No derived
+"in motion" number went in with it, and that was deliberate**: I wrote one, saw that the obvious
+trim is wrong here — frames 0 to 12 of this clip *are* moving, being the scroll still settling, so
+trimming to "the first frame that moved" does not remove the opening hold at all — and took it out
+again rather than ship a number that looks authoritative and is not. Where the motion begins is
+something the scene knows and the check does not, and re-specifying the item's threshold over that
+span is a measurement definition, so it is ADDRESS's.
+
+**The gate the protocol runs before every commit had never once returned zero.** `WORKER_PROMPT.md`
+says to run `flutter analyze && flutter test` before any commit that touches code. On a fresh
+container that conjunction cannot pass: the suite was 164 green at exit 0 and the analyzer reported
+**27 issues and exited 1**. None was an error — 21 info-level lints, eighteen of them unnecessary
+imports, plus six unused imports and one unused declaration — which is exactly why it survived four
+cycles, because the summary says green and the only dissent is an exit code. All 27 cleared,
+re-broken by putting one import back and watching the analyzer return 1, and the suite still reads
+the same count, so nothing removed was load-bearing. This is a **precondition for rank 27** rather
+than that item: wiring the gate into `capture.sh` while it was red would have failed every capture
+on an unnecessary import, and the failure would have looked like the app.
+
+One removal was not a lint. `_desk = DeskColour.day` sat in the pairs test, declared and never read,
+because no ink of any colour is legible on the plank — `no_word_is_written_on_the_desk_test.dart`
+puts the ink it would need at Y = −0.006 — so there is no ink-and-desk pair to declare. The reason
+is left in the file where the constant was, pointing at the test that enforces it.
+
+**Rank 29's hole was real and it was not the one the item names.** The address check was already
+sound: `hostBind` calls `addressToServeOn` first and unconditionally in *both* modes, so a declared
+address outside the tailnet ranges is refused and a node with no tailnet address refuses to serve.
+What had no test at all was the branch taken afterwards — `boundTo = isUserspace ? '127.0.0.1' :
+address` — and userspace is the only mode anything in this repository has ever measured, which is
+the item's own observation. **Changing that one literal to `'0.0.0.0'` would have put the
+conversation on every interface of the phone and left the suite green.** Three tests now hold it,
+re-broken with the wildcard in place: two of the three fail, restored, 167 pass.
+
+The item stays open because half its measurement cannot be built. It asks that the bound address be
+the tailnet address in *both* modes, and in userspace there is no such address to bind — with no
+TUN the 100.x address is on no local interface and `bind()` refuses it. That is what userspace
+networking is, not a policy to reverse. The note says how ADDRESS should restate it: as the
+property it is really protecting, which is that a wildcard is never reached.
+
+**What the next IMPLEMENT firing should expect, and it matters.** The stage stays IMPLEMENT — 31
+open, not drained, and `LOOP.md` advances only on empty. But **the top of the queue is now largely
+capture-blocked**: ranks 1, 5, 7, 9 and 11 all have their code half done and their remaining
+measurement in pixels, and firing 21 already said that of two of them. Rank 5 in particular is no
+longer waiting on the resolution item the way firing 20 expected — it waits on the tooth decision
+now. Capture-free work that genuinely remains: ranks 17, 26, 28, and `the-folds-floor-passes-a-blank-
+sheet`. If the next firing finds the same shape, it should say so loudly, because that is the
+argument for OBSERVE rather than a sixth IMPLEMENT firing.
+
+Evidence is still stale and this firing did not change that in substance: the only `app/lib` edit
+was one unnecessary import removed from `server_io.dart`. `flutter test` writes `coldstart.json` and
+`reliability.json` into `evidence/`, as `CONTINUE.md` §5 warns; both were reverted rather than
+committed, twice. The probe render also wrote a manifest entry with a path climbing out of the
+repository, as `CLAUDE.md` warns; reverted too.
+
+No new `asks[]`. Stage unchanged: IMPLEMENT, cycle 3. Queue: 32 open — the 31 inherited plus the one
+filed here — 35 closed, 5 superseded. Lease released.
