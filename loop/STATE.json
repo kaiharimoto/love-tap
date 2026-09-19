@@ -143,11 +143,12 @@
    "points": 1.5,
    "why": "A STATED FAILURE CONDITION, not merely a points item: docs/BRIEF.md 09 forbids 'a feeling that shares its object asset, name, or haptic sequence with another feeling'. The emotional-transmission critic's own measurement of haptics.json finds three of the six shelter feelings are the same gesture, separated only by count and by an amplitude difference of <= 40/255 -- its_okay (200@160 x4 with 200ms gaps) and its siblings. The row requires each feeling to be identifiable by its haptic pattern alone with the screen face down, and three that are one pattern cannot be. Inseparable from the item below it.",
    "measurement": "A pairwise distance over all 34 sequences reports no pair below a stated just-noticeable-difference threshold, with the threshold written down and defended. Re-break by restoring the duplicate shelter envelopes and watching the pair distance fall below it.",
-   "state": "open",
-   "attempts": 0,
-   "closed_by": null,
+   "state": "closed",
+   "attempts": 1,
+   "closed_by": "fbb3d9e",
    "rank": 32,
-   "owner_priority": "using-it"
+   "owner_priority": "using-it",
+   "closed_note": "Closed together with haptics-json-is-a-catalogue-not-a-discrimination-test, which the queue calls inseparable from it and which is the instrument this needed. tools/check/haptics.py measures all 561 pairs in just-noticeable differences over six terms -- count, tempo, pulse length, duty, evenness, force and its contour -- each divided by its own published Weber fraction and combined as an L2 norm, with a 2.0 JND floor and a --selftest that re-breaks it on five cases. THE ITEM'S OWN FINDING DID NOT SURVIVE THE MEASUREMENT: here/its_okay/steady are 3.22, 3.34 and 5.50 JND apart, because their pulses and gaps differ by up to 2x and a doubling of tempo alone is 3.8 JND. The real pair was stuck_with_me/confetti at 1.83 -- seven or eight 30ms taps at 30-40ms gaps either way, separated only by an amplitude arch an LRA renders poorly, and invisible to string equality because the two strings differ in every character. confetti is scattered now (uneven gaps, uneven force) and the closest pair in the vocabulary is stuck_with_me/overwhelmed at 2.58, nothing under the floor. capture.sh runs the selftest and then the check. The floor is a stated convention, defended in the tool's docstring and in docs/FEELINGS.md; the experiment that would settle it is a new asks[] entry."
   },
   {
    "id": "unselected-is-drawn-as-alpha-and-that-is-two-thirds-of-the-vocabulary",
@@ -454,11 +455,12 @@
    "points": 0,
    "why": "The file is a catalogue of specifications extracted from app/lib/feelings/builtins.dart. It carries no pairwise distance, no confusion analysis, no just-noticeable-difference threshold and no stated criterion for what its empty problems array means -- so a critic measuring it by hand found the duplicate above that the file reports nothing about. The row's claim is that each of 34 feelings is identifiable by its haptic pattern ALONE, and the evidence for that claim currently amounts to a list of the patterns.",
    "measurement": "evidence/haptics.json carries a full 34x34 pairwise distance matrix, a stated JND threshold with its reasoning, and a problems array that is non-empty when any pair falls below it. Re-break by lowering the threshold and watching problems fill.",
-   "state": "open",
-   "attempts": 0,
-   "closed_by": null,
+   "state": "closed",
+   "attempts": 1,
+   "closed_by": "fbb3d9e",
    "rank": 33,
-   "owner_priority": "harness"
+   "owner_priority": "harness",
+   "closed_note": "Closed by the same commit as three-of-six-shelter-feelings-are-one-gesture, which is the item it was the instrument for. haptics.json now carries a `discrimination` block: the floor, the number of pairs, the closest distance, every pair under the floor, and the closest twelve with the terms that made each distance. The check fails the capture when any pair is under 2.0 JND."
   },
   {
    "id": "the-ios-non-haptic-substitute-has-no-evidence-anywhere",
@@ -927,6 +929,11 @@
   {
    "at_firing": 21,
    "ask": "05_settings.png cannot show paired state or the six-word pairing code in this container. The still is captured against the PWA client, and the only thing it can pair WITH is the Android host, which needs an emulator, which needs /dev/kvm. docs/PHONES.md records the three measured attempts. Everything else rank 7 asked for is done and tested; this half needs a host on real hardware, exactly like 09_two_devices.png and 16_setup_android.png.",
+   "blocks_the_loop": false
+  },
+  {
+   "at_firing": 21,
+   "ask": "The 2.0 JND floor on haptic discrimination is a stated convention, not a measured one. One JND is the difference detected half the time in a side-by-side forced choice; naming one of thirty-four from memory with the phone face down is harder than that by a margin nobody in this build has measured. What would settle it is a forced-choice identification run on real hardware with real hands -- thirty-four sequences, no screen, and a count of how often each is named correctly. Until then the number is defended in tools/check/haptics.py's docstring and in docs/FEELINGS.md, and the vocabulary clears it with its closest pair at 2.58.",
    "blocks_the_loop": false
   }
  ],
