@@ -33,7 +33,12 @@ class SettingsRegion extends StatefulWidget {
 
 class _SettingsRegionState extends State<SettingsRegion> {
   PairingCode? _code;
-  final _address = TextEditingController(text: 'http://127.0.0.1:8480');
+  // Empty. It opened holding `http://127.0.0.1:8480`, which is a development default and which
+  // 05_settings.png printed in the handwriting face -- the one moment in the build where a raw
+  // debug address is treated as something a person wrote by hand. What a person types here is
+  // their handwriting; what the app knows is not.
+  final _address = TextEditingController();
+  bool _showAddress = false;
   final _words = TextEditingController();
   String? _result;
   NotificationPrefs? _prefs;
@@ -110,44 +115,9 @@ class _SettingsRegionState extends State<SettingsRegion> {
             await t.unpair();
             setState(() => _result = 'unpaired. the other phone will need the words again.');
           },
+          showAddress: _showAddress,
+          onShowAddress: () => setState(() => _showAddress = true),
         ),
-        const SizedBox(height: 22),
-        Strip(id: 'heading-what-may-interrupt', row: 2,
-            padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
-            child: const Stamped('what may interrupt', size: 11)),
-        const SizedBox(height: 6),
-        if (!scope.ambient.allowed)
-          // On a slip, and in the ink that is legible on wood. This was pencil grey written
-          // straight onto the desk: 0xFF6D6D70 on 0xFF5E5044 is under two to one, and it is the
-          // one thing on the screen that has to be tapped before any of the rest of it does
-          // anything.
-          Padding(
-            padding: const EdgeInsets.fromLTRB(2, 0, 2, 12),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Slip(
-                id: 'settings.interrupt',
-                row: 2,
-                stock: 'sticky_yellow',
-                torn: false,
-                padding: const EdgeInsets.fromLTRB(14, 8, 14, 9),
-                onTap: () async {
-                  await scope.ambient.ask();
-                  if (mounted) setState(() {});
-                },
-                child: Text('let it interrupt you',
-                    style: Hands.margin(size: 16).copyWith(color: Pen.stamp)),
-              ),
-            ),
-          ),
-        if (_prefs != null)
-          NotificationSettings(
-            prefs: _prefs!,
-            onChanged: (p) async {
-              await p.save(scope.spine);
-              setState(() => _prefs = p);
-            },
-          ),
         const SizedBox(height: 22),
         Row(children: [
           Strip(id: 'heading-feelings-you-made', row: 3,
@@ -246,6 +216,47 @@ class _SettingsRegionState extends State<SettingsRegion> {
             ],
           ),
         ),
+        const SizedBox(height: 22),
+        // The long table last. It is the one thing on this screen you set once and never
+        // look at again, and with it in the middle the artifact of this screen carried
+        // thirteen rows of it and none of the feeling-authoring tools the row asks for.
+        Strip(id: 'heading-what-may-interrupt', row: 2,
+            padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
+            child: const Stamped('what may interrupt', size: 11)),
+        const SizedBox(height: 6),
+        if (!scope.ambient.allowed)
+          // On a slip, and in the ink that is legible on wood. This was pencil grey written
+          // straight onto the desk: 0xFF6D6D70 on 0xFF5E5044 is under two to one, and it is the
+          // one thing on the screen that has to be tapped before any of the rest of it does
+          // anything.
+          Padding(
+            padding: const EdgeInsets.fromLTRB(2, 0, 2, 12),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Slip(
+                id: 'settings.interrupt',
+                row: 2,
+                stock: 'sticky_yellow',
+                torn: false,
+                padding: const EdgeInsets.fromLTRB(14, 8, 14, 9),
+                onTap: () async {
+                  await scope.ambient.ask();
+                  if (mounted) setState(() {});
+                },
+                child: Text('let it interrupt you',
+                    style: Hands.margin(size: 16).copyWith(color: Pen.stamp)),
+              ),
+            ),
+          ),
+        if (_prefs != null)
+          NotificationSettings(
+            prefs: _prefs!,
+            onChanged: (p) async {
+              await p.save(scope.spine);
+              setState(() => _prefs = p);
+            },
+          ),
+
       ],
     );
   }
@@ -306,6 +317,8 @@ class _Pairing extends StatelessWidget {
     required this.onShow,
     required this.onPair,
     required this.onUnpair,
+    required this.showAddress,
+    required this.onShowAddress,
   });
 
   final Transport transport;
@@ -317,6 +330,11 @@ class _Pairing extends StatelessWidget {
   final VoidCallback onShow;
   final VoidCallback onPair;
   final VoidCallback onUnpair;
+
+  /// Whether the machine address is on the card. It is a thing you go and look at when something
+  /// is wrong, not a thing the screen is about.
+  final bool showAddress;
+  final VoidCallback onShowAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -333,11 +351,23 @@ class _Pairing extends StatelessWidget {
           if (paired != null) ...[
             Text('two phones, linked ${_ago(paired.pairedAt)}', style: Hands.teo(size: 17)),
             const SizedBox(height: 4),
-            _Fact(paired.hostPerson.name, '${paired.hostId} · holds the log'),
-            _Fact(paired.clientPerson.name, paired.clientId),
+            _Fact(paired.hostPerson.name, '${paired.hostId} · holds the log', machine: true),
+            _Fact(paired.clientPerson.name, paired.clientId, machine: true),
           ] else
             Text(S.notPaired, style: Hands.teo(size: 17)),
-          _Fact('link', '${link.state.name}${link.address != null ? ' · ${link.address}' : ''}'),
+          _Fact('link', link.state.name),
+          if (link.address != null)
+            if (showAddress)
+              _Fact('address', link.address!, machine: true)
+            else
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: onShowAddress,
+                  child: Text('show the address', style: Hands.margin(size: 14)),
+                ),
+              ),
           const SizedBox(height: 10),
           if (transport.role == TransportRole.host) ...[
             GestureDetector(onTap: onShow, child: Text('read six words to them', style: Hands.margin(size: 15))),
@@ -387,9 +417,14 @@ class _Pairing extends StatelessWidget {
 }
 
 class _Fact extends StatelessWidget {
-  const _Fact(this.label, this.value);
+  const _Fact(this.label, this.value, {this.machine = false});
   final String label;
   final String value;
+
+  /// A fact the phone knows rather than one a person wrote: an address, a device id. It is set in
+  /// the stamped face, not the handwritten one. `Stamped` itself is not used because it puts a
+  /// machine fact in capitals, and an address in capitals is a different address.
+  final bool machine;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -398,7 +433,10 @@ class _Fact extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(width: 110, child: Stamped(label, size: 9, colour: Pen.margin)),
-            Expanded(child: Text(value, style: Hands.margin(size: 14))),
+            Expanded(
+              child: Text(value,
+                  style: machine ? Hands.stamp(size: 12, spacing: 0.4) : Hands.margin(size: 14)),
+            ),
           ],
         ),
       );
