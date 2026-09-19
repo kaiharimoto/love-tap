@@ -14,7 +14,6 @@ import 'package:desk/spine/projections/thread.dart';
 import 'package:desk/spine/spine.dart';
 import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/sync.dart';
-import 'package:desk/transport/transport.dart';
 import 'package:desk/voice/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

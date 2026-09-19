@@ -8,7 +8,6 @@ import 'dart:typed_data';
 
 import 'package:path/path.dart' as p;
 
-import '../../spine/event.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
 import '../transport.dart';

@@ -26,7 +26,6 @@ import 'package:desk/spine/seed_loader.dart';
 import 'package:desk/spine/spine.dart';
 import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/sync.dart';
-import 'package:desk/transport/transport.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_test/flutter_test.dart';

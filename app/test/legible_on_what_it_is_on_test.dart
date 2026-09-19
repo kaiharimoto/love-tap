@@ -52,7 +52,6 @@
 import 'dart:math' as math;
 
 import 'package:desk/material/desk.dart';
-import 'package:desk/material/hands.dart';
 import 'package:desk/material/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -111,7 +110,10 @@ const _midHigh = 0.64;
 /// to a thousandth.
 const _chromatic = 0.10;
 
-const _desk = DeskColour.day;
+// There is deliberately no desk here. No ink of any colour is legible on the plank -- the
+// arithmetic in no_word_is_written_on_the_desk_test.dart puts the required ink at Y = -0.006
+// -- so there is no ink/desk pair to declare, and that invariant is structural rather than a
+// contrast sum. Do not add one back: the sibling test is what enforces it.
 const _paper = Color(0xFFF1ECDF); // the palest stock, the hardest ground for a pale ink
 
 const _inks = <String, Color>{

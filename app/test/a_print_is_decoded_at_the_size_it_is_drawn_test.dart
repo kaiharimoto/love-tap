@@ -22,7 +22,6 @@
 // `RawImage` the framework is painting. It is the defect itself rather than a proxy for it: a
 // duration would measure this machine, and a count of `cacheWidth` call sites would pass on a
 // build that computed the wrong one.
-import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 

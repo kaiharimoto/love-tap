@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:desk/spine/spine.dart';
 import 'package:desk/spine/store/store_native.dart';
-import 'package:desk/spine/ulid.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

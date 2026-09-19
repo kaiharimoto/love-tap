@@ -34,7 +34,6 @@ import 'package:desk/spine/spine.dart';
 import 'package:desk/spine/store/store.dart';
 import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/sync.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// A store that answers when it is told to, so the test decides what is outstanding and when.

@@ -58,7 +58,7 @@ List<Event> _aYear({int count = 14000}) {
   for (var k = 0; k < 6; k++) {
     seq++;
     out.add(Event(
-      id: 'A${k}', seq: seq, author: Person.noor, device: DeviceKind.android,
+      id: 'A$k', seq: seq, author: Person.noor, device: DeviceKind.android,
       ts: DateTime.utc(2026, 2, 1).millisecondsSinceEpoch + k * 900000,
       type: 'feeling_authored',
       payload: {

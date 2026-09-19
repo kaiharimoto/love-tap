@@ -10,7 +10,6 @@ import 'dart:convert';
 
 import 'package:desk/spine/seed_loader.dart';
 import 'package:desk/spine/spine.dart';
-import 'package:desk/spine/store/store.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_test/flutter_test.dart';
 

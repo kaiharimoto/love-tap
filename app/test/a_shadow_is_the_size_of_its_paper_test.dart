@@ -104,7 +104,11 @@ void _unconstrainedIsTheSizeOfItsWriting() {
         ),
       ));
       final size = tester.getSize(find.byKey(const ValueKey('chip')));
-      if (out == 0) narrow = size; else wide = size;
+      if (out == 0) {
+        narrow = size;
+      } else {
+        wide = size;
+      }
     }
     expect(narrow.width, lessThan(120),
         reason: 'a four-letter chip came out ${narrow.width} points wide');
