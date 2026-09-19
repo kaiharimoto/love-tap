@@ -9346,7 +9346,7 @@
    }
   },
   "assets/paper/looseleaf_01.webp": {
-   "bytes": 97928,
+   "bytes": 424550,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -9354,6 +9354,7 @@
     "format": "WEBP",
     "light": "day",
     "look": {
+     "albedo": 6.5,
      "fibre": 1000.0,
      "rgb": [
       0.94,
@@ -10452,7 +10453,7 @@
    }
   },
   "assets/paper/spiral_03.webp": {
-   "bytes": 165406,
+   "bytes": 460390,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -10460,6 +10461,7 @@
     "format": "WEBP",
     "light": "day",
     "look": {
+     "albedo": 6.0,
      "fibre": 900.0,
      "rgb": [
       0.93,
@@ -10650,7 +10652,7 @@
    }
   },
   "assets/paper/spiral_04.webp": {
-   "bytes": 167042,
+   "bytes": 472618,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -10658,6 +10660,7 @@
     "format": "WEBP",
     "light": "day",
     "look": {
+     "albedo": 6.0,
      "fibre": 900.0,
      "rgb": [
       0.93,
