@@ -65,11 +65,12 @@
    "points": 0.5,
    "why": "12_search.png results run strictly newest-first across days but are non-monotonic inside 4 Aug -- 07:20, then 07:24, then 07:14 -- and the third result, 'text when home \u00b7 kept', carries no highlighted match and contains no occurrence of the search term in anything shown. Ordering that makes no sense is named in the row; a hit whose match cannot be seen makes the highlighted-search feature, which is otherwise the best thing on the screen, untrustworthy.",
    "measurement": "A test over the seeded year asserts search results are monotonically non-increasing in timestamp within and across days, and that every returned hit carries at least one highlighted span. Re-break by restoring the current comparator and watching the 4 Aug triple come back out of order.",
-   "state": "open",
-   "attempts": 0,
-   "closed_by": null,
+   "state": "closed",
+   "attempts": 1,
+   "closed_by": "7d40122",
    "rank": 22,
-   "owner_priority": "using-it"
+   "owner_priority": "using-it",
+   "closed_note": "Both halves closed, at the level the measurement named. Ordering: the comparator sorted by score with the timestamp only as a tiebreak, so 4 Aug came out 07:20, 07:24, 07:14; it sorts by timestamp descending now, with the event id breaking a tie so the order is stable across runs. Visible match: the third hit was a ritual_kept, whose summary prints `title . kept` and never its note -- the note that morning was `rain the whole way down and i did not go round it`. SearchHit now carries matchedIn (the indexed fields the terms are in) and matchedKind (set when only the kind of thing matched, which is a deliberate feature), and the row draws one under the sentence when the sentence shows none of it. The highlighter also matched the whole query as one literal substring, so a two-word query lit nothing unless the words were adjacent and a prefix term lit nothing at all; it marks whole words now, the same match the index makes. The index's source list is one function shared by the indexer and the query, so the two cannot drift -- the shape of open item 28. app/test/a_hit_you_can_see_in_an_order_you_can_read_test.dart, six tests over the seeded year, re-broken twice and watched to fail on the artifact's own row and its own timestamps. 12_search.png will show it the next time capture.sh runs; nothing further is needed from IMPLEMENT."
   },
   {
    "id": "five-screens-clip-their-own-content-at-an-edge",

@@ -168,6 +168,14 @@ reports. Cycle 2 cost ~1.2M subagent tokens and 583 tool calls and was worth eve
   `<artifact>.surfaces.json` beside every still. When a surface looks wrong, read that first.
 - **A test that passes with the bug put back is a claim, not a test.** Two in this build did.
   Always re-break the thing and watch it fail.
+- **`tools/pack_assets.py` without `--seed=year` makes every test over the seeded year pass by
+  returning early.** Those tests open `assets/seed/index.json`, and when it is not in the bundle
+  they set `absent` and `return` from every case — green, with nothing run. A fresh container's
+  first pack is the bare one, because that is what the error message from `flutter test` asks for,
+  and the suite then reads 132 green while the year is not being touched at all. Firing 21 watched
+  a re-break of the search comparator pass for exactly that reason. Pack with `--seed=year` (80 MB,
+  about two minutes) before believing any run of the suite, and check the count: it is 146 with the
+  year in and 132 without it.
 - **The filesystem is not the daemon, and the address file is not the node.** That same stale-state
   trap bit three times: `capture.sh`, `coldstart_test.dart`, `reliability_test.dart`.
 - **`PaintingContext.paintChild` can leave the context on a different canvas** — a `saveLayer`
