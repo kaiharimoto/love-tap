@@ -7953,7 +7953,7 @@
    }
   },
   "assets/paper/index_02.webp": {
-   "bytes": 138824,
+   "bytes": 305164,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -7961,6 +7961,7 @@
     "format": "WEBP",
     "light": "day",
     "look": {
+     "albedo": 7.0,
      "fibre": 1300.0,
      "rgb": [
       0.95,
@@ -11289,7 +11290,7 @@
    }
   },
   "assets/paper/sticky_yellow_01.webp": {
-   "bytes": 186926,
+   "bytes": 458826,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -11297,6 +11298,7 @@
     "format": "WEBP",
     "light": "day",
     "look": {
+     "albedo": 6.0,
      "fibre": 1200.0,
      "rgb": [
       0.94,
