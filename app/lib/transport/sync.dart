@@ -77,9 +77,16 @@ class SyncEngine {
     }
   }
 
+  /// Push everything the outbox holds, in batches, until it is empty.
+  ///
+  /// `spine.outbox` and not `spine.pending`: a refused event is still pending — it stays where
+  /// its author can see it — and this loop used to offer it to the host again on every round,
+  /// for ever, having just been told no. The mark in the margin said it had stopped and the
+  /// engine had not, and the only way it ever went was by being re-offered behind the person's
+  /// back. It goes when they ask for it to, through `Spine.retry`, and not before.
   Future<void> _drainOutbox() async {
-    while (spine.pending.isNotEmpty) {
-      final batch = spine.pending.take(100).toList();
+    while (spine.outbox.isNotEmpty) {
+      final batch = spine.outbox.take(100).toList();
       // blobs first, so the host never sees an event whose media it cannot serve
       for (final e in batch) {
         for (final h in e.blobs) {
@@ -110,6 +117,8 @@ class SyncEngine {
           _refused++;
         }
       }
+      // A host that answered for none of them — an older one that drops what it will not take
+      // rather than refusing it — would spin this loop for ever otherwise.
       if (assigned.isEmpty) break;
       await spine.applyFromHost(assigned);
       _pushed += assigned.length;
@@ -154,6 +163,10 @@ class SyncEngine {
         'pulled': _pulled,
         'blobs_fetched': _blobsFetched,
         'pending': spine.pending.length,
+        // What is waiting to go, and what is waiting for its author. Two very different numbers
+        // that `pending` had been quietly adding together.
+        'outbox': spine.outbox.length,
+        'refused_waiting': spine.refused.length,
         'cursor': spine.cursor,
         'link': transport.current.toJson(),
       };

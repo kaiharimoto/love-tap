@@ -1,23 +1,23 @@
 {
  "transport": "local",
- "generated_at": "2026-09-19T04:54:34.326934Z",
+ "generated_at": "2026-09-19T07:11:17.210005Z",
  "host": {
   "transport": "local",
   "role": "host",
   "state": "connected",
-  "address": "127.0.0.1:36041",
-  "peer_cursor": 174,
-  "our_cursor": 174,
+  "address": "127.0.0.1:36409",
+  "peer_cursor": 175,
+  "our_cursor": 175,
   "last_error": null,
-  "since": "2026-09-19T04:54:34.314572Z",
-  "last_contact": "2026-09-19T04:54:34.324140Z",
+  "since": "2026-09-19T07:11:17.198432Z",
+  "last_contact": "2026-09-19T07:11:17.207697Z",
   "device_id": "android-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-19T04:54:33.897486Z"
+   "paired_at": "2026-09-19T07:11:16.749656Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -30,19 +30,19 @@
   "transport": "local",
   "role": "client",
   "state": "connected",
-  "address": "http://127.0.0.1:36041",
-  "peer_cursor": 174,
-  "our_cursor": 174,
+  "address": "http://127.0.0.1:36409",
+  "peer_cursor": 175,
+  "our_cursor": 175,
   "last_error": null,
-  "since": "2026-09-19T04:54:34.109536Z",
-  "last_contact": "2026-09-19T04:54:34.325482Z",
+  "since": "2026-09-19T07:11:16.987325Z",
+  "last_contact": "2026-09-19T07:11:17.208966Z",
   "device_id": "pwa-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-19T04:54:33.901357Z"
+   "paired_at": "2026-09-19T07:11:16.754370Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -110,13 +110,21 @@
    "ok": true,
    "detail": "host received it once, the retry did not duplicate it, the client learned its seq"
   },
+  "retry": {
+   "ok": true,
+   "detail": "a refused message stayed in the outbox unsent while the engine ran, carried its reason on the row, and reached the host with seq 18 when its author asked for it again"
+  },
+  "refusal_reported": {
+   "ok": true,
+   "detail": "the host answered for an event it would not take (the other phone is paired to a different name.) instead of dropping it out of the reply"
+  },
   "offline_queue": {
    "ok": true,
    "detail": "26 events queued offline, all delivered on reconnect"
   },
   "reconnect_ordering": {
    "ok": true,
-   "detail": "client holds seq 1..173 gapless and monotonic after the gap"
+   "detail": "client holds seq 1..174 gapless and monotonic after the gap"
   },
   "host_offline_outbox": {
    "ok": true,
@@ -124,8 +132,8 @@
   }
  },
  "all_ok": true,
- "events_host": 174,
- "events_client": 174,
+ "events_host": 175,
+ "events_client": 175,
  "duplicates": 0,
  "same_order_both_sides": true,
  "ordering": "monotonic",
@@ -161,7 +169,7 @@
   "later_check": {
    "status": "pending",
    "why": "the nodes were not answering when this was re-run; the run above stands",
-   "checked_at": "2026-09-19T04:54:34.354329Z"
+   "checked_at": "2026-09-19T07:11:17.238173Z"
   }
  }
 }

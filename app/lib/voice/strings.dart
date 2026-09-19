@@ -33,6 +33,16 @@ class S {
   static const searchHint = 'anything, any time';
   static const sending = 'going';
   static const refused = 'it would not go';
+
+  /// What the person presses to send a refused one again. A refusal that offers nothing is a
+  /// dead end on the one screen this whole build is for, and it is why somebody opens Instagram.
+  static const tryAgain = 'try again';
+
+  /// Why the host would not take something, written in the margin under the note it refused.
+  /// The host chooses which of these to send; they live here because they are words on a screen
+  /// and docs/VOICE.md rules every one of those, wherever it is chosen.
+  static const refusedUnreadable = "the other phone couldn't read it.";
+  static const refusedWrongName = 'the other phone is paired to a different name.';
   static const searchNothing = 'nothing with that in it.';
   static const searchAside = 'a year of it, and every kind of thing in it.';
   static const searchNoneAside = 'try fewer words, or a different month.';

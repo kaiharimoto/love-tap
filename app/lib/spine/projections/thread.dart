@@ -45,6 +45,7 @@ class ThreadItem {
     required this.replyTo,
     required this.delivery,
     required this.writtenEarlier,
+    this.refusedWhy,
   });
 
   final Event event;
@@ -63,6 +64,11 @@ class ThreadItem {
 
   /// Authored well before it arrived (sent from the outbox after a gap).
   final bool writtenEarlier;
+
+  /// Why the host would not take it, when [delivery] is [Delivery.refused]. The reason was on
+  /// the row's own record in the spine and stopped there: the margin said only that it would not
+  /// go, which is the half of the sentence a person can do nothing with.
+  final String? refusedWhy;
 
   String get id => event.id;
   String get type => event.type;
@@ -328,11 +334,14 @@ class ThreadProjector {
 
     // The link going down, or something being refused or picked up for sending, can only change
     // the margin of what is still in the outbox.
-    if (refused.length != _assembledRefused ||
+    // Which ids are refused, not how many: one cleared by a retry and another arriving between
+    // two assembles leaves the count where it was, and the rows would have kept their old marks.
+    final refusedKey = Object.hashAllUnordered(refused.keys);
+    if (refusedKey != _assembledRefused ||
         inFlight.length != _assembledInFlight ||
         linkUp != _assembledLinkUp) {
       _dirty.addAll(_pending);
-      _assembledRefused = refused.length;
+      _assembledRefused = refusedKey;
       _assembledInFlight = inFlight.length;
       _assembledLinkUp = linkUp;
     }
@@ -360,6 +369,7 @@ class ThreadProjector {
         replyTo: replyTo,
         delivery: delivery,
         writtenEarlier: e.seq == null ? false : (_arrivalHint(e) ?? false),
+        refusedWhy: delivery == Delivery.refused ? refused[e.id] : null,
       );
     }
     _dirty.clear();

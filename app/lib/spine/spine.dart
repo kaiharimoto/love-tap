@@ -158,8 +158,30 @@ class Spine {
     _changes.add(const SpineChange(added: [], assigned: []));
   }
 
+  /// The person asks for a refused event to go again: the refusal is dropped and the event is
+  /// back in the outbox, where the sync engine will pick it up on its next round.
+  ///
+  /// This is the only thing that clears a refusal. `markRefused` says the host would not take it
+  /// and the doc on [Delivery.refused] says it is not going anywhere on its own; both were true
+  /// of the mark and neither was true of the sending, because the drain pushed the whole of
+  /// `pending` on every round and a refused event is still pending. So a refusal was a word in
+  /// the margin over a message the phone was quietly re-sending for ever, and the person who
+  /// wrote it had no way to send it themselves. Returns whether there was a refusal to clear.
+  bool retry(String id) {
+    if (_refused.remove(id) == null) return false;
+    _changes.add(const SpineChange(added: [], assigned: []));
+    return true;
+  }
+
   /// Events minted here that the host has not accepted yet (the outbox).
   List<Event> get pending => List.unmodifiable(_pending);
+
+  /// What the sync engine may push: pending, minus everything the host has already refused.
+  ///
+  /// A refused event waits for its author. Re-offering it round after round cannot make a host
+  /// that will not have it change its mind, and it is what made the refused mark a lie.
+  List<Event> get outbox =>
+      _refused.isEmpty ? pending : List.unmodifiable([for (final e in _pending) if (!_refused.containsKey(e.id)) e]);
 
   /// Accepted events followed by pending ones: what the thread shows.
   ///
@@ -258,7 +280,13 @@ class Spine {
 
   /// Host side: accepts events from the client, assigning the next seq to each new one.
   /// Duplicates (already known ids) are returned with their existing seq and not re-added.
-  Future<List<Event>> accept(Iterable<Event> incoming) async {
+  ///
+  /// [refusals] collects, by id, why an event was not stored. It is optional only because most
+  /// callers are the host's own code path; the wire fills it in and sends every reason back. It
+  /// used to have nowhere to go: an invalid event was dropped here with a `continue`, left out of
+  /// the reply, and the phone that wrote it re-pushed it on the next round and every round after,
+  /// while its row said `going`. Silence is the one answer a sender cannot act on.
+  Future<List<Event>> accept(Iterable<Event> incoming, {Map<String, String>? refusals}) async {
     final out = <Event>[];
     final added = <Event>[];
     for (final e in incoming) {
@@ -268,7 +296,10 @@ class Spine {
         continue;
       }
       final problem = specOf(e.type).validate(e.payload);
-      if (problem != null) continue; // the host never stores an invalid event
+      if (problem != null) {
+        refusals?[e.id] = problem; // the host never stores an invalid event, and now says so
+        continue;
+      }
       final assigned = e.withSeq(_maxSeq + 1);
       _ordered.add(assigned);
       _touched();

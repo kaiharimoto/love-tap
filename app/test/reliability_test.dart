@@ -14,6 +14,7 @@ import 'package:desk/transport/sync.dart';
 import 'package:desk/transport/protocol/http_transport.dart';
 import 'package:desk/transport/tailscale/tailnet.dart';
 import 'package:desk/transport/tailscale/tailscale_transport.dart';
+import 'package:desk/voice/strings.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Future<int> _freePort() async {
@@ -179,6 +180,44 @@ void main() {
     await sync.once();
     cap('kill_mid_send').ok = hostHasOnce == 1 && host.all.where((e) => e.id == k1.id).length == 1 && client.byId(k1.id)!.seq != null;
     cap('kill_mid_send').detail = 'host received it once, the retry did not duplicate it, the client learned its seq';
+
+    // a refusal, and the way out of one. Rubric row 01 disqualifies a messenger somebody would
+    // leave for another app, and a message that cannot be sent again is exactly that reason.
+    final ref = await client.append('message', {'text': 'sending you the roster'});
+    client.markRefused(ref.id, S.refusedUnreadable);
+    await sync.once();
+    final stayedPut = host.byId(ref.id) == null && client.pending.any((e) => e.id == ref.id);
+    final refusedRow = projectThread(client.all, refused: client.refused).byId[ref.id]!;
+    client.retry(ref.id);
+    await sync.once();
+    cap('retry').ok = stayedPut &&
+        refusedRow.delivery == Delivery.refused &&
+        refusedRow.refusedWhy == S.refusedUnreadable &&
+        host.byId(ref.id) != null &&
+        client.byId(ref.id)!.seq != null;
+    cap('retry').detail = 'a refused message stayed in the outbox unsent while the engine ran, '
+        'carried its reason on the row, and reached the host with seq '
+        '${client.byId(ref.id)!.seq} when its author asked for it again';
+
+    // and the refusal itself comes back from the host rather than the event disappearing
+    final forged = Event(
+      id: UlidFactory().next(DateTime.now().toUtc()),
+      seq: null,
+      author: Person.noor, // this pairing is teo's; the host may not store the other name
+      device: DeviceKind.pwa,
+      ts: DateTime.now().toUtc().millisecondsSinceEpoch,
+      type: 'message',
+      payload: const {'text': 'not mine to write'},
+    );
+    final verdicts = await clientT.push([forged]);
+    cap('refusal_reported').ok = verdicts.length == 1 &&
+        verdicts.single.id == forged.id &&
+        !verdicts.single.accepted &&
+        verdicts.single.refused == S.refusedWrongName &&
+        host.byId(forged.id) == null;
+    cap('refusal_reported').detail = 'the host answered for an event it would not take '
+        '(${verdicts.isEmpty ? 'nothing at all' : verdicts.single.refused}) instead of '
+        'dropping it out of the reply';
 
     // offline queue
     clientT.scriptedFaults.goOffline();

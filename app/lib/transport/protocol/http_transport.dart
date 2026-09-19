@@ -212,9 +212,14 @@ class HttpTransport implements Transport {
     final body = utf8.encode(jsonEncode({'events': outbox.map((e) => e.toJson()).toList()}));
     final res = await _send('POST', '/events', body: body, contentType: 'application/json');
     final j = jsonDecode(res.body) as Map<String, dynamic>;
-    return (j['accepted'] as List)
-        .map((a) => Accepted(id: (a as Map)['id'] as String, seq: a['seq'] as int))
-        .toList();
+    // A verdict per event, and a verdict may be a refusal. Reading only `seq` here is what kept
+    // the refusal half of the protocol dead: the host's reply had no `refused` in it because the
+    // host never wrote one, and this would have thrown on the null seq if it ever had.
+    return (j['accepted'] as List).map((a) {
+      final m = (a as Map);
+      final why = m['refused'] as String?;
+      return Accepted(id: m['id'] as String, seq: (m['seq'] as int?) ?? 0, refused: why);
+    }).toList();
   }
 
   @override

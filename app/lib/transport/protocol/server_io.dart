@@ -8,7 +8,9 @@ import 'dart:typed_data';
 
 import 'package:path/path.dart' as p;
 
+import '../../spine/event.dart';
 import '../../spine/spine.dart';
+import '../../voice/strings.dart';
 import '../transport.dart';
 import 'http_transport.dart';
 import 'wire.dart';
@@ -216,10 +218,40 @@ class HostServer {
     }
     final pairing = pairingFor();
     // the client may only author as the person it paired as
-    final allowed = incoming.where((e) => e.author == pairing?.clientPerson).toList();
-    final accepted = await spine.accept(allowed);
+    final allowed = <Event>[];
+    // Why each event was not taken, by id. Every event that came in gets a verdict: one it kept,
+    // with its seq, or one it would not, with a reason. It used to answer only with what it kept
+    // and let the rest fall out of the reply, so a phone whose event this host would never take
+    // pushed it again on every round for the life of the pairing, and the row it wrote it on said
+    // `going` for just as long. `Accepted.refused` has been on the wire type since the protocol
+    // was written and nothing ever put a value in it.
+    final refusals = <String, String>{};
+    for (final e in incoming) {
+      if (e.author == pairing?.clientPerson) {
+        allowed.add(e);
+      } else {
+        refusals[e.id] = S.refusedWrongName;
+      }
+    }
+    final problems = <String, String>{};
+    final accepted = await spine.accept(allowed, refusals: problems);
+    // The validator's words are for a log, not for a margin: what a person is shown is that the
+    // other phone could not read it, and the detail rides alongside for the sync log.
+    final details = <String, String>{};
+    for (final entry in problems.entries) {
+      refusals[entry.key] = S.refusedUnreadable;
+      details[entry.key] = entry.value;
+    }
     await _json(req, {
-      'accepted': accepted.map((e) => {'id': e.id, 'seq': e.seq}).toList(),
+      'accepted': [
+        for (final e in accepted) {'id': e.id, 'seq': e.seq},
+        for (final entry in refusals.entries)
+          {
+            'id': entry.key,
+            'refused': entry.value,
+            if (details[entry.key] != null) 'detail': details[entry.key],
+          },
+      ],
       'cursor': spine.cursor,
     });
   }

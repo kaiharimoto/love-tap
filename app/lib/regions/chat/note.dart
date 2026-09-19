@@ -126,6 +126,9 @@ class Note extends StatelessWidget {
           _body(context, scope),
           const SizedBox(height: 3),
           _Margin(item: item, mine: mine),
+          // Under the margin rather than in it: the reason and the way out of it are a block, and
+          // the margin is one line that already runs off a narrow note with three things in it.
+          if (mine && item.delivery == Delivery.refused) _Refused(item: item),
         ],
       ),
     );
@@ -237,7 +240,7 @@ class _Margin extends StatelessWidget {
             const Padding(padding: EdgeInsets.only(left: 5), child: _EditCaret()),
           if (mine) ...[
             const SizedBox(width: 7),
-            _DeliveryMark(delivery: item.delivery, id: item.id),
+            _DeliveryMark(item: item),
           ],
         ],
       ),
@@ -258,11 +261,13 @@ class _EditCaret extends StatelessWidget {
 ///   sending  the same dash with a line running off it
 ///   sent     one tick
 ///   read     one tick and the word, in the ink of the person who read it
-///   refused  a cross, in red, and the reason on the paper
+///   refused  a cross, in red, the reason, and something to press to send it again
 class _DeliveryMark extends StatelessWidget {
-  const _DeliveryMark({required this.delivery, required this.id});
-  final Delivery delivery;
-  final String id;
+  const _DeliveryMark({required this.item});
+  final ThreadItem item;
+
+  Delivery get delivery => item.delivery;
+  String get id => item.id;
 
   @override
   Widget build(BuildContext context) {
@@ -289,12 +294,59 @@ class _DeliveryMark extends StatelessWidget {
           Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed),
           Mark.tick(size: 12, colour: Pen.ballpoint, seed: seed + 1),
         ]),
+      // Only the mark and the words here: what to do about it is a block of its own under the
+      // margin, because three things in the margin Row overflowed the note by 101 pixels and the
+      // third was clipped off the edge of the paper.
       Delivery.refused => Row(mainAxisSize: MainAxisSize.min, children: [
           Text(S.refused, style: Hands.margin(size: 12).copyWith(color: Pen.red)),
           const SizedBox(width: 4),
           Mark.cross(size: 12, colour: Pen.red, seed: seed),
         ]),
     };
+  }
+}
+
+/// The one state a person has to be able to do something about.
+///
+/// Every other delivery state is news. This one is a dead end unless the row offers a way out of
+/// it, and it offered none: a message the host would not take sat there marked, for ever, while
+/// the sync engine re-offered it behind the person's back and the margin never changed. The row
+/// now says what happened, why, and what to press — in that order, because the reason is what
+/// decides whether pressing it is worth anything.
+class _Refused extends StatelessWidget {
+  const _Refused({required this.item});
+  final ThreadItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    final scope = AppScope.of(context);
+    final seed = (item.id.hashCode & 0x7fff) + 2;
+    return Padding(
+      padding: const EdgeInsets.only(top: 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (item.refusedWhy != null)
+            Text(item.refusedWhy!, style: Hands.margin(size: 11.5), maxLines: 2),
+          // A turn-back mark: the same one the app puts in when a word is changed, which is what
+          // sending it again is. `opaque` and the padding together are the press — twelve-point
+          // handwriting is not a tap target on its own.
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => scope.sendAgain(item.id),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 3, right: 10, bottom: 2),
+              child: Row(mainAxisSize: MainAxisSize.min, children: [
+                Mark.turnback(size: 12, colour: Pen.red, seed: seed),
+                const SizedBox(width: 4),
+                Text(S.tryAgain, style: Hands.margin(size: 12.5).copyWith(color: Pen.red)),
+              ]),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

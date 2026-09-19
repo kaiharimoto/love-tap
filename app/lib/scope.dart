@@ -151,6 +151,14 @@ class AppScope extends ChangeNotifier {
   Future<Event> emit(String type, Map<String, dynamic> payload, {DateTime? at}) =>
       spine.append(type, payload, at: at ?? clock.now(), hostAssign: _hostAssign);
 
+  /// Send a refused one again, because the person asked. The refusal is dropped and the sync
+  /// engine is woken so the outbox goes now rather than at the end of its backoff — a person who
+  /// has just pressed something is owed the attempt while they are still looking at it.
+  void sendAgain(String id) {
+    if (!spine.retry(id)) return;
+    sync.kick();
+  }
+
   Future<void> sendTyping(bool on) async {
     try {
       await transport.sendEphemeral(Ephemeral(kind: 'typing', from: me, at: clock.now().millisecondsSinceEpoch, data: {'on': on}));

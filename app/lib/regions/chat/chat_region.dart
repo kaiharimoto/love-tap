@@ -146,7 +146,9 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       scope.spine.markInFlight([going.id]);
       await scope.emit('message', {'text': 'and the bread, if there is any'});
       final no = await scope.emit('message', {'text': 'sending you the roster'});
-      scope.spine.markRefused(no.id, 'the other phone is on an older version');
+      // The reason is on the artifact now, under the margin, beside the way out of it — so it is
+      // the same sentence the host actually sends and not one written here for the photograph.
+      scope.spine.markRefused(no.id, S.refusedUnreadable);
       if (mounted) setState(() {});
       await _scrollToAnchor(no.id);
     };
