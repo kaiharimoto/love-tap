@@ -9493,7 +9493,7 @@
    }
   },
   "assets/paper/looseleaf_02.webp": {
-   "bytes": 101814,
+   "bytes": 440218,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -9501,6 +9501,7 @@
     "format": "WEBP",
     "light": "day",
     "look": {
+     "albedo": 6.5,
      "fibre": 1000.0,
      "rgb": [
       0.94,
@@ -9639,7 +9640,7 @@
    }
   },
   "assets/paper/looseleaf_03.webp": {
-   "bytes": 103212,
+   "bytes": 446664,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -9647,6 +9648,7 @@
     "format": "WEBP",
     "light": "day",
     "look": {
+     "albedo": 6.5,
      "fibre": 1000.0,
      "rgb": [
       0.94,
