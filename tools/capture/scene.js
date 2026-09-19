@@ -335,6 +335,7 @@ function ensure(p) {
         // microseconds still to come; the take ends on the first shot after it reaches zero, so a
         // clip cannot acquire a tail of held frames because a count was written down by hand.
         const stop = step.stop;
+        let started = false;   // it has to have something to count down before zero means over
         let stopped = 0;
         // where this step's frames start in the directory, so one clip can be made of two takes:
         // a note opening, and then the thread it opened in
@@ -376,9 +377,14 @@ function ensure(p) {
           if (stop) {
             const left = await page.evaluate((h) => (window[h] ? window[h]() : -1), stop);
             if (left === -1) { problems.push('frames: no ' + stop + ' handle'); break; }
-            // one shot past zero, so the last frame of the clip is the settled thing and not the
-            // frame before it finished arriving
-            if (left === 0 && stopped++ > 0) break;
+            // A zero before the thing has started is the widget not having been built yet, not the
+            // thing being over: the sequence is looked up asynchronously, so the handle answers
+            // zero for the first frame or two. Taking that at face value would end the take two
+            // frames in, which is a worse artifact than the held tail this replaces.
+            if (left > 0) started = true;
+            // then one shot past zero, so the last frame of the clip is the settled thing and not
+            // the frame before it finished arriving
+            if (started && left === 0 && stopped++ > 0) break;
           }
         }
         if (drive && drive.kind === 'drag' && !drive.release) await page.mouse.up();
