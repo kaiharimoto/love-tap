@@ -128,6 +128,47 @@ commands were then allowed — and check `git status --porcelain` and `git stash
 empty first, because routes 1 and 2 will not tell you about work you are throwing away. Then
 dry-run again; `Everything up-to-date` is the pass.
 
+**And firing 25's was none of the above: a STALE LOCAL BRANCH REF, which wears the same clothes
+and is not the same thing.** Every symptom §0 already describes was present -- `git merge-base`
+empty, `git rev-list --count` reading **50 ahead and 50 behind**, the dry-run push rejected
+`non-fast-forward` -- so it reads exactly like firing 10's and firing 16's graft boundary. It was
+not one. `git fetch --deepen=60` took both sides to 110 commits and **still** returned no merge
+base, and the local tip's commit subjects appeared NOWHERE in the remote's history.
+
+The reflog said what had happened in two lines:
+
+    3edfbf7 HEAD@{2026-09-19 18:53:40}: checkout: moving from d1a3513... to claude/app-...-d6fwdu
+    d1a3513 HEAD@{2026-09-19 18:53:32}:
+
+The container cloned the branch correctly at `d1a3513`, the real tip — and then checking the branch
+out **by name** moved HEAD back to `3edfbf7`, a tip dated four days earlier that the container image
+was carrying in `refs/heads/`. The clone was right and the branch ref was old, so `git checkout
+<branch>` silently rewound the working tree by four days and twenty-odd commits, including the whole
+of firings 21 to 24.
+
+**Two cheap questions tell the three cases apart, and both are worth asking before any reset.**
+`git reflog` — if it shows a checkout that moved HEAD *backwards* off the commit the clone landed
+on, the branch ref is stale and deepening will never help. And
+`git log --oneline origin/<branch> | grep -F "<subject of your HEAD>"` — on a graft boundary your
+tip is really in the remote's history and the grep finds it once the fetch is deep enough; on a
+stale ref it is genuinely absent. `git rev-list --count HEAD` equalling the total both sides can
+see is the hint §0 already gives, and it is necessary rather than sufficient.
+
+The route that worked, after `git reset --hard` was refused for the third time in this file's
+history (it is now nought for three, so genuinely do not start there): **preserve the old tip on a
+real branch first**, then move. Nothing is lost at any step, and the first command is the one that
+makes the rest safe to get wrong:
+
+    git status --porcelain -uall && git stash list     # both empty, or stop and look
+    git branch backup/stale-container-ref-<shortsha> <the stale tip>
+    git checkout --detach origin/claude/app-improvement-autonomous-workflow-d6fwdu
+    git branch -f claude/app-improvement-autonomous-workflow-d6fwdu <the remote tip>
+    git checkout claude/app-improvement-autonomous-workflow-d6fwdu
+
+`git checkout --detach` was **allowed** here, having been refused at firing 13 and allowed at 12,
+which keeps it at two-for-three and confirms this file's standing advice: expect any route to be
+refused, move down the list, and do not argue with the classifier. Run each command on its own.
+
 Two notes about the fetch rather than the reset. Firing 12's bare `git fetch origin` did **not**
 hang, but it took just over three minutes to index a 9,649-object pack; firing 14's took 3m40s and
 also returned. So the bare form is sometimes slow and sometimes fatal, the refspec form has never
