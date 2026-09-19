@@ -7,11 +7,33 @@ This repository is built by an autonomous loop. If you are a firing of that loop
 `loop/WORKER_PROMPT.md` is your running order, `docs/LOOP.md` is the machine behind it, and
 `loop/STATE.json` is where you are. If you are a person, everything below applies to you too.
 
+## The owner's steer, which outranks everything below
+
+2026-09-19, verbatim:
+
+> "I made the mistake of asking for too many demo populated items, if that's what they're stuck on.
+> Those aren't important because it's using it and the UI that matters more."
+
+**Using it, and the UI, come first.** Populated demo media — the sixteen absent photographs, the
+seeded year's videos and voice notes — is explicitly not important. Evidence plumbing that exists
+only so the scoring harness can score itself is not important either; thirteen of the forty open
+queue items at firing 20 were that. Fix a ruler only when you cannot see without it.
+
+The accepted cost, stated plainly so no firing re-litigates it: deprioritising demo media **caps
+`messenger_reliability`, the heaviest rubric row**. The score will stall while the app gets better
+to use. That is the instruction working, not the loop failing. Do not re-promote a demo-content
+item to lift a number.
+
+Every open item in `loop/STATE.json` carries an `owner_priority` tag — `using-it`, `the-ui`,
+`harness`, `deprioritised-demo-content` — and the queue is ranked by it. `loop/WORKER_PROMPT.md`
+§3c is the long form.
+
 ## Read in this order
 
 1. `docs/BRIEF.md` — **authoritative**. The mission, the rubric, the anti-goals, the evidence set,
-   the coverage floors. Where anything disagrees with it, it wins. It is 85 KB; read it whole in a
-   stage that judges or plans, and skip it in a stage that is executing one named item.
+   the coverage floors. Where anything disagrees with it, it wins — except the owner's steer
+   above, which outranks it. It is 85 KB; read it whole in a stage that judges or plans, and skip
+   it in a stage that is executing one named item.
 2. `DIRECTION.md` — the design law, and its dated decisions log. `docs/COLOR.md` when it exists is
    the colour half of the same law and takes precedence on anything it covers.
 3. `loop/STATE.json` — the cycle, the stage, the queue, what is blocked.

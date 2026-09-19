@@ -3393,3 +3393,55 @@ four builds and eight probes fitted inside this firing comfortably, and they are
 any of the above is a measurement rather than another guess at a picture.
 
 **Lease released.**
+
+---
+
+## Between firings 20 and 21 — the owner re-ranks the queue
+
+Not a firing. The lease was free and no stage ran; this is the orchestrator recording an
+instruction from the owner and re-ordering the queue against it, so the next firing does not have
+to discover it from a chat transcript it cannot read.
+
+The owner, on being shown what twenty firings had been working on:
+
+> "I made the mistake of asking for too many demo populated items, if that's what they're stuck on.
+> Those aren't important because it's using it and the UI that matters more."
+
+Every one of the 40 open queue items was tagged `owner_priority` and the queue re-sorted by it:
+
+| tag | items |
+|---|---:|
+| `the-ui` | 16 |
+| `harness` | 13 |
+| `using-it` | 8 |
+| `deprioritised-demo-content` | 3 |
+
+**The interesting number is 13, not 3.** Only one item was genuinely the demo media the owner was
+apologising for — `the-gallery-has-no-photographs-because-sixteen-of-them-are-not-on-disk`. The
+larger finding is that thirteen items existed so the scoring harness could score itself: rulers,
+manifests, regression detectors, evidence plumbing. Firing 18 had already said it in other words —
+*"the queue was ordered by what could be measured, not by what was blocking"* — and the owner has
+now said it from the outside, without having read that sentence.
+
+Three real usability holes were sitting below the harness work and are now the top of the queue:
+
+1. `a-failed-message-offers-no-way-to-retry` — a messenger that drops a message and offers nothing.
+2. `search-is-non-monotonic-inside-one-day-and-returns-a-hit-with-no-visible-match`.
+3. `five-screens-clip-their-own-content-at-an-edge`.
+
+Then: a blank authored feeling, a feeling coming to rest as a card with a read receipt, typing
+indication that exists nowhere, a raw loopback URL set in the handwriting face, and three of six
+shelter feelings being one gesture.
+
+**The cost, accepted rather than worked around.** `messenger_reliability` is the heaviest row at
+30 points and part of what it is scored on is evidence artifacts showing a populated app. Leaving
+the demo media undone caps it. The rubric score will stall — possibly for several cycles — while
+the app gets materially better to hold. That is the instruction working. It is written into
+`CLAUDE.md` and `loop/WORKER_PROMPT.md` §3c so no future firing re-promotes a demo-content item to
+lift a number and calls it progress.
+
+One demotion carries a caveat: `twelve-seconds-of-cold-start-on-every-seeded-scene` was demoted as
+an artifact of the seeded year, but nobody has established whether the cost is O(n) in the event
+log. If it is, it will bite two real users eventually, and it comes straight back.
+
+Lease was never taken and is still free. Stage is unchanged: IMPLEMENT, cycle 3.

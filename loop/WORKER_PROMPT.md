@@ -208,6 +208,39 @@ If every open queue item is genuinely blocked — which has not happened yet —
 `loop/JOURNAL.md`, set `blocked` in `loop/STATE.json` with what would unblock it, and stop. That
 is a real outcome. "Waiting for a secret" is not.
 
+### 3c. The owner's standing steer, which outranks the rubric
+
+Recorded at firing 20 from the owner, verbatim:
+
+> "I made the mistake of asking for too many demo populated items, if that's what they're stuck on.
+> Those aren't important because it's using it and the UI that matters more."
+
+It is in `loop/STATE.json` as `owner_steer`, and every open queue item carries an `owner_priority`
+tag against it: `using-it`, `the-ui`, `harness`, `deprioritised-demo-content`. Drain them in that
+order of preference where the rubric leaves you a choice, and **where the rubric and the steer
+disagree, the steer wins**.
+
+What it means in practice:
+
+- **`using-it` first.** A thing a person holding the phone would hit: a failed message with no way
+  to retry, a search that returns a hit you cannot see, a screen that clips its own content, a
+  feeling that arrives as a blank sheet.
+- **`the-ui` next.** A surface that is flat when it should be paper, a vocabulary drawn as alpha, a
+  raw loopback URL set in the handwriting face.
+- **`harness` only when it unblocks one of the above.** Thirteen of the forty open items at firing
+  20 served the scoring harness rather than the app. Evidence plumbing that exists only so the
+  harness can score itself is not work the owner asked for. Fix a ruler when you cannot see without
+  it; do not fix a ruler because it is the easiest thing in the queue.
+- **`deprioritised-demo-content` last, or not at all.** The sixteen absent photographs, the seeded
+  year's media: populated demo data is explicitly not important. **This caps
+  `messenger_reliability`, the heaviest row, and that is an accepted cost, not a task.** Do not
+  re-promote a demo-content item to lift a score. If the score stalls while the app gets better to
+  use, the loop is doing what it was told.
+
+The one caveat carried forward: `twelve-seconds-of-cold-start-on-every-seeded-scene` was demoted as
+a seeded-scene artifact, but if the cost turns out to be O(n) in the event log it will bite two real
+users eventually. Establish that before dismissing it again.
+
 ### 4. End the firing
 
 Update `loop/STATE.json` — increment `firing`, record what happened in `history`, set the stage for
