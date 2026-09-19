@@ -125,7 +125,7 @@ class Note extends StatelessWidget {
           if (item.replyTo != null) _ReplyStrip(target: item.replyTo!, registry: registry),
           _body(context, scope),
           const SizedBox(height: 3),
-          _Margin(item: item, mine: mine),
+          if (_marginBelongs(thrown, mine)) _Margin(item: item, mine: mine),
           // Under the margin rather than in it: the reason and the way out of it are a block, and
           // the margin is one line that already runs off a narrow note with three things in it.
           if (mine && item.delivery == Delivery.refused) _Refused(item: item),
@@ -143,6 +143,26 @@ class Note extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// Whether this row gets the pencil line under it: the time it was written, whether it was
+  /// edited, how far it got, whether they have read it.
+  ///
+  /// A message gets one. A feeling does not, once it has landed. 13_messenger_states.png is the
+  /// row's own named failure mode twice over: `empty chair / Thu 3 Sep . 17:19 read` sat under a
+  /// drawn object in furniture identical, line for line, to `left the key under the pot /
+  /// Thu 3 Sep . 19:40 read` fourteen hundred pixels below it. A gesture that arrives as a
+  /// sensation and then comes to rest as a message with a receipt on it is a message; the row is
+  /// about the difference, and cycle 3 fixed the arrival and left the resting state alone.
+  ///
+  /// It keeps the line while it is still in the outbox, because a feeling that has not gone has
+  /// something to say and something to be done about it -- that is the `try again` from the item
+  /// above this one, and it is on the same pencil line. Once it has gone there is nothing to say:
+  /// it is a thing on the desk, and a thing on the desk has no delivery state written under it.
+  bool _marginBelongs(bool thrown, bool mine) {
+    if (!thrown) return true;
+    if (!mine) return false;
+    return item.delivery != Delivery.sent && item.delivery != Delivery.read;
   }
 
   /// Which types are a line in the margin rather than a piece of paper — asked of the registry,

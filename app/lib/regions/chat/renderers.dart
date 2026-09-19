@@ -94,7 +94,11 @@ Widget objectLanding(NoteContext c) {
         // scrap laid over it would be a sticker on a letter
         onPaper: false,
       ),
-      const SizedBox(height: 4),
+      // A rendered object's shadow is painted at up to 1.12 of the square it was given and is
+      // free to fall outside it, so at four points the drop shadow of a big one landed across the
+      // name under it and darkened it -- `hold / Fri 18 Sep . 13:46` in 08_state_propagating.
+      // This is clearance, not a proof; what proves it is the capture.
+      const SizedBox(height: 10),
       Text(f.name, style: Hands.margin(size: 13), textAlign: TextAlign.center),
     ],
   );
