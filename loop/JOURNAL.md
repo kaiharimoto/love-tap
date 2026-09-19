@@ -3445,3 +3445,97 @@ an artifact of the seeded year, but nobody has established whether the cost is O
 log. If it is, it will bite two real users eventually, and it comes straight back.
 
 Lease was never taken and is still free. Stage is unchanged: IMPLEMENT, cycle 3.
+
+---
+
+## Firing 21 — IMPLEMENT, cycle 3 — the whole `using-it` half of the queue
+
+Lease taken at 06:56Z, four hours, released at the end of this entry. Push proved before any work.
+
+**The checkout read as a fork and was not one.** `git fetch` on the branch reported
+`+ 3edfbf7...25794ee (forced update)`, `merge-base --all` came back empty, and the counts read 50
+ahead and 50 behind — the shape `WORKER_PROMPT.md` §0 warns about. It is a shallow clone at depth
+50 and the tip it was made against was four days old. `--deepen=60` did not fill the graft in, so
+route 1 (`git checkout -B <branch> origin/<branch>`) took it; the working tree was clean and the
+local branch held no commit of its own. Nothing was lost and nothing was force-pushed.
+
+**Eight items closed, and they are the whole of `owner_priority: using-it`.** In queue order:
+
+| # | item | what it actually was |
+|---|---|---|
+| 1 | a failed message offers no way to retry | three holes, not one — see below |
+| 2 | search is non-monotonic and returns an invisible hit | a score-first comparator, and a phrase-literal highlighter |
+| 3 | five screens clip their own content | three of five were the declaration, not the layout |
+| 4 | an authored feeling arrives as a blank sheet | a `CustomPaint` with no size |
+| 5 | a feeling comes to rest as a card with a read receipt | the resting state cycle 3 never touched |
+| 6 | typing indication exists nowhere | it always existed; nothing could photograph it |
+| 7 | a raw loopback URL in the handwriting font | one declared, one invisible to the declaration |
+| 8 | three of six shelter feelings are one gesture | the wrong pair; the right one was elsewhere |
+
+Rank 9, the four-point one, has its code half done and tested and stays open because its
+measurement is in pixels.
+
+**Rank 1 was a dead end in three places at once, and two of them were invisible.** The host dropped
+what it would not take without saying so — `_push` answered only with what it kept, and
+`Accepted.refused` had carried a doc comment explaining why a refusal is per event since the
+protocol was written, with nothing ever putting a value in it. The sync engine drained
+`spine.pending`, and a refused event is still pending, so it was re-offered to the host on every
+round for the life of the pairing, behind the person's back, having already been told no. Only the
+third — the row saying `it would not go` and nothing else — was the one the queue item could see.
+
+**Three findings did not survive their own measurement, and saying so is the point.**
+
+* Rank 3 named five clipped screens. Three of them were the *declaration*: `__deskTextRuns`
+  intersected a paragraph's box with the frame, and a scrollable lays its last child out past the
+  end of its viewport and clips it there. `02_chat` declared a message two pixels tall at y=3118 of
+  a 3120-pixel frame, in the band the tab strip is painted in and where none of that message is
+  drawn. Every one of those sidecars read `offscreen: 0`, which was true and useless. The measured
+  answer to the item's first clause — bottom padding of a tab strip plus a line — is that it is
+  already there (96, 96, 96, 90 against a 62-point strip) and the strip is a sibling of the regions
+  in a `Column`, not a bar over them.
+* Rank 4's second blank sheet is `RegionPad`, the paper the regions are drawn on, which `app.dart`
+  introduces deliberately and which is visible behind every other region in the same crop strip.
+* Rank 8 named `here`, `its_okay` and `steady` as one gesture separated only by count and by
+  ≤40/255 of amplitude. Measured, they are 3.22, 3.34 and 5.50 JND apart: their pulses and gaps
+  differ by up to 2×, and a doubling of tempo alone is 3.8 JND. The real pair is `stuck_with_me`
+  and `confetti` at 1.83 — seven or eight 30 ms taps at 30–40 ms gaps either way, separated only by
+  an amplitude arch an LRA renders poorly, and invisible to a string-equality check because the two
+  strings differ in every character.
+
+**The thing that nearly let rank 2 close falsely, and which is now in `CONTINUE.md` §5.**
+`app/assets` had been packed without `--seed=year`. Every test guarded on the seeded year sets
+`absent` and returns — green, with nothing run. The first run of the new search test passed against
+a deliberately re-broken comparator for that reason. The suite reads 132 without the year and 146
+with it; the count is how you tell which you are looking at.
+
+**Instruments built, because two items could not be closed without one.** A perceptual distance
+over haptic sequences — six terms, each divided by its own published Weber fraction, L2-combined,
+with a 2.0 JND floor defended in the tool's docstring and in `docs/FEELINGS.md`, and a `--selftest`
+that re-breaks it on five cases. `capture.sh` runs the selftest first, for the same reason the
+manifest's does. That closed rank 8 and `haptics-json-is-a-catalogue-not-a-discrimination-test`,
+which the queue itself called inseparable.
+
+**Every change was re-broken and watched to fail.** Fourteen re-breaks across nine commits. Two of
+them caught mistakes in my own first drafts rather than in the old code: the retry affordance's
+first version overflowed a note by 101 pixels, which is rank 3's own failure mode, and the first
+version of the search-affordance test asserted a scroll position rather than the property.
+
+**Evidence is now stale and `evidence_fresh_as_of` says so.** Nine commits touched `app/lib`. The
+committed stills were captured at firing 16 and DIAGNOSE may not score on them. A capture is
+OBSERVE's work, not IMPLEMENT's, so this firing did not run one — but the toolchain is bootstrapped
+and `app/assets` is packed with the year in it, so the next OBSERVE starts from a warm container if
+it gets one.
+
+**What the next IMPLEMENT firing should expect.** The queue opens on `the-ui` now; `using-it` is
+empty. Rank 9's code is done and its measurement is a capture. `no-surface-in-this-app-is-drawn-at-
+its-own-resolution` is looking like the parent of at least two other open items — the remaining flat
+samples under `the-backing-surface-of-three-screens-is-one-rgb-value`, and the vertical-bar comb,
+which a crop of `13_messenger_states.png` shows hanging off the bottom edge of one sheet rather than
+laid across the paper. Both were measured on stills that predate firing 20's `hashOf` fix, so
+re-measure before spending a firing on either.
+
+Two new `asks[]` entries, neither blocking: 05_settings cannot show paired state or the six words in
+this container, for the same `/dev/kvm` reason as 09 and 16; and the 2.0 JND floor is a stated
+convention that a forced-choice identification run on real hardware would settle.
+
+Stage unchanged: IMPLEMENT, cycle 3. Queue: 31 open, 35 closed, 5 superseded. Lease released.
