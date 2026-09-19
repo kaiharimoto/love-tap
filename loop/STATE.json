@@ -1067,7 +1067,7 @@
   {
    "firing": 19,
    "stage": "IMPLEMENT",
-   "commit": "pending",
+   "commit": "483900de",
    "did": "Established rank 1's cause before spending Blender on it, as the dispatch required: the render is the flat rectangle, because fold.py passed no rules_image where stocks.py passes one for all fifty-four stocks. Wired the stock's rules through with a UV scale so the pitch survives the change of sheet, probed it, then re-rendered all 240 frames (2h11m, six chunks, committed as they landed). Closed both broken gates the triage put at the top -- the DIFF.json double writer and the manifest gate -- each with an end-to-end selftest, each re-broken and watched to fail, each wired into capture.sh above the gate it checks. The manifest gate turned out wrong in both directions and its 115 false 'missing' files had sent firing 18's triage to the wrong root cause for the heaviest row, so rank 2's diagnosis was withdrawn and replaced. Located rank 5 exactly. Bootstrapped a toolchain and ran the suite for the first time in the build's history: analyze 0 errors, 123 tests green."
   }
  ],
