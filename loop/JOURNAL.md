@@ -3661,3 +3661,78 @@ repository, as `CLAUDE.md` warns; reverted too.
 
 No new `asks[]`. Stage unchanged: IMPLEMENT, cycle 3. Queue: 32 open — the 31 inherited plus the one
 filed here — 35 closed, 5 superseded. Lease released.
+
+## Firing 23 — OBSERVE, cycle 3 — the stage was switched on purpose, and here is the argument
+
+**Lease taken** at 2026-09-19T12:58Z, three hours, `session_01M3UMskRKNw5gzXdBfVToV2`. `lease` was
+`null` on arrival and firing 22 had released it cleanly.
+
+**The push pre-flight took the long way round and it was not a credential fault.** `git fetch` on
+the branch refspec reported `+ 3edfbf7...222d4c1 (forced update)` and the dry-run push came back
+`non-fast-forward`. `git merge-base` returned empty and `git branch -r --contains` found the local
+tip on no remote branch — the shape §0 of `WORKER_PROMPT.md` describes, and for once it was worth
+checking rather than assuming, because this one was **not** a graft artifact of two shallow clones
+taken hours apart. The local tip was dated 2026-09-15 and the remote tip 2026-09-19: four days and
+three commits of local history that the branch has never carried. The three were checked by content
+before anything was thrown away — `evidence/legibility.json`, `tools/check/legibility.py`,
+`tools/check/palette.py`, `critics/visual_design.md` and `.github/workflows/build.yml` all exist on
+the remote tip — so the container was handed a stale snapshot of a lineage that has since been
+rewritten, not work anybody did here. Route 1 (`checkout -B`) was not needed; `git reset --hard`
+was allowed in this container, which makes it **one refusal for two attempts over the run of
+firings, not two for two**. Dry run then read `Everything up-to-date`. Note for a successor: the
+`(forced update)` line and an empty `merge-base` are still not enough on their own to call a
+divergence real — date the two tips and look for the local subjects in the remote log before you
+believe either story.
+
+**THE DECISION THIS FIRING WAS ASKED TO SETTLE: IMPLEMENT OR OBSERVE. It is OBSERVE.**
+
+`loop/STATE.json` said `IMPLEMENT`, entered at firing 19, queue not drained — 32 open — and
+`docs/LOOP.md` advances that stage only on an empty queue. So the letter of the protocol said carry
+on. It was switched anyway, and the argument is about **which 32 are open**, not how many.
+
+Firing 21 drained `owner_priority: using-it` to **zero**. Nothing remains in the bucket the owner's
+steer puts first. What is left is 17 `the-ui`, 12 `harness`, 3 `deprioritised-demo-content`.
+
+**All seventeen of the `the-ui` items name a pixel measurement as their close condition, and every
+one of them states its baseline as a number read off `evidence/` as captured at firing 16.** Rank 1
+(six points, the highest-value item in the build) wants `L_std >= 30` at (200,1350) in
+`13_messenger_states.png` "against today's 1.310 / 11" and `repeated_fraction <= 0.02` "against
+today's 0.163 / 23". Rank 5 wants the flat fill gone "against today's 59.5%". Rank 9 wants glyph
+variance "against today's 3.07". Rank 24 wants sharpness "against today's 0.66". **`today` in all
+seventeen of those sentences is firing 16.** Eleven commits of `app/lib` have landed since, and
+firing 20's `hashOf` repair moved every paper, tear and patch assignment on the PWA — which is to
+say it moved the exact quantities fifteen of the seventeen are measured in.
+
+So an IMPLEMENT firing that picked up any of them would be doing one of two forbidden things:
+claiming a fix against a baseline that has not been the baseline for two firings, or re-deriving
+the baseline by hand from a stale PNG. `CLAUDE.md` forbids the first outright — *never claim a fix
+without the measurement that shows it* — and `docs/LOOP.md` says the same thing from the other end
+in its reason for stage 0 existing at all: *a diagnosis made from stale artifacts is an assertion
+with a number attached.* `evidence_fresh_as_of` has read **STALE AS OF FIRING 21** since firing 21.
+Firing 21 asked for the refresh; firing 22 wrote *"if the next firing finds the same shape, it
+should say so loudly, because that is the argument for OBSERVE rather than a sixth IMPLEMENT
+firing."* It found the same shape.
+
+**What was weighed against it, so this is not a rubber stamp.** There is real buildable work that
+needs no capture. Ranks 26, 27, 28 and 29 are source faults closed by a grep and a widget test;
+rank 10 is a tool change measurable over the committed stills. Five items, and every one of them is
+tagged `harness`. Doing those while the whole of `the-ui` sits blind is the thing
+`WORKER_PROMPT.md` §3c names in so many words: *fix a ruler when you cannot see without it; do not
+fix a ruler because it is the easiest thing in the queue.* They keep — none of them decays. And the
+capture is not itself a harness item under that rule; the dispatcher's steer is explicit that it is
+how anyone sees the UI at all.
+
+**The cost was checked before the choice, not after.** This is a fresh container: no toolchain, no
+apt prerequisites, `app/assets` unpacked. `evidence_fresh_as_of`'s note that "this container has
+the toolchain bootstrapped" was written about firing 21's container and is dead. So the bill is
+`tools/apt-prereqs.sh`, then `bootstrap.sh --profile=web`, then `tools/pack_assets.py --seed=year`,
+then `./capture.sh` — the fifteen-minute half and the forty-five-minute half, plus the checks.
+Disk read 29 GB available against the 6 GB `capture.sh` needs and the 8 GB rung 1 of the ladder
+watches for, so the ladder starts at 0.
+
+**Expect `DIFF.json` to differ from `evidence/.previous` almost everywhere.** That is the `hashOf`
+repair landing in the artifacts for the first time, not a library-wide regression, and
+`evidence_fresh_as_of` lists what firing 21 changed that a still should show: the refused row with
+its reason and `try again`, 12_search newest-first with per-word highlighting, the search strip
+above the thread in 02_chat, no raw loopback address in 05_settings, full-strength ink on both
+pickers, a typing frame in 13_messenger_states. Those are the first things to check.
