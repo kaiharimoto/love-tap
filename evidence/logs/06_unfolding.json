@@ -10,31 +10,31 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3155
+   "ms": 2833
   },
   {
    "do": "wait",
-   "ms": 2004
+   "ms": 2002
   },
   {
    "do": "scrollTo",
-   "ms": 1717
+   "ms": 1552
   },
   {
    "do": "wait",
-   "ms": 1602
+   "ms": 1603
   },
   {
    "do": "unfold",
-   "ms": 439
+   "ms": 407
   },
   {
    "do": "frames",
-   "ms": 216226
+   "ms": 214549
   },
   {
    "do": "report",
-   "ms": 416
+   "ms": 433
   }
  ],
  "shots": [
@@ -103,7 +103,7 @@
   }
  ],
  "blob_waits": [],
- "cold_ms": 11438,
+ "cold_ms": 10774,
  "problems": [],
  "ok": true
 }

@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3189
+   "ms": 2611
   },
   {
    "do": "wait",
-   "ms": 1702
+   "ms": 1703
   },
   {
    "do": "scrollTo",
-   "ms": 2340
+   "ms": 3564
   },
   {
    "do": "wait",
@@ -26,7 +26,7 @@
   },
   {
    "do": "stage",
-   "ms": 2788
+   "ms": 3411
   },
   {
    "do": "wait",
@@ -34,19 +34,19 @@
   },
   {
    "do": "partnerTyping",
-   "ms": 1281
+   "ms": 1492
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1103
   },
   {
    "do": "shot",
-   "ms": 2152
+   "ms": 2333
   },
   {
    "do": "report",
-   "ms": 716
+   "ms": 712
   }
  ],
  "shots": [
@@ -64,28 +64,28 @@
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0HTT044MCAH1W35E4",
-    "0001MCJ1M0HTT044MCAH1W35E5",
-    "0001MCJ1M0HTT044MCAH1W35E6",
-    "0001MCJ1M0HTT044MCAH1W35E7"
+    "0001MCJ1M0PX3B8TK1B1W288QR",
+    "0001MCJ1M0PX3B8TK1B1W288QS",
+    "0001MCJ1M0PX3B8TK1B1W288QT",
+    "0001MCJ1M0PX3B8TK1B1W288QV"
    ],
    "tears": {
     "0001M4GW48FEW3M67XKAZT5051": "tear_031",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M0HTT044MCAH1W35E4": "tear_035",
-    "0001MCJ1M0HTT044MCAH1W35E5": "tear_055",
-    "0001MCJ1M0HTT044MCAH1W35E6": "tear_018",
-    "0001MCJ1M0HTT044MCAH1W35E7": "tear_040"
+    "0001MCJ1M0PX3B8TK1B1W288QR": "tear_035",
+    "0001MCJ1M0PX3B8TK1B1W288QS": "tear_055",
+    "0001MCJ1M0PX3B8TK1B1W288QT": "tear_018",
+    "0001MCJ1M0PX3B8TK1B1W288QV": "tear_040"
    },
    "stocks": {
     "0001M4GW48FEW3M67XKAZT5051": "legal_01",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
     "0001M59VY0YA13H9M86HTA6XNP": "receipt_01",
-    "0001MCJ1M0HTT044MCAH1W35E4": "looseleaf_03",
-    "0001MCJ1M0HTT044MCAH1W35E5": "legal_01",
-    "0001MCJ1M0HTT044MCAH1W35E6": "legal_02",
-    "0001MCJ1M0HTT044MCAH1W35E7": "lined_01"
+    "0001MCJ1M0PX3B8TK1B1W288QR": "legal_01",
+    "0001MCJ1M0PX3B8TK1B1W288QS": "lined_03",
+    "0001MCJ1M0PX3B8TK1B1W288QT": "lined_02",
+    "0001MCJ1M0PX3B8TK1B1W288QV": "looseleaf_03"
    },
    "scroll": {
     "first": 8384,
@@ -125,7 +125,7 @@
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 7324,
+ "cold_ms": 10736,
  "problems": [],
  "ok": true
 }

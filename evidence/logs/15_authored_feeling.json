@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 1732
+   "ms": 3183
   },
   {
    "do": "wait",
-   "ms": 1803
+   "ms": 1802
   },
   {
    "do": "goTo",
-   "ms": 1868
+   "ms": 2665
   },
   {
    "do": "wait",
@@ -26,39 +26,39 @@
   },
   {
    "do": "openCorner",
-   "ms": 835
+   "ms": 1163
   },
   {
    "do": "frames",
-   "ms": 31792
+   "ms": 36962
   },
   {
    "do": "sendFeeling",
-   "ms": 1030
+   "ms": 1013
   },
   {
    "do": "frames",
-   "ms": 77283
+   "ms": 88577
   },
   {
    "do": "sendFeeling",
-   "ms": 877
+   "ms": 1202
   },
   {
    "do": "frames",
-   "ms": 126894
+   "ms": 146215
   },
   {
    "do": "openCorner",
-   "ms": 549
+   "ms": 761
   },
   {
    "do": "frames",
-   "ms": 27830
+   "ms": 31480
   },
   {
    "do": "report",
-   "ms": 416
+   "ms": 426
   }
  ],
  "shots": [
@@ -66,24 +66,32 @@
    "frames": 32,
    "dir": "evidence/frames/15_authored_feeling",
    "ms": 8,
+   "fps": 60,
+   "stop": null,
    "drive": null
   },
   {
    "frames": 94,
    "dir": "evidence/frames/15_authored_feeling",
    "ms": 8,
+   "fps": 60,
+   "stop": null,
    "drive": null
   },
   {
    "frames": 150,
    "dir": "evidence/frames/15_authored_feeling",
    "ms": 8,
+   "fps": 60,
+   "stop": null,
    "drive": null
   },
   {
    "frames": 32,
    "dir": "evidence/frames/15_authored_feeling",
    "ms": 8,
+   "fps": 60,
+   "stop": null,
    "drive": null
   }
  ],
@@ -92,18 +100,18 @@
    "region": 1,
    "visible": [
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0FT07NG3EFWZYABR8",
-    "0001MCJ1M0FT07NG3EFWZYABR9"
+    "0001MCJ1M0RZMJWMDRZ0120B1P",
+    "0001MCJ1M0RZMJWMDRZ0120B1Q"
    ],
    "tears": {
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M0FT07NG3EFWZYABR8": "tear_035",
-    "0001MCJ1M0FT07NG3EFWZYABR9": "tear_055"
+    "0001MCJ1M0RZMJWMDRZ0120B1P": "tear_035",
+    "0001MCJ1M0RZMJWMDRZ0120B1Q": "tear_055"
    },
    "stocks": {
     "0001M59VY0YA13H9M86HTA6XNP": "receipt_01",
-    "0001MCJ1M0FT07NG3EFWZYABR8": "looseleaf_03",
-    "0001MCJ1M0FT07NG3EFWZYABR9": "lined_02"
+    "0001MCJ1M0RZMJWMDRZ0120B1P": "looseleaf_02",
+    "0001MCJ1M0RZMJWMDRZ0120B1Q": "lined_01"
    },
    "scroll": {
     "first": 8386,
@@ -137,7 +145,7 @@
   }
  ],
  "blob_waits": [],
- "cold_ms": 7523,
+ "cold_ms": 10742,
  "problems": [],
  "ok": true
 }

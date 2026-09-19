@@ -10,23 +10,23 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 1828
+   "ms": 2582
   },
   {
    "do": "wait",
-   "ms": 2001
+   "ms": 2004
   },
   {
    "do": "scrollTo",
-   "ms": 2055
+   "ms": 2304
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1101
   },
   {
    "do": "frames",
-   "ms": 251547
+   "ms": 298018
   }
  ],
  "shots": [
@@ -34,6 +34,8 @@
    "frames": 330,
    "dir": "evidence/frames/11_chat_scroll",
    "ms": 16,
+   "fps": 60,
+   "stop": null,
    "drive": {
     "kind": "scrollBy",
     "per": -11
@@ -42,7 +44,7 @@
  ],
  "reports": [],
  "blob_waits": [],
- "cold_ms": 7547,
+ "cold_ms": 10966,
  "problems": [],
  "ok": true
 }

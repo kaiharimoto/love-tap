@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-19T16:15:39Z",
+ "captured_at": "2026-09-19T16:34:58Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -7,7 +7,7 @@
    "frames": 255,
    "fps": 60.0,
    "seconds": 4.25,
-   "mean_change_per_frame": 0.00476,
+   "mean_change_per_frame": 0.0048,
    "repeated_frames": 0,
    "repeated_fraction": 0.0,
    "longest_still_run": 0,
@@ -30,14 +30,15 @@
    "frames": 384,
    "fps": 60.0,
    "seconds": 6.4,
-   "mean_change_per_frame": 0.01518,
-   "repeated_frames": 27,
-   "repeated_fraction": 0.07,
+   "mean_change_per_frame": 0.01519,
+   "repeated_frames": 28,
+   "repeated_fraction": 0.073,
    "longest_still_run": 10,
    "repeated_at": [
+    0,
+    32,
     140,
     141,
-    192,
     269,
     270,
     271,
@@ -45,19 +46,23 @@
     273,
     289,
     290,
-    291,
-    292
+    291
    ],
    "still_runs": [
+    {
+     "from": 0,
+     "to": 0,
+     "len": 1
+    },
+    {
+     "from": 32,
+     "to": 32,
+     "len": 1
+    },
     {
      "from": 140,
      "to": 141,
      "len": 2
-    },
-    {
-     "from": 192,
-     "to": 192,
-     "len": 1
     },
     {
      "from": 269,
@@ -97,9 +102,9 @@
    "frames": 488,
    "fps": 60.0,
    "seconds": 8.13,
-   "mean_change_per_frame": 0.01214,
-   "repeated_frames": 48,
-   "repeated_fraction": 0.099,
+   "mean_change_per_frame": 0.01152,
+   "repeated_frames": 51,
+   "repeated_fraction": 0.105,
    "longest_still_run": 22,
    "repeated_at": [
     1,
@@ -132,54 +137,49 @@
      "len": 2
     },
     {
-     "from": 253,
-     "to": 253,
+     "from": 256,
+     "to": 256,
      "len": 1
     },
     {
-     "from": 257,
-     "to": 257,
+     "from": 282,
+     "to": 285,
+     "len": 4
+    },
+    {
+     "from": 292,
+     "to": 292,
      "len": 1
     },
     {
-     "from": 267,
-     "to": 267,
-     "len": 1
-    },
-    {
-     "from": 270,
-     "to": 271,
+     "from": 296,
+     "to": 297,
      "len": 2
     },
     {
-     "from": 274,
-     "to": 274,
+     "from": 300,
+     "to": 300,
      "len": 1
     },
     {
-     "from": 285,
-     "to": 285,
+     "from": 303,
+     "to": 303,
      "len": 1
     },
     {
-     "from": 305,
-     "to": 305,
+     "from": 312,
+     "to": 312,
      "len": 1
     },
     {
-     "from": 339,
-     "to": 339,
+     "from": 322,
+     "to": 322,
      "len": 1
     },
     {
-     "from": 358,
-     "to": 358,
-     "len": 1
-    },
-    {
-     "from": 369,
-     "to": 369,
-     "len": 1
+     "from": 335,
+     "to": 336,
+     "len": 2
     },
     {
      "from": 451,
@@ -232,7 +232,7 @@
    "frames": 308,
    "fps": 60.0,
    "seconds": 5.13,
-   "mean_change_per_frame": 0.01333,
+   "mean_change_per_frame": 0.01332,
    "repeated_frames": 29,
    "repeated_fraction": 0.094,
    "longest_still_run": 17,
@@ -297,27 +297,27 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 7547,
+  "cold_ms": 10966,
   "steps": [
    {
     "do": "goTo",
-    "ms": 1828
+    "ms": 2582
    },
    {
     "do": "wait",
-    "ms": 2001
+    "ms": 2004
    },
    {
     "do": "scrollTo",
-    "ms": 2055
+    "ms": 2304
    },
    {
     "do": "wait",
-    "ms": 1103
+    "ms": 1101
    },
    {
     "do": "frames",
-    "ms": 251547
+    "ms": 298018
    }
   ]
  },
