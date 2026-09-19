@@ -28,6 +28,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskStep(JSFunction f);
   external set __deskBlobsPending(JSFunction f);
   external set __deskPaperSurfaces(JSFunction f);
+  external set __deskPartnerTyping(JSFunction f);
 }
 
 void expose(CaptureHooks hooks) {
@@ -52,6 +53,7 @@ void expose(CaptureHooks hooks) {
   // parse per poll is a cost the shot does not need.
   w.__deskBlobsPending = (() => BlobCache.outstanding.toJS).toJS;
   w.__deskPaperSurfaces = (() => jsonEncode(CaptureHooks.paperSurfaces()).toJS).toJS;
+  w.__deskPartnerTyping = ((JSBoolean on) => hooks.partnerTyping(on.toDart).toJS).toJS;
 }
 
 /// Signal values arrive as strings on the wire; the numbers and flags among them are read back

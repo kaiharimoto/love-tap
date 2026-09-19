@@ -58,6 +58,12 @@ class CaptureBus {
   /// Chat: open every folded note on screen at once, for the unfolding clip.
   static void Function()? unfoldAll;
 
+  /// Chat: the other phone starts or stops writing. It is a frame that is not an event, and the
+  /// evidence for it has to be a picture of this phone showing it, because rubric row 01 names
+  /// typing indication and docs/BRIEF.md 09 forbids storing it as one — so it can never appear in
+  /// reliability.json's capability list or anywhere else in the log.
+  static void Function(bool on)? partnerTyping;
+
   /// Settings: begin pairing (host) so the six words are on screen.
   static Future<void> Function()? showWords;
 
@@ -73,6 +79,7 @@ class CaptureBus {
     chatReport = null;
     scrollBy = null;
     stageStates = null;
+    partnerTyping = null;
     unfoldAll = null;
     showWords = null;
   }

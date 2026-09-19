@@ -32,6 +32,14 @@
    "ms": 900
   },
   {
+   "do": "partnerTyping",
+   "arg": true
+  },
+  {
+   "do": "wait",
+   "ms": 400
+  },
+  {
    "do": "shot",
    "out": "evidence/13_messenger_states.png",
    "settle": 1200

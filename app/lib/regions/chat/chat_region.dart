@@ -19,6 +19,7 @@ import '../../media/capture.dart';
 import '../../media/local_uri.dart';
 import '../../media/read_bytes.dart';
 import '../../scope.dart';
+import '../../transport/transport.dart';
 import '../../spine/projections/thread.dart';
 import '../../spine/spine.dart';
 import '../../voice/strings.dart';
@@ -156,6 +157,16 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
       scope.spine.markRefused(no.id, S.refusedUnreadable);
       if (mounted) setState(() {});
       await _scrollToAnchor(no.id);
+    };
+    CaptureBus.partnerTyping = (on) {
+      // A real frame from the other person, through the same door the transport's stream uses.
+      // Not a flag: a picture of a flag being set is not evidence that the signal works.
+      AppScope.of(context).onEphemeral(Ephemeral(
+        kind: 'typing',
+        from: AppScope.of(context).partner,
+        at: AppScope.of(context).clock.now().millisecondsSinceEpoch,
+        data: {'on': on},
+      ));
     };
     CaptureBus.unfoldAll = Folds.openAll;
     CaptureBus.chatReport = () {

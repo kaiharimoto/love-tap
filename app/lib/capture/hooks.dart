@@ -68,6 +68,15 @@ class CaptureHooks {
     return 'ok';
   }
 
+  /// The other phone starts or stops writing.
+  Future<String> partnerTyping(bool on) async {
+    final f = CaptureBus.partnerTyping;
+    if (f == null) return 'no shell';
+    f(on);
+    await _settle();
+    return 'ok';
+  }
+
   /// Set one of my own signals, as if it had been declared on this phone or read off it.
   Future<String> setSignal(String signal, Object value, {bool declared = true}) async {
     await scope.emit(declared ? 'state_declared' : 'state_passive', {'signal': signal, 'value': value});

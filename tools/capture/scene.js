@@ -253,6 +253,8 @@ function ensure(p) {
         await hook('__deskOpenSender', step.arg !== false); break;
       case 'openViewer':
         await hook('__deskOpenViewer', step.arg); break;
+      case 'partnerTyping':
+        await hook('__deskPartnerTyping', step.arg !== false); break;
       case 'search':
         await hook('__deskSearch', step.arg); break;
       case 'unfold':

@@ -40,7 +40,7 @@ class AppScope extends ChangeNotifier {
       link = s;
       notifyListeners();
     });
-    _esub = transport.ephemeral.listen(_onEphemeral);
+    _esub = transport.ephemeral.listen(onEphemeral);
     link = transport.current;
     _refresh();
   }
@@ -129,6 +129,15 @@ class AppScope extends ChangeNotifier {
       break;
     }
   }
+
+  /// A frame that is not an event, from the other phone: typing, presence.
+  ///
+  /// Public because the capture drives the partner's half of a two-phone signal on one phone, and
+  /// it has to arrive the way a real one does rather than by setting a flag. It is the same
+  /// function the transport's stream feeds, and it takes a real `Ephemeral`; nothing about a
+  /// frame that came through here differs from one that came off the wire, including that it
+  /// never touches the spine.
+  void onEphemeral(Ephemeral e) => _onEphemeral(e);
 
   void _onEphemeral(Ephemeral e) {
     if (e.from == me) return;
