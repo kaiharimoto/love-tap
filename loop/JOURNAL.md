@@ -3218,3 +3218,15 @@ seed out and the bundle will not build. `python3 -m pip install numpy pillow` af
 restart.
 
 **Lease released.**
+
+## Firing 20 — IMPLEMENT, cycle 3 — lease taken
+
+Push pre-flight passed. The container's checkout was at firing 1's tip (`3edfbf7`) and eighteen
+firings behind; a bare `git fetch origin` took just over nine minutes to index a 9,948-object pack,
+which is the slow-but-not-fatal shape `WORKER_PROMPT.md` §0 records for firing 12 and 14. The
+dry-run push then read `non-fast-forward`, which is the staleness signature §0 warns not to report
+as a credential failure. `git reset --hard origin/<branch>` was **allowed** in this container — the
+first firing for which it was, against two refusals — and the dry-run read `Everything up-to-date`
+after it. Route 1 (`checkout -B`) was not needed.
+
+Lease taken, TTL four hours to 08:07Z, pushed before anything else was touched.
