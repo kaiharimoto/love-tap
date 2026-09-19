@@ -4023,3 +4023,119 @@ gallery. Worth a look by whoever works the gallery next.
 
 No new `asks[]`. Stage stays **IMPLEMENT, cycle 3**; the queue is not drained. Queue: **35 open**
 (34 inherited plus one filed here), 35 closed, 5 superseded. Lease released.
+
+---
+
+## Firing 25 — IMPLEMENT, cycle 3
+
+Step 0 passed, but not on the first try, and the reason is new. The dry-run push came back
+`non-fast-forward` with `git merge-base` empty and `git rev-list --count` reading **50 ahead and 50
+behind** — the exact shape §0 describes twice as a shallow graft boundary. It was not one.
+`git fetch --deepen=60` took both sides to 110 commits and still returned no merge base, and the
+local tip's subjects were absent from the remote's history altogether. The reflog had it in two
+lines: the container cloned the branch correctly at `d1a3513` and then `git checkout <branch>` moved
+HEAD **backwards** onto `3edfbf7`, a tip the container image was carrying from 2026-09-15, rewinding
+the tree past the whole of firings 21 to 24. The clone was right and the branch ref was old.
+`git reset --hard` was refused (nought for three now); `git checkout --detach` was allowed (two for
+three). The stale tip went onto a backup branch first, so nothing was lost however the rest went.
+That is written into §0 for successors, with the two cheap questions that tell the three cases
+apart.
+
+### What the item said, and what was actually wrong
+
+`the-interrupt-matrix-is-no-longer-in-the-evidence-at-all` said firing 21 moved the table below the
+feelings section and off a one-screenful capture. That is true. It is not the half that matters.
+
+Every row of the matrix was `Expanded(name)` against three `Choice`s — and a `Choice` is a
+`Row(mainAxisSize: min)` that takes whatever its word needs. `wake me`, `quietly` and `not at all`
+come to about 320 logical pixels between them; inside two lots of padding on a 480-pixel phone there
+are about 424 to share. **`Expanded` was left nine and a half pixels**, and every one of the fourteen
+event names wrapped one character per line into a column 400 pixels tall.
+
+Measured before anything was changed: `maxScrollExtent` **6447** logical pixels, the matrix spanning
+**4282** of them, and at the very bottom of the scroll exactly **one** of the fourteen rows in frame.
+Fourteen lines of text were occupying four screenfuls. The table could not have fitted above any
+fold, and no amount of scrolling would have captured it. Firing 23 read the symptom correctly and
+stopped one layer short of the cause.
+
+Names stacked over their choices, in a `Wrap` so a longer word in a future type moves to the next
+line instead of starving the one beside it: `maxScrollExtent` **6447 → 1171.7**, the name box
+**9.6×400 → 356.3×20**, the whole matrix inside one 1040-pixel viewport.
+
+### The thumb the capture never had
+
+`CaptureBus.scrollBy` belongs to the thread — both regions can be mounted at once and whichever
+registered last would win — so settings got its own bus slot, its own hook and a `scrollSettings`
+scene verb, and `05_settings.json` takes a second shot at the bottom of the page. The handles now
+register on `Flags.capture || CaptureBus.wanted`, the way `ChatRegion` always has: `Flags.capture` is
+a compile-time const and false under `flutter test`, so a handle guarded on it alone can only ever be
+exercised by a real capture, and a test of it would be vacuous.
+
+### Closed on the measurement, every clause
+
+`evidence/05_settings_interrupt.text.json` carries **14 runs each** of `wake me`, `quietly` and
+`not at all` — the 42-run matrix, declared for the first time since firing 21. `legibility.py` reads
+that artifact at **61 runs and zero below the 4.5 floor**, so every one of the 42 is at or above it.
+And the population is *accounted for rather than reduced*, which is the clause that kept this and
+rank 11 open: `total_runs` **298 → 359**, artifacts **10 → 11**, the +61 being exactly the new still;
+`total_below_floor` **16 → 15**.
+
+`05_settings.png` came back **byte-identical** to firing 24's. The top screenful never moved, so
+firing 21's reason for putting the table at the bottom — the authoring tools the row asks for being
+in frame — is intact, and the matrix is reached the way a person reaches it.
+
+Re-broken twice and watched to fail: the old `Row` back gives 0 of 14 declared; dropping the handle
+fails both tests.
+
+### Rank 11 is left open on purpose
+
+Its blocker is gone and its premise is discharged — all 42 unselected-token runs clear 4.5, and no
+`0x80` or `0x99` alpha run fails anywhere in the capture. Its *number* is not met: it asks for zero
+below floor on `05_settings.png` and `01_pulse.png` and a set total ≤ 8, and reads 2, 2 and 15.
+
+But **not one of those fifteen is an unselected token.** All fifteen are full-alpha ink, thirteen of
+them the single ink `ff464648`, split seven `stamp` and eight `hand`. The four on the two screens the
+item names are small-caps headings — `THE TWO PHONES` 2.66, `HISTORY` 4.31, `RINGER` 3.53, `SIGNAL`
+4.28 — not words anybody is choosing between. So the item's own defect measures as fixed and what
+holds its number down is a different defect. IMPLEMENT does not close an item whose written
+measurement is unmet, and did not. ADDRESS should close it on its premise and re-file the residue, or
+restate the number.
+
+### One cost, reported rather than hidden
+
+`across_the_set.mean_chroma` reads **0.0449** over 11 artifacts against **0.0451** over the same ten
+stills — so the set figure crosses just under rank 15's `>= 0.045`, and the cause is the new still
+itself: a sheet of looseleaf at lightness 0.9378, and a large quiet page lowers a set mean. It is a
+real screen of the app and measuring it is correct; that the app's quietest surface pulls the set
+under the floor is precisely what rank 15 is about. `lightness_drift_room` went 0.2929 → **0.2924**,
+unchanged — and it is worth saying that the tool's summary line prints `lightness_drift` (0.5513, and
+0.5513 at firing 24 too), *not* the 0.20-ceiling `lightness_drift_room`. This firing misread that
+line once, measured the set without the new artifact to test it, and found the number identical
+either way before reporting anything.
+
+### The two files no capture writes
+
+The firing was asked to make sure the committed ruler number and the shipped tool cannot drift apart
+silently. They can, and the mechanism is plain: **`capture.sh` runs neither `legibility.py` nor
+`palette.py`**, so both JSONs under `evidence/` are the only things there made by hand. That is how
+firing 24 came to record a ruler reading 25 of 298 beside a committed file saying 16 — no live
+disagreement at HEAD, since rank 10's fix landed before that sentence was written, but a hand-run
+number and a tool that moved under it, with nothing able to say which a reader is holding.
+
+Filed as `the-rulers-numbers-are-not-written-by-the-capture-that-they-describe` rather than fixed,
+because §3b says unranked work goes to the queue, and because the change is four lines and its
+measurement is a forty-five minute capture this firing had already spent. The next firing to capture
+for any other reason gets it for nothing. Both JSONs were regenerated by hand here, as firing 24 did.
+
+### Pre-existing, and not this firing's
+
+`capture.sh`'s assets gate still reports `✗ assets`. `entries_without_a_file` is **0** — rank 4's
+twenty are gone — but `entries_for_files_outside_the_library` is **14**, committed
+`assets/MANIFEST.json` entries pointing at `scratch/` paths. Untouched here and present at `d1a3513`.
+
+`DIFF.json` reads `new` for all fifteen again: `evidence/.previous` is gitignored and does not
+survive a fresh clone, so the first capture in any container is its own baseline. An empty
+comparison, not a library-wide change.
+
+No new `asks[]`. Stage stays **IMPLEMENT, cycle 3**; the queue is not drained. Queue: **35 open**
+(34 inherited plus one filed here), **36 closed**, 5 superseded. Lease released.

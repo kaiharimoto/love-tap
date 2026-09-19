@@ -1,0 +1,42 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 25,
+ "at": "ec4aa15",
+ "written_at": "2026-09-19T20:12:00Z",
+ "tests": 174,
+ "analyze_errors": 0,
+ "items_worked": [
+  "the-interrupt-matrix-is-no-longer-in-the-evidence-at-all",
+  "unselected-is-drawn-as-alpha-and-that-is-two-thirds-of-the-vocabulary"
+ ],
+ "items_closed": [
+  "the-interrupt-matrix-is-no-longer-in-the-evidence-at-all"
+ ],
+ "items_filed": [
+  "the-rulers-numbers-are-not-written-by-the-capture-that-they-describe"
+ ],
+ "causes_established": [
+  "The interrupt matrix was not merely below the fold. Each row was Expanded(name) against three Choice widgets, and a Choice is a Row(mainAxisSize: min) that takes its natural width: `wake me`, `quietly` and `not at all` come to about 320 logical px of the ~424 available inside two lots of padding on a 480px phone, leaving Expanded NINE AND A HALF pixels. Every one of the fourteen event names wrapped one character per line into a column 400px tall. Measured: maxScrollExtent 6447 logical px with the matrix spanning 4282 of them, and exactly ONE of the fourteen rows in frame at the very bottom of the scroll. Fourteen lines of text occupying four screenfuls; the table could not have fitted above any fold.",
+  "Nothing could scroll the settings page from a scene at all. CaptureBus.scrollTo and scrollBy are registered only by ChatRegion, so `what may interrupt` was reachable by a thumb and by nothing else. Settings now has its own bus slot, hook and `scrollSettings` scene verb -- its own rather than reusing scrollBy, because both regions can be mounted at once and whichever registered last would win.",
+  "SettingsRegion registered its capture handles on `Flags.capture` alone. Flags.capture is a compile-time const and is false under `flutter test`, so every handle there was unreachable by any test; ChatRegion has always read `Flags.capture || CaptureBus.wanted`, and settings now does too.",
+  "None of the 15 remaining legibility failures is an unselected token. All 15 are full-alpha ink, 13 of them the single ink ff464648, split 7 `stamp` and 8 `hand`. Rank 11's premise is discharged and its number is held down by a different defect.",
+  "capture.sh runs neither legibility.py nor palette.py, so evidence/legibility.json and evidence/palette.json are the only files under evidence/ made by hand. Filed rather than fixed: the change is four lines, the measurement is a full capture."
+ ],
+ "measurements": {
+  "settings_page_maxScrollExtent": "6447 -> 1171.7 logical px",
+  "event_name_box": "9.6x400 -> 356.3x20 logical px",
+  "matrix_runs_declared": "0 -> 42 (14 each of wake me / quietly / not at all)",
+  "new_artifact_legibility": "05_settings_interrupt.png: 61 runs, 0 below the 4.5 floor",
+  "set_legibility": "total_runs 298 -> 359; artifacts 10 -> 11; total_below_floor 16 -> 15; on_moving_ground 14 -> 13",
+  "set_palette": "mean_chroma 0.0451 (10 stills) -> 0.0449 (11 artifacts, under rank 15's 0.045); lightness_drift_room 0.2929 -> 0.2924",
+  "05_settings_png": "byte-identical to firing 24's",
+  "capture": "14 of 17, the three absences standing"
+ },
+ "re_broken": [
+  "Put the old squeezing Row back: 0 of 14 `wake me` declared, test fails.",
+  "Dropped CaptureBus.settingsScrollBy registration: both tests fail."
+ ],
+ "stage_complete": false,
+ "why_not": "The queue is not drained. 35 open."
+}
