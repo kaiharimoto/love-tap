@@ -130,11 +130,12 @@
    "points": 0.5,
    "why": "05_settings.png prints 'connecting \u00b7 http://127.0.0.1:8480' and a second bare 'http://127.0.0.1:8480' in the handwriting font on the THE TWO PHONES card -- the one moment in the build where a raw debug address is treated as something a person wrote by hand, on the artifact whose deliverable is pairing state. The same screen reads 'not paired yet.', so the pairing the whole messenger stands on is not shown working, and the screen shows no feeling-authoring tools although it is the artifact that is supposed to carry them.",
    "measurement": "05_settings.png shows the six-word pairing code and a short human address with the loopback URL behind a disclosure, shows paired state, and declares the feeling-authoring tools in 05_settings.text.json. The string lint covers handwriting-font runs. Re-break by restoring the raw URL and watching the lint fire.",
-   "state": "open",
-   "attempts": 0,
-   "closed_by": null,
+   "state": "closed",
+   "attempts": 1,
+   "closed_by": "6d6a21d",
    "rank": 38,
-   "owner_priority": "using-it"
+   "owner_priority": "using-it",
+   "closed_note": "Both URLs gone and the authoring tools reachable. The declared one was `_Fact('link', ...)` concatenating the state and the address into a handwritten line; the link says its state, the address is its own fact in the stamped face behind `show the address`, and the paired device ids are stamped too. The second was never declared at all -- a TextEditingController opening with a development default, and a TextField's contents are drawn by RenderEditable rather than RenderParagraph, so __deskTextRuns cannot see them and only the PNG showed it; it opens empty now. The artifact reached no feeling-authoring tools because they sat below thirteen rows of the interrupt matrix, which is the one thing on that screen you set once -- it is last now. Three tests over the declared runs, re-broken twice. NOT DONE AND NOT DOABLE HERE: the measurement also wants the six-word code and paired state on 05. It is captured against a PWA client with no Android host to pair with, which is the same /dev/kvm fact that keeps 09 and 16 out of this container; see the new asks[] entry."
   },
   {
    "id": "three-of-six-shelter-feelings-are-one-gesture",
@@ -921,6 +922,11 @@
   {
    "what": "nothing new; recorded so a successor does not re-ask",
    "why": "ADDRESS found no ask. All three standing asks (a host with /dev/kvm, TS_AUTHKEY, the four Android signing secrets) are unchanged and none blocks the loop. Every one of the 39 queue items is actionable in this container with the web profile toolchain.",
+   "blocks_the_loop": false
+  },
+  {
+   "at_firing": 21,
+   "ask": "05_settings.png cannot show paired state or the six-word pairing code in this container. The still is captured against the PWA client, and the only thing it can pair WITH is the Android host, which needs an emulator, which needs /dev/kvm. docs/PHONES.md records the three measured attempts. Everything else rank 7 asked for is done and tested; this half needs a host on real hardware, exactly like 09_two_devices.png and 16_setup_android.png.",
    "blocks_the_loop": false
   }
  ],
