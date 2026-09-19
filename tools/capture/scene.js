@@ -208,9 +208,17 @@ function ensure(p) {
       return (x1 - x0) >= 1 && (y1 - y0) >= 1 ? [x0, y0, x1 - x0, y1 - y0] : null;
     };
     const kept = [];
+    let clipped = 0;
     for (const run of runs) {
       const rect = shift(run.rect);
       if (!rect) continue;
+      // `shift` clamps a rect into the frame, so a run the app declared partly outside it came
+      // through as a smaller run rather than as a trimmed one, and `offscreen` counted only the
+      // ones that were wholly outside. A message clamped from fifty-eight pixels tall to two is
+      // not a fifty-eight pixel message and it is not offscreen either; it is cut, and the number
+      // that says so should be in the sidecar rather than worked out by subtracting rects by hand.
+      const whole = run.rect;
+      if (rect[2] !== whole[2] || rect[3] !== whole[3]) clipped++;
       const lines = (run.lines || []).map(shift).filter(Boolean);
       kept.push(Object.assign({}, run, { rect, lines: lines.length ? lines : [rect] }));
     }
@@ -222,6 +230,7 @@ function ensure(p) {
       dpr,
       declared: kept.length,
       offscreen: runs.length - kept.length,
+      clipped,
       runs: kept,
     }, null, 1));
     return kept.length;

@@ -26,6 +26,11 @@ import 'note.dart';
 import 'search_page.dart';
 import 'viewer_page.dart';
 
+/// The strip of bare desk the search affordance is written in, above the first note. Nothing in
+/// the thread is laid out inside it, so the loop and the word `search` are never drawn over
+/// somebody's sentence.
+const double kSearchMargin = 40;
+
 class ChatRegion extends StatefulWidget {
   const ChatRegion({super.key});
 
@@ -431,6 +436,38 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     }
     return Column(
       children: [
+        // finding something is a loop drawn round a word, up in the margin
+        //
+        // It was `Positioned` over the thread, and a thread scrolls: whatever note was under it
+        // had the loop and the word `search` drawn across the middle of a sentence, which in
+        // crops/11_chat_scroll_strip.png was the word `saw`. Padding at the top of the list does
+        // not fix that either -- a scrollable's leading padding scrolls away with everything else.
+        // A margin is paper nothing is written on, so it is a strip of its own above the thread
+        // and the thread is laid out under it rather than through it.
+        SizedBox(
+          height: kSearchMargin,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: _search,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 4, 12, 4),
+                // The loop is a shape and stays on the wood; the word goes on a strip.
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  Mark.loop(size: 17, colour: Pen.margin),
+                  const SizedBox(width: 5),
+                  Strip(
+                    id: 'search-affordance',
+                    row: 3,
+                    padding: const EdgeInsets.fromLTRB(8, 3, 8, 3),
+                    child: Text(S.search, style: Hands.margin(size: 13)),
+                  ),
+                ]),
+              ),
+            ),
+          ),
+        ),
         Expanded(
           child: Stack(
             children: [
@@ -461,29 +498,6 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                         );
                       },
                     ),
-              // finding something is a loop drawn round a word, up in the margin
-              Positioned(
-                top: 0,
-                right: 8,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: _search,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 4, 4, 10),
-                    // The loop is a shape and stays on the wood; the word goes on a strip.
-                    child: Row(mainAxisSize: MainAxisSize.min, children: [
-                      Mark.loop(size: 17, colour: Pen.margin),
-                      const SizedBox(width: 5),
-                      Strip(
-                        id: 'search-affordance',
-                        row: 3,
-                        padding: const EdgeInsets.fromLTRB(8, 3, 8, 3),
-                        child: Text(S.search, style: Hands.margin(size: 13)),
-                      ),
-                    ]),
-                  ),
-                ),
-              ),
             ],
           ),
         ),

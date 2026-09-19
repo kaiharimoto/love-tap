@@ -159,11 +159,17 @@ class SearchPageState extends State<SearchPage> {
           ),
 
           // the tabs down the side of a card index: what kind, and whose
-          SizedBox(
-            height: 42,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+          //
+          // They were one horizontal list, and nine tabs do not fit across a phone: five were on
+          // screen, the fifth (`TALKING`) was cut off at the right edge of the frame, and four --
+          // `FEELINGS`, `DATES`, `THE LIST`, `STATE` -- were not drawn at all, with nothing on the
+          // screen to say the row moved. A card index shows you all of its tabs; that is what a
+          // tab is for. They wrap.
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Wrap(
+              spacing: 0,
+              runSpacing: 2,
               children: [
                 _Tab(
                   label: 'everything',

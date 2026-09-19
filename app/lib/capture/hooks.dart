@@ -443,9 +443,22 @@ class CaptureHooks {
     final visible = span.toPlainText(includePlaceholders: false).trim();
     if (visible.isEmpty) return;
 
+    // Where this paragraph is actually allowed to put ink: every clip between it and the view,
+    // intersected, and not merely the edge of the frame.
+    //
+    // `bounds` was standing in for that, and a scrollable's last child is laid out past the end of
+    // its viewport and clipped there rather than moved. So a note half under the end of the thread
+    // declared the whole of its box, and `scene.js` -- which clamps a declared rect into the frame
+    // -- turned what was left into a run inside the picture. `02_chat` declared a message two
+    // pixels tall at y=3118 of a 3120-pixel frame, in a band where the tab strip is drawn and that
+    // message is not; `05_settings` and `17_setup_pwa` each declared two lines across the strip
+    // the same way. The tool then reads pixels inside a rect where the app draws nothing, and the
+    // sidecar's `offscreen: 0` is true only because nothing was ever fully outside.
+    final clip = _paintClip(p, view, bounds);
+    if (clip.isEmpty) return;
     final Matrix4 toView = p.getTransformTo(view);
     Rect? box(Rect local) {
-      final r = MatrixUtils.transformRect(toView, local).intersect(bounds);
+      final r = MatrixUtils.transformRect(toView, local).intersect(clip);
       if (r.isEmpty || r.width < 1 || r.height < 1) return null;
       return r;
     }
@@ -487,6 +500,26 @@ class CaptureHooks {
       'text': visible.length > 64 ? '${visible.substring(0, 63)}…' : visible,
       'chars': visible.length,
     });
+  }
+
+  /// The rectangle [node] may paint in, in the view's pixels: [bounds] narrowed by every clip its
+  /// ancestors impose. `describeApproximatePaintClip` is the framework's own answer for one
+  /// parent -- a viewport, a `ClipRect`, a `ClipPath`'s bounding box -- and null from a parent
+  /// that clips nothing, which is most of them.
+  static Rect _paintClip(RenderObject node, RenderView view, Rect bounds) {
+    var out = bounds;
+    RenderObject child = node;
+    var parent = child.parent;
+    while (parent != null) {
+      final local = parent.describeApproximatePaintClip(child);
+      if (local != null) {
+        out = out.intersect(MatrixUtils.transformRect(parent.getTransformTo(view), local));
+        if (out.isEmpty) return Rect.zero;
+      }
+      child = parent;
+      parent = child.parent;
+    }
+    return out;
   }
 
   /// A rect already in the picture's own pixels, rounded outward so a mark on the edge of a line
