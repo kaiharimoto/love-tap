@@ -152,6 +152,20 @@ reports. Cycle 2 cost ~1.2M subagent tokens and 583 tool calls and was worth eve
   clock passes between two frames of a clip: an implicit animation is either not started or already
   finished at every frame that gets grabbed. Use `Turning` / `Settling` in
   `app/lib/material/motion.dart`. `app/test/nothing_moves_on_the_wall_clock_test.dart` holds it.
+- **A web `int` is an IEEE-754 double, and the app runs on the web.** `hashOf` was FNV-1a written
+  the obvious way, `h = (h * 0x01000193) & 0xFFFFFFFF`. That product reaches 3.6e16 on the first
+  character of the first id — four times past 2^53 — so on the PWA it rounds and the bits it drops
+  are the low ones, which are the whole hash. Every piece of paper in the app was a different
+  piece of paper on the two devices for the life of the build, and what it looked like from the
+  outside was a flat cream rectangle that two separate diagnoses called a missing asset. Any
+  arithmetic here that leaves 2^53 is wrong on one of the two phones and right on the other, and
+  the test suite runs on the VM, where it cannot reproduce. The way to test it is to evaluate the
+  same steps in `double` on the VM and require the two to agree —
+  `app/test/the_same_paper_on_both_phones_test.dart` does that.
+- **A screenshot cannot tell you how big a render was, or how far it was stretched.** Three review
+  cycles argued about one flat rectangle from the pixels and named it wrongly twice. The app knows;
+  `CaptureHooks.paperSurfaces` and `__deskPaperSurfaces` make it say so, and `scene.js` writes
+  `<artifact>.surfaces.json` beside every still. When a surface looks wrong, read that first.
 - **A test that passes with the bug put back is a claim, not a test.** Two in this build did.
   Always re-break the thing and watch it fail.
 - **The filesystem is not the daemon, and the address file is not the node.** That same stale-state

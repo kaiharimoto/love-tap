@@ -3230,3 +3230,166 @@ first firing for which it was, against two refusals — and the dry-run read `Ev
 after it. Route 1 (`checkout -B`) was not needed.
 
 Lease taken, TTL four hours to 08:07Z, pushed before anything else was touched.
+
+### What this firing did
+
+Four legs, all pushed as they landed. Two queue items worked, neither closed, and both for the
+same honest reason: their measurements are pixels and `docs/LOOP.md` puts `./capture.sh` in
+stage 0. What is closed is the *causes* — three of them, one of which had been diagnosed wrongly
+twice.
+
+The toolchain came up in about eight minutes (`apt-prereqs.sh`, `bootstrap.sh --profile=web`,
+`pack_assets.py --seed=year`, `pip install numpy pillow`). Baseline before anything was touched:
+`flutter analyze` 0 errors, `flutter test` 123 passed. At the end: 0 errors, **134 passed**.
+
+### Rank 2, the heaviest row: the decode branch that no call site ever reached
+
+`BlobImage` has carried this paragraph since it was written — a print in the Moments gallery is a
+third of the screen wide and the photograph behind it is full-size, so decoding it at its own
+resolution puts nine times the pixels it can show into the image cache, per tile, across a year of
+them. The guard was `cacheWidth: width == null ? null : (width! * dpr).round()`.
+
+**No call site in the app ever passed a width.** All five put the picture inside something that
+constrains it — an `AspectRatio` in the gallery and in the thread, a `Center` in the viewer — and
+gave it none. So the branch was dead for the life of the build, the paragraph described a
+parameter nobody used, and every photograph in this app has been decoded whole in the one region
+whose capture came back with no thumbnail in it.
+
+The width was never unknown. It is in the widget's own constraints. Measured off the decoded pixel
+width of the `RawImage` the framework paints, rather than off a duration, which would measure this
+machine: a 1200×1600 photograph, fifteen prints in the gallery, widest **375 px against 375
+drawn**. With the old guard put back — re-broken and watched to fail — the same fifteen decode at
+**1200**, which is 10.2× the pixels in each direction and 104× the bytes.
+
+The viewer keeps the whole photograph, under a named `full` flag rather than by reusing `urgent`,
+which is about queue position: it is inside an `InteractiveViewer` at `maxScale: 6`, so the pixels
+it will need are not the pixels it is showing.
+
+### And the shutter that was going before the screen had filled
+
+`window.__deskReady` is set from the second post-frame callback after the first frame. It is a
+claim about painting and `scene.js` was reading it as a claim about content. So the app now says
+what it is still waiting for — `BlobCache.outstanding`, `report()['blobs_pending']`,
+`__deskBlobsPending` — and `scene.js` waits on it before every shot.
+
+**On a budget, and that is the half that keeps it honest.** Waiting until the grid fills, however
+long that takes, would photograph a screen no person would ever see: twelve seconds of blank grid
+is that row's own disqualifier. So the wait is bounded at 12 s, written into the log as
+`blob_waits` either way, and a scene that outruns it is recorded as having outrun it.
+
+Confirmed live rather than asserted: a real WebKit against a real build reported **13 pictures
+still outstanding about four seconds after ready**. That is the defect, and it is a number now
+instead of an argument about a screenshot.
+
+One honesty fix beside it, because it misled this build's own triage: `S.fetching` was drawn both
+while a read was outstanding and when it came back empty, so a slow screen could not be told from
+a broken one. Three critics read firing 16's `04_moments` as the second.
+
+### Rank 5: the flat cream rectangle was a till roll
+
+This is the one worth the firing. `10_first_run.png` is 59.5% a single RGB value, `17_setup_pwa`
+48.0%, the bare part of `01_pulse` 10.9% — the archetype `docs/BRIEF.md` names as the failure of
+the whole visual concept. Cycle 3 called it a missing stock render. Firing 19 called it the
+`ColoredBox` fallback showing through, *"located exactly"*, with three candidates in rank order.
+
+**It is none of them, and the firing-19 note is withdrawn in full.** Each candidate was killed by
+its own experiment against a live WebKit and a real build, not by reasoning:
+
+- the fallback set to **magenta** puts **no magenta pixel anywhere in the frame** — every sheet,
+  the flat one included, has its render over it;
+- removing `RegionPad`'s `RepaintBoundary`, which the note called the most likely, leaves the
+  frame **bit-identical**;
+- `filterQuality` medium → low, **bit-identical**;
+- removing the pad leaves the desk at mean L 67.6, so the cream area **is** the pad;
+- and the stock served to the browser is intact at 1073×1500, L_std 25.8, whose *smoothest*
+  600×150 window is L_std 3.99 — nine times more varied than the 0.465 on screen. No part of that
+  sheet is as smooth as what was being drawn, so what was being drawn was not that sheet.
+
+Then the app was asked what it had drawn, through a handle written for the purpose, and it
+answered: **source 702×1500, drawn at 1.94×.** Exactly one stock in the library is 702 wide.
+`receipt_01` — a till roll. Narrow, smooth, no printed rules, almost no tooth, because that is
+what thermal paper is, stretched across a whole phone screen.
+
+**Why the browser picked a till roll.** `hashOf` is FNV-1a written the obvious way,
+`h = (h * 0x01000193) & 0xFFFFFFFF`. A web `int` is an IEEE-754 double. That product reaches
+3.6e16 on the first character of the first id — four times past 2^53 — so it rounds, and the bits
+it drops are the low ones, which are the entire hash. One step of `pad.pulse` is 4111221743 on the
+phone and 4111221744 in the browser.
+
+So **every piece of paper in this app was a different piece of paper on the two devices**: stock,
+tear mask, which patch of the sheet shows, the tilt. `DIRECTION.md` states the opposite twice —
+*the same date is the same piece of paper every time it is drawn, on both phones* — and the code
+had never once kept it. On the PWA `pad.pulse` and `pad.chat` both hashed to `receipt`.
+
+The multiply is split so no intermediate leaves 2^53 and the 32-bit result is identical: the
+Android build does not move and the PWA comes to meet it. And `RegionPad` has its own stock list
+with neither `receipt` nor `index` in it — `index_02` is 1500×933 landscape and would magnify
+3.27× — because a pad is the only sheet that is the whole screen.
+
+Measured, same browser, same rect, before and after: a bare 400×200 sample goes from **4
+luminance levels to 98** and **L_std 0.450 to 11.274**, and the frame's dominant RGB falls to
+**6.5%**, under the item's 8% floor. The pad is ruled paper with a red margin rule down it, which
+is what `DIRECTION.md` says a region is.
+
+**The item stays open, and by how much is written on it.** Two of four bare 400×200 samples are
+still under L_std 8 — 5.726 and 4.238, at 49 and 47 levels. That is the quiet paper between a
+lined sheet's printed rules, magnified 2.29×, and it is the same question as the new item below.
+
+### The gate for a bug that cannot reproduce where the tests run
+
+This suite runs on the VM, where the arithmetic is exact. So
+`app/test/the_same_paper_on_both_phones_test.dart` computes the hash once, then computes it again
+in `double` arithmetic — which is what the web *is* — and requires the two to agree. An
+implementation whose intermediates stay inside 2^53 satisfies it by construction; one that leaves
+the range fails it here, with no browser and no build. The re-break is **kept as a third test**
+rather than done once and thrown away: with the single multiply put back, browser and phone part
+company on all fifteen non-empty ids, and if that ever stops being true the other test has
+silently stopped proving anything.
+
+### What a screenshot cannot say, and now does not have to
+
+Three review cycles argued about one rectangle from the pixels and named it wrongly twice, because
+neither the 702 nor the 1.94 is in a PNG. `CaptureHooks.paperSurfaces()` and
+`__deskPaperSurfaces` declare every surface on the glass with its asset, the size of the render
+behind it, the size it was drawn at and the magnification — using the same paint-order and
+visibility rules the text-run declaration already has, so an offstage region's four screens of
+paper are not declared. `scene.js` writes `<artifact>.surfaces.json` beside every still.
+
+Two gaps in it were found and fixed before it was trusted: the asset name was empty on every
+surface (an `Image`'s `renderObject` is its `Semantics` wrapper, not the `RenderImage`, so the
+names landed on a key nothing looked up), and nothing called the handle — a handle the harness
+never calls is not evidence, which is the shape firing 19 found in the selftests.
+
+### Two new items, filed rather than fixed
+
+**`no-surface-in-this-app-is-drawn-at-its-own-resolution`.** With the declaration in, not one
+surface is drawn at or below its own render: the desk 2.10×, a pad 1.94–2.29×, a baked tear
+shadow 2.03×, a full-height note's stock 1.27×. Magnifying a render of paper resamples its tooth
+away — the till roll was the extreme case, not the only one, and it is why the item above still
+has two samples under floor. `SIZES['paper'] = 1500` against sources `DIRECTION.md` says are
+2400×3200, so the material exists and the packer is where the resolution is being spent. The trade
+is bundle size against the tooth on the two surfaces that are the whole screen, and it touches the
+32 MB texture budget with 4.0 MB of headroom. That is a ranking decision and it belongs to
+ADDRESS, not to a firing that happened to be nearby.
+
+**`the-committed-stills-predate-a-library-wide-change-of-paper`.** The hash fix moves every paper
+assignment on the PWA, which is the whole evidence set. The next capture will differ from
+`evidence/.previous` almost everywhere, and `DIFF.json`'s first meaningful run in this build's
+history will land on it. **A DIAGNOSE that reads that as a library-wide regression will be reading
+a repair.**
+
+### What the next firing gets
+
+Stage IMPLEMENT, cycle 3, lease released. 134 tests pass, `analyze` clean, everything pushed and
+confirmed landed. Rank 1 and rank 2 both now need the same thing and it is the same thing firing
+19 said: a capture. Rank 5's root cause is fixed and what remains of it is ranked with a new item
+rather than guessed at.
+
+`bootstrap.sh --profile=web` is about six minutes here. Run `tools/pack_assets.py --seed=year`
+before `flutter test` or the bundle will not build. `python3 -m pip install numpy pillow` after
+any container restart. A release web build is about 40 seconds once the toolchain is warm, and a
+Playwright probe against `python3 -m http.server` in `app/build/web` answers in under a minute —
+four builds and eight probes fitted inside this firing comfortably, and they are the only reason
+any of the above is a measurement rather than another guess at a picture.
+
+**Lease released.**

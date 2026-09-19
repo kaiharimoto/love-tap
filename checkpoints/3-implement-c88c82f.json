@@ -1,0 +1,20 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 20,
+ "at": "c88c82f",
+ "written_at": "2026-09-19T04:57:21Z",
+ "tests": 134,
+ "analyze_errors": 0,
+ "items_worked": [
+  "the-gallery-has-no-photographs-because-sixteen-of-them-are-not-on-disk",
+  "the-backing-surface-of-three-screens-is-one-rgb-value"
+ ],
+ "items_closed": [],
+ "causes_established": [
+  "BlobImage's cacheWidth branch was unreachable: no call site passed a width, so every photograph decoded whole",
+  "__deskReady is a claim about painting, not content; the shutter now waits on outstanding blob reads on a budget",
+  "hashOf's FNV-1a multiply passes 2^53 and a web int is a double, so every paper assignment differed between the two devices; the PWA's region pads were torn from receipt_01, a 702x1500 till roll drawn at 1.94x"
+ ],
+ "open_items": 40
+}
