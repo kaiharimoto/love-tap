@@ -971,6 +971,20 @@
    "owner_priority": "harness",
    "filed_by": "firing 24",
    "note": "harness, so \u00a73c's `fix a ruler when you cannot see without it` applies: this is only worth a firing if a later one needs to measure one scene and cannot afford the full forty-five minutes. Firing 24 could afford it."
+  },
+  {
+   "id": "the-rulers-numbers-are-not-written-by-the-capture-that-they-describe",
+   "row": "the loop",
+   "points": 0,
+   "why": "FILED AT FIRING 25, NOT RANKED -- ADDRESS RANKS IT. capture.sh runs neither tools/check/legibility.py nor tools/check/palette.py: `grep -n 'legibility\\|palette.py' capture.sh` returns nothing. So evidence/legibility.json and evidence/palette.json -- two of the numbers every cycle's scoring leans on -- are the only files in evidence/ that are made BY HAND, by whichever firing last remembered to, from whichever stills happened to be on disk at the time and with whichever version of the tool was checked out. Firing 24 said so in evidence_fresh_as_of and regenerated both by hand. THE DRIFT THIS ALLOWS HAS ALREADY HAPPENED ONCE AND IS ON THE RECORD: firing 24 reported legibility.json holding 16 of 298 while `the as-shipped ruler reads 25 of 298 on the same stills`. At HEAD that gap should not exist -- rank 10's fix landed at ef9838c, before d1a3513 wrote that sentence, so the shipped ruler and the committed number are both the fixed ruler's 16 -- which makes the sentence itself the artifact of the drift: a hand-run number and a tool that moved under it, with nothing in the build able to say which of the two a reader is holding. CLAUDE.md's first never is `never hand-edit anything in evidence/`, on the grounds that an artifact comes out of ./capture.sh or it is recorded as missing. These two files are inside evidence/ and come out of neither. This is the one ruler item that is not about a ruler being wrong: both tools are fine, and nothing writes their answers down where the answer cannot be stale.",
+   "measurement": "capture.sh runs `python3 tools/check/legibility.py --out evidence/legibility.json` and `python3 tools/check/palette.py --out evidence/palette.json` after the stills are captured and before tools/capture/collect.py, and records a note_missing for either that fails to run at all (NOT for either that reports ok:false -- a ruler saying the app is below floor is the ruler working, and capture.sh already exits 0 with artifacts missing). Then: delete both JSONs, run ./capture.sh, and both exist and carry this capture's stills -- every filename in legibility.json's `artifacts` is a file this run wrote, and its `total_runs` matches a hand-run of the same tool over the same evidence/ to the integer. Re-break by reverting the two lines and watching a capture leave a stale legibility.json untouched with an older `total_runs` in it. CANNOT BE VERIFIED WITHOUT RUNNING A CAPTURE, which is the whole reason firing 25 filed it rather than doing it: the change is four lines, the measurement is forty-five minutes, and firing 25 had already spent its capture.",
+   "state": "open",
+   "attempts": 0,
+   "closed_by": null,
+   "rank": null,
+   "owner_priority": "harness",
+   "filed_by": "firing 25",
+   "note": "Cheap for whoever is already running a capture: the next firing that captures for any other reason can land this in the same run at no extra cost. WORKER_PROMPT.md section 3c's `fix a ruler only when you cannot see without it` does not obviously cover this, because it is not a fix to a ruler -- it is the wiring that stops a correct ruler's answer being hand-copied. That judgement is ADDRESS's to make."
   }
  ],
  "blocked": null,
