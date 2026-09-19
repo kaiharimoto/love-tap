@@ -3155,3 +3155,66 @@ One prerequisite that was written down nowhere and cost a run: `flutter test` fa
 fresh container until `tools/pack_assets.py --seed=year` has run, because `app/assets` is derived and
 gitignored and a bare pack leaves the seed directories out.
 
+### The render, and what it did and did not close
+
+All 240 frames of `unfold_thirds` are re-rendered and committed. Six chunks of forty, every one
+exit 0 with forty frames saved, 22:30:55Z to 00:42:02Z — two hours eleven at about 33 s a frame on
+four cores, at the committed 1440/16. Each chunk was verified decodable at 1440×1267 and committed
+with the manifest entries the generator wrote for it, so a half-finished sequence was never on the
+branch claiming to be whole.
+
+Measured at the source and passing:
+
+- the 300×120 interior patch over all 240 frames runs **L_std 6.476 to 6.717, mean 6.574**, against
+  1.795 for the blank sheet, with no outlier — the sheet carries its stock folded, turning and
+  lying flat alike;
+- frame 239, fully open, has thirteen rule dips at a median 62 px, which at 1440 px across 185 mm
+  is **7.97 mm against the 8.0 mm** `rules.py` prints for lined;
+- `surfaces.py --root assets`: 321 surfaces, none flat, ok true;
+- `texture_budget.py` on a clean repack: **28.0 MB peak against 32 MB** on a 36-frame window. The
+  constraint the item said must be honoured is honoured — the clip is not fixed by holding the
+  sequence.
+
+One number moved and a successor needs it: the peak was **21.2 MB in the item's original text and
+is now 28.0**, because the tallest packed band went 315 → 377 rows. Headroom is 4.0 MB, not 10.8.
+Anyone raising `SIZES["folds"]` from 540 has a third of the room the earlier note implies.
+
+**The item stays open, and deliberately.** Half its measurement is the pixels of the artifacts —
+`13_messenger_states.png`, `crops/06_unfolding_strip.png`, `frames.json` — and `docs/LOOP.md` puts
+`./capture.sh` in stage 0. This was IMPLEMENT. Running a capture would have been a second stage,
+which is the thing §3 exists to stop. The next OBSERVE closes it on the pixels or reopens it.
+Note that `repeated_fraction` and `longest_still_run` are a *timing* property: the re-render cannot
+have moved them, and if they are still 0.163 and 23 that is the decode-lag question candidate (a)
+described, which is now the only part of (a) left alive.
+
+### One mistake, and CLAUDE.md had already written it down
+
+The two-frame probe was sent to a scratch directory with `--out`, which does not stop a blender
+generator writing `assets/MANIFEST.json`: it recorded the sequence directory and both frames under
+paths beginning `../../../tmp`, and those three entries were committed with chunk 0. CLAUDE.md
+names this hazard in as many words and says to `git checkout -- assets/MANIFEST.json` after a
+throwaway render. It was read after the fact. Dropped with `manifest.py --fill`, the code path that
+already existed for it; 822 entries to 819, none outside the library.
+
+The container was also restarted mid-repack, which left `app/assets/folds` holding 241 files at
+1186 px and made `texture_budget.py` read 99.7 MB against a 32 MB budget. That is a half-written
+derived directory, not a regression. `rm -rf app/assets` and a clean repack gave 240 at 540 and
+28.0 MB. A note to that effect is on the queue item, because the failure looks exactly like a real
+one.
+
+### What the next firing gets
+
+Stage IMPLEMENT, cycle 3, **38 open items**, lease released. Two closed this firing, both of them
+gates the triage ranked above items worth more points, and the triage was right to: one of them had
+been sending the build's own diagnosis to the wrong root cause for the row worth thirty points.
+
+Three items now carry a cause that was established rather than assumed — ranks 1, 2 and 5 — and
+each names the measurement that would settle what is left. Two of the three need a Flutter
+toolchain and no capture; rank 1 needs a capture and nothing else.
+
+`./bootstrap.sh --profile=web` takes about six minutes here and gives Flutter 3.47.2, Blender 4.5.13
+and ffmpeg. Before `flutter test`, run `tools/pack_assets.py --seed=year` — a bare pack leaves the
+seed out and the bundle will not build. `python3 -m pip install numpy pillow` after any container
+restart.
+
+**Lease released.**
