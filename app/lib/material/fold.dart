@@ -13,7 +13,6 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart';
 
 import '../capture/hooks.dart';
-import '../flags.dart';
 import 'library.dart';
 import 'motion.dart';
 
@@ -34,6 +33,25 @@ class FoldFrames {
   /// How many frames are held at once, and how far ahead decoding runs.
   static const window = 36;
   static const _ahead = 24;
+
+  /// The rate every sequence is rendered and played at. A clip of one has to be assembled at the
+  /// same rate, and the clock stepped by exactly one of these between shots, or the recording is
+  /// not of the sequence -- see DrivenClock.period.
+  static const frameRate = 60;
+
+  /// Which frame of a sequence [length] long is showing, [since] it started playing.
+  ///
+  /// Microseconds, because the clock does not land on whole milliseconds. One frame of a sixty-a-
+  /// second clip is 16667 us, and `inMilliseconds` truncates the run of them to 16, 33, 50, 66,
+  /// 83 -- which indexes 0, 1, 3, 3, 4: a frame shown twice and a frame never shown at all, four
+  /// times a second, in the one sequence the whole material claim rests on.
+  static int frameAt(Duration since, int length) => since.isNegative || length == 0
+      ? 0
+      : (since.inMicroseconds * frameRate ~/ 1000000).clamp(0, length - 1);
+
+  /// Whether a sequence [length] long has played out, [since] it started.
+  static bool finished(Duration since, int length) =>
+      since.inMicroseconds * frameRate >= length * 1000000;
 
   final Map<int, ui.Image> _held = {};
   final Set<int> _loading = {};
@@ -168,8 +186,6 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
   /// blinking out, which is what a dropped frame would look like.
   ui.Image? _lastDrawn;
 
-  static const _frameRate = 60;
-
   @override
   void initState() {
     super.initState();
@@ -181,8 +197,13 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
   }
 
   void _start() {
+    final f = _frames;
     if (DrivenClock.enabled) {
       final from = DrivenClock.now;
+      // Here and not where the note was touched: the widget is built and its frames looked up
+      // asynchronously, so the instant the sequence's clock starts from is this one, and a take
+      // sized off the earlier one would stop short of the end of the open.
+      if (f != null) Folds.openFrom(from, f.length);
       _driven = DrivenClock.ticks.listen((now) => _advance(now - from));
       return;
     }
@@ -195,7 +216,7 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
     if (f == null || f.length == 0) return;
     setState(() => _elapsed = elapsed);
     final after = elapsed - widget.holdFirst;
-    if (after.inMilliseconds >= f.length * 1000 / _frameRate) {
+    if (FoldFrames.finished(after, f.length)) {
       _done = true;
       _ticker?.stop();
       _driven?.cancel();
@@ -228,8 +249,7 @@ class _UnfoldingState extends State<Unfolding> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     final f = _frames;
     if (f == null || f.length == 0) return SizedBox(width: widget.width, height: _height);
-    final after = _elapsed - widget.holdFirst;
-    final i = after.isNegative ? 0 : (after.inMilliseconds * _frameRate ~/ 1000).clamp(0, f.length - 1);
+    final i = FoldFrames.frameAt(_elapsed - widget.holdFirst, f.length);
     final image = f.at(i) ?? _lastDrawn;
     if (image == null) return SizedBox(width: widget.width, height: _height);
     _lastDrawn = image;
@@ -324,9 +344,13 @@ class _FoldedNoteState extends State<FoldedNote> {
       return Unfolding(
         seq: widget.seq,
         width: widget.width,
-        // long enough for a reader to see the note lying folded, short enough that the clip
-        // is the note opening rather than the note sitting there
-        holdFirst: Flags.capture ? const Duration(milliseconds: 200) : Duration.zero,
+        // No hold, and none under capture either. A beat of the note lying folded before it
+        // starts to open is a beat in which nothing is drawn, and a clip is disqualified outright
+        // by any frame identical to the one before it -- so under capture this held twelve frames
+        // of the sheet and put them in 06_unfolding.mp4. It was also the app behaving one way for
+        // the camera and another way in a hand, which is the thing the artifacts exist to rule
+        // out. The first frame of the sequence IS the note lying folded; the beat, if it is ever
+        // wanted, belongs in the render and not in a timer.
         onOpen: () => setState(() => _open = true),
       );
     }
@@ -345,7 +369,35 @@ class _FoldedNoteState extends State<FoldedNote> {
 class Folds {
   static final List<VoidCallback> _waiting = [];
 
+  /// The driven-clock instant the last open asked for will be finished at: the sequence played
+  /// out, and the settle that puts the written note over its final frame finished with it.
+  ///
+  /// This exists so a take of the open is exactly as long as the open. capture.sh used to be
+  /// told a frame count by hand -- three hundred, for a fold that is two hundred and forty frames
+  /// and a settle that is sixteen -- and the forty-four frames of slack at the end of that sum
+  /// were the twenty-one identical frames at the tail of 06_unfolding.mp4. A count written in a
+  /// scene file cannot know the sequence length; the app does, so the app is asked.
+  static Duration? openEndsAt;
+
   static void whenAsked(VoidCallback open) => _waiting.add(open);
+
+  /// How much of the open is still to come, in microseconds, or zero once it is over. The
+  /// harness polls this between shots, the way it already polls the outstanding blob count.
+  static int get microsecondsLeftInTheOpen {
+    final ends = openEndsAt;
+    if (ends == null) return 0;
+    final left = (ends - DrivenClock.now).inMicroseconds;
+    return left > 0 ? left : 0;
+  }
+
+  /// Called by a sequence as it starts to play, with the instant its clock starts from and how
+  /// many frames it has, so [openEndsAt] is read off the sequence rather than guessed outside it.
+  static void openFrom(Duration zero, int frames) {
+    if (frames == 0) return;
+    openEndsAt = zero +
+        Duration(microseconds: frames * 1000000 ~/ FoldFrames.frameRate) +
+        Motion.settle;
+  }
 
   static void openAll() {
     for (final open in List.of(_waiting)) {
@@ -355,5 +407,8 @@ class Folds {
   }
 
   @visibleForTesting
-  static void reset() => _waiting.clear();
+  static void reset() {
+    _waiting.clear();
+    openEndsAt = null;
+  }
 }

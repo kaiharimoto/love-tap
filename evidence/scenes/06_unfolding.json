@@ -25,25 +25,20 @@
    "ms": 1200
   },
   {
-   "do": "frames",
-   "dir": "evidence/frames/06_unfolding",
-   "count": 20,
-   "ms": 16
-  },
-  {
    "do": "unfold",
    "after": 0
   },
   {
    "do": "frames",
-   "dir": "evidence/frames/06_unfolding_b",
-   "count": 300,
-   "ms": 16
+   "dir": "evidence/frames/06_unfolding",
+   "count": 400,
+   "fps": 60,
+   "stop": "__deskFoldLeft"
   },
   {
    "do": "report",
    "out": "evidence/logs/06_unfolding.report.json",
-   "at": "06_unfolding_b"
+   "at": "06_unfolding"
   }
  ]
 }

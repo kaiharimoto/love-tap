@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:js_interop';
 
+import '../material/fold.dart';
 import '../regions/chat/blob_widgets.dart';
 import 'hooks.dart';
 
@@ -27,6 +28,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskStage(JSFunction f);
   external set __deskStep(JSFunction f);
   external set __deskBlobsPending(JSFunction f);
+  external set __deskFoldLeft(JSFunction f);
   external set __deskPaperSurfaces(JSFunction f);
   external set __deskPartnerTyping(JSFunction f);
 }
@@ -48,10 +50,17 @@ void expose(CaptureHooks hooks) {
   w.__deskPair = ((JSString base, JSString words) => hooks.pair(base.toDart, words.toDart).toJS).toJS;
   w.__deskScrollBy = ((JSNumber dy) => hooks.scrollBy(dy.toDartDouble).toJS).toJS;
   w.__deskStage = (() => hooks.stageStates().toJS).toJS;
-  w.__deskStep = ((JSNumber ms) => DrivenClock.step(ms.toDartInt).toJS).toJS;
+  // A fraction of a millisecond, not a whole one: the harness steps by one frame of the clip it
+  // is assembling, and sixty frames a second is 16.667 ms. `toDartInt` threw that 0.667 away on
+  // every frame of every clip.
+  w.__deskStep = ((JSNumber ms) =>
+      DrivenClock.step(Duration(microseconds: (ms.toDartDouble * 1000).round())).toJS).toJS;
   // A number rather than a sentence: the harness polls it between frames and a JSON
   // parse per poll is a cost the shot does not need.
   w.__deskBlobsPending = (() => BlobCache.outstanding.toJS).toJS;
+  // How much of a note's open is still to come, in microseconds. A take of the fold is as long
+  // as this says and not a frame longer, so the clip cannot end on a run of settled frames.
+  w.__deskFoldLeft = (() => Folds.microsecondsLeftInTheOpen.toJS).toJS;
   w.__deskPaperSurfaces = (() => jsonEncode(CaptureHooks.paperSurfaces()).toJS).toJS;
   w.__deskPartnerTyping = ((JSBoolean on) => hooks.partnerTyping(on.toDart).toJS).toJS;
 }

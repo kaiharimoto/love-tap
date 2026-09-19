@@ -322,7 +322,20 @@ function ensure(p) {
         const dir = abs(step.dir);
         fs.mkdirSync(dir, { recursive: true });
         const count = step.count || 30;
-        const ms = step.ms || 33;
+        // The clock's step and the clip's frame rate are the same number, and writing it twice is
+        // how one fold frame in every twenty-five came to be shot twice: the scene stepped a whole
+        // 16 ms while ffmpeg assembled at 60, which is 16.667. The sequence fell one frame behind
+        // every 400 ms and the shot at that moment caught the frame before it again -- recorded
+        // frames 44, 94, 144, 169, 244, 269 of 06_unfolding.mp4, a cadence of exactly 25. So the
+        // rate is the number written down and the step is derived from it. `ms` still overrides,
+        // for a take deliberately run slower than the clip it goes into.
+        const fps = step.fps || 60;
+        const ms = step.ms === undefined ? 1000 / fps : step.ms;
+        // A take is as long as the thing it records. `stop` names a handle that answers with the
+        // microseconds still to come; the take ends on the first shot after it reaches zero, so a
+        // clip cannot acquire a tail of held frames because a count was written down by hand.
+        const stop = step.stop;
+        let stopped = 0;
         // where this step's frames start in the directory, so one clip can be made of two takes:
         // a note opening, and then the thread it opened in
         const from = step.from || 0;
@@ -360,9 +373,16 @@ function ensure(p) {
           await page.screenshot({ path: name, fullPage: false, clip: step.clip });
           names.push(path.relative(ROOT, name));
           await page.evaluate((m) => window.__deskStep(m), ms);
+          if (stop) {
+            const left = await page.evaluate((h) => (window[h] ? window[h]() : -1), stop);
+            if (left === -1) { problems.push('frames: no ' + stop + ' handle'); break; }
+            // one shot past zero, so the last frame of the clip is the settled thing and not the
+            // frame before it finished arriving
+            if (left === 0 && stopped++ > 0) break;
+          }
         }
         if (drive && drive.kind === 'drag' && !drive.release) await page.mouse.up();
-        log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms, drive: drive || null });
+        log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms, fps, stop: stop || null, drive: drive || null });
         break;
       }
       case 'report': {

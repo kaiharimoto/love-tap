@@ -565,7 +565,7 @@ class CaptureHooks {
   static Future<void> _settle() async {
     for (var i = 0; i < 3; i++) {
       await Future<void>.delayed(Duration.zero);
-      await DrivenClock.step(16);
+      await DrivenClock.step(const Duration(milliseconds: 16));
     }
   }
 }
@@ -580,9 +580,21 @@ class DrivenClock {
   static Duration get now => _now;
   static Stream<Duration> get ticks => _ticks.stream;
 
-  /// Advance by [ms] and let the framework produce exactly one frame.
-  static Future<void> step(int ms) async {
-    _now += Duration(milliseconds: ms);
+  /// The period of one frame of a clip assembled at [fps], as an exact duration.
+  ///
+  /// A clip is a directory of frames handed to ffmpeg at a frame rate, and the clock has to
+  /// advance by exactly that frame's worth of time between one shot and the next or the recording
+  /// is not of the app at the times it claims. Sixty frames a second is 16.667 ms and not 16, and
+  /// the 4% those two differ by is not a rounding detail: a sequence indexed at 60 fps falls one
+  /// frame behind every 400 ms, so the shot at that moment catches the frame before it again.
+  /// That is the whole of 06_unfolding.mp4's mid-motion stall -- one repeat every twenty-five
+  /// frames, at recorded frames 44, 94, 144, 169, 244, 269 -- and it is why this takes a Duration
+  /// rather than a whole number of milliseconds.
+  static Duration period(double fps) => Duration(microseconds: (1000000 / fps).round());
+
+  /// Advance by [by] and let the framework produce exactly one frame.
+  static Future<void> step(Duration by) async {
+    _now += by;
     if (_ticks.hasListener) _ticks.add(_now);
     final done = Completer<void>();
     SchedulerBinding.instance.addPostFrameCallback((_) {
