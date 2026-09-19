@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../feelings/registry.dart';
 import '../../material/assignment.dart';
+import '../../material/choice.dart';
 import '../../material/hands.dart';
 import '../../material/marks.dart';
 import '../../material/library.dart';
@@ -258,15 +259,10 @@ class _Row extends StatelessWidget {
                 spacing: 10,
                 children: [
                   for (final o in options)
-                    GestureDetector(
+                    Choice(
+                      label: o.replaceAll('_', ' '),
+                      chosen: o == value,
                       onTap: () => onPick(o),
-                      child: Text(
-                        o.replaceAll('_', ' '),
-                        style: Hands.margin(size: 15).copyWith(
-                          color: o == value ? Pen.ballpoint : Pen.margin.withValues(alpha: 0.6),
-                          decoration: o == value ? TextDecoration.underline : null,
-                        ),
-                      ),
                     ),
                 ],
               ),

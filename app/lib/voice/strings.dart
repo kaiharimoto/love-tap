@@ -81,6 +81,10 @@ class S {
   // settings
   static const emptyFeelings = 'the built-in ones are here. make one below.';
 
+  /// What is missing, said in words. It used to be said by drawing `keep it` at forty per cent of
+  /// an ink, which is 2.4:1 against the paper and tells nobody which of the four fields it wants.
+  static const itNeedsAName = 'it needs a name first.';
+
   static String feelingFrom(String feelingName, String person) => '$feelingName from $person';
   static String aPhotoFrom(String person) => '$person, a photo';
 }

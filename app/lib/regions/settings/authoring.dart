@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 
 import '../../feelings/builtins.dart';
 import '../../feelings/registry.dart';
+import '../../material/choice.dart';
 import '../../material/hands.dart';
+import '../../voice/strings.dart';
 import '../../material/library.dart';
 import '../../material/objects.dart';
 import '../../material/slip.dart';
@@ -126,15 +128,12 @@ class _AuthoringSheetState extends State<AuthoringSheet> {
                 spacing: 12,
                 children: [
                   for (final f in Family.values)
-                    GestureDetector(
+                    Choice(
+                      label: f.label.toLowerCase(),
+                      size: 16,
+                      chosen: f == _family,
+                      chosenInk: Pen.stamp,
                       onTap: () => setState(() => _family = f),
-                      child: Text(
-                        f.label.toLowerCase(),
-                        style: Hands.margin(size: 16).copyWith(
-                          color: f == _family ? Pen.stamp : Pen.margin.withValues(alpha: 0.6),
-                          decoration: f == _family ? TextDecoration.underline : null,
-                        ),
-                      ),
                     ),
                 ],
               ),
@@ -203,10 +202,18 @@ class _AuthoringSheetState extends State<AuthoringSheet> {
                               'sound': preview.sound,
                               'retired': false,
                             }),
-                    child: Text('keep it',
-                        style: Hands.margin(size: 16).copyWith(
-                          color: _name.text.trim().isEmpty ? Pen.margin.withValues(alpha: 0.4) : Pen.stamp,
-                        )),
+                    // A thing that cannot be done yet says why, in words. It said it by being
+                    // forty per cent of an ink, which is the same fade as the pickers above and
+                    // the same 2.4:1, and which tells a person nothing about what is missing.
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('keep it', style: Hands.margin(size: 16).copyWith(color: Pen.stamp)),
+                        if (_name.text.trim().isEmpty)
+                          Text(S.itNeedsAName, style: Hands.margin(size: 12)),
+                      ],
+                    ),
                   ),
                 ],
               ),

@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../../material/choice.dart';
 import '../../material/hands.dart';
 import '../../material/palette.dart';
 import '../../material/slip.dart';
@@ -136,21 +137,19 @@ class NotificationSettings extends StatelessWidget {
                   children: [
                     Expanded(child: Text(_said(t.id), style: Hands.margin(size: 14))),
                     for (final a in Announce.values)
-                      GestureDetector(
-                        onTap: () => onChanged(prefs.copyWith(byType: {...prefs.byType, t.id: a})),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12),
-                          child: Text(
-                            switch (a) {
-                              Announce.interrupt => 'wake me',
-                              Announce.quiet => 'quietly',
-                              Announce.off => 'not at all',
-                            },
-                            style: Hands.margin(size: 13).copyWith(
-                              color: (prefs.byType[t.id] ?? Announce.quiet) == a ? Pen.stamp : Pen.margin.withValues(alpha: 0.5),
-                              decoration: (prefs.byType[t.id] ?? Announce.quiet) == a ? TextDecoration.underline : null,
-                            ),
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Choice(
+                          label: switch (a) {
+                            Announce.interrupt => 'wake me',
+                            Announce.quiet => 'quietly',
+                            Announce.off => 'not at all',
+                          },
+                          size: 13,
+                          chosen: (prefs.byType[t.id] ?? Announce.quiet) == a,
+                          chosenInk: Pen.stamp,
+                          onTap: () =>
+                              onChanged(prefs.copyWith(byType: {...prefs.byType, t.id: a})),
                         ),
                       ),
                   ],
