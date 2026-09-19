@@ -148,6 +148,37 @@ function ensure(p) {
   // A shot with a `clip` is a crop of the viewport, so the declared rects are shifted into the
   // crop's own coordinates and anything outside it is dropped — otherwise the tool would be
   // handed permission to look at pixels that are not in the file.
+  // Beside every still, what the app says it drew on: the asset, the size of the render it came
+  // from, the size it was drawn at, and the magnification between the two.
+  //
+  // It is here because a PNG cannot answer that question and three review cycles tried. The flat
+  // cream rectangle in `10_first_run.png` was diagnosed as a missing render and then as a
+  // fallback colour showing through; it was neither. It was a 702x1500 till roll drawn as a whole
+  // phone screen, and neither the 702 nor the 1.94 is a thing anyone can read off the picture.
+  //
+  // Written as its own file per artifact, the way the text runs are, so a tool can be pointed at
+  // `10_first_run.surfaces.json` and told what the frame was made of.
+  async function surfacesSidecar(out) {
+    const raw = await page
+      .evaluate(() => window.__deskPaperSurfaces && window.__deskPaperSurfaces())
+      .catch((e) => 'threw: ' + e);
+    if (!raw || typeof raw !== 'string' || raw.startsWith('threw:')) {
+      problems.push('surfaces: ' + (raw ? String(raw).slice(0, 200) : 'no __deskPaperSurfaces handle'));
+      return null;
+    }
+    let surfaces;
+    try {
+      surfaces = JSON.parse(raw);
+    } catch (e) {
+      problems.push('surfaces: unparseable: ' + String(e).slice(0, 200));
+      return null;
+    }
+    const side = out.replace(/\.png$/, '') + '.surfaces.json';
+    ensure(side);
+    fs.writeFileSync(side, JSON.stringify(surfaces, null, 1));
+    return surfaces.length;
+  }
+
   async function textSidecar(out, clip) {
     const raw = await page.evaluate(() => window.__deskTextRuns && window.__deskTextRuns())
       .catch((e) => 'threw: ' + e);
@@ -265,7 +296,11 @@ function ensure(p) {
         await settleBlobs(path.basename(out));
         await page.screenshot({ path: out, fullPage: false, clip: step.clip });
         const declared = await textSidecar(out, step.clip);
-        log.shots.push({ out: path.relative(ROOT, out), clip: step.clip || null, text_runs: declared });
+        const surfaces = await surfacesSidecar(out);
+        log.shots.push({
+          out: path.relative(ROOT, out), clip: step.clip || null,
+          text_runs: declared, surfaces,
+        });
         break;
       }
       case 'frames': {

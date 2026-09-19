@@ -274,10 +274,14 @@ class CaptureHooks {
     final names = <RenderObject, String>{};
     void pair(Element el) {
       final w = el.widget;
-      if (w is Image) {
-        final ro = el.renderObject;
-        final provider = w.image;
-        if (ro != null && provider is AssetImage) names[ro] = provider.assetName;
+      final provider = w is Image ? w.image : null;
+      if (provider is AssetImage) {
+        // `el.renderObject` is the nearest render object at or under the element, and for an
+        // `Image` that is its `Semantics` wrapper rather than the `RenderImage` -- so the name
+        // was landing on a key nothing else ever looked up, and every surface came back with an
+        // empty asset. Descend to the image itself.
+        final ro = _imageUnder(el);
+        if (ro != null) names[ro] = provider.assetName;
       }
       el.visitChildren(pair);
     }
@@ -288,6 +292,23 @@ class CaptureHooks {
       _collectSurfaces(view, view, view.flutterView.devicePixelRatio, names, out);
     }
     return out;
+  }
+
+  /// The `RenderImage` an `Image` element eventually paints with, past whatever it is wrapped in.
+  static RenderImage? _imageUnder(Element el) {
+    final ro = el.renderObject;
+    if (ro is RenderImage) return ro;
+    RenderImage? found;
+    void down(RenderObject node) {
+      if (found != null) return;
+      if (node is RenderImage) {
+        found = node;
+        return;
+      }
+      node.visitChildren(down);
+    }
+    if (ro != null) down(ro);
+    return found;
   }
 
   static void _collectSurfaces(RenderObject node, RenderView view, double dpr,
