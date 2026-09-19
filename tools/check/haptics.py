@@ -21,6 +21,43 @@ And it checks what `docs/FEELINGS.md` states as a rule: no two feelings share a 
 and no two share an object asset. A palette of feelings that repeat itself is a palette that
 transmits less than it claims to.
 
+That check was string equality, which is a catalogue and not a discrimination test: two sequences
+can differ in every character and be the same thing in the hand. So it also measures the distance
+between every pair of the thirty-four, in just-noticeable differences, and fails when any pair is
+closer than the floor.
+
+THE DISTANCE, and why it is these six terms. A haptic is felt as a gesture, and what the hand gets
+from a gesture is how many times it was touched, how fast, how long each touch was, how much of the
+time the phone was buzzing, whether the rhythm was even or not, and whether the force was steady,
+rising or falling. Each of those is one term, each is divided by its own just-noticeable
+difference, and the six are combined as an L2 norm, so a pair that differs by one JND on one
+dimension alone scores 1.0.
+
+  count     |nA - nB|, capped at four. Past about four pulses nobody is counting, they are
+            feeling a texture, so the fifth difference is not worth anything the fourth was not.
+  tempo     the mean onset-to-onset interval, in log, over ln(1.2). The Weber fraction for the
+            duration of a vibrotactile interval is about 0.2 across the 50-1000 ms range this
+            vocabulary lives in (Gescheider).
+  pulse     the mean length of one buzz, same fraction. Tempo and pulse length are independent:
+            four short taps in a second is not four long ones.
+  duty      the fraction of the time the motor is on, over 0.12. It is a ratio of two durations
+            each good to about 0.2, so the ratio is good to about 0.12 by the same argument.
+  evenness  the coefficient of variation of the onset intervals, over 0.20. This is what separates
+            a metronome from a stutter, and it is the single feature that says `same gesture` when
+            everything else differs.
+  force     the mean amplitude over time in log over ln(1.25) (the Weber fraction for vibration
+            intensity is 0.15-0.3; the cautious end of that is taken), plus the contour -- the
+            rise from the first pulse to the last, and the span between the quietest and the
+            loudest -- each over 0.35 of full scale.
+
+THE FLOOR IS 2.0 JND, and it is a stated convention rather than a measured one. One JND is by
+definition the difference detected half the time when the two stimuli are side by side and the
+listener is told to compare them. Naming one of thirty-four from memory, with the phone face down
+in a pocket and nothing to compare it against, is a harder task than that by a margin nobody here
+has measured. Two is the smallest allowance for it that is still expressed in the same unit, and it
+is what this vocabulary is held to. What would settle it is a forced-choice identification run on
+real hardware with real hands, and that is in loop/STATE.json asks[] because nobody here can do it.
+
 The notation is `80@90 off40 160@160`, with `(...) ×N` and `... ×N` repeats, and it is parsed here
 in the same terms as `parseHaptic` in `app/lib/feelings/builtins.dart`. Two parsers is one too
 many, so `app/test/the_haptics_are_written_down_test.dart` asserts the Dart agrees with the file
@@ -28,6 +65,7 @@ this writes; if they ever drift, the Dart test fails rather than the drift going
 """
 import argparse
 import json
+import math
 import os
 import re
 import sys
@@ -105,6 +143,82 @@ def feelings(path=BUILTINS):
     return out
 
 
+# ---- the distance -------------------------------------------------------------------------------
+
+W_TEMPO = math.log(1.2)     # Weber fraction 0.2 on an interval duration
+W_PULSE = math.log(1.2)     # and on the length of one buzz
+W_FORCE = math.log(1.25)    # Weber fraction 0.25 on vibration intensity, the cautious end
+W_DUTY = 0.12               # a ratio of two durations each good to 0.2
+W_EVEN = 0.20               # a change in the coefficient of variation of the onset intervals
+W_CONTOUR = 0.35            # of full scale, for the rise across the pulses and for their span
+COUNT_CAP = 4               # past four pulses nobody is counting, they are feeling a texture
+FLOOR_JND = 2.0             # the docstring defends this number
+
+
+def shape(spec):
+    """The six things a hand gets from a gesture, off one sequence."""
+    segs = segments(spec)
+    pulses = [(ms, amp) for ms, amp in segs if amp > 0]
+    total = sum(ms for ms, _ in segs)
+    buzzing = sum(ms for ms, _ in pulses)
+    onsets, t = [], 0
+    for ms, amp in segs:
+        if amp > 0:
+            onsets.append(t)
+        t += ms
+    intervals = [onsets[i + 1] - onsets[i] for i in range(len(onsets) - 1)] or [total]
+    mean_ioi = sum(intervals) / len(intervals)
+    variance = sum((x - mean_ioi) ** 2 for x in intervals) / len(intervals)
+    amps = [amp for _, amp in pulses] or [0]
+    return {
+        "pulses": len(pulses),
+        "mean_interval_ms": round(mean_ioi, 1),
+        "mean_pulse_ms": round(buzzing / len(pulses), 1) if pulses else 0.0,
+        "duty": round(buzzing / total, 4) if total else 0.0,
+        "evenness_cv": round(variance ** 0.5 / mean_ioi, 4) if mean_ioi else 0.0,
+        "mean_amp": round(sum(ms * amp for ms, amp in pulses) / buzzing, 1) if buzzing else 0.0,
+        "contour_rise": round((amps[-1] - amps[0]) / AMP_MAX, 4),
+        "contour_span": round((max(amps) - min(amps)) / AMP_MAX, 4),
+    }
+
+
+def _log_ratio(a, b, w):
+    return abs(math.log((a + 1.0) / (b + 1.0))) / w
+
+
+def distance(spec_a, spec_b):
+    """How far apart two sequences are, in just-noticeable differences. Terms and total."""
+    a, b = shape(spec_a), shape(spec_b)
+    terms = {
+        "count": min(abs(a["pulses"] - b["pulses"]), COUNT_CAP) / 1.0,
+        "tempo": _log_ratio(a["mean_interval_ms"], b["mean_interval_ms"], W_TEMPO),
+        "pulse": _log_ratio(a["mean_pulse_ms"], b["mean_pulse_ms"], W_PULSE),
+        "duty": abs(a["duty"] - b["duty"]) / W_DUTY,
+        "evenness": abs(a["evenness_cv"] - b["evenness_cv"]) / W_EVEN,
+        "force": _log_ratio(a["mean_amp"], b["mean_amp"], W_FORCE),
+        "rise": abs(a["contour_rise"] - b["contour_rise"]) / W_CONTOUR,
+        "span": abs(a["contour_span"] - b["contour_span"]) / W_CONTOUR,
+    }
+    total = math.sqrt(sum(v * v for v in terms.values()))
+    return total, {k: round(v, 3) for k, v in terms.items()}
+
+
+def nearest_pairs(described, limit=12):
+    """Every pair, closest first, with the terms that made the distance."""
+    out = []
+    for i in range(len(described)):
+        for j in range(i + 1, len(described)):
+            d, terms = distance(described[i]["haptic"], described[j]["haptic"])
+            out.append({
+                "a": described[i]["id"],
+                "b": described[j]["id"],
+                "jnd": round(d, 3),
+                "terms": {k: v for k, v in terms.items() if v >= 0.3},
+            })
+    out.sort(key=lambda r: r["jnd"])
+    return out[:limit], out
+
+
 def describe(f):
     segs = segments(f["haptic"])
     total = sum(ms for ms, _ in segs)
@@ -124,10 +238,57 @@ def describe(f):
     }
 
 
+def selftest():
+    """Re-break the check here, so a floor that has stopped measuring anything says so.
+
+    A check that has only ever passed is a check nobody has watched fail. Each case below is a
+    thing the distance has to answer, and the last two are the two shapes of mistake it exists to
+    catch: the same gesture wearing different numbers, and a floor that would let one through.
+    """
+    failures = []
+
+    def want(name, ok, detail=""):
+        if not ok:
+            failures.append(f"{name}: {detail}")
+        print(f"  {'ok  ' if ok else 'FAIL'} {name}{(' — ' + detail) if detail and not ok else ''}")
+
+    same = "200@160 off200 200@160"
+    want("a sequence is no distance from itself", distance(same, same)[0] == 0.0)
+
+    # The same gesture with different numbers on it: an even train either way.
+    near = distance("30@220 off30 ×8", "30@200 off35 ×8")[0]
+    want("an even train is close to an even train", near < FLOOR_JND, f"{near:.2f}")
+
+    # A different gesture entirely: one long press against a run of taps.
+    far = distance("30@220 off30 ×8", "1200@110 off800 1200@110")[0]
+    want("a press is nowhere near a run of taps", far > 4 * FLOOR_JND, f"{far:.2f}")
+
+    # Evenness alone has to be able to carry a pair: same count, same tempo, same force.
+    even = "50@200 off150 50@200 off150 50@200 off150 50@200"
+    stutter = "50@200 off40 50@200 off260 50@200 off40 50@200"
+    d, terms = distance(even, stutter)
+    want("a stutter is not a metronome", terms["evenness"] >= 1.0, f"evenness {terms['evenness']}")
+
+    # And the floor has to reject what the old string-equality check let through: the pair firing
+    # 21 found and re-authored, as it stood then.
+    old_confetti = ("30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 "
+                    "30@190 off40 30@150")
+    d = distance("30@220 off30 ×8", old_confetti)[0]
+    want("the pair the catalogue could not see is under the floor", d < FLOOR_JND, f"{d:.2f}")
+
+    print("haptics selftest: " + ("all cases pass" if not failures else f"{len(failures)} FAILED"))
+    return 0 if not failures else 1
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="")
+    ap.add_argument("--selftest", action="store_true",
+                    help="re-break the distance and watch each case fail or pass")
     args = ap.parse_args()
+
+    if args.selftest:
+        return selftest()
 
     rows = feelings()
     if not rows:
@@ -145,6 +306,13 @@ def main():
                 problems.append(f"{what} {value!r} is shared by {', '.join(ids)} — "
                                 f"docs/FEELINGS.md says no two rows share one")
 
+    closest, every_pair = nearest_pairs(described, limit=12)
+    for pair in every_pair:
+        if pair["jnd"] < FLOOR_JND:
+            problems.append(
+                f"{pair['a']} and {pair['b']} are {pair['jnd']} JND apart, under the {FLOOR_JND} "
+                f"floor — one of them cannot be named from the hand alone")
+
     report = {
         "what": "every built-in feeling's haptic, from app/lib/feelings/builtins.dart",
         "notation": "ms@amp, offN for a gap, (…) ×N to repeat; amp is 0–255",
@@ -156,6 +324,15 @@ def main():
             "shortest": min(f["duration_ms"] for f in described),
             "longest": max(f["duration_ms"] for f in described),
             "mean": round(sum(f["duration_ms"] for f in described) / len(described), 1),
+        },
+        "discrimination": {
+            "unit": "just-noticeable differences, L2 over six perceptual terms; "
+                    "tools/check/haptics.py's docstring defends the terms and the floor",
+            "floor_jnd": FLOOR_JND,
+            "pairs": len(every_pair),
+            "closest_jnd": closest[0]["jnd"] if closest else None,
+            "under_floor": [p for p in every_pair if p["jnd"] < FLOOR_JND],
+            "closest_twelve": closest,
         },
         "problems": problems,
         "rows": described,

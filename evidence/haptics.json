@@ -15,7 +15,175 @@
  "duration_ms": {
   "shortest": 30,
   "longest": 3200,
-  "mean": 1079.0
+  "mean": 1082.8
+ },
+ "discrimination": {
+  "unit": "just-noticeable differences, L2 over six perceptual terms; tools/check/haptics.py's docstring defends the terms and the floor",
+  "floor_jnd": 2.0,
+  "pairs": 561,
+  "closest_jnd": 2.584,
+  "under_floor": [],
+  "closest_twelve": [
+   {
+    "a": "stuck_with_me",
+    "b": "overwhelmed",
+    "jnd": 2.584,
+    "terms": {
+     "count": 2.0,
+     "tempo": 0.982,
+     "pulse": 0.965,
+     "rise": 0.616,
+     "span": 0.616
+    }
+   },
+   {
+    "a": "not_okay",
+    "b": "treat",
+    "jnd": 2.615,
+    "terms": {
+     "tempo": 1.081,
+     "pulse": 0.786,
+     "evenness": 0.501,
+     "force": 1.736,
+     "rise": 0.616,
+     "span": 1.177
+    }
+   },
+   {
+    "a": "crown",
+    "b": "treat",
+    "jnd": 2.672,
+    "terms": {
+     "count": 1.0,
+     "tempo": 0.867,
+     "pulse": 1.19,
+     "duty": 0.948,
+     "evenness": 1.03,
+     "force": 1.048,
+     "rise": 0.896,
+     "span": 0.336
+    }
+   },
+   {
+    "a": "nyeh",
+    "b": "catch",
+    "jnd": 2.715,
+    "terms": {
+     "count": 2.0,
+     "tempo": 0.723,
+     "pulse": 0.61,
+     "duty": 0.833,
+     "force": 0.419,
+     "rise": 0.896,
+     "span": 0.896
+    }
+   },
+   {
+    "a": "goodnight",
+    "b": "wish_you_were_here",
+    "jnd": 2.87,
+    "terms": {
+     "count": 1.0,
+     "tempo": 0.671,
+     "pulse": 0.811,
+     "duty": 1.921,
+     "evenness": 1.087,
+     "rise": 0.784,
+     "span": 0.784
+    }
+   },
+   {
+    "a": "nuzzle",
+    "b": "make_you_tea",
+    "jnd": 2.948,
+    "terms": {
+     "count": 1.0,
+     "pulse": 1.808,
+     "duty": 0.842,
+     "evenness": 1.678,
+     "force": 0.509,
+     "rise": 0.784
+    }
+   },
+   {
+    "a": "catch",
+    "b": "did_it",
+    "jnd": 2.958,
+    "terms": {
+     "count": 1.0,
+     "tempo": 1.933,
+     "pulse": 1.927,
+     "duty": 0.5
+    }
+   },
+   {
+    "a": "catch",
+    "b": "tangled",
+    "jnd": 2.965,
+    "terms": {
+     "count": 1.0,
+     "tempo": 0.987,
+     "pulse": 0.944,
+     "duty": 0.833,
+     "evenness": 1.905,
+     "rise": 1.064,
+     "span": 0.672
+    }
+   },
+   {
+    "a": "forehead",
+    "b": "make_you_tea",
+    "jnd": 3.011,
+    "terms": {
+     "count": 1.0,
+     "tempo": 2.568,
+     "pulse": 0.841,
+     "force": 0.73,
+     "rise": 0.336,
+     "span": 0.336
+    }
+   },
+   {
+    "a": "not_okay",
+    "b": "crown",
+    "jnd": 3.039,
+    "terms": {
+     "count": 1.0,
+     "pulse": 0.403,
+     "duty": 0.797,
+     "evenness": 1.531,
+     "force": 0.687,
+     "rise": 1.513,
+     "span": 1.513
+    }
+   },
+   {
+    "a": "long_day",
+    "b": "hold",
+    "jnd": 3.107,
+    "terms": {
+     "tempo": 0.522,
+     "pulse": 0.645,
+     "duty": 0.878,
+     "force": 2.791,
+     "rise": 0.448,
+     "span": 0.448
+    }
+   },
+   {
+    "a": "nuzzle",
+    "b": "treat",
+    "jnd": 3.121,
+    "terms": {
+     "tempo": 0.442,
+     "pulse": 2.167,
+     "evenness": 1.084,
+     "force": 1.402,
+     "rise": 1.065,
+     "span": 0.728
+    }
+   }
+  ]
  },
  "problems": [],
  "rows": [
@@ -1380,42 +1548,34 @@
    "name": "confetti",
    "family": "sparkle",
    "object": "obj_confetti",
-   "haptic": "30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150",
+   "haptic": "20@240 off50 20@140 off120 20@255 off40 20@110 off180 20@200 off70 20@90",
    "sound": "snd_confetti",
    "colour": "#f2a8c0",
-   "duration_ms": 450,
-   "buzzing_ms": 210,
-   "silent_ms": 240,
-   "pulses": 7,
+   "duration_ms": 580,
+   "buzzing_ms": 120,
+   "silent_ms": 460,
+   "pulses": 6,
    "peak_amp": 255,
-   "mean_amp_over_time": 93.0,
+   "mean_amp_over_time": 35.7,
    "envelope": [
     {
-     "ms": 30,
-     "amp": 150
+     "ms": 20,
+     "amp": 240
     },
     {
-     "ms": 40,
+     "ms": 50,
      "amp": 0
     },
     {
-     "ms": 30,
-     "amp": 190
+     "ms": 20,
+     "amp": 140
     },
     {
-     "ms": 40,
+     "ms": 120,
      "amp": 0
     },
     {
-     "ms": 30,
-     "amp": 230
-    },
-    {
-     "ms": 40,
-     "amp": 0
-    },
-    {
-     "ms": 30,
+     "ms": 20,
      "amp": 255
     },
     {
@@ -1423,27 +1583,27 @@
      "amp": 0
     },
     {
-     "ms": 30,
-     "amp": 230
+     "ms": 20,
+     "amp": 110
     },
     {
-     "ms": 40,
+     "ms": 180,
      "amp": 0
     },
     {
-     "ms": 30,
-     "amp": 190
+     "ms": 20,
+     "amp": 200
     },
     {
-     "ms": 40,
+     "ms": 70,
      "amp": 0
     },
     {
-     "ms": 30,
-     "amp": 150
+     "ms": 20,
+     "amp": 90
     }
    ],
-   "strip": "++  ##  %%  @@  %%  ##  ++"
+   "strip": "%  +      @  =         #    -"
   },
   {
    "id": "yes",

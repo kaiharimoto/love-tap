@@ -83,6 +83,15 @@ python3 tools/check/illuminant.py --out "$LOG/illuminant.json" >/dev/null \
 echo "· checking the library holds everything the app asks it for at dusk"
 python3 tools/check/dusk_shadows.py --out "$LOG/dusk_shadows.json" >/dev/null \
   || note_missing "dusk" "the app names an asset under _dusk that the library does not hold, and loads it behind an errorBuilder, so it draws nothing and says nothing; see $LOG/dusk_shadows.json"
+echo "· measuring how far apart the thirty-four haptics are"
+# The selftest first, for the same reason the manifest's runs first: a floor that has stopped
+# measuring anything passes quietly. It re-breaks the distance on five cases, including the pair
+# the old string-equality check could not see.
+python3 tools/check/haptics.py --selftest >"$LOG/haptics_selftest.txt" 2>&1 \
+  || note_missing "haptics" "tools/check/haptics.py --selftest failed: the discrimination floor cannot be trusted to go red; see evidence/logs/haptics_selftest.txt"
+python3 tools/check/haptics.py --out evidence/haptics.json >"$LOG/haptics.txt" 2>&1 \
+  || note_missing "haptics" "two feelings are closer than the 2.0 JND floor, or share an object; see problems and discrimination.under_floor in evidence/haptics.json"
+
 echo "· checking the push payload carries only kind and sender"
 python3 tools/push/webpush.py --self-test > "$LOG/webpush.txt" 2>&1 || note_missing "push" "the web push sender failed its own vectors"
 

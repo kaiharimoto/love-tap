@@ -7,6 +7,27 @@ User-authored feelings (`feeling_authored` events) join this table at runtime an
 everywhere: same send paths, same thread rendering, same haptics, same sound, same notification,
 same place in history and search.
 
+## How far apart two of them have to be
+
+"No two rows share a haptic sequence" was checked as string equality, which is a catalogue and not
+a test: two sequences can differ in every character and be the same thing in the hand.
+
+The rule is a distance, measured by `tools/check/haptics.py` over every one of the 561 pairs, in
+just-noticeable differences. Six terms — how many pulses, how fast, how long each one is, how much
+of the time the motor is on, how even the rhythm is, and how hard and in what direction the force
+moves — each divided by its own JND and combined as an L2 norm. **No pair may be closer than 2.0
+JND.** The tool's docstring defends every weight and the floor; `--selftest` re-breaks it.
+
+Two is a stated convention, not a measured one. One JND is the difference detected half the time
+with the two stimuli side by side; naming one of thirty-four from memory with the phone face down
+is harder than that by a margin nobody in this build has measured. What would settle the number is
+a forced-choice identification run on real hardware, and that is an `asks[]` entry.
+
+The check found one pair the catalogue could not: `stuck_with_me` and `confetti` were both a run of
+seven or eight 30 ms taps at 30–40 ms gaps, separated only by an amplitude arch that an LRA renders
+poorly, at 1.83 JND. `confetti` is scattered now — uneven gaps, uneven force — which is what
+confetti is.
+
 ## Haptic notation
 
 `on@amp` pairs separated by `off` gaps, in milliseconds, amplitude 0–255. This is exactly the Android

@@ -117,7 +117,7 @@ const List<Feeling> kBuiltInFeelings = [
   Feeling(id: 'grey', name: 'grey', family: Family.static_, object: 'obj_rain', haptic: '(60@70 off60) ×8', sound: 'snd_grey', colour: '#8a8a8e'),
   Feeling(id: 'not_okay', name: 'not okay', family: Family.static_, object: 'obj_torn_corner', haptic: '400@255 off100 40@255 off100 40@255 off100 40@255', sound: 'snd_notokay', colour: '#141a2e'),
   Feeling(id: 'did_it', name: 'did it', family: Family.sparkle, object: 'obj_gold_star', haptic: '40@120 off60 40@170 off60 40@220 off60 200@255', sound: 'snd_didit', colour: '#c9a23a'),
-  Feeling(id: 'confetti', name: 'confetti', family: Family.sparkle, object: 'obj_confetti', haptic: '30@150 off40 30@190 off40 30@230 off40 30@255 off40 30@230 off40 30@190 off40 30@150', sound: 'snd_confetti', colour: '#f2a8c0'),
+  Feeling(id: 'confetti', name: 'confetti', family: Family.sparkle, object: 'obj_confetti', haptic: '20@240 off50 20@140 off120 20@255 off40 20@110 off180 20@200 off70 20@90', sound: 'snd_confetti', colour: '#f2a8c0'),
   Feeling(id: 'yes', name: 'yes', family: Family.sparkle, object: 'obj_firework', haptic: '60@100 off40 60@180 off40 60@255 off200 60@255 off40 60@255', sound: 'snd_yes', colour: '#a8322b'),
   Feeling(id: 'crown', name: 'crown', family: Family.sparkle, object: 'obj_crown', haptic: '100@120 off100 100@170 off100 100@220 off100 100@255 off300 300@255', sound: 'snd_crown', colour: '#f4ea6a'),
   Feeling(id: 'treat', name: 'treat', family: Family.sparkle, object: 'obj_ribbon', haptic: '50@200 off80 50@200 off80 300@150 off80 50@255', sound: 'snd_treat', colour: '#f2a8c0'),
