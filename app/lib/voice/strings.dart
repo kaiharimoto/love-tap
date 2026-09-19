@@ -44,6 +44,11 @@ class S {
   static const pause = 'pause';
   static const fetching = 'still fetching the picture.';
 
+  /// A read that came back with nothing, which is not the same as one that has not come
+  /// back. Both used to say the line above, and a screen that was merely slow could not be
+  /// told from a screen that was broken -- including by this build's own review.
+  static const pictureNotHere = "this picture isn't on this phone.";
+
   // link
   static const offlineQueued = "can't reach the other phone. it'll go when it can.";
   static const hostDown = "the other phone isn't answering. keeping this until it does.";

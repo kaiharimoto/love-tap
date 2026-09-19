@@ -128,6 +128,7 @@ class BlobImage extends StatelessWidget {
     this.height,
     this.fit = BoxFit.cover,
     this.urgent = false,
+    this.full = false,
   });
   final String hash;
   final double? width;
@@ -139,33 +140,57 @@ class BlobImage extends StatelessWidget {
   /// none is.
   final bool urgent;
 
+  /// Whether the picture can be magnified past the box it is drawn in.
+  ///
+  /// Only the viewer's photograph can: it is inside an `InteractiveViewer` at `maxScale: 6`, so
+  /// the pixels it is going to need are not the pixels it is currently showing. Everything else
+  /// in the app is drawn at one size and decoding it larger buys nothing.
+  final bool full;
+
   @override
   Widget build(BuildContext context) {
     final spine = AppScope.of(context).spine;
-    return FutureBuilder<StoredBlob?>(
-      future: BlobCache.get(spine, hash, urgent: urgent),
-      builder: (context, snap) {
-        final b = snap.data;
-        if (b == null) {
-          return SizedBox(
-            width: width,
-            height: height ?? 160,
-            child: const Center(child: Text(S.fetching, style: TextStyle(fontSize: 12))),
-          );
-        }
-        // A print in the Moments gallery is about a third of the screen wide and the photograph
-        // behind it is a full-size one, so decoding it at its own resolution puts nine times the
-        // pixels it can ever show into the image cache, per tile, across a year of them. cacheWidth
-        // decodes at the size being drawn. It is only passed when a width is actually known: with
-        // no width there is nothing to decode against and a guess would be worse than the original.
-        final dpr = MediaQuery.devicePixelRatioOf(context);
-        return Image.memory(
-          b.bytes,
-          width: width,
-          height: height,
-          fit: fit,
-          gaplessPlayback: true,
-          cacheWidth: width == null ? null : (width! * dpr).round(),
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    // The width to decode at is the width it is drawn at, and a picture inside an `AspectRatio`
+    // has always been told that during layout. It used to be taken from [width] alone, and no
+    // call site in the app ever passed one: the gallery, the thread and the viewer all put a
+    // `BlobImage` inside something that constrains it and gave it no explicit width, so the
+    // branch below was dead for the life of the build and every photograph was decoded at its
+    // own resolution. A print 140 logical px across was 1200 px of source: nine times the pixels
+    // it can show in each direction, per tile, eighteen tiles to a screen, on the region whose
+    // capture came back with no thumbnail in it.
+    return LayoutBuilder(
+      builder: (context, box) {
+        final drawn = width ?? (box.maxWidth.isFinite ? box.maxWidth : null);
+        return FutureBuilder<StoredBlob?>(
+          future: BlobCache.get(spine, hash, urgent: urgent),
+          builder: (context, snap) {
+            final b = snap.data;
+            if (b == null) {
+              // Two different things, and they used to say the same sentence. A read that has not
+              // come back yet is a picture on its way; a read that came back with nothing is a
+              // picture this device does not have. Telling a reader which is not a nicety — it
+              // told this build's own triage the wrong one, and three critics scored a capture as
+              // a broken screen when it was a slow one.
+              final arriving = snap.connectionState != ConnectionState.done;
+              return SizedBox(
+                width: width,
+                height: height ?? 160,
+                child: Center(
+                  child: Text(arriving ? S.fetching : S.pictureNotHere,
+                      style: const TextStyle(fontSize: 12)),
+                ),
+              );
+            }
+            return Image.memory(
+              b.bytes,
+              width: width,
+              height: height,
+              fit: fit,
+              gaplessPlayback: true,
+              cacheWidth: full || drawn == null ? null : (drawn * dpr).round(),
+            );
+          },
         );
       },
     );

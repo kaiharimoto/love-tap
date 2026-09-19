@@ -106,7 +106,12 @@ class _ViewerPageState extends State<ViewerPage> {
     if (widget.item.type == 'photo') {
       body = InteractiveViewer(
         maxScale: 6,
-        child: Center(child: BlobImage(hash: p['blob'] as String, fit: BoxFit.contain, urgent: true)),
+        // `full`, because this is the one picture in the app that magnifies: the
+        // `InteractiveViewer` above goes to six times, so the pixels it will need are not
+        // the pixels it is showing. Every other BlobImage decodes at the width it is drawn.
+        child: Center(
+            child: BlobImage(
+                hash: p['blob'] as String, fit: BoxFit.contain, urgent: true, full: true)),
       );
     } else if (widget.item.type == 'video') {
       final v = _video;
