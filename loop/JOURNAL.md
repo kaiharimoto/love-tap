@@ -3941,3 +3941,85 @@ listed under `stale` with the checkout time as its `written`. The files are byte
 was committed — git shows them unmodified — so nothing is falsified and nothing is lost, but the
 manifest a scoring firing reads becomes a `--only` manifest. A full `./capture.sh` was run
 afterwards to put that back.
+
+### Then rank 10, and why ranks 5 to 9 were stepped over
+
+Rank 1 is as far as one firing can take it, so the queue said ranks 2, 5, 6, 7, 8, 9 next. Rank 2
+is `deprioritised-demo-content` and §3c says last or not at all. Ranks 5 to 8 are the
+simulated-paper cluster and rank 9 is the handwriting: firings 19, 20 and 22 between them traced
+rank 5's residue past three candidates to the tooth amplitude of the paper material itself — about
+6 L_std on quiet paper **at every resolution tested**, so it is a re-render of the library and not
+a thing a firing with two hours left can start and finish. Starting one would have left a half-done
+asset job and no measurement, which is the failure mode §3b names.
+
+So **rank 10**, under §3c's one carve-out — *fix a ruler when you cannot see without it* — which
+firing 23 invoked for this item by name when it wrote that the whole remaining legibility picture,
+and therefore any answer to the owner's original complaint, now turns on whether this ruler is
+right.
+
+`legibility.py` measured `contrast(core, gated)` with `core` taken over **every** mark of that
+polarity in the ring box — the components the glyph filters threw out, and the desk. Where a run
+had something darker than its own letters near it, the tenth percentile landed on that thing.
+`stroke = pl[pm]` becomes `stroke = pl[pm & pmg]`: the ink is what the tool already accepted as
+glyphs, which is what the ground band has been grown from since firing 15. The same rule at both
+ends of the comparison.
+
+The cost was not the reading but the guard under it. `on_the_far_side` exists to notice that a
+ground darker than the ink is a second surface behind a hole in the paper, and to keep the ring
+reading when it is. Handed an ink darker than the ground, it fired the wrong way round on runs
+that were plainly legible.
+
+**Measured on this firing's own capture: 25 below floor → 16, `total_runs` unchanged at 298,
+`on_moving_ground` 23 → 14. Nine cleared, none created.** The nine are the high-swing false
+failures the item and firing 23 both predicted — `week one, and the room smells right again` at
+ink_core 1.30 against ground_swing 7.93, one run repeated on six of the ten stills; `WHAT WE SENT`
+at 1.07/9.56; `make one` at 1.16/8.6; `three layers. it leans…` at 1.26/10.53 — every one with a
+ring reading already between 9.97 and 12.79 against a floor of 4.5. Three survivors read *worse*
+(`WHAT HAPPENED` 4.40 → 3.45, `63s` 2.73 → 2.30, `WHAT WE FELT` 1.37 → 1.11), which is the fix
+being a fix and not a relaxation; none of them was passing before, so no failure was created.
+
+Section 7 of `legibility_selftest.py` is the re-break, and **it took three geometries to build a
+page that discriminates** — exactly what the item warned of when it said the probe passes the
+selftest as it stands. The two that do not work are written into the docstring so nobody rebuilds
+them: a surface off to one side of the line contributes a sliver far under the fifth percentile the
+adversarial end is read from, so the band comes back flat paper; and marks placed a
+comfortable-looking distance above the line are simply outside the ring, which is
+`max(RING, (y1 - y0) // 2)`. What works is a surface **darker than the ink** and taller than the
+line, running along it, with darker marks shorter than the line under it. `pl[pm]` reads 1.11:1 and
+fails the artifact; `pl[pm & pmg]` reads 12.69:1 against the 12.81 the same writing reads on a
+clean page. Both were run.
+
+**It is not closed, and the reason is its own amendment.** That says every surviving below-floor
+run must have `ground_swing <= 1.2`. Two of the sixteen do — `teo` at 1.12 and `all year` at 1.13,
+exactly the two firing 23 predicted — and fourteen do not. But look at what the clause asks for:
+for dark ink `on_the_far_side` is `g_adv > core`, and `g_adv` is the band's *dark* end. Dark
+writing on paper has its darkest ground lighter than its ink, so the guard fires and the run is
+gated against the worst of its own ground — which is what `GROUND_SWING_GATE` was built to do.
+Requiring every remaining failure to have a flat ground asks for every moving-ground reading to be
+thrown away, which empties the gate instead of fixing the ruler. That is a rubric question and
+ADDRESS's to settle, not IMPLEMENT's to decide by closing the item.
+
+### A claim this firing made before it measured it, and then measured
+
+The capture commit said `legibility.json` and `palette.json` "read" their numbers on this capture.
+They did not. **`capture.sh` runs neither tool.** Both files still carried the checkout as their
+mtime, and what was quoted was firing 23's committed output. The claim happens to be true — the
+as-shipped ruler on this capture reads 25 of 298 with `on_moving_ground` 23, identical in all
+three, and palette reads `mean_chroma` 0.0451 against 0.0452 with `lightness_drift_room` 0.2929
+unchanged — but it was asserted before it was measured, which is the one thing this repository
+does not do. Both files are now regenerated from this capture and committed, so the numbers and the
+artifacts are the same session. **A successor should not assume a capture refreshes either file.**
+
+### And one result nobody was looking for
+
+The full capture came back with **eight of the ten stills byte-identical** to what firing 23
+committed — `01_pulse`, `02_chat`, `03_us`, `05_settings`, `10_first_run`, `12_search`,
+`14_media_viewer`, `17_setup_pwa`. The capture is reproducible to the byte, across containers and
+eleven commits. That has never been shown here before, because no container had a baseline to
+compare against. It also means a still that moves is a still that something moved:
+`13_messenger_states` (ssim 0.9317) is this firing's doing — the folded note is no longer frozen
+for 200 ms — and `04_moments` (ssim 0.9863) is not, and nothing this firing touched goes near the
+gallery. Worth a look by whoever works the gallery next.
+
+No new `asks[]`. Stage stays **IMPLEMENT, cycle 3**; the queue is not drained. Queue: **35 open**
+(34 inherited plus one filed here), 35 closed, 5 superseded. Lease released.

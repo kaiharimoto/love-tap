@@ -1,0 +1,34 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 24,
+ "at": "ef9838c",
+ "written_at": "2026-09-19T17:44:59Z",
+ "tests": 172,
+ "analyze_errors": 0,
+ "items_worked": [
+  "the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames",
+  "a-runs-ink-is-the-glyphs-not-every-mark-near-it"
+ ],
+ "items_closed": [],
+ "items_filed": [
+  "a-only-capture-rewrites-the-manifest-for-the-whole-set"
+ ],
+ "causes_established": [
+  "The unfolding clip's frame rate was written down twice and the copies disagreed by four percent: ffmpeg assembles at 60 a second (16667 us a frame) while tools/capture/scene.js stepped the driven clock a whole 16 ms between shots, so the sequence fell one frame behind every 400 ms and one shot in every twenty-five re-shot the frame before it. Confirmed against the committed evidence: firing 23's repeats at recorded frames 44, 94, 144, 169, 244, 269 are all in the predicted set 44, 69, 94, 119, 144, 169, 194, 219, 244, 269.",
+  "Duration.inMilliseconds truncates an exact run of 16667 us steps to 16, 33, 50, 66, 83 and indexes 0, 1, 3, 3, 4 -- a frame shown twice and a frame never shown, whatever the harness steps by.",
+  "The clip's 23-frame head and 21-frame tail were a capture-only 200 ms hold in FoldedNote and a scene asking for 300 frames of a 240-frame fold with a 16-frame settle. Neither is the renders and neither is the decoder.",
+  "legibility.py took a run's ink over every mark of that polarity in the ring, so anything darker than the letters became the ink -- which then made on_the_far_side gate the run against a ground lighter than its own false ink, at about one to one, on runs whose ring reading was already 10 to 13.",
+  "capture.sh runs neither legibility.py nor palette.py, so both evidence files keep the checkout mtime after a clone and read as firing 23's until someone re-runs them by hand."
+ ],
+ "measurements": {
+  "06_unfolding.mp4": "repeated_fraction 0.157 -> 0.0, longest_still_run 23 -> 0, 255 frames, reproduced on two independent captures",
+  "texture_budget": "28.0 MB peak of 32",
+  "legibility": "25 of 298 below floor -> 16, total_runs unchanged, on_moving_ground 23 -> 14, nine cleared and none created",
+  "rank_1_still_clause": "13_messenger_states 300x120 at (200,1350): L_std 26.743 against >= 30, levels 160 against >= 150",
+  "capture_reproducibility": "eight of ten stills byte-identical to firing 23's across containers and eleven commits"
+ },
+ "stage_complete": false,
+ "why_not": "IMPLEMENT spans firings and the queue is not drained. Ranks 5 to 9 were deliberately not started: rank 5's residue is the paper material's tooth amplitude, a library re-render, and firings 19, 20 and 22 established that. Rank 10 was taken instead under LOOP section 3c's ruler carve-out.",
+ "open_items": 35
+}
