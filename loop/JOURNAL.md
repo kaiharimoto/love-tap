@@ -3838,3 +3838,106 @@ a cycle advance, and DIAGNOSE is not next because cycle 3 was diagnosed at firin
 at firing 18. Queue: **34 open** (32 inherited plus the two filed here), 35 closed, 5 superseded.
 Seven open items now carry a `measured_at_firing_23` note saying what their stated baselines
 actually read today. Lease released.
+
+## Firing 24 — IMPLEMENT, cycle 3 — the fold clip was a rounding error, four percent wide
+
+Lease taken and pushed at `77a9080` before anything was touched. Step 0 read `non-fast-forward` on
+the first dry run and it was the graft boundary again, for the third time in this build: a shallow
+clone at depth 50, `git merge-base` empty, 50 ahead and 50 behind.
+`git fetch --unshallow origin <branch>` filled it in, `merge-base` then returned the local tip
+exactly, `git merge --ff-only` took it, and the second dry run read `Everything up-to-date`.
+`WORKER_PROMPT.md` §0 says to try that first and it was right to.
+
+Worked **rank 1**, `the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames`, which
+firing 23 had split in two and told the next firing to read as the fold sequence rather than the
+paper under it. That was the right steer and the cause was not in either of the two candidates the
+item had carried since firing 18.
+
+### It was never the decoder and never the renders
+
+All 240 frames of `unfold_thirds` are on disk and distinct. What was wrong is that the clip's
+frame rate was written down twice and the two copies disagreed. `capture.sh` hands the frames to
+ffmpeg at 60 a second — 16667 microseconds each — and `tools/capture/scene.js` stepped the driven
+clock by a whole **16 milliseconds** between shots. Four percent. A sequence indexed at 60 fps
+falls one frame behind every 400 ms, so one shot in every twenty-five catches the frame before it
+again.
+
+That is not a reading of the pixels, it is arithmetic, and the committed evidence confirms it to
+the frame. `still_runs` in the firing 23 `frames.json` puts the mid-motion repeats at recorded
+frames **44, 94, 144, 169, 244, 269** — differences of 50, 50, 25, 75, 25, every one a multiple of
+twenty-five. Modelling the scene (20 pre-roll frames, a 200 ms hold, 16 ms steps, `inMilliseconds`
+indexing) predicts duplicates at 44, 69, 94, 119, 144, 169, 194, 219, 244, 269, and **every one of
+the six observed is in that set**. The four that are predicted but not observed had something else
+on screen move a pixel, so they are not byte-identical — they are still the same fold frame twice.
+240 rendered frames were being recorded as 250, and the sequence played 57.6 unique frames a second
+against a stated floor of thirty.
+
+There was a second half inside the widget. `after.inMilliseconds * 60 ~/ 1000` truncates, so even
+an exact run of 16667 us steps reads 16, 33, 50, 66, 83 ms and indexes **0, 1, 3, 3, 4** — a frame
+shown twice *and* a frame never shown at all, four times a second, whatever the harness steps by.
+
+### And the head and the tail were two more numbers written by hand
+
+The 23-frame run at the head and the 21-frame run at the tail are 44 of the 50 repeats, and
+`frames.py`'s own comment had already located them. They were not one fault but two:
+
+- `FoldedNote` held the folded sheet for 200 ms **under capture only** — twelve identical frames,
+  and the app behaving one way for the camera and another way in a hand, which is the thing the
+  artifacts exist to rule out. Gone. The first frame of the sequence *is* the note lying folded.
+  If a beat of it lying there is ever wanted it belongs in the render, not in a timer.
+- The scene asked for 300 frames of a fold that is 240 long with a 16-frame settle after it. The
+  44 frames of slack in that sum were the tail. A count in a scene file cannot know how long a
+  sequence is, so the app is asked instead: `__deskFoldLeft` answers with the microseconds left in
+  the open, read off the sequence actually playing, and a `frames` step stops one shot after it
+  reaches zero. A take is now as long as the thing it records.
+
+### Measured
+
+`evidence/frames.json`, `06_unfolding.mp4`, on a capture taken after the fix:
+
+| | filed | firing 23 | now |
+|---|---|---|---|
+| `repeated_fraction` | 0.163 | 0.157 | **0.0** |
+| `longest_still_run` | 23 | 23 | **0** |
+| `repeated_frames` | 52 | 50 | **0** |
+
+255 frames, 4.25 seconds, and the 255 is the app's number rather than anyone's guess. Not one frame
+is identical to its predecessor, so the clip clears the `docs/BRIEF.md` 09 failure condition
+outright rather than clearing a threshold.
+
+Five tests in `app/test/every_frame_of_the_fold_is_shot_once_test.dart`, **two of which are the
+re-break kept standing**: a whole-millisecond step still repeats on a cadence of exactly
+twenty-five, and millisecond truncation still yields `[0, 0, 1, 3, 3, 4]`. Putting the old
+expression back was done, not assumed — it fails the suite in two places, `Expected: <239> Actual:
+<238>` and `Expected: [0,1,2,3,4,5] Actual: [0,0,1,3,3,4]`. `flutter analyze` clean, **172 tests
+pass**, up from 167.
+
+### Rank 1 is NOT closed, and the reason is one clause
+
+The item names four measurements. Three are met: the frames above, `texture_budget.py` at 28.0 MB
+peak against 32 (so the clip was not fixed by holding the sequence), and every sampled frame of
+`crops/06_unfolding_strip.png` carrying paper at HF_std 10.3–12.6 against the clause's `>= 4`.
+
+The fourth is not. The 300x120 sample at (200,1350) in `13_messenger_states.png` reads **L_std
+23.673 with 157 distinct luminance levels** against `>= 30` and `>= 150`. That reproduces firing
+23's 23.673 / 158 exactly, so it is the same measurement and it has not moved. The levels half
+passes; L_std is six and a third short.
+
+So the item has inverted since firing 23 wrote its note. **What is left of rank 1 is the paper
+under the note, not the fold sequence** — and that residue is the simulated-paper cluster at ranks
+5 to 8, measured on the same still. A successor should not read "rank 1" as a fold problem again.
+
+### One thing that cost this firing twenty minutes, so it does not cost the next one
+
+`flutter build web` was started by hand against the same tree while `capture.sh` was inside its own
+build. They share `app/.dart_tool`, the capture's build child was killed, and `capture.sh` sat
+alive with no children and a log that had stopped moving — which looks exactly like a slow build
+and is not one. **Nothing may touch `app/` while a capture is running.** Killed by PID (never
+`pkill -f`, per `CLAUDE.md`), removed `app/.dart_tool/flutter_build`, restarted, and it ran clean.
+
+Also worth knowing before anyone reaches for it: **`./capture.sh --only=<scene>` rewrites
+`MANIFEST.json` for the whole set**, and in a fresh container every artifact it did not take is
+listed under `stale` with the checkout time as its `written`. The files are byte-identical to what
+was committed — git shows them unmodified — so nothing is falsified and nothing is lost, but the
+manifest a scoring firing reads becomes a `--only` manifest. A full `./capture.sh` was run
+afterwards to put that back.
