@@ -117,11 +117,12 @@
    "points": 1,
    "why": "The rubric row 01 text names typing indication in its enumerated capability list, and messenger_reliability found it in no artifact and in no key: reliability.json's capabilities object has sixteen keys (send, ack, read, reply, react, edit, delete, voice_note, video, viewer, search, draft_survival, kill_mid_send, offline_queue, reconnect_ordering, host_offline_outbox) and typing is not among them. CONSTRAINT THAT MUST BE HONOURED, or closing this breaches a stated failure condition: docs/BRIEF.md 09 forbids 'typing indication or presence ticks stored as events'. The code critic confirms typing currently never reaches the log, by construction and by assertion -- that is correct and must stay correct. It has to be an ephemeral transport-level signal with its own artifact evidence, not a spine event. Note also that typing is NOT in the failure condition's reliability.json capability list, so the proof belongs in a captured artifact rather than in that file.",
    "measurement": "A captured artifact shows the partner's typing indication in the chat thread, and app/test/ has a test asserting that a typing signal produces zero rows in the spine -- which must fail if typing is ever made an event. Re-break by routing typing through the log and watching the persistence test fail.",
-   "state": "open",
-   "attempts": 0,
-   "closed_by": null,
+   "state": "closed",
+   "attempts": 1,
+   "closed_by": "2b8abf8",
    "rank": 20,
-   "owner_priority": "using-it"
+   "owner_priority": "using-it",
+   "closed_note": "The signal has always existed and always been ephemeral -- the constraint the item names is honoured and is now held by tests rather than by construction alone. What was missing was any way to photograph it, because a capture runs one phone and typing comes from the other. CaptureBus.partnerTyping builds a real Ephemeral from the partner and hands it to AppScope.onEphemeral, the same function the transport's stream feeds; scene.js has a partnerTyping step; 13_messenger_states sends one before its shot. Tests: there is no event type for typing at all, and the thread shows and stops showing the line with the spine the same length on both sides of it -- re-broken by emitting a state_declared beside the frame and watched to grow by one. The two-phones-over-the-wire half is already held by transport_local_test's `ephemeral frames are delivered and never stored` and cannot be held in a file that initialises the widget binding (the harness answers every HTTP request 400 there). FOR WHOEVER SCORES THIS: typing must never become a key of reliability.json. That file records what the log carries, and typing is the one capability that must not be in the log; the artifact is the evidence. The remaining half of the measurement is a captured 13."
   },
   {
    "id": "a-raw-loopback-url-is-printed-twice-in-the-handwriting-font",
