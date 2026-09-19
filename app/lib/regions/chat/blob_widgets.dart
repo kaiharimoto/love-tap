@@ -100,6 +100,24 @@ class BlobCache {
     }
   }
 
+  /// How many reads this cache is holding that have not come back: the ones the store has
+  /// accepted and the ones still waiting for a lane.
+  ///
+  /// It exists for the capture harness. `window.__deskReady` means the app has painted a frame —
+  /// the library is loaded, the spine is open, one frame is on the glass — and it says nothing
+  /// about whether the region on screen has the pictures it asked for. `tools/capture/scene.js`
+  /// waited on that flag and a fixed settle, so `04_moments` was photographed between two and
+  /// five seconds after ready against a grid that took longer than that to fill, and the still
+  /// that came out was indistinguishable from a grid that never fills. Three critics read it as
+  /// the second. A shot that waits on this instead is a shot of what the screen becomes, and a
+  /// scene that outruns the budget is recorded as slow rather than photographed blank.
+  ///
+  /// Process-wide rather than per-region, which is stricter and simpler: a region that is
+  /// offstage inside the `IndexedStack` is never laid out, so it issues no reads of its own
+  /// (measured in `scroll_cost_test.dart`), and what is outstanding is what the screen is
+  /// waiting for.
+  static int get outstanding => _inFlight + _waiting.length;
+
   static void forget(String hash) => _futures.remove(hash);
 
   /// Empties the cache and the queue. For tests, which share one process: a cached future from an

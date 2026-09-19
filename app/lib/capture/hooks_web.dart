@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:js_interop';
 
+import '../regions/chat/blob_widgets.dart';
 import 'hooks.dart';
 
 @JS('window')
@@ -25,6 +26,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskScrollBy(JSFunction f);
   external set __deskStage(JSFunction f);
   external set __deskStep(JSFunction f);
+  external set __deskBlobsPending(JSFunction f);
 }
 
 void expose(CaptureHooks hooks) {
@@ -45,6 +47,9 @@ void expose(CaptureHooks hooks) {
   w.__deskScrollBy = ((JSNumber dy) => hooks.scrollBy(dy.toDartDouble).toJS).toJS;
   w.__deskStage = (() => hooks.stageStates().toJS).toJS;
   w.__deskStep = ((JSNumber ms) => DrivenClock.step(ms.toDartInt).toJS).toJS;
+  // A number rather than a sentence: the harness polls it between frames and a JSON
+  // parse per poll is a cost the shot does not need.
+  w.__deskBlobsPending = (() => BlobCache.outstanding.toJS).toJS;
 }
 
 /// Signal values arrive as strings on the wire; the numbers and flags among them are read back

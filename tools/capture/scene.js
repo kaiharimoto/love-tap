@@ -67,7 +67,7 @@ function ensure(p) {
   });
   const page = await context.newPage();
   const problems = [];
-  const log = { scene: scene.name, browser: browserName, viewport: vp, url, steps: [], shots: [], reports: [] };
+  const log = { scene: scene.name, browser: browserName, viewport: vp, url, steps: [], shots: [], reports: [], blob_waits: [] };
   page.on('pageerror', (e) => problems.push('pageerror: ' + String(e).slice(0, 300)));
   page.on('console', (m) => {
     if (m.type() === 'error' && !m.text().includes('404')) problems.push('console: ' + m.text().slice(0, 300));
@@ -89,6 +89,51 @@ function ensure(p) {
   }
   async function settle(ms) {
     await page.waitForTimeout(ms === undefined ? (scene.settle || 700) : ms);
+  }
+
+  // The second readiness signal, and the reason there has to be one.
+  //
+  // `window.__deskReady` is set from the second post-frame callback after the first frame: the
+  // material library is loaded, the spine is open, one frame is on the glass. It says nothing
+  // about whether the region on screen has the pictures it asked for. `evidence/logs/04_moments`
+  // timed a run at 4771 ms to ready and then 2305 and 2828 before the shutter, against a grid
+  // whose blob reads took longer than that — so the still that came out showed one photograph and
+  // six tiles reading "still fetching the picture.", and a still taken early is indistinguishable
+  // from a still of a screen that never fills. Three of this cycle's critics read it as the
+  // second and the row it caps was scored from that reading.
+  //
+  // So a shot waits for the reads to land. And it waits on a budget, because a scene that takes
+  // longer than a person will wait is a fact about the app: the wait is written into the log
+  // either way, and a scene that runs out is recorded as having run out rather than photographed
+  // blank. `blobsBudgetMs` is what a person is assumed to give it.
+  const blobsBudgetMs = scene.blobs_budget_ms === undefined ? 12000 : scene.blobs_budget_ms;
+  async function settleBlobs(label) {
+    if (blobsBudgetMs <= 0) return;
+    const began = Date.now();
+    let pending = null;
+    for (;;) {
+      pending = await page
+        .evaluate(() => (window.__deskBlobsPending ? window.__deskBlobsPending() : 0))
+        .catch(() => null);
+      // An older build with no handle is not a failed scene; it is a still taken the way every
+      // still before this one was. Said out loud so it is never mistaken for a screen that filled.
+      if (pending === null) {
+        problems.push('blobs: no __deskBlobsPending handle');
+        return;
+      }
+      if (pending === 0) break;
+      if (Date.now() - began >= blobsBudgetMs) break;
+      await page.waitForTimeout(100);
+    }
+    const waited = Date.now() - began;
+    log.blob_waits.push({ at: label, waited_ms: waited, pending_at_shot: pending });
+    if (pending !== 0) {
+      problems.push(
+        `blobs: ${label} was shot with ${pending} picture(s) still being read, after waiting ` +
+          `${waited} ms. The still is of a screen that had not filled yet, not of a screen that ` +
+          `does not fill.`,
+      );
+    }
   }
 
   // Beside every still, what the app says it drew. tools/check/legibility.py finds writing by
@@ -217,6 +262,7 @@ function ensure(p) {
         const out = abs(step.out);
         ensure(out);
         await settle(step.settle);
+        await settleBlobs(path.basename(out));
         await page.screenshot({ path: out, fullPage: false, clip: step.clip });
         const declared = await textSidecar(out, step.clip);
         log.shots.push({ out: path.relative(ROOT, out), clip: step.clip || null, text_runs: declared });

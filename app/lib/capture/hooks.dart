@@ -14,6 +14,7 @@ import '../material/assignment.dart';
 import '../material/desk.dart';
 import '../material/fold.dart';
 import '../material/library.dart';
+import '../regions/chat/blob_widgets.dart';
 import '../scope.dart';
 import 'bus.dart';
 import 'hooks_stub.dart' if (dart.library.js_interop) 'hooks_web.dart' as impl;
@@ -202,6 +203,11 @@ class CaptureHooks {
       // a clip of a note opening that does not open is either a sequence nothing asked to play
       // or a sequence whose frames never decoded, and from the outside they look the same
       'fold': FoldFrames.state,
+      // What the screen is still waiting for. `__deskReady` means a frame was painted, not
+      // that the pictures arrived; this is the difference, and it is written into every
+      // scene log so a still taken over an unfilled grid can never again be read as a still
+      // of a grid that does not fill.
+      'blobs_pending': BlobCache.outstanding,
     };
   }
 
