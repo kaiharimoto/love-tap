@@ -31,17 +31,30 @@ MARGIN_MM = 4.0
 THICKNESS_M = 0.00010
 
 STOCK_LOOK = {
-    # base rgb (linear-ish sRGB values), tooth, fibre scale, sheen, yellowing per variant
-    "lined":        dict(rgb=(0.93, 0.90, 0.84), tooth=1.05, fibre=950.0, sheen=0.22, yellow=[0.12, 0.30, 0.48, 0.60]),
-    "graph":        dict(rgb=(0.90, 0.92, 0.92), tooth=0.90, fibre=1100.0, sheen=0.20, yellow=[0.05, 0.12, 0.22, 0.30]),
-    "spiral":       dict(rgb=(0.93, 0.90, 0.84), tooth=1.10, fibre=900.0, sheen=0.22, yellow=[0.10, 0.28, 0.45, 0.58]),
-    "looseleaf":    dict(rgb=(0.94, 0.92, 0.87), tooth=0.95, fibre=1000.0, sheen=0.24, yellow=[0.08, 0.22, 0.38, 0.50]),
-    "legal":        dict(rgb=(0.94, 0.88, 0.62), tooth=1.00, fibre=900.0, sheen=0.20, yellow=[0.10, 0.30]),
-    "index":        dict(rgb=(0.95, 0.93, 0.88), tooth=0.80, fibre=1300.0, sheen=0.28, yellow=[0.06, 0.20]),
-    "sticky_yellow": dict(rgb=(0.94, 0.86, 0.52), tooth=0.75, fibre=1200.0, sheen=0.26, yellow=[0.04, 0.12]),
-    "sticky_pink":  dict(rgb=(0.94, 0.74, 0.74), tooth=0.75, fibre=1200.0, sheen=0.26, yellow=[0.04, 0.12]),
-    "sticky_blue":  dict(rgb=(0.72, 0.83, 0.90), tooth=0.75, fibre=1200.0, sheen=0.26, yellow=[0.04, 0.12]),
-    "receipt":      dict(rgb=(0.95, 0.94, 0.90), tooth=0.55, fibre=1600.0, sheen=0.35, yellow=[0.10]),
+    # base rgb (linear-ish sRGB values), tooth, fibre scale, sheen, yellowing per variant, and
+    # `albedo` -- the multiplier on the albedo mottle alone, which is the only knob that raises a
+    # sheet's L_std without dimming it. `tooth` cannot be used for that: it also scales the bump,
+    # and past about 1.2 the bump darkens the sheet faster than the mottle textures it. Firing 26
+    # measured the whole response and tools/paper_tooth_sweep.md carries it.
+    #
+    # Each value is the one the fitted variance model (V_other + V_mottle*k^2, validated to 0.45%)
+    # puts at or just over the 8.0 floor for that stock, rounded up to a half. Two families cannot
+    # reach the floor at any value that still reads as paper and are set where the gain flattens
+    # instead: the sticky notes ship at L_std 1.08 -- flatter than anything else in the library, and
+    # the purest case of the "one RGB value" complaint -- and k=6 takes them to 4.8, a 4.4x lift
+    # that is short of 8.0; a thermal receipt would need k=12.8, and a real one is a coated,
+    # near-featureless surface whose correct render has almost no tooth. graph already passes at
+    # 8.755 untouched, so it stays at 1.0 rather than spending bundle on variance it does not need.
+    "lined":        dict(rgb=(0.93, 0.90, 0.84), tooth=1.05, fibre=950.0, sheen=0.22, yellow=[0.12, 0.30, 0.48, 0.60], albedo=6.0),
+    "graph":        dict(rgb=(0.90, 0.92, 0.92), tooth=0.90, fibre=1100.0, sheen=0.20, yellow=[0.05, 0.12, 0.22, 0.30], albedo=1.0),
+    "spiral":       dict(rgb=(0.93, 0.90, 0.84), tooth=1.10, fibre=900.0, sheen=0.22, yellow=[0.10, 0.28, 0.45, 0.58], albedo=6.0),
+    "looseleaf":    dict(rgb=(0.94, 0.92, 0.87), tooth=0.95, fibre=1000.0, sheen=0.24, yellow=[0.08, 0.22, 0.38, 0.50], albedo=6.5),
+    "legal":        dict(rgb=(0.94, 0.88, 0.62), tooth=1.00, fibre=900.0, sheen=0.20, yellow=[0.10, 0.30], albedo=7.5),
+    "index":        dict(rgb=(0.95, 0.93, 0.88), tooth=0.80, fibre=1300.0, sheen=0.28, yellow=[0.06, 0.20], albedo=7.0),
+    "sticky_yellow": dict(rgb=(0.94, 0.86, 0.52), tooth=0.75, fibre=1200.0, sheen=0.26, yellow=[0.04, 0.12], albedo=6.0),
+    "sticky_pink":  dict(rgb=(0.94, 0.74, 0.74), tooth=0.75, fibre=1200.0, sheen=0.26, yellow=[0.04, 0.12], albedo=6.0),
+    "sticky_blue":  dict(rgb=(0.72, 0.83, 0.90), tooth=0.75, fibre=1200.0, sheen=0.26, yellow=[0.04, 0.12], albedo=6.0),
+    "receipt":      dict(rgb=(0.95, 0.94, 0.90), tooth=0.55, fibre=1600.0, sheen=0.35, yellow=[0.10], albedo=4.0),
 }
 
 
@@ -225,7 +238,8 @@ def render_sheet(stock, variant, res_long, condition, samples, out_dir, fmt="WEB
     mat = common.paper_material(f"paper_{stock}_{variant}", look["rgb"],
                                 tooth=look["tooth"] * tooth_scale, yellowing=yellow,
                                 sheen=look["sheen"], rules_image=rules_img,
-                                fibre_scale=look["fibre"], albedo_tooth=albedo_tooth)
+                                fibre_scale=look["fibre"],
+                                albedo_tooth=look.get("albedo", 1.0) * albedo_tooth)
     sheet.data.materials.append(mat)
     common.add_desk(scene, z=0.0)
 
@@ -287,7 +301,9 @@ def main():
     ap.add_argument("--albedo-tooth", type=float, default=1.0,
                     help="multiply ONLY the albedo mottle amplitudes, leaving the relief alone. "
                          "This is the knob that raises a sheet's L_std without dimming it; "
-                         "--tooth-scale raises both and the bump half wins. 1.0 is what shipped.")
+                         "--tooth-scale raises both and the bump half wins. It MULTIPLIES the "
+                         "per-stock `albedo` in STOCK_LOOK rather than replacing it, so 1.0 renders "
+                         "the library as it ships and a sweep value is relative to that.")
     ap.add_argument("--border", type=float, nargs=4, metavar=("X0", "Y0", "X1", "Y1"),
                     help="render only this fraction of the frame (fast full-resolution tests)")
     a = ap.parse_args(argv)

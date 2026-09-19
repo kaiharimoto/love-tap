@@ -555,5 +555,372 @@
   "rooms": 10,
   "viewers": 1
  },
- "read": 11
+ "read": 11,
+ "floors": {
+  "law": "docs/COLOR.md",
+  "classes_from": "docs/screen_classes.json",
+  "breaches": 45,
+  "breached": [
+   {
+    "artifact": "01_pulse.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 330.0,
+    "section": "4"
+   },
+   {
+    "artifact": "01_pulse.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.0837,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "01_pulse.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.00096,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "02_chat.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 330.0,
+    "section": "4"
+   },
+   {
+    "artifact": "02_chat.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.0787,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "02_chat.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.00204,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "03_us.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 330.0,
+    "section": "4"
+   },
+   {
+    "artifact": "03_us.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.0757,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "03_us.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.00073,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "04_moments.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 330.0,
+    "section": "4"
+   },
+   {
+    "artifact": "04_moments.png",
+    "class": "room",
+    "quantity": "chroma_by_band.ground.mean_chroma",
+    "requires": ">= 0.03",
+    "actual": 0.0209,
+    "section": "5 floor"
+   },
+   {
+    "artifact": "04_moments.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.076,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "04_moments.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.00011,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "05_settings.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 330.0,
+    "section": "4"
+   },
+   {
+    "artifact": "05_settings.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.0722,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "05_settings.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.0,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "05_settings_interrupt.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 330.0,
+    "section": "4"
+   },
+   {
+    "artifact": "05_settings_interrupt.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.0722,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "05_settings_interrupt.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.0,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "10_first_run.png",
+    "class": "room",
+    "quantity": "value_bands.mid",
+    "requires": ">= 0.04",
+    "actual": 0.0211,
+    "section": "2"
+   },
+   {
+    "artifact": "10_first_run.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 320.0,
+    "section": "4"
+   },
+   {
+    "artifact": "10_first_run.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.0805,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "10_first_run.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.0,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "12_search.png",
+    "class": "room",
+    "quantity": "lightness.p50",
+    "requires": ">= 0.78",
+    "actual": 0.6493,
+    "section": "3"
+   },
+   {
+    "artifact": "12_search.png",
+    "class": "room",
+    "quantity": "value_bands.mid",
+    "requires": ">= 0.04",
+    "actual": 0.0384,
+    "section": "2"
+   },
+   {
+    "artifact": "12_search.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 340.0,
+    "section": "4"
+   },
+   {
+    "artifact": "12_search.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.0802,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "12_search.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.00334,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "13_messenger_states.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 330.0,
+    "section": "4"
+   },
+   {
+    "artifact": "13_messenger_states.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.0799,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "13_messenger_states.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.00289,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "14_media_viewer.png",
+    "class": "viewer",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 320.0,
+    "section": "4"
+   },
+   {
+    "artifact": "14_media_viewer.png",
+    "class": "viewer",
+    "quantity": "chroma_by_band.ground.mean_chroma",
+    "requires": ">= 0.03",
+    "actual": 0.023,
+    "section": "5 floor"
+   },
+   {
+    "artifact": "14_media_viewer.png",
+    "class": "viewer",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.07,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "14_media_viewer.png",
+    "class": "viewer",
+    "quantity": "chroma.grey_fraction",
+    "requires": "<= 0.08",
+    "actual": 0.1377,
+    "section": "5 floor"
+   },
+   {
+    "artifact": "17_setup_pwa.png",
+    "class": "room",
+    "quantity": "widest_hue_gap_deg",
+    "requires": "<= 200.0",
+    "actual": 340.0,
+    "section": "4"
+   },
+   {
+    "artifact": "17_setup_pwa.png",
+    "class": "room",
+    "quantity": "chroma_by_band.ground.mean_chroma",
+    "requires": ">= 0.03",
+    "actual": 0.0256,
+    "section": "5 floor"
+   },
+   {
+    "artifact": "17_setup_pwa.png",
+    "class": "room",
+    "quantity": "chroma_by_band.mid.mean_chroma",
+    "requires": ">= 0.03",
+    "actual": 0.0113,
+    "section": "5 floor"
+   },
+   {
+    "artifact": "17_setup_pwa.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.mean_chroma",
+    "requires": ">= 0.035",
+    "actual": 0.0172,
+    "section": "5 floor"
+   },
+   {
+    "artifact": "17_setup_pwa.png",
+    "class": "room",
+    "quantity": "chroma_by_band.figure.p99_chroma",
+    "requires": ">= 0.1",
+    "actual": 0.0378,
+    "section": "5 floor / 7 item 2"
+   },
+   {
+    "artifact": "17_setup_pwa.png",
+    "class": "room",
+    "quantity": "chroma.accent_fraction",
+    "requires": ">= 0.01",
+    "actual": 0.0,
+    "section": "7 item 5"
+   },
+   {
+    "artifact": "<the set>",
+    "class": "-",
+    "quantity": "across_the_set.mean_chroma",
+    "requires": ">= 0.045",
+    "actual": 0.0449,
+    "section": "5 floor / 7 item 1"
+   },
+   {
+    "artifact": "<the set>",
+    "class": "-",
+    "quantity": "across_the_set.lightness_drift_room",
+    "requires": "<= 0.2",
+    "actual": 0.2924,
+    "section": "3"
+   },
+   {
+    "artifact": "<the set>",
+    "class": "-",
+    "quantity": "across_the_set.widest_hue_gap_deg",
+    "requires": "<= 150.0",
+    "actual": 320.0,
+    "section": "4 / 7 item 4"
+   },
+   {
+    "artifact": "<the set>",
+    "class": "-",
+    "quantity": "across_the_set.named_families",
+    "requires": ">= 4",
+    "actual": 1,
+    "section": "4 / 7 item 4"
+   }
+  ]
+ }
 }

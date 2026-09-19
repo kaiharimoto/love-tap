@@ -351,6 +351,26 @@ if [ -f evidence/02_chat.png ]; then
     || note_missing "02_chat.png" "$(python3 -c "import json;print(json.load(open('$LOG/tears.json')).get('why',''))" 2>/dev/null)"
 fi
 
+# ---- the two rulers the capture describes and never used to write ---------------------------
+#
+# For four cycles `evidence/legibility.json` and `evidence/palette.json` were the only files under
+# evidence/ that no capture produced. Every other number here comes out of this script; those two
+# came out of somebody typing the command, which is how firing 24 committed a legibility file
+# saying 16 while the shipped ruler read 25 on the same stills. A ruler that is not re-read by the
+# run it describes drifts silently, and it drifts in the direction of whoever last ran it.
+#
+# Both tools exit non-zero when a FLOOR IS BREACHED, which is the normal state of this build and
+# not a failure of the tool -- so neither may be treated as a missing artifact on its exit code.
+# What would be a real failure is the JSON not being written at all, and that is what is checked.
+echo "· writing the legibility and palette rulers"
+python3 tools/check/legibility.py --out evidence/legibility.json >"$LOG/legibility.txt" 2>&1 || true
+[ -s evidence/legibility.json ] \
+  || note_missing "legibility.json" "tools/check/legibility.py wrote no ruler; see $LOG/legibility.txt"
+python3 tools/check/palette.py --out evidence/palette.json --floors \
+    --classes docs/screen_classes.json >"$LOG/palette.txt" 2>&1 || true
+[ -s evidence/palette.json ] \
+  || note_missing "palette.json" "tools/check/palette.py wrote no ruler; see $LOG/palette.txt"
+
 # What moved since the last capture, measured against evidence/.previous, and then this capture
 # becomes the baseline for the next one. The rotation has to happen here rather than by hand:
 # nothing rotated it for a long time, so every SSIM in DIFF.json was unreproducible from the
