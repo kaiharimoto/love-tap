@@ -129,29 +129,49 @@ class NotificationSettings extends StatelessWidget {
             _Hour(value: prefs.quietTo, onPick: (h) => onChanged(prefs.copyWith(quietTo: h))),
           ]),
           const SizedBox(height: 10),
+          // The name on its own line, the three choices under it.
+          //
+          // They were one Row: `Expanded(name)` against three `Choice`s, and a Choice is a
+          // Row(mainAxisSize: min) that takes whatever its word needs. `wake me`, `quietly` and
+          // `not at all` come to about 320 logical pixels between them, and on a 480-pixel phone
+          // inside two lots of padding there are only about 424 to share -- so Expanded was left
+          // with NINE AND A HALF, and the name wrapped one character per line into a column 400
+          // pixels tall. Every row did it. The matrix measured 4,282 logical pixels from the top
+          // of its first row to the top of its last, which is four screenfuls of a settings page
+          // for fourteen lines of text, and it is why `05_settings.png` could not show the table
+          // however far the page was scrolled: at the very bottom of it exactly one row was in
+          // the frame. Stacking them is what makes it a table you can read and a thing a capture
+          // can see; a Wrap rather than a Row so a longer word in a future type moves to the next
+          // line instead of starving the one beside it.
           for (final t in kEventTypes)
             if (t.notify != Notify.none)
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Row(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Expanded(child: Text(_said(t.id), style: Hands.margin(size: 14))),
-                    for (final a in Announce.values)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Choice(
-                          label: switch (a) {
-                            Announce.interrupt => 'wake me',
-                            Announce.quiet => 'quietly',
-                            Announce.off => 'not at all',
-                          },
-                          size: 13,
-                          chosen: (prefs.byType[t.id] ?? Announce.quiet) == a,
-                          chosenInk: Pen.stamp,
-                          onTap: () =>
-                              onChanged(prefs.copyWith(byType: {...prefs.byType, t.id: a})),
-                        ),
-                      ),
+                    Text(_said(t.id), style: Hands.margin(size: 14)),
+                    const SizedBox(height: 3),
+                    Wrap(
+                      spacing: 18,
+                      runSpacing: 4,
+                      children: [
+                        for (final a in Announce.values)
+                          Choice(
+                            label: switch (a) {
+                              Announce.interrupt => 'wake me',
+                              Announce.quiet => 'quietly',
+                              Announce.off => 'not at all',
+                            },
+                            size: 13,
+                            chosen: (prefs.byType[t.id] ?? Announce.quiet) == a,
+                            chosenInk: Pen.stamp,
+                            onTap: () =>
+                                onChanged(prefs.copyWith(byType: {...prefs.byType, t.id: a})),
+                          ),
+                      ],
+                    ),
                   ],
                 ),
               ),

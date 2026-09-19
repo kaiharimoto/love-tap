@@ -25,6 +25,24 @@
    "do": "report",
    "out": "evidence/logs/05_settings.report.json",
    "at": "05_settings.png"
+  },
+  {
+   "do": "scrollSettings",
+   "arg": 99999
+  },
+  {
+   "do": "wait",
+   "ms": 900
+  },
+  {
+   "do": "shot",
+   "out": "evidence/05_settings_interrupt.png",
+   "settle": 900
+  },
+  {
+   "do": "report",
+   "out": "evidence/logs/05_settings_interrupt.report.json",
+   "at": "05_settings_interrupt.png"
   }
  ]
 }

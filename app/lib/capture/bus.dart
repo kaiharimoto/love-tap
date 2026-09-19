@@ -67,6 +67,18 @@ class CaptureBus {
   /// Settings: begin pairing (host) so the six words are on screen.
   static Future<void> Function()? showWords;
 
+  /// Settings: move the settings page by this many logical pixels, once, right now.
+  ///
+  /// The settings page is taller than one screenful and `what may interrupt` is the last thing
+  /// on it, so a capture of the top of the page cannot see the interrupt matrix at all. Firing 21
+  /// moved that table to the bottom on purpose -- it is the one thing here you set once and never
+  /// look at again, and with it in the middle the artifact carried thirteen rows of it and none of
+  /// the feeling-authoring tools the row asks for -- and the cost was that all 42 of the matrix's
+  /// text runs left `05_settings.text.json` and the critics stopped being able to see a real
+  /// surface. This is its own slot rather than `scrollBy` because that one belongs to the thread:
+  /// both regions can be mounted at once, and whichever registered last would win.
+  static void Function(double dy)? settingsScrollBy;
+
   static void clear() {
     regionIndex = -1;
     goToRegion = null;
@@ -82,5 +94,6 @@ class CaptureBus {
     partnerTyping = null;
     unfoldAll = null;
     showWords = null;
+    settingsScrollBy = null;
   }
 }

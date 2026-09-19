@@ -43,13 +43,22 @@ class _SettingsRegionState extends State<SettingsRegion> {
   String? _result;
   NotificationPrefs? _prefs;
   final Sensation _sensation = Sensation();
+  // The page's own scroller, so that a capture can reach `what may interrupt` at the bottom of
+  // it. A person reaches it with a thumb; before this, a scene had no way to.
+  final ScrollController _scroll = ScrollController();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadPrefs();
-      if (Flags.capture) CaptureBus.showWords = _showWords;
+      // `|| CaptureBus.wanted` is what lets a test reach these: Flags.capture is a compile-time
+      // const and is false under `flutter test`, so a handle guarded on it alone can only ever be
+      // exercised by a real capture. ChatRegion has always read it this way.
+      if (Flags.capture || CaptureBus.wanted) {
+        CaptureBus.showWords = _showWords;
+        CaptureBus.settingsScrollBy = _scrollBy;
+      }
     });
   }
 
@@ -68,9 +77,21 @@ class _SettingsRegionState extends State<SettingsRegion> {
     if (mounted) setState(() => _code = c);
   }
 
+  /// Capture mode: one nudge of the page's own scroller, clamped to what there is to scroll, so
+  /// a scene asking for more than the page has lands at the bottom rather than throwing.
+  void _scrollBy(double dy) {
+    if (!_scroll.hasClients) return;
+    final max = _scroll.position.maxScrollExtent;
+    _scroll.jumpTo((_scroll.offset + dy).clamp(0.0, max));
+  }
+
   @override
   void dispose() {
-    if (Flags.capture) CaptureBus.showWords = null;
+    if (Flags.capture || CaptureBus.wanted) {
+      CaptureBus.showWords = null;
+      CaptureBus.settingsScrollBy = null;
+    }
+    _scroll.dispose();
     _address.dispose();
     _words.dispose();
     _sensation.dispose();
@@ -85,6 +106,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
     final registry = scope.feelings;
     final authored = registry.all.where((f) => !f.builtIn).toList();
     return ListView(
+      controller: _scroll,
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 96),
       children: [
         Strip(id: 'heading-the-two-phones', row: 1,

@@ -25,6 +25,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskTextRuns(JSFunction f);
   external set __deskPair(JSFunction f);
   external set __deskScrollBy(JSFunction f);
+  external set __deskSettingsScrollBy(JSFunction f);
   external set __deskStage(JSFunction f);
   external set __deskStep(JSFunction f);
   external set __deskBlobsPending(JSFunction f);
@@ -49,6 +50,7 @@ void expose(CaptureHooks hooks) {
   w.__deskTextRuns = (() => jsonEncode(CaptureHooks.textRuns()).toJS).toJS;
   w.__deskPair = ((JSString base, JSString words) => hooks.pair(base.toDart, words.toDart).toJS).toJS;
   w.__deskScrollBy = ((JSNumber dy) => hooks.scrollBy(dy.toDartDouble).toJS).toJS;
+  w.__deskSettingsScrollBy = ((JSNumber dy) => hooks.settingsScrollBy(dy.toDartDouble).toJS).toJS;
   w.__deskStage = (() => hooks.stageStates().toJS).toJS;
   // A fraction of a millisecond, not a whole one: the harness steps by one frame of the clip it
   // is assembling, and sixty frames a second is 16.667 ms. `toDartInt` threw that 0.667 away on

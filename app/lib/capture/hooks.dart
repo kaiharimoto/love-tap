@@ -92,6 +92,16 @@ class CaptureHooks {
     return 'ok';
   }
 
+  /// Move the settings page by [dy] logical pixels, once, so a scene can reach the interrupt
+  /// matrix at the bottom of it.
+  Future<String> settingsScrollBy(double dy) async {
+    final f = CaptureBus.settingsScrollBy;
+    if (f == null) return 'settings is not on screen';
+    f(dy);
+    await _settle();
+    return 'ok';
+  }
+
   /// Pair with the phone at [base] using the six words it is showing.
   ///
   /// The same call the setup list makes, not a shortcut past it: the words derive the key, and

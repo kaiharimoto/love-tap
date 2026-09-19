@@ -243,6 +243,10 @@ function ensure(p) {
         await hook('__deskGoTo', step.arg); break;
       case 'scrollTo':
         await hook('__deskScrollTo', String(step.arg)); break;
+      // The settings page is taller than one screenful and `what may interrupt` is last on it,
+      // so the top-of-page shot cannot see the interrupt matrix. This is the thumb that reaches it.
+      case 'scrollSettings':
+        await hook('__deskSettingsScrollBy', Number(step.arg)); break;
       case 'sendFeeling':
         await hook('__deskSendFeeling', step.feeling, step.intensity === undefined ? 0.7 : step.intensity); break;
       case 'openCorner':
