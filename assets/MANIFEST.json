@@ -8948,7 +8948,7 @@
    }
   },
   "assets/paper/lined_03.webp": {
-   "bytes": 145698,
+   "bytes": 440734,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -8956,6 +8956,7 @@
     "format": "WEBP",
     "light": "day",
     "look": {
+     "albedo": 6.0,
      "fibre": 950.0,
      "rgb": [
       0.93,
