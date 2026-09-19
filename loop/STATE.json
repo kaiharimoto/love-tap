@@ -187,7 +187,8 @@
    "attempts": 0,
    "closed_by": null,
    "rank": 7,
-   "owner_priority": "the-ui"
+   "owner_priority": "the-ui",
+   "looked-at_at_firing_21": "NOT FIXED, BUT LOOKED AT DIRECTLY AND NARROWED, SO THE NEXT FIRING DOES NOT START FROM THE PROSE. Cropping 13_messenger_states.png at y 1250-1620 and enlarging it shows what the column profile was reading: the bars are not laid ACROSS the paper, they HANG BELOW one particular note -- the flat tan rectangle with the hard dark right and bottom edge -- like fibres pulled off its bottom edge, tapering downward, all starting at exactly the sheet's bottom and ending at varying depths. That is the shape of a baked edge or shadow asset magnified until its own detail becomes bands, and the sheet it hangs from is the SAME flat unrendered rectangle this capture shows for the-backing-surface-of-three-screens-is-one-rgb-value. TWO CONSEQUENCES. (1) It is most likely the same family as no-surface-in-this-app-is-drawn-at-its-own-resolution and should be read with the __deskPaperSurfaces declaration beside the still rather than from the pixels alone -- that handle exists now and writes <artifact>.surfaces.json. (2) THE STILLS IT WAS MEASURED ON PREDATE FIRING 20'S hashOf FIX, which changed every paper, tear and patch assignment on the PWA. Chasing this on the committed stills is chasing an artifact of a bug that is already closed. Re-measure on a fresh capture first: if the comb is still there, the surfaces sidecar will name the asset and its magnification in one read."
   },
   {
    "id": "the-tears-are-overlays-painted-on-whole-paper",
