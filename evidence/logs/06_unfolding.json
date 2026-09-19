@@ -10,48 +10,40 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2030
+   "ms": 3155
   },
   {
    "do": "wait",
-   "ms": 2003
+   "ms": 2004
   },
   {
    "do": "scrollTo",
-   "ms": 1121
+   "ms": 1717
   },
   {
    "do": "wait",
-   "ms": 1603
-  },
-  {
-   "do": "frames",
-   "ms": 13044
+   "ms": 1602
   },
   {
    "do": "unfold",
-   "ms": 321
+   "ms": 439
   },
   {
    "do": "frames",
-   "ms": 212734
+   "ms": 216226
   },
   {
    "do": "report",
-   "ms": 426
+   "ms": 416
   }
  ],
  "shots": [
   {
-   "frames": 20,
+   "frames": 255,
    "dir": "evidence/frames/06_unfolding",
-   "ms": 16,
-   "drive": null
-  },
-  {
-   "frames": 300,
-   "dir": "evidence/frames/06_unfolding_b",
-   "ms": 16,
+   "ms": 16.666666666666668,
+   "fps": 60,
+   "stop": "__deskFoldLeft",
    "drive": null
   }
  ],
@@ -85,7 +77,7 @@
     "of": 8387
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 5264,
+   "driven_ms": 4394,
    "seed": 20260903,
    "events": 14062,
    "transport": "local",
@@ -107,11 +99,11 @@
     "held_to": 239
    },
    "blobs_pending": 0,
-   "at": "06_unfolding_b"
+   "at": "06_unfolding"
   }
  ],
  "blob_waits": [],
- "cold_ms": 7989,
+ "cold_ms": 11438,
  "problems": [],
  "ok": true
 }
