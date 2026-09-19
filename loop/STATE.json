@@ -104,11 +104,12 @@
    "points": 3,
    "why": "THE ROW'S OWN NAMED FAILURE MODE, in the two highest-resolution artifacts in the set. In 13_messenger_states.png a feeling comes to rest in the record as a captioned card with a timestamp and a double-tick read receipt, structurally identical to the text message 'left the key under the pot / Thu 3 Sep \u00b7 19:40 read \u2713\u2713' 1400px below it; a partner-state change comes to rest as a one-line strip in the same message stream; crops/08_state_propagating_strip.png repeats the pattern with 'hold' and 'noor is restless'. The row is about a gesture arriving as a sensation rather than as a message in a different colour, and the resting state says message. Cycle 3 earned +4 here by fixing the ARRIVAL; the RESTING STATE was not touched and is what both blocking findings are about. Related: the arrival object's drop shadow falls across the 'hold / Fri 18 Sep \u00b7 13:46' caption and darkens it.",
    "measurement": "13_messenger_states.png and a re-captured 08 show a feeling at rest with no timestamp, no delivery tick and no read receipt, in furniture distinct from a text message -- declared in the .text.json as a different rendering id. A test asserts read markers never render as rows in the thread, which is also the standing failure condition. Re-break by restoring the shared card renderer and watching the tick reappear.",
-   "state": "open",
-   "attempts": 0,
-   "closed_by": null,
+   "state": "closed",
+   "attempts": 1,
+   "closed_by": "1aea3d7",
    "rank": 30,
-   "owner_priority": "using-it"
+   "owner_priority": "using-it",
+   "closed_note": "The resting half, which cycle 3 left alone while earning +4 on the arrival. A feeling that has landed carries no pencil line under it: no timestamp, no delivery tick, no read receipt. It keeps one while it is still in the outbox, because a feeling that has not gone has something to say and the `try again` from rank 1 to offer, and those are on that line -- the two items have to agree and they do. The declared difference the measurement asks for falls out of the same change: a feeling at rest declares one run, its name, with no timestamp run and no `read` run beside it, where a message declares all three. Also fixed: a rendered object's shadow is painted at up to 1.12 of the square it is given and may fall outside it, and four points of clearance let it land across the name under it (`hold / Fri 18 Sep . 13:46` in 08_state_propagating); ten points now, which is clearance rather than a proof. NOT DONE: the item also says a partner-state change comes to rest as a one-line strip in the message stream. That IS the design -- renderers.dart routes state through marginSentence deliberately, and a pencil line in the margin is already furniture distinct from a note. Changing it is a DESIGN question for the authority inside the cycle-6 freeze, not an IMPLEMENT one, and it is left for the pixels of a re-captured 08 to settle."
   },
   {
    "id": "typing-indication-exists-nowhere-in-the-build",
