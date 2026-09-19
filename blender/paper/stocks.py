@@ -210,7 +210,8 @@ def ensure_rules(stock, variant):
     return path, rules.params_for(stock, variant)
 
 
-def render_sheet(stock, variant, res_long, condition, samples, out_dir, fmt="WEBP", border=None, threads=0):
+def render_sheet(stock, variant, res_long, condition, samples, out_dir, fmt="WEBP", border=None, threads=0,
+                 tooth_scale=1.0, albedo_tooth=1.0):
     scene = common.reset_scene()
     w_mm, h_mm = rules.SHEETS_MM[stock]
     rules_png, params = ensure_rules(stock, variant)
@@ -221,8 +222,10 @@ def render_sheet(stock, variant, res_long, condition, samples, out_dir, fmt="WEB
     add_holes(sheet, stock, w_mm, h_mm, variant)
     rules_img = common.load_image(rules_png)
     rules_img.colorspace_settings.name = "sRGB"
-    mat = common.paper_material(f"paper_{stock}_{variant}", look["rgb"], tooth=look["tooth"], yellowing=yellow,
-                                sheen=look["sheen"], rules_image=rules_img, fibre_scale=look["fibre"])
+    mat = common.paper_material(f"paper_{stock}_{variant}", look["rgb"],
+                                tooth=look["tooth"] * tooth_scale, yellowing=yellow,
+                                sheen=look["sheen"], rules_image=rules_img,
+                                fibre_scale=look["fibre"], albedo_tooth=albedo_tooth)
     sheet.data.materials.append(mat)
     common.add_desk(scene, z=0.0)
 
@@ -275,6 +278,16 @@ def main():
     ap.add_argument("--skip-existing", action="store_true")
     ap.add_argument("--format", choices=["WEBP", "PNG"], default="WEBP")
     ap.add_argument("--threads", type=int, default=0, help="render threads (0 = all)")
+    ap.add_argument("--tooth-scale", type=float, default=1.0,
+                    help="multiply every stock's tooth by this. The per-stock tooth in STOCK_LOOK "
+                         "scales exactly the albedo mottle amplitudes in rig/common.paper_material, "
+                         "so this is the same knob the queue item calls 'the tooth of the material' "
+                         "and it can be swept without editing the material. 1.0 is what shipped. "
+                         "NOTE it also scales the bump, which darkens the sheet: see --albedo-tooth.")
+    ap.add_argument("--albedo-tooth", type=float, default=1.0,
+                    help="multiply ONLY the albedo mottle amplitudes, leaving the relief alone. "
+                         "This is the knob that raises a sheet's L_std without dimming it; "
+                         "--tooth-scale raises both and the bump half wins. 1.0 is what shipped.")
     ap.add_argument("--border", type=float, nargs=4, metavar=("X0", "Y0", "X1", "Y1"),
                     help="render only this fraction of the frame (fast full-resolution tests)")
     a = ap.parse_args(argv)
@@ -299,7 +312,9 @@ def main():
             continue
         import time
         t0 = time.time()
-        path = render_sheet(s, v, a.res, c, a.samples, a.out, fmt=a.format, border=a.border, threads=a.threads)
+        path = render_sheet(s, v, a.res, c, a.samples, a.out, fmt=a.format, border=a.border,
+                            threads=a.threads, tooth_scale=a.tooth_scale,
+                            albedo_tooth=a.albedo_tooth)
         print(f"rendered {path} in {time.time() - t0:.0f}s", flush=True)
 
 

@@ -310,10 +310,23 @@ def add_shadow_catcher(scene, size_m=2.0):
 
 def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_image=None,
                    fibre_scale=900.0, roughness=0.78, subsurface=0.012,
-                   rules_uv_scale=(1.0, 1.0), rules_uv_offset=(0.0, 0.0)):
+                   rules_uv_scale=(1.0, 1.0), rules_uv_offset=(0.0, 0.0),
+                   albedo_tooth=1.0):
     """The base paper material. Fibre relief is a bump from layered noise; the printed rules
     (an image texture generated in Python) are multiplied over the base colour; yellowing warms
     the base toward the edges. tooth scales the relief. Returns the material.
+
+    `tooth` is a COMPOUND knob and firing 26 measured what that costs. It scales the albedo
+    mottle amplitudes below AND the Bump node's Strength, which ships at 0.85 * tooth. Blender's
+    bump strength is meaningful over 0..1; past about 1.2 it tilts the shading normal far enough
+    off the surface that the sheet loses light faster than the mottle adds variance to it. Swept
+    on lined_01 at res 3000, raising `tooth` alone took mean luminance 218.9 -> 193.9 -> 173.9 ->
+    137.4 at scales 1.0/1.5/2.0/3.0 while L_std FELL 6.83 -> 6.14 -> 6.52 -> 5.70. Relative
+    contrast did rise (3.12% -> 4.15%); the sheet just went dark faster. So `tooth` cannot be
+    used to answer "make the paper toothier" -- it makes the paper dimmer.
+
+    `albedo_tooth` is the half that can. It multiplies ONLY the four mottle amplitudes and leaves
+    the relief exactly where it is, so the variance rises without the sheet losing luminance.
 
     `rules_uv_scale` and `rules_uv_offset` exist because the rules image is sampled by raw UV and
     every sheet's UV is 0..1 over its own size, so a rules image drawn for one sheet lands at the
@@ -411,9 +424,10 @@ def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_i
     # across in the world, so a feature has to be bigger than about a fifth of a millimetre to
     # survive to a person's eye at all; the first pass put the speckle at a twelfth of that and it
     # averaged to nothing on the way down.
-    _mottle(120.0, 6.0, 0.62, 0.030 * tooth)                      # look-through, the cloudiness
-    _mottle(360.0, 8.0, 0.70, 0.034 * tooth)                       # individual fibres
-    _mottle(220.0, 6.0, 0.55, 0.028 * tooth, machine.outputs["Vector"])   # along the machine
+    _a = tooth * albedo_tooth
+    _mottle(120.0, 6.0, 0.62, 0.030 * _a)                      # look-through, the cloudiness
+    _mottle(360.0, 8.0, 0.70, 0.034 * _a)                       # individual fibres
+    _mottle(220.0, 6.0, 0.55, 0.028 * _a, machine.outputs["Vector"])   # along the machine
     speck = nodes.new("ShaderNodeTexWhiteNoise")
     speck.noise_dimensions = "2D"
     speck_map = nodes.new("ShaderNodeMapping")
@@ -422,11 +436,11 @@ def paper_material(name, base_rgb, tooth=1.0, yellowing=0.0, sheen=0.25, rules_i
     links.new(speck_map.outputs["Vector"], speck.inputs["Vector"])
     speck_ramp = nodes.new("ShaderNodeValToRGB")
     speck_ramp.color_ramp.elements[0].position = 0.32
-    speck_ramp.color_ramp.elements[0].color = (1.0 - 0.022 * tooth, 1.0 - 0.022 * tooth,
-                                               1.0 - 0.021 * tooth, 1)
+    speck_ramp.color_ramp.elements[0].color = (1.0 - 0.022 * _a, 1.0 - 0.022 * _a,
+                                               1.0 - 0.021 * _a, 1)
     speck_ramp.color_ramp.elements[1].position = 0.68
-    speck_ramp.color_ramp.elements[1].color = (1.0 + 0.022 * tooth, 1.0 + 0.022 * tooth,
-                                               1.0 + 0.022 * tooth, 1)
+    speck_ramp.color_ramp.elements[1].color = (1.0 + 0.022 * _a, 1.0 + 0.022 * _a,
+                                               1.0 + 0.022 * _a, 1)
     links.new(speck.outputs["Value"], speck_ramp.inputs["Fac"])
     fibre_layers.append(speck_ramp.outputs["Color"])
 
