@@ -6,8 +6,16 @@ artifacts at their exact filenames, the family floors, the three commands, and t
 constraints. Everything in this file is *state*, not instruction — where the two disagree, the
 brief wins.
 
-**Repository** `kaiharimoto/love-tap` · **branch** `claude/new-session-vxz721` (develop, commit and
-push only here) · **working directory** `/home/user/love-tap` · working tree is clean and pushed.
+**Repository** `kaiharimoto/love-tap` · **branch**
+`claude/app-improvement-autonomous-workflow-d6fwdu` (develop, commit and push only here) ·
+**working directory** `/home/user/love-tap`
+
+> **This file is prose and it runs behind.** It named a branch that does not exist for several
+> cycles — `claude/new-session-vxz721` — which is the kind of stale line somebody pushes to. The
+> authority order is: `docs/BRIEF.md`, then `DIRECTION.md` and `docs/COLOR.md`, then
+> `loop/STATE.json` for where the loop actually is, then `loop/JOURNAL.md` for what the last firing
+> did. Sections 1 to 3 below are a snapshot from cycle 2 and the scores in them are two cycles old;
+> §4 and §5 are the parts that stay true, and §5 is the one to read before spending a day.
 
 Every reply must end with the fenced ```mpstate block the brief specifies (v, task, phase, step,
 cycle, score, next, blocked, ask).
