@@ -4139,3 +4139,52 @@ comparison, not a library-wide change.
 
 No new `asks[]`. Stage stays **IMPLEMENT, cycle 3**; the queue is not drained. Queue: **35 open**
 (34 inherited plus one filed here), **36 closed**, 5 superseded. Lease released.
+
+---
+
+## Firing 26 — cycle 3, IMPLEMENT — the simulated-paper cluster, taken rather than deferred
+
+**THE DECISION, WHICH THE DISPATCH MADE THE WHOLE FIRING: (a), run the re-render.** Written down
+before it was run, so that the reason survives whatever the measurement turns out to say.
+
+Five firings — 19, 20, 22, 24, 25 — reached the top of the queue, traced rank 5's residue to the
+tooth amplitude of the paper material, costed a re-render at about eight hours, and wrote "that is
+a re-render and not a firing's work". Each was right about the size and wrong about the conclusion.
+A firing is what there is.
+
+**Why (a) and not (b), moving the stage to ADDRESS.** ADDRESS is the stage that re-ranks and
+re-sizes. This cluster has been sized five times. What it has never once had is a *measurement of
+the proposed fix*: nobody has changed the tooth and looked. A sixth estimate is worth strictly less
+than one reading, and a reading is what ADDRESS would need in order to re-rank honestly. So (a)
+feeds (b); (b) does not feed (a). If this firing measures the tooth and the tooth answers, the
+re-render is the work. If it measures the tooth and the tooth does *not* answer, then reading (b)
+of `the-paper-tooth-is-six-and-the-floor-asks-eight` — *the floor falls, re-derived against what a
+photograph of real paper at this magnification measures* — is settled on evidence rather than
+asserted, and the cluster stops being a permanent deferral either way. Both outcomes end the loop
+this firing. Neither is a third work-around.
+
+**The cheap decisive step comes first, and that is not hedging.** `blender/paper/stocks.py` takes
+`--border`, `tools/paper_tooth.py` takes `--probe` and the matching `--border`, and firing 22 left
+both pointed at exactly this question. A bordered crop is about twenty-one seconds of Blender
+against fifteen minutes for a whole sheet, so the shape of the tooth-to-artifact response can be
+measured on three renders in a couple of minutes. Eight hours committed *before* that curve is
+known is eight hours spent on an assumption, and the assumption is live: across the committed
+library the pass rate does not track the `tooth` parameter at all — `receipt` is tooth 0.55 and
+passes 1 of 8, `sticky_*` 0.75 and 2 of 8, `lined` 1.05 and 1 of 8, while `graph` at 0.90 passes 8
+of 8. What separates graph from lined is a printed grid, not tooth. That is a real reason to think
+the floor reads printed content rather than paper, and it is cheap to settle before spending the
+render.
+
+**Two facts this firing established before choosing, which the dispatch did not have.**
+
+*`assets/paper` is already fully relit.* Rank 15 asks for the library re-rendered under the warmed
+day illuminant; `tools/render_queue6.sh` is a working resumable harness for it, keyed on git rather
+than mtime; and all 27 day stocks under `assets/paper` have changed since `a6f46fd`. The 27 dusk
+files are untouched by design — the dusk rig was never the fault. What is still owed to rank 15 is
+38 files in other families: `objects` 21 of 75, `bits` 16 of 44, `shell` 1 of 2. So the paper half
+of the warmth item is *done*, which is a thing no queue entry currently says.
+
+*The baseline reproduces exactly.* `tools/paper_tooth.py --all` on this checkout reads **117 of 432
+above the floor, mean L_std 10.849**, which is the number firing 22 filed. The instrument is stable
+across containers and the comparison this firing is about to make is like-for-like.
+
