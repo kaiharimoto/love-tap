@@ -1,0 +1,9 @@
+ok    a library built to be whole passes, exit 0
+ok    a present file recorded relative to the repository root is not called missing
+ok    entries_without_a_file_count                   fires when a seed photograph at the repository root is deleted
+ok    entries_without_a_file_count                   fires when a file under assets/ is deleted
+ok    without_an_entry_count                         fires when a file arrives in assets/ with no entry
+ok    entries_for_files_outside_the_library_count    fires when an entry claims a file under gitignored build scratch
+ok    naming_a_generator_that_cannot_build_them      fires when an entry names a generator that cannot build it
+
+7 checks passed: the gate can be passed, and each fault ok is made of can fail it

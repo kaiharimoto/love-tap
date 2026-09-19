@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5436
+   "ms": 3189
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1702
   },
   {
    "do": "scrollTo",
-   "ms": 2201
+   "ms": 2340
   },
   {
    "do": "wait",
@@ -26,71 +26,74 @@
   },
   {
    "do": "stage",
-   "ms": 3615
+   "ms": 2788
   },
   {
    "do": "wait",
    "ms": 1603
   },
   {
+   "do": "partnerTyping",
+   "ms": 1281
+  },
+  {
+   "do": "wait",
+   "ms": 1102
+  },
+  {
    "do": "shot",
-   "ms": 2216
+   "ms": 2152
   },
   {
    "do": "report",
-   "ms": 715
+   "ms": 716
   }
  ],
  "shots": [
   {
    "out": "evidence/13_messenger_states.png",
    "clip": null,
-   "text_runs": 34
+   "text_runs": 30,
+   "surfaces": 52
   }
  ],
  "reports": [
   {
    "region": 1,
    "visible": [
-    "0001M3F41R2APQC59QKBMZK4XF",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF",
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0D71QR2YCWV81J687",
-    "0001MCJ1M0D71QR2YCWV81J688",
-    "0001MCJ1M0D71QR2YCWV81J689",
-    "0001MCJ1M0D71QR2YCWV81J68A"
+    "0001MCJ1M0HTT044MCAH1W35E4",
+    "0001MCJ1M0HTT044MCAH1W35E5",
+    "0001MCJ1M0HTT044MCAH1W35E6",
+    "0001MCJ1M0HTT044MCAH1W35E7"
    ],
    "tears": {
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
     "0001M4GW48FEW3M67XKAZT5051": "tear_031",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M0D71QR2YCWV81J687": "tear_035",
-    "0001MCJ1M0D71QR2YCWV81J688": "tear_055",
-    "0001MCJ1M0D71QR2YCWV81J689": "tear_018",
-    "0001MCJ1M0D71QR2YCWV81J68A": "tear_040"
+    "0001MCJ1M0HTT044MCAH1W35E4": "tear_035",
+    "0001MCJ1M0HTT044MCAH1W35E5": "tear_055",
+    "0001MCJ1M0HTT044MCAH1W35E6": "tear_018",
+    "0001MCJ1M0HTT044MCAH1W35E7": "tear_040"
    },
    "stocks": {
-    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
-    "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M0D71QR2YCWV81J687": "looseleaf_02",
-    "0001MCJ1M0D71QR2YCWV81J688": "legal_01",
-    "0001MCJ1M0D71QR2YCWV81J689": "looseleaf_03",
-    "0001MCJ1M0D71QR2YCWV81J68A": "lined_03"
+    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
+    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01",
+    "0001MCJ1M0HTT044MCAH1W35E4": "looseleaf_03",
+    "0001MCJ1M0HTT044MCAH1W35E5": "legal_01",
+    "0001MCJ1M0HTT044MCAH1W35E6": "legal_02",
+    "0001MCJ1M0HTT044MCAH1W35E7": "lined_01"
    },
    "scroll": {
-    "first": 8382,
-    "last": 8391,
+    "first": 8384,
+    "last": 8390,
     "of": 8391
    },
    "now": "2026-09-03T19:40:00.000Z",
-   "driven_ms": 144,
+   "driven_ms": 192,
    "seed": 20260903,
    "events": 14068,
    "transport": "local",
@@ -111,10 +114,18 @@
     "held_from": 0,
     "held_to": 23
    },
+   "blobs_pending": 0,
    "at": "13_messenger_states.png"
   }
  ],
- "cold_ms": 11528,
+ "blob_waits": [
+  {
+   "at": "13_messenger_states.png",
+   "waited_ms": 3,
+   "pending_at_shot": 0
+  }
+ ],
+ "cold_ms": 7324,
  "problems": [],
  "ok": true
 }

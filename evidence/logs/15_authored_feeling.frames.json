@@ -3,23 +3,50 @@
  "frames": 308,
  "fps": 60.0,
  "seconds": 5.13,
- "mean_change_per_frame": 0.01341,
- "repeated_frames": 98,
- "repeated_fraction": 0.319,
- "longest_still_run": 36,
+ "mean_change_per_frame": 0.01333,
+ "repeated_frames": 29,
+ "repeated_fraction": 0.094,
+ "longest_still_run": 17,
  "repeated_at": [
-  33,
-  34,
-  35,
-  36,
-  37,
-  38,
-  39,
-  45,
-  46,
-  47,
-  48,
-  49
+  29,
+  121,
+  122,
+  123,
+  124,
+  178,
+  179,
+  180,
+  181,
+  182,
+  183,
+  184
+ ],
+ "still_runs": [
+  {
+   "from": 29,
+   "to": 29,
+   "len": 1
+  },
+  {
+   "from": 121,
+   "to": 124,
+   "len": 4
+  },
+  {
+   "from": 178,
+   "to": 194,
+   "len": 17
+  },
+  {
+   "from": 271,
+   "to": 274,
+   "len": 4
+  },
+  {
+   "from": 304,
+   "to": 306,
+   "len": 3
+  }
  ],
  "brightness_jumps": 0,
  "ok": true,

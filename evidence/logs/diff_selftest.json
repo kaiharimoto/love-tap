@@ -1,0 +1,7 @@
+ok    one writer of DIFF.json and one rotator of evidence/.previous, both diff.py
+ok    with no baseline on disk, every still reads new
+ok    02_chat.png altered upstream reads changed at ssim 0.9493
+ok    the stills that did not move read unchanged
+ok    the DIFF.json on disk is diff.py's: {'new': 0, 'gone': 0, 'unchanged': 2, 'changed': 1, 'absent': 14}
+
+DIFF.json is measured against the previous capture by one writer, and an altered still is labelled changed

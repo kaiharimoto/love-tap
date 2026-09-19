@@ -10,43 +10,43 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3366
+   "ms": 1814
   },
   {
    "do": "wait",
-   "ms": 1803
+   "ms": 1807
   },
   {
    "do": "openCorner",
-   "ms": 1009
+   "ms": 1395
   },
   {
    "do": "frames",
-   "ms": 33736
+   "ms": 28877
   },
   {
    "do": "sendFeeling",
-   "ms": 1503
+   "ms": 1065
   },
   {
    "do": "frames",
-   "ms": 155695
+   "ms": 131748
   },
   {
    "do": "sendFeeling",
-   "ms": 930
+   "ms": 765
   },
   {
    "do": "frames",
-   "ms": 160355
+   "ms": 136754
   },
   {
    "do": "openCorner",
-   "ms": 928
+   "ms": 566
   },
   {
    "do": "frames",
-   "ms": 31641
+   "ms": 26706
   },
   {
    "do": "report",
@@ -86,22 +86,22 @@
     "0001M4GW48FEW3M67XKAZT5051",
     "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0TBA9ZATND9W253VK",
-    "0001MCJ1M0TBA9ZATND9W253VM"
+    "0001MCJ1M02YP99VBWK10DESY4",
+    "0001MCJ1M02YP99VBWK10DESY5"
    ],
    "tears": {
     "0001M4GW48FEW3M67XKAZT5051": "tear_031",
     "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M0TBA9ZATND9W253VK": "tear_035",
-    "0001MCJ1M0TBA9ZATND9W253VM": "tear_055"
+    "0001MCJ1M02YP99VBWK10DESY4": "tear_035",
+    "0001MCJ1M02YP99VBWK10DESY5": "tear_055"
    },
    "stocks": {
-    "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M0TBA9ZATND9W253VK": "legal_02",
-    "0001MCJ1M0TBA9ZATND9W253VM": "legal_02"
+    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
+    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01",
+    "0001MCJ1M02YP99VBWK10DESY4": "lined_01",
+    "0001MCJ1M02YP99VBWK10DESY5": "legal_02"
    },
    "scroll": {
     "first": 8384,
@@ -130,10 +130,12 @@
     "held_from": 0,
     "held_to": 23
    },
+   "blobs_pending": 0,
    "at": "07_feeling_landing"
   }
  ],
- "cold_ms": 11625,
+ "blob_waits": [],
+ "cold_ms": 7409,
  "problems": [],
  "ok": true
 }

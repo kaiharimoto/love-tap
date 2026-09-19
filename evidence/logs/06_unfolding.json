@@ -10,35 +10,35 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2858
+   "ms": 2030
   },
   {
    "do": "wait",
-   "ms": 2002
+   "ms": 2003
   },
   {
    "do": "scrollTo",
-   "ms": 1164
+   "ms": 1121
   },
   {
    "do": "wait",
-   "ms": 1602
+   "ms": 1603
   },
   {
    "do": "frames",
-   "ms": 15183
+   "ms": 13044
   },
   {
    "do": "unfold",
-   "ms": 487
+   "ms": 321
   },
   {
    "do": "frames",
-   "ms": 251141
+   "ms": 212734
   },
   {
    "do": "report",
-   "ms": 421
+   "ms": 426
   }
  ],
  "shots": [
@@ -73,11 +73,11 @@
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
    },
    "stocks": {
-    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
-    "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
+    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_02",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "receipt_01",
+    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
+    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01"
    },
    "scroll": {
     "first": 8382,
@@ -106,10 +106,12 @@
     "held_from": 227,
     "held_to": 239
    },
+   "blobs_pending": 0,
    "at": "06_unfolding_b"
   }
  ],
- "cold_ms": 11779,
+ "blob_waits": [],
+ "cold_ms": 7989,
  "problems": [],
  "ok": true
 }

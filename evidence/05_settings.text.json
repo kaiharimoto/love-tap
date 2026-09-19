@@ -5,8 +5,9 @@
   3120
  ],
  "dpr": 3,
- "declared": 77,
+ "declared": 35,
  "offscreen": 0,
+ "clipped": 0,
  "runs": [
   {
    "rect": [
@@ -103,14 +104,14 @@
   {
    "rect": [
     174,
-    336,
+    337,
     358,
     43
    ],
    "lines": [
     [
      176,
-     337,
+     338,
      358,
      42
     ]
@@ -125,17 +126,17 @@
   },
   {
    "rect": [
-    155,
-    492,
-    410,
+    154,
+    499,
+    409,
     77
    ],
    "lines": [
     [
-     155,
-     498,
-     410,
-     66
+     154,
+     505,
+     409,
+     65
     ]
    ],
    "points": 17,
@@ -148,17 +149,17 @@
   },
   {
    "rect": [
-    155,
-    573,
+    154,
+    580,
     331,
-    35
+    34
    ],
    "lines": [
     [
-     157,
-     572,
+     156,
+     580,
      79,
-     35
+     34
     ]
    ],
    "points": 9,
@@ -171,29 +172,17 @@
   },
   {
    "rect": [
-    485,
-    574,
+    484,
+    578,
     801,
-    64
+    63
    ],
    "lines": [
     [
-     485,
-     578,
-     263,
+     484,
+     584,
+     247,
      54
-    ],
-    [
-     747,
-     580,
-     12,
-     50
-    ],
-    [
-     759,
-     579,
-     452,
-     55
     ]
    ],
    "points": 14,
@@ -201,20 +190,66 @@
    "family": "TeoHand",
    "role": "hand",
    "ink": "ff464648",
-   "text": "connecting · http://127.0.0.1:8480",
-   "chars": 34
+   "text": "connecting",
+   "chars": 10
   },
   {
    "rect": [
     154,
-    774,
+    652,
+    403,
+    62
+   ],
+   "lines": [
+    [
+     154,
+     656,
+     403,
+     54
+    ]
+   ],
+   "points": 14,
+   "px": 42,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "show the address",
+   "chars": 16
+  },
+  {
+   "rect": [
+    154,
+    743,
     1131,
-    71
+    70
    ],
    "lines": [
     [
      155,
-     779,
+     751,
+     345,
+     58
+    ]
+   ],
+   "points": 15,
+   "px": 45,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "their address",
+   "chars": 13
+  },
+  {
+   "rect": [
+    155,
+    845,
+    1131,
+    70
+   ],
+   "lines": [
+    [
+     155,
+     853,
      340,
      58
     ]
@@ -229,15 +264,15 @@
   },
   {
    "rect": [
-    153,
-    873,
+    155,
+    947,
     99,
     64
    ],
    "lines": [
     [
-     154,
-     876,
+     155,
+     950,
      99,
      57
     ]
@@ -252,15 +287,436 @@
   },
   {
    "rect": [
+    92,
+    1193,
+    423,
+    44
+   ],
+   "lines": [
+    [
+     95,
+     1194,
+     423,
+     43
+    ]
+   ],
+   "points": 11,
+   "px": 33,
+   "family": "DeskStamp",
+   "role": "stamp",
+   "ink": "ff464648",
+   "text": "FEELINGS YOU MADE",
+   "chars": 17
+  },
+  {
+   "rect": [
+    1152,
+    1179,
+    209,
+    61
+   ],
+   "lines": [
+    [
+     1152,
+     1183,
+     208,
+     53
+    ]
+   ],
+   "points": 14,
+   "px": 42,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "make one",
+   "chars": 8
+  },
+  {
+   "rect": [
+    144,
+    1604,
+    125,
+    52
+   ],
+   "lines": [
+    [
+     144,
+     1607,
+     125,
+     46
+    ]
+   ],
+   "points": 12,
+   "px": 36,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "pigeon",
+   "chars": 6
+  },
+  {
+   "rect": [
+    145,
+    1655,
+    123,
+    43
+   ],
+   "lines": [
+    [
+     145,
+     1657,
+     123,
+     38
+    ]
+   ],
+   "points": 10,
+   "px": 30,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "by noor",
+   "chars": 7
+  },
+  {
+   "rect": [
+    332,
+    1604,
+    258,
+    52
+   ],
+   "lines": [
+    [
+     332,
+     1607,
+     258,
+     46
+    ]
+   ],
+   "points": 12,
+   "px": 36,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "tuesday soup",
+   "chars": 12
+  },
+  {
+   "rect": [
+    412,
+    1655,
+    97,
+    43
+   ],
+   "lines": [
+    [
+     413,
+     1657,
+     97,
+     38
+    ]
+   ],
+   "points": 10,
+   "px": 30,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "by teo",
+   "chars": 6
+  },
+  {
+   "rect": [
+    125,
+    1844,
+    354,
+    43
+   ],
+   "lines": [
+    [
+     127,
+     1845,
+     354,
+     42
+    ]
+   ],
+   "points": 11,
+   "px": 33,
+   "family": "DeskStamp",
+   "role": "stamp",
+   "ink": "ff464648",
+   "text": "THE TWO OF YOU",
+   "chars": 14
+  },
+  {
+   "rect": [
+    205,
+    2108,
+    331,
+    35
+   ],
+   "lines": [
+    [
+     208,
+     2108,
+     207,
+     35
+    ]
+   ],
+   "points": 9,
+   "px": 27,
+   "family": "DeskStamp",
+   "role": "stamp",
+   "ink": "ff464648",
+   "text": "THIS PHONE",
+   "chars": 10
+  },
+  {
+   "rect": [
+    535,
+    2105,
+    775,
+    63
+   ],
+   "lines": [
+    [
+     536,
+     2112,
+     87,
+     53
+    ],
+    [
+     622,
+     2113,
+     12,
+     50
+    ],
+    [
+     633,
+     2111,
+     159,
+     54
+    ],
+    [
+     792,
+     2112,
+     12,
+     50
+    ],
+    [
+     804,
+     2111,
+     124,
+     53
+    ]
+   ],
+   "points": 14,
+   "px": 42,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "teo · client · local",
+   "chars": 20
+  },
+  {
+   "rect": [
+    206,
+    2180,
+    331,
+    35
+   ],
+   "lines": [
+    [
+     208,
+     2180,
+     227,
+     35
+    ]
+   ],
+   "points": 9,
+   "px": 27,
+   "family": "DeskStamp",
+   "role": "stamp",
+   "ink": "ff464648",
+   "text": "THEIR PHONE",
+   "chars": 11
+  },
+  {
+   "rect": [
+    536,
+    2177,
+    775,
+    63
+   ],
+   "lines": [
+    [
+     536,
+     2184,
+     103,
+     53
+    ]
+   ],
+   "points": 14,
+   "px": 42,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "noor",
+   "chars": 4
+  },
+  {
+   "rect": [
+    206,
+    2252,
+    331,
+    35
+   ],
+   "lines": [
+    [
+     208,
+     2252,
+     154,
+     35
+    ]
+   ],
+   "points": 9,
+   "px": 27,
+   "family": "DeskStamp",
+   "role": "stamp",
+   "ink": "ff464648",
+   "text": "HISTORY",
+   "chars": 7
+  },
+  {
+   "rect": [
+    536,
+    2249,
+    775,
+    63
+   ],
+   "lines": [
+    [
+     536,
+     2253,
+     684,
+     56
+    ]
+   ],
+   "points": 14,
+   "px": 42,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "14062 events, 1 waiting to send",
+   "chars": 31
+  },
+  {
+   "rect": [
+    206,
+    2324,
+    331,
+    35
+   ],
+   "lines": [
+    [
+     209,
+     2324,
+     166,
+     35
+    ]
+   ],
+   "points": 9,
+   "px": 27,
+   "family": "DeskStamp",
+   "role": "stamp",
+   "ink": "ff464648",
+   "text": "FEELINGS",
+   "chars": 8
+  },
+  {
+   "rect": [
+    536,
+    2321,
+    775,
+    63
+   ],
+   "lines": [
+    [
+     537,
+     2326,
+     545,
+     55
+    ]
+   ],
+   "points": 14,
+   "px": 42,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "36 to send, 2 made here",
+   "chars": 23
+  },
+  {
+   "rect": [
+    207,
+    2431,
+    657,
+    66
+   ],
+   "lines": [
+    [
+     207,
+     2434,
+     657,
+     59
+    ]
+   ],
+   "points": 15,
+   "px": 45,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "write the whole history out",
+   "chars": 27
+  },
+  {
+   "rect": [
+    207,
+    2522,
+    1105,
+    107
+   ],
+   "lines": [
+    [
+     207,
+     2525,
+     1018,
+     49
+    ],
+    [
+     208,
+     2578,
+     498,
+     47
+    ]
+   ],
+   "points": 12,
+   "px": 36,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff464648",
+   "text": "everything either of you wrote is in one log on both phones. th…",
+   "chars": 80
+  },
+  {
+   "rect": [
     232,
-    1102,
+    2872,
     459,
     44
    ],
    "lines": [
     [
      234,
-     1103,
+     2872,
      459,
      43
     ]
@@ -272,1439 +728,6 @@
    "ink": "ff464648",
    "text": "WHAT MAY INTERRUPT",
    "chars": 18
-  },
-  {
-   "rect": [
-    157,
-    1226,
-    491,
-    72
-   ],
-   "lines": [
-    [
-     157,
-     1230,
-     491,
-     63
-    ]
-   ],
-   "points": 16,
-   "px": 48,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "let it interrupt you",
-   "chars": 20
-  },
-  {
-   "rect": [
-    191,
-    1722,
-    211,
-    34
-   ],
-   "lines": [
-    [
-     193,
-     1721,
-     211,
-     35
-    ]
-   ],
-   "points": 9,
-   "px": 27,
-   "family": "DeskStamp",
-   "role": "stamp",
-   "ink": "ff464648",
-   "text": "QUIET FROM",
-   "chars": 10
-  },
-  {
-   "rect": [
-    425,
-    1705,
-    134,
-    70
-   ],
-   "lines": [
-    [
-     426,
-     1709,
-     134,
-     61
-    ]
-   ],
-   "points": 16,
-   "px": 48,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff3a3a3c",
-   "text": "23:00",
-   "chars": 5
-  },
-  {
-   "rect": [
-    588,
-    1723,
-    97,
-    34
-   ],
-   "lines": [
-    [
-     591,
-     1723,
-     97,
-     35
-    ]
-   ],
-   "points": 9,
-   "px": 27,
-   "family": "DeskStamp",
-   "role": "stamp",
-   "ink": "ff464648",
-   "text": "UNTIL",
-   "chars": 5
-  },
-  {
-   "rect": [
-    709,
-    1706,
-    139,
-    70
-   ],
-   "lines": [
-    [
-     709,
-     1710,
-     138,
-     61
-    ]
-   ],
-   "points": 16,
-   "px": 48,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff3a3a3c",
-   "text": "07:00",
-   "chars": 5
-  },
-  {
-   "rect": [
-    190,
-    1809,
-    482,
-    62
-   ],
-   "lines": [
-    [
-     191,
-     1813,
-     415,
-     55
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "something written",
-   "chars": 17
-  },
-  {
-   "rect": [
-    707,
-    1812,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     708,
-     1817,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    918,
-    1813,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     918,
-     1818,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1100,
-    1814,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1101,
-     1819,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    190,
-    1881,
-    482,
-    62
-   ],
-   "lines": [
-    [
-     191,
-     1885,
-     207,
-     54
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "a picture",
-   "chars": 9
-  },
-  {
-   "rect": [
-    707,
-    1884,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     708,
-     1889,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    918,
-    1885,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     918,
-     1890,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1100,
-    1886,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1100,
-     1891,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    190,
-    1953,
-    482,
-    62
-   ],
-   "lines": [
-    [
-     190,
-     1957,
-     446,
-     55
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "something to watch",
-   "chars": 18
-  },
-  {
-   "rect": [
-    707,
-    1956,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     707,
-     1961,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    917,
-    1957,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     918,
-     1962,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1100,
-    1958,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1100,
-     1963,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    190,
-    2025,
-    482,
-    62
-   ],
-   "lines": [
-    [
-     190,
-     2029,
-     242,
-     54
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "their voice",
-   "chars": 11
-  },
-  {
-   "rect": [
-    707,
-    2028,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     707,
-     2033,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    917,
-    2029,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     918,
-     2034,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1099,
-    2030,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1100,
-     2035,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    189,
-    2097,
-    482,
-    122
-   ],
-   "lines": [
-    [
-     190,
-     2101,
-     313,
-     54
-    ],
-    [
-     190,
-     2161,
-     428,
-     55
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "an answer to something of yours",
-   "chars": 31
-  },
-  {
-   "rect": [
-    706,
-    2130,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     707,
-     2135,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    917,
-    2131,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     917,
-     2136,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1099,
-    2132,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1099,
-     2137,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    189,
-    2229,
-    482,
-    62
-   ],
-   "lines": [
-    [
-     189,
-     2233,
-     198,
-     54
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "a feeling",
-   "chars": 9
-  },
-  {
-   "rect": [
-    706,
-    2232,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     706,
-     2237,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    916,
-    2233,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     917,
-     2238,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1099,
-    2234,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1099,
-     2239,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    188,
-    2301,
-    482,
-    122
-   ],
-   "lines": [
-    [
-     189,
-     2305,
-     455,
-     55
-    ],
-    [
-     189,
-     2365,
-     390,
-     54
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "something they say about themselves",
-   "chars": 35
-  },
-  {
-   "rect": [
-    706,
-    2334,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     706,
-     2339,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    916,
-    2335,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     916,
-     2340,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1098,
-    2336,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1099,
-     2341,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    188,
-    2433,
-    482,
-    122
-   ],
-   "lines": [
-    [
-     189,
-     2437,
-     378,
-     54
-    ],
-    [
-     188,
-     2497,
-     308,
-     54
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "something their phone notices",
-   "chars": 29
-  },
-  {
-   "rect": [
-    705,
-    2466,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     705,
-     2471,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    916,
-    2467,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     916,
-     2472,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1098,
-    2468,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1098,
-     2473,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    188,
-    2565,
-    482,
-    62
-   ],
-   "lines": [
-    [
-     188,
-     2569,
-     328,
-     54
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "a date moving",
-   "chars": 13
-  },
-  {
-   "rect": [
-    705,
-    2568,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     705,
-     2573,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    915,
-    2569,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     916,
-     2574,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1097,
-    2570,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1098,
-     2575,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    187,
-    2637,
-    482,
-    62
-   ],
-   "lines": [
-    [
-     188,
-     2641,
-     338,
-     54
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "the list moving",
-   "chars": 15
-  },
-  {
-   "rect": [
-    704,
-    2640,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     705,
-     2645,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    915,
-    2641,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     915,
-     2646,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1097,
-    2642,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1098,
-     2647,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    187,
-    2709,
-    482,
-    62
-   ],
-   "lines": [
-    [
-     188,
-     2713,
-     449,
-     55
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "a day that matters",
-   "chars": 18
-  },
-  {
-   "rect": [
-    704,
-    2712,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     705,
-     2717,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    915,
-    2713,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     915,
-     2718,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1097,
-    2714,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1097,
-     2719,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    187,
-    2781,
-    482,
-    62
-   ],
-   "lines": [
-    [
-     187,
-     2785,
-     224,
-     54
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "passed on",
-   "chars": 9
-  },
-  {
-   "rect": [
-    704,
-    2784,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     704,
-     2789,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    914,
-    2785,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     915,
-     2790,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1097,
-    2786,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1097,
-     2791,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    186,
-    2853,
-    482,
-    122
-   ],
-   "lines": [
-    [
-     187,
-     2857,
-     463,
-     55
-    ],
-    [
-     187,
-     2917,
-     111,
-     53
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "a note set to arrive later",
-   "chars": 26
-  },
-  {
-   "rect": [
-    703,
-    2886,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     704,
-     2891,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    914,
-    2887,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     914,
-     2892,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1096,
-    2888,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1097,
-     2893,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
-  },
-  {
-   "rect": [
-    186,
-    2985,
-    482,
-    122
-   ],
-   "lines": [
-    [
-     187,
-     2989,
-     463,
-     55
-    ],
-    [
-     186,
-     3049,
-     123,
-     53
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "a feeling one of you made",
-   "chars": 25
-  },
-  {
-   "rect": [
-    703,
-    3018,
-    175,
-    58
-   ],
-   "lines": [
-    [
-     703,
-     3023,
-     175,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "wake me",
-   "chars": 7
-  },
-  {
-   "rect": [
-    914,
-    3019,
-    147,
-    58
-   ],
-   "lines": [
-    [
-     914,
-     3024,
-     147,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "quietly",
-   "chars": 7
-  },
-  {
-   "rect": [
-    1096,
-    3020,
-    204,
-    58
-   ],
-   "lines": [
-    [
-     1096,
-     3025,
-     204,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "80464648",
-   "text": "not at all",
-   "chars": 10
   },
   {
    "rect": [

@@ -5,40 +5,40 @@
   "01_pulse.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9286,
+    "p50": 0.9219,
     "p98": 165.0,
-    "span": 0.5964
+    "span": 0.5962
    },
    "value_bands": {
-    "ground": 0.1385,
-    "mid": 0.0508,
-    "figure": 0.8107
+    "ground": 0.1395,
+    "mid": 0.051,
+    "figure": 0.8095
    },
    "chroma": {
-    "mean": 0.0397,
-    "p99": 0.0821,
-    "grey_fraction": 0.0015,
-    "accent_fraction": 0.00048,
+    "mean": 0.0557,
+    "p99": 0.0829,
+    "grey_fraction": 0.0017,
+    "accent_fraction": 0.00096,
     "accent_fraction_by_family": {
-     "A_paper": 0.0,
-     "B_rose": 5e-05,
+     "A_paper": 0.00023,
+     "B_rose": 4e-05,
      "C_cool": 0.0,
      "D_green": 0.0,
-     "outside_any_family": 0.00043
+     "outside_any_family": 0.00069
     }
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0376,
+     "mean_chroma": 0.0381,
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0311,
-     "p99_chroma": 0.0896
+     "mean_chroma": 0.0386,
+     "p99_chroma": 0.0898
     },
     "figure": {
-     "mean_chroma": 0.0407,
-     "p99_chroma": 0.0829
+     "mean_chroma": 0.0598,
+     "p99_chroma": 0.0837
     }
    },
    "hue_families": 4,
@@ -53,89 +53,88 @@
   "02_chat.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9286,
+    "p50": 0.9217,
     "p98": 165.0,
-    "span": 0.6158
+    "span": 0.6178
    },
    "value_bands": {
-    "ground": 0.1397,
-    "mid": 0.0812,
-    "figure": 0.7791
+    "ground": 0.1468,
+    "mid": 0.062,
+    "figure": 0.7912
    },
    "chroma": {
-    "mean": 0.0412,
-    "p99": 0.0718,
-    "grey_fraction": 0.002,
-    "accent_fraction": 0.0,
+    "mean": 0.0507,
+    "p99": 0.0781,
+    "grey_fraction": 0.0035,
+    "accent_fraction": 0.00204,
     "accent_fraction_by_family": {
-     "A_paper": 0.0,
+     "A_paper": 0.00092,
      "B_rose": 0.0,
      "C_cool": 0.0,
      "D_green": 0.0,
-     "outside_any_family": 0.0
+     "outside_any_family": 0.00112
     }
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0363,
+     "mean_chroma": 0.0378,
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0332,
-     "p99_chroma": 0.0554
+     "mean_chroma": 0.0338,
+     "p99_chroma": 0.0906
     },
     "figure": {
-     "mean_chroma": 0.0429,
-     "p99_chroma": 0.0722
+     "mean_chroma": 0.0545,
+     "p99_chroma": 0.0787
     }
    },
-   "hue_families": 5,
+   "hue_families": 4,
    "hue_centres_deg": [
     55.0,
     65.0,
     75.0,
-    85.0,
-    95.0
+    85.0
    ],
-   "widest_hue_gap_deg": 320.0
+   "widest_hue_gap_deg": 330.0
   },
   "03_us.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9267,
+    "p50": 0.926,
     "p98": 165.0,
-    "span": 0.615
+    "span": 0.6128
    },
    "value_bands": {
-    "ground": 0.1232,
-    "mid": 0.0455,
-    "figure": 0.8313
+    "ground": 0.126,
+    "mid": 0.0443,
+    "figure": 0.8298
    },
    "chroma": {
-    "mean": 0.0426,
-    "p99": 0.0718,
+    "mean": 0.045,
+    "p99": 0.0756,
     "grey_fraction": 0.0006,
-    "accent_fraction": 5e-05,
+    "accent_fraction": 0.00073,
     "accent_fraction_by_family": {
-     "A_paper": 0.0,
+     "A_paper": 0.00034,
      "B_rose": 0.0,
      "C_cool": 0.0,
      "D_green": 0.0,
-     "outside_any_family": 5e-05
+     "outside_any_family": 0.00039
     }
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0377,
+     "mean_chroma": 0.0384,
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0326,
-     "p99_chroma": 0.0712
+     "mean_chroma": 0.0348,
+     "p99_chroma": 0.0895
     },
     "figure": {
-     "mean_chroma": 0.0439,
-     "p99_chroma": 0.0722
+     "mean_chroma": 0.0465,
+     "p99_chroma": 0.0757
     }
    },
    "hue_families": 4,
@@ -150,40 +149,40 @@
   "04_moments.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9282,
+    "p50": 0.9132,
     "p98": 165.0,
-    "span": 0.6305
+    "span": 0.6799
    },
    "value_bands": {
-    "ground": 0.1376,
-    "mid": 0.0589,
-    "figure": 0.8035
+    "ground": 0.2615,
+    "mid": 0.1163,
+    "figure": 0.6222
    },
    "chroma": {
-    "mean": 0.0421,
-    "p99": 0.0731,
-    "grey_fraction": 0.0094,
-    "accent_fraction": 0.0,
+    "mean": 0.0397,
+    "p99": 0.0742,
+    "grey_fraction": 0.0685,
+    "accent_fraction": 0.00011,
     "accent_fraction_by_family": {
-     "A_paper": 0.0,
+     "A_paper": 8e-05,
      "B_rose": 0.0,
      "C_cool": 0.0,
      "D_green": 0.0,
-     "outside_any_family": 0.0
+     "outside_any_family": 3e-05
     }
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.033,
-     "p99_chroma": 0.0491
+     "mean_chroma": 0.0213,
+     "p99_chroma": 0.049
     },
     "mid": {
-     "mean_chroma": 0.034,
-     "p99_chroma": 0.056
+     "mean_chroma": 0.0312,
+     "p99_chroma": 0.0559
     },
     "figure": {
-     "mean_chroma": 0.0442,
-     "p99_chroma": 0.0733
+     "mean_chroma": 0.0491,
+     "p99_chroma": 0.0758
     }
    },
    "hue_families": 4,
@@ -198,19 +197,19 @@
   "05_settings.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9279,
+    "p50": 0.929,
     "p98": 165.0,
-    "span": 0.5958
+    "span": 0.5942
    },
    "value_bands": {
-    "ground": 0.1375,
-    "mid": 0.06,
-    "figure": 0.8025
+    "ground": 0.1288,
+    "mid": 0.046,
+    "figure": 0.8252
    },
    "chroma": {
-    "mean": 0.0435,
-    "p99": 0.084,
-    "grey_fraction": 0.001,
+    "mean": 0.043,
+    "p99": 0.0722,
+    "grey_fraction": 0.0008,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -222,16 +221,16 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0369,
+     "mean_chroma": 0.0375,
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0317,
-     "p99_chroma": 0.0558
+     "mean_chroma": 0.0315,
+     "p99_chroma": 0.0577
     },
     "figure": {
-     "mean_chroma": 0.0455,
-     "p99_chroma": 0.084
+     "mean_chroma": 0.0446,
+     "p99_chroma": 0.0722
     }
    },
    "hue_families": 4,
@@ -246,19 +245,19 @@
   "10_first_run.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9434,
+    "p50": 0.9208,
     "p98": 165.0,
-    "span": 0.5945
+    "span": 0.5877
    },
    "value_bands": {
     "ground": 0.1299,
-    "mid": 0.0212,
-    "figure": 0.8489
+    "mid": 0.0211,
+    "figure": 0.849
    },
    "chroma": {
-    "mean": 0.0258,
-    "p99": 0.0481,
-    "grey_fraction": 0.0002,
+    "mean": 0.0671,
+    "p99": 0.0805,
+    "grey_fraction": 0.0001,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -270,16 +269,111 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0388,
+     "mean_chroma": 0.0395,
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0287,
-     "p99_chroma": 0.0517
+     "mean_chroma": 0.0374,
+     "p99_chroma": 0.0638
     },
     "figure": {
-     "mean_chroma": 0.0238,
-     "p99_chroma": 0.0462
+     "mean_chroma": 0.0721,
+     "p99_chroma": 0.0805
+    }
+   },
+   "hue_families": 4,
+   "hue_centres_deg": [
+    55.0,
+    65.0,
+    75.0,
+    95.0
+   ],
+   "widest_hue_gap_deg": 320.0
+  },
+  "12_search.png": {
+   "lightness": {
+    "p2": 120.0,
+    "p50": 0.6488,
+    "p98": 165.0,
+    "span": 0.6568
+   },
+   "value_bands": {
+    "ground": 0.477,
+    "mid": 0.0385,
+    "figure": 0.4845
+   },
+   "chroma": {
+    "mean": 0.0416,
+    "p99": 0.0612,
+    "grey_fraction": 0.0009,
+    "accent_fraction": 0.00334,
+    "accent_fraction_by_family": {
+     "A_paper": 0.00334,
+     "B_rose": 0.0,
+     "C_cool": 0.0,
+     "D_green": 0.0,
+     "outside_any_family": 0.0
+    }
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0392,
+     "p99_chroma": 0.0491
+    },
+    "mid": {
+     "mean_chroma": 0.0331,
+     "p99_chroma": 0.0532
+    },
+    "figure": {
+     "mean_chroma": 0.0446,
+     "p99_chroma": 0.0802
+    }
+   },
+   "hue_families": 3,
+   "hue_centres_deg": [
+    55.0,
+    65.0,
+    75.0
+   ],
+   "widest_hue_gap_deg": 340.0
+  },
+  "13_messenger_states.png": {
+   "lightness": {
+    "p2": 120.0,
+    "p50": 0.9219,
+    "p98": 165.0,
+    "span": 0.5911
+   },
+   "value_bands": {
+    "ground": 0.145,
+    "mid": 0.0529,
+    "figure": 0.8021
+   },
+   "chroma": {
+    "mean": 0.0569,
+    "p99": 0.0798,
+    "grey_fraction": 0.0027,
+    "accent_fraction": 0.00298,
+    "accent_fraction_by_family": {
+     "A_paper": 0.00098,
+     "B_rose": 0.00107,
+     "C_cool": 0.0,
+     "D_green": 0.0,
+     "outside_any_family": 0.00094
+    }
+   },
+   "chroma_by_band": {
+    "ground": {
+     "mean_chroma": 0.0378,
+     "p99_chroma": 0.0491
+    },
+    "mid": {
+     "mean_chroma": 0.0411,
+     "p99_chroma": 0.1122
+    },
+    "figure": {
+     "mean_chroma": 0.0614,
+     "p99_chroma": 0.0802
     }
    },
    "hue_families": 4,
@@ -291,120 +385,22 @@
    ],
    "widest_hue_gap_deg": 330.0
   },
-  "12_search.png": {
-   "lightness": {
-    "p2": 120.0,
-    "p50": 0.89,
-    "p98": 165.0,
-    "span": 0.6437
-   },
-   "value_bands": {
-    "ground": 0.3321,
-    "mid": 0.056,
-    "figure": 0.6119
-   },
-   "chroma": {
-    "mean": 0.0448,
-    "p99": 0.0825,
-    "grey_fraction": 0.0011,
-    "accent_fraction": 0.00782,
-    "accent_fraction_by_family": {
-     "A_paper": 0.00782,
-     "B_rose": 0.0,
-     "C_cool": 0.0,
-     "D_green": 0.0,
-     "outside_any_family": 0.0
-    }
-   },
-   "chroma_by_band": {
-    "ground": {
-     "mean_chroma": 0.0384,
-     "p99_chroma": 0.0491
-    },
-    "mid": {
-     "mean_chroma": 0.0302,
-     "p99_chroma": 0.0568
-    },
-    "figure": {
-     "mean_chroma": 0.0496,
-     "p99_chroma": 0.0938
-    }
-   },
-   "hue_families": 5,
-   "hue_centres_deg": [
-    55.0,
-    65.0,
-    75.0,
-    85.0,
-    95.0
-   ],
-   "widest_hue_gap_deg": 320.0
-  },
-  "13_messenger_states.png": {
-   "lightness": {
-    "p2": 120.0,
-    "p50": 0.9293,
-    "p98": 165.0,
-    "span": 0.6191
-   },
-   "value_bands": {
-    "ground": 0.1409,
-    "mid": 0.0732,
-    "figure": 0.7859
-   },
-   "chroma": {
-    "mean": 0.0422,
-    "p99": 0.0722,
-    "grey_fraction": 0.0032,
-    "accent_fraction": 0.00058,
-    "accent_fraction_by_family": {
-     "A_paper": 0.0,
-     "B_rose": 0.00058,
-     "C_cool": 0.0,
-     "D_green": 0.0,
-     "outside_any_family": 0.0
-    }
-   },
-   "chroma_by_band": {
-    "ground": {
-     "mean_chroma": 0.0363,
-     "p99_chroma": 0.0491
-    },
-    "mid": {
-     "mean_chroma": 0.0367,
-     "p99_chroma": 0.0806
-    },
-    "figure": {
-     "mean_chroma": 0.0437,
-     "p99_chroma": 0.0726
-    }
-   },
-   "hue_families": 5,
-   "hue_centres_deg": [
-    55.0,
-    65.0,
-    75.0,
-    85.0,
-    95.0
-   ],
-   "widest_hue_gap_deg": 320.0
-  },
   "14_media_viewer.png": {
    "lightness": {
     "p2": 120.0,
     "p50": 0.3904,
     "p98": 165.0,
-    "span": 0.7332
+    "span": 0.7335
    },
    "value_bands": {
-    "ground": 0.5224,
+    "ground": 0.5225,
     "mid": 0.183,
-    "figure": 0.2946
+    "figure": 0.2944
    },
    "chroma": {
-    "mean": 0.0342,
+    "mean": 0.0333,
     "p99": 0.0692,
-    "grey_fraction": 0.1376,
+    "grey_fraction": 0.1377,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -417,14 +413,14 @@
    "chroma_by_band": {
     "ground": {
      "mean_chroma": 0.023,
-     "p99_chroma": 0.0459
+     "p99_chroma": 0.0458
     },
     "mid": {
-     "mean_chroma": 0.0555,
+     "mean_chroma": 0.0552,
      "p99_chroma": 0.0706
     },
     "figure": {
-     "mean_chroma": 0.041,
+     "mean_chroma": 0.038,
      "p99_chroma": 0.07
     }
    },
@@ -487,8 +483,8 @@
   }
  },
  "across_the_set": {
-  "mean_chroma": 0.0375,
-  "mean_lightness_span": 0.6228,
+  "mean_chroma": 0.0452,
+  "mean_lightness_span": 0.6254,
   "hue_families_min": 3,
   "hue_families_max": 5,
   "hue_families": 5,
@@ -504,10 +500,10 @@
   "named_families_present": [
    "A_paper"
   ],
-  "grey_fraction": 0.0182,
-  "accent_fraction": 0.00089,
-  "lightness_drift": 0.553,
-  "lightness_drift_room": 0.0534,
+  "grey_fraction": 0.0242,
+  "accent_fraction": 0.00102,
+  "lightness_drift": 0.5513,
+  "lightness_drift_room": 0.2929,
   "rooms": 9,
   "viewers": 1
  },
@@ -515,7 +511,7 @@
  "floors": {
   "law": "docs/COLOR.md",
   "classes_from": "docs/screen_classes.json",
-  "breaches": 40,
+  "breaches": 41,
   "breached": [
    {
     "artifact": "01_pulse.png",
@@ -530,7 +526,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0829,
+    "actual": 0.0837,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -538,7 +534,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.00048,
+    "actual": 0.00096,
     "section": "7 item 5"
    },
    {
@@ -546,7 +542,7 @@
     "class": "room",
     "quantity": "widest_hue_gap_deg",
     "requires": "<= 200.0",
-    "actual": 320.0,
+    "actual": 330.0,
     "section": "4"
    },
    {
@@ -554,7 +550,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0722,
+    "actual": 0.0787,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -562,7 +558,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.0,
+    "actual": 0.00204,
     "section": "7 item 5"
    },
    {
@@ -578,7 +574,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0722,
+    "actual": 0.0757,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -586,7 +582,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 5e-05,
+    "actual": 0.00073,
     "section": "7 item 5"
    },
    {
@@ -600,9 +596,17 @@
    {
     "artifact": "04_moments.png",
     "class": "room",
+    "quantity": "chroma_by_band.ground.mean_chroma",
+    "requires": ">= 0.03",
+    "actual": 0.0213,
+    "section": "5 floor"
+   },
+   {
+    "artifact": "04_moments.png",
+    "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0733,
+    "actual": 0.0758,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -610,7 +614,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.0,
+    "actual": 0.00011,
     "section": "7 item 5"
    },
    {
@@ -626,7 +630,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.084,
+    "actual": 0.0722,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -642,7 +646,7 @@
     "class": "room",
     "quantity": "value_bands.mid",
     "requires": ">= 0.04",
-    "actual": 0.0212,
+    "actual": 0.0211,
     "section": "2"
    },
    {
@@ -650,31 +654,15 @@
     "class": "room",
     "quantity": "widest_hue_gap_deg",
     "requires": "<= 200.0",
-    "actual": 330.0,
+    "actual": 320.0,
     "section": "4"
-   },
-   {
-    "artifact": "10_first_run.png",
-    "class": "room",
-    "quantity": "chroma_by_band.mid.mean_chroma",
-    "requires": ">= 0.03",
-    "actual": 0.0287,
-    "section": "5 floor"
-   },
-   {
-    "artifact": "10_first_run.png",
-    "class": "room",
-    "quantity": "chroma_by_band.figure.mean_chroma",
-    "requires": ">= 0.035",
-    "actual": 0.0238,
-    "section": "5 floor"
    },
    {
     "artifact": "10_first_run.png",
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0462,
+    "actual": 0.0805,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -688,9 +676,25 @@
    {
     "artifact": "12_search.png",
     "class": "room",
+    "quantity": "lightness.p50",
+    "requires": ">= 0.78",
+    "actual": 0.6488,
+    "section": "3"
+   },
+   {
+    "artifact": "12_search.png",
+    "class": "room",
+    "quantity": "value_bands.mid",
+    "requires": ">= 0.04",
+    "actual": 0.0385,
+    "section": "2"
+   },
+   {
+    "artifact": "12_search.png",
+    "class": "room",
     "quantity": "widest_hue_gap_deg",
     "requires": "<= 200.0",
-    "actual": 320.0,
+    "actual": 340.0,
     "section": "4"
    },
    {
@@ -698,7 +702,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0938,
+    "actual": 0.0802,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -706,7 +710,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.00782,
+    "actual": 0.00334,
     "section": "7 item 5"
    },
    {
@@ -714,7 +718,7 @@
     "class": "room",
     "quantity": "widest_hue_gap_deg",
     "requires": "<= 200.0",
-    "actual": 320.0,
+    "actual": 330.0,
     "section": "4"
    },
    {
@@ -722,7 +726,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0726,
+    "actual": 0.0802,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -730,7 +734,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.00058,
+    "actual": 0.00298,
     "section": "7 item 5"
    },
    {
@@ -762,7 +766,7 @@
     "class": "viewer",
     "quantity": "chroma.grey_fraction",
     "requires": "<= 0.08",
-    "actual": 0.1376,
+    "actual": 0.1377,
     "section": "5 floor"
    },
    {
@@ -816,10 +820,10 @@
    {
     "artifact": "<the set>",
     "class": "-",
-    "quantity": "across_the_set.mean_chroma",
-    "requires": ">= 0.045",
-    "actual": 0.0375,
-    "section": "5 floor / 7 item 1"
+    "quantity": "across_the_set.lightness_drift_room",
+    "requires": "<= 0.2",
+    "actual": 0.2929,
+    "section": "3"
    },
    {
     "artifact": "<the set>",

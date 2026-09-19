@@ -10,55 +10,55 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2049
+   "ms": 1732
   },
   {
    "do": "wait",
-   "ms": 1807
+   "ms": 1803
   },
   {
    "do": "goTo",
-   "ms": 2675
+   "ms": 1868
   },
   {
    "do": "wait",
-   "ms": 1302
+   "ms": 1303
   },
   {
    "do": "openCorner",
-   "ms": 1601
+   "ms": 835
   },
   {
    "do": "frames",
-   "ms": 38865
+   "ms": 31792
   },
   {
    "do": "sendFeeling",
-   "ms": 1453
+   "ms": 1030
   },
   {
    "do": "frames",
-   "ms": 93886
+   "ms": 77283
   },
   {
    "do": "sendFeeling",
-   "ms": 1052
+   "ms": 877
   },
   {
    "do": "frames",
-   "ms": 151378
+   "ms": 126894
   },
   {
    "do": "openCorner",
-   "ms": 861
+   "ms": 549
   },
   {
    "do": "frames",
-   "ms": 33420
+   "ms": 27830
   },
   {
    "do": "report",
-   "ms": 429
+   "ms": 416
   }
  ],
  "shots": [
@@ -91,25 +91,22 @@
   {
    "region": 1,
    "visible": [
-    "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M0KGHR1ENFFVQY4MBH",
-    "0001MCJ1M0KGHR1ENFFVQY4MBJ"
+    "0001MCJ1M0FT07NG3EFWZYABR8",
+    "0001MCJ1M0FT07NG3EFWZYABR9"
    ],
    "tears": {
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M0KGHR1ENFFVQY4MBH": "tear_035",
-    "0001MCJ1M0KGHR1ENFFVQY4MBJ": "tear_055"
+    "0001MCJ1M0FT07NG3EFWZYABR8": "tear_035",
+    "0001MCJ1M0FT07NG3EFWZYABR9": "tear_055"
    },
    "stocks": {
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "lined_02",
-    "0001MCJ1M0KGHR1ENFFVQY4MBH": "legal_01",
-    "0001MCJ1M0KGHR1ENFFVQY4MBJ": "legal_02"
+    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01",
+    "0001MCJ1M0FT07NG3EFWZYABR8": "looseleaf_03",
+    "0001MCJ1M0FT07NG3EFWZYABR9": "lined_02"
    },
    "scroll": {
-    "first": 8385,
+    "first": 8386,
     "last": 8388,
     "of": 8389
    },
@@ -135,10 +132,12 @@
     "held_from": 0,
     "held_to": 23
    },
+   "blobs_pending": 0,
    "at": "15_authored_feeling"
   }
  ],
- "cold_ms": 12004,
+ "blob_waits": [],
+ "cold_ms": 7523,
  "problems": [],
  "ok": true
 }

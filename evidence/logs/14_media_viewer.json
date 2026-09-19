@@ -10,34 +10,35 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2466
+   "ms": 3256
   },
   {
    "do": "wait",
-   "ms": 1905
+   "ms": 1902
   },
   {
    "do": "openViewer",
-   "ms": 4512
+   "ms": 5061
   },
   {
    "do": "wait",
-   "ms": 2503
+   "ms": 2505
   },
   {
    "do": "shot",
-   "ms": 2396
+   "ms": 2422
   },
   {
    "do": "report",
-   "ms": 713
+   "ms": 711
   }
  ],
  "shots": [
   {
    "out": "evidence/14_media_viewer.png",
    "clip": null,
-   "text_runs": 2
+   "text_runs": 2,
+   "surfaces": 72
   }
  ],
  "reports": [
@@ -56,9 +57,9 @@
     "0003P9AZEGXQ38N9BVB70W8KDR": "tear_004"
    },
    "stocks": {
-    "0003P4A218ZAJ17AQB86SG2SEV": "spiral_02",
-    "0003P6AZ60EBYC9RTMBCXWKR7R": "lined_02",
-    "0003P6X94080SW3FA6FBY8NKCB": "index_02",
+    "0003P4A218ZAJ17AQB86SG2SEV": "graph_03",
+    "0003P6AZ60EBYC9RTMBCXWKR7R": "spiral_01",
+    "0003P6X94080SW3FA6FBY8NKCB": "index_01",
     "0003P9AZEGXQ38N9BVB70W8KDR": "lined_03"
    },
    "scroll": {
@@ -88,10 +89,18 @@
     "held_from": 0,
     "held_to": 23
    },
+   "blobs_pending": 0,
    "at": "14_media_viewer.png"
   }
  ],
- "cold_ms": 11677,
+ "blob_waits": [
+  {
+   "at": "14_media_viewer.png",
+   "waited_ms": 4,
+   "pending_at_shot": 0
+  }
+ ],
+ "cold_ms": 7462,
  "problems": [],
  "ok": true
 }

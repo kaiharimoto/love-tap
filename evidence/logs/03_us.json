@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4018
+   "ms": 5330
   },
   {
    "do": "wait",
@@ -18,18 +18,19 @@
   },
   {
    "do": "shot",
-   "ms": 3282
+   "ms": 2150
   },
   {
    "do": "report",
-   "ms": 990
+   "ms": 712
   }
  ],
  "shots": [
   {
    "out": "evidence/03_us.png",
    "clip": null,
-   "text_runs": 24
+   "text_runs": 23,
+   "surfaces": 30
   }
  ],
  "reports": [
@@ -52,12 +53,12 @@
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
    },
    "stocks": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "lined_04",
-    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_03",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "lined_04",
-    "0001M4GW48FEW3M67XKAZT5051": "looseleaf_03",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "lined_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "lined_02"
+    "0001M3AY8G83A3FBSRB1Y7W78Q": "graph_02",
+    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_02",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "receipt_01",
+    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
+    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01"
    },
    "scroll": {
     "first": 8381,
@@ -86,10 +87,18 @@
     "held_from": 0,
     "held_to": 23
    },
+   "blobs_pending": 0,
    "at": "03_us.png"
   }
  ],
- "cold_ms": 12548,
+ "blob_waits": [
+  {
+   "at": "03_us.png",
+   "waited_ms": 5,
+   "pending_at_shot": 0
+  }
+ ],
+ "cold_ms": 7632,
  "problems": [],
  "ok": true
 }

@@ -1,16 +1,17 @@
 {
  "report": "evidence/logs/02_chat.report.json",
- "visible": 8,
- "notes_with_tears": 8,
- "distinct_tears": 8,
+ "visible": 7,
+ "notes_with_tears": 7,
+ "distinct_tears": 7,
  "repeats": {},
  "pool": 56,
  "scroll": {
   "first": 5196,
-  "last": 5203,
+  "last": 5202,
   "of": 8387
  },
  "driven_ms": 96,
  "seed": 20260903,
- "ok": true
+ "ok": false,
+ "why": "only 7 notes on screen"
 }
