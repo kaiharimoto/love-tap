@@ -88,6 +88,24 @@ def main():
         runs.append(run)
     longest_still = max(runs) if runs else 0
     still_fraction = len(still) / max(1, len(deltas))
+    # WHERE the still frames are, not just how many. `repeated_at` is truncated to twelve entries
+    # and that truncation hid the shape of this for four cycles: 06_unfolding's twelve visible
+    # indices were the opening hold, so the clip read as a fold that stalls, and the two runs that
+    # actually carry its repeats -- nineteen frames of a note lying folded BEFORE the scene calls
+    # `unfold`, and twenty-one after it has finished opening and the clip is still rolling -- were
+    # off the end of the list. Between them the motion repeats sixteen frames out of two hundred
+    # and sixty-six. A run at the head or the tail of a clip is a clip; one in the middle is a
+    # stall, and a reader cannot tell the two apart from a count.
+    spans = []
+    start = None
+    for i, d in enumerate(deltas):
+        if d < 1e-4 and start is None:
+            start = i
+        elif d >= 1e-4 and start is not None:
+            spans.append([start, i - 1])
+            start = None
+    if start is not None:
+        spans.append([start, len(deltas) - 1])
     # the light must not swing about mid-motion: overall brightness may drift, not jump
     jumps = [i for i in range(1, len(means)) if abs(means[i] - means[i - 1]) > 0.06]
 
@@ -101,6 +119,7 @@ def main():
         "repeated_fraction": round(still_fraction, 3),
         "longest_still_run": longest_still,
         "repeated_at": still[:12],
+        "still_runs": [{"from": a, "to": b, "len": b - a + 1} for a, b in spans],
         "brightness_jumps": len(jumps),
         "ok": (moved > 1e-4 and not jumps and seconds >= args.min_seconds
                and still_fraction < 0.35 and longest_still <= args.fps),
