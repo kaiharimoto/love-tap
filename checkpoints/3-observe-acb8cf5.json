@@ -1,0 +1,76 @@
+{
+ "cycle": 3,
+ "stage": "OBSERVE",
+ "firing": 23,
+ "at_commit": "acb8cf5",
+ "completed": "the evidence set is fresh against the code, degradation rung 0, 14 of 17",
+ "out_of_band": "the stage said IMPLEMENT, entered at firing 19, queue not drained. Switched deliberately because all 17 open `the-ui` items stated their baselines as numbers read off the firing 16 capture and eleven commits of app/lib had landed since. Handed straight back to IMPLEMENT; this is not a cycle advance.",
+ "ruler_control": {
+  "today_tool_over_firing16_stills": "64 of 362",
+  "committed_at_8d0f64d": "64 of 362",
+  "reading": "the ruler has not moved, so nothing below is the instrument"
+ },
+ "legibility_declared": {
+  "runs": 298,
+  "below_floor": 25,
+  "share": 0.0839,
+  "was": {"runs": 362, "below_floor": 64, "share": 0.1768},
+  "on_moving_ground": "30 -> 23",
+  "would_pass_on_ring_reading": "28 -> 23",
+  "genuine_sub_floor_runs": "about 34 -> 2"
+ },
+ "legibility_matched_runs": {
+  "matched": 369,
+  "below_floor": "86 -> 87",
+  "rate": "0.2331 -> 0.2358",
+  "gone": 412,
+  "new": 276,
+  "reading": "flat. of the -58 whole-set headline, +1 is the same text reading differently and -59 is the run population moving"
+ },
+ "why_the_headline_fell": "05_settings.png lost all 42 runs of the interrupt matrix -- 14 each of `wake me`, `quietly`, `not at all`, every one in the 0x80-alpha unselected token. Same frame 1440x3120, offscreen 0, clipped 0: firing 21 moved the matrix below the feelings section and it is off the bottom of the shot. Ink 80464648 went 26 failures to 0 and 99464648 9 to 0, which is 35 of the 39. The words did not clear the floor; they left the picture.",
+ "rank_1_paper_sample": {
+  "where": "13_messenger_states.png, 300x120 at (200,1350)",
+  "L_std": "1.317 -> 23.673",
+  "distinct_luminance_levels": "11 -> 158",
+  "HF_std": "0.373 -> 3.981",
+  "reading": "the >= 150 levels clause passes; the >= 30 L_std clause does not. The clip half has not moved at all (06_unfolding 0.163/23 -> 0.157/23), so rank 1 is now a clip item rather than a paper one."
+ },
+ "frames": {
+  "06_unfolding": "0.163/23 -> 0.157/23",
+  "07_feeling_landing": "0.068/10 -> 0.070/10",
+  "08_state_propagating": "0.117/22 -> 0.099/22",
+  "11_chat_scroll": "0.0/0 -> 0.0/0",
+  "15_authored_feeling": "0.319/36 -> 0.094/17"
+ },
+ "palette": {
+  "mean_chroma": 0.0452,
+  "was": 0.0375,
+  "floor": 0.045,
+  "breaches": 41,
+  "grey_fraction": "0.0183 -> 0.02",
+  "lightness_drift_room": "0.452 -> 0.2929",
+  "reading": "the set-level chroma floor is met for the first time; rank 16's p50 clause now passes on all three stills it names, breaching only on 12_search at 0.6488"
+ },
+ "suite": "flutter analyze clean; 167 tests pass; app/assets 80.1 MB with `seed included`",
+ "selftests": "legibility_selftest.py and palette_selftest.py both pass",
+ "artifacts_missing": {
+  "09_two_devices.png": "no /dev/kvm; the standing hardware fact",
+  "16_setup_android.png": "no /dev/kvm; the standing hardware fact",
+  "02_chat.png": "tools/check/tears.py sample-size floor of 8 visible notes against a screen that now fits 7. All 7 tears distinct, repeats empty, same scroll position. The PNG is on disk, is this session's and is measurable."
+ },
+ "diff": "15 new / 0 gone / 0 changed, because /evidence/.previous/ is gitignored and no container holds it after a fresh clone. This capture is the baseline the next one diffs against; it is an empty comparison, not a library-wide change.",
+ "new_queue_items": [
+  "the-tear-gate-needs-eight-notes-and-the-screen-now-fits-seven",
+  "the-interrupt-matrix-is-no-longer-in-the-evidence-at-all"
+ ],
+ "items_annotated_with_todays_baseline": [
+  "the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames",
+  "unselected-is-drawn-as-alpha-and-that-is-two-thirds-of-the-vocabulary",
+  "the-day-rig-is-what-took-the-colour-out",
+  "paper-is-the-median-pixel",
+  "the-clips-hold-frames-and-one-of-them-is-static-for-two-and-a-half-seconds",
+  "the-timestamps-are-a-quarter-of-the-failing-writing",
+  "a-runs-ink-is-the-glyphs-not-every-mark-near-it"
+ ],
+ "next_stage": "IMPLEMENT, cycle 3, 34 items open; the cycle has not advanced"
+}

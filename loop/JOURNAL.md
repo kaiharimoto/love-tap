@@ -3736,3 +3736,105 @@ repair landing in the artifacts for the first time, not a library-wide regressio
 its reason and `try again`, 12_search newest-first with per-word highlighting, the search strip
 above the thread in 02_chat, no raw loopback address in 05_settings, full-strength ink on both
 pickers, a typing frame in 13_messenger_states. Those are the first things to check.
+
+### What the capture said, and the headline is a false one
+
+`./capture.sh` ran rung 0 end to end in 44 minutes and returned **14 of 17**. The toolchain came
+from nothing: `tools/apt-prereqs.sh`, `bootstrap.sh --profile=web`, then
+`pack_assets.py --seed=year`, which printed `app/assets: 80.1 MB, seed included` — the check
+`CONTINUE.md` §5 asks for, because a bare pack makes every year-guarded test return early and pass.
+`flutter analyze` clean, **167 tests green**. Disk never went below 20 GB.
+
+**I held the ruler still before reading anything.** Today's `legibility.py`, pointed at the firing
+16 stills extracted from `8d0f64d`, returns **64 of 362** — the committed number exactly. So the
+instrument has not moved, and every number below is the app or the pictures, not the tool. Both
+selftests pass.
+
+**The declared ruler fell 64 of 362 (17.68%) to 25 of 298 (8.39%), and that fall is mostly not the
+ink.** I went looking for which ink stopped failing:
+
+| ink | before | after |
+|---|---|---|
+| `80464648` — the 0x80-alpha unselected token | 26 | **0** |
+| `99464648` | 9 | **0** |
+| `ff464648` | 20 | 15 |
+| `d91f2a44` | 6 | 6 |
+
+Thirty-five of the thirty-nine. That is rank 11's target met on its face — and rank 11's
+measurement was written with the clause `with total_runs unchanged (the words must clear the floor,
+not stop declaring themselves)`, so I checked. `05_settings.text.json` at firing 16 held **14 runs
+each of `wake me`, `quietly` and `not at all`** — the 42-run interrupt matrix, every run of it in
+the 0x80 token. **Today's holds zero of all three.** Same frame, 1440×3120. Declared y range
+55..3020 before and 55..3015 after. `offscreen: 0`, `clipped: 0` — so this is *not* firing 21's
+clip-aware declaration dropping rows past the viewport, which was the explanation I expected to
+find. The matrix is simply not on the screen the capture takes, because firing 21 moved it below
+the feelings section. 05_settings went 77 declared runs / 27 failures to 35 / 4.
+
+**`legibility_delta.py` says the same thing from the opposite end, and it is the comparison this
+repository designated as the sound one.** On the **369 runs found in both captures**, failures went
+**86 → 87** — a matched rate of 0.2331 → 0.2358. Four hundred and twelve runs went and two hundred
+and seventy-six arrived. Of the −58 in the whole-set headline, **+1 is the same text reading
+differently and −59 is the run population moving under the detector.**
+
+So: the writing did not get easier to read between firing 16 and firing 23. It got less numerous on
+the worst screen. **Rank 11 must not be closed on this capture**, and that is now written on the
+item itself and filed as `the-interrupt-matrix-is-no-longer-in-the-evidence-at-all`. It is worth
+being plain that the app is probably fine — the settings page scrolls and a person can reach the
+matrix — but the evidence set can no longer see those rows, so no capture can say whether firing
+21's full-strength ink ever reached them.
+
+### What did move, and one of them re-shapes the top of the queue
+
+**Rank 1, the six-point item, has split in two.** Its own sample — 300×120 at (200,1350) in
+`13_messenger_states.png` — now reads **L_std 23.673 with 158 distinct luminance levels** and
+HF_std 3.981, against the `1.310 / 11` the item was filed with. The old still reproduces at
+**1.317 / 11** under my arithmetic, which is what says the two are the same measurement rather than
+two different ones that happen to disagree. The `>= 150 levels` clause **passes**; `>= 30 L_std`
+does not, at 23.7. And the clip half has not moved **at all**: `06_unfolding` repeated_fraction
+0.163 → 0.157, longest_still_run **23 → 23**, against `<= 0.02` and `<= 2`. Whatever is left of
+rank 1 is the fold sequence, not the paper under it, and it is not written that way round.
+
+`15_authored_feeling` went **0.319/36 → 0.094/17** with nobody working it — the largest single
+improvement in the set. Rank 15's set-level chroma floor is **met for the first time**
+(`across_the_set.mean_chroma` 0.0452 against `>= 0.045`, from 0.0375). Rank 16's `p50` clause now
+passes on **all three** stills it names; the only p50 breach left is 12_search, which it never
+named. `lightness_drift_room` 0.452 → 0.2929 against a 0.20 ceiling.
+
+**And one finding changes a priority.** Of the 25 declared runs still below floor, the tool's own
+fields say **23 are `on_moving_ground` and 23 `would_pass_on_ring_reading`**, each carrying
+`ink_core_ring` between 5.52 and 12.79 against a 4.5 floor. Only **two of the twenty-five** survive
+the ruler item's own amendment of `ground_swing <= 1.2`. Six of the 23 are a *single* run — the day
+banner `week one, and the room smells right again`, `ink_core` 1.30, `ground_swing` 7.93, ring
+10.13 — repeated across six of the ten stills. So `a-runs-ink-is-the-glyphs-not-every-mark-near-it`
+is no longer evidence plumbing that exists so the harness can score itself. It is the instrument
+standing between this build and any honest answer to the owner's first complaint, that the text was
+hard to read. That is the `fix a ruler when you cannot see without it` case §3c carves out, and it
+is noted on the item.
+
+### Two things recorded so a successor does not re-derive them
+
+**`02_chat.png` is recorded missing and the picture is fine.** `tools/check/tears.py` refused it
+with `only 7 notes on screen`. Its own report reads visible 7, notes_with_tears 7, distinct_tears
+7, `repeats {}`, pool 56 — every visible note carries a tear and no two repeat. The previous
+capture read **visible 8** at the identical pool and the identical scroll position (first 5196 of
+8387). The floor is a *sample size*, and firing 21's search strip above the thread took one note's
+worth of height. A gate that turns a deliberate layout change into a missing hero artifact is
+measuring the viewport. Filed as `the-tear-gate-needs-eight-notes-and-the-screen-now-fits-seven`,
+and written into `evidence_fresh_as_of` so no critic reads 02_chat as absent — it is on disk, it is
+this session's, and it is measurable.
+
+**`DIFF.json` reads 15 new / 0 gone / 0 changed, and that is an empty comparison, not a
+library-wide change.** `/evidence/.previous/` is gitignored, so no fresh clone has one and the
+first capture in any container is always its own baseline. I expected the `hashOf` repair to show
+up here and it cannot: there was nothing to diff against. The rotation has now run.
+
+Also worth one line: the `CLAUDE.md` quoted to this firing in its dispatch was from the stale
+lineage and still called `tools/check/texture_budget.py` a dangling claim. The file on disk has
+existed since `1bdcf23`, the law file already says so, and it passes. Nothing to do — but a
+successor reading the dispatch rather than the repository would have spent a firing on it.
+
+No new `asks[]`. Stage handed back to **IMPLEMENT, cycle 3** — this was an out-of-band OBSERVE, not
+a cycle advance, and DIAGNOSE is not next because cycle 3 was diagnosed at firing 17 and addressed
+at firing 18. Queue: **34 open** (32 inherited plus the two filed here), 35 closed, 5 superseded.
+Seven open items now carry a `measured_at_firing_23` note saying what their stated baselines
+actually read today. Lease released.
