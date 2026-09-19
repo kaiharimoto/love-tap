@@ -91,11 +91,12 @@
    "points": 2,
    "why": "The row requires user-authored feelings to behave identically to built-ins in every path, and the artifact falsifies the wording directly. In crops/15_authored_feeling_strip.png the authored feeling 'pigeon' arrives as a full-width blank yellow legal sheet carrying only 'pigeon' and 'Thu 3 Sep \u00b7 waiting to send', with no object and no mark of any kind, and a second wholly blank sheet sits directly beneath it -- while a built-in in 13_messenger_states.png renders with its object drawn on the note and haptics.json gives every one of its 34 feelings an object (obj_pinch, obj_thumbprint, obj_coffee_ring and the rest). Named serious by both emotional_transmission and coherence.",
    "measurement": "A re-captured 15_authored_feeling.mp4 shows the authored feeling carrying an object mark in the same furniture as a built-in, and a test asserts an authored feeling and a built-in take the identical render path. The second blank sheet is gone. Re-break by removing the object from the authored path and watching the blank sheet return.",
-   "state": "open",
-   "attempts": 0,
-   "closed_by": null,
+   "state": "closed",
+   "attempts": 1,
+   "closed_by": "pending-commit",
    "rank": 31,
-   "owner_priority": "using-it"
+   "owner_priority": "using-it",
+   "closed_note": "The row's own claim was already true and the artifact was not falsifying it: `objectLanding` is the renderer for every `feeling` event whoever made it, and FeelingRegistry hands built-ins and authored ones back in one list with nothing downstream asking which is which. What differed is that the seeded year's two authored feelings name objects nobody has baked -- obj_user_pigeon and obj_user_soup -- and nobody on a phone can bake one, which is why objects.dart has had an answer for it since it was written: `_Fallback`, a scribble in the feeling's own colour, drawn by hand, never a system glyph. IT HAD NEVER DRAWN A PIXEL. A CustomPaint with no child and no `size` lays out at Size.zero, so the one thing between a feeling with no baked object and an empty sheet of paper was a widget of no size. `size: Size.infinite` gives it the square it is in (measured: 128x128 in a 128-point object), and the mark goes from 4 antialiased pixels to over 200. THE SECOND BLANK SHEET IS NOT A DEFECT: measured, the thread puts down exactly one row per feeling event (three events, three rows, the feeling's 274 points tall), and the sheet under it in crops/15_authored_feeling_strip.png is `RegionPad` -- the paper the regions are drawn on, which app.dart introduces deliberately and which is visible behind every other region in the same strip. NOT DONE, on the owner's steer: baking obj_user_pigeon and obj_user_soup in Blender is demo content and stays undone; the app's answer for an object it does not have is the point, and it now works for any of them."
   },
   {
    "id": "a-feeling-comes-to-rest-as-a-card-with-a-read-receipt",

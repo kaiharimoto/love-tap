@@ -149,14 +149,22 @@ class FeelingObject extends StatelessWidget {
   }
 }
 
-/// Before the library is baked, a feeling still has to be a mark rather than a blank: a scribble
-/// in its own colour, drawn by hand. Never a system glyph.
+/// When there is no rendered object for a feeling, it is still a mark rather than a blank: a
+/// scribble in its own colour, drawn by hand. Never a system glyph.
+///
+/// `Size.infinite` and not the default. A `CustomPaint` with no child and no size lays out at
+/// `Size.zero`, so this painter has drawn nothing at all for the life of the build: the one thing
+/// standing between a feeling with no baked object and an empty sheet of paper was a widget of no
+/// size. `crops/15_authored_feeling_strip.png` is what that looks like -- the authored feeling
+/// `pigeon` arriving as a blank yellow legal sheet with its name under it, while every built-in
+/// beside it in the fan has its object on it.
 class _Fallback extends StatelessWidget {
   const _Fallback({required this.feeling});
   final Feeling feeling;
 
   @override
-  Widget build(BuildContext context) => CustomPaint(painter: _ScribblePainter(feeling));
+  Widget build(BuildContext context) =>
+      CustomPaint(size: Size.infinite, painter: _ScribblePainter(feeling));
 }
 
 class _ScribblePainter extends CustomPainter {
