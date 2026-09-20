@@ -116,7 +116,8 @@ class FeelingObject extends StatelessWidget {
               child: Transform.scale(
                 scale: scale * (0.86 + 0.14 * shadowScale),
                 child: Image.asset(objectAsset('${id}_shadow${dusk ? '_dusk' : ''}'),
-                    fit: BoxFit.contain, gaplessPlayback: true, errorBuilder: _none),
+                    fit: BoxFit.contain, gaplessPlayback: true,
+                    frameBuilder: paintWhenItArrives, errorBuilder: _none),
               ),
             ),
             Transform.translate(
@@ -127,6 +128,7 @@ class FeelingObject extends StatelessWidget {
                     fit: BoxFit.contain,
                     gaplessPlayback: true,
                     filterQuality: FilterQuality.medium,
+                    frameBuilder: paintWhenItArrives,
                     errorBuilder: (c, e, s) => _Fallback(feeling: feeling)),
               ),
             ),

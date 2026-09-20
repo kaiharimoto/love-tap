@@ -34,7 +34,8 @@ class Desk extends StatelessWidget {
           ColoredBox(color: dusk ? DeskColour.dusk : DeskColour.day),
           if (surface)
             Image.asset(shellAsset(dusk ? 'desk_dusk' : 'desk'),
-                fit: BoxFit.cover, repeat: ImageRepeat.repeatY, errorBuilder: PaperPiece.none),
+                fit: BoxFit.cover, repeat: ImageRepeat.repeatY,
+                frameBuilder: paintWhenItArrives, errorBuilder: PaperPiece.none),
           child,
         ],
       ),

@@ -353,6 +353,7 @@ class _Tabs extends StatelessWidget {
                                   alignment: _cardWindows[i % _cardWindows.length],
                                   filterQuality: FilterQuality.medium,
                                   gaplessPlayback: true,
+                                  frameBuilder: paintWhenItArrives,
                                   errorBuilder: PaperPiece.none,
                                 ),
                               ),

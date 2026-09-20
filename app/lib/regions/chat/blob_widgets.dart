@@ -368,7 +368,8 @@ class Print extends StatelessWidget {
                   top: -8,
                   child: Transform.rotate(
                     angle: -0.5,
-                    child: Image.asset(bitAsset(tape), width: 60, errorBuilder: PaperPiece.none),
+                    child: Image.asset(bitAsset(tape), width: 60,
+                  frameBuilder: paintWhenItArrives, errorBuilder: PaperPiece.none),
                   ),
                 ),
               if (durationMs != null)

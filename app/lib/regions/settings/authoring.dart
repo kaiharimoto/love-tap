@@ -12,6 +12,7 @@ import '../../material/hands.dart';
 import '../../voice/strings.dart';
 import '../../material/library.dart';
 import '../../material/objects.dart';
+import '../../material/paper.dart';
 import '../../material/slip.dart';
 import '../../material/palette.dart';
 import '../../spine/spine.dart';
@@ -151,7 +152,9 @@ class _AuthoringSheetState extends State<AuthoringSheet> {
                           opacity: (_object ?? _drawer.first) == o ? 1 : 0.5,
                           child: Padding(
                             padding: const EdgeInsets.all(4),
-                            child: Image.asset(objectAsset(o), width: 64, errorBuilder: (c, e, s) => const SizedBox(width: 64)),
+                            child: Image.asset(objectAsset(o), width: 64,
+              frameBuilder: paintWhenItArrives,
+              errorBuilder: (c, e, s) => const SizedBox(width: 64)),
                           ),
                         ),
                       ),

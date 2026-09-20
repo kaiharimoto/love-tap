@@ -10,11 +10,72 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'library.dart';
 import 'palette.dart';
 import 'light.dart';
+
+/// Ask for the frame the framework does not ask for.
+///
+/// **This is the whole of why the first two screens a new person sees were flat colour.**
+///
+/// A render arrives asynchronously: the bytes are fetched, the codec decodes, and some time later
+/// the widget is handed a `ui.Image` and says so — an `Image`'s stream listener calls `setState`,
+/// a `MaskCache` continuation does the same. Every one of those paths ends in
+/// `SchedulerBinding.ensureVisualUpdate`, and that method **only schedules a frame from
+/// `idle` and `postFrameCallbacks`**. From the three phases inside a frame it returns without
+/// scheduling anything, on the assumption that the frame already in flight will carry the change.
+///
+/// When the arrival lands during the *build* of a frame that assumption holds. When it lands
+/// during that frame's paint, or in the microtasks between its phases, the subtree it belongs to
+/// has already been painted, and the request is simply dropped: no frame is scheduled, nothing is
+/// left dirty, and the screen keeps the last thing that was drawn. On a screen where anything at
+/// all asks for a frame afterwards — a note landing, a caret blinking, a partner's name ticking
+/// over — the render appears on that frame and nobody ever knew. On a screen with nothing moving
+/// on it, nothing ever asks.
+///
+/// Both of the screens a fresh install shows are that screen. Measured at firing 28, against a
+/// build with no capture hooks in it at all: `17_setup_pwa` at three seconds, eight seconds and
+/// twenty seconds is 47.98% one exact RGB — `Paper.looseleaf`, the fallback colour, not any pixel
+/// of the render — with another 23.87% of the frame the flat `DeskColour.day` under it, because
+/// the desk's own render was dropped the same way. A pointer move does not fix it, a tap does not
+/// fix it, a `visibilitychange` does not fix it, and the scheduler says `hasScheduledFrame=false`,
+/// `schedulerPhase=idle`, `framesEnabled=true`, `lifecycle=resumed` for as long as you watch it.
+/// One bare `scheduleFrame()` and nothing else puts both the paper and the desk on the glass:
+/// 47.98% falls to 1.88%. The render tree was right the whole time; the frame was never asked for.
+///
+/// So every place in this app that draws a rendered surface asks for it here. From inside a frame
+/// that is a post-frame callback, which runs at the end of the frame in flight and schedules the
+/// next one; from outside a frame it is the `scheduleFrame` `ensureVisualUpdate` would have made
+/// itself. It costs one empty frame per render that arrives late and nothing at all per render
+/// that was already decoded, which is every render after the first screenful.
+void askForAFrame() {
+  final sched = SchedulerBinding.instance;
+  switch (sched.schedulerPhase) {
+    case SchedulerPhase.idle:
+    case SchedulerPhase.postFrameCallbacks:
+      sched.scheduleFrame();
+    case SchedulerPhase.transientCallbacks:
+    case SchedulerPhase.midFrameMicrotasks:
+    case SchedulerPhase.persistentCallbacks:
+      // The frame in flight is already past this subtree, so it is the next one that has to
+      // carry the render. `addPostFrameCallback` does not schedule a frame on its own; it is
+      // safe here only because a frame is in flight by definition in these three phases.
+      sched.addPostFrameCallback((_) => sched.scheduleFrame());
+  }
+}
+
+/// The `frameBuilder` every `Image.asset` in this app is given, so that a render arriving late is
+/// a render that reaches the glass. See [askForAFrame] for what it is working around.
+///
+/// `wasSynchronouslyLoaded` is the case this does not need to do anything about: the image was in
+/// the cache when the widget first built, so it was painted with everything else.
+Widget paintWhenItArrives(BuildContext context, Widget child, int? frame, bool wasSynchronouslyLoaded) {
+  if (frame != null && !wasSynchronouslyLoaded) askForAFrame();
+  return child;
+}
 
 /// Decoded masks, kept for the life of the process: a screenful of notes shares a small pool.
 class MaskCache {
@@ -112,6 +173,7 @@ class PaperPiece extends StatelessWidget {
             tearAsset('${tearId!}_shadow$suffix'),
             fit: BoxFit.fill,
             gaplessPlayback: true,
+            frameBuilder: paintWhenItArrives,
             errorBuilder: none,
           ),
         ),
@@ -140,6 +202,7 @@ class PaperPiece extends StatelessWidget {
               alignment: stockAlignment,
               gaplessPlayback: true,
               filterQuality: FilterQuality.medium,
+              frameBuilder: paintWhenItArrives,
               errorBuilder: PaperPiece.none,
             ),
           ),
@@ -313,7 +376,10 @@ class _MaskedLayerState extends State<MaskedLayer> {
     // a mask that is not baked yet leaves the sheet whole rather than blank
     unawaited(
       MaskCache.load(widget.maskAsset).then((img) {
-        if (mounted) setState(() => _mask = img);
+        if (!mounted) return;
+        setState(() => _mask = img);
+        // A decode finishing inside a frame has its rebuild dropped; see [askForAFrame].
+        askForAFrame();
       }, onError: (Object _) {}),
     );
   }
@@ -427,7 +493,10 @@ class _NineSlicedState extends State<NineSliced> {
       return;
     }
     unawaited(MaskCache.load(widget.asset).then((img) {
-      if (mounted) setState(() => _image = img);
+      if (!mounted) return;
+      setState(() => _image = img);
+      // A decode finishing inside a frame has its rebuild dropped; see [askForAFrame].
+      askForAFrame();
     }, onError: (Object _) {}));
   }
 
