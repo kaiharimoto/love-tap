@@ -13,22 +13,94 @@
  ],
  "stocks": 54,
  "mean_std": {
-  "today": 11.671,
-  "bigger": 11.981
+  "today": 12.39,
+  "bigger": 12.691
  },
  "passes": {
   "today": [
-   168,
+   250,
    432
   ],
   "bigger": [
-   185,
+   262,
    432
   ]
  },
  "bytes": {
-  "today": 8444050,
-  "bigger": 14603410
+  "today": 10680190,
+  "bigger": 17015302
+ },
+ "by_family": {
+  "graph": {
+   "sheets": 8,
+   "median_std": 8.477,
+   "mean_std": 11.473,
+   "passes": 38,
+   "of": 64
+  },
+  "index": {
+   "sheets": 4,
+   "median_std": 8.154,
+   "mean_std": 11.679,
+   "passes": 19,
+   "of": 32
+  },
+  "legal": {
+   "sheets": 4,
+   "median_std": 8.948,
+   "mean_std": 11.816,
+   "passes": 28,
+   "of": 32
+  },
+  "lined": {
+   "sheets": 8,
+   "median_std": 8.727,
+   "mean_std": 11.186,
+   "passes": 48,
+   "of": 64
+  },
+  "looseleaf": {
+   "sheets": 8,
+   "median_std": 8.416,
+   "mean_std": 11.043,
+   "passes": 38,
+   "of": 64
+  },
+  "receipt": {
+   "sheets": 2,
+   "median_std": 3.573,
+   "mean_std": 7.992,
+   "passes": 2,
+   "of": 16
+  },
+  "spiral": {
+   "sheets": 8,
+   "median_std": 9.061,
+   "mean_std": 13.005,
+   "passes": 53,
+   "of": 64
+  },
+  "sticky_blue": {
+   "sheets": 4,
+   "median_std": 4.657,
+   "mean_std": 15.305,
+   "passes": 8,
+   "of": 32
+  },
+  "sticky_pink": {
+   "sheets": 4,
+   "median_std": 4.432,
+   "mean_std": 15.099,
+   "passes": 8,
+   "of": 32
+  },
+  "sticky_yellow": {
+   "sheets": 4,
+   "median_std": 4.89,
+   "mean_std": 15.961,
+   "passes": 8,
+   "of": 32
+  }
  },
  "rows": [
   {
@@ -916,42 +988,42 @@
      1500,
      933
     ],
-    "bytes": 75774,
+    "bytes": 160026,
     "magnification": 3.116,
-    "passes": 1,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 2.32,
-      "levels": 21
+      "std": 5.027,
+      "levels": 36
      },
      {
-      "std": 6.904,
+      "std": 8.556,
+      "levels": 65
+     },
+     {
+      "std": 8.303,
+      "levels": 64
+     },
+     {
+      "std": 7.697,
+      "levels": 59
+     },
+     {
+      "std": 6.319,
       "levels": 55
      },
      {
-      "std": 6.907,
-      "levels": 57
+      "std": 8.937,
+      "levels": 69
      },
      {
-      "std": 6.385,
-      "levels": 51
+      "std": 51.682,
+      "levels": 188
      },
      {
-      "std": 4.602,
-      "levels": 40
-     },
-     {
-      "std": 7.603,
-      "levels": 61
-     },
-     {
-      "std": 51.634,
-      "levels": 187
-     },
-     {
-      "std": 6.75,
-      "levels": 55
+      "std": 8.098,
+      "levels": 64
      }
     ]
    },
@@ -961,42 +1033,42 @@
      1800,
      1120
     ],
-    "bytes": 164028,
+    "bytes": 246624,
     "magnification": 2.596,
-    "passes": 1,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 2.972,
-      "levels": 30
+      "std": 5.434,
+      "levels": 42
      },
      {
-      "std": 7.203,
-      "levels": 58
+      "std": 8.907,
+      "levels": 66
      },
      {
-      "std": 7.186,
-      "levels": 61
+      "std": 8.604,
+      "levels": 65
      },
      {
-      "std": 6.654,
-      "levels": 54
+      "std": 7.96,
+      "levels": 63
      },
      {
-      "std": 4.792,
-      "levels": 43
-     },
-     {
-      "std": 7.814,
-      "levels": 61
-     },
-     {
-      "std": 51.63,
-      "levels": 189
-     },
-     {
-      "std": 7.011,
+      "std": 6.593,
       "levels": 59
+     },
+     {
+      "std": 9.182,
+      "levels": 70
+     },
+     {
+      "std": 51.737,
+      "levels": 192
+     },
+     {
+      "std": 8.439,
+      "levels": 68
      }
     ]
    }
@@ -1110,42 +1182,42 @@
      1500,
      933
     ],
-    "bytes": 75676,
+    "bytes": 160098,
     "magnification": 3.116,
-    "passes": 1,
+    "passes": 4,
     "of": 8,
     "samples": [
      {
-      "std": 2.463,
-      "levels": 36
-     },
-     {
-      "std": 3.586,
-      "levels": 49
-     },
-     {
-      "std": 6.953,
-      "levels": 56
-     },
-     {
-      "std": 4.564,
-      "levels": 50
-     },
-     {
-      "std": 4.811,
+      "std": 5.148,
       "levels": 40
      },
      {
-      "std": 7.491,
+      "std": 5.959,
       "levels": 56
      },
      {
-      "std": 40.847,
-      "levels": 186
+      "std": 8.548,
+      "levels": 64
      },
      {
-      "std": 6.927,
+      "std": 6.096,
       "levels": 57
+     },
+     {
+      "std": 6.55,
+      "levels": 60
+     },
+     {
+      "std": 8.799,
+      "levels": 70
+     },
+     {
+      "std": 41.069,
+      "levels": 194
+     },
+     {
+      "std": 8.319,
+      "levels": 63
      }
     ]
    },
@@ -1155,42 +1227,42 @@
      1800,
      1120
     ],
-    "bytes": 165836,
+    "bytes": 249966,
     "magnification": 2.596,
-    "passes": 1,
+    "passes": 4,
     "of": 8,
     "samples": [
      {
-      "std": 3.14,
-      "levels": 33
+      "std": 5.622,
+      "levels": 45
      },
      {
-      "std": 3.824,
-      "levels": 47
+      "std": 6.263,
+      "levels": 54
      },
      {
-      "std": 7.169,
-      "levels": 55
+      "std": 8.81,
+      "levels": 66
      },
      {
-      "std": 4.779,
-      "levels": 53
+      "std": 6.35,
+      "levels": 57
      },
      {
-      "std": 5.134,
-      "levels": 44
+      "std": 6.723,
+      "levels": 57
      },
      {
-      "std": 7.676,
-      "levels": 68
+      "std": 9.09,
+      "levels": 73
      },
      {
-      "std": 40.85,
-      "levels": 185
+      "std": 41.069,
+      "levels": 192
      },
      {
-      "std": 7.142,
-      "levels": 61
+      "std": 8.591,
+      "levels": 67
      }
     ]
    }
@@ -1304,42 +1376,42 @@
      1073,
      1500
     ],
-    "bytes": 149784,
+    "bytes": 295550,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 7.204,
-      "levels": 61
+      "std": 9.953,
+      "levels": 72
      },
      {
-      "std": 6.663,
-      "levels": 57
+      "std": 9.072,
+      "levels": 75
      },
      {
-      "std": 6.97,
-      "levels": 59
+      "std": 9.602,
+      "levels": 68
      },
      {
-      "std": 10.492,
-      "levels": 103
+      "std": 12.28,
+      "levels": 113
      },
      {
-      "std": 6.567,
-      "levels": 78
+      "std": 8.988,
+      "levels": 91
      },
      {
-      "std": 5.575,
-      "levels": 57
+      "std": 8.94,
+      "levels": 71
      },
      {
-      "std": 35.54,
-      "levels": 190
+      "std": 35.994,
+      "levels": 198
      },
      {
-      "std": 5.671,
-      "levels": 56
+      "std": 8.666,
+      "levels": 70
      }
     ]
    },
@@ -1349,42 +1421,42 @@
      1288,
      1800
     ],
-    "bytes": 301636,
+    "bytes": 459474,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 7.662,
-      "levels": 64
+      "std": 10.379,
+      "levels": 74
      },
      {
-      "std": 7.007,
-      "levels": 63
+      "std": 9.446,
+      "levels": 76
      },
      {
-      "std": 7.36,
-      "levels": 62
+      "std": 10.027,
+      "levels": 74
      },
      {
-      "std": 10.79,
-      "levels": 103
+      "std": 12.64,
+      "levels": 116
      },
      {
-      "std": 6.812,
-      "levels": 79
+      "std": 9.332,
+      "levels": 94
      },
      {
-      "std": 5.945,
-      "levels": 58
+      "std": 9.338,
+      "levels": 72
      },
      {
-      "std": 35.644,
-      "levels": 191
+      "std": 36.058,
+      "levels": 199
      },
      {
-      "std": 6.081,
-      "levels": 62
+      "std": 9.069,
+      "levels": 71
      }
     ]
    }
@@ -1498,42 +1570,42 @@
      1073,
      1500
     ],
-    "bytes": 150310,
+    "bytes": 296320,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 7.115,
-      "levels": 66
+      "std": 9.879,
+      "levels": 76
      },
      {
-      "std": 6.416,
-      "levels": 58
+      "std": 8.884,
+      "levels": 75
      },
      {
-      "std": 7.049,
-      "levels": 61
+      "std": 9.66,
+      "levels": 76
      },
      {
-      "std": 10.367,
-      "levels": 99
+      "std": 12.121,
+      "levels": 110
      },
      {
-      "std": 6.54,
-      "levels": 77
+      "std": 8.979,
+      "levels": 93
      },
      {
-      "std": 5.459,
-      "levels": 53
+      "std": 8.956,
+      "levels": 72
      },
      {
-      "std": 32.217,
-      "levels": 189
+      "std": 32.688,
+      "levels": 201
      },
      {
-      "std": 5.643,
-      "levels": 61
+      "std": 8.644,
+      "levels": 75
      }
     ]
    },
@@ -1543,42 +1615,42 @@
      1288,
      1800
     ],
-    "bytes": 298456,
+    "bytes": 450676,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 7.545,
-      "levels": 68
-     },
-     {
-      "std": 6.801,
-      "levels": 59
-     },
-     {
-      "std": 7.414,
-      "levels": 63
-     },
-     {
-      "std": 10.705,
-      "levels": 102
-     },
-     {
-      "std": 6.818,
+      "std": 10.32,
       "levels": 79
      },
      {
-      "std": 5.859,
-      "levels": 62
+      "std": 9.302,
+      "levels": 75
      },
      {
-      "std": 32.314,
-      "levels": 193
+      "std": 10.078,
+      "levels": 78
      },
      {
-      "std": 6.066,
-      "levels": 65
+      "std": 12.436,
+      "levels": 109
+     },
+     {
+      "std": 9.322,
+      "levels": 94
+     },
+     {
+      "std": 9.346,
+      "levels": 76
+     },
+     {
+      "std": 32.779,
+      "levels": 202
+     },
+     {
+      "std": 9.07,
+      "levels": 77
      }
     ]
    }
@@ -1692,42 +1764,42 @@
      1073,
      1500
     ],
-    "bytes": 151232,
+    "bytes": 256526,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.414,
-      "levels": 65
+      "std": 9.365,
+      "levels": 74
      },
      {
-      "std": 6.407,
-      "levels": 58
+      "std": 8.225,
+      "levels": 66
      },
      {
-      "std": 7.086,
-      "levels": 63
+      "std": 9.038,
+      "levels": 72
      },
      {
-      "std": 9.177,
-      "levels": 97
+      "std": 10.586,
+      "levels": 103
      },
      {
-      "std": 3.63,
-      "levels": 29
+      "std": 6.135,
+      "levels": 46
      },
      {
-      "std": 7.077,
-      "levels": 59
+      "std": 9.06,
+      "levels": 73
      },
      {
-      "std": 33.073,
-      "levels": 191
+      "std": 33.462,
+      "levels": 197
      },
      {
-      "std": 7.073,
-      "levels": 60
+      "std": 8.832,
+      "levels": 73
      }
     ]
    },
@@ -1737,42 +1809,42 @@
      1288,
      1800
     ],
-    "bytes": 300032,
+    "bytes": 427458,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.735,
-      "levels": 68
+      "std": 9.791,
+      "levels": 76
      },
      {
-      "std": 6.814,
-      "levels": 61
+      "std": 8.627,
+      "levels": 69
      },
      {
-      "std": 7.468,
-      "levels": 64
+      "std": 9.405,
+      "levels": 74
      },
      {
-      "std": 9.536,
-      "levels": 101
+      "std": 10.982,
+      "levels": 107
      },
      {
-      "std": 4.071,
-      "levels": 36
+      "std": 6.49,
+      "levels": 48
      },
      {
-      "std": 7.387,
-      "levels": 66
+      "std": 9.457,
+      "levels": 74
      },
      {
-      "std": 33.203,
-      "levels": 194
+      "std": 33.577,
+      "levels": 202
      },
      {
-      "std": 7.437,
-      "levels": 63
+      "std": 9.22,
+      "levels": 72
      }
     ]
    }
@@ -1886,42 +1958,42 @@
      1073,
      1500
     ],
-    "bytes": 152960,
+    "bytes": 259022,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 6.941,
-      "levels": 60
+      "std": 9.176,
+      "levels": 74
      },
      {
-      "std": 7.516,
-      "levels": 64
+      "std": 9.081,
+      "levels": 72
      },
      {
-      "std": 7.042,
-      "levels": 63
+      "std": 9.029,
+      "levels": 73
      },
      {
-      "std": 9.224,
-      "levels": 99
+      "std": 10.731,
+      "levels": 107
      },
      {
-      "std": 3.893,
-      "levels": 31
+      "std": 6.391,
+      "levels": 47
      },
      {
-      "std": 6.775,
-      "levels": 60
+      "std": 8.958,
+      "levels": 70
      },
      {
-      "std": 36.913,
-      "levels": 191
+      "std": 37.167,
+      "levels": 197
      },
      {
-      "std": 6.85,
-      "levels": 61
+      "std": 8.725,
+      "levels": 76
      }
     ]
    },
@@ -1931,42 +2003,42 @@
      1288,
      1800
     ],
-    "bytes": 302628,
+    "bytes": 428628,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.34,
-      "levels": 64
+      "std": 9.6,
+      "levels": 76
      },
      {
-      "std": 7.869,
-      "levels": 67
+      "std": 9.5,
+      "levels": 75
      },
      {
-      "std": 7.441,
-      "levels": 68
+      "std": 9.465,
+      "levels": 74
      },
      {
-      "std": 9.566,
-      "levels": 103
+      "std": 11.06,
+      "levels": 111
      },
      {
-      "std": 4.273,
-      "levels": 35
+      "std": 6.702,
+      "levels": 50
      },
      {
-      "std": 7.163,
-      "levels": 66
+      "std": 9.307,
+      "levels": 75
      },
      {
-      "std": 36.958,
-      "levels": 195
+      "std": 37.289,
+      "levels": 199
      },
      {
-      "std": 7.231,
-      "levels": 62
+      "std": 9.096,
+      "levels": 75
      }
     ]
    }
@@ -2080,42 +2152,42 @@
      1073,
      1500
     ],
-    "bytes": 150950,
+    "bytes": 256822,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.036,
-      "levels": 61
+      "std": 9.224,
+      "levels": 75
      },
      {
-      "std": 5.939,
-      "levels": 56
+      "std": 8.047,
+      "levels": 68
      },
      {
-      "std": 6.716,
-      "levels": 62
+      "std": 8.729,
+      "levels": 71
      },
      {
-      "std": 9.415,
-      "levels": 106
+      "std": 10.868,
+      "levels": 110
      },
      {
-      "std": 4.102,
-      "levels": 32
+      "std": 6.533,
+      "levels": 50
      },
      {
-      "std": 6.828,
-      "levels": 60
+      "std": 9.044,
+      "levels": 74
      },
      {
-      "std": 29.966,
-      "levels": 187
+      "std": 30.35,
+      "levels": 198
      },
      {
-      "std": 6.719,
-      "levels": 57
+      "std": 8.713,
+      "levels": 76
      }
     ]
    },
@@ -2125,42 +2197,42 @@
      1288,
      1800
     ],
-    "bytes": 299050,
+    "bytes": 429916,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.461,
+      "std": 9.632,
+      "levels": 78
+     },
+     {
+      "std": 8.438,
       "levels": 68
      },
      {
-      "std": 6.357,
-      "levels": 60
+      "std": 9.188,
+      "levels": 77
      },
      {
-      "std": 7.097,
-      "levels": 64
+      "std": 11.218,
+      "levels": 114
      },
      {
-      "std": 9.745,
-      "levels": 106
+      "std": 6.854,
+      "levels": 52
      },
      {
-      "std": 4.469,
-      "levels": 38
+      "std": 9.42,
+      "levels": 73
      },
      {
-      "std": 7.151,
-      "levels": 64
+      "std": 30.421,
+      "levels": 198
      },
      {
-      "std": 30.093,
-      "levels": 191
-     },
-     {
-      "std": 7.127,
-      "levels": 65
+      "std": 9.196,
+      "levels": 79
      }
     ]
    }
@@ -2274,42 +2346,42 @@
      1073,
      1500
     ],
-    "bytes": 153870,
+    "bytes": 257680,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.578,
-      "levels": 68
+      "std": 9.528,
+      "levels": 76
      },
      {
-      "std": 7.405,
-      "levels": 61
+      "std": 8.879,
+      "levels": 70
      },
      {
-      "std": 7.299,
-      "levels": 66
+      "std": 9.109,
+      "levels": 76
      },
      {
-      "std": 8.834,
-      "levels": 95
+      "std": 10.29,
+      "levels": 106
      },
      {
-      "std": 3.69,
-      "levels": 30
+      "std": 6.246,
+      "levels": 50
      },
      {
-      "std": 6.905,
-      "levels": 59
+      "std": 9.016,
+      "levels": 71
      },
      {
-      "std": 36.632,
-      "levels": 186
+      "std": 37.012,
+      "levels": 195
      },
      {
-      "std": 7.095,
-      "levels": 63
+      "std": 8.931,
+      "levels": 70
      }
     ]
    },
@@ -2319,42 +2391,42 @@
      1288,
      1800
     ],
-    "bytes": 302028,
+    "bytes": 429570,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.969,
-      "levels": 70
+      "std": 9.935,
+      "levels": 77
      },
      {
-      "std": 7.756,
-      "levels": 64
+      "std": 9.295,
+      "levels": 76
      },
      {
-      "std": 7.63,
-      "levels": 65
+      "std": 9.522,
+      "levels": 73
      },
      {
-      "std": 9.178,
-      "levels": 99
+      "std": 10.654,
+      "levels": 106
      },
      {
-      "std": 4.12,
-      "levels": 37
+      "std": 6.608,
+      "levels": 52
      },
      {
-      "std": 7.23,
-      "levels": 64
+      "std": 9.34,
+      "levels": 71
      },
      {
-      "std": 36.704,
-      "levels": 190
+      "std": 37.077,
+      "levels": 197
      },
      {
-      "std": 7.427,
-      "levels": 66
+      "std": 9.347,
+      "levels": 75
      }
     ]
    }
@@ -2468,42 +2540,42 @@
      1073,
      1500
     ],
-    "bytes": 132280,
+    "bytes": 243076,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 8.289,
-      "levels": 63
+      "std": 9.941,
+      "levels": 70
      },
      {
-      "std": 7.021,
-      "levels": 61
+      "std": 8.607,
+      "levels": 78
      },
      {
-      "std": 7.34,
-      "levels": 60
+      "std": 8.965,
+      "levels": 69
      },
      {
-      "std": 6.73,
-      "levels": 63
+      "std": 8.52,
+      "levels": 78
      },
      {
-      "std": 4.744,
-      "levels": 51
+      "std": 6.761,
+      "levels": 68
      },
      {
-      "std": 6.733,
-      "levels": 57
+      "std": 8.723,
+      "levels": 67
      },
      {
-      "std": 40.952,
-      "levels": 193
+      "std": 41.218,
+      "levels": 199
      },
      {
-      "std": 7.85,
-      "levels": 64
+      "std": 9.376,
+      "levels": 73
      }
     ]
    },
@@ -2513,42 +2585,42 @@
      1288,
      1800
     ],
-    "bytes": 280682,
+    "bytes": 399380,
     "magnification": 1.616,
-    "passes": 3,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 8.651,
+      "std": 10.383,
+      "levels": 74
+     },
+     {
+      "std": 8.963,
+      "levels": 74
+     },
+     {
+      "std": 9.341,
+      "levels": 73
+     },
+     {
+      "std": 8.849,
+      "levels": 78
+     },
+     {
+      "std": 7.055,
       "levels": 69
      },
      {
-      "std": 7.252,
-      "levels": 61
+      "std": 9.132,
+      "levels": 68
      },
      {
-      "std": 7.644,
-      "levels": 66
+      "std": 41.327,
+      "levels": 203
      },
      {
-      "std": 7.075,
-      "levels": 64
-     },
-     {
-      "std": 5.038,
-      "levels": 56
-     },
-     {
-      "std": 7.089,
-      "levels": 60
-     },
-     {
-      "std": 41.051,
-      "levels": 196
-     },
-     {
-      "std": 8.131,
-      "levels": 64
+      "std": 9.75,
+      "levels": 77
      }
     ]
    }
@@ -2662,42 +2734,42 @@
      1073,
      1500
     ],
-    "bytes": 137678,
+    "bytes": 247488,
     "magnification": 1.939,
-    "passes": 1,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.077,
-      "levels": 59
+      "std": 9.102,
+      "levels": 76
      },
      {
-      "std": 7.518,
-      "levels": 54
+      "std": 8.928,
+      "levels": 67
      },
      {
-      "std": 6.826,
-      "levels": 59
+      "std": 8.607,
+      "levels": 73
      },
      {
-      "std": 6.762,
-      "levels": 61
+      "std": 8.486,
+      "levels": 73
      },
      {
-      "std": 3.615,
-      "levels": 35
+      "std": 6.06,
+      "levels": 46
      },
      {
-      "std": 6.791,
-      "levels": 61
+      "std": 8.678,
+      "levels": 72
      },
      {
-      "std": 39.677,
-      "levels": 193
+      "std": 39.966,
+      "levels": 199
      },
      {
-      "std": 7.064,
-      "levels": 57
+      "std": 8.686,
+      "levels": 70
      }
     ]
    },
@@ -2707,42 +2779,42 @@
      1288,
      1800
     ],
-    "bytes": 281072,
+    "bytes": 404216,
     "magnification": 1.616,
-    "passes": 1,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.37,
-      "levels": 64
+      "std": 9.461,
+      "levels": 76
      },
      {
-      "std": 7.883,
-      "levels": 63
+      "std": 9.358,
+      "levels": 70
      },
      {
-      "std": 7.255,
-      "levels": 65
+      "std": 9.07,
+      "levels": 76
      },
      {
-      "std": 7.151,
-      "levels": 66
+      "std": 8.923,
+      "levels": 76
      },
      {
-      "std": 3.978,
-      "levels": 36
+      "std": 6.423,
+      "levels": 51
      },
      {
-      "std": 7.107,
-      "levels": 64
+      "std": 9.032,
+      "levels": 72
      },
      {
-      "std": 39.742,
-      "levels": 200
+      "std": 40.031,
+      "levels": 205
      },
      {
-      "std": 7.426,
-      "levels": 62
+      "std": 9.063,
+      "levels": 72
      }
     ]
    }
@@ -2856,42 +2928,42 @@
      1073,
      1500
     ],
-    "bytes": 145834,
+    "bytes": 257262,
     "magnification": 1.939,
-    "passes": 1,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.533,
-      "levels": 62
+      "std": 9.488,
+      "levels": 71
      },
      {
-      "std": 6.435,
-      "levels": 55
+      "std": 8.123,
+      "levels": 67
      },
      {
-      "std": 7.021,
-      "levels": 58
+      "std": 8.772,
+      "levels": 70
      },
      {
-      "std": 6.561,
-      "levels": 58
+      "std": 8.349,
+      "levels": 72
      },
      {
-      "std": 5.05,
-      "levels": 56
+      "std": 6.973,
+      "levels": 66
      },
      {
-      "std": 6.592,
-      "levels": 55
+      "std": 8.637,
+      "levels": 67
      },
      {
-      "std": 32.931,
-      "levels": 190
+      "std": 33.228,
+      "levels": 202
      },
      {
-      "std": 7.745,
-      "levels": 56
+      "std": 9.428,
+      "levels": 63
      }
     ]
    },
@@ -2901,42 +2973,42 @@
      1288,
      1800
     ],
-    "bytes": 282480,
+    "bytes": 404710,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.828,
-      "levels": 63
+      "std": 9.843,
+      "levels": 72
      },
      {
-      "std": 6.76,
-      "levels": 56
-     },
-     {
-      "std": 7.349,
-      "levels": 58
-     },
-     {
-      "std": 6.937,
+      "std": 8.433,
       "levels": 65
      },
      {
-      "std": 5.367,
-      "levels": 58
+      "std": 9.173,
+      "levels": 71
      },
      {
-      "std": 6.919,
-      "levels": 60
+      "std": 8.678,
+      "levels": 75
      },
      {
-      "std": 33.011,
-      "levels": 194
+      "std": 7.252,
+      "levels": 66
      },
      {
-      "std": 8.14,
-      "levels": 61
+      "std": 9.004,
+      "levels": 68
+     },
+     {
+      "std": 33.319,
+      "levels": 205
+     },
+     {
+      "std": 9.845,
+      "levels": 70
      }
     ]
    }
@@ -3050,42 +3122,42 @@
      1073,
      1500
     ],
-    "bytes": 137644,
+    "bytes": 253992,
     "magnification": 1.939,
-    "passes": 1,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 6.97,
-      "levels": 60
+      "std": 9.085,
+      "levels": 71
      },
      {
-      "std": 7.359,
-      "levels": 58
+      "std": 8.862,
+      "levels": 73
      },
      {
-      "std": 7.773,
-      "levels": 57
+      "std": 9.39,
+      "levels": 69
      },
      {
-      "std": 6.983,
-      "levels": 62
+      "std": 8.73,
+      "levels": 74
      },
      {
-      "std": 4.326,
-      "levels": 33
+      "std": 6.557,
+      "levels": 53
      },
      {
-      "std": 6.432,
-      "levels": 58
+      "std": 8.438,
+      "levels": 66
      },
      {
-      "std": 31.805,
-      "levels": 189
+      "std": 32.147,
+      "levels": 200
      },
      {
-      "std": 6.998,
-      "levels": 60
+      "std": 8.691,
+      "levels": 66
      }
     ]
    },
@@ -3095,42 +3167,42 @@
      1288,
      1800
     ],
-    "bytes": 285362,
+    "bytes": 403502,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.358,
-      "levels": 63
+      "std": 9.488,
+      "levels": 74
      },
      {
-      "std": 7.613,
-      "levels": 59
+      "std": 9.221,
+      "levels": 72
      },
      {
-      "std": 8.135,
-      "levels": 62
+      "std": 9.758,
+      "levels": 73
      },
      {
-      "std": 7.311,
+      "std": 9.024,
+      "levels": 77
+     },
+     {
+      "std": 6.801,
+      "levels": 54
+     },
+     {
+      "std": 8.812,
       "levels": 68
      },
      {
-      "std": 4.634,
-      "levels": 38
+      "std": 32.223,
+      "levels": 203
      },
      {
-      "std": 6.749,
-      "levels": 61
-     },
-     {
-      "std": 31.898,
-      "levels": 196
-     },
-     {
-      "std": 7.311,
-      "levels": 60
+      "std": 9.093,
+      "levels": 70
      }
     ]
    }
@@ -3244,42 +3316,42 @@
      702,
      1500
     ],
-    "bytes": 57582,
+    "bytes": 84090,
     "magnification": 1.939,
     "passes": 1,
     "of": 8,
     "samples": [
      {
-      "std": 2.701,
-      "levels": 23
+      "std": 3.264,
+      "levels": 25
      },
      {
-      "std": 2.633,
-      "levels": 20
+      "std": 3.24,
+      "levels": 24
      },
      {
-      "std": 2.642,
-      "levels": 22
+      "std": 3.177,
+      "levels": 25
      },
      {
-      "std": 4.188,
-      "levels": 31
+      "std": 4.582,
+      "levels": 34
      },
      {
-      "std": 7.119,
-      "levels": 57
+      "std": 7.376,
+      "levels": 59
      },
      {
-      "std": 6.53,
+      "std": 6.776,
       "levels": 60
      },
      {
-      "std": 41.752,
-      "levels": 212
+      "std": 41.854,
+      "levels": 213
      },
      {
-      "std": 3.469,
-      "levels": 53
+      "std": 3.882,
+      "levels": 54
      }
     ]
    },
@@ -3289,42 +3361,42 @@
      843,
      1800
     ],
-    "bytes": 142866,
+    "bytes": 156938,
     "magnification": 1.616,
     "passes": 1,
     "of": 8,
     "samples": [
      {
-      "std": 3.262,
+      "std": 3.763,
+      "levels": 30
+     },
+     {
+      "std": 3.668,
       "levels": 26
      },
      {
-      "std": 3.184,
-      "levels": 26
+      "std": 3.704,
+      "levels": 30
      },
      {
-      "std": 3.222,
-      "levels": 26
-     },
-     {
-      "std": 4.462,
+      "std": 4.912,
       "levels": 37
      },
      {
-      "std": 7.435,
-      "levels": 56
+      "std": 7.679,
+      "levels": 60
      },
      {
-      "std": 6.916,
-      "levels": 61
+      "std": 7.14,
+      "levels": 60
      },
      {
-      "std": 41.811,
-      "levels": 213
+      "std": 41.9,
+      "levels": 214
      },
      {
-      "std": 3.952,
-      "levels": 53
+      "std": 4.303,
+      "levels": 55
      }
     ]
    }
@@ -3438,42 +3510,42 @@
      1073,
      1500
     ],
-    "bytes": 165890,
+    "bytes": 264214,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.073,
-      "levels": 62
+      "std": 9.367,
+      "levels": 76
      },
      {
-      "std": 7.431,
+      "std": 9.205,
+      "levels": 80
+     },
+     {
+      "std": 9.304,
+      "levels": 77
+     },
+     {
+      "std": 10.715,
+      "levels": 109
+     },
+     {
+      "std": 7.051,
       "levels": 64
      },
      {
-      "std": 7.251,
-      "levels": 64
+      "std": 8.339,
+      "levels": 70
      },
      {
-      "std": 9.284,
-      "levels": 99
+      "std": 48.801,
+      "levels": 229
      },
      {
-      "std": 4.872,
-      "levels": 53
-     },
-     {
-      "std": 5.797,
-      "levels": 59
-     },
-     {
-      "std": 48.605,
-      "levels": 225
-     },
-     {
-      "std": 7.107,
-      "levels": 63
+      "std": 9.248,
+      "levels": 71
      }
     ]
    },
@@ -3483,42 +3555,42 @@
      1288,
      1800
     ],
-    "bytes": 310558,
+    "bytes": 411974,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.524,
-      "levels": 72
+      "std": 9.773,
+      "levels": 82
      },
      {
-      "std": 7.79,
-      "levels": 66
+      "std": 9.575,
+      "levels": 82
      },
      {
-      "std": 7.574,
+      "std": 9.739,
+      "levels": 79
+     },
+     {
+      "std": 11.061,
+      "levels": 103
+     },
+     {
+      "std": 7.389,
       "levels": 67
      },
      {
-      "std": 9.622,
-      "levels": 95
+      "std": 8.686,
+      "levels": 70
      },
      {
-      "std": 5.205,
-      "levels": 60
+      "std": 48.853,
+      "levels": 229
      },
      {
-      "std": 6.145,
-      "levels": 62
-     },
-     {
-      "std": 48.648,
-      "levels": 226
-     },
-     {
-      "std": 7.438,
-      "levels": 64
+      "std": 9.608,
+      "levels": 71
      }
     ]
    }
@@ -3632,42 +3704,42 @@
      1073,
      1500
     ],
-    "bytes": 154088,
+    "bytes": 274332,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.017,
-      "levels": 62
+      "std": 9.314,
+      "levels": 73
      },
      {
-      "std": 7.946,
-      "levels": 63
+      "std": 9.601,
+      "levels": 76
      },
      {
-      "std": 7.214,
-      "levels": 61
+      "std": 9.303,
+      "levels": 72
      },
      {
-      "std": 9.243,
-      "levels": 101
+      "std": 10.735,
+      "levels": 111
      },
      {
-      "std": 3.653,
-      "levels": 30
+      "std": 6.386,
+      "levels": 51
      },
      {
-      "std": 7.182,
-      "levels": 63
+      "std": 9.451,
+      "levels": 79
      },
      {
-      "std": 43.236,
-      "levels": 208
+      "std": 43.39,
+      "levels": 216
      },
      {
-      "std": 7.206,
-      "levels": 65
+      "std": 9.482,
+      "levels": 73
      }
     ]
    },
@@ -3677,42 +3749,42 @@
      1288,
      1800
     ],
-    "bytes": 305724,
+    "bytes": 409744,
     "magnification": 1.616,
-    "passes": 3,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.419,
-      "levels": 64
+      "std": 9.751,
+      "levels": 76
      },
      {
-      "std": 8.24,
-      "levels": 65
+      "std": 9.927,
+      "levels": 77
      },
      {
-      "std": 7.563,
-      "levels": 65
+      "std": 9.661,
+      "levels": 75
      },
      {
-      "std": 9.568,
-      "levels": 100
+      "std": 11.096,
+      "levels": 115
      },
      {
-      "std": 4.047,
-      "levels": 36
+      "std": 6.718,
+      "levels": 55
      },
      {
-      "std": 7.479,
-      "levels": 66
+      "std": 9.732,
+      "levels": 76
      },
      {
-      "std": 43.272,
-      "levels": 211
+      "std": 43.44,
+      "levels": 214
      },
      {
-      "std": 7.601,
-      "levels": 67
+      "std": 9.866,
+      "levels": 74
      }
     ]
    }
@@ -3826,42 +3898,42 @@
      1073,
      1500
     ],
-    "bytes": 167906,
+    "bytes": 273652,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 6.948,
-      "levels": 62
+      "std": 9.318,
+      "levels": 75
      },
      {
-      "std": 7.492,
-      "levels": 59
+      "std": 9.227,
+      "levels": 73
      },
      {
-      "std": 6.901,
-      "levels": 61
+      "std": 9.108,
+      "levels": 75
      },
      {
-      "std": 9.381,
-      "levels": 100
+      "std": 10.848,
+      "levels": 110
      },
      {
-      "std": 3.899,
-      "levels": 34
+      "std": 6.596,
+      "levels": 54
      },
      {
-      "std": 6.837,
-      "levels": 58
+      "std": 9.158,
+      "levels": 76
      },
      {
-      "std": 46.652,
-      "levels": 218
+      "std": 46.908,
+      "levels": 226
      },
      {
-      "std": 6.688,
-      "levels": 58
+      "std": 9.013,
+      "levels": 67
      }
     ]
    },
@@ -3871,42 +3943,42 @@
      1288,
      1800
     ],
-    "bytes": 317184,
+    "bytes": 426990,
     "magnification": 1.616,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.376,
-      "levels": 66
+      "std": 9.749,
+      "levels": 77
      },
      {
-      "std": 7.788,
-      "levels": 62
+      "std": 9.592,
+      "levels": 77
      },
      {
-      "std": 7.272,
-      "levels": 66
+      "std": 9.551,
+      "levels": 78
      },
      {
-      "std": 9.775,
-      "levels": 104
+      "std": 11.212,
+      "levels": 111
      },
      {
-      "std": 4.292,
-      "levels": 35
+      "std": 6.897,
+      "levels": 57
      },
      {
-      "std": 7.144,
-      "levels": 63
+      "std": 9.482,
+      "levels": 74
      },
      {
-      "std": 46.727,
-      "levels": 218
+      "std": 46.993,
+      "levels": 227
      },
      {
-      "std": 7.079,
-      "levels": 61
+      "std": 9.441,
+      "levels": 74
      }
     ]
    }
@@ -4020,42 +4092,42 @@
      1073,
      1500
     ],
-    "bytes": 162700,
+    "bytes": 267942,
     "magnification": 1.939,
-    "passes": 2,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.086,
-      "levels": 63
+      "std": 9.313,
+      "levels": 77
      },
      {
-      "std": 7.79,
-      "levels": 59
+      "std": 9.341,
+      "levels": 73
      },
      {
-      "std": 6.179,
-      "levels": 62
+      "std": 8.573,
+      "levels": 70
      },
      {
-      "std": 8.682,
-      "levels": 92
+      "std": 10.338,
+      "levels": 102
      },
      {
-      "std": 3.255,
-      "levels": 30
+      "std": 6.304,
+      "levels": 53
      },
      {
-      "std": 7.025,
-      "levels": 60
+      "std": 9.35,
+      "levels": 79
      },
      {
-      "std": 46.194,
-      "levels": 214
+      "std": 46.508,
+      "levels": 222
      },
      {
-      "std": 6.131,
-      "levels": 63
+      "std": 8.562,
+      "levels": 70
      }
     ]
    },
@@ -4065,42 +4137,42 @@
      1288,
      1800
     ],
-    "bytes": 305856,
+    "bytes": 410094,
     "magnification": 1.616,
-    "passes": 3,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 7.468,
-      "levels": 66
+      "std": 9.712,
+      "levels": 79
      },
      {
-      "std": 8.035,
-      "levels": 60
+      "std": 9.711,
+      "levels": 74
      },
      {
-      "std": 6.561,
-      "levels": 66
+      "std": 8.979,
+      "levels": 72
      },
      {
-      "std": 9.055,
-      "levels": 96
+      "std": 10.718,
+      "levels": 105
      },
      {
-      "std": 3.68,
-      "levels": 33
+      "std": 6.678,
+      "levels": 53
      },
      {
-      "std": 7.329,
-      "levels": 65
+      "std": 9.724,
+      "levels": 77
      },
      {
-      "std": 46.245,
-      "levels": 213
+      "std": 46.559,
+      "levels": 225
      },
      {
-      "std": 6.526,
-      "levels": 64
+      "std": 8.981,
+      "levels": 75
      }
     ]
    }
@@ -4214,42 +4286,42 @@
      1500,
      1500
     ],
-    "bytes": 119854,
+    "bytes": 187326,
     "magnification": 1.939,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 22.737,
-      "levels": 75
+      "std": 22.994,
+      "levels": 82
      },
      {
-      "std": 2.642,
-      "levels": 29
+      "std": 4.758,
+      "levels": 41
      },
      {
-      "std": 2.345,
-      "levels": 27
+      "std": 4.536,
+      "levels": 38
      },
      {
-      "std": 2.31,
-      "levels": 27
+      "std": 4.216,
+      "levels": 38
      },
      {
-      "std": 4.431,
-      "levels": 42
+      "std": 5.821,
+      "levels": 57
      },
      {
-      "std": 2.543,
-      "levels": 28
+      "std": 4.698,
+      "levels": 43
      },
      {
-      "std": 69.113,
-      "levels": 170
+      "std": 69.279,
+      "levels": 175
      },
      {
-      "std": 2.348,
-      "levels": 24
+      "std": 4.713,
+      "levels": 39
      }
     ]
    },
@@ -4259,42 +4331,42 @@
      1800,
      1800
     ],
-    "bytes": 245522,
+    "bytes": 318614,
     "magnification": 1.616,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 22.78,
-      "levels": 79
+      "std": 23.036,
+      "levels": 83
      },
      {
-      "std": 3.154,
-      "levels": 31
+      "std": 5.158,
+      "levels": 46
      },
      {
-      "std": 3.006,
-      "levels": 32
+      "std": 4.966,
+      "levels": 41
      },
      {
-      "std": 2.889,
-      "levels": 28
+      "std": 4.555,
+      "levels": 40
      },
      {
-      "std": 4.762,
-      "levels": 43
+      "std": 6.088,
+      "levels": 62
      },
      {
-      "std": 3.067,
-      "levels": 32
+      "std": 5.107,
+      "levels": 44
      },
      {
-      "std": 69.093,
-      "levels": 171
+      "std": 69.273,
+      "levels": 176
      },
      {
-      "std": 2.988,
-      "levels": 31
+      "std": 5.118,
+      "levels": 44
      }
     ]
    }
@@ -4408,42 +4480,42 @@
      1500,
      1500
     ],
-    "bytes": 113902,
+    "bytes": 193266,
     "magnification": 1.939,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 22.806,
-      "levels": 69
+      "std": 22.977,
+      "levels": 77
      },
      {
-      "std": 2.708,
-      "levels": 27
-     },
-     {
-      "std": 2.343,
-      "levels": 27
-     },
-     {
-      "std": 3.143,
-      "levels": 28
-     },
-     {
-      "std": 4.587,
+      "std": 4.828,
       "levels": 39
      },
      {
-      "std": 2.649,
-      "levels": 28
+      "std": 4.514,
+      "levels": 41
      },
      {
-      "std": 58.818,
-      "levels": 167
+      "std": 4.609,
+      "levels": 43
      },
      {
-      "std": 2.369,
-      "levels": 26
+      "std": 5.881,
+      "levels": 58
+     },
+     {
+      "std": 4.807,
+      "levels": 41
+     },
+     {
+      "std": 59.004,
+      "levels": 173
+     },
+     {
+      "std": 4.665,
+      "levels": 40
      }
     ]
    },
@@ -4453,42 +4525,42 @@
      1800,
      1800
     ],
-    "bytes": 238234,
+    "bytes": 317972,
     "magnification": 1.616,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 22.808,
-      "levels": 69
+      "std": 23.028,
+      "levels": 83
      },
      {
-      "std": 3.192,
-      "levels": 32
+      "std": 5.242,
+      "levels": 42
      },
      {
-      "std": 2.994,
-      "levels": 32
+      "std": 4.947,
+      "levels": 42
      },
      {
-      "std": 3.61,
-      "levels": 34
+      "std": 4.984,
+      "levels": 45
      },
      {
-      "std": 4.835,
-      "levels": 41
+      "std": 6.164,
+      "levels": 57
      },
      {
-      "std": 3.222,
-      "levels": 30
+      "std": 5.18,
+      "levels": 43
      },
      {
-      "std": 58.789,
-      "levels": 170
+      "std": 58.96,
+      "levels": 173
      },
      {
-      "std": 2.996,
-      "levels": 30
+      "std": 5.084,
+      "levels": 42
      }
     ]
    }
@@ -4602,42 +4674,42 @@
      1500,
      1500
     ],
-    "bytes": 125250,
+    "bytes": 189062,
     "magnification": 1.939,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 22.198,
-      "levels": 79
+      "std": 22.454,
+      "levels": 85
      },
      {
-      "std": 2.194,
-      "levels": 25
+      "std": 4.433,
+      "levels": 37
      },
      {
-      "std": 2.328,
-      "levels": 27
+      "std": 4.534,
+      "levels": 40
      },
      {
-      "std": 2.16,
-      "levels": 26
+      "std": 4.096,
+      "levels": 36
      },
      {
-      "std": 4.477,
-      "levels": 44
+      "std": 5.65,
+      "levels": 58
      },
      {
-      "std": 2.232,
-      "levels": 25
+      "std": 4.431,
+      "levels": 36
      },
      {
-      "std": 72.262,
-      "levels": 174
+      "std": 72.418,
+      "levels": 179
      },
      {
-      "std": 2.223,
-      "levels": 26
+      "std": 4.61,
+      "levels": 42
      }
     ]
    },
@@ -4647,42 +4719,42 @@
      1800,
      1800
     ],
-    "bytes": 263836,
+    "bytes": 318652,
     "magnification": 1.616,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 22.291,
-      "levels": 80
+      "std": 22.513,
+      "levels": 86
      },
      {
-      "std": 2.909,
-      "levels": 32
+      "std": 4.82,
+      "levels": 41
      },
      {
-      "std": 2.995,
-      "levels": 32
+      "std": 5.007,
+      "levels": 43
      },
      {
-      "std": 2.899,
-      "levels": 29
+      "std": 4.483,
+      "levels": 42
      },
      {
-      "std": 4.789,
-      "levels": 46
+      "std": 5.919,
+      "levels": 61
      },
      {
-      "std": 2.793,
-      "levels": 28
+      "std": 4.877,
+      "levels": 41
      },
      {
-      "std": 72.254,
-      "levels": 174
+      "std": 72.388,
+      "levels": 180
      },
      {
-      "std": 2.934,
-      "levels": 31
+      "std": 5.067,
+      "levels": 41
      }
     ]
    }
@@ -4796,42 +4868,42 @@
      1500,
      1500
     ],
-    "bytes": 123274,
+    "bytes": 192316,
     "magnification": 1.939,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 23.721,
-      "levels": 75
+      "std": 23.948,
+      "levels": 80
      },
      {
-      "std": 2.479,
-      "levels": 28
+      "std": 4.425,
+      "levels": 37
      },
      {
-      "std": 2.211,
-      "levels": 26
+      "std": 4.419,
+      "levels": 38
      },
      {
-      "std": 2.578,
-      "levels": 28
+      "std": 4.258,
+      "levels": 36
      },
      {
-      "std": 4.565,
-      "levels": 45
+      "std": 5.857,
+      "levels": 55
      },
      {
-      "std": 2.415,
-      "levels": 26
+      "std": 4.566,
+      "levels": 36
      },
      {
-      "std": 64.706,
-      "levels": 170
+      "std": 64.926,
+      "levels": 174
      },
      {
-      "std": 2.309,
-      "levels": 26
+      "std": 4.5,
+      "levels": 40
      }
     ]
    },
@@ -4841,42 +4913,42 @@
      1800,
      1800
     ],
-    "bytes": 250836,
+    "bytes": 312838,
     "magnification": 1.616,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 23.775,
-      "levels": 81
+      "std": 23.982,
+      "levels": 84
      },
      {
-      "std": 3.053,
-      "levels": 34
+      "std": 4.803,
+      "levels": 39
      },
      {
-      "std": 2.863,
-      "levels": 32
+      "std": 4.894,
+      "levels": 42
      },
      {
-      "std": 3.256,
-      "levels": 32
+      "std": 4.684,
+      "levels": 39
      },
      {
-      "std": 4.844,
-      "levels": 45
+      "std": 6.1,
+      "levels": 57
      },
      {
-      "std": 3.032,
-      "levels": 33
+      "std": 4.954,
+      "levels": 41
      },
      {
-      "std": 64.7,
-      "levels": 173
+      "std": 64.879,
+      "levels": 175
      },
      {
-      "std": 2.957,
-      "levels": 30
+      "std": 4.898,
+      "levels": 43
      }
     ]
    }
@@ -4990,42 +5062,42 @@
      1500,
      1500
     ],
-    "bytes": 115674,
+    "bytes": 201442,
     "magnification": 1.939,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 24.801,
-      "levels": 83
+      "std": 25.013,
+      "levels": 88
      },
      {
-      "std": 2.201,
-      "levels": 26
+      "std": 4.735,
+      "levels": 41
      },
      {
-      "std": 2.514,
-      "levels": 28
+      "std": 4.898,
+      "levels": 42
      },
      {
-      "std": 2.182,
-      "levels": 25
+      "std": 4.323,
+      "levels": 37
      },
      {
-      "std": 4.491,
-      "levels": 40
+      "std": 5.854,
+      "levels": 58
      },
      {
-      "std": 2.182,
-      "levels": 25
+      "std": 4.838,
+      "levels": 37
      },
      {
-      "std": 73.846,
-      "levels": 175
+      "std": 74.08,
+      "levels": 185
      },
      {
-      "std": 2.356,
-      "levels": 26
+      "std": 4.967,
+      "levels": 39
      }
     ]
    },
@@ -5035,42 +5107,42 @@
      1800,
      1800
     ],
-    "bytes": 240320,
+    "bytes": 362578,
     "magnification": 1.616,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 24.825,
-      "levels": 83
+      "std": 25.086,
+      "levels": 89
      },
      {
-      "std": 2.773,
-      "levels": 29
-     },
-     {
-      "std": 3.007,
-      "levels": 29
-     },
-     {
-      "std": 2.782,
-      "levels": 28
-     },
-     {
-      "std": 4.793,
+      "std": 5.094,
       "levels": 42
      },
      {
-      "std": 2.786,
-      "levels": 30
+      "std": 5.325,
+      "levels": 44
      },
      {
-      "std": 73.885,
-      "levels": 179
+      "std": 4.751,
+      "levels": 42
      },
      {
-      "std": 2.917,
-      "levels": 31
+      "std": 6.192,
+      "levels": 61
+     },
+     {
+      "std": 5.214,
+      "levels": 40
+     },
+     {
+      "std": 74.064,
+      "levels": 187
+     },
+     {
+      "std": 5.329,
+      "levels": 45
      }
     ]
    }
@@ -5184,42 +5256,42 @@
      1500,
      1500
     ],
-    "bytes": 117326,
+    "bytes": 202074,
     "magnification": 1.939,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 25.219,
-      "levels": 78
+      "std": 25.427,
+      "levels": 86
      },
      {
-      "std": 2.617,
-      "levels": 28
+      "std": 4.93,
+      "levels": 40
      },
      {
-      "std": 2.535,
-      "levels": 27
+      "std": 4.761,
+      "levels": 47
      },
      {
-      "std": 2.21,
-      "levels": 25
-     },
-     {
-      "std": 4.558,
+      "std": 4.374,
       "levels": 39
      },
      {
-      "std": 2.703,
-      "levels": 24
+      "std": 5.991,
+      "levels": 56
      },
      {
-      "std": 69.414,
-      "levels": 174
+      "std": 4.972,
+      "levels": 39
      },
      {
-      "std": 2.546,
-      "levels": 28
+      "std": 69.555,
+      "levels": 180
+     },
+     {
+      "std": 4.928,
+      "levels": 42
      }
     ]
    },
@@ -5229,42 +5301,42 @@
      1800,
      1800
     ],
-    "bytes": 242310,
+    "bytes": 357914,
     "magnification": 1.616,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 25.241,
-      "levels": 82
+      "std": 25.476,
+      "levels": 85
      },
      {
-      "std": 3.089,
-      "levels": 31
-     },
-     {
-      "std": 3.163,
-      "levels": 31
-     },
-     {
-      "std": 2.817,
-      "levels": 30
-     },
-     {
-      "std": 4.849,
+      "std": 5.372,
       "levels": 43
      },
      {
-      "std": 3.232,
-      "levels": 30
+      "std": 5.216,
+      "levels": 45
      },
      {
-      "std": 69.464,
-      "levels": 176
+      "std": 4.796,
+      "levels": 39
      },
      {
-      "std": 3.181,
-      "levels": 35
+      "std": 6.302,
+      "levels": 60
+     },
+     {
+      "std": 5.365,
+      "levels": 41
+     },
+     {
+      "std": 69.517,
+      "levels": 179
+     },
+     {
+      "std": 5.351,
+      "levels": 49
      }
     ]
    }
