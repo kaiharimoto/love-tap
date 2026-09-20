@@ -43,6 +43,8 @@ import sys
 import numpy as np
 from PIL import Image
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PACKED = os.path.join(ROOT, "app", "assets")     # derived, gitignored, what the app ships
 SOURCE = os.path.join(ROOT, "assets")            # the renders themselves, committed
@@ -53,12 +55,15 @@ FLOORS = {
     "paper": 1.2,      # tooth and fibre: quiet, but never nothing
     "shell": 4.0,      # a desk is wood, and wood has figure in it
     "objects": 2.0,    # a rendered thing has form; a flat one has not been lit
-    # The family this file did not read, and the one the material row is judged on. 281 of the
-    # 320 frames of 06_unfolding.mp4 were a flat cream rectangle and nothing here objected,
-    # because fold frames live one directory deeper than every other family -- folds/<name>/NNNN
-    # -- so even naming the family was not enough on its own. Same floor as paper: a fold is
-    # paper, and it has to carry the tooth the stocks carry.
-    "folds": 1.2,
+    # NOTE: `folds` is deliberately NOT in this table any more. It carried 1.2 here -- paper's
+    # floor, on the reasoning that a fold is paper -- and a blank sheet clears 1.2 without
+    # difficulty: `unfold_thirds` read patch_std 1.918 to 2.075 across all 240 frames and passed,
+    # while ruled stock in the same artifact read 36.9. So the gate was satisfied by procedural
+    # tooth alone and could not tell a sheet of ruled stock from a flat rectangle with noise on
+    # it, which is how the object five of seven critics named sat unexplained for three cycles.
+    # docs/COLOR.md §5a replaces it with the class floor of the stock the sequence is folded
+    # from -- 8.0 / 60 for `unfold_thirds`, a written stock -- measured by tools/check/
+    # stock_class.py over a window placed from the sheet's own bounds. See fold_report() below.
 }
 PATCH = 200
 
@@ -96,6 +101,78 @@ def read(path):
     cols = np.where(solid.any(axis=0))[0]
     grey = np.where(solid, grey, np.nan)
     return grey[rows.min():rows.max() + 1, cols.min():cols.max() + 1]
+
+
+def fold_report(assets, sequences=None):
+    """Every fold sequence, read against its stock's §5a class floor rather than paper's 1.2.
+
+    A frame is read at whatever size the library under `--root` holds it at, exactly like every
+    other family here: `--root assets` reads the 1440 px source render, the default `app/assets`
+    reads the frame packed down to `SIZES['folds']`. Neither is the size the app finally draws,
+    and the difference is worth knowing before quoting a number from this file -- frame 0000 of
+    `unfold_thirds` reads **6.824** at source, **6.322** packed, and **5.686** once the packed
+    frame is drawn at the 1045 px the card actually occupies in `13_messenger_states.png`. So the
+    shipped figure is the worst of the three, this file reports one of the other two, and the
+    shipped reading is the one `tools/check/stock_class_selftest.py` takes. All three fail 8.0,
+    which is why reporting the source figure here is safe today and would not be if the render
+    were repaired to just over the floor: a pass here is not yet a pass on the screen.
+
+    The statistic is the MEDIAN over tiled placements, not the maximum. `patch_std` above takes
+    `max()`, which passes a flat sheet on the strength of its one textured corner; that leniency is
+    most of why this family read green for three cycles.
+    """
+    import stock_class
+
+    out = {}
+    root = os.path.join(assets, "folds")
+    if not os.path.isdir(root):
+        return out
+    for seq in sorted(os.listdir(root)):
+        if sequences and seq not in sequences:
+            continue
+        cls, floor_std, floor_levels = stock_class.floor_for_fold(seq)
+        if cls is None:
+            # Refusing to guess is the point: a sequence with no declared stock gets no floor and
+            # is reported as unmeasured, rather than silently taking someone else's number.
+            out[seq] = {"error": "no stock declared in stock_class.FOLDED_FROM", "ok": False}
+            continue
+        frames = sorted(glob.glob(os.path.join(root, seq, "*.png"))
+                        + glob.glob(os.path.join(root, seq, "*.webp")))
+        if not frames:
+            out[seq] = {"error": "no frames", "ok": False}
+            continue
+        # The first frame is the one that ships as the FOLDED state of a note and freezes into the
+        # stills, so it is read whatever else is; the rest are sampled evenly so 240 frames do not
+        # cost 240 decodes on every run.
+        picks = [frames[0]] + [frames[i] for i in range(0, len(frames), max(1, len(frames) // 8))
+                               if i]
+        readings = []
+        for path in picks:
+            with Image.open(path) as im:
+                got = stock_class.measure(np.asarray(im.convert("RGBA")), floor_std, floor_levels)
+            if got is not None:
+                got["frame"] = os.path.basename(path)
+                readings.append(got)
+        if not readings:
+            out[seq] = {"error": "no frame read as a sheet", "ok": False}
+            continue
+        first = readings[0]
+        out[seq] = {
+            "stock": stock_class.FOLDED_FROM.get(seq),
+            "class": cls,
+            "floor": [floor_std, floor_levels],
+            "frames_read": len(readings),
+            "frame_0000": {k: first[k] for k in
+                           ("frame", "bounds", "window", "placements", "median_std",
+                            "median_levels", "pass_fraction", "ok")},
+            "median_std_over_frames": round(float(np.median([r["median_std"] for r in readings])), 3),
+            # The L_std clause is the one §5a derives from a measurement; the 60-level clause is
+            # missed by the repaired written stocks themselves (57-58), so gating on it here would
+            # fail every fold for a reason that is not about folds. Reported, not gated. See
+            # tools/check/stock_class_selftest.py.
+            "ok": all(r["median_std"] >= floor_std for r in readings),
+        }
+    return out
 
 
 def main():
@@ -138,7 +215,23 @@ def main():
             if best < floor:
                 report["flat"].append(f"{family}/{name}: {best:.3f} < {floor}")
 
-    report["read"] = len(report["surfaces"])
+    # The folds family, on its own floor. docs/COLOR.md §5a.
+    report["folds"] = fold_report(assets)
+    for seq, got in report["folds"].items():
+        if got.get("ok"):
+            continue
+        if "error" in got:
+            report["flat"].append(f"folds/{seq}: {got['error']}")
+        else:
+            f = got["frame_0000"]
+            report["flat"].append(
+                f"folds/{seq}: median L_std {got['median_std_over_frames']} over "
+                f"{got['frames_read']} frames < {got['floor'][0]} ({got['class']} stock "
+                f"{got['stock']!r}); frame 0000 reads {f['median_std']} over {f['placements']} "
+                f"placements of a {f['window'][0]}x{f['window'][1]} window, "
+                f"pass fraction {f['pass_fraction']}")
+
+    report["read"] = len(report["surfaces"]) + len(report["folds"])
     report["enough_read"] = report["read"] >= args.min_read
     report["ok"] = report["enough_read"] and not report["flat"]
     text = json.dumps(report, indent=1)
