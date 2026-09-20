@@ -3,12 +3,13 @@
 Resumable state. Re-read `docs/BRIEF.md`, `DIRECTION.md` and this file first, then open the latest
 checkpoint under `checkpoints/` and continue from **Next action**.
 
-> **This file stops at session 4 and the build is on firing 21 of an autonomous loop.** It is kept
+> **This file stops at session 4 and the build is on firing 27 of an autonomous loop.** It is kept
 > for the history in it, which nothing else holds. Where the loop is, what the queue holds and what
 > the last firing did are `loop/STATE.json` and `loop/JOURNAL.md`, and those win over anything
-> below. The one claim here that a reader should not believe is
-> `tools/check/texture_budget.py` enforcing a WebKit texture budget: that file has never existed,
-> and `CLAUDE.md` says so.
+> below. The warning that used to stand here -- that this file's claim about
+> `tools/check/texture_budget.py` should not be believed because the file had never existed -- is
+> **withdrawn**: the tool was written at `5002867` and it passes, so the claim at the WebKit
+> texture budget line below is now true. `CLAUDE.md` was corrected in the same commit and says so.
 
 ## Session log
 
