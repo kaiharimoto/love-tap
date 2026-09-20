@@ -5060,3 +5060,77 @@ reached 2026-09-17, so the date range of the deepened window is the cheapest way
 have not deepened far enough.** Ask "does the remote's oldest visible commit predate my HEAD?"
 before concluding anything from a missing merge-base.
 
+### What firing 32 did, and the one thing it would say if it could only say one
+
+ADDRESS, cycle 3. No code — that is what this stage is, and firing 18 ran it and wrote none either.
+The output is a queue of 51 items ranked 1 to 51 with no gaps, four decisions settled rather than
+parked a sixth time, and one rule written into the protocol because it outlives every item it
+applies to.
+
+**The rule, first, because it is the highest-leverage thing available to this firing.**
+`loop/WORKER_PROMPT.md` §3d: a queue item's measurement must be anchored to something the app itself
+declares — a rect in a surfaces sidecar, a playhead in a report, a `says` string, an event id, an
+asset path reached through a test — and never to an absolute pixel coordinate or a frame ordinal.
+Three of cycle 3's green numbers were pointing somewhere else and all three are that one error: a
+sample box that slid off the fold placeholder onto real paper standing beside it, a frame-distinctness
+check passing on 255 unique frames of a scroll because the fold had finished before the recorder
+started, and 42 failing text runs that left the screen when the interrupt matrix moved below the
+fold. Two corollaries, because the failure has two shapes — a window is placed by the object and
+tiled across it, since one placement is a sampling accident, and a count that can fall by the thing
+leaving the screen must be paired with a population that cannot. And one disqualification: a ruler
+that scores a known defect above a known repair is out, not merely doubted. `docs/LOOP.md`'s ADDRESS
+row and its honesty rules now both point at §3d, so a firing that reads only the machine still meets
+the rule.
+
+**The sweep was narrower than it looked, and that is worth writing down too.** Every open measurement
+was read. Most were already set-level or library-level and needed nothing; a window *size* — 400×200
+of a paper region, 200×200 of a tile — was never the fault, and thirteen items needed their window's
+*placement* re-expressed. Ranks 1, 3, 9, 14, 15, 19, 20, 22, 23, 30, 31, 39 and 50.
+
+**The four decisions.** Rank 1's L_std: the 30/150 pair is retired — it was a comparison against a
+neighbouring note at a different magnification and never a floor this build enforces anywhere else —
+and a fold frame is paper, so it takes the class floor of the stock it is folded from. Rank 1's
+HF_std: struck from the item entirely, on the evidence firing 29 already had. Rank 15's measurement
+moves from the screen to the token, with the population clause that would have caught its false close
+at firing 23. And the per-class, per-condition flat-fill floor is written into `docs/COLOR.md` as a
+new §5a with its derivation — written stock 8.0/60, plain 6.0/48, coated 4.0/32, day and dusk met
+separately. `V_other` is 76 for a printed grid, 39 for feint rules and 16 for a blank receipt, which
+is the whole argument: 8.0 was a floor on printed content, not on paper. The coated floor sits below
+what the stickies reach and above the receipt at 1.569, so it still has teeth on the one stock that
+is genuinely flat.
+
+**On the freeze**, because a successor will check: §5a declares a number `docs/COLOR.md` had
+explicitly left undeclared — §11 says `palette.py` "deliberately carries no pass/fail floor until
+`docs/COLOR.md` declares one", and both tools carry `FLOOR_STD = 8.0` marked *"quoted from the queue
+item rather than defended here"*. It reverses no design decision, so the cycle-6 freeze is untouched
+and no DESIGN work was done.
+
+**The eight-note item is re-filed pointing the other way, and this one was checked at the source
+rather than taken on report.** `docs/BRIEF.md` states it verbatim four times — lines 223, 247, 271
+and 295 — as an exit condition: *"lists the tear-mask ids on screen in 02_chat.png with no id
+repeated and at least eight notes visible"*. `tools/check/tears.py` is quoting the brief and quoting
+it correctly. The item had been filed since firing 23 as a gate bug whose remedy was to re-derive the
+floor; that would have hidden an unmet exit condition and falsified the one gate currently telling
+the truth. **The screen must fit eight notes and the ruler must not bend.** It sits at rank 9 because
+02_chat.png is the most-measured artifact in the build, the capture records it missing, and six
+measurements below it read it.
+
+**The ordering changed principle, not just position.** Firing 18 ordered by what was capped. This one
+orders by the owner's steer first and by what is capped second, which is what §3c says to do where
+the two disagree. The clearest evidence that it is being obeyed: the single largest points figure in
+the queue, 7, sits at rank 50, because it is the sixteen absent demo photographs.
+
+### Two things for whoever takes IMPLEMENT
+
+1. **Rank 4 before anything else.** `cd app && flutter analyze && flutter test` — the command
+   `WORKER_PROMPT.md` names as the gate before any commit touching code — exits 1 on one INFO at
+   `app/test/a_voice_is_drawn_by_a_hand_test.dart:70`. It never reaches `flutter test`. Firing 29
+   recorded "0 errors", which was true and is not the same thing as exit 0. Every item below rank 4
+   is committed through that gate.
+2. **Rank 31 has a deadline rather than a rank.** The builder sheet's anchor points are due before
+   cycle 4's DIAGNOSE whatever else is going on: firing 31's builder scored visual_design 9 against a
+   critic's 14.5 and anti_goal 7 against 9.2, and `score.py`'s lower-of-the-two took **7.7 points on
+   two rows where neither sheet named a defect the other missed**. That is the cheapest arithmetic on
+   the board and it expires at that DIAGNOSE. The home is settled as `docs/COLOR.md` §7 — not
+   `docs/BRIEF.md`, which is authoritative and not a builder's to amend.
+

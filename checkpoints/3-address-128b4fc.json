@@ -1,0 +1,120 @@
+{
+  "cycle": 3,
+  "stage": "ADDRESS",
+  "firing": 32,
+  "at_commit": "128b4fc",
+  "completed": true,
+  "at": "2026-09-20T16:08:59Z",
+  "definition_of_done": "every queue item names the measurement that will close it AND that measurement is anchored to something the app declares. The second half is new at this firing and is now in docs/LOOP.md's ADDRESS row and in loop/WORKER_PROMPT.md 3d. Both halves hold over all 51 open items.",
+  "four_decisions_settled_not_parked": [
+    "rank 1's L_std definition: the 30/150 pair retired, the class floor of the stock from docs/COLOR.md 5a adopted (8.0/60), the sample tiled across the object's own declared bounds and reported as a median with its pass fraction",
+    "rank 1's HF_std definition: struck from the item, because the committed tool reads the strip taken when the sheet WAS the blank rectangle above today's repaired one",
+    "rank 15 (was 11): the measurement moves from the screen to the token, with a population clause, and absorbs the one real legibility failure in the set",
+    "the per-class and per-condition flat-fill floor: written into docs/COLOR.md as 5a with its derivation"
+  ],
+  "the_rule": "loop/WORKER_PROMPT.md 3d. A measurement must be anchored to something the app declares -- a surfaces rect, a playhead, a `says` string, an event id, an asset path via a test. Two corollaries: a window is placed by the object and tiled; a count that can fall by the thing leaving the screen is paired with a population that cannot. And a ruler that scores a known defect above a known repair is disqualified.",
+  "coordinate_sweep": {
+    "open_measurements_read": 51,
+    "rewritten": 13,
+    "ranks_rewritten": [
+      1,
+      3,
+      9,
+      14,
+      15,
+      19,
+      20,
+      22,
+      23,
+      30,
+      31,
+      39,
+      50
+    ]
+  },
+  "re_filed": {
+    "from": "the-tear-gate-needs-eight-notes-and-the-screen-now-fits-seven",
+    "to": "the-chat-hero-must-fit-eight-notes-and-now-fits-seven",
+    "why": "docs/BRIEF.md states the eight-note floor verbatim at lines 223, 247, 271 and 295 as an exit condition. The gate is quoting the brief. The screen must fit eight; the ruler must not bend.",
+    "verified_against": "docs/BRIEF.md, read at this firing rather than taken on report"
+  },
+  "queue": {
+    "open": 51,
+    "closed": 42,
+    "superseded": 5,
+    "ranks": "1..51 contiguous, no gaps, no duplicates",
+    "open_points_total": 65.5,
+    "headroom": 45,
+    "by_owner_priority": {
+      "deprioritised-demo-content": 2,
+      "harness": 14,
+      "harness-that-unblocks-seeing": 7,
+      "the-ui": 23,
+      "using-it": 5
+    },
+    "top_ten": [
+      {
+        "rank": 1,
+        "id": "the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames",
+        "points": 6,
+        "owner_priority": "the-ui"
+      },
+      {
+        "rank": 2,
+        "id": "the-fold-clip-is-captured-after-the-fold-has-already-finished",
+        "points": 0.0,
+        "owner_priority": "harness-that-unblocks-seeing"
+      },
+      {
+        "rank": 3,
+        "id": "the-folds-floor-passes-a-blank-sheet",
+        "points": 0,
+        "owner_priority": "harness-that-unblocks-seeing"
+      },
+      {
+        "rank": 4,
+        "id": "flutter-analyze-exits-1-on-an-info-so-the-commit-gate-short-circuits",
+        "points": 0,
+        "owner_priority": "harness-that-unblocks-seeing"
+      },
+      {
+        "rank": 5,
+        "id": "a-runs-ink-is-the-glyphs-not-every-mark-near-it",
+        "points": 0,
+        "owner_priority": "harness-that-unblocks-seeing"
+      },
+      {
+        "rank": 6,
+        "id": "the-dusk-array-in-legibility-json-is-empty",
+        "points": 0,
+        "owner_priority": "harness-that-unblocks-seeing"
+      },
+      {
+        "rank": 7,
+        "id": "the-manifest-calls-a-refused-artifact-someone-elses-without-looking-at-the-clock",
+        "points": 0.0,
+        "owner_priority": "harness-that-unblocks-seeing"
+      },
+      {
+        "rank": 8,
+        "id": "a-pageerror-with-an-empty-message-cannot-name-the-artifact-it-failed",
+        "points": 0,
+        "owner_priority": "harness-that-unblocks-seeing"
+      },
+      {
+        "rank": 9,
+        "id": "the-chat-hero-must-fit-eight-notes-and-now-fits-seven",
+        "points": 1.0,
+        "owner_priority": "the-ui"
+      },
+      {
+        "rank": 10,
+        "id": "the-read-receipt-says-read-for-a-note-the-reader-has-never-seen",
+        "points": 3.0,
+        "owner_priority": "using-it"
+      }
+    ]
+  },
+  "no_code_written": "correct for this stage. Firing 18 ran ADDRESS and wrote none either. flutter analyze and flutter test were not run because nothing under app/ was touched.",
+  "next_stage": "IMPLEMENT. DESIGN is frozen until cycle 6 and is skipped."
+}
