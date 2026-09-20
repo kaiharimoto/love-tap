@@ -4902,3 +4902,27 @@ and `texture_budget` sitting outside the rule that put every other ruler inside 
 5. Then ADDRESS: rank 1's two definitions, rank 6's and rank 7's missing tools, rank 10, rank 11,
    the per-class floor in `docs/COLOR.md`, and a re-rank that places the four new harness items.
    DESIGN is frozen until cycle 6.
+
+## Firing 31 — DIAGNOSE (cycle 3)
+
+Step 0 passed, but not on the first try, and the shape is one this file already names twice.
+The container's checkout read **50 ahead and 50 behind** with an empty `git merge-base` — the
+signature WORKER_PROMPT §0 gives for both a graft boundary and firing 25's stale branch ref.
+`git fetch --deepen=60` left it at 110 and 110 with still no merge base, which is exactly where
+firing 25 concluded "stale ref" and reached for a reset. **That conclusion would have been wrong
+here.** One more deepen settled it:
+
+    git fetch --filter=blob:none --deepen=300 origin claude/app-improvement-autonomous-workflow-d6fwdu
+
+after which `merge-base --is-ancestor` returned true and the counts read **0 ahead, 268 behind** —
+an ordinary stale checkout, taken by `git merge --ff-only`, nothing reset and no tip dropped. The
+`--filter=blob:none` is why it was cheap: it fetches the commit and tree objects that decide
+ancestry and none of the 552 MB of blobs that do not. It returned in seconds where `--unshallow`
+is the expensive form firing 16 used.
+
+So §0 gains a line: **60 is not a deep enough deepen to tell a graft from a stale ref**, and a
+firing that stops at 60 will misdiagnose it in the direction of a destructive fix. Deepen with
+`--filter=blob:none` and a few hundred before believing the divergence is real.
+
+Lease taken for three hours, pushed before anything else was touched.
+
