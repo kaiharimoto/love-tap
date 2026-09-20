@@ -10,35 +10,35 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2577
+   "ms": 2679
   },
   {
    "do": "wait",
-   "ms": 2303
+   "ms": 2302
   },
   {
    "do": "shot",
-   "ms": 4224
+   "ms": 3070
   },
   {
    "do": "report",
-   "ms": 718
+   "ms": 711
   },
   {
    "do": "scrollSettings",
-   "ms": 1418
+   "ms": 1513
   },
   {
    "do": "wait",
-   "ms": 1604
+   "ms": 1603
   },
   {
    "do": "shot",
-   "ms": 1713
+   "ms": 2564
   },
   {
    "do": "report",
-   "ms": 718
+   "ms": 709
   }
  ],
  "shots": [
@@ -172,16 +172,16 @@
  "blob_waits": [
   {
    "at": "05_settings.png",
-   "waited_ms": 1491,
+   "waited_ms": 99,
    "pending_at_shot": 0
   },
   {
    "at": "05_settings_interrupt.png",
-   "waited_ms": 11,
+   "waited_ms": 3,
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 9031,
+ "cold_ms": 8101,
  "problems": [],
  "ok": true
 }

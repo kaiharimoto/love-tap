@@ -10,27 +10,51 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2305
+   "ms": 2304
   },
   {
    "do": "pair",
-   "ms": 945
+   "ms": 887
   },
   {
    "do": "wait",
-   "ms": 3703
+   "ms": 3705
   },
   {
    "do": "goTo",
-   "ms": 1249
+   "ms": 1275
   },
   {
    "do": "wait",
-   "ms": 1704
+   "ms": 1703
   },
   {
    "do": "frames",
-   "ms": 13498
+   "ms": 30443
+  },
+  {
+   "do": "far",
+   "ms": 501
+  },
+  {
+   "do": "frames",
+   "ms": 34184
+  },
+  {
+   "do": "far",
+   "ms": 501
+  },
+  {
+   "do": "frames",
+   "ms": 194692
+  },
+  {
+   "do": "goTo",
+   "ms": 1255
+  },
+  {
+   "do": "frames",
+   "ms": 50324
   },
   {
    "do": "far",
@@ -38,23 +62,7 @@
   },
   {
    "do": "frames",
-   "ms": 19604
-  },
-  {
-   "do": "far",
-   "ms": 505
-  },
-  {
-   "do": "frames",
-   "ms": 118296
-  },
-  {
-   "do": "goTo",
-   "ms": 1367
-  },
-  {
-   "do": "frames",
-   "ms": 28745
+   "ms": 160526
   },
   {
    "do": "far",
@@ -62,19 +70,11 @@
   },
   {
    "do": "frames",
-   "ms": 97669
-  },
-  {
-   "do": "far",
-   "ms": 501
-  },
-  {
-   "do": "frames",
-   "ms": 90950
+   "ms": 150648
   },
   {
    "do": "report",
-   "ms": 509
+   "ms": 520
   }
  ],
  "shots": [
@@ -134,29 +134,29 @@
   {
    "region": 1,
    "visible": [
-    "01M2XKV2HKJB6A40YVTJ0JQN5B",
-    "01M2XKVP4KCBER6P3KX4N6Y3R4",
-    "01M2XM07M99NKQ0HCJ9AA3T78Y",
-    "01M2XM37EX5BSCJSJW3QTS2N6K"
+    "01M2YCYMVQTX1S4MNYNMQW83W9",
+    "01M2YCZPQSKA5EFM1KPNN85E3W",
+    "01M2YD77RQCY8ESRAH503W82RC",
+    "01M2YDC51B8M01R6A9BZ2SY98Z"
    ],
    "tears": {
-    "01M2XKV2HKJB6A40YVTJ0JQN5B": "tear_001",
-    "01M2XKVP4KCBER6P3KX4N6Y3R4": "tear_020",
-    "01M2XM07M99NKQ0HCJ9AA3T78Y": "tear_043",
-    "01M2XM37EX5BSCJSJW3QTS2N6K": "tear_005"
+    "01M2YCYMVQTX1S4MNYNMQW83W9": "tear_001",
+    "01M2YCZPQSKA5EFM1KPNN85E3W": "tear_020",
+    "01M2YD77RQCY8ESRAH503W82RC": "tear_043",
+    "01M2YDC51B8M01R6A9BZ2SY98Z": "tear_005"
    },
    "stocks": {
-    "01M2XKV2HKJB6A40YVTJ0JQN5B": "receipt_01",
-    "01M2XKVP4KCBER6P3KX4N6Y3R4": "receipt_01",
-    "01M2XM07M99NKQ0HCJ9AA3T78Y": "receipt_01",
-    "01M2XM37EX5BSCJSJW3QTS2N6K": "spiral_03"
+    "01M2YCYMVQTX1S4MNYNMQW83W9": "lined_04",
+    "01M2YCZPQSKA5EFM1KPNN85E3W": "lined_01",
+    "01M2YD77RQCY8ESRAH503W82RC": "spiral_02",
+    "01M2YDC51B8M01R6A9BZ2SY98Z": "spiral_01"
    },
    "scroll": {
     "first": 0,
     "last": 3,
     "of": 4
    },
-   "now": "2026-09-19T20:02:06.193Z",
+   "now": "2026-09-20T03:24:52.669Z",
    "driven_ms": 5712,
    "seed": 20260903,
    "events": 8,
@@ -183,7 +183,7 @@
   }
  ],
  "blob_waits": [],
- "cold_ms": 1813,
+ "cold_ms": 941,
  "problems": [],
  "ok": true
 }

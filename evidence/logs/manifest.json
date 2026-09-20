@@ -1,39 +1,24 @@
 {
  "files": 687,
- "entries": 819,
+ "entries": 805,
  "without_an_entry": [],
  "without_an_entry_count": 0,
  "entries_without_a_file": [],
  "entries_without_a_file_count": 0,
- "entries_for_files_outside_the_library": [
-  "scratch/dusk/lined_01_dusk.webp",
-  "scratch/posters/2025-09_market_awning.jpg",
-  "scratch/posters/2025-10_pigeon_cupboard_clip.jpg",
-  "scratch/posters/2025-11_rain_window_night.jpg",
-  "scratch/posters/2025-12_window_lights_sleet.jpg",
-  "scratch/posters/2026-01_boiler_noise.jpg",
-  "scratch/posters/2026-02_soup_pot.jpg",
-  "scratch/posters/2026-03_oven_light.jpg",
-  "scratch/posters/2026-04_canal_boats_pass.jpg",
-  "scratch/posters/2026-04_washing_line_wind.jpg",
-  "scratch/posters/2026-05_boiler_gauge.jpg",
-  "scratch/posters/2026-06_fan_ribbon.jpg",
-  "scratch/posters/2026-07_boat_wake.jpg",
-  "scratch/posters/2026-08_rain_canal.jpg"
- ],
- "entries_for_files_outside_the_library_count": 14,
+ "entries_for_files_outside_the_library": [],
+ "entries_for_files_outside_the_library_count": 0,
  "entries_whose_file_is_not_under_assets": {
   "count": 118,
   "note": "resolved at the repository root, or a directory entry, or an exempt index file: on disk, and not a fault"
  },
  "naming_a_generator_that_cannot_build_them": [],
- "checked_against_a_catalogue": 459,
+ "checked_against_a_catalogue": 458,
  "no_catalogue_to_check_against": {
   "blender/paper/tear_relief.py": 168,
-  "blender/photos/still.py + blender/photos/develop.py": 128,
+  "blender/photos/still.py + blender/photos/develop.py": 115,
   "blender/shell/desk.py": 2,
   "tools/handwriting/build.py": 5,
   "tools/tears/tear.py": 57
  },
- "ok": false
+ "ok": true
 }
