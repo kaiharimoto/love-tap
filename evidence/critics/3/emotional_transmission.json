@@ -1,0 +1,130 @@
+{
+  "critic": "emotional_transmission",
+  "cycle": 3,
+  "score": 12.5,
+  "floor": 17,
+  "meets_floor": false,
+  "findings": [
+    {
+      "artifact": "01_pulse.png",
+      "severity": "blocking",
+      "subsystem": "partner state / signal rendering",
+      "where": "the partner's sheet, the top third, under the status line",
+      "what": "All twelve partner signals are rendered as a handwritten label-value table -- MOOD bright / HERE open / PLACE travelling / NEEDS a lot / HAS LEFT a little / BATTERY 72% / LAST UP just now / THEIR CLOCK 11:00 / RINGER normal / MOVING still / SIGNAL wifi / AT HOME yes -- on one uniform paper stock, in one ink weight, with no material differentiation of any kind.",
+      "why": "Half of this row is whether the other person's inner state arrives as a sensation; here it arrives as a device status panel set in a nice font, which is exactly 'a message in a different colour'. SIGNALS.md promises a pencil worn to a stub for battery, tape over the corner for a silent ringer, the strip sitting askew when they are walking, a house doodle in the margin when they are home, the corner folded over by need, pen pressure by energy, and the paper stock itself chosen by mood -- none of that is present in the artifact. The same table drives the partner strip on all six regions, so the failure is systemic, not local.",
+      "root_cause": "The signal layer was implemented as a data model and a text formatter; the material renderings described in SIGNALS.md were specified but never built, and nothing in the capture set would have caught the gap because no check measures 'is this signal drawn or written'.",
+      "correction": "Render at least the seven passive signals as the objects SIGNALS.md already specifies (pencil stub for battery, plug doodle for charging, tape for silent, askew strip for walking, radio mast for cellular, house doodle for at_home, ink wetness for last_active) and make need fold the sheet's corner and energy change the pen pressure of the handwriting, then re-capture 01_pulse. Keep words only for status_line and place."
+    },
+    {
+      "artifact": "MANIFEST.json (whole set), 05_settings_interrupt.png",
+      "severity": "blocking",
+      "subsystem": "ambient presence surfaces",
+      "where": "absent from every artifact in the set",
+      "what": "Not one ambient presence surface appears anywhere: no widget, no standing notification, no lock screen, no pocket pulse. The strings 'widget', 'notification', 'pocket' and 'ambient' occur in none of the eleven rendered-text sidecars. 05_settings_interrupt.png configures what may interrupt across thirteen event kinds but shows no surface that any of it would appear on.",
+      "why": "The row's floor names three ambient presence surfaces and asks for a state change that reaches the other device without the app being opened; the evidence shows zero surfaces and no closed-app arrival. evidence/logs/webpush.txt proves the RFC 8291 envelope round-trips and carries only {kind, from}, which is the transport, not the surface -- a correct push with nothing drawn on the other end is still an absence.",
+      "root_cause": "Ambient surfaces are Android-shaped in the design (widget, standing notification), the Android capture route is dead in this container, and no PWA-side substitute capture was scripted -- but a PWA standing notification is capturable in WebKit and no scene attempts it.",
+      "correction": "Add one scene that drives a push to the WebKit client with the page hidden and shoots the resulting notification, and a second that shoots the installed PWA's pocket-pulse/peripheral surface. Record the Android widget as unobtainable here with its reason rather than leaving all three surfaces unevidenced."
+    },
+    {
+      "artifact": "05_settings.png, 15_authored_feeling.mp4 (crops/15_authored_feeling_strip.png)",
+      "severity": "serious",
+      "subsystem": "authored feelings / stroke engine",
+      "where": "05_settings.png, the 'FEELINGS YOU MADE' block; strip frames 4-6",
+      "what": "The two authored feelings, 'pigeon by noor' and 'tuesday soup by teo', are the same two-stroke squiggle drawn twice, differing only in ink colour (navy vs brown); in the thread the authored object is a flat uniform-width vector stroke with no contact shadow, sitting one row away from built-ins (obj_clover, obj_coffee_ring, obj_margin_sun) that carry baked shadows and real form.",
+      "why": "The row requires a feeling someone made to behave exactly like a built-in everywhere it appears. The plumbing parity is genuinely shown -- same drawer, same tray, same torn sheet in the thread, same 'Thu 3 Sep - waiting to send' delivery line -- but the object itself is a visibly lower tier, and two authored feelings told apart by colour alone is the one thing FEELINGS.md explicitly forbids ('no two are told apart by colour alone'). Beyond that, 'pigeon' and 'soup' appear in no other artifact: not in 02_chat, not in 04_moments, not in 12_search, so parity in the remaining paths is asserted and not shown.",
+      "root_cause": "The finger-drawing stroke engine emits flat constant-width paths with no pressure, no paper tooth and no shadow pass, so an authored object can never reach the material standard of a rendered obj_* asset; and the authoring flow lets two feelings ship with near-identical marks because nothing measures visual distance the way tools/check/haptics.py measures haptic distance.",
+      "correction": "Run authored strokes through the same lighting and shadow bake the rendered objects get, and add a visual-distance check on the authored mark mirroring the 2.0 JND haptic floor so two squiggles that differ only in ink are refused. Then capture one authored feeling in Moments and in a search result."
+    },
+    {
+      "artifact": "07_feeling_landing.mp4 (crops/07_feeling_landing_strip.png, scenes/07_feeling_landing.json, logs/07_feeling_landing.report.json)",
+      "severity": "serious",
+      "subsystem": "evidence capture / scene scripting",
+      "where": "the whole clip",
+      "what": "The clip named 'a feeling arriving on the receiving device' records a departure, not an arrival: its scene is openCorner -> sendFeeling hold -> sendFeeling squeeze -> closeCorner on a single device whose report says \"link\": \"connecting\", the drawer covers the sheet for the entire send, and the object row on the Pulse sheet is identical in the first strip frame and the last.",
+      "why": "This is one of the two clips the row is explicitly judged on, and it contains no receiving device and no landing. 08_state_propagating.mp4 does show a real arrival from a real far end, so the category is not left with nothing -- but the artifact that carries the word 'landing' in its name cannot be used to answer the question it was made to answer.",
+      "root_cause": "07 was scripted before the pair/far harness used in scene 08 existed, and was never rewritten against it; sendFeeling on an unpaired client is a local send with no far end to land on.",
+      "correction": "Rewrite scenes/07_feeling_landing.json to use 'pair' then 'far feeling <id> <intensity>' as scene 08 does, keep the corner closed, and hold the camera on Pulse and then the thread so the drop, the shadow-before-object and the sheet's rock are all on screen."
+    },
+    {
+      "artifact": "07_feeling_landing.mp4 and 15_authored_feeling.mp4 (both strips, frames 2-5)",
+      "severity": "serious",
+      "subsystem": "feeling sender / drawer compositing",
+      "where": "the open corner drawer, over the whole sheet",
+      "what": "The drawer is a semi-transparent dark scrim and the page underneath reads straight through it: 'ACHE' sits on top of 'room smells right', 'STATIC' over 'their clock 11:00 normal', 'SPARKLE' over 'wifi yes', and in the 15 clip the thread text 'two stops. put the kettle on' shows through the tray.",
+      "why": "This is the app's primary emotional surface -- the one place all thirty-four feelings are chosen from -- and the family names, which are the whole navigation of the vocabulary, are laid over live body text. It makes the widest part of the emotional layer the least legible part of the app.",
+      "root_cause": "The drawer is composited as an alpha overlay on the live region rather than as an opaque surface lifted off the desk, so no amount of scrim darkening removes the underlying glyphs.",
+      "correction": "Make the drawer an opaque paper surface with its own tear and its own cast shadow over the region, or blur the region behind it to destroy glyph edges rather than just darkening it."
+    },
+    {
+      "artifact": "11_chat_scroll.mp4 (crops/11_chat_scroll_strip.png, frames 4-6)",
+      "severity": "serious",
+      "subsystem": "partner state / in-thread state strips",
+      "where": "the thin torn strips between notes",
+      "what": "Passive partner-state signals land in the thread as strips truncated mid-word with the timestamp printed after the ellipsis and a wide empty margin to the right of it -- \"you's phone ...  Wed 22 Apr - 07:09\", \"said of the l...  07:10\", \"noor's phone is o...  07:55\" -- and one of them renders the possessive of 'you' as \"you's\".",
+      "why": "Twelve legible partner-state signals is a floor of this row. In the thread, where most of them actually surface across a year, the majority cannot be read at all, and the one word that is fully legible is ungrammatical. A signal you cannot read is not a signal.",
+      "root_cause": "The strip label is clipped to a fixed character budget computed independently of the strip's real width, and the label is assembled by concatenating a person token with \"'s\" without a special case for the second person.",
+      "correction": "Size the label to the space actually left after the timestamp and let it wrap to a second line rather than clipping, and special-case the second person so the string reads 'your phone'."
+    },
+    {
+      "artifact": "17_setup_pwa.png (and the whole WebKit-captured clip set)",
+      "severity": "serious",
+      "subsystem": "iOS haptic substitute",
+      "where": "nowhere in the evidence",
+      "what": "Nothing in the artifact set shows or names the non-haptic substitute. 17_setup_pwa.png is a six-step install checklist that never mentions it; no setting exposes it; the words 'rhythm', 'haptic', 'vibrate' and 'sound' appear in none of the eleven rendered-text sidecars. Every clip in the set was captured in WebKit -- these already are the PWA -- and the six-frame strips are 1.6 s apart while FEELINGS.md's page rhythm for 'hold' is 900/100/900 ms, so the substitute cannot be confirmed or denied from what is on disk.",
+      "why": "The row calls this the hard one and asks whether the substitute reads as a deliberate physical thing or as a missing feature. With no frame series in frames.json and no still or text that marks the substitute as designed, I cannot confirm it runs, and the two people using this build would meet it, if at all, as silence where the Android phone buzzes.",
+      "root_cause": "frames.json records only aggregate motion (mean_change_per_frame, still runs); no capture step samples the sheet's vertical offset over time, which is the one measurement that would make the page rhythm checkable at all.",
+      "correction": "Emit a per-frame sheet-offset series for 07 and 08 alongside frames.json so the lift-and-settle envelope can be compared against the feeling's own on/off timings, and put one line in 17_setup_pwa naming what this phone does instead of vibrating, so the substitute is legible as a choice."
+    },
+    {
+      "artifact": "all eleven *.surfaces.json sidecars",
+      "severity": "minor",
+      "subsystem": "feeling object vocabulary / evidence coverage",
+      "where": "assets/objects/obj_* placements across the set",
+      "what": "Only five of the thirty-four named feeling objects appear anywhere in the still evidence -- obj_candle, obj_confetti, obj_gold_star, obj_clover, obj_coffee_ring -- and of those, all but the two on Pulse are placed off-canvas (obj_gold_star sits at y=5753 in a 3120-tall frame, obj_confetti at y=-2252 in 12_search and y=-3568 in 13_messenger_states). The drawer in 07 and 15 only ever shows the Warmth family open; the other twenty-eight feelings are never pictured.",
+      "why": "haptics.json makes a strong case that thirty-four feelings are distinguishable in the hand (34 distinct objects, 34 distinct haptic sequences, 561 pairs none closer than 2.584 JND against a 2.0 floor). The pictures support six of them. The breadth of the vocabulary is measured but not shown, which is the weakest part of an otherwise well-evidenced claim.",
+      "root_cause": "No scene scrolls the drawer through its families, and the stills were framed for their own subjects without regard to whether a feeling object fell inside the viewport.",
+      "correction": "Add one still of the drawer scrolled to show all six families expanded, or a contact sheet of the thirty-four objects lit by the same rig, captured by the harness rather than assembled by hand."
+    },
+    {
+      "artifact": "11_chat_scroll.mp4 (strip frame 6), 02_chat.png",
+      "severity": "minor",
+      "subsystem": "reactions / hero coverage",
+      "where": "the corner of 'There was a boat.'; and the whole of 02_chat.png",
+      "what": "The reaction stuck to 'There was a boat.' is a small yellow square bearing a red-biro smiley, which is the nearest thing in this build to an emoji on a post-it; and 02_chat.png, the hero of the set, contains seven text notes, two state strips and not one feeling (its single obj_gold_star is placed at y=5753, off the bottom of the frame).",
+      "why": "The reaction is physical in its mounting but its mark is a stock smile rather than one of the thirty-four objects, which brushes the 'no emoji soup' anti-goal; and the screen most likely to be looked at first shows none of the layer the app exists for.",
+      "root_cause": "The reaction renderer falls back to a generic face for reaction kinds that do not map to a feeling id, and 02_chat's scroll position (0.62 of the thread) happens to land on a stretch of pure text.",
+      "correction": "Render every reaction as the dropped feeling's own object, and pick a scroll position for 02_chat that puts at least one feeling and one reaction in frame."
+    },
+    {
+      "artifact": "haptics.json vs docs/FEELINGS.md",
+      "severity": "minor",
+      "subsystem": "vocabulary documentation",
+      "where": "the confetti row of the FEELINGS.md table; the family id in haptics.json",
+      "what": "FEELINGS.md's prose says confetti was re-scattered to clear the 1.83 JND collision with stuck_with_me, and haptics.json confirms the shipped sequence is the scattered one, but the table four paragraphs below still prints the old amplitude arch; separately haptics.json reports the Static family id as 'static_' and mangles two feeling names to '\"it' and '\"i'.",
+      "why": "Small, but the table is the document a person would read to learn the vocabulary, and it disagrees with the code on the one row the same document singles out as having changed. The 'static_' and truncated names show the extractor is parsing Dart source by hand rather than reading a structured export.",
+      "root_cause": "The table is maintained by hand while haptics.json is generated; the extractor splits on quote characters, so a Dart trailing-underscore keyword escape and any name containing an apostrophe survive into the measurement file.",
+      "correction": "Generate the FEELINGS.md table from the same source haptics.json reads, and have the extractor parse names and family ids properly so 'static_', '\"it' and '\"i' become 'static', \"it's okay\" and \"i'll make you tea\"."
+    },
+    {
+      "artifact": "09_two_devices.png, 16_setup_android.png",
+      "severity": "minor",
+      "subsystem": "capture environment",
+      "where": "absent",
+      "what": "Both are genuinely missing: with no /dev/kvm the x86_64 image runs under QEMU instruction emulation, adbd answered after 113 minutes but the framework never came up, so no APK could be installed and no second screen existed. Recorded here once, not penalised again.",
+      "why": "It costs this row three specific judgements that cannot be made from anything else in the set: whether Android and the iOS PWA read as one thing in one frame, whether the PWA reads as a reduced edition beside the Android app, and what the Android widget and standing notification actually look like when a feeling lands on them. Those go unjudged rather than judged badly.",
+      "root_cause": "Hardware: no nested virtualisation in this container, and no GTK for a desktop build to stand in as a second screen. Not a build defect.",
+      "correction": "None available here. On any host with /dev/kvm the existing capture route produces both."
+    }
+  ],
+  "what_is_working": [
+    "A built-in feeling genuinely arrives as an object. In 08_state_propagating the candle for 'hold' drops onto the partner's sheet at Pulse tilted, lit from the rig's direction and throwing a long cast shadow, then stands on its own torn sheet in the thread with a contact shadow and its name in small hand underneath. In 11_chat_scroll 'goodnight' is a blue biro crescent on punched loose-leaf, sheet-sized and quiet. Nothing about either reads as an icon or as a bubble in another colour. This is the build at its best and should not be disturbed.",
+    "The discrimination measurement is the most serious piece of work in the evidence set. Thirty-four feelings, six named families, thirty-four distinct objects and thirty-four distinct haptic sequences, all 561 pairs measured in just-noticeable differences over six perceptual terms with the closest at 2.584 against a stated floor of 2.0 and nothing under it. It turns 'identifiable face down' from a claim into a number, and FEELINGS.md is candid that 2.0 is a convention rather than a measured threshold and that the forced-choice run on real hardware is still owed.",
+    "Colour is deliberately reused -- twenty-one hues across thirty-four feelings, with #3a3a3c and #a8322b each carrying four -- so nothing in the vocabulary can be told apart by colour alone. That is the anti-goal taken seriously in the data model rather than in prose.",
+    "The feeling sender is a physical drawer. Six family strips torn from real stock, a tray of objects laid on the desk beneath them with their names in the partner's hand, and it opens from a folded corner present at the bottom right of Pulse, Chat, Us, Moments and Settings alike -- one gesture from any region, as the floor asks.",
+    "State changes reach both regions from a real far end. Scene 08 pairs, then drives 'far state mood restless', 'far feeling hold 0.92', 'far message', 'far feeling squeeze 0.6' with the report showing \"link\": \"connected\", and the change shows up as the paper stock and words on the partner strip at Pulse and as a torn 'noor is restless Sun 20 Sep - 10:59' strip in the thread. The partner strip itself is on every one of the six region stills.",
+    "A feeling crosses a real Tailscale link in both directions. coldstart.json records two userspace nodes with distinct node keys, a direct path, and feeling events arriving at seq 2 and seq 4 in the same order on both spines; webpush.txt shows the RFC 8291 record round-tripping with a 32-byte payload carrying only kind and sender. reliability.json's search capability reports hits typed 'feeling' and 'state_declared', which is machine evidence that feelings sit in the same log and the same index as everything else.",
+    "The empty state is honest and in voice. 08's first frame reads 'nothing from them yet. it will show here. their phone tells this one where they are, once it can reach it' -- no exclamation mark, no product voice, no invented data standing in for a partner who is not there yet.",
+    "05_settings_interrupt gives 'a feeling' and 'a feeling one of you made' their own rows in a thirteen-kind wake me / quietly / not at all list, with no badges, no streaks and no guilt anywhere in the set."
+  ],
+  "verdict": "For a built-in feeling on a paired device, the answer to this row's question is yes: in 08_state_propagating and 11_chat_scroll a feeling arrives as a lit object that drops onto paper and casts a shadow, chosen from a physical drawer of six named families reachable by a folded corner on every region, backed by the most serious measurement in the evidence set -- thirty-four feelings, 561 pairs, none closer than 2.584 JND against a floor of 2.0. But this row is equally about whether the other person's inner state is continuously legible as a sensation, and there it fails outright: 01_pulse renders all twelve signals as a handwritten label-value table (BATTERY 72%, RINGER normal, SIGNAL wifi, AT HOME yes) with none of the material renderings SIGNALS.md specifies, which is precisely a message in a different font, and in the thread those same signals arrive truncated mid-word as 'you's phone ...'. Not one of the three required ambient presence surfaces exists anywhere in the set; the clip named 07_feeling_landing is scripted as two sends on an unpaired device and contains no arrival; authored feelings send down the same path and land on the same sheet as built-ins but are two near-identical squiggles told apart by ink colour alone, the one thing the vocabulary's own rules forbid; and the iOS non-haptic substitute is described in FEELINGS.md and shown nowhere, unconfirmable from a six-frame strip sampled 1.6 s apart. 09_two_devices.png is genuinely absent for want of /dev/kvm, which costs three judgements this row would otherwise make and is counted once. The feeling half of the emotional nervous system is real and good; the state half is a dashboard and the ambient half is not there, so the category sits below its floor."
+}

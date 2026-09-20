@@ -1,0 +1,161 @@
+{
+  "critic": "coherence",
+  "cycle": 3,
+  "score": 11.0,
+  "floor": 13,
+  "meets_floor": false,
+  "scope": "I am judging only the half of this row that is visible in the artifacts. The code half - whether one event log, one theme source and one module registry actually exist behind these pictures - is not visible to me and I have scored the visible half out of the full weight of 15 as instructed.",
+  "findings": [
+    {
+      "artifact": "13_messenger_states.png",
+      "severity": "major",
+      "subsystem": "paper surface system / message card component",
+      "where": "the thread, x 60-1115, y 1072-1328, between 'noor needs a lot' and 'left the key under the pot'",
+      "what": "One card in the thread is a flat pale-pink ruled rectangle with dead-straight edges, square corners and a hard uniform offset drop shadow, containing no text and no label, while every other card on the same screen is torn paper with a fibrous edge.",
+      "root_cause": "It is not drawn by the paper system at all. 13_messenger_states.surfaces.json lists 52 surfaces and not one of them intersects that rectangle - the nearest entries are tear_039/looseleaf_02 ending at y 1040 and tear_035/looseleaf_03 starting at y 1344. Every other card is a paper asset paired with a tears/tear_NNN_shadow mask; this one is a bare filled box with a box-shadow. It is almost certainly the 'taken back' state, rendered as a blank sheet, but rendered outside the material system and with no word saying so.",
+      "correction": "Draw the taken-back card through the same paper + tear-mask path as every other card, and label it in words the way 'read', 'going', 'waiting to send' and 'it would not go' are labelled. A blank sheet where the words used to be is a good idea; a square-cornered rectangle with a drop shadow is the one shape the visual concept forbids.",
+      "also_visible_in": ["04_moments.png", "06_unfolding.mp4", "08_state_propagating.mp4"]
+    },
+    {
+      "artifact": "04_moments.png",
+      "severity": "major",
+      "subsystem": "Moments / archive over the one event log",
+      "where": "the right column at 23 Aug 26, 18 Aug 26 and 8 Aug 26, and the equivalent sheets elsewhere in the masonry",
+      "what": "Not one word of any message appears anywhere in Moments: written events render as blank ruled sheets carrying only a date, while photographs carry a date and voice notes carry a duration.",
+      "root_cause": "04_moments.text.json confirms it - all 33 text runs on the screen are chrome (the three filter rows, the person filter, the nav) plus dates and durations. The body of a written event is never composed into the archive tile. The tiles are the same straight-edged pale-pink ruled card as the blank card in 13_messenger_states, so this is most likely the same component failing the same way.",
+      "correction": "Render the note's own hand (NoorHand or TeoHand, as Chat does) into the Moments tile, clipped to the tile, so the same sentence is recognisable in Chat, in Moments and in Search. Until then the archive is a filtered view over the photographs and the voice notes only.",
+      "rubric_bullet": "the same event appearing consistently wherever it should, across Chat, Moments and Us"
+    },
+    {
+      "artifact": "03_us.png",
+      "severity": "major",
+      "subsystem": "Us / shared-life modules",
+      "where": "the whole screen - one DATES tab at the top, then AHEAD and BEEN, then empty sheet to the bottom nav",
+      "what": "The Us region shows one module, Dates, and offers no visible way to reach any other; the four shared-life modules the goal names cannot be seen.",
+      "root_cause": "The rest of the system plainly knows about the other modules - 12_search offers DATES and THE LIST as separate filters, and 05_settings_interrupt enumerates 'a date moving', 'the list moving' and 'a day that matters' as distinct event kinds - so the modules exist as event kinds but the region that is supposed to present them presents one. 03_us.surfaces.json has 30 surfaces, the second-smallest count of any full region screen.",
+      "correction": "Put the module tabs on the Us screen as a real row (the DATES card already reads as a tab; give it siblings), so the artifact shows four modules sharing one region rather than one module occupying it. This is the single clearest extensibility claim the evidence set could make and it currently makes the opposite one."
+    },
+    {
+      "artifact": "12_search.png",
+      "severity": "major",
+      "subsystem": "shell chrome / search region",
+      "where": "top and bottom of the screen; and the filter stack from y 430 to y 2290",
+      "what": "Search is the only non-overlay screen in the set with neither the persistent partner-state band nor the five-tab nav, and twelve full-width filter strips occupy roughly 70 percent of the height, leaving one and a half results of which the second is cut by the bottom edge.",
+      "root_cause": "12_search.text.json contains no 'week one, and the room smells right again' run and no PULSE/CHAT/US/MOMENTS/SETTINGS runs, whereas 01, 02, 03, 04, 05, 10, 13 and 17 all contain both. Search appears to be built as a full-screen takeover rather than as a region of the same shell. The filter strips reuse the stacked torn-strip component from the feeling list in 07_feeling_landing.mp4, which is good reuse, but at full width and full count it becomes the screen.",
+      "correction": "Keep the band and the nav on Search as on every other screen, and collapse the twelve filters to a wrapped row or a single 'looking in' line that opens, so results get the page.",
+      "rubric_bullet": "partner state legible on every screen rather than only on Pulse"
+    },
+    {
+      "artifact": "05_settings.png",
+      "severity": "major",
+      "subsystem": "pairing state / partner telemetry",
+      "where": "THE TWO PHONES block, 'not paired yet.' with 'LINK  connecting'",
+      "what": "Settings states the two phones are not paired and the link is still connecting, while 01_pulse simultaneously reports the partner's battery at 72 percent, their clock at 11:00, ringer normal, signal wifi, at home yes and last up 'just now', and 13_messenger_states shows 'read' double-ticks and 'noor writing...'.",
+      "root_cause": "Two different sources of truth for the connection, or a seeded demo state that was not propagated to the settings block. Either way the artifact set asserts both that the partner is reachable and that the partner has never been paired.",
+      "correction": "Drive the pairing block from the same connection state the telemetry and the delivery receipts come from. If the intent was to show the pairing affordances, capture them on an unpaired device (as 10_first_run and 17_setup_pwa correctly do) rather than on the paired one."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "minor",
+      "subsystem": "Chat thread layout / event rendering",
+      "where": "the top row at y ~402 under the status band, and the bottom state row at y ~2648",
+      "what": "The topmost thread row, 'noor went out  Wed 22 Apr - 15:50', is sliced horizontally through the middle of its glyphs by the edge of the status band; and the bottom state row reads 'one hour, then stop - Thu 23 Apr   Wed 22 Apr - 16:50', two unseparated and apparently contradictory dates on one line.",
+      "root_cause": "The scroll's top inset does not clear the overlaid band, so the first row is occluded rather than scrolled free - and 02_chat.text.json reports clipped 0, because the occlusion is a paint-order problem rather than a text-box clip, so the harness's own clipping check cannot see it. The double date looks like a scheduled-until value rendered beside the event timestamp with no label between them.",
+      "correction": "Inset the thread by the band's height, and label the second date ('until Thu 23 Apr') so the row stops reading as two conflicting timestamps for one event. This is the hero still; both defects are in it."
+    },
+    {
+      "artifact": "17_setup_pwa.png",
+      "severity": "minor",
+      "subsystem": "paper surface system / setup region",
+      "where": "the top edge of the main sheet, y 380-700; and the bottom nav",
+      "what": "The sheet's tear is a fine fibrous edge sitting on top of a visibly blocky stair-stepped shadow mask with roughly 30-pixel square steps, so the paper's edge and the paper's shadow are made of different resolutions; separately the nav highlights CHAT while the screen shows the PWA setup checklist, and the top fifth of the sheet is empty.",
+      "root_cause": "17_setup_pwa.surfaces.json carries only 2 tear masks against 7 paper surfaces, the leanest ratio of any screen (02_chat has 44 against 51), which fits a region finished to a lower standard than the ones the hero shots cover. The nav highlight looks inherited from the chat route the setup screen is presented over.",
+      "correction": "Use the same resolution tear shadow as the chat cards, and either give the setup screen its own nav state or suppress the highlight while a checklist is showing.",
+      "rubric_bullet": "one visual language holding across all five regions - the same stock, hands, light and marks"
+    },
+    {
+      "artifact": "04_moments.png",
+      "severity": "minor",
+      "subsystem": "text compositing",
+      "where": "the 63s voice chip at x 130-440, y 1290-1400; the same effect on the 'the second one' card in 03_us.png",
+      "what": "A faint low-opacity ghost of some other text sits behind and around the duration numeral on the voice chip, and the same grey ghosting appears behind the planned-date card in Us.",
+      "root_cause": "Looks like a second text pass (an emboss, impression or shadow layer) drawn at low alpha and offset from, or unaligned with, the glyphs it belongs to - or an underlying note's text bleeding through a semi-transparent chip.",
+      "correction": "Align or remove the second pass. It is small, but it appears in two different regions, which makes it a shared-component defect rather than a one-screen blemish."
+    },
+    {
+      "artifact": "14_media_viewer.png",
+      "severity": "minor",
+      "subsystem": "media presentation",
+      "where": "the top quarter of the image, y 115-330",
+      "what": "The viewer's photograph is a square-cornered rectangle laid straight on the desk with no paper mount, and its upper quarter is a perfectly flat dark grey band meeting the wood at a hard horizontal line, which reads as an unloaded tile rather than as part of the picture.",
+      "root_cause": "The band is part of the render (a dark wall) but it is flat enough to be indistinguishable from a failed load, and in Moments the same photographs are mounted on paper with torn edges, so the viewer presents media in a different language from the archive that opens it.",
+      "correction": "Mount the opened photograph the way Moments mounts the thumbnail, and either crop or light the dark band so it cannot be mistaken for a missing texture."
+    },
+    {
+      "artifact": "09_two_devices.png, 16_setup_android.png",
+      "severity": "minor",
+      "subsystem": "evidence set / platform parity",
+      "where": "absent from the capture",
+      "what": "Both Android artifacts are missing, so the rubric bullet 'both platforms serving the same regions, the same feelings, the same events' has no evidence behind it at all; every screen in this set is the one platform.",
+      "root_cause": "MANIFEST.json records the reason and it is a hardware fact, not a build defect: with no /dev/kvm the x86_64 image runs under instruction emulation, adbd answered after 113 minutes but the framework never came up, and there is no GTK for a desktop build to stand in. The note explicitly states neither was faked from the PWA, which is the right call.",
+      "correction": "None available here. I record the absence once and do not score it twice; but I also cannot credit platform parity I have not seen, and that is part of why this row does not reach its floor.",
+      "penalised_once": true
+    },
+    {
+      "artifact": "MANIFEST.json, DIFF.json",
+      "severity": "minor",
+      "subsystem": "capture harness bookkeeping",
+      "where": "MANIFEST 'missing' block; DIFF.json label_basis strings",
+      "what": "MANIFEST lists 13_messenger_states under 'missing' with an empty reason while the same artifact is in 'artifacts' with from_this_run true, so 14 present plus 4 missing reads as 18 against a set of 17; and DIFF.json attaches the boilerplate label_basis 'at or above it, nothing a person would see has moved' to all seven rows labelled changed, where it asserts the opposite of the label it is explaining.",
+      "root_cause": "Two independent formatting bugs in the tools that describe the evidence rather than in the evidence. The MANIFEST entry is keyed on the bare scene name rather than the filename; the label_basis template is emitted unconditionally without branching on the comparison it just made.",
+      "correction": "Key the missing block on filenames and drop entries that also appear in artifacts; branch the label_basis sentence on the comparison. A set that cannot count itself is a small thing to fix and a real drag on how much any of these numbers can be trusted.",
+      "note": "13_messenger_states.png is present and complete and I have judged it as present."
+    }
+  ],
+  "what_is_working": [
+    "One persistent partner band across the top of Pulse, Chat, Us, Moments and Settings, carrying the partner's own words plus TRAVELLING / NEED / ENERGY - and degrading correctly to NEED / ENERGY with no partner line on the two screens where no partner exists yet (10_first_run.png, 17_setup_pwa.png). Six of the eight region screens keep partner state legible without being Pulse. Do not let this band be dropped from any further screen.",
+    "Two named hands used as identity. 01/02/03/12's text.json all show NoorHand for one person, TeoHand for the other, DeskStamp for every machine label, and the assignment holds in Chat, in Us ('the boat to the island' and 'we would do that again tomorrow' in NoorHand, the reply in TeoHand), in the header band and in Pulse. You can tell who said a thing in any region without a name being printed. This is the strongest coherence device in the build.",
+    "State events live inside the chat thread rather than beside it: 'noor went out', 'noor - travelling', 'noor needs a lot', 'noor is restless', 'you got in', 'noor - work' all appear as rows in the same scroll as the messages, in 02_chat.png, 13_messenger_states.png, 06_unfolding.mp4, 08_state_propagating.mp4 and 11_chat_scroll.mp4. The one-event-log claim is shown, not asserted.",
+    "08_state_propagating.mp4 carries a single event across two regions in one unbroken take - 'nothing from them yet' becomes a partner card reading restless, the header band changes to 'restless', and the same event then appears in the Chat thread as 'noor is restless  Sun 20 Sep - 10:59'. This clip alone answers the central question of this rubric row in the affirmative.",
+    "15_authored_feeling.mp4 shows a feeling one of them made ('pigeon') sitting in the same row as WARMTH, ACHE, SHELTER, MISCHIEF, STATIC and SPARKLE, then entering the thread carrying 'waiting to send' - the same delivery vocabulary an ordinary message uses in 13_messenger_states.png. An authored thing and a built-in thing are indistinguishable at the point of use.",
+    "05_settings_interrupt.png enumerates thirteen event kinds - a picture, something to watch, their voice, an answer to something of yours, a feeling, something they say about themselves, something their phone notices, a date moving, the list moving, a day that matters, passed on, a note set to arrive later, a feeling one of you made - each with wake me / quietly / not at all. That taxonomy maps cleanly onto the regions and is the best extensibility evidence in the set, better than any screenshot of a module.",
+    "One five-tab nav with a consistent raised-active tab, present on every region screen, always in the same order and the same stamp face.",
+    "crops/dusk_pulse.png re-lights the identical Pulse layout at a different hour with the light coming from the same direction and the shadows lengthening consistently - one lighting system, not two renders.",
+    "Small cross-region rhymes that would be easy to break: the chair mark appears both as a feeling tile in the Pulse row and as a drawn 'empty chair' note in the thread in 13_messenger_states.png and 06_unfolding.mp4; the stacked torn-strip list is one component serving both the search filters and the feeling list.",
+    "The refusal to fake 09 and 16. MANIFEST records what was measured, how long adbd took and why no desktop build could stand in, and says outright that neither was faked from the PWA. An honest hole is worth more to this row than a convincing composite."
+  ],
+  "diff_judgements": {
+    "01_pulse.png": "unchanged",
+    "02_chat.png": "unchanged",
+    "03_us.png": "unchanged",
+    "04_moments.png": "improved",
+    "05_settings.png": "unchanged",
+    "06_unfolding.mp4": "improved",
+    "07_feeling_landing.mp4": "improved",
+    "08_state_propagating.mp4": "improved",
+    "09_two_devices.png": null,
+    "10_first_run.png": "unchanged",
+    "11_chat_scroll.mp4": "improved",
+    "12_search.png": "unchanged",
+    "13_messenger_states.png": "improved",
+    "14_media_viewer.png": "unchanged",
+    "15_authored_feeling.mp4": "improved",
+    "16_setup_android.png": null,
+    "17_setup_pwa.png": "unchanged"
+  },
+  "diff_judgement_counts": {
+    "improved": 7,
+    "unchanged": 8,
+    "regressed": 0,
+    "absent_left_null": 2
+  },
+  "diff_method_and_trust": {
+    "baseline_images_on_disk": false,
+    "what_i_actually_compared": "evidence/.previous does not exist in this checkout. DIFF.json names it as the baseline directory and records a captured_at of 2026-09-20T04:51:35Z and a previous_sha per row, but the images themselves are not here for me to look at. Every label below is therefore the current artifact judged against the recorded SSIM number, not against the previous picture. I am saying this plainly because the difference matters: SSIM told me that a change happened and roughly how large; the direction of every 'improved' label is my reading of whether the artifact as it now stands delivers what it claims, not a before-and-after.",
+    "why_no_regressed_label": "I assigned none. 'Regressed' asserts that something got worse, and with no baseline image I cannot show that about any artifact. Several artifacts are defective - the blank off-system card, Moments with no words in it, Us with one module, Search with no band and no nav - and I have written all of those up as findings. What I will not do is smuggle 'currently bad' into a field that is supposed to carry a trend, because that would corrupt the one signal this file exists to produce. If evidence/.previous is restored, the two labels I would re-examine first are 13_messenger_states.png (the largest delta, 0.8943) and 04_moments.png.",
+    "the_baseline_is_real_for_the_first_time": "This is worth saying and I agree it is noteworthy. Every row now carries a previous_sha and a real SSIM instead of reading 'new', the counts are 8 unchanged / 7 changed / 0 new / 0 gone / 2 absent, and the two byte-identical rows (12_search.png and 14_media_viewer.png at ssim 1.0 with matching sha and no previous_sha field) are exactly what a genuine no-op comparison looks like. The file is doing real work for the first time.",
+    "the_six_identical_values": "Six rows - 01_pulse, 02_chat, 03_us, 05_settings, 10_first_run, 17_setup_pwa - carry ssim of exactly 0.9995. All six have a previous_sha different from their sha, so the files genuinely differ; a true no-op reports 1.0, as the two byte-identical rows do. Six different 5279202-byte, 1440x3120 photographic screens landing on the same four-decimal value is not what an unconstrained SSIM over six different pictures looks like. The benign reading is that the metric is computed on a downscale and rounded, these pairs differ only in a small region, and the values saturate and collide at four decimals. The unhappy reading is that 0.9995 is a constant substituted when the real computation is skipped or clamped, which would make the eight 'unchanged' rows assertions rather than measurements. I cannot tell which from the evidence directory alone, and I am not allowed the tool source. What tips me towards taking it seriously is that 0.9995 sits just above the file's own 0.999 threshold - a stub value chosen to pass would look exactly like that - and that the label_basis sentence in this same file is provably wrong on all seven 'changed' rows, which shows the generator does emit unconditional boilerplate. Recommendation: print the SSIM to six decimals and log the per-row mean and variance, or have the tool write the diff image it computed from. Until then I treat the seven 'changed' rows as measured and the eight 'unchanged' rows as plausible but unverified, and I would not let this file alone carry the 'no regression' exit condition.",
+    "row_specific_caveat": "The 02_chat.png row is the weakest in the file for a different reason. MANIFEST.json's own missing block says this session's chat capture had only seven notes and that the file on disk is a copy carried over from an earlier run and is not counted as this session's. So that row's 0.9995 is comparing a stale file against the baseline. The hero artifact of the whole set is not from this capture, and the diff does not say so."
+  },
+  "verdict": "This is one system and not an assembly - the same partner band rides the top of five regions and degrades honestly when there is no partner, two named hands identify the same two people in every region without a name being printed, state events sit inside the chat scroll beside the messages, and 08_state_propagating.mp4 carries a single event from Pulse to Chat in one unbroken take while the header band changes underneath it. But the seams are real and four of them are structural rather than cosmetic: a message card drawn entirely outside the paper system as a square-cornered rectangle with a hard drop shadow and no tear mask at all (confirmed against 13_messenger_states.surfaces.json, which has no surface covering it), an archive in 04_moments that contains not one word of any message so that a written event recognisable in Chat is a blank dated sheet in Moments, a Us region showing one of the four shared-life modules when the system's own notification taxonomy and search filters name at least three more, and a Search screen that is the only non-overlay screen in the set with neither the partner band nor the nav. Add a Settings block insisting the phones are not paired while Pulse reports the partner's battery and clock and Chat shows read receipts, and the row lands at 11 of 15, below its floor of 13; the three Moments/Us/Search seams are each a one-screen fix away from clearing it, and the off-system card is the one to fix first because it is also the shape the anti-goals forbid."
+}

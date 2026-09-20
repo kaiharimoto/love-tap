@@ -1,0 +1,131 @@
+{
+  "critic": "material_truth",
+  "cycle": 3,
+  "score": 15,
+  "floor": 22,
+  "meets_floor": false,
+  "findings": [
+    {
+      "artifact": "13_messenger_states.png",
+      "severity": "blocking",
+      "subsystem": "fold / note surface renderer",
+      "where": "the note between 'noor needs a l... 17:27' and the next torn note, x 60-1090, y 1080-1325",
+      "what": "A flat pink rounded rectangle with a 1px grey border and a hard drop shadow offset down-and-right stands where a sheet of paper should be: measured interior luminance std 5.03 over 41 levels, against 40.53 std / 187 levels for the real torn note 200px below it and 36.75 / 205 for the legal pad behind it, i.e. below the build's own flat-fill ceiling of std 8.0 / 60 levels, and its top-right corner is a clean ~4px radius round join.",
+      "why": "The stated anti-goal is verbatim 'a beige rounded rectangle with a drop shadow is a failure of the entire visual concept', and the rubric row says any such rectangle standing in for paper puts this category below its floor.",
+      "root_cause": "13_messenger_states.report.json reports fold {sequence unfold_thirds, length 240, decoded 24, playhead 0}. Only 24 of the 240 fold frames ever decode, so a folded note has no sprite to draw and the code falls back to a painted rounded-rect fill plus a box shadow. 13_messenger_states.surfaces.json confirms it: nothing is listed at that rect except desk.webp and the legal_02 background - the panel has no paper asset and no tear asset at all.",
+      "correction": "Delete the painted fallback. A note whose fold sprite has not decoded must draw its flat paper stock and tear mask at fold frame 0 (the stock and tear are already resolved and cheap), never a code-filled rounded rect with a BoxShadow. Then raise the decode budget so more than 24/240 frames are resident."
+    },
+    {
+      "artifact": "06_unfolding.mp4",
+      "severity": "blocking",
+      "subsystem": "fold animation + capture harness",
+      "where": "all 255 frames; the same flat pink rounded rectangle occupies roughly the lower quarter of the screen for the whole clip",
+      "what": "The clip whose entire job is 'a note opening from folded to flat' contains no fold. I decoded every one of the 255 frames: the thread creeps upward, the pink placeholder panel grows, and at frame ~240 the finished note ('two steps. put the kettle on the second one not the first one') cross-fades in already flat. There is no crease, no geometry, no light moving across a fold at any point in 4.25 seconds.",
+      "why": "The rubric names this clip as the one that exposes a faked material system; a flat panel growing and a note fading in is exactly 'a flat image being transformed rather than geometry catching light', and it means the material system is never demonstrated in motion anywhere in the evidence set.",
+      "root_cause": "06_unfolding.json shows the harness runs a 432ms 'unfold' step and only then starts the 255-frame capture, and 06_unfolding.report.json confirms the fold playhead was already at 239/240 (held_from 227) before the first frame was recorded, with 13 of 240 frames decoded. Every other scene's report has playhead 0 with 24/240 decoded. In no artifact in the set is the fold sequence ever seen mid-travel.",
+      "correction": "Start the frame capture before the unfold step, not after it, and hold the recording open for the full 240-frame travel; pre-warm the unfold_thirds decode (texture_budget.json shows peak 28.0 MB against a 32 MB budget, so the headroom exists) so the sprite is resident when the playhead moves."
+    },
+    {
+      "artifact": "12_search.png",
+      "severity": "major",
+      "subsystem": "tear mask assignment",
+      "where": "the twelve filter chips from EVERYTHING down to THIS YEAR, y 368 to 2349",
+      "what": "tear_001_shadow.webp is drawn twelve times on screen at identical size [1338x123], identical scale 1.307 and identical x offset -117, so all twelve chips carry the same torn silhouette - the same left notch, the same downward wave, the same right terminus - stacked into a visible ladder of clones. The paper fill underneath is offset-randomised (x = 6, -105, 22, -12, -36, -65, 9) but the tear is not.",
+      "why": "'The same tear edge appearing twice in one frame' is the first item the rubric tells me to look for, and here it is twelve times in one frame out of a pool of 56 masks. The same defect appears at lower multiples in 03_us.png (tear_043 three times, tear_020 twice on screen), 01_pulse.png, 02_chat.png and 17_setup_pwa.png.",
+      "root_cause": "The per-note tear is chosen from the event id, but chips and list rows are not events, so they all fall through to the same default mask. The randomiser that jitters the paper offset was not extended to the tear index.",
+      "correction": "Key the tear mask off the row's own stable identity (chip label, row index) and hash it into the 56-mask pool, with a per-frame guard that refuses to draw a mask already used in the same viewport."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "major",
+      "subsystem": "tear + baked contact shadow compositing",
+      "where": "crops/02_chat_300_edge.png, the bottom edge of the 'Apr 16:34 read' note; and 110 draws across the whole still set",
+      "what": "At 300% the contact shadow under that note is a hard near-black straight bar about 8px deep rather than a falloff, because tear_002_shadow.webp (src 1024x978) is drawn with fit 'fill' into a 1218x94 box - a 12.4:1 aspect distortion that squashes a shadow baked for a tall object into a strip. Across the eleven stills 110 tear/shadow draws are stretched non-uniformly by more than 2:1, with individual draws at 10:1 (tear_035, tear_047), 12:1 (tear_002) and 20.8:1 (tear_054 in 02_chat).",
+      "why": "The rubric asks for 'contact shadows baked from the render's own light' and warns against 'shadows that are a uniform blur'. A bake squashed 12-20x on one axis is neither - the falloff collapses into a drawn line and the torn fibre smears into a horizontal streak, which is what the 300% crop shows.",
+      "root_cause": "Tear assets are applied with fit:'fill' to whatever box the note lays out to, instead of being authored per aspect band or tiled along the edge.",
+      "correction": "Author the tear/shadow masks as edge strips that repeat along the torn edge at native aspect, or bin them by aspect ratio and pick the nearest bin, and refuse any draw whose aspect distortion exceeds about 1.3:1."
+    },
+    {
+      "artifact": "01_pulse.png",
+      "severity": "major",
+      "subsystem": "3D object library / lighting bake",
+      "where": "the feelings row at y 1140-1460; also 07_feeling_landing.mp4 frames 140-200 and 08_state_propagating.mp4 throughout",
+      "what": "The candle is a perfectly smooth cream cylinder with no wax grain, no wick fibre (the wick is a grey capsule) and no specular, and the 'confetti' is a scatter of featureless ovoids; the clover in 07 is a faceted flat-green shape with no veining. The candle throws a long hard-edged shadow down and to the RIGHT at roughly 35 degrees and about 1.5x its own height, while every paper contact shadow in the same frame falls straight DOWN and recovers over about 50px, and the confetti beside it throws no shadow at all.",
+      "why": "Two named failures at once - 'contact shadows whose light directions disagree with each other', and untextured primitives sitting inside a photographed-material world so that the objects read as default-shader clay, not as things on the desk.",
+      "root_cause": "The object renders come out of a different rig from the paper bake. logs/illuminant.json checks only the paper rig (5200K, drift 0.0) and logs/dusk_shadows.json only counts that a *_shadow asset exists per object - neither measures the object shadows' direction or length against the paper's, so the disagreement passes every check on disk.",
+      "correction": "Re-render the object library under the same 5200K key with the same elevation as the paper bake so the object shadow vector matches the paper contact vector, give the objects real surface maps (wax grain, leaf veins), and add a check that compares each object shadow's centroid offset angle against the paper's."
+    },
+    {
+      "artifact": "07_feeling_landing.mp4",
+      "severity": "major",
+      "subsystem": "feeling vocabulary",
+      "where": "the feeling picker tiles at frame ~170, y 1450-1900; the same tiles in 15_authored_feeling.mp4 and in 01_pulse.png",
+      "what": "The feelings are drawn as icons: a standard eight-ray sun glyph, a crescent moon, and a two-dot-plus-red-curve smiley face. The selected tiles additionally carry a thin dashed white marching-ants selection rectangle, and the labels ('a squeeze', 'forehead', 'warm palm', 'nuzzle', 'thinking of y...', 'goodnight') float as blue ink directly on the dimmed wood with no surface under them.",
+      "why": "The rubric names 'feelings drawn as icons rather than as physical objects' as a failure and the anti-goals forbid emoji or stock illustration standing in for feeling; a sun glyph and a smiley face are both. The dashed selection rect is a UI convention from outside the material world entirely.",
+      "root_cause": "The glyph set was drawn as a pictogram vocabulary rather than photographed or modelled as objects; the picker's selection state was solved with a CSS/Flutter outline instead of a physical affordance.",
+      "correction": "Replace the sun, moon and smiley with photographed or modelled objects that carry the feeling (the candle and clover already show the intended register), and express selection by lifting the tile - a larger contact shadow and a slight rotation - rather than with a dashed outline. Ink text needs a scrap under it.",
+      "mitigation": "The marks sit on genuinely torn scraps and some, like the authored 'pigeon' and 'tuesday soup' squiggles in 05_settings.png, read as real ink rather than as icons."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "major",
+      "subsystem": "paper stock library",
+      "where": "everywhere paper is drawn; measured in logs/paper_tooth.json at the shipped magnification of 1.94",
+      "what": "The build's own tooth measurement passes only 250 of 432 samples at the size the app actually ships. receipt stock is essentially featureless (receipt_01 median std 2.06, 1 of 8 samples passing) and the sticky stocks sit at median std 4.3-4.9 - all below the project's own flat ceiling of 8.0. receipt_01 is drawn as a chat note stock in 02_chat and eight times in 04_moments.",
+      "why": "A stock whose tooth measures below the flat-fill threshold is, at the size it ships, an approximation of paper rather than a photograph of it, which is the row's whole question.",
+      "root_cause": "Stocks are packed to a 1500px long side and then magnified 1.94x on a 3x-dpr screen; the smooth-surfaced families (receipt, sticky) have too little grain to survive that, and the WebP quantisation removes what is left.",
+      "correction": "Pack the smooth families at a longer side (paper_tooth.json's own 'bigger' column at 1800px gains 12 passes for 6.3 MB) and re-shoot receipt and sticky at grazing light so the tooth survives magnification, or cap those stocks' draw scale at 1.2."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "minor",
+      "subsystem": "handwriting rendering",
+      "where": "crops/02_chat_300_hand.png and 02_chat_300_edge.png; every text run",
+      "what": "The writing is vector type composited over the paper in flat ink, not writing that is part of the surface: the ink core of the 'The folder is open...' run is exactly RGB(58,58,60) for 20,179 of its 20,823 darkest pixels, and the Noor run is exactly (31,42,68) for 8,967 of 9,255 - no paper tooth shows through the stroke, no pressure or ink-pooling variation, no bleed at the terminals. The five 'Wed 22 Apr' runs at 36px cross-correlate 0.93-0.98 against each other.",
+      "why": "The row asks for 'real handwriting' and warns about repeated letters being pixel-identical; solid-fill glyphs sitting on top of the paper are the giveaway that the writing was never on the sheet.",
+      "root_cause": "NoorHand/TeoHand are TTFs painted with a solid Paint. The variant machinery is real (logs/fonts.json: 775 glyphs, 360 variants checked) so the letterforms are not byte-identical, but the ink compositing is.",
+      "correction": "Multiply the glyph coverage against the underlying stock's luminance so the tooth modulates the ink, and vary per-stroke alpha slightly along the glyph so terminals pool. That alone would move these runs out of 'font on paper' and into 'ink in paper'.",
+      "mitigation": "Two distinct hands, a genuine variant system and non-identical repeats - this is much better than a single font used flat."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "minor",
+      "subsystem": "desk shell",
+      "where": "the left and right desk margins, e.g. x 0-100 at y 1600-2200, at 300%",
+      "what": "assets/shell/desk.webp is a 685x1500 source drawn at 1440x3120 (2.10x) in every one of the eleven stills. At 300% the wood is smooth airbrushed brown with soft vertical stripes and no pore, no grain, no specular - it reads as an illustration of wood rather than a photograph of a desk, and the 12_search chip gaps show visible horizontal banding from the upscale.",
+      "why": "'Every surface is photographed or rendered stock' includes the plate under everything; the one surface present in every artifact is the least material one.",
+      "root_cause": "The desk plate is packed far smaller than the screen it covers.",
+      "correction": "Ship the desk at least at 1440 wide (it is one asset, drawn once per scene) and re-shoot or re-render it with grazing light so the grain and pores survive."
+    },
+    {
+      "artifact": "14_media_viewer.png",
+      "severity": "minor",
+      "subsystem": "media surface",
+      "where": "the image plate filling the upper two thirds; same renders as the thumbnails in 04_moments.png",
+      "what": "The 'photographs' are untextured grey CG renders of plates and eggs on a table, presented as a bare rectangle with sharp square digital corners, no print border, no paper edge and no contact shadow against the desk.",
+      "why": "In a world where everything else is paper, a photo should be a print with an edge and a shadow; a hard-cornered digital rectangle breaks the material rule at the moment the viewer is looking hardest.",
+      "root_cause": "Seed media are placeholder Blender scenes and the viewer draws them as raw textures rather than as prints on stock.",
+      "correction": "Mount media on a print stock with its own edge and baked contact shadow, and replace the clay renders with photographic seed content."
+    },
+    {
+      "artifact": "09_two_devices.png, 16_setup_android.png",
+      "severity": "minor",
+      "subsystem": "capture environment",
+      "where": "absent from evidence/; MANIFEST.json records both under 'missing'",
+      "what": "Two of the seventeen artifacts do not exist because no Android device could be brought up (no /dev/kvm; adbd answered after 113 minutes under QEMU emulation but the framework never came up). Recorded once here, not penalised twice.",
+      "why": "09_two_devices is a hero and it is the only artifact that could have shown the material system holding identically on Android and on the iOS PWA, so material parity across the two platforms is unverifiable from this evidence set.",
+      "root_cause": "Container hardware, not a build defect. The manifest states the three routes that were measured rather than assumed.",
+      "correction": "Nothing available in this container. Capture on real hardware when it exists; do not synthesise either frame from the PWA."
+    }
+  ],
+  "what_is_working": [
+    "The torn edges on the real notes are genuinely good. At 300% (crops/02_chat_300_hand.png, 02_chat_300_shadow.png) the deckle is fibrous, irregular and carries dark crumbs along the tear, with a soft shadow beneath it - it reads as torn, not as a wavy vector path. Do not simplify these.",
+    "Paper contact shadows are directionally consistent: measured down the 12_search chip column, the wood sits at 72-79 right up to a chip's top edge and drops to 41-50 immediately under its bottom edge, recovering over about 50px. One light, from above, for every sheet in the frame.",
+    "The paper ground has real tooth where it matters: legal_02 at the shipped 1.94x measures std 36.7 over 205 levels, and the ruled lines wander and break rather than being drawn rules.",
+    "The lighting bake is genuinely two-state, not a filter. logs/illuminant.json shows zero drift from the declared 5200K rig (net fit error 0.0003) and logs/dusk_shadows.json shows a complete dusk counterpart for all 56 tear shadows, 25 object shadows, 27 stocks and the desk plate with nothing missing - crops/dusk_pulse.png is a real second bake.",
+    "11_chat_scroll.mp4 is the strongest material evidence in the set: a dense year of notes scrolling past on many distinct stocks and tears, with no flat panel and no visible repeat.",
+    "The library itself is real work - 54 paper stocks, 56 tear masks (47 writable), 129 recipes over 501 objects, two handwriting faces with 775 glyphs and working variant substitution. The problem is how it is being drawn, not that it is missing.",
+    "The surfaces telemetry is honest enough to convict the build: every sidecar lists each asset, its source size, its drawn size and its rect, which is how the repeated tears and the 20:1 stretches are provable at all. Keep it."
+  ],
+  "verdict": "There is a real photographed-paper system here - 54 stocks, 56 tear masks with day and dusk bakes under one measured 5200K light, and torn edges that hold up at 300% - but it is being drawn badly enough, and in enough places, that the material reads as simulated in three of the artifacts that matter most. A flat pink rounded rectangle with a drop shadow (interior std 5.03, below the build's own flat ceiling, with no paper or tear asset behind it) stands in for a sheet of paper in 13_messenger_states.png and occupies a quarter of the screen for the whole of 06_unfolding.mp4; that clip, the one the rubric says exposes a faked material system, contains no fold at all across its 255 frames because the capture starts after the playhead has already run to 239/240; and 12_search.png stacks the same tear silhouette twelve times down one screen. The emotional objects, which are the reason the app exists, are untextured clay primitives whose shadows point 35 degrees away from every paper shadow beside them, and the feelings themselves are a sun glyph, a crescent moon and a smiley face. 15 of 25, below the floor of 22, and the flat rounded rectangle alone is enough to hold it there."
+}

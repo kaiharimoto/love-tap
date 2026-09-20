@@ -1,0 +1,113 @@
+{
+  "critic": "visual_design",
+  "cycle": 3,
+  "score": 14.5,
+  "floor": 17,
+  "meets_floor": false,
+  "measured": {
+    "artifacts_with_failing_text": 1,
+    "worst_ratio": 4.15,
+    "worst_ratio_where": "04_moments.png — the unselected filter chip reading 'teo' (also 'all year' at 4.30), soft grey pencil on flat pale index stock, against a 4.5:1 body floor. This is the worst ratio I could confirm with my own eyes; the tool's raw worst is 1.09 on 01_pulse 'open' and that one is an artifact of the measurement, not of the design (see finding 4)."
+  },
+  "findings": [
+    {
+      "artifact": "04_moments.png",
+      "severity": "blocking",
+      "subsystem": "filter chips / disabled-state ink",
+      "what": "The two unselected filter chips, 'teo' and 'all year', are set in a soft grey pencil that sits below the body contrast floor on a flat, pale, unambiguous ground — I cropped both at 300% and the ink is visibly lighter than every other word in the set.",
+      "measurement": "ink_core 4.15 and 3.62; ink_core_ring 4.15 and 4.30; ground_swing 1.14 and 1.21, i.e. the ground under them really is flat, so the ring reading is the fair reading and it still fails 4.5. These are the only two of the 17 flagged runs that fail on both readings.",
+      "root_cause": "An unselected/inactive state is being expressed by lowering the ink's lightness toward the paper rather than by a material change. COLOR.md §2 puts every achromatic ink at L ≤ 0.40 and these are clearly above it; a greyed pen is the one way this build's own ladder can produce unreadable text, because there is no other lever the UI reaches for to say 'not chosen'.",
+      "correction": "Keep both chips' ink at the full L ≤ 0.40 graphite and carry the selected/unselected distinction materially instead: the selected chip is a card that has been lifted (a real contact shadow, a slight rotation, a torn tab), the unselected ones lie flat. If a lightness cue is wanted, dim the *stock* under the chip, not the ink on it — lightness separation does the reading, and paper can lose 0.08 L before the ink notices."
+    },
+    {
+      "artifact": "01_pulse.png, 02_chat.png, 03_us.png, 05_settings.png, 05_settings_interrupt.png, 10_first_run.png, 12_search.png, 17_setup_pwa.png",
+      "severity": "blocking",
+      "subsystem": "colour / the charm axis",
+      "what": "The whole build is one amber wedge. Across eleven stills every hue that carries area falls between 55° and 95° — the 'hue_families: 5' figure is five adjacent 10° bins of the same colour, not five colours — and I can see it: there is no blue, no green and almost no red anywhere except three small patches in the entire evidence set.",
+      "measurement": "palette.json across_the_set: hue_centres_deg [55,65,75,85,95], widest_hue_gap_deg 320° against a 150° ceiling, named_families_present ['A_paper'] against a floor of 4. accent_fraction 0.00058 across the set against a 0.010 floor — 17x short; 05_settings, 05_settings_interrupt and 17_setup_pwa are at exactly 0.0. chroma_by_band.figure.p99_chroma fails on all eleven stills (0.045–0.082 against 0.10). All six conditions of COLOR.md §7 fail. 44 breaches total.",
+      "root_cause": "Families B, C and D exist in the law, are printed on the stock the pipeline renders, and reach the glass only as hairlines: a 2-px pink margin rule and a 1-px feint blue rule. Nothing opaque and nothing with area carries a non-amber hue on a room screen. §5 names the mechanism — a multiply-only accent policy drags every accent toward the ground's own hue — and the evidence shows it has not been broken yet.",
+      "correction": "Put one opaque, non-amber object with real area on every room screen, as §7 item 6 already specifies: a pink sticky on Pulse, the pressed clover on Us, a red-pen correction on Chat, a blue-stock index card in Settings. One 1% patch per screen clears accent_fraction and figure.p99_chroma at once. The objects already exist in the build — 15_authored_feeling shows the clover, the sun stamp and the envelope rendered and lit — they are locked inside a drawer that no still ever sees."
+    },
+    {
+      "artifact": "10_first_run.png, 05_settings_interrupt.png, 12_search.png, 03_us.png, 05_settings.png (and every other room still)",
+      "severity": "major",
+      "subsystem": "lighting / contact shadow / value structure",
+      "what": "There is no middle. Every screen is a near-black desk and a near-white sheet butted together with a hairline, and nothing lives between them — sheets look pasted onto the wood rather than lying on it, and overlapping sheets have no shadow to separate them.",
+      "measurement": "I recomputed it independently of palette.json: the fraction of each still in the 0.12–0.50 luminance band is 0.023 (10_first_run), 0.031 (05_settings_interrupt), 0.035 (05_settings), 0.036 (03_us and 12_search), 0.040 (01_pulse). COLOR.md §2 floors value_bands.mid at 0.04 and calls an empty mid band 'a two-value image: a plank and some paper, with nothing in between and therefore no depth'. palette.json records the breach on 10_first_run (0.0225) and 12_search (0.0389). The 300% crop evidence/crops/02_chat_300_shadow.png shows two sheets meeting with a 2-px dark line and no falloff at all.",
+      "root_cause": "The sheets are being composited as flat cutouts with a deckled alpha edge rather than rendered as objects resting on a surface under the render's own light. There is no ambient-occlusion term where paper meets desk, so the ladder's 'mid' rung — the rung that makes a screen look finished — was never built.",
+      "correction": "Bake a soft contact shadow under every sheet and every stacked note from the render's own lighting, falling off over roughly the sheet's own thickness, and let the turned corners and the tape carry midtones. This is the cheapest single change in the list: it raises value_bands.mid, it gives every screen depth, and it costs no chroma and no contrast."
+    },
+    {
+      "artifact": "01_pulse.png, 02_chat.png, 04_moments.png, 05_settings.png, 12_search.png, 13_messenger_states.png",
+      "severity": "minor",
+      "subsystem": "the legibility harness itself",
+      "what": "Fifteen of the seventeen below-floor runs are not legibility failures at all — I cropped every one at 300% and the text is emphatic black on cream. 01_pulse's 'open' measures 1.09:1 and is one of the boldest words on the screen.",
+      "measurement": "would_pass_on_ring_reading 15, on_moving_ground 16. In every one of the fifteen, ground_lum is 0.07–0.39 while ground_lum_ring is 0.83–0.90 and ground_swing runs to 7.52 — the local ground window is sampling the glyphs' own strokes, or an adjacent line of text, or the black flecks of a torn edge, as 'the darkest part of the ground'.",
+      "root_cause": "The adversarial-end rule of COLOR.md §6 takes the ground's 5th percentile inside a window the size of the run's own height. On tightly-set handwriting, and on any run that sits within one line-height of a torn edge, that percentile is ink, not paper. The rule is right; the window is not ink-masked.",
+      "correction": "Exclude pixels belonging to the run's own connected components and to any neighbouring text run from the ground window before taking the percentile, and fall back to the ring reading whenever ground_swing exceeds the 1.2 gate. Until that lands, 17 below-floor is not a comparable number and a later firing will either chase ghosts or, worse, learn to ignore the file."
+    },
+    {
+      "artifact": "04_moments.png",
+      "severity": "major",
+      "subsystem": "media thumbnails",
+      "what": "The Moments grid — the screen whose whole job is to be the couple's photographs — is a column of murky, neutral-grey CGI renders of an empty table, a black sphere and a bare room. It reads as placeholder test geometry, and it is the one screen in the build I would call cold.",
+      "measurement": "palette.json 04_moments: chroma_by_band.ground.mean_chroma 0.0209 against a 0.030 floor (the only room still to breach it), grey_fraction 0.0685 — thirty times 03_us's 0.0007 — and accent_fraction 4e-05, the lowest in the set. 14_media_viewer, the full-size view of the same material, breaches the grey ceiling outright at 0.1377 against ≤ 0.08.",
+      "root_cause": "The photograph pipeline is rendering untextured grey primitives under a neutral key light, so the one place in the app where real-world colour could legitimately enter is instead the coldest surface in it — and because thumbnails tile, that coldness owns 40% of the screen.",
+      "correction": "Either give the rendered scenes warm practical lighting and real materials so they sit inside family A with something coloured in them, or treat every thumbnail as a physical print — a warm-toned photographic paper with a white border and a real curl — so the grid reads as prints on a desk rather than as viewport captures."
+    },
+    {
+      "artifact": "05_settings_interrupt.png, 01_pulse.png",
+      "severity": "major",
+      "subsystem": "the blu-tack / magnet object",
+      "what": "Flat brown discs are stuck down the left margin and they land on top of words: in 05_settings_interrupt one sits squarely over the 'a' of 'a day that matters' and the 'w' of 'wake me' below it. The disc has no specular, no texture and no cast shadow — it is the only object in the build that is plainly a filled circle.",
+      "measurement": null,
+      "root_cause": "The object is being positioned by a decorative rule that does not know where the text runs are, and it was modelled as a vector disc rather than rendered like everything else, so it carries none of the material vocabulary the rest of the build earns its credibility with.",
+      "correction": "Render it as an actual pressed lump of blu-tack or a real magnet with a specular and a baked contact shadow, and constrain its placement to the sheet's margin — outside every declared text box — with a collision check, so it can never occlude a glyph."
+    },
+    {
+      "artifact": "05_settings_interrupt.png, 12_search.png",
+      "severity": "major",
+      "subsystem": "typographic hierarchy",
+      "what": "Two screens are flat lists with no hierarchy at all: fourteen identical rows of 'wake me / quietly / not at all' in one size in one ink, and twelve identical torn strips carrying twelve ALL-CAPS words in one size in one ink. Both read as a form to be completed rather than as a page somebody keeps.",
+      "measurement": "12_search: lightness.p50 0.649 against a ≥ 0.78 floor and value_bands.mid 0.0389 — 48% of that still is bare dark desk between eleven interchangeable strips. 05_settings_interrupt: 61 text runs, one family, one size band.",
+      "root_cause": "Where the content is genuinely a list of options, the design has no second move — no grouping, no rule, no size step, no object — so it defaults to repetition. The hand's total lack of baseline jitter (see the working notes) makes the repetition read as a printed table rather than as a written one.",
+      "correction": "On the interrupt list, group the fourteen rows under two or three stamped section heads and let the chosen answer be a real mark — an underline in red pen, a tick — rather than a tick in the same ink as everything else. On search, replace the eleven identical strips with objects of different stock, width and angle, and let the current filter be a tab that has been pulled out."
+    },
+    {
+      "artifact": "02_chat.png, 03_us.png, 12_search.png",
+      "severity": "minor",
+      "subsystem": "paper substrate",
+      "what": "At 300% the paper is a uniform high-frequency speckle at one scale across the entire sheet, with no fibre direction and no large-scale variation, and the torn edges are a hard alpha cut decorated with black flecks rather than a fibre pull with a soft overhang.",
+      "measurement": "flat_fill.json passes every window (median_std 20.9–34.0 against a ≥ 8.0 floor), which is the point: the grain is present and abundant, it is just isotropic. evidence/crops/02_chat_300_hand.png and 02_chat_300_edge.png show it directly.",
+      "root_cause": "The grain reads as a noise field multiplied over a flat cream rather than as a photograph of a sheet; the flat-fill check measures whether variation exists, not whether it has structure, so a procedural field satisfies it completely.",
+      "correction": "Give the stock a directional fibre and low-frequency variation — a faint machine direction, a slight cockle across the sheet, a darker edge where it has been handled — and make the deckle a two-sided edge with a pale overhanging fibre above the dark line, so the tear has thickness."
+    },
+    {
+      "artifact": "09_two_devices.png, 16_setup_android.png",
+      "severity": "minor",
+      "subsystem": "evidence set",
+      "what": "Two artifacts do not exist, so the Android half of the two-device story is unjudged: I cannot say whether the design holds on a second screen or in the Android setup flow.",
+      "measurement": "MANIFEST.json missing{} — no /dev/kvm, the emulator's framework never came up, and the manifest records that neither was faked from the PWA. Recorded once here and not counted again. (13_messenger_states appears under 'missing' with an empty reason while also appearing in 'artifacts' with from_this_run true; it is present and complete and I judged the picture. 02_chat is present, 4.7 MB, and I judged it; its 'missing' reason is a seven-notes-instead-of-eight sample floor, though the manifest also states the file on disk is from an earlier run at 10:20:05, which is a provenance caveat on that one still and not an absence.)",
+      "root_cause": "A hardware limit of the capture container, not a design defect.",
+      "correction": "Nothing to correct in the design. If the two-device claim needs visual evidence, it needs a host with KVM."
+    }
+  ],
+  "charming": [
+    "The row of small drawings on Pulse in 01_pulse.png — a crescent moon, a lopsided smiley, a scribbled 'W', a tiny chair — each on its own scrap of different stock, none of them a UI icon, all of them plainly drawn by a hand rather than chosen from a set. The chair reappears in 13_messenger_states.png captioned 'empty chair' and it is the single warmest thing in the evidence.",
+    "The feelings drawer in 15_authored_feeling.mp4 and 07_feeling_landing.mp4: a pressed green clover, a sun stamp and a small envelope laid out as physical tiles in a dark drawer. It is the only green in the build and the only moment where the palette opens up. That it is charming is exactly why it is a finding that no room still contains anything like it.",
+    "The small authored details that nobody had to write: 'pigeon' and 'tuesday soup' credited 'by noor' and 'by teo' in 05_settings.png; 'first one's yours. whatever it is. it only goes to one person.' as the entire first-run screen in 10_first_run.png; the red-pen 'it would not go ✗ / ↻ try again' in 13_messenger_states.png, which is the one place a failure state is drawn as a person correcting a page rather than as an error."
+  ],
+  "drab": [
+    "04_moments.png — a tiled column of grey untextured CGI renders of an empty table, a black sphere and a bare room, standing in for the couple's photographs. It is the coldest surface in the build and it occupies the screen whose entire purpose is memory.",
+    "05_settings_interrupt.png — fourteen identical rows of 'wake me / quietly / not at all', one size, one ink, no grouping, no section heads, with flat brown discs sitting on top of the words. It is a compliance form on lined paper.",
+    "12_search.png — eleven interchangeable torn strips stacked on bare dark wood carrying eleven ALL-CAPS words, with 48% of the frame empty desk and almost nothing in the mid tones. Correct as an index, joyless as a page."
+  ],
+  "would_open_it_daily": false,
+  "what_is_working": [
+    "The legibility repair is real and it is the bulk of the improvement here. 358 runs, 17 flagged, and of those only two survive an eye check — against a recorded baseline in COLOR.md §1 of 404 of 834 below floor at a median 2.39:1. I read every room screen at downscale and the body text is comfortable at arm's length. Do not trade any of this back for chroma; §2 is right that lightness does the reading and chroma does the charm, and they are separate budgets.",
+    "The chrome is coherent across all five regions and that is the hardest thing on this list to get. The state strip at the top, the tab bar at the bottom, the desk, the search affordance and the composer all hold their position, size and material from Pulse through Settings; nothing looks like a different build. 17_setup_pwa.png in particular has a genuine three-step hierarchy — stamped heading, hand heading, smaller body — that the rest of the app should be copying.",
+    "The two hands are told apart by material rather than by colour, exactly as required: Teo's rounded hand on torn cream against Noor's printed slab on a cleaner stock, with the blue ✓✓ read receipts as the only tint. 02_chat.png reads as a conversation between two people without a single coloured bubble, and 13_messenger_states.png carries sent / read / going / waiting to send / failed as five distinct written states in the margin. That is the concept working.",
+    "The desk itself as a continuous surface across screens, with sheets that keep their identity — the same lined stock, the same legal pad, the same index cards — so that moving between regions feels like moving things around on one table rather than switching pages."
+  ],
+  "verdict": "The reading complaint is close to answered — body text is comfortable everywhere I looked, the confirmed contrast failures are down to two greyed filter chips on 04_moments, and the chrome holds together across all five regions well enough that the app reads as one object. The warmth complaint is not answered at all: measured on the glass this is one 40°-wide amber wedge with an accent fraction seventeen times below its own floor, no mid tones to give any screen depth, and its only genuinely coloured objects locked inside a drawer that no room screen ever shows — so the owner would open this, find it readable, and still not find it warm."
+}

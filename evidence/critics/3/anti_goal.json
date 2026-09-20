@@ -1,0 +1,90 @@
+{
+  "critic": "anti_goal",
+  "cycle": 3,
+  "score": 9.2,
+  "floor": 9,
+  "meets_floor": true,
+  "four_anti_goals": {
+    "engagement_machinery": {
+      "status": "clear",
+      "decided_on": "03_us.png, 05_settings.png, 05_settings_interrupt.png, 01_pulse.png, 04_moments.png",
+      "note": "Nothing on any surface counts, ranks, resets or reports on the relationship. 03_us.png carries only 'AHEAD / PLANNED 9 Nov' and 'BEEN / REMEMBERED 18 Jul' — dates, not tallies; 'a month today' is a fact about one boat trip, not a running total. The only numbers anywhere are device or transport facts ('72%', '14062 events, 1 waiting to send', '36 to send, 2 made here') and media durations ('41s', '63s'). The NEED and ENERGY tally strokes in the header and the NEED/ENERGY scales in 01_pulse are the partner's self-declared state, which is the mission, not a score: they do not accumulate across days, cannot be broken, and nothing is said about them. 05_settings_interrupt.png is the strongest evidence in the other direction — thirteen event classes, each offered 'wake me / quietly / not at all', with refusal a first-class, unpenalised choice. No badge, no streak, no nudge, no guilt string anywhere in the 369 text runs."
+    },
+    "emoji_soup_or_stock_illustration": {
+      "status": "clear",
+      "decided_on": "01_pulse.png (feeling row, y1170-1470), 07_feeling_landing.mp4 strip, 11_chat_scroll.mp4 strip",
+      "note": "No system emoji glyph is rendered anywhere. A codepoint scan of all 369 text runs across every .text.json sidecar (plus crops/dusk_pulse) found zero characters in any emoji or dingbat block; the only non-ASCII are the middot separator and an ellipsis. The feeling vocabulary is not an icon set: it is a heterogeneous mix of hand-drawn ink on torn cards (crescent, sun, smiley, squiggle, a chair) and lit 3D objects with cast shadows (candle, confetti, clover, coffee ring), plus two user-authored marks named 'pigeon' and 'tuesday soup'. At 400% (01_pulse x100-560, y1200-1420) the smiley is wobbling red ink sitting in visible paper tooth on a torn card with a contact shadow — a biro doodle, not a glyph. No stock illustration style, no clip art, no consistent stroke weight or grid that would betray a purchased pack."
+    },
+    "product_marketing_voice": {
+      "status": "clear",
+      "decided_on": "10_first_run.png, 17_setup_pwa.png, 08_state_propagating.mp4 strip, 13_messenger_states.png",
+      "note": "Every displayed string across all sidecars was read. Zero exclamation marks. Zero occurrences of 'user', 'oops', 'welcome', 'get started', 'awesome', 'tap to'. The app never names itself in any string. The empty state in 10_first_run.png is \"first one's yours.\" / 'whatever it is. it only goes to one person.' The empty partner state in 08_state_propagating.mp4 is 'nothing from them yet. it will show here.' / 'their phone tells this one where they are, once it can reach it.' The failure state in 13_messenger_states.png is 'it would not go' / \"the other phone couldn't read it.\" / 'try again'. 17_setup_pwa.png is seven lowercase imperatives; the only capitalised words are Safari and iPhone, which are other people's proper nouns and correct. The dismiss control in 14_media_viewer.png is 'PUT IT BACK'. This is a person's voice throughout, never a product's."
+    },
+    "simulated_paper": {
+      "status": "clear",
+      "decided_on": "crops/02_chat_300_edge.png, crops/02_chat_300_hand.png, crops/02_chat_300_shadow.png, 02_chat.surfaces.json",
+      "note": "At the 300% zoom the brief names, every surface is photographed or rendered stock. Tears are irregular deckled edges with individual fibre whiskers and dark flecks — never a path offset. Contact shadows hug the tear line and vary in density along it, and they come from baked assets (assets/tears/tear_NNN_shadow.webp), not a CSS box-shadow. Ruled lines wobble and vary in ink density; the red margin rule bleeds into the fibre. No rounded rectangle, no drop shadow, no procedural noise overlay. No tiling: vertical autocorrelation over a 2000px strip of the pad in 02_chat.png shows a single 0.47 peak at 130px, which is the rule spacing itself, and there are zero duplicate pixel rows. 02_chat.png draws 17 distinct paper stocks and 29 distinct tear masks across 98 surfaces, and evidence/logs/tears.json records 7 distinct tears for 7 notes with no repeats. Every card visible on screen resolves to a paper rect in the surfaces sidecar."
+    }
+  },
+  "findings": [
+    {
+      "artifact": "01_pulse.png, 02_chat.png, 03_us.png, 04_moments.png, 05_settings.png, 05_settings_interrupt.png, 13_messenger_states.png, crops/dusk_pulse.png",
+      "severity": "minor",
+      "subsystem": "header / partner state strip",
+      "where": "the header strip, x785-860 y140-172, immediately right of 'ENERGY ||||'",
+      "what": "A flat two-tone grey arrow (shaft #6B675F, head #3A3A3C) sits in the persistent header of every still where the partner's place is 'travelling'; it has no paper, no ink texture, no light gradient and no contact shadow, and it corresponds to no asset in any .surfaces.json.",
+      "why": "It is the only element in the whole artifact set that is neither photographed paper, nor ink on paper, nor a lit rendered object, so it is the one place the paper law is broken by a flat vector UI mark. I do not find it to be a system emoji glyph — it is two distinct flat fills, not a single-colour font glyph, and it appears in no text run — so it does not breach anti-goal 2, but it sits closer to that line than anything else here.",
+      "root_cause": "A 'moving / travelling' indicator drawn as a vector path rather than authored as a drawn mark or a lit object like the candle and the confetti.",
+      "correction": "Replace it with an ink stroke in the same hand as the tally marks beside it, or with a small lit object rendered under the same 5200K rig with its own contact shadow, so the header contains nothing that a paper desk could not contain."
+    },
+    {
+      "artifact": "02_chat.png, 13_messenger_states.png, 11_chat_scroll.mp4, crops/02_chat_300_edge.png",
+      "severity": "minor",
+      "subsystem": "messenger delivery state",
+      "where": "after 'read' on each delivered note; also the small marks after 'going', 'waiting to send' and 'it would not go'",
+      "what": "The double check mark is a crisp geometric vector glyph with uniform stroke width and flat chisel ends; at 300% it shows no ink bleed, no paper tooth interaction and no stroke variation, unlike the handwriting immediately beside it.",
+      "why": "It is the closest the build comes to an icon set, and it is a WhatsApp convention imported whole into a world that otherwise invents its own marks. It is not an emoji glyph and it does not stand in for a feeling, so it is not a breach of anti-goal 2 — but it is a foreign object in the vocabulary.",
+      "root_cause": "Delivery state rendered as a UI icon rather than as an authored ink mark, unlike the 'going' and 'try again' marks which do read as ink.",
+      "correction": "Draw the read mark in the same ink as the hand it annotates, with the stroke variation and paper interaction the rest of the ink has."
+    },
+    {
+      "artifact": "01_pulse.png, 11_chat_scroll.mp4",
+      "severity": "minor",
+      "subsystem": "feeling vocabulary / reactions",
+      "where": "01_pulse.png feeling row second card; 11_chat_scroll.mp4 frames 3 and 5, as a reaction tile beside 'read'",
+      "what": "The drawn smiley card doubles as the reaction tile, and at reaction size (roughly 30x25px on screen) a yellow card with two red dots and a curved red mouth reads at a glance as a yellow emoji face.",
+      "why": "Not a breach — at full resolution it is unmistakably red ink in paper tooth on a torn card with a contact shadow, and it sits among a chair, a coffee ring, a candle and 'tuesday soup', which no icon pack contains — but it is the single closest approach to anti-goal 2 in the set and should be watched if the reaction vocabulary grows.",
+      "root_cause": "Reactions correctly reuse the feeling cards; the smiley is the one feeling whose drawing collides with an emoji at small size.",
+      "correction": "Nothing required. If reactions become more prominent, keep the vocabulary weighted toward the idiosyncratic marks (chair, coffee ring, 'pigeon') rather than the sun/moon/smiley triad."
+    },
+    {
+      "artifact": "13_messenger_states.png",
+      "severity": "minor",
+      "subsystem": "paper stock",
+      "where": "the blank pale index card at roughly x200-1000, y1120-1280",
+      "what": "The blank card measures L_std 6.6 over 90 levels, below the build's own 8.0 tooth floor, and at 1000% magnification its interior is close to a flat fill with only faint mottling; evidence/logs/paper_tooth.json records the receipt and sticky families at median std 3.5-4.9 against the same floor.",
+      "why": "It is not a beige rounded rectangle with a drop shadow — it is pale pink, ruled, with a red margin and hard cut edges with a real edge shadow — so anti-goal 4 is not breached. But it is the one surface in the set that begins to read as an approximation rather than a photograph, and it is the place a regression would start.",
+      "root_cause": "Low-tooth stocks (receipt, sticky, some index) magnified past the point where their fibre survives.",
+      "correction": "Raise the tooth on the receipt and sticky stocks, or cap their magnification so median std stays over the declared 8.0 floor."
+    },
+    {
+      "artifact": "16_setup_android.png",
+      "severity": "minor",
+      "subsystem": "evidence coverage",
+      "where": "absent from the set",
+      "what": "The Android setup checklist is one of the three screens my rubric names for close string reading, and it does not exist in this run (MANIFEST.json records no /dev/kvm, adbd up at 113 minutes but no framework, so no package service to install into; 09_two_devices.png is absent for the same single reason).",
+      "why": "I cannot verify anti-goal 3 on the Android setup copy at all. The absence is recorded once and is a hardware fact, not a build defect, and the sibling PWA checklist in 17_setup_pwa.png is clean — but a screen I was told to read closely was not available to read.",
+      "root_cause": "No hardware virtualisation in the capture container.",
+      "correction": "Capture 16_setup_android.png on a host with /dev/kvm, or lint the Android setup strings from source and record that lint as an artifact so the voice on that screen is measurable without the device."
+    }
+  ],
+  "what_is_working": [
+    "The string discipline is the strongest thing in this build. 369 text runs across every sidecar, zero exclamation marks, zero emoji codepoints, zero 'user', and the app never names itself. Do not let a single cheerful string in.",
+    "The empty and failure states, which are where marketing voice normally survives: \"first one's yours.\" / 'whatever it is. it only goes to one person.' (10_first_run.png); 'nothing from them yet. it will show here.' (08_state_propagating.mp4); 'it would not go' / \"the other phone couldn't read it.\" (13_messenger_states.png). These are the hardest strings to write and they are right.",
+    "05_settings_interrupt.png makes refusal a first-class option thirteen times over ('not at all'), which is the structural opposite of engagement machinery. Keep 'not at all' visible and unpenalised on every row.",
+    "The tear masks and baked contact shadows. 7 notes, 7 distinct tears, no repeats; 29 distinct tear masks and 17 paper stocks in the hero alone; at 300% the edges carry individual fibres. This is what makes anti-goal 4 clear and it is the most expensive thing to rebuild.",
+    "The feeling vocabulary's heterogeneity — ink drawings beside lit rendered objects beside two user-made marks. A uniform set would immediately become an icon pack; this one cannot.",
+    "State is shown as fact, never as measurement: 'noor is restless Sun 20 Sep · 10:55', 'a month today'. No days-in-a-row anywhere."
+  ],
+  "verdict": "All four forbidden interpretations are clear. Nothing on any surface counts, ranks, resets or guilts; no system emoji glyph is rendered anywhere and the feeling vocabulary is too idiosyncratic to be a stock set; every displayed string is in a person's voice with no exclamation mark, no self-naming and no reader addressed as a user; and at the 300% zoom the brief names, the paper is genuinely photographed stock torn along real masks with baked contact shadows and no tiling, no noise overlay and no rounded rectangle. The deductions are for near-misses rather than breaches: a flat two-tone grey vector arrow that sits in the persistent header of eight artifacts and is the only element in the whole set that is neither paper nor ink nor a lit object, geometric vector read-receipt ticks that are the closest thing here to an imported icon set, and 16_setup_android.png — one of three screens my rubric names for close string reading — absent for a documented hardware reason so that its copy could not be checked at all."
+}
