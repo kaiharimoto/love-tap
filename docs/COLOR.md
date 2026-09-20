@@ -356,6 +356,74 @@ saturated than something the brief already names.
 
 ---
 
+## 5a · The flat-fill floor, per stock class and per condition
+
+*(Declared at firing 32, ADDRESS, cycle 3. This section does not reverse anything and is not a
+design amendment: §11 records that `palette.py` "deliberately carries no pass/fail floor until
+`docs/COLOR.md` declares one", and the flat-fill floor has until now lived in
+`tools/check/flat_fill.py` and `tools/paper_tooth.py` as `FLOOR_STD = 8.0`, marked in both files as
+"quoted from the queue item rather than defended here". This section is where it is defended. The
+design freeze at cycle 6 is untouched.)*
+
+A paper surface is flat-filled when a window of it carries no variance. The quantity is the standard
+deviation of luminance over a 400x200 window of the artifact, with the count of distinct luminance
+levels beside it, and the window is **placed from the surface's own declared rect** and tiled across
+it at a fixed stride — never dropped at a fixed coordinate. §3d of `loop/WORKER_PROMPT.md` is why.
+
+**The 8.0 floor is the right number for a writing paper and the wrong number for a coated stock**,
+and five firings spent themselves on the difference. Firing 26 measured the cost of reaching 8.0 by
+amplitude alone: a sticky note needs the mottle scaled by k≈10.0-10.7 and a thermal receipt by
+k=12.8, at which point neither reads as its own material. The mechanism is in `V_other` — everything
+in a window that is not the mottle — which measures **76 for a printed grid, 39 for feint rules and
+16 for a blank receipt**. So a floor of 8.0 is dominated by printed content, not by paper, and
+asking a thermal receipt to carry the surface variance of graph paper is measuring the wrong thing
+on that stock. A real receipt is a coated, near-featureless surface and its correct render has
+almost no tooth.
+
+Three classes, therefore:
+
+| class | what it is | stocks today | floor: L_std / distinct levels |
+|---|---|---|---:|
+| **written** | stock carrying printed rules, a grid or a margin | `lined_*`, `spiral_*`, `legal_*`, `looseleaf_*`, `index_*`, `graph_*` | **8.0 / 60** |
+| **plain** | uncoated stock with no printed content | none today; any future blank writing stock | **6.0 / 48** |
+| **coated** | a surface whose correct render is near-featureless | `sticky_blue`, `sticky_pink`, `sticky_yellow`, `receipt` | **4.0 / 32** |
+
+Where the numbers come from, so that none of them is a preference:
+
+- **8.0** is the measured median of the re-rendered written stocks: 7.977 by day (firing 26) and
+  8.729 at dusk (firing 27), against 6.131 and 7.039 before the `albedo_tooth` knob existed. It is a
+  floor the class already clears at the median, which is what a floor should be.
+- **4.0** is set below what the coated stocks actually reach — stickies 4.25-4.63 by day and about
+  4.8 at dusk — and **above the receipt at 1.569**, so the floor keeps its teeth on the one stock
+  that is genuinely flat today. A floor no stock can fail is not a floor.
+- **6.0** sits between them in the ratio `V_other` gives: feint rules at 39 are about half a printed
+  grid's 76, and about twice a blank receipt's 16.
+- The level counts are the existing 60 scaled by the same steps, and they exist to catch a posterised
+  render that has variance in the histogram's tails and nowhere else.
+
+**Per condition: the same number, met twice.** A stock must clear its class floor **separately at
+day and at dusk**, not on a figure combining the two. Firing 27 measured `looseleaf` clearing 8.727
+at dusk while its day twin missed at 7.655 on the same albedo, which is a fault in the day rig and
+not in the stock — and a single combined median would have hidden exactly that. The whole-library
+figure (250/432 at firing 27) stays reported and gates nothing.
+
+**A fold sequence is governed by the class of the stock it is folded from.** `assets/folds/*` frames
+are paper drawn on a screen and are measured by this section like any other paper surface, at the
+frame's shipped display size inside its own declared bounds. `unfold_thirds` is folded from a
+written stock and its floor is therefore **8.0 / 60**. It measures 5.650 / 87 at frame 0000 as of
+firing 31. `tools/check/surfaces.py`'s separate 1.2-grey-level patch floor for the folds family is
+superseded by this one, and the pack size in `SIZES['folds']` has to move with it — the pack itself
+costs 2.047 -> 1.489, so raising the floor without raising the pack only moves the failure.
+
+**What this floor is not derived from, stated so it is not re-asked.** It is not derived from a
+photograph of real paper at a known magnification. There is no photograph of real paper in this
+repository: `seed/photos/*.jpg` are themselves Blender renders out of `blender/photos/`, so
+measuring one would be measuring this build's own rig and calling it ground truth. That photograph
+stands in `asks[]` and does not block this floor. If one ever arrives, these three numbers are the
+first thing it should be used to check.
+
+---
+
 ## 6 · Contrast, and the rule for grounds that are not flat
 
 The floors, by light condition, measured by `tools/check/legibility.py` on `ink_core`:
@@ -714,6 +782,17 @@ declared flat. `--flats` runs it alone, which is what `--dir assets/shell` wants
    Reporting both and gating on the adversarial one keeps the fix that `GROUND_PCTL` bought.
    Add `--dusk` naming the dusk artifacts and raising `FLOOR_BODY` to 5.0 and `FLOOR_LARGE` to 4.5.
    `FLOOR_LARGE` goes to 4.0 by day.
+
+`tools/check/flat_fill.py` and `tools/paper_tooth.py` need one between them, added at firing 32:
+
+8. **A stock class map, and three floors instead of one.** Both files carry `FLOOR_STD = 8.0` and
+   `FLOOR_LEVELS = 60` marked "quoted from the queue item rather than defended here". §5a defends
+   them and splits them: a stock resolves to `written`, `plain` or `coated`, and takes 8.0/60,
+   6.0/48 or 4.0/32. The map is declared beside the tools rather than inferred from the filename, so
+   that a new stock has to be classified deliberately. Both tools report day and dusk separately and
+   a stock passes only when both clear. `tools/check/surfaces.py`'s 1.2-grey-level patch floor for
+   `assets/folds/*` is replaced by the class floor of the stock the sequence is folded from, and
+   `SIZES['folds']` in `tools/pack_assets.py` moves with it.
 
 One quantity in this document is not a pixel measurement and needs a Dart test instead: the ladder
 in §2. `app/test/legible_on_what_it_is_on_test.dart` is the right home — it already walks every ink

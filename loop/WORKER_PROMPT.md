@@ -310,6 +310,66 @@ The one caveat carried forward: `twelve-seconds-of-cold-start-on-every-seeded-sc
 a seeded-scene artifact, but if the cost turns out to be O(n) in the event log it will bite two real
 users eventually. Establish that before dismissing it again.
 
+### 3d. A measurement must be anchored to something the app declares
+
+**This is the rule cycle 3 cost most to learn, and it is written here rather than in a queue item
+because it outlives every item it applies to.**
+
+ADDRESS's definition of done has been, since firing 18, that every queue item names the measurement
+that will close it. **That is no longer sufficient.** Three metrics went green in cycle 3 while the
+defects they were named for did not move, and all three are one error:
+
+- **The fold placeholder's sample box slid off it.** The item sampled a 300x120 box at a fixed
+  `(200,1350)`. The object sat at y1281-1515 when the item was written and at y1075-1330 when it was
+  next measured, so the box landed on `assets/paper/looseleaf_03` instead and read 24.854 / 165
+  against a floor of 8.0. The placeholder itself read 7.061 / 81 and failed. The ruler had walked
+  off the defect and was measuring the repair standing next to it.
+- **`06_unfolding` reported 255 unique frames of a scroll.** `repeated_frames 0` over 255 frames
+  looks like sixty unique fold frames per second, which is what the brief asks for. But
+  `06_unfolding.report.json` has `playhead 239 of 240` at frame zero: the fold had already finished
+  before the recorder started, and those are 255 unique frames of a scroll and a cross-fade. A
+  frame-distinctness check cannot fail on a clip that does not contain the thing it is checking.
+- **The interrupt matrix left the screen and read as a legibility win.** Firing 21 moved it below
+  the fold; 42 failing text runs left `05_settings.text.json`; the headline fell 64 -> 25. The
+  matched-run ruler, which compares only the runs present in both captures, read 86 -> 87. Nothing
+  got easier to read. The population moved under the detector.
+
+So, in addition to naming a measurement, **an item must express it against something the app itself
+declares**:
+
+| anchor | where it lives |
+|---|---|
+| a surface's rect and asset id | `evidence/<artifact>.surfaces.json` |
+| a playhead, a sequence name, a frame index the app reports | `evidence/<artifact>.report.json` |
+| the text of a run (`says`) | `evidence/<artifact>.text.json` |
+| an event id | the spine, and the scene's report |
+| a registry id, a token name, an asset path | the source, via a test |
+
+Not an absolute pixel coordinate. Not a frame ordinal of the recording. Not "the box at (200,1350)".
+
+**Two corollaries, because the failure has two shapes.**
+
+1. **A sample window is placed by the object, not by the frame.** A window *size* is fine and often
+   necessary — 400x200 of a paper region, 200x200 of a tile. Its *placement* must come from the
+   object's own declared rect, and where one placement can be lucky, tile the window across the
+   rect at a fixed stride and report the median with the pass fraction beside it. A single
+   placement is a sampling accident; firing 29 measured 26.962 at one pixel and 31.421 at the
+   median of a 7x13 grid of the same object.
+2. **A count that can fall by the thing leaving the screen must be paired with a population that
+   cannot.** Any item whose measurement is "N failures fall to M" must also assert that the
+   denominator held: `total_runs` unchanged, the tile count unchanged, the same event ids present.
+   Otherwise deleting the evidence closes the item.
+
+**And a ruler that scores the defect above the repair is disqualified, not merely suspect.** Firing
+29 found `tools/check/hf_std.py` reading the firing 17 strip — taken when the fold sheet *was* the
+blank rectangle — at 14.609-15.635 against today's repaired 14.317-15.088. A ruler that inverts on a
+known before-and-after may not be cited by any item's measurement until it discriminates the pair.
+Every new ruler earns its place by being run against a defect that is known to be present and a
+repair that is known to have landed, and printing them in the right order.
+
+**When you write or re-rank a queue item, sweep its measurement for an absolute coordinate or a
+frame ordinal and re-express it.** ADDRESS is not done until that sweep has been made.
+
 ### 4. End the firing
 
 Update `loop/STATE.json` — increment `firing`, record what happened in `history`, set the stage for

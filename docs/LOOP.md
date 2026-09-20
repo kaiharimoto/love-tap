@@ -65,7 +65,7 @@ artifacts is an assertion with a number attached.
 |---|---|---|---|
 | **0 OBSERVE** | capture | `tools/apt-prereqs.sh`, `bootstrap.sh --profile=web`, build, `./capture.sh`, then `tools/check/*` and `tools/check/legibility.py` and `tools/check/palette.py` | the artifact set is fresh against this commit, or the ladder bottomed out |
 | **1 DIAGNOSE** | none | write `evidence/critics/<n>/builder.json` **first**, then run the seven critics as fresh contexts in parallel, then `python3 tools/score.py --cycle <n>` | every category has a critic score and `score.py` accepts the arithmetic |
-| **2 ADDRESS** | none | turn findings into an ordered queue in `loop/STATE.json`. **No code changes in this stage.** | every queue item names the measurement that will close it |
+| **2 ADDRESS** | none | turn findings into an ordered queue in `loop/STATE.json`. **No code changes in this stage.** | every queue item names the measurement that will close it **and that measurement is anchored to something the app declares** — a surfaces rect, an event id, a playhead, a `says` string — never an absolute pixel coordinate or a frame ordinal. `loop/WORKER_PROMPT.md` §3d is the rule and why it exists |
 | **3 DESIGN** | none | the design authority, below. Only when design state is stale. | a verdict is recorded and frozen |
 | **4 IMPLEMENT** | app | drain the queue in order, one commit per item | queue empty → `cycle += 1`, back to OBSERVE |
 
@@ -133,8 +133,11 @@ The one file that decides what a fresh session does. Read it before anything els
 
 Two rules keep it honest:
 
-- **A queue item closes only against its named measurement.** A claim with no measurement is
-  rejected; the item goes back to `open` and `attempts += 1`.
+- **A queue item closes only against its named measurement, and the measurement must be anchored
+  to something the app declares.** A claim with no measurement is rejected; the item goes back to
+  `open` and `attempts += 1`. A measurement written as an absolute pixel box or a frame ordinal is
+  not a ruler for a defect that can move — three of cycle 3's green numbers were pointing somewhere
+  else. `loop/WORKER_PROMPT.md` §3d carries the rule, the three cases and the two corollaries.
 - **`attempts >= 3`** moves the item to the back of the queue, sets `blocked` with what would
   unblock it, and the loop carries on. It does not spin on one thing.
 
