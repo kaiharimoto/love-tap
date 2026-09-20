@@ -4188,3 +4188,116 @@ of the warmth item is *done*, which is a thing no queue entry currently says.
 above the floor, mean L_std 10.849**, which is the number firing 22 filed. The instrument is stable
 across containers and the comparison this firing is about to make is like-for-like.
 
+
+### What the measurement said, and it was not what the item predicted
+
+**The knob was broken, and that is the whole reason five firings could name the cause and not fix
+it.** `rig/common.paper_material` spends `tooth` twice — on the four albedo mottle amplitudes, and
+on `bump.Strength = 0.85 * tooth`. Blender's bump strength is meaningful over 0..1. Past about 1.2
+it tilts the shading normal far enough off the surface that the sheet loses light faster than the
+mottle adds variance to it. Swept on `lined_01` at res 3000: `tooth` 1.0 → 3.0 takes mean luminance
+**218.9 → 137.4** while L_std **falls 6.83 → 5.70**. Relative contrast rises the whole way (3.12% →
+4.15%); the paper just goes dark faster than it goes toothy.
+
+So the item's own reading (a) — *"`paper_material`'s tooth is changed and the stocks re-rendered"* —
+could not have worked as written. Anyone who tried it would have got a dimmer sheet and a lower
+number and concluded the tooth was not the cause after all. The shipped library was never affected:
+per-stock `tooth` tops out at 1.10, so bump strength tops out at 0.935 and stays in range. It is a
+broken knob, not a broken asset, and it was invisible precisely because nobody had turned it.
+
+The first hypothesis was a ColorRamp clamp — the mottle ramps set element colours above 1.0, and if
+Blender clamped them each layer would only ever darken. **That was wrong**, checked directly in
+Blender 4.5.13: elements store 1.09 and 1.3 unclamped. Worth recording because it is the obvious
+explanation and it is not the right one.
+
+**`albedo_tooth` is the half that works.** It multiplies only the mottle. Across a 5× change:
+
+- mean luminance constant to **0.03 of a grey level**,
+- OKLab chroma **−1.6%**, a factor of two under `docs/COLOR.md` §5's ground ceiling of 0.09,
+- the dark end of the histogram **does not move at all** — p01 is 182 at every level, so the tooth
+  adds no new dark paper for ink to compete with, which is the legibility argument in one number,
+- decomposed by feature size, all of the addition is under 0.8 mm and **the coarse band falls**:
+  grain, not stain.
+
+The response fits `V_other + V_mottle·k²`. Fitted on four points it predicted **8.011 at k=3.75**
+and the render measured **7.975** — 0.45% out. That model is what priced the other nine stocks
+without rendering each one.
+
+**The sample count mattered and nearly cost a wrong answer.** At `--samples 24` a real part of the
+reading is Monte Carlo noise, and k=5.0 looked like it cleared the floor. At the shipped
+`--samples 48` the same k reads 7.577 and does not. Every shipped number is at the shipping
+settings, through the full committed chain — LANCZOS to 1500, WEBP q88, bilinear into the 2908 px
+box.
+
+### The result
+
+23 sheets, 1 h 27 m on four cores, committed per family. Over every 400×200 window of every day
+sheet, against firing 25's tip:
+
+| family | median L_std before | after |
+|---|---|---|
+| lined | 6.213 | **8.039** |
+| spiral | 6.197 | **8.325** |
+| legal | 5.693 | **8.307** |
+| index | 6.811 | 7.971 |
+| looseleaf | 6.056 | 7.655 |
+| sticky_yellow | 1.088 | 4.626 |
+| sticky_blue | 1.109 | 4.518 |
+| sticky_pink | 1.080 | 4.248 |
+| receipt | 1.101 | 1.569 |
+| graph | 8.291 | 8.291 (untouched) |
+| **all day** | **6.131** | **7.977** |
+
+Windows above the floor: **25/216 → 84/216**. `paper_tooth.py --all` reads 168/432 against 117/432,
+and understates it, because only the day half of the library moved.
+
+**Use the median, not the mean, and here is why.** `sticky_yellow_01`'s eight windows are 60.23,
+4.45, 4.60, 4.16, 4.88, 4.67, 3.99, 4.74 — one window straddles the sheet edge and its shadow, and
+it drags the mean to 11.5 while seven windows sit near 4.5. Reporting "sticky notes went 8.7 → 11.7"
+would have been true of the arithmetic and false about the paper.
+
+**Cost, stated rather than discovered later:** packed paper 1465 kB → 4763 kB, and the whole bundle
+**80.1 MB → 83.4 MB, +4.1%**. Noise is incompressible; there is no cheap version of this.
+
+**Gates:** `flutter analyze` 0 errors, `flutter test` **174/174**, `surfaces` ok on the source
+library (321 read) and on the packed one (318 read), `recipes` ok, `manifest` entry-for-entry
+identical to what this firing inherited — its 14 `scratch/` entries and the `ok: false` they cause
+are inherited, not new, and `surfaces.py`'s exit 2 on the default root is its designed error for a
+container with no packed library, not a regression.
+
+`evidence/coldstart.json` and `evidence/reliability.json` were rewritten by the test run and were
+**reverted, not committed**: the only changes were timestamps and an ephemeral port, the cursors and
+state were identical, and a side effect of `flutter test` is not a capture.
+
+### What this settles, and what it does not
+
+The item's "either the tooth rises or the floor falls" was a false dichotomy and both halves are
+true of different stocks. The tooth rises for writing paper and it works. **The floor is wrong for
+coated stocks**: a sticky note needs k≈10.0–10.7 and a thermal receipt k=12.8 to read 8.0, and a
+real thermal receipt is a coated, near-featureless surface whose correct render has almost no tooth.
+A floor that asks a receipt to have the surface variance of graph paper is measuring the wrong thing
+on that stock. `V_other` — everything in the window that is not the mottle — is 76 for a printed
+grid, 39 for feint rules and 16 for a blank receipt, which is the whole story: **the 8.0 floor is
+dominated by printed content, not by paper.**
+
+What this firing could NOT do is reading (b) as written. It asks the floor be re-derived against *a
+photograph of real paper at this magnification*, and there is no photograph of real paper in this
+repository — `seed/photos/*.jpg` are themselves Blender renders out of `blender/photos/`, so
+measuring one would be measuring this build's own rig and calling it ground truth. That is now in
+`asks[]`. A **per-class** floor in `docs/COLOR.md` is what the item needs next and it is an ADDRESS
+or DESIGN decision, not an IMPLEMENT one.
+
+### For the next firing
+
+1. **The dusk half is owed and filed** as `the-dusk-paper-still-carries-the-old-tooth`. Same stock
+   list, `--condition dusk`, about an hour and a half. The day-only pass is defensible — a screen is
+   either a day screen or a dusk screen, never both — but it is still half a library.
+2. **Rank 5 cannot be closed without a capture.** Its measurement is in pixels on stills and this
+   firing spent its budget on the render. The first firing to capture should read it, and the two
+   rulers now write themselves, so that capture will not repeat firing 24's hand-made number.
+3. **Rank 15's paper half is already done** and no entry said so until this firing checked: all 27
+   day stocks moved with the rig fix at `a6f46fd`. What is left is 38 files — objects 21 of 75, bits
+   16 of 44, shell 1 of 2 — and `tools/render_queue6.sh` is the harness for them.
+4. `assets/MANIFEST.json` carries **14 inherited `scratch/` entries** that keep the manifest gate at
+   `ok: false`. They are not out-of-tree so the new guard does not catch them, and they are older
+   than this firing. Somebody should decide whether they are assets or litter.
