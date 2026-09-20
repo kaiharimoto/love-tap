@@ -6,6 +6,7 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'palette.dart';
@@ -233,4 +234,106 @@ class _RulePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_RulePainter old) => old.colour != colour || old.seed != seed;
+}
+
+/// A row of pen strokes standing side by side: a tally, a dial, the shape of a recorded voice.
+///
+/// Every other affordance in this file has been a hand's stroke since the file was written. These
+/// two were not, and they are the only two, which is why one queue item found the same defect on
+/// six artifacts. `_WavePainter` in `regions/chat/blob_widgets.dart` drew a voice note as
+/// `Canvas.drawRect` bars of `Theme.of(context).colorScheme.onSurface` — a Material scheme colour,
+/// in an app that has no Material scheme colours anywhere else — and `_Dial` in `material/desk.dart`
+/// drew four flat `Container`s while its own docstring said "drawn as tally strokes rather than as
+/// a progress bar". The dial sits on the partner strip at the top of every screen, so the run of
+/// hard-edged vertical bars with perfectly constant interiors was on all of them: 58 mean-crossings
+/// and a 70.8 L range across 47% of the width of `02_chat`, 68 crossings on `13_messenger_states`,
+/// 21 on the dusk object shelf.
+///
+/// A stroke from [_Hand] fixes both clauses of that at once and for the same reason a hand does:
+/// it wobbles, so the bars stop sharing a y and stop being axis-aligned, and it swells and thins
+/// along its length, so no interior is one constant value.
+///
+/// [heights] are fractions of the box height, one per stroke. Strokes before [struck] are pressed
+/// — full weight in [colour] — and the rest are light, in [lightColour] at a lighter hand. That is
+/// two inks and two pressures rather than one ink at two opacities: alpha standing in for a
+/// distinction is its own queue item, and a voice that has been played is not a faint voice.
+class Tally extends StatelessWidget {
+  const Tally({
+    super.key,
+    required this.heights,
+    this.struck = -1,
+    this.colour = Pen.graphite,
+    this.lightColour = Pen.margin,
+    this.weight = 1.6,
+    this.seed = 23,
+  });
+
+  /// One fraction of the box height per stroke, clamped into the box when it is drawn.
+  final List<double> heights;
+
+  /// Strokes at an index below this are pressed. -1 presses none; [heights].length presses all.
+  final int struck;
+
+  final Color colour;
+  final Color lightColour;
+  final double weight;
+
+  /// Moves the wobble, so two tallies on one screen are not twins. Held constant across rebuilds
+  /// so that a mark does not redraw itself differently every frame.
+  final int seed;
+
+  @override
+  Widget build(BuildContext context) =>
+      CustomPaint(painter: _TallyPainter(heights, struck, colour, lightColour, weight, seed));
+}
+
+class _TallyPainter extends CustomPainter {
+  _TallyPainter(this.heights, this.struck, this.colour, this.light, this.weight, this.seed);
+  final List<double> heights;
+  final int struck;
+  final Color colour;
+  final Color light;
+  final double weight;
+  final int seed;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final n = heights.length;
+    if (n == 0 || size.width <= 0 || size.height <= 0) return;
+    final step = size.width / n;
+    final mid = size.height * 0.5;
+    // one hand for the whole row, so each stroke leans and wobbles differently from its neighbour
+    final pressed = _Hand(canvas, colour, weight, seed);
+    final faint = _Hand(canvas, light, weight * 0.62, seed + 1);
+    for (var i = 0; i < n; i++) {
+      final half = (heights[i].clamp(0.05, 1.0)) * size.height * 0.5;
+      final x = step * (i + 0.5);
+      final hand = i < struck ? pressed : faint;
+      // A lean, because nobody draws two strokes at the same angle. And FOUR points, not three:
+      // [_Hand.stroke] gives its middle segment the swell, and with three points there are two
+      // segments and both of them are an end, so a three-point stroke has the same pressure all
+      // the way down. Four puts a real thickening in the middle, which is the pressure variance
+      // the material row is judged on.
+      final lean = (i.isEven ? 0.6 : -0.45) * (half / size.height);
+      hand.stroke(
+        [
+          Offset(x - lean, mid + half),
+          Offset(x - lean * 0.3, mid + half / 3),
+          Offset(x + lean * 0.3, mid - half / 3),
+          Offset(x + lean, mid - half),
+        ],
+        wobble: 0.55,
+        taper: 0.3,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_TallyPainter old) =>
+      old.struck != struck ||
+      old.seed != seed ||
+      old.colour != colour ||
+      old.light != light ||
+      old.weight != weight ||
+      !listEquals(old.heights, heights);
 }

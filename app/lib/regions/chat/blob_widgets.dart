@@ -297,37 +297,25 @@ class _VoiceNotePlayerState extends State<VoiceNotePlayer> {
         SizedBox(
           width: 160,
           height: 28,
-          child: CustomPaint(painter: _WavePainter(widget.waveform, _progress, Theme.of(context).colorScheme.onSurface)),
+          // Strokes, not bars. This was `_WavePainter`: flat `drawRect` bars of
+          // `Theme.of(context).colorScheme.onSurface`, the only Material scheme colour left in
+          // the app, all beginning and ending at exactly the same y with perfectly constant
+          // interiors. It measured as a barcode laid over the paper on four artifacts.
+          child: Tally(
+            heights: widget.waveform,
+            struck: (widget.waveform.length * _progress).round(),
+            colour: Pen.graphite,
+            lightColour: Pen.margin,
+            weight: 1.5,
+            // per note, so two voice notes in one thread are not the same hand twice
+            seed: 23 + hashOf(widget.hash) % 64,
+          ),
         ),
         const SizedBox(width: 8),
         Text('${secs ~/ 60}:${(secs % 60).toString().padLeft(2, '0')}', style: const TextStyle(fontSize: 12)),
       ],
     );
   }
-}
-
-class _WavePainter extends CustomPainter {
-  _WavePainter(this.wave, this.progress, this.colour);
-  final List<double> wave;
-  final double progress;
-  final Color colour;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (wave.isEmpty) return;
-    final n = wave.length;
-    final w = size.width / n;
-    final played = Paint()..color = colour;
-    final rest = Paint()..color = colour.withValues(alpha: 0.35);
-    for (var i = 0; i < n; i++) {
-      final h = (wave[i].clamp(0.05, 1.0)) * size.height;
-      final x = i * w;
-      canvas.drawRect(Rect.fromLTWH(x + w * 0.2, (size.height - h) / 2, w * 0.6, h), i / n < progress ? played : rest);
-    }
-  }
-
-  @override
-  bool shouldRepaint(_WavePainter old) => old.progress != progress || old.wave != wave;
 }
 
 /// Bytes of a blob for the viewer (photo full-res, video).

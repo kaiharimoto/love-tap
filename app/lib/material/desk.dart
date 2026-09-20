@@ -10,6 +10,7 @@ import 'assignment.dart';
 import 'hands.dart';
 import 'library.dart';
 import 'light.dart';
+import 'marks.dart';
 import 'palette.dart';
 import 'paper.dart';
 
@@ -176,13 +177,23 @@ class _Dial extends StatelessWidget {
         children: [
           Stamped(label, size: 9, colour: Pen.margin),
           const SizedBox(width: 3),
-          for (var i = 0; i < 4; i++)
-            Container(
-              width: 2.2,
-              height: i < value ? 11 : 5,
-              margin: const EdgeInsets.symmetric(horizontal: 1),
-              color: Pen.margin.withValues(alpha: i < value ? 0.85 : 0.3),
+          // Tally strokes, which is what this widget's docstring has always said it was. It was
+          // four flat `Container`s: hard-edged vertical bars sharing a y to the pixel, interiors
+          // perfectly constant, one ink at two opacities. This strip is at the top of every
+          // screen, so that barcode was on all of them.
+          SizedBox(
+            width: 17,
+            height: 11,
+            child: Tally(
+              heights: [for (var i = 0; i < 4; i++) i < value ? 1.0 : 0.45],
+              struck: value,
+              colour: Pen.margin,
+              lightColour: Pen.margin,
+              weight: 1.4,
+              // the two dials sit side by side, so they must not be the same hand twice
+              seed: label == 'need' ? 31 : 37,
             ),
+          ),
         ],
       );
 }
