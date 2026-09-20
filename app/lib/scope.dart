@@ -174,10 +174,20 @@ class AppScope extends ChangeNotifier {
     } catch (_) {}
   }
 
-  /// Advance my read marker to the latest accepted row, if it moved.
-  Future<void> markRead() async {
-    final latest = thread.latestSeq();
+  /// Advance my read marker to the latest accepted row I have actually seen, if it moved.
+  ///
+  /// [notPast] is the ceiling the thread computes from what is still lying folded. Without it
+  /// this wrote a marker over the whole thread six hundred milliseconds after the region opened,
+  /// including rows drawn folded shut -- so the other person was told `read` for a note whose
+  /// writing the reader had not seen and could not have seen. The rubric's clause is "a delivery
+  /// and read marker that cannot be trusted", and a receipt for a closed envelope is exactly it.
+  ///
+  /// A null ceiling means nothing is folded and the whole thread may be marked. A ceiling below
+  /// my current marker moves nothing: a read marker never goes backwards.
+  Future<void> markRead({int? notPast}) async {
+    var latest = thread.latestSeq();
     if (latest == null) return;
+    if (notPast != null && notPast < latest) latest = notPast;
     final mine = thread.readUpto[me] ?? 0;
     if (latest > mine) await emit('read_marker', {'upto_seq': latest});
   }

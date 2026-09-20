@@ -26,6 +26,74 @@ import '../../material/slip.dart';
 /// The width a note takes on the desk, as a fraction of the region's width.
 const double _noteWidthFraction = 0.76;
 
+/// Whether this row is lying folded shut, and so whether its writing has been seen.
+///
+/// This used to be one expression inside [Note.build] and nothing else could ask it. That is why
+/// the read receipt could lie: `AppScope.markRead()` advanced the marker over the whole thread
+/// six hundred milliseconds after the region opened, while a note of theirs above the reader's
+/// frozen arrival marker was still drawn folded. The app told the other person `read` for a sheet
+/// the reader had not opened and could not have read. A receipt that fires on a closed envelope is
+/// worse than no receipt at all.
+///
+/// So the predicate lives here, once, and both the rendering and the receipt ask it. Two
+/// questions answered by two copies of the same condition is how they drift apart.
+///
+/// [FoldedNote.available] is part of it and not an afterthought: with no fold sequence on disk
+/// the note lies flat and its writing is on the screen, so nothing is hidden and the marker may
+/// honestly advance. Nothing of mine is ever folded, a thrown object lands face up with nothing
+/// to unfold, and a margin line is not a sheet of paper at all.
+///
+/// [foldsAvailable] overrides that reading for a caller that cannot ask. `reliability_test.dart`
+/// is the one: loading the material library needs the widget binding, and a file that
+/// initialises the widget binding has every HTTP request answered 400 by the test harness --
+/// which is the transport that test is built on. Passing it explicitly says "assume the sheet
+/// can fold, and tell me about the shape of this thread", which is the question that matters
+/// there and is not a question about the asset directory.
+bool noteLiesFolded(
+  ThreadItem item, {
+  required Person me,
+  required int unreadFrom,
+  bool? foldsAvailable,
+}) {
+  if (!(foldsAvailable ?? FoldedNote.available)) return false;
+  if (item.author == me) return false;
+  if (Note._isMarginal(item.type)) return false;
+  if (kThreadRenderers[kEventTypeById[item.type]?.renderer] == objectLanding) return false;
+  return (item.event.seq ?? 0) > unreadFrom;
+}
+
+/// The highest seq a read marker may honestly advance to, given what is still folded.
+///
+/// A read marker is a watermark -- `upto_seq` -- so it cannot say "I read 12 and 14 but not 13".
+/// The truthful watermark is therefore the last row before the first folded sheet the reader has
+/// not opened. Everything at or below it is either mine, or thrown, or was already read when the
+/// thread was opened, or has been opened since; every one of those the reader has actually seen.
+///
+/// Returns 0 where even the first row with a seq is folded and unopened: there is nothing honest
+/// to advance to. Zero rather than null on purpose -- `markRead`'s ceiling is nullable and null
+/// there means "no ceiling, mark everything", which is the opposite of what this case means. A
+/// read marker starts at 0 and never goes backwards, so 0 is the value that moves nothing.
+int seenUpto(
+  List<ThreadItem> items, {
+  required Person me,
+  required int unreadFrom,
+  required Set<int> opened,
+  bool? foldsAvailable,
+}) {
+  var last = 0;
+  for (final item in items) {
+    final seq = item.event.seq;
+    if (seq == null) continue;
+    if (!opened.contains(seq) &&
+        noteLiesFolded(item,
+            me: me, unreadFrom: unreadFrom, foldsAvailable: foldsAvailable)) {
+      return last;
+    }
+    last = seq;
+  }
+  return last;
+}
+
 class Note extends StatelessWidget {
   const Note({
     super.key,
@@ -34,6 +102,7 @@ class Note extends StatelessWidget {
     required this.onLongPress,
     required this.row,
     required this.unreadFrom,
+    this.onOpened,
     this.highlight = false,
   });
 
@@ -47,6 +116,10 @@ class Note extends StatelessWidget {
   final int unreadFrom;
   final FeelingRegistry registry;
   final VoidCallback onLongPress;
+
+  /// Called once this row's writing is actually on the screen, so the thread can let the read
+  /// marker past it. A folded note that nobody opens never fires it, which is the whole point.
+  final VoidCallback? onOpened;
   final bool highlight;
 
   @override
@@ -79,7 +152,7 @@ class Note extends StatelessWidget {
     // 08_state_propagating was for ever, because nothing ever taps it. Two of the three things the
     // far phone sent arrived as blank paper.
     final thrown = kThreadRenderers[kEventTypeById[item.type]?.renderer] == objectLanding;
-    final folded = !mine && !thrown && (e.seq ?? 0) > unreadFrom;
+    final folded = noteLiesFolded(item, me: scope.me, unreadFrom: unreadFrom);
 
     final piece = PaperPiece(
       stockId: stock,
@@ -139,7 +212,9 @@ class Note extends StatelessWidget {
         onLongPress: onLongPress,
         child: Padding(
           padding: EdgeInsets.fromLTRB(mine ? 40 : 14, 4, mine ? 14 : 40, 4),
-          child: folded ? FoldedNote(width: width, child: piece) : piece,
+          child: folded
+              ? FoldedNote(width: width, onOpened: onOpened, child: piece)
+              : piece,
         ),
       ),
     );

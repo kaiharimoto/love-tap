@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:desk/regions/chat/note.dart';
 import 'package:desk/spine/projections/thread.dart';
 import 'package:desk/spine/spine.dart';
 import 'package:desk/spine/store/store_native.dart';
@@ -83,6 +84,37 @@ void main() {
     final t1 = projectThread(client.all);
     cap('read').ok = t1.byId[m1.id]!.delivery == Delivery.read;
     cap('read').detail = 'client sees its message as ${t1.byId[m1.id]!.delivery.name} after the host read marker';
+
+    // read only what was seen
+    //
+    // The row above says a read marker travels. This says it does not travel for something the
+    // reader has not looked at. A note of theirs that arrives above the reader's arrival marker
+    // is drawn folded shut, and `markRead` used to write a marker over the whole thread six
+    // hundred milliseconds after the region opened -- so the other person was told `read` for a
+    // sheet whose writing was never on the screen. It is the heaviest failure this row can have,
+    // because the other person acts on it.
+    final unseen = await host.append(
+        'message', {'text': 'the key is under the pot'}, hostAssign: true);
+    await sync.once();
+    final t2 = projectThread(client.all);
+    final arrivedAt = t2.readUpto[Person.teo] ?? 0;
+    final unseenSeq = client.byId(unseen.id)!.seq!;
+    // `foldsAvailable: true` rather than letting it read the library: loading the library needs
+    // the widget binding, and a file that initialises it has every HTTP request answered 400 --
+    // which is the transport this whole file runs on. What is being asked here is the shape of
+    // the thread, not what is in the asset directory.
+    final ceiling = seenUpto(t2.items,
+        me: Person.teo, unreadFrom: arrivedAt, opened: const {}, foldsAvailable: true);
+    final opened = seenUpto(t2.items,
+        me: Person.teo, unreadFrom: arrivedAt, opened: {unseenSeq}, foldsAvailable: true);
+    cap('read_only_what_was_seen').ok = unseenSeq > arrivedAt &&
+        noteLiesFolded(t2.byId[unseen.id]!,
+            me: Person.teo, unreadFrom: arrivedAt, foldsAvailable: true) &&
+        ceiling < unseenSeq &&
+        opened >= unseenSeq;
+    cap('read_only_what_was_seen').detail =
+        'their row arrived at seq $unseenSeq above the arrival marker $arrivedAt and is folded; '
+        'the read marker may reach $ceiling until it is opened, and $opened once it has been';
 
     // reply
     final r1 = await host.append('message', {'text': 'yes. floor 3 apparently.', 'reply_to': m1.id}, hostAssign: true);

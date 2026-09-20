@@ -45,6 +45,10 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   /// folded for exactly one frame.
   int? _arrivedAt;
 
+  /// The seqs of folded notes whose writing the reader has actually watched arrive. A read
+  /// marker may pass a row only if it is here, or was never folded in the first place.
+  final Set<int> _openedSeqs = <int>{};
+
   final _text = TextEditingController();
   final _scroll = ItemScrollController();
   final _positions = ItemPositionsListener.create();
@@ -250,7 +254,19 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
     _readTimer?.cancel();
     _readTimer = Timer(const Duration(milliseconds: 600), () {
       if (!mounted) return;
-      AppScope.of(context).markRead();
+      final scope = AppScope.of(context);
+      // Only as far as the reader has actually seen. This used to be a bare `markRead()`, which
+      // wrote a marker over the entire thread -- including notes still drawn folded shut, whose
+      // writing was never on the screen. The ceiling is computed from the same predicate that
+      // decides whether to fold the row, so the receipt and the rendering cannot disagree.
+      scope.markRead(
+        notPast: seenUpto(
+          scope.thread.items,
+          me: scope.me,
+          unreadFrom: _arrivedAt ?? scope.thread.readUpto[scope.me] ?? 0,
+          opened: _openedSeqs,
+        ),
+      );
     });
   }
 
@@ -508,6 +524,16 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                           registry: registry,
                           highlight: it.id == _highlightId,
                           onLongPress: () => _actions(it, registry),
+                          // The row has been opened and its writing is on the screen, so the
+                          // marker may now pass it. Re-scheduled rather than emitted here: opening
+                          // the last folded note should carry the marker all the way to the
+                          // latest row, not just to this one.
+                          onOpened: () {
+                            final seq = it.event.seq;
+                            if (seq == null) return;
+                            _openedSeqs.add(seq);
+                            _scheduleRead();
+                          },
                         );
                       },
                     ),

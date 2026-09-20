@@ -284,10 +284,16 @@ class _FramePainter extends CustomPainter {
 /// This is the only place a fold sequence appears in the thread, and it is why the sequences exist:
 /// their notes arrive folded because that is what a note passed across a table is.
 class FoldedNote extends StatefulWidget {
-  const FoldedNote({super.key, required this.width, required this.child, this.seq = 'unfold_thirds'});
+  const FoldedNote({super.key, required this.width, required this.child, this.onOpened, this.seq = 'unfold_thirds'});
 
   final double width;
   final Widget child;
+
+  /// Called once the sequence has finished and the writing is on the screen -- not when the
+  /// person taps. The thread uses it to let the read marker past this row, and a receipt may
+  /// only be sent for something that has actually been seen. Tapping is a commitment to open;
+  /// the writing arriving is the reader having read it.
+  final VoidCallback? onOpened;
   final String seq;
 
   /// Whether a fold sequence is on disk at all. Without one the note simply lies flat, which is
@@ -351,7 +357,10 @@ class _FoldedNoteState extends State<FoldedNote> {
         // the camera and another way in a hand, which is the thing the artifacts exist to rule
         // out. The first frame of the sequence IS the note lying folded; the beat, if it is ever
         // wanted, belongs in the render and not in a timer.
-        onOpen: () => setState(() => _open = true),
+        onOpen: () {
+          setState(() => _open = true);
+          widget.onOpened?.call();
+        },
       );
     }
     return GestureDetector(
