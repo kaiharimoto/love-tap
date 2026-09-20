@@ -4458,3 +4458,191 @@ were rewritten by the test run and **reverted before the capture**, per §5.
    untouched and are all `the-ui`.
 4. Rank 10 and rank 11 remain parked for ADDRESS on their own amendments; rank 11's premise is
    discharged and its written number is not met.
+
+## Firing 28 — cycle 3, IMPLEMENT — the frame nobody asked for
+
+Step 0 passed on the second try. The container's clone read as **50 ahead and 50 behind** with no
+merge base, which §0 of `loop/WORKER_PROMPT.md` describes three different causes for; this was the
+plain one. `git fetch --depth=120` moved the remote side to 120 and left the local side at 50, and
+the local tip's date (2026-09-15) was four days older than the *deepest commit the remote fetch had
+reached* (2026-09-18) — so the tip was not absent from the remote's history, it was below the
+window. `git reset --hard origin/<branch>` was **allowed** here, which takes that route to one for
+four in this file's history. `Everything up-to-date` after it. The lease was written, committed and
+pushed before anything else was touched.
+
+### The item, and it was a fifteen-minute experiment that took four
+
+`the-pad-is-a-flat-fill-on-the-two-screens-a-new-person-sees-first`, the last piece of rank 5's
+first clause. Firing 27 filed it with two candidates and an experiment to separate them. The
+experiment ran, and it killed both candidates and found a third thing underneath.
+
+**What the committed evidence already said, checked first.** `assets/paper/legal_02.webp` contains
+the value `#F3E6A8` **zero times**, and `looseleaf_01.webp` contains `#F2EDE2` zero times. So the
+59.56% and the 47.98% were not any pixel of any render. They were the `ColoredBox` in
+`material/paper.dart` and the `ColoredBox` in `material/desk.dart` — and firing 27's reading missed
+that the desk was flat too: `17_setup_pwa.png` carried another **23.87% of exact `DeskColour.day`**
+beside its sheet, so the first screen a new person saw was two flat fills, one on the other.
+
+**The experiment.** Served the fresh build and shot it at the scene's own timings and again at
+fifteen seconds, with every `.webp` request timed.
+
+- `legal_02.webp` was requested at 2532 ms and **finished at 3338 ms**.
+- The shot at **9149 ms** is flat: L_std **0.000**, one luminance level.
+- The shot at **15910 ms**, nothing touched in between, is **the same flat**. So candidate (b), the
+  shutter being early, is dead: twelve and a half seconds after the bytes landed is not early.
+- One `window.__deskStep(16)` — a single driven frame — and the same window reads L_std **8.585**
+  at 69 levels. The paper was there the whole time.
+
+**Then the same thing on a build with no capture hooks compiled into it at all**, which is the only
+reading that says anything about a person rather than about the harness: `17_setup_pwa` at three
+seconds, eight seconds and **twenty seconds** is 47.98% one exact RGB. A pointer move does not fix
+it. A tap does not fix it. A `visibilitychange` does not fix it. **This is what a person installing
+the PWA saw**, and it is not a capture artifact.
+
+**Why.** A temporary hook was added that reports the scheduler and pokes it three ways. It said:
+
+    hasScheduledFrame=false  schedulerPhase=idle  framesEnabled=true  lifecycle=resumed
+
+and `requestAnimationFrame` was frozen at 12 calls from 1.9 s to 9.8 s. `markNeedsPaint` on every
+`RenderImage` changed nothing beyond what one bare `scheduleFrame()` did on its own, and
+`markNeedsBuild` on all 541 elements changed nothing beyond that either. **One `scheduleFrame()`
+and nothing else took 47.98% to 1.88%.** The render tree had been right all along; the frame was
+never asked for.
+
+`SchedulerBinding.ensureVisualUpdate` — which every one of these paths ends in — schedules a frame
+only from `idle` and `postFrameCallbacks`. From `transientCallbacks`, `midFrameMicrotasks` and
+`persistentCallbacks` it returns without scheduling, on the assumption that the frame already in
+flight will carry the change. A decode that finishes during that frame's **paint**, or in the
+microtasks between its phases, is asking to repaint a subtree the frame has already painted, and
+the request is dropped: nothing scheduled, nothing left dirty, and the last thing drawn stays on
+the glass. On any screen where something else asks for a frame afterwards it lands and nobody ever
+knew. **A fresh install has no notes, no animation and nothing pending, so nothing ever asks.**
+
+That is why five firings looking at seeded screens could not see it, and it is the exact reason
+firing 20's magenta test was right and useless: it was run on a seeded screen, where the render was
+already in the cache before the widget first built, so there was nothing arriving late to drop.
+
+### The fix
+
+Every place that draws a rendered surface now asks for the frame — eight `Image.asset` call sites
+through one shared `frameBuilder`, and `MaskedLayer` and `NineSliced` after their `setState`, which
+take the same drop through `MaskCache`. From inside a frame it is a post-frame callback, which runs
+at the end of the frame in flight and schedules the next one; from outside it is the `scheduleFrame`
+`ensureVisualUpdate` would have made itself. It costs one empty frame per render that arrives late
+and nothing per render that was already decoded, which is every render after the first screenful.
+
+### The capture, and the thing in it nobody was aiming at
+
+14 of 17, the standing ceiling. The first clause of rank 5 — no single RGB over 8% of a frame —
+**now passes on every still in the set**: 01_pulse 0.97, 02_chat 2.17, 03_us 1.33, 04_moments 1.04,
+05_settings 1.35, 05_settings_interrupt 2.28, 10_first_run 0.66, 12_search 0.96,
+13_messenger_states 0.86, 14_media_viewer 1.35, 17_setup_pwa 1.88. Not one of those dominant values
+is a `Paper` or `DeskColour` constant any more. Pad-box windows go 76/88 to **81/88**;
+`10_first_run` 2/8 to 6/8 with its median L_std **0.000 → 9.200**, and `17_setup_pwa` 7/8 to 8/8.
+
+**Six stills came back byte-identical** — 01_pulse, 02_chat, 03_us, 05_settings, 12_search,
+14_media_viewer — and that is the strongest thing in this set. A frame that was already complete is
+unchanged to the byte; only the screens where a render was arriving late moved. That is what a fix
+for a dropped repaint should look like and it is not what a fix for anything else would.
+
+And one number came back that nothing was aiming at: **palette `mean_chroma` 0.0438 → 0.0450**,
+which is rank 15's `>= 0.045` floor met again. Firing 27 recorded the 0.0449 → 0.0438 fall as the
+price of the paper re-render. Some of it was not the paper: it was two screens of flat fill sitting
+in the union, and the renders underneath them carry colour that a constant does not.
+
+Legibility 18 of 358 below floor → **16 of 358**, `on_moving_ground` 17 → 15,
+`would_pass_on_ring_reading` 16 → 14, so by the tool's own qualifiers genuinely sub-floor runs are
+one either way. `10_first_run` is 0 of 13 and `17_setup_pwa` 0 of 32.
+
+`tools/check/flat_fill.py` is the sibling gate rank 5's measurement asked for. It reproduces firing
+27's hand-made figures **exactly** from the committed stills — 59.56%, 47.98%, 2/8, 7/8, median
+0.000 — names the constant out of `palette.dart` when the dominant value is one, and samples with
+`tools/paper_tooth.py`'s own window, floors and seed. `capture.sh` writes it now, for the same
+reason the other two rulers were moved into the capture.
+
+### Rank 5 closes, and what it hands on
+
+Rank 5 closes on its own cause and its own first clause. Its second clause is **81 of 88** and the
+seven that remain sit at L_std 7.3 to 7.9 **with the levels clause passing**, over five stills —
+`10_first_run`'s two are 7.368 at 66 levels and 7.458 at 69. That is tooth amplitude, not a fill,
+and it is `the-paper-tooth-is-six-and-the-floor-asks-eight`: a floor written per class and per
+condition in `docs/COLOR.md`, which is DESIGN's question and not IMPLEMENT's.
+
+### The fourth deferral, which was taken instead
+
+`loop/WORKER_PROMPT.md` says that deferring a fourth thing to ADDRESS is the signal to stop
+deferring. Reading the capture produced a fourth, and it was taken rather than filed.
+
+`13_messenger_states.png` read L_std **26.962** against rank 1's floor of 30 — *down* 1.06 on firing
+27's 28.019. The surfaces sidecar said why: same number of surfaces, same heights, **different
+stocks**. The report said it exactly. The three seeded notes keep their ids and their stocks; the
+four the scene stages do not — `0001MCJ1M0H9H62TRFZBB1MNXS` against `0001MCJ1M0HZ2R94F1XFBSH9JW` —
+and an event id picks the paper it is written on through `hashOf(id)`.
+
+`Flags.capture`'s own docstring has said **"driven clock, fixed RNG seed"** since it was written,
+`Flags.captureSeed` has been 20260903 for as long, and every capture report prints
+`seed: 20260903`. Nothing applied it to `UlidFactory`. So four of the seven notes on the screen
+rank 1's last clause is measured on were torn from different paper on every run, and the series
+23.673 → 28.019 → 26.962 is three different sets of paper rather than three readings of one.
+
+Fixed under capture only — a real build keeps `Random.secure()`, which is what an id unique across
+two phones that have never met needs to be. **Measured:** the same scene run twice against one
+build, into a scratch directory so nothing under `evidence/` was touched. `visible` and `stocks`
+identical to the character, and the rank 1 sample reading **25.158 and 25.159** — three decimals
+apart instead of a point and a half. The stills are still not byte-identical, so something
+sub-pixel remains; the ruler is repeatable, which is what the clause needed.
+
+§3c allows fixing a ruler you cannot see without, and this is the six-point item at the top of the
+queue. It cost forty minutes.
+
+### Rank 1, read whole for the first time
+
+Three of its four clauses pass, and the second had never been read at all.
+
+- **Still clause:** 26.962 of 30, 166 levels of 150. Short by 3.0, and comparable to the *next*
+  capture rather than to the last one.
+- **Strip clause:** all six sampled frames of `crops/06_unfolding_strip.png` carry the sheet at
+  HF_std **14.4 to 15.1** against a floor of 4. Two caveats stated rather than buried: **no
+  committed tool defines HF_std**, so the definition used is L minus a 2-px gaussian over the
+  brightest 45% of the frame; and the strip is 908×320, about 151 px a frame, with the
+  full-resolution frames it was made from in scratch and gone.
+- **Clip clause:** `repeated_fraction` 0.0, `longest_still_run` 0, over 255 frames, against 0.02
+  and 2.
+- **Budget clause:** 28.0 MB of 32.
+
+### The costs and the caveats
+
+`02_chat.png` is refused again by `tears.py`'s sample-size floor of eight notes against a screen
+that fits seven. **The PNG is on disk, written 04:52:38Z by this run**, and `MANIFEST.json`'s
+reason — "a copy from an earlier run is still on disk … it is not this session's" — contains a
+timestamp claim that is wrong on its own numbers: the file is newer than `captured_at` 04:51:35Z.
+A critic must not read it as absent, and somebody should fix the comparison.
+
+`15_authored_feeling`'s scene reported a failure with an **empty message** and its 308 frames
+assembled anyway; the mp4 is from this run and is counted present. Nobody has looked at why the
+scene returned non-zero.
+
+`DIFF.json` reads `new` for all 15 again — `evidence/.previous` is gitignored and does not survive
+a fresh clone, so the first capture in any container is its own baseline.
+
+**Gates:** `flutter analyze` 0 errors; **174 tests pass** with the year packed (the same suite reads
+166 pass and 8 skip when `app/assets` has no seed in it); `surfaces` ok at 318 read, none flat;
+`texture_budget` 28.0 MB of 32.
+
+### For the next firing
+
+1. **Rank 5 is closed and the paper cluster's IMPLEMENT half is finished.** What is left of it and
+   of `the-paper-tooth-is-six-and-the-floor-asks-eight` is one DESIGN question: a floor per class
+   and per condition in `docs/COLOR.md`. The ADDRESS backlog is **three**, unchanged, because the
+   fourth was taken.
+2. **Rank 1 is the top of the queue and three of its four clauses pass.** The whole of what is left
+   is 3.0 of L_std on one 300×120 sample — and for the first time that sample is on paper that will
+   be the same paper next capture. Read it against firing 29's, not against 28.019.
+3. **Ranks 6 to 9 are untouched and all four are `the-ui`.** Rank 7's barcode is the most contained
+   of them: `_WavePainter` in `regions/chat/blob_widgets.dart` draws a voice note as flat
+   `drawRect` bars of `colorScheme.onSurface` — a Material theme colour, in an app that has no
+   Material theme colours anywhere else — with perfectly constant interiors, which is the
+   measurement the item was filed on. `_Dial` in `material/desk.dart` does the same thing smaller,
+   four flat `Container`s, and it is on the partner strip at the top of **every** screen, which is
+   why the item found it on six artifacts.
+4. Rank 10 and rank 11 remain parked on their own amendments.

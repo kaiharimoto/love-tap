@@ -1,0 +1,42 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 28,
+ "at": "b84c64e",
+ "written_at": "2026-09-20T06:25:00Z",
+ "tests": 174,
+ "analyze_errors": 0,
+ "items_worked": [
+  "the-pad-is-a-flat-fill-on-the-two-screens-a-new-person-sees-first",
+  "the-backing-surface-of-three-screens-is-one-rgb-value",
+  "the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames"
+ ],
+ "items_closed": [
+  "the-pad-is-a-flat-fill-on-the-two-screens-a-new-person-sees-first",
+  "the-backing-surface-of-three-screens-is-one-rgb-value",
+  "the-staged-ids-are-re-rolled-on-every-capture"
+ ],
+ "items_filed": [
+  "the-staged-ids-are-re-rolled-on-every-capture"
+ ],
+ "causes_established": [
+  "SchedulerBinding.ensureVisualUpdate schedules a frame only from SchedulerPhase.idle and postFrameCallbacks; from transientCallbacks, midFrameMicrotasks and persistentCallbacks it returns without scheduling, assuming the frame in flight carries the change. A render whose decode finishes during that frame's paint is asking to repaint a subtree the frame has already painted, so the request is dropped -- no frame scheduled, nothing left dirty, and the last thing drawn stays on the glass indefinitely. Measured directly: hasScheduledFrame=false, schedulerPhase=idle, framesEnabled=true, lifecycle=resumed, requestAnimationFrame frozen at 12 calls from 1.9 s to 9.8 s, and one bare scheduleFrame() taking 17_setup_pwa from 47.98% to 1.88%.",
+  "It is not the capture. A build with no capture hooks compiled into it shows 17_setup_pwa at 47.98% one exact RGB at three, eight and twenty seconds, and a pointer move, a tap and a visibilitychange all leave it there.",
+  "It was never the fallback being wrong to exist, nor the stock, the bundle, the pack size or the aspect ratio: the exact dominant RGB of each affected still appears ZERO times in the asset that screen declares, and the same asset at the same size and magnification was textured on the seeded screens.",
+  "Firing 27's reading was one surface short: 17_setup_pwa also carried 23.87% of exact DeskColour.day, the desk's own fallback, dropped by the same mechanism.",
+  "Flags.capture has promised 'driven clock, fixed RNG seed' since it was written and Flags.captureSeed has been 20260903, but nothing applied it to UlidFactory. An event id picks its paper through hashOf(id), so the four notes 13_messenger_states stages were torn from different stock on every capture -- which is what rank 1's last open clause is measured on."
+ ],
+ "measurements": {
+  "flat_fill_first_clause": "11 of 11 stills under the 8% dominant-RGB ceiling, 0.66% to 2.28%, none of them a Paper or DeskColour constant. 10_first_run 59.56 -> 0.66, 17_setup_pwa 47.98 -> 1.88.",
+  "flat_fill_second_clause": "pad-box windows 76/88 -> 81/88; 10_first_run 2/8 -> 6/8, median L_std 0.000 -> 9.200; 17_setup_pwa 7/8 -> 8/8",
+  "capture_reproducibility": "six of eleven stills byte-identical to firing 27's -- 01_pulse, 02_chat, 03_us, 05_settings, 12_search, 14_media_viewer -- so only the screens with a late render moved",
+  "palette": "mean_chroma 0.0438 -> 0.0450, rank 15's floor met again; grey_fraction 0.0204; lightness_drift_room 0.2805; named_families 1 of 4",
+  "legibility": "18 of 358 -> 16 of 358 below floor; on_moving_ground 17 -> 15; would_pass_on_ring_reading 16 -> 14",
+  "rank_1_still_clause": "13_messenger_states 300x120 at (200,1350): L_std 26.962 against >= 30, levels 166 against >= 150 -- on a different set of paper from firing 27's 28.019, firing 24's 26.743 and firing 23's 23.673",
+  "rank_1_strip_clause": "read for the first time: six of six sampled frames of crops/06_unfolding_strip.png at HF_std 14.4-15.1 against >= 4, on a 151-px-per-frame thumbnail, HF defined as L minus a 2-px gaussian over the brightest 45% because no committed tool defines HF_std",
+  "rank_1_clip_clause": "06_unfolding repeated_fraction 0.0, longest_still_run 0, 255 frames",
+  "texture_budget": "28.0 MB peak of 32",
+  "determinism": "two runs of 13_messenger_states against one build: `visible` and `stocks` identical to the character, rank 1 sample 25.158 and 25.159. PNGs still not byte-identical."
+ },
+ "artifacts": "14 of 17; the standing two plus 02_chat.png (tears.py sample-size floor; the PNG is on disk from this run) and 15_authored_feeling (scene returned non-zero with an empty message while its 308 frames assembled)"
+}
