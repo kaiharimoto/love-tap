@@ -49,5 +49,52 @@
   "FOR THE VISUAL-DESIGN CRITIC SPECIFICALLY: the colour finding is structural, not a tuning nit. hue_centres_deg [55, 65, 75, 85, 95] is one hue reported as five families, so 'hue_families: 5' in palette.json should not be read as five colours.",
   "MESSENGER_RELIABILITY IS CAPPED BY THE OWNER'S STEER AND THAT IS ACCEPTED. Part of this row is scored on evidence of a populated app, and the owner deprioritised populated demo content on 2026-09-19. The row is scored on what the artifacts show and NOT inflated to compensate, and no demo-content work is filed to lift it. A stalled heavy row beside a better app is the instruction working.",
   "NOT VERIFIED THIS FIRING: the 167-passing-test count and `flutter analyze` clean are carried from firing 23's log. DIAGNOSE runs with no toolchain profile, so this firing did not re-run them and does not claim them."
- ]
+ ],
+ "addendum_after_the_scores_still_before_any_critic": {
+  "written": "After the six scores above were committed and pushed (f7265aa) and before any critic report was opened. The scores are NOT revised: this identifies the defect they already priced, and corrects the ruler that has been mis-reporting it. It is here rather than in the queue because ADDRESS ranks and DIAGNOSE measures.",
+  "the_blank_card_is_the_fold_placeholder": "evidence/crops/06_unfolding_strip.png settles it. The same pale card, same position, same stock, is blank in five of the six sampled frames and in the sixth carries 'two stops. put the kettle on the second one not the first one / Thu 3 Sep 17:33'. So it is a note in its FOLDED state, and the folded state is drawn as a flat rectangle. This is not a new defect: it is queue rank 40 / rank 1, the fold placeholder, which five of seven critics named independently at firing 18 — seen on a still rather than in the clip.",
+  "the_fold_sequence_is_never_painted": "assets/folds appears ZERO times in all eleven stills' .surfaces.json sidecars. Every seeded scene's report declares fold {sequence unfold_thirds, length 240, decoded 24, playhead 0, held 0..23}, so the sequence is loaded and parked at frame 0 — and nothing of it reaches the glass. Caveat stated honestly: the sidecar may only instrument PaperPiece, so zero could mean uninstrumented rather than unpainted. The pixels are the primary reading and they agree.",
+  "measured_here": {
+   "card_interior_x120_y1110_w960_h190": {
+    "L_std": 5.65,
+    "levels": 87,
+    "mean_rgb": [
+     250.2,
+     224.4,
+     197.5
+    ]
+   },
+   "left_the_key_note_interior": {
+    "L_std": 42.677,
+    "levels": 189
+   },
+   "ok_leaving_now_note_interior": {
+    "L_std": 36.351,
+    "levels": 174
+   },
+   "project_own_flat_fill_floor": {
+    "std": 8.0,
+    "levels": 60
+   },
+   "reading": "The placeholder fails the build's own flat-fill floor at 5.65 against 8.0, beside real notes in the same frame carrying seven times the structure."
+  },
+  "THE_RULER_HAS_DRIFTED_OFF_THE_DEFECT_AND_THIS_IS_THE_CORRECTION": {
+   "what_rank_40_names": "a 300x120 sample at (200,1350) in 13_messenger_states.png, floor L_std >= 30 and >= 150 distinct levels",
+   "what_that_box_reads_today": {
+    "L_std": 24.854,
+    "levels": 165
+   },
+   "what_firing_23_concluded_from_it": "'the levels clause passes at 158, the L_std clause does not at 23.7 — THE ITEM'S STILL FLOOR IS NOW HALF MET'",
+   "why_that_is_wrong": "The box is no longer on the placeholder. Firing 18 recorded the object at x65-1099 y1281-1515; this capture finds it at y1075-1330 — it moved up about 206 px with the layout. The box spans y1350..1470, and 13_messenger_states.surfaces.json puts assets/paper/looseleaf_03 at rect y1357 h299. So all but seven rows of that sample sit on REAL PAPER. The number that has been read as the placeholder improving for three firings is a measurement of the note below it.",
+   "what_the_placeholder_actually_reads": {
+    "same_300x120_sample_on_the_card_at_200_1150": {
+     "L_std": 7.061,
+     "levels": 81
+    }
+   },
+   "so": "Against the item's own floor of 30 / 150 the placeholder fails BOTH clauses, not one. Nothing about it is half met. It reads 7.061 / 81 where firing 18 read 1.35 / 168 — flat then and flat now.",
+   "the_replacement_measurement_ADDRESS_should_write": "Anchor the sample to the object, never to a pixel box, because the object moves with the layout. The sidecar form is cheapest and cannot drift: NO painted note-sized card in any still may lack a matching assets/paper rect in that scene's .surfaces.json, and the region of any card that does lack one must measure L_std >= 30 with >= 150 levels. Re-break by parking the fold at playhead 0 and watching the unbacked card come back."
+  },
+  "a_general_lesson_for_the_loop": "A fixed-pixel sample box is not a ruler for a defect that can move. This build has caught itself twice now on a measurement that stopped pointing at the thing it was named for — the 42-run interrupt matrix that left the screen at firing 21 and read as a legibility win, and this. Both times the number improved and the app did not. Any queue measurement written as absolute coordinates should be re-expressed against something the app declares."
+ }
 }
