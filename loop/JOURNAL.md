@@ -5134,3 +5134,120 @@ the queue, 7, sits at rank 50, because it is the sixteen absent demo photographs
    the board and it expires at that DIAGNOSE. The home is settled as `docs/COLOR.md` §7 — not
    `docs/BRIEF.md`, which is authoritative and not a builder's to amend.
 
+
+---
+
+## Firing 33 — IMPLEMENT, cycle 3
+
+Four commits, each pushed and confirmed landed: `007440c`, `2f3b6f1`, `e6aa82a`, `df6d0b9`. Rank 4
+first as directed, then 3, then 2, then 1. Three items closed, rank 1's root cause found and half
+fixed, two items filed.
+
+### The gate was not measuring what it claimed, and now the suite's number is honest
+
+`cd app && flutter analyze && flutter test` exits **0**. The INFO was `read` at
+`a_voice_is_drawn_by_a_hand_test.dart:70`, a public function returning the private `_Reading`; it is
+`_read` now, private at its site rather than suppressed.
+
+The number underneath it turned out to depend on something nobody had written down:
+
+    pack_assets.py               63.5 MB, "seed absent"    +171 ~8, EIGHT SKIPPED, exit 0
+    pack_assets.py --seed=year   "seed included"           +179 ~0, none skipped, exit 0
+
+So **179 is the true figure and it is only true with the year packed.** The eight are
+`markTestSkipped(absent!)` guards in `the_year_loads_whole_test` and `with_the_year_in_it_test` —
+`docs/CONTINUE.md` §5's trap — and a firing that packs without `--seed=year` sees a green suite eight
+tests smaller with nothing telling it so. A fresh container also needs a pack before `flutter
+analyze` is clean at all: thirteen `asset_does_not_exist` warnings until `app/assets` exists.
+
+### Rank 2 was closed by being disproved, and the error is worth naming
+
+The item read `playhead 239 of 240` and concluded the fold had finished before the recorder started.
+But `report` is the **last** step in the scene, after `frames`, so that playhead is the sequence at
+the **end** of the take. It reads 239 whatever the clip in front of it contains.
+
+The driven clock settles it:
+
+    driven_ms at the report                       4394 ms
+    the frames step, 255 shots x 16667 us         4250.085 ms
+    therefore driven time before the first shot     143.915 ms
+
+and 143.915 ms is precisely the three `_settle()` calls `goTo`, `scrollTo` and `unfold` make on the
+way past, to within one clock period. `wait` is `page.waitForTimeout` and moves wall time only. The
+sequence is 4000 ms. **The clip contained the whole fold all along**, so rank 1's clause (c) is
+already true of the capture that exists and rank 1 was never blocked by rank 2.
+
+`WORKER_PROMPT` §3d forbids anchoring to a frame ordinal. This is the same error one level up: the
+ordinal was fine, the **moment it was sampled at** was not. A number that could have been taken at
+the wrong end of the thing is worth checking before implementing against it. The real gap — that
+nothing recorded the playhead *at* the first frame — is closed: `__deskFoldState` is read at the
+take's own first and last frame and lands in the report as `fold_at_first_frame` / `fold_at_last_frame`.
+
+### The flat card is the asset, and the two halves of rank 1 pull opposite ways
+
+The object five of seven critics named is `assets/folds/unfold_thirds` frame 0000, drawn faithfully.
+Not a code-painted fill, and not the instrument being blind:
+
+    the card in 13_messenger_states.png, y1085-1329    median L_std  5.647 / 45   (52 placements)
+    frame 0000 packed and drawn at that same 1045 px   median L_std  5.686 / 42   (18 placements)
+    the real note 70 px below it, same screenshot      median L_std 47.922
+
+Agreeing to 0.04 is what says they are one surface. **And the card's bounds are y1085–1329, not the
+y1281–1515 that three critics and two queue items quote** — that box is mostly the note below it,
+which is the walk-off §3d exists for.
+
+The cause: `blender/paper/stocks.py` gives every written stock an `albedo` mottle amplitude and
+`lined` ships at 6.0 — the knob firing 26 added *because* `tooth` cannot lift L_std without dimming
+the sheet. `fold.py` passed none and took the default 1.0. **The fold has been rendered from the
+sheet it is torn out of with a sixth of that sheet's mottle, for the whole build.** It now reads the
+look out of `stocks.py`, so the two cannot drift again.
+
+                        at source 1440      at the shipped size
+    albedo_tooth 1.0       6.824                 5.686
+    albedo_tooth 6.0       8.554                 6.928        floor 8.0
+
+The source clears the floor. The shipped frame does not, and the smallest pack that would is 900 —
+at which point clause (d) stops being a formality and becomes the binding constraint:
+
+    pack             540    720    900   1080   1260   1440
+    peak MB         29.3   52.1   81.4  117.3  159.6  208.5    budget 32.0
+    window that fits  39     22     14      9      7      5    today 36, _ahead 24
+
+The peak is already 28.0 of 32 MB. Pack 900 needs the decoded window cut from 36 to 14, **below the
+24 frames `FoldFrames` decodes ahead to hold 60 fps.** So the flat-fill floor and the WebKit texture
+budget point in opposite directions at every pack size, and that — not Blender — is why this item has
+survived five firings. Three routes out are written into the item; none was taken, because choosing
+between them is ADDRESS's.
+
+**`assets/folds` was deliberately not re-rendered.** Four hours for 240 frames, and committing the
+one frame rendered here would have left 239 stale behind it — which is exactly what `bf5ac29` did
+when it re-rendered "the first four frames" with rules and left 236 without. The library is knowingly
+behind its renderer and that is filed as its own item. **Do not re-render until `SIZES['folds']` is
+settled, or it gets rendered twice.**
+
+### A ruler that had to earn its place first
+
+`tools/check/stock_class.py` is `docs/COLOR.md` §5a in code; `surfaces.py` no longer gives the folds
+family paper's 1.2, which a blank sheet cleared by nearly ten times (max patch_std 11.680 over all
+240 frames, and it passed). The new gate fails it at 6.220, exit 1.
+
+`stock_class_selftest.py` runs the ruler against a known defect and a known repair before anything
+may cite it: **defect 5.686 < floor 8.0 ≤ repair 8.4265**. Re-broken by no longer excluding the
+rendered drop shadow from the sheet's bounds, at which point it does not merely fail — it **inverts**,
+scoring the defect 11.488 above the repair 9.0945, and the selftest disqualifies it in §3d's own
+words. The sampling accident §3d was written about is exactly the one that would have flipped it.
+
+One thing found and **not** quietly satisfied: §5a's 60-distinct-levels clause is missed by the
+repaired written stocks themselves (57–58). It fails defect and repair alike, so it separates
+nothing. It stays in `measure()` and is reported rather than gated on, with the reason at the call
+site — lowering a floor declared in `docs/COLOR.md` is ADDRESS's call. Filed.
+
+### For whoever takes IMPLEMENT next
+
+1. **Pack with `--seed=year` before believing a green suite.** +179 is the number; +171 with eight
+   silent skips is what you get otherwise.
+2. **Rank 1 is now a decision, not a bug.** The render half is done. The rest is the decoded-frame
+   window versus the texture budget, and it needs ADDRESS.
+3. **Don't re-render `assets/folds`** until the pack size is settled.
+4. The evidence set is **stale** as of this firing — `app/` and `blender/` both moved. It is
+   readable as a record, not scorable. `./capture.sh` before any stage that judges.
