@@ -668,6 +668,59 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
     return result
 
 
+def measurable_stills(dirpath):
+    """Every PNG in the set that is a screen the app declared, crops included.
+
+    `evidence/*.png` was the whole input list, and it silently left out the one artifact
+    rendered under the dusk rig: `capture.sh` writes it to `evidence/crops/dusk_pulse.png`,
+    one directory down, so the glob never saw it and the dusk floors below gated nothing at
+    all. That is what an empty `dusk` array in the report meant.
+
+    `crops/` cannot simply be globbed in, because most of what lives there is not a screen.
+    The `*_strip.png` filmstrips are montages of video frames, and measuring one as a still
+    invents runs that no screen ever showed; the `*_300_*.png` magnifications are pieces of
+    an artifact that is already in the list, and measuring one again counts the same writing
+    twice. The discriminator is the sidecar: a crop that carries a `<name>.text.json` is one
+    the app declared its own text for, which is the same anchor every other reading in this
+    file is taken against. Today that is `dusk_pulse` and nothing else.
+
+    The name a crop is reported under keeps its directory -- `crops/dusk_pulse.png` -- so that
+    it cannot be mistaken for a top-level artifact of the same stem. Top-level names are
+    unchanged, because their relative path is their basename.
+    """
+    paths = sorted(glob.glob(os.path.join(dirpath, "*.png")))
+    for p in sorted(glob.glob(os.path.join(dirpath, "crops", "*.png"))):
+        if os.path.exists(p[:-4] + ".text.json"):
+            paths.append(p)
+    return paths
+
+
+def declared_light(dirpath, path):
+    """Which rig the app says lit this artifact, or None where it did not say.
+
+    The scene writes `light` into `evidence/logs/<stem>.report.json` -- `capture.sh` builds
+    the dusk PWA with `--dart-define=LIGHT=dusk` and the app reports back what it was handed.
+    That is the app declaring its own condition, which is the anchor a rig has to be read from.
+
+    The obvious alternative is wrong and worth writing down so it is not tried again: picking
+    the rig out of `<stem>.surfaces.json` by looking for assets named `_dusk` classifies
+    `14_media_viewer` as a dusk screen. It draws five dusk-rendered surfaces -- photographs and
+    notes taken in the evening -- on a daylit desk, and its report says `day`. A screen is lit
+    by its rig, not by the provenance of the pictures lying on it, and holding it to the dusk
+    floors would have been a relaxation dressed as coverage.
+    """
+    stem = os.path.basename(path)
+    stem = stem[:-4] if stem.endswith(".png") else stem
+    report = os.path.join(dirpath, "logs", stem + ".report.json")
+    if not os.path.exists(report):
+        return None
+    try:
+        with open(report, encoding="utf-8") as f:
+            return json.load(f).get("light")
+    except (ValueError, OSError):
+        return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="")
@@ -675,8 +728,10 @@ def main():
     ap.add_argument("--worst", type=int, default=12, help="how many failures to print")
     ap.add_argument("--dir", default=EVIDENCE)
     ap.add_argument("--dusk", default="",
-                    help="comma-separated artifacts captured under the dusk rig; they are held to "
-                         "the dusk floors in docs/COLOR.md section 6 rather than the day ones")
+                    help="comma-separated artifacts to hold to the dusk floors in docs/COLOR.md "
+                         "section 6. Only needed for an artifact whose scene report is missing: "
+                         "where there is one, the rig is read from the `light` the app declared "
+                         "in it, and a flag that contradicts a declaration is refused")
     ap.add_argument("--text-runs", default="auto", choices=("auto", "off", "require"),
                     help="use the <name>.text.json the capture wrote beside each still, which is "
                          "what the app says it drew. auto: where there is one. off: never, which "
@@ -685,9 +740,10 @@ def main():
     args = ap.parse_args()
     dusk = {n.strip() for n in args.dusk.split(",") if n.strip()}
 
-    paths = sorted(glob.glob(os.path.join(args.dir, "*.png")))
+    paths = measurable_stills(args.dir)
     if args.only:
-        paths = [p for p in paths if os.path.basename(p) == args.only]
+        paths = [p for p in paths
+                 if args.only in (os.path.basename(p), os.path.relpath(p, args.dir))]
     if not paths:
         print(f"legibility: no PNGs in {args.dir}", file=sys.stderr)
         return 2
@@ -697,13 +753,19 @@ def main():
         "floors": {"body": FLOOR_BODY, "large": FLOOR_LARGE, "large_above_px": LARGE_PX,
                    "body_dusk": FLOOR_BODY_DUSK, "large_dusk": FLOOR_LARGE_DUSK,
                    "ground_swing_gate": GROUND_SWING_GATE},
-        "dusk": sorted(dusk),
+        # Filled in below from what each artifact declared, rather than echoed back from the
+        # command line. An empty array now means no dusk surface was captured, which is a fact
+        # about the capture; before this it meant nobody had passed a flag, which is a fact
+        # about nothing and read exactly the same.
+        "dusk": [],
+        "rig_declared_by": {},
         "artifacts": {},
         "failures": [],
     }
     missing_sidecars = []
+    rig_conflicts = []
     for path in paths:
-        name = os.path.basename(path)
+        name = os.path.relpath(path, args.dir)
         sidecar = None
         if args.text_runs != "off":
             side = path[:-4] + ".text.json" if path.endswith(".png") else path + ".text.json"
@@ -712,9 +774,24 @@ def main():
                     sidecar = json.load(f)
             else:
                 missing_sidecars.append(name)
+        # Which rig lit this artifact, and on whose word. The app's own report wins wherever
+        # it exists; the flag is for an artifact that has no report to read. Where the two
+        # disagree the run is failed rather than resolved, because a flag quietly overriding a
+        # declaration is how a screen gets held to the wrong floor without anyone seeing it.
+        light = declared_light(args.dir, path)
+        flagged = name in dusk or os.path.basename(path) in dusk
+        if light is not None and flagged and light != "dusk":
+            rig_conflicts.append({"artifact": name, "declared": light, "flagged": "dusk"})
+        if light is not None:
+            is_dusk, by = light == "dusk", "declared"
+        else:
+            is_dusk, by = flagged, "flag" if flagged else "default-day"
+        if is_dusk:
+            report["dusk"].append(name)
+        report["rig_declared_by"][name] = {"light": "dusk" if is_dusk else "day", "by": by}
         m = measure(path,
-                    FLOOR_BODY_DUSK if name in dusk else FLOOR_BODY,
-                    FLOOR_LARGE_DUSK if name in dusk else FLOOR_LARGE,
+                    FLOOR_BODY_DUSK if is_dusk else FLOOR_BODY,
+                    FLOOR_LARGE_DUSK if is_dusk else FLOOR_LARGE,
                     sidecar=sidecar)
         runs = m.get("runs", [])
         bad = [r for r in runs if r["ink_core"] < r["floor"]]
@@ -764,7 +841,20 @@ def main():
     report["marks_outside_text"] = sum(
         a["marks_outside_text"] or 0 for a in report["artifacts"].values()
         if a.get("marks_outside_text") is not None)
-    report["ok"] = not report["failures"]
+    report["dusk"] = sorted(report["dusk"])
+    report["rig_conflicts"] = rig_conflicts
+    report["ok"] = not report["failures"] and not rig_conflicts
+
+    # A flag that contradicts what the app said about itself is an error, not a preference. It
+    # is checked before the floors are reported so that the wrong floor can never be the thing
+    # a reader takes away from the run.
+    if rig_conflicts:
+        print("legibility: --dusk names artifacts the app declared were not at dusk:\n  " +
+              "\n  ".join(f"{c['artifact']} declares light={c['declared']!r}"
+                           for c in rig_conflicts) +
+              "\nThe scene report is the app's own word on which rig lit it. Drop the flag, or "
+              "re-capture the artifact under the rig you meant.", file=sys.stderr)
+        return 2
 
     if args.text_runs == "require" and missing_sidecars:
         print("legibility: --text-runs require, and these stills have no <name>.text.json beside "

@@ -69,6 +69,17 @@ DESK = 0.10                # the wood seen through a gap in the sheet: DARKER th
 DEEP = 0.04                # a mark darker than the writing: the shadow in a tear, a printed bar,
                            # anything the glyph filters throw out. Shorter than the line, so it
                            # leaves the ground -- and it was still being taken as the ink
+# Section 8's ink, and the only value in this file chosen for where it falls BETWEEN two floors.
+# Against PAPER it reads 4.80:1 -- above the day body floor of 4.5 and below the dusk body floor
+# of 5.0 -- so the same writing on the same stock passes under one rig and fails under the other.
+# That is the whole property: a dusk artifact that is merely READ proves nothing, because every
+# floor would still be the day one and the array would be full of screens nothing was gating.
+DIM_INK = 0.40
+DIM_SAYS = "between the two floors"
+# Mirrors FLOOR_BODY_DUSK in legibility.py. It is written out rather than imported because this
+# file drives that one as a subprocess on purpose -- a selftest that imported the module could
+# be made to pass by the same edit that broke it.
+FLOOR_BODY_DUSK = 5.0
 RULED_SAYS = "the six words"
 HOLED_SAYS = "written across a tear"
 NEAR_SAYS = "darker things beside it"
@@ -204,6 +215,25 @@ def still_darker_near(path):
     Image.fromarray(np.repeat((a * 255.0).round().astype(np.uint8)[:, :, None], 3, axis=2),
                     "RGB").save(path)
     return left + right
+
+
+def still_dim(path):
+    """One declared line at DIM_INK on cream: 4.80:1, between the day floor and the dusk one."""
+    rng = np.random.default_rng(29)
+    img = PAPER + rng.normal(0.0, 0.004, size=(H, W))
+    writing = blocks(img, WRITING_Y, 120, DIM_INK)
+    a = np.clip(img, 0.0, 1.0)
+    rgb = np.repeat((a * 255.0).round().astype(np.uint8)[:, :, None], 3, axis=2)
+    Image.fromarray(rgb, "RGB").save(path)
+    return writing
+
+
+def scene_report(dirpath, stem, light):
+    """The `light` the app reports back, in the place and shape capture.sh writes it."""
+    logs = os.path.join(dirpath, "logs")
+    os.makedirs(logs, exist_ok=True)
+    with open(os.path.join(logs, stem + ".report.json"), "w", encoding="utf-8") as f:
+        json.dump({"light": light, "has_dusk_paper": True}, f)
 
 
 def sidecar(path, name, groups):
@@ -383,6 +413,64 @@ def main():
             # outside it to count. The property that they are seen rather than erased is section
             # 2's, on a page built for it. What this section proves is the one thing that page
             # cannot: which of the marks inside a declared run is the run's ink.
+
+        # ---- 8. the dusk rig is read from what the app declared, and it gates ----------------
+        # Two stills of the same writing on the same stock at the same ink, one top-level and one
+        # under crops/, and a third crop with no declaration beside it. The dusk floors had been
+        # gating nothing at all: the only artifact captured under that rig is written to
+        # `evidence/crops/dusk_pulse.png`, which the input glob never reached, and membership came
+        # from a `--dusk` flag that no caller passed. The report said `"dusk": []` either way, so
+        # an uncovered rig and a covered one that happened to be empty read identically.
+        with tempfile.TemporaryDirectory() as ed:
+            os.makedirs(os.path.join(ed, "crops"))
+            dim = still_dim(os.path.join(ed, "day.png"))
+            sidecar(os.path.join(ed, "day.text.json"), "day.png", [(dim, DIM_SAYS)])
+            scene_report(ed, "day", "day")
+            dim2 = still_dim(os.path.join(ed, "crops", "dusk.png"))
+            sidecar(os.path.join(ed, "crops", "dusk.text.json"), "dusk.png", [(dim2, DIM_SAYS)])
+            scene_report(ed, "dusk", "dusk")
+            # A crop with no declaration: the filmstrips and the 300% magnifications are this, and
+            # measuring one as a screen either invents runs or counts the same writing twice.
+            still_dim(os.path.join(ed, "crops", "strip.png"))
+
+            p8, rig = measure(ed)
+            names = sorted(rig["artifacts"])
+            check(names == ["crops/dusk.png", "day.png"],
+                  f"a crop the app declared its text for is read, and one it did not is not "
+                  f"({names})")
+            check(rig["dusk"] == ["crops/dusk.png"],
+                  f"and the dusk array names it instead of being empty ({rig['dusk']})")
+            check(rig["rig_declared_by"]["crops/dusk.png"] == {"light": "dusk", "by": "declared"},
+                  "on the app's own word about which rig lit it, not on a flag")
+            # The half that makes this a gate rather than a listing: identical writing, and the
+            # only difference between the two readings is the floor each is held to.
+            day_art, dusk_art = rig["artifacts"]["day.png"], rig["artifacts"]["crops/dusk.png"]
+            check(day_art["below_floor"] == 0 and dusk_art["below_floor"] == 1,
+                  f"and the same writing passes by day and fails at dusk "
+                  f"({day_art['worst_ink_core']}:1 against 4.5, then against 5.0)")
+            check(p8.returncode == 1
+                  and any(f["artifact"] == "crops/dusk.png" and f["floor"] == FLOOR_BODY_DUSK
+                          for f in rig["failures"]),
+                  "so the dusk floor is enforced rather than declared")
+
+            # A flag that contradicts the declaration is refused. Silently letting it win is how a
+            # screen gets held to the wrong floor with the report still looking well-formed.
+            p8b = subprocess.run([sys.executable, LEGIBILITY, "--dir", ed, "--worst", "0",
+                                  "--dusk", "day.png"], capture_output=True, text=True)
+            check(p8b.returncode == 2 and "day.png" in p8b.stderr,
+                  "a --dusk flag against an artifact the app declared was daylit is refused")
+
+        # And the flag still works where there is nothing to contradict it, which is the only
+        # case it is for: an artifact captured before the scene reported its rig.
+        with tempfile.TemporaryDirectory() as fd:
+            dim3 = still_dim(os.path.join(fd, "unreported.png"))
+            sidecar(os.path.join(fd, "unreported.text.json"), "unreported.png",
+                    [(dim3, DIM_SAYS)])
+            p8c, flagged = measure(fd, "--dusk", "unreported.png")
+            check(flagged["dusk"] == ["unreported.png"]
+                  and flagged["rig_declared_by"]["unreported.png"]["by"] == "flag"
+                  and flagged["total_below_floor"] == 1,
+                  "and with no report to read, the flag is what decides the rig and says so")
 
     if failures:
         print(f"\n{len(failures)} check(s) failed", file=sys.stderr)
