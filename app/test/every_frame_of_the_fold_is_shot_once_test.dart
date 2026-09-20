@@ -112,4 +112,68 @@ void main() {
     Folds.reset();
     expect(Folds.openEndsAt, isNull);
   });
+
+  _register();
+}
+
+// ---------------------------------------------------------------------------------------------
+// And a clip of the fold has to be told apart from a clip of its aftermath, which is what firing
+// 31 could not do.
+//
+// `06_unfolding.report.json` is written by the scene's `report` step, which runs AFTER the frames
+// step. So its `fold.playhead` is the sequence as it stands at the END of the take -- 239 of 240,
+// every single time, whatever the clip in front of it contains. Firing 31 read that end-of-clip
+// 239 as though it were the reading at frame zero and concluded the sequence had already finished
+// before the recorder started, which filed the defect as a capture-ordering bug.
+//
+// It was not one, and the driven clock says so to the millisecond. `driven_ms` at the report was
+// 4394 and the frames step stepped 255 frames of 1000/60 ms, which is 4250.0 exactly; the
+// difference is 144 ms, and 144 ms is precisely the three `_settle()` calls that `goTo`,
+// `scrollTo` and `unfold` make on their way past, at 3 x 16 ms each. Nothing else advanced the
+// clock, because `wait` is `page.waitForTimeout` and moves wall time only. A 240-frame sequence at
+// 60 fps is 4000 ms, so at the first shot it can have advanced at most 144 ms of it -- under nine
+// frames, and in fact under three, since only `unfold`'s own settle falls after the fold begins.
+//
+// The lesson generalises past this clip, and it is WORKER_PROMPT 3d: a reading taken after the
+// fact is not a reading of the first frame. So the harness now asks at the first frame, and this
+// is the arithmetic that says what it should find there.
+
+const _drivenMsAtReport = 4394;
+const _framesShot = 255;
+const _settlesBeforeTheTake = 3;      // goTo, scrollTo, unfold
+const _stepsPerSettle = 3;            // CaptureHooks._settle loops three times
+const _settleStepMs = 16;
+
+void _register() {
+  test('the recorder started 144 ms into a 4000 ms fold, not after it', () {
+    const length = 240;
+    final period = DrivenClock.period(FoldFrames.frameRate.toDouble());
+
+    // what the frames step itself stepped, in microseconds
+    final takeUs = _framesShot * period.inMicroseconds;
+    final beforeTheTakeUs = _drivenMsAtReport * 1000 - takeUs;
+
+    // 143915 us against the three settles' nominal 144000. The 85 us is the clock's own period
+    // being a whole number of microseconds -- 1000000/60 rounds to 16667, so 255 of them are
+    // 4250.085 ms and not the 4250.0 the frame rate suggests -- plus up to a millisecond of
+    // quantisation in `driven_ms`, which the report writes as a whole number. So this is an
+    // equality within the rounding the two figures actually carry, not an approximation chosen
+    // to make the test pass: the slack is one clock period and it is named.
+    expect(beforeTheTakeUs,
+        closeTo(_settlesBeforeTheTake * _stepsPerSettle * _settleStepMs * 1000,
+            period.inMicroseconds),
+        reason: 'the only driven time before the take is three _settle() calls; if this stops '
+            'matching, something else started stepping the clock and the reasoning below is void');
+
+    // so the playhead at the first shot is far below the end of the sequence
+    final frameAtFirstShot = FoldFrames.frameAt(Duration(microseconds: beforeTheTakeUs), length);
+    expect(frameAtFirstShot, lessThan(20),
+        reason: 'clause (c) of rank 1: the clip has to contain the fold, not its aftermath');
+
+    // and the take is long enough to carry the sequence past the far end
+    final frameAtLastShot =
+        FoldFrames.frameAt(Duration(microseconds: beforeTheTakeUs + takeUs), length);
+    expect(frameAtLastShot, greaterThan(220),
+        reason: 'the take ran 4250 ms against a 4000 ms sequence, so it finishes inside the clip');
+  });
 }

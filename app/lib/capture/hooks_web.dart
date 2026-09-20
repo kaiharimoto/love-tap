@@ -30,6 +30,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskStep(JSFunction f);
   external set __deskBlobsPending(JSFunction f);
   external set __deskFoldLeft(JSFunction f);
+  external set __deskFoldState(JSFunction f);
   external set __deskPaperSurfaces(JSFunction f);
   external set __deskPartnerTyping(JSFunction f);
 }
@@ -57,6 +58,11 @@ void expose(CaptureHooks hooks) {
   // every frame of every clip.
   w.__deskStep = ((JSNumber ms) =>
       DrivenClock.step(Duration(microseconds: (ms.toDartDouble * 1000).round())).toJS).toJS;
+  // The sequence's own state, cheap enough to ask for at a single frame. `__deskFoldLeft` says
+  // how much of the open is still to come and is what the take stops on; this says where the
+  // playhead actually IS, which is the only thing that can tell a clip of the fold from a clip
+  // of its aftermath. The harness reads it at the take's first and last frame.
+  w.__deskFoldState = (() => jsonEncode(FoldFrames.state).toJS).toJS;
   // A number rather than a sentence: the harness polls it between frames and a JSON
   // parse per poll is a cost the shot does not need.
   w.__deskBlobsPending = (() => BlobCache.outstanding.toJS).toJS;

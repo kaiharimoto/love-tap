@@ -346,6 +346,8 @@ function ensure(p) {
         const from = step.from || 0;
         const drive = step.drive;
         const names = [];
+        // what the fold sequence was doing at the first and last frame this take actually shot
+        const foldAt = { first: null, last: null };
         if (drive && drive.kind === 'drag') {
           await page.mouse.move(drive.from[0], drive.from[1]);
           await page.mouse.down();
@@ -377,6 +379,18 @@ function ensure(p) {
           const name = path.join(dir, String(from + i).padStart(4, '0') + '.png');
           await page.screenshot({ path: name, fullPage: false, clip: step.clip });
           names.push(path.relative(ROOT, name));
+          // The sequence's own state AT THE FRAME, which is the only thing that can say whether a
+          // clip contains the thing it is named for. `report` runs after this whole step, so the
+          // playhead it records is the one at the END of the take -- and firing 31 read that
+          // end-of-clip 239 as if it were the start and concluded the fold had finished before the
+          // recorder began. It had not: the driven clock proves the recorder started 144 ms in, on
+          // a 4000 ms sequence. A number sampled after the fact is not a reading of the first
+          // frame, so the first frame is now read at the first frame.
+          if (i === 0) {
+            const fold = await page.evaluate(
+              () => (window.__deskFoldState ? window.__deskFoldState() : null));
+            if (fold) foldAt.first = JSON.parse(fold);
+          }
           await page.evaluate((m) => window.__deskStep(m), ms);
           if (stop) {
             const left = await page.evaluate((h) => (window[h] ? window[h]() : -1), stop);
@@ -392,13 +406,32 @@ function ensure(p) {
           }
         }
         if (drive && drive.kind === 'drag' && !drive.release) await page.mouse.up();
-        log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms, fps, stop: stop || null, drive: drive || null });
+        // The last frame's reading is taken here rather than at `i === count - 1`, because a take
+        // with a `stop` handle ends on the first shot past zero and never reaches count - 1: this
+        // one shot 255 of a requested 400.
+        {
+          const fold = await page.evaluate(
+            () => (window.__deskFoldState ? window.__deskFoldState() : null));
+          if (fold) foldAt.last = JSON.parse(fold);
+        }
+        log.shots.push({ frames: names.length, dir: path.relative(ROOT, dir), ms, fps, stop: stop || null, drive: drive || null, fold: foldAt });
         break;
       }
       case 'report': {
         const raw = await page.evaluate(() => window.__deskReport && window.__deskReport());
         const report = raw ? JSON.parse(raw) : { missing: 'no report handle' };
         report.at = step.at || step.out || 'report';
+        // `report.fold` is the sequence as it stands NOW, which for a clip is after the take has
+        // finished -- 239 of 240, every time, whatever the clip contains. The readings taken at
+        // the take's own first and last frame go in beside it under their own names, so nothing
+        // has to infer a start from an end again.
+        {
+          const shot = log.shots[log.shots.length - 1];
+          if (shot && shot.fold) {
+            report.fold_at_first_frame = shot.fold.first;
+            report.fold_at_last_frame = shot.fold.last;
+          }
+        }
         log.reports.push(report);
         if (step.out) {
           const out = abs(step.out);
