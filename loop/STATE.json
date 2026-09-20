@@ -546,7 +546,10 @@
       "attempts": 0,
       "closed_by": null,
       "rank": 39,
-      "owner_priority": "harness"
+      "owner_priority": "harness",
+      "firing_notes": {
+        "firing_31": "A SECOND INSTANCE, AND THE SAME 5.5. At firing 31 the builder sheet scored visual_design 9 against a critic's 14.5 -- a gap of 5.5 again, and since score.py takes the lower, the sheet cost the build 5.5 points it had earned. THE CAUSE IS NAMEABLE THIS TIME: the sheet leaned on legibility.json's headline of 17 below-floor runs in 358. The critic cropped all 17 at 300% and found 15 of them to be instrument artifacts -- the adversarial-ground window samples the glyphs' own strokes as ground (ground_lum 0.07 against ground_lum_ring 0.85). The builder then made the same crop itself, on 01_pulse's word 'open', reported at 1.09:1: it is near-black ink on pale cream and is one of the boldest words on the screen. The builder had the means to distrust the number and trusted it anyway. anti_goal shows the same shape at a smaller size: builder 7, critic 9.2. SO THE ANCHOR THE ITEM ASKS FOR SHOULD BE A RULE, not a table of past scores: where a tool's headline and a 300 percent crop disagree, the sheet cites the crop. Note the rule cuts one way only -- a sheet may not be revised upward after a critic is read, which is why firing 31 left its 9 standing and wrote this instead."
+      }
     },
     {
       "id": "the-folds-floor-passes-a-blank-sheet",
@@ -1173,6 +1176,78 @@
       "attempts": 0,
       "rank": null,
       "owner_priority": "using-it",
+      "filed_at_firing": 31
+    },
+    {
+      "id": "one-tear-mask-is-drawn-thirteen-times-on-the-search-screen",
+      "row": "material_truth + anti_goal",
+      "points": null,
+      "owner_priority": "the-ui",
+      "why": "FILED AT FIRING 31. A STATED FAILURE CONDITION, found by the material-truth critic and verified independently from the sidecar. 12_search.surfaces.json has 21 tear draws on screen and only 7 distinct masks, because assets/tears/tear_001_shadow.webp is drawn THIRTEEN times -- twelve of them at byte-identical geometry (src [1024,578], drawn [1338,123], scale 1.307, fit fill), one larger. It is the filter strips, and it reads as a ladder of clones. docs/BRIEF.md 09 names 'reusing a single tear mask across the app because generating dozens of them was slow' as a failure condition and rubric row 02 requires 'tear masks with no visible repeat on a single screen'. The pool holds 56 masks and the report says 47 are writable, so this is a selection bug, not a shortage. Also repeating: 03_us draws tear_043 three times and tear_020 twice; 02_chat draws tear_002 twice. AND THE GATE DOES NOT SEE ANY OF IT: tools/check/tears.py counts only the NOTES' tears, so 02_chat reports distinct_tears 7 / repeats {} while the same frame repeats a mask in its chrome. The gate is narrower than the clause it is enforcing.",
+      "measurement": "For every still, the count of distinct assets/tears/* in <name>.surfaces.json with a rect on screen equals the count of on-screen tear draws, and tools/check/tears.py counts every tear surface in the frame rather than only the notes'. Re-break by pinning the filter strips to one mask and watching the distinct count fall below the draw count.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 31
+    },
+    {
+      "id": "the-tear-shadow-is-stretched-six-to-one-and-becomes-a-hard-bar",
+      "row": "material_truth",
+      "points": null,
+      "owner_priority": "the-ui",
+      "why": "FILED AT FIRING 31, from the material-truth critic and verified in the sidecar. Tear shadow assets are drawn with fit 'fill' at wildly non-uniform aspect: the search filter strips take a 1024x578 mask to 1338x123, which is 1.31x across and 0.21x down -- a 6.1:1 distortion -- and the critic reports 110 such draws across the stills reaching 12:1 and 20.8:1. A contact shadow baked from the render's own lighting, squashed six to one, stops being a falloff and becomes a hard black bar, which is exactly what is visible along the top edge of the note in crops/02_chat_300_edge.png. The brief asks for 'contact shadows baked from the render's own lighting rather than applied as a uniform blur'; a baked shadow scaled past recognition is the uniform blur by another route.",
+      "measurement": "No tear or shadow surface in any <name>.surfaces.json is drawn at an aspect more than 1.5:1 away from its source aspect, computed as (drawn_w/src_w)/(drawn_h/src_h). Re-break by restoring fit 'fill' on the filter strips and watching the ratio return to 6.1.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 31
+    },
+    {
+      "id": "the-fold-clip-is-captured-after-the-fold-has-already-finished",
+      "row": "material_truth + the loop",
+      "points": null,
+      "owner_priority": "harness",
+      "why": "FILED AT FIRING 31, and it explains why 06_unfolding's numbers went green while the defect did not move. The material-truth critic decoded all 255 frames and found no unfold in them: a scroll, the placeholder growing, then the finished note cross-fading in already flat. 06_unfolding.report.json agrees -- playhead 239 of 240, held_from 227 -- so the sequence had ALREADY RUN before frame 0 was recorded. The scene performs the unfold step and then starts the recorder. SO THE THIRD GREEN METRIC OF THIS FIRING IS MEASURING THE WRONG THING: repeated_frames 0 over 255 frames is 255 unique frames of a scroll and a cross-fade, not 60 unique fold frames per second. The clip docs/BRIEF.md names as 'the clip that exposes a faked material system' currently demonstrates nothing, and its passing frame-distinctness check is what has been hiding that.",
+      "measurement": "evidence/06_unfolding.report.json records a playhead below 20 at the first captured frame and above 220 at the last, AND at least 120 distinct fold frame indices appear across the clip's frames, AND assets/folds/unfold_thirds appears in the clip's surfaces telemetry. Re-break by moving the unfold step back before the recorder and watching the playhead start at 239.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 31
+    },
+    {
+      "id": "three-of-the-four-modules-are-below-the-fold-in-the-artifact-that-must-show-four",
+      "row": "coherence + messenger_reliability",
+      "points": null,
+      "owner_priority": "the-ui",
+      "why": "FILED AT FIRING 31. The coherence critic reported that Us presents one module where the brief requires four; the observation is right and ITS ROOT CAUSE IS WRONG, so the item is filed with the corrected cause. All four modules exist -- app/lib/modules/ holds dates, todos, calendar and rituals plus shelf, with registry.dart and module.dart -- and us_region.dart iterates kModules rendering every one of them with a row budget of dates 2, todos 3, calendar 2, rest 2. Nothing is missing. WHAT IS WRONG IS THAT ONE MODULE FILLS THE PHONE. 03_us.text.json holds 23 runs and the only module stamp among them is DATES, with AHEAD and BEEN; there are two blank stretches of ruled paper inside the frame, y375-958 and y2392-3015, about 1200 px of nothing, while the to-do list, the calendar and the rituals sit below the fold. AND THE SCENE NEVER SCROLLS: evidence/scenes/03_us.json is goTo 2, wait, shot, report -- four steps, no scrollTo. TWO HALVES, AND BOTH ARE REAL. The brief's deliverable requires 03_us.png to show all four modules populated, and 09 makes 'one module standing in for four' a failure condition, so the artifact is non-compliant as captured. And a person opening Us to check the shared list should not have to scroll past 1200 px of empty paper to reach it.",
+      "measurement": "03_us.text.json carries a module stamp for all four modules -- the dates, the list, the calendar and the rituals -- with at least one populated row under each, in a single frame. Re-break by restoring the DATES-only top of the region and watching three stamps leave the file.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 31
+    },
+    {
+      "id": "none-of-the-three-ambient-presence-surfaces-appears-anywhere-in-the-set",
+      "row": "emotional_transmission",
+      "points": null,
+      "owner_priority": "the-ui",
+      "why": "FILED AT FIRING 31, from the emotional-transmission critic. docs/BRIEF.md 05 row 03 and the exit conditions both require at least THREE ambient presence surfaces, and the critic found zero in the evidence: no widget, no standing notification, no lock screen, no pocket surface, and the words widget, notification, pocket and ambient appear in none of the eleven rendered-text sidecars. evidence/logs/webpush.txt proves the RFC 8291 envelope round-trips carrying only kind and sender, which is the TRANSPORT for such a surface and not a surface. The critic notes a PWA standing notification is capturable in WebKit and no scene attempts one. Related and already in the queue: no-artifact-shows-a-state-change-perceptible-without-opening-the-app. This is a family floor stated in the brief, so it is not polish.",
+      "measurement": "At least three ambient presence surfaces are visible across the evidence set, each in a named artifact, with the PWA standing notification among them captured in WebKit. Re-break by removing one and watching the count fall below three.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 31
+    },
+    {
+      "id": "partner-state-is-a-label-and-value-table-and-signals-md-describes-something-else",
+      "row": "emotional_transmission + visual_design",
+      "points": null,
+      "owner_priority": "the-ui",
+      "why": "FILED AT FIRING 31, from the emotional-transmission critic, and it is the sharpest statement yet of what this row is failing at. All twelve partner signals in 01_pulse.png are rendered as one handwritten label-value table on one stock in one ink weight -- MOOD bright, BATTERY 72%, RINGER normal, SIGNAL wifi, AT HOME yes. docs/SIGNALS.md specifies a MATERIAL rendering per signal: a pencil worn to a stub, tape over the corner, the strip askew, a house doodle, the corner folded by need, pen pressure carrying energy, the stock itself chosen by mood. None of those is present. The row's own wording is that a feeling must arrive as a sensation rather than as a message in a different colour; twelve rows of a table is a message in a different FONT, which is the same failure with the colour swapped out. This is also where the visual-design row's 'one hue, no accent' finding and this row meet: the signals are the obvious place for material and colour to carry meaning and they currently carry none.",
+      "measurement": "01_pulse.png renders at least six of the twelve signals through the material treatment docs/SIGNALS.md names for them rather than as a label-value pair, verified by 01_pulse.surfaces.json carrying a distinct asset per treated signal. Re-break by returning one to a text row and watching its asset leave the sidecar.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
       "filed_at_firing": 31
     }
   ],
