@@ -5,6 +5,8 @@
     python3 tools/paper_tooth.py --all                # every stock in assets/paper
     python3 tools/paper_tooth.py --long-side 1800     # what a bigger pack would buy
     python3 tools/paper_tooth.py --out evidence/logs/paper_tooth.json
+    python3 tools/paper_tooth.py --all --condition dusk          # one half of the library
+    python3 tools/paper_tooth.py --all --source /tmp/old/assets/paper   # a library out of git
 
 This exists to settle one question that two queue items disagreed about, and it is not a gate.
 
@@ -133,18 +135,36 @@ def main():
                          "probe and the committed chain cover the SAME paper. Given in Blender's "
                          "convention, with y measured from the bottom, so the same four numbers "
                          "passed to blender/paper/stocks.py --border go here unchanged.")
+    ap.add_argument("--source", default=SOURCE,
+                    help="the directory of rendered stocks to read. Defaults to assets/paper. "
+                         "A before/after against a re-render needs the OLD library too, and the "
+                         "old library is in git rather than on disk: `git archive <sha> "
+                         "assets/paper | tar -x -C <dir>` and point this at it.")
+    ap.add_argument("--only", default="",
+                    help="keep only stems containing this substring, so one family can be read "
+                         "on its own while the rest of a re-render is still in flight.")
+    ap.add_argument("--condition", choices=["day", "dusk", "both"], default="both",
+                    help="which half of the library to read. A stem ending `_dusk` is a dusk "
+                         "sheet and every other stem is a day one. Only meaningful with --all.")
     ap.add_argument("--out", default="")
     args = ap.parse_args()
+    source = args.source
     box = tuple(args.box)
 
     if args.all:
-        stocks = sorted(os.path.basename(p)[:-5] for p in glob.glob(os.path.join(SOURCE, "*.webp")))
+        stocks = sorted(os.path.basename(p)[:-5] for p in glob.glob(os.path.join(source, "*.webp")))
     else:
         stocks = DEFAULT
+    if args.only:
+        stocks = [s_ for s_ in stocks if args.only in s_]
+    if args.condition == "day":
+        stocks = [s_ for s_ in stocks if not s_.endswith("_dusk")]
+    elif args.condition == "dusk":
+        stocks = [s_ for s_ in stocks if s_.endswith("_dusk")]
 
     rows = []
     for stem in stocks:
-        path = os.path.join(SOURCE, stem + ".webp")
+        path = os.path.join(source, stem + ".webp")
         if not os.path.exists(path):
             rows.append({"stock": stem, "why": "not on disk"})
             continue
@@ -198,6 +218,14 @@ def main():
         v = [s["std"] for r in rs if key in r for s in r[key]["samples"]]
         return round(float(np.mean(v)), 3) if v else None
 
+    def family(stem):
+        """`sticky_blue_02_dusk` -> `sticky_blue`. The variant is two digits and a condition
+        suffix is one word, and every stock name in rules.STOCKS is what is left."""
+        parts = stem.split("_")
+        while parts and (parts[-1] == "dusk" or parts[-1].isdigit()):
+            parts.pop()
+        return "_".join(parts)
+
     good = [r for r in rows if "today" in r]
     cols = ["today", "bigger"] + (["probe"] if any("probe" in r for r in rows) else [])
     report = {
@@ -208,8 +236,23 @@ def main():
         "passes": {k: (sum(r[k]["passes"] for r in good if k in r),
                        sum(r[k]["of"] for r in good if k in r)) for k in cols},
         "bytes": {k: sum(r[k]["bytes"] for r in good) for k in ("today", "bigger")},
+        "by_family": {},
         "rows": rows,
     }
+
+    # By family, because the 8.0 floor is a per-stock question: a writing paper reaches it and a
+    # coated one does not at any amplitude that still reads as paper. The median is the statistic
+    # the queue item's own readings are quoted in.
+    for fam in sorted({family(r["stock"]) for r in good}):
+        fr = [r for r in good if family(r["stock"]) == fam]
+        v = [sm["std"] for r in fr for sm in r["today"]["samples"]]
+        report["by_family"][fam] = {
+            "sheets": len(fr),
+            "median_std": round(float(np.median(v)), 3) if v else None,
+            "mean_std": round(float(np.mean(v)), 3) if v else None,
+            "passes": sum(r["today"]["passes"] for r in fr),
+            "of": sum(r["today"]["of"] for r in fr),
+        }
 
     if args.out:
         os.makedirs(os.path.dirname(args.out), exist_ok=True)
