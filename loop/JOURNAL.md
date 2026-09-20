@@ -4791,3 +4791,114 @@ should fix.
 4. **Do not quote the strip clause's HF_std as a pass.** It is unread until its mask is
    re-specified. `tools/check/hf_std.py --box` is the reading that discriminates.
 5. Then DIAGNOSE, then ADDRESS. DESIGN is frozen until cycle 6.
+
+## Firing 30 — OBSERVE, cycle 3 — 2026-09-20
+
+Step 0 passed on the second reading. The checkout was §0's **stale container ref**, not a graft:
+local tip `3edfbf7` dated four days before the real one, `git merge-base` empty, 50 ahead and 50
+behind. The cheap question settled it — deepening the fetch to 420 made `3edfbf7` an ancestor of
+`3c8189a`, so it was a checkout that was behind rather than a fork, and `git merge --ff-only` took
+it. Nothing reset, nothing force-moved, no tip dropped. Lease taken and pushed at `6eccb94` before
+anything else.
+
+One thing to carry forward: **the `CLAUDE.md` a firing is handed at session start can be the stale
+one.** Mine still carried the withdrawn warning that `tools/check/texture_budget.py` does not
+exist. The file on disk after the fast-forward says the opposite and is right. Re-read it after
+step 0.
+
+### The capture, and the baseline under it
+
+15 scenes, webkit, 10:06Z to 11:13Z, 67 minutes, commit `2fbfde5`, **14 of 17**.
+
+Before the run I seeded `evidence/.previous` from the **committed firing 28 artifacts**. That
+directory is gitignored and has never survived a fresh clone, which is the whole reason `DIFF.json`
+has read `new` for everything in every container since the tool was written. Those files are, by
+`diff.py`'s own docstring, "the artifacts as they were at the end of the last capture" — so this is
+the first DIFF this build has that measures anything. **8 unchanged, 7 changed, 0 new, 0 gone, 2
+absent.** With firing 28's `UlidFactory` seed fix behind it, it is also the first *pair* of captures
+whose numbers are comparable at all.
+
+`12_search.png` and `14_media_viewer.png` came back **byte-identical**.
+
+### Rank 7, which is what the capture was for
+
+Five stills share an SSIM to six decimal places — 0.999534 on `01_pulse`, `02_chat`, `03_us` and
+`05_settings`. That is not a ruler fault, and it was checked rather than waved through: the pixels
+that moved are the *same 2720 pixels in the same box*, x[481,858] y[136,175], on every one of them.
+
+That box is the partner strip's SPEED and ENERGY meters. At firing 28 they are two hard-edged grey
+rectangles of graduated alpha with a faded ghost bar. At firing 30 they are **pen tally strokes**,
+varying in weight and ink. Firing 29's `Tally` landed, nobody could see it, and it is now on eleven
+stills.
+
+It does not close the item. Rank 7's measurement is a column profile in mean-crossings and **no
+committed tool computes one**. What it has now is a before and an after on the same ruler. For
+whoever writes that profile: the arrow beside ENERGY is still a flat filled grey shape, in the
+same band.
+
+### The empty pageerror, split in two
+
+`13_messenger_states` failed its scene with a 0-byte stderr and `problems: ['pageerror: ']`, while
+its PNG sits on disk, complete and correct. The manifest counts it present *and* lists it missing
+with an empty reason, which is why 14 present plus 4 missing reads as 18 against a set of 17.
+
+**The certain half is the ruler.** `tools/capture/scene.js:71` records `'pageerror: ' + String(e)`.
+The thrown value has `name` and `message` both `''`, so `String(e)` is the empty string — but
+`e.stack` is intact and names its frames. A throwaway probe read `at b3z … at aRF …` off the same
+error the capture discarded. This is the one gate in the build that can go red and say nothing, and
+it has now cost two captures a hero artifact apiece.
+
+**The app half is not solved, and I got it wrong once before getting it right.** It reproduced
+immediately after `__deskStage` on the first probe run, and I took that for a deterministic fault on
+`stage`. It then failed to reproduce in **eight further runs of the identical steps** — so the honest
+figure is about 1 in 9, and it is intermittent. Two things follow that a successor should not
+re-derive: `13_messenger_states` is the **only** scene using `stage`, and firing 28's empty failure
+was `15_authored_feeling`, which passed cleanly here — so these are not one throw with one cause.
+`cold_ms` does not explain it either (11282 against a seeded range of 10884–12327). The stack is
+`A.aRF → A.b3z`, dart2js's unhandled-async-error rethrow; naming it needs a non-minified build.
+
+### What the rulers say, including a clause nobody has been quoting
+
+- **flat_fill** — identical to firing 28 to two decimals. Every still passes the 8% dominant-share
+  ceiling at 0.66%–2.29%. But the file's overall `ok` is **False**, and was false at firing 28 too:
+  its *other* clause, 400×200 windows of the pad box under L_std 8.0, fails on five stills, the same
+  five and the same counts at both firings. Nothing regressed. A red clause simply was not mentioned.
+- **legibility** — 358 runs at both firings, 16 → **17** below floor. Exactly one gained, none
+  recovered: `13_messenger_states`'s `Thu 3 Sep · 19:40` at 3.66:1. Firing 23 measured that same run
+  at 3.84 and named it one of the two timestamp-shaped runs inside the population rank 10 says is
+  being misread. It oscillates across the floor. The dusk array is still empty — rank 12, still open.
+- **palette** — 43 → **44** breaches, and the one new breach is a knife-edge, not a regression:
+  `across_the_set.mean_chroma` 0.0450 → **0.0449** against a floor of `>= 0.045`. One count in the
+  fourth decimal. Firing 28 passed it by nothing; this one fails it by nothing. The quantity sits
+  *on* its floor. Nothing else moved and no breach cleared.
+- **texture_budget** — passes (28.0 MB of 32, window 36), and **nothing in `capture.sh` runs it**.
+
+### Evidence for a question §3c left open
+
+§3c asks that the twelve-second cold start be established as O(n) in the event log before it is
+dismissed again as a seeded-scene artifact. This run measures both conditions side by side: the
+**seeded** build's `cold_ms` is 10884–12327 across thirteen scenes, the **fresh** build's is
+1259–1321 across three. A factor of about nine, and the only difference between them is the year of
+events. That is not a proof of O(n), but it puts the cost in the seed rather than in the shell.
+
+### What I did not do
+
+`02_chat` is refused for the fourth capture running by `tears.py`'s floor of eight against a screen
+that fits seven. Its own report reads visible 7, notes_with_tears 7, distinct_tears 7, **repeats
+{}** — the clause the gate exists to enforce passes; only the sample size fails. The screen was not
+reshaped to fit an eighth note. The item is already filed and unranked.
+
+Four items filed, all `harness`, none implemented: the empty-message pageerror, the unhandled async
+throw, `flutter analyze` exiting 1 on an `info` so that `analyze && test` never reaches the suite,
+and `texture_budget` sitting outside the rule that put every other ruler inside `capture.sh`.
+
+### For the next firing
+
+1. **Run DIAGNOSE.** The set is fresh and `evidence_fresh_as_of` says so; the test is
+   `git diff --stat 2fbfde5..HEAD -- app assets seed`, and it is empty.
+2. **Builder sheet first**, to `evidence/critics/3/builder.json`, before reading any critic.
+3. `13_messenger_states.png` is **present**. Do not score it absent because the missing map names it.
+4. `DIFF.json` is real this time. Its `judgement` field is the coherence critic's to fill in.
+5. Then ADDRESS: rank 1's two definitions, rank 6's and rank 7's missing tools, rank 10, rank 11,
+   the per-class floor in `docs/COLOR.md`, and a re-rank that places the four new harness items.
+   DESIGN is frozen until cycle 6.

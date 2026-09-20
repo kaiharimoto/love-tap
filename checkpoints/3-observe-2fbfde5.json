@@ -1,0 +1,74 @@
+{
+ "cycle": 3,
+ "stage": "OBSERVE",
+ "firing": 30,
+ "at_commit": "2fbfde5",
+ "completed": "the evidence set is fresh against the code, degradation rung 0, 14 of 17, and DIAGNOSE may score on it",
+ "freshness_test": "`git diff --stat 2fbfde5..HEAD -- app assets seed` is empty; every later commit in this firing touches loop/ and docs/ only",
+ "capture": {
+  "at": "2026-09-20T10:06:21Z to 11:13Z",
+  "minutes": 67,
+  "browser": "webkit",
+  "present": 14,
+  "ceiling_here": 15,
+  "absent": {
+   "09_two_devices.png": "no /dev/kvm; docs/PHONES.md; hardware",
+   "16_setup_android.png": "no /dev/kvm; docs/PHONES.md; hardware",
+   "02_chat.png": "tears.py's sample-size floor of 8 against a screen that fits 7, fourth capture running. Its report reads visible 7, notes_with_tears 7, distinct_tears 7, repeats {} -- the clause the gate exists to enforce passes."
+  },
+  "present_but_also_listed_missing": {
+   "13_messenger_states": "empty pageerror reason; the PNG is complete and correct, which is why 14 present + 4 missing reads as 18 against a set of 17"
+  }
+ },
+ "the_first_real_diff": {
+  "why_it_is_the_first": "evidence/.previous is gitignored and has never survived a fresh clone, so DIFF.json has read `new` for everything in every container. Seeded it from the COMMITTED firing 28 artifacts before the run -- diff.py's own definition of what that directory holds.",
+  "and_the_first_comparable_pair": "firing 28 seeded UlidFactory; before that, staged notes were minted with fresh random ids every run and no two captures measured the same sheets",
+  "counts": {
+   "unchanged": 8,
+   "changed": 7,
+   "new": 0,
+   "gone": 0,
+   "absent": 2
+  },
+  "byte_identical": [
+   "12_search.png",
+   "14_media_viewer.png"
+  ],
+  "baseline_captured_at": "2026-09-20T04:51:35Z"
+ },
+ "rank_7_visible": {
+  "ssim_shared_to_six_decimals": [
+   "01_pulse 0.999534",
+   "02_chat 0.999534",
+   "03_us 0.999534",
+   "05_settings 0.999534",
+   "10_first_run 0.999529",
+   "17_setup_pwa 0.999529"
+  ],
+  "checked_not_assumed": "the same 2720 pixels in the same box, x[481,858] y[136,175], 0.061% of the frame, on each of the first four",
+  "what_it_is": "the partner strip's SPEED and ENERGY meters: two hard-edged grey alpha rectangles at firing 28, pen tally strokes at firing 30",
+  "does_not_close_the_item": "rank 7's measurement is a column profile in mean-crossings and no committed tool computes one",
+  "left_in_the_same_band": "the arrow beside ENERGY is still a flat filled grey shape"
+ },
+ "rulers": {
+  "flat_fill": "identical to firing 28 to two decimals; all 11 stills under the 8% dominant-share ceiling at 0.66-2.29%. Overall ok False at BOTH firings: the window clause (400x200 of the pad box under L_std 8.0) fails on the same five stills with the same counts. Firing 28's headline quoted the share clause only.",
+  "legibility": "358 runs both; below floor 16 -> 17; one gained, none recovered; the new one is 13_messenger_states 'Thu 3 Sep - 19:40' at 3.66:1, which firing 23 measured at 3.84 and which oscillates. marks_outside_text 1619 -> 1659. dusk array still empty (rank 12).",
+  "palette": "43 -> 44 breaches; the single new one is across_the_set.mean_chroma 0.0450 -> 0.0449 against >= 0.045, one count in the fourth decimal -- a knife-edge, not a regression. No breach cleared.",
+  "texture_budget": "passes: unfold_thirds peaks 28.0 MB of 32 on a window of 36 frames. NOT called from capture.sh, so its json is not capture output.",
+  "suite": "flutter analyze 1 info 0 errors but EXIT 1; flutter test 179 pass"
+ },
+ "the_empty_pageerror": {
+  "ruler_half_certain": "scene.js:71 records 'pageerror: ' + String(e); name and message are both '' so it writes nothing, while e.stack is intact. Two captures have now lost a hero artifact with no reason attached.",
+  "app_half_open": "unhandled async Dart throw, dart2js stack A.aRF -> A.b3z; needs a non-minified build to name",
+  "intermittent_measured": "reproduced on 1 of 9 identical probe runs; an earlier reading this firing called it deterministic on stage and was wrong",
+  "not_the_same_as_firing_28s": "13_messenger_states is the only scene using `stage`; firing 28's empty failure was 15_authored_feeling, which passed cleanly here"
+ },
+ "cold_start_evidence_for_3c": "seeded cold_ms 10884-12327 across 13 scenes against fresh 1259-1321 across 3, on one run. A factor of about nine whose only difference is the year of events. Not a proof of O(n); it does place the cost in the seed rather than the shell.",
+ "filed_not_implemented": [
+  "a-pageerror-with-an-empty-message-cannot-name-the-artifact-it-failed",
+  "an-unhandled-async-throw-loses-a-hero-artifact-about-once-a-capture",
+  "flutter-analyze-exits-1-on-an-info-so-the-commit-gate-short-circuits",
+  "texture-budget-passes-and-nothing-in-the-capture-runs-it"
+ ],
+ "next_stage": "DIAGNOSE"
+}
