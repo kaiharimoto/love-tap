@@ -154,6 +154,34 @@ tip is really in the remote's history and the grep finds it once the fetch is de
 stale ref it is genuinely absent. `git rev-list --count HEAD` equalling the total both sides can
 see is the hint §0 already gives, and it is necessary rather than sufficient.
 
+**And firing 31's was a graft after all, which is the case firing 25's two questions get WRONG at
+the depth they are asked.** Every symptom again: `git merge-base` empty, `git rev-list --count`
+reading **50 and 50**, the dry-run push rejected `non-fast-forward`. Then, exactly as firing 25
+describes, `git fetch --deepen=60` took both sides to **110 and 110** and *still* returned no merge
+base, and the local tip's subject appeared nowhere in the remote's log. By this file's own test
+that is a stale branch ref, and the next step is a reset. **It was not a stale ref, and a reset
+would have thrown away nothing but would have proved nothing either.** One more deepen settled it:
+
+    git fetch --filter=blob:none --deepen=300 origin claude/app-improvement-autonomous-workflow-d6fwdu
+
+After it `git merge-base --is-ancestor HEAD origin/<branch>` returned true and the counts read
+**0 ahead, 268 behind** — an ordinary checkout that is behind, which `git merge --ff-only` then
+took. Nothing reset, nothing force-moved, no tip dropped.
+
+So two corrections to §0, and the first one matters most:
+
+- **60 is not a deep enough deepen to tell a graft from a stale ref.** This branch takes 50-100
+  commits a day in a busy cycle, so 110 commits of history can be three days and still not reach
+  the fork point. A firing that stops at 60, applies firing 25's two questions and concludes
+  "stale ref" will reach for a reset on a checkout that is merely old. Deepen by a few hundred
+  before believing the divergence is real.
+- **`--filter=blob:none` is what makes deepening cheap**, and it is the reason to prefer this over
+  firing 16's `--unshallow`. Ancestry lives in commits and trees; the 552 MB is blobs. The filtered
+  300-commit deepen returned in seconds. Use it for any deepen whose only purpose is to answer
+  "is my tip in their history".
+
+Ask the two questions, but ask them at depth 300 with `--filter=blob:none`, not at 60.
+
 The route that worked, after `git reset --hard` was refused for the third time in this file's
 history (it is now nought for three, so genuinely do not start there): **preserve the old tip on a
 real branch first**, then move. Nothing is lost at any step, and the first command is the one that
