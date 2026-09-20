@@ -68,7 +68,30 @@ function ensure(p) {
   const page = await context.newPage();
   const problems = [];
   const log = { scene: scene.name, browser: browserName, viewport: vp, url, steps: [], shots: [], reports: [], blob_waits: [] };
-  page.on('pageerror', (e) => problems.push('pageerror: ' + String(e).slice(0, 300)));
+  // What a thrown value actually was, when `String(e)` is the empty string.
+  //
+  // This was `'pageerror: ' + String(e)`. For the class of error the app throws, `name` and
+  // `message` are both empty and `String(e)` is '' -- so the scene reported `pageerror: `, and
+  // capture.sh wrote an EMPTY reason into MANIFEST.json. That cost two captures a hero artifact
+  // with no reason attached to either: 15_authored_feeling at firing 28 and 13_messenger_states
+  // at firing 30. `e.stack` was intact in both cases and named the frames; it was simply never
+  // read. This is the one gate in the build that could go red and say nothing.
+  //
+  // So the description is assembled from whatever the value actually carries, in the order that
+  // is most use to somebody reading MANIFEST.json, and the first stack frame is included even
+  // when there is a message -- an artifact is failed by a throw SITE, and `Error: undefined is
+  // not an object` on its own has never once been enough to find one.
+  const describe = (e) => {
+    if (e === null || e === undefined) return String(e);
+    const text = (v) => (v === null || v === undefined ? '' : String(v)).trim();
+    const name = text(e.name) || (e.constructor && text(e.constructor.name)) || '';
+    const msg = text(e.message);
+    const stack = text(e.stack);
+    const frame = stack.split('\n').map((l) => l.trim()).filter((l) => l.startsWith('at '))[0] || '';
+    const head = [name, msg].filter(Boolean).join(': ') || text(e) || `a ${typeof e} with no name, message or toString`;
+    return (frame ? head + ' — ' + frame : head).slice(0, 300);
+  };
+  page.on('pageerror', (e) => problems.push('pageerror: ' + describe(e)));
   page.on('console', (m) => {
     if (m.type() === 'error' && !m.text().includes('404')) problems.push('console: ' + m.text().slice(0, 300));
   });
@@ -456,7 +479,21 @@ function ensure(p) {
   }
   console.log(JSON.stringify(log, null, 1));
   await browser.close();
-  if (!log.ok) process.exitCode = 1;
+  if (!log.ok) {
+    // The problems have to leave on STDERR, and the first line has to be the sentence.
+    //
+    // Recording the error's stack fixes the message but not the channel, and the channel is the
+    // other half of why the reason arrived empty. This path writes a correct PNG and only then
+    // refuses it, so it never reaches the `.catch` below that does print to stderr; the problems
+    // went to stdout and to the log file, and capture.sh:196 books the failure with
+    // `head -1 "$SCRATCH/$name.err"`, which was empty on exactly this path. A reason that exists
+    // in a file nobody reads is not a reason the manifest can carry.
+    //
+    // `head -1` is why the most useful problem is written first and alone on its line.
+    console.error(scene.name + ' refused: ' + log.problems[0]);
+    for (const p of log.problems.slice(1)) console.error('  and: ' + p);
+    process.exitCode = 1;
+  }
 })().catch((e) => {
   console.error(String(e && e.stack ? e.stack : e));
   process.exit(1);

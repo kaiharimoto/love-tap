@@ -72,6 +72,13 @@ echo "· checking every file in assets/ names what made it, and every entry has 
 # fails if any of them leaves the gate green.
 python3 tools/check/manifest_selftest.py >"$LOG/manifest_selftest.json" 2>&1 \
   || note_missing "assets" "tools/check/manifest_selftest.py failed: the manifest gate cannot be trusted to go red; see evidence/logs/manifest_selftest.json"
+# And the ruler for the record of the run itself, before the run writes one. MANIFEST.json has
+# now twice said something false about an artifact -- that a file written fourteen minutes into
+# the capture belonged to an earlier session, and that a scene which refused an artifact had
+# produced it -- and both went unnoticed because nothing could drive collect.py and scene.js
+# against a throwaway directory and watch them lie.
+python3 tools/capture/capture_selftest.py >"$LOG/capture_selftest.txt" 2>&1 \
+  || note_missing "capture" "tools/capture/capture_selftest.py failed: the manifest cannot be trusted to say whose an artifact is or why it is missing; see evidence/logs/capture_selftest.txt"
 python3 tools/check/manifest.py --out "$LOG/manifest.json" >/dev/null \
   || note_missing "assets" "assets/MANIFEST.json does not match what is on disk: see entries_without_a_file and entries_for_files_outside_the_library in evidence/logs/manifest.json"
 echo "· checking every recipe can actually be built"

@@ -49,6 +49,12 @@ MINIMUMS = {
     "08_state_propagating.mp4": (1080, 2340), "11_chat_scroll.mp4": (1080, 2340),
     "15_authored_feeling.mp4": (1080, 2340),
 }
+# How far before the run stamp a file may have been written and still count as this run's. The
+# scenes start within a second or two of the stamp and a filesystem mtime is not the same clock,
+# so a small slack is the difference between "written just before the stamp was taken" and
+# "left here by an earlier session". It is named once because it is now asked twice -- of an
+# artifact nothing reported on, and of an artifact a scene refused.
+FRESH_TOLERANCE_S = 5
 MIN_SECONDS = {
     "06_unfolding.mp4": 4, "07_feeling_landing.mp4": 6, "08_state_propagating.mp4": 8,
     "11_chat_scroll.mp4": 4, "15_authored_feeling.mp4": 4,
@@ -93,6 +99,11 @@ def main():
     ap.add_argument("--stamp", required=True)
     ap.add_argument("--missing", default="")
     ap.add_argument("--browser", default="webkit")
+    ap.add_argument("--evidence", default=str(EVIDENCE),
+                    help="where the artifacts are and where MANIFEST.json is written. Only the "
+                         "selftest passes it; capture.sh uses the default. It exists because a "
+                         "gate nothing can drive against a throwaway directory is a gate nothing "
+                         "can re-break, and this one has now stated something false twice.")
     args = ap.parse_args()
 
     reasons = {}
@@ -102,6 +113,8 @@ def main():
                 name, why = line.split("|", 1)
                 reasons[name.strip()] = why.strip()
 
+    evidence = pathlib.Path(args.evidence)
+    logs = evidence / "logs"
     manifest = {"captured_at": args.stamp, "browser": args.browser, "artifacts": {}, "missing": {}}
 
     stamp_s = None
@@ -112,10 +125,27 @@ def main():
     except Exception:
         pass
 
+    # A reason may arrive under either of two keys and they are not interchangeable. capture.sh's
+    # run_scene calls note_missing with the BARE scene name -- `13_messenger_states` -- while
+    # STILLS and CLIPS hold filenames. Both spellings have to resolve to the same artifact, in
+    # both directions, or the manifest grows an entry for an artifact that does not exist.
+    stems = {n.rsplit(".", 1)[0] for n in STILLS + CLIPS}
+
     for name in STILLS + CLIPS:
-        path = EVIDENCE / name
+        path = evidence / name
         key = name.rsplit(".", 1)[0]
-        why = reasons.get(name) or reasons.get(key)
+        # `or` was the bug, not a shorthand for it. A reason that is the EMPTY STRING is falsy, so
+        # `reasons.get(name) or reasons.get(key)` fell through to None and the artifact was booked
+        # as present and complete -- which is what 13_messenger_states did at firing 30, because
+        # scene.js handed capture.sh an empty sentence and capture.sh wrote `13_messenger_states|`
+        # into the missing file. A scene that refused an artifact and then said nothing about why
+        # is a worse fault than one that refused it loudly, and it must not read as success.
+        why = reasons.get(name)
+        if why is None:
+            why = reasons.get(key)
+        if why is not None and not why.strip():
+            why = ("the scene refused this artifact and reported no reason; see "
+                   f"evidence/logs/{key}.json for the problems it collected")
         # A scene that failed is a missing artifact, whatever is on disk. This is the whole reason
         # the file exists: 13_messenger_states failed four runs in a row and the manifest listed it
         # as captured every time, because a copy of it from five hours earlier was still sitting
@@ -124,16 +154,37 @@ def main():
         if why:
             manifest["missing"][name] = why
             if path.exists():
-                manifest["missing"][name] += (
-                    f" (a copy from an earlier run is still on disk, written "
-                    f"{_stamp_of(path)}; it is not this session's and is not counted)")
+                # Whose file it is, decided by the clock rather than assumed.
+                #
+                # This branch used to append "a copy from an earlier run is still on disk ... it
+                # is not this session's" to EVERY refused artifact whose file existed, without
+                # comparing the time it printed to anything -- while the branch immediately below
+                # made exactly that comparison to decide staleness, and was never reached because
+                # this one returns first. So MANIFEST.json said of 02_chat.png that it was "not
+                # this session's": it was written at 10:20:05Z and the capture began at 10:06:21Z,
+                # fourteen minutes INTO the run. Firing 31's visual-design critic read that
+                # sentence and recorded a provenance caveat against a good artifact.
+                #
+                # A refused artifact written during the run is a real thing and not a rare one:
+                # scene.js writes its PNG and only then sets exitCode 1 if it collected problems,
+                # so the file is this session's and the scene still refused it. Both facts are
+                # true at once and the manifest has to say both, because "it is not counted" is
+                # the part that matters and "it is not yours" is the part that was false.
+                if stamp_s is not None and path.stat().st_mtime < stamp_s - FRESH_TOLERANCE_S:
+                    manifest["missing"][name] += (
+                        f" (a copy from an earlier run is still on disk, written "
+                        f"{_stamp_of(path)}; it is not this session's and is not counted)")
+                else:
+                    manifest["missing"][name] += (
+                        f" (this session wrote {name} at {_stamp_of(path)} and then refused it, "
+                        f"so the file on disk is this run's and is still not counted)")
             continue
         if not path.exists():
             manifest["missing"][name] = reasons.get("__default__") or "not captured this session"
             continue
         entry = {"bytes": path.stat().st_size, "written": _stamp_of(path)}
         # and one that nothing reported on, but which predates this run, is stale rather than fresh
-        if stamp_s is not None and path.stat().st_mtime < stamp_s - 5:
+        if stamp_s is not None and path.stat().st_mtime < stamp_s - FRESH_TOLERANCE_S:
             entry["from_this_run"] = False
             manifest.setdefault("stale", {})[name] = (
                 f"on disk from {_stamp_of(path)}, before this capture began at {args.stamp}")
@@ -155,10 +206,10 @@ def main():
     # frames.json: what every clip is made of, and where the frames came from
     frames = {"captured_at": args.stamp, "source": args.browser, "clips": {}, "scroll": {}}
     for name in CLIPS:
-        log = LOGS / f"{name.rsplit('.', 1)[0]}.frames.json"
+        log = logs / f"{name.rsplit('.', 1)[0]}.frames.json"
         if log.exists():
             frames["clips"][name] = json.loads(log.read_text())
-    scroll_log = LOGS / "11_chat_scroll.json"
+    scroll_log = logs / "11_chat_scroll.json"
     if scroll_log.exists():
         s = json.loads(scroll_log.read_text())
         frames["scroll"] = {
@@ -167,7 +218,7 @@ def main():
             "cold_ms": s.get("cold_ms"),
             "steps": s.get("steps"),
         }
-    emulator = LOGS / "scroll_emulator.json"
+    emulator = logs / "scroll_emulator.json"
     if emulator.exists():
         frames["scroll_emulator"] = json.loads(emulator.read_text())
     else:
@@ -177,13 +228,17 @@ def main():
     # gate that failed -- still has to appear. It was being read into `reasons` and then dropped on
     # the floor, so a note_missing on DIFF.json or a selftest would have printed once to a console
     # nobody reads and left MANIFEST.json saying everything was fine.
-    said = set(STILLS) | set(CLIPS) | {"__default__"}
+    # The stems belong here as well as the filenames. Without them a reason keyed
+    # `13_messenger_states` is not recognised as being about a known artifact, survives this
+    # filter, and is added to `missing` under a name nothing else in the file uses -- which is
+    # exactly why firing 30's manifest read 14 present plus 4 missing against a set of 17.
+    said = set(STILLS) | set(CLIPS) | stems | {"__default__"}
     for name, why in reasons.items():
         if name not in said and name not in manifest["missing"]:
             manifest["missing"][name] = why
 
-    (EVIDENCE / "frames.json").write_text(json.dumps(frames, indent=1) + "\n")
-    (EVIDENCE / "MANIFEST.json").write_text(json.dumps(manifest, indent=1) + "\n")
+    (evidence / "frames.json").write_text(json.dumps(frames, indent=1) + "\n")
+    (evidence / "MANIFEST.json").write_text(json.dumps(manifest, indent=1) + "\n")
 
     have = len(manifest["artifacts"])
     print(f"· {have} of {len(STILLS) + len(CLIPS)} artifacts present")
