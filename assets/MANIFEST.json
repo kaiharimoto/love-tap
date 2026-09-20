@@ -9938,7 +9938,7 @@
    }
   },
   "assets/paper/receipt_01.webp": {
-   "bytes": 45882,
+   "bytes": 117580,
    "generator": "blender/paper/stocks.py",
    "kind": "paper_stock",
    "settings": {
@@ -9946,6 +9946,7 @@
     "format": "WEBP",
     "light": "day",
     "look": {
+     "albedo": 4.0,
      "fibre": 1600.0,
      "rgb": [
       0.95,
