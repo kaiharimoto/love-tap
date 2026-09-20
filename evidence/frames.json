@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-20T02:25:51Z",
+ "captured_at": "2026-09-20T04:51:35Z",
  "source": "webkit",
  "clips": {
   "06_unfolding.mp4": {
@@ -7,7 +7,7 @@
    "frames": 255,
    "fps": 60.0,
    "seconds": 4.25,
-   "mean_change_per_frame": 0.00511,
+   "mean_change_per_frame": 0.00531,
    "repeated_frames": 0,
    "repeated_fraction": 0.0,
    "longest_still_run": 0,
@@ -31,27 +31,67 @@
    "fps": 60.0,
    "seconds": 6.4,
    "mean_change_per_frame": 0.01596,
-   "repeated_frames": 27,
-   "repeated_fraction": 0.07,
+   "repeated_frames": 38,
+   "repeated_fraction": 0.099,
    "longest_still_run": 10,
    "repeated_at": [
-    0,
+    2,
+    6,
+    8,
+    11,
+    14,
+    18,
+    21,
+    23,
+    27,
     140,
     141,
-    269,
-    270,
-    271,
-    272,
-    273,
-    289,
-    290,
-    291,
-    292
+    269
    ],
    "still_runs": [
     {
-     "from": 0,
-     "to": 0,
+     "from": 2,
+     "to": 2,
+     "len": 1
+    },
+    {
+     "from": 6,
+     "to": 6,
+     "len": 1
+    },
+    {
+     "from": 8,
+     "to": 8,
+     "len": 1
+    },
+    {
+     "from": 11,
+     "to": 11,
+     "len": 1
+    },
+    {
+     "from": 14,
+     "to": 14,
+     "len": 1
+    },
+    {
+     "from": 18,
+     "to": 18,
+     "len": 1
+    },
+    {
+     "from": 21,
+     "to": 21,
+     "len": 1
+    },
+    {
+     "from": 23,
+     "to": 23,
+     "len": 1
+    },
+    {
+     "from": 27,
+     "to": 27,
      "len": 1
     },
     {
@@ -73,6 +113,21 @@
      "from": 308,
      "to": 317,
      "len": 10
+    },
+    {
+     "from": 359,
+     "to": 359,
+     "len": 1
+    },
+    {
+     "from": 371,
+     "to": 371,
+     "len": 1
+    },
+    {
+     "from": 377,
+     "to": 377,
+     "len": 1
     },
     {
      "from": 380,
@@ -97,11 +152,12 @@
    "frames": 488,
    "fps": 60.0,
    "seconds": 8.13,
-   "mean_change_per_frame": 0.01349,
-   "repeated_frames": 54,
-   "repeated_fraction": 0.111,
-   "longest_still_run": 22,
+   "mean_change_per_frame": 0.01278,
+   "repeated_frames": 94,
+   "repeated_fraction": 0.193,
+   "longest_still_run": 23,
    "repeated_at": [
+    0,
     1,
     2,
     3,
@@ -112,14 +168,13 @@
     8,
     9,
     10,
-    11,
-    12
+    11
    ],
    "still_runs": [
     {
-     "from": 1,
+     "from": 0,
      "to": 22,
-     "len": 22
+     "len": 23
     },
     {
      "from": 24,
@@ -132,68 +187,158 @@
      "len": 2
     },
     {
-     "from": 266,
-     "to": 266,
+     "from": 58,
+     "to": 58,
      "len": 1
     },
     {
-     "from": 275,
-     "to": 275,
+     "from": 78,
+     "to": 78,
      "len": 1
     },
     {
-     "from": 278,
-     "to": 278,
+     "from": 125,
+     "to": 125,
      "len": 1
     },
     {
-     "from": 290,
-     "to": 290,
+     "from": 128,
+     "to": 128,
      "len": 1
     },
     {
-     "from": 293,
-     "to": 294,
+     "from": 149,
+     "to": 149,
+     "len": 1
+    },
+    {
+     "from": 172,
+     "to": 172,
+     "len": 1
+    },
+    {
+     "from": 179,
+     "to": 179,
+     "len": 1
+    },
+    {
+     "from": 203,
+     "to": 203,
+     "len": 1
+    },
+    {
+     "from": 208,
+     "to": 208,
+     "len": 1
+    },
+    {
+     "from": 253,
+     "to": 253,
+     "len": 1
+    },
+    {
+     "from": 258,
+     "to": 258,
+     "len": 1
+    },
+    {
+     "from": 263,
+     "to": 263,
+     "len": 1
+    },
+    {
+     "from": 267,
+     "to": 267,
+     "len": 1
+    },
+    {
+     "from": 273,
+     "to": 273,
+     "len": 1
+    },
+    {
+     "from": 281,
+     "to": 284,
+     "len": 4
+    },
+    {
+     "from": 292,
+     "to": 292,
+     "len": 1
+    },
+    {
+     "from": 302,
+     "to": 307,
+     "len": 6
+    },
+    {
+     "from": 313,
+     "to": 314,
      "len": 2
     },
     {
-     "from": 304,
-     "to": 306,
+     "from": 318,
+     "to": 321,
+     "len": 4
+    },
+    {
+     "from": 331,
+     "to": 336,
+     "len": 6
+    },
+    {
+     "from": 350,
+     "to": 351,
+     "len": 2
+    },
+    {
+     "from": 355,
+     "to": 359,
+     "len": 5
+    },
+    {
+     "from": 364,
+     "to": 366,
      "len": 3
     },
     {
-     "from": 314,
-     "to": 314,
+     "from": 371,
+     "to": 371,
      "len": 1
     },
     {
-     "from": 317,
-     "to": 317,
+     "from": 377,
+     "to": 377,
      "len": 1
     },
     {
-     "from": 345,
-     "to": 346,
-     "len": 2
-    },
-    {
-     "from": 349,
-     "to": 349,
+     "from": 382,
+     "to": 382,
      "len": 1
     },
     {
-     "from": 354,
-     "to": 354,
+     "from": 390,
+     "to": 390,
      "len": 1
     },
     {
-     "from": 360,
-     "to": 360,
+     "from": 398,
+     "to": 398,
      "len": 1
     },
     {
-     "from": 366,
-     "to": 366,
+     "from": 411,
+     "to": 411,
+     "len": 1
+    },
+    {
+     "from": 418,
+     "to": 418,
+     "len": 1
+    },
+    {
+     "from": 441,
+     "to": 441,
      "len": 1
     },
     {
@@ -202,9 +347,24 @@
      "len": 5
     },
     {
+     "from": 465,
+     "to": 465,
+     "len": 1
+    },
+    {
      "from": 471,
+     "to": 475,
+     "len": 5
+    },
+    {
+     "from": 477,
      "to": 477,
-     "len": 7
+     "len": 1
+    },
+    {
+     "from": 483,
+     "to": 483,
+     "len": 1
     }
    ],
    "brightness_jumps": 0,
@@ -247,25 +407,50 @@
    "frames": 308,
    "fps": 60.0,
    "seconds": 5.13,
-   "mean_change_per_frame": 0.01391,
-   "repeated_frames": 29,
-   "repeated_fraction": 0.094,
+   "mean_change_per_frame": 0.01386,
+   "repeated_frames": 38,
+   "repeated_fraction": 0.124,
    "longest_still_run": 17,
    "repeated_at": [
+    2,
+    6,
+    12,
+    19,
+    24,
     29,
     121,
     122,
     123,
     124,
     178,
-    179,
-    180,
-    181,
-    182,
-    183,
-    184
+    179
    ],
    "still_runs": [
+    {
+     "from": 2,
+     "to": 2,
+     "len": 1
+    },
+    {
+     "from": 6,
+     "to": 6,
+     "len": 1
+    },
+    {
+     "from": 12,
+     "to": 12,
+     "len": 1
+    },
+    {
+     "from": 19,
+     "to": 19,
+     "len": 1
+    },
+    {
+     "from": 24,
+     "to": 24,
+     "len": 1
+    },
     {
      "from": 29,
      "to": 29,
@@ -285,6 +470,26 @@
      "from": 271,
      "to": 274,
      "len": 4
+    },
+    {
+     "from": 277,
+     "to": 277,
+     "len": 1
+    },
+    {
+     "from": 287,
+     "to": 287,
+     "len": 1
+    },
+    {
+     "from": 293,
+     "to": 293,
+     "len": 1
+    },
+    {
+     "from": 300,
+     "to": 300,
+     "len": 1
     },
     {
      "from": 304,
@@ -312,27 +517,27 @@
    "height": 780,
    "dpr": 3
   },
-  "cold_ms": 8226,
+  "cold_ms": 12164,
   "steps": [
    {
     "do": "goTo",
-    "ms": 1657
+    "ms": 2170
    },
    {
     "do": "wait",
-    "ms": 2004
+    "ms": 2007
    },
    {
     "do": "scrollTo",
-    "ms": 3177
+    "ms": 3113
    },
    {
     "do": "wait",
-    "ms": 1103
+    "ms": 1102
    },
    {
     "do": "frames",
-    "ms": 436245
+    "ms": 468180
    }
   ]
  },

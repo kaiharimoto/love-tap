@@ -152,17 +152,17 @@
   "04_moments.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9004,
+    "p50": 0.907,
     "p98": 165.0,
     "span": 0.6797
    },
    "value_bands": {
-    "ground": 0.2768,
-    "mid": 0.123,
-    "figure": 0.6001
+    "ground": 0.2615,
+    "mid": 0.1167,
+    "figure": 0.6218
    },
    "chroma": {
-    "mean": 0.0382,
+    "mean": 0.0387,
     "p99": 0.0726,
     "grey_fraction": 0.0685,
     "accent_fraction": 4e-05,
@@ -176,16 +176,16 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0209,
-     "p99_chroma": 0.0489
+     "mean_chroma": 0.0213,
+     "p99_chroma": 0.049
     },
     "mid": {
-     "mean_chroma": 0.0312,
-     "p99_chroma": 0.0563
+     "mean_chroma": 0.031,
+     "p99_chroma": 0.0551
     },
     "figure": {
-     "mean_chroma": 0.0476,
-     "p99_chroma": 0.0742
+     "mean_chroma": 0.0474,
+     "p99_chroma": 0.0738
     }
    },
    "hue_families": 5,
@@ -299,47 +299,48 @@
   "10_first_run.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9208,
+    "p50": 0.9199,
     "p98": 165.0,
-    "span": 0.592
+    "span": 0.6006
    },
    "value_bands": {
-    "ground": 0.1301,
-    "mid": 0.0215,
-    "figure": 0.8485
+    "ground": 0.1303,
+    "mid": 0.0225,
+    "figure": 0.8473
    },
    "chroma": {
-    "mean": 0.0668,
-    "p99": 0.0805,
+    "mean": 0.0599,
+    "p99": 0.0761,
     "grey_fraction": 0.0002,
-    "accent_fraction": 0.0,
+    "accent_fraction": 0.00057,
     "accent_fraction_by_family": {
-     "A_paper": 0.0,
+     "A_paper": 0.00021,
      "B_rose": 0.0,
      "C_cool": 0.0,
      "D_green": 0.0,
-     "outside_any_family": 0.0
+     "outside_any_family": 0.00036
     }
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0395,
+     "mean_chroma": 0.0394,
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.037,
-     "p99_chroma": 0.0644
+     "mean_chroma": 0.0371,
+     "p99_chroma": 0.0877
     },
     "figure": {
-     "mean_chroma": 0.0717,
-     "p99_chroma": 0.0805
+     "mean_chroma": 0.0636,
+     "p99_chroma": 0.0772
     }
    },
-   "hue_families": 4,
+   "hue_families": 5,
    "hue_centres_deg": [
     55.0,
     65.0,
     75.0,
+    85.0,
     95.0
    ],
    "widest_hue_gap_deg": 320.0
@@ -395,26 +396,26 @@
   "13_messenger_states.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9144,
+    "p50": 0.9143,
     "p98": 165.0,
-    "span": 0.5991
+    "span": 0.5992
    },
    "value_bands": {
     "ground": 0.1455,
-    "mid": 0.0546,
-    "figure": 0.8
+    "mid": 0.0543,
+    "figure": 0.8002
    },
    "chroma": {
-    "mean": 0.0542,
-    "p99": 0.0771,
+    "mean": 0.0547,
+    "p99": 0.0776,
     "grey_fraction": 0.0032,
-    "accent_fraction": 0.00155,
+    "accent_fraction": 0.00165,
     "accent_fraction_by_family": {
      "A_paper": 0.00016,
-     "B_rose": 0.00097,
+     "B_rose": 0.00051,
      "C_cool": 0.0,
      "D_green": 0.0,
-     "outside_any_family": 0.00042
+     "outside_any_family": 0.00098
     }
    },
    "chroma_by_band": {
@@ -423,12 +424,12 @@
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0402,
-     "p99_chroma": 0.1094
+     "mean_chroma": 0.0404,
+     "p99_chroma": 0.1121
     },
     "figure": {
-     "mean_chroma": 0.0582,
-     "p99_chroma": 0.0774
+     "mean_chroma": 0.0588,
+     "p99_chroma": 0.0778
     }
    },
    "hue_families": 5,
@@ -493,19 +494,19 @@
   "17_setup_pwa.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9417,
+    "p50": 0.9183,
     "p98": 165.0,
-    "span": 0.584
+    "span": 0.633
    },
    "value_bands": {
-    "ground": 0.2863,
-    "mid": 0.043,
-    "figure": 0.6708
+    "ground": 0.2821,
+    "mid": 0.0526,
+    "figure": 0.6653
    },
    "chroma": {
-    "mean": 0.0194,
-    "p99": 0.0367,
-    "grey_fraction": 0.0251,
+    "mean": 0.0381,
+    "p99": 0.0482,
+    "grey_fraction": 0.0048,
     "accent_fraction": 0.0,
     "accent_fraction_by_family": {
      "A_paper": 0.0,
@@ -517,31 +518,32 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0256,
-     "p99_chroma": 0.0278
+     "mean_chroma": 0.0372,
+     "p99_chroma": 0.049
     },
     "mid": {
-     "mean_chroma": 0.0113,
-     "p99_chroma": 0.0306
+     "mean_chroma": 0.0264,
+     "p99_chroma": 0.0509
     },
     "figure": {
-     "mean_chroma": 0.0172,
-     "p99_chroma": 0.0378
+     "mean_chroma": 0.0394,
+     "p99_chroma": 0.0453
     }
    },
-   "hue_families": 3,
+   "hue_families": 4,
    "hue_centres_deg": [
+    55.0,
     65.0,
     75.0,
     85.0
    ],
-   "widest_hue_gap_deg": 340.0
+   "widest_hue_gap_deg": 330.0
   }
  },
  "across_the_set": {
-  "mean_chroma": 0.0438,
-  "mean_lightness_span": 0.6267,
-  "hue_families_min": 3,
+  "mean_chroma": 0.045,
+  "mean_lightness_span": 0.6319,
+  "hue_families_min": 4,
   "hue_families_max": 5,
   "hue_families": 5,
   "hue_centres_deg": [
@@ -556,10 +558,10 @@
   "named_families_present": [
    "A_paper"
   ],
-  "grey_fraction": 0.0222,
-  "accent_fraction": 0.00055,
-  "lightness_drift": 0.5513,
-  "lightness_drift_room": 0.2927,
+  "grey_fraction": 0.0204,
+  "accent_fraction": 0.00061,
+  "lightness_drift": 0.5391,
+  "lightness_drift_room": 0.2805,
   "rooms": 10,
   "viewers": 1
  },
@@ -567,7 +569,7 @@
  "floors": {
   "law": "docs/COLOR.md",
   "classes_from": "docs/screen_classes.json",
-  "breaches": 46,
+  "breaches": 43,
   "breached": [
    {
     "artifact": "01_pulse.png",
@@ -654,7 +656,7 @@
     "class": "room",
     "quantity": "chroma_by_band.ground.mean_chroma",
     "requires": ">= 0.03",
-    "actual": 0.0209,
+    "actual": 0.0213,
     "section": "5 floor"
    },
    {
@@ -662,7 +664,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0742,
+    "actual": 0.0738,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -734,7 +736,7 @@
     "class": "room",
     "quantity": "value_bands.mid",
     "requires": ">= 0.04",
-    "actual": 0.0215,
+    "actual": 0.0225,
     "section": "2"
    },
    {
@@ -750,7 +752,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0805,
+    "actual": 0.0772,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -758,7 +760,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.0,
+    "actual": 0.00057,
     "section": "7 item 5"
    },
    {
@@ -814,7 +816,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0774,
+    "actual": 0.0778,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -822,7 +824,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.00155,
+    "actual": 0.00165,
     "section": "7 item 5"
    },
    {
@@ -862,31 +864,15 @@
     "class": "room",
     "quantity": "widest_hue_gap_deg",
     "requires": "<= 200.0",
-    "actual": 340.0,
+    "actual": 330.0,
     "section": "4"
-   },
-   {
-    "artifact": "17_setup_pwa.png",
-    "class": "room",
-    "quantity": "chroma_by_band.ground.mean_chroma",
-    "requires": ">= 0.03",
-    "actual": 0.0256,
-    "section": "5 floor"
    },
    {
     "artifact": "17_setup_pwa.png",
     "class": "room",
     "quantity": "chroma_by_band.mid.mean_chroma",
     "requires": ">= 0.03",
-    "actual": 0.0113,
-    "section": "5 floor"
-   },
-   {
-    "artifact": "17_setup_pwa.png",
-    "class": "room",
-    "quantity": "chroma_by_band.figure.mean_chroma",
-    "requires": ">= 0.035",
-    "actual": 0.0172,
+    "actual": 0.0264,
     "section": "5 floor"
    },
    {
@@ -894,7 +880,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0378,
+    "actual": 0.0453,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -908,17 +894,9 @@
    {
     "artifact": "<the set>",
     "class": "-",
-    "quantity": "across_the_set.mean_chroma",
-    "requires": ">= 0.045",
-    "actual": 0.0438,
-    "section": "5 floor / 7 item 1"
-   },
-   {
-    "artifact": "<the set>",
-    "class": "-",
     "quantity": "across_the_set.lightness_drift_room",
     "requires": "<= 0.2",
-    "actual": 0.2927,
+    "actual": 0.2805,
     "section": "3"
    },
    {

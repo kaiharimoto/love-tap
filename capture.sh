@@ -371,6 +371,17 @@ python3 tools/check/palette.py --out evidence/palette.json --floors \
 [ -s evidence/palette.json ] \
   || note_missing "palette.json" "tools/check/palette.py wrote no ruler; see $LOG/palette.txt"
 
+# The third ruler, and the one the flat-fill cluster is closed on: whether any still has a single
+# RGB value standing in for a surface, and whether the pad box has tooth in it. Read here for the
+# same reason as the two above -- for five firings it was measured by hand, once per firing, and
+# 10_first_run sat at 59.56% one exact colour through three separate diagnoses of it.
+#
+# Like them, it exits non-zero on a breached floor, which is the normal state of this build while
+# the tooth question in docs/COLOR.md is open, so its exit code is not read as a missing artifact.
+python3 tools/check/flat_fill.py --out evidence/flat_fill.json >"$LOG/flat_fill.txt" 2>&1 || true
+[ -s evidence/flat_fill.json ] \
+  || note_missing "flat_fill.json" "tools/check/flat_fill.py wrote no ruler; see $LOG/flat_fill.txt"
+
 # What moved since the last capture, measured against evidence/.previous, and then this capture
 # becomes the baseline for the next one. The rotation has to happen here rather than by hand:
 # nothing rotated it for a long time, so every SSIM in DIFF.json was unreproducible from the

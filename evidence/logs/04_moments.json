@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2442
+   "ms": 4553
   },
   {
    "do": "wait",
@@ -18,11 +18,11 @@
   },
   {
    "do": "shot",
-   "ms": 6137
+   "ms": 4751
   },
   {
    "do": "report",
-   "ms": 729
+   "ms": 715
   }
  ],
  "shots": [
@@ -94,11 +94,11 @@
  "blob_waits": [
   {
    "at": "04_moments.png",
-   "waited_ms": 2511,
+   "waited_ms": 1336,
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 8141,
+ "cold_ms": 12946,
  "problems": [],
  "ok": true
 }

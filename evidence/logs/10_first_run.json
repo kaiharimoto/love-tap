@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 1847
+   "ms": 3019
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2103
   },
   {
    "do": "shot",
-   "ms": 1670
+   "ms": 2835
   },
   {
    "do": "report",
-   "ms": 705
+   "ms": 707
   }
  ],
  "shots": [
@@ -40,7 +40,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-20T02:40:40.630Z",
+   "now": "2026-09-20T04:55:44.889Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -67,7 +67,7 @@
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 1001,
+ "cold_ms": 1215,
  "problems": [],
  "ok": true
 }
