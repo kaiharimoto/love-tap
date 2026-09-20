@@ -2,17 +2,11 @@
   "v": 1,
   "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
   "cycle": 3,
-  "stage": "DIAGNOSE",
-  "firing": 30,
-  "stage_entered_at_firing": 31,
-  "lease": {
-    "session_id": "session_01NkgWz8RgzVPyLCMAt1zddg",
-    "firing": 31,
-    "stage": "DIAGNOSE",
-    "started_at": "2026-09-20T12:56:18Z",
-    "expires_at": "2026-09-20T15:56:18Z"
-  },
-  "evidence_fresh_as_of": "FRESH AS OF FIRING 30, AND DIAGNOSE MAY SCORE ON IT. The set is firing 30's capture (2026-09-20T10:06:21Z to 11:13Z, webkit, commit 2fbfde5). The freshness test is `git diff --stat 2fbfde5..HEAD -- app assets seed` and it is EMPTY: every commit after 2fbfde5 in this firing touches loop/ and docs/ only. 14 of 17 artifacts present, which is the container's ceiling of 15 less one.\n\nTHE HEADLINE IS THAT THERE IS A BASELINE UNDER IT. evidence/.previous is gitignored and has never survived a fresh clone, so every DIFF.json in a fresh container has read `new` for everything. This firing seeded .previous from the COMMITTED firing 28 artifacts before the run -- those files are, by diff.py's own definition, 'the artifacts as they were at the end of the last capture' -- so DIFF.json is the first real comparison this build has: 8 unchanged, 7 changed, 0 new, 0 gone, 2 absent. Combined with firing 28's UlidFactory seed fix, which ended fresh random note ids on every run, this is also the first PAIR of captures whose numbers are comparable at all. A successor that wants the same should re-seed .previous the same way; the rotation at the end of capture.sh has already moved it on to this capture.\n\nTHE THREE ABSENCES. 09_two_devices and 16_setup_android: no /dev/kvm, docs/PHONES.md, a hardware fact. 02_chat.png: tears.py's sample-size floor of eight against a screen that fits seven, for the FOURTH capture running -- and its own report reads visible 7, notes_with_tears 7, distinct_tears 7, repeats {}, so the clause the gate exists to enforce PASSES and only its sample size fails. The PNG is on disk and is measurable. The item is already filed and unranked.\n\nONE ARTIFACT IS PRESENT AND ALSO CARRIES A FAILURE. 13_messenger_states.png is counted in artifacts and ALSO appears in missing under the bare scene name `13_messenger_states`, with an EMPTY reason. That is why 14 present plus 4 missing reads as 18 against a set of 17. See measured_at_firing_30.the_empty_pageerror -- the picture is complete and correct, and the reason is lost by the ruler rather than by the app.",
+  "stage": "ADDRESS",
+  "firing": 31,
+  "stage_entered_at_firing": 32,
+  "lease": null,
+  "evidence_fresh_as_of": "STILL FIRING 30'S CAPTURE, AND IT HAS NOW BEEN SCORED. The set is 2026-09-20T10:06:21Z to 11:13Z, webkit, commit 2fbfde5, and firing 31 re-verified the freshness test itself before scoring: `git diff --stat 2fbfde5..HEAD -- app assets seed` is empty, with every commit after the capture touching checkpoints/ and loop/ only. 14 of 17 present against a container ceiling of 15.\n\nIT REMAINS SCORABLE FOR ADDRESS, which reads rather than re-captures. IT STOPS BEING SCORABLE THE MOMENT IMPLEMENT TOUCHES app/, assets/ or seed/ -- run the freshness test again, do not assume it.\n\nTHREE THINGS A READER OF THIS SET MUST KNOW, all confirmed by firing 31. 13_messenger_states.png is PRESENT and complete and is also listed in missing under its bare scene name with an empty reason; that is collect.py:178-181 letting an extension-less key through the `said` filter, and it is why 14 plus 4 reads as 18 against 17. 02_chat.png is PRESENT and measurable; its refusal is the brief's own eight-note floor against a seven-note screen, and its no-repeat clause passes. AND MANIFEST.JSON SAYS SOMETHING FALSE ABOUT 02_chat.png: the sentence 'it is not this session's' is appended by collect.py:126-129 to any refused artifact whose file exists, without comparing the clock, and that file was written fourteen minutes INTO the run. Two of six critics believed it.",
   "evidence_note": "FIRING 23, AND THE HEADLINE IS THAT THE LEGIBILITY WIN IS MOSTLY A SCREEN LOSING ITS TEXT, NOT INK GETTING DARKER. Read this before crediting any legibility number.\nTHE RULER WAS HELD CONSTANT FIRST, so that nothing here is the tool moving: today's legibility.py re-read the firing 16 stills and returned 64 of 362, byte-identical to the number committed at 8d0f64d. The ruler has not changed. Both selftests (legibility_selftest.py, palette_selftest.py) pass.\nTHE DECLARED RULER: 64 of 362 (17.68%) -> 25 of 298 (8.39%). But the tool's own qualifiers say most of what is left is the tool: on_moving_ground 30 -> 23 and would_pass_on_ring_reading 28 -> 23, so genuine sub-floor runs read about 34 -> 2. And the fall is NOT relighting. By ink: 80464648 (the 0x80-alpha unselected token) 26 failures -> 0, and 99464648 9 -> 0, which is 35 of the 39. THOSE RUNS DID NOT CLEAR THE FLOOR; THEY LEFT THE SCREEN. 05_settings.text.json held 14 runs each of `wake me`, `quietly` and `not at all` -- the 42-run interrupt matrix, every one of them 0x80 alpha -- and today's holds ZERO of all three. Same frame (1440x3120), same y range (55..3020 before, 55..3015 after), offscreen 0, clipped 0. The matrix is not clipped and not declared-past-the-viewport; it is simply not on the screen the capture takes, because firing 21 moved it below the feelings section. 05_settings alone went 77 declared runs / 27 failures -> 35 / 4.\nTHE MATCHED-RUN RULER AGREES INDEPENDENTLY AND IT IS THE ONE TO GATE ON. legibility_delta.py --before <8d0f64d stills> --after evidence: on the 369 runs found in BOTH captures, failures went 86 -> 87, a matched rate of 0.2331 -> 0.2358. Of the -58 in the whole-set headline, +1 is the same text reading differently and -59 is the run population moving under the detector (412 runs gone, 276 arrived). THE WRITING DID NOT GET EASIER TO READ BETWEEN FIRING 16 AND FIRING 23. It got less numerous on the worst screen.\nWHAT DID GENUINELY MOVE, AND IT IS THE HIGHEST-VALUE ITEM IN THE QUEUE. Rank 1's own sample -- 300x120 at (200,1350) in 13_messenger_states.png -- reads L_std 23.673 with 158 distinct luminance levels and HF_std 3.981, against 1.317 / 11 / 0.373 on the firing 16 still. The before figure reproduces the item's quoted `1.310 / 11` to three decimals, which is what says the two measurements are the same measurement. The item's still floor (L_std >= 30, >= 150 levels) is now HALF MET: the levels clause passes at 158, the L_std clause does not at 23.7. THE CLIP HALF HAS NOT MOVED AT ALL: 06_unfolding repeated_fraction 0.163 -> 0.157 with longest_still_run 23 -> 23, against the item's <= 0.02 / <= 2. So rank 1 is now a clip problem much more than a paper problem, which is not how it is written.\nCLIPS: 15_authored_feeling 0.319/36 -> 0.094/17, the largest single improvement in the set; 08_state_propagating 0.117/22 -> 0.099/22; 07_feeling_landing 0.068/10 -> 0.070/10; 11_chat_scroll 0.0/0 (and it is still the scripted slideshow rank 23 names).\nPALETTE: 41 breaches across 10 artifacts, against 40. across_the_set mean_chroma 0.0375 -> 0.0452, which MEETS rank 15's `>= 0.045` set-level floor for the first time; grey_fraction 0.0183 -> 0.02; lightness_drift_room 0.452 -> 0.2929 against a 0.20 ceiling. Rank 16's p50 clause now passes on 02_chat, 04_moments and 10_first_run -- all three of the stills it names -- and breaches only on 12_search at 0.6488. Still open: ground/mid chroma floors on 04_moments (ground 0.0213), 14_media_viewer (ground 0.023, grey_fraction 0.1377) and 17_setup_pwa (ground 0.0256, mid 0.0113, figure 0.0172); named_families 1 against a floor of 4; widest_hue_gap 320-340 degrees against 150.\nTHE SUITE: flutter analyze clean, 167 tests pass, app/assets packed at 80.1 MB with `seed included` -- so the year-guarded tests genuinely ran rather than returning early, which is the trap CONTINUE.md section 5 records. texture_budget.py passes.",
   "degradation": 0,
   "design": {
@@ -302,7 +296,7 @@
       "row": "material_truth + anti_goal + emotional_transmission + coherence + visual_design",
       "points": 6,
       "why": "THE CAP ON material_truth, AND THE SINGLE HIGHEST-VALUE ITEM IN THE BUILD. What the app draws for most of 06_unfolding, and freezes into 13_messenger_states.png, is a flat beige rectangle with square corners and a hard drop shadow. That is the literal archetype docs/BRIEF.md names as a failure of the entire visual concept -- 'any procedural noise overlay, tiled repeating texture, or beige rounded rectangle standing in for paper scores this category below its floor' -- so while it ships, material_truth cannot reach 22 no matter what else is repaired, and anti_goal is charged for the same object a second time by the brief's own double-count.\n\nFIVE OF SEVEN CRITICS NAMED THIS ONE OBJECT INDEPENDENTLY, all from the pixels: anti_goal blocking (1035x235 at x65-1099 y1281-1515, fill (253,227,200), radius 2-3px, interior std 1.35 / 168 colours / hf_mean 0.640 against 35.79 / 2182 / 6.853 for real note paper 200px below it in the same frame); material_truth blocking (a flat untextured square-cornered rectangle for at least frames 64-255 of 320, about 3.2s of the 5.33s clip, with no paper stock, no ruled lines, no tear edge, no crease and no fold seam; a 300x120 sample at (200,1350) measures mean L 230.8, L_std 1.310, HF_std 0.446 and 11 distinct luminance levels); coherence serious (std 1.4 against 52.4 for a real note body in the same screenshot); emotional_transmission (a feeling arriving as an empty box); visual_design minor (five of six sampled strip frames flat, text only in the last). It is also a stated failure condition -- 'a fold or crumple sequence playing fewer than 30 unique frames per second' -- and evidence/frames.json gives 06_unfolding repeated_fraction 0.163 with longest_still_run 23.\n\nTHE ROOT CAUSE IS NOT YET ESTABLISHED, AND ONE PLAUSIBLE READING HAS ALREADY BEEN RULED OUT AT FIRING 18. logs/06_unfolding.report.json reads fold {sequence: unfold_thirds, length: 240, decoded: 13, decoding: 0, playhead: 239, held_from: 227, held_to: 239}, and it is tempting to read 'decoded: 13' as a decoder that stopped at thirteen of two hundred and forty. It is not. FoldFrames.window in app/lib/material/fold.dart:35 is 36, _held is a ROLLING window, and the report is a snapshot taken at playhead 239 -- the last frame of the sequence -- where frames 227 to 239 are the only ones left ahead. Thirteen held at the end of a 240-frame sequence is the window working correctly. All 240 PNGs are present at assets/folds/unfold_thirds/. So the report does not explain the flat rectangle and the pixels are the only evidence that does. The two candidates IMPLEMENT should separate, in this order:\n  (a) DECODE CANNOT KEEP AHEAD. fold.dart:72-90 frameAt returns 'the frame at i if it is decoded, and otherwise the last one before it that is', and the comment at :77 records a past bug of exactly this shape -- 'the note sat on frame zero for the whole take and then jumped open'. If decoding falls behind, every late frame serves a stale one, which is both the held runs in frames.json and, if it falls behind from frame zero, a long flat opening. The capture took 962ms of wall clock per frame, so the decoder is being asked to keep ahead of a clock that is driven, not real.\n  (b) A SEPARATE PLACEHOLDER SURFACE is drawn when nothing has decoded yet, and it is that surface -- not a fold frame -- that is measured at std 1.31. Its square 2-3px corners and uniform drop shadow do not look like any frame of a rendered fold.\nEstablish which before changing anything; they have different fixes and the item has five rows riding on it.\n\nCONSTRAINT THAT MUST BE HONOURED, or closing this breaches another failure condition: 'a fold or crumple sequence ... exceeding the WebKit texture budget recorded in TASK_STATE.md'. That budget is 32 MB peak decoded per sequence; the 36-frame window peaks at 21.2 MB; the whole sequence held at once is about 141 MB. So the fix is NOT to decode the sequence. tools/check/texture_budget.py exists now and enforces this -- run it.",
-      "measurement": "ANCHORED TO THE OBJECT, NOT TO A PIXEL BOX. The previous measurement named a 300x120 sample at a fixed (200,1350) in 13_messenger_states.png; the placeholder moved from y1281-1515 (firing 18) to y1075-1330 (firing 31) and that box now sits inside assets/paper/looseleaf_03, whose rect the sidecar puts at y1357 h299 -- so the 24.854 L_std / 165 levels it reports is a reading of real paper, and the 'floor half met' that firing 23 drew from it was never about the defect. THE REPLACEMENT, which cannot drift because the app declares it: every painted note-sized card in every still has a matching assets/paper rect in that scene's .surfaces.json, AND any card without one measures L_std >= 30 with >= 150 distinct levels over a 300x120 sample taken INSIDE that card's own detected bounds, AND assets/folds appears at least once in a seeded still's surfaces sidecar, AND evidence/frames.json gives 06_unfolding repeated_fraction <= 0.02 with longest_still_run <= 2, AND tools/check/texture_budget.py still passes. Re-break by parking the fold at playhead 0 and watching an unbacked card come back.",
+      "measurement": "CORRECTED TWICE AT FIRING 31. First away from a fixed pixel box, which had slid off the object; then away from the sidecar test that replaced it, which CANNOT PASS. The code critic traced the card to FoldedNote drawing frame 0000 of unfold_thirds (app/lib/material/fold.dart:339-369) for a note sitting above the reader's arrival marker, and a fold frame is painted by CustomPaint while CaptureHooks.paperSurfaces records only RenderImage -- so 'no assets/paper rect behind it' is the instrument being blind to CustomPaint, not the app painting a bare rectangle. Three of seven critics and the builder's own first reading called it a code-painted fill; it is not. SO THE MEASUREMENT IS ABOUT THE ASSET, NOT ABOUT THE WIDGET: (a) frame 0000 of unfold_thirds, sampled at its SHIPPED display size inside the FoldedNote's own bounds rather than at any fixed coordinate, measures L_std >= 30 over >= 150 distinct levels, against 5.650 / 87 measured at firing 31; AND (b) CaptureHooks.paperSurfaces records CustomPaint-painted fold frames, so the sidecar stops being unable to see a third of what is on the glass; AND (c) 06_unfolding.report.json shows a playhead below 20 at the first captured frame and above 220 at the last, so the clip contains the fold rather than its aftermath; AND (d) tools/check/texture_budget.py still passes. Re-break by restoring today's frame 0000 and watching (a) fall back to single figures. SEE ALSO the-folds-floor-passes-a-blank-sheet, which is the same asset measured from the library side and says why the surfaces gate passes it: the floor and the pack size have to move together.",
       "state": "open",
       "attempts": 4,
       "closed_by": null,
@@ -322,7 +316,8 @@
       "blocked_on": "ADDRESS, on two measurement definitions and nothing else. (a) Clause (2)'s HF_std mask, which scores the flat rectangle above the repaired sheet -- see hf-std-on-a-strip-frame-does-not-measure-the-sheet. (b) Clause (1)'s single-coordinate L_std sample, which reads 26.962 at its own pixel and 31.421 at the median of a +-24 px neighbourhood of that pixel. NOT blocked on code, not on a capture, not on Blender, and not on the owner. LOOP.md's attempts >= 3 rule is what moved it: three firings have now read it and it has not closed, so it goes to the back and the loop carries on. It does not block the loop and must not be allowed to.",
       "measurement_superseded_at_firing_31": "THE PRIMARY MEASUREMENT IS THE PIXELS, not the report, because the report's decoded count is a window snapshot: a 300x120 sample at (200,1350) in 13_messenger_states.png measures L_std >= 30 with >= 150 distinct luminance levels against today's 1.310 / 11, AND every sampled frame of crops/06_unfolding_strip.png carries paper stock, ruled lines and a tear edge measurable at HF_std >= 4 against today's 0.446, AND evidence/frames.json gives 06_unfolding repeated_fraction <= 0.02 with longest_still_run <= 2 against today's 0.163 / 23. AND, simultaneously, python3 tools/check/texture_budget.py passes -- peak decoded under the 32 MB in TASK_STATE.md -- so the clip is not fixed by holding the sequence. Re-break by restoring whichever cause is established and watching the flat rectangle and the 23-frame still run both come back. | SHARPENED AT FIRING 19, now that the cause is known: the first thing to check after a re-render is that assets/folds/unfold_thirds/0018.png carries ruled lines -- a column profile across the sheet with the rule pitch of the stock in it -- because that is the defect, and the patch_std the surfaces gate reads is not sensitive to it (it reads 2.047 today, passing, on a sheet with no rules at all).",
       "firing_notes": {
-        "firing_31": "MEASURED AT FIRING 31, AND THE ITEM IS NOT HALF MET -- IT IS UNMOVED. On the placeholder itself the same 300x120 sample reads L_std 7.061 / 81 levels against the floor of 30 / 150, so both clauses fail rather than one. The whole card interior (x120 y1110 w960 h190) reads L_std 5.650 / 87 levels / mean rgb (250,224,198), which fails the build's OWN flat-fill floor of std 8.0, beside 'left the key under the pot' at 42.677 and 'ok - leaving now' at 36.351 in the same frame. WHAT THE CARD IS: the folded state of a note. crops/06_unfolding_strip.png shows the same card in the same place blank in five of six sampled frames and carrying 'two stops. put the kettle on the second one not the first one' in the sixth. AND assets/folds is painted ZERO times across all eleven stills' surfaces sidecars while every seeded scene's report declares fold {unfold_thirds, length 240, decoded 24, playhead 0, held 0..23} -- the sequence is loaded, parked at frame 0, and never reaches the glass. Caveat stated honestly: the sidecar may only instrument PaperPiece, so zero could mean uninstrumented rather than unpainted; the pixels are the primary reading and they agree. The clip half DID move and should be credited: 06_unfolding is now 255 frames, repeated_frames 0, repeated_fraction 0.0, longest_still_run 0 -- 60 unique fold frames per second against the brief's floor of 30. The frames metric went green while the object it was proxying for did not change."
+        "firing_31": "MEASURED AT FIRING 31, AND THE ITEM IS NOT HALF MET -- IT IS UNMOVED. On the placeholder itself the same 300x120 sample reads L_std 7.061 / 81 levels against the floor of 30 / 150, so both clauses fail rather than one. The whole card interior (x120 y1110 w960 h190) reads L_std 5.650 / 87 levels / mean rgb (250,224,198), which fails the build's OWN flat-fill floor of std 8.0, beside 'left the key under the pot' at 42.677 and 'ok - leaving now' at 36.351 in the same frame. WHAT THE CARD IS: the folded state of a note. crops/06_unfolding_strip.png shows the same card in the same place blank in five of six sampled frames and carrying 'two stops. put the kettle on the second one not the first one' in the sixth. AND assets/folds is painted ZERO times across all eleven stills' surfaces sidecars while every seeded scene's report declares fold {unfold_thirds, length 240, decoded 24, playhead 0, held 0..23} -- the sequence is loaded, parked at frame 0, and never reaches the glass. Caveat stated honestly: the sidecar may only instrument PaperPiece, so zero could mean uninstrumented rather than unpainted; the pixels are the primary reading and they agree. The clip half DID move and should be credited: 06_unfolding is now 255 frames, repeated_frames 0, repeated_fraction 0.0, longest_still_run 0 -- 60 unique fold frames per second against the brief's floor of 30. The frames metric went green while the object it was proxying for did not change.",
+        "firing_31_second_correction": "The builder's own addendum in evidence/critics/3/builder.json proposed the sidecar test and was wrong, for the reason it had itself written down as a caveat -- that zero fold surfaces might mean uninstrumented rather than unpainted. It meant uninstrumented. Recording it here rather than quietly swapping the measurement, because a measurement that cannot pass is exactly the failure this item is now about."
       }
     },
     {
@@ -1249,6 +1244,54 @@
       "attempts": 0,
       "rank": null,
       "filed_at_firing": 31
+    },
+    {
+      "id": "the-read-receipt-says-read-for-a-note-the-reader-has-never-seen",
+      "row": "messenger_reliability",
+      "points": null,
+      "owner_priority": "using-it",
+      "why": "FILED AT FIRING 31 from the code critic, and it is the worst defect found this cycle by the standard the row is judged on. scope.dart:178 has markRead() write a read marker over the whole thread 600 ms after the region opens, while note.dart:82-84 keeps a note that arrived above the reader's frozen arrival marker drawn FOLDED SHUT. So the app tells the other person 'read' for a note whose text the reader has not seen and cannot have seen, because the sheet was never opened. The rubric's clause is 'a delivery and read marker that cannot be trusted', and a read receipt that fires on a closed envelope is the exact thing. It is also why the delivery-states artifact carries an information-free slab where its most interesting row should be. NOT A DUPLICATE of the fold-placeholder item: that one is about how the folded sheet LOOKS, this one is about the app asserting something untrue to the other person. Fixing the render does not fix this.",
+      "measurement": "reliability.json exercises a note that arrives above the arrival marker and shows no read marker written for it until it has been opened, and a test asserts markRead() never covers a row still folded. Re-break by restoring the blanket markRead() and watching the marker appear over an unopened row.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 31
+    },
+    {
+      "id": "an-event-kind-reaches-the-glass-as-its-own-registry-id",
+      "row": "coherence + anti_goal",
+      "points": null,
+      "owner_priority": "the-ui",
+      "why": "FILED AT FIRING 31 from the code critic, VERIFIED HERE against the artifact. app/lib/regions/settings/notifications.dart:86's _said switch turns each event type into the phrase a person would use -- 'a picture', 'their voice', 'a date moving', 'a day that matters' -- and has no case for passed_on. 05_settings_interrupt.text.json carries the result: every other row in the interrupt matrix is a sentence and one row reads 'passed on', which is the registry id with its underscore swapped for a space, sitting on a committed artifact. IT IS AN INSTANCE OF A LARGER THING and that is why it is filed with the row it is. The critic found three per-type lists still living outside the registry: this one, moments_region.dart:84 which hardcodes its type sets so passed_on and ping appear in no Moments view at all, and search_page.dart:56 which maps 8 of 18 types. The thread-versus-search drift the rubric names IS fixed and tested; the promise that adding a type is one registry entry and one renderer is still false, and this row is the proof that has already reached a picture.",
+      "measurement": "A test asserts every id in the registry has a case in notifications.dart's _said, in moments_region's type sets and in search_page's map -- the same shape as the existing thread_types_test -- and 05_settings_interrupt.text.json contains no run equal to a registry id with underscores replaced. Re-break by removing one case and watching the test and the artifact go red together.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 31
+    },
+    {
+      "id": "the-app-says-yous-phone-because-a-name-and-a-pronoun-go-through-one-template",
+      "row": "anti_goal + coherence",
+      "points": null,
+      "owner_priority": "using-it",
+      "why": "FILED AT FIRING 31, found by the builder reading the source after the emotional-transmission critic reported malformed state strings. renderers.dart:144 sets `who` to the literal 'you' when the event is the reader's own, and _stateSentence then drops that straight into possessive and verb-agreement templates at lines 236, 240, 242 and 245-246. The app therefore displays \"you's phone is nearly out\", \"you's phone is on silent\", \"you's signal is wifi\", \"you was up ...\" and \"it is nine where you is\". THE STRING LINT CANNOT SEE ANY OF IT, which is the interesting half: tools/lint/strings.py walks Dart literals reaching a display call, and these are composed at runtime from a template plus a name, so each fragment passes on its own. docs/VOICE.md is enforced over the string table and the string table is not every displayed string -- the code critic makes the same point independently. None of the five appears in this capture's sidecars because no passive state row of the reader's own was on screen, so it is a defect the evidence set does not currently reach.",
+      "measurement": "A test renders every signal in _stateSentence for both the first and the third person and asserts no output contains \"you's\", 'you was' or 'where you is'; and one such row appears in a captured artifact so the evidence set can see the path at all. Re-break by putting the shared template back and watching the first-person rendering fail.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 31
+    },
+    {
+      "id": "the-projector-that-runs-every-frame-of-the-hero-screen-cites-a-test-that-does-not-exist",
+      "row": "coherence",
+      "points": null,
+      "owner_priority": "harness",
+      "why": "FILED AT FIRING 31 from the code critic. thread.dart:161 cites thread_incremental_test as what holds the incremental ThreadProjector correct. There is no such file. The projector runs on every frame of Chat, the screen the couple lives in, and it still carries the bug its own comment explains fixing: line 339 hashes refused.keys while line 341 compares inFlight.length, a count -- so a membership change that does not change the size leaves every outbox row's delivery margin stale. A comment naming a test that was never written is worse than no comment, because it is why nobody looked. The critic also found spine_replay_golden_test to be a determinism check over a 15-event synthetic log rather than the golden replay of the seeded year docs/EVENT_TYPES.md promises, and four test files that bare-return to green when the seed asset is absent.",
+      "measurement": "thread_incremental_test exists and fails when line 341 compares a length instead of membership; and no test file returns green on a missing asset without reporting that it skipped. Re-break by putting the length comparison back and watching the new test go red.",
+      "state": "open",
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 31
     }
   ],
   "blocked": null,
@@ -1290,48 +1333,25 @@
     }
   ],
   "last_score": {
+    "total": 75.0,
+    "of": 120,
+    "at_firing": 31,
     "cycle": 3,
-    "total": 67,
-    "scale": 120,
-    "exit": 114,
+    "commit": "12a0dfa",
+    "rows": {
+      "messenger_reliability": 21,
+      "material_truth": 15,
+      "emotional_transmission": 12,
+      "coherence": 11.0,
+      "anti_goal": 7,
+      "visual_design": 9
+    },
     "every_floor_met": false,
-    "by_category": {
-      "messenger_reliability": 20,
-      "material_truth": 13,
-      "emotional_transmission": 10,
-      "coherence": 10,
-      "anti_goal": 6,
-      "visual_design": 8
-    },
-    "critic_and_builder": {
-      "messenger_reliability": [
-        21,
-        20
-      ],
-      "material_truth": [
-        13,
-        15
-      ],
-      "emotional_transmission": [
-        11,
-        10
-      ],
-      "coherence": [
-        11,
-        10
-      ],
-      "anti_goal": [
-        6,
-        6
-      ],
-      "visual_design": [
-        13.5,
-        8
-      ]
-    },
-    "on_the_five_rows_that_have_a_predecessor": "55.5 -> 59.0, +3.5; the brief's structural-pass rule triggers under +1.0 and is not triggered",
-    "critics_run": 7,
-    "problems": []
+    "previous": {
+      "total": 67,
+      "at_firing": 18,
+      "note": "measured against a build that no longer exists; replaced by this row"
+    }
   },
   "history": [
     {
@@ -1617,6 +1637,15 @@
         "flutter-analyze-exits-1-on-an-info-so-the-commit-gate-short-circuits",
         "texture-budget-passes-and-nothing-in-the-capture-runs-it"
       ]
+    },
+    {
+      "firing": 31,
+      "stage": "DIAGNOSE",
+      "cycle": 3,
+      "at": "2026-09-20T13:26:18Z",
+      "commit": "12a0dfa",
+      "result": "scored cycle 3 at 75.0/120 against firing 18's 67, on firing 30's capture; seven critics, builder sheet written and pushed first",
+      "found": "the flat card is the folded state of a note and is unbacked by any paper asset; three metrics went green while their defects did not move; two harness bugs traced to their lines, one of which states something false about the evidence"
     }
   ],
   "routine": {
@@ -1764,7 +1793,7 @@
       "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
     }
   },
-  "stage_change_note": "FIRING 30 RAN OBSERVE AND HANDS THE STAGE TO DIAGNOSE, WHICH IS THE ORDER FIRING 29 SET AND THE ONE CONDITION DIAGNOSE WAS MISSING. evidence_fresh_as_of now says plainly that the set MAY be scored: the capture is commit 2fbfde5 and `git diff --stat 2fbfde5..HEAD -- app assets seed` is empty, because everything this firing committed after the evidence touches loop/ and docs/ only.\n\nWHAT DIAGNOSE SHOULD KNOW BEFORE IT SCORES. (1) last_score's 67 of 120 was measured at firing 18 and describes a build that does not exist; the whole point of this capture is that it can now be replaced. (2) Write the builder sheet to evidence/critics/3/builder.json BEFORE reading any critic, and never score a category above its critic -- tools/score.py refuses the arithmetic. (3) The set is 14 of 17 and the ceiling here is 15; the two Android artifacts are a hardware fact and 02_chat is a sample-size floor, not a picture. (4) 13_messenger_states.png is present AND listed missing with an empty reason -- the picture is fine and the ruler lost the reason. Do not score that artifact as absent. (5) DIFF.json is real this time and its judgement field is the coherence critic's to fill in.\n\nTHE FOUR ITEMS THIS FIRING FILED ARE ALL owner_priority harness AND SHOULD BE RANKED AS SUCH -- the steer is explicit that a ruler gets fixed when you cannot see without it, and not because it is the easiest thing in the queue. Two of the four meet that bar plainly: the empty pageerror is the one gate in the build that can go red and say nothing, and the analyze gate short-circuits before the suite runs. The other two are bookkeeping.\n\nAND THE PATTERN FIRING 29 NAMED IS UNCHANGED AND IS STILL ADDRESS'S FIRST JOB. Rank 7's before and after now exist on one ruler, but its measurement -- a column profile in mean-crossings -- still has no committed tool, and neither does rank 6's traced contour. This capture could not close either item and no capture will until those two definitions exist. ADDRESS's own definition of done is that every queue item names the measurement that will close it; it is still false for the queue.",
+  "stage_change_note": "FIRING 31 RAN DIAGNOSE AND HANDS THE STAGE TO ADDRESS, which is the order firing 29 set. DESIGN IS FROZEN UNTIL CYCLE 6 AND MUST BE SKIPPED. Cycle 3 now scores 75.0 of 120 against firing 18's 67, on a capture of the build that actually exists; no floor is met. The full reading is in measured_at_firing_31 and the seven reports are in evidence/critics/3/, with firing 18's moved unread to at_firing_18/.\n\nADDRESS'S FIRST JOB IS UNCHANGED FROM WHAT FIRING 29 SET, and this firing has made it concrete. Rank 1's two measurement definitions and rank 10 are still the top of the list, rank 11, the per-class and per-condition floor in docs/COLOR.md, and a re-rank. But re-rank against this:\n\n(1) ONE OBJECT HOLDS TWO FLOORS SHUT and five of seven critics found it independently for the second cycle running. It is the folded state of a note, drawn as a flat beige square-cornered card with a drop shadow, backed by no paper asset in its own sidecar and failing the build's own flat-fill floor at L_std 5.650 against 8.0. It is rank 40 / rank 1. Nothing else in the queue buys material_truth and anti_goal at once.\n\n(2) THE MEASUREMENTS THEMSELVES ARE THE SECOND JOB, and this is the finding ADDRESS should act on hardest. Three metrics went green this cycle while their defects did not move: rank 40's fixed sample box slid off the placeholder onto real paper; 06_unfolding's clean frame-distinctness is 255 unique frames of a scroll, because the capture starts after the fold has finished; and firing 21's interrupt matrix left the screen and read as a legibility win. ADDRESS's own definition of done is that every queue item names the measurement that will close it. That is not enough any more. THE MEASUREMENT MUST ALSO BE ANCHORED TO SOMETHING THE APP DECLARES -- a surfaces rect, an event id, a playhead -- rather than to a pixel box or a frame index. Sweep the queue for absolute coordinates and re-express them.\n\n(3) THE INSTRUMENT, NOT THE APP, IS WHAT RANK 10 BLOCKS. legibility.json's 17 below-floor runs are 15 instrument artifacts and about two real failures; confirmed twice over by 300% crop. Rank 10 should be ranked as unblocking the ability to see, which is exactly the bar WORKER_PROMPT 3c sets for harness work -- 'fix a ruler when you cannot see without it'. The one real failure is the unselected filter chips on 04_moments at 4.15:1 and 4.30:1.\n\n(4) THE OWNER'S SECOND COMPLAINT IS THE LARGEST UNTOUCHED BLOCK OF POINTS. visual_design is 9 of 20 and the palette has exactly one hue family against a floor of four, with accent_fraction at 0.00058 against 0.01 and three screens at exactly zero. Ranks 13, 14 and 15 are that work.\n\n(5) SIX ITEMS WERE RE-MEASURED AND NINE FILED UNRANKED, all with measurements, all for ADDRESS to rank. Among them: rank 2 was run against its own three clauses and two pass while the third fails ten of fourteen, so it stays open but the row-01 disqualifier is largely lifted; the eight-note floor on the chat hero is the BRIEF's exit condition and not the tear gate's invention, which reverses that item -- the screen must fit eight, the ruler must not bend; and the cold start is re-tagged using-it on the measurement 3c asked for.\n\n(6) THE STEER STILL HOLDS AND MESSENGER_RELIABILITY IS STILL CAPPED BY IT. The row scored 21 of 30 from both builder and critic independently. Do not file demo-content work to lift it.",
   "measured_at_firing_12": {
     "captured_at": "e7a3a5a",
     "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",
@@ -2030,5 +2059,94 @@
     "texture_budget": "PASSES, and nothing in the capture runs it. tools/check/texture_budget.py exists (5002867) and reports every sequence inside the 32 MB recorded in TASK_STATE.md -- unfold_thirds peaks at 28.0 MB on a window of 36 frames, against 186.4 MB held whole. It is not called from capture.sh, so evidence/texture_budget.json is not capture output and does not rotate with the set. Run by hand this firing; the file was NOT rewritten.",
     "suite": "flutter analyze: 1 issue, info-level, app/test/a_voice_is_drawn_by_a_hand_test.dart:70 -- `Future<_Reading> read(...)` is a public function returning a private type. flutter test: 179 pass, with the year packed. NOTE: analyze EXITS 1 on an info, so the commit gate `flutter analyze && flutter test` short-circuits before the suite runs. Filed.",
     "what_did_not_move": "12_search.png and 14_media_viewer.png came back BYTE-IDENTICAL to firing 28's, and six more stills differ only in the tally box. A frame that was already complete is unchanged; only what was actually rebuilt changed."
+  },
+  "measured_at_firing_31": {
+    "what": "DIAGNOSE, cycle 3, run on firing 30's capture. The first score in this build's history taken from a capture of the build that exists: last_score's 67 was measured at firing 18 and described a build thirteen firings old.",
+    "freshness_verified_here": "`git diff --stat 2fbfde5..HEAD -- app assets seed` is empty; every commit after the capture touches checkpoints/ and loop/ only. Checked before scoring, not assumed.",
+    "ordering_is_provable_from_git": "builder.json was committed at f7265aa and pushed BEFORE any critic was launched. Firing 18's cycle-3 reports were moved unread to evidence/critics/3/at_firing_18/ at the start; score.py globs only the top level, so they do not count. Seven critics then ran as fresh contexts.",
+    "score": {
+      "total": 75.0,
+      "of": 120,
+      "exit": 114,
+      "every_floor_met": false,
+      "rows": {
+        "messenger_reliability": {
+          "weight": 30,
+          "floor": 26,
+          "critic": 21,
+          "builder": 21,
+          "taken": 21,
+          "meets_floor": false
+        },
+        "material_truth": {
+          "weight": 25,
+          "floor": 22,
+          "critic": 15,
+          "builder": 18,
+          "taken": 15,
+          "meets_floor": false
+        },
+        "emotional_transmission": {
+          "weight": 20,
+          "floor": 17,
+          "critic": 12.5,
+          "builder": 12,
+          "taken": 12,
+          "meets_floor": false
+        },
+        "coherence": {
+          "weight": 15,
+          "floor": 13,
+          "critic": 11.0,
+          "builder": 11,
+          "taken": 11.0,
+          "meets_floor": false
+        },
+        "anti_goal": {
+          "weight": 10,
+          "floor": 9,
+          "critic": 9.2,
+          "builder": 7,
+          "taken": 7,
+          "meets_floor": false
+        },
+        "visual_design": {
+          "weight": 20,
+          "floor": 17,
+          "critic": 14.5,
+          "builder": 9,
+          "taken": 9,
+          "meets_floor": false
+        }
+      }
+    },
+    "the_headline": "75.0 of 120, against 67 at firing 18. NO FLOOR IS MET and the two that are furthest from being met are held shut by ONE OBJECT. The build has genuinely improved -- 04_moments is populated, the interrupt matrix is legible, the retry affordance exists, the paper library carries tooth on 250 of 432 windows against 117, search highlights its hits, and legibility is repaired -- and the score moving 8 points while six floors stay unmet is the honest shape of that.",
+    "THE_ONE_OBJECT": "A flat beige card, square-cornered, with a hard drop shadow, standing where a note should be. FIVE OF SEVEN CRITICS FOUND IT INDEPENDENTLY, as five of seven did at firing 18, and it is the same object. It is the FOLDED state of a note: crops/06_unfolding_strip.png shows the same card in the same place blank in five of six sampled frames and carrying 'two stops. put the kettle on the second one not the first one' in the sixth. MEASURED: interior L_std 5.650 over 87 levels, mean rgb (250,224,198), against 42.677 and 36.351 for the two real notes beside it in the same frame -- it fails the build's OWN flat-fill floor of std 8.0. 13_messenger_states.report.json declares event 0001M4ZQQ0H0PPVTKMMQEE268D on stock graph_01 with tear_051, and 13_messenger_states.surfaces.json contains NEITHER ASSET ANYWHERE. A second note on the same screen, 0001M59VY0YA13H9M86HTA6XNP, gets its receipt_01 but not its tear_013. It is charged to material_truth and to anti_goal both, by the brief's deliberate double-count, and those are the two rows it holds under their floors. It recurs in 04_moments, 06_unfolding and 08_state_propagating.",
+    "THE_PATTERN_THIS_FIRING_FOUND_AND_IT_IS_THE_MOST_USEFUL_THING_HERE": "THREE SEPARATE METRICS WENT GREEN THIS CYCLE WHILE THE THING THEY WERE NAMED FOR DID NOT MOVE. (1) Rank 40's fold-placeholder sample is a 300x120 box at a fixed (200,1350). The object sat at y1281-1515 at firing 18 and sits at y1075-1330 now, so the box slid onto assets/paper/looseleaf_03 (sidecar rect y1357 h299). It reads 24.854/165 and firing 23 called the floor 'half met'; the placeholder itself reads 7.061/81 and fails both clauses. (2) 06_unfolding reports repeated_frames 0 over 255 frames, which looks like 60 unique fold frames per second -- but 06_unfolding.report.json has playhead 239 of 240 at frame zero, so the fold had already finished and those are 255 unique frames of a scroll and a cross-fade. (3) Firing 21 moved the interrupt matrix below the fold and 42 failing text runs left 05_settings.text.json, which read as a legibility win; that one is already recorded, and it is the same error. THE RULE THAT FALLS OUT: a queue measurement written as absolute pixel coordinates is not a ruler for a defect that can move, and a gate that passes because the thing it watches was not on screen has not passed. Every measurement in the queue that names a fixed box or a fixed frame should be re-expressed against something the app itself declares -- a surfaces rect, an event id, a playhead.",
+    "the_legibility_number_is_not_what_it_looks_like": "legibility.json's headline is 17 below floor of 358 declared runs. The visual-design critic cropped all 17 at 300% and found 15 to be instrument artifacts; the builder then made the same crop itself on 01_pulse's word 'open', reported at 1.09:1, and it is near-black ink on pale cream and one of the boldest words on the screen. The tool's own qualifiers agree -- on_moving_ground 16, would_pass_on_ring_reading 15. Genuine sub-floor text is one or two runs, and the one the critic confirmed by eye is on 04_moments: the unselected filter chips 'teo' (4.15:1) and 'all year' (4.30:1), a disabled state expressed by lightening the ink. THE OWNER'S FIRST COMPLAINT IS ANSWERED. Rank 10 is confirmed from two independent directions and should be read as blocking the INSTRUMENT, not the app.",
+    "the_owners_second_complaint_is_not_answered_and_is_now_arithmetic": "'It doesn't evoke cuteness to me' is measurable and the measurement is stark. Every hue with real area across all eleven stills falls between 55 and 95 degrees: palette.json's hue_families 5 is five adjacent 10-degree bins of one amber, named_families_present is ['A_paper'] alone against a floor of 4, widest_hue_gap_deg is 320 against a ceiling of 150, and accent_fraction is 0.00058 against a floor of 0.01 with 05_settings, 05_settings_interrupt and 17_setup_pwa at exactly 0.0. figure.p99_chroma fails on all eleven. mean_chroma is 0.0449 against 0.045 -- it misses by one ten-thousandth. 44 breaches. The critic would not open it daily and said so.",
+    "cold_start_is_settled_and_settles_against_dismissal": "WORKER_PROMPT 3c asked that twelve-seconds-of-cold-start be established before being dismissed as a seeded-scene artifact again. cold_ms is 10884-12327 ms on the thirteen scenes served the seeded build and 1259-1321 ms on the three served the fresh build -- same commit, same browser, one flag apart -- against 14,067 events. 8.7x, about 0.7 ms per event. HONEST LIMIT: the seeded build also ships the seed's media, so this pair cannot separate spine-open cost from bundle weight; a third point at half a seed is the first thing to measure. Re-tagged using-it. The steer deprioritised PRODUCING demo content, not FIXING a load-scaling defect it revealed.",
+    "two_harness_bugs_traced_to_their_lines": "(1) THE LOST REASON AND THE PHANTOM EIGHTEENTH ENTRY. scene.js:417-418 sets exitCode 1 when problems is non-empty AFTER writing a correct PNG, and writes problems to stdout and its log, never stderr; capture.sh:196 books the failure from `head -1 $SCRATCH/$name.err`, which is empty on that path. Separately run_scene passes the BARE scene name where collect.py's STILLS holds the filename, so at collect.py:178-181 '13_messenger_states' survives the `said` filter and is added to missing with an empty value, while the PNG is written into artifacts as normal. That is why 14 present plus 4 missing reads as 18 against a set of 17. (2) A FALSE PROVENANCE CLAIM, and it did measurable harm this firing. collect.py:126-129 appends 'a copy from an earlier run is still on disk ... it is not this session's' to EVERY refused artifact whose file exists, without comparing the timestamp -- while the very next branch makes exactly that comparison. 02_chat.png was written at 10:20:05Z and the capture began at 10:06:21Z, fourteen minutes earlier, so the statement is false. TWO OF SIX critics read it and recorded a provenance caveat against a good artifact; one concluded the hero of the set was not from this capture.",
+    "what_was_verified_rather_than_transcribed": "Every critic claim carried into the queue was re-checked against the evidence first, and one was corrected. The coherence critic reported that Us presents one module where the brief requires four; the observation is right and the root cause is wrong. app/lib/modules holds dates, todos, calendar and rituals, registry.dart and module.dart, and us_region.dart iterates kModules rendering all of them. What is true is that DATES alone fills 3120 px with about 1200 px of blank ruled paper inside the frame, and evidence/scenes/03_us.json never scrolls.",
+    "not_run_this_firing": "flutter analyze and the test suite. DIAGNOSE has no toolchain profile and bootstrapping one costs about fifteen minutes and 2 GB; the 167-passing count carried in earlier notes is from firing 23's log and is not re-asserted here.",
+    "artifacts": {
+      "present": 14,
+      "of": 17,
+      "container_ceiling": 15,
+      "absent_for_hardware": [
+        "09_two_devices.png",
+        "16_setup_android.png"
+      ],
+      "refused_by_a_brief_floor_but_present_and_measured": "02_chat.png, seven notes against the brief's eight; its no-repeat clause passes",
+      "phantom": "13_messenger_states, bare scene name, empty reason -- present and complete"
+    },
+    "diff": {
+      "judgements_assigned_by": "the coherence critic, as the brief requires",
+      "improved": 7,
+      "unchanged": 8,
+      "regressed": 0,
+      "absent": 2,
+      "caveat_the_critic_raised": "evidence/.previous is not in this checkout, so every label is the current artifact judged against a recorded SSIM rather than a before-and-after; it declined to write 'regressed' anywhere on that ground. It also found label_basis printing 'nothing a person would see has moved' against an ssim of 0.8943 -- unconditional boilerplate, which is a better reason to distrust the six values pinned at exactly 0.9995 than the roundness of the number."
+    }
   }
 }

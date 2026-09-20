@@ -1,0 +1,148 @@
+{
+  "critic": "code",
+  "cycle": 3,
+  "score": 13.5,
+  "floor": 13,
+  "meets_floor": true,
+  "method": "The Flutter suite was READ AS SOURCE, not run: there is no toolchain in this container and installing one costs about fifteen minutes and 2 GB. Every claim below about a test is a claim about what the test file would assert if it ran, not about a run. Everything under app/ was read, plus docs/EVENT_TYPES.md, docs/SIGNALS.md and the JSON sidecars under evidence/. No builder note, no prior critic, no history.",
+  "findings": [
+    {
+      "artifact": "13_messenger_states.png",
+      "severity": "serious",
+      "subsystem": "chat thread / FoldedNote / read markers",
+      "where": "app/lib/regions/chat/note.dart:82-84 with app/lib/material/fold.dart:339-369 and app/lib/scope.dart:178-183",
+      "what": "The blank card is a note lying FOLDED: FoldedNote drawing frame 0000 of the unfold_thirds sequence for the one seeded note from noor that sits above the reader's arrival marker, and on this screen it is a square-cornered rectangle with a hard drop shadow carrying no author, no time and no delivery mark.",
+      "evidence": "Four independent things agree. (1) The rectangle is about 1060 device px wide against 1094 for every real note on the screen, which is 0.98x -- exactly the Transform.scale(0.98) that FoldedNote._face applies while a note is at rest and unopened (fold.dart:361-366). (2) It has ruled lines and a red margin rule in the pixels, so it is a render of lined paper, not Flutter's release ErrorWidget (which is flat 0xF0C0C0C0 with no text). (3) A fold frame is painted by CustomPaint(_FramePainter) (fold.dart:270-277, 280-300), which is not a RenderImage, and CaptureHooks.paperSurfaces only records RenderImage nodes (hooks.dart:330-350) -- which is precisely why the sidecar shows no assets/paper and no assets/tears rect behind it while all seven real notes have both. (4) While folded, FoldedNote never builds widget.child, so the PaperPiece, the body text and the whole _Margin line (timestamp, edited, delivery) are absent from the tree, which is why 13_messenger_states.text.json declares 30 runs and none of them lands in that band. Selection is also forced: of the three seeded rows visible, the 'empty chair' feeling is excluded from folding by `thrown` and the 'noor needs a lot' row is excluded by _isMarginal, leaving exactly one ordinary sheet from noor to fold.",
+      "root_cause": "The fold is keyed to _arrivedAt (chat_region.dart:46, 507), the read marker frozen as it stood when the region was first built, while AppScope.markRead() (scope.dart:178-183) fires 600 ms after didChangeDependencies and writes a read_marker over the whole thread. So the app tells the other phone the note was read while still drawing it shut. On this artifact the two halves are side by side: a staged message says `read` because a marker was injected, and a real unread note four rows above is a blank slab.",
+      "correction": "Either the fold has to survive as an unread state that markRead does not contradict (hold the read marker until the note has actually been opened, and then the folded row is honest), or an unread note has to arrive folded and open itself on the frame the read marker covers it. Whichever way, a folded row must still carry its margin line -- author, time, and the fact that there is something under it -- so that no row of the thread is information-free. It should also not be the one rectangle in the build with square corners and a uniform drop shadow.",
+      "unexplained": "The scene log's `problems: [\"pageerror: \"]` is NOT explained by any of this and I could not trace it from source. Ruled out: a build-time exception replacing the row (an ErrorWidget in release is flat grey with no message and would size to 100000 logical px in an unbounded list -- the observed box is ~82 logical px and is ruled lined paper); the injected read_marker becoming a row (thread.dart:270-276 returns before _add, and spine_replay_golden_test and thread_types_test both hold that); a non-ULID id from the staged marker (chat_region.dart:141-146 mints one through UlidFactory.seeded, and Spine.applyFromHost validates); a renderer cast failure (all four staged rows are `message`, which reaches _written); the ambient/notification JS interop (every external call in ambient_web.dart is inside a try/catch and _allowed is false without permission). What I could NOT rule out: an unhandled async rejection from the service-worker or WebKit interop path outside those try/catches, or an error thrown from a paint/ticker callback, since neither can be located without running the build."
+    },
+    {
+      "artifact": "05_settings_interrupt.png",
+      "severity": "serious",
+      "subsystem": "event type registry / per-type switches",
+      "where": "app/lib/regions/settings/notifications.dart:86-105 (`_said`), app/lib/regions/moments/moments_region.dart:84-90 (`_keepsIn`), app/lib/regions/chat/search_page.dart:56-65 (`_facets`)",
+      "what": "The thread/search sentence switch really has been unified into one summaryOf, but three OTHER per-type lists survive outside the registry, and one of them has already drifted into an artifact: 05_settings_interrupt.text.json shows the row `passed on`, a raw registry id with its underscore swapped for a space, sitting among hand-written lines like `a day that matters`.",
+      "root_cause": "`passed_on` was added for the fifth module and `_said` was not updated, so it falls through to `_ => type.replaceAll('_',' ')`. thread_types_test forbids exactly this (`shows a key rather than words`) for summaryOf and nothing guards _said. The same shape holds elsewhere: moments_region hardcodes `media` and `marks` sets, so `passed_on` and `ping` appear in no Moments view at all, and search_page._facets maps eight labels to eight type ids out of eighteen. The registry already declares SearchSpec.facets for every type and the only thing that reads it is the term indexer in spine/search.dart:95 -- the two UI filters ignore it.",
+      "correction": "Drive all three from kEventTypes: give EventTypeSpec a `said` field (or fold it into summaryOf) so notifications.dart has no switch; build the Moments views and the search facets from SearchSpec.facets; then extend thread_types_test to assert that every type has a notification sentence and appears under at least one facet, so a nineteenth type cannot be added half-way again."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "serious",
+      "subsystem": "spine / thread projection",
+      "where": "app/lib/spine/projections/thread.dart:161 and :339-346",
+      "what": "thread.dart:161 says `thread_incremental_test holds it to exactly that`, and no such file exists in app/test/. The incremental ThreadProjector -- the code every frame of the hero screen actually runs -- is covered by nothing, because projectThread() always does one full fold and then one assemble, so the append path, the reset detection in fold(), and the dirty-set invalidation in assemble() are never exercised by any test in the suite.",
+      "root_cause": "A citation was written before the test was. The cost is visible two hundred lines below it: assemble() correctly hashes the refused ids (`Object.hashAllUnordered(refused.keys)`, line 339) after learning that a count cannot see one refusal clearing while another arrives, and then on the very next line compares `inFlight.length != _assembledInFlight` -- a count, for exactly the same reason it was wrong for refused. One id leaving the in-flight set while another enters leaves the length unchanged and every outbox row keeps its stale margin. _reset() also clears _assembledRefused and _assembledInFlight and leaves _assembledLinkUp alone, and fold()'s guard tests `ordered.length < _seen` twice.",
+      "correction": "Write app/test/thread_incremental_test.dart, or delete the citation. The test is cheap and obvious: for a log built up event by event, assert that projector.update(prefix) equals projectThread(prefix) at every step, including an out-of-order insert, a pending event gaining a seq, a read marker moving forwards and backwards, and an in-flight set that changes membership without changing size -- that last case fails today."
+    },
+    {
+      "artifact": "04_moments.png",
+      "severity": "minor",
+      "subsystem": "spine / rebuildability proof",
+      "where": "app/test/spine_replay_golden_test.dart, against docs/EVENT_TYPES.md's closing paragraph",
+      "what": "docs/EVENT_TYPES.md says this test `replays the seeded year and compares every region's view to a golden`. It does neither: it replays a fifteen-event synthetic log written inline, and it compares a replay against another replay rather than against a stored golden.",
+      "root_cause": "What it does prove is real and worth keeping -- determinism, commutativity under shuffling, prefix-then-rest equality, and that removing a photo removes it from every view (the actual 'no second store' check). But with no stored expectation, a projection that changed behaviour wholesale would still be self-consistent and still pass, and the views it covers are thread + state + module glances only: Moments' filtered view, the search index and the ThreadProjector's incremental path are all outside it.",
+      "correction": "Either load assets/seed/year through SeedLoader and check the projections against a committed golden file, or correct the sentence in docs/EVENT_TYPES.md to say what the test actually holds. A citation that overstates a gate is how a reader stops checking."
+    },
+    {
+      "artifact": "12_search.png",
+      "severity": "minor",
+      "subsystem": "test suite",
+      "where": "app/test/a_hit_you_can_see_in_an_order_you_can_read_test.dart:68,82,89,106,128; a_screen_does_not_clip_its_own_content_test.dart:158,181,197; no_word_is_written_in_a_faded_ink_test.dart:90,112; with_the_year_in_it_test.dart:80",
+      "what": "When the seeded year is not in the bundle these tests take a bare `return` and report green with nothing measured -- including the two that judge clipping and faded ink, which are the ones most likely to be relied on.",
+      "root_cause": "Sibling call sites in the same files use markTestSkipped(absent!) and these were missed. A skip is honest; a silent pass is a gate that cannot go red.",
+      "correction": "Replace every bare `return` in an `if (absent != null)` with `return markTestSkipped(absent!)`, so a build packed without the seed says so instead of showing a clean suite."
+    },
+    {
+      "artifact": "03_us.png",
+      "severity": "minor",
+      "subsystem": "modules",
+      "where": "app/lib/modules/calendar/calendar_module.dart:21 and app/test/floors_test.dart:96-101",
+      "what": "CalendarModule declares `eventTypes: ['milestone']` and contains no emit call anywhere -- it is read-only, so an anniversary cannot be added from inside the app. `ping` and `state_passive` have no producer at all outside the seed loader and the capture hook, so of eighteen registered types three can only ever arrive from the seed.",
+      "root_cause": "floors_test asserts that a module's declared types are non-empty and exist in the registry, which is true of a module that never writes one. The test names the property ('each writing into the one log') and checks something weaker.",
+      "correction": "Give the calendar a write path, and make floors_test assert what its own name says -- that for each declared type there is a call site that emits it -- which is a grep over lib/ of the same shape the persistence-boundary test already uses."
+    },
+    {
+      "artifact": "05_settings.png",
+      "severity": "minor",
+      "subsystem": "voice / string table",
+      "where": "app/lib/voice/strings.dart:1 against app/lib/modules/todos/todos_module.dart:92,96, dates/date_list.dart:25,75, rituals/rituals_module.dart:79, calendar/calendar_module.dart:95, regions/settings/settings_region.dart:159,233,236,390,395,415, and app/lib/regions/chat/chat_region.dart:709-714",
+      "what": "strings.dart opens with 'Every displayed string' and is not. Four of its empty-state lines exist verbatim a second time as inline literals in the modules (S.emptyTodos vs todos_module.dart:96, S.emptyDates vs date_list.dart:25, S.emptyRituals vs rituals_module.dart:79, S.emptyCalendar vs calendar_module.dart:95), and dozens of settings and module strings never enter the table at all.",
+      "root_cause": "tools/lint/strings.py does enforce the VOICE rules over literals passed to Text(/Written(/Stamped(/hintText: and over `static const` in the table, so the anti-goals are covered. It cannot see a displayed string that reaches a screen through a variable: _AttachStrip._choices (chat_region.dart:709-714) holds 'a photo', 'take one', 'a video', 'film something', which are rendered by `Text(word)` and match none of the lint's prefixes.",
+      "correction": "Move the stragglers into S, and add one rule to the lint: flag a Text(/Written(/Stamped( whose argument is neither an S member nor an interpolation, so a literal cannot be displayed from outside the table."
+    },
+    {
+      "artifact": "11_chat_scroll.mp4",
+      "severity": "minor",
+      "subsystem": "projections / performance",
+      "where": "app/lib/scope.dart:106-113 and app/lib/spine/projections/state.dart:44-46",
+      "what": "AppScope._refresh calls projectState(all) on every spine change, and projectState begins with inLogOrder(events), which copies and sorts the whole fourteen-thousand-event log. The thread projection beside it was made incremental for exactly this reason; the state projection was not.",
+      "root_cause": "The two projections were optimised at different times. Every read marker the scroll emits pays for a full sort.",
+      "correction": "Keep the state projection incremental the way ThreadProjector is, or at minimum memoise it against Spine's _rev the way `all` and `countOf` already are."
+    },
+    {
+      "artifact": "17_setup_pwa.png",
+      "severity": "minor",
+      "subsystem": "persistence boundary",
+      "where": "app/test/persistence_boundary_test.dart:8-9 and app/lib/regions/settings/notifications.dart:30,55",
+      "what": "The boundary test is real and does enforce the rule, but its regex matches only single-quoted `import 'package:...` -- a double-quoted import or an `export` of the same driver would pass -- and it says nothing about a plain dart:io File written from outside lib/spine/. Separately, the notification schedule and interrupt matrix live in the store's meta table rather than in the log, so the one piece of user-set state in Settings cannot be rebuilt from the spine and does not reach the other phone.",
+      "root_cause": "The meta table is device-local by design (pairing key, device id, draft, seed marker), which is defensible; the notification prefs were put in with them. Nothing today violates the import rule, so this is about what the gate would catch tomorrow rather than about a present breach.",
+      "correction": "Widen the regex to `(?:import|export)\\s+[\"']package:` and add dart:io File/Directory writes outside lib/spine/ to the same sweep. Decide explicitly whether quiet hours are per-device (then say so in the doc) or shared (then they are an event type)."
+    },
+    {
+      "artifact": "06_unfolding.mp4",
+      "severity": "minor",
+      "subsystem": "chat thread / FoldedNote",
+      "where": "app/lib/material/fold.dart:341-345, 370-374",
+      "what": "_FoldedNoteState.initState calls Folds.whenAsked(_open2) and nothing removes it in dispose, so the static _waiting list accumulates a closure over a disposed State for every folded note the list has ever built. openAll() clears it, but openAll only runs from the capture harness.",
+      "root_cause": "The registration is one-way. In an ordinary run nothing ever calls openAll, so the list only grows.",
+      "correction": "Add a Folds.forget(callback) and call it from dispose."
+    },
+    {
+      "artifact": "02_chat.png",
+      "severity": "minor",
+      "subsystem": "event type registry",
+      "where": "app/lib/spine/types.dart:1-2",
+      "what": "The file header says docs/EVENT_TYPES.md 'lists the same seventeen types'. There are eighteen, and the doc says eighteen.",
+      "root_cause": "The count was not updated when passed_on was added.",
+      "correction": "Say eighteen, or say 'the same types' and let the test be the count."
+    }
+  ],
+  "what_is_working": [
+    "There is exactly one event log and no second store. spine/store/ is the only place a driver is imported (sqlite3 on Android, idb_shim on the web, behind one SpineStore interface and one conditional openStore), app/test/persistence_boundary_test.dart is a real sweep over every .dart file outside lib/spine/ and would fail the build on an offender, and a grep for localStorage, shared_preferences, dart:indexed_db or a stray File write outside lib/spine/ finds nothing. Every static in lib/ is an image or mask cache keyed by asset, never domain state.",
+    "Every region is genuinely a view. Pulse reads projectState, Chat reads the ThreadProjector, Moments and Us read spine.all and filter, Settings reads the spine. Every write in the app goes through AppScope.emit -> Spine.append, which validates the payload against the registry and derives refs and blobs from it; there is no other append path.",
+    "The module seam is real and has already been used. modules/registry.dart is five lines, Module/ModuleContext hand a module the log, the two people, the clock and one emit, and Us iterates kModules with a default in _rowsFor -- the shelf is a fifth module added after the brief's four and it touched no existing module. A sixth costs a directory, one line in the registry, and a type only if it needs one.",
+    "One per-type switch where it matters. kThreadRenderers is keyed by the registry's own `renderer` field, summaryOf is the single sentence for the thread margin, search results, notifications and the standing line, and note.dart asks the registry which types are marginal rather than keeping a list. thread_types_test holds all of it from both ends and additionally forbids a raw timestamp or a payload key reaching a person -- and would catch the ping/search drift its comment describes.",
+    "Typing and presence are not events and read markers are not rows, in the code and in tests. There is no `typing` or `presence` type to store one by accident, Ephemeral never touches the spine, thread.dart:270 returns before _add for read_marker, and typing_is_a_frame_and_never_a_row_test counts spine rows across a real typing frame through the real onEphemeral door.",
+    "The transport is one interface with two bindings. Transport declares host/client roles, cursor pull, outbox push with per-event refusals, pairing, blobs, ephemeral frames and fault injection; HttpTransport implements all of it once; LocalBinding and TailscaleBinding differ only in where they bind and which http.Client they make. The Tailscale addition demonstrably did not change the interface -- tailscaleTransport() returns the same HttpTransport -- and tailnet_test proves there is no path to a wildcard address, boundary values included.",
+    "One codebase, two platforms, no reduced edition. The only kIsWeb branches in lib/ are the store implementation, the video controller, the haptic channel and the role/device defaults in main.dart; no region, feeling or event type is gated by platform.",
+    "No downloaded fonts -- two local .ttf files, no google_fonts, no remote link in web/index.html -- and nothing_is_set_in_an_icon_font_test bans Icons/IconData/IconButton/Icon( and emoji glyphs across all of lib/.",
+    "the_same_paper_on_both_phones_test is the best test in the suite and should not be touched. It models web double arithmetic on the VM to catch a bug that cannot reproduce on the VM, checks the implementation against a BigInt reference, and then keeps the re-break as a third test that fails if the old form stops diverging -- which is the difference between a test and a claim.",
+    "The outbox semantics are thought through: a refusal carries the host's reason to the row, stops the sync engine re-offering it, and is cleared only by the person pressing try again -- and Delivery has five distinguishable states with five different marks, held by floors_test."
+  ],
+  "checked": {
+    "one_event_log_no_second_store": true,
+    "storage_driver_import_test_exists_and_enforces": true,
+    "storage_driver_import_test_is_airtight": "uncertain -- the regex matches only single-quoted package imports and does not cover export forms or a dart:io File written outside lib/spine/; nothing violates it today",
+    "every_region_is_a_view_every_module_writes_in": true,
+    "fifth_module_without_touching_the_other_four": true,
+    "fourteen_plus_event_types_documented": true,
+    "schema_test_asserts_the_same_list": true,
+    "adding_a_type_touches_only_registry_and_one_renderer": false,
+    "exactly_one_per_type_switch_thread_vs_search": true,
+    "no_other_per_type_switches": false,
+    "derived_state_rebuildable_from_the_spine_alone": true,
+    "golden_test_replays_the_log_and_compares_every_region": "uncertain -- a replay-vs-replay determinism test over a fifteen-event synthetic log, not a golden, not the seeded year, and it does not cover Moments, search or the incremental projector",
+    "typing_and_presence_are_not_stored_as_events": true,
+    "read_markers_are_not_rows": true,
+    "transport_has_roles_cursor_outbox_pairing": true,
+    "local_and_tailscale_behind_one_interface": true,
+    "tailscale_did_not_require_changing_the_interface": true,
+    "both_platforms_same_regions_feelings_types": true,
+    "no_reduced_pwa": true,
+    "no_downloaded_fonts": true,
+    "string_table_lint_covers_every_displayed_string": false,
+    "blank_card_traced": "yes -- a FoldedNote drawing fold frame 0000 for an unread note; the accompanying empty pageerror is not traced"
+  },
+  "verdict": "The spine holds: one log, one store directory behind a boundary that a real test enforces, every region a projection of it, every module writing through one emit, and a transport whose Tailscale half was added without the interface moving -- this is coherent architecture rather than architecture that photographs well, and the FNV-1a parity test is better work than the rubric asks for. What keeps it off the top of the band is the second ring: the promise that a new type costs one registry entry and one renderer is measurably false, three more per-type lists live outside the registry and one has already drifted far enough to put the raw id `passed on` on 05_settings_interrupt.png, the incremental thread projector that every frame of the hero screen runs cites a test that does not exist and still carries the count-instead-of-ids bug its own comment explains, and the blank card on 13_messenger_states is a folded unread note that the app has already sent a read receipt for."
+}

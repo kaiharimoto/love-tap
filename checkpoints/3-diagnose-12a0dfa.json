@@ -1,0 +1,154 @@
+{
+ "cycle": 3,
+ "stage": "DIAGNOSE",
+ "firing": 31,
+ "at_commit": "12a0dfa",
+ "completed": "cycle 3 scored at 75.0 of 120 on firing 30's capture, seven critics, no floor met; replaces firing 18's 67, which described a build thirteen firings old",
+ "ordering": "builder.json committed and pushed at f7265aa BEFORE any critic was launched; firing 18's cycle-3 reports moved unread to evidence/critics/3/at_firing_18/, which score.py does not glob",
+ "score": {
+  "total": 75.0,
+  "of": 120,
+  "exit": 114,
+  "was": 67,
+  "at_firing_was": 18,
+  "rows": {
+   "messenger_reliability": {
+    "taken": 21,
+    "floor": 26,
+    "critic": 21,
+    "builder": 21
+   },
+   "material_truth": {
+    "taken": 15,
+    "floor": 22,
+    "critic": 15,
+    "builder": 18
+   },
+   "emotional_transmission": {
+    "taken": 12,
+    "floor": 17,
+    "critic": 12.5,
+    "builder": 12
+   },
+   "coherence": {
+    "taken": 11.0,
+    "floor": 13,
+    "critic": 11.0,
+    "code_critic": 13.5,
+    "builder": 11
+   },
+   "anti_goal": {
+    "taken": 7,
+    "floor": 9,
+    "critic": 9.2,
+    "builder": 7
+   },
+   "visual_design": {
+    "taken": 9,
+    "floor": 17,
+    "critic": 14.5,
+    "builder": 9
+   }
+  },
+  "every_floor_met": false,
+  "problems": []
+ },
+ "the_one_object": "A flat beige card where a note should be, found independently by five of seven critics for the second cycle running. It is FoldedNote drawing frame 0000 of unfold_thirds (fold.dart:339-369); L_std 5.650 over 87 levels at display size against the build's own tooth floor of 8.0 and against 42.677 for the real note beside it. Charged to material_truth and anti_goal both, and it is the one defect holding both under their floors.",
+ "three_metrics_went_green_while_their_defects_did_not_move": {
+  "rank_40_sample_box": "a fixed 300x120 at (200,1350); the object moved from y1281-1515 to y1075-1330, so the box now reads assets/paper/looseleaf_03 at 24.854/165. The placeholder itself reads 7.061/81 and fails both clauses, not one. Firing 23 called this 'half met'.",
+  "06_unfolding_frame_distinctness": "repeated_frames 0 over 255 frames looks like 60 unique fold frames per second, but report playhead is 239 of 240 at frame zero -- the fold finished before the recorder started, so they are 255 unique frames of a scroll and a cross-fade.",
+  "firing_21_interrupt_matrix": "already recorded; 42 failing runs left the screen and read as a legibility win.",
+  "the_rule": "a measurement written as absolute pixel coordinates or a frame index is not a ruler for a defect that can move, and a gate that passes because its subject was off screen has not passed."
+ },
+ "a_measurement_this_firing_proposed_and_then_had_to_withdraw": "The builder's addendum replaced rank 40's drifted box with a sidecar test -- no painted card without a matching assets/paper rect. It cannot pass: a fold frame is painted by CustomPaint and CaptureHooks.paperSurfaces records only RenderImage. The addendum's own stated caveat was the answer. Corrected in the item and recorded rather than swapped quietly.",
+ "legibility": {
+  "headline": "17 below floor of 358 declared runs",
+  "real": "about two",
+  "how_established": "the visual-design critic cropped all 17 at 300%; the builder independently cropped 01_pulse's 'open', reported at 1.09:1, and it is near-black ink on pale cream",
+  "tool_qualifiers": "on_moving_ground 16, would_pass_on_ring_reading 15",
+  "the_one_confirmed_failure": "04_moments unselected filter chips, 'teo' 4.15:1 and 'all year' 4.30:1",
+  "reading": "rank 10 blocks the instrument, not the app; the owner's first complaint is answered"
+ },
+ "palette": {
+  "mean_chroma": 0.0449,
+  "floor": 0.045,
+  "breaches": 44,
+  "named_families": 1,
+  "floor_named": 4,
+  "hue_centres_deg": [
+   55,
+   65,
+   75,
+   85,
+   95
+  ],
+  "widest_hue_gap_deg": 320,
+  "ceiling": 150,
+  "accent_fraction": 0.00058,
+  "accent_floor": 0.01,
+  "exactly_zero_on": [
+   "05_settings",
+   "05_settings_interrupt",
+   "17_setup_pwa"
+  ],
+  "reading": "hue_families 5 is five adjacent 10-degree bins of one amber; the owner's second complaint is unanswered and is now arithmetic"
+ },
+ "cold_start": {
+  "seeded_ms": "10884-12327",
+  "fresh_ms": "1259-1321",
+  "events": 14067,
+  "ratio": "8.7x",
+  "per_event_ms": 0.7,
+  "limit": "the seeded build also ships the seed's media, so this pair cannot separate spine-open cost from bundle weight; a third point at half a seed is the first thing to measure",
+  "reading": "WORKER_PROMPT 3c's caveat is settled and settles against dismissal; re-tagged using-it"
+ },
+ "frames": {
+  "06_unfolding": "0 repeats / 0.000 / run 0 -- but see above, the fold had already finished",
+  "07_feeling_landing": "39 / 0.102 / run 10",
+  "08_state_propagating": "91 / 0.187 / run 23 (frames 0-22)",
+  "11_chat_scroll": "1 / 0.003 / run 1",
+  "15_authored_feeling": "39 / 0.127 / run 17",
+  "gate_vs_brief": "frames.py sets ok when still_fraction < 0.35 and longest_still <= fps, so all five read ok true; BRIEF 09 makes any frame pixel-identical to its predecessor a failure condition with no tolerance. Three clips stand as a failure condition while every gate reads green."
+ },
+ "tears": {
+  "12_search": "21 draws on screen, 7 distinct -- tear_001_shadow drawn 13 times, twelve at byte-identical geometry",
+  "03_us": "tear_043 x3, tear_020 x2",
+  "02_chat": "tear_002 x2",
+  "gate_blindness": "tears.py counts only the notes' tears, so 02_chat reports repeats {} while the same frame repeats a mask in its chrome"
+ },
+ "paper_tooth": {
+  "passing": "250 of 432, against 117 before the re-render",
+  "the_whole_remaining_gap": "receipt 2/16, sticky_blue 8/32, sticky_pink 8/32, sticky_yellow 8/32 (median_std 3.6-4.9 against 8.0); 156 of 320 elsewhere"
+ },
+ "two_harness_bugs_traced_to_their_lines": {
+  "lost_reason_and_phantom_entry": "scene.js:417-418 writes problems to stdout and its log, never stderr, after writing a correct PNG; capture.sh:196 reads stderr. And run_scene passes the bare scene name where collect.py's STILLS holds the filename, so at collect.py:178-181 '13_messenger_states' survives the `said` filter into missing with an empty value. That is why 14 present plus 4 missing reads as 18 against 17.",
+  "false_provenance": "collect.py:126-129 appends 'it is not this session's' to any refused artifact whose file exists without comparing the clock, while the next branch does exactly that comparison. 02_chat.png was written at 10:20:05Z into a capture that began at 10:06:21Z. Two of six critics believed it; one concluded the hero of the set was not from this capture."
+ },
+ "verified_rather_than_transcribed": "Every critic claim carried into the queue was re-checked first, and one was corrected: the coherence critic's root cause for Us presenting one module is wrong -- all four modules exist in app/lib/modules and us_region iterates all of them. DATES alone fills 3120 px with about 1200 px of blank paper, and scenes/03_us.json never scrolls.",
+ "diff": {
+  "assigned_by": "the coherence critic, as the brief requires",
+  "improved": 7,
+  "unchanged": 8,
+  "regressed": 0,
+  "absent": 2,
+  "caveat": "evidence/.previous is not in this checkout, so labels are current-artifact-against-recorded-SSIM rather than before-and-after; the critic declined to write 'regressed' on that ground. label_basis prints 'nothing a person would see has moved' against an ssim of 0.8943, which is unconditional boilerplate and the better reason to distrust the six values pinned at 0.9995."
+ },
+ "artifacts": {
+  "present": 14,
+  "of": 17,
+  "container_ceiling": 15,
+  "absent_for_hardware": [
+   "09_two_devices.png",
+   "16_setup_android.png"
+  ],
+  "02_chat": "present and measured; refused by the BRIEF's eight-note floor against a seven-note screen; its no-repeat clause passes",
+  "13_messenger_states": "present and complete; the bare-name empty-reason missing entry is collect.py's filter bug"
+ },
+ "not_run_this_firing": "flutter analyze and the test suite -- DIAGNOSE has no toolchain profile. The 167-passing count in earlier notes is firing 23's and is not re-asserted.",
+ "queue": {
+  "re_measured": 6,
+  "filed_unranked": 9,
+  "open_after": 51
+ },
+ "next_stage": "ADDRESS, cycle 3. DESIGN is frozen until cycle 6 and must be skipped."
+}

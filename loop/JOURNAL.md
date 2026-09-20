@@ -4926,3 +4926,123 @@ firing that stops at 60 will misdiagnose it in the direction of a destructive fi
 
 Lease taken for three hours, pushed before anything else was touched.
 
+
+### What the stage did
+
+Cycle 3 scores **75.0 of 120**, against the 67 that has stood since firing 18 and described a build
+thirteen firings old. Seven critics ran as fresh contexts, `tools/score.py` accepted the arithmetic
+with no problems, and **no floor is met**. The builder's sheet was committed and pushed at `f7265aa`
+before a single critic was launched, and firing 18's cycle-3 reports were moved *unread* into
+`evidence/critics/3/at_firing_18/` first, where `score.py`'s top-level glob cannot reach them. The
+ordering the rule exists to enforce is readable from the git log rather than asserted here.
+
+Before scoring, the freshness condition was re-checked rather than taken from `stage_change_note`:
+`git diff --stat 2fbfde5..HEAD -- app assets seed` is empty, and everything committed after the
+capture touches `checkpoints/` and `loop/`.
+
+### The one object, and it is the same one as last time
+
+Five of seven critics independently found a flat beige card standing where a note should be — as
+five of seven did at firing 18. It is charged to `material_truth` and `anti_goal` both, by the
+brief's deliberate double-count, and it is the only defect holding both of those rows under their
+floors. Interior **L_std 5.650 over 87 levels**, against 42.677 and 36.351 for the two real notes
+beside it in the same frame, and under the build's *own* flat-fill floor of 8.0.
+
+What it is took three readings to get right, and the first two were wrong. The builder called it a
+code-painted rectangle. Three critics reasoning from the same sidecar called it the same thing. The
+code critic, which is the only one that can read `app/`, traced it to `FoldedNote` drawing **frame
+0000 of `unfold_thirds`** — a note lying folded above the reader's arrival marker. The sidecar shows
+no paper behind it because a fold frame is painted by `CustomPaint` and `CaptureHooks.paperSurfaces`
+records only `RenderImage`. The builder's addendum had written that caveat down and then reasoned
+past it; the hedge was the answer.
+
+So the measurement it proposed to replace the drifted one — *no painted card without a matching
+`assets/paper` rect* — **cannot pass**, and has been withdrawn in the item rather than quietly
+swapped. That is now recorded twice, because handing ADDRESS a measurement that can never go green
+is precisely the failure this firing turned out to be about.
+
+### Three metrics went green this cycle while the thing they were named for did not move
+
+This is the most useful thing here and it should outrank the score.
+
+1. **Rank 40's sample box.** A fixed 300×120 at `(200,1350)`. The placeholder sat at y1281–1515 at
+   firing 18 and sits at y1075–1330 now, so the box has slid onto `assets/paper/looseleaf_03`, whose
+   rect the sidecar puts at y1357. It reads 24.854 / 165 — and firing 23 read that as the floor being
+   *half met*. On the placeholder itself the same sample reads **7.061 / 81**, failing both clauses
+   rather than one.
+2. **`06_unfolding`'s frame distinctness.** 255 frames, 0 repeats, which looks like 60 unique fold
+   frames per second against a floor of 30. But `06_unfolding.report.json` has the playhead at **239
+   of 240 at frame zero**: the fold had already finished before the recorder started. They are 255
+   unique frames of a scroll and a cross-fade. The clip the brief names as the one that exposes a
+   faked material system currently demonstrates nothing, and its clean number is what hid that.
+3. **Firing 21's interrupt matrix**, already on the record: 42 failing runs left the screen and read
+   as a legibility win.
+
+**The rule that falls out:** a measurement written as absolute pixel coordinates or a frame index is
+not a ruler for a defect that can move, and a gate that passes because its subject was off screen has
+not passed. ADDRESS's definition of done — every item names the measurement that closes it — is no
+longer sufficient. The measurement has to be anchored to something the app itself declares: a
+surfaces rect, an event id, a playhead.
+
+### The owner's two complaints, separately
+
+**The first is answered.** `legibility.json`'s headline of 17 below-floor runs in 358 is about two
+real failures. The visual-design critic cropped all 17 at 300%; the builder then cropped `01_pulse`'s
+word *open*, reported at **1.09:1**, and it is near-black ink on pale cream and one of the boldest
+words on the screen. The tool's own qualifiers already said so — `on_moving_ground` 16,
+`would_pass_on_ring_reading` 15. Rank 10 blocks the **instrument**, not the app, which is exactly the
+bar §3c sets for harness work. The one failure confirmed by eye is `04_moments`'s unselected filter
+chips at 4.15:1 and 4.30:1 — a disabled state expressed by lightening the ink.
+
+**The second is not, and it is now arithmetic rather than taste.** Every hue with real area across all
+eleven stills lies between 55° and 95°. `hue_families: 5` is five adjacent 10° bins of one amber;
+`named_families` is **1** against a floor of 4; `widest_hue_gap_deg` is 320 against a ceiling of 150;
+`accent_fraction` is 0.00058 against a floor of 0.01 and is **exactly 0.0** on three screens.
+`mean_chroma` misses 0.045 by one ten-thousandth. The critic would not open it daily and said so.
+
+### The cold start is settled, and it settles against dismissal
+
+§3c asked that this be established before being waved away as a seeded-scene artifact again.
+`cold_ms` is **10884–12327 ms** on the thirteen scenes served the seeded build and **1259–1321 ms** on
+the three served the fresh build — same commit, same browser, one flag apart — against 14,067 events.
+Eleven seconds to open a conversation. Re-tagged `using-it`. The honest limit: the seeded build also
+ships the seed's media, so this pair cannot separate spine-open cost from bundle weight, and a third
+point at half a seed is the first thing to measure. The steer deprioritised *producing* demo content,
+not *fixing* a load-scaling defect that demo content revealed.
+
+### Two harness bugs, traced to their lines, one of which lies
+
+`scene.js:417-418` sets exit code 1 when `problems` is non-empty **after** writing a correct PNG, and
+writes the reason to stdout and its log — never stderr, which is where `capture.sh:196` reads. And
+`run_scene` passes the *bare* scene name where `collect.py`'s `STILLS` holds the filename, so at
+`collect.py:178-181` the key `13_messenger_states` survives the `said` filter into `missing` with an
+empty value while the PNG is written into `artifacts` as normal. That is the whole of why 14 present
+plus 4 missing reads as 18 against a set of 17.
+
+The second did measurable harm this firing. `collect.py:126-129` appends *"a copy from an earlier run
+is still on disk … it is not this session's"* to **any** refused artifact whose file exists, without
+comparing the timestamp — while the very next branch makes exactly that comparison. `02_chat.png` was
+written at 10:20:05Z into a capture that began at 10:06:21Z, fourteen minutes earlier. **Two of six
+critics read that sentence and recorded a provenance caveat against a good artifact; one concluded the
+hero of the set was not from this capture.**
+
+### One critic was corrected rather than transcribed
+
+Every critic claim carried into the queue was re-checked first. The coherence critic reported that Us
+presents one module where the brief requires four. The observation is right; the root cause is wrong.
+`app/lib/modules/` holds dates, todos, calendar and rituals with a registry, and `us_region.dart`
+iterates `kModules` rendering every one. What is true is that DATES alone fills 3120 px with about
+1200 px of blank ruled paper inside the frame, and `evidence/scenes/03_us.json` is `goTo, wait, shot,
+report` — it never scrolls.
+
+### The builder sheet cost 5.5 points again
+
+`visual_design`: builder 9, critic 14.5. The same 5.5 as the gap rank 39 was filed for, and this time
+the cause is nameable — the sheet leaned on `legibility.json`'s headline when it had the means to
+distrust it, and made the disproving crop itself an hour later. The score was **not** revised after
+reading the critic, because a sheet that may be talked up after seeing a critic is the one thing the
+rule forbids. Recorded against rank 39 as a rule for next cycle instead: where a tool's headline and a
+300% crop disagree, the sheet cites the crop.
+
+Six items re-measured, nine filed unranked, 51 open. Stage handed to **ADDRESS**; DESIGN is frozen
+until cycle 6 and must be skipped. Lease released.
