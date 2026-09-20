@@ -4301,3 +4301,160 @@ or DESIGN decision, not an IMPLEMENT one.
 4. `assets/MANIFEST.json` carries **14 inherited `scratch/` entries** that keep the manifest gate at
    `ok: false`. They are not out-of-tree so the new guard does not catch them, and they are older
    than this firing. Somebody should decide whether they are assets or litter.
+
+## Firing 27 — cycle 3, IMPLEMENT — the other half of the library, and the two screens nobody had looked at
+
+**Step 0 passed, after the same false alarm three firings before it had.** The dry-run push came
+back `non-fast-forward` with `git merge-base` empty and `git rev-list --count` reading 50 ahead and
+50 behind — the exact shape §0 of `WORKER_PROMPT.md` describes three different causes for. It was
+the first of them: a shallow clone at depth 50 whose graft boundary hides the merge base.
+`git fetch --deepen=60` was not enough and still returned nothing, which is the reading that sent
+firing 25 looking for a stale branch ref; `--deepen=300` filled it in and the counts read **0 ahead,
+237 behind**, an ordinary checkout that is behind. `git merge --ff-only` took it. Nothing was reset
+and no tip was dropped. **Deepen further before believing a stale ref: 60 was not enough here and
+300 was.**
+
+### What this firing took, and why that one
+
+`stage_change_note` was a firing out of date — it still described firing 25 and still said "RANKS 5
+TO 9 STILL NOT STARTED" after firing 26 had started rank 5 and moved the whole day library through
+it. Replacing it was the lease commit. The rule it now carries: **any firing that ends rewrites this
+field or deletes it.**
+
+The queue item was `the-dusk-paper-still-carries-the-old-tooth`, filed by firing 26 as the half of
+its own work it did not do. It is not a choice so much as an obligation: the per-stock `albedo` in
+`STOCK_LOOK` applies to both conditions and only the day condition had been rendered against it.
+
+**One thing a successor must not redo, and this firing nearly did.** The orchestrator's brief
+handed over `measured_at_firing_26.k_needed_for_8_0` as "the per-stock scale factor each remaining
+stock needs". It is not. Those factors were already rounded up to the half and written into
+`STOCK_LOOK` by firing 26 — `lined` 5.82→6.0, `looseleaf` 6.2→6.5, `legal` 7.23→7.5, `index`
+6.63→7.0 — and the day library on disk **is** the render at those values. The 84/216 was the number
+after the table was applied, not before it. There was no second day pass owed.
+
+### The dusk render
+
+`tools/render_queue27.sh` is `render_queue26.sh` with `--condition day` changed to `--condition
+dusk`. A copy, not a parameterisation: `render_queue26.sh` is the script that produced the committed
+day library, editing it would make that provenance unreadable, and bash reads a running script
+incrementally. 23 sheets, 1h14m, about 190 s each on four cores, committed per family as they
+landed.
+
+| family | dusk median before | after | windows |
+|---|---|---|---|
+| legal | 6.816 | **9.337** | 4/16 → **16/16** |
+| spiral | 7.145 | **9.314** | 8/32 → 28/32 |
+| lined | 7.075 | **9.041** | 8/32 → 28/32 |
+| looseleaf | 7.010 | **8.727** | 5/32 → 28/32 |
+| index | 6.827 | **8.201** | 2/16 → 9/16 |
+| sticky_yellow | 2.582 | 4.948 | 4/16 → 4/16 |
+| sticky_blue | 2.679 | 4.783 | 4/16 → 4/16 |
+| sticky_pink | 2.447 | 4.550 | 4/16 → 4/16 |
+| receipt | 3.829 | 4.232 | 1/8 → 1/8 |
+| graph | 8.672 | 8.672 (untouched) | 26/32 |
+| **all dusk** | **7.039** | **8.729** | **66/216 → 148/216** |
+
+The whole library now reads **250/432** against firing 26's 168/432 and the 117/432 it shipped at,
+median 8.326. Bundle 83.4 → **85.6 MB**, +2.6% — about half what the day half cost, because the
+sticky and receipt renders compress better at this amplitude.
+
+**The item asked that the dusk sheets move by the same margin their day twins did, and they moved
+further.** Every dusk family starts higher than its day twin — the dusk rig's falloff carries
+variance the flatter day light does not — and lands higher. The case worth keeping is `looseleaf`:
+its day twin is **7.655**, short of the floor, and the same albedo on the same sheet at dusk is
+**8.727**. So the day shortfall on `looseleaf` and `index` is **the day rig**, not the stock and not
+the value chosen for it. That is an argument for a per-**condition** floor as well as a per-**class**
+one, and it belongs to ADDRESS.
+
+### Two numbers of firing 26's that do not reconcile
+
+Firing 26 reports the day half as 25/216 before and 84/216 after. Re-measured today with the same
+tool through the same chain, firing 25's day library reads **51/216** and firing 26's reads
+**102/216**. The arithmetic decides it: firing 25's committed `--all` is 117/432 and 51 + 66 = 117;
+firing 26's is 168/432 and 102 + 66 = 168. **Both of its whole-library figures are right and both of
+its day-only figures are not.** The lift it found is real and slightly larger than it claimed — day
+median 6.264 → 8.133 rather than 6.131 → 7.977. Corrected in `STATE.json` rather than repeated.
+
+`tools/paper_tooth.py` gained `--source`, `--condition` and `--only`, and a `by_family` block
+carrying the median. Not tidying: there was no way to measure a dusk before/after at all without
+`--source` (the old library is in git, not on disk) and no way to commit a family at a time without
+`--only`, and the median had been computed by hand every time it was quoted.
+
+### The fourteen entries firing 26 asked someone to decide about
+
+`assets/MANIFEST.json` held 14 entries under `scratch/` — one dusk sweep render from firing 26, 13
+poster stills from the commit that made the dusk plates — naming files in a gitignored directory
+that exists in no fresh container. They are litter. Removed, `tools/check/manifest.py` exits 0 for
+the first time this cycle, re-broken by putting one back and watching the gate name it.
+
+**It is not cosmetic.** `capture.sh` line 75 runs that gate and calls `note_missing "assets"` when it
+fails, so every capture from here would have recorded the asset library as missing, for a reason
+with nothing to do with the app, in the same evidence set that is meant to close rank 5.
+
+### The capture, and the thing it found
+
+14 of 17, one run, 53 minutes. The three missing are the standing two with no `/dev/kvm` and
+`02_chat.png` refused again by `tears.py`'s floor of eight notes against a screen that fits seven.
+**It is the first capture whose `legibility.json` and `palette.json` were written by the capture**,
+which is the four lines firing 26 wired in and had no run to exercise.
+
+Rank 5's paper half is **done**: nine of eleven stills are under its 8% dominant-RGB ceiling at 0.86%
+to 2.28% — `01_pulse`, which the item names, is 0.97% — and 76 of 88 400×200 windows of the pad box
+clear L_std 8 with 60 levels, at medians of 14.8 to 78.1.
+
+**The two that fail are the two screens a new person sees first**, and the reading rules out every
+cause the last three firings proposed:
+
+- `10_first_run.png` is **59.56% one exact RGB**, (243,230,168) = bit-exact `Paper.legal`
+  `0xFFF3E6A8`, a constant, which no render can be. Bounding box x 36..1403, y 318..2897 —
+  `RegionPad`'s box to the pixel — and 75.8% of that box is the constant. Windows of it read L_std
+  **0.000** at one luminance level.
+- `17_setup_pwa.png` is 47.98% (242,237,226) = bit-exact `Paper.looseleaf`.
+- **`01_pulse.surfaces.json` and `10_first_run.surfaces.json` declare the same asset at the same
+  size at the same magnification**: `legal_02.webp`, src 1073×1500, drawn 1347×2908, ×1.939, twice
+  each. One is textured at 1.1% dominant and the other is flat at 75.8%. So it is not stock
+  selection (firing 20's receipt hash), not the bundle, not the pack size, not the aspect ratio, and
+  not a library that failed to load — the report says `paper_stocks 54`.
+- **The one thing that differs is that there is nothing else on the screen.** Both fresh stills read
+  `stocks: {}` and `visible: []`; every seeded still has both populated. A fresh install has no
+  notes, so the pad is the only image in the frame and nothing else is decoding beside it.
+
+Two candidates remain and they are separable in fifteen minutes: the layer is rasterised before the
+image resolves and nothing invalidates it — firing 19's candidate (c), which firing 20 disproved
+**on a seeded screen, where the notes force repaints**, a disproof that does not reach a screen with
+no notes on it — or the capture shoots before the decode and no further frame is driven. Against the
+second: the scene waits 1400 ms and settles 900 ms, and `01_pulse` has identical timings, identical
+`driven_ms 48`, and is textured. Filed as
+`the-pad-is-a-flat-fill-on-the-two-screens-a-new-person-sees-first`, with the experiment written
+into its measurement. **Rank 5 should close with it and not before.**
+
+Rank 1's still clause has never been closer and is still short: `13_messenger_states.png`, 300×120 at
+(200,1350), **L_std 28.019 against 30** with **173 levels against 150**. The series is 1.310 at
+firing 16, 23.673 at firing 24, 28.019 now. Its clip clause was not re-read.
+
+### The costs, both of them stated
+
+Legibility's headline goes 15 below floor to **18 of 358** runs. But `on_moving_ground` goes 13 → 17
+and `would_pass_on_ring_reading` 13 → 16, so by the tool's own qualifiers genuinely sub-floor runs
+went **2 → 1** and the extra three are ink standing on paper that now has texture in it. Palette's
+across-the-set mean chroma goes 0.0449 → **0.0438** — the −1.6% OKLab chroma firing 26 measured on
+the knob, arriving on the screens, and it crosses rank 15's `>= 0.045` the wrong way. `COLOR.md`
+says not to trade legibility back for warmth; this is the size of the trade, and both `before`
+figures were hand-made while this one is not, so it is a change of instrument as well as of paper.
+
+**Gates:** `flutter analyze` 0 errors, `flutter test` **174/174** (packed with `--seed=year`, 85.6 MB,
+`seed included`), `surfaces` ok (318 read, none flat), `recipes` ok, `manifest` ok, `texture_budget`
+ok at a peak of 28.0 MB of the 32 MB ceiling. `evidence/coldstart.json` and `evidence/reliability.json`
+were rewritten by the test run and **reverted before the capture**, per §5.
+
+### For the next firing
+
+1. **The paper cluster's IMPLEMENT half is finished.** Both conditions are rendered, both medians
+   clear 8.0, and what is left of rank 5 and of `the-paper-tooth-is-six-and-the-floor-asks-eight` is
+   a floor written **per class and per condition** in `docs/COLOR.md`. That is ADDRESS or DESIGN.
+2. **The fresh-install pad is the next IMPLEMENT-shaped thing**, it is `the-ui`, and it is the first
+   frame of the app. Run its fifteen-minute experiment before writing any code.
+3. Ranks 6 to 9 — the tears, the barcode, the feeling sprites, one variant per glyph — are still
+   untouched and are all `the-ui`.
+4. Rank 10 and rank 11 remain parked for ADDRESS on their own amendments; rank 11's premise is
+   discharged and its written number is not met.
