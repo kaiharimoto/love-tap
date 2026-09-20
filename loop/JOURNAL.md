@@ -5046,3 +5046,17 @@ rule forbids. Recorded against rank 39 as a rule for next cycle instead: where a
 
 Six items re-measured, nine filed unranked, 51 open. Stage handed to **ADDRESS**; DESIGN is frozen
 until cycle 6 and must be skipped. Lease released.
+
+## Firing 32 — ADDRESS, cycle 3
+
+Took the lease at 15:56Z, two hours. The push pre-flight passed on the third question rather than
+the first: `git merge-base` empty, the counts reading 50 and 50, the dry-run rejected
+`non-fast-forward` — firing 31's shape exactly, and firing 31's answer. A filtered deepen to 400
+(`--filter=blob:none`, the whole thing in seconds) made `git merge-base --is-ancestor` return true,
+and `git merge --ff-only` took it. Nothing reset, nothing force-moved. **Two corrections to
+WORKER_PROMPT §0 for whoever is next: 300 was not deep enough here either — the fork point was at
+depth 300-400 — and the local tip was 2026-09-15 against a remote whose 200-commit window only
+reached 2026-09-17, so the date range of the deepened window is the cheapest way to see that you
+have not deepened far enough.** Ask "does the remote's oldest visible commit predate my HEAD?"
+before concluding anything from a missing merge-base.
+
