@@ -5251,3 +5251,126 @@ site — lowering a floor declared in `docs/COLOR.md` is ADDRESS's call. Filed.
 3. **Don't re-render `assets/folds`** until the pack size is settled.
 4. The evidence set is **stale** as of this firing — `app/` and `blender/` both moved. It is
    readable as a record, not scorable. `./capture.sh` before any stage that judges.
+
+---
+
+## Firing 34 — IMPLEMENT, cycle 3
+
+Took ranks 2–5 and rank 7 of the forty-eight. Five closed, four filed, ranks 6 and 8 left open
+for a reason that was measured rather than assumed.
+
+### Rank 2 was already implemented, and what was left was not an implementing firing's to do
+
+Firing 24 landed `stroke = pl[pm & pmg]` and this firing re-proved it rather than taking its word:
+restoring `pl[pm]` turns selftest §7 into `FAIL a mark darker than the writing is not the writing
+(1.11:1)` against `12.69` repaired, and `12.81` for the same writing on a clean page. The fix is
+load-bearing.
+
+Its amendment — *every surviving run must have `ground_swing <= 1.2`* — is met by 1 of 17 today,
+and firing 24 had already written down why the clause is wrong: for dark ink `on_the_far_side` is
+`g_adv > core` where `g_adv` is the band's **dark** end, so dark writing on paper always satisfies
+it and is correctly gated against the worst of its own ground. Requiring every remaining failure to
+sit under 1.2 asks for every moving-ground reading to be discarded, which **empties**
+`GROUND_SWING_GATE` rather than fixing the ruler. Closed; the clause is filed as the rubric question
+it is. Two firings have now declined to settle it, which is why it is an item and not a footnote.
+
+### Rank 3: the dusk rig had been gating nothing, and the app fails it badly
+
+Two defects, either one sufficient. `legibility.py` globbed `evidence/*.png` and `capture.sh` writes
+the only dusk artifact to `evidence/crops/dusk_pulse.png`, one directory down. And dusk membership
+came from a `--dusk` flag `capture.sh:366` does not pass — so `"dusk": []` meant *nobody passed a
+flag* and read identically to *no dusk surface was captured*.
+
+The rig is now read from the `light` the app declares in `evidence/logs/<stem>.report.json`.
+**The obvious anchor was wrong and is worth not re-trying:** reading `_dusk` out of the asset names
+in `surfaces.json` classifies `14_media_viewer` as a dusk screen. It draws five dusk-rendered
+surfaces on a **daylit** desk and its own report says `day`. A screen is lit by its rig, not by the
+provenance of the pictures lying on it, and holding it to the dusk floors would have been a
+relaxation dressed as coverage.
+
+The reading, and it is a **controlled pair** rather than a new screen — `dusk_pulse` is `01_pulse`
+under the other rig, same declared text, 54 runs each:
+
+| | day | dusk |
+|---|---|---|
+| below floor | 3 of 54 | **31 of 54** |
+| median `ink_core` | 6.78:1 | 4.69:1 |
+
+**24 of the 31 fail even at the day floors**, so this is not the half-point dusk premium. Most sit
+at swing 1.2–1.4 — flat ground, no gate involved, the most trustworthy failures this tool makes.
+All eleven day artifacts are byte-identical across the change; the whole of `358 → 412` runs and
+`17 → 48` failures is one surface arriving. Filed as its own item, tagged `the-ui`.
+
+### Ranks 4 and 5: the capture can say whose an artifact is, and where the throw was
+
+`collect.py` called every refused artifact someone else's without looking at the clock, while the
+branch below it made exactly that comparison and was never reached. `scene.js` recorded a page error
+as `String(e)` — empty for what the app throws — and then wrote its problems to **stdout** while
+`capture.sh` reads `head -1` of stderr. Either one alone empties the reason; both were fixed,
+because fixing the message without the channel would have been a claim with nothing to show for it.
+
+The phantom eighteenth entry was downstream of the same empty string: `reasons.get(name) or
+reasons.get(key)` fell through an empty-string reason to `None`, and `said` held filenames while
+`run_scene` passes bare scene names. Restoring both reproduces **1 present + 17 missing** exactly.
+
+These lied for two cycles because **nothing could drive either tool against a throwaway directory**.
+`collect.py` gained `--evidence`, `tools/capture/capture_selftest.py` is the ruler, and `capture.sh`
+runs it before `collect.py` writes anything. Section 1 is a **pair**: same artifact, same refusal,
+and the only thing changed between the two readings is the file's mtime.
+
+### Rank 7: a receipt is only for what was seen
+
+`markRead()` marked the whole thread 600 ms after the region opened while `note.dart` kept a note
+above the reader's frozen arrival marker drawn folded shut — so the app told the other person
+*read* for a sheet whose writing was never on screen.
+
+The fold condition was one expression inside `Note.build` that nothing else could ask, **which is
+why the receipt and the rendering could disagree about the same sheet**. It is now
+`noteLiesFolded()`, once, and both ask it. `seenUpto()` gives the honest watermark: the last row
+before the first folded sheet the reader has not opened.
+
+Three ways it would have been wrong, all handled: with no fold sequence on disk the note lies flat
+and nothing is hidden, so `FoldedNote.available` is part of the predicate; `seenUpto` returns `0`
+and not `null`, because `markRead`'s ceiling is nullable and `null` there means *mark everything*,
+the exact opposite; and a ceiling below the marker moves nothing, because a marker that can go
+backwards is a second way of lying.
+
+**The re-break worth having is the second one.** Removing the clamp inside `markRead` fails two unit
+checks. Dropping `notPast:` at the **call site** leaves every unit test green — so there is a widget
+test over the real `ChatRegion` that reads `Expected 1, Actual 2` with the argument gone. A clamp
+nobody hands an argument to is the same bug with more code in it.
+
+### Ranks 6 and 8 are capture-gated, and should be taken together
+
+Verified, not assumed. Rank 6 reads `visible` out of `evidence/logs/02_chat.report.json`, which
+`tears.py:28` takes from the event ids the app wrote **at the moment of the shot**; rank 8 measures
+`12_search.surfaces.json`. Neither number exists in the source tree. They are two stills from one
+capture, so one `./capture.sh` closes both or neither.
+
+**One capture is enough for either**, which is worth knowing before budgeting the firing: the broken
+reading is already committed from firing 30 (`visible 7`), so the *before* half of each re-break
+pair exists. Each item carries what was established about it — including that the search strip is
+`kSearchMargin = 40` at `chat_region.dart:32`, 120 device px of 3120, not a whole note's height but
+enough to push the eighth out.
+
+### Two checks that do not discriminate, and say so
+
+Because a check that passes with the bug in is what this build keeps getting caught by.
+`capture_selftest.py`'s *the problem is recorded with something in it* passes with `String(e)`
+restored — Playwright re-marshals a page error, so it is not literally empty at that boundary; the
+throw-site checks beside it are the discriminating ones. And `reliability.json`'s new
+`read_only_what_was_seen` exercises the predicate but **not** `markRead`'s call site.
+
+### For whoever takes IMPLEMENT next
+
+1. **The ranks are stale.** Five closures have opened gaps in 1–48 and four new items are unranked.
+   ADDRESS should re-rank before anyone takes "the next one".
+2. **Ranks 6 and 8 in one firing, with one capture.** `bash tools/apt-prereqs.sh` first or WebKit
+   will not launch at all.
+3. **The dusk screen is the biggest open app defect found this cycle** — 31 of 54, and 24 of them
+   fail at the day floors.
+4. **Rank 1 is untouched**, as instructed. `assets/folds` was not re-rendered.
+5. Pack with `--seed=year` before believing a green suite. **+189** now, up from +180.
+6. Evidence is still **stale and staler** — `app/` and `tools/` both moved. Not scorable.
+   `evidence/legibility.json` and `evidence/reliability.json` were regenerated; no PNG or MP4 was
+   touched.
