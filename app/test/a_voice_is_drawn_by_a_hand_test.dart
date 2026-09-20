@@ -67,7 +67,7 @@ class _Reading {
   int get distinctTops => tops.toSet().length;
 }
 
-Future<_Reading> read(WidgetTester tester, Widget mark) async {
+Future<_Reading> _read(WidgetTester tester, Widget mark) async {
   await tester.pumpWidget(Directionality(
     textDirection: TextDirection.ltr,
     child: Center(
@@ -132,7 +132,7 @@ const _wave = [0.42, 0.88, 0.31, 0.67, 0.95, 0.24, 0.55, 0.78, 0.36, 0.61, 0.83,
 
 void main() {
   testWidgets('the strokes of a voice do not all begin on one row', (tester) async {
-    final r = await read(
+    final r = await _read(
         tester,
         const Tally(heights: _wave, struck: 5));
     // A pen inks far fewer columns than a bar does, and that is part of the point: the item
@@ -149,7 +149,7 @@ void main() {
   });
 
   testWidgets('no stroke has an interior of one constant value', (tester) async {
-    final r = await read(tester, const Tally(heights: _wave, struck: 5));
+    final r = await _read(tester, const Tally(heights: _wave, struck: 5));
     // a hand swells and thins along a stroke, so the ink is many values; drawRect gives one
     // per paint, which for played-and-rest was exactly two
     expect(r.inkColours.length, greaterThan(20),
@@ -158,7 +158,7 @@ void main() {
   });
 
   testWidgets('a dial is the same marks at dial size', (tester) async {
-    final r = await read(
+    final r = await _read(
         tester,
         const Tally(
           heights: [1.0, 1.0, 0.45, 0.45],
@@ -180,7 +180,7 @@ void main() {
   // ---- the re-break, kept standing ------------------------------------------------------------
 
   testWidgets('RE-BREAK: the old bars share one row, and that is what was wrong', (tester) async {
-    final r = await read(tester, CustomPaint(painter: _BarPainter(_wave, Pen.graphite)));
+    final r = await _read(tester, CustomPaint(painter: _BarPainter(_wave, Pen.graphite)));
     expect(r.inkedColumns, greaterThan(40));
     // every rect is centred on the box, so tops take one value per distinct height and no more
     expect(r.distinctTops, lessThanOrEqualTo(_wave.toSet().length),
@@ -190,7 +190,7 @@ void main() {
   });
 
   testWidgets('RE-BREAK: the old bar interiors are one exact value', (tester) async {
-    final r = await read(tester, CustomPaint(painter: _BarPainter(_wave, Pen.graphite)));
+    final r = await _read(tester, CustomPaint(painter: _BarPainter(_wave, Pen.graphite)));
     // one fill colour, plus whatever the edges antialias to
     expect(r.inkColours.length, lessThan(20),
         reason: 'the bars took ${r.inkColours.length} distinct values, so they are no longer flat '
