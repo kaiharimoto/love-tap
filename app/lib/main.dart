@@ -42,7 +42,10 @@ Future<AppScope> bootstrap() async {
   final identity = Identity(person: person, device: device);
 
   final store = await openStore(Flags.profile);
-  final spine = await Spine.open(store, identity);
+  // Under capture the ids are minted from a fixed seed, so two captures of one commit put the
+  // same events on the same paper. See [UlidFactory.seeded] for what it cost not to.
+  final spine = await Spine.open(store, identity,
+      ulids: Flags.capture ? UlidFactory.seeded(Flags.captureSeed) : null);
 
   if (Flags.seeded) {
     await SeedLoader(rootBundle).load(spine);
