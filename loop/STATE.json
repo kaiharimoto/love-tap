@@ -1371,7 +1371,7 @@
       "firing": 28,
       "stage": "IMPLEMENT",
       "cycle": 3,
-      "at": "2026-09-20T06:20Z",
+      "at": "2026-09-20T05:57Z",
       "what": "Closed the-pad-is-a-flat-fill-on-the-two-screens-a-new-person-sees-first and, with it, rank 5. The flat fills on the two fresh-install screens were never the stock, the bundle, the pack size, the aspect ratio or the shutter: SchedulerBinding.ensureVisualUpdate drops a repaint requested from inside a frame, so a render that decodes during that frame's paint never reaches the glass unless something else later asks for a frame -- and a fresh install never does. Proved on a build with no capture hooks in it (47.98% one exact RGB at three, eight and twenty seconds; pointer, tap and visibilitychange all leave it) and fixed by asking for the frame at every place that draws a rendered surface. Wrote tools/check/flat_fill.py, which reproduces firing 27's hand-made figures exactly, and wired it into capture.sh. Took a full capture: eleven of eleven stills now under the 8% ceiling, six of them byte-identical to the last set, and palette mean_chroma back to 0.0450. Then found and fixed the reason rank 1's last clause could not be read twice: Flags.capture has promised a fixed RNG seed since it was written and nothing applied it to UlidFactory, so the four staged notes on 13_messenger_states were torn from different paper on every capture.",
       "commits": [
         "ff4e6b0",
