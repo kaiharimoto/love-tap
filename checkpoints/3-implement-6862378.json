@@ -1,0 +1,43 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 29,
+ "at": "6862378",
+ "written_at": "2026-09-20T07:26:21Z",
+ "tests": 179,
+ "analyze_errors": 0,
+ "stage_completed": false,
+ "stage_handed_to": "OBSERVE",
+ "why_the_stage_moved_without_a_drained_queue": "The queue's top three cannot be advanced by implementing them. Rank 1 is blocked on two measurement definitions that are ADDRESS's; rank 6 needs one layer identified and its filed evidence was taken on a still that was two flat fills; rank 7's code half is pushed and its measurement is pixels of a capture. A capture unblocks all three, and it is also the only route to a score that is not eleven firings old. Argued in full in stage_change_note; the cheap correction is to set stage back to IMPLEMENT and drain ranks 8, 9 and 13 onward.",
+ "items_worked": [
+  "the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames",
+  "a-barcode-of-vertical-bars-is-painted-across-the-paper-on-four-artifacts",
+  "the-tears-are-overlays-painted-on-whole-paper"
+ ],
+ "items_closed": [],
+ "items_filed": [
+  "hf-std-on-a-strip-frame-does-not-measure-the-sheet"
+ ],
+ "items_parked": [
+  "the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames"
+ ],
+ "tools_written": [
+  "tools/check/hf_std.py",
+  "tools/check/hf_std_selftest.py"
+ ],
+ "causes_established": [
+  "HF_std as firing 28 defined it -- L minus a 2-px gaussian over the brightest 45% of the frame -- does not measure a sheet on a strip frame, because a strip frame is a whole phone screen at 148 px rather than a sheet on a dark desk. The brightest 45% of that is a scattered slice through an interface and HF over a scattered mask is mostly the scatter. PROOF: the firing 17 strip, from the era of the flat rectangle, reads 14.609-15.635 against today's repaired 14.317-15.088; a synthetic flat beige rectangle reads 14.372; eroding the mask 2 px collapses 06_unfolding to 3.7-4.8 on 1,173 pixels of 22,665. On a box that IS all sheet it works: rank 1's own --box sample reads 0.506 at 92d7b5a and 8.454 today.",
+  "Rank 1's still clause is a sampling accident rather than a property of the build. The same 300x120 window nudged over a 7x13 grid at +-24 px reads 18.873-40.393 today, median 31.421, 51 of 91 placements clearing the floor of 30 -- and 1.254-1.329, spread 0.076, 0 of 91, on the still it was filed against. A flat rectangle is flat wherever the window falls.",
+  "Rank 6's stated mechanism is wrong. MaskedLayer applies the mask with BlendMode.dstIn against its alpha -- the tear cuts, it does not overlay -- and RegionPad is torn: false, so a pad-backed screen has no tear on the pad at all. RULED OUT by measurement: drawImageNine at edge 0.4 stretches the setup sheet's vertical centre band ~8.2x against 1.00x horizontally, predicting left treads 8x the top's; measured 1.98x."
+ ],
+ "measurements": {
+  "hf_std_strip_today": "06_unfolding 14.317-15.088 over six 148x320 frames, floor 4",
+  "hf_std_strip_at_92d7b5a": "14.609-15.635 -- HIGHER than the repair",
+  "hf_std_box_rank1_sample": "0.506 at 92d7b5a -> 8.454 today; 0 of 91 nudged placements clearing 4 then, 87 of 91 now",
+  "rank1_still_clause": "26.962 / 166 levels at (200,1350) against 30 / 150; neighbourhood median 31.421, 51 of 91 placements passing",
+  "rank6_treads_today": "17_setup_pwa top edge longest 109 px (9 treads >= 8 px over 431); left edge longest 39 px (48 >= 8 over 341); item asks <= 4 px",
+  "rank7_widget": "distinct ink values 9 -> 184; distinct stroke tops 9 -> 14; inked columns 96 -> 24 of 160. Dial: 4 tops, 83 ink values, 8 columns."
+ },
+ "gates": "flutter analyze 0 errors; 179 tests pass (174 before, +5 new); five tool selftests green including the new hf_std_selftest.py",
+ "artifacts": "none taken; this was IMPLEMENT. The committed set is firing 28's and is now stale against HEAD -- see evidence_fresh_as_of."
+}

@@ -4646,3 +4646,148 @@ a fresh clone, so the first capture in any container is its own baseline.
    four flat `Container`s, and it is on the partner strip at the top of **every** screen, which is
    why the item found it on six artifacts.
 4. Rank 10 and rank 11 remain parked on their own amendments.
+
+## Firing 29 — cycle 3, IMPLEMENT — the ruler that scored the defect above the repair
+
+The item at the top of the queue is worth 6 points across five rows and has been read by three
+firings. Three of its four clauses were recorded as passing. This firing committed the ruler one of
+them rests on, and that clause turned out to score the defect above the repair.
+
+### HF_std, made runnable, and what running it showed
+
+`HF_std` has been in four of rank 1's five clauses since firing 18. **No committed tool has ever
+defined it.** Firing 28 read the strip clause for the first time — six frames at 14.4 to 15.1
+against a floor of 4 — and wrote the definition out in prose beside the number because there was
+nothing to point at.
+
+`tools/check/hf_std.py` is that definition, verbatim, unchanged: L minus a 2-px Gaussian, over the
+brightest 45% of the frame. It reproduces firing 28's numbers to the tenth — 14.317 to 15.088 on
+`06_unfolding_strip.png`. Then:
+
+* `git show 92d7b5a:evidence/crops/06_unfolding_strip.png` is the strip from the era when the fold
+  sheet **was** the blank, unruled, square-cornered rectangle this item was filed on. It reads
+  **14.609 to 15.635 — higher than today's repaired sheet.**
+* A synthetic flat beige rectangle with no tooth anywhere in it reads **14.372**.
+* Erode the mask by 2 px and `06_unfolding` collapses from 14.3–15.1 to **3.7–4.8**, on 1,173
+  surviving pixels of 22,665. Almost the whole number is the mask's own boundary.
+
+The fault is the definition's own premise: *"the brightest 45% of the frame, **which is the
+sheet**"*. That holds for a sheet of paper on a dark desk. A `frames.py` strip frame is a whole
+1440-px phone screen reduced to 148 px, pale almost edge to edge, with notes, rules, handwriting, a
+search bar and a nav row in it. The brightest 45% of that is a scattered brightness slice through an
+interface, and HF over a scattered mask is mostly the scatter. It rises with ink and chrome and
+falls with neither flatness nor tooth.
+
+On a box that **is** all sheet it works, and works well: rank 1's own sample, `--box
+200,1350,300,120`, reads **0.506 at 92d7b5a against 8.454 today**, with 0 of 91 nudged placements
+clearing 4 then and 87 of 91 now. HF_std is not a bad number. It is a good number pointed at the
+wrong frame.
+
+So the tool is committed **unwired**. A gate that passes a flat beige rectangle is the `surfaces.py`
+failure this repository has already filed once, and adding a second is not progress.
+`hf_std_selftest.py` holds six assertions, two of which assert the defect on purpose, so the day the
+mask is re-specified they go red instead of staying quietly green.
+
+### The still clause straddles its floor, and the window decides which side
+
+26.962 against 30 looked like three points of work. It is not. Nudge the same 300×120 window over a
+7×13 grid at ±24 px and today's still reads **18.873 to 40.393, median 31.421, 51 of 91 placements
+clearing 30**. The item's exact pixel is one of the 40 that do not.
+
+That is not an argument that it passes. It is decisive evidence about the specification, because the
+same grid on the still it was filed against reads **1.254 to 1.329 — spread 0.076, 0 of 91**. A flat
+rectangle is flat wherever you put the window: 284 times less spread. When the clause discriminated,
+the coordinate did not matter. Now the rectangle is gone the coordinate is the whole reading — the
+window straddles the pad at L_std 6.6–8.6, a torn edge, the note at 45.7, and one word of ink, and
+ten pixels of y move it from 21.2 to 42.1.
+
+**IMPLEMENT does not get to fix this.** Moving the coordinate, widening the window or lowering 30 are
+the same act, and the re-break would be what was lost. Rank 1 goes to the back under `LOOP.md`'s own
+`attempts >= 3` rule, blocked on ADDRESS for two definitions and on nothing else — not code, not a
+capture, not Blender, not the owner. The block is recorded on the item, not in the global `blocked`
+field, which `WORKER_PROMPT` §3b reserves for every open item being blocked.
+
+### Rank 7: the last two rectangles in the app
+
+Cause already established by firing 28's journal, so nothing was re-derived. `_WavePainter` drew a
+voice note as `Canvas.drawRect` bars of `Theme.of(context).colorScheme.onSurface` — the last Material
+scheme colour in an app that has none anywhere else — and `_Dial` drew four flat `Container`s under a
+docstring that already said "drawn as tally strokes rather than as a progress bar". The dial is on the
+partner strip at the top of **every** screen, which is why one defect was measured on six artifacts.
+
+`marks.dart` has had `_Hand` since it was written and every other affordance in the app is one of its
+strokes. `Tally` is a row of them — four points each, because `_Hand.stroke` gives its *middle*
+segment the swell and a three-point stroke has two segments both of which are an end, so it carries
+one pressure all the way down. Two pressures rather than one ink at two opacities: alpha standing in
+for a distinction is rank 11's item, and a voice that has been played is not a faint voice.
+
+Measured at the widget over a 160×28 box with a twelve-sample waveform:
+
+| | distinct ink values | distinct stroke tops | inked columns of 160 |
+|---|---|---|---|
+| bars | 9 | 9 | 96 |
+| strokes | **184** | **14** | 24 |
+
+Nine tops for twelve bars is one per distinct height, which is what centred rectangles give. The
+re-break is kept standing rather than done once and described: two of the five new tests hold a
+verbatim `_BarPainter` and assert that it fails both clauses.
+
+`flutter analyze` 0 errors; **179 tests pass**, up from 174. The item stays open because its own
+measurement is a column profile over the stills, and a capture is OBSERVE's.
+
+### Rank 6, read rather than worked
+
+Its filed evidence is unusable as a *before*: it names `17_setup_pwa.png`, and firing 28 established
+that that still was 47.98% one exact RGB for five firings. The 89 px tread and the −141 px
+discontinuity are numbers off an image that largely did not exist.
+
+The defect survives anyway — top edge longest tread **109 px**, left edge 39, against the item's ≤ 4 —
+but its stated mechanism is wrong. `MaskedLayer` applies the mask with `BlendMode.dstIn`: the tear
+cuts, it does not overlay. And one candidate is ruled out by measurement rather than left for a
+successor to have again: `drawImageNine` at `edge = 0.4` stretches the setup sheet's vertical centre
+band about **8.2×** against 1.00× horizontally, which predicts left treads eight times the top's;
+they measure **1.98×**. What is left is that the stepped boundary is an *inner* one — the outer edge
+against the wood is fibrous and fine — so it belongs to the lit edge or the baked shadow, which are
+nine-sliced separately from the mask and have three geometries between them.
+
+### The stage moved, and the queue is not drained
+
+`docs/LOOP.md` says IMPLEMENT exits on a drained queue. This firing handed the stage to **OBSERVE**
+with 34 items open, deliberately, and the argument is in `stage_change_note` in full. In short: the
+queue's top three cannot be advanced by implementing them. Rank 1 is blocked on two definitions that
+are ADDRESS's. Rank 6 needs one layer identified. Rank 7's code half is pushed and its measurement is
+pixels of a capture — **there is now pushed work whose effect nobody can see.** A capture unblocks all
+three.
+
+And the cycle's own feedback loop has been open for eleven firings. `last_score` reads 67 of 120 from
+cycle 3, measured at firing 18, with `visual_design` at 8 because the builder scored 8 against a
+critic's 13.5. Since then the loop has closed the fold clip, the retry affordance, search, the
+clipping screens, the interrupt matrix, the whole paper library across both conditions, the
+fresh-install flat fill and now the barcode. That number describes a build that does not exist.
+DIAGNOSE cannot be run on the committed evidence to fix it — `app/lib` has changed since the capture
+commit `2a03a77`, twice — so OBSERVE is not a way of avoiding IMPLEMENT. It is the only route to the
+score.
+
+### The pattern that is worth more than any of the three items
+
+Three of the four items this firing touched name a number that **no committed tool computes**: rank
+1's `HF_std`, rank 6's "traced contour" and its treads, and rank 7's "mean-crossings". The one that
+was made runnable turned out to score the defect above the repair. The other two are unaudited.
+
+ADDRESS's own definition of done is *"every queue item names the measurement that will close it"*. On
+the evidence of this firing that is currently false for the queue, and it is the first thing ADDRESS
+should fix.
+
+### For the next firing
+
+1. **Run OBSERVE.** `bash tools/apt-prereqs.sh`, `./bootstrap.sh --profile=web`, then `./capture.sh`.
+   This container bootstrapped the web profile in about six minutes and packed the year in about
+   nine, so the budget is mostly the capture itself.
+2. **Read `evidence/MANIFEST.json`, never `capture.sh`'s exit code.** The standing three absences
+   are `09_two_devices`, `16_setup_android` (no `/dev/kvm`) and `02_chat.png` under `tears.py`'s
+   sample-size floor — that PNG is on disk and is measurable.
+3. **The capture reads rank 7 and rank 6.** Rank 7 closes or reopens on the column profile; rank 6
+   gets its first before-number that was taken on a real image.
+4. **Do not quote the strip clause's HF_std as a pass.** It is unread until its mask is
+   re-specified. `tools/check/hf_std.py --box` is the reading that discriminates.
+5. Then DIAGNOSE, then ADDRESS. DESIGN is frozen until cycle 6.
