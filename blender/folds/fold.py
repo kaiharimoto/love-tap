@@ -217,6 +217,17 @@ def rules_for_a_note():
     return path, scale, offset
 
 
+def _stock_look():
+    """The look dict of the stock named in RULES_STOCK, read from blender/paper/stocks.py.
+
+    Read rather than copied, so `albedo` cannot be raised on the stock and silently left behind on
+    the fold -- which is the shape of the defect this exists to close.
+    """
+    sys.path.insert(0, os.path.join(os.path.dirname(HERE), "paper"))
+    import stocks as stocks_mod  # noqa: E402
+    return stocks_mod.STOCK_LOOK[RULES_STOCK]
+
+
 def render_sequence(name, frames, res, samples, out_dir, condition="day", start=0, end=None):
     cfg = SEQUENCES[name]
     kind = cfg["kind"]
@@ -260,10 +271,31 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
         solid.offset = -1.0
         rules_img = common.load_image(rules_png)
         rules_img.colorspace_settings.name = "sRGB"
+        # The albedo mottle amplitude comes from the stock this note is cut from, not from a
+        # number typed here, so the two cannot drift apart again.
+        #
+        # THIS IS THE KNOB THE FOLD NEVER GOT, and it is the whole of rank 1. Firing 26 added
+        # `albedo_tooth` to lift a written stock's L_std without dimming it -- `tooth` cannot,
+        # because it also scales the Bump strength and takes the sheet dark faster than it adds
+        # variance (218.9 -> 137.4 mean while L_std FELL 6.83 -> 5.70, swept on lined_01). Every
+        # written stock was re-rendered with it: `lined` ships at albedo 6.0 and measures 8.42.
+        # This material was left at the default 1.0, so the fold has been rendered from the same
+        # base colour and the same tooth as the sheet it is supposed to be torn out of, with a
+        # sixth of its mottle. That is why frame 0000 reads 6.824 at source and 5.686 at the size
+        # the app draws it, against docs/COLOR.md 5a's written floor of 8.0, while the real note
+        # 70 px below it in the same screenshot reads 47.9.
+        #
+        # The earlier sweep at fold.py:343 is not contradicted: it refuted matching the stocks'
+        # FIBRE SCALE in millimetres, which is a UV-space quantity and genuinely differs here
+        # (this sheet's UV spans 148 mm against a stock's 210). `albedo_tooth` is a pure amplitude
+        # multiplier on the mottle and carries no UV span with it, so it transfers where the
+        # fibre scale did not.
+        look = _stock_look()
         mat = common.paper_material(f"{name}_paper", (0.94, 0.91, 0.85), tooth=1.05, yellowing=0.25,
                                     sheen=0.24, fibre_scale=1100.0,
                                     rules_image=rules_img, rules_uv_scale=rules_scale,
-                                    rules_uv_offset=rules_offset)
+                                    rules_uv_offset=rules_offset,
+                                    albedo_tooth=look.get("albedo", 1.0))
         obj.data.materials.append(mat)
         common.add_shadow_catcher(scene, size_m=0.4)
         common.add_top_camera(scene, w * 1.25, h * 1.55, ortho=True, distance=0.5)
