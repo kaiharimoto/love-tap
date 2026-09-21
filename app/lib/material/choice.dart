@@ -15,6 +15,7 @@
 // one you are being asked to read.
 import 'package:flutter/widgets.dart';
 
+import 'assignment.dart';
 import 'hands.dart';
 import 'marks.dart';
 import 'palette.dart';
@@ -60,7 +61,9 @@ class Choice extends StatelessWidget {
             SizedBox(width: size * 0.24),
             // The seed is the label's, so a given option's tick is the same tick every time it is
             // drawn rather than a different hand on every rebuild.
-            Mark.tick(size: size * 0.78, colour: colour, seed: label.hashCode & 0x7fff),
+            // `hashOf`, not `hashCode`: the comment above is only true within one platform,
+            // because a Dart string hash is not the same number in a browser as on the phone.
+            Mark.tick(size: size * 0.78, colour: colour, seed: hashOf(label) & 0x7fff),
           ],
         ],
       ),

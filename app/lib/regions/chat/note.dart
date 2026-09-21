@@ -178,7 +178,7 @@ class Note extends StatelessWidget {
                       feeling: registry.byId(r.feelingId) ?? kBuiltInFeelings.first,
                       size: 46,
                       intensity: 0.6,
-                      tilt: (r.eventId.hashCode % 20 - 10) / 90,
+                      tilt: (hashOf(r.eventId) % 20 - 10) / 90,
                     ),
                   ),
               ],
@@ -366,7 +366,7 @@ class _DeliveryMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final seed = id.hashCode & 0x7fff;
+    final seed = hashOf(id) & 0x7fff;
     return switch (delivery) {
       Delivery.queued => Row(mainAxisSize: MainAxisSize.min, children: [
           Text(S.waitingToSend, style: Hands.margin(size: 12)),
@@ -415,7 +415,7 @@ class _Refused extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scope = AppScope.of(context);
-    final seed = (item.id.hashCode & 0x7fff) + 2;
+    final seed = (hashOf(item.id) & 0x7fff) + 2;
     return Padding(
       padding: const EdgeInsets.only(top: 2),
       child: Column(
@@ -472,7 +472,7 @@ class _MarginLine extends StatelessWidget {
           Flexible(
             child: Strip(
               id: 'margin-${item.event.id}',
-              row: item.ts.hashCode & 0x7fffffff,
+              row: hashOf(item.id),
               padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
               child: Row(
                 mainAxisSize: MainAxisSize.min,

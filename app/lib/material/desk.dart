@@ -92,7 +92,9 @@ class PartnerStrip extends StatelessWidget {
     final id = variants.isEmpty ? '' : variants[(partner.index + (state.mood?.length ?? 0)) % variants.length];
     final tears = lib?.writableTears ?? const <String>[];
     // a strip torn across the page: the strip kinds sit early in the pool
-    final tear = tears.isEmpty ? null : tears[(state.mood?.hashCode.abs() ?? 3) % tears.length];
+    // `hashOf`, not `hashCode`: a Dart string hash is whatever the platform's hash happens to be
+    // and the VM's is not the browser's, so this tear was a different tear on the two phones.
+    final tear = tears.isEmpty ? null : tears[(state.mood == null ? 3 : hashOf(state.mood!)) % tears.length];
     final asleep = state.availability == 'asleep';
     final headsDown = state.availability == 'heads_down';
     final ink = partner == Person.noor ? Pen.ballpoint : Pen.graphite;

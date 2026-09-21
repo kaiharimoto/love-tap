@@ -24,6 +24,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../capture/hooks.dart';
 import '../flags.dart';
+import '../material/assignment.dart';
 import '../material/objects.dart';
 import 'builtins.dart';
 
@@ -178,7 +179,7 @@ class _LandingStageState extends State<LandingStage> with SingleTickerProviderSt
     setState(() {
       _arrival = a;
       _t = 0.0;
-      _seed = ((a.feeling.id.hashCode & 0xffff) / 0xffff);
+      _seed = ((hashOf(a.feeling.id) & 0xffff) / 0xffff);
       _startedAt = DrivenClock.enabled ? DrivenClock.now : Duration.zero;
     });
     if (!DrivenClock.enabled) {

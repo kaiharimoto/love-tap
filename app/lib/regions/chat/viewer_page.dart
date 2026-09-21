@@ -7,6 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../material/assignment.dart';
 import '../../material/hands.dart';
 import '../../material/light.dart';
 import '../../material/marks.dart';
@@ -125,7 +126,7 @@ class _ViewerPageState extends State<ViewerPage> {
       body = const SizedBox.shrink();
     }
     final dusk = Light.of(context) == LightCondition.dusk;
-    final tilt = ((widget.item.id.hashCode % 21) - 10) / 420.0;
+    final tilt = ((hashOf(widget.item.id) % 21) - 10) / 420.0;
     return GestureDetector(
       onTap: () {
         final v = _video;

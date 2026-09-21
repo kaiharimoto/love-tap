@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../feelings/builtins.dart';
 import '../feelings/drawn.dart';
+import 'assignment.dart';
 import 'library.dart';
 import 'paper.dart';
 import 'light.dart';
@@ -67,7 +68,7 @@ class FeelingObject extends StatelessWidget {
           object: id,
           colour: Color(int.parse(feeling.colour.substring(1), radix: 16) | 0xFF000000),
           size: size * (onPaper ? 0.72 : 1.0),
-          seed: feeling.id.hashCode,
+          seed: hashOf(feeling.id),
         ),
       );
       if (!onPaper) {
@@ -81,7 +82,7 @@ class FeelingObject extends StatelessWidget {
       // of the same render as every other piece of paper on the desk
       final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
       final scraps = lib?.scrapTears ?? const <String>[];
-      final tear = scraps.isEmpty ? null : scraps[feeling.id.hashCode.abs() % scraps.length];
+      final tear = scraps.isEmpty ? null : scraps[hashOf(feeling.id) % scraps.length];
       return SizedBox(
         width: size,
         height: size,
@@ -94,8 +95,8 @@ class FeelingObject extends StatelessWidget {
           padding: EdgeInsets.zero,
           safe: lib == null ? const [0.1, 0.1, 0.1, 0.1] : lib.safeOf(tear ?? ''),
           stockAlignment: Alignment(
-            ((feeling.id.hashCode % 100) / 50.0) - 1.0,
-            (((feeling.id.hashCode >> 7) % 100) / 50.0) - 1.0,
+            ((hashOf(feeling.id) % 100) / 50.0) - 1.0,
+            (((hashOf(feeling.id) >> 7) % 100) / 50.0) - 1.0,
           ),
           stockScale: 2.4,
           child: Center(child: mark),
@@ -145,9 +146,12 @@ class FeelingObject extends StatelessWidget {
   static String _scrapStock(MaterialLibrary lib, String id) {
     final names = lib.stocks;
     if (names.isEmpty) return 'plain_01';
-    final variants = lib.stockVariants(names[id.hashCode.abs() % names.length]);
+    // `hashOf`, not `hashCode`. A scrap is a piece of paper, and a piece of paper is the same
+    // piece of paper on both phones or the law in DIRECTION.md is not kept.
+    final h = hashOf(id);
+    final variants = lib.stockVariants(names[h % names.length]);
     if (variants.isEmpty) return 'plain_01';
-    return variants[(id.hashCode.abs() >> 5) % variants.length];
+    return variants[(h >> 5) % variants.length];
   }
 }
 
