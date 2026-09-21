@@ -209,6 +209,27 @@ report of the error. Do not do the stage. A firing that discovers it cannot push
 thirty seconds is useful. One that discovers it after a forty-five minute capture has thrown that
 capture away, because nothing uncommitted survives the container.
 
+**And whatever the checkout turns out to be, RE-READ THE REPOSITORY FILES AFTER YOU FIX IT.** The
+copies of `CLAUDE.md` and the rest that arrive in a firing's system prompt are read when the
+container is built, from the tip the container checked out — so if that checkout is behind, the law
+you are handed is the law as it was then, and fast-forwarding the working tree does not update it.
+
+Firing 38's container landed on a tip **fifty commits old**, which is the ordinary case this
+section already describes. What was new is what the prompt said. Its copy of `CLAUDE.md` carried:
+
+> **`tools/check/texture_budget.py` does not exist** ... Either write it or delete the claim; a
+> dangling enforcement claim has survived four cycles already.
+
+The file on disk, after the fast-forward, says `**tools/check/texture_budget.py` exists now**, and
+it does: 173 lines, it runs, and it passes on all four sequences. Some firing between 35 and 37
+wrote it and corrected the entry. A firing that trusted its prompt would have spent itself writing
+a file that was already there — and it would have been following an instruction that names itself
+as a way to avoid wasting a firing, which is the shape of this that is worth remembering.
+
+So after §0 succeeds, re-read `CLAUDE.md` from disk before believing anything it says about what
+does and does not exist, and check a "this does not exist" claim with `ls` rather than on trust.
+The prompt is a snapshot; the branch is the truth.
+
 ### 1. Read where you are
 
 `CLAUDE.md`, then `docs/LOOP.md`, then `loop/STATE.json`, in that order. `docs/BRIEF.md` is

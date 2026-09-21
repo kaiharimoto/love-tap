@@ -5706,3 +5706,120 @@ experiment that settles which it is, before anything is done about it.
 6. `bash tools/apt-prereqs.sh` then `./bootstrap.sh --profile=web` took **five minutes** in this
    container, not fifteen, and exited 0. `python3 tools/pack_assets.py --seed=year` is another
    three and is not optional.
+
+---
+
+## Firing 38 — IMPLEMENT, cycle 3, 2026-09-21
+
+Two items closed, two filed, and the question the last firing said to settle first came back with
+the answer that costs the most.
+
+### It was never the clock
+
+Firing 37 paid a 45-minute capture to find that a seeded event id is not the same string on the two
+rigs, and wrote the cause down as *"same 80-bit tail from the key, different 48-bit head from the
+clock"*. The clock is not involved. Both rigs are handed the identical `ts` out of the identical
+line of `seed/year/2026-04.jsonl`. Decoding the two heads takes one minute and settles it:
+
+    1776875780000            the ts both rigs are given, from key 2026-04-22-0012
+    1776875780000 mod 2^32 = 3054286752
+    0002V0SDX0             = 3054286752                  what the PWA wrote
+
+Not a clock: a **width**. `UlidFactory.next` peeled its ten time characters with `t & 31` and
+`t >>= 5`, and a web `int` is an IEEE-754 double on which `&` and `>>` are 32-bit operations.
+`timeOf` had the same bug in reverse — ten base32 characters are fifty bits and `<<` gives up at
+thirty-two of them. Reproduced character for character in node under dart2js's unsigned semantics
+before a line of Dart was touched, which is the three-minutes-before-hours rule from firings 36 and
+37 doing its work a fourth time.
+
+So the divergence is **VM-against-web**, not test-against-capture, which is the branch the item said
+would make it a material_truth defect rather than a harness one. Every one of the 14,061 seeded
+events diverges — a millisecond count has been past 2^32 since the 19th of February 1970 — so the
+same seeded note was written on different stock, in a different variant, at a different lift and
+tilt on the two phones. The fix is to divide rather than shift.
+
+### The same defect, one file away, fourteen more times
+
+`hashOf` was repaired for this exact hazard before firing 36, with a careful comment about keeping
+intermediates inside 2^53 — and that repair never went looking for the other instances. There were
+fifteen. One was the ULID. The other fourteen took a `String.hashCode` or an `int.hashCode` and used
+it to choose something a person looks at. Measured rather than assumed:
+
+    'pad.pulse'                   VM 762877079    web 151588280
+    'f.tender'                    VM 218915526    web 229765906
+    '01KPV0SDX06FA58CJ9JXH23W7R'  VM 965547515    web 500903478
+    'calm'                        VM 151166986    web 172139146
+
+A Dart hash code is a promise about a run, and this app was reading it as a promise about a value.
+It was picking the stock and variant a feeling's scrap is torn from, the tear across the desk, the
+patch of sheet that shows through, the tilt of a photograph in the viewer and of a reply in the
+thread, the seed of the hand that draws a tick, the marks for a queued delivery and a refusal.
+`choice.dart` even carried a comment explaining that the seed is the label's *"so a given option's
+tick is the same tick every time it is drawn"* — true within one platform and false across two,
+which is this whole defect in one sentence.
+
+### The silence, and the third defect it was hiding
+
+`_scrollToAnchor` returned quietly on an anchor it could not resolve, which is what turned a wrong
+id into a photograph of six notes with a clean log and a clean manifest. It throws now, on every way
+of not landing, naming the anchor and the first and last id in the thread.
+
+Making it loud found another one in the first run. `stageStates` emits three messages and scrolls to
+the last, and `scope.emit` returns the event while the thread projection is still catching up — so
+the id was genuinely absent and **the scroll that frames `13_messenger_states` was being skipped,
+silently, on every capture that ever ran it**. The handle waits for the note now. Counted, not
+clocked: a wall-clock deadline was tried first and is wrong on both rigs that matter, because under
+capture the app's clock is driven a frame at a time and in a widget test it does not advance at all.
+
+### An ink tuned against a piece of paper that does not exist
+
+Then rank 3's app half, which closes on `flutter test` and needs no capture. `docs/COLOR.md` §2
+derives the `ink` step of the ladder — and therefore every pen in the app — from *"aged stock
+rendered at dusk, Y p50 0.5528"*. Re-measured from the committed library, firing 36's diagnosis
+holds to four decimals, and the first half has a sharper form than "there is no aged stock":
+`Paper.aged` **does** exist, as a flat swatch in `palette.dart` that the app declares and never
+draws. That is how the name survived four cycles of review — real enough to grep for, not real
+enough to measure. And 0.5528 is `index_02_dusk` at 0.5530, a middling written stock, with eleven
+dusk renders shipping darker down to `sticky_pink_02_dusk` at 0.4506.
+
+`Pen.stamp` and `Pen.margin` read 4.490:1 there against §6's dusk floor of 5.0. They are `#3F3F41`
+now, 5.009:1, and the day sweep improves with them. No floor moved and no step of the ladder was
+redrawn; only which stock the derivation is taken against, and it is now one that can be opened.
+
+### For whoever takes IMPLEMENT next
+
+1. **Two of this repository's tests were claims, and one still is.** Both `both phones` tests guard
+   the law by *modelling* browser arithmetic on the VM. The model is hand-written and never touches
+   the real function — so the ULID bug put back leaves `flutter test` **green** on all five of the
+   new tests. `CLAUDE.md` says in terms that a test which passes with the bug put back is a claim
+   and not a test. `tools/check/both_phones.sh` runs both files on chrome, where the same re-break
+   fails all five and the repair passes all nine in three seconds. **Nothing runs that script yet** —
+   it is not in the gate and not in `CLAUDE.md`'s three commands, which is the filed item
+   `a-test-that-models-the-browser-cannot-see-the-browser-change`. Only tests free of `dart:ffi`
+   compile on that rig; anything that opens a Spine fails against sqlite3's FFI bindings.
+2. **Re-read `CLAUDE.md` from disk before believing what it says does not exist.** This firing's
+   container checked out a tip fifty commits old, which §0 already covers — but the copy of
+   `CLAUDE.md` *in the system prompt* came from that tip too, and it said
+   `tools/check/texture_budget.py` does not exist, under the heading whose purpose is to stop a
+   firing wasting itself. It exists, it runs, and it passes on all four sequences. A firing that
+   trusted its prompt would have written a file that was already there. Now in `WORKER_PROMPT` §0.
+3. **Rank 3 is not closed and this firing did not attempt it.** Its measurement needs a capture, and
+   the ink change's arithmetic says what that capture would show: the ground did not move and the
+   ink did, so every `Pen.stamp` and `Pen.margin` run improves by exactly **×1.1161**. `SIGNAL`
+   3.61→4.03, `wifi` 3.75→4.19, `TRAVELLING` 3.79→4.23, `NEED` 3.99→4.45, `MOOD` and `72%`
+   4.08→4.55, `BATTERY` 4.13→4.61. Three cross the **day** floor of 4.5; none crosses the dusk floor
+   of 5.0. So the tally moves and the item does not close, and 45 minutes would have bought a number
+   already derivable. The next OBSERVE has a prediction to check rather than a blank sheet.
+4. **The evidence set is no longer scorable.** `app/lib/material/palette.dart` changed, so the
+   capture of this morning predates the ink it would be measuring. That is the ordinary cost of an
+   IMPLEMENT firing and not a defect.
+5. **`Pen.red` is the last ink in the palette that misses a floor** — 3.17:1 on the darkest ground —
+   and it is filed rather than fixed, because §2's own 2026-09-16 amendment exempts a chromatic ink
+   from the lightness ceiling for a reason that still holds, and the three available routes are
+   priced in the item. Route 3, saying a chromatic ink is a marking ink and not a body ink, is the
+   only one that costs no colour.
+6. **Do not start rank 7's 240-frame render.** Unchanged from firings 36 and 37.
+7. `./bootstrap.sh --profile=web` took **2m31s** in this container and `tools/apt-prereqs.sh` was
+   never needed, because nothing here launched WebKit — `flutter test --platform chrome` uses the
+   Chromium already at `/opt/pw-browsers`. `python3 tools/pack_assets.py --seed=year` is about three
+   minutes and is not optional.
