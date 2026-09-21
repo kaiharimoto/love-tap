@@ -6099,3 +6099,94 @@ could see it. A gate that can only go red one way goes quiet in the other.
    never been checked against the library it depends on. It is the cheaper of the two and it found
    two items in about fifteen minutes here.
 5. **Ranks 6 and 7 untouched, and 7 still must not be started.**
+
+## Firing 42 — cycle 3, IMPLEMENT — 2026-09-21T21:56Z to 2026-09-22T01:20Z
+
+The checkout read as a fork and was a graft: fifty ahead, fifty behind, no merge base, the dry-run
+push rejected `non-fast-forward`. `git fetch --unshallow` on the branch refspec settled it in
+seconds — the local tip was an ancestor and the counts read 0 ahead, 334 behind. Nothing reset,
+no tip dropped. §0's first route is still the right one to try first.
+
+**Rank 10 — the twelve-second cold start — fixed at the cause, measured, left open on purpose.**
+The cause was never in the app and firing 40 had already proved it: `scene.js` launches a browser
+and makes a context per scene, one node process per scene, so every scene meets an empty IndexedDB
+and every `cold_ms` in `evidence/logs` is the seed *install*. The scene now opens the page twice in
+the context it already made. The install is written down as `install_ms` under its own name, the
+second open is `cold_ms`, and `events_at_open` goes beside them so neither number can be met by
+shrinking the seed. The context is still per scene — reusing one across scenes would make scenes
+depend on each other's state, which is a worse thing than a slow capture, and it would destroy
+`install_ms` as well — and the two scenes whose subject *is* the install carry `"first_run": true`.
+
+On a targeted webkit leg against the seeded build: **install_ms 12,708, cold_ms 1,698,
+events_at_open 14,061**, against the item's floor of 3,000. Two things worth as much as the number:
+`01_pulse.png` came back **byte-identical** to firing 41's, so the extra load changes nothing about
+what is photographed; and `capture_selftest.py` is green on all nineteen checks, including the two
+sections that drive `scene.js` against a bare `file://` probe. The item stays open because its
+measurement says *every* seeded scene log and this is one; the next full capture reads the rest.
+
+**Rank 13 — the tear shadow — the headline is wrong and the last two routes are now one.**
+Firing 41 refuted mask selection. This firing refutes fit and slice, and corrects what the defect
+looks like. Pairing each piece's stock surface with its shadow surface in the sidecars — 87 pieces
+over six artifacts, every window placed by the app's own declared rect — the contact shadow
+*disappears* as the distortion rises rather than hardening into a bar:
+
+| distortion | band above the piece | depth |
+|---|---|---|
+| > 6:1 | median **0 px** (n=29) | 0.2 L |
+| 2–6:1 | median 6 px (n=38) | 5.9 L |
+| ≤ 2:1 | median 9.5 px (n=20) | 6.2 L |
+
+and the least distorted piece in the set carries 67 px of band at depth 38.4. On the strips this
+item is about there is no contact shadow on the glass at all, which for `material_truth` is worse
+than a hard bar and is a different sentence from the one filed. The reason is geometric:
+`_bakedShadow` is `Positioned.fill` inside a Stack the size of the piece, so the shadow's box *is*
+the piece's box and `shadowFrame = 1.2` makes the spill **a tenth of the paper** — 11 device px on
+a margin strip, 97 on a tall note — instead of a function of the lift. `BoxFit.cover` preserves the
+sampling and breaks the hug; a nine-slice cannot be aimed either, because the source's spill band
+is 8.33% of 675×1024, which is 56 px across and 85 px down, so equal spill on four sides and
+uniform sampling are not simultaneously reachable from this library. What is left is new renders,
+or laying the render's own 1-D falloff around the outline procedurally — and the second needs a
+millimetre scale that `app/lib` does not contain, so it is a `DIRECTION.md` decision.
+
+**Rank 15 — the barcode — its own measurement cannot close it.** `tools/check/comb.py` implements
+the stated clause and was earned against the pair whose answer is known (`2a03a77`, the last
+capture before firing 29 replaced the two `drawRect` sites, against firing 41's). It reads **114
+before and 110 after** on a floor of 8. Disqualified, committed anyway, and three reasons written
+into it: the count is dominated by everything standing *on* the declared rect (a rect is not the
+paper you can see — this has no occlusion); the writing satisfies both clauses by itself, worth
+206–544 "bar interiors" an artifact until the declared runs are masked out; and the item's own
+21–68 does not reproduce at the band size it names. The one figure that *did* move across the
+repair is the band's luminance range: 183–202 before, 43–61 after.
+
+**Rank 16 — the handwriting — the cause is wrong and the second clause is unreachable.** The item
+says "the hands carry the variants; nothing asks for them". Something asks, and the ask is
+honoured. `FontFeature.enable('calt')` has been in `hands.dart` throughout and is a no-op either
+way, because HarfBuzz turns `calt` on by itself; the shipped font carries GSUB with `calt`, `rand`
+and `ss01–05` reachable from DFLT and latn, `calt` pointing at a type-6 chain-context lookup of
+eight subtables; and shaped through HarfBuzz, `eeeeeeee` comes out as glyph ids 690, 225, 380, 535,
+690, 380, 535, 690 — **four distinct outlines**. The variants are applied and too similar to see:
+6.07–10.61 best-aligned MAD at the sizes `02_chat.text.json` declares, against a control of **4.99
+for the same glyph moved half a pixel**. The cycle's period brings 690 back at the fifth and eighth
+letter, which is where the critic's 3.07 between the "e" of "The" and the "e" of "open" came from.
+The site is `tools/handwriting/build.py`'s alt planning, not the app. And the second clause asks a
+filled TrueType outline to vary in *tone*; interior ink IQR is 0 at every size in both hands and
+always will be, because pressure in a font is the width of the stroke.
+
+### What is worth more than the four items
+
+**A ruler is as falsifiable as a cause, and both of this firing's first drafts were wrong in the
+same way.** `comb.py` v1 profiled `axis=1` — a thirty-sample profile of a band's *rows*, which
+cannot exceed thirty crossings however barred the paper is. It read 4 on every artifact on both
+sides of a known repair and looked exactly like a pass. The Dart guard over the hands had the same
+shape: a floor on the pairwise glyph difference passes just as happily with `calt` disabled,
+because what it measures is the rasteriser's subpixel phase. Both were caught by running the
+instrument on the case whose answer was already known and noticing that **it did not move**.
+
+So the habit is narrower than firing 41's version of it. A ruler earns its place by *moving* across
+the known pair. A ruler that gives the same answer on both sides has told you nothing — and an
+equal reading is the disqualification that is easiest to mistake for success, because it arrives
+wearing a pass.
+
+Cheap disproof is eleven for eleven. Three of the four items worked this firing had an account of
+themselves that measurement contradicted, and all three were settled from files already in the
+repository in under half an hour each.
