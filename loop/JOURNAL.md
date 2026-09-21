@@ -5374,3 +5374,165 @@ throw-site checks beside it are the discriminating ones. And `reliability.json`'
 6. Evidence is still **stale and staler** — `app/` and `tools/` both moved. Not scorable.
    `evidence/legibility.json` and `evidence/reliability.json` were regenerated; no PNG or MP4 was
    touched.
+
+---
+
+## Firing 35 — ADDRESS, cycle 3 — 2026-09-21
+
+`loop/STATE.json` said IMPLEMENT. Firing 34 had already written the reason it should not be, in
+`stage_change_note`: five closures had opened gaps at the old 2, 3, 4, 5 and 7, four items were
+unranked, and *take the next one* pointed at nothing coherent. Firings 29 and 32 moved the stage the
+same way. So this one ran ADDRESS and set it back to IMPLEMENT against a contiguous queue. No code,
+no capture, no toolchain.
+
+### The three decisions ADDRESS owed
+
+**Rank 6 — the flat beige card — takes route 2, and that settles `SIZES['folds']` at 540.**
+
+Firing 33 left three routes. The one taken is the one that attacks the cause rather than
+compensating for it. The cause is a low-pass filter: packing 1440 → 540 is a 2.67:1 LANCZOS
+downsample, which destroys mottle with a period under about five source pixels and keeps mottle
+coarser than that. That is the whole of 8.554 at source becoming 6.928 shipped, and the pack sweep's
+shape says the same — steep from 540 to 900, then a plateau at 8.0–8.4 with 0.2 of scatter in it.
+`fibre_scale` moves the tooth into the half the downsample keeps. **Firing 26 swept it and rejected
+it at `albedo_tooth` 1.0**, a sixth of today's amplitude, where it could not have discriminated
+anything; it has never been tried at 6.0. One frame is 1m08s, so a five-point sweep is ten minutes
+against four hours for the sequence.
+
+So the sweep runs, the `fibre_scale` that clears 8.0 at the shipped size goes into
+`blender/paper/stocks.py`, and **then** the 240 frames are rendered once — rank 7, immediately
+below. At 540 the peak stays 29.3 MB inside 32 and nothing in `fold.dart` moves.
+
+**On the 32 MB, because the question was put directly.** It is a *design* budget, not a device
+measurement, and `CLAUDE.md` says so: no phone has ever been available to measure WebKit on, and the
+number exists to catch somebody simplifying the decode window away. That makes it a real constraint
+on the window — which this repository controls, which `texture_budget.py` genuinely enforces, and
+whose alternative is the 186.4 MB the sequence costs held whole — and a guess about the device. This
+firing **treats it as binding and does not re-derive it**. Raising a guess until a floor clears is
+the same act as lowering the floor, and what it costs is the item's own rule: re-break it and watch
+it fail. What would settle the device half is one measurement nobody here can take — decoded RGBA
+held for a fold sequence on a real iPhone, to the point WebKit starts evicting. It is in `asks[]`
+and it blocks nothing.
+
+Route 1 is rejected as the primary and **half of it is kept**. Pack 900 allows 14 held frames inside
+32 MB against `_ahead = 24`, so it cuts the decode runway 42% with no measurement of what the runway
+needs — trading a material defect for a motion defect, which is the exact failure firing 19 spent
+itself on. But `window = 36` is `_ahead` 24 **plus twelve frames behind the playhead**, and
+`unfold_thirds` only ever plays forward, so `at()` never reaches back past the last frame decoded.
+36 → 26 is 28% of the peak for nothing. Five firings have costed that window without reading what is
+in it. It is a ladder rung, not a task, because route 2 should make it unnecessary.
+
+Route 3 is rejected on the physics as well as the law. The loss is in the **pack** downsample, not
+the display upsample, so drawing the sheet smaller cannot put back mottle already averaged out. What
+it *would* change is how much of the sheet a fixed window covers — the sampling accident §3d exists
+to forbid, arrived at on purpose.
+
+**`ground_swing ≤ 1.2` is struck**, and replaced by a property of the reading rather than of the
+count. The clause asked that every surviving failure be a flat-ground one, which asks that
+`GROUND_SWING_GATE` never be the reason a run fails — that empties the gate rather than sharpening
+it, and it has never been met in fifteen firings. Firing 34's dusk set is what settles it rather
+than the argument: 31 of 54 fail, most at swing 1.2–1.4, 24 of them even at the day floors. The tool
+plainly *does* produce clean failures in quantity on a surface that is genuinely hard to read; the
+day set's scarcity of them is a fact about the day set. What replaces it is the real fault
+underneath: a ring taken from a window wherever it falls puts **desk** in the ring of a run near its
+sheet's edge, so the gate holds ink on paper against the plank behind it. The ring is clipped to the
+declared rect of the surface the run sits on, and a run with nothing left inside it is reported
+*unmeasurable* rather than failed.
+
+**5a's 60-level clause is struck** in all three classes and kept as a reported number. The two halves
+of `8.0 / 60` do different jobs and only one was defended. 8.0 is the flatness ruler and it
+discriminates. The level count is, in 5a's own words, a guard against a posterised render — and the
+obvious repair, taking the class median the way 8.0 was taken, gives it **zero margin**: 58, 58, 57,
+57, so a floor of 57 against a class whose worst member measures exactly 57. A guard earns its
+number from the failure it guards against, and nobody has ever measured what a posterised render of
+these stocks reads. So it is struck, the count stays reported, and 5a names the measurement that
+would let a guard be re-declared instead of leaving an undefended number standing in the law. Rank
+6's clause (a) loses its `/60` half here.
+
+Neither of the last two is a design amendment. They are ADDRESS declaring how a measurement is
+taken, exactly as §5a itself was at firing 32. No colour, lightness, chroma or contrast floor moves
+and the cycle-6 freeze is untouched.
+
+### The queue: 49 items, contiguous 1..49, two clusters at the top
+
+| | |
+|---|---|
+| **1–2** | the two ruler corrections, because both change numbers the items below are measured by |
+| **3–5** | **the capture cluster** — dusk, search filters, chat hero. One `./capture.sh` closes all three |
+| **6–7** | **the fold cluster** — the card, then the re-render it unblocks. Blender, no capture |
+
+**Rank 3 is the dusk screen, and it is the biggest move in this re-rank.** It is the owner's own
+complaint — *"the desk was giving me visibility issues with text"* — alive in a lighting condition
+nobody had ever measured, in the worst-performing row in the build (visual_design 9 of 20, 45%,
+against 60–73% everywhere else). `open` reads 1.04:1. It is a controlled pair, not a new screen: the
+same declared text and 54 runs under both rigs, 3 below floor by day against 31 at dusk, and eleven
+day artifacts byte-identical across the change that revealed it.
+
+**Rank 6 is the card, and that is scheduling and not a demotion.** It is still the highest-point item
+in the build at 6 and it still caps `material_truth`'s floor. Splitting the clusters is what stops a
+45-minute capture being spent on one item and a four-hour render being started by a firing with
+nothing else to do. Rank 6's `blocked_on` is **cleared** — it had stood three firings and both
+definitions are now settled.
+
+Rank 3 re-reads its baseline on the committed `crops/dusk_pulse.png` *after* rank 1 lands. The 31 is
+firing 34's number under firing 34's ruler, and a ruler that moves under a before-and-after is
+precisely what §3d exists to stop. The artifact is committed, so re-reading costs nothing.
+
+### A rank is not a name
+
+Seven measurements carried `rank N` cross-references and **six of the seven were already pointing at
+the wrong item** — two a whole renumbering out, two naming items that had since closed. Rank 6's
+`rank 2` named `the-fold-clip-is-captured-after-the-fold-has-already-finished`, closed at firing 33;
+rank 11's two blockers had both closed at firing 34; two items' `rank 9` meant the chat hero, which
+has been rank 9, then 6, and is now 5. The queue had been quietly lying to itself about its own
+dependencies. All seven are ids now. **Cross-reference an item by its `id`, never by its rank.** A
+rank is a position in a queue that ADDRESS reorders; an id is what the item *is*.
+
+### The `CLAUDE.md` a firing is handed can be fifty commits stale
+
+Firing 34 filed `claude-md-names-two-dead-ends-and-one-of-them-is-alive`, quoting `CLAUDE.md` as
+saying `tools/check/texture_budget.py` does not exist. **It does not say that, and has not since
+firing 20.** Line 93 at HEAD reads *"`tools/check/texture_budget.py` exists now"* and goes on to
+name the two things worth knowing before trusting it. The item is closed without code.
+
+Where firing 34 read it is the finding. A firing opens with `CLAUDE.md` injected as project
+instructions, read off **the commit the container checked out** — at firing 35, `3edfbf7`, fifty
+commits and five days behind the tip. This firing's own injected copy said *"does not exist"* and
+*"14 of 17 is the ceiling"*; the file on disk after the fast-forward said *"exists now"* and *"15 of
+17"*. `git show 3edfbf7:CLAUDE.md` against `git show HEAD:CLAUDE.md` reproduces it from git alone.
+
+It is the same staleness `WORKER_PROMPT` §0 already handles for refs, arriving through a door nobody
+had shut — and it is worse than a stale ref, because §0 makes you *look* at the refs. Nobody re-reads
+`CLAUDE.md`; it is the one document a firing is sure it has already read. **Re-read it from the tree
+after §0's fast-forward.** Filed at rank 47. The `build.yml` half of that section is still true and
+was left exactly as it is: all three of `tools/pack_pwa.py`, `tools/release_notes.py` and
+`tools/check/apk.py` are still absent.
+
+### Step 0, and the order to do it in
+
+The dry run came back `non-fast-forward`, `git merge-base` empty, `git rev-list --count` reading
+**50 and 50** — the shape §0 describes three times. Route 1, `git checkout -B`, was allowed and took
+it. **Then** firing 31's `git fetch --filter=blob:none --deepen=300` was run and
+`git merge-base --is-ancestor 3edfbf7 origin/<branch>` returned true: a graft boundary, and the
+reset had lost nothing.
+
+Proving it *afterwards* is the wrong order, and it is written down so a successor does not copy it.
+The deepen is seconds with `--filter=blob:none` and it is the only step that distinguishes a graft
+from a stale branch ref *before* anything is overwritten. Do it first; it is the cheapest thing in
+§0.
+
+### For whoever takes IMPLEMENT next
+
+1. **Take rank 1.** The queue is contiguous and nothing is blocked. Ranks 1–2 are small ruler
+   corrections and they must land before 3 and 6 are measured.
+2. **Ranks 3, 4 and 5 are one firing with one `./capture.sh` in it.** `bash tools/apt-prereqs.sh`
+   before anything, or WebKit will not launch. The *before* half of every re-break pair is already
+   committed from firing 30.
+3. **Ranks 6 and 7 are the next firing, with Blender and no capture.** The sweep, then the render —
+   once. Do not re-render before the sweep names the `fibre_scale`.
+4. **Pack with `--seed=year` before believing a green suite.** +189, analyze clean. A fresh container
+   needs the pack before analyze is clean at all, and `python3 -m pip install numpy pillow` before
+   any `tools/check/*.py` runs.
+5. **Evidence is still stale** and not scorable. The capture at ranks 3–5 is owed to the loop
+   regardless of those three items.
+6. **Re-read `CLAUDE.md` from the tree.** The copy at the top of your context is the container's.
