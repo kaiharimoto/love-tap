@@ -83,6 +83,12 @@ system libraries it can check for and cannot install. Run `bash tools/apt-prereq
 there is no capture at all. `bootstrap.sh --profile=web` skips the Android SDK, the NDK and the
 AVD, which are 2.1 GB and several minutes and buy nothing without `/dev/kvm`.
 
+**And `bootstrap.sh` itself now fails partway, quietly, on a fresh container.** The pinned static
+ffmpeg URL answers 200 with 7.3 KB of HTML from a JS interstitial, `tar` rejects it, and the script
+is `set -e` — so it stops at ffmpeg and never reaches **tailscale or Playwright WebKit**, which is
+no capture at all rather than a missing clip. Read `toolchain/.done/` after bootstrapping, not the
+exit code: it must hold `playwright`. `docs/CONTINUE.md` §5 has the four lines that fix it.
+
 Everything else worth knowing about running it is in `docs/CONTINUE.md` §4–§5.
 
 ## Known dead ends, so nobody spends a firing on them

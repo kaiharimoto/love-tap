@@ -155,6 +155,46 @@ reports. Cycle 2 cost ~1.2M subagent tokens and 583 tool calls and was worth eve
 
 ## 5. Things that cost hours here, so that they cost you none
 
+- **`bootstrap.sh` now dies at ffmpeg in a fresh container, and it takes WebKit down with it.**
+  The pinned `https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz` sits
+  behind a JS interstitial: it answers **200** with 7.3 KB of `text/html` that says "One moment,
+  please...", a browser user-agent does not get past it, and `tar -xJf` fails with
+  `xz: (stdin): File format not recognized`. `bootstrap.sh` is `set -euo pipefail`, so it stops
+  THERE — and the two stages after ffmpeg are **tailscale and Playwright WebKit**. A firing that
+  reads `BOOTSTRAP_RC=2` as "no clips" and runs the capture anyway has no browser and gets no
+  capture at all. The symptom is quiet: `toolchain/.done/` holds only `blender`, `flutter`,
+  `flutter-config`. **Check that directory after bootstrap, not the exit code.** The route that
+  worked at firing 39, in about forty seconds:
+
+      apt-get install -y ffmpeg
+      mkdir -p toolchain/ffmpeg toolchain/.done
+      ln -sf /usr/bin/ffmpeg  toolchain/ffmpeg/ffmpeg
+      ln -sf /usr/bin/ffprobe toolchain/ffmpeg/ffprobe
+      touch toolchain/.done/ffmpeg
+      ./bootstrap.sh --profile=web        # every stage is idempotent; it resumes at tailscale
+
+  All five clips assembled under distro ffmpeg 6.1.1 and every frame check passed. It is **not**
+  the pinned binary, so say so in `evidence_note` when a capture uses it: an mp4 SSIM measured
+  across that boundary is comparing encoders as well as content.
+- **Take the BEFORE reading of a committed artifact before `./capture.sh` overwrites it.** This is
+  the only way to satisfy firing 36's clause that the ruler be held still, and it costs seconds.
+  `evidence/.previous/` holds the stills once you seed it, but the sidecars a ruler needs —
+  `<name>.text.json`, `<name>.surfaces.json`, `evidence/logs/<name>.report.json` — are not in it,
+  and the capture overwrites those too. Lift them out of git into a scratch directory and point
+  the tool at it with `--dir`:
+
+      git show HEAD:evidence/01_pulse.text.json > $D/01_pulse.text.json
+      python3 tools/check/legibility.py --dir $D --only 01_pulse.png --dump-runs --out $D/leg.json
+
+  Firing 39 read 31 of 54 off the committed dusk crop that way and matched firing 36's number
+  exactly, which is what made the 31 -> 24 a measurement instead of a claim.
+- **Match runs by the string the app declared, never by the box.** Nine of 54 runs on
+  `crops/dusk_pulse.png` shifted their box by a few pixels between two captures — a segmentation
+  boundary moved between `LAST UP` and `just now` — so a `(box, says)` key matched 45 of 54 and
+  looked like nine runs appearing and nine disappearing. Keyed on `says` plus its ordinal down the
+  page it is 54 of 54 and the population clause is satisfiable. This is WORKER_PROMPT 3d's rule
+  about absolute coordinates, in the one place it is easy to reintroduce by accident.
+
 - **Anything on the wall clock is invisible in the evidence.** Under capture the app's clock is
   driven a frame at a time and screenshots are taken between steps, so a quarter-second of wall
   clock passes between two frames of a clip: an implicit animation is either not started or already

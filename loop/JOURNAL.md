@@ -5823,3 +5823,103 @@ redrawn; only which stock the derivation is taken against, and it is now one tha
    never needed, because nothing here launched WebKit — `flutter test --platform chrome` uses the
    Chromium already at `/opt/pw-browsers`. `python3 tools/pack_assets.py --seed=year` is about three
    minutes and is not optional.
+
+## Firing 39 — IMPLEMENT, cycle 3, 2026-09-21 — the capture, and rank 3 measured
+
+Step 0 passed on the second question rather than the first. The container handed over a **shallow
+clone at depth 50** whose tip was `3edfbf7`, 315 commits behind; `git fetch` reported
+`(forced update)`, `git merge-base` came back empty, and both sides read 50 commits. Every symptom
+`WORKER_PROMPT` §0 catalogues. It was a graft boundary and nothing else:
+`git fetch --unshallow origin <branch>` made the local tip an ancestor at **0 ahead, 315 behind**
+and `--ff-only` took it. Nothing reset, nothing force-moved, no tip dropped. The lease was written
+and pushed before anything was touched, as `3ef0e85`.
+
+**The capture ran whole: 15 of 17, 13:11Z to 14:33Z, exit 0 read out of `MANIFEST.json` rather than
+out of the exit code.** The two Android stills are booked missing with the measured `/dev/kvm`
+reason — the full sentence, not firing 37's "not captured this session", because this leg was not
+`--only`. `surfaces` is booked missing on the empty rendered surface, which is rank 6 and unchanged.
+
+### 1. What `DIFF.json` says, and why it is not a regression
+
+13 changed, 2 unchanged, 2 absent. The note in `evidence_fresh_as_of` is the one firing 27 had to
+write and this is its second outing — but it does not rest on assertion this time. **The only two
+artifacts `DIFF.json` calls unchanged are `10_first_run.png` and `17_setup_pwa.png`, and those are
+exactly the two scenes `capture.sh` draws from the fresh build with no seed compiled in.** Every
+artifact built against the seeded year moved; neither artifact built against a seedless install did.
+That is firing 38's ULID repair landing on all 14,061 ids with `hashOf` choosing paper from the new
+ones. Measured rather than inferred: on `13_messenger_states`, **11 of 20 matched runs are torn from
+a different stock**, `empty chair` going `legal_01` → `lined_02` and 1.19:1 → 7.20:1.
+
+The set's legibility improved: **48 runs below floor → 39**, over 418 runs → 426.
+
+### 2. Rank 3: 31 → 24, and it does not close
+
+Firing 38 predicted ×1.1161 and that no dusk run would cross 5.0. **Both confirmed.** Observed
+factor over the 48 runs whose declared ink went `ff464648` → `ff3f3f41`: median **1.1146**. The five
+runs whose ink did not change moved by 1.0031 — the ground standing still.
+
+The clause firing 36 said this item was missing is now satisfied, and it is the part worth keeping:
+`runs unchanged at 54` guards against the screen losing its text and **not** against the ruler
+moving, so both readings were taken in this firing **by the same `legibility.py` binary** — the
+before lifted off the *committed* `crops/dusk_pulse.png` before `./capture.sh` overwrote it. It
+reproduced firing 36's 54 runs / 31 below floor exactly. Population held in the strong form: **54 of
+54 matched on the declared string**, identical string sets. Nine runs shifted their box a few pixels
+(a segmentation boundary moved between `LAST UP` and `just now`), so a box-keyed match reads 45 of
+54 and is the wrong anchor — §3d's rule, in the place it is easiest to reintroduce by accident.
+
+Cheap disproof before the expensive thing, which is now five for five: `01_pulse`'s paper comes from
+`stockForMood(mood)` and `variants.first`, **never** from `hashOf` or an event id — so the re-roll
+that moved the rest of the library cannot reach this screen's grounds, and the ×1.1161 was safe to
+predict. Two minutes of reading, and it is why the factor is trustworthy.
+
+The day twin improved, **3 → 1** below floor at 54 runs, so its clause is met. One run got worse:
+`LAST UP` 4.40 → 4.09, its box grown 25px → 52px as `just now` shrank — segmentation, not the screen.
+
+**The adversarial-ground artefact migrated rather than cleared.** Firing 36 found exactly one run
+whose ground reads as the ink's own antialiasing, `open` at 1.04 with a ring of 5.52. There is
+exactly one again and it is a **different** run — `MOOD` at 1.10 with a ring of 5.70, `open`
+recovered. So it is not a property of a run that could be repaired; it is a property of wherever a
+glyph's ring clips, and it moves between captures. That belongs to the item firing 36 filed for it.
+
+24 runs still sit below a 5.0 dusk floor, worst achromatic `SIGNAL` at 4.06. ×1.1161 is the whole of
+what `#3F3F41` buys. Closing the rest needs the ground, the floor or the tool — not another nudge.
+
+### 3. What the repair cost, filed rather than fixed
+
+`hashOf(e.id)` chooses stock, variant, tear, tilt and lift, so re-minting every seeded id re-rolled
+the assignment library-wide. **The roll is not neutral.** On `13_messenger_states` it fixed two runs
+and broke three, all three against the **day** floor of 4.5 and all three previously comfortable:
+`and the bread, if there is any` 9.01 → 4.28, `left the key under the pot` 9.59 → 4.47, and
+`try again` 8.93 → 4.38 — the last being `Pen.red` on the refused row, the one row whose whole job is
+to be read when something has gone wrong.
+
+No test could have caught it. `legible_on_what_it_is_on_test.dart` walks (ink, stock) pairs out of
+the source and cannot know which stock a note actually draws on, because that is a hash of a runtime
+id. **Legibility is being left to a hash**, and a re-roll for any other reason would do this again.
+Filed as `the-seeded-id-repair-re-rolled-the-paper-and-three-notes-landed-on-darker-stock`, with a
+cheap candidate fix named and explicitly left to ADDRESS: filter the stocks a note can be torn from
+to those its row's inks clear, so the hash chooses among legible grounds. The ULID repair is correct
+and is not in question.
+
+### 4. Things worth the next firing's time
+
+1. **`bootstrap.sh` dies at ffmpeg in a fresh container and takes WebKit with it.** The pinned
+   johnvansickle URL answers **200** with 7.3 KB of interstitial HTML; `tar` rejects it; the script
+   is `set -e`; the two stages after ffmpeg are **tailscale and Playwright WebKit**. `BOOTSTRAP_RC=2`
+   with no browser is not "no clips", it is no capture at all. **Read `toolchain/.done/`, not the
+   exit code** — it must hold `playwright`. Four lines fix it (`docs/CONTINUE.md` §5), and both that
+   file and `CLAUDE.md` now carry it.
+2. **The clips in this capture were encoded by distro ffmpeg 6.1.1, not the pinned static build.**
+   All five assembled, every frame check passed, and it is written into `evidence_note`. An mp4 SSIM
+   measured across this boundary compares encoders as well as content.
+3. **Take the before-reading off the committed artifact before the capture overwrites it.** Seconds,
+   and it is the only thing that makes a before/after a measurement. The sidecars a ruler needs are
+   not in `evidence/.previous` — lift them from git and use `--dir`. §5 has the recipe.
+4. **13_messenger_states' denominator moved, 20 runs → 30.** Firing 38's `_scrollToAnchor` repair
+   made a scroll land that had been skipped silently on every capture ever run; ten runs arrived and
+   none left. So its raw 2 → 4 below floor is **not** a like-for-like tally and must not be quoted as
+   one. Worth recording plainly: the committed artifact already had all five delivery states in
+   frame at `offscreen=0 clipped=0`, so the scroll that was being skipped was ~85px of framing, not
+   the difference between showing the refused note and not showing it.
+5. **Ranks 6 and 7 untouched, and 7 still must not be started.**
+
