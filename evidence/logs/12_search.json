@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2808
+   "ms": 5617
   },
   {
    "do": "wait",
@@ -18,19 +18,19 @@
   },
   {
    "do": "search",
-   "ms": 5853
+   "ms": 4116
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1903
   },
   {
    "do": "shot",
-   "ms": 3624
+   "ms": 3238
   },
   {
    "do": "report",
-   "ms": 742
+   "ms": 717
   }
  ],
  "shots": [
@@ -45,28 +45,28 @@
   {
    "region": 1,
    "visible": [
-    "0001M3AY8G83A3FBSRB1Y7W78Q",
-    "0001M3F41R2APQC59QKBMZK4XF",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF",
-    "0001M4GW48FEW3M67XKAZT5051",
-    "0001M4ZQQ0H0PPVTKMMQEE268D",
-    "0001M59VY0YA13H9M86HTA6XNP"
+    "01M1M3AY8G83A3FBSRB1Y7W78Q",
+    "01M1M3F41R2APQC59QKBMZK4XF",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF",
+    "01M1M4GW48FEW3M67XKAZT5051",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D",
+    "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
-    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_047",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_031",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
+    "01M1M59VY0YA13H9M86HTA6XNP": "tear_013"
    },
    "stocks": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "graph_02",
-    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_02",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "receipt_01",
-    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01"
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "receipt_01",
+    "01M1M3F41R2APQC59QKBMZK4XF": "lined_01",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "graph_02",
+    "01M1M4GW48FEW3M67XKAZT5051": "lined_02",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
+    "01M1M59VY0YA13H9M86HTA6XNP": "graph_02"
    },
    "scroll": {
     "first": 8381,
@@ -102,11 +102,11 @@
  "blob_waits": [
   {
    "at": "12_search.png",
-   "waited_ms": 3,
+   "waited_ms": 92,
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 14018,
+ "cold_ms": 12957,
  "problems": [],
  "ok": true
 }

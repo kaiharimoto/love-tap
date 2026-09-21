@@ -10,55 +10,55 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3122
+   "ms": 5084
   },
   {
    "do": "wait",
-   "ms": 1807
+   "ms": 1803
   },
   {
    "do": "goTo",
-   "ms": 3919
+   "ms": 3565
   },
   {
    "do": "wait",
-   "ms": 1304
+   "ms": 1302
   },
   {
    "do": "openCorner",
-   "ms": 1723
+   "ms": 2083
   },
   {
    "do": "frames",
-   "ms": 73003
+   "ms": 76234
   },
   {
    "do": "sendFeeling",
-   "ms": 1471
+   "ms": 2416
   },
   {
    "do": "frames",
-   "ms": 151949
+   "ms": 154914
   },
   {
    "do": "sendFeeling",
-   "ms": 1372
+   "ms": 1354
   },
   {
    "do": "frames",
-   "ms": 243288
+   "ms": 249725
   },
   {
    "do": "openCorner",
-   "ms": 1113
+   "ms": 1147
   },
   {
    "do": "frames",
-   "ms": 64087
+   "ms": 66540
   },
   {
    "do": "report",
-   "ms": 439
+   "ms": 430
   }
  ],
  "shots": [
@@ -179,25 +179,25 @@
   {
    "region": 1,
    "visible": [
-    "0001M4GW48FEW3M67XKAZT5051",
-    "0001M4ZQQ0H0PPVTKMMQEE268D",
-    "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M02CDNKZD17AYTKFKH",
-    "0001MCJ1M02CDNKZD17AYTKFKJ"
+    "01M1M4GW48FEW3M67XKAZT5051",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D",
+    "01M1M59VY0YA13H9M86HTA6XNP",
+    "01M1MCJ1M02CDNKZD17AYTKFKH",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ"
    ],
    "tears": {
-    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M02CDNKZD17AYTKFKH": "tear_035",
-    "0001MCJ1M02CDNKZD17AYTKFKJ": "tear_055"
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_031",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
+    "01M1M59VY0YA13H9M86HTA6XNP": "tear_013",
+    "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_035",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_055"
    },
    "stocks": {
-    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01",
-    "0001MCJ1M02CDNKZD17AYTKFKH": "looseleaf_03",
-    "0001MCJ1M02CDNKZD17AYTKFKJ": "legal_02"
+    "01M1M4GW48FEW3M67XKAZT5051": "lined_02",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
+    "01M1M59VY0YA13H9M86HTA6XNP": "graph_02",
+    "01M1MCJ1M02CDNKZD17AYTKFKH": "lined_04",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ": "legal_01"
    },
    "scroll": {
     "first": 8384,
@@ -249,7 +249,7 @@
   }
  ],
  "blob_waits": [],
- "cold_ms": 13460,
+ "cold_ms": 14044,
  "problems": [],
  "ok": true
 }

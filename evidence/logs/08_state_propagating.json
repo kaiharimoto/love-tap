@@ -10,11 +10,11 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2305
+   "ms": 2304
   },
   {
    "do": "pair",
-   "ms": 1086
+   "ms": 1117
   },
   {
    "do": "wait",
@@ -22,23 +22,15 @@
   },
   {
    "do": "goTo",
-   "ms": 1329
+   "ms": 1847
   },
   {
    "do": "wait",
-   "ms": 1703
+   "ms": 1707
   },
   {
    "do": "frames",
-   "ms": 36071
-  },
-  {
-   "do": "far",
-   "ms": 502
-  },
-  {
-   "do": "frames",
-   "ms": 42357
+   "ms": 37677
   },
   {
    "do": "far",
@@ -46,15 +38,7 @@
   },
   {
    "do": "frames",
-   "ms": 266633
-  },
-  {
-   "do": "goTo",
-   "ms": 1845
-  },
-  {
-   "do": "frames",
-   "ms": 68211
+   "ms": 43801
   },
   {
    "do": "far",
@@ -62,7 +46,15 @@
   },
   {
    "do": "frames",
-   "ms": 197669
+   "ms": 272747
+  },
+  {
+   "do": "goTo",
+   "ms": 1968
+  },
+  {
+   "do": "frames",
+   "ms": 69279
   },
   {
    "do": "far",
@@ -70,11 +62,19 @@
   },
   {
    "do": "frames",
-   "ms": 183532
+   "ms": 210494
+  },
+  {
+   "do": "far",
+   "ms": 504
+  },
+  {
+   "do": "frames",
+   "ms": 195954
   },
   {
    "do": "report",
-   "ms": 507
+   "ms": 508
   }
  ],
  "shots": [
@@ -206,29 +206,29 @@
   {
    "region": 1,
    "visible": [
-    "01M31JWRZCWM8YA9BJSP3HJ8ER",
-    "01M31JY2TW3YBC8ABTT06M53DS",
-    "01M31K8C3DB9DPS6SFZTRWZB6S",
-    "01M31KEDM6XPTTQK53HCAAGGPB"
+    "01M3256GVG7NMRXB9YZK3WGXJ6",
+    "01M3257W18FBK7YY5BDXT7TCKV",
+    "01M325JCGG5H2FC8F2T02NZYE2",
+    "01M325RTJR4NVFNBBXNZWQPTHX"
    ],
    "tears": {
-    "01M31JWRZCWM8YA9BJSP3HJ8ER": "tear_001",
-    "01M31JY2TW3YBC8ABTT06M53DS": "tear_020",
-    "01M31K8C3DB9DPS6SFZTRWZB6S": "tear_043",
-    "01M31KEDM6XPTTQK53HCAAGGPB": "tear_005"
+    "01M3256GVG7NMRXB9YZK3WGXJ6": "tear_001",
+    "01M3257W18FBK7YY5BDXT7TCKV": "tear_020",
+    "01M325JCGG5H2FC8F2T02NZYE2": "tear_043",
+    "01M325RTJR4NVFNBBXNZWQPTHX": "tear_005"
    },
    "stocks": {
-    "01M31JWRZCWM8YA9BJSP3HJ8ER": "receipt_01",
-    "01M31JY2TW3YBC8ABTT06M53DS": "graph_04",
-    "01M31K8C3DB9DPS6SFZTRWZB6S": "receipt_01",
-    "01M31KEDM6XPTTQK53HCAAGGPB": "receipt_01"
+    "01M3256GVG7NMRXB9YZK3WGXJ6": "receipt_01",
+    "01M3257W18FBK7YY5BDXT7TCKV": "spiral_02",
+    "01M325JCGG5H2FC8F2T02NZYE2": "spiral_01",
+    "01M325RTJR4NVFNBBXNZWQPTHX": "graph_04"
    },
    "scroll": {
     "first": 0,
     "last": 3,
     "of": 4
    },
-   "now": "2026-09-21T09:09:14.660Z",
+   "now": "2026-09-21T14:29:42.372Z",
    "driven_ms": 5712,
    "seed": 20260903,
    "events": 6,
@@ -273,7 +273,7 @@
   }
  ],
  "blob_waits": [],
- "cold_ms": 1590,
+ "cold_ms": 1460,
  "problems": [],
  "ok": true
 }

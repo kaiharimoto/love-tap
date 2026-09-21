@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5780
+   "ms": 3232
   },
   {
    "do": "wait",
@@ -18,7 +18,7 @@
   },
   {
    "do": "scrollTo",
-   "ms": 3271
+   "ms": 5204
   },
   {
    "do": "wait",
@@ -26,27 +26,27 @@
   },
   {
    "do": "stage",
-   "ms": 3459
+   "ms": 4576
   },
   {
    "do": "wait",
-   "ms": 1603
+   "ms": 1604
   },
   {
    "do": "partnerTyping",
-   "ms": 2059
+   "ms": 1831
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1103
   },
   {
    "do": "shot",
-   "ms": 4182
+   "ms": 4391
   },
   {
    "do": "report",
-   "ms": 759
+   "ms": 720
   }
  ],
  "shots": [
@@ -61,35 +61,35 @@
   {
    "region": 1,
    "visible": [
-    "0001M4GW48FEW3M67XKAZT5051",
-    "0001M4ZQQ0H0PPVTKMMQEE268D",
-    "0001M59VY0YA13H9M86HTA6XNP",
-    "0001MCJ1M02CDNKZD17AYTKFKH",
-    "0001MCJ1M02CDNKZD17AYTKFKJ",
-    "0001MCJ1M02CDNKZD17AYTKFKK",
-    "0001MCJ1M02CDNKZD17AYTKFKM"
+    "01M1M4GW48FEW3M67XKAZT5051",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D",
+    "01M1M59VY0YA13H9M86HTA6XNP",
+    "01M1MCJ1M02CDNKZD17AYTKFKH",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ",
+    "01M1MCJ1M02CDNKZD17AYTKFKK",
+    "01M1MCJ1M02CDNKZD17AYTKFKM"
    ],
    "tears": {
-    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "0001MCJ1M02CDNKZD17AYTKFKH": "tear_035",
-    "0001MCJ1M02CDNKZD17AYTKFKJ": "tear_055",
-    "0001MCJ1M02CDNKZD17AYTKFKK": "tear_018",
-    "0001MCJ1M02CDNKZD17AYTKFKM": "tear_040"
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_031",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
+    "01M1M59VY0YA13H9M86HTA6XNP": "tear_013",
+    "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_035",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_055",
+    "01M1MCJ1M02CDNKZD17AYTKFKK": "tear_018",
+    "01M1MCJ1M02CDNKZD17AYTKFKM": "tear_040"
    },
    "stocks": {
-    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01",
-    "0001MCJ1M02CDNKZD17AYTKFKH": "looseleaf_03",
-    "0001MCJ1M02CDNKZD17AYTKFKJ": "legal_02",
-    "0001MCJ1M02CDNKZD17AYTKFKK": "lined_01",
-    "0001MCJ1M02CDNKZD17AYTKFKM": "looseleaf_02"
+    "01M1M4GW48FEW3M67XKAZT5051": "lined_02",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
+    "01M1M59VY0YA13H9M86HTA6XNP": "graph_02",
+    "01M1MCJ1M02CDNKZD17AYTKFKH": "lined_04",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ": "legal_01",
+    "01M1MCJ1M02CDNKZD17AYTKFKK": "lined_01",
+    "01M1MCJ1M02CDNKZD17AYTKFKM": "legal_02"
    },
    "scroll": {
     "first": 8384,
-    "last": 8390,
+    "last": 8391,
     "of": 8391
    },
    "now": "2026-09-03T19:40:00.000Z",
@@ -121,11 +121,11 @@
  "blob_waits": [
   {
    "at": "13_messenger_states.png",
-   "waited_ms": 4,
+   "waited_ms": 3,
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 13886,
+ "cold_ms": 13014,
  "problems": [],
  "ok": true
 }

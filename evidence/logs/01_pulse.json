@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4554
+   "ms": 6522
   },
   {
    "do": "wait",
-   "ms": 2105
+   "ms": 2104
   },
   {
    "do": "shot",
-   "ms": 16082
+   "ms": 10859
   },
   {
    "do": "report",
-   "ms": 1082
+   "ms": 727
   }
  ],
  "shots": [
@@ -37,28 +37,28 @@
   {
    "region": 0,
    "visible": [
-    "0001M3AY8G83A3FBSRB1Y7W78Q",
-    "0001M3F41R2APQC59QKBMZK4XF",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF",
-    "0001M4GW48FEW3M67XKAZT5051",
-    "0001M4ZQQ0H0PPVTKMMQEE268D",
-    "0001M59VY0YA13H9M86HTA6XNP"
+    "01M1M3AY8G83A3FBSRB1Y7W78Q",
+    "01M1M3F41R2APQC59QKBMZK4XF",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF",
+    "01M1M4GW48FEW3M67XKAZT5051",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D",
+    "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
-    "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
-    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_047",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_031",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
+    "01M1M59VY0YA13H9M86HTA6XNP": "tear_013"
    },
    "stocks": {
-    "0001M3AY8G83A3FBSRB1Y7W78Q": "graph_02",
-    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_02",
-    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "receipt_01",
-    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
-    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
-    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01"
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "receipt_01",
+    "01M1M3F41R2APQC59QKBMZK4XF": "lined_01",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "graph_02",
+    "01M1M4GW48FEW3M67XKAZT5051": "lined_02",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
+    "01M1M59VY0YA13H9M86HTA6XNP": "graph_02"
    },
    "scroll": {
     "first": 8381,
@@ -94,11 +94,11 @@
  "blob_waits": [
   {
    "at": "01_pulse.png",
-   "waited_ms": 12038,
+   "waited_ms": 6256,
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 14581,
+ "cold_ms": 14549,
  "problems": [],
  "ok": true
 }

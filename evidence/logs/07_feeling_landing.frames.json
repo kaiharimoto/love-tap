@@ -3,43 +3,38 @@
  "frames": 384,
  "fps": 60.0,
  "seconds": 6.4,
- "mean_change_per_frame": 0.01594,
- "repeated_frames": 34,
- "repeated_fraction": 0.089,
+ "mean_change_per_frame": 0.01626,
+ "repeated_frames": 35,
+ "repeated_fraction": 0.091,
  "longest_still_run": 10,
  "repeated_at": [
-  4,
-  9,
-  15,
-  19,
+  3,
+  23,
+  25,
   29,
-  140,
   141,
-  192,
-  269,
-  270,
-  271,
-  272
+  142,
+  143,
+  144,
+  145,
+  146,
+  275,
+  276
  ],
  "still_runs": [
   {
-   "from": 4,
-   "to": 4,
+   "from": 3,
+   "to": 3,
    "len": 1
   },
   {
-   "from": 9,
-   "to": 9,
+   "from": 23,
+   "to": 23,
    "len": 1
   },
   {
-   "from": 15,
-   "to": 15,
-   "len": 1
-  },
-  {
-   "from": 19,
-   "to": 19,
+   "from": 25,
+   "to": 25,
    "len": 1
   },
   {
@@ -48,38 +43,28 @@
    "len": 1
   },
   {
-   "from": 140,
-   "to": 141,
-   "len": 2
-  },
-  {
-   "from": 192,
-   "to": 192,
-   "len": 1
-  },
-  {
-   "from": 269,
-   "to": 273,
-   "len": 5
-  },
-  {
-   "from": 289,
-   "to": 294,
+   "from": 141,
+   "to": 146,
    "len": 6
   },
   {
-   "from": 308,
-   "to": 317,
+   "from": 275,
+   "to": 280,
+   "len": 6
+  },
+  {
+   "from": 294,
+   "to": 303,
    "len": 10
   },
   {
-   "from": 353,
-   "to": 353,
-   "len": 1
+   "from": 313,
+   "to": 317,
+   "len": 5
   },
   {
-   "from": 373,
-   "to": 373,
+   "from": 358,
+   "to": 358,
    "len": 1
   },
   {

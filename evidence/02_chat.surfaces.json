@@ -19,22 +19,22 @@
   ]
  },
  {
-  "asset": "assets/tears/tear_048_shadow.webp",
+  "asset": "assets/tears/tear_009_shadow.webp",
   "src": [
    1024,
-   753
+   652
   ],
   "drawn": [
    1380,
-   186
+   244
   ],
   "scale": 1.348,
   "fit": "fill",
   "rect": [
    -143,
-   -10,
-   1726,
-   242
+   -18,
+   1727,
+   316
   ]
  },
  {
@@ -45,15 +45,15 @@
   ],
   "drawn": [
    1380,
-   186
+   244
   ],
   "scale": 1.286,
   "fit": "cover",
   "rect": [
    -109,
    13,
-   1657,
-   233
+   1658,
+   303
   ]
  },
  {
@@ -149,14 +149,14 @@
   "scale": 1.069,
   "fit": "fill",
   "rect": [
-   -4,
-   507,
-   1370,
-   770
+   -7,
+   501,
+   1377,
+   783
   ]
  },
  {
-  "asset": "assets/paper/lined_02.webp",
+  "asset": "assets/paper/spiral_03.webp",
   "src": [
    1073,
    1500
@@ -168,31 +168,71 @@
   "scale": 1.02,
   "fit": "cover",
   "rect": [
-   100,
-   545,
-   1260,
-   709
+   87,
+   523,
+   1267,
+   720
   ]
  },
  {
-  "asset": "assets/tears/tear_055_shadow.webp",
+  "asset": "assets/tears/tear_039_shadow.webp",
   "src": [
    1024,
-   767
+   1000
   ],
   "drawn": [
    1218,
-   91
+   88
   ],
   "scale": 1.189,
   "fit": "fill",
   "rect": [
    -8,
-   452,
+   454,
    1523,
-   117
+   115
   ],
-  "piece": "margin-0002XSD430JZPJA1QM314BP2W4"
+  "piece": "margin-01KPXSD430JZPJA1QM314BP2W4"
+ },
+ {
+  "asset": "assets/paper/index_02.webp",
+  "src": [
+   1500,
+   933
+  ],
+  "drawn": [
+   1218,
+   88
+  ],
+  "scale": 0.812,
+  "fit": "cover",
+  "rect": [
+   141,
+   464,
+   1462,
+   111
+  ],
+  "piece": "margin-01KPXSD430JZPJA1QM314BP2W4"
+ },
+ {
+  "asset": "assets/tears/tear_003_shadow.webp",
+  "src": [
+   1024,
+   766
+  ],
+  "drawn": [
+   1218,
+   104
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   313,
+   1523,
+   132
+  ],
+  "piece": "margin-01KPXGJRY0JDB97RZ6QCB245T2"
  },
  {
   "asset": "assets/paper/index_01.webp",
@@ -202,57 +242,17 @@
   ],
   "drawn": [
    1218,
-   91
+   104
   ],
   "scale": 0.812,
   "fit": "cover",
   "rect": [
-   98,
-   456,
+   115,
+   314,
    1462,
-   113
+   127
   ],
-  "piece": "margin-0002XSD430JZPJA1QM314BP2W4"
- },
- {
-  "asset": "assets/tears/tear_007_shadow.webp",
-  "src": [
-   946,
-   1024
-  ],
-  "drawn": [
-   1218,
-   89
-  ],
-  "scale": 1.288,
-  "fit": "fill",
-  "rect": [
-   -8,
-   329,
-   1523,
-   111
-  ],
-  "piece": "margin-0002XGJRY0JDB97RZ6QCB245T2"
- },
- {
-  "asset": "assets/paper/lined_01.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   89
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   25,
-   327,
-   1462,
-   106
-  ],
-  "piece": "margin-0002XGJRY0JDB97RZ6QCB245T2"
+  "piece": "margin-01KPXGJRY0JDB97RZ6QCB245T2"
  },
  {
   "asset": "assets/tears/tear_011_shadow.webp",
@@ -267,14 +267,14 @@
   "scale": 1.069,
   "fit": "fill",
   "rect": [
-   74,
-   -311,
-   1370,
-   692
+   71,
+   -330,
+   1377,
+   705
   ]
  },
  {
-  "asset": "assets/paper/looseleaf_02.webp",
+  "asset": "assets/paper/lined_02.webp",
   "src": [
    1073,
    1500
@@ -286,10 +286,10 @@
   "scale": 1.02,
   "fit": "cover",
   "rect": [
-   83,
-   -278,
-   1261,
-   637
+   182,
+   -290,
+   1267,
+   649
   ]
  },
  {
@@ -305,10 +305,10 @@
   "scale": 0.329,
   "fit": "contain",
   "rect": [
-   974,
-   36,
-   444,
-   444
+   977,
+   20,
+   442,
+   442
   ]
  },
  {
@@ -324,462 +324,31 @@
   "scale": 0.329,
   "fit": "contain",
   "rect": [
-   974,
-   36,
-   444,
-   444
+   977,
+   20,
+   442,
+   442
   ]
  },
  {
-  "asset": "assets/tears/tear_001_shadow.webp",
+  "asset": "assets/tears/tear_043_shadow.webp",
   "src": [
    1024,
-   578
+   801
   ],
   "drawn": [
    1218,
-   151
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -9,
-   -443,
-   1523,
-   194
-  ],
-  "piece": "margin-0002XCHP2G1EREAEXQG9V0YQRK"
- },
- {
-  "asset": "assets/paper/looseleaf_04.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   151
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   134,
-   -449,
-   1462,
-   186
-  ],
-  "piece": "margin-0002XCHP2G1EREAEXQG9V0YQRK"
- },
- {
-  "asset": "assets/tears/tear_031_shadow.webp",
-  "src": [
-   1024,
-   929
-  ],
-  "drawn": [
-   1218,
-   90
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -8,
-   -559,
-   1523,
    115
   ],
-  "piece": "margin-0002WNBNY04FJ499Z82AQD9RXZ"
- },
- {
-  "asset": "assets/paper/index_01.webp",
-  "src": [
-   1500,
-   933
-  ],
-  "drawn": [
-   1218,
-   90
-  ],
-  "scale": 0.812,
-  "fit": "cover",
-  "rect": [
-   134,
-   -549,
-   1462,
-   111
-  ],
-  "piece": "margin-0002WNBNY04FJ499Z82AQD9RXZ"
- },
- {
-  "asset": "assets/tears/tear_045_shadow.webp",
-  "src": [
-   1024,
-   838
-  ],
-  "drawn": [
-   1218,
-   102
-  ],
   "scale": 1.189,
   "fit": "fill",
   "rect": [
    -8,
-   -699,
+   -412,
    1523,
-   131
+   144
   ],
-  "piece": "margin-0002WMGMPG94MD60NR9ZTXPNRJ"
- },
- {
-  "asset": "assets/paper/looseleaf_04.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   102
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   5,
-   -699,
-   1462,
-   125
-  ],
-  "piece": "margin-0002WMGMPG94MD60NR9ZTXPNRJ"
- },
- {
-  "asset": "assets/tears/tear_016_shadow.webp",
-  "src": [
-   1024,
-   1001
-  ],
-  "drawn": [
-   1218,
-   97
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -8,
-   -831,
-   1523,
-   125
-  ],
-  "piece": "margin-0002WGTMARH3GCFDSTCTG87B2X"
- },
- {
-  "asset": "assets/paper/lined_03.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   97
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   122,
-   -838,
-   1462,
-   120
-  ],
-  "piece": "margin-0002WGTMARH3GCFDSTCTG87B2X"
- },
- {
-  "asset": "assets/tears/tear_021_shadow.webp",
-  "src": [
-   1024,
-   744
-  ],
-  "drawn": [
-   1094,
-   798
-  ],
-  "scale": 1.073,
-  "fit": "fill",
-  "rect": [
-   -4,
-   -1746,
-   1369,
-   999
-  ]
- },
- {
-  "asset": "assets/paper/lined_02.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1094,
-   798
-  ],
-  "scale": 1.02,
-  "fit": "cover",
-  "rect": [
-   28,
-   -1731,
-   1260,
-   919
-  ]
- },
- {
-  "asset": "assets/tears/tear_002_shadow.webp",
-  "src": [
-   1024,
-   978
-  ],
-  "drawn": [
-   1094,
-   619
-  ],
-  "scale": 1.069,
-  "fit": "fill",
-  "rect": [
-   -4,
-   -2368,
-   1371,
-   778
-  ]
- },
- {
-  "asset": "assets/paper/graph_03.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1094,
-   619
-  ],
-  "scale": 1.02,
-  "fit": "cover",
-  "rect": [
-   19,
-   -2354,
-   1261,
-   716
-  ]
- },
- {
-  "asset": "assets/tears/tear_015_shadow.webp",
-  "src": [
-   1024,
-   596
-  ],
-  "drawn": [
-   1218,
-   94
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -8,
-   -2424,
-   1523,
-   118
-  ],
-  "piece": "margin-0002VBA59G5C7M6892M0WA6BF1"
- },
- {
-  "asset": "assets/paper/looseleaf_02.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   94
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   -53,
-   -2415,
-   1462,
-   113
-  ],
-  "piece": "margin-0002VBA59G5C7M6892M0WA6BF1"
- },
- {
-  "asset": "assets/tears/tear_054_shadow.webp",
-  "src": [
-   675,
-   1024
-  ],
-  "drawn": [
-   1218,
-   89
-  ],
-  "scale": 1.804,
-  "fit": "fill",
-  "rect": [
-   -8,
-   -2548,
-   1523,
-   111
-  ],
-  "piece": "margin-0002V3A8T8TA4CKWWHNDVHH6VV"
- },
- {
-  "asset": "assets/paper/index_02.webp",
-  "src": [
-   1500,
-   933
-  ],
-  "drawn": [
-   1218,
-   89
-  ],
-  "scale": 0.812,
-  "fit": "cover",
-  "rect": [
-   -56,
-   -2544,
-   1462,
-   107
-  ],
-  "piece": "margin-0002V3A8T8TA4CKWWHNDVHH6VV"
- },
- {
-  "asset": "assets/tears/tear_054_shadow.webp",
-  "src": [
-   675,
-   1024
-  ],
-  "drawn": [
-   1094,
-   397
-  ],
-  "scale": 1.621,
-  "fit": "fill",
-  "rect": [
-   74,
-   -3015,
-   1370,
-   500
-  ]
- },
- {
-  "asset": "assets/paper/looseleaf_03.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1094,
-   397
-  ],
-  "scale": 1.02,
-  "fit": "cover",
-  "rect": [
-   78,
-   -2978,
-   1260,
-   460
-  ]
- },
- {
-  "asset": "assets/tears/tear_048_shadow.webp",
-  "src": [
-   1024,
-   753
-  ],
-  "drawn": [
-   1218,
-   98
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -8,
-   -3105,
-   1523,
-   125
-  ],
-  "piece": "margin-0002V1KKSGZBD11H39SVDW9WD5"
- },
- {
-  "asset": "assets/paper/lined_03.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   98
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   49,
-   -3107,
-   1462,
-   120
-  ],
-  "piece": "margin-0002V1KKSGZBD11H39SVDW9WD5"
- },
- {
-  "asset": "assets/tears/tear_012_shadow.webp",
-  "src": [
-   1024,
-   732
-  ],
-  "drawn": [
-   1094,
-   509
-  ],
-  "scale": 1.069,
-  "fit": "fill",
-  "rect": [
-   -3,
-   -3695,
-   1368,
-   637
-  ]
- },
- {
-  "asset": "assets/paper/spiral_02.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1094,
-   509
-  ],
-  "scale": 1.02,
-  "fit": "cover",
-  "rect": [
-   -1,
-   -3688,
-   1259,
-   586
-  ]
- },
- {
-  "asset": "assets/tears/tear_050_shadow.webp",
-  "src": [
-   1024,
-   749
-  ],
-  "drawn": [
-   1094,
-   415
-  ],
-  "scale": 1.069,
-  "fit": "fill",
-  "rect": [
-   74,
-   -4126,
-   1371,
-   526
-  ]
+  "piece": "margin-01KPXCHP2G1EREAEXQG9V0YQRK"
  },
  {
   "asset": "assets/paper/lined_04.webp",
@@ -788,215 +357,18 @@
    1500
   ],
   "drawn": [
-   1094,
-   415
-  ],
-  "scale": 1.02,
-  "fit": "cover",
-  "rect": [
-   55,
-   -4082,
-   1261,
-   484
-  ]
- },
- {
-  "asset": "assets/tears/tear_029_shadow.webp",
-  "src": [
-   1024,
-   528
-  ],
-  "drawn": [
-   1094,
-   399
-  ],
-  "scale": 1.069,
-  "fit": "fill",
-  "rect": [
-   -4,
-   -4547,
-   1371,
-   506
-  ]
- },
- {
-  "asset": "assets/paper/receipt_01.webp",
-  "src": [
-   702,
-   1500
-  ],
-  "drawn": [
-   1094,
-   399
-  ],
-  "scale": 1.559,
-  "fit": "cover",
-  "rect": [
-   62,
-   -4540,
-   1261,
-   466
-  ]
- },
- {
-  "asset": "assets/tears/tear_033_shadow.webp",
-  "src": [
-   1024,
-   524
-  ],
-  "drawn": [
    1218,
-   122
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -8,
-   1213,
-   1523,
-   154
-  ],
-  "piece": "margin-0002Z36PTG84DM3V2032VH63PQ"
- },
- {
-  "asset": "assets/paper/lined_01.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   122
+   115
   ],
   "scale": 1.135,
   "fit": "cover",
   "rect": [
-   46,
-   1221,
+   -24,
+   -410,
    1462,
-   148
+   139
   ],
-  "piece": "margin-0002Z36PTG84DM3V2032VH63PQ"
- },
- {
-  "asset": "assets/tears/tear_045_shadow.webp",
-  "src": [
-   1024,
-   838
-  ],
-  "drawn": [
-   1218,
-   102
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -8,
-   1375,
-   1523,
-   127
-  ],
-  "piece": "margin-0002Z7RFVRGDZN8AP05862FM92"
- },
- {
-  "asset": "assets/paper/lined_03.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   102
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   -66,
-   1370,
-   1462,
-   122
-  ],
-  "piece": "margin-0002Z7RFVRGDZN8AP05862FM92"
- },
- {
-  "asset": "assets/tears/tear_031_shadow.webp",
-  "src": [
-   1024,
-   929
-  ],
-  "drawn": [
-   1218,
-   90
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -8,
-   1513,
-   1523,
-   114
-  ],
-  "piece": "margin-0002ZYZAC073PTHBMVK7VD9FZJ"
- },
- {
-  "asset": "assets/paper/index_01.webp",
-  "src": [
-   1500,
-   933
-  ],
-  "drawn": [
-   1218,
-   90
-  ],
-  "scale": 0.812,
-  "fit": "cover",
-  "rect": [
-   0,
-   1513,
-   1462,
-   110
-  ],
-  "piece": "margin-0002ZYZAC073PTHBMVK7VD9FZJ"
- },
- {
-  "asset": "assets/tears/tear_048_shadow.webp",
-  "src": [
-   1024,
-   753
-  ],
-  "drawn": [
-   1218,
-   98
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -8,
-   1637,
-   1523,
-   126
-  ],
-  "piece": "margin-000302YHN8N4WZA8E02GVFZ1A2"
- },
- {
-  "asset": "assets/paper/lined_01.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   98
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   -53,
-   1637,
-   1462,
-   121
-  ],
-  "piece": "margin-000302YHN8N4WZA8E02GVFZ1A2"
+  "piece": "margin-01KPXCHP2G1EREAEXQG9V0YQRK"
  },
  {
   "asset": "assets/tears/tear_023_shadow.webp",
@@ -1012,31 +384,619 @@
   "fit": "fill",
   "rect": [
    -8,
-   1772,
+   -535,
    1523,
-   116
+   115
   ],
-  "piece": "margin-00030BSV30D3VM93BBQ38H46KP"
+  "piece": "margin-01KPWNBNY04FJ499Z82AQD9RXZ"
  },
  {
-  "asset": "assets/paper/index_02.webp",
+  "asset": "assets/paper/looseleaf_04.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   89
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   46,
+   -535,
+   1462,
+   111
+  ],
+  "piece": "margin-01KPWNBNY04FJ499Z82AQD9RXZ"
+ },
+ {
+  "asset": "assets/tears/tear_055_shadow.webp",
+  "src": [
+   1024,
+   767
+  ],
+  "drawn": [
+   1218,
+   91
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   -661,
+   1523,
+   114
+  ],
+  "piece": "margin-01KPWMGMPG94MD60NR9ZTXPNRJ"
+ },
+ {
+  "asset": "assets/paper/looseleaf_03.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   91
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   54,
+   -653,
+   1462,
+   110
+  ],
+  "piece": "margin-01KPWMGMPG94MD60NR9ZTXPNRJ"
+ },
+ {
+  "asset": "assets/tears/tear_049_shadow.webp",
+  "src": [
+   1024,
+   508
+  ],
+  "drawn": [
+   1218,
+   142
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   -847,
+   1523,
+   182
+  ],
+  "piece": "margin-01KPWGTMARH3GCFDSTCTG87B2X"
+ },
+ {
+  "asset": "assets/paper/lined_04.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   142
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   15,
+   -829,
+   1462,
+   174
+  ],
+  "piece": "margin-01KPWGTMARH3GCFDSTCTG87B2X"
+ },
+ {
+  "asset": "assets/tears/tear_021_shadow.webp",
+  "src": [
+   1024,
+   744
+  ],
+  "drawn": [
+   1094,
+   798
+  ],
+  "scale": 1.073,
+  "fit": "fill",
+  "rect": [
+   -8,
+   -1763,
+   1379,
+   1013
+  ]
+ },
+ {
+  "asset": "assets/paper/spiral_02.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1094,
+   798
+  ],
+  "scale": 1.02,
+  "fit": "cover",
+  "rect": [
+   60,
+   -1732,
+   1269,
+   932
+  ]
+ },
+ {
+  "asset": "assets/tears/tear_002_shadow.webp",
+  "src": [
+   1024,
+   978
+  ],
+  "drawn": [
+   1094,
+   619
+  ],
+  "scale": 1.069,
+  "fit": "fill",
+  "rect": [
+   -7,
+   -2383,
+   1376,
+   787
+  ]
+ },
+ {
+  "asset": "assets/paper/receipt_01.webp",
+  "src": [
+   702,
+   1500
+  ],
+  "drawn": [
+   1094,
+   619
+  ],
+  "scale": 1.559,
+  "fit": "cover",
+  "rect": [
+   60,
+   -2316,
+   1266,
+   724
+  ]
+ },
+ {
+  "asset": "assets/tears/tear_012_shadow.webp",
+  "src": [
+   1024,
+   732
+  ],
+  "drawn": [
+   1218,
+   117
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -9,
+   -2462,
+   1523,
+   151
+  ],
+  "piece": "margin-01KPVBA59G5C7M6892M0WA6BF1"
+ },
+ {
+  "asset": "assets/paper/looseleaf_03.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   117
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   97,
+   -2470,
+   1462,
+   145
+  ],
+  "piece": "margin-01KPVBA59G5C7M6892M0WA6BF1"
+ },
+ {
+  "asset": "assets/tears/tear_055_shadow.webp",
+  "src": [
+   1024,
+   767
+  ],
+  "drawn": [
+   1218,
+   91
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   -2585,
+   1523,
+   117
+  ],
+  "piece": "margin-01KPV3A8T8TA4CKWWHNDVHH6VV"
+ },
+ {
+  "asset": "assets/paper/lined_01.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   91
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   129,
+   -2583,
+   1462,
+   112
+  ],
+  "piece": "margin-01KPV3A8T8TA4CKWWHNDVHH6VV"
+ },
+ {
+  "asset": "assets/tears/tear_054_shadow.webp",
+  "src": [
+   675,
+   1024
+  ],
+  "drawn": [
+   1094,
+   397
+  ],
+  "scale": 1.621,
+  "fit": "fill",
+  "rect": [
+   74,
+   -3051,
+   1370,
+   501
+  ]
+ },
+ {
+  "asset": "assets/paper/lined_01.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1094,
+   397
+  ],
+  "scale": 1.02,
+  "fit": "cover",
+  "rect": [
+   186,
+   -3033,
+   1260,
+   461
+  ]
+ },
+ {
+  "asset": "assets/tears/tear_018_shadow.webp",
+  "src": [
+   1024,
+   700
+  ],
+  "drawn": [
+   1218,
+   104
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   -3148,
+   1523,
+   134
+  ],
+  "piece": "margin-01KPV1KKSGZBD11H39SVDW9WD5"
+ },
+ {
+  "asset": "assets/paper/looseleaf_02.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   104
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   44,
+   -3149,
+   1462,
+   128
+  ],
+  "piece": "margin-01KPV1KKSGZBD11H39SVDW9WD5"
+ },
+ {
+  "asset": "assets/tears/tear_012_shadow.webp",
+  "src": [
+   1024,
+   732
+  ],
+  "drawn": [
+   1094,
+   509
+  ],
+  "scale": 1.069,
+  "fit": "fill",
+  "rect": [
+   -5,
+   -3741,
+   1373,
+   647
+  ]
+ },
+ {
+  "asset": "assets/paper/lined_04.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1094,
+   509
+  ],
+  "scale": 1.02,
+  "fit": "cover",
+  "rect": [
+   33,
+   -3716,
+   1263,
+   595
+  ]
+ },
+ {
+  "asset": "assets/tears/tear_050_shadow.webp",
+  "src": [
+   1024,
+   749
+  ],
+  "drawn": [
+   1094,
+   415
+  ],
+  "scale": 1.069,
+  "fit": "fill",
+  "rect": [
+   71,
+   -4176,
+   1377,
+   543
+  ]
+ },
+ {
+  "asset": "assets/paper/legal_02.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1094,
+   415
+  ],
+  "scale": 1.02,
+  "fit": "cover",
+  "rect": [
+   101,
+   -4142,
+   1267,
+   499
+  ]
+ },
+ {
+  "asset": "assets/tears/tear_029_shadow.webp",
+  "src": [
+   1024,
+   528
+  ],
+  "drawn": [
+   1094,
+   399
+  ],
+  "scale": 1.069,
+  "fit": "fill",
+  "rect": [
+   -5,
+   -4591,
+   1373,
+   512
+  ]
+ },
+ {
+  "asset": "assets/paper/graph_03.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1094,
+   399
+  ],
+  "scale": 1.02,
+  "fit": "cover",
+  "rect": [
+   78,
+   -4563,
+   1263,
+   471
+  ]
+ },
+ {
+  "asset": "assets/tears/tear_029_shadow.webp",
+  "src": [
+   1024,
+   528
+  ],
+  "drawn": [
+   1218,
+   118
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   1213,
+   1523,
+   151
+  ],
+  "piece": "margin-01KPZ36PTG84DM3V2032VH63PQ"
+ },
+ {
+  "asset": "assets/paper/index_01.webp",
   "src": [
    1500,
    933
   ],
   "drawn": [
    1218,
-   89
+   118
   ],
   "scale": 0.812,
   "fit": "cover",
   "rect": [
-   73,
-   1778,
+   -29,
+   1219,
    1462,
-   111
+   145
   ],
-  "piece": "margin-00030BSV30D3VM93BBQ38H46KP"
+  "piece": "margin-01KPZ36PTG84DM3V2032VH63PQ"
+ },
+ {
+  "asset": "assets/tears/tear_045_shadow.webp",
+  "src": [
+   1024,
+   838
+  ],
+  "drawn": [
+   1218,
+   102
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   1369,
+   1523,
+   132
+  ],
+  "piece": "margin-01KPZ7RFVRGDZN8AP05862FM92"
+ },
+ {
+  "asset": "assets/paper/looseleaf_01.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   102
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   -54,
+   1373,
+   1462,
+   127
+  ],
+  "piece": "margin-01KPZ7RFVRGDZN8AP05862FM92"
+ },
+ {
+  "asset": "assets/tears/tear_011_shadow.webp",
+  "src": [
+   1024,
+   1000
+  ],
+  "drawn": [
+   1218,
+   100
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   1507,
+   1523,
+   129
+  ],
+  "piece": "margin-01KPZYZAC073PTHBMVK7VD9FZJ"
+ },
+ {
+  "asset": "assets/paper/looseleaf_03.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   100
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   -66,
+   1511,
+   1462,
+   124
+  ],
+  "piece": "margin-01KPZYZAC073PTHBMVK7VD9FZJ"
+ },
+ {
+  "asset": "assets/tears/tear_054_shadow.webp",
+  "src": [
+   675,
+   1024
+  ],
+  "drawn": [
+   1218,
+   89
+  ],
+  "scale": 1.804,
+  "fit": "fill",
+  "rect": [
+   -8,
+   1643,
+   1523,
+   116
+  ],
+  "piece": "margin-01KQ02YHN8N4WZA8E02GVFZ1A2"
+ },
+ {
+  "asset": "assets/paper/lined_01.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   89
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   85,
+   1639,
+   1462,
+   112
+  ],
+  "piece": "margin-01KQ02YHN8N4WZA8E02GVFZ1A2"
  },
  {
   "asset": "assets/tears/tear_021_shadow.webp",
@@ -1052,91 +1012,11 @@
   "fit": "fill",
   "rect": [
    -8,
-   1894,
+   1764,
    1523,
-   153
+   157
   ],
-  "piece": "margin-00031QHK2RCPKYP6X898ZXQ5AW"
- },
- {
-  "asset": "assets/paper/lined_03.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   122
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   44,
-   1894,
-   1462,
-   147
-  ],
-  "piece": "margin-00031QHK2RCPKYP6X898ZXQ5AW"
- },
- {
-  "asset": "assets/tears/tear_053_shadow.webp",
-  "src": [
-   1024,
-   729
-  ],
-  "drawn": [
-   1218,
-   116
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -9,
-   2050,
-   1523,
-   151
-  ],
-  "piece": "margin-00031VV4EG3JD6KEYNCHMBCVV6"
- },
- {
-  "asset": "assets/paper/lined_02.webp",
-  "src": [
-   1073,
-   1500
-  ],
-  "drawn": [
-   1218,
-   116
-  ],
-  "scale": 1.135,
-  "fit": "cover",
-  "rect": [
-   -63,
-   2063,
-   1462,
-   145
-  ],
-  "piece": "margin-00031VV4EG3JD6KEYNCHMBCVV6"
- },
- {
-  "asset": "assets/tears/tear_044_shadow.webp",
-  "src": [
-   1024,
-   696
-  ],
-  "drawn": [
-   1218,
-   132
-  ],
-  "scale": 1.189,
-  "fit": "fill",
-  "rect": [
-   -8,
-   2201,
-   1523,
-   169
-  ],
-  "piece": "margin-00031W6AV8QJA20W2EFN30VGJC"
+  "piece": "margin-01KQ0BSV30D3VM93BBQ38H46KP"
  },
  {
   "asset": "assets/paper/index_01.webp",
@@ -1146,17 +1026,137 @@
   ],
   "drawn": [
    1218,
-   132
+   122
   ],
   "scale": 0.812,
   "fit": "cover",
   "rect": [
-   -2,
-   2210,
+   127,
+   1777,
    1462,
-   162
+   151
   ],
-  "piece": "margin-00031W6AV8QJA20W2EFN30VGJC"
+  "piece": "margin-01KQ0BSV30D3VM93BBQ38H46KP"
+ },
+ {
+  "asset": "assets/tears/tear_055_shadow.webp",
+  "src": [
+   1024,
+   767
+  ],
+  "drawn": [
+   1218,
+   91
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   1927,
+   1523,
+   116
+  ],
+  "piece": "margin-01KQ1QHK2RCPKYP6X898ZXQ5AW"
+ },
+ {
+  "asset": "assets/paper/looseleaf_04.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1218,
+   91
+  ],
+  "scale": 1.135,
+  "fit": "cover",
+  "rect": [
+   -80,
+   1926,
+   1462,
+   111
+  ],
+  "piece": "margin-01KQ1QHK2RCPKYP6X898ZXQ5AW"
+ },
+ {
+  "asset": "assets/tears/tear_029_shadow.webp",
+  "src": [
+   1024,
+   528
+  ],
+  "drawn": [
+   1218,
+   118
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   2050,
+   1523,
+   151
+  ],
+  "piece": "margin-01KQ1VV4EG3JD6KEYNCHMBCVV6"
+ },
+ {
+  "asset": "assets/paper/index_02.webp",
+  "src": [
+   1500,
+   933
+  ],
+  "drawn": [
+   1218,
+   118
+  ],
+  "scale": 0.812,
+  "fit": "cover",
+  "rect": [
+   -34,
+   2050,
+   1462,
+   145
+  ],
+  "piece": "margin-01KQ1VV4EG3JD6KEYNCHMBCVV6"
+ },
+ {
+  "asset": "assets/tears/tear_009_shadow.webp",
+  "src": [
+   1024,
+   652
+  ],
+  "drawn": [
+   1218,
+   129
+  ],
+  "scale": 1.189,
+  "fit": "fill",
+  "rect": [
+   -8,
+   2204,
+   1523,
+   165
+  ],
+  "piece": "margin-01KQ1W6AV8QJA20W2EFN30VGJC"
+ },
+ {
+  "asset": "assets/paper/index_02.webp",
+  "src": [
+   1500,
+   933
+  ],
+  "drawn": [
+   1218,
+   129
+  ],
+  "scale": 0.812,
+  "fit": "cover",
+  "rect": [
+   17,
+   2197,
+   1462,
+   158
+  ],
+  "piece": "margin-01KQ1W6AV8QJA20W2EFN30VGJC"
  },
  {
   "asset": "assets/tears/tear_032_shadow.webp",
@@ -1172,28 +1172,28 @@
   "fit": "fill",
   "rect": [
    -6,
-   2286,
-   1373,
-   919
+   2285,
+   1374,
+   921
   ]
  },
  {
-  "asset": "assets/paper/receipt_01.webp",
+  "asset": "assets/paper/graph_04.webp",
   "src": [
-   702,
+   1073,
    1500
   ],
   "drawn": [
    1094,
    729
   ],
-  "scale": 1.559,
+  "scale": 1.02,
   "fit": "cover",
   "rect": [
-   101,
-   2365,
-   1263,
-   845
+   103,
+   2295,
+   1264,
+   847
   ]
  },
  {
@@ -1210,7 +1210,7 @@
   "fit": "contain",
   "rect": [
    173,
-   2516,
+   2512,
    452,
    452
   ]
@@ -1229,50 +1229,50 @@
   "fit": "contain",
   "rect": [
    173,
-   2516,
+   2512,
    452,
    452
   ]
  },
  {
-  "asset": "assets/tears/tear_007_shadow.webp",
+  "asset": "assets/tears/tear_036_shadow.webp",
   "src": [
-   946,
-   1024
+   1024,
+   571
   ],
   "drawn": [
    1218,
-   89
+   126
   ],
-  "scale": 1.288,
+  "scale": 1.189,
   "fit": "fill",
   "rect": [
    -8,
-   3128,
+   3122,
    1523,
-   113
+   162
   ],
-  "piece": "margin-00032Y6J30EJ5T2FRA0CQKWW68"
+  "piece": "margin-01KQ2Y6J30EJ5T2FRA0CQKWW68"
  },
  {
-  "asset": "assets/paper/lined_01.webp",
+  "asset": "assets/paper/looseleaf_02.webp",
   "src": [
    1073,
    1500
   ],
   "drawn": [
    1218,
-   89
+   126
   ],
   "scale": 1.135,
   "fit": "cover",
   "rect": [
-   -36,
-   3128,
+   -95,
+   3127,
    1462,
-   108
+   156
   ],
-  "piece": "margin-00032Y6J30EJ5T2FRA0CQKWW68"
+  "piece": "margin-01KQ2Y6J30EJ5T2FRA0CQKWW68"
  },
  {
   "asset": "assets/tears/tear_014_shadow.webp",
@@ -1287,14 +1287,14 @@
   "scale": 2.151,
   "fit": "fill",
   "rect": [
-   74,
-   3148,
-   1370,
-   1097
+   70,
+   3181,
+   1377,
+   1106
   ]
  },
  {
-  "asset": "assets/paper/legal_01.webp",
+  "asset": "assets/paper/lined_03.webp",
   "src": [
    1073,
    1500
@@ -1306,10 +1306,10 @@
   "scale": 1.02,
   "fit": "cover",
   "rect": [
-   116,
-   3156,
-   1260,
-   1009
+   89,
+   3228,
+   1267,
+   1017
   ]
  },
  {
@@ -1325,14 +1325,14 @@
   "scale": 2.731,
   "fit": "fill",
   "rect": [
-   60,
-   3953,
-   1397,
-   1970
+   68,
+   3996,
+   1383,
+   1959
   ]
  },
  {
-  "asset": "assets/paper/legal_01.webp",
+  "asset": "assets/paper/looseleaf_01.webp",
   "src": [
    1073,
    1500
@@ -1344,10 +1344,10 @@
   "scale": 1.04,
   "fit": "cover",
   "rect": [
-   60,
-   4028,
-   1286,
-   1812
+   181,
+   4191,
+   1272,
+   1803
   ]
  },
  {
@@ -1363,14 +1363,14 @@
   "scale": 1,
   "fit": "cover",
   "rect": [
-   350,
-   4497,
-   871,
-   659
+   355,
+   4538,
+   866,
+   652
   ]
  },
  {
-  "asset": "assets/bits/glue_01.webp",
+  "asset": "assets/bits/pin_01_dusk_shadow.webp",
   "src": [
    420,
    420
@@ -1382,10 +1382,10 @@
   "scale": 0.429,
   "fit": "",
   "rect": [
-   288,
-   4453,
-   245,
-   245
+   297,
+   4483,
+   244,
+   244
   ]
  },
  {
@@ -1401,14 +1401,14 @@
   "scale": 1.069,
   "fit": "fill",
   "rect": [
-   71,
-   5670,
-   1377,
-   633
+   72,
+   5711,
+   1374,
+   625
   ]
  },
  {
-  "asset": "assets/paper/lined_02.webp",
+  "asset": "assets/paper/legal_01.webp",
   "src": [
    1073,
    1500
@@ -1420,91 +1420,91 @@
   "scale": 1.02,
   "fit": "cover",
   "rect": [
-   114,
-   5713,
-   1267,
-   582
+   198,
+   5731,
+   1264,
+   575
   ]
  },
  {
-  "asset": "assets/tears/tear_055_shadow.webp",
+  "asset": "assets/tears/tear_044_shadow.webp",
   "src": [
    1024,
-   767
+   696
   ],
   "drawn": [
    1218,
-   91
+   132
   ],
   "scale": 1.189,
   "fit": "fill",
   "rect": [
    -8,
-   6247,
+   6282,
    1523,
-   120
+   165
   ],
-  "piece": "margin-00034AJ2WRKG8VH5M9JFWR9RWM"
+  "piece": "margin-01KQ4AJ2WRKG8VH5M9JFWR9RWM"
  },
  {
-  "asset": "assets/paper/index_02.webp",
+  "asset": "assets/paper/looseleaf_01.webp",
   "src": [
-   1500,
-   933
+   1073,
+   1500
   ],
   "drawn": [
    1218,
-   91
+   132
   ],
-  "scale": 0.812,
+  "scale": 1.135,
   "fit": "cover",
   "rect": [
-   -78,
-   6245,
+   -5,
+   6294,
    1462,
-   115
+   158
   ],
-  "piece": "margin-00034AJ2WRKG8VH5M9JFWR9RWM"
+  "piece": "margin-01KQ4AJ2WRKG8VH5M9JFWR9RWM"
  },
  {
-  "asset": "assets/tears/tear_012_shadow.webp",
+  "asset": "assets/tears/tear_024_shadow.webp",
   "src": [
    1024,
-   732
+   843
   ],
   "drawn": [
    1218,
-   117
+   110
   ],
   "scale": 1.189,
   "fit": "fill",
   "rect": [
-   -9,
-   6371,
+   -8,
+   6451,
    1523,
-   152
+   141
   ],
-  "piece": "margin-00034AS1HRE6E7BK8MWVHN3PQS"
+  "piece": "margin-01KQ4AS1HRE6E7BK8MWVHN3PQS"
  },
  {
-  "asset": "assets/paper/index_02.webp",
+  "asset": "assets/paper/index_01.webp",
   "src": [
    1500,
    933
   ],
   "drawn": [
    1218,
-   117
+   110
   ],
   "scale": 0.812,
   "fit": "cover",
   "rect": [
-   10,
-   6365,
+   59,
+   6453,
    1462,
-   145
+   135
   ],
-  "piece": "margin-00034AS1HRE6E7BK8MWVHN3PQS"
+  "piece": "margin-01KQ4AS1HRE6E7BK8MWVHN3PQS"
  },
  {
   "asset": "assets/tears/tear_004_shadow.webp",
@@ -1519,29 +1519,29 @@
   "scale": 1.069,
   "fit": "fill",
   "rect": [
-   -4,
-   6466,
-   1370,
-   678
+   -5,
+   6535,
+   1372,
+   681
   ]
  },
  {
-  "asset": "assets/paper/graph_03.webp",
+  "asset": "assets/paper/receipt_01.webp",
   "src": [
-   1073,
+   702,
    1500
   ],
   "drawn": [
    1094,
    539
   ],
-  "scale": 1.02,
+  "scale": 1.559,
   "fit": "cover",
   "rect": [
-   33,
-   6514,
-   1261,
-   624
+   49,
+   6593,
+   1262,
+   626
   ]
  },
  {
@@ -1557,14 +1557,14 @@
   "scale": 1.069,
   "fit": "fill",
   "rect": [
-   74,
-   7034,
-   1371,
-   619
+   70,
+   7095,
+   1378,
+   638
   ]
  },
  {
-  "asset": "assets/paper/lined_04.webp",
+  "asset": "assets/paper/lined_03.webp",
   "src": [
    1073,
    1500
@@ -1576,10 +1576,10 @@
   "scale": 1.02,
   "fit": "cover",
   "rect": [
-   145,
-   7075,
-   1261,
-   570
+   93,
+   7146,
+   1268,
+   587
   ]
  },
  {

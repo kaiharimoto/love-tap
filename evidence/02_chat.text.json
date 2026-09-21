@@ -5,21 +5,21 @@
   3120
  ],
  "dpr": 3,
- "declared": 33,
+ "declared": 32,
  "offscreen": 0,
  "clipped": 0,
  "runs": [
   {
    "rect": [
-    120,
-    55,
+    123,
+    77,
     1059,
     79
    ],
    "lines": [
     [
-     121,
-     59,
+     123,
+     81,
      1059,
      71
     ]
@@ -34,15 +34,15 @@
   },
   {
    "rect": [
-    121,
-    138,
+    123,
+    160,
     236,
     41
    ],
    "lines": [
     [
-     123,
-     140,
+     125,
+     162,
      236,
      39
     ]
@@ -51,21 +51,21 @@
    "px": 30,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "TRAVELLING",
    "chars": 10
   },
   {
    "rect": [
-    380,
-    141,
+    383,
+    163,
     89,
     34
    ],
    "lines": [
     [
-     383,
-     140,
+     385,
+     162,
      89,
      35
     ]
@@ -74,21 +74,21 @@
    "px": 27,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "NEED",
    "chars": 4
   },
   {
    "rect": [
-    559,
-    139,
+    561,
+    161,
     139,
     34
    ],
    "lines": [
     [
-     561,
-     138,
+     564,
+     160,
      139,
      35
     ]
@@ -97,7 +97,7 @@
    "px": 27,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "ENERGY",
    "chars": 6
   },
@@ -120,79 +120,79 @@
    "px": 39,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "search",
    "chars": 6
   },
   {
    "rect": [
-    299,
-    1072,
-    211,
-    58
+    297,
+    1068,
+    212,
+    60
    ],
    "lines": [
     [
-     299,
-     1076,
-     211,
-     50
+     297,
+     1073,
+     212,
+     52
     ]
    ],
    "points": 13,
    "px": 39,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "goodnight",
    "chars": 9
   },
   {
    "rect": [
-    222,
-    482,
+    226,
+    481,
     391,
-    58
+    59
    ],
    "lines": [
     [
-     223,
+     226,
      486,
      391,
-     50
+     51
     ]
    ],
    "points": 13,
    "px": 39,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "you is heads down",
    "chars": 17
   },
   {
    "rect": [
-    637,
-    484,
+    640,
+    485,
     327,
-    52
+    53
    ],
    "lines": [
     [
-     637,
-     489,
+     641,
+     490,
      218,
      44
     ],
     [
-     855,
-     490,
+     858,
+     492,
      10,
      41
     ],
     [
-     865,
-     489,
+     868,
+     491,
      100,
      44
     ]
@@ -201,79 +201,44 @@
    "px": 34.5,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "Thu 23 Apr · 18:25",
    "chars": 18
   },
   {
    "rect": [
-    234,
+    271,
     402,
     294,
-    11
+    2
    ],
    "lines": [
     [
-     234,
+     271,
      402,
      294,
-     8
+     2
     ]
    ],
    "points": 13,
    "px": 39,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "noor went out",
    "chars": 13
   },
   {
    "rect": [
-    551,
-    402,
-    330,
-    8
-   ],
-   "lines": [
-    [
-     551,
-     402,
-     218,
-     5
-    ],
-    [
-     769,
-     402,
-     10,
-     3
-    ],
-    [
-     779,
-     402,
-     102,
-     5
-    ]
-   ],
-   "points": 11.5,
-   "px": 34.5,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "Thu 23 Apr · 15:50",
-   "chars": 18
-  },
-  {
-   "rect": [
-    219,
-    1266,
+    215,
+    1264,
     294,
     58
    ],
    "lines": [
     [
-     219,
-     1270,
+     215,
+     1268,
      294,
      50
     ]
@@ -282,33 +247,33 @@
    "px": 39,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "noor went out",
    "chars": 13
   },
   {
    "rect": [
-    536,
-    1268,
+    532,
+    1266,
     320,
     52
    ],
    "lines": [
     [
-     537,
-     1273,
+     532,
+     1271,
      203,
      44
     ],
     [
-     739,
-     1274,
+     735,
+     1272,
      10,
      41
     ],
     [
-     749,
-     1273,
+     745,
+     1271,
      107,
      44
     ]
@@ -317,312 +282,22 @@
    "px": 34.5,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "Fri 24 Apr · 06:35",
    "chars": 18
   },
   {
    "rect": [
     221,
-    1409,
-    509,
-    58
-   ],
-   "lines": [
-    [
-     221,
-     1414,
-     509,
-     49
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "noor's phone is on silent",
-   "chars": 25
-  },
-  {
-   "rect": [
-    754,
-    1412,
-    320,
-    52
-   ],
-   "lines": [
-    [
-     754,
-     1417,
-     203,
-     44
-    ],
-    [
-     957,
-     1417,
-     10,
-     41
-    ],
-    [
-     966,
-     1417,
-     108,
-     44
-    ]
-   ],
-   "points": 11.5,
-   "px": 34.5,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "Fri 24 Apr · 07:55",
-   "chars": 18
-  },
-  {
-   "rect": [
-    222,
-    1540,
-    541,
-    58
-   ],
-   "lines": [
-    [
-     223,
-     1545,
-     541,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "noor's phone is on normal",
-   "chars": 25
-  },
-  {
-   "rect": [
-    787,
-    1544,
-    321,
-    52
-   ],
-   "lines": [
-    [
-     788,
-     1549,
-     203,
-     44
-    ],
-    [
-     990,
-     1550,
-     10,
-     41
-    ],
-    [
-     1000,
-     1549,
-     108,
-     44
-    ]
-   ],
-   "points": 11.5,
-   "px": 34.5,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "Fri 24 Apr · 14:40",
-   "chars": 18
-  },
-  {
-   "rect": [
-    216,
-    1673,
-    294,
-    58
-   ],
-   "lines": [
-    [
-     217,
-     1678,
-     294,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "noor went out",
-   "chars": 13
-  },
-  {
-   "rect": [
-    533,
-    1677,
-    315,
-    52
-   ],
-   "lines": [
-    [
-     534,
-     1681,
-     203,
-     44
-    ],
-    [
-     736,
-     1683,
-     10,
-     41
-    ],
-    [
-     746,
-     1682,
-     103,
-     44
-    ]
-   ],
-   "points": 11.5,
-   "px": 34.5,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "Fri 24 Apr · 15:50",
-   "chars": 18
-  },
-  {
-   "rect": [
-    214,
-    1801,
-    391,
+    1403,
+    510,
     59
    ],
    "lines": [
     [
-     214,
-     1806,
-     391,
-     50
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "you is heads down",
-   "chars": 17
-  },
-  {
-   "rect": [
-    629,
-    1803,
-    312,
-    52
-   ],
-   "lines": [
-    [
-     629,
-     1808,
-     203,
-     44
-    ],
-    [
-     832,
-     1809,
-     10,
-     41
-    ],
-    [
-     842,
-     1808,
-     100,
-     44
-    ]
-   ],
-   "points": 11.5,
-   "px": 34.5,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "Fri 24 Apr · 18:25",
-   "chars": 18
-  },
-  {
-   "rect": [
-    233,
-    1948,
-    520,
-    58
-   ],
-   "lines": [
-    [
-     234,
-     1953,
-     520,
-     49
-    ]
-   ],
-   "points": 13,
-   "px": 39,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "you's phone is on normal",
-   "chars": 24
-  },
-  {
-   "rect": [
-    776,
-    1951,
-    333,
-    52
-   ],
-   "lines": [
-    [
-     777,
-     1956,
-     213,
-     44
-    ],
-    [
-     990,
-     1957,
-     10,
-     41
-    ],
-    [
-     999,
-     1956,
-     111,
-     44
-    ]
-   ],
-   "points": 11.5,
-   "px": 34.5,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff464648",
-   "text": "Sat 25 Apr · 07:09",
-   "chars": 18
-  },
-  {
-   "rect": [
-    217,
-    2095,
-    542,
-    60
-   ],
-   "lines": [
-    [
-     218,
-     2100,
-     542,
+     221,
+     1408,
+     510,
      51
     ]
    ],
@@ -630,33 +305,91 @@
    "px": 39,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
+   "text": "noor's phone is on silent",
+   "chars": 25
+  },
+  {
+   "rect": [
+    753,
+    1408,
+    321,
+    53
+   ],
+   "lines": [
+    [
+     754,
+     1413,
+     203,
+     44
+    ],
+    [
+     957,
+     1414,
+     10,
+     41
+    ],
+    [
+     966,
+     1414,
+     108,
+     44
+    ]
+   ],
+   "points": 11.5,
+   "px": 34.5,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
+   "text": "Fri 24 Apr · 07:55",
+   "chars": 18
+  },
+  {
+   "rect": [
+    381,
+    1539,
+    538,
+    59
+   ],
+   "lines": [
+    [
+     382,
+     1544,
+     523,
+     51
+    ]
+   ],
+   "points": 13,
+   "px": 39,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
    "text": "noor's phone is on normal",
    "chars": 25
   },
   {
    "rect": [
-    782,
-    2097,
-    332,
+    942,
+    1541,
+    321,
     53
    ],
    "lines": [
     [
-     783,
-     2102,
-     214,
+     943,
+     1546,
+     203,
      44
     ],
     [
-     995,
-     2102,
+     1146,
+     1547,
      10,
      41
     ],
     [
-     1005,
-     2101,
+     1155,
+     1546,
      109,
      44
     ]
@@ -665,21 +398,253 @@
    "px": 34.5,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
+   "text": "Fri 24 Apr · 14:40",
+   "chars": 18
+  },
+  {
+   "rect": [
+    251,
+    1671,
+    288,
+    59
+   ],
+   "lines": [
+    [
+     251,
+     1675,
+     271,
+     50
+    ]
+   ],
+   "points": 13,
+   "px": 39,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
+   "text": "noor went out",
+   "chars": 13
+  },
+  {
+   "rect": [
+    563,
+    1675,
+    315,
+    53
+   ],
+   "lines": [
+    [
+     563,
+     1680,
+     203,
+     44
+    ],
+    [
+     766,
+     1681,
+     10,
+     41
+    ],
+    [
+     776,
+     1680,
+     103,
+     44
+    ]
+   ],
+   "points": 11.5,
+   "px": 34.5,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
+   "text": "Fri 24 Apr · 15:50",
+   "chars": 18
+  },
+  {
+   "rect": [
+    233,
+    1819,
+    391,
+    59
+   ],
+   "lines": [
+    [
+     234,
+     1824,
+     391,
+     51
+    ]
+   ],
+   "points": 13,
+   "px": 39,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
+   "text": "you is heads down",
+   "chars": 17
+  },
+  {
+   "rect": [
+    648,
+    1823,
+    312,
+    52
+   ],
+   "lines": [
+    [
+     648,
+     1828,
+     203,
+     44
+    ],
+    [
+     851,
+     1829,
+     10,
+     41
+    ],
+    [
+     861,
+     1829,
+     100,
+     44
+    ]
+   ],
+   "points": 11.5,
+   "px": 34.5,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
+   "text": "Fri 24 Apr · 18:25",
+   "chars": 18
+  },
+  {
+   "rect": [
+    222,
+    1956,
+    520,
+    58
+   ],
+   "lines": [
+    [
+     223,
+     1960,
+     520,
+     50
+    ]
+   ],
+   "points": 13,
+   "px": 39,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
+   "text": "you's phone is on normal",
+   "chars": 24
+  },
+  {
+   "rect": [
+    765,
+    1959,
+    334,
+    52
+   ],
+   "lines": [
+    [
+     766,
+     1964,
+     213,
+     44
+    ],
+    [
+     978,
+     1965,
+     10,
+     41
+    ],
+    [
+     988,
+     1964,
+     111,
+     44
+    ]
+   ],
+   "points": 11.5,
+   "px": 34.5,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
+   "text": "Sat 25 Apr · 07:09",
+   "chars": 18
+  },
+  {
+   "rect": [
+    215,
+    2101,
+    541,
+    59
+   ],
+   "lines": [
+    [
+     215,
+     2105,
+     541,
+     50
+    ]
+   ],
+   "points": 13,
+   "px": 39,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
+   "text": "noor's phone is on normal",
+   "chars": 25
+  },
+  {
+   "rect": [
+    779,
+    2103,
+    332,
+    52
+   ],
+   "lines": [
+    [
+     780,
+     2108,
+     213,
+     44
+    ],
+    [
+     993,
+     2109,
+     10,
+     41
+    ],
+    [
+     1002,
+     2108,
+     109,
+     44
+    ]
+   ],
+   "points": 11.5,
+   "px": 34.5,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff3f3f41",
    "text": "Sat 25 Apr · 08:24",
    "chars": 18
   },
   {
    "rect": [
-    248,
-    2261,
+    218,
+    2255,
     211,
     58
    ],
    "lines": [
     [
-     249,
-     2266,
+     218,
+     2260,
      211,
      50
     ]
@@ -688,34 +653,34 @@
    "px": 39,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "you got in",
    "chars": 10
   },
   {
    "rect": [
-    483,
-    2265,
+    453,
+    2259,
     332,
     52
    ],
    "lines": [
     [
-     483,
-     2269,
+     453,
+     2264,
      213,
      44
     ],
     [
-     696,
-     2271,
+     666,
+     2265,
      10,
      41
     ],
     [
-     706,
-     2270,
-     110,
+     676,
+     2264,
+     109,
      44
     ]
    ],
@@ -723,7 +688,7 @@
    "px": 34.5,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "Sat 25 Apr · 08:30",
    "chars": 18
   },
@@ -746,7 +711,7 @@
    "px": 48,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "write something",
    "chars": 15
   },
@@ -769,7 +734,7 @@
    "px": 48,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "send",
    "chars": 4
   },
@@ -792,7 +757,7 @@
    "px": 33,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "PULSE",
    "chars": 5
   },
@@ -815,7 +780,7 @@
    "px": 36,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "CHAT",
    "chars": 4
   },
@@ -838,7 +803,7 @@
    "px": 33,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "US",
    "chars": 2
   },
@@ -861,7 +826,7 @@
    "px": 33,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "MOMENTS",
    "chars": 7
   },
@@ -884,7 +849,7 @@
    "px": 33,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff464648",
+   "ink": "ff3f3f41",
    "text": "SETTINGS",
    "chars": 8
   }
