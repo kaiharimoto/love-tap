@@ -18,7 +18,9 @@
   },
   {
    "do": "scrollTo",
-   "arg": "0.62"
+   "arg": "01KPZ36PTG84DM3V2032VH63PQ",
+   "was": "0.62",
+   "why": "An event id rather than a fraction, so the eight notes the brief asks for on this artifact are reproducible rather than lucky. A fraction is an index into a thread whose length changes; an id is the same note in every capture. 0.62 landed on a run of long notes and put seven on the screen against an exit condition of eight, and firing 21's 40-logical search margin was blamed for the eighth -- measured at firing 37, that is not what took it: at this anchor the region can be given 40, 60 or 100 more logical pixels of height and the visible span does not move at all, because the next note costs between 65 and 104. So the shot is framed rather than the screen re-cut. This id is index 5216 of 8387 in the seeded year, chosen from a sweep of the thread as the densest stretch near the old anchor: twelve notes in frame with twelve distinct tears and no repeat, which leaves nine even if WebKit fits three fewer at the bottom than the test rig does."
   },
   {
    "do": "wait",
