@@ -783,6 +783,38 @@ declared flat. `--flats` runs it alone, which is what `--dir assets/shell` wants
    Add `--dusk` naming the dusk artifacts and raising `FLOOR_BODY` to 5.0 and `FLOOR_LARGE` to 4.5.
    `FLOOR_LARGE` goes to 4.0 by day.
 
+   **`ground_swing <= 1.2` on every surviving failure is STRUCK, and does not come back.** It was
+   added as an amendment to the ink item and was never met: 2 of 16 day failures satisfied it at
+   firing 24 and 1 of 17 at firing 34. It asks that the gate never be the reason a run fails,
+   which empties the gate rather than sharpening it — and the gate is not manufacturing failures,
+   which firing 34's dusk reading settles from the other side: 31 of 54 runs fail at dusk, most of
+   them at a swing of 1.2–1.4 with no gate involved, and 24 of the 31 fail even at the day floors.
+   The day set's scarcity of flat-ground failures is a fact about the day set. A clause nobody has
+   met in fifteen firings is a clause, not a finding.
+
+   **What the complaint underneath it was really about is the RING, and the ring is now reported
+   two ways.** The ground is taken from a rectangle around the run wherever that rectangle falls,
+   so a line written near the edge of its own sheet has desk in its ring — and the adversarial end
+   of a ring that straddles a sheet edge is the plank. The gate then holds ink *on* paper against
+   the darkest thing *behind* the paper. So `legibility.py` also reads each run's ground restricted
+   to the sheet the app declares under it in `<artifact>.surfaces.json`, and reports
+   `ground_ring_clipped`, `ground_surface`, `ink_core_clipped` and `ground_swing_clipped` beside
+   the unrestricted pair. A run with nothing left inside its own sheet is reported `unmeasurable`
+   — still counted as a run, gated on by nothing.
+
+   **The floors do not gate on the clipped reading, and the reason is measured.** A declared `rect`
+   is the box an image was laid out into, shadow pad and all, not the sheet's own outline. The pad
+   is recoverable from `drawn` for some entries (`lined_01`, drawn 1218×90 in a rect of 1462×108,
+   is 1.200 on both axes) and not for others (`looseleaf_02`, drawn 1094×494 in 1268×591, is 1.159
+   and 1.196). On the committed capture that makes `02_chat` and `13_messenger_states` read a
+   byte-identical region two ways — 8.04:1 and a 3.04:1 failure — on nothing but which sidecar
+   declared it. A ruler whose reading of a region depends on which artifact declared it is
+   disqualified from being cited under `loop/WORKER_PROMPT.md` §3d, so it is reported and not
+   cited. `tools/check/ground_clip_selftest.py` §5 holds that line: it requires `ink_core` to be
+   identical across two declarations of the same pixels while `ink_core_clipped` differs. What
+   would make the clip gateable is the app declaring the sheet's own quad rather than its bounding
+   box, which is a change to the capture and is filed as its own queue item.
+
 `tools/check/flat_fill.py` and `tools/paper_tooth.py` need one between them, added at firing 32:
 
 8. **A stock class map, and three floors instead of one.** Both files carry `FLOOR_STD = 8.0` and

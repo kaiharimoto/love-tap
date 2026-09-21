@@ -281,6 +281,75 @@ def declared_lines(sidecar):
             np.array(owner, dtype=np.int64))
 
 
+# Writing sits on a SHEET. `<artifact>.surfaces.json` lists every image the app drew, and only
+# one family of them is stock the app writes on; the rest are the desk under it, the drop shadows
+# beneath it, the objects lying beside it and the small drawn bits. This is the asset path the app
+# declares, which docs/LOOP.md's anchor table names as an anchor in its own right.
+STOCK_PREFIX = "assets/paper/"
+
+
+def surface_under(box, surfaces):
+    """The declared rect of the sheet a run sits on, or None where it sits on no declared sheet.
+
+    `<artifact>.surfaces.json` is the app's own list of every image it drew, in paint order, each
+    with the `rect` it drew it into. The sheet a run of writing sits on is the LAST rect in that
+    list that BELONGS TO A STOCK and contains the run's centre -- last, because the list is
+    painter's order and the topmost sheet under the letters is the one drawn most recently.
+
+    **A `rect` is a draw box, not an opaque surface, and that distinction is the whole of why
+    this function filters by family rather than simply taking the last containing rect.** It was
+    written the simple way first and measured, and the simple way walks off the object exactly as
+    WORKER_PROMPT 3d describes. `01_pulse`'s run `wifi` sits at (378, 1023) on
+    `assets/paper/sticky_yellow_02` at rect [74, 985, 514, 460]. Drawn after it is
+    `assets/objects/obj_candle` at rect [239, 1013, 631, 631] -- a 631-pixel square bounding box
+    for a candle that is nowhere near the word, transparent everywhere the word is, and LAST in
+    paint order at that point. Clipping the ground to the candle's box cut the top and left off
+    the sticky note the word is actually written on, and turned a 4.74 into a 3.64 failure. The
+    ring would have been clipped to a sheet of glass.
+
+    Drop shadows are the same fault with a different shape and they are commoner: `02_chat` draws
+    `assets/tears/tear_018_shadow` at rect [-6, -556, 1373, 709], a box reaching 556 pixels above
+    the top of the screen. A shadow is drawn UNDER the paper and is not a surface anything is
+    written on; taking its rect as the sheet is meaningless.
+
+    So the candidates are stocks and nothing else, and a run over no stock -- a label on the desk,
+    a word on the shell -- returns None and is read exactly as it was before the clip existed.
+    That is the conservative answer and it is also the true one: there is no sheet under it, so
+    there is no sheet to hold its ground to.
+
+    The centre rather than the whole box, because a run that straddles its sheet's edge is exactly
+    the case this exists for: it still sits on that sheet, and requiring containment of the whole
+    box would fall through to no stock at all and clip nothing.
+
+    Returns `(x, y, w, h, asset)` or None.
+    """
+    if not surfaces:
+        return None
+    y0, y1, x0, x1 = box
+    cy, cx = (y0 + y1) / 2.0, (x0 + x1) / 2.0
+    for s in reversed(surfaces):
+        if not str(s.get("asset", "")).startswith(STOCK_PREFIX):
+            continue
+        rect = s.get("rect")
+        if not rect or len(rect) != 4:
+            continue
+        x, y, w, h = rect
+        if w <= 0 or h <= 0:
+            continue
+        # THE SHEET IS `drawn` INSIDE `rect`, NOT `rect`. The sidecar declares both, and they
+        # differ: `02_chat` draws `assets/paper/lined_01` at drawn 1218x90 into a rect of
+        # 1462x108 -- twenty percent larger on both axes. `rect` is the box the image was laid
+        # out into, shadow pad and all; `drawn` is the size the sheet was actually painted at.
+        # Clipping to `rect` therefore keeps a margin of DESK all the way around the sheet,
+        # which is the exact thing the clip exists to remove.
+        dw, dh = (s.get("drawn") or [w, h])[:2]
+        if 0 < dw <= w and 0 < dh <= h:
+            x, y, w, h = x + (w - dw) // 2, y + (h - dh) // 2, dw, dh
+        if x <= cx < x + w and y <= cy < y + h:
+            return (x, y, w, h, s.get("asset", ""))
+    return None
+
+
 def line_of(boxes, lines):
     """Which declared line each glyph box belongs to, or -1 for none of them.
 
@@ -399,7 +468,8 @@ def marks(gam, ground_gam, polarity):
     return gam > (ground_gam + INK_DELTA)
 
 
-def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
+def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None,
+            surfaces=None):
     with Image.open(path) as im:
         rgb = np.asarray(im.convert("RGB"))
     H, W = rgb.shape[:2]
@@ -519,6 +589,25 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
             pm = mask[ry0:ry1, rx0:rx1]
             pg = is_ground[ry0:ry1, rx0:rx1]
             pmg = glyph_px[ry0:ry1, rx0:rx1]
+            # THE RING IS CLIPPED TO THE SURFACE THE RUN SITS ON.
+            #
+            # The ring is a rectangle taken around the run wherever that rectangle falls, so a
+            # run near the edge of its own sheet has DESK in its ring -- and the adversarial end
+            # of a ring that straddles a sheet edge is the plank. The gate below then holds ink
+            # ON PAPER against the darkest thing BEHIND the paper. That is not a hard reading,
+            # it is the wrong reading, and unlike a flat-ground failure it is a property of one
+            # run's position rather than of the surface anyone has to read.
+            #
+            # So the ground is taken only from pixels inside the rect the app says it drew that
+            # surface into. `surf_px` is that mask over the ring box; where the app declared no
+            # surface under this run it is None and everything below reads as it did before.
+            surf = surface_under((y0, y1, x0, x1), surfaces)
+            surf_px = None
+            if surf is not None:
+                sx, sy, sw, sh = surf[0], surf[1], surf[2], surf[3]
+                yy = np.arange(ry0, ry1)[:, None]
+                xx = np.arange(rx0, rx1)[None, :]
+                surf_px = ((yy >= sy) & (yy < sy + sh) & (xx >= sx) & (xx < sx + sw))
             # A run's ink is the glyphs, not every mark near them.
             #
             # `pm` is every pixel of this polarity the detector fired on inside the ring box --
@@ -539,12 +628,7 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
             stroke = pl[pm & pmg]
             if stroke.size < 40 or pl.size < 400:
                 continue
-            if polarity == "dark":
-                core = float(np.percentile(stroke, 10))         # the darkest of the stroke
-                g = float(np.percentile(pl, GROUND_PCTL))       # the lightest of the ring
-            else:
-                core = float(np.percentile(stroke, 90))         # the lightest of the stroke
-                g = float(np.percentile(pl, 100 - GROUND_PCTL)) # the darkest of the ring
+            core = float(np.percentile(stroke, 10 if polarity == "dark" else 90))
 
             # How wide the ground under this run actually is, and therefore whether the reading
             # above is fair.
@@ -582,30 +666,82 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
             # grain in its band and never reaches this.
             band = max(3, (y1 - y0) // 2)
             near = dilate(pmg, band) & pg
-            ground = pl[near]
-            swing, g_adv = None, None
-            if ground.size >= 200:
-                g_lo = float(np.percentile(ground, 5))
-                g_hi = float(np.percentile(ground, 95))
-                swing = round(contrast(g_hi, g_lo), 2)
-                g_adv = g_lo if polarity == "dark" else g_hi
-            # On flat paper the ring percentile is kept: it is the right answer there and it was
-            # arrived at the hard way. On a ground that moves, the floor is required against the
-            # end that is worst for this ink -- no fudge factor, just the correct comparison
-            # instead of a flattering one.
-            gated = g
-            if swing is not None and swing >= GROUND_SWING_GATE and g_adv is not None:
-                # A ground has to be on the far side of the ink from the reader, or it is not
-                # this ink's ground. Dark ink is written on something lighter than itself; pale
-                # ink on something darker. Where the adversarial end crosses the stroke -- a line
-                # of dark text with the status bar or a photograph inside its band, a pale label
-                # beside something paler still -- what has been found is a second surface rather
-                # than the one the letters are on, and the ring reading is kept instead. Without
-                # this, fifty runs in `02_chat.png` alone reported one to one, none of which was
-                # a real failure and all of which would have drowned the ones that are.
-                on_the_far_side = (g_adv > core) if polarity == "dark" else (g_adv < core)
-                if on_the_far_side:
-                    gated = g_adv
+
+            def read_ground(keep):
+                """The ring percentile, the band's swing and the gated ground, over `keep`.
+
+                `keep` is a boolean mask over the ring box saying which pixels may be counted as
+                this run's ground -- everything, or only what lies inside the surface the app
+                declared under the run. Returning them together is what lets the same arithmetic
+                be taken twice and the two printed side by side, which is the only way a reader
+                can tell whether the clip moved the READING or moved the POPULATION.
+
+                Returns None where fewer than 400 pixels of ring survive `keep`, which is the
+                same floor the unclipped path has always had and means the same thing: there is
+                not enough surface here to call anything a ground.
+                """
+                ring_px = pl[keep]
+                if ring_px.size < 400:
+                    return None
+                g = float(np.percentile(ring_px, GROUND_PCTL if polarity == "dark"
+                                        else 100 - GROUND_PCTL))
+                ground = pl[near & keep]
+                swing, g_adv = None, None
+                if ground.size >= 200:
+                    g_lo = float(np.percentile(ground, 5))
+                    g_hi = float(np.percentile(ground, 95))
+                    swing = round(contrast(g_hi, g_lo), 2)
+                    g_adv = g_lo if polarity == "dark" else g_hi
+                # On flat paper the ring percentile is kept: it is the right answer there and it
+                # was arrived at the hard way. On a ground that moves, the floor is required
+                # against the end that is worst for this ink -- no fudge factor, just the correct
+                # comparison instead of a flattering one.
+                gated = g
+                if swing is not None and swing >= GROUND_SWING_GATE and g_adv is not None:
+                    # A ground has to be on the far side of the ink from the reader, or it is not
+                    # this ink's ground. Dark ink is written on something lighter than itself;
+                    # pale ink on something darker. Where the adversarial end crosses the stroke
+                    # -- a line of dark text with the status bar or a photograph inside its band,
+                    # a pale label beside something paler still -- what has been found is a
+                    # second surface rather than the one the letters are on, and the ring reading
+                    # is kept instead. Without this, fifty runs in `02_chat.png` alone reported
+                    # one to one, none of which was a real failure and all of which would have
+                    # drowned the ones that are.
+                    on_the_far_side = (g_adv > core) if polarity == "dark" else (g_adv < core)
+                    if on_the_far_side:
+                        gated = g_adv
+                return {"g": g, "swing": swing, "gated": gated,
+                        "ring_px": int(ring_px.size), "band_px": int(ground.size)}
+
+            whole = np.ones(pl.shape, dtype=bool)
+            unclipped = read_ground(whole)
+            if unclipped is None:
+                continue
+            # The clipped reading, where the app declared a surface to clip to. Where it did not,
+            # the two are deliberately the same object: nothing is claimed about a run whose
+            # ground was never in question.
+            clipped = read_ground(surf_px) if surf_px is not None else unclipped
+            # A RUN WHOSE RING HAS NOTHING LEFT INSIDE ITS OWN SURFACE IS UNMEASURABLE, NOT
+            # FAILED. It is writing drawn so near the edge of the sheet it is on -- or onto a
+            # surface whose declared rect is smaller than the ring around one line of type --
+            # that this tool has no ground to read. Calling that a contrast failure would put a
+            # number on the floor's side of the argument that no one can act on, and calling it
+            # a pass would hide it. It is counted as a run, reported by name, and gated on by
+            # nothing.
+            unmeasurable = clipped is None
+            if unmeasurable:
+                clipped = unclipped
+            # THE FLOORS STILL GATE ON THE UNCLIPPED READING, AND THE CLIP IS REPORTED BESIDE IT.
+            # This is not what firing 35 expected when it chose the clip, and the reason is
+            # measured rather than argued -- see the note on `ink_core_clipped` below and
+            # `the-declared-rect-of-a-sheet-is-not-the-sheet` in the queue. In short: a declared
+            # `rect` is a padded layout box rather than the sheet's own outline, the padding is
+            # not recoverable from the sidecar for every entry, and a clip taken from it reads
+            # the SAME PIXELS two different ways depending on which artifact declared them.
+            # WORKER_PROMPT 3d disqualifies such a ruler from being cited, so it is not cited.
+            g = unclipped["g"]
+            swing = unclipped["swing"]
+            gated = unclipped["gated"]
             # The test is the median of the surface, not its dark end. A paragraph of dark ink on
             # cream has a very dark tenth percentile — it is full of letters — and reading that as
             # "a dark ground" turns ordinary text inside out and reports the paper as failing ink.
@@ -644,6 +780,36 @@ def measure(path, floor_body=FLOOR_BODY, floor_large=FLOOR_LARGE, sidecar=None):
                 "ground_swing": swing,
                 "ground_lum": round(gated, 4),
                 "ground_lum_ring": round(g, 4),
+                # THE CLIP, REPORTED RATHER THAN APPLIED SILENTLY. `ground_ring_clipped` says
+                # whether this run's ground was restricted to a declared surface at all, and the
+                # `*_unclipped` pair is the same arithmetic over the whole ring box -- which is
+                # exactly what this file reported before the clip existed. Where the two differ,
+                # the difference is the desk coming out of the ring.
+                # THE CLIP, REPORTED AND NOT GATED ON. `ground_ring_clipped` says whether a
+                # declared sheet was found under this run at all; `ink_core_clipped` and
+                # `ground_swing_clipped` are the same arithmetic as `ink_core` and
+                # `ground_swing` over only the pixels inside that sheet. Where they differ from
+                # the pair above, the difference is what the ring reaches beyond the sheet.
+                #
+                # They are reported because the reading is worth having and because the next
+                # firing needs the numbers to hand; they are not gated on because they do not
+                # yet discriminate. See `ground_surface`: the box comes from the sheet's
+                # declared `drawn` size centred in its declared `rect`, which is exact for some
+                # entries -- `lined_01` at 1218x90 in 1462x108 is 1.2 on both axes -- and not
+                # for others -- `looseleaf_02` at 1094x494 in 1268x591 is 1.159 and 1.196. On
+                # the second kind the box misses the sheet, and `02_chat` and
+                # `13_messenger_states` then read a BYTE-IDENTICAL region two ways: 8.04 and a
+                # 3.04 failure, on the same pixels, because the two sidecars declare different
+                # boxes over them.
+                "ground_ring_clipped": surf_px is not None,
+                "ground_surface": surf[4] if surf is not None else None,
+                "ground_ring_px": unclipped["ring_px"],
+                "ground_ring_px_clipped": clipped["ring_px"],
+                "ink_core_clipped": round(contrast(core, clipped["gated"]), 2),
+                "ground_swing_clipped": clipped["swing"],
+                # Nothing left of the ring inside this run's own sheet. Reported, counted as a
+                # run, and gated on by nothing -- see the note where it is set.
+                "unmeasurable": unmeasurable,
             }
             if decl:
                 # So a failure can be read as a sentence rather than cropped out of the PNG at
@@ -726,6 +892,12 @@ def main():
     ap.add_argument("--out", default="")
     ap.add_argument("--only", default="", help="one artifact filename")
     ap.add_argument("--worst", type=int, default=12, help="how many failures to print")
+    ap.add_argument("--dump-runs", action="store_true",
+                    help="write every run, not only the ones below their floor, as `all_runs` "
+                         "on each artifact. The report is normally a record of what FAILED, and "
+                         "a ruler for this ruler has to be able to see a run that passed -- "
+                         "otherwise a check stops discriminating the moment a run crosses its "
+                         "floor, which is the one direction a check must not go quiet in.")
     ap.add_argument("--dir", default=EVIDENCE)
     ap.add_argument("--dusk", default="",
                     help="comma-separated artifacts to hold to the dusk floors in docs/COLOR.md "
@@ -763,6 +935,7 @@ def main():
         "failures": [],
     }
     missing_sidecars = []
+    missing_surfaces = []
     rig_conflicts = []
     for path in paths:
         name = os.path.relpath(path, args.dir)
@@ -789,16 +962,45 @@ def main():
         if is_dusk:
             report["dusk"].append(name)
         report["rig_declared_by"][name] = {"light": "dusk" if is_dusk else "day", "by": by}
+        # What the app says it drew under the writing, so a run's ground can be taken from its
+        # own surface rather than from whatever the ring happened to reach. Absent for an
+        # artifact captured before the sidecar existed, and absent is not an error: those runs
+        # read exactly as they did before.
+        surfaces = None
+        surf_side = path[:-4] + ".surfaces.json" if path.endswith(".png") else None
+        if surf_side and os.path.exists(surf_side):
+            try:
+                with open(surf_side, encoding="utf-8") as f:
+                    surfaces = json.load(f)
+            except (ValueError, OSError):
+                surfaces = None
+        if surfaces is None:
+            missing_surfaces.append(name)
         m = measure(path,
                     FLOOR_BODY_DUSK if is_dusk else FLOOR_BODY,
                     FLOOR_LARGE_DUSK if is_dusk else FLOOR_LARGE,
-                    sidecar=sidecar)
+                    sidecar=sidecar,
+                    surfaces=surfaces)
         runs = m.get("runs", [])
+        # An unmeasurable run is not a failure and not a pass. It is excluded from `bad` and from
+        # the worst-and-median summary, and counted by name below, so that it can never be the
+        # quiet reason a number improved.
+        gauged = [r for r in runs if not r.get("unmeasurable")]
+        unmeasurable = [r for r in runs if r.get("unmeasurable")]
         bad = [r for r in runs if r["ink_core"] < r["floor"]]
+        # The same tally taken over the clipped ring, reported beside the one the floors gate
+        # on. The population clause of this item turns on being able to see whether the clip
+        # moved the READING or moved the DENOMINATOR: `runs` is the denominator and must not
+        # move at all, and these two are the numerator either way.
+        bad_clipped = [r for r in gauged if r["ink_core_clipped"] < r["floor"]]
         worst = min((r["ink_core"] for r in runs), default=None)
         report["artifacts"][name] = {
             "runs": len(runs),
             "below_floor": len(bad),
+            # Both tallies, always. See the note where `bad_unclipped` is built.
+            "below_floor_clipped": len(bad_clipped),
+            "unmeasurable": len(unmeasurable),
+            "ground_ring_clipped": sum(1 for r in runs if r.get("ground_ring_clipped")),
             # Which instrument read this artifact. A number taken one way and compared against a
             # number taken the other is not a comparison, and the whole of firing 9 was spent
             # establishing that after the fact.
@@ -810,11 +1012,17 @@ def main():
             "median_as_rendered": round(float(np.median([r["ink_median"] for r in runs])), 2) if runs else None,
             "detail": sorted(bad, key=lambda r: r["ink_core"])[:60],
         }
+        if args.dump_runs:
+            report["artifacts"][name]["all_runs"] = runs
         for r in bad:
             f = {
                 "artifact": name, "box": r["box"], "role": r["role"], "polarity": r["polarity"],
                 "ink_core": r["ink_core"], "ink_median": r["ink_median"], "floor": r["floor"],
                 "ink_core_ring": r["ink_core_ring"], "ground_swing": r["ground_swing"],
+                "ink_core_clipped": r["ink_core_clipped"],
+                "ground_swing_clipped": r["ground_swing_clipped"],
+                "ground_ring_clipped": r["ground_ring_clipped"],
+                "ground_surface": r["ground_surface"],
             }
             if "says" in r:
                 f["says"] = r["says"]
@@ -834,6 +1042,16 @@ def main():
     report["read"] = len(paths)
     report["total_runs"] = sum(a["runs"] for a in report["artifacts"].values())
     report["total_below_floor"] = len(report["failures"])
+    # THE POPULATION CLAUSE, KEPT WHERE A READER CANNOT MISS IT. `total_runs` is the denominator
+    # and the clip must not move it: a run whose ground could not be read is still a run. These
+    # three say what the clip did -- how many rings were restricted at all, how many runs it left
+    # with nothing to read, and what the tally would have been over the whole ring box.
+    report["total_ground_ring_clipped"] = sum(
+        a["ground_ring_clipped"] for a in report["artifacts"].values())
+    report["total_unmeasurable"] = sum(a["unmeasurable"] for a in report["artifacts"].values())
+    report["total_below_floor_clipped"] = sum(
+        a["below_floor_clipped"] for a in report["artifacts"].values())
+    report["without_surfaces"] = sorted(missing_surfaces)
     report["text_runs"] = args.text_runs
     report["measured_from_declared_text"] = sum(
         1 for a in report["artifacts"].values() if a.get("text_runs") == "declared")
