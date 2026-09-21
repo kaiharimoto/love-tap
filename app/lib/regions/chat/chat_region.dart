@@ -190,9 +190,50 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
   }
 
   /// Land the thread on an anchor: an event id, a fraction of the way through, or the end.
+  ///
+  /// EVERY WAY OF NOT LANDING THROWS, and the reason is one capture and one wrong diagnosis.
+  /// Firing 37 set a scene's anchor to a seeded event id. A seeded id was not the same string in
+  /// the test that chose it as in the PWA that ran it — `UlidFactory.next` peeled its timestamp
+  /// with 32-bit operations and the browser's `int` is a double, so every seeded id had a
+  /// different head there. `indexWhere` returned -1, this function returned, the list never moved,
+  /// and the shutter caught the thread wherever it happened to be standing: six notes instead of
+  /// twelve. Nothing in the scene log, the report or the manifest said an anchor had not been
+  /// found, so the artifact came back looking like a real photograph of a short thread.
+  ///
+  /// The id is repaired. The silence is the part that would have hidden the next one: `hook()` in
+  /// `tools/capture/scene.js` refuses a step whose handle throws, and books it with the anchor in
+  /// the reason. `_offerHandles` is only wired under capture, and both in-app callers pass an id
+  /// they have just emitted or just found, so nothing a person holding the phone does reaches
+  /// this. It is the same rule `openViewer` above already states: finding nothing is not the same
+  /// as succeeding.
   Future<void> _scrollToAnchor(String anchor) async {
-    final items = AppScope.of(context).thread.items;
-    if (items.isEmpty || !_scroll.isAttached) return;
+    var items = AppScope.of(context).thread.items;
+    if (items.isEmpty) {
+      throw StateError('cannot scroll to "$anchor": the thread has no items');
+    }
+    if (!_scroll.isAttached) {
+      throw StateError('cannot scroll to "$anchor": the thread list is not attached yet');
+    }
+    // An id may be a beat ahead of the projection, so wait for it before disbelieving it.
+    //
+    // Making the miss loud found a second one immediately: `stageStates` emits three messages and
+    // then scrolls to the last of them, and `scope.emit` hands back the event while the thread
+    // projection is still catching up — so the id was genuinely not in `items` yet and the scroll
+    // it was silently skipping was the one that frames 13_messenger_states. A handle returns when
+    // the thing has happened, which is this file's whole thesis, so it waits for the note to
+    // arrive rather than asking once. Only an anchor that never arrives is an error.
+    //
+    // Counted, not clocked. `DateTime.now()` is the wall clock, and under capture the app's clock
+    // is driven a frame at a time while in a widget test it does not advance at all — so a
+    // deadline expressed in wall time either never expires or expires instantly, and neither is a
+    // wait. Twenty attempts at fifty milliseconds is a second of scheduled time on any clock.
+    if (anchor != 'end' && double.tryParse(anchor) == null) {
+      for (var tries = 0; tries < 20 && items.indexWhere((it) => it.id == anchor) < 0; tries++) {
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+        if (!mounted) return;
+        items = AppScope.of(context).thread.items;
+      }
+    }
     int index;
     if (anchor == 'end') {
       // the spacer, pinned to the bottom of the viewport, which leaves the newest note whole
@@ -206,7 +247,13 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
           ? (fraction.clamp(0.0, 1.0) * (items.length - 1)).round()
           : items.indexWhere((it) => it.id == anchor);
     }
-    if (index < 0) return;
+    if (index < 0) {
+      throw StateError(
+          'no anchor "$anchor" in the thread: it is not the id of any of the ${items.length} '
+          'items, not a fraction of the way through, and not "end". The first id is '
+          '"${items.first.id}" and the last is "${items.last.id}" — if those do not look like the '
+          'ids the scene was written against, the two rigs are minting different ids again.');
+    }
     _scroll.jumpTo(index: index, alignment: 0.35);
     await Future<void>.delayed(const Duration(milliseconds: 40));
   }

@@ -26,6 +26,15 @@ itself -- could not say whose it was or why.
      line of stderr. Either one alone empties the reason. Two captures lost a hero artifact with
      nothing attached to say why.
 
+  4. A capture HANDLE that could not do what it was asked returned quietly, and `hook()` reads a
+     handle that returns as a handle that worked. `__deskScrollTo` was given a seeded event id
+     that named nothing in the PWA -- the two rigs minted different ids, repaired at firing 38 --
+     so `indexWhere` returned -1, the function returned, the list never moved, and the shutter
+     photographed the thread where it stood. 02_chat came back with six notes against a floor of
+     eight, exit 0, a clean log and a clean manifest. Nothing anywhere said an anchor had not been
+     found. That is the one failure shape the three above cannot catch, because there was no
+     refusal to attribute: the artifact was booked PRESENT.
+
 Each section runs the real tool against a throwaway directory, checks it says the true thing, and
 then puts the fault back and checks it says the false one. A section that only asserts the fixed
 behaviour cannot tell a fix from a tool that stopped looking.
@@ -173,6 +182,62 @@ def main():
                   f"and the first line of STDERR is the sentence capture.sh reads ({first!r})")
             check("throwsHere" in first,
                   "so the reason that reaches MANIFEST.json names the throw site")
+
+    # ---- 4. a handle that cannot do what it was asked does not pass for one that did ----
+    # The app is not built here, so the two behaviours are put on a probe page directly: one
+    # `__deskScrollTo` that throws the way the repaired handle throws, and one that returns the
+    # way it used to. What is under test is the whole path from a handle that cannot land to an
+    # artifact that is not booked -- `hook()` refusing, the reason carrying the anchor, and the
+    # PNG never being written.
+    if not os.path.isdir(pw):
+        check(False, "scene.js needs toolchain/pw; run ./bootstrap.sh --profile=web first")
+    else:
+        anchor = "01KPV0SDX06FA58CJ9JXH23W7R"  # the id from the capture that found this
+
+        def run_scroll_probe(handle_body):
+            with tempfile.TemporaryDirectory() as sd:
+                probe = os.path.join(sd, "probe.html")
+                with open(probe, "w", encoding="utf-8") as f:
+                    # The two sidecar handles are stubbed so the only thing that differs
+                    # between the two runs below is what __deskScrollTo does. Without them the
+                    # scene refuses for want of a handle and the comparison measures that
+                    # instead -- though even then the PNG is written, which is the half that
+                    # matters and the half the old behaviour got wrong.
+                    f.write("<!doctype html><meta charset=utf-8><title>probe</title><script>\n"
+                            "window.__deskReady = true;\n"
+                            "window.__deskTextRuns = function () { return '[]'; };\n"
+                            "window.__deskPaperSurfaces = function () { return '[]'; };\n"
+                            "window.__deskScrollTo = function (a) { " + handle_body + " };\n"
+                            "</script>\n")
+                shot = os.path.join(sd, "02_chat.png")
+                scene = os.path.join(sd, "probe_scene.json")
+                with open(scene, "w", encoding="utf-8") as f:
+                    json.dump({"name": "02_chat",
+                               "viewport": {"width": 320, "height": 480, "dpr": 1},
+                               "settle": 50,
+                               "steps": [{"do": "scrollTo", "arg": anchor},
+                                         {"do": "shot", "out": shot}]}, f)
+                p = subprocess.run(["node", SCENE, scene, "--url", "file://" + probe,
+                                    "--browser", "chromium"],
+                                   capture_output=True, text=True, cwd=ROOT)
+                return p, os.path.exists(shot)
+
+        # The repaired handle: it throws, naming the anchor it could not find.
+        p, shot_exists = run_scroll_probe(
+            "throw new Error('no anchor \"' + a + '\" in the thread');")
+        said = (p.stderr or "") + (p.stdout or "")
+        check(p.returncode != 0,
+              f"a scene whose handle could not land is refused ({p.returncode})")
+        check(not shot_exists,
+              "and no PNG is written, so the artifact is booked missing rather than present")
+        check(anchor in said,
+              "and the anchor it could not find is in the reason, which is what makes it findable")
+
+        # The fault put back: the handle returns, exactly as it did before firing 38.
+        p2, shot_exists2 = run_scroll_probe("return;")
+        check(p2.returncode == 0 and shot_exists2,
+              "and with the silent return put back the scene passes and writes a PNG, which is "
+              "how a shot of six notes was booked as a shot of twelve")
 
     if failures:
         print(f"\n{len(failures)} check(s) failed", file=sys.stderr)

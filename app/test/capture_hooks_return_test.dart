@@ -30,6 +30,7 @@ const _pushes = [
 
 void main() {
   _everyHandleRuns();
+  _anAnchorThatIsNotThereIsRefused();
   test('no capture handle waits for a page to be closed', () {
     final offenders = <String>[];
     final files = Directory('lib')
@@ -124,5 +125,97 @@ void _everyHandleRuns() {
       }
       expect(tester.takeException(), isNull, reason: '${e.key} left an exception behind');
     }
+  });
+}
+
+// ---------------------------------------------------------------------------------------------
+// And a handle that cannot do what it was asked says so.
+//
+// `__deskScrollTo` used to return quietly when it could not resolve its anchor, and that silence
+// cost firing 37 a 45-minute capture. The scene named a seeded event id; the id was a different
+// string in the PWA than in the test that chose it, because `UlidFactory.next` peeled its 48-bit
+// timestamp with 32-bit operations and a web `int` is a double. `indexWhere` returned -1, the
+// handle returned, the list never moved, and the shutter photographed the thread where it stood:
+// six notes where the artifact's floor is eight. The log, the report and the manifest were all
+// clean, so what came back looked exactly like a real photograph of a short thread.
+//
+// The id is repaired. This is the other half — the half that would have named it in seconds.
+// `hook()` in tools/capture/scene.js refuses any step whose handle throws and books the anchor in
+// the reason, so a throw here is the difference between an artifact that is refused with a
+// sentence and one that is quietly wrong.
+void _anAnchorThatIsNotThereIsRefused() {
+  testWidgets('an anchor that is in neither the thread nor the unit interval is refused', (tester) async {
+    CaptureBus.wanted = true;
+    addTearDown(() => CaptureBus.wanted = false);
+    await MaterialLibrary.load();
+    final spine = await Spine.open(
+      SpineStore.memory(),
+      const Identity(person: Person.teo, device: DeviceKind.pwa),
+    );
+    for (final text in ['the canal has gone all dimples', 'one hour then stop']) {
+      await spine.append('message', {'text': text}, hostAssign: true);
+    }
+    final transport = LocalTransport(role: TransportRole.client, spine: spine, deviceId: 'test');
+    final scope = AppScope(
+      spine: spine,
+      transport: transport,
+      sync: SyncEngine(spine: spine, transport: transport),
+      clock: Clock(frozenAt: DateTime.utc(2026, 9, 3, 19, 40)),
+    );
+    addTearDown(scope.dispose);
+
+    tester.view.physicalSize = const Size(1440, 3120);
+    tester.view.devicePixelRatio = 3.0;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(AppScope.provide(
+      scope: scope,
+      child: const MaterialApp(home: Scaffold(body: ChatRegion())),
+    ));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    /// Run a handle the way the test above does — started, pumped, then awaited — and hand back
+    /// whatever it ended with. Awaiting first deadlocks: the future waits for a pump that is
+    /// waiting for the future.
+    Future<Object?> outcome(Future<void> Function() run) async {
+      final running = run();
+      Object? error;
+      var settled = false;
+      unawaited(running.then((_) => settled = true, onError: (Object e) {
+        error = e;
+        settled = true;
+      }));
+      for (var i = 0; i < 40 && !settled; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      // Awaited, not merely pumped at. Reading `error` while the future is still in flight is how
+      // a test that is watching for a throw reports `null` and calls the throw missing.
+      try {
+        await running;
+      } catch (e) {
+        error = e;
+      }
+      return error;
+    }
+
+    // A ULID-shaped id that is simply not in this thread — which is precisely what a seeded id
+    // from the other rig was.
+    final absent = await outcome(() => CaptureBus.scrollTo!('01KPV0SDX06FA58CJ9JXH23W7R'));
+    expect(absent, isA<StateError>(),
+        reason: 'an anchor naming no note in the thread has to be refused, not returned from: '
+            'returning is how a capture of six notes passes for a capture of twelve');
+    expect('$absent', contains('01KPV0SDX06FA58CJ9JXH23W7R'),
+        reason: 'and the anchor has to be in the reason, because that is what scene.js books');
+
+    // Not a number either, so it cannot be read as a fraction of the way through.
+    final nonsense = await outcome(() => CaptureBus.scrollTo!('nowhere-at-all'));
+    expect(nonsense, isA<StateError>());
+
+    // And the shapes that do resolve still resolve, so this has not simply broken scrolling.
+    expect(await outcome(() => CaptureBus.scrollTo!('end')), isNull);
+    expect(await outcome(() => CaptureBus.scrollTo!('0.5')), isNull);
+    final first = scope.thread.items.first.id;
+    expect(await outcome(() => CaptureBus.scrollTo!(first)), isNull,
+        reason: 'an id that IS in the thread must still land');
   });
 }
