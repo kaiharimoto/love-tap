@@ -1,0 +1,40 @@
+{
+ "cycle": 3,
+ "stage": "ADDRESS",
+ "firing": 35,
+ "at": "f111a67",
+ "written_at": "2026-09-21T01:08:33Z",
+ "stage_was_when_the_firing_started": "IMPLEMENT",
+ "why_the_stage_was_moved": "firing 34's own stage_change_note: five closures had opened gaps at the old 2, 3, 4, 5 and 7 and four items were unranked, so `take the next one` pointed at nothing coherent. Firings 29 and 32 moved the stage the same way and recorded it the same way.",
+ "no_code_written": true,
+ "no_capture": true,
+ "no_toolchain_bootstrapped": true,
+ "items_ranked": 49,
+ "ranks_contiguous": "1..49, no gaps",
+ "items_closed": [
+  "claude-md-names-two-dead-ends-and-one-of-them-is-alive"
+ ],
+ "items_filed": [
+  "the-claude-md-a-firing-is-handed-can-be-fifty-commits-stale"
+ ],
+ "decisions": {
+  "the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames": "route 2 of firing 33's three -- fibre_scale, a lower spatial frequency at the same amplitude. SIZES['folds'] settled at 540; the 240-frame re-render unblocked and sequenced AFTER a five-point single-frame sweep. Routes 1 and 3 rejected with reasons and kept as a ladder. The 32 MB treated as a design budget binding on the window, not re-derived; the device measurement that would settle it filed in asks[]. blocked_on cleared.",
+  "is-ground-swing-1-2-the-right-clause-to-hold-a-failure-to": "struck; replaced by clipping the ground ring to the declared rect of the surface the run sits on, with a run that has nothing left inside it reported unmeasurable rather than failed. Goes into docs/COLOR.md 6 clause 7.",
+  "the-60-level-clause-of-5a-does-not-discriminate": "struck in all three classes, kept as a reported number. Re-deriving from the class median would give it zero margin (58/58/57/57 -> 57). docs/COLOR.md 5a names the measurement that would let a posterisation guard be re-declared instead."
+ },
+ "clusters": {
+  "1-2": "the two ruler corrections; both change numbers the items below are measured by",
+  "3-5": "the capture cluster -- dusk, search filters, chat hero; one ./capture.sh closes all three",
+  "6-7": "the fold cluster -- the card, then the re-render it unblocks; Blender, no capture"
+ },
+ "measurements": {
+  "3d_sweep": "every open measurement swept for an absolute coordinate or a frame ordinal. One hit survives and is intentional: rank 6's `Not a box at (200,1350)`, a prohibition rather than a specification.",
+  "cross_references": "7 `rank N` references found in open measurements, 6 of them already pointing at the wrong item and 2 at items that had closed. 0 left; all rewritten as ids.",
+  "claude_md": "`git show 3edfbf7:CLAUDE.md` says texture_budget.py does not exist and `14 of 17`; `git show HEAD:CLAUDE.md` line 93 says it exists now and `15 of 17`. 50 commits between them.",
+  "step_0": "dry run non-fast-forward, merge-base empty, rev-list 50 and 50. `git checkout -B` took it; `git fetch --filter=blob:none --deepen=300` then proved 3edfbf7 an ancestor -- a graft boundary, so the reset lost nothing. Proved after the fact, which is the wrong order."
+ },
+ "stage_complete": true,
+ "definition_of_done": "every queue item names the measurement that will close it and that measurement is anchored to something the app declares. Met: 49 items, all with a measurement, 3d sweep made, ranks contiguous, nothing blocked, no ask blocking the loop.",
+ "open_items": 49,
+ "next_stage": "IMPLEMENT"
+}
