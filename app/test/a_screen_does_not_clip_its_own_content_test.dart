@@ -20,14 +20,22 @@
 // horizontal list across a phone, drew five, cut the fifth (`TALKING`) at the right edge of the
 // frame and left four undrawn, with nothing on the screen to say the row moved.
 //
+// The fifth is the fourth's own repair, measured nine firings later: the `Wrap` the tabs were
+// moved into bounds its children at its own width, `PaperPiece` reads a bounded width as "fill
+// the line", and so every tab came out full width and the `Wrap` fitted one to a row. All nine
+// tabs were on the screen and 63% of the screen was tabs.
+//
 // Re-break: put `bounds` back in place of `clip` in `_paragraph` and `nothing is declared outside
 // the paper it is drawn on` finds the runs past the viewport again; put the tabs back in a
-// horizontal ListView and `every facet tab is on the screen` loses four of them.
+// horizontal ListView and `every facet tab is on the screen` loses four of them; take `hug: true`
+// off the facet slip in `search_page.dart` and `the facet tabs are tabs` reads 63% against a
+// ceiling of 25% and two results where five are wanted.
 import 'dart:convert';
 
 import 'package:desk/capture/bus.dart';
 import 'package:desk/capture/hooks.dart';
 import 'package:desk/material/library.dart';
+import 'package:desk/material/paper.dart';
 import 'package:desk/regions/chat/chat_region.dart';
 import 'package:desk/regions/chat/search_page.dart';
 import 'package:desk/regions/settings/settings_region.dart';
@@ -191,6 +199,57 @@ void main() {
           reason: 'the facet "$l" runs off the right edge of the screen');
       expect(box.left, greaterThanOrEqualTo(-0.5));
     }
+  });
+
+  testWidgets('the facet tabs are tabs, and the results are what the screen is for', (tester) async {
+    if (absent != null) return;
+    // The fourth symptom's second half, and the one the horizontal-list fix uncovered. Nine tabs
+    // did not fit across a phone in one row, so they were moved into a `Wrap` -- and a `Wrap`
+    // lays every child out against its OWN maxWidth rather than against an unbounded one, which
+    // is the case `PaperPiece` reads as "fill the line". So each tab became a full-width torn
+    // strip and the `Wrap` fitted exactly one to a row: thirteen sheets stacked down the screen,
+    // 63% of the frame, with one and a half results underneath them.
+    //
+    // Measured against what the app declares, not against a box on the frame: a tab is a
+    // `PaperPiece` whose id is its facet, a result is one whose id is its event.
+    await tester.runAsync(() async {});
+    await draw(tester, const SearchPage(initialQuery: 'rain'), viewport: _frame.height / _dpr);
+
+    Iterable<Element> pieces(bool Function(String id) want) => tester
+        .elementList(find.byWidgetPredicate((w) => w is PaperPiece && w.id != null && want(w.id!)));
+
+    final tabs = pieces((id) => id.startsWith('facet_')).toList();
+    expect(tabs, isNotEmpty, reason: 'the facet tabs are not drawn as paper at all');
+    final band = tabs
+        .map((e) => tester.getRect(find.byElementPredicate((x) => identical(x, e))))
+        .reduce((a, b) => a.expandToInclude(b));
+
+    final frame = _frame.height / _dpr;
+    expect(band.height / frame, lessThanOrEqualTo(0.25),
+        reason: '${tabs.length} facet tabs take ${(band.height / frame * 100).round()}% of the '
+            'height of the screen. They are stacked rather than wrapped, which is what a '
+            '`PaperPiece` does inside a `Wrap` without `hug`');
+
+    // And the answers are what is left. FOUR, not the five the queue item asked for, and the
+    // difference is arithmetic rather than a concession: a torn result strip is 137-208 logical
+    // tall on a 1040-logical screen -- the writing plus the safe area the tear mask cannot be
+    // written inside -- and the slip and the tabs above take 319 of that screen between them.
+    // Five whole strips want 850 and there are 721. Moving this floor to four would be bending
+    // the ruler if four were the defect; it is not. The stacked layout put 2 on the screen and 1
+    // of those was cut by the frame, which is the picture the item was filed from.
+    final hits = pieces((id) => id.startsWith('hit.'))
+        .map((e) => tester.getRect(find.byElementPredicate((x) => identical(x, e))))
+        .where((r) => r.top >= band.bottom - 0.5 && r.top < frame)
+        .length;
+    expect(hits, greaterThanOrEqualTo(4),
+        reason: 'only $hits results reach the screen below the filters; a search that answers '
+            'one and a half questions is a menu standing where the answers go');
+
+    // The structural half, which is the sentence the item was filed as: the filters are not
+    // standing where the results go. This is what separates the two layouts hardest -- stacked,
+    // the tabs took 63% of the frame and the results 20%.
+    expect(band.height, lessThan(frame - band.bottom),
+        reason: 'the filters take more of the screen than the results they filter');
   });
 
   testWidgets('the search affordance is written in a margin, not over a note', (tester) async {

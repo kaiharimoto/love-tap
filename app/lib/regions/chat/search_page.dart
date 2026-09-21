@@ -165,6 +165,14 @@ class SearchPageState extends State<SearchPage> {
           // `FEELINGS`, `DATES`, `THE LIST`, `STATE` -- were not drawn at all, with nothing on the
           // screen to say the row moved. A card index shows you all of its tabs; that is what a
           // tab is for. They wrap.
+          //
+          // And wrapping was not enough on its own, which took nine firings to see. A `Wrap`
+          // hands each child its own maxWidth rather than an unbounded one, and a `PaperPiece`
+          // with a bounded width fills it -- so every tab came out the full width of the line and
+          // the `Wrap` fitted exactly one to a row. Nine tabs became thirteen full-width torn
+          // strips stacked down 63% of the frame with one and a half results underneath, which
+          // is the same defect as the cut-off horizontal row wearing the opposite clothes.
+          // `hug: true` on the slip is the whole of the fix.
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Wrap(
@@ -254,6 +262,11 @@ class _Tab extends StatelessWidget {
           child: Slip(
             id: 'facet_$label',
             stock: 'index',
+            // A tab is the width of the word stamped on it. Without this the slip fills the
+            // width the `Wrap` offers, the `Wrap` fits one tab to a line, and thirteen tabs
+            // become thirteen full-width strips down 63% of the screen with the results
+            // underneath them. PaperPiece.hug is the whole of the fix.
+            hug: true,
             padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: Stamped(label, size: 9.5, colour: on ? Pen.stamp : Pen.margin),
           ),
@@ -313,6 +326,9 @@ class _Hit extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: PaperPiece(
+          // Named, so `12_search.surfaces.json` says how many results were on the desk rather
+          // than leaving a reader to guess it from a stock the facet tabs are torn from too.
+          id: 'hit.${e.id}',
           stockId: lib == null ? '' : stockVariantFor(e, lib!),
           tearId: tear,
           liftMm: 0.6,

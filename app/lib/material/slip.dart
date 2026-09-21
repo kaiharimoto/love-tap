@@ -26,6 +26,7 @@ class Slip extends StatelessWidget {
     this.row = 0,
     this.stock,
     this.width,
+    this.hug = false,
     this.torn = true,
     this.padding = const EdgeInsets.fromLTRB(15, 11, 15, 11),
     this.overlays = const [],
@@ -43,6 +44,11 @@ class Slip extends StatelessWidget {
   /// A stock name from assets/INDEX.json. Null lets the id pick one.
   final String? stock;
   final double? width;
+
+  /// Take the width of what is written on this slip rather than the width on offer. See
+  /// [PaperPiece.hug]: a slip inside a `Wrap` fills the line without it, and a `Wrap` of
+  /// full-width slips is a vertical stack.
+  final bool hug;
 
   /// A whole sheet rather than a torn piece: a card, a stub, something that was cut.
   final bool torn;
@@ -70,11 +76,13 @@ class Slip extends StatelessWidget {
     }
 
     final piece = PaperPiece(
+      id: id,
       stockId: stockId,
       tearId: tear,
       liftMm: 0.5 + (h % 5) * 0.24,
       tilt: ((h >> 16) % 100 - 50) / 100.0 * 0.016,
       width: width,
+      hug: hug,
       stockAlignment: Alignment(((h >> 3) % 100) / 50.0 - 1, ((h >> 11) % 100) / 50.0 - 1),
       stockScale: 1.12,
       padding: padding,
@@ -155,6 +163,7 @@ class Strip extends StatelessWidget {
     }
 
     return PaperPiece(
+      id: id,
       stockId: stockId,
       tearId: tear,
       liftMm: liftMm,

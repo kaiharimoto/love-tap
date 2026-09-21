@@ -111,6 +111,7 @@ class MaskCache {
 class PaperPiece extends StatelessWidget {
   const PaperPiece({
     super.key,
+    this.id,
     required this.stockId,
     this.tearId,
     this.liftMm = 0.8,
@@ -118,11 +119,20 @@ class PaperPiece extends StatelessWidget {
     this.padding = const EdgeInsets.fromLTRB(10, 8, 10, 8),
     this.safe = const [0.06, 0.07, 0.06, 0.07],
     this.width,
+    this.hug = false,
     this.child,
     this.stockAlignment = Alignment.center,
     this.stockScale = 1.0,
     this.overlays = const [],
   });
+
+  /// What this piece of paper is, in the app's own words — `facet_written`, `search_query`,
+  /// `empty.chat`, an event id. Null where nothing named it.
+  ///
+  /// It is carried into `evidence/<artifact>.surfaces.json` as `piece`, so a measurement can say
+  /// which surfaces it is about without inferring it from an asset path or a coordinate. See
+  /// `CaptureHooks.paperSurfaces`.
+  final String? id;
 
   /// A paper stock variant id, e.g. `lined_02`.
   final String stockId;
@@ -143,6 +153,21 @@ class PaperPiece extends StatelessWidget {
   /// cannot reach. tools/pack_assets.py measures this from the mask itself.
   final List<double> safe;
   final double? width;
+
+  /// Take the width of what is written on this piece, even where something above it offers a
+  /// width to fill.
+  ///
+  /// A piece with nothing constraining it is already the width of its writing — that is the
+  /// `else` branch in [_RenderWithinTear.performLayout], and it is how a slip behaves in a `Row`,
+  /// which hands its children an unbounded main axis. A `Wrap` does not: it lays every child out
+  /// against its own `maxWidth`, so a piece of paper inside one grows to fill the line and the
+  /// `Wrap` never wraps — it becomes a vertical stack of full-width sheets, one per child. That
+  /// is what thirteen facet tabs on the search screen were, and between them they took 63% of the
+  /// frame and left one and a half results underneath.
+  ///
+  /// The width is still clamped by the incoming constraints at the end of layout, so a label
+  /// longer than the screen is bounded rather than overflowing.
+  final bool hug;
   final Widget? child;
 
   /// Which square of the stock this piece is torn from, so two notes on the same stock never show
@@ -211,7 +236,8 @@ class PaperPiece extends StatelessWidget {
           // sliced the same way the mask is, so the lit fibres on the torn edge keep the length
           // they were rendered at however tall the sheet turns out to be
           Positioned.fill(child: NineSliced(asset: tearAsset('${tearId!}_edge'))),
-        _WithinTear(safe: safe, padding: padding, child: child ?? const SizedBox.shrink()),
+        _WithinTear(
+            safe: safe, padding: padding, hug: hug, child: child ?? const SizedBox.shrink()),
         ...overlays,
       ],
     );
@@ -232,6 +258,12 @@ class PaperPiece extends StatelessWidget {
       child: Align(
         alignment: Alignment.topCenter,
         heightFactor: 1.0,
+        // And the width too, when the piece is hugging. An `Align` with no `widthFactor` takes
+        // the whole of a bounded width, so a sheet that had just been laid out at the width of
+        // its own label was handed back to the `Wrap` as a full-width box with the label
+        // centred in it — the same vertical stack, with the tear in the middle of the line
+        // instead of across it.
+        widthFactor: hug ? 1.0 : null,
         child: SizedBox(
           width: width,
           child: Stack(
@@ -256,27 +288,38 @@ class PaperPiece extends StatelessWidget {
 /// fraction of that height, so the two are solved together: with content height C and safe
 /// fractions fT and fB, the piece is C / (1 - fT - fB) tall and the writing starts fT down it.
 class _WithinTear extends SingleChildRenderObjectWidget {
-  const _WithinTear({required this.safe, required this.padding, required Widget child}) : super(child: child);
+  const _WithinTear(
+      {required this.safe, required this.padding, required this.hug, required Widget child})
+      : super(child: child);
 
   final List<double> safe;
   final EdgeInsets padding;
+  final bool hug;
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderWithinTear(safe, padding);
+  RenderObject createRenderObject(BuildContext context) => _RenderWithinTear(safe, padding, hug);
 
   @override
   void updateRenderObject(BuildContext context, _RenderWithinTear renderObject) {
     renderObject
       ..safe = safe
-      ..padding = padding;
+      ..padding = padding
+      ..hug = hug;
   }
 }
 
 class _RenderWithinTear extends RenderShiftedBox {
-  _RenderWithinTear(this._safe, this._padding) : super(null);
+  _RenderWithinTear(this._safe, this._padding, this._hug) : super(null);
 
   List<double> _safe;
   EdgeInsets _padding;
+  bool _hug;
+
+  set hug(bool v) {
+    if (_hug == v) return;
+    _hug = v;
+    markNeedsLayout();
+  }
 
   set safe(List<double> v) {
     if (_safe == v) return;
@@ -299,7 +342,7 @@ class _RenderWithinTear extends RenderShiftedBox {
       return;
     }
     final double width;
-    if (constraints.hasBoundedWidth) {
+    if (constraints.hasBoundedWidth && !_hug) {
       width = constraints.maxWidth;
       final inner = (width * (1 - fL - fR) - _padding.horizontal).clamp(24.0, width);
       child.layout(BoxConstraints(maxWidth: inner), parentUsesSize: true);
@@ -308,6 +351,11 @@ class _RenderWithinTear extends RenderShiftedBox {
       // scrolling row. It used to fall back to a flat 320 points, so a filter chip reading
       // `both` was two thirds of the screen wide and the third chip was off the edge of it.
       // A piece with no width given is the width of what is written on it.
+      //
+      // `hug` takes this branch on purpose where there *is* a bound, because a `Wrap` bounds its
+      // children at its own width and a sheet that fills the line it is on is a sheet the `Wrap`
+      // can never put two of on one line. `constraints.constrain` below still clamps the result,
+      // so a label wider than the screen is bounded here rather than overflowing later.
       child.layout(const BoxConstraints(), parentUsesSize: true);
       final horizontal = (1 - fL - fR).clamp(0.35, 1.0);
       width = (child.size.width + _padding.horizontal) / horizontal;

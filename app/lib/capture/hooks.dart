@@ -15,6 +15,7 @@ import '../material/assignment.dart';
 import '../material/desk.dart';
 import '../material/fold.dart';
 import '../material/library.dart';
+import '../material/paper.dart';
 import '../regions/chat/blob_widgets.dart';
 import '../scope.dart';
 import 'bus.dart';
@@ -291,8 +292,16 @@ class CaptureHooks {
     // tree is walked once to pair them up and the render tree is walked after, where the paint
     // order and the visibility rules already are.
     final names = <RenderObject, String>{};
-    void pair(Element el) {
+    // And which piece of paper each image belongs to, where the piece has a name. An asset path
+    // says what stock a surface is torn from and nothing about what it *is*: `12_search.png` drew
+    // nineteen surfaces on `index_01` and `index_02`, of which one was the query slip and twelve
+    // were facet tabs, and no reader of the sidecar could tell them apart. A measurement that
+    // cannot name the object it is about is the failure WORKER_PROMPT 3d is written against, so
+    // the piece says its own id and the sidecar carries it.
+    final pieces = <RenderObject, String>{};
+    void pair(Element el, String? piece) {
       final w = el.widget;
+      if (w is PaperPiece && w.id != null) piece = w.id;
       final provider = w is Image ? w.image : null;
       if (provider is AssetImage) {
         // `el.renderObject` is the nearest render object at or under the element, and for an
@@ -300,15 +309,19 @@ class CaptureHooks {
         // was landing on a key nothing else ever looked up, and every surface came back with an
         // empty asset. Descend to the image itself.
         final ro = _imageUnder(el);
-        if (ro != null) names[ro] = provider.assetName;
+        if (ro != null) {
+          names[ro] = provider.assetName;
+          if (piece != null) pieces[ro] = piece;
+        }
       }
-      el.visitChildren(pair);
+      final owner = piece;
+      el.visitChildren((child) => pair(child, owner));
     }
-    WidgetsBinding.instance.rootElement?.visitChildren(pair);
+    WidgetsBinding.instance.rootElement?.visitChildren((el) => pair(el, null));
 
     final out = <Map<String, dynamic>>[];
     for (final view in RendererBinding.instance.renderViews) {
-      _collectSurfaces(view, view, view.flutterView.devicePixelRatio, names, out);
+      _collectSurfaces(view, view, view.flutterView.devicePixelRatio, names, pieces, out);
     }
     return out;
   }
@@ -331,7 +344,8 @@ class CaptureHooks {
   }
 
   static void _collectSurfaces(RenderObject node, RenderView view, double dpr,
-      Map<RenderObject, String> names, List<Map<String, dynamic>> out) {
+      Map<RenderObject, String> names, Map<RenderObject, String> pieces,
+      List<Map<String, dynamic>> out) {
     if (node is RenderImage) {
       final img = node.image;
       if (img != null && node.hasSize && node.size.width > 0 && node.size.height > 0) {
@@ -349,11 +363,12 @@ class CaptureHooks {
           'scale': double.parse(scale.toStringAsFixed(3)),
           'fit': node.fit?.name ?? '',
           'rect': [rect.left.round(), rect.top.round(), rect.width.round(), rect.height.round()],
+          if (pieces[node] != null) 'piece': pieces[node],
         });
       }
     }
     node.visitChildren((child) {
-      if (_painted(node, child)) _collectSurfaces(child, view, dpr, names, out);
+      if (_painted(node, child)) _collectSurfaces(child, view, dpr, names, pieces, out);
     });
   }
 
