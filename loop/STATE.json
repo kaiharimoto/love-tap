@@ -1565,6 +1565,36 @@
       "filed_by": "firing 36",
       "from": "the-dusk-screen-fails-31-of-its-54-runs",
       "note": "ADDRESS should also amend rank 3's own measurement, which today can be closed without the app changing. Filed unranked per 3b. It does not block rank 3: the ink defect filed beside it is real whatever this one turns out to be worth."
+    },
+    {
+      "id": "the-family-tabs-in-the-feeling-corner-are-stacked-sheets-too",
+      "row": "visual_design + the-ui",
+      "points": 0,
+      "owner_priority": "the-ui",
+      "why": "THE SAME DEFECT AS THE SEARCH FILTERS, IN THE SECOND AND LAST PLACE IT OCCURS, AND THE FIX IS ONE WORD. app/lib/feelings/corner.dart:277 lays `Slip(id: 'family_<name>', stock: 'index')` inside a `Wrap`, exactly as search_page.dart did. A `Wrap` hands each child its own maxWidth rather than an unbounded one, and `PaperPiece` reads a bounded width as an instruction to fill it, so every family tab comes out the full width of the line and the `Wrap` fits one to a row. On the search screen that was twelve full-width torn strips down 63% of the frame; here it is one per `Family` value down the feeling corner.\n\nNOT TAKEN AT FIRING 37, DELIBERATELY. WORKER_PROMPT 3b says work that is not in the queue is added to the queue rather than done, and this is a different screen from the item firing 37 was given. `PaperPiece.hug` already exists and is already tested; `hug: true` on that slip is the whole of the change. Nothing regressed by leaving it: without the flag the corner draws exactly as it drew before.",
+      "measurement": "A widget test at 1440x3120 with the real hands loaded (see app/test/the_hero_of_the_set_fits_eight_notes_test.dart for why the test font cannot be used for a layout measurement) pumps the feeling corner and reads the `PaperPiece`s whose id starts `family_`: their rects must fall on at least two rows -- more than one distinct `top` -- and the union of them must take no more than 25% of the 1040-logical frame. ANCHORED (3d): the pieces are found by the id the app gives them, not by a box on the frame, and the same ids reach `<artifact>.surfaces.json` as `piece` since firing 37. Re-break by taking `hug: true` off again and watching every tab share one column and the band pass 50%.",
+      "state": "open",
+      "closed_by": null,
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 37,
+      "filed_by": "firing 37",
+      "note": "Cheap: one line in corner.dart plus the test. Filed unranked because ADDRESS ranks."
+    },
+    {
+      "id": "a-search-result-is-a-sixth-of-the-screen-tall-and-five-do-not-fit",
+      "row": "messenger_reliability + visual_design",
+      "points": 0,
+      "owner_priority": "using-it",
+      "why": "WHAT IS LEFT OF RANK 4 AFTER ITS FILTERS WERE FIXED, AND IT IS A DIFFERENT DEFECT FROM THE ONE THAT WAS FILED. `the-search-filters-eat-two-thirds-of-the-search-screen` asked for two things: filters under 25% of the frame, and at least five results below them. Firing 37 took the filters from 63% of the frame to 18% and the results went from three on the screen to four. FIVE DO NOT FIT, and the arithmetic is not close: a torn result strip measured 137, 148, 198 and 208 logical on a 1040-logical screen, the query slip takes 116 and the tabs 191, so five whole strips want about 850 of the 721 that are left.\n\nWHY A STRIP IS THAT TALL, WHICH IS THE ACTUAL QUESTION. Two thirds of it is writing and one third is the safe area the tear mask cannot be written inside. `_Hit` draws the summary at `maxLines: 3`, an aside under it and a time label under that; `PaperPiece` then divides the content height by `1 - fT - fB`, and for these masks that came to about 1.66x. So a one-line result 40 logical tall of writing is drawn on a 137-logical sheet. On a note in the thread that ratio is the material being honest about itself; on a list of search hits it is what stops the list being a list.\n\nTHE ANTI-GOAL HAS TO BE CHECKED BEFORE THIS IS TAKEN. Shortening the strips by taking the paper off them is the named failure of the whole visual concept, so a fix here is about what is WRITTEN on the strip -- three lines of a message where one is the answer -- and not about whether it is on paper.",
+      "measurement": "evidence/12_search.surfaces.json carries at least five distinct `piece` values matching `hit.*` whose rect tops are inside the 3120-row frame, with the filter band still at or under 25% of it, and evidence/logs/12_search.text.json still showing the query highlighted in every one of them. ANCHORED (3d): the hits are counted by the `piece` ids the app gives them -- `hit.<event id>`, an event id off the spine -- which firing 37 put into the sidecar for this purpose; no pixel box and no frame ordinal. POPULATION: the number of hits the search returns for the scene's query must be unchanged in the same capture, so that five on the screen cannot be reached by the search finding fewer. Re-break by restoring `maxLines: 3` or whatever the fix moves and watching the count fall to four.",
+      "state": "open",
+      "closed_by": null,
+      "attempts": 0,
+      "rank": null,
+      "filed_at_firing": 37,
+      "filed_by": "firing 37",
+      "note": "Filed rather than folded into rank 4, because rank 4's defect was the filters and that is measurably fixed. Moving rank 4's floor from five to four to close it would have been bending the ruler; this carries the unmet half instead."
     }
   ],
   "blocked": null,
