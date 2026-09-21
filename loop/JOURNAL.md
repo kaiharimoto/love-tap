@@ -5923,3 +5923,86 @@ and is not in question.
    the difference between showing the refused note and not showing it.
 5. **Ranks 6 and 7 untouched, and 7 still must not be started.**
 
+
+---
+
+## Firing 40 — IMPLEMENT, cycle 3, 2026-09-21 — ranks 8 to 12, and four items that named the wrong cause
+
+Stage stayed IMPLEMENT. Lease taken at 15:56Z and pushed before anything was touched; the container
+handed this firing the same stale-looking depth-50 clone firing 39 got, tip `3edfbf7`, 319 commits
+behind. `git fetch --unshallow` proved it a graft boundary (0 ahead, 319 behind) and `--ff-only`
+took it. Nothing reset, nothing force-moved.
+
+The prompt's five ranks, in order, all five touched, none closed. The queue went 51 → 52: one item
+was filed out of rank 12 because it is the cause rather than the instance.
+
+### 1. Four of the five items named a cause that is not the cause
+
+This is the firing's finding, and it is about how items get written rather than about any one of
+them. Each of these was filed off a real measurement, and each drew a conclusion the measurement
+does not support:
+
+- **Rank 8** said "a blob read that resolves to nothing and fails silently". Nothing resolved to
+  nothing. A read that comes back empty draws `S.pictureNotHere` **in words**, and there is no such
+  run anywhere in `04_moments.text.json`. The read succeeded; the *decode* had not finished. The
+  proof is inside the harness's own ordering: `scene.js` writes the surfaces sidecar AFTER
+  `page.screenshot`, and the sidecar declares a decoded 375x500 image in every box the PNG shows as
+  empty paper. The artifact and its own sidecar disagree about one frame.
+- **Rank 9** said the evidence set does not reach the path. `evidence/02_chat.text.json`, from
+  firing 39, carries three of the malformed strings — `"you's phone is on normal"` and two of
+  `"you is heads down"` — on the hero chat screen. 2,056 of the seed's `state_passive` rows are
+  authored by the reader. It was never unreachable; it was unlooked-at.
+- **Rank 10** said "a person opening this app after a year of using it waits twelve seconds".
+  Measured on the real platform: they wait 1.1 to 1.3 seconds. The twelve is the seed import, paid
+  once, and every capture scene pays it because Playwright gives each scene a fresh context.
+- **Rank 11**'s residue, which firing 25 asked ADDRESS to re-file as a different defect, is this
+  same defect one layer up: an `Opacity` around the whole tab, which composites the word and
+  declares nothing.
+
+The common shape: **a number was read as a statement about the app when it was a statement about
+the instrument or about where the instrument was pointed.** WORKER_PROMPT §3d is written against
+the version of this that moves a ruler off a defect. This is the other version — the reading is
+correct and the sentence attached to it is not. Worth §3d's attention when ADDRESS next runs.
+
+### 2. What landed
+
+| rank | what | measurement |
+|---:|---|---|
+| 8 | `pictures_pending`: painted image boxes with no image yet, in `report()`, on `__deskPicturesPending`, and `settleBlobs` waits on it | discriminator test: read landed, decode not, `blobs_pending 0` and `pictures_pending 1` |
+| 9 | `voice/subject.dart` — `who` is a subject with grammar, not a string | 56 sentences (14 signals x 2 types x 2 persons) against three shape patterns, plus the read marker |
+| 10 | the three-load control, and a test on the property rather than the clock | import once; three opens read 14,061 events and re-import nothing |
+| 11 | the `Opacity(0.72)` off the Moments filter chips | the tree, not the run: nothing carrying a Text inside a fade between 0 and 0.80, across five regions |
+| 12 | every facet tab and the query slip say which row they are on | 20 tears on the search screen, 20 distinct, was 20 and 8 |
+
+Every one re-broken and watched to fail. `flutter analyze` clean, `flutter test` **+215**, exit 0
+(+202 at the start of the firing). `pack_assets.py --seed=year` before every build.
+
+### 3. The widened tear gate turns capture.sh's tears line red, on purpose
+
+`tools/check/tears.py` counted only the tears the scene report listed against event ids, so it could
+report `distinct_tears 7, repeats {}` about a frame that repeats a mask in its chrome. It reads the
+surfaces sidecar now. **Eight of eleven stills repeat a mask**, and the old gate said nothing about
+any of them. The whole map is in the new queue item, read off files already committed, so the next
+firing needs no capture to work it.
+
+The frame answer is deliberately **not** folded into the exit code: `capture.sh` turns a failed `ok`
+into `note_missing`, and booking the hero chat still as MISSING because its chrome repeats a mask
+throws the artifact away instead of measuring it. `--frame-fatal` is the one flag that folds it in,
+for the firing that clears the last repeat.
+
+### 4. Things worth the next firing's time
+
+1. **Three items are now one capture leg away from closing** — 8, 9 and 11 each have an app clause
+   that has landed and an artifact clause that wants new stills. The artifact clauses are restated
+   in `loop/STATE.json` against text and rects the app declares, with paired populations, so they can
+   be read mechanically off the sidecars. A `--only=` leg for `02_chat`, `04_moments` and `12_search`
+   would settle all three.
+2. **`pictures_pending` should change the next capture's stills.** The three blank tiles on
+   `04_moments` are a decode the shutter did not wait for; the wait now waits for it. If the next
+   `04_moments` still has blank tiles, the cause is NOT what this firing measured and the item
+   should be reopened rather than argued.
+3. **Rank 10 is a judgement, not work.** Its remaining number measures the harness. Three ways to
+   take it are written into its item, ranked.
+4. **The one untested scenario rank 10 uncovered**: a second phone pulling a year down over the
+   tailnet. That is sync, not seed import, and nothing measures it.
+5. **Ranks 6 and 7 untouched, and 7 still must not be started.**
