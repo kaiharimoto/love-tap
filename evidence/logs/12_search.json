@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4365
+   "ms": 3502
   },
   {
    "do": "wait",
@@ -18,19 +18,19 @@
   },
   {
    "do": "search",
-   "ms": 4940
+   "ms": 4963
   },
   {
    "do": "wait",
-   "ms": 1904
+   "ms": 1902
   },
   {
    "do": "shot",
-   "ms": 2663
+   "ms": 2875
   },
   {
    "do": "report",
-   "ms": 720
+   "ms": 712
   }
  ],
  "shots": [
@@ -103,12 +103,12 @@
  "blob_waits": [
   {
    "at": "12_search.png",
-   "waited_ms": 7,
+   "waited_ms": 9,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "cold_ms": 8653,
+ "cold_ms": 8926,
  "problems": [],
  "ok": true
 }

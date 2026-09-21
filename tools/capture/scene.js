@@ -151,7 +151,14 @@ function ensure(p) {
     const began = Date.now();
     let pending = null;
     let undrawn = null;
+    // Whether this page ever answered the blobs handle at all, which is what says it is this app.
+    let sawBlobsHandle = false;
+    let saidNoPicturesHandle = false;
     for (;;) {
+      const sawIt = await page
+        .evaluate(() => typeof window.__deskBlobsPending === 'function')
+        .catch(() => false);
+      if (sawIt) sawBlobsHandle = true;
       pending = await page
         .evaluate(() => (window.__deskBlobsPending ? window.__deskBlobsPending() : 0))
         .catch(() => null);
@@ -165,11 +172,37 @@ function ensure(p) {
         .evaluate(() => (window.__deskPicturesPending ? window.__deskPicturesPending() : null))
         .catch(() => null);
       if (undrawn === null) {
-        problems.push(
-          'blobs: no __deskPicturesPending handle, so this still waited for the reads and not ' +
-            'for the pictures — the gap the three blank tiles on 04_moments went through',
-        );
-        undrawn = 0;
+        // Two different absences wear the same null, and only one of them is a fault.
+        //
+        // A page that is this app but an older build of it HAS __deskBlobsPending and lacks this
+        // handle: that still waited for the reads and not for the pictures, which is the gap the
+        // three blank tiles on 04_moments went through, and it has to be said out loud. A page
+        // that is not this app at all -- the scroll probe tools/capture/capture_selftest.py
+        // drives, a bare file:// document -- has neither handle and is not a still of anything,
+        // so there is no picture it could have been waiting for.
+        //
+        // Telling them apart matters because a `problems` entry REFUSES THE SCENE. Pushing one
+        // for every page without the handle made the selftest's own re-break check fail: it puts
+        // the silent scroll return back and asserts the scene then passes, and the scene could no
+        // longer pass on any page, so `capture_selftest.py` went red on every capture and
+        // MANIFEST.json booked a failed gate. The check that caught it is the only one of the
+        // four that requires a ZERO exit; the three above it accept any non-zero and would have
+        // gone on reading ok.
+        //
+        // And it is pushed inside the poll loop, so on a page that really is mid-read it was
+        // pushed again every 100 ms until the budget ran out.
+        if (!sawBlobsHandle) {
+          undrawn = 0;
+        } else {
+          if (!saidNoPicturesHandle) {
+            saidNoPicturesHandle = true;
+            problems.push(
+              'blobs: no __deskPicturesPending handle, so this still waited for the reads and ' +
+                'not for the pictures — the gap the three blank tiles on 04_moments went through',
+            );
+          }
+          undrawn = 0;
+        }
       }
       if (pending === 0 && undrawn === 0) break;
       if (Date.now() - began >= blobsBudgetMs) break;

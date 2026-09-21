@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-21T19:26:26Z",
+ "captured_at": "2026-09-21T19:30:11Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
@@ -87,8 +87,8 @@
    ]
   },
   "12_search.png": {
-   "bytes": 4651776,
-   "written": "2026-09-21T19:27:00Z",
+   "bytes": 4651705,
+   "written": "2026-09-21T19:30:44Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -241,23 +241,22 @@
  "missing": {
   "09_two_devices.png": "not captured this session",
   "16_setup_android.png": "not captured this session",
-  "capture": "tools/capture/capture_selftest.py failed: the manifest cannot be trusted to say whose an artifact is or why it is missing; see evidence/logs/capture_selftest.txt",
   "surfaces": "a rendered surface in the library has nothing in it; see evidence/logs/surfaces.json"
  },
  "stale": {
-  "01_pulse.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "02_chat.png": "on disk from 2026-09-21T19:25:15Z, before this capture began at 2026-09-21T19:26:26Z",
-  "03_us.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "04_moments.png": "on disk from 2026-09-21T19:21:06Z, before this capture began at 2026-09-21T19:26:26Z",
-  "05_settings.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "10_first_run.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "13_messenger_states.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "14_media_viewer.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "17_setup_pwa.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "06_unfolding.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "07_feeling_landing.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "08_state_propagating.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "11_chat_scroll.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
-  "15_authored_feeling.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z"
+  "01_pulse.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "02_chat.png": "on disk from 2026-09-21T19:25:15Z, before this capture began at 2026-09-21T19:30:11Z",
+  "03_us.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "04_moments.png": "on disk from 2026-09-21T19:21:06Z, before this capture began at 2026-09-21T19:30:11Z",
+  "05_settings.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "10_first_run.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "13_messenger_states.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "14_media_viewer.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "17_setup_pwa.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "06_unfolding.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "07_feeling_landing.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "08_state_propagating.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "11_chat_scroll.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z",
+  "15_authored_feeling.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:30:11Z"
  }
 }

@@ -1,8 +1,8 @@
 {
- "commit": "c56d50c",
+ "commit": "b9130b1",
  "baseline": {
   "dir": "evidence/.previous",
-  "captured_at": "2026-09-21T19:26:08.443016+00:00"
+  "captured_at": "2026-09-21T19:27:55.601830+00:00"
  },
  "unchanged_at": 0.999,
  "labels": "new, gone, unchanged, changed \u2014 measured. `judgement` (improved or regressed) is the coherence critic's to fill in; SSIM does not know whether a change is an improvement.",
@@ -96,12 +96,12 @@
   },
   {
    "artifact": "12_search.png",
-   "label": "changed",
-   "ssim": 0.371,
+   "label": "unchanged",
+   "ssim": 0.9998,
    "judgement": null,
-   "sha": "fbf8879cd79039be",
-   "previous_sha": "b1a7a9882403ad09",
-   "label_basis": "ssim 0.371 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "sha": "ac35c2f03804cd0c",
+   "previous_sha": "fbf8879cd79039be",
+   "label_basis": "ssim 0.9998 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "13_messenger_states.png",
@@ -146,8 +146,8 @@
  "counts": {
   "new": 0,
   "gone": 0,
-  "unchanged": 14,
-  "changed": 1,
+  "unchanged": 15,
+  "changed": 0,
   "absent": 2
  }
 }

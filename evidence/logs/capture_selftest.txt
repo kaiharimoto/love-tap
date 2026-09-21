@@ -9,13 +9,13 @@ ok    and no phantom entry appears under the bare name beside it
 ok    the set still adds up to seventeen (0 present + 17 missing)
 ok    and a scene that refused an artifact silently is named as having done so
 ok    a scene that collected a problem exits 1 (1)
-ok    the problem is recorded with something in it ('pageerror: PlaywrightError: Error — at throwsHere (file:///tmp/tmp5ognsa_m/probe.html:4:13)')
+ok    the problem is recorded with something in it ('pageerror: PlaywrightError: Error — at throwsHere (file:///tmp/tmpf3kwbkv1/probe.html:4:13)')
 ok    it names the function it was thrown from, which is what e.stack always held
-ok    and the first line of STDERR is the sentence capture.sh reads ('probe refused: pageerror: PlaywrightError: Error — at throwsHere (file:///tmp/tmp5ognsa_m/probe.html:4:13)')
+ok    and the first line of STDERR is the sentence capture.sh reads ('probe refused: pageerror: PlaywrightError: Error — at throwsHere (file:///tmp/tmpf3kwbkv1/probe.html:4:13)')
 ok    so the reason that reaches MANIFEST.json names the throw site
 ok    a scene whose handle could not land is refused (1)
 ok    and no PNG is written, so the artifact is booked missing rather than present
 ok    and the anchor it could not find is in the reason, which is what makes it findable
-FAIL  and with the silent return put back the scene passes and writes a PNG, which is how a shot of six notes was booked as a shot of twelve
+ok    and with the silent return put back the scene passes and writes a PNG, which is how a shot of six notes was booked as a shot of twelve
 
-1 check(s) failed
+every check passed: a refused artifact is named, dated and attributed correctly
