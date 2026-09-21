@@ -152,19 +152,19 @@
   "04_moments.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.9033,
+    "p50": 0.8003,
     "p98": 165.0,
-    "span": 0.6795
+    "span": 0.6832
    },
    "value_bands": {
-    "ground": 0.2737,
-    "mid": 0.1146,
-    "figure": 0.6117
+    "ground": 0.3374,
+    "mid": 0.1382,
+    "figure": 0.5244
    },
    "chroma": {
-    "mean": 0.0382,
-    "p99": 0.0727,
-    "grey_fraction": 0.0687,
+    "mean": 0.0369,
+    "p99": 0.0726,
+    "grey_fraction": 0.076,
     "accent_fraction": 4e-05,
     "accent_fraction_by_family": {
      "A_paper": 2e-05,
@@ -176,16 +176,16 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0205,
-     "p99_chroma": 0.0482
+     "mean_chroma": 0.0211,
+     "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0301,
-     "p99_chroma": 0.0567
+     "mean_chroma": 0.0315,
+     "p99_chroma": 0.0674
     },
     "figure": {
-     "mean_chroma": 0.0477,
-     "p99_chroma": 0.0746
+     "mean_chroma": 0.0484,
+     "p99_chroma": 0.076
     }
    },
    "hue_families": 5,
@@ -542,8 +542,8 @@
   }
  },
  "across_the_set": {
-  "mean_chroma": 0.0449,
-  "mean_lightness_span": 0.6351,
+  "mean_chroma": 0.0448,
+  "mean_lightness_span": 0.6354,
   "hue_families_min": 4,
   "hue_families_max": 5,
   "hue_families": 5,
@@ -559,10 +559,10 @@
   "named_families_present": [
    "A_paper"
   ],
-  "grey_fraction": 0.0201,
+  "grey_fraction": 0.0208,
   "accent_fraction": 0.00079,
   "lightness_drift": 0.5417,
-  "lightness_drift_room": 0.0845,
+  "lightness_drift_room": 0.1293,
   "rooms": 10,
   "viewers": 1
  },
@@ -657,7 +657,7 @@
     "class": "room",
     "quantity": "chroma_by_band.ground.mean_chroma",
     "requires": ">= 0.03",
-    "actual": 0.0205,
+    "actual": 0.0211,
     "section": "5 floor"
    },
    {
@@ -665,7 +665,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.0746,
+    "actual": 0.076,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -897,7 +897,7 @@
     "class": "-",
     "quantity": "across_the_set.mean_chroma",
     "requires": ">= 0.045",
-    "actual": 0.0449,
+    "actual": 0.0448,
     "section": "5 floor / 7 item 1"
    },
    {

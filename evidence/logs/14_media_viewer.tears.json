@@ -1,0 +1,26 @@
+{
+ "report": "evidence/logs/14_media_viewer.report.json",
+ "visible": 4,
+ "notes_with_tears": 4,
+ "distinct_tears": 4,
+ "repeats": {},
+ "pool": 56,
+ "scroll": {
+  "first": 4382,
+  "last": 4385,
+  "of": 8387
+ },
+ "driven_ms": 96,
+ "seed": 20260903,
+ "frame": [
+  1440,
+  3120
+ ],
+ "frame_surfaces": "evidence/14_media_viewer.surfaces.json",
+ "frame_tear_draws": 12,
+ "frame_distinct_tears": 12,
+ "frame_repeats": {},
+ "frame_ok": true,
+ "ok": false,
+ "why": "only 4 notes on screen"
+}

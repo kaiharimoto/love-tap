@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4294
+   "ms": 4021
   },
   {
    "do": "wait",
-   "ms": 2305
+   "ms": 2303
   },
   {
    "do": "shot",
-   "ms": 11372
+   "ms": 6198
   },
   {
    "do": "report",
-   "ms": 725
+   "ms": 716
   }
  ],
  "shots": [
@@ -88,17 +88,19 @@
     "held_to": 23
    },
    "blobs_pending": 0,
+   "pictures_pending": 0,
    "at": "04_moments.png"
   }
  ],
  "blob_waits": [
   {
    "at": "04_moments.png",
-   "waited_ms": 6969,
-   "pending_at_shot": 0
+   "waited_ms": 2979,
+   "pending_at_shot": 0,
+   "undrawn_at_shot": 0
   }
  ],
- "cold_ms": 13447,
+ "cold_ms": 9910,
  "problems": [],
  "ok": true
 }

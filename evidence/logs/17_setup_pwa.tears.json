@@ -1,0 +1,25 @@
+{
+ "report": "evidence/logs/17_setup_pwa.report.json",
+ "visible": 0,
+ "notes_with_tears": 0,
+ "distinct_tears": 0,
+ "repeats": {},
+ "pool": 56,
+ "scroll": null,
+ "driven_ms": 0,
+ "seed": 20260903,
+ "frame": [
+  1440,
+  3120
+ ],
+ "frame_surfaces": "evidence/17_setup_pwa.surfaces.json",
+ "frame_tear_draws": 2,
+ "frame_distinct_tears": 1,
+ "frame_repeats": {
+  "assets/tears/tear_004_shadow.webp": 2
+ },
+ "frame_ok": false,
+ "frame_why": "a tear is used twice in the frame: assets/tears/tear_004_shadow.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see.",
+ "ok": false,
+ "why": "only 0 notes on screen"
+}
