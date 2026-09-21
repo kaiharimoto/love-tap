@@ -130,10 +130,27 @@ function ensure(p) {
   // either way, and a scene that runs out is recorded as having run out rather than photographed
   // blank. `blobsBudgetMs` is what a person is assumed to give it.
   const blobsBudgetMs = scene.blobs_budget_ms === undefined ? 12000 : scene.blobs_budget_ms;
+  //
+  // AND THE READS ARE NOT THE PICTURES, which is the correction firing 40 made after the same
+  // defect went through this wait unseen. `__deskBlobsPending` counts blobs the store has been
+  // asked for and has not answered. It reaches 0 the instant the last read lands — one frame and
+  // one decode before anything is on the glass, because the bytes still have to go through
+  // `Image.memory`. On firing 39's 04_moments this wait recorded `waited_ms 6969,
+  // pending_at_shot 0` and the shutter went through that gap: three of the gallery's tiles are
+  // blank index card in the PNG, with the paper's own rules running straight through the box the
+  // photograph should be in. The proof that they were a decode away rather than missing is in
+  // this script's own ordering — `surfacesSidecar` runs AFTER `page.screenshot`, and the sidecar
+  // it wrote declares a decoded 375x500 image in every one of those three boxes.
+  //
+  // So the wait asks the app both questions and goes when both are 0: no read outstanding, and
+  // no painted image box still empty. A picture this phone does not have is not one of those —
+  // it is drawn as a sentence, not as an empty box — so a missing blob still cannot hold the
+  // shutter past its budget.
   async function settleBlobs(label) {
     if (blobsBudgetMs <= 0) return;
     const began = Date.now();
     let pending = null;
+    let undrawn = null;
     for (;;) {
       pending = await page
         .evaluate(() => (window.__deskBlobsPending ? window.__deskBlobsPending() : 0))
@@ -144,17 +161,37 @@ function ensure(p) {
         problems.push('blobs: no __deskBlobsPending handle');
         return;
       }
-      if (pending === 0) break;
+      undrawn = await page
+        .evaluate(() => (window.__deskPicturesPending ? window.__deskPicturesPending() : null))
+        .catch(() => null);
+      if (undrawn === null) {
+        problems.push(
+          'blobs: no __deskPicturesPending handle, so this still waited for the reads and not ' +
+            'for the pictures — the gap the three blank tiles on 04_moments went through',
+        );
+        undrawn = 0;
+      }
+      if (pending === 0 && undrawn === 0) break;
       if (Date.now() - began >= blobsBudgetMs) break;
       await page.waitForTimeout(100);
     }
     const waited = Date.now() - began;
-    log.blob_waits.push({ at: label, waited_ms: waited, pending_at_shot: pending });
+    log.blob_waits.push({
+      at: label, waited_ms: waited, pending_at_shot: pending, undrawn_at_shot: undrawn,
+    });
     if (pending !== 0) {
       problems.push(
         `blobs: ${label} was shot with ${pending} picture(s) still being read, after waiting ` +
           `${waited} ms. The still is of a screen that had not filled yet, not of a screen that ` +
           `does not fill.`,
+      );
+    }
+    if (undrawn !== 0) {
+      problems.push(
+        `blobs: ${label} was shot with ${undrawn} picture box(es) still empty, after waiting ` +
+          `${waited} ms. The bytes had arrived and the decode had not, so the artifact shows ` +
+          `paper where a photograph goes and the surfaces sidecar — collected after the ` +
+          `shutter — declares the photograph. That disagreement is this defect, said out loud.`,
       );
     }
   }

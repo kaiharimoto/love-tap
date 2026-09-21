@@ -229,6 +229,9 @@ class CaptureHooks {
       // scene log so a still taken over an unfilled grid can never again be read as a still
       // of a grid that does not fill.
       'blobs_pending': BlobCache.outstanding,
+      // And what is still not ON THE GLASS, which is a different number and is the one the
+      // shutter actually needs. See [picturesPending].
+      'pictures_pending': picturesPending(),
     };
   }
 
@@ -265,6 +268,49 @@ class CaptureHooks {
   ///
   /// Static, like `DrivenClock.step`, because it reads the framework rather than the app: it needs
   /// no spine, no transport and no library, and a test of it should not have to stand one up.
+  /// How many pictures the screen has asked for and has not got on the glass yet: a painted
+  /// `RenderImage` that is laid out with a real size and whose `image` is still null.
+  ///
+  /// **This is the number `blobs_pending` was believed to be, and is not.** [BlobCache.outstanding]
+  /// counts READS -- how many blobs the store has been asked for and has not answered. A read
+  /// coming back is bytes arriving in Dart, and bytes arriving is not a picture: `Image.memory`
+  /// then has to decode them, which is a second asynchronous step that nothing was counting. The
+  /// two numbers differ by exactly one frame plus a decode, and the shutter fits in that gap.
+  ///
+  /// It fitted in it on firing 39's capture and nothing said so. `evidence/logs/04_moments.json`
+  /// records `waited_ms 6969, pending_at_shot 0` and the report says `blobs_pending 0`, so the
+  /// harness believed the gallery had filled. Three of its tiles are blank index card in the PNG
+  /// -- the paper's own rules run straight through the photograph's box, which is what paper
+  /// showing through a picture that is not there looks like. And `04_moments.surfaces.json`, which
+  /// `scene.js` collects AFTER the screenshot, declares a decoded 375x500 image in every one of
+  /// those boxes: between the shutter and the sidecar, the three pictures arrived.
+  ///
+  /// So the artifact and the sidecar disagreed about the same frame and no gate could see it. The
+  /// harness waited for the reads, which were done, and photographed the screen one decode early.
+  ///
+  /// A blob that resolves to nothing is NOT counted here and must not be: [BlobImage] draws
+  /// `S.pictureNotHere` in words for that case, and words are a `RenderParagraph`. So a picture
+  /// this phone does not have says so and the shutter goes; only a picture that is on its way
+  /// holds it, and it holds it on the same budget [BlobCache.outstanding] is held on.
+  static int picturesPending() {
+    var waiting = 0;
+    void walk(RenderObject node) {
+      if (node is RenderImage &&
+          node.image == null &&
+          node.hasSize &&
+          !node.size.isEmpty) {
+        waiting++;
+      }
+      node.visitChildren((child) {
+        if (_painted(node, child)) walk(child);
+      });
+    }
+    for (final view in RendererBinding.instance.renderViews) {
+      walk(view);
+    }
+    return waiting;
+  }
+
   /// Every rendered surface the app put on the glass, with the size of the render it came from
   /// and the size it was drawn at.
   ///

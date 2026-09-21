@@ -29,6 +29,7 @@ extension type _Win(JSObject o) implements JSObject {
   external set __deskStage(JSFunction f);
   external set __deskStep(JSFunction f);
   external set __deskBlobsPending(JSFunction f);
+  external set __deskPicturesPending(JSFunction f);
   external set __deskFoldLeft(JSFunction f);
   external set __deskFoldState(JSFunction f);
   external set __deskPaperSurfaces(JSFunction f);
@@ -66,6 +67,11 @@ void expose(CaptureHooks hooks) {
   // A number rather than a sentence: the harness polls it between frames and a JSON
   // parse per poll is a cost the shot does not need.
   w.__deskBlobsPending = (() => BlobCache.outstanding.toJS).toJS;
+  // The reads and the pictures are two different numbers and the shutter needs the second one.
+  // `__deskBlobsPending` answers 0 the instant the last read lands, which is one frame and one
+  // decode before the picture is on the glass; the harness shot three blank tiles through that
+  // gap on firing 39's 04_moments and its own log read `pending_at_shot 0`.
+  w.__deskPicturesPending = (() => CaptureHooks.picturesPending().toJS).toJS;
   // How much of a note's open is still to come, in microseconds. A take of the fold is as long
   // as this says and not a frame longer, so the clip cannot end on a run of settled frames.
   w.__deskFoldLeft = (() => Folds.microsecondsLeftInTheOpen.toJS).toJS;
