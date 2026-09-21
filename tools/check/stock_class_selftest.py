@@ -64,7 +64,7 @@ def shipped(path, display_width=1045):
     return np.asarray(im)
 
 
-def whole_frame_reading(rgba, floor_std, floor_levels):
+def whole_frame_reading(rgba, floor_std):
     """The same ruler with the shadow left in: the sampling accident, kept here to be failed."""
     a = rgba.astype(float)
     lum = 0.2126 * a[..., 0] + 0.7152 * a[..., 1] + 0.0722 * a[..., 2]
@@ -82,12 +82,12 @@ def whole_frame_reading(rgba, floor_std, floor_levels):
 def main():
     failures = []
 
-    cls, floor_std, floor_levels = stock_class.floor_for_fold("unfold_thirds")
+    cls, floor_std = stock_class.floor_for_fold("unfold_thirds")
     if cls is None:
         print("unfold_thirds resolves to no stock class at all", file=sys.stderr)
         return 1
     print(f"unfold_thirds is folded from {stock_class.FOLDED_FROM['unfold_thirds']!r}, "
-          f"class {cls!r}, floor {floor_std} / {floor_levels}")
+          f"class {cls!r}, floor L_std {floor_std}")
 
     # --- the consistency check: the stock this claims, against the one the renderer uses --------
     fold_py = os.path.join(ROOT, "blender", "folds", "fold.py")
@@ -110,7 +110,7 @@ def main():
     if not os.path.exists(DEFECT):
         print(f"the known defect is missing: {DEFECT}", file=sys.stderr)
         return 1
-    defect = stock_class.measure(shipped(DEFECT), floor_std, floor_levels)
+    defect = stock_class.measure(shipped(DEFECT), floor_std)
     if defect is None:
         print("the known defect read as no sheet at all", file=sys.stderr)
         return 1
@@ -126,7 +126,7 @@ def main():
     readings = []
     for path in repairs:
         im = np.asarray(Image.open(path).convert("RGBA"))
-        got = stock_class.measure(im, floor_std, floor_levels)
+        got = stock_class.measure(im, floor_std)
         if got is not None:
             readings.append((os.path.basename(path), got))
     if not readings:
@@ -156,22 +156,27 @@ def main():
             f"repaired written stock misses its own L_std floor: {', '.join(missed_std)}. §5a sets "
             f"8.0 from this class's measured median, so this means the floor or the stocks moved")
 
-    # The level clause is NOT derived from a measurement -- §5a says only that "the level counts
-    # are the existing 60 scaled by the same steps" -- and measured here it separates nothing: the
-    # defect reads 42 and the repaired stocks 57-58, so BOTH sides of a known before-and-after sit
-    # below 60. A clause that fails the repair as well as the defect cannot discriminate, and under
-    # WORKER_PROMPT 3d that disqualifies it as a ruler rather than merely dating it. It is reported
-    # here and left in `stock_class.measure`, because lowering a floor declared in docs/COLOR.md is
-    # ADDRESS's call and not a selftest's -- the queue item is
-    # `the-60-level-clause-of-5a-does-not-discriminate`.
-    missed_levels = [n for n, g in readings if g["median_levels"] < floor_levels]
-    if missed_levels:
-        print(f"  NOTE: the {floor_levels}-level clause is missed by the REPAIRED stocks too "
-              f"({', '.join(missed_levels)}), so it separates nothing here and this selftest does "
-              f"not assert on it. The L_std clause below is what discriminates.")
+    # THE LEVEL CLAUSE IS GONE, AND THIS IS THE READING THAT TOOK IT OUT. §5a said only that "the
+    # level counts are the existing 60 scaled by the same steps"; measured, 60 separates nothing,
+    # because BOTH sides of a known before-and-after sit below it -- the defect at 42 and the
+    # repaired stocks at 57-58. Struck at firing 36 from §5a and from all three tools.
+    #
+    # THE COUNT IS STILL PRINTED, AND THIS CHECK IS WHAT KEEPS THE STRIKE HONEST RATHER THAN
+    # CONVENIENT. A floor removed because it was undefended must not quietly become a floor that
+    # would now pass: if the repaired stocks ever reach 60 on their own, the reason this clause was
+    # struck has evaporated and a successor should know it, because at that point the number could
+    # be defended and the argument for striking it could not. This prints; it does not fail.
+    levels = sorted(g["median_levels"] for _, g in readings)
+    print(f"  levels, reported and gating nothing: defect {defect['median_levels']}, "
+          f"repair {levels[0]}-{levels[-1]}")
+    if levels[0] >= 60:
+        print("  NOTE: every repaired written stock now reaches 60 levels on its own. The reading "
+              "that disqualified the 60-level clause -- that it failed the repair as well as the "
+              "defect -- no longer holds, so a posterisation guard could be re-derived. That is "
+              "ADDRESS's call; file it rather than reinstating a number here.")
 
     # --- assertion 3: the shadow is the sampling accident ----------------------------------------
-    with_shadow = whole_frame_reading(shipped(DEFECT), floor_std, floor_levels)
+    with_shadow = whole_frame_reading(shipped(DEFECT), floor_std)
     if with_shadow is not None:
         print(f"  same frame WITH the drop shadow in the window: median L_std {with_shadow:7.3f}"
               f"  (floor {floor_std})")

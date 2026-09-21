@@ -11,7 +11,7 @@
 This exists to settle one question that two queue items disagreed about, and it is not a gate.
 
 `the-backing-surface-of-three-screens-is-one-rgb-value` asks that every 400x200 sample of a paper
-region measure L_std >= 8 with >= 60 distinct luminance levels. Firing 20 fixed the cause it was
+region measure L_std >= 8. Firing 20 fixed the cause it was
 filed on -- a till roll stretched across a whole phone screen, because `hashOf` overflowed a double
 on the web and picked a different stock there than on Android -- and left two of four samples still
 under that floor. `no-surface-in-this-app-is-drawn-at-its-own-resolution` then read those two as a
@@ -60,7 +60,8 @@ SOURCE = os.path.join(ROOT, "assets", "paper")
 # what the queue item asks of a 400x200 sample of a paper region
 SAMPLE = (400, 200)
 FLOOR_STD = 8.0
-FLOOR_LEVELS = 60
+# No level floor: struck from docs/COLOR.md §5a at firing 36 for failing the repaired stocks
+# (57-58) as well as the defect (42). The count is still measured and reported per window.
 
 # RegionPad's box on a 1440x3120 capture, as firing 20 measured it off the live build
 PAD_BOX = (1347, 2908)
@@ -114,7 +115,7 @@ def samples(img, n=8, seed=7):
 
 
 def passes(ss):
-    return sum(1 for s in ss if s["std"] >= FLOOR_STD and s["levels"] >= FLOOR_LEVELS)
+    return sum(1 for s in ss if s["std"] >= FLOOR_STD)
 
 
 def main():
@@ -229,7 +230,7 @@ def main():
     good = [r for r in rows if "today" in r]
     cols = ["today", "bigger"] + (["probe"] if any("probe" in r for r in rows) else [])
     report = {
-        "floor": {"std": FLOOR_STD, "levels": FLOOR_LEVELS, "sample": list(SAMPLE)},
+        "floor": {"std": FLOOR_STD, "sample": list(SAMPLE)},
         "box": list(box),
         "stocks": len(good),
         "mean_std": {k: mean([r for r in good if k in r], k) for k in cols},
@@ -260,8 +261,8 @@ def main():
             json.dump(report, fh, indent=1)
 
     w = sys.stdout.write
-    w("floor: L_std >= %.1f and >= %d levels on a %dx%d sample of the artifact\n"
-      % (FLOOR_STD, FLOOR_LEVELS, SAMPLE[0], SAMPLE[1]))
+    w("floor: L_std >= %.1f on a %dx%d sample of the artifact\n"
+      % (FLOOR_STD, SAMPLE[0], SAMPLE[1]))
     w("every column below is drawn into the same %dx%d box, so each samples the same paper\n\n"
       % box)
     head = "%-16s %-20s %-20s" % ("stock", "packed %d" % args.packed_at,

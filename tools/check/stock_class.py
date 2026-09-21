@@ -9,9 +9,29 @@ class for a stock it does not recognise rather than guessing one.
 Three classes, because one floor was the right number for a writing paper and the wrong number for
 a coated stock:
 
-  written   stock carrying printed rules, a grid or a margin    8.0 / 60
-  plain     uncoated stock with no printed content              6.0 / 48
-  coated    a surface whose correct render is near-featureless  4.0 / 32
+  written   stock carrying printed rules, a grid or a margin    8.0
+  plain     uncoated stock with no printed content              6.0
+  coated    a surface whose correct render is near-featureless  4.0
+
+ONE NUMBER PER CLASS, AND THE DISTINCT-LEVEL COUNT IS NOT A FLOOR. §5a used to carry `8.0 / 60`,
+`6.0 / 48` and `4.0 / 32`. Only the first of each pair was ever derived: 8.0 is the measured median
+of the re-rendered written stocks, while the level counts are, in §5a's own words, "the existing 60
+scaled by the same steps" -- inherited from the queue item `flat_fill.py` quotes and never
+defended. Measured at firing 33, the clause fails the REPAIRED stocks as well as the defect:
+`lined_01` 58, `lined_02` 58, `lined_03` 57, `lined_04` 57 against a floor of 60, with the known
+defect at 42. A clause that fails the repair and the defect alike separates nothing, which under
+`loop/WORKER_PROMPT.md` §3d disqualifies it rather than merely dating it.
+
+Re-deriving it from the class median is the wrong repair and firing 35 wrote down why: 57 would
+give a guard ZERO margin against a class whose worst member measures exactly it, and the first
+re-render that moved a stock by one level would turn it red for no reason anyone could name. The
+level count is a GUARD against one named failure mode -- a posterised render with variance in the
+histogram's tails and nowhere else -- not a second flatness ruler, and a guard earns its number
+from the failure it guards against. Nobody has ever measured a deliberately posterised render of
+these stocks, so there is no honest number to put there today.
+
+So the count is still MEASURED AND REPORTED on every window, and it gates nothing. §5a records
+what would let a posterisation guard be re-declared.
 
 And the window, which is the half of the ruler that cycle 3 got wrong three times. A 400x200 window
 is placed **from the surface's own declared bounds** and tiled across them at a fixed stride, and
@@ -25,11 +45,12 @@ import os
 
 import numpy as np
 
-# docs/COLOR.md §5a. (L_std floor, distinct-luminance-level floor).
+# docs/COLOR.md §5a. The L_std floor, and nothing else -- see the module docstring for why there
+# is no longer a level floor beside it.
 FLOORS = {
-    "written": (8.0, 60),
-    "plain": (6.0, 48),
-    "coated": (4.0, 32),
+    "written": 8.0,
+    "plain": 6.0,
+    "coated": 4.0,
 }
 
 # Which class each stock is in, by the prefix of its name. §5a's table, verbatim.
@@ -72,15 +93,14 @@ def classify(stock):
 
 
 def floor_for_fold(sequence):
-    """(class, L_std floor, level floor) for a fold sequence, by the stock it is folded from."""
+    """(class, L_std floor) for a fold sequence, by the stock it is folded from."""
     stock = FOLDED_FROM.get(sequence)
     if stock is None:
-        return None, None, None
+        return None, None
     cls = classify(stock)
     if cls is None:
-        return None, None, None
-    std, levels = FLOORS[cls]
-    return cls, std, levels
+        return None, None
+    return cls, FLOORS[cls]
 
 
 def sheet_bounds(rgba):
@@ -126,7 +146,7 @@ def tiled(lum, bounds, sample=SAMPLE, stride=STRIDE):
     return (ww, wh), out
 
 
-def measure(rgba, floor_std, floor_levels):
+def measure(rgba, floor_std):
     """The §5a reading of one frame: median over tiled placements, with the pass fraction."""
     found = sheet_bounds(rgba)
     if found is None:
@@ -140,7 +160,7 @@ def measure(rgba, floor_std, floor_levels):
         return None
     stds = np.array([p[0] for p in placements])
     levels = np.array([p[1] for p in placements])
-    passed = (stds >= floor_std) & (levels >= floor_levels)
+    passed = stds >= floor_std
     return {
         "bounds": [x0, y0, x1 - x0, y1 - y0],
         "window": list(window),
@@ -150,6 +170,7 @@ def measure(rgba, floor_std, floor_levels):
         "min_std": round(float(stds.min()), 3),
         "max_std": round(float(stds.max()), 3),
         "pass_fraction": round(float(passed.mean()), 3),
-        "floor": [floor_std, floor_levels],
-        "ok": bool(np.median(stds) >= floor_std and np.median(levels) >= floor_levels),
+        "floor": floor_std,
+        # `median_levels` above is reported and is not in this verdict. See the module docstring.
+        "ok": bool(np.median(stds) >= floor_std),
     }

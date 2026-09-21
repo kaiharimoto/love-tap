@@ -130,7 +130,7 @@ def fold_report(assets, sequences=None):
     for seq in sorted(os.listdir(root)):
         if sequences and seq not in sequences:
             continue
-        cls, floor_std, floor_levels = stock_class.floor_for_fold(seq)
+        cls, floor_std = stock_class.floor_for_fold(seq)
         if cls is None:
             # Refusing to guess is the point: a sequence with no declared stock gets no floor and
             # is reported as unmeasured, rather than silently taking someone else's number.
@@ -149,7 +149,7 @@ def fold_report(assets, sequences=None):
         readings = []
         for path in picks:
             with Image.open(path) as im:
-                got = stock_class.measure(np.asarray(im.convert("RGBA")), floor_std, floor_levels)
+                got = stock_class.measure(np.asarray(im.convert("RGBA")), floor_std)
             if got is not None:
                 got["frame"] = os.path.basename(path)
                 readings.append(got)
@@ -160,16 +160,15 @@ def fold_report(assets, sequences=None):
         out[seq] = {
             "stock": stock_class.FOLDED_FROM.get(seq),
             "class": cls,
-            "floor": [floor_std, floor_levels],
+            "floor": floor_std,
             "frames_read": len(readings),
             "frame_0000": {k: first[k] for k in
                            ("frame", "bounds", "window", "placements", "median_std",
                             "median_levels", "pass_fraction", "ok")},
             "median_std_over_frames": round(float(np.median([r["median_std"] for r in readings])), 3),
-            # The L_std clause is the one §5a derives from a measurement; the 60-level clause is
-            # missed by the repaired written stocks themselves (57-58), so gating on it here would
-            # fail every fold for a reason that is not about folds. Reported, not gated. See
-            # tools/check/stock_class_selftest.py.
+            # `median_levels` is reported and gates nothing. The 60-level clause was struck from
+            # §5a at firing 36: it is missed by the REPAIRED written stocks themselves (57-58) as
+            # well as by the defect (42), so it separated nothing. See stock_class.py's docstring.
             "ok": all(r["median_std"] >= floor_std for r in readings),
         }
     return out
@@ -226,7 +225,7 @@ def main():
             f = got["frame_0000"]
             report["flat"].append(
                 f"folds/{seq}: median L_std {got['median_std_over_frames']} over "
-                f"{got['frames_read']} frames < {got['floor'][0]} ({got['class']} stock "
+                f"{got['frames_read']} frames < {got['floor']} ({got['class']} stock "
                 f"{got['stock']!r}); frame 0000 reads {f['median_std']} over {f['placements']} "
                 f"placements of a {f['window'][0]}x{f['window'][1]} window, "
                 f"pass fraction {f['pass_fraction']}")

@@ -382,11 +382,11 @@ almost no tooth.
 
 Three classes, therefore:
 
-| class | what it is | stocks today | floor: L_std / distinct levels |
+| class | what it is | stocks today | floor: L_std |
 |---|---|---|---:|
-| **written** | stock carrying printed rules, a grid or a margin | `lined_*`, `spiral_*`, `legal_*`, `looseleaf_*`, `index_*`, `graph_*` | **8.0 / 60** |
-| **plain** | uncoated stock with no printed content | none today; any future blank writing stock | **6.0 / 48** |
-| **coated** | a surface whose correct render is near-featureless | `sticky_blue`, `sticky_pink`, `sticky_yellow`, `receipt` | **4.0 / 32** |
+| **written** | stock carrying printed rules, a grid or a margin | `lined_*`, `spiral_*`, `legal_*`, `looseleaf_*`, `index_*`, `graph_*` | **8.0** |
+| **plain** | uncoated stock with no printed content | none today; any future blank writing stock | **6.0** |
+| **coated** | a surface whose correct render is near-featureless | `sticky_blue`, `sticky_pink`, `sticky_yellow`, `receipt` | **4.0** |
 
 Where the numbers come from, so that none of them is a preference:
 
@@ -398,8 +398,33 @@ Where the numbers come from, so that none of them is a preference:
   that is genuinely flat today. A floor no stock can fail is not a floor.
 - **6.0** sits between them in the ratio `V_other` gives: feint rules at 39 are about half a printed
   grid's 76, and about twice a blank receipt's 16.
-- The level counts are the existing 60 scaled by the same steps, and they exist to catch a posterised
-  render that has variance in the histogram's tails and nowhere else.
+- **The distinct-level counts — 60, 48 and 32 — are STRUCK as floors, at firing 36.** They were the
+  one number in this section never derived: this list used to say only that they were "the existing
+  60 scaled by the same steps", and the 60 itself came from the queue item `flat_fill.py` quotes
+  rather than from any measurement. Measured at firing 33 over a 400×200 window tiled across each
+  sheet's own bounds, the clause fails the **repaired** written stocks as well as the defect —
+  `lined_01` 58, `lined_02` 58, `lined_03` 57, `lined_04` 57 against a floor of 60, with the known
+  defect (`unfold_thirds` frame 0000) at 42. A clause that fails the repair and the defect alike
+  separates nothing, and `loop/WORKER_PROMPT.md` §3d disqualifies such a ruler rather than merely
+  dating it.
+
+  **Re-deriving it from the class median would be the wrong repair**, and it is worth writing down
+  because it is the obvious move. Doing to 60 what this section did to 8.0 — taking the measured
+  median, which is 57 — would give a guard *zero margin* against a class whose worst member measures
+  exactly it, so the first re-render that moved a stock by one level would turn it red for no reason
+  anyone could name. The level count was never a second flatness ruler; it is a **guard against one
+  named failure mode**, a posterised render with variance in the histogram's tails and nowhere else,
+  and a guard earns its number from the failure it guards against rather than from the median of the
+  things it guards.
+
+  **What would let a posterisation guard be re-declared:** a reading of a deliberately posterised
+  render of these stocks — the same 400×200 tiled window, the same day-and-dusk pair — showing a
+  distinct-level count that the repaired stocks clear with margin. No such reading exists in this
+  repository, which is why no number stands here today. **Until one does, no item's measurement may
+  cite a distinct-level count.** The count is still measured and reported per window by
+  `stock_class.py`, `flat_fill.py` and `paper_tooth.py`, and it gates nothing in any of them;
+  `stock_class_selftest.py` prints it beside the defect and says so if the repaired stocks ever
+  reach 60 on their own, because at that point the reading that struck this clause has evaporated.
 
 **Per condition: the same number, met twice.** A stock must clear its class floor **separately at
 day and at dusk**, not on a figure combining the two. Firing 27 measured `looseleaf` clearing 8.727
@@ -410,8 +435,8 @@ figure (250/432 at firing 27) stays reported and gates nothing.
 **A fold sequence is governed by the class of the stock it is folded from.** `assets/folds/*` frames
 are paper drawn on a screen and are measured by this section like any other paper surface, at the
 frame's shipped display size inside its own declared bounds. `unfold_thirds` is folded from a
-written stock and its floor is therefore **8.0 / 60**. It measures 5.650 / 87 at frame 0000 as of
-firing 31. `tools/check/surfaces.py`'s separate 1.2-grey-level patch floor for the folds family is
+written stock and its floor is therefore **8.0**. It measures 5.686 at frame 0000 at its shipped
+size as of firing 36, over 18 placements, and 6.220 as a median over 8 frames of the sequence. `tools/check/surfaces.py`'s separate 1.2-grey-level patch floor for the folds family is
 superseded by this one, and the pack size in `SIZES['folds']` has to move with it — the pack itself
 costs 2.047 -> 1.489, so raising the floor without raising the pack only moves the failure.
 
@@ -819,8 +844,9 @@ declared flat. `--flats` runs it alone, which is what `--dir assets/shell` wants
 
 8. **A stock class map, and three floors instead of one.** Both files carry `FLOOR_STD = 8.0` and
    `FLOOR_LEVELS = 60` marked "quoted from the queue item rather than defended here". §5a defends
-   them and splits them: a stock resolves to `written`, `plain` or `coated`, and takes 8.0/60,
-   6.0/48 or 4.0/32. The map is declared beside the tools rather than inferred from the filename, so
+   the L_std half and splits it: a stock resolves to `written`, `plain` or `coated`, and takes 8.0,
+   6.0 or 4.0. `FLOOR_LEVELS` is gone from both files at firing 36 — §5a could never defend it, and
+   measured it separated nothing. The map is declared beside the tools rather than inferred from the filename, so
    that a new stock has to be classified deliberately. Both tools report day and dusk separately and
    a stock passes only when both clear. `tools/check/surfaces.py`'s 1.2-grey-level patch floor for
    `assets/folds/*` is replaced by the class floor of the stock the sequence is folded from, and

@@ -7,7 +7,7 @@
 
 `the-backing-surface-of-three-screens-is-one-rgb-value` names two clauses and asks for a gate to
 hold them: **no single RGB value occupies more than 8% of a frame**, and **every 400x200 window of
-a paper region measures L_std >= 8 with >= 60 distinct luminance levels**. Until firing 28 both
+a paper region measures L_std >= 8**. Until firing 28 both
 were measured by hand, once per firing, by whoever happened to be looking -- which is how
 `10_first_run.png` sat at 59.56% one exact colour for five firings while three separate diagnoses
 of it were written down and two of them were wrong.
@@ -40,10 +40,17 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 
 # the ceiling the queue item names, as a fraction of the frame
 DOMINANT_CEILING = 0.08
-# the tooth floors, quoted from the same item and shared with tools/paper_tooth.py
+# the tooth floor, quoted from the same item and shared with tools/paper_tooth.py.
+#
+# THERE IS NO LEVEL FLOOR BESIDE IT ANY MORE. `FLOOR_LEVELS = 60` stood here from the queue item
+# this file quotes, and docs/COLOR.md §5a inherited it without deriving it. Measured at firing 33,
+# it is missed by the REPAIRED written stocks as well as by the defect -- lined_01 58, lined_02 58,
+# lined_03 57, lined_04 57, defect 42 -- so it separated nothing, and WORKER_PROMPT §3d disqualifies
+# a ruler that fails the repair and the defect alike. Struck at firing 36. The distinct-level count
+# is still measured and reported per window; see tools/check/stock_class.py for the whole argument
+# and for what would let a posterisation guard be re-declared.
 SAMPLE = (400, 200)
 FLOOR_STD = 8.0
-FLOOR_LEVELS = 60
 
 # app/lib/material/palette.dart. A dominant value that is one of these to the bit is a fallback
 # colour showing through, not a render -- which is the whole diagnosis, stated once.
@@ -103,7 +110,7 @@ def read(path):
     x, y, bw, bh = pad_box(w, h)
     lum = np.asarray(im.convert("L"), dtype=np.float64)[y:y + bh, x:x + bw]
     ss = samples(lum)
-    passing = sum(1 for s in ss if s["std"] >= FLOOR_STD and s["levels"] >= FLOOR_LEVELS)
+    passing = sum(1 for s in ss if s["std"] >= FLOOR_STD)
     stds = sorted(s["std"] for s in ss)
     problems = []
     if share > DOMINANT_CEILING:
@@ -114,8 +121,8 @@ def read(path):
                if named else "", DOMINANT_CEILING * 100))
     if ss and passing < len(ss):
         problems.append(
-            "%d of %d %dx%d windows of the pad box are under L_std %.1f with %d levels"
-            % (len(ss) - passing, len(ss), SAMPLE[0], SAMPLE[1], FLOOR_STD, FLOOR_LEVELS))
+            "%d of %d %dx%d windows of the pad box are under L_std %.1f"
+            % (len(ss) - passing, len(ss), SAMPLE[0], SAMPLE[1], FLOOR_STD))
     return {
         "of": os.path.basename(path),
         "size": [w, h],
@@ -143,7 +150,7 @@ def main():
     results = [read(p) for p in paths]
     report = {
         "ceiling": {"dominant_share": DOMINANT_CEILING, "sample": list(SAMPLE),
-                    "std": FLOOR_STD, "levels": FLOOR_LEVELS},
+                    "std": FLOOR_STD},
         "stills": results,
         "ok": all(r["ok"] for r in results),
     }
