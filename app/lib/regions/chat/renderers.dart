@@ -21,6 +21,7 @@ import '../../material/objects.dart';
 import '../../material/palette.dart';
 import '../../spine/projections/thread.dart';
 import '../../spine/spine.dart';
+import '../../voice/subject.dart';
 import 'blob_widgets.dart';
 
 String timeLabel(int ts) =>
@@ -141,7 +142,12 @@ const Map<String, ThreadBody> kThreadRenderers = {
 /// type cannot say one thing in the thread and another on a lock screen.
 String summaryOf(Event e, {Person? me}) {
   final p = e.payload;
-  final who = me == null ? e.author.name : (e.author == me ? 'you' : e.author.name);
+  // A subject rather than a string. It was a string, and the templates below were written for
+  // a third-person one, so the reader's own rows came out as "you's phone is nearly out".
+  // See voice/subject.dart for the ten sentences and for why no lint could catch them.
+  final who = me != null && e.author == me
+      ? const Subject.you()
+      : Subject.named(e.author.name);
   switch (e.type) {
     case 'message':
       return (p['text'] as String?) ?? '';
@@ -162,7 +168,7 @@ String summaryOf(Event e, {Person? me}) {
     case 'message_delete':
       return '$who took it back';
     case 'read_marker':
-      return '$who has read up to here';
+      return '$who ${who.have} read up to here';
     case 'state_declared':
       return _stateSentence(who, p, declared: true);
     case 'state_passive':
@@ -222,27 +228,29 @@ String _when(Object? at) {
   return t == null ? '$at' : DateFormat('EEE d MMM').format(t.toLocal());
 }
 
-String _stateSentence(String who, Map<String, dynamic> p, {required bool declared}) {
+String _stateSentence(Subject who, Map<String, dynamic> p, {required bool declared}) {
   final signal = p['signal'] as String? ?? '';
   final value = p['value'];
   final words = '$value'.replaceAll('_', ' ');
   return switch (signal) {
-    'mood' => '$who is $words',
-    'availability' => '$who is $words',
+    'mood' => '$who ${who.be} $words',
+    'availability' => '$who ${who.be} $words',
     'place' => '$who · $words',
-    'need' => '$who needs ${_dial(value)}',
-    'energy' => '$who has ${_dial(value)} left',
+    'need' => '$who ${who.does('need')} ${_dial(value)}',
+    'energy' => '$who ${who.have} ${_dial(value)} left',
     'status_line' => '$who: $words',
-    'battery' => value == 'low' ? "$who's phone is nearly out" : "$who's phone is on $words",
+    'battery' => value == 'low'
+        ? '${who.possessive} phone is nearly out'
+        : '${who.possessive} phone is on $words',
     // a passive notice is a change, so it reads as one: the phone noticed them arrive, it did
     // not take a reading of where they are
     'at_home' => value == true || value == 'true' ? '$who got in' : '$who went out',
-    'ringer' => "$who's phone is on $words",
-    'moving' => '$who is $words',
-    'network' => "$who's signal is $words",
-    'local_hour' => "it is $words where $who is",
-    'last_active' => '$who was up $words',
-    'charging' => '$who is charging',
+    'ringer' => '${who.possessive} phone is on $words',
+    'moving' => '$who ${who.be} $words',
+    'network' => '${who.possessive} signal is $words',
+    'local_hour' => 'it is $words where $who ${who.be}',
+    'last_active' => '$who ${who.were} up $words',
+    'charging' => '$who ${who.be} charging',
     _ => '$who · $signal $words',
   };
 }
