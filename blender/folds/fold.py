@@ -217,6 +217,27 @@ def rules_for_a_note():
     return path, scale, offset
 
 
+# THE SPATIAL FREQUENCY OF THE FOLD'S MOTTLE, AND THE ONLY KNOB LEFT THAT IS FREE.
+#
+# `albedo_tooth` fixed the mottle's AMPLITUDE at firing 33 and took frame 0000 from 6.824 to 8.554
+# at source -- above docs/COLOR.md 5a's written floor of 8.0 -- while the SHIPPED frame still read
+# 6.928. The gap is the pack: 1440 -> 540 is a 2.67:1 LANCZOS downsample, which is a low-pass
+# filter, and it averages away mottle whose period is under about five source pixels. So the
+# amplitude is now right and half of it is thrown away before the app ever sees it.
+#
+# Lowering this number moves the mottle to a coarser spatial frequency at the SAME amplitude --
+# `rig/common.paper_material` drives its three noise nodes at `fibre_scale/3`, `fibre_scale/9` and
+# `fibre_scale*0.45` -- so it lands in the half of the spectrum the downsample keeps. It costs
+# nothing in texture, nothing in bundle size and nothing in layout, which is why firing 35 chose it
+# over raising the pack (900 would take the WebKit peak from 28.0 MB to 81.4 against a 32 MB
+# budget) and over drawing the card smaller.
+#
+# THE EARLIER SWEEP AT firing 26 IS NOT A REASON NOT TO TRY THIS, and the reason is worth keeping:
+# it swept this knob at `albedo_tooth` 1.0, a sixth of today's amplitude, where there was almost no
+# mottle for a frequency change to move. It has never been swept at 6.0.
+FOLD_FIBRE_SCALE = 1100.0
+
+
 def _stock_look():
     """The look dict of the stock named in RULES_STOCK, read from blender/paper/stocks.py.
 
@@ -228,7 +249,8 @@ def _stock_look():
     return stocks_mod.STOCK_LOOK[RULES_STOCK]
 
 
-def render_sequence(name, frames, res, samples, out_dir, condition="day", start=0, end=None):
+def render_sequence(name, frames, res, samples, out_dir, condition="day", start=0, end=None,
+                    fibre_scale=FOLD_FIBRE_SCALE):
     cfg = SEQUENCES[name]
     kind = cfg["kind"]
     rng = np.random.default_rng(20260903 + abs(hash(name)) % 1000)
@@ -292,7 +314,7 @@ def render_sequence(name, frames, res, samples, out_dir, condition="day", start=
         # fibre scale did not.
         look = _stock_look()
         mat = common.paper_material(f"{name}_paper", (0.94, 0.91, 0.85), tooth=1.05, yellowing=0.25,
-                                    sheen=0.24, fibre_scale=1100.0,
+                                    sheen=0.24, fibre_scale=fibre_scale,
                                     rules_image=rules_img, rules_uv_scale=rules_scale,
                                     rules_uv_offset=rules_offset,
                                     albedo_tooth=look.get("albedo", 1.0))
@@ -388,13 +410,18 @@ def main():
     ap.add_argument("--start", type=int, default=0)
     ap.add_argument("--end", type=int)
     ap.add_argument("--out", default=OUT)
+    ap.add_argument("--fibre-scale", type=float, default=FOLD_FIBRE_SCALE,
+                    help="the fold paper's fibre scale; see FOLD_FIBRE_SCALE. Lower is coarser. "
+                         "This exists so the sweep can be driven without editing the module, "
+                         "which is how the last four sweeps here were run and re-run.")
     a = ap.parse_args(argv)
     names = list(SEQUENCES) if a.all else ([a.seq] if a.seq else [])
     if not names:
         ap.error("--seq or --all")
     for n in names:
         frames = a.frames or SEQUENCES[n]["frames"]
-        render_sequence(n, frames, a.res, a.samples, os.path.join(a.out, n), a.condition, a.start, a.end)
+        render_sequence(n, frames, a.res, a.samples, os.path.join(a.out, n), a.condition, a.start,
+                        a.end, fibre_scale=a.fibre_scale)
 
 
 if __name__ == "__main__":
