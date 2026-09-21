@@ -121,10 +121,43 @@ Seven named steps, in OKLab L. Every surface in the app is one of these or it is
 | `stock_bright` | 0.96 | ± 0.02 | index card, correction fluid |
 
 The `ink` ceiling of 0.40 is derived rather than chosen. The darkest ground a word can legitimately
-land on is aged stock rendered at dusk, which measures Y p50 0.5528 in `crops/dusk_pulse.png`. The
-dusk body floor of 5.0:1 (§6) against that ground requires the ink at Y ≤ 0.0706, which is OKLab
-L 0.413. Rounding down to 0.40 gives the hairline strokes of a handwritten face a little room. Every
-ink in `app/lib/material/palette.dart` is tested against that number in §10.
+land on is `sticky_pink_02` rendered at dusk, which measures Y p50 0.4506 in `assets/paper`. The
+dusk body floor of 5.0:1 (§6) against that ground requires the ink at Y ≤ 0.0501, which is OKLab
+L 0.368. The ceiling stays at 0.40 — it is the ladder's step and the mid band above it does not
+move — so the binding constraint on an achromatic ink is the contrast, not the lightness, and §10
+is where it is checked. Every ink in `app/lib/material/palette.dart` is tested against that number
+in §10.
+
+**Amended 2026-09-21, because this derivation named a stock that is not in the library.** It read:
+"the darkest ground a word can legitimately land on is aged stock rendered at dusk, which measures
+Y p50 0.5528 in `crops/dusk_pulse.png`", and put the ink at L ≤ 0.413. Two things were wrong with
+it, both measured at firing 36 and both confirmed independently at firing 38 by
+`tools/check/dusk_ground.py`, which reads the renders rather than quoting a capture.
+
+There is **no `aged` render**. `assets/paper` holds graph, index, legal, lined, looseleaf, receipt,
+spiral and three stickies, in day and dusk, and nothing called `aged` in either light. What does
+exist is `Paper.aged`, a flat swatch in `app/lib/material/palette.dart` — a colour this app
+declares and never draws. That is how the name survived four cycles of review: the law cited
+something real enough to grep for and not real enough to measure. The name still appears in §5's
+band table above and in §10's prose, where it describes that swatch and is correct.
+
+And **0.5528 was never the darkest stock**. It is `index_02_dusk`, which measures 0.5530 — a
+middling written stock. The written stocks sit at 0.5450–0.5627 and that is the band the figure
+came out of. Eleven dusk renders ship darker, down to `sticky_pink_02_dusk` at 0.4506, a tenth of
+a unit of luminance below the premise. A sticky is a ground for a word here:
+`app/test/legible_on_what_it_is_on_test.dart` has swept every ink against `Paper.stickyPink` since
+it was written.
+
+What it cost: `Pen.stamp` and `Pen.margin` were `#464648`, which is 5.406:1 against 0.5528 and
+**4.490:1 against 0.4506**, under this section's own dusk floor. They are now `#3F3F41`, OKLab
+L 0.3684, which reads 5.009:1 on that sticky and improves the day sweep with it — worst 6.59:1
+where it was 5.91. Nothing else in the palette moved: `ballpoint` reads 6.797:1 on the same
+ground, `graphite` 5.411:1 and `biro` 8.227:1. `Pen.red` is chromatic, is exempted from the L
+ceiling by the amendment below for a reason that still holds, and reads 3.17:1 there; it is
+written down in the test's dusk ratchet rather than excluded from the sweep.
+
+The floors did not move and no step of the ladder was redrawn. What changed is which stock the
+derivation is taken against, and it is now a stock that can be opened.
 
 **Amended 2026-09-16, by a measurement taken while implementing it.** As first written this
 section put *every* pen, pencil and stamp that carries a word at L ≤ 0.40, and §10's own table

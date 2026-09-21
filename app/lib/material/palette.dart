@@ -1,10 +1,22 @@
 // Colours from stationery, not from a UI palette (DIRECTION.md). Nothing here emits light: no
 // glow, no saturated brand colour, no gradient that is not the shading of a fold.
 //
-// docs/COLOR.md is the colour law and wins on any number here. In particular every ink in this
-// file sits at OKLab L <= 0.40, which is the `ink` step of its ladder, derived from the darkest
-// ground a word can legitimately land on: aged stock rendered at dusk, Y p50 0.5528, which at the
-// dusk body floor of 5.0:1 puts the ink at L <= 0.413.
+// docs/COLOR.md is the colour law and wins on any number here. In particular every achromatic ink
+// in this file sits at OKLab L <= 0.40, which is the `ink` step of its ladder, derived from the
+// darkest ground a word can legitimately land on.
+//
+// THAT DERIVATION NAMED A STOCK THAT IS NOT IN THE LIBRARY, and this header repeated it for four
+// cycles. It read "aged stock rendered at dusk, Y p50 0.5528, which at the dusk body floor of
+// 5.0:1 puts the ink at L <= 0.413". There is no `aged` render in assets/paper in any light --
+// `Paper.aged` below is a flat swatch the app declares and never draws, which is exactly how the
+// name survived -- and 0.5528 is `index_02_dusk`, a middling written stock. Eleven dusk stocks
+// ship darker than it.
+//
+// The darkest ground a word can actually land on is `sticky_pink_02_dusk` at Y p50 0.4506, and a
+// sticky has always been a ground for a word here: legible_on_what_it_is_on_test.dart has swept
+// every ink against `Paper.stickyPink` since it was written. The same dusk floor of 5.0:1 against
+// 0.4506 puts the ink at Y <= 0.0501, which is OKLab L 0.368. `tools/check/dusk_ground.py`
+// measures it from the renders rather than quoting it, and the test reads what it wrote.
 //
 // `Pen.onWood` used to live here, for the few headings written straight onto the desk. It is gone
 // rather than retuned. It measured 4.94:1 against the flat colour the desk declares and 2.49:1
@@ -27,8 +39,19 @@ class Pen {
   static const red = Color(0xFFA8322B);
 
   /// The stamped furniture face. Inside the `ink` step of docs/COLOR.md's ladder at OKLab
-  /// L 0.3949, where it was 0.410 and just outside it.
-  static const stamp = Color(0xFF464648);
+  /// L 0.3684 -- it was 0.410 and outside it, then 0.3949 and inside a ceiling derived from the
+  /// wrong stock, and is now inside one derived from the darkest stock that ships.
+  ///
+  /// At #464648 it read 4.490:1 on `sticky_pink_02_dusk` against a dusk body floor of 5.0. That
+  /// was invisible for four cycles because the ceiling it was tuned to came from `index_02_dusk`
+  /// by another name. At #3F3F41 it reads 5.009:1 there, and its day sweep improves with it:
+  /// worst 6.59:1 on the pink sticky where it was 5.91, best 9.33:1 on index where it was 8.36.
+  ///
+  /// The dusk margin is 0.009, which is thin on purpose: this is the LIGHTEST ink that clears the
+  /// floor, and stamp and margin are furniture and want to recede. It is arithmetic on committed
+  /// renders rather than a sampled reading, so it does not drift -- but a re-render that darkens
+  /// that sticky turns it red, and that is the test doing its job rather than a flake.
+  static const stamp = Color(0xFF3F3F41);
 
   /// Pencil, for the margin of a page.
   ///
@@ -38,9 +61,12 @@ class Pen {
   /// a pink sticky, 4.01 on a yellow one, 4.03 on the underside of a turned corner, 4.05 on aged,
   /// 4.22 on legal, 4.47 on graph. Its own comment said it had been tuned "against the palest
   /// stock", and that is the wrong end of the range to tune against: ink is tuned against the
-  /// darkest ground it can land on. At L 0.3949 it now clears every stock, worst 5.91:1 on the
-  /// pink sticky, which also clears the dusk floor of 5.0.
-  static const margin = Color(0xFF464648);
+  /// darkest ground it can land on -- which is the mistake this constant made twice. The first
+  /// time it was tuned against the palest stock. The second time it was tuned against a ceiling
+  /// derived from `index_02_dusk` under the name "aged", and cleared 5.0 against that and 4.490
+  /// against the sticky that is really darkest. At L 0.3684 it clears every stock in the library,
+  /// worst 6.59:1 on the pink sticky by day, and 5.009:1 on the same stock at dusk.
+  static const margin = Color(0xFF3F3F41);
 
   /// How far a margin note is thinned toward the paper behind it.
   ///
@@ -57,9 +83,11 @@ class Pen {
   /// shape of an ink that is fractionally too pale rather than one on the wrong ground.
   ///
   /// The arithmetic, composited the way `Opacity` composites, over the ten stocks in the library:
-  /// at full strength [margin] runs 5.91:1 (pink sticky) to 8.36:1 (index) and clears the 4.5
-  /// body floor everywhere. At 0.78 it runs 3.74:1 to 4.68:1 and six of the ten are below floor
-  /// -- pink sticky 3.74, stickyYellow 4.22, underside 4.23, aged 4.24, legal 4.36, spiral 4.49.
+  /// at full strength [margin] runs 6.59:1 (pink sticky) to 9.33:1 (index) and clears the 4.5
+  /// body floor everywhere. The 0.78 figures below were taken when it was #464648 and are kept as
+  /// they were measured, because they are what the defect read: 3.74:1 to 4.68:1, with six of the
+  /// ten below floor -- pink sticky 3.74, stickyYellow 4.22, underside 4.23, aged 4.24, legal
+  /// 4.36, spiral 4.49. Darkening the ink lifts them; it does not make thinning a word safe.
   /// [margin] was derived to sit exactly at the ink ceiling of the ladder and therefore has no
   /// headroom at all to spend on being faint: the whole of its margin over the floor is the thing
   /// being thinned away.

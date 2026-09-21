@@ -49,6 +49,8 @@
 // rather than tuning the pair, and `Pen.onWood` and `Hands.onDesk` are deleted. The three tests
 // that asserted those pairs are gone with them; what replaces them is the ladder, below, which
 // is the rule they were a special case of.
+import 'dart:convert';
+import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:desk/material/desk.dart';
@@ -94,11 +96,29 @@ double _oklabChroma(Color c) {
 /// Nothing in this app is set at 24px, so nothing in this app gets the large-text floor.
 const _body = 4.5;
 
-/// The `ink` step of the ladder. Derived rather than chosen: the darkest ground a word can
-/// legitimately land on is aged stock rendered at dusk, Y p50 0.5528, and the dusk body floor of
-/// 5.0:1 against that puts the ink at Y <= 0.0706, which is OKLab L 0.413. Rounded down to give a
-/// handwritten hairline a little room.
+/// The `ink` step of the ladder. Derived rather than chosen -- and derived, until firing 38, from
+/// a stock that is not in the library.
+///
+/// The derivation used to read: "the darkest ground a word can legitimately land on is aged stock
+/// rendered at dusk, Y p50 0.5528, and the dusk body floor of 5.0:1 against that puts the ink at
+/// Y <= 0.0706, which is OKLab L 0.413." There is no `aged` render in `assets/paper` in any light
+/// -- `Paper.aged` is a flat swatch the app declares and never draws, which is how the name
+/// survived four cycles -- and 0.5528 is `index_02_dusk`, a middling written stock, not the
+/// darkest anything. Eleven dusk stocks ship darker than it.
+///
+/// The darkest ground a word can actually land on is `sticky_pink_02_dusk` at Y p50 0.4506, and
+/// the app has always treated a sticky as a ground for a word: the sweep below has read every ink
+/// against `Paper.stickyPink` since it was written. The same body floor of 5.0:1 against 0.4506
+/// puts the ink at Y <= 0.0501, which is OKLab L 0.368.
+///
+/// The ceiling stays at 0.40 because that is what the ladder declares and this file does not get
+/// to move it; what the re-derivation binds is the CONTRAST, and that is checked against the
+/// measured library in the dusk test at the end of this file rather than inferred from a swatch.
 const _inkCeiling = 0.40;
+
+/// The dusk body floor, from docs/COLOR.md §6. A word at dusk is read in less light and asks for
+/// more separation than the 4.5 a day screen asks for.
+const _duskBody = 5.0;
 
 /// The `mid` step: contact shadow, the underside of a turned corner, tape, a photograph's
 /// midtones. Nothing that sits here carries a word.
@@ -168,7 +188,7 @@ Color _thinned(Color ink, double alpha, Color ground) => Color.lerp(ground, ink,
 ///
 /// Seven of the eight entries that used to be here were `Pen.margin`, which was #6B6B6E: OKLab
 /// L 0.529, sitting in the `mid` band, which is where shadows live. It was a shadow that had been
-/// asked to spell. At L 0.3949 it clears every stock in the library, worst 5.91:1 on the pink
+/// asked to spell. At L 0.3684 it clears every stock in the library, worst 6.59:1 on the pink
 /// sticky, so all seven are gone from this list because they are gone from the build.
 ///
 /// What is left is a red pen on a pink sticky note, which is a real pair and a genuinely hard
@@ -179,6 +199,7 @@ const _knownBelowFloor = <String, double>{
 };
 
 void main() {
+  _theDarkestGroundThatShips();
   test('every ink sits in the ink step of the ladder', () {
     // docs/COLOR.md section 2, as amended on 2026-09-16 by the measurement this test took.
     //
@@ -282,7 +303,7 @@ void main() {
     // The guard the nineteen failing timestamps did not have. Put `Pen.marginThinning` back to
     // 0.78 and this fails on six of the ten stocks -- pink sticky 3.74:1, stickyYellow 4.22,
     // underside 4.23, aged 4.24, legal 4.36, spiral 4.49 -- while all six tests above stay
-    // green, because the ink they read is still #464648 at full strength and the thinning never
+    // green, because the ink they read is still the declared ink at full strength and the thinning never
     // reached it. That is the whole of the blind spot, demonstrated rather than argued.
     //
     // The pair is checked against the stock rather than against the desk on purpose: `Opacity`
@@ -306,5 +327,105 @@ void main() {
         reason: 'these inks are below $_body:1 once the widget has thinned them, however well '
             'they read at full strength: '
             '${below.entries.map((e) => '${e.key} at ${e.value.toStringAsFixed(2)}:1').join(', ')}');
+  });
+}
+
+// ---------------------------------------------------------------------------------------------
+// And the dusk half, read from the stocks that ship rather than from a swatch.
+//
+// Everything above this line is a declared colour against a declared colour, and every ground in
+// this app is a render. That is said at the top of the file and it is the reason `Paper.aged`
+// could be the premise of the whole ink ladder while no `aged` render existed: a flat swatch is
+// not a stock, and nothing was comparing the two.
+//
+// `tools/check/dusk_ground.py` measures the median luminance of every render in `assets/paper`
+// and writes `evidence/dusk_ground.json`. This reads that file, takes the darkest dusk ground it
+// found, and asks the achromatic inks for the dusk body floor against it -- which is the law's own
+// derivation, applied to the library the law is about.
+//
+// ACHROMATIC ONLY, and that is the law as written rather than an exemption invented here. §2
+// binds an achromatic ink to L <= 0.40 because it carries body text; a chromatic one is allowed
+// above that, because forcing `Pen.red` to 0.40 takes its chroma from 0.1553 to 0.1215 and §5
+// anchors the figure chroma ceiling on that 0.1553. Red therefore goes in a ratchet with its
+// measured number, the way `_knownBelowFloor` already holds `red on stickyPink`, rather than
+// being silently excluded.
+//
+// Re-break: put `Pen.stamp` and `Pen.margin` back to #464648 and this fails at 4.490:1 against
+// sticky_pink_02_dusk, naming the stock.
+
+/// Chromatic inks below the dusk floor on the darkest ground, written down with what they measure.
+/// It may only shrink, like its day-lit sibling above.
+const _knownBelowFloorAtDusk = <String, double>{
+  'red': 3.17,
+};
+
+/// Read once, so a missing or malformed report fails loudly rather than skipping the test.
+Map<String, dynamic> _duskGround() {
+  // The test runs with `app/` as its working directory.
+  final f = File('../evidence/dusk_ground.json');
+  if (!f.existsSync()) {
+    fail('evidence/dusk_ground.json is missing. Run `python3 tools/check/dusk_ground.py --out '
+        'evidence/dusk_ground.json`. A check that skips itself when its measurement is absent is '
+        'the same failure as a floor that gates nothing.');
+  }
+  return jsonDecode(f.readAsStringSync()) as Map<String, dynamic>;
+}
+
+void _theDarkestGroundThatShips() {
+  test('every achromatic ink clears the dusk floor on the darkest stock that actually ships', () {
+    final report = _duskGround();
+    final darkest = report['darkest_dusk'] as Map<String, dynamic>;
+    final stock = darkest['stock'] as String;
+    final groundY = (darkest['p50'] as num).toDouble();
+
+    // The measurement is of the library, so say how much of it was read. A floor met because the
+    // sweep shrank is the failure WORKER_PROMPT §3d's population clause exists for.
+    final counted = report['counted'] as Map<String, dynamic>;
+    expect((counted['dusk'] as num).toInt(), greaterThanOrEqualTo(27),
+        reason: 'the dusk library had 27 renders when this was written and has '
+            '${counted['dusk']}. A darkest-ground floor is only as good as the set it is the '
+            'darkest of, so this may not fall.');
+
+    var walked = 0;
+    final below = <String, double>{};
+    for (final e in _inks.entries) {
+      // (ink, darkest dusk ground) -- one pair per ink, counted so the assertion cannot be met
+      // by an ink leaving the sweep.
+      walked++;
+      final r = (groundY + 0.05) / (_lum(e.value) + 0.05);
+      if (_oklabChroma(e.value) >= _chromatic) {
+        final known = _knownBelowFloorAtDusk[e.key];
+        expect(known, isNotNull,
+            reason: '${e.key} is chromatic and is not written down in _knownBelowFloorAtDusk');
+        expect(r, greaterThanOrEqualTo(known! - 0.01),
+            reason: '${e.key} was $known:1 on $stock and is now ${r.toStringAsFixed(2)}:1, '
+                'which is the wrong direction');
+        continue;
+      }
+      if (r < _duskBody) below['${e.key} on $stock'] = r;
+    }
+
+    expect(walked, _inks.length,
+        reason: 'the sweep read $walked of ${_inks.length} inks');
+    expect(below, isEmpty,
+        reason: 'these achromatic inks are below $_duskBody:1 on $stock, which at Y p50 '
+            '$groundY is the darkest ground a word can land on in this build: '
+            '${below.entries.map((e) => '${e.key} at ${e.value.toStringAsFixed(3)}:1').join(', ')}'
+            '. docs/COLOR.md §2 derives the ink ceiling from exactly this stock, so an ink that '
+            'misses here is an ink the law does not actually permit.');
+  });
+
+  test('the law quotes a stock that is on disk', () {
+    // The other half of what firing 36 found, kept as a test so the sentence cannot drift back.
+    // §2 named a render that does not exist; if one is ever added under that name this test says
+    // so rather than continuing to assert a correction that is no longer needed.
+    final premise = _duskGround()['law_premise'] as Map<String, dynamic>;
+    expect(premise['no_such_render'], isTrue,
+        reason: 'an `aged` render now exists in assets/paper. docs/COLOR.md §2 and '
+            'material/palette.dart were corrected on the basis that it did not, and both should '
+            'be read again against it.');
+    expect((premise['darker_stocks_shipping'] as List).isNotEmpty, isTrue,
+        reason: 'nothing ships darker than §2\'s premise any more, which would mean the premise '
+            'has become the darkest ground after all and this file can stop correcting it');
   });
 }
