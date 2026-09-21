@@ -73,7 +73,8 @@
    159,
    1517,
    3261
-  ]
+  ],
+  "piece": "pad.chat"
  },
  {
   "asset": "assets/paper/legal_02.webp",
@@ -92,7 +93,8 @@
    138,
    1517,
    3261
-  ]
+  ],
+  "piece": "pad.chat"
  },
  {
   "asset": "assets/tears/tear_005_shadow.webp",
@@ -111,7 +113,8 @@
    282,
    278,
    120
-  ]
+  ],
+  "piece": "search-affordance"
  },
  {
   "asset": "assets/paper/lined_03.webp",
@@ -130,7 +133,8 @@
    284,
    266,
    115
-  ]
+  ],
+  "piece": "search-affordance"
  },
  {
   "asset": "assets/tears/tear_039_shadow.webp",
@@ -149,7 +153,8 @@
    2245,
    1523,
    112
-  ]
+  ],
+  "piece": "margin-0001M4ZQQ0H0PPVTKMMQEE268D"
  },
  {
   "asset": "assets/paper/looseleaf_02.webp",
@@ -168,7 +173,8 @@
    2256,
    1462,
    107
-  ]
+  ],
+  "piece": "margin-0001M4ZQQ0H0PPVTKMMQEE268D"
  },
  {
   "asset": "assets/tears/tear_031_shadow.webp",
@@ -225,7 +231,8 @@
    1484,
    1523,
    141
-  ]
+  ],
+  "piece": "margin-0001M3Y4GR5ZE8WDQ00S3NX0KF"
  },
  {
   "asset": "assets/paper/lined_01.webp",
@@ -244,7 +251,8 @@
    1479,
    1462,
    136
-  ]
+  ],
+  "piece": "margin-0001M3Y4GR5ZE8WDQ00S3NX0KF"
  },
  {
   "asset": "assets/tears/tear_047_shadow.webp",
@@ -415,7 +423,8 @@
    -750,
    1523,
    140
-  ]
+  ],
+  "piece": "margin-0001M2CBR08X76QDS8H7W19XQW"
  },
  {
   "asset": "assets/paper/looseleaf_02.webp",
@@ -434,7 +443,8 @@
    -738,
    1462,
    134
-  ]
+  ],
+  "piece": "margin-0001M2CBR08X76QDS8H7W19XQW"
  },
  {
   "asset": "assets/tears/tear_049_shadow.webp",
@@ -453,7 +463,8 @@
    -932,
    1523,
    180
-  ]
+  ],
+  "piece": "margin-0001M29290CECT4GB84Z9HMXNY"
  },
  {
   "asset": "assets/paper/looseleaf_02.webp",
@@ -472,7 +483,8 @@
    -942,
    1462,
    173
-  ]
+  ],
+  "piece": "margin-0001M29290CECT4GB84Z9HMXNY"
  },
  {
   "asset": "assets/tears/tear_036_shadow.webp",
@@ -491,7 +503,8 @@
    -1093,
    1523,
    160
-  ]
+  ],
+  "piece": "margin-0001M1R3A0PT3J336CDZYHMJBS"
  },
  {
   "asset": "assets/paper/index_02.webp",
@@ -510,7 +523,8 @@
    -1093,
    1462,
    153
-  ]
+  ],
+  "piece": "margin-0001M1R3A0PT3J336CDZYHMJBS"
  },
  {
   "asset": "assets/tears/tear_014_shadow.webp",
@@ -719,7 +733,8 @@
    -3571,
    1523,
    119
-  ]
+  ],
+  "piece": "margin-0001M09C68FQ5MRZPPWFPGPRGA"
  },
  {
   "asset": "assets/paper/looseleaf_02.webp",
@@ -738,7 +753,8 @@
    -3573,
    1462,
    114
-  ]
+  ],
+  "piece": "margin-0001M09C68FQ5MRZPPWFPGPRGA"
  },
  {
   "asset": "assets/tears/tear_035_shadow.webp",
@@ -757,7 +773,8 @@
    -3714,
    1523,
    136
-  ]
+  ],
+  "piece": "margin-0001KZD6TGX24EBZG6E3GAT3BM"
  },
  {
   "asset": "assets/paper/lined_02.webp",
@@ -776,7 +793,8 @@
    -3714,
    1462,
    131
-  ]
+  ],
+  "piece": "margin-0001KZD6TGX24EBZG6E3GAT3BM"
  },
  {
   "asset": "assets/tears/tear_005_shadow.webp",
@@ -871,7 +889,8 @@
    2695,
    1696,
    234
-  ]
+  ],
+  "piece": "composer"
  },
  {
   "asset": "assets/paper/lined_04.webp",
@@ -890,7 +909,8 @@
    2713,
    1628,
    225
-  ]
+  ],
+  "piece": "composer"
  },
  {
   "asset": "assets/paper/index_01.webp",
@@ -1023,7 +1043,8 @@
    -5,
    1696,
    394
-  ]
+  ],
+  "piece": "search_query"
  },
  {
   "asset": "assets/paper/index_01.webp",
@@ -1042,7 +1063,8 @@
    27,
    1519,
    353
-  ]
+  ],
+  "piece": "search_query"
  },
  {
   "asset": "assets/tears/tear_001_shadow.webp",
@@ -1051,17 +1073,98 @@
    578
   ],
   "drawn": [
-   1338,
+   306,
    123
   ],
-  "scale": 1.307,
+  "scale": 0.299,
   "fit": "fill",
   "rect": [
-   -116,
-   368,
-   1673,
+   13,
+   369,
+   383,
+   154
+  ],
+  "piece": "facet_everything"
+ },
+ {
+  "asset": "assets/paper/index_02.webp",
+  "src": [
+   1500,
+   933
+  ],
+  "drawn": [
+   306,
+   123
+  ],
+  "scale": 0.204,
+  "fit": "cover",
+  "rect": [
+   33,
+   382,
+   343,
+   138
+  ],
+  "piece": "facet_everything"
+ },
+ {
+  "asset": "assets/tears/tear_001_shadow.webp",
+  "src": [
+   1024,
+   578
+  ],
+  "drawn": [
+   235,
+   123
+  ],
+  "scale": 0.229,
+  "fit": "fill",
+  "rect": [
+   357,
+   369,
+   294,
    156
-  ]
+  ],
+  "piece": "facet_written"
+ },
+ {
+  "asset": "assets/paper/index_01.webp",
+  "src": [
+   1500,
+   933
+  ],
+  "drawn": [
+   235,
+   123
+  ],
+  "scale": 0.156,
+  "fit": "cover",
+  "rect": [
+   379,
+   382,
+   264,
+   139
+  ],
+  "piece": "facet_written"
+ },
+ {
+  "asset": "assets/tears/tear_001_shadow.webp",
+  "src": [
+   1024,
+   578
+  ],
+  "drawn": [
+   356,
+   123
+  ],
+  "scale": 0.347,
+  "fit": "fill",
+  "rect": [
+   606,
+   368,
+   445,
+   156
+  ],
+  "piece": "facet_photographs"
  },
  {
   "asset": "assets/paper/index_02.webp",
@@ -1070,17 +1173,18 @@
    933
   ],
   "drawn": [
-   1338,
+   356,
    123
   ],
-  "scale": 0.892,
+  "scale": 0.237,
   "fit": "cover",
   "rect": [
-   -26,
-   381,
-   1499,
+   620,
+   380,
+   399,
    140
-  ]
+  ],
+  "piece": "facet_photographs"
  },
  {
   "asset": "assets/tears/tear_001_shadow.webp",
@@ -1089,245 +1193,18 @@
    578
   ],
   "drawn": [
-   1338,
+   184,
    123
   ],
-  "scale": 1.307,
+  "scale": 0.213,
   "fit": "fill",
   "rect": [
-   -117,
-   529,
-   1673,
-   165
-  ]
- },
- {
-  "asset": "assets/paper/index_01.webp",
-  "src": [
-   1500,
-   933
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 0.892,
-  "fit": "cover",
-  "rect": [
-   6,
-   543,
-   1499,
-   148
-  ]
- },
- {
-  "asset": "assets/tears/tear_001_shadow.webp",
-  "src": [
-   1024,
-   578
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 1.307,
-  "fit": "fill",
-  "rect": [
-   -117,
-   694,
-   1673,
-   164
-  ]
- },
- {
-  "asset": "assets/paper/index_02.webp",
-  "src": [
-   1500,
-   933
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 0.892,
-  "fit": "cover",
-  "rect": [
-   -65,
-   707,
-   1499,
-   147
-  ]
- },
- {
-  "asset": "assets/tears/tear_001_shadow.webp",
-  "src": [
-   1024,
-   578
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 1.307,
-  "fit": "fill",
-  "rect": [
-   -117,
-   858,
-   1674,
-   166
-  ]
- },
- {
-  "asset": "assets/paper/index_02.webp",
-  "src": [
-   1500,
-   933
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 0.892,
-  "fit": "cover",
-  "rect": [
-   -54,
-   865,
-   1500,
-   148
-  ]
- },
- {
-  "asset": "assets/tears/tear_001_shadow.webp",
-  "src": [
-   1024,
-   578
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 1.307,
-  "fit": "fill",
-  "rect": [
-   -117,
-   1023,
-   1674,
-   166
-  ]
- },
- {
-  "asset": "assets/paper/index_01.webp",
-  "src": [
-   1500,
-   933
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 0.892,
-  "fit": "cover",
-  "rect": [
-   -105,
-   1029,
-   1500,
-   148
-  ]
- },
- {
-  "asset": "assets/tears/tear_001_shadow.webp",
-  "src": [
-   1024,
-   578
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 1.307,
-  "fit": "fill",
-  "rect": [
-   -117,
-   1191,
-   1673,
-   160
-  ]
- },
- {
-  "asset": "assets/paper/index_01.webp",
-  "src": [
-   1500,
-   933
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 0.892,
-  "fit": "cover",
-  "rect": [
-   22,
-   1200,
-   1499,
-   143
-  ]
- },
- {
-  "asset": "assets/tears/tear_001_shadow.webp",
-  "src": [
-   1024,
-   578
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 1.307,
-  "fit": "fill",
-  "rect": [
-   -116,
-   1358,
-   1673,
+   1014,
+   369,
+   231,
    155
-  ]
- },
- {
-  "asset": "assets/paper/index_01.webp",
-  "src": [
-   1500,
-   933
   ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 0.892,
-  "fit": "cover",
-  "rect": [
-   -12,
-   1373,
-   1499,
-   139
-  ]
- },
- {
-  "asset": "assets/tears/tear_001_shadow.webp",
-  "src": [
-   1024,
-   578
-  ],
-  "drawn": [
-   1338,
-   123
-  ],
-  "scale": 1.307,
-  "fit": "fill",
-  "rect": [
-   -117,
-   1518,
-   1674,
-   165
-  ]
+  "piece": "facet_video"
  },
  {
   "asset": "assets/paper/index_02.webp",
@@ -1336,17 +1213,18 @@
    933
   ],
   "drawn": [
-   1338,
+   184,
    123
   ],
-  "scale": 0.892,
+  "scale": 0.132,
   "fit": "cover",
   "rect": [
-   -89,
-   1535,
-   1499,
-   148
-  ]
+   1022,
+   374,
+   207,
+   139
+  ],
+  "piece": "facet_video"
  },
  {
   "asset": "assets/tears/tear_001_shadow.webp",
@@ -1355,17 +1233,18 @@
    578
   ],
   "drawn": [
-   1338,
+   233,
    123
   ],
-  "scale": 1.307,
+  "scale": 0.228,
   "fit": "fill",
   "rect": [
-   -117,
-   1683,
-   1674,
-   167
-  ]
+   21,
+   534,
+   292,
+   156
+  ],
+  "piece": "facet_talking"
  },
  {
   "asset": "assets/paper/index_01.webp",
@@ -1374,17 +1253,18 @@
    933
   ],
   "drawn": [
-   1338,
+   233,
    123
   ],
-  "scale": 0.892,
+  "scale": 0.155,
   "fit": "cover",
   "rect": [
-   -36,
-   1689,
-   1500,
-   149
-  ]
+   23,
+   539,
+   262,
+   140
+  ],
+  "piece": "facet_talking"
  },
  {
   "asset": "assets/tears/tear_001_shadow.webp",
@@ -1393,17 +1273,18 @@
    578
   ],
   "drawn": [
-   1338,
+   249,
    123
   ],
-  "scale": 1.307,
+  "scale": 0.243,
   "fit": "fill",
   "rect": [
-   -116,
-   1859,
-   1673,
+   283,
+   534,
+   312,
    155
-  ]
+  ],
+  "piece": "facet_feelings"
  },
  {
   "asset": "assets/paper/index_01.webp",
@@ -1412,17 +1293,18 @@
    933
   ],
   "drawn": [
-   1338,
+   249,
    123
   ],
-  "scale": 0.892,
+  "scale": 0.166,
   "fit": "cover",
   "rect": [
-   -65,
-   1869,
-   1499,
+   308,
+   542,
+   279,
    139
-  ]
+  ],
+  "piece": "facet_feelings"
  },
  {
   "asset": "assets/tears/tear_001_shadow.webp",
@@ -1431,17 +1313,58 @@
    578
   ],
   "drawn": [
-   1338,
+   193,
    123
   ],
-  "scale": 1.307,
+  "scale": 0.213,
   "fit": "fill",
   "rect": [
-   -117,
-   2018,
-   1674,
-   167
-  ]
+   569,
+   534,
+   241,
+   154
+  ],
+  "piece": "facet_dates"
+ },
+ {
+  "asset": "assets/paper/index_01.webp",
+  "src": [
+   1500,
+   933
+  ],
+  "drawn": [
+   193,
+   123
+  ],
+  "scale": 0.132,
+  "fit": "cover",
+  "rect": [
+   584,
+   548,
+   216,
+   138
+  ],
+  "piece": "facet_dates"
+ },
+ {
+  "asset": "assets/tears/tear_001_shadow.webp",
+  "src": [
+   1024,
+   578
+  ],
+  "drawn": [
+   237,
+   123
+  ],
+  "scale": 0.232,
+  "fit": "fill",
+  "rect": [
+   785,
+   534,
+   297,
+   156
+  ],
+  "piece": "facet_the list"
  },
  {
   "asset": "assets/paper/index_02.webp",
@@ -1450,17 +1373,18 @@
    933
   ],
   "drawn": [
-   1338,
+   237,
    123
   ],
-  "scale": 0.892,
+  "scale": 0.158,
   "fit": "cover",
   "rect": [
-   -14,
-   2030,
-   1500,
-   150
-  ]
+   790,
+   549,
+   267,
+   140
+  ],
+  "piece": "facet_the list"
  },
  {
   "asset": "assets/tears/tear_001_shadow.webp",
@@ -1469,17 +1393,18 @@
    578
   ],
   "drawn": [
-   1338,
+   190,
    123
   ],
-  "scale": 1.307,
+  "scale": 0.213,
   "fit": "fill",
   "rect": [
-   -117,
-   2185,
-   1673,
-   164
-  ]
+   1058,
+   534,
+   238,
+   156
+  ],
+  "piece": "facet_state"
  },
  {
   "asset": "assets/paper/index_01.webp",
@@ -1488,17 +1413,138 @@
    933
   ],
   "drawn": [
-   1338,
+   190,
    123
   ],
-  "scale": 0.892,
+  "scale": 0.132,
   "fit": "cover",
   "rect": [
-   9,
-   2197,
-   1499,
-   147
-  ]
+   1070,
+   539,
+   213,
+   139
+  ],
+  "piece": "facet_state"
+ },
+ {
+  "asset": "assets/tears/tear_001_shadow.webp",
+  "src": [
+   1024,
+   578
+  ],
+  "drawn": [
+   176,
+   123
+  ],
+  "scale": 0.213,
+  "fit": "fill",
+  "rect": [
+   29,
+   699,
+   221,
+   154
+  ],
+  "piece": "facet_noor"
+ },
+ {
+  "asset": "assets/paper/index_01.webp",
+  "src": [
+   1500,
+   933
+  ],
+  "drawn": [
+   176,
+   123
+  ],
+  "scale": 0.132,
+  "fit": "cover",
+  "rect": [
+   36,
+   709,
+   198,
+   138
+  ],
+  "piece": "facet_noor"
+ },
+ {
+  "asset": "assets/tears/tear_001_shadow.webp",
+  "src": [
+   1024,
+   578
+  ],
+  "drawn": [
+   141,
+   123
+  ],
+  "scale": 0.213,
+  "fit": "fill",
+  "rect": [
+   239,
+   699,
+   178,
+   155
+  ],
+  "piece": "facet_teo"
+ },
+ {
+  "asset": "assets/paper/index_02.webp",
+  "src": [
+   1500,
+   933
+  ],
+  "drawn": [
+   141,
+   123
+  ],
+  "scale": 0.132,
+  "fit": "cover",
+  "rect": [
+   250,
+   710,
+   159,
+   139
+  ],
+  "piece": "facet_teo"
+ },
+ {
+  "asset": "assets/tears/tear_001_shadow.webp",
+  "src": [
+   1024,
+   578
+  ],
+  "drawn": [
+   275,
+   123
+  ],
+  "scale": 0.268,
+  "fit": "fill",
+  "rect": [
+   394,
+   698,
+   344,
+   156
+  ],
+  "piece": "facet_this year"
+ },
+ {
+  "asset": "assets/paper/index_01.webp",
+  "src": [
+   1500,
+   933
+  ],
+  "drawn": [
+   275,
+   123
+  ],
+  "scale": 0.183,
+  "fit": "cover",
+  "rect": [
+   420,
+   710,
+   308,
+   140
+  ],
+  "piece": "facet_this year"
  },
  {
   "asset": "assets/tears/tear_001_shadow.webp",
@@ -1514,10 +1560,11 @@
   "fit": "fill",
   "rect": [
    -136,
-   2303,
+   812,
    1713,
    581
-  ]
+  ],
+  "piece": "hit.00035THC6GKTN6JK7V1X6SPKVM"
  },
  {
   "asset": "assets/paper/lined_02.webp",
@@ -1533,10 +1580,11 @@
   "fit": "cover",
   "rect": [
    35,
-   2360,
+   869,
    1576,
    535
-  ]
+  ],
+  "piece": "hit.00035THC6GKTN6JK7V1X6SPKVM"
  },
  {
   "asset": "assets/tears/tear_020_shadow.webp",
@@ -1552,10 +1600,11 @@
   "fit": "fill",
   "rect": [
    -137,
-   2786,
+   1295,
    1713,
    567
-  ]
+  ],
+  "piece": "hit.00035TAR98HM1YCSC72P57B58R"
  },
  {
   "asset": "assets/paper/looseleaf_04.webp",
@@ -1571,10 +1620,11 @@
   "fit": "cover",
   "rect": [
    0,
-   2825,
+   1334,
    1576,
    522
-  ]
+  ],
+  "piece": "hit.00035TAR98HM1YCSC72P57B58R"
  },
  {
   "asset": "assets/tears/tear_043_shadow.webp",
@@ -1590,10 +1640,11 @@
   "fit": "fill",
   "rect": [
    -136,
-   3260,
+   1769,
    1711,
    545
-  ]
+  ],
+  "piece": "hit.00035SYSF8VY7FDB5A9KVMFWBE"
  },
  {
   "asset": "assets/paper/graph_01.webp",
@@ -1609,10 +1660,11 @@
   "fit": "cover",
   "rect": [
    -33,
-   3281,
+   1791,
    1574,
    501
-  ]
+  ],
+  "piece": "hit.00035SYSF8VY7FDB5A9KVMFWBE"
  },
  {
   "asset": "assets/tears/tear_005_shadow.webp",
@@ -1628,10 +1680,11 @@
   "fit": "fill",
   "rect": [
    -135,
-   3721,
+   2231,
    1710,
    513
-  ]
+  ],
+  "piece": "hit.0002RP1BQ0ZRM9VF2GWFH89TVJ"
  },
  {
   "asset": "assets/paper/spiral_03.webp",
@@ -1647,9 +1700,170 @@
   "fit": "cover",
   "rect": [
    -67,
-   3726,
+   2236,
    1573,
    472
-  ]
+  ],
+  "piece": "hit.0002RP1BQ0ZRM9VF2GWFH89TVJ"
+ },
+ {
+  "asset": "assets/tears/tear_026_shadow.webp",
+  "src": [
+   1024,
+   931
+  ],
+  "drawn": [
+   1368,
+   360
+  ],
+  "scale": 1.336,
+  "fit": "fill",
+  "rect": [
+   -136,
+   2666,
+   1713,
+   460
+  ],
+  "piece": "hit.00013W80B8AFCBMABQYAKE0SXW"
+ },
+ {
+  "asset": "assets/paper/graph_01.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1368,
+   360
+  ],
+  "scale": 1.275,
+  "fit": "cover",
+  "rect": [
+   -102,
+   2657,
+   1576,
+   423
+  ],
+  "piece": "hit.00013W80B8AFCBMABQYAKE0SXW"
+ },
+ {
+  "asset": "assets/tears/tear_048_shadow.webp",
+  "src": [
+   1024,
+   753
+  ],
+  "drawn": [
+   1368,
+   386
+  ],
+  "scale": 1.336,
+  "fit": "fill",
+  "rect": [
+   -135,
+   3051,
+   1711,
+   484
+  ],
+  "piece": "hit.0002PQVGGGZE962R8MGXHHFRMQ"
+ },
+ {
+  "asset": "assets/paper/graph_01.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1368,
+   386
+  ],
+  "scale": 1.275,
+  "fit": "cover",
+  "rect": [
+   -135,
+   3099,
+   1574,
+   446
+  ],
+  "piece": "hit.0002PQVGGGZE962R8MGXHHFRMQ"
+ },
+ {
+  "asset": "assets/tears/tear_010_shadow.webp",
+  "src": [
+   1024,
+   829
+  ],
+  "drawn": [
+   1368,
+   331
+  ],
+  "scale": 1.336,
+  "fit": "fill",
+  "rect": [
+   -135,
+   3468,
+   1710,
+   415
+  ],
+  "piece": "hit.0002DK3MM8RNMZ8NV6MW8MMR35"
+ },
+ {
+  "asset": "assets/paper/looseleaf_03.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1368,
+   331
+  ],
+  "scale": 1.275,
+  "fit": "cover",
+  "rect": [
+   -169,
+   3497,
+   1573,
+   382
+  ],
+  "piece": "hit.0002DK3MM8RNMZ8NV6MW8MMR35"
+ },
+ {
+  "asset": "assets/tears/tear_032_shadow.webp",
+  "src": [
+   1024,
+   594
+  ],
+  "drawn": [
+   1368,
+   239
+  ],
+  "scale": 1.336,
+  "fit": "fill",
+  "rect": [
+   -136,
+   3831,
+   1711,
+   306
+  ],
+  "piece": "hit.0002DEZNZ8ZYT6P4CCDT8B257K"
+ },
+ {
+  "asset": "assets/paper/looseleaf_04.webp",
+  "src": [
+   1073,
+   1500
+  ],
+  "drawn": [
+   1368,
+   239
+  ],
+  "scale": 1.275,
+  "fit": "cover",
+  "rect": [
+   35,
+   3843,
+   1574,
+   281
+  ],
+  "piece": "hit.0002DEZNZ8ZYT6P4CCDT8B257K"
  }
 ]

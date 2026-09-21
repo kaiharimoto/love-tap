@@ -10,55 +10,55 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2472
+   "ms": 3122
   },
   {
    "do": "wait",
-   "ms": 1803
+   "ms": 1807
   },
   {
    "do": "goTo",
-   "ms": 3243
+   "ms": 3919
   },
   {
    "do": "wait",
-   "ms": 1303
+   "ms": 1304
   },
   {
    "do": "openCorner",
-   "ms": 1380
+   "ms": 1723
   },
   {
    "do": "frames",
-   "ms": 59372
+   "ms": 73003
   },
   {
    "do": "sendFeeling",
-   "ms": 1500
+   "ms": 1471
   },
   {
    "do": "frames",
-   "ms": 124002
+   "ms": 151949
   },
   {
    "do": "sendFeeling",
-   "ms": 998
+   "ms": 1372
   },
   {
    "do": "frames",
-   "ms": 201038
+   "ms": 243288
   },
   {
    "do": "openCorner",
-   "ms": 801
+   "ms": 1113
   },
   {
    "do": "frames",
-   "ms": 52307
+   "ms": 64087
   },
   {
    "do": "report",
-   "ms": 438
+   "ms": 439
   }
  ],
  "shots": [
@@ -68,7 +68,27 @@
    "ms": 8,
    "fps": 60,
    "stop": null,
-   "drive": null
+   "drive": null,
+   "fold": {
+    "first": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    },
+    "last": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    }
+   }
   },
   {
    "frames": 94,
@@ -76,7 +96,27 @@
    "ms": 8,
    "fps": 60,
    "stop": null,
-   "drive": null
+   "drive": null,
+   "fold": {
+    "first": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    },
+    "last": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    }
+   }
   },
   {
    "frames": 150,
@@ -84,7 +124,27 @@
    "ms": 8,
    "fps": 60,
    "stop": null,
-   "drive": null
+   "drive": null,
+   "fold": {
+    "first": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    },
+    "last": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    }
+   }
   },
   {
    "frames": 32,
@@ -92,29 +152,55 @@
    "ms": 8,
    "fps": 60,
    "stop": null,
-   "drive": null
+   "drive": null,
+   "fold": {
+    "first": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    },
+    "last": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    }
+   }
   }
  ],
  "reports": [
   {
    "region": 1,
    "visible": [
+    "0001M4GW48FEW3M67XKAZT5051",
+    "0001M4ZQQ0H0PPVTKMMQEE268D",
     "0001M59VY0YA13H9M86HTA6XNP",
     "0001MCJ1M02CDNKZD17AYTKFKH",
     "0001MCJ1M02CDNKZD17AYTKFKJ"
    ],
    "tears": {
+    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
     "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
     "0001MCJ1M02CDNKZD17AYTKFKH": "tear_035",
     "0001MCJ1M02CDNKZD17AYTKFKJ": "tear_055"
    },
    "stocks": {
+    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
     "0001M59VY0YA13H9M86HTA6XNP": "receipt_01",
     "0001MCJ1M02CDNKZD17AYTKFKH": "looseleaf_03",
     "0001MCJ1M02CDNKZD17AYTKFKJ": "legal_02"
    },
    "scroll": {
-    "first": 8386,
+    "first": 8384,
     "last": 8388,
     "of": 8389
    },
@@ -141,11 +227,29 @@
     "held_to": 23
    },
    "blobs_pending": 0,
-   "at": "15_authored_feeling"
+   "at": "15_authored_feeling",
+   "fold_at_first_frame": {
+    "sequence": "unfold_thirds",
+    "length": 240,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
+   },
+   "fold_at_last_frame": {
+    "sequence": "unfold_thirds",
+    "length": 240,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
+   }
   }
  ],
  "blob_waits": [],
- "cold_ms": 11131,
+ "cold_ms": 13460,
  "problems": [],
  "ok": true
 }

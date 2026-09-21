@@ -10,47 +10,47 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2055
+   "ms": 2696
   },
   {
    "do": "wait",
-   "ms": 1806
+   "ms": 1804
   },
   {
    "do": "openCorner",
-   "ms": 2128
+   "ms": 3841
   },
   {
    "do": "frames",
-   "ms": 56628
+   "ms": 68451
   },
   {
    "do": "sendFeeling",
-   "ms": 1860
+   "ms": 2646
   },
   {
    "do": "frames",
-   "ms": 208475
+   "ms": 255838
   },
   {
    "do": "sendFeeling",
-   "ms": 937
+   "ms": 1263
   },
   {
    "do": "frames",
-   "ms": 217031
+   "ms": 270925
   },
   {
    "do": "openCorner",
-   "ms": 815
+   "ms": 1226
   },
   {
    "do": "frames",
-   "ms": 52127
+   "ms": 66064
   },
   {
    "do": "report",
-   "ms": 434
+   "ms": 425
   }
  ],
  "shots": [
@@ -60,7 +60,27 @@
    "ms": 8,
    "fps": 60,
    "stop": null,
-   "drive": null
+   "drive": null,
+   "fold": {
+    "first": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    },
+    "last": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    }
+   }
   },
   {
    "frames": 160,
@@ -68,7 +88,27 @@
    "ms": 8,
    "fps": 60,
    "stop": null,
-   "drive": null
+   "drive": null,
+   "fold": {
+    "first": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    },
+    "last": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    }
+   }
   },
   {
    "frames": 160,
@@ -76,7 +116,27 @@
    "ms": 8,
    "fps": 60,
    "stop": null,
-   "drive": null
+   "drive": null,
+   "fold": {
+    "first": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    },
+    "last": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    }
+   }
   },
   {
    "frames": 32,
@@ -84,7 +144,27 @@
    "ms": 8,
    "fps": 60,
    "stop": null,
-   "drive": null
+   "drive": null,
+   "fold": {
+    "first": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    },
+    "last": {
+     "sequence": "unfold_thirds",
+     "length": 240,
+     "decoded": 24,
+     "decoding": 0,
+     "playhead": 0,
+     "held_from": 0,
+     "held_to": 23
+    }
+   }
   }
  ],
  "reports": [
@@ -139,11 +219,29 @@
     "held_to": 23
    },
    "blobs_pending": 0,
-   "at": "07_feeling_landing"
+   "at": "07_feeling_landing",
+   "fold_at_first_frame": {
+    "sequence": "unfold_thirds",
+    "length": 240,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
+   },
+   "fold_at_last_frame": {
+    "sequence": "unfold_thirds",
+    "length": 240,
+    "decoded": 24,
+    "decoding": 0,
+    "playhead": 0,
+    "held_from": 0,
+    "held_to": 23
+   }
   }
  ],
  "blob_waits": [],
- "cold_ms": 10985,
+ "cold_ms": 13365,
  "problems": [],
  "ok": true
 }

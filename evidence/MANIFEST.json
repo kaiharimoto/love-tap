@@ -1,10 +1,10 @@
 {
- "captured_at": "2026-09-20T10:06:21Z",
+ "captured_at": "2026-09-21T07:52:31Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
-   "bytes": 5279202,
-   "written": "2026-09-20T10:19:35Z",
+   "bytes": 5279566,
+   "written": "2026-09-21T08:07:56Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -17,8 +17,8 @@
    ]
   },
   "03_us.png": {
-   "bytes": 4789398,
-   "written": "2026-09-20T10:20:32Z",
+   "bytes": 4789818,
+   "written": "2026-09-21T08:09:00Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -31,8 +31,8 @@
    ]
   },
   "04_moments.png": {
-   "bytes": 5207555,
-   "written": "2026-09-20T10:20:58Z",
+   "bytes": 5145540,
+   "written": "2026-09-21T08:09:34Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -45,8 +45,8 @@
    ]
   },
   "05_settings.png": {
-   "bytes": 5052258,
-   "written": "2026-09-20T10:21:23Z",
+   "bytes": 5052587,
+   "written": "2026-09-21T08:10:03Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -60,7 +60,7 @@
   },
   "10_first_run.png": {
    "bytes": 4620748,
-   "written": "2026-09-20T10:23:10Z",
+   "written": "2026-09-21T08:12:07Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -73,8 +73,8 @@
    ]
   },
   "12_search.png": {
-   "bytes": 4771201,
-   "written": "2026-09-20T10:21:58Z",
+   "bytes": 4755379,
+   "written": "2026-09-21T08:10:42Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -87,8 +87,8 @@
    ]
   },
   "13_messenger_states.png": {
-   "bytes": 5174954,
-   "written": "2026-09-20T10:22:32Z",
+   "bytes": 5173647,
+   "written": "2026-09-21T08:11:22Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -102,7 +102,7 @@
   },
   "14_media_viewer.png": {
    "bytes": 2667968,
-   "written": "2026-09-20T10:23:01Z",
+   "written": "2026-09-21T08:11:56Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -116,7 +116,7 @@
   },
   "17_setup_pwa.png": {
    "bytes": 3850742,
-   "written": "2026-09-20T10:23:18Z",
+   "written": "2026-09-21T08:12:16Z",
    "from_this_run": true,
    "size": [
     1440,
@@ -129,8 +129,8 @@
    ]
   },
   "06_unfolding.mp4": {
-   "bytes": 3507516,
-   "written": "2026-09-20T10:55:05Z",
+   "bytes": 3478823,
+   "written": "2026-09-21T08:51:21Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -148,8 +148,8 @@
    "long_enough": true
   },
   "07_feeling_landing.mp4": {
-   "bytes": 8313675,
-   "written": "2026-09-20T10:56:01Z",
+   "bytes": 8387196,
+   "written": "2026-09-21T08:52:29Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -167,8 +167,8 @@
    "long_enough": true
   },
   "08_state_propagating.mp4": {
-   "bytes": 7938506,
-   "written": "2026-09-20T11:10:49Z",
+   "bytes": 7906153,
+   "written": "2026-09-21T09:09:51Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -186,8 +186,8 @@
    "long_enough": true
   },
   "11_chat_scroll.mp4": {
-   "bytes": 8781054,
-   "written": "2026-09-20T10:57:08Z",
+   "bytes": 8812331,
+   "written": "2026-09-21T08:53:49Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -205,8 +205,8 @@
    "long_enough": true
   },
   "15_authored_feeling.mp4": {
-   "bytes": 6697523,
-   "written": "2026-09-20T10:58:08Z",
+   "bytes": 6641170,
+   "written": "2026-09-21T08:55:00Z",
    "from_this_run": true,
    "size": [
     1080,
@@ -225,9 +225,9 @@
   }
  },
  "missing": {
-  "02_chat.png": "only 7 notes on screen (a copy from an earlier run is still on disk, written 2026-09-20T10:20:05Z; it is not this session's and is not counted)",
+  "02_chat.png": "only 6 notes on screen (this session wrote 02_chat.png at 2026-09-21T08:08:30Z and then refused it, so the file on disk is this run's and is still not counted)",
   "09_two_devices.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
   "16_setup_android.png": "no Android device was up in this session. Measured, not assumed: with no /dev/kvm the x86_64 image runs under QEMU's own instruction emulation, and it does start \u2014 adbd answered after 113 minutes \u2014 but the framework never came up with it, so there was no package service to install an APK into. There is no GTK either, so no desktop build can stand in for a second screen. Neither of these was faked from the PWA",
-  "13_messenger_states": ""
+  "surfaces": "a rendered surface in the library has nothing in it; see evidence/logs/surfaces.json"
  }
 }

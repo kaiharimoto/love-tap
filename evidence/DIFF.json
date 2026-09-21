@@ -1,8 +1,8 @@
 {
- "commit": "6eccb94",
+ "commit": "ffcb677",
  "baseline": {
   "dir": "evidence/.previous",
-  "captured_at": "2026-09-20T04:51:35Z"
+  "captured_at": "2026-09-20T10:06:21Z"
  },
  "unchanged_at": 0.999,
  "labels": "new, gone, unchanged, changed \u2014 measured. `judgement` (improved or regressed) is the coherence critic's to fill in; SSIM does not know whether a change is an improvement.",
@@ -10,82 +10,74 @@
   {
    "artifact": "01_pulse.png",
    "label": "unchanged",
-   "ssim": 0.9995,
-   "judgement": "unchanged",
-   "judgement_why": "ssim 0.9995 is above the 0.999 threshold and the screen still carries the full partner card (mood, here, place, needs, has left, battery, last up, their clock, ringer, moving, signal, at home) plus the YOURS panel and the five-tab nav; nothing a person would notice has moved.",
-   "sha": "606e3dc82cc17ed4",
-   "previous_sha": "33a2f167a7583ebd",
-   "label_basis": "ssim 0.9995 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "ssim": 0.9998,
+   "judgement": null,
+   "sha": "58a48c99b7084ba1",
+   "previous_sha": "606e3dc82cc17ed4",
+   "label_basis": "ssim 0.9998 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "02_chat.png",
-   "label": "unchanged",
-   "ssim": 0.9995,
-   "judgement": "unchanged",
-   "judgement_why": "ssim 0.9995; the thread, the two hands and the persistent partner band are as before. Caveat recorded by the coherence critic: MANIFEST.json states this file is a copy carried over from an earlier run and is not this session's capture, so this row measures a stale file against the baseline rather than this session's chat.",
-   "sha": "4da6964e6e9ff788",
-   "previous_sha": "93f430c00261e58d",
-   "label_basis": "ssim 0.9995 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label": "changed",
+   "ssim": 0.6721,
+   "judgement": null,
+   "sha": "bf6ae5c22c6620ee",
+   "previous_sha": "4da6964e6e9ff788",
+   "label_basis": "ssim 0.6721 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "03_us.png",
    "label": "unchanged",
-   "ssim": 0.9995,
-   "judgement": "unchanged",
-   "judgement_why": "ssim 0.9995; the Us region still shows a single module (DATES) with AHEAD and BEEN, in the same layout and the same two hands. The one-module limitation is unchanged, not newly introduced.",
-   "sha": "21d170c813e0c7a2",
-   "previous_sha": "e41a60923855c851",
-   "label_basis": "ssim 0.9995 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "ssim": 0.9998,
+   "judgement": null,
+   "sha": "1cf3a1a8bbaebc52",
+   "previous_sha": "21d170c813e0c7a2",
+   "label_basis": "ssim 0.9998 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "04_moments.png",
    "label": "changed",
-   "ssim": 0.984,
-   "judgement": "improved",
-   "judgement_why": "ssim 0.984. Judged from the present artifact, not from the baseline (evidence/.previous is not on disk). The archive now reads as one filtered view over one log: three filter axes (WHAT WE SENT / WHAT HAPPENED / WHAT WE FELT), a per-person axis (both / noor / teo / all year), dated media and dated voice durations in one masonry. Reservation: written events in it render as blank dated sheets with no words, so the improvement is structural rather than complete.",
-   "sha": "1675e8811f4e3638",
-   "previous_sha": "89f58035896babd8",
-   "label_basis": "ssim 0.984 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "ssim": 0.954,
+   "judgement": null,
+   "sha": "68f9cb666d18c216",
+   "previous_sha": "1675e8811f4e3638",
+   "label_basis": "ssim 0.954 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "05_settings.png",
    "label": "unchanged",
-   "ssim": 0.9995,
-   "judgement": "unchanged",
-   "judgement_why": "ssim 0.9995; pairing block, authored feelings (pigeon by noor, tuesday soup by teo), the two-of-you counters and the history export are in the same places. Unchanged also means the 'not paired yet' line still contradicts the live partner telemetry on Pulse.",
-   "sha": "c1c6148a95041864",
-   "previous_sha": "8ac0d11d143f808c",
-   "label_basis": "ssim 0.9995 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "ssim": 0.9998,
+   "judgement": null,
+   "sha": "6e18d840ead5ab81",
+   "previous_sha": "c1c6148a95041864",
+   "label_basis": "ssim 0.9998 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "06_unfolding.mp4",
    "label": "changed",
-   "ssim": 0.9783,
-   "judgement": "improved",
-   "judgement_why": "ssim 0.9783. Direction inferred from the present clip only; the baseline is not on disk. Every sampled frame keeps the partner band, the five-tab nav and the composer, and state events sit inline in the thread with the messages, so the clip holds the system together. The delta is in the same 0.978-0.989 band as the other four clips, which is consistent with frame-timing jitter, so this label is the least independently supported of the seven.",
-   "sha": "657517a2050c4818",
-   "previous_sha": "2caf911c6d1e085d",
-   "label_basis": "ssim 0.9783 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "ssim": 0.9885,
+   "judgement": null,
+   "sha": "38de731b76ad69b1",
+   "previous_sha": "657517a2050c4818",
+   "label_basis": "ssim 0.9885 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "07_feeling_landing.mp4",
    "label": "changed",
-   "ssim": 0.9839,
-   "judgement": "improved",
-   "judgement_why": "ssim 0.9839. Direction inferred from the present clip only. The feeling surface uses the same stacked torn-strip list component as the search filters, the authored and built-in feelings sit in one row, and the nav stays visible through the overlay, so the feeling layer reads as part of the same system rather than a separate mode. As with 06, the delta is within the clip-jitter band and the direction is not independently verifiable.",
-   "sha": "b646305df1b6bab6",
-   "previous_sha": "7655d6e751406a18",
-   "label_basis": "ssim 0.9839 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "ssim": 0.9847,
+   "judgement": null,
+   "sha": "e2bbdf18287560f1",
+   "previous_sha": "b646305df1b6bab6",
+   "label_basis": "ssim 0.9847 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "08_state_propagating.mp4",
    "label": "changed",
-   "ssim": 0.9803,
-   "judgement": "improved",
-   "judgement_why": "ssim 0.9803, and this is the best-supported label in the set. The clip carries one event across two regions in a single take: the screen goes from 'nothing from them yet' to the partner card reading restless, the persistent header band changes to 'restless', and the same event then appears in the Chat thread as 'noor is restless  Sun 20 Sep - 10:59'. That is the coherence claim demonstrated rather than asserted.",
-   "sha": "5b6caec4506006f4",
-   "previous_sha": "8e412807bec9f696",
-   "label_basis": "ssim 0.9803 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "ssim": 0.9849,
+   "judgement": null,
+   "sha": "0b057b8fbf38d546",
+   "previous_sha": "5b6caec4506006f4",
+   "label_basis": "ssim 0.9849 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "09_two_devices.png",
@@ -97,60 +89,54 @@
   {
    "artifact": "10_first_run.png",
    "label": "unchanged",
-   "ssim": 0.9995,
-   "judgement": "unchanged",
-   "judgement_why": "ssim 0.9995; the fresh-install screen still degrades the partner band correctly to NEED/ENERGY with no partner line, and keeps the same composer and nav.",
-   "sha": "bbf507770a86e010",
-   "previous_sha": "75dea2bc563b3460",
-   "label_basis": "ssim 0.9995 against 0.999 \u2014 at or above it, nothing a person would see has moved"
-  },
-  {
-   "artifact": "11_chat_scroll.mp4",
-   "label": "changed",
-   "ssim": 0.9889,
-   "judgement": "improved",
-   "judgement_why": "ssim 0.9889, the smallest delta among the clips. The scroll shows a year-deep thread with state events ('noor went out', 'noor - work', 'you got in') interleaved among messages, reactions on read messages and a drawn goodnight, all in the same two hands. It delivers the one-log idea over a long span; direction inferred from the present clip.",
-   "sha": "d7d1814ac3082ad5",
-   "previous_sha": "676e96230aa57b5c",
-   "label_basis": "ssim 0.9889 against 0.999 \u2014 at or above it, nothing a person would see has moved"
-  },
-  {
-   "artifact": "12_search.png",
-   "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
-   "judgement_why": "ssim 1.0 and the same sha - byte for byte the same file, so nothing changed. Note that what did not change includes the fact that this is the only non-overlay screen with neither the partner band nor the five-tab nav.",
-   "sha": "2d754dfb9082b4e1",
+   "judgement": null,
+   "sha": "bbf507770a86e010",
    "why": "byte for byte the same file"
   },
   {
-   "artifact": "13_messenger_states.png",
+   "artifact": "11_chat_scroll.mp4",
+   "label": "unchanged",
+   "ssim": 0.9995,
+   "judgement": null,
+   "sha": "edae893bd3c49713",
+   "previous_sha": "d7d1814ac3082ad5",
+   "label_basis": "ssim 0.9995 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+  },
+  {
+   "artifact": "12_search.png",
    "label": "changed",
-   "ssim": 0.8943,
-   "judgement": "improved",
-   "judgement_why": "ssim 0.8943, by far the largest delta in the set, and the present artifact is correspondingly rich: read (double check), going, waiting to send, a failure carrying 'it would not go / the other phone couldn't read it / try again', a live 'noor writing...', and a state event inline in the thread. Five of the six states its caption names are present and labelled in words. Reservations: 'edited' is absent, and the taken-back state is an unlabelled blank card drawn outside the paper system.",
-   "sha": "086eaa94ca8d3ce9",
-   "previous_sha": "8082b3cd22a45d82",
-   "label_basis": "ssim 0.8943 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "ssim": 0.4541,
+   "judgement": null,
+   "sha": "e31479b2f721b54e",
+   "previous_sha": "2d754dfb9082b4e1",
+   "label_basis": "ssim 0.4541 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+  },
+  {
+   "artifact": "13_messenger_states.png",
+   "label": "unchanged",
+   "ssim": 0.9991,
+   "judgement": null,
+   "sha": "b0a0b0990e94c5ed",
+   "previous_sha": "086eaa94ca8d3ce9",
+   "label_basis": "ssim 0.9991 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "14_media_viewer.png",
    "label": "unchanged",
    "ssim": 1.0,
-   "judgement": "unchanged",
-   "judgement_why": "ssim 1.0 and the same sha - byte for byte the same file. Nothing changed.",
+   "judgement": null,
    "sha": "c7e0820688f127cb",
    "why": "byte for byte the same file"
   },
   {
    "artifact": "15_authored_feeling.mp4",
    "label": "changed",
-   "ssim": 0.9841,
-   "judgement": "improved",
-   "judgement_why": "ssim 0.9841. The clip shows a feeling one of them made ('pigeon') sitting in the same row as the built-in feelings and then entering the thread carrying 'waiting to send' - the same delivery vocabulary as an ordinary message in 13_messenger_states. That is the extensibility claim made visible. One defect seen: the first sampled frame is a cross-fade with two full screens superimposed.",
-   "sha": "6a6472c2e233c5ca",
-   "previous_sha": "66725d8d470bccef",
-   "label_basis": "ssim 0.9841 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "ssim": 0.9218,
+   "judgement": null,
+   "sha": "befc7aed9b7f9b88",
+   "previous_sha": "6a6472c2e233c5ca",
+   "label_basis": "ssim 0.9218 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "16_setup_android.png",
@@ -162,12 +148,10 @@
   {
    "artifact": "17_setup_pwa.png",
    "label": "unchanged",
-   "ssim": 0.9995,
-   "judgement": "unchanged",
-   "judgement_why": "ssim 0.9995; the checklist, its wording and the reduced NEED/ENERGY band are unchanged, as is the blocky tear-shadow mask on the sheet's top edge and the nav highlighting CHAT on a setup screen.",
+   "ssim": 1.0,
+   "judgement": null,
    "sha": "d102a0391574de71",
-   "previous_sha": "136dff33b6a8cdcd",
-   "label_basis": "ssim 0.9995 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "why": "byte for byte the same file"
   }
  ],
  "counts": {

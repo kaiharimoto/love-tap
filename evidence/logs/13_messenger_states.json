@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3451
+   "ms": 5780
   },
   {
    "do": "wait",
@@ -18,15 +18,15 @@
   },
   {
    "do": "scrollTo",
-   "ms": 3583
+   "ms": 3271
   },
   {
    "do": "wait",
-   "ms": 1304
+   "ms": 1302
   },
   {
    "do": "stage",
-   "ms": 3475
+   "ms": 3459
   },
   {
    "do": "wait",
@@ -34,26 +34,26 @@
   },
   {
    "do": "partnerTyping",
-   "ms": 1601
+   "ms": 2059
   },
   {
    "do": "wait",
-   "ms": 1103
+   "ms": 1102
   },
   {
    "do": "shot",
-   "ms": 3173
+   "ms": 4182
   },
   {
    "do": "report",
-   "ms": 719
+   "ms": 759
   }
  ],
  "shots": [
   {
    "out": "evidence/13_messenger_states.png",
    "clip": null,
-   "text_runs": 30,
+   "text_runs": 29,
    "surfaces": 52
   }
  ],
@@ -125,9 +125,7 @@
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 11282,
- "problems": [
-  "pageerror: "
- ],
- "ok": false
+ "cold_ms": 13886,
+ "problems": [],
+ "ok": true
 }

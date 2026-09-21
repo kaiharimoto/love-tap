@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 1904
+   "ms": 2776
   },
   {
    "do": "wait",
@@ -18,7 +18,7 @@
   },
   {
    "do": "shot",
-   "ms": 2826
+   "ms": 3104
   },
   {
    "do": "report",
@@ -40,7 +40,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-20T10:23:10.688Z",
+   "now": "2026-09-21T08:12:07.715Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -63,11 +63,11 @@
  "blob_waits": [
   {
    "at": "10_first_run.png",
-   "waited_ms": 3,
+   "waited_ms": 4,
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 1263,
+ "cold_ms": 1518,
  "problems": [],
  "ok": true
 }

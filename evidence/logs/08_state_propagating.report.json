@@ -1,32 +1,32 @@
 {
  "region": 1,
  "visible": [
-  "01M2Z7H65GBECQJD729QPH1G6Z",
-  "01M2Z7J98Y2EHY3ZMR5XHMVGW8",
-  "01M2Z7TP98BR144069ND42NAQA",
-  "01M2Z7ZZT3CZ1F1ZG71G63F2M1"
+  "01M31JWRZCWM8YA9BJSP3HJ8ER",
+  "01M31JY2TW3YBC8ABTT06M53DS",
+  "01M31K8C3DB9DPS6SFZTRWZB6S",
+  "01M31KEDM6XPTTQK53HCAAGGPB"
  ],
  "tears": {
-  "01M2Z7H65GBECQJD729QPH1G6Z": "tear_001",
-  "01M2Z7J98Y2EHY3ZMR5XHMVGW8": "tear_020",
-  "01M2Z7TP98BR144069ND42NAQA": "tear_043",
-  "01M2Z7ZZT3CZ1F1ZG71G63F2M1": "tear_005"
+  "01M31JWRZCWM8YA9BJSP3HJ8ER": "tear_001",
+  "01M31JY2TW3YBC8ABTT06M53DS": "tear_020",
+  "01M31K8C3DB9DPS6SFZTRWZB6S": "tear_043",
+  "01M31KEDM6XPTTQK53HCAAGGPB": "tear_005"
  },
  "stocks": {
-  "01M2Z7H65GBECQJD729QPH1G6Z": "lined_03",
-  "01M2Z7J98Y2EHY3ZMR5XHMVGW8": "spiral_02",
-  "01M2Z7TP98BR144069ND42NAQA": "lined_04",
-  "01M2Z7ZZT3CZ1F1ZG71G63F2M1": "graph_03"
+  "01M31JWRZCWM8YA9BJSP3HJ8ER": "receipt_01",
+  "01M31JY2TW3YBC8ABTT06M53DS": "graph_04",
+  "01M31K8C3DB9DPS6SFZTRWZB6S": "receipt_01",
+  "01M31KEDM6XPTTQK53HCAAGGPB": "receipt_01"
  },
  "scroll": {
   "first": 0,
   "last": 3,
   "of": 4
  },
- "now": "2026-09-20T11:10:19.076Z",
+ "now": "2026-09-21T09:09:14.660Z",
  "driven_ms": 5712,
  "seed": 20260903,
- "events": 8,
+ "events": 6,
  "transport": "local",
  "link": "connected",
  "me": "teo",
@@ -46,5 +46,23 @@
   "held_to": 23
  },
  "blobs_pending": 0,
- "at": "08_state_propagating"
+ "at": "08_state_propagating",
+ "fold_at_first_frame": {
+  "sequence": "unfold_thirds",
+  "length": 240,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
+ },
+ "fold_at_last_frame": {
+  "sequence": "unfold_thirds",
+  "length": 240,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
+ }
 }

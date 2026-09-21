@@ -1,0 +1,17 @@
+ok    an artifact written during the run and refused is not called someone else's
+ok    and the manifest says what it actually is: this run's, and still not counted
+ok    still not counted -- a refused artifact is missing whatever is on disk
+ok    and a file that really does predate the run is still called an earlier run's
+ok    and is not counted either, which is the sentence that was always the true half
+ok    a refusal keyed by the bare scene name misses the artifact it is about
+ok    so an artifact refused with an empty reason is not booked as complete
+ok    and no phantom entry appears under the bare name beside it
+ok    the set still adds up to seventeen (0 present + 17 missing)
+ok    and a scene that refused an artifact silently is named as having done so
+ok    a scene that collected a problem exits 1 (1)
+ok    the problem is recorded with something in it ('pageerror: PlaywrightError: Error — at throwsHere (file:///tmp/tmphqijtmj0/probe.html:4:13)')
+ok    it names the function it was thrown from, which is what e.stack always held
+ok    and the first line of STDERR is the sentence capture.sh reads ('probe refused: pageerror: PlaywrightError: Error — at throwsHere (file:///tmp/tmphqijtmj0/probe.html:4:13)')
+ok    so the reason that reaches MANIFEST.json names the throw site
+
+every check passed: a refused artifact is named, dated and attributed correctly

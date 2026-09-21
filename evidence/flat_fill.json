@@ -5,8 +5,7 @@
    400,
    200
   ],
-  "std": 8.0,
-  "levels": 60
+  "std": 8.0
  },
  "stills": [
   {
@@ -107,8 +106,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#FFF4DA",
-    "share": 0.02175,
+    "rgb": "#FFEBD6",
+    "share": 0.00903,
     "constant": null
    },
    "pad_box": [
@@ -119,77 +118,79 @@
    ],
    "windows": {
     "declared": 8,
-    "passing": 8,
-    "median_std": 33.978,
+    "passing": 7,
+    "median_std": 32.284,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 31.607,
-      "levels": 173
+      "std": 33.597,
+      "levels": 177
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 32.604,
-      "levels": 179
+      "std": 31.222,
+      "levels": 186
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 51.626,
-      "levels": 186
+      "std": 7.587,
+      "levels": 70
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 52.42,
-      "levels": 199
+      "std": 25.526,
+      "levels": 176
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 35.933,
-      "levels": 192
+      "std": 65.47,
+      "levels": 183
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 26.536,
-      "levels": 178
+      "std": 49.679,
+      "levels": 193
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 31.41,
-      "levels": 174
+      "std": 32.284,
+      "levels": 188
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 33.978,
-      "levels": 174
+      "std": 22.598,
+      "levels": 177
      }
     ]
    },
-   "problems": [],
-   "ok": true
+   "problems": [
+    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
+   ],
+   "ok": false
   },
   {
    "of": "03_us.png",
@@ -280,7 +281,7 @@
     ]
    },
    "problems": [
-    "1 of 8 400x200 windows of the pad box are under L_std 8.0 with 60 levels"
+    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
    ],
    "ok": false
   },
@@ -291,8 +292,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#FDE6CC",
-    "share": 0.00968,
+    "rgb": "#AB8C74",
+    "share": 0.00885,
     "constant": null
    },
    "pad_box": [
@@ -304,7 +305,7 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 68.164,
+    "median_std": 70.576,
     "each": [
      {
       "at": [
@@ -319,16 +320,16 @@
        868,
        1628
       ],
-      "std": 18.78,
-      "levels": 173
+      "std": 65.693,
+      "levels": 214
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 80.435,
-      "levels": 209
+      "std": 85.556,
+      "levels": 207
      },
      {
       "at": [
@@ -367,7 +368,7 @@
        794,
        1189
       ],
-      "std": 68.164,
+      "std": 70.576,
       "levels": 208
      }
     ]
@@ -464,7 +465,7 @@
     ]
    },
    "problems": [
-    "1 of 8 400x200 windows of the pad box are under L_std 8.0 with 60 levels"
+    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
    ],
    "ok": false
   },
@@ -557,7 +558,7 @@
     ]
    },
    "problems": [
-    "2 of 8 400x200 windows of the pad box are under L_std 8.0 with 60 levels"
+    "2 of 8 400x200 windows of the pad box are under L_std 8.0"
    ],
    "ok": false
   },
@@ -650,7 +651,7 @@
     ]
    },
    "problems": [
-    "2 of 8 400x200 windows of the pad box are under L_std 8.0 with 60 levels"
+    "2 of 8 400x200 windows of the pad box are under L_std 8.0"
    ],
    "ok": false
   },
@@ -661,8 +662,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#FDE6CC",
-    "share": 0.00959,
+    "rgb": "#FFEBD6",
+    "share": 0.02068,
     "constant": null
    },
    "pad_box": [
@@ -674,71 +675,71 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 81.762,
+    "median_std": 78.746,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 45.802,
-      "levels": 236
+      "std": 80.728,
+      "levels": 232
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 82.407,
-      "levels": 232
+      "std": 29.244,
+      "levels": 175
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 81.762,
-      "levels": 233
+      "std": 80.074,
+      "levels": 236
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 56.149,
-      "levels": 236
+      "std": 56.128,
+      "levels": 222
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 81.767,
-      "levels": 233
+      "std": 81.629,
+      "levels": 234
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 81.883,
-      "levels": 235
+      "std": 28.228,
+      "levels": 192
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 54.115,
-      "levels": 225
+      "std": 78.746,
+      "levels": 236
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 74.37,
-      "levels": 237
+      "std": 42.257,
+      "levels": 190
      }
     ]
    },
@@ -812,8 +813,8 @@
        845,
        678
       ],
-      "std": 19.977,
-      "levels": 181
+      "std": 19.98,
+      "levels": 182
      },
      {
       "at": [
@@ -925,7 +926,7 @@
     ]
    },
    "problems": [
-    "1 of 8 400x200 windows of the pad box are under L_std 8.0 with 60 levels"
+    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
    ],
    "ok": false
   },

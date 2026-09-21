@@ -10,19 +10,19 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5089
+   "ms": 5450
   },
   {
    "do": "wait",
-   "ms": 2303
+   "ms": 2307
   },
   {
    "do": "shot",
-   "ms": 4138
+   "ms": 8908
   },
   {
    "do": "report",
-   "ms": 724
+   "ms": 727
   }
  ],
  "shots": [
@@ -94,11 +94,11 @@
  "blob_waits": [
   {
    "at": "dusk_pulse.png",
-   "waited_ms": 757,
+   "waited_ms": 4593,
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 11012,
+ "cold_ms": 14157,
  "problems": [],
  "ok": true
 }

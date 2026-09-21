@@ -10,70 +10,67 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3352
+   "ms": 4685
+  },
+  {
+   "do": "wait",
+   "ms": 1908
+  },
+  {
+   "do": "scrollTo",
+   "ms": 5425
   },
   {
    "do": "wait",
    "ms": 1903
   },
   {
-   "do": "scrollTo",
-   "ms": 6041
-  },
-  {
-   "do": "wait",
-   "ms": 1906
-  },
-  {
    "do": "shot",
-   "ms": 3316
+   "ms": 3614
   },
   {
    "do": "report",
-   "ms": 715
+   "ms": 722
   }
  ],
  "shots": [
   {
    "out": "evidence/02_chat.png",
    "clip": null,
-   "text_runs": 28,
-   "surfaces": 98
+   "text_runs": 21,
+   "surfaces": 52
   }
  ],
  "reports": [
   {
    "region": 1,
    "visible": [
-    "0002TY53N816B1Y330XQS2B0AX",
-    "0002V0E6H000S96SY78DF5NFTE",
-    "0002V0PH48RXHYX3MJ7PZ1PMBG",
-    "0002V0SDX06FA58CJ9JXH23W7R",
-    "0002V11RG88S9FGS842FKJ9ZHQ",
-    "0002V17SVRQY5E5S69MJ3HT7NT",
-    "0002V1KKSGZBD11H39SVDW9WD5"
+    "0001M3AY8G83A3FBSRB1Y7W78Q",
+    "0001M3F41R2APQC59QKBMZK4XF",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF",
+    "0001M4GW48FEW3M67XKAZT5051",
+    "0001M4ZQQ0H0PPVTKMMQEE268D",
+    "0001M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "0002TY53N816B1Y330XQS2B0AX": "tear_023",
-    "0002V0E6H000S96SY78DF5NFTE": "tear_045",
-    "0002V0PH48RXHYX3MJ7PZ1PMBG": "tear_008",
-    "0002V0SDX06FA58CJ9JXH23W7R": "tear_029",
-    "0002V11RG88S9FGS842FKJ9ZHQ": "tear_050",
-    "0002V17SVRQY5E5S69MJ3HT7NT": "tear_012",
-    "0002V1KKSGZBD11H39SVDW9WD5": "tear_034"
+    "0001M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
+    "0001M3F41R2APQC59QKBMZK4XF": "tear_047",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
+    "0001M4GW48FEW3M67XKAZT5051": "tear_031",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
+    "0001M59VY0YA13H9M86HTA6XNP": "tear_013"
    },
    "stocks": {
-    "0002TY53N816B1Y330XQS2B0AX": "spiral_03",
-    "0002V0E6H000S96SY78DF5NFTE": "receipt_01",
-    "0002V0PH48RXHYX3MJ7PZ1PMBG": "looseleaf_03",
-    "0002V0SDX06FA58CJ9JXH23W7R": "receipt_01",
-    "0002V11RG88S9FGS842FKJ9ZHQ": "lined_04",
-    "0002V17SVRQY5E5S69MJ3HT7NT": "spiral_02",
-    "0002V1KKSGZBD11H39SVDW9WD5": "index_02"
+    "0001M3AY8G83A3FBSRB1Y7W78Q": "graph_02",
+    "0001M3F41R2APQC59QKBMZK4XF": "looseleaf_02",
+    "0001M3Y4GR5ZE8WDQ00S3NX0KF": "receipt_01",
+    "0001M4GW48FEW3M67XKAZT5051": "legal_01",
+    "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
+    "0001M59VY0YA13H9M86HTA6XNP": "receipt_01"
    },
    "scroll": {
-    "first": 5196,
-    "last": 5202,
+    "first": 8381,
+    "last": 8387,
     "of": 8387
    },
    "now": "2026-09-03T19:40:00.000Z",
@@ -105,11 +102,11 @@
  "blob_waits": [
   {
    "at": "02_chat.png",
-   "waited_ms": 3,
+   "waited_ms": 4,
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 11663,
+ "cold_ms": 14016,
  "problems": [],
  "ok": true
 }

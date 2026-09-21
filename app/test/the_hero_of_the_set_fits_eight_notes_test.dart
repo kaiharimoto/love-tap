@@ -12,10 +12,21 @@
 //
 // So the shot is framed rather than the screen re-cut, which is the second of the two routes the
 // queue item names, and it carries the item's own condition: the anchor has to be RECORDED, so
-// the eight are reproducible rather than lucky. `evidence/scenes/02_chat.json` names an event id
-// instead of the fraction `0.62` -- a fraction is an index into a thread whose length changes,
-// an id is the same note in every capture -- and this test drives the app to whatever that file
-// says and reads what the app then declares.
+// the eight are reproducible rather than lucky. This test drives the app to whatever
+// `evidence/scenes/02_chat.json` says and reads what the app then declares.
+//
+// AND THE ANCHOR IS A FRACTION, WHICH FIRING 37 GOT WRONG ONCE BEFORE GETTING IT RIGHT. It moved
+// the scene to a seeded event id first, on the reasoning that an id is the same note in every
+// capture while a fraction is an index into a thread whose length changes. The capture refuted
+// it. A seeded id is `SeedLoader._ulidFor(key, ts)`: eighty bits of randomness derived from the
+// key and forty-eight bits of time from the timestamp. The randomness is identical on the two
+// rigs and the time is not -- index 5199 is `01KPV0SDX06FA58CJ9JXH23W7R` here and
+// `0002V0SDX06FA58CJ9JXH23W7R` in the captured PWA, the same twenty-two-character tail under a
+// different four-character head. An id read off this rig therefore names nothing over there:
+// `indexWhere` returns -1, `_scrollToAnchor` returns without scrolling, and the shot is taken
+// wherever the thread was standing, which is the end of it and six notes. An INDEX crosses
+// cleanly -- both rigs read 8387 items and 0.622 is item 5216 in each -- so the scene names a
+// fraction and this test resolves it the same way the app does.
 //
 // ON THE FLOOR OF ELEVEN, WHICH IS NOT THE BRIEF'S EIGHT. This rig is not the rig the artifact
 // comes out of: `flutter test` lays the writing out with Skia and the capture with WebKit, and
@@ -104,13 +115,22 @@ void main() {
         .cast<Map<String, dynamic>>()
         .firstWhere((s) => s['do'] == 'scrollTo');
     final anchor = step['arg'] as String;
-    expect(double.tryParse(anchor), isNull,
-        reason: 'the scene anchors 02_chat on the fraction "$anchor". A fraction is an index '
-            'into a thread whose length changes, so the notes it lands on are not the same '
-            'notes next time the year is reseeded');
-    expect(scope.thread.items.any((it) => it.id == anchor), isTrue,
-        reason: 'the scene anchors 02_chat on "$anchor", which is not in the thread at all, so '
-            'the capture will silently shoot wherever the list happened to be');
+    final items = scope.thread.items;
+    // Whatever the scene names, it has to resolve to a row. `_scrollToAnchor` fails SILENTLY on
+    // one that does not -- `indexWhere` gives -1 and it returns without moving the list -- so an
+    // anchor that names nothing costs a whole capture to notice.
+    final fraction = double.tryParse(anchor);
+    final resolved = fraction != null
+        ? (fraction.clamp(0.0, 1.0) * (items.length - 1)).round()
+        : items.indexWhere((it) => it.id == anchor);
+    expect(resolved, greaterThanOrEqualTo(0),
+        reason: 'the scene anchors 02_chat on "$anchor", which is in neither the thread nor the '
+            'unit interval, so `_scrollToAnchor` will return without scrolling and the capture '
+            'will shoot wherever the list happened to be standing');
+    if (fraction == null) {
+      // An id, which the capture's own id space may not share. See the note at the top.
+      expect(items[resolved].id, equals(anchor));
+    }
 
     tester.view.physicalSize = _frame;
     tester.view.devicePixelRatio = _dpr;

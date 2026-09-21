@@ -1,22 +1,28 @@
 {
  "region": 1,
  "visible": [
+  "0001M4GW48FEW3M67XKAZT5051",
+  "0001M4ZQQ0H0PPVTKMMQEE268D",
   "0001M59VY0YA13H9M86HTA6XNP",
   "0001MCJ1M02CDNKZD17AYTKFKH",
   "0001MCJ1M02CDNKZD17AYTKFKJ"
  ],
  "tears": {
+  "0001M4GW48FEW3M67XKAZT5051": "tear_031",
+  "0001M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
   "0001M59VY0YA13H9M86HTA6XNP": "tear_013",
   "0001MCJ1M02CDNKZD17AYTKFKH": "tear_035",
   "0001MCJ1M02CDNKZD17AYTKFKJ": "tear_055"
  },
  "stocks": {
+  "0001M4GW48FEW3M67XKAZT5051": "legal_01",
+  "0001M4ZQQ0H0PPVTKMMQEE268D": "graph_01",
   "0001M59VY0YA13H9M86HTA6XNP": "receipt_01",
   "0001MCJ1M02CDNKZD17AYTKFKH": "looseleaf_03",
   "0001MCJ1M02CDNKZD17AYTKFKJ": "legal_02"
  },
  "scroll": {
-  "first": 8386,
+  "first": 8384,
   "last": 8388,
   "of": 8389
  },
@@ -43,5 +49,23 @@
   "held_to": 23
  },
  "blobs_pending": 0,
- "at": "15_authored_feeling"
+ "at": "15_authored_feeling",
+ "fold_at_first_frame": {
+  "sequence": "unfold_thirds",
+  "length": 240,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
+ },
+ "fold_at_last_frame": {
+  "sequence": "unfold_thirds",
+  "length": 240,
+  "decoded": 24,
+  "decoding": 0,
+  "playhead": 0,
+  "held_from": 0,
+  "held_to": 23
+ }
 }

@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2550
+   "ms": 2808
   },
   {
    "do": "wait",
-   "ms": 1701
+   "ms": 1703
   },
   {
    "do": "search",
-   "ms": 4679
+   "ms": 5853
   },
   {
    "do": "wait",
@@ -26,19 +26,19 @@
   },
   {
    "do": "shot",
-   "ms": 2940
+   "ms": 3624
   },
   {
    "do": "report",
-   "ms": 716
+   "ms": 742
   }
  ],
  "shots": [
   {
    "out": "evidence/12_search.png",
    "clip": null,
-   "text_runs": 16,
-   "surfaces": 87
+   "text_runs": 24,
+   "surfaces": 95
   }
  ],
  "reports": [
@@ -106,7 +106,7 @@
    "pending_at_shot": 0
   }
  ],
- "cold_ms": 11948,
+ "cold_ms": 14018,
  "problems": [],
  "ok": true
 }
