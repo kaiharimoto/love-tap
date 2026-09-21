@@ -18,14 +18,14 @@
  ],
  "frame_surfaces": "evidence/12_search.surfaces.json",
  "frame_tear_draws": 28,
- "frame_distinct_tears": 13,
+ "frame_distinct_tears": 25,
  "frame_repeats": {
   "assets/tears/tear_005_shadow.webp": 2,
-  "assets/tears/tear_020_shadow.webp": 2,
-  "assets/tears/tear_001_shadow.webp": 14
+  "assets/tears/tear_029_shadow.webp": 2,
+  "assets/tears/tear_020_shadow.webp": 2
  },
  "frame_ok": false,
- "frame_why": "a tear is used twice in the frame: assets/tears/tear_001_shadow.webp x14, assets/tears/tear_005_shadow.webp x2, assets/tears/tear_020_shadow.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see.",
+ "frame_why": "a tear is used twice in the frame: assets/tears/tear_005_shadow.webp x2, assets/tears/tear_020_shadow.webp x2, assets/tears/tear_029_shadow.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see.",
  "ok": false,
  "why": "only 6 notes on screen"
 }

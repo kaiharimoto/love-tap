@@ -1,83 +1,75 @@
 {
- "commit": "f91f5eb",
+ "commit": "c56d50c",
  "baseline": {
   "dir": "evidence/.previous",
-  "captured_at": null
+  "captured_at": "2026-09-21T19:26:08.443016+00:00"
  },
  "unchanged_at": 0.999,
  "labels": "new, gone, unchanged, changed \u2014 measured. `judgement` (improved or regressed) is the coherence critic's to fill in; SSIM does not know whether a change is an improvement.",
  "artifacts": [
   {
    "artifact": "01_pulse.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 5361334,
    "sha": "384036a7eef39066",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "02_chat.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 5229886,
-   "sha": "0c2dd012206f9312",
-   "why": "there was no previous capture of this"
+   "sha": "f14e790e56eaa391",
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "03_us.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 4862308,
    "sha": "672d5db5651f3910",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "04_moments.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 5210417,
    "sha": "956b1076047e4b67",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "05_settings.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 5123910,
    "sha": "1e8c6646b4dd8c2d",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "06_unfolding.mp4",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 3556777,
    "sha": "229fd5103bb69d56",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "07_feeling_landing.mp4",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 8320279,
    "sha": "24e4b2396a40ec03",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "08_state_propagating.mp4",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 8179389,
    "sha": "4db0eceb72038949",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "09_two_devices.png",
@@ -88,57 +80,52 @@
   },
   {
    "artifact": "10_first_run.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 4621372,
    "sha": "6cee8a7ad7a6605b",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "11_chat_scroll.mp4",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 8934596,
    "sha": "51bac9558f4b811e",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "12_search.png",
-   "label": "new",
-   "ssim": null,
+   "label": "changed",
+   "ssim": 0.371,
    "judgement": null,
-   "bytes": 4682407,
-   "sha": "b1a7a9882403ad09",
-   "why": "there was no previous capture of this"
+   "sha": "fbf8879cd79039be",
+   "previous_sha": "b1a7a9882403ad09",
+   "label_basis": "ssim 0.371 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "13_messenger_states.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 5301365,
    "sha": "e982fab4442c0d9e",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "14_media_viewer.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 2732403,
    "sha": "f0d3cd2b6cfef39e",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "15_authored_feeling.mp4",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 6568144,
    "sha": "9f28773c474aa560",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   },
   {
    "artifact": "16_setup_android.png",
@@ -149,19 +136,18 @@
   },
   {
    "artifact": "17_setup_pwa.png",
-   "label": "new",
-   "ssim": null,
+   "label": "unchanged",
+   "ssim": 1.0,
    "judgement": null,
-   "bytes": 3853446,
    "sha": "9489e36a33a5dd05",
-   "why": "there was no previous capture of this"
+   "why": "byte for byte the same file"
   }
  ],
  "counts": {
-  "new": 15,
+  "new": 0,
   "gone": 0,
-  "unchanged": 0,
-  "changed": 0,
+  "unchanged": 14,
+  "changed": 1,
   "absent": 2
  }
 }

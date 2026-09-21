@@ -60,8 +60,8 @@
    },
    "value_bands": {
     "ground": 0.1337,
-    "mid": 0.0477,
-    "figure": 0.8185
+    "mid": 0.048,
+    "figure": 0.8183
    },
    "chroma": {
     "mean": 0.0508,
@@ -82,8 +82,8 @@
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0357,
-     "p99_chroma": 0.0829
+     "mean_chroma": 0.0356,
+     "p99_chroma": 0.0827
     },
     "figure": {
      "mean_chroma": 0.0537,
@@ -348,22 +348,22 @@
   "12_search.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.8451,
+    "p50": 0.8677,
     "p98": 165.0,
-    "span": 0.7027
+    "span": 0.6818
    },
    "value_bands": {
-    "ground": 0.3989,
-    "mid": 0.0588,
-    "figure": 0.5422
+    "ground": 0.369,
+    "mid": 0.0661,
+    "figure": 0.5648
    },
    "chroma": {
-    "mean": 0.0392,
-    "p99": 0.0676,
-    "grey_fraction": 0.0026,
-    "accent_fraction": 0.00542,
+    "mean": 0.039,
+    "p99": 0.0786,
+    "grey_fraction": 0.0027,
+    "accent_fraction": 0.00602,
     "accent_fraction_by_family": {
-     "A_paper": 0.00542,
+     "A_paper": 0.00602,
      "B_rose": 0.0,
      "C_cool": 0.0,
      "D_green": 0.0,
@@ -376,12 +376,12 @@
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.0284,
-     "p99_chroma": 0.0506
+     "mean_chroma": 0.028,
+     "p99_chroma": 0.0502
     },
     "figure": {
-     "mean_chroma": 0.041,
-     "p99_chroma": 0.09
+     "mean_chroma": 0.0407,
+     "p99_chroma": 0.0901
     }
    },
    "hue_families": 5,
@@ -543,7 +543,7 @@
  },
  "across_the_set": {
   "mean_chroma": 0.0448,
-  "mean_lightness_span": 0.6354,
+  "mean_lightness_span": 0.6335,
   "hue_families_min": 4,
   "hue_families_max": 5,
   "hue_families": 5,
@@ -560,7 +560,7 @@
    "A_paper"
   ],
   "grey_fraction": 0.0208,
-  "accent_fraction": 0.00079,
+  "accent_fraction": 0.00085,
   "lightness_drift": 0.5417,
   "lightness_drift_room": 0.1293,
   "rooms": 10,
@@ -785,7 +785,7 @@
     "class": "room",
     "quantity": "chroma_by_band.mid.mean_chroma",
     "requires": ">= 0.03",
-    "actual": 0.0284,
+    "actual": 0.028,
     "section": "5 floor"
    },
    {
@@ -793,7 +793,7 @@
     "class": "room",
     "quantity": "chroma_by_band.figure.p99_chroma",
     "requires": ">= 0.1",
-    "actual": 0.09,
+    "actual": 0.0901,
     "section": "5 floor / 7 item 2"
    },
    {
@@ -801,7 +801,7 @@
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.00542,
+    "actual": 0.00602,
     "section": "7 item 5"
    },
    {

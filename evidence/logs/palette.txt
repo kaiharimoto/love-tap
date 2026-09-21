@@ -27,9 +27,9 @@ palette: 43 breaches of docs/COLOR.md across 11 artifacts
   §5 floor / 7 item 2 10_first_run.png         chroma_by_band.figure.p99_chroma = 0.0772, requires >= 0.1
   §7 item 5           10_first_run.png         chroma.accent_fraction = 0.00057, requires >= 0.01
   §4                  12_search.png            widest_hue_gap_deg = 320.0, requires <= 200.0
-  §5 floor            12_search.png            chroma_by_band.mid.mean_chroma = 0.0284, requires >= 0.03
-  §5 floor / 7 item 2 12_search.png            chroma_by_band.figure.p99_chroma = 0.09, requires >= 0.1
-  §7 item 5           12_search.png            chroma.accent_fraction = 0.00542, requires >= 0.01
+  §5 floor            12_search.png            chroma_by_band.mid.mean_chroma = 0.028, requires >= 0.03
+  §5 floor / 7 item 2 12_search.png            chroma_by_band.figure.p99_chroma = 0.0901, requires >= 0.1
+  §7 item 5           12_search.png            chroma.accent_fraction = 0.00602, requires >= 0.01
   §4                  13_messenger_states.png  widest_hue_gap_deg = 320.0, requires <= 200.0
   §5 floor / 7 item 2 13_messenger_states.png  chroma_by_band.figure.p99_chroma = 0.0774, requires >= 0.1
   §7 item 5           13_messenger_states.png  chroma.accent_fraction = 0.00164, requires >= 0.01

@@ -1,5 +1,5 @@
 {
- "captured_at": "2026-09-21T19:08:02Z",
+ "captured_at": "2026-09-21T19:26:26Z",
  "browser": "webkit",
  "artifacts": {
   "01_pulse.png": {
@@ -17,8 +17,8 @@
    ]
   },
   "02_chat.png": {
-   "bytes": 5229886,
-   "written": "2026-09-21T18:55:02Z",
+   "bytes": 5230883,
+   "written": "2026-09-21T19:25:15Z",
    "from_this_run": false,
    "size": [
     1440,
@@ -47,7 +47,7 @@
   "04_moments.png": {
    "bytes": 5210417,
    "written": "2026-09-21T19:21:06Z",
-   "from_this_run": true,
+   "from_this_run": false,
    "size": [
     1440,
     3120
@@ -87,9 +87,9 @@
    ]
   },
   "12_search.png": {
-   "bytes": 4682407,
-   "written": "2026-09-21T18:55:02Z",
-   "from_this_run": false,
+   "bytes": 4651776,
+   "written": "2026-09-21T19:27:00Z",
+   "from_this_run": true,
    "size": [
     1440,
     3120
@@ -245,19 +245,19 @@
   "surfaces": "a rendered surface in the library has nothing in it; see evidence/logs/surfaces.json"
  },
  "stale": {
-  "01_pulse.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "02_chat.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "03_us.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "05_settings.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "10_first_run.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "12_search.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "13_messenger_states.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "14_media_viewer.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "17_setup_pwa.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "06_unfolding.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "07_feeling_landing.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "08_state_propagating.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "11_chat_scroll.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z",
-  "15_authored_feeling.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:08:02Z"
+  "01_pulse.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "02_chat.png": "on disk from 2026-09-21T19:25:15Z, before this capture began at 2026-09-21T19:26:26Z",
+  "03_us.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "04_moments.png": "on disk from 2026-09-21T19:21:06Z, before this capture began at 2026-09-21T19:26:26Z",
+  "05_settings.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "10_first_run.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "13_messenger_states.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "14_media_viewer.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "17_setup_pwa.png": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "06_unfolding.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "07_feeling_landing.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "08_state_propagating.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "11_chat_scroll.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z",
+  "15_authored_feeling.mp4": "on disk from 2026-09-21T18:55:02Z, before this capture began at 2026-09-21T19:26:26Z"
  }
 }

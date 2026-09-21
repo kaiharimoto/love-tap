@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3964
-  },
-  {
-   "do": "wait",
-   "ms": 1904
-  },
-  {
-   "do": "scrollTo",
-   "ms": 5782
+   "ms": 4104
   },
   {
    "do": "wait",
    "ms": 1903
   },
   {
+   "do": "scrollTo",
+   "ms": 6035
+  },
+  {
+   "do": "wait",
+   "ms": 1901
+  },
+  {
    "do": "shot",
-   "ms": 5832
+   "ms": 3522
   },
   {
    "do": "report",
-   "ms": 728
+   "ms": 715
   }
  ],
  "shots": [
@@ -114,17 +114,19 @@
     "held_to": 23
    },
    "blobs_pending": 0,
+   "pictures_pending": 0,
    "at": "02_chat.png"
   }
  ],
  "blob_waits": [
   {
    "at": "02_chat.png",
-   "waited_ms": 710,
-   "pending_at_shot": 0
+   "waited_ms": 8,
+   "pending_at_shot": 0,
+   "undrawn_at_shot": 0
   }
  ],
- "cold_ms": 13411,
+ "cold_ms": 8569,
  "problems": [],
  "ok": true
 }
