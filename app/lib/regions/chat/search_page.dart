@@ -99,6 +99,57 @@ class SearchPageState extends State<SearchPage> {
     setState(() => _hits = hits);
   }
 
+  /// The filter strip, in order. A null is the gap between the type filters and the people.
+  ///
+  /// Built as a list so it can be indexed: each tab's index is the row it sits on, and a row is
+  /// what keeps two slips on one screen from being torn along the same edge.
+  List<_TabSpec?> _tabs() {
+    final scope = AppScope.of(context);
+    return [
+      (label: 'everything', on: _typeFilter == null, onTap: () {
+        _typeFilter = null;
+        _run();
+      }),
+      for (final f in _facets.entries)
+        (label: f.key, on: _typeFilter == f.value, onTap: () {
+          _typeFilter = _typeFilter == f.value ? null : f.value;
+          _run();
+        }),
+      null,
+      for (final p in Person.values)
+        (label: p.name, on: _author == p, onTap: () {
+          _author = _author == p ? null : p;
+          _run();
+        }),
+      (label: _range == null ? 'this year' : 'that month', on: _range != null, onTap: () {
+        final now = scope.clock.now();
+        _range = _range == null
+            ? DateTimeRange(start: DateTime(now.year, now.month - 1, 1), end: now)
+            : null;
+        _run();
+      }),
+    ];
+  }
+
+  /// Where a tab sits in the tear pool's walk.
+  ///
+  /// Not its index. `material/assignment.dart` guarantees that consecutive rows are torn along
+  /// different edges, and that guarantee holds INSIDE ONE LIST: the results underneath this strip
+  /// are rows 0, 1, 2 ... of their own list, so a tab numbered from 0 would be torn exactly like
+  /// the first hit rather than like the tab beside it. The offset moves the strip's whole walk
+  /// past the run of results that can be on screen at once, which is about eight on this viewport.
+  /// `the_search_screen_tears_its_own_strips_test` is what holds it: it reads every tear surface
+  /// the page actually drew and requires them all to differ, so a future offset that collides
+  /// fails there rather than in a capture three cycles later.
+  /// Where the query slip sits in the walk. It is a list of one, and a list of one still has a
+  /// row: without it the slip took `writableTears[0]`, which is exactly what the first result
+  /// takes, and the two biggest sheets on the screen were torn identically.
+  static const _chromeRow = 23;
+
+  static const _tabRowOffset = 24;
+
+  int _tabRow(int i) => _tabRowOffset + i;
+
   @override
   Widget build(BuildContext context) {
     final scope = AppScope.of(context);
@@ -120,6 +171,10 @@ class SearchPageState extends State<SearchPage> {
             padding: const EdgeInsets.fromLTRB(14, 12, 14, 6),
             child: Slip(
               id: 'search_query',
+              // Chrome is a list of one and still has to say where it sits. With no row it took
+              // `writableTears[0]`, which is the same edge the FIRST RESULT is torn along, and the
+              // two largest sheets on the screen were clones of each other.
+              row: _chromeRow,
               width: width - 28,
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
               child: Row(
@@ -175,49 +230,25 @@ class SearchPageState extends State<SearchPage> {
           // `hug: true` on the slip is the whole of the fix.
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
+            // THE TABS ARE A LIST AND HAVE TO SAY SO. Every one of them was a `Slip` with no
+            // `row`, and `row` defaults to 0 — so all thirteen took `writableTears[0]` and
+            // 12_search drew `tear_001_shadow` fourteen times, twelve of them at byte-identical
+            // geometry. docs/BRIEF.md 09 names reusing one tear mask across the app as a failure
+            // condition and rubric row 02 asks for no visible repeat on a single screen; the
+            // strips read as a ladder of clones. It was never a shortage — the pool holds 56 and
+            // the report says 47 are writable — and it was never the assignment, which walks the
+            // pool with a stride coprime to its size so that any run of consecutive rows is
+            // distinct. It was that nobody told these thirteen slips which row they were on.
+            //
+            // `_tabRow` is why the offset exists: a row is unique inside ONE list, and this
+            // screen has two of them. The results underneath start at row 0 as well, so tabs
+            // numbered from 0 would collide with the first hits rather than with each other.
             child: Wrap(
               spacing: 0,
               runSpacing: 2,
               children: [
-                _Tab(
-                  label: 'everything',
-                  on: _typeFilter == null,
-                  onTap: () {
-                    _typeFilter = null;
-                    _run();
-                  },
-                ),
-                for (final f in _facets.entries)
-                  _Tab(
-                    label: f.key,
-                    on: _typeFilter == f.value,
-                    onTap: () {
-                      _typeFilter = _typeFilter == f.value ? null : f.value;
-                      _run();
-                    },
-                  ),
-                const SizedBox(width: 10),
-                for (final p in Person.values)
-                  _Tab(
-                    label: p.name,
-                    on: _author == p,
-                    onTap: () {
-                      _author = _author == p ? null : p;
-                      _run();
-                    },
-                  ),
-                _Tab(
-                  label: _range == null ? 'this year' : 'that month',
-                  on: _range != null,
-                  onTap: () {
-                    final now = scope.clock.now();
-                    _range = _range == null
-                        ? DateTimeRange(
-                            start: DateTime(now.year, now.month - 1, 1), end: now)
-                        : null;
-                    _run();
-                  },
-                ),
+                for (final (i, tab) in _tabs().indexed)
+                  if (tab == null) const SizedBox(width: 10) else _Tab(row: _tabRow(i), tab: tab),
               ],
             ),
           ),
@@ -247,20 +278,29 @@ class SearchPageState extends State<SearchPage> {
   }
 }
 
+/// One tab's label and what it does. A record rather than three positional arguments, so the
+/// list can be built once and indexed — which is what gives each tab its row.
+typedef _TabSpec = ({String label, bool on, VoidCallback onTap});
+
 /// One stamped tab. Never a count on it: what a filter narrows to is the list under it.
 class _Tab extends StatelessWidget {
-  const _Tab({required this.label, required this.on, required this.onTap});
-  final String label;
-  final bool on;
-  final VoidCallback onTap;
+  const _Tab({required this.row, required this.tab});
+
+  /// Where this tab sits in the strip. Required, and with no default, because the default is what
+  /// the defect was: thirteen tabs at row 0 are thirteen slips torn along the same edge.
+  final int row;
+  final _TabSpec tab;
+
+  String get label => tab.label;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: onTap,
+        onTap: tab.onTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 6),
           child: Slip(
             id: 'facet_$label',
+            row: row,
             stock: 'index',
             // A tab is the width of the word stamped on it. Without this the slip fills the
             // width the `Wrap` offers, the `Wrap` fits one tab to a line, and thirteen tabs
@@ -268,7 +308,7 @@ class _Tab extends StatelessWidget {
             // underneath them. PaperPiece.hug is the whole of the fix.
             hug: true,
             padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-            child: Stamped(label, size: 9.5, colour: on ? Pen.stamp : Pen.margin),
+            child: Stamped(label, size: 9.5, colour: tab.on ? Pen.stamp : Pen.margin),
           ),
         ),
       );

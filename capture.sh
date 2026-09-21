@@ -356,6 +356,23 @@ if [ -f evidence/02_chat.png ]; then
   python3 tools/check/crops.py evidence/02_chat.png --out-dir evidence/crops --scale 3 >"$LOG/crops.json"
   python3 tools/check/tears.py "$LOG/02_chat.report.json" --out "$LOG/tears.json" >/dev/null \
     || note_missing "02_chat.png" "$(python3 -c "import json;print(json.load(open('$LOG/tears.json')).get('why',''))" 2>/dev/null)"
+  # The frame-wide answer, said out loud for every still rather than only for the notes of one.
+  #
+  # tears.py read the scene report's `tears` map, which is keyed by event id, so it saw the notes
+  # and nothing else -- and eight of the eleven stills in firing 39's capture repeat a mask in
+  # their CHROME while that map reports no repeat at all. 12_search drew one mask fourteen times.
+  # The gate was narrower than the clause it enforces (docs/BRIEF.md 09, rubric row 02: no visible
+  # repeat on a single screen), which is how it survived four captures.
+  #
+  # Not folded into `ok` yet, and `--frame-fatal` is the one flag that will do it. A failed `ok`
+  # here becomes note_missing, and booking a still as MISSING because its chrome repeats a mask
+  # throws the artifact away instead of measuring it. This prints and records; the queue item owns
+  # getting every line to frame_ok true, and then the flag goes on.
+  for R in "$LOG"/*.report.json; do
+    [ -f "$R" ] || continue
+    python3 tools/check/tears.py "$R" --out "${R%.report.json}.tears.json" >/dev/null 2>&1 || true
+    python3 tools/check/tears_line.py "$R" "${R%.report.json}.tears.json" || true
+  done
 fi
 
 # ---- the two rulers the capture describes and never used to write ---------------------------
