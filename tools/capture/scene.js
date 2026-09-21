@@ -96,10 +96,57 @@ function ensure(p) {
     if (m.type() === 'error' && !m.text().includes('404')) problems.push('console: ' + m.text().slice(0, 300));
   });
 
+  // Opening the app twice, because the first open and every open after it are different costs
+  // and only one of them is a cost anybody pays twice.
+  //
+  // `cold_ms` used to be the FIRST load, and every scene log in `evidence/logs/` carried one:
+  // 10,884-12,327 ms across the thirteen scenes served the seeded build against 1,259-1,321 ms
+  // across the three served the fresh one. A queue item read that as `a person opening this app
+  // after a year of using it waits twelve seconds`, and firing 40 measured the sentence false.
+  // Every one of those numbers is an INSTALL. This script makes a browser and a context per
+  // scene, one node process per scene, so every scene meets an empty IndexedDB and every scene
+  // pays the whole seed import -- 14,061 events and 197 blobs out of the bundle and into the
+  // store. Loaded three times in ONE context firing 40 measured 8,686 then 1,301 then 1,101 ms
+  // over the same 14,061 events, and a fresh EMPTY context cost 8,306: opening a year costs what
+  // opening nothing costs, and the twelve seconds is the import, paid once.
+  //
+  // So the number that goes on being called `cold_ms` is now the one a person actually pays --
+  // the app opened again on a device that already holds the year -- and the install is written
+  // down beside it under its own name rather than wearing `cold_ms`'s. Both come out of the same
+  // context, which is why `install_ms` stays honest: the reopen is not a different browser, a
+  // different build or a different machine, it is the same page a second time.
+  //
+  // The context is still made fresh PER SCENE. Reusing one across scenes would make the scenes
+  // depend on each other's state, which is a far worse thing than a slow capture, and it would
+  // also destroy `install_ms` -- so a storage state carried into the context is refused by
+  // app/test/a_year_is_imported_once_and_opened_ever_after_test.dart and must stay refused.
+  //
+  // A scene whose subject IS the install says `"first_run": true` and is not reopened: on
+  // 10_first_run and 17_setup_pwa the first load is the thing being photographed, and for those
+  // two the install is what a person waits for. Their `cold_ms` is their `install_ms` and the log
+  // says `reopened: false` so nobody has to infer it.
+  const open = async () => {
+    await page.goto(url, { waitUntil: 'load', timeout: 120000 });
+    await page.waitForFunction('window.__deskReady === true', { timeout: scene.wait || 60000 });
+  };
   const t0 = Date.now();
-  await page.goto(url, { waitUntil: 'load', timeout: 120000 });
-  await page.waitForFunction('window.__deskReady === true', { timeout: scene.wait || 60000 });
-  log.cold_ms = Date.now() - t0;
+  await open();
+  log.install_ms = Date.now() - t0;
+  if (scene.first_run === true) {
+    log.cold_ms = log.install_ms;
+    log.reopened = false;
+  } else {
+    const t1 = Date.now();
+    await open();
+    log.cold_ms = Date.now() - t1;
+    log.reopened = true;
+  }
+  // And what was in the store when it was timed, so the number cannot be met by shrinking the
+  // seed. `report()` counts the spine the app actually opened; a page that is not this app has no
+  // handle and records null rather than a zero that would read as an empty year.
+  log.events_at_open = await page
+    .evaluate(() => (window.__deskReport ? JSON.parse(window.__deskReport()).events : null))
+    .catch(() => null);
 
   // Every handle answers with a sentence: 'ok', or what was missing. A step that did not land is
   // a failed scene, not a screenshot of the wrong screen.
