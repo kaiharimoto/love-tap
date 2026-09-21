@@ -6006,3 +6006,96 @@ for the firing that clears the last repeat.
 4. **The one untested scenario rank 10 uncovered**: a second phone pulling a year down over the
    tailnet. That is sync, not seed import, and nothing measures it.
 5. **Ranks 6 and 7 untouched, and 7 still must not be started.**
+
+## Firing 41 — IMPLEMENT, cycle 3, 2026-09-21 — ranks 8, 9, 11 and 12 closed, and two routes refuted
+
+Firing 40 repaired four items in the app and could close none of them, because each one's last
+clause wanted a capture. This firing took three `--only` legs and closed all four. Every closure is
+read off an artifact taken this firing, and every one carries the population clause that stops it
+being met by the thing leaving the screen.
+
+### 1. The checkout, which was not a checkout
+
+Step 0 passed, but only after the third case `WORKER_PROMPT.md` §0 describes. `git merge-base` came
+back empty and the counts read 50 ahead and 50 behind, which is the graft boundary every firing
+since 10 has seen. It was not one. The reflog said so in two lines: the container cloned the branch
+correctly at `96a73a9` and then checking it out **by name** moved HEAD back to `3edfbf7`, a tip
+whose subjects appear nowhere in the remote's history. That is firing 25's stale container ref.
+`git reset --hard` was **allowed** here, which is its first pass in four attempts across this
+file's record — it has been refused at 12, 13 and 31 and taken at 41. It is still not where to
+start, but it is no longer nought for three.
+
+### 2. What closed, and what each one is anchored to
+
+- **Rank 8, the blank gallery tiles.** `tools/check/pictures_drawn.py` is new and was earned
+  against the known pair *before* it was trusted, which §3d requires of every new ruler. On firing
+  39's committed capture it fails, naming **three** blank boxes and not the item's four, and reads
+  `(59,2368)` at **21.694** at the median of a tiled window with pass fraction 0.875 — a night
+  photograph, not a blank tile. That is firing 40's correction reproduced by a second instrument.
+  On the new artifact: **3 blank tiles → 0**, with 17 declared, 14 on screen and 33 runs all
+  unchanged, and `evidence/logs/04_moments.json` carrying `undrawn_at_shot 0` — a field firing 39's
+  log does not have at all.
+- **Rank 11, unselected drawn as alpha.** All four Moments chips clear the 4.5 floor: `teo`
+  4.47 → **8.73**, `all year` 3.89 → **7.45**, `noor` 6.33 → 5.49, `both` 7.97 and never the
+  defect. All four still declare `ff3f3f41`, which was the whole shape of it. `declared` holds at
+  33 with all four strings still on screen — which matters more here than anywhere, because this
+  item had already been closed once by its words moving below the fold.
+- **Rank 9, "you's phone".** Zero runs match the malformed patterns, against three. `declared` 32
+  either way, and the same three rows now read `you are heads down` twice and `your phone is on
+  normal` once. Matched on the declared string and not the box.
+- **Rank 12, the repeated tear mask.** 28 draws and **25** distinct masks against 28 and 13, and
+  the twelve facet tabs take twelve different tears where `tear_001` had been drawn fourteen times.
+
+### 3. Two routes refuted, which is what this firing is actually for
+
+Firing 40 found four items naming a cause that is not the cause. This firing found the same shape
+twice more, both off files already committed, which takes cheap disproof to **eight for eight** —
+but both of these refuted a **fix** rather than a cause, and that is the part worth keeping.
+
+- **The tear-family item says the family is one root cause: `Slip.row` defaults to 0.** `tearFor`
+  is a pure function of row, so that cause predicts every repeat is `tear_001`. They are three
+  different masks. Asking each repeat which `piece` took it separates **three** mechanisms — the
+  row-0 default, cross-list collision (row 1 of the dates and row 1 of the todos are one mask,
+  which is why `tear_020` and `tear_043` recur across four screens), and a hash passed where a row
+  goes at `note.dart:475`. The item asked ADDRESS to choose between making `Slip.row` required and
+  namespacing the walk. **(a) cannot fix either of the last two**, so the choice was already made
+  and only measurement could say so. The three pairs left on the repaired search screen are two
+  cross-list collisions and one margin hash, named piece by piece.
+- **Rank 13's obvious route is impossible.** All 56 masks carry their millimetres in the asset
+  manifest: source aspects run 0.85 to 3.64. The draws run 0.33 to **18.08**, and **70 of 172 need
+  an aspect wider than the widest mask that exists**. No assignment reaches them. What is left is
+  to stop stretching — `_bakedShadow` is the only `BoxFit.fill` in `app/lib`, so that has one site
+  — or to author wider masks. That is a judgement, so it is written down rather than taken.
+
+### 4. A regression from firing 40, found and fixed
+
+`capture_selftest.py` was green at firing 39 and red here with no code change between, so **every
+capture was booking a failed gate**. Firing 40 gave the two blob handles different falls:
+`__deskBlobsPending` returns 0 when absent, `__deskPicturesPending` returns `null` — and null was
+turned into a `problems` entry, which refuses the scene. So every page that is not this app
+refused, including the bare `file://` probe the selftest drives. The branch now asks whether the
+blobs handle ever answered, which separates an older build of this app (worth refusing) from a page
+that was never this app (nothing to wait for). The note is also said once instead of every 100 ms.
+
+Worth noticing which check caught it: three of the four around it accept **any** non-zero exit, so
+a scene refusing for the wrong reason reads `ok` to them. Only the one requiring a **zero** exit
+could see it. A gate that can only go red one way goes quiet in the other.
+
+### 5. Things worth the next firing's time
+
+1. **`--only` does not skip the build.** It re-packs and runs two full `flutter build web` passes,
+   which is the entire cost. The first leg took about twenty-five minutes; the next two took about
+   two each with `--no-build` against the cached `$SCRATCH/web_seeded`. Run the first leg without
+   it and every leg after it with it.
+2. **A run's text is under `text` in `<name>.text.json`, not `says`.** WORKER_PROMPT §3d's anchor
+   table says `says`, which is what `legibility.py` calls it in *its* output. Grepping the table's
+   key against the text sidecar matches nothing and reads exactly like a defect already fixed.
+   This firing made that mistake and caught it only by printing the runs.
+3. **Every `--only` leg loses the measured `/dev/kvm` sentence** against `09` and `16`, because
+   that `note_missing` sits behind the same guard that skips the scene. Firing 37 lost it, 39 put
+   it back, 41 lost it four times. Now filed as its own item rather than rediscovered a fourth time.
+4. **ADDRESS has a second sweep to make.** Firing 40 asked for a sweep for a `why` asserting a
+   mechanism the measurement does not reach. Add one for an item whose proposed **remedy** has
+   never been checked against the library it depends on. It is the cheaper of the two and it found
+   two items in about fifteen minutes here.
+5. **Ranks 6 and 7 untouched, and 7 still must not be started.**
