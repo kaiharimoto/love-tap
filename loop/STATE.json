@@ -5,7 +5,13 @@
   "stage": "IMPLEMENT",
   "firing": 38,
   "stage_entered_at_firing": 35,
-  "lease": null,
+  "lease": {
+    "session_id": "session_01S6BCcgLGEtF95bJgGxqhpf",
+    "firing": 39,
+    "stage": "IMPLEMENT",
+    "started_at": "2026-09-21T12:57:00Z",
+    "expires_at": "2026-09-21T16:57:00Z"
+  },
   "evidence_fresh_as_of": "firing 37, 2026-09-21T09:14Z (02_chat reshot; the rest 07:52Z the same morning)",
   "evidence_note": "15 of 17, which is the ceiling in this container. 09_two_devices.png and 16_setup_android.png need /dev/kvm; docs/PHONES.md records three measured routes. `surfaces` is booked missing on folds/unfold_thirds at median L_std 6.319 against a floor of 8.0, which is rank 6. The two Android entries in this MANIFEST read 'not captured this session' rather than the measured reason, because the second leg ran --only=02_chat and the block that writes that sentence sits inside the scene loop; the commit before it carries the full text.",
   "degradation": 0,
@@ -2134,12 +2140,12 @@
       "what": "THE QUESTION FIRING 37 SAID TO SETTLE FIRST WAS SETTLED IN TEN MINUTES AND THE ANSWER WAS THE BAD ONE. Firing 37 recorded the seeded-id divergence as `same 80-bit tail from the key, different 48-bit head from the clock`. THE CLOCK IS NOT INVOLVED: both rigs are handed the identical ts out of the identical seed line, and 1776875780000 mod 2^32 is 3054286752, which is exactly what the PWA's head `0002V0SDX0` decodes to. Not a clock, a WIDTH. `UlidFactory.next` peeled its 48-bit timestamp with `t & 31` and `t >>= 5`, and a web `int` is an IEEE-754 double on which those are 32-bit operations; `timeOf` had it in reverse. Reproduced character-for-character in node under dart2js's unsigned semantics before a line was changed. So the divergence is VM-AGAINST-WEB, the paper claim was live, and all 14,061 seeded events diverge -- a millisecond count has been past 2^32 since 1970-02-19. Fixed by dividing rather than shifting. THE SWEEP IT IMPLIED FOUND A SECOND FAMILY: fourteen places under material/, feelings/ and regions/ chose something a person looks at from `String.hashCode` or `int.hashCode` -- the stock and variant a feeling's scrap is torn from, the tear on the desk, the tilt of a photograph and of a reply, the seed of a drawn tick, the marks for a queued delivery and a refusal. MEASURED, not assumed: 'pad.pulse' is 762877079 on the VM and 151588280 on web. All fourteen now go through `hashOf`, guarded by a source-reading test re-broken to name viewer_page.dart:129. AND THE SILENCE IS CLOSED: `_scrollToAnchor` throws on every way of not landing. Making it loud found a THIRD defect in its first run -- `stageStates` scrolls to a note the thread projection does not have yet, so the scroll that frames 13_messenger_states was being skipped silently on every capture that ever ran it. THEN RANK 3'S APP HALF. docs/COLOR.md 2 derived the ink ceiling of the whole palette from `aged stock rendered at dusk, Y p50 0.5528`. Re-measured from the library: there is no aged render, 0.5528 is index_02_dusk at 0.5530, and eleven dusk stocks ship darker, down to sticky_pink_02_dusk at 0.4506. `Paper.aged` does exist -- as a flat swatch the app declares and never draws, which is how the name survived four cycles. Pen.stamp and Pen.margin read 4.490:1 there against a floor of 5.0; they are now #3F3F41 at 5.009:1, and the day sweep improves with them. No floor moved and no step of the ladder was redrawn -- only which stock the derivation is taken against.",
       "gate": "packed with --seed=year (85.6 MB, seed included), `flutter analyze` clean, `flutter test` +202 all passed, exit 0 (+192 before this firing). `tools/check/both_phones.sh` 9/9 on chrome. `python3 tools/capture/capture_selftest.py` 19/19, exit 0. `tools/check/dusk_ground.py` 54 renders. Every fix re-broken and watched to fail: the ULID bug put back fails all five tests ON CHROME (and passes all five on the VM, which is the finding below); a `hashCode` put back names its file and line; the silent return put back fails the absent-anchor case; #464648 put back fails at 4.490:1 naming the stock.",
       "closed": [
-       "a-seeded-event-id-is-not-the-same-string-in-a-test-as-in-the-app",
-       "the-ink-ceiling-is-derived-from-a-stock-that-is-not-in-the-library"
+        "a-seeded-event-id-is-not-the-same-string-in-a-test-as-in-the-app",
+        "the-ink-ceiling-is-derived-from-a-stock-that-is-not-in-the-library"
       ],
       "filed": [
-       "the-red-pen-is-three-to-one-on-the-darkest-paper-it-can-land-on",
-       "a-test-that-models-the-browser-cannot-see-the-browser-change"
+        "the-red-pen-is-three-to-one-on-the-darkest-paper-it-can-land-on",
+        "a-test-that-models-the-browser-cannot-see-the-browser-change"
       ],
       "the_finding_worth_more_than_the_items": "BOTH `both phones` TESTS WERE CLAIMS AND NOT MEASUREMENTS, and firing 38 only knows because it checked. They guard the law by MODELLING browser arithmetic on the VM. The model is hand-written and never touches the real function, so putting the ULID bug back left `flutter test` green on all five of the new tests. CLAUDE.md says in terms that a test which passes with the bug put back is a claim. `tools/check/both_phones.sh` runs them on chrome, where the same re-break fails all five. Only tests free of `dart:ffi` compile there -- anything opening a Spine fails against sqlite3's FFI bindings -- so the rig covers the pure-logic files and not the suite.",
       "a_loop_hazard_recorded_in_WORKER_PROMPT": "The container checked out a tip FIFTY COMMITS OLD, which is ordinary and 0 already describes. What was not ordinary is that the copy of CLAUDE.md in this firing's system prompt came from that tip, and it said `tools/check/texture_budget.py` does not exist -- under a heading whose whole purpose is to stop a firing wasting itself. The file on disk is 173 lines, runs, and passes on all four sequences; some firing between 35 and 37 wrote it and corrected the entry. A firing that trusted its prompt would have written a file that was already there. WORKER_PROMPT 0 now says to re-read CLAUDE.md from disk after the fast-forward, and to check a `does not exist` claim with ls rather than on trust.",
