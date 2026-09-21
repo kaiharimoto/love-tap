@@ -50,8 +50,12 @@ class UlidFactory {
     var t = ms;
     final timeChars = List<int>.filled(10, 0);
     for (var i = 9; i >= 0; i--) {
-      timeChars[i] = t & 31;
-      t >>= 5;
+      // Divide, do not shift. A web `int` is a double and `&` and `>>` are 32-bit operations on
+      // it, so `ms & 31` on a real millisecond count reads the low half of the number and throws
+      // the rest away. `%` and `~/` are exact on both platforms for anything inside 2^53, and a
+      // 48-bit millisecond time is inside it by five orders of magnitude.
+      timeChars[i] = t % 32;
+      t = t ~/ 32;
     }
     for (final c in timeChars) {
       sb.write(_alphabet[c]);
@@ -73,7 +77,9 @@ class UlidFactory {
   static int timeOf(String ulid) {
     var t = 0;
     for (var i = 0; i < 10; i++) {
-      t = (t << 5) | _alphabet.indexOf(ulid[i]);
+      // Multiply, do not shift, for the same reason [next] divides: ten base32 characters are
+      // fifty bits and `<<` gives up at thirty-two of them in a browser.
+      t = t * 32 + _alphabet.indexOf(ulid[i]);
     }
     return t;
   }
