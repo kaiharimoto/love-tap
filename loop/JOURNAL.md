@@ -5536,3 +5536,65 @@ from a stale branch ref *before* anything is overwritten. Do it first; it is the
 5. **Evidence is still stale** and not scorable. The capture at ranks 3–5 is owed to the loop
    regardless of those three items.
 6. **Re-read `CLAUDE.md` from the tree.** The copy at the top of your context is the container's.
+
+## Firing 36 — IMPLEMENT — ranks 1, 2, 3 and 6
+
+Step 0 passed, and on a case §0 does not quite have. The reflog showed the clone landing on the
+real tip `974dcb7` and `git checkout <branch>` then moving HEAD **backwards** to `3edfbf7`, dated
+six days earlier — firing 25's stale-container-ref signature exactly, and by its two questions a
+reset case. It was not one. `git fetch --filter=blob:none --deepen=300` settled it in nine seconds:
+0 ahead, 294 behind, `merge-base --is-ancestor` true. The branch ref was stale **and** its tip was
+contained, so `git merge --ff-only` took it and lost nothing. **A stale ref is not by itself a
+reason to reset** — firing 31 already said to deepen before believing a divergence; this adds that
+the reflog question can be answered "stale" and the answer still not imply a reset.
+
+### What landed
+
+**Rank 1 closed, and its second half came back negative.** The `ground_swing <= 1.2` clause is
+struck from `docs/COLOR.md` §6 clause 7 with both counts and firing 34's dusk reading written
+beside it. The ground-ring clip is implemented and `tools/check/ground_clip_selftest.py` proves it
+on a synthetic plank: the run at the sheet's edge reads a ground swinging 6.41:1 against the
+interior run's 1.03:1 and is held against the plank at 2.18:1 against 13.95:1; clipped to its own
+sheet its swing falls to 1.03 and its ink reads 13.95. **The interior run does not move at all** —
+that is the half a careless implementation passes by accident.
+
+**But the floors do not gate on it, and that is the finding.** A declared `rect` is a padded layout
+box, not the sheet's outline. The pad is recoverable from `drawn` for `lined_01` (1218×90 in
+1462×108, 1.200 on both axes) and not for `looseleaf_02` (1094×494 in 1268×591, 1.159 and 1.196).
+On the committed capture `02_chat` and `13_messenger_states` therefore read a **byte-identical**
+region two ways — 8.04:1 and a 3.04:1 failure — on nothing but which sidecar declared it. §3d
+disqualifies that, so `ink_core` still comes from the unclipped ring and §5 of the selftest holds
+the line. `evidence/legibility.json` is identical in runs **and** below_floor on every artifact
+(412 / 48), which is the strongest form the population clause could have taken.
+
+**Rank 2 closed.** The 60/48/32 level floors are struck from §5a and from **four** tools — the
+fourth, `surfaces.py`, was found by running it rather than reading it. The ruler that remains
+discriminates: defect 5.686 < floor 8.0 ≤ repair 8.4265, and `surfaces.py` still fails the folds at
+6.220, byte-identical to firing 33.
+
+**Rank 3 diagnosed, not fixed.** The ink does not move between the rigs (median dusk/day 0.999) and
+the ground falls to 0.661 — `ff464648` is a rig-independent constant. And `docs/COLOR.md` §2
+derives the ink ceiling from *"aged stock rendered at dusk, Y p50 0.5528"*: **there is no `aged`
+stock in `assets/paper`**, and the darkest dusk render that ships is `sticky_pink_02_dusk` at
+0.4506, where the ink reads 4.490:1 under a 5.0 floor.
+
+**Rank 6 swept, and route 2 is refuted.** Across `fibre_scale` 320→1600 the shipped reading moves
+0.185 and moves the *wrong way*. Crossed with pack size, the pack column moves it by 1.3 and the
+fibre row by at most 0.19 anywhere. Pack 720 tops out at 7.804 **at every fibre_scale**, so firing
+35's rung (ii) buys a surface that still fails.
+
+### For whoever takes IMPLEMENT next
+
+1. **Do not start rank 7's 240-frame render.** There is no `fibre_scale` to bake in. Four hours
+   would buy between 0.0 and −0.2. This is the single most expensive mistake available right now.
+2. **Rank 3's measurement can be closed without the app changing** — 24 of its 31 failures clear on
+   the ring reading. ADDRESS should amend it before anyone implements against it.
+3. **`the-ink-ceiling-is-derived-from-a-stock-that-is-not-in-the-library` needs no capture.** It
+   closes on `cd app && flutter test` against the committed library, and
+   `legible_on_what_it_is_on_test.dart` already walks every ink against every stock. It is the one
+   half of rank 3 that is squarely the app and squarely reachable today.
+4. **Ranks 4 and 5 are still one capture with rank 3.** Nothing here changed that.
+5. **The gate is green and was actually run**: packed `--seed=year` at 85.6 MB seed included,
+   `flutter analyze` clean, `flutter test` **+189**. `./bootstrap.sh --profile=web` gets Blender in
+   about two minutes but **exits 2** on ffmpeg's tarball; Blender 4.5.13 is fine regardless, and
+   `blender/folds/fold.py` now takes `--fibre-scale` so a route can be tested without editing it.
