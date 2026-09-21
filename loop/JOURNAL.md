@@ -5598,3 +5598,111 @@ fibre row by at most 0.19 anywhere. Pack 720 tops out at 7.804 **at every fibre_
    `flutter analyze` clean, `flutter test` **+189**. `./bootstrap.sh --profile=web` gets Blender in
    about two minutes but **exits 2** on ffmpeg's tarball; Blender 4.5.13 is fine regardless, and
    `blender/folds/fold.py` now takes `--fibre-scale` so a route can be tested without editing it.
+
+## Firing 37 — IMPLEMENT — ranks 4 and 5, both closed
+
+One capture and one reshoot. `flutter analyze` clean, `flutter test` **+192** (from +189: two new
+tests, three cases), capture **15 of 17**, which is the ceiling in this container.
+
+### Rank 4 — the search filters. Closed on both clauses.
+
+Thirteen full-width torn strips down 63% of the search screen were never thirteen decisions. They
+were **one layout rule**. A `Wrap` lays each child out against its *own* `maxWidth` rather than
+against an unbounded one, and `PaperPiece` reads a bounded width as an instruction to fill it —
+the same branch that makes a slip in a `Row` the width of its own writing. So every tab came out
+the full width of the line, the `Wrap` fitted exactly one to a row, and the widget brought in at
+firing ~28 to stop nine tabs running off the right edge became the vertical stack it replaced,
+wearing the opposite clothes.
+
+`PaperPiece.hug` takes the intrinsic-width branch even where a width is on offer. The `Align`
+above it has to hug too, and that is the half that is easy to miss: an `Align` with no
+`widthFactor` takes the whole of a bounded width, so the piece is laid out at the width of its
+label and then handed back to the `Wrap` as a full-width box with the label centred in it —
+the same stack, with the tear down the middle of the line instead of across it.
+
+Measured in `evidence/12_search.surfaces.json`:
+
+| | filed at firing 31 | now |
+|---|---|---|
+| facet band, of the 3120-row frame | 0.629, twelve rows | **0.1558, three rows** |
+| result strips reaching the frame | 2, one of them clipped | **6, five effectively whole** |
+
+The item asked for ≤ 0.25 and ≥ 5. Both. And the population held: `evidence/legibility.json` went
+**412 runs / 48 below floor → 418 / 48**. Six more runs of writing reached the desk and not one
+more failure came with them, which is the check §3d's second corollary asks for and the opposite
+of the failure it is written against.
+
+**And the sidecar can now name what it is measuring.** `12_search.surfaces.json` drew nineteen
+surfaces on `index_01` and `index_02`, of which one was the query slip and twelve were facet tabs,
+and nothing in the file could tell them apart. `PaperPiece.id` is carried through to `piece` —
+`facet_written`, `search_query`, `hit.<event id>`, `composer`, `margin-<event id>`, `pad.chat` —
+on 62 of that artifact's 95 surfaces. A measurement that cannot name its own object is the thing
+§3d exists to forbid.
+
+### Rank 5 — the chat hero. Closed, and the item was wrong about its own cause.
+
+`evidence/logs/tears.json`: **visible 12, notes_with_tears 12, distinct_tears 12, repeats {}, ok
+true**, scroll 5213..5224 of 8387. The floor of eight in `tools/check/tears.py` did not move.
+
+Nine firings carried one explanation: *firing 21's 40-logical search strip took one note's worth of
+height*. **It did not.** At the old anchor the chat region can be handed 40 more logical pixels, or
+60, or 100, and the visible span is **5195..5203 all three times** — it does not move by one note
+in either direction, because the next note down the thread costs between 65 and 104. A 40-pixel
+strip cannot have taken a note that costs 80. `0.62` was landing on a run of long notes, and that
+is all it ever was.
+
+So the shot is framed rather than the screen re-cut — the item's own second route — at 0.622,
+which is item 5216, the densest stretch in a sweep either side of the old anchor. The scene file
+carries the fraction and the reason; the report carries the span it produced.
+
+### The one that cost a capture, and it reaches past the harness
+
+The anchor was set to a seeded **event id** first, on the reasoning that an id is the same note in
+every capture while a fraction is an index into a thread whose length changes. The capture came
+back with six notes — the end of the thread — and not one error anywhere.
+
+`SeedLoader._ulidFor(key, ts)` mints a seeded id from eighty bits of randomness derived from the
+key and forty-eight bits of time from the timestamp. **The randomness crosses between the rigs and
+the time does not.** Item 5199:
+
+    flutter test     01KPV0SDX06FA58CJ9JXH23W7R
+    captured PWA     0002V0SDX06FA58CJ9JXH23W7R
+
+Same twenty-two-character tail, different four-character head. So the id read off the rig named
+nothing over there, `indexWhere` returned −1, `_scrollToAnchor` returned **silently**, and the
+shutter caught the thread where it starts.
+
+An **index** crosses cleanly — both rigs read 8387 items, both put 0.622 at item 5216. The fraction
+was the more portable anchor all along and the reasoning for leaving it was simply wrong.
+
+It is filed as `a-seeded-event-id-is-not-the-same-string-in-a-test-as-in-the-app`, and the second
+half of that item is not a harness question: `hashOf(id)` in `material/slip.dart` picks the stock a
+note is written on and the tear it is torn along. **If the divergence is VM-against-web rather than
+test-against-capture, the same seeded note is written on different paper on the two phones**, which
+is the sentence `app/test/the_same_paper_on_both_phones_test.dart` is named for — and that test
+compares two spines inside one VM, so it cannot see it. The item's measurement opens with the cheap
+experiment that settles which it is, before anything is done about it.
+
+### For whoever takes IMPLEMENT next
+
+1. **`flutter test` is an estimate of a layout, not a reading of it.** Two ways, both paid for here.
+   With `--use-test-fonts` — the default — the rig fits five notes where the real hands fit nine; a
+   sweep run against Ahem measures Ahem. `FontLoader` with `assets/fonts/{Noor,Teo}Hand.ttf` in
+   `setUpAll` fixes that half. The other half does not fix: even with the right fonts the rig read
+   nine notes where WebKit read seven at one anchor and twelve where WebKit read twelve at another,
+   and it predicted four search results where WebKit fit six. Use it to *choose* between routes in
+   three minutes; use the capture to *close* an item.
+2. **A cheap discriminating experiment before an expensive one, every time.** Firing 36 wrote that
+   down after saving four hours of Blender with three minutes of sweep. It held again: the
+   viewport sweep that refuted rank 5's nine-firing-old premise ran in four seconds.
+3. **Do not start rank 7's 240-frame render.** Unchanged from firing 36 and still the single most
+   expensive mistake available.
+4. **Rank 3 and its three unranked children are the top of the queue now**, with rank 6 behind
+   them. `the-ink-ceiling-is-derived-from-a-stock-that-is-not-in-the-library` still needs no
+   capture and is still the reachable half.
+5. **The evidence set is fresh as of this morning**, so the next firing owes the loop no capture.
+   Two Android artifacts need `/dev/kvm`; `surfaces` is booked missing on the fold at median L_std
+   6.319 against 8.0, which is rank 6 and was not touched.
+6. `bash tools/apt-prereqs.sh` then `./bootstrap.sh --profile=web` took **five minutes** in this
+   container, not fifteen, and exited 0. `python3 tools/pack_assets.py --seed=year` is another
+   three and is not optional.

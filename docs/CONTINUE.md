@@ -228,6 +228,31 @@ reports. Cycle 2 cost ~1.2M subagent tokens and 583 tool calls and was worth eve
   of each other. `RenderObject.paintsChild` is the framework's own answer and covers opacity,
   `Offstage`, `Visibility` and list children scrolled out of a viewport; `RenderIndexedStack` does
   not implement it and has to be asked for the child at its `index` directly.
+- **A seeded event's id is not the same string in a test as in the app, and an anchor named as one
+  costs a capture.** `SeedLoader._ulidFor(key, ts)` takes eighty bits of randomness from the key
+  and forty-eight bits of time from the timestamp. The randomness crosses between the Dart VM and
+  the compiled web app; the time does not. The thread's item 5199 is
+  `01KPV0SDX06FA58CJ9JXH23W7R` under `flutter test` and `0002V0SDX06FA58CJ9JXH23W7R` in the
+  captured PWA — the same twenty-two-character tail under a different four-character head. Firing
+  37 chose a scroll anchor by id on the rig, put it in `evidence/scenes/02_chat.json`, and got
+  back a 45-minute capture whose hero artifact was a picture of the end of the thread, because
+  `_scrollToAnchor` does `indexWhere`, gets −1 and **returns silently**. Nothing in the scene log,
+  the report or the manifest says an anchor was not found. An *index* crosses cleanly — both rigs
+  read 8387 items — so anchor a scene on a fraction, and if you must anchor on an id, take it out
+  of a capture report rather than out of a test. See the bullet above about `hashOf`: the two are
+  the same question one layer apart, and whether this one also means the two phones write the same
+  note on different paper is an open queue item rather than a settled fact.
+- **`flutter test` is an estimate of a layout, never a reading of one.** Two independent ways, both
+  paid for at firing 37. The first is fixable: the runner passes `--use-test-fonts
+  --disable-asset-fonts`, so a note's height is Ahem's line count and not the hands' — the rig fit
+  five notes on the chat screen where the real fonts fit nine. Loading
+  `assets/fonts/{Noor,Teo}Hand.ttf` with `FontLoader` in `setUpAll` fixes that half, and any test
+  that measures a height rather than a structure should. The second does not fix: Skia and WebKit
+  do not set the same writing in the same space. With the right fonts loaded the rig still read
+  nine notes where the capture read seven at one anchor, twelve where it read twelve at another,
+  and four search results where the capture fit six. So use the rig to choose between routes in
+  three minutes — it refuted a nine-firing-old premise in four seconds — and use `./capture.sh` to
+  close the item.
 
 ## 6. Secrets, which are failure conditions
 
