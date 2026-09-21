@@ -1,5 +1,5 @@
 {
- "commit": "ffcb677",
+ "commit": "57c88d0",
  "baseline": {
   "dir": "evidence/.previous",
   "captured_at": "2026-09-20T10:06:21Z"
@@ -19,11 +19,11 @@
   {
    "artifact": "02_chat.png",
    "label": "changed",
-   "ssim": 0.6721,
+   "ssim": 0.6525,
    "judgement": null,
-   "sha": "bf6ae5c22c6620ee",
+   "sha": "dd53d754c8a9e2b9",
    "previous_sha": "4da6964e6e9ff788",
-   "label_basis": "ssim 0.6721 against 0.999 \u2014 at or above it, nothing a person would see has moved"
+   "label_basis": "ssim 0.6525 against 0.999 \u2014 at or above it, nothing a person would see has moved"
   },
   {
    "artifact": "03_us.png",

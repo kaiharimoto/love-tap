@@ -1,12 +1,12 @@
 11 artifacts read -> evidence/palette.json
-  mean chroma 0.0449  ·  grey 2%  ·  hue families 4-5  ·  lightness drift 0.5391
+  mean chroma 0.0448  ·  grey 2%  ·  hue families 4-5  ·  lightness drift 0.5391
 palette: 42 breaches of docs/COLOR.md across 11 artifacts
   §4                  01_pulse.png             widest_hue_gap_deg = 320.0, requires <= 200.0
   §5 floor / 7 item 2 01_pulse.png             chroma_by_band.figure.p99_chroma = 0.0819, requires >= 0.1
   §7 item 5           01_pulse.png             chroma.accent_fraction = 0.00058, requires >= 0.01
   §4                  02_chat.png              widest_hue_gap_deg = 320.0, requires <= 200.0
-  §5 floor / 7 item 2 02_chat.png              chroma_by_band.figure.p99_chroma = 0.0768, requires >= 0.1
-  §7 item 5           02_chat.png              chroma.accent_fraction = 0.00035, requires >= 0.01
+  §5 floor / 7 item 2 02_chat.png              chroma_by_band.figure.p99_chroma = 0.0759, requires >= 0.1
+  §7 item 5           02_chat.png              chroma.accent_fraction = 0.0003, requires >= 0.01
   §4                  03_us.png                widest_hue_gap_deg = 320.0, requires <= 200.0
   §5 floor / 7 item 2 03_us.png                chroma_by_band.figure.p99_chroma = 0.0736, requires >= 0.1
   §7 item 5           03_us.png                chroma.accent_fraction = 0.00023, requires >= 0.01
@@ -40,6 +40,6 @@ palette: 42 breaches of docs/COLOR.md across 11 artifacts
   §5 floor            17_setup_pwa.png         chroma_by_band.mid.mean_chroma = 0.0264, requires >= 0.03
   §5 floor / 7 item 2 17_setup_pwa.png         chroma_by_band.figure.p99_chroma = 0.0453, requires >= 0.1
   §7 item 5           17_setup_pwa.png         chroma.accent_fraction = 0.0, requires >= 0.01
-  §5 floor / 7 item 1 <the set>                across_the_set.mean_chroma = 0.0449, requires >= 0.045
+  §5 floor / 7 item 1 <the set>                across_the_set.mean_chroma = 0.0448, requires >= 0.045
   §4 / 7 item 4       <the set>                across_the_set.widest_hue_gap_deg = 320.0, requires <= 150.0
   §4 / 7 item 4       <the set>                across_the_set.named_families = 1, requires >= 4

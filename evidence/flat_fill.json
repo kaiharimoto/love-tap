@@ -106,8 +106,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#FFEBD6",
-    "share": 0.00903,
+    "rgb": "#464648",
+    "share": 0.01224,
     "constant": null
    },
    "pad_box": [
@@ -118,79 +118,77 @@
    ],
    "windows": {
     "declared": 8,
-    "passing": 7,
-    "median_std": 32.284,
+    "passing": 8,
+    "median_std": 29.659,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 33.597,
-      "levels": 177
+      "std": 13.806,
+      "levels": 176
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 31.222,
-      "levels": 186
+      "std": 37.434,
+      "levels": 187
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 7.587,
-      "levels": 70
+      "std": 27.975,
+      "levels": 176
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 25.526,
-      "levels": 176
+      "std": 29.659,
+      "levels": 212
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 65.47,
-      "levels": 183
+      "std": 32.876,
+      "levels": 174
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 49.679,
-      "levels": 193
+      "std": 30.404,
+      "levels": 169
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 32.284,
-      "levels": 188
+      "std": 17.236,
+      "levels": 127
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 22.598,
-      "levels": 177
+      "std": 29.096,
+      "levels": 176
      }
     ]
    },
-   "problems": [
-    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
-   ],
-   "ok": false
+   "problems": [],
+   "ok": true
   },
   {
    "of": "03_us.png",
