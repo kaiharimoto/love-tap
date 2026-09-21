@@ -5,7 +5,13 @@
   "stage": "IMPLEMENT",
   "firing": 37,
   "stage_entered_at_firing": 35,
-  "lease": null,
+  "lease": {
+    "session_id": "session_01HrReGCNVUAngq3uCrFXQE3",
+    "firing": 38,
+    "stage": "IMPLEMENT",
+    "started_at": "2026-09-21T09:56:01Z",
+    "expires_at": "2026-09-21T13:56:01Z"
+  },
   "evidence_fresh_as_of": "firing 37, 2026-09-21T09:14Z (02_chat reshot; the rest 07:52Z the same morning)",
   "evidence_note": "15 of 17, which is the ceiling in this container. 09_two_devices.png and 16_setup_android.png need /dev/kvm; docs/PHONES.md records three measured routes. `surfaces` is booked missing on folds/unfold_thirds at median L_std 6.319 against a floor of 8.0, which is rank 6. The two Android entries in this MANIFEST read 'not captured this session' rather than the measured reason, because the second leg ran --only=02_chat and the block that writes that sentence sits inside the scene loop; the commit before it carries the full text.",
   "degradation": 0,
