@@ -244,20 +244,34 @@ class _Chip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    // a filter is a tab on a sticky note: the one you are on is stuck down, the rest are
-    // half-lifted and paler
+    // A filter is a tab on a sticky note: the one you are on is stuck down and the rest are
+    // half-lifted. They were also *paler* — the whole tab, paper and word together, inside an
+    // `Opacity(0.72)`.
+    //
+    // That is the owner's first complaint in the one place the repair for it could not see.
+    // `material/choice.dart` took the fade out of every picker's ink and
+    // `no_word_is_written_in_a_faded_ink_test` holds docs/COLOR.md section 6 over the ink each run
+    // DECLARES. This tab declared `ff3f3f41` and composited at 0.72 of it, so the guard read full
+    // strength and the glass showed less: all four chips declare the same ink in
+    // `04_moments.text.json` and `tools/check/legibility.py` reads `both` at 7.97:1 and `all year`
+    // at 3.89:1 and `teo` at 4.47:1 against a floor of 4.5, on stable ground — ground_swing 1.21
+    // and 1.14, well under the 1.8 the instrument artifacts sit above. Firing 31's visual-design
+    // critic confirmed the same two at 300%. They are the one real legibility failure in the set.
+    //
+    // The fade was never carrying anything on its own. Which tab is chosen is already said three
+    // ways that survive being read: it is on yellow sticky rather than white index, it is stuck
+    // down rather than lifted by this padding, and its word is in `Pen.stamp` rather than the
+    // margin pencil. A choice is not a brightness — and thinning the paper thins the word standing
+    // on it, whatever the word says its ink is.
     padding: EdgeInsets.only(right: 6, top: on ? 0 : 4, bottom: on ? 4 : 0),
-    child: Opacity(
-      opacity: on ? 1.0 : 0.72,
-      child: Slip(
-        id: 'moments.$label',
-        row: label.length,
-        stock: on ? 'sticky_yellow' : 'index',
-        torn: false,
-        padding: const EdgeInsets.fromLTRB(11, 5, 11, 6),
-        onTap: onTap,
-        child: Text(label, style: Hands.margin(size: 13).copyWith(color: on ? Pen.stamp : Pen.margin)),
-      ),
+    child: Slip(
+      id: 'moments.$label',
+      row: label.length,
+      stock: on ? 'sticky_yellow' : 'index',
+      torn: false,
+      padding: const EdgeInsets.fromLTRB(11, 5, 11, 6),
+      onTap: onTap,
+      child: Text(label, style: Hands.margin(size: 13).copyWith(color: on ? Pen.stamp : Pen.margin)),
     ),
   );
 }

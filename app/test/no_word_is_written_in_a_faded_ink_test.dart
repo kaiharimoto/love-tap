@@ -107,6 +107,50 @@ void main() {
     }
   });
 
+  testWidgets('and no word is faded by the thing it is standing on either', (tester) async {
+    // THE SAME RULE, ONE LAYER UP, AND THIS IS WHERE IT SURVIVED. The test above reads the ink a
+    // run DECLARES. `Opacity` declares nothing: it composites the whole subtree, paper and word
+    // together, and the run underneath goes on saying `ff3f3f41` while the glass shows 0.72 of it.
+    //
+    // The Moments filter tabs were exactly that — `Opacity(opacity: on ? 1.0 : 0.72)` around the
+    // slip. All four chips declare the same full-strength ink in `04_moments.text.json`, and
+    // `tools/check/legibility.py` reads the chosen one at 7.97:1 and two of the unchosen at 3.89:1
+    // and 4.47:1 against a floor of 4.5, on ground that is not moving (ground_swing 1.21 and 1.14,
+    // against the ~1.8 above which a reading is the instrument rather than the ink). Firing 31's
+    // visual-design critic confirmed the same two at 300%. They were the one real legibility
+    // failure left in the set, and the guard written for this exact defect could not see them.
+    //
+    // So the question is asked of the tree rather than of the run: nothing that carries a word may
+    // be composited under docs/COLOR.md section 6's floor. `Pen.marginThinning` is 1.0 for the
+    // same reason — the thread's timestamps were thinned to 0.78 and thirteen of them went under
+    // the floor while `legible_on_what_it_is_on_test` read the ink at full strength and passed.
+    if (absent != null) return;
+    for (final (name, screen) in <(String, Widget)>[
+      ('pulse', const PulseRegion()),
+      ('chat', const ChatRegion()),
+      ('us', const UsRegion()),
+      ('moments', const MomentsRegion()),
+      ('settings', const SettingsRegion()),
+    ]) {
+      await draw(tester, screen);
+      for (final (kind, el, value) in _fades(tester)) {
+        if (value >= kMinInkAlpha / 255) continue;
+        // Zero is not a fade, it is an absence. `CaptureHooks._painted` says the same thing — a
+        // subtree the framework does not put on the glass is not declared — so a word at 0 is not
+        // a word anybody is being asked to read. It is also how the framework hides a TextField's
+        // hint once there is something in the field, which is every field carrying a seeded line.
+        if (value <= 0) continue;
+        final word = _wordUnder(el);
+        expect(word, isNull,
+            reason: '$name puts "$word" inside a $kind at '
+                '${value.toStringAsFixed(2)}, so it composites at '
+                '${(value * 255).round()} of 255 against the floor of $kMinInkAlpha. The run will '
+                'go on declaring its ink at full strength and the glass will show less, which is '
+                'the shape of defect the test above was written for and cannot see.');
+      }
+    }
+  });
+
   testWidgets('the mood picker says which one is chosen with a mark, not a brightness',
       (tester) async {
     if (absent != null) return;
@@ -124,4 +168,49 @@ void main() {
               'as readable as the one already chosen');
     }
   });
+}
+
+/// Every fade currently in the tree, with what it is set to.
+///
+/// The three the framework offers: `Opacity`, `AnimatedOpacity` (whose current value is on its
+/// state, so the settled frame is what is read), and `FadeTransition`.
+List<(String, Element, double)> _fades(WidgetTester tester) {
+  final out = <(String, Element, double)>[];
+  void take(Finder f, String kind, double Function(Widget) value) {
+    for (final el in tester.elementList(f)) {
+      out.add((kind, el, value(el.widget)));
+    }
+  }
+  take(find.byType(Opacity), 'Opacity', (w) => (w as Opacity).opacity);
+  take(find.byType(AnimatedOpacity), 'AnimatedOpacity', (w) => (w as AnimatedOpacity).opacity);
+  take(find.byType(FadeTransition), 'FadeTransition',
+      (w) => (w as FadeTransition).opacity.value);
+  return out;
+}
+
+/// The first word under [root], or null if it carries none.
+///
+/// A fade over a drawn object is not this defect: `settings_region` dims a retired feeling's
+/// object and `authoring` dims the objects in the drawer, and neither is a word somebody is being
+/// asked to read. Only a `Text` with something in it counts.
+String? _wordUnder(Element root) {
+  String? found;
+  void down(Element e) {
+    if (found != null) return;
+    final w = e.widget;
+    if (w is Text && (w.data ?? '').trim().isNotEmpty) {
+      found = w.data;
+      return;
+    }
+    if (w is RichText) {
+      final t = w.text.toPlainText().trim();
+      if (t.isNotEmpty) {
+        found = t;
+        return;
+      }
+    }
+    e.visitChildren(down);
+  }
+  root.visitChildren(down);
+  return found;
 }
