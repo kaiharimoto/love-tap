@@ -1,0 +1,52 @@
+{
+ "cycle": 3,
+ "stage": "implement",
+ "firing": 45,
+ "commit": "c421736",
+ "at": "2026-09-22T08:20:00Z",
+ "closed": [
+  "the-tear-shadow-is-stretched-six-to-one-and-becomes-a-hard-bar"
+ ],
+ "advanced": [
+  "the-tears-are-overlays-painted-on-whole-paper",
+  "a-slip-with-no-row-takes-the-same-tear-as-every-other-slip-with-no-row"
+ ],
+ "gate": {
+  "pack_assets_seed_year": "exit 0 at the start and at the end",
+  "flutter_analyze": "clean",
+  "flutter_test": "+220, exit 0",
+  "re_break": "BoxFit.fill restored: 3 of 4 watching tests red, then restored, 220 green"
+ },
+ "measurement": {
+  "dpr": 3,
+  "strip": {
+   "distortion": 6.05,
+   "drawn": [
+    900,
+    84
+   ],
+   "spill_device_px": 13.68,
+   "falloff_px": 12,
+   "depth_L": 104.0
+  },
+  "sheet": {
+   "distortion": 1.0,
+   "drawn": [
+    900,
+    509
+   ],
+   "spill_device_px": 13.68,
+   "falloff_px": 12,
+   "depth_L": 118.0
+  },
+  "clause_a_ratio": 1.0,
+  "clause_a_floor": 0.8,
+  "before_firing_42": {
+   "gt6to1_band_px": 0,
+   "le2to1_band_px": 9.5
+  }
+ },
+ "stage_after": "IMPLEMENT",
+ "open_items": 55,
+ "capture": "none taken; a full ./capture.sh is still owed from firing 44"
+}

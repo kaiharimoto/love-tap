@@ -6472,3 +6472,102 @@ This firing took one `--only=17_setup_pwa` leg, so `MANIFEST.json` is an `--only
 measured `/dev/kvm` sentence is off 09 and 16 again — the fourth time, and it is already filed as
 its own item — and the DIFF baseline has been rotated onto a set with one fresh still and ten from
 firing 43. A full `./capture.sh` puts all three back.
+
+## Firing 45 — IMPLEMENT, cycle 3
+
+Rank 3 closed. Rank 2's blocker was tested before it was believed, and it survived — for a reason
+firing 42 did not have.
+
+### The blocker check, which is the half of §3e everybody skips
+
+Firing 42 closed the nine-slice route with *"no destination band can be equal on all four sides AND
+sample both bands uniformly unless the render is square"*. **Half of that sentence is wrong.** It
+asks for equal *source-pixel* scale, which is not the invariant a contact shadow needs; the
+invariant is equal *physical* width. And `assets/MANIFEST.json` declares **one** `px_per_mm`,
+17.067, for all 56 masks — so a border scaled by `kShadowPerMm / px_per_mm` maps all four bands at
+one uniform physical scale, with undistorted corners, on a render of any aspect.
+
+**The route still fails, and now there is a number for why.** The falloff belongs to the *render's*
+outline, and that outline is not on the piece's box: measured off all 56 source masks, cropped to
+each shape's own bbox, the paper sits a median of **8.73 mm** inside the box on its worst torn side
+— **7.28×** the 1.2 mm falloff — and never less than **2.70 mm** on any of the 91 torn sides. All
+91 of 91 exceed the falloff's own width. Any slice at the box cuts the falloff along exactly the
+torn edges the item is about. So the route is **exhausted, not impossible**, which is firing 43's
+distinction, and route (b) now stands on a measurement rather than on a sentence about squareness.
+
+### What landed
+
+`_bakedShadow` is gone. The falloff is measured off the renders by `tools/check/shadow_falloff.py`
+— extended to the dusk half and to **per-tear** profiles, emitted as `app/lib/material/falloff.g.dart`
+— and laid around the piece's own outline, the same `SlicedMasks.at` composition `MaskedLayer` cuts
+the paper with, at the width `light.dart` says a millimetre is. Per-tear rather than pooled was not
+fidelity for its own sake: it is what keeps the surface's declared asset honest, and `tears.py`
+counts by asset path, so a pooled profile would have put two layers of one piece under one name and
+made `frame_repeats` non-empty for every piece in the set.
+
+At dpr 3, two pieces off the same mask:
+
+    strip  6.05:1   900x84 device px    spill 13.68 px   falloff 12 px at 104.0 L
+    sheet  1.00:1   900x509 device px   spill 13.68 px   falloff 12 px at 118.0 L
+
+Clause (a) reads **1.000** against a floor of 0.8, where firing 42 measured 0 px against 9.5 px.
+Predicted before the run — 13.68 px is 1.2 mm × 3.8 dp/mm × 3 — and hit.
+
+### Two rulers, and the first one was thrown away
+
+**Firing 42's window cannot be reused, and a firing that reuses it will believe a repair that has
+not happened.** It reads the band above each piece's declared rect. A packed mask's alpha *does not
+reach the top of its own box*: over the 28 masks whose top edge is a straight cut rather than a
+tear, the fraction of the top row above half alpha is **0.0 on every one**, and the row means climb
+0, 0, 0, 1, 1, 2. So the window reads the wander of the tear, not the width of the shadow. Built,
+run, and measured at 3 px on the strip against **0 px on the sheet** — for two shadows that are the
+same width. It scores the repair below the defect on one of the two, which is a disqualification
+under §3d and not a calibration problem.
+
+**And the replacement needed corollary 1 twice.** One column down the middle read 14 px and 18 px;
+tiled across thirty-two columns it read 14 and 19, which is still not the same shadow twice. The
+residue was the *mask's* own soft edge, which stretches with the piece — a strip six times shorter
+carries a sixth of it — so the bare outline is composed at the same geometry and subtracted column
+by column. That is what turns 14-against-19 into 12-against-12. The five pixels it removes are real
+and they belong to `the-tears-are-overlays-painted-on-whole-paper`, not to this item.
+
+### The cost firing 44 named, paid
+
+Route (b) stops the app naming a shadow asset to the bundle, so two tests lost their mechanism and
+kept their requirement. `a_note_at_dusk_asks_for_its_dusk_shadow` now asks what the app *declares*
+its profile was measured from — a stronger anchor than a bundle call — and `ShadowFalloff.byTearDusk`
+is generated from `*_shadow_dusk.webp` and `byTearDay` from `*_shadow.webp`, so the library is still
+obliged to hold all 56 of each. `the_three_layers_of_a_tear_each_say_so` asks for the layer by what
+it is. **Both would otherwise have passed by the thing leaving the screen**, which is the failure
+the corollary is written against, and the contact shadow declares itself to
+`CaptureHooks.paperSurfaces` with `spill` so that the fix does not delete the evidence that judges
+it.
+
+Re-broken: `BoxFit.fill` put back, three of the four tests that watch this go red — the new one at
+the paired-population clause, before it reads a pixel. Restored, 220 green.
+
+### What this firing did NOT do, and what it leaves
+
+- **No capture.** The item closed on widget tests, which is what the steer asked for over a
+  45-minute set. The housekeeping firing 44 recorded is still owed and is still a full `./capture.sh`.
+- **`tears.py`'s population is NOT moved again by this firing.** A torn piece still declares three
+  surfaces under the same three asset names — `tear_NNN.webp`, `tear_NNN_edge.webp`,
+  `tear_NNN_shadow.webp` — so rank 4's floor needs restating against firing 44 and not against 45.
+- **The lift question is left for ADDRESS, deliberately.** The library bakes one lift (2.4 mm) and
+  one falloff (1.2 mm), and every `liftMm` in `app/lib` is far below it, 0.25 to 1.46. A linear
+  penumbra law would put the visible band at 1.4–8.3 device px and the median piece *under this
+  item's own 6 px floor*. Extrapolating a curve from a single baked lift is the invention this
+  route exists to avoid; a second baked lift is the only thing that would make it honest, and that
+  is Blender time and not IMPLEMENT's to authorise.
+- **Both fences held and neither was approached.** No Blender was run, nothing under `blender/` or
+  `assets/` was touched, the 240-frame re-render was neither started nor authorised, and the flat
+  card's ladder stays closed. Route (b) needs no renders, which is why firing 43 chose it.
+
+### One container fact, so the next firing does not chase it
+
+`./bootstrap.sh` **exits 2 in this container**, at the ffmpeg stage and nowhere else. Flutter 3.47.2
+and Blender 4.5.13 install fine; `johnvansickle.com` serves a 7,242-byte *"One moment, please…"*
+bot-check interstitial with HTTP 200 instead of the tarball, and `tar` dies on it. The agent proxy
+is healthy and reports no relay failures, so this is upstream and not the proxy. Everything this
+firing needed — `flutter analyze`, `flutter test`, `pack_assets.py` — works without ffmpeg; a
+capture that records MP4 clips will not.
