@@ -29,8 +29,10 @@
 import 'package:desk/capture/bus.dart';
 import 'package:desk/capture/hooks.dart';
 import 'package:desk/material/assignment.dart';
+import 'package:desk/material/desk.dart';
 import 'package:desk/material/library.dart';
 import 'package:desk/regions/chat/chat_region.dart';
+import 'package:desk/regions/chat/search_page.dart';
 import 'package:desk/regions/moments/moments_region.dart';
 import 'package:desk/regions/pulse/pulse_region.dart';
 import 'package:desk/regions/settings/settings_region.dart';
@@ -132,6 +134,22 @@ void main() {
   /// falls to zero just as well by emptying the screen, so the number of pieces the screen tears
   /// is asserted at the same time. The floors are read off the committed surfaces sidecars of the
   /// capture this item was filed against, counting one shadow per piece.
+  /// Which named pieces took each mask, so a failure says what collided and not only that
+  /// something did. `paperSurfaces` carries the piece id where the piece declared one; the shell's
+  /// strip and a few others declare none, and `(unnamed)` is a true answer about them.
+  Map<String, Set<String>> takers(List<Map<String, Object?>> surfaces) {
+    final out = <String, Set<String>>{};
+    for (final s in surfaces) {
+      final a = s['asset'] as String? ?? '';
+      if (!a.startsWith('assets/tears/')) continue;
+      final rect = (s['rect'] as List?)?.map((v) => (v as num).round()).toList();
+      out
+          .putIfAbsent(stemOf(a), () => <String>{})
+          .add((s['piece'] as String?) ?? '(unnamed at ${rect ?? '?'})');
+    }
+    return out;
+  }
+
   Future<void> check(WidgetTester tester, String name, Widget region, int floor) async {
     tester.view.physicalSize = const Size(1440, 3120);
     tester.view.devicePixelRatio = 3.0;
@@ -139,15 +157,33 @@ void main() {
     CaptureBus.wanted = true;
     addTearDown(() => CaptureBus.wanted = false);
 
+    // **The region INSIDE THE SHELL, which is the half firing 46's version could not see.**
+    // `app.dart` puts a `PartnerStrip` above every region, and that strip is chrome: it takes a
+    // row of the chrome lane exactly as the region's own furniture does. A test that pumped the
+    // bare region could not watch the two collide -- and on firing 47's capture they did, on
+    // three screens of the four that still repeated. This is that Column, with the same two
+    // children in the same order.
     await tester.pumpWidget(AppScope.provide(
       scope: scope,
-      child: MaterialApp(home: Scaffold(body: region)),
+      child: MaterialApp(
+        home: Scaffold(
+          body: Column(children: [
+            PartnerStrip(
+              partner: scope.partner,
+              state: scope.partnerState,
+              nowMs: scope.clock.now().millisecondsSinceEpoch,
+            ),
+            Expanded(child: region),
+          ]),
+        ),
+      ),
     ));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
     expect(tester.takeException(), isNull);
 
     final drawn = await tears(tester);
+    final who = takers(CaptureHooks.paperSurfaces());
     final pieces = <String, int>{};
     for (final a in drawn) {
       final s = stemOf(a);
@@ -162,18 +198,21 @@ void main() {
             'so this screen is emptier than the one the item was filed against and a repeat count '
             'of zero would mean nothing. Either the screen is not built or the floor is stale.');
 
-    final repeated = <String, int>{};
-    pieces.forEach((stem, n) {
-      // three layers of one piece is not a repeat; a fourth draw of the same stem is
-      if (n > 3) repeated[stem] = n;
+    // **The verdict is counted in PIECES, not in layers.** A piece draws up to three surfaces off
+    // one stem, so a count of surfaces says nothing; two pieces on one stem is the failure however
+    // many layers each of them managed to decode.
+    final repeated = <String, Set<String>>{};
+    who.forEach((stem, names) {
+      if (names.length > 1) repeated[stem] = names;
     });
     expect(repeated, isEmpty,
-        reason: '$name: ${pieces.length} pieces and ${repeated.length} masks taken more than once '
-            '($repeated, about ${perPiece.toStringAsFixed(1)} layers a piece). docs/BRIEF.md 09 '
-            'makes reusing one mask a failure condition of the build. The pool holds '
-            '${MaterialLibrary.instance.tearMasks.length} masks, '
+        reason: '$name: ${pieces.length} masks on the glass and ${repeated.length} of them taken '
+            'by more than one piece ($repeated, about ${perPiece.toStringAsFixed(1)} layers a '
+            'piece). docs/BRIEF.md 09 makes reusing one mask a failure condition of the build. '
+            'The pool holds ${MaterialLibrary.instance.tearMasks.length} masks, '
             '${MaterialLibrary.instance.writableTears.length} of them writable, so this is a '
-            'selection that did not ask rather than a shortage.');
+            'selection that did not ask rather than a shortage. Every row of the chrome lane is '
+            'named in ChromeRows; two pieces here have taken one name.');
   }
 
   testWidgets('no two pieces on the chat screen are torn along the same edge', (tester) async {
@@ -199,6 +238,18 @@ void main() {
   testWidgets('no two pieces on the pulse are torn along the same edge', (tester) async {
     if (absent != null) return;
     await check(tester, '01_pulse', const PulseRegion(), 4);
+  });
+
+  // **The search page, which is where the chrome lane is under the most pressure.** It carries
+  // the shell's strip, the affordance, the composer behind it and its own query slip, and
+  // `12_search.surfaces.json` had the query and the strip on one mask because the query's row was
+  // `_chromeRow = 0`, which is the strip's. It is also the case that gives the re-break its teeth:
+  // with `PartnerStrip` back on `4 + partner.index` the strip lands on ChromeRows.leaf and takes
+  // the query's mask, and the pulse — where neither the leaf nor the overlay is drawn — cannot
+  // see it.
+  testWidgets('no two pieces on the search page are torn along the same edge', (tester) async {
+    if (absent != null) return;
+    await check(tester, '12_search', const SearchPage(), 6);
   });
 
   testWidgets('the lanes of one screen do not overlap in the pool', (tester) async {

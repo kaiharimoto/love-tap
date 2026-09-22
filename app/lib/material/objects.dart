@@ -81,8 +81,7 @@ class FeelingObject extends StatelessWidget {
       // a scrap, torn off something, with the mark on it — and the scrap's own contact shadow out
       // of the same render as every other piece of paper on the desk
       final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
-      final scraps = lib?.scrapTears ?? const <String>[];
-      final tear = scraps.isEmpty ? null : scraps[hashOf(feeling.id) % scraps.length];
+      final tear = scrapFor(lib, feeling.id);
       return SizedBox(
         width: size,
         height: size,

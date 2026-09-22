@@ -446,7 +446,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         barrierColor: Shadow.warm.withValues(alpha: 0.18),
         builder: (ctx) => DeskSheet(
           id: 'the.vocabulary',
-          row: 2,
+          row: ChromeRows.overlay,
           lane: TearLanes.chrome,
           child: ListView(
             shrinkWrap: true,
@@ -537,7 +537,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                   const SizedBox(width: 5),
                   Strip(
                     id: 'search-affordance',
-                    row: 3,
+                    row: ChromeRows.affordance,
                     lane: TearLanes.chrome,
                     padding: const EdgeInsets.fromLTRB(8, 3, 8, 3),
                     child: Text(S.search, style: Hands.margin(size: 13)),
@@ -597,8 +597,8 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
               alignment: Alignment.centerLeft,
               child: Strip(
                 id: 'typing-${scope.partner.name}',
-                row: 5,
-                lane: TearLanes.composer,
+                row: ChromeRows.notice,
+                lane: TearLanes.chrome,
                 padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
                 child: Text('${scope.partner.name} ${S.typing}', style: Hands.margin(size: 13)),
               ),
@@ -684,7 +684,7 @@ class _Composer extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(14, 2, 14, 10),
       child: Strip(
         id: 'composer',
-        row: 1,
+        row: ChromeRows.composer,
         lane: TearLanes.chrome,
         stock: 'lined',
         liftMm: 0.7,

@@ -199,7 +199,10 @@ class EmptySurface extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(24, 40, 24, 80),
         child: Slip(
           id: 'empty.$id',
-          row: 3,
+          // It was row 3, which is also what `search-affordance` wrote, so `10_first_run` drew
+          // `tear_053` twice — and it is not the leaf either, because the search page shows its
+          // query slip and this note together when nothing has been typed.
+          row: ChromeRows.empty,
           width: width,
           padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
           child: Column(
@@ -253,16 +256,15 @@ class EmptySurface extends StatelessWidget {
 /// to be *on* something or the screen is a page rather than a surface, which is the anti-goal the
 /// whole visual concept is defined against.
 class RegionPad extends StatelessWidget {
-  const RegionPad({super.key, required this.id, this.row = 0, this.lane = TearLanes.chrome});
+  /// It passes `torn: false` below, so it takes no mask at all — which is why it no longer says
+  /// a row or a lane. The `pads` lane was reserving one of the six rows above `tabs` for a widget
+  /// that never indexes the pool, and the chrome lane needed it.
+  const RegionPad({super.key, required this.id});
 
   /// Which region this is. It picks the stock, so Moments is the same paper every time it is
   /// turned to and a different paper from Us — five regions, five stacks, which is what the
   /// sentence in DIRECTION.md actually says.
   final String id;
-  final int row;
-
-  /// Which list this row is a row of; see [TearLane].
-  final TearLane lane;
 
   /// The stocks a region pad is torn from.
   ///
@@ -311,8 +313,6 @@ class RegionPad extends StatelessWidget {
             // One id for every sheet: same stock, same variant, one decode, painted twice.
             final sheet = Slip(
               id: 'pad.$id',
-              row: row,
-              lane: lane,
               stock: stocks[hashOf('pad.$id') % stocks.length],
               width: sheetW,
               torn: false,
@@ -349,7 +349,7 @@ class RegionPad extends StatelessWidget {
 ///
 /// [id] decides the stock and the tear, so the same question is always asked on the same slip.
 class DeskSheet extends StatelessWidget {
-  const DeskSheet({super.key, required this.id, required this.child, this.row = 5,
+  const DeskSheet({super.key, required this.id, required this.child, this.row = ChromeRows.overlay,
       this.lane = TearLanes.chrome});
 
   final String id;
@@ -404,7 +404,7 @@ Future<String?> askOnPaper(
           type: MaterialType.transparency,
           child: Slip(
             id: 'ask.$id',
-            row: 4,
+            row: ChromeRows.overlay,
             width: MediaQuery.sizeOf(ctx).width * 0.82,
             padding: const EdgeInsets.fromLTRB(20, 16, 20, 14),
             child: Column(

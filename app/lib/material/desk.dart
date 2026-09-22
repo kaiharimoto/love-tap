@@ -95,7 +95,11 @@ class PartnerStrip extends StatelessWidget {
     // `tearAt`'s docstring rules out -- a hash cannot promise distinctness -- and it also made
     // the strip change its torn edge when the partner's mood changed, which is a piece of paper
     // becoming a different piece of paper because somebody felt differently.
-    final tear = tearAt(lib, lane: TearLanes.chrome, row: 4 + partner.index);
+    // `4 + partner.index` stood here, and `chrome` had a span of 4: `(4 + i) % 4 == i % 4`, so
+    // the `+ 4` that was meant to hold this clear of the pulse's their-sheet was annihilated by
+    // the modulus and the two drew the same mask on every screen the strip is on. It is the one
+    // piece of chrome that is above every region, so it has a row of its own and no arithmetic.
+    final tear = tearAt(lib, lane: TearLanes.chrome, row: ChromeRows.partner);
     final asleep = state.availability == 'asleep';
     final headsDown = state.availability == 'heads_down';
     final ink = partner == Person.noor ? Pen.ballpoint : Pen.graphite;

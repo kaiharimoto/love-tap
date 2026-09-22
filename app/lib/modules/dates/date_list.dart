@@ -147,7 +147,7 @@ class _StubState extends State<_Stub> {
       barrierColor: const Color(0x2E3A2A1C),
       builder: (ctx) => DeskSheet(
         id: 'what.happened.to.it',
-        row: 3,
+        row: ChromeRows.overlay,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

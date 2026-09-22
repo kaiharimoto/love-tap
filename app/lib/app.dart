@@ -1,7 +1,6 @@
 // The shell: one desk, five stacks of paper on it. The partner's strip sits at the top of every
 // region so their state is legible everywhere, and the feeling corner sits at the bottom right of
 // every region so a feeling is one gesture away from anywhere.
-import 'material/assignment.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -219,7 +218,7 @@ class _ShellState extends State<Shell> {
                       // things on it are exchanged — and it is skipped entirely while the setup
                       // sheet is up, because that sheet is already paper and already the palest
                       // screen in the set at p50 0.9470, a hair under section 2's 0.95 ceiling.
-                      RegionPad(id: _padIds[_index], row: _index, lane: TearLanes.pads),
+                      RegionPad(id: _padIds[_index]),
                       // Every region keeps its state and its scroll, so they are all built and
                       // one is shown — but showing one by cutting to it is a hard edit: half the
                       // brightness of the screen changes between two frames, which reads as a

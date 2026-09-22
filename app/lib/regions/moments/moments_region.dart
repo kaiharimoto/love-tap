@@ -202,7 +202,7 @@ class _Filters extends StatelessWidget {
                         barrierColor: const Color(0x2E3A2A1C),
                         builder: (ctx) => DeskSheet(
                           id: 'which.feeling',
-                          row: 8,
+                          row: ChromeRows.overlay,
                           lane: TearLanes.chrome,
                           child: GridView.count(
                             crossAxisCount: 4,

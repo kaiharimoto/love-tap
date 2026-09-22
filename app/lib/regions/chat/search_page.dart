@@ -150,7 +150,10 @@ class SearchPageState extends State<SearchPage> {
   /// the strips' walk past the run of results. They are [TearLanes] now, where the other screens'
   /// lanes can be checked against them — the offsets were right for this screen and nothing else
   /// in the app got them, which is why eight of eleven stills repeated a mask.
-  static const _chromeRow = 0;
+  ///
+  /// And `_chromeRow = 0` then stood here, which is [ChromeRows.partner] — the shell's strip —
+  /// so this screen's query slip and the strip above it drew one mask. The query is this
+  /// screen's own sheet and says so: [ChromeRows.leaf].
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +179,7 @@ class SearchPageState extends State<SearchPage> {
               // Chrome is a list of one and still has to say where it sits. With no row it took
               // `writableTears[0]`, which is the same edge the FIRST RESULT is torn along, and the
               // two largest sheets on the screen were clones of each other.
-              row: _chromeRow,
+              row: ChromeRows.leaf,
               lane: TearLanes.chrome,
               width: width - 28,
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),

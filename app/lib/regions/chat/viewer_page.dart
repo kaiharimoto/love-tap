@@ -171,6 +171,10 @@ class _ViewerPageState extends State<ViewerPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 26),
                 child: Slip(
                   id: 'viewer_${widget.item.id}',
+                  // The words under the photograph: this named no row at all, so it took the
+                  // chrome lane's row 0 — the shell's partner strip — and `14_media_viewer` drew
+                  // one mask three times.
+                  row: ChromeRows.leaf,
                   padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
                   child: Written(widget.item.text!, by: widget.item.author, size: 18),
                 ),
@@ -189,7 +193,7 @@ class _ViewerPageState extends State<ViewerPage> {
                   children: [
                     Strip(
                       id: 'put-it-back',
-                      row: 4,
+                      row: ChromeRows.overlay,
                       lane: TearLanes.chrome,
                       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                       child: Row(

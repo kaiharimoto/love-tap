@@ -80,7 +80,7 @@ class _TheirSheet extends StatelessWidget {
     final id = variants.isEmpty ? '' : variants[(state.mood?.length ?? 1) % variants.length];
     // One card per person, so it is a two-row lane and the row is who it is. `partner.index * 7
     // + 11` was an index into the pool that no other call site could see or avoid.
-    final tear = tearAt(lib, lane: TearLanes.chrome, row: partner.index);
+    final tear = tearAt(lib, lane: TearLanes.chrome, row: ChromeRows.theirs);
     return PaperPiece(
       stockId: id,
       tearId: tear,
@@ -216,7 +216,7 @@ class _MySheet extends StatelessWidget {
     final id = variants.isEmpty ? '' : variants.first;
     // A place slip, one of them, taking the third row of the chrome lane rather than counting
     // back from the end of the pool -- which is an index, and an index is what collides.
-    final tear = tearAt(lib, lane: TearLanes.chrome, row: 2);
+    final tear = tearAt(lib, lane: TearLanes.chrome, row: ChromeRows.mine);
     return PaperPiece(
       stockId: id,
       tearId: tear,

@@ -126,7 +126,7 @@ String? tearFor(Event e, MaterialLibrary lib,
 /// 47 masks and `12_search` draws 41 pieces into one frame, so there is not room to give every
 /// lane in the app a window of its own.
 class TearLane {
-  const TearLane(this.name, this.base, this.span);
+  const TearLane(this.name, this.base, this.span, {this.wraps = true});
 
   final String name;
 
@@ -136,7 +136,34 @@ class TearLane {
   /// How many rows it may show before it would reach the next lane.
   final int span;
 
-  int rowAt(int row) => base + (row.abs() % span);
+  /// Whether a row past the end of this lane may quietly come back to its start.
+  ///
+  /// **True for a list, false for furniture, and firing 48 is what the difference cost.** A list
+  /// is as long as its content and its span is a window on it, so the fifteenth note in a
+  /// fourteen-row lane wraps onto the first — a repeat far down one list, which is not what the
+  /// brief forbids. A lane of fixed furniture has no length: every row in it is a named piece
+  /// written down in [ChromeRows], and a row past the end is a piece nobody allocated.
+  ///
+  /// It wrapped silently, and `% span` then folded rows that were CHOSEN to be distinct onto each
+  /// other. `chrome` had a span of 4; [PartnerStrip] asked for `4 + partner.index` and pulse's
+  /// their-sheet for `partner.index`, and `(4 + i) % 4 == i % 4`, so the `+ 4` that was there to
+  /// separate the two lanes was exactly annihilated by the modulus. On firing 47's capture that
+  /// is `01_pulse`, `12_search` and `14_media_viewer` each drawing `tear_049` twice, and
+  /// `14_media_viewer` drawing `tear_011` twice as well; `10_first_run` drew `tear_053` twice for
+  /// the simpler reason that two call sites both wrote `row: 3`.
+  ///
+  /// Which is the lane table's own defect one level down. Its docstring says a base chosen next
+  /// to its call site is a base nobody can check against the others — and then left every row
+  /// INSIDE the chrome lane to be chosen next to its call site. [ChromeRows] is the other half.
+  final bool wraps;
+
+  int rowAt(int row) {
+    assert(wraps || (row >= 0 && row < span),
+        'row $row is outside the $name lane (0..${span - 1}). A furniture lane has one row per '
+        'named piece: give it a row in ChromeRows rather than letting the modulus fold it onto '
+        'somebody else\'s.');
+    return base + (row.abs() % span);
+  }
 
   @override
   String toString() => 'TearLane($name @$base+$span)';
@@ -148,8 +175,11 @@ class TearLane {
 /// why nothing else got it.
 ///
 /// **The layout, over the 47 writable masks.** Lanes on one line are never on screen together and
-/// share their window on purpose; the pool is not big enough to give all sixteen a window of their
-/// own, because `12_search` draws 41 pieces into one frame.
+/// share their window on purpose; the pool is not big enough to give all fifteen a window of its
+/// own. Measured in-frame off firing 47's committed sidecars, the busiest screen is `12_search`
+/// at 27 torn pieces against 47 masks — firing 46's "41 pieces" counted the three layers a piece
+/// has declared since firing 44, not the pieces. What IS exactly full is the row budget: 0-27 for
+/// the lists, 28-40 for the tabs, 41-46 for the chrome, and nothing spare above them.
 ///
 ///     0-13   thread | hits                 the long list of whichever page is open
 ///     0-27   moments                       the moments list, which is neither
@@ -161,8 +191,8 @@ class TearLane {
 ///     22-27  sections                      Us's section sheets; `margins` is never on Us
 ///     28-40  tabs                          search's facets and moments' views; not with headings
 ///     28-33  headings                      every screen with sections; not search, not moments
-///     41-44  chrome                        the fixed furniture of a region, everywhere
-///     45     composer      46  pads        one each, everywhere
+///     41-46  chrome                        the fixed furniture of a region, everywhere; its six
+///                                           rows are named in `ChromeRows`
 ///     0-9    panels                        settings' sheets, on a screen with no long list
 class TearLanes {
   /// The chat thread's notes.
@@ -214,21 +244,92 @@ class TearLanes {
   /// lanes can be checked against it.
   static const tabs = TearLane('tabs', 28, 13);
 
-  /// The fixed chrome of a region. The default, so a piece that never says where it sits lands
-  /// here rather than on `writableTears[0]`.
-  static const chrome = TearLane('chrome', 41, 4);
-
-  /// The composer, which is a list of one and still has a row.
-  static const composer = TearLane('composer', 45, 1);
-
-  /// The region pad — the stack of sheets the whole screen is on. One per region and never two at
-  /// once, so one row is enough.
-  static const pads = TearLane('pads', 46, 1);
+  /// The fixed chrome of a region: the strips, the sheets and the labels that are not a list.
+  /// The default, so a piece that never says where it sits lands here rather than on
+  /// `writableTears[0]`.
+  ///
+  /// **Six rows, and it does not wrap.** It had four, and [ChromeRows] names six pieces that can
+  /// be on one screen at once — the viewer carries all six. The two extra rows are the ones the
+  /// `composer` and `pads` lanes were holding: `composer` is a piece of chrome and is a row of
+  /// this lane now rather than a lane of its own, and `pads` was reserving a row for a widget
+  /// that draws no mask at all, because [RegionPad] passes `torn: false`.
+  static const chrome = TearLane('chrome', 41, 6, wraps: false);
 
   static const all = [
     thread, hits, moments, setup, panels, dates, todos, shelf, rituals, calendar,
-    margins, sections, headings, tabs, chrome, composer, pads,
+    margins, sections, headings, tabs, chrome,
   ];
+}
+
+/// **Every row of [TearLanes.chrome], in one place, for the same reason [TearLanes] itself
+/// exists.** A base chosen next to its call site is a base nobody can check against the others;
+/// so is a row. Firing 46 put the bases in a table and left the rows where they were, and firing
+/// 47's capture still had four screens tearing two pieces along one edge — every one of them two
+/// chrome call sites that had each picked a number they could not see each other pick.
+///
+/// A lane is a namespace for a LIST, where the row is a position and the content decides how many
+/// there are. Chrome is not a list. Its rows are a fixed, countable set of pieces, so they are
+/// named here and the call sites say which piece they are rather than which number they want.
+///
+/// **The layout, over the six rows, and lanes on one line are never on screen together.** The
+/// invariant is not held by this table, which cannot see a screen: it is held by
+/// `a_screen_tears_every_piece_differently_test`, which pumps each screen INSIDE THE SHELL — the
+/// [PartnerStrip] that sits above every region is chrome too, and a test that pumps a bare region
+/// cannot see the shell collide with it, which is how three of the four repeats survived firing
+/// 46's test passing.
+///
+///     0  partner    the shell's strip, above every region — on every screen, so nobody else's
+///     1  composer   chat's composer          | theirs   the pulse's their-sheet
+///     2  affordance the search affordance    | mine     the pulse's my-sheet
+///     3  notice     chat's typing line       | leaf     a pushed page's own sheet: search's
+///                                                       query, the viewer's caption
+///     4  empty      the note an empty region leaves in place of its list
+///     5  overlay    what comes up over a screen: a desk sheet, an ask, the way out of the viewer
+///
+/// **[notice] and [leaf] are the one pairing here that is a judgement rather than a fact**, and it
+/// is written down so a successor can overturn it with a measurement rather than by reading it
+/// twice. Every other pair on a line above is impossible by construction: `Turning` keeps one
+/// region in the tree, so chat's chrome and the pulse's are never both drawn. The typing line
+/// belongs to chat and the leaf to a route pushed OVER chat, and a pushed route does not take its
+/// parent out of the tree — `14_media_viewer.surfaces.json` carries chat's composer and its search
+/// affordance behind the viewer, which is the proof that the parent is still drawn. What it does
+/// not carry, and neither does `12_search.surfaces.json`, is a typing strip: the line is drawn
+/// only while the other person is typing. So the pairing holds on every artifact in the set and
+/// would break on a capture taken in the second somebody typed. Six rows is one short of not
+/// having to choose, and the row budget above has nothing spare — see [TearLanes].
+class ChromeRows {
+  /// The partner strip in the shell, above every region. It is the only piece of chrome that is
+  /// on every screen, so it holds a row of its own and nothing else may take it.
+  static const partner = 0;
+
+  /// The chat composer. Never on the pulse, which is why [theirs] shares the row.
+  static const composer = 1;
+
+  /// The pulse's sheet for the other person. Never on a screen with the composer.
+  static const theirs = 1;
+
+  /// The search affordance, in the chat bar and carried into search and the viewer.
+  static const affordance = 2;
+
+  /// The pulse's sheet for you. Never on a screen with the affordance.
+  static const mine = 2;
+
+  /// The typing line under the thread. See the note above on why it shares with [leaf].
+  static const notice = 3;
+
+  /// The sheet a pushed page puts up on its own account: what you typed into search, the words
+  /// under a photograph in the viewer. A pushed page has at most one.
+  static const leaf = 3;
+
+  /// The note a region leaves where its list would be. **It is not the [leaf]**, which is what
+  /// firing 48's search case caught within a minute of being written: open search and type
+  /// nothing and `search_query` and `empty.search` are both on the glass, so the one row they
+  /// shared was a repeat in a state the capture never reaches because the capture types a query.
+  static const empty = 4;
+
+  /// What comes up OVER a screen and is gone again: a desk sheet, an ask, the way out of the
+  /// viewer. Never two at once.
+  static const overlay = 5;
 }
 
 /// **The one place the mask pool is indexed.** It was six: `tearFor` here, the walk copied into
@@ -245,6 +346,42 @@ String? tearAt(MaterialLibrary? lib, {required TearLane lane, int row = 0, bool 
   final n = masks.length;
   final stride = _coprimeStride(n);
   return masks[((lane.rowAt(row) % n) * stride) % n];
+}
+
+/// The six masks [TearLanes.chrome] holds, which is every mask that can be on the glass at any
+/// moment: chrome is the only lane that is on every screen.
+List<String> chromeMasks(MaterialLibrary lib) => [
+      for (var r = 0; r < TearLanes.chrome.span; r++)
+        tearAt(lib, lane: TearLanes.chrome, row: r) ?? '',
+    ];
+
+/// The scrap a feeling object is drawn on — **the seventh place the pool was indexed, and the one
+/// the source test could not see.**
+///
+/// `material/objects.dart` read `final scraps = lib?.scrapTears ?? const []` and then
+/// `scraps[hashOf(feeling.id) % scraps.length]`, and `the_pool_is_indexed_in_one_place_test`
+/// matches `scrapTears\s*\[` — so binding the getter to a local defeated it and the site survived
+/// firing 46 untouched. Firing 48 found it when the tear test was made to pump each region inside
+/// the shell: `01_pulse` drew `tear_011` on the pulse's their-sheet and on a feeling object in the
+/// day's traffic beside it.
+///
+/// **The chrome masks are taken out of the pool this chooses from, and that is not a nicety.** 26
+/// of the 28 square-ish masks `scrapTears` returns are also in `writableTears`, so a scrap chosen
+/// by a hash can land on any lane's mask — and a collision with chrome is not luck, because chrome
+/// is on every screen. Removing the six chrome masks makes that class of collision impossible for
+/// the cost of one scrap (`tear_011` is the only mask in both sets today).
+///
+/// **The hash is still a hash, and that is the residue.** `tearAt`'s own docstring says why a hash
+/// cannot promise distinctness, and this one is picking between 27 scraps for a vocabulary of the
+/// same order — two feelings on one screen can still be torn alike. The repair is a row, which
+/// means a position in the list each object is in, at eleven call sites; it is filed rather than
+/// guessed at here.
+String? scrapFor(MaterialLibrary? lib, String feelingId) {
+  if (lib == null) return null;
+  final chrome = chromeMasks(lib).toSet();
+  final scraps = [for (final t in lib.scrapTears) if (!chrome.contains(t)) t];
+  if (scraps.isEmpty) return null;
+  return scraps[hashOf(feelingId) % scraps.length];
 }
 
 int _coprimeStride(int n) {

@@ -36,13 +36,36 @@ void main() {
     // fine and happens in the capture hooks and in the tests. Taking an element by a computed
     // index is the thing that cannot be namespaced.
     final index = RegExp(r'(writableTears|tearMasks|scrapTears)\s*\[');
+    // **And the same getter bound to a local, which is how the seventh site survived.**
+    // `material/objects.dart` read `final scraps = lib?.scrapTears ?? const <String>[];` and then
+    // indexed `scraps` on the next line, so the regex above — which needs the getter's own name
+    // immediately before the bracket — matched nothing and the test stayed green over a call that
+    // takes `scraps[hashOf(feeling.id) % scraps.length]`. Firing 48 found it with a widget test
+    // instead: `01_pulse` drew one mask on the pulse's their-sheet and on a feeling object beside
+    // it. A source test that reads one spelling of a thing is a source test that can be renamed
+    // past, so this follows the name the pool was bound to and flags indexing THAT.
+    final bind = RegExp(r'\b(?:final|var|const)\s+(\w+)\s*=[^;]*'
+        r'(?:writableTears|tearMasks|scrapTears)');
     for (final f in Directory('lib').listSync(recursive: true).whereType<File>()) {
       if (!f.path.endsWith('.dart')) continue;
       if (f.path.endsWith('material/assignment.dart')) continue;
       final src = f.readAsStringSync();
-      for (final (i, line) in src.split('\n').indexed) {
-        if (line.trimLeft().startsWith('//') || line.trimLeft().startsWith('///')) continue;
-        if (index.hasMatch(line)) offenders.add('${f.path}:${i + 1}: ${line.trim()}');
+      final lines = src.split('\n');
+      final code = [
+        for (final l in lines)
+          (l.trimLeft().startsWith('//') || l.trimLeft().startsWith('///')) ? '' : l,
+      ];
+      final aliases = <String>{
+        for (final m in bind.allMatches(code.join('\n'))) m.group(1)!,
+      };
+      final aliased = aliases.isEmpty
+          ? null
+          : RegExp('\\b(${aliases.map(RegExp.escape).join('|')})\\s*\\[');
+      for (final (i, line) in code.indexed) {
+        if (line.isEmpty) continue;
+        if (index.hasMatch(line) || (aliased != null && aliased.hasMatch(line))) {
+          offenders.add('${f.path}:${i + 1}: ${line.trim()}');
+        }
       }
     }
     expect(offenders, isEmpty,

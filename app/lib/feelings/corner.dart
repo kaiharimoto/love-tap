@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import '../capture/bus.dart';
 import '../capture/hooks.dart';
 import '../flags.dart';
+import '../material/assignment.dart';
 import '../material/hands.dart';
 import '../material/motion.dart';
 import '../material/objects.dart';
@@ -284,6 +285,10 @@ class _Fan extends StatelessWidget {
                             onTap: () => onFamily(f),
                             child: Slip(
                               id: 'family_${f.name}',
+                              // Inside the vocabulary sheet, which is itself the overlay: these
+                              // named no row and took the chrome lane's row 0, the shell's
+                              // partner strip.
+                              row: ChromeRows.overlay,
                               stock: 'index',
                               padding: const EdgeInsets.fromLTRB(9, 5, 9, 5),
                               child: Stamped(
