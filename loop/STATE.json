@@ -529,7 +529,8 @@
       "closed_note": "PARTLY DONE ALREADY, which no entry said until firing 26 checked: all 27 day stocks under assets/paper have changed since the rig fix a6f46fd, so the paper half of this re-render is complete. What is still owed is 38 files in other families -- objects 21 of 75, bits 16 of 44, shell 1 of 2 -- and tools/render_queue6.sh is the resumable harness for them. The 27 dusk paper files are untouched by design; the dusk rig was never the fault.",
       "rank_before_firing_33": 24,
       "rank_before_firing_35": 21,
-      "rank_before_firing_43": 20
+      "rank_before_firing_43": 20,
+      "measured_at_firing_49": "NOT WORKED: IT NEEDS RENDERS, AND IT HAS SLIPPED SINCE FIRING 23. palette.py --floors on firing 47's committed set: ground mean_chroma breaches on 04_moments 0.0212 and 14_media_viewer 0.0234 (17_setup_pwa now passes); mid mean_chroma breaches on 05_settings_interrupt 0.0298, 12_search 0.029 and 17_setup_pwa 0.027, the first two NEW since firing 23; across_the_set.mean_chroma is 0.0448, back under the 0.045 it met at firing 23 (0.0452). The 38 files firing 26 said were still owed a re-render under the corrected lamp -- objects 21, bits 16, shell 1 -- are still owed: none of the 73 day files under assets/objects, assets/bits and assets/shell has changed in the visible history. what_would_unblock (a COLOR.md decision about 17_setup_pwa and the viewer) is unchanged. AND ONE FACT THAT CHANGES WHAT `bits 16 owed` MEANS: every bit in the library is an EMPTY image (see `every-bit-in-the-library-renders-empty`), so the bits were never a colour question; they were never on the glass at all."
     },
     {
       "id": "one-coloured-thing-per-screen",
@@ -544,7 +545,8 @@
       "owner_priority": "the-ui",
       "rank_before_firing_33": 25,
       "rank_before_firing_35": 22,
-      "rank_before_firing_43": 21
+      "rank_before_firing_43": 21,
+      "measured_at_firing_49": "PARTLY WORKED; NOT CLOSED, AND THE ITEM'S ROUTE IS HALF REFUTED. (1) THE PREMISE `the counter-hues are ALREADY IN THE BUILD` IS FALSE FOR OBJECTS. Measured over the opaque pixels of every committed day render: of 25 objects only three have ANY pixel at OKLab chroma >= 0.09 -- obj_snapped_pencil 0.533, obj_gold_star 0.256, obj_rubber_band 0.191 of their opaque pixels -- and all three are FAMILY A. obj_clover, the only family D object COLOR.md names, has 0.004 (median chroma 0.082); obj_confetti median 0.053; obj_ticket 0.050. No sticky stock reaches 0.09 anywhere: sticky_yellow median 0.081, sticky_pink 0.055, sticky_blue 0.020. So COLOR.md 7 item 6 and DIRECTION.md's `the accent-area floor is carried by opaque objects` cannot be met by any rendered thing in the library today; only code-drawn marks reach accent chroma (the yellow highlighter, Pen.red). That is an ADDRESS/DESIGN fact and it probably ties to `the-day-rig-is-what-took-the-colour-out`. (2) WHAT WAS DONE: the highlighter now obeys DIRECTION.md -- multiplied, never on top -- at 70%, the smallest round alpha whose composite clears 0.09 over all seven stocks a note or hit can take (worst graph_01_dusk 0.1105, hue 93); at 45% multiplied it is 0.0889. And painting it on top had been a USING-IT defect, filed and closed as `the-note-a-search-hit-takes-you-to-has-its-words-washed-out`. (3) WHAT IS LEFT: accent_fraction >= 0.010 is 0.0000-0.0055 on every room and needs AREA -- a mark with meaning on screens that have nothing selected (settings, first run, setup) -- which is a design decision about where accents live, not an implementation one. The capture of 12_search this firing is the measurement of what (2) moved; see captured_at_firing_49."
     },
     {
       "id": "families-b-c-and-d-reach-the-glass",
@@ -559,7 +561,8 @@
       "owner_priority": "the-ui",
       "rank_before_firing_33": 26,
       "rank_before_firing_35": 23,
-      "rank_before_firing_43": 22
+      "rank_before_firing_43": 22,
+      "measured_at_firing_49": "NOT WORKED: every route it names is a render (printed-rule chroma, graph's cast, family D through objects and stock). The object table on `one-coloured-thing-per-screen` measured_at_firing_49 is the evidence for how far off it is: no rendered object or sticky in the library has accent-chroma pixels in family B, C or D."
     },
     {
       "id": "paper-is-the-median-pixel",
@@ -578,7 +581,8 @@
       "measured_at_firing_23": "REMEASURED AT FIRING 23 AND MOST OF IT IS DONE. lightness.p50 now passes on all three stills this item names -- 02_chat was 0.575, 04_moments 0.495, 10_first_run 0.495, and none of them breaches now. The only p50 breach left in the set is 12_search at 0.6488, which this item did not name. value_bands.mid still breaches on 10_first_run (0.0211) and 12_search (0.0385) but no longer on 04_moments. lightness_drift_room is 0.2929 against 0.452 and a ceiling of 0.20.",
       "rank_before_firing_33": 27,
       "rank_before_firing_35": 24,
-      "rank_before_firing_43": 23
+      "rank_before_firing_43": 23,
+      "measured_at_firing_49": "THREE OF FOUR CLAUSES NOW HOLD, off firing 47's committed set: lightness.p50 in [0.78, 0.95] on every room (04_moments lowest at 0.7935), value_bands.ground <= 0.50 everywhere, lightness_drift_room 0.1366 against 0.20. ONLY value_bands.mid >= 0.04 FAILS, on 02_chat 0.0366, 05_settings 0.0348, 10_first_run 0.0163, 13_messenger_states 0.033 and 17_setup_pwa 0.0384. FOUR OF THOSE FIVE CROSSED BETWEEN FIRING 39's CAPTURE (b9130b1) AND FIRING 47's: 02 0.048 -> 0.0366, 05 0.0431 -> 0.0348, 13 0.0446 -> 0.033, 17 0.0516 -> 0.0384. The cheap hypothesis was that firings 44-46's contact shadow took the mid tones away. IT COULD NOT BE CONFIRMED, BECAUSE THE RULER SAMPLES SOMETHING ELSE: palette.py downsamples every still to a 700 px long edge, bilinear, before banding, and at that scale ink strokes and printed rules blur into the middle third. At full resolution 02_chat's mid band RISES 0.0251 -> 0.0303 across the same pair while the 700 px reading falls. So on this ruler the mid clause is measuring stroke density as much as `depth`, and no law about shadows may be derived from it until someone establishes what the 700 px mid band is made of. palette.py was not changed."
     },
     {
       "id": "the-corrected-lamp-pins-the-red-channel",
@@ -594,7 +598,8 @@
       "owner_priority": "the-ui",
       "rank_before_firing_33": 28,
       "rank_before_firing_35": 25,
-      "rank_before_firing_43": 24
+      "rank_before_firing_43": 24,
+      "measured_at_firing_49": "THE GATE HALF IS DONE; THE FIX HALF IS RENDERS. tools/check/headroom.py: no day render (paper, objects, bits, shell; shadows excluded) with more than 1% of its opaque pixels at 255 in any single channel. On the committed library it fails EXACTLY the 38 the item names -- paper 25 of 27, objects 13 of 25 -- and shell passes. Exits 2, and 2 on an empty read. evidence/logs/headroom.json is its output. TWO THINGS IT FOUND. (a) `--condition dusk` fails 20 of 27 dusk papers too (legal_01_dusk R=255 on 0.0631, receipt_01_dusk 0.0470), so the item's `the rig's own answer is DUSK_STOPS` is refuted as sufficient: the dusk aperture exists and the dusk library still clips red. (b) EVERY BIT HAS NO OPAQUE PIXEL AT ALL -- filed as `every-bit-in-the-library-renders-empty`. NOT EARNED ON A REPAIRED CASE: the pre-relight library is outside this clone's history (a6f46fd is past the graft), so the gate has been run only against the defect. Firing 10's probe (fold frame 0000 at -0.30 stop, R=255 0.9564 -> 0.0000) is the repair to earn it against when the aperture is rendered."
     },
     {
       "id": "the-relit-tear-edge-is-a-dark-band",
@@ -632,7 +637,8 @@
       "measured_at_firing_23": "REMEASURED AT FIRING 23: two timestamp-shaped runs fail, not nineteen -- `Tue 4 Aug · 07:24` on 12_search at 3.66 and `Thu 3 Sep · 19:40` on 13_messenger_states at 3.84, both within 0.9 of the 4.5 floor. Both also read ground_swing 2.11 and 2.00, so both are inside the population the ruler item a-runs-ink-is-the-glyphs-not-every-mark-near-it says is being misread. Establish that before spending a firing here.",
       "rank_before_firing_33": 30,
       "rank_before_firing_35": 27,
-      "rank_before_firing_43": 26
+      "rank_before_firing_43": 26,
+      "measured_at_firing_49": "ONE, NOT NINETEEN, AND IT IS THE RULER'S POPULATION. Off firing 47's committed evidence/legibility.json: 21 runs across the set declare a timestamp in their text, and exactly one fails -- `Thu 3 Sep · 19:40` on 13_messenger_states at ink_core 4.4 against 4.5, ground_swing 2.28, ink_core_ring 9.96. That is the shape `a-run-reads-the-line-above-it-as-its-own-ground` is about, and legibility.py must not change alongside an item it measures. Not worked."
     },
     {
       "id": "the-builder-sheet-has-no-anchor-points-and-it-cost-five-and-a-half-points",
@@ -1929,6 +1935,48 @@
       "attempts": 0,
       "filed_at_firing": 48,
       "note": "THE ROW BUDGET IS EXACTLY FULL AND THAT IS MEASURED, NOT ASSUMED: 0-27 for the list lanes, 28-40 for `tabs` (12_search draws thirteen facets and uses rows 0-12 of it), 41-46 for `chrome`, against 47 writable masks. Firing 48 already took the only two slack rows -- `pads`, which reserved one for a `RegionPad` that passes `torn: false` and draws no mask at all, and `composer`, which is a piece of chrome and is a row now.\nTWO ROUTES, BOTH COSTED, NEITHER STARTED. (a) RENUMBER: shift `tabs` to 27-39 and `chrome` to 40-46, which costs `moments` one row (28->27, 04_moments draws 10 in frame), `margins` one (14->13, 02_chat draws 9 in frame) and `sections` one (6->5) -- and `sections` must be looked at first, because `us_region` gives module i its card at row i and its body at row i+1, so module i's body and module i+1's card already ask for the same row. (b) GROW THE POOL: nine masks in `assets/tears` are excluded from `writableTears` by `usable < 0.5` and are used by NOTHING, with their edge and shadow renders already baked -- tear_006 0.256, tear_017 0.487, tear_022 0.442, tear_025 0.478, tear_028 0.439, tear_030 0.373, tear_038 0.199, tear_041 0.386, tear_046 0.224. A furniture pool over those nine would give the chrome lane nine rows and no overlap with any list lane, AT NO RENDER COST. What has to be checked first is whether a piece that carries a sentence fits their safe boxes: tear_017's is 92% of the width and 53% of the height, tear_038's is 47% by 42%. That check is a widget test, not a capture."
+    },
+    {
+      "state": "open",
+      "attempts": 0,
+      "closed_by": null,
+      "rank": null,
+      "id": "every-bit-in-the-library-renders-empty",
+      "row": "material_truth + visual_design",
+      "points": 0.5,
+      "owner_priority": "the-ui",
+      "filed_at_firing": 49,
+      "kind_of_finding": "NEW DEFECT, not a refinement of a known one",
+      "why": "All 11 bits under assets/bits -- clip_01/02, glue_01, pin_01/02, staple_01/02, tape_01..04 -- and their dusk twins are 600x600 PNGs with alpha 0 on every pixel (RGB <= 1); the shadows peak at alpha 7. The packed app/assets/bits/*.webp are the same. So the tape on every chat photograph (blob_widgets.dart:359, `Image.asset(bitAsset(tape))`) and the pin 14_media_viewer.surfaces.json declares draw nothing. CAUSE, FOUND AND FIXED IN THE GENERATOR AT FIRING 49: blender/rig/common.py add_top_camera tilted the camera IN PLACE, so bits.py's tilt 18 at distance 0.40 aimed a 4.5 cm ortho frame at a point 0.40*tan(18) = 13 cm from a 1 cm clip at the origin. objects.py sets cam.location itself after the call, which is why objects were never affected. The camera now orbits the origin; at tilt 0, which every other caller uses, the position is unchanged.",
+      "measurement": "python3 tools/check/headroom.py --family bits reads 11 of 11 `no opaque pixels to read` on the committed library. After re-rendering with `bash blender/run.sh blender/bits/bits.py --all --res 600 --samples 18` (the MANIFEST settings) it must read an opaque fraction > 0 on all 11, day and dusk, and a still that shows a photograph must declare the tape surface. PROBED at firing 49 into scratch at 200 px / 8 samples: opaque fraction clip 0.019, glue 0.264, pin 0.115, staple 0.010, tape 0.124 -- and clip, glue, pin and staple look like themselves. 18.5 s for all 11 day renders at probe settings, so the library is minutes of Blender, not the fenced fold render. NOT RE-RENDERED: renders are ADDRESS's to authorise. BLOCKED ALSO ON `the-tape-renders-opaque-black`, because re-rendering today would ship four black strips of tape."
+    },
+    {
+      "state": "open",
+      "attempts": 0,
+      "closed_by": null,
+      "rank": null,
+      "id": "the-tape-renders-opaque-black",
+      "row": "material_truth + visual_design",
+      "points": 0.25,
+      "owner_priority": "the-ui",
+      "filed_at_firing": 49,
+      "kind_of_finding": "NEW DEFECT, uncovered by the camera fix; it was hidden behind the empty frame",
+      "why": "With the bit camera fixed, tape_01..04 render as solid black strips: every pixel with alpha > 0 is RGB (0,0,0) at alpha 255. The other seven bits render correctly in the same scene, so it is not the rig or the lights. THE CHEAP HYPOTHESIS IS REFUTED: tape_material sets Transmission Weight 0.86, and a copy of bits.py with it at 0.0 renders the same black. So it is the tape's geometry, normals or build (build_tape, bits.py:108), not its transmission. Not diagnosed further.",
+      "measurement": "A scratch render of tape_01 (bits.py --only tape_01 --res 200 --samples 8 --conditions day) has median RGB over its alpha>0 pixels above 150 on every channel, i.e. a pale strip, and tools/check/headroom.py reads it. Re-break: whatever the fix is, reverting it gives the black strip back."
+    },
+    {
+      "state": "closed",
+      "attempts": 0,
+      "closed_by": "firing 49",
+      "rank": null,
+      "id": "the-note-a-search-hit-takes-you-to-has-its-words-washed-out",
+      "row": "legibility + visual_design",
+      "points": 0.0,
+      "owner_priority": "using-it",
+      "filed_at_firing": 49,
+      "kind_of_finding": "NEW DEFECT, found and closed in the same firing",
+      "why": "ChatRegion._goTo lights the note a person jumps to from a search hit for three seconds. The light was a DecoratedBox in the note's overlays -- which PaperPiece paints after the words -- at 45% yellow, ON TOP, so the one note the person asked to see had its ink veiled. The search hits painted the same yellow as a text backgroundColor, also on top. DIRECTION.md: `Multiplied, never on top`.",
+      "measurement": "app/test/a_highlighted_note_keeps_its_ink_test.dart rasterises the real Note, built as the thread builds it, lit and unlit, and reads the darkest 2% of its pixels. Old code: 50.1 -> 129.7. Now, multiplied at 70%: 50.1 -> 46.1, with the paper's median blue 194 -> 114 so the light is drawn. Re-broken: on top at 45% fails at 129.7, on top at 70% at 174.1. a_highlighter_is_a_dye_test.dart holds the composite (>= 0.09 chroma, family A, over the seven stocks stockFor can return) and names any site that paints it on top; both re-broken."
     }
   ],
   "blocked": null,
