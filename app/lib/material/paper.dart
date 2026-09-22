@@ -6,6 +6,7 @@
 // Nothing here is a rounded rectangle with a drop shadow: every layer is a render made under
 // blender/rig/common.py, and the masks carry their fibres in their alpha.
 import 'dart:async';
+import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import 'falloff.g.dart';
 import 'library.dart';
 import 'palette.dart';
 import 'light.dart';
@@ -182,26 +184,50 @@ class PaperPiece extends StatelessWidget {
 
 
 
-  Widget _bakedShadow(BuildContext context, String suffix) {
-    final frame = MaterialLibrary.loaded ? MaterialLibrary.instance.shadowFrame : 1.0;
-    // Scaling about the centre is what puts it back: the render was framed [frame] times the
-    // piece in both directions, and the piece's height is not known until its writing is laid out.
+  /// The contact shadow, laid around the piece's OWN outline at the width the render's falloff
+  /// actually has — not the render stretched to the shape of whatever box the piece turned out
+  /// to be.
+  ///
+  /// **What this used to be, and why it is not that any more.** It was the shadow render drawn
+  /// `Positioned.fill` with `BoxFit.fill` inside a `Transform.scale(shadowFrame)`, which made the
+  /// spill a tenth of the PIECE on each side. A margin strip 111 device pixels tall got 11 px of
+  /// spill and a note 974 px tall got 97, for a shadow that is one millimetre wide either way, so
+  /// the render's 85-row falloff was averaged away on the strips and blown up on the notes.
+  /// Measured at firing 42 over 87 pieces on six artifacts, by each piece's own declared rect: at
+  /// more than 6:1 of aspect distortion the visible contact band had a median width of 0 px, at
+  /// 2–6:1 it was 6 px, and at 2:1 or less it was 9.5 px. The spill was proportional to the paper
+  /// instead of to the lift, which is not what a contact shadow is.
+  ///
+  /// Three routes were tried and measured before this one. Picking a mask whose aspect suits the
+  /// piece cannot reach it — 70 of 172 draws need an aspect wider than the widest of the 56 masks
+  /// (firing 41). `BoxFit.cover` preserves the sampling and breaks the hug. And a nine-slice
+  /// cannot be aimed either, for a reason firing 45 had to measure rather than assert: the falloff
+  /// belongs to the RENDER's outline, and that outline sits a median of 8.73 mm inside the piece's
+  /// box on its worst torn side — 7.28 times the falloff's own 1.2 mm, and never less than
+  /// 2.70 mm on any of the 91 torn sides — so any slice drawn at the box cuts the falloff along
+  /// exactly the torn edges, and leaves it in the stretched middle.
+  ///
+  /// So the falloff is laid around the outline instead, at the physical width `light.dart` says a
+  /// millimetre is. The profile is [ShadowFalloff], measured off these same renders by
+  /// `tools/check/shadow_falloff.py` — the brief asks for a shadow `baked from the render's own
+  /// lighting rather than applied as a uniform blur`, and a `MaskFilter.blur` is that uniform blur
+  /// and is the anti-goal. The shape is the renders'; only the stretching is gone.
+  Widget _contactShadow(BuildContext context, LightCondition condition) {
     return Positioned.fill(
-      child: Transform.scale(
-        scale: frame,
-        child: Opacity(
-          // One lift was modelled, and the render is as dark as this shadow gets: a note that
-          // lies flatter than the model cannot press harder than the render already did, so the
-          // reference is the flattest lift and every other note lifts away from it, lighter.
-          opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(0.0)).clamp(0.6, 1.0),
-          child: Image.asset(
-            tearAsset('${tearId!}_shadow$suffix'),
-            fit: BoxFit.fill,
-            gaplessPlayback: true,
-            frameBuilder: paintWhenItArrives,
-            errorBuilder: none,
-          ),
-        ),
+      child: ContactShadow(
+        tearId: tearId!,
+        condition: condition,
+        // One lift was modelled, and the render is as dark as this shadow gets: a note that
+        // lies flatter than the model cannot press harder than the render already did, so the
+        // reference is the flattest lift and every other note lifts away from it, lighter.
+        //
+        // The lift is still carried HERE and not in the width, deliberately. The library bakes one
+        // lift (`relief.json` `lift_mm` 2.4) and one falloff (1.2 mm), so a penumbra-per-millimetre
+        // law drawn from it would be extrapolated from a single measurement — and every `liftMm` in
+        // this app is far below the baked one, 0.25 to 1.46, so a linear law would put the visible
+        // band at 1.4–8.3 device pixels at dpr 3. Inventing that curve is the thing this route
+        // exists to avoid; a second baked lift is what would make it honest.
+        opacity: (shadowOpacityFor(liftMm) / shadowOpacityFor(0.0)).clamp(0.6, 1.0),
       ),
     );
   }
@@ -209,7 +235,6 @@ class PaperPiece extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dusk = Light.of(context) == LightCondition.dusk;
-    final suffix = dusk ? '_dusk' : '';
     final stock = (!dusk || stockId.endsWith('_dusk')) ? stockId : '${stockId}_dusk';
     final content = Stack(
       children: [
@@ -272,7 +297,8 @@ class PaperPiece extends StatelessWidget {
               // render as the piece, already in the right place, already the right shape. All the
               // app does is put it back at the size it was framed at — wider than the piece, because
               // the part of a contact shadow anyone sees is the part the paper is not covering.
-              if (tearId != null) _bakedShadow(context, suffix),
+              if (tearId != null)
+                _contactShadow(context, dusk ? LightCondition.dusk : LightCondition.day),
               piece,
             ],
           ),
@@ -605,4 +631,243 @@ class NinePainter extends CustomPainter {
   @override
   bool shouldRepaint(NinePainter old) =>
       !identical(old.image, image) || old.edge != edge || old.opacity != opacity;
+}
+
+/// The contact shadow of one piece: the library's measured falloff laid around the piece's own
+/// torn outline, at the physical width `light.dart` says a millimetre is.
+///
+/// See [PaperPiece._contactShadow] for what this replaced and for the three routes that were
+/// measured and refused first.
+class ContactShadow extends StatefulWidget {
+  const ContactShadow({
+    super.key,
+    required this.tearId,
+    required this.condition,
+    this.opacity = 1.0,
+  });
+
+  /// The tear this piece is cut to, e.g. `tear_004`. Its mask is the outline the shadow is laid
+  /// around — composed the same way [MaskedLayer] composes it, so the shadow and the paper agree
+  /// about where the edge is — and its `*_shadow` render is where the profile was measured.
+  final String tearId;
+
+  /// Which rig's renders the profile was measured from. The requirement
+  /// `a_note_at_dusk_asks_for_its_dusk_shadow_test.dart` was written for — a shadow at dusk is the
+  /// dusk rig's own lighting and not the day one dimmed — lives here now that the app no longer
+  /// names a shadow asset.
+  final LightCondition condition;
+
+  final double opacity;
+
+  @override
+  State<ContactShadow> createState() => _ContactShadowState();
+}
+
+class _ContactShadowState extends State<ContactShadow> {
+  ui.Image? _mask;
+
+  @override
+  void initState() {
+    super.initState();
+    _resolve();
+  }
+
+  @override
+  void didUpdateWidget(ContactShadow old) {
+    super.didUpdateWidget(old);
+    if (old.tearId != widget.tearId) {
+      _mask = MaskCache.peek(tearAsset(widget.tearId));
+      _resolve();
+    }
+  }
+
+  void _resolve() {
+    final asset = tearAsset(widget.tearId);
+    final cached = MaskCache.peek(asset);
+    if (cached != null) {
+      _mask = cached;
+      return;
+    }
+    // a mask that is not decoded yet draws no shadow rather than a black rectangle
+    unawaited(MaskCache.load(asset).then((img) {
+      if (!mounted) return;
+      setState(() => _mask = img);
+      // A decode finishing inside a frame has its rebuild dropped; see [askForAFrame].
+      askForAFrame();
+    }, onError: (Object _) {}));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mask = _mask;
+    if (mask == null) return const SizedBox.shrink();
+    return CustomPaint(
+      painter: ContactShadowPainter(
+        tearId: widget.tearId,
+        mask: mask,
+        condition: widget.condition,
+        opacity: widget.opacity,
+        dpr: MediaQuery.maybeDevicePixelRatioOf(context) ?? 1.0,
+      ),
+    );
+  }
+}
+
+/// Public, and carrying the profile it laid and the spill it laid it over, so that
+/// [CaptureHooks.paperSurfaces] can declare a contact shadow the way it already declares the mask
+/// and the lit edge.
+///
+/// Before firing 45 the shadow was an `Image.asset`, so the sidecar saw it for free as a
+/// `RenderImage` and every measurement of this item was written against that. A procedural shadow
+/// that said nothing would have taken the shadow surfaces out of `evidence/*.surfaces.json`
+/// entirely — and this item's own clause (c) asserts the piece count does not fall, so the fix
+/// would have deleted the evidence that judges it. It says what it drew instead.
+class ContactShadowPainter extends CustomPainter {
+  const ContactShadowPainter({
+    required this.tearId,
+    required this.mask,
+    required this.condition,
+    required this.opacity,
+    required this.dpr,
+  });
+
+  /// The tear whose outline this shadow is laid around, e.g. `tear_004`.
+  final String tearId;
+  final ui.Image mask;
+  final LightCondition condition;
+  final double opacity;
+  final double dpr;
+
+  /// The mask asset the outline comes from, e.g. `assets/tears/tear_004.webp`.
+  String get asset => tearAsset(tearId);
+
+  /// The profile laid down: this tear's own render where the library has it, and the pooled
+  /// profile over all fifty-six where it does not.
+  List<double> get profile => ShadowFalloff.forTear(tearId, condition.name);
+
+  /// The render the profile was measured from, e.g. `tear_004_shadow_dusk`, or null where the
+  /// pooled profile was used. This is the surface's provenance, and it is what
+  /// `a_note_at_dusk_asks_for_its_dusk_shadow_test.dart` holds the app to.
+  String? get render => ShadowFalloff.renderFor(tearId, condition.name);
+
+  /// How far the shadow reaches outside the piece, in logical pixels. This is the whole point of
+  /// the class: it is a physical width, the same on a margin strip and on a full sheet, and it
+  /// does not know how big the piece is.
+  static double get spill => ShadowFalloff.reachMm * kShadowPerMm;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (size.isEmpty || opacity <= 0) return;
+    final composed = ContactShadows.at(asset, mask, size, dpr, condition, profile);
+    if (composed == null) return;
+    final dst = Rect.fromLTWH(-spill, -spill, size.width + 2 * spill, size.height + 2 * spill);
+    canvas.drawImageRect(
+      composed,
+      Rect.fromLTWH(0, 0, composed.width.toDouble(), composed.height.toDouble()),
+      dst,
+      Paint()
+        ..filterQuality = FilterQuality.medium
+        ..color = Color.fromRGBO(0, 0, 0, opacity),
+    );
+  }
+
+  @override
+  bool shouldRepaint(ContactShadowPainter old) =>
+      old.tearId != tearId ||
+      !identical(old.mask, mask) ||
+      old.condition != condition ||
+      old.opacity != opacity ||
+      old.dpr != dpr;
+}
+
+/// Contact shadows composed at the size a piece turned out to be, kept so a screenful of notes
+/// composes each shape once rather than once a frame — the same bargain [SlicedMasks] makes, for
+/// the same reason.
+class ContactShadows {
+  static final Map<String, ui.Image> _images = {};
+  static const int _keep = 24;
+
+  /// Composing the shadow for a sheet four thousand device pixels tall at device resolution would
+  /// allocate about twenty megabytes of it, and there is nothing in it that needs the resolution:
+  /// the falloff is 1.2 mm wide and the tear's own roughness is a couple of millimetres, so past
+  /// this the composition is done smaller and scaled back up on the way to the glass. Unlike
+  /// upsampling a render, nothing is lost that was ever measured — the profile is a smooth
+  /// function being rasterised, not a photograph being stretched.
+  static const int _maxSide = 768;
+
+  /// The resolution each shadow was last composed at, in device pixels, and the spill it was
+  /// composed with. `CaptureHooks.paperSurfaces` carries it, so a reader of the sidecar can tell a
+  /// shadow that was composed small from one that was not.
+  static final Map<String, List<int>> composedAt = {};
+
+  static String composedKey(String asset, Size box, LightCondition condition) =>
+      '$asset@${box.width.round()}x${box.height.round()}@${condition.name}';
+
+  /// The falloff laid around [asset]'s outline for a piece of [box] logical pixels.
+  ///
+  /// Null where the piece is too small to carry a shadow at all, which is not a failure: a piece
+  /// one pixel wide has no outline to hug.
+  static ui.Image? at(String asset, ui.Image mask, Size box, double dpr,
+      LightCondition condition, List<double> profile) {
+    final spillPx = ContactShadowPainter.spill * dpr;
+    final fullW = box.width * dpr + 2 * spillPx;
+    final fullH = box.height * dpr + 2 * spillPx;
+    if (fullW < 2 || fullH < 2) return null;
+    final shrink = math.min(1.0, _maxSide / math.max(fullW, fullH));
+    final w = (fullW * shrink).round().clamp(2, _maxSide);
+    final h = (fullH * shrink).round().clamp(2, _maxSide);
+    final key = '$asset@${w}x$h@${condition.name}';
+    composedAt[composedKey(asset, box, condition)] = [w, h];
+    final have = _images[key];
+    if (have != null) return have;
+
+    // The outline is the piece's own: the same composition `MaskedLayer` cuts the paper with, so
+    // the shadow cannot disagree with the edge it belongs to about where that edge is.
+    final outline = SlicedMasks.at(asset, mask, box, dpr);
+    final inner = Rect.fromLTWH(
+      spillPx * shrink,
+      spillPx * shrink,
+      box.width * dpr * shrink,
+      box.height * dpr * shrink,
+    );
+    final src = Rect.fromLTWH(0, 0, outline.width.toDouble(), outline.height.toDouble());
+    // one step of the profile, in the pixels of this composition
+    final step = ShadowFalloff.stepMm * kShadowPerMm * dpr * shrink;
+
+    final recorder = ui.PictureRecorder();
+    final bounds = Rect.fromLTWH(0, 0, w.toDouble(), h.toDouble());
+    final canvas = Canvas(recorder, bounds);
+    // Outermost ring first, then inward. Each ring is the outline dilated by its own distance, so
+    // the band between two rings ends up carrying the profile's value at the outer of the two —
+    // and because the rings are drawn over each other with srcOver rather than replacing, each is
+    // asked for the INCREMENT that lands the accumulation on its target. Drawing each ring at its
+    // own alpha instead would compound them and the shadow would come out far too dark.
+    double covered = 0.0;
+    for (var i = profile.length - 1; i >= 0; i--) {
+      final target = profile[i];
+      if (target <= covered) continue;
+      final increment = (target - covered) / (1.0 - covered);
+      final radius = i * step;
+      final ink = Paint()
+        ..filterQuality = FilterQuality.medium
+        ..colorFilter = ui.ColorFilter.mode(
+            Color.fromRGBO(0, 0, 0, increment.clamp(0.0, 1.0)), BlendMode.srcIn);
+      if (radius >= 0.5) {
+        canvas.saveLayer(
+            bounds, Paint()..imageFilter = ui.ImageFilter.dilate(radiusX: radius, radiusY: radius));
+        canvas.drawImageRect(outline, src, inner, ink);
+        canvas.restore();
+      } else {
+        canvas.drawImageRect(outline, src, inner, ink);
+      }
+      covered = target;
+    }
+    final image = recorder.endRecording().toImageSync(w, h);
+    if (_images.length >= _keep) {
+      final oldest = _images.keys.first;
+      _images.remove(oldest)?.dispose();
+    }
+    _images[key] = image;
+    return image;
+  }
 }

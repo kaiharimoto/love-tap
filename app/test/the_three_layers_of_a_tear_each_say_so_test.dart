@@ -75,14 +75,21 @@ void main() {
           orElse: () => <String, dynamic>{},
         );
 
-    // The shadow, which has always been declared, so that a failure here says the pump went
-    // wrong rather than that the instrument did.
-    final shadow = mine.firstWhere(
-      (s) => (s['asset'] as String).endsWith('_shadow.webp'),
-      orElse: () => <String, dynamic>{},
-    );
+    // The contact shadow. It was an `Image.asset` until firing 45 and so had always been declared
+    // for free; it is a `CustomPaint` now, and it is asked for by what it IS rather than by the
+    // file it used to load, so that a failure here says the pump went wrong rather than that the
+    // instrument did.
+    final shadow = layer('contact');
     expect(shadow, isNotEmpty,
-        reason: 'the baked shadow was not declared, so the piece never painted: $mine');
+        reason: 'the contact shadow was not declared, so the piece never painted: $mine');
+    expect(shadow['asset'], endsWith('_shadow.webp'),
+        reason: 'a contact shadow names the render its profile was measured from, so that '
+            'tools/check/tears.py still counts one draw per layer per piece: $shadow');
+    expect(shadow['spill'], isA<num>(),
+        reason: 'the number this layer turns on is how far it reaches outside the piece, in '
+            'device pixels, and a shadow that does not declare it cannot be measured: $shadow');
+    expect(shadow['spill'] as num, greaterThan(0),
+        reason: 'a contact shadow with no spill is not a contact shadow');
 
     // The lit edge: the layer firing 29 could not name.
     final edge = layer('nine');

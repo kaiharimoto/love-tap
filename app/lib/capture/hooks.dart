@@ -353,7 +353,13 @@ class CaptureHooks {
   ///   both magnifications multiplied together, so the two nine-sliced layers of one piece are
   ///   directly comparable.
   ///
-  /// Nothing about what is drawn changed when they were added.
+  /// * `fit: contact` — the contact shadow. It stopped being an `Image.asset` at firing 45, so
+  ///   it would have dropped out of every sidecar in the set exactly as the other two had been
+  ///   missing from it; `spill` is how far it reaches outside the piece in device pixels, which
+  ///   is the number `the-tear-shadow-is-stretched-six-to-one-and-becomes-a-hard-bar` is about,
+  ///   and `render` is the render its profile was measured from.
+  ///
+  /// Nothing about what is drawn changed when the first two were added.
   static List<Map<String, dynamic>> paperSurfaces() {
     // The asset name lives on the widget and the size lives on the render object, so the element
     // tree is walked once to pair them up and the render tree is walked after, where the paint
@@ -381,11 +387,13 @@ class CaptureHooks {
           if (piece != null) pieces[ro] = piece;
         }
       }
-      // The two nine-sliced layers, which are not `RenderImage` and so were invisible to every
-      // sidecar in the set. The lit edge carries its asset on its painter; the mask does not
-      // reach paint as a widget at all, so its asset is keyed onto the `RenderShaderMask` that
-      // applies it. Both want the piece id for the same reason the images do.
-      if (w is NineSliced) {
+      // The three layers that are not `RenderImage` and so were invisible to every sidecar in
+      // the set. The lit edge and the contact shadow carry what they need on their painters; the
+      // mask does not reach paint as a widget at all, so its asset is keyed onto the
+      // `RenderShaderMask` that applies it. All three want the piece id for the same reason the
+      // images do -- a surface that cannot name the object it is about is WORKER_PROMPT 3d's
+      // failure, and this item's clause (c) counts pieces, not draws.
+      if (w is NineSliced || w is ContactShadow) {
         final ro = _under<RenderCustomPaint>(el);
         if (ro != null && piece != null) pieces[ro] = piece;
       }
@@ -485,6 +493,40 @@ class CaptureHooks {
             double.parse((fx[1] * dpr).toStringAsFixed(3)),
             double.parse((fy[1] * dpr).toStringAsFixed(3)),
           ],
+          'rect': [rect.left.round(), rect.top.round(), rect.width.round(), rect.height.round()],
+          if (pieces[node] != null) 'piece': pieces[node],
+        });
+      }
+    }
+    // The contact shadow: no longer a render drawn into the piece's box, so no longer a
+    // `RenderImage` the walk sees for free. `spill` is the number this item turns on -- how far
+    // the shadow reaches outside the piece, in device pixels. It is a PHYSICAL width, the same on
+    // a margin strip and on a full sheet, where before firing 45 it was a tenth of the piece on
+    // each side and so 11 px on a strip and 97 px on a note. `render` is where the profile was
+    // measured, which is what says the dusk rig's shadow is its own lighting rather than the day
+    // one dimmed.
+    if (node is RenderCustomPaint) {
+      final painter = node.painter;
+      if (painter is ContactShadowPainter && node.hasSize && !node.size.isEmpty) {
+        final box = node.size;
+        final img = painter.mask;
+        final composed = ContactShadows.composedAt[
+            ContactShadows.composedKey(painter.asset, box, painter.condition)];
+        final rect = MatrixUtils.transformRect(node.getTransformTo(view), Offset.zero & box);
+        final spill = ContactShadowPainter.spill * dpr;
+        out.add({
+          'asset': painter.render == null
+              ? painter.asset
+              : 'assets/tears/${painter.render}.webp',
+          'src': [img.width, img.height],
+          'composed': ?composed,
+          'drawn': [(box.width * dpr).round(), (box.height * dpr).round()],
+          'scale': 1.0,
+          'fit': 'contact',
+          'spill': double.parse(spill.toStringAsFixed(3)),
+          'profile': painter.profile.length,
+          'condition': painter.condition.name,
+          'render': ?painter.render,
           'rect': [rect.left.round(), rect.top.round(), rect.width.round(), rect.height.round()],
           if (pieces[node] != null) 'piece': pieces[node],
         });
