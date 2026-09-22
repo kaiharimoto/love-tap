@@ -146,13 +146,23 @@ class Pen {
 }
 
 class Accent {
-  static const highlighterYellow = Color(0x73F4EA6A); // 45%
+  /// Multiplied, never on top: DIRECTION.md's accent line, and [highlighterBlend] is how. 70%, not
+  /// the 45% it was, because docs/COLOR.md §5 prices the composite rather than the swatch: over
+  /// the seven stocks a note or a search hit can be torn from ([stockFor]), multiplied at 45% the
+  /// worst lands at chroma 0.0889 (graph_01 at dusk), under the 0.09 an accent is counted at; at
+  /// 70% the worst is 0.1105 at hue 93°, inside family A, with 94% of its pixels over the line.
+  /// And multiply only darkens, so the ink under it darkens with the paper instead of being
+  /// veiled: painted on top at 45%, a highlighted note's ballpoint went from about 13:1 to 3.4:1.
+  static const highlighterYellow = Color(0xB3F4EA6A); // 70%
   static const highlighterPink = Color(0x66F2A8C0); // 40%
   static const correctionFluid = Color(0xFFF7F5EE);
   static const tapeAmber = Color(0x8CD9B46B); // 55%
   static const stickyYellow = Color(0xFFF3E08A);
   static const stickyPink = Color(0xFFF2C1C1);
   static const stickyBlue = Color(0xFFBCD8E8);
+
+  /// How a highlighter reaches the page. A dye, not a coat of paint.
+  static const highlighterBlend = BlendMode.multiply;
 }
 
 /// A warm shadow, never neutral grey. (The desk's own colours live in material/desk.dart, with

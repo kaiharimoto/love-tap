@@ -142,7 +142,10 @@ void main() {
     var lit = 0;
     for (final t in rich) {
       t.textSpan!.visitChildren((span) {
-        if (span is TextSpan && span.style?.backgroundColor != null) lit++;
+        // Since firing 49 the mark is a multiplied `background` paint rather than a
+        // `backgroundColor`, which could only paint on top.
+        final style = span is TextSpan ? span.style : null;
+        if (style?.background != null || style?.backgroundColor != null) lit++;
         return true;
       });
     }

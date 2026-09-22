@@ -439,7 +439,11 @@ class _Marked extends StatelessWidget {
       if (start > at) out.add(TextSpan(text: text.substring(at, start)));
       out.add(TextSpan(
         text: text.substring(start, end),
-        style: const TextStyle(backgroundColor: Accent.highlighterYellow),
+        style: TextStyle(
+          background: Paint()
+            ..color = Accent.highlighterYellow
+            ..blendMode = Accent.highlighterBlend,
+        ),
       ));
       at = end;
     }

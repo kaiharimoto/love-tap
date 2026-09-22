@@ -187,7 +187,14 @@ class Note extends StatelessWidget {
         if (highlight)
           Positioned.fill(
             child: IgnorePointer(
-              child: DecoratedBox(decoration: const BoxDecoration(color: Accent.highlighterYellow)),
+              // An overlay is painted over the words, so on top it veiled them; multiplied, the
+              // ink stays as dark as the paper under it lets it be.
+              child: DecoratedBox(
+                decoration: const BoxDecoration(
+                  color: Accent.highlighterYellow,
+                  backgroundBlendMode: Accent.highlighterBlend,
+                ),
+              ),
             ),
           ),
       ],
