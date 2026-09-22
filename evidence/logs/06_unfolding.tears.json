@@ -1,12 +1,12 @@
 {
  "report": "evidence/logs/06_unfolding.report.json",
- "visible": 5,
- "notes_with_tears": 5,
- "distinct_tears": 5,
+ "visible": 3,
+ "notes_with_tears": 3,
+ "distinct_tears": 3,
  "repeats": {},
  "pool": 56,
  "scroll": {
-  "first": 8382,
+  "first": 8384,
   "last": 8387,
   "of": 8387
  },
@@ -17,5 +17,5 @@
  "frame_ok": false,
  "frame_why": "no surfaces sidecar for 06_unfolding, so only the notes' tears were read",
  "ok": false,
- "why": "only 5 notes on screen"
+ "why": "only 3 notes on screen"
 }

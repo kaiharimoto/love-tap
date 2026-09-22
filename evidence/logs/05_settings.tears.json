@@ -17,13 +17,10 @@
   3120
  ],
  "frame_surfaces": "evidence/05_settings.surfaces.json",
- "frame_tear_draws": 9,
- "frame_distinct_tears": 8,
- "frame_repeats": {
-  "assets/tears/tear_020_shadow.webp": 2
- },
- "frame_ok": false,
- "frame_why": "a tear is used twice in the frame: assets/tears/tear_020_shadow.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see.",
+ "frame_tear_draws": 26,
+ "frame_distinct_tears": 26,
+ "frame_repeats": {},
+ "frame_ok": true,
  "ok": false,
  "why": "only 6 notes on screen"
 }

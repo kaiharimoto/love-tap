@@ -10,27 +10,27 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3824
+   "ms": 3904
   },
   {
    "do": "wait",
-   "ms": 2104
+   "ms": 2102
   },
   {
    "do": "shot",
-   "ms": 11241
+   "ms": 5821
   },
   {
    "do": "report",
-   "ms": 723
+   "ms": 710
   }
  ],
  "shots": [
   {
    "out": "evidence/03_us.png",
    "clip": null,
-   "text_runs": 23,
-   "surfaces": 30
+   "text_runs": 24,
+   "surfaces": 50
   }
  ],
  "reports": [
@@ -45,12 +45,12 @@
     "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
-    "01M1M3F41R2APQC59QKBMZK4XF": "tear_047",
-    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_031",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "01M1M59VY0YA13H9M86HTA6XNP": "tear_013"
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_014",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_036",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_056",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M59VY0YA13H9M86HTA6XNP": "tear_001"
    },
    "stocks": {
     "01M1M3AY8G83A3FBSRB1Y7W78Q": "receipt_01",
@@ -88,17 +88,22 @@
     "held_to": 23
    },
    "blobs_pending": 0,
+   "pictures_pending": 0,
    "at": "03_us.png"
   }
  ],
  "blob_waits": [
   {
    "at": "03_us.png",
-   "waited_ms": 7252,
-   "pending_at_shot": 0
+   "waited_ms": 2772,
+   "pending_at_shot": 0,
+   "undrawn_at_shot": 0
   }
  ],
- "cold_ms": 14216,
+ "install_ms": 10365,
+ "cold_ms": 1491,
+ "reopened": true,
+ "events_at_open": 14061,
  "problems": [],
  "ok": true
 }

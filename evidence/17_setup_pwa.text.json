@@ -5,21 +5,21 @@
   3120
  ],
  "dpr": 3,
- "declared": 20,
+ "declared": 17,
  "offscreen": 0,
  "clipped": 0,
  "runs": [
   {
    "rect": [
-    306,
-    153,
+    120,
+    171,
     89,
     34
    ],
    "lines": [
     [
-     308,
-     152,
+     123,
+     170,
      89,
      35
     ]
@@ -28,21 +28,21 @@
    "px": 27,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "NEED",
    "chars": 4
   },
   {
    "rect": [
-    485,
-    152,
+    299,
+    169,
     139,
     34
    ],
    "lines": [
     [
-     487,
-     151,
+     301,
+     168,
      139,
      35
     ]
@@ -51,21 +51,21 @@
    "px": 27,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "ENERGY",
    "chars": 6
   },
   {
    "rect": [
-    332,
-    1055,
+    143,
+    1556,
     687,
     101
    ],
    "lines": [
     [
-     332,
-     1062,
+     144,
+     1563,
      687,
      87
     ]
@@ -74,50 +74,50 @@
    "px": 66,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff3a3a3c",
+   "ink": "ff323234",
    "text": "this one, the iphone",
    "chars": 20
   },
   {
    "rect": [
-    333,
-    1162,
-    932,
-    126
+    144,
+    1661,
+    1134,
+    127
    ],
    "lines": [
     [
-     333,
-     1166,
-     821,
-     58
+     144,
+     1665,
+     1100,
+     60
     ],
     [
-     333,
-     1229,
-     394,
-     55
+     145,
+     1731,
+     115,
+     54
     ]
    ],
    "points": 14,
    "px": 42,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "two phones, one wire between them, nobody else on it.",
    "chars": 53
   },
   {
    "rect": [
-    412,
-    1324,
+    223,
+    1825,
     758,
     83
    ],
    "lines": [
     [
-     412,
-     1329,
+     223,
+     1830,
      757,
      73
     ]
@@ -126,85 +126,79 @@
    "px": 54,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff3a3a3c",
+   "ink": "ff323234",
    "text": "add it to the home screen",
    "chars": 25
   },
   {
    "rect": [
-    412,
-    1408,
-    854,
-    186
+    224,
+    1907,
+    1056,
+    127
    ],
    "lines": [
     [
-     412,
-     1412,
-     815,
-     58
+     224,
+     1911,
+     1001,
+     59
     ],
     [
-     413,
-     1472,
-     781,
+     224,
+     1973,
+     755,
      58
-    ],
-    [
-     413,
-     1536,
-     161,
-     54
     ]
    ],
    "points": 14,
    "px": 42,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "share, then add to home screen. it will not hold on to anything…",
    "chars": 77
   },
   {
    "rect": [
-    413,
-    1597,
-    854,
-    114
+    224,
+    2036,
+    1056,
+    115
    ],
    "lines": [
     [
-     414,
-     1601,
-     740,
-     52
+     225,
+     2040,
+     1040,
+     54
     ],
     [
-     414,
-     1656,
-     627,
-     51
+     225,
+     2099,
+     326,
+     49
     ]
    ],
    "points": 12.5,
    "px": 37.5,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "waiting to be opened from the home screen rather than from a tab",
    "chars": 64
   },
   {
    "rect": [
-    414,
-    1741,
+    225,
+    2182,
     836,
     84
    ],
    "lines": [
     [
-     414,
-     1746,
+     226,
+     2187,
      836,
      73
     ]
@@ -213,156 +207,28 @@
    "px": 54,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff3a3a3c",
+   "ink": "ff323234",
    "text": "put this phone on the tailnet",
    "chars": 29
   },
   {
    "rect": [
-    415,
-    1825,
-    854,
-    126
+    226,
+    2264,
+    1056,
+    127
    ],
    "lines": [
     [
-     415,
-     1829,
-     766,
-     58
+     226,
+     2268,
+     1068,
+     59
     ],
     [
-     415,
-     1889,
-     816,
-     58
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff3f3f41",
-   "text": "the same private network as the other phone, and nothing else o…",
-   "chars": 68
-  },
-  {
-   "rect": [
-    415,
-    1981,
-    854,
-    162
-   ],
-   "lines": [
-    [
-     416,
-     1986,
-     816,
-     73
-    ],
-    [
-     416,
-     2066,
-     463,
-     71
-    ]
-   ],
-   "points": 18,
-   "px": 54,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff3a3a3c",
-   "text": "install the profile the other phone is serving",
-   "chars": 46
-  },
-  {
-   "rect": [
-    416,
-    2143,
-    854,
-    246
-   ],
-   "lines": [
-    [
-     417,
-     2147,
-     839,
-     58
-    ],
-    [
-     417,
-     2207,
-     736,
-     57
-    ],
-    [
-     418,
-     2267,
-     694,
-     57
-    ],
-    [
-     418,
-     2330,
-     192,
-     54
-    ]
-   ],
-   "points": 14,
-   "px": 42,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff3f3f41",
-   "text": "open its address in Safari, take the profile, then trust it in …",
-   "chars": 112
-  },
-  {
-   "rect": [
-    418,
-    2419,
-    854,
-    162
-   ],
-   "lines": [
-    [
-     419,
-     2424,
-     787,
-     73
-    ],
-    [
-     419,
-     2505,
-     349,
-     70
-    ]
-   ],
-   "points": 18,
-   "px": 54,
-   "family": "TeoHand",
-   "role": "hand",
-   "ink": "ff3a3a3c",
-   "text": "read the six words off the other phone",
-   "chars": 38
-  },
-  {
-   "rect": [
-    419,
-    2581,
-    854,
-    126
-   ],
-   "lines": [
-    [
-     419,
-     2584,
-     853,
-     58
-    ],
-    [
-     420,
-     2646,
-     560,
+     226,
+     2331,
+     514,
      56
     ]
    ],
@@ -370,61 +236,102 @@
    "px": 42,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff3f3f41",
-   "text": "say them out loud in the same room. they are only good once.",
-   "chars": 60
+   "ink": "ff373739",
+   "text": "the same private network as the other phone, and nothing else o…",
+   "chars": 68
   },
   {
    "rect": [
-    420,
-    2739,
-    550,
-    82
+    227,
+    2420,
+    1056,
+    163
    ],
    "lines": [
     [
-     420,
-     2743,
-     550,
-     71
+     227,
+     2425,
+     1072,
+     74
+    ],
+    [
+     227,
+     2508,
+     208,
+     69
     ]
    ],
    "points": 18,
    "px": 54,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff3a3a3c",
-   "text": "let it interrupt you",
-   "chars": 20
+   "ink": "ff323234",
+   "text": "install the profile the other phone is serving",
+   "chars": 46
   },
   {
    "rect": [
-    421,
-    2821,
-    854,
-    113
+    228,
+    2582,
+    1056,
+    187
    ],
    "lines": [
     [
-     421,
-     2825,
-     801,
+     228,
+     2586,
+     1016,
+     59
+    ],
+    [
+     228,
+     2647,
+     865,
      58
     ],
     [
-     421,
-     2886,
-     606,
-     48
+     229,
+     2709,
+     579,
+     56
     ]
    ],
    "points": 14,
    "px": 42,
    "family": "TeoHand",
    "role": "hand",
-   "ink": "ff3f3f41",
-   "text": "an iPhone only offers this once the app is on the home screen.",
-   "chars": 62
+   "ink": "ff373739",
+   "text": "open its address in Safari, take the profile, then trust it in …",
+   "chars": 112
+  },
+  {
+   "rect": [
+    229,
+    2798,
+    1056,
+    136
+   ],
+   "lines": [
+    [
+     229,
+     2804,
+     967,
+     74
+    ],
+    [
+     230,
+     2887,
+     170,
+     47
+    ]
+   ],
+   "points": 18,
+   "px": 54,
+   "family": "TeoHand",
+   "role": "hand",
+   "ink": "ff323234",
+   "text": "read the six words off the other phone",
+   "chars": 38
   },
   {
    "rect": [
@@ -445,7 +352,7 @@
    "px": 33,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "PULSE",
    "chars": 5
   },
@@ -468,7 +375,7 @@
    "px": 36,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "CHAT",
    "chars": 4
   },
@@ -491,7 +398,7 @@
    "px": 33,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "US",
    "chars": 2
   },
@@ -514,7 +421,7 @@
    "px": 33,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "MOMENTS",
    "chars": 7
   },
@@ -537,7 +444,7 @@
    "px": 33,
    "family": "DeskStamp",
    "role": "stamp",
-   "ink": "ff3f3f41",
+   "ink": "ff373739",
    "text": "SETTINGS",
    "chars": 8
   }

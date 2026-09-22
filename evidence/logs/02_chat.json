@@ -10,42 +10,41 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 4104
+   "ms": 4222
   },
   {
    "do": "wait",
-   "ms": 1903
+   "ms": 1904
   },
   {
    "do": "scrollTo",
-   "ms": 6035
+   "ms": 5526
   },
   {
    "do": "wait",
-   "ms": 1901
+   "ms": 1902
   },
   {
    "do": "shot",
-   "ms": 3522
+   "ms": 3885
   },
   {
    "do": "report",
-   "ms": 715
+   "ms": 713
   }
  ],
  "shots": [
   {
    "out": "evidence/02_chat.png",
    "clip": null,
-   "text_runs": 32,
-   "surfaces": 88
+   "text_runs": 31,
+   "surfaces": 151
   }
  ],
  "reports": [
   {
    "region": 1,
    "visible": [
-    "01KPXGJRY0JDB97RZ6QCB245T2",
     "01KPXSD430JZPJA1QM314BP2W4",
     "01KPY55G18V0FTEBGMV2XMCMR2",
     "01KPZ36PTG84DM3V2032VH63PQ",
@@ -59,21 +58,19 @@
     "01KQ29BFD8145K9QVBRVTSZFNV"
    ],
    "tears": {
-    "01KPXGJRY0JDB97RZ6QCB245T2": "tear_033",
-    "01KPXSD430JZPJA1QM314BP2W4": "tear_053",
-    "01KPY55G18V0FTEBGMV2XMCMR2": "tear_015",
-    "01KPZ36PTG84DM3V2032VH63PQ": "tear_037",
-    "01KPZ7RFVRGDZN8AP05862FM92": "tear_001",
-    "01KPZYZAC073PTHBMVK7VD9FZJ": "tear_020",
-    "01KQ02YHN8N4WZA8E02GVFZ1A2": "tear_043",
-    "01KQ0BSV30D3VM93BBQ38H46KP": "tear_005",
-    "01KQ1QHK2RCPKYP6X898ZXQ5AW": "tear_026",
-    "01KQ1VV4EG3JD6KEYNCHMBCVV6": "tear_048",
-    "01KQ1W6AV8QJA20W2EFN30VGJC": "tear_010",
-    "01KQ29BFD8145K9QVBRVTSZFNV": "tear_032"
+    "01KPXSD430JZPJA1QM314BP2W4": "tear_010",
+    "01KPY55G18V0FTEBGMV2XMCMR2": "tear_032",
+    "01KPZ36PTG84DM3V2032VH63PQ": "tear_052",
+    "01KPZ7RFVRGDZN8AP05862FM92": "tear_014",
+    "01KPZYZAC073PTHBMVK7VD9FZJ": "tear_036",
+    "01KQ02YHN8N4WZA8E02GVFZ1A2": "tear_056",
+    "01KQ0BSV30D3VM93BBQ38H46KP": "tear_019",
+    "01KQ1QHK2RCPKYP6X898ZXQ5AW": "tear_042",
+    "01KQ1VV4EG3JD6KEYNCHMBCVV6": "tear_001",
+    "01KQ1W6AV8QJA20W2EFN30VGJC": "tear_020",
+    "01KQ29BFD8145K9QVBRVTSZFNV": "tear_043"
    },
    "stocks": {
-    "01KPXGJRY0JDB97RZ6QCB245T2": "spiral_03",
     "01KPXSD430JZPJA1QM314BP2W4": "legal_01",
     "01KPY55G18V0FTEBGMV2XMCMR2": "spiral_03",
     "01KPZ36PTG84DM3V2032VH63PQ": "spiral_02",
@@ -87,7 +84,7 @@
     "01KQ29BFD8145K9QVBRVTSZFNV": "graph_04"
    },
    "scroll": {
-    "first": 5213,
+    "first": 5214,
     "last": 5224,
     "of": 8387
    },
@@ -121,12 +118,15 @@
  "blob_waits": [
   {
    "at": "02_chat.png",
-   "waited_ms": 8,
+   "waited_ms": 10,
    "pending_at_shot": 0,
    "undrawn_at_shot": 0
   }
  ],
- "cold_ms": 8569,
+ "install_ms": 10070,
+ "cold_ms": 1520,
+ "reopened": true,
+ "events_at_open": 14061,
  "problems": [],
  "ok": true
 }

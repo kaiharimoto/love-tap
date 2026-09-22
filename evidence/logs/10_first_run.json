@@ -10,7 +10,7 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 1854
+   "ms": 2985
   },
   {
    "do": "wait",
@@ -18,11 +18,11 @@
   },
   {
    "do": "shot",
-   "ms": 3097
+   "ms": 2780
   },
   {
    "do": "report",
-   "ms": 706
+   "ms": 705
   }
  ],
  "shots": [
@@ -30,7 +30,7 @@
    "out": "evidence/10_first_run.png",
    "clip": null,
    "text_runs": 12,
-   "surfaces": 16
+   "surfaces": 24
   }
  ],
  "reports": [
@@ -40,7 +40,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-21T13:31:05.444Z",
+   "now": "2026-09-22T13:50:29.781Z",
    "driven_ms": 48,
    "seed": 20260903,
    "events": 0,
@@ -57,17 +57,22 @@
     "sequence": null
    },
    "blobs_pending": 0,
+   "pictures_pending": 0,
    "at": "10_first_run.png"
   }
  ],
  "blob_waits": [
   {
    "at": "10_first_run.png",
-   "waited_ms": 4,
-   "pending_at_shot": 0
+   "waited_ms": 10,
+   "pending_at_shot": 0,
+   "undrawn_at_shot": 0
   }
  ],
- "cold_ms": 1539,
+ "install_ms": 1222,
+ "cold_ms": 1222,
+ "reopened": false,
+ "events_at_open": 0,
  "problems": [],
  "ok": true
 }

@@ -1,12 +1,12 @@
 {
  "report": "evidence/logs/02_chat.report.json",
- "visible": 12,
- "notes_with_tears": 12,
- "distinct_tears": 12,
+ "visible": 11,
+ "notes_with_tears": 11,
+ "distinct_tears": 11,
  "repeats": {},
  "pool": 56,
  "scroll": {
-  "first": 5213,
+  "first": 5214,
   "last": 5224,
   "of": 8387
  },
@@ -17,14 +17,9 @@
   3120
  ],
  "frame_surfaces": "evidence/02_chat.surfaces.json",
- "frame_tear_draws": 16,
- "frame_distinct_tears": 13,
- "frame_repeats": {
-  "assets/tears/tear_009_shadow.webp": 2,
-  "assets/tears/tear_011_shadow.webp": 2,
-  "assets/tears/tear_029_shadow.webp": 2
- },
- "frame_ok": false,
- "frame_why": "a tear is used twice in the frame: assets/tears/tear_009_shadow.webp x2, assets/tears/tear_011_shadow.webp x2, assets/tears/tear_029_shadow.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see.",
+ "frame_tear_draws": 46,
+ "frame_distinct_tears": 46,
+ "frame_repeats": {},
+ "frame_ok": true,
  "ok": true
 }

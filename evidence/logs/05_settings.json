@@ -10,23 +10,23 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 6305
+   "ms": 3801
   },
   {
    "do": "wait",
-   "ms": 2308
+   "ms": 2302
   },
   {
    "do": "shot",
-   "ms": 5210
+   "ms": 4316
   },
   {
    "do": "report",
-   "ms": 722
+   "ms": 710
   },
   {
    "do": "scrollSettings",
-   "ms": 2064
+   "ms": 1762
   },
   {
    "do": "wait",
@@ -34,11 +34,11 @@
   },
   {
    "do": "shot",
-   "ms": 2861
+   "ms": 2678
   },
   {
    "do": "report",
-   "ms": 724
+   "ms": 711
   }
  ],
  "shots": [
@@ -46,13 +46,13 @@
    "out": "evidence/05_settings.png",
    "clip": null,
    "text_runs": 35,
-   "surfaces": 28
+   "surfaces": 45
   },
   {
    "out": "evidence/05_settings_interrupt.png",
    "clip": null,
-   "text_runs": 64,
-   "surfaces": 12
+   "text_runs": 65,
+   "surfaces": 16
   }
  ],
  "reports": [
@@ -67,12 +67,12 @@
     "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
-    "01M1M3F41R2APQC59QKBMZK4XF": "tear_047",
-    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_031",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "01M1M59VY0YA13H9M86HTA6XNP": "tear_013"
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_014",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_036",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_056",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M59VY0YA13H9M86HTA6XNP": "tear_001"
    },
    "stocks": {
     "01M1M3AY8G83A3FBSRB1Y7W78Q": "receipt_01",
@@ -110,6 +110,7 @@
     "held_to": 23
    },
    "blobs_pending": 0,
+   "pictures_pending": 0,
    "at": "05_settings.png"
   },
   {
@@ -123,12 +124,12 @@
     "01M1M59VY0YA13H9M86HTA6XNP"
    ],
    "tears": {
-    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_024",
-    "01M1M3F41R2APQC59QKBMZK4XF": "tear_047",
-    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_009",
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_031",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "01M1M59VY0YA13H9M86HTA6XNP": "tear_013"
+    "01M1M3AY8G83A3FBSRB1Y7W78Q": "tear_014",
+    "01M1M3F41R2APQC59QKBMZK4XF": "tear_036",
+    "01M1M3Y4GR5ZE8WDQ00S3NX0KF": "tear_056",
+    "01M1M4GW48FEW3M67XKAZT5051": "tear_019",
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M59VY0YA13H9M86HTA6XNP": "tear_001"
    },
    "stocks": {
     "01M1M3AY8G83A3FBSRB1Y7W78Q": "receipt_01",
@@ -166,22 +167,28 @@
     "held_to": 23
    },
    "blobs_pending": 0,
+   "pictures_pending": 0,
    "at": "05_settings_interrupt.png"
   }
  ],
  "blob_waits": [
   {
    "at": "05_settings.png",
-   "waited_ms": 1327,
-   "pending_at_shot": 0
+   "waited_ms": 1059,
+   "pending_at_shot": 0,
+   "undrawn_at_shot": 0
   },
   {
    "at": "05_settings_interrupt.png",
-   "waited_ms": 3,
-   "pending_at_shot": 0
+   "waited_ms": 8,
+   "pending_at_shot": 0,
+   "undrawn_at_shot": 0
   }
  ],
- "cold_ms": 14450,
+ "install_ms": 10751,
+ "cold_ms": 1554,
+ "reopened": true,
+ "events_at_open": 14061,
  "problems": [],
  "ok": true
 }

@@ -10,47 +10,47 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 2856
+   "ms": 2711
   },
   {
    "do": "wait",
-   "ms": 1803
+   "ms": 1802
   },
   {
    "do": "openCorner",
-   "ms": 3516
+   "ms": 2402
   },
   {
    "do": "frames",
-   "ms": 67946
+   "ms": 54496
   },
   {
    "do": "sendFeeling",
-   "ms": 2374
+   "ms": 1609
   },
   {
    "do": "frames",
-   "ms": 263998
+   "ms": 207434
   },
   {
    "do": "sendFeeling",
-   "ms": 1727
+   "ms": 785
   },
   {
    "do": "frames",
-   "ms": 275777
+   "ms": 220857
   },
   {
    "do": "openCorner",
-   "ms": 1248
+   "ms": 761
   },
   {
    "do": "frames",
-   "ms": 66968
+   "ms": 53201
   },
   {
    "do": "report",
-   "ms": 427
+   "ms": 424
   }
  ],
  "shots": [
@@ -171,28 +171,25 @@
   {
    "region": 0,
    "visible": [
-    "01M1M4GW48FEW3M67XKAZT5051",
     "01M1M4ZQQ0H0PPVTKMMQEE268D",
     "01M1M59VY0YA13H9M86HTA6XNP",
     "01M1MCJ1M02CDNKZD17AYTKFKH",
     "01M1MCJ1M02CDNKZD17AYTKFKJ"
    ],
    "tears": {
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_031",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "01M1M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_035",
-    "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_055"
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M59VY0YA13H9M86HTA6XNP": "tear_001",
+    "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_020",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_043"
    },
    "stocks": {
-    "01M1M4GW48FEW3M67XKAZT5051": "lined_02",
     "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
     "01M1M59VY0YA13H9M86HTA6XNP": "graph_02",
     "01M1MCJ1M02CDNKZD17AYTKFKH": "lined_04",
     "01M1MCJ1M02CDNKZD17AYTKFKJ": "legal_01"
    },
    "scroll": {
-    "first": 8384,
+    "first": 8385,
     "last": 8388,
     "of": 8389
    },
@@ -219,6 +216,7 @@
     "held_to": 23
    },
    "blobs_pending": 0,
+   "pictures_pending": 0,
    "at": "07_feeling_landing",
    "fold_at_first_frame": {
     "sequence": "unfold_thirds",
@@ -241,7 +239,10 @@
   }
  ],
  "blob_waits": [],
- "cold_ms": 13543,
+ "install_ms": 10676,
+ "cold_ms": 1577,
+ "reopened": true,
+ "events_at_open": 14061,
  "problems": [],
  "ok": true
 }

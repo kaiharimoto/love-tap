@@ -17,10 +17,18 @@
   3120
  ],
  "frame_surfaces": "evidence/14_media_viewer.surfaces.json",
- "frame_tear_draws": 12,
- "frame_distinct_tears": 12,
- "frame_repeats": {},
- "frame_ok": true,
+ "frame_tear_draws": 35,
+ "frame_distinct_tears": 27,
+ "frame_repeats": {
+  "assets/tears/tear_049.webp": 3,
+  "assets/tears/tear_049_edge.webp": 3,
+  "assets/tears/tear_011_shadow.webp": 2,
+  "assets/tears/tear_011.webp": 2,
+  "assets/tears/tear_011_edge.webp": 2,
+  "assets/tears/tear_049_shadow_dusk.webp": 2
+ },
+ "frame_ok": false,
+ "frame_why": "a tear is used twice in the frame: assets/tears/tear_011.webp x2, assets/tears/tear_011_edge.webp x2, assets/tears/tear_011_shadow.webp x2, assets/tears/tear_049.webp x3, assets/tears/tear_049_edge.webp x3, assets/tears/tear_049_shadow_dusk.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see.",
  "ok": false,
  "why": "only 4 notes on screen"
 }

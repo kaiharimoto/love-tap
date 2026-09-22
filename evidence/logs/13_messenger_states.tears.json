@@ -7,7 +7,7 @@
  "pool": 56,
  "scroll": {
   "first": 8384,
-  "last": 8391,
+  "last": 8390,
   "of": 8391
  },
  "driven_ms": 192,
@@ -17,13 +17,10 @@
   3120
  ],
  "frame_surfaces": "evidence/13_messenger_states.surfaces.json",
- "frame_tear_draws": 11,
- "frame_distinct_tears": 10,
- "frame_repeats": {
-  "assets/tears/tear_055_shadow.webp": 2
- },
- "frame_ok": false,
- "frame_why": "a tear is used twice in the frame: assets/tears/tear_055_shadow.webp x2. The notes are fine; this is the chrome, which the event-id map cannot see.",
+ "frame_tear_draws": 36,
+ "frame_distinct_tears": 36,
+ "frame_repeats": {},
+ "frame_ok": true,
  "ok": false,
  "why": "only 7 notes on screen"
 }

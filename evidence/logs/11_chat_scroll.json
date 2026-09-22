@@ -10,23 +10,23 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3344
+   "ms": 3562
   },
   {
    "do": "wait",
-   "ms": 2008
+   "ms": 2003
   },
   {
    "do": "scrollTo",
-   "ms": 4629
+   "ms": 3212
   },
   {
    "do": "wait",
-   "ms": 1102
+   "ms": 1103
   },
   {
    "do": "frames",
-   "ms": 581221
+   "ms": 465044
   }
  ],
  "shots": [
@@ -64,7 +64,10 @@
  ],
  "reports": [],
  "blob_waits": [],
- "cold_ms": 13942,
+ "install_ms": 10240,
+ "cold_ms": 1552,
+ "reopened": true,
+ "events_at_open": 14061,
  "problems": [],
  "ok": true
 }

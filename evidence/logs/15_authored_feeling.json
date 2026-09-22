@@ -10,55 +10,55 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 5084
+   "ms": 2755
   },
   {
    "do": "wait",
-   "ms": 1803
+   "ms": 1804
   },
   {
    "do": "goTo",
-   "ms": 3565
+   "ms": 3834
   },
   {
    "do": "wait",
-   "ms": 1302
+   "ms": 1303
   },
   {
    "do": "openCorner",
-   "ms": 2083
+   "ms": 1142
   },
   {
    "do": "frames",
-   "ms": 76234
+   "ms": 57228
   },
   {
    "do": "sendFeeling",
-   "ms": 2416
+   "ms": 1365
   },
   {
    "do": "frames",
-   "ms": 154914
+   "ms": 127265
   },
   {
    "do": "sendFeeling",
-   "ms": 1354
+   "ms": 1330
   },
   {
    "do": "frames",
-   "ms": 249725
+   "ms": 206074
   },
   {
    "do": "openCorner",
-   "ms": 1147
+   "ms": 731
   },
   {
    "do": "frames",
-   "ms": 66540
+   "ms": 53011
   },
   {
    "do": "report",
-   "ms": 430
+   "ms": 421
   }
  ],
  "shots": [
@@ -179,28 +179,25 @@
   {
    "region": 1,
    "visible": [
-    "01M1M4GW48FEW3M67XKAZT5051",
     "01M1M4ZQQ0H0PPVTKMMQEE268D",
     "01M1M59VY0YA13H9M86HTA6XNP",
     "01M1MCJ1M02CDNKZD17AYTKFKH",
     "01M1MCJ1M02CDNKZD17AYTKFKJ"
    ],
    "tears": {
-    "01M1M4GW48FEW3M67XKAZT5051": "tear_031",
-    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_051",
-    "01M1M59VY0YA13H9M86HTA6XNP": "tear_013",
-    "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_035",
-    "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_055"
+    "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
+    "01M1M59VY0YA13H9M86HTA6XNP": "tear_001",
+    "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_020",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_043"
    },
    "stocks": {
-    "01M1M4GW48FEW3M67XKAZT5051": "lined_02",
     "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
     "01M1M59VY0YA13H9M86HTA6XNP": "graph_02",
     "01M1MCJ1M02CDNKZD17AYTKFKH": "lined_04",
     "01M1MCJ1M02CDNKZD17AYTKFKJ": "legal_01"
    },
    "scroll": {
-    "first": 8384,
+    "first": 8385,
     "last": 8388,
     "of": 8389
    },
@@ -227,6 +224,7 @@
     "held_to": 23
    },
    "blobs_pending": 0,
+   "pictures_pending": 0,
    "at": "15_authored_feeling",
    "fold_at_first_frame": {
     "sequence": "unfold_thirds",
@@ -249,7 +247,10 @@
   }
  ],
  "blob_waits": [],
- "cold_ms": 14044,
+ "install_ms": 10763,
+ "cold_ms": 1538,
+ "reopened": true,
+ "events_at_open": 14061,
  "problems": [],
  "ok": true
 }

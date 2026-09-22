@@ -15,8 +15,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#3F3F41",
-    "share": 0.00983,
+    "rgb": "#373739",
+    "share": 0.00987,
     "constant": null
    },
    "pad_box": [
@@ -28,71 +28,71 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 24.941,
+    "median_std": 36.34,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 24.941,
-      "levels": 166
+      "std": 36.34,
+      "levels": 194
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 23.512,
-      "levels": 169
+      "std": 35.353,
+      "levels": 197
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 21.669,
-      "levels": 181
+      "std": 15.144,
+      "levels": 122
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 55.003,
-      "levels": 191
+      "std": 31.595,
+      "levels": 243
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 46.541,
-      "levels": 200
+      "std": 37.441,
+      "levels": 199
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 17.721,
-      "levels": 156
+      "std": 19.919,
+      "levels": 176
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 41.756,
-      "levels": 192
+      "std": 54.838,
+      "levels": 199
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 20.083,
-      "levels": 168
+      "std": 38.01,
+      "levels": 216
      }
     ]
    },
@@ -106,8 +106,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#3F3F41",
-    "share": 0.01221,
+    "rgb": "#373739",
+    "share": 0.0116,
     "constant": null
    },
    "pad_box": [
@@ -119,71 +119,71 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 33.728,
+    "median_std": 19.04,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 13.151,
-      "levels": 174
+      "std": 13.927,
+      "levels": 138
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 33.728,
-      "levels": 189
+      "std": 38.289,
+      "levels": 196
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 34.938,
-      "levels": 206
+      "std": 32.386,
+      "levels": 187
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 25.527,
-      "levels": 215
+      "std": 19.04,
+      "levels": 173
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 33.731,
-      "levels": 178
+      "std": 15.708,
+      "levels": 108
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 31.592,
-      "levels": 177
+      "std": 14.245,
+      "levels": 104
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 15.611,
-      "levels": 122
+      "std": 18.238,
+      "levels": 141
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 38.075,
-      "levels": 211
+      "std": 33.037,
+      "levels": 194
      }
     ]
    },
@@ -198,100 +198,7 @@
    ],
    "dominant": {
     "rgb": "#FFF3D9",
-    "share": 0.01335,
-    "constant": null
-   },
-   "pad_box": [
-    36,
-    318,
-    1368,
-    2580
-   ],
-   "windows": {
-    "declared": 8,
-    "passing": 7,
-    "median_std": 21.328,
-    "each": [
-     {
-      "at": [
-       605,
-       2248
-      ],
-      "std": 12.212,
-      "levels": 152
-     },
-     {
-      "at": [
-       868,
-       1628
-      ],
-      "std": 27.33,
-      "levels": 190
-     },
-     {
-      "at": [
-       750,
-       1376
-      ],
-      "std": 7.598,
-      "levels": 65
-     },
-     {
-      "at": [
-       218,
-       1984
-      ],
-      "std": 50.626,
-      "levels": 194
-     },
-     {
-      "at": [
-       290,
-       132
-      ],
-      "std": 21.328,
-      "levels": 179
-     },
-     {
-      "at": [
-       845,
-       678
-      ],
-      "std": 21.103,
-      "levels": 177
-     },
-     {
-      "at": [
-       5,
-       2172
-      ],
-      "std": 27.351,
-      "levels": 183
-     },
-     {
-      "at": [
-       794,
-       1189
-      ],
-      "std": 12.696,
-      "levels": 148
-     }
-    ]
-   },
-   "problems": [
-    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
-   ],
-   "ok": false
-  },
-  {
-   "of": "04_moments.png",
-   "size": [
-    1440,
-    3120
-   ],
-   "dominant": {
-    "rgb": "#FFF3D9",
-    "share": 0.00934,
+    "share": 0.014,
     "constant": null
    },
    "pad_box": [
@@ -303,22 +210,113 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 70.518,
+    "median_std": 15.777,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 75.618,
-      "levels": 201
+      "std": 9.529,
+      "levels": 83
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 66.875,
+      "std": 15.353,
+      "levels": 147
+     },
+     {
+      "at": [
+       750,
+       1376
+      ],
+      "std": 25.964,
+      "levels": 195
+     },
+     {
+      "at": [
+       218,
+       1984
+      ],
+      "std": 30.033,
+      "levels": 192
+     },
+     {
+      "at": [
+       290,
+       132
+      ],
+      "std": 24.469,
+      "levels": 188
+     },
+     {
+      "at": [
+       845,
+       678
+      ],
+      "std": 11.783,
+      "levels": 101
+     },
+     {
+      "at": [
+       5,
+       2172
+      ],
+      "std": 15.777,
+      "levels": 130
+     },
+     {
+      "at": [
+       794,
+       1189
+      ],
+      "std": 8.854,
+      "levels": 86
+     }
+    ]
+   },
+   "problems": [],
+   "ok": true
+  },
+  {
+   "of": "04_moments.png",
+   "size": [
+    1440,
+    3120
+   ],
+   "dominant": {
+    "rgb": "#FFF4DA",
+    "share": 0.00935,
+    "constant": null
+   },
+   "pad_box": [
+    36,
+    318,
+    1368,
+    2580
+   ],
+   "windows": {
+    "declared": 8,
+    "passing": 8,
+    "median_std": 74.89,
+    "each": [
+     {
+      "at": [
+       605,
+       2248
+      ],
+      "std": 74.89,
+      "levels": 202
+     },
+     {
+      "at": [
+       868,
+       1628
+      ],
+      "std": 69.657,
       "levels": 213
      },
      {
@@ -326,48 +324,48 @@
        750,
        1376
       ],
-      "std": 85.724,
-      "levels": 208
+      "std": 86.567,
+      "levels": 204
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 76.941,
-      "levels": 199
+      "std": 81.1,
+      "levels": 197
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 30.601,
-      "levels": 189
+      "std": 36.263,
+      "levels": 191
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 45.893,
-      "levels": 209
+      "std": 39.022,
+      "levels": 204
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 43.557,
-      "levels": 81
+      "std": 44.094,
+      "levels": 84
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 70.518,
-      "levels": 208
+      "std": 74.968,
+      "levels": 206
      }
     ]
    },
@@ -381,8 +379,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#3F3F41",
-    "share": 0.01364,
+    "rgb": "#373739",
+    "share": 0.01363,
     "constant": null
    },
    "pad_box": [
@@ -394,71 +392,71 @@
    "windows": {
     "declared": 8,
     "passing": 7,
-    "median_std": 33.209,
+    "median_std": 16.898,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 15.363,
-      "levels": 157
+      "std": 14.991,
+      "levels": 119
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 12.436,
-      "levels": 113
+      "std": 16.898,
+      "levels": 105
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 33.209,
-      "levels": 181
+      "std": 14.576,
+      "levels": 117
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 42.816,
-      "levels": 182
+      "std": 45.756,
+      "levels": 191
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 40.998,
-      "levels": 185
+      "std": 42.883,
+      "levels": 192
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 8.541,
-      "levels": 86
+      "std": 10.046,
+      "levels": 119
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 37.531,
-      "levels": 182
+      "std": 42.041,
+      "levels": 192
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 7.564,
-      "levels": 67
+      "std": 7.612,
+      "levels": 66
      }
     ]
    },
@@ -474,8 +472,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#3F3F41",
-    "share": 0.02292,
+    "rgb": "#373739",
+    "share": 0.02449,
     "constant": null
    },
    "pad_box": [
@@ -486,77 +484,77 @@
    ],
    "windows": {
     "declared": 8,
-    "passing": 6,
-    "median_std": 16.305,
+    "passing": 7,
+    "median_std": 14.065,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 7.346,
-      "levels": 69
+      "std": 14.065,
+      "levels": 99
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 7.866,
-      "levels": 63
+      "std": 7.83,
+      "levels": 62
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 16.736,
-      "levels": 150
+      "std": 10.072,
+      "levels": 119
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 8.683,
-      "levels": 73
+      "std": 35.291,
+      "levels": 205
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 45.251,
-      "levels": 197
+      "std": 42.523,
+      "levels": 191
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 23.55,
-      "levels": 181
+      "std": 10.173,
+      "levels": 111
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 16.305,
-      "levels": 171
+      "std": 16.441,
+      "levels": 114
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 13.622,
-      "levels": 136
+      "std": 8.039,
+      "levels": 65
      }
     ]
    },
    "problems": [
-    "2 of 8 400x200 windows of the pad box are under L_std 8.0"
+    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
    ],
    "ok": false
   },
@@ -568,7 +566,7 @@
    ],
    "dominant": {
     "rgb": "#FCE4B1",
-    "share": 0.00663,
+    "share": 0.00672,
     "constant": null
    },
    "pad_box": [
@@ -580,15 +578,15 @@
    "windows": {
     "declared": 8,
     "passing": 6,
-    "median_std": 9.2,
+    "median_std": 9.743,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 12.023,
-      "levels": 173
+      "std": 9.743,
+      "levels": 91
      },
      {
       "at": [
@@ -603,8 +601,8 @@
        750,
        1376
       ],
-      "std": 9.2,
-      "levels": 123
+      "std": 13.115,
+      "levels": 105
      },
      {
       "at": [
@@ -643,8 +641,8 @@
        794,
        1189
       ],
-      "std": 41.274,
-      "levels": 194
+      "std": 30.573,
+      "levels": 189
      }
     ]
    },
@@ -660,8 +658,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#FFEAD3",
-    "share": 0.01069,
+    "rgb": "#FFF3D7",
+    "share": 0.01005,
     "constant": null
    },
    "pad_box": [
@@ -673,71 +671,71 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 76.865,
+    "median_std": 76.057,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 41.995,
-      "levels": 197
+      "std": 76.057,
+      "levels": 210
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 81.29,
-      "levels": 233
+      "std": 76.098,
+      "levels": 205
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 38.819,
-      "levels": 183
+      "std": 72.31,
+      "levels": 209
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 73.899,
-      "levels": 237
+      "std": 41.064,
+      "levels": 198
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 80.747,
-      "levels": 232
+      "std": 71.855,
+      "levels": 215
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 76.865,
-      "levels": 242
+      "std": 79.027,
+      "levels": 216
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 73.835,
-      "levels": 197
+      "std": 77.687,
+      "levels": 205
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 79.9,
-      "levels": 235
+      "std": 70.185,
+      "levels": 218
      }
     ]
    },
@@ -751,8 +749,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#3A3A3C",
-    "share": 0.00858,
+    "rgb": "#373739",
+    "share": 0.00786,
     "constant": null
    },
    "pad_box": [
@@ -764,71 +762,71 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 34.527,
+    "median_std": 31.067,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 17.546,
-      "levels": 175
+      "std": 11.267,
+      "levels": 104
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 49.174,
-      "levels": 193
+      "std": 31.067,
+      "levels": 192
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 26.21,
-      "levels": 183
+      "std": 29.474,
+      "levels": 191
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 54.269,
-      "levels": 189
+      "std": 51.04,
+      "levels": 196
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 42.982,
-      "levels": 137
+      "std": 41.456,
+      "levels": 126
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 18.488,
-      "levels": 174
+      "std": 19.733,
+      "levels": 178
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 34.527,
-      "levels": 182
+      "std": 35.49,
+      "levels": 189
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 27.232,
-      "levels": 168
+      "std": 24.249,
+      "levels": 180
      }
     ]
    },
@@ -843,7 +841,7 @@
    ],
    "dominant": {
     "rgb": "#2D2C2A",
-    "share": 0.01363,
+    "share": 0.01374,
     "constant": null
    },
    "pad_box": [
@@ -855,46 +853,46 @@
    "windows": {
     "declared": 8,
     "passing": 7,
-    "median_std": 35.235,
+    "median_std": 39.781,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 30.333,
-      "levels": 210
+      "std": 39.781,
+      "levels": 223
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 71.835,
-      "levels": 231
+      "std": 56.257,
+      "levels": 209
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 2.711,
-      "levels": 49
+      "std": 3.372,
+      "levels": 90
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 35.235,
-      "levels": 171
+      "std": 33.06,
+      "levels": 183
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 27.716,
+      "std": 28.791,
       "levels": 99
      },
      {
@@ -902,7 +900,7 @@
        845,
        678
       ],
-      "std": 10.05,
+      "std": 9.472,
       "levels": 96
      },
      {
@@ -910,16 +908,16 @@
        5,
        2172
       ],
-      "std": 77.244,
-      "levels": 221
+      "std": 57.642,
+      "levels": 212
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 53.522,
-      "levels": 162
+      "std": 49.527,
+      "levels": 159
      }
     ]
    },
@@ -935,8 +933,8 @@
     3120
    ],
    "dominant": {
-    "rgb": "#3F3F41",
-    "share": 0.01882,
+    "rgb": "#373739",
+    "share": 0.01434,
     "constant": null
    },
    "pad_box": [
@@ -948,71 +946,71 @@
    "windows": {
     "declared": 8,
     "passing": 8,
-    "median_std": 45.271,
+    "median_std": 56.549,
     "each": [
      {
       "at": [
        605,
        2248
       ],
-      "std": 46.87,
-      "levels": 185
+      "std": 56.549,
+      "levels": 193
      },
      {
       "at": [
        868,
        1628
       ],
-      "std": 36.746,
-      "levels": 189
+      "std": 40.039,
+      "levels": 192
      },
      {
       "at": [
        750,
        1376
       ],
-      "std": 51.993,
-      "levels": 191
+      "std": 42.281,
+      "levels": 197
      },
      {
       "at": [
        218,
        1984
       ],
-      "std": 45.271,
-      "levels": 188
+      "std": 60.734,
+      "levels": 199
      },
      {
       "at": [
        290,
        132
       ],
-      "std": 11.228,
-      "levels": 64
+      "std": 73.79,
+      "levels": 213
      },
      {
       "at": [
        845,
        678
       ],
-      "std": 35.26,
-      "levels": 188
+      "std": 8.857,
+      "levels": 66
      },
      {
       "at": [
        5,
        2172
       ],
-      "std": 79.455,
-      "levels": 221
+      "std": 64.381,
+      "levels": 203
      },
      {
       "at": [
        794,
        1189
       ],
-      "std": 43.2,
-      "levels": 184
+      "std": 35.519,
+      "levels": 190
      }
     ]
    },
