@@ -18,6 +18,25 @@
 // 0.4506 puts the ink at Y <= 0.0501, which is OKLab L 0.368. `tools/check/dusk_ground.py`
 // measures it from the renders rather than quoting it, and the test reads what it wrote.
 //
+// AND THAT WAS STILL THE WRONG STATISTIC, WHICH IS THE THIRD TIME THIS DERIVATION HAS BEEN TAKEN
+// AGAINST SOMETHING A WORD DOES NOT LAND ON. A p50 is the median pixel of a sheet. A word does not
+// land on the median pixel of a sheet: every written stock in this library is PRINTED, and the
+// line a word is written on is darker than the paper either side of it. Measured at firing 47 by
+// `printed_rules` in the same tool, over the 21 ruled dusk renders, the horizontal rulings sit at
+// Y 0.3963 (`spiral_04_dusk`) to 0.4414, every one of them below the premise. The dusk body floor
+// of 5.0:1 against 0.3963 puts the ink at Y <= 0.0393, which is OKLab L 0.3375.
+//
+// The first derivation was taken against a stock that does not exist, the second against a stock
+// that does and a statistic that misses the line. The measurement is not "which sheet is darkest"
+// but "what is the darkest thing a line of writing is written ON", and it is now read that way.
+//
+// A SECOND NUMBER CAME OUT OF THE SAME MEASUREMENT AND NO INK ANSWERS IT. Legal, lined and spiral
+// carry a red vertical margin rule, which at dusk measures Y 0.2235 (`spiral_03_dusk`) -- half the
+// premise. 5.0:1 across it would need an ink at Y <= 0.0047, which is very nearly black and is not
+// a stationery colour. A word laid ACROSS the margin rule cannot be rescued by any ink in this
+// ladder; it is a placement defect, it is filed as its own queue item, and the ink below is
+// derived against the horizontal ruling with that case excluded and named rather than averaged in.
+//
 // `Pen.onWood` used to live here, for the few headings written straight onto the desk. It is gone
 // rather than retuned. It measured 4.94:1 against the flat colour the desk declares and 2.49:1
 // against the plate the app actually ships, and no value would have rescued it: the plank's grain
@@ -30,7 +49,19 @@ class Pen {
   static const ballpoint = Color(0xFF1F2A44);
 
   /// Teo: graphite.
-  static const graphite = Color(0xFF3A3A3C);
+  ///
+  /// Moved with the ceiling at firing 47 rather than chosen again. At #3A3A3C it read 5.411:1 on
+  /// the darkest SHEET the ink ladder used to be derived from and 4.824:1 on the darkest printed
+  /// RULING it is derived from now -- below the dusk body floor of 5.0, which the sweep in
+  /// `legible_on_what_it_is_on_test.dart` found the moment the ground was corrected. It is the
+  /// same miss `Pen.stamp` made and it was hidden by the same statistic.
+  ///
+  /// #323234 is not the lightest value that clears, because graphite is not furniture: it is a
+  /// person's pencil and it carries their words. What is held instead is its RELATIONSHIP to the
+  /// stamped face, which the palette already had and which the correction would otherwise have
+  /// flattened -- graphite sat OKLab 0.0192 below `stamp`, and at #323234 under a `stamp` of
+  /// #373739 it sits 0.0197 below. It reads 5.438:1 on `spiral_04_dusk`'s ruling.
+  static const graphite = Color(0xFF323234);
 
   /// A cheap biro pressed hard.
   static const biro = Color(0xFF141A2E);
@@ -39,19 +70,29 @@ class Pen {
   static const red = Color(0xFFA8322B);
 
   /// The stamped furniture face. Inside the `ink` step of docs/COLOR.md's ladder at OKLab
-  /// L 0.3684 -- it was 0.410 and outside it, then 0.3949 and inside a ceiling derived from the
-  /// wrong stock, and is now inside one derived from the darkest stock that ships.
+  /// L 0.3375 -- it was 0.410 and outside it, then 0.3949 and inside a ceiling derived from a
+  /// stock that does not exist, then 0.3684 and inside one derived from the darkest stock's
+  /// MEDIAN PIXEL, and is now inside one derived from the darkest line a word is written on.
   ///
-  /// At #464648 it read 4.490:1 on `sticky_pink_02_dusk` against a dusk body floor of 5.0. That
-  /// was invisible for four cycles because the ceiling it was tuned to came from `index_02_dusk`
-  /// by another name. At #3F3F41 it reads 5.009:1 there, and its day sweep improves with it:
-  /// worst 6.59:1 on the pink sticky where it was 5.91, best 9.33:1 on index where it was 8.36.
+  /// The three readings, all on committed renders, all by `tools/check/dusk_ground.py`:
   ///
-  /// The dusk margin is 0.009, which is thin on purpose: this is the LIGHTEST ink that clears the
-  /// floor, and stamp and margin are furniture and want to recede. It is arithmetic on committed
-  /// renders rather than a sampled reading, so it does not drift -- but a re-render that darkens
-  /// that sticky turns it red, and that is the test doing its job rather than a flake.
-  static const stamp = Color(0xFF3F3F41);
+  ///   #464648  4.490:1 on `sticky_pink_02_dusk` p50 --  4.003:1 on the darkest printed rule
+  ///   #3F3F41  5.009:1 on the same p50            --  4.466:1 on the darkest printed rule
+  ///   #373739  5.663:1 on the same p50            --  5.049:1 on the darkest printed rule
+  ///
+  /// The dusk floor is 5.0, so the second row is the one that was passing a test and failing the
+  /// screen: 24 of 54 runs below floor in `crops/dusk_pulse.png` at firing 39, and 17 of those 24
+  /// sit on a horizontal ruling reading 0.395-0.448 -- which is the printed rule, not the paper.
+  ///
+  /// The dusk margin is 0.049, still thin on purpose: this is the LIGHTEST ink that clears the
+  /// floor -- #38383A reads 4.97 and misses it -- and stamp and margin are furniture and want to
+  /// recede. It is arithmetic on committed renders rather than a sampled reading, so it does not
+  /// drift; a re-render that darkens a ruling turns it red, which is the test doing its job.
+  ///
+  /// What it does NOT buy, stated so nobody spends a firing expecting it: the six runs that cross
+  /// the red margin rule stay below floor, because 3.094:1 is what this ink reads there and no
+  /// ink in the ladder reads 5.0 across a ground at Y 0.2235.
+  static const stamp = Color(0xFF373739);
 
   /// Pencil, for the margin of a page.
   ///
@@ -64,9 +105,12 @@ class Pen {
   /// darkest ground it can land on -- which is the mistake this constant made twice. The first
   /// time it was tuned against the palest stock. The second time it was tuned against a ceiling
   /// derived from `index_02_dusk` under the name "aged", and cleared 5.0 against that and 4.490
-  /// against the sticky that is really darkest. At L 0.3684 it clears every stock in the library,
-  /// worst 6.59:1 on the pink sticky by day, and 5.009:1 on the same stock at dusk.
-  static const margin = Color(0xFF3F3F41);
+  /// against the sticky that is really darkest. The third time it was tuned against that sticky's
+  /// MEDIAN PIXEL, which is lighter than the ruling on any written stock in the library, and read
+  /// 4.466:1 on the darkest of them. At L 0.3375 it clears the ruling too: 5.049:1 on
+  /// `spiral_04_dusk`'s rule at dusk, and 5.663:1 on the pink sticky render it was last derived
+  /// against. On the flat `Paper.stickyPink` swatch the day sweep reads 7.45:1, where it was 6.59.
+  static const margin = Color(0xFF373739);
 
   /// How far a margin note is thinned toward the paper behind it.
   ///

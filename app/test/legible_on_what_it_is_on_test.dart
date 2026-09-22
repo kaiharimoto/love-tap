@@ -111,6 +111,15 @@ const _body = 4.5;
 /// against `Paper.stickyPink` since it was written. The same body floor of 5.0:1 against 0.4506
 /// puts the ink at Y <= 0.0501, which is OKLab L 0.368.
 ///
+/// AND A p50 IS STILL THE WRONG STATISTIC, which firing 47 measured and this file now reads. A
+/// word does not land on a sheet's median pixel; on every written stock in this library it lands
+/// on a PRINTED RULE, which is darker than the paper either side of it. The 21 ruled dusk renders
+/// carry rulings at Y 0.3963 to 0.4414 -- every one below the premise -- and the same floor of
+/// 5.0:1 against the darkest of them puts the ink at Y <= 0.0393, OKLab L 0.3375. The dusk test at
+/// the end of this file reads that number out of `evidence/dusk_ground.json` rather than either
+/// p50, and `tools/check/dusk_ground_selftest.py` is where the ruler that produces it earns its
+/// place against 21 day/dusk pairs.
+///
 /// The ceiling stays at 0.40 because that is what the ladder declares and this file does not get
 /// to move it; what the re-derivation binds is the CONTRAST, and that is checked against the
 /// measured library in the dusk test at the end of this file rather than inferred from a swatch.
@@ -188,7 +197,7 @@ Color _thinned(Color ink, double alpha, Color ground) => Color.lerp(ground, ink,
 ///
 /// Seven of the eight entries that used to be here were `Pen.margin`, which was #6B6B6E: OKLab
 /// L 0.529, sitting in the `mid` band, which is where shadows live. It was a shadow that had been
-/// asked to spell. At L 0.3684 it clears every stock in the library, worst 6.59:1 on the pink
+/// asked to spell. At L 0.3375 it clears every stock in the library, worst 7.45:1 on the pink
 /// sticky, so all seven are gone from this list because they are gone from the build.
 ///
 /// What is left is a red pen on a pink sticky note, which is a real pair and a genuinely hard
@@ -338,10 +347,17 @@ void main() {
 // could be the premise of the whole ink ladder while no `aged` render existed: a flat swatch is
 // not a stock, and nothing was comparing the two.
 //
-// `tools/check/dusk_ground.py` measures the median luminance of every render in `assets/paper`
-// and writes `evidence/dusk_ground.json`. This reads that file, takes the darkest dusk ground it
-// found, and asks the achromatic inks for the dusk body floor against it -- which is the law's own
-// derivation, applied to the library the law is about.
+// `tools/check/dusk_ground.py` measures every render in `assets/paper` and writes
+// `evidence/dusk_ground.json`. This reads that file, takes the darkest ground it found, and asks
+// the achromatic inks for the dusk body floor against it -- which is the law's own derivation,
+// applied to the library the law is about.
+//
+// WHICH GROUND, AND WHY IT CHANGED AT FIRING 47. It used to read `darkest_dusk.p50`: the median
+// pixel of the darkest sheet. That is not a ground a word lands on. It lands on the printed rule,
+// and this now reads `written_ground.y` -- the darkest horizontal ruling over every ruled dusk
+// render. The p50 is still in the report and still asserted below, because an ink that clears the
+// rule and misses the sheet would mean the ruling is no longer the binding ground and this file
+// should be read again.
 //
 // ACHROMATIC ONLY, and that is the law as written rather than an exemption invented here. §2
 // binds an achromatic ink to L <= 0.40 because it carries body text; a chromatic one is allowed
@@ -350,13 +366,42 @@ void main() {
 // measured number, the way `_knownBelowFloor` already holds `red on stickyPink`, rather than
 // being silently excluded.
 //
-// Re-break: put `Pen.stamp` and `Pen.margin` back to #464648 and this fails at 4.490:1 against
-// sticky_pink_02_dusk, naming the stock.
+// Re-break: put `Pen.stamp` and `Pen.margin` back to #3F3F41 and this fails at 4.466:1 against
+// `spiral_04_dusk`'s ruling, naming the stock. Back to #464648 and it fails at 4.003:1.
 
-/// Chromatic inks below the dusk floor on the darkest ground, written down with what they measure.
-/// It may only shrink, like its day-lit sibling above.
-const _knownBelowFloorAtDusk = <String, double>{
-  'red': 3.17,
+/// Chromatic inks below the dusk floor on the darkest ground, written down with what they measure
+/// AND with the luminance of the ink that measured it. It may only shrink, like its day-lit
+/// sibling above.
+///
+/// THE RATIO IS NOT THE RATCHET, AND FIRING 47 IS WHY. This used to hold `red: 3.17` alone and
+/// assert that the ratio could not fall. A ratio is (ground + 0.05) / (ink + 0.05), so it falls
+/// when the GROUND gets darker just as readily as when the ink gets lighter -- and moving the
+/// derivation from the darkest sheet (Y 0.4506) to the darkest printed rule (Y 0.3963) took red
+/// from 3.17:1 to 2.83:1 without touching a single colour. That is a harder ground, not a worse
+/// ink, and a ratchet that cannot tell the two apart fails on the first honest correction and
+/// then gets loosened, which is how a ratchet stops meaning anything.
+///
+/// So the thing held still is the INK, whose luminance this file does control: `y` may not rise.
+/// The ratio is kept beside it and checked against the ground of the day, so the entry cannot go
+/// stale and be believed -- if the ground moves, the recorded ratio has to be re-measured and the
+/// commit that does it says which ground it was taken against.
+class _KnownBelowFloor {
+  const _KnownBelowFloor(this.ratio, this.y, this.against);
+
+  /// What it measured, on the ground named in [against].
+  final double ratio;
+
+  /// The ink's own relative luminance when that was measured. This is the ratchet.
+  final double y;
+
+  /// The ground the ratio was taken against, so a moved ground is visible rather than absorbed.
+  final String against;
+}
+
+const _knownBelowFloorAtDusk = <String, _KnownBelowFloor>{
+  // Re-measured at firing 47 against the printed ruling, which is 0.0543 darker than the sheet
+  // p50 it used to be taken against. Red did not move: 0.1553 chroma, L 0.494, Y 0.1086.
+  'red': _KnownBelowFloor(2.83, 0.1086, 'spiral_04_dusk ruling at Y 0.3963'),
 };
 
 /// Read once, so a missing or malformed report fails loudly rather than skipping the test.
@@ -372,11 +417,19 @@ Map<String, dynamic> _duskGround() {
 }
 
 void _theDarkestGroundThatShips() {
-  test('every achromatic ink clears the dusk floor on the darkest stock that actually ships', () {
+  test('every achromatic ink clears the dusk floor on the darkest line a word is written on', () {
     final report = _duskGround();
-    final darkest = report['darkest_dusk'] as Map<String, dynamic>;
-    final stock = darkest['stock'] as String;
-    final groundY = (darkest['p50'] as num).toDouble();
+    final written = report['written_ground'] as Map<String, dynamic>?;
+    if (written == null) {
+      fail('evidence/dusk_ground.json has no `written_ground`. Regenerate it with '
+          '`python3 tools/check/dusk_ground.py --out evidence/dusk_ground.json`; a report from '
+          'before firing 47 reads the darkest SHEET and not the darkest RULE, and the ink is no '
+          'longer derived from the sheet.');
+    }
+    final stock = written['stock'] as String;
+    final groundY = (written['y'] as num).toDouble();
+    final sheet = report['darkest_dusk'] as Map<String, dynamic>;
+    final sheetY = (sheet['p50'] as num).toDouble();
 
     // The measurement is of the library, so say how much of it was read. A floor met because the
     // sweep shrank is the failure WORKER_PROMPT §3d's population clause exists for.
@@ -385,6 +438,18 @@ void _theDarkestGroundThatShips() {
         reason: 'the dusk library had 27 renders when this was written and has '
             '${counted['dusk']}. A darkest-ground floor is only as good as the set it is the '
             'darkest of, so this may not fall.');
+    // The same clause for the rules themselves: the binding number is the darkest of 21, and a
+    // ruling that stops being FOUND would lift the ground without lightening a single pixel.
+    expect((written['counted'] as num).toInt(), greaterThanOrEqualTo(21),
+        reason: '21 ruled dusk renders carried a printed ruling when this was written and '
+            '${written['counted']} do now. The ink ceiling is the darkest of that set, so a '
+            'ruling the tool stops finding is a floor that rises for free.');
+    // And the rule has to still be the darker of the two. If a re-render ever takes a SHEET below
+    // its own ruling, the derivation above is against the wrong one of them again.
+    expect(groundY, lessThan(sheetY),
+        reason: 'the darkest printed rule ($groundY on $stock) is no longer darker than the '
+            'darkest sheet ($sheetY on ${sheet['stock']}), so the ink is being derived against '
+            'the lighter of the two. Read docs/COLOR.md §2 again before touching this.');
 
     var walked = 0;
     final below = <String, double>{};
@@ -397,9 +462,18 @@ void _theDarkestGroundThatShips() {
         final known = _knownBelowFloorAtDusk[e.key];
         expect(known, isNotNull,
             reason: '${e.key} is chromatic and is not written down in _knownBelowFloorAtDusk');
-        expect(r, greaterThanOrEqualTo(known! - 0.01),
-            reason: '${e.key} was $known:1 on $stock and is now ${r.toStringAsFixed(2)}:1, '
-                'which is the wrong direction');
+        // The ratchet: the INK may not get lighter. A ground that gets darker is allowed to take
+        // the ratio down with it, because that is the ground telling the truth.
+        expect(_lum(e.value), lessThanOrEqualTo(known!.y + 0.0005),
+            reason: '${e.key} was Y ${known.y} when it was written down and is now '
+                '${_lum(e.value).toStringAsFixed(4)}. A chromatic ink in this list may only get '
+                'darker; it is already below the floor.');
+        // And the entry may not go stale: what it says it measures has to be what it measures on
+        // today's ground, or the number beside it is decoration.
+        expect(r, closeTo(known.ratio, 0.02),
+            reason: '${e.key} is written down as ${known.ratio}:1 against ${known.against} and '
+                'reads ${r.toStringAsFixed(2)}:1 on $stock at Y $groundY. Re-measure the entry '
+                'and say in the commit which ground moved.');
         continue;
       }
       if (r < _duskBody) below['${e.key} on $stock'] = r;
@@ -408,8 +482,8 @@ void _theDarkestGroundThatShips() {
     expect(walked, _inks.length,
         reason: 'the sweep read $walked of ${_inks.length} inks');
     expect(below, isEmpty,
-        reason: 'these achromatic inks are below $_duskBody:1 on $stock, which at Y p50 '
-            '$groundY is the darkest ground a word can land on in this build: '
+        reason: 'these achromatic inks are below $_duskBody:1 on $stock, whose printed ruling at '
+            'Y $groundY is the darkest ground a word can land on in this build: '
             '${below.entries.map((e) => '${e.key} at ${e.value.toStringAsFixed(3)}:1').join(', ')}'
             '. docs/COLOR.md §2 derives the ink ceiling from exactly this stock, so an ink that '
             'misses here is an ink the law does not actually permit.');

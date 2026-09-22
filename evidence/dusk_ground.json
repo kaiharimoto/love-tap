@@ -33,6 +33,554 @@
    "sticky_yellow_02_dusk"
   ]
  },
+ "written_ground": {
+  "what": "the printed horizontal rule of a written stock at dusk -- the line a word is written ON, which is the ground the band hugging its letters is taken over",
+  "stock": "spiral_04_dusk",
+  "y": 0.3963,
+  "counted": 21,
+  "ink_at_or_below": 0.0393,
+  "lighter_than_law_premise_by": 0.1565,
+  "rules": {
+   "spiral_04_dusk": 0.3963,
+   "lined_04_dusk": 0.4015,
+   "spiral_02_dusk": 0.4015,
+   "spiral_03_dusk": 0.4021,
+   "index_02_dusk": 0.4026,
+   "index_01_dusk": 0.4045,
+   "legal_02_dusk": 0.4059,
+   "legal_01_dusk": 0.4063,
+   "lined_01_dusk": 0.4086,
+   "spiral_01_dusk": 0.4086,
+   "lined_02_dusk": 0.4092,
+   "lined_03_dusk": 0.4092,
+   "graph_03_dusk": 0.4205,
+   "graph_04_dusk": 0.4303,
+   "looseleaf_03_dusk": 0.4317,
+   "looseleaf_02_dusk": 0.4346,
+   "looseleaf_01_dusk": 0.4365,
+   "graph_01_dusk": 0.4391,
+   "graph_02_dusk": 0.4394,
+   "looseleaf_04_dusk": 0.4414,
+   "receipt_01_dusk": 0.5675
+  }
+ },
+ "margin_rule": {
+  "what": "the red vertical margin rule, which a word is written BESIDE. A run laid across it is a placement defect and no ink in the ladder answers it",
+  "stock": "spiral_03_dusk",
+  "y": 0.2235,
+  "counted": 10,
+  "ink_at_or_below": 0.0047,
+  "rules": {
+   "spiral_03_dusk": 0.2235,
+   "lined_03_dusk": 0.224,
+   "lined_02_dusk": 0.2268,
+   "lined_04_dusk": 0.2268,
+   "lined_01_dusk": 0.2271,
+   "spiral_04_dusk": 0.2281,
+   "spiral_01_dusk": 0.2339,
+   "legal_02_dusk": 0.2349,
+   "spiral_02_dusk": 0.2355,
+   "legal_01_dusk": 0.2384
+  }
+ },
+ "printed": {
+  "graph_01": {
+   "horizontal": {
+    "n": 41,
+    "pitch": 41,
+    "y": 0.6375,
+    "darkest": 0.5635
+   }
+  },
+  "graph_01_dusk": {
+   "horizontal": {
+    "n": 41,
+    "pitch": 41,
+    "y": 0.4391,
+    "darkest": 0.3677
+   }
+  },
+  "graph_02": {
+   "horizontal": {
+    "n": 42,
+    "pitch": 41,
+    "y": 0.6032,
+    "darkest": 0.5551
+   }
+  },
+  "graph_02_dusk": {
+   "horizontal": {
+    "n": 42,
+    "pitch": 41,
+    "y": 0.4394,
+    "darkest": 0.367
+   }
+  },
+  "graph_03": {
+   "horizontal": {
+    "n": 41,
+    "pitch": 41,
+    "y": 0.5789,
+    "darkest": 0.5469
+   }
+  },
+  "graph_03_dusk": {
+   "horizontal": {
+    "n": 41,
+    "pitch": 41,
+    "y": 0.4205,
+    "darkest": 0.3438
+   }
+  },
+  "graph_04": {
+   "horizontal": {
+    "n": 42,
+    "pitch": 41,
+    "y": 0.5998,
+    "darkest": 0.5589
+   }
+  },
+  "graph_04_dusk": {
+   "horizontal": {
+    "n": 42,
+    "pitch": 41,
+    "y": 0.4303,
+    "darkest": 0.3469
+   }
+  },
+  "index_01": {
+   "horizontal": {
+    "n": 10,
+    "pitch": 80,
+    "y": 0.5404,
+    "darkest": 0.3481
+   }
+  },
+  "index_01_dusk": {
+   "horizontal": {
+    "n": 10,
+    "pitch": 80,
+    "y": 0.4045,
+    "darkest": 0.2499
+   }
+  },
+  "index_02": {
+   "horizontal": {
+    "n": 10,
+    "pitch": 80,
+    "y": 0.5398,
+    "darkest": 0.3481
+   }
+  },
+  "index_02_dusk": {
+   "horizontal": {
+    "n": 10,
+    "pitch": 80,
+    "y": 0.4026,
+    "darkest": 0.2595
+   }
+  },
+  "legal_01": {
+   "horizontal": {
+    "n": 21,
+    "pitch": 72,
+    "y": 0.554,
+    "darkest": 0.54
+   },
+   "margin": {
+    "at": [
+     317,
+     322
+    ],
+    "y": 0.3757,
+    "warmth": 0.426
+   }
+  },
+  "legal_01_dusk": {
+   "horizontal": {
+    "n": 21,
+    "pitch": 72,
+    "y": 0.4063,
+    "darkest": 0.3596
+   },
+   "margin": {
+    "at": [
+     317,
+     322
+    ],
+    "y": 0.2384,
+    "warmth": 0.39
+   }
+  },
+  "legal_02": {
+   "horizontal": {
+    "n": 21,
+    "pitch": 72,
+    "y": 0.551,
+    "darkest": 0.5376
+   },
+   "margin": {
+    "at": [
+     297,
+     302
+    ],
+    "y": 0.3766,
+    "warmth": 0.43
+   }
+  },
+  "legal_02_dusk": {
+   "horizontal": {
+    "n": 21,
+    "pitch": 72,
+    "y": 0.4059,
+    "darkest": 0.3669
+   },
+   "margin": {
+    "at": [
+     297,
+     301
+    ],
+    "y": 0.2349,
+    "warmth": 0.392
+   }
+  },
+  "lined_01": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.5474,
+    "darkest": 0.5327
+   },
+   "margin": {
+    "at": [
+     293,
+     297
+    ],
+    "y": 0.3609,
+    "warmth": 0.362
+   }
+  },
+  "lined_01_dusk": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.4086,
+    "darkest": 0.3586
+   },
+   "margin": {
+    "at": [
+     293,
+     297
+    ],
+    "y": 0.2271,
+    "warmth": 0.338
+   }
+  },
+  "lined_02": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.5458,
+    "darkest": 0.5366
+   },
+   "margin": {
+    "at": [
+     296,
+     301
+    ],
+    "y": 0.3598,
+    "warmth": 0.364
+   }
+  },
+  "lined_02_dusk": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.4092,
+    "darkest": 0.3615
+   },
+   "margin": {
+    "at": [
+     297,
+     300
+    ],
+    "y": 0.2268,
+    "warmth": 0.342
+   }
+  },
+  "lined_03": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.5458,
+    "darkest": 0.5286
+   },
+   "margin": {
+    "at": [
+     294,
+     298
+    ],
+    "y": 0.3593,
+    "warmth": 0.366
+   }
+  },
+  "lined_03_dusk": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.4092,
+    "darkest": 0.3653
+   },
+   "margin": {
+    "at": [
+     294,
+     298
+    ],
+    "y": 0.224,
+    "warmth": 0.342
+   }
+  },
+  "lined_04": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.5404,
+    "darkest": 0.5271
+   },
+   "margin": {
+    "at": [
+     297,
+     301
+    ],
+    "y": 0.3656,
+    "warmth": 0.375
+   }
+  },
+  "lined_04_dusk": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.4015,
+    "darkest": 0.3526
+   },
+   "margin": {
+    "at": [
+     297,
+     301
+    ],
+    "y": 0.2268,
+    "warmth": 0.347
+   }
+  },
+  "looseleaf_01": {
+   "horizontal": {
+    "n": 27,
+    "pitch": 58,
+    "y": 0.585,
+    "darkest": 0.5763
+   }
+  },
+  "looseleaf_01_dusk": {
+   "horizontal": {
+    "n": 27,
+    "pitch": 58,
+    "y": 0.4365,
+    "darkest": 0.3878
+   }
+  },
+  "looseleaf_02": {
+   "horizontal": {
+    "n": 26,
+    "pitch": 58,
+    "y": 0.581,
+    "darkest": 0.5697
+   }
+  },
+  "looseleaf_02_dusk": {
+   "horizontal": {
+    "n": 26,
+    "pitch": 58,
+    "y": 0.4346,
+    "darkest": 0.3866
+   }
+  },
+  "looseleaf_03": {
+   "horizontal": {
+    "n": 27,
+    "pitch": 58,
+    "y": 0.5753,
+    "darkest": 0.5578
+   }
+  },
+  "looseleaf_03_dusk": {
+   "horizontal": {
+    "n": 27,
+    "pitch": 58,
+    "y": 0.4317,
+    "darkest": 0.3776
+   }
+  },
+  "looseleaf_04": {
+   "horizontal": {
+    "n": 26,
+    "pitch": 58,
+    "y": 0.5853,
+    "darkest": 0.5705
+   }
+  },
+  "looseleaf_04_dusk": {
+   "horizontal": {
+    "n": 26,
+    "pitch": 58,
+    "y": 0.4414,
+    "darkest": 0.3845
+   }
+  },
+  "receipt_01": {
+   "horizontal": {
+    "n": 8,
+    "pitch": 12,
+    "y": 0.8217,
+    "darkest": 0.6206
+   }
+  },
+  "receipt_01_dusk": {
+   "horizontal": {
+    "n": 8,
+    "pitch": 19,
+    "y": 0.5675,
+    "darkest": 0.4395
+   }
+  },
+  "spiral_01": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.5407,
+    "darkest": 0.5312
+   },
+   "margin": {
+    "at": [
+     295,
+     300
+    ],
+    "y": 0.3641,
+    "warmth": 0.356
+   }
+  },
+  "spiral_01_dusk": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.4086,
+    "darkest": 0.352
+   },
+   "margin": {
+    "at": [
+     296,
+     300
+    ],
+    "y": 0.2339,
+    "warmth": 0.334
+   }
+  },
+  "spiral_02": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.5411,
+    "darkest": 0.5321
+   },
+   "margin": {
+    "at": [
+     294,
+     299
+    ],
+    "y": 0.3651,
+    "warmth": 0.356
+   }
+  },
+  "spiral_02_dusk": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.4015,
+    "darkest": 0.3546
+   },
+   "margin": {
+    "at": [
+     294,
+     299
+    ],
+    "y": 0.2355,
+    "warmth": 0.338
+   }
+  },
+  "spiral_03": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.5349,
+    "darkest": 0.5197
+   },
+   "margin": {
+    "at": [
+     292,
+     296
+    ],
+    "y": 0.3563,
+    "warmth": 0.362
+   }
+  },
+  "spiral_03_dusk": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.4021,
+    "darkest": 0.3569
+   },
+   "margin": {
+    "at": [
+     292,
+     296
+    ],
+    "y": 0.2235,
+    "warmth": 0.339
+   }
+  },
+  "spiral_04": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.5396,
+    "darkest": 0.528
+   },
+   "margin": {
+    "at": [
+     293,
+     298
+    ],
+    "y": 0.3542,
+    "warmth": 0.364
+   }
+  },
+  "spiral_04_dusk": {
+   "horizontal": {
+    "n": 23,
+    "pitch": 66,
+    "y": 0.3963,
+    "darkest": 0.3492
+   },
+   "margin": {
+    "at": [
+     294,
+     298
+    ],
+    "y": 0.2281,
+    "warmth": 0.344
+   }
+  }
+ },
  "stocks": {
   "graph_01": {
    "p2": 0.2814,

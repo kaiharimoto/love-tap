@@ -159,6 +159,54 @@ written down in the test's dusk ratchet rather than excluded from the sweep.
 The floors did not move and no step of the ladder was redrawn. What changed is which stock the
 derivation is taken against, and it is now a stock that can be opened.
 
+**Amended 2026-09-22, because a sheet's median pixel is not a ground a word lands on.** The
+correction above fixed *which stock* and left *which statistic* alone, and the statistic was the
+half that was wrong. Every written stock in this library is **printed**: a horizontal ruling that a
+line of writing sits on, and — on legal, lined and spiral — a red vertical margin rule. Both are
+darker than the paper either side of them, and `tools/check/legibility.py` takes a run's ground
+over the band hugging its letters, which on these stocks is as tall as the rule pitch. So the rule
+is in the band of **every** body run on written stock, and the p50 of the sheet never sees it.
+
+Measured by `printed_rules` in `tools/check/dusk_ground.py` over the committed renders, with no
+capture involved:
+
+| ground | darkest at dusk | Y | what it asks of an achromatic ink |
+|---|---|---:|---|
+| the sheet's median pixel | `sticky_pink_02_dusk` | 0.4506 | Y ≤ 0.0501 · L 0.368 |
+| **the horizontal ruling** | `spiral_04_dusk` | **0.3963** | **Y ≤ 0.0393 · L 0.3375** |
+| the red margin rule | `spiral_03_dusk` | 0.2235 | Y ≤ 0.0047 · L 0.168 |
+
+The ruling is the one the ceiling is derived against, because **a ruling is a ground a word
+legitimately lands on — that is what ruled paper is for.** All 21 ruled dusk renders carry one and
+every one of them is darker than the premise; the ruling band is 0.3963–0.4414.
+
+**The margin rule is not, and this section does not try to buy it with an ink.** At Y 0.2235 the
+dusk floor would need an ink at Y ≤ 0.0047, which is L 0.168 — not a stationery colour, and a step
+this ladder does not have. A word laid *across* the red margin rule cannot be carried by any ink
+the ladder permits, at any lightness, in either light. That is a **placement** defect: on a legal
+pad you write beside the margin, not through it. It is filed as
+`a-word-is-written-across-the-printed-margin-rule` with its measurement, and it is named here so
+that the next derivation does not quietly average it into the ruling and produce a black ink.
+
+What it cost: `Pen.stamp` and `Pen.margin` were `#3F3F41`, which is 5.009:1 against the sheet p50
+above and **4.466:1 against the darkest ruling**, under this section's own dusk floor — the same
+shape of miss as `#464648`'s, one statistic further in. They are now `#373739`, OKLab L 0.3375,
+which reads 5.049:1 on that ruling and 5.663:1 on the pink sticky. `#38383A` reads 4.973 and misses,
+so this is still the lightest ink that clears, which is what furniture should be.
+
+Independently confirmed on the capture that is the reason this was looked at. Of the 24 runs below
+floor in `crops/dusk_pulse.png` at firing 39, **17 sit on a horizontal ruling and read 0.3950 to
+0.4478** — against a library ruling measured at 0.4063 for `legal_01_dusk` and 0.4365 for
+`looseleaf_01_dusk`, two instruments agreeing to within a hundredth. **Six cross a red margin rule**
+and are the six worst on the screen. **One is the clipping artefact** already filed as
+`the-dusk-tally-is-a-moving-ground-tally-and-can-be-closed-by-the-tool`. Three causes, one screen,
+and only the first of them is an ink.
+
+The floors did not move and no step of the ladder was redrawn, again. What changed is the
+statistic, and `tools/check/dusk_ground_selftest.py` is where the ruler that produces it earns its
+place: 21 day/dusk pairs, every day ruling above its dusk twin, and margin < ruling < premise
+printed in that order.
+
 **Amended 2026-09-16, by a measurement taken while implementing it.** As first written this
 section put *every* pen, pencil and stamp that carries a word at L ≤ 0.40, and §10's own table
 then checked five inks and quietly omitted the sixth. The sixth is `Pen.red`, which is L 0.494,
