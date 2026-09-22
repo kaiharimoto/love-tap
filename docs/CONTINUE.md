@@ -294,6 +294,25 @@ reports. Cycle 2 cost ~1.2M subagent tokens and 583 tool calls and was worth eve
   three minutes — it refuted a nine-firing-old premise in four seconds — and use `./capture.sh` to
   close the item.
 
+- **`blender/run.sh` and `capture.sh`'s siblings are not all executable in a fresh checkout, and
+  the error names the wrong thing.** `./blender/run.sh …` came back `Permission denied`, which
+  reads like a sandbox refusal and is a missing `+x` bit: `bash blender/run.sh …` runs it fine and
+  is what to use rather than `chmod`, which puts a mode change in the diff for nothing. Firing 48
+  lost one background job to it.
+
+- **A font rebuild is NOT byte-reproducible, whatever an earlier note says, and the difference is
+  not a clock.** `tools/handwriting/build.py` at the default seed writes a NoorHand.ttf of exactly
+  the shipped 319,452 bytes with a different sha256. `head.created` and `head.modified` are pinned
+  and identical; exactly two tables differ, GSUB and the `head` checksum that follows it, so it is
+  feaLib's lookup packing and not the outlines. **It is behaviourally identical** —
+  `tools/check/hands.py` reads the same counts and the same single `room` pair from both files. So
+  verify a rebuild by SHAPING it, never by comparing hashes, and do not read a changed sha as a
+  changed font.
+
+- **`tools/check/hands.py` and `tools/check/composited.py` need `uharfbuzz`, `fonttools` and
+  `scipy`**, which a fresh container has none of: `python3 -m pip install uharfbuzz fonttools
+  scipy`. `numpy` and `pillow` are still needed for everything else under `tools/check/`.
+
 ## 6. Secrets, which are failure conditions
 
 `TS_AUTHKEY`, a CA private key, or a pairing secret in any committed file fails the whole build.

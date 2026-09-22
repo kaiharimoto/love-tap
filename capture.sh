@@ -406,6 +406,28 @@ python3 tools/check/flat_fill.py --out evidence/flat_fill.json >"$LOG/flat_fill.
 [ -s evidence/flat_fill.json ] \
   || note_missing "flat_fill.json" "tools/check/flat_fill.py wrote no ruler; see $LOG/flat_fill.txt"
 
+# The fourth and fifth, read here for the reason the three above are: a ruler the run does not
+# re-read drifts, and it drifts towards whoever last ran it by hand. Both were written at firing 48
+# and both exit non-zero on a breached floor, which is today's state, so neither exit code is read
+# as a missing artifact.
+#
+#   hands.py       does a letter that comes round again get a different outline, measured over the
+#                  runs the app DECLARES rather than over `eeeeeeee`, which the app never draws.
+#   composited.py  is a feeling object lit by the same lamp as the paper it is lying on, measured
+#                  over the object's own opaque pixels between the day still and the dusk one.
+#
+# `composited.py` needs both stills, so it is skipped rather than booked missing when the dusk
+# crop is not in this run.
+for T in evidence/*.text.json; do
+  [ -f "$T" ] || continue
+  python3 tools/check/hands.py "$T" --out "$LOG/$(basename "${T%.text.json}").hands.json" \
+    >/dev/null 2>&1 || true
+done
+if [ -f evidence/01_pulse.png ] && [ -f evidence/crops/dusk_pulse.png ]; then
+  python3 tools/check/composited.py evidence/01_pulse.png evidence/crops/dusk_pulse.png \
+    --out "$LOG/composited.json" >/dev/null 2>&1 || true
+fi
+
 # What moved since the last capture, measured against evidence/.previous, and then this capture
 # becomes the baseline for the next one. The rotation has to happen here rather than by hand:
 # nothing rotated it for a long time, so every SSIM in DIFF.json was unreproducible from the

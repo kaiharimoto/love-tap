@@ -6856,3 +6856,132 @@ shell running that very `pgrep`: the bracket trick hides the pattern from *itsel
 sibling shell whose command line contains the literal string. `CLAUDE.md` warns about `pkill -f`
 for the same reason; this is the same hazard one door along. Wait on a PID, or on the log's last
 line.
+
+## Firing 48 — IMPLEMENT, cycle 3
+
+Ranks 4, 5, 7 and 8, in order. One of them was handed to me as closed and is not; two of them had
+their own account of themselves wrong; one needs renders and now says how many minutes of them.
+
+### The container gave me the stale branch ref this file already names by its sha
+
+`git checkout <branch>` rewound HEAD from `4cd77bc`, where the clone landed, to `3edfbf7` — seven
+days and fifty commits behind, and `3edfbf7` is the exact sha `loop/WORKER_PROMPT.md` §0 records
+from firing 25. The reflog said it in two lines. No deepening was needed and none would have
+helped: the tip's subjects are genuinely absent from the remote's history because it is not on that
+branch at all. Backed it up as `backup/stale-container-ref-3edfbf7`, moved the branch, dry run
+clean. Then re-read `CLAUDE.md` from disk, as §0 says to, because the copy in the prompt was seven
+days old.
+
+### Rank 4 was not closed, and ten minutes of arithmetic said so
+
+I was told it was closed in substance at firing 46 and asked to confirm it. `tools/check/tears.py`
+over all sixteen of firing 47's committed reports: **four of eleven stills still repeat a mask in
+frame.** 01_pulse `tear_049` ×2, 10_first_run `tear_053` ×2, 12_search `tear_049` ×2,
+14_media_viewer `tear_049` ×3 and `tear_011` ×2. Every one of them the chrome lane.
+
+The cause is one line. `TearLane.rowAt` is `base + row % span` and `chrome` had a span of 4;
+`PartnerStrip` asked for `4 + partner.index` and the pulse's their-sheet for `partner.index`, and
+`(4 + i) % 4 == i % 4`. The `+ 4` that was there to separate two lanes was exactly annihilated by
+the modulus. `search_query` wrote `_chromeRow = 0`, the viewer's caption wrote no row at all and
+`put-it-back` wrote 4 — all three the strip's row; `search-affordance` and `EmptySurface` both wrote
+a literal `row: 3`.
+
+**Which is firing 46's lane table one level down.** Its docstring says a base chosen next to its
+call site is a base nobody can check against the others, and then leaves every row *inside* the
+chrome lane to be chosen next to its call site. `ChromeRows` is the other half. A furniture lane no
+longer wraps — a list's span is a window on content, a furniture lane's is one row per named piece
+— and the two rows it needed were being held by lanes that draw nothing: `pads`, for a `RegionPad`
+that passes `torn: false` (nothing in the whole evidence set draws `tear_037`), and `composer`,
+which is a piece of chrome and is a row now.
+
+### The test could not see it because it pumped a region and the app pumps a shell
+
+`app.dart` puts a `PartnerStrip` above every region, and that strip is chrome. Three of the four
+repeats are the shell colliding with the region, and a test that pumps `Scaffold(body: region)`
+cannot watch that happen. It pumps the Column the shell actually builds now, and a search-page case
+came with it and caught, within a minute of being written, that `search_query` and `empty.search`
+are both on the glass when nothing has been typed — a state the capture never reaches because the
+capture types a query. The re-break proves the case had to exist: with `PartnerStrip` back on
+`4 + partner.index` the search case fails and the pulse case does not see it.
+
+### And the strengthened test found the seventh site, which the source test had been renamed past
+
+`material/objects.dart` bound `lib.scrapTears` to a local and indexed *that* by
+`hashOf(feeling.id)`. `the_pool_is_indexed_in_one_place_test` matches `scrapTears\s*\[`, so the
+alias walked straight past it and the test stayed green over the call. **A source test that reads
+one spelling of a thing is a source test that can be renamed past**; it follows aliases now, and
+re-breaking it makes it name `lib/material/objects.dart:85` and the line.
+
+### Rank 5: the number everybody has been quoting is about a string the app never draws
+
+`eeeeeeee` is eight instances against five variants. Two of them *must* share an outline, so the
+minimum is 0.00 before a line of the generator is touched, and that zero has been read as a
+measurement of this app for two cycles. `tools/check/hands.py` measures the runs
+`<artifact>.text.json` declares instead: 19 of 53 repeated letters take an outline twice, and — the
+number nobody had — 14 of 384 glyphs take the same variant as the glyph before them, **one of them
+the same letter**. The two `o`s of `room` in the 51px Chat hero are the identical outline printed
+twice in a row, in the exact run the critic judges at three hundred percent.
+
+Earned against `--no-calt`: 27 of 53, 8, 96 against the shipped 19, 1, 14.
+
+Two things for whoever runs the tuning loop. `--hausdorff-min` is a flag now, and the build counts
+the variants that fell back to a non-distinct outline after twenty-four tries — 3 of 775 at 12.0 —
+because a floor raised too far stops making distinct variants and starts making the same one twice,
+and the font builds at the same size with the same glyph count and says nothing. And **firing 46's
+"the build is byte-reproducible" is wrong**: same 319,452 bytes, different sha256, `head.created`
+and `head.modified` pinned and identical, exactly two tables differing — GSUB and the head checksum
+that follows it. The outlines reproduce; feaLib's packing does not. It is behaviourally identical,
+so verify a rebuild by shaping and never by sha256.
+
+### Rank 7 needs renders, and the measurement is half an hour rather than four
+
+The app declares this one itself. `crops/dusk_pulse.surfaces.json` has the same object contributing
+`obj_candle_shadow_dusk.webp` and `obj_candle.webp` — no suffix, the day render — while all fourteen
+paper surfaces beside it are `*_dusk` stocks. `blender/objects/objects.py:541` is why:
+`if pass_kind == "object" and condition != "day": continue`. The generator skips an object's colour
+pass at dusk **on purpose**, so the render does not exist to be asked for. 25 objects, 25
+`_shadow_dusk`, zero `_dusk` bodies.
+
+The item says the spool is byte-identical at 0.02. It is not: over their own opaque pixels the two
+objects move 13.721 and 16.546 between the lights — a dusk grade and a re-rendered shadow do move a
+sprite. What is true is that they move **half as far as the paper they are lying on**: 0.499 and
+0.601 against the paper's 27.515. `tools/check/composited.py` is that, earned inside one frame,
+which is the cheapest form of the qualification — it is asked to separate the paper, which is
+relit, from the bodies, which are not, in the same pair of stills, and it reads the relit one at
+roughly twice the composited one.
+
+Timed one object: 106 seconds for both day passes at the shipped res 1200 / 64 samples. A dusk body
+is one more colour pass each, so the whole vocabulary is **about half an hour of Blender** — a
+different animal from the four-hour 240-frame fold re-render the fence names, and ADDRESS should
+decide it on that number rather than on the word *render*. Stopped there, as the steer says to.
+
+### Rank 8's headline has stopped being true, and its worst case is younger than its refutation
+
+603 surfaces declare a scale; 162 cover more than a tenth of their frame; 118 of those are drawn
+above their own resolution — so **44 are at or below it**, where the item says *not one* is. The
+desk plate is still exactly 2.102, unmoved in twenty-eight firings. But the six worst surfaces in
+the set are now `assets/tears/*_edge` at a flat 3.000, and **firing 44 created that class** — firing
+22, which refuted this item's remedy, measured paper and could not have seen it.
+
+The reason is a comment that is true of one file and false of its neighbour:
+`SIZES['tears'] = 1024  # masks are alpha only`. Right about the mask. Wrong about `_edge`, a lit
+relief render of the torn fibre, 1400×1400 at source, inheriting the mask's budget because it is in
+the same directory — and the fibre is the first thing a 3× magnification takes out. Repacked with
+the packer's own `convert()` and its own crop box, a named sample of six goes 0.851 MB → 3.654 MB,
+×4.30: **+35 MB on a 50 MB bundle** to reach about 2.2×. Same shape as firing 22's refutation, much
+worse number, and now on the item.
+
+One thing that could still change that answer and nobody has measured: since firing 44 the edge is
+drawn with `drawImageNine`, so a declared 3.000 is not a uniform magnification and the edge band is
+a thin strip of the render. Crop the band out of a committed still against its declared rect before
+anyone spends the 35 MB. No capture needed.
+
+### What the next firing should expect
+
+No capture was taken and none was needed; every number above is off committed files or a widget
+test. The four repeats are fixed in a test and **predicted** in the frame — check that prediction
+rather than assume it. `--frame-fatal` is still off in `capture.sh` and must not simply be switched
+on: a failed check there becomes `note_missing`, so a good still whose chrome repeats a mask would
+be booked MISSING, which is the same shape as the anomaly firing 47 filed against `dusk_pulse`.
+What that flag needs first is a way for `capture.sh` to record a failed check that is not an absent
+artifact.
