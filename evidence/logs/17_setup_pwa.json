@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "wait",
-   "ms": 2909
+   "ms": 2905
   },
   {
    "do": "shot",
-   "ms": 2661
+   "ms": 2546
   },
   {
    "do": "report",
-   "ms": 705
+   "ms": 704
   }
  ],
  "shots": [
@@ -26,7 +26,7 @@
    "out": "evidence/17_setup_pwa.png",
    "clip": null,
    "text_runs": 20,
-   "surfaces": 10
+   "surfaces": 14
   }
  ],
  "reports": [
@@ -36,7 +36,7 @@
    "tears": {},
    "stocks": {},
    "scroll": null,
-   "now": "2026-09-21T13:31:14.179Z",
+   "now": "2026-09-22T04:26:23.950Z",
    "driven_ms": 0,
    "seed": 20260903,
    "events": 0,
@@ -53,17 +53,22 @@
     "sequence": null
    },
    "blobs_pending": 0,
+   "pictures_pending": 0,
    "at": "17_setup_pwa.png"
   }
  ],
  "blob_waits": [
   {
    "at": "17_setup_pwa.png",
-   "waited_ms": 4,
-   "pending_at_shot": 0
+   "waited_ms": 7,
+   "pending_at_shot": 0,
+   "undrawn_at_shot": 0
   }
  ],
- "cold_ms": 1528,
+ "install_ms": 1706,
+ "cold_ms": 1706,
+ "reopened": false,
+ "events_at_open": 0,
  "problems": [],
  "ok": true
 }

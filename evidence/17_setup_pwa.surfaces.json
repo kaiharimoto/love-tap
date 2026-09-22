@@ -38,6 +38,38 @@
   ]
  },
  {
+  "asset": "assets/tears/tear_004.webp",
+  "src": [
+   1024,
+   824
+  ],
+  "composed": [
+   1024,
+   224
+  ],
+  "drawn": [
+   1380,
+   224
+  ],
+  "scale": 1.348,
+  "fit": "mask",
+  "slice": 0.4,
+  "fixed": [
+   1.348,
+   0.339
+  ],
+  "centre": [
+   1.348,
+   0
+  ],
+  "rect": [
+   29,
+   14,
+   1381,
+   232
+  ]
+ },
+ {
   "asset": "assets/paper/lined_01.webp",
   "src": [
    1073,
@@ -54,6 +86,34 @@
    13,
    1658,
    278
+  ]
+ },
+ {
+  "asset": "assets/tears/tear_004_edge.webp",
+  "src": [
+   1024,
+   824
+  ],
+  "drawn": [
+   1380,
+   224
+  ],
+  "scale": 1.685,
+  "fit": "nine",
+  "slice": 0.4,
+  "fixed": [
+   1.685,
+   0.339
+  ],
+  "centre": [
+   0,
+   0
+  ],
+  "rect": [
+   29,
+   14,
+   1381,
+   232
   ]
  },
  {
@@ -76,6 +136,38 @@
   ]
  },
  {
+  "asset": "assets/tears/tear_004.webp",
+  "src": [
+   1024,
+   824
+  ],
+  "composed": [
+   1024,
+   3296
+  ],
+  "drawn": [
+   1332,
+   4026
+  ],
+  "scale": 1.301,
+  "fit": "mask",
+  "slice": 0.4,
+  "fixed": [
+   1.301,
+   1.222
+  ],
+  "centre": [
+   1.301,
+   19.545
+  ],
+  "rect": [
+   42,
+   332,
+   1356,
+   4034
+  ]
+ },
+ {
   "asset": "assets/paper/looseleaf_01.webp",
   "src": [
    1073,
@@ -87,6 +179,34 @@
   ],
   "scale": 2.684,
   "fit": "cover",
+  "rect": [
+   42,
+   332,
+   1356,
+   4034
+  ]
+ },
+ {
+  "asset": "assets/tears/tear_004_edge.webp",
+  "src": [
+   1024,
+   824
+  ],
+  "drawn": [
+   1332,
+   4026
+  ],
+  "scale": 3,
+  "fit": "nine",
+  "slice": 0.4,
+  "fixed": [
+   1.626,
+   3
+  ],
+  "centre": [
+   0,
+   12.431
+  ],
   "rect": [
    42,
    332,
