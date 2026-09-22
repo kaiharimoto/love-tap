@@ -1,0 +1,29 @@
+{
+ "cycle": 3,
+ "stage": "IMPLEMENT",
+ "firing": 47,
+ "commit": "24277eb",
+ "what": "Rank 6's ink half: the ink ceiling re-derived against the printed rule rather than a sheet's median pixel, and the whole evidence set re-captured.",
+ "dusk_pulse": {
+  "below_floor_before": 24,
+  "below_floor_after": 5,
+  "runs_before": 53,
+  "runs_after": 53,
+  "all_survivors_cross_a_margin_rule": true
+ },
+ "set": {
+  "below_floor_before": "37 of 432",
+  "below_floor_after": "36 of 429",
+  "artifacts": "15 of 17"
+ },
+ "gate": "pack_assets --seed=year twice, flutter analyze clean, flutter test 227/227, dusk_ground_selftest passes, four re-breaks fail",
+ "not_closed": [
+  "the-dusk-screen-fails-31-of-its-54-runs"
+ ],
+ "filed": [
+  "a-word-is-written-across-the-printed-margin-rule",
+  "the-alpha-a-word-may-composite-at-does-not-clear-the-floor-the-same-law-sets",
+  "a-run-reads-the-line-above-it-as-its-own-ground",
+  "the-manifest-books-an-artifact-missing-that-every-ruler-in-the-run-reads"
+ ]
+}

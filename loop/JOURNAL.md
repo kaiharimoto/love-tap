@@ -6691,3 +6691,168 @@ seed came out sha256-identical to the shipped file. Use `--out <scratch> --no-ma
 ffmpeg bot-check interstitial firing 45 hit at johnvansickle.com has cleared upstream; ffmpeg 7.0.2
 installed. `python3 -m pip install numpy pillow` is still needed, and `scipy` and `uharfbuzz` on top
 of it for the font path.
+
+## Firing 47 — IMPLEMENT, cycle 3
+
+Rank 6's 24 failing runs are three defects with three different fixes, and the measurement that
+separates them cost an hour and no capture. One of them is an ink, and firing 39's note said it
+would not be.
+
+### The blocker, tested — fifth firing running
+
+Firing 39 left rank 6 at 24 of 54 and wrote: *"closing the remaining 24 is not another ink nudge —
+×1.1161 was the whole of what `#3F3F41` buys and it moved 7 runs. This needs the ground, the floor,
+or the tool."* WORKER_PROMPT §3e's second half says to test the sentence that says a route is
+closed, because *a blocker gets believed because it promises no work*. This one was half wrong.
+
+Another ink move was available, it was **required by the law's own derivation**, and the reason
+nobody could see it is that the derivation has now been taken three times against a statistic that
+is not a ground a word lands on.
+
+### A word does not land on the median pixel of a sheet
+
+`docs/COLOR.md` §2 derives the ink ceiling of the whole palette from *"the darkest ground a word can
+legitimately land on"*. Firing 36 found that premise named `aged` stock, which is not in the
+library. Firing 38 replaced it with `sticky_pink_02_dusk`, which is — and kept the **statistic**,
+which is the sheet's median pixel.
+
+Every written stock in this library is **printed**. The failing runs told me so before any tool did:
+all 24 sit on `legal_01_dusk` or `looseleaf_01_dusk`, and reading the rows of the committed crop
+around `SIGNAL` showed two dark bands 76 px apart that are not in the sheet's p50 and are not the
+glyphs' antialiasing.
+
+`printed_rules` in `tools/check/dusk_ground.py` now measures them off the renders by asset path,
+needing no capture and no rig:
+
+| ground | darkest at dusk | Y | what it asks of an achromatic ink |
+|---|---|---:|---|
+| the sheet's median pixel | `sticky_pink_02_dusk` | 0.4506 | Y ≤ 0.0501 · L 0.368 |
+| **the horizontal ruling** | `spiral_04_dusk` | **0.3963** | **Y ≤ 0.0393 · L 0.3375** |
+| the red margin rule | `spiral_03_dusk` | 0.2235 | Y ≤ 0.0047 · L 0.168 |
+
+All 21 ruled dusk renders carry a ruling and every one of them is darker than the premise.
+`legibility.py` takes a run's ground over the band hugging its letters, and that band is as tall as
+the rule pitch — so **the rule is in the band of every body run on written stock**, and the p50
+never saw it.
+
+### The 24, split three ways
+
+Mapping each failing run's declared box through its surface's declared rect and scale, and through
+the packer's paper resize (`SIZES['paper'] = 1500` against a committed 1800):
+
+- **17 sit on the horizontal ruling**, `ground_lum` 0.3950–0.4478.
+- **6 cross the red vertical margin rule**, 0.3553–0.4281 — the five worst readings on the screen
+  plus `just now`.
+- **1** is `MOOD` at 0.0597 with a ring of 5.70, the clipping artefact firing 39 already re-filed.
+
+**Two instruments agree to within a hundredth.** The library says `legal_01_dusk`'s ruling is Y
+0.4063 and `looseleaf_01_dusk`'s is 0.4365; the capture says the runs on those two stocks that do
+not cross a margin read 0.3950–0.4478. Nothing connects the two measurements but the paper.
+
+### What landed, and what no ink answers
+
+`Pen.stamp` and `Pen.margin` go `#3F3F41` → `#373739`: 4.466:1 → 5.049:1 on the darkest ruling, and
+still the lightest ink that clears, because `#38383A` reads 4.973. The corrected sweep then caught
+`Pen.graphite` at 4.824:1 — it had passed at 5.411 on the old ground — so it goes `#3A3A3C` →
+`#323234`, keeping its 0.019 OKLab gap below the stamped face rather than being flattened into it.
+Graphite is a person's pencil and not furniture, so it is not set to the lightest value that clears.
+
+**The margin rule is not an ink problem and saying so is arithmetic.** 5.0:1 across Y 0.2235 needs
+an ink at Y ≤ 0.0047, OKLab L 0.168 — not a stationery colour and not a step this ladder has. It is
+filed with both routes costed, and the cheap one is **exhausted rather than impossible**: cropping
+past the margin works for a piece narrower than its stock, and `legal_01`'s margin sits at 23–25% of
+a sheet the pulse pad draws full width.
+
+### A third item fell out of the same arithmetic
+
+`docs/COLOR.md` §6 permits an ink carrying a word to composite at alpha ≥ 0.80, and §2 derives every
+ink to clear 5.0:1 **at full strength**. Nobody had multiplied the two. On the darkest ruling:
+
+|  | full | 0.85 | 0.80 |
+|---|---:|---:|---:|
+| `biro` | 7.335 | 5.619 | 5.063 |
+| `ballpoint` | 6.060 | 4.606 | 4.177 |
+| `graphite` | 5.438 | 4.142 | 3.773 |
+| `stamp` / `margin` | 5.049 | 3.875 | 3.542 |
+
+At the alpha the law permits, four of the five inks are below the floor the same law sets. It is not
+hypothetical: `week one, and the room smells right again` is declared `d91f2a44` — ballpoint at
+0.851 — and reads 4.25:1. The obvious refutation is that Flutter composites in linear light, which
+would make those numbers wrong; the measured run settles it on the sRGB side, 0.0481 observed
+against 0.0536 predicted by sRGB compositing and 0.031 by linear.
+
+### The ratchet was holding the wrong end
+
+The dusk test's `_knownBelowFloorAtDusk` held `red: 3.17` and asserted the ratio could not fall. A
+ratio is `(ground + 0.05) / (ink + 0.05)`: it falls when the **ground** gets darker just as readily
+as when the ink gets lighter. Correcting the ground took red from 3.17:1 to 2.83:1 without touching
+a colour, and the test failed — correctly, for the wrong reason. It holds the ink's own luminance
+now, with the ratio beside it checked against today's ground so a stale entry cannot be believed.
+
+### The ruler earned its place
+
+`tools/check/dusk_ground_selftest.py`: 21 day/dusk pairs with every day ruling above its dusk twin,
+the darkest ruling below the law's premise, every ruling below its own sheet by more than the tooth,
+and the margin found on the three stocks that carry one and nowhere else. It prints
+**margin 0.2235 < ruling 0.3963 < premise 0.4506** in that order. Re-broken twice: blinding its
+colour test loses all ten margins, and loosening the row threshold reads the tooth as a rule on nine
+stocks.
+
+### The capture, and what it said
+
+The whole set, one run, **15 of 17** — the ceiling here, with the two Android stills booked missing
+with the measured `/dev/kvm` reason. `evidence/.previous` was seeded from the artifacts committed at
+firing 39 so `DIFF.json` compares against them: 15 changed, 2 absent.
+
+**Rank 6: 24 below floor → 5.** Declared population identical — 53 runs before and after, matched on
+`says`, nothing gone and nothing new — and one `legibility.py` over both readings, the before taken
+off the committed artifact before the run overwrote it.
+
+The prediction said 6. It is 5, and **the count was the weaker half of it.** Of the six runs named,
+only `LAST UP` and `TRAVELLING` still fail, for the reason the prediction gave in as many words:
+firings 44–46 moved which mask each piece takes and therefore where its text sits. The half that
+matters held exactly — **all five survivors cross a printed margin rule**, and their grounds are
+0.2568–0.3775, which is the margin's measured 0.2235–0.2663 and not the ruling's 0.3963. `AT HOME`
+at 3.47 is the new worst and it lies straight across the rule.
+
+It does not close: the exit condition is ≤ 3. But the residue is no longer mixed. There is nothing
+left in it for an ink, a floor or a re-render.
+
+### Two things nobody was looking for
+
+**The manifest books an artifact missing that every ruler in the run reads.** `scene.js` wrote
+`crops/dusk_pulse.png` and both sidecars at 13:51:03, then exited non-zero over five page errors it
+had collected, and `capture.sh` called it refused at 13:51:04. `MANIFEST.json` says it is missing.
+`legibility.json` measured it and `DIFF.json` compared it. The artifact is good: its legal sheet
+reads median Y 0.5512 against the committed 0.5519, with a local grain of 0.0409 against 0.0448 —
+the render is there with its tooth, not a flat fallback. Both cheap causes were refuted before it
+was filed: 127.0.0.1 is in `NO_PROXY`, and `http.server` has been threaded since 3.7 and answered 24
+concurrent requests for the same asset with 24 × 200.
+
+**The day set's failures relocated into the instrument.** 37 of 432 → 36 of 429, so nothing got
+harder to read — but 26 of the 31 day failures now carry a ring-to-band ratio ≥ 4, where 3 of 13 did
+before. `TRAVELLING` reads exactly 1.23 and `week one, and the room smells right again` exactly 1.54
+on five artifacts and five different declared stocks. Five measurements of different pixels cannot
+agree to two decimals; it is one widget photographed five times, and its two lines are 4 px apart.
+
+The darker ink is what tipped it, and it is owned rather than disowned: the gap is 4 px before and
+after, so the layout did not close it — a darker stroke's antialiasing bridges it and the mark
+detector segments the two lines as one run, 103 px tall where the declared run is 41. The gate is
+meant to refuse exactly this, and its test `g_adv > core` cannot catch a neighbour in the **same**
+ink, whose antialiasing sits just above the stroke's own tenth percentile.
+
+**`legibility.py` was not touched.** The whole before-and-after above was read by one binary,
+unchanged since `b9b6497`, and that is the only reason any of it can be believed. The item says so
+in its own measurement.
+
+### Two hours I would like back
+
+`bootstrap.sh` died at ffmpeg again — the johnvansickle.com tarball is behind the interstitial once
+more and `xz` rejects 7 KB of HTML, so `set -e` stopped it before tailscale and WebKit. Firing 46's
+note that it had cleared upstream no longer holds; `docs/CONTINUE.md` §5's four lines fixed it.
+
+And twice I blocked on a process that was my own watcher. `pgrep -f "[c]apture.sh"` matches the
+shell running that very `pgrep`: the bracket trick hides the pattern from *itself*, not from a
+sibling shell whose command line contains the literal string. `CLAUDE.md` warns about `pkill -f`
+for the same reason; this is the same hazard one door along. Wait on a PID, or on the log's last
+line.
