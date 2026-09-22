@@ -6571,3 +6571,123 @@ bot-check interstitial with HTTP 200 instead of the tarball, and `tar` dies on i
 is healthy and reports no relay failures, so this is upstream and not the proxy. Everything this
 firing needed — `flutter analyze`, `flutter test`, `pack_assets.py` — works without ffmpeg; a
 capture that records MP4 clips will not.
+
+## Firing 46 — IMPLEMENT, cycle 3
+
+Rank 2's blocker was wrong by one line of the packer. Rank 4 landed: the pool was indexed in six
+places and is now indexed in one. Rank 5 split in two, and only one half is a rebuild.
+
+### Rank 2 — the sheet is not five times its mask
+
+Firing 44 closed the `<= 4 px` clause with arithmetic: *a sheet 4.886× its mask cannot reach it by
+ANY redistribution of the slice*. **The sheet is 4.886× the packed copy of its mask.** Every mask in
+`assets/tears` is committed at 2048×2048 — `tools/tears/tear.py`, `SIZE = 2048` — and
+`pack_assets.py` crops it to the paper box and then applies `SIZES['tears'] = 1024` to the long
+side. `tear_004`'s paper box is 1520×1223 at source and the app is handed 1024×824. Every
+magnification figure on the item was measured downstream of that one line.
+
+At the resolution the masks were authored at, with the stretch not concentrated by the nine-slice,
+all eight over-stretched pieces land **under the item's own 4× floor** — worst case 3.29× on the
+setup sheet, where the committed sidecar reads 19.545. No Blender, no new asset, no design
+decision. The bundle cost, measured by running the packer's own `convert()` at both sizes: 4.4 MB
+→ 8.0 MB across 56 masks.
+
+**My own cheaper reading was refuted 8 for 8**, and it is on the item so nobody re-runs it. I
+expected a big backing sheet's stretched side to be a straight *cut* rather than a tear, which
+would have made the treads meaningless. Crossing all 172 pieces' boxes against their masks'
+declared `torn_edges`: every piece over 4× is stretched on the vertical axis only — the largest
+horizontal centre band in the whole set is 1.35× — and every one of them has a torn left or right
+edge on that axis.
+
+**The route's cost is now a different number, and it is the one that decides it.** 12_search holds
+32 distinct masks, 02_chat 29, packed RGBA lossless with R=G=B=255: about 109 MB decoded at 1024
+and about 256 MB at full resolution. Three quarters of both figures is constant white. That is the
+honest blocker, it is not firing 44's, and it is measurable before anything is built. It also
+uncovered a dangling enforcement claim, filed as its own item: `tools/check/texture_budget.py`
+enforces the 32 MB ceiling against `app/assets/folds` **only**, so the largest texture family in
+the app has never been asked, at any size.
+
+### Rank 4 — a row is a position in one list
+
+The item was filed against the row-0 default and firing 41 refuted that and named three mechanisms.
+**Under all three is one thing.** `assignment.dart` opens by stating the rule and the rule was
+stated in one file and implemented in **six**: `tearFor`, the walk copied verbatim into
+`Slip.build` and `Strip.build`, `desk.dart` keyed off a hash of the partner's mood,
+`pulse_region.dart`'s `(partner.index * 7 + 11)` and `masks[n - 3]`, and `setup_region.dart`'s
+constant `writableTears[3]`. **Three of the six took no row at all** — which is why this item could
+not be fixed as filed: the repair is a namespace, and a call site with nowhere to put a row has
+nowhere to put a lane.
+
+`tearAt` is the one place now. `TearLane` is the namespace and `TearLanes` is the whole table in one
+file with the layout over the 47 writable masks written out above it. Firing 40's `_chromeRow = 23`
+and `_tabRowOffset = 24` were that table hand-rolled for one screen — which is exactly why it
+worked there and why nothing else in the app got it — and they are two rows of it now.
+
+Three mechanisms the item had, and three it did not: settings had eleven pieces on rows chosen next
+to each other with three pairs sharing; moments' filter chips all took `row: label.length`, which is
+not a position in a list; and the partner strip changed its torn edge when the partner changed their
+*mood*.
+
+**The gate is the item's own measurement.** `a_screen_tears_every_piece_differently_test` pumps
+02_chat, 03_us, 04_moments, 05_settings and 01_pulse through `CaptureHooks.paperSurfaces` and
+requires no mask taken by two pieces, with the piece-count floor beside it so a screen that fails to
+build fails the floor rather than passing empty. **It counts by piece and not by surface**, because
+since firing 44 a torn piece declares three layers under three names off one stem — counting names
+would have reported three surfaces per piece and no repeat at all where two pieces share a mask,
+which is the corollary-2 failure firing 44 wrote onto this item in advance.
+`the_pool_is_indexed_in_one_place_test` reads the source, because the defect is a call that exists
+at all and a widget test cannot see a call site that today happens to agree.
+
+**The table was wrong twice and the gate caught both**, which is the argument for having written
+it. `moments` at a span of 10 wrapped the gallery's eleventh print onto its first; `headings` and
+`tabs` both started at 28, which put moments' chips on the mask its first view tab had. Neither was
+visible by reading the table.
+
+Re-broken both ways. `hashOf(item.id)` back in the margins: 02_chat reads twelve pieces with
+`tear_053` taken by four of them and `tear_011` by two. `writableTears[3]` back in setup: the source
+test fails naming the file and line.
+
+**The cost, stated rather than absorbed.** Any repair of this item changes which mask a note takes,
+so its safe insets, so its height. `the_hero_of_the_set_fits_eight_notes_test` pinned a `+100`
+control that held at those heights and does not at these — the span moves at +80 now. The margin
+comparison the test is *named* for passes unchanged at 40. The control is a sweep now: it finds the
+boundary, prints it, and requires it clear of the margin by half again, which catches the near miss
+`+100` was there to catch and cannot go stale when a note's height moves four pixels. Proved it can
+still fail by asking for three times the margin, which it does not have.
+
+### Rank 5 — the pool is exactly big enough
+
+Shaping 02_chat.text.json's 32 declared runs through HarfBuzz against the shipped faces: **19 of
+the 56 same-letter repeats put two instances on one glyph id**, worst `n` in *"noor's phone is on
+silent"* at four instances and two outlines. And the longest repeat of any letter in any declared
+run is **five**, against `variants = 5` — so not one outline is missing and clause 3 is the calt
+rotation in `build.py`, not new geometry.
+
+**The test everyone reads the zero from renders `eeeeeeee`**: eight instances against five variants,
+so two must share an outline before anything is built. The 0.00 minimum is a property of the test's
+own string. The item's clause is anchored to the declared runs; the test is not. A firing that tunes
+the font until eight e's come clean is tuning against a requirement the brief does not make.
+
+Clause 1 is the geometry rebuild and only clause 1: the best pair of distinct outlines in the
+shipped fonts is 12.76 against a floor of 15, and the knob is `HAUSDORFF_MIN = 12.0` at
+`build.py:42`. A rebuild costs 2m19s a face, needs `scipy` and `uharfbuzz`, and — worth knowing
+before anyone opens `assets/fonts` — **is byte-reproducible**: NoorHand.ttf rebuilt at the default
+seed came out sha256-identical to the shipped file. Use `--out <scratch> --no-manifest`.
+
+### What this firing did not do
+
+- **Rank 6 was not reached.** The dusk screen's 31-of-54 stands where firing 39 left it.
+- **No capture, again.** Firing 44's full `./capture.sh` is still owed, and it is now owed harder:
+  rank 4's fix moves which mask every piece takes, so the whole committed set's `surfaces.json`
+  describes an app that no longer exists. Rank 4's `--frame-fatal` clause needs it too.
+- **Both fences held and neither was approached.** No Blender was run, nothing under `blender/` or
+  `assets/` was touched, the 240-frame re-render was neither started nor authorised, and the flat
+  card's ladder stays closed. Rank 2's remaining route needs no renders either; its blocker is
+  memory, not pixels.
+
+### Container, corrected
+
+`./bootstrap.sh --profile=web` **exits 0 here**, and `toolchain/.done/` holds `playwright`. The
+ffmpeg bot-check interstitial firing 45 hit at johnvansickle.com has cleared upstream; ffmpeg 7.0.2
+installed. `python3 -m pip install numpy pillow` is still needed, and `scipy` and `uharfbuzz` on top
+of it for the font path.
