@@ -1,4 +1,5 @@
 // Chat: the full chronological rendering of the spine, and the complete messenger.
+import '../../material/assignment.dart';
 import 'dart:async';
 import 'dart:typed_data';
 
@@ -446,6 +447,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
         builder: (ctx) => DeskSheet(
           id: 'the.vocabulary',
           row: 2,
+          lane: TearLanes.chrome,
           child: ListView(
             shrinkWrap: true,
             padding: EdgeInsets.zero,
@@ -536,6 +538,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
                   Strip(
                     id: 'search-affordance',
                     row: 3,
+                    lane: TearLanes.chrome,
                     padding: const EdgeInsets.fromLTRB(8, 3, 8, 3),
                     child: Text(S.search, style: Hands.margin(size: 13)),
                   ),
@@ -595,6 +598,7 @@ class _ChatRegionState extends State<ChatRegion> with WidgetsBindingObserver {
               child: Strip(
                 id: 'typing-${scope.partner.name}',
                 row: 5,
+                lane: TearLanes.composer,
                 padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
                 child: Text('${scope.partner.name} ${S.typing}', style: Hands.margin(size: 13)),
               ),
@@ -681,6 +685,7 @@ class _Composer extends StatelessWidget {
       child: Strip(
         id: 'composer',
         row: 1,
+        lane: TearLanes.chrome,
         stock: 'lined',
         liftMm: 0.7,
         padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),

@@ -5,6 +5,7 @@
 // a tick beside the ones that already have. Nothing here congratulates anyone.
 import 'package:flutter/widgets.dart';
 
+import '../material/assignment.dart';
 import '../material/hands.dart';
 import '../material/library.dart';
 import '../material/marks.dart';
@@ -34,7 +35,9 @@ class SetupSheet extends StatelessWidget {
     final state = observe(steps, facts);
     final lib = MaterialLibrary.loaded ? MaterialLibrary.instance : null;
     final stock = lib?.stockVariants('looseleaf').firstOrNull ?? lib?.stockVariants('lined').firstOrNull ?? '';
-    final tear = lib?.writableTears.isNotEmpty == true ? lib!.writableTears[3 % lib.writableTears.length] : null;
+    // A constant index, which is why 17_setup_pwa drew both of its pieces on the same mask: two
+    // sheets, one number. The setup lane has three rows and this is the first of them.
+    final tear = tearAt(lib, lane: TearLanes.setup, row: 0);
     final width = MediaQuery.sizeOf(context).width - 36;
 
     return ListView(

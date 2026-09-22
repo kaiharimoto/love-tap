@@ -144,11 +144,13 @@ class SearchPageState extends State<SearchPage> {
   /// Where the query slip sits in the walk. It is a list of one, and a list of one still has a
   /// row: without it the slip took `writableTears[0]`, which is exactly what the first result
   /// takes, and the two biggest sheets on the screen were torn identically.
-  static const _chromeRow = 23;
-
-  static const _tabRowOffset = 24;
-
-  int _tabRow(int i) => _tabRowOffset + i;
+  ///
+  /// `_chromeRow = 23` and `_tabRowOffset = 24` stood here, and they were this screen's lanes
+  /// hand-rolled: a row is unique inside one list and a screen has several, so the offsets moved
+  /// the strips' walk past the run of results. They are [TearLanes] now, where the other screens'
+  /// lanes can be checked against them — the offsets were right for this screen and nothing else
+  /// in the app got them, which is why eight of eleven stills repeated a mask.
+  static const _chromeRow = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -175,6 +177,7 @@ class SearchPageState extends State<SearchPage> {
               // `writableTears[0]`, which is the same edge the FIRST RESULT is torn along, and the
               // two largest sheets on the screen were clones of each other.
               row: _chromeRow,
+              lane: TearLanes.chrome,
               width: width - 28,
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
               child: Row(
@@ -240,15 +243,16 @@ class SearchPageState extends State<SearchPage> {
             // pool with a stride coprime to its size so that any run of consecutive rows is
             // distinct. It was that nobody told these thirteen slips which row they were on.
             //
-            // `_tabRow` is why the offset exists: a row is unique inside ONE list, and this
-            // screen has two of them. The results underneath start at row 0 as well, so tabs
-            // numbered from 0 would collide with the first hits rather than with each other.
+            // `TearLanes.tabs` is why a row is not enough on its own: a row is unique inside ONE
+            // list, and this screen has two of them. The results underneath start at row 0 as
+            // well, so tabs numbered from 0 would collide with the first hits rather than with
+            // each other.
             child: Wrap(
               spacing: 0,
               runSpacing: 2,
               children: [
                 for (final (i, tab) in _tabs().indexed)
-                  if (tab == null) const SizedBox(width: 10) else _Tab(row: _tabRow(i), tab: tab),
+                  if (tab == null) const SizedBox(width: 10) else _Tab(row: i, tab: tab),
               ],
             ),
           ),
@@ -301,6 +305,7 @@ class _Tab extends StatelessWidget {
           child: Slip(
             id: 'facet_$label',
             row: row,
+            lane: TearLanes.tabs,
             stock: 'index',
             // A tab is the width of the word stamped on it. Without this the slip fills the
             // width the `Wrap` offers, the `Wrap` fits one tab to a line, and thirteen tabs
@@ -360,7 +365,7 @@ class _Hit extends StatelessWidget {
   Widget build(BuildContext context) {
     final e = hit.event;
     final aside = _aside;
-    final tear = lib == null ? null : tearFor(e, lib!, row: row);
+    final tear = lib == null ? null : tearFor(e, lib!, row: row, lane: TearLanes.hits);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: GestureDetector(

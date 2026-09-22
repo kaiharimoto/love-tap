@@ -1,4 +1,5 @@
 // The dates that matter: anniversaries and firsts, stamped on cards, counting down.
+import '../../material/assignment.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -121,6 +122,7 @@ class _Card extends StatelessWidget {
       child: Slip(
         id: m.id,
         row: row,
+        lane: TearLanes.calendar,
         torn: false,
         stock: 'index',
         width: MediaQuery.sizeOf(context).width - 28,

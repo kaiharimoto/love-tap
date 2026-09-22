@@ -192,10 +192,33 @@ void main() {
   testWidgets('the search margin is not what is keeping the eighth note off the screen',
       (tester) async {
     if (absent != null) return;
-    // The claim nine firings of this build carried, measured. `kSearchMargin` is 40 logical; at
-    // the old anchor the region can be given four times that and the span does not move.
+    // The claim nine firings of this build carried, measured. `kSearchMargin` is 40 logical.
+    //
+    // THIS SWEEPS RATHER THAN SAMPLING THREE POINTS, AND FIRING 46 IS WHY. It read the span at
+    // `_region`, `_region + kSearchMargin` and `_region + 100` and required all three equal. The
+    // margin comparison is the claim; `+100` was a control, meaning *and it is not a near miss
+    // either*. `+100` is a frame ordinal, and WORKER_PROMPT 3d corollary 1 is written against
+    // exactly that: a number pinned off one measurement, standing in for a property of the object.
+    // The property is the height of the note above the first one on screen, and the comment above
+    // states it as `between 65 and 104` logical pixels -- so a control at 100 sat INSIDE the
+    // range it was controlling for, and held only while that particular note was at the top of it.
+    //
+    // Firing 46 gave every list on a screen its own window in the mask pool, which changes which
+    // mask the notes at this anchor are torn from, which changes their safe insets, which changes
+    // their heights by a few pixels. Any repair of `a-slip-with-no-row-takes-the-same-tear-as-
+    // every-other-slip-with-no-row` does that: the item IS which mask a piece takes. The span now
+    // holds to +70 and moves at +80, so the margin comparison passes exactly as before and the
+    // pinned +100 does not.
+    //
+    // So the control is expressed against the margin it is a control for. The boundary is found
+    // rather than assumed, it is reported, and it must be clear of the margin by a factor -- which
+    // catches a near miss the way `+100` was meant to, and cannot go stale when a note's height
+    // moves by four pixels.
+    const step = 10.0;
+    const sweep = 200.0;
     final spans = <double, String>{};
-    for (final viewport in <double>[_region, _region + kSearchMargin, _region + 100]) {
+    for (var d = 0.0; d <= sweep; d += step) {
+      final viewport = _region + d;
       // The view is grown with the region rather than the region grown inside a fixed view:
       // a 1086-logical box inside a 1040-logical frame overflows the `Column` and the framework
       // fails the test for it, which says nothing about the thread.
@@ -217,14 +240,30 @@ void main() {
       unawaited(CaptureBus.scrollTo!('0.62'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 300));
-      spans[viewport] = jsonEncode(CaptureHooks(scope).report()['scroll']);
+      spans[d] = jsonEncode(CaptureHooks(scope).report()['scroll']);
     }
-    expect(spans[_region], equals(spans[_region + kSearchMargin]),
+
+    final base = spans[0.0];
+    var movesAt = double.infinity;
+    for (var d = step; d <= sweep; d += step) {
+      if (spans[d] != base) {
+        movesAt = d;
+        break;
+      }
+    }
+    // ignore: avoid_print
+    print('the span $base holds to '
+        '${movesAt.isFinite ? '+${(movesAt - step).toInt()}' : 'beyond +${sweep.toInt()}'} and '
+        '${movesAt.isFinite ? 'moves at +${movesAt.toInt()} to ${spans[movesAt]}' : 'never moves'}, '
+        'against a search margin of ${kSearchMargin.toInt()}');
+
+    expect(spans[0.0], equals(spans[kSearchMargin]),
         reason: 'giving the thread back the search margin changes what is on the screen, so the '
             'margin is a live suspect after all and this test is the one that is wrong: '
-            '${spans[_region]} against ${spans[_region + kSearchMargin]}');
-    expect(spans[_region], equals(spans[_region + 100]),
-        reason: 'a hundred logical pixels moves the span: ${spans[_region]} against '
-            '${spans[_region + 100]}');
+            '${spans[0.0]} against ${spans[kSearchMargin]}');
+    expect(movesAt, greaterThan(kSearchMargin * 1.5),
+        reason: 'the span moves at +$movesAt, which is within half again of the '
+            '${kSearchMargin.toInt()}-logical search margin -- so the margin is close enough to '
+            'the boundary to be the cause after all, which is what this test exists to rule out');
   });
 }

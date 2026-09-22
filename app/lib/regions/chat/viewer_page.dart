@@ -190,6 +190,7 @@ class _ViewerPageState extends State<ViewerPage> {
                     Strip(
                       id: 'put-it-back',
                       row: 4,
+                      lane: TearLanes.chrome,
                       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,

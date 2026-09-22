@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../material/assignment.dart';
 import '../../feelings/builtins.dart';
 import '../../feelings/registry.dart';
 import '../../material/hands.dart';
@@ -148,6 +149,7 @@ class _Filters extends StatelessWidget {
                       child: Strip(
                         id: 'moments-tab-${v.name}',
                         row: v.index,
+                        lane: TearLanes.tabs,
                         stock: 'index',
                         padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
                         liftMm: v == view ? 0.7 : 0.25,
@@ -171,11 +173,12 @@ class _Filters extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                _Chip(label: 'both', on: person == null, onTap: () => onPerson(null)),
-                for (final p in Person.values)
-                  _Chip(label: p.name, on: person == p, onTap: () => onPerson(p)),
+                _Chip(row: 3, label: 'both', on: person == null, onTap: () => onPerson(null)),
+                for (final (i, p) in Person.values.indexed)
+                  _Chip(row: 4 + i, label: p.name, on: person == p, onTap: () => onPerson(p)),
                 const SizedBox(width: 12),
                 _Chip(
+                  row: 6,
                   label: range == null
                       ? 'all year'
                       : '${DateFormat('d MMM').format(range!.start)}–${DateFormat('d MMM').format(range!.end)}',
@@ -189,6 +192,7 @@ class _Filters extends StatelessWidget {
                 if (view == MomentsView.feelings) ...[
                   const SizedBox(width: 12),
                   _Chip(
+                    row: 7,
                     label: feelingId == null ? 'any feeling' : feelingId!,
                     on: feelingId != null,
                     onTap: () async {
@@ -199,6 +203,7 @@ class _Filters extends StatelessWidget {
                         builder: (ctx) => DeskSheet(
                           id: 'which.feeling',
                           row: 8,
+                          lane: TearLanes.chrome,
                           child: GridView.count(
                             crossAxisCount: 4,
                             shrinkWrap: true,
@@ -237,7 +242,12 @@ class _Filters extends StatelessWidget {
 }
 
 class _Chip extends StatelessWidget {
-  const _Chip({required this.label, required this.on, required this.onTap});
+  const _Chip({required this.row, required this.label, required this.on, required this.onTap});
+
+  /// Which chip this is. It was `label.length` where a row goes, so two labels of the same length
+  /// were the same piece of paper -- and every chip sat at one row anyway, which put the whole
+  /// filter row on the mask the first view tab had already taken.
+  final int row;
   final String label;
   final bool on;
   final VoidCallback onTap;
@@ -266,7 +276,8 @@ class _Chip extends StatelessWidget {
     padding: EdgeInsets.only(right: 6, top: on ? 0 : 4, bottom: on ? 4 : 0),
     child: Slip(
       id: 'moments.$label',
-      row: label.length,
+      row: row,
+      lane: TearLanes.tabs,
       stock: on ? 'sticky_yellow' : 'index',
       torn: false,
       padding: const EdgeInsets.fromLTRB(11, 5, 11, 6),
@@ -381,6 +392,7 @@ class _One extends StatelessWidget {
       return Slip(
         id: event.id,
         row: row,
+        lane: TearLanes.moments,
         stock: 'receipt',
         width: width,
         padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),

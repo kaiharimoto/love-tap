@@ -1,4 +1,5 @@
 // The date planner and tracker: a stack of ticket stubs on the desk.
+import '../../material/assignment.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -20,14 +21,14 @@ class DateList extends StatelessWidget {
     final past = dates.where((d) => !upcoming.contains(d)).toList().reversed.toList();
     final ahead = ctx.few(upcoming);
     final rows = <Widget>[
-      _Header(label: 'ahead', onAdd: () => _plan(context)),
+      _Header(label: 'ahead', row: 0, onAdd: () => _plan(context)),
       if (upcoming.isEmpty)
         Padding(padding: const EdgeInsets.all(12), child: Text("nowhere planned. that's fine.", style: Hands.margin(size: 15))),
       for (var i = 0; i < ahead.length; i++) _Stub(item: ahead[i], ctx: ctx, row: i),
       // where they have been is a long list; on the desk it is one stub under the heading, and
       // the whole of it when the module is opened on its own
       const SizedBox(height: 14),
-      const _Header(label: 'been'),
+      const _Header(label: 'been', row: 1),
       for (var i = 0; i < (ctx.onTheDesk ? past.take(1) : past.take(40)).length; i++)
         _Stub(item: past[i], ctx: ctx, row: ahead.length + i),
     ];
@@ -55,8 +56,12 @@ Future<String?> _ask(BuildContext context, String hint, {String initial = ''}) =
     );
 
 class _Header extends StatelessWidget {
-  const _Header({required this.label, this.onAdd});
+  const _Header({required this.label, required this.row, this.onAdd});
   final String label;
+
+  /// Which heading this is. Both headers took row 2, so both were torn along the same edge --
+  /// which `03_us` shows as `date-label-ahead` and `date-label-been` on one mask.
+  final int row;
   final VoidCallback? onAdd;
 
   @override
@@ -66,7 +71,8 @@ class _Header extends StatelessWidget {
           children: [
             Strip(
               id: 'date-label-$label',
-              row: 2,
+              row: row,
+              lane: TearLanes.headings,
               padding: const EdgeInsets.fromLTRB(8, 3, 8, 3),
               child: Stamped(label, size: 11),
             ),
@@ -101,6 +107,7 @@ class _StubState extends State<_Stub> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 5, 18, 5),
       child: Slip(
+        lane: TearLanes.dates,
         id: item.id,
         row: widget.row,
         width: width,

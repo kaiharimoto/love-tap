@@ -78,8 +78,9 @@ class _TheirSheet extends StatelessWidget {
     final stock = stockForMood(state.mood);
     final variants = lib?.stockVariants(stock) ?? const <String>[];
     final id = variants.isEmpty ? '' : variants[(state.mood?.length ?? 1) % variants.length];
-    final masks = lib?.writableTears ?? const <String>[];
-    final tear = masks.isEmpty ? null : masks[(partner.index * 7 + 11) % masks.length];
+    // One card per person, so it is a two-row lane and the row is who it is. `partner.index * 7
+    // + 11` was an index into the pool that no other call site could see or avoid.
+    final tear = tearAt(lib, lane: TearLanes.chrome, row: partner.index);
     return PaperPiece(
       stockId: id,
       tearId: tear,
@@ -213,8 +214,9 @@ class _MySheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final variants = lib?.stockVariants('looseleaf') ?? const <String>[];
     final id = variants.isEmpty ? '' : variants.first;
-    final masks = lib?.writableTears ?? const <String>[];
-    final tear = masks.isEmpty ? null : masks[(masks.length - 3).clamp(0, masks.length - 1)];
+    // A place slip, one of them, taking the third row of the chrome lane rather than counting
+    // back from the end of the pool -- which is an index, and an index is what collides.
+    final tear = tearAt(lib, lane: TearLanes.chrome, row: 2);
     return PaperPiece(
       stockId: id,
       tearId: tear,

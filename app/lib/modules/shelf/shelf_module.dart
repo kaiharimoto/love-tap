@@ -9,6 +9,7 @@
 // What it holds is one question: has the other one got to it yet, and what did they say when they
 // did. That is the whole shape of it, and it is why a row is a card with two hands on it — one
 // person passed it on, and the other one wrote back underneath.
+import '../../material/assignment.dart';
 import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
@@ -135,6 +136,7 @@ class _Thing extends StatelessWidget {
       child: Slip(
         id: thing.id,
         row: row,
+        lane: TearLanes.shelf,
         stock: 'index',
         width: MediaQuery.sizeOf(context).width - 30,
         padding: const EdgeInsets.fromLTRB(14, 11, 14, 12),

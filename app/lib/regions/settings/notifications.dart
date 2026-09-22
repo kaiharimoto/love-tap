@@ -1,6 +1,7 @@
 // What is allowed to interrupt, per event type, plus quiet hours and the pings a person has
 // scheduled. Nothing here can be turned into engagement: a ping exists only because one of the
 // two people wrote it, and the app never schedules one of its own.
+import '../../material/assignment.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -113,7 +114,8 @@ class NotificationSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slip(
       id: 'settings.notify',
-      row: 1,
+      row: 7,
+      lane: TearLanes.panels,
       stock: 'looseleaf',
       padding: const EdgeInsets.fromLTRB(14, 11, 14, 13),
       child: Column(

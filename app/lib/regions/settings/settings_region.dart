@@ -4,6 +4,7 @@
 // concern this phone (which types may interrupt, quiet hours) live in the spine's meta, because
 // they are not the couple's history — but nothing that either person *authored* is kept anywhere
 // but the spine.
+import '../../material/assignment.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -109,7 +110,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
       controller: _scroll,
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 96),
       children: [
-        Strip(id: 'heading-the-two-phones', row: 1,
+        Strip(id: 'heading-the-two-phones', row: 0, lane: TearLanes.headings,
             padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
             child: const Stamped('the two phones', size: 11)),
         const SizedBox(height: 6),
@@ -142,7 +143,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
         ),
         const SizedBox(height: 22),
         Row(children: [
-          Strip(id: 'heading-feelings-you-made', row: 3,
+          Strip(id: 'heading-feelings-you-made', row: 2, lane: TearLanes.headings,
             padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
             child: const Stamped('feelings you made', size: 11)),
           const Spacer(),
@@ -154,7 +155,8 @@ class _SettingsRegionState extends State<SettingsRegion> {
             },
             child: Strip(
               id: 'make-a-feeling',
-              row: 6,
+              row: 0,
+              lane: TearLanes.panels,
               padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
               child: Text('make one', style: Hands.margin(size: 14)),
             ),
@@ -164,7 +166,8 @@ class _SettingsRegionState extends State<SettingsRegion> {
         if (authored.isEmpty)
           Slip(
             id: 'settings.feelings.empty',
-            row: 7,
+            row: 1,
+            lane: TearLanes.panels,
             stock: 'looseleaf',
             padding: const EdgeInsets.fromLTRB(12, 9, 12, 10),
             child: Text(S.emptyFeelings, style: Hands.margin(size: 15)),
@@ -172,7 +175,8 @@ class _SettingsRegionState extends State<SettingsRegion> {
         else
           Slip(
             id: 'settings.feelings',
-            row: 7,
+            row: 2,
+            lane: TearLanes.panels,
             stock: 'looseleaf',
             padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),
             child: Wrap(
@@ -204,7 +208,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
           ),
           ),
         const SizedBox(height: 22),
-        Strip(id: 'heading-the-two-of-you', row: 4,
+        Strip(id: 'heading-the-two-of-you', row: 3, lane: TearLanes.headings,
             padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
             child: const Stamped('the two of you', size: 11)),
         const SizedBox(height: 6),
@@ -214,7 +218,8 @@ class _SettingsRegionState extends State<SettingsRegion> {
         // exists once there is a history to count.
         Slip(
           id: 'settings.the-two-of-you',
-          row: 8,
+          row: 3,
+          lane: TearLanes.panels,
           stock: 'lined',
           padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
           child: Column(
@@ -242,7 +247,7 @@ class _SettingsRegionState extends State<SettingsRegion> {
         // The long table last. It is the one thing on this screen you set once and never
         // look at again, and with it in the middle the artifact of this screen carried
         // thirteen rows of it and none of the feeling-authoring tools the row asks for.
-        Strip(id: 'heading-what-may-interrupt', row: 2,
+        Strip(id: 'heading-what-may-interrupt', row: 1, lane: TearLanes.headings,
             padding: const EdgeInsets.fromLTRB(9, 4, 9, 4),
             child: const Stamped('what may interrupt', size: 11)),
         const SizedBox(height: 6),
@@ -257,7 +262,8 @@ class _SettingsRegionState extends State<SettingsRegion> {
               alignment: Alignment.centerLeft,
               child: Slip(
                 id: 'settings.interrupt',
-                row: 2,
+                row: 4,
+                lane: TearLanes.panels,
                 stock: 'sticky_yellow',
                 torn: false,
                 padding: const EdgeInsets.fromLTRB(14, 8, 14, 9),
@@ -297,7 +303,8 @@ class _SettingsRegionState extends State<SettingsRegion> {
             type: MaterialType.transparency,
             child: Slip(
               id: 'the.whole.log',
-              row: 6,
+              row: 5,
+              lane: TearLanes.panels,
               stock: 'graph',
               width: MediaQuery.sizeOf(ctx).width * 0.88,
               child: Column(
@@ -363,7 +370,8 @@ class _Pairing extends StatelessWidget {
     final paired = transport.pairing;
     return Slip(
       id: 'settings.pairing',
-      row: 0,
+      row: 6,
+      lane: TearLanes.panels,
       stock: 'index',
       torn: false,
       padding: const EdgeInsets.fromLTRB(15, 13, 15, 15),

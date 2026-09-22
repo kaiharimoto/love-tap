@@ -3,6 +3,7 @@
 // changing.
 import 'package:flutter/material.dart';
 
+import '../../material/assignment.dart';
 import '../../material/desk.dart';
 import '../../material/hands.dart';
 import '../../material/marks.dart';
@@ -99,6 +100,7 @@ class _Section extends StatelessWidget {
             child: Slip(
               id: 'us.${module.id}',
               row: row,
+              lane: TearLanes.sections,
               stock: 'index',
               torn: false,
               width: 236,
@@ -135,6 +137,7 @@ class _Section extends StatelessWidget {
             child: Slip(
               id: 'us.body.${module.id}',
               row: row + 1,
+              lane: TearLanes.sections,
               stock: 'looseleaf',
               padding: const EdgeInsets.fromLTRB(4, 4, 4, 6),
               child: module.build(context, ctx.only(rows)),

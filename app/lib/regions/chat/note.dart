@@ -130,7 +130,7 @@ class Note extends StatelessWidget {
     final e = item.event;
 
     // margin events: a pencil line beside the thread, not a piece of paper
-    if (_isMarginal(item.type)) return _MarginLine(item: item, me: scope.me);
+    if (_isMarginal(item.type)) return _MarginLine(item: item, me: scope.me, row: row);
 
     final width = MediaQuery.sizeOf(context).width * _noteWidthFraction;
     final stock = lib == null ? '' : stockVariantFor(e, lib);
@@ -453,9 +453,14 @@ class _Refused extends StatelessWidget {
 /// `one hour, then stop · Thu 23 Apr` in search, off the same event. A person was being shown a
 /// stored field. Two sentences for one event is one sentence too many.
 class _MarginLine extends StatelessWidget {
-  const _MarginLine({required this.item, required this.me});
+  const _MarginLine({required this.item, required this.me, required this.row});
   final ThreadItem item;
   final Person me;
+
+  /// Where this line sits in the thread. It was `hashOf(item.id)`, and `tearAt`'s docstring says
+  /// exactly why that cannot work: a hash cannot promise distinctness, and `02_chat` had three
+  /// margins on one mask and nine repeats in one frame because of it.
+  final int row;
 
   @override
   Widget build(BuildContext context) {
@@ -472,7 +477,8 @@ class _MarginLine extends StatelessWidget {
           Flexible(
             child: Strip(
               id: 'margin-${item.event.id}',
-              row: hashOf(item.id),
+              row: row,
+              lane: TearLanes.margins,
               padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
               child: Row(
                 mainAxisSize: MainAxisSize.min,

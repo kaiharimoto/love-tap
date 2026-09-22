@@ -90,11 +90,12 @@ class PartnerStrip extends StatelessWidget {
     final stock = stockForMood(state.mood);
     final variants = lib?.stockVariants(stock) ?? const <String>[];
     final id = variants.isEmpty ? '' : variants[(partner.index + (state.mood?.length ?? 0)) % variants.length];
-    final tears = lib?.writableTears ?? const <String>[];
-    // a strip torn across the page: the strip kinds sit early in the pool
-    // `hashOf`, not `hashCode`: a Dart string hash is whatever the platform's hash happens to be
-    // and the VM's is not the browser's, so this tear was a different tear on the two phones.
-    final tear = tears.isEmpty ? null : tears[(state.mood == null ? 3 : hashOf(state.mood!)) % tears.length];
+    // The partner strip is one strip per person, so it is a two-row lane and the row is who it
+    // is. It keyed off `hashOf(state.mood)` into the whole pool, which is the mechanism
+    // `tearAt`'s docstring rules out -- a hash cannot promise distinctness -- and it also made
+    // the strip change its torn edge when the partner's mood changed, which is a piece of paper
+    // becoming a different piece of paper because somebody felt differently.
+    final tear = tearAt(lib, lane: TearLanes.chrome, row: 4 + partner.index);
     final asleep = state.availability == 'asleep';
     final headsDown = state.availability == 'heads_down';
     final ink = partner == Person.noor ? Pen.ballpoint : Pen.graphite;

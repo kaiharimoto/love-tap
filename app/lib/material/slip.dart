@@ -24,6 +24,7 @@ class Slip extends StatelessWidget {
     required this.id,
     required this.child,
     this.row = 0,
+    this.lane = TearLanes.chrome,
     this.stock,
     this.width,
     this.hug = false,
@@ -40,6 +41,10 @@ class Slip extends StatelessWidget {
   /// Where this slip sits in whatever list it is in: what keeps two slips on one screen from being
   /// torn along the same edge (material/assignment.dart).
   final int row;
+
+  /// Which list this row is a row of. Without it every list on a screen numbers from zero into
+  /// the same pool and collides pairwise down its length; see [TearLane].
+  final TearLane lane;
 
   /// A stock name from assets/INDEX.json. Null lets the id pick one.
   final String? stock;
@@ -68,12 +73,7 @@ class Slip extends StatelessWidget {
     if (variants.isEmpty) variants = lib?.stockVariants('lined') ?? const <String>[];
     final stockId = variants.isEmpty ? '' : variants[(h >> 8) % variants.length];
 
-    String? tear;
-    if (torn && lib != null && lib.writableTears.isNotEmpty) {
-      final masks = lib.writableTears;
-      final n = masks.length;
-      tear = masks[((row % n) * _stride(n)) % n];
-    }
+    final tear = torn ? tearAt(lib, lane: lane, row: row) : null;
 
     final piece = PaperPiece(
       id: id,
@@ -94,14 +94,6 @@ class Slip extends StatelessWidget {
     return GestureDetector(onTap: onTap, onLongPress: onLongPress, child: piece);
   }
 
-  static int _stride(int n) {
-    for (var s = (n * 0.37).round(); s < n; s++) {
-      if (_gcd(s, n) == 1) return s;
-    }
-    return 1;
-  }
-
-  static int _gcd(int a, int b) => b == 0 ? a : _gcd(b, a % b);
 }
 
 /// A torn strip of stock, sized to whatever is written on it.
@@ -127,6 +119,7 @@ class Strip extends StatelessWidget {
     required this.id,
     required this.child,
     this.row = 0,
+    this.lane = TearLanes.chrome,
     this.stock,
     this.padding = const EdgeInsets.fromLTRB(9, 5, 9, 5),
     this.liftMm = 0.35,
@@ -135,6 +128,10 @@ class Strip extends StatelessWidget {
   final String id;
   final Widget child;
   final int row;
+
+  /// Which list this row is a row of. Without it every list on a screen numbers from zero into
+  /// the same pool and collides pairwise down its length; see [TearLane].
+  final TearLane lane;
   final String? stock;
   final EdgeInsets padding;
 
@@ -155,12 +152,7 @@ class Strip extends StatelessWidget {
     if (variants.isEmpty) variants = lib?.stockVariants('lined') ?? const <String>[];
     final stockId = variants.isEmpty ? '' : variants[(h >> 8) % variants.length];
 
-    String? tear;
-    final masks = lib?.writableTears ?? const <String>[];
-    if (masks.isNotEmpty) {
-      final n = masks.length;
-      tear = masks[((row % n) * Slip._stride(n)) % n];
-    }
+    final tear = tearAt(lib, lane: lane, row: row);
 
     return PaperPiece(
       id: id,
@@ -261,13 +253,16 @@ class EmptySurface extends StatelessWidget {
 /// to be *on* something or the screen is a page rather than a surface, which is the anti-goal the
 /// whole visual concept is defined against.
 class RegionPad extends StatelessWidget {
-  const RegionPad({super.key, required this.id, this.row = 0});
+  const RegionPad({super.key, required this.id, this.row = 0, this.lane = TearLanes.chrome});
 
   /// Which region this is. It picks the stock, so Moments is the same paper every time it is
   /// turned to and a different paper from Us — five regions, five stacks, which is what the
   /// sentence in DIRECTION.md actually says.
   final String id;
   final int row;
+
+  /// Which list this row is a row of; see [TearLane].
+  final TearLane lane;
 
   /// The stocks a region pad is torn from.
   ///
@@ -317,6 +312,7 @@ class RegionPad extends StatelessWidget {
             final sheet = Slip(
               id: 'pad.$id',
               row: row,
+              lane: lane,
               stock: stocks[hashOf('pad.$id') % stocks.length],
               width: sheetW,
               torn: false,
@@ -353,11 +349,15 @@ class RegionPad extends StatelessWidget {
 ///
 /// [id] decides the stock and the tear, so the same question is always asked on the same slip.
 class DeskSheet extends StatelessWidget {
-  const DeskSheet({super.key, required this.id, required this.child, this.row = 5});
+  const DeskSheet({super.key, required this.id, required this.child, this.row = 5,
+      this.lane = TearLanes.chrome});
 
   final String id;
   final Widget child;
   final int row;
+
+  /// Which list this row is a row of; see [TearLane].
+  final TearLane lane;
 
   @override
   Widget build(BuildContext context) {
@@ -369,6 +369,7 @@ class DeskSheet extends StatelessWidget {
         child: Slip(
           id: 'sheet.$id',
           row: row,
+          lane: lane,
           width: width * 0.89,
           padding: const EdgeInsets.fromLTRB(20, 14, 20, 16),
           child: child,

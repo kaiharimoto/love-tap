@@ -1,6 +1,7 @@
 // The shared to-do list: lines torn off a list, ticked in the ink of whoever did them. Assigning
 // one to the other person is the only thing in the app that makes a sound on their phone without
 // being a message, and it is still just an event in the same spine.
+import '../../material/assignment.dart';
 import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
@@ -151,6 +152,7 @@ class _Line extends StatelessWidget {
         child: Slip(
           id: item.id,
           row: row,
+          lane: TearLanes.todos,
           stock: 'looseleaf',
           width: MediaQuery.sizeOf(context).width - 32,
           padding: const EdgeInsets.fromLTRB(13, 8, 13, 8),

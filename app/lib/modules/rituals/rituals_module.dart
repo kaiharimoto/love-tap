@@ -4,6 +4,7 @@
 // no broken state, and nothing that can be failed. What is kept is a tally in the margin — the
 // marks a person makes beside a habit — and the marks simply stop when a week goes by without one.
 // Nothing nags: the only thing that ever arrives on the other phone is what one of them wrote.
+import '../../material/assignment.dart';
 import 'package:flutter/material.dart';
 
 import '../../material/hands.dart';
@@ -116,6 +117,7 @@ class _Ritual extends StatelessWidget {
         child: Slip(
           id: r.id,
           row: row,
+          lane: TearLanes.rituals,
           stock: 'graph',
           width: MediaQuery.sizeOf(context).width - 30,
           padding: const EdgeInsets.fromLTRB(14, 11, 14, 12),
