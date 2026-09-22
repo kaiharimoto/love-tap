@@ -333,6 +333,27 @@ class CaptureHooks {
   ///
   /// Painted-ness is decided by [_painted], exactly as it is for the text runs, so an offstage
   /// region's four screens of paper are not declared.
+  ///
+  /// **A torn piece is three layers and until firing 44 this could see one of them.** The walk is
+  /// for `RenderImage`, so the baked contact shadow — an `Image.asset` — appeared in every sidecar
+  /// in the set, 183 draws across it, while the tear mask (composed offscreen and applied as a
+  /// shader) and the lit edge (a `CustomPaint`) appeared nowhere. The three have three different
+  /// geometries and three different fixes, so firing 29's instruction to establish which of them
+  /// makes the stepped inner boundary on `17_setup_pwa` before changing anything asked a reader
+  /// to choose between three suspects from a sidecar that could see one. Both now declare
+  /// themselves, with the numbers their own geometry turns on:
+  ///
+  /// * `fit: nine` — the lit edge. `fixed` and `centre` are how far it magnifies what it draws,
+  ///   in device pixels per source pixel, through the sliced edges and through the stretched
+  ///   middle. It draws onto the piece's own canvas, so its slices land at their own size in
+  ///   *logical* pixels and the device pixel ratio multiplies them.
+  /// * `fit: mask` — the tear mask. `composed` is the resolution its contour is actually defined
+  ///   at, which is neither the render's size nor the piece's: `SlicedMasks.at` clamps the
+  ///   composition to the mask's own width and four times its height. `fixed` and `centre` carry
+  ///   both magnifications multiplied together, so the two nine-sliced layers of one piece are
+  ///   directly comparable.
+  ///
+  /// Nothing about what is drawn changed when they were added.
   static List<Map<String, dynamic>> paperSurfaces() {
     // The asset name lives on the widget and the size lives on the render object, so the element
     // tree is walked once to pair them up and the render tree is walked after, where the paint
@@ -360,6 +381,21 @@ class CaptureHooks {
           if (piece != null) pieces[ro] = piece;
         }
       }
+      // The two nine-sliced layers, which are not `RenderImage` and so were invisible to every
+      // sidecar in the set. The lit edge carries its asset on its painter; the mask does not
+      // reach paint as a widget at all, so its asset is keyed onto the `RenderShaderMask` that
+      // applies it. Both want the piece id for the same reason the images do.
+      if (w is NineSliced) {
+        final ro = _under<RenderCustomPaint>(el);
+        if (ro != null && piece != null) pieces[ro] = piece;
+      }
+      if (w is MaskedLayer) {
+        final ro = _under<RenderShaderMask>(el);
+        if (ro != null) {
+          names[ro] = w.maskAsset;
+          if (piece != null) pieces[ro] = piece;
+        }
+      }
       final owner = piece;
       el.visitChildren((child) => pair(child, owner));
     }
@@ -373,13 +409,20 @@ class CaptureHooks {
   }
 
   /// The `RenderImage` an `Image` element eventually paints with, past whatever it is wrapped in.
-  static RenderImage? _imageUnder(Element el) {
+  static RenderImage? _imageUnder(Element el) => _under<RenderImage>(el);
+
+  /// The first render object of type [T] at or under [el].
+  ///
+  /// An element's `renderObject` is the nearest one at or *under* it, which for an `Image` is its
+  /// `Semantics` wrapper and for a `NineSliced` is whatever its state built this frame. So the
+  /// walk down is the general case and every caller needs it.
+  static T? _under<T extends RenderObject>(Element el) {
     final ro = el.renderObject;
-    if (ro is RenderImage) return ro;
-    RenderImage? found;
+    if (ro is T) return ro;
+    T? found;
     void down(RenderObject node) {
       if (found != null) return;
-      if (node is RenderImage) {
+      if (node is T) {
         found = node;
         return;
       }
@@ -413,9 +456,99 @@ class CaptureHooks {
         });
       }
     }
+    // The lit edge: a `CustomPaint`, drawn with `drawImageNine` straight onto the piece's canvas,
+    // so its sliced edges land at their own size in LOGICAL pixels and are magnified by the
+    // device pixel ratio before anybody sees them. `fixed` and `centre` say so in device pixels
+    // per source pixel, which is the unit the mask's entry below reports in too, so the two
+    // nine-sliced layers of one piece can be compared against each other.
+    if (node is RenderCustomPaint) {
+      final painter = node.painter;
+      if (painter is NinePainter && node.hasSize && !node.size.isEmpty) {
+        final box = node.size;
+        final img = painter.image;
+        final fx = _nineScale(img.width.toDouble(), box.width, painter.edge);
+        final fy = _nineScale(img.height.toDouble(), box.height, painter.edge);
+        final scale = fx[0] * dpr > fy[0] * dpr ? fx[0] * dpr : fy[0] * dpr;
+        final rect = MatrixUtils.transformRect(node.getTransformTo(view), Offset.zero & box);
+        out.add({
+          'asset': painter.asset,
+          'src': [img.width, img.height],
+          'drawn': [(box.width * dpr).round(), (box.height * dpr).round()],
+          'scale': double.parse(scale.toStringAsFixed(3)),
+          'fit': 'nine',
+          'slice': painter.edge,
+          'fixed': [
+            double.parse((fx[0] * dpr).toStringAsFixed(3)),
+            double.parse((fy[0] * dpr).toStringAsFixed(3)),
+          ],
+          'centre': [
+            double.parse((fx[1] * dpr).toStringAsFixed(3)),
+            double.parse((fy[1] * dpr).toStringAsFixed(3)),
+          ],
+          'rect': [rect.left.round(), rect.top.round(), rect.width.round(), rect.height.round()],
+          if (pieces[node] != null) 'piece': pieces[node],
+        });
+      }
+    }
+    // The tear mask: nine-sliced into an offscreen image at device pixels and then applied as a
+    // shader, so it is magnified TWICE — once by whatever `SlicedMasks.at` had to clamp the
+    // composition to, and once by the shader stretching that composition over the piece.
+    // `composed` is the resolution the torn contour is actually defined at; `fixed` and `centre`
+    // are the two magnifications multiplied together, in device pixels per source pixel.
+    if (node is RenderShaderMask && names[node] != null && node.hasSize && !node.size.isEmpty) {
+      final asset = names[node]!;
+      final mask = MaskCache.peek(asset);
+      final composed = SlicedMasks.composedAt[SlicedMasks.composedKey(asset, node.size)];
+      if (mask != null && composed != null) {
+        final box = node.size;
+        const slice = SlicedMasks.edge;
+        final fx = _nineScale(mask.width.toDouble(), composed[0].toDouble(), slice);
+        final fy = _nineScale(mask.height.toDouble(), composed[1].toDouble(), slice);
+        // and then the shader, which stretches the whole composition over the piece
+        final sx = box.width * dpr / composed[0];
+        final sy = box.height * dpr / composed[1];
+        final scale = sx > sy ? sx : sy;
+        final rect = MatrixUtils.transformRect(node.getTransformTo(view), Offset.zero & box);
+        out.add({
+          'asset': asset,
+          'src': [mask.width, mask.height],
+          'composed': composed,
+          'drawn': [(box.width * dpr).round(), (box.height * dpr).round()],
+          'scale': double.parse(scale.toStringAsFixed(3)),
+          'fit': 'mask',
+          'slice': slice,
+          'fixed': [
+            double.parse((fx[0] * sx).toStringAsFixed(3)),
+            double.parse((fy[0] * sy).toStringAsFixed(3)),
+          ],
+          'centre': [
+            double.parse((fx[1] * sx).toStringAsFixed(3)),
+            double.parse((fy[1] * sy).toStringAsFixed(3)),
+          ],
+          'rect': [rect.left.round(), rect.top.round(), rect.width.round(), rect.height.round()],
+          if (pieces[node] != null) 'piece': pieces[node],
+        });
+      }
+    }
     node.visitChildren((child) {
       if (_painted(node, child)) _collectSurfaces(child, view, dpr, names, pieces, out);
     });
+  }
+
+  /// How far a nine-slice magnifies what it draws on one axis: `[through the sliced edges,
+  /// through the stretched middle]`, in destination units per source pixel.
+  ///
+  /// The two sliced edges are drawn at their own size, which is why a nine-slice keeps its fibres
+  /// — unless the box is narrower than the two of them together, and then the whole lattice is
+  /// shrunk proportionally and there is no middle left at all. Everything downstream of the draw
+  /// (a device pixel ratio, a shader stretching the result again) is the caller's to multiply in.
+  static List<double> _nineScale(double src, double dst, double edge) {
+    final fixed = src * 2 * edge;
+    final shrink = fixed <= 0 ? 1.0 : (dst < fixed ? dst / fixed : 1.0);
+    final middleSrc = src * (1 - 2 * edge);
+    final middleDst = dst - fixed * shrink;
+    if (middleSrc <= 0 || middleDst <= 0) return [shrink, 0.0];
+    return [shrink, middleDst / middleSrc];
   }
 
   static List<Map<String, dynamic>> textRuns() {

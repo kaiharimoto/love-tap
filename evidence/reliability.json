@@ -1,23 +1,23 @@
 {
  "transport": "local",
- "generated_at": "2026-09-21T19:37:56.103309Z",
+ "generated_at": "2026-09-22T04:10:57.161925Z",
  "host": {
   "transport": "local",
   "role": "host",
   "state": "connected",
-  "address": "127.0.0.1:43551",
+  "address": "127.0.0.1:39739",
   "peer_cursor": 176,
   "our_cursor": 176,
   "last_error": null,
-  "since": "2026-09-21T19:37:56.090365Z",
-  "last_contact": "2026-09-21T19:37:56.100535Z",
+  "since": "2026-09-22T04:10:57.149202Z",
+  "last_contact": "2026-09-22T04:10:57.159522Z",
   "device_id": "android-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-21T19:37:55.612327Z"
+   "paired_at": "2026-09-22T04:10:56.660737Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -30,19 +30,19 @@
   "transport": "local",
   "role": "client",
   "state": "connected",
-  "address": "http://127.0.0.1:43551",
+  "address": "http://127.0.0.1:39739",
   "peer_cursor": 176,
   "our_cursor": 176,
   "last_error": null,
-  "since": "2026-09-21T19:37:55.863834Z",
-  "last_contact": "2026-09-21T19:37:56.102044Z",
+  "since": "2026-09-22T04:10:56.919323Z",
+  "last_contact": "2026-09-22T04:10:57.161028Z",
   "device_id": "pwa-rel",
   "paired": {
    "host_id": "android-rel",
    "client_id": "pwa-rel",
    "host_person": "noor",
    "client_person": "teo",
-   "paired_at": "2026-09-21T19:37:55.616492Z"
+   "paired_at": "2026-09-22T04:10:56.665319Z"
   },
   "faults": "scripted",
   "offline": false,
@@ -173,7 +173,7 @@
   "later_check": {
    "status": "pending",
    "why": "the nodes were not answering when this was re-run; the run above stands",
-   "checked_at": "2026-09-21T19:37:56.138027Z"
+   "checked_at": "2026-09-22T04:10:57.192358Z"
   }
  }
 }

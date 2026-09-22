@@ -462,6 +462,20 @@ class SlicedMasks {
   static final Map<String, ui.Image> _images = {};
   static const _keep = 64;
 
+  /// The resolution a mask was last composed at, for the logical box it was composed for:
+  /// `'<asset>@<logical w>x<logical h>'` to `[composed w, composed h]`, both in device pixels.
+  ///
+  /// This is the number the tear's own contour is defined at, and it is not the mask render's
+  /// size: [at] clamps the composition to the mask's own width and to four times its height, so a
+  /// sheet wider than its mask has its torn edge resampled up by the shader afterwards. Nothing
+  /// visible could say so — the composed image never leaves this class — and the surfaces sidecar
+  /// now carries it, so a reader can tell a mask that is upsampled from a lit edge that is.
+  /// See `CaptureHooks.paperSurfaces`.
+  static final Map<String, List<int>> composedAt = {};
+
+  static String composedKey(String asset, Size box) =>
+      '$asset@${box.width.round()}x${box.height.round()}';
+
   /// How much of a mask, in from each edge, is the torn edge itself rather than the paper inside
   /// it. Measured off the masks: the fibres reach about a fifth of the way in and the middle fifth
   /// is always solid, so four tenths is comfortably outside them.
@@ -474,6 +488,7 @@ class SlicedMasks {
     final w = (size.width * dpr).round().clamp(1, mask.width);
     final h = (size.height * dpr).round().clamp(1, mask.height * 4);
     final key = '$asset@${w}x$h';
+    composedAt[composedKey(asset, size)] = [w, h];
     final have = _images[key];
     if (have != null) return have;
     if (_images.length > _keep) {
@@ -552,12 +567,23 @@ class _NineSlicedState extends State<NineSliced> {
   Widget build(BuildContext context) {
     final image = _image;
     if (image == null) return const SizedBox.shrink();
-    return CustomPaint(painter: _NinePainter(image, widget.edge, widget.opacity));
+    return CustomPaint(painter: NinePainter(widget.asset, image, widget.edge, widget.opacity));
   }
 }
 
-class _NinePainter extends CustomPainter {
-  _NinePainter(this.image, this.edge, this.opacity);
+/// Public, and carrying the asset it draws, so that [CaptureHooks.paperSurfaces] can declare a
+/// lit edge the way it already declares a baked shadow.
+///
+/// A torn piece is three rendered layers with three geometries — the mask, this, and the contact
+/// shadow — and until firing 44 only the shadow appeared in `evidence/<artifact>.surfaces.json`,
+/// because the sidecar is built by walking the render tree for `RenderImage` and this is a
+/// `CustomPaint`. So a reader asking which of the three makes a stepped boundary could see one of
+/// the three suspects. Nothing about what is drawn changes; the painter simply says what it is.
+class NinePainter extends CustomPainter {
+  NinePainter(this.asset, this.image, this.edge, this.opacity);
+
+  /// The asset this draws, e.g. `assets/tears/tear_004_edge.webp`.
+  final String asset;
   final ui.Image image;
   final double edge;
   final double opacity;
@@ -577,6 +603,6 @@ class _NinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_NinePainter old) =>
+  bool shouldRepaint(NinePainter old) =>
       !identical(old.image, image) || old.edge != edge || old.opacity != opacity;
 }
