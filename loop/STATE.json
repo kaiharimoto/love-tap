@@ -5,7 +5,14 @@
   "stage": "IMPLEMENT",
   "firing": 47,
   "stage_entered_at_firing": 44,
-  "lease": null,
+  "lease": {
+    "session_id": "session_01TgCnnywB9PsoiCtY2KP8jW",
+    "firing": 48,
+    "stage": "IMPLEMENT",
+    "started_at": "2026-09-22T15:58:33Z",
+    "expires_at": "2026-09-22T19:58:33Z",
+    "note": "Firing 48. IMPLEMENT: ranks 4, 5, 7, 8 in order. Rank 2 is ADDRESS's. No new renders."
+  },
   "evidence_fresh_as_of": "firing 47, 2026-09-22T13:33Z. 15 of 17, whole set, one run, seeded with evidence/.previous from the artifacts committed at firing 39 so DIFF.json compares against them: 15 changed, 2 absent. TWO THINGS TO READ BEFORE BELIEVING A NUMBER OUT OF THIS SET. (1) MANIFEST.json books crops/dusk_pulse.png MISSING and every ruler in the run read it anyway -- scene.js wrote it and both sidecars at 13:51:03 and then exited non-zero over five page errors, and capture.sh called it refused one second later. The artifact is good: its legal sheet reads median Y 0.5512 against the committed 0.5519 with a local grain of 0.0409 against 0.0448, so the render is present with its tooth. Filed as `the-manifest-books-an-artifact-missing-that-every-ruler-in-the-run-reads`. (2) THE DAY SET'S FAILURE LIST IS NOW MOSTLY THE INSTRUMENT. 26 of 31 day failures carry a ring-to-band ratio >= 4 -- the band hugging a run reading the ADJACENT LINE'S INK -- where 3 of 13 did before. The total barely moved, 37 of 432 to 36 of 429, so nothing got harder to read; the failures relocated. `TRAVELLING` at 1.23 and `week one, and the room smells right again` at 1.54 appear with identical readings on five artifacts because they are one widget photographed five times. Filed as `a-run-reads-the-line-above-it-as-its-own-ground`, and legibility.py MUST NOT be changed alongside any item it measures.",
   "evidence_note": "15 of 17, the ceiling in this container. 09_two_devices.png and 16_setup_android.png are booked missing WITH the measured /dev/kvm reason this time, not 'not captured this session' -- firing 37's MANIFEST lost that text because its second leg ran --only=02_chat; this run was whole so the sentence is there. `surfaces` is booked missing on the rendered surface with nothing in it, which is rank 6 and unchanged. THE CLIPS IN THIS CAPTURE WERE ENCODED BY A DIFFERENT BINARY THAN THE ONES BEFORE THEM: the pinned johnvansickle.com ffmpeg tarball now sits behind a JS interstitial that returns 7.3 KB of HTML with a 200, tar fails on it, and bootstrap.sh is `set -e` so it dies at that line and never reaches tailscale or Playwright WebKit -- which is no capture at all, not a missing clip. The distro ffmpeg 6.1.1 is symlinked into toolchain/ffmpeg. All five clips assembled and every frame check passed. Do not read mp4 SSIM across this boundary as content movement without checking that first.",
   "degradation": 0,
