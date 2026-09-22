@@ -5,7 +5,14 @@
   "stage": "IMPLEMENT",
   "firing": 46,
   "stage_entered_at_firing": 44,
-  "lease": null,
+  "lease": {
+    "session_id": "session_019KU8VVnAH7Tao72p8Xq5Qu",
+    "firing": 47,
+    "stage": "IMPLEMENT",
+    "started_at": "2026-09-22T12:57:52Z",
+    "expires_at": "2026-09-22T16:57:52Z",
+    "note": "Firing 47. IMPLEMENT: rank 6 (the dusk screen), then ./capture.sh in full."
+  },
   "evidence_fresh_as_of": "firing 39, 2026-09-21T13:11Z. 15 of 17, whole set, one run. READ DIFF.json's 13-CHANGED CAREFULLY BEFORE CALLING ANYTHING A REGRESSION -- firing 27 had to write this same note and this is the second time. Firing 38 repaired `UlidFactory.next`, which had been peeling a 48-bit millisecond with `t & 31` on a web int that is a 32-bit operation, so ALL 14,061 seeded event ids changed; and `hashOf` now chooses stock, variant, tear, tilt, lift and tick seed from those new ids in fourteen places. So every seeded surface in the library is drawn on different paper than the artifact beside it in .previous. THE PROOF THAT THIS IS THE FIX LANDING AND NOT A BREAK IS IN DIFF.json ITSELF: the only two artifacts it calls unchanged are 10_first_run.png and 17_setup_pwa.png, and those are EXACTLY the two scenes capture.sh draws from the fresh build with no seed compiled in (capture.sh's second scene loop, against FRESH_URL). Every artifact built against the seeded year moved; neither artifact built against a seedless install did. Measured on 13_messenger_states with one instrument over both readings: 11 of 20 matched runs are torn from a different stock, `empty chair` going legal_01 -> lined_02 and 1.19:1 -> 7.20:1. The set's legibility improved 48 below floor -> 39, over 418 runs -> 426.",
   "evidence_note": "15 of 17, the ceiling in this container. 09_two_devices.png and 16_setup_android.png are booked missing WITH the measured /dev/kvm reason this time, not 'not captured this session' -- firing 37's MANIFEST lost that text because its second leg ran --only=02_chat; this run was whole so the sentence is there. `surfaces` is booked missing on the rendered surface with nothing in it, which is rank 6 and unchanged. THE CLIPS IN THIS CAPTURE WERE ENCODED BY A DIFFERENT BINARY THAN THE ONES BEFORE THEM: the pinned johnvansickle.com ffmpeg tarball now sits behind a JS interstitial that returns 7.3 KB of HTML with a 200, tar fails on it, and bootstrap.sh is `set -e` so it dies at that line and never reaches tailscale or Playwright WebKit -- which is no capture at all, not a missing clip. The distro ffmpeg 6.1.1 is symlinked into toolchain/ffmpeg. All five clips assembled and every frame check passed. Do not read mp4 SSIM across this boundary as content movement without checking that first.",
   "degradation": 0,
