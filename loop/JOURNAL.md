@@ -6190,3 +6190,149 @@ wearing a pass.
 Cheap disproof is eleven for eleven. Three of the four items worked this firing had an account of
 themselves that measurement contradicted, and all three were settled from files already in the
 repository in under half an hour each.
+
+---
+
+## Firing 43 — cycle 3, ADDRESS — 2026-09-22T01:07Z to 2026-09-22T02:00Z
+
+The stage said IMPLEMENT and IMPLEMENT had nothing it could execute. Four of the top items could no
+longer be worked as written: firing 42 had refuted ranks 13, 15 and 16 against their own declared
+rects and the shipped font's own GSUB table, and had left 14 blocked on three layers of a torn
+piece of which only one declares itself. So the stage moved to ADDRESS before anything was touched,
+the way firings 29, 32 and 35 moved it. No code changed, nothing under `assets/` or `evidence/` was
+touched, and the lease was written and pushed before the first read.
+
+### The blocker was a hypothesis and nobody had been testing those
+
+Firing 42 was a careful firing. It refuted three items' stated causes with numbers in one sitting.
+And in the same sitting it closed the tear shadow's last route with a sentence:
+
+> (b) needs a number the app does not have — there is no mm-to-pixel scale anywhere in `app/lib` —
+> so it is a `DIRECTION.md` decision and not an IMPLEMENT one.
+
+`app/lib` has had one since `light.dart` was written.
+
+```
+app/lib/material/light.dart:13   /// How far a shadow shifts per millimetre of lift, in logical
+app/lib/material/light.dart:14   const double kShadowPerMm = 3.8;
+app/lib/material/light.dart:41   Offset shadowOffsetFor(double liftMm) => kShadowDirection * (liftMm * kShadowPerMm);
+```
+
+And the lift is not a constant either. `PaperPiece.liftMm` is declared at `paper.dart:117` and
+`:144` and passed at **eleven call sites** covering every family of piece — `slip.dart:82` and
+`:132`, `desk.dart:122`, `objects.dart:92`, `note.dart:160`, `chat_region.dart:685`,
+`search_page.dart:374`, `pulse_region.dart:86` and `:221`, `moments_region.dart:153`,
+`setup_region.dart:48` — and `_bakedShadow` **already reads it**, at `paper.dart:196`, eleven lines
+from the `BoxFit.fill` the whole item is about. The render's own physical scale is declared too:
+`assets/tears/relief.json` carries `shadow_frame 1.2`, `lift_mm 2.4`, `edge_band_mm 2.6`, and
+`assets/MANIFEST.json` carries `w_mm` and `h_mm` for all fifty-six masks.
+
+One `grep -rn mm app/lib`. Cheap disproof is twelve for twelve.
+
+**A cause gets checked because it promises work. A blocker gets believed because it promises none.**
+That asymmetry is the whole of why this one survived a firing, and it is now `WORKER_PROMPT.md`
+§3e: the cheapest experiment that could refute the claim goes before the fix *and* before the
+decision not to fix.
+
+### The fork, settled
+
+Route **(b)** — lay the render's own one-dimensional falloff around the outline, at a width that is
+a function of the lift — is chosen, and route (a), authoring shadow renders at the aspects the
+strips need, is not taken. Four reasons, in order of how much they decide:
+
+1. It is the only route that makes the spill a function of the **lift**, which is what the defect
+   is. (a) fixes the sampling and leaves the spill proportional to the paper; the next strip at a
+   new aspect breaks it again.
+2. (a) is seventy of a hundred and seventy-two draws' worth of Blender on a container that renders
+   this library at thirty-one to thirty-nine seconds a frame.
+3. (b) keeps the brief's clause instead of trading it away. `docs/BRIEF.md` 05 asks for contact
+   shadows *baked from the render's own lighting rather than applied as a uniform blur* — a
+   `MaskFilter.blur` **would be** that uniform blur and is the anti-goal. What (b) lays down is the
+   profile measured off the committed renders, so the lighting is still the render's own.
+4. One site, and no collision. `_bakedShadow` is the only `BoxFit.fill` in `app/lib`, and (b) does
+   not touch `tearFor` — so the namespace collision firing 41 warned of with
+   `a-slip-with-no-row-takes-the-same-tear-as-every-other-slip-with-no-row` does not arise on this
+   route. It would have arisen on the mask-selection route firing 41 refuted.
+
+**This does not reopen either render fence**, and the items say so. (b) needs no Blender time at
+all; the profile is read off shadow renders that are already committed. Had the decision landed on
+"new renders" it would have touched the fence and this entry would say so.
+
+The one measurement that would overturn it, and it goes first: read the spill band of
+`assets/tears/*_shadow.png` and check it carries a monotone profile that survives being resampled
+to the eleven pixels of spill a margin strip has room for. Minutes, against a route that is hours.
+
+### Three items re-filed, three clauses struck
+
+- **The tear shadow.** The 1.5:1 aspect clause is struck — it can never pass while the shadow's box
+  is the piece's box, and seventy of a hundred and seventy-two draws need an aspect wider than the
+  widest mask that exists. In its place: the contact band read off each piece's own declared rect,
+  with the >6:1 group's median required to reach 0.8× the ≤2:1 group's (today: 0 px against 9.5 px),
+  a floor of 6 px at depth 5 L so both cannot satisfy it by being zero, and a paired population so
+  it cannot be met by a piece leaving the screen.
+- **The barcode.** The mean-crossing clause is struck: implemented as `comb.py` and disqualified by
+  its own earning, 114 before and 110 after across a repair that is known to have landed. What
+  replaces it is the figure that *did* move — the band's luminance range, 183–202 before and 43–61
+  after — plus the shared-edge test the item was actually filed on, "all beginning and ending at
+  exactly the same y", which a crossing count never expressed. Re-tagged
+  `harness-that-unblocks-seeing` and moved from 15 to 39: both drawing sites were replaced at
+  firing 29 and measured at the widget with two standing re-breaks, so what is left is a ruler and
+  not a repair.
+- **The handwriting.** The ink-luminance IQR clause is struck: it asks a filled TrueType outline to
+  vary in tone, the interior-ink IQR is 0 at every size in both hands, and it is 0 by construction.
+  What the brief actually asks for takes its place — *"stroke weight varies with pen pressure"* —
+  as a coefficient of variation ≥ 0.25 on the horizontal ink run-lengths through each instance's own
+  box. Clause one survives with the same-glyph control of 4.99 required in the same report so the
+  floor cannot be met by the rasteriser's subpixel phase, and a third clause lands on the variant
+  cycle's *period*, because 690 returning at the fifth and eighth letter is where the critic's 3.07
+  came from.
+
+### Rank 14's blocker is a code change
+
+Not a design decision: the three layers and their three geometries are not in dispute and no
+verdict moves. Not a re-render: it adds no pixel to any asset. About thirty lines — `_NinePainter`
+carries its asset, `_collectSurfaces` grows a branch for a `RenderCustomPaint` whose painter is one
+— and it draws exactly what it drew before. Two and a half points of `material_truth` and
+`anti_goal` sit behind it, so it is **rank 1**, and `the-tears-are-overlays-painted-on-whole-paper`
+is rank 2 and they are one sitting. Nothing is redrawn until the sidecar names the layer.
+
+### Both fences held
+
+The four-hour two-hundred-and-forty-frame re-render is not started and not authorised. The
+scheduling call firing 36 left to ADDRESS is answered: **not now**. Four hours of this container's
+only Blender would take the committed frame from 5.686 to about 6.938 against a floor of 8.0 — a
+real gain that still fails — on a sequence whose floor-clearing route is blocked on a measurement
+no firing can take. What would reopen it is written on the item and neither half is a firing's to
+supply. The one leg that remains takeable is the provenance check the item itself has always
+offered, which renders nothing.
+
+`the-unfolding-clip-shows-a-flat-rectangle-for-two-thirds-of-its-frames` is marked `fenced` at rank
+48. It is still the highest-value item in the build and still the reason `material_truth` cannot
+reach 22, and it is ranked there **because no firing in this container can advance it**, not because
+it stopped mattering. It comes straight back to the top the day the WebKit decode-and-hold reading
+exists. No number was moved; raising the budget until the floor clears is the same act as lowering
+the floor.
+
+### The queue
+
+Fifty-one open items, contiguous 1..51, no gaps, every one carrying `rank_before_firing_43`; the
+ten that had no rank at all now have one, and closed and superseded items carry `rank: null` so a
+stale number cannot be read as a position. Only items this firing has new information about were
+moved — churning a ranking nobody has new evidence about is not triage.
+
+The 3d sweep was made over all fifty-one measurements. Two hits, both vetted and both staying: rank
+48's `Not a box at (200,1350)` is a *prohibition* rather than a specification, and the `frame 0000`
+in ranks 48 and 14 is `assets/folds/unfold_thirds/0000`, an **asset path** — one of the anchors
+§3d's own table names — and not a frame ordinal of a recording.
+
+### What is worth more than the items
+
+Two clauses were struck this firing and **only one of them was genuinely impossible.** Rank 16's
+asked a filled outline to vary in tone, which no font can do at any effort. Rank 13's asked for an
+aspect ratio that cannot hold while the shadow is an image filling the piece's box — unreachable by
+the route that had been tried, and perfectly reachable by the one nobody had costed.
+
+In prose those two sentences are identical. Only a measurement separates them. An item that records
+"impossible" where it meant "exhausted" has closed a door that was open, and it will stay closed,
+because the next firing reads the sentence and not the tree.
+

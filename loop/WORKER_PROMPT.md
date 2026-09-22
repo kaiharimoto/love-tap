@@ -391,6 +391,48 @@ repair that is known to have landed, and printing them in the right order.
 **When you write or re-rank a queue item, sweep its measurement for an absolute coordinate or a
 frame ordinal and re-express it.** ADDRESS is not done until that sweep has been made.
 
+### 3e. A stated cause is a hypothesis, and so is a stated blocker
+
+**Since firing 35, twelve items have had their own account of themselves refuted, and most of them
+were settled in minutes off files already in the repository.** Rank 13's mask pool, rank 15's
+crossing count, rank 16's `calt` is never asked for, rank 10's twelve-second cold start, rank 14's
+translucent overlay, rank 6's decoder that stopped at thirteen frames. Not one of those needed a
+capture. Cheap disproof is now twelve for twelve, and it has never once cost more than half an hour.
+
+So, before the fix: **run the cheapest experiment that could refute the item's stated cause.** Not
+a better-argued paragraph about whether the cause is right — a grep, a read of a committed sidecar,
+a line of arithmetic against a declared number. If the cause survives it, the fix is aimed at
+something real. If it does not, you have saved the firing and the item gets re-filed against what
+is true. Write the experiment and its result onto the item either way, because the next firing
+should not have to repeat it to find out it was done.
+
+**And the same instrument points at the sentence that says a route is impossible, which is the half
+nobody had been checking.** Firing 42 refuted three causes with numbers in one sitting and, in the
+same sitting, closed rank 13's last route with *"it needs a millimetre scale `app/lib` does not
+have"*. `app/lib` has had one since `light.dart` was written: `kShadowPerMm = 3.8` at line 14,
+`shadowOffsetFor(liftMm)` at line 41, `PaperPiece.liftMm` passed at eleven call sites, and
+`_bakedShadow` already reading it eleven lines from the function the item was about. One grep.
+
+A cause gets checked because it promises work. **A blocker gets believed because it promises none**,
+and it moves an item out of the queue and into somebody else's stage, where nobody looks at it
+again. That asymmetry is why this one survived a whole firing. So the rule has two halves and the
+second is the one that is easy to skip:
+
+- **before the fix**, the cheapest experiment that could refute the cause;
+- **before the decision not to fix**, the cheapest experiment that could refute the blocker.
+
+"This is a DIRECTION.md decision", "the pool cannot reach it", "there is no X in the tree", "that
+would need a re-render" — every one of those is a claim with a `grep`, an `ls` or one division
+behind it. Spend the minute.
+
+**And when you strike a clause, say which kind of impossible it is.** Firing 43 struck two clauses
+in one firing. Rank 16's asked a filled TrueType outline to vary in tone, which no font can do at
+any effort. Rank 13's asked for an aspect ratio that cannot hold while the shadow is an image
+filling the piece's box — unreachable by the route that had been tried, and perfectly reachable by
+the one nobody had costed. **In prose those two sentences are identical.** Only the measurement
+separates them, and an item that records "impossible" where it meant "exhausted" has closed a door
+that was open.
+
 ### 4. End the firing
 
 Update `loop/STATE.json` — increment `firing`, record what happened in `history`, set the stage for
