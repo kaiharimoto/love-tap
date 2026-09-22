@@ -232,7 +232,9 @@ The prompt is a snapshot; the branch is the truth.
 
 ### 1. Read where you are
 
-`CLAUDE.md`, then `docs/LOOP.md`, then `loop/STATE.json`, in that order. `docs/BRIEF.md` is
+`CLAUDE.md`, then `docs/LOOP.md`, then `loop/STATE.json`, in that order, **from the tree after
+§0**, not from the copy in your opening context, which comes from the container's checkout and
+can be many commits old. `docs/BRIEF.md` is
 authoritative and is 85 KB: read it whole in a stage that judges or plans (DIAGNOSE, ADDRESS,
 DESIGN) and skip it in a stage executing one named item.
 
@@ -293,6 +295,12 @@ which is an `asks[]` entry — and `asks[]` entries *never block the loop*, by c
 is coming to answer. A firing that finds itself waiting on the owner has taken a wrong turn some
 way back: record the ask, drop that item, and spend the rest of the firing on the queue. The only
 legitimate reason to stop early is the push pre-flight failing or another firing holding the lease.
+
+**A new `harness` filing worth 0 points must name, by id, the ranked item whose measurement it
+blocks.** If it blocks nothing, it goes in the journal, not the queue. Firing 50 set this rule
+because the queue grew 49 → 57 across six firings, and its tail is 0-point harness items that the
+owner's steer tells every firing not to work. A defect a person would see (`using-it`, `the-ui`)
+is always filed, with its points.
 
 If every open queue item is genuinely blocked — which has not happened yet — say so in
 `loop/JOURNAL.md`, set `blocked` in `loop/STATE.json` with what would unblock it, and stop. That

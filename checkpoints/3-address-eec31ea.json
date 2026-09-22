@@ -1,0 +1,29 @@
+{
+ "cycle": 3,
+ "stage": "ADDRESS",
+ "firing": 50,
+ "at": "eec31ea",
+ "written_at": "2026-09-22T22:09:35Z",
+ "stage_was_when_the_firing_started": "IMPLEMENT",
+ "why_the_stage_was_moved": "The dispatcher sent this firing to ADDRESS because firing 49 counted ranks 2, 7, 8, 10, 11, 12 and 14 as needing renders, and only ADDRESS may authorise them. Recorded as firings 29, 32, 35 and 43 recorded theirs.",
+ "no_code_written": true,
+ "no_capture": true,
+ "toolchain_bootstrapped": "flutter only, for the gate",
+ "items_ranked": 56,
+ "ranks_contiguous": "1..56, no gaps",
+ "items_closed": [
+  "the-claude-md-a-firing-is-handed-can-be-fifty-commits-stale"
+ ],
+ "items_superseded_or_struck": [
+  "no-surface-in-this-app-is-drawn-at-its-own-resolution",
+  "hf-std-on-a-strip-frame-does-not-measure-the-sheet"
+ ],
+ "items_filed": [
+  "the-last-search-hit-is-cut-by-the-frame-edge-and-the-delta-gate-failed-on-it",
+  "the-bead-spheres-have-no-surface-and-nyeh-is-an-emoji"
+ ],
+ "decisions": {
+  "render_decision_at_firing_50": "Authorised: aperture probe, tape, bits, objects day+dusk with the clover's albedo, and the shell (about 2h15m). Conditional: day paper. Refused: folds (fenced), photos, tears, dusk paper, new objects. The full text is in loop/STATE.json."
+ },
+ "next": "IMPLEMENT, rank 1: the-tears-are-overlays-painted-on-whole-paper."
+}

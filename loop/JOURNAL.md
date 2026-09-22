@@ -7079,3 +7079,71 @@ Rank 15 is next in order and was not reached. Evidence: 12_search, its sidecars 
 rulers are from this firing's `--only=12_search` capture. MANIFEST.json, frames.json and DIFF.json
 were put back to firing 47's, because an `--only` run drops the /dev/kvm reason (firing 37's trap).
 flutter analyze clean, flutter test 231 green, pack_assets exit 0 at start and end.
+
+## Firing 50 — ADDRESS, cycle 3 (moved from IMPLEMENT)
+
+Step 0 passed first time: the checkout was at the remote tip and the dry-run push came back
+`Everything up-to-date`. I took the lease and pushed it before touching anything. STATE said
+IMPLEMENT. The dispatcher sent this firing to ADDRESS instead, because firing 49 counted seven ranks
+waiting on renders, and I have recorded the move the way firings 29, 32, 35 and 43 did. No app code
+was changed, and nothing under `assets/` or `evidence/` was committed.
+
+### The render question, decided
+
+It is written in full at `render_decision_at_firing_50` in `loop/STATE.json`. In short:
+
+- **Authorised, in this order:** (1) a day aperture probe that sets `DAY_STOPS` by a stated rule,
+  as an exposure change only, with the hue untouched, about 15 min; (2) the tape, under 10 min of
+  probes; (3) bits, day and dusk, about 15 min; (4) objects, a day body and a new dusk body for all
+  25 plus the clover's albedo (COLOR.md's only named family-D carrier), about 90 min; (5) the
+  shell, only if (1) set a stop. About 2h15m, which fits inside one IMPLEMENT lease.
+- **Conditional:** day paper, about 80 min, only if the probe finds a stop that keeps paper L p50
+  within 0.03 and still clears the tooth class floor. Paper is the ground under every word, and
+  firing 49 has only just re-earned those floors.
+- **Refused:** folds (fenced, and not bundled in), photos (the steer), tears (nothing asks for
+  them), dusk paper (DUSK_STOPS already exists and the paper still clips, so a second stop would be
+  a guess), and new objects or colours, which are DESIGN's.
+- **Re-measure afterwards:** headroom, illuminant, composited, texture budget and bundle size,
+  then one full capture that four items are waiting on.
+
+Before deciding, I checked firing 49's count one item at a time (3e), and three of the seven fell
+out. Rank 2 needs the packer, not Blender: its own firing-46 measurement says so. Rank 8 is a bundle
+question. Rank 11's open half is where accents live, which is a design question. That leaves four
+ranks plus the bits and the tape, and all of them fit in minutes-to-an-hour legs.
+
+The owner's review of three visual directions is noted in the decision as a cost fact: work put
+into renders is the work a change of direction would affect most. It did not decide anything, and
+DIRECTION.md stands.
+
+### The queue
+
+Re-ranked 1..56, contiguous, with a permutation assert in the script. Rank 1 is the tears item
+(no render). Ranks 2-5 are the legs in order. Rank 7 is firing 49's recorded delta-gate failure,
+now an item so that it gets worked rather than accepted; it closes on the post-legs capture. I
+superseded `no-surface-...-own-resolution` (its scale clause is exhausted on cost, not impossible)
+and struck the hf_std ruler item (no open measurement cites HF_std, so nothing asks for it). I
+closed the stale-CLAUDE.md item with the two doc lines it asked for. The relighting item's hf_mean
+clause was struck and split out for DESIGN as `the-bead-spheres-have-no-surface-and-nyeh-is-an-emoji`.
+
+### Is it converging
+
+Not by count. It went 57 → 56 this firing, and count is the wrong measure. Real new defects keep
+turning up as the instruments improve, and those close once IMPLEMENT is allowed to render. The
+tail that never drains is 24 harness items the steer says not to work. I added a rule in
+WORKER_PROMPT §3b: a 0-point harness filing must name the ranked item it blocks, or it goes in
+the journal. Measure convergence by open the-ui plus using-it points, which stand at 36.25 as a
+baseline.
+
+### Gate
+
+`pack_assets --seed=year` exit 0, with no tracked file changed. `flutter analyze` clean, and
+`flutter test` 231 green (on a toolchain bootstrapped for the gate). The test run rewrites
+`evidence/coldstart.json` and `evidence/reliability.json`; I restored both from git and did not
+commit them.
+
+### What the next firing should expect
+
+IMPLEMENT, rank 1: measure what `SlicedMasks` keeps resident before changing `pack_assets.py`.
+If the budget allows, go on to leg 1 (the aperture probe) and follow the legs in order, committing
+each family as it lands. Blender is in `bootstrap.sh --profile=web`. The pinned ffmpeg URL still
+stops bootstrap after Flutter, so apply CONTINUE §5's fix before relying on `.done/`.

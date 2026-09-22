@@ -68,6 +68,10 @@ history that has been pushed. Check the branch before every push, not once at th
 - **A blender generator writes `assets/MANIFEST.json` even when `--out` points elsewhere.** A throwaway
   comparison render leaves entries whose paths climb out of the repo; `git checkout -- assets/MANIFEST.json`
   after one.
+- **Never trust the copy of this file you were handed in your opening context.** It is read from the
+  commit the container checked out, which has been fifty commits behind the branch before. Re-read
+  it from the tree after `loop/WORKER_PROMPT.md` §0's fast-forward, and check any "does not exist"
+  with `ls`.
 - **Never edit a running bash script** — bash reads it incrementally and the run corrupts.
 - **Never `pkill -f <pattern>`** where the pattern appears in your own command line. It has killed
   three sessions here. Split the literal.
