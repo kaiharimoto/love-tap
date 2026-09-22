@@ -1,0 +1,676 @@
+{
+ "ceiling": 0.01,
+ "condition": "day",
+ "read": 64,
+ "failing": 49,
+ "by_family": {
+  "bits": {
+   "read": 11,
+   "failing": 11
+  },
+  "objects": {
+   "read": 25,
+   "failing": 13
+  },
+  "paper": {
+   "read": 27,
+   "failing": 25
+  },
+  "shell": {
+   "read": 1,
+   "failing": 0
+  }
+ },
+ "files": [
+  {
+   "file": "assets/bits/clip_01.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/clip_02.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/glue_01.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/pin_01.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/pin_02.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/staple_01.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/staple_02.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/tape_01.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/tape_02.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/tape_03.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/bits/tape_04.png",
+   "opaque": 0,
+   "ok": false,
+   "why": "no opaque pixels to read"
+  },
+  {
+   "file": "assets/objects/obj_blanket_fold.png",
+   "opaque": 199189,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_boat.png",
+   "opaque": 128162,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_candle.png",
+   "opaque": 110974,
+   "at_255": {
+    "R": 0.0011,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_clover.png",
+   "opaque": 63624,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_coffee_ring.png",
+   "opaque": 273835,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_confetti.png",
+   "opaque": 39674,
+   "at_255": {
+    "R": 0.5038,
+    "G": 0.0721,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_crane.png",
+   "opaque": 160976,
+   "at_255": {
+    "R": 0.7212,
+    "G": 0.1807,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_crown.png",
+   "opaque": 139759,
+   "at_255": {
+    "R": 0.438,
+    "G": 0.2034,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_crumple_ball.png",
+   "opaque": 153100,
+   "at_255": {
+    "R": 0.4955,
+    "G": 0.2266,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_fortune_teller.png",
+   "opaque": 282774,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_gold_star.png",
+   "opaque": 142467,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_knot.png",
+   "opaque": 37402,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_mug.png",
+   "opaque": 208285,
+   "at_255": {
+    "R": 0.6455,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_pinch.png",
+   "opaque": 202194,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_plane.png",
+   "opaque": 271150,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_plaster.png",
+   "opaque": 93817,
+   "at_255": {
+    "R": 0.8306,
+    "G": 0.0271,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_ribbon.png",
+   "opaque": 53784,
+   "at_255": {
+    "R": 0.4748,
+    "G": 0.004,
+    "B": 0.0007
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_rubber_band.png",
+   "opaque": 34785,
+   "at_255": {
+    "R": 0.3722,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_snapped_pencil.png",
+   "opaque": 58503,
+   "at_255": {
+    "R": 0.5046,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_spitball.png",
+   "opaque": 31769,
+   "at_255": {
+    "R": 0.3384,
+    "G": 0.1179,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_staple_chain.png",
+   "opaque": 24075,
+   "at_255": {
+    "R": 0.1902,
+    "G": 0.1681,
+    "B": 0.1534
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_stone.png",
+   "opaque": 110556,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/objects/obj_string_loop.png",
+   "opaque": 29932,
+   "at_255": {
+    "R": 0.2914,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_ticket.png",
+   "opaque": 95893,
+   "at_255": {
+    "R": 0.5875,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/objects/obj_torn_corner.png",
+   "opaque": 109806,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/paper/graph_01.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.5123,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/graph_02.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.4784,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/graph_03.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.4397,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/graph_04.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.4204,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/index_01.webp",
+   "opaque": 2016000,
+   "at_255": {
+    "R": 0.233,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/index_02.webp",
+   "opaque": 2016000,
+   "at_255": {
+    "R": 0.2232,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/legal_01.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.3278,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/legal_02.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.3204,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/lined_01.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.2892,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/lined_02.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.2816,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/lined_03.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.277,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/lined_04.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.2697,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/looseleaf_01.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.4086,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/looseleaf_02.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.4022,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/looseleaf_03.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.3896,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/looseleaf_04.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.3865,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/receipt_01.webp",
+   "opaque": 1517400,
+   "at_255": {
+    "R": 0.6254,
+    "G": 0.0001,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/spiral_01.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.2376,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/spiral_02.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.2308,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/spiral_03.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.2337,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/spiral_04.webp",
+   "opaque": 2318400,
+   "at_255": {
+    "R": 0.2235,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/sticky_blue_01.webp",
+   "opaque": 3240000,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/paper/sticky_blue_02.webp",
+   "opaque": 3240000,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  },
+  {
+   "file": "assets/paper/sticky_pink_01.webp",
+   "opaque": 3240000,
+   "at_255": {
+    "R": 0.098,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/sticky_pink_02.webp",
+   "opaque": 3240000,
+   "at_255": {
+    "R": 0.1143,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/sticky_yellow_01.webp",
+   "opaque": 3240000,
+   "at_255": {
+    "R": 0.0882,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/paper/sticky_yellow_02.webp",
+   "opaque": 3240000,
+   "at_255": {
+    "R": 0.0959,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": false
+  },
+  {
+   "file": "assets/shell/desk.png",
+   "opaque": 2651000,
+   "at_255": {
+    "R": 0.0,
+    "G": 0.0,
+    "B": 0.0
+   },
+   "worst": "R",
+   "ok": true
+  }
+ ],
+ "ok": false
+}

@@ -276,8 +276,14 @@ def add_top_camera(scene, width_m, height_m, ortho=True, tilt_deg=0.0, distance=
     cam_data.clip_end = 100.0
     cam = bpy.data.objects.new("scan_cam", cam_data)
     scene.collection.objects.link(cam)
-    cam.location = (0.0, 0.0, distance)
-    cam.rotation_euler = (math.radians(tilt_deg), 0.0, 0.0)
+    # A tilted camera is swung back over the origin, not left overhead and turned: turned in place,
+    # its frame lands distance*tan(tilt) away from what it was pointed at. bits.py asked for 18°
+    # at 0.40 m and got a 4.5 cm frame centred 13 cm past a 1 cm clip, so every bit in the library
+    # rendered as an empty 600x600 PNG (firing 49). objects.py swung its own camera, which is why
+    # nobody saw it; at tilt 0 this is the same (0, 0, distance) it always was.
+    t = math.radians(tilt_deg)
+    cam.location = (0.0, -distance * math.sin(t), distance * math.cos(t))
+    cam.rotation_euler = (t, 0.0, 0.0)
     scene.camera = cam
     # an orthographic camera fills the frame to the *larger* axis; match the aspect
     scene.render.pixel_aspect_x = 1.0
