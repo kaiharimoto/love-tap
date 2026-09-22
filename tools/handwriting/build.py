@@ -822,6 +822,18 @@ def covers(contours, want, slack=0.22):
     return got_w >= want_w * (1 - slack) and got_h >= want_h * (1 - slack)
 
 
+# Every (glyph, variant) that fell back to a non-distinct outline in the face being built. Reset
+# per face by `build_face`; reported in the face's log line and in its info, because the number
+# that matters when `HAUSDORFF_MIN` is raised is not the build time, it is this.
+_FALLBACKS = []
+
+
+def _set_hausdorff_min(value):
+    """The floor is a module constant so the build stays readable; `--hausdorff-min` moves it."""
+    global HAUSDORFF_MIN
+    HAUSDORFF_MIN = float(value)
+
+
 def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
     """All variants of a glyph, re-rolled until every pair is distinct (Hausdorff > 12) and every
     one of them still carries all of its ink."""
@@ -847,6 +859,14 @@ def build_glyph_variants(glyph, hand, face_index, glyph_index, seed):
             if v == 0 or not glyph["strokes"] or all(hausdorff(pts, r["pts"]) > HAUSDORFF_MIN for r in results):
                 chosen = made
                 break
+        # **A variant that never came out distinct is a SILENT failure and is counted out loud.**
+        # Twenty-four attempts is the ceiling; past it this keeps the best attempt whether or not
+        # it clears `HAUSDORFF_MIN`, which is the right thing to ship and the wrong thing to be
+        # quiet about. Raising the floor makes the re-roll harder, so a floor raised too far stops
+        # producing distinct variants and starts producing the SAME variant twice -- and the font
+        # still builds, the same size, with the same glyph count, and nothing says so.
+        if chosen is None:
+            _FALLBACKS.append((glyph.get("name") or glyph_index, v))
         results.append(chosen or fallback or
                        {"contours": [], "pts": np.zeros((0, 2)), "alt": None, "attempts": 24, "whole": True})
     return results
@@ -982,6 +1002,7 @@ def build_face(face, face_index, skel, hands, seed, out_dir, log):
     order = glyph_order_for(glyphs)
     n = hand["variants"]
     t0 = time.time()
+    _FALLBACKS.clear()
     built = {}
     alt_usage = {}
     for gi, name in enumerate(order):
@@ -1079,7 +1100,10 @@ def build_face(face, face_index, skel, hands, seed, out_dir, log):
     path = os.path.join(out_dir, f"{face}.ttf")
     fb.save(path)
     log(f"  {face}: wrote {path} ({len(full_order)} glyphs, {time.time() - t0:.1f}s)")
+    log(f"  {face}: {len(_FALLBACKS)} of {len(order) * n} variants fell back to a non-distinct "
+        f"outline at HAUSDORFF_MIN={HAUSDORFF_MIN}")
     return path, {"glyphs": len(order), "variants": n, "alt_usage": alt_usage,
+                  "hausdorff_min": HAUSDORFF_MIN, "non_distinct": len(_FALLBACKS),
                   "attempts_max": max(v["attempts"] for vs in built.values() for v in vs)}
 
 
@@ -1194,7 +1218,17 @@ def main(argv=None):
     ap.add_argument("--faces", default=",".join(FACES))
     ap.add_argument("--sheet", default=None, help="also write a debug glyph sheet per face into this dir")
     ap.add_argument("--no-manifest", action="store_true", help="do not touch assets/MANIFEST.json")
+    ap.add_argument("--hausdorff-min", type=float, default=HAUSDORFF_MIN,
+                    help="how far apart two variants of one glyph must be before both are kept. "
+                         "The knob `one-variant-per-glyph-and-zero-pressure-variance` clause one "
+                         "names: the shipped fonts' best pair of distinct outlines reads a "
+                         "best-aligned MAD of 9.82-10.61 against a floor of 15, and this is what "
+                         "re-rolls them. Watch `non_distinct` in the log, not the build time -- "
+                         "past twenty-four attempts a variant keeps its best try whether or not it "
+                         "clears the floor, so a floor raised too far buys nothing and says "
+                         "nothing. Build into a scratch --out with --no-manifest.")
     args = ap.parse_args(argv)
+    _set_hausdorff_min(args.hausdorff_min)
     out_dir = os.path.abspath(args.out)
     prev_dir = os.path.abspath(args.preview or os.path.join(out_dir, "previews"))
     faces = [f.strip() for f in args.faces.split(",") if f.strip()]

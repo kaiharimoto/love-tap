@@ -138,6 +138,22 @@ void main() {
     await _load('TeoHand', 'assets/fonts/TeoHand.ttf');
   });
 
+  // **`eeeeeeee` IS A CONTROL STRING FOR THE RASTERISER AND IS NOT A MEASUREMENT OF THIS APP**,
+  // and firing 48 put that sentence here because the number it produces has been quoted as one
+  // for two cycles. Eight instances against five variants: by pigeonhole two of them MUST share an
+  // outline, so `min` is 0.00 before a single line of the generator is touched, and a firing that
+  // tunes the hands until this string comes clean is tuning against a requirement the brief does
+  // not make. The item's clause is anchored to the runs `02_chat.text.json` declares, where the
+  // longest same-letter repeat is FIVE against five variants -- exactly reachable.
+  //
+  // What that clause needs is glyph IDS, which is shaping rather than rasterising, and it is in
+  // `tools/check/hands.py`: 19 of the 53 repeated letters inside a declared run take an outline
+  // twice, and one pair -- the two `o`s of `room` in the Chat hero -- is the identical outline
+  // printed twice IN A ROW. The ruler is earned against `--no-calt`, which reads 27 of 53 and
+  // eight such pairs, so it discriminates the defect from the repair in the right order.
+  //
+  // What stays here is what only a rasteriser can answer: how far apart two DIFFERENT outlines
+  // actually look, against the floor of the method.
   test('a letter that comes round again is not the same outline stamped twice', () async {
     for (final size in <double>[51, 39, 34.5]) {
       for (final entry in {
@@ -150,12 +166,13 @@ void main() {
                 'letters, so the measurement below is about the wrong boxes');
         final median = r.mads[r.mads.length ~/ 2];
         // ignore: avoid_print
-        print('${entry.key} @${size}px eight e: MAD min ${r.mads.first.toStringAsFixed(2)} '
-            'median ${median.toStringAsFixed(2)} max ${r.mads.last.toStringAsFixed(2)}; '
-            'interior ink IQR ${r.coreIqr}');
-        // and no floor on `median`, on purpose: see the head of this file. It is mostly the
-        // rasteriser's subpixel phase and it survives `calt` being switched off, so it cannot
-        // stand as a guard over anything. It is printed, not asserted.
+        print('${entry.key} @${size}px eight e (a RASTERISER control, not the app): MAD min '
+            '${r.mads.first.toStringAsFixed(2)} median ${median.toStringAsFixed(2)} max '
+            '${r.mads.last.toStringAsFixed(2)}; interior ink IQR ${r.coreIqr}. The min is 0.00 by '
+            'pigeonhole and says nothing; the MEDIAN is how far two different outlines are, '
+            'against the item\'s floor of 15 and this method\'s own floor of 4.99.');
+        // and no floor asserted, on purpose: see the head of this file. It is printed so a
+        // successor tuning HAUSDORFF_MIN can watch the median move, and it is not a gate.
       }
     }
   });
