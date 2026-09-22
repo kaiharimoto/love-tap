@@ -1,6 +1,6 @@
 11 artifacts read -> evidence/palette.json
   mean chroma 0.0448  ·  grey 2%  ·  hue families 4-5  ·  lightness drift 0.5499
-palette: 46 breaches of docs/COLOR.md across 11 artifacts
+palette: 45 breaches of docs/COLOR.md across 11 artifacts
   §4                  01_pulse.png             widest_hue_gap_deg = 320.0, requires <= 200.0
   §5 floor / 7 item 2 01_pulse.png             chroma_by_band.figure.p99_chroma = 0.0748, requires >= 0.1
   §7 item 5           01_pulse.png             chroma.accent_fraction = 0.00046, requires >= 0.01
@@ -28,9 +28,8 @@ palette: 46 breaches of docs/COLOR.md across 11 artifacts
   §5 floor / 7 item 2 10_first_run.png         chroma_by_band.figure.p99_chroma = 0.0773, requires >= 0.1
   §7 item 5           10_first_run.png         chroma.accent_fraction = 0.00058, requires >= 0.01
   §4                  12_search.png            widest_hue_gap_deg = 320.0, requires <= 200.0
-  §5 floor            12_search.png            chroma_by_band.mid.mean_chroma = 0.029, requires >= 0.03
-  §5 floor / 7 item 2 12_search.png            chroma_by_band.figure.p99_chroma = 0.0901, requires >= 0.1
-  §7 item 5           12_search.png            chroma.accent_fraction = 0.0055, requires >= 0.01
+  §5 floor            12_search.png            chroma_by_band.mid.mean_chroma = 0.0294, requires >= 0.03
+  §7 item 5           12_search.png            chroma.accent_fraction = 0.00999, requires >= 0.01
   §2                  13_messenger_states.png  value_bands.mid = 0.033, requires >= 0.04
   §4                  13_messenger_states.png  widest_hue_gap_deg = 320.0, requires <= 200.0
   §5 floor / 7 item 2 13_messenger_states.png  chroma_by_band.figure.p99_chroma = 0.0776, requires >= 0.1

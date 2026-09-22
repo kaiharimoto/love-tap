@@ -348,22 +348,22 @@
   "12_search.png": {
    "lightness": {
     "p2": 120.0,
-    "p50": 0.851,
+    "p50": 0.8629,
     "p98": 165.0,
-    "span": 0.635
+    "span": 0.6348
    },
    "value_bands": {
-    "ground": 0.3968,
-    "mid": 0.0617,
-    "figure": 0.5415
+    "ground": 0.3837,
+    "mid": 0.0626,
+    "figure": 0.5537
    },
    "chroma": {
-    "mean": 0.0397,
-    "p99": 0.0669,
+    "mean": 0.0399,
+    "p99": 0.0898,
     "grey_fraction": 0.0026,
-    "accent_fraction": 0.0055,
+    "accent_fraction": 0.00999,
     "accent_fraction_by_family": {
-     "A_paper": 0.0055,
+     "A_paper": 0.00999,
      "B_rose": 0.0,
      "C_cool": 0.0,
      "D_green": 0.0,
@@ -372,16 +372,16 @@
    },
    "chroma_by_band": {
     "ground": {
-     "mean_chroma": 0.0397,
+     "mean_chroma": 0.0396,
      "p99_chroma": 0.0491
     },
     "mid": {
-     "mean_chroma": 0.029,
-     "p99_chroma": 0.0549
+     "mean_chroma": 0.0294,
+     "p99_chroma": 0.08
     },
     "figure": {
-     "mean_chroma": 0.0408,
-     "p99_chroma": 0.0901
+     "mean_chroma": 0.0413,
+     "p99_chroma": 0.1185
     }
    },
    "hue_families": 5,
@@ -560,7 +560,7 @@
    "A_paper"
   ],
   "grey_fraction": 0.0207,
-  "accent_fraction": 0.00079,
+  "accent_fraction": 0.0012,
   "lightness_drift": 0.5499,
   "lightness_drift_room": 0.1366,
   "rooms": 10,
@@ -570,7 +570,7 @@
  "floors": {
   "law": "docs/COLOR.md",
   "classes_from": "docs/screen_classes.json",
-  "breaches": 46,
+  "breaches": 45,
   "breached": [
    {
     "artifact": "01_pulse.png",
@@ -793,23 +793,15 @@
     "class": "room",
     "quantity": "chroma_by_band.mid.mean_chroma",
     "requires": ">= 0.03",
-    "actual": 0.029,
+    "actual": 0.0294,
     "section": "5 floor"
-   },
-   {
-    "artifact": "12_search.png",
-    "class": "room",
-    "quantity": "chroma_by_band.figure.p99_chroma",
-    "requires": ">= 0.1",
-    "actual": 0.0901,
-    "section": "5 floor / 7 item 2"
    },
    {
     "artifact": "12_search.png",
     "class": "room",
     "quantity": "chroma.accent_fraction",
     "requires": ">= 0.01",
-    "actual": 0.0055,
+    "actual": 0.00999,
     "section": "7 item 5"
    },
    {

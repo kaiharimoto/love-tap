@@ -6985,3 +6985,97 @@ on: a failed check there becomes `note_missing`, so a good still whose chrome re
 be booked MISSING, which is the same shape as the anomaly firing 47 filed against `dusk_pulse`.
 What that flag needs first is a way for `capture.sh` to record a failed check that is not an absent
 artifact.
+
+## Firing 49 — IMPLEMENT, cycle 3
+
+Step 0 passed after one detour: the container checked out `3edfbf7`, a stale branch ref (the same
+tip firing 25 met), and the remote tip was fifty commits on. Kept on `backup/local-3edfbf7`, moved
+to `b1f961c`, dry run clean. Lease taken and pushed before anything was touched.
+
+Ranks 4, 5, 7 and 8 stay open exactly as firing 48 handed them over: each is waiting on a capture,
+a font-tuning sitting, or an ADDRESS decision about renders, and none of those was this firing's.
+
+### Rank 9 closed: the tooth is judged by the class of the paper it is on
+
+`paper_tooth.py` and `flat_fill.py` both still carried `FLOOR_STD = 8.0` seventeen firings after
+COLOR.md §5a declared three floors, and `stock_class.py`, which holds those floors, was imported by
+neither. Now `stock_class.verdict()` is the one definition: class floor, met at day and at dusk
+separately. `flat_fill.py` takes each still's floor from the stock its own `surfaces.json` declares
+under the pad box.
+
+Two corrections to the ruler came first, and they mattered more. **The library draw was a draw the
+app never makes**: every `Slip` puts `Transform.scale(1.12)` round its image (the pad declares
+`drawn` 1347×2908 and `rect` 1513×3259), and the tool neither applied it nor cropped to the box.
+And **eight seeded windows a sheet was noise**: adding ×1.12 moved most day medians *up*, which a
+smoother draw cannot do. Receipt at dusk read 3.799 on eight windows and 4.494 on sixty-four, and
+index at dusk flipped. The verdict now uses §5a's own tiled median. Earned on the pre-firing-26
+library, which fails 9 of 10 stocks against today's 2, with untouched graph identical in both.
+
+Today looseleaf fails by day at 7.689 and receipt by day at 1.119. The item predicted the receipt
+alone; looseleaf is the day-rig case §5a already names. At ×1.0 the receipt *passes*, because its
+render has a 38-px grey frame that the old draw left in the box. Re-broken three ways.
+
+### Rank 10: needs renders, and has slipped
+
+Re-measured: five chroma breaches where firing 23 had four, and the set mean back under 0.045. The
+38 day files owed a re-render are still owed. Stopped there, per the fence rule.
+
+### Rank 11: the premise is half false, and a using-it defect under it
+
+**No rendered object carries family B or D at accent chroma.** Of 25 objects, three have any pixel
+at chroma ≥ 0.09, all family A; the clover has 0.4%, and no sticky stock reaches 0.09 at all. So
+DIRECTION.md's "the accent-area floor is carried by opaque objects" cannot be met by anything in the
+library today. That's for ADDRESS.
+
+What could be done was the highlighter, and it turned out to be a bug a person hits. The note you
+land on from a search hit was lit by a 45% yellow wash **painted over its words**: measured on the
+real `Note`, rasterised, its ink went from luminance 50.1 to 129.7. Both sites now multiply, as
+DIRECTION.md says, at 70%, the smallest round alpha whose composite clears 0.09 over every stock a
+note can take (at 45% multiplied it misses on graph at dusk). Ink under the light now reads 46.1.
+
+A capture of 12_search measured it on the glass: figure p99 chroma 0.0901 → 0.1185 (passes),
+accent_fraction 0.0055 → 0.00999 (misses 0.010 by 0.00001). Population held at 25 declared runs.
+Legibility has one new failure, the last hit, now cut in half by the frame edge after firing 48
+moved the page up 55 px, and never measured before. `legibility_delta.py --gate` formally fails,
+1 → 2 of 7 matched, and the matched box is IoU across that 55-px shift over different content.
+The pixels read identically. A full capture on a post-48 baseline settles it; I have not claimed it.
+
+### Rank 14: the gate exists, and its first run found the bits are empty
+
+`tools/check/headroom.py` fails exactly the item's 38 files. It also fails 20 of 27 **dusk**
+papers, so the dusk aperture is not the answer the item says it is.
+
+And every bit in the library, tape, pin, clip, staple, glue, day and dusk, is a picture with
+nothing in it. The tape on every chat photo draws nothing. `add_top_camera` tilted the camera in
+place, so bits.py's 18° pointed a 4.5 cm frame 13 cm past the clip; objects.py swung its own camera
+and was never affected. Fixed at the root; a no-op for every other caller. Probed in scratch: all 11
+have content, and four of the five kinds look right. **The tape renders opaque black**, with
+transmission at 0.86 and at 0 alike, so it is geometry or build rather than the material. Filed.
+Nothing re-rendered.
+
+### Ranks 12, 13, 16
+
+12 needs renders. 13: three of four clauses now hold; only `value_bands.mid` fails, on five
+stills, and palette.py bands at 700 px, where strokes blur into mid tones. At full resolution
+02_chat's mid band moves the opposite way. Don't derive a shadow law from it. 16: one timestamp of
+21 fails, by 0.1, on the ruler item's population.
+
+### Is the queue converging
+
+Open went 56 → 57: rank 9 closed; three defects filed, **all three new, not refinements**
+(empty bits, black tape, the washed-out note; the last closed the same firing). Every re-measure
+this firing refined a known item.
+
+My view, not acted on: **the queue is no longer converging, and one decision would change that.**
+Ranks 2, 7, 8, 10, 11 (its B/D half), 12, 14, the bits and the tape all bottom out in "needs
+renders", and most of those renders are minutes, not the fenced four hours: bits 18 s at probe
+settings, objects about 30 minutes (firing 48). New instruments keep finding real defects faster
+than IMPLEMENT can close items it isn't allowed to render for. ADDRESS authorising minutes-scale,
+non-fold renders would unblock about half the open queue at once.
+
+### What the next firing should expect
+
+Rank 15 is next in order and was not reached. Evidence: 12_search, its sidecars and the set-level
+rulers are from this firing's `--only=12_search` capture. MANIFEST.json, frames.json and DIFF.json
+were put back to firing 47's, because an `--only` run drops the /dev/kvm reason (firing 37's trap).
+flutter analyze clean, flutter test 231 green, pack_assets exit 0 at start and end.
