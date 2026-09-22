@@ -17,9 +17,14 @@ exact: a *render* of paper cannot put 59% of a frame on one value to the bit, be
 paper has tooth in it. A flat fill can, and the value it lands on is a constant somebody typed.
 So the report names the constant when it recognises one, out of `app/lib/material/palette.dart`.
 
-The second clause is the tooth, sampled the way `tools/paper_tooth.py` samples it -- the same
-window size, the same floors, the same fixed seed -- so a number here and a number there are the
-same kind of number.
+The second clause is the tooth, sampled with the window size and fixed seed `tools/paper_tooth.py`'s
+eight-window sampler uses. ITS FLOOR IS THE CLASS FLOOR OF THE STOCK UNDER THE BOX, per
+docs/COLOR.md §5a, read from tools/check/stock_class.py -- not a number of this file's own. Which
+stock is under the box is what the still's `<still>.surfaces.json` DECLARES: the `assets/paper/`
+surface whose rect covers most of the pad box. That is the pad on every region, and on
+17_setup_pwa, which has no pad, it is the looseleaf sheet the setup page is written on. A still
+with no sidecar, or no declared paper covering half the box, fails the clause and says why, rather
+than being read against a floor guessed for it.
 
 The box for the second clause is the region pad's, which is where the flat fills were. It is
 derived from the frame rather than written down, so it holds for any still of this app at any
@@ -50,7 +55,8 @@ DOMINANT_CEILING = 0.08
 # is still measured and reported per window; see tools/check/stock_class.py for the whole argument
 # and for what would let a posterisation guard be re-declared.
 SAMPLE = (400, 200)
-FLOOR_STD = 8.0
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import stock_class  # noqa: E402
 
 # app/lib/material/palette.dart. A dominant value that is one of these to the bit is a fallback
 # colour showing through, not a render -- which is the whole diagnosis, stated once.
@@ -84,6 +90,42 @@ def pad_box(w, h):
             round(1368 * dpr / 3), round(2580 * (h / 3120.0)))
 
 
+def declared_stock(path, box):
+    """The paper stock the still's own surfaces.json declares under `box`, and how much of it.
+
+    Returns (stem, share) -- `legal_02_dusk`, 0.97 -- or (None, why) when there is nothing to
+    read. The share is of the box's area, clipped to the frame, so a pad drawn past the frame edge
+    by its Transform.scale is not counted for paper nobody sees.
+    """
+    side = os.path.splitext(path)[0] + ".surfaces.json"
+    if not os.path.exists(side):
+        return None, "no %s beside it" % os.path.basename(side)
+    with open(side) as fh:
+        surfaces = json.load(fh)
+    bx, by, bw, bh = box
+    best, share = None, 0.0
+    for sf in surfaces:
+        asset = sf.get("asset", "")
+        if not asset.startswith("assets/paper/"):
+            continue
+        x, y, w, h = sf["rect"]
+        ix = max(0, min(bx + bw, x + w) - max(bx, x))
+        iy = max(0, min(by + bh, y + h) - max(by, y))
+        cov = ix * iy / float(bw * bh)
+        if cov > share:
+            best, share = os.path.splitext(os.path.basename(asset))[0], cov
+    if best is None or share < 0.5:
+        return None, "no declared paper covers half the pad box (best %.2f)" % share
+    return best, round(share, 3)
+
+
+def stem_family(stem):
+    parts = stem.split("_")
+    while parts and (parts[-1] == "dusk" or parts[-1].isdigit()):
+        parts.pop()
+    return "_".join(parts)
+
+
 def samples(lum, n=8, seed=7):
     """n windows of the size the item measures. Identical to tools/paper_tooth.py's sampler --
     same size, same seed, same placement rule -- so the two tables can be read together."""
@@ -110,25 +152,33 @@ def read(path):
     x, y, bw, bh = pad_box(w, h)
     lum = np.asarray(im.convert("L"), dtype=np.float64)[y:y + bh, x:x + bw]
     ss = samples(lum)
-    passing = sum(1 for s in ss if s["std"] >= FLOOR_STD)
+    stock, covers = declared_stock(path, (x, y, bw, bh))
+    cls = stock_class.classify(stem_family(stock)) if stock else None
+    floor = stock_class.FLOORS[cls] if cls else None
+    passing = sum(1 for s in ss if floor is not None and s["std"] >= floor)
     stds = sorted(s["std"] for s in ss)
     problems = []
+    if floor is None:
+        problems.append("the tooth clause has no floor: %s" % (
+            covers if stock is None else "%s has no class in docs/COLOR.md 5a" % stock))
     if share > DOMINANT_CEILING:
         named = CONSTANTS.get(value)
         problems.append(
             "%.2f%% of the frame is the one value #%06X%s, against a ceiling of %.0f%%"
             % (share * 100, value, " -- which is %s, a constant, so no render made it" % named
                if named else "", DOMINANT_CEILING * 100))
-    if ss and passing < len(ss):
+    if ss and floor is not None and passing < len(ss):
         problems.append(
-            "%d of %d %dx%d windows of the pad box are under L_std %.1f"
-            % (len(ss) - passing, len(ss), SAMPLE[0], SAMPLE[1], FLOOR_STD))
+            "%d of %d %dx%d windows of the pad box are under L_std %.1f, the %s floor of %s"
+            % (len(ss) - passing, len(ss), SAMPLE[0], SAMPLE[1], floor, cls, stock))
     return {
         "of": os.path.basename(path),
         "size": [w, h],
         "dominant": {"rgb": "#%06X" % value, "share": round(share, 5),
                      "constant": CONSTANTS.get(value)},
         "pad_box": [x, y, bw, bh],
+        "stock": {"declared": stock, "covers": covers if stock else None, "class": cls,
+                  "floor": floor, "why": None if stock else covers},
         "windows": {"declared": len(ss), "passing": passing,
                     "median_std": stds[len(stds) // 2] if stds else None,
                     "each": ss},
@@ -150,7 +200,7 @@ def main():
     results = [read(p) for p in paths]
     report = {
         "ceiling": {"dominant_share": DOMINANT_CEILING, "sample": list(SAMPLE),
-                    "std": FLOOR_STD},
+                    "std": dict(stock_class.FLOORS), "by": "docs/COLOR.md 5a, per stock class"},
         "stills": results,
         "ok": all(r["ok"] for r in results),
     }
@@ -160,11 +210,12 @@ def main():
             json.dump(report, fh, indent=1)
     for r in results:
         mark = "ok" if r["ok"] else "--"
-        print("%s %-28s dominant %6.2f%% %s%s  windows %d/%d  median L_std %s"
+        print("%s %-28s dominant %6.2f%% %s%s  windows %d/%d  median L_std %s  on %s (%s %s)"
               % (mark, r["of"], r["dominant"]["share"] * 100, r["dominant"]["rgb"],
                  " (%s)" % r["dominant"]["constant"] if r["dominant"]["constant"] else "",
                  r["windows"]["passing"], r["windows"]["declared"],
-                 r["windows"]["median_std"]))
+                 r["windows"]["median_std"], r["stock"]["declared"], r["stock"]["class"],
+                 r["stock"]["floor"]))
         for p in r["problems"]:
             print("     %s" % p)
     return 0 if report["ok"] else 2

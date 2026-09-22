@@ -40,9 +40,26 @@ variance on a lined sheet, so that comparison reads 21/48 against 6/48 and looks
 magnification is the mechanism. It is not a like-for-like reading and it is not evidence. Every
 column in this table draws into `--box`, for that reason.
 
-The floor is quoted from the queue item rather than defended here. Whether 8.0 is the right floor
-for the quiet paper between a lined sheet's printed rules is a separate question, and the answer
-this file gives is an input to it, not a verdict on it.
+THE FLOOR IS NO LONGER ONE NUMBER. It was `FLOOR_STD = 8.0`, "quoted from the queue item rather
+than defended here", until docs/COLOR.md §5a declared a floor per stock class -- written 8.0,
+plain 6.0, coated 4.0 -- and required each to be met SEPARATELY at day and at dusk. Both live in
+tools/check/stock_class.py and nowhere else, so this file, flat_fill.py and surfaces.py cannot
+drift apart. Each window is counted against its own stock's floor, and the table ends with the
+§5a verdict per stock: its class, its floor, its day and dusk medians, and whether both clear.
+
+AND THE DRAW NOW INCLUDES THE MAGNIFICATION THE APP ACTUALLY APPLIES. Every `Slip` -- `RegionPad`
+included -- hands `PaperPiece` a `stockScale` of 1.12, and `PaperPiece` wraps the image in
+`Transform.scale(stockScale)` on top of `BoxFit.cover`. The pad's own `surfaces.json` entry shows
+it: `drawn` 1347x2908, `rect` 1513x3259, which is x1.123 on both axes. Until firing 49 this file
+drew into the box at cover alone, which is a draw the app never makes. `--stock-scale 1.0` gives
+the old chain back, for comparing against a number measured before.
+
+WHAT THIS DRAW STILL IS NOT, stated so a verdict is not read as more than it is: every stock is
+drawn into the PAD's box, and the pad is only ever `lined`, `looseleaf`, `graph`, `legal` or
+`spiral` (`RegionPad.stocks`). The committed evidence set draws `receipt` as notes at a median
+declared scale of 1.56 and never draws a sticky note at 400x200 or larger at all -- 198x192 is the
+biggest -- so the coated verdicts are a verdict on the stock, read at the pad's magnification,
+and not on any surface a person has seen.
 """
 import argparse
 import glob
@@ -55,16 +72,21 @@ import numpy as np
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "tools", "check"))
+import stock_class  # noqa: E402
 SOURCE = os.path.join(ROOT, "assets", "paper")
 
 # what the queue item asks of a 400x200 sample of a paper region
 SAMPLE = (400, 200)
-FLOOR_STD = 8.0
+# The floor is per class and lives in stock_class.FLOORS -- docs/COLOR.md §5a.
 # No level floor: struck from docs/COLOR.md §5a at firing 36 for failing the repaired stocks
 # (57-58) as well as the defect (42). The count is still measured and reported per window.
 
-# RegionPad's box on a 1440x3120 capture, as firing 20 measured it off the live build
+# RegionPad's box on a 1440x3120 capture, as firing 20 measured it off the live build, and what
+# every capture since declares as the pad's `drawn`
 PAD_BOX = (1347, 2908)
+# PaperPiece's Transform.scale around the image, as Slip passes it (app/lib/material/slip.dart)
+STOCK_SCALE = 1.12
 
 # the six the item and its parent name between them, plus the two that bracket the range
 DEFAULT = ["lined_02", "lined_01", "looseleaf_01", "legal_01", "graph_01", "index_01"]
@@ -114,8 +136,54 @@ def samples(img, n=8, seed=7):
     return out
 
 
-def passes(ss):
-    return sum(1 for s in ss if s["std"] >= FLOOR_STD)
+def tiled(img, stride=stock_class.STRIDE):
+    """Every placement of the window across the whole drawn box at a fixed stride, as L_std.
+
+    docs/COLOR.md §5a's statistic: the window is tiled across the surface's own bounds and the
+    reading is the median over every placement, never a handful of random drops. Firing 49
+    measured why on this very file: eight seeded placements per sheet put `receipt` at dusk at
+    3.799 and sixty-four put it at 4.494, and `index` at dusk passed on one and failed on the
+    other. Computed off an integral image, so four thousand placements a sheet cost nothing.
+    """
+    a = np.asarray(img.convert("L"), dtype=np.float64)
+    w, h = SAMPLE
+    if a.shape[0] < h or a.shape[1] < w:
+        return np.array([])
+    s1 = np.pad(a.cumsum(0).cumsum(1), ((1, 0), (1, 0)))
+    s2 = np.pad((a * a).cumsum(0).cumsum(1), ((1, 0), (1, 0)))
+    ys = np.arange(0, a.shape[0] - h + 1, stride)
+    xs = np.arange(0, a.shape[1] - w + 1, stride)
+    Y, X = np.meshgrid(ys, xs, indexing="ij")
+
+    def box(t):
+        return t[Y + h, X + w] - t[Y, X + w] - t[Y + h, X] + t[Y, X]
+    n = float(w * h)
+    mean = box(s1) / n
+    var = np.maximum(box(s2) / n - mean * mean, 0.0)
+    return np.sqrt(var).ravel()
+
+
+def family(stem):
+    """`sticky_blue_02_dusk` -> `sticky_blue`. The variant is two digits and a condition
+    suffix is one word, and every stock name in rules.STOCKS is what is left."""
+    parts = stem.split("_")
+    while parts and (parts[-1] == "dusk" or parts[-1].isdigit()):
+        parts.pop()
+    return "_".join(parts)
+
+
+def condition(stem):
+    return "dusk" if stem.endswith("_dusk") else "day"
+
+
+def floor_of(stem):
+    """The §5a floor for this sheet's stock, or None when the stock has no class."""
+    cls = stock_class.classify(family(stem))
+    return stock_class.FLOORS[cls] if cls else None
+
+
+def passes(ss, floor):
+    return 0 if floor is None else sum(1 for s in ss if s["std"] >= floor)
 
 
 def main():
@@ -144,6 +212,9 @@ def main():
     ap.add_argument("--only", default="",
                     help="keep only stems containing this substring, so one family can be read "
                          "on its own while the rest of a re-render is still in flight.")
+    ap.add_argument("--stock-scale", type=float, default=STOCK_SCALE,
+                    help="PaperPiece's Transform.scale on top of cover. 1.12 is what Slip passes; "
+                         "1.0 is the chain this file measured until firing 49.")
     ap.add_argument("--condition", choices=["day", "dusk", "both"], default="both",
                     help="which half of the library to read. A stem ending `_dusk` is a dusk "
                          "sheet and every other stem is a day one. Only meaningful with --all.")
@@ -170,7 +241,9 @@ def main():
             rows.append({"stock": stem, "why": "not on disk"})
             continue
         src = Image.open(path)
-        row = {"stock": stem, "source": list(src.size)}
+        floor = floor_of(stem)
+        row = {"stock": stem, "source": list(src.size), "class": stock_class.classify(family(stem)),
+               "floor": floor}
 
         # Both the packer's downscale and the draw's magnification are set by the WHOLE sheet
         # against the box. A crop must be put through those same two factors, not renormalised to
@@ -187,13 +260,28 @@ def main():
         for tag, ls in (("today", args.packed_at), ("bigger", args.long_side)):
             pack_scale = min(1.0, ls / max(whole))
             packed, nbytes = pack(src, round(max(src.size) * pack_scale))
-            mag = max(box[0] / (whole[0] * pack_scale), box[1] / (whole[1] * pack_scale))
+            mag = max(box[0] / (whole[0] * pack_scale),
+                      box[1] / (whole[1] * pack_scale)) * args.stock_scale
             drawn = packed.resize((max(1, round(packed.width * mag)),
                                    max(1, round(packed.height * mag))), Image.BILINEAR)
             ss = samples(drawn, args.samples)
             row[tag] = {"long_side": ls, "packed": list(packed.size), "bytes": nbytes,
                         "magnification": round(mag, 3),
-                        "passes": passes(ss), "of": len(ss), "samples": ss}
+                        "passes": passes(ss, floor), "of": len(ss), "samples": ss}
+            # What the glass shows is the box, not the whole magnified sheet: cover crops the
+            # overhang, so a window that lands in it is measuring paper nobody is shown.
+            left = max(0, (drawn.width - box[0]) // 2)
+            top = max(0, (drawn.height - box[1]) // 2)
+            t = tiled(drawn.crop((left, top, left + min(box[0], drawn.width),
+                                  top + min(box[1], drawn.height))))
+            row[tag]["tiled"] = {
+                "placements": int(t.size),
+                "median_std": round(float(np.median(t)), 3) if t.size else None,
+                "pass_fraction": (round(float((t >= floor).mean()), 3)
+                                  if t.size and floor is not None else None),
+            }
+            if tag == "today":
+                row["_tiled"] = t
 
         # a render made at a resolution the committed library does not have. It is already at its
         # own scale, so it is only resized by the magnification the box would apply to it.
@@ -212,26 +300,20 @@ def main():
                 ss = samples(pim, args.samples)
                 row["probe"] = {"long_side": args.probe_res, "file": os.path.relpath(hit, ROOT),
                                 "magnification": round(mag, 3),
-                                "passes": passes(ss), "of": len(ss), "samples": ss}
+                                "passes": passes(ss, floor), "of": len(ss), "samples": ss}
         rows.append(row)
 
     def mean(rs, key):
         v = [s["std"] for r in rs if key in r for s in r[key]["samples"]]
         return round(float(np.mean(v)), 3) if v else None
 
-    def family(stem):
-        """`sticky_blue_02_dusk` -> `sticky_blue`. The variant is two digits and a condition
-        suffix is one word, and every stock name in rules.STOCKS is what is left."""
-        parts = stem.split("_")
-        while parts and (parts[-1] == "dusk" or parts[-1].isdigit()):
-            parts.pop()
-        return "_".join(parts)
-
     good = [r for r in rows if "today" in r]
     cols = ["today", "bigger"] + (["probe"] if any("probe" in r for r in rows) else [])
     report = {
-        "floor": {"std": FLOOR_STD, "sample": list(SAMPLE)},
+        "floor": {"std": dict(stock_class.FLOORS), "by": "docs/COLOR.md 5a, per stock class",
+                  "sample": list(SAMPLE)},
         "box": list(box),
+        "stock_scale": args.stock_scale,
         "stocks": len(good),
         "mean_std": {k: mean([r for r in good if k in r], k) for k in cols},
         "passes": {k: (sum(r[k]["passes"] for r in good if k in r),
@@ -241,19 +323,46 @@ def main():
         "rows": rows,
     }
 
-    # By family, because the 8.0 floor is a per-stock question: a writing paper reaches it and a
+    # By family, because the floor is a per-stock question: a writing paper reaches 8.0 and a
     # coated one does not at any amplitude that still reads as paper. The median is the statistic
-    # the queue item's own readings are quoted in.
+    # the queue item's own readings are quoted in. The combined figure is reported and gates
+    # nothing; the verdict below is taken per condition.
+    def median_of(rs):
+        v = [sm["std"] for r in rs for sm in r["today"]["samples"]]
+        return round(float(np.median(v)), 3) if v else None
+
+    def tiled_median(rs):
+        v = np.concatenate([r["_tiled"] for r in rs]) if rs else np.array([])
+        return round(float(np.median(v)), 3) if v.size else None
+
+    report["verdicts"] = []
     for fam in sorted({family(r["stock"]) for r in good}):
         fr = [r for r in good if family(r["stock"]) == fam]
-        v = [sm["std"] for r in fr for sm in r["today"]["samples"]]
         report["by_family"][fam] = {
             "sheets": len(fr),
-            "median_std": round(float(np.median(v)), 3) if v else None,
-            "mean_std": round(float(np.mean(v)), 3) if v else None,
+            "median_std": median_of(fr),
+            "mean_std": round(float(np.mean([sm["std"] for r in fr
+                                             for sm in r["today"]["samples"]])), 3),
             "passes": sum(r["today"]["passes"] for r in fr),
             "of": sum(r["today"]["of"] for r in fr),
+            "by_condition": {},
         }
+        readings = {}
+        for cond in stock_class.CONDITIONS:
+            cr = [r for r in fr if condition(r["stock"]) == cond]
+            if cr:
+                # The verdict is the tiled median. The eight-window figure beside it is kept so a
+                # reading can be compared with one quoted before firing 49, and gates nothing.
+                readings[cond] = tiled_median(cr)
+                report["by_family"][fam]["by_condition"][cond] = {
+                    "sheets": len(cr), "median_std": readings[cond],
+                    "median_std_8_windows": median_of(cr),
+                    "passes": sum(r["today"]["passes"] for r in cr),
+                    "of": sum(r["today"]["of"] for r in cr)}
+        report["verdicts"].append(stock_class.verdict(fam, readings))
+    report["failing"] = [v["stock"] for v in report["verdicts"] if not v["ok"]]
+    for r in rows:
+        r.pop("_tiled", None)
 
     if args.out:
         os.makedirs(os.path.dirname(args.out), exist_ok=True)
@@ -261,8 +370,10 @@ def main():
             json.dump(report, fh, indent=1)
 
     w = sys.stdout.write
-    w("floor: L_std >= %.1f on a %dx%d sample of the artifact\n"
-      % (FLOOR_STD, SAMPLE[0], SAMPLE[1]))
+    w("floor: per docs/COLOR.md 5a -- %s -- on a %dx%d sample of the artifact\n"
+      % (", ".join("%s %.1f" % kv for kv in stock_class.FLOORS.items()), SAMPLE[0], SAMPLE[1]))
+    w("drawn at cover x %.2f, the Transform.scale PaperPiece puts around the image\n"
+      % args.stock_scale)
     w("every column below is drawn into the same %dx%d box, so each samples the same paper\n\n"
       % box)
     head = "%-16s %-20s %-20s" % ("stock", "packed %d" % args.packed_at,
@@ -296,6 +407,18 @@ def main():
         args.packed_at, report["bytes"]["today"] / 1e3,
         args.long_side, report["bytes"]["bigger"] / 1e3,
         report["bytes"]["bigger"] / max(1, report["bytes"]["today"])))
+    w("\nthe 5a verdict, packed %d: a stock passes only when day AND dusk clear its class floor,\n"
+      "on the median of every %dx%d window tiled across the drawn box at a stride of %d\n"
+      % (args.packed_at, SAMPLE[0], SAMPLE[1], stock_class.STRIDE))
+    for v in report["verdicts"]:
+        c = v["conditions"]
+        w("%s %-14s %-8s %4s  day %-8s dusk %-8s %s\n" % (
+            "ok" if v["ok"] else "--", v["stock"], v["class"] or "?",
+            "%.1f" % v["floor"] if v["floor"] is not None else "-",
+            "%.3f" % c["day"]["median_std"] if c.get("day") else "-",
+            "%.3f" % c["dusk"]["median_std"] if c.get("dusk") else "-",
+            "; ".join(v["why"])))
+    w("%d of %d stocks fail\n" % (len(report["failing"]), len(report["verdicts"])))
     return 0
 
 

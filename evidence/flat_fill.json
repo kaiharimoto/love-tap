@@ -5,7 +5,12 @@
    400,
    200
   ],
-  "std": 8.0
+  "std": {
+   "written": 8.0,
+   "plain": 6.0,
+   "coated": 4.0
+  },
+  "by": "docs/COLOR.md 5a, per stock class"
  },
  "stills": [
   {
@@ -25,6 +30,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "legal_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 8,
@@ -116,6 +128,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "legal_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 8,
@@ -207,6 +226,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "legal_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 8,
@@ -298,6 +324,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "legal_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 8,
@@ -389,6 +422,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "looseleaf_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 7,
@@ -461,7 +501,7 @@
     ]
    },
    "problems": [
-    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
+    "1 of 8 400x200 windows of the pad box are under L_std 8.0, the written floor of looseleaf_02"
    ],
    "ok": false
   },
@@ -482,6 +522,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "looseleaf_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 7,
@@ -554,7 +601,7 @@
     ]
    },
    "problems": [
-    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
+    "1 of 8 400x200 windows of the pad box are under L_std 8.0, the written floor of looseleaf_02"
    ],
    "ok": false
   },
@@ -575,6 +622,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "legal_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 6,
@@ -647,7 +701,7 @@
     ]
    },
    "problems": [
-    "2 of 8 400x200 windows of the pad box are under L_std 8.0"
+    "2 of 8 400x200 windows of the pad box are under L_std 8.0, the written floor of legal_02"
    ],
    "ok": false
   },
@@ -668,6 +722,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "legal_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 8,
@@ -759,6 +820,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "legal_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 8,
@@ -850,6 +918,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "legal_02",
+    "covers": 1.0,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 7,
@@ -922,7 +997,7 @@
     ]
    },
    "problems": [
-    "1 of 8 400x200 windows of the pad box are under L_std 8.0"
+    "1 of 8 400x200 windows of the pad box are under L_std 8.0, the written floor of legal_02"
    ],
    "ok": false
   },
@@ -943,6 +1018,13 @@
     1368,
     2580
    ],
+   "stock": {
+    "declared": "looseleaf_01",
+    "covers": 0.989,
+    "class": "written",
+    "floor": 8.0,
+    "why": null
+   },
    "windows": {
     "declared": 8,
     "passing": 8,

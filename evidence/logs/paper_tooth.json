@@ -1,7 +1,11 @@
 {
  "floor": {
-  "std": 8.0,
-  "levels": 60,
+  "std": {
+   "written": 8.0,
+   "plain": 6.0,
+   "coated": 4.0
+  },
+  "by": "docs/COLOR.md 5a, per stock class",
   "sample": [
    400,
    200
@@ -11,18 +15,19 @@
   1347,
   2908
  ],
+ "stock_scale": 1.12,
  "stocks": 54,
  "mean_std": {
-  "today": 12.39,
-  "bigger": 12.691
+  "today": 12.482,
+  "bigger": 12.784
  },
  "passes": {
   "today": [
-   250,
+   324,
    432
   ],
   "bigger": [
-   262,
+   352,
    432
   ]
  },
@@ -33,73 +38,233 @@
  "by_family": {
   "graph": {
    "sheets": 8,
-   "median_std": 8.477,
-   "mean_std": 11.473,
-   "passes": 38,
-   "of": 64
+   "median_std": 8.534,
+   "mean_std": 11.619,
+   "passes": 53,
+   "of": 64,
+   "by_condition": {
+    "day": {
+     "sheets": 4,
+     "median_std": 8.521,
+     "median_std_8_windows": 8.376,
+     "passes": 28,
+     "of": 32
+    },
+    "dusk": {
+     "sheets": 4,
+     "median_std": 8.316,
+     "median_std_8_windows": 8.678,
+     "passes": 25,
+     "of": 32
+    }
+   }
   },
   "index": {
    "sheets": 4,
-   "median_std": 8.154,
-   "mean_std": 11.679,
-   "passes": 19,
-   "of": 32
+   "median_std": 8.402,
+   "mean_std": 11.581,
+   "passes": 17,
+   "of": 32,
+   "by_condition": {
+    "day": {
+     "sheets": 2,
+     "median_std": 8.489,
+     "median_std_8_windows": 8.434,
+     "passes": 9,
+     "of": 16
+    },
+    "dusk": {
+     "sheets": 2,
+     "median_std": 8.029,
+     "median_std_8_windows": 8.181,
+     "passes": 8,
+     "of": 16
+    }
+   }
   },
   "legal": {
    "sheets": 4,
-   "median_std": 8.948,
-   "mean_std": 11.816,
-   "passes": 28,
-   "of": 32
+   "median_std": 8.726,
+   "mean_std": 11.946,
+   "passes": 26,
+   "of": 32,
+   "by_condition": {
+    "day": {
+     "sheets": 2,
+     "median_std": 8.286,
+     "median_std_8_windows": 8.444,
+     "passes": 11,
+     "of": 16
+    },
+    "dusk": {
+     "sheets": 2,
+     "median_std": 9.13,
+     "median_std_8_windows": 9.315,
+     "passes": 15,
+     "of": 16
+    }
+   }
   },
   "lined": {
    "sheets": 8,
-   "median_std": 8.727,
-   "mean_std": 11.186,
+   "median_std": 8.732,
+   "mean_std": 11.353,
    "passes": 48,
-   "of": 64
+   "of": 64,
+   "by_condition": {
+    "day": {
+     "sheets": 4,
+     "median_std": 8.2,
+     "median_std_8_windows": 8.278,
+     "passes": 22,
+     "of": 32
+    },
+    "dusk": {
+     "sheets": 4,
+     "median_std": 8.653,
+     "median_std_8_windows": 9.119,
+     "passes": 26,
+     "of": 32
+    }
+   }
   },
   "looseleaf": {
    "sheets": 8,
-   "median_std": 8.416,
-   "mean_std": 11.043,
-   "passes": 38,
-   "of": 64
+   "median_std": 8.001,
+   "mean_std": 10.948,
+   "passes": 32,
+   "of": 64,
+   "by_condition": {
+    "day": {
+     "sheets": 4,
+     "median_std": 7.689,
+     "median_std_8_windows": 7.683,
+     "passes": 7,
+     "of": 32
+    },
+    "dusk": {
+     "sheets": 4,
+     "median_std": 8.581,
+     "median_std_8_windows": 8.611,
+     "passes": 25,
+     "of": 32
+    }
+   }
   },
   "receipt": {
    "sheets": 2,
-   "median_std": 3.573,
-   "mean_std": 7.992,
-   "passes": 2,
-   "of": 16
+   "median_std": 3.184,
+   "mean_std": 7.909,
+   "passes": 7,
+   "of": 16,
+   "by_condition": {
+    "day": {
+     "sheets": 1,
+     "median_std": 1.119,
+     "median_std_8_windows": 1.204,
+     "passes": 3,
+     "of": 8
+    },
+    "dusk": {
+     "sheets": 1,
+     "median_std": 4.412,
+     "median_std_8_windows": 3.799,
+     "passes": 4,
+     "of": 8
+    }
+   }
   },
   "spiral": {
    "sheets": 8,
-   "median_std": 9.061,
-   "mean_std": 13.005,
-   "passes": 53,
-   "of": 64
+   "median_std": 8.738,
+   "mean_std": 13.037,
+   "passes": 48,
+   "of": 64,
+   "by_condition": {
+    "day": {
+     "sheets": 4,
+     "median_std": 8.438,
+     "median_std_8_windows": 8.634,
+     "passes": 20,
+     "of": 32
+    },
+    "dusk": {
+     "sheets": 4,
+     "median_std": 8.645,
+     "median_std_8_windows": 9.371,
+     "passes": 28,
+     "of": 32
+    }
+   }
   },
   "sticky_blue": {
    "sheets": 4,
-   "median_std": 4.657,
-   "mean_std": 15.305,
-   "passes": 8,
-   "of": 32
+   "median_std": 4.629,
+   "mean_std": 15.51,
+   "passes": 32,
+   "of": 32,
+   "by_condition": {
+    "day": {
+     "sheets": 2,
+     "median_std": 4.477,
+     "median_std_8_windows": 4.519,
+     "passes": 16,
+     "of": 16
+    },
+    "dusk": {
+     "sheets": 2,
+     "median_std": 4.354,
+     "median_std_8_windows": 4.792,
+     "passes": 16,
+     "of": 16
+    }
+   }
   },
   "sticky_pink": {
    "sheets": 4,
-   "median_std": 4.432,
-   "mean_std": 15.099,
-   "passes": 8,
-   "of": 32
+   "median_std": 4.439,
+   "mean_std": 15.358,
+   "passes": 29,
+   "of": 32,
+   "by_condition": {
+    "day": {
+     "sheets": 2,
+     "median_std": 4.206,
+     "median_std_8_windows": 4.336,
+     "passes": 13,
+     "of": 16
+    },
+    "dusk": {
+     "sheets": 2,
+     "median_std": 4.378,
+     "median_std_8_windows": 4.548,
+     "passes": 16,
+     "of": 16
+    }
+   }
   },
   "sticky_yellow": {
    "sheets": 4,
-   "median_std": 4.89,
-   "mean_std": 15.961,
-   "passes": 8,
-   "of": 32
+   "median_std": 4.864,
+   "mean_std": 16.24,
+   "passes": 32,
+   "of": 32,
+   "by_condition": {
+    "day": {
+     "sheets": 2,
+     "median_std": 4.624,
+     "median_std_8_windows": 4.77,
+     "passes": 16,
+     "of": 16
+    },
+    "dusk": {
+     "sheets": 2,
+     "median_std": 4.578,
+     "median_std_8_windows": 4.89,
+     "passes": 16,
+     "of": 16
+    }
+   }
   }
  },
  "rows": [
@@ -109,6 +274,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -116,43 +283,48 @@
      1500
     ],
     "bytes": 74082,
-    "magnification": 1.939,
-    "passes": 4,
+    "magnification": 2.171,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 8.567,
-      "levels": 59
-     },
-     {
-      "std": 8.311,
-      "levels": 59
-     },
-     {
-      "std": 8.272,
+      "std": 8.944,
       "levels": 60
      },
      {
-      "std": 8.569,
-      "levels": 63
+      "std": 7.897,
+      "levels": 60
      },
      {
-      "std": 8.653,
-      "levels": 57
-     },
-     {
-      "std": 8.457,
+      "std": 8.477,
       "levels": 58
      },
      {
-      "std": 28.853,
-      "levels": 111
+      "std": 8.517,
+      "levels": 63
      },
      {
-      "std": 9.124,
-      "levels": 60
+      "std": 9.103,
+      "levels": 58
+     },
+     {
+      "std": 8.961,
+      "levels": 61
+     },
+     {
+      "std": 29.958,
+      "levels": 114
+     },
+     {
+      "std": 9.189,
+      "levels": 61
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.523,
+     "pass_fraction": 0.865
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -161,43 +333,48 @@
      1800
     ],
     "bytes": 112374,
-    "magnification": 1.616,
-    "passes": 4,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 8.817,
-      "levels": 58
-     },
-     {
-      "std": 8.549,
-      "levels": 58
-     },
-     {
-      "std": 8.523,
+      "std": 9.07,
       "levels": 60
      },
      {
-      "std": 8.837,
-      "levels": 59
-     },
-     {
-      "std": 8.929,
-      "levels": 61
-     },
-     {
-      "std": 8.759,
+      "std": 8.15,
       "levels": 58
      },
      {
-      "std": 28.986,
-      "levels": 109
+      "std": 8.694,
+      "levels": 60
      },
      {
-      "std": 9.439,
+      "std": 8.758,
+      "levels": 60
+     },
+     {
+      "std": 9.368,
       "levels": 61
+     },
+     {
+      "std": 9.263,
+      "levels": 60
+     },
+     {
+      "std": 30.046,
+      "levels": 111
+     },
+     {
+      "std": 9.447,
+      "levels": 59
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.776,
+     "pass_fraction": 0.94
+    }
    }
   },
   {
@@ -206,6 +383,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -213,43 +392,48 @@
      1500
     ],
     "bytes": 159988,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 8.9,
-      "levels": 66
-     },
-     {
-      "std": 9.054,
-      "levels": 63
-     },
-     {
-      "std": 8.915,
-      "levels": 69
-     },
-     {
-      "std": 8.53,
+      "std": 8.976,
       "levels": 70
      },
      {
-      "std": 7.74,
-      "levels": 58
+      "std": 8.426,
+      "levels": 64
      },
      {
-      "std": 8.675,
-      "levels": 65
+      "std": 8.959,
+      "levels": 70
      },
      {
-      "std": 38.488,
-      "levels": 192
+      "std": 8.369,
+      "levels": 70
      },
      {
-      "std": 9.643,
-      "levels": 68
+      "std": 7.885,
+      "levels": 57
+     },
+     {
+      "std": 9.069,
+      "levels": 67
+     },
+     {
+      "std": 40.048,
+      "levels": 193
+     },
+     {
+      "std": 9.488,
+      "levels": 70
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.3,
+     "pass_fraction": 0.706
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -258,43 +442,48 @@
      1800
     ],
     "bytes": 297106,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 9.284,
-      "levels": 70
-     },
-     {
-      "std": 9.338,
-      "levels": 65
-     },
-     {
-      "std": 9.266,
-      "levels": 71
-     },
-     {
-      "std": 8.892,
-      "levels": 71
-     },
-     {
-      "std": 8.024,
-      "levels": 60
-     },
-     {
-      "std": 8.992,
+      "std": 9.297,
       "levels": 68
      },
      {
-      "std": 38.513,
-      "levels": 199
+      "std": 8.743,
+      "levels": 61
      },
      {
-      "std": 9.951,
-      "levels": 71
+      "std": 9.283,
+      "levels": 70
+     },
+     {
+      "std": 8.715,
+      "levels": 69
+     },
+     {
+      "std": 8.177,
+      "levels": 58
+     },
+     {
+      "std": 9.377,
+      "levels": 66
+     },
+     {
+      "std": 40.09,
+      "levels": 197
+     },
+     {
+      "std": 9.752,
+      "levels": 70
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.639,
+     "pass_fraction": 0.89
+    }
    }
   },
   {
@@ -303,6 +492,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -310,43 +501,48 @@
      1500
     ],
     "bytes": 71916,
-    "magnification": 1.939,
-    "passes": 5,
+    "magnification": 2.171,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.024,
-      "levels": 62
-     },
-     {
-      "std": 8.156,
-      "levels": 57
-     },
-     {
-      "std": 8.132,
-      "levels": 61
-     },
-     {
-      "std": 8.147,
-      "levels": 59
-     },
-     {
-      "std": 8.191,
+      "std": 7.861,
       "levels": 60
      },
      {
-      "std": 8.249,
-      "levels": 61
+      "std": 8.628,
+      "levels": 60
      },
      {
-      "std": 29.162,
-      "levels": 109
+      "std": 7.7,
+      "levels": 60
      },
      {
-      "std": 8.123,
-      "levels": 56
+      "std": 8.096,
+      "levels": 60
+     },
+     {
+      "std": 8.025,
+      "levels": 60
+     },
+     {
+      "std": 8.328,
+      "levels": 62
+     },
+     {
+      "std": 30.254,
+      "levels": 115
+     },
+     {
+      "std": 8.218,
+      "levels": 57
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.532,
+     "pass_fraction": 0.881
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -355,43 +551,48 @@
      1800
     ],
     "bytes": 111116,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 7,
     "of": 8,
     "samples": [
+     {
+      "std": 8.117,
+      "levels": 61
+     },
+     {
+      "std": 8.866,
+      "levels": 60
+     },
+     {
+      "std": 7.904,
+      "levels": 60
+     },
+     {
+      "std": 8.395,
+      "levels": 60
+     },
      {
       "std": 8.305,
       "levels": 59
      },
      {
-      "std": 8.402,
-      "levels": 57
-     },
-     {
-      "std": 8.299,
-      "levels": 61
-     },
-     {
-      "std": 8.451,
+      "std": 8.542,
       "levels": 59
      },
      {
-      "std": 8.423,
-      "levels": 59
+      "std": 30.375,
+      "levels": 107
      },
      {
-      "std": 8.468,
-      "levels": 58
-     },
-     {
-      "std": 29.317,
-      "levels": 106
-     },
-     {
-      "std": 8.435,
-      "levels": 56
+      "std": 8.551,
+      "levels": 55
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.798,
+     "pass_fraction": 0.957
+    }
    }
   },
   {
@@ -400,6 +601,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -407,43 +610,48 @@
      1500
     ],
     "bytes": 157530,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 8.299,
+      "std": 8.165,
       "levels": 62
      },
      {
-      "std": 8.67,
+      "std": 9.112,
+      "levels": 63
+     },
+     {
+      "std": 8.157,
+      "levels": 65
+     },
+     {
+      "std": 8.035,
       "levels": 62
      },
      {
-      "std": 8.518,
+      "std": 7.191,
+      "levels": 58
+     },
+     {
+      "std": 8.492,
       "levels": 66
      },
      {
-      "std": 8.076,
-      "levels": 62
+      "std": 42.656,
+      "levels": 190
      },
      {
-      "std": 7.621,
-      "levels": 61
-     },
-     {
-      "std": 8.437,
-      "levels": 66
-     },
-     {
-      "std": 40.939,
-      "levels": 192
-     },
-     {
-      "std": 8.506,
-      "levels": 66
+      "std": 8.552,
+      "levels": 65
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.289,
+     "pass_fraction": 0.722
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -452,43 +660,48 @@
      1800
     ],
     "bytes": 290838,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 8.685,
-      "levels": 67
-     },
-     {
-      "std": 9.005,
-      "levels": 60
-     },
-     {
-      "std": 8.895,
+      "std": 8.541,
       "levels": 66
      },
      {
-      "std": 8.45,
-      "levels": 67
+      "std": 9.434,
+      "levels": 64
      },
      {
-      "std": 7.95,
-      "levels": 67
+      "std": 8.482,
+      "levels": 63
      },
      {
-      "std": 8.764,
+      "std": 8.393,
+      "levels": 63
+     },
+     {
+      "std": 7.548,
+      "levels": 62
+     },
+     {
+      "std": 8.808,
       "levels": 65
      },
      {
-      "std": 41.009,
-      "levels": 196
+      "std": 42.723,
+      "levels": 194
      },
      {
-      "std": 8.837,
+      "std": 8.869,
       "levels": 64
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.632,
+     "pass_fraction": 0.911
+    }
    }
   },
   {
@@ -497,6 +710,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -504,43 +719,48 @@
      1500
     ],
     "bytes": 70414,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 8.375,
-      "levels": 57
-     },
-     {
-      "std": 7.896,
-      "levels": 60
-     },
-     {
-      "std": 8.833,
-      "levels": 57
-     },
-     {
-      "std": 8.329,
-      "levels": 60
-     },
-     {
-      "std": 8.209,
-      "levels": 57
-     },
-     {
-      "std": 9.012,
+      "std": 8.588,
       "levels": 59
      },
      {
-      "std": 28.726,
-      "levels": 111
+      "std": 8.168,
+      "levels": 59
      },
      {
-      "std": 8.235,
+      "std": 8.182,
+      "levels": 56
+     },
+     {
+      "std": 8.19,
       "levels": 59
+     },
+     {
+      "std": 8.119,
+      "levels": 58
+     },
+     {
+      "std": 8.636,
+      "levels": 59
+     },
+     {
+      "std": 29.764,
+      "levels": 115
+     },
+     {
+      "std": 8.66,
+      "levels": 61
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.461,
+     "pass_fraction": 0.827
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -549,43 +769,48 @@
      1800
     ],
     "bytes": 109878,
-    "magnification": 1.616,
-    "passes": 3,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 8.647,
-      "levels": 56
-     },
-     {
-      "std": 8.123,
-      "levels": 60
-     },
-     {
-      "std": 9.08,
-      "levels": 59
-     },
-     {
-      "std": 8.703,
-      "levels": 59
-     },
-     {
-      "std": 8.507,
-      "levels": 57
-     },
-     {
-      "std": 9.299,
-      "levels": 60
-     },
-     {
-      "std": 28.836,
-      "levels": 110
-     },
-     {
-      "std": 8.431,
+      "std": 8.867,
       "levels": 58
+     },
+     {
+      "std": 8.4,
+      "levels": 59
+     },
+     {
+      "std": 8.395,
+      "levels": 60
+     },
+     {
+      "std": 8.581,
+      "levels": 59
+     },
+     {
+      "std": 8.457,
+      "levels": 58
+     },
+     {
+      "std": 8.913,
+      "levels": 59
+     },
+     {
+      "std": 29.875,
+      "levels": 107
+     },
+     {
+      "std": 8.879,
+      "levels": 62
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.725,
+     "pass_fraction": 0.925
+    }
    }
   },
   {
@@ -594,6 +819,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -601,43 +828,48 @@
      1500
     ],
     "bytes": 165246,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.81,
+      "std": 8.864,
       "levels": 68
      },
      {
-      "std": 8.622,
+      "std": 8.835,
+      "levels": 64
+     },
+     {
+      "std": 8.9,
+      "levels": 60
+     },
+     {
+      "std": 7.776,
+      "levels": 64
+     },
+     {
+      "std": 7.164,
+      "levels": 55
+     },
+     {
+      "std": 8.787,
       "levels": 63
      },
      {
-      "std": 9.323,
-      "levels": 63
+      "std": 40.68,
+      "levels": 195
      },
      {
-      "std": 7.885,
-      "levels": 61
-     },
-     {
-      "std": 7.248,
-      "levels": 56
-     },
-     {
-      "std": 9.319,
-      "levels": 66
-     },
-     {
-      "std": 39.169,
-      "levels": 199
-     },
-     {
-      "std": 8.862,
-      "levels": 66
+      "std": 9.14,
+      "levels": 68
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.264,
+     "pass_fraction": 0.663
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -646,43 +878,48 @@
      1800
     ],
     "bytes": 294528,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.13,
-      "levels": 71
-     },
-     {
-      "std": 8.963,
-      "levels": 71
-     },
-     {
-      "std": 9.64,
+      "std": 9.176,
       "levels": 69
      },
      {
-      "std": 8.33,
-      "levels": 66
+      "std": 9.182,
+      "levels": 68
      },
      {
-      "std": 7.544,
-      "levels": 60
+      "std": 9.166,
+      "levels": 63
      },
      {
-      "std": 9.569,
-      "levels": 69
+      "std": 8.225,
+      "levels": 64
      },
      {
-      "std": 39.279,
+      "std": 7.481,
+      "levels": 62
+     },
+     {
+      "std": 9.029,
+      "levels": 65
+     },
+     {
+      "std": 40.802,
       "levels": 196
      },
      {
-      "std": 9.201,
-      "levels": 67
+      "std": 9.49,
+      "levels": 68
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.619,
+     "pass_fraction": 0.855
+    }
    }
   },
   {
@@ -691,6 +928,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -698,43 +937,48 @@
      1500
     ],
     "bytes": 70148,
-    "magnification": 1.939,
-    "passes": 1,
+    "magnification": 2.171,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 8.121,
+      "std": 8.289,
+      "levels": 56
+     },
+     {
+      "std": 8.803,
       "levels": 57
      },
      {
-      "std": 8.357,
-      "levels": 55
+      "std": 7.336,
+      "levels": 56
      },
      {
-      "std": 7.981,
-      "levels": 58
-     },
-     {
-      "std": 8.283,
-      "levels": 58
-     },
-     {
-      "std": 8.241,
+      "std": 8.205,
       "levels": 59
      },
      {
-      "std": 8.456,
-      "levels": 58
+      "std": 8.082,
+      "levels": 60
      },
      {
-      "std": 28.06,
-      "levels": 102
+      "std": 8.424,
+      "levels": 60
      },
      {
-      "std": 7.779,
-      "levels": 61
+      "std": 29.061,
+      "levels": 103
+     },
+     {
+      "std": 8.08,
+      "levels": 59
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.558,
+     "pass_fraction": 0.875
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -743,43 +987,48 @@
      1800
     ],
     "bytes": 112450,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 8.405,
+      "std": 8.483,
       "levels": 58
      },
      {
-      "std": 8.757,
+      "std": 9.109,
       "levels": 59
      },
      {
-      "std": 8.196,
-      "levels": 54
+      "std": 7.574,
+      "levels": 53
      },
      {
-      "std": 8.61,
-      "levels": 63
+      "std": 8.52,
+      "levels": 61
      },
      {
-      "std": 8.543,
-      "levels": 58
-     },
-     {
-      "std": 8.744,
+      "std": 8.329,
       "levels": 59
      },
      {
-      "std": 28.155,
-      "levels": 102
+      "std": 8.638,
+      "levels": 57
      },
      {
-      "std": 7.981,
+      "std": 29.132,
+      "levels": 101
+     },
+     {
+      "std": 8.219,
       "levels": 58
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.816,
+     "pass_fraction": 0.956
+    }
    }
   },
   {
@@ -788,6 +1037,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -795,43 +1046,48 @@
      1500
     ],
     "bytes": 161296,
-    "magnification": 1.939,
-    "passes": 6,
+    "magnification": 2.171,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.712,
+      "std": 8.71,
+      "levels": 66
+     },
+     {
+      "std": 9.159,
+      "levels": 65
+     },
+     {
+      "std": 7.992,
       "levels": 63
      },
      {
-      "std": 8.761,
-      "levels": 62
-     },
-     {
-      "std": 8.307,
+      "std": 7.841,
       "levels": 63
      },
      {
-      "std": 7.886,
-      "levels": 63
+      "std": 7.093,
+      "levels": 57
      },
      {
-      "std": 7.212,
-      "levels": 59
-     },
-     {
-      "std": 8.675,
+      "std": 8.553,
       "levels": 64
      },
      {
-      "std": 30.07,
-      "levels": 190
+      "std": 31.126,
+      "levels": 189
      },
      {
-      "std": 8.497,
-      "levels": 66
+      "std": 8.645,
+      "levels": 65
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.415,
+     "pass_fraction": 0.778
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -840,43 +1096,48 @@
      1800
     ],
     "bytes": 293654,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.147,
-      "levels": 71
+      "std": 9.075,
+      "levels": 65
      },
      {
-      "std": 9.193,
-      "levels": 68
+      "std": 9.481,
+      "levels": 67
      },
      {
-      "std": 8.693,
+      "std": 8.376,
       "levels": 64
      },
      {
-      "std": 8.305,
-      "levels": 65
+      "std": 8.235,
+      "levels": 64
      },
      {
-      "std": 7.535,
+      "std": 7.394,
       "levels": 59
      },
      {
-      "std": 8.988,
+      "std": 8.8,
+      "levels": 63
+     },
+     {
+      "std": 31.259,
+      "levels": 190
+     },
+     {
+      "std": 8.901,
       "levels": 65
-     },
-     {
-      "std": 30.236,
-      "levels": 194
-     },
-     {
-      "std": 8.814,
-      "levels": 66
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.754,
+     "pass_fraction": 0.917
+    }
    }
   },
   {
@@ -885,6 +1146,8 @@
     1800,
     1120
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -892,43 +1155,48 @@
      933
     ],
     "bytes": 143360,
-    "magnification": 3.116,
-    "passes": 6,
+    "magnification": 3.49,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 6.801,
-      "levels": 56
+      "std": 6.758,
+      "levels": 57
      },
      {
-      "std": 8.153,
+      "std": 4.551,
+      "levels": 33
+     },
+     {
+      "std": 8.46,
+      "levels": 64
+     },
+     {
+      "std": 8.899,
+      "levels": 61
+     },
+     {
+      "std": 4.681,
+      "levels": 33
+     },
+     {
+      "std": 8.877,
       "levels": 66
      },
      {
-      "std": 8.241,
-      "levels": 63
-     },
-     {
-      "std": 8.497,
-      "levels": 62
-     },
-     {
-      "std": 4.749,
-      "levels": 32
-     },
-     {
-      "std": 8.685,
-      "levels": 69
-     },
-     {
-      "std": 38.493,
+      "std": 39.845,
       "levels": 106
      },
      {
-      "std": 8.019,
-      "levels": 66
+      "std": 8.409,
+      "levels": 67
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.534,
+     "pass_fraction": 0.721
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -937,43 +1205,48 @@
      1120
     ],
     "bytes": 225442,
-    "magnification": 2.596,
-    "passes": 6,
+    "magnification": 2.908,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 7.054,
-      "levels": 58
+      "std": 7.011,
+      "levels": 55
      },
      {
-      "std": 8.473,
+      "std": 4.956,
+      "levels": 38
+     },
+     {
+      "std": 8.786,
       "levels": 63
      },
      {
-      "std": 8.566,
+      "std": 9.16,
       "levels": 64
      },
      {
-      "std": 8.796,
-      "levels": 64
-     },
-     {
-      "std": 5.121,
+      "std": 5.045,
       "levels": 35
      },
      {
-      "std": 8.979,
-      "levels": 67
+      "std": 9.168,
+      "levels": 68
      },
      {
-      "std": 38.57,
+      "std": 39.939,
       "levels": 110
      },
      {
-      "std": 8.284,
-      "levels": 67
+      "std": 8.652,
+      "levels": 70
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.845,
+     "pass_fraction": 0.731
+    }
    }
   },
   {
@@ -982,6 +1255,8 @@
     1800,
     1120
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -989,43 +1264,48 @@
      933
     ],
     "bytes": 160026,
-    "magnification": 3.116,
-    "passes": 5,
+    "magnification": 3.49,
+    "passes": 4,
     "of": 8,
     "samples": [
      {
-      "std": 5.027,
-      "levels": 36
+      "std": 4.999,
+      "levels": 37
      },
      {
-      "std": 8.556,
+      "std": 5.421,
+      "levels": 37
+     },
+     {
+      "std": 8.493,
       "levels": 65
      },
      {
-      "std": 8.303,
-      "levels": 64
+      "std": 7.967,
+      "levels": 58
      },
      {
-      "std": 7.697,
-      "levels": 59
-     },
-     {
-      "std": 6.319,
+      "std": 6.144,
       "levels": 55
      },
      {
-      "std": 8.937,
-      "levels": 69
+      "std": 9.088,
+      "levels": 71
      },
      {
-      "std": 51.682,
-      "levels": 188
+      "std": 53.258,
+      "levels": 187
      },
      {
-      "std": 8.098,
-      "levels": 64
+      "std": 8.394,
+      "levels": 65
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.047,
+     "pass_fraction": 0.544
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1034,43 +1314,48 @@
      1120
     ],
     "bytes": 246624,
-    "magnification": 2.596,
+    "magnification": 2.908,
     "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 5.434,
+      "std": 5.395,
       "levels": 42
      },
      {
-      "std": 8.907,
+      "std": 5.798,
+      "levels": 40
+     },
+     {
+      "std": 8.784,
       "levels": 66
      },
      {
-      "std": 8.604,
-      "levels": 65
+      "std": 8.204,
+      "levels": 61
      },
      {
-      "std": 7.96,
-      "levels": 63
+      "std": 6.439,
+      "levels": 58
      },
      {
-      "std": 6.593,
-      "levels": 59
+      "std": 9.35,
+      "levels": 69
      },
      {
-      "std": 9.182,
-      "levels": 70
+      "std": 53.329,
+      "levels": 191
      },
      {
-      "std": 51.737,
-      "levels": 192
-     },
-     {
-      "std": 8.439,
-      "levels": 68
+      "std": 8.726,
+      "levels": 69
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.38,
+     "pass_fraction": 0.712
+    }
    }
   },
   {
@@ -1079,6 +1364,8 @@
     1800,
     1120
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1086,43 +1373,48 @@
      933
     ],
     "bytes": 146228,
-    "magnification": 3.116,
+    "magnification": 3.49,
     "passes": 4,
     "of": 8,
     "samples": [
      {
-      "std": 6.594,
+      "std": 6.526,
       "levels": 58
      },
      {
-      "std": 5.488,
-      "levels": 48
+      "std": 4.775,
+      "levels": 32
      },
      {
-      "std": 8.29,
+      "std": 8.664,
       "levels": 62
      },
      {
-      "std": 6.733,
-      "levels": 60
+      "std": 4.593,
+      "levels": 35
      },
      {
-      "std": 4.661,
-      "levels": 34
+      "std": 4.556,
+      "levels": 31
      },
      {
-      "std": 8.793,
-      "levels": 71
+      "std": 9.093,
+      "levels": 70
      },
      {
-      "std": 38.283,
+      "std": 39.439,
       "levels": 103
      },
      {
-      "std": 8.155,
+      "std": 8.518,
       "levels": 65
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.457,
+     "pass_fraction": 0.697
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1131,43 +1423,48 @@
      1120
     ],
     "bytes": 225770,
-    "magnification": 2.596,
+    "magnification": 2.908,
     "passes": 4,
     "of": 8,
     "samples": [
      {
-      "std": 6.829,
-      "levels": 57
+      "std": 6.768,
+      "levels": 54
      },
      {
-      "std": 5.717,
-      "levels": 49
+      "std": 5.157,
+      "levels": 34
      },
      {
-      "std": 8.587,
+      "std": 8.996,
       "levels": 61
      },
      {
-      "std": 6.926,
-      "levels": 60
+      "std": 4.948,
+      "levels": 35
      },
      {
-      "std": 4.974,
+      "std": 4.886,
       "levels": 39
      },
      {
-      "std": 9.106,
+      "std": 9.418,
       "levels": 70
      },
      {
-      "std": 38.295,
+      "std": 39.454,
       "levels": 102
      },
      {
-      "std": 8.465,
-      "levels": 67
+      "std": 8.832,
+      "levels": 66
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.759,
+     "pass_fraction": 0.727
+    }
    }
   },
   {
@@ -1176,6 +1473,8 @@
     1800,
     1120
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1183,43 +1482,48 @@
      933
     ],
     "bytes": 160098,
-    "magnification": 3.116,
+    "magnification": 3.49,
     "passes": 4,
     "of": 8,
     "samples": [
      {
-      "std": 5.148,
-      "levels": 40
+      "std": 5.074,
+      "levels": 42
      },
      {
-      "std": 5.959,
-      "levels": 56
+      "std": 5.386,
+      "levels": 37
      },
      {
-      "std": 8.548,
+      "std": 8.901,
       "levels": 64
      },
      {
-      "std": 6.096,
-      "levels": 57
+      "std": 4.61,
+      "levels": 33
      },
      {
-      "std": 6.55,
-      "levels": 60
+      "std": 6.306,
+      "levels": 58
      },
      {
-      "std": 8.799,
-      "levels": 70
+      "std": 9.089,
+      "levels": 68
      },
      {
-      "std": 41.069,
-      "levels": 194
+      "std": 42.234,
+      "levels": 193
      },
      {
-      "std": 8.319,
+      "std": 8.585,
       "levels": 63
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.012,
+     "pass_fraction": 0.517
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1228,43 +1532,48 @@
      1120
     ],
     "bytes": 249966,
-    "magnification": 2.596,
+    "magnification": 2.908,
     "passes": 4,
     "of": 8,
     "samples": [
      {
-      "std": 5.622,
-      "levels": 45
+      "std": 5.555,
+      "levels": 44
      },
      {
-      "std": 6.263,
-      "levels": 54
+      "std": 5.796,
+      "levels": 41
      },
      {
-      "std": 8.81,
+      "std": 9.183,
       "levels": 66
      },
      {
-      "std": 6.35,
-      "levels": 57
+      "std": 4.974,
+      "levels": 38
      },
      {
-      "std": 6.723,
-      "levels": 57
+      "std": 6.513,
+      "levels": 56
      },
      {
-      "std": 9.09,
+      "std": 9.384,
       "levels": 73
      },
      {
-      "std": 41.069,
-      "levels": 192
+      "std": 42.234,
+      "levels": 190
      },
      {
-      "std": 8.591,
-      "levels": 67
+      "std": 8.84,
+      "levels": 66
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.312,
+     "pass_fraction": 0.694
+    }
    }
   },
   {
@@ -1273,6 +1582,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1280,43 +1591,48 @@
      1500
     ],
     "bytes": 257712,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.429,
+      "std": 8.632,
       "levels": 68
      },
      {
-      "std": 8.466,
+      "std": 8.674,
+      "levels": 70
+     },
+     {
+      "std": 8.334,
       "levels": 69
      },
      {
-      "std": 8.199,
-      "levels": 64
+      "std": 13.074,
+      "levels": 116
      },
      {
-      "std": 12.445,
-      "levels": 114
-     },
-     {
-      "std": 8.918,
+      "std": 8.376,
       "levels": 95
      },
      {
-      "std": 7.484,
+      "std": 7.653,
       "levels": 67
      },
      {
-      "std": 26.556,
-      "levels": 111
+      "std": 27.554,
+      "levels": 113
      },
      {
-      "std": 7.135,
-      "levels": 68
+      "std": 7.279,
+      "levels": 69
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.258,
+     "pass_fraction": 0.551
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1325,43 +1641,48 @@
      1800
     ],
     "bytes": 385134,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.801,
-      "levels": 68
+      "std": 9.02,
+      "levels": 67
      },
      {
-      "std": 8.811,
-      "levels": 73
+      "std": 8.965,
+      "levels": 71
      },
      {
-      "std": 8.549,
+      "std": 8.659,
       "levels": 69
      },
      {
-      "std": 12.706,
+      "std": 13.342,
+      "levels": 112
+     },
+     {
+      "std": 8.793,
+      "levels": 96
+     },
+     {
+      "std": 7.965,
+      "levels": 70
+     },
+     {
+      "std": 27.727,
       "levels": 110
      },
      {
-      "std": 9.203,
-      "levels": 97
-     },
-     {
-      "std": 7.809,
-      "levels": 68
-     },
-     {
-      "std": 26.754,
-      "levels": 110
-     },
-     {
-      "std": 7.487,
-      "levels": 66
+      "std": 7.669,
+      "levels": 69
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.624,
+     "pass_fraction": 0.621
+    }
    }
   },
   {
@@ -1370,6 +1691,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1377,43 +1700,48 @@
      1500
     ],
     "bytes": 295550,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 9.953,
-      "levels": 72
-     },
-     {
-      "std": 9.072,
-      "levels": 75
-     },
-     {
-      "std": 9.602,
+      "std": 9.919,
       "levels": 68
      },
      {
-      "std": 12.28,
-      "levels": 113
+      "std": 9.075,
+      "levels": 75
      },
      {
-      "std": 8.988,
-      "levels": 91
-     },
-     {
-      "std": 8.94,
-      "levels": 71
-     },
-     {
-      "std": 35.994,
-      "levels": 198
-     },
-     {
-      "std": 8.666,
+      "std": 9.555,
       "levels": 70
+     },
+     {
+      "std": 12.679,
+      "levels": 111
+     },
+     {
+      "std": 8.539,
+      "levels": 90
+     },
+     {
+      "std": 8.937,
+      "levels": 69
+     },
+     {
+      "std": 37.38,
+      "levels": 195
+     },
+     {
+      "std": 8.638,
+      "levels": 72
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.129,
+     "pass_fraction": 0.943
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1422,43 +1750,48 @@
      1800
     ],
     "bytes": 459474,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 10.379,
-      "levels": 74
+      "std": 10.369,
+      "levels": 71
      },
      {
-      "std": 9.446,
+      "std": 9.407,
       "levels": 76
      },
      {
-      "std": 10.027,
-      "levels": 74
+      "std": 9.964,
+      "levels": 71
      },
      {
-      "std": 12.64,
+      "std": 13.054,
       "levels": 116
      },
      {
-      "std": 9.332,
+      "std": 8.974,
       "levels": 94
      },
      {
-      "std": 9.338,
-      "levels": 72
+      "std": 9.326,
+      "levels": 73
      },
      {
-      "std": 36.058,
+      "std": 37.481,
       "levels": 199
      },
      {
-      "std": 9.069,
-      "levels": 71
+      "std": 9.05,
+      "levels": 74
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.529,
+     "pass_fraction": 0.968
+    }
    }
   },
   {
@@ -1467,6 +1800,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1474,43 +1809,48 @@
      1500
     ],
     "bytes": 256628,
-    "magnification": 1.939,
-    "passes": 6,
+    "magnification": 2.171,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.373,
+      "std": 8.566,
+      "levels": 68
+     },
+     {
+      "std": 8.337,
       "levels": 67
      },
      {
-      "std": 8.278,
-      "levels": 69
+      "std": 8.513,
+      "levels": 68
      },
      {
-      "std": 8.33,
-      "levels": 67
+      "std": 12.817,
+      "levels": 108
      },
      {
-      "std": 12.232,
-      "levels": 106
+      "std": 7.289,
+      "levels": 82
      },
      {
-      "std": 8.904,
-      "levels": 96
+      "std": 7.792,
+      "levels": 65
      },
      {
-      "std": 7.603,
-      "levels": 66
+      "std": 27.093,
+      "levels": 109
      },
      {
-      "std": 26.137,
-      "levels": 110
-     },
-     {
-      "std": 7.321,
-      "levels": 76
+      "std": 7.517,
+      "levels": 77
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.315,
+     "pass_fraction": 0.556
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1519,43 +1859,48 @@
      1800
     ],
     "bytes": 365174,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.778,
-      "levels": 69
+      "std": 8.966,
+      "levels": 70
      },
      {
-      "std": 8.63,
-      "levels": 69
+      "std": 8.641,
+      "levels": 66
      },
      {
-      "std": 8.683,
-      "levels": 71
+      "std": 8.878,
+      "levels": 74
      },
      {
-      "std": 12.584,
-      "levels": 109
+      "std": 13.132,
+      "levels": 110
      },
      {
-      "std": 9.155,
-      "levels": 95
+      "std": 7.734,
+      "levels": 87
      },
      {
-      "std": 7.993,
-      "levels": 75
+      "std": 8.137,
+      "levels": 73
      },
      {
-      "std": 26.247,
-      "levels": 111
+      "std": 27.189,
+      "levels": 106
      },
      {
-      "std": 7.66,
-      "levels": 77
+      "std": 7.813,
+      "levels": 74
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.672,
+     "pass_fraction": 0.618
+    }
    }
   },
   {
@@ -1564,6 +1909,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1571,43 +1918,48 @@
      1500
     ],
     "bytes": 296320,
-    "magnification": 1.939,
-    "passes": 8,
+    "magnification": 2.171,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.879,
-      "levels": 76
+      "std": 9.855,
+      "levels": 77
      },
      {
-      "std": 8.884,
-      "levels": 75
+      "std": 8.769,
+      "levels": 73
      },
      {
-      "std": 9.66,
-      "levels": 76
-     },
-     {
-      "std": 12.121,
-      "levels": 110
-     },
-     {
-      "std": 8.979,
-      "levels": 93
-     },
-     {
-      "std": 8.956,
+      "std": 9.665,
       "levels": 72
      },
      {
-      "std": 32.688,
-      "levels": 201
+      "std": 12.47,
+      "levels": 106
      },
      {
-      "std": 8.644,
-      "levels": 75
+      "std": 7.763,
+      "levels": 82
+     },
+     {
+      "std": 8.999,
+      "levels": 69
+     },
+     {
+      "std": 33.835,
+      "levels": 196
+     },
+     {
+      "std": 8.684,
+      "levels": 78
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.132,
+     "pass_fraction": 0.944
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1616,43 +1968,48 @@
      1800
     ],
     "bytes": 450676,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 10.32,
+      "std": 10.288,
       "levels": 79
      },
      {
-      "std": 9.302,
-      "levels": 75
+      "std": 9.139,
+      "levels": 73
      },
      {
-      "std": 10.078,
-      "levels": 78
+      "std": 10.106,
+      "levels": 79
      },
      {
-      "std": 12.436,
-      "levels": 109
+      "std": 12.766,
+      "levels": 107
      },
      {
-      "std": 9.322,
-      "levels": 94
+      "std": 8.224,
+      "levels": 87
      },
      {
-      "std": 9.346,
+      "std": 9.375,
       "levels": 76
      },
      {
-      "std": 32.779,
-      "levels": 202
+      "std": 33.956,
+      "levels": 200
      },
      {
-      "std": 9.07,
-      "levels": 77
+      "std": 9.081,
+      "levels": 76
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.529,
+     "pass_fraction": 0.965
+    }
    }
   },
   {
@@ -1661,6 +2018,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1668,43 +2027,48 @@
      1500
     ],
     "bytes": 220360,
-    "magnification": 1.939,
-    "passes": 4,
+    "magnification": 2.171,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.008,
-      "levels": 69
-     },
-     {
-      "std": 7.494,
+      "std": 8.225,
       "levels": 66
      },
      {
-      "std": 7.896,
-      "levels": 67
+      "std": 7.35,
+      "levels": 65
      },
      {
-      "std": 10.922,
-      "levels": 106
-     },
-     {
-      "std": 5.242,
-      "levels": 39
-     },
-     {
-      "std": 8.008,
+      "std": 8.136,
       "levels": 68
      },
      {
-      "std": 27.203,
-      "levels": 111
+      "std": 11.215,
+      "levels": 108
      },
      {
-      "std": 7.771,
+      "std": 5.218,
+      "levels": 41
+     },
+     {
+      "std": 8.318,
       "levels": 69
+     },
+     {
+      "std": 28.184,
+      "levels": 113
+     },
+     {
+      "std": 8.009,
+      "levels": 66
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.189,
+     "pass_fraction": 0.63
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1713,43 +2077,48 @@
      1800
     ],
     "bytes": 324900,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.316,
+      "std": 8.546,
+      "levels": 68
+     },
+     {
+      "std": 7.677,
+      "levels": 67
+     },
+     {
+      "std": 8.431,
       "levels": 71
      },
      {
-      "std": 7.825,
-      "levels": 66
-     },
-     {
-      "std": 8.222,
-      "levels": 70
-     },
-     {
-      "std": 11.261,
-      "levels": 107
-     },
-     {
-      "std": 5.56,
-      "levels": 44
-     },
-     {
-      "std": 8.33,
-      "levels": 72
-     },
-     {
-      "std": 27.383,
+      "std": 11.523,
       "levels": 109
      },
      {
-      "std": 8.081,
-      "levels": 65
+      "std": 5.544,
+      "levels": 41
+     },
+     {
+      "std": 8.614,
+      "levels": 71
+     },
+     {
+      "std": 28.33,
+      "levels": 110
+     },
+     {
+      "std": 8.346,
+      "levels": 66
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.521,
+     "pass_fraction": 0.658
+    }
    }
   },
   {
@@ -1758,6 +2127,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1765,43 +2136,48 @@
      1500
     ],
     "bytes": 256526,
-    "magnification": 1.939,
-    "passes": 7,
+    "magnification": 2.171,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 9.365,
-      "levels": 74
-     },
-     {
-      "std": 8.225,
-      "levels": 66
-     },
-     {
-      "std": 9.038,
-      "levels": 72
-     },
-     {
-      "std": 10.586,
-      "levels": 103
-     },
-     {
-      "std": 6.135,
-      "levels": 46
-     },
-     {
-      "std": 9.06,
+      "std": 9.31,
       "levels": 73
      },
      {
-      "std": 33.462,
+      "std": 7.994,
+      "levels": 67
+     },
+     {
+      "std": 9.08,
+      "levels": 71
+     },
+     {
+      "std": 10.717,
+      "levels": 106
+     },
+     {
+      "std": 6.057,
+      "levels": 47
+     },
+     {
+      "std": 9.137,
+      "levels": 73
+     },
+     {
+      "std": 34.736,
       "levels": 197
      },
      {
-      "std": 8.832,
-      "levels": 73
+      "std": 8.926,
+      "levels": 71
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.669,
+     "pass_fraction": 0.808
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1810,43 +2186,48 @@
      1800
     ],
     "bytes": 427458,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.791,
+      "std": 9.786,
       "levels": 76
      },
      {
-      "std": 8.627,
+      "std": 8.384,
       "levels": 69
      },
      {
-      "std": 9.405,
-      "levels": 74
+      "std": 9.425,
+      "levels": 76
      },
      {
-      "std": 10.982,
+      "std": 11.116,
       "levels": 107
      },
      {
-      "std": 6.49,
+      "std": 6.396,
       "levels": 48
      },
      {
-      "std": 9.457,
+      "std": 9.544,
       "levels": 74
      },
      {
-      "std": 33.577,
-      "levels": 202
+      "std": 34.866,
+      "levels": 201
      },
      {
-      "std": 9.22,
-      "levels": 72
+      "std": 9.303,
+      "levels": 70
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.066,
+     "pass_fraction": 0.909
+    }
    }
   },
   {
@@ -1855,6 +2236,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1862,43 +2245,48 @@
      1500
     ],
     "bytes": 218670,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.252,
-      "levels": 66
+      "std": 8.481,
+      "levels": 65
      },
      {
-      "std": 8.301,
-      "levels": 66
+      "std": 7.222,
+      "levels": 59
      },
      {
-      "std": 8.055,
-      "levels": 70
+      "std": 8.349,
+      "levels": 72
      },
      {
-      "std": 10.658,
-      "levels": 108
+      "std": 11.017,
+      "levels": 106
      },
      {
-      "std": 5.455,
+      "std": 5.454,
       "levels": 38
      },
      {
-      "std": 7.908,
+      "std": 8.238,
       "levels": 65
      },
      {
-      "std": 27.14,
-      "levels": 111
+      "std": 28.178,
+      "levels": 113
      },
      {
-      "std": 7.683,
+      "std": 7.897,
       "levels": 65
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.201,
+     "pass_fraction": 0.63
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -1907,43 +2295,48 @@
      1800
     ],
     "bytes": 327064,
-    "magnification": 1.616,
-    "passes": 7,
+    "magnification": 1.809,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.592,
-      "levels": 67
+      "std": 8.833,
+      "levels": 68
      },
      {
-      "std": 8.621,
+      "std": 7.545,
+      "levels": 66
+     },
+     {
+      "std": 8.673,
       "levels": 69
      },
      {
-      "std": 8.404,
-      "levels": 68
+      "std": 11.313,
+      "levels": 106
      },
      {
-      "std": 10.932,
-      "levels": 104
+      "std": 5.799,
+      "levels": 40
      },
      {
-      "std": 5.801,
-      "levels": 41
+      "std": 8.513,
+      "levels": 66
      },
      {
-      "std": 8.219,
-      "levels": 68
+      "std": 28.29,
+      "levels": 113
      },
      {
-      "std": 27.28,
-      "levels": 116
-     },
-     {
-      "std": 8.002,
-      "levels": 70
+      "std": 8.267,
+      "levels": 69
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.526,
+     "pass_fraction": 0.678
+    }
    }
   },
   {
@@ -1952,6 +2345,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -1959,43 +2354,48 @@
      1500
     ],
     "bytes": 259022,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.176,
-      "levels": 74
-     },
-     {
-      "std": 9.081,
+      "std": 9.216,
       "levels": 72
      },
      {
-      "std": 9.029,
-      "levels": 73
+      "std": 8.025,
+      "levels": 71
      },
      {
-      "std": 10.731,
-      "levels": 107
+      "std": 9.135,
+      "levels": 71
      },
      {
-      "std": 6.391,
+      "std": 10.935,
+      "levels": 111
+     },
+     {
+      "std": 6.304,
       "levels": 47
      },
      {
-      "std": 8.958,
-      "levels": 70
+      "std": 9.099,
+      "levels": 69
      },
      {
-      "std": 37.167,
+      "std": 38.632,
       "levels": 197
      },
      {
-      "std": 8.725,
-      "levels": 76
+      "std": 8.833,
+      "levels": 74
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.643,
+     "pass_fraction": 0.773
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2004,43 +2404,48 @@
      1800
     ],
     "bytes": 428628,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.6,
+      "std": 9.66,
       "levels": 76
      },
      {
-      "std": 9.5,
+      "std": 8.454,
       "levels": 75
      },
      {
-      "std": 9.465,
-      "levels": 74
+      "std": 9.569,
+      "levels": 73
      },
      {
-      "std": 11.06,
+      "std": 11.272,
       "levels": 111
      },
      {
-      "std": 6.702,
-      "levels": 50
+      "std": 6.641,
+      "levels": 49
      },
      {
-      "std": 9.307,
-      "levels": 75
+      "std": 9.427,
+      "levels": 71
      },
      {
-      "std": 37.289,
-      "levels": 199
+      "std": 38.742,
+      "levels": 197
      },
      {
-      "std": 9.096,
+      "std": 9.223,
       "levels": 75
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.022,
+     "pass_fraction": 0.904
+    }
    }
   },
   {
@@ -2049,6 +2454,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2056,43 +2463,48 @@
      1500
     ],
     "bytes": 209092,
-    "magnification": 1.939,
-    "passes": 4,
+    "magnification": 2.171,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.26,
-      "levels": 72
+      "std": 8.487,
+      "levels": 71
      },
      {
-      "std": 7.077,
-      "levels": 66
+      "std": 7.238,
+      "levels": 68
      },
      {
-      "std": 7.771,
-      "levels": 62
-     },
-     {
-      "std": 10.895,
-      "levels": 110
-     },
-     {
-      "std": 5.432,
-      "levels": 41
-     },
-     {
-      "std": 8.083,
+      "std": 8.02,
       "levels": 63
      },
      {
-      "std": 26.511,
-      "levels": 101
+      "std": 10.553,
+      "levels": 107
      },
      {
-      "std": 7.698,
+      "std": 5.395,
+      "levels": 39
+     },
+     {
+      "std": 8.437,
       "levels": 68
+     },
+     {
+      "std": 27.471,
+      "levels": 106
+     },
+     {
+      "std": 7.961,
+      "levels": 65
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.164,
+     "pass_fraction": 0.606
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2101,43 +2513,48 @@
      1800
     ],
     "bytes": 322580,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.593,
-      "levels": 71
+      "std": 8.845,
+      "levels": 72
      },
      {
-      "std": 7.393,
-      "levels": 66
-     },
-     {
-      "std": 8.131,
+      "std": 7.568,
       "levels": 67
      },
      {
-      "std": 11.21,
-      "levels": 112
+      "std": 8.374,
+      "levels": 68
      },
      {
-      "std": 5.756,
-      "levels": 42
+      "std": 10.83,
+      "levels": 106
      },
      {
-      "std": 8.442,
+      "std": 5.723,
+      "levels": 41
+     },
+     {
+      "std": 8.812,
       "levels": 66
      },
      {
-      "std": 26.64,
+      "std": 27.554,
       "levels": 101
      },
      {
-      "std": 8.12,
-      "levels": 70
+      "std": 8.346,
+      "levels": 65
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.5,
+     "pass_fraction": 0.656
+    }
    }
   },
   {
@@ -2146,6 +2563,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2153,43 +2572,48 @@
      1500
     ],
     "bytes": 256822,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.224,
-      "levels": 75
+      "std": 9.242,
+      "levels": 73
      },
      {
-      "std": 8.047,
+      "std": 8.087,
       "levels": 68
      },
      {
-      "std": 8.729,
-      "levels": 71
-     },
-     {
-      "std": 10.868,
-      "levels": 110
-     },
-     {
-      "std": 6.533,
-      "levels": 50
-     },
-     {
-      "std": 9.044,
+      "std": 8.856,
       "levels": 74
      },
      {
-      "std": 30.35,
+      "std": 10.515,
+      "levels": 107
+     },
+     {
+      "std": 6.422,
+      "levels": 50
+     },
+     {
+      "std": 9.205,
+      "levels": 76
+     },
+     {
+      "std": 31.465,
       "levels": 198
      },
      {
-      "std": 8.713,
-      "levels": 76
+      "std": 8.862,
+      "levels": 74
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.599,
+     "pass_fraction": 0.788
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2198,43 +2622,48 @@
      1800
     ],
     "bytes": 429916,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.632,
-      "levels": 78
+      "std": 9.667,
+      "levels": 79
      },
      {
-      "std": 8.438,
+      "std": 8.484,
       "levels": 68
      },
      {
-      "std": 9.188,
+      "std": 9.298,
       "levels": 77
      },
      {
-      "std": 11.218,
-      "levels": 114
+      "std": 10.853,
+      "levels": 111
      },
      {
-      "std": 6.854,
-      "levels": 52
+      "std": 6.755,
+      "levels": 49
      },
      {
-      "std": 9.42,
+      "std": 9.587,
       "levels": 73
      },
      {
-      "std": 30.421,
-      "levels": 198
+      "std": 31.511,
+      "levels": 199
      },
      {
-      "std": 9.196,
-      "levels": 79
+      "std": 9.302,
+      "levels": 78
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.975,
+     "pass_fraction": 0.905
+    }
    }
   },
   {
@@ -2243,6 +2672,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2250,43 +2681,48 @@
      1500
     ],
     "bytes": 215708,
-    "magnification": 1.939,
-    "passes": 7,
+    "magnification": 2.171,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.351,
-      "levels": 71
-     },
-     {
-      "std": 8.321,
-      "levels": 68
-     },
-     {
-      "std": 8.176,
+      "std": 8.631,
       "levels": 70
      },
      {
-      "std": 10.572,
-      "levels": 104
+      "std": 7.267,
+      "levels": 63
      },
      {
-      "std": 5.408,
-      "levels": 41
-     },
-     {
-      "std": 8.139,
+      "std": 8.436,
       "levels": 67
      },
      {
-      "std": 26.619,
-      "levels": 106
+      "std": 11.054,
+      "levels": 103
      },
      {
-      "std": 8.106,
-      "levels": 71
+      "std": 5.394,
+      "levels": 39
+     },
+     {
+      "std": 8.356,
+      "levels": 68
+     },
+     {
+      "std": 27.599,
+      "levels": 109
+     },
+     {
+      "std": 8.189,
+      "levels": 70
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.238,
+     "pass_fraction": 0.656
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2295,43 +2731,48 @@
      1800
     ],
     "bytes": 329258,
-    "magnification": 1.616,
-    "passes": 7,
+    "magnification": 1.809,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.66,
-      "levels": 73
+      "std": 8.949,
+      "levels": 74
      },
      {
-      "std": 8.628,
-      "levels": 71
+      "std": 7.569,
+      "levels": 62
      },
      {
-      "std": 8.477,
-      "levels": 69
+      "std": 8.728,
+      "levels": 67
      },
      {
-      "std": 10.859,
+      "std": 11.347,
       "levels": 105
      },
      {
-      "std": 5.728,
+      "std": 5.712,
       "levels": 43
      },
      {
-      "std": 8.427,
-      "levels": 66
+      "std": 8.67,
+      "levels": 67
      },
      {
-      "std": 26.724,
-      "levels": 106
+      "std": 27.673,
+      "levels": 105
      },
      {
-      "std": 8.41,
+      "std": 8.51,
       "levels": 67
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.543,
+     "pass_fraction": 0.678
+    }
    }
   },
   {
@@ -2340,6 +2781,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2347,43 +2790,48 @@
      1500
     ],
     "bytes": 257680,
-    "magnification": 1.939,
-    "passes": 7,
+    "magnification": 2.171,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 9.528,
-      "levels": 76
+      "std": 9.54,
+      "levels": 75
      },
      {
-      "std": 8.879,
-      "levels": 70
+      "std": 7.85,
+      "levels": 69
      },
      {
-      "std": 9.109,
-      "levels": 76
+      "std": 9.152,
+      "levels": 73
      },
      {
-      "std": 10.29,
-      "levels": 106
+      "std": 10.598,
+      "levels": 104
      },
      {
-      "std": 6.246,
+      "std": 6.179,
       "levels": 50
      },
      {
-      "std": 9.016,
-      "levels": 71
+      "std": 9.103,
+      "levels": 72
      },
      {
-      "std": 37.012,
+      "std": 38.501,
       "levels": 195
      },
      {
-      "std": 8.931,
+      "std": 8.906,
       "levels": 70
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.73,
+     "pass_fraction": 0.834
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2392,43 +2840,48 @@
      1800
     ],
     "bytes": 429570,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.935,
-      "levels": 77
+      "std": 9.973,
+      "levels": 79
      },
      {
-      "std": 9.295,
-      "levels": 76
+      "std": 8.264,
+      "levels": 68
      },
      {
-      "std": 9.522,
+      "std": 9.576,
       "levels": 73
      },
      {
-      "std": 10.654,
+      "std": 10.947,
       "levels": 106
      },
      {
-      "std": 6.608,
+      "std": 6.539,
       "levels": 52
      },
      {
-      "std": 9.34,
+      "std": 9.453,
       "levels": 71
      },
      {
-      "std": 37.077,
-      "levels": 197
+      "std": 38.572,
+      "levels": 196
      },
      {
-      "std": 9.347,
-      "levels": 75
+      "std": 9.345,
+      "levels": 74
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.108,
+     "pass_fraction": 0.926
+    }
    }
   },
   {
@@ -2437,6 +2890,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2444,43 +2899,48 @@
      1500
     ],
     "bytes": 197718,
-    "magnification": 1.939,
-    "passes": 3,
+    "magnification": 2.171,
+    "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 8.81,
-      "levels": 67
-     },
-     {
-      "std": 7.709,
-      "levels": 72
-     },
-     {
-      "std": 7.68,
+      "std": 8.029,
       "levels": 68
      },
      {
-      "std": 7.615,
-      "levels": 70
+      "std": 7.845,
+      "levels": 72
      },
      {
-      "std": 6.175,
-      "levels": 62
+      "std": 7.968,
+      "levels": 69
      },
      {
-      "std": 7.267,
-      "levels": 62
+      "std": 7.846,
+      "levels": 69
      },
      {
-      "std": 28.855,
-      "levels": 111
+      "std": 5.408,
+      "levels": 57
      },
      {
-      "std": 8.133,
-      "levels": 67
+      "std": 7.583,
+      "levels": 64
+     },
+     {
+      "std": 29.988,
+      "levels": 118
+     },
+     {
+      "std": 7.205,
+      "levels": 63
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 7.761,
+     "pass_fraction": 0.242
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2489,43 +2949,48 @@
      1800
     ],
     "bytes": 306278,
-    "magnification": 1.616,
-    "passes": 3,
+    "magnification": 1.809,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 9.124,
-      "levels": 69
+      "std": 8.287,
+      "levels": 68
      },
      {
-      "std": 7.933,
-      "levels": 71
-     },
-     {
-      "std": 7.972,
-      "levels": 67
-     },
-     {
-      "std": 7.853,
+      "std": 8.12,
       "levels": 72
      },
      {
-      "std": 6.492,
-      "levels": 63
+      "std": 8.246,
+      "levels": 70
      },
      {
-      "std": 7.626,
-      "levels": 66
+      "std": 8.103,
+      "levels": 72
      },
      {
-      "std": 28.963,
-      "levels": 113
+      "std": 5.767,
+      "levels": 61
      },
      {
-      "std": 8.472,
+      "std": 7.947,
       "levels": 69
+     },
+     {
+      "std": 30.06,
+      "levels": 115
+     },
+     {
+      "std": 7.595,
+      "levels": 68
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.071,
+     "pass_fraction": 0.566
+    }
    }
   },
   {
@@ -2534,6 +2999,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2541,43 +3008,48 @@
      1500
     ],
     "bytes": 243076,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.941,
+      "std": 9.195,
       "levels": 70
      },
      {
-      "std": 8.607,
+      "std": 8.586,
+      "levels": 76
+     },
+     {
+      "std": 9.072,
+      "levels": 70
+     },
+     {
+      "std": 8.569,
       "levels": 78
      },
      {
-      "std": 8.965,
-      "levels": 69
+      "std": 6.183,
+      "levels": 61
      },
      {
-      "std": 8.52,
-      "levels": 78
-     },
-     {
-      "std": 6.761,
-      "levels": 68
-     },
-     {
-      "std": 8.723,
+      "std": 8.873,
       "levels": 67
      },
      {
-      "std": 41.218,
-      "levels": 199
+      "std": 42.976,
+      "levels": 197
      },
      {
-      "std": 9.376,
-      "levels": 73
+      "std": 8.473,
+      "levels": 67
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.528,
+     "pass_fraction": 0.777
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2586,43 +3058,48 @@
      1800
     ],
     "bytes": 399380,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 10.383,
+      "std": 9.577,
       "levels": 74
      },
      {
-      "std": 8.963,
+      "std": 8.977,
       "levels": 74
      },
      {
-      "std": 9.341,
+      "std": 9.443,
+      "levels": 74
+     },
+     {
+      "std": 8.926,
+      "levels": 79
+     },
+     {
+      "std": 6.503,
+      "levels": 67
+     },
+     {
+      "std": 9.276,
+      "levels": 70
+     },
+     {
+      "std": 43.086,
+      "levels": 201
+     },
+     {
+      "std": 8.906,
       "levels": 73
-     },
-     {
-      "std": 8.849,
-      "levels": 78
-     },
-     {
-      "std": 7.055,
-      "levels": 69
-     },
-     {
-      "std": 9.132,
-      "levels": 68
-     },
-     {
-      "std": 41.327,
-      "levels": 203
-     },
-     {
-      "std": 9.75,
-      "levels": 77
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.911,
+     "pass_fraction": 0.899
+    }
    }
   },
   {
@@ -2631,6 +3108,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2638,43 +3117,48 @@
      1500
     ],
     "bytes": 197384,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 7.852,
-      "levels": 73
+      "std": 8.056,
+      "levels": 75
      },
      {
-      "std": 8.092,
-      "levels": 65
+      "std": 6.331,
+      "levels": 64
      },
      {
-      "std": 7.236,
-      "levels": 62
+      "std": 7.363,
+      "levels": 61
      },
      {
-      "std": 7.594,
-      "levels": 65
+      "std": 7.9,
+      "levels": 64
      },
      {
-      "std": 4.886,
-      "levels": 42
+      "std": 4.881,
+      "levels": 39
      },
      {
-      "std": 7.315,
+      "std": 7.475,
       "levels": 66
      },
      {
-      "std": 28.601,
-      "levels": 114
+      "std": 29.734,
+      "levels": 118
      },
      {
-      "std": 7.318,
-      "levels": 65
+      "std": 7.607,
+      "levels": 69
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 7.635,
+     "pass_fraction": 0.09
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2683,43 +3167,48 @@
      1800
     ],
     "bytes": 302504,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 3,
     "of": 8,
     "samples": [
      {
-      "std": 8.046,
+      "std": 8.333,
       "levels": 72
      },
      {
-      "std": 8.465,
+      "std": 6.694,
       "levels": 70
      },
      {
-      "std": 7.642,
-      "levels": 65
+      "std": 7.779,
+      "levels": 64
      },
      {
-      "std": 7.946,
+      "std": 8.243,
       "levels": 66
      },
      {
-      "std": 5.191,
-      "levels": 44
+      "std": 5.179,
+      "levels": 43
      },
      {
-      "std": 7.628,
+      "std": 7.821,
       "levels": 70
      },
      {
-      "std": 28.711,
+      "std": 29.829,
       "levels": 115
      },
      {
-      "std": 7.642,
-      "levels": 67
+      "std": 7.927,
+      "levels": 68
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 7.985,
+     "pass_fraction": 0.476
+    }
    }
   },
   {
@@ -2728,6 +3217,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2735,43 +3226,48 @@
      1500
     ],
     "bytes": 247488,
-    "magnification": 1.939,
-    "passes": 7,
+    "magnification": 2.171,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 9.102,
-      "levels": 76
+      "std": 9.115,
+      "levels": 75
      },
      {
-      "std": 8.928,
-      "levels": 67
+      "std": 7.281,
+      "levels": 68
      },
      {
-      "std": 8.607,
-      "levels": 73
+      "std": 8.57,
+      "levels": 66
      },
      {
-      "std": 8.486,
-      "levels": 73
+      "std": 8.581,
+      "levels": 74
      },
      {
-      "std": 6.06,
+      "std": 5.966,
       "levels": 46
      },
      {
-      "std": 8.678,
+      "std": 8.647,
+      "levels": 68
+     },
+     {
+      "std": 41.629,
+      "levels": 200
+     },
+     {
+      "std": 8.823,
       "levels": 72
-     },
-     {
-      "std": 39.966,
-      "levels": 199
-     },
-     {
-      "std": 8.686,
-      "levels": 70
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.447,
+     "pass_fraction": 0.775
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2780,43 +3276,48 @@
      1800
     ],
     "bytes": 404216,
-    "magnification": 1.616,
-    "passes": 7,
+    "magnification": 1.809,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 9.461,
-      "levels": 76
+      "std": 9.562,
+      "levels": 74
      },
      {
-      "std": 9.358,
+      "std": 7.721,
       "levels": 70
      },
      {
-      "std": 9.07,
-      "levels": 76
-     },
-     {
-      "std": 8.923,
-      "levels": 76
-     },
-     {
-      "std": 6.423,
-      "levels": 51
-     },
-     {
-      "std": 9.032,
+      "std": 9.043,
       "levels": 72
      },
      {
-      "std": 40.031,
-      "levels": 205
+      "std": 9.029,
+      "levels": 75
      },
      {
-      "std": 9.063,
-      "levels": 72
+      "std": 6.321,
+      "levels": 49
+     },
+     {
+      "std": 9.043,
+      "levels": 73
+     },
+     {
+      "std": 41.693,
+      "levels": 204
+     },
+     {
+      "std": 9.203,
+      "levels": 74
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.867,
+     "pass_fraction": 0.912
+    }
    }
   },
   {
@@ -2825,6 +3326,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2832,43 +3335,48 @@
      1500
     ],
     "bytes": 197506,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 1,
     "of": 8,
     "samples": [
      {
-      "std": 7.941,
-      "levels": 68
+      "std": 6.933,
+      "levels": 64
      },
      {
-      "std": 7.432,
-      "levels": 65
-     },
-     {
-      "std": 7.552,
-      "levels": 61
-     },
-     {
-      "std": 7.519,
-      "levels": 62
-     },
-     {
-      "std": 6.358,
+      "std": 7.644,
       "levels": 63
      },
      {
-      "std": 7.403,
-      "levels": 61
+      "std": 7.838,
+      "levels": 62
      },
      {
-      "std": 27.772,
-      "levels": 106
+      "std": 7.707,
+      "levels": 62
      },
      {
-      "std": 8.393,
-      "levels": 61
+      "std": 4.711,
+      "levels": 36
+     },
+     {
+      "std": 7.681,
+      "levels": 64
+     },
+     {
+      "std": 28.81,
+      "levels": 110
+     },
+     {
+      "std": 6.402,
+      "levels": 60
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 7.699,
+     "pass_fraction": 0.071
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2877,43 +3385,48 @@
      1800
     ],
     "bytes": 319134,
-    "magnification": 1.616,
-    "passes": 3,
+    "magnification": 1.809,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.202,
-      "levels": 70
+      "std": 7.244,
+      "levels": 67
      },
      {
-      "std": 7.735,
+      "std": 8.031,
+      "levels": 67
+     },
+     {
+      "std": 8.259,
+      "levels": 65
+     },
+     {
+      "std": 8.126,
+      "levels": 67
+     },
+     {
+      "std": 5.048,
+      "levels": 38
+     },
+     {
+      "std": 8.009,
       "levels": 64
      },
      {
-      "std": 7.933,
-      "levels": 63
-     },
-     {
-      "std": 7.798,
-      "levels": 65
-     },
-     {
-      "std": 6.601,
-      "levels": 63
-     },
-     {
-      "std": 7.764,
-      "levels": 65
-     },
-     {
-      "std": 27.898,
+      "std": 28.925,
       "levels": 109
      },
      {
-      "std": 8.823,
-      "levels": 65
+      "std": 6.767,
+      "levels": 60
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.071,
+     "pass_fraction": 0.649
+    }
    }
   },
   {
@@ -2922,6 +3435,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -2929,43 +3444,48 @@
      1500
     ],
     "bytes": 257262,
-    "magnification": 1.939,
-    "passes": 7,
+    "magnification": 2.171,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 9.488,
-      "levels": 71
+      "std": 8.592,
+      "levels": 68
      },
      {
-      "std": 8.123,
-      "levels": 67
-     },
-     {
-      "std": 8.772,
-      "levels": 70
-     },
-     {
-      "std": 8.349,
-      "levels": 72
-     },
-     {
-      "std": 6.973,
+      "std": 8.22,
       "levels": 66
      },
      {
-      "std": 8.637,
-      "levels": 67
+      "std": 8.877,
+      "levels": 69
      },
      {
-      "std": 33.228,
-      "levels": 202
+      "std": 8.393,
+      "levels": 70
      },
      {
-      "std": 9.428,
-      "levels": 63
+      "std": 6.043,
+      "levels": 46
+     },
+     {
+      "std": 8.786,
+      "levels": 70
+     },
+     {
+      "std": 34.544,
+      "levels": 203
+     },
+     {
+      "std": 7.75,
+      "levels": 66
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.665,
+     "pass_fraction": 0.883
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -2974,43 +3494,48 @@
      1800
     ],
     "bytes": 404710,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.843,
-      "levels": 72
-     },
-     {
-      "std": 8.433,
-      "levels": 65
-     },
-     {
-      "std": 9.173,
-      "levels": 71
-     },
-     {
-      "std": 8.678,
-      "levels": 75
-     },
-     {
-      "std": 7.252,
-      "levels": 66
-     },
-     {
-      "std": 9.004,
+      "std": 9.002,
       "levels": 68
      },
      {
-      "std": 33.319,
-      "levels": 205
+      "std": 8.589,
+      "levels": 68
      },
      {
-      "std": 9.845,
-      "levels": 70
+      "std": 9.307,
+      "levels": 74
+     },
+     {
+      "std": 8.83,
+      "levels": 76
+     },
+     {
+      "std": 6.353,
+      "levels": 51
+     },
+     {
+      "std": 9.113,
+      "levels": 69
+     },
+     {
+      "std": 34.637,
+      "levels": 204
+     },
+     {
+      "std": 8.122,
+      "levels": 65
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.034,
+     "pass_fraction": 0.942
+    }
    }
   },
   {
@@ -3019,6 +3544,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3026,43 +3553,48 @@
      1500
     ],
     "bytes": 208174,
-    "magnification": 1.939,
-    "passes": 3,
+    "magnification": 2.171,
+    "passes": 2,
     "of": 8,
     "samples": [
      {
-      "std": 7.713,
+      "std": 7.971,
       "levels": 68
      },
      {
-      "std": 8.305,
-      "levels": 71
+      "std": 7.685,
+      "levels": 69
      },
      {
-      "std": 8.464,
-      "levels": 65
+      "std": 6.391,
+      "levels": 63
      },
      {
-      "std": 7.729,
+      "std": 7.985,
       "levels": 67
      },
      {
-      "std": 4.789,
-      "levels": 37
+      "std": 4.774,
+      "levels": 36
      },
      {
-      "std": 7.306,
-      "levels": 60
+      "std": 7.656,
+      "levels": 62
      },
      {
-      "std": 27.672,
-      "levels": 108
+      "std": 28.717,
+      "levels": 115
      },
      {
-      "std": 7.712,
-      "levels": 64
+      "std": 8.017,
+      "levels": 67
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 7.682,
+     "pass_fraction": 0.041
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3071,43 +3603,48 @@
      1800
     ],
     "bytes": 318474,
-    "magnification": 1.616,
-    "passes": 5,
+    "magnification": 1.809,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.088,
-      "levels": 70
-     },
-     {
-      "std": 8.57,
+      "std": 8.338,
       "levels": 71
      },
      {
-      "std": 8.815,
-      "levels": 70
+      "std": 8.041,
+      "levels": 74
      },
      {
-      "std": 7.983,
+      "std": 6.761,
+      "levels": 73
+     },
+     {
+      "std": 8.265,
       "levels": 66
      },
      {
-      "std": 5.13,
-      "levels": 41
+      "std": 5.125,
+      "levels": 40
      },
      {
-      "std": 7.693,
-      "levels": 67
+      "std": 8.044,
+      "levels": 66
      },
      {
-      "std": 27.786,
-      "levels": 108
+      "std": 28.806,
+      "levels": 111
      },
      {
-      "std": 8.021,
-      "levels": 65
+      "std": 8.311,
+      "levels": 66
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.005,
+     "pass_fraction": 0.51
+    }
    }
   },
   {
@@ -3116,6 +3653,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3123,43 +3662,48 @@
      1500
     ],
     "bytes": 253992,
-    "magnification": 1.939,
-    "passes": 7,
+    "magnification": 2.171,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 9.085,
+      "std": 9.113,
       "levels": 71
      },
      {
-      "std": 8.862,
-      "levels": 73
+      "std": 8.187,
+      "levels": 70
      },
      {
-      "std": 9.39,
+      "std": 7.549,
+      "levels": 67
+     },
+     {
+      "std": 8.758,
+      "levels": 72
+     },
+     {
+      "std": 6.39,
+      "levels": 50
+     },
+     {
+      "std": 8.631,
+      "levels": 66
+     },
+     {
+      "std": 33.283,
+      "levels": 197
+     },
+     {
+      "std": 8.9,
       "levels": 69
-     },
-     {
-      "std": 8.73,
-      "levels": 74
-     },
-     {
-      "std": 6.557,
-      "levels": 53
-     },
-     {
-      "std": 8.438,
-      "levels": 66
-     },
-     {
-      "std": 32.147,
-      "levels": 200
-     },
-     {
-      "std": 8.691,
-      "levels": 66
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.683,
+     "pass_fraction": 0.893
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3168,43 +3712,48 @@
      1800
     ],
     "bytes": 403502,
-    "magnification": 1.616,
-    "passes": 7,
+    "magnification": 1.809,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 9.488,
-      "levels": 74
-     },
-     {
-      "std": 9.221,
-      "levels": 72
-     },
-     {
-      "std": 9.758,
+      "std": 9.518,
       "levels": 73
      },
      {
-      "std": 9.024,
-      "levels": 77
+      "std": 8.629,
+      "levels": 69
      },
      {
-      "std": 6.801,
-      "levels": 54
+      "std": 7.987,
+      "levels": 74
      },
      {
-      "std": 8.812,
-      "levels": 68
+      "std": 9.075,
+      "levels": 76
      },
      {
-      "std": 32.223,
-      "levels": 203
+      "std": 6.649,
+      "levels": 53
      },
      {
-      "std": 9.093,
+      "std": 9.018,
+      "levels": 70
+     },
+     {
+      "std": 33.348,
+      "levels": 201
+     },
+     {
+      "std": 9.3,
       "levels": 70
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.036,
+     "pass_fraction": 0.933
+    }
    }
   },
   {
@@ -3213,6 +3762,8 @@
     843,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3220,43 +3771,48 @@
      1500
     ],
     "bytes": 43082,
-    "magnification": 1.939,
-    "passes": 1,
+    "magnification": 2.171,
+    "passes": 3,
     "of": 8,
     "samples": [
      {
-      "std": 1.08,
+      "std": 1.084,
       "levels": 11
      },
      {
-      "std": 1.065,
+      "std": 1.048,
       "levels": 11
      },
      {
-      "std": 1.054,
-      "levels": 11
+      "std": 1.038,
+      "levels": 10
      },
      {
-      "std": 1.075,
+      "std": 1.081,
       "levels": 12
      },
      {
-      "std": 7.556,
-      "levels": 58
+      "std": 6.27,
+      "levels": 55
      },
      {
-      "std": 6.028,
-      "levels": 57
+      "std": 5.808,
+      "levels": 52
      },
      {
-      "std": 33.807,
+      "std": 35.583,
       "levels": 109
      },
      {
-      "std": 2.059,
-      "levels": 42
+      "std": 1.324,
+      "levels": 35
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 1.119,
+     "pass_fraction": 0.421
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3265,43 +3821,48 @@
      1800
     ],
     "bytes": 75154,
-    "magnification": 1.616,
-    "passes": 1,
+    "magnification": 1.809,
+    "passes": 3,
     "of": 8,
     "samples": [
      {
-      "std": 1.593,
+      "std": 1.602,
       "levels": 16
      },
      {
-      "std": 1.58,
-      "levels": 18
-     },
-     {
-      "std": 1.585,
+      "std": 1.576,
       "levels": 16
      },
      {
-      "std": 1.574,
-      "levels": 18
+      "std": 1.552,
+      "levels": 16
      },
      {
-      "std": 7.808,
-      "levels": 58
+      "std": 1.584,
+      "levels": 17
      },
      {
-      "std": 6.243,
-      "levels": 57
+      "std": 6.486,
+      "levels": 59
      },
      {
-      "std": 33.857,
-      "levels": 110
+      "std": 5.999,
+      "levels": 52
      },
      {
-      "std": 2.39,
-      "levels": 47
+      "std": 35.611,
+      "levels": 116
+     },
+     {
+      "std": 1.819,
+      "levels": 43
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 1.628,
+     "pass_fraction": 0.431
+    }
    }
   },
   {
@@ -3310,6 +3871,8 @@
     843,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3317,43 +3880,48 @@
      1500
     ],
     "bytes": 84090,
-    "magnification": 1.939,
-    "passes": 1,
+    "magnification": 2.171,
+    "passes": 4,
     "of": 8,
     "samples": [
      {
-      "std": 3.264,
-      "levels": 25
+      "std": 3.079,
+      "levels": 23
      },
      {
-      "std": 3.24,
-      "levels": 24
+      "std": 3.065,
+      "levels": 23
      },
      {
-      "std": 3.177,
-      "levels": 25
+      "std": 3.044,
+      "levels": 26
      },
      {
-      "std": 4.582,
-      "levels": 34
+      "std": 4.309,
+      "levels": 33
      },
      {
-      "std": 7.376,
+      "std": 6.294,
       "levels": 59
      },
      {
-      "std": 6.776,
-      "levels": 60
+      "std": 6.653,
+      "levels": 57
      },
      {
-      "std": 41.854,
-      "levels": 213
+      "std": 43.576,
+      "levels": 207
      },
      {
-      "std": 3.882,
-      "levels": 54
+      "std": 3.289,
+      "levels": 43
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.412,
+     "pass_fraction": 0.615
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3362,43 +3930,48 @@
      1800
     ],
     "bytes": 156938,
-    "magnification": 1.616,
-    "passes": 1,
+    "magnification": 1.809,
+    "passes": 4,
     "of": 8,
     "samples": [
      {
-      "std": 3.763,
-      "levels": 30
+      "std": 3.606,
+      "levels": 28
      },
      {
-      "std": 3.668,
+      "std": 3.51,
       "levels": 26
      },
      {
-      "std": 3.704,
-      "levels": 30
+      "std": 3.575,
+      "levels": 31
      },
      {
-      "std": 4.912,
-      "levels": 37
+      "std": 4.661,
+      "levels": 38
      },
      {
-      "std": 7.679,
+      "std": 6.651,
       "levels": 60
      },
      {
-      "std": 7.14,
-      "levels": 60
+      "std": 6.981,
+      "levels": 58
      },
      {
-      "std": 41.9,
-      "levels": 214
+      "std": 43.638,
+      "levels": 213
      },
      {
-      "std": 4.303,
-      "levels": 55
+      "std": 3.786,
+      "levels": 48
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.745,
+     "pass_fraction": 0.696
+    }
    }
   },
   {
@@ -3407,6 +3980,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3414,43 +3989,48 @@
      1500
     ],
     "bytes": 229756,
-    "magnification": 1.939,
-    "passes": 6,
+    "magnification": 2.171,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.324,
-      "levels": 74
+      "std": 8.589,
+      "levels": 72
      },
      {
-      "std": 8.474,
-      "levels": 73
+      "std": 7.807,
+      "levels": 72
      },
      {
-      "std": 8.304,
-      "levels": 75
+      "std": 8.622,
+      "levels": 76
      },
      {
-      "std": 10.997,
-      "levels": 106
+      "std": 10.52,
+      "levels": 100
      },
      {
-      "std": 7.196,
-      "levels": 68
+      "std": 5.792,
+      "levels": 41
      },
      {
-      "std": 7.197,
+      "std": 7.34,
       "levels": 64
      },
      {
-      "std": 42.028,
-      "levels": 174
+      "std": 42.966,
+      "levels": 173
      },
      {
-      "std": 8.241,
-      "levels": 65
+      "std": 8.507,
+      "levels": 63
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.426,
+     "pass_fraction": 0.674
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3459,43 +4039,48 @@
      1800
     ],
     "bytes": 341314,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 8.671,
-      "levels": 72
+      "std": 8.892,
+      "levels": 73
      },
      {
-      "std": 8.81,
-      "levels": 76
+      "std": 8.135,
+      "levels": 71
      },
      {
-      "std": 8.623,
-      "levels": 74
+      "std": 8.921,
+      "levels": 75
      },
      {
-      "std": 11.278,
-      "levels": 106
+      "std": 10.794,
+      "levels": 98
      },
      {
-      "std": 7.527,
-      "levels": 72
+      "std": 6.133,
+      "levels": 43
      },
      {
-      "std": 7.509,
+      "std": 7.67,
       "levels": 68
      },
      {
-      "std": 42.092,
-      "levels": 174
+      "std": 43.031,
+      "levels": 175
      },
      {
-      "std": 8.583,
-      "levels": 69
+      "std": 8.865,
+      "levels": 72
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.76,
+     "pass_fraction": 0.697
+    }
    }
   },
   {
@@ -3504,6 +4089,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3511,43 +4098,48 @@
      1500
     ],
     "bytes": 264214,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.367,
-      "levels": 76
+      "std": 9.427,
+      "levels": 73
      },
      {
-      "std": 9.205,
+      "std": 8.555,
       "levels": 80
      },
      {
-      "std": 9.304,
+      "std": 9.437,
       "levels": 77
      },
      {
-      "std": 10.715,
-      "levels": 109
+      "std": 10.273,
+      "levels": 97
      },
      {
-      "std": 7.051,
-      "levels": 64
+      "std": 6.203,
+      "levels": 52
      },
      {
-      "std": 8.339,
-      "levels": 70
+      "std": 8.283,
+      "levels": 65
      },
      {
-      "std": 48.801,
-      "levels": 229
+      "std": 49.886,
+      "levels": 228
      },
      {
-      "std": 9.248,
+      "std": 9.378,
       "levels": 71
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.605,
+     "pass_fraction": 0.813
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3556,43 +4148,48 @@
      1800
     ],
     "bytes": 411974,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.773,
-      "levels": 82
+      "std": 9.801,
+      "levels": 77
      },
      {
-      "std": 9.575,
-      "levels": 82
+      "std": 8.906,
+      "levels": 81
      },
      {
-      "std": 9.739,
-      "levels": 79
+      "std": 9.884,
+      "levels": 81
      },
      {
-      "std": 11.061,
-      "levels": 103
+      "std": 10.627,
+      "levels": 99
      },
      {
-      "std": 7.389,
-      "levels": 67
+      "std": 6.557,
+      "levels": 53
      },
      {
-      "std": 8.686,
-      "levels": 70
+      "std": 8.656,
+      "levels": 69
      },
      {
-      "std": 48.853,
-      "levels": 229
+      "std": 49.932,
+      "levels": 230
      },
      {
-      "std": 9.608,
-      "levels": 71
+      "std": 9.758,
+      "levels": 73
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.988,
+     "pass_fraction": 0.903
+    }
    }
   },
   {
@@ -3601,6 +4198,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3608,43 +4207,48 @@
      1500
     ],
     "bytes": 222726,
-    "magnification": 1.939,
-    "passes": 7,
+    "magnification": 2.171,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.371,
-      "levels": 66
+      "std": 8.671,
+      "levels": 68
      },
      {
-      "std": 8.848,
-      "levels": 70
-     },
-     {
-      "std": 8.248,
-      "levels": 64
-     },
-     {
-      "std": 10.98,
-      "levels": 108
-     },
-     {
-      "std": 5.88,
-      "levels": 43
-     },
-     {
-      "std": 8.492,
+      "std": 9.065,
       "levels": 71
      },
      {
-      "std": 40.85,
-      "levels": 172
+      "std": 7.295,
+      "levels": 65
      },
      {
-      "std": 8.339,
-      "levels": 69
+      "std": 11.488,
+      "levels": 110
+     },
+     {
+      "std": 5.879,
+      "levels": 39
+     },
+     {
+      "std": 8.647,
+      "levels": 70
+     },
+     {
+      "std": 41.287,
+      "levels": 175
+     },
+     {
+      "std": 7.412,
+      "levels": 71
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.441,
+     "pass_fraction": 0.651
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3653,43 +4257,48 @@
      1800
     ],
     "bytes": 333640,
-    "magnification": 1.616,
-    "passes": 7,
+    "magnification": 1.809,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.749,
+      "std": 9.039,
       "levels": 71
      },
      {
-      "std": 9.151,
+      "std": 9.388,
       "levels": 75
      },
      {
-      "std": 8.58,
-      "levels": 68
+      "std": 7.604,
+      "levels": 67
      },
      {
-      "std": 11.3,
-      "levels": 109
+      "std": 11.782,
+      "levels": 110
      },
      {
-      "std": 6.252,
-      "levels": 46
+      "std": 6.256,
+      "levels": 45
      },
      {
-      "std": 8.799,
-      "levels": 69
+      "std": 8.998,
+      "levels": 71
      },
      {
-      "std": 40.908,
+      "std": 41.349,
       "levels": 171
      },
      {
-      "std": 8.72,
+      "std": 7.689,
       "levels": 70
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.779,
+     "pass_fraction": 0.685
+    }
    }
   },
   {
@@ -3698,6 +4307,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3705,43 +4316,48 @@
      1500
     ],
     "bytes": 274332,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.314,
-      "levels": 73
-     },
-     {
-      "std": 9.601,
-      "levels": 76
-     },
-     {
-      "std": 9.303,
+      "std": 9.394,
       "levels": 72
      },
      {
-      "std": 10.735,
-      "levels": 111
+      "std": 9.618,
+      "levels": 77
      },
      {
-      "std": 6.386,
-      "levels": 51
+      "std": 8.456,
+      "levels": 71
      },
      {
-      "std": 9.451,
-      "levels": 79
+      "std": 11.04,
+      "levels": 105
      },
      {
-      "std": 43.39,
-      "levels": 216
+      "std": 6.314,
+      "levels": 52
      },
      {
-      "std": 9.482,
-      "levels": 73
+      "std": 9.458,
+      "levels": 77
+     },
+     {
+      "std": 43.71,
+      "levels": 218
+     },
+     {
+      "std": 8.699,
+      "levels": 75
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.666,
+     "pass_fraction": 0.812
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3750,43 +4366,48 @@
      1800
     ],
     "bytes": 409744,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.751,
-      "levels": 76
-     },
-     {
-      "std": 9.927,
-      "levels": 77
-     },
-     {
-      "std": 9.661,
+      "std": 9.824,
       "levels": 75
      },
      {
-      "std": 11.096,
-      "levels": 115
+      "std": 9.962,
+      "levels": 75
      },
      {
-      "std": 6.718,
-      "levels": 55
+      "std": 8.811,
+      "levels": 70
      },
      {
-      "std": 9.732,
-      "levels": 76
+      "std": 11.368,
+      "levels": 108
      },
      {
-      "std": 43.44,
+      "std": 6.651,
+      "levels": 53
+     },
+     {
+      "std": 9.758,
+      "levels": 77
+     },
+     {
+      "std": 43.78,
       "levels": 214
      },
      {
-      "std": 9.866,
-      "levels": 74
+      "std": 9.01,
+      "levels": 73
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.043,
+     "pass_fraction": 0.901
+    }
    }
   },
   {
@@ -3795,6 +4416,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3802,43 +4425,48 @@
      1500
     ],
     "bytes": 226060,
-    "magnification": 1.939,
-    "passes": 7,
+    "magnification": 2.171,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.436,
-      "levels": 67
+      "std": 8.703,
+      "levels": 69
      },
      {
-      "std": 8.637,
-      "levels": 70
+      "std": 8.859,
+      "levels": 69
      },
      {
-      "std": 8.279,
-      "levels": 72
+      "std": 7.375,
+      "levels": 63
      },
      {
-      "std": 11.02,
+      "std": 11.506,
       "levels": 107
      },
      {
-      "std": 5.921,
-      "levels": 42
+      "std": 5.904,
+      "levels": 39
      },
      {
-      "std": 8.468,
-      "levels": 67
-     },
-     {
-      "std": 38.584,
-      "levels": 179
-     },
-     {
-      "std": 8.236,
+      "std": 8.655,
       "levels": 64
+     },
+     {
+      "std": 39.57,
+      "levels": 176
+     },
+     {
+      "std": 7.416,
+      "levels": 66
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.446,
+     "pass_fraction": 0.647
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3847,43 +4475,48 @@
      1800
     ],
     "bytes": 338398,
-    "magnification": 1.616,
-    "passes": 7,
+    "magnification": 1.809,
+    "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.816,
-      "levels": 71
+      "std": 9.043,
+      "levels": 72
      },
      {
-      "std": 8.931,
+      "std": 9.159,
       "levels": 69
      },
      {
-      "std": 8.601,
-      "levels": 76
+      "std": 7.707,
+      "levels": 68
      },
      {
-      "std": 11.35,
+      "std": 11.802,
       "levels": 111
      },
      {
-      "std": 6.217,
-      "levels": 44
+      "std": 6.213,
+      "levels": 43
      },
      {
-      "std": 8.785,
+      "std": 8.986,
       "levels": 68
      },
      {
-      "std": 38.671,
-      "levels": 174
+      "std": 39.657,
+      "levels": 177
      },
      {
-      "std": 8.577,
-      "levels": 68
+      "std": 7.746,
+      "levels": 72
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.795,
+     "pass_fraction": 0.686
+    }
    }
   },
   {
@@ -3892,6 +4525,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3899,43 +4534,48 @@
      1500
     ],
     "bytes": 273652,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.318,
-      "levels": 75
-     },
-     {
-      "std": 9.227,
-      "levels": 73
-     },
-     {
-      "std": 9.108,
-      "levels": 75
-     },
-     {
-      "std": 10.848,
-      "levels": 110
-     },
-     {
-      "std": 6.596,
-      "levels": 54
-     },
-     {
-      "std": 9.158,
+      "std": 9.355,
       "levels": 76
      },
      {
-      "std": 46.908,
-      "levels": 226
+      "std": 9.299,
+      "levels": 75
      },
      {
-      "std": 9.013,
-      "levels": 67
+      "std": 8.32,
+      "levels": 71
+     },
+     {
+      "std": 11.08,
+      "levels": 104
+     },
+     {
+      "std": 6.511,
+      "levels": 56
+     },
+     {
+      "std": 9.233,
+      "levels": 71
+     },
+     {
+      "std": 48.119,
+      "levels": 225
+     },
+     {
+      "std": 8.288,
+      "levels": 69
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.717,
+     "pass_fraction": 0.829
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -3944,43 +4584,48 @@
      1800
     ],
     "bytes": 426990,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.749,
+      "std": 9.779,
       "levels": 77
      },
      {
-      "std": 9.592,
-      "levels": 77
+      "std": 9.671,
+      "levels": 76
      },
      {
-      "std": 9.551,
-      "levels": 78
+      "std": 8.787,
+      "levels": 73
      },
      {
-      "std": 11.212,
-      "levels": 111
+      "std": 11.432,
+      "levels": 108
      },
      {
-      "std": 6.897,
-      "levels": 57
+      "std": 6.819,
+      "levels": 58
      },
      {
-      "std": 9.482,
+      "std": 9.558,
       "levels": 74
      },
      {
-      "std": 46.993,
-      "levels": 227
+      "std": 48.219,
+      "levels": 225
      },
      {
-      "std": 9.441,
-      "levels": 74
+      "std": 8.718,
+      "levels": 75
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 9.082,
+     "pass_fraction": 0.918
+    }
    }
   },
   {
@@ -3989,6 +4634,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -3996,43 +4643,48 @@
      1500
     ],
     "bytes": 222748,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.267,
-      "levels": 65
+      "std": 8.598,
+      "levels": 66
      },
      {
-      "std": 8.651,
-      "levels": 68
+      "std": 8.908,
+      "levels": 69
      },
      {
-      "std": 7.11,
-      "levels": 62
+      "std": 7.248,
+      "levels": 61
      },
      {
-      "std": 10.779,
-      "levels": 102
+      "std": 11.221,
+      "levels": 105
      },
      {
-      "std": 5.928,
-      "levels": 46
+      "std": 5.927,
+      "levels": 40
      },
      {
-      "std": 8.506,
-      "levels": 70
+      "std": 8.772,
+      "levels": 66
      },
      {
-      "std": 39.29,
-      "levels": 175
+      "std": 40.296,
+      "levels": 176
      },
      {
-      "std": 7.262,
-      "levels": 63
+      "std": 7.484,
+      "levels": 64
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.44,
+     "pass_fraction": 0.646
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4041,43 +4693,48 @@
      1800
     ],
     "bytes": 338260,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 5,
     "of": 8,
     "samples": [
      {
-      "std": 8.538,
-      "levels": 68
-     },
-     {
-      "std": 8.925,
+      "std": 8.862,
       "levels": 69
      },
      {
-      "std": 7.418,
-      "levels": 63
+      "std": 9.192,
+      "levels": 69
      },
      {
-      "std": 11.066,
-      "levels": 105
-     },
-     {
-      "std": 6.21,
-      "levels": 49
-     },
-     {
-      "std": 8.859,
-      "levels": 68
-     },
-     {
-      "std": 39.407,
-      "levels": 173
-     },
-     {
-      "std": 7.637,
+      "std": 7.596,
       "levels": 67
+     },
+     {
+      "std": 11.525,
+      "levels": 107
+     },
+     {
+      "std": 6.211,
+      "levels": 45
+     },
+     {
+      "std": 9.102,
+      "levels": 67
+     },
+     {
+      "std": 40.422,
+      "levels": 175
+     },
+     {
+      "std": 7.801,
+      "levels": 65
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.759,
+     "pass_fraction": 0.671
+    }
    }
   },
   {
@@ -4086,6 +4743,8 @@
     1288,
     1800
    ],
+   "class": "written",
+   "floor": 8.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4093,43 +4752,48 @@
      1500
     ],
     "bytes": 267942,
-    "magnification": 1.939,
+    "magnification": 2.171,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.313,
-      "levels": 77
+      "std": 9.364,
+      "levels": 74
      },
      {
-      "std": 9.341,
-      "levels": 73
+      "std": 9.405,
+      "levels": 74
      },
      {
-      "std": 8.573,
-      "levels": 70
+      "std": 8.483,
+      "levels": 68
      },
      {
-      "std": 10.338,
-      "levels": 102
+      "std": 10.612,
+      "levels": 98
      },
      {
-      "std": 6.304,
-      "levels": 53
+      "std": 6.262,
+      "levels": 54
      },
      {
-      "std": 9.35,
-      "levels": 79
+      "std": 9.404,
+      "levels": 72
      },
      {
-      "std": 46.508,
+      "std": 47.602,
       "levels": 222
      },
      {
-      "std": 8.562,
-      "levels": 70
+      "std": 8.567,
+      "levels": 69
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.601,
+     "pass_fraction": 0.786
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4138,43 +4802,48 @@
      1800
     ],
     "bytes": 410094,
-    "magnification": 1.616,
+    "magnification": 1.809,
     "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 9.712,
+      "std": 9.77,
       "levels": 79
      },
      {
-      "std": 9.711,
-      "levels": 74
+      "std": 9.779,
+      "levels": 75
      },
      {
-      "std": 8.979,
+      "std": 8.896,
       "levels": 72
      },
      {
-      "std": 10.718,
-      "levels": 105
+      "std": 11.004,
+      "levels": 104
      },
      {
-      "std": 6.678,
-      "levels": 53
+      "std": 6.638,
+      "levels": 54
      },
      {
-      "std": 9.724,
-      "levels": 77
+      "std": 9.78,
+      "levels": 74
      },
      {
-      "std": 46.559,
+      "std": 47.65,
       "levels": 225
      },
      {
-      "std": 8.981,
-      "levels": 75
+      "std": 8.955,
+      "levels": 73
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 8.998,
+     "pass_fraction": 0.898
+    }
    }
   },
   {
@@ -4183,6 +4852,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4190,43 +4861,48 @@
      1500
     ],
     "bytes": 169958,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 61.992,
-      "levels": 173
+      "std": 63.634,
+      "levels": 172
      },
      {
-      "std": 4.537,
+      "std": 4.497,
       "levels": 36
      },
      {
-      "std": 4.347,
+      "std": 4.33,
       "levels": 37
      },
      {
-      "std": 4.538,
+      "std": 4.561,
+      "levels": 36
+     },
+     {
+      "std": 4.411,
+      "levels": 36
+     },
+     {
+      "std": 4.504,
       "levels": 38
      },
      {
-      "std": 4.444,
-      "levels": 37
-     },
-     {
-      "std": 4.472,
-      "levels": 38
-     },
-     {
-      "std": 36.26,
+      "std": 37.277,
       "levels": 109
      },
      {
-      "std": 4.445,
-      "levels": 37
+      "std": 4.404,
+      "levels": 36
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.469,
+     "pass_fraction": 1.0
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4235,43 +4911,48 @@
      1800
     ],
     "bytes": 280674,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 61.945,
+      "std": 63.581,
       "levels": 172
      },
      {
-      "std": 4.878,
+      "std": 4.846,
+      "levels": 41
+     },
+     {
+      "std": 4.699,
       "levels": 39
      },
      {
-      "std": 4.708,
-      "levels": 40
+      "std": 4.918,
+      "levels": 38
      },
      {
-      "std": 4.88,
-      "levels": 41
-     },
-     {
-      "std": 4.792,
+      "std": 4.75,
       "levels": 37
      },
      {
-      "std": 4.78,
-      "levels": 41
+      "std": 4.811,
+      "levels": 43
      },
      {
-      "std": 36.315,
-      "levels": 111
+      "std": 37.327,
+      "levels": 107
      },
      {
-      "std": 4.738,
-      "levels": 42
+      "std": 4.688,
+      "levels": 43
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.809,
+     "pass_fraction": 1.0
+    }
    }
   },
   {
@@ -4280,6 +4961,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4287,43 +4970,48 @@
      1500
     ],
     "bytes": 187326,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 22.994,
-      "levels": 82
+      "std": 23.668,
+      "levels": 78
      },
      {
-      "std": 4.758,
-      "levels": 41
-     },
-     {
-      "std": 4.536,
-      "levels": 38
-     },
-     {
-      "std": 4.216,
-      "levels": 38
-     },
-     {
-      "std": 5.821,
-      "levels": 57
-     },
-     {
-      "std": 4.698,
+      "std": 4.76,
       "levels": 43
      },
      {
-      "std": 69.279,
-      "levels": 175
+      "std": 4.56,
+      "levels": 37
      },
      {
-      "std": 4.713,
+      "std": 4.202,
+      "levels": 38
+     },
+     {
+      "std": 5.748,
+      "levels": 55
+     },
+     {
+      "std": 4.707,
+      "levels": 44
+     },
+     {
+      "std": 70.536,
+      "levels": 172
+     },
+     {
+      "std": 4.68,
       "levels": 39
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.376,
+     "pass_fraction": 0.997
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4332,43 +5020,48 @@
      1800
     ],
     "bytes": 318614,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 23.036,
-      "levels": 83
+      "std": 23.727,
+      "levels": 80
      },
      {
-      "std": 5.158,
+      "std": 5.172,
       "levels": 46
      },
      {
-      "std": 4.966,
+      "std": 4.979,
       "levels": 41
      },
      {
-      "std": 4.555,
-      "levels": 40
+      "std": 4.546,
+      "levels": 38
      },
      {
-      "std": 6.088,
-      "levels": 62
+      "std": 6.01,
+      "levels": 60
      },
      {
-      "std": 5.107,
+      "std": 5.123,
       "levels": 44
      },
      {
-      "std": 69.273,
-      "levels": 176
+      "std": 70.534,
+      "levels": 177
      },
      {
-      "std": 5.118,
+      "std": 5.095,
       "levels": 44
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.801,
+     "pass_fraction": 1.0
+    }
    }
   },
   {
@@ -4377,6 +5070,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4384,43 +5079,48 @@
      1500
     ],
     "bytes": 170922,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 68.51,
-      "levels": 172
+      "std": 69.153,
+      "levels": 170
      },
      {
-      "std": 4.57,
-      "levels": 40
+      "std": 4.517,
+      "levels": 39
      },
      {
-      "std": 4.444,
-      "levels": 37
-     },
-     {
-      "std": 4.649,
-      "levels": 37
-     },
-     {
-      "std": 4.55,
+      "std": 4.454,
       "levels": 38
      },
      {
-      "std": 4.491,
+      "std": 4.642,
+      "levels": 35
+     },
+     {
+      "std": 4.521,
+      "levels": 38
+     },
+     {
+      "std": 4.545,
       "levels": 36
      },
      {
-      "std": 36.732,
-      "levels": 107
+      "std": 37.799,
+      "levels": 106
      },
      {
-      "std": 4.482,
-      "levels": 36
+      "std": 4.438,
+      "levels": 37
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.487,
+     "pass_fraction": 1.0
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4429,16 +5129,16 @@
      1800
     ],
     "bytes": 262584,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 68.569,
-      "levels": 172
+      "std": 69.196,
+      "levels": 170
      },
      {
-      "std": 4.913,
+      "std": 4.852,
       "levels": 40
      },
      {
@@ -4446,26 +5146,31 @@
       "levels": 39
      },
      {
-      "std": 4.953,
+      "std": 4.95,
+      "levels": 41
+     },
+     {
+      "std": 4.815,
+      "levels": 41
+     },
+     {
+      "std": 4.843,
       "levels": 40
      },
      {
-      "std": 4.839,
-      "levels": 40
+      "std": 37.831,
+      "levels": 105
      },
      {
-      "std": 4.796,
-      "levels": 39
-     },
-     {
-      "std": 36.769,
-      "levels": 109
-     },
-     {
-      "std": 4.826,
+      "std": 4.784,
       "levels": 38
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.792,
+     "pass_fraction": 1.0
+    }
    }
   },
   {
@@ -4474,6 +5179,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4481,43 +5188,48 @@
      1500
     ],
     "bytes": 193266,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 22.977,
-      "levels": 77
+      "std": 23.373,
+      "levels": 76
      },
      {
-      "std": 4.828,
+      "std": 4.836,
       "levels": 39
      },
      {
-      "std": 4.514,
-      "levels": 41
+      "std": 4.522,
+      "levels": 37
      },
      {
-      "std": 4.609,
-      "levels": 43
-     },
-     {
-      "std": 5.881,
-      "levels": 58
-     },
-     {
-      "std": 4.807,
-      "levels": 41
-     },
-     {
-      "std": 59.004,
-      "levels": 173
-     },
-     {
-      "std": 4.665,
+      "std": 4.507,
       "levels": 40
+     },
+     {
+      "std": 5.769,
+      "levels": 57
+     },
+     {
+      "std": 4.823,
+      "levels": 40
+     },
+     {
+      "std": 59.34,
+      "levels": 168
+     },
+     {
+      "std": 4.615,
+      "levels": 38
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.336,
+     "pass_fraction": 0.997
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4526,43 +5238,48 @@
      1800
     ],
     "bytes": 317972,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 23.028,
-      "levels": 83
+      "std": 23.424,
+      "levels": 82
      },
      {
-      "std": 5.242,
-      "levels": 42
-     },
-     {
-      "std": 4.947,
-      "levels": 42
-     },
-     {
-      "std": 4.984,
-      "levels": 45
-     },
-     {
-      "std": 6.164,
-      "levels": 57
-     },
-     {
-      "std": 5.18,
+      "std": 5.238,
       "levels": 43
      },
      {
-      "std": 58.96,
+      "std": 4.95,
+      "levels": 41
+     },
+     {
+      "std": 4.89,
+      "levels": 46
+     },
+     {
+      "std": 6.043,
+      "levels": 58
+     },
+     {
+      "std": 5.181,
+      "levels": 42
+     },
+     {
+      "std": 59.273,
       "levels": 173
      },
      {
-      "std": 5.084,
-      "levels": 42
+      "std": 5.027,
+      "levels": 44
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.748,
+     "pass_fraction": 1.0
+    }
    }
   },
   {
@@ -4571,6 +5288,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4578,43 +5297,48 @@
      1500
     ],
     "bytes": 169754,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 56.496,
-      "levels": 160
+      "std": 58.206,
+      "levels": 161
      },
      {
-      "std": 4.181,
-      "levels": 34
+      "std": 4.134,
+      "levels": 32
      },
      {
-      "std": 4.31,
+      "std": 4.315,
       "levels": 31
      },
      {
-      "std": 3.566,
+      "std": 3.555,
       "levels": 28
      },
      {
-      "std": 4.493,
-      "levels": 34
+      "std": 4.472,
+      "levels": 35
      },
      {
-      "std": 4.326,
+      "std": 4.358,
       "levels": 31
      },
      {
-      "std": 35.652,
-      "levels": 100
+      "std": 36.656,
+      "levels": 98
      },
      {
-      "std": 4.336,
-      "levels": 32
+      "std": 4.293,
+      "levels": 31
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.225,
+     "pass_fraction": 0.752
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4623,43 +5347,48 @@
      1800
     ],
     "bytes": 264404,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 56.479,
-      "levels": 164
+      "std": 58.183,
+      "levels": 165
      },
      {
-      "std": 4.476,
+      "std": 4.431,
       "levels": 33
      },
      {
-      "std": 4.622,
-      "levels": 35
-     },
-     {
-      "std": 3.878,
-      "levels": 32
-     },
-     {
-      "std": 4.819,
+      "std": 4.624,
       "levels": 36
      },
      {
-      "std": 4.62,
-      "levels": 35
+      "std": 3.874,
+      "levels": 31
      },
      {
-      "std": 35.701,
-      "levels": 98
+      "std": 4.785,
+      "levels": 36
      },
      {
-      "std": 4.627,
-      "levels": 34
+      "std": 4.657,
+      "levels": 33
+     },
+     {
+      "std": 36.706,
+      "levels": 97
+     },
+     {
+      "std": 4.576,
+      "levels": 33
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.538,
+     "pass_fraction": 0.866
+    }
    }
   },
   {
@@ -4668,6 +5397,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4675,43 +5406,48 @@
      1500
     ],
     "bytes": 189062,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 22.454,
-      "levels": 85
+      "std": 23.174,
+      "levels": 86
      },
      {
-      "std": 4.433,
+      "std": 4.409,
       "levels": 37
      },
      {
-      "std": 4.534,
+      "std": 4.538,
       "levels": 40
      },
      {
-      "std": 4.096,
+      "std": 4.112,
+      "levels": 35
+     },
+     {
+      "std": 5.583,
+      "levels": 56
+     },
+     {
+      "std": 4.449,
       "levels": 36
      },
      {
-      "std": 5.65,
-      "levels": 58
+      "std": 73.95,
+      "levels": 178
      },
      {
-      "std": 4.431,
-      "levels": 36
-     },
-     {
-      "std": 72.418,
-      "levels": 179
-     },
-     {
-      "std": 4.61,
-      "levels": 42
+      "std": 4.557,
+      "levels": 43
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.466,
+     "pass_fraction": 0.996
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4720,43 +5456,48 @@
      1800
     ],
     "bytes": 318652,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 22.513,
-      "levels": 86
+      "std": 23.224,
+      "levels": 88
      },
      {
-      "std": 4.82,
+      "std": 4.791,
       "levels": 41
      },
      {
-      "std": 5.007,
-      "levels": 43
-     },
-     {
-      "std": 4.483,
+      "std": 4.992,
       "levels": 42
      },
      {
-      "std": 5.919,
-      "levels": 61
+      "std": 4.522,
+      "levels": 39
      },
      {
-      "std": 4.877,
+      "std": 5.834,
+      "levels": 60
+     },
+     {
+      "std": 4.914,
       "levels": 41
      },
      {
-      "std": 72.388,
-      "levels": 180
+      "std": 73.907,
+      "levels": 178
      },
      {
-      "std": 5.067,
-      "levels": 41
+      "std": 5.029,
+      "levels": 42
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.868,
+     "pass_fraction": 1.0
+    }
    }
   },
   {
@@ -4765,6 +5506,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4772,43 +5515,48 @@
      1500
     ],
     "bytes": 159282,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 6,
     "of": 8,
     "samples": [
      {
-      "std": 65.909,
-      "levels": 161
+      "std": 67.086,
+      "levels": 160
      },
      {
-      "std": 3.832,
-      "levels": 29
-     },
-     {
-      "std": 4.15,
+      "std": 3.792,
       "levels": 30
      },
      {
-      "std": 3.51,
+      "std": 4.183,
       "levels": 31
      },
      {
-      "std": 4.4,
-      "levels": 34
+      "std": 3.504,
+      "levels": 30
      },
      {
-      "std": 4.331,
-      "levels": 32
+      "std": 4.374,
+      "levels": 35
      },
      {
-      "std": 35.864,
-      "levels": 99
+      "std": 4.357,
+      "levels": 33
      },
      {
-      "std": 4.28,
+      "std": 36.897,
+      "levels": 97
+     },
+     {
+      "std": 4.255,
       "levels": 32
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.188,
+     "pass_fraction": 0.709
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4817,43 +5565,48 @@
      1800
     ],
     "bytes": 253706,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 7,
     "of": 8,
     "samples": [
      {
-      "std": 65.949,
+      "std": 67.096,
       "levels": 160
      },
      {
-      "std": 4.112,
-      "levels": 32
+      "std": 4.061,
+      "levels": 30
      },
      {
-      "std": 4.453,
-      "levels": 32
+      "std": 4.473,
+      "levels": 31
      },
      {
-      "std": 3.813,
-      "levels": 32
+      "std": 3.809,
+      "levels": 31
      },
      {
-      "std": 4.748,
+      "std": 4.704,
       "levels": 38
      },
      {
-      "std": 4.639,
-      "levels": 34
+      "std": 4.667,
+      "levels": 33
      },
      {
-      "std": 35.908,
-      "levels": 100
+      "std": 36.938,
+      "levels": 99
      },
      {
-      "std": 4.586,
-      "levels": 35
+      "std": 4.543,
+      "levels": 36
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.503,
+     "pass_fraction": 0.763
+    }
    }
   },
   {
@@ -4862,6 +5615,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4869,43 +5624,48 @@
      1500
     ],
     "bytes": 192316,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 23.948,
-      "levels": 80
+      "std": 24.559,
+      "levels": 83
      },
      {
-      "std": 4.425,
-      "levels": 37
-     },
-     {
-      "std": 4.419,
+      "std": 4.375,
       "levels": 38
      },
      {
+      "std": 4.437,
+      "levels": 37
+     },
+     {
       "std": 4.258,
+      "levels": 39
+     },
+     {
+      "std": 5.785,
+      "levels": 54
+     },
+     {
+      "std": 4.561,
       "levels": 36
      },
      {
-      "std": 5.857,
-      "levels": 55
+      "std": 65.818,
+      "levels": 173
      },
      {
-      "std": 4.566,
-      "levels": 36
-     },
-     {
-      "std": 64.926,
-      "levels": 174
-     },
-     {
-      "std": 4.5,
+      "std": 4.441,
       "levels": 40
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.315,
+     "pass_fraction": 0.957
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -4914,43 +5674,48 @@
      1800
     ],
     "bytes": 312838,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 23.982,
+      "std": 24.571,
       "levels": 84
      },
      {
-      "std": 4.803,
+      "std": 4.751,
       "levels": 39
      },
      {
-      "std": 4.894,
-      "levels": 42
+      "std": 4.913,
+      "levels": 45
      },
      {
-      "std": 4.684,
+      "std": 4.668,
       "levels": 39
      },
      {
-      "std": 6.1,
+      "std": 6.012,
       "levels": 57
      },
      {
-      "std": 4.954,
+      "std": 4.967,
       "levels": 41
      },
      {
-      "std": 64.879,
-      "levels": 175
+      "std": 65.772,
+      "levels": 173
      },
      {
-      "std": 4.898,
-      "levels": 43
+      "std": 4.837,
+      "levels": 42
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.737,
+     "pass_fraction": 1.0
+    }
    }
   },
   {
@@ -4959,6 +5724,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -4966,43 +5733,48 @@
      1500
     ],
     "bytes": 198316,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 59.931,
-      "levels": 166
+      "std": 61.641,
+      "levels": 164
      },
      {
-      "std": 4.61,
-      "levels": 33
-     },
-     {
-      "std": 4.655,
-      "levels": 33
-     },
-     {
-      "std": 4.212,
-      "levels": 30
-     },
-     {
-      "std": 4.899,
-      "levels": 35
-     },
-     {
-      "std": 4.796,
+      "std": 4.593,
       "levels": 34
      },
      {
-      "std": 37.991,
-      "levels": 93
+      "std": 4.672,
+      "levels": 34
      },
      {
-      "std": 4.761,
+      "std": 4.188,
+      "levels": 30
+     },
+     {
+      "std": 4.866,
+      "levels": 36
+     },
+     {
+      "std": 4.831,
+      "levels": 31
+     },
+     {
+      "std": 39.065,
+      "levels": 97
+     },
+     {
+      "std": 4.715,
       "levels": 37
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.613,
+     "pass_fraction": 0.991
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -5011,43 +5783,48 @@
      1800
     ],
     "bytes": 324874,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 59.958,
+      "std": 61.648,
       "levels": 166
      },
      {
-      "std": 4.956,
-      "levels": 35
-     },
-     {
-      "std": 5.006,
+      "std": 4.931,
       "levels": 36
      },
      {
-      "std": 4.571,
+      "std": 5.015,
       "levels": 36
      },
      {
-      "std": 5.252,
-      "levels": 39
+      "std": 4.548,
+      "levels": 33
      },
      {
-      "std": 5.149,
+      "std": 5.211,
+      "levels": 40
+     },
+     {
+      "std": 5.203,
       "levels": 36
      },
      {
-      "std": 37.989,
-      "levels": 104
+      "std": 39.069,
+      "levels": 101
      },
      {
-      "std": 5.117,
+      "std": 5.081,
       "levels": 38
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.971,
+     "pass_fraction": 1.0
+    }
    }
   },
   {
@@ -5056,6 +5833,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -5063,43 +5842,48 @@
      1500
     ],
     "bytes": 201442,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 25.013,
-      "levels": 88
+      "std": 25.818,
+      "levels": 85
      },
      {
-      "std": 4.735,
-      "levels": 41
+      "std": 4.705,
+      "levels": 40
      },
      {
-      "std": 4.898,
-      "levels": 42
+      "std": 4.88,
+      "levels": 43
      },
      {
-      "std": 4.323,
+      "std": 4.324,
+      "levels": 39
+     },
+     {
+      "std": 5.759,
+      "levels": 54
+     },
+     {
+      "std": 4.863,
       "levels": 37
      },
      {
-      "std": 5.854,
-      "levels": 58
+      "std": 75.644,
+      "levels": 181
      },
      {
-      "std": 4.838,
-      "levels": 37
-     },
-     {
-      "std": 74.08,
-      "levels": 185
-     },
-     {
-      "std": 4.967,
+      "std": 4.881,
       "levels": 39
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.671,
+     "pass_fraction": 1.0
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -5108,43 +5892,48 @@
      1800
     ],
     "bytes": 362578,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 25.086,
-      "levels": 89
+      "std": 25.872,
+      "levels": 87
      },
      {
-      "std": 5.094,
+      "std": 5.064,
       "levels": 42
      },
      {
-      "std": 5.325,
-      "levels": 44
+      "std": 5.303,
+      "levels": 45
      },
      {
-      "std": 4.751,
-      "levels": 42
+      "std": 4.76,
+      "levels": 43
      },
      {
-      "std": 6.192,
+      "std": 6.101,
       "levels": 61
      },
      {
-      "std": 5.214,
+      "std": 5.236,
       "levels": 40
      },
      {
-      "std": 74.064,
-      "levels": 187
+      "std": 75.633,
+      "levels": 184
      },
      {
-      "std": 5.329,
-      "levels": 45
+      "std": 5.258,
+      "levels": 46
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 5.092,
+     "pass_fraction": 1.0
+    }
    }
   },
   {
@@ -5153,6 +5942,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -5160,43 +5951,48 @@
      1500
     ],
     "bytes": 194848,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 65.642,
-      "levels": 165
+      "std": 67.149,
+      "levels": 167
      },
      {
-      "std": 4.389,
+      "std": 4.336,
       "levels": 31
      },
      {
-      "std": 4.55,
-      "levels": 32
+      "std": 4.571,
+      "levels": 34
      },
      {
-      "std": 4.108,
-      "levels": 32
+      "std": 4.079,
+      "levels": 30
      },
      {
-      "std": 4.883,
+      "std": 4.838,
       "levels": 35
      },
      {
-      "std": 4.791,
+      "std": 4.825,
       "levels": 35
      },
      {
-      "std": 38.239,
-      "levels": 106
+      "std": 39.334,
+      "levels": 105
      },
      {
-      "std": 4.654,
+      "std": 4.628,
       "levels": 34
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.634,
+     "pass_fraction": 0.896
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -5205,43 +6001,48 @@
      1800
     ],
     "bytes": 290210,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 65.705,
-      "levels": 167
+      "std": 67.209,
+      "levels": 168
      },
      {
-      "std": 4.726,
-      "levels": 33
-     },
-     {
-      "std": 4.857,
-      "levels": 35
-     },
-     {
-      "std": 4.401,
+      "std": 4.675,
       "levels": 34
      },
      {
-      "std": 5.157,
+      "std": 4.864,
+      "levels": 35
+     },
+     {
+      "std": 4.382,
+      "levels": 33
+     },
+     {
+      "std": 5.134,
       "levels": 39
      },
      {
-      "std": 5.055,
+      "std": 5.088,
       "levels": 36
      },
      {
-      "std": 38.253,
-      "levels": 105
+      "std": 39.346,
+      "levels": 103
      },
      {
-      "std": 4.917,
+      "std": 4.904,
       "levels": 36
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.916,
+     "pass_fraction": 1.0
+    }
    }
   },
   {
@@ -5250,6 +6051,8 @@
     1800,
     1800
    ],
+   "class": "coated",
+   "floor": 4.0,
    "today": {
     "long_side": 1500,
     "packed": [
@@ -5257,43 +6060,48 @@
      1500
     ],
     "bytes": 202074,
-    "magnification": 1.939,
-    "passes": 2,
+    "magnification": 2.171,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 25.427,
-      "levels": 86
+      "std": 26.118,
+      "levels": 87
      },
      {
-      "std": 4.93,
+      "std": 4.899,
       "levels": 40
      },
      {
-      "std": 4.761,
-      "levels": 47
-     },
-     {
-      "std": 4.374,
-      "levels": 39
-     },
-     {
-      "std": 5.991,
-      "levels": 56
-     },
-     {
-      "std": 4.972,
-      "levels": 39
-     },
-     {
-      "std": 69.555,
-      "levels": 180
-     },
-     {
-      "std": 4.928,
+      "std": 4.733,
       "levels": 42
+     },
+     {
+      "std": 4.293,
+      "levels": 34
+     },
+     {
+      "std": 5.9,
+      "levels": 55
+     },
+     {
+      "std": 4.971,
+      "levels": 39
+     },
+     {
+      "std": 70.703,
+      "levels": 177
+     },
+     {
+      "std": 4.872,
+      "levels": 43
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.514,
+     "pass_fraction": 1.0
+    }
    },
    "bigger": {
     "long_side": 1800,
@@ -5302,44 +6110,229 @@
      1800
     ],
     "bytes": 357914,
-    "magnification": 1.616,
-    "passes": 2,
+    "magnification": 1.809,
+    "passes": 8,
     "of": 8,
     "samples": [
      {
-      "std": 25.476,
-      "levels": 85
+      "std": 26.158,
+      "levels": 82
      },
      {
-      "std": 5.372,
+      "std": 5.324,
       "levels": 43
      },
      {
-      "std": 5.216,
-      "levels": 45
+      "std": 5.194,
+      "levels": 43
      },
      {
-      "std": 4.796,
+      "std": 4.739,
       "levels": 39
      },
      {
-      "std": 6.302,
-      "levels": 60
+      "std": 6.228,
+      "levels": 57
      },
      {
-      "std": 5.365,
+      "std": 5.362,
       "levels": 41
      },
      {
-      "std": 69.517,
-      "levels": 179
+      "std": 70.685,
+      "levels": 178
      },
      {
-      "std": 5.351,
+      "std": 5.291,
       "levels": 49
      }
-    ]
+    ],
+    "tiled": {
+     "placements": 4142,
+     "median_std": 4.95,
+     "pass_fraction": 1.0
+    }
    }
   }
+ ],
+ "verdicts": [
+  {
+   "stock": "graph",
+   "class": "written",
+   "floor": 8.0,
+   "conditions": {
+    "day": {
+     "median_std": 8.521,
+     "ok": true
+    },
+    "dusk": {
+     "median_std": 8.316,
+     "ok": true
+    }
+   },
+   "why": [],
+   "ok": true
+  },
+  {
+   "stock": "index",
+   "class": "written",
+   "floor": 8.0,
+   "conditions": {
+    "day": {
+     "median_std": 8.489,
+     "ok": true
+    },
+    "dusk": {
+     "median_std": 8.029,
+     "ok": true
+    }
+   },
+   "why": [],
+   "ok": true
+  },
+  {
+   "stock": "legal",
+   "class": "written",
+   "floor": 8.0,
+   "conditions": {
+    "day": {
+     "median_std": 8.286,
+     "ok": true
+    },
+    "dusk": {
+     "median_std": 9.13,
+     "ok": true
+    }
+   },
+   "why": [],
+   "ok": true
+  },
+  {
+   "stock": "lined",
+   "class": "written",
+   "floor": 8.0,
+   "conditions": {
+    "day": {
+     "median_std": 8.2,
+     "ok": true
+    },
+    "dusk": {
+     "median_std": 8.653,
+     "ok": true
+    }
+   },
+   "why": [],
+   "ok": true
+  },
+  {
+   "stock": "looseleaf",
+   "class": "written",
+   "floor": 8.0,
+   "conditions": {
+    "day": {
+     "median_std": 7.689,
+     "ok": false
+    },
+    "dusk": {
+     "median_std": 8.581,
+     "ok": true
+    }
+   },
+   "why": [
+    "day 7.689 < 8.0"
+   ],
+   "ok": false
+  },
+  {
+   "stock": "receipt",
+   "class": "coated",
+   "floor": 4.0,
+   "conditions": {
+    "day": {
+     "median_std": 1.119,
+     "ok": false
+    },
+    "dusk": {
+     "median_std": 4.412,
+     "ok": true
+    }
+   },
+   "why": [
+    "day 1.119 < 4.0"
+   ],
+   "ok": false
+  },
+  {
+   "stock": "spiral",
+   "class": "written",
+   "floor": 8.0,
+   "conditions": {
+    "day": {
+     "median_std": 8.438,
+     "ok": true
+    },
+    "dusk": {
+     "median_std": 8.645,
+     "ok": true
+    }
+   },
+   "why": [],
+   "ok": true
+  },
+  {
+   "stock": "sticky_blue",
+   "class": "coated",
+   "floor": 4.0,
+   "conditions": {
+    "day": {
+     "median_std": 4.477,
+     "ok": true
+    },
+    "dusk": {
+     "median_std": 4.354,
+     "ok": true
+    }
+   },
+   "why": [],
+   "ok": true
+  },
+  {
+   "stock": "sticky_pink",
+   "class": "coated",
+   "floor": 4.0,
+   "conditions": {
+    "day": {
+     "median_std": 4.206,
+     "ok": true
+    },
+    "dusk": {
+     "median_std": 4.378,
+     "ok": true
+    }
+   },
+   "why": [],
+   "ok": true
+  },
+  {
+   "stock": "sticky_yellow",
+   "class": "coated",
+   "floor": 4.0,
+   "conditions": {
+    "day": {
+     "median_std": 4.624,
+     "ok": true
+    },
+    "dusk": {
+     "median_std": 4.578,
+     "ok": true
+    }
+   },
+   "why": [],
+   "ok": true
+  }
+ ],
+ "failing": [
+  "looseleaf",
+  "receipt"
  ]
 }

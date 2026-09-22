@@ -92,6 +92,38 @@ def classify(stock):
     return None
 
 
+CONDITIONS = ("day", "dusk")
+
+
+def verdict(family, readings):
+    """§5a's per-stock verdict: the class floor, met SEPARATELY at day and at dusk.
+
+    `readings` maps a condition to the median L_std measured for this stock in it. A stock passes
+    only when both conditions are present and both clear -- a combined median is exactly what hid
+    `looseleaf` missing by day behind its dusk twin (firing 27), so there is no combined figure in
+    the verdict at all. A condition that was not measured fails the stock rather than being skipped:
+    a half-read library is not a library that passed. An unrecognised stock fails too, because
+    `classify` refuses to guess a class and a floor invented here would be the guess it refuses.
+    """
+    cls = classify(family)
+    floor = FLOORS.get(cls) if cls else None
+    out = {"stock": family, "class": cls, "floor": floor, "conditions": {}, "why": []}
+    if floor is None:
+        out["why"].append("no class in docs/COLOR.md 5a for %r" % family)
+    for cond in CONDITIONS:
+        v = readings.get(cond)
+        if v is None:
+            out["conditions"][cond] = None
+            out["why"].append("%s not measured" % cond)
+            continue
+        ok = floor is not None and v >= floor
+        out["conditions"][cond] = {"median_std": round(float(v), 3), "ok": ok}
+        if floor is not None and not ok:
+            out["why"].append("%s %.3f < %.1f" % (cond, v, floor))
+    out["ok"] = not out["why"]
+    return out
+
+
 def floor_for_fold(sequence):
     """(class, L_std floor) for a fold sequence, by the stock it is folded from."""
     stock = FOLDED_FROM.get(sequence)

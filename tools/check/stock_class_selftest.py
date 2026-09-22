@@ -189,6 +189,37 @@ def main():
                 "excluding the drop shadow no longer changes the reading; sheet_bounds may have "
                 "stopped excluding it")
 
+    # --- assertion 4: the verdict is per class and per condition --------------------------------
+    # The readings are firing 49's, off `tools/paper_tooth.py --all` through the app's own chain.
+    # Each case is one thing §5a says and one way of getting it wrong: collapse the classes back
+    # to one 8.0 and every coated stock goes red together; combine day and dusk into one figure and
+    # looseleaf passes on its dusk twin (7.689 and 8.581 average 8.135); let a half-read library
+    # through and an unmeasured condition passes by being absent.
+    cases = [
+        ("sticky_pink", {"day": 4.206, "dusk": 4.378}, True, "a coated stock clears 4.0"),
+        ("receipt", {"day": 1.119, "dusk": 4.412}, False, "the flat receipt fails by day"),
+        ("looseleaf", {"day": 7.689, "dusk": 8.581}, False, "a written miss by day is a miss"),
+        ("lined", {"day": 8.200, "dusk": 8.653}, True, "a written stock clears 8.0 twice"),
+        ("lined", {"day": 8.200}, False, "an unmeasured dusk is not a pass"),
+        ("vellum", {"day": 9.0, "dusk": 9.0}, False, "no class, no floor, no pass"),
+    ]
+    for stock, got, want, why in cases:
+        v = stock_class.verdict(stock, got)
+        mark = "ok" if v["ok"] == want else "WRONG"
+        print(f"  verdict {stock:<12} {str(got):<30} -> {'pass' if v['ok'] else 'fail'}"
+              f"  [{mark}] {why}")
+        if v["ok"] != want:
+            failures.append(f"verdict({stock!r}, {got}) is {v['ok']}, and {why}")
+
+    # And the tools that apply a floor take it from here. A literal left behind in one of them is
+    # how a floor drifts: flat_fill.py and paper_tooth.py both carried `FLOOR_STD = 8.0` for
+    # seventeen firings after §5a declared three.
+    for rel in ("tools/paper_tooth.py", "tools/check/flat_fill.py"):
+        with open(os.path.join(ROOT, rel), encoding="utf-8") as f:
+            src = f.read()
+        if re.search(r"^FLOOR_STD\s*=", src, re.M) or "stock_class" not in src:
+            failures.append(f"{rel} carries its own floor instead of reading stock_class.FLOORS")
+
     print()
     if failures:
         print(f"{len(failures)} failure(s):", file=sys.stderr)
