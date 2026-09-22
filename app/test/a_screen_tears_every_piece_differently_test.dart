@@ -42,7 +42,6 @@ import 'package:desk/transport/local/local_transport.dart';
 import 'package:desk/transport/sync.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
