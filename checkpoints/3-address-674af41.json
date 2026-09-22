@@ -1,0 +1,32 @@
+{
+ "cycle": 3,
+ "stage": "ADDRESS",
+ "firing": 43,
+ "at": "674af41",
+ "written_at": "2026-09-22T02:00:00Z",
+ "code_changed": false,
+ "open_items": 51,
+ "ranks": "contiguous 1..51, asserted as a permutation of the open ids rather than eyeballed",
+ "items_refiled": [
+  "the-tear-shadow-is-stretched-six-to-one-and-becomes-a-hard-bar",
+  "a-barcode-of-vertical-bars-is-painted-across-the-paper-on-four-artifacts",
+  "one-variant-per-glyph-and-zero-pressure-variance",
+  "twelve-seconds-of-cold-start-on-every-seeded-scene"
+ ],
+ "clauses_struck": [
+  "the 1.5:1 aspect clause -- unreachable while the shadow is an Image filling the piece box",
+  "the mean-crossing and constant-interior clauses -- the ruler does not move across a known repair",
+  "the ink-luminance IQR clause -- a filled TrueType outline cannot vary in tone, at any effort",
+  "the third-point-at-half-a-seed preamble -- discharged by firing 40 by a better route"
+ ],
+ "decisions": {
+  "tear_shadow_fork": "route (b), the procedural falloff, is chosen; route (a), new renders, is not taken; the stated blocker on (b) was refuted off light.dart, paper.dart, relief.json and assets/MANIFEST.json",
+  "rank_14_blocker": "a code change of about thirty lines, not a design decision and not a re-render; ranked 1, immediately above the item it unblocks",
+  "render_fences": "both held. The four-hour 240-frame re-render is not started and not authorised, and the rank-13 decision does not reopen it"
+ },
+ "rule_added": "loop/WORKER_PROMPT.md 3e -- a stated cause is a hypothesis, and so is a stated blocker",
+ "sweep_3d": "made over all 51 open measurements; two hits, both vetted and both staying (a prohibition, and an asset path that is not a frame ordinal)",
+ "next_stage": "IMPLEMENT",
+ "next_rank_1": "the-nine-sliced-layers-of-a-tear-do-not-declare-themselves",
+ "next_rank_2": "the-tears-are-overlays-painted-on-whole-paper -- one sitting with rank 1"
+}
