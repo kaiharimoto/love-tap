@@ -6336,3 +6336,139 @@ In prose those two sentences are identical. Only a measurement separates them. A
 "impossible" where it meant "exhausted" has closed a door that was open, and it will stay closed,
 because the next firing reads the sentence and not the tree.
 
+
+## Firing 44 — cycle 3, IMPLEMENT — 2026-09-22T03:56Z to 2026-09-22T04:45Z
+
+The checkout was shallow at depth 50 and read as a fork: fifty ahead, fifty behind, no merge base,
+the dry-run push rejected `non-fast-forward`. `git fetch --unshallow` on the branch refspec settled
+it in seconds — the local tip turned out to be the merge base exactly, 0 ahead and 343 behind, an
+ordinary fast-forward. Nothing reset, no tip dropped, §0's first route right for the third time.
+The remote also reported the branch as a `(forced update)` in the same breath, which §0 already
+says is what a shallow refetch of a moved branch looks like and not evidence of anyone rewriting
+anything. Both of those were true again here.
+
+### Rank 1 — the two nine-sliced layers declare themselves, and the still is byte-identical
+
+Thirty lines was the estimate and it was about right. `_NinePainter` is public as `NinePainter`
+and carries its asset; `SlicedMasks` records the resolution it composed at, keyed by the logical
+box it composed for; `CaptureHooks._collectSurfaces` grows a branch for a `RenderCustomPaint` whose
+painter is one (`fit: nine`) and one for the `RenderShaderMask` that applies a mask (`fit: mask`),
+and `pair()` keys the piece id onto both.
+
+Each entry carries `fixed` and `centre`: how far that layer magnifies what it draws, in device
+pixels per source pixel, through the sliced edges and through the stretched middle. The mask's two
+magnifications — the offscreen composition and the shader that stretches it over the piece — are
+multiplied together, so the two nine-sliced layers of one piece can be read against each other,
+which is the comparison rank 2 needed and could not make.
+
+**The instrument was earned before it was read.** All six of the setup sheet's magnifications were
+computed by hand off the committed sidecar's rect, the scene's declared dpr of 3 and the packed
+assets' dimensions, and written down *before* the capture ran:
+
+    predicted   edge  fixed [1.626, 3.000]  centre [0.000, 12.430]
+                mask  composed 1024x3296  fixed [1.301, 1.221]  centre [1.301, 19.544]
+    measured    edge  fixed [1.626, 3]      centre [0, 12.431]
+                mask  composed [1024,3296] fixed [1.301, 1.222]  centre [1.301, 19.545]
+
+A ruler that reproduces arithmetic done in advance is a ruler. And `evidence/17_setup_pwa.png` came
+back **byte-identical** over a fresh build, so "it draws exactly what it drew before" is a
+measurement here rather than a promise.
+
+### Rank 2 — it is the mask, and the nine-slice is four times worse than no slicing
+
+The setup sheet is 1332x4026 device px and its mask render is 1024x824: the sheet is 4.886x taller
+than its mask. `SlicedMasks.at` composes at `edge = 0.4`, which holds the top and bottom 40% of the
+*source* at its own scale and pours everything left into the middle 20%. So the contour is at
+1.222x vertically for the first 403 px of the sheet and **19.545x** for the 3200 px below it. A
+plain uniform stretch would have been 4.886x. The nine-slice protects the along-edge detail of the
+top and bottom edges and destroys it on the left and right, on any sheet much taller than its mask.
+
+Three separate things say it is the mask and not the lit edge:
+
+- **The break point.** Binned by depth into the piece's own declared rect, the left contour's mean
+  tread reads 1.52, 1.61, 1.35 over the bins ending at 400 px and 6.44, 7.00, 12.25, 6.64, 9.55
+  over the five after it. 403 px is the mask's fixed band. The lit edge's is 989 px and nothing
+  happens there: 3.43 either side of it, which is the noise of its neighbours.
+- **The geometry.** `paper.dart` builds the `NineSliced` into the Stack that `MaskedLayer` then cuts
+  with `BlendMode.dstIn`. The edge layer is *inside* the mask and cannot move the outer contour at
+  all — only make an inner boundary, which is the other half of what firing 29 saw.
+- **The quantum test, which failed and is recorded as failing.** Tread lengths were checked against
+  each layer's declared stretch as a multiple; the median distance from an integer came out 0.33,
+  0.23, 0.28 and 0.33 for the four candidates. Nothing clustered. It discriminates nothing and it
+  is written down here so nobody runs it again expecting it to.
+
+Then the scope, off the committed sidecars with no capture: the shadow entry's `drawn` *is* the
+piece's box, so every one of the 172 torn pieces in the set has its would-be mask geometry as
+arithmetic. **Twelve of 172 have a centre band above 4x; sixteen are more than 1.5x worse than no
+slicing; the median piece's vertical centre band is zero,** because most pieces are smaller than
+their mask's two fixed bands together and their lattice is fully shrunk. The twelve are all large
+backing sheets — `settings.notify` at 19.75x, the setup sheet at 19.54x, `us.body.dates` at 15.90x,
+the chat and viewer backings at 6.76–9.65x.
+
+That corrects the fork in favour of the cheap horn. Capping the centre band cannot make anything
+worse on a piece whose centre band is already zero, so the unmeasured cost of route (a) falls on
+sixteen pieces rather than on the set. It also says what the item's `<= 4 px on every still` clause
+is now: on the left contour the tread floor *is* the vertical magnification, so `<= 4 px` needs
+`<= 4x`, and a sheet 4.886x its mask cannot reach it by any redistribution of the slice. Firing
+43's question — which kind of impossible — has a number under it now, and it is ADDRESS's to answer.
+
+### Rank 3 — the refuting experiment, and the route survives it with room to spare
+
+`tools/check/shadow_falloff.py` reads all 56 packed shadow renders, registers each against its own
+mask at the frame the app actually scales by, and takes alpha by distance outside the outline on a
+millimetre axis. Monotone falling over all 56: 226.7 under the paper, then 33.1, 19.9, 12.7, 7.0,
+4.6 at 0.2, 0.4, 0.6, 0.8, 1.0 mm, with p10 and p90 bracketing the median rather than crossing it.
+One profile, not fifty-six.
+
+The resampling half of the question answers itself in the opposite direction from the one the item
+expected. The profile does not have to survive being squeezed into a margin strip's 11 px: at
+`kShadowPerMm = 3.8` and dpr 3, 1.2 mm of falloff **is** 13.7 device px. At its own physical scale
+it already fits. What does not fit is what the app does now — the render stretched to 12.5% of the
+*piece's* height, which is 503 px of spill on the setup sheet and 14 px on a margin strip, for a
+shadow that is one millimetre wide either way. That is firing 42's `median 0 px of band at >6:1
+against 9.5 px at <=2:1` stated as a cause.
+
+The dusk half was measured too, and it retires a sentence the repository still repeats. **All 56
+dusk contact shadows exist**, in the source library and the packed one; the dusk test's header still
+says four exist and fifty-two do not, which was true when it was written. And the dusk profile sits
+inside the day profile's own p10–p90 at 0.0, 0.2, 0.4, 0.6, 0.8 and 1.0 mm, leaving it only past
+1.5 mm where the day renders carry an ambient floor of about 2.6 alpha that dusk does not. Over the
+range route (b) lays down, it is one table.
+
+**The widget code was not started, on purpose.** Route (b) stops `_bakedShadow` being an
+`Image.asset`, and `a_note_at_dusk_asks_for_its_dusk_shadow_test.dart` asserts that the bundle is
+asked for `tear_XXX_shadow_dusk` by name. The test's *requirement* survives route (b) intact; its
+*mechanism* does not, and re-expressing it is about as much work again as the composer. That is a
+cost and not a blocker — firing 43's rule, applied to firing 43's own decision — and it is written
+onto the item rather than discovered halfway through.
+
+### One trap, which cost this firing twenty minutes and will cost the next one nothing
+
+`shadow_frame` is **1.2** in `assets/tears/relief.json` and **1.25** in `app/assets/INDEX.json`.
+`tools/pack_assets.py` crops the shadow about the piece's own box with `SHADOW_MARGIN = 1.25` and
+overwrites the number on the way past; the app reads the packed one. Registering the two images
+with the source's 1.2 puts the outline about 4% out, and what that reads as is *a shadow with no
+spill at all* — alpha 211 under the paper and 4 one pixel outside it, on every render in the
+library. It looks exactly like the refutation the experiment was looking for. It is in the tool's
+head comment now. Ask the packed index, which is what the app asks.
+
+### The thing the next firing must not misread
+
+Firing 44's own instrument moved a population under a gate. `tools/check/tears.py` counts
+tear-family surfaces in `<artifact>.surfaces.json`, and a torn piece now declares its mask and its
+lit edge beside the shadow that was always there — so a piece that contributed **one** tear draw
+contributes **three**. On the one still re-captured, `17_setup_pwa` went from `2 draws, 1 mask` to
+`6 draws, 3 masks`, with the same two pieces drawing the same one tear. Rank 4's paired-population
+floor (`02_chat 16, 03_us 7, … 17_setup_pwa 2`) was read off a shadow-only population and every one
+of those numbers will roughly triple at the next full capture with nothing on any screen changing.
+
+This is WORKER_PROMPT §3d corollary 2 in the direction nobody watches: the corollary is written
+against a count falling because the thing left the screen, and this is a count *rising* because the
+instrument grew an eye. Both are the same failure. It is on the item.
+
+### Housekeeping owed
+
+This firing took one `--only=17_setup_pwa` leg, so `MANIFEST.json` is an `--only` manifest, the
+measured `/dev/kvm` sentence is off 09 and 16 again — the fourth time, and it is already filed as
+its own item — and the DIFF baseline has been rotated onto a set with one fresh still and ten from
+firing 43. A full `./capture.sh` puts all three back.
