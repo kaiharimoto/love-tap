@@ -3,62 +3,37 @@
  "calt": true,
  "runs_read": 1,
  "pairs": 12,
- "pairs_repeating": 6,
- "pairs_avoidable": 6,
+ "pairs_repeating": 3,
+ "pairs_avoidable": 0,
  "worst": [
   {
    "family": "NoorHand",
    "char": "a",
    "instances": 7,
-   "distinct": 4,
-   "avoidable": true,
+   "distinct": 5,
+   "avoidable": false,
    "run": "three layers. it leans. i am not saying that as a criticism,"
   },
   {
    "family": "NoorHand",
    "char": "i",
    "instances": 7,
-   "distinct": 4,
-   "avoidable": true,
+   "distinct": 5,
+   "avoidable": false,
    "run": "three layers. it leans. i am not saying that as a criticism,"
   },
   {
    "family": "NoorHand",
    "char": "t",
    "instances": 6,
-   "distinct": 3,
-   "avoidable": true,
-   "run": "three layers. it leans. i am not saying that as a criticism,"
-  },
-  {
-   "family": "NoorHand",
-   "char": "s",
-   "instances": 5,
-   "distinct": 3,
-   "avoidable": true,
-   "run": "three layers. it leans. i am not saying that as a criticism,"
-  },
-  {
-   "family": "NoorHand",
-   "char": "e",
-   "instances": 4,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "three layers. it leans. i am not saying that as a criticism,"
-  },
-  {
-   "family": "NoorHand",
-   "char": "n",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
+   "distinct": 5,
+   "avoidable": false,
    "run": "three layers. it leans. i am not saying that as a criticism,"
   }
  ],
  "glyphs": 63,
- "stalls": 3,
+ "stalls": 7,
  "stalls_same_letter": 0,
  "stalled_words": [],
- "ok": false,
- "why": "6 of 12 repeated letters inside one declared run take fewer outlines than they could (6 repeat one at all), and 0 of 63 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "ok": true
 }

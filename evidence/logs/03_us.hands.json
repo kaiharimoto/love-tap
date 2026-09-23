@@ -3,96 +3,40 @@
  "calt": true,
  "runs_read": 10,
  "pairs": 54,
- "pairs_repeating": 26,
- "pairs_avoidable": 26,
+ "pairs_repeating": 12,
+ "pairs_avoidable": 8,
  "worst": [
   {
    "family": "TeoHand",
    "char": "o",
    "instances": 9,
-   "distinct": 4,
-   "avoidable": true,
+   "distinct": 5,
+   "avoidable": false,
    "run": "book it in october or the table goes to somebody else"
   },
   {
    "family": "TeoHand",
    "char": "e",
    "instances": 7,
-   "distinct": 3,
-   "avoidable": true,
+   "distinct": 5,
+   "avoidable": false,
    "run": "book it in october or the table goes to somebody else"
   },
   {
    "family": "TeoHand",
    "char": "a",
    "instances": 7,
-   "distinct": 3,
-   "avoidable": true,
+   "distinct": 5,
+   "avoidable": false,
    "run": "a month today. the rail was cold and my hands were cold and "
   },
   {
    "family": "TeoHand",
    "char": "d",
    "instances": 7,
-   "distinct": 4,
-   "avoidable": true,
+   "distinct": 5,
+   "avoidable": false,
    "run": "a month today. the rail was cold and my hands were cold and "
-  },
-  {
-   "family": "NoorHand",
-   "char": "e",
-   "instances": 5,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 5,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "next: the place by the bridge"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 5,
-   "distinct": 3,
-   "avoidable": true,
-   "run": "book it in october or the table goes to somebody else"
-  },
-  {
-   "family": "NoorHand",
-   "char": "t",
-   "instances": 4,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "the boat to the island"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 4,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "a month today. the rail was cold and my hands were cold and "
-  },
-  {
-   "family": "NoorHand",
-   "char": "n",
-   "instances": 3,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "o",
-   "instances": 5,
-   "distinct": 4,
-   "avoidable": true,
-   "run": "we would do that again tomorrow"
   },
   {
    "family": "TeoHand",
@@ -104,6 +48,14 @@
   },
   {
    "family": "TeoHand",
+   "char": "o",
+   "instances": 4,
+   "distinct": 3,
+   "avoidable": true,
+   "run": "a month today. the rail was cold and my hands were cold and "
+  },
+  {
+   "family": "TeoHand",
    "char": "n",
    "instances": 4,
    "distinct": 3,
@@ -112,15 +64,7 @@
   },
   {
    "family": "NoorHand",
-   "char": "o",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "a",
+   "char": "n",
    "instances": 3,
    "distinct": 2,
    "avoidable": true,
@@ -135,40 +79,8 @@
    "run": "next: the place by the bridge"
   },
   {
-   "family": "NoorHand",
+   "family": "TeoHand",
    "char": "e",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "the second one"
-  },
-  {
-   "family": "TeoHand",
-   "char": "s",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "book it in october or the table goes to somebody else"
-  },
-  {
-   "family": "NoorHand",
-   "char": "w",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "we would do that again tomorrow"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "a month today. the rail was cold and my hands were cold and "
-  },
-  {
-   "family": "TeoHand",
-   "char": "h",
    "instances": 3,
    "distinct": 2,
    "avoidable": true,
@@ -189,36 +101,12 @@
    "distinct": 1,
    "avoidable": true,
    "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "g",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "TeoHand",
-   "char": "i",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "book it in october or the table goes to somebody else"
-  },
-  {
-   "family": "NoorHand",
-   "char": "o",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "the boat to the island"
   }
  ],
  "glyphs": 262,
- "stalls": 9,
+ "stalls": 38,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "26 of 54 repeated letters inside one declared run take fewer outlines than they could (26 repeat one at all), and 0 of 262 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "8 of 54 repeated letters inside one declared run take fewer outlines than they could (12 repeat one at all), and 0 of 262 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

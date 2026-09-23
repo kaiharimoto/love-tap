@@ -1,34 +1,18 @@
 {
  "text": "evidence/13_messenger_states.text.json",
  "calt": true,
- "runs_read": 21,
- "pairs": 51,
- "pairs_repeating": 22,
- "pairs_avoidable": 22,
+ "runs_read": 15,
+ "pairs": 37,
+ "pairs_repeating": 8,
+ "pairs_avoidable": 6,
  "worst": [
   {
-   "family": "NoorHand",
-   "char": "e",
-   "instances": 5,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
    "family": "TeoHand",
    "char": "e",
-   "instances": 5,
-   "distinct": 3,
-   "avoidable": true,
-   "run": "left the key under the pot"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 4,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "and the bread, if there is any"
+   "instances": 7,
+   "distinct": 5,
+   "avoidable": false,
+   "run": "It was the good end. I left you the better one, which is a d"
   },
   {
    "family": "TeoHand",
@@ -40,75 +24,27 @@
   },
   {
    "family": "TeoHand",
-   "char": "e",
-   "instances": 4,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "the other phone couldn't read it."
+   "char": "t",
+   "instances": 6,
+   "distinct": 5,
+   "avoidable": false,
+   "run": "It was the good end. I left you the better one, which is a d"
   },
   {
    "family": "NoorHand",
    "char": "n",
    "instances": 3,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "TeoHand",
-   "char": "h",
-   "instances": 3,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "the other phone couldn't read it."
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 4,
-   "distinct": 3,
-   "avoidable": true,
-   "run": "the other phone couldn't read it."
-  },
-  {
-   "family": "NoorHand",
-   "char": "o",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "a",
-   "instances": 3,
    "distinct": 2,
    "avoidable": true,
    "run": "week one, and the room smells right again"
   },
   {
    "family": "TeoHand",
-   "char": "e",
+   "char": "d",
    "instances": 3,
    "distinct": 2,
    "avoidable": true,
-   "run": "sending you the roster"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "it would not go"
-  },
-  {
-   "family": "TeoHand",
-   "char": "o",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "the other phone couldn't read it."
+   "run": "It was the good end. I left you the better one, which is a d"
   },
   {
    "family": "NoorHand",
@@ -117,38 +53,6 @@
    "distinct": 1,
    "avoidable": true,
    "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "g",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "and the bread, if there is any"
-  },
-  {
-   "family": "TeoHand",
-   "char": "g",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "going"
-  },
-  {
-   "family": "TeoHand",
-   "char": "r",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "sending you the roster"
   },
   {
    "family": "TeoHand",
@@ -156,37 +60,21 @@
    "instances": 2,
    "distinct": 1,
    "avoidable": true,
-   "run": "the other phone couldn't read it."
+   "run": "noor \u00b7 travelling"
   },
   {
    "family": "TeoHand",
-   "char": "i",
+   "char": "I",
    "instances": 2,
    "distinct": 1,
    "avoidable": true,
-   "run": "write something"
-  },
-  {
-   "family": "TeoHand",
-   "char": "t",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "write something"
-  },
-  {
-   "family": "TeoHand",
-   "char": "e",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "write something"
+   "run": "It was the good end. I left you the better one, which is a d"
   }
  ],
- "glyphs": 332,
- "stalls": 7,
+ "glyphs": 261,
+ "stalls": 22,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "22 of 51 repeated letters inside one declared run take fewer outlines than they could (22 repeat one at all), and 0 of 332 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "6 of 37 repeated letters inside one declared run take fewer outlines than they could (8 repeat one at all), and 0 of 261 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

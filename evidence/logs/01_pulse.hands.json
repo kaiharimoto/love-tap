@@ -3,21 +3,13 @@
  "calt": true,
  "runs_read": 27,
  "pairs": 35,
- "pairs_repeating": 12,
- "pairs_avoidable": 12,
+ "pairs_repeating": 4,
+ "pairs_avoidable": 4,
  "worst": [
   {
    "family": "NoorHand",
-   "char": "e",
-   "instances": 5,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "e",
-   "instances": 5,
+   "char": "n",
+   "instances": 3,
    "distinct": 2,
    "avoidable": true,
    "run": "week one, and the room smells right again"
@@ -25,46 +17,6 @@
   {
    "family": "NoorHand",
    "char": "n",
-   "instances": 3,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "n",
-   "instances": 3,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "o",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "a",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "o",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "a",
    "instances": 3,
    "distinct": 2,
    "avoidable": true,
@@ -80,23 +32,7 @@
   },
   {
    "family": "NoorHand",
-   "char": "g",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
    "char": "t",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "g",
    "instances": 2,
    "distinct": 1,
    "avoidable": true,
@@ -104,9 +40,9 @@
   }
  ],
  "glyphs": 194,
- "stalls": 2,
+ "stalls": 13,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "12 of 35 repeated letters inside one declared run take fewer outlines than they could (12 repeat one at all), and 0 of 194 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "4 of 35 repeated letters inside one declared run take fewer outlines than they could (4 repeat one at all), and 0 of 194 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }

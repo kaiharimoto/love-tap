@@ -24,4 +24,4 @@ apt-get install -y -qq --no-install-recommends \
   libgstreamer1.0-0 libevdev2 libgudev-1.0-0 libgtk-4-1 libgraphene-1.0-0 libatomic1 \
   gstreamer1.0-libav gstreamer1.0-plugins-good gstreamer1.0-plugins-bad libavif16 liblcms2-2 \
   libevent-2.1-7t64 libwayland-server0
-pip3 install --quiet --disable-pip-version-check numpy pillow fonttools scipy scikit-image opencv-python-headless
+pip3 install --quiet --disable-pip-version-check numpy pillow fonttools uharfbuzz scipy scikit-image opencv-python-headless

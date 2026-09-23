@@ -1,13 +1,28 @@
-Traceback (most recent call last):
-  File "/home/user/love-tap/tools/check/hands_selftest.py", line 117, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "/home/user/love-tap/tools/check/hands_selftest.py", line 77, in main
-    shapes = {f: shaper(args.fonts, f) for f in ('NoorHand', 'TeoHand')}
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/user/love-tap/tools/check/hands_selftest.py", line 77, in <dictcomp>
-    shapes = {f: shaper(args.fonts, f) for f in ('NoorHand', 'TeoHand')}
-                 ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/user/love-tap/tools/check/hands_selftest.py", line 38, in shaper
-    import uharfbuzz as hb
-ModuleNotFoundError: No module named 'uharfbuzz'
+{
+ "fonts": "/home/user/love-tap/assets/fonts",
+ "memory": 12,
+ "runs": 202,
+ "room": [
+  {
+   "family": "NoorHand",
+   "o": [
+    "o.v4",
+    "o"
+   ]
+  },
+  {
+   "family": "TeoHand",
+   "o": [
+    "o.v4",
+    "o"
+   ]
+  }
+ ],
+ "hands_py": {
+  "avoidable": 105,
+  "stalls_same_letter": 0
+ },
+ "failures": [],
+ "failed": 0,
+ "ok": true
+}

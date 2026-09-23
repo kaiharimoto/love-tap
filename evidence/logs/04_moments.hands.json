@@ -3,36 +3,12 @@
  "calt": true,
  "runs_read": 22,
  "pairs": 15,
- "pairs_repeating": 6,
- "pairs_avoidable": 6,
+ "pairs_repeating": 2,
+ "pairs_avoidable": 2,
  "worst": [
   {
    "family": "NoorHand",
-   "char": "e",
-   "instances": 5,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
    "char": "n",
-   "instances": 3,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "o",
-   "instances": 3,
-   "distinct": 2,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "a",
    "instances": 3,
    "distinct": 2,
    "avoidable": true,
@@ -45,20 +21,12 @@
    "distinct": 1,
    "avoidable": true,
    "run": "week one, and the room smells right again"
-  },
-  {
-   "family": "NoorHand",
-   "char": "g",
-   "instances": 2,
-   "distinct": 1,
-   "avoidable": true,
-   "run": "week one, and the room smells right again"
   }
  ],
  "glyphs": 150,
- "stalls": 1,
+ "stalls": 6,
  "stalls_same_letter": 0,
  "stalled_words": [],
  "ok": false,
- "why": "6 of 15 repeated letters inside one declared run take fewer outlines than they could (6 repeat one at all), and 0 of 150 glyphs are the same letter AND the same variant as the glyph immediately before them"
+ "why": "2 of 15 repeated letters inside one declared run take fewer outlines than they could (2 repeat one at all), and 0 of 150 glyphs are the same letter AND the same variant as the glyph immediately before them"
 }
