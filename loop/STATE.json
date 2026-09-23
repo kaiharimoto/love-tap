@@ -5,7 +5,13 @@
   "stage": "OBSERVE",
   "firing": 55,
   "stage_entered_at_firing": 56,
-  "lease": null,
+  "lease": {
+    "session_id": "session_01T4gB3CFU17jMvcD83ejkfs",
+    "started_at": "2026-09-23T15:55:14Z",
+    "expires_at": "2026-09-23T18:55:14Z",
+    "firing": 56,
+    "stage": "OBSERVE"
+  },
   "evidence_fresh_as_of": "firing 54: ONE FULL ./capture.sh, 2026-09-23T10:35-11:20Z, built from 7ceb7d5-era code (ranks 1-3: half-size lit edges, finer masks for big sheets, the pressed clover) and BEFORE the margin commit, so the strip's status line is still written across its rule in this set. 14 of 17: 09 and 16 (no /dev/kvm), and 13_messenger_states shot and then refused on a pageerror, as at firing 51 -- the file on disk is this run's. evidence/.previous was not seeded, so DIFF.json reads everything as new. ffmpeg is distro 6.1.1, not the pinned binary. palette.json and legibility.json are this run's. THEN 01_pulse and crops/dusk_pulse RE-CAPTURED ALONE (./capture.sh --only=..., 11:50-12:25Z) from the margin build; MANIFEST.json, frames.json and DIFF.json restored to the full run's. palette.json and legibility.json are recomputed over the mixed set.",
   "evidence_note": "15 of 17, the ceiling in this container. 09_two_devices.png and 16_setup_android.png are booked missing WITH the measured /dev/kvm reason this time, not 'not captured this session' -- firing 37's MANIFEST lost that text because its second leg ran --only=02_chat; this run was whole so the sentence is there. `surfaces` is booked missing on the rendered surface with nothing in it, which is rank 6 and unchanged. THE CLIPS IN THIS CAPTURE WERE ENCODED BY A DIFFERENT BINARY THAN THE ONES BEFORE THEM: the pinned johnvansickle.com ffmpeg tarball now sits behind a JS interstitial that returns 7.3 KB of HTML with a 200, tar fails on it, and bootstrap.sh is `set -e` so it dies at that line and never reaches tailscale or Playwright WebKit -- which is no capture at all, not a missing clip. The distro ffmpeg 6.1.1 is symlinked into toolchain/ffmpeg. All five clips assembled and every frame check passed. Do not read mp4 SSIM across this boundary as content movement without checking that first.",
   "degradation": 0,
