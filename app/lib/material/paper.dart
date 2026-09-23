@@ -79,25 +79,121 @@ Widget paintWhenItArrives(BuildContext context, Widget child, int? frame, bool w
   return child;
 }
 
-/// Decoded masks, kept for the life of the process: a screenful of notes shares a small pool.
+/// Decoded masks and lit edges, shared by every piece that draws them and bounded in bytes.
+///
+/// Until firing 52 this was a plain map with no eviction and no dispose, so every mask a session
+/// had ever drawn stayed decoded until the app died: 181 MB after one visit to the search screen,
+/// 228 MB after a walk through every captured screen, measured at firing 51. On an iPhone PWA that
+/// is a WebKit tab reloaded under the person using it.
+///
+/// So the cache no longer lends its own handle to anything that keeps it. A piece that draws a
+/// mask [hold]s it — a `ui.Image.clone()`, which shares the decoded pixels and costs nothing — and
+/// [release]s it when it stops drawing it. The cache's own handles live in least-recently-used
+/// order under [budget], and an eviction disposes only the cache's handle: pixels a piece on the
+/// glass is still holding stay decoded until that piece lets go. So what is resident is exactly
+/// what is on screen plus at most [budget] of what was, however many screens a session has seen.
+///
+/// Alpha-only packing is not a lever here and was measured not to be: a `ui.Image` has no
+/// single-channel pixel format, so a grey mask decodes to the same four bytes a pixel (firing 51).
 class MaskCache {
-  static final Map<String, ui.Image> _images = {};
-  static final Map<String, Future<ui.Image>> _loading = {};
+  /// Decoded bytes the cache keeps for pieces that are no longer drawing them. Four of the largest
+  /// masks and their edges (1024x824, 3.4 MB each) is about a screenful's worth to come back to.
+  static const int budget = 48 << 20;
 
+  static final Map<String, ui.Image> _images = {}; // insertion order is recency order
+  static final Map<String, Future<ui.Image>> _loading = {};
+  static final Map<String, int> _held = {};
+  static final Map<String, List<int>> _sizes = {};
+  static final Map<String, int> _bytes = {};
+
+  /// The cache's own handle, or null. **Borrowed**: read it, draw with it this frame, and do not
+  /// keep it — it may be disposed by the next eviction. Anything that keeps a mask calls [hold].
   static ui.Image? peek(String asset) => _images[asset];
 
+  /// The decoded size of [asset] as `[width, height]`, remembered past eviction, so that a reader
+  /// like `CaptureHooks.paperSurfaces` can declare a piece whose mask the cache has let go of.
+  static List<int>? sizeOf(String asset) => _sizes[asset];
+
+  /// A handle of the piece's own on a decoded [asset], or null if it is not decoded. The caller
+  /// owns it and must [release] it.
+  static ui.Image? hold(String asset) {
+    final have = _images.remove(asset);
+    if (have == null) return null;
+    _images[asset] = have; // most recently used
+    _held[asset] = (_held[asset] ?? 0) + 1;
+    return have.clone();
+  }
+
+  /// Decode [asset] if need be, then [hold] it.
+  static Future<ui.Image> holdWhenLoaded(String asset) async {
+    for (;;) {
+      await load(asset);
+      // between the decode and this line another decode may have evicted it; decode it again
+      final held = hold(asset);
+      if (held != null) return held;
+    }
+  }
+
+  /// Give back a handle [hold] or [holdWhenLoaded] returned.
+  static void release(String asset, ui.Image image) {
+    image.dispose();
+    final n = (_held[asset] ?? 1) - 1;
+    if (n <= 0) {
+      _held.remove(asset);
+      // it is idle now, and may be what tips the idle bytes over
+      _evict(keep: '');
+    } else {
+      _held[asset] = n;
+    }
+  }
+
+  /// Decode [asset] into the cache. The image it completes with is the cache's own handle and is
+  /// borrowed, exactly as [peek]'s is.
   static Future<ui.Image> load(String asset) {
     final have = _images[asset];
     if (have != null) return Future.value(have);
     return _loading.putIfAbsent(asset, () async {
-      final data = await rootBundle.load(asset);
-      final codec = await ui.instantiateImageCodec(data.buffer.asUint8List());
-      final frame = await codec.getNextFrame();
-      _images[asset] = frame.image;
-      _loading.remove(asset);
-      return frame.image;
+      try {
+        final data = await rootBundle.load(asset);
+        final codec = await ui.instantiateImageCodec(data.buffer.asUint8List());
+        final frame = await codec.getNextFrame();
+        final image = frame.image;
+        _images[asset] = image;
+        _sizes[asset] = [image.width, image.height];
+        _bytes[asset] = image.width * image.height * 4;
+        _evict(keep: asset);
+        return image;
+      } finally {
+        _loading.remove(asset);
+      }
     });
   }
+
+  /// Oldest first, drop the cache's handles on masks nobody is holding until what nobody is
+  /// holding fits in [budget]. Never [keep], which has just been asked for.
+  static void _evict({required String keep}) {
+    var idle = idleBytes;
+    if (idle <= budget) return;
+    for (final asset in _images.keys.toList()) {
+      if (idle <= budget) break;
+      if (asset == keep || (_held[asset] ?? 0) > 0) continue;
+      _images.remove(asset)!.dispose();
+      idle -= _bytes[asset] ?? 0;
+    }
+  }
+
+  /// Bytes decoded for masks some piece is holding: what is on the glass.
+  static int get heldBytes => _sum(_images.keys.where((a) => (_held[a] ?? 0) > 0));
+
+  /// Bytes the cache keeps for masks nobody is holding. Never more than [budget] once a decode has
+  /// finished, apart from the one mask just decoded.
+  static int get idleBytes => _sum(_images.keys.where((a) => (_held[a] ?? 0) == 0));
+
+  /// Everything decoded: [heldBytes] plus [idleBytes]. Clones share their pixels, so a mask five
+  /// pieces are holding is counted once.
+  static int get residentBytes => heldBytes + idleBytes;
+
+  static int _sum(Iterable<String> assets) => assets.fold(0, (t, a) => t + (_bytes[a] ?? 0));
 
   /// Decode a set of masks up front (capture mode does this so no frame waits on a decode).
   static Future<void> warm(Iterable<String> assets) async {
@@ -106,6 +202,68 @@ class MaskCache {
         await load(a);
       } catch (_) {}
     }
+  }
+}
+
+/// What every widget that draws a decoded mask does with it: [MaskCache.hold] it while it draws
+/// it, [MaskCache.release] it when it stops, and rebuild when a mask that was still decoding
+/// arrives. Three widgets did this by hand with the cache's own handle, which is what kept every
+/// mask a session had seen decoded forever.
+mixin HoldsAMask<T extends StatefulWidget> on State<T> {
+  /// The asset this widget draws now.
+  String get heldAsset;
+
+  /// This widget's own handle, or null while the mask decodes or when it failed to.
+  ui.Image? get held => _held;
+  ui.Image? _held;
+  String? _heldFor;
+
+  @override
+  void initState() {
+    super.initState();
+    _take();
+  }
+
+  @override
+  void didUpdateWidget(T oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_heldFor != heldAsset) {
+      _let();
+      _take();
+    }
+  }
+
+  @override
+  void dispose() {
+    _let();
+    super.dispose();
+  }
+
+  void _let() {
+    final h = _held, a = _heldFor;
+    _held = null;
+    _heldFor = null;
+    if (h != null && a != null) MaskCache.release(a, h);
+  }
+
+  void _take() {
+    final asset = heldAsset;
+    _heldFor = asset;
+    final now = MaskCache.hold(asset);
+    if (now != null) {
+      _held = now;
+      return;
+    }
+    unawaited(MaskCache.holdWhenLoaded(asset).then((img) {
+      // unmounted, or asked for another asset while this one decoded: give it straight back
+      if (!mounted || _heldFor != asset || _held != null) {
+        MaskCache.release(asset, img);
+        return;
+      }
+      setState(() => _held = img);
+      // A decode finishing inside a frame has its rebuild dropped; see [askForAFrame].
+      askForAFrame();
+    }, onError: (Object _) {}));
   }
 }
 
@@ -423,44 +581,14 @@ class MaskedLayer extends StatefulWidget {
   State<MaskedLayer> createState() => _MaskedLayerState();
 }
 
-class _MaskedLayerState extends State<MaskedLayer> {
-  ui.Image? _mask;
-
+class _MaskedLayerState extends State<MaskedLayer> with HoldsAMask<MaskedLayer> {
   @override
-  void initState() {
-    super.initState();
-    _resolve();
-  }
-
-  @override
-  void didUpdateWidget(MaskedLayer old) {
-    super.didUpdateWidget(old);
-    if (old.maskAsset != widget.maskAsset) {
-      _mask = MaskCache.peek(widget.maskAsset);
-      _resolve();
-    }
-  }
-
-  void _resolve() {
-    final cached = MaskCache.peek(widget.maskAsset);
-    if (cached != null) {
-      _mask = cached;
-      return;
-    }
-    // a mask that is not baked yet leaves the sheet whole rather than blank
-    unawaited(
-      MaskCache.load(widget.maskAsset).then((img) {
-        if (!mounted) return;
-        setState(() => _mask = img);
-        // A decode finishing inside a frame has its rebuild dropped; see [askForAFrame].
-        askForAFrame();
-      }, onError: (Object _) {}),
-    );
-  }
+  String get heldAsset => widget.maskAsset;
 
   @override
   Widget build(BuildContext context) {
-    final mask = _mask;
+    // a mask that is not decoded yet leaves the sheet whole rather than blank
+    final mask = held;
     if (mask == null) return widget.child;
     // Composed at device pixels, not logical ones. A note is about 340 points wide and the screen
     // it is on is three times that, so a mask composed at 340 would be upsampled threefold before
@@ -485,8 +613,16 @@ class _MaskedLayerState extends State<MaskedLayer> {
 /// Masks composed at the size a piece turned out to be, kept so a screenful of notes composes
 /// each shape once rather than once a frame.
 class SlicedMasks {
-  static final Map<String, ui.Image> _images = {};
-  static const _keep = 64;
+  static final Map<String, ui.Image> _images = {}; // insertion order is recency order
+
+  /// Decoded bytes of composed masks kept, least recently used dropped first. It was 64 images
+  /// until firing 52, and one composition can be 1024x3296 — 13.5 MB — so a count bounded
+  /// nothing. A screen whose pieces need more than this still draws every one: an image dropped
+  /// here is disposed only as this cache's handle, and a shader already built on it keeps its own.
+  static const int budget = 48 << 20;
+
+  /// Bytes of composed masks held now.
+  static int get bytes => _images.values.fold(0, (t, i) => t + i.width * i.height * 4);
 
   /// The resolution a mask was last composed at, for the logical box it was composed for:
   /// `'<asset>@<logical w>x<logical h>'` to `[composed w, composed h]`, both in device pixels.
@@ -541,11 +677,14 @@ class SlicedMasks {
     final h = (size.height * dpr).round().clamp(1, mask.height * 4);
     final key = '$asset@${w}x$h';
     composedAt[composedKey(asset, size)] = [w, h];
-    final have = _images[key];
-    if (have != null) return have;
-    if (_images.length > _keep) {
+    final have = _images.remove(key);
+    if (have != null) return _images[key] = have; // most recently used
+    var total = bytes + w * h * 4;
+    while (total > budget && _images.isNotEmpty) {
       final oldest = _images.keys.first;
-      _images.remove(oldest)?.dispose();
+      final gone = _images.remove(oldest)!;
+      total -= gone.width * gone.height * 4;
+      gone.dispose();
     }
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
@@ -584,41 +723,13 @@ class NineSliced extends StatefulWidget {
   State<NineSliced> createState() => _NineSlicedState();
 }
 
-class _NineSlicedState extends State<NineSliced> {
-  ui.Image? _image;
-
+class _NineSlicedState extends State<NineSliced> with HoldsAMask<NineSliced> {
   @override
-  void initState() {
-    super.initState();
-    _resolve();
-  }
-
-  @override
-  void didUpdateWidget(NineSliced old) {
-    super.didUpdateWidget(old);
-    if (old.asset != widget.asset) {
-      _image = MaskCache.peek(widget.asset);
-      _resolve();
-    }
-  }
-
-  void _resolve() {
-    final cached = MaskCache.peek(widget.asset);
-    if (cached != null) {
-      _image = cached;
-      return;
-    }
-    unawaited(MaskCache.load(widget.asset).then((img) {
-      if (!mounted) return;
-      setState(() => _image = img);
-      // A decode finishing inside a frame has its rebuild dropped; see [askForAFrame].
-      askForAFrame();
-    }, onError: (Object _) {}));
-  }
+  String get heldAsset => widget.asset;
 
   @override
   Widget build(BuildContext context) {
-    final image = _image;
+    final image = held;
     if (image == null) return const SizedBox.shrink();
     return CustomPaint(painter: NinePainter(widget.asset, image, widget.edge, widget.opacity));
   }
@@ -690,43 +801,14 @@ class ContactShadow extends StatefulWidget {
   State<ContactShadow> createState() => _ContactShadowState();
 }
 
-class _ContactShadowState extends State<ContactShadow> {
-  ui.Image? _mask;
-
+class _ContactShadowState extends State<ContactShadow> with HoldsAMask<ContactShadow> {
   @override
-  void initState() {
-    super.initState();
-    _resolve();
-  }
-
-  @override
-  void didUpdateWidget(ContactShadow old) {
-    super.didUpdateWidget(old);
-    if (old.tearId != widget.tearId) {
-      _mask = MaskCache.peek(tearAsset(widget.tearId));
-      _resolve();
-    }
-  }
-
-  void _resolve() {
-    final asset = tearAsset(widget.tearId);
-    final cached = MaskCache.peek(asset);
-    if (cached != null) {
-      _mask = cached;
-      return;
-    }
-    // a mask that is not decoded yet draws no shadow rather than a black rectangle
-    unawaited(MaskCache.load(asset).then((img) {
-      if (!mounted) return;
-      setState(() => _mask = img);
-      // A decode finishing inside a frame has its rebuild dropped; see [askForAFrame].
-      askForAFrame();
-    }, onError: (Object _) {}));
-  }
+  String get heldAsset => tearAsset(widget.tearId);
 
   @override
   Widget build(BuildContext context) {
-    final mask = _mask;
+    // a mask that is not decoded yet draws no shadow rather than a black rectangle
+    final mask = held;
     if (mask == null) return const SizedBox.shrink();
     return CustomPaint(
       painter: ContactShadowPainter(

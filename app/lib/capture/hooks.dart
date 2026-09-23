@@ -539,15 +539,16 @@ class CaptureHooks {
     // are the two magnifications multiplied together, in device pixels per source pixel.
     if (node is RenderShaderMask && names[node] != null && node.hasSize && !node.size.isEmpty) {
       final asset = names[node]!;
-      final mask = MaskCache.peek(asset);
+      // the size and not the image: a mask the cache has let go of is still a piece on the glass
+      final mask = MaskCache.sizeOf(asset);
       final composed = SlicedMasks.composedAt[SlicedMasks.composedKey(asset, node.size)];
       if (mask != null && composed != null) {
         final box = node.size;
         // per axis since firing 51: the fixed band gives way on a piece much larger than its mask
-        final ex = SlicedMasks.sliceFor(mask.width.toDouble(), composed[0].toDouble());
-        final ey = SlicedMasks.sliceFor(mask.height.toDouble(), composed[1].toDouble());
-        final fx = _nineScale(mask.width.toDouble(), composed[0].toDouble(), ex);
-        final fy = _nineScale(mask.height.toDouble(), composed[1].toDouble(), ey);
+        final ex = SlicedMasks.sliceFor(mask[0].toDouble(), composed[0].toDouble());
+        final ey = SlicedMasks.sliceFor(mask[1].toDouble(), composed[1].toDouble());
+        final fx = _nineScale(mask[0].toDouble(), composed[0].toDouble(), ex);
+        final fy = _nineScale(mask[1].toDouble(), composed[1].toDouble(), ey);
         // and then the shader, which stretches the whole composition over the piece
         final sx = box.width * dpr / composed[0];
         final sy = box.height * dpr / composed[1];
@@ -555,7 +556,7 @@ class CaptureHooks {
         final rect = MatrixUtils.transformRect(node.getTransformTo(view), Offset.zero & box);
         out.add({
           'asset': asset,
-          'src': [mask.width, mask.height],
+          'src': [mask[0], mask[1]],
           'composed': composed,
           'drawn': [(box.width * dpr).round(), (box.height * dpr).round()],
           'scale': double.parse(scale.toStringAsFixed(3)),
