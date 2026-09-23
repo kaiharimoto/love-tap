@@ -49,13 +49,20 @@ def rng(seed):
 
 # ------------------------------------------------------------------ materials
 def tape_material():
-    """Matte office tape: mostly transmissive, slightly cloudy, with a low sheen."""
+    """Matte office tape: half transmissive, cloudy, with a low sheen.
+
+    Transmission 0.55, not the 0.86 it was written with. Rendered with transparent glass (see
+    render_bit), the weight is what sets how much of the note underneath shows through, and firing
+    51 laid probes over lined_01: at 0.86 the strip's alpha p50 is 63 and it is all but invisible
+    on pale paper; at 0.55 it is 128, the rules read through it and the strip reads as frosted tape;
+    at 0.35 it is 171 and starts to read as a label.
+    """
     mat = bpy.data.materials.new("tape")
     mat.use_nodes = True
     b = mat.node_tree.nodes.get("Principled BSDF")
     b.inputs["Base Color"].default_value = (0.96, 0.95, 0.92, 1.0)
     b.inputs["Roughness"].default_value = 0.42
-    b.inputs["Transmission Weight"].default_value = 0.86
+    b.inputs["Transmission Weight"].default_value = 0.55
     b.inputs["IOR"].default_value = 1.47
     return mat
 
@@ -122,7 +129,12 @@ def build_tape(name, width, seed):
     bm.verts.ensure_lookup_table()
     for i in range(len(xs) - 1):
         bm.faces.new((rows[0][i], rows[0][i + 1], rows[1][i + 1], rows[1][i]))
-    bmesh.ops.solidify(bm, geom=list(bm.faces), thickness=thickness)
+    # One sheet, not a solidified slab. The slab rendered every tape as RGB (0,0,0) at alpha 255, and
+    # firing 51 took it apart at 200 px: black with the solidify at 60, 200 and 600 microns, with its
+    # normals recalculated, with flat shading, and at transmission 0 as well as 0.86 -- and pale,
+    # 255/253/227 at transmission 0, the moment the solidify was removed. So it is the closed slab
+    # itself, not its thickness, its winding or its material. A tape is 60 microns; a single face
+    # is what it looks like from 40 cm.
     obj = link_mesh(bm, name, tape_material())
     # tape is never laid square, and it lifts a little where it was pressed down badly
     obj.rotation_euler = (0.0, 0.0, float(r.uniform(-0.22, 0.22)))
@@ -262,10 +274,20 @@ def render_bit(name, res, samples, out_dir, conditions=("day", "dusk")):
             frame = width * 1.5
             common.add_top_camera(scene, frame, frame, ortho=True, tilt_deg=18.0, distance=0.40)
             common.render_settings(scene, res, res, samples=samples, transparent=True, file_format="PNG")
+            if kind == "tape":
+                # A transmissive sheet over a transparent film is opaque unless Cycles is told to let
+                # glass through, and then the note under it shows in the app rather than the sky of
+                # this scene. Its roughness is 0.42, so the threshold has to sit above that.
+                scene.cycles.film_transparent_glass = True
+                scene.cycles.film_transparent_roughness = 0.5
             if condition == "day":
                 common.add_daylight(scene)
+                common.stop_down_for_day(scene)
             else:
                 common.add_dusk(scene)
+                # the aperture everything lit at dusk shares (rig/common.py); the bits never asked
+                # for it, which nobody could see while every bit rendered empty
+                common.stop_down_for_dusk(scene)
             suffix = "" if condition == "day" else "_dusk"
             path = os.path.join(out_dir, f"{name}{suffix}{pass_name}.png")
             common.render(scene, path)

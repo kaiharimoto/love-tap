@@ -2012,7 +2012,7 @@
     },
     {
       "state": "open",
-      "attempts": 0,
+      "attempts": 1,
       "closed_by": null,
       "rank": 4,
       "id": "every-bit-in-the-library-renders-empty",
@@ -2024,12 +2024,13 @@
       "why": "All 11 bits under assets/bits -- clip_01/02, glue_01, pin_01/02, staple_01/02, tape_01..04 -- and their dusk twins are 600x600 PNGs with alpha 0 on every pixel (RGB <= 1); the shadows peak at alpha 7. The packed app/assets/bits/*.webp are the same. So the tape on every chat photograph (blob_widgets.dart:359, `Image.asset(bitAsset(tape))`) and the pin 14_media_viewer.surfaces.json declares draw nothing. CAUSE, FOUND AND FIXED IN THE GENERATOR AT FIRING 49: blender/rig/common.py add_top_camera tilted the camera IN PLACE, so bits.py's tilt 18 at distance 0.40 aimed a 4.5 cm ortho frame at a point 0.40*tan(18) = 13 cm from a 1 cm clip at the origin. objects.py sets cam.location itself after the call, which is why objects were never affected. The camera now orbits the origin; at tilt 0, which every other caller uses, the position is unchanged.",
       "measurement": "python3 tools/check/headroom.py --family bits reads 11 of 11 `no opaque pixels to read` on the committed library. After re-rendering with `bash blender/run.sh blender/bits/bits.py --all --res 600 --samples 18` (the MANIFEST settings) it must read an opaque fraction > 0 on all 11, day and dusk, and a still that shows a photograph must declare the tape surface. PROBED at firing 49 into scratch at 200 px / 8 samples: opaque fraction clip 0.019, glue 0.264, pin 0.115, staple 0.010, tape 0.124 -- and clip, glue, pin and staple look like themselves. 18.5 s for all 11 day renders at probe settings, so the library is minutes of Blender, not the fenced fold render. NOT RE-RENDERED: renders are ADDRESS's to authorise. BLOCKED ALSO ON `the-tape-renders-opaque-black`, because re-rendering today would ship four black strips of tape.",
       "ranked_at_firing_50": "RANK 4 AT FIRING 50: LEG 3. Authorised. If the tape is not fixed, ship the seven bits that are not tape and leave the tape files empty; do not ship a black bar.",
-      "rank_before_firing_50": null
+      "rank_before_firing_50": null,
+      "rendered_at_firing_51": "LEG 3 RUN: bash blender/run.sh blender/bits/bits.py --all --res 600 --samples 18, 3m44s for all 44 files (11 bits x colour/shadow x day/dusk). assets/MANIFEST.json changed in exactly 44 `bytes` fields and nothing else. Opaque fraction (alpha >= 250), day = dusk: clip 0.026, glue 0.268, pin 0.117, staple 0.012; the four tapes are translucent (alpha>0 0.130-0.132, alpha p50 128) by the tape fix. So the item's `opaque fraction > 0 on all 11` holds for the seven that are meant to be opaque, and for tape as alpha>0, which is the only reading of it that a translucent tape can meet. ALSO FIXED ON THE WAY: bits.py never set the dusk aperture (common.stop_down_for_dusk), which the rig says everything lit at dusk must share -- invisible while every bit was empty. It does now, and the day stop hook too (0). headroom.py --family bits: day 9 of 11 fail, dusk 8 of 11 -- 5 of each are the clip/pin/staple red channel (rank 2's lamp; clip_01 22.9%, pin 11%) and 4 are the translucent tapes reading `no opaque pixels`. A contact sheet over lined_01 day and dusk shows every bit as the thing it is. ONE DEFECT SEEN ON THAT SHEET and fixed in the next commit: glue_01 renders as a beige square plate, because build_glue makes faces over its whole 48x48 grid including the flat skirt at z = 0. STILL OPEN for its last clause: `a still that shows a photograph must declare the tape surface`, which needs the post-legs capture."
     },
     {
-      "state": "open",
-      "attempts": 0,
-      "closed_by": null,
+      "state": "closed",
+      "attempts": 1,
+      "closed_by": "firing 51",
       "rank": 3,
       "id": "the-tape-renders-opaque-black",
       "row": "material_truth + visual_design",
@@ -2040,7 +2041,8 @@
       "why": "With the bit camera fixed, tape_01..04 render as solid black strips: every pixel with alpha > 0 is RGB (0,0,0) at alpha 255. The other seven bits render correctly in the same scene, so it is not the rig or the lights. THE CHEAP HYPOTHESIS IS REFUTED: tape_material sets Transmission Weight 0.86, and a copy of bits.py with it at 0.0 renders the same black. So it is the tape's geometry, normals or build (build_tape, bits.py:108), not its transmission. Not diagnosed further.",
       "measurement": "A scratch render of tape_01 (bits.py --only tape_01 --res 200 --samples 8 --conditions day) has median RGB over its alpha>0 pixels above 150 on every channel, i.e. a pale strip, and tools/check/headroom.py reads it. Re-break: whatever the fix is, reverting it gives the black strip back.",
       "ranked_at_firing_50": "RANK 3 AT FIRING 50: LEG 2. A CHEAP OBSERVATION THAT NARROWS THE CAUSE, made without Blender: glue_material has Transmission Weight 0.65 and renders correctly in the same scene, so transmission is out twice over. build_tape winds its faces (r0[i], r0[i+1], r1[i+1], r1[i]), with rows[0] at -x and xs increasing along y, which gives a -z normal facing away from the top camera, and then solidifies 60 microns. Probe recalc_face_normals first, then the tape with no solidify. Both are 2-second probes.",
-      "rank_before_firing_50": null
+      "rank_before_firing_50": null,
+      "diagnosed_at_firing_51": "CAUSE: THE SOLIDIFY ITSELF, not its winding, thickness or material. Probes of tape_01 at 200 px / 8 samples, median RGB over alpha>0 (13.6% of the frame in every case): solidify 60 um = 0/0/0; with recalc_face_normals after it = 0/0/0; flat shading = 0/0/0; solidify at 200 and 600 um = 0/0/0 (so not ray-offset precision); transmission 0.0 with solidify = 0/0/0 (firing 49's refutation reproduced, on a copy this time committed in the journal); NO solidify = 213/192/171 at transmission 0.86 and 255/253/227 at 0.0. FIX, blender/bits/bits.py: build_tape is one sheet; tape_material's transmission 0.86 -> 0.55; and tape scenes set cycles.film_transparent_glass with a 0.5 roughness threshold (the tape's is 0.42), so the note under it shows through in the app instead of this scene's sky. The weight was chosen by laying probes over lined_01: 0.86 -> alpha p50 63, all but invisible; 0.55 -> 128, rules read through it, frosted tape; 0.35 -> 171, a label. MEASURED on the committed renders at 600/18: tape_01 alpha>0 on 0.132 of the frame, median RGB 255/248/223 (day) and 238/210/176 (dusk), alpha p50 128 -- the item's `median above 150 on every channel` holds. RE-BREAK: putting the solidify back gives 0/0/0 on the same probe. TWO THINGS NOT CLAIMED. (1) tools/check/headroom.py reads the tape as `no opaque pixels` because its opaque is alpha >= 250 and the tape is translucent by design now; the item's own clause is alpha > 0. (2) Its median R is 255: the tape carries the same pinned red channel as every other day render, which is rank 2's lamp and which leg 1 found no aperture for."
     },
     {
       "state": "closed",
