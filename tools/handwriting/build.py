@@ -1019,6 +1019,70 @@ def feature_text(base_names, n, buckets=None):
     return "\n".join(lines) + "\n"
 
 
+# How many glyphs back a letter looks for its own last instance (memory_text). Measured at firing 55
+# over the runs the app declares, avoidable repeats and shaping cost on the seeded year: depth 0
+# 256 and 0.2 us a character, 8 166 and 2.3, 12 107 and 3.5, 14 88 and 4.6; at 16 and 32 the chain
+# rules' shared coverage tables overflow GSUB's 16-bit offsets even as extension lookups. 12 reaches
+# 76% of the same-letter gaps in those runs and takes the Chat hero from 19 to 2.
+CALT_MEMORY = 12
+
+
+def memory_text(order, letters, n, depth=CALT_MEMORY):
+    """A third calt pass: a letter takes the variant one on from its own nearest earlier instance.
+
+    The cascade and the rotation in `feature_text` decide a glyph by the glyph immediately before
+    it, so two instances of one letter with different letters between them are decided by their
+    neighbours alone, and firing 52's corpus search converged with 256 avoidable repeats left in
+    the declared runs: `room`, `week`, a `55` printed as one outline twice. This pass remembers.
+    For each letter, one lookup of chain rules looks back 1, 2, ... `depth` glyphs, nearest first,
+    for an instance of the same letter; finding one in variant k, it gives this one variant k+1.
+    So successive instances of a letter within `depth` of each other walk through all n outlines
+    before any comes back, which is DIRECTION.md's `cycle through calt` with a longer memory.
+
+    One lookup per letter rather than one for all: HarfBuzz tries every subtable of a lookup at
+    every glyph, and a single lookup shaped the seeded year at 6.1 us a character against 0.2;
+    split, a glyph only walks its own letter's rules (3.5 us at depth 12, firing 55).
+
+    `letters` are the base glyphs this applies to: the ones that stand for a letter or a digit,
+    since those are what a reader sees come round again."""
+    if n < 2 or not letters:
+        return ""
+    # every glyph, .notdef too: neither hand has a `·`, and a run like `Thu 23 Apr · 18:25` shaped
+    # in one face puts .notdef between the two 2s. (In the app a missing glyph falls back to
+    # another font, which splits the shaping run there, so the memory cannot cross it on the glass.)
+    lines = ["@ANY = [" + " ".join(order) + "];"]
+    for g in letters:
+        lines.append(f"@L_{g} = [" + " ".join(variant_name(g, k) for k in range(n)) + "];")
+    for t in range(n):
+        subs = " ".join(f"sub @v{k} by @v{t};" for k in range(n) if k != t)
+        lines.append(f"lookup TO{t} {{ {subs} }} TO{t};")
+    for i, g in enumerate(letters):
+        lines.append(f"lookup MEM{i} useExtension {{")
+        for d in range(1, depth + 1):
+            between = " @ANY" * (d - 1)
+            for k in range(n):
+                lines.append(f"  sub {variant_name(g, k)}{between} @L_{g}' lookup TO{(k + 1) % n};")
+        lines.append(f"}} MEM{i};")
+    lines.append("feature calt { " + " ".join(f"lookup MEM{i};" for i in range(len(letters))) + " } calt;")
+    return "\n".join(lines) + "\n"
+
+
+def _letters(order, cp_of, n):
+    """The base glyphs that stand for a letter or digit and carry all n variants."""
+    have = set(order)
+    return sorted(b for b in order
+                  if ".v" not in b and b != ".notdef" and cp_of.get(b) is not None
+                  and chr(cp_of[b]).isalnum()
+                  and all(variant_name(b, k) in have for k in range(n)))
+
+
+def _max_context(tt):
+    # fontTools' calculator does not descend into extension lookups and reads the memory pass as 1;
+    # its longest context is the memory's own, `CALT_MEMORY` glyphs back plus the one it changes
+    from fontTools.otlLib.maxContextCalc import maxCtxFont
+    tt["OS/2"].usMaxContext = max(maxCtxFont(tt), CALT_MEMORY + 1)
+
+
 def build_face(face, face_index, skel, hands, seed, out_dir, log):
     hand = hands[face]
     glyphs = face_glyphs(skel, hand)
@@ -1115,7 +1179,11 @@ def build_face(face, face_index, skel, hands, seed, out_dir, log):
     gasp.version = 1
     gasp.gaspRange = {0xFFFF: 15}
     fb.font["gasp"] = gasp
-    addOpenTypeFeaturesFromString(fb.font, feature_text(order, n, calt_buckets()))
+    full = fb.font.getGlyphOrder()
+    cp_of = {name: cp for cp, name in fb.font.getBestCmap().items()}
+    addOpenTypeFeaturesFromString(
+        fb.font, feature_text(order, n, calt_buckets()) + memory_text(full, _letters(full, cp_of, n), n))
+    _max_context(fb.font)
     os2 = fb.font["OS/2"]
     os2.recalcUnicodeRanges(fb.font)
     os2.recalcAvgCharWidth(fb.font)
@@ -1246,14 +1314,21 @@ def features_only(args):
         base = [g for g in tt.getGlyphOrder() if ".v" not in g]
         if "GSUB" in tt:
             del tt["GSUB"]
-        addOpenTypeFeaturesFromString(tt, feature_text(base, hands[face]["variants"], buckets))
+        n = hands[face]["variants"]
+        cp_of = {name: cp for cp, name in tt.getBestCmap().items()}
+        order = tt.getGlyphOrder()
+        letters = _letters(order, cp_of, n)
+        addOpenTypeFeaturesFromString(tt, feature_text(base, n, buckets) + memory_text(order, letters, n))
+        _max_context(tt)
         tt.save(path)
-        print(f"{face}: features recompiled with {len(buckets)} rotation classes from buckets.json", flush=True)
+        print(f"{face}: features recompiled with {len(buckets)} rotation classes from buckets.json "
+              f"and a {CALT_MEMORY}-glyph memory over {len(letters)} letters", flush=True)
         if not args.no_manifest:
             import manifest
             old = manifest._load()["files"].get(os.path.relpath(path, ROOT).replace(os.sep, "/"), {})
             settings = dict(old.get("settings") or {})
             settings["calt_buckets"] = sha256(os.path.join(HERE, "buckets.json"))
+            settings["calt_memory"] = CALT_MEMORY
             record(path, GENERATOR, settings, kind="font")
 
 

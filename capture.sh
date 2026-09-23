@@ -441,6 +441,10 @@ for T in evidence/*.text.json; do
   python3 tools/check/hands.py "$T" --out "$LOG/$(basename "${T%.text.json}").hands.json" \
     >/dev/null 2>&1 || true
 done
+# and the property the hands' twelve-glyph memory promises (firing 55), over the same runs; unlike
+# hands.py it holds today, so a red one here is a regression in the fonts, not the known state
+python3 tools/check/hands_selftest.py >"$LOG/hands_selftest.json" 2>&1 \
+  || note_missing "handwriting" "tools/check/hands_selftest.py failed: a letter inside the hands' twelve-glyph memory took the same outline twice; see evidence/logs/hands_selftest.json"
 if [ -f evidence/01_pulse.png ] && [ -f evidence/crops/dusk_pulse.png ]; then
   python3 tools/check/composited.py evidence/01_pulse.png evidence/crops/dusk_pulse.png \
     --out "$LOG/composited.json" >/dev/null 2>&1 || true
