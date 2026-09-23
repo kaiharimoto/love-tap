@@ -7240,3 +7240,52 @@ green (242 + 2 new, re-broken). Note: the test run rewrites `evidence/coldstart.
 IMPLEMENT continues from rank 10. ADDRESS is overdue: three routes are exhausted and waiting on
 DESIGN (the day roll-off, hand variants by construction, and a longer calt context), rank 6 needs
 re-scoping, and the lit edges are the next residency lever.
+
+## Firing 53 — ADDRESS, cycle 3 (moved from IMPLEMENT) — 2026-09-23
+
+On the dispatcher's instruction, recorded as firings 29, 32, 35, 43 and 50 did: the top of the
+queue had become decisions rather than work. No code. Nothing under `assets/` or `evidence/`.
+Step 0 passed: fast-forwarded 19 commits, then `Everything up-to-date`. `CLAUDE.md` was re-read
+from the tree and was unchanged.
+
+**The lamp (was 2, now 47, parked).** Firing 52's proof is accepted, so nobody should probe
+another stop. The roll-off that is left is not IMPLEMENT's, and I checked that with a grep rather
+than believing it. `common.py:164` declares the Standard view transform on purpose (*"a scan, not
+a filmic photograph"*). `fold.py:326` renders the fenced folds through the same settings, so a
+roll-off moves them too. DESIGN at cycle 6.
+
+**The day rig (was 6, now 48, parked).** The item was three clauses and they came apart:
+
+- The lamp half is closed. Nothing is left to render under the corrected lamp.
+- The set-mean clause (0.0448 against 0.045) moves to the accents item, with 1.0 point.
+- The per-still ground and mid floors stay on it with 0.5, parked for a COLOR.md decision.
+
+**The tears.** The mask cache is now rank 1. It is using-it: 12_search still holds about 158 MB
+while it is shown, and 78 MB of that is lit edges. The tears are rank 2 behind it. Five pieces
+are still over the 4 px floor, and the only lever left is a per-mask 2048 delivery, which spends
+the residency that the edges would buy back.
+
+**Firing 52's three DESIGN routes:**
+
+- A longer `calt` lookback is IMPLEMENT's under `DIRECTION.md:95`.
+- Variants built by construction are IMPLEMENT's under `DIRECTION.md:93`.
+- App-side shaping is struck as a route.
+- The roll-off waits for cycle 6.
+
+**Two 3e finds, each from one grep.** Rank 12's blocker, *"where accents live is DESIGN's"*, is
+answered by `COLOR.md:419` and §7 item 6. The clover already exists at family-D chroma, so that
+item is rank 3 and IMPLEMENT's again. Rank 9's clause 3 is **impossible as written**, not just
+exhausted. Declared runs hold up to 9 of one letter against the law's 5 variants on 5 of the 11
+stills. It is re-scoped to `distinct >= min(instances, 5)`.
+
+**Convergence.** Open the-ui plus using-it points went 36.25 → 34.5 → 32.0 → 32.0. It is
+converging slowly. 22.5 of those points are workable. The other 9.5 are parked until cycle 6 or
+until the folds fence is lifted. The count stays at 52.
+
+**Context recorded, not acted on.** If the rendered-paper pipeline were retired, 13 open items
+would be moot or re-based. They hold 13.0 of the 32.0 points (list in `address_at_firing_53`).
+
+**Gate.** No toolchain in this container, and no code changed. `app/` and `tools/` are
+byte-identical to the tree firing 52 gated at 244 green.
+
+**Next.** IMPLEMENT from rank 1: the lit edges on 12_search.
