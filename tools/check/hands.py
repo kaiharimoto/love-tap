@@ -19,6 +19,12 @@ Two numbers, and the second is the one nobody had:
 
   repeats   for every character that occurs more than once inside ONE declared run, whether all
             its instances took different glyph ids. This is the item's clause three.
+  avoidable the same, counting only a character whose instances took FEWER distinct outlines than
+            min(instances, variants). A run with nine `e`s against five variants must repeat four
+            outlines by pigeonhole, at any effort; firing 53 found clause three impossible as
+            written for exactly that reason (up to 9 instances in one run on 5 of 11 stills) and
+            re-scoped it to this count. `variants` is read per face from
+            tools/handwriting/hands.json, so the ruler cannot drift from the build.
   stalls    how often a glyph takes the same variant as the glyph immediately before it, and how
             often that glyph is the SAME LETTER -- which is one outline printed twice in a row,
             the most visible form the defect has, and it is in the set: `room` in the Chat hero
@@ -52,12 +58,16 @@ def read(font_dir, text_json, families, calt=True):
         'runs_read': 0,
         'pairs': 0,
         'pairs_repeating': 0,
+        'pairs_avoidable': 0,
         'worst': [],
         'glyphs': 0,
         'stalls': 0,
         'stalls_same_letter': 0,
         'stalled_words': [],
     }
+    hands = pathlib.Path(__file__).resolve().parents[1] / 'handwriting' / 'hands.json'
+    variants = {k: v.get('variants', 1) for k, v in json.loads(hands.read_text()).items()
+                if isinstance(v, dict)}
     for r in runs:
         fam = r.get('family')
         if fam not in families:
@@ -93,9 +103,12 @@ def read(font_dir, text_json, families, calt=True):
             out['pairs'] += 1
             if len(set(names)) < len(names):
                 out['pairs_repeating'] += 1
+                avoidable = len(set(names)) < min(len(names), variants.get(fam, 1))
+                if avoidable:
+                    out['pairs_avoidable'] += 1
                 out['worst'].append({
                     'family': fam, 'char': ch, 'instances': len(names),
-                    'distinct': len(set(names)), 'run': text[:60],
+                    'distinct': len(set(names)), 'avoidable': avoidable, 'run': text[:60],
                 })
 
         for i in range(1, len(glyphs)):
@@ -130,15 +143,18 @@ def main():
     args = ap.parse_args()
 
     out = read(args.fonts, args.text, set(args.families.split(',')), calt=not args.no_calt)
-    # The floor is clause three of `one-variant-per-glyph-and-zero-pressure-variance`, plus the
-    # stall count this tool adds: no repeated letter inside one declared run may take an outline
-    # twice, and no glyph may be the same letter and the same variant as the one before it.
-    out['ok'] = out['pairs_repeating'] == 0 and out['stalls_same_letter'] == 0
+    # The floor is clause three of `one-variant-per-glyph-and-zero-pressure-variance` as firing 53
+    # re-scoped it, plus the stall count this tool adds: no repeated letter inside one declared run
+    # may take fewer distinct outlines than it could, and no glyph may be the same letter and the
+    # same variant as the one before it. `pairs_repeating`, which counts the pigeonhole too, is
+    # still reported beside it.
+    out['ok'] = out['pairs_avoidable'] == 0 and out['stalls_same_letter'] == 0
     if not out['ok']:
         out['why'] = (
-            f"{out['pairs_repeating']} of {out['pairs']} repeated letters inside one declared run "
-            f"take an outline twice, and {out['stalls_same_letter']} of {out['glyphs']} glyphs are "
-            f"the same letter AND the same variant as the glyph immediately before them")
+            f"{out['pairs_avoidable']} of {out['pairs']} repeated letters inside one declared run "
+            f"take fewer outlines than they could ({out['pairs_repeating']} repeat one at all), and "
+            f"{out['stalls_same_letter']} of {out['glyphs']} glyphs are the same letter AND the same "
+            f"variant as the glyph immediately before them")
     if args.out:
         pathlib.Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         pathlib.Path(args.out).write_text(json.dumps(out, indent=1))
