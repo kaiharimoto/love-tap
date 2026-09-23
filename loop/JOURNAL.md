@@ -7368,3 +7368,103 @@ clause is left. The top of the queue is now:
 - split rank 3's `figure.p99_chroma` clause off as an ink item;
 - restate rank 2's tread clause as the mean tread;
 - look at 12_search's tear_014 piece, which still declares the coarse mask.
+
+## Firing 55 — IMPLEMENT, cycle 3 — 2026-09-23 12:54–14:20Z
+
+Step 0 passed: the checkout was 30 commits behind and took a fast-forward. The lease was pushed
+before any work. Ranks 2, 3, 4, 6, 7 and 8 were worked, in that order. Three items closed, two
+were filed, and the stage moves to **OBSERVE**. Why is at the end.
+
+**Rank 2, tears: each edge is sliced at its own mask's fibre depth.** The packer now measures
+all four edges of every mask and writes the result to `INDEX.json` as `fibres`.
+
+- tear_032's bottom fibres end at 0.066, so the 0.25 floor was guarding fibres that edge does not
+  have. The same measurement found edges where 0.25 was too shallow, such as tear_014's bottom
+  at 0.28.
+- `SlicedMasks.bandsFor` gives each edge way on its own. `at` and `CaptureHooks` share
+  `slicesFor`, so the sidecar declares the slice that was drawn.
+- The prediction, made in Python before the test existed: settings.notify 4.89 → 4.00 and
+  setup 6.96 → 6.51, with the other six big pieces unchanged. The test reproduced all eight.
+  Over the floor: 2 → 1. Re-broken.
+- The setup sheet is out of reach by arithmetic. It is drawn at 3.98x its finer mask, so it
+  would need both fixed bands to total under 0.7% of the mask.
+- The longest-tread clause is restated as a mean tread plus a population clause. The
+  ruled-lines clause still has no ruler.
+
+**Rank 3, colour: closed on its accent clauses, with the rest re-filed.** Firing 54 said the
+figure band is ink. palette.py line 152 says it is the **lightest** third of the frame, which is
+the paper; the clover lands in the mid band.
+
+- The clause needs about 37,000 device px per room that are both light and at C ≥ 0.10.
+- Nothing packed supplies any. sticky_yellow renders at C 0.081 against the 0.1085 its declared
+  colour gives.
+- Only the highlighter reaches it, and DIRECTION.md keeps the highlighter a supporting voice.
+- So the clause is fenced behind day paper and re-filed as
+  `the-lightest-third-has-nothing-coloured-in-it`.
+
+**Rank 4, hands: a 12-glyph `calt` memory.** A letter now takes the variant after its nearest
+earlier instance.
+
+- Costed first on scratch `--features-only` builds. Depth 0 rebuilt the shipped fonts
+  byte-identically.
+- One lookup for all letters shaped at 6.1 µs a character, which refused that layout. One lookup
+  per letter shaped at 3.5 µs at depth 12.
+- Depth 16 and depth 32 overflow GSUB's 16-bit offsets, even as extension lookups.
+- Shipped at depth 12. Avoidable repeats 256 → 105, same-letter stalls 2 → 0, the Chat hero
+  19 → 2. The population is unchanged.
+- `tools/check/hands_selftest.py` holds the exact property on every declared run. It fails 668
+  times on the old fonts. `capture.sh` now runs it.
+- Two footnotes. Neither hand has a `·`, so `.notdef` is in `@ANY`. `usMaxContext` is now set by
+  hand to 13, because fontTools' calculator read 1.
+
+**Rank 6: read, not worked.**
+
+- 04_moments' median breach exists only at the 700 px sample. The seeded photographs are 40% of
+  that frame, and without them the median is 0.92.
+- The mid band now passes on 8 of 9 rooms. But 30–60% of every reading is ink, rules and torn
+  edges blurred into the middle third, so 10_first_run fails for being empty.
+- This is left for DIAGNOSE.
+
+**Ranks 7 and 8: closed off firing 54's capture.**
+
+- 23 of 422 runs are below floor, and all 23 pass on their own ring. I cropped each one; the
+  contact sheet is described in the state. Each is ink on paper whose gated ground caught
+  neighbouring ink. None of them has the torn lip as its dark end.
+- Zero timestamps fail, and 21 are declared. That is the same 21 firing 49 counted.
+- The crops turned up one real thing: a brown disc over `a picture` on 05_settings_interrupt,
+  which nothing declares. It is filed.
+
+### Gate
+
+- `pack_assets --seed=year`: exit 0 at the start and at the end (86.3 → 86.9 MB, the fonts).
+- `flutter analyze`: clean.
+- `flutter test`: 257 green (4 new, re-broken).
+- `hands_selftest.py`: ok.
+- No capture was taken. `bootstrap.sh --profile=web` completed after the CONTINUE.md §5 ffmpeg
+  fix. `toolchain/.done` holds playwright.
+
+### Why OBSERVE and not rank 9
+
+The last score, 75 of 120, is 24 firings old.
+
+Half of this firing was reading committed evidence, and that reading showed the queue describes
+a build that no longer exists:
+- rank 3's cause was false;
+- ranks 7 and 8 were already met;
+- rank 6 is photographs plus a ruler that counts writing.
+
+The glass has also changed in two ways no capture has seen: the calt memory (shaping cost on
+WebKit is unmeasured) and the per-edge slicing.
+
+Re-judging before spending more IMPLEMENT firings is the honest order. Rank 9 was not started.
+
+### What the next firing should expect
+
+**OBSERVE.** Capture, then `tools/check/*`. The capture needs 6 GB and about 45 minutes.
+
+Things to look at on that capture:
+- whether the Chat hero's letters change outline, now that the calt memory is on the glass;
+- settings.notify's `centre` on the sidecar, which should read 4.00;
+- `hands_selftest.json` in the logs.
+
+Then DIAGNOSE, with the builder sheet written first.

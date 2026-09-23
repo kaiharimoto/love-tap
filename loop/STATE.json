@@ -2,16 +2,10 @@
   "v": 1,
   "branch": "claude/app-improvement-autonomous-workflow-d6fwdu",
   "cycle": 3,
-  "stage": "IMPLEMENT",
-  "firing": 54,
-  "stage_entered_at_firing": 53,
-  "lease": {
-    "session_id": "session_01ACxmjpupXdqkS8fbTWSELn",
-    "firing": 55,
-    "stage": "IMPLEMENT",
-    "started_at": "2026-09-23T12:54:02Z",
-    "expires_at": "2026-09-23T16:54:02Z"
-  },
+  "stage": "OBSERVE",
+  "firing": 55,
+  "stage_entered_at_firing": 56,
+  "lease": null,
   "evidence_fresh_as_of": "firing 54: ONE FULL ./capture.sh, 2026-09-23T10:35-11:20Z, built from 7ceb7d5-era code (ranks 1-3: half-size lit edges, finer masks for big sheets, the pressed clover) and BEFORE the margin commit, so the strip's status line is still written across its rule in this set. 14 of 17: 09 and 16 (no /dev/kvm), and 13_messenger_states shot and then refused on a pageerror, as at firing 51 -- the file on disk is this run's. evidence/.previous was not seeded, so DIFF.json reads everything as new. ffmpeg is distro 6.1.1, not the pinned binary. palette.json and legibility.json are this run's. THEN 01_pulse and crops/dusk_pulse RE-CAPTURED ALONE (./capture.sh --only=..., 11:50-12:25Z) from the margin build; MANIFEST.json, frames.json and DIFF.json restored to the full run's. palette.json and legibility.json are recomputed over the mixed set.",
   "evidence_note": "15 of 17, the ceiling in this container. 09_two_devices.png and 16_setup_android.png are booked missing WITH the measured /dev/kvm reason this time, not 'not captured this session' -- firing 37's MANIFEST lost that text because its second leg ran --only=02_chat; this run was whole so the sentence is there. `surfaces` is booked missing on the rendered surface with nothing in it, which is rank 6 and unchanged. THE CLIPS IN THIS CAPTURE WERE ENCODED BY A DIFFERENT BINARY THAN THE ONES BEFORE THEM: the pinned johnvansickle.com ffmpeg tarball now sits behind a JS interstitial that returns 7.3 KB of HTML with a 200, tar fails on it, and bootstrap.sh is `set -e` so it dies at that line and never reaches tailscale or Playwright WebKit -- which is no capture at all, not a missing clip. The distro ffmpeg 6.1.1 is symlinked into toolchain/ffmpeg. All five clips assembled and every frame check passed. Do not read mp4 SSIM across this boundary as content movement without checking that first.",
   "degradation": 0,
@@ -2233,6 +2227,19 @@
       "blocked_on": "the day paper re-render: the law's opaque carrier is the sticky note (DIRECTION.md Palette, COLOR.md §5), and sticky_yellow renders at median C 0.081 against its declared 0.1085. Day paper is unauthorised (render_decision_at_firing_50) and parked for cycle 6 with the lamp route. Not the highlighter: DIRECTION.md makes it a supporting voice.",
       "needs_stage": "DESIGN (cycle 6, with the day paper)",
       "measured_at_firing_55": "Needs ~37,000 device px per room still that are light (L >= ~0.75) and C >= 0.10; 01_pulse has 7. Measured candidates: no packed object or stock supplies any; the 70% multiplied yellow highlighter does (C 0.120-0.134 at L 0.85-0.88 over four stocks)."
+    },
+    {
+      "id": "a-round-mark-sits-on-a-picture-in-the-interrupt-matrix",
+      "row": "visual_design",
+      "points": 0.5,
+      "owner_priority": "the-ui",
+      "why": "On firing 54's 05_settings_interrupt.png a translucent brown disc about 45 logical px across lies over the `pi` of the declared run `a picture` (05_settings_interrupt.text.json, the interrupt matrix's second row label), so a word a person reads is written across a round dark mark. It is not in 05_settings_interrupt.surfaces.json (nothing but the desk is declared under that rect), so whatever draws it is not declared either. 05_settings.png has a similar disc beside the FEELINGS YOU MADE pad. Found at firing 55 while cropping the 23 below-floor runs; it is one of them (`a picture`, ink_core 3.81, ring 10.33).",
+      "measurement": "FIRST identify the widget (it is undeclared, which is its own defect). Then: on a capture, no run declared in 05_settings_interrupt.text.json or 05_settings.text.json has a disc-drawing surface intersecting its rect, AND the disc is declared in the surfaces sidecar. POPULATION: total_runs on both stills unchanged.",
+      "state": "open",
+      "attempts": 0,
+      "closed_by": null,
+      "rank": null,
+      "filed_at_firing": 55
     }
   ],
   "blocked": null,
@@ -2938,6 +2945,25 @@
       "open_ui_plus_using_points": 31.0,
       "gate": "pack_assets --seed=year exit 0 at start and end; flutter analyze clean; flutter test 253 green (9 new tests, each re-broken).",
       "pushed": true
+    },
+    {
+      "firing": 55,
+      "stage": "IMPLEMENT",
+      "cycle": 3,
+      "at": "2026-09-23T14:07:38Z",
+      "what": "IMPLEMENT ranks 2, 3, 4, 6, 7, 8. (2) Per-edge fibre floors measured by the packer and sliced per edge: settings.notify 4.89 -> 4.00, setup 6.96 -> 6.51, over the 4x floor 2 -> 1; the setup sheet is out of reach by arithmetic (needs fixed bands < 0.7% of its mask); longest-tread clause restated as mean tread. (3) CLOSED on its accent clauses; the figure-band clause's cause refuted (lightest third, not ink), costed (~37k light px at C >= 0.10 per room), and re-filed as the-lightest-third-has-nothing-coloured-in-it, fenced behind day paper. (4) calt memory costed on scratch builds then shipped at depth 12: avoidable repeats 256 -> 105, same-letter stalls 2 -> 0, Chat hero 19 -> 2; depth 16+ does not pack; hands_selftest.py re-broken on the old fonts (668). (6) Read, not worked: 04's p50 breach is the seeded photographs, the mid band is 30-60% blurred writing; left for DIAGNOSE. (7) and (8) CLOSED off firing 54's capture: no failing run has the torn lip as its dark end (23/23 inspected), zero timestamp failures with 21 declared. Stage moved to OBSERVE.",
+      "closed": [
+        "one-coloured-thing-per-screen",
+        "the-relit-tear-edge-is-a-dark-band",
+        "the-timestamps-are-a-quarter-of-the-failing-writing"
+      ],
+      "filed": [
+        "the-lightest-third-has-nothing-coloured-in-it",
+        "a-round-mark-sits-on-a-picture-in-the-interrupt-matrix"
+      ],
+      "gate": "pack_assets --seed=year exit 0 at start and end; flutter analyze clean; flutter test 257 green (4 new, re-broken); tools/check/hands_selftest.py ok (re-broken: 668 failures on the old fonts).",
+      "decision": "OBSERVE -> DIAGNOSE rather than rank 9; see stage_change_note.",
+      "pushed": true
     }
   ],
   "routine": {
@@ -3086,7 +3112,7 @@
       "the_shape_of_it": "Roughly fifty of the sixty-three breaches are section 5 chroma floors -- ground, mid and figure mean chroma, figure p99, accent fraction -- on every still in the set. That is the owner's 'doesn't evoke cuteness' and it dwarfs everything else on the board. Every section 5 CEILING passes with room to spare; the whole failure is absence. Firing 4 found the cause: the day rig's net illuminant is R:G:B 1.000:0.975:0.931, a neutral lamp, and nothing rendered under a neutral lamp can be more chromatic than its own albedo. See the-day-rig-is-what-took-the-colour-out."
     }
   },
-  "stage_change_note": "Firing 54 ran IMPLEMENT from rank 1 and leaves the stage at IMPLEMENT. Closed: the-mask-cache-never-lets-go-of-a-mask (rank 1), the-dusk-screen-fails-31-of-its-54-runs (rank 5), a-word-is-written-across-the-printed-margin-rule (rank 11). Worked and measured on a capture: the-tears-are-overlays-painted-on-whole-paper (rank 2; 4 -> 2 pieces over the 4x floor, fibre floor next), one-coloured-thing-per-screen (rank 3; accent clauses met on every room still, the figure-ink clause is not an object's and should be split). Rank 4: harness half only. NEXT: rank 2's per-mask fibre floor, then rank 4's calt lookback (measure GSUB cost on a scratch build first), then rank 6 down. Ranks were not renumbered.",
+  "stage_change_note": "Firing 55 ran IMPLEMENT ranks 2, 3, 4, 6, 7, 8 and MOVES THE STAGE TO OBSERVE, cycle 3 (the queue is not drained; firing 29 is the precedent). WHY, which the firing prompt asked to be written down: (1) the last score, 75/120 at firing 31, describes a build twenty-four firings old; (2) half of what this firing worked was not work on the app but a reading of committed evidence that showed the queue's own text is stale -- rank 3's remaining clause had a false cause (the figure band is the lightest third, not ink), ranks 7 and 8 were already met on firing 54's capture, rank 6's two breaches are the seeded photographs and a ruler that counts writing; a queue that describes a build that no longer exists should be re-judged before IMPLEMENT spends more firings on it; (3) this firing changed what is on the glass in two ways no capture has seen: the hands' 12-glyph calt memory (fonts +275 KB a face, shaping 0.2 -> 3.5 us a character, unmeasured on WebKit) and the per-edge fibre slicing of big sheets. NEXT: OBSERVE (capture, then tools/check/*, including the new hands_selftest.py which capture.sh now runs), then DIAGNOSE (builder sheet first), then ADDRESS re-ranks against the steer. Rank 9 and below were not started. Ranks were not renumbered; closed items carry rank null.",
   "measured_at_firing_12": {
     "captured_at": "e7a3a5a",
     "artifacts": "15 of 17; 09_two_devices.png and 16_setup_android.png are the container ceiling",
