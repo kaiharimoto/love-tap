@@ -34,6 +34,11 @@ SIZES = {
     "folds": 540,
     "shell": 1500,
 }
+# The lit edges are packed this many times smaller than the masks they light. The app draws them
+# at the mask's geometry (kEdgeDownsample in app/lib/material/paper.dart, which must agree): a
+# soft light band that measured within 1.1/255 of the full-size one at 2x, and was the larger half
+# of a screen's decoded bytes at 1x.
+EDGE_DOWNSAMPLE = 2
 QUALITY = {"paper": 88, "tears": 92, "objects": 92, "bits": 92, "folds": 90, "shell": 88}
 
 
@@ -190,7 +195,10 @@ def pack_family(name, index, verbose=True):
                 # coordinates. Anything past the render's edge crops to transparent, which is
                 # what is there anyway.
                 crop = _into_frame(_expand(crop, SHADOW_MARGIN), frame)
-        size = convert(os.path.join(src_dir, fn), dst, SIZES.get(name, 1024), QUALITY.get(name, 90),
+        long_side = SIZES.get(name, 1024)
+        if name == "tears" and "_edge" in stem:
+            long_side //= EDGE_DOWNSAMPLE
+        size = convert(os.path.join(src_dir, fn), dst, long_side, QUALITY.get(name, 90),
                        keep_alpha=name != "paper", luminance_to_alpha=plain_mask, crop=crop)
         row = {"id": stem, "w": size[0], "h": size[1]}
         if stem in safes:

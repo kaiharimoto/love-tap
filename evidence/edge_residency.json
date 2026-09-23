@@ -1,0 +1,489 @@
+{
+ "artifact": "12_search",
+ "residency": {
+  "masks": 27,
+  "edges": 27,
+  "mask_mb": 79.9,
+  "edge_mb": 19.98,
+  "composed_mb": 22.82,
+  "edge_px": [
+   "338x512",
+   "473x512",
+   "512x203",
+   "512x254"
+  ],
+  "total_mb": 122.7
+ },
+ "band": {
+  "downsample": 2.0,
+  "n": 41,
+  "rect_mean_max": 0.257,
+  "band_mean_max": 1.108,
+  "band_mean_median": 0.735,
+  "worst": {
+   "asset": "assets/tears/tear_001_edge.webp",
+   "piece": "",
+   "drawn": [
+    1094,
+    676
+   ],
+   "rect_mean": 0.194,
+   "band_mean": 1.108,
+   "p999": 12.5
+  },
+  "ceiling": 2.0,
+  "rows": [
+   {
+    "asset": "assets/tears/tear_049_edge.webp",
+    "piece": "",
+    "drawn": [
+     1380,
+     258
+    ],
+    "rect_mean": 0.217,
+    "band_mean": 1.05,
+    "p999": 11.3
+   },
+   {
+    "asset": "assets/tears/tear_033_edge.webp",
+    "piece": "search-affordance",
+    "drawn": [
+     210,
+     96
+    ],
+    "rect_mean": 0.078,
+    "band_mean": 0.363,
+    "p999": 2.5
+   },
+   {
+    "asset": "assets/tears/tear_045_edge.webp",
+    "piece": "margin-01M1M4ZQQ0H0PPVTKMMQEE268D",
+    "drawn": [
+     1218,
+     102
+    ],
+    "rect_mean": 0.117,
+    "band_mean": 0.661,
+    "p999": 6.9
+   },
+   {
+    "asset": "assets/tears/tear_019_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     642
+    ],
+    "rect_mean": 0.155,
+    "band_mean": 1.002,
+    "p999": 10.9
+   },
+   {
+    "asset": "assets/tears/tear_003_edge.webp",
+    "piece": "margin-01M1M3Y4GR5ZE8WDQ00S3NX0KF",
+    "drawn": [
+     1218,
+     104
+    ],
+    "rect_mean": 0.093,
+    "band_mean": 0.502,
+    "p999": 5.9
+   },
+   {
+    "asset": "assets/tears/tear_036_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     697
+    ],
+    "rect_mean": 0.257,
+    "band_mean": 1.076,
+    "p999": 12.4
+   },
+   {
+    "asset": "assets/tears/tear_014_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     876
+    ],
+    "rect_mean": 0.229,
+    "band_mean": 1.003,
+    "p999": 12.0
+   },
+   {
+    "asset": "assets/tears/tear_052_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     408
+    ],
+    "rect_mean": 0.186,
+    "band_mean": 0.907,
+    "p999": 10.0
+   },
+   {
+    "asset": "assets/tears/tear_032_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     375
+    ],
+    "rect_mean": 0.175,
+    "band_mean": 0.89,
+    "p999": 10.8
+   },
+   {
+    "asset": "assets/tears/tear_013_edge.webp",
+    "piece": "margin-01M1M2CBR08X76QDS8H7W19XQW",
+    "drawn": [
+     1218,
+     107
+    ],
+    "rect_mean": 0.15,
+    "band_mean": 0.735,
+    "p999": 9.7
+   },
+   {
+    "asset": "assets/tears/tear_051_edge.webp",
+    "piece": "margin-01M1M29290CECT4GB84Z9HMXNY",
+    "drawn": [
+     1218,
+     99
+    ],
+    "rect_mean": 0.136,
+    "band_mean": 0.577,
+    "p999": 7.5
+   },
+   {
+    "asset": "assets/tears/tear_031_edge.webp",
+    "piece": "margin-01M1M1R3A0PT3J336CDZYHMJBS",
+    "drawn": [
+     1218,
+     90
+    ],
+    "rect_mean": 0.077,
+    "band_mean": 0.474,
+    "p999": 5.8
+   },
+   {
+    "asset": "assets/tears/tear_005_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     685
+    ],
+    "rect_mean": 0.195,
+    "band_mean": 1.098,
+    "p999": 12.1
+   },
+   {
+    "asset": "assets/tears/tear_043_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     513
+    ],
+    "rect_mean": 0.159,
+    "band_mean": 0.867,
+    "p999": 10.2
+   },
+   {
+    "asset": "assets/tears/tear_020_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     372
+    ],
+    "rect_mean": 0.197,
+    "band_mean": 1.003,
+    "p999": 10.8
+   },
+   {
+    "asset": "assets/tears/tear_001_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     676
+    ],
+    "rect_mean": 0.194,
+    "band_mean": 1.108,
+    "p999": 12.5
+   },
+   {
+    "asset": "assets/tears/tear_045_edge.webp",
+    "piece": "margin-01M1M09C68FQ5MRZPPWFPGPRGA",
+    "drawn": [
+     1218,
+     102
+    ],
+    "rect_mean": 0.117,
+    "band_mean": 0.661,
+    "p999": 6.9
+   },
+   {
+    "asset": "assets/tears/tear_023_edge.webp",
+    "piece": "margin-01M1KZD6TGX24EBZG6E3GAT3BM",
+    "drawn": [
+     1218,
+     89
+    ],
+    "rect_mean": 0.075,
+    "band_mean": 0.458,
+    "p999": 5.5
+   },
+   {
+    "asset": "assets/tears/tear_056_edge.webp",
+    "piece": "",
+    "drawn": [
+     1094,
+     368
+    ],
+    "rect_mean": 0.121,
+    "band_mean": 0.772,
+    "p999": 7.6
+   },
+   {
+    "asset": "assets/tears/tear_011_edge.webp",
+    "piece": "composer",
+    "drawn": [
+     1356,
+     166
+    ],
+    "rect_mean": 0.135,
+    "band_mean": 0.68,
+    "p999": 8.4
+   },
+   {
+    "asset": "assets/tears/tear_053_edge.webp",
+    "piece": "search_query",
+    "drawn": [
+     1356,
+     240
+    ],
+    "rect_mean": 0.136,
+    "band_mean": 0.752,
+    "p999": 9.0
+   },
+   {
+    "asset": "assets/tears/tear_008_edge.webp",
+    "piece": "facet_everything",
+    "drawn": [
+     332,
+     82
+    ],
+    "rect_mean": 0.058,
+    "band_mean": 0.353,
+    "p999": 2.1
+   },
+   {
+    "asset": "assets/tears/tear_029_edge.webp",
+    "piece": "facet_written",
+    "drawn": [
+     242,
+     97
+    ],
+    "rect_mean": 0.091,
+    "band_mean": 0.491,
+    "p999": 2.8
+   },
+   {
+    "asset": "assets/tears/tear_050_edge.webp",
+    "piece": "facet_photographs",
+    "drawn": [
+     357,
+     76
+    ],
+    "rect_mean": 0.057,
+    "band_mean": 0.327,
+    "p999": 2.4
+   },
+   {
+    "asset": "assets/tears/tear_012_edge.webp",
+    "piece": "facet_video",
+    "drawn": [
+     192,
+     95
+    ],
+    "rect_mean": 0.052,
+    "band_mean": 0.304,
+    "p999": 1.6
+   },
+   {
+    "asset": "assets/tears/tear_034_edge.webp",
+    "piece": "facet_talking",
+    "drawn": [
+     238,
+     75
+    ],
+    "rect_mean": 0.049,
+    "band_mean": 0.285,
+    "p999": 1.6
+   },
+   {
+    "asset": "assets/tears/tear_054_edge.webp",
+    "piece": "facet_feelings",
+    "drawn": [
+     419,
+     72
+    ],
+    "rect_mean": 0.095,
+    "band_mean": 0.532,
+    "p999": 5.9
+   },
+   {
+    "asset": "assets/tears/tear_016_edge.webp",
+    "piece": "facet_dates",
+    "drawn": [
+     197,
+     79
+    ],
+    "rect_mean": 0.041,
+    "band_mean": 0.263,
+    "p999": 1.3
+   },
+   {
+    "asset": "assets/tears/tear_039_edge.webp",
+    "piece": "facet_the list",
+    "drawn": [
+     266,
+     72
+    ],
+    "rect_mean": 0.052,
+    "band_mean": 0.265,
+    "p999": 1.4
+   },
+   {
+    "asset": "assets/tears/tear_002_edge.webp",
+    "piece": "facet_state",
+    "drawn": [
+     192,
+     77
+    ],
+    "rect_mean": 0.056,
+    "band_mean": 0.334,
+    "p999": 1.7
+   },
+   {
+    "asset": "assets/tears/tear_044_edge.webp",
+    "piece": "facet_noor",
+    "drawn": [
+     184,
+     107
+    ],
+    "rect_mean": 0.037,
+    "band_mean": 0.232,
+    "p999": 1.2
+   },
+   {
+    "asset": "assets/tears/tear_007_edge.webp",
+    "piece": "facet_teo",
+    "drawn": [
+     169,
+     72
+    ],
+    "rect_mean": 0.039,
+    "band_mean": 0.231,
+    "p999": 1.3
+   },
+   {
+    "asset": "assets/tears/tear_027_edge.webp",
+    "piece": "facet_this year",
+    "drawn": [
+     299,
+     85
+    ],
+    "rect_mean": 0.069,
+    "band_mean": 0.348,
+    "p999": 2.1
+   },
+   {
+    "asset": "assets/tears/tear_001_edge.webp",
+    "piece": "hit.01KZ5THC6GKTN6JK7V1X6SPKVM",
+    "drawn": [
+     1368,
+     458
+    ],
+    "rect_mean": 0.189,
+    "band_mean": 1.076,
+    "p999": 12.1
+   },
+   {
+    "asset": "assets/tears/tear_020_edge.webp",
+    "piece": "hit.01KZ5TAR98HM1YCSC72P57B58R",
+    "drawn": [
+     1368,
+     445
+    ],
+    "rect_mean": 0.21,
+    "band_mean": 1.073,
+    "p999": 11.2
+   },
+   {
+    "asset": "assets/tears/tear_043_edge.webp",
+    "piece": "hit.01KZ5SYSF8VY7FDB5A9KVMFWBE",
+    "drawn": [
+     1368,
+     433
+    ],
+    "rect_mean": 0.147,
+    "band_mean": 0.817,
+    "p999": 9.3
+   },
+   {
+    "asset": "assets/tears/tear_005_edge.webp",
+    "piece": "hit.01KTRP1BQ0ZRM9VF2GWFH89TVJ",
+    "drawn": [
+     1368,
+     410
+    ],
+    "rect_mean": 0.175,
+    "band_mean": 0.995,
+    "p999": 10.7
+   },
+   {
+    "asset": "assets/tears/tear_026_edge.webp",
+    "piece": "hit.01KN3W80B8AFCBMABQYAKE0SXW",
+    "drawn": [
+     1368,
+     360
+    ],
+    "rect_mean": 0.127,
+    "band_mean": 0.838,
+    "p999": 10.3
+   },
+   {
+    "asset": "assets/tears/tear_048_edge.webp",
+    "piece": "hit.01KJPQVGGGZE962R8MGXHHFRMQ",
+    "drawn": [
+     1368,
+     386
+    ],
+    "rect_mean": 0.163,
+    "band_mean": 0.992,
+    "p999": 11.4
+   },
+   {
+    "asset": "assets/tears/tear_010_edge.webp",
+    "piece": "hit.01KADK3MM8RNMZ8NV6MW8MMR35",
+    "drawn": [
+     1368,
+     331
+    ],
+    "rect_mean": 0.124,
+    "band_mean": 0.8,
+    "p999": 8.2
+   },
+   {
+    "asset": "assets/tears/tear_032_edge.webp",
+    "piece": "hit.01KADEZNZ8ZYT6P4CCDT8B257K",
+    "drawn": [
+     1368,
+     239
+    ],
+    "rect_mean": 0.143,
+    "band_mean": 0.785,
+    "p999": 8.4
+   }
+  ]
+ }
+}

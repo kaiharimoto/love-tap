@@ -137,11 +137,16 @@ void main() {
     final edgeDrawn = (edge['drawn'] as List).cast<int>();
     const dpr = 3.0;
     final slice = (edge['slice'] as num).toDouble();
+    // the edge is packed smaller than the geometry it is laid out at (kEdgeDownsample), so each
+    // decoded pixel covers that many laid-out ones, and the sidecar has to say so
+    final k = (edge['downsample'] as num).toDouble();
+    expect(k, kEdgeDownsample, reason: 'the lit edge does not declare the downsample it is drawn at');
     for (final axis in [0, 1]) {
-      final wanted = edgeSrc[axis] * 2 * slice;              // logical px the two slices want
+      final wanted = edgeSrc[axis] * k * 2 * slice;          // logical px the two slices want
       final box = edgeDrawn[axis] / dpr;                     // logical px there are
-      final expected = (box < wanted ? box / wanted : 1.0) * dpr;
-      expect(edgeFixed[axis], closeTo(expected, 0.002),
+      final expected = (box < wanted ? box / wanted : 1.0) * dpr * k;
+      // `drawn` is rounded to a device pixel, and that rounding is multiplied by k with the rest
+      expect(edgeFixed[axis], closeTo(expected, 0.002 * k),
           reason: 'the lit edge declares ${edgeFixed[axis]}x through its sliced edges on axis '
               '$axis, and its own src/drawn/slice say ${expected.toStringAsFixed(3)}x, so the '
               'declaration is decorative rather than arithmetic');

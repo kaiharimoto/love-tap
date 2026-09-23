@@ -96,8 +96,9 @@ Widget paintWhenItArrives(BuildContext context, Widget child, int? frame, bool w
 /// Alpha-only packing is not a lever here and was measured not to be: a `ui.Image` has no
 /// single-channel pixel format, so a grey mask decodes to the same four bytes a pixel (firing 51).
 class MaskCache {
-  /// Decoded bytes the cache keeps for pieces that are no longer drawing them. Four of the largest
-  /// masks and their edges (1024x824, 3.4 MB each) is about a screenful's worth to come back to.
+  /// Decoded bytes the cache keeps for pieces that are no longer drawing them. Ten of the largest
+  /// masks (1024x824, 3.4 MB each) and their edges (packed at half, 0.8 MB) is about a screenful's
+  /// worth to come back to.
   static const int budget = 48 << 20;
 
   static final Map<String, ui.Image> _images = {}; // insertion order is recency order
@@ -418,7 +419,8 @@ class PaperPiece extends StatelessWidget {
         if (tearId != null)
           // sliced the same way the mask is, so the lit fibres on the torn edge keep the length
           // they were rendered at however tall the sheet turns out to be
-          Positioned.fill(child: NineSliced(asset: tearAsset('${tearId!}_edge'))),
+          Positioned.fill(
+              child: NineSliced(asset: tearAsset('${tearId!}_edge'), downsample: kEdgeDownsample)),
         _WithinTear(
             safe: safe, padding: padding, hug: hug, child: child ?? const SizedBox.shrink()),
         ...overlays,
@@ -702,6 +704,18 @@ class SlicedMasks {
   }
 }
 
+/// How many times smaller the lit edges are packed than the masks they light, on each axis.
+///
+/// `tools/pack_assets.py` writes `*_edge.webp` at half the mask's size, and [NinePainter] draws it
+/// at the mask's geometry, so nothing on the glass moves: only the resolution of a soft light band
+/// does. Until firing 54 the edges were packed at the masks' 1024 and were the larger half of what
+/// a screen holds decoded -- 78.0 MB of `12_search`'s 158 MB, for a band that is a glow and not a
+/// cut. Measured off that screen's 41 declared edges before the change: drawn at their own
+/// geometry over paper, a 2x edge differs from the 1024 one by at most 0.26/255 over a piece and
+/// 1.1/255 over the band itself; 3x reaches 2.1/255 on the band, which is why it is 2.
+/// `test/the_lit_edge_is_packed_at_half_test.dart` holds the pack to it.
+const double kEdgeDownsample = 2;
+
 /// An image drawn as a nine-slice: the four corners and the four edges at the scale they were
 /// rendered at, and only the middle stretched.
 ///
@@ -709,9 +723,14 @@ class SlicedMasks {
 /// visible, and every one of these is drawn into a box of a different shape from the render. So
 /// the image is decoded through the same cache the masks use and drawn straight.
 class NineSliced extends StatefulWidget {
-  const NineSliced({super.key, required this.asset, this.edge = 0.4, this.opacity = 1.0});
+  const NineSliced(
+      {super.key, required this.asset, this.edge = 0.4, this.opacity = 1.0, this.downsample = 1.0});
 
   final String asset;
+
+  /// How many times smaller [asset] was packed than the geometry it is drawn at. The slices land
+  /// where a full-size render's would; see [kEdgeDownsample].
+  final double downsample;
 
   /// How much of the render, in from each edge, is the torn edge itself rather than the paper
   /// inside it. Measured off the masks: the fibres reach about a fifth of the way in and the
@@ -731,7 +750,8 @@ class _NineSlicedState extends State<NineSliced> with HoldsAMask<NineSliced> {
   Widget build(BuildContext context) {
     final image = held;
     if (image == null) return const SizedBox.shrink();
-    return CustomPaint(painter: NinePainter(widget.asset, image, widget.edge, widget.opacity));
+    return CustomPaint(
+        painter: NinePainter(widget.asset, image, widget.edge, widget.opacity, widget.downsample));
   }
 }
 
@@ -744,7 +764,7 @@ class _NineSlicedState extends State<NineSliced> with HoldsAMask<NineSliced> {
 /// `CustomPaint`. So a reader asking which of the three makes a stepped boundary could see one of
 /// the three suspects. Nothing about what is drawn changes; the painter simply says what it is.
 class NinePainter extends CustomPainter {
-  NinePainter(this.asset, this.image, this.edge, this.opacity);
+  NinePainter(this.asset, this.image, this.edge, this.opacity, [this.downsample = 1.0]);
 
   /// The asset this draws, e.g. `assets/tears/tear_004_edge.webp`.
   final String asset;
@@ -752,23 +772,36 @@ class NinePainter extends CustomPainter {
   final double edge;
   final double opacity;
 
+  /// See [NineSliced.downsample].
+  final double downsample;
+
   @override
   void paint(Canvas canvas, Size size) {
     if (size.isEmpty) return;
     final w = image.width.toDouble(), h = image.height.toDouble();
+    // drawImageNine lays the slices down at one canvas unit a source pixel, so an image packed
+    // [downsample] times smaller is drawn on a canvas that many times larger: the slices, and
+    // the shrink-to-fit when the box is narrower than them, land exactly where the full-size
+    // render's did
+    canvas.save();
+    canvas.scale(downsample);
     canvas.drawImageNine(
       image,
       Rect.fromLTRB(w * edge, h * edge, w * (1 - edge), h * (1 - edge)),
-      Offset.zero & size,
+      Offset.zero & (size / downsample),
       Paint()
         ..filterQuality = FilterQuality.medium
         ..color = Color.fromRGBO(0, 0, 0, opacity),
     );
+    canvas.restore();
   }
 
   @override
   bool shouldRepaint(NinePainter old) =>
-      !identical(old.image, image) || old.edge != edge || old.opacity != opacity;
+      !identical(old.image, image) ||
+      old.edge != edge ||
+      old.opacity != opacity ||
+      old.downsample != downsample;
 }
 
 /// The contact shadow of one piece: the library's measured falloff laid around the piece's own

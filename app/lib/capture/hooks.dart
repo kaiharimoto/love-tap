@@ -474,8 +474,12 @@ class CaptureHooks {
       if (painter is NinePainter && node.hasSize && !node.size.isEmpty) {
         final box = node.size;
         final img = painter.image;
-        final fx = _nineScale(img.width.toDouble(), box.width, painter.edge);
-        final fy = _nineScale(img.height.toDouble(), box.height, painter.edge);
+        // the lattice is laid out at the size the edge was rendered for, and each of its source
+        // pixels then covers [NinePainter.downsample] of those: the magnification is per pixel
+        // of the image actually decoded, which is what a reader comparing resolutions needs
+        final k = painter.downsample;
+        final fx = _nineScale(img.width * k, box.width, painter.edge).map((f) => f * k).toList();
+        final fy = _nineScale(img.height * k, box.height, painter.edge).map((f) => f * k).toList();
         final scale = fx[0] * dpr > fy[0] * dpr ? fx[0] * dpr : fy[0] * dpr;
         final rect = MatrixUtils.transformRect(node.getTransformTo(view), Offset.zero & box);
         out.add({
@@ -485,6 +489,7 @@ class CaptureHooks {
           'scale': double.parse(scale.toStringAsFixed(3)),
           'fit': 'nine',
           'slice': painter.edge,
+          'downsample': painter.downsample,
           'fixed': [
             double.parse((fx[0] * dpr).toStringAsFixed(3)),
             double.parse((fy[0] * dpr).toStringAsFixed(3)),
