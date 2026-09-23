@@ -10,15 +10,15 @@
  "steps": [
   {
    "do": "goTo",
-   "ms": 3201
+   "ms": 4493
   },
   {
    "do": "wait",
-   "ms": 1803
+   "ms": 1801
   },
   {
    "do": "goTo",
-   "ms": 5267
+   "ms": 5994
   },
   {
    "do": "wait",
@@ -26,39 +26,39 @@
   },
   {
    "do": "openCorner",
-   "ms": 2804
+   "ms": 1462
   },
   {
    "do": "frames",
-   "ms": 68303
+   "ms": 61400
   },
   {
    "do": "sendFeeling",
-   "ms": 1925
+   "ms": 1854
   },
   {
    "do": "frames",
-   "ms": 144525
+   "ms": 131232
   },
   {
    "do": "sendFeeling",
-   "ms": 1837
+   "ms": 1274
   },
   {
    "do": "frames",
-   "ms": 239849
+   "ms": 212879
   },
   {
    "do": "openCorner",
-   "ms": 957
+   "ms": 804
   },
   {
    "do": "frames",
-   "ms": 61816
+   "ms": 54351
   },
   {
    "do": "report",
-   "ms": 430
+   "ms": 419
   }
  ],
  "shots": [
@@ -181,20 +181,20 @@
    "visible": [
     "01M1M4ZQQ0H0PPVTKMMQEE268D",
     "01M1M59VY0YA13H9M86HTA6XNP",
-    "01M1MCJ1M02CDNKZD17AYTKFKK",
-    "01M1MCJ1M02CDNKZD17AYTKFKM"
+    "01M1MCJ1M02CDNKZD17AYTKFKH",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ"
    ],
    "tears": {
     "01M1M4ZQQ0H0PPVTKMMQEE268D": "tear_042",
     "01M1M59VY0YA13H9M86HTA6XNP": "tear_001",
-    "01M1MCJ1M02CDNKZD17AYTKFKK": "tear_020",
-    "01M1MCJ1M02CDNKZD17AYTKFKM": "tear_043"
+    "01M1MCJ1M02CDNKZD17AYTKFKH": "tear_020",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ": "tear_043"
    },
    "stocks": {
     "01M1M4ZQQ0H0PPVTKMMQEE268D": "receipt_01",
     "01M1M59VY0YA13H9M86HTA6XNP": "graph_02",
-    "01M1MCJ1M02CDNKZD17AYTKFKK": "lined_01",
-    "01M1MCJ1M02CDNKZD17AYTKFKM": "legal_02"
+    "01M1MCJ1M02CDNKZD17AYTKFKH": "lined_04",
+    "01M1MCJ1M02CDNKZD17AYTKFKJ": "legal_01"
    },
    "scroll": {
     "first": 8385,
@@ -247,12 +247,10 @@
   }
  ],
  "blob_waits": [],
- "install_ms": 19374,
- "cold_ms": 2029,
+ "install_ms": 14836,
+ "cold_ms": 1966,
  "reopened": true,
  "events_at_open": 14061,
- "problems": [
-  "pageerror: PlaywrightError — at b4x (http://127.0.0.1:8799/main.dart.js:6585:8)"
- ],
- "ok": false
+ "problems": [],
+ "ok": true
 }

@@ -7468,3 +7468,52 @@ Things to look at on that capture:
 - `hands_selftest.json` in the logs.
 
 Then DIAGNOSE, with the builder sheet written first.
+
+## Firing 56 — OBSERVE, cycle 3 — 2026-09-23 15:53–18:35Z
+
+**Step 0 passed**: the checkout was 37 commits behind, `--ff-only` took it, and the dry-run read
+`Everything up-to-date`. Lease taken and pushed before anything else.
+
+### The capture
+
+- Fresh container. Ran `tools/apt-prereqs.sh`, then the CONTINUE.md §5 ffmpeg fix, then
+  `bootstrap.sh --profile=web`. `toolchain/.done` held `playwright`.
+- Seeded `evidence/.previous` from firing 54's committed artifacts, so `DIFF.json` is a real
+  comparison: 15 changed, 2 absent.
+- **One full `./capture.sh`, built from `0480996`.** That is firing 55's tip plus a lease; no app
+  change. It gave 14 of 17.
+- **`15_authored_feeling` was refused on a pageerror.** Re-captured it alone from the same code,
+  and it passed with 308 frames at 60 fps. **15 of 17, the ceiling here.**
+- `git diff --stat 0480996..HEAD -- app assets seed` is empty.
+
+### What the capture said
+
+- **Chat hero handwriting:** avoidable repeats fell 19 → 2, and same-letter stalls fell 1 → 0.
+  The population held: 23 runs, 53 pairs, 384 glyphs.
+- **Settings tear centre:** `settings.notify` `tear_032` reads 4.894 → **4.00**, as predicted.
+  The setup sheet reads 6.96 → 6.51, also as predicted.
+- **`hands_selftest`:** passes on the shipped fonts, with 0 failures over 202 runs.
+  - Its red in the full run was **this container, not the fonts**. `uharfbuzz` was missing.
+  - `capture.sh` runs `hands.py` under `|| true`, so the missing import had also left every
+    `*.hands.json` from firing 54, silently.
+  - I installed it, re-ran both scripts the way `capture.sh` runs them, and committed the
+    results. `tools/apt-prereqs.sh` now installs it.
+- **The brown disc is a punch hole.** It is the upper hole of `assets/paper/looseleaf_04.webp`,
+  settings.notify's stock.
+  - The hole is *painted*, opaque, in the render's background colour: rgb(171,141,114) in the
+    asset against rgb(171,140,116) on the glass.
+  - So the desk does not show through, and the disc is not an undeclared widget.
+  - The cover fit puts it in the matrix's text column, under `a picture`, which still reads
+    ink_core 3.81.
+- **The pageerror has a shape now.** `b4x` at `main.dart.js:6585` is dart2js's
+  `Error.throwWithStackTrace`: a Dart error rethrown with its message lost.
+  - It has refused 13 twice (firings 51 and 54) and 15 once (this firing), and passed on a retry
+    each time.
+  - It is a using-it defect to file, not a flake.
+- **Legibility:** 15 of 413 declared runs are below floor, against 23 of 422. The population
+  moved, so match runs before crediting it.
+- **`surfaces`:** the fold sheet is flat, byte-identical to firing 54. It is fenced.
+
+### Next
+
+**DIAGNOSE.** Write the builder sheet first.
