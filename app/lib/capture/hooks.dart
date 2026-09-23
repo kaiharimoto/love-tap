@@ -557,11 +557,12 @@ class CaptureHooks {
       final composed = SlicedMasks.composedAt[SlicedMasks.composedKey(asset, node.size)];
       if (mask != null && composed != null) {
         final box = node.size;
-        // per axis since firing 51: the fixed band gives way on a piece much larger than its mask
-        final ex = SlicedMasks.sliceFor(mask[0].toDouble(), composed[0].toDouble());
-        final ey = SlicedMasks.sliceFor(mask[1].toDouble(), composed[1].toDouble());
-        final fx = _nineScale(mask[0].toDouble(), composed[0].toDouble(), ex);
-        final fy = _nineScale(mask[1].toDouble(), composed[1].toDouble(), ey);
+        // per axis since firing 51: the fixed band gives way on a piece much larger than its mask;
+        // per edge since firing 55, each no thinner than its own mask's fibres
+        final e = SlicedMasks.slicesFor(asset, mask[0].toDouble(), mask[1].toDouble(),
+            composed[0].toDouble(), composed[1].toDouble());
+        final fx = _nineScale(mask[0].toDouble(), composed[0].toDouble(), e[0], e[2]);
+        final fy = _nineScale(mask[1].toDouble(), composed[1].toDouble(), e[1], e[3]);
         // and then the shader, which stretches the whole composition over the piece
         final sx = box.width * dpr / composed[0];
         final sy = box.height * dpr / composed[1];
@@ -574,7 +575,8 @@ class CaptureHooks {
           'drawn': [(box.width * dpr).round(), (box.height * dpr).round()],
           'scale': double.parse(scale.toStringAsFixed(3)),
           'fit': 'mask',
-          'slice': [ex, ey],
+          'slice': [e[0], e[1]],
+          'slice_far': [e[2], e[3]],
           'fixed': [
             double.parse((fx[0] * sx).toStringAsFixed(3)),
             double.parse((fy[0] * sy).toStringAsFixed(3)),
@@ -600,10 +602,12 @@ class CaptureHooks {
   /// — unless the box is narrower than the two of them together, and then the whole lattice is
   /// shrunk proportionally and there is no middle left at all. Everything downstream of the draw
   /// (a device pixel ratio, a shader stretching the result again) is the caller's to multiply in.
-  static List<double> _nineScale(double src, double dst, double edge) {
-    final fixed = src * 2 * edge;
+  /// [edge] is the near band and [far] the far one, when a mask's two edges are sliced apart.
+  static List<double> _nineScale(double src, double dst, double edge, [double? far]) {
+    final bands = edge + (far ?? edge);
+    final fixed = src * bands;
     final shrink = fixed <= 0 ? 1.0 : (dst < fixed ? dst / fixed : 1.0);
-    final middleSrc = src * (1 - 2 * edge);
+    final middleSrc = src * (1 - bands);
     final middleDst = dst - fixed * shrink;
     if (middleSrc <= 0 || middleDst <= 0) return [shrink, 0.0];
     return [shrink, middleDst / middleSrc];

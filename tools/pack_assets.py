@@ -137,6 +137,41 @@ def safe_inset(mask_path, box):
     ]
 
 
+def fibre_depths(mask_path, box):
+    """How deep each torn edge's fibres reach, as fractions of the crop: [left, top, right, bottom].
+
+    The app nine-slices a mask onto a piece bigger than it, and whatever of the torn edge falls
+    outside the fixed bands is stretched along with the paper. On a big sheet the bands have to
+    thin to keep the torn sides from being stretched too far (SlicedMasks.sliceFor), and until
+    firing 55 they stopped at one floor for every mask and every edge: 0.25, the deepest fibre
+    firing 51 found on five masks. Most edges' fibres end far shallower -- tear_032's bottom at
+    0.064 -- so a uniform floor held settings' torn sides at 4.9x to protect fibres it did not
+    have, and on a few edges (tear_014's bottom, 0.28) it was not deep enough.
+
+    Per column (per row, for the sides), the depth from the edge at which the alpha first holds
+    solid for a hundredth of the crop, over the middle four fifths of the edge so the other axis's
+    torn corner is not read as this edge's fibre; the 99th percentile of that, capped at the 0.45
+    the search looks through. The app never slices past its own 0.4, whatever this says."""
+    from PIL import Image
+    import numpy as np
+    a = np.asarray(Image.open(mask_path).convert("L"), dtype=np.float32) / 255.0
+    a = a[box[1]:box[3], box[0]:box[2]]
+
+    def one(a):
+        h, w = a.shape
+        lim = int(h * 0.45)
+        run = max(4, round(h / 100))
+        cols = a[:lim, int(w * 0.1):int(w * 0.9)] >= 0.85
+        acc = np.zeros(cols.shape[1], np.int32)
+        first = np.full(cols.shape[1], lim, np.int32)
+        for y in range(lim - 1, -1, -1):
+            acc = np.where(cols[y], acc + 1, 0)
+            first = np.where(acc >= run, y, first)
+        return round(float(np.percentile(first / h, 99)) + 0.005, 3)
+
+    return [one(a.T), one(a), one(a.T[::-1]), one(a[::-1])]
+
+
 # How much wider than the piece the packed contact shadow is. The renderer frames the shadow wider
 # than the sheet because the visible part of one is the part outside the paper; packing keeps that
 # margin relative to the piece's own box, so the app can put every shadow back with one number
@@ -174,6 +209,7 @@ def pack_family(name, index, verbose=True):
     finer = []
     boxes = {}
     safes = {}
+    fibres = {}
     frame = render_frame() if name == "tears" else 1.0
     if name == "tears":
         for fn in sorted(os.listdir(src_dir)):
@@ -183,6 +219,7 @@ def pack_family(name, index, verbose=True):
                 if box:
                     boxes[stem] = box
                     safes[stem] = safe_inset(os.path.join(src_dir, fn), box)
+                    fibres[stem] = fibre_depths(os.path.join(src_dir, fn), box)
     for fn in sorted(os.listdir(src_dir)):
         if not fn.lower().endswith((".png", ".webp", ".jpg")):
             continue
@@ -209,6 +246,8 @@ def pack_family(name, index, verbose=True):
             row["safe"] = safes[stem]
             sf = safes[stem]
             row["usable"] = round((1 - sf[0] - sf[2]) * (1 - sf[1] - sf[3]), 4)
+        if stem in fibres:
+            row["fibres"] = fibres[stem]
         out.append(row)
         if plain_mask:
             # The same crop at the resolution it was rendered at, for a piece too big for the

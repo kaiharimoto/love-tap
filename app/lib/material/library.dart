@@ -6,7 +6,7 @@ import 'package:flutter/painting.dart' show Rect, Size;
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
 class LibraryEntry {
-  const LibraryEntry(this.id, this.w, this.h, [this.safe, this.usable = 1.0]);
+  const LibraryEntry(this.id, this.w, this.h, [this.safe, this.usable = 1.0, this.fibres]);
   final String id;
   final int w;
   final int h;
@@ -17,6 +17,11 @@ class LibraryEntry {
 
   /// How much of the piece is inside that rectangle: a long strip has little, a half sheet a lot.
   final double usable;
+
+  /// For a tear mask: how deep each torn edge's fibres reach (left, top, right, bottom, as
+  /// fractions), which is as thin as `SlicedMasks` may slice that edge on a big sheet.
+  /// tools/pack_assets.py measures it from the mask itself.
+  final List<double>? fibres;
 
   double get aspect => h == 0 ? 1 : w / h;
 }
@@ -95,6 +100,7 @@ class MaterialLibrary {
               (e['h'] as num).toInt(),
               (e['safe'] as List?)?.map((x) => (x as num).toDouble()).toList(),
               (e['usable'] as num?)?.toDouble() ?? 1.0,
+              (e['fibres'] as List?)?.map((x) => (x as num).toDouble()).toList(),
             ))
         .toList();
     final folds = <String, int>{};

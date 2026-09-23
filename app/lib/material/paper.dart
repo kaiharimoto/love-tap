@@ -765,18 +765,56 @@ class SlicedMasks {
   /// piece grows, just far enough to hold the centre at [cap], and never thinner than [fibres].
   /// A piece up to 1.6x its mask on an axis is sliced exactly as before, which is 156 of the 172
   /// torn pieces in the set.
-  static double sliceFor(double src, double dst) {
-    if (src <= 0) return edge;
-    final f = (cap * src - dst) / (2 * src * (cap - 1));
-    return f.clamp(fibres, edge).toDouble();
+  static double sliceFor(double src, double dst) => bandsFor(src, dst).$1;
+
+  /// The two fixed bands for one axis, `(near, far)`, when the near edge's fibres reach [near] of
+  /// the mask and the far edge's reach [far].
+  ///
+  /// [sliceFor] with a floor per edge instead of one [fibres] for all of them. The bands together
+  /// give way exactly as [sliceFor]'s do, as evenly as the floors allow, and neither is ever
+  /// thinner than its own edge's fibres. Until firing 55 every edge of every mask stopped at 0.25,
+  /// which held settings' torn sides at 4.9x to protect a bottom edge whose fibres end at 0.066.
+  static (double, double) bandsFor(double src, double dst,
+      [double near = fibres, double far = fibres]) {
+    near = math.min(near, edge);
+    far = math.min(far, edge);
+    if (src <= 0) return (edge, edge);
+    final total = ((cap * src - dst) / (src * (cap - 1))).clamp(near + far, 2 * edge).toDouble();
+    // max, because `near + far - near` is not always `far` in floating point
+    if (total / 2 < near) return (near, math.max(far, total - near));
+    if (total / 2 < far) return (math.max(near, total - far), far);
+    return (total / 2, total / 2);
+  }
+
+  /// How deep [asset]'s fibres reach from each edge, `[left, top, right, bottom]`, as
+  /// `tools/pack_assets.py` measured them; [fibres] on every edge for a mask it did not measure.
+  /// The finer copy is the same crop, so it answers for its mask.
+  static List<double> fibresOf(String asset) {
+    final id = asset.split('/').last.split('.').first;
+    final measured = MaterialLibrary.loaded
+        ? MaterialLibrary.instance.entry(MaterialLibrary.instance.tears, id)?.fibres
+        : null;
+    return measured != null && measured.length == 4 ? measured : const [fibres, fibres, fibres, fibres];
+  }
+
+  /// The four fixed bands `[left, top, right, bottom]` [asset], a mask [mw] x [mh], is sliced at
+  /// when composed to [w] x [h]. [at] slices with exactly these, and `CaptureHooks` declares them.
+  static List<double> slicesFor(String asset, double mw, double mh, double w, double h) {
+    final f = fibresOf(asset);
+    final (l, r) = bandsFor(mw, w, f[0], f[2]);
+    final (t, b) = bandsFor(mh, h, f[1], f[3]);
+    return [l, t, r, b];
   }
 
   /// Whether a piece of [size] logical pixels is too big for [mask]: past the point on either axis
   /// where [sliceFor] starts giving the fixed bands up, which is 1.6x. Below it the mask is sliced
   /// exactly as it always was and nothing finer is decoded (see [FinerMask]).
-  static bool wantsFiner(ui.Image mask, Size size, double dpr) =>
-      sliceFor(mask.width.toDouble(), size.width * dpr) < edge ||
-      sliceFor(mask.height.toDouble(), size.height * dpr) < edge;
+  static bool wantsFiner(ui.Image mask, Size size, double dpr) => wantsFinerFor(
+      mask.width.toDouble(), mask.height.toDouble(), size.width * dpr, size.height * dpr);
+
+  /// [wantsFiner] for a mask [mw] x [mh] drawn at [w] x [h] device pixels.
+  static bool wantsFinerFor(double mw, double mh, double w, double h) =>
+      sliceFor(mw, w) < edge || sliceFor(mh, h) < edge;
 
   /// Which asset a piece's mask was actually composed from, keyed by the asset it asked for and
   /// its box: `composedKey(tearAsset(id), box)` to `tearAsset(id)` or `finerTearAsset(id)`. So
@@ -803,10 +841,10 @@ class SlicedMasks {
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
     final mw = mask.width.toDouble(), mh = mask.height.toDouble();
-    final ex = sliceFor(mw, w.toDouble()), ey = sliceFor(mh, h.toDouble());
+    final e = slicesFor(asset, mw, mh, w.toDouble(), h.toDouble());
     canvas.drawImageNine(
       mask,
-      Rect.fromLTRB(mw * ex, mh * ey, mw * (1 - ex), mh * (1 - ey)),
+      Rect.fromLTRB(mw * e[0], mh * e[1], mw * (1 - e[2]), mh * (1 - e[3])),
       Rect.fromLTWH(0, 0, w.toDouble(), h.toDouble()),
       Paint()..filterQuality = FilterQuality.medium,
     );
