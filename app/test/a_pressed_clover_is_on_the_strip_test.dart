@@ -102,14 +102,19 @@ void main() {
     final painted = tester.renderObject<RenderParagraph>(find.textContaining('week one'));
     final inkWidth = painted.getMaxIntrinsicWidth(double.infinity) * 3;
 
-    var accent = 0, green = 0, underWords = 0;
+    var accent = 0, green = 0, underWords = 0, ruleUnderWords = 0;
     for (var y = 0; y < h; y++) {
       for (var x = 0; x < w; x++) {
         final i = (y * w + x) * 4;
         final (c, hue) = chromaHue(px[i], px[i + 1], px[i + 2]);
         if (c < 0.09) continue;
         accent++;
-        if (hue < 120 || hue > 165) continue; // the strip's own printed red rule, say
+        if (hue < 120 || hue > 165) {
+          // the strip stock's printed red margin rule, which the status line used to be written
+          // across (a_word_is_written_beside_the_margin_test.dart)
+          if (words.contains(Offset(x.toDouble(), y.toDouble()))) ruleUnderWords++;
+          continue;
+        }
         green++;
         if (words.contains(Offset(x.toDouble(), y.toDouble())) && x < words.left + inkWidth) {
           underWords++;
@@ -119,12 +124,13 @@ void main() {
     final frame = 1440 * 3120;
     // ignore: avoid_print
     print('accent ${accent}px = ${(accent / frame).toStringAsFixed(5)} of the still; family D '
-        '${(green / math.max(1, accent)).toStringAsFixed(3)} of it; under the status line: $underWords');
+        '${(green / math.max(1, accent)).toStringAsFixed(3)} of it; under the status line: $underWords clover, $ruleUnderWords rule');
     expect(w, 1440);
     expect(accent / frame, greaterThanOrEqualTo(0.0105),
         reason: 'the clover no longer carries 1% of the screen, with the 2% palette.py\'s '
             '700-pixel sampling takes off an edge');
     expect(green / accent, greaterThan(0.9), reason: 'the accent area is not the clover');
     expect(underWords, 0, reason: 'the clover is over the partner\'s words');
+    expect(ruleUnderWords, 0, reason: 'the partner\'s words are written across the margin rule');
   });
 }

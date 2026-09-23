@@ -348,6 +348,7 @@ class PaperPiece extends StatelessWidget {
     this.child,
     this.stockAlignment = Alignment.center,
     this.stockScale = 1.0,
+    this.besideTheMargin = false,
     this.overlays = const [],
   });
 
@@ -399,6 +400,27 @@ class PaperPiece extends StatelessWidget {
   /// the same patch of paper.
   final Alignment stockAlignment;
   final double stockScale;
+
+  /// Cut this piece from the paper to the right of its stock's printed margin rule, so the words
+  /// on it are never laid across the rule. On a pad you write beside the red line; a word across
+  /// it sits on the darkest ground in the library, and at dusk no ink in the ladder reads there
+  /// (`a-word-is-written-across-the-printed-margin-rule`, firing 47). The stock is drawn from its
+  /// right edge, just enough larger that the rule falls off the piece's left edge -- which a piece
+  /// can do because it is torn from a sheet, and a sheet is wider than what is torn from it.
+  /// A stock with no rule is drawn exactly as [stockScale] and [stockAlignment] say.
+  final bool besideTheMargin;
+
+  /// [stockScale] and [stockAlignment] for [stock], moved past its margin rule when
+  /// [besideTheMargin] asks and the library says where the rule is.
+  (double, Alignment) stockFraming(String stock) {
+    if (!besideTheMargin || !MaterialLibrary.loaded) return (stockScale, stockAlignment);
+    final m = MaterialLibrary.instance.paperMargin[stock];
+    if (m == null) return (stockScale, stockAlignment);
+    // drawn from the right edge, the rule sits (1 - m[1]) of the stock's width in from it; that
+    // has to be the whole piece, plus a little for the tilt and the torn edge
+    final scale = math.max(stockScale, 1.06 / (1 - m[1]));
+    return (scale, Alignment(1, stockAlignment.y));
+  }
 
   /// Tape, staples, clips: rendered bits laid over the piece.
   final List<Widget> overlays;
@@ -459,6 +481,7 @@ class PaperPiece extends StatelessWidget {
   Widget build(BuildContext context) {
     final dusk = Light.of(context) == LightCondition.dusk;
     final stock = (!dusk || stockId.endsWith('_dusk')) ? stockId : '${stockId}_dusk';
+    final framing = stockFraming(stock);
     final content = Stack(
       children: [
         // Underneath everything, the colour the stock is. The render is what makes it paper, but
@@ -467,12 +490,12 @@ class PaperPiece extends StatelessWidget {
         Positioned.fill(child: ColoredBox(color: Paper.forStock(stock))),
         Positioned.fill(
           child: Transform.scale(
-            scale: stockScale,
-            alignment: stockAlignment,
+            scale: framing.$1,
+            alignment: framing.$2,
             child: Image.asset(
               paperAsset(stock),
               fit: BoxFit.cover,
-              alignment: stockAlignment,
+              alignment: framing.$2,
               gaplessPlayback: true,
               filterQuality: FilterQuality.medium,
               frameBuilder: paintWhenItArrives,

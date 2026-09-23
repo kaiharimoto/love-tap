@@ -267,6 +267,26 @@ def _fold_band(paths):
     return (left, right), rows
 
 
+def measure_paper_margins():
+    """The printed margin rule of each packed stock, `[left, right]` as fractions of its width,
+    found by tools/check/dusk_ground.py's `printed_rules` -- the same reading the dusk ground
+    report makes, so the app and the ruler cannot disagree about where the rule is."""
+    from PIL import Image
+    sys.path.insert(0, os.path.join(ROOT, "tools", "check"))
+    import dusk_ground
+    out = {}
+    d = os.path.join(DST, "paper")
+    for fn in sorted(os.listdir(d)) if os.path.isdir(d) else []:
+        if not fn.endswith(".webp"):
+            continue
+        path = os.path.join(d, fn)
+        m = dusk_ground.printed_rules(path).get("margin")
+        if m:
+            w = Image.open(path).width
+            out[fn[:-5]] = [round(m["at"][0] / w, 4), round((m["at"][1] + 1) / w, 4)]
+    return out
+
+
 def measure_object_ink(verbose=True):
     """The opaque bounding box of each packed object, as fractions of its frame."""
     import numpy as np
@@ -425,6 +445,11 @@ def main(argv=None):
     # smaller ones read as a smudge beside their own name. This is the number that makes `size`
     # mean the object.
     index["object_ink"] = measure_object_ink()
+    # Where each stock's printed red margin rule is, as fractions of its width. A word written
+    # across it is a placement defect no ink answers: at dusk it is the darkest ground in the
+    # library by a factor of two (evidence/dusk_ground.json, firing 47). The app reads this to
+    # cut a piece that carries a person's words from the paper to the right of the rule.
+    index["paper_margin"] = measure_paper_margins()
     pack_folds(index)
     copy_flat("fonts", index, exts=(".ttf",))
     copy_flat("sound", index, exts=(".ogg",))

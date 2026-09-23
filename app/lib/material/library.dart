@@ -23,7 +23,12 @@ class LibraryEntry {
 
 class MaterialLibrary {
   MaterialLibrary._(this.paper, this.tears, this.objects, this.bits, this.shell, this.folds,
-      this.foldSize, this.objectInk, this.fonts, this.sounds, this.shadowFrame);
+      this.foldSize, this.objectInk, this.fonts, this.sounds, this.shadowFrame,
+      [this.paperMargin = const {}]);
+
+  /// stock id -> where its printed red margin rule is, `[left, right]` as fractions of its width.
+  /// Only the stocks that carry one (legal, lined, spiral); `tools/pack_assets.py` finds it.
+  final Map<String, List<double>> paperMargin;
 
   final List<LibraryEntry> paper;
   final List<LibraryEntry> tears;
@@ -120,6 +125,15 @@ class MaterialLibrary {
         }
       });
     }
+    final paperMargin = <String, List<double>>{};
+    final pm = j['paper_margin'];
+    if (pm is Map) {
+      pm.forEach((k, v) {
+        if (v is List && v.length == 2) {
+          paperMargin[k as String] = [(v[0] as num).toDouble(), (v[1] as num).toDouble()];
+        }
+      });
+    }
     return _instance = MaterialLibrary._(
       family('paper'),
       family('tears'),
@@ -132,6 +146,7 @@ class MaterialLibrary {
       ((j['fonts'] as List?) ?? const []).cast<String>(),
       ((j['sound'] as List?) ?? const []).cast<String>(),
       ((j['relief'] as Map?)?['shadow_frame'] as num?)?.toDouble() ?? 1.0,
+      paperMargin,
     );
   }
 

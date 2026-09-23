@@ -88,6 +88,8 @@ class _TheirSheet extends StatelessWidget {
       tilt: -0.008,
       safe: tear == null || lib == null ? const [0.07, 0.08, 0.07, 0.08] : lib!.safeOf(tear),
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
+      // their state's first column sits where a legal pad's red rule does
+      besideTheMargin: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,

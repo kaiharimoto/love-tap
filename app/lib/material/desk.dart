@@ -135,6 +135,9 @@ class PartnerStrip extends StatelessWidget {
               safe: tear == null || lib == null ? const [0.06, 0.07, 0.06, 0.07] : lib.safeOf(tear),
               stockScale: 1.2,
               stockAlignment: Alignment.topCenter,
+              // the status line runs the width of the strip, and the strip's stock is whichever
+              // the mood picks -- legal, lined and spiral all carry a red rule at about 23%
+              besideTheMargin: true,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
