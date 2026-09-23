@@ -225,7 +225,14 @@ def build_glue(name, width, seed):
             grid[(i, j)] = bm.verts.new((u * width * 0.5, v * width * 0.32, max(z, 0.0)))
     for i in range(n - 1):
         for j in range(n - 1):
-            bm.faces.new((grid[(i, j)], grid[(i + 1, j)], grid[(i + 1, j + 1)], grid[(i, j + 1)]))
+            quad = (grid[(i, j)], grid[(i + 1, j)], grid[(i + 1, j + 1)], grid[(i, j + 1)])
+            # only where there is glue. The grid is square and the smear is not: faced whole, the
+            # flat skirt at z = 0 around it rendered as a beige plate filling 27% of the frame
+            # (firing 51, the first time any bit rendered at all).
+            if any(v.co.z > 0 for v in quad):
+                bm.faces.new(quad)
+    for v in [v for v in bm.verts if not v.link_faces]:
+        bm.verts.remove(v)
     obj = link_mesh(bm, name, glue_material())
     obj.rotation_euler = (0.0, 0.0, float(r.uniform(-0.4, 0.4)))
     return obj
@@ -278,6 +285,9 @@ def render_bit(name, res, samples, out_dir, conditions=("day", "dusk")):
                 # A transmissive sheet over a transparent film is opaque unless Cycles is told to let
                 # glass through, and then the note under it shows in the app rather than the sky of
                 # this scene. Its roughness is 0.42, so the threshold has to sit above that.
+                # Not glue: probed the same way at firing 51, a glue smear went to alpha 96 in the
+                # paper's own tone and could not be seen at all, which is no use to a mark whose
+                # whole job is to say that something is stuck here.
                 scene.cycles.film_transparent_glass = True
                 scene.cycles.film_transparent_roughness = 0.5
             if condition == "day":

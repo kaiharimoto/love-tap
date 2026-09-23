@@ -211,8 +211,13 @@ class MaterialLibrary {
     return const [0.06, 0.07, 0.06, 0.07];
   }
 
-  List<String> get objectIds =>
-      objects.map((e) => e.id).where((id) => !id.contains('_shadow')).toList()..sort();
+  /// The objects a feeling can be, one id each: not their shadows, and not their dusk bodies,
+  /// which are the same object under the lamp rather than another thing to choose.
+  List<String> get objectIds => objects
+      .map((e) => e.id)
+      .where((id) => !id.contains('_shadow') && !id.endsWith('_dusk'))
+      .toList()
+    ..sort();
 
   bool hasObject(String id) => objects.any((e) => e.id == id);
 
@@ -225,6 +230,10 @@ class MaterialLibrary {
     if (fill <= 0.05) return 1.0;
     return (1.0 / fill).clamp(1.0, 3.4);
   }
+
+  /// Whether the library carries [id] rendered under the dusk rig. Before firing 51 no object had
+  /// one, and the day render was drawn under the lamp, which is a sprite lit by a sun that had set.
+  bool hasObjectDuskBody(String id) => objects.any((e) => e.id == '${id}_dusk');
 
   bool hasObjectShadow(String id, {bool dusk = false}) =>
       objects.any((e) => e.id == '${id}_shadow${dusk ? '_dusk' : ''}');

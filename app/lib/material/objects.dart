@@ -9,6 +9,17 @@ import 'library.dart';
 import 'paper.dart';
 import 'light.dart';
 
+/// The render of [id] to draw under the given light: its dusk body where the library has one, and
+/// the day body where it does not, so a library packed before the dusk bodies existed still draws.
+///
+/// The shadow already asked for `_shadow_dusk` under the lamp. The body did not, so every object at
+/// dusk was lit by the day rig's sun and set on a sheet lit by the lamp
+/// (`the-feeling-objects-are-sprites-composited-over-the-scene`).
+String bodyOf(String id, {required bool dusk}) {
+  if (!dusk || !MaterialLibrary.loaded) return id;
+  return MaterialLibrary.instance.hasObjectDuskBody(id) ? '${id}_dusk' : id;
+}
+
 class FeelingObject extends StatelessWidget {
   const FeelingObject({
     super.key,
@@ -124,7 +135,7 @@ class FeelingObject extends StatelessWidget {
               offset: Offset(lift * size * 0.16, -lift * size * 0.62),
               child: Transform.scale(
                 scale: scale,
-                child: Image.asset(objectAsset(id),
+                child: Image.asset(objectAsset(bodyOf(id, dusk: dusk)),
                     fit: BoxFit.contain,
                     gaplessPlayback: true,
                     filterQuality: FilterQuality.medium,

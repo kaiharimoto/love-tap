@@ -18,6 +18,7 @@ import argparse
 import math
 import os
 import sys
+import zlib
 
 import bpy
 import bmesh
@@ -472,7 +473,11 @@ def obj_clover(rng):
     """A clover, picked rather than drawn: three leaves that each dish and tilt their own way, on
     a stem that bends where it was pinched off. Light comes through a leaf, so it has thickness
     and scatter rather than being a flat green shape."""
-    mat = simple_mat("clover", (0.20, 0.34, 0.14), roughness=0.62)
+    # docs/COLOR.md names the clover as family D's only carrier, and at (0.20, 0.34, 0.14) its median
+    # opaque pixel was OKLab C 0.083 at 123 degrees, under the 0.09 at which a pixel counts as
+    # coloured at all and on the yellow edge of the family. Firing 51 probed three albedos at 400 px
+    # and took the smallest move: C 0.108 at 130.6 degrees, with L 0.668 against 0.678 before.
+    mat = simple_mat("clover", (0.15, 0.36, 0.10), roughness=0.62)
     b = mat.node_tree.nodes.get("Principled BSDF")
     b.inputs["Subsurface Weight"].default_value = 0.45
     b.inputs["Subsurface Radius"].default_value = (0.0016, 0.0034, 0.0012)
@@ -526,7 +531,7 @@ OBJECTS = {
 }
 
 
-def outputs_of(name, out_dir, conditions=("day", "dusk")):
+def outputs_of(name, out_dir, conditions=("day", "dusk"), passes=("object", "shadow")):
     """Every file render_object will write for these conditions.
 
     The third copy of the same hole, after bits.py (firing 7) and tear_relief.py (firing 8): the
@@ -537,22 +542,36 @@ def outputs_of(name, out_dir, conditions=("day", "dusk")):
     """
     paths = []
     for condition in conditions:
-        for pass_kind in ("object", "shadow"):
-            if pass_kind == "object" and condition != "day":
-                continue
-            suffix = {"object": "", "shadow": "_shadow" if condition == "day" else "_shadow_dusk"}[pass_kind]
-            paths.append(os.path.join(out_dir, name + suffix + ".png"))
+        for pass_kind in passes:
+            paths.append(os.path.join(out_dir, name + _suffix(pass_kind, condition) + ".png"))
     return paths
 
 
-def render_object(name, res, samples, out_dir, conditions=("day", "dusk")):
-    rng = np.random.default_rng(20260903 + abs(hash(name)) % 997)
+def _suffix(pass_kind, condition):
+    """`obj_x`, `obj_x_shadow`, `obj_x_dusk`, `obj_x_shadow_dusk`.
+
+    Until firing 51 there was no dusk body: the object pass was skipped at dusk and the app drew
+    the day render under the desk lamp, a sprite lit by a sun that had set
+    (`the-feeling-objects-are-sprites-composited-over-the-scene`). The shadow's dusk name predates
+    the body's and is kept as it is, because the app and falloff tables already ask for it.
+    """
+    if pass_kind == "shadow":
+        return "_shadow" if condition == "day" else "_shadow_dusk"
+    return "" if condition == "day" else "_dusk"
+
+
+def render_object(name, res, samples, out_dir, conditions=("day", "dusk"), passes=("object", "shadow")):
     written = []
     for condition in conditions:
-        for pass_kind in ("object", "shadow"):
-            if pass_kind == "object" and condition != "day":
-                continue
+        for pass_kind in passes:
             scene = common.reset_scene()
+            # One seed per object, the same in every pass and every process. It was
+            # `abs(hash(name)) % 997` drawn once per call, which is wrong twice: Python salts string
+            # hashes per process (two Blender runs gave obj_crown 702 and 624), and each pass drew
+            # from the same generator in turn, so an object built from random numbers -- pinch,
+            # crown, gold_star, clover -- was a different object in its body, its shadow and its
+            # dusk twin. Found at firing 51 when a re-render moved obj_crown by MAD 14.
+            rng = np.random.default_rng(20260903 + zlib.crc32(name.encode("utf-8")) % 997)
             made = OBJECTS[name](rng)
             objs = made if isinstance(made, list) else [made]
             if pass_kind == "shadow":
@@ -569,7 +588,13 @@ def render_object(name, res, samples, out_dir, conditions=("day", "dusk")):
                 common.stop_down_for_day(scene)
             else:
                 common.add_dusk(scene)
-            suffix = {"object": "", "shadow": "_shadow" if condition == "day" else "_shadow_dusk"}[pass_kind]
+                if pass_kind == "object":
+                    # the aperture the dusk paper is shot at, so a body sits on its sheet at the
+                    # sheet's exposure. The shadow pass is left as it was made: keep_shadow_only
+                    # reads the catcher's colour, so an aperture there would move every committed
+                    # dusk shadow, and nothing asks for that.
+                    common.stop_down_for_dusk(scene)
+            suffix = _suffix(pass_kind, condition)
             path = os.path.join(out_dir, name + suffix + ".png")
             common.render(scene, path)
             if pass_kind == "shadow":
@@ -592,19 +617,25 @@ def main():
     ap.add_argument("--out", default=OUT)
     ap.add_argument("--conditions", default="day,dusk")
     ap.add_argument("--skip-existing", action="store_true")
+    ap.add_argument("--passes", default="object,shadow",
+                    help="object, shadow or both: a dusk body can be added without re-shooting "
+                         "the dusk shadows it sits on")
     a = ap.parse_args(argv)
     names = list(OBJECTS) if a.all else (a.only or [])
     if not names:
         ap.error("--only or --all")
     os.makedirs(a.out, exist_ok=True)
     conditions = [c for c in a.conditions.split(",") if c]
+    passes = tuple(p for p in a.passes.split(",") if p)
+    if not passes or any(p not in ("object", "shadow") for p in passes):
+        ap.error("--passes takes object and shadow")
     import time
     for n in names:
-        if a.skip_existing and all(os.path.exists(p) for p in outputs_of(n, a.out, conditions)):
+        if a.skip_existing and all(os.path.exists(p) for p in outputs_of(n, a.out, conditions, passes)):
             print(f"skip {n}")
             continue
         t0 = time.time()
-        render_object(n, a.res, a.samples, a.out, conditions)
+        render_object(n, a.res, a.samples, a.out, conditions, passes)
         print(f"{n} in {time.time() - t0:.0f}s", flush=True)
 
 
